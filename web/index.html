@@ -70,6 +70,22 @@
         <button class="quick-btn" data-topic="学术困惑">💭 学术困惑</button>
       </div>
     </div>
+
+    <!-- 归档/只读浏览头部 -->
+    <div class="chat-archive-header" id="chat-archive-header" style="display:none;">
+      <div class="archive-info">
+        <span id="archive-topic"></span>
+        <span id="archive-meta" style="color:var(--text-tertiary);margin-left:8px;"></span>
+      </div>
+      <button class="btn-text" id="close-archive-view">✕ 关闭浏览</button>
+    </div>
+
+    <!-- 历史消息提示条 -->
+    <div class="history-hint" id="history-hint" style="display:none;">
+      <span>↑ 向上滚动查看历史消息</span>
+      <button class="btn-text" id="history-hint-close">✕</button>
+    </div>
+
     <div class="messages" id="messages"></div>
     <div class="typing-indicator" id="typing-indicator" style="display:none;">
       <span class="dot"></span><span class="dot"></span><span class="dot"></span>

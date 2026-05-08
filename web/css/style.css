@@ -1152,3 +1152,53 @@ body {
   background: var(--accent-light);
   color: var(--text-primary);
 }
+
+/* ---- 归档浏览头部 ---- */
+.chat-archive-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.85rem;
+}
+
+.chat-archive-header .archive-info {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+#archive-topic {
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ---- 历史消息提示条 ---- */
+.history-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--accent-light);
+  color: var(--accent-color);
+  font-size: 0.8rem;
+  border-bottom: 1px solid var(--border-color);
+  animation: fadeInDown 0.3s ease;
+}
+
+.history-hint button {
+  padding: 2px 6px;
+  font-size: 0.75rem;
+}
+
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}

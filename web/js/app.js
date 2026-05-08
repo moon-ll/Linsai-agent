@@ -229,6 +229,10 @@ async function switchSession(sessionId) {
         appendMessage(msg.role, msg.content, msg.timestamp, false, msg.msg_id);
       });
       scrollToBottom();
+      // 消息较多时显示历史提示
+      if (data.messages.length > 3) {
+        showHistoryHint(data.messages.length);
+      }
     } else {
       // 空会话显示欢迎语
       appendMessage('assistant', `你好，我是林赛。\n\n我们今天聊「${data.topic}」？先画个框图，说说你的整体思路。`, null, false);
@@ -859,6 +863,23 @@ function bindEvents() {
     }
   });
 
+  // 关闭归档浏览视图
+  document.getElementById('close-archive-view').addEventListener('click', () => {
+    document.getElementById('chat-archive-header').style.display = 'none';
+    document.querySelector('.input-area').style.display = 'block';
+    State.viewingArchive = false;
+    renderSessionList();
+    // 如果当前有会话，回到续接模式
+    if (State.currentSessionId) {
+      switchSession(State.currentSessionId);
+    }
+  });
+
+  // 关闭历史提示条
+  document.getElementById('history-hint-close').addEventListener('click', () => {
+    document.getElementById('history-hint').style.display = 'none';
+  });
+
   // 主题选择
   document.getElementById('theme-select').addEventListener('change', (e) => {
     applyTheme(e.target.value);
@@ -1086,17 +1107,23 @@ async function loadLLMStatus() {
     // 更新顶部 provider-badge
     const badge = document.getElementById('provider-badge');
     if (badge) {
-      const currentProvider = providers.find(p => p.name === current);
       if (current === 'auto') {
         badge.textContent = 'auto';
         badge.title = '自动选择 Provider';
-      } else if (currentProvider) {
-        const typeIcon = currentProvider.type === 'api' ? '🌐' : '💻';
-        badge.textContent = `${typeIcon} ${currentProvider.name}`;
-        badge.title = `当前: ${currentProvider.name} (${currentProvider.type === 'api' ? currentProvider.model || 'API' : 'CLI'})`;
+      } else if (current === 'cli_auto') {
+        const cli = providers.find(p => p.type === 'cli' && p.available);
+        badge.textContent = `💻 ${cli ? cli.name : 'CLI'}`;
+        badge.title = `强制 CLI 模式 (${cli ? cli.name : '无可用 CLI'})`;
       } else {
-        badge.textContent = current;
-        badge.title = '当前 Provider';
+        const currentProvider = providers.find(p => p.name === current);
+        if (currentProvider) {
+          const typeIcon = currentProvider.type === 'api' ? '🌐' : '💻';
+          badge.textContent = `${typeIcon} ${currentProvider.name}`;
+          badge.title = `当前: ${currentProvider.name} (${currentProvider.type === 'api' ? currentProvider.model || 'API' : 'CLI'})`;
+        } else {
+          badge.textContent = current;
+          badge.title = '当前 Provider';
+        }
       }
     }
 
@@ -1109,14 +1136,31 @@ async function loadLLMStatus() {
       return;
     }
 
-    // 生成 radio 按钮列表：auto + 每个可用 provider
+    // 生成 radio 按钮列表
     const html = [];
+
+    // 自动选择
     html.push(`
       <label style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:4px 0;" data-provider="auto">
         <input type="radio" name="provider-select" value="auto" ${current === 'auto' ? 'checked' : ''}>
-        <span>🔄 自动选择</span>
+        <span>🔄 自动选择（推荐）</span>
       </label>
     `);
+
+    // CLI 自动模式
+    const hasCli = providers.some(p => p.type === 'cli');
+    const cliAvail = providers.some(p => p.type === 'cli' && p.available);
+    html.push(`
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:4px 0;${cliAvail ? '' : 'opacity:0.5;'}">
+        <input type="radio" name="provider-select" value="cli_auto" ${current === 'cli_auto' ? 'checked' : ''} ${cliAvail ? '' : 'disabled'}>
+        <span>💻 CLI 自动（${cliAvail ? '第一个可用 CLI' : '无可用的 CLI'}）</span>
+      </label>
+    `);
+
+    // 分割线
+    if (providers.length > 0) {
+      html.push(`<div style="border-top:1px solid var(--border-color);margin:4px 0;"></div>`);
+    }
 
     providers.forEach(p => {
       const icon = p.available ? '✓' : '✗';
@@ -1151,7 +1195,8 @@ async function switchProvider(providerName) {
   try {
     const data = await apiPost('/api/switch-provider', { provider: providerName });
     if (data.success) {
-      showToast(`✓ 已切换到 ${providerName === 'auto' ? '自动选择' : providerName}`, 'success');
+      const label = providerName === 'auto' ? '自动选择' : providerName === 'cli_auto' ? 'CLI 自动' : providerName;
+      showToast(`✓ 已切换到 ${label}`, 'success');
       // 刷新状态显示
       await loadLLMStatus();
     } else {
@@ -1161,6 +1206,20 @@ async function switchProvider(providerName) {
     console.error('切换 Provider 失败:', e);
     showToast('✗ 切换 Provider 失败', 'error');
   }
+}
+
+// ============================================
+// 历史消息提示
+// ============================================
+function showHistoryHint(count) {
+  const hint = document.getElementById('history-hint');
+  if (!hint) return;
+  hint.querySelector('span').textContent = `↑ 已加载 ${count} 条消息，向上滚动查看历史`;
+  hint.style.display = 'flex';
+  // 5 秒后自动隐藏
+  setTimeout(() => {
+    if (hint) hint.style.display = 'none';
+  }, 8000);
 }
 
 // ============================================

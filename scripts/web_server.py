@@ -387,6 +387,12 @@ class RequestHandler(BaseHTTPRequestHandler):
             if name == "auto" or name == "":
                 lr.router.set_auto()
                 self._send_json({"success": True, "mode": "auto", "active": lr.router.get_status()["active_provider"]})
+            elif name == "cli_auto":
+                if lr.router.set_provider("cli_auto"):
+                    status = lr.router.get_status()
+                    self._send_json({"success": True, "mode": "manual", "provider": "cli_auto", "active": status.get("active_provider", "")})
+                else:
+                    self._send_json({"error": "没有可用的 CLI Provider"}, 400)
             elif lr.router.set_provider(name):
                 self._send_json({"success": True, "mode": "manual", "provider": name})
             else:

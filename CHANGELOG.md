@@ -1,5 +1,25 @@
 # 变更记录
 
+## v1.5.2 - 2026-05-08 think 过滤 + CLI/API 切换 + 聊天记录查看
+
+### 新增
+- **过滤 LLM 推理标签 `<think>`**
+  - `scripts/llm_router.py` 新增 `_strip_think_tags()` 函数，使用栈算法处理嵌套标签
+  - 所有 Provider（CLI + API）返回的内容自动过滤 think 标签，对话更干净
+- **Provider 选择持久化**
+  - 手动切换的 Provider 保存到 `memory/llm-config.json`，服务器重启后保留
+  - 新增 `💻 CLI 自动` 选项：强制使用第一个可用的 CLI Provider（claude/kimi）
+  - 设置面板同时显示所有 Provider（包括不可用的），灰色标记，让用户知道有哪些选择
+- **聊天记录查看优化**
+  - 修复遗漏的 `chat-archive-header` HTML 元素（v1.4.1 引入的 `viewArchiveSession` 功能）
+  - 点击会话加载后，消息数 > 3 时显示提示条：`↑ 已加载 X 条消息，向上滚动查看历史`（8 秒后自动消失）
+  - 归档浏览头部显示会话主题、消息数、模式，提供 `✕ 关闭浏览` 按钮返回对话
+
+### 修复
+- `scripts/copilot_engine.py` / `scripts/web_server.py` — 补全遗漏的 `import llm_router as lr`
+- `scripts/copilot_engine.py` — `detect_llm_cli()` 延迟初始化，避免模块导入时循环依赖
+- `scripts/web_server.py` — `POST /api/switch-provider` 支持 `cli_auto` 特殊值
+
 ## v1.5.1 - 2026-05-08 手动 Provider 切换
 
 ### 新增

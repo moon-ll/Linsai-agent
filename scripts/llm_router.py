@@ -21,6 +21,7 @@
 
 import json
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -57,6 +58,38 @@ def _load_env_file(path: Path) -> Dict[str, str]:
                 k, v = line.split("=", 1)
                 result[k.strip()] = v.strip().strip('"').strip("'")
     return result
+
+
+def _strip_think_tags(text: str) -> str:
+    """过滤掉 LLM 推理标签 <think>...</think> 及其内容。"""
+    if not text:
+        return text
+
+    # 使用栈处理可能嵌套的 think 标签
+    result = []
+    i = 0
+    depth = 0
+    while i < len(text):
+        if text[i:].lower().startswith("<think") and (i + 6 >= len(text) or text[i + 6] in " >"):
+            # 找到 think 开始标签
+            depth += 1
+            # 跳过整个开始标签
+            end = text.find(">", i)
+            i = end + 1 if end != -1 else len(text)
+        elif text[i:].lower().startswith("</think>") and depth > 0:
+            depth -= 1
+            i += 8
+        elif depth == 0:
+            result.append(text[i])
+            i += 1
+        else:
+            # 在 think 标签内部，跳过
+            i += 1
+
+    cleaned = "".join(result)
+    # 清理因移除标签产生的多余空行
+    cleaned = re.sub(r"\n{3,}", "\n\n", cleaned)
+    return cleaned.strip()
 
 
 def _detect_cli_providers() -> List[Dict[str, Any]]:
@@ -158,10 +191,12 @@ class LLMProvider:
     def call(self, system_prompt: str, messages: List[Dict[str, str]], timeout: int = 60) -> str:
         """调用 LLM 获取回复。"""
         if self.type == "cli":
-            return self._call_cli(system_prompt, messages, timeout)
+            raw = self._call_cli(system_prompt, messages, timeout)
         elif self.type == "api":
-            return self._call_api(system_prompt, messages, timeout)
-        raise ValueError(f"Unknown provider type: {self.type}")
+            raw = self._call_api(system_prompt, messages, timeout)
+        else:
+            raise ValueError(f"Unknown provider type: {self.type}")
+        return _strip_think_tags(raw)
 
     # ---- CLI 调用 ----
 
@@ -276,6 +311,7 @@ class LLMRouter:
         self._round_robin_idx = 0
         self.force_provider: Optional[str] = None  # 手动强制指定
         self._last_used: Optional[str] = None       # 记录上次实际使用的 Provider
+        self.load_force_provider()
 
     def call_llm(self, system_prompt: str, messages: List[Dict[str, str]]) -> str:
         """调用 LLM。若 force_provider 已设置则直接使用；否则按策略自动选择。
@@ -295,7 +331,19 @@ class LLMRouter:
 
         # 模式 A：手动强制指定
         if self.force_provider:
-            provider = self._get_provider(self.force_provider)
+            target_name = self.force_provider
+            # 特殊值 cli_auto：动态选择第一个可用 CLI
+            if target_name == "cli_auto":
+                provider = None
+                for p in self.providers:
+                    if p.type == "cli" and self._is_available(p):
+                        provider = p
+                        target_name = p.name
+                        break
+                if not provider:
+                    raise RuntimeError("强制 CLI 模式：没有可用的 CLI Provider")
+            else:
+                provider = self._get_provider(target_name)
             if provider and self._is_available(provider):
                 for attempt in range(retry + 1):
                     try:
@@ -309,7 +357,7 @@ class LLMRouter:
                             continue
                         raise RuntimeError(f"强制指定 Provider {provider.name} 失败: {e}")
             else:
-                raise RuntimeError(f"强制指定 Provider {self.force_provider} 不可用")
+                raise RuntimeError(f"强制指定 Provider {target_name} 不可用")
 
         # 模式 B：自动策略
         strategy = self.config.get("strategy", "priority")
@@ -394,16 +442,60 @@ class LLMRouter:
         }
 
     def set_provider(self, name: str) -> bool:
-        """手动强制指定 Provider。"""
+        """手动强制指定 Provider。支持特殊值 'cli_auto'（第一个可用 CLI）。"""
+        if name == "cli_auto":
+            for p in self.providers:
+                if p.type == "cli" and self._is_available(p):
+                    self.force_provider = "cli_auto"
+                    self.save_force_provider()
+                    return True
+            return False
         provider = self._get_provider(name)
         if provider and self._is_available(provider):
             self.force_provider = name
+            self.save_force_provider()
             return True
         return False
 
     def set_auto(self) -> None:
         """恢复自动策略。"""
         self.force_provider = None
+        self.save_force_provider()
+
+    def save_force_provider(self) -> None:
+        """将当前强制选择持久化到 llm-config.json。"""
+        config: Dict[str, Any] = {}
+        if _CONFIG_PATH.exists():
+            try:
+                with open(_CONFIG_PATH, "r", encoding="utf-8") as f:
+                    config = json.load(f)
+            except Exception:
+                pass
+        config["force_provider"] = self.force_provider
+        _CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with open(_CONFIG_PATH, "w", encoding="utf-8") as f:
+            json.dump(config, f, ensure_ascii=False, indent=2)
+
+    def load_force_provider(self) -> None:
+        """从 llm-config.json 读取持久化的强制选择。"""
+        if not _CONFIG_PATH.exists():
+            return
+        try:
+            with open(_CONFIG_PATH, "r", encoding="utf-8") as f:
+                config = json.load(f)
+            saved = config.get("force_provider")
+            if saved == "cli_auto":
+                # 验证是否仍有可用 CLI
+                for p in self.providers:
+                    if p.type == "cli" and self._is_available(p):
+                        self.force_provider = "cli_auto"
+                        return
+            elif saved:
+                provider = self._get_provider(saved)
+                if provider and self._is_available(provider):
+                    self.force_provider = saved
+        except Exception:
+            pass
 
     def reload_config(self) -> None:
         """重新加载配置（用于动态更新）。"""
