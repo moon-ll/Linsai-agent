@@ -327,6 +327,10 @@ async function sendMessage(content) {
   const bubble = assistantDiv.querySelector('.message-bubble');
   bubble.innerHTML = ''; // 清空，准备流式填充
 
+  // 超时保护：120 秒后强制重置
+  const STREAM_TIMEOUT_MS = 120000;
+  let streamTimeoutId = null;
+
   try {
     const res = await fetch(API_BASE + `/api/sessions/${encodeURIComponent(State.currentSessionId)}/messages`, {
       method: 'POST',
@@ -343,6 +347,19 @@ async function sendMessage(content) {
     const decoder = new TextDecoder();
     let buffer = '';
     let fullText = '';
+    let streamDone = false;
+
+    // 设置超时
+    streamTimeoutId = setTimeout(() => {
+      if (!streamDone) {
+        console.warn('[SSE] 流超时，强制结束');
+        try { reader.cancel(); } catch (_) {}
+        State.isStreaming = false;
+        document.getElementById('typing-indicator').style.display = 'none';
+        updateStatus('响应超时');
+        showToast('林赛响应超时，请重试', 'error');
+      }
+    }, STREAM_TIMEOUT_MS);
 
     while (true) {
       const { done, value } = await reader.read();
@@ -363,13 +380,20 @@ async function sendMessage(content) {
             fullText += data.content;
             bubble.innerHTML = renderMarkdown(fullText);
             scrollToBottom();
+          } else if (data.type === 'done') {
+            streamDone = true;
+            break; // 收到 done 立即退出，不等待连接关闭
           } else if (data.type === 'error') {
             throw new Error(data.message);
           }
         } catch (e) {
-          // 忽略解析失败的行
+          if (e.message && e.message !== 'Unexpected end of JSON input') {
+            console.warn('[SSE] 解析异常:', e.message);
+          }
         }
       }
+
+      if (streamDone) break;
     }
 
     // 最终渲染确保 Markdown 完整解析
@@ -384,8 +408,10 @@ async function sendMessage(content) {
     bubble.innerHTML = `<p style="color:var(--error-color)">✗ 发送失败: ${escapeHtml(e.message)}</p>`;
     updateStatus('发送失败');
   } finally {
+    if (streamTimeoutId) clearTimeout(streamTimeoutId);
     State.isStreaming = false;
     document.getElementById('typing-indicator').style.display = 'none';
+    console.log('[SSE] 流已结束，状态已重置');
   }
 }
 
