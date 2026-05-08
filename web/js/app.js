@@ -839,6 +839,16 @@ function bindEvents() {
     document.getElementById('settings-drawer').style.display = 'flex';
     document.getElementById('theme-select').value = State.theme;
     document.getElementById('autonomy-select').value = State.autonomy;
+    // 刷新 provider 状态
+    loadLLMStatus();
+  });
+
+  // 顶部 provider-badge 点击打开设置面板
+  document.getElementById('provider-badge').addEventListener('click', () => {
+    document.getElementById('settings-drawer').style.display = 'flex';
+    document.getElementById('theme-select').value = State.theme;
+    document.getElementById('autonomy-select').value = State.autonomy;
+    loadLLMStatus();
   });
   document.getElementById('close-settings').addEventListener('click', () => {
     document.getElementById('settings-drawer').style.display = 'none';
@@ -1061,27 +1071,95 @@ function bindEvents() {
 }
 
 // ============================================
-// LLM 状态
+// LLM Provider 状态与切换
 // ============================================
 async function loadLLMStatus() {
   try {
-    const data = await apiGet('/api/llm-status');
+    const [providersData, currentData] = await Promise.all([
+      apiGet('/api/providers'),
+      apiGet('/api/providers/current')
+    ]);
+
+    const providers = providersData.providers || [];
+    const current = currentData.current || 'auto';
+
+    // 更新顶部 provider-badge
+    const badge = document.getElementById('provider-badge');
+    if (badge) {
+      const currentProvider = providers.find(p => p.name === current);
+      if (current === 'auto') {
+        badge.textContent = 'auto';
+        badge.title = '自动选择 Provider';
+      } else if (currentProvider) {
+        const typeIcon = currentProvider.type === 'api' ? '🌐' : '💻';
+        badge.textContent = `${typeIcon} ${currentProvider.name}`;
+        badge.title = `当前: ${currentProvider.name} (${currentProvider.type === 'api' ? currentProvider.model || 'API' : 'CLI'})`;
+      } else {
+        badge.textContent = current;
+        badge.title = '当前 Provider';
+      }
+    }
+
+    // 更新设置面板中的 provider 列表
     const container = document.getElementById('llm-status');
     if (!container) return;
 
-    const providers = data.providers || [];
     if (providers.length === 0) {
       container.innerHTML = '✗ 无可用 Provider';
       return;
     }
 
-    container.innerHTML = providers.map(p => {
+    // 生成 radio 按钮列表：auto + 每个可用 provider
+    const html = [];
+    html.push(`
+      <label style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:4px 0;" data-provider="auto">
+        <input type="radio" name="provider-select" value="auto" ${current === 'auto' ? 'checked' : ''}>
+        <span>🔄 自动选择</span>
+      </label>
+    `);
+
+    providers.forEach(p => {
       const icon = p.available ? '✓' : '✗';
       const typeLabel = p.type === 'api' ? `API (${p.model || '未知模型'})` : 'CLI';
-      return `<div>${icon} ${escapeHtml(p.name)} <span style="color:var(--text-tertiary)">${typeLabel}</span></div>`;
-    }).join('');
+      const disabled = !p.available ? 'disabled' : '';
+      const opacity = !p.available ? 'opacity:0.5;' : '';
+      html.push(`
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;padding:4px 0;${opacity}" data-provider="${escapeHtml(p.name)}">
+          <input type="radio" name="provider-select" value="${escapeHtml(p.name)}" ${current === p.name ? 'checked' : ''} ${disabled}>
+          <span>${icon} ${escapeHtml(p.name)} <span style="color:var(--text-tertiary)">${typeLabel}</span></span>
+        </label>
+      `);
+    });
+
+    container.innerHTML = html.join('');
+
+    // 绑定 radio 按钮切换事件
+    container.querySelectorAll('input[name="provider-select"]').forEach(radio => {
+      radio.addEventListener('change', async (e) => {
+        const providerName = e.target.value;
+        await switchProvider(providerName);
+      });
+    });
   } catch (e) {
     console.error('加载 LLM 状态失败:', e);
+    const container = document.getElementById('llm-status');
+    if (container) container.innerHTML = '✗ 加载失败';
+  }
+}
+
+async function switchProvider(providerName) {
+  try {
+    const data = await apiPost('/api/switch-provider', { provider: providerName });
+    if (data.success) {
+      showToast(`✓ 已切换到 ${providerName === 'auto' ? '自动选择' : providerName}`, 'success');
+      // 刷新状态显示
+      await loadLLMStatus();
+    } else {
+      showToast(`✗ 切换失败: ${data.error || '未知错误'}`, 'error');
+    }
+  } catch (e) {
+    console.error('切换 Provider 失败:', e);
+    showToast('✗ 切换 Provider 失败', 'error');
   }
 }
 

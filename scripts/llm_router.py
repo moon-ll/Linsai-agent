@@ -274,9 +274,11 @@ class LLMRouter:
         self.config = _build_config()
         self.providers = [LLMProvider(p) for p in self.config.get("providers", [])]
         self._round_robin_idx = 0
+        self.force_provider: Optional[str] = None  # 手动强制指定
+        self._last_used: Optional[str] = None       # 记录上次实际使用的 Provider
 
     def call_llm(self, system_prompt: str, messages: List[Dict[str, str]]) -> str:
-        """调用 LLM，按策略自动选择 Provider，失败时自动降级。
+        """调用 LLM。若 force_provider 已设置则直接使用；否则按策略自动选择。
 
         Args:
             system_prompt: 系统提示词
@@ -288,10 +290,29 @@ class LLMRouter:
         Raises:
             RuntimeError: 所有 Provider 均失败
         """
-        strategy = self.config.get("strategy", "priority")
         timeout = int(self.config.get("timeout", 60))
         retry = int(self.config.get("retry", 1))
 
+        # 模式 A：手动强制指定
+        if self.force_provider:
+            provider = self._get_provider(self.force_provider)
+            if provider and self._is_available(provider):
+                for attempt in range(retry + 1):
+                    try:
+                        result = provider.call(system_prompt, messages, timeout)
+                        provider.failure_count = 0
+                        self._last_used = provider.name
+                        return result
+                    except Exception as e:
+                        provider.failure_count += 1
+                        if attempt < retry:
+                            continue
+                        raise RuntimeError(f"强制指定 Provider {provider.name} 失败: {e}")
+            else:
+                raise RuntimeError(f"强制指定 Provider {self.force_provider} 不可用")
+
+        # 模式 B：自动策略
+        strategy = self.config.get("strategy", "priority")
         available = [p for p in self.providers if self._is_available(p)]
         if not available:
             raise RuntimeError("✗ 没有可用的 LLM Provider。请检查配置或安装 CLI 工具。")
@@ -309,6 +330,7 @@ class LLMRouter:
                 try:
                     result = provider.call(system_prompt, messages, timeout)
                     provider.failure_count = 0
+                    self._last_used = provider.name
                     return result
                 except urllib.error.HTTPError as e:
                     provider.failure_count += 1
@@ -330,6 +352,13 @@ class LLMRouter:
 
         raise RuntimeError(f"所有 Provider 均失败。最后错误: {last_error}")
 
+    def _get_provider(self, name: str) -> Optional[LLMProvider]:
+        """按名称查找 Provider。"""
+        for p in self.providers:
+            if p.name == name:
+                return p
+        return None
+
     def _is_available(self, provider: LLMProvider) -> bool:
         """检查 Provider 是否可用。"""
         if provider.type == "cli":
@@ -338,9 +367,9 @@ class LLMRouter:
             return bool(provider.config.get("api_key") and provider.config.get("base_url"))
         return False
 
-    def get_status(self) -> List[Dict[str, Any]]:
-        """返回所有 Provider 的状态。"""
-        return [
+    def get_status(self) -> Dict[str, Any]:
+        """返回所有 Provider 的状态和当前配置。"""
+        providers = [
             {
                 "name": p.name,
                 "type": p.type,
@@ -351,6 +380,30 @@ class LLMRouter:
             }
             for p in self.providers
         ]
+        active = self.force_provider or self._last_used or ""
+        if not active and providers:
+            avail = [p for p in providers if p["available"]]
+            if avail:
+                avail.sort(key=lambda p: p["priority"])
+                active = avail[0]["name"]
+        return {
+            "providers": providers,
+            "strategy": self.config.get("strategy", "priority"),
+            "force_provider": self.force_provider,
+            "active_provider": active,
+        }
+
+    def set_provider(self, name: str) -> bool:
+        """手动强制指定 Provider。"""
+        provider = self._get_provider(name)
+        if provider and self._is_available(provider):
+            self.force_provider = name
+            return True
+        return False
+
+    def set_auto(self) -> None:
+        """恢复自动策略。"""
+        self.force_provider = None
 
     def reload_config(self) -> None:
         """重新加载配置（用于动态更新）。"""
@@ -381,10 +434,15 @@ def main(argv: Optional[List[str]] = None) -> int:
     args = parser.parse_args(argv)
 
     if args.status:
+        status = router.get_status()
         print("=== LLM Provider 状态 ===")
-        for s in router.get_status():
+        print(f"  策略: {status['strategy']}  |  当前: {status['active_provider'] or 'auto'}")
+        if status['force_provider']:
+            print(f"  [强制指定: {status['force_provider']}]")
+        for s in status["providers"]:
             avail = "✓" if s["available"] else "✗"
-            print(f"  {avail} {s['name']:12} {s['type']:6} 优先:{s['priority']:2}  失败:{s['failure_count']}")
+            model = f" ({s['model']})" if s.get("model") else ""
+            print(f"  {avail} {s['name']:12} {s['type']:6} 优先:{s['priority']:2}  失败:{s['failure_count']}{model}")
         return 0
 
     if args.test:

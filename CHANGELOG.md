@@ -1,5 +1,23 @@
 # 变更记录
 
+## v1.5.1 - 2026-05-08 手动 Provider 切换
+
+### 新增
+- **Web 界面手动切换 Provider**
+  - 顶部栏新增 `provider-badge`，实时显示当前使用的模型/CLI（点击打开设置面板）
+  - 设置面板中 LLM Provider 区域改为 radio 按钮列表，支持选择：
+    - `🔄 自动选择`（默认）
+    - 每个可用 Provider（显示 ✓/✗ 可用状态、API/CLI 类型、模型名）
+  - 切换后即时生效，下次对话使用新 Provider
+- **新 API 端点**
+  - `GET /api/providers` — 返回所有 Provider 状态列表
+  - `GET /api/providers/current` — 返回当前选中的 Provider（`auto` 或具体名称）
+  - `POST /api/switch-provider` — 手动切换 Provider（与 `/api/llm-provider` 兼容）
+
+### 修复
+- `scripts/web_server.py` / `scripts/copilot_engine.py` — 补全遗漏的 `import llm_router as lr`
+- `scripts/copilot_engine.py` — `detect_llm_cli()` 改为延迟初始化，避免模块导入时循环依赖
+
 ## v1.5.0 - 2026-05-08 多模型路由 + MiniMax API 支持
 
 ### 新增

@@ -40,6 +40,8 @@ _PROJECT_ROOT = _SCRIPT_DIR.parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
+import llm_router as lr
+
 try:
     from session_manager import (
         create_session,
@@ -89,6 +91,8 @@ except ImportError:
 # ---------------------------------------------------------------------------
 # LLM CLI 检测（已迁移到 llm_router，保留兼容接口）
 # ---------------------------------------------------------------------------
+_LLM_CLI = None
+
 def detect_llm_cli() -> tuple[str, str] | None:
     """检测本地可用的 LLM CLI，返回 (cli_name, cli_path)。"""
     status = lr.get_status()
@@ -96,9 +100,6 @@ def detect_llm_cli() -> tuple[str, str] | None:
         if s["type"] == "cli" and s["available"]:
             return s["name"], s["name"]
     return None
-
-
-_LLM_CLI = detect_llm_cli()
 
 
 # ---------------------------------------------------------------------------

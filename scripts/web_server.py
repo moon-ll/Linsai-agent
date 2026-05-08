@@ -43,6 +43,7 @@ import chat_archive as ca
 import context_builder as cb
 import copilot_engine as ce
 import document_handler as dh
+import llm_router as lr
 import memory_manager as mm
 import proactive_engine as pe
 import session_manager as sm
@@ -249,8 +250,23 @@ class RequestHandler(BaseHTTPRequestHandler):
             return
 
         if path == "/api/llm-status":
+            self._send_json(lr.get_status())
+            return
+
+        # Provider 列表
+        if path == "/api/providers":
             status = lr.get_status()
-            self._send_json({"providers": status, "strategy": lr.config.get("strategy", "priority")})
+            self._send_json({
+                "providers": status.get("providers", [])
+            })
+            return
+
+        # 当前 Provider
+        if path == "/api/providers/current":
+            status = lr.get_status()
+            self._send_json({
+                "current": status.get("force_provider") or "auto"
+            })
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)
@@ -363,6 +379,18 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"success": True, "path": str(export_path)})
             except Exception as e:
                 self._send_json({"error": str(e)}, 500)
+            return
+
+        # 切换 LLM Provider
+        if path == "/api/llm-provider" or path == "/api/switch-provider":
+            name = body.get("provider", "").strip()
+            if name == "auto" or name == "":
+                lr.router.set_auto()
+                self._send_json({"success": True, "mode": "auto", "active": lr.router.get_status()["active_provider"]})
+            elif lr.router.set_provider(name):
+                self._send_json({"success": True, "mode": "manual", "provider": name})
+            else:
+                self._send_json({"error": f"Provider {name} 不可用"}, 400)
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)
