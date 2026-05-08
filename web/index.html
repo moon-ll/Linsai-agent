@@ -27,7 +27,7 @@
 <!-- 主体布局 -->
 <div class="main-layout">
 
-  <!-- 左侧栏：会话 -->
+  <!-- 左侧栏：会话 + 历史搜索 -->
   <aside class="sidebar left" id="left-sidebar">
     <div class="sidebar-header">
       <input type="text" id="session-search" placeholder="🔍 搜索会话…" autocomplete="off">
@@ -38,6 +38,21 @@
     <div class="sidebar-footer">
       <button id="new-session-btn" class="btn-primary">+ 新建会话</button>
       <button id="archived-btn" class="btn-text">📦 归档</button>
+    </div>
+  </aside>
+
+  <!-- 历史搜索侧边栏（可折叠） -->
+  <aside class="sidebar history" id="history-sidebar" style="display:none;">
+    <div class="sidebar-header">
+      <h3>📚 聊天记录</h3>
+      <button id="close-history" class="icon-btn">✕</button>
+    </div>
+    <div class="history-search-box">
+      <input type="text" id="history-search-input" placeholder="🔍 搜索所有历史消息…" autocomplete="off">
+      <button id="history-search-btn">搜索</button>
+    </div>
+    <div class="history-results" id="history-results">
+      <p class="empty">输入关键词搜索历史记录</p>
     </div>
   </aside>
 

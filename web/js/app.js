@@ -14,6 +14,8 @@ const State = {
   isStreaming: false,
   theme: localStorage.getItem('linsai-theme') || 'auto',
   autonomy: localStorage.getItem('linsai-autonomy') || 'suggest',
+  viewingArchive: false,  // 是否正在查看历史会话
+  sessionKeywords: {},    // 缓存会话关键词
 };
 
 const API_BASE = '';
@@ -177,29 +179,40 @@ function renderSessionList() {
     );
   }
 
-  container.innerHTML = sessions.map(s => `
-    <div class="session-item ${s.session_id === State.currentSessionId ? 'active' : ''}"
+  container.innerHTML = sessions.map(s => {
+    const kws = State.sessionKeywords[s.session_id] || [];
+    const kwHtml = kws.length > 0
+      ? `<div class="keyword-tags">${kws.slice(0, 4).map(k => `<span class="keyword-tag">${escapeHtml(k)}</span>`).join('')}</div>`
+      : '';
+    return `
+    <div class="session-item ${s.session_id === State.currentSessionId && !State.viewingArchive ? 'active' : ''}"
          data-id="${escapeHtml(s.session_id)}">
       <div class="session-topic">${escapeHtml(s.topic || '未命名会话')}</div>
       <div class="session-meta">
         <span>${formatDate(s.last_active)}</span>
         <span>${s.message_count || 0} 条</span>
       </div>
+      ${kwHtml}
     </div>
-  `).join('');
+  `}).join('');
 
   // 绑定点击事件
   container.querySelectorAll('.session-item').forEach(el => {
     el.addEventListener('click', () => {
       const sid = el.dataset.id;
-      switchSession(sid);
+      viewArchiveSession(sid);
     });
   });
 }
 
 async function switchSession(sessionId) {
   State.currentSessionId = sessionId;
+  State.viewingArchive = false;
   renderSessionList();
+
+  // 隐藏归档头部，显示输入区
+  document.getElementById('chat-archive-header').style.display = 'none';
+  document.querySelector('.input-area').style.display = 'block';
 
   // 隐藏欢迎页
   document.getElementById('welcome-screen').style.display = 'none';
@@ -229,6 +242,106 @@ async function switchSession(sessionId) {
 
   // 加载任务
   loadTasks();
+}
+
+// ============================================
+// 历史会话查看（只读模式）
+// ============================================
+async function viewArchiveSession(sessionId) {
+  State.viewingArchive = true;
+  renderSessionList();
+
+  // 显示归档头部，隐藏输入区
+  document.getElementById('chat-archive-header').style.display = 'flex';
+  document.querySelector('.input-area').style.display = 'none';
+  document.getElementById('welcome-screen').style.display = 'none';
+  document.getElementById('messages').innerHTML = '';
+
+  try {
+    const data = await apiGet(`/api/sessions/${encodeURIComponent(sessionId)}/messages`);
+    document.getElementById('archive-topic').textContent = data.topic || sessionId;
+    document.getElementById('archive-meta').textContent = `${data.messages?.length || 0} 条消息 · ${data.mode || 'co-working'}`;
+
+    if (data.messages && data.messages.length > 0) {
+      data.messages.forEach(msg => {
+        appendMessage(msg.role, msg.content, msg.timestamp, false, msg.msg_id);
+      });
+      scrollToBottom();
+    } else {
+      appendMessage('assistant', '（此会话暂无消息）', null, false);
+    }
+
+    updateStatus(`查看历史: ${data.topic || sessionId}`);
+  } catch (e) {
+    console.error('加载历史失败:', e);
+    showToast('加载历史失败', 'error');
+  }
+}
+
+function backToCurrentSession() {
+  if (State.currentSessionId) {
+    State.viewingArchive = false;
+    switchSession(State.currentSessionId);
+  }
+}
+
+// ============================================
+// 历史搜索
+// ============================================
+async function searchHistory() {
+  const input = document.getElementById('history-search-input');
+  const query = input.value.trim();
+  const container = document.getElementById('history-results');
+
+  if (!query) {
+    container.innerHTML = '<p class="empty">输入关键词搜索历史记录</p>';
+    return;
+  }
+
+  container.innerHTML = '<p class="empty">◐ 搜索中…</p>';
+
+  try {
+    const data = await apiGet(`/api/history?q=${encodeURIComponent(query)}`);
+    const results = data.results || [];
+
+    if (results.length === 0) {
+      container.innerHTML = '<p class="empty">未找到匹配记录</p>';
+      return;
+    }
+
+    container.innerHTML = results.map(r => `
+      <div class="history-result-item" data-session="${escapeHtml(r.session_id)}">
+        <div class="result-topic">${escapeHtml(r.topic)}</div>
+        <div class="result-preview">${escapeHtml(r.content_preview)}</div>
+        <div class="result-meta">${r.role === 'user' ? '你' : '林赛'} · ${formatDate(r.timestamp)}</div>
+      </div>
+    `).join('');
+
+    container.querySelectorAll('.history-result-item').forEach(el => {
+      el.addEventListener('click', () => {
+        const sid = el.dataset.session;
+        viewArchiveSession(sid);
+      });
+    });
+  } catch (e) {
+    console.error('搜索失败:', e);
+    container.innerHTML = '<p class="empty">搜索失败</p>';
+  }
+}
+
+// ============================================
+// 加载会话关键词
+// ============================================
+async function loadSessionKeywords() {
+  for (const s of State.sessions) {
+    try {
+      const data = await apiGet(`/api/sessions/${encodeURIComponent(s.session_id)}/keywords`);
+      State.sessionKeywords[s.session_id] = data.keywords || [];
+    } catch (e) {
+      State.sessionKeywords[s.session_id] = [];
+    }
+  }
+  renderSessionList();
 }
 
 async function createNewSession(topic, mode) {
@@ -885,10 +998,24 @@ function bindEvents() {
     document.getElementById('left-sidebar').classList.toggle('open');
   });
 
-  // 归档按钮
+  // 归档按钮 → 打开历史搜索侧边栏
   document.getElementById('archived-btn').addEventListener('click', () => {
-    showToast('归档功能请使用终端: python3 scripts/copilot_engine.py --archive <ID>', 'warning', 5000);
+    document.getElementById('history-sidebar').style.display = 'flex';
   });
+
+  // 关闭历史搜索
+  document.getElementById('close-history').addEventListener('click', () => {
+    document.getElementById('history-sidebar').style.display = 'none';
+  });
+
+  // 历史搜索
+  document.getElementById('history-search-btn').addEventListener('click', searchHistory);
+  document.getElementById('history-search-input').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') searchHistory();
+  });
+
+  // 返回当前会话
+  document.getElementById('back-to-current').addEventListener('click', backToCurrentSession);
 
   // 底部按钮
   document.getElementById('backup-btn').addEventListener('click', () => {
@@ -938,6 +1065,9 @@ async function init() {
 
   // 加载会话
   await loadSessions();
+
+  // 加载会话关键词（异步，不阻塞）
+  loadSessionKeywords();
 
   // 检查主动提醒
   await checkHeartbeat();

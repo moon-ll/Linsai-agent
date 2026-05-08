@@ -39,6 +39,7 @@ if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
 import agora_bridge as ab
+import chat_archive as ca
 import context_builder as cb
 import copilot_engine as ce
 import document_handler as dh
@@ -225,6 +226,26 @@ class RequestHandler(BaseHTTPRequestHandler):
         if path == "/api/references":
             refs = _list_references()
             self._send_json(refs)
+            return
+
+        # 会话关键词
+        if path.startswith("/api/sessions/") and path.endswith("/keywords"):
+            sid = path[len("/api/sessions/") : -len("/keywords")]
+            kws = ca.get_session_keywords(sid)
+            self._send_json({"session_id": sid, "keywords": kws})
+            return
+
+        # 历史搜索
+        if path == "/api/history":
+            query = parse_qs(parsed.query).get("q", [""])[0]
+            results = ca.search_history(query)
+            self._send_json({"query": query, "results": results})
+            return
+
+        # 归档索引
+        if path == "/api/archive-index":
+            idx = ca.get_archive_index()
+            self._send_json(idx)
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)
