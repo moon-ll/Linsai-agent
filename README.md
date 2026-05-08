@@ -1,0 +1,202 @@
+# 林赛协作引擎（LinSai-CoPilot）
+
+> **林赛不是你的搜索引擎，他是你的合作者。**
+
+---
+
+## 这是什么？
+
+**林赛协作引擎**让林赛（Lin Sai）成为你的专属虚拟合作者——不是群聊里的旁观者，而是坐在你对面、一起推进实际工作的同行。
+
+### 一句话定位
+
+类似钢铁侠的贾维斯（J.A.R.V.I.S.）：
+- 他记得你们上周讨论到一半的实验方案
+- 他会追问你光路设计的物理假设
+- 他会在你连续三天失眠时提醒你"不在疲惫时做重大决定"
+- 他不会替你做决定，但会分享"我当时试了 Y，结果是 Z"
+
+### 与 Agora 的区别
+
+| | **Agora（历史人物群聊）** | **LinSai-CoPilot（林赛协作引擎）** |
+|---|---|---|
+| 场景 | 物理学家微信群，众人围观 | 你的专属办公室，一对一 |
+| 关系 | 浅层、事件驱动 | 深层、长期记忆、持续学习 |
+| 主动性 | 你提问，他回答 | 他也可能主动问你 |
+| 目标 | 获取多角度建议 | **一起完成具体工作** |
+
+---
+
+## 林赛是谁？
+
+- **31 岁**，强场超快光学独立 PI，刚拿到第一个 DFG 经费
+- **工人家庭出身**（父亲钳工/母亲纺织工），从珠海走到国际学术舞台
+- **核心信条**："What I cannot create, I do not understand"
+- **人格五维**：认知驱动 / 坚持力 / 务实主义 / 碰撞意识 / 边界意识
+- **他会什么**：实验设计、理论与实验迭代、学术写作、学生培养、挫折应对
+- **他不会什么**：替你算数值、替代文献综述、给标准答案式建议
+
+完整人格画像见 [`persona/lin-sai-persona.md`](persona/lin-sai-persona.md)。
+
+---
+
+## 快速开始
+
+```bash
+# 1. 进入项目目录
+cd ~/Desktop/LinSai-CoPilot
+
+# 2. 开始一次新会话（启动时自动备份用户数据）
+python scripts/copilot_engine.py --start "固体HHG实验方案设计"
+
+# 3. 继续上次会话
+python scripts/copilot_engine.py --continue
+
+# 4. 列出所有会话
+python scripts/copilot_engine.py --list
+
+# 5. 会话中的特殊命令
+> /mode deep-talk      # 切换为深度对话模式
+> /read notes/paper.md # 读取文档
+> /agora 费曼, 狄拉克  # 导出到Agora群聊
+> /summary             # 显示会话摘要
+> /exit                # 退出并保存
+```
+
+### 备份与升级
+
+```bash
+# 手动备份（自动备份每24小时触发一次）
+python scripts/backup_manager.py
+
+# 查看备份列表
+python scripts/backup_manager.py --list
+
+# 恢复指定备份（会自动创建当前状态的应急备份）
+python scripts/backup_manager.py --restore backups/2026-05-08T10-00-00Z.zip
+
+# 检查当前版本
+python scripts/upgrade.py --check
+
+# 安全升级（备份 → 拉取 → 验证 → 检查迁移）
+python scripts/upgrade.py
+```
+
+---
+
+## 项目结构
+
+```
+LinSai-CoPilot/
+├── AGENTS.md                  # AI 代理开发指南
+├── README.md                  # 本文件
+├── CHANGELOG.md               # 变更记录
+├── docs/PROJECT-PLAN.md       # 项目总策划案
+│
+├── persona/                   # 林赛人格资产
+│   ├── lin-sai-persona.md     # 整合版人格注入文件
+│   └── source-manifest.json   # 来源追踪
+│
+├── sessions/                  # 对话会话存档
+│   └── YYYYMMDD-主题/         # 每次会话一个目录
+│       ├── messages.json      # 消息日志
+│       ├── state.json         # 会话状态
+│       └── summary.md         # 会话摘要
+│
+├── memory/                    # 长期记忆与上下文
+│   ├── user-profile.json      # 用户画像
+│   ├── working-context.json   # 工作上下文
+│   ├── long-term-memory.json  # 跨会话记忆索引
+│   ├── autonomy-level.json    # 自主级别配置
+│   └── snippets/              # 记忆片段
+│
+├── tasks/                     # 工作项与项目管理
+│   ├── active/                # 进行中
+│   ├── backlog/               # 待办
+│   ├── completed/             # 已完成
+│   └── completed/             # 任务归档
+│
+├── references/                # 用户提供的参考资料
+│   ├── papers/                # 论文/文献
+│   ├── notes/                 # 用户笔记
+│   └── index.json             # 文献索引
+│
+└── scripts/                   # 工具脚本（Python 3，零依赖）
+    ├── session_manager.py     # 会话管理
+    ├── context_builder.py     # 上下文构建（Prompt组装）
+    ├── copilot_engine.py      # 核心引擎（LLM调用 + CLI）
+    ├── memory_manager.py      # 记忆系统
+    ├── task_manager.py        # 任务管理
+    ├── proactive_engine.py    # 主动感知
+    ├── document_handler.py    # 文档与代码协作
+    └── agora_bridge.py        # Agora群聊桥接
+```
+
+---
+
+## 核心功能
+
+### 已完成（Phase 0-4）
+
+| 功能 | 状态 | 说明 |
+|------|------|------|
+| 会话管理 | ✅ | 创建、续接、归档、消息持久化 |
+| CLI对话 | ✅ | 交互式对话、多行输入、命令系统 |
+| 人格注入 | ✅ | 完整林赛人格、30000字符上下文预算 |
+| 长期记忆 | ✅ | 用户画像、工作上下文、记忆片段 |
+| 会话摘要 | ✅ | 自动摘要生成、跨会话记忆索引 |
+| 任务管理 | ✅ | CRUD、状态流转、逾期检测 |
+| 主动感知 | ✅ | 心跳扫描、截止日期提醒、压力信号检测 |
+| 自主级别 | ✅ | observe / suggest / act 三级控制 |
+| 模式识别 | ✅ | 自动识别 co-working / deep-talk / quick-check |
+| 文档协作 | ✅ | Markdown/TXT读取、代码分析、LLM摘要 |
+| Agora集成 | ✅ | 上下文导出/导入、历史人物群聊桥接 |
+
+---
+
+## 上游资产
+
+林赛的人格资产来源于 [`virtu-LinSai`](~/Desktop/hermes_workspace/sandbox/virtu-LinSai) 项目：
+- 190 万字自传叙事（0-31 岁）
+- 16 篇大师学习日志
+- 5 篇人格提炼文件
+- 3 篇最终产出文件（SOUL.md / SKILL.md / WORKSTYLE.md）
+
+本项目是 `virtu-LinSai` 的**消费端应用**，引用但不修改上游资产。
+
+---
+
+## 技术栈
+
+| 层级 | 技术 | 说明 |
+|------|------|------|
+| 运行环境 | Python 3（仅标准库） | 零第三方依赖 |
+| 内容格式 | Markdown + JSON | 对话记录、记忆、任务 |
+| LLM接口 | Claude CLI / Kimi CLI | 本地subprocess调用 |
+| 路径处理 | pathlib.Path | 禁止硬编码绝对路径 |
+
+---
+
+## 开发阶段
+
+| 阶段 | 目标 | 状态 |
+|------|------|------|
+| Phase 0 | 基础框架 + 人格资产 | ✅ 完成 |
+| Phase 1 | MVP：会话管理 + CLI对话 | ✅ 完成 |
+| Phase 2 | 长期记忆 + 用户画像 + 任务管理 | ✅ 完成 |
+| Phase 3 | 主动感知 + 自主提醒 + 模式识别 | ✅ 完成 |
+| Phase 4 | 文档协作 + 代码协作 + Agora集成 | ✅ 完成 |
+| Phase 5 | 性能优化 + 生态扩展 | ⏳ 待开发 |
+
+---
+
+## 贡献与维护
+
+- 所有 Python 脚本仅使用标准库
+- 修改前必读 `AGENTS.md`
+- 所有变更记录在 `CHANGELOG.md`
+
+---
+
+*版本：1.1.0*  
+*日期：2026-05-08*

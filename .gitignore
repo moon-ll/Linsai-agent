@@ -1,0 +1,30 @@
+# LinSai-CoPilot — Git 忽略规则
+# 原则：用户数据不提交，只提交代码与文档
+
+# === 用户生成数据（无价，禁止提交）===
+/sessions/*/
+/memory/*.json
+/memory/snippets/*
+/tasks/*/
+/references/papers/*
+/references/notes/*
+
+# 备份目录
+/backups/
+
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# === 系统文件 ===
+.DS_Store
+Thumbs.db
+
+# === 编辑器 ===
+*.swp
+*.swo
+*~
+.vscode/
+.idea/

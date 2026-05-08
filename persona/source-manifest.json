@@ -1,0 +1,36 @@
+{
+  "project": "LinSai-CoPilot",
+  "version": "1.0.0",
+  "last_sync": "2026-05-08T09:15:00Z",
+  "source_project": "virtu-LinSai",
+  "source_version": "v2.7",
+  "source_path": "~/Desktop/hermes_workspace/sandbox/virtu-LinSai",
+  "files": [
+    {
+      "local": "lin-sai-persona.md",
+      "sources": [
+        "EXTRAITS/SKILL-blueprints/SOUL.md",
+        "EXTRAITS/SKILL-blueprints/SKILL.md",
+        "EXTRAITS/SKILL-blueprints/WORKSTYLE.md",
+        ".kimi/skills/林赛-perspective/SKILL.md",
+        "PERSONA/ai-collaboration.md"
+      ],
+      "sync_date": "2026-05-08T09:15:00Z",
+      "note": "整合精简版，供 prompt 直接注入"
+    }
+  ],
+  "sync_log": [
+    {
+      "date": "2026-05-08T09:15:00Z",
+      "from_version": "v2.7",
+      "to_version": "v0.1",
+      "changes": "初始同步：创建整合版人格注入文件"
+    },
+    {
+      "date": "2026-05-08T17:41:00Z",
+      "from_version": "v0.1",
+      "to_version": "v1.0.0",
+      "changes": "项目Phase 1-4全部完成，8个核心脚本就绪，引入版本管理与备份系统"
+    }
+  ]
+}
