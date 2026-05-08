@@ -866,6 +866,9 @@ function bindEvents() {
     showToast('请在终端运行: python3 scripts/backup_manager.py', 'warning', 5000);
   });
 
+  // 加载 LLM 状态
+  loadLLMStatus();
+
   // 新建会话
   document.getElementById('new-session-btn').addEventListener('click', () => {
     document.getElementById('new-session-modal').style.display = 'flex';
@@ -1055,6 +1058,31 @@ function bindEvents() {
   document.addEventListener('drop', (e) => {
     uploadZone.classList.remove('drag-over');
   });
+}
+
+// ============================================
+// LLM 状态
+// ============================================
+async function loadLLMStatus() {
+  try {
+    const data = await apiGet('/api/llm-status');
+    const container = document.getElementById('llm-status');
+    if (!container) return;
+
+    const providers = data.providers || [];
+    if (providers.length === 0) {
+      container.innerHTML = '✗ 无可用 Provider';
+      return;
+    }
+
+    container.innerHTML = providers.map(p => {
+      const icon = p.available ? '✓' : '✗';
+      const typeLabel = p.type === 'api' ? `API (${p.model || '未知模型'})` : 'CLI';
+      return `<div>${icon} ${escapeHtml(p.name)} <span style="color:var(--text-tertiary)">${typeLabel}</span></div>`;
+    }).join('');
+  } catch (e) {
+    console.error('加载 LLM 状态失败:', e);
+  }
 }
 
 // ============================================

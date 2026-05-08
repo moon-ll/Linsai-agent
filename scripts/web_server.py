@@ -248,6 +248,11 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json(idx)
             return
 
+        if path == "/api/llm-status":
+            status = lr.get_status()
+            self._send_json({"providers": status, "strategy": lr.config.get("strategy", "priority")})
+            return
+
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_POST(self) -> None:

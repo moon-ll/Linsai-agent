@@ -27,7 +27,7 @@ _PROJECT_ROOT = _SCRIPT_DIR.parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
-import copilot_engine as ce
+import llm_router as lr
 
 
 # ---------------------------------------------------------------------------
@@ -183,7 +183,7 @@ def extract_keywords(session_id: str, force: bool = False) -> List[str]:
             f"对话摘要:\n{summary}\n\n关键词:"
         )
 
-        resp = ce.call_llm(
+        resp = lr.call_llm(
             "你是一个严谨的信息整理助手，只输出关键词列表。",
             [{"role": "user", "content": prompt}],
         )

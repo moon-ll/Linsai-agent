@@ -1,5 +1,44 @@
 # 变更记录
 
+## v1.5.0 - 2026-05-08 多模型路由 + MiniMax API 支持
+
+### 新增
+- `scripts/llm_router.py` — 多模型路由管理器（350行）
+  - 支持 CLI 后端：claude, kimi
+  - 支持 HTTP API 后端：OpenAI 兼容格式（MiniMax, DeepSeek, Groq 等）
+  - 自动检测 `.env` 文件中的 API Key，自动注册 Provider
+  - **策略系统**：priority（优先级）/ round_robin（轮询）/ 自动降级
+  - **限流自动降级**：HTTP 429 触发自动切换到下一个 Provider
+  - 健康检查与失败计数
+- **零第三方依赖**：HTTP API 调用使用 Python 标准库 `urllib.request`
+- **安全配置**：
+  - `.env` 和 `memory/llm-config.json` 已加入 `.gitignore`，API Key 永不进入 Git
+  - 环境变量优先于配置文件
+
+### 接入修改
+- `copilot_engine.py` — `call_llm()` 迁移到 llm_router，保留兼容接口
+- `chat_archive.py` — 关键词提炼改用 llm_router
+- `web_server.py` — 新增 `GET /api/llm-status` 接口
+- Web 界面 — 设置面板显示当前 LLM Provider 状态
+
+### 使用方式
+```bash
+# 方式 1：项目根目录创建 .env 文件
+cat > .env << 'EOF'
+MINIMAX_API_KEY=your_key_here
+MINIMAX_MODEL=MiniMax-M2.7
+MINIMAX_BASE_URL=https://api.minimaxi.com/v1
+EOF
+
+# 方式 2：环境变量
+export MINIMAX_API_KEY=your_key_here
+
+# 启动后自动检测并优先使用 API
+python3 scripts/web_server.py
+```
+
+---
+
 ## v1.4.0 - 2026-05-08 聊天记录浏览器 + 智能归档
 
 ### 新增

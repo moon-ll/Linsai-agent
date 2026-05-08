@@ -12,6 +12,10 @@
 # 备份目录
 /backups/
 
+# LLM API 配置（含敏感凭据）
+.env
+memory/llm-config.json
+
 # === Python ===
 __pycache__/
 *.pyc

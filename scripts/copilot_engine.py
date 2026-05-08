@@ -87,25 +87,14 @@ except ImportError:
 
 
 # ---------------------------------------------------------------------------
-# LLM CLI 检测
+# LLM CLI 检测（已迁移到 llm_router，保留兼容接口）
 # ---------------------------------------------------------------------------
 def detect_llm_cli() -> tuple[str, str] | None:
-    """检测本地可用的 LLM CLI，返回 (cli_name, cli_path)。
-
-    优先级：claude > kimi
-    """
-    for cmd in ("claude", "kimi"):
-        try:
-            result = subprocess.run(
-                ["which", cmd],
-                capture_output=True,
-                text=True,
-                check=False,
-            )
-            if result.returncode == 0 and result.stdout.strip():
-                return cmd, result.stdout.strip()
-        except Exception:
-            continue
+    """检测本地可用的 LLM CLI，返回 (cli_name, cli_path)。"""
+    status = lr.get_status()
+    for s in status:
+        if s["type"] == "cli" and s["available"]:
+            return s["name"], s["name"]
     return None
 
 
@@ -162,56 +151,20 @@ def _build_prompt_text(system_prompt: str, messages: list, include_system: bool 
 
 
 # ---------------------------------------------------------------------------
-# LLM 调用封装
+# LLM 调用封装（已迁移到 llm_router，保留兼容接口）
 # ---------------------------------------------------------------------------
 def call_llm(system_prompt: str, messages: list, timeout: int = 120) -> str:
-    """调用本地 LLM CLI，返回 assistant 的回复内容。
+    """调用 LLM，返回 assistant 的回复内容。
 
-    支持的 CLI（按优先级）：claude, kimi
+    由 llm_router 按策略自动选择 Provider：
+    - 优先使用配置文件中优先级最高的可用 Provider
+    - 支持 CLI (claude, kimi) 和 HTTP API (MiniMax 等)
+    - 失败时自动降级到下一个 Provider
     """
-    if not _LLM_CLI:
-        raise RuntimeError(
-            "未检测到 LLM CLI。请安装 kimi-cli: pip install kimi-cli"
-            " 或安装 Claude Code: npm install -g @anthropic-ai/claude-code"
-        )
-
-    cli_name, _ = _LLM_CLI
-    prompt_text = _build_prompt_text(system_prompt, messages, include_system=(cli_name != "claude"))
-
-    if cli_name == "claude":
-        cmd = [
-            "claude",
-            "--print",
-            "--tools",
-            "",
-            "--system-prompt",
-            system_prompt,
-            prompt_text,
-        ]
-    else:  # kimi
-        cmd = ["kimi", "--print", "--prompt", prompt_text]
-
     try:
-        result = subprocess.run(
-            cmd, capture_output=True, text=True, timeout=timeout, stdin=subprocess.DEVNULL
-        )
-    except subprocess.TimeoutExpired as exc:
-        raise TimeoutError(f"LLM 调用超时（>{timeout}秒），请重试") from exc
-
-    if result.returncode != 0:
-        err = result.stderr.strip() or "未知错误"
-        raise RuntimeError(f"LLM CLI 返回错误 (code={result.returncode}): {err}")
-
-    stdout = result.stdout.strip()
-    if not stdout:
-        raise RuntimeError("LLM 返回空响应")
-
-    if cli_name == "kimi":
-        stdout = _parse_kimi_output(stdout)
-        if not stdout:
-            raise RuntimeError("无法从 kimi 输出中提取有效文本")
-
-    return stdout
+        return lr.call_llm(system_prompt, messages)
+    except RuntimeError as e:
+        raise RuntimeError(f"LLM 调用失败: {e}") from e
 
 
 # ---------------------------------------------------------------------------
