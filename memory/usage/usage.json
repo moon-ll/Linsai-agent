@@ -1,1 +1,20 @@
-{"records": [], "total": {"prompt": 0, "completion": 0, "calls": 0}}
+{
+  "records": [
+    {
+      "timestamp": "2026-05-08T15:37:02Z",
+      "date": "2026-05-08",
+      "month": "2026-05",
+      "session_id": "20260508-测试任务系统",
+      "provider": "minimax",
+      "prompt_tokens": 3441,
+      "completion_tokens": 107,
+      "total_tokens": 3548,
+      "is_estimated": false
+    }
+  ],
+  "total": {
+    "prompt": 3441,
+    "completion": 107,
+    "calls": 1
+  }
+}

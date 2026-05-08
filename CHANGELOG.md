@@ -1,5 +1,88 @@
 # 变更记录
 
+## v1.7.0 - 2026-05-08 知识库系统重构（raw/wiki 分层 + 知识图谱 + 生长机制）
+
+### 架构重构（借鉴 Karpathy 笔记系统）
+- **目录结构重组**：`knowledge/` 分为 `raw/`（用户原始材料）和 `wiki/`（林赛研究笔记）
+  - `raw/papers/` — 论文 PDF/笔记
+  - `raw/notes/` — 用户手写笔记
+  - `raw/webclips/` — 网页剪藏
+  - `wiki/concepts/` — 核心概念
+  - `wiki/methods/` — 实验方法
+  - `wiki/people/` — 学者评价
+  - `wiki/papers/` — 论文精读
+  - `wiki/projects/` — 项目聚合
+
+### 新增核心模块
+- **Wiki 页面管理**（`scripts/knowledge_base.py`）
+  - `parse_frontmatter()` / `build_frontmatter()` — YAML frontmatter 解析与生成
+  - `get_wiki_page()` / `list_wiki_pages()` / `save_wiki_page()` / `delete_wiki_page()` — CRUD
+  - 标准 wiki 格式：YAML frontmatter + Markdown，林赛第一人称视角
+  - 关键字段：`growth_stage`（seedling/growing/mature/archived）、`confidence`（0-1）、`related`（关联概念）
+
+- **知识图谱**（`knowledge/graph.json`）
+  - `update_graph_node()` / `add_graph_edge()` — 节点/边管理
+  - `get_related_concepts()` — 通过图谱拉取关联知识（支持深度遍历）
+  - `get_graph_summary()` — 图谱概览（节点数、边数、生长阶段分布）
+
+- **生长日志**（`knowledge/growth-log.json`）
+  - `log_growth()` — 记录每次创建/更新/关联/提炼/纳入事件
+  - `get_growth_log()` — 按目标或时间范围查询
+  - `get_growth_candidates()` — 获取待生长概念列表（seedling 阶段）
+
+- **raw → wiki 提炼流程**
+  - `ingest_raw()` — 将 raw 文件纳入系统，记录日志，可选自动触发提炼
+  - `distill_raw_to_wiki()` — 生成提炼 prompt（供 LLM 使用）
+  - `save_distilled_wiki()` — 保存 LLM 提炼结果，自动更新图谱和日志
+  - 五种 wiki 类型的提炼模板：concepts / methods / people / papers / projects
+
+- **交互触发生长机制**
+  - `create_wiki_stub()` — 对话中遇到新概念时自动创建 seedling stub
+  - `grow_wiki_prompt()` — 生成 wiki 丰满 prompt（供 LLM 使用）
+  - `apply_growth()` — 应用 LLM 生成的丰满内容，更新生长阶段
+
+### 索引系统增强
+- `build_index()` — 统一索引 raw + wiki 目录
+- `search()` — 支持 `source="all"|"raw"|"wiki"` 过滤，wiki 结果加权（×1.2），mature 再加权（×1.1）
+- `get_enriched_context()` — 增强上下文：搜索结果 + 图谱关联知识 + 缺失概念检测
+- `get_index_status()` — 返回 raw_count / wiki_count / chunks / graph 概览
+
+### 上下文构建增强
+- `context_builder.py` — `_read_knowledge_context()` 使用 `get_enriched_context()`
+  - 搜索结果标注来源（📚 raw / 📝 wiki）和生长阶段
+  - 通过图谱拉取关联知识（轻量注入）
+  - **缺失概念检测**：如果用户提到知识库中没有的概念，林赛会标注"认知边界"，邀请一起记录
+  - 体现"知识库是林赛的可靠知识来源，而非额外记忆负担"
+
+### API 端点（大量新增）
+- `GET /api/knowledge/raw` — 列出 raw 文件
+- `GET /api/knowledge/wiki` — 列出 wiki 页面（支持 `?type=` 过滤）
+- `GET /api/knowledge/wiki/{path}` — 获取单个 wiki 页面（含 frontmatter + body）
+- `DELETE /api/knowledge/wiki/{path}` — 删除 wiki 页面（清理图谱关联）
+- `GET /api/knowledge/graph` — 知识图谱概览
+- `GET /api/knowledge/related?q=...` — 关联概念查询
+- `GET /api/knowledge/growth-log?limit=N` — 生长日志
+- `GET /api/knowledge/growth-candidates` — 待生长概念
+- `GET /api/knowledge/enriched?q=...` — 增强上下文（搜索+关联+缺失检测）
+- `POST /api/knowledge/ingest` — 纳入 raw 文件
+- `POST /api/knowledge/wiki` — 创建/更新 wiki 页面
+- `POST /api/knowledge/stub` — 创建概念 stub
+- `GET /api/knowledge/search` — 增强：支持 `?source=` 和 `?top_k=` 参数
+
+### Web 前端增强
+- 设置面板新增"📚 知识库管理器"按钮
+- 知识库管理器模态框：5 个标签页
+  - 📊 **概览**：统计卡片（raw/wiki/段落/节点/边/待生长）+ 生长阶段分布
+  - 📄 **Raw**：按分类（论文/笔记/剪藏）浏览 raw 文件
+  - 📝 **Wiki**：按类型过滤浏览 wiki 页面，点击打开详情
+  - 🔗 **图谱**：节点/边统计 + 生长阶段分布
+  - 🌱 **生长**：待生长概念列表 + 最近生长日志
+- Wiki 详情模态框：frontmatter 元信息 + Markdown 渲染（标题/列表/引用/代码）
+- 支持"➕ 新建概念 Stub"交互
+
+### 文档
+- `knowledge/README.md` — 完整知识库使用指南（设计理念、目录结构、wiki 格式、使用方式）
+
 ## v1.6.0-M3 - 2026-05-08 子代理调用系统
 
 ### 新增

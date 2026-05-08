@@ -324,8 +324,53 @@ class RequestHandler(BaseHTTPRequestHandler):
 
         if path == "/api/knowledge/search":
             query = parse_qs(parsed.query).get("q", [""])[0]
-            results = kb.search(query, top_k=3)
+            source = parse_qs(parsed.query).get("source", ["all"])[0]
+            top_k = int(parse_qs(parsed.query).get("top_k", ["3"])[0])
+            results = kb.search(query, top_k=top_k, source=source)
             self._send_json({"query": query, "results": results})
+            return
+
+        # 知识库增强 API
+        if path == "/api/knowledge/raw":
+            self._send_json({"files": kb.list_raw_files()})
+            return
+
+        if path == "/api/knowledge/wiki":
+            wiki_type = parse_qs(parsed.query).get("type", [None])[0]
+            self._send_json({"pages": kb.list_wiki_pages(wiki_type)})
+            return
+
+        if path.startswith("/api/knowledge/wiki/"):
+            wiki_rel = path[len("/api/knowledge/wiki/"):]
+            page = kb.get_wiki_page(f"wiki/{wiki_rel}")
+            if page:
+                self._send_json(page)
+            else:
+                self._send_json({"error": "Wiki 页面不存在"}, 404)
+            return
+
+        if path == "/api/knowledge/graph":
+            self._send_json(kb.get_graph_summary())
+            return
+
+        if path == "/api/knowledge/related":
+            query = parse_qs(parsed.query).get("q", [""])[0]
+            related = kb.get_related_concepts(query, depth=1)
+            self._send_json({"concept": query, "related": related})
+            return
+
+        if path == "/api/knowledge/growth-log":
+            limit = int(parse_qs(parsed.query).get("limit", ["50"])[0])
+            self._send_json({"log": kb.get_growth_log(limit=limit)})
+            return
+
+        if path == "/api/knowledge/growth-candidates":
+            self._send_json({"candidates": kb.get_growth_candidates()})
+            return
+
+        if path == "/api/knowledge/enriched":
+            query = parse_qs(parsed.query).get("q", [""])[0]
+            self._send_json(kb.get_enriched_context(query, top_k=3))
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)
@@ -484,6 +529,41 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"error": str(e)}, 500)
             return
 
+        # 知识库增强 POST API
+        if path == "/api/knowledge/ingest":
+            raw_path = body.get("path", "")
+            auto_distill = body.get("auto_distill", False)
+            if not raw_path:
+                self._send_json({"error": "缺少 path 参数"}, 400)
+                return
+            result = kb.ingest_raw(raw_path, auto_distill=auto_distill)
+            self._send_json(result, 200 if result.get("success") else 400)
+            return
+
+        if path == "/api/knowledge/wiki":
+            wiki_rel = body.get("path", "")
+            content = body.get("content", "")
+            meta = body.get("meta", {})
+            if not wiki_rel or not content:
+                self._send_json({"error": "缺少 path 或 content 参数"}, 400)
+                return
+            try:
+                saved = kb.save_wiki_page(wiki_rel, content, meta)
+                self._send_json({"success": True, "path": saved})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        if path == "/api/knowledge/stub":
+            concept = body.get("concept", "")
+            context = body.get("context", "")
+            if not concept:
+                self._send_json({"error": "缺少 concept 参数"}, 400)
+                return
+            wiki_path = kb.create_wiki_stub(concept, context, trigger="manual")
+            self._send_json({"success": True, "path": wiki_path})
+            return
+
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_PUT(self) -> None:
@@ -523,6 +603,16 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"success": True})
             else:
                 self._send_json({"error": "消息未找到"}, 404)
+            return
+
+        # DELETE /api/knowledge/wiki/{path}
+        if path.startswith("/api/knowledge/wiki/"):
+            wiki_rel = path[len("/api/knowledge/wiki/"):]
+            ok = kb.delete_wiki_page(f"wiki/{wiki_rel}")
+            if ok:
+                self._send_json({"success": True})
+            else:
+                self._send_json({"error": "Wiki 页面不存在"}, 404)
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)

@@ -1274,6 +1274,9 @@ function bindEvents() {
   document.addEventListener('drop', (e) => {
     uploadZone.classList.remove('drag-over');
   });
+
+  // 知识库管理器事件
+  bindKbManagerEvents();
 }
 
 // ============================================
@@ -1560,3 +1563,342 @@ async function init() {
 
 // 启动
 document.addEventListener('DOMContentLoaded', init);
+
+// ============================================
+// 知识库管理器
+// ============================================
+
+const KBManager = {
+  activeTab: 'overview',
+  wikiPages: [],
+  rawFiles: [],
+  graph: {},
+  growthLog: [],
+  candidates: [],
+};
+
+function openKbManager() {
+  document.getElementById('kb-manager-overlay').style.display = 'flex';
+  loadKbOverview();
+}
+
+function closeKbManager() {
+  document.getElementById('kb-manager-overlay').style.display = 'none';
+}
+
+function switchKbTab(tab) {
+  KBManager.activeTab = tab;
+  document.querySelectorAll('.kb-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  document.querySelectorAll('.kb-panel').forEach(p => p.classList.toggle('active', p.id === `kb-panel-${tab}`));
+
+  if (tab === 'overview') loadKbOverview();
+  else if (tab === 'raw') loadKbRaw();
+  else if (tab === 'wiki') loadKbWiki();
+  else if (tab === 'graph') loadKbGraph();
+  else if (tab === 'growth') loadKbGrowth();
+}
+
+async function loadKbOverview() {
+  const container = document.getElementById('kb-overview-content');
+  container.innerHTML = '◐ 加载中…';
+  try {
+    const [status, graph, candidates] = await Promise.all([
+      apiGet('/api/knowledge'),
+      apiGet('/api/knowledge/graph'),
+      apiGet('/api/knowledge/growth-candidates'),
+    ]);
+
+    const stages = graph.growth_stages || {};
+    const stageHtml = Object.entries(stages).map(([s, c]) => {
+      const labels = { seedling: '🌱 幼苗', growing: '🌿 成长中', mature: '🌳 成熟', archived: '📦 归档' };
+      return `<span class="kb-badge kb-badge-${s}">${labels[s] || s}: ${c}</span>`;
+    }).join(' ');
+
+    container.innerHTML = `
+      <div class="kb-stat-grid">
+        <div class="kb-stat-card">
+          <div class="kb-stat-value">${status.raw_count || 0}</div>
+          <div class="kb-stat-label">Raw 文件</div>
+        </div>
+        <div class="kb-stat-card">
+          <div class="kb-stat-value">${status.wiki_count || 0}</div>
+          <div class="kb-stat-label">Wiki 页面</div>
+        </div>
+        <div class="kb-stat-card">
+          <div class="kb-stat-value">${status.chunks || 0}</div>
+          <div class="kb-stat-label">索引段落</div>
+        </div>
+        <div class="kb-stat-card">
+          <div class="kb-stat-value">${graph.node_count || 0}</div>
+          <div class="kb-stat-label">知识节点</div>
+        </div>
+        <div class="kb-stat-card">
+          <div class="kb-stat-value">${graph.edge_count || 0}</div>
+          <div class="kb-stat-label">关联关系</div>
+        </div>
+        <div class="kb-stat-card">
+          <div class="kb-stat-value">${candidates.candidates?.length || 0}</div>
+          <div class="kb-stat-label">待生长</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;">${stageHtml}</div>
+      <div style="color:var(--text-tertiary);font-size:0.75rem;margin-top:8px;">
+        索引时间: ${status.built_at || '未知'}
+      </div>
+    `;
+  } catch (e) {
+    container.innerHTML = `<div class="kb-empty">✗ 加载失败: ${e.message}</div>`;
+  }
+}
+
+async function loadKbRaw() {
+  const container = document.getElementById('kb-raw-content');
+  container.innerHTML = '◐ 加载中…';
+  try {
+    const data = await apiGet('/api/knowledge/raw');
+    const files = data.files || [];
+    if (files.length === 0) {
+      container.innerHTML = '<div class="kb-empty">📂 暂无 raw 文件<br>将 .md/.txt 文件放入 knowledge/raw/ 目录即可</div>';
+      return;
+    }
+    const cats = {};
+    files.forEach(f => {
+      const cat = f.category || '其他';
+      if (!cats[cat]) cats[cat] = [];
+      cats[cat].push(f);
+    });
+
+    let html = '';
+    for (const [cat, list] of Object.entries(cats)) {
+      const catLabels = { papers: '📄 论文', notes: '📝 笔记', webclips: '🌐 剪藏' };
+      html += `<div class="kb-section-title">${catLabels[cat] || cat}</div>`;
+      list.forEach(f => {
+        html += `
+          <div class="kb-list-item">
+            <div class="kb-list-title">${f.name}</div>
+            <div class="kb-list-meta">${(f.size / 1024).toFixed(1)} KB · ${new Date(f.mtime * 1000).toLocaleDateString()}</div>
+          </div>
+        `;
+      });
+    }
+    container.innerHTML = html;
+  } catch (e) {
+    container.innerHTML = `<div class="kb-empty">✗ 加载失败</div>`;
+  }
+}
+
+async function loadKbWiki() {
+  const container = document.getElementById('kb-wiki-content');
+  container.innerHTML = '◐ 加载中…';
+  try {
+    const filter = document.getElementById('kb-wiki-filter')?.value || '';
+    const data = await apiGet(`/api/knowledge/wiki${filter ? '?type=' + filter : ''}`);
+    const pages = data.pages || [];
+    KBManager.wikiPages = pages;
+
+    if (pages.length === 0) {
+      container.innerHTML = '<div class="kb-empty">📝 暂无 Wiki 页面<br>通过"新建概念 Stub"或 raw→wiki 提炼来创建</div>';
+      return;
+    }
+
+    const stageLabels = { seedling: '🌱', growing: '🌿', mature: '🌳', archived: '📦' };
+    let html = '';
+    pages.forEach(p => {
+      const stageIcon = stageLabels[p.growth_stage] || '○';
+      html += `
+        <div class="kb-list-item" onclick="openWikiDetail('${p.path}')">
+          <div class="kb-list-title">${stageIcon} ${p.title}</div>
+          <div class="kb-list-meta">
+            ${p.type} · 确信度 ${(p.confidence * 100).toFixed(0)}%
+            ${p.tags?.length ? '· ' + p.tags.join(', ') : ''}
+          </div>
+        </div>
+      `;
+    });
+    container.innerHTML = html;
+  } catch (e) {
+    container.innerHTML = `<div class="kb-empty">✗ 加载失败</div>`;
+  }
+}
+
+async function loadKbGraph() {
+  const container = document.getElementById('kb-graph-content');
+  container.innerHTML = '◐ 加载中…';
+  try {
+    const data = await apiGet('/api/knowledge/graph');
+    const nodes = data.node_count || 0;
+    const edges = data.edge_count || 0;
+
+    if (nodes === 0) {
+      container.innerHTML = '<div class="kb-empty">🔗 知识图谱为空<br>创建 Wiki 页面并添加 related 字段即可建立关联</div>';
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="kb-stat-grid" style="grid-template-columns: repeat(2, 1fr);">
+        <div class="kb-stat-card">
+          <div class="kb-stat-value">${nodes}</div>
+          <div class="kb-stat-label">节点</div>
+        </div>
+        <div class="kb-stat-card">
+          <div class="kb-stat-value">${edges}</div>
+          <div class="kb-stat-label">边</div>
+        </div>
+      </div>
+      <div class="kb-section-title">生长阶段分布</div>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        ${Object.entries(data.growth_stages || {}).map(([s, c]) => {
+          const labels = { seedling: '🌱 幼苗', growing: '🌿 成长中', mature: '🌳 成熟', archived: '📦 归档' };
+          return `<span class="kb-badge kb-badge-${s}">${labels[s] || s}: ${c}</span>`;
+        }).join('')}
+      </div>
+    `;
+  } catch (e) {
+    container.innerHTML = `<div class="kb-empty">✗ 加载失败</div>`;
+  }
+}
+
+async function loadKbGrowth() {
+  const container = document.getElementById('kb-growth-content');
+  container.innerHTML = '◐ 加载中…';
+  try {
+    const [logData, candData] = await Promise.all([
+      apiGet('/api/knowledge/growth-log?limit=20'),
+      apiGet('/api/knowledge/growth-candidates'),
+    ]);
+
+    const logs = logData.log || [];
+    const candidates = candData.candidates || [];
+
+    let html = '';
+
+    // 待生长概念
+    if (candidates.length > 0) {
+      html += `<div class="kb-section-title">🌱 待生长概念 (${candidates.length})</div>`;
+      candidates.forEach(c => {
+        html += `
+          <div class="kb-list-item" onclick="openWikiDetail('${c.path}')">
+            <div class="kb-list-title">🌱 ${c.title}</div>
+            <div class="kb-list-meta">${c.reason}</div>
+          </div>
+        `;
+      });
+    }
+
+    // 生长日志
+    html += `<div class="kb-section-title">📜 最近生长记录</div>`;
+    if (logs.length === 0) {
+      html += '<div class="kb-empty">暂无生长记录</div>';
+    } else {
+      logs.forEach(l => {
+        const actionLabels = { create: '✨ 创建', update: '✏️ 更新', link: '🔗 关联', distill: '🧪 提炼', ingest: '📥 纳入' };
+        html += `
+          <div style="padding:8px 0;border-bottom:1px solid var(--border-color);font-size:0.8rem;">
+            <div style="display:flex;justify-content:space-between;">
+              <span>${actionLabels[l.action] || l.action} <strong>${l.target?.split('/').pop()}</strong></span>
+              <span style="color:var(--text-tertiary);">${new Date(l.timestamp).toLocaleDateString()}</span>
+            </div>
+            <div style="color:var(--text-tertiary);margin-top:2px;">${l.reason || ''}</div>
+          </div>
+        `;
+      });
+    }
+
+    container.innerHTML = html;
+  } catch (e) {
+    container.innerHTML = `<div class="kb-empty">✗ 加载失败</div>`;
+  }
+}
+
+async function openWikiDetail(wikiPath) {
+  const overlay = document.getElementById('kb-wiki-detail-overlay');
+  const titleEl = document.getElementById('kb-wiki-detail-title');
+  const bodyEl = document.getElementById('kb-wiki-detail-body');
+
+  overlay.style.display = 'flex';
+  bodyEl.innerHTML = '◐ 加载中…';
+
+  try {
+    const relPath = wikiPath.replace(/^wiki\//, '');
+    const data = await apiGet(`/api/knowledge/wiki/${encodeURIComponent(relPath)}`);
+    const fm = data.frontmatter || {};
+    const body = data.body || '';
+
+    titleEl.textContent = fm.title || relPath;
+
+    const stageLabels = { seedling: '🌱 幼苗', growing: '🌿 成长中', mature: '🌳 成熟', archived: '📦 归档' };
+    const stage = stageLabels[fm.growth_stage] || fm.growth_stage || '未知';
+
+    // 简单 Markdown 渲染
+    let renderedBody = body
+      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+      .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
+      .replace(/^\- (.*$)/gim, '<li>$1</li>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.*?)\*/g, '<em>$1</em>')
+      .replace(/`(.*?)`/g, '<code>$1</code>');
+
+    // 包裹列表项
+    renderedBody = renderedBody.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
+
+    bodyEl.innerHTML = `
+      <div class="kb-frontmatter">
+        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">类型</span><span class="kb-frontmatter-value">${fm.type || '-'}</span></div>
+        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">生长阶段</span><span class="kb-frontmatter-value">${stage}</span></div>
+        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">确信度</span><span class="kb-frontmatter-value">${(fm.confidence * 100).toFixed(0)}%</span></div>
+        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">标签</span><span class="kb-frontmatter-value">${(fm.tags || []).join(', ') || '-'}</span></div>
+        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">关联</span><span class="kb-frontmatter-value">${(fm.related || []).join(', ') || '-'}</span></div>
+        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">更新</span><span class="kb-frontmatter-value">${fm.updated ? new Date(fm.updated).toLocaleString() : '-'}</span></div>
+        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">路径</span><span class="kb-frontmatter-value">${wikiPath}</span></div>
+      </div>
+      <div class="kb-wiki-body">${renderedBody}</div>
+    `;
+  } catch (e) {
+    bodyEl.innerHTML = `<div class="kb-empty">✗ 加载失败: ${e.message}</div>`;
+  }
+}
+
+function closeWikiDetail() {
+  document.getElementById('kb-wiki-detail-overlay').style.display = 'none';
+}
+
+async function createWikiStub() {
+  const concept = prompt('请输入新概念名称：');
+  if (!concept) return;
+  try {
+    const data = await apiPost('/api/knowledge/stub', { concept, context: '手动创建' });
+    if (data.success) {
+      showToast(`✨ 已创建 stub: ${concept}`, 'success');
+      if (KBManager.activeTab === 'wiki') loadKbWiki();
+      else if (KBManager.activeTab === 'growth') loadKbGrowth();
+      else if (KBManager.activeTab === 'overview') loadKbOverview();
+    } else {
+      showToast('✗ 创建失败', 'error');
+    }
+  } catch (e) {
+    showToast('✗ 创建失败: ' + e.message, 'error');
+  }
+}
+
+// 知识库管理器事件绑定（在 bindEvents 中调用）
+function bindKbManagerEvents() {
+  document.getElementById('knowledge-manager-btn')?.addEventListener('click', openKbManager);
+  document.getElementById('kb-manager-close')?.addEventListener('click', closeKbManager);
+  document.getElementById('kb-manager-overlay')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeKbManager();
+  });
+
+  document.querySelectorAll('.kb-tab').forEach(tab => {
+    tab.addEventListener('click', () => switchKbTab(tab.dataset.tab));
+  });
+
+  document.getElementById('kb-wiki-detail-close')?.addEventListener('click', closeWikiDetail);
+  document.getElementById('kb-wiki-detail-overlay')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeWikiDetail();
+  });
+
+  document.getElementById('kb-wiki-create-stub')?.addEventListener('click', createWikiStub);
+  document.getElementById('kb-wiki-filter')?.addEventListener('change', loadKbWiki);
+}

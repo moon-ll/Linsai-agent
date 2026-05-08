@@ -86,12 +86,29 @@ LinSai-CoPilot/
 │   └── papers/                # 论文/文献
 │   └── notes/                 # 用户笔记
 │
+├── knowledge/                 # 林赛的知识库（raw/wiki 分层 + 知识图谱）
+│   ├── README.md              # 知识库使用指南
+│   ├── raw/                   # 用户原始材料（只读）
+│   │   ├── papers/            # 论文 PDF/笔记
+│   │   ├── notes/             # 用户手写笔记
+│   │   └── webclips/          # 网页剪藏
+│   ├── wiki/                  # LLM 管理的结构化知识（林赛研究笔记）
+│   │   ├── concepts/          # 核心概念
+│   │   ├── methods/           # 实验方法
+│   │   ├── people/            # 学者评价
+│   │   ├── papers/            # 论文精读
+│   │   └── projects/          # 项目聚合
+│   ├── index.json             # 统一倒排索引
+│   ├── graph.json             # 知识图谱
+│   └── growth-log.json        # 知识生长日志
+│
 └── scripts/                   # 工具脚本（Python 3，零依赖）
     ├── session_manager.py     # 会话创建、存档、加载
     ├── memory_manager.py      # 记忆读写、索引、压缩
     ├── task_manager.py        # 任务 CRUD、状态流转
     ├── copilot_engine.py      # 核心引擎：prompt 构建、调用 LLM、响应解析
-    ├── context_builder.py     # 上下文组装：人格 + 记忆 + 当前任务 + 会话历史
+    ├── context_builder.py     # 上下文组装：人格 + 记忆 + 知识库 + 当前任务 + 会话历史
+    ├── knowledge_base.py      # 知识库引擎：raw/wiki 分层、知识图谱、生长机制
     ├── proactive_engine.py    # 主动感知、心跳扫描
     ├── document_handler.py    # 文档读取、PDF提取、代码分析
     ├── agora_bridge.py        # Agora群聊桥接
@@ -223,9 +240,17 @@ LinSai-CoPilot/
 [系统指令]        ← 林赛人格注入（lin-sai-persona.md）
 [长期记忆]        ← 用户画像 + 相关记忆片段（≤6000 字符）
 [工作上下文]      ← 当前进行中的任务和关键决策（≤4000 字符）
+[技能上下文]      ← 匹配用户输入的 SKILL.md 内容（≤2000 字符）
+[相关知识]        ← 知识库检索结果 + 图谱关联知识（≤2000 字符）
 [会话历史]        ← 本次会话的最近消息（≤10000 字符）
 [当前输入]        ← 用户的最新消息
 ```
+
+**知识库注入策略**：
+- 优先返回 wiki 页面（结构化知识 > raw 原材料）
+- wiki 结果加权 1.2×，mature 阶段再加权 1.1×
+- 通过知识图谱拉取关联概念（深度=1）
+- 缺失概念检测：如果用户提到知识库中没有的概念，林赛会标注"认知边界"
 
 **总量控制**：注入内容总计不超过 30000 字符（约 7500-10000 tokens），充分利用 LLM 上下文能力（Kimi K2.5 支持 256K tokens），同时避免过度稀释注意力。
 
@@ -272,7 +297,23 @@ LinSai-CoPilot/
   - SSE 流式输出，Markdown 渲染，移动端适配
   - 右侧栏集成任务面板与文档引用
 
-### Phase 5：高级功能【⏳ 待开发】
+### Phase 5：智能知识库【✅ 已完成】
+- ✅ **raw/wiki 分层知识库** — `scripts/knowledge_base.py`
+  - raw/：用户原始材料（论文、笔记、剪藏），保留原貌
+  - wiki/：林赛研究笔记（concepts/methods/people/papers/projects），第一人称视角
+  - 标准 frontmatter 格式：title, type, growth_stage, confidence, related, tags
+- ✅ **知识图谱** — `knowledge/graph.json`
+  - 概念节点 + 关联边，支持深度遍历拉取关联知识
+- ✅ **知识生长机制**
+  - raw → wiki 提炼：LLM 自动将原始材料提炼为结构化笔记
+  - 交互触发生长：遇到新概念自动创建 seedling stub，对话中逐步丰满
+  - 生长日志：记录所有创建/更新/关联事件
+- ✅ **上下文集成** — `scripts/context_builder.py`
+  - 检索结果优先 wiki（结构化知识 > raw 原材料）
+  - 图谱关联知识自动拉取
+  - 缺失概念检测：标注"认知边界"，邀请用户一起记录
+
+### Phase 6：高级功能【⏳ 待开发】
 - 多设备会话同步
 - 语音/富文本交互（如有需求）
 - 性能优化与生态扩展

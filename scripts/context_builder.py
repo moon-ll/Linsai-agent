@@ -230,14 +230,44 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
         except Exception:
             pass
 
-    # 知识库检索注入
+    # 知识库检索注入（增强版：搜索结果 + 关联知识 + 缺失概念检测）
     knowledge_raw = ""
+    missing_concepts = []
     if _try_knowledge_base is not None:
         try:
-            results = _try_knowledge_base.search(user_input, top_k=2)
-            if results:
-                parts = [f"【知识库: {r['doc']}】\n{r['text'][:400]}" for r in results]
+            # 优先使用增强上下文（含图谱关联）
+            if hasattr(_try_knowledge_base, "get_enriched_context"):
+                enriched = _try_knowledge_base.get_enriched_context(user_input, top_k=2)
+                results = enriched.get("results", [])
+                related = enriched.get("related", [])
+                missing_concepts = enriched.get("missing_concepts", [])
+
+                parts = []
+                for r in results:
+                    src_icon = "📚" if r.get("source") == "raw" else "📝"
+                    stage = r.get("growth_stage", "")
+                    stage_tag = f" [{stage}]" if stage else ""
+                    parts.append(f"{src_icon}【知识库{stage_tag}: {r.get('title', r['doc'])}】\n{r['text'][:400]}")
+
+                # 添加图谱关联知识（轻量）
+                if related:
+                    parts.append("\n【关联知识】")
+                    for rel in related[:2]:
+                        parts.append(f"  → {rel['title']}（{rel['relation']}）: {rel['text'][:200]}")
+
                 knowledge_raw = "\n\n".join(parts)
+
+                # 如果检测到缺失概念，添加林赛的"认知边界"提示
+                # 这体现知识库作为"林赛的可靠知识来源"而非"记忆负担"
+                if missing_concepts:
+                    missing_str = "、".join(missing_concepts[:3])
+                    knowledge_raw += f"\n\n[林赛的认知边界] 你提到的 '{missing_str}' 在我的知识库中还没有系统的研究笔记。如果你愿意，我们可以一起把它记录下来，成为我知识体系的一部分。"
+            else:
+                # 回退到基础搜索
+                results = _try_knowledge_base.search(user_input, top_k=2)
+                if results:
+                    parts = [f"【知识库: {r['doc']}】\n{r['text'][:400]}" for r in results]
+                    knowledge_raw = "\n\n".join(parts)
         except Exception:
             pass
 

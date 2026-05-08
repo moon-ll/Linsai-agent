@@ -32,3 +32,8 @@ Thumbs.db
 *~
 .vscode/
 .idea/
+
+# === 知识库自动生成文件 ===
+knowledge/index.json
+knowledge/graph.json
+knowledge/growth-log.json
