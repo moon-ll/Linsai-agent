@@ -16,10 +16,10 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.parent
 
 # 预算与截断配置
-DEFAULT_BUDGETS = {"system": 8000, "memory": 6000, "context": 4000, "history": 10000, "input": 2000, "skills": 2000}
+DEFAULT_BUDGETS = {"system": 8000, "memory": 6000, "context": 4000, "history": 10000, "input": 2000, "skills": 2000, "knowledge": 2000}
 DEFAULT_TOTAL, EMERGENCY_TOTAL = 30000, 50000
-TRUNCATION_ORDER = ["history", "memory", "skills", "context", "system"]
-MIN_KEEP = {"system": 2000, "memory": 0, "context": 0, "history": 0, "skills": 0, "input": None}
+TRUNCATION_ORDER = ["history", "memory", "skills", "knowledge", "context", "system"]
+MIN_KEEP = {"system": 2000, "memory": 0, "context": 0, "history": 0, "skills": 0, "knowledge": 0, "input": None}
 
 
 def _load_text(path: Path) -> str:
@@ -76,6 +76,20 @@ try:
         _sm_mod = importlib.util.module_from_spec(_spec)
         _spec.loader.exec_module(_sm_mod)
         _try_skill_manager = _sm_mod
+except Exception:
+    pass
+
+
+# 尝试导入 knowledge_base
+_try_knowledge_base = None
+try:
+    import importlib.util
+    _kb_path = Path(__file__).parent / "knowledge_base.py"
+    if _kb_path.exists():
+        _spec = importlib.util.spec_from_file_location("knowledge_base", _kb_path)
+        _kb_mod = importlib.util.module_from_spec(_spec)
+        _spec.loader.exec_module(_kb_mod)
+        _try_knowledge_base = _kb_mod
 except Exception:
     pass
 
@@ -216,6 +230,17 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
         except Exception:
             pass
 
+    # 知识库检索注入
+    knowledge_raw = ""
+    if _try_knowledge_base is not None:
+        try:
+            results = _try_knowledge_base.search(user_input, top_k=2)
+            if results:
+                parts = [f"【知识库: {r['doc']}】\n{r['text'][:400]}" for r in results]
+                knowledge_raw = "\n\n".join(parts)
+        except Exception:
+            pass
+
     history_msgs = _read_history(session_id)
     input_raw = user_input
 
@@ -224,6 +249,7 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
         "memory": len(memory_raw),
         "context": len(context_raw),
         "skills": len(skills_raw),
+        "knowledge": len(knowledge_raw),
         "history": sum(len(m["content"]) for m in history_msgs),
         "input": len(input_raw),
     }
@@ -234,6 +260,7 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
     memory_final = _truncate_text(memory_raw, budgets["memory"])
     context_final = _truncate_text(context_raw, budgets["context"])
     skills_final = _truncate_text(skills_raw, budgets["skills"])
+    knowledge_final = _truncate_text(knowledge_raw, budgets["knowledge"])
     history_final = _truncate_history(history_msgs, budgets["history"])
     input_final = input_raw
 
@@ -247,6 +274,8 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
         system_prompt += f"\n\n[工作上下文]\n{context_final}"
     if skills_final.strip():
         system_prompt += f"\n\n[技能上下文]\n{skills_final}"
+    if knowledge_final.strip():
+        system_prompt += f"\n\n[相关知识]\n{knowledge_final}"
 
     messages = [{"role": m["role"], "content": m["content"]} for m in history_final]
     messages.append({"role": "user", "content": input_final})
@@ -260,6 +289,7 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
             "memory": {"budget": budgets["memory"], "actual": actuals["memory"], "final": len(memory_final)},
             "context": {"budget": budgets["context"], "actual": actuals["context"], "final": len(context_final)},
             "skills": {"budget": budgets["skills"], "actual": actuals["skills"], "final": len(skills_final)},
+            "knowledge": {"budget": budgets["knowledge"], "actual": actuals["knowledge"], "final": len(knowledge_final)},
             "history": {"budget": budgets["history"], "actual": actuals["history"], "final": sum(len(m["content"]) for m in history_final)},
             "input": {"budget": budgets["input"], "actual": actuals["input"], "final": len(input_final)},
         },

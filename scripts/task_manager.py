@@ -114,6 +114,9 @@ def create_task(
         "priority": final_priority,
         "description": description,
         "due_date": due_date,
+        "progress": 0,
+        "subtasks": [],
+        "milestones": [],
         "created_at": _now_utc(),
         "updated_at": _now_utc(),
         "completed_at": None,
@@ -377,4 +380,69 @@ if __name__ == "__main__":
 
     print("\n" + "=" * 40)
     print("task_manager.py 自检完成")
+
+
+# ---------------------------------------------------------------------------
+# 任务进度与结构化增强
+# ---------------------------------------------------------------------------
+
+def update_progress(task_id: str, progress: int) -> dict:
+    """更新任务进度（0-100），自动检测完成状态。"""
+    task = get_task(task_id)
+    progress = max(0, min(100, progress))
+    task["progress"] = progress
+    if progress >= 100 and task.get("status") != "completed":
+        task["status"] = "completed"
+        task["completed_at"] = _now_utc()
+    task["updated_at"] = _now_utc()
+    path = _find_task_file(task_id)
+    _write_json(path, task)
+    return task
+
+
+def add_subtask(task_id: str, title: str) -> dict:
+    """添加子任务。"""
+    task = get_task(task_id)
+    subtasks = task.get("subtasks", [])
+    subtask_id = f"st{len(subtasks) + 1}"
+    subtasks.append({
+        "id": subtask_id,
+        "title": title,
+        "done": False,
+    })
+    task["subtasks"] = subtasks
+    task["updated_at"] = _now_utc()
+    _recalc_progress(task)
+    path = _find_task_file(task_id)
+    _write_json(path, task)
+    return task
+
+
+def toggle_subtask(task_id: str, subtask_id: str) -> dict:
+    """切换子任务完成状态。"""
+    task = get_task(task_id)
+    subtasks = task.get("subtasks", [])
+    for st in subtasks:
+        if st.get("id") == subtask_id:
+            st["done"] = not st.get("done", False)
+            break
+    task["subtasks"] = subtasks
+    task["updated_at"] = _now_utc()
+    _recalc_progress(task)
+    path = _find_task_file(task_id)
+    _write_json(path, task)
+    return task
+
+
+def _recalc_progress(task: dict) -> None:
+    """根据子任务完成状态重新计算父任务进度。"""
+    subtasks = task.get("subtasks", [])
+    if not subtasks:
+        return
+    done_count = sum(1 for st in subtasks if st.get("done"))
+    progress = int(done_count / len(subtasks) * 100)
+    task["progress"] = progress
+    if progress >= 100 and task.get("status") != "completed":
+        task["status"] = "completed"
+        task["completed_at"] = _now_utc()
     print("=" * 40)

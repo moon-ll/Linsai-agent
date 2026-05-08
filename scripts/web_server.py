@@ -43,6 +43,7 @@ import chat_archive as ca
 import context_builder as cb
 import copilot_engine as ce
 import document_handler as dh
+import knowledge_base as kb
 import llm_router as lr
 import memory_manager as mm
 import proactive_engine as pe
@@ -221,6 +222,16 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json(tasks)
             return
 
+        # 单个任务详情
+        if path.startswith("/api/tasks/") and len(path.split("/")) == 4:
+            tid = path[len("/api/tasks/"):]
+            try:
+                task = tm.get_task(tid)
+                self._send_json(task)
+            except FileNotFoundError:
+                self._send_json({"error": f"任务不存在: {tid}"}, 404)
+            return
+
         if path == "/api/heartbeat":
             reminders = pe.heartbeat()
             self._send_json({"reminders": reminders})
@@ -291,6 +302,17 @@ class RequestHandler(BaseHTTPRequestHandler):
                 "active": skm.get_active_skill_names(query),
                 "all": skm.list_skills(),
             })
+            return
+
+        # 知识库
+        if path == "/api/knowledge":
+            self._send_json(kb.get_index_status())
+            return
+
+        if path == "/api/knowledge/search":
+            query = parse_qs(parsed.query).get("q", [""])[0]
+            results = kb.search(query, top_k=3)
+            self._send_json({"query": query, "results": results})
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)
@@ -428,6 +450,19 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"success": True, "mode": "manual", "provider": name})
             else:
                 self._send_json({"error": f"Provider {name} 不可用"}, 400)
+            return
+
+        # 重建知识库索引
+        if path == "/api/knowledge/reindex":
+            try:
+                idx = kb.build_index(force=True)
+                self._send_json({
+                    "success": True,
+                    "documents": len(idx.get("documents", {})),
+                    "terms": len(idx.get("inverted", {})),
+                })
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)

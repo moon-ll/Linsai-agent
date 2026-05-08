@@ -155,6 +155,43 @@ async function apiPost(path, body) {
   return res.json();
 }
 
+async function apiPut(path, body) {
+  const res = await fetch(API_BASE + path, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error || `HTTP ${res.status}`);
+  }
+  return res.json();
+}
+
+// ============================================
+// 模态框
+// ============================================
+function showModal(htmlContent) {
+  let overlay = document.getElementById('modal-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.id = 'modal-overlay';
+    overlay.className = 'modal-overlay';
+    overlay.innerHTML = '<div class="modal" id="modal-content"></div>';
+    document.body.appendChild(overlay);
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeModal();
+    });
+  }
+  document.getElementById('modal-content').innerHTML = htmlContent;
+  overlay.style.display = 'flex';
+}
+
+function closeModal() {
+  const overlay = document.getElementById('modal-overlay');
+  if (overlay) overlay.style.display = 'none';
+}
+
 // ============================================
 // 会话管理
 // ============================================
@@ -772,33 +809,142 @@ async function deleteMessage(msgId) {
 async function loadTasks() {
   try {
     State.tasks = await apiGet('/api/tasks');
-    renderTaskList();
+    renderTaskBoard();
   } catch (e) {
     console.error('加载任务失败:', e);
   }
 }
 
-function renderTaskList() {
-  const container = document.getElementById('task-list');
+function renderTaskBoard() {
+  const columns = {
+    backlog: document.getElementById('task-backlog'),
+    active: document.getElementById('task-active'),
+    completed: document.getElementById('task-completed'),
+  };
+
+  // 清空
+  Object.values(columns).forEach(c => c.innerHTML = '');
+
   if (!State.tasks || State.tasks.length === 0) {
-    container.innerHTML = '<p class="empty">暂无任务</p>';
+    columns.backlog.innerHTML = '<p class="empty">暂无任务</p>';
     return;
   }
 
-  container.innerHTML = State.tasks.slice(0, 8).map(t => {
-    const statusClass = t.status === 'active' ? 'status-active' :
-                        t.status === 'completed' ? 'status-completed' :
-                        t.due_date && new Date(t.due_date) < new Date() ? 'status-overdue' : '';
-    return `
-      <div class="task-item ${statusClass}">
-        <div class="task-title">${escapeHtml(t.title || '未命名')}</div>
-        <div class="task-meta">
-          ${t.due_date ? formatDate(t.due_date) : '无截止日期'}
-          · ${t.priority || '普通'}
+  State.tasks.forEach(t => {
+    const status = t.status === 'paused' ? 'backlog' : t.status;
+    const col = columns[status];
+    if (!col) return;
+
+    const progress = t.progress || 0;
+    const subtasks = t.subtasks || [];
+    const doneCount = subtasks.filter(st => st.done).length;
+    const subtaskLabel = subtasks.length > 0 ? `${doneCount}/${subtasks.length}` : '';
+    const overdue = t.due_date && new Date(t.due_date) < new Date() && t.status !== 'completed';
+
+    const card = document.createElement('div');
+    card.className = 'task-card';
+    card.innerHTML = `
+      <div class="task-card-title">${escapeHtml(t.title || '未命名')}</div>
+      <div class="task-card-meta">
+        ${overdue ? '<span class="task-overdue">逾期</span>' : ''}
+        ${t.priority ? `<span class="task-priority task-priority-${t.priority}">${t.priority}</span>` : ''}
+        ${t.due_date ? formatDate(t.due_date) : ''}
+      </div>
+      <div class="task-card-progress">
+        <div class="progress-track">
+          <div class="progress-fill-bar" style="width:${progress}%"></div>
+        </div>
+        <span class="progress-label">${progress}% ${subtaskLabel}</span>
+      </div>
+    `;
+    card.addEventListener('click', () => openTaskDetail(t.task_id));
+    col.appendChild(card);
+  });
+}
+
+async function openTaskDetail(taskId) {
+  try {
+    const task = await apiGet(`/api/tasks/${encodeURIComponent(taskId)}`);
+    const subtasks = task.subtasks || [];
+    const milestones = task.milestones || [];
+
+    const subtasksHtml = subtasks.length > 0 ? `
+      <div style="margin-top:12px;">
+        <div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:6px;">子任务</div>
+        ${subtasks.map(st => `
+          <label style="display:flex;align-items:center;gap:6px;padding:3px 0;cursor:pointer;font-size:0.85rem;">
+            <input type="checkbox" data-stid="${st.id}" ${st.done ? 'checked' : ''}>
+            <span style="${st.done ? 'text-decoration:line-through;color:var(--text-tertiary);' : ''}">${escapeHtml(st.title)}</span>
+          </label>
+        `).join('')}
+      </div>
+    ` : '<div style="margin-top:12px;font-size:0.8rem;color:var(--text-tertiary);">暂无子任务</div>';
+
+    const milestonesHtml = milestones.length > 0 ? `
+      <div style="margin-top:12px;">
+        <div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:6px;">里程碑</div>
+        ${milestones.map(m => `
+          <div style="font-size:0.8rem;padding:2px 0;">
+            ${m.reached ? '✓' : '○'} ${escapeHtml(m.label)} (${m.date})
+          </div>
+        `).join('')}
+      </div>
+    ` : '';
+
+    const html = `
+      <div style="max-width:400px;">
+        <h3 style="margin:0 0 8px;">${escapeHtml(task.title)}</h3>
+        <div style="font-size:0.8rem;color:var(--text-tertiary);margin-bottom:12px;">
+          ${task.status} · ${task.priority || '普通'} · 进度 ${task.progress || 0}%
+        </div>
+        ${task.description ? `<div style="font-size:0.85rem;margin-bottom:12px;">${escapeHtml(task.description)}</div>` : ''}
+        <div style="margin-bottom:12px;">
+          <input type="range" min="0" max="100" value="${task.progress || 0}" id="task-progress-slider" style="width:100%;">
+          <div style="text-align:center;font-size:0.8rem;margin-top:4px;"><span id="task-progress-value">${task.progress || 0}</span>%</div>
+        </div>
+        ${subtasksHtml}
+        ${milestonesHtml}
+        <div style="margin-top:16px;display:flex;gap:8px;justify-content:flex-end;">
+          <button class="btn-text" id="close-task-detail">关闭</button>
+          <button class="btn-primary" id="save-task-progress">保存</button>
         </div>
       </div>
     `;
-  }).join('');
+
+    showModal(html);
+
+    // 进度滑块实时更新
+    const slider = document.getElementById('task-progress-slider');
+    const valueLabel = document.getElementById('task-progress-value');
+    if (slider && valueLabel) {
+      slider.addEventListener('input', (e) => {
+        valueLabel.textContent = e.target.value;
+      });
+    }
+
+    // 子任务勾选
+    document.querySelectorAll('#modal-content input[type="checkbox"][data-stid]').forEach(cb => {
+      cb.addEventListener('change', async (e) => {
+        const stid = e.target.dataset.stid;
+        await apiPut(`/api/tasks/${encodeURIComponent(taskId)}/subtasks`, { action: 'toggle', subtask_id: stid });
+        await loadTasks();
+      });
+    });
+
+    // 保存进度
+    document.getElementById('save-task-progress').addEventListener('click', async () => {
+      const val = parseInt(document.getElementById('task-progress-slider').value, 10);
+      await apiPut(`/api/tasks/${encodeURIComponent(taskId)}/progress`, { progress: val });
+      await loadTasks();
+      closeModal();
+    });
+
+    document.getElementById('close-task-detail').addEventListener('click', closeModal);
+
+  } catch (e) {
+    console.error('加载任务详情失败:', e);
+    showToast('加载任务详情失败', 'error');
+  }
 }
 
 // ============================================
@@ -847,6 +993,7 @@ function bindEvents() {
     loadLLMStatus();
     loadUsage();
     loadSkills();
+    loadKnowledge();
   });
 
   // 顶部 provider-badge 点击打开设置面板
@@ -857,6 +1004,19 @@ function bindEvents() {
     loadLLMStatus();
     loadUsage();
     loadSkills();
+    loadKnowledge();
+  });
+
+  // 知识库重建索引
+  document.getElementById('knowledge-reindex-btn').addEventListener('click', async () => {
+    try {
+      showToast('◐ 正在重建知识库索引…', 'warning');
+      const data = await apiPost('/api/knowledge/reindex', {});
+      showToast(`✓ 索引完成: ${data.documents} 个文档, ${data.terms} 个词项`, 'success');
+      loadKnowledge();
+    } catch (e) {
+      showToast('✗ 索引失败: ' + e.message, 'error');
+    }
   });
   document.getElementById('close-settings').addEventListener('click', () => {
     document.getElementById('settings-drawer').style.display = 'none';
@@ -1296,6 +1456,28 @@ async function loadSkills() {
   } catch (e) {
     console.error('加载技能失败:', e);
     const container = document.getElementById('skills-status');
+    if (container) container.innerHTML = '✗ 加载失败';
+  }
+}
+
+async function loadKnowledge() {
+  try {
+    const data = await apiGet('/api/knowledge');
+    const container = document.getElementById('knowledge-status');
+    if (!container) return;
+
+    if (!data.indexed) {
+      container.innerHTML = '○ 尚未索引。将 .md/.txt 文件放入 knowledge/ 目录后点击重建索引。';
+      return;
+    }
+
+    container.innerHTML = `
+      <div>✓ 已索引 <strong>${data.documents}</strong> 个文档，<strong>${data.chunks}</strong> 个段落</div>
+      <div style="color:var(--text-tertiary);font-size:0.75rem;margin-top:2px;">索引时间: ${data.built_at || '未知'}</div>
+    `;
+  } catch (e) {
+    console.error('加载知识库失败:', e);
+    const container = document.getElementById('knowledge-status');
     if (container) container.innerHTML = '✗ 加载失败';
   }
 }

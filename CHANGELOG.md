@@ -1,5 +1,42 @@
 # 变更记录
 
+## v1.6.0-M2 - 2026-05-08 本地知识库 + 任务看板
+
+### 新增
+- **本地知识库**
+  - `scripts/knowledge_base.py` — 新建模块（300行）
+    - 纯标准库实现：中文分词（单字+双字+四字窗口）、英文单词提取
+    - 文档分块：按段落切分，每块 ≤500 字符
+    - 倒排索引 + TF-IDF 检索
+    - 增量索引：只更新修改过的文档
+    - 数据存储：`knowledge/index.json`
+  - `knowledge/` 目录：用户放入 .md/.txt/.rst 文件即可被索引
+  - 示例文档：`knowledge/solid_hhg_basics.md`（固体HHG基础）
+  - `context_builder.py` 自动检索：用户输入自动匹配 Top-2 相关知识段落注入 system_prompt
+  - Web 界面：设置面板显示索引状态，支持一键重建索引
+- **任务进度跟踪增强**
+  - `scripts/task_manager.py` 增强：
+    - 任务 JSON 新增 `progress` (0-100)、`subtasks`、 `milestones` 字段
+    - `update_progress()` — 更新进度，自动检测完成（progress=100 → status=completed）
+    - `add_subtask()` / `toggle_subtask()` — 子任务 CRUD
+    - `_recalc_progress()` — 根据子任务完成数自动计算父任务进度
+  - Web 界面：
+    - 右侧任务面板改为**三列看板**（待办 / 进行中 / 已完成）
+    - 任务卡片显示进度条 + 子任务完成数（如 `2/5`）
+    - 点击任务展开详情模态框：进度滑块、子任务勾选、里程碑列表
+  - API 端点：
+    - `GET /api/tasks/{id}` — 任务详情
+    - `PUT /api/tasks/{id}/progress` — 更新进度
+    - `PUT /api/tasks/{id}/subtasks` — 添加/切换子任务
+- **知识库 API**
+  - `GET /api/knowledge` — 索引状态
+  - `GET /api/knowledge/search?q=...` — TF-IDF 检索
+  - `POST /api/knowledge/reindex` — 重建索引
+
+### 修改
+- `scripts/context_builder.py` — 新增 `knowledge` 预算项（2000字符），知识检索结果参与预算分配
+- `scripts/web_server.py` — 新增知识库和任务管理 API
+
 ## v1.6.0-M1 - 2026-05-08 Token 统计 + 技能系统
 
 ### 新增
