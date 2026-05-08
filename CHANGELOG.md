@@ -1,5 +1,36 @@
 # 变更记录
 
+## v1.3.0 - 2026-05-08 Web 界面第二批 + 启动快捷方式
+
+### 新增
+- **文件上传图形化**
+  - 拖拽上传区域 + 点击选择按钮
+  - 支持文本文件（.md/.txt）直接读取，二进制文件 Base64 传输
+  - 上传进度条，完成后自动在对话中插入文件引用卡片
+  - 上传后自动更新文献索引和右侧栏引用列表
+- **Agora 集成按钮**
+  - 点击 `/agora` 弹出 20 位历史人物选择面板（费曼、狄拉克、爱因斯坦等）
+  - 多选人物，一键导出到 Agora 群聊格式
+- **消息编辑/删除**
+  - 用户消息 hover 显示编辑/删除按钮
+  - 编辑后实时更新 DOM 和持久化存储
+  - 删除前确认，避免误操作
+- **启动快捷方式**
+  - `scripts/launch.sh` — 一键启动脚本，检测端口占用，自动打开浏览器
+  - `scripts/LinSai-CoPilot.command` — macOS 双击启动（可放桌面）
+- **文献列表 API** — `/api/references` 实时显示已上传文档
+
+### 后端增强
+- `web_server.py` 新增 API：
+  - `POST /api/upload` — 文件上传（JSON base64 方式）
+  - `POST /api/agora` — Agora 上下文导出
+  - `PUT /api/sessions/<id>/messages/<msg_id>` — 消息编辑
+  - `DELETE /api/sessions/<id>/messages/<msg_id>` — 消息删除
+  - `GET /api/references` — 文献列表
+- 新增辅助函数：`_handle_upload`、`_edit_message`、`_delete_message`、`_list_references`
+
+---
+
 ## v1.2.0 - 2026-05-08 Web 界面与浏览器交互
 
 ### 新增

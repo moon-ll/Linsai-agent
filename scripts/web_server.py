@@ -14,6 +14,7 @@
 """
 
 import argparse
+import base64
 import json
 import queue
 import re
@@ -37,6 +38,7 @@ _WEB_DIR = _PROJECT_ROOT / "web"
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
+import agora_bridge as ab
 import context_builder as cb
 import copilot_engine as ce
 import document_handler as dh
@@ -220,6 +222,11 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json({"reminders": reminders})
             return
 
+        if path == "/api/references":
+            refs = _list_references()
+            self._send_json(refs)
+            return
+
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_POST(self) -> None:
@@ -308,6 +315,71 @@ class RequestHandler(BaseHTTPRequestHandler):
                 ).start()
             return
 
+        # 文件上传
+        if path == "/api/upload":
+            result = _handle_upload(body)
+            if result.get("success"):
+                self._send_json(result)
+            else:
+                self._send_json(result, 400)
+            return
+
+        # Agora 导出
+        if path == "/api/agora":
+            sid = body.get("session_id", "")
+            topic = body.get("topic", "")
+            personas = body.get("personas", [])
+            if not sid or not personas:
+                self._send_json({"error": "缺少 session_id 或 personas"}, 400)
+                return
+            try:
+                export_path = ab.export_to_agora(sid, topic, personas)
+                self._send_json({"success": True, "path": str(export_path)})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        self._send_json({"error": f"Not found: {path}"}, 404)
+
+    def do_PUT(self) -> None:
+        """处理 PUT 请求（消息编辑）。"""
+        parsed = urlparse(self.path)
+        path = unquote(parsed.path)
+        body = self._read_json_body()
+
+        # PUT /api/sessions/<id>/messages/<msg_id>
+        m = re.match(r"^/api/sessions/([^/]+)/messages/([^/]+)$", path)
+        if m:
+            sid, msg_id = m.group(1), m.group(2)
+            new_content = body.get("content", "").strip()
+            if not new_content:
+                self._send_json({"error": "内容不能为空"}, 400)
+                return
+            ok = _edit_message(sid, msg_id, new_content)
+            if ok:
+                self._send_json({"success": True})
+            else:
+                self._send_json({"error": "消息未找到"}, 404)
+            return
+
+        self._send_json({"error": f"Not found: {path}"}, 404)
+
+    def do_DELETE(self) -> None:
+        """处理 DELETE 请求（消息删除）。"""
+        parsed = urlparse(self.path)
+        path = unquote(parsed.path)
+
+        # DELETE /api/sessions/<id>/messages/<msg_id>
+        m = re.match(r"^/api/sessions/([^/]+)/messages/([^/]+)$", path)
+        if m:
+            sid, msg_id = m.group(1), m.group(2)
+            ok = _delete_message(sid, msg_id)
+            if ok:
+                self._send_json({"success": True})
+            else:
+                self._send_json({"error": "消息未找到"}, 404)
+            return
+
         self._send_json({"error": f"Not found: {path}"}, 404)
 
 
@@ -318,6 +390,129 @@ def _update_memory_async(session_id: str) -> None:
         mm.update_working_context(session_id)
     except Exception:
         pass
+
+
+# ---------------------------------------------------------------------------
+# 辅助函数
+# ---------------------------------------------------------------------------
+
+def _edit_message(session_id: str, msg_id: str, new_content: str) -> bool:
+    """编辑指定消息。"""
+    msg_path = _PROJECT_ROOT / "sessions" / session_id / "messages.json"
+    if not msg_path.exists():
+        return False
+    try:
+        with open(msg_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        messages = data if isinstance(data, list) else data.get("messages", [])
+        for msg in messages:
+            if msg.get("msg_id") == msg_id:
+                msg["content"] = new_content
+                break
+        else:
+            return False
+        with open(msg_path, "w", encoding="utf-8") as f:
+            json.dump(data if isinstance(data, list) else {"messages": messages},
+                      f, ensure_ascii=False, indent=2)
+        return True
+    except Exception:
+        return False
+
+
+def _delete_message(session_id: str, msg_id: str) -> bool:
+    """删除指定消息。"""
+    msg_path = _PROJECT_ROOT / "sessions" / session_id / "messages.json"
+    if not msg_path.exists():
+        return False
+    try:
+        with open(msg_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        messages = data if isinstance(data, list) else data.get("messages", [])
+        original_len = len(messages)
+        messages = [m for m in messages if m.get("msg_id") != msg_id]
+        if len(messages) == original_len:
+            return False
+        with open(msg_path, "w", encoding="utf-8") as f:
+            json.dump(data if isinstance(data, list) else {"messages": messages},
+                      f, ensure_ascii=False, indent=2)
+        return True
+    except Exception:
+        return False
+
+
+def _handle_upload(body: Dict[str, Any]) -> Dict[str, Any]:
+    """处理文件上传，保存到 references/ 目录。"""
+    filename = body.get("filename", "")
+    content = body.get("content", "")
+    category = body.get("category", "notes")
+    is_base64 = body.get("is_base64", False)
+
+    if not filename:
+        return {"success": False, "error": "缺少文件名"}
+
+    # 清理文件名
+    safe_name = re.sub(r"[^\w\-.\s]", "_", filename).strip()
+    if not safe_name:
+        safe_name = "uploaded_file"
+
+    dest_dir = _PROJECT_ROOT / "references" / category
+    dest_dir.mkdir(parents=True, exist_ok=True)
+    dest_path = dest_dir / safe_name
+
+    # 避免覆盖：追加序号
+    counter = 1
+    stem = dest_path.stem
+    suffix = dest_path.suffix
+    while dest_path.exists():
+        dest_path = dest_dir / f"{stem}_{counter}{suffix}"
+        counter += 1
+
+    try:
+        if is_base64:
+            raw = base64.b64decode(content)
+            with open(dest_path, "wb") as f:
+                f.write(raw)
+            # 尝试提取文本摘要
+            try:
+                text_preview = dh.read_document(str(dest_path))
+                if text_preview:
+                    text_preview = text_preview[:200] + "…" if len(text_preview) > 200 else text_preview
+            except Exception:
+                text_preview = None
+        else:
+            with open(dest_path, "w", encoding="utf-8") as f:
+                f.write(content)
+            text_preview = content[:200] + "…" if len(content) > 200 else content
+
+        # 更新索引
+        try:
+            dh.index_references()
+        except Exception:
+            pass
+
+        return {
+            "success": True,
+            "path": str(dest_path.relative_to(_PROJECT_ROOT)),
+            "filename": dest_path.name,
+            "category": category,
+            "preview": text_preview,
+        }
+    except Exception as e:
+        return {"success": False, "error": str(e)}
+
+
+def _list_references() -> List[Dict[str, Any]]:
+    """列出已上传的参考文献。"""
+    refs: List[Dict[str, Any]] = []
+    index_path = _PROJECT_ROOT / "references" / "index.json"
+    if index_path.exists():
+        try:
+            with open(index_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            refs = data if isinstance(data, list) else data.get("entries", [])
+        except Exception:
+            pass
+    return refs
 
 
 # ---------------------------------------------------------------------------

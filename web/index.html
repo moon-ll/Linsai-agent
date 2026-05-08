@@ -66,6 +66,15 @@
         <button class="cmd-btn" data-cmd="/read" title="读取文档">/read</button>
         <button class="cmd-btn" data-cmd="/agora" title="Agora群聊">/agora</button>
         <button class="cmd-btn" data-cmd="/summary" title="会话摘要">/summary</button>
+        <button class="cmd-btn" id="upload-btn" title="上传文件">📎</button>
+      </div>
+      <div class="upload-zone" id="upload-zone">
+        <p>📎 拖拽文件到此处，或 <span class="upload-link">点击选择</span></p>
+        <input type="file" id="file-input" multiple style="display:none">
+      </div>
+      <div class="upload-progress" id="upload-progress" style="display:none;">
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        <span class="progress-text" id="progress-text">0%</span>
       </div>
       <div class="input-row">
         <textarea id="message-input" placeholder="输入消息… Shift+Enter 换行" rows="2"></textarea>
@@ -129,6 +138,35 @@
     <div class="modal-actions">
       <button class="btn-text" id="cancel-new-session">取消</button>
       <button class="btn-primary" id="confirm-new-session">创建</button>
+    </div>
+  </div>
+</div>
+
+<!-- Agora 人物选择弹窗 -->
+<div class="modal-overlay" id="agora-modal" style="display:none;">
+  <div class="modal">
+    <h3>📤 导出到 Agora 群聊</h3>
+    <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;">
+      选择你想邀请的历史人物参与讨论
+    </p>
+    <div class="persona-grid" id="persona-grid">
+      <!-- 动态填充 -->
+    </div>
+    <div class="modal-actions">
+      <button class="btn-text" id="cancel-agora">取消</button>
+      <button class="btn-primary" id="confirm-agora">导出</button>
+    </div>
+  </div>
+</div>
+
+<!-- 消息编辑弹窗 -->
+<div class="modal-overlay" id="edit-message-modal" style="display:none;">
+  <div class="modal">
+    <h3>✏️ 编辑消息</h3>
+    <textarea id="edit-message-content" rows="6" style="width:100%;margin-top:8px;"></textarea>
+    <div class="modal-actions">
+      <button class="btn-text" id="cancel-edit-message">取消</button>
+      <button class="btn-primary" id="confirm-edit-message">保存</button>
     </div>
   </div>
 </div>
