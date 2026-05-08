@@ -91,7 +91,18 @@ LinSai-CoPilot/
     ├── memory_manager.py      # 记忆读写、索引、压缩
     ├── task_manager.py        # 任务 CRUD、状态流转
     ├── copilot_engine.py      # 核心引擎：prompt 构建、调用 LLM、响应解析
-    └── context_builder.py     # 上下文组装：人格 + 记忆 + 当前任务 + 会话历史
+    ├── context_builder.py     # 上下文组装：人格 + 记忆 + 当前任务 + 会话历史
+    ├── proactive_engine.py    # 主动感知、心跳扫描
+    ├── document_handler.py    # 文档读取、PDF提取、代码分析
+    ├── agora_bridge.py        # Agora群聊桥接
+    ├── backup_manager.py      # 数据备份/恢复/清理
+    ├── upgrade.py             # 安全升级标准流程
+    └── web_server.py          # Web 服务器（HTTP + SSE + API路由）
+
+├── web/                       # 前端界面（零框架依赖）
+│   ├── index.html             # 单页应用入口
+│   ├── css/style.css          # 双主题样式（深色/浅色/自动）
+│   └── js/app.js              # 原生 JavaScript（会话/聊天/流式SSE）
 ```
 
 ---
@@ -256,6 +267,10 @@ LinSai-CoPilot/
 - ✅ 文档附件处理（用户上传论文/笔记）— `scripts/document_handler.py`
 - ✅ 代码协作（读取、分析、建议）— `scripts/document_handler.py`
 - ✅ Agora 集成（"让我们开个会问问费曼和狄拉克"）— `scripts/agora_bridge.py`
+- ✅ **Web 界面** — `scripts/web_server.py` + `web/`
+  - 浏览器交互替代终端，双主题切换（深色/浅色/自动）
+  - SSE 流式输出，Markdown 渲染，移动端适配
+  - 右侧栏集成任务面板与文档引用
 
 ### Phase 5：高级功能【⏳ 待开发】
 - 多设备会话同步
@@ -297,9 +312,18 @@ LinSai-CoPilot/
   - 验证结果
   ```
 
-### 4. 测试策略
+### 4. 前端规范
+- **零框架依赖**：纯原生 HTML/CSS/JavaScript，不引入 React/Vue/Angular
+- **主题系统**：CSS 变量 + `data-theme` 属性切换（`light`/`dark`/`auto`）
+- **通信协议**：REST API + SSE（Server-Sent Events）流式输出，不引入 WebSocket
+- **服务器**：Python `http.server` + `socketserver.ThreadingMixIn`，零第三方依赖
+- **移动端优先**：侧边栏可折叠、触摸目标 ≥ 40px、响应式断点 680px/900px
+- **无障碍**：语义化标签、键盘导航支持（Enter 发送、Shift+Enter 换行）
+
+### 5. 测试策略
 - 脚本自检（参数校验、错误处理）
 - 手动端到端测试（创建会话 → 多轮对话 → 检查存档完整性）
+- Web 界面测试（启动服务器 → API 连通性 → 静态文件服务 → 流式输出）
 - 人格一致性测试（确保响应符合 lin-sai-persona.md 中定义的风格）
 
 ---

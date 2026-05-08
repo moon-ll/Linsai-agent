@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="auto">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>林赛协作引擎</title>
+<link rel="stylesheet" href="/web/css/style.css">
+</head>
+<body>
+
+<!-- 顶部栏 -->
+<header class="topbar">
+  <div class="topbar-left">
+    <button id="sidebar-toggle" class="icon-btn" title="切换侧边栏">☰</button>
+    <h1 class="logo">林赛协作引擎</h1>
+    <span class="version" id="version-label">v1.1.0</span>
+  </div>
+  <div class="topbar-center">
+    <span class="mode-badge" id="mode-badge" title="当前交互模式">并肩工作</span>
+  </div>
+  <div class="topbar-right">
+    <button id="theme-toggle" class="icon-btn" title="切换主题">🔆</button>
+    <button id="settings-toggle" class="icon-btn" title="设置">⚙️</button>
+  </div>
+</header>
+
+<!-- 主体布局 -->
+<div class="main-layout">
+
+  <!-- 左侧栏：会话 -->
+  <aside class="sidebar left" id="left-sidebar">
+    <div class="sidebar-header">
+      <input type="text" id="session-search" placeholder="🔍 搜索会话…" autocomplete="off">
+    </div>
+    <div class="session-list" id="session-list">
+      <!-- 动态填充 -->
+    </div>
+    <div class="sidebar-footer">
+      <button id="new-session-btn" class="btn-primary">+ 新建会话</button>
+      <button id="archived-btn" class="btn-text">📦 归档</button>
+    </div>
+  </aside>
+
+  <!-- 中间：对话区 -->
+  <main class="chat-area" id="chat-area">
+    <div class="welcome-screen" id="welcome-screen">
+      <h2>👋 欢迎回来</h2>
+      <p>林赛不是你的搜索引擎，他是你的合作者。</p>
+      <div class="quick-starts">
+        <button class="quick-btn" data-topic="实验方案设计">⚗️ 实验方案设计</button>
+        <button class="quick-btn" data-topic="论文写作讨论">📝 论文写作讨论</button>
+        <button class="quick-btn" data-topic="数据分析">📊 数据分析</button>
+        <button class="quick-btn" data-topic="学术困惑">💭 学术困惑</button>
+      </div>
+    </div>
+    <div class="messages" id="messages"></div>
+    <div class="typing-indicator" id="typing-indicator" style="display:none;">
+      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      <span class="typing-text">林赛正在思考…</span>
+    </div>
+
+    <!-- 输入区 -->
+    <div class="input-area">
+      <div class="command-bar">
+        <button class="cmd-btn" data-cmd="/mode" title="切换模式">/mode</button>
+        <button class="cmd-btn" data-cmd="/read" title="读取文档">/read</button>
+        <button class="cmd-btn" data-cmd="/agora" title="Agora群聊">/agora</button>
+        <button class="cmd-btn" data-cmd="/summary" title="会话摘要">/summary</button>
+      </div>
+      <div class="input-row">
+        <textarea id="message-input" placeholder="输入消息… Shift+Enter 换行" rows="2"></textarea>
+        <button id="send-btn" class="btn-send" title="发送">🚀</button>
+      </div>
+      <div class="input-hints">
+        <span>Enter 发送 · Shift+Enter 换行 · 拖拽文件上传</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- 右侧栏：协同 -->
+  <aside class="sidebar right" id="right-sidebar">
+    <div class="panel" id="task-panel">
+      <h3>📋 任务</h3>
+      <div class="task-list" id="task-list">
+        <p class="empty">暂无任务</p>
+      </div>
+    </div>
+    <div class="panel" id="reference-panel">
+      <h3>📄 文档引用</h3>
+      <div class="reference-list" id="reference-list">
+        <p class="empty">暂无引用</p>
+      </div>
+    </div>
+    <div class="panel" id="context-panel">
+      <h3>💡 上下文</h3>
+      <div class="context-info" id="context-info">
+        <p>选择会话后显示</p>
+      </div>
+    </div>
+  </aside>
+
+</div>
+
+<!-- 底部状态栏 -->
+<footer class="statusbar">
+  <span id="status-text">就绪</span>
+  <div class="status-actions">
+    <button id="backup-btn" title="立即备份">💾 备份</button>
+    <button id="export-btn" title="导出当前会话">📤 导出</button>
+  </div>
+</footer>
+
+<!-- 新建会话弹窗 -->
+<div class="modal-overlay" id="new-session-modal" style="display:none;">
+  <div class="modal">
+    <h3>新建会话</h3>
+    <label>
+      主题
+      <input type="text" id="new-session-topic" placeholder="例如：固体HHG实验方案设计" value="">
+    </label>
+    <label>
+      模式
+      <select id="new-session-mode">
+        <option value="co-working">并肩工作 — 一起推进具体任务</option>
+        <option value="deep-talk">深度对话 — 学术/人生困惑</option>
+        <option value="quick-check">快速验证 — 具体问题快速反馈</option>
+      </select>
+    </label>
+    <div class="modal-actions">
+      <button class="btn-text" id="cancel-new-session">取消</button>
+      <button class="btn-primary" id="confirm-new-session">创建</button>
+    </div>
+  </div>
+</div>
+
+<!-- 设置面板 -->
+<div class="drawer-overlay" id="settings-drawer" style="display:none;">
+  <div class="drawer">
+    <h3>⚙️ 设置</h3>
+    <div class="setting-item">
+      <label>主题</label>
+      <select id="theme-select">
+        <option value="auto">自动（跟随系统）</option>
+        <option value="light">浅色</option>
+        <option value="dark">深色</option>
+      </select>
+    </div>
+    <div class="setting-item">
+      <label>林赛自主级别</label>
+      <select id="autonomy-select">
+        <option value="observe">观察 — 只记录，不主动打扰</option>
+        <option value="suggest" selected>建议 — 适时提醒（推荐）</option>
+        <option value="act">主动 — 积极推进任务</option>
+      </select>
+    </div>
+    <div class="setting-item">
+      <button class="btn-primary" id="drawer-backup-btn">💾 立即备份数据</button>
+    </div>
+    <div class="drawer-footer">
+      <button class="btn-text" id="close-settings">关闭</button>
+    </div>
+  </div>
+</div>
+
+<!-- 主动提醒弹窗 -->
+<div class="toast-container" id="toast-container"></div>
+
+<script src="/web/js/app.js"></script>
+</body>
+</html>

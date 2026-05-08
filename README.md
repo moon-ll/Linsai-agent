@@ -46,16 +46,16 @@
 # 1. 进入项目目录
 cd ~/Desktop/LinSai-CoPilot
 
-# 2. 开始一次新会话（启动时自动备份用户数据）
+# 方式一：Web 界面（推荐 — 浏览器交互，支持主题切换、流式输出、任务面板）
+python scripts/web_server.py
+# 打开 http://localhost:8080
+
+# 方式二：终端 CLI（轻量、脚本化）
 python scripts/copilot_engine.py --start "固体HHG实验方案设计"
-
-# 3. 继续上次会话
 python scripts/copilot_engine.py --continue
-
-# 4. 列出所有会话
 python scripts/copilot_engine.py --list
 
-# 5. 会话中的特殊命令
+# 会话中的特殊命令（Web 界面和 CLI 均支持）
 > /mode deep-talk      # 切换为深度对话模式
 > /read notes/paper.md # 读取文档
 > /agora 费曼, 狄拉克  # 导出到Agora群聊
@@ -151,6 +151,7 @@ LinSai-CoPilot/
 | 模式识别 | ✅ | 自动识别 co-working / deep-talk / quick-check |
 | 文档协作 | ✅ | Markdown/TXT读取、代码分析、LLM摘要 |
 | Agora集成 | ✅ | 上下文导出/导入、历史人物群聊桥接 |
+| **Web 界面** | ✅ | 浏览器交互、双主题、流式输出、任务面板 |
 
 ---
 
@@ -187,6 +188,18 @@ LinSai-CoPilot/
 | Phase 3 | 主动感知 + 自主提醒 + 模式识别 | ✅ 完成 |
 | Phase 4 | 文档协作 + 代码协作 + Agora集成 | ✅ 完成 |
 | Phase 5 | 性能优化 + 生态扩展 | ⏳ 待开发 |
+
+### Web 界面特性
+
+| 特性 | 说明 |
+|------|------|
+| 双主题 | 深色 / 浅色 / 自动跟随系统 |
+| 会话管理 | 侧边栏搜索、新建、切换 |
+| 流式输出 | SSE 实时打字效果 |
+| Markdown 渲染 | 代码块、引用、列表、粗体、斜体 |
+| 快捷命令 | /mode /read /agora /summary 一键触发 |
+| 任务面板 | 右侧栏实时显示任务状态与逾期提醒 |
+| 移动端适配 | 侧边栏折叠、触摸优化 |
 
 ---
 

@@ -1,5 +1,32 @@
 # 变更记录
 
+## v1.2.0 - 2026-05-08 Web 界面与浏览器交互
+
+### 新增
+- `scripts/web_server.py` — Web 服务器（HTTP + SSE + API路由，330行，4项自检通过）
+  - ThreadingHTTPServer 并发处理，零第三方依赖
+  - REST API：会话 CRUD、消息历史、任务列表、主动提醒、版本信息
+  - SSE 流式输出：LLM 回复逐句切分模拟打字效果
+  - 复用现有引擎：context_builder + copilot_engine.call_llm()
+- `web/index.html` — 单页应用入口（6大功能区块）
+- `web/css/style.css` — 双主题样式系统（深色/浅色/自动跟随系统）
+  - CSS 变量驱动，切换无闪烁
+  - 消息气泡、代码块、Markdown 渲染、滚动条美化
+  - 响应式布局：移动端侧边栏折叠、触摸优化
+- `web/js/app.js` — 原生 JavaScript 前端逻辑（450行）
+  - 会话管理：搜索、新建、切换、侧边栏渲染
+  - 聊天界面：消息气泡、Markdown 轻量渲染器、流式 SSE 接收
+  - 主题管理：localStorage 持久化、系统主题监听
+  - 快捷命令：/mode /read /agora /summary 按钮触发
+  - 主动提醒：Toast 弹窗通知
+
+### 设计决策
+- 前端零框架：不引入 React/Vue/Angular，保持项目极简哲学
+- SSE 替代 WebSocket：Python 标准库原生支持，无需额外依赖
+- 模拟流式输出：现有 call_llm() 为同步调用，先获取完整回复再逐句推送
+
+---
+
 ## v1.1.0 - 2026-05-08 版本管理与数据安全体系
 
 ### 新增
