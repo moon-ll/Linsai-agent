@@ -16,10 +16,10 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.parent
 
 # 预算与截断配置
-DEFAULT_BUDGETS = {"system": 8000, "memory": 6000, "context": 4000, "history": 10000, "input": 2000}
+DEFAULT_BUDGETS = {"system": 8000, "memory": 6000, "context": 4000, "history": 10000, "input": 2000, "skills": 2000}
 DEFAULT_TOTAL, EMERGENCY_TOTAL = 30000, 50000
-TRUNCATION_ORDER = ["history", "memory", "context", "system"]
-MIN_KEEP = {"system": 2000, "memory": 0, "context": 0, "history": 0, "input": None}
+TRUNCATION_ORDER = ["history", "memory", "skills", "context", "system"]
+MIN_KEEP = {"system": 2000, "memory": 0, "context": 0, "history": 0, "skills": 0, "input": None}
 
 
 def _load_text(path: Path) -> str:
@@ -62,6 +62,20 @@ try:
         _mm_mod = importlib.util.module_from_spec(_spec)
         _spec.loader.exec_module(_mm_mod)
         _try_memory_manager = _mm_mod
+except Exception:
+    pass
+
+
+# 尝试导入 skill_manager
+_try_skill_manager = None
+try:
+    import importlib.util
+    _sm_path = Path(__file__).parent / "skill_manager.py"
+    if _sm_path.exists():
+        _spec = importlib.util.spec_from_file_location("skill_manager", _sm_path)
+        _sm_mod = importlib.util.module_from_spec(_spec)
+        _spec.loader.exec_module(_sm_mod)
+        _try_skill_manager = _sm_mod
 except Exception:
     pass
 
@@ -193,6 +207,15 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
     lt = rel.get("related_snippets", "")
     memory_raw = "\n".join(p for p in (profile, lt) if p)
     context_raw = rel.get("work_context_summary", "")
+
+    # 技能上下文注入
+    skills_raw = ""
+    if _try_skill_manager is not None:
+        try:
+            skills_raw = _try_skill_manager.get_matched_context(user_input)
+        except Exception:
+            pass
+
     history_msgs = _read_history(session_id)
     input_raw = user_input
 
@@ -200,6 +223,7 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
         "system": len(system_raw),
         "memory": len(memory_raw),
         "context": len(context_raw),
+        "skills": len(skills_raw),
         "history": sum(len(m["content"]) for m in history_msgs),
         "input": len(input_raw),
     }
@@ -209,6 +233,7 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
     system_final = _truncate_text(system_raw, budgets["system"])
     memory_final = _truncate_text(memory_raw, budgets["memory"])
     context_final = _truncate_text(context_raw, budgets["context"])
+    skills_final = _truncate_text(skills_raw, budgets["skills"])
     history_final = _truncate_history(history_msgs, budgets["history"])
     input_final = input_raw
 
@@ -220,6 +245,8 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
         system_prompt += f"\n\n[长期记忆]\n{memory_final}"
     if context_final.strip():
         system_prompt += f"\n\n[工作上下文]\n{context_final}"
+    if skills_final.strip():
+        system_prompt += f"\n\n[技能上下文]\n{skills_final}"
 
     messages = [{"role": m["role"], "content": m["content"]} for m in history_final]
     messages.append({"role": "user", "content": input_final})
@@ -232,6 +259,7 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
             "system": {"budget": budgets["system"], "actual": actuals["system"], "final": len(system_final)},
             "memory": {"budget": budgets["memory"], "actual": actuals["memory"], "final": len(memory_final)},
             "context": {"budget": budgets["context"], "actual": actuals["context"], "final": len(context_final)},
+            "skills": {"budget": budgets["skills"], "actual": actuals["skills"], "final": len(skills_final)},
             "history": {"budget": budgets["history"], "actual": actuals["history"], "final": sum(len(m["content"]) for m in history_final)},
             "input": {"budget": budgets["input"], "actual": actuals["input"], "final": len(input_final)},
         },

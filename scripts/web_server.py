@@ -47,7 +47,9 @@ import llm_router as lr
 import memory_manager as mm
 import proactive_engine as pe
 import session_manager as sm
+import skill_manager as skm
 import task_manager as tm
+import usage_tracker as ut
 
 
 # ---------------------------------------------------------------------------
@@ -269,6 +271,28 @@ class RequestHandler(BaseHTTPRequestHandler):
             })
             return
 
+        # Token 用量统计
+        if path == "/api/usage":
+            self._send_json(ut.get_usage_summary())
+            return
+
+        if path == "/api/usage/daily":
+            self._send_json(ut.get_stats("daily"))
+            return
+
+        # 技能系统
+        if path == "/api/skills":
+            self._send_json({"skills": skm.list_skills()})
+            return
+
+        if path == "/api/skills/active":
+            query = parse_qs(parsed.query).get("q", [""])[0]
+            self._send_json({
+                "active": skm.get_active_skill_names(query),
+                "all": skm.list_skills(),
+            })
+            return
+
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_POST(self) -> None:
@@ -311,11 +335,18 @@ class RequestHandler(BaseHTTPRequestHandler):
                     messages = context.get("messages", [])
 
                     # 调用 LLM 获取完整回复
-                    response = ce.call_llm(system_prompt, messages)
+                    response, usage, provider_name = ce.call_llm(system_prompt, messages)
 
                     if not response or not response.strip():
                         q.put(("error", "LLM 返回为空"))
                         return
+
+                    # 记录 token 用量
+                    try:
+                        full_prompt = system_prompt + "\n".join(m.get("content", "") for m in messages)
+                        ut.record_usage(sid, provider_name, full_prompt, response, usage)
+                    except Exception:
+                        pass
 
                     # 切分并流式输出
                     chunks = split_response_stream(response)

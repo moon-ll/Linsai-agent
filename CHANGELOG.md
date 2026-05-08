@@ -1,5 +1,41 @@
 # 变更记录
 
+## v1.6.0-M1 - 2026-05-08 Token 统计 + 技能系统
+
+### 新增
+- **Token 用量统计**
+  - `scripts/usage_tracker.py` — 新建模块（200行）
+    - API Provider 精确统计（从 HTTP 响应解析 usage 字段）
+    - CLI Provider 字符估算（utf-8 字节数 // 3）
+    - 五维统计：daily / monthly / by_session / by_provider / total
+    - 数据存储：`memory/usage/usage.json`
+  - Web 界面：设置面板显示今日用量、总用量、各 Provider 分布
+  - 顶部栏不显示（避免干扰），在设置面板中展示详细统计
+- **技能系统**
+  - `scripts/skill_manager.py` — 新建模块（150行）
+    - 扫描 `skills/` 目录下的 SKILL.md 文件
+    - 关键词触发匹配：根据用户输入自动激活相关技能
+    - 技能上下文注入到 system_prompt，参与预算分配
+  - `skills/` 目录结构：
+    - `math-derivation/` — 数学推导辅助（量纲检查、标注假设、极限验证）
+    - `code-review/` — 代码审查（可读性、边界情况、性能）
+    - `experiment-design/` — 实验方案设计（先画框图、风险预判、备用方案）
+  - Web 界面：
+    - 设置面板显示所有可用技能及触发条件
+    - 输入框实时检测：顶部栏显示 `🎯 math-derivation` 等激活技能
+    - 300ms 防抖，避免频繁请求
+- **API 端点**
+  - `GET /api/usage` — 用量摘要（daily + total + by_provider）
+  - `GET /api/usage/daily` — 今日用量
+  - `GET /api/skills` — 列出所有技能
+  - `GET /api/skills/active?q=...` — 查询输入激活的技能
+
+### 修改
+- `scripts/llm_router.py` — `call_llm()` 返回 `(text, usage_dict, provider_name)`，支持用量追踪
+- `scripts/copilot_engine.py` — 适配新返回值格式
+- `scripts/context_builder.py` — 新增 `skills` 预算项（2000字符），技能上下文参与分配与截断
+- `scripts/web_server.py` — 对话后自动记录 token 用量；新增 usage/skills API
+
 ## v1.5.2 - 2026-05-08 think 过滤 + CLI/API 切换 + 聊天记录查看
 
 ### 新增

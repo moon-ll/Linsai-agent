@@ -843,8 +843,10 @@ function bindEvents() {
     document.getElementById('settings-drawer').style.display = 'flex';
     document.getElementById('theme-select').value = State.theme;
     document.getElementById('autonomy-select').value = State.autonomy;
-    // 刷新 provider 状态
+    // 刷新各状态
     loadLLMStatus();
+    loadUsage();
+    loadSkills();
   });
 
   // 顶部 provider-badge 点击打开设置面板
@@ -853,6 +855,8 @@ function bindEvents() {
     document.getElementById('theme-select').value = State.theme;
     document.getElementById('autonomy-select').value = State.autonomy;
     loadLLMStatus();
+    loadUsage();
+    loadSkills();
   });
   document.getElementById('close-settings').addEventListener('click', () => {
     document.getElementById('settings-drawer').style.display = 'none';
@@ -943,6 +947,15 @@ function bindEvents() {
       e.preventDefault();
       sendMessage(e.target.value);
     }
+  });
+
+  // 输入时实时检测激活的技能
+  let _skillDebounce = null;
+  document.getElementById('message-input').addEventListener('input', (e) => {
+    clearTimeout(_skillDebounce);
+    _skillDebounce = setTimeout(() => {
+      updateSkillBadge(e.target.value);
+    }, 300);
   });
 
   // 快捷命令按钮
@@ -1223,6 +1236,92 @@ function showHistoryHint(count) {
 }
 
 // ============================================
+// Token 用量
+// ============================================
+async function loadUsage() {
+  try {
+    const data = await apiGet('/api/usage');
+    const container = document.getElementById('usage-status');
+    if (!container) return;
+
+    const daily = data.daily || {};
+    const total = data.total || {};
+    const byProvider = data.by_provider || {};
+
+    const prompt = daily.prompt || 0;
+    const completion = daily.completion || 0;
+    const calls = daily.calls || 0;
+
+    let html = `<div>今日: <strong>${prompt + completion}</strong> tokens（${calls} 次调用）</div>`;
+    html += `<div style="color:var(--text-tertiary);font-size:0.75rem;margin-top:2px;">`;
+    html += `prompt: ${prompt} · completion: ${completion}`;
+    html += `</div>`;
+
+    if (Object.keys(byProvider).length > 0) {
+      html += `<div style="margin-top:4px;">`;
+      Object.entries(byProvider).forEach(([name, stats]) => {
+        const isEst = name === 'kimi' || name === 'claude';
+        const label = isEst ? '（估算）' : '';
+        html += `<span style="font-size:0.75rem;color:var(--text-tertiary);margin-right:8px;">${name}: ${stats.prompt + stats.completion}${label}</span>`;
+      });
+      html += `</div>`;
+    }
+
+    container.innerHTML = html;
+  } catch (e) {
+    console.error('加载用量失败:', e);
+    const container = document.getElementById('usage-status');
+    if (container) container.innerHTML = '✗ 加载失败';
+  }
+}
+
+// ============================================
+// 技能系统
+// ============================================
+async function loadSkills() {
+  try {
+    const data = await apiGet('/api/skills');
+    const container = document.getElementById('skills-status');
+    if (!container) return;
+
+    const skills = data.skills || [];
+    if (skills.length === 0) {
+      container.innerHTML = '○ 暂无技能';
+      return;
+    }
+
+    container.innerHTML = skills.map(s => {
+      return `<div>· ${escapeHtml(s.name)} <span style="color:var(--text-tertiary)">${escapeHtml(s.triggers)}</span></div>`;
+    }).join('');
+  } catch (e) {
+    console.error('加载技能失败:', e);
+    const container = document.getElementById('skills-status');
+    if (container) container.innerHTML = '✗ 加载失败';
+  }
+}
+
+async function updateSkillBadge(text) {
+  const badge = document.getElementById('skill-badge');
+  if (!badge) return;
+  if (!text || text.length < 2) {
+    badge.style.display = 'none';
+    return;
+  }
+  try {
+    const data = await apiGet(`/api/skills/active?q=${encodeURIComponent(text)}`);
+    const active = data.active || [];
+    if (active.length > 0) {
+      badge.textContent = `🎯 ${active.join(', ')}`;
+      badge.style.display = 'inline-flex';
+    } else {
+      badge.style.display = 'none';
+    }
+  } catch (e) {
+    badge.style.display = 'none';
+  }
+}
+
+// ============================================
 // 初始化
 // ============================================
 async function init() {
@@ -1248,6 +1347,10 @@ async function init() {
 
   // 加载文献
   loadReferences();
+
+  // 加载用量和技能（异步，不阻塞）
+  loadUsage();
+  loadSkills();
 
   // 绑定事件
   bindEvents();

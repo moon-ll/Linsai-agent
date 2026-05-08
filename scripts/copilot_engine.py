@@ -154,8 +154,14 @@ def _build_prompt_text(system_prompt: str, messages: list, include_system: bool 
 # ---------------------------------------------------------------------------
 # LLM 调用封装（已迁移到 llm_router，保留兼容接口）
 # ---------------------------------------------------------------------------
-def call_llm(system_prompt: str, messages: list, timeout: int = 120) -> str:
-    """调用 LLM，返回 assistant 的回复内容。
+def call_llm(system_prompt: str, messages: list, timeout: int = 120):
+    """调用 LLM，返回 assistant 的回复内容及用量信息。
+
+    返回:
+        (response_text, usage_dict, provider_name)
+        - response_text: LLM 生成的文本
+        - usage_dict: API 返回的 usage 字段（CLI 调用时为 None）
+        - provider_name: 实际使用的 Provider 名称
 
     由 llm_router 按策略自动选择 Provider：
     - 优先使用配置文件中优先级最高的可用 Provider

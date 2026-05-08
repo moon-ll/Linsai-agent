@@ -154,6 +154,17 @@ body {
   background: var(--bg-hover);
 }
 
+.skill-badge {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: var(--accent-light);
+  color: var(--accent-color);
+  font-weight: 500;
+  margin-left: 6px;
+  align-items: center;
+}
+
 .icon-btn {
   width: 32px;
   height: 32px;

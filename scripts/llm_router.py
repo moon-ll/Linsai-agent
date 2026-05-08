@@ -185,15 +185,22 @@ class LLMProvider:
     def __repr__(self) -> str:
         return f"LLMProvider({self.name}/{self.type})"
 
-    def call(self, system_prompt: str, messages: List[Dict[str, str]], timeout: int = 60) -> str:
-        """调用 LLM 获取回复。"""
+    def call(self, system_prompt: str, messages: List[Dict[str, str]], timeout: int = 60):
+        """调用 LLM 获取回复。
+
+        返回: (response_text, usage_dict)
+            - response_text: LLM 生成的文本（已过滤 think 标签）
+            - usage_dict: API 返回的 usage 字段，如 {"prompt_tokens": 100, "completion_tokens": 50}
+                         CLI 调用时为 None
+        """
         if self.type == "cli":
             raw = self._call_cli(system_prompt, messages, timeout)
+            usage = None
         elif self.type == "api":
-            raw = self._call_api(system_prompt, messages, timeout)
+            raw, usage = self._call_api(system_prompt, messages, timeout)
         else:
             raise ValueError(f"Unknown provider type: {self.type}")
-        return _strip_think_tags(raw)
+        return _strip_think_tags(raw), usage
 
     # ---- CLI 调用 ----
 
@@ -289,7 +296,9 @@ class LLMProvider:
         try:
             with urllib.request.urlopen(req, timeout=timeout) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
-                return data["choices"][0]["message"]["content"]
+                text = data["choices"][0]["message"]["content"]
+                usage = data.get("usage")
+                return text, usage
         except urllib.error.HTTPError as e:
             body = e.read().decode("utf-8")
             raise RuntimeError(f"API HTTP {e.code}: {body}")
@@ -310,7 +319,7 @@ class LLMRouter:
         self._last_used: Optional[str] = None       # 记录上次实际使用的 Provider
         self.load_force_provider()
 
-    def call_llm(self, system_prompt: str, messages: List[Dict[str, str]]) -> str:
+    def call_llm(self, system_prompt: str, messages: List[Dict[str, str]]):
         """调用 LLM。若 force_provider 已设置则直接使用；否则按策略自动选择。
 
         Args:
@@ -325,6 +334,7 @@ class LLMRouter:
         """
         timeout = int(self.config.get("timeout", 60))
         retry = int(self.config.get("retry", 1))
+        used_provider_name = ""
 
         # 模式 A：手动强制指定
         if self.force_provider:
@@ -344,10 +354,10 @@ class LLMRouter:
             if provider and self._is_available(provider):
                 for attempt in range(retry + 1):
                     try:
-                        result = provider.call(system_prompt, messages, timeout)
+                        result, usage = provider.call(system_prompt, messages, timeout)
                         provider.failure_count = 0
                         self._last_used = provider.name
-                        return result
+                        return result, usage, provider.name
                     except Exception as e:
                         provider.failure_count += 1
                         if attempt < retry:
@@ -373,10 +383,10 @@ class LLMRouter:
         for provider in available:
             for attempt in range(retry + 1):
                 try:
-                    result = provider.call(system_prompt, messages, timeout)
+                    result, usage = provider.call(system_prompt, messages, timeout)
                     provider.failure_count = 0
                     self._last_used = provider.name
-                    return result
+                    return result, usage, provider.name
                 except urllib.error.HTTPError as e:
                     provider.failure_count += 1
                     if e.code == 429:
