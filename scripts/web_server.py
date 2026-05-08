@@ -309,6 +309,19 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json(kb.get_index_status())
             return
 
+        # 可用工具列表
+        if path == "/api/tools":
+            import importlib.util
+            te_path = _SCRIPT_DIR / "tool_engine.py"
+            if te_path.exists():
+                spec = importlib.util.spec_from_file_location("tool_engine", te_path)
+                te_mod = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(te_mod)
+                self._send_json({"tools": te_mod.list_tools()})
+            else:
+                self._send_json({"tools": []})
+            return
+
         if path == "/api/knowledge/search":
             query = parse_qs(parsed.query).get("q", [""])[0]
             results = kb.search(query, top_k=3)
@@ -350,18 +363,22 @@ class RequestHandler(BaseHTTPRequestHandler):
             q: queue.Queue[Tuple[str, Any]] = queue.Queue()
 
             def llm_worker() -> None:
-                """在后台线程调用 LLM。"""
+                """在后台线程调用 LLM，支持工具调用。"""
                 try:
                     context = cb.build_context(sid, user_input, mode)
                     system_prompt = context.get("system_prompt", "")
                     messages = context.get("messages", [])
 
-                    # 调用 LLM 获取完整回复
-                    response, usage, provider_name = ce.call_llm(system_prompt, messages)
+                    # 调用 LLM（支持工具调用）
+                    response, usage, provider_name, tool_log = ce.call_llm_with_tools(system_prompt, messages)
 
                     if not response or not response.strip():
                         q.put(("error", "LLM 返回为空"))
                         return
+
+                    # 如果有工具调用，先发送工具事件
+                    if tool_log:
+                        q.put(("tools", tool_log))
 
                     # 记录 token 用量
                     try:
@@ -391,6 +408,8 @@ class RequestHandler(BaseHTTPRequestHandler):
                 if event_type == "token":
                     self._send_sse({"type": "token", "content": data})
                     full_response += data
+                elif event_type == "tools":
+                    self._send_sse({"type": "tools", "calls": data})
                 elif event_type == "done":
                     self._send_sse({"type": "done"})
                     full_response = data  # 使用完整原始文本

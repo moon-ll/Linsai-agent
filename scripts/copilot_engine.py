@@ -174,6 +174,96 @@ def call_llm(system_prompt: str, messages: list, timeout: int = 120):
         raise RuntimeError(f"LLM 调用失败: {e}") from e
 
 
+def call_llm_with_tools(system_prompt: str, messages: list, timeout: int = 120):
+    """调用 LLM，支持工具调用（子代理）。
+
+    执行流程：
+        1. 在 system_prompt 中注入可用工具说明
+        2. 第一次调用 LLM，获取响应
+        3. 解析响应中的工具调用指令
+        4. 执行工具，获取结果
+        5. 将工具结果作为 assistant/tool 消息加入对话
+        6. 第二次调用 LLM，获取最终回复
+        7. 返回 (final_text, usage_dict, provider_name, tool_calls_log)
+
+    Returns:
+        (response_text, usage_dict, provider_name, tool_log)
+        - tool_log: 工具调用记录列表，每项为 {"name", "args", "result"}
+    """
+    try:
+        import importlib.util
+        te_path = Path(__file__).parent / "tool_engine.py"
+        spec = importlib.util.spec_from_file_location("tool_engine", te_path)
+        te = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(te)
+    except Exception:
+        # 工具引擎不可用，降级为普通调用
+        text, usage, provider = lr.call_llm(system_prompt, messages)
+        return text, usage, provider, []
+
+    # 注入工具说明
+    enhanced_prompt = te.inject_tools_prompt(system_prompt)
+
+    # 第一次调用
+    first_text, first_usage, provider = lr.call_llm(enhanced_prompt, messages)
+    tool_log = []
+
+    # 检查是否包含工具调用
+    if not te.has_tool_calls(first_text):
+        # 无工具调用，直接返回（清理可能的残余标记）
+        clean_text = te.strip_tool_calls(first_text)
+        return clean_text, first_usage, provider, []
+
+    # 解析并执行工具调用
+    calls = te.parse_tool_calls(first_text)
+    if not calls:
+        clean_text = te.strip_tool_calls(first_text)
+        return clean_text, first_usage, provider, []
+
+    results = te.execute_tool_calls(calls)
+
+    # 记录工具调用日志
+    for i, call in enumerate(calls):
+        res = results[i] if i < len(results) else {"success": False, "result": "未知错误"}
+        tool_log.append({
+            "name": call["name"],
+            "args": call["args"],
+            "result": res.get("result", ""),
+            "success": res.get("success", False),
+        })
+
+    # 构建工具结果消息
+    tool_messages = list(messages)
+    # 追加 assistant 的思考过程（去掉工具调用标记）
+    thought = te.strip_tool_calls(first_text)
+    if thought:
+        tool_messages.append({"role": "assistant", "content": thought})
+
+    # 追加每个工具的结果
+    for entry in tool_log:
+        tool_messages.append({
+            "role": "user",
+            "content": f"[工具 {entry['name']} 结果]\n{entry['result']}",
+        })
+
+    # 第二次调用：让 LLM 基于工具结果给出最终回复
+    final_text, final_usage, _ = lr.call_llm(enhanced_prompt, tool_messages)
+
+    # 合并用量（简单累加）
+    merged_usage = {}
+    if first_usage:
+        merged_usage.update(first_usage)
+    if final_usage:
+        for k, v in final_usage.items():
+            if k in merged_usage and isinstance(v, (int, float)):
+                merged_usage[k] = merged_usage.get(k, 0) + v
+            else:
+                merged_usage[k] = v
+
+    clean_final = te.strip_tool_calls(final_text)
+    return clean_final, merged_usage or None, provider, tool_log
+
+
 # ---------------------------------------------------------------------------
 # 交互式对话循环
 # ---------------------------------------------------------------------------

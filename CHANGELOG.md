@@ -1,6 +1,26 @@
 # 变更记录
 
-## v1.6.0-M2 - 2026-05-08 本地知识库 + 任务看板
+## v1.6.0-M3 - 2026-05-08 子代理调用系统
+
+### 新增
+- **子代理调用系统**
+  - `scripts/tool_engine.py` — 新建模块（300行）
+    - 工具注册表：`file_read`, `file_write`, `calc`, `task_create`, `knowledge_query`
+    - 严格安全边界：
+      - `file_read`: 只能读项目目录内文件
+      - `file_write`: 只能写 `memory/`, `sessions/`, `tasks/`, `knowledge/`
+      - `calc`: `ast.parse` 白名单机制，仅允许数学运算节点，禁止导入/系统调用
+    - 工具调用协议：`@@tool:name@@\n{json}\n@@end@@`
+    - `parse_tool_calls()` / `execute_tool_calls()` / `strip_tool_calls()`
+  - `scripts/copilot_engine.py` — 新增 `call_llm_with_tools()`
+    - 执行流程：注入工具说明 → 第一次 LLM 调用 → 解析工具调用 → 执行工具 → 结果回传 → 第二次 LLM 调用 → 最终回复
+    - 无工具调用时只消耗一次 LLM 调用（性能无损）
+  - `scripts/web_server.py` — SSE 流式支持工具事件
+    - 前端收到 `{"type": "tools", "calls": [...]}` 事件时显示工具调用提示
+  - `persona/lin-sai-persona.md` — 追加"子代理调用"角色说明
+    - 教会林赛何时使用工具、如何分解任务、调用格式
+  - Web 界面：消息气泡旁显示 `🔧 调用工具: calc, knowledge_query` 提示
+  - API：`GET /api/tools` — 列出可用工具
 
 ### 新增
 - **本地知识库**

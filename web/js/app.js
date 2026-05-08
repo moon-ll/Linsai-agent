@@ -534,6 +534,18 @@ async function sendMessage(content) {
             fullText += data.content;
             bubble.innerHTML = renderMarkdown(fullText);
             scrollToBottom();
+          } else if (data.type === 'tools') {
+            // 显示工具调用提示
+            const calls = data.calls || [];
+            const toolNames = calls.map(c => c.name).join(', ');
+            const hint = document.createElement('div');
+            hint.className = 'tool-call-hint';
+            hint.innerHTML = `🔧 调用工具: ${escapeHtml(toolNames)}`;
+            hint.style.cssText = 'font-size:0.75rem;color:var(--text-tertiary);padding:4px 12px;background:var(--bg-secondary);border-radius:12px;margin-bottom:8px;display:inline-block;';
+            const bubbleContainer = bubble.parentElement;
+            if (bubbleContainer && !bubbleContainer.querySelector('.tool-call-hint')) {
+              bubbleContainer.insertBefore(hint, bubble);
+            }
           } else if (data.type === 'done') {
             streamDone = true;
             break; // 收到 done 立即退出，不等待连接关闭
