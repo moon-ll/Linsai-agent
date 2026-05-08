@@ -19,6 +19,7 @@
 - `scripts/copilot_engine.py` / `scripts/web_server.py` — 补全遗漏的 `import llm_router as lr`
 - `scripts/copilot_engine.py` — `detect_llm_cli()` 延迟初始化，避免模块导入时循环依赖
 - `scripts/web_server.py` — `POST /api/switch-provider` 支持 `cli_auto` 特殊值
+- **`scripts/llm_router.py` — 修复 CLI 检测被 API 配置阻塞的 bug**：原逻辑"没有 API 时才检测 CLI"改为"始终检测 CLI"，确保同时配置了 API 和安装了 CLI 时，两者都能被识别
 
 ## v1.5.1 - 2026-05-08 手动 Provider 切换
 

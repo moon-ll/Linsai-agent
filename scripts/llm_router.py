@@ -157,15 +157,12 @@ def _build_config() -> Dict[str, Any]:
                     "priority": env_vars.get(f"{prefix}_PRIORITY", "2"),
                 })
 
-    # 5. 如果没有配置任何 API provider，自动检测 CLI
-    api_providers = [p for p in config["providers"] if p.get("type") == "api"]
-    if not api_providers:
-        cli_detected = _detect_cli_providers()
-        # 合并，避免重复
-        existing_names = {p["name"] for p in config["providers"]}
-        for p in cli_detected:
-            if p["name"] not in existing_names:
-                config["providers"].append(p)
+    # 5. 自动检测本地 CLI（始终执行，与 API provider 无关）
+    cli_detected = _detect_cli_providers()
+    existing_names = {p["name"] for p in config["providers"]}
+    for p in cli_detected:
+        if p["name"] not in existing_names:
+            config["providers"].append(p)
 
     return config
 
