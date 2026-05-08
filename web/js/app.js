@@ -196,11 +196,11 @@ function renderSessionList() {
     </div>
   `}).join('');
 
-  // 绑定点击事件
+  // 绑定点击事件 — 点击会话列表 = 续接对话（不是只读浏览）
   container.querySelectorAll('.session-item').forEach(el => {
     el.addEventListener('click', () => {
       const sid = el.dataset.id;
-      viewArchiveSession(sid);
+      switchSession(sid);
     });
   });
 }
@@ -1001,6 +1001,15 @@ function bindEvents() {
   // 归档按钮 → 打开历史搜索侧边栏
   document.getElementById('archived-btn').addEventListener('click', () => {
     document.getElementById('history-sidebar').style.display = 'flex';
+  });
+
+  // 顶部栏"查看历史记录"按钮 → 只读浏览当前会话
+  document.getElementById('view-history-btn').addEventListener('click', () => {
+    if (!State.currentSessionId) {
+      showToast('请先选择一个会话', 'warning');
+      return;
+    }
+    viewArchiveSession(State.currentSessionId);
   });
 
   // 关闭历史搜索
