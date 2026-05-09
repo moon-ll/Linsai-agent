@@ -1001,11 +1001,9 @@ function bindEvents() {
     document.getElementById('settings-drawer').style.display = 'flex';
     document.getElementById('theme-select').value = State.theme;
     document.getElementById('autonomy-select').value = State.autonomy;
-    // 刷新各状态
+    // 刷新各状态（轻量：只加载设置面板需要的）
     loadLLMStatus();
     loadUsage();
-    loadSkills();
-    loadKnowledge();
   });
 
   // 顶部 provider-badge 点击打开设置面板
@@ -1015,20 +1013,6 @@ function bindEvents() {
     document.getElementById('autonomy-select').value = State.autonomy;
     loadLLMStatus();
     loadUsage();
-    loadSkills();
-    loadKnowledge();
-  });
-
-  // 知识库重建索引
-  document.getElementById('knowledge-reindex-btn').addEventListener('click', async () => {
-    try {
-      showToast('◐ 正在重建知识库索引…', 'warning');
-      const data = await apiPost('/api/knowledge/reindex', {});
-      showToast(`✓ 索引完成: ${data.documents} 个文档, ${data.terms} 个词项`, 'success');
-      loadKnowledge();
-    } catch (e) {
-      showToast('✗ 索引失败: ' + e.message, 'error');
-    }
   });
   document.getElementById('close-settings').addEventListener('click', () => {
     document.getElementById('settings-drawer').style.display = 'none';
@@ -1545,9 +1529,8 @@ async function init() {
   // 加载文献
   loadReferences();
 
-  // 加载用量和技能（异步，不阻塞）
+  // 加载用量（异步，不阻塞）
   loadUsage();
-  loadSkills();
 
   // 绑定事件
   bindEvents();
@@ -1642,6 +1625,11 @@ async function loadKbOverview() {
         </div>
       </div>
       <div style="margin-top:12px;">${stageHtml}</div>
+      <div style="display:flex;gap:8px;margin-top:16px;">
+        <button class="btn-text" onclick="openLocalFile('knowledge')">📂 打开知识库文件夹</button>
+        <button class="btn-text" onclick="openLocalFile('knowledge/raw')">📂 打开 Raw 文件夹</button>
+        <button class="btn-text" onclick="openLocalFile('knowledge/wiki')">📂 打开 Wiki 文件夹</button>
+      </div>
       <div style="color:var(--text-tertiary);font-size:0.75rem;margin-top:8px;">
         索引时间: ${status.built_at || '未知'}
       </div>
@@ -1675,8 +1663,13 @@ async function loadKbRaw() {
       list.forEach(f => {
         html += `
           <div class="kb-list-item">
-            <div class="kb-list-title">${f.name}</div>
-            <div class="kb-list-meta">${(f.size / 1024).toFixed(1)} KB · ${new Date(f.mtime * 1000).toLocaleDateString()}</div>
+            <div class="kb-list-main">
+              <div class="kb-list-title">${f.name}</div>
+              <div class="kb-list-meta">${(f.size / 1024).toFixed(1)} KB · ${new Date(f.mtime * 1000).toLocaleDateString()}</div>
+            </div>
+            <div class="kb-list-actions">
+              <button class="kb-action-btn" onclick="openLocalFile('${f.path}')" title="打开文件">📂</button>
+            </div>
           </div>
         `;
       });
@@ -1706,11 +1699,16 @@ async function loadKbWiki() {
     pages.forEach(p => {
       const stageIcon = stageLabels[p.growth_stage] || '○';
       html += `
-        <div class="kb-list-item" onclick="openWikiDetail('${p.path}')">
-          <div class="kb-list-title">${stageIcon} ${p.title}</div>
-          <div class="kb-list-meta">
-            ${p.type} · 确信度 ${(p.confidence * 100).toFixed(0)}%
-            ${p.tags?.length ? '· ' + p.tags.join(', ') : ''}
+        <div class="kb-list-item">
+          <div class="kb-list-main" onclick="openWikiDetail('${p.path}')">
+            <div class="kb-list-title">${stageIcon} ${p.title}</div>
+            <div class="kb-list-meta">
+              ${p.type} · 确信度 ${(p.confidence * 100).toFixed(0)}%
+              ${p.tags?.length ? '· ' + p.tags.join(', ') : ''}
+            </div>
+          </div>
+          <div class="kb-list-actions">
+            <button class="kb-action-btn" onclick="event.stopPropagation(); openLocalFile('${p.path}')" title="在编辑器中打开">📂</button>
           </div>
         </div>
       `;
@@ -1844,6 +1842,10 @@ async function openWikiDetail(wikiPath) {
     renderedBody = renderedBody.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
 
     bodyEl.innerHTML = `
+      <div class="kb-detail-actions">
+        <button class="btn-text" onclick="openLocalFile('${wikiPath}')">📂 在编辑器中打开</button>
+        <button class="btn-text" onclick="copyToClipboard('${wikiPath}')">📋 复制路径</button>
+      </div>
       <div class="kb-frontmatter">
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">类型</span><span class="kb-frontmatter-value">${fm.type || '-'}</span></div>
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">生长阶段</span><span class="kb-frontmatter-value">${stage}</span></div>
@@ -1857,6 +1859,35 @@ async function openWikiDetail(wikiPath) {
     `;
   } catch (e) {
     bodyEl.innerHTML = `<div class="kb-empty">✗ 加载失败: ${e.message}</div>`;
+  }
+}
+
+async function openLocalFile(relPath) {
+  try {
+    const data = await apiPost('/api/open-local', { path: relPath });
+    if (data.success) {
+      showToast('✓ 已打开本地文件', 'success');
+    } else {
+      showToast('✗ 打开失败: ' + (data.error || '未知错误'), 'error');
+    }
+  } catch (e) {
+    showToast('✗ 打开失败: ' + e.message, 'error');
+  }
+}
+
+async function copyToClipboard(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    showToast('✓ 已复制到剪贴板', 'success');
+  } catch (e) {
+    // 回退方案
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('✓ 已复制到剪贴板', 'success');
   }
 }
 
@@ -1884,7 +1915,29 @@ async function createWikiStub() {
 
 // 知识库管理器事件绑定（在 bindEvents 中调用）
 function bindKbManagerEvents() {
-  document.getElementById('knowledge-manager-btn')?.addEventListener('click', openKbManager);
+  // 工具栏按钮
+  document.getElementById('toolbar-kb')?.addEventListener('click', openKbManager);
+  document.getElementById('toolbar-skills')?.addEventListener('click', async () => {
+    // 轻量技能面板：直接打开设置面板并定位到技能信息（或显示 toast）
+    const data = await apiGet('/api/skills');
+    const skills = data.skills || [];
+    const list = skills.map(s => `• ${s.name}`).join('\n');
+    showModal(`🎯 技能系统\n\n已加载 ${skills.length} 个技能：\n${list}\n\n技能在对话中根据关键词自动触发。`);
+  });
+  document.getElementById('toolbar-tasks')?.addEventListener('click', () => {
+    // 滚动到任务面板（右侧）
+    const panel = document.querySelector('.task-panel') || document.querySelector('.right-panel');
+    if (panel) panel.scrollIntoView({ behavior: 'smooth' });
+    else showToast('📋 任务面板在右侧栏', 'info');
+  });
+  document.getElementById('toolbar-usage')?.addEventListener('click', async () => {
+    // 轻量用量显示
+    const data = await apiGet('/api/usage');
+    const daily = data.daily || {};
+    showModal(`📊 Token 用量（今日）\n\n• Prompt: ${daily.prompt || 0}\n• Completion: ${daily.completion || 0}\n• 调用次数: ${daily.calls || 0}\n\nProvider: ${Object.keys(data.by_provider || {}).join(', ') || '无记录'}`);
+  });
+
+  // 知识库管理器
   document.getElementById('kb-manager-close')?.addEventListener('click', closeKbManager);
   document.getElementById('kb-manager-overlay')?.addEventListener('click', (e) => {
     if (e.target === e.currentTarget) closeKbManager();

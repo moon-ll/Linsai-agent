@@ -1560,3 +1560,84 @@ body {
 .btn-icon:hover {
   color: var(--text-primary);
 }
+
+/* ---- 侧边栏工具栏 ---- */
+.toolbar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px 12px;
+  border-top: 1px solid var(--border-color);
+  background: var(--surface);
+  gap: 4px;
+}
+
+.toolbar-btn {
+  flex: 1;
+  padding: 6px 4px;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+  line-height: 1;
+}
+
+.toolbar-btn:hover {
+  background: var(--bg-primary);
+  border-color: var(--border-color);
+  transform: translateY(-1px);
+}
+
+.toolbar-btn:active {
+  transform: translateY(0);
+}
+
+/* ---- 知识库管理器轻量化优化 ---- */
+.kb-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.kb-list-main {
+  flex: 1;
+  min-width: 0;
+}
+
+.kb-list-actions {
+  display: flex;
+  gap: 6px;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.kb-list-item:hover .kb-list-actions {
+  opacity: 1;
+}
+
+.kb-action-btn {
+  padding: 2px 6px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.kb-action-btn:hover {
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+.kb-detail-actions {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-color);
+}

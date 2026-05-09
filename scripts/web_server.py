@@ -16,6 +16,8 @@
 import argparse
 import base64
 import json
+import os
+import platform
 import queue
 import re
 import sys
@@ -562,6 +564,36 @@ class RequestHandler(BaseHTTPRequestHandler):
                 return
             wiki_path = kb.create_wiki_stub(concept, context, trigger="manual")
             self._send_json({"success": True, "path": wiki_path})
+            return
+
+        # 打开本地文件/文件夹（系统文件管理器）
+        if path == "/api/open-local":
+            target = body.get("path", "")
+            if not target:
+                self._send_json({"error": "缺少 path 参数"}, 400)
+                return
+            # 安全校验：resolve 后必须在项目根目录内
+            try:
+                full = (_PROJECT_ROOT / target).resolve()
+                root_resolved = _PROJECT_ROOT.resolve()
+                full.relative_to(root_resolved)
+            except (ValueError, RuntimeError):
+                self._send_json({"error": "路径超出项目范围"}, 403)
+                return
+            if not full.exists():
+                self._send_json({"error": "路径不存在"}, 404)
+                return
+            sys_name = platform.system()
+            try:
+                if sys_name == "Darwin":
+                    os.system(f"open '{full}' &")
+                elif sys_name == "Windows":
+                    os.startfile(str(full))
+                else:
+                    os.system(f"xdg-open '{full}' &")
+                self._send_json({"success": True, "path": target, "system": sys_name})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)
