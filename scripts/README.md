@@ -18,15 +18,23 @@
 | 脚本 | 状态 | 行数 | 说明 |
 |------|------|------|------|
 | `session_manager.py` | ✅ 已完成 | 382 | 会话创建、存档、加载、列出、归档 |
-| `context_builder.py` | ✅ 已完成 | 337 | 上下文组装：人格注入 + 记忆 + 会话历史 + 预算控制 |
-| `copilot_engine.py` | ✅ 已完成 | 584 | 核心引擎：LLM调用（Claude/Kimi CLI）、交互式对话循环、CLI参数解析 |
+| `context_builder.py` | ✅ 已完成 | 425 | 上下文组装：人格 + 记忆 + 知识库 + 技能 + 会话历史 + 预算控制 |
+| `copilot_engine.py` | ✅ 已完成 | 650 | 核心引擎：LLM调用（多Provider）、交互式对话、CLI参数解析、工具调用 |
 | `memory_manager.py` | ✅ 已完成 | 465 | 用户画像提取、工作上下文、长期记忆索引、记忆片段、会话摘要 |
-| `task_manager.py` | ✅ 已完成 | 380 | 任务 CRUD、状态流转、截止日期追踪、逾期检测 |
+| `task_manager.py` | ✅ 已完成 | 448 | 任务 CRUD、状态流转、进度/子任务/里程碑、截止日期追踪 |
 | `proactive_engine.py` | ✅ 已完成 | 465 | 心跳扫描、主动提醒、压力信号检测、三级自主控制、模式识别 |
 | `document_handler.py` | ✅ 已完成 | 486 | Markdown/TXT读取、PDF基础提取、代码分析、文档摘要、参考文献索引 |
 | `agora_bridge.py` | ✅ 已完成 | 208 | Agora群聊系统桥接：上下文导出/导入、历史人物召唤 |
+| `llm_router.py` | ✅ 已完成 | 565 | 多模型路由：MiniMax API + Kimi CLI + Claude CLI，自动降级 |
+| `usage_tracker.py` | ✅ 已完成 | 210 | Token 用量追踪：API精确统计 + CLI字符估算，多维度查询 |
+| `skill_manager.py` | ✅ 已完成 | 192 | 技能系统：扫描 skills/ 目录，关键词匹配，上下文注入 |
+| `knowledge_base.py` | ✅ 已完成 | 1258 | 知识库引擎：raw/wiki分层、frontmatter、知识图谱、生长机制 |
+| `tool_engine.py` | ✅ 已完成 | 322 | 子代理调用：5工具注册、安全白名单、解析-执行-回传 |
+| `web_server.py` | ✅ 已完成 | 845 | Web 服务器：HTTP + SSE + API路由 + 文件上传 |
+| `backup_manager.py` | ✅ 已完成 | — | 数据备份/恢复/清理 |
+| `upgrade.py` | ✅ 已完成 | — | 安全升级标准流程 |
 
-**总计：8 个脚本，3307 行 Python，零第三方依赖。**
+**总计：16 个脚本，约 7200 行 Python，零第三方依赖。**
 
 ---
 

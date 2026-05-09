@@ -466,7 +466,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：1.0*
+*版本：1.7.0*
 *日期：2026-05-08*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*
