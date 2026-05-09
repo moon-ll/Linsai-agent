@@ -471,6 +471,20 @@ def chat_loop(session_id: str, mode: str = "co-working") -> None:
         except Exception:
             pass
 
+        # 每轮对话后尝试捕获知识片段（静默执行）
+        try:
+            import importlib.util
+            kc_path = _PROJECT_ROOT / "scripts" / "kb_capture.py"
+            if kc_path.exists():
+                spec = importlib.util.spec_from_file_location("kb_capture", kc_path)
+                kc = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(kc)
+                result = kc.capture_from_session(session_id, topic_hint=topic)
+                if result.get("captured"):
+                    print(f"  📎 已捕获知识片段: {result['path']}")
+        except Exception:
+            pass
+
         print(f"\n林赛: {assistant_content}\n")
 
 

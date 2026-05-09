@@ -16,7 +16,7 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.parent
 
 # 预算与截断配置
-DEFAULT_BUDGETS = {"system": 8000, "memory": 6000, "context": 4000, "history": 10000, "input": 2000, "skills": 2000, "knowledge": 2000}
+DEFAULT_BUDGETS = {"system": 8000, "memory": 6000, "context": 4000, "history": 10000, "input": 2000, "skills": 2000, "knowledge": 1200}
 DEFAULT_TOTAL, EMERGENCY_TOTAL = 30000, 50000
 TRUNCATION_ORDER = ["history", "memory", "skills", "knowledge", "context", "system"]
 MIN_KEEP = {"system": 2000, "memory": 0, "context": 0, "history": 0, "skills": 0, "knowledge": 0, "input": None}

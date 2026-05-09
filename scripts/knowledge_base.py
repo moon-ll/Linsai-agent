@@ -56,6 +56,7 @@ WIKI_DIR = KNOWLEDGE_DIR / "wiki"
 INDEX_PATH = KNOWLEDGE_DIR / "index.json"
 GRAPH_PATH = KNOWLEDGE_DIR / "graph.json"
 GROWTH_LOG_PATH = KNOWLEDGE_DIR / "growth-log.json"
+ALIASES_PATH = KNOWLEDGE_DIR / "aliases.json"
 
 _SUPPORTED_EXTS = {".md", ".txt", ".rst"}
 _WIKI_TYPES = {"concepts", "methods", "people", "papers", "projects"}
@@ -74,6 +75,97 @@ _STOPWORDS: Set[str] = {
 # ─────────────────────────────────────────────
 # 工具函数
 # ─────────────────────────────────────────────
+
+def _load_aliases() -> Dict[str, List[str]]:
+    """加载别名映射。"""
+    if not ALIASES_PATH.exists():
+        return {}
+    try:
+        with open(ALIASES_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        return {k: v if isinstance(v, list) else [v] for k, v in data.items()}
+    except Exception:
+        return {}
+
+
+def _expand_query_with_aliases(query: str) -> List[str]:
+    """使用别名扩展查询词。"""
+    aliases = _load_aliases()
+    if not aliases:
+        return [query]
+    expanded = [query]
+    lower_query = query.lower()
+    for canonical, alts in aliases.items():
+        matches = canonical.lower() in lower_query
+        if not matches:
+            for alt in alts:
+                if alt.lower() in lower_query:
+                    matches = True
+                    break
+        if matches:
+            replaced = query
+            for alt in alts:
+                replaced = replaced.replace(alt, canonical)
+            if replaced != query:
+                expanded.append(replaced)
+    return expanded
+
+
+def _exact_concept_match(query: str) -> bool:
+    """检查查询是否精确命中知识库中的概念标题。"""
+    if not INDEX_PATH.exists():
+        return False
+    try:
+        with open(INDEX_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        docs = data.get("documents", {})
+        query_lower = query.lower()
+        for doc_info in docs.values():
+            title = doc_info.get("title", "")
+            if title and (title.lower() in query_lower or query_lower in title.lower()):
+                return True
+    except Exception:
+        pass
+    return False
+
+
+def _has_tech_terms(query: str) -> bool:
+    """检查查询是否包含科研/技术相关术语。"""
+    return bool(re.search(
+        r"(实验|方案|设计|参数|模型|理论|计算|测量|数据|结果|分析|"
+        r"激光|脉冲|光谱|相位|振幅|偏振|晶体|样品|光路|"
+        r"论文|文献|引用|作者|期刊|方程|公式|推导|"
+        r"HHG|attosecond|nonlinear|dispersion|phase|amplitude)",
+        query, re.IGNORECASE,
+    ))
+
+
+def should_search_knowledge(query: str, session_mode: str = "co-working") -> bool:
+    """判断当前查询是否需要检索知识库。"""
+    text = query.strip()
+    if not text or len(text) < 10:
+        return False
+    # 简单闲聊过滤
+    if re.match(r"^(你好|您好|嗨|哈喽|hello|hi|hey|在吗|谢谢|再见|拜拜)", text, re.I):
+        return False
+    # 1. 用户明确请求
+    if re.search(r"(查(?:一)?下|搜索|知识库|我记得|之前说过|相关知识|参考资料|笔记里)", text):
+        return True
+    # 2. 精确概念匹配
+    if _exact_concept_match(text):
+        return True
+    # 3. 工作模式 + 技术讨论
+    if session_mode == "co-working" and len(text) > 50 and _has_tech_terms(text):
+        return True
+    # 4. 快速验证 + 技术术语
+    if session_mode == "quick-check" and _has_tech_terms(text):
+        return True
+    # 5. 深度对话 + 引用过往
+    if session_mode == "deep-talk" and len(text) > 30:
+        if re.search(r"(之前|上次|以前|记得|说过|讨论过)", text):
+            return True
+    return False
+
 
 def _now_utc() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -716,6 +808,27 @@ def save_distilled_wiki(wiki_rel_path: str, llm_output: str,
 # 交互触发生长
 # ─────────────────────────────────────────────
 
+def check_similar_concepts(concept_name: str, threshold: float = 0.9) -> List[Dict[str, Any]]:
+    """检查知识库中是否存在与给定概念高度相似的条目。
+
+    Returns:
+        相似概念列表，每项含 title, doc, score, path
+    """
+    results = search(concept_name, top_k=5)
+    similar = []
+    for r in results:
+        score = r.get("score", 0)
+        if score >= threshold:
+            similar.append({
+                "title": r.get("title", ""),
+                "doc": r.get("doc", ""),
+                "score": score,
+                "source": r.get("source", ""),
+                "growth_stage": r.get("growth_stage", ""),
+            })
+    return similar
+
+
 def create_wiki_stub(concept_name: str, context: str = "",
                      trigger: str = "conversation") -> str:
     """基于上下文创建 wiki stub（交互触发生长）。
@@ -1032,6 +1145,17 @@ def search(query: str, top_k: int = 3, source: str = "all") -> List[Dict[str, An
     if not query_terms:
         return []
 
+    # 别名扩展：将查询中的别名替换为 canonical 形式
+    aliases = _load_aliases()
+    expanded_terms = set(query_terms)
+    for term in list(query_terms):
+        for canonical, alts in aliases.items():
+            if term.lower() == canonical.lower() or any(term.lower() == a.lower() for a in alts):
+                expanded_terms.add(canonical.lower())
+                for alt in alts:
+                    expanded_terms.add(alt.lower())
+    query_terms = list(expanded_terms)
+
     inverted = index_data.get("inverted", {})
     idf = index_data.get("idf", {})
     docs = index_data.get("documents", {})
@@ -1097,6 +1221,98 @@ def search(query: str, top_k: int = 3, source: str = "all") -> List[Dict[str, An
 
     scored.sort(key=lambda x: x["score"], reverse=True)
     return scored[:top_k]
+
+
+def search_light(query: str, top_k: int = 3, source: str = "all") -> List[Dict[str, Any]]:
+    """轻量检索：只返回标题、摘要、路径和分数，不返回全文。
+
+    用于快速判断是否需要注入上下文，节省内存和序列化开销。
+    """
+    results = search(query, top_k=top_k, source=source)
+    light = []
+    for r in results:
+        text = r.get("text", "")
+        # 生成一句话摘要（取第一句或前 80 字符）
+        summary = text.split("。")[0] if "。" in text else text[:80]
+        if len(summary) > 80:
+            summary = summary[:77] + "..."
+        light.append({
+            "title": r.get("title", ""),
+            "doc": r.get("doc", ""),
+            "score": r.get("score", 0),
+            "source": r.get("source", ""),
+            "growth_stage": r.get("growth_stage", ""),
+            "summary": summary,
+        })
+    return light
+
+
+def get_kb_health() -> Dict[str, Any]:
+    """返回知识库健康度数据，供仪表盘使用。"""
+    status = get_index_status()
+    graph = get_graph_summary()
+    candidates = get_growth_candidates()
+
+    # 统计 capture 文件
+    capture_dir = KNOWLEDGE_DIR / "captures"
+    capture_count = len(list(capture_dir.glob("*.md"))) if capture_dir.exists() else 0
+
+    # 统计本周新增（基于 growth-log）
+    log = get_growth_log(limit=200)
+    week_count = 0
+    try:
+        from datetime import timedelta
+        now = datetime.now(timezone.utc)
+        week_ago = now - timedelta(days=7)
+        for entry in log:
+            ts = entry.get("timestamp", "")
+            if ts:
+                try:
+                    et = datetime.fromisoformat(ts.replace("Z", "+00:00"))
+                    if et >= week_ago:
+                        week_count += 1
+                except Exception:
+                    pass
+    except Exception:
+        pass
+
+    # 待蒸馏 raw：已索引但未关联 wiki 的 raw 文件
+    raw_files = list_raw_files()
+    wiki_from_raw = set()
+    for page in list_wiki_pages():
+        fm = get_wiki_page(page.get("path", ""))
+        if fm:
+            src = fm.get("frontmatter", {}).get("source_raw", "")
+            if src:
+                wiki_from_raw.add(src)
+    pending_distill = len([f for f in raw_files if f["name"] not in wiki_from_raw])
+
+    return {
+        "indexed": status.get("indexed", False),
+        "raw_count": status.get("raw_count", 0),
+        "wiki_count": status.get("wiki_count", 0),
+        "capture_count": capture_count,
+        "chunks": status.get("chunks", 0),
+        "growth_stages": graph.get("growth_stages", {}),
+        "graph_nodes": graph.get("node_count", 0),
+        "graph_edges": graph.get("edge_count", 0),
+        "graph_orphans": _count_graph_orphans(),
+        "week_new": week_count,
+        "pending_distill": pending_distill,
+        "growth_candidates": len(candidates),
+        "built_at": status.get("built_at", ""),
+    }
+
+
+def _count_graph_orphans() -> int:
+    """统计知识图谱中无对应 wiki 文件的孤儿节点。"""
+    graph = _load_graph()
+    orphans = 0
+    for title, node in graph.get("nodes", {}).items():
+        path = node.get("path", "")
+        if path and not (KNOWLEDGE_DIR / path).exists():
+            orphans += 1
+    return orphans
 
 
 def get_index_status() -> Dict[str, Any]:

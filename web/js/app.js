@@ -1535,6 +1535,8 @@ function switchKbTab(tab) {
   else if (tab === 'wiki') loadKbWiki();
   else if (tab === 'graph') loadKbGraph();
   else if (tab === 'growth') loadKbGrowth();
+  else if (tab === 'health') loadKbHealth();
+  else if (tab === 'aliases') loadKbAliases();
 }
 
 async function loadKbOverview() {
@@ -1764,6 +1766,151 @@ async function loadKbGrowth() {
   }
 }
 
+async function loadKbHealth() {
+  const container = document.getElementById('kb-health-content');
+  container.innerHTML = '◐ 加载中…';
+  try {
+    const health = await apiGet('/api/knowledge/health');
+    const stages = health.growth_stages || {};
+    const stageLabels = { seedling: '🌱 幼苗', growing: '🌿 成长中', mature: '🌳 成熟' };
+    const stageHtml = Object.entries(stages).map(([s, c]) => `<span class="kb-badge kb-badge-${s}">${stageLabels[s] || s}: ${c}</span>`).join(' ');
+
+    container.innerHTML = `
+      <div class="kb-health-grid">
+        <div class="kb-health-card">
+          <div class="kb-health-value">${health.raw_count || 0}</div>
+          <div class="kb-health-label">Raw 文件</div>
+        </div>
+        <div class="kb-health-card">
+          <div class="kb-health-value">${health.wiki_count || 0}</div>
+          <div class="kb-health-label">Wiki 页面</div>
+        </div>
+        <div class="kb-health-card">
+          <div class="kb-health-value">${health.capture_count || 0}</div>
+          <div class="kb-health-label">对话捕获</div>
+        </div>
+        <div class="kb-health-card">
+          <div class="kb-health-value">${health.graph_nodes || 0}</div>
+          <div class="kb-health-label">图谱节点</div>
+        </div>
+        <div class="kb-health-card">
+          <div class="kb-health-value">${health.graph_edges || 0}</div>
+          <div class="kb-health-label">关联边</div>
+        </div>
+        <div class="kb-health-card">
+          <div class="kb-health-value">${health.growth_candidates || 0}</div>
+          <div class="kb-health-label">生长候选</div>
+        </div>
+      </div>
+      <div style="margin-top:12px;">${stageHtml}</div>
+      <div class="kb-health-section">
+        <div class="kb-health-row"><span>本周新增</span><span>${health.week_new || 0} 条</span></div>
+        <div class="kb-health-row"><span>待蒸馏 raw</span><span>${health.pending_distill || 0} 个</span></div>
+        <div class="kb-health-row"><span>孤儿节点</span><span>${health.graph_orphans || 0} 个</span></div>
+        <div class="kb-health-row"><span>索引时间</span><span>${health.built_at ? new Date(health.built_at).toLocaleString() : '未知'}</span></div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;">
+        <button class="btn-text" onclick="runMaintenance('reindex')">🔄 重建索引</button>
+        <button class="btn-text" onclick="runMaintenance('orphans')">🧹 清理孤儿</button>
+        <button class="btn-text" onclick="runMaintenance('candidates')">📋 候选报告</button>
+        <button class="btn-text" onclick="runMaintenance('weekly')">🔧 周维护</button>
+      </div>
+    `;
+  } catch (e) {
+    container.innerHTML = `<div class="kb-empty">✗ 加载失败: ${e.message}</div>`;
+  }
+}
+
+async function loadKbAliases() {
+  const container = document.getElementById('kb-aliases-content');
+  container.innerHTML = '◐ 加载中…';
+  try {
+    const data = await apiGet('/api/knowledge/aliases');
+    const aliases = data.aliases || {};
+    let html = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <span style="font-size:0.85rem;color:var(--text-secondary);">别名映射：查询时自动展开同义词</span>
+        <button class="btn-text" onclick="saveAliases()">💾 保存</button>
+      </div>
+      <div id="aliases-editor" style="display:flex;flex-direction:column;gap:8px;">
+    `;
+
+    const entries = Object.entries(aliases);
+    if (entries.length === 0) {
+      html += `<div class="kb-empty">暂无别名映射。点击"添加"创建。</div>`;
+    } else {
+      entries.forEach(([canonical, alts], idx) => {
+        html += `
+          <div class="alias-row" data-idx="${idx}">
+            <input type="text" class="alias-canonical" value="${canonical}" placeholder="标准词" style="flex:1;padding:6px 8px;border-radius:6px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);">
+            <span style="color:var(--text-tertiary);">→</span>
+            <input type="text" class="alias-alts" value="${Array.isArray(alts) ? alts.join(', ') : alts}" placeholder="别名1, 别名2" style="flex:2;padding:6px 8px;border-radius:6px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);">
+            <button class="btn-icon" onclick="this.parentElement.remove()" title="删除">🗑️</button>
+          </div>
+        `;
+      });
+    }
+    html += `</div>`;
+    html += `
+      <div style="margin-top:12px;">
+        <button class="btn-text" onclick="addAliasRow()">➕ 添加别名</button>
+      </div>
+    `;
+    container.innerHTML = html;
+  } catch (e) {
+    container.innerHTML = `<div class="kb-empty">✗ 加载失败: ${e.message}</div>`;
+  }
+}
+
+function addAliasRow() {
+  const editor = document.getElementById('aliases-editor');
+  const idx = editor.children.length;
+  const row = document.createElement('div');
+  row.className = 'alias-row';
+  row.dataset.idx = idx;
+  row.innerHTML = `
+    <input type="text" class="alias-canonical" placeholder="标准词" style="flex:1;padding:6px 8px;border-radius:6px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);">
+    <span style="color:var(--text-tertiary);">→</span>
+    <input type="text" class="alias-alts" placeholder="别名1, 别名2" style="flex:2;padding:6px 8px;border-radius:6px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);">
+    <button class="btn-icon" onclick="this.parentElement.remove()" title="删除">🗑️</button>
+  `;
+  editor.appendChild(row);
+}
+
+async function saveAliases() {
+  const rows = document.querySelectorAll('.alias-row');
+  const aliases = {};
+  rows.forEach(row => {
+    const canonical = row.querySelector('.alias-canonical').value.trim();
+    const altsStr = row.querySelector('.alias-alts').value.trim();
+    if (canonical && altsStr) {
+      aliases[canonical] = altsStr.split(',').map(s => s.trim()).filter(Boolean);
+    }
+  });
+  try {
+    await apiPost('/api/knowledge/aliases', { aliases });
+    showToast('✓ 别名已保存', 'success');
+  } catch (e) {
+    showToast('✗ 保存失败: ' + e.message, 'error');
+  }
+}
+
+async function runMaintenance(task) {
+  try {
+    showToast(`◐ 运行 ${task}...`, 'info');
+    const result = await apiPost('/api/knowledge/maintenance', { task });
+    if (result.success) {
+      showToast(`✓ ${task} 完成`, 'success');
+      if (KBManager.activeTab === 'health') loadKbHealth();
+      else if (KBManager.activeTab === 'overview') loadKbOverview();
+    } else {
+      showToast('✗ 失败: ' + (result.error || '未知错误'), 'error');
+    }
+  } catch (e) {
+    showToast('✗ 请求失败: ' + e.message, 'error');
+  }
+}
+
 async function openWikiDetail(wikiPath) {
   const overlay = document.getElementById('kb-wiki-detail-overlay');
   const titleEl = document.getElementById('kb-wiki-detail-title');
@@ -1851,16 +1998,23 @@ function closeWikiDetail() {
   document.getElementById('kb-wiki-detail-overlay').style.display = 'none';
 }
 
-async function createWikiStub() {
+async function createWikiStub(force = false) {
   const concept = prompt('请输入新概念名称：');
   if (!concept) return;
   try {
-    const data = await apiPost('/api/knowledge/stub', { concept, context: '手动创建' });
+    const data = await apiPost('/api/knowledge/stub', { concept, context: '手动创建', force });
     if (data.success) {
       showToast(`✨ 已创建 stub: ${concept}`, 'success');
       if (KBManager.activeTab === 'wiki') loadKbWiki();
       else if (KBManager.activeTab === 'growth') loadKbGrowth();
       else if (KBManager.activeTab === 'overview') loadKbOverview();
+      else if (KBManager.activeTab === 'health') loadKbHealth();
+    } else if (data.action === 'suggest_merge') {
+      const similarList = data.similar.map(s => `• ${s.title} [${s.source}:${s.growth_stage}]`).join('\n');
+      const confirmCreate = confirm(`检测到相似概念:\n${similarList}\n\n${data.message}\n\n点击"确定"强制创建，点击"取消"取消。`);
+      if (confirmCreate) {
+        createWikiStub(true);
+      }
     } else {
       showToast('✗ 创建失败', 'error');
     }

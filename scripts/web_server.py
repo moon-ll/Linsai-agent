@@ -375,6 +375,41 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json(kb.get_enriched_context(query, top_k=3))
             return
 
+        if path == "/api/knowledge/aliases":
+            aliases_path = _PROJECT_ROOT / "knowledge" / "aliases.json"
+            if aliases_path.exists():
+                try:
+                    with open(aliases_path, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                    self._send_json({"aliases": data})
+                except Exception as e:
+                    self._send_json({"aliases": {}, "error": str(e)})
+            else:
+                self._send_json({"aliases": {}})
+            return
+
+        if path == "/api/knowledge/captures":
+            try:
+                import importlib.util
+                kc_path = _SCRIPT_DIR / "kb_capture.py"
+                if kc_path.exists():
+                    spec = importlib.util.spec_from_file_location("kb_capture", kc_path)
+                    kc = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(kc)
+                    self._send_json({"captures": kc.list_captures()})
+                else:
+                    self._send_json({"captures": []})
+            except Exception as e:
+                self._send_json({"captures": [], "error": str(e)})
+            return
+
+        if path == "/api/knowledge/health":
+            try:
+                self._send_json(kb.get_kb_health())
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_POST(self) -> None:
@@ -562,8 +597,67 @@ class RequestHandler(BaseHTTPRequestHandler):
             if not concept:
                 self._send_json({"error": "缺少 concept 参数"}, 400)
                 return
+            # 相似概念检测
+            similar = []
+            if hasattr(kb, "check_similar_concepts"):
+                similar = kb.check_similar_concepts(concept, threshold=0.9)
+            if similar and not body.get("force", False):
+                self._send_json({
+                    "success": False,
+                    "action": "suggest_merge",
+                    "similar": similar,
+                    "message": f"检测到 {len(similar)} 个相似概念，是否仍然创建？"
+                }, 409)
+                return
             wiki_path = kb.create_wiki_stub(concept, context, trigger="manual")
             self._send_json({"success": True, "path": wiki_path})
+            return
+
+        if path == "/api/knowledge/aliases":
+            aliases = body.get("aliases", {})
+            aliases_path = _PROJECT_ROOT / "knowledge" / "aliases.json"
+            try:
+                with open(aliases_path, "w", encoding="utf-8") as f:
+                    json.dump(aliases, f, ensure_ascii=False, indent=2)
+                self._send_json({"success": True, "aliases": aliases})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        if path == "/api/knowledge/maintenance":
+            task = body.get("task", "health")
+            try:
+                import importlib.util
+                km_path = _SCRIPT_DIR / "kb_maintenance.py"
+                if not km_path.exists():
+                    self._send_json({"error": "维护模块未找到"}, 500)
+                    return
+                spec = importlib.util.spec_from_file_location("kb_maintenance", km_path)
+                km = importlib.util.module_from_spec(spec)
+                spec.loader.exec_module(km)
+                kb_mod = km._import_kb()
+
+                if task == "reindex":
+                    km.cmd_reindex(kb_mod)
+                    self._send_json({"success": True, "task": task})
+                elif task == "orphans":
+                    km.cmd_orphans(kb_mod)
+                    self._send_json({"success": True, "task": task})
+                elif task == "candidates":
+                    km.cmd_candidates(kb_mod)
+                    self._send_json({"success": True, "task": task})
+                elif task == "health":
+                    health = kb_mod.get_kb_health()
+                    self._send_json({"success": True, "task": task, "health": health})
+                elif task == "weekly":
+                    # weekly 输出到控制台，返回 health 数据
+                    km.cmd_weekly(kb_mod)
+                    health = kb_mod.get_kb_health()
+                    self._send_json({"success": True, "task": task, "health": health})
+                else:
+                    self._send_json({"error": f"未知任务: {task}"}, 400)
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
             return
 
         # 打开本地文件/文件夹（系统文件管理器）
