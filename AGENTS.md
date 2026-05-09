@@ -98,6 +98,8 @@ LinSai-CoPilot/
 │   │   ├── people/            # 学者评价
 │   │   ├── papers/            # 论文精读
 │   │   └── projects/          # 项目聚合
+│   ├── captures/              # 对话自动捕获片段（零 LLM 开销）
+│   ├── aliases.json           # 别名映射（查询自动展开）
 │   ├── index.json             # 统一倒排索引
 │   ├── graph.json             # 知识图谱
 │   └── growth-log.json        # 知识生长日志
@@ -108,7 +110,9 @@ LinSai-CoPilot/
     ├── task_manager.py        # 任务 CRUD、状态流转
     ├── copilot_engine.py      # 核心引擎：prompt 构建、调用 LLM、响应解析
     ├── context_builder.py     # 上下文组装：人格 + 记忆 + 知识库 + 当前任务 + 会话历史
-    ├── knowledge_base.py      # 知识库引擎：raw/wiki 分层、知识图谱、生长机制
+    ├── knowledge_base.py      # 知识库引擎：raw/wiki 分层、知识图谱、生长机制、别名、健康度
+    ├── kb_capture.py          # 对话自动捕获：技术参数检测、零 LLM 开销
+    ├── kb_maintenance.py      # 批处理维护：索引重建、孤儿清理、候选报告、周维护
     ├── proactive_engine.py    # 主动感知、心跳扫描
     ├── document_handler.py    # 文档读取、PDF提取、代码分析
     ├── agora_bridge.py        # Agora群聊桥接
@@ -241,15 +245,21 @@ LinSai-CoPilot/
 [长期记忆]        ← 用户画像 + 相关记忆片段（≤6000 字符）
 [工作上下文]      ← 当前进行中的任务和关键决策（≤4000 字符）
 [技能上下文]      ← 匹配用户输入的 SKILL.md 内容（≤2000 字符）
-[相关知识]        ← 知识库检索结果 + 图谱关联知识（≤2000 字符）
+[相关知识]        ← 知识库检索结果 + 图谱关联知识（≤1200 字符）
 [会话历史]        ← 本次会话的最近消息（≤10000 字符）
 [当前输入]        ← 用户的最新消息
 ```
 
-**知识库注入策略**：
-- 优先返回 wiki 页面（结构化知识 > raw 原材料）
-- wiki 结果加权 1.2×，mature 阶段再加权 1.1×
-- 通过知识图谱拉取关联概念（深度=1）
+**知识库注入策略**（v1.7.1 精细化）：
+- **智能触发**：闲聊/问候自动跳过检索，技术讨论才浮现知识库
+- **别名扩展**：查询前自动展开同义词（如 HHG → 高次谐波产生）
+- **分级注入**：
+  - score ≥ 0.8（高相关）：注入全文摘要 300 字
+  - 0.4 ≤ score < 0.8（中相关）：只注入标题 + 一句话 + 路径链接
+  - score < 0.4（低相关）：不注入
+- **紧凑格式**：`[KB] 标题 [source:stage]: 摘要`（节省 ~30% prompt 空间）
+- 优先返回 wiki 页面（结构化知识 > raw 原材料），wiki 加权 1.2×，mature 再加权 1.1×
+- 通过知识图谱拉取关联概念（深度=1，仅高相关结果触发）
 - 缺失概念检测：如果用户提到知识库中没有的概念，林赛会标注"认知边界"
 
 **总量控制**：注入内容总计不超过 30000 字符（约 7500-10000 tokens），充分利用 LLM 上下文能力（Kimi K2.5 支持 256K tokens），同时避免过度稀释注意力。
@@ -301,13 +311,19 @@ LinSai-CoPilot/
 - ✅ **raw/wiki 分层知识库** — `scripts/knowledge_base.py`
   - raw/：用户原始材料（论文、笔记、剪藏），保留原貌
   - wiki/：林赛研究笔记（concepts/methods/people/papers/projects），第一人称视角
+  - captures/：对话自动捕获片段，零 LLM 开销
   - 标准 frontmatter 格式：title, type, growth_stage, confidence, related, tags
 - ✅ **知识图谱** — `knowledge/graph.json`
   - 概念节点 + 关联边，支持深度遍历拉取关联知识
-- ✅ **知识生长机制**
-  - raw → wiki 提炼：LLM 自动将原始材料提炼为结构化笔记
-  - 交互触发生长：遇到新概念自动创建 seedling stub，对话中逐步丰满
-  - 生长日志：记录所有创建/更新/关联事件
+- ✅ **别名映射** — `knowledge/aliases.json`
+  - 查询时自动展开同义词（如 HHG → 高次谐波产生）
+- ✅ **知识库精细化**（v1.7.1）
+  - 智能检索触发：闲聊跳过，技术讨论才浮现知识库
+  - 分级上下文注入：高相关全文 / 中相关摘要 / 低相关忽略
+  - 紧凑注入格式：`[KB] 标题 [source:stage]: 摘要`
+  - 对话自动捕获：`scripts/kb_capture.py`，检测技术参数和明确请求
+  - 相似概念检测：创建 wiki stub 前检查重复，防膨胀
+  - 批处理维护：`scripts/kb_maintenance.py --weekly`
 - ✅ **上下文集成** — `scripts/context_builder.py`
   - 检索结果优先 wiki（结构化知识 > raw 原材料）
   - 图谱关联知识自动拉取
@@ -466,7 +482,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：1.7.0*
-*日期：2026-05-08*
+*版本：1.7.1*
+*日期：2026-05-09*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

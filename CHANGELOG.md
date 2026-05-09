@@ -1,5 +1,44 @@
 # 变更记录
 
+## v1.7.1 - 2026-05-09 知识库精细化 — 从"建库"到"浮现"
+
+### 核心改进
+- **对话自动捕获** — `scripts/kb_capture.py`
+  - 检测技术参数（3个以上数字+单位）、用户明确请求（"记下来"）、工作模式长消息
+  - 零 LLM 开销，保存到 `knowledge/captures/`
+- **智能检索触发器** — `scripts/knowledge_base.py` 的 `should_search_knowledge()`
+  - 闲聊/问候自动跳过，技术讨论才检索知识库
+  - 节省 40-100% 的每轮对话知识库上下文开销
+- **分级上下文注入** — `scripts/context_builder.py`
+  - 高相关（score≥0.8）：注入全文摘要 300 字
+  - 中相关（0.4≤score<0.8）：只注入标题 + 一句话 + 路径链接
+  - 低相关（score<0.4）：不注入
+- **紧凑注入格式** — `[KB] 标题 [source:stage]: 摘要`（节省 ~30% prompt 空间）
+- **别名映射系统** — `knowledge/aliases.json`
+  - 查询时自动展开同义词（如 HHG → 高次谐波产生）
+- **相似概念检测** — 创建 wiki stub 前检测 score>0.9 的相似条目，防膨胀
+- **批处理维护窗口** — `scripts/kb_maintenance.py`
+  - `--weekly` 一键维护：重建索引 + 清理孤儿 + 候选报告 + 健康度
+  - `--reindex` / `--orphans` / `--candidates` / `--health` / `--captures`
+- **知识库健康仪表盘** — Web 界面新增"健康度"和"别名"标签页
+  - 健康度：总条目、生长分布、图谱状态、本周新增、待处理项
+  - 别名管理：增删改别名映射，实时保存
+- **移除 auto_distill 默认触发** — 蒸馏/生长改为用户控制，节省 80%+ LLM 调用
+
+### 文件变更
+- 新增：`scripts/kb_capture.py`（317 行，自检通过）
+- 新增：`scripts/kb_maintenance.py`（260 行，自检通过）
+- 新增：`knowledge/aliases.json`
+- 修改：`scripts/knowledge_base.py`（+216 行：别名、相似检测、健康度、智能触发）
+- 修改：`scripts/context_builder.py`（分级注入、紧凑格式、预算 2000→1200）
+- 修改：`scripts/copilot_engine.py`（对话后自动调用 capture）
+- 修改：`scripts/web_server.py`（+94 行：aliases/captures/health/maintenance API）
+- 修改：`web/js/app.js`（+158 行：健康度/别名标签页、维护按钮、相似概念提示）
+- 修改：`web/css/style.css`（+69 行：仪表盘和别名样式）
+- 修改：`web/index.html`（新增 2 个标签页和面板）
+
+---
+
 ## v1.7.0 - 2026-05-08 知识库系统重构（raw/wiki 分层 + 知识图谱 + 生长机制）
 
 ### 架构重构（借鉴 Karpathy 笔记系统）
