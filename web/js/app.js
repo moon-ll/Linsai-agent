@@ -1435,52 +1435,8 @@ async function loadUsage() {
 }
 
 // ============================================
-// 技能系统
+// 技能系统（实时检测输入框中的技能）
 // ============================================
-async function loadSkills() {
-  try {
-    const data = await apiGet('/api/skills');
-    const container = document.getElementById('skills-status');
-    if (!container) return;
-
-    const skills = data.skills || [];
-    if (skills.length === 0) {
-      container.innerHTML = '○ 暂无技能';
-      return;
-    }
-
-    container.innerHTML = skills.map(s => {
-      return `<div>· ${escapeHtml(s.name)} <span style="color:var(--text-tertiary)">${escapeHtml(s.triggers)}</span></div>`;
-    }).join('');
-  } catch (e) {
-    console.error('加载技能失败:', e);
-    const container = document.getElementById('skills-status');
-    if (container) container.innerHTML = '✗ 加载失败';
-  }
-}
-
-async function loadKnowledge() {
-  try {
-    const data = await apiGet('/api/knowledge');
-    const container = document.getElementById('knowledge-status');
-    if (!container) return;
-
-    if (!data.indexed) {
-      container.innerHTML = '○ 尚未索引。将 .md/.txt 文件放入 knowledge/ 目录后点击重建索引。';
-      return;
-    }
-
-    container.innerHTML = `
-      <div>✓ 已索引 <strong>${data.documents}</strong> 个文档，<strong>${data.chunks}</strong> 个段落</div>
-      <div style="color:var(--text-tertiary);font-size:0.75rem;margin-top:2px;">索引时间: ${data.built_at || '未知'}</div>
-    `;
-  } catch (e) {
-    console.error('加载知识库失败:', e);
-    const container = document.getElementById('knowledge-status');
-    if (container) container.innerHTML = '✗ 加载失败';
-  }
-}
-
 async function updateSkillBadge(text) {
   const badge = document.getElementById('skill-badge');
   if (!badge) return;
