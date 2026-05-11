@@ -1226,8 +1226,8 @@ function bindEvents() {
     if (e.key === 'Enter') searchHistory();
   });
 
-  // 返回当前会话
-  document.getElementById('back-to-current').addEventListener('click', backToCurrentSession);
+  // 返回当前会话（如果按钮存在）
+  document.getElementById('back-to-current')?.addEventListener('click', backToCurrentSession);
 
   // 底部按钮
   document.getElementById('backup-btn').addEventListener('click', () => {
