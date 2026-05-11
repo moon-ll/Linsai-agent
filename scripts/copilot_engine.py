@@ -31,6 +31,14 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+# 统一日志
+try:
+    from logger import get_logger, setup_logging
+    setup_logging()
+    _log = get_logger("copilot_engine")
+except Exception:
+    _log = None
+
 # ---------------------------------------------------------------------------
 # 路径与导入配置
 # ---------------------------------------------------------------------------
@@ -276,7 +284,11 @@ def chat_loop(session_id: str, mode: str = "co-working") -> None:
     """
     try:
         messages, state = load_session(session_id)
+        if _log:
+            _log.info(f"会话加载: {session_id} | 主题: {state.get('topic', '')} | 消息数: {len(messages)}")
     except Exception as exc:
+        if _log:
+            _log.error(f"加载会话失败: {exc}", exc_info=True)
         print(f"✗ 加载会话失败: {exc}")
         return
 
@@ -443,8 +455,12 @@ def chat_loop(session_id: str, mode: str = "co-working") -> None:
             ctx = build_context(session_id, user_input, mode)
             system_prompt = ctx.get("system_prompt", "")
             llm_messages = ctx.get("messages", [])
+            if _log:
+                _log.info(f"LLM 调用: session={session_id}, mode={mode}, messages={len(llm_messages)}")
             assistant_content = call_llm(system_prompt, llm_messages)
         except Exception as exc:
+            if _log:
+                _log.error(f"LLM 调用失败: {exc}", exc_info=True)
             print(f"✗ LLM 调用失败: {exc}")
             continue
 

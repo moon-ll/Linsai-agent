@@ -28,6 +28,14 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import parse_qs, unquote, urlparse
 
+# 统一日志
+try:
+    from logger import get_logger, setup_logging
+    setup_logging()
+    _log = get_logger("web_server")
+except Exception:
+    _log = None
+
 
 # ---------------------------------------------------------------------------
 # 路径与导入
@@ -179,6 +187,8 @@ class RequestHandler(BaseHTTPRequestHandler):
         """处理 GET 请求。"""
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
+        if _log:
+            _log.info(f"GET {path}")
 
         # 静态文件
         if path == "/":
@@ -426,6 +436,8 @@ class RequestHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
         body = self._read_json_body()
+        if _log:
+            _log.info(f"POST {path}")
 
         # 创建会话
         if path == "/api/sessions":
@@ -499,6 +511,8 @@ class RequestHandler(BaseHTTPRequestHandler):
 
                     q.put(("done", response.strip()))
                 except Exception as e:
+                    if _log:
+                        _log.error(f"LLM 调用失败: {e}", exc_info=True)
                     q.put(("error", str(e)))
 
             thread = threading.Thread(target=llm_worker)
@@ -583,6 +597,8 @@ class RequestHandler(BaseHTTPRequestHandler):
                     "terms": len(idx.get("inverted", {})),
                 })
             except Exception as e:
+                if _log:
+                    _log.error(f"API 错误 {path}: {e}", exc_info=True)
                 self._send_json({"error": str(e)}, 500)
             return
 
@@ -983,6 +999,8 @@ def main(argv: Optional[List[str]] = None) -> int:
         print("✓ 全部通过" if ok else "✗ 存在失败项")
         return 0 if ok else 1
 
+    if _log:
+        _log.info(f"Web 服务器启动: http://{args.host}:{args.port}")
     run_server(args.host, args.port)
     return 0
 

@@ -30,6 +30,13 @@ import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+# 统一日志
+try:
+    from logger import get_logger
+    _log = get_logger("llm_router")
+except Exception:
+    _log = None
+
 
 # ---------------------------------------------------------------------------
 # 路径常量
@@ -336,6 +343,9 @@ class LLMRouter:
         retry = int(self.config.get("retry", 1))
         used_provider_name = ""
 
+        if _log:
+            _log.info(f"LLM 路由: strategy={self.config.get('strategy', 'priority')}, force={self.force_provider or 'auto'}")
+
         # 模式 A：手动强制指定
         if self.force_provider:
             target_name = self.force_provider
@@ -391,20 +401,32 @@ class LLMRouter:
                     provider.failure_count += 1
                     if e.code == 429:
                         last_error = f"⚠ {provider.name} 限流 (429)，尝试下一个…"
+                        if _log:
+                            _log.warning(f"Provider {provider.name} 限流 (429)")
                         print(last_error, file=sys.stderr)
                     elif e.code >= 500:
                         last_error = f"⚠ {provider.name} 服务端错误 ({e.code})，尝试下一个…"
+                        if _log:
+                            _log.warning(f"Provider {provider.name} 服务端错误 ({e.code})")
                         print(last_error, file=sys.stderr)
                     else:
                         last_error = f"✗ {provider.name} HTTP {e.code}"
+                        if _log:
+                            _log.error(f"Provider {provider.name} HTTP {e.code}")
                 except subprocess.TimeoutExpired:
                     provider.failure_count += 1
                     last_error = f"⚠ {provider.name} 超时，尝试下一个…"
+                    if _log:
+                        _log.warning(f"Provider {provider.name} 超时")
                     print(last_error, file=sys.stderr)
                 except Exception as e:
                     provider.failure_count += 1
                     last_error = f"✗ {provider.name}: {e}"
+                    if _log:
+                        _log.error(f"Provider {provider.name} 错误: {e}")
 
+        if _log:
+            _log.error(f"所有 Provider 均失败。最后错误: {last_error}")
         raise RuntimeError(f"所有 Provider 均失败。最后错误: {last_error}")
 
     def _get_provider(self, name: str) -> Optional[LLMProvider]:
