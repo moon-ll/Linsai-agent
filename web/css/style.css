@@ -1710,3 +1710,60 @@ body {
 [data-theme="dark"] .kb-badge-growing { background: #0d2b3e; color: #64b5f6; }
 [data-theme="dark"] .kb-badge-mature { background: #2a1b3d; color: #ba68c8; }
 [data-theme="dark"] .kb-badge-raw { background: #3e2723; color: #ffab91; }
+
+/* ── 技能管理器 ── */
+.skill-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+  background: var(--surface);
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.skill-row:hover {
+  border-color: var(--accent-color);
+  background: var(--bg-primary);
+}
+
+.skill-row input[type="checkbox"] {
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-color);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.skill-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.skill-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.skill-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 2px;
+  line-height: 1.4;
+}
+
+.skill-triggers {
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+  margin-top: 4px;
+}
+
+/* 深色模式 */
+[data-theme="dark"] .skill-row {
+  background: var(--surface);
+}

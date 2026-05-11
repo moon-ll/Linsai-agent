@@ -1459,6 +1459,144 @@ async function updateSkillBadge(text) {
 }
 
 // ============================================
+// 技能管理器
+// ============================================
+let _skillConfigCache = null;
+let _allSkillsCache = [];
+
+function openSkillManager() {
+  document.getElementById('skill-manager-overlay').style.display = 'flex';
+  loadSkillList();
+}
+
+function closeSkillManager() {
+  document.getElementById('skill-manager-overlay').style.display = 'none';
+}
+
+async function loadSkillList() {
+  const container = document.getElementById('skill-list-content');
+  container.innerHTML = '◐ 加载中…';
+  try {
+    const [config, allData] = await Promise.all([
+      apiGet('/api/skills/config'),
+      apiGet('/api/skills'),
+    ]);
+    _skillConfigCache = config;
+    _allSkillsCache = allData.skills || [];
+
+    // 设置模式
+    const mode = config.mode || 'auto';
+    document.getElementById(`skill-mode-${mode}`).checked = true;
+
+    renderSkillList(_allSkillsCache, config.active_skills || []);
+  } catch (e) {
+    container.innerHTML = `<div class="kb-empty">✗ 加载失败: ${e.message}</div>`;
+  }
+}
+
+function renderSkillList(skills, activeSkills) {
+  const container = document.getElementById('skill-list-content');
+  if (!skills.length) {
+    container.innerHTML = '<div class="kb-empty">暂无技能</div>';
+    return;
+  }
+
+  const activeSet = new Set(activeSkills);
+  const mode = _skillConfigCache?.mode || 'auto';
+
+  let html = '';
+  skills.forEach(skill => {
+    const isActive = activeSet.has(skill.name);
+    const checked = isActive ? 'checked' : '';
+    const dimmed = (mode === 'manual' && !isActive) ? 'opacity:0.5;' : '';
+    html += `
+      <label class="skill-row" style="${dimmed}">
+        <input type="checkbox" class="skill-checkbox" data-name="${skill.name}" ${checked}>
+        <div class="skill-info">
+          <div class="skill-name">${skill.name}</div>
+          <div class="skill-desc">${skill.description || '暂无描述'}</div>
+          <div class="skill-triggers">触发: ${skill.triggers || '无'}</div>
+        </div>
+      </label>
+    `;
+  });
+  container.innerHTML = html;
+
+  // 更新计数
+  const count = activeSet.size;
+  document.getElementById('skill-active-count').textContent = `已激活 ${count}/${skills.length}`;
+
+  // 绑定复选框事件
+  container.querySelectorAll('.skill-checkbox').forEach(cb => {
+    cb.addEventListener('change', updateSkillCount);
+  });
+}
+
+function updateSkillCount() {
+  const checked = document.querySelectorAll('.skill-checkbox:checked');
+  const total = document.querySelectorAll('.skill-checkbox').length;
+  document.getElementById('skill-active-count').textContent = `已激活 ${checked.length}/${total}`;
+}
+
+function filterSkillList() {
+  const query = document.getElementById('skill-search-input').value.trim().toLowerCase();
+  if (!query) {
+    renderSkillList(_allSkillsCache, getSelectedSkillNames());
+    return;
+  }
+  const filtered = _allSkillsCache.filter(s =>
+    s.name.toLowerCase().includes(query) ||
+    (s.description && s.description.toLowerCase().includes(query)) ||
+    (s.triggers && s.triggers.toLowerCase().includes(query))
+  );
+  renderSkillList(filtered, getSelectedSkillNames());
+}
+
+function getSelectedSkillNames() {
+  return Array.from(document.querySelectorAll('.skill-checkbox:checked')).map(cb => cb.dataset.name);
+}
+
+function onSkillModeChange() {
+  const mode = document.querySelector('input[name="skill-mode"]:checked')?.value || 'auto';
+  // 手动模式下，未选中的技能变暗
+  document.querySelectorAll('.skill-row').forEach(row => {
+    const cb = row.querySelector('.skill-checkbox');
+    if (mode === 'manual' && !cb.checked) {
+      row.style.opacity = '0.5';
+    } else {
+      row.style.opacity = '1';
+    }
+  });
+}
+
+async function saveSkillConfig() {
+  const mode = document.querySelector('input[name="skill-mode"]:checked')?.value || 'auto';
+  const active = getSelectedSkillNames();
+  try {
+    await apiPost('/api/skills/config', { mode, active_skills: active });
+    _skillConfigCache = { mode, active_skills: active };
+    showToast(`✓ 技能配置已保存: ${mode === 'auto' ? '自动模式' : '手动模式'}，${active.length} 个技能激活`);
+    closeSkillManager();
+  } catch (e) {
+    showToast('✗ 保存失败: ' + e.message, 'error');
+  }
+}
+
+async function resetSkillConfig() {
+  try {
+    const allNames = _allSkillsCache.map(s => s.name);
+    await apiPost('/api/skills/config', { mode: 'auto', active_skills: allNames });
+    _skillConfigCache = { mode: 'auto', active_skills: allNames };
+    document.getElementById('skill-mode-auto').checked = true;
+    document.getElementById('skill-search-input').value = '';
+    renderSkillList(_allSkillsCache, allNames);
+    showToast('✓ 已重置为默认（自动模式，全部激活）');
+  } catch (e) {
+    showToast('✗ 重置失败: ' + e.message, 'error');
+  }
+}
+
+// ============================================
 // 初始化
 // ============================================
 async function init() {
@@ -2027,13 +2165,7 @@ async function createWikiStub(force = false) {
 function bindKbManagerEvents() {
   // 工具栏按钮
   document.getElementById('toolbar-kb')?.addEventListener('click', openKbManager);
-  document.getElementById('toolbar-skills')?.addEventListener('click', async () => {
-    // 轻量技能面板：直接打开设置面板并定位到技能信息（或显示 toast）
-    const data = await apiGet('/api/skills');
-    const skills = data.skills || [];
-    const list = skills.map(s => `• ${s.name}`).join('\n');
-    showModal(`🎯 技能系统\n\n已加载 ${skills.length} 个技能：\n${list}\n\n技能在对话中根据关键词自动触发。`);
-  });
+  document.getElementById('toolbar-skills')?.addEventListener('click', openSkillManager);
   document.getElementById('toolbar-tasks')?.addEventListener('click', () => {
     // 滚动到任务面板（右侧）
     const panel = document.querySelector('.task-panel') || document.querySelector('.right-panel');
@@ -2064,4 +2196,16 @@ function bindKbManagerEvents() {
 
   document.getElementById('kb-wiki-create-stub')?.addEventListener('click', createWikiStub);
   document.getElementById('kb-wiki-filter')?.addEventListener('change', loadKbWiki);
+
+  // 技能管理器
+  document.getElementById('skill-manager-close')?.addEventListener('click', closeSkillManager);
+  document.getElementById('skill-manager-overlay')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeSkillManager();
+  });
+  document.getElementById('skill-save-btn')?.addEventListener('click', saveSkillConfig);
+  document.getElementById('skill-reset-btn')?.addEventListener('click', resetSkillConfig);
+  document.getElementById('skill-search-input')?.addEventListener('input', filterSkillList);
+  document.querySelectorAll('input[name="skill-mode"]').forEach(radio => {
+    radio.addEventListener('change', onSkillModeChange);
+  });
 }

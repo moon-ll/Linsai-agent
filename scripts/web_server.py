@@ -306,6 +306,15 @@ class RequestHandler(BaseHTTPRequestHandler):
             })
             return
 
+        if path == "/api/skills/config":
+            self._send_json(skm.get_skill_config())
+            return
+
+        if path == "/api/skills/search":
+            query = parse_qs(parsed.query).get("q", [""])[0]
+            self._send_json({"query": query, "results": skm.search_skills(query)})
+            return
+
         # 知识库
         if path == "/api/knowledge":
             self._send_json(kb.get_index_status())
@@ -424,6 +433,17 @@ class RequestHandler(BaseHTTPRequestHandler):
             mode = body.get("mode", "co-working")
             sid, _ = sm.create_session(topic, mode)
             self._send_json({"session_id": sid, "topic": topic, "mode": mode})
+            return
+
+        # 技能配置更新
+        if path == "/api/skills/config":
+            mode = body.get("mode", "auto")
+            active = body.get("active_skills", [])
+            try:
+                result = skm.set_skill_config(mode, active)
+                self._send_json({"success": True, "config": result})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
             return
 
         # 发送消息（SSE 流式返回）
