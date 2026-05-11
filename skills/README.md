@@ -31,3 +31,7 @@
 | `math-derivation` | 推导、证明、公式、方程、量纲 | 数学推导辅助 |
 | `code-review` | 代码、review、bug、优化、重构 | 代码审查与建议 |
 | `experiment-design` | 实验、方案、光路、设计、搭建 | 实验方案设计 |
+| `literature-distill` | 文献、论文、精读、PRL、Nature、综述 | 文献精读与知识蒸馏 |
+| `hpc-computing` | 服务器、PBS、提交、计算、集群、qsub | HPC 计算工作流 |
+| `project-planning` | 项目、计划、分解、里程碑、roadmap | 项目拆解与规划 |
+| `agora-meeting` | 讨论、开会、Agora、历史人物、对话 | 多人物会议主持 |
