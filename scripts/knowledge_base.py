@@ -270,20 +270,118 @@ def parse_frontmatter(text: str) -> Tuple[Dict[str, Any], str]:
 
 
 def build_frontmatter(meta: Dict[str, Any]) -> str:
-    """将字典转换为 YAML frontmatter 字符串。"""
+    """将字典转换为 YAML frontmatter 字符串（Obsidian 兼容格式）。"""
     lines = ["---"]
     for key, val in meta.items():
         if isinstance(val, list):
-            items = ', '.join(f'"{v}"' for v in val)
-            lines.append(f'{key}: [{items}]')
+            if not val:
+                lines.append(f'{key}: []')
+            else:
+                # YAML 标准数组格式，Obsidian 完全兼容
+                items = ', '.join(f'"{v}"' for v in val)
+                lines.append(f'{key}: [{items}]')
         elif isinstance(val, bool):
             lines.append(f'{key}: {"true" if val else "false"}')
         elif isinstance(val, (int, float)):
             lines.append(f'{key}: {val}')
         else:
-            lines.append(f'{key}: "{val}"')
+            # 字符串值，简单转义双引号
+            s = str(val).replace('"', '\\"')
+            lines.append(f'{key}: "{s}"')
     lines.append("---")
     return "\n".join(lines)
+
+
+_WIKILINK_RE = re.compile(r"(?<!\!)\[\[([^\]\|]+)(?:\|[^\]]*)?\]\]")
+_WIKILINKS_SECTION_RE = re.compile(
+    r"\n?<!-- linsai-wikilinks -->\n.*?<!-- /linsai-wikilinks -->\n?",
+    re.DOTALL,
+)
+
+
+def _extract_wikilinks(text: str) -> List[str]:
+    """从 Markdown 正文中提取所有 [[WikiLink]]（不含显示文本）。"""
+    links = []
+    for m in _WIKILINK_RE.finditer(text):
+        link = m.group(1).strip()
+        if link:
+            links.append(link)
+    return links
+
+
+def _get_aliases_for_concept(title: str) -> List[str]:
+    """从 aliases.json 中查找给定概念的所有别名。"""
+    if not ALIASES_PATH.exists():
+        return []
+    try:
+        with open(ALIASES_PATH, "r", encoding="utf-8") as f:
+            aliases = json.load(f)
+    except Exception:
+        return []
+    # aliases.json 格式: {标准词: [别名1, 别名2, ...]}
+    # 反向查找：哪些标准词包含此 title 作为别名
+    result: Set[str] = set()
+    for canonical, alts in aliases.items():
+        if canonical == title:
+            result.update(alts)
+            continue
+        if title in alts:
+            result.add(canonical)
+            result.update(a for a in alts if a != title)
+    return sorted(result)
+
+
+def _inject_wikilinks(page_text: str) -> str:
+    """同步 frontmatter 的 related 与正文 [[WikiLink]]，返回更新后的页面文本。
+
+    策略：
+    1. 从正文中提取所有已存在的 [[WikiLink]]
+    2. 与 frontmatter['related'] 合并、去重
+    3. 更新 frontmatter['related']
+    4. 在正文末尾注入/更新 <!-- linsai-wikilinks --> 区域
+    5. 把当前概念的别名写入 frontmatter['aliases']
+    """
+    fm, body = parse_frontmatter(page_text)
+    if not fm:
+        return page_text
+
+    title = fm.get("title", "")
+
+    # 提取正文中已有的 wikilinks（排除 wikilinks 区域本身的）
+    # 先去掉旧的 wikilinks 区域
+    clean_body = _WIKILINKS_SECTION_RE.sub("\n", body).strip()
+    body_links = set(_extract_wikilinks(clean_body))
+
+    # 合并 frontmatter related 和正文中的链接
+    related = set(r for r in fm.get("related", []) if isinstance(r, str) and r)
+    merged = sorted(related | body_links)
+    fm["related"] = merged
+
+    # 注入别名
+    aliases = _get_aliases_for_concept(title)
+    if aliases:
+        fm["aliases"] = aliases
+
+    # 构建 wikilinks 区域
+    if merged:
+        link_lines = "\n".join(f"- [[{name}]]" for name in merged)
+        wikilinks_section = (
+            f"\n\n<!-- linsai-wikilinks -->\n"
+            f"## 关联概念\n\n"
+            f"{link_lines}\n"
+            f"<!-- /linsai-wikilinks -->"
+        )
+    else:
+        wikilinks_section = (
+            "\n\n<!-- linsai-wikilinks -->\n"
+            "## 关联概念\n\n"
+            "_暂无关联概念_\n"
+            "<!-- /linsai-wikilinks -->"
+        )
+
+    new_body = clean_body.rstrip() + wikilinks_section
+    new_fm = build_frontmatter(fm)
+    return f"{new_fm}\n\n{new_body}\n"
 
 
 def build_wiki_page(title: str, wiki_type: str, content: str,
@@ -395,6 +493,21 @@ def save_wiki_page(rel_path: str, content: str, meta: Optional[Dict[str, Any]] =
         meta=existing_fm,
     )
     path.write_text(page_text, encoding="utf-8")
+
+    # 注入 Obsidian 双向链接并同步图谱
+    final_text = _inject_wikilinks(path.read_text(encoding="utf-8"))
+    path.write_text(final_text, encoding="utf-8")
+
+    fm, _ = parse_frontmatter(final_text)
+    title = fm.get("title", "")
+    if title:
+        wiki_type = fm.get("type", "concepts")
+        growth_stage = fm.get("growth_stage", "growing")
+        update_graph_node(title, wiki_type, str(rel_path), growth_stage)
+        for related in fm.get("related", []):
+            if related:
+                add_graph_edge(title, related, "related")
+
     return str(rel_path)
 
 
@@ -603,13 +716,29 @@ def get_growth_candidates() -> List[Dict[str, Any]]:
 # raw 文件管理
 # ─────────────────────────────────────────────
 
+def _should_index(fpath: Path) -> bool:
+    """判断文件是否应该被索引（排除 Obsidian 配置等隐藏目录）。"""
+    if not fpath.is_file():
+        return False
+    if fpath.suffix.lower() not in _SUPPORTED_EXTS:
+        return False
+    # 排除 .obsidian/、.git/、__pycache__/ 等隐藏目录
+    parts = fpath.parts
+    for p in parts:
+        if p.startswith(".") and p not in (".", ".."):
+            return False
+        if p.startswith("__"):
+            return False
+    return True
+
+
 def list_raw_files() -> List[Dict[str, Any]]:
     """列出所有 raw 文件。"""
     files = []
     if not RAW_DIR.exists():
         return files
     for fpath in sorted(RAW_DIR.rglob("*")):
-        if fpath.is_file() and fpath.suffix.lower() in _SUPPORTED_EXTS:
+        if _should_index(fpath):
             rel = str(fpath.relative_to(KNOWLEDGE_DIR))
             files.append({
                 "path": rel,
@@ -736,6 +865,8 @@ def _build_distill_prompt(raw_text: str, raw_name: str, wiki_type: str) -> str:
 
 请使用以下格式输出（包含 YAML frontmatter）：
 
+【输出格式要求】直接输出 markdown 原文，不要加代码块标记（如 ```markdown），不要添加任何解释性文字。输出必须从 ---（YAML frontmatter）开始。
+
 ---
 title: "标题"
 type: {wiki_type}
@@ -746,6 +877,8 @@ related: ["相关概念1", "相关概念2"]
 source_raw: "{raw_name}"
 growth_stage: "growing"
 confidence: 0.7
+auto_grown: true
+review_status: "pending"
 ---
 
 # 标题
@@ -758,6 +891,10 @@ confidence: 0.7
 ## 实验/研究关联
 
 ## 开放问题
+
+## 来源
+- 原始材料：{raw_name}
+- 蒸馏时间：{_now_utc()}
 
 原始材料内容如下：
 
@@ -781,8 +918,12 @@ def save_distilled_wiki(wiki_rel_path: str, llm_output: str,
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(llm_output, encoding="utf-8")
 
+    # 注入 Obsidian 双向链接
+    final_text = _inject_wikilinks(path.read_text(encoding="utf-8"))
+    path.write_text(final_text, encoding="utf-8")
+
     # 解析 frontmatter 更新图谱
-    fm, _ = parse_frontmatter(llm_output)
+    fm, _ = parse_frontmatter(final_text)
     title = fm.get("title", path.stem)
     wiki_type = fm.get("type", "concepts")
     growth_stage = fm.get("growth_stage", "growing")
@@ -950,7 +1091,11 @@ def apply_growth(wiki_rel_path: str, llm_output: str,
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(llm_output, encoding="utf-8")
 
-    fm, _ = parse_frontmatter(llm_output)
+    # 注入 Obsidian 双向链接
+    final_text = _inject_wikilinks(path.read_text(encoding="utf-8"))
+    path.write_text(final_text, encoding="utf-8")
+
+    fm, _ = parse_frontmatter(final_text)
     title = fm.get("title", path.stem)
     wiki_type = fm.get("type", "concepts")
     growth_stage = fm.get("growth_stage", "growing")
@@ -1006,7 +1151,7 @@ def build_index(force: bool = False) -> Dict[str, Any]:
     for base_dir in [RAW_DIR, WIKI_DIR]:
         if base_dir.exists():
             for fpath in base_dir.rglob("*"):
-                if fpath.is_file() and fpath.suffix.lower() in _SUPPORTED_EXTS:
+                if _should_index(fpath):
                     all_files.append(fpath)
 
     docs: Dict[str, Dict[str, Any]] = {}

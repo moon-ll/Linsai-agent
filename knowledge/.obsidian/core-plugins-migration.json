@@ -1,0 +1,12 @@
+{
+  "backlink": true,
+  "command-palette": true,
+  "graph": true,
+  "markdown-importer": true,
+  "page-preview": true,
+  "switcher": true,
+  "tag-pane": true,
+  "templates": true,
+  "word-count": true,
+  "bookmarks": true
+}
