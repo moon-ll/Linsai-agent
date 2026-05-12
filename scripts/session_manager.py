@@ -25,7 +25,7 @@ import json
 import re
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 
 def _get_project_root() -> Path:
@@ -259,7 +259,7 @@ def list_sessions(status: str = "all") -> list[dict]:
     return result
 
 
-def get_latest_session_id() -> str | None:
+def get_latest_session_id() -> Optional[str]:
     """返回最近活跃的会话 ID，无会话返回 None。"""
     sessions = list_sessions(status="active")
     if not sessions:

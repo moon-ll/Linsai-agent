@@ -241,7 +241,7 @@ class LLMProvider:
     def _call_claude(self, system_prompt: str, messages: List[Dict[str, str]], timeout: int) -> str:
         """调用 claude CLI。"""
         # claude CLI 支持多轮对话格式
-        cmd = ["claude", "-p", "--no-stream"]
+        cmd = ["claude", "-p", "--output-format", "text"]
         # 构建对话文本
         prompt_parts = [f"System: {system_prompt}"]
         for m in messages:

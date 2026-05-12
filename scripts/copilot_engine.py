@@ -30,6 +30,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Optional, Tuple
 
 # 统一日志
 try:
@@ -101,11 +102,11 @@ except ImportError:
 # ---------------------------------------------------------------------------
 _LLM_CLI = None
 
-def detect_llm_cli() -> tuple[str, str] | None:
+def detect_llm_cli() -> Optional[Tuple[str, str]]:
     """检测本地可用的 LLM CLI，返回 (cli_name, cli_path)。"""
     status = lr.get_status()
-    for s in status:
-        if s["type"] == "cli" and s["available"]:
+    for s in status.get("providers", []):
+        if s.get("type") == "cli" and s.get("available"):
             return s["name"], s["name"]
     return None
 
@@ -457,7 +458,7 @@ def chat_loop(session_id: str, mode: str = "co-working") -> None:
             llm_messages = ctx.get("messages", [])
             if _log:
                 _log.info(f"LLM 调用: session={session_id}, mode={mode}, messages={len(llm_messages)}")
-            assistant_content = call_llm(system_prompt, llm_messages)
+            assistant_content, _usage, _provider = call_llm(system_prompt, llm_messages)
         except Exception as exc:
             if _log:
                 _log.error(f"LLM 调用失败: {exc}", exc_info=True)
@@ -651,7 +652,7 @@ if __name__ == "__main__":
     # 2. 测试 call_llm
     if cli_info:
         try:
-            test_resp = call_llm(
+            test_resp, _usage, _provider = call_llm(
                 "你是一个测试助手，只回复'测试成功'三个字，不要多说。",
                 [{"role": "user", "content": "开始测试"}],
             )

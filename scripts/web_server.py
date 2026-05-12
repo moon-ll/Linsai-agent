@@ -15,6 +15,7 @@
 
 import argparse
 import base64
+import datetime
 import json
 import os
 import platform
@@ -429,6 +430,73 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"error": str(e)}, 500)
             return
 
+        # --- 学习配置 API ---
+        if path == "/api/learning/config":
+            config_path = _PROJECT_ROOT / "memory" / "learning-config.json"
+            if config_path.exists():
+                try:
+                    with open(config_path, "r", encoding="utf-8") as f:
+                        data = json.load(f)
+                    self._send_json(data)
+                except Exception as e:
+                    self._send_json({"error": str(e)}, 500)
+            else:
+                self._send_json({"error": "配置不存在"}, 404)
+            return
+
+        if path == "/api/learning/status":
+            try:
+                cost_data = {}
+                cost_path = _PROJECT_ROOT / "memory" / "learning-cost.json"
+                if cost_path.exists():
+                    with open(cost_path, "r", encoding="utf-8") as f:
+                        cost_data = json.load(f)
+                config = {}
+                if config_path.exists():
+                    with open(config_path, "r", encoding="utf-8") as f:
+                        config = json.load(f)
+                self._send_json({
+                    "enabled": config.get("auto_enabled", False),
+                    "strategy": config.get("strategy", "balanced"),
+                    "today_cost": cost_data.get("daily", {}).get(datetime.now().strftime("%Y-%m-%d"), 0),
+                    "month_cost": cost_data.get("monthly", {}).get(datetime.now().strftime("%Y-%m"), 0),
+                    "total_calls": cost_data.get("total_calls", 0),
+                    "today_quota_used": config.get("today_count", 0),
+                    "today_quota_total": config.get("daily_quota", 1),
+                })
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        if path == "/api/learning/queue":
+            try:
+                import importlib.util
+                qe_path = _SCRIPT_DIR / "quality_evaluator.py"
+                if qe_path.exists():
+                    spec = importlib.util.spec_from_file_location("quality_evaluator", qe_path)
+                    qe = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(qe)
+                    queue = qe.get_pending_queue()
+                    self._send_json({"queue": queue})
+                else:
+                    self._send_json({"queue": []})
+            except Exception as e:
+                self._send_json({"queue": [], "error": str(e)})
+            return
+
+        if path == "/api/learning/log":
+            try:
+                log_path = _PROJECT_ROOT / "memory" / "learning-quality-log.json"
+                if log_path.exists():
+                    with open(log_path, "r", encoding="utf-8") as f:
+                        log = json.load(f)
+                    self._send_json({"log": log})
+                else:
+                    self._send_json({"log": []})
+            except Exception as e:
+                self._send_json({"log": [], "error": str(e)})
+            return
+
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_POST(self) -> None:
@@ -445,6 +513,70 @@ class RequestHandler(BaseHTTPRequestHandler):
             mode = body.get("mode", "co-working")
             sid, _ = sm.create_session(topic, mode)
             self._send_json({"session_id": sid, "topic": topic, "mode": mode})
+            return
+
+        # 学习配置更新
+        if path == "/api/learning/config":
+            config_path = _PROJECT_ROOT / "memory" / "learning-config.json"
+            try:
+                with open(config_path, "r", encoding="utf-8") as f:
+                    config = json.load(f)
+                # 只允许更新白名单字段
+                allowed_fields = ["auto_enabled", "daily_quota", "weekly_quota", "strategy",
+                                  "cost_limit_daily", "cost_limit_monthly", "sources", "adversarial_mode", "notify_web"]
+                for field in allowed_fields:
+                    if field in body:
+                        config[field] = body[field]
+                with open(config_path, "w", encoding="utf-8") as f:
+                    json.dump(config, f, ensure_ascii=False, indent=2)
+                self._send_json({"success": True, "config": config})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 学习触发
+        if path == "/api/learning/trigger":
+            try:
+                import importlib.util
+                le_path = _SCRIPT_DIR / "learning_engine.py"
+                if le_path.exists():
+                    spec = importlib.util.spec_from_file_location("learning_engine", le_path)
+                    le = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(le)
+                    query = body.get("query")
+                    sources = body.get("sources", ["arxiv", "wikipedia", "raw"])
+                    max_items = body.get("max_items", 2)
+                    result = le.run_learning_cycle(query=query, sources=sources, max_items=max_items)
+                    self._send_json(result)
+                else:
+                    self._send_json({"error": "学习引擎未安装"}, 500)
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 学习审批
+        if path == "/api/learning/review":
+            try:
+                import importlib.util
+                qe_path = _SCRIPT_DIR / "quality_evaluator.py"
+                if qe_path.exists():
+                    spec = importlib.util.spec_from_file_location("quality_evaluator", qe_path)
+                    qe = importlib.util.module_from_spec(spec)
+                    spec.loader.exec_module(qe)
+                    action = body.get("action", "")
+                    wiki_path = body.get("wiki_path", "")
+                    if action == "approve":
+                        success = qe.approve_pending(wiki_path)
+                        self._send_json({"success": success, "action": "approve"})
+                    elif action == "reject":
+                        success = qe.reject_pending(wiki_path)
+                        self._send_json({"success": success, "action": "reject"})
+                    else:
+                        self._send_json({"error": "无效操作"}, 400)
+                else:
+                    self._send_json({"error": "评估引擎未安装"}, 500)
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
             return
 
         # 技能配置更新
@@ -716,11 +848,11 @@ class RequestHandler(BaseHTTPRequestHandler):
             sys_name = platform.system()
             try:
                 if sys_name == "Darwin":
-                    os.system(f"open '{full}' &")
+                    subprocess.run(["open", str(full)], check=False)
                 elif sys_name == "Windows":
                     os.startfile(str(full))
                 else:
-                    os.system(f"xdg-open '{full}' &")
+                    subprocess.run(["xdg-open", str(full)], check=False)
                 self._send_json({"success": True, "path": target, "system": sys_name})
             except Exception as e:
                 self._send_json({"error": str(e)}, 500)
@@ -729,7 +861,7 @@ class RequestHandler(BaseHTTPRequestHandler):
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_PUT(self) -> None:
-        """处理 PUT 请求（消息编辑）。"""
+        """处理 PUT 请求（消息编辑、任务子任务、任务进度）。"""
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
         body = self._read_json_body()
@@ -747,6 +879,30 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"success": True})
             else:
                 self._send_json({"error": "消息未找到"}, 404)
+            return
+
+        # PUT /api/tasks/<id>/subtasks
+        m = re.match(r"^/api/tasks/([^/]+)/subtasks$", path)
+        if m:
+            tid = m.group(1)
+            subtask_id = body.get("subtask_id", "")
+            try:
+                tm.toggle_subtask(tid, subtask_id)
+                self._send_json({"success": True})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # PUT /api/tasks/<id>/progress
+        m = re.match(r"^/api/tasks/([^/]+)/progress$", path)
+        if m:
+            tid = m.group(1)
+            progress = body.get("progress", 0)
+            try:
+                tm.update_progress(tid, int(progress))
+                self._send_json({"success": True})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)

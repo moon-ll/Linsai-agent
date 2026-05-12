@@ -261,6 +261,11 @@ def generate_proactive_message(signal: dict) -> str:
         return f"我注意到你最近提到了 '{signal.get('keyword', '一些压力')}’。不在疲惫时做重大决定——需要我帮你梳理一下吗？"
     if sig_type == "dormant_session":
         return f"我们关于 '{signal.get('topic', '之前的讨论')}' 的对话已经停了 {signal.get('days', '几')} 天，有什么新进展吗？"
+    if sig_type == "learning_opportunity":
+        top_score = signal.get("top_score", 0)
+        candidates = signal.get("candidates", [])
+        topics = "、".join(c["title"][:20] for c in candidates[:2])
+        return f"我在浏览最新文献时发现了几个可能相关的方向：{topics}（相关度 {top_score:.0%}）。要启动自主学习吗？"
     return "有件事想提醒你，有空的时候看看？"
 
 
@@ -302,6 +307,101 @@ def handle_user_feedback(feedback: str) -> str:
     _write_json(_autonomy_path(), data)
     print("⚠ 未识别反馈意图，保持当前级别")
     return data.get("level", "suggest")
+
+
+# ---------------------------------------------------------------------------
+# 自主学习机会检测
+# ---------------------------------------------------------------------------
+
+def _check_learning_opportunities() -> list[dict]:
+    """检测自主学习机会，返回信号列表。"""
+    signals = []
+
+    # 读取配置
+    config_path = _PROJECT_ROOT / "memory" / "learning-config.json"
+    config = _read_json(config_path, {})
+    if not config.get("auto_enabled", False):
+        return signals
+
+    # 检查自主级别
+    if get_autonomy_level() not in ("suggest", "act"):
+        return signals
+
+    # 检查配额
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    last_run = config.get("last_auto_run", "")
+    today_count = config.get("today_count", 0)
+    week_count = config.get("week_count", 0)
+
+    # 跨天重置
+    if last_run != today:
+        today_count = 0
+        config["today_count"] = 0
+        config["last_auto_run"] = today
+        _write_json(config_path, config)
+
+    if today_count >= config.get("daily_quota", 1):
+        return signals
+    if week_count >= config.get("weekly_quota", 5):
+        return signals
+
+    # 获取策略阈值
+    strategy = config.get("strategy", "balanced")
+    thresholds = config.get("thresholds", {"conservative": 0.8, "balanced": 0.5, "aggressive": 0.3})
+    threshold = thresholds.get(strategy, 0.5)
+
+    # 动态导入 external_fetcher
+    try:
+        import importlib.util
+        ef_path = Path(__file__).parent / "external_fetcher.py"
+        if not ef_path.exists():
+            return signals
+        spec = importlib.util.spec_from_file_location("external_fetcher", ef_path)
+        ef = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(ef)
+    except Exception as e:
+        print(f"⚠ 无法导入 external_fetcher: {e}")
+        return signals
+
+    # 发现学习机会
+    try:
+        opportunities = ef.discover_learning_opportunities(
+            max_results=3,
+            sources=config.get("sources", ["arxiv", "wikipedia", "raw"])
+        )
+    except Exception as e:
+        print(f"⚠ 学习机会发现失败: {e}")
+        return signals
+
+    if not opportunities:
+        return signals
+
+    # 取最高分
+    top = opportunities[0]
+    score = top.get("_score", {})
+    overall = score.get("overall", 0)
+
+    if overall < threshold:
+        return signals
+
+    # 生成信号
+    candidates = [{
+        "title": op.get("title", "未知"),
+        "source": op.get("source", "unknown"),
+        "score": op.get("_score", {}).get("overall", 0),
+    } for op in opportunities[:3]]
+
+    signals.append({
+        "type": "learning_opportunity",
+        "severity": "low",
+        "source": "auto_scan",
+        "description": f"发现 {len(opportunities)} 个学习机会（最高相关度 {overall:.0%}）",
+        "suggested_action": "启动自主学习",
+        "candidates": candidates,
+        "top_score": overall,
+    })
+
+    return signals
 
 
 # ---------------------------------------------------------------------------
@@ -351,6 +451,9 @@ def heartbeat() -> list[dict]:
         if result["has_stress"]:
             top_signal = result["signals"][0]
             signals.append({"type": "stress_signal", "severity": result["overall_risk"], "source": sid, "description": f"会话 '{sess.get('topic', sid)}' 检测到压力关键词 '{top_signal['keyword']}'", "suggested_action": result["recommendation"], "keyword": top_signal["keyword"]})
+
+    # 5. 自主学习机会（learning opportunity）
+    signals.extend(_check_learning_opportunities())
 
     print(f"✓ 心跳扫描完成，检测到 {len(signals)} 个信号")
     return signals

@@ -50,6 +50,8 @@ function toggleTheme() {
 // 工具函数
 // ============================================
 function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  if (typeof str !== 'string') str = String(str);
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
@@ -58,13 +60,13 @@ function escapeHtml(str) {
 function formatTime(iso) {
   if (!iso) return '';
   const d = new Date(iso);
-  return d.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
+  return isNaN(d.getTime()) ? '' : d.toLocaleTimeString('zh-CN', { hour: '2-digit', minute: '2-digit' });
 }
 
 function formatDate(iso) {
   if (!iso) return '';
   const d = new Date(iso);
-  return d.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
+  return isNaN(d.getTime()) ? '' : d.toLocaleDateString('zh-CN', { month: 'short', day: 'numeric' });
 }
 
 /**
@@ -183,7 +185,8 @@ function showModal(htmlContent) {
       if (e.target === overlay) closeModal();
     });
   }
-  document.getElementById('modal-content').innerHTML = htmlContent;
+  const html = (typeof htmlContent === 'string') ? htmlContent : String(htmlContent || '');
+  document.getElementById('modal-content').innerHTML = html;
   overlay.style.display = 'flex';
 }
 
@@ -197,10 +200,13 @@ function closeModal() {
 // ============================================
 async function loadSessions() {
   try {
-    State.sessions = await apiGet('/api/sessions');
+    const data = await apiGet('/api/sessions');
+    State.sessions = Array.isArray(data) ? data : [];
     renderSessionList();
   } catch (e) {
     console.error('加载会话失败:', e);
+    State.sessions = [];
+    renderSessionList();
     showToast('加载会话失败', 'error');
   }
 }
@@ -209,25 +215,30 @@ function renderSessionList() {
   const container = document.getElementById('session-list');
   const search = document.getElementById('session-search').value.toLowerCase();
 
-  let sessions = State.sessions;
+  let sessions = Array.isArray(State.sessions) ? State.sessions : [];
   if (search) {
-    sessions = sessions.filter(s =>
-      (s.topic || '').toLowerCase().includes(search)
-    );
+    sessions = sessions.filter(s => {
+      const topic = (s && typeof s.topic === 'string') ? s.topic : '';
+      return topic.toLowerCase().includes(search);
+    });
   }
 
   container.innerHTML = sessions.map(s => {
-    const kws = State.sessionKeywords[s.session_id] || [];
+    const sid = (s && typeof s.session_id === 'string') ? s.session_id : '';
+    const topic = (s && typeof s.topic === 'string') ? s.topic : '未命名会话';
+    const lastActive = s && s.last_active;
+    const msgCount = (s && typeof s.message_count === 'number') ? s.message_count : 0;
+    const kws = State.sessionKeywords[sid] || [];
     const kwHtml = kws.length > 0
       ? `<div class="keyword-tags">${kws.slice(0, 4).map(k => `<span class="keyword-tag">${escapeHtml(k)}</span>`).join('')}</div>`
       : '';
     return `
-    <div class="session-item ${s.session_id === State.currentSessionId && !State.viewingArchive ? 'active' : ''}"
-         data-id="${escapeHtml(s.session_id)}">
-      <div class="session-topic">${escapeHtml(s.topic || '未命名会话')}</div>
+    <div class="session-item ${sid === State.currentSessionId && !State.viewingArchive ? 'active' : ''}"
+         data-id="${escapeHtml(sid)}">
+      <div class="session-topic">${escapeHtml(topic)}</div>
       <div class="session-meta">
-        <span>${formatDate(s.last_active)}</span>
-        <span>${s.message_count || 0} 条</span>
+        <span>${formatDate(lastActive)}</span>
+        <span>${msgCount} 条</span>
       </div>
       ${kwHtml}
     </div>
@@ -401,12 +412,13 @@ async function createNewSession(topic, mode) {
 // ============================================
 // 消息渲染
 // ============================================
-function appendMessage(role, content, timestamp, animate = true, msgId = null) {
+function appendMessage(role, rawContent, timestamp, animate = true, msgId = null) {
   const container = document.getElementById('messages');
   const div = document.createElement('div');
   div.className = `message ${role}`;
   if (msgId) div.dataset.msgId = msgId;
 
+  const content = (typeof rawContent === 'string') ? rawContent : String(rawContent || '');
   const avatar = role === 'user' ? '你' : '林';
   const time = timestamp ? formatTime(timestamp) : formatTime(new Date().toISOString());
 
@@ -531,7 +543,8 @@ async function sendMessage(content) {
         try {
           const data = JSON.parse(dataStr);
           if (data.type === 'token') {
-            fullText += data.content;
+            const token = (typeof data.content === 'string') ? data.content : String(data.content || '');
+            fullText += token;
             bubble.innerHTML = renderMarkdown(fullText);
             scrollToBottom();
           } else if (data.type === 'tools') {
@@ -661,20 +674,27 @@ async function loadReferences() {
     renderReferenceList(refs);
   } catch (e) {
     console.error('加载文献失败:', e);
+    renderReferenceList([]);
+    showToast('加载文献失败: ' + e.message, 'error');
   }
 }
 
 function renderReferenceList(refs) {
   const container = document.getElementById('reference-list');
-  if (!refs || refs.length === 0) {
+  if (!Array.isArray(refs) || refs.length === 0) {
     container.innerHTML = '<p class="empty">暂无引用</p>';
     return;
   }
-  container.innerHTML = refs.slice(0, 10).map(r => `
-    <div class="reference-item" data-path="${escapeHtml(r.path || '')}">
-      📄 ${escapeHtml(r.title || r.filename || '未命名')}
+  container.innerHTML = refs.slice(0, 10).map(r => {
+    const path = (r && typeof r.path === 'string') ? r.path : '';
+    const title = (r && typeof r.title === 'string') ? r.title : '';
+    const filename = (r && typeof r.filename === 'string') ? r.filename : '';
+    return `
+    <div class="reference-item" data-path="${escapeHtml(path)}">
+      📄 ${escapeHtml(title || filename || '未命名')}
     </div>
-  `).join('');
+  `;
+  }).join('');
 
   container.querySelectorAll('.reference-item').forEach(el => {
     el.addEventListener('click', () => {
@@ -820,10 +840,14 @@ async function deleteMessage(msgId) {
 // ============================================
 async function loadTasks() {
   try {
-    State.tasks = await apiGet('/api/tasks');
+    const data = await apiGet('/api/tasks');
+    State.tasks = Array.isArray(data) ? data : [];
     renderTaskBoard();
   } catch (e) {
     console.error('加载任务失败:', e);
+    State.tasks = [];
+    renderTaskBoard();
+    showToast('加载任务失败: ' + e.message, 'error');
   }
 }
 
@@ -837,30 +861,35 @@ function renderTaskBoard() {
   // 清空
   Object.values(columns).forEach(c => c.innerHTML = '');
 
-  if (!State.tasks || State.tasks.length === 0) {
+  // 防御：确保 tasks 是数组
+  if (!Array.isArray(State.tasks) || State.tasks.length === 0) {
     columns.backlog.innerHTML = '<p class="empty">暂无任务</p>';
     return;
   }
 
   State.tasks.forEach(t => {
-    const status = t.status === 'paused' ? 'backlog' : t.status;
+    const rawStatus = t.status;
+    const status = (typeof rawStatus === 'string' && rawStatus === 'paused') ? 'backlog' : rawStatus;
     const col = columns[status];
     if (!col) return;
 
-    const progress = t.progress || 0;
-    const subtasks = t.subtasks || [];
-    const doneCount = subtasks.filter(st => st.done).length;
+    const progress = (typeof t.progress === 'number' ? t.progress : 0) || 0;
+    const subtasks = Array.isArray(t.subtasks) ? t.subtasks : [];
+    const doneCount = subtasks.filter(st => st && st.done).length;
     const subtaskLabel = subtasks.length > 0 ? `${doneCount}/${subtasks.length}` : '';
-    const overdue = t.due_date && new Date(t.due_date) < new Date() && t.status !== 'completed';
+    const dueDate = t.due_date;
+    const overdue = dueDate && typeof dueDate === 'string' && new Date(dueDate) < new Date() && t.status !== 'completed';
 
+    const title = (typeof t.title === 'string' ? t.title : '') || '未命名';
+    const priority = typeof t.priority === 'string' ? t.priority : '';
     const card = document.createElement('div');
     card.className = 'task-card';
     card.innerHTML = `
-      <div class="task-card-title">${escapeHtml(t.title || '未命名')}</div>
+      <div class="task-card-title">${escapeHtml(title)}</div>
       <div class="task-card-meta">
         ${overdue ? '<span class="task-overdue">逾期</span>' : ''}
-        ${t.priority ? `<span class="task-priority task-priority-${t.priority}">${t.priority}</span>` : ''}
-        ${t.due_date ? formatDate(t.due_date) : ''}
+        ${priority ? `<span class="task-priority task-priority-${escapeHtml(priority)}">${escapeHtml(priority)}</span>` : ''}
+        ${dueDate && typeof dueDate === 'string' ? formatDate(dueDate) : ''}
       </div>
       <div class="task-card-progress">
         <div class="progress-track">
@@ -1004,6 +1033,7 @@ function bindEvents() {
     // 刷新各状态（轻量：只加载设置面板需要的）
     loadLLMStatus();
     loadUsage();
+    loadLearningConfig();
   });
 
   // 顶部 provider-badge 点击打开设置面板
@@ -1013,6 +1043,7 @@ function bindEvents() {
     document.getElementById('autonomy-select').value = State.autonomy;
     loadLLMStatus();
     loadUsage();
+    loadLearningConfig();
   });
   document.getElementById('close-settings').addEventListener('click', () => {
     document.getElementById('settings-drawer').style.display = 'none';
@@ -1431,6 +1462,55 @@ async function loadUsage() {
     console.error('加载用量失败:', e);
     const container = document.getElementById('usage-status');
     if (container) container.innerHTML = '✗ 加载失败';
+  }
+}
+
+// ============================================
+// 学习配置管理
+// ============================================
+async function loadLearningConfig() {
+  try {
+    const config = await apiGet('/api/learning/config');
+    document.getElementById('learning-auto-enabled').checked = !!config.auto_enabled;
+    document.getElementById('learning-strategy').value = config.strategy || 'balanced';
+    document.getElementById('learning-daily-quota').value = config.daily_quota || 1;
+    document.getElementById('learning-cost-limit').value = config.cost_limit_daily || 0.5;
+    const sources = config.sources || ['arxiv', 'wikipedia', 'raw'];
+    document.getElementById('learning-source-arxiv').checked = sources.includes('arxiv');
+    document.getElementById('learning-source-web').checked = sources.includes('web');
+    document.getElementById('learning-source-raw').checked = sources.includes('raw');
+  } catch (e) {
+    console.error('加载学习配置失败:', e);
+  }
+}
+
+async function saveLearningConfig() {
+  const sources = [];
+  if (document.getElementById('learning-source-arxiv').checked) sources.push('arxiv');
+  if (document.getElementById('learning-source-web').checked) sources.push('web');
+  if (document.getElementById('learning-source-raw').checked) sources.push('raw');
+
+  const config = {
+    auto_enabled: document.getElementById('learning-auto-enabled').checked,
+    strategy: document.getElementById('learning-strategy').value,
+    daily_quota: parseInt(document.getElementById('learning-daily-quota').value, 10) || 1,
+    cost_limit_daily: parseFloat(document.getElementById('learning-cost-limit').value) || 0.5,
+    sources: sources,
+  };
+
+  try {
+    const result = await apiPost('/api/learning/config', config);
+    const status = document.getElementById('learning-config-status');
+    if (status) {
+      status.textContent = '✓ 已保存';
+      setTimeout(() => status.textContent = '', 2000);
+    }
+  } catch (e) {
+    const status = document.getElementById('learning-config-status');
+    if (status) {
+      status.textContent = '✗ 保存失败';
+      setTimeout(() => status.textContent = '', 2000);
+    }
   }
 }
 
@@ -2177,6 +2257,36 @@ function bindKbManagerEvents() {
     const data = await apiGet('/api/usage');
     const daily = data.daily || {};
     showModal(`📊 Token 用量（今日）\n\n• Prompt: ${daily.prompt || 0}\n• Completion: ${daily.completion || 0}\n• 调用次数: ${daily.calls || 0}\n\nProvider: ${Object.keys(data.by_provider || {}).join(', ') || '无记录'}`);
+  });
+  document.getElementById('toolbar-learning')?.addEventListener('click', openLearningManager);
+
+  // 学习管理器
+  document.getElementById('learning-manager-close')?.addEventListener('click', closeLearningManager);
+  document.getElementById('learning-manager-overlay')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeLearningManager();
+  });
+  document.getElementById('learning-trigger-btn')?.addEventListener('click', async () => {
+    const btn = document.getElementById('learning-trigger-btn');
+    if (btn) btn.disabled = true;
+    showToast('🌱 启动自主学习周期...', 'info');
+    try {
+      const result = await apiPost('/api/learning/trigger', { sources: ['arxiv'], max_items: 1 });
+      if (result.created && result.created.length > 0) {
+        showToast(`✓ 学习完成，创建 ${result.created.length} 个 wiki`, 'success');
+      } else if (result.failed && result.failed.length > 0) {
+        showToast(`⚠ 学习失败: ${result.failed[0]}`, 'warning');
+      } else {
+        showToast('○ 未发现学习机会', 'info');
+      }
+      await renderLearningManager();
+    } catch (e) {
+      showToast('✗ 触发失败: ' + e.message, 'error');
+    } finally {
+      if (btn) btn.disabled = false;
+    }
+  });
+  document.querySelectorAll('#learning-manager-overlay .kb-tab').forEach(tab => {
+    tab.addEventListener('click', () => switchLearningTab(tab.dataset.tab));
   });
 
   // 知识库管理器
