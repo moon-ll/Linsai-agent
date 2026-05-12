@@ -119,6 +119,7 @@ LinSai-CoPilot/
 │   ├── PROJECT-PLAN.md        # 项目总策划案
 │   ├── DEEP-AUDIT-REPORT.md   # 深度评估报告
 │   ├── FUNCTIONAL-TEST-REPORT.md # 功能测试报告
+│   ├── CLAUDE-CLI-ADMIN.md    # Claude CLI 人工管理指南
 │   └── prompts/               # LLM prompt 模板与管理文档
 │
 ├── scripts/                   # 工具脚本（Python 3，零依赖）
@@ -130,6 +131,10 @@ LinSai-CoPilot/
 │   ├── knowledge_base.py      # 知识库引擎：raw/wiki 分层、知识图谱、生长机制、别名、健康度
 │   ├── kb_capture.py          # 对话自动捕获：技术参数检测、零 LLM 开销
 │   ├── kb_maintenance.py      # 批处理维护：索引重建、孤儿清理、候选报告、周维护
+│   ├── research_profiler.py   # 研究方向感知器：TF-IDF关键词、7天自动重建
+│   ├── external_fetcher.py    # 统一信息获取：deepxiv + 联网检索 + raw扫描
+│   ├── learning_engine.py     # 自主学习核心：蒸馏/精读/概念整合/成本追踪
+│   ├── quality_evaluator.py   # 质量评估引擎：规则+LLM评估、三级决策
 │   ├── logger.py              # 统一日志：控制台彩色输出 + 文件按日期轮转
 │   ├── proactive_engine.py    # 主动感知、心跳扫描
 │   ├── document_handler.py    # 文档读取、PDF提取、代码分析
@@ -369,7 +374,27 @@ LinSai-CoPilot/
   - 图谱关联知识自动拉取
   - 缺失概念检测：标注"认知边界"，邀请用户一起记录
 
-### Phase 6：高级功能【⏳ 待开发】
+### Phase 6：自主学习引擎【✅ 已完成】
+- ✅ **研究方向感知** — `scripts/research_profiler.py`
+  - 从用户画像 / 活跃任务 / 近期会话动态提取 TF-IDF 研究关键词
+  - 7 天自动重建，漂移检测
+- ✅ **外部信息获取** — `scripts/external_fetcher.py`
+  - deepxiv arXiv 检索、多源联网检索（wsearch → DuckDuckGo → Wikipedia fallback）
+  - raw/ 目录变更扫描、四级评分排序（相关性/新颖性/可靠性/时效性）
+- ✅ **学习核心编排** — `scripts/learning_engine.py`
+  - 统一蒸馏接口：论文精读 → wiki/papers/、词条蒸馏 → wiki/concepts/、raw 自动蒸馏
+  - 概念提取与整合、知识图谱边自动发现（supported_by/supports/extends/contradicts）
+  - 成本追踪（日/月配额）、一键回滚、待审队列
+- ✅ **质量评估** — `scripts/quality_evaluator.py`
+  - 规则评估 + LLM 评估，三级决策（accept/pending/reject）
+  - 对抗性多轮蒸馏（G→C→D→S）、用户编辑 diff 闭环
+- ✅ **主动感知扩展** — `scripts/proactive_engine.py`
+  - heartbeat() 新增第 5 类信号 `learning_opportunity`
+  - 保守/平衡/激进三策略，成本阈值自动暂停
+- ✅ **Web 前端集成**
+  - 学习管理器（日志/待审/统计）、策略设置面板、手动触发学习
+
+### Phase 7：高级功能【⏳ 待开发】
 - 多设备会话同步
 - 语音/富文本交互（如有需求）
 - 性能优化与生态扩展
@@ -527,7 +552,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：1.7.3*
+*版本：2.0.0*
 *日期：2026-05-12*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

@@ -31,6 +31,10 @@
 | `knowledge_base.py` | ✅ 已完成 | ~1380 | 知识库引擎：raw/wiki分层、frontmatter、知识图谱、生长机制、别名、健康度 |
 | `kb_capture.py` | ✅ 已完成 | ~317 | 对话自动捕获：技术参数检测、零LLM开销 |
 | `kb_maintenance.py` | ✅ 已完成 | ~260 | 批处理维护：索引重建、孤儿清理、候选报告、周维护 |
+| `research_profiler.py` | ✅ 已完成 | ~250 | 研究方向感知器：TF-IDF关键词提取、7天自动重建、漂移检测 |
+| `external_fetcher.py` | ✅ 已完成 | ~380 | 统一信息获取：deepxiv(arXiv) + 联网检索 + raw扫描 + 四级评分 |
+| `learning_engine.py` | ✅ 已完成 | ~980 | 自主学习核心：蒸馏/精读/概念整合/图谱扩展/成本追踪/回滚 |
+| `quality_evaluator.py` | ✅ 已完成 | ~520 | 质量评估引擎：规则+LLM评估、三级决策、对抗蒸馏、待审队列 |
 | `tool_engine.py` | ✅ 已完成 | 322 | 子代理调用：5工具注册、安全白名单、解析-执行-回传 |
 | `logger.py` | ✅ 已完成 | ~140 | 统一日志：控制台彩色输出 + 文件按日期轮转，DEBUG/INFO/WARNING/ERROR |
 | `web_server.py` | ✅ 已完成 | ~940 | Web 服务器：HTTP + SSE + API路由 + 文件上传 + 知识库API |
@@ -47,10 +51,13 @@
 | `test_core.py` | 核心模块单元测试（34 个检查点） |
 | `test_scenarios.py` | 场景剧本测试 — 5 类影子用户（16 个检查点） |
 | `test_persona.py` | 人格一致性静态抽检（38 个检查点） |
+| `test_e2e_learning.py` | 端到端 arXiv 链路验证（来源链接注入检查） |
+| `test_e2e_learning_full.py` | 三来源（arXiv/web/raw）端到端完整链路验证 |
+| `upgrade_wiki_for_obsidian.py` | 一次性升级脚本：为现有 wiki 注入双向链接 |
 
-**总计：22 个主脚本 + 4 个测试脚本，约 8700 行 Python，零第三方依赖。**
+**总计：26 个主脚本 + 6 个测试脚本，约 11000+ 行 Python，零第三方依赖。**
 
 ---
 
-*版本：1.2*  
-*日期：2026-05-11*
+*版本：2.0*  
+*日期：2026-05-12*
