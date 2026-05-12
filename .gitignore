@@ -37,7 +37,14 @@ Thumbs.db
 knowledge/index.json
 knowledge/graph.json
 knowledge/growth-log.json
+knowledge/.cache/
+
+# === 运行时数据 ===
+memory/usage/
 
 # === 日志文件 ===
 /logs/
 *.log
+
+# === 备份 ===
+knowledge/.backup/

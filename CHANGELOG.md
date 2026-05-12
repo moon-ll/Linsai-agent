@@ -1,5 +1,133 @@
 # 变更记录
 
+## v2.0.0 - 2026-05-12 林赛自主学习引擎（5 阶段完整实施）
+
+### 新增（自主学习引擎）
+
+- `scripts/research_profiler.py` — 研究方向感知器：从用户画像/任务/会话动态提取研究关键词
+- `scripts/external_fetcher.py` — 统一信息获取接口：deepxiv(arXiv) + Wikipedia API + raw/ 扫描 + 优先级排序
+- `scripts/learning_engine.py` — 自主学习核心编排器：蒸馏/精读/概念提取/知识整合/图谱扩展/成本追踪/一键回滚
+- `scripts/quality_evaluator.py` — 质量评估引擎：规则评估 + LLM 评估 + 对抗性多轮蒸馏 + 用户反馈闭环
+- `memory/learning-config.json` — 学习策略与配额配置（自动开关/策略/来源/成本上限）
+- `memory/research-profile.json` — 研究方向关键词（动态更新）
+- `memory/learning-cost.json` — 学习成本追踪（日/月/按来源/按 Provider）
+- `memory/learning-quality-log.json` — 质量评分历史
+- `memory/learning-pending-queue.json` — 待审队列
+- `memory/learning-user-edits.json` — 用户编辑追踪
+- `knowledge/.cache/` — 网络获取结果缓存（arXiv 24h / Wikipedia 7d）
+- `knowledge/.backup/auto-grown/` — 生长前自动备份
+
+### 新增（Web 前端）
+
+- 侧边栏工具栏新增 🌱 学习管理器入口
+- 学习管理器模态框：3 标签页（📜 学习日志 / 📝 待审内容 / 📊 统计）
+- 设置面板新增学习策略配置：自动开关、保守/平衡/激进策略、来源勾选、日配额、成本上限
+- 手动触发学习按钮（带进度反馈）
+
+### 新增（API 端点）
+
+- `GET /api/learning/config` — 获取学习配置
+- `POST /api/learning/config` — 更新学习配置
+- `GET /api/learning/status` — 学习状态（成本/配额/调用次数）
+- `GET /api/learning/queue` — 待审队列
+- `GET /api/learning/log` — 质量评估日志
+- `POST /api/learning/trigger` — 手动触发学习周期
+- `POST /api/learning/review` — 审批/拒绝待审内容
+
+### 新增（配套文档）
+
+- `docs/CLAUDE-CLI-ADMIN.md` — Claude CLI 人工管理指南
+- `docs/prompts/quality-audit.txt` — 质量审查 prompt 模板
+- `docs/prompts/maintenance-audit.txt` — 维护审查 prompt 模板
+- `docs/prompts/concept-merge.txt` — 概念合并 prompt 模板
+- `docs/prompts/paper-deep-read.txt` — 论文精读 prompt 模板
+
+### 改造
+
+- `scripts/proactive_engine.py` — heartbeat() 新增第 5 类信号 `learning_opportunity`
+- `scripts/knowledge_base.py` — 扩展图谱边类型（`supported_by`/`supports`/`extends`/`contradicts`）
+- `scripts/web_server.py` — 新增 `/api/learning/*` 端点
+- `web/index.html` — 新增学习管理器 DOM
+- `web/js/app.js` — 新增学习管理器渲染逻辑
+
+### 验证
+
+- 5 个新模块自检全部通过
+- **全量自测 88/88 通过** ✅
+- 零破坏性：所有现有功能不受影响
+
+---
+
+## v1.7.3 - 2026-05-12 Obsidian 前端兼容性改造
+
+### 新增（Obsidian 兼容）
+
+- `knowledge/.obsidian/` — 开箱即用的 Obsidian Vault 配置
+  - `app.json`：新建文件默认放入 `wiki/concepts/`，附件放入 `assets/`
+  - `appearance.json`：强调色 `#2563eb`（林赛品牌蓝）
+  - `core-plugins.json`：启用图谱、反向链接、标签面板、页面预览等核心插件
+- `knowledge/templates/概念笔记.md` — Obsidian 模板，frontmatter 结构完整
+- `knowledge/README.md` — 知识库使用指南（含 Obsidian 使用说明）
+- `scripts/upgrade_wiki_for_obsidian.py` — 一次性升级脚本，为现有 wiki 文件注入双向链接
+
+### 改造（知识库引擎）
+
+- `scripts/knowledge_base.py` — 全面支持 Obsidian 双向链接 `[[WikiLink]]`
+  - 新增 `_extract_wikilinks()` — 从正文提取 `[[链接]]`
+  - 新增 `_get_aliases_for_concept()` — 从 `aliases.json` 反向查找别名
+  - 新增 `_inject_wikilinks()` — 自动在正文末尾注入 `<!-- linsai-wikilinks -->` 区域，同步 frontmatter `related` 与正文 `[[链接]]`
+  - `build_frontmatter()` — 优化 YAML 输出格式，字符串转义更安全，空数组正确输出 `[]`
+  - `save_wiki_page()` — 保存后自动注入 wikilinks 并同步图谱
+  - `save_distilled_wiki()` — 蒸馏后自动注入 wikilinks
+  - `apply_growth()` — 生长后自动注入 wikilinks
+  - `build_index()` / `list_raw_files()` — 新增 `_should_index()` 过滤器，排除 `.obsidian/`、`.git/`、`__pycache__/` 等隐藏目录
+
+### 影响
+
+- 现有 2 个 wiki 页面已通过升级脚本注入 wikilinks 区域
+- 新建/更新的 wiki 页面自动获得 `[[双向链接]]`，Obsidian 图谱可正确显示概念间连接
+- frontmatter 新增 `aliases` 字段（来自 `aliases.json` 映射），Obsidian 别名搜索可用
+- 全量自测 88/88 通过 ✅
+
+## v1.7.2 - 2026-05-11 内测系统 — 影子用户自动化回归测试
+
+### 新增
+
+- `scripts/self_test.py` — 内测统一入口，支持命令行与程序化双接口
+  - 命令行：`--module` / `--scenario` / `--persona` / `--json`
+  - 程序化：`from self_test import run_tests; result = run_tests(["module"])`
+- `scripts/tests/test_runner.py` — 零依赖轻量级测试框架，支持隔离环境、Monkey-patch、中文报告
+- `scripts/tests/test_core.py` — 核心模块单元测试（会话 / 知识库 / 技能 / 任务 / 记忆 / 上下文）
+- `scripts/tests/test_scenarios.py` — 场景剧本测试（5 类影子用户：并肩工作 / 深度对话 / 快速验证 / 任务驱动 / 主动感知）
+- `scripts/tests/test_persona.py` — 人格一致性静态抽检（锚点 / 结构 / 表达 DNA / 反模式）
+- `skills/self-test/SKILL.md` — 内测技能封装，触发词：内测/测试/回归测试/影子用户/健康检查
+
+### 新增（深度评估与功能测试）
+
+- `scripts/deep_audit.py` — 9维度深度评估脚本（代码质量 / 架构拓扑 / 数据完整性 / 边界条件 / 前端资产 / LLM引擎 / 安全审查 / 文档一致性 / 性能基线）
+- `docs/DEEP-AUDIT-REPORT.md` — 深度评估报告（风险评分 150/1000，0 严重 0 高 0 中）
+- `docs/FUNCTIONAL-TEST-REPORT.md` — 子代理模拟用户功能测试报告（65 个检查点，Web API 15/15 通过）
+
+### 修复
+
+- `scripts/copilot_engine.py:461` — `call_llm()` 返回值从单值改为 3 元组解包，修复 `AttributeError`
+- `scripts/copilot_engine.py:108` — `detect_llm_cli()` 遍历 `status["providers"]` 而非字典键，修复 CLI 入口崩溃
+- `scripts/web_server.py` — 新增 `PUT /api/tasks/{id}/subtasks` 和 `/progress` 路由，修复前端 API 调用失败
+- `scripts/web_server.py` — `os.system` 替换为 `subprocess.run`，消除命令注入风险
+- `web/index.html` — 版本标签 `v1.1.0` → `v1.7.2`
+- `tasks/` — 修复 8 个任务文件状态与目录不一致
+- `sessions/agora_exports/` — 修复 `invited_personas` 数据类型（字符串 `"t"` → 列表 `["费曼"]`）
+
+### 验证
+
+- 全量测试 88/88 通过（核心 34 + 人格 38 + 场景 16），总耗时 ~0.06s
+- 深度评估：0 严重 / 0 高 / 0 中 / 150 低，风险评分 150/1000
+- 子代理功能测试：Web API 15/15 通过，CLI 入口恢复正常
+- 测试隔离：所有写入操作在临时目录进行，零污染真实数据
+- 零第三方依赖，仅使用 Python 3 标准库
+
+---
+
 ## v1.7.1 - 2026-05-09 知识库精细化 — 从"建库"到"浮现"
 
 ### 核心改进

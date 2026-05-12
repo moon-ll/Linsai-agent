@@ -27,18 +27,30 @@
 | `agora_bridge.py` | ✅ 已完成 | 208 | Agora群聊系统桥接：上下文导出/导入、历史人物召唤 |
 | `llm_router.py` | ✅ 已完成 | 565 | 多模型路由：MiniMax API + Kimi CLI + Claude CLI，自动降级 |
 | `usage_tracker.py` | ✅ 已完成 | 210 | Token 用量追踪：API精确统计 + CLI字符估算，多维度查询 |
-| `skill_manager.py` | ✅ 已完成 | 192 | 技能系统：扫描 skills/ 目录，关键词匹配，上下文注入 |
+| `skill_manager.py` | ✅ 已完成 | ~330 | 技能系统：扫描 skills/ 目录，关键词匹配，上下文注入，自动/手动模式，配置管理，模糊搜索 |
 | `knowledge_base.py` | ✅ 已完成 | ~1380 | 知识库引擎：raw/wiki分层、frontmatter、知识图谱、生长机制、别名、健康度 |
 | `kb_capture.py` | ✅ 已完成 | ~317 | 对话自动捕获：技术参数检测、零LLM开销 |
 | `kb_maintenance.py` | ✅ 已完成 | ~260 | 批处理维护：索引重建、孤儿清理、候选报告、周维护 |
 | `tool_engine.py` | ✅ 已完成 | 322 | 子代理调用：5工具注册、安全白名单、解析-执行-回传 |
+| `logger.py` | ✅ 已完成 | ~140 | 统一日志：控制台彩色输出 + 文件按日期轮转，DEBUG/INFO/WARNING/ERROR |
 | `web_server.py` | ✅ 已完成 | ~940 | Web 服务器：HTTP + SSE + API路由 + 文件上传 + 知识库API |
 | `backup_manager.py` | ✅ 已完成 | — | 数据备份/恢复/清理 |
 | `upgrade.py` | ✅ 已完成 | — | 安全升级标准流程 |
+| `self_test.py` | ✅ 已完成 | ~200 | 内测统一入口：全量回归测试 / 分维度 / JSON 输出 / 程序化调用 |
+| `deep_audit.py` | ✅ 已完成 | ~500 | 深度评估脚本：9维度架构稳定性审查（代码质量/架构/数据/边界/前端/LLM/安全/文档/性能） |
 
-**总计：18 个脚本，约 7700 行 Python，零第三方依赖。**
+**测试套件（`scripts/tests/`）**
+
+| 脚本 | 说明 |
+|------|------|
+| `test_runner.py` | 轻量测试框架：隔离环境、Monkey-patch、中文报告 |
+| `test_core.py` | 核心模块单元测试（34 个检查点） |
+| `test_scenarios.py` | 场景剧本测试 — 5 类影子用户（16 个检查点） |
+| `test_persona.py` | 人格一致性静态抽检（38 个检查点） |
+
+**总计：22 个主脚本 + 4 个测试脚本，约 8700 行 Python，零第三方依赖。**
 
 ---
 
-*版本：1.1*  
-*日期：2026-05-09*
+*版本：1.2*  
+*日期：2026-05-11*

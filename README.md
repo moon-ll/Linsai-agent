@@ -96,7 +96,7 @@ LinSai-CoPilot/
 ├── AGENTS.md                  # AI 代理开发指南
 ├── README.md                  # 本文件
 ├── CHANGELOG.md               # 变更记录
-├── docs/PROJECT-PLAN.md       # 项目总策划案
+├── VERSION                    # 版本号唯一真相源
 │
 ├── persona/                   # 林赛人格资产
 │   ├── lin-sai-persona.md     # 整合版人格注入文件
@@ -118,15 +118,35 @@ LinSai-CoPilot/
 ├── tasks/                     # 工作项与项目管理
 │   ├── active/                # 进行中
 │   ├── backlog/               # 待办
-│   ├── completed/             # 已完成
-│   └── completed/             # 任务归档
+│   └── completed/             # 已完成
 │
 ├── references/                # 用户提供的参考资料
 │   ├── papers/                # 论文/文献
 │   ├── notes/                 # 用户笔记
 │   └── index.json             # 文献索引
 │
-└── scripts/                   # 工具脚本（Python 3，零依赖）
+├── knowledge/                 # 林赛的知识库（Obsidian Vault）
+│   ├── raw/                   # 用户原始材料（只读）
+│   ├── wiki/                  # 结构化知识（concepts/methods/people/papers/projects）
+│   ├── .obsidian/             # Obsidian 配置
+│   ├── templates/             # 笔记模板
+│   ├── captures/              # 对话自动捕获片段
+│   ├── aliases.json           # 别名映射
+│   ├── index.json             # 倒排索引
+│   ├── graph.json             # 知识图谱
+│   └── growth-log.json        # 知识生长日志
+│
+├── skills/                    # 技能目录（8+ 个思维顾问技能）
+│   └── {skill-name}/
+│       └── SKILL.md
+│
+├── docs/                      # 项目文档与报告
+│   ├── PROJECT-PLAN.md        # 项目总策划案
+│   ├── DEEP-AUDIT-REPORT.md   # 深度评估报告
+│   ├── FUNCTIONAL-TEST-REPORT.md # 功能测试报告
+│   └── prompts/               # LLM prompt 模板
+│
+└── scripts/                   # 工具脚本（Python 3，零依赖，23 个）
     ├── session_manager.py     # 会话管理
     ├── context_builder.py     # 上下文构建（Prompt组装）
     ├── copilot_engine.py      # 核心引擎（LLM调用 + CLI）
@@ -134,7 +154,27 @@ LinSai-CoPilot/
     ├── task_manager.py        # 任务管理
     ├── proactive_engine.py    # 主动感知
     ├── document_handler.py    # 文档与代码协作
-    └── agora_bridge.py        # Agora群聊桥接
+    ├── agora_bridge.py        # Agora群聊桥接
+    ├── llm_router.py          # 多模型路由与自动降级
+    ├── usage_tracker.py       # Token 用量追踪
+    ├── skill_manager.py       # 技能系统管理
+    ├── tool_engine.py         # 子代理调用引擎
+    ├── knowledge_base.py      # 知识库引擎
+    ├── kb_capture.py          # 对话自动捕获
+    ├── kb_maintenance.py      # 知识库批处理维护
+    ├── logger.py              # 统一日志系统
+    ├── chat_archive.py        # 聊天记录归档浏览器
+    ├── backup_manager.py      # 数据备份/恢复
+    ├── upgrade.py             # 安全升级流程
+    ├── upgrade_wiki_for_obsidian.py  # wiki 双向链接升级
+    ├── web_server.py          # Web 服务器
+    ├── self_test.py           # 内测统一入口
+    ├── deep_audit.py          # 深度评估脚本
+    └── tests/                 # 自动化测试套件
+        ├── test_runner.py
+        ├── test_core.py
+        ├── test_scenarios.py
+        └── test_persona.py
 ```
 
 ---
@@ -160,10 +200,13 @@ LinSai-CoPilot/
 | **聊天记录浏览器** | ✅ | 历史会话查看、关键词标签、跨会话搜索 |
 | **多模型路由** | ✅ | CLI + HTTP API，自动降级，限流切换 |
 | **Token 统计** | ✅ | API 精确统计 + CLI 字符估算，多维度查询 |
-| **技能系统** | ✅ | 3 个技能（数学推导/代码审查/实验设计），关键词触发 |
+| **技能系统** | ✅ | 8+ 个技能（数学推导/代码审查/实验设计/文献蒸馏/项目规划/群聊会议/HPC/自测），关键词触发 |
 | **任务看板增强** | ✅ | 三列看板、进度条、子任务、里程碑 |
 | **子代理调用** | ✅ | 5 工具（file_read/write, calc, task_create, knowledge_query），安全白名单 |
 | **智能知识库** | ✅ | raw/wiki 分层、知识图谱、交互触发生长、林赛视角 |
+| **内测系统** | ✅ | 88 检查点自动化回归测试（影子用户），零依赖轻量框架 |
+| **深度评估** | ✅ | 9 维度架构稳定性审查，风险评分 150/1000 |
+| **Obsidian 兼容** | ✅ | 双向链接 `[[WikiLink]]`、frontmatter、Vault 配置、模板 |
 
 ---
 
@@ -200,6 +243,7 @@ LinSai-CoPilot/
 | Phase 3 | 主动感知 + 自主提醒 + 模式识别 | ✅ 完成 |
 | Phase 4 | 文档协作 + 代码协作 + Agora集成 + Web界面 | ✅ 完成 |
 | Phase 5 | Token统计 + 技能系统 + **知识库精细化** + 子代理调用 | ✅ 完成 |
+| Phase 5.5 | **内测系统** — 影子用户自动化回归测试（88 检查点） | ✅ 完成 |
 | Phase 6 | 性能优化 + 生态扩展 | ⏳ 待开发 |
 
 ### Web 界面特性
@@ -215,6 +259,7 @@ LinSai-CoPilot/
 | 技能检测 | 输入框实时检测激活技能，顶部显示技能徽章 |
 | Token 统计 | 设置面板显示今日/累计用量，按 Provider 分组 |
 | 知识库管理器 | 7 标签页模态框：概览 / Raw / Wiki / 图谱 / 生长 / **健康度** / **别名** |
+| **技能面板** | 🎯 自动/手动模式 + 模糊搜索 + 技能开关（侧边栏工具栏入口） |
 | 子代理工具日志 | 消息旁显示工具调用提示，可展开查看执行详情 |
 | **侧边栏工具栏** | 📚 知识库 / 🎯 技能 / 📋 任务 / 📊 用量 独立快捷入口 |
 | **本地软连接** | Wiki/Raw 文件一键在系统编辑器中打开，支持复制路径 |
@@ -230,5 +275,5 @@ LinSai-CoPilot/
 
 ---
 
-*版本：1.5.0*  
-*日期：2026-05-08*
+*版本：1.7.3*  
+*日期：2026-05-12*

@@ -2,7 +2,7 @@
 
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
-> 最后更新：2026-05-08
+> 最后更新：2026-05-11
 
 ---
 
@@ -54,6 +54,8 @@ LinSai-CoPilot/
 │
 ├── AGENTS.md                  # 本文件。AI 代理必读指南
 ├── README.md                  # 人类可读的项目说明
+├── CHANGELOG.md               # 变更记录
+├── VERSION                    # 版本号唯一真相源
 │
 ├── persona/                   # 林赛人格资产（注入材料）
 │   ├── README.md              # 资产来源说明与更新规范
@@ -72,6 +74,7 @@ LinSai-CoPilot/
 │   ├── user-profile.json      # 用户画像（偏好、习惯、已知技能）
 │   ├── working-context.json   # 当前工作上下文（进行中的项目、关键决策）
 │   ├── long-term-memory.json  # 跨会话记忆索引
+│   ├── autonomy-level.json    # 自主级别配置
 │   └── snippets/              # 记忆片段（用户的名言、关键事件）
 │       └── README.md
 │
@@ -83,11 +86,12 @@ LinSai-CoPilot/
 │
 ├── references/                # 用户提供的参考资料
 │   ├── README.md
-│   └── papers/                # 论文/文献
-│   └── notes/                 # 用户笔记
+│   ├── papers/                # 论文/文献
+│   ├── notes/                 # 用户笔记
+│   └── index.json             # 文献索引
 │
-├── knowledge/                 # 林赛的知识库（raw/wiki 分层 + 知识图谱）
-│   ├── README.md              # 知识库使用指南
+├── knowledge/                 # 林赛的知识库（Obsidian Vault）
+│   ├── README.md              # 知识库使用指南（含 Obsidian 说明）
 │   ├── raw/                   # 用户原始材料（只读）
 │   │   ├── papers/            # 论文 PDF/笔记
 │   │   ├── notes/             # 用户手写笔记
@@ -98,32 +102,61 @@ LinSai-CoPilot/
 │   │   ├── people/            # 学者评价
 │   │   ├── papers/            # 论文精读
 │   │   └── projects/          # 项目聚合
+│   ├── .obsidian/             # Obsidian 配置（主题、插件、CSS）
+│   ├── templates/             # Obsidian 笔记模板
 │   ├── captures/              # 对话自动捕获片段（零 LLM 开销）
 │   ├── aliases.json           # 别名映射（查询自动展开）
 │   ├── index.json             # 统一倒排索引
 │   ├── graph.json             # 知识图谱
 │   └── growth-log.json        # 知识生长日志
 │
-└── scripts/                   # 工具脚本（Python 3，零依赖）
-    ├── session_manager.py     # 会话创建、存档、加载
-    ├── memory_manager.py      # 记忆读写、索引、压缩
-    ├── task_manager.py        # 任务 CRUD、状态流转
-    ├── copilot_engine.py      # 核心引擎：prompt 构建、调用 LLM、响应解析
-    ├── context_builder.py     # 上下文组装：人格 + 记忆 + 知识库 + 当前任务 + 会话历史
-    ├── knowledge_base.py      # 知识库引擎：raw/wiki 分层、知识图谱、生长机制、别名、健康度
-    ├── kb_capture.py          # 对话自动捕获：技术参数检测、零 LLM 开销
-    ├── kb_maintenance.py      # 批处理维护：索引重建、孤儿清理、候选报告、周维护
-    ├── proactive_engine.py    # 主动感知、心跳扫描
-    ├── document_handler.py    # 文档读取、PDF提取、代码分析
-    ├── agora_bridge.py        # Agora群聊桥接
-    ├── backup_manager.py      # 数据备份/恢复/清理
-    ├── upgrade.py             # 安全升级标准流程
-    └── web_server.py          # Web 服务器（HTTP + SSE + API路由）
-
-├── web/                       # 前端界面（零框架依赖）
-│   ├── index.html             # 单页应用入口
-│   ├── css/style.css          # 双主题样式（深色/浅色/自动）
-│   └── js/app.js              # 原生 JavaScript（会话/聊天/流式SSE）
+├── skills/                    # 技能目录（每个技能一个子目录）
+│   ├── README.md
+│   └── {skill-name}/
+│       └── SKILL.md           # 技能定义：触发词、心智模型、表达 DNA
+│
+├── docs/                      # 项目文档与报告
+│   ├── PROJECT-PLAN.md        # 项目总策划案
+│   ├── DEEP-AUDIT-REPORT.md   # 深度评估报告
+│   ├── FUNCTIONAL-TEST-REPORT.md # 功能测试报告
+│   └── prompts/               # LLM prompt 模板与管理文档
+│
+├── scripts/                   # 工具脚本（Python 3，零依赖）
+│   ├── session_manager.py     # 会话创建、存档、加载
+│   ├── memory_manager.py      # 记忆读写、索引、压缩
+│   ├── task_manager.py        # 任务 CRUD、状态流转
+│   ├── copilot_engine.py      # 核心引擎：prompt 构建、调用 LLM、响应解析
+│   ├── context_builder.py     # 上下文组装：人格 + 记忆 + 知识库 + 当前任务 + 会话历史
+│   ├── knowledge_base.py      # 知识库引擎：raw/wiki 分层、知识图谱、生长机制、别名、健康度
+│   ├── kb_capture.py          # 对话自动捕获：技术参数检测、零 LLM 开销
+│   ├── kb_maintenance.py      # 批处理维护：索引重建、孤儿清理、候选报告、周维护
+│   ├── logger.py              # 统一日志：控制台彩色输出 + 文件按日期轮转
+│   ├── proactive_engine.py    # 主动感知、心跳扫描
+│   ├── document_handler.py    # 文档读取、PDF提取、代码分析
+│   ├── agora_bridge.py        # Agora群聊桥接
+│   ├── llm_router.py          # 多模型路由：MiniMax API + Kimi CLI + Claude CLI，自动降级
+│   ├── usage_tracker.py       # Token 用量追踪：API精确统计 + CLI字符估算
+│   ├── skill_manager.py       # 技能系统：扫描、匹配、注入、配置
+│   ├── tool_engine.py         # 子代理调用：工具注册、安全白名单、解析-执行-回传
+│   ├── chat_archive.py        # 聊天记录归档浏览器
+│   ├── backup_manager.py      # 数据备份/恢复/清理
+│   ├── upgrade.py             # 安全升级标准流程
+│   ├── upgrade_wiki_for_obsidian.py  # 一次性升级：为现有 wiki 注入双向链接
+│   ├── web_server.py          # Web 服务器（HTTP + SSE + API路由）
+│   ├── self_test.py           # 内测统一入口：全量/分维度/JSON/程序化
+│   ├── deep_audit.py          # 深度评估脚本：9维度架构稳定性审查
+│   └── tests/                 # 自动化测试套件
+│       ├── test_runner.py     # 零依赖轻量测试框架
+│       ├── test_core.py       # 核心模块单元测试（34个检查点）
+│       ├── test_scenarios.py  # 场景剧本测试（5类影子用户）
+│       └── test_persona.py    # 人格一致性静态抽检
+│
+└── web/                       # 前端界面（零框架依赖）
+    ├── index.html             # 单页应用入口
+    ├── css/
+    │   └── style.css          # 双主题样式（深色/浅色/自动）
+    └── js/
+        └── app.js              # 原生 JavaScript（会话/聊天/流式SSE）
 ```
 
 ---
@@ -324,6 +357,13 @@ LinSai-CoPilot/
   - 对话自动捕获：`scripts/kb_capture.py`，检测技术参数和明确请求
   - 相似概念检测：创建 wiki stub 前检查重复，防膨胀
   - 批处理维护：`scripts/kb_maintenance.py --weekly`
+- ✅ **技能面板**（Web 界面）
+  - 自动/手动模式切换：自动模式下关键词匹配，手动模式下只注入选中技能
+  - 模糊搜索：实时过滤技能名称/描述/触发词
+  - 技能开关：独立启用/禁用每个技能，视觉反馈（未选中变暗）
+- ✅ **统一日志系统** — `scripts/logger.py`
+  - 控制台彩色输出（INFO 级别）+ 文件按日期轮转（DEBUG 级别）
+  - 已接入：web_server、copilot_engine、llm_router
 - ✅ **上下文集成** — `scripts/context_builder.py`
   - 检索结果优先 wiki（结构化知识 > raw 原材料）
   - 图谱关联知识自动拉取
@@ -378,6 +418,11 @@ LinSai-CoPilot/
 - **无障碍**：语义化标签、键盘导航支持（Enter 发送、Shift+Enter 换行）
 
 ### 5. 测试策略
+- **自动化回归测试（影子用户）**：`scripts/self_test.py` + `scripts/tests/`
+  - 零依赖轻量框架，隔离环境，88 个检查点，0.06s 全量通过
+  - 三层覆盖：模块单元测试（31）/ 场景剧本测试（16）/ 人格一致性抽检（38）
+  - 命令行：`--module` / `--scenario` / `--persona` / `--json`
+  - 程序化：`from self_test import run_tests`
 - 脚本自检（参数校验、错误处理）
 - 手动端到端测试（创建会话 → 多轮对话 → 检查存档完整性）
 - Web 界面测试（启动服务器 → API 连通性 → 静态文件服务 → 流式输出）
@@ -482,7 +527,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：1.7.1*
-*日期：2026-05-09*
+*版本：1.7.3*
+*日期：2026-05-12*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*
