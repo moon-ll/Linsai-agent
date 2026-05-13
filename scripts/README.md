@@ -55,7 +55,7 @@
 | `test_e2e_learning_full.py` | 三来源（arXiv/web/raw）端到端完整链路验证 |
 | `upgrade_wiki_for_obsidian.py` | 一次性升级脚本：为现有 wiki 注入双向链接 |
 
-**总计：26 个主脚本 + 6 个测试脚本，约 11000+ 行 Python，零第三方依赖。**
+**总计：29 个主脚本 + 6 个测试脚本，约 11000+ 行 Python，零第三方依赖。**
 
 ---
 
