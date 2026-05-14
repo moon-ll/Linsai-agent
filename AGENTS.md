@@ -150,6 +150,9 @@ LinSai-CoPilot/
 │   ├── web_server.py          # Web 服务器（HTTP + SSE + API路由）
 │   ├── self_test.py           # 内测统一入口：全量/分维度/JSON/程序化
 │   ├── deep_audit.py          # 深度评估脚本：9维度架构稳定性审查
+│   ├── learning_quality_tracker.py  # 交互质量追踪器：质量评分/记忆召回率/人格漂移检测
+│   ├── test_e2e_learning.py   # 端到端 arXiv 链路验证
+│   ├── test_e2e_learning_full.py  # 三来源端到端完整链路验证
 │   └── tests/                 # 自动化测试套件
 │       ├── test_runner.py     # 零依赖轻量测试框架
 │       ├── test_core.py       # 核心模块单元测试（34个检查点）
