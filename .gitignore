@@ -1,3 +1,5 @@
+# 备份目录
+/backups/
 # LinSai-CoPilot — Git 忽略规则
 # 原则：用户数据不提交，只提交代码与文档
 
@@ -9,8 +11,6 @@
 /references/papers/*
 /references/notes/*
 
-# 备份目录
-/backups/
 
 # LLM API 配置（含敏感凭据）
 .env
