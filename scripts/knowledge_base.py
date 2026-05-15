@@ -538,7 +538,11 @@ def _load_graph() -> Dict[str, Any]:
         return {"nodes": {}, "edges": []}
     try:
         with open(GRAPH_PATH, "r", encoding="utf-8") as f:
-            return json.load(f)
+            data = json.load(f)
+        # 确保结构完整
+        if "nodes" not in data or "edges" not in data:
+            return {"nodes": {}, "edges": []}
+        return data
     except Exception:
         return {"nodes": {}, "edges": []}
 

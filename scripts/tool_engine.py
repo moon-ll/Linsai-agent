@@ -172,6 +172,325 @@ def tool_knowledge_query(query: str) -> str:
         return f"✗ 查询失败: {e}"
 
 
+def tool_knowledge_research(topic: str, depth: str = "full", timeout: int = 300) -> str:
+    """【工作流 1: 自动增加】调研主题，编译信息并写入知识库。
+
+    当用户请求调研某个方向或概念时，使用此工具完成全流程：
+    1. 调研文献（通过 Hermes LinSai 调用 skills/web search）
+    2. 提取完整信息
+    3. 编译为林赛视角的结构化 wiki 笔记
+    4. 创建双向链接
+
+    参数：
+        topic：调研主题（如"拓扑绝缘体表面态探测进展"）
+        depth：调研深度 "quick" | "full"（默认 full，10min+）
+        timeout：超时秒数（默认 300s）
+
+    示例：
+        tool_knowledge_research("固体HHG中能谷极化效应的研究进展", "full", 300)
+        tool_knowledge_research("二维材料中太赫兹波产生的最新方法", "quick", 120)
+    """
+    try:
+        import importlib.util
+        from datetime import datetime, timezone
+
+        kb_path = Path(__file__).parent / "knowledge_base.py"
+        spec = importlib.util.spec_from_file_location("knowledge_base", kb_path)
+        kb = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(kb)
+
+        # 第一步：通过 Hermes 调研
+        depth_instruction = "" if depth == "full" else "简要调研，3-5个关键点即可。"
+        research_prompt = f"""你是林赛（强场超快光学 PI），正在为知识库建设调研一个新主题。
+
+你的任务：调研 **"{topic}"**，以林赛的研究视角整理成结构化笔记。
+
+{depth_instruction}
+
+请从以下角度展开（根据主题相关性选择重点）：
+1. 核心物理机制
+2. 主要实验方法和技术路线
+3. 关键文献和代表性工作
+4. 与固体高次谐波/阿秒科学/拍赫兹电子学的关联
+5. 开放问题和前沿挑战
+
+调研完成后，请生成一份完整的知识库笔记（含 YAML frontmatter）。
+
+【输出格式】直接输出 markdown 原文，从 --- 开始，不要代码块标记：
+
+---
+title: "【概念名】"
+type: concepts
+created: "{datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+updated: "{datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}"
+tags: ["核心概念"]
+related: []
+source_raw: ""
+growth_stage: "growing"
+confidence: 0.7
+auto_grown: true
+review_status: "pending"
+---
+
+# 【标题】
+
+## 林赛的理解
+（用第一人称写，体现 PI 视角和物理直觉）
+
+## 核心要点
+- 要点1
+- 要点2
+
+## 研究方法
+（相关实验方法）
+
+## 关键文献
+（代表性工作，附简要评价）
+
+## 开放问题
+
+## 与林赛工作的关联
+"""
+
+        # 调用 Hermes LinSai 进行调研
+        research_result = tool_hermes_chat(research_prompt, timeout=min(timeout, 180))
+        if research_result.startswith("✗"):
+            return f"✗ 调研失败: {research_result}"
+
+        # 第二步：保存为 wiki 页面
+        # 解析标题
+        title_match = None
+        for line in research_result.split("\n"):
+            if line.startswith("title:"):
+                title_match = line.split(":", 1)[1].strip().strip('"').strip("'")
+                break
+
+        if not title_match:
+            # 尝试从第一个 # 标题行提取
+            for line in research_result.split("\n"):
+                if line.startswith("# "):
+                    title_match = line[2:].strip()
+                    break
+
+        if not title_match:
+            title_match = topic
+
+        # 生成安全的文件名
+        safe_name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "", title_match).strip()
+        if not safe_name:
+            safe_name = "untitled"
+        wiki_rel = f"wiki/concepts/{safe_name}.md"
+        wiki_path = PROJECT_ROOT / "knowledge" / wiki_rel
+
+        # 确保目录存在
+        wiki_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # 写入文件（注入双向链接）
+        wiki_path.write_text(research_result, encoding="utf-8")
+        final_text = kb._inject_wikilinks(research_result)
+        wiki_path.write_text(final_text, encoding="utf-8")
+
+        # 更新图谱
+        fm, _ = kb.parse_frontmatter(final_text)
+        title = fm.get("title", safe_name)
+        kb.update_graph_node(title, "concepts", wiki_rel, fm.get("growth_stage", "growing"))
+        for related in fm.get("related", []):
+            if related:
+                kb.add_graph_edge(title, related, "related")
+
+        # 重建索引
+        kb.build_index()
+        kb.log_growth("create", wiki_rel, "auto_research",
+                      f"自动调研主题 '{topic}' 生成")
+
+        return (f"✓ 调研完成，已写入知识库: {wiki_rel}\n"
+                f"  标题: {title}\n"
+                f"  路径: knowledge/{wiki_rel}\n"
+                f"  调研结果摘要: {research_result[:300]}...")
+
+    except subprocess.TimeoutExpired:
+        return f"✗ 调研超时（{timeout}s），已自动终止"
+    except Exception as e:
+        return f"✗ 调研失败: {e}"
+
+
+def tool_knowledge_ingest(folder: str = "raw", timeout: int = 300) -> str:
+    """【工作流 2: 手动增加】编译 raw 文件夹中的文件，建立双向连接，健康检查。
+
+    当用户将文件存入 raw/ 目录并请求整理时，使用此工具完成全流程：
+    1. 列出 raw/ 中的文件
+    2. 对每个文件进行编译（raw → wiki）
+    3. 建立双向链接
+    4. 知识库健康检查（索引覆盖率、孤立节点检测）
+
+    参数：
+        folder：要处理的文件夹（默认 "raw"，即 raw/papers/）
+        timeout：超时秒数（默认 300s）
+
+    示例：
+        tool_knowledge_ingest("raw/papers", 300)
+        tool_knowledge_ingest("raw", 120)
+    """
+    try:
+        import importlib.util
+        from datetime import datetime, timezone
+
+        kb_path = Path(__file__).parent / "knowledge_base.py"
+        spec = importlib.util.spec_from_file_location("knowledge_base", kb_path)
+        kb = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(kb)
+
+        # 确保 raw 目录存在
+        raw_base = PROJECT_ROOT / "knowledge" / "raw"
+        raw_base.mkdir(parents=True, exist_ok=True)
+
+        # 列出文件
+        target_dir = raw_base if folder == "raw" else PROJECT_ROOT / "knowledge" / folder
+        if not target_dir.exists():
+            return f"✗ 目录不存在: {target_dir}"
+
+        md_files = list(target_dir.rglob("*.md")) + list(target_dir.rglob("*.txt"))
+        md_files = [f for f in md_files if not any(p.startswith(".") for p in f.parts)]
+
+        if not md_files:
+            return "○ raw 文件夹为空，无需整理"
+
+        results = []
+        now_str = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+        for fpath in md_files[:10]:  # 最多处理10个文件
+            rel = str(fpath.relative_to(PROJECT_ROOT / "knowledge"))
+            try:
+                raw_text = fpath.read_text(encoding="utf-8")
+            except Exception:
+                results.append(f"  ⚠ 跳过（读取失败）: {fpath.name}")
+                continue
+
+            # 推断 wiki 类型
+            category = fpath.parent.name
+            type_map = {"papers": "papers", "notes": "concepts", "webclips": "concepts"}
+            wiki_type = type_map.get(category, "concepts")
+
+            # 生成提炼 prompt
+            title_guess = fpath.stem
+            safe_name = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "", title_guess).strip() or "untitled"
+            truncated = raw_text[:8000] + ("..." if len(raw_text) > 8000 else "")
+
+            distill_prompt = f"""请将以下原始材料提炼为林赛（强场超快光学 PI）的研究笔记。
+
+原始材料: {fpath.name}
+笔记类型: {wiki_type}
+
+{truncated}
+
+【输出格式】直接输出 markdown 原文，从 --- 开始：
+
+---
+title: "{title_guess}"
+type: {wiki_type}
+created: "{now_str}"
+updated: "{now_str}"
+tags: []
+related: []
+source_raw: "{fpath.name}"
+growth_stage: "growing"
+confidence: 0.7
+auto_grown: true
+review_status: "pending"
+---
+
+# {title_guess}
+
+## 林赛的理解
+（第一人称 PI 视角）
+
+## 核心要点
+
+## 来源
+- {fpath.name}
+"""
+
+            # 调用 Hermes 提炼
+            distilled = tool_hermes_chat(distill_prompt, timeout=min(timeout // max(len(md_files), 1), 120))
+            if distilled.startswith("✗") or distilled == "(无输出)":
+                results.append(f"  ⚠ 提炼失败: {fpath.name}")
+                continue
+
+            # 保存 wiki
+            wiki_rel = f"wiki/{wiki_type}/{safe_name}.md"
+            wiki_path = PROJECT_ROOT / "knowledge" / wiki_rel
+            wiki_path.parent.mkdir(parents=True, exist_ok=True)
+            wiki_path.write_text(distilled, encoding="utf-8")
+            final_text = kb._inject_wikilinks(distilled)
+            wiki_path.write_text(final_text, encoding="utf-8")
+
+            # 更新图谱
+            fm, _ = kb.parse_frontmatter(final_text)
+            title = fm.get("title", safe_name)
+            kb.update_graph_node(title, wiki_type, wiki_rel, "growing")
+            for related in fm.get("related", []):
+                if related:
+                    kb.add_graph_edge(title, related, "related")
+
+            results.append(f"  ✓ {fpath.name} → wiki/{wiki_type}/{safe_name}.md")
+
+        # 重建索引
+        kb.build_index()
+
+        # 健康检查
+        graph = kb.get_graph_summary()
+        orphaned = []
+        for node_id, node in kb._load_graph()["nodes"].items():
+            path = node.get("path", "")
+            if path and not (PROJECT_ROOT / "knowledge" / path).exists():
+                orphaned.append(node_id)
+
+        health = (f"\n\n【知识库健康检查】"
+                  f"\n  节点数: {graph['node_count']}"
+                  f"\n  边数: {graph['edge_count']}"
+                  f"\n  处理文件: {len(md_files)} 个"
+                  f"\n  孤立节点: {len(orphaned)} 个")
+
+        kb.log_growth("distill", folder, "manual",
+                      f"整理 raw 文件夹 '{folder}'，处理 {len(md_files)} 个文件")
+
+        return ("\n".join(results) + health)
+
+    except Exception as e:
+        return f"✗ 整理失败: {e}"
+
+
+def tool_knowledge_create(concept_name: str, context: str = "", timeout: int = 60) -> str:
+    """【工作流 3: 对话生长】创建新概念存根，支持对话中触发生长。
+
+    当讨论中遇到知识库中没有的概念时，使用此工具创建 seedling stub，
+    记录触发上下文，供后续丰满。
+
+    参数：
+        concept_name：概念名称
+        context：触发上下文（当前对话片段）
+        timeout：超时秒数
+
+    示例：
+        tool_knowledge_create("能谷极化", "用户提到了能谷极化效应在固体HHG中的作用", 60)
+    """
+    try:
+        import importlib.util
+
+        kb_path = Path(__file__).parent / "knowledge_base.py"
+        spec = importlib.util.spec_from_file_location("knowledge_base", kb_path)
+        kb = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(kb)
+
+        wiki_rel = kb.create_wiki_stub(concept_name, context, trigger="conversation")
+        return (f"✓ 已创建 seedling stub: {wiki_rel}\n"
+                f"  概念: {concept_name}\n"
+                f"  路径: knowledge/{wiki_rel}\n"
+                f"  下次讨论此概念时，林赛将自动丰满该页面")
+    except Exception as e:
+        return f"✗ 创建失败: {e}"
+
+
 def tool_hermes_chat(prompt: str, timeout: int = 60) -> str:
     """与 Hermes LinSai 对话。
 
@@ -460,6 +779,9 @@ _TOOL_REGISTRY: Dict[str, tuple] = {
     "run_command": (tool_run_command, ["command", "timeout", "cwd"]),
     "hermes_chat": (tool_hermes_chat, ["prompt", "timeout"]),
     "agent": (tool_agent, ["task", "agent_type", "model", "timeout"]),
+    "knowledge_research": (tool_knowledge_research, ["topic", "depth", "timeout"]),
+    "knowledge_ingest": (tool_knowledge_ingest, ["folder", "timeout"]),
+    "knowledge_create": (tool_knowledge_create, ["concept_name", "context", "timeout"]),
 }
 
 
@@ -596,12 +918,37 @@ def inject_tools_prompt(system_prompt: str) -> str:
    - 适合需要并行执行、深度探索的复杂任务
    - timeout 默认 300s（5分钟）
 
+9. knowledge_research — 【工作流1: 自动增加】调研主题并写入知识库
+   参数: {"topic": "调研主题", "depth": "quick|full", "timeout": 300}
+   示例: {"topic": "固体HHG中能谷极化效应的研究进展", "depth": "full", "timeout": 300}
+   示例: {"topic": "二维材料中太赫兹波产生的最新方法", "depth": "quick", "timeout": 120}
+   说明：
+   - 当用户请求调研某个方向时使用，自动完成：调研→编译→写入wiki→建双向链接
+   - depth: quick=3-5个要点，full=完整调研
+   - 默认通过 Hermes LinSai 进行（有人格、记忆、skills加成）
+
+10. knowledge_ingest — 【工作流2: 手动增加】编译raw文件夹并健康检查
+    参数: {"folder": "raw|papers|notes|webclips", "timeout": 300}
+    示例: {"folder": "raw/papers", "timeout": 300}
+    说明：
+    - 当用户将文件存入 raw/ 并请求整理时使用
+    - 自动完成：编译→建立双向链接→知识库健康检查
+    - 返回：处理结果 + 健康报告（节点数/边数/孤立节点）
+
+11. knowledge_create — 【工作流3: 对话生长】创建新概念存根
+    参数: {"concept_name": "概念名", "context": "触发上下文", "timeout": 60}
+    示例: {"concept_name": "能谷极化", "context": "用户在讨论固体HHG中提到了能谷极化效应", 60}
+    说明：
+    - 对话中遇到知识库中没有的概念时使用，创建 seedling stub
+    - 触发上下文会被记录，下次讨论同一概念时自动丰满
+
 规则：
 - 小问题直接回答，不需要调用工具
 - 遇到你不确定的事实，优先用 knowledge_query 查知识库
 - 遇到需要生成代码的场景，用 run_command 执行 python
 - 遇到需要深度思考或多技能协作的场景，用 hermes_chat 调用独立的 Hermes LinSai
 - 遇到需要审查/分析代码的场景，用 run_command 调用 claude
+- 讨论中遇到新概念时，**主动调用 knowledge_create**，不要直接忽略
 - 你的角色是策划者和协调者：理解需求 → 调用工具 → 整合结果，而不是自己硬扛
 - 每次回复最多调用 3 个工具
 """
