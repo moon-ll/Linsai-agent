@@ -217,6 +217,49 @@ def tool_hermes_chat(prompt: str, timeout: int = 60) -> str:
         return f"✗ Hermes 调用失败: {e}"
 
 
+def tool_agent(task: str, agent_type: str = "coder", model: str = "", timeout: int = 300) -> str:
+    """调用子代理（Agent）完成特定任务。
+
+    实现方式：通过 run_command 调用 Claude Code CLI 的 --agent 参数。
+    这会启动一个专注的子代理实例，完成任务后返回结果。
+
+    与 hermes_chat 的区别：
+        - hermes_chat：调用独立的 Hermes LinSai（有完整人格、记忆、skills）
+        - agent：在当前会话启动专注子代理，适合代码库探索、并行调研
+
+    用途：
+        - 并行调研：同时搜索 arXiv、知识库、现有笔记
+        - 深度分析：委托一个 Agent 专门分析代码/论文/数据
+        - 复杂任务拆分：分解为多个子任务并行执行
+
+    参数：
+        task：给子代理的任务描述（完整描述，包含背景和目标）
+        agent_type：子代理类型
+            - "explore"：代码库探索代理（只读，适合调研，默认）
+            - "coder"：通用编程代理
+            - "plan"：计划代理（只读，适合架构设计）
+        model：指定模型（默认使用父代理模型）
+        timeout：超时秒数（默认 300s = 5分钟）
+
+    示例：
+        tool_agent(
+            "调研拓扑绝缘体表面态探测的最新进展，重点关注ARPES和STM实验技术",
+            "explore", "", 180
+        )
+        tool_agent("帮我分析 sessions/ 目录下的所有会话记录，统计用户最常讨论的话题", "coder", "", 120)
+    """
+    # 映射 agent_type 到 Claude Code CLI 参数
+    type_map = {"explore": "explore", "coder": "coder", "plan": "plan"}
+    cli_type = type_map.get(agent_type, "coder")
+
+    # 构建 CLI 命令
+    model_arg = f" --model {model}" if model else ""
+    cmd = f"claude --agent {cli_type}{model_arg} -p {repr(task)}"
+
+    # 通过 tool_run_command 执行（权限模型已内置）
+    return tool_run_command(cmd, timeout=timeout)
+
+
 # ---------------------------------------------------------------------------
 # CLI 工具
 # ---------------------------------------------------------------------------
@@ -416,6 +459,7 @@ _TOOL_REGISTRY: Dict[str, tuple] = {
     "knowledge_query": (tool_knowledge_query, ["query"]),
     "run_command": (tool_run_command, ["command", "timeout", "cwd"]),
     "hermes_chat": (tool_hermes_chat, ["prompt", "timeout"]),
+    "agent": (tool_agent, ["task", "agent_type", "model", "timeout"]),
 }
 
 
@@ -538,9 +582,19 @@ def inject_tools_prompt(system_prompt: str) -> str:
    示例: {"prompt": "帮我调研一下拓扑绝缘体表面态的最新进展"}
    示例: {"prompt": "解释一下能谷极化在固体HHG中的作用"}
    说明：
-   - Hermes LinSai 有完整的人格、记忆、117个skills，能自主调用工具
+   - Hermes LinSai 有完整的人格、记忆、skills，能自主调用工具
    - 适合需要深度思考、多技能协作的场景
    - timeout 默认 60s
+
+8. agent — 启动子代理完成特定任务（并行调研、深度分析）
+   参数: {"task": "任务描述", "agent_type": "coder|explore|plan", "model": "", "timeout": 300}
+   示例: {"task": "并行调研拓扑绝缘体：① arXiv最新论文 ② 知识库 ③ 现有笔记", "agent_type": "explore", "timeout": 180}
+   示例: {"task": "分析 sessions/ 下所有会话，统计用户最常讨论的话题", "agent_type": "coder", "timeout": 120}
+   说明：
+   - agent_type: coder=编程, explore=调研(只读), plan=架构设计(只读)
+   - 与 hermes_chat 的区别：agent 在当前会话启动专注子代理，hermes_chat 调用独立人格
+   - 适合需要并行执行、深度探索的复杂任务
+   - timeout 默认 300s（5分钟）
 
 规则：
 - 小问题直接回答，不需要调用工具

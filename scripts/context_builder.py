@@ -110,19 +110,67 @@ def _read_profile() -> str:
 
 
 def _read_lt_mem() -> str:
+    """读取长期记忆片段（Phase 2: 返回实际内容而非计数）。"""
     d = _load_json(PROJECT_ROOT / "memory" / "long-term-memory.json", default={})
-    s = d.get("snippets", [])
-    return f"[长期记忆] 共 {len(s)} 条记忆片段" if s else ""
+    snippets = d.get("snippets", [])
+    if not snippets:
+        return ""
+
+    # 按时间倒序，取最近 10 条
+    recent = sorted(snippets, key=lambda x: x.get("timestamp", ""), reverse=True)[:10]
+    parts = [f"[长期记忆] 共 {len(snippets)} 条记忆片段，显示最近 {len(recent)} 条："]
+    for s in recent:
+        summary = s.get("summary", "")
+        if summary:
+            parts.append(f"  • {summary}")
+    return "\n".join(parts)
 
 
 def _read_work_ctx() -> str:
+    """读取工作上下文（Phase 2: 过滤过期任务）。"""
+    from datetime import date
     d = _load_json(PROJECT_ROOT / "memory" / "working-context.json", default={})
     parts = []
-    p = d.get("active_projects", [])
-    if p:
-        parts.append(f"进行中项目：{', '.join(x.get('name', '') for x in p if x.get('name'))}")
-    if d.get("pending_decisions"):
-        parts.append(f"待决策事项：{len(d['pending_decisions'])} 项")
+    today = date.today()
+
+    # 过滤过期项目：deadline 已过或状态为 completed/archived
+    projects = d.get("active_projects", [])
+    valid_projects = []
+    for p in projects:
+        status = p.get("status", "")
+        if status in ("completed", "archived"):
+            continue
+        deadlines = p.get("deadlines", [])
+        if deadlines:
+            # 如果所有 deadline 都已过，过滤掉
+            from datetime import datetime
+            try:
+                latest = max(datetime.fromisoformat(dl).date() for dl in deadlines if dl)
+                if latest < today:
+                    continue  # 已逾期且无未来 deadline
+            except (ValueError, TypeError):
+                pass  # 日期格式错误，保留
+        valid_projects.append(p.get("name", ""))
+
+    if valid_projects:
+        parts.append(f"进行中项目：{', '.join(v for v in valid_projects if v)}")
+
+    # 过滤过期待决策
+    pending = d.get("pending_decisions", [])
+    valid_pending = []
+    for pd_ in pending:
+        dl = pd_.get("deadline", "")
+        if dl:
+            try:
+                from datetime import datetime
+                if datetime.fromisoformat(dl).date() < today:
+                    continue  # 已逾期
+            except (ValueError, TypeError):
+                pass
+        valid_pending.append(pd_.get("topic", ""))
+
+    if valid_pending:
+        parts.append(f"待决策事项：{len(valid_pending)} 项")
     if d.get("key_insights"):
         parts.append(f"关键洞察：{len(d['key_insights'])} 项")
     return "\n".join(parts)
