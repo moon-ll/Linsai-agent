@@ -142,7 +142,7 @@ LinSai-CoPilot/
 │   ├── llm_router.py          # 多模型路由：MiniMax API + Kimi CLI + Claude CLI，自动降级
 │   ├── usage_tracker.py       # Token 用量追踪：API精确统计 + CLI字符估算
 │   ├── skill_manager.py       # 技能系统：扫描、匹配、注入、配置
-│   ├── tool_engine.py         # 子代理调用：工具注册、安全白名单、解析-执行-回传
+│   ├── tool_engine.py         # 工具注册：file_read/write, calc, task_create, knowledge_query, run_command, hermes_chat
 │   ├── chat_archive.py        # 聊天记录归档浏览器
 │   ├── backup_manager.py      # 数据备份/恢复/清理
 │   ├── upgrade.py             # 安全升级标准流程
@@ -398,6 +398,12 @@ LinSai-CoPilot/
   - 学习管理器（日志/待审/统计）、策略设置面板、手动触发学习
 
 ### Phase 7：高级功能【⏳ 待开发】
+
+### Phase 8：工具协作者（v2.1.0）【✅ 已完成】
+- ✅ **run_command 工具**：执行 CLI 命令（hermes / claude / python / git），Claude Code 权限模型
+- ✅ **hermes_chat 工具**：调用 Hermes LinSai profile 进行深度对话
+- ✅ **人格软链接**：Hermes SOUL.md → `persona/lin-sai-persona.md`
+- ✅ **工具引擎接入**：copilot_engine.chat_loop 集成 call_llm_with_tools
 - 多设备会话同步
 - 语音/富文本交互（如有需求）
 - 性能优化与生态扩展

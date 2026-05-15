@@ -456,9 +456,12 @@ def chat_loop(session_id: str, mode: str = "co-working") -> None:
             ctx = build_context(session_id, user_input, mode)
             system_prompt = ctx.get("system_prompt", "")
             llm_messages = ctx.get("messages", [])
+            # 当前用户输入需要补入消息列表（build_context 只返回历史）
+            llm_messages.append({"role": "user", "content": user_input})
             if _log:
                 _log.info(f"LLM 调用: session={session_id}, mode={mode}, messages={len(llm_messages)}")
-            assistant_content, _usage, _provider = call_llm(system_prompt, llm_messages)
+            # 使用工具调用版本（Phase 0）
+            assistant_content, _usage, _provider, tool_log = call_llm_with_tools(system_prompt, llm_messages)
         except Exception as exc:
             if _log:
                 _log.error(f"LLM 调用失败: {exc}", exc_info=True)
@@ -474,6 +477,11 @@ def chat_loop(session_id: str, mode: str = "co-working") -> None:
             append_message(session_id, "assistant", assistant_content, mode)
         except Exception as exc:
             print(f"✗ 保存消息失败: {exc}")
+
+        # 显示工具调用反馈
+        if tool_log:
+            tool_names = [entry["name"] for entry in tool_log]
+            print(f"  🔧 调用了工具: {', '.join(tool_names)}")
 
         # 每轮对话后尝试更新记忆（静默执行，失败不影响对话）
         try:

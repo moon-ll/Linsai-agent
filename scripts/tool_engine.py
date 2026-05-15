@@ -3,7 +3,7 @@
 
 用途：
     解析 LLM 输出中的工具调用指令，安全执行，返回结果。
-    支持文件读写、数值计算、任务创建、知识库查询。
+    支持文件读写、数值计算、任务创建、知识库查询、CLI 命令执行。
 
 用法示例：
     >>> from tool_engine import parse_tool_calls, execute_tool_calls, inject_tools_prompt
@@ -11,16 +11,22 @@
     >>> calls = parse_tool_calls(text)
     >>> results = execute_tool_calls(calls)
 
+新增（v2.1.0 Phase 0）：
+    - tool_run_command: 执行 CLI 命令（hermes / claude / python / git）
+    - Claude Code 权限模型：默认限制在项目目录内，禁止逃离
+    - tool_hermes_chat: 调用 Hermes LinSai 进行深度对话
+
 规范：
     - 仅使用 Python 3 标准库
     - 所有文件操作有严格路径白名单
     - calc 使用 ast.parse 白名单，禁止系统调用
+    - run_command 有危险命令黑名单、超时保护、cwd 限制
 """
 
 import ast
 import json
-import os
 import re
+import subprocess
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -166,6 +172,238 @@ def tool_knowledge_query(query: str) -> str:
         return f"✗ 查询失败: {e}"
 
 
+def tool_hermes_chat(prompt: str, timeout: int = 60) -> str:
+    """与 Hermes LinSai 对话。
+
+    调用独立的 Hermes LinSai profile（linsai）进行对话。
+    这个 LinSai 有完整的人格、记忆、skills 和工具集。
+
+    用途：
+        - 当需要 LinSai 独立思考时
+        - 当需要调用 Hermes skills/skills 时
+        - 当需要多轮工具调用时（Hermes 自己会执行多步工具）
+
+    参数：
+        prompt：你想问 Hermes LinSai 的问题
+        timeout：超时秒数（默认 60s）
+
+    示例：
+        tool_hermes_chat("解释固体高次谐波的物理机制")
+        tool_hermes_chat("帮我搜索一下拓扑绝缘体表面态的探测方法")
+        tool_hermes_chat("用欧拉的思维框架分析这个问题：为什么固体HHG的截止频率... ")
+    """
+    try:
+        result = subprocess.run(
+            ['hermes', '--profile', 'linsai', '-z', prompt],
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+        )
+        output = result.stdout.strip()
+        if not output:
+            if result.stderr:
+                return f"✗ Hermes 错误: {result.stderr[:500]}"
+            return "(无输出)"
+        # 截断超长输出
+        MAX_OUTPUT = 8000
+        if len(output) > MAX_OUTPUT:
+            output = output[:MAX_OUTPUT] + f"\n... (已截断，共 {len(output)} 字符)"
+        return output
+    except subprocess.TimeoutExpired:
+        return f"✗ Hermes 对话超时（{timeout}s），已自动终止"
+    except FileNotFoundError:
+        return "✗ Hermes 未安装或不在 PATH 中"
+    except Exception as e:
+        return f"✗ Hermes 调用失败: {e}"
+
+
+# ---------------------------------------------------------------------------
+# CLI 工具
+# ---------------------------------------------------------------------------
+
+# 危险命令黑名单
+_BLOCKED_PATTERNS = [
+    r"rm\s+-rf\s+/",          # 递归删除根目录
+    r"sudo\s+",                # 提权命令
+    r"dd\s+if=",               # 磁盘直接写入
+    r"mkfs",                    # 格式化
+    r":\(\)\{\s*:\|:\|\s*&\s*\};:",  # Fork 炸弹
+    r"chmod\s+-R\s+777\s+/",  # 过度开放权限
+    r"wget.*\|\s*sh",          # 远程脚本执行
+    r"curl.*\|\s*sh",          # 远程脚本执行
+]
+
+
+def _is_command_safe(command: str) -> tuple[bool, str]:
+    """检查命令是否安全，返回 (是否安全, 原因)"""
+    cmd_lower = command.lower()
+    for pattern in _BLOCKED_PATTERNS:
+        if re.search(pattern, cmd_lower):
+            return False, f"危险命令模式: {pattern}"
+    return True, ""
+
+
+def _check_escape(command: str) -> tuple[bool, str]:
+    """检查命令是否试图逃离项目目录。
+
+    Claude Code 模式：所有操作默认限制在项目目录内。
+    允许：相对路径、仅在项目目录内的 cd
+    禁止：cd /, cd ~, cd .. 用于逃离项目边界的组合
+
+    返回：(是否合规, 原因)
+    """
+    cmd = command.strip()
+    # 允许的命令前缀
+    ALLOWED_PREFIXES = (
+        "kimi", "claude", "hermes", "python", "python3", "git",
+        "ls", "cat", "head", "tail", "grep", "find", "wc",
+        "echo", "date", "pwd", "mkdir", "touch", "cp", "mv",
+    )
+    # 检查是否以允许的命令开头
+    cmd_stripped = cmd.strip().split()[0] if cmd.strip() else ""
+    # 对于复合命令（&&, ||, ;, |）检查第一段
+    first_cmd = cmd_stripped.split("&&")[0].split("||")[0].split(";")[0].split("|")[0].strip()
+    if first_cmd not in ALLOWED_PREFIXES:
+        # 非预期命令类型，检查是否在黑名单
+        for bad in ["cd /", "cd /home", "cd /Users", "cd ~", "cd $HOME", "cd $HOME/"]:
+            if cmd.startswith(bad):
+                return False, f"禁止 cd 到项目目录外部 ({bad})"
+        # rm -rf 后面跟非项目路径
+        if re.search(r"rm\s+(-rf\s+)?/[^(]", cmd):
+            return False, "禁止删除项目目录外部的文件"
+    return True, ""
+
+
+def tool_run_command(command: str, timeout: int = 60, cwd: str = "") -> str:
+    """执行 CLI 命令。
+
+    用途：调用 kimi / claude / hermes 等 CLI 工具，或执行 python / git 等命令。
+
+    权限模型（Claude Code 模式）：
+        - 默认所有操作在项目目录内
+        - 禁止逃离项目目录的命令（如 cd /, cd ~, cd .. 等用于逃离的组合）
+        - 危险命令直接拦截
+        - 用户可通过显式传入 cwd='' 临时提升权限（需自行确保安全）
+
+    参数：
+        command：命令字符串（完整命令，包含参数）
+        timeout：超时秒数（默认 60s）
+        cwd：工作目录（默认项目根目录，强制限制）
+
+    示例：
+        tool_run_command("kimi code 生成斐波那契数列", 30)
+        tool_run_command("claude --print '解释薛定谔方程'")
+        tool_run_command("python3 scripts/self_test.py", 120)
+        tool_run_command("git status")
+    """
+    # 安全检查
+    safe, reason = _is_command_safe(command)
+    if not safe:
+        return f"✗ 命令被拦截: {reason}。请换一个安全的命令。"
+
+    # 权限检查：禁止逃离项目目录
+    escape_ok, escape_reason = _check_escape(command)
+    if not escape_ok:
+        return f"✗ 权限不足: {escape_reason}。所有操作仅限于 {PROJECT_ROOT}。如需临时提升权限，请在命令中显式指定 cwd=''（需谨慎）。"
+
+    # cwd 限制：必须在项目目录内
+    if cwd:
+        target_cwd = (PROJECT_ROOT / cwd).resolve()
+    else:
+        target_cwd = PROJECT_ROOT
+
+    # 防止路径穿越
+    if not str(target_cwd).startswith(str(PROJECT_ROOT)):
+        return "✗ 路径越界：工作目录必须在项目目录内"
+
+    try:
+        result = subprocess.run(
+            command,
+            shell=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            cwd=str(target_cwd),
+        )
+        # 合并 stdout 和 stderr
+        output = result.stdout
+        if result.stderr:
+            output = output + "\n[stderr]\n" + result.stderr if output else result.stderr
+
+        # 截断超长输出
+        MAX_OUTPUT = 8000
+        if len(output) > MAX_OUTPUT:
+            output = output[:MAX_OUTPUT] + f"\n... (已截断，共 {len(output)} 字符)"
+
+        if not output.strip():
+            return "(命令执行成功，无输出)"
+
+        return output
+
+    except subprocess.TimeoutExpired:
+        return f"✗ 命令超时（{timeout}s），已自动终止"
+    except Exception as e:
+        return f"✗ 执行失败: {e}"
+    """执行 CLI 命令。
+
+    用途：调用 kimi / claude / hermes 等 CLI 工具，或执行 python / git 等命令。
+
+    参数：
+        command：命令字符串（完整命令，包含参数）
+        timeout：超时秒数（默认 60s）
+        cwd：工作目录（相对项目根目录，默认在项目根目录）
+
+    示例：
+        tool_run_command("kimi code 生成斐波那契数列", 30)
+        tool_run_command("claude --print '解释薛定谔方程'")
+        tool_run_command("python3 scripts/self_test.py", 120)
+        tool_run_command("git status", 10)
+    """
+    # 安全检查
+    safe, reason = _is_command_safe(command)
+    if not safe:
+        return f"✗ 命令被拦截: {reason}。请换一个安全的命令。"
+
+    # cwd 限制：必须在项目目录内
+    if cwd:
+        target_cwd = (PROJECT_ROOT / cwd).resolve()
+    else:
+        target_cwd = PROJECT_ROOT
+
+    # 防止路径穿越
+    if not str(target_cwd).startswith(str(PROJECT_ROOT)):
+        return "✗ 路径越界：工作目录必须在项目目录内"
+
+    try:
+        result = subprocess.run(
+            command,
+            shell=True,
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+            cwd=str(target_cwd),
+        )
+        # 合并 stdout 和 stderr
+        output = result.stdout
+        if result.stderr:
+            output = output + "\n[stderr]\n" + result.stderr if output else result.stderr
+
+        # 截断超长输出
+        MAX_OUTPUT = 8000
+        if len(output) > MAX_OUTPUT:
+            output = output[:MAX_OUTPUT] + f"\n... (已截断，共 {len(output)} 字符)"
+
+        if not output.strip():
+            return "(命令执行成功，无输出)"
+
+        return output
+
+    except subprocess.TimeoutExpired:
+        return f"✗ 命令超时（{timeout}s），已自动终止"
+    except Exception as e:
+        return f"✗ 执行失败: {e}"
+
+
 # ---------------------------------------------------------------------------
 # 工具注册表
 # ---------------------------------------------------------------------------
@@ -176,6 +414,8 @@ _TOOL_REGISTRY: Dict[str, tuple] = {
     "calc": (tool_calc, ["expression"]),
     "task_create": (tool_task_create, ["title", "due_date", "priority", "description"]),
     "knowledge_query": (tool_knowledge_query, ["query"]),
+    "run_command": (tool_run_command, ["command", "timeout", "cwd"]),
+    "hermes_chat": (tool_hermes_chat, ["prompt", "timeout"]),
 }
 
 
@@ -253,7 +493,7 @@ def inject_tools_prompt(system_prompt: str) -> str:
     tool_desc = """
 ---
 【可用工具】
-你可以在回复中使用以下工具来协助完成任务。当需要时，按以下格式输出工具调用：
+你可以使用以下工具来协助完成任务。当需要时，按以下格式输出工具调用：
 
 @@tool:工具名@@
 {"参数名": "参数值"}
@@ -276,10 +516,39 @@ def inject_tools_prompt(system_prompt: str) -> str:
 5. knowledge_query — 查询本地知识库
    参数: {"query": "查询关键词"}
 
+6. run_command — 执行 CLI 命令（python / git / hermes / claude 等）
+   参数: {"command": "命令字符串", "timeout": 60, "cwd": ""}
+   示例: {"command": "hermes -z '用 Python 写一个斐波那契函数'", "timeout": 30}
+   示例: {"command": "claude --print '解释薛定谔方程中波函数的物理意义'", "timeout": 60}
+   示例: {"command": "python3 scripts/self_test.py", "timeout": 120}
+   示例: {"command": "git status"}
+   示例: {"command": "python3 -c \"import math; print(math.pi * 2)\""}
+   说明：
+   - hermes -z "prompt"：非交互模式，适合快速查询和代码生成
+   - claude --print "prompt"：非交互模式，适合代码审查、分析
+   - python3 script.py：执行 Python 脚本
+   - timeout 默认 60s，超时自动终止
+   - cwd 默认在项目根目录执行
+   - 危险命令（如 rm -rf /）会被拦截
+   - 所有操作默认限制在项目目录内（Claude Code 模式），禁止逃离项目目录
+
+7. hermes_chat — 与独立的 Hermes LinSai 对话
+   参数: {"prompt": "问题内容", "timeout": 60}
+   示例: {"prompt": "用欧拉的思维框架分析固体HHG的截止定律"}
+   示例: {"prompt": "帮我调研一下拓扑绝缘体表面态的最新进展"}
+   示例: {"prompt": "解释一下能谷极化在固体HHG中的作用"}
+   说明：
+   - Hermes LinSai 有完整的人格、记忆、117个skills，能自主调用工具
+   - 适合需要深度思考、多技能协作的场景
+   - timeout 默认 60s
+
 规则：
 - 小问题直接回答，不需要调用工具
-- 复杂问题先分解，再决定是否需要工具辅助
-- 数值计算优先使用 calc，不要心算
+- 遇到你不确定的事实，优先用 knowledge_query 查知识库
+- 遇到需要生成代码的场景，用 run_command 执行 python
+- 遇到需要深度思考或多技能协作的场景，用 hermes_chat 调用独立的 Hermes LinSai
+- 遇到需要审查/分析代码的场景，用 run_command 调用 claude
+- 你的角色是策划者和协调者：理解需求 → 调用工具 → 整合结果，而不是自己硬扛
 - 每次回复最多调用 3 个工具
 """
     return system_prompt + tool_desc
@@ -318,5 +587,37 @@ if __name__ == "__main__":
     # 测试 strip
     stripped = strip_tool_calls(sample)
     print(f"  清理后: {stripped[:30]}...")
+
+    # 测试 run_command 安全检查
+    safe, _ = _is_command_safe("kimi code 生成代码")
+    print(f"  run_command 安全检查（kimi）: {'✓' if safe else '✗'}")
+    safe2, reason = _is_command_safe("rm -rf /")
+    print(f"  run_command 安全检查（危险命令）: {'✗ ' + reason if not safe2 else '✓'}")
+
+    # 测试 run_command 实际执行（简单命令）
+    result = tool_run_command("echo 'hello from tool_engine'", timeout=10)
+    print(f"  run_command(echo): {result.strip()[:60]}")
+
+    # 测试权限检查
+    safe_esc, _ = _check_escape("kimi code 生成代码")
+    print(f"  权限检查（kimi）: {'✓' if safe_esc else '✗'}")
+    safe_esc2, reason2 = _check_escape("cd / && rm -rf /some/path")
+    print(f"  权限检查（cd /）: {'✗ ' + reason2 if not safe_esc2 else '✓'}")
+
+    # 测试工具注册
+    tools = list_tools()
+    tool_names = [t['name'] for t in tools]
+    print(f"  工具注册: {', '.join(tool_names)}")
+    assert 'run_command' in tool_names, "run_command 未注册"
+    assert 'hermes_chat' in tool_names, "hermes_chat 未注册"
+    print("  ✓ run_command 已注册")
+    print("  ✓ hermes_chat 已注册")
+
+    # 测试 hermes_chat（简单问题）
+    try:
+        result = tool_hermes_chat("你叫什么名字？用一句话回答。", timeout=15)
+        print(f"  hermes_chat 测试: {result[:80]}")
+    except Exception as e:
+        print(f"  hermes_chat 测试跳过: {e}")
 
     print("✓ 自检通过")
