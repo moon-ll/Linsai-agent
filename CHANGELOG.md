@@ -58,6 +58,41 @@
 
 ---
 
+## v2.1.0 - 2026-05-15 工具协作者 + 知识库三工作流
+
+### Phase 0 — 工具协作者（v2.1.0）
+- `scripts/tool_engine.py` — 新增 `tool_run_command()` + `tool_hermes_chat()`
+  - run_command: subprocess 调用 CLI（kimi/claude/hermes/python/git），cwd 限制 + 危险命令黑名单
+  - hermes_chat: 调用 `hermes --profile linsai -z`，获得 LinSai 完整人格 + 记忆的深度回答
+  - 权限模型：禁止逃离项目目录的命令组合
+
+### Phase 1 — 子代理工具（v2.1.0）
+- `scripts/tool_engine.py` — 新增 `tool_agent()`，通过 `claude --agent explore/coder/plan` 调用子代理
+- 8 个工具完整注册：calc / file_read / file_write / task_create / knowledge_query / run_command / hermes_chat / agent
+
+### Phase 2 — 记忆加载自动化（v2.1.0）
+- `scripts/context_builder.py` — `_read_lt_mem()` 返回实际内容（最近 10 条），`_read_work_ctx()` 过滤已逾期项目
+
+### 知识库三工作流（v2.1.0）
+- `tool_knowledge_research` — 工作流1-自动增加：Hermes调研 → 编译 → 写入wiki → 建双向链接
+- `tool_knowledge_ingest` — 工作流2-手动增加：编译raw文件夹 → 建立双向链接 → 健康检查
+- `tool_knowledge_create` — 工作流3-对话生长：创建概念存根 → 记录上下文
+- 外部导入规范：raw/ 三级分类（papers/notes/webclips），林赛负责所有后续编译管理
+
+### 斜杠命令系统（v2.1.0）
+- `scripts/slash_commands.py` — 统一命令入口（719行）
+  - 解析器支持 `/research` 和 `/research:topic:depth` 两种格式
+  - 44 个思维视角动态加载（~/.claude/skills/）
+  - `/skill:<name>` 激活视角，session state 注入 prompt
+  - `/research` / `/ingest` / `/check` / `/session` / `/mode` / `/read` / `/help` / `/list`
+- `scripts/copilot_engine.py` — chat_loop 统一拦截 `/` 前缀
+
+### 修复
+- `knowledge_base.py` — `_load_graph()` 处理 graph.json 为空对象 `{}` 的情况
+- `.gitignore` — 补充 `knowledge/captures`
+
+---
+
 ## v1.7.3 - 2026-05-12 Obsidian 前端兼容性改造
 
 ### 新增（Obsidian 兼容）
