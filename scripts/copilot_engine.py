@@ -32,6 +32,13 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional, Tuple
 
+# 斜杠命令系统
+try:
+    from slash_commands import slash_dispatch, inject_active_skill_prompt
+except ImportError:
+    slash_dispatch = None
+    inject_active_skill_prompt = lambda p, s: p
+
 # 统一日志
 try:
     from logger import get_logger, setup_logging
@@ -337,70 +344,32 @@ def chat_loop(session_id: str, mode: str = "co-working") -> None:
             print("✓ 会话已自动保存（无需手动操作）")
             continue
 
-        if user_input == "/help":
-            print("  /exit, /quit — 退出会话")
-            print("  /save        — 手动保存提示（已自动保存）")
-            print("  /mode <mode> — 切换交互模式")
-            print("  /summary     — 显示会话摘要")
-            print("  /read <文件>  — 读取并显示文档/代码内容")
-            print("  /agora <人物> — 导出当前上下文到Agora群聊")
-            print("  /help        — 显示此帮助")
-            continue
-
-        if user_input == "/summary":
-            try:
-                msgs, st = load_session(session_id)
-                duration = "未知"
+        # 斜杠命令系统（统一拦截所有 / 开头的输入）
+        if slash_dispatch is not None and user_input.startswith("/"):
+            # /summary 在 chat_loop 内处理（需要 load_session）
+            if user_input == "/summary":
                 try:
-                    started = datetime.fromisoformat(
-                        st.get("started_at", "").replace("Z", "+00:00")
-                    )
-                    now = datetime.now(timezone.utc)
-                    delta = now - started
-                    duration = f"{int(delta.total_seconds() // 60)} 分钟"
-                except Exception:
-                    pass
-                print(f"  主题: {st.get('topic', '')}")
-                print(f"  模式: {st.get('mode', '')}")
-                print(f"  消息数: {len(msgs)}")
-                print(f"  已进行: {duration}")
-            except Exception as exc:
-                print(f"✗ 获取摘要失败: {exc}")
-            continue
-
-        if user_input.startswith("/mode "):
-            new_mode = user_input[6:].strip()
-            if new_mode:
-                mode = new_mode
-                try:
-                    state_path = _PROJECT_ROOT / "sessions" / session_id / "state.json"
-                    if state_path.exists():
-                        st = json.loads(state_path.read_text(encoding="utf-8"))
-                        st["mode"] = mode
-                        state_path.write_text(
-                            json.dumps(st, ensure_ascii=False, indent=2) + "\n",
-                            encoding="utf-8",
+                    msgs, st = load_session(session_id)
+                    duration = "未知"
+                    try:
+                        started = datetime.fromisoformat(
+                            st.get("started_at", "").replace("Z", "+00:00")
                         )
+                        delta = datetime.now(timezone.utc) - started
+                        duration = f"{int(delta.total_seconds() // 60)} 分钟"
+                    except Exception:
+                        pass
+                    print(f"  主题: {st.get('topic', '')}")
+                    print(f"  模式: {st.get('mode', '')}")
+                    print(f"  消息数: {len(msgs)}")
+                    print(f"  已进行: {duration}")
                 except Exception as exc:
-                    print(f"⚠ 更新模式失败: {exc}")
-                print(f"✓ 模式已切换为: {mode}")
-            continue
+                    print(f"✗ 获取摘要失败: {exc}")
+                continue
 
-        if user_input.startswith("/read "):
-            file_path = user_input[6:].strip()
-            try:
-                import importlib.util
-                dh_path = _PROJECT_ROOT / "scripts" / "document_handler.py"
-                if dh_path.exists():
-                    spec = importlib.util.spec_from_file_location("document_handler", dh_path)
-                    dh = importlib.util.module_from_spec(spec)
-                    spec.loader.exec_module(dh)
-                    content = dh.read_document(file_path)
-                    print(f"\n◐ 文档内容（前1000字符）:\n{content[:1000]}\n")
-                else:
-                    print("✗ document_handler 模块不可用")
-            except Exception as exc:
-                print(f"✗ 读取文档失败: {exc}")
+            result = slash_dispatch(user_input, session_id)
+            if result is not None:
+                print(result)
             continue
 
         if user_input.startswith("/agora "):
@@ -455,6 +424,9 @@ def chat_loop(session_id: str, mode: str = "co-working") -> None:
         try:
             ctx = build_context(session_id, user_input, mode)
             system_prompt = ctx.get("system_prompt", "")
+            # 注入激活的思维视角（来自 /skill:xxx 命令）
+            if inject_active_skill_prompt is not None:
+                system_prompt = inject_active_skill_prompt(system_prompt, session_id)
             llm_messages = ctx.get("messages", [])
             # 当前用户输入需要补入消息列表（build_context 只返回历史）
             llm_messages.append({"role": "user", "content": user_input})
