@@ -144,24 +144,38 @@ def _build_config() -> Dict[str, Any]:
                 "type": "api",
                 "base_url": env_vars.get("MINIMAX_BASE_URL", "https://api.minimaxi.com/v1"),
                 "api_key": env_vars["MINIMAX_API_KEY"],
-                "model": env_vars.get("MINIMAX_MODEL", "MiniMax-M2.7"),
+                "model": env_vars.get("MINIMAX_MODEL", "MiniMax-M3"),
                 "priority": 1,
+            })
+        # MiniMax 降级模型（M2.7 等），与主力共用同一 API Key / base_url
+        fallback_model = env_vars.get("MINIMAX_FALLBACK_MODEL")
+        has_fallback = any(p.get("name") == "minimax-fallback" for p in config["providers"])
+        if fallback_model and not has_fallback:
+            config["providers"].append({
+                "name": "minimax-fallback",
+                "type": "api",
+                "base_url": env_vars.get("MINIMAX_BASE_URL", "https://api.minimaxi.com/v1"),
+                "api_key": env_vars["MINIMAX_API_KEY"],
+                "model": fallback_model,
+                "priority": 2,
             })
 
     # 4. 如果环境变量中有其他 OpenAI 兼容配置，自动添加
-    for prefix in ["OPENAI", "DEEPSEEK", "GROQ", "AZURE"]:
+    # GLM 默认 priority=3（备选，排在 kimi/minimax/claude 之后）
+    for prefix in ["OPENAI", "DEEPSEEK", "GROQ", "AZURE", "GLM"]:
         key = env_vars.get(f"{prefix}_API_KEY")
         if key:
             name = prefix.lower()
             has_it = any(p.get("name") == name for p in config["providers"])
             if not has_it:
+                default_prio = "3" if prefix == "GLM" else "2"
                 config["providers"].append({
                     "name": name,
                     "type": "api",
                     "base_url": env_vars.get(f"{prefix}_BASE_URL", ""),
                     "api_key": key,
                     "model": env_vars.get(f"{prefix}_MODEL", ""),
-                    "priority": env_vars.get(f"{prefix}_PRIORITY", "2"),
+                    "priority": env_vars.get(f"{prefix}_PRIORITY", default_prio),
                 })
 
     # 5. 自动检测本地 CLI（始终执行，与 API provider 无关）
