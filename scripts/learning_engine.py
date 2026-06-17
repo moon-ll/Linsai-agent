@@ -978,10 +978,9 @@ related: ["阿秒科学", "强场物理"]
     assert "1234.56789" in arxiv_prompt
     assert "auto_grown: true" in arxiv_prompt
 
-    wiki_prompt = _build_wikipedia_distill_prompt({
+    wiki_prompt = _build_web_search_distill_prompt({
         "title": "Attosecond",
-        "extract": "An attosecond is a very short time.",
-        "description": "Unit of time",
+        "snippet": "An attosecond is a very short time.",
         "url": "https://en.wikipedia.org/wiki/Attosecond"
     })
     assert "Attosecond" in wiki_prompt

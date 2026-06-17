@@ -345,7 +345,7 @@ def update_if_stale(max_age_days: int = 7) -> Optional[Dict[str, Any]]:
     # 如果方向漂移 > 20%，记录到生长日志
     if drift > 0.2:
         try:
-            kb = _import_kb()
+            import knowledge_base as kb
             kb.log_growth("profile_update", "research-profile", "auto",
                           f"研究方向漂移 {drift:.0%}，新增: {', '.join(list(added)[:3])}")
         except Exception:

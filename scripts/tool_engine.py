@@ -706,64 +706,6 @@ def tool_run_command(command: str, timeout: int = 60, cwd: str = "") -> str:
         return f"✗ 命令超时（{timeout}s），已自动终止"
     except Exception as e:
         return f"✗ 执行失败: {e}"
-    """执行 CLI 命令。
-
-    用途：调用 kimi / claude / hermes 等 CLI 工具，或执行 python / git 等命令。
-
-    参数：
-        command：命令字符串（完整命令，包含参数）
-        timeout：超时秒数（默认 60s）
-        cwd：工作目录（相对项目根目录，默认在项目根目录）
-
-    示例：
-        tool_run_command("kimi code 生成斐波那契数列", 30)
-        tool_run_command("claude --print '解释薛定谔方程'")
-        tool_run_command("python3 scripts/self_test.py", 120)
-        tool_run_command("git status", 10)
-    """
-    # 安全检查
-    safe, reason = _is_command_safe(command)
-    if not safe:
-        return f"✗ 命令被拦截: {reason}。请换一个安全的命令。"
-
-    # cwd 限制：必须在项目目录内
-    if cwd:
-        target_cwd = (PROJECT_ROOT / cwd).resolve()
-    else:
-        target_cwd = PROJECT_ROOT
-
-    # 防止路径穿越
-    if not str(target_cwd).startswith(str(PROJECT_ROOT)):
-        return "✗ 路径越界：工作目录必须在项目目录内"
-
-    try:
-        result = subprocess.run(
-            command,
-            shell=True,
-            capture_output=True,
-            text=True,
-            timeout=timeout,
-            cwd=str(target_cwd),
-        )
-        # 合并 stdout 和 stderr
-        output = result.stdout
-        if result.stderr:
-            output = output + "\n[stderr]\n" + result.stderr if output else result.stderr
-
-        # 截断超长输出
-        MAX_OUTPUT = 8000
-        if len(output) > MAX_OUTPUT:
-            output = output[:MAX_OUTPUT] + f"\n... (已截断，共 {len(output)} 字符)"
-
-        if not output.strip():
-            return "(命令执行成功，无输出)"
-
-        return output
-
-    except subprocess.TimeoutExpired:
-        return f"✗ 命令超时（{timeout}s），已自动终止"
-    except Exception as e:
-        return f"✗ 执行失败: {e}"
 
 
 # ---------------------------------------------------------------------------

@@ -1,5 +1,27 @@
 # 变更记录
 
+## v2.6.2 - 2026-06-17 代码瑕疵修复 + 知识库索引重建 + 会话摘要链路接通
+
+### 修复 3 处代码瑕疵
+- `tool_engine.py`：删除 `tool_run_command` 的死代码（return/except 后重复的整段函数体 L709-766，永不执行）
+- `learning_engine.py`：自检 `[4/5]` 调用未定义的 `_build_wikipedia_distill_prompt` → 改用运行时实际使用的 `_build_web_search_distill_prompt`（之前手动自检会 NameError）
+- `research_profiler.py`：漂移分支调用未定义的 `_import_kb()` → 改用 `import knowledge_base as kb`（之前被 try/except 静默吞掉，导致生长日志少记）
+
+### 重建知识库索引（修复严重脱节）
+- `knowledge/index.json`：死链 74 → **0**（74 条引用不存在文件的陈旧索引已清除），doc_count 8 → 739，built_at 更新至今日
+- `knowledge/graph.json` + `index.json` 的 `graph_summary`：**完全同步**（节点 32 / 边 16，之前 index 缓存的 summary 停在 2 节点/3 边）
+- 清理 17 个指向不存在论文的孤儿图谱节点
+- 检索功能恢复可信：`search("三步模型")` → principles-report score=0.44（TF-IDF 真实打分）
+
+### 接通会话摘要链路（CoPilot 记忆能力起点）
+- `session_manager.archive_session()`：归档时自动调用 `memory_manager.generate_session_summary()`，替代创建时的占位符 `"> 会话摘要预留位置"`
+- 摘要生成失败不阻塞归档（降级保留占位）
+- 端到端验证通过：创建→加消息→归档→摘要含真实内容 + 长期记忆索引同步更新
+
+### 验证
+- `py_compile` 全量通过 + `self_test` 88/88 全绿
+- `learning_engine` 自检 5/5 通过（之前 [4/5] NameError）
+
 ## v2.6.1 - 2026-06-17 项目健康度清理：补回幽灵脚本 + 恢复 Web + 修包 import
 
 ### 补回缺失脚本（被 4d3969e 误删或从未实现）

@@ -291,6 +291,21 @@ def archive_session(session_id: str) -> bool:
         return False
 
     try:
+        # 归档前生成会话摘要（替代创建时的占位符）
+        # 若已有真实摘要（非占位），则跳过
+        summary_path = src / "summary.md"
+        is_placeholder = False
+        if summary_path.exists():
+            content = summary_path.read_text(encoding="utf-8")
+            is_placeholder = "会话摘要预留位置" in content
+        if is_placeholder:
+            try:
+                from memory_manager import generate_session_summary
+                generate_session_summary(session_id)
+                print(f"  ✓ 会话摘要已生成（替代占位符）")
+            except Exception as exc:  # noqa: BLE001
+                print(f"  ⚠ 摘要生成失败（不阻塞归档）: {exc}")
+
         src.rename(dst)
         # 更新 state.json 中的 status
         state_path = dst / "state.json"
