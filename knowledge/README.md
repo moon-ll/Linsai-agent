@@ -8,6 +8,7 @@
 knowledge/
 ├── raw/                    # 原始材料（只读）
 │   ├── papers/             # 论文 PDF/笔记
+│   │   └── [arXiv ID].md  # 61 篇 HHG 相关论文（2026-05-19 更新）
 │   ├── notes/              # 用户手写笔记
 │   └── webclips/           # 网页剪藏
 ├── wiki/                   # 结构化知识（LLM 智能管理）
@@ -22,6 +23,24 @@ knowledge/
 ├── aliases.json            # 别名映射
 └── growth-log.json         # 知识生长日志
 ```
+
+## 调研报告
+
+| 文件 | 内容 | 规模 |
+|------|------|------|
+| `docs/solid-HHG-theory-methods-survey.md` | 固体 HHG 理论模型与数值方法调研（按理论模型分类）| **23.5 KB / 579 行** |
+| `docs/solid-HHG-by-material-system.md` | 凝聚态 HHG 计算方法调研（按材料体系分类，v3）【9 大体系，31 KB / 831 行，全文原文提取】| **31 KB / 831 行** |
+| `docs/solid-HHG-computation-by-material.md` | 固体 HHG 计算与分析方法调研（按理论模型分类，v2）| **28.7 KB / 850 行** |
+
+### 当前调研覆盖的理论方向
+
+- **A**：SBE（半导体布洛赫方程）—— 结构规范、激光规范、退相干、Wannier 规范
+- **B**：Berry 曲率与谷电子学—— MoS₂、MoSe₂、WSe₂、WS₂ 单层/双层
+- **C**：MLWF（最大局域 Wannier 函数）形式
+- **D**：量子光学—— Fermi-Hubbard 模型、非经典光、压缩态
+- **E**：相位匹配—— 软/硬 X 射线扩展（Popmintchev 2024）
+- **F**：隧穿时间—— attoclock、TCCSFA、24–58 as
+- **G**：模型对比（三步→四步→五步→SFQED）
 
 ## 在 Obsidian 中使用
 

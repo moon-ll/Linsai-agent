@@ -108,8 +108,10 @@ class ScenarioTests(TestSuite):
     # 场景4：任务驱动 — DFG 申请截止提醒
     # ------------------------------------------------------------------
     def _scenario_task_driven(self):
-        # 创建带截止日期的任务
-        due = "2026-05-20T23:59:00Z"
+        # 创建带截止日期的任务（动态计算未来日期，避免测试随时间推移失效）
+        from datetime import datetime, timedelta, timezone
+        due_dt = datetime.now(timezone.utc) + timedelta(days=30)
+        due = due_dt.strftime("%Y-%m-%dT23:59:00Z")
         task_id, task_path = self.tm.create_task("DFG申请提交", priority="high", category="admin", due_date=due)
         tid = task_id
 

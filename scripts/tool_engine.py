@@ -11,7 +11,7 @@
     >>> calls = parse_tool_calls(text)
     >>> results = execute_tool_calls(calls)
 
-新增（v2.1.0 Phase 0）：
+新增（Phase 8 工具协作者，v2.1.0 引入，当前见 VERSION 文件）：
     - tool_run_command: 执行 CLI 命令（hermes / claude / python / git）
     - Claude Code 权限模型：默认限制在项目目录内，禁止逃离
     - tool_hermes_chat: 调用 Hermes LinSai 进行深度对话

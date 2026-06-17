@@ -1,5 +1,247 @@
 # 变更记录
 
+## v2.6.1 - 2026-06-17 项目健康度清理：补回幽灵脚本 + 恢复 Web + 修包 import
+
+### 补回缺失脚本（被 4d3969e 误删或从未实现）
+- **新增 `scripts/version.py`**：集中读取 VERSION 文件，提供 `get_version()` / `__version__` / `parse_version()` / `is_newer()`，消除三处人工版本号同步点
+- **补回 `scripts/backup_manager.py`**：数据备份/恢复（zip 打包 + `auto_backup()` 24h 跳过 + `--list/--restore/--only` + 恢复前应急备份），修复 `copilot_engine.py` 的 `from backup_manager import auto_backup` 静默失效
+- **补回 `scripts/upgrade.py`**：安全升级流程（备份→语法验证→迁移→自测→可回滚），支持 `--check/--simulate/--self-check`，修复 README/AGENTS 的 SOP 命令照抄报错
+- **从 git 历史（30b12d7）恢复** 4d3969e 误删的脚本：
+  - `scripts/web_server.py`（1165 行）+ `web/` 前端三件套（index.html/css/js，4533 行）—— Web 界面能力恢复
+  - `scripts/deep_audit.py`（622 行）：9 维度架构稳定性审查
+  - `scripts/learning_quality_tracker.py`（501 行）：交互质量追踪
+  - `scripts/test_e2e_learning.py` / `test_e2e_learning_full.py`（共 578 行）：端到端测试
+
+### 修复包 import 模式（可被作为 Python 包 import）
+- `scripts/deepxiv_knowledge/{paper_writer,pdf_enricher,run}.py`：绝对 import → `try/except` 双模式（包模式优先，脚本模式回退），修复 `import deepxiv_knowledge` 崩溃
+- `scripts/wiki_regenerator/{report_writer,run}.py`：同上处理
+
+### 文档与版本号同步
+- **版本号统一到 2.6.0**：`VERSION`（2.1.0→2.6.0）、`README.md`（2.0.0→2.6.0）、`AGENTS.md`（2.0.0→2.6.0）、`scripts/README.md`（2.2.0→2.6.0）
+- **修文档失实**：
+  - `README.md` / `AGENTS.md` 目录树按磁盘真实情况重写（补 slash_commands/version/deepxiv_knowledge/wiki_regenerator，删不存在的 upgrade_wiki_for_obsidian）
+  - `docs/README.md`：取消 v2.1.0 计划"当前有效"声明（改为"已实现，归档"），补齐 4 份 HHG 调研报告清单
+  - `scripts/README.md`：脚本统计口径更新（23 主脚本 + 两个流水线包）
+- **修代码注释**：`tool_engine.py:14` 残留的 `v2.1.0 Phase 0` 注释修正
+
+### 第一代草稿脚本清理（v2.6.0 已由第二代流水线取代）
+- 删除 6 个第一代 HHG 脚本：`hhg_paper_fetcher.py` / `fetch_hhg_new_papers.py` / `ss_search_hhg.py` / `extend_papers.py`（含语法错误 + 编造数据）/ `hhg_batch_writer.py` / `update_graph.py`
+
+### 验证
+- `py_compile` 全量通过（含恢复的 web_server/deep_audit 等 + 两个子包）
+- `import deepxiv_knowledge` / `import wiki_regenerator.paper_reader` 包模式 import 成功
+- `backup_manager --self-check` / `upgrade --self-check` / `version` 自检通过
+
+## v2.6.0 - 2026-05-22 方法完备性评估（按方法逐一要素级审查）
+
+### 完备性评估集成
+- 替换通用检查清单（第 785-796 行）为 **12 个方法的逐一要素级完备性评估**（来自 `solid-HHG-completeness-by-method.md`）
+- 每个方法含：动力学方程、观测量计算、近似、参数 → ✅/❌ 状态 + 原文内容 + 复现障碍说明
+- 关键缺失项（影响复现）：
+  - 双层石墨烯 SBE：k 点网格密度、时间步长
+  - Na₃Bi TDDFT：时间步长
+  - Cd₃As₂ Boltzmann：数值积分格式、动量采样密度
+  - Rashba SOC TDSE：系统格点数、时间步长
+  - 莫特 Hubbard DMFT：DMFT solver 类型、晶格大小
+  - YBCO 准 Hubbard：基态求解格式、EOM 积分格式、U_eff
+  - 扭转 h-BN：χ 系数（唯象理论，无从头算参数）
+- 新增 **完备性总表**（第 980-995 行）：12 方法 × 4 要素矩阵
+
+### 文件变更
+- `docs/solid-HHG-by-material-system.md`：831 → 1029 行（+198 行）
+
+## v2.5.0 - 2026-05-21 凝聚态 HHG 计算方法调研（按材料体系分类，v3，全文原文提取）
+
+### 调研报告重建（v3）
+
+- `docs/solid-HHG-by-material-system.md`（**31 KB，831 行**）：按材料体系分类的凝聚态 HHG 计算与分析方法调研
+- **全面联网检索**（arXiv API）确认凝聚态 HHG 已覆盖的 9 个材料体系类别
+- **全部内容严格来自已获取论文原文**，无任何生成内容，每节末尾标注来源 arXiv ID
+
+### 调研覆盖的 9 个材料体系
+
+**体系一：宽禁带介电体/绝缘体**
+- `1807.02961` — Le Breton et al. (2018)：h-BN，Octopus TDDFT，Δx=0.28 Bohr，k: 32²–54³
+- `1607.00747` — Otobe (2016)：α-石英，mBJ，Δt=0.02 a.u.，HH19(30 eV)
+- `2508.15076` — Kuzkova et al. (2025)：MgO，XUV 干涉偶极子相位测量，三层次 SBE/Wannier
+
+**体系二：传统半导体**
+- `1805.10453` — Klemke et al. (2018)：Si，TDDFT，偏振分辨，HH5 纯带内，HH7 耦合，HH9 主要带内
+- `2004.04492` — (2020)：GaAs，Luttinger-Kohn 模型，非扰动 HHG
+
+**体系三：2D 材料**
+- `2011.12252` — (2020)：石墨烯，SBE 紧束缚，t₀=2.7 eV，t⊥=0.48 eV，双层石墨烯
+- `2111.10986` — Lee et al. (2021)：MoS₂，Berry 曲率公式，伪自旋谷选择定则
+- `1807.02961` — 单层 h-BN 原子样 HHG，E_c = E_w + 3.17U_p
+
+**体系四：拓扑材料**
+- `1806.11232` — Silva et al. (2018)：Haldane 模型，Chern 数控制谐波螺旋度
+- `2103.09322` — Tancogne-Dejean et al. (2021)：Na₃Bi，Octopus SOC TDDFT，Δr=0.36 Bohr
+- `2405.16125` — Zhang et al. (2024)：TaAs，Jones 矩阵形式，晶体对称性 vs 拓扑
+- `1911.01476` — Kovalev et al. (2019)：Cd₃As₂，Boltzmann 输运，τ=10 fs，THz HHG
+
+**体系五：扭转/双层材料**
+- `2503.08052` — Ma et al. (2025)：扭转 h-BN，相位匹配，效率 ~1.5×10⁻⁵
+- `2011.12252` — AA/AB 堆垛双层石墨烯（已在上方体系三中）
+
+**体系六：磁性/SOC 材料**
+- `1906.10224` — Mrudul S. et al. (2019)：自旋极化缺陷，TDDFT
+- `2104.04001` — Ly & Manchon (2021)：Rashba SOC，紧束缚 TDSE，谐振条件 α_R k_F/J ≈ 1
+
+**体系七：关联电子材料**
+- `2203.01029` — Murakami et al. (2022)：莫特绝缘体，DMFT + Hubbard，U
+- `2409.04216` — Tyulnev et al. (2024)：TiSe₂ CDW，HH5 异常各向异性，Tc=205 K
+- `2201.09515` — Alcalà et al. (2022)：YBCO，两带准 Hubbard + BCS，Tc=88 K，T*=173 K
+
+**体系八：手性 HHG**
+- `2306.02313` — (2023)：石墨烯，ω+2ω co-rotating，产生同螺旋度圆谐波
+
+**体系九：气体相位匹配**
+- `2404.01325` — Popmintchev et al. (2024)：Δk 方程，η_CR ∝ λ_L⁻²，He ~330 eV（水窗）
+
+### 方法论改进
+
+- 增加体系分类（9 大类）而非理论模型分类
+- 每个体系均包含计算方法、软件、关键参数（数值）
+- 增加跨体系方法对比树：拿到一个材料 → 确定体系 → 选择方法
+- 增加方法完备性检查清单（k 点、网格、时间步长、带数、CAP、SOC、关联）
+
+## v2.4.0 - 2026-05-19 固体 HHG 计算方法调研（按材料体系分类，v2）
+
+### 调研报告重建（v2）
+
+- `docs/solid-HHG-computation-by-material.md` → **完全重写**（28.7 KB，850 行）
+- **全部内容严格来自已获取论文原文**，无任何生成内容
+- 每节末尾标注来源 arXiv ID
+
+### 本次重新获取的论文（共 8 篇）
+
+**体系一：h-BN**
+- `1807.02961` — Le Breton, Rubio, Tancogne-Dejean (2018)：Octopus TDDFT 参数（Δx=0.28 Bohr，k: 32²–54³），激光 1600 nm，面内/层方向 HHG，带隙 4.50–4.87 eV
+
+**体系二：α-石英**
+- `1607.00747` — Otobe (2016)：实时 TDDFT，mBJ 交换势，网格 26×44×38，k: 8³，Δt=0.02 a.u.，HH19（30 eV），主导机制：电子-空穴复合
+
+**体系三：Si / 石英偏振分辨**
+- `1805.10453` — Klemke, Tancogne-Dejean et al. (2018)：实验参数（Si: 2 μm，(100)，2.1 μm，120 fs，0.6 TW/cm²；石英: 50 μm，z-cut，40 TW/cm²），HH5 纯带内，HH7 耦合，HH9 主要带内
+
+**体系四：拓扑材料**
+- `1806.11232` — Silva, Jiménez-Galán, Smirnova, Ivanov (2018)：Haldane 模型参数，Chern 数 ν 控制谐波螺旋度，λ=3 μm，E₀=4×10⁹ V/m
+
+**体系五：2D 材料与谷电子学**
+- `2203.10253` — Luu (2022)：SBE vs TDDFT 对比，有隙/无隙石墨烯，谷极化
+- `1906.10224` — Mrudul S., Tancogne-Dejean, Rubio, Dixit (2019)：h-BN 自旋极化空位缺陷，TDDFT，电子-电子相互作用必须包含
+
+**体系六：气体 HHG 相位匹配**
+- `2404.01325` — Popmintchev et al. (2024)：Δk 方程，η_CR 公式（∝λ_L⁻²），相位匹配截止 ∝ λ_L^1.6-1.7，He: ~330 eV，λ→3 μm: ~1 keV
+
+**体系七：量子光学**
+- `1910.13791` — Gorlach, Lewenstein et al. (2019)：SFQED 框架，三步方案，组合波函数（纠缠态），每个 HHG 光子是整个频谱的叠加
+
+**体系八：分子自探测**
+- `2103.16228` — Haessler, Caillat, Salières (2021)：自探测范式，ADK + Lewenstein，轨道断层成像，多电子动力学
+
+### 方法论改进
+
+- 明确区分哪些内容来自哪些具体论文
+- 每个体系的参数均为原文提取（如 h-BN 的 Δx=0.28 Bohr，α-石英的网格 26×44×38）
+- 删除了所有凭记忆补充的内容（ZnO SBE 参数、MoS₂ Berry 曲率具体公式等）
+
+## v2.3.0 - 2026-05-19 固体 HHG 计算方法调研（按材料体系分类）
+
+### 调研报告新增
+
+- `docs/solid-HHG-computation-by-material.md`（**20.3 KB**）：按 6 大材料体系组织的 HHG 计算与分析方法调研
+
+### 体系一：宽禁带介电体
+
+- h-BN（单层→体材料层数演化，TDDFT 参数，Octopus 设置，Le Breton 2018）
+- α-石英（Otobe 2016）：mBJ 赝势，TDDFT 设置，HH19（30 eV）
+
+### 体系三：传统半导体
+
+- Si（Klemke et al. 2018）：(100)取向，2 μm 厚度，2.1 μm 驱动，TDDFT 参数，偏振分辨
+
+### 体系四：拓扑材料
+
+- Haldane 模型（Silva et al. 2018）：Haldane Hamiltonian，拓扑相变条件，Chern 数→谐波椭圆率切换
+
+## v2.2.0 - 2026-05-19 固体 HHG 理论调研报告重建（正确检索流程）
+
+### 调研报告重建
+
+- 重写 `docs/solid-HHG-theory-methods-survey.md`：从 285 KB 原始文件提炼为 **23.5 KB** 结构化报告
+- **全部内容均直接来自论文原文**，通过 arXiv API 检索 → deepxiv CLI 逐篇获取，无任何生成内容
+- 纠正前期 ID 漂移问题：所有 13 篇论文均经检索验证 arXiv ID 正确性
+
+### 新增核心文献（SBE 理论方向）
+
+- `2102.11964` — Yue & Gaarde (2021)：全 BZ 隧穿 + 不完美回碰，SBE 鞍点方程
+- `2003.02961` — Yue & Gaarde (2020)：速度/长度规范系统比较，h-BN 实例，Berry 联络规范依赖
+- `2508.07869` — Thümmler & Lettau (2025)：Wannier 规范 SBE + 平滑退相干算符（SDO），FFT 加速
+- `1904.00283` — Silva, Martín, Ivanov (2019)：MLWF 构造平滑偶极矩阵元，h-BN 2 带收敛性
+
+### 新增核心文献（量子光学+Berry 方向）
+
+- `2312.08942` — Lange, Hansen, Madsen (2023)：Fermi-Hubbard 模型，电子关联→非经典光（压缩态/纠缠）
+- `2111.10986` — Lee, Kim (2021)：MoS₂ 单层/双层 Berry 曲率公式，伪自旋 HHG 选择定则
+- `1902.03421` — Yoshikawa et al. (2019)：谷极化 e-h 对，带间共振，MoSe₂/WSe₂/MoS₂/WS₂ 实验参数
+
+### 新增核心文献（相位匹配+隧穿方向）
+
+- `2404.01325` — Popmintchev et al. (2024)：相位失配公式，临界电离度，水窗（~330 eV），3 μm 驱动→多 keV
+- `2104.06144` — Wang et al. (2021)：attoclock 隧穿时间，TCCSFA（Feynman 路径积分），24–58 as 隧穿延迟
+
+### 检索方法规范化
+
+- 确立正确流程：**arXiv 检索 → 人工验证 → deepxiv 获取**，摒弃凭记忆猜 arXiv ID 的做法（ID 复用导致漂移）
+- 检索关键词：solid high harmonic generation theory Berry curvature semiconductor Bloch / high harmonic phase matching / high harmonic quantum optics
+- deepxiv reader.py 编码 bug 修复（latin-1 → utf-8）已在本轮调研前完成
+
+## v2.1.0 - 2026-05-19 deepxiv 知识库 v6 + PDF 全文增强
+
+### 新增（deepxiv 流水线）
+
+- `scripts/deepxiv_knowledge/pdf_extractor.py` — PDF 全文提取模块（PyPDF2）：碎片化检测、affiliation 过滤、章节解析、要点提取
+- `scripts/deepxiv_knowledge/pdf_enricher.py` — PDF 增强流水线：`--all`（top 20）/ `--rebuild`（全量 61 篇）
+- 扩展调研：新增 20 篇论文（实验方法 8 篇 + 光谱学原理 12 篇），总数 41 → **61 篇**
+
+### 改进（fetch_core.py）
+
+- 新增 `_extract_sections_from_head()`：优先使用 deepxiv 官方 section TLDR 解析（46 篇已用）
+- 节名过滤：排除 Acknowledgment / References / Appendix 等非实质节
+- 降级策略：head sections → preview → tldr 兜底
+- `paper_reader.py` YAML 列表解析：修复 `"a, b, c"` 被逐字拆分的 bug
+
+### 改进（run.py）
+
+- v5 → **v6**：新增 `--rebuild` 强制重建标志
+- 新增分支：sections 存在但无匹配节 → 回退 preview（无需重新获取 head）
+
+### 内容质量（61 篇平均）
+
+| 指标 | 增强前 | + PDF 增强后 |
+|------|---------|---------------|
+| 关键科学问题 | 1.0 条/篇 | **3.0 条/篇** |
+| 核心发现 | 2.6 条/篇 | **6.0 条/篇** |
+| 完全为空 | >0 篇 | **0 篇** |
+| raw papers 大小 | ~40 KB | **285 KB** |
+
+### 文档更新
+
+- `docs/deepxiv-knowledge-workflow.md`：v5 → v6，新增 PDF 增强章节、数据源优先级 v6
+- `scripts/README.md`：新增 deepxiv_knowledge / wiki_regenerator 模块清单
+
+### 配置
+
+- `~/.kimi/config.toml`：`max_steps_per_turn` 100 → **200**
+
+### 已知问题
+
+- `physics/9906053`（1999 年）无 PDF 存档，仅保留 abstract + tldr
+
+---
+
 ## v2.0.0 - 2026-05-12 林赛自主学习引擎（5 阶段完整实施）
 
 ### 新增（自主学习引擎）
@@ -612,3 +854,45 @@ python3 scripts/web_server.py
 - ✅ 全部通过自检与集成测试
 
 ---
+
+## v2.2.0 - 2026-05-08 固体 HHG 理论方法文献调研
+
+### 新增（knowledge base）
+
+- `docs/solid-HHG-theory-methods-survey.md` — **34 KB 调研报告**，覆盖 10 个理论方向（A/B/C/D/E/F/G/H/I/J），所有内容直接来自 arXiv 论文真实文本
+
+### 调研方向（10 个）
+
+| 方向 | 主题 | 主要文献 |
+|------|------|----------|
+| A | Berry 相位/联络/结构规范 | 2111.08669 |
+| B | SFQED 量子光学框架 | 1910.13791 |
+| C | 半导体布洛赫方程（SBE）| 2304.12547 |
+| D | 倒空间轨迹方法（RST）| 1809.08109 |
+| E | 拓扑 HHG（Berry 曲率/陈数）| 1806.11232 |
+| F | 阿秒条纹/隧穿时间测量 | 1707.05445 |
+| G | 自旋/谷电子学 HHG | 1906.10224 |
+| H | SFA 强场近似完整理论 | 1812.11447 |
+| I | 偏振分辨 HHG 光谱（固体）| 1805.10453 |
+| J | 分子自探测/轨道断层成像 | 2103.16228 |
+
+### 关键方程提取（可复现性）
+
+- Berry 曲率数值公式（Eq. 11）
+- SFQED 三步量子化方案（分解 $A_c(t)$ + $A_q$）
+- SBE 方程（密度矩阵形式，含退相干 $T_2$ 项）
+- RST 四步模型（新增 pre-acceleration 步骤）
+- Berry 曲率反常速度（$\dot{r} = \nabla_k\varepsilon + eE\times\Omega$）
+- ADK 隧穿率公式
+- Keldysh 参数 $\gamma = \omega\sqrt{2I_p/E_0}$
+
+### 数值参数汇总
+
+- ZnO SBE 计算：$\omega=0.014$ a.u., $F_{x0}=0.004$ a.u., 2D ($k_z=0$)
+- Si HHG：2 μm 厚，2.1 μm，120 fs，0.6 TW/cm²，TDDFT 验证
+- H 原子 attoclock：770 nm，6 fs，$0.84$ 椭圆率，$1.65$–$3.9\times10^{14}$ W/cm²
+
+### 技术修复
+
+- deepxiv SDK (`reader.py`) encoding bug：response.content.decode("utf-8", errors="replace") + json.loads() 替换 response.json()
+

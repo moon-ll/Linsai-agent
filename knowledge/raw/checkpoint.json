@@ -1,0 +1,314 @@
+{
+  "papers": {
+    "1012.3863": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:31:24Z",
+      "error": ""
+    },
+    "1102.1461": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:31:30Z",
+      "error": ""
+    },
+    "physics/9906053": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:25:18Z",
+      "error": ""
+    },
+    "0707.4192": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:31:36Z",
+      "error": ""
+    },
+    "1812.11447": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:25:25Z",
+      "error": ""
+    },
+    "1910.13791": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:25:25Z",
+      "error": ""
+    },
+    "1809.08109": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:29:10Z",
+      "error": ""
+    },
+    "1006.3942": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:31:42Z",
+      "error": ""
+    },
+    "1010.4558": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:25:38Z",
+      "error": ""
+    },
+    "1401.2878": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:25:39Z",
+      "error": ""
+    },
+    "1010.2800": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:31:49Z",
+      "error": ""
+    },
+    "1302.4495": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:25:46Z",
+      "error": ""
+    },
+    "1707.05445": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:25:46Z",
+      "error": ""
+    },
+    "0908.2575": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:25:47Z",
+      "error": ""
+    },
+    "1411.0838": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:25:48Z",
+      "error": ""
+    },
+    "1005.1253": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:25:48Z",
+      "error": ""
+    },
+    "1301.0771": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:31:55Z",
+      "error": ""
+    },
+    "1502.07183": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:25:55Z",
+      "error": ""
+    },
+    "1609.09852": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:25:56Z",
+      "error": ""
+    },
+    "1806.11232": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:29:16Z",
+      "error": ""
+    },
+    "1710.02208": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:03Z",
+      "error": ""
+    },
+    "1807.02961": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:03Z",
+      "error": ""
+    },
+    "2008.03619": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:04Z",
+      "error": ""
+    },
+    "1812.09339": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:04Z",
+      "error": ""
+    },
+    "1906.10224": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:05Z",
+      "error": ""
+    },
+    "0712.3710": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:29:22Z",
+      "error": ""
+    },
+    "2103.16228": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:12Z",
+      "error": ""
+    },
+    "1801.06691": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:29:29Z",
+      "error": ""
+    },
+    "1412.1300": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:19Z",
+      "error": ""
+    },
+    "1207.4653": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:32:01Z",
+      "error": ""
+    },
+    "1411.1964": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:26Z",
+      "error": ""
+    },
+    "2003.06755": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:26Z",
+      "error": ""
+    },
+    "2101.10547": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:27Z",
+      "error": ""
+    },
+    "2012.08856": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:27Z",
+      "error": ""
+    },
+    "1201.5094": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:28Z",
+      "error": ""
+    },
+    "2604.15085": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:29Z",
+      "error": ""
+    },
+    "2501.06752": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:29Z",
+      "error": ""
+    },
+    "2403.19535": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:35:16Z",
+      "error": ""
+    },
+    "2306.16212": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:31Z",
+      "error": ""
+    },
+    "2512.09585": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:31Z",
+      "error": ""
+    },
+    "2304.12547": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:32Z",
+      "error": ""
+    },
+    "0707.4228": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:32:08Z",
+      "error": ""
+    },
+    "1312.1679": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:32:14Z",
+      "error": ""
+    },
+    "1104.5086": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:35:23Z",
+      "error": ""
+    },
+    "1602.08144": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:46Z",
+      "error": ""
+    },
+    "1612.08528": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:46Z",
+      "error": ""
+    },
+    "2404.01325": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:47Z",
+      "error": ""
+    },
+    "1612.04100": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:48Z",
+      "error": ""
+    },
+    "2503.08052": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:35:23Z",
+      "error": ""
+    },
+    "1009.2224": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:32:22Z",
+      "error": ""
+    },
+    "1211.0917": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:55Z",
+      "error": ""
+    },
+    "1805.10453": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:56Z",
+      "error": ""
+    },
+    "2003.10430": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:56Z",
+      "error": ""
+    },
+    "2203.10253": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:26:57Z",
+      "error": ""
+    },
+    "2307.14693": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:32:28Z",
+      "error": ""
+    },
+    "1210.4814": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:27:04Z",
+      "error": ""
+    },
+    "1502.07422": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:27:04Z",
+      "error": ""
+    },
+    "1401.4050": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:29:35Z",
+      "error": ""
+    },
+    "1808.04690": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:27:11Z",
+      "error": ""
+    },
+    "1607.00747": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:27:12Z",
+      "error": ""
+    },
+    "2111.08669": {
+      "status": "verified",
+      "updated_at": "2026-05-19T08:27:13Z",
+      "error": ""
+    }
+  },
+  "meta": {
+    "total": 61,
+    "completed": 61,
+    "failed": 0
+  }
+}

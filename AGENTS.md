@@ -135,6 +135,7 @@ LinSai-CoPilot/
 │   ├── external_fetcher.py    # 统一信息获取：deepxiv + 联网检索 + raw扫描
 │   ├── learning_engine.py     # 自主学习核心：蒸馏/精读/概念整合/成本追踪
 │   ├── quality_evaluator.py   # 质量评估引擎：规则+LLM评估、三级决策
+│   ├── learning_quality_tracker.py  # 交互质量追踪器：质量评分/记忆召回率/人格漂移检测
 │   ├── logger.py              # 统一日志：控制台彩色输出 + 文件按日期轮转
 │   ├── proactive_engine.py    # 主动感知、心跳扫描
 │   ├── document_handler.py    # 文档读取、PDF提取、代码分析
@@ -142,17 +143,19 @@ LinSai-CoPilot/
 │   ├── llm_router.py          # 多模型路由：MiniMax API + Kimi CLI + Claude CLI，自动降级
 │   ├── usage_tracker.py       # Token 用量追踪：API精确统计 + CLI字符估算
 │   ├── skill_manager.py       # 技能系统：扫描、匹配、注入、配置
+│   ├── slash_commands.py      # 斜杠命令系统：解析、路由、帮助
 │   ├── tool_engine.py         # 工具注册：file_read/write, calc, task_create, knowledge_query, run_command, hermes_chat
 │   ├── chat_archive.py        # 聊天记录归档浏览器
-│   ├── backup_manager.py      # 数据备份/恢复/清理
+│   ├── backup_manager.py      # 数据备份/恢复
 │   ├── upgrade.py             # 安全升级标准流程
-│   ├── upgrade_wiki_for_obsidian.py  # 一次性升级：为现有 wiki 注入双向链接
+│   ├── version.py             # 版本号集中读取（VERSION 真相源）
 │   ├── web_server.py          # Web 服务器（HTTP + SSE + API路由）
 │   ├── self_test.py           # 内测统一入口：全量/分维度/JSON/程序化
 │   ├── deep_audit.py          # 深度评估脚本：9维度架构稳定性审查
-│   ├── learning_quality_tracker.py  # 交互质量追踪器：质量评分/记忆召回率/人格漂移检测
 │   ├── test_e2e_learning.py   # 端到端 arXiv 链路验证
 │   ├── test_e2e_learning_full.py  # 三来源端到端完整链路验证
+│   ├── deepxiv_knowledge/     # deepxiv 论文获取流水线（8 模块）
+│   ├── wiki_regenerator/      # wiki 报告重建（4 模块）
 │   └── tests/                 # 自动化测试套件
 │       ├── test_runner.py     # 零依赖轻量测试框架
 │       ├── test_core.py       # 核心模块单元测试（34个检查点）
@@ -561,7 +564,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：2.0.0*
-*日期：2026-05-12*
+*版本：2.6.0*
+*日期：2026-06-17*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

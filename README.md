@@ -141,12 +141,17 @@ LinSai-CoPilot/
 │       └── SKILL.md
 │
 ├── docs/                      # 项目文档与报告
-│   ├── PROJECT-PLAN.md        # 项目总策划案
-│   ├── DEEP-AUDIT-REPORT.md   # 深度评估报告
-│   ├── FUNCTIONAL-TEST-REPORT.md # 功能测试报告
+│   ├── README.md              # 本目录说明与文件清单
+│   ├── CLAUDE-CLI-ADMIN.md    # Claude CLI 人工管理指南
+│   ├── IMPLEMENTATION-PLAN-v2.1.0.md   # 工具型协作者计划（已实现，归档）
+│   ├── IMPLEMENTATION-PLAN-v3.0.0.md   # 旧版计划（已废弃）
+│   ├── DEEP-AUDIT-REPORT-v1.7.2.md     # 深度评估报告（归档）
+│   ├── FUNCTIONAL-TEST-REPORT-v1.7.2.md # 功能测试报告（归档）
+│   ├── deepxiv-knowledge-workflow.md   # deepxiv 知识库流水线设计
+│   ├── solid-HHG-*.md         # 固体 HHG 调研报告（3 份）
 │   └── prompts/               # LLM prompt 模板
 │
-└── scripts/                   # 工具脚本（Python 3，零依赖，23 个）
+└── scripts/                   # 工具脚本（Python 3，零依赖，23 个主脚本 + 子包）
     ├── session_manager.py     # 会话管理
     ├── context_builder.py     # 上下文构建（Prompt组装）
     ├── copilot_engine.py      # 核心引擎（LLM调用 + CLI）
@@ -158,18 +163,24 @@ LinSai-CoPilot/
     ├── llm_router.py          # 多模型路由与自动降级
     ├── usage_tracker.py       # Token 用量追踪
     ├── skill_manager.py       # 技能系统管理
-    ├── tool_engine.py         # 子代理调用引擎
+    ├── slash_commands.py      # 斜杠命令系统
+    ├── tool_engine.py         # 子代理工具引擎
     ├── knowledge_base.py      # 知识库引擎
     ├── kb_capture.py          # 对话自动捕获
     ├── kb_maintenance.py      # 知识库批处理维护
+    ├── research_profiler.py   # 研究方向感知器
+    ├── external_fetcher.py    # 统一信息获取
+    ├── learning_engine.py     # 自主学习核心
+    ├── quality_evaluator.py   # 质量评估引擎
+    ├── learning_quality_tracker.py  # 交互质量追踪
     ├── logger.py              # 统一日志系统
     ├── chat_archive.py        # 聊天记录归档浏览器
     ├── backup_manager.py      # 数据备份/恢复
     ├── upgrade.py             # 安全升级流程
-    ├── upgrade_wiki_for_obsidian.py  # wiki 双向链接升级
-    ├── web_server.py          # Web 服务器
+    ├── version.py             # 版本号集中读取
     ├── self_test.py           # 内测统一入口
-    ├── deep_audit.py          # 深度评估脚本
+    ├── deepxiv_knowledge/     # deepxiv 论文获取流水线（8 模块）
+    ├── wiki_regenerator/      # wiki 报告重建（4 模块）
     └── tests/                 # 自动化测试套件
         ├── test_runner.py
         ├── test_core.py
@@ -278,5 +289,5 @@ LinSai-CoPilot/
 
 ---
 
-*版本：2.0.0*  
-*日期：2026-05-12*
+*版本：2.6.0*  
+*日期：2026-06-17*

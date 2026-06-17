@@ -38,6 +38,21 @@
 | `kb_capture.py` | 318 | 对话自动捕获：技术参数检测、零LLM开销 |
 | `kb_maintenance.py` | 213 | 批处理维护：索引重建、孤儿清理 |
 
+## deepxiv 知识库流水线
+
+| 脚本 | 行数 | 说明 |
+|------|------|------|
+| `deepxiv_knowledge/fetch_core.py` | ~295 | deepxiv 封装 + section TLDR 解析 |
+| `deepxiv_knowledge/paper_writer.py` | ~71 | 写入 raw paper Markdown |
+| `deepxiv_knowledge/checkpoint.py` | ~65 | 断点持久化 |
+| `deepxiv_knowledge/schema.py` | ~46 | 论文标准结构（PAPER_SCHEMA）|
+| `deepxiv_knowledge/pdf_extractor.py` | ~350 | PDF 全文提取（PyPDF2）|
+| `deepxiv_knowledge/pdf_enricher.py` | ~180 | PDF 增强流水线（追加/替换 content sections）|
+| `deepxiv_knowledge/run.py` | ~240 | 主入口（v6，--rebuild 支持）|
+| `wiki_regenerator/paper_reader.py` | ~85 | 读取所有 raw papers |
+| `wiki_regenerator/report_writer.py` | ~420 | 6 篇报告生成器 |
+| `wiki_regenerator/run.py` | ~69 | wiki 重建主入口 |
+
 ## LLM 路由
 
 | 脚本 | 行数 | 说明 |
@@ -69,8 +84,8 @@
 | `test_scenarios.py` | 场景剧本测试（16个检查点） |
 | `test_persona.py` | 人格一致性静态抽检（38个检查点） |
 
-**总计：23 个主脚本 + 4 个测试脚本。**
+**总计：23 个主脚本 + 4 个测试脚本 + deepxiv_knowledge（8 模块）/ wiki_regenerator（4 模块）两个流水线包。**
 
 ---
-*版本：2.1.0*
-*日期：2026-05-15*
+*版本：2.6.0*
+*日期：2026-06-17*
