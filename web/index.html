@@ -11,7 +11,7 @@
 <!-- 顶部栏 -->
 <header class="topbar">
   <div class="topbar-left">
-    <button id="sidebar-toggle" class="icon-btn" title="切换侧边栏">☰</button>
+    <button id="sidebar-toggle" class="icon-btn" title="切换侧边栏" data-tooltip="切换侧边栏">☰</button>
     <h1 class="logo">林赛协作引擎</h1>
     <span class="version" id="version-label">v</span>
   </div>
@@ -21,9 +21,9 @@
     <span class="skill-badge" id="skill-badge" style="display:none;" title="当前激活的技能"></span>
   </div>
   <div class="topbar-right">
-    <button id="view-history-btn" class="icon-btn" title="查看当前会话历史记录">📜</button>
-    <button id="theme-toggle" class="icon-btn" title="切换主题">🔆</button>
-    <button id="settings-toggle" class="icon-btn" title="设置">⚙️</button>
+    <button id="view-history-btn" class="icon-btn" title="查看当前会话历史记录" data-tooltip="聊天记录搜索">📜</button>
+    <button id="theme-toggle" class="icon-btn" title="切换主题" data-tooltip="切换主题">🔆</button>
+    <button id="settings-toggle" class="icon-btn" title="设置" data-tooltip="设置">⚙️</button>
   </div>
 </header>
 
@@ -44,11 +44,11 @@
     </div>
     <!-- 工具栏 -->
     <div class="toolbar">
-      <button class="toolbar-btn" id="toolbar-kb" title="知识库">📚</button>
-      <button class="toolbar-btn" id="toolbar-skills" title="技能">🎯</button>
-      <button class="toolbar-btn" id="toolbar-tasks" title="任务">📋</button>
-      <button class="toolbar-btn" id="toolbar-usage" title="用量">📊</button>
-      <button class="toolbar-btn" id="toolbar-learning" title="自主学习">🌱</button>
+      <button class="toolbar-btn" id="toolbar-kb" title="知识库" data-tooltip="知识库">📚</button>
+      <button class="toolbar-btn" id="toolbar-skills" title="技能" data-tooltip="技能">🎯</button>
+      <button class="toolbar-btn" id="toolbar-tasks" title="任务" data-tooltip="任务">📋</button>
+      <button class="toolbar-btn" id="toolbar-usage" title="用量" data-tooltip="用量统计">📊</button>
+      <button class="toolbar-btn" id="toolbar-learning" title="自主学习" data-tooltip="自主学习">🌱</button>
     </div>
   </aside>
 
@@ -108,7 +108,7 @@
         <button class="cmd-btn" data-cmd="/read" title="读取文档">/read</button>
         <button class="cmd-btn" data-cmd="/agora" title="Agora群聊">/agora</button>
         <button class="cmd-btn" data-cmd="/summary" title="会话摘要">/summary</button>
-        <button class="cmd-btn" id="upload-btn" title="上传文件">📎</button>
+        <button class="cmd-btn" id="upload-btn" title="上传文件" data-tooltip="上传文件">📎</button>
       </div>
       <div class="upload-zone" id="upload-zone">
         <p>📎 拖拽文件到此处，或 <span class="upload-link">点击选择</span></p>
@@ -120,7 +120,7 @@
       </div>
       <div class="input-row">
         <textarea id="message-input" placeholder="输入消息… Shift+Enter 换行" rows="2"></textarea>
-        <button id="send-btn" class="btn-send" title="发送">🚀</button>
+        <button id="send-btn" class="btn-send" title="发送" data-tooltip="发送">🚀</button>
       </div>
       <div class="input-hints">
         <span>Enter 发送 · Shift+Enter 换行 · 拖拽文件上传</span>
