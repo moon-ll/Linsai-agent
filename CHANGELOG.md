@@ -1,5 +1,40 @@
 # 变更记录
 
+## v2.8.0 - 2026-06-17 虚拟用户测试 + 前端 bug 修复 + 知识库全套整理
+
+### 第一块：Web API 虚拟用户测试框架
+- **新增 `scripts/tests/test_web_api.py`**：基于 test_runner 框架的 HTTP 虚拟用户测试套件
+  - ApiClient（urllib 零依赖）：GET/POST/PUT/DELETE + JSON 编解码 + 状态码断言
+  - WebApiSuite：启动 web_server 子进程（隔离环境），26 个测试用例覆盖所有 API
+  - 接入 self_test：`python3 scripts/self_test.py --web`（26/26 通过）
+  - web_server.py 加 `--root` 参数支持隔离测试环境
+
+### 第二块：前端 bug 修复
+- **P0 崩溃修复**：补全 learning manager 4 个缺失函数（openLearningManager/closeLearningManager/renderLearningManager/switchLearningTab），点击🌱自主学习按钮不再报错
+- **P1 任务按钮**：修复 `.task-panel`/`.right-panel` 选择器 → `getElementById`
+- **P1 任务新建/删除**：task-panel 加「+新建」表单 + createNewTask/deleteTask 函数 + 后端 POST/DELETE /api/tasks 路由
+- **P2 导出会话**：实现 export-btn 真导出（生成 .md 下载，不再是"开发中"）
+- **P2 死代码**：删除 #back-to-current 遗留绑定
+
+### 第三块：知识库数据修复
+- **methods-report 重复 bug**：截断 hhg-methods-report.md（1510→735 行，删除 775 行重复）
+- **graph 悬空边**：清理 16 条全空 source/target 的坏边
+- **principles 标题 bug**：修复 Python list 字面量未解包的标题
+
+### 第四块：知识库全套整理（补 HHG 核心原子笔记）
+- **concepts 新增 8 篇**：三步模型/截止定律/相位匹配/水窗口/Lewenstein模型/固体高次谐波/液体高次谐波/高次谐波产生（HHG总论）
+- **methods 新增 8 篇**：RABBITT/FROG/瞬态吸收光谱/VMI/COLTRIMS/阿秒条纹相机/协方差映射/TDSE求解器
+- **people 新增 5 篇**：Corkum/Krausz/LHuillier/Ghimare-Reis/北大HHG团队
+- **拓扑绝缘体补完**：seedling(0.3) → growing(0.7)，补充实质内容
+- **aliases.json**：从空 → 25 组中英/缩写对照（HHG=高次谐波产生、三步模型=three-step-model 等）
+- **图谱重建**：48 节点 26 边（原 32 节点 0 边），0 孤儿，核心概念/方法/人物互联
+- **growth-log**：补充 8 条整理事件记录
+
+### 成果数据
+- wiki 条目：9 → 30（mature 12 / growing 5 / seedling 1）
+- 知识库检索：别名扩展生效（"HHG"→高次谐波产生、"RABBITT"→重建阿秒拍频干涉）
+- 测试：self_test 88/88 + web_api 26/26，全绿不回归
+
 ## v2.7.0 - 2026-06-17 hermes 协作中枢：林赛 Web 作为双 hermes 工作流的指挥台
 
 ### 架构定位

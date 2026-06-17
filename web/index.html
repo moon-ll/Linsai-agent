@@ -133,7 +133,17 @@
   <!-- 右侧栏：协同 -->
   <aside class="sidebar right" id="right-sidebar">
     <div class="panel" id="task-panel">
-      <h3>📋 任务看板</h3>
+      <h3>📋 任务看板 <button id="task-add-btn" style="float:right;font-size:0.8rem;padding:2px 8px;cursor:pointer;border:1px solid var(--border-color);border-radius:4px;background:var(--bg-primary);">+ 新建</button></h3>
+      <div id="task-add-form" style="display:none;padding:8px;margin-bottom:8px;background:var(--bg-secondary);border-radius:6px;">
+        <input type="text" id="task-add-title" placeholder="任务标题" style="width:100%;padding:6px;margin-bottom:6px;border:1px solid var(--border-color);border-radius:4px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;box-sizing:border-box;">
+        <div style="display:flex;gap:6px;">
+          <select id="task-add-priority" style="padding:4px;border:1px solid var(--border-color);border-radius:4px;background:var(--bg-primary);color:var(--text-primary);font-size:0.8rem;">
+            <option value="medium">中</option><option value="high">高</option><option value="low">低</option>
+          </select>
+          <button id="task-add-confirm" style="flex:1;padding:4px;background:var(--accent-color);color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.8rem;">创建</button>
+          <button id="task-add-cancel" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:4px;cursor:pointer;font-size:0.8rem;">取消</button>
+        </div>
+      </div>
       <div class="task-board" id="task-board">
         <div class="task-column" data-status="backlog">
           <div class="task-column-header">○ 待办</div>

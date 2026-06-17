@@ -1,1 +1,27 @@
-{}
+{
+  "高次谐波产生": ["HHG", "高次谐波", "high-harmonic-generation", "high harmonic generation"],
+  "高次谐波": ["HHG", "高次谐波产生"],
+  "三步模型": ["three-step-model", "三步机制", "半经典模型", "three step model"],
+  "截止定律": ["cutoff-law", "截止能量", "cutoff law"],
+  "相位匹配": ["phase-matching", "相位匹配条件", "phase matching"],
+  "水窗口": ["water-window", "水窗", "water window"],
+  "Lewenstein模型": ["Lewenstein-model", "SFA", "强场近似", "strong field approximation"],
+  "固体高次谐波": ["solid-state-HHG", "固体HHG", "solid state HHG"],
+  "液体高次谐波": ["liquid-HHG", "液体HHG"],
+  "德鲁德模型": ["Drude-model", "德鲁德", "Drude model"],
+  "拓扑绝缘体": ["topological-insulator", "TI", "topological insulator"],
+  "RABBITT": ["重建阿秒拍频干涉", "reconstruction-of-attosecond-beating"],
+  "FROG": ["频率分辨光学门控", "frequency-resolved-optical-gating", "FROG-CRAB"],
+  "阿秒条纹相机": ["attosecond-streaking", "条纹技术", "streak-camera"],
+  "瞬态吸收光谱": ["transient-absorption", "瞬态吸收"],
+  "VMI": ["速度映射成像", "velocity-map-imaging"],
+  "COLTRIMS": ["冷靶反冲动量谱", "cold-target-recoil-ion-momentum-spectroscopy"],
+  "协方差映射": ["covariance-mapping", "协方差"],
+  "TDSE求解器": ["TDSE-solver", "含时薛定谔求解", "time-dependent-schrodinger"],
+  "阿秒": ["attosecond", "阿秒科学", "attosecond science"],
+  "相位锁定": ["phase-locking", "相位锁定"],
+  "有质动能": ["ponderomotive-energy", "U_p", "ponderomotive energy"],
+  "带间跃迁": ["interband-transition", "interband"],
+  "带内电流": ["intraband-current", "intraband"],
+  "Berry曲率": ["Berry-curvature", "贝里曲率", "Berry curvature"]
+}

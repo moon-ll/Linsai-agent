@@ -903,6 +903,45 @@ function renderTaskBoard() {
   });
 }
 
+// v2.8.0: 任务新建/删除
+async function createNewTask() {
+  const titleEl = document.getElementById('task-add-title');
+  const prioEl = document.getElementById('task-add-priority');
+  const title = (titleEl && titleEl.value || '').trim();
+  if (!title) { showToast('请输入任务标题', 'info'); return; }
+  try {
+    const result = await apiPost('/api/tasks', { title, priority: prioEl ? prioEl.value : 'medium' });
+    if (result.success) {
+      showToast(`✓ 任务已创建: ${title}`, 'success');
+      titleEl.value = '';
+      document.getElementById('task-add-form').style.display = 'none';
+      await loadTasks();
+    }
+  } catch (e) {
+    showToast('✗ 创建失败: ' + e.message, 'error');
+  }
+}
+
+async function deleteTask(taskId) {
+  if (!confirm('确定删除此任务？')) return;
+  try {
+    await apiDelete(`/api/tasks/${taskId}`);
+    showToast('✓ 任务已删除', 'success');
+    await loadTasks();
+  } catch (e) {
+    showToast('✗ 删除失败: ' + e.message, 'error');
+  }
+}
+
+// apiDelete 辅助（若未定义）
+if (typeof apiDelete === 'undefined') {
+  window.apiDelete = async function(path) {
+    const resp = await fetch(API_BASE + path, { method: 'DELETE' });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    return resp.json();
+  };
+}
+
 async function openTaskDetail(taskId) {
   try {
     const task = await apiGet(`/api/tasks/${encodeURIComponent(taskId)}`);
@@ -1257,15 +1296,41 @@ function bindEvents() {
     if (e.key === 'Enter') searchHistory();
   });
 
-  // 返回当前会话（如果按钮存在）
-  document.getElementById('back-to-current')?.addEventListener('click', backToCurrentSession);
+  // 返回当前会话（back-to-current 已被 close-archive-view 取代，保留兼容）
 
   // 底部按钮
   document.getElementById('backup-btn').addEventListener('click', () => {
     showToast('请在终端运行: python3 scripts/backup_manager.py', 'warning', 5000);
   });
-  document.getElementById('export-btn').addEventListener('click', () => {
-    showToast('导出功能开发中', 'warning');
+  document.getElementById('export-btn').addEventListener('click', async () => {
+    // 导出当前会话为 Markdown 文件
+    if (!State.currentSessionId) {
+      showToast('请先选择一个会话', 'info');
+      return;
+    }
+    try {
+      const [messages, sessions] = await Promise.all([
+        apiGet(`/api/sessions/${State.currentSessionId}/messages`),
+        apiGet('/api/sessions'),
+      ]);
+      const msgs = messages.messages || messages;
+      const sess = sessions.find(s => s.session_id === State.currentSessionId) || {};
+      const topic = sess.topic || State.currentSessionId;
+      let md = `# ${topic}\n\n> 导出于 ${new Date().toLocaleString()}\n\n`;
+      for (const m of msgs) {
+        const role = m.role === 'user' ? '🧑 用户' : '🔬 林赛';
+        md += `### ${role}\n\n${m.content || ''}\n\n---\n\n`;
+      }
+      const blob = new Blob([md], { type: 'text/markdown;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `${State.currentSessionId}.md`;
+      a.click();
+      URL.revokeObjectURL(a.href);
+      showToast(`✓ 已导出 ${msgs.length} 条消息`, 'success');
+    } catch (e) {
+      showToast('✗ 导出失败: ' + e.message, 'error');
+    }
   });
 
   // 监听系统主题变化
@@ -1741,6 +1806,127 @@ function openKbManager() {
 
 function closeKbManager() {
   document.getElementById('kb-manager-overlay').style.display = 'none';
+}
+
+// ============================================
+// 学习管理器（v2.8.0 补全）
+// ============================================
+const LearningManager = { activeTab: 'learning-log' };
+
+function openLearningManager() {
+  const overlay = document.getElementById('learning-manager-overlay');
+  if (!overlay) return;
+  overlay.style.display = 'flex';
+  LearningManager.activeTab = 'learning-log';
+  // 重置 tab 样式
+  document.querySelectorAll('#learning-manager-overlay .kb-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.tab === 'learning-log');
+  });
+  document.querySelectorAll('#learning-manager-overlay .kb-panel').forEach(p => {
+    p.classList.toggle('active', p.id === 'kb-panel-learning-log');
+  });
+  renderLearningManager();
+}
+
+function closeLearningManager() {
+  const overlay = document.getElementById('learning-manager-overlay');
+  if (overlay) overlay.style.display = 'none';
+}
+
+async function renderLearningManager() {
+  const tab = LearningManager.activeTab;
+  if (tab === 'learning-log') await loadLearningLog();
+  else if (tab === 'learning-review') await loadLearningReview();
+  else if (tab === 'learning-stats') await loadLearningStats();
+}
+
+function switchLearningTab(tab) {
+  LearningManager.activeTab = tab;
+  document.querySelectorAll('#learning-manager-overlay .kb-tab').forEach(t => {
+    t.classList.toggle('active', t.dataset.tab === tab);
+  });
+  document.querySelectorAll('#learning-manager-overlay .kb-panel').forEach(p => {
+    p.classList.toggle('active', p.id === `kb-panel-${tab}`);
+  });
+  renderLearningManager();
+}
+
+async function loadLearningLog() {
+  const el = document.getElementById('learning-log-content');
+  if (!el) return;
+  el.innerHTML = '<span style="color:var(--text-tertiary);">◐ 加载中…</span>';
+  try {
+    const data = await apiGet('/api/learning/log');
+    const log = (data && data.log) || [];
+    if (!log.length) {
+      el.innerHTML = '<p style="color:var(--text-tertiary);text-align:center;padding:20px;">暂无学习记录</p>';
+      return;
+    }
+    el.innerHTML = log.slice(-20).reverse().map(item => {
+      const time = (item.timestamp || item.time || '').slice(0, 16);
+      const action = escapeHtml(item.action || item.type || '学习');
+      const target = escapeHtml(item.target || item.title || item.concept || '');
+      const status = item.success === false ? '⚠️' : '✓';
+      return `<div style="padding:6px 0;border-bottom:1px solid var(--border-color);font-size:0.85rem;">
+        ${status} <span style="color:var(--text-tertiary);">${time}</span> ${action} → <strong>${target}</strong>
+      </div>`;
+    }).join('');
+  } catch (e) {
+    el.innerHTML = `<p style="color:var(--error-color);">加载失败: ${escapeHtml(e.message)}</p>`;
+  }
+}
+
+async function loadLearningReview() {
+  const el = document.getElementById('learning-review-content');
+  if (!el) return;
+  el.innerHTML = '<span style="color:var(--text-tertiary);">◐ 加载中…</span>';
+  try {
+    const data = await apiGet('/api/learning/queue');
+    const queue = (data && (data.queue || data.items)) || [];
+    if (!queue.length) {
+      el.innerHTML = '<p style="color:var(--text-tertiary);text-align:center;padding:20px;">无待审内容</p>';
+      return;
+    }
+    el.innerHTML = queue.map(item => {
+      const title = escapeHtml(item.title || item.concept || '未知');
+      const stage = escapeHtml(item.growth_stage || '');
+      return `<div style="padding:8px;margin:4px 0;background:var(--bg-secondary);border-radius:6px;">
+        <div style="font-size:0.88rem;font-weight:500;">${title}</div>
+        <div style="font-size:0.75rem;color:var(--text-tertiary);">${stage}</div>
+      </div>`;
+    }).join('');
+  } catch (e) {
+    el.innerHTML = `<p style="color:var(--error-color);">加载失败: ${escapeHtml(e.message)}</p>`;
+  }
+}
+
+async function loadLearningStats() {
+  const el = document.getElementById('learning-stats-content');
+  if (!el) return;
+  el.innerHTML = '<span style="color:var(--text-tertiary);">◐ 加载中…</span>';
+  try {
+    const data = await apiGet('/api/learning/status');
+    const stats = data || {};
+    let html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">';
+    const fields = [
+      ['自动学习', stats.auto_enabled ? '✓ 开启' : '○ 关闭'],
+      ['总学习数', stats.total_learned || 0],
+      ['今日学习', stats.today_count || 0],
+      ['待审', stats.pending_count || 0],
+      ['本月成本', `${stats.cost_monthly || 0}`],
+      ['策略', escapeHtml(stats.strategy || 'balanced')],
+    ];
+    fields.forEach(([k, v]) => {
+      html += `<div style="padding:10px;background:var(--bg-secondary);border-radius:6px;">
+        <div style="font-size:0.75rem;color:var(--text-tertiary);">${escapeHtml(k)}</div>
+        <div style="font-size:1.1rem;font-weight:600;margin-top:4px;">${v}</div>
+      </div>`;
+    });
+    html += '</div>';
+    el.innerHTML = html;
+  } catch (e) {
+    el.innerHTML = `<p style="color:var(--error-color);">加载失败: ${escapeHtml(e.message)}</p>`;
+  }
 }
 
 function switchKbTab(tab) {
@@ -2248,9 +2434,13 @@ function bindKbManagerEvents() {
   document.getElementById('toolbar-skills')?.addEventListener('click', openSkillManager);
   document.getElementById('toolbar-tasks')?.addEventListener('click', () => {
     // 滚动到任务面板（右侧）
-    const panel = document.querySelector('.task-panel') || document.querySelector('.right-panel');
-    if (panel) panel.scrollIntoView({ behavior: 'smooth' });
-    else showToast('📋 任务面板在右侧栏', 'info');
+    const panel = document.getElementById('task-panel') || document.getElementById('right-sidebar');
+    if (panel) {
+      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      panel.style.flash = '1';
+    } else {
+      showToast('📋 任务面板在右侧栏', 'info');
+    }
   });
   document.getElementById('toolbar-usage')?.addEventListener('click', async () => {
     // 轻量用量显示
@@ -2310,6 +2500,22 @@ function bindKbManagerEvents() {
   // v2.7.0: 项目面板 + hermes 控制台
   if (typeof bindProjectsEvents === 'function') bindProjectsEvents();
   if (typeof bindHermesEvents === 'function') bindHermesEvents();
+
+  // v2.8.0: 任务新建/删除
+  document.getElementById('task-add-btn')?.addEventListener('click', () => {
+    const form = document.getElementById('task-add-form');
+    if (form) {
+      form.style.display = form.style.display === 'none' ? 'block' : 'none';
+      if (form.style.display === 'block') document.getElementById('task-add-title')?.focus();
+    }
+  });
+  document.getElementById('task-add-confirm')?.addEventListener('click', createNewTask);
+  document.getElementById('task-add-cancel')?.addEventListener('click', () => {
+    document.getElementById('task-add-form').style.display = 'none';
+  });
+  document.getElementById('task-add-title')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') createNewTask();
+  });
 
   // 技能管理器
   document.getElementById('skill-manager-close')?.addEventListener('click', closeSkillManager);

@@ -53,6 +53,7 @@ def _run_selected(filters: List[str]) -> List[TestSuite]:
         "module": "test_core",
         "scenario": "test_scenarios",
         "persona": "test_persona",
+        "web": "test_web_api",
     }
 
     for key, mod_name in mapping.items():
@@ -118,6 +119,9 @@ def run_tests(filters: Optional[List[str]] = None) -> Dict[str, Any]:
         for fpath in sorted(test_dir.glob("test_*.py")):
             mod_name = fpath.stem
             if mod_name == "test_runner":
+                continue
+            # test_web_api 需要启动子进程+端口，不纳入默认全量（用 --web 显式触发）
+            if mod_name == "test_web_api":
                 continue
             try:
                 mod = importlib.import_module(mod_name)
@@ -200,6 +204,7 @@ def main():
     parser.add_argument("--module", action="store_true", help="仅运行核心模块测试")
     parser.add_argument("--scenario", action="store_true", help="仅运行场景剧本")
     parser.add_argument("--persona", action="store_true", help="仅运行人格抽检")
+    parser.add_argument("--web", action="store_true", help="仅运行 Web API 虚拟用户测试")
     parser.add_argument("--verbose", action="store_true", help="详细输出")
     parser.add_argument("--json", action="store_true", help="输出 JSON 格式结果")
     args = parser.parse_args()
@@ -211,6 +216,8 @@ def main():
         filters.append("scenario")
     if args.persona:
         filters.append("persona")
+    if args.web:
+        filters.append("web")
 
     result = run_tests(filters if filters else None)
 

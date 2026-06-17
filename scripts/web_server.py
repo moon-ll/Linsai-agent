@@ -1023,6 +1023,22 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json({"success": True, "result": result})
             return
 
+        # v2.8.0: 创建任务
+        if path == "/api/tasks":
+            title = body.get("title", "").strip()
+            if not title:
+                self._send_json({"error": "缺少 title"}, 400)
+                return
+            tid, _ = tm.create_task(
+                title=title,
+                priority=body.get("priority", "medium"),
+                category=body.get("category", "general"),
+                due_date=body.get("due_date", ""),
+                description=body.get("description", ""),
+            )
+            self._send_json({"success": True, "task_id": tid, "title": title})
+            return
+
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_PUT(self) -> None:
@@ -1096,6 +1112,17 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"success": True})
             else:
                 self._send_json({"error": "Wiki 页面不存在"}, 404)
+            return
+
+        # v2.8.0: DELETE /api/tasks/<id>
+        m = re.match(r"^/api/tasks/(.+)$", path)
+        if m:
+            tid = m.group(1)
+            ok = tm.delete_task(tid)
+            if ok:
+                self._send_json({"success": True})
+            else:
+                self._send_json({"error": "任务不存在"}, 404)
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)
@@ -1310,8 +1337,15 @@ def main(argv: Optional[List[str]] = None) -> int:
     )
     parser.add_argument("--port", type=int, default=8080, help="监听端口 (默认: 8080)")
     parser.add_argument("--host", default="127.0.0.1", help="监听地址 (默认: 127.0.0.1)")
+    parser.add_argument("--root", default="", help="项目根目录覆盖（隔离测试用，默认: 脚本上级）")
     parser.add_argument("--self-check", action="store_true", help="运行自检")
     args = parser.parse_args(argv)
+
+    # --root 覆盖项目根目录（用于隔离测试环境）
+    if args.root:
+        global _PROJECT_ROOT, _WEB_DIR
+        _PROJECT_ROOT = Path(args.root).resolve()
+        _WEB_DIR = _PROJECT_ROOT / "web"
 
     if args.self_check:
         print("=== Web 服务器自检 ===")

@@ -62,7 +62,7 @@ $$E_{\text{cutoff}} \approx E_g + 2U_p$$
 
 
 ### Introduction to theory of high-harmonic generation in solids: tutorial（2021）
-- **作者**：['Lun Yue', 'Mette B. Gaarde']
+- **作者**：Lun Yue Mette B. Gaarde
 - **引用**：98 次 | **标签**：spectroscopy, theory, solids, tutorial, review
 - **摘要**：High-harmonic generation (HHG) in solids has emerged in recent years as a rapidly expanding and interdisciplinary field, attracting attention from both the condensed-matter and the atomic, molecular, and optics communities. It has exciting prospects for the engineering of new light sources and the p
 
@@ -71,7 +71,7 @@ $$E_{\text{cutoff}} \approx E_g + 2U_p$$
 
 
 ### On the Quantum-Optical Nature of High Harmonic Generation（2019）
-- **作者**：['Alexey Gorlach', 'Ofer Neufeld', 'Nicholas Rivera', 'Oren Cohen', 'Ido Kaminer']
+- **作者**：Alexey Gorlach Ofer Neufeld Nicholas Rivera Oren Cohen Ido Kaminer
 - **引用**：137 次 | **标签**：theory, quantum-optics, HHG
 - **摘要**：High harmonic generation (HHG) is an extremely nonlinear effect, where a medium is driven by a strong laser field, generating coherent broadband radiation with photon energies ranging up to the X-ray and pulse durations reaching attosecond timescales. Conventional models of HHG treat the medium quan
 
@@ -80,12 +80,12 @@ $$E_{\text{cutoff}} \approx E_g + 2U_p$$
 
 
 ### Symphony on Strong Field Approximation（2018）
-- **作者**：['K. Amini', 'J. Biegert', 'F. Calegari', 'A. Chacón', 'M. Ciappina', 'A. Dauphin', 'D. Efimov', 'C. Figueira de Morisson Faria', 'Krzysztof Giergiel', 'Piotr Gniewek', 'A. Landsman', 'M. Lesiuk', 'M. Mandrysz', 'A. Maxwell', 'R. Moszynski', 'L. Ortmann', 'José Antonio Pérez-Hernández', 'A. Picón', 'E. Pisanty', 'J. Prauzner-Bechcicki', 'K. Sacha', 'N. Suárez', 'A. Zaïr', 'J. Zakrzewski', 'M. Lewenstein']
+- **作者**：K. Amini J. Biegert F. Calegari A. Chacón M. Ciappina A. Dauphin D. Efimov C. Figueira de Morisson Faria Krzysztof Giergiel Piotr Gniewek A. Landsman M. Lesiuk M. Mandrysz A. Maxwell R. Moszynski L. Ortmann José Antonio Pérez-Hernández A. Picón E. Pisanty J. Prauzner-Bechcicki K. Sacha N. Suárez A. Zaïr J. Zakrzewski M. Lewenstein
 - **引用**：183 次 | **标签**：theory, SFA, strong-field-approximation
 - **摘要**：This paper has been prepared by the Symphony collaboration (University of Warsaw, Uniwersytet Jagiello\\'nski, DESY/CNR and ICFO) on the occasion of the 25th anniversary of the "simple man's models" which underlie most of the phenomena that occur when intense ultrashort laser pulses interact with ma
 
 ### Reciprocal-space-trajectory perspective on high harmonic generation in solids（2018）
-- **作者**：['Liang Li', 'Pengfei Lan', 'Xiaosong Zhu', 'Tengfei Huang', 'Qingbin Zhang', 'Manfred Lein', 'Peixiang Lu']
+- **作者**：Liang Li Pengfei Lan Xiaosong Zhu Tengfei Huang Qingbin Zhang Manfred Lein Peixiang Lu
 - **引用**：80 次 | **标签**：theory, reciprocal-space, trajectory
 - **摘要**：We revisit the mechanism of high harmonic generation (HHG) from solids by comparing HHG in laser fields with different ellipticities but constant maximum amplitude. It is shown that the cutoff of HHG is strongly extended in a circularly polarized field. Moreover, the harmonic yield with large ellipt
 
@@ -94,7 +94,7 @@ $$E_{\text{cutoff}} \approx E_g + 2U_p$$
 
 
 ### Time-resolved photoemission by attosecond streaking: extraction of time information（2011）
-- **作者**：['S. Nagele', 'R. Pazourek', 'J. Feist', 'K. Doblhoff-Dier', 'C. Lemell', 'K. Tőkési', 'J. Burgdörfer']
+- **作者**：S. Nagele R. Pazourek J. Feist K. Doblhoff-Dier C. Lemell K. Tőkési J. Burgdörfer
 - **引用**：136 次 | **标签**：theory, measurement, streaking, TDSE
 - **摘要**：Attosecond streaking of atomic photoemission holds the promise to provide unprecedented information on the release time of the photoelectron. We show that attosecond streaking phase shifts indeed contain timing (or spectral phase) information associated with the Eisenbud-Wigner-Smith time delay matr
 
@@ -103,12 +103,12 @@ $$E_{\text{cutoff}} \approx E_g + 2U_p$$
 
 
 ### Probing single-photon ionization on the attosecond time scale（2010）
-- **作者**：['K. Klünder', 'J. M. Dahlström', 'M. Gisselbrecht', 'T. Fordell', 'M. Swoboda', 'D. Guénot', 'P. Johnsson', 'J. Caillat', 'J. Mauritsson', 'A. Maquet', 'R. Taïeb', 'A. L’Huillier']
+- **作者**：K. Klünder J. M. Dahlström M. Gisselbrecht T. Fordell M. Swoboda D. Guénot P. Johnsson J. Caillat J. Mauritsson A. Maquet R. Taïeb A. L’Huillier
 - **引用**：461 次 | **标签**：theory, measurement, RABBITT, attosecond
 - **摘要**：We study photoionization of argon atoms excited by attosecond pulses using an interferometric measurement technique. We measure the difference in time delays between electrons emitted from the 3s² and from the 3p⁶ shell, at different excitation energies ranging from 32 to 42 eV. The determination of
 
-### ['Bright', 'Coherent', 'Ultrafast Soft X-Ray Harmonics Spanning the Water Window from a Tabletop Light Source']（2010）
-- **作者**：['M.C. Chen', 'P. Arpin', 'T. Popmintchev', 'M. Gerrity', 'B. Zhang', 'M. Seaberg', 'M.M. Murnane', 'H.C. Kapteyn']
+### Bright Coherent Ultrafast Soft X-Ray Harmonics Spanning the Water Window from a Tabletop Light Source（2010）
+- **作者**：M.C. Chen P. Arpin T. Popmintchev M. Gerrity B. Zhang M. Seaberg M.M. Murnane H.C. Kapteyn
 - **引用**：312 次 | **标签**：theory, water-window, phase-matching
 - **摘要**：We demonstrate fully phase matched high-order harmonic generation with emission spanning the water window spectral region important for bio- and nano-imaging and a breadth of materials and molecular dynamics studies. We also generate the broadest bright coherent bandwidth (~300eV) to date obtained f
 
@@ -117,7 +117,7 @@ $$E_{\text{cutoff}} \approx E_g + 2U_p$$
 
 
 ### Improved Lewenstein model for high-order harmonic generation of atoms and molecules with scattering wavefunctions（2007）
-- **作者**：['Anh-Thu Le', 'Toru Morishita', 'C. D. Lin']
+- **作者**：Anh-Thu Le Toru Morishita C. D. Lin
 - **引用**：1 次 | **标签**：theory, Lewenstein-model, SFA
 - **摘要**：We demonstrate a simple method to improve the Lewenstein model for the description of high-order harmonic generation (HHG). It is shown that HHG spectra can be expressed as the product of a returning electron wave packet and the photo-recombination cross sections, where the former can be extracted f
 
@@ -126,7 +126,7 @@ $$E_{\text{cutoff}} \approx E_g + 2U_p$$
 
 
 ### Quantum theory of a high harmonic generation as a three-step process（1999）
-- **作者**：['M. Yu. Kuchiev', 'V. N. Ostrovsky']
+- **作者**：M. Yu. Kuchiev V. N. Ostrovsky
 - **引用**：40 次 | **标签**：theory, three-step, quantum-model
 - **摘要**：Fully quantum treatment explicitly presents the high harmonic generation as a three-step process: (i) above threshold ionization (ATI) is followed by (ii) electron propagation in a laser-dressed continuum. Subsequently (iii) stimulated (or laser assisted) recombination brings the electron back into 
 
