@@ -2307,6 +2307,10 @@ function bindKbManagerEvents() {
   document.getElementById('kb-wiki-create-stub')?.addEventListener('click', createWikiStub);
   document.getElementById('kb-wiki-filter')?.addEventListener('change', loadKbWiki);
 
+  // v2.7.0: 项目面板 + hermes 控制台
+  if (typeof bindProjectsEvents === 'function') bindProjectsEvents();
+  if (typeof bindHermesEvents === 'function') bindHermesEvents();
+
   // 技能管理器
   document.getElementById('skill-manager-close')?.addEventListener('click', closeSkillManager);
   document.getElementById('skill-manager-overlay')?.addEventListener('click', (e) => {

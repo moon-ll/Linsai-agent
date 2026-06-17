@@ -1,5 +1,46 @@
 # 变更记录
 
+## v2.7.0 - 2026-06-17 hermes 协作中枢：林赛 Web 作为双 hermes 工作流的指挥台
+
+### 架构定位
+hermes（+ profile linsai）是"大脑和手脚"——自主执行论文简报 cron、NSFC 工作流 cron。
+林赛 CoPilot Web 升级为"指挥台和档案室"——可视化产出、控制 cron、沉淀知识、多端汇聚。
+
+### 新增 5 个核心脚本
+- `scripts/project_reader.py`：解析 NSFC state.md（进度/待决策/路线图）、discussions（决策卡）、topics（申请书章节）、文献候选/简报
+- `scripts/kb_importer.py`：把 hermes 产出（daily_candidates/deep_analysis JSON）转换为林赛知识库 markdown，沉淀到「文献简报」子库
+- `scripts/hermes_bridge.py`：控制 hermes cron（list/pause/resume/run）+ 手动派活（oneshot agent loop）
+- `scripts/sync_engine.py`：多端同步层，扫描 hermes 248 个会话/文献产出 → 导入林赛（幂等去重）
+- 知识库子库改造：`knowledge_base.py` 支持 projects/ 子目录、project 字段过滤检索、图谱 belongs_to 边
+
+### 新增 12 个 API 端点
+- **项目数据**：`/api/projects`、`/api/projects/nsfc/{dashboard,decisions,chapters,proposal}`、`/api/projects/papers/{candidates,briefings}`
+- **hermes 控制**：`/api/hermes/cron`、`/api/hermes/cron/<id>/{pause,resume,run}`、`/api/hermes/run`（SSE 流式）
+- **导入沉淀**：`/api/import/paper`、`/api/sync/{status,run}`
+
+### 新增前端
+- 工具栏加 📂 项目面板 + ⚡ hermes 控制台两个按钮
+- `web/js/projects.js`：NSFC 仪表盘（阶段/待决策/风险/路线图/决策时间轴）+ 文献候选表格（勾选导入）+ 多端同步
+- `web/js/hermes_console.js`：cron 列表（启停/触发）+ 手动派活（hermes agent loop 流式输出）
+
+### 知识库子库架构
+- `knowledge/wiki/projects/文献简报/` 和 `NSFC-强场超快/` 两个子库
+- frontmatter 新增 `project` 字段，search() 支持 `project=` 过滤
+- 图谱自动连接 项目节点→子内容（belongs_to 边）
+- 文献简报子库可作为 NSFC 项目的知识来源（跨子库互联）
+
+### 写回策略（安全）
+- 林赛讨论结论只写 hermes 的 `discussions/`（BRAIN 必读输入），不直接改申请书内容
+- 文献讨论沉淀写林赛自己的 `knowledge/wiki/projects/文献简报/`
+
+### 验证
+- `py_compile` 全量通过 + `self_test` 88/88 全绿
+- 5 个新脚本自检全部通过
+- web_server 实测：12 个 API 返回 200，前端面板渲染正常
+- NSFC 仪表盘：3 BRAIN 区块 / 5 待决策 / 20 路线图行 / 5 条决策
+- 文献候选：55 篇可导入，子库检索验证通过
+- hermes cron：6 个 job 正确读取，网关 running
+
 ## v2.6.2 - 2026-06-17 代码瑕疵修复 + 知识库索引重建 + 会话摘要链路接通
 
 ### 修复 3 处代码瑕疵

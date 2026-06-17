@@ -61,6 +61,11 @@ import proactive_engine as pe
 import session_manager as sm
 import skill_manager as skm
 import task_manager as tm
+# v2.7.0: hermes 协作中枢模块
+import project_reader as pr
+import kb_importer as ki
+import hermes_bridge as hb
+import sync_engine as se
 import usage_tracker as ut
 
 
@@ -497,6 +502,57 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"log": [], "error": str(e)})
             return
 
+        # ============================================================
+        # v2.7.0: 项目面板 + hermes 协作中枢 API（GET）
+        # ============================================================
+
+        # 项目概况
+        if path == "/api/projects":
+            self._send_json(pr.get_projects_overview())
+            return
+
+        # NSFC 仪表盘
+        if path == "/api/projects/nsfc/dashboard":
+            self._send_json(pr.parse_nsfc_state())
+            return
+
+        # NSFC 决策时间轴
+        if path == "/api/projects/nsfc/decisions":
+            limit = int(parse_qs(parsed.query).get("limit", ["10"])[0])
+            self._send_json({"decisions": pr.get_decisions(limit=limit)})
+            return
+
+        # NSFC 申请书章节列表
+        if path == "/api/projects/nsfc/chapters":
+            self._send_json({"chapters": pr.get_proposal_chapters()})
+            return
+
+        # NSFC 申请书章节内容
+        if path == "/api/projects/nsfc/proposal":
+            topic = parse_qs(parsed.query).get("topic", [""])[0]
+            self._send_json(pr.read_proposal_content(topic))
+            return
+
+        # 文献候选列表
+        if path == "/api/projects/papers/candidates":
+            self._send_json(pr.get_candidates())
+            return
+
+        # 文献简报列表
+        if path == "/api/projects/papers/briefings":
+            self._send_json({"briefings": pr.get_briefings()})
+            return
+
+        # hermes cron job 列表
+        if path == "/api/hermes/cron":
+            self._send_json({"jobs": hb.cron_list(), "status": hb.check_hermes_available()})
+            return
+
+        # 同步状态
+        if path == "/api/sync/status":
+            self._send_json(se.get_sync_status())
+            return
+
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_POST(self) -> None:
@@ -856,6 +912,115 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"success": True, "path": target, "system": sys_name})
             except Exception as e:
                 self._send_json({"error": str(e)}, 500)
+            return
+
+        # ============================================================
+        # v2.7.0: 项目面板 + hermes 协作中枢 API
+        # ============================================================
+
+        # 项目概况
+        if path == "/api/projects":
+            self._send_json(pr.get_projects_overview())
+            return
+
+        # NSFC 仪表盘
+        if path == "/api/projects/nsfc/dashboard":
+            self._send_json(pr.parse_nsfc_state())
+            return
+
+        # NSFC 决策时间轴
+        if path == "/api/projects/nsfc/decisions":
+            limit = int(parse_qs(parsed.query).get("limit", ["10"])[0])
+            self._send_json({"decisions": pr.get_decisions(limit=limit)})
+            return
+
+        # NSFC 申请书章节列表
+        if path == "/api/projects/nsfc/chapters":
+            self._send_json({"chapters": pr.get_proposal_chapters()})
+            return
+
+        # NSFC 申请书章节内容
+        if path == "/api/projects/nsfc/proposal":
+            topic = parse_qs(parsed.query).get("topic", [""])[0]
+            self._send_json(pr.read_proposal_content(topic))
+            return
+
+        # 文献候选列表
+        if path == "/api/projects/papers/candidates":
+            self._send_json(pr.get_candidates())
+            return
+
+        # 文献简报列表
+        if path == "/api/projects/papers/briefings":
+            self._send_json({"briefings": pr.get_briefings()})
+            return
+
+        # hermes cron job 列表
+        if path == "/api/hermes/cron":
+            self._send_json({"jobs": hb.cron_list(), "status": hb.check_hermes_available()})
+            return
+
+        # 同步状态
+        if path == "/api/sync/status":
+            self._send_json(se.get_sync_status())
+            return
+
+        # ============================================================
+        # v2.7.0: hermes 控制 + 导入 + 同步（POST）
+        # ============================================================
+
+        # hermes cron 控制（暂停/恢复/触发）
+        if path.startswith("/api/hermes/cron/") and path.endswith(("/pause", "/resume", "/run")):
+            parts = path.split("/")
+            if len(parts) >= 6:
+                job_id = parts[4]
+                action = parts[5]
+                result = hb.cron_control(job_id, action)
+                self._send_json(result)
+            else:
+                self._send_json({"error": "格式: /api/hermes/cron/<id>/<action>"}, 400)
+            return
+
+        # hermes 手动派活（oneshot agent loop）
+        if path == "/api/hermes/run":
+            prompt = body.get("prompt", "").strip()
+            if not prompt:
+                self._send_json({"error": "缺少 prompt"}, 400)
+                return
+            timeout = int(body.get("timeout", 300))
+            # 在后台线程执行（agent loop 较慢），通过 SSE 返回
+            self._send_sse_header()
+            def _hermes_worker():
+                try:
+                    result = hb.oneshot(prompt, timeout=timeout)
+                    for chunk in split_response_stream(result.get("output", "") or result.get("error", "")):
+                        self._send_sse({"type": "token", "content": chunk})
+                    self._send_sse({"type": "done", "success": result["success"]})
+                except Exception as e:
+                    self._send_sse({"type": "error", "message": str(e)})
+                finally:
+                    self._send_sse_raw("data: [DONE]\n\n")
+                    self.wfile.flush()
+            threading.Thread(target=_hermes_worker, daemon=True).start()
+            return
+
+        # 导入文献到子库
+        if path == "/api/import/paper":
+            arxiv_id = body.get("arxiv_id", "").strip()
+            with_analysis = body.get("with_analysis", False)
+            if not arxiv_id:
+                self._send_json({"error": "缺少 arxiv_id"}, 400)
+                return
+            results = {"candidate": ki.import_candidate(arxiv_id)}
+            if with_analysis:
+                results["analysis"] = ki.import_deep_analysis(arxiv_id)
+            self._send_json({"success": True, "results": results})
+            return
+
+        # 触发多端同步
+        if path == "/api/sync/run":
+            result = se.sync_all()
+            self._send_json({"success": True, "result": result})
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)

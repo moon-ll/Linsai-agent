@@ -49,6 +49,8 @@
       <button class="toolbar-btn" id="toolbar-tasks" title="任务" data-tooltip="任务">📋</button>
       <button class="toolbar-btn" id="toolbar-usage" title="用量" data-tooltip="用量统计">📊</button>
       <button class="toolbar-btn" id="toolbar-learning" title="自主学习" data-tooltip="自主学习">🌱</button>
+      <button class="toolbar-btn" id="toolbar-projects" title="项目面板" data-tooltip="项目面板">📂</button>
+      <button class="toolbar-btn" id="toolbar-hermes" title="hermes控制台" data-tooltip="hermes控制台">⚡</button>
     </div>
   </aside>
 
@@ -438,6 +440,53 @@
 <!-- 主动提醒弹窗 -->
 <div class="toast-container" id="toast-container"></div>
 
+<!-- v2.7.0: 项目面板 -->
+<div class="modal-overlay" id="projects-overlay" style="display:none;">
+  <div class="modal-content" style="max-width:760px;max-height:88vh;display:flex;flex-direction:column;">
+    <div class="modal-header">
+      <h3>📂 项目面板</h3>
+      <button class="btn-icon" id="projects-close">✕</button>
+    </div>
+    <div style="padding:8px 16px;border-bottom:1px solid var(--border-color);display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="proj-tab-btn" data-tab="nsfc" style="padding:6px 12px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-active);cursor:pointer;font-size:0.85rem;">🔬 NSFC 项目</button>
+      <button class="proj-tab-btn" data-tab="papers" style="padding:6px 12px;border:1px solid var(--border-color);border-radius:6px;background:transparent;cursor:pointer;font-size:0.85rem;">📄 文献简报</button>
+      <button class="proj-tab-btn" data-tab="sync" style="padding:6px 12px;border:1px solid var(--border-color);border-radius:6px;background:transparent;cursor:pointer;font-size:0.85rem;">🔄 多端同步</button>
+      <button id="proj-refresh" style="margin-left:auto;padding:6px 12px;font-size:0.85rem;cursor:pointer;">🔄 刷新</button>
+    </div>
+    <div id="projects-body" style="flex:1;overflow-y:auto;padding:16px;font-size:0.9rem;">
+      <p style="color:var(--text-tertiary);text-align:center;padding:40px;">加载中...</p>
+    </div>
+  </div>
+</div>
+
+<!-- v2.7.0: hermes 控制台 -->
+<div class="modal-overlay" id="hermes-overlay" style="display:none;">
+  <div class="modal-content" style="max-width:680px;max-height:88vh;display:flex;flex-direction:column;">
+    <div class="modal-header">
+      <h3>⚡ hermes 控制台</h3>
+      <button class="btn-icon" id="hermes-close">✕</button>
+    </div>
+    <div style="padding:8px 16px;border-bottom:1px solid var(--border-color);display:flex;justify-content:space-between;align-items:center;">
+      <span id="hermes-status" style="font-size:0.8rem;color:var(--text-secondary);">检查中...</span>
+      <button id="hermes-refresh" style="padding:4px 10px;font-size:0.8rem;cursor:pointer;">🔄</button>
+    </div>
+    <div style="flex:1;overflow-y:auto;padding:12px 16px;">
+      <h4 style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:8px;">定时任务（cron）</h4>
+      <div id="hermes-cron-list" style="margin-bottom:16px;">
+        <p style="color:var(--text-tertiary);font-size:0.85rem;">加载中...</p>
+      </div>
+      <h4 style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:8px;">手动派活（hermes agent loop）</h4>
+      <div style="display:flex;gap:8px;margin-bottom:8px;">
+        <input type="text" id="hermes-prompt" placeholder="输入任务，如：深分析 arXiv 2403.15337" style="flex:1;padding:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;">
+        <button id="hermes-run" style="padding:8px 16px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">执行</button>
+      </div>
+      <div id="hermes-output" style="background:var(--bg-secondary);border-radius:6px;padding:12px;min-height:80px;max-height:300px;overflow-y:auto;font-size:0.85rem;white-space:pre-wrap;display:none;"></div>
+    </div>
+  </div>
+</div>
+
 <script src="/web/js/app.js"></script>
+<script src="/web/js/projects.js"></script>
+<script src="/web/js/hermes_console.js"></script>
 </body>
 </html>

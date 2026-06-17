@@ -429,13 +429,17 @@ def get_wiki_page(rel_path: str) -> Optional[Dict[str, Any]]:
 
 
 def list_wiki_pages(wiki_type: Optional[str] = None) -> List[Dict[str, Any]]:
-    """列出所有 wiki 页面（只返回 frontmatter，不加载全文）。"""
+    """列出所有 wiki 页面（只返回 frontmatter，不加载全文）。
+
+    支持子目录（v2.7.0）：projects/ 等类型下可按项目再分子目录，
+    用 rglob 递归扫描，使子库结构可见。
+    """
     pages = []
     dirs = [WIKI_DIR / wiki_type] if wiki_type else [WIKI_DIR / t for t in _WIKI_TYPES]
     for d in dirs:
         if not d.exists():
             continue
-        for fpath in sorted(d.glob("*.md")):
+        for fpath in sorted(d.rglob("*.md")):
             try:
                 text = fpath.read_text(encoding="utf-8")
                 fm, _ = parse_frontmatter(text)
@@ -448,6 +452,7 @@ def list_wiki_pages(wiki_type: Optional[str] = None) -> List[Dict[str, Any]]:
                     "confidence": fm.get("confidence", 0.0),
                     "updated": fm.get("updated", ""),
                     "tags": fm.get("tags", []),
+                    "project": fm.get("project", ""),
                 })
             except Exception:
                 continue
@@ -507,6 +512,15 @@ def save_wiki_page(rel_path: str, content: str, meta: Optional[Dict[str, Any]] =
         for related in fm.get("related", []):
             if related:
                 add_graph_edge(title, related, "related")
+        # 子库归属（v2.7.0）：frontmatter 含 project 时，自动连 项目→title 边
+        projects = fm.get("project", [])
+        if isinstance(projects, str):
+            projects = [projects] if projects else []
+        for proj in projects:
+            if proj:
+                # 确保项目节点存在（作为汇聚节点）
+                update_graph_node(proj, "projects", f"wiki/projects/{proj}", "mature")
+                add_graph_edge(title, proj, "belongs_to")
 
     return str(rel_path)
 
@@ -1189,20 +1203,38 @@ def build_index(force: bool = False) -> Dict[str, Any]:
         # 判断来源（raw 还是 wiki）
         source = "wiki" if "wiki/" in rel_key else "raw"
 
-        # 对于 wiki 页面，解析 frontmatter 获取额外元数据
+        # 解析 frontmatter 获取额外元数据（wiki 必解析；raw 也尝试解析 project/tags）
         title = file_path.stem
         tags: List[str] = []
         growth_stage = ""
+        project: Any = ""
         if source == "wiki":
             try:
                 fm, body = parse_frontmatter(text)
                 title = fm.get("title", title)
                 tags = fm.get("tags", [])
                 growth_stage = fm.get("growth_stage", "")
+                project = fm.get("project", "")
                 # 索引时包含 frontmatter 中的标签
                 text = body + " " + " ".join(tags)
                 if growth_stage:
                     text += " " + growth_stage
+            except Exception:
+                pass
+
+        # 推断 project（v2.7.0）：若 frontmatter 未声明，从路径 wiki/projects/<项目名>/ 推断
+        if not project and source == "wiki":
+            parts = Path(rel_key).parts
+            if len(parts) >= 3 and parts[1] == "projects":
+                project = parts[2]  # wiki/projects/<项目名>/...
+
+        # raw 文件也尝试解析 project/tags frontmatter（导入的候选论文带 project 标签）
+        if not project and source == "raw":
+            try:
+                fm_raw, _ = parse_frontmatter(text)
+                project = fm_raw.get("project", "")
+                if not tags:
+                    tags = fm_raw.get("tags", [])
             except Exception:
                 pass
 
@@ -1228,6 +1260,7 @@ def build_index(force: bool = False) -> Dict[str, Any]:
             "mtime": mtime,
             "chunks": len(doc_chunks),
             "chunk_list": doc_chunks,
+            "project": project,
         }
         if tags:
             docs[rel_key]["tags"] = tags
@@ -1270,16 +1303,17 @@ def build_index(force: bool = False) -> Dict[str, Any]:
     return index_data
 
 
-def search(query: str, top_k: int = 3, source: str = "all") -> List[Dict[str, Any]]:
+def search(query: str, top_k: int = 3, source: str = "all", project: str = "") -> List[Dict[str, Any]]:
     """根据查询检索相关知识段落（增强版）。
 
     Args:
         query: 用户输入的查询文本
         top_k: 返回最相关的 K 个段落
         source: "all" | "raw" | "wiki" — 只返回指定来源的结果
+        project: 只返回属于指定项目子库的结果（v2.7.0，空字符串=不过滤）
 
     Returns:
-        段落列表，每项含 text, doc, score, source, title, growth_stage
+        段落列表，每项含 text, doc, score, source, title, growth_stage, project
     """
     if not INDEX_PATH.exists():
         return []
@@ -1329,6 +1363,16 @@ def search(query: str, top_k: int = 3, source: str = "all") -> List[Dict[str, An
         if source != "all" and doc_source != source:
             continue
 
+        # 项目子库过滤（v2.7.0）
+        doc_project = doc_info.get("project", "")
+        if project:
+            # project 可能是字符串或列表
+            if isinstance(doc_project, list):
+                if project not in doc_project:
+                    continue
+            elif doc_project != project:
+                continue
+
         chunk_id = info["chunk_id"]
         chunk_text = ""
         chunk_keywords = []
@@ -1366,6 +1410,7 @@ def search(query: str, top_k: int = 3, source: str = "all") -> List[Dict[str, An
             "source": doc_source,
             "title": doc_info.get("title", doc_name),
             "growth_stage": doc_info.get("growth_stage", ""),
+            "project": doc_info.get("project", ""),
         })
 
     scored.sort(key=lambda x: x["score"], reverse=True)
