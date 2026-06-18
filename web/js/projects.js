@@ -264,8 +264,8 @@ async function renderPapersCards(container) {
   // 按状态分组
   const groups = [
     {status: 'unseen', label: '🔔 未看（待你决定）', color: 'var(--info-color)', defaultOpen: true},
-    {status: 'viewed', label: '⏰ 已看未讨论（稍后回来）', color: 'var(--warning-color)', defaultOpen: false},
-    {status: 'archived', label: '✅ 已归档（已沉淀知识库）', color: 'var(--success-color)', defaultOpen: false},
+    {status: 'viewed', label: '📖 已看未讨论（感兴趣/待深读，讨论后归档）', color: 'var(--warning-color)', defaultOpen: false},
+    {status: 'archived', label: '✅ 已归档（深度阅读+讨论后的知识沉淀）', color: 'var(--success-color)', defaultOpen: false},
   ];
 
   const papers = pool.papers || [];
@@ -293,12 +293,13 @@ async function renderPapersCards(container) {
         html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','interested',this)" style="padding:4px 10px;border:1px solid var(--success-color);border-radius:5px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.78rem;">👍 感兴趣</button>`;
         html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','later',this)" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:5px;background:transparent;color:var(--warning-color);cursor:pointer;font-size:0.78rem;">⏰ 稍后</button>`;
         html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','skip',this)" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:5px;background:transparent;color:var(--text-tertiary);cursor:pointer;font-size:0.78rem;">👎 跳过</button>`;
-        html += `<button onclick="discussPaper('${escapeHtml(p.arxiv_id)}','${escapeHtml(p.title).replace(/'/g,"")}')", style="padding:4px 10px;border:1px solid var(--accent-color);border-radius:5px;background:var(--accent-color);color:#fff;cursor:pointer;font-size:0.78rem;">💬 讨论</button>`;
+        html += `<button onclick="discussPaper('${escapeHtml(p.arxiv_id)}','${escapeHtml(p.title).replace(/'/g,"")}')" style="padding:4px 10px;border:1px solid var(--accent-color);border-radius:5px;background:var(--accent-color);color:#fff;cursor:pointer;font-size:0.78rem;">💬 讨论</button>`;
       } else if (g.status === 'viewed') {
-        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','interested',this)" style="padding:4px 10px;border:1px solid var(--success-color);border-radius:5px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.78rem;">👍 归档+解析</button>`;
-        html += `<button onclick="discussPaper('${escapeHtml(p.arxiv_id)}','${escapeHtml(p.title).replace(/'/g,"")}')", style="padding:4px 10px;border:1px solid var(--accent-color);border-radius:5px;background:var(--accent-color);color:#fff;cursor:pointer;font-size:0.78rem;">💬 讨论</button>`;
+        // 已看未讨论：主要操作是讨论，讨论完可归档
+        html += `<button onclick="discussPaper('${escapeHtml(p.arxiv_id)}','${escapeHtml(p.title).replace(/'/g,"")}')" style="padding:4px 10px;border:1px solid var(--accent-color);border-radius:5px;background:var(--accent-color);color:#fff;cursor:pointer;font-size:0.78rem;">💬 讨论</button>`;
+        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','discuss_done',this)" style="padding:4px 10px;border:1px solid var(--success-color);border-radius:5px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.78rem;">📥 归档沉淀</button>`;
       } else {
-        html += `<span style="font-size:0.75rem;color:var(--success-color);padding:4px 8px;">✓ 已沉淀到知识库</span>`;
+        html += `<span style="font-size:0.75rem;color:var(--success-color);padding:4px 8px;">✓ 已深度沉淀</span>`;
       }
       html += `</div></div>`;
     }
@@ -342,10 +343,11 @@ async function paperFeedback(arxivId, action, btn) {
     const r = resp.result || {};
 
     if (action === 'interested') {
-      let msg = `✓ 已归档: ${r.archived || '已存在'}`;
+      showToast('👍 已标记感兴趣，移入"已看未讨论"，待深度讨论后归档', 'success');
+    } else if (action === 'discuss_done') {
+      let msg = `✓ 已归档沉淀: ${r.archived || '已存在'}`;
       if (r.has_analysis) msg += ' + 深度解析已导入';
       showToast(msg, 'success');
-
       // 展示 wiki 建议确认
       if (r.wiki_suggestion && r.wiki_suggestion.available) {
         showWikiGrowConfirm(r.wiki_suggestion);
@@ -354,6 +356,8 @@ async function paperFeedback(arxivId, action, btn) {
       showToast(`✓ 已归档: ${r.archived || '已存在'}`, 'success');
     } else if (action === 'skip') {
       showToast('👎 已记录偏好', 'info');
+    } else if (action === 'later') {
+      showToast('⏰ 已标记稍后', 'info');
     }
 
     // 刷新候选池（状态流转，不删除）

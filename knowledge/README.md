@@ -7,22 +7,33 @@
 ```
 knowledge/
 ├── raw/                    # 原始材料（只读）
-│   ├── papers/             # 论文 PDF/笔记
-│   │   └── [arXiv ID].md  # 61 篇 HHG 相关论文（2026-05-19 更新）
+│   ├── papers/             # arXiv 论文元数据（deepxiv 流水线抓取）
+│   │   └── [year]-[arxiv_id]-[slug].md  # 61 篇 HHG 论文，project: deepxiv-论文库
 │   ├── notes/              # 用户手写笔记
 │   └── webclips/           # 网页剪藏
-├── wiki/                   # 结构化知识（LLM 智能管理）
-│   ├── concepts/           # 核心概念
-│   ├── methods/            # 实验方法与技术
-│   ├── people/             # 重要学者
-│   ├── papers/             # 论文精读笔记
-│   └── projects/           # 项目知识聚合
-├── templates/              # Obsidian 模板
-├── index.json              # 倒排索引（程序生成）
-├── graph.json              # 知识图谱（程序生成）
-├── aliases.json            # 别名映射
+├── wiki/                   # 结构化知识（林赛研究笔记）
+│   ├── concepts/           # 核心概念（10 篇：三步模型/截止定律/相位匹配等）
+│   ├── methods/            # 实验方法（8 篇：RABBITT/FROG/VMI/TDSE 等）
+│   ├── people/             # 学者（5 篇：Corkum/Krausz/LHuillier 等）
+│   ├── papers/             # 综述报告（6 篇 hhg-* 综述 + _archive/）
+│   └── projects/           # 子库（按研究方向聚合）
+│       ├── deepxiv-论文库/  # deepxiv 抓取的论文（project 标签）
+│       └── NSFC-强场超快/   # NSFC 课题相关论文
+├── templates/              # Obsidian 模板（含 project 字段）
+├── index.json              # 倒排索引（程序生成，含 project 字段）
+├── graph.json              # 知识图谱（27 节点 26 边，程序生成）
+├── aliases.json            # 别名映射（25 组中英对照）
 └── growth-log.json         # 知识生长日志
 ```
+
+## project 字段与子库分类
+
+每篇文档的 frontmatter 含 `project` 字段，标识归属子库：
+- `deepxiv-论文库`：deepxiv 流水线从 arXiv 抓取的论文元数据（raw 层，55 篇）
+- `NSFC-强场超快`：NSFC 强场超快课题相关论文（raw 层，6 篇）
+- 检索时可按子库过滤：`search(query, project="NSFC-强场超快")`
+
+> **注意**：`raw/papers/` 中的论文是 deepxiv 抓取的**结构化论文元数据**（含摘要/关键问题/核心发现），不是简报。简报（hermes 每日文献候选）在确认归档前不进入知识库。
 
 ## 调研报告
 

@@ -47,8 +47,8 @@ from typing import Any, Dict, List, Optional
 PROJECT_ROOT = Path(__file__).parent.parent
 KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
 RAW_PAPERS_DIR = KNOWLEDGE_DIR / "raw" / "papers"
-WIKI_PROJECTS_DIR = KNOWLEDGE_DIR / "wiki" / "projects" / "文献简报"
-PROJECT_TAG = "文献简报"
+WIKI_PROJECTS_DIR = KNOWLEDGE_DIR / "wiki" / "projects" / "deepxiv-论文库"
+PROJECT_TAG = "deepxiv-论文库"  # 归档论文默认子库（原"文献简报"，v2.9.3 重命名避免与每日简报混淆）
 
 # hermes 简报产出目录
 HERMES_WORKSPACE = Path.home() / "Desktop" / "hermes_workspace"
@@ -392,7 +392,7 @@ def import_session_discussion(session_path: Path, project: str = PROJECT_TAG) ->
 _SUBPROJECT_RULES = [
     (["固体HHG", "固体", "solid", "凝聚态", "2D", "MoS", "h-BN", "拓扑", "拓扑绝缘", "topological",
       "谷电子", "铁电", "石墨烯", " Transition metal"], "NSFC-强场超快"),
-    (["气体HHG", "气体", "原子", "分子"], "文献简报"),
+    (["气体HHG", "气体", "原子", "分子"], "deepxiv-论文库"),
 ]
 
 

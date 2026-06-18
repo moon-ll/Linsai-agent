@@ -1129,9 +1129,9 @@ class RequestHandler(BaseHTTPRequestHandler):
         # v2.9.0: 文献反馈（👍感兴趣/👎跳过/📥归档）→ 归档+深分析+hermes偏好
         if path == "/api/projects/papers/feedback":
             arxiv_id = body.get("arxiv_id", "").strip()
-            action = body.get("action", "").strip()  # interested/skip/archive/later
-            if not arxiv_id or action not in ("interested", "skip", "archive", "later"):
-                self._send_json({"error": "需要 arxiv_id 和 action(interested/skip/archive/later)"}, 400)
+            action = body.get("action", "").strip()  # interested/skip/archive/later/discuss_done
+            if not arxiv_id or action not in ("interested", "skip", "archive", "later", "discuss_done"):
+                self._send_json({"error": "需要 arxiv_id 和 action(interested/skip/archive/later/discuss_done)"}, 400)
                 return
 
             # 记录反馈到本地（累积偏好）
@@ -1149,27 +1149,23 @@ class RequestHandler(BaseHTTPRequestHandler):
 
             result = {"action": action, "arxiv_id": arxiv_id}
 
-            # 候选池状态联动（v2.9.1）
+            # 候选池状态联动（v2.9.3 重构：感兴趣≠归档）
+            # 正确流程：未看 → [感兴趣] → 已看未讨论 → [讨论完成] → 归档（深度沉淀）
             pool_status_map = {
-                "interested": pp.STATUS_ARCHIVED,  # 归档+深分析 → archived
-                "archive": pp.STATUS_ARCHIVED,     # 仅归档 → archived
-                "skip": pp.STATUS_VIEWED,          # 跳过 → viewed（保留可追溯）
-                "later": pp.STATUS_VIEWED,         # 稍后讨论 → viewed
+                "interested": pp.STATUS_VIEWED,   # 感兴趣 → 已看未讨论（待深度阅读/讨论）
+                "later": pp.STATUS_VIEWED,        # 稍后 → 已看未讨论
+                "skip": pp.STATUS_VIEWED,         # 跳过 → 已看未讨论（保留可追溯）
+                "archive": pp.STATUS_ARCHIVED,    # 归档 → 深度阅读+讨论后的最终沉淀
+                "discuss_done": pp.STATUS_ARCHIVED,  # 讨论完成 → 归档
             }
             pp.update_status(arxiv_id, pool_status_map.get(action, pp.STATUS_VIEWED))
 
             if action == "interested":
-                # 归档候选
-                result["archived"] = ki.import_candidate(arxiv_id)
-                # 尝试导入已有深分析
-                analysis = ki.import_deep_analysis(arxiv_id)
-                result["has_analysis"] = analysis is not None
-                # 生成 wiki 建议（供用户确认）
-                result["wiki_suggestion"] = ki.suggest_wiki_notes(arxiv_id)
-                # 异步反馈给 hermes（fire-and-forget，不阻塞）
+                # 感兴趣：仅记录偏好，不归档（归档需充分讨论后）
+                # 异步反馈 hermes 偏好
                 try:
                     import threading as _th
-                    title = result.get("wiki_suggestion", {}).get("title", arxiv_id)
+                    title = body.get("title", arxiv_id)
                     def _hermes_feedback():
                         try:
                             hb.oneshot(f"用户对 arXiv {arxiv_id}（{title}）标记为感兴趣，请更新研究偏好记忆。", timeout=120)
@@ -1178,13 +1174,21 @@ class RequestHandler(BaseHTTPRequestHandler):
                     _th.Thread(target=_hermes_feedback, daemon=True).start()
                 except Exception:
                     pass
-            elif action == "archive":
+            elif action in ("archive", "discuss_done"):
+                # 归档：深度阅读+讨论后的沉淀
+                # 归档候选到 raw
                 result["archived"] = ki.import_candidate(arxiv_id)
+                if action == "discuss_done":
+                    # 讨论完成：归档 + 深分析 + wiki建议
+                    analysis = ki.import_deep_analysis(arxiv_id)
+                    result["has_analysis"] = analysis is not None
+                    result["wiki_suggestion"] = ki.suggest_wiki_notes(arxiv_id)
+                    result["discussion_summary"] = body.get("discussion_summary", "")
             elif action in ("skip", "later"):
                 # 异步反馈偏好
-                label = "不感兴趣（跳过）" if action == "skip" else "稍后讨论"
                 try:
                     import threading as _th
+                    label = "不感兴趣（跳过）" if action == "skip" else "稍后讨论"
                     def _hermes_pref():
                         try:
                             hb.oneshot(f"用户对 arXiv {arxiv_id} 标记为{label}，请更新偏好。", timeout=60)
