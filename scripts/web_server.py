@@ -516,6 +516,11 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json(pr.parse_nsfc_state())
             return
 
+        # NSFC 层次结构树（v2.9.0 三层展开）
+        if path == "/api/projects/nsfc/tree":
+            self._send_json(pr.parse_nsfc_state_hierarchical())
+            return
+
         # NSFC 决策时间轴
         if path == "/api/projects/nsfc/decisions":
             limit = int(parse_qs(parsed.query).get("limit", ["10"])[0])
@@ -928,6 +933,11 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json(pr.parse_nsfc_state())
             return
 
+        # NSFC 层次结构树（v2.9.0 三层展开）
+        if path == "/api/projects/nsfc/tree":
+            self._send_json(pr.parse_nsfc_state_hierarchical())
+            return
+
         # NSFC 决策时间轴
         if path == "/api/projects/nsfc/decisions":
             limit = int(parse_qs(parsed.query).get("limit", ["10"])[0])
@@ -1021,6 +1031,87 @@ class RequestHandler(BaseHTTPRequestHandler):
         if path == "/api/sync/run":
             result = se.sync_all()
             self._send_json({"success": True, "result": result})
+            return
+
+        # v2.9.0: 文献反馈（👍感兴趣/👎跳过/📥归档）→ 归档+深分析+hermes偏好
+        if path == "/api/projects/papers/feedback":
+            arxiv_id = body.get("arxiv_id", "").strip()
+            action = body.get("action", "").strip()  # interested/skip/archive
+            if not arxiv_id or action not in ("interested", "skip", "archive"):
+                self._send_json({"error": "需要 arxiv_id 和 action(interested/skip/archive)"}, 400)
+                return
+
+            # 记录反馈到本地（累积偏好）
+            import json as _json
+            from datetime import datetime as _dt, timezone as _tz
+            fb_path = _PROJECT_ROOT / "memory" / "paper-feedback.json"
+            fb = []
+            if fb_path.exists():
+                try:
+                    fb = _json.loads(fb_path.read_text(encoding="utf-8"))
+                except Exception:
+                    fb = []
+            fb.append({"arxiv_id": arxiv_id, "action": action, "timestamp": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ")})
+            fb_path.write_text(_json.dumps(fb[-200:], ensure_ascii=False, indent=2), encoding="utf-8")
+
+            result = {"action": action, "arxiv_id": arxiv_id}
+
+            if action == "interested":
+                # 归档候选
+                result["archived"] = ki.import_candidate(arxiv_id)
+                # 尝试导入已有深分析
+                analysis = ki.import_deep_analysis(arxiv_id)
+                result["has_analysis"] = analysis is not None
+                # 生成 wiki 建议（供用户确认）
+                result["wiki_suggestion"] = ki.suggest_wiki_notes(arxiv_id)
+                # 异步反馈给 hermes（fire-and-forget，不阻塞）
+                try:
+                    import threading as _th
+                    title = result.get("wiki_suggestion", {}).get("title", arxiv_id)
+                    def _hermes_feedback():
+                        try:
+                            hb.oneshot(f"用户对 arXiv {arxiv_id}（{title}）标记为感兴趣，请更新研究偏好记忆。", timeout=120)
+                        except Exception:
+                            pass
+                    _th.Thread(target=_hermes_feedback, daemon=True).start()
+                except Exception:
+                    pass
+            elif action == "archive":
+                result["archived"] = ki.import_candidate(arxiv_id)
+            elif action == "skip":
+                # 异步反馈 skip 偏好
+                try:
+                    import threading as _th
+                    def _hermes_skip():
+                        try:
+                            hb.oneshot(f"用户对 arXiv {arxiv_id} 标记为不感兴趣（跳过），请更新偏好。", timeout=60)
+                        except Exception:
+                            pass
+                    _th.Thread(target=_hermes_skip, daemon=True).start()
+                except Exception:
+                    pass
+
+            self._send_json({"success": True, "result": result})
+            return
+
+        # v2.9.0: 知识库智能生长（按用户确认生成 wiki 笔记）
+        if path == "/api/knowledge/grow":
+            arxiv_id = body.get("arxiv_id", "").strip()
+            confirmed = body.get("confirmed", {})
+            if not arxiv_id:
+                self._send_json({"error": "缺少 arxiv_id"}, 400)
+                return
+            result = ki.grow_from_suggestion(arxiv_id, confirmed)
+            self._send_json(result)
+            return
+
+        # v2.9.0: 查询 wiki 建议（不触发反馈，仅看建议）
+        if path == "/api/knowledge/suggest":
+            arxiv_id = body.get("arxiv_id", "").strip()
+            if not arxiv_id:
+                self._send_json({"error": "缺少 arxiv_id"}, 400)
+                return
+            self._send_json(ki.suggest_wiki_notes(arxiv_id))
             return
 
         # v2.8.0: 创建任务

@@ -485,6 +485,152 @@ def get_projects_overview() -> Dict[str, Any]:
 
 
 # ============================================================
+# NSFC state.md 层次结构解析（v2.9.0 三层展开）
+# ============================================================
+
+# 文件路径正则：反引号路径 `xxx/yyy.md` 和 markdown 链接 [text](path)
+_RE_TICK_PATH = re.compile(r"`([a-zA-Z0-9_/\-\.]+\.md)`")
+_RE_MD_LINK = re.compile(r"\[([^\]]*?)\]\(([a-zA-Z0-9_/\-\.]+\.md)\)")
+# 默认展开的关键区块（按 emoji 匹配）
+_DEFAULT_OPEN_ICONS = {"🎯", "⚠️", "⚠", "📅"}
+
+
+def parse_nsfc_state_hierarchical() -> Dict[str, Any]:
+    """解析 NSFC state.md 为三层结构（供前端折叠树渲染）。
+
+    层次：
+      第1层：## 区块（标题 + emoji）
+      第2层：区块内的 ### 子标题 / 表格行 / 列表项
+      第3层：行内提取的文件路径（可点击读内容）
+
+    Returns:
+        {
+          "available": bool,
+          "sections": [
+            {
+              "title": "🧠 BRAIN 决策 (...)",
+              "icon": "🧠",
+              "summary": "首段非空摘要",
+              "default_open": bool,  # 是否默认展开
+              "rows": [  # 第2层
+                {
+                  "type": "table"|"list"|"text",
+                  "cells": ["...", ...]  # table 行的单元格 / list 的文本
+                  "file_paths": ["topics/...md", ...]  # 第3层
+                  "status": "done"|"in_progress"|"risk"|"pending_decision"|""
+                }
+              ]
+            }
+          ],
+          "last_updated": str,
+        }
+    """
+    state_path = NSFC_DIR / "state.md"
+    if not state_path.exists():
+        return {"available": False, "sections": [], "reason": "state.md 不存在"}
+
+    text = _read_text(state_path)
+    result: Dict[str, Any] = {
+        "available": True,
+        "sections": [],
+        "last_updated": datetime.fromtimestamp(state_path.stat().st_mtime).strftime("%Y-%m-%d %H:%M"),
+    }
+
+    # 第1层：按 ## 切区块
+    raw_sections = re.split(r"^## ", text, flags=re.MULTILINE)
+    for raw_sec in raw_sections[1:]:  # 跳过第一段（文件头）
+        lines = raw_sec.strip().split("\n")
+        if not lines:
+            continue
+        header = lines[0].strip()
+
+        # 提取 emoji icon
+        icon = ""
+        for ch in header:
+            if ord(ch) > 0x1F000:  # emoji 范围
+                icon += ch
+
+        # 摘要：首个非空非标题非表格行
+        summary = ""
+        for line in lines[1:5]:
+            line = line.strip()
+            if line and not line.startswith("|") and not line.startswith("#") and not line.startswith("---"):
+                summary = line[:100]
+                break
+
+        # 第2层：解析区块内的行
+        rows = []
+        in_table = False
+        for line in lines[1:]:
+            line_stripped = line.strip()
+            if not line_stripped:
+                in_table = False
+                continue
+
+            # 表格行
+            if line_stripped.startswith("|"):
+                if "---" in line_stripped:
+                    continue  # 表头分隔线
+                cells = [c.strip() for c in line_stripped.split("|")[1:-1]]
+                if cells and any(c for c in cells):
+                    # 提取第3层文件路径
+                    file_paths = set()
+                    for cell in cells:
+                        for m in _RE_TICK_PATH.finditer(cell):
+                            file_paths.add(m.group(1))
+                        for m in _RE_MD_LINK.finditer(cell):
+                            file_paths.add(m.group(2))
+                    # 检测状态
+                    status = _detect_status(line_stripped)
+                    rows.append({
+                        "type": "table",
+                        "cells": cells,
+                        "file_paths": sorted(file_paths),
+                        "status": status,
+                    })
+                in_table = True
+                continue
+
+            # 列表项（- 或 数字.）
+            list_match = re.match(r"^(?:[-*]|\d+\.)\s+(.+)", line_stripped)
+            if list_match:
+                content = list_match.group(1)
+                file_paths = set()
+                for m in _RE_TICK_PATH.finditer(content):
+                    file_paths.add(m.group(1))
+                for m in _RE_MD_LINK.finditer(content):
+                    file_paths.add(m.group(2))
+                status = _detect_status(content)
+                rows.append({
+                    "type": "list",
+                    "cells": [content],
+                    "file_paths": sorted(file_paths),
+                    "status": status,
+                })
+                continue
+
+            # ### 子标题作为分隔标记（也作为 text 行）
+            if line_stripped.startswith("###"):
+                rows.append({
+                    "type": "text",
+                    "cells": [line_stripped.lstrip("#").strip()],
+                    "file_paths": [],
+                    "status": "",
+                })
+                continue
+
+        result["sections"].append({
+            "title": header[:80],
+            "icon": icon or "📄",
+            "summary": summary,
+            "default_open": any(ic in header for ic in _DEFAULT_OPEN_ICONS) or len(rows) <= 3,
+            "rows": rows,
+        })
+
+    return result
+
+
+# ============================================================
 # 自检
 # ============================================================
 

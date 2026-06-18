@@ -105,12 +105,12 @@ def _find_candidate(arxiv_id: str) -> Optional[Dict[str, Any]]:
     return None
 
 
-def import_candidate(arxiv_id: str, project: str = PROJECT_TAG) -> Optional[str]:
+def import_candidate(arxiv_id: str, project: str = "") -> Optional[str]:
     """导入单篇候选论文到 raw/papers/。
 
     Args:
         arxiv_id: arXiv 论文 ID（如 '2403.15337'）
-        project: 归属项目标签（默认「文献简报」）
+        project: 归属项目标签（空则按 direction 自动推断）
 
     Returns:
         生成的文件相对路径；未找到候选返回 None。
@@ -119,6 +119,10 @@ def import_candidate(arxiv_id: str, project: str = PROJECT_TAG) -> Optional[str]
     if not candidate:
         print(f"○ 未找到候选论文: {arxiv_id}")
         return None
+
+    # 子库自动分类（v2.9.0）：project 为空时按 direction 推断
+    if not project:
+        project = infer_project(candidate.get("direction", ""))
 
     title = candidate.get("title", arxiv_id)
     year = _extract_year(candidate.get("date", ""))
@@ -184,7 +188,7 @@ score_deepxiv: {score}
     return str(out_path.relative_to(KNOWLEDGE_DIR))
 
 
-def import_deep_analysis(arxiv_id: str, project: str = PROJECT_TAG) -> Optional[str]:
+def import_deep_analysis(arxiv_id: str, project: str = "") -> Optional[str]:
     """导入深度解析到 wiki/projects/文献简报/ 子库。
 
     将 hermes 的深度分析（why_notable / core_findings / linsai_connection）
@@ -192,7 +196,7 @@ def import_deep_analysis(arxiv_id: str, project: str = PROJECT_TAG) -> Optional[
 
     Args:
         arxiv_id: arXiv 论文 ID
-        project: 归属项目标签
+        project: 归属项目标签（空则按 direction 推断）
 
     Returns:
         生成的 wiki 文件相对路径；无深度解析返回 None。
@@ -201,6 +205,10 @@ def import_deep_analysis(arxiv_id: str, project: str = PROJECT_TAG) -> Optional[
     if not analysis:
         print(f"○ 无深度解析: {arxiv_id}")
         return None
+
+    # 子库自动分类
+    if not project:
+        project = infer_project(analysis.get("direction", ""))
 
     title = analysis.get("title", arxiv_id)
     authors = analysis.get("authors", "")
@@ -214,7 +222,9 @@ def import_deep_analysis(arxiv_id: str, project: str = PROJECT_TAG) -> Optional[
 
     slug = _slugify(title)
     filename = f"{slug}.md"
-    out_path = WIKI_PROJECTS_DIR / filename
+    # 按推断的 project 归入对应子库目录
+    out_dir = KNOWLEDGE_DIR / "wiki" / "projects" / project
+    out_path = out_dir / filename
 
     tags = [PROJECT_TAG, "深度解析"]
     if direction:
@@ -280,9 +290,6 @@ related: []
     out_path.write_text(content, encoding="utf-8")
     print(f"✓ 深度解析已导入子库: wiki/projects/{project}/{filename}")
     return str(out_path.relative_to(KNOWLEDGE_DIR))
-
-
-def import_all_candidates(project: str = PROJECT_TAG, with_analysis: bool = False) -> List[str]:
     """批量导入当日全部候选论文。
 
     Args:
@@ -375,6 +382,230 @@ def import_session_discussion(session_path: Path, project: str = PROJECT_TAG) ->
     out_path.write_text("\n".join(lines), encoding="utf-8")
     print(f"✓ 讨论记录已导入: {filename}")
     return str(out_path.relative_to(KNOWLEDGE_DIR))
+
+
+# ============================================================
+# 智能生长（v2.9.0：归档自动 + wiki 确认）
+# ============================================================
+
+# 子库分类规则：direction 关键词 → 子库名
+_SUBPROJECT_RULES = [
+    (["固体HHG", "固体", "solid", "凝聚态", "2D", "MoS", "h-BN", "拓扑", "拓扑绝缘", "topological",
+      "谷电子", "铁电", "石墨烯", " Transition metal"], "NSFC-强场超快"),
+    (["气体HHG", "气体", "原子", "分子"], "文献简报"),
+]
+
+
+def infer_project(direction: str, default: str = PROJECT_TAG) -> str:
+    """根据研究方向推断归属子库。
+
+    Args:
+        direction: 论文方向标签（如 "固体HHG"、"2D材料"）
+        default: 无法匹配时的默认子库
+
+    Returns:
+        子库名（"NSFC-强场超快" 或 "文献简报"）
+    """
+    if not direction:
+        return default
+    d_lower = direction.lower()
+    for keywords, project in _SUBPROJECT_RULES:
+        for kw in keywords:
+            if kw.lower() in d_lower:
+                return project
+    return default
+
+
+def suggest_wiki_notes(arxiv_id: str) -> Dict[str, Any]:
+    """从深分析推断 wiki 笔记建议（供用户确认后生成）。
+
+    读取 deep_analysis 的 core_findings / new_methods / linsai_connection，
+    提取关键词，匹配现有 concepts，返回结构化建议。
+
+    Returns:
+        {
+          "arxiv_id": str, "title": str, "available": bool,
+          "concepts": [{"name": str, "existing": bool, "reason": str}],  # 建议的 concept 笔记
+          "methods": [{"name": str, "reason": str}],  # 建议的 method 笔记
+          "relations": [{"from": str, "to": str, "reason": str}],  # 建议的图谱关联
+          "project": str,  # 建议归属子库
+        }
+    """
+    analysis = _load_deep_analysis(arxiv_id)
+    if not analysis:
+        return {"arxiv_id": arxiv_id, "available": False, "concepts": [], "methods": [], "relations": []}
+
+    title = analysis.get("title", arxiv_id)
+    direction = analysis.get("direction", "")
+    project = infer_project(direction)
+
+    # 收集现有 concepts（用于匹配）
+    import sys
+    if str(PROJECT_ROOT / "scripts") not in sys.path:
+        sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+    try:
+        from knowledge_base import list_wiki_pages
+        existing_concepts = {p["title"]: p for p in list_wiki_pages("concepts")}
+    except Exception:
+        existing_concepts = {}
+
+    # 从 core_findings 提取概念关键词
+    concepts_suggested = []
+    core_findings = analysis.get("core_findings") or []
+    if isinstance(core_findings, str):
+        core_findings = [core_findings]
+    for finding in core_findings[:5]:
+        if not isinstance(finding, str):
+            continue
+        # 简单关键词提取：找中文/英文术语（>3字符的名词短语）
+        import re
+        terms = re.findall(r"[\u4e00-\u9fff]{2,8}|[A-Z][a-z]+(?:\s[A-Z][a-z]+)*|[A-Z]{2,}(?:-[A-Z]{2,})*", finding)
+        for term in set(terms):
+            if len(term) < 3 or term in ("The", "This", "These", "HHG", "We", "Our"):
+                continue
+            # 匹配现有 concept（模糊）
+            matched = None
+            for ec_title in existing_concepts:
+                if term in ec_title or ec_title in term:
+                    matched = ec_title
+                    break
+            concepts_suggested.append({
+                "name": term,
+                "existing": matched is not None,
+                "existing_title": matched or "",
+                "reason": f"出现在核心发现: {finding[:60]}",
+            })
+
+    # 去重（同名只留一个，优先 existing=True）
+    seen = {}
+    for c in concepts_suggested:
+        key = c["name"]
+        if key not in seen or c["existing"]:
+            seen[key] = c
+    concepts_suggested = list(seen.values())[:8]
+
+    # 从 new_methods 提取方法建议
+    methods_suggested = []
+    new_methods = analysis.get("new_methods") or []
+    if isinstance(new_methods, str):
+        new_methods = [new_methods]
+    for m in new_methods[:3]:
+        if isinstance(m, str) and len(m) > 5:
+            methods_suggested.append({"name": m[:40], "reason": "深分析标注的新方法"})
+
+    # 关联建议：linsai_connection 提到的概念
+    relations_suggested = []
+    linsai_conn = analysis.get("linsai_connection") or ""
+    if isinstance(linsai_conn, str):
+        for ec_title in list(existing_concepts.keys())[:10]:
+            if ec_title in linsai_conn:
+                relations_suggested.append({
+                    "from": title, "to": ec_title, "reason": "林赛视角中提及",
+                })
+
+    return {
+        "arxiv_id": arxiv_id,
+        "title": title,
+        "available": True,
+        "concepts": concepts_suggested,
+        "methods": methods_suggested,
+        "relations": relations_suggested,
+        "project": project,
+    }
+
+
+def grow_from_suggestion(arxiv_id: str, confirmed: Dict[str, Any]) -> Dict[str, Any]:
+    """按用户确认的建议生成 wiki 笔记 + 连图谱。
+
+    Args:
+        arxiv_id: 论文 ID
+        confirmed: {
+          "concepts": [{"name": str, "generate": bool}],  # 用户确认要生成的 concept
+          "relations": [{"from": str, "to": str, "confirm": bool}],  # 确认的关联
+          "project": str,  # 归属子库
+        }
+
+    Returns:
+        {success, generated_concepts: [...], generated_relations: [...]}
+    """
+    import sys
+    if str(PROJECT_ROOT / "scripts") not in sys.path:
+        sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+    from knowledge_base import save_wiki_page, add_graph_edge
+
+    project = confirmed.get("project", PROJECT_TAG)
+    analysis = _load_deep_analysis(arxiv_id)
+    if not analysis:
+        return {"success": False, "error": "无深分析数据"}
+
+    generated = []
+
+    # 生成确认的 concept 笔记（种子级，标记 seedling 待用户补充）
+    for c in confirmed.get("concepts", []):
+        if not c.get("generate"):
+            continue
+        name = c.get("name", "").strip()
+        if not name:
+            continue
+        wiki_type = c.get("type", "concepts")
+        content = f"""---
+title: "{name}"
+type: "{wiki_type}"
+created: "{_now_utc()}"
+updated: "{_now_utc()}"
+tags: ["{project}", "自动提取"]
+related: []
+aliases: []
+project: ["{project}"]
+source_arxiv: "{arxiv_id}"
+growth_stage: "seedling"
+confidence: 0.4
+---
+
+# {name}
+
+## 来源
+
+从 arXiv [{arxiv_id}](https://arxiv.org/abs/{arxiv_id}) 的深度分析自动提取。
+
+> 这是一个种子笔记，请补充你的理解。
+
+## 林赛的理解
+
+（待补充）
+
+## 核心要点
+
+（待补充）
+
+## 来源论文
+
+- {analysis.get('title', arxiv_id)} ([arXiv {arxiv_id}](https://arxiv.org/abs/{arxiv_id}))
+"""
+        try:
+            rel_path = save_wiki_page(name, wiki_type, content)
+            generated.append({"type": wiki_type, "name": name, "path": rel_path})
+        except Exception as e:
+            generated.append({"type": wiki_type, "name": name, "error": str(e)})
+
+    # 生成确认的关联边
+    relations_made = []
+    for r in confirmed.get("relations", []):
+        if not r.get("confirm"):
+            continue
+        try:
+            add_graph_edge(r["from"], r["to"], r.get("reason", "related"))
+            relations_made.append({"from": r["from"], "to": r["to"]})
+        except Exception:
+            pass
+
+    return {
+        "success": True,
+        "generated_concepts": [g for g in generated if g.get("type") == "concepts"],
+        "generated_all": generated,
+        "generated_relations": relations_made,
+        "project": project,
+    }
 
 
 def _self_check() -> None:

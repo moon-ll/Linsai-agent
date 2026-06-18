@@ -1,5 +1,46 @@
 # 变更记录
 
+## v2.9.0 - 2026-06-18 以知识库为核心的科研协作工作流
+
+### 用户需求重构
+界面是基本需求（文献卡+进度展开），知识库是核心（反馈→深读→归档→分类→生长），讨论是轻量的。
+
+### 文献卡小红书式卡片流
+- 每篇候选文献一张卡片（标题/作者/方向/评分/TL;DR），纵向滚动流
+- 三个操作按钮：👍感兴趣 / 👎跳过 / 📥归档，操作后卡片淡出移除
+- 👍 触发：归档 raw + 导入深分析 + 生成 wiki 笔记建议 + 异步反馈 hermes 偏好
+
+### 申请书进度层次展开
+- 新增 `parse_nsfc_state_hierarchical()`：state.md → 三层结构（区块→表格行→文件路径）
+- 前端渲染为可折叠 `<details>` 树，关键区块默认展开（当前Phase/待决策/风险）
+- 表格行/列表项提取文件路径，点击 📄 按钮加载文档内容（第3层）
+
+### 知识库智能生长（归档自动 + wiki 确认）
+- `suggest_wiki_notes(arxiv_id)`：从深分析的 core_findings/linsai_connection 提取概念和关联建议
+- 👍 处理后弹出确认弹窗：勾选要生成的概念笔记和图谱关联，确认后生成
+- 生成的笔记标记 seedling（confidence 0.4），邀请用户补充
+- `grow_from_suggestion()`：按确认结果生成 wiki 笔记 + 连图谱边
+
+### 子库自动分类
+- `infer_project(direction)`：按方向关键词自动归入对应子库
+  - "固体HHG"/"2D材料"/"拓扑" → NSFC-强场超快 子库
+  - 默认 → 文献简报 子库
+- import_candidate/import_deep_analysis 自动使用
+
+### hermes 偏好反馈闭环
+- 👍/👎 时异步调 `hermes_bridge.oneshot()` 反馈用户偏好（fire-and-forget，不阻塞 UI）
+- 本地 `memory/paper-feedback.json` 累积偏好数据
+
+### 新增 API
+- `GET /api/projects/nsfc/tree` — 层次结构树（12 区块）
+- `POST /api/projects/papers/feedback` — 文献反馈（interested/skip/archive）
+- `POST /api/knowledge/suggest` — 查询 wiki 建议
+- `POST /api/knowledge/grow` — 按确认生成 wiki 笔记
+
+### 验证
+- self_test 88/88 + web_api 26/26 全绿
+- 实测：tree 返回 12 区块、feedback(skip/archive) 正常、suggest 返回 8 概念
+
 ## v2.8.0 - 2026-06-17 虚拟用户测试 + 前端 bug 修复 + 知识库全套整理
 
 ### 第一块：Web API 虚拟用户测试框架
