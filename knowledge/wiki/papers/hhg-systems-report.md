@@ -1,3 +1,14 @@
+---
+title: "固体与液体 HHG 体系进展"
+type: "papers"
+created: "2026-05-19T00:00:00Z"
+updated: "2026-06-19T00:00:00Z"
+tags: ["HHG", "综述", "材料体系", "#type/report", "#topic/HHG", "#status/mature"]
+related: ["固体高次谐波", "液体高次谐波", "德鲁德模型"]
+growth_stage: "mature"
+confidence: 0.9
+---
+
 # 固体与液体 HHG 体系进展
 
 **最后更新**：2026-06-17 UTC

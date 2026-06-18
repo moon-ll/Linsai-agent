@@ -3,7 +3,7 @@ title: "Corkum"
 type: "people"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
-tags: ["人物", "三步模型", "加拿大"]
+tags: ["人物", "三步模型", "加拿大", "#type/person", "#status/mature"]
 related: ["三步模型", "高次谐波产生"]
 aliases: ["Paul-Corkum", "科克姆"]
 growth_stage: "mature"

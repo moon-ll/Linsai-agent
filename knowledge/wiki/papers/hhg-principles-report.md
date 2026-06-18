@@ -1,3 +1,14 @@
+---
+title: "HHG 光谱学原理与理论模型"
+type: "papers"
+created: "2026-05-19T00:00:00Z"
+updated: "2026-06-19T00:00:00Z"
+tags: ["HHG", "综述", "理论", "#type/report", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/mature"]
+related: ["三步模型", "截止定律", "Lewenstein模型", "相位匹配"]
+growth_stage: "mature"
+confidence: 0.9
+---
+
 # HHG 光谱学原理与理论模型
 
 **调研范围**：2010–2026 年高次谐波光谱学核心文献

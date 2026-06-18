@@ -1,3 +1,14 @@
+---
+title: "HHG 光谱学综合评述与未来展望"
+type: "papers"
+created: "2026-05-19T00:00:00Z"
+updated: "2026-06-19T00:00:00Z"
+tags: ["HHG", "综述", "总论", "#type/report", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/mature"]
+related: ["高次谐波产生", "三步模型", "水窗口"]
+growth_stage: "mature"
+confidence: 0.9
+---
+
 # HHG 光谱学综合评述与未来展望
 
 **最后更新**：2026-06-17 UTC

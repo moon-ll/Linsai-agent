@@ -1,5 +1,46 @@
 # 变更记录
 
+## v2.9.4 - 2026-06-19 知识库专项优化：修bug+分层结构+MOC+标签体系
+
+### 第一层：修 Bug
+- **打开文件 404 修复**：openLocalFile 补 knowledge/ 路径前缀
+  - 根因：wiki/raw 列表传的路径相对 knowledge/，后端按项目根拼接（缺前缀）
+  - 修复后点知识库面板里的文件能正常打开
+
+### 第二层：数据治理（一致性）
+- **6 篇综述补 frontmatter**：hhg-methods/principles/comprehensive/systems/technology/teams
+  - 全部补全 type/tags/related/growth_stage/confidence（之前完全无或残缺）
+- **图谱治理**：
+  - 26 条边补 type 字段（related/pioneered/same_as）
+  - 9 个节点 type 统一为复数（concept→concepts, method→methods, person→people）
+  - 连接孤立节点 attosecond → 高次谐波产生
+- 结果：27 节点 27 边 0 孤立，33 篇 wiki 全有 frontmatter
+
+### 第三层：分层结构（让知识库"好用"）
+- **MOC 索引页（Map of Content）**：
+  - `wiki/concepts/MOC-HHG.md` — HHG 知识地图（理论/材料/方法/人物/应用/综述）
+  - `wiki/projects/NSFC-强场超快/MOC.md` — NSFC 课题入口（T1-T5/概念/方法/论文）
+  - `wiki/projects/deepxiv-论文库/MOC.md` — 论文库索引（61篇/归档说明）
+- **标签体系规范化**：33 篇 wiki 追加分类维度标签
+  - `#type/concept` `#type/method` `#type/person` `#type/report` `#type/MOC`
+  - `#topic/HHG` `#topic/固体HHG`
+  - `#status/mature` `#status/growing`
+- **前端分层浏览**：loadKbWiki 重写
+  - 顶部 MOC 知识地图入口（主题漫游起点）
+  - 按 type 折叠分组（概念/方法/人物/综述/项目）
+  - 每组按 growth_stage 排序（mature 优先）
+  - 显示 project 子库标签
+
+### 成果
+- 知识库从"平铺列表"升级为"分层结构 + MOC 主题入口"
+- 符合好知识库标准：原子化笔记 + 双向链接 + MOC + 标签体系
+- 94 文档（61 raw + 33 wiki），27 节点 27 边 0 孤立
+
+### 验证
+- self_test 88/88 全绿
+- 33 篇 wiki 全有 frontmatter，图谱 0 孤立
+- 打开文件不再 404
+
 ## v2.9.3 - 2026-06-18 知识库整理 + 文献流程修正（感兴趣≠归档）
 
 ### 知识库整理（确保 hermes 工作连贯性）

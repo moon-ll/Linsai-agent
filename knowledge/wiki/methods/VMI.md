@@ -3,7 +3,7 @@ title: "VMI"
 type: "methods"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
-tags: ["表征方法", "光电子", "动量成像"]
+tags: ["表征方法", "光电子", "动量成像", "#type/method", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature", "#status/growing"]
 related: ["RABBITT"]
 aliases: ["VMI", "速度映射成像", "velocity-map-imaging"]
 growth_stage: "growing"

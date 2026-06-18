@@ -3,7 +3,7 @@ title: "COLTRIMS"
 type: "methods"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
-tags: ["表征方法", "动量谱", "冷靶反冲"]
+tags: ["表征方法", "动量谱", "冷靶反冲", "#type/method", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature", "#status/growing", "#status/growing"]
 related: ["VMI"]
 aliases: ["COLTRIMS", "冷靶反冲动量谱", "cold-target-recoil-ion-momentum-spectroscopy"]
 growth_stage: "growing"

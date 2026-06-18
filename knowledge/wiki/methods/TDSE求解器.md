@@ -3,7 +3,7 @@ title: "TDSE求解器"
 type: "methods"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
-tags: ["计算方法", "TDSE", "数值模拟"]
+tags: ["计算方法", "TDSE", "数值模拟", "#type/method", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature", "#status/growing", "#status/growing", "#status/growing", "#status/growing"]
 related: ["Lewenstein模型", "三步模型"]
 aliases: ["TDSE-solver", "含时薛定谔求解", "time-dependent-schrodinger"]
 growth_stage: "growing"

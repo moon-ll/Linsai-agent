@@ -3,7 +3,7 @@ title: "RABBITT"
 type: "methods"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
-tags: ["表征方法", "阿秒", "干涉"]
+tags: ["表征方法", "阿秒", "干涉", "#type/method", "#topic/HHG", "#status/mature"]
 related: ["三步模型", "Lewenstein模型", "FROG"]
 aliases: ["RABBITT", "重建阿秒拍频干涉", "reconstruction-of-attosecond-beating"]
 growth_stage: "mature"

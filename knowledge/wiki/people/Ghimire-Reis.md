@@ -3,7 +3,7 @@ title: "Ghimire-Reis"
 type: "people"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
-tags: ["人物", "固体HHG", "美国"]
+tags: ["人物", "固体HHG", "美国", "#type/person", "#status/mature", "#status/mature", "#status/growing"]
 related: ["固体高次谐波"]
 aliases: ["Ghimire", "Reis", "固体HHG开创"]
 growth_stage: "growing"

@@ -3,7 +3,7 @@ title: "LHuillier"
 type: "people"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
-tags: ["人物", "HHG理论", "瑞典", "诺贝尔"]
+tags: ["人物", "HHG理论", "瑞典", "诺贝尔", "#type/person", "#status/mature", "#status/mature"]
 related: ["高次谐波产生", "相位匹配"]
 aliases: ["Anne-LHuillier", "吕利耶"]
 growth_stage: "mature"

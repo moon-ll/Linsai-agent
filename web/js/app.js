@@ -2069,24 +2069,78 @@ async function loadKbWiki() {
     }
 
     const stageLabels = { seedling: '🌱', growing: '🌿', mature: '🌳', archived: '📦' };
+
+    // v2.9.4: 按 type 分组渲染 + MOC 入口
+    const typeLabels = {
+      concepts: '📐 核心概念', methods: '🛠️ 方法与技术',
+      people: '👤 学者', papers: '📚 综述报告', projects: '📁 项目子库',
+    };
+    const typeOrder = ['concepts', 'methods', 'people', 'papers', 'projects'];
+
+    // 找 MOC 索引页
+    const mocPages = pages.filter(p => p.title && p.title.includes('🗺️'));
+    const normalPages = pages.filter(p => !(p.title && p.title.includes('🗺️')));
+
+    // 按 type 分组
+    const groups = {};
+    for (const p of normalPages) {
+      const t = p.type || 'other';
+      (groups[t] = groups[t] || []).push(p);
+    }
+    // 每组按 growth_stage 排序（mature 优先）
+    const stageOrder = { mature: 0, growing: 1, seedling: 2, archived: 3, unknown: 4 };
+    for (const t in groups) {
+      groups[t].sort((a, b) => (stageOrder[a.growth_stage] ?? 9) - (stageOrder[b.growth_stage] ?? 9));
+    }
+
     let html = '';
-    pages.forEach(p => {
-      const stageIcon = stageLabels[p.growth_stage] || '○';
-      html += `
-        <div class="kb-list-item">
-          <div class="kb-list-main" onclick="openWikiDetail('${p.path}')">
-            <div class="kb-list-title">${stageIcon} ${p.title}</div>
-            <div class="kb-list-meta">
-              ${p.type} · 确信度 ${(p.confidence * 100).toFixed(0)}%
-              ${p.tags?.length ? '· ' + p.tags.join(', ') : ''}
+
+    // MOC 入口（如果有）
+    if (mocPages.length) {
+      html += '<div style="margin-bottom:12px;padding:8px 10px;background:var(--bg-tertiary);border-radius:6px;border-left:3px solid var(--accent-color);">';
+      html += '<div style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:4px;">🗺️ 知识地图（主题入口）</div>';
+      mocPages.forEach(p => {
+        html += `<div class="kb-list-item" style="margin:2px 0;" onclick="openWikiDetail('${p.path}')">
+          <span style="font-size:0.85rem;font-weight:500;color:var(--accent-color);">${escapeHtml(p.title)}</span>
+        </div>`;
+      });
+      html += '</div>';
+    }
+
+    // 按 type 分组渲染
+    for (const t of typeOrder) {
+      const items = groups[t];
+      if (!items || !items.length) continue;
+      const label = typeLabels[t] || t;
+      html += `<div style="margin-bottom:10px;">`;
+      html += `<div style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:4px;padding:2px 0;border-bottom:1px solid var(--border-color);">${label} <span style="color:var(--text-tertiary);font-weight:400;">(${items.length})</span></div>`;
+      items.forEach(p => {
+        const stageIcon = stageLabels[p.growth_stage] || '○';
+        const projTag = p.project ? ` <span style="color:var(--info-color);font-size:0.7rem;">[${Array.isArray(p.project)?p.project[0]:p.project}]</span>` : '';
+        html += `
+          <div class="kb-list-item">
+            <div class="kb-list-main" onclick="openWikiDetail('${p.path}')">
+              <div class="kb-list-title">${stageIcon} ${escapeHtml(p.title)}</div>
+              <div class="kb-list-meta">
+                确信度 ${((p.confidence || 0) * 100).toFixed(0)}%${projTag}
+                ${p.tags?.length ? ' · ' + p.tags.filter(tg => !tg.startsWith('#')).slice(0,3).join(', ') : ''}
+              </div>
+            </div>
+            <div class="kb-list-actions">
+              <button class="kb-action-btn" onclick="event.stopPropagation(); openLocalFile('${p.path}')" title="在编辑器中打开">📂</button>
             </div>
           </div>
-          <div class="kb-list-actions">
-            <button class="kb-action-btn" onclick="event.stopPropagation(); openLocalFile('${p.path}')" title="在编辑器中打开">📂</button>
-          </div>
-        </div>
-      `;
-    });
+        `;
+      });
+      html += '</div>';
+    }
+
+    // 未分类的
+    const uncategorized = groups['other'] || groups['unknown'] || [];
+    if (uncategorized.length) {
+      html += `<div style="font-size:0.8rem;color:var(--text-tertiary);margin-top:8px;">其他 (${uncategorized.length})</div>`;
+    }
+
     container.innerHTML = html;
   } catch (e) {
     container.innerHTML = `<div class="kb-empty">✗ 加载失败</div>`;
@@ -2383,7 +2437,13 @@ async function openWikiDetail(wikiPath) {
 
 async function openLocalFile(relPath) {
   try {
-    const data = await apiPost('/api/open-local', { path: relPath });
+    // 知识库文件路径是相对 knowledge/ 的（如 wiki/concepts/三步模型.md），
+    // 但后端按相对项目根拼接，需要补 knowledge/ 前缀（不重复加）
+    let fullPath = relPath;
+    if (fullPath && !fullPath.startsWith('knowledge/') && !fullPath.startsWith('knowledge\\')) {
+      fullPath = 'knowledge/' + fullPath;
+    }
+    const data = await apiPost('/api/open-local', { path: fullPath });
     if (data.success) {
       showToast('✓ 已打开本地文件', 'success');
     } else {

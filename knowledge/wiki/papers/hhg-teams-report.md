@@ -1,3 +1,14 @@
+---
+title: "HHG 光谱学关键研究团队"
+type: "papers"
+created: "2026-05-19T00:00:00Z"
+updated: "2026-06-19T00:00:00Z"
+tags: ["HHG", "综述", "人物", "#type/report", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature"]
+related: ["Corkum", "Krausz", "LHuillier"]
+growth_stage: "mature"
+confidence: 0.9
+---
+
 # HHG 光谱学关键研究团队
 
 **最后更新**：2026-06-17 UTC

@@ -3,7 +3,7 @@ title: "北大HHG团队"
 type: "people"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
-tags: ["人物", "团队", "中国", "固体HHG"]
+tags: ["人物", "团队", "中国", "固体HHG", "#type/person", "#status/mature", "#status/mature", "#status/growing", "#status/mature", "#status/growing"]
 related: ["固体高次谐波"]
 aliases: ["Peking-University-HHG", "北大"]
 growth_stage: "growing"

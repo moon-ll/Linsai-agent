@@ -1,18 +1,11 @@
 ---
-title: HHG 光谱学研究进展调研报告——方法维度
+title: "HHG 光谱学研究进展调研报告——方法维度"
 date: 2026-05-15
-type: paper-survey
-growth_stage: mature
-confidence: high
-related:
-  - ../concepts/high-harmonic-generation
-  - ../concepts/attosecond-pulse
-tags:
-  - HHG
-  - 高次谐波产生
-  - 阿秒光谱学
-  - 测量方法
-  - 数值模拟
+type: "papers"
+tags: ["HHG", "综述", "方法", "表征", "#type/report", "#topic/HHG", "#status/mature", "#status/mature"]
+related: ["RABBITT", "FROG", "TDSE求解器", "瞬态吸收光谱", "VMI"]
+growth_stage: "mature"
+confidence: 0.9
 ---
 
 # HHG 光谱学研究进展调研报告 —— 方法维度
