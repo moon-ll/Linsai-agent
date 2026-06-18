@@ -479,6 +479,18 @@ async function sendMessage(content) {
   }
   if (!content.trim()) return;
 
+  // v2.9.1: 注入 @选中的知识库文件上下文
+  let fullContent = content;
+  if (window._kbSelectedFiles.length || window._pendingKbContext) {
+    const kbCtx = await injectKbContext();
+    if (kbCtx) {
+      fullContent = content + '\n' + kbCtx;
+      // 注入后清空选中（下次需重新选）
+      window._kbSelectedFiles = [];
+      updateKbContextBadge();
+    }
+  }
+
   // 显示用户消息
   appendMessage('user', content);
   document.getElementById('message-input').value = '';
@@ -501,7 +513,7 @@ async function sendMessage(content) {
     const res = await fetch(API_BASE + `/api/sessions/${encodeURIComponent(State.currentSessionId)}/messages`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ content, mode: State.currentMode }),
+      body: JSON.stringify({ content: fullContent, mode: State.currentMode }),
     });
 
     if (!res.ok) {
@@ -2517,6 +2529,11 @@ function bindKbManagerEvents() {
     if (e.key === 'Enter') createNewTask();
   });
 
+  // v2.9.1: @知识库文件讨论
+  document.getElementById('kb-context-btn')?.addEventListener('click', openKbFilePicker);
+  document.getElementById('message-input')?.addEventListener('input', handleKbMention);
+  document.getElementById('message-input')?.addEventListener('focus', ensureKbFileCache);  // 首次聚焦时缓存文件列表
+
   // 技能管理器
   document.getElementById('skill-manager-close')?.addEventListener('click', closeSkillManager);
   document.getElementById('skill-manager-overlay')?.addEventListener('click', (e) => {
@@ -2528,4 +2545,119 @@ function bindKbManagerEvents() {
   document.querySelectorAll('input[name="skill-mode"]').forEach(radio => {
     radio.addEventListener('change', onSkillModeChange);
   });
+}
+
+// ============================================
+// v2.9.1: @知识库文件讨论
+// ============================================
+window._kbSelectedFiles = [];  // 选中的知识库文件 [{path, title}]
+window._pendingKbContext = null;  // discussPaper 暂存的上下文
+
+// 🗂️按钮：弹出文件选择器
+async function openKbFilePicker() {
+  showModal('<div style="max-width:480px;"><h3 style="margin-bottom:8px;">🗂️ 选择知识库文件注入讨论</h3><p style="color:var(--text-secondary);font-size:0.82rem;margin-bottom:12px;">勾选要讨论的知识库内容，发送消息时会自动注入林赛上下文。</p><div id="kb-file-list" style="max-height:350px;overflow-y:auto;"><p style="color:var(--text-tertiary);">◐ 加载中…</p></div><div style="display:flex;gap:8px;margin-top:12px;"><button id="kb-pick-confirm" style="flex:1;padding:8px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;">确认选择</button><button id="kb-pick-cancel" style="padding:8px 16px;border:1px solid var(--border-color);border-radius:6px;cursor:pointer;">取消</button></div></div>');
+  try {
+    const files = await apiGet('/api/knowledge/files');
+    const list = document.getElementById('kb-file-list');
+    if (!list) return;
+    if (!files.length) { list.innerHTML = '<p style="color:var(--text-tertiary);">知识库为空</p>'; return; }
+    // 按类型分组
+    const groups = {};
+    files.forEach(f => { (groups[f.type] = groups[f.type] || []).push(f); });
+    let html = '';
+    for (const [type, items] of Object.entries(groups)) {
+      html += `<div style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin:8px 0 4px;">${type} (${items.length})</div>`;
+      items.forEach(f => {
+        const checked = window._kbSelectedFiles.some(s => s.path === f.path) ? 'checked' : '';
+        html += `<label style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:0.82rem;cursor:pointer;"><input type="checkbox" class="kb-file-cb" data-path="${escapeHtml(f.path)}" data-title="${escapeHtml(f.title)}" ${checked}><span>${escapeHtml(f.title)}</span><span style="color:var(--text-tertiary);font-size:0.72rem;">${f.project ? '['+f.project+']' : ''}</span></label>`;
+      });
+    }
+    list.innerHTML = html;
+  } catch (e) { document.getElementById('kb-file-list').innerHTML = `<p style="color:var(--error-color);">加载失败: ${e.message}</p>`; }
+  document.getElementById('kb-pick-cancel').onclick = closeModal;
+  document.getElementById('kb-pick-confirm').onclick = () => {
+    window._kbSelectedFiles = Array.from(document.querySelectorAll('.kb-file-cb:checked')).map(cb => ({path: cb.dataset.path, title: cb.dataset.title}));
+    closeModal();
+    updateKbContextBadge();
+  };
+}
+
+// @补全：输入框打@时触发
+function handleKbMention(e) {
+  const input = e.target;
+  const val = input.value;
+  const pos = input.selectionStart;
+  // 找最近的 @
+  const before = val.slice(0, pos);
+  const atMatch = before.match(/@([^\s@]*)$/);
+  // 移除旧的提示
+  const existing = document.getElementById('kb-mention-popup');
+  if (!atMatch) { if (existing) existing.remove(); return; }
+  const query = atMatch[1];
+  // 简单：从已缓存的文件列表补全（避免每次请求）
+  if (!window._kbFileCache) return;
+  const matches = window._kbFileCache.filter(f => f.title.toLowerCase().includes(query.toLowerCase())).slice(0, 6);
+  if (!matches.length) { if (existing) existing.remove(); return; }
+  // 渲染补全弹窗
+  if (existing) existing.remove();
+  const popup = document.createElement('div');
+  popup.id = 'kb-mention-popup';
+  popup.style.cssText = 'position:absolute;background:var(--bg-secondary);border:1px solid var(--border-color);border-radius:6px;padding:4px;box-shadow:var(--shadow-md);z-index:9999;max-width:300px;font-size:0.82rem;';
+  matches.forEach(f => {
+    const item = document.createElement('div');
+    item.style.cssText = 'padding:4px 8px;cursor:pointer;border-radius:4px;';
+    item.textContent = `${f.title} [${f.type}]`;
+    item.onmouseenter = () => item.style.background = 'var(--bg-active)';
+    item.onmouseleave = () => item.style.background = '';
+    item.onclick = () => {
+      // 替换 @query 为标记，并选中该文件
+      input.value = val.slice(0, before.lastIndexOf('@')) + `[${f.title}] ` + val.slice(pos);
+      window._kbSelectedFiles.push({path: f.path, title: f.title});
+      updateKbContextBadge();
+      popup.remove();
+      input.focus();
+    };
+    popup.appendChild(item);
+  });
+  input.parentElement.style.position = 'relative';
+  input.parentElement.appendChild(popup);
+}
+
+// 更新上下文徽章（显示已选文件数）
+function updateKbContextBadge() {
+  let badge = document.getElementById('kb-context-badge');
+  if (!window._kbSelectedFiles.length) { if (badge) badge.remove(); return; }
+  if (!badge) {
+    badge = document.createElement('span');
+    badge.id = 'kb-context-badge';
+    badge.style.cssText = 'position:absolute;top:-8px;right:-8px;background:var(--accent-color);color:#fff;border-radius:10px;font-size:0.65rem;padding:1px 5px;';
+    document.getElementById('kb-context-btn')?.appendChild(badge);
+  }
+  badge.textContent = window._kbSelectedFiles.length;
+  badge.title = window._kbSelectedFiles.map(f => f.title).join('\n');
+}
+
+// 发送前注入知识库上下文（被 sendMessage 调用）
+async function injectKbContext() {
+  if (!window._kbSelectedFiles.length && !window._pendingKbContext) return '';
+  let context = '';
+  const files = window._pendingKbContext ? window._kbSelectedFiles.concat(window._pendingKbContext.map(r => ({path: r.path || r.doc, title: r.title}))) : window._kbSelectedFiles;
+  for (const f of files.slice(0, 3)) {
+    if (!f.path) continue;
+    try {
+      const data = await apiGet(`/api/knowledge/file-content?path=${encodeURIComponent(f.path)}`);
+      if (data.content) {
+        context += `\n\n--- 知识库参考: ${f.title} ---\n${data.content.slice(0, 2000)}\n---\n`;
+      }
+    } catch (e) { /* 静默 */ }
+  }
+  // 清除暂存
+  window._pendingKbContext = null;
+  return context;
+}
+
+// 缓存知识库文件列表（首次 @ 时加载）
+async function ensureKbFileCache() {
+  if (window._kbFileCache) return;
+  try { window._kbFileCache = await apiGet('/api/knowledge/files'); } catch (e) { window._kbFileCache = []; }
 }

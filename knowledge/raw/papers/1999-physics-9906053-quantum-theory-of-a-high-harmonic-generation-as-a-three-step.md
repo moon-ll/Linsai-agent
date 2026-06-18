@@ -14,6 +14,7 @@ categories: physics.atom-ph
 tags: theory, three-step, quantum-model
 citation_count: 40
 tldr: [theoretical physics research paper] Proposes a fully quantum, three-step framework for high harmonic generation (HHG) that explicitly links above-threshold ionization (ATI) and laser-assisted recombination (LAR) via coherent amplitude contributions. All stages—ATI, electron propagation in the laser-dressed continuum, and recombination—are described by analytical expressions that preserve physical consistency (no off-energy-shell states), enabling quantitative agreement with benchmark calculations for H⁻ ion HHG. The model achieves precise agreement between length and velocity gauge results, validating its robustness and offering a physically transparent alternative to classical or semi-quantum approximations.
+project: ["文献简报"]
 ---
 
 # Quantum theory of a high harmonic generation as a three-step process

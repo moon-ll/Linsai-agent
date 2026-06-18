@@ -66,6 +66,7 @@ import project_reader as pr
 import kb_importer as ki
 import hermes_bridge as hb
 import sync_engine as se
+import paper_pool as pp  # v2.9.1: 候选池
 import usage_tracker as ut
 
 
@@ -543,6 +544,37 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json(pr.get_candidates())
             return
 
+        # v2.9.1: 候选池（三状态持久化）
+        if path == "/api/projects/papers/pool":
+            status_filter = parse_qs(parsed.query).get("status", [""])[0]
+            self._send_json(pp.get_pool(status=status_filter))
+            return
+
+        # v2.9.1: 知识库文件树（供 @文件讨论选择）
+        if path == "/api/knowledge/files":
+            self._send_json(kb.list_wiki_pages())
+            return
+
+        # v2.9.1: 读取知识库文件内容（供上下文注入）
+        if path == "/api/knowledge/file-content":
+            fpath = parse_qs(parsed.query).get("path", [""])[0]
+            if not fpath:
+                self._send_json({"error": "缺少 path"}, 400)
+                return
+            full = _PROJECT_ROOT / "knowledge" / fpath
+            # 安全检查：防路径穿越
+            try:
+                full.resolve().relative_to((_PROJECT_ROOT / "knowledge").resolve())
+            except ValueError:
+                self._send_json({"error": "路径越界"}, 403)
+                return
+            if not full.exists():
+                self._send_json({"error": "文件不存在"}, 404)
+                return
+            content = full.read_text(encoding="utf-8")[:8000]  # 截断
+            self._send_json({"path": fpath, "content": content, "size": len(content)})
+            return
+
         # 文献简报列表
         if path == "/api/projects/papers/briefings":
             self._send_json({"briefings": pr.get_briefings()})
@@ -960,6 +992,37 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json(pr.get_candidates())
             return
 
+        # v2.9.1: 候选池（三状态持久化）
+        if path == "/api/projects/papers/pool":
+            status_filter = parse_qs(parsed.query).get("status", [""])[0]
+            self._send_json(pp.get_pool(status=status_filter))
+            return
+
+        # v2.9.1: 知识库文件树（供 @文件讨论选择）
+        if path == "/api/knowledge/files":
+            self._send_json(kb.list_wiki_pages())
+            return
+
+        # v2.9.1: 读取知识库文件内容（供上下文注入）
+        if path == "/api/knowledge/file-content":
+            fpath = parse_qs(parsed.query).get("path", [""])[0]
+            if not fpath:
+                self._send_json({"error": "缺少 path"}, 400)
+                return
+            full = _PROJECT_ROOT / "knowledge" / fpath
+            # 安全检查：防路径穿越
+            try:
+                full.resolve().relative_to((_PROJECT_ROOT / "knowledge").resolve())
+            except ValueError:
+                self._send_json({"error": "路径越界"}, 403)
+                return
+            if not full.exists():
+                self._send_json({"error": "文件不存在"}, 404)
+                return
+            content = full.read_text(encoding="utf-8")[:8000]  # 截断
+            self._send_json({"path": fpath, "content": content, "size": len(content)})
+            return
+
         # 文献简报列表
         if path == "/api/projects/papers/briefings":
             self._send_json({"briefings": pr.get_briefings()})
@@ -1036,9 +1099,9 @@ class RequestHandler(BaseHTTPRequestHandler):
         # v2.9.0: 文献反馈（👍感兴趣/👎跳过/📥归档）→ 归档+深分析+hermes偏好
         if path == "/api/projects/papers/feedback":
             arxiv_id = body.get("arxiv_id", "").strip()
-            action = body.get("action", "").strip()  # interested/skip/archive
-            if not arxiv_id or action not in ("interested", "skip", "archive"):
-                self._send_json({"error": "需要 arxiv_id 和 action(interested/skip/archive)"}, 400)
+            action = body.get("action", "").strip()  # interested/skip/archive/later
+            if not arxiv_id or action not in ("interested", "skip", "archive", "later"):
+                self._send_json({"error": "需要 arxiv_id 和 action(interested/skip/archive/later)"}, 400)
                 return
 
             # 记录反馈到本地（累积偏好）
@@ -1055,6 +1118,15 @@ class RequestHandler(BaseHTTPRequestHandler):
             fb_path.write_text(_json.dumps(fb[-200:], ensure_ascii=False, indent=2), encoding="utf-8")
 
             result = {"action": action, "arxiv_id": arxiv_id}
+
+            # 候选池状态联动（v2.9.1）
+            pool_status_map = {
+                "interested": pp.STATUS_ARCHIVED,  # 归档+深分析 → archived
+                "archive": pp.STATUS_ARCHIVED,     # 仅归档 → archived
+                "skip": pp.STATUS_VIEWED,          # 跳过 → viewed（保留可追溯）
+                "later": pp.STATUS_VIEWED,         # 稍后讨论 → viewed
+            }
+            pp.update_status(arxiv_id, pool_status_map.get(action, pp.STATUS_VIEWED))
 
             if action == "interested":
                 # 归档候选
@@ -1078,16 +1150,17 @@ class RequestHandler(BaseHTTPRequestHandler):
                     pass
             elif action == "archive":
                 result["archived"] = ki.import_candidate(arxiv_id)
-            elif action == "skip":
-                # 异步反馈 skip 偏好
+            elif action in ("skip", "later"):
+                # 异步反馈偏好
+                label = "不感兴趣（跳过）" if action == "skip" else "稍后讨论"
                 try:
                     import threading as _th
-                    def _hermes_skip():
+                    def _hermes_pref():
                         try:
-                            hb.oneshot(f"用户对 arXiv {arxiv_id} 标记为不感兴趣（跳过），请更新偏好。", timeout=60)
+                            hb.oneshot(f"用户对 arXiv {arxiv_id} 标记为{label}，请更新偏好。", timeout=60)
                         except Exception:
                             pass
-                    _th.Thread(target=_hermes_skip, daemon=True).start()
+                    _th.Thread(target=_hermes_pref, daemon=True).start()
                 except Exception:
                     pass
 

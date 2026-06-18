@@ -133,37 +133,87 @@ async function loadNsfcFile(filePath) {
 }
 
 // ============================================
-// 文献卡小红书式卡片流（v2.9.0）
+// 文献候选池（v2.9.1：三状态分组 + 持久化）
 // ============================================
 async function renderPapersCards(container) {
-  const candidates = await apiGet('/api/projects/papers/candidates');
+  const pool = await apiGet('/api/projects/papers/pool');
+  const byStatus = pool.by_status || {};
 
-  let html = '';
-  if (candidates.available) {
-    html += `<div style="margin-bottom:12px;padding:8px 12px;background:var(--bg-secondary);border-radius:6px;font-size:0.8rem;color:var(--text-secondary);">
-      📄 今日候选 <strong>${candidates.total}</strong> 篇 (${escapeHtml(candidates.date || '?')}) — 👍感兴趣(归档+深分析) · 👎跳过 · 📥仅归档
-    </div>`;
-    html += '<div id="papers-card-list" style="display:flex;flex-direction:column;gap:10px;">';
-    for (const p of (candidates.papers || [])) {
+  let html = `<div style="margin-bottom:12px;padding:8px 12px;background:var(--bg-secondary);border-radius:6px;font-size:0.8rem;color:var(--text-secondary);">
+    📊 候选池：<strong style="color:var(--info-color)">${byStatus.unseen||0}</strong> 未看 ·
+    <strong style="color:var(--warning-color)">${byStatus.viewed||0}</strong> 已看未讨论 ·
+    <strong style="color:var(--success-color)">${byStatus.archived||0}</strong> 已归档
+    <span style="margin-left:8px;color:var(--text-tertiary);">(共 ${pool.total} 篇，累积保留)</span>
+  </div>`;
+
+  // 按状态分组
+  const groups = [
+    {status: 'unseen', label: '🔔 未看（待你决定）', color: 'var(--info-color)', defaultOpen: true},
+    {status: 'viewed', label: '⏰ 已看未讨论（稍后回来）', color: 'var(--warning-color)', defaultOpen: false},
+    {status: 'archived', label: '✅ 已归档（已沉淀知识库）', color: 'var(--success-color)', defaultOpen: false},
+  ];
+
+  const papers = pool.papers || [];
+  for (const g of groups) {
+    const groupPapers = papers.filter(p => p.status === g.status);
+    if (!groupPapers.length) continue;
+    const openAttr = g.defaultOpen ? 'open' : '';
+    html += `<details ${openAttr} style="margin-bottom:10px;border:1px solid var(--border-color);border-radius:6px;overflow:hidden;">
+      <summary style="padding:8px 12px;cursor:pointer;font-weight:600;font-size:0.85rem;background:var(--bg-secondary);color:${g.color};">
+        ${g.label} <span style="font-weight:400;color:var(--text-tertiary);">(${groupPapers.length})</span>
+      </summary>
+      <div style="padding:8px;display:flex;flex-direction:column;gap:8px;">`;
+
+    for (const p of groupPapers) {
       const scorePct = Math.round((p.score || 0) * 100);
-      const analysisBadge = p.has_analysis ? '<span style="color:var(--success-color);font-size:0.72rem;">✓已解析</span>' : '';
-      html += `<div class="paper-card" id="card-${escapeHtml(p.arxiv_id)}" style="padding:12px;background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border-color);transition:opacity 0.3s;">`;
-      html += `<div style="font-size:0.88rem;font-weight:600;line-height:1.4;margin-bottom:4px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${escapeHtml(p.title)}</div>`;
-      html += `<div style="font-size:0.75rem;color:var(--text-tertiary);margin-bottom:6px;">${escapeHtml(p.authors)} · ${escapeHtml(p.direction)} · 评分 ${scorePct}% ${analysisBadge}</div>`;
+      html += `<div class="paper-card" id="card-${escapeHtml(p.arxiv_id)}" style="padding:10px;background:var(--bg-tertiary);border-radius:6px;border:1px solid var(--border-color);transition:opacity 0.3s;">`;
+      html += `<div style="font-size:0.85rem;font-weight:600;line-height:1.4;margin-bottom:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${escapeHtml(p.title)}</div>`;
+      html += `<div style="font-size:0.72rem;color:var(--text-tertiary);margin-bottom:6px;">${escapeHtml(p.authors)} · ${escapeHtml(p.direction)} · ${scorePct}%</div>`;
       if (p.tldr) {
-        html += `<div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:8px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;">${escapeHtml(p.tldr)}</div>`;
+        html += `<div style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:6px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${escapeHtml(p.tldr)}</div>`;
       }
-      html += `<div style="display:flex;gap:8px;">`;
-      html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','interested',this)" style="flex:1;padding:6px;border:1px solid var(--success-color);border-radius:6px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.82rem;">👍 感兴趣</button>`;
-      html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','skip',this)" style="flex:1;padding:6px;border:1px solid var(--border-color);border-radius:6px;background:transparent;color:var(--text-tertiary);cursor:pointer;font-size:0.82rem;">👎 跳过</button>`;
-      html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','archive',this)" style="flex:1;padding:6px;border:1px solid var(--border-color);border-radius:6px;background:transparent;cursor:pointer;font-size:0.82rem;">📥 归档</button>`;
+      html += `<div style="display:flex;gap:6px;flex-wrap:wrap;">`;
+
+      if (g.status === 'unseen') {
+        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','interested',this)" style="padding:4px 10px;border:1px solid var(--success-color);border-radius:5px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.78rem;">👍 感兴趣</button>`;
+        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','later',this)" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:5px;background:transparent;color:var(--warning-color);cursor:pointer;font-size:0.78rem;">⏰ 稍后</button>`;
+        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','skip',this)" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:5px;background:transparent;color:var(--text-tertiary);cursor:pointer;font-size:0.78rem;">👎 跳过</button>`;
+        html += `<button onclick="discussPaper('${escapeHtml(p.arxiv_id)}','${escapeHtml(p.title).replace(/'/g,"")}')", style="padding:4px 10px;border:1px solid var(--accent-color);border-radius:5px;background:var(--accent-color);color:#fff;cursor:pointer;font-size:0.78rem;">💬 讨论</button>`;
+      } else if (g.status === 'viewed') {
+        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','interested',this)" style="padding:4px 10px;border:1px solid var(--success-color);border-radius:5px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.78rem;">👍 归档+解析</button>`;
+        html += `<button onclick="discussPaper('${escapeHtml(p.arxiv_id)}','${escapeHtml(p.title).replace(/'/g,"")}')", style="padding:4px 10px;border:1px solid var(--accent-color);border-radius:5px;background:var(--accent-color);color:#fff;cursor:pointer;font-size:0.78rem;">💬 讨论</button>`;
+      } else {
+        html += `<span style="font-size:0.75rem;color:var(--success-color);padding:4px 8px;">✓ 已沉淀到知识库</span>`;
+      }
       html += `</div></div>`;
     }
-    html += '</div>';
-  } else {
-    html = '<p style="color:var(--text-tertiary);text-align:center;padding:40px;">暂无候选数据</p>';
+    html += `</div></details>`;
+  }
+
+  if (!papers.length) {
+    html = '<p style="color:var(--text-tertiary);text-align:center;padding:40px;">候选池为空</p>';
   }
   container.innerHTML = html;
+}
+
+// 讨论某篇文献（跳到聊天框 + 注入上下文）
+async function discussPaper(arxivId, title) {
+  closeProjectsManager();
+  showToast(`💬 正在加载 ${title.slice(0,30)}... 到讨论`, 'info');
+  // 把文献信息注入聊天输入框，用户可补充问题后发送
+  const input = document.getElementById('message-input');
+  if (input) {
+    input.value = `基于 arXiv:${arxivId}（${title}）的内容，`;
+    input.focus();
+    input.setSelectionRange(input.value.length, input.value.length);
+  }
+  // 异步加载该论文的 raw 内容到 KB 上下文（通过 @机制）
+  try {
+    const resp = await apiGet(`/api/knowledge/search?q=${arxivId}`);
+    if (resp.results && resp.results.length) {
+      window._pendingKbContext = resp.results.slice(0, 2);  // 暂存，发送时注入
+    }
+  } catch (e) { /* 静默 */ }
 }
 
 // 文献反馈处理
@@ -191,11 +241,9 @@ async function paperFeedback(arxivId, action, btn) {
       showToast('👎 已记录偏好', 'info');
     }
 
-    // 卡片淡出移除
-    if (card) {
-      card.style.opacity = '0.3';
-      setTimeout(() => card.remove(), 400);
-    }
+    // 刷新候选池（状态流转，不删除）
+    if (card) card.style.opacity = '0.4';
+    setTimeout(() => loadProjectsTab('papers'), 600);
   } catch (e) {
     showToast(`✗ 操作失败: ${e.message}`, 'error');
     if (action === 'interested') { btn.textContent = '👍 感兴趣'; btn.disabled = false; }
