@@ -69,67 +69,89 @@
     </div>
   </aside>
 
-  <!-- 中间：对话区 -->
-  <main class="chat-area" id="chat-area">
-    <div class="welcome-screen" id="welcome-screen">
-      <h2>👋 欢迎回来</h2>
-      <p>林赛不是你的搜索引擎，他是你的合作者。</p>
-      <div class="quick-starts">
-        <button class="quick-btn" data-topic="实验方案设计">⚗️ 实验方案设计</button>
-        <button class="quick-btn" data-topic="论文写作讨论">📝 论文写作讨论</button>
-        <button class="quick-btn" data-topic="数据分析">📊 数据分析</button>
-        <button class="quick-btn" data-topic="学术困惑">💭 学术困惑</button>
+  <!-- 中间：知识库主区（v3.0.0 主舞台） -->
+  <main class="kb-main" id="kb-main">
+    <!-- 左半：文件树 -->
+    <div class="kb-tree-panel">
+      <div class="kb-tree-header">
+        <input type="text" id="kb-tree-search" placeholder="🔍 搜索知识库…" autocomplete="off" style="width:100%;padding:5px 10px;border-radius:6px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);font-size:0.82rem;box-sizing:border-box;">
+      </div>
+      <div class="kb-tree-content" id="kb-tree-content">
+        <!-- 动态填充：折叠文件树 -->
       </div>
     </div>
-
-    <!-- 归档/只读浏览头部 -->
-    <div class="chat-archive-header" id="chat-archive-header" style="display:none;">
-      <div class="archive-info">
-        <span id="archive-topic"></span>
-        <span id="archive-meta" style="color:var(--text-tertiary);margin-left:8px;"></span>
+    <!-- 右半：内容预览 -->
+    <div class="kb-preview-panel" id="kb-preview-panel">
+      <div class="kb-preview-default" id="kb-preview-default">
+        <div style="text-align:center;padding:60px 20px;color:var(--text-tertiary);">
+          <div style="font-size:2.5rem;margin-bottom:12px;">📚</div>
+          <p>从左侧选择一篇笔记，或点击 🗺️ 知识地图开始浏览</p>
+          <p style="font-size:0.8rem;margin-top:8px;">[[]] 双链 · related 关联 · 🔍 搜索 · 全部可点击跳转</p>
+        </div>
       </div>
-      <button class="btn-text" id="close-archive-view">✕ 关闭浏览</button>
-    </div>
-
-    <!-- 历史消息提示条 -->
-    <div class="history-hint" id="history-hint" style="display:none;">
-      <span>↑ 向上滚动查看历史消息</span>
-      <button class="btn-text" id="history-hint-close">✕</button>
-    </div>
-
-    <div class="messages" id="messages"></div>
-    <div class="typing-indicator" id="typing-indicator" style="display:none;">
-      <span class="dot"></span><span class="dot"></span><span class="dot"></span>
-      <span class="typing-text">林赛正在思考…</span>
-    </div>
-
-    <!-- 输入区 -->
-    <div class="input-area">
-      <div class="command-bar">
-        <button class="cmd-btn" data-cmd="/mode" title="切换模式">/mode</button>
-        <button class="cmd-btn" data-cmd="/read" title="读取文档">/read</button>
-        <button class="cmd-btn" data-cmd="/agora" title="Agora群聊">/agora</button>
-        <button class="cmd-btn" data-cmd="/summary" title="会话摘要">/summary</button>
-        <button class="cmd-btn" id="upload-btn" title="上传文件" data-tooltip="上传文件">📎</button>
-        <button class="cmd-btn" id="kb-context-btn" title="选择知识库文件注入讨论" data-tooltip="@知识库文件">🗂️</button>
-      </div>
-      <div class="upload-zone" id="upload-zone">
-        <p>📎 拖拽文件到此处，或 <span class="upload-link">点击选择</span></p>
-        <input type="file" id="file-input" multiple style="display:none">
-      </div>
-      <div class="upload-progress" id="upload-progress" style="display:none;">
-        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
-        <span class="progress-text" id="progress-text">0%</span>
-      </div>
-      <div class="input-row">
-        <textarea id="message-input" placeholder="输入消息… Shift+Enter 换行" rows="2"></textarea>
-        <button id="send-btn" class="btn-send" title="发送" data-tooltip="发送">🚀</button>
-      </div>
-      <div class="input-hints">
-        <span>Enter 发送 · Shift+Enter 换行 · 拖拽文件上传</span>
+      <div class="kb-preview-detail" id="kb-preview-detail" style="display:none;">
+        <div id="kb-preview-title" class="kb-preview-title"></div>
+        <div id="kb-preview-body" class="kb-preview-body"></div>
       </div>
     </div>
   </main>
+
+  <!-- 右侧：聊天侧栏（可折叠） -->
+  <aside class="chat-sidebar" id="chat-sidebar">
+    <div class="chat-sidebar-toggle" id="chat-sidebar-toggle" title="收起/展开聊天" style="display:none;">💬</div>
+    <div class="chat-sidebar-inner" id="chat-sidebar-inner">
+      <div class="chat-sidebar-header">
+        <span style="font-size:0.85rem;color:var(--text-secondary);">💬 讨论</span>
+        <button class="icon-btn" id="chat-collapse-btn" title="收起聊天">▶</button>
+      </div>
+      <div class="welcome-screen" id="welcome-screen" style="display:none;">
+        <h2>👋 欢迎回来</h2>
+        <p>林赛不是你的搜索引擎，他是你的合作者。</p>
+      </div>
+      <div class="chat-archive-header" id="chat-archive-header" style="display:none;">
+        <div class="archive-info">
+          <span id="archive-topic"></span>
+          <span id="archive-meta" style="color:var(--text-tertiary);margin-left:8px;"></span>
+        </div>
+        <button class="btn-text" id="close-archive-view">✕ 关闭浏览</button>
+      </div>
+      <div class="history-hint" id="history-hint" style="display:none;">
+        <span>↑ 向上滚动查看历史消息</span>
+        <button class="btn-text" id="history-hint-close">✕</button>
+      </div>
+      <div class="messages" id="messages"></div>
+      <div class="typing-indicator" id="typing-indicator" style="display:none;">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        <span class="typing-text">林赛正在思考…</span>
+      </div>
+      <!-- 输入区 -->
+      <div class="input-area">
+        <div class="command-bar">
+          <button class="cmd-btn" data-cmd="/mode" title="切换模式">/mode</button>
+          <button class="cmd-btn" data-cmd="/read" title="读取文档">/read</button>
+          <button class="cmd-btn" data-cmd="/agora" title="Agora群聊">/agora</button>
+          <button class="cmd-btn" data-cmd="/summary" title="会话摘要">/summary</button>
+          <button class="cmd-btn" id="upload-btn" title="上传文件" data-tooltip="上传文件">📎</button>
+          <button class="cmd-btn" id="kb-context-btn" title="选择知识库文件注入讨论" data-tooltip="@知识库文件">🗂️</button>
+        </div>
+        <div class="upload-zone" id="upload-zone">
+          <p>📎 拖拽文件到此处，或 <span class="upload-link">点击选择</span></p>
+          <input type="file" id="file-input" multiple style="display:none">
+        </div>
+        <div class="upload-progress" id="upload-progress" style="display:none;">
+          <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+          <span class="progress-text" id="progress-text">0%</span>
+        </div>
+        <div class="input-row">
+          <textarea id="message-input" placeholder="输入消息… Shift+Enter 换行" rows="2"></textarea>
+          <button id="send-btn" class="btn-send" title="发送" data-tooltip="发送">🚀</button>
+        </div>
+        <div class="input-hints">
+          <span>Enter 发送 · Shift+Enter 换行 · 🗂️ 选择知识库文件注入讨论</span>
+        </div>
+      </div>
+    </div>
+  </aside>
 
   <!-- 右侧栏：协同 -->
   <aside class="sidebar right" id="right-sidebar">

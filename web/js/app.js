@@ -1786,6 +1786,12 @@ async function init() {
   // 绑定事件
   bindEvents();
 
+  // v3.0.0: 初始化知识库常驻面板（文件树）
+  initKbMain();
+
+  // 聊天侧栏折叠状态恢复
+  initChatSidebar();
+
   // 检查是否有活跃会话，有则自动选中最新
   if (State.sessions.length > 0) {
     const active = State.sessions.find(s => s.status === 'active') || State.sessions[0];
@@ -1812,8 +1818,8 @@ const KBManager = {
 };
 
 function openKbManager() {
-  document.getElementById('kb-manager-overlay').style.display = 'flex';
-  loadKbOverview();
+  // v3.0.0: 知识库现在是常驻主区，📚 按钮改为打开 HHG 知识地图 MOC
+  openWikiByTitle('🗺️ HHG 知识地图');
 }
 
 function closeKbManager() {
@@ -2415,12 +2421,21 @@ async function runMaintenance(task) {
 }
 
 async function openWikiDetail(wikiPath) {
-  const overlay = document.getElementById('kb-wiki-detail-overlay');
-  const titleEl = document.getElementById('kb-wiki-detail-title');
-  const bodyEl = document.getElementById('kb-wiki-detail-body');
+  // v3.0.0: 渲染到知识库主区的预览面板（不再弹窗）
+  const titleEl = document.getElementById('kb-preview-title');
+  const bodyEl = document.getElementById('kb-preview-body');
+  const defaultEl = document.getElementById('kb-preview-default');
+  const detailEl = document.getElementById('kb-preview-detail');
+  if (!titleEl || !bodyEl) return;
 
-  overlay.style.display = 'flex';
-  bodyEl.innerHTML = '◐ 加载中…';
+  // 显示详情区，隐藏默认提示
+  if (defaultEl) defaultEl.style.display = 'none';
+  if (detailEl) detailEl.style.display = 'block';
+  titleEl.textContent = '◐ 加载中…';
+  bodyEl.innerHTML = '';
+
+  // 高亮树节点
+  document.querySelectorAll('.kb-tree-item').forEach(el => el.classList.remove('active'));
 
   try {
     const relPath = wikiPath.replace(/^wiki\//, '');
@@ -2527,35 +2542,36 @@ async function loadBacklinks(title) {
 
 // v2.9.5: raw 文件预览（弹窗）
 async function openRawDetail(rawPath) {
-  showModal(`<div style="max-width:680px;max-height:80vh;display:flex;flex-direction:column;">
-    <h3 style="margin-bottom:8px;">📄 ${escapeHtml(rawPath.split('/').pop())}</h3>
-    <div id="raw-detail-body" style="flex:1;overflow-y:auto;font-size:0.85rem;line-height:1.6;white-space:pre-wrap;background:var(--bg-secondary);padding:12px;border-radius:6px;">◐ 加载中…</div>
-    <div style="margin-top:8px;display:flex;gap:8px;">
-      <button class="btn-text" onclick="openLocalFile('${rawPath.replace(/'/g,"\\'")}')" style="padding:6px 12px;border:1px solid var(--border-color);border-radius:5px;cursor:pointer;font-size:0.82rem;">📂 在编辑器中打开</button>
-      <button onclick="closeModal" style="padding:6px 12px;border:1px solid var(--border-color);border-radius:5px;cursor:pointer;font-size:0.82rem;">关闭</button>
-    </div>
-  </div>`);
+  // v3.0.0: 渲染到知识库主区预览面板（不再弹窗）
+  const titleEl = document.getElementById('kb-preview-title');
+  const bodyEl = document.getElementById('kb-preview-body');
+  const defaultEl = document.getElementById('kb-preview-default');
+  const detailEl = document.getElementById('kb-preview-detail');
+  if (!titleEl || !bodyEl) return;
+  if (defaultEl) defaultEl.style.display = 'none';
+  if (detailEl) detailEl.style.display = 'block';
+  titleEl.textContent = '📄 ' + rawPath.split('/').pop();
+  bodyEl.innerHTML = '<span style="color:var(--text-tertiary);">◐ 加载中…</span>';
+
   try {
     const data = await apiGet(`/api/knowledge/file-content?path=${encodeURIComponent(rawPath)}`);
-    const body = document.getElementById('raw-detail-body');
     if (data.content) {
-      // 简单 markdown 渲染
       let rendered = data.content
-        .replace(/^## (.*$)/gim, '<h3>$1</h3>')
-        .replace(/^# (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+        .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
         .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
         .replace(/`(.*?)`/g, '<code>$1</code>');
-      body.innerHTML = rendered.slice(0, 5000) + (data.size > 5000 ? '\n\n... (截断)' : '');
-      body.style.whiteSpace = 'normal';
+      const safePath = rawPath.replace(/'/g, "\\'");
+      bodyEl.innerHTML = `<div style="margin-bottom:8px;"><button class="btn-text" onclick="openLocalFile('${safePath}')" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:4px;cursor:pointer;font-size:0.8rem;">📂 在编辑器中打开</button></div>${rendered.slice(0, 6000)}${data.size > 6000 ? '\n\n<p style="color:var(--text-tertiary);">... (截断)</p>' : ''}`;
     } else {
-      body.textContent = '无法读取（' + (data.error || '未知错误') + '）';
+      bodyEl.innerHTML = '<span style="color:var(--error-color);">无法读取（' + escapeHtml(data.error || '未知错误') + '）</span>';
     }
   } catch (e) {
-    const body = document.getElementById('raw-detail-body');
-    if (body) body.textContent = '加载失败: ' + e.message;
+    bodyEl.innerHTML = '<span style="color:var(--error-color);">加载失败: ' + escapeHtml(e.message) + '</span>';
   }
 }
-
 async function openLocalFile(relPath) {
   try {
     // 知识库文件路径是相对 knowledge/ 的，需要补 knowledge/ 前缀（不重复加）
@@ -2849,4 +2865,135 @@ async function injectKbContext() {
 async function ensureKbFileCache() {
   if (window._kbFileCache) return;
   try { window._kbFileCache = await apiGet('/api/knowledge/files'); } catch (e) { window._kbFileCache = []; }
+}
+
+// ============================================
+// v3.0.0: 知识库常驻主区（文件树 + 预览）
+// ============================================
+
+async function initKbMain() {
+  await renderKbTree();
+  // 绑定搜索
+  let treeSearchTimer;
+  document.getElementById('kb-tree-search')?.addEventListener('input', (e) => {
+    clearTimeout(treeSearchTimer);
+    const q = e.target.value.trim();
+    if (!q) { renderKbTree(); return; }
+    treeSearchTimer = setTimeout(() => searchKbToTree(q), 300);
+  });
+}
+
+const KB_TREE_TYPES = [
+  {key: 'concepts', label: '📐 概念', mocFirst: true},
+  {key: 'methods', label: '🛠️ 方法'},
+  {key: 'people', label: '👤 人物'},
+  {key: 'papers', label: '📚 综述'},
+  {key: 'projects', label: '📁 项目'},
+];
+
+async function renderKbTree() {
+  const container = document.getElementById('kb-tree-content');
+  if (!container) return;
+  container.innerHTML = '◐ 加载中…';
+  try {
+    const data = await apiGet('/api/knowledge/wiki');
+    const pages = data.pages || [];
+    KBManager.wikiPages = pages;
+
+    // MOC 索引页置顶
+    const mocs = pages.filter(p => p.title && p.title.includes('🗺️'));
+    const normal = pages.filter(p => !(p.title && p.title.includes('🗺️')));
+
+    let html = '';
+    // MOC 区
+    if (mocs.length) {
+      html += `<div class="kb-tree-group"><details open><summary>🗺️ 知识地图</summary>`;
+      mocs.forEach(p => {
+        const safePath = (p.path || '').replace(/'/g, "\\'");
+        html += `<div class="kb-tree-item is-moc" onclick="openWikiDetail('${safePath}')">${escapeHtml(p.title.replace('🗺️ ',''))}</div>`;
+      });
+      html += `</details></div>`;
+    }
+
+    // 按 type 分组
+    const groups = {};
+    normal.forEach(p => { (groups[p.type] = groups[p.type] || []).push(p); });
+    const stageOrder = { mature: 0, growing: 1, seedling: 2, archived: 3, unknown: 4 };
+    for (const t of KB_TREE_TYPES) {
+      const items = (groups[t.key] || []).sort((a, b) => (stageOrder[a.growth_stage] ?? 9) - (stageOrder[b.growth_stage] ?? 9));
+      if (!items.length) continue;
+      html += `<div class="kb-tree-group"><details><summary>${t.label} (${items.length})</summary>`;
+      items.forEach(p => {
+        const safePath = (p.path || '').replace(/'/g, "\\'");
+        const stageIcon = { mature: '🌳', growing: '🌿', seedling: '🌱' }[p.growth_stage] || '○';
+        html += `<div class="kb-tree-item" onclick="openWikiDetail('${safePath}')">${stageIcon} ${escapeHtml(p.title)}</div>`;
+      });
+      html += `</details></div>`;
+    }
+
+    // raw 论文库（折叠，量大）
+    try {
+      const rawData = await apiGet('/api/knowledge/raw');
+      const rawFiles = (rawData.files || []).filter(f => f.category === 'papers');
+      if (rawFiles.length) {
+        html += `<div class="kb-tree-group"><details><summary>📄 论文库 (${rawFiles.length})</summary>`;
+        rawFiles.slice(0, 30).forEach(f => {
+          const safePath = (f.path || '').replace(/'/g, "\\'");
+          html += `<div class="kb-tree-item" onclick="openRawDetail('${safePath}')" title="${escapeHtml(f.name)}">${escapeHtml(f.name.replace(/\.md$/, '').slice(0, 28))}</div>`;
+        });
+        if (rawFiles.length > 30) html += `<div class="kb-tree-item" style="color:var(--text-tertiary);">... 共 ${rawFiles.length} 篇</div>`;
+        html += `</details></div>`;
+      }
+    } catch (e) {}
+
+    container.innerHTML = html;
+  } catch (e) {
+    container.innerHTML = '<div style="color:var(--error-color);font-size:0.8rem;padding:8px;">加载失败</div>';
+  }
+}
+
+// 搜索结果渲染到文件树区域
+async function searchKbToTree(query) {
+  const container = document.getElementById('kb-tree-content');
+  if (!container) return;
+  container.innerHTML = '◐ 搜索中…';
+  try {
+    const data = await apiGet(`/api/knowledge/search?q=${encodeURIComponent(query)}&top_k=20`);
+    const results = data.results || [];
+    if (!results.length) {
+      container.innerHTML = `<div style="color:var(--text-tertiary);font-size:0.8rem;padding:8px;">🔍 未找到「${escapeHtml(query)}」</div>`;
+      return;
+    }
+    let html = `<div style="font-size:0.78rem;color:var(--text-secondary);padding:4px 8px;">🔍 ${results.length} 条结果</div>`;
+    results.forEach(r => {
+      const safeDoc = (r.doc || r.path || '').replace(/'/g, "\\'");
+      const onclick = r.source === 'wiki' ? `openWikiDetail('${safeDoc}')` : `openRawDetail('${safeDoc}')`;
+      html += `<div class="kb-tree-item" onclick="${onclick}" title="${escapeHtml(r.text||'').slice(0,60)}">${r.source === 'wiki' ? '📝' : '📄'} ${escapeHtml(r.title || r.doc)}</div>`;
+    });
+    container.innerHTML = html;
+  } catch (e) {
+    container.innerHTML = '<div style="color:var(--error-color);font-size:0.8rem;">搜索失败</div>';
+  }
+}
+
+// ============================================
+// v3.0.0: 聊天侧栏折叠
+// ============================================
+function initChatSidebar() {
+  const sidebar = document.getElementById('chat-sidebar');
+  if (!sidebar) return;
+  // 恢复折叠状态
+  if (localStorage.getItem('chat-collapsed') === 'true') {
+    sidebar.classList.add('collapsed');
+  }
+  // 收起按钮
+  document.getElementById('chat-collapse-btn')?.addEventListener('click', () => {
+    sidebar.classList.add('collapsed');
+    localStorage.setItem('chat-collapsed', 'true');
+  });
+  // 展开按钮
+  document.getElementById('chat-sidebar-toggle')?.addEventListener('click', () => {
+    sidebar.classList.remove('collapsed');
+    localStorage.setItem('chat-collapsed', 'false');
+  });
 }
