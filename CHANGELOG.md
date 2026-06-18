@@ -1,5 +1,31 @@
 # 变更记录
 
+## v2.9.5 - 2026-06-19 知识库交互修复：双链可点击+搜索+raw预览+7个bug
+
+### 核心修复：让知识网络真正连通
+之前数据层建好了（MOC/双链/related/图谱），但展示层把所有关联渲染成纯文本，
+知识网络在 UI 里是断的。本次让所有关联都可点击跳转。
+
+### 7 个 Bug 修复
+- **BUG-1** 打开文件夹 404：openLocalFile 裸 'knowledge' 被错加前缀 → 修复判断
+- **BUG-2** MOC 详情 [[]] 双链不可点击（最严重）→ 渲染成可点击链接，点击跳转
+- **BUG-3** related 字段纯文本 → 渲染成可点击 chip
+- **BUG-4** raw 列表点击无反应 → 新增 openRawDetail 预览弹窗
+- **BUG-5** .kb-tab 选择器跨面板冲突（污染学习面板）→ scope 到 #kb-manager-overlay
+- **BUG-6** confidence NaN → 兜底 `?? 0`
+- **BUG-7** onclick 路径未转义 → 统一转义单引号
+
+### 新功能
+- **知识库搜索框**：wiki tab 顶部加搜索框，接已有 /api/knowledge/search，支持跨类型按关键词找概念
+- **按标题跳转 openWikiByTitle**：[[wikilink]] 和 related chip 共用，模糊匹配 title/path
+- **反向关联展示**：wiki 详情底部显示"被哪些笔记关联"（调 /api/knowledge/related）
+- **CSS 双链样式**：.kb-wikilink 虚线下划线 + .kb-related-chip 圆角标签
+
+### 验证
+- self_test 88/88 全绿
+- 搜索 API 返回正确结果（三步模型 3 条）
+- MOC 双链、related chip、raw 预览均可点击
+
 ## v2.9.4 - 2026-06-19 知识库专项优化：修bug+分层结构+MOC+标签体系
 
 ### 第一层：修 Bug

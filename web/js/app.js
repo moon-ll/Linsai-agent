@@ -1943,8 +1943,9 @@ async function loadLearningStats() {
 
 function switchKbTab(tab) {
   KBManager.activeTab = tab;
-  document.querySelectorAll('.kb-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
-  document.querySelectorAll('.kb-panel').forEach(p => p.classList.toggle('active', p.id === `kb-panel-${tab}`));
+  // scope 到知识库面板（避免污染学习面板的同名 class）
+  document.querySelectorAll('#kb-manager-overlay .kb-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+  document.querySelectorAll('#kb-manager-overlay .kb-panel').forEach(p => p.classList.toggle('active', p.id === `kb-panel-${tab}`));
 
   if (tab === 'overview') loadKbOverview();
   else if (tab === 'raw') loadKbRaw();
@@ -2035,14 +2036,15 @@ async function loadKbRaw() {
       const catLabels = { papers: '📄 论文', notes: '📝 笔记', webclips: '🌐 剪藏' };
       html += `<div class="kb-section-title">${catLabels[cat] || cat}</div>`;
       list.forEach(f => {
+        const safePath = (f.path || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
         html += `
           <div class="kb-list-item">
-            <div class="kb-list-main">
-              <div class="kb-list-title">${f.name}</div>
-              <div class="kb-list-meta">${(f.size / 1024).toFixed(1)} KB · ${new Date(f.mtime * 1000).toLocaleDateString()}</div>
+            <div class="kb-list-main" onclick="openRawDetail('${safePath}')" style="cursor:pointer;">
+              <div class="kb-list-title">${escapeHtml(f.name)}</div>
+              <div class="kb-list-meta">${(f.size / 1024).toFixed(1)} KB · ${new Date(f.mtime * 1000).toLocaleDateString()}${f.project ? ' · [' + escapeHtml(Array.isArray(f.project)?f.project[0]:f.project) + ']' : ''}</div>
             </div>
             <div class="kb-list-actions">
-              <button class="kb-action-btn" onclick="openLocalFile('${f.path}')" title="打开文件">📂</button>
+              <button class="kb-action-btn" onclick="event.stopPropagation(); openLocalFile('${safePath}')" title="在编辑器中打开">📂</button>
             </div>
           </div>
         `;
@@ -2051,6 +2053,37 @@ async function loadKbRaw() {
     container.innerHTML = html;
   } catch (e) {
     container.innerHTML = `<div class="kb-empty">✗ 加载失败</div>`;
+  }
+}
+
+// v2.9.5: 知识库搜索
+async function searchKb(query) {
+  const container = document.getElementById('kb-wiki-content');
+  if (!container) return;
+  container.innerHTML = '◐ 搜索中…';
+  try {
+    const data = await apiGet(`/api/knowledge/search?q=${encodeURIComponent(query)}&top_k=15`);
+    const results = data.results || [];
+    if (!results.length) {
+      container.innerHTML = `<div class="kb-empty">🔍 未找到与「${escapeHtml(query)}」相关的内容</div>`;
+      return;
+    }
+    const stageLabels = { seedling: '🌱', growing: '🌿', mature: '🌳' };
+    let html = `<div style="margin-bottom:8px;font-size:0.8rem;color:var(--text-secondary);">🔍 找到 ${results.length} 条结果</div>`;
+    results.forEach(r => {
+      const stageIcon = stageLabels[r.growth_stage] || '○';
+      const sourceTag = r.source === 'raw' ? '📄' : '📝';
+      html += `
+        <div class="kb-list-item">
+          <div class="kb-list-main" onclick="${r.source === 'wiki' ? `openWikiDetail('${r.doc.replace(/'/g,"\\'")}')` : `openRawDetail('${r.path.replace(/'/g,"\\'")}')`}" style="cursor:pointer;">
+            <div class="kb-list-title">${sourceTag} ${stageIcon} ${escapeHtml(r.title || r.doc)}</div>
+            <div class="kb-list-meta" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${escapeHtml((r.text || '').slice(0, 120))}</div>
+          </div>
+        </div>`;
+    });
+    container.innerHTML = html;
+  } catch (e) {
+    container.innerHTML = `<div class="kb-empty">✗ 搜索失败: ${e.message}</div>`;
   }
 }
 
@@ -2400,7 +2433,7 @@ async function openWikiDetail(wikiPath) {
     const stageLabels = { seedling: '🌱 幼苗', growing: '🌿 成长中', mature: '🌳 成熟', archived: '📦 归档' };
     const stage = stageLabels[fm.growth_stage] || fm.growth_stage || '未知';
 
-    // 简单 Markdown 渲染
+    // 简单 Markdown 渲染（含 [[wikilink]] 双向链接处理）
     let renderedBody = body
       .replace(/^### (.*$)/gim, '<h3>$1</h3>')
       .replace(/^## (.*$)/gim, '<h2>$1</h2>')
@@ -2409,38 +2442,125 @@ async function openWikiDetail(wikiPath) {
       .replace(/^\- (.*$)/gim, '<li>$1</li>')
       .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/`(.*?)`/g, '<code>$1</code>');
+      .replace(/`(.*?)`/g, '<code>$1</code>')
+      // [[wikilink]] → 可点击链接（知识网络核心）
+      .replace(/\[\[([^\]]+)\]\]/g, (m, name) => {
+        const safe = name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
+        return `<a class="kb-wikilink" onclick="openWikiByTitle('${safe}')" title="点击跳转">${escapeHtml(name)}</a>`;
+      });
 
     // 包裹列表项
     renderedBody = renderedBody.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
 
+    // related 字段渲染为可点击 chip（BUG-3 修复）
+    const relatedHtml = (fm.related || []).map(r => {
+      const safe = String(r).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+      return `<span class="kb-related-chip" onclick="openWikiByTitle('${safe}')" title="点击跳转">${escapeHtml(r)}</span>`;
+    }).join(' ') || '-';
+
     bodyEl.innerHTML = `
       <div class="kb-detail-actions">
-        <button class="btn-text" onclick="openLocalFile('${wikiPath}')">📂 在编辑器中打开</button>
-        <button class="btn-text" onclick="copyToClipboard('${wikiPath}')">📋 复制路径</button>
+        <button class="btn-text" onclick="openLocalFile('${wikiPath.replace(/'/g, "\\'")}')">📂 在编辑器中打开</button>
+        <button class="btn-text" onclick="copyToClipboard('${wikiPath.replace(/'/g, "\\'")}')">📋 复制路径</button>
       </div>
       <div class="kb-frontmatter">
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">类型</span><span class="kb-frontmatter-value">${fm.type || '-'}</span></div>
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">生长阶段</span><span class="kb-frontmatter-value">${stage}</span></div>
-        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">确信度</span><span class="kb-frontmatter-value">${(fm.confidence * 100).toFixed(0)}%</span></div>
+        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">确信度</span><span class="kb-frontmatter-value">${((fm.confidence ?? 0) * 100).toFixed(0)}%</span></div>
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">标签</span><span class="kb-frontmatter-value">${(fm.tags || []).join(', ') || '-'}</span></div>
-        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">关联</span><span class="kb-frontmatter-value">${(fm.related || []).join(', ') || '-'}</span></div>
+        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">关联</span><span class="kb-frontmatter-value">${relatedHtml}</span></div>
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">更新</span><span class="kb-frontmatter-value">${fm.updated ? new Date(fm.updated).toLocaleString() : '-'}</span></div>
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">路径</span><span class="kb-frontmatter-value">${wikiPath}</span></div>
       </div>
+      <div id="kb-backlinks-region"></div>
       <div class="kb-wiki-body">${renderedBody}</div>
     `;
+
+    // 加载反向关联（谁关联了我）
+    loadBacklinks(fm.title || '');
   } catch (e) {
     bodyEl.innerHTML = `<div class="kb-empty">✗ 加载失败: ${e.message}</div>`;
   }
 }
 
+// v2.9.5: 按标题跳转 wiki（[[wikilink]] 和 related chip 共用）
+function openWikiByTitle(title) {
+  // 优先精确匹配 title，其次匹配文件名 stem
+  const pages = KBManager.wikiPages || [];
+  // 确保 wikiPages 已加载
+  if (!pages.length) {
+    apiGet('/api/knowledge/wiki').then(data => {
+      KBManager.wikiPages = data.pages || [];
+      openWikiByTitle(title);
+    });
+    return;
+  }
+  let found = pages.find(p => p.title === title);
+  if (!found) found = pages.find(p => p.path && p.path.replace(/.*\//, '').replace('.md', '') === title);
+  if (!found) found = pages.find(p => p.title && p.title.includes(title));
+  if (found) {
+    openWikiDetail(found.path);
+  } else {
+    showToast('未找到笔记: ' + title, 'info');
+  }
+}
+
+// v2.9.5: 加载反向关联（显示哪些笔记关联了当前笔记）
+async function loadBacklinks(title) {
+  if (!title) return;
+  const region = document.getElementById('kb-backlinks-region');
+  if (!region) return;
+  try {
+    const data = await apiGet(`/api/knowledge/related?q=${encodeURIComponent(title)}`);
+    const related = (data.concepts || data.related || []).filter(r => r !== title);
+    if (related.length) {
+      region.innerHTML = `<div style="margin:8px 0;padding:6px 10px;background:var(--bg-tertiary);border-radius:6px;">
+        <span style="font-size:0.78rem;color:var(--text-secondary);">↩️ 被以下笔记关联：</span>
+        ${related.map(r => {
+          const safe = String(r).replace(/'/g, "\\'").replace(/"/g, '&quot;');
+          return `<span class="kb-related-chip" onclick="openWikiByTitle('${safe}')" title="点击跳转">${escapeHtml(r)}</span>`;
+        }).join(' ')}
+      </div>`;
+    }
+  } catch (e) { /* 静默 */ }
+}
+
+// v2.9.5: raw 文件预览（弹窗）
+async function openRawDetail(rawPath) {
+  showModal(`<div style="max-width:680px;max-height:80vh;display:flex;flex-direction:column;">
+    <h3 style="margin-bottom:8px;">📄 ${escapeHtml(rawPath.split('/').pop())}</h3>
+    <div id="raw-detail-body" style="flex:1;overflow-y:auto;font-size:0.85rem;line-height:1.6;white-space:pre-wrap;background:var(--bg-secondary);padding:12px;border-radius:6px;">◐ 加载中…</div>
+    <div style="margin-top:8px;display:flex;gap:8px;">
+      <button class="btn-text" onclick="openLocalFile('${rawPath.replace(/'/g,"\\'")}')" style="padding:6px 12px;border:1px solid var(--border-color);border-radius:5px;cursor:pointer;font-size:0.82rem;">📂 在编辑器中打开</button>
+      <button onclick="closeModal" style="padding:6px 12px;border:1px solid var(--border-color);border-radius:5px;cursor:pointer;font-size:0.82rem;">关闭</button>
+    </div>
+  </div>`);
+  try {
+    const data = await apiGet(`/api/knowledge/file-content?path=${encodeURIComponent(rawPath)}`);
+    const body = document.getElementById('raw-detail-body');
+    if (data.content) {
+      // 简单 markdown 渲染
+      let rendered = data.content
+        .replace(/^## (.*$)/gim, '<h3>$1</h3>')
+        .replace(/^# (.*$)/gim, '<h2>$1</h2>')
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/`(.*?)`/g, '<code>$1</code>');
+      body.innerHTML = rendered.slice(0, 5000) + (data.size > 5000 ? '\n\n... (截断)' : '');
+      body.style.whiteSpace = 'normal';
+    } else {
+      body.textContent = '无法读取（' + (data.error || '未知错误') + '）';
+    }
+  } catch (e) {
+    const body = document.getElementById('raw-detail-body');
+    if (body) body.textContent = '加载失败: ' + e.message;
+  }
+}
+
 async function openLocalFile(relPath) {
   try {
-    // 知识库文件路径是相对 knowledge/ 的（如 wiki/concepts/三步模型.md），
-    // 但后端按相对项目根拼接，需要补 knowledge/ 前缀（不重复加）
+    // 知识库文件路径是相对 knowledge/ 的，需要补 knowledge/ 前缀（不重复加）
     let fullPath = relPath;
-    if (fullPath && !fullPath.startsWith('knowledge/') && !fullPath.startsWith('knowledge\\')) {
+    if (fullPath && fullPath !== 'knowledge' && !fullPath.startsWith('knowledge/') && !fullPath.startsWith('knowledge\\')) {
       fullPath = 'knowledge/' + fullPath;
     }
     const data = await apiPost('/api/open-local', { path: fullPath });
@@ -2557,7 +2677,7 @@ function bindKbManagerEvents() {
     if (e.target === e.currentTarget) closeKbManager();
   });
 
-  document.querySelectorAll('.kb-tab').forEach(tab => {
+  document.querySelectorAll('#kb-manager-overlay .kb-tab').forEach(tab => {
     tab.addEventListener('click', () => switchKbTab(tab.dataset.tab));
   });
 
@@ -2568,6 +2688,15 @@ function bindKbManagerEvents() {
 
   document.getElementById('kb-wiki-create-stub')?.addEventListener('click', createWikiStub);
   document.getElementById('kb-wiki-filter')?.addEventListener('change', loadKbWiki);
+
+  // v2.9.5: 知识库搜索
+  let searchTimer;
+  document.getElementById('kb-search-input')?.addEventListener('input', (e) => {
+    clearTimeout(searchTimer);
+    const q = e.target.value.trim();
+    if (!q) { loadKbWiki(); return; }  // 清空搜索恢复列表
+    searchTimer = setTimeout(() => searchKb(q), 300);
+  });
 
   // v2.7.0: 项目面板 + hermes 控制台
   if (typeof bindProjectsEvents === 'function') bindProjectsEvents();

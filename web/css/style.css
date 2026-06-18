@@ -1685,6 +1685,35 @@ body {
   color: var(--accent-color);
 }
 
+/* v2.9.5: 双向链接与关联 chip */
+.kb-wikilink {
+  color: var(--accent-color);
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  font-weight: 500;
+}
+.kb-wikilink:hover {
+  background: var(--bg-active);
+  border-radius: 3px;
+}
+.kb-related-chip {
+  display: inline-block;
+  padding: 1px 8px;
+  margin: 2px 3px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  color: var(--accent-color);
+  transition: background 0.15s;
+}
+.kb-related-chip:hover {
+  background: var(--bg-active);
+  border-color: var(--accent-color);
+}
+
 .kb-detail-actions {
   display: flex;
   gap: 8px;
