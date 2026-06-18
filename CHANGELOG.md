@@ -1,5 +1,35 @@
 # 变更记录
 
+## v2.9.2 - 2026-06-18 NSFC 面板重构 + 异步协作框架（hermes干活↔知识库↔林赛讨论）
+
+### NSFC 面板三区重构
+- **区域1 课题产物**：T1-T5 + 共性顶层，卡片网格展示（进度/版本/大小/参考数），点击展开文档
+- **区域2 调研资料**：references(16篇) + knowledge_base(concepts/methods) + daily_brief(7份)，折叠列表
+- **区域3 待决策项**：从 state.md 提取，每项可 ✓通过/✗否决/💬讨论
+- 替换了原来照搬 state.md 区块的混乱展示
+
+### 通用异步协作框架
+**hermes 干活 → 知识库 → 林赛讨论 → 反馈 → hermes 再干活**
+- 待决策项「💬 讨论」：注入该课题知识库到聊天框 → 林赛基于知识库讨论 → 总结写 discussions/ → 异步反馈 hermes
+- 通过/否决：持久化到 memory/nsfc-decisions.json + 异步反馈 hermes
+- 林赛和 hermes 不直接交互，通过知识库（discussions 文件）异步通信
+
+### 讨论→反馈闭环
+- `POST /api/projects/nsfc/pending/<id>` — 决策（approve/reject/discuss）
+- `POST /api/projects/nsfc/discuss-summary` — 总结讨论 → 写 discussions/ + 反馈 hermes
+- 讨论工具栏：显示"📝总结讨论"按钮 → 林赛生成总结 → "✓提交总结到discussions"
+- 决策状态持久化：memory/nsfc-decisions.json（approved/rejected 不再显示）
+
+### 新增后端数据
+- `get_nsfc_topics()` — 6 课题卡片（T1-T4 mature 100KB+，T5 seedling）
+- `get_nsfc_references()` — 16 references + 7 概念/方法 + 7 简报
+- `get_nsfc_pending()` — 结构化待决策项（合并持久化状态）
+- 新增 API：/nsfc/topics /nsfc/references /nsfc/pending /nsfc/pending/<id> /nsfc/discuss-summary
+
+### 验证
+- self_test 88/88 全绿
+- 6 课题卡片渲染、23 调研资料、待决策项通过/讨论闭环
+
 ## v2.9.1 - 2026-06-18 候选池三状态 + @知识库文件讨论 + 智能分类回填
 
 ### 候选池三状态持久化

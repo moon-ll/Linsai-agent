@@ -631,6 +631,194 @@ def parse_nsfc_state_hierarchical() -> Dict[str, Any]:
 
 
 # ============================================================
+# NSFC 结构化数据（v2.9.2：课题产物 + 调研资料 + 待决策项）
+# ============================================================
+
+# 中文课题名映射
+_TOPIC_NAMES = {
+    "T1": "量子几何", "T2": "谷电子学", "T3": "带动力学",
+    "T4": "序参量", "T5": "反演方法学", "00": "共性顶层",
+}
+
+
+def get_nsfc_topics() -> List[Dict[str, Any]]:
+    """扫描 topics/ 返回课题产物卡片列表。
+
+    Returns:
+        [{topic, name, direction, notes:[{name,size_kb,modified,version}],
+          references_count, decisions_count, progress, total_kb}]
+    """
+    topics_dir = NSFC_DIR / "topics"
+    if not topics_dir.exists():
+        return []
+
+    topics = []
+    for tdir in sorted(topics_dir.iterdir()):
+        if not tdir.is_dir() or not tdir.name.startswith(("T", "0")):
+            continue
+
+        topic_id = tdir.name.split("_")[0]
+        name = _TOPIC_NAMES.get(topic_id, tdir.name)
+        direction = tdir.name.split("_", 1)[1].replace("_", " ") if "_" in tdir.name else ""
+
+        # notes/ 文档
+        notes = []
+        notes_dir = tdir / "notes"
+        if notes_dir.exists():
+            for f in sorted(notes_dir.glob("*.md"), key=lambda p: p.stat().st_mtime, reverse=True):
+                vm = re.search(r"v(\d+\.\d+)", f.name)
+                notes.append({
+                    "name": f.name,
+                    "size_kb": round(f.stat().st_size / 1024, 1),
+                    "modified": datetime.fromtimestamp(f.stat().st_mtime).strftime("%m-%d"),
+                    "version": vm.group(1) if vm else "?",
+                })
+
+        # references/ 和 decisions/ 计数
+        refs_count = len(list((tdir / "references").glob("*.md"))) if (tdir / "references").exists() else 0
+        decs_count = len(list((tdir / "decisions").glob("*.md"))) if (tdir / "decisions").exists() else 0
+
+        # 进度推断（notes 总大小）
+        total_kb = sum(n["size_kb"] for n in notes)
+        if total_kb > 80:
+            progress = "mature"
+        elif total_kb > 30:
+            progress = "growing"
+        elif total_kb > 0:
+            progress = "seedling"
+        else:
+            progress = "empty"
+
+        topics.append({
+            "topic": topic_id,
+            "name": name,
+            "direction": direction,
+            "dir_name": tdir.name,
+            "notes": notes,
+            "references_count": refs_count,
+            "decisions_count": decs_count,
+            "progress": progress,
+            "total_kb": total_kb,
+        })
+
+    return topics
+
+
+def get_nsfc_references() -> Dict[str, Any]:
+    """聚合 NSFC 项目的调研资料清单（按来源分类）。
+
+    Returns:
+        {references:[...], knowledge_base:{concepts:[],methods:[]}, briefs:[]}
+    """
+    result = {"references": [], "knowledge_base": {}, "briefs": []}
+
+    # references/ 文献笔记
+    refs_dir = NSFC_DIR / "references"
+    if refs_dir.exists():
+        for sub in refs_dir.iterdir():
+            if sub.is_dir():
+                for f in sub.glob("*.md"):
+                    result["references"].append({
+                        "name": f.name, "category": sub.name,
+                        "size_kb": round(f.stat().st_size / 1024, 1),
+                        "path": str(f.relative_to(NSFC_DIR)),
+                    })
+            elif sub.suffix == ".md":
+                result["references"].append({
+                    "name": sub.name, "category": "root",
+                    "size_kb": round(sub.stat().st_size / 1024, 1),
+                    "path": str(sub.relative_to(NSFC_DIR)),
+                })
+
+    # knowledge_base/ 概念/方法
+    kb_dir = NSFC_DIR / "knowledge_base"
+    if kb_dir.exists():
+        for sub in ("concepts", "methods", "literature"):
+            sub_dir = kb_dir / sub
+            if sub_dir.exists():
+                items = []
+                for f in sub_dir.glob("*.md"):
+                    items.append({"name": f.stem, "path": str(f.relative_to(NSFC_DIR)),
+                                  "size_kb": round(f.stat().st_size / 1024, 1)})
+                result["knowledge_base"][sub] = items
+
+    # deliverables/daily_brief 简报
+    brief_dir = NSFC_DIR / "deliverables" / "daily_brief"
+    if brief_dir.exists():
+        for f in sorted(brief_dir.glob("*.md"), reverse=True):
+            dm = re.search(r"(\d{4}-\d{2}-\d{2})", f.name)
+            result["briefs"].append({
+                "date": dm.group(1) if dm else f.stem,
+                "name": f.name, "path": str(f.relative_to(NSFC_DIR)),
+                "size_kb": round(f.stat().st_size / 1024, 1),
+            })
+
+    return result
+
+
+def get_nsfc_pending() -> List[Dict[str, Any]]:
+    """从 state.md 提取待决策项（结构化）。
+
+    合并持久化决策状态（memory/nsfc-decisions.json），
+    approved/rejected 的不再返回。
+
+    Returns:
+        [{id, title, context, related_topic, status, source}]
+    """
+    import json as _json
+    state_path = NSFC_DIR / "state.md"
+    text = _read_text(state_path)
+
+    # 加载持久化决策状态
+    decisions_path = PROJECT_ROOT / "memory" / "nsfc-decisions.json"
+    decided = {}
+    if decisions_path.exists():
+        try:
+            decided = _json.loads(decisions_path.read_text(encoding="utf-8"))
+        except Exception:
+            decided = {}
+
+    # 从 state.md 提取待决策行（⚠️/📌/待拍板/待讨论）
+    pending = []
+    pid_counter = 0
+    for i, line in enumerate(text.split("\n"), 1):
+        line_stripped = line.strip()
+        if not any(mark in line_stripped for mark in ("⚠️", "⚠", "📌", "待.*拍板", "待.*讨论", "可推翻")):
+            continue
+        # 清理 markdown 符号
+        clean = re.sub(r"^[✅⏳⚠️📌❌\-*\s]+", "", line_stripped).strip()
+        clean = re.sub(r"\*\*(.+?)\*\*", r"\1", clean)  # 去粗体
+        if len(clean) < 5:
+            continue
+
+        pid_counter += 1
+        pid = f"pd_{pid_counter:03d}"
+
+        # 检测关联课题
+        related_topic = ""
+        for tid in _TOPIC_NAMES:
+            if tid in clean or tid in line_stripped:
+                related_topic = tid
+                break
+
+        # 持久化状态
+        status = decided.get(pid, {}).get("status", "pending")
+        if status in ("approved", "rejected"):
+            continue  # 已决策的不显示
+
+        pending.append({
+            "id": pid,
+            "title": clean[:80],
+            "context": clean[:200],
+            "related_topic": related_topic,
+            "status": status,
+            "source": f"state.md L{i}",
+        })
+
+    return pending
+
+
+# ============================================================
 # 自检
 # ============================================================
 

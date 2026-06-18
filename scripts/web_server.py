@@ -522,6 +522,21 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json(pr.parse_nsfc_state_hierarchical())
             return
 
+        # v2.9.2: NSFC 课题产物卡片
+        if path == "/api/projects/nsfc/topics":
+            self._send_json({"topics": pr.get_nsfc_topics()})
+            return
+
+        # v2.9.2: NSFC 调研资料清单
+        if path == "/api/projects/nsfc/references":
+            self._send_json(pr.get_nsfc_references())
+            return
+
+        # v2.9.2: NSFC 待决策项
+        if path == "/api/projects/nsfc/pending":
+            self._send_json({"pending": pr.get_nsfc_pending()})
+            return
+
         # NSFC 决策时间轴
         if path == "/api/projects/nsfc/decisions":
             limit = int(parse_qs(parsed.query).get("limit", ["10"])[0])
@@ -970,6 +985,21 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json(pr.parse_nsfc_state_hierarchical())
             return
 
+        # v2.9.2: NSFC 课题产物卡片
+        if path == "/api/projects/nsfc/topics":
+            self._send_json({"topics": pr.get_nsfc_topics()})
+            return
+
+        # v2.9.2: NSFC 调研资料清单
+        if path == "/api/projects/nsfc/references":
+            self._send_json(pr.get_nsfc_references())
+            return
+
+        # v2.9.2: NSFC 待决策项
+        if path == "/api/projects/nsfc/pending":
+            self._send_json({"pending": pr.get_nsfc_pending()})
+            return
+
         # NSFC 决策时间轴
         if path == "/api/projects/nsfc/decisions":
             limit = int(parse_qs(parsed.query).get("limit", ["10"])[0])
@@ -1185,6 +1215,99 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"error": "缺少 arxiv_id"}, 400)
                 return
             self._send_json(ki.suggest_wiki_notes(arxiv_id))
+            return
+
+        # v2.9.2: NSFC 待决策项操作（approve/reject/discuss）
+        m = re.match(r"^/api/projects/nsfc/pending/(.+)$", path)
+        if m:
+            import json as _json
+            from datetime import datetime as _dt, timezone as _tz
+            pid = m.group(1)
+            action = body.get("action", "").strip()  # approve/reject/discuss
+            dec_path = _PROJECT_ROOT / "memory" / "nsfc-decisions.json"
+            decs = {}
+            if dec_path.exists():
+                try: decs = _json.loads(dec_path.read_text(encoding="utf-8"))
+                except Exception: decs = {}
+
+            if action == "discuss":
+                # 标记讨论中，返回该课题的知识库上下文供注入
+                decs[pid] = {"status": "discussing", "started_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
+                dec_path.write_text(_json.dumps(decs, ensure_ascii=False, indent=2), encoding="utf-8")
+                title = body.get("title", "")
+                topic = body.get("related_topic", "")
+                # 收集该课题的 references 上下文
+                context_files = []
+                refs = pr.get_nsfc_references()
+                for r in refs.get("references", [])[:5]:
+                    context_files.append(r.get("path", ""))
+                self._send_json({"success": True, "status": "discussing", "title": title,
+                                 "context_files": context_files, "topic": topic})
+            elif action in ("approve", "reject"):
+                decs[pid] = {"status": action, "decided_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                             "summary": body.get("summary", "")}
+                dec_path.write_text(_json.dumps(decs, ensure_ascii=False, indent=2), encoding="utf-8")
+                # 异步反馈 hermes
+                title = body.get("title", "")
+                try:
+                    import threading as _th
+                    label = "通过" if action == "approve" else "否决"
+                    def _fb(): 
+                        try: hb.oneshot(f"用户对待决策项「{title}」标记为{label}。请更新项目状态。", timeout=120)
+                        except Exception: pass
+                    _th.Thread(target=_fb, daemon=True).start()
+                except Exception: pass
+                self._send_json({"success": True, "status": action})
+            else:
+                self._send_json({"error": "action 需为 approve/reject/discuss"}, 400)
+            return
+
+        # v2.9.2: NSFC 讨论总结 → 写 discussions + 反馈 hermes
+        if path == "/api/projects/nsfc/discuss-summary":
+            import json as _json
+            from datetime import datetime as _dt, timezone as _tz
+            pid = body.get("pending_id", "")
+            title = body.get("title", "")
+            summary = body.get("summary", "").strip()
+            topic = body.get("topic", "")
+            if not summary:
+                self._send_json({"error": "缺少 summary"}, 400)
+                return
+
+            # 写回 discussions/{date}_decisions.md
+            today = _dt.now(_tz.utc).strftime("%Y-%m-%d")
+            disc_dir = pr.NSFC_DIR / "discussions"
+            disc_file = disc_dir / f"{today}_decisions.md"
+            disc_dir.mkdir(parents=True, exist_ok=True)
+            entry = f"\n\n## 决策: {title} 🌐 林赛CoPilot讨论捕获\n\n"
+            entry += f"**决策**: ✅ 已讨论（{topic}）\n\n"
+            entry += f"**讨论总结**:\n\n{summary}\n\n"
+            entry += f"**来源**: 林赛CoPilot Web 讨论({_dt.now(_tz.utc).strftime('%Y-%m-%dT%H:%M:%SZ')})\n"
+            entry += f"**可推翻**: 用户可在后续讨论中调整\n\n---\n"
+            mode = "a" if disc_file.exists() else "w"
+            with open(disc_file, mode, encoding="utf-8") as f:
+                f.write(entry)
+
+            # 更新持久化状态
+            dec_path = _PROJECT_ROOT / "memory" / "nsfc-decisions.json"
+            decs = {}
+            if dec_path.exists():
+                try: decs = _json.loads(dec_path.read_text(encoding="utf-8"))
+                except Exception: decs = {}
+            if pid:
+                decs[pid] = {"status": "discussed", "decided_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "summary": summary[:200]}
+                dec_path.write_text(_json.dumps(decs, ensure_ascii=False, indent=2), encoding="utf-8")
+
+            # 异步反馈 hermes
+            try:
+                import threading as _th
+                def _fb2():
+                    try: hb.oneshot(f"用户在林赛CoPilot讨论了「{title}」（课题{topic}），结论：{summary[:500]}。请据此更新 state.md 和后续 BRAIN 计划。", timeout=180)
+                    except Exception: pass
+                _th.Thread(target=_fb2, daemon=True).start()
+            except Exception: pass
+
+            self._send_json({"success": True, "written_to": str(disc_file.relative_to(pr.NSFC_DIR)), "pid": pid})
             return
 
         # v2.8.0: 创建任务

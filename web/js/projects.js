@@ -43,92 +43,207 @@ async function loadProjectsTab(tab) {
 }
 
 // ============================================
-// NSFC 层次折叠树（v2.9.0）
+// NSFC 三区面板（v2.9.2：课题产物 + 调研资料 + 待决策项）
 // ============================================
 async function renderNsfcTree(container) {
-  const data = await apiGet('/api/projects/nsfc/tree');
-  if (!data.available) {
-    container.innerHTML = '<p style="color:var(--text-tertiary);">NSFC 项目数据不可用</p>';
-    return;
-  }
+  const [topics, refs, pending] = await Promise.all([
+    apiGet('/api/projects/nsfc/topics'),
+    apiGet('/api/projects/nsfc/references'),
+    apiGet('/api/projects/nsfc/pending'),
+  ]);
 
-  let html = `<div style="margin-bottom:12px;padding:8px 12px;background:var(--bg-secondary);border-radius:6px;font-size:0.8rem;color:var(--text-secondary);">
-    📅 最后更新: ${escapeHtml(data.last_updated || '?')} | 点击区块展开/折叠，点击文件路径查看内容
-  </div>`;
+  let html = '';
 
-  const statusColors = {
-    done: 'var(--success-color)', in_progress: 'var(--info-color)',
-    risk: 'var(--error-color)', pending_decision: 'var(--warning-color)',
-    blocked: 'var(--error-color)',
-  };
-  const statusIcons = { done: '✅', in_progress: '⏳', risk: '⚠️', pending_decision: '📌', blocked: '❌' };
+  // === 区域 1：课题产物（卡片网格）===
+  const progressColors = { mature: 'var(--success-color)', growing: 'var(--info-color)', seedling: 'var(--warning-color)', empty: 'var(--text-tertiary)' };
+  const progressLabels = { mature: '🌳 成熟', growing: '🌿 成长中', seedling: '🌱 起步', empty: '○ 空' };
 
-  for (const sec of data.sections) {
-    const openAttr = sec.default_open ? 'open' : '';
-    html += `<details ${openAttr} style="margin-bottom:8px;border:1px solid var(--border-color);border-radius:6px;overflow:hidden;">
-      <summary style="padding:8px 12px;cursor:pointer;font-weight:600;font-size:0.9rem;background:var(--bg-secondary);user-select:none;">
-        ${escapeHtml(sec.icon)} ${escapeHtml(sec.title.replace(/^[\u{1F000}-\u{1FFFF}✅⏳⚠📌❌📋🎯📊🧠🔁📅🔗📚]+\s*/u, ''))}
-        <span style="font-weight:400;color:var(--text-tertiary);font-size:0.78rem;"> (${sec.rows.length})</span>
+  html += '<h4 style="font-size:0.9rem;margin:0 0 8px;color:var(--text-primary);">📋 课题产物（点击展开浏览文档）</h4>';
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-bottom:20px;">';
+  for (const t of (topics.topics || [])) {
+    const color = progressColors[t.progress] || 'inherit';
+    html += `<details style="border:1px solid var(--border-color);border-radius:8px;overflow:hidden;background:var(--bg-secondary);">
+      <summary style="padding:8px 10px;cursor:pointer;font-size:0.82rem;font-weight:600;user-select:none;">
+        <span style="color:${color};">${t.topic}</span> ${escapeHtml(t.name)}
+        <div style="font-size:0.72rem;font-weight:400;color:var(--text-tertiary);margin-top:2px;">
+          ${progressLabels[t.progress]} · ${t.total_kb}KB · 📚${t.references_count}
+        </div>
       </summary>
-      <div style="padding:8px 12px;">`;
-
-    if (sec.summary) {
-      html += `<div style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:8px;padding:4px 8px;background:var(--bg-tertiary);border-radius:4px;">${escapeHtml(sec.summary)}</div>`;
+      <div style="padding:6px 8px;border-top:1px solid var(--border-color);">`;
+    if (t.notes && t.notes.length) {
+      html += '<div style="font-size:0.72rem;color:var(--text-secondary);margin-bottom:4px;">📄 立项依据：</div>';
+      for (const n of t.notes) {
+        html += `<div style="font-size:0.75rem;padding:2px 0;color:var(--text-secondary);">
+          ${escapeHtml(n.name).replace(/\.md$/,'')} <span style="color:var(--text-tertiary);">(${n.size_kb}KB, ${n.modified})</span>
+        </div>`;
+      }
+    } else {
+      html += '<div style="font-size:0.75rem;color:var(--text-tertiary);">无文档</div>';
     }
+    html += `<div style="font-size:0.72rem;margin-top:4px;color:var(--text-tertiary);">📚 ${t.references_count} 篇参考 · 🧠 ${t.decisions_count} 条决策</div>`;
+    html += `</div></details>`;
+  }
+  html += '</div>';
 
-    for (const row of sec.rows) {
-      const color = statusColors[row.status] || 'inherit';
-      const icon = statusIcons[row.status] || '○';
-
-      if (row.type === 'table') {
-        html += `<div style="display:flex;align-items:start;gap:6px;padding:4px 0;font-size:0.82rem;border-bottom:1px solid var(--border-color);">`;
-        html += `<span style="flex-shrink:0;">${icon}</span>`;
-        html += `<span style="flex:1;color:${color};">${row.cells.map(c => escapeHtml(c).replace(/`([^`]+)`/g, '<code style="background:var(--bg-tertiary);padding:1px 4px;border-radius:3px;font-size:0.78rem;">$1</code>')).join(' | ')}</span>`;
-        // 文件路径按钮
-        for (const fp of row.file_paths) {
-          html += `<button onclick="loadNsfcFile('${escapeHtml(fp)}')" style="flex-shrink:0;padding:2px 6px;font-size:0.72rem;border:1px solid var(--border-color);border-radius:3px;cursor:pointer;background:var(--bg-primary);">📄</button>`;
-        }
-        html += `</div>`;
-      } else if (row.type === 'list') {
-        html += `<div style="display:flex;align-items:start;gap:6px;padding:3px 0;font-size:0.82rem;">`;
-        html += `<span style="flex-shrink:0;color:${color};">${icon}</span>`;
-        html += `<span style="flex:1;">${row.cells.map(c => escapeHtml(c).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>').replace(/`([^`]+)`/g, '<code style="background:var(--bg-tertiary);padding:1px 4px;border-radius:3px;font-size:0.78rem;">$1</code>')).join(' ')}</span>`;
-        for (const fp of row.file_paths) {
-          html += `<button onclick="loadNsfcFile('${escapeHtml(fp)}')" style="flex-shrink:0;padding:1px 5px;font-size:0.72rem;border:1px solid var(--border-color);border-radius:3px;cursor:pointer;">📄</button>`;
-        }
-        html += `</div>`;
-      } else if (row.type === 'text') {
-        html += `<div style="padding:6px 0;font-size:0.82rem;font-weight:500;color:var(--text-secondary);border-top:1px dashed var(--border-color);">${escapeHtml(row.cells[0] || '')}</div>`;
+  // === 区域 2：调研资料（折叠列表）===
+  html += '<details style="margin-bottom:16px;border:1px solid var(--border-color);border-radius:6px;overflow:hidden;">';
+  html += '<summary style="padding:8px 12px;cursor:pointer;font-weight:600;font-size:0.85rem;background:var(--bg-secondary);">📚 调研资料</summary>';
+  html += '<div style="padding:8px 12px;">';
+  // references
+  if (refs.references && refs.references.length) {
+    html += `<div style="font-size:0.8rem;margin-bottom:4px;">参考文献笔记（${refs.references.length}）：</div>`;
+    for (const r of refs.references.slice(0, 10)) {
+      html += `<div style="font-size:0.75rem;padding:2px 0;">📄 ${escapeHtml(r.name)} <span style="color:var(--text-tertiary);">${r.size_kb}KB</span></div>`;
+    }
+    if (refs.references.length > 10) html += `<div style="font-size:0.72rem;color:var(--text-tertiary);">... 共 ${refs.references.length} 篇</div>`;
+  }
+  // knowledge_base
+  const kb = refs.knowledge_base || {};
+  for (const [type, items] of Object.entries(kb)) {
+    if (items && items.length) {
+      html += `<div style="font-size:0.8rem;margin:6px 0 4px;">${type}（${items.length}）：</div>`;
+      for (const it of items) {
+        html += `<div style="font-size:0.75rem;padding:2px 0;">📝 ${escapeHtml(it.name)} <span style="color:var(--text-tertiary);">${it.size_kb}KB</span></div>`;
       }
     }
-    html += `</div></details>`;
+  }
+  // briefs
+  if (refs.briefs && refs.briefs.length) {
+    html += `<div style="font-size:0.8rem;margin:6px 0 4px;">每日简报（${refs.briefs.length}）：</div>`;
+    for (const b of refs.briefs.slice(0, 5)) {
+      html += `<div style="font-size:0.75rem;padding:2px 0;">📊 ${escapeHtml(b.date)} <span style="color:var(--text-tertiary);">${b.size_kb}KB</span></div>`;
+    }
+  }
+  html += '</div></details>';
+
+  // === 区域 3：待决策项（卡片）===
+  const pendItems = pending.pending || [];
+  html += `<h4 style="font-size:0.9rem;margin:0 0 8px;color:var(--text-primary);">📌 待决策项（${pendItems.length}）</h4>`;
+  if (!pendItems.length) {
+    html += '<p style="color:var(--text-tertiary);font-size:0.82rem;padding:8px;">暂无待决策项 🎉</p>';
+  } else {
+    html += '<div style="display:flex;flex-direction:column;gap:8px;">';
+    for (const p of pendItems) {
+      html += `<div style="padding:10px;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--warning-color);">
+        <div style="font-size:0.85rem;font-weight:500;margin-bottom:4px;">📌 ${escapeHtml(p.title)}</div>
+        <div style="font-size:0.72rem;color:var(--text-tertiary);margin-bottom:6px;">${p.related_topic ? '课题 '+p.related_topic+' · ' : ''}来源 ${escapeHtml(p.source)}</div>
+        <div style="display:flex;gap:6px;">
+          <button onclick="nsfcDecide('${escapeHtml(p.id)}','approve','${escapeHtml(p.title).replace(/'/g,'')}')" style="padding:4px 10px;border:1px solid var(--success-color);border-radius:5px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.78rem;">✓ 通过</button>
+          <button onclick="nsfcDecide('${escapeHtml(p.id)}','reject','${escapeHtml(p.title).replace(/'/g,'')}')" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:5px;background:transparent;color:var(--text-tertiary);cursor:pointer;font-size:0.78rem;">✗ 否决</button>
+          <button onclick="nsfcDiscuss('${escapeHtml(p.id)}','${escapeHtml(p.title).replace(/'/g,'')}','${escapeHtml(p.related_topic)}')" style="padding:4px 10px;border:1px solid var(--accent-color);border-radius:5px;background:var(--accent-color);color:#fff;cursor:pointer;font-size:0.78rem;">💬 讨论</button>
+        </div>
+      </div>`;
+    }
+    html += '</div>';
   }
 
   html += `<div id="nsfc-file-viewer" style="margin-top:12px;display:none;"></div>`;
   container.innerHTML = html;
 }
 
-// 加载 NSFC 文件内容（第3层展开）
-async function loadNsfcFile(filePath) {
-  const viewer = document.getElementById('nsfc-file-viewer');
-  if (!viewer) return;
-  viewer.style.display = 'block';
-  viewer.innerHTML = `<div style="padding:12px;background:var(--bg-secondary);border-radius:6px;"><p style="color:var(--text-tertiary);">◐ 加载 ${escapeHtml(filePath)}…</p></div>`;
+// NSFC 决策（通过/否决）
+async function nsfcDecide(pid, action, title) {
+  const labels = { approve: '通过', reject: '否决' };
+  showToast(`◐ ${labels[action]}: ${title.slice(0,30)}...`, 'info');
   try {
-    // 从文件路径推断 topic（如 topics/T3_xxx/ → T3）
-    const topicMatch = filePath.match(/topics\/(T\d)/);
-    const topic = topicMatch ? topicMatch[1] : '';
-    const data = await apiGet(`/api/projects/nsfc/proposal?topic=${topic || filePath}`);
-    if (data.available && data.content) {
-      viewer.innerHTML = `<div style="padding:12px;background:var(--bg-secondary);border-radius:6px;border-left:3px solid var(--accent-color);">
-        <div style="font-size:0.8rem;color:var(--text-tertiary);margin-bottom:6px;">📄 ${escapeHtml(data.path)} (${data.size_kb}KB)</div>
-        <div style="font-size:0.82rem;max-height:400px;overflow-y:auto;white-space:pre-wrap;line-height:1.5;">${escapeHtml(data.content.slice(0, 3000))}${data.content.length > 3000 ? '\n\n... (截断，共 ' + data.content.length + ' 字符)' : ''}</div>
-      </div>`;
-    } else {
-      viewer.innerHTML = `<div style="padding:12px;background:var(--bg-secondary);border-radius:6px;"><p style="color:var(--text-tertiary);">无法读取 ${escapeHtml(filePath)}（可能是非 topics 路径）</p></div>`;
-    }
+    await apiPost(`/api/projects/nsfc/pending/${pid}`, { action, title });
+    showToast(`✓ 已${labels[action]}，已反馈 hermes`, 'success');
+    loadProjectsTab('nsfc');  // 刷新
   } catch (e) {
-    viewer.innerHTML = `<div style="padding:12px;background:var(--bg-secondary);border-radius:6px;"><p style="color:var(--error-color);">加载失败: ${escapeHtml(e.message)}</p></div>`;
+    showToast(`✗ 操作失败: ${e.message}`, 'error');
+  }
+}
+
+// NSFC 讨论（注入上下文 → 聊天框）
+async function nsfcDiscuss(pid, title, topic) {
+  try {
+    const resp = await apiPost(`/api/projects/nsfc/pending/${pid}`, { action: 'discuss', title, related_topic: topic });
+    closeProjectsManager();
+    // 加载该课题的知识库上下文
+    window._kbSelectedFiles = [];
+    window._discussContext = { pid, title, topic, context_files: resp.context_files || [] };
+    // 注入 references 内容
+    for (const fp of (resp.context_files || []).slice(0, 3)) {
+      try {
+        const data = await apiGet(`/api/knowledge/file-content?path=${encodeURIComponent('references/' + fp)}`);
+        if (data.content) window._kbSelectedFiles.push({ path: 'references/' + fp, title: fp });
+      } catch (e) {}
+    }
+    // 填入聊天框
+    const input = document.getElementById('message-input');
+    if (input) {
+      input.value = `📌 关于待决策项「${title}」（课题${topic}），基于知识库讨论：`;
+      input.focus();
+    }
+    // 显示讨论工具栏（总结按钮）
+    showDiscussBar(pid, title);
+    showToast(`💬 已加载课题${topic}的知识库，开始讨论`, 'info');
+  } catch (e) {
+    showToast(`✗ 启动讨论失败: ${e.message}`, 'error');
+  }
+}
+
+// 讨论工具栏（显示"总结讨论"按钮）
+function showDiscussBar(pid, title) {
+  let bar = document.getElementById('discuss-bar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'discuss-bar';
+    bar.style.cssText = 'position:sticky;top:0;background:var(--bg-secondary);border:1px solid var(--accent-color);border-radius:6px;padding:6px 10px;margin-bottom:6px;display:flex;align-items:center;gap:8px;font-size:0.82rem;z-index:10;';
+    document.querySelector('.chat-messages')?.prepend(bar);
+  }
+  bar.innerHTML = `<span style="color:var(--accent-color);">💬 正在讨论：${escapeHtml(title.slice(0,40))}</span>
+    <button id="discuss-summarize-btn" style="margin-left:auto;padding:4px 12px;background:var(--accent-color);color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.78rem;">📝 总结讨论</button>
+    <button id="discuss-cancel-btn" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:4px;cursor:pointer;font-size:0.78rem;">取消</button>`;
+  bar.style.display = 'flex';
+  document.getElementById('discuss-summarize-btn').onclick = () => summarizeDiscussion(pid, title);
+  document.getElementById('discuss-cancel-btn').onclick = () => { bar.style.display = 'none'; window._discussContext = null; };
+}
+
+// 总结讨论 → 写 discussions + 反馈 hermes
+async function summarizeDiscussion(pid, title) {
+  const input = document.getElementById('message-input');
+  showToast('◐ 林赛正在总结讨论...', 'info');
+  // 让林赛总结当前会话
+  input.value = `请总结我们刚才关于「${title}」的讨论，给出结论和下一步建议（3-5句话）。`;
+  // 标记这是总结请求
+  window._discussSummaryPending = { pid, title, topic: window._discussContext?.topic || '' };
+  // 触发展示"提交总结"按钮（在林赛回复后）
+  setTimeout(() => {
+    const bar = document.getElementById('discuss-bar');
+    if (bar) {
+      bar.innerHTML = `<span style="color:var(--accent-color);">⏳ 等待林赛总结...收到后点击提交</span>
+        <button id="submit-summary-btn" style="margin-left:auto;padding:4px 12px;background:var(--success-color);color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.78rem;">✓ 提交总结到 discussions</button>
+        <button id="discuss-cancel-btn" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:4px;cursor:pointer;font-size:0.78rem;">取消</button>`;
+      document.getElementById('submit-summary-btn').onclick = submitDiscussionSummary;
+      document.getElementById('discuss-cancel-btn').onclick = () => { bar.style.display = 'none'; };
+    }
+  }, 100);
+}
+
+// 提交讨论总结到后端
+async function submitDiscussionSummary() {
+  // 获取林赛最后一条回复
+  const msgs = document.querySelectorAll('.message.assistant');
+  const lastMsg = msgs[msgs.length - 1];
+  const summary = lastMsg ? lastMsg.textContent.trim().slice(0, 1000) : '';
+  if (!summary) { showToast('未找到林赛的总结回复', 'error'); return; }
+
+  const ctx = window._discussSummaryPending || {};
+  showToast('◐ 提交总结并反馈 hermes...', 'info');
+  try {
+    await apiPost('/api/projects/nsfc/discuss-summary', {
+      pending_id: ctx.pid || '',
+      title: ctx.title || '',
+      topic: ctx.topic || '',
+      summary,
+    });
+    showToast('✓ 讨论总结已写入 discussions 并反馈 hermes', 'success');
+    document.getElementById('discuss-bar').style.display = 'none';
+    window._discussContext = null;
+    window._discussSummaryPending = null;
+  } catch (e) {
+    showToast(`✗ 提交失败: ${e.message}`, 'error');
   }
 }
 
