@@ -605,6 +605,25 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json(se.get_sync_status())
             return
 
+        # 自动同步状态（LaunchAgent + auto_sync_history）
+        if path == "/api/sync/auto-status":
+            import json as _json
+            from pathlib import Path as _Path
+            agent_path = _Path.home() / "Library" / "LaunchAgents" / "com.linsai.kb-auto-sync.plist"
+            sync_state_path = _Path(__file__).parent.parent / "memory" / "sync-state.json"
+            auto_history = []
+            if sync_state_path.exists():
+                try:
+                    state = _json.loads(sync_state_path.read_text(encoding="utf-8"))
+                    auto_history = state.get("auto_sync_history", [])[-5:]
+                except Exception:
+                    pass
+            self._send_json({
+                "launchagent_installed": agent_path.exists(),
+                "auto_sync_history": auto_history,
+            })
+            return
+
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_POST(self) -> None:

@@ -144,13 +144,13 @@
 
 ## 六、实施路线（分 3 个迭代）
 
-### 迭代 1：自维护闭环（最高优先）
-1. 修复 import_all_candidates 死代码
-2. kb_maintenance 新增 cmd_rebuild_graph（反向重建图谱）
-3. sync_all 末尾自动 reindex
-4. 新增 kb_auto_sync.py LaunchAgent（每日定时同步+重建）
-5. 前端文件树顶部加"🔄一键同步+重建"按钮
-6. 前端加自动同步状态指示器
+### 迭代 1：自维护闭环（最高优先）—— ✅ 已完成（v3.1.0）
+1. ✅ 修复 import_all_candidates 死代码（v3.0.2）
+2. ✅ kb_maintenance 新增 cmd_rebuild_graph（v3.0.2）
+3. ✅ sync_all 末尾自动 reindex + rebuild_graph（v3.1.0）
+4. ✅ 新增 kb_auto_sync.py LaunchAgent（每日定时同步+重建）（v3.1.0）
+5. ✅ 前端文件树顶部加"🔄一键同步+重建"按钮（v3.1.0）
+6. ✅ 前端加自动同步状态指示器（v3.1.0）
 
 ### 迭代 2：灵活分类
 7. 自定义分类系统（新建分类+关键词规则+自动关联）

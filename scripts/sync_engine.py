@@ -80,6 +80,16 @@ def _save_sync_state(state: Dict[str, Any]) -> None:
     )
 
 
+def _import_kb_helper():
+    """动态导入 knowledge_base 模块（供 sync_all 自动重建用）。"""
+    import importlib.util
+    kb_path = PROJECT_ROOT / "scripts" / "knowledge_base.py"
+    spec = importlib.util.spec_from_file_location("knowledge_base", kb_path)
+    kb = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(kb)
+    return kb
+
+
 def sync_hermes_sessions(max_count: int = 50) -> Dict[str, Any]:
     """同步 hermes linsai 的新会话到林赛讨论记录。
 
@@ -231,8 +241,20 @@ def sync_all() -> Dict[str, Any]:
     _save_sync_state(state)
 
     total_new = sess_result["new_sessions"] + paper_result["new_papers"]
+
+    # 同步后自动重建索引和图谱（v3.1 自维护闭环）
     if total_new > 0:
-        print(f"✓ 同步完成：新增 {total_new} 项（建议重建索引）")
+        print("  [3/3] 重建索引和图谱...")
+        try:
+            import sys
+            sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+            from kb_maintenance import cmd_reindex, cmd_rebuild_graph
+            kb = _import_kb_helper()
+            cmd_reindex(kb)
+            cmd_rebuild_graph(kb)
+        except Exception as e:
+            print(f"  ⚠ 自动重建失败: {e}")
+        print(f"✓ 同步完成：新增 {total_new} 项，索引和图谱已更新")
     else:
         print("✓ 同步完成：无新增（已是最新）")
 

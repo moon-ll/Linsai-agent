@@ -211,6 +211,52 @@ body {
   padding: 10px;
   border-bottom: 1px solid var(--border-color);
 }
+
+/* v3.1: 知识库管理工具栏 */
+.kb-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+}
+.kb-toolbar-btn {
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.kb-toolbar-btn:hover {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.kb-toolbar-btn:active {
+  transform: scale(0.96);
+}
+.kb-toolbar-btn.syncing {
+  opacity: 0.6;
+  pointer-events: none;
+}
+.kb-sync-indicator {
+  margin-left: auto;
+  font-size: 0.7rem;
+  color: var(--text-tertiary);
+  cursor: help;
+  white-space: nowrap;
+}
+.kb-sync-indicator.active::before {
+  content: "⏰";
+  margin-right: 3px;
+}
+.kb-sync-indicator.inactive::before {
+  content: "○";
+  margin-right: 3px;
+}
 .kb-tree-content {
   flex: 1;
   overflow-y: auto;

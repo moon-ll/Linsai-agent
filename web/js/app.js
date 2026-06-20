@@ -2886,6 +2886,83 @@ async function initKbMain() {
     if (!q) { renderKbTree(); return; }
     treeSearchTimer = setTimeout(() => searchKbToTree(q), 300);
   });
+
+  // v3.1: 知识库管理工具栏
+  document.getElementById('kb-sync-btn')?.addEventListener('click', handleKbSync);
+  document.getElementById('kb-health-btn')?.addEventListener('click', handleKbHealth);
+  loadSyncIndicator();
+}
+
+/** v3.1: 一键同步 + 重建 */
+async function handleKbSync() {
+  const btn = document.getElementById('kb-sync-btn');
+  if (!btn) return;
+  btn.classList.add('syncing');
+  btn.textContent = '🔄 同步中…';
+  try {
+    const result = await apiPost('/api/sync/run', {});
+    const r = result.result || result;
+    const total = (r.new_sessions || 0) + (r.new_papers || 0);
+    if (total > 0) {
+      showToast(`✓ 同步完成：新增 ${r.new_sessions || 0} 会话 + ${r.new_papers || 0} 文献，索引和图谱已更新`);
+      await renderKbTree();
+    } else {
+      showToast('✓ 同步完成：无新增（已是最新）');
+    }
+  } catch (e) {
+    showToast('✗ 同步失败: ' + (e.message || e), 'error');
+  } finally {
+    btn.classList.remove('syncing');
+    btn.textContent = '🔄 同步';
+    loadSyncIndicator();
+  }
+}
+
+/** v3.1: 健康检查 */
+async function handleKbHealth() {
+  const btn = document.getElementById('kb-health-btn');
+  if (!btn) return;
+  btn.classList.add('syncing');
+  try {
+    const data = await apiGet('/api/knowledge/health');
+    const h = data.health || data;
+    const msg = `📊 知识库健康度\n` +
+      `  raw: ${h.raw_count || 0}  wiki: ${h.wiki_count || 0}\n` +
+      `  图谱: ${h.graph_nodes || 0} 节点 / ${h.graph_edges || 0} 边\n` +
+      `  孤儿: ${h.graph_orphans || 0}\n` +
+      `  本周新增: ${h.week_new || 0}`;
+    alert(msg);
+  } catch (e) {
+    showToast('✗ 健康检查失败: ' + (e.message || e), 'error');
+  } finally {
+    btn.classList.remove('syncing');
+  }
+}
+
+/** v3.1: 加载自动同步状态指示器 */
+async function loadSyncIndicator() {
+  const indicator = document.getElementById('kb-sync-indicator');
+  if (!indicator) return;
+  try {
+    const data = await apiGet('/api/sync/auto-status');
+    if (data.launchagent_installed) {
+      indicator.className = 'kb-sync-indicator active';
+      const history = data.auto_sync_history || [];
+      if (history.length > 0) {
+        const last = history[history.length - 1];
+        const ts = (last.timestamp || '').slice(0, 10);
+        indicator.textContent = `自动同步 ${ts}`;
+      } else {
+        indicator.textContent = '自动同步已开启';
+      }
+    } else {
+      indicator.className = 'kb-sync-indicator inactive';
+      indicator.textContent = '手动同步';
+    }
+  } catch (e) {
+    indicator.className = 'kb-sync-indicator inactive';
+    indicator.textContent = '';
+  }
 }
 
 const KB_TREE_TYPES = [

@@ -1,5 +1,32 @@
 # 变更记录
 
+## v3.1.0 - 2026-06-20 知识库自维护闭环（迭代 1）
+
+### 新功能
+- **`sync_all()` 自动重建**：同步完成后自动触发 reindex + rebuild_graph，无需手动重建
+- **`kb_auto_sync.py` 定时同步脚本**：支持 macOS LaunchAgent 每日 09:00 自动同步
+  - `--install`：安装 LaunchAgent
+  - `--uninstall`：卸载 LaunchAgent
+  - `--status`：查看自动同步状态和历史
+  - 失败自动记录到 `sync-state.json` 的 `auto_sync_history`
+- **`/api/sync/auto-status` API**：返回 LaunchAgent 安装状态和自动同步历史
+- **前端管理工具栏**：知识库文件树顶部新增
+  - 🔄 同步按钮：一键触发 sync_all（含自动重建）
+  - 📊 健康按钮：快速查看知识库健康度
+  - 同步状态指示器：显示自动同步是否开启
+
+### 改进
+- `sync_engine.py` 新增 `_import_kb_helper()` 辅助函数
+- `web_server.py` 新增 `/api/sync/auto-status` GET 端点
+- `web/index.html` 新增 `.kb-toolbar` 管理工具栏
+- `web/css/style.css` 新增工具栏和指示器样式
+- `web/js/app.js` 新增 `handleKbSync`、`handleKbHealth`、`loadSyncIndicator` 函数
+
+### 验证
+- self_test 88/88 全绿
+- Web API 测试 26/26 全绿
+- 浏览器验证：工具栏渲染正常，同步按钮功能正常，指示器正确显示"手动同步"
+
 ## v3.0.2 - 2026-06-20 BUG-A 修复 + 知识库维护增强
 
 ### BUG 修复
