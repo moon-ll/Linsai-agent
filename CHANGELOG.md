@@ -1,5 +1,41 @@
 # 变更记录
 
+## v3.1.1 - 2026-06-20 灵活分类系统（迭代 2）
+
+### 新功能
+- **自定义分类系统**：用户可创建基于关键词规则的虚拟分类
+  - 支持任一匹配（any）和全部匹配（all）两种逻辑
+  - 自动扫描全库，匹配 wiki 页面
+  - 分类是虚拟的：不移动文件，删除分类不影响文件
+  - 存储在 `knowledge/categories.json`
+- **分类管理弹窗**：前端 🏷️ 分类按钮，支持创建/删除/重新扫描
+- **搜索筛选器**：4 个下拉筛选器（类型/阶段/子库/标签）
+  - 实时过滤文件树
+  - 一键清除筛选
+- **标签内联编辑**：文件预览区显示标签 chip
+  - 点击 ✕ 移除标签/子库归属
+  - 点击"+ 标签"添加新标签
+  - 通过 `/api/knowledge/wiki` POST meta-only 更新
+
+### 新增 API 端点
+- `GET /api/knowledge/categories` — 列出全部分类
+- `GET /api/knowledge/filters` — 获取筛选器选项
+- `POST /api/knowledge/categories/create` — 创建分类
+- `POST /api/knowledge/categories/update` — 更新分类
+- `POST /api/knowledge/categories/delete` — 删除分类
+- `POST /api/knowledge/categories/scan` — 重新扫描全部分类
+- `POST /api/knowledge/filter` — 按条件过滤 wiki 页面
+
+### 改进
+- `POST /api/knowledge/wiki` 支持 meta-only 更新（无需 content）
+- 新增 `scripts/kb_categories.py` 模块（CRUD + 匹配 + 筛选）
+- 前端新增分类管理、筛选器、标签编辑器 JS 函数
+
+### 验证
+- self_test 88/88 全绿
+- Web API 测试 26/26 全绿
+- 浏览器验证：创建"固体HHG"分类，自动匹配 74 篇 wiki 页面
+
 ## v3.1.0 - 2026-06-20 知识库自维护闭环（迭代 1）
 
 ### 新功能

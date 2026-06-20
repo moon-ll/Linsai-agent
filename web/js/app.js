@@ -2492,9 +2492,13 @@ async function openWikiDetail(wikiPath) {
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">更新</span><span class="kb-frontmatter-value">${fm.updated ? new Date(fm.updated).toLocaleString() : '-'}</span></div>
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">路径</span><span class="kb-frontmatter-value">${wikiPath}</span></div>
       </div>
+      ${renderTagEditor(fm, wikiPath)}
       <div id="kb-backlinks-region"></div>
       <div class="kb-wiki-body">${renderedBody}</div>
     `;
+
+    // v3.1: 绑定标签编辑器事件
+    bindTagEditor(fm, wikiPath);
 
     // 加载反向关联（谁关联了我）
     loadBacklinks(fm.title || '');
@@ -2890,7 +2894,13 @@ async function initKbMain() {
   // v3.1: 知识库管理工具栏
   document.getElementById('kb-sync-btn')?.addEventListener('click', handleKbSync);
   document.getElementById('kb-health-btn')?.addEventListener('click', handleKbHealth);
+  document.getElementById('kb-category-btn')?.addEventListener('click', handleKbCategory);
+  document.getElementById('kb-filter-clear')?.addEventListener('click', clearKbFilters);
+  ['kb-filter-type', 'kb-filter-stage', 'kb-filter-project', 'kb-filter-tag'].forEach(id => {
+    document.getElementById(id)?.addEventListener('change', applyKbFilters);
+  });
   loadSyncIndicator();
+  loadKbFilters();
 }
 
 /** v3.1: 一键同步 + 重建 */
@@ -2963,6 +2973,245 @@ async function loadSyncIndicator() {
     indicator.className = 'kb-sync-indicator inactive';
     indicator.textContent = '';
   }
+}
+
+/** v3.1: 加载筛选器选项 */
+async function loadKbFilters() {
+  try {
+    const data = await apiGet('/api/knowledge/filters');
+    const fillSelect = (id, options) => {
+      const sel = document.getElementById(id);
+      if (!sel) return;
+      const current = sel.value;
+      sel.innerHTML = `<option value="">${sel.title || '全部'}</option>`;
+      options.forEach(opt => {
+        const o = document.createElement('option');
+        o.value = opt; o.textContent = opt;
+        sel.appendChild(o);
+      });
+      sel.value = current;
+    };
+    fillSelect('kb-filter-type', data.types || []);
+    fillSelect('kb-filter-stage', data.stages || []);
+    fillSelect('kb-filter-project', data.projects || []);
+    fillSelect('kb-filter-tag', data.tags || []);
+  } catch (e) { /* 静默失败 */ }
+}
+
+/** v3.1: 应用筛选器 */
+async function applyKbFilters() {
+  const filters = {};
+  const type = document.getElementById('kb-filter-type')?.value;
+  const stage = document.getElementById('kb-filter-stage')?.value;
+  const project = document.getElementById('kb-filter-project')?.value;
+  const tag = document.getElementById('kb-filter-tag')?.value;
+  if (type) filters.type = type;
+  if (stage) filters.stage = stage;
+  if (project) filters.project = project;
+  if (tag) filters.tag = tag;
+
+  const hasFilter = Object.keys(filters).length > 0;
+  const filterBar = document.getElementById('kb-filter-bar');
+  if (filterBar) filterBar.style.display = hasFilter ? 'flex' : 'none';
+
+  if (!hasFilter) {
+    renderKbTree();
+    return;
+  }
+
+  const container = document.getElementById('kb-tree-content');
+  if (container) container.innerHTML = '◐ 筛选中…';
+  try {
+    const data = await apiPost('/api/knowledge/filter', { filters });
+    renderFilteredTree(data.pages || []);
+  } catch (e) {
+    if (container) container.innerHTML = '✗ 筛选失败';
+  }
+}
+
+/** v3.1: 清除筛选 */
+function clearKbFilters() {
+  ['kb-filter-type', 'kb-filter-stage', 'kb-filter-project', 'kb-filter-tag'].forEach(id => {
+    const sel = document.getElementById(id);
+    if (sel) sel.value = '';
+  });
+  document.getElementById('kb-filter-bar').style.display = 'none';
+  renderKbTree();
+}
+
+/** v3.1: 渲染筛选结果 */
+function renderFilteredTree(pages) {
+  const container = document.getElementById('kb-tree-content');
+  if (!container) return;
+  if (!pages.length) {
+    container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-tertiary);">无匹配结果</div>';
+    return;
+  }
+  const html = pages.map(p => {
+    const stageIcon = { seedling: '🌱', growing: '🌿', mature: '🌳' }[p.growth_stage] || '○';
+    return `<div class="kb-tree-item" data-path="${p.path}" onclick="loadKbPage('${p.path}')" style="padding:4px 8px;cursor:pointer;border-radius:4px;font-size:0.82rem;">
+      ${stageIcon} ${p.title}
+      <span style="color:var(--text-tertiary);font-size:0.7rem;">${p.type}</span>
+    </div>`;
+  }).join('');
+  container.innerHTML = `<div style="padding:4px 8px;font-size:0.75rem;color:var(--text-tertiary);">筛选结果 (${pages.length})</div>` + html;
+}
+
+/** v3.1: 分类管理弹窗 */
+async function handleKbCategory() {
+  const overlay = document.createElement('div');
+  overlay.className = 'kb-modal-overlay';
+  overlay.onclick = () => overlay.remove();
+
+  const modal = document.createElement('div');
+  modal.className = 'kb-category-modal';
+  modal.onclick = e => e.stopPropagation();
+  modal.innerHTML = `
+    <h3>🏷️ 分类管理</h3>
+    <div class="kb-category-list" id="cat-list">加载中…</div>
+    <div class="kb-category-form">
+      <label>新建分类</label>
+      <input type="text" id="cat-name-input" placeholder="分类名称（如：水窗成像）">
+      <input type="text" id="cat-keywords-input" placeholder="关键词，逗号分隔（如：水窗,water window,成像）">
+      <select id="cat-logic-select">
+        <option value="any">任一关键词匹配</option>
+        <option value="all">全部关键词匹配</option>
+      </select>
+      <input type="text" id="cat-desc-input" placeholder="描述（可选）">
+      <button class="kb-toolbar-btn" id="cat-create-btn" style="width:100%;margin-top:4px;">➕ 创建分类</button>
+    </div>
+    <button class="kb-toolbar-btn" id="cat-rescan-btn" style="width:100%;margin-top:6px;">🔄 重新扫描全部</button>
+    <button class="kb-toolbar-btn" id="cat-close-btn" style="width:100%;margin-top:4px;">关闭</button>
+  `;
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  const refreshList = async () => {
+    const listEl = document.getElementById('cat-list');
+    try {
+      const data = await apiGet('/api/knowledge/categories');
+      const cats = data.categories || [];
+      if (!cats.length) {
+        listEl.innerHTML = '<div style="color:var(--text-tertiary);font-size:0.82rem;">暂无自定义分类</div>';
+        return;
+      }
+      listEl.innerHTML = cats.map(c => `
+        <div class="kb-category-item">
+          <span class="cat-name">📂 ${c.name}</span>
+          <span class="cat-count">${(c.matched_paths || []).length} 篇</span>
+          <span class="cat-delete" data-name="${c.name}">✕</span>
+        </div>
+      `).join('');
+      listEl.querySelectorAll('.cat-delete').forEach(btn => {
+        btn.onclick = async () => {
+          const name = btn.dataset.name;
+          if (!confirm(`删除分类 "${name}"？`)) return;
+          await apiPost('/api/knowledge/categories/delete', { name });
+          refreshList();
+        };
+      });
+    } catch (e) {
+      listEl.innerHTML = '✗ 加载失败';
+    }
+  };
+
+  document.getElementById('cat-create-btn').onclick = async () => {
+    const name = document.getElementById('cat-name-input').value.trim();
+    const keywords = document.getElementById('cat-keywords-input').value
+      .split(',').map(s => s.trim()).filter(Boolean);
+    const logic = document.getElementById('cat-logic-select').value;
+    const description = document.getElementById('cat-desc-input').value.trim();
+    if (!name || !keywords.length) {
+      showToast('请填写分类名称和关键词', 'error');
+      return;
+    }
+    try {
+      await apiPost('/api/knowledge/categories/create', { name, keywords, logic, description });
+      showToast(`✓ 分类 "${name}" 已创建`);
+      document.getElementById('cat-name-input').value = '';
+      document.getElementById('cat-keywords-input').value = '';
+      document.getElementById('cat-desc-input').value = '';
+      refreshList();
+    } catch (e) {
+      showToast('✗ 创建失败: ' + (e.message || e), 'error');
+    }
+  };
+
+  document.getElementById('cat-rescan-btn').onclick = async () => {
+    try {
+      await apiPost('/api/knowledge/categories/scan', {});
+      showToast('✓ 全部分类已重新扫描');
+      refreshList();
+    } catch (e) {
+      showToast('✗ 扫描失败', 'error');
+    }
+  };
+
+  document.getElementById('cat-close-btn').onclick = () => overlay.remove();
+  refreshList();
+}
+
+/** v3.1: 渲染标签编辑器（在文件预览区） */
+function renderTagEditor(frontmatter, pagePath) {
+  const tags = Array.isArray(frontmatter.tags) ? frontmatter.tags : [];
+  const project = frontmatter.project || '';
+  const projectList = typeof project === 'string' ? (project ? [project] : []) : project;
+
+  const tagChips = tags.map(t => `
+    <span class="kb-tag-chip">${t}<span class="tag-remove" data-tag="${t}" data-type="tag">✕</span></span>
+  `).join('');
+  const projChips = projectList.map(p => `
+    <span class="kb-tag-chip" style="background:var(--accent);color:white;border-color:var(--accent);">${p}<span class="tag-remove" data-tag="${p}" data-type="project">✕</span></span>
+  `).join('');
+
+  return `<div class="kb-tag-editor" id="kb-tag-editor">
+    ${projChips}${tagChips}
+    <button class="kb-tag-add" id="kb-tag-add-btn">+ 标签</button>
+  </div>`;
+}
+
+/** v3.1: 绑定标签编辑事件 */
+function bindTagEditor(frontmatter, pagePath) {
+  const editor = document.getElementById('kb-tag-editor');
+  if (!editor) return;
+
+  editor.querySelectorAll('.tag-remove').forEach(btn => {
+    btn.onclick = async () => {
+      const tag = btn.dataset.tag;
+      const type = btn.dataset.type;
+      if (!confirm(`移除 ${type === 'project' ? '子库' : '标签'} "${tag}"？`)) return;
+      try {
+        const fm = { ...frontmatter };
+        if (type === 'tag') {
+          fm.tags = (Array.isArray(fm.tags) ? fm.tags : []).filter(t => t !== tag);
+        } else {
+          const proj = typeof fm.project === 'string' ? [fm.project] : (fm.project || []);
+          fm.project = proj.filter(p => p !== tag);
+          if (fm.project.length === 1) fm.project = fm.project[0];
+          else if (fm.project.length === 0) fm.project = '';
+        }
+        await apiPost('/api/knowledge/wiki', { path: pagePath, meta: fm });
+        showToast('✓ 标签已更新');
+        loadKbPage(pagePath);
+      } catch (e) {
+        showToast('✗ 更新失败', 'error');
+      }
+    };
+  });
+
+  document.getElementById('kb-tag-add-btn')?.addEventListener('click', async () => {
+    const tag = prompt('输入新标签：');
+    if (!tag || !tag.trim()) return;
+    try {
+      const fm = { ...frontmatter };
+      fm.tags = [...(Array.isArray(fm.tags) ? fm.tags : []), tag.trim()];
+      await apiPost('/api/knowledge/wiki', { path: pagePath, meta: fm });
+      showToast('✓ 标签已添加');
+      loadKbPage(pagePath);
+    } catch (e) {
+      showToast('✗ 添加失败', 'error');
+    }
+  });
 }
 
 const KB_TREE_TYPES = [

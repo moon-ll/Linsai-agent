@@ -78,7 +78,15 @@
         <div class="kb-toolbar" id="kb-toolbar">
           <button class="kb-toolbar-btn" id="kb-sync-btn" title="一键同步 hermes 产出 + 重建索引和图谱">🔄 同步</button>
           <button class="kb-toolbar-btn" id="kb-health-btn" title="知识库健康检查">📊 健康</button>
+          <button class="kb-toolbar-btn" id="kb-category-btn" title="分类管理">🏷️ 分类</button>
           <span class="kb-sync-indicator" id="kb-sync-indicator" title="自动同步状态"></span>
+        </div>
+        <div class="kb-filter-bar" id="kb-filter-bar" style="display:none;">
+          <select id="kb-filter-type" class="kb-filter-select" title="按类型筛选"><option value="">全部类型</option></select>
+          <select id="kb-filter-stage" class="kb-filter-select" title="按阶段筛选"><option value="">全部阶段</option></select>
+          <select id="kb-filter-project" class="kb-filter-select" title="按子库筛选"><option value="">全部子库</option></select>
+          <select id="kb-filter-tag" class="kb-filter-select" title="按标签筛选"><option value="">全部标签</option></select>
+          <button class="kb-toolbar-btn" id="kb-filter-clear" title="清除筛选">✕</button>
         </div>
       </div>
       <div class="kb-tree-content" id="kb-tree-content">

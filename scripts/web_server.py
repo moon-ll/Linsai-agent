@@ -67,6 +67,7 @@ import kb_importer as ki
 import hermes_bridge as hb
 import sync_engine as se
 import paper_pool as pp  # v2.9.1: 候选池
+import kb_categories as kbc  # v3.1: 自定义分类
 import usage_tracker as ut
 
 
@@ -434,6 +435,15 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json(kb.get_kb_health())
             except Exception as e:
                 self._send_json({"error": str(e)}, 500)
+            return
+
+        # v3.1: 自定义分类 API
+        if path == "/api/knowledge/categories":
+            self._send_json({"categories": kbc.list_categories()})
+            return
+
+        if path == "/api/knowledge/filters":
+            self._send_json(kbc.get_all_filters())
             return
 
         # --- 学习配置 API ---
@@ -876,10 +886,19 @@ class RequestHandler(BaseHTTPRequestHandler):
             wiki_rel = body.get("path", "")
             content = body.get("content", "")
             meta = body.get("meta", {})
-            if not wiki_rel or not content:
-                self._send_json({"error": "缺少 path 或 content 参数"}, 400)
+            if not wiki_rel:
+                self._send_json({"error": "缺少 path 参数"}, 400)
                 return
             try:
+                # v3.1: 支持仅更新 meta（标签编辑场景）
+                if not content and meta:
+                    # 读取现有内容，仅更新 frontmatter
+                    existing = kb.get_wiki_page(wiki_rel)
+                    if existing:
+                        content = existing.get("body", "")
+                    else:
+                        self._send_json({"error": "页面不存在"}, 404)
+                        return
                 saved = kb.save_wiki_page(wiki_rel, content, meta)
                 self._send_json({"success": True, "path": saved})
             except Exception as e:
@@ -953,6 +972,59 @@ class RequestHandler(BaseHTTPRequestHandler):
                     self._send_json({"error": f"未知任务: {task}"}, 400)
             except Exception as e:
                 self._send_json({"error": str(e)}, 500)
+            return
+
+        # v3.1: 自定义分类 CRUD
+        if path == "/api/knowledge/categories/create":
+            name = body.get("name", "").strip()
+            keywords = body.get("keywords", [])
+            logic = body.get("logic", "any")
+            description = body.get("description", "")
+            if not name:
+                self._send_json({"error": "缺少分类名称"}, 400)
+                return
+            try:
+                cat = kbc.create_category(name, keywords, logic, description)
+                self._send_json({"success": True, "category": cat})
+            except ValueError as e:
+                self._send_json({"error": str(e)}, 400)
+            return
+
+        if path == "/api/knowledge/categories/update":
+            name = body.get("name", "").strip()
+            if not name:
+                self._send_json({"error": "缺少分类名称"}, 400)
+                return
+            try:
+                cat = kbc.update_category(
+                    name,
+                    keywords=body.get("keywords"),
+                    logic=body.get("logic"),
+                    description=body.get("description"),
+                )
+                self._send_json({"success": True, "category": cat})
+            except ValueError as e:
+                self._send_json({"error": str(e)}, 400)
+            return
+
+        if path == "/api/knowledge/categories/delete":
+            name = body.get("name", "").strip()
+            if not name:
+                self._send_json({"error": "缺少分类名称"}, 400)
+                return
+            deleted = kbc.delete_category(name)
+            self._send_json({"success": deleted})
+            return
+
+        if path == "/api/knowledge/categories/scan":
+            results = kbc.scan_all_categories()
+            self._send_json({"success": True, "results": results})
+            return
+
+        if path == "/api/knowledge/filter":
+            filters = body.get("filters", {})
+            pages = kbc.filter_wiki_pages(filters)
+            self._send_json({"pages": pages})
             return
 
         # 打开本地文件/文件夹（系统文件管理器）
