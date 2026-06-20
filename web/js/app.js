@@ -2936,11 +2936,18 @@ async function handleKbHealth() {
   try {
     const data = await apiGet('/api/knowledge/health');
     const h = data.health || data;
+    const conn = h.graph_connectivity || 0;
+    const cov = h.category_coverage || {};
+    const alias = h.alias_hit_rate || {};
     const msg = `📊 知识库健康度\n` +
-      `  raw: ${h.raw_count || 0}  wiki: ${h.wiki_count || 0}\n` +
-      `  图谱: ${h.graph_nodes || 0} 节点 / ${h.graph_edges || 0} 边\n` +
-      `  孤儿: ${h.graph_orphans || 0}\n` +
-      `  本周新增: ${h.week_new || 0}`;
+      `━━━━━━━━━━━━━━━━━━\n` +
+      `  📁 raw: ${h.raw_count || 0}  wiki: ${h.wiki_count || 0}\n` +
+      `  🕸️ 图谱: ${h.graph_nodes || 0} 节点 / ${h.graph_edges || 0} 边\n` +
+      `  🔗 连通性: ${(conn * 100).toFixed(0)}%  孤儿: ${h.graph_orphans || 0}\n` +
+      `  🏷️ 分类: ${cov.total_categories || 0} 个，覆盖 ${(cov.coverage_rate * 100).toFixed(0)}%\n` +
+      `  📝 别名: ${alias.total_aliases || 0} 个，命中率 ${(alias.hit_rate * 100).toFixed(0)}%\n` +
+      `  🌱 待蒸馏: ${h.pending_distill || 0}  晋升候选: ${h.growth_candidates || 0}\n` +
+      `  📈 本周新增: ${h.week_new || 0}`;
     alert(msg);
   } catch (e) {
     showToast('✗ 健康检查失败: ' + (e.message || e), 'error');

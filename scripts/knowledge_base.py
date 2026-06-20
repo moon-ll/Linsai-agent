@@ -1481,6 +1481,15 @@ def get_kb_health() -> Dict[str, Any]:
                 wiki_from_raw.add(src)
     pending_distill = len([f for f in raw_files if f["name"] not in wiki_from_raw])
 
+    # v3.1.2: 图谱连通性（最大连通分量占比）
+    graph_conn = _compute_graph_connectivity()
+
+    # v3.1.2: 分类覆盖率
+    category_coverage = _compute_category_coverage()
+
+    # v3.1.2: 别名命中率
+    alias_hit_rate = _compute_alias_hit_rate()
+
     return {
         "indexed": status.get("indexed", False),
         "raw_count": status.get("raw_count", 0),
@@ -1491,11 +1500,110 @@ def get_kb_health() -> Dict[str, Any]:
         "graph_nodes": graph.get("node_count", 0),
         "graph_edges": graph.get("edge_count", 0),
         "graph_orphans": _count_graph_orphans(),
+        "graph_connectivity": graph_conn,
+        "category_coverage": category_coverage,
+        "alias_hit_rate": alias_hit_rate,
         "week_new": week_count,
         "pending_distill": pending_distill,
         "growth_candidates": len(candidates),
         "built_at": status.get("built_at", ""),
     }
+
+
+def _compute_graph_connectivity() -> float:
+    """计算图谱连通性：最大连通分量节点数 / 总节点数。"""
+    graph = _load_graph()
+    nodes = graph.get("nodes", {})
+    edges = graph.get("edges", [])
+    if not nodes:
+        return 0.0
+
+    # 构建邻接表
+    from collections import defaultdict, deque
+    adj: Dict[str, set] = defaultdict(set)
+    for edge in edges:
+        f = edge.get("from", "")
+        t = edge.get("to", "")
+        if f and t:
+            adj[f].add(t)
+            adj[t].add(f)
+
+    # BFS 找最大连通分量
+    visited: set = set()
+    max_component = 0
+    for node in nodes:
+        if node in visited:
+            continue
+        queue = deque([node])
+        component_size = 0
+        while queue:
+            current = queue.popleft()
+            if current in visited:
+                continue
+            visited.add(current)
+            component_size += 1
+            for neighbor in adj.get(current, []):
+                if neighbor not in visited:
+                    queue.append(neighbor)
+        max_component = max(max_component, component_size)
+
+    return round(max_component / len(nodes), 2) if nodes else 0.0
+
+
+def _compute_category_coverage() -> Dict[str, Any]:
+    """计算分类覆盖率：被自定义分类覆盖的 wiki 页面比例。"""
+    import json as _json
+    cat_path = KNOWLEDGE_DIR / "categories.json"
+    if not cat_path.exists():
+        return {"total_categories": 0, "covered_pages": 0, "coverage_rate": 0.0}
+    try:
+        data = _json.loads(cat_path.read_text(encoding="utf-8"))
+        cats = data.get("categories", [])
+        covered = set()
+        for cat in cats:
+            for p in cat.get("matched_paths", []):
+                covered.add(p)
+        wiki_count = len(list_wiki_pages())
+        return {
+            "total_categories": len(cats),
+            "covered_pages": len(covered),
+            "coverage_rate": round(len(covered) / wiki_count, 2) if wiki_count else 0.0,
+        }
+    except Exception:
+        return {"total_categories": 0, "covered_pages": 0, "coverage_rate": 0.0}
+
+
+def _compute_alias_hit_rate() -> Dict[str, Any]:
+    """计算别名命中率：aliases.json 中的别名在 wiki 中被使用的比例。"""
+    import json as _json
+    aliases_path = KNOWLEDGE_DIR / "aliases.json"
+    if not aliases_path.exists():
+        return {"total_aliases": 0, "used_aliases": 0, "hit_rate": 0.0}
+    try:
+        aliases = _json.loads(aliases_path.read_text(encoding="utf-8"))
+        total = 0
+        used = 0
+        # 收集所有 wiki 文本
+        wiki_texts = []
+        for page in list_wiki_pages():
+            full = get_wiki_page(page.get("path", ""))
+            if full:
+                wiki_texts.append(full.get("body", "").lower())
+
+        for canonical, alts in aliases.items():
+            for alt in alts:
+                total += 1
+                alt_lower = alt.lower()
+                if any(alt_lower in wt for wt in wiki_texts):
+                    used += 1
+
+        return {
+            "total_aliases": total,
+            "used_aliases": used,
+            "hit_rate": round(used / total, 2) if total else 0.0,
+        }
+    except Exception:
+        return {"total_aliases": 0, "used_aliases": 0, "hit_rate": 0.0}
 
 
 def _count_graph_orphans() -> int:

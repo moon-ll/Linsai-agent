@@ -158,11 +158,11 @@
 9. ✅ 搜索筛选器（type/stage/project/tag）（v3.1.1）
 10. ✅ 文件预览区的标签内联编辑（v3.1.1）
 
-### 迭代 3：智能增强
-11. alias_learner.py（别名自动发现）
-12. growth_stage 自动晋升规则引擎
-13. 导入时自动提取主题关键词连 related 边
-14. 健康检查增强（分类覆盖率/图谱连通性/别名命中率）
+### 迭代 3：智能增强 —— ✅ 已完成（v3.1.2）
+11. ✅ alias_learner.py 别名自动发现（wikilink/frontmatter/graph 三来源）（v3.1.2）
+12. ✅ growth_stage 自动晋升规则引擎（seedling→growing→mature）（v3.1.2）
+13. ✅ 导入时自动提取主题关键词连 related 边（kb_linker.py）（v3.1.2）
+14. ✅ 健康检查增强（分类覆盖率/图谱连通性/别名命中率）（v3.1.2）
 
 ## 七、数据安全约束
 

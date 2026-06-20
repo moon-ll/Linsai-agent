@@ -1,5 +1,38 @@
 # 变更记录
 
+## v3.1.2 - 2026-06-20 智能增强（迭代 3）
+
+### 新功能
+- **别名自动发现**：`alias_learner.py` 从三个来源发现别名候选
+  - `[[WikiLink|别名]]` 用法
+  - frontmatter 的 `aliases` 字段
+  - 图谱 `same_as` 边
+  - 候选存储在 `memory/alias-candidates.json`，`--apply` 写入 `aliases.json`
+  - 实测发现 11 个新候选
+- **growth_stage 自动晋升**：`growth_engine.py` 规则引擎
+  - seedling → growing：被 ≥3 篇 raw 引用，或内容 >500 字且有 related
+  - growing → mature：被 ≥5 篇引用 + 检索命中 ≥10 次，或内容 >2000 字且有 related
+  - 只升不降，手动设置的 mature 不被覆盖
+  - 晋升记录写入 `growth-log.json`
+- **导入时自动连边**：`kb_linker.py` 自动提取主题关键词连接 related 边
+  - 从 `[[WikiLink]]` 和标题提及两个来源发现关联
+  - 不覆盖已有 related，只追加新发现的
+  - 实测发现 62 个页面可补充 169 条新边
+- **健康检查增强**：`get_kb_health()` 新增 3 个维度
+  - 图谱连通性（最大连通分量占比）
+  - 分类覆盖率（被自定义分类覆盖的 wiki 比例）
+  - 别名命中率（aliases.json 中的别名在 wiki 中被使用的比例）
+  - 前端健康弹窗同步增强显示
+
+### 新增文件
+- `scripts/alias_learner.py` — 别名自动发现引擎
+- `scripts/growth_engine.py` — growth_stage 自动晋升规则引擎
+- `scripts/kb_linker.py` — 导入时自动连边引擎
+
+### 验证
+- self_test 88/88 全绿
+- Web API 测试 26/26 全绿
+
 ## v3.1.1 - 2026-06-20 灵活分类系统（迭代 2）
 
 ### 新功能
