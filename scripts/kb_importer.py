@@ -290,6 +290,9 @@ related: []
     out_path.write_text(content, encoding="utf-8")
     print(f"✓ 深度解析已导入子库: wiki/projects/{project}/{filename}")
     return str(out_path.relative_to(KNOWLEDGE_DIR))
+
+
+def import_all_candidates(project: str = "", with_analysis: bool = False) -> List[str]:
     """批量导入当日全部候选论文。
 
     Args:

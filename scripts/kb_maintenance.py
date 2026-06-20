@@ -153,6 +153,74 @@ def cmd_health(kb) -> None:
     print("└─────────────────────────────────────────────┘")
 
 
+def cmd_rebuild_graph(kb) -> None:
+    """从所有 wiki 页面的 frontmatter 反向重建知识图谱。
+
+    扫描 wiki/ 下全部 Markdown，提取 frontmatter 中的 title / type /
+    growth_stage / related / project 字段，重建 graph.json 的节点与边。
+    解决 import_candidate / import_deep_analysis 直接 write_text 绕过
+    save_wiki_page 导致的图谱断层问题。
+    """
+    print("⏳ 重建知识图谱…")
+
+    pages = kb.list_wiki_pages()
+    if not pages:
+        print("⚠ 没有 wiki 页面，跳过")
+        return
+
+    nodes: dict = {}
+    edges: list = []
+    edge_set: set = set()  # (from, to, relation) 去重
+
+    for page in pages:
+        fm = page.get("frontmatter", {})
+        title = fm.get("title", "")
+        if not title:
+            # 从文件名推导标题
+            title = page.get("path", "").rsplit("/", 1)[-1].replace(".md", "")
+
+        wiki_type = fm.get("type", "")
+        growth_stage = fm.get("growth_stage", "seedling")
+        path = page.get("path", "")
+
+        # 创建节点
+        nodes[title] = {
+            "type": wiki_type,
+            "path": path,
+            "growth_stage": growth_stage,
+        }
+
+        # 从 related 字段创建边
+        related = fm.get("related", [])
+        if isinstance(related, str):
+            related = [related]
+        if isinstance(related, list):
+            for target in related:
+                if target and target != title:
+                    key = (title, target, "related")
+                    if key not in edge_set:
+                        edge_set.add(key)
+                        edges.append({"from": title, "to": target, "relation": "related"})
+
+        # 从 project 字段创建边
+        project = fm.get("project", "")
+        if isinstance(project, str) and project:
+            project = [project]
+        if isinstance(project, list):
+            for proj in project:
+                if proj and proj != title:
+                    key = (title, proj, "project")
+                    if key not in edge_set:
+                        edge_set.add(key)
+                        edges.append({"from": title, "to": proj, "relation": "project"})
+
+    # 一次性保存
+    graph = {"nodes": nodes, "edges": edges}
+    kb._save_graph(graph)
+
+    print(f"✓ 知识图谱重建完成: {len(nodes)} 节点, {len(edges)} 边")
+
+
 def cmd_weekly(kb) -> None:
     """一键周维护。"""
     print(f"\n{'='*50}")
@@ -162,15 +230,19 @@ def cmd_weekly(kb) -> None:
     # 1. 重建索引
     cmd_reindex(kb)
 
-    # 2. 清理孤儿
+    # 2. 重建知识图谱
+    print()
+    cmd_rebuild_graph(kb)
+
+    # 3. 清理孤儿
     print()
     cmd_orphans(kb)
 
-    # 3. 候选报告
+    # 4. 候选报告
     print()
     cmd_candidates(kb)
 
-    # 4. 健康度
+    # 5. 健康度
     print()
     cmd_health(kb)
 
@@ -188,6 +260,7 @@ def parse_args(argv=None) -> argparse.Namespace:
     group.add_argument("--orphans", action="store_true", help="清理孤儿节点")
     group.add_argument("--captures", action="store_true", help="列出 capture 文件")
     group.add_argument("--health", action="store_true", help="输出健康度报告")
+    group.add_argument("--rebuild-graph", action="store_true", help="从 frontmatter 反向重建知识图谱")
     return parser.parse_args(argv)
 
 
@@ -207,6 +280,8 @@ def main() -> None:
         cmd_captures(kb)
     elif args.health:
         cmd_health(kb)
+    elif args.rebuild_graph:
+        cmd_rebuild_graph(kb)
 
 
 if __name__ == "__main__":

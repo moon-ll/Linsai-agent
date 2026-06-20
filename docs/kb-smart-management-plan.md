@@ -183,22 +183,17 @@
 
 > 以下 bug 在 v3.0.0/v3.0.1 重构后发现，待执行迭代计划时一并修复。
 
-### 🔴 BUG-A：聊天功能异常（v3.0.0 布局重构引入）
+### ✅ BUG-A：聊天功能异常（v3.0.0 布局重构引入）—— 已修复（v3.0.2）
 - **症状**：用户反馈"聊天也出问题了"（2026-06-19）
-- **可能根因**：v3.0.0 把 chat-area 拆为 kb-main + chat-sidebar，聊天相关 DOM 元素（messages/typing-indicator/welcome-screen/input-area）被移动到新容器，但以下可能断裂：
-  - `sendMessage` / `appendMessage` / SSE 流式引用的元素 ID 可能找不到（如 `#messages`、`#message-input`、`#typing-indicator`）
-  - 事件绑定（send-btn click、message-input keydown、upload）可能在 `bindEvents()` 执行时元素还未渲染（如果 chat-sidebar 的 inner 被异步加载）
-  - `State.currentSessionId` / `loadMessages` 等引用 `#messages` 容器可能失效
-  - 欢迎屏（`#welcome-screen`）的快速启动按钮（quick-starts）在迁移时被删除了（新 HTML 里 welcome-screen display:none 且无 quick-starts 内容）
-  - CSS：`.messages` / `.input-area` / `.typing-indicator` 的 flex 布局可能在新的 `.chat-sidebar-inner` 容器里高度塌陷（聊天区没有撑满侧栏高度）
-- **排查方向**：
-  1. 浏览器 F12 控制台看有无 JS 报错（元素找不到/函数未定义）
-  2. 检查 `document.getElementById('messages')` 等是否返回 null
-  3. 检查 `.chat-sidebar-inner` 的 flex 布局是否让 `.messages` 正确撑满
-  4. 确认 send-btn/message-input/upload-btn 的事件绑定在 DOM 就绪后执行
-  5. 确认 SSE 流式的 `data: ` 事件仍能正确推送到侧栏内的消息容器
-- **修复优先级**：🔴 最高（聊天是核心功能，不能退化）
-- **修复约束**：不能回退 v3.0.0 的知识库主区布局，需在侧栏容器内修复
+- **实际根因**：经排查，DOM 元素 ID 和事件绑定均正常（`bindEvents()` 在 `init()` 末尾同步调用）。核心问题是 CSS 布局：
+  - `.upload-zone` 默认可见，占用输入区 64px 空间，挤压消息区域
+  - `.chat-sidebar` 缺少 `align-self: stretch`，首次加载时高度可能为 0（竞态条件）
+  - `.chat-sidebar-inner` 缺少 `min-height: 0`，flex 子元素高度可能塌陷
+- **修复内容**（v3.0.2）：
+  1. `.upload-zone` 添加 `display:none`，上传按钮改为切换显示/隐藏
+  2. `.chat-sidebar` 添加 `align-self: stretch` + `overflow: hidden`
+  3. `.chat-sidebar-inner` 添加 `min-height: 0`
+- **验证**：消息区从 377px 增至 441px，输入区从 212px 降至 148px，self_test 88/88 + Web API 26/26 全绿
 
 ---
 

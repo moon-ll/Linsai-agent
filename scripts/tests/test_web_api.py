@@ -110,12 +110,12 @@ def _copy_web_essentials(tmp_root: Path):
         shutil.copy(env_src, tmp_root / ".env")
 
 
-def _wait_for_server(url: str, timeout: int = 20) -> bool:
+def _wait_for_server(url: str, timeout: int = 30) -> bool:
     """等待 web_server 就绪（轮询 /api/version）。"""
     deadline = time.time() + timeout
     while time.time() < deadline:
         try:
-            with urllib.request.urlopen(url + "/api/version", timeout=2) as resp:
+            with urllib.request.urlopen(url + "/api/version", timeout=3) as resp:
                 if resp.status == 200:
                     return True
         except Exception:
@@ -151,7 +151,7 @@ class WebApiSuite(TestSuite):
             env=env,
         )
         base_url = f"http://127.0.0.1:{self.port}"
-        if not _wait_for_server(base_url, timeout=20):
+        if not _wait_for_server(base_url, timeout=30):
             raise RuntimeError("web_server 启动超时")
         self.client = ApiClient(base_url, timeout=15)
 

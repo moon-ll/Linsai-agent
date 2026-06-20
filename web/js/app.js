@@ -1245,7 +1245,12 @@ function bindEvents() {
   const fileInput = document.getElementById('file-input');
 
   document.getElementById('upload-btn').addEventListener('click', () => {
-    fileInput.click();
+    const zone = document.getElementById('upload-zone');
+    if (zone.style.display === 'none' || !zone.style.display) {
+      zone.style.display = 'block';
+    } else {
+      zone.style.display = 'none';
+    }
   });
 
   fileInput.addEventListener('change', (e) => {

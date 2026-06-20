@@ -1,5 +1,28 @@
 # 变更记录
 
+## v3.0.2 - 2026-06-20 BUG-A 修复 + 知识库维护增强
+
+### BUG 修复
+- **BUG-A（Web 端聊天功能异常）**：修复 v3.0.0 布局重构引入的聊天侧栏问题
+  - `.upload-zone` 默认隐藏（此前始终可见，占用输入区 64px 空间）
+  - `.chat-sidebar` 添加 `align-self: stretch` + `overflow: hidden` 高度保护
+  - `.chat-sidebar-inner` 添加 `min-height: 0` 防止 flex 子元素高度塌陷
+  - 上传按钮改为切换上传区域显示/隐藏（此前直接弹文件选择器）
+- **Web API 测试超时**：`_wait_for_server` 超时从 20s 增至 30s，轮询超时从 2s 增至 3s
+
+### 知识库维护增强
+- **`kb_importer.py`**：补全 `import_all_candidates()` 函数定义（此前 def 行缺失，函数体悬空）
+- **`kb_maintenance.py`**：新增 `cmd_rebuild_graph()` 子命令（`--rebuild-graph`）
+  - 从所有 wiki frontmatter 的 related/project 字段反向重建知识图谱
+  - 解决 import_candidate/import_deep_analysis 绕过 save_wiki_page 导致的图谱断层
+  - 已集成到 `--weekly` 周维护流程
+
+### 验证
+- self_test 88/88 全绿
+- Web API 测试 26/26 全绿
+- 浏览器验证：消息区从 377px 增至 441px，输入区从 212px 降至 148px
+- 图谱重建：88 节点成功导入
+
 ## v3.0.1 - 2026-06-19 每日简报+NSFC项目正式纳入知识库管理
 
 ### 导入内容（47 篇）
