@@ -7,16 +7,14 @@
 // 面板打开/关闭
 // ============================================
 function openHermesConsole() {
-  const overlay = document.getElementById('hermes-overlay');
-  if (!overlay) return;
-  overlay.style.display = 'flex';
+  if (!document.getElementById('hermes-overlay')) return;
+  openModal('hermes-overlay');
   loadHermesStatus();
   loadCronList();
 }
 
 function closeHermesConsole() {
-  const overlay = document.getElementById('hermes-overlay');
-  if (overlay) overlay.style.display = 'none';
+  closeModal('hermes-overlay');
 }
 
 // ============================================

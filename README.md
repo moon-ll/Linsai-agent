@@ -50,12 +50,10 @@ cd ~/Desktop/LinSai-CoPilot
 python scripts/web_server.py
 # 打开 http://localhost:8080
 
-# 方式一（快捷）：一键启动并自动打开浏览器
+# 方式二：一键启动（自动打开浏览器）
 ./scripts/launch.sh
 
-# macOS 用户可使用 ./scripts/launch.sh 一键启动
-
-# 方式二：终端 CLI（轻量、脚本化）
+# 方式三：终端 CLI（轻量、脚本化）
 python scripts/copilot_engine.py --start "固体HHG实验方案设计"
 python scripts/copilot_engine.py --continue
 python scripts/copilot_engine.py --list
@@ -289,5 +287,5 @@ LinSai-CoPilot/
 
 ---
 
-*版本：3.0.1*  
+*版本：3.1.2*  
 *日期：2026-06-17*

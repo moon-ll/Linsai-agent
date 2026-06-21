@@ -1,12 +1,10 @@
 #!/bin/bash
-"""
-LinSai-CoPilot 一键启动脚本
-启动 Web 服务器并自动打开浏览器
-
-用法:
-    ./scripts/launch.sh           # 默认端口 8080
-    ./scripts/launch.sh 9000      # 指定端口
-"""
+# LinSai-CoPilot 一键启动脚本
+# 启动 Web 服务器并自动打开浏览器
+#
+# 用法:
+#     ./scripts/launch.sh           # 默认端口 8080
+#     ./scripts/launch.sh 9000      # 指定端口
 
 set -e
 

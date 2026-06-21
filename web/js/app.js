@@ -21,6 +21,12 @@ const State = {
 const API_BASE = '';
 
 // ============================================
+// 阶段标签与图标常量（避免多处内联重复定义）
+// ============================================
+const STAGE_LABELS_FULL = { seedling: '🌱 幼苗', growing: '🌿 成长中', mature: '🌳 成熟', archived: '📦 归档' };
+const STAGE_ICONS = { seedling: '🌱', growing: '🌿', mature: '🌳', archived: '📦' };
+
+// ============================================
 // 主题管理
 // ============================================
 function applyTheme(theme) {
@@ -173,6 +179,9 @@ async function apiPut(path, body) {
 // ============================================
 // 模态框
 // ============================================
+function openModal(id) { const el = document.getElementById(id); if (el) el.style.display = 'flex'; }
+function closeModal(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
+
 function showModal(htmlContent) {
   let overlay = document.getElementById('modal-overlay');
   if (!overlay) {
@@ -182,17 +191,12 @@ function showModal(htmlContent) {
     overlay.innerHTML = '<div class="modal" id="modal-content"></div>';
     document.body.appendChild(overlay);
     overlay.addEventListener('click', (e) => {
-      if (e.target === overlay) closeModal();
+      if (e.target === overlay) closeModal('modal-overlay');
     });
   }
   const html = (typeof htmlContent === 'string') ? htmlContent : String(htmlContent || '');
   document.getElementById('modal-content').innerHTML = html;
   overlay.style.display = 'flex';
-}
-
-function closeModal() {
-  const overlay = document.getElementById('modal-overlay');
-  if (overlay) overlay.style.display = 'none';
 }
 
 // ============================================
@@ -327,13 +331,6 @@ async function viewArchiveSession(sessionId) {
   } catch (e) {
     console.error('加载历史失败:', e);
     showToast('加载历史失败', 'error');
-  }
-}
-
-function backToCurrentSession() {
-  if (State.currentSessionId) {
-    State.viewingArchive = false;
-    switchSession(State.currentSessionId);
   }
 }
 
@@ -770,7 +767,7 @@ async function handleAgoraExport() {
       personas: selectedPersonas,
     });
     showToast(`Agora 导出成功: ${data.path}`);
-    document.getElementById('agora-modal').style.display = 'none';
+    closeModal('agora-modal');
   } catch (e) {
     console.error('Agora 导出失败:', e);
     showToast(`导出失败: ${e.message}`, 'error');
@@ -787,7 +784,7 @@ let editingMsgId = null;
 function openEditMessage(msgId, content) {
   editingMsgId = msgId;
   document.getElementById('edit-message-content').value = content;
-  document.getElementById('edit-message-modal').style.display = 'flex';
+  openModal('edit-message-modal');
 }
 
 async function saveEditMessage() {
@@ -821,7 +818,7 @@ async function saveEditMessage() {
     }
 
     showToast('消息已更新');
-    document.getElementById('edit-message-modal').style.display = 'none';
+    closeModal('edit-message-modal');
     editingMsgId = null;
   } catch (e) {
     console.error('编辑失败:', e);
@@ -934,17 +931,6 @@ async function createNewTask() {
   }
 }
 
-async function deleteTask(taskId) {
-  if (!confirm('确定删除此任务？')) return;
-  try {
-    await apiDelete(`/api/tasks/${taskId}`);
-    showToast('✓ 任务已删除', 'success');
-    await loadTasks();
-  } catch (e) {
-    showToast('✗ 删除失败: ' + e.message, 'error');
-  }
-}
-
 // apiDelete 辅助（若未定义）
 if (typeof apiDelete === 'undefined') {
   window.apiDelete = async function(path) {
@@ -1028,10 +1014,10 @@ async function openTaskDetail(taskId) {
       const val = parseInt(document.getElementById('task-progress-slider').value, 10);
       await apiPut(`/api/tasks/${encodeURIComponent(taskId)}/progress`, { progress: val });
       await loadTasks();
-      closeModal();
+      closeModal('modal-overlay');
     });
 
-    document.getElementById('close-task-detail').addEventListener('click', closeModal);
+    document.getElementById('close-task-detail').addEventListener('click', () => closeModal('modal-overlay'));
 
   } catch (e) {
     console.error('加载任务详情失败:', e);
@@ -1144,11 +1130,11 @@ function bindEvents() {
 
   // 新建会话
   document.getElementById('new-session-btn').addEventListener('click', () => {
-    document.getElementById('new-session-modal').style.display = 'flex';
+    openModal('new-session-modal');
     document.getElementById('new-session-topic').focus();
   });
   document.getElementById('cancel-new-session').addEventListener('click', () => {
-    document.getElementById('new-session-modal').style.display = 'none';
+    closeModal('new-session-modal');
   });
   document.getElementById('confirm-new-session').addEventListener('click', () => {
     const topic = document.getElementById('new-session-topic').value.trim();
@@ -1158,7 +1144,7 @@ function bindEvents() {
       return;
     }
     createNewSession(topic, mode);
-    document.getElementById('new-session-modal').style.display = 'none';
+    closeModal('new-session-modal');
     document.getElementById('new-session-topic').value = '';
   });
   document.getElementById('new-session-modal').addEventListener('click', (e) => {
@@ -1209,7 +1195,7 @@ function bindEvents() {
       } else if (cmd === '/agora') {
         selectedPersonas = [];
         renderPersonaGrid();
-        document.getElementById('agora-modal').style.display = 'flex';
+        openModal('agora-modal');
       } else if (cmd === '/summary') {
         sendMessage('/summary');
       }
@@ -1218,7 +1204,7 @@ function bindEvents() {
 
   // Agora 弹窗
   document.getElementById('cancel-agora').addEventListener('click', () => {
-    document.getElementById('agora-modal').style.display = 'none';
+    closeModal('agora-modal');
   });
   document.getElementById('confirm-agora').addEventListener('click', handleAgoraExport);
   document.getElementById('agora-modal').addEventListener('click', (e) => {
@@ -1229,7 +1215,7 @@ function bindEvents() {
 
   // 编辑消息弹窗
   document.getElementById('cancel-edit-message').addEventListener('click', () => {
-    document.getElementById('edit-message-modal').style.display = 'none';
+    closeModal('edit-message-modal');
     editingMsgId = null;
   });
   document.getElementById('confirm-edit-message').addEventListener('click', saveEditMessage);
@@ -1273,14 +1259,6 @@ function bindEvents() {
     if (e.dataTransfer.files.length > 0) {
       uploadFiles(e.dataTransfer.files);
     }
-  });
-
-  // 快速开始按钮
-  document.querySelectorAll('.quick-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const topic = btn.dataset.topic;
-      createNewSession(topic, 'co-working');
-    });
   });
 
   // 移动端侧边栏切换
@@ -1627,12 +1605,12 @@ let _skillConfigCache = null;
 let _allSkillsCache = [];
 
 function openSkillManager() {
-  document.getElementById('skill-manager-overlay').style.display = 'flex';
+  openModal('skill-manager-overlay');
   loadSkillList();
 }
 
 function closeSkillManager() {
-  document.getElementById('skill-manager-overlay').style.display = 'none';
+  closeModal('skill-manager-overlay');
 }
 
 async function loadSkillList() {
@@ -1827,19 +1805,14 @@ function openKbManager() {
   openWikiByTitle('🗺️ HHG 知识地图');
 }
 
-function closeKbManager() {
-  document.getElementById('kb-manager-overlay').style.display = 'none';
-}
-
 // ============================================
 // 学习管理器（v2.8.0 补全）
 // ============================================
 const LearningManager = { activeTab: 'learning-log' };
 
 function openLearningManager() {
-  const overlay = document.getElementById('learning-manager-overlay');
-  if (!overlay) return;
-  overlay.style.display = 'flex';
+  if (!document.getElementById('learning-manager-overlay')) return;
+  openModal('learning-manager-overlay');
   LearningManager.activeTab = 'learning-log';
   // 重置 tab 样式
   document.querySelectorAll('#learning-manager-overlay .kb-tab').forEach(t => {
@@ -1852,8 +1825,7 @@ function openLearningManager() {
 }
 
 function closeLearningManager() {
-  const overlay = document.getElementById('learning-manager-overlay');
-  if (overlay) overlay.style.display = 'none';
+  closeModal('learning-manager-overlay');
 }
 
 async function renderLearningManager() {
@@ -1952,479 +1924,6 @@ async function loadLearningStats() {
   }
 }
 
-function switchKbTab(tab) {
-  KBManager.activeTab = tab;
-  // scope 到知识库面板（避免污染学习面板的同名 class）
-  document.querySelectorAll('#kb-manager-overlay .kb-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
-  document.querySelectorAll('#kb-manager-overlay .kb-panel').forEach(p => p.classList.toggle('active', p.id === `kb-panel-${tab}`));
-
-  if (tab === 'overview') loadKbOverview();
-  else if (tab === 'raw') loadKbRaw();
-  else if (tab === 'wiki') loadKbWiki();
-  else if (tab === 'graph') loadKbGraph();
-  else if (tab === 'growth') loadKbGrowth();
-  else if (tab === 'health') loadKbHealth();
-  else if (tab === 'aliases') loadKbAliases();
-}
-
-async function loadKbOverview() {
-  const container = document.getElementById('kb-overview-content');
-  container.innerHTML = '◐ 加载中…';
-  try {
-    const [status, graph, candidates] = await Promise.all([
-      apiGet('/api/knowledge'),
-      apiGet('/api/knowledge/graph'),
-      apiGet('/api/knowledge/growth-candidates'),
-    ]);
-
-    const stages = graph.growth_stages || {};
-    const stageHtml = Object.entries(stages).map(([s, c]) => {
-      const labels = { seedling: '🌱 幼苗', growing: '🌿 成长中', mature: '🌳 成熟', archived: '📦 归档' };
-      return `<span class="kb-badge kb-badge-${s}">${labels[s] || s}: ${c}</span>`;
-    }).join(' ');
-
-    container.innerHTML = `
-      <div class="kb-stat-grid">
-        <div class="kb-stat-card">
-          <div class="kb-stat-value">${status.raw_count || 0}</div>
-          <div class="kb-stat-label">Raw 文件</div>
-        </div>
-        <div class="kb-stat-card">
-          <div class="kb-stat-value">${status.wiki_count || 0}</div>
-          <div class="kb-stat-label">Wiki 页面</div>
-        </div>
-        <div class="kb-stat-card">
-          <div class="kb-stat-value">${status.chunks || 0}</div>
-          <div class="kb-stat-label">索引段落</div>
-        </div>
-        <div class="kb-stat-card">
-          <div class="kb-stat-value">${graph.node_count || 0}</div>
-          <div class="kb-stat-label">知识节点</div>
-        </div>
-        <div class="kb-stat-card">
-          <div class="kb-stat-value">${graph.edge_count || 0}</div>
-          <div class="kb-stat-label">关联关系</div>
-        </div>
-        <div class="kb-stat-card">
-          <div class="kb-stat-value">${candidates.candidates?.length || 0}</div>
-          <div class="kb-stat-label">待生长</div>
-        </div>
-      </div>
-      <div style="margin-top:12px;">${stageHtml}</div>
-      <div style="display:flex;gap:8px;margin-top:16px;">
-        <button class="btn-text" onclick="openLocalFile('knowledge')">📂 打开知识库文件夹</button>
-        <button class="btn-text" onclick="openLocalFile('knowledge/raw')">📂 打开 Raw 文件夹</button>
-        <button class="btn-text" onclick="openLocalFile('knowledge/wiki')">📂 打开 Wiki 文件夹</button>
-      </div>
-      <div style="color:var(--text-tertiary);font-size:0.75rem;margin-top:8px;">
-        索引时间: ${status.built_at || '未知'}
-      </div>
-    `;
-  } catch (e) {
-    container.innerHTML = `<div class="kb-empty">✗ 加载失败: ${e.message}</div>`;
-  }
-}
-
-async function loadKbRaw() {
-  const container = document.getElementById('kb-raw-content');
-  container.innerHTML = '◐ 加载中…';
-  try {
-    const data = await apiGet('/api/knowledge/raw');
-    const files = data.files || [];
-    if (files.length === 0) {
-      container.innerHTML = '<div class="kb-empty">📂 暂无 raw 文件<br>将 .md/.txt 文件放入 knowledge/raw/ 目录即可</div>';
-      return;
-    }
-    const cats = {};
-    files.forEach(f => {
-      const cat = f.category || '其他';
-      if (!cats[cat]) cats[cat] = [];
-      cats[cat].push(f);
-    });
-
-    let html = '';
-    for (const [cat, list] of Object.entries(cats)) {
-      const catLabels = { papers: '📄 论文', notes: '📝 笔记', webclips: '🌐 剪藏' };
-      html += `<div class="kb-section-title">${catLabels[cat] || cat}</div>`;
-      list.forEach(f => {
-        const safePath = (f.path || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
-        html += `
-          <div class="kb-list-item">
-            <div class="kb-list-main" onclick="openRawDetail('${safePath}')" style="cursor:pointer;">
-              <div class="kb-list-title">${escapeHtml(f.name)}</div>
-              <div class="kb-list-meta">${(f.size / 1024).toFixed(1)} KB · ${new Date(f.mtime * 1000).toLocaleDateString()}${f.project ? ' · [' + escapeHtml(Array.isArray(f.project)?f.project[0]:f.project) + ']' : ''}</div>
-            </div>
-            <div class="kb-list-actions">
-              <button class="kb-action-btn" onclick="event.stopPropagation(); openLocalFile('${safePath}')" title="在编辑器中打开">📂</button>
-            </div>
-          </div>
-        `;
-      });
-    }
-    container.innerHTML = html;
-  } catch (e) {
-    container.innerHTML = `<div class="kb-empty">✗ 加载失败</div>`;
-  }
-}
-
-// v2.9.5: 知识库搜索
-async function searchKb(query) {
-  const container = document.getElementById('kb-wiki-content');
-  if (!container) return;
-  container.innerHTML = '◐ 搜索中…';
-  try {
-    const data = await apiGet(`/api/knowledge/search?q=${encodeURIComponent(query)}&top_k=15`);
-    const results = data.results || [];
-    if (!results.length) {
-      container.innerHTML = `<div class="kb-empty">🔍 未找到与「${escapeHtml(query)}」相关的内容</div>`;
-      return;
-    }
-    const stageLabels = { seedling: '🌱', growing: '🌿', mature: '🌳' };
-    let html = `<div style="margin-bottom:8px;font-size:0.8rem;color:var(--text-secondary);">🔍 找到 ${results.length} 条结果</div>`;
-    results.forEach(r => {
-      const stageIcon = stageLabels[r.growth_stage] || '○';
-      const sourceTag = r.source === 'raw' ? '📄' : '📝';
-      html += `
-        <div class="kb-list-item">
-          <div class="kb-list-main" onclick="${r.source === 'wiki' ? `openWikiDetail('${r.doc.replace(/'/g,"\\'")}')` : `openRawDetail('${r.path.replace(/'/g,"\\'")}')`}" style="cursor:pointer;">
-            <div class="kb-list-title">${sourceTag} ${stageIcon} ${escapeHtml(r.title || r.doc)}</div>
-            <div class="kb-list-meta" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;">${escapeHtml((r.text || '').slice(0, 120))}</div>
-          </div>
-        </div>`;
-    });
-    container.innerHTML = html;
-  } catch (e) {
-    container.innerHTML = `<div class="kb-empty">✗ 搜索失败: ${e.message}</div>`;
-  }
-}
-
-async function loadKbWiki() {
-  const container = document.getElementById('kb-wiki-content');
-  container.innerHTML = '◐ 加载中…';
-  try {
-    const filter = document.getElementById('kb-wiki-filter')?.value || '';
-    const data = await apiGet(`/api/knowledge/wiki${filter ? '?type=' + filter : ''}`);
-    const pages = data.pages || [];
-    KBManager.wikiPages = pages;
-
-    if (pages.length === 0) {
-      container.innerHTML = '<div class="kb-empty">📝 暂无 Wiki 页面<br>通过"新建概念 Stub"或 raw→wiki 提炼来创建</div>';
-      return;
-    }
-
-    const stageLabels = { seedling: '🌱', growing: '🌿', mature: '🌳', archived: '📦' };
-
-    // v2.9.4: 按 type 分组渲染 + MOC 入口
-    const typeLabels = {
-      concepts: '📐 核心概念', methods: '🛠️ 方法与技术',
-      people: '👤 学者', papers: '📚 综述报告', projects: '📁 项目子库',
-    };
-    const typeOrder = ['concepts', 'methods', 'people', 'papers', 'projects'];
-
-    // 找 MOC 索引页
-    const mocPages = pages.filter(p => p.title && p.title.includes('🗺️'));
-    const normalPages = pages.filter(p => !(p.title && p.title.includes('🗺️')));
-
-    // 按 type 分组
-    const groups = {};
-    for (const p of normalPages) {
-      const t = p.type || 'other';
-      (groups[t] = groups[t] || []).push(p);
-    }
-    // 每组按 growth_stage 排序（mature 优先）
-    const stageOrder = { mature: 0, growing: 1, seedling: 2, archived: 3, unknown: 4 };
-    for (const t in groups) {
-      groups[t].sort((a, b) => (stageOrder[a.growth_stage] ?? 9) - (stageOrder[b.growth_stage] ?? 9));
-    }
-
-    let html = '';
-
-    // MOC 入口（如果有）
-    if (mocPages.length) {
-      html += '<div style="margin-bottom:12px;padding:8px 10px;background:var(--bg-tertiary);border-radius:6px;border-left:3px solid var(--accent-color);">';
-      html += '<div style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:4px;">🗺️ 知识地图（主题入口）</div>';
-      mocPages.forEach(p => {
-        html += `<div class="kb-list-item" style="margin:2px 0;" onclick="openWikiDetail('${p.path}')">
-          <span style="font-size:0.85rem;font-weight:500;color:var(--accent-color);">${escapeHtml(p.title)}</span>
-        </div>`;
-      });
-      html += '</div>';
-    }
-
-    // 按 type 分组渲染
-    for (const t of typeOrder) {
-      const items = groups[t];
-      if (!items || !items.length) continue;
-      const label = typeLabels[t] || t;
-      html += `<div style="margin-bottom:10px;">`;
-      html += `<div style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin-bottom:4px;padding:2px 0;border-bottom:1px solid var(--border-color);">${label} <span style="color:var(--text-tertiary);font-weight:400;">(${items.length})</span></div>`;
-      items.forEach(p => {
-        const stageIcon = stageLabels[p.growth_stage] || '○';
-        const projTag = p.project ? ` <span style="color:var(--info-color);font-size:0.7rem;">[${Array.isArray(p.project)?p.project[0]:p.project}]</span>` : '';
-        html += `
-          <div class="kb-list-item">
-            <div class="kb-list-main" onclick="openWikiDetail('${p.path}')">
-              <div class="kb-list-title">${stageIcon} ${escapeHtml(p.title)}</div>
-              <div class="kb-list-meta">
-                确信度 ${((p.confidence || 0) * 100).toFixed(0)}%${projTag}
-                ${p.tags?.length ? ' · ' + p.tags.filter(tg => !tg.startsWith('#')).slice(0,3).join(', ') : ''}
-              </div>
-            </div>
-            <div class="kb-list-actions">
-              <button class="kb-action-btn" onclick="event.stopPropagation(); openLocalFile('${p.path}')" title="在编辑器中打开">📂</button>
-            </div>
-          </div>
-        `;
-      });
-      html += '</div>';
-    }
-
-    // 未分类的
-    const uncategorized = groups['other'] || groups['unknown'] || [];
-    if (uncategorized.length) {
-      html += `<div style="font-size:0.8rem;color:var(--text-tertiary);margin-top:8px;">其他 (${uncategorized.length})</div>`;
-    }
-
-    container.innerHTML = html;
-  } catch (e) {
-    container.innerHTML = `<div class="kb-empty">✗ 加载失败</div>`;
-  }
-}
-
-async function loadKbGraph() {
-  const container = document.getElementById('kb-graph-content');
-  container.innerHTML = '◐ 加载中…';
-  try {
-    const data = await apiGet('/api/knowledge/graph');
-    const nodes = data.node_count || 0;
-    const edges = data.edge_count || 0;
-
-    if (nodes === 0) {
-      container.innerHTML = '<div class="kb-empty">🔗 知识图谱为空<br>创建 Wiki 页面并添加 related 字段即可建立关联</div>';
-      return;
-    }
-
-    container.innerHTML = `
-      <div class="kb-stat-grid" style="grid-template-columns: repeat(2, 1fr);">
-        <div class="kb-stat-card">
-          <div class="kb-stat-value">${nodes}</div>
-          <div class="kb-stat-label">节点</div>
-        </div>
-        <div class="kb-stat-card">
-          <div class="kb-stat-value">${edges}</div>
-          <div class="kb-stat-label">边</div>
-        </div>
-      </div>
-      <div class="kb-section-title">生长阶段分布</div>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;">
-        ${Object.entries(data.growth_stages || {}).map(([s, c]) => {
-          const labels = { seedling: '🌱 幼苗', growing: '🌿 成长中', mature: '🌳 成熟', archived: '📦 归档' };
-          return `<span class="kb-badge kb-badge-${s}">${labels[s] || s}: ${c}</span>`;
-        }).join('')}
-      </div>
-    `;
-  } catch (e) {
-    container.innerHTML = `<div class="kb-empty">✗ 加载失败</div>`;
-  }
-}
-
-async function loadKbGrowth() {
-  const container = document.getElementById('kb-growth-content');
-  container.innerHTML = '◐ 加载中…';
-  try {
-    const [logData, candData] = await Promise.all([
-      apiGet('/api/knowledge/growth-log?limit=20'),
-      apiGet('/api/knowledge/growth-candidates'),
-    ]);
-
-    const logs = logData.log || [];
-    const candidates = candData.candidates || [];
-
-    let html = '';
-
-    // 待生长概念
-    if (candidates.length > 0) {
-      html += `<div class="kb-section-title">🌱 待生长概念 (${candidates.length})</div>`;
-      candidates.forEach(c => {
-        html += `
-          <div class="kb-list-item" onclick="openWikiDetail('${c.path}')">
-            <div class="kb-list-title">🌱 ${c.title}</div>
-            <div class="kb-list-meta">${c.reason}</div>
-          </div>
-        `;
-      });
-    }
-
-    // 生长日志
-    html += `<div class="kb-section-title">📜 最近生长记录</div>`;
-    if (logs.length === 0) {
-      html += '<div class="kb-empty">暂无生长记录</div>';
-    } else {
-      logs.forEach(l => {
-        const actionLabels = { create: '✨ 创建', update: '✏️ 更新', link: '🔗 关联', distill: '🧪 提炼', ingest: '📥 纳入' };
-        html += `
-          <div style="padding:8px 0;border-bottom:1px solid var(--border-color);font-size:0.8rem;">
-            <div style="display:flex;justify-content:space-between;">
-              <span>${actionLabels[l.action] || l.action} <strong>${l.target?.split('/').pop()}</strong></span>
-              <span style="color:var(--text-tertiary);">${new Date(l.timestamp).toLocaleDateString()}</span>
-            </div>
-            <div style="color:var(--text-tertiary);margin-top:2px;">${l.reason || ''}</div>
-          </div>
-        `;
-      });
-    }
-
-    container.innerHTML = html;
-  } catch (e) {
-    container.innerHTML = `<div class="kb-empty">✗ 加载失败</div>`;
-  }
-}
-
-async function loadKbHealth() {
-  const container = document.getElementById('kb-health-content');
-  container.innerHTML = '◐ 加载中…';
-  try {
-    const health = await apiGet('/api/knowledge/health');
-    const stages = health.growth_stages || {};
-    const stageLabels = { seedling: '🌱 幼苗', growing: '🌿 成长中', mature: '🌳 成熟' };
-    const stageHtml = Object.entries(stages).map(([s, c]) => `<span class="kb-badge kb-badge-${s}">${stageLabels[s] || s}: ${c}</span>`).join(' ');
-
-    container.innerHTML = `
-      <div class="kb-health-grid">
-        <div class="kb-health-card">
-          <div class="kb-health-value">${health.raw_count || 0}</div>
-          <div class="kb-health-label">Raw 文件</div>
-        </div>
-        <div class="kb-health-card">
-          <div class="kb-health-value">${health.wiki_count || 0}</div>
-          <div class="kb-health-label">Wiki 页面</div>
-        </div>
-        <div class="kb-health-card">
-          <div class="kb-health-value">${health.capture_count || 0}</div>
-          <div class="kb-health-label">对话捕获</div>
-        </div>
-        <div class="kb-health-card">
-          <div class="kb-health-value">${health.graph_nodes || 0}</div>
-          <div class="kb-health-label">图谱节点</div>
-        </div>
-        <div class="kb-health-card">
-          <div class="kb-health-value">${health.graph_edges || 0}</div>
-          <div class="kb-health-label">关联边</div>
-        </div>
-        <div class="kb-health-card">
-          <div class="kb-health-value">${health.growth_candidates || 0}</div>
-          <div class="kb-health-label">生长候选</div>
-        </div>
-      </div>
-      <div style="margin-top:12px;">${stageHtml}</div>
-      <div class="kb-health-section">
-        <div class="kb-health-row"><span>本周新增</span><span>${health.week_new || 0} 条</span></div>
-        <div class="kb-health-row"><span>待蒸馏 raw</span><span>${health.pending_distill || 0} 个</span></div>
-        <div class="kb-health-row"><span>孤儿节点</span><span>${health.graph_orphans || 0} 个</span></div>
-        <div class="kb-health-row"><span>索引时间</span><span>${health.built_at ? new Date(health.built_at).toLocaleString() : '未知'}</span></div>
-      </div>
-      <div style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;">
-        <button class="btn-text" onclick="runMaintenance('reindex')">🔄 重建索引</button>
-        <button class="btn-text" onclick="runMaintenance('orphans')">🧹 清理孤儿</button>
-        <button class="btn-text" onclick="runMaintenance('candidates')">📋 候选报告</button>
-        <button class="btn-text" onclick="runMaintenance('weekly')">🔧 周维护</button>
-      </div>
-    `;
-  } catch (e) {
-    container.innerHTML = `<div class="kb-empty">✗ 加载失败: ${e.message}</div>`;
-  }
-}
-
-async function loadKbAliases() {
-  const container = document.getElementById('kb-aliases-content');
-  container.innerHTML = '◐ 加载中…';
-  try {
-    const data = await apiGet('/api/knowledge/aliases');
-    const aliases = data.aliases || {};
-    let html = `
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <span style="font-size:0.85rem;color:var(--text-secondary);">别名映射：查询时自动展开同义词</span>
-        <button class="btn-text" onclick="saveAliases()">💾 保存</button>
-      </div>
-      <div id="aliases-editor" style="display:flex;flex-direction:column;gap:8px;">
-    `;
-
-    const entries = Object.entries(aliases);
-    if (entries.length === 0) {
-      html += `<div class="kb-empty">暂无别名映射。点击"添加"创建。</div>`;
-    } else {
-      entries.forEach(([canonical, alts], idx) => {
-        html += `
-          <div class="alias-row" data-idx="${idx}">
-            <input type="text" class="alias-canonical" value="${canonical}" placeholder="标准词" style="flex:1;padding:6px 8px;border-radius:6px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);">
-            <span style="color:var(--text-tertiary);">→</span>
-            <input type="text" class="alias-alts" value="${Array.isArray(alts) ? alts.join(', ') : alts}" placeholder="别名1, 别名2" style="flex:2;padding:6px 8px;border-radius:6px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);">
-            <button class="btn-icon" onclick="this.parentElement.remove()" title="删除">🗑️</button>
-          </div>
-        `;
-      });
-    }
-    html += `</div>`;
-    html += `
-      <div style="margin-top:12px;">
-        <button class="btn-text" onclick="addAliasRow()">➕ 添加别名</button>
-      </div>
-    `;
-    container.innerHTML = html;
-  } catch (e) {
-    container.innerHTML = `<div class="kb-empty">✗ 加载失败: ${e.message}</div>`;
-  }
-}
-
-function addAliasRow() {
-  const editor = document.getElementById('aliases-editor');
-  const idx = editor.children.length;
-  const row = document.createElement('div');
-  row.className = 'alias-row';
-  row.dataset.idx = idx;
-  row.innerHTML = `
-    <input type="text" class="alias-canonical" placeholder="标准词" style="flex:1;padding:6px 8px;border-radius:6px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);">
-    <span style="color:var(--text-tertiary);">→</span>
-    <input type="text" class="alias-alts" placeholder="别名1, 别名2" style="flex:2;padding:6px 8px;border-radius:6px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);">
-    <button class="btn-icon" onclick="this.parentElement.remove()" title="删除">🗑️</button>
-  `;
-  editor.appendChild(row);
-}
-
-async function saveAliases() {
-  const rows = document.querySelectorAll('.alias-row');
-  const aliases = {};
-  rows.forEach(row => {
-    const canonical = row.querySelector('.alias-canonical').value.trim();
-    const altsStr = row.querySelector('.alias-alts').value.trim();
-    if (canonical && altsStr) {
-      aliases[canonical] = altsStr.split(',').map(s => s.trim()).filter(Boolean);
-    }
-  });
-  try {
-    await apiPost('/api/knowledge/aliases', { aliases });
-    showToast('✓ 别名已保存', 'success');
-  } catch (e) {
-    showToast('✗ 保存失败: ' + e.message, 'error');
-  }
-}
-
-async function runMaintenance(task) {
-  try {
-    showToast(`◐ 运行 ${task}...`, 'info');
-    const result = await apiPost('/api/knowledge/maintenance', { task });
-    if (result.success) {
-      showToast(`✓ ${task} 完成`, 'success');
-      if (KBManager.activeTab === 'health') loadKbHealth();
-      else if (KBManager.activeTab === 'overview') loadKbOverview();
-    } else {
-      showToast('✗ 失败: ' + (result.error || '未知错误'), 'error');
-    }
-  } catch (e) {
-    showToast('✗ 请求失败: ' + e.message, 'error');
-  }
-}
-
 async function openWikiDetail(wikiPath) {
   // v3.0.0: 渲染到知识库主区的预览面板（不再弹窗）
   const titleEl = document.getElementById('kb-preview-title');
@@ -2450,8 +1949,7 @@ async function openWikiDetail(wikiPath) {
 
     titleEl.textContent = fm.title || relPath;
 
-    const stageLabels = { seedling: '🌱 幼苗', growing: '🌿 成长中', mature: '🌳 成熟', archived: '📦 归档' };
-    const stage = stageLabels[fm.growth_stage] || fm.growth_stage || '未知';
+    const stage = STAGE_LABELS_FULL[fm.growth_stage] || fm.growth_stage || '未知';
 
     // 简单 Markdown 渲染（含 [[wikilink]] 双向链接处理）
     let renderedBody = body
@@ -2615,35 +2113,6 @@ async function copyToClipboard(text) {
   }
 }
 
-function closeWikiDetail() {
-  document.getElementById('kb-wiki-detail-overlay').style.display = 'none';
-}
-
-async function createWikiStub(force = false) {
-  const concept = prompt('请输入新概念名称：');
-  if (!concept) return;
-  try {
-    const data = await apiPost('/api/knowledge/stub', { concept, context: '手动创建', force });
-    if (data.success) {
-      showToast(`✨ 已创建 stub: ${concept}`, 'success');
-      if (KBManager.activeTab === 'wiki') loadKbWiki();
-      else if (KBManager.activeTab === 'growth') loadKbGrowth();
-      else if (KBManager.activeTab === 'overview') loadKbOverview();
-      else if (KBManager.activeTab === 'health') loadKbHealth();
-    } else if (data.action === 'suggest_merge') {
-      const similarList = data.similar.map(s => `• ${s.title} [${s.source}:${s.growth_stage}]`).join('\n');
-      const confirmCreate = confirm(`检测到相似概念:\n${similarList}\n\n${data.message}\n\n点击"确定"强制创建，点击"取消"取消。`);
-      if (confirmCreate) {
-        createWikiStub(true);
-      }
-    } else {
-      showToast('✗ 创建失败', 'error');
-    }
-  } catch (e) {
-    showToast('✗ 创建失败: ' + e.message, 'error');
-  }
-}
-
 // 知识库管理器事件绑定（在 bindEvents 中调用）
 function bindKbManagerEvents() {
   // 工具栏按钮
@@ -2694,33 +2163,6 @@ function bindKbManagerEvents() {
   });
   document.querySelectorAll('#learning-manager-overlay .kb-tab').forEach(tab => {
     tab.addEventListener('click', () => switchLearningTab(tab.dataset.tab));
-  });
-
-  // 知识库管理器
-  document.getElementById('kb-manager-close')?.addEventListener('click', closeKbManager);
-  document.getElementById('kb-manager-overlay')?.addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) closeKbManager();
-  });
-
-  document.querySelectorAll('#kb-manager-overlay .kb-tab').forEach(tab => {
-    tab.addEventListener('click', () => switchKbTab(tab.dataset.tab));
-  });
-
-  document.getElementById('kb-wiki-detail-close')?.addEventListener('click', closeWikiDetail);
-  document.getElementById('kb-wiki-detail-overlay')?.addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) closeWikiDetail();
-  });
-
-  document.getElementById('kb-wiki-create-stub')?.addEventListener('click', createWikiStub);
-  document.getElementById('kb-wiki-filter')?.addEventListener('change', loadKbWiki);
-
-  // v2.9.5: 知识库搜索
-  let searchTimer;
-  document.getElementById('kb-search-input')?.addEventListener('input', (e) => {
-    clearTimeout(searchTimer);
-    const q = e.target.value.trim();
-    if (!q) { loadKbWiki(); return; }  // 清空搜索恢复列表
-    searchTimer = setTimeout(() => searchKb(q), 300);
   });
 
   // v2.7.0: 项目面板 + hermes 控制台
@@ -2788,10 +2230,10 @@ async function openKbFilePicker() {
     }
     list.innerHTML = html;
   } catch (e) { document.getElementById('kb-file-list').innerHTML = `<p style="color:var(--error-color);">加载失败: ${e.message}</p>`; }
-  document.getElementById('kb-pick-cancel').onclick = closeModal;
+  document.getElementById('kb-pick-cancel').onclick = () => closeModal('modal-overlay');
   document.getElementById('kb-pick-confirm').onclick = () => {
     window._kbSelectedFiles = Array.from(document.querySelectorAll('.kb-file-cb:checked')).map(cb => ({path: cb.dataset.path, title: cb.dataset.title}));
-    closeModal();
+    closeModal('modal-overlay');
     updateKbContextBadge();
   };
 }
@@ -3055,8 +2497,8 @@ function renderFilteredTree(pages) {
     return;
   }
   const html = pages.map(p => {
-    const stageIcon = { seedling: '🌱', growing: '🌿', mature: '🌳' }[p.growth_stage] || '○';
-    return `<div class="kb-tree-item" data-path="${p.path}" onclick="loadKbPage('${p.path}')" style="padding:4px 8px;cursor:pointer;border-radius:4px;font-size:0.82rem;">
+    const stageIcon = STAGE_ICONS[p.growth_stage] || '○';
+    return `<div class="kb-tree-item" data-path="${p.path}" onclick="openWikiDetail('${p.path}')" style="padding:4px 8px;cursor:pointer;border-radius:4px;font-size:0.82rem;">
       ${stageIcon} ${p.title}
       <span style="color:var(--text-tertiary);font-size:0.7rem;">${p.type}</span>
     </div>`;
@@ -3199,7 +2641,7 @@ function bindTagEditor(frontmatter, pagePath) {
         }
         await apiPost('/api/knowledge/wiki', { path: pagePath, meta: fm });
         showToast('✓ 标签已更新');
-        loadKbPage(pagePath);
+        openWikiDetail(pagePath);
       } catch (e) {
         showToast('✗ 更新失败', 'error');
       }
@@ -3214,7 +2656,7 @@ function bindTagEditor(frontmatter, pagePath) {
       fm.tags = [...(Array.isArray(fm.tags) ? fm.tags : []), tag.trim()];
       await apiPost('/api/knowledge/wiki', { path: pagePath, meta: fm });
       showToast('✓ 标签已添加');
-      loadKbPage(pagePath);
+      openWikiDetail(pagePath);
     } catch (e) {
       showToast('✗ 添加失败', 'error');
     }
@@ -3263,7 +2705,7 @@ async function renderKbTree() {
       html += `<div class="kb-tree-group"><details><summary>${t.label} (${items.length})</summary>`;
       items.forEach(p => {
         const safePath = (p.path || '').replace(/'/g, "\\'");
-        const stageIcon = { mature: '🌳', growing: '🌿', seedling: '🌱' }[p.growth_stage] || '○';
+        const stageIcon = STAGE_ICONS[p.growth_stage] || '○';
         html += `<div class="kb-tree-item" onclick="openWikiDetail('${safePath}')">${stageIcon} ${escapeHtml(p.title)}</div>`;
       });
       html += `</details></div>`;

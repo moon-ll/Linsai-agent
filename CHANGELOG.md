@@ -1,5 +1,28 @@
 # 变更记录
 
+## v3.2.0 - 2026-06-21 代码简化与冗余清理
+
+### Bug 修复（P0）
+- **`loadKbPage` 未定义**：3 处调用改为 `openWikiDetail`，修复筛选器和标签编辑崩溃
+- **`launch.sh` 语法错误**：Python docstring `"""` 改为 bash 注释 `#`
+- **CSS 变量缺失**：补全 `--surface`/`--accent`/`--info-color`（浅色+深色主题），修复 20+ 处样式失效
+
+### 代码简化
+- **删除 599 行前端死代码**：17 个废弃 `kb-manager-overlay` 相关死函数 + 2 个死 HTML 弹窗
+- **删除 3 个死脚本**：`test_e2e_learning.py`（子集）、`learning_quality_tracker.py`（从未运行）、`deep_audit.py`（一次性）
+- **提取公共函数**：`STAGE_LABELS_FULL`/`STAGE_ICONS` 常量（3 处重复→1 处）、`openModal`/`closeModal`（12 处重复→1 处）
+- **CSS 合并**：`.modal-overlay` 重复定义合并、3 处 blockquote 样式合并、删除 7 组未使用的 CSS 类
+- **创建公共模块**：`scripts/common.py`（`now_utc`/`load_json`/`save_json`/`safe_filename`）、`scripts/paths.py`（统一路径常量）
+
+### 配置修复
+- 版本号同步：README.md / AGENTS.md / scripts/README.md 的 `3.0.1` → `3.1.2`
+- `.gitignore`：新增 `knowledge/raw/checkpoint.json`，`knowledge/captures` → `knowledge/captures/`
+- README.md 启动说明：修复两个"方式一"自相矛盾
+
+### 验证
+- self_test 88/88 全绿
+- Web API 测试 26/26 全绿
+
 ## v3.1.2 - 2026-06-20 智能增强（迭代 3）
 
 ### 新功能

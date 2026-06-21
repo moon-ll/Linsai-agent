@@ -18,7 +18,7 @@ function openProjectsManager() {
 }
 
 function closeProjectsManager() {
-  document.getElementById('projects-overlay').style.display = 'none';
+  closeModal('projects-overlay');
 }
 
 function switchProjectsTab(tab) {
@@ -434,7 +434,7 @@ function showWikiGrowConfirm(suggestion) {
       try {
         const result = await apiPost('/api/knowledge/grow', { arxiv_id: suggestion.arxiv_id, confirmed });
         showToast(`✓ 生成 ${result.generated_concepts.length} 篇笔记 + ${result.generated_relations.length} 条关联`, 'success');
-        closeModal();
+        closeModal('modal-overlay');
       } catch (e) {
         showToast(`✗ 生成失败: ${e.message}`, 'error');
         confirmBtn.textContent = '✓ 确认生成'; confirmBtn.disabled = false;
