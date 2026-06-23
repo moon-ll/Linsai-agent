@@ -205,13 +205,14 @@ body {
   min-width: 0;
 }
 .kb-tree-panel {
-  width: 280px;
-  min-width: 200px;
+  flex: 0 1 280px;
+  max-width: 280px;
+  min-width: 180px;
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
   background: var(--bg-sidebar);
-  flex-shrink: 0;
+  overflow: hidden;
 }
 .kb-tree-header {
   padding: 10px;

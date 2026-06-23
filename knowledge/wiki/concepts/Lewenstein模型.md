@@ -2,12 +2,13 @@
 title: "Lewenstein模型"
 type: "concepts"
 created: "2026-06-17T12:39:10Z"
-updated: "2026-06-17T12:39:10Z"
+updated: "2026-06-23T02:42:18Z"
 tags: ["HHG", "理论模型", "SFA", "量子", "#type/concept", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/growing", "#status/mature", "#status/mature"]
-related: ["三步模型", "截止定律", "高次谐波产生"]
-aliases: ["Lewenstein-model", "SFA", "强场近似"]
+related: ["RABBITT", "三步模型", "截止定律", "高次谐波产生"]
+source_raw: ""
 growth_stage: "mature"
 confidence: 0.9
+aliases: ["Lewenstein-model", "SFA", "strong field approximation", "强场近似"]
 ---
 
 # Lewenstein 模型（SFA 强场近似）
@@ -36,3 +37,12 @@ Lewenstein 模型（1994）是三步模型的量子力学精确化。它用强�
 
 - Lewenstein et al., "Theory of high-harmonic generation by low-frequency laser fields", PRA 49, 2117 (1994)
 - arXiv: 0707.4192（改进 Lewenstein 模型）
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[RABBITT]]
+- [[三步模型]]
+- [[截止定律]]
+- [[高次谐波产生]]
+<!-- /linsai-wikilinks -->

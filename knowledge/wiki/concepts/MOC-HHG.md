@@ -2,9 +2,10 @@
 title: "🗺️ HHG 知识地图"
 type: "concepts"
 created: "2026-06-19T00:00:00Z"
-updated: "2026-06-19T00:00:00Z"
+updated: "2026-06-23T02:42:18Z"
 tags: ["MOC", "HHG", "索引", "#type/concept", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature"]
-related: []
+related: ["COLTRIMS", "Corkum", "FROG", "Ghimire-Reis", "Krausz", "LHuillier", "Lewenstein模型", "MOC-NSFC课题", "MOC-deepxiv论文库", "RABBITT", "TDSE求解器", "VMI", "hhg-comprehensive-report", "hhg-methods-report", "hhg-principles-report", "hhg-systems-report", "hhg-teams-report", "hhg-technology-report", "三步模型", "北大HHG团队", "协方差映射", "固体高次谐波", "德鲁德模型", "截止定律", "拓扑绝缘体", "水窗口", "液体高次谐波", "相位匹配", "瞬态吸收光谱", "阿秒条纹相机", "高次谐波产生"]
+source_raw: ""
 growth_stage: "mature"
 confidence: 1.0
 ---
@@ -65,3 +66,39 @@ confidence: 1.0
 
 - 见 [[MOC-deepxiv论文库]] — 61 篇 arXiv 论文元数据
 - 见 [[MOC-NSFC课题]] — NSFC 强场超快课题相关
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[COLTRIMS]]
+- [[Corkum]]
+- [[FROG]]
+- [[Ghimire-Reis]]
+- [[Krausz]]
+- [[LHuillier]]
+- [[Lewenstein模型]]
+- [[MOC-NSFC课题]]
+- [[MOC-deepxiv论文库]]
+- [[RABBITT]]
+- [[TDSE求解器]]
+- [[VMI]]
+- [[hhg-comprehensive-report]]
+- [[hhg-methods-report]]
+- [[hhg-principles-report]]
+- [[hhg-systems-report]]
+- [[hhg-teams-report]]
+- [[hhg-technology-report]]
+- [[三步模型]]
+- [[北大HHG团队]]
+- [[协方差映射]]
+- [[固体高次谐波]]
+- [[德鲁德模型]]
+- [[截止定律]]
+- [[拓扑绝缘体]]
+- [[水窗口]]
+- [[液体高次谐波]]
+- [[相位匹配]]
+- [[瞬态吸收光谱]]
+- [[阿秒条纹相机]]
+- [[高次谐波产生]]
+<!-- /linsai-wikilinks -->

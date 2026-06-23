@@ -2,9 +2,10 @@
 title: "HHG 光谱学原理与理论模型"
 type: "papers"
 created: "2026-05-19T00:00:00Z"
-updated: "2026-06-19T00:00:00Z"
+updated: "2026-06-23T02:42:19Z"
 tags: ["HHG", "综述", "理论", "#type/report", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/mature"]
-related: ["三步模型", "截止定律", "Lewenstein模型", "相位匹配"]
+related: ["Corkum", "Lewenstein模型", "RABBITT", "三步模型", "截止定律", "相位匹配", "高次谐波产生"]
+source_raw: ""
 growth_stage: "mature"
 confidence: 0.9
 ---
@@ -145,3 +146,15 @@ $$E_{\text{cutoff}} \approx E_g + 2U_p$$
 ---
 
 *本报告由 LinSai-CoPilot 基于 deepxiv 真实文献生成于 2026-06-17*
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[Corkum]]
+- [[Lewenstein模型]]
+- [[RABBITT]]
+- [[三步模型]]
+- [[截止定律]]
+- [[相位匹配]]
+- [[高次谐波产生]]
+<!-- /linsai-wikilinks -->

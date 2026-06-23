@@ -2,12 +2,13 @@
 title: "🗺️ deepxiv 论文库"
 type: "projects"
 created: "2026-06-19T00:00:00Z"
-updated: "2026-06-19T00:00:00Z"
+updated: "2026-06-23T02:42:18Z"
 tags: ["MOC", "论文库", "索引", "#type/MOC", "#status/mature"]
-related: ["高次谐波产生"]
-project: ["deepxiv-论文库"]
+related: ["FROG", "MOC-HHG", "MOC-NSFC课题", "RABBITT", "三步模型", "高次谐波产生"]
+source_raw: ""
 growth_stage: "mature"
 confidence: 1.0
+project: ["deepxiv-论文库"]
 ---
 
 # 🗺️ deepxiv 论文库索引
@@ -47,3 +48,14 @@ confidence: 1.0
 3. 概念/方法笔记进入 wiki/concepts/ wiki/methods/（讨论后提炼）
 
 > **注意**：感兴趣（👍）不等于归档。归档发生在讨论完成之后。
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[FROG]]
+- [[MOC-HHG]]
+- [[MOC-NSFC课题]]
+- [[RABBITT]]
+- [[三步模型]]
+- [[高次谐波产生]]
+<!-- /linsai-wikilinks -->

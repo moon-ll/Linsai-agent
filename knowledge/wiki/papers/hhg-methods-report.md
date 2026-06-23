@@ -1,11 +1,14 @@
 ---
 title: "HHG 光谱学研究进展调研报告——方法维度"
-date: 2026-05-15
 type: "papers"
+created: "2026-06-23T02:42:19Z"
+updated: "2026-06-23T02:42:19Z"
 tags: ["HHG", "综述", "方法", "表征", "#type/report", "#topic/HHG", "#status/mature", "#status/mature"]
-related: ["RABBITT", "FROG", "TDSE求解器", "瞬态吸收光谱", "VMI"]
+related: ["COLTRIMS", "Corkum", "FROG", "Krausz", "RABBITT", "TDSE求解器", "VMI", "三步模型", "协方差映射", "截止定律", "拓扑绝缘体", "相位匹配", "瞬态吸收光谱", "高次谐波产生"]
+source_raw: ""
 growth_stage: "mature"
 confidence: 0.9
+date: "2026-05-15"
 ---
 
 # HHG 光谱学研究进展调研报告 —— 方法维度
@@ -725,3 +728,22 @@ Lewenstein 模型成功解释了 HHG 的平台结构、截止定律、空间对�
 ---
 
 *本报告基于 LinSai-CoPilot 于 2026-05-15 综合领域文献整理，涵盖 2000-2024 年间 HHG 光谱学方法学的重要进展，并新增 2026 年最新突破。*
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[COLTRIMS]]
+- [[Corkum]]
+- [[FROG]]
+- [[Krausz]]
+- [[RABBITT]]
+- [[TDSE求解器]]
+- [[VMI]]
+- [[三步模型]]
+- [[协方差映射]]
+- [[截止定律]]
+- [[拓扑绝缘体]]
+- [[相位匹配]]
+- [[瞬态吸收光谱]]
+- [[高次谐波产生]]
+<!-- /linsai-wikilinks -->

@@ -2,9 +2,10 @@
 title: "HHG 光谱学综合评述与未来展望"
 type: "papers"
 created: "2026-05-19T00:00:00Z"
-updated: "2026-06-19T00:00:00Z"
+updated: "2026-06-23T02:42:19Z"
 tags: ["HHG", "综述", "总论", "#type/report", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/mature"]
-related: ["高次谐波产生", "三步模型", "水窗口"]
+related: ["RABBITT", "三步模型", "水窗口", "高次谐波产生"]
+source_raw: ""
 growth_stage: "mature"
 confidence: 0.9
 ---
@@ -221,3 +222,12 @@ confidence: 0.9
 *本报告基于 deepxiv 真实文献于 2026-06-17 自动生成*
 
 *报告生成器：scripts/wiki_regenerator/report_writer.py*
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[RABBITT]]
+- [[三步模型]]
+- [[水窗口]]
+- [[高次谐波产生]]
+<!-- /linsai-wikilinks -->

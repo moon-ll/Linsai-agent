@@ -2,13 +2,14 @@
 title: "每日简报 research_briefing_2026-06-08"
 type: "papers"
 created: "research_briefing_2026-06-08T00:00:00Z"
-updated: "2026-06-19T01:43:07Z"
+updated: "2026-06-23T02:42:19Z"
 tags: ["每日简报", "HHG", "文献调研"]
-related: ["高次谐波产生"]
-project: ["deepxiv-论文库"]
-source: "hermes-每日简报"
+related: ["RABBITT", "固体高次谐波", "相位匹配", "高次谐波产生"]
+source_raw: ""
 growth_stage: "mature"
 confidence: 0.85
+project: ["deepxiv-论文库"]
+source: "hermes-每日简报"
 ---
 
 # 林赛研究简报
@@ -122,3 +123,12 @@ confidence: 0.85
 
 *本简报由林赛研究简报深度分析机器人自动生成*
 *生成时间：2026-06-08*
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[RABBITT]]
+- [[固体高次谐波]]
+- [[相位匹配]]
+- [[高次谐波产生]]
+<!-- /linsai-wikilinks -->

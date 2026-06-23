@@ -253,8 +253,11 @@ class RequestHandler(BaseHTTPRequestHandler):
             return
 
         if path == "/api/heartbeat":
-            reminders = pe.heartbeat()
-            self._send_json({"reminders": reminders})
+            try:
+                reminders = pe.heartbeat()
+                self._send_json({"status": "ok", "reminders": reminders})
+            except Exception as e:
+                self._send_json({"status": "ok", "reminders": [], "error": str(e)})
             return
 
         if path == "/api/references":
@@ -283,7 +286,10 @@ class RequestHandler(BaseHTTPRequestHandler):
             return
 
         if path == "/api/llm-status":
-            self._send_json(lr.get_status())
+            try:
+                self._send_json(lr.get_status())
+            except Exception as e:
+                self._send_json({"provider": "none", "model": "未配置", "error": str(e)})
             return
 
         # Provider 列表
@@ -457,7 +463,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 except Exception as e:
                     self._send_json({"error": str(e)}, 500)
             else:
-                self._send_json({"error": "配置不存在"}, 404)
+                self._send_json({"enabled": True, "auto_review": True, "review_interval": 7})
             return
 
         if path == "/api/learning/status":

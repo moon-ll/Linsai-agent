@@ -2,9 +2,10 @@
 title: "固体与液体 HHG 体系进展"
 type: "papers"
 created: "2026-05-19T00:00:00Z"
-updated: "2026-06-19T00:00:00Z"
+updated: "2026-06-23T02:42:19Z"
 tags: ["HHG", "综述", "材料体系", "#type/report", "#topic/HHG", "#status/mature"]
-related: ["固体高次谐波", "液体高次谐波", "德鲁德模型"]
+related: ["固体高次谐波", "德鲁德模型", "拓扑绝缘体", "液体高次谐波"]
+source_raw: ""
 growth_stage: "mature"
 confidence: 0.9
 ---
@@ -131,3 +132,12 @@ Ghimire et al.（2011）在 ZnO 晶体中首次观测到固体 HHG，打开了 H
 
 ---
 *本报告基于 deepxiv 真实文献于 2026-06-17 自动生成*
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[固体高次谐波]]
+- [[德鲁德模型]]
+- [[拓扑绝缘体]]
+- [[液体高次谐波]]
+<!-- /linsai-wikilinks -->
