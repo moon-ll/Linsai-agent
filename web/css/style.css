@@ -38,6 +38,12 @@
   --radius-lg: 16px;
   --font-mono: "SF Mono", "Fira Code", "Consolas", monospace;
   --transition: 0.2s ease;
+  /* P3-4: 字号层级 type scale token */
+  --text-xs: 0.7rem;
+  --text-sm: 0.78rem;
+  --text-base: 0.85rem;
+  --text-md: 0.95rem;
+  --text-lg: 1.1rem;
 }
 
 /* ---- 深色主题 ---- */
@@ -217,6 +223,7 @@ body {
 .kb-tree-header {
   padding: 10px;
   border-bottom: 1px solid var(--border-color);
+  flex-shrink: 0; /* P1-6: 防止筛选条被挤压隐藏 */
 }
 
 /* v3.1: 知识库管理工具栏 */
@@ -643,6 +650,72 @@ body {
 .welcome-screen p {
   color: var(--text-secondary);
   margin-bottom: 32px;
+}
+
+/* P2-4: 首屏引导卡 */
+.welcome-guide {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 360px;
+  width: 100%;
+}
+.guide-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: border-color 0.15s;
+}
+.guide-card:hover {
+  border-color: var(--accent-color);
+}
+.guide-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+.guide-text strong {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 2px;
+}
+.guide-text p {
+  font-size: 0.8rem;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+/* P2-3: @知识库注入 chip 列表 */
+.kb-context-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+.kb-context-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 8px;
+  background: var(--accent-light);
+  color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  cursor: default;
+}
+.kb-context-chip .chip-remove {
+  cursor: pointer;
+  opacity: 0.6;
+  font-size: 0.8rem;
+}
+.kb-context-chip .chip-remove:hover {
+  opacity: 1;
 }
 
 .messages {
@@ -1246,9 +1319,65 @@ body {
 }
 
 /* ---- 响应式（移动端） ---- */
+/* P1-3: 移动端底部 tab 切换栏 */
+.mobile-tab-bar {
+  display: none;
+}
+
 @media (max-width: 900px) {
-  .sidebar.right { display: none; }
-  .sidebar.history { width: 100%; position: fixed; inset: 48px 0 28px; z-index: 60; }
+  /* P1-3: 底部 tab 栏 */
+  .mobile-tab-bar {
+    display: flex;
+    position: fixed;
+    bottom: 28px;
+    left: 0;
+    right: 0;
+    height: 44px;
+    background: var(--bg-secondary);
+    border-top: 1px solid var(--border-color);
+    z-index: 100;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .mobile-tab {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    background: transparent;
+    color: var(--text-tertiary);
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: color 0.15s;
+    text-align: center;
+  }
+  .mobile-tab.active {
+    color: var(--accent-color);
+    font-weight: 600;
+    border-top: 2px solid var(--accent-color);
+  }
+  /* P1-3: 移动端单栏切换 */
+  .kb-main { display: flex; }
+  .chat-sidebar { display: none !important; }
+  .kb-main.mobile-hidden { display: none; }
+  .chat-sidebar.mobile-visible { display: flex !important; width: 100% !important; min-width: 0 !important; }
+
+  /* P1-1: 右侧栏改为可滑出抽屉而非完全隐藏 */
+  .sidebar.right {
+    position: fixed;
+    right: 0;
+    top: 48px;
+    bottom: 72px;
+    z-index: 50;
+    width: 280px;
+    transform: translateX(100%);
+    box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+  }
+  .sidebar.right.open {
+    transform: translateX(0);
+  }
+  .sidebar.history { width: 100%; position: fixed; inset: 48px 0 72px; z-index: 60; }
+  /* 移动端底部留出 tab 栏空间 */
+  .statusbar { margin-bottom: 44px; }
 }
 
 @media (max-width: 680px) {
@@ -1795,25 +1924,54 @@ body {
 /* ---- 侧边栏工具栏 ---- */
 .toolbar {
   display: flex;
-  justify-content: space-around;
   align-items: center;
-  padding: 8px 12px;
+  padding: 6px 8px;
   border-top: 1px solid var(--border-color);
   background: var(--surface);
   gap: 4px;
+  flex-wrap: wrap;
+}
+
+/* P3-2: 工具栏分组 */
+.toolbar-group {
+  display: flex;
+  gap: 2px;
+  flex: 1;
+  justify-content: center;
+}
+.toolbar-divider {
+  width: 1px;
+  height: 24px;
+  background: var(--border-color);
+  flex-shrink: 0;
 }
 
 .toolbar-btn {
-  flex: 1;
-  padding: 6px 4px;
+  padding: 4px 2px;
   background: transparent;
   border: 1px solid transparent;
   border-radius: 8px;
-  font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.15s;
   text-align: center;
   line-height: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.toolbar-icon {
+  font-size: 1.05rem;
+}
+.toolbar-label {
+  font-size: var(--text-xs);
+  color: var(--text-tertiary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 .toolbar-btn:hover {
@@ -1824,6 +1982,29 @@ body {
 
 .toolbar-btn:active {
   transform: translateY(0);
+}
+
+/* P2-7: 工具栏按钮 active 态 */
+.toolbar-btn.active {
+  background: var(--accent-light);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+}
+
+/* P2-7: 统一 loading 按钮样式 */
+.btn-loading {
+  opacity: 0.7;
+  pointer-events: none;
+  position: relative;
+}
+.btn-loading::after {
+  content: "◐";
+  margin-left: 4px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
 /* ---- 图标 Tooltip（hover 立即显示功能名称）---- */
@@ -2021,6 +2202,12 @@ body {
 [data-theme="dark"] .kb-badge-growing { background: #0d2b3e; color: #64b5f6; }
 [data-theme="dark"] .kb-badge-mature { background: #2a1b3d; color: #ba68c8; }
 [data-theme="dark"] .kb-badge-raw { background: #3e2723; color: #ffab91; }
+
+/* P3-1: task-priority 深色模式适配 */
+[data-theme="dark"] .task-priority-urgent { background: #4a1e1e; color: #f87171; }
+[data-theme="dark"] .task-priority-high   { background: #4a3a1e; color: #fbbf24; }
+[data-theme="dark"] .task-priority-medium { background: #1e3a5f; color: #60a5fa; }
+[data-theme="dark"] .task-priority-low    { background: #2a2a3a; color: #9ca3af; }
 
 /* ── 技能管理器 ── */
 .skill-row {

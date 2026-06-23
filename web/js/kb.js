@@ -54,15 +54,15 @@ async function openWikiDetail(wikiPath) {
       .replace(/\*(.*?)\*/g, '<em>$1</em>')
       .replace(/`(.*?)`/g, '<code>$1</code>')
       .replace(/\[\[([^\]]+)\]\]/g, (m, name) => {
-        const safe = name.replace(/'/g, "\\'").replace(/"/g, '&quot;');
-        return `<a class="kb-wikilink" onclick="openWikiByTitle('${safe}')" title="点击跳转">${escapeHtml(name)}</a>`;
+        // P1-8: 使用 data 属性替代 onclick 拼接
+        return `<a class="kb-wikilink" data-wiki-title="${escapeHtml(name)}" title="点击跳转">${escapeHtml(name)}</a>`;
       });
 
     renderedBody = renderedBody.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
 
     const relatedHtml = (fm.related || []).map(r => {
-      const safe = String(r).replace(/'/g, "\\'").replace(/"/g, '&quot;');
-      return `<span class="kb-related-chip" onclick="openWikiByTitle('${safe}')" title="点击跳转">${escapeHtml(r)}</span>`;
+      // P1-8: 使用 data 属性替代 onclick 拼接
+      return `<span class="kb-related-chip" data-wiki-title="${escapeHtml(String(r))}" title="点击跳转">${escapeHtml(r)}</span>`;
     }).join(' ') || '-';
 
     bodyEl.innerHTML = `
@@ -121,8 +121,8 @@ async function loadBacklinks(title) {
       region.innerHTML = `<div style="margin:8px 0;padding:6px 10px;background:var(--bg-tertiary);border-radius:6px;">
         <span style="font-size:0.78rem;color:var(--text-secondary);">↩️ 被以下笔记关联：</span>
         ${related.map(r => {
-          const safe = String(r).replace(/'/g, "\\'").replace(/"/g, '&quot;');
-          return `<span class="kb-related-chip" onclick="openWikiByTitle('${safe}')" title="点击跳转">${escapeHtml(r)}</span>`;
+          // P1-8: 使用 data 属性替代 onclick 拼接
+          return `<span class="kb-related-chip" data-wiki-title="${escapeHtml(String(r))}" title="点击跳转">${escapeHtml(r)}</span>`;
         }).join(' ')}
       </div>`;
     }
@@ -271,6 +271,28 @@ function updateKbContextBadge() {
   }
   badge.textContent = window._kbSelectedFiles.length;
   badge.title = window._kbSelectedFiles.map(f => f.title).join('\n');
+
+  // P2-3: 渲染 chip 列表显示已注入文件
+  const chipsContainer = document.getElementById('kb-context-chips');
+  if (chipsContainer) {
+    if (window._kbSelectedFiles.length) {
+      chipsContainer.style.display = 'flex';
+      chipsContainer.innerHTML = window._kbSelectedFiles.map((f, i) => {
+        return `<span class="kb-context-chip">📎 ${escapeHtml(f.title)}<span class="chip-remove" data-idx="${i}">✕</span></span>`;
+      }).join('');
+      // 绑定移除事件
+      chipsContainer.querySelectorAll('.chip-remove').forEach(btn => {
+        btn.onclick = () => {
+          const idx = parseInt(btn.dataset.idx);
+          window._kbSelectedFiles.splice(idx, 1);
+          updateKbContextBadge();
+        };
+      });
+    } else {
+      chipsContainer.style.display = 'none';
+      chipsContainer.innerHTML = '';
+    }
+  }
 }
 
 async function injectKbContext() {
@@ -301,19 +323,30 @@ async function ensureKbFileCache() {
 async function initKbMain() {
   await renderKbTree();
 
-  // 事件委托：确保 <details>/<summary> 点击切换始终生效
+  // 事件委托：确保 <details>/<summary> 点击切换始终生效 + P1-8: data 属性事件委托
   document.getElementById('kb-tree-content')?.addEventListener('click', (e) => {
-    const summary = e.target.closest('summary');
-    if (!summary) return;
-    const details = summary.parentElement;
-    if (details && details.tagName === 'DETAILS') {
+    // P2-1: 交叉链接 → 打开项目面板
+    const projectsLink = e.target.closest('[data-action="open-projects"]');
+    if (projectsLink) {
       e.preventDefault();
-      if (details.hasAttribute('open')) {
-        details.removeAttribute('open');
-      } else {
-        details.setAttribute('open', '');
-      }
+      if (typeof openProjectsManager === 'function') openProjectsManager();
+      return;
     }
+    // P1-8: 处理 data-wiki-path / data-raw-path 点击（替代 onclick 拼接）
+    const wikiItem = e.target.closest('[data-wiki-path]');
+    if (wikiItem) {
+      e.preventDefault();
+      openWikiDetail(wikiItem.dataset.wikiPath);
+      return;
+    }
+    const rawItem = e.target.closest('[data-raw-path]');
+    if (rawItem) {
+      e.preventDefault();
+      openRawDetail(rawItem.dataset.rawPath);
+      return;
+    }
+    // P3-3: details/summary 使用原生切换，不再 JS 接管
+    // （CSS 已隐藏原生 marker 并用 ::before 替代，原生 toggle 自动更新 [open] 属性）
   });
 
   let treeSearchTimer;
@@ -322,6 +355,22 @@ async function initKbMain() {
     const q = e.target.value.trim();
     if (!q) { renderKbTree(); return; }
     treeSearchTimer = setTimeout(() => searchKbToTree(q), 300);
+  });
+
+  // P1-8: 预览面板事件委托（wikilinks + related chips + backlinks）
+  document.getElementById('kb-preview-body')?.addEventListener('click', (e) => {
+    const link = e.target.closest('[data-wiki-title]');
+    if (link) {
+      e.preventDefault();
+      openWikiByTitle(link.dataset.wikiTitle);
+    }
+  });
+  document.getElementById('kb-backlinks-region')?.addEventListener('click', (e) => {
+    const link = e.target.closest('[data-wiki-title]');
+    if (link) {
+      e.preventDefault();
+      openWikiByTitle(link.dataset.wikiTitle);
+    }
   });
 
   document.getElementById('kb-sync-btn')?.addEventListener('click', handleKbSync);
@@ -378,7 +427,8 @@ async function handleKbHealth() {
       `  📝 别名: ${alias.total_aliases || 0} 个，命中率 ${(alias.hit_rate * 100).toFixed(0)}%\n` +
       `  🌱 待蒸馏: ${h.pending_distill || 0}  晋升候选: ${h.growth_candidates || 0}\n` +
       `  📈 本周新增: ${h.week_new || 0}`;
-    alert(msg);
+    // P2-6: 用 showModal 替代 alert
+    showModal(`<div style="white-space:pre-wrap;font-size:0.85rem;line-height:1.8;">${msg}</div>`);
   } catch (e) {
     showToast('✗ 健康检查失败: ' + (e.message || e), 'error');
   } finally {
@@ -481,9 +531,10 @@ function renderFilteredTree(pages) {
   }
   const html = pages.map(p => {
     const stageIcon = STAGE_ICONS[p.growth_stage] || '○';
-    return `<div class="kb-tree-item" data-path="${p.path}" onclick="openWikiDetail('${p.path}')" style="padding:4px 8px;cursor:pointer;border-radius:4px;font-size:0.82rem;">
-      ${stageIcon} ${p.title}
-      <span style="color:var(--text-tertiary);font-size:0.7rem;">${p.type}</span>
+    // P1-8: 使用 data 属性替代 onclick 字符串拼接
+    return `<div class="kb-tree-item" data-wiki-path="${escapeHtml(p.path)}" style="padding:4px 8px;cursor:pointer;border-radius:4px;font-size:0.82rem;">
+      ${stageIcon} ${escapeHtml(p.title)}
+      <span style="color:var(--text-tertiary);font-size:0.7rem;">${escapeHtml(p.type || '')}</span>
     </div>`;
   }).join('');
   container.innerHTML = `<div style="padding:4px 8px;font-size:0.75rem;color:var(--text-tertiary);">筛选结果 (${pages.length})</div>` + html;
@@ -670,8 +721,8 @@ async function renderKbTree() {
     if (mocs.length) {
       html += `<div class="kb-tree-group"><details open><summary>🗺️ 知识地图</summary>`;
       mocs.forEach(p => {
-        const safePath = (p.path || '').replace(/'/g, "\\'");
-        html += `<div class="kb-tree-item is-moc" onclick="openWikiDetail('${safePath}')">${escapeHtml(p.title.replace('🗺️ ',''))}</div>`;
+        // P1-8: 使用 data 属性替代 onclick 字符串拼接
+        html += `<div class="kb-tree-item is-moc" data-wiki-path="${escapeHtml(p.path)}">${escapeHtml(p.title.replace('🗺️ ',''))}</div>`;
       });
       html += `</details></div>`;
     }
@@ -684,9 +735,8 @@ async function renderKbTree() {
       if (!items.length) continue;
       html += `<div class="kb-tree-group"><details><summary>${t.label} (${items.length})</summary>`;
       items.forEach(p => {
-        const safePath = (p.path || '').replace(/'/g, "\\'");
         const stageIcon = STAGE_ICONS[p.growth_stage] || '○';
-        html += `<div class="kb-tree-item" onclick="openWikiDetail('${safePath}')">${stageIcon} ${escapeHtml(p.title)}</div>`;
+        html += `<div class="kb-tree-item" data-wiki-path="${escapeHtml(p.path)}">${stageIcon} ${escapeHtml(p.title)}</div>`;
       });
       html += `</details></div>`;
     }
@@ -697,10 +747,11 @@ async function renderKbTree() {
       if (rawFiles.length) {
         html += `<div class="kb-tree-group"><details><summary>📄 论文库 (${rawFiles.length})</summary>`;
         rawFiles.slice(0, 30).forEach(f => {
-          const safePath = (f.path || '').replace(/'/g, "\\'");
-          html += `<div class="kb-tree-item" onclick="openRawDetail('${safePath}')" title="${escapeHtml(f.name)}">${escapeHtml(f.name.replace(/\.md$/, '').slice(0, 28))}</div>`;
+          html += `<div class="kb-tree-item" data-raw-path="${escapeHtml(f.path)}" title="${escapeHtml(f.name)}">${escapeHtml(f.name.replace(/\.md$/, '').slice(0, 28))}</div>`;
         });
         if (rawFiles.length > 30) html += `<div class="kb-tree-item" style="color:var(--text-tertiary);">... 共 ${rawFiles.length} 篇</div>`;
+        // P2-1: 交叉链接提示
+        html += `<div class="kb-tree-item" data-action="open-projects" style="color:var(--accent-color);font-size:0.72rem;border-top:1px dashed var(--border-color);margin-top:4px;padding-top:4px;">📂 待决策文献 → 项目面板</div>`;
         html += `</details></div>`;
       }
     } catch (e) {}
@@ -724,9 +775,10 @@ async function searchKbToTree(query) {
     }
     let html = `<div style="font-size:0.78rem;color:var(--text-secondary);padding:4px 8px;">🔍 ${results.length} 条结果</div>`;
     results.forEach(r => {
-      const safeDoc = (r.doc || r.path || '').replace(/'/g, "\\'");
-      const onclick = r.source === 'wiki' ? `openWikiDetail('${safeDoc}')` : `openRawDetail('${safeDoc}')`;
-      html += `<div class="kb-tree-item" onclick="${onclick}" title="${escapeHtml(r.text||'').slice(0,60)}">${r.source === 'wiki' ? '📝' : '📄'} ${escapeHtml(r.title || r.doc)}</div>`;
+      const docPath = r.doc || r.path || '';
+      // P1-8: 使用 data 属性替代 onclick 字符串拼接
+      const attr = r.source === 'wiki' ? `data-wiki-path="${escapeHtml(docPath)}"` : `data-raw-path="${escapeHtml(docPath)}"`;
+      html += `<div class="kb-tree-item" ${attr} title="${escapeHtml(r.text||'').slice(0,60)}">${r.source === 'wiki' ? '📝' : '📄'} ${escapeHtml(r.title || r.doc)}</div>`;
     });
     container.innerHTML = html;
   } catch (e) {

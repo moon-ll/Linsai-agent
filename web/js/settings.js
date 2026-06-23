@@ -3,31 +3,37 @@
  */
 
 // ============================================
-// 心跳检测 & 状态更新
+// 心跳检测 & 状态更新 (P0-6: 用 status-text 替代不存在的 status-dot)
 // ============================================
+let _heartbeatTimer = null;
+
 async function checkHeartbeat() {
   try {
     const data = await apiGet('/api/heartbeat');
-    const dot = document.getElementById('status-dot');
-    if (dot) {
-      dot.className = 'status-dot online';
-    }
+    updateStatus('就绪');
+    // 设置 30 秒后再次检测
+    if (_heartbeatTimer) clearTimeout(_heartbeatTimer);
+    _heartbeatTimer = setTimeout(checkHeartbeat, 30000);
   } catch (e) {
-    const dot = document.getElementById('status-dot');
-    if (dot) dot.className = 'status-dot offline';
+    updateStatus('⚠️ 连接异常');
+    if (_heartbeatTimer) clearTimeout(_heartbeatTimer);
+    _heartbeatTimer = setTimeout(checkHeartbeat, 60000);
   }
 }
 
+// P0-7: 补全所有模式映射
 function updateModeBadge(mode) {
   const badge = document.getElementById('mode-badge');
   if (!badge) return;
   const labels = {
-    'co-working': '协作',
+    'co-working': '并肩工作',
+    'deep-talk': '深度对话',
+    'quick-check': '快速验证',
     'autonomous': '自主',
     'review': '审阅',
   };
   badge.textContent = labels[mode] || mode;
-  badge.className = 'mode-badge ' + mode;
+  badge.className = 'mode-badge ' + (mode || 'co-working');
 }
 
 function updateStatus(text) {
@@ -36,21 +42,34 @@ function updateStatus(text) {
 }
 
 // ============================================
-// LLM 状态管理
+// LLM 状态管理 (P0-4: 同时更新顶栏 provider-badge)
 // ============================================
 async function loadLLMStatus() {
   try {
     const data = await apiGet('/api/llm-status');
-    const providerEl = document.getElementById('llm-provider');
-    const modelEl = document.getElementById('llm-model');
     const activeName = data.active_provider || data.provider || 'unknown';
     const providers = data.providers || [];
     const active = providers.find(p => p.name === activeName);
     const model = active?.model || data.model || '';
-    if (providerEl) providerEl.textContent = activeName;
-    if (modelEl) modelEl.textContent = model || 'default';
+
+    // 更新设置面板
+    const llmStatusEl = document.getElementById('llm-status');
+    if (llmStatusEl) {
+      llmStatusEl.innerHTML = `Provider: <strong>${escapeHtml(activeName)}</strong>${model ? ` · Model: ${escapeHtml(model)}` : ''}`;
+    }
+
+    // P0-4: 更新顶栏 provider-badge
+    const badge = document.getElementById('provider-badge');
+    if (badge) {
+      badge.textContent = activeName;
+      badge.title = `当前模型: ${model || activeName}`;
+    }
   } catch (e) {
     console.error('加载LLM状态失败:', e);
+    const llmStatusEl = document.getElementById('llm-status');
+    if (llmStatusEl) llmStatusEl.textContent = '⚠️ LLM 未配置';
+    const badge = document.getElementById('provider-badge');
+    if (badge) badge.textContent = '未配置';
   }
 }
 
@@ -84,87 +103,86 @@ function showHistoryHint(count) {
 }
 
 // ============================================
-// 用量统计
+// 用量统计 (P0-5: 统一 API 契约，更新 usage-status)
 // ============================================
 async function loadUsage() {
   try {
     const data = await apiGet('/api/usage');
-    const el = document.getElementById('usage-info');
+    const el = document.getElementById('usage-status');
     if (!el) return;
 
-    const today = data.today || {};
+    // 兼容两种 API 返回结构
+    const today = data.today || data.daily || {};
     const total = data.total || {};
+    const todayTokens = today.tokens || today.total_tokens || 0;
+    const todayCost = today.cost || 0;
+    const todayCalls = today.calls || today.messages || 0;
+    const totalTokens = total.tokens || 0;
+    const totalCost = total.cost || 0;
 
     el.innerHTML = `
-      <div class="usage-section">
-        <h4>今日</h4>
-        <div class="usage-stats">
-          <div class="usage-stat">
-            <span class="usage-label">消息</span>
-            <span class="usage-value">${today.messages || 0}</span>
-          </div>
-          <div class="usage-stat">
-            <span class="usage-label">Token</span>
-            <span class="usage-value">${(today.tokens || 0).toLocaleString()}</span>
-          </div>
-          <div class="usage-stat">
-            <span class="usage-label">费用</span>
-            <span class="usage-value">¥${(today.cost || 0).toFixed(2)}</span>
-          </div>
-        </div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+        <span>今日: <strong>${todayCalls}</strong> 次 · <strong>${todayTokens.toLocaleString()}</strong> tokens · ¥<strong>${todayCost.toFixed(2)}</strong></span>
       </div>
-      <div class="usage-section">
-        <h4>累计</h4>
-        <div class="usage-stats">
-          <div class="usage-stat">
-            <span class="usage-label">消息</span>
-            <span class="usage-value">${total.messages || 0}</span>
-          </div>
-          <div class="usage-stat">
-            <span class="usage-label">Token</span>
-            <span class="usage-value">${(total.tokens || 0).toLocaleString()}</span>
-          </div>
-          <div class="usage-stat">
-            <span class="usage-label">费用</span>
-            <span class="usage-value">¥${(total.cost || 0).toFixed(2)}</span>
-          </div>
-        </div>
+      <div style="font-size:0.78rem;color:var(--text-tertiary);margin-top:4px;">
+        累计: ${totalTokens.toLocaleString()} tokens · ¥${totalCost.toFixed(2)}
       </div>
     `;
   } catch (e) {
     console.error('加载用量失败:', e);
+    const el = document.getElementById('usage-status');
+    if (el) el.textContent = '暂无用量数据';
   }
 }
 
 // ============================================
-// 学习配置
+// 学习配置 (P0-2: 对接 HTML 现有 id)
 // ============================================
 async function loadLearningConfig() {
   try {
     const data = await apiGet('/api/learning/config');
-    const cb = document.getElementById('learning-enabled');
-    if (cb) cb.checked = data.enabled !== false;
-    const autoCb = document.getElementById('learning-auto-review');
-    if (autoCb) autoCb.checked = data.auto_review !== false;
-    const intervalEl = document.getElementById('learning-interval');
-    if (intervalEl) intervalEl.value = data.review_interval || 7;
+    const autoCb = document.getElementById('learning-auto-enabled');
+    if (autoCb) autoCb.checked = data.enabled !== false;
+    const strategyEl = document.getElementById('learning-strategy');
+    if (strategyEl) strategyEl.value = data.strategy || 'balanced';
+    const arxivCb = document.getElementById('learning-source-arxiv');
+    if (arxivCb) arxivCb.checked = (data.sources || []).includes('arxiv');
+    const webCb = document.getElementById('learning-source-web');
+    if (webCb) webCb.checked = (data.sources || []).includes('web');
+    const rawCb = document.getElementById('learning-source-raw');
+    if (rawCb) rawCb.checked = (data.sources || []).includes('raw');
+    const quotaEl = document.getElementById('learning-daily-quota');
+    if (quotaEl) quotaEl.value = data.daily_quota || 1;
+    const costEl = document.getElementById('learning-cost-limit');
+    if (costEl) costEl.value = data.cost_limit || 0.5;
   } catch (e) {
     console.error('加载学习配置失败:', e);
   }
 }
 
 async function saveLearningConfig() {
+  const sources = [];
+  if (document.getElementById('learning-source-arxiv')?.checked) sources.push('arxiv');
+  if (document.getElementById('learning-source-web')?.checked) sources.push('web');
+  if (document.getElementById('learning-source-raw')?.checked) sources.push('raw');
+
   const config = {
-    enabled: document.getElementById('learning-enabled')?.checked !== false,
-    auto_review: document.getElementById('learning-auto-review')?.checked !== false,
-    review_interval: parseInt(document.getElementById('learning-interval')?.value || '7'),
+    enabled: document.getElementById('learning-auto-enabled')?.checked !== false,
+    strategy: document.getElementById('learning-strategy')?.value || 'balanced',
+    sources,
+    daily_quota: parseInt(document.getElementById('learning-daily-quota')?.value || '1'),
+    cost_limit: parseFloat(document.getElementById('learning-cost-limit')?.value || '0.5'),
   };
 
+  const statusEl = document.getElementById('learning-config-status');
   try {
+    if (statusEl) statusEl.textContent = '保存中…';
     await apiPost('/api/learning/config', config);
     showToast('学习配置已保存');
+    if (statusEl) statusEl.textContent = '✓ 已保存';
   } catch (e) {
     console.error('保存学习配置失败:', e);
     showToast('保存失败', 'error');
+    if (statusEl) statusEl.textContent = '✗ 保存失败';
   }
 }

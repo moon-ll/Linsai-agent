@@ -190,7 +190,7 @@ function showDiscussBar(pid, title) {
     bar = document.createElement('div');
     bar.id = 'discuss-bar';
     bar.style.cssText = 'position:sticky;top:0;background:var(--bg-secondary);border:1px solid var(--accent-color);border-radius:6px;padding:6px 10px;margin-bottom:6px;display:flex;align-items:center;gap:8px;font-size:0.82rem;z-index:10;';
-    document.querySelector('.chat-messages')?.prepend(bar);
+    document.querySelector('#messages')?.prepend(bar);
   }
   bar.innerHTML = `<span style="color:var(--accent-color);">💬 正在讨论：${escapeHtml(title.slice(0,40))}</span>
     <button id="discuss-summarize-btn" style="margin-left:auto;padding:4px 12px;background:var(--accent-color);color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.78rem;">📝 总结讨论</button>
@@ -259,6 +259,7 @@ async function renderPapersCards(container) {
     <strong style="color:var(--warning-color)">${byStatus.viewed||0}</strong> 已看未讨论 ·
     <strong style="color:var(--success-color)">${byStatus.archived||0}</strong> 已归档
     <span style="margin-left:8px;color:var(--text-tertiary);">(共 ${pool.total} 篇，累积保留)</span>
+    <span style="margin-left:8px;color:var(--text-tertiary);">| 📚 沉淀后可在知识库浏览</span>
   </div>`;
 
   // 按状态分组
@@ -281,7 +282,24 @@ async function renderPapersCards(container) {
 
     for (const p of groupPapers) {
       const scorePct = Math.round((p.score || 0) * 100);
+      // P2-2: 文献生命周期进度条
+      const lifecycleSteps = ['unseen', 'viewed', 'archived'];
+      const currentStep = lifecycleSteps.indexOf(g.status);
+      const lifecycleHtml = lifecycleSteps.map((step, i) => {
+        const isActive = i <= currentStep;
+        const colors = { unseen: 'var(--info-color)', viewed: 'var(--warning-color)', archived: 'var(--success-color)' };
+        return `<span style="flex:1;height:3px;border-radius:2px;background:${isActive ? colors[step] : 'var(--bg-tertiary)'};"></span>`;
+      }).join('<span style="width:2px;"></span>');
+      const lifecycleLabels = ['未看', '感兴趣', '已沉淀'];
+      const lifecycleLabelHtml = lifecycleLabels.map((label, i) => {
+        const isActive = i <= currentStep;
+        return `<span style="font-size:0.65rem;color:${isActive ? 'var(--text-secondary)' : 'var(--text-tertiary)'};">${label}</span>`;
+      }).join('<span style="width:2px;"></span>');
+
       html += `<div class="paper-card" id="card-${escapeHtml(p.arxiv_id)}" style="padding:10px;background:var(--bg-tertiary);border-radius:6px;border:1px solid var(--border-color);transition:opacity 0.3s;">`;
+      // P2-2: 生命周期进度条
+      html += `<div style="display:flex;align-items:center;gap:2px;margin-bottom:6px;">${lifecycleHtml}</div>`;
+      html += `<div style="display:flex;justify-content:space-between;margin-bottom:4px;">${lifecycleLabelHtml}</div>`;
       html += `<div style="font-size:0.85rem;font-weight:600;line-height:1.4;margin-bottom:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${escapeHtml(p.title)}</div>`;
       html += `<div style="font-size:0.72rem;color:var(--text-tertiary);margin-bottom:6px;">${escapeHtml(p.authors)} · ${escapeHtml(p.direction)} · ${scorePct}%</div>`;
       if (p.tldr) {

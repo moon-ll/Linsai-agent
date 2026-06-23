@@ -112,6 +112,29 @@ async function sendMessage(content) {
     let fullText = '';
     let streamDone = false;
 
+    // P1-7: 节流渲染，避免每个 token 都全量 re-render
+    let _renderPending = false;
+    let _lastRenderTime = 0;
+    const RENDER_INTERVAL_MS = 80; // 最小渲染间隔
+
+    function scheduleRender() {
+      const now = Date.now();
+      if (now - _lastRenderTime >= RENDER_INTERVAL_MS) {
+        _lastRenderTime = now;
+        bubble.innerHTML = renderMarkdown(fullText);
+        scrollToBottom();
+        _renderPending = false;
+      } else if (!_renderPending) {
+        _renderPending = true;
+        setTimeout(() => {
+          _lastRenderTime = Date.now();
+          bubble.innerHTML = renderMarkdown(fullText);
+          scrollToBottom();
+          _renderPending = false;
+        }, RENDER_INTERVAL_MS);
+      }
+    }
+
     streamTimeoutId = setTimeout(() => {
       if (!streamDone) {
         console.warn('[SSE] 流超时，强制结束');
@@ -141,8 +164,7 @@ async function sendMessage(content) {
           if (data.type === 'token') {
             const token = (typeof data.content === 'string') ? data.content : String(data.content || '');
             fullText += token;
-            bubble.innerHTML = renderMarkdown(fullText);
-            scrollToBottom();
+            scheduleRender(); // P1-7: 节流渲染
           } else if (data.type === 'tools') {
             const calls = data.calls || [];
             const toolNames = calls.map(c => c.name).join(', ');
@@ -425,8 +447,10 @@ async function deleteMessage(msgId) {
 }
 
 // ============================================
-// 聊天侧栏折叠
+// 聊天侧栏折叠 (P1-4: 折叠时显示未读徽标)
 // ============================================
+let _chatUnreadCount = 0;
+
 function initChatSidebar() {
   const sidebar = document.getElementById('chat-sidebar');
   if (!sidebar) return;
@@ -440,5 +464,37 @@ function initChatSidebar() {
   document.getElementById('chat-sidebar-toggle')?.addEventListener('click', () => {
     sidebar.classList.remove('collapsed');
     localStorage.setItem('chat-collapsed', 'false');
+    _chatUnreadCount = 0;
+    updateChatUnreadBadge();
   });
+
+  // 监听新消息（折叠状态下计数）
+  const messagesEl = document.getElementById('messages');
+  if (messagesEl) {
+    const observer = new MutationObserver(() => {
+      if (sidebar.classList.contains('collapsed')) {
+        _chatUnreadCount++;
+        updateChatUnreadBadge();
+      }
+    });
+    observer.observe(messagesEl, { childList: true });
+  }
+}
+
+function updateChatUnreadBadge() {
+  const toggle = document.getElementById('chat-sidebar-toggle');
+  if (!toggle) return;
+  let badge = toggle.querySelector('.unread-badge');
+  if (_chatUnreadCount > 0) {
+    if (!badge) {
+      badge = document.createElement('span');
+      badge.className = 'unread-badge';
+      badge.style.cssText = 'position:absolute;top:-4px;right:-4px;background:var(--accent-color);color:#fff;border-radius:10px;font-size:0.65rem;padding:1px 5px;min-width:16px;text-align:center;';
+      toggle.style.position = 'relative';
+      toggle.appendChild(badge);
+    }
+    badge.textContent = _chatUnreadCount > 99 ? '99+' : _chatUnreadCount;
+  } else if (badge) {
+    badge.remove();
+  }
 }

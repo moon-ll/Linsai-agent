@@ -21,9 +21,9 @@ async function loadTasks() {
 
 function renderTaskBoard() {
   const columns = {
-    todo: document.getElementById('task-todo'),
-    doing: document.getElementById('task-doing'),
-    done: document.getElementById('task-done'),
+    backlog: document.getElementById('task-backlog'),
+    active: document.getElementById('task-active'),
+    completed: document.getElementById('task-completed'),
   };
 
   Object.values(columns).forEach(col => {
@@ -92,7 +92,7 @@ async function updateTaskStatus(taskId, newStatus) {
   }
 }
 
-async function createNewTask(title, description = '') {
+async function createNewTask(title, description = '', priority = 'medium') {
   if (!State.currentSessionId) {
     showToast('请先选择一个会话', 'warning');
     return;
@@ -102,7 +102,8 @@ async function createNewTask(title, description = '') {
       session_id: State.currentSessionId,
       title,
       description,
-      status: 'todo',
+      status: 'backlog',
+      priority,
     });
     State.tasks.push(task);
     renderTaskBoard();
@@ -117,13 +118,16 @@ async function openTaskDetail(taskId) {
   const task = State.tasks.find(t => t.id === taskId);
   if (!task) return;
 
+  const statusLabels = { backlog: '待办', active: '进行中', completed: '已完成' };
+  const priorityLabels = { high: '高', medium: '中', low: '低' };
+
   const html = `
     <div class="task-detail">
       <h3>${escapeHtml(task.title)}</h3>
       <p>${escapeHtml(task.description || '无描述')}</p>
       <div class="task-detail-meta">
-        <div>状态: ${escapeHtml(task.status)}</div>
-        <div>优先级: ${escapeHtml(task.priority || 'normal')}</div>
+        <div>状态: ${escapeHtml(statusLabels[task.status] || task.status)}</div>
+        <div>优先级: ${escapeHtml(priorityLabels[task.priority] || '中')}</div>
         <div>负责人: ${escapeHtml(task.assignee || '未分配')}</div>
         ${task.due_date ? `<div>截止: ${formatDate(task.due_date)}</div>` : ''}
       </div>

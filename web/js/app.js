@@ -212,6 +212,24 @@ function bindEvents() {
     document.getElementById('left-sidebar').classList.toggle('open');
   });
 
+  // P1-3: 移动端 kb/chat tab 切换
+  document.querySelectorAll('.mobile-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.target;
+      document.querySelectorAll('.mobile-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const kbMain = document.getElementById('kb-main');
+      const chatSidebar = document.getElementById('chat-sidebar');
+      if (target === 'kb-main') {
+        kbMain?.classList.remove('mobile-hidden');
+        chatSidebar?.classList.remove('mobile-visible');
+      } else {
+        kbMain?.classList.add('mobile-hidden');
+        chatSidebar?.classList.add('mobile-visible');
+      }
+    });
+  });
+
   // 归档按钮 → 打开历史搜索侧边栏
   document.getElementById('archived-btn').addEventListener('click', () => {
     document.getElementById('history-sidebar').style.display = 'flex';
@@ -301,22 +319,70 @@ function bindEvents() {
 // 跨模块事件绑定（工具栏、学习管理器、技能管理器、任务、@知识库）
 // ============================================
 function bindKbManagerEvents() {
+  // P2-7: 工具栏按钮 active 态切换辅助
+  function toggleToolbarActive(btnId, overlayId) {
+    const btn = document.getElementById(btnId);
+    const overlay = document.getElementById(overlayId);
+    if (!btn || !overlay) return;
+    const observer = new MutationObserver(() => {
+      const isVisible = overlay.style.display !== 'none' && overlay.style.display !== '';
+      btn.classList.toggle('active', isVisible);
+    });
+    observer.observe(overlay, { attributes: true, attributeFilter: ['style'] });
+  }
+
   // 工具栏按钮
   document.getElementById('toolbar-kb')?.addEventListener('click', openKbManager);
   document.getElementById('toolbar-skills')?.addEventListener('click', openSkillManager);
+  toggleToolbarActive('toolbar-skills', 'skill-manager-overlay');
+  toggleToolbarActive('toolbar-learning', 'learning-manager-overlay');
+  toggleToolbarActive('toolbar-projects', 'projects-overlay');
+  toggleToolbarActive('toolbar-hermes', 'hermes-overlay');
   document.getElementById('toolbar-tasks')?.addEventListener('click', () => {
-    const panel = document.getElementById('task-panel') || document.getElementById('right-sidebar');
-    if (panel) {
-      panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      panel.style.flash = '1';
-    } else {
+    // P0-8: 修复窄屏失效 + 移除无效 flash
+    const sidebar = document.getElementById('right-sidebar');
+    if (!sidebar) {
       showToast('📋 任务面板在右侧栏', 'info');
+      return;
     }
+    // 窄屏展开侧栏
+    if (window.innerWidth <= 768) {
+      sidebar.classList.remove('collapsed');
+      sidebar.style.display = 'flex';
+    }
+    // 高亮任务区域
+    sidebar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    const taskSection = sidebar.querySelector('.task-board') || sidebar;
+    taskSection.style.transition = 'box-shadow 0.3s';
+    taskSection.style.boxShadow = '0 0 0 2px var(--accent-color)';
+    setTimeout(() => { taskSection.style.boxShadow = ''; }, 1500);
   });
+  // P0-5: 统一用量统计，复用 loadUsage + 弹窗展示
   document.getElementById('toolbar-usage')?.addEventListener('click', async () => {
-    const data = await apiGet('/api/usage');
-    const daily = data.daily || {};
-    showModal(`📊 Token 用量（今日）\n\n• Prompt: ${daily.prompt || 0}\n• Completion: ${daily.completion || 0}\n• 调用次数: ${daily.calls || 0}\n\nProvider: ${Object.keys(data.by_provider || {}).join(', ') || '无记录'}`);
+    try {
+      const data = await apiGet('/api/usage');
+      const today = data.today || data.daily || {};
+      const total = data.total || {};
+      const todayTokens = today.tokens || today.total_tokens || 0;
+      const todayCost = today.cost || 0;
+      const todayCalls = today.calls || today.messages || 0;
+      const totalTokens = total.tokens || 0;
+      const totalCost = total.cost || 0;
+      showModal(`<div style="padding:16px;line-height:1.8;">
+        <h3 style="margin-bottom:8px;">📊 Token 用量统计</h3>
+        <hr style="border:none;border-top:1px solid var(--border-color);margin:8px 0;">
+        <p><strong>今日</strong></p>
+        <p>• 调用次数: ${todayCalls}</p>
+        <p>• Token: ${todayTokens.toLocaleString()}</p>
+        <p>• 费用: ¥${todayCost.toFixed(2)}</p>
+        <hr style="border:none;border-top:1px solid var(--border-color);margin:8px 0;">
+        <p><strong>累计</strong></p>
+        <p>• Token: ${totalTokens.toLocaleString()}</p>
+        <p>• 费用: ¥${totalCost.toFixed(2)}</p>
+      </div>`);
+    } catch (e) {
+      showToast('加载用量失败', 'error');
+    }
   });
   document.getElementById('toolbar-learning')?.addEventListener('click', openLearningManager);
 
@@ -348,6 +414,9 @@ function bindKbManagerEvents() {
   document.querySelectorAll('#learning-manager-overlay .kb-tab').forEach(tab => {
     tab.addEventListener('click', () => switchLearningTab(tab.dataset.tab));
   });
+
+  // P0-2: 绑定学习配置保存按钮
+  document.getElementById('save-learning-config')?.addEventListener('click', saveLearningConfig);
 
   // 项目面板 + hermes 控制台
   if (typeof bindProjectsEvents === 'function') bindProjectsEvents();
@@ -413,12 +482,21 @@ async function init() {
   await checkHeartbeat();
   loadReferences();
   loadUsage();
+  loadLLMStatus();
   bindEvents();
   initKbMain();
   initChatSidebar();
 
+  // P1-2: 自动选择第一个会话或显示欢迎页
   if (State.sessions.length > 0) {
     const active = State.sessions.find(s => s.status === 'active') || State.sessions[0];
+    if (active && active.session_id) {
+      switchSession(active.session_id);
+    }
+  } else {
+    // 无会话时显示欢迎页
+    const welcome = document.getElementById('welcome-screen');
+    if (welcome) welcome.style.display = 'flex';
   }
 
   console.log('✓ LinSai Web 界面已就绪');

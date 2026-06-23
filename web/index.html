@@ -40,17 +40,46 @@
     </div>
     <div class="sidebar-footer">
       <button id="new-session-btn" class="btn-primary">+ 新建会话</button>
-      <button id="archived-btn" class="btn-text">📦 归档</button>
+      <button id="archived-btn" class="btn-text">📜 搜索记录</button>
     </div>
-    <!-- 工具栏 -->
+    <!-- 工具栏 (P3-2: 分组 + 文字 label) -->
     <div class="toolbar">
-      <button class="toolbar-btn" id="toolbar-kb" title="知识库" data-tooltip="知识库">📚</button>
-      <button class="toolbar-btn" id="toolbar-skills" title="技能" data-tooltip="技能">🎯</button>
-      <button class="toolbar-btn" id="toolbar-tasks" title="任务" data-tooltip="任务">📋</button>
-      <button class="toolbar-btn" id="toolbar-usage" title="用量" data-tooltip="用量统计">📊</button>
-      <button class="toolbar-btn" id="toolbar-learning" title="自主学习" data-tooltip="自主学习">🌱</button>
-      <button class="toolbar-btn" id="toolbar-projects" title="项目面板" data-tooltip="项目面板">📂</button>
-      <button class="toolbar-btn" id="toolbar-hermes" title="hermes控制台" data-tooltip="hermes控制台">⚡</button>
+      <div class="toolbar-group">
+        <button class="toolbar-btn" id="toolbar-kb" title="知识库" data-tooltip="知识库">
+          <span class="toolbar-icon">📚</span>
+          <span class="toolbar-label">知识库</span>
+        </button>
+      </div>
+      <div class="toolbar-divider"></div>
+      <div class="toolbar-group">
+        <button class="toolbar-btn" id="toolbar-skills" title="技能" data-tooltip="技能">
+          <span class="toolbar-icon">🎯</span>
+          <span class="toolbar-label">技能</span>
+        </button>
+        <button class="toolbar-btn" id="toolbar-tasks" title="任务" data-tooltip="任务">
+          <span class="toolbar-icon">📋</span>
+          <span class="toolbar-label">任务</span>
+        </button>
+        <button class="toolbar-btn" id="toolbar-usage" title="用量" data-tooltip="用量统计">
+          <span class="toolbar-icon">📊</span>
+          <span class="toolbar-label">用量</span>
+        </button>
+      </div>
+      <div class="toolbar-divider"></div>
+      <div class="toolbar-group">
+        <button class="toolbar-btn" id="toolbar-learning" title="自主学习" data-tooltip="自主学习">
+          <span class="toolbar-icon">🌱</span>
+          <span class="toolbar-label">学习</span>
+        </button>
+        <button class="toolbar-btn" id="toolbar-projects" title="项目面板" data-tooltip="项目面板">
+          <span class="toolbar-icon">📂</span>
+          <span class="toolbar-label">项目</span>
+        </button>
+        <button class="toolbar-btn" id="toolbar-hermes" title="hermes控制台" data-tooltip="hermes控制台">
+          <span class="toolbar-icon">⚡</span>
+          <span class="toolbar-label">hermes</span>
+        </button>
+      </div>
     </div>
   </aside>
 
@@ -120,6 +149,30 @@
       <div class="welcome-screen" id="welcome-screen" style="display:none;">
         <h2>👋 欢迎回来</h2>
         <p>林赛不是你的搜索引擎，他是你的合作者。</p>
+        <!-- P2-4: 3步引导卡 -->
+        <div class="welcome-guide">
+          <div class="guide-card">
+            <div class="guide-icon">1️⃣</div>
+            <div class="guide-text">
+              <strong>新建会话</strong>
+              <p>点击左下角"+ 新建会话"，选择模式开始协作</p>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-icon">2️⃣</div>
+            <div class="guide-text">
+              <strong>浏览知识库</strong>
+              <p>中间区域是知识库，点击文件树浏览笔记，双链可跳转</p>
+            </div>
+          </div>
+          <div class="guide-card">
+            <div class="guide-icon">3️⃣</div>
+            <div class="guide-text">
+              <strong>发送消息</strong>
+              <p>在右侧聊天区输入消息，🗂️ 可注入知识库文件作为上下文</p>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="chat-archive-header" id="chat-archive-header" style="display:none;">
         <div class="archive-info">
@@ -155,6 +208,8 @@
           <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
           <span class="progress-text" id="progress-text">0%</span>
         </div>
+        <!-- P2-3: @知识库注入透明化 chip 列表 -->
+        <div class="kb-context-chips" id="kb-context-chips" style="display:none;"></div>
         <div class="input-row">
           <textarea id="message-input" placeholder="输入消息… Shift+Enter 换行" rows="2"></textarea>
           <button id="send-btn" class="btn-send" title="发送" data-tooltip="发送">🚀</button>
@@ -208,6 +263,12 @@
       </div>
     </div>
   </aside>
+
+  <!-- P1-3: 移动端底部 tab 切换栏 -->
+  <nav class="mobile-tab-bar" id="mobile-tab-bar">
+    <button class="mobile-tab active" data-target="kb-main">📚 知识库</button>
+    <button class="mobile-tab" data-target="chat-sidebar">💬 聊天</button>
+  </nav>
 
 </div>
 

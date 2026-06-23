@@ -159,6 +159,10 @@ function bindHermesRun() {
               }
             } else if (evt.type === 'done') {
               showToast(evt.success ? '✓ hermes 完成' : '⚠ 完成（可能有错误）', evt.success ? 'success' : 'info');
+              // P1-5: hermes 完成后刷新知识库树
+              if (typeof renderKbTree === 'function') {
+                setTimeout(() => renderKbTree(), 500);
+              }
             } else if (evt.type === 'error') {
               showToast(`✗ ${evt.message}`, 'error');
             }
