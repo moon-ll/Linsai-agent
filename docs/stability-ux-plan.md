@@ -165,6 +165,82 @@
 - 文献反馈流程能走通完整链路
 - 移动端基本可用（知识库/聊天可切换）
 
+## 八、盲区补充（第二轮审计发现）
+
+> 第一轮体检聚焦 DOM 断头线/布局/流程，第二轮审计发现 8 个被忽略的维度。
+
+### 数据安全（最高优先，用户数据无价）
+
+**P0-9：删除操作零保护** `web_server.py:1495`
+- DELETE wiki/消息/任务直接 unlink/覆写，无回收站、无备份前置、前端无二次确认
+- **修复**：DELETE 前调 `backup_manager.create_backup()`；前端删除统一二次确认；wiki 改软删除（移到 `.trash/`）
+
+**P0-10：备份按钮是死的** `app.js:70`
+- "备份"只弹 toast 让用户去终端跑，Web 从未真正触发备份
+- **修复**：新增 `/api/backup`（list/create/restore），设置面板的备份按钮真正可用
+
+### 并发安全（索引/消息损坏风险）
+
+**P1-9：文件写入无锁** `knowledge_base.py:1300`
+- index.json(44MB)/messages.json/graph.json 的 read-modify-write 无任何锁，多线程并发会互相覆盖
+- **修复**：统一 `threading.Lock` 包裹关键文件写入
+
+**P1-10：SSE 流式切换会话不中断** `session.js:62`
+- 流式中切会话，旧 stream 继续向已清空的 DOM 写入，切回来看到半截消息
+- **修复**：switchSession 开头判断 isStreaming，cancel reader + reset 状态
+
+**P1-11：同步/重建无防重入** `kb.js:387`
+- 同时点"同步"+"重建"会并发读写同一 index.json
+- **修复**：服务端 `_busy` 标志，重复请求返回 409
+
+### 性能瓶颈
+
+**P1-12：索引重建同步阻塞** `web_server.py:866`
+- 44MB index.json 全量重建同步返回，请求 hang 数秒到数十秒
+- **修复**：改后台线程 + 前端进度提示；或用增量 build_index(force=False)
+
+### 安全性（XSS）
+
+**P1-13：renderMarkdown 链接协议未校验** `core.js:88`
+- `[x](javascript:alert(1))` 会生成可执行链接
+- **修复**：href 协议白名单（只允许 http/https/mailto）
+
+**P1-14：raw 文件预览未 sanitize** `kb.js:154`
+- raw 里的 HTML/SVG 经简单正则后 innerHTML，潜在 XSS
+- **修复**：渲染前 escapeHtml 或白名单标签
+
+### 状态一致性
+
+**P1-15：标签编辑后跨面板不刷新** `kb.js:674`
+- 知识库改标签后，文件树计数/项目面板/搜索索引都不会更新
+- **修复**：写成功后 renderKbTree() + 事件广播；save_wiki_page 触发增量索引
+
+### 离线/断网体验
+
+**P2-14：无全局断网提示** `core.js`
+- API 失败只零散 toast"加载失败"，无"服务已断开"全局横幅
+- **修复**：online/offline 监听 + fetch 失败计数 + 顶部横幅
+
+**P2-16：长任务无前端超时** `apiPost`
+- 同步/重建/学习触发无超时，fetch 无限等
+- **修复**：apiPost 加可选 timeout，长任务默认 60s
+
+### 无障碍
+
+**P2-10：零 aria-label** `index.html:14-78`
+- 全仓无 aria-label/role/tabindex，屏幕阅读器不可用
+- **修复**：图标按钮补 aria-label，emoji 包 aria-hidden
+
+**P2-11：键盘不可达** `core.js:170`
+- 模态框无 ESC 关闭、无 focus trap，文件树无方向键
+- **修复**：ESC 关模态 + focus trap + 关键容器加 role
+
+### 新用户上手成本
+
+**P2-18：术语门槛极高**
+- "林赛/hermes/Agora/BRAIN/seedling/蒸馏"等大量自造术语，新用户 5 分钟无法理解
+- **修复**：welcome-screen 内置术语词典 + 3 步引导；工具栏按钮加 `?` 帮助气泡
+
 ---
 
-*基于 v3.2.0 全面体检制定。体检发现大量重构遗留的"断头线"（DOM改名但JS没跟上），修复成本极低但体验提升巨大。*
+*基于 v3.2.0 全面体检制定。第一轮聚焦 DOM 断头线/布局/流程；第二轮审计补充数据安全/并发/安全/一致性/可达性/上手成本 8 个盲区。两轮共发现 48 个改进点。*
