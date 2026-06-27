@@ -142,7 +142,12 @@ LinSai-CoPilot/
 │   ├── task_manager.py        # 任务 CRUD、状态流转
 │   ├── copilot_engine.py      # 核心引擎：prompt 构建、调用 LLM、响应解析
 │   ├── context_builder.py     # 上下文组装：人格 + 记忆 + 知识库 + 课题 + 会话历史
-│   ├── knowledge_base.py      # 知识库引擎：raw/wiki 分层、知识图谱、生长机制、别名、健康度
+│   ├── knowledge_base.py      # 知识库引擎门面（v3.5.5 门面化）：re-export 子模块全部函数
+│   ├── kb_text.py             # v3.5.5 知识库文本工具：tokenize/chunk/IDF/frontmatter
+│   ├── kb_graph.py            # v3.5.5 知识图谱：节点CRUD/关联概念/wikilink注入
+│   ├── kb_index.py            # v3.5.5 知识库索引：build_index/search/search_light/raw管理
+│   ├── kb_wiki.py             # v3.5.5 wiki页面：CRUD/stub创建/生长阶段
+│   ├── kb_health.py           # v3.5.5 知识库健康度：连通性/覆盖率/指标
 │   ├── kb_capture.py          # 对话自动捕获：技术参数检测、零 LLM 开销
 │   ├── kb_maintenance.py      # 批处理维护：索引重建、孤儿清理、候选报告、周维护
 │   ├── kb_auto_sync.py        # 知识库自动同步
@@ -180,7 +185,18 @@ LinSai-CoPilot/
 │   ├── project_memory.py      # v3.5 课题记忆：对话存档、片段、决策、核心记忆
 │   ├── project_context.py     # v3.5 课题上下文：@语法解析、跨课题检索、上下文构建
 │   ├── project_workflow.py    # v3.5 课题工作流：规划→执行→验收→完成→总结
-│   ├── web_server.py          # Web 服务器（HTTP + SSE + API路由）
+│   ├── web_server.py          # Web 服务器聚合器（v3.5.6 Mixin 架构，321行）：RequestHandler 继承 10 个路由 Mixin
+│   ├── web_base.py            # v3.5.6 Web 基础设施：BaseRequestHandler/文件锁/SSE工具/静态文件
+│   ├── web_routes_sessions.py # v3.5.6 会话路由 Mixin（9 路由，含 SSE 流式）
+│   ├── web_routes_kb.py       # v3.5.6 知识库路由 Mixin（33 路由）
+│   ├── web_routes_projects.py # v3.5.6 项目路由 Mixin（33 路由）
+│   ├── web_routes_research.py # v3.5.6 课题路由 Mixin（37 路由）
+│   ├── web_routes_system.py   # v3.5.6 系统路由 Mixin（19 路由）
+│   ├── web_routes_tasks.py    # v3.5.6 任务路由 Mixin（8 路由）
+│   ├── web_routes_learning.py # v3.5.6 学习路由 Mixin（7 路由）
+│   ├── web_routes_skills.py   # v3.5.6 技能路由 Mixin（5 路由）
+│   ├── web_routes_hermes.py   # v3.5.6 Hermes 路由 Mixin（4 路由）
+│   ├── web_routes_upload.py   # v3.5.6 上传路由 Mixin（5 路由）
 │   ├── self_test.py           # 内测统一入口：全量/分维度/JSON/程序化
 │   ├── test_e2e_learning_full.py  # 三来源端到端完整链路验证
 │   ├── deepxiv_knowledge/     # deepxiv 论文获取流水线（8 模块）
@@ -471,6 +487,15 @@ LinSai-CoPilot/
 - ✅ **Web API** — `web_server.py` 新增 37 个路由（/api/research/ 前缀）
 - ✅ **前端面板** — `web/js/research.js`：课题列表/详情/单元时间线/知识库浏览器/记忆面板/工作流操作
 
+### Phase 11：架构重构与质量优化（v3.5.1 → v3.5.6）【✅ 已完成】
+- ✅ **v3.5.1 架构优化** — 路由表重构（37 条 if-elif → 结构化路由表）、ModuleLoader 前端模块自注册、ai_plan_units LLM 驱动规划、统一知识库检索（全局+课题加权）、学习成本 SVG 可视化、AGENTS.md 测试策略更新、docs 目录清理
+- ✅ **v3.5.2 原子化写入** — `common.save_json` 改用 tempfile+fsync+replace 原子模式，防崩溃损坏
+- ✅ **v3.5.3 测试扩展** — 单元测试 88→120 检查点（新增课题链路 19 + LLM 路由 5 + 工具引擎 8），`--web-ci` 集成 Web API 测试（146/146）
+- ✅ **v3.5.4 全面质量优化** — P0 修复（settings.js DOM ID、sendMessage TypeError、AGENTS.md 虚假声明）、P1 安全（run_command 注入防护、backup 覆盖 projects/persona、并发文件锁）、P2 架构（paths.py 统一、except Exception 治理、logger TimedRotatingFileHandler）、P3 打磨（防抖、无障碍 tabindex、CSS 变量统一）
+- ✅ **v3.5.5 知识库门面化拆分** — `knowledge_base.py` 1792→534 行门面 + 5 子模块（kb_text/kb_graph/kb_index/kb_wiki/kb_health），门面注入模式解决循环依赖
+- ✅ **v3.5.6 Web 服务器 Mixin 拆分** — `web_server.py` 2576→321 行聚合器 + `web_base.py` + 10 路由 Mixin（共 130 路由），零行为变更
+- ✅ **内联样式清理** — 426/554（76.8%）内联 style 替换为 CSS 类，新增 ~180 个工具类
+
 ---
 
 ## 开发约定
@@ -632,7 +657,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：3.5.4*
+*版本：3.5.6*
 *日期：2026-06-28*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*
