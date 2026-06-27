@@ -22,15 +22,13 @@ _PROJECT_ROOT = _SCRIPT_DIR.parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
+from common import now_utc as _now_utc, save_json as _write_json
+
 try:
     from session_manager import load_session
 except ImportError as _import_err:
     print(f"✗ 无法导入 session_manager: {_import_err}")
     sys.exit(1)
-
-
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _mem_dir() -> Path:
@@ -49,10 +47,6 @@ def _sess_dir() -> Path:
     d = _PROJECT_ROOT / "sessions"
     d.mkdir(parents=True, exist_ok=True)
     return d
-
-
-def _write_json(path: Path, data) -> None:
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def _load_json(path: Path, default=None):

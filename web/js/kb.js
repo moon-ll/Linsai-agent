@@ -44,21 +44,14 @@ async function openWikiDetail(wikiPath) {
     titleEl.textContent = fm.title || relPath;
     const stage = STAGE_LABELS_FULL[fm.growth_stage] || fm.growth_stage || '未知';
 
-    let renderedBody = body
-      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-      .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
-      .replace(/^\- (.*$)/gim, '<li>$1</li>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.*?)\*/g, '<em>$1</em>')
-      .replace(/`(.*?)`/g, '<code>$1</code>')
-      .replace(/\[\[([^\]]+)\]\]/g, (m, name) => {
-        // P1-8: 使用 data 属性替代 onclick 拼接
-        return `<a class="kb-wikilink" data-wiki-title="${escapeHtml(name)}" title="点击跳转">${escapeHtml(name)}</a>`;
-      });
-
-    renderedBody = renderedBody.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>');
+    // 复用 core.js 的 renderMarkdown（内部已 escapeHtml + 标题/列表/加粗/斜体/代码/引用/链接）
+    let renderedBody = renderMarkdown(body);
+    // wikilink 双链 [[xxx]]：renderMarkdown 不支持，单独追加
+    // 注意：name 已被 renderMarkdown 转义（[ ] 不受 escapeHtml 影响，但名称内的 < & " 已转义），
+    // 此处直接使用即可，切勿再次 escapeHtml 以免二次转义破坏 data 属性读取
+    renderedBody = renderedBody.replace(/\[\[([^\]]+)\]\]/g, (m, name) => {
+      return `<a class="kb-wikilink" data-wiki-title="${name}" title="点击跳转">${name}</a>`;
+    });
 
     const relatedHtml = (fm.related || []).map(r => {
       // P1-8: 使用 data 属性替代 onclick 拼接
@@ -143,13 +136,8 @@ async function openRawDetail(rawPath) {
   try {
     const data = await apiGet(`/api/knowledge/file-content?path=${encodeURIComponent(rawPath)}`);
     if (data.content) {
-      let rendered = data.content
-        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-        .replace(/^\> (.*$)/gim, '<blockquote>$1</blockquote>')
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/`(.*?)`/g, '<code>$1</code>');
+      // P1-14: renderMarkdown 内部已先 escapeHtml 再做 Markdown 替换，防止 raw HTML/SVG XSS
+      let rendered = renderMarkdown(data.content);
       const safePath = rawPath.replace(/'/g, "\\'");
       bodyEl.innerHTML = `<div style="margin-bottom:8px;"><button class="btn-text" onclick="openLocalFile('${safePath}')" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:4px;cursor:pointer;font-size:0.8rem;">📂 在编辑器中打开</button></div>${rendered.slice(0, 6000)}${data.size > 6000 ? '\n\n<p style="color:var(--text-tertiary);">... (截断)</p>' : ''}`;
     } else {
@@ -347,6 +335,17 @@ async function initKbMain() {
     }
     // P3-3: details/summary 使用原生切换，不再 JS 接管
     // （CSS 已隐藏原生 marker 并用 ::before 替代，原生 toggle 自动更新 [open] 属性）
+  });
+
+  // P3-5: 键盘可达 — Enter/Space 触发点击
+  document.getElementById('kb-tree-content')?.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      const item = e.target.closest('[data-wiki-path], [data-raw-path], [data-action]');
+      if (item) {
+        e.preventDefault();
+        item.click();
+      }
+    }
   });
 
   let treeSearchTimer;
@@ -587,7 +586,7 @@ async function handleKbCategory() {
       listEl.querySelectorAll('.cat-delete').forEach(btn => {
         btn.onclick = async () => {
           const name = btn.dataset.name;
-          if (!confirm(`删除分类 "${name}"？`)) return;
+          if (!await confirmModal(`删除分类 "${name}"？`)) return;
           await apiPost('/api/knowledge/categories/delete', { name });
           refreshList();
         };
@@ -659,7 +658,7 @@ function bindTagEditor(frontmatter, pagePath) {
     btn.onclick = async () => {
       const tag = btn.dataset.tag;
       const type = btn.dataset.type;
-      if (!confirm(`移除 ${type === 'project' ? '子库' : '标签'} "${tag}"？`)) return;
+      if (!await confirmModal(`移除 ${type === 'project' ? '子库' : '标签'} "${tag}"？`)) return;
       try {
         const fm = { ...frontmatter };
         if (type === 'tag') {
@@ -673,6 +672,8 @@ function bindTagEditor(frontmatter, pagePath) {
         await apiPost('/api/knowledge/wiki', { path: pagePath, meta: fm });
         showToast('✓ 标签已更新');
         openWikiDetail(pagePath);
+        // P1-15: 刷新文件树计数和搜索索引
+        if (typeof renderKbTree === 'function') renderKbTree();
       } catch (e) {
         showToast('✗ 更新失败', 'error');
       }
@@ -680,7 +681,7 @@ function bindTagEditor(frontmatter, pagePath) {
   });
 
   document.getElementById('kb-tag-add-btn')?.addEventListener('click', async () => {
-    const tag = prompt('输入新标签：');
+    const tag = await promptModal('输入新标签：', '例如: #topic/HHG');
     if (!tag || !tag.trim()) return;
     try {
       const fm = { ...frontmatter };
@@ -688,6 +689,8 @@ function bindTagEditor(frontmatter, pagePath) {
       await apiPost('/api/knowledge/wiki', { path: pagePath, meta: fm });
       showToast('✓ 标签已添加');
       openWikiDetail(pagePath);
+      // P1-15: 刷新文件树计数和搜索索引
+      if (typeof renderKbTree === 'function') renderKbTree();
     } catch (e) {
       showToast('✗ 添加失败', 'error');
     }
@@ -722,7 +725,8 @@ async function renderKbTree() {
       html += `<div class="kb-tree-group"><details open><summary>🗺️ 知识地图</summary>`;
       mocs.forEach(p => {
         // P1-8: 使用 data 属性替代 onclick 字符串拼接
-        html += `<div class="kb-tree-item is-moc" data-wiki-path="${escapeHtml(p.path)}">${escapeHtml(p.title.replace('🗺️ ',''))}</div>`;
+        // P3-5: 加 tabindex 和 role 使键盘可聚焦
+        html += `<div class="kb-tree-item is-moc" data-wiki-path="${escapeHtml(p.path)}" tabindex="0" role="button" aria-label="${escapeHtml(p.title.replace('🗺️ ',''))}">${escapeHtml(p.title.replace('🗺️ ',''))}</div>`;
       });
       html += `</details></div>`;
     }
@@ -736,7 +740,7 @@ async function renderKbTree() {
       html += `<div class="kb-tree-group"><details><summary>${t.label} (${items.length})</summary>`;
       items.forEach(p => {
         const stageIcon = STAGE_ICONS[p.growth_stage] || '○';
-        html += `<div class="kb-tree-item" data-wiki-path="${escapeHtml(p.path)}">${stageIcon} ${escapeHtml(p.title)}</div>`;
+        html += `<div class="kb-tree-item" data-wiki-path="${escapeHtml(p.path)}" tabindex="0" role="button" aria-label="${escapeHtml(p.title)}">${stageIcon} ${escapeHtml(p.title)}</div>`;
       });
       html += `</details></div>`;
     }
@@ -747,11 +751,11 @@ async function renderKbTree() {
       if (rawFiles.length) {
         html += `<div class="kb-tree-group"><details><summary>📄 论文库 (${rawFiles.length})</summary>`;
         rawFiles.slice(0, 30).forEach(f => {
-          html += `<div class="kb-tree-item" data-raw-path="${escapeHtml(f.path)}" title="${escapeHtml(f.name)}">${escapeHtml(f.name.replace(/\.md$/, '').slice(0, 28))}</div>`;
+          html += `<div class="kb-tree-item" data-raw-path="${escapeHtml(f.path)}" tabindex="0" role="button" aria-label="${escapeHtml(f.name)}" title="${escapeHtml(f.name)}">${escapeHtml(f.name.replace(/\.md$/, '').slice(0, 28))}</div>`;
         });
-        if (rawFiles.length > 30) html += `<div class="kb-tree-item" style="color:var(--text-tertiary);">... 共 ${rawFiles.length} 篇</div>`;
+        if (rawFiles.length > 30) html += `<div class="kb-tree-item" style="color:var(--text-tertiary);" aria-hidden="true">... 共 ${rawFiles.length} 篇</div>`;
         // P2-1: 交叉链接提示
-        html += `<div class="kb-tree-item" data-action="open-projects" style="color:var(--accent-color);font-size:0.72rem;border-top:1px dashed var(--border-color);margin-top:4px;padding-top:4px;">📂 待决策文献 → 项目面板</div>`;
+        html += `<div class="kb-tree-item" data-action="open-projects" tabindex="0" role="button" aria-label="打开项目面板查看待决策文献" style="color:var(--accent-color);font-size:0.72rem;border-top:1px dashed var(--border-color);margin-top:4px;padding-top:4px;">📂 待决策文献 → 项目面板</div>`;
         html += `</details></div>`;
       }
     } catch (e) {}

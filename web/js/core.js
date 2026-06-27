@@ -16,6 +16,7 @@ const State = {
   autonomy: localStorage.getItem('linsai-autonomy') || 'suggest',
   viewingArchive: false,
   sessionKeywords: {},
+  currentReader: null,  // P1-10: SSE reader 引用，切换会话时取消
 };
 
 const API_BASE = '';
@@ -41,7 +42,7 @@ function applyTheme(theme) {
   localStorage.setItem('linsai-theme', theme);
 
   const btn = document.getElementById('theme-toggle');
-  btn.textContent = html.getAttribute('data-theme') === 'dark' ? '🌙' : '🔆';
+  if (btn) btn.textContent = html.getAttribute('data-theme') === 'dark' ? '🌙' : '🔆';
 }
 
 function toggleTheme() {
@@ -85,7 +86,18 @@ function renderMarkdown(text) {
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
   html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
   html = html.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
-  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+  // 标题（须在转义后匹配，# 不受 escapeHtml 影响；先 ### 再 ## 再 # 避免误匹配）
+  html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (match, text, url) => {
+    // P1-13: 链接协议白名单，防止 javascript: XSS
+    const safeUrl = url.trim();
+    if (/^(https?:|mailto:|\/|#)/i.test(safeUrl)) {
+      return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${text}</a>`;
+    }
+    return `<span title="不支持的链接协议">${text}</span>`;
+  });
   html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
   html = html.replace(/(<li>.+<\/li>\n?)+/g, '<ul>$&</ul>');
   html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
@@ -106,6 +118,7 @@ function renderMarkdown(text) {
 // ============================================
 function showToast(message, type = 'success', duration = 3000) {
   const container = document.getElementById('toast-container');
+  if (!container) { console.warn('toast-container not found:', message); return; }
   const toast = document.createElement('div');
   toast.className = `toast ${type}`;
   toast.textContent = message;
@@ -128,17 +141,28 @@ async function apiGet(path) {
   return res.json();
 }
 
-async function apiPost(path, body) {
-  const res = await fetch(API_BASE + path, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.error || `HTTP ${res.status}`);
+async function apiPost(path, body, timeoutMs) {
+  // P2-16: 支持可选超时
+  const controller = timeoutMs ? new AbortController() : null;
+  const timer = timeoutMs ? setTimeout(() => controller.abort(), timeoutMs) : null;
+  try {
+    const res = await fetch(API_BASE + path, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+      signal: controller?.signal,
+    });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || `HTTP ${res.status}`);
+    }
+    return res.json();
+  } catch (e) {
+    if (e.name === 'AbortError') throw new Error('请求超时');
+    throw e;
+  } finally {
+    if (timer) clearTimeout(timer);
   }
-  return res.json();
 }
 
 async function apiPut(path, body) {
@@ -167,6 +191,40 @@ async function apiDelete(path) {
 function openModal(id) { const el = document.getElementById(id); if (el) el.style.display = 'flex'; }
 function closeModal(id) { const el = document.getElementById(id); if (el) el.style.display = 'none'; }
 
+// P0-9: Promise 版 confirm，替代原生 confirm()
+function confirmModal(message, confirmText = '确定', cancelText = '取消') {
+  return new Promise(resolve => {
+    showModal(`<div style="max-width:360px;text-align:center;">
+      <p style="margin:16px 0;font-size:0.9rem;">${escapeHtml(message)}</p>
+      <div style="display:flex;gap:8px;justify-content:center;">
+        <button id="cm-confirm-btn" style="padding:6px 20px;background:var(--error-color);color:#fff;border:none;border-radius:6px;cursor:pointer;">${escapeHtml(confirmText)}</button>
+        <button id="cm-cancel-btn" style="padding:6px 20px;border:1px solid var(--border-color);border-radius:6px;cursor:pointer;">${escapeHtml(cancelText)}</button>
+      </div>
+    </div>`);
+    document.getElementById('cm-cancel-btn').onclick = () => { closeModal('modal-overlay'); resolve(false); };
+    document.getElementById('cm-confirm-btn').onclick = () => { closeModal('modal-overlay'); resolve(true); };
+  });
+}
+
+// P0-9: Promise 版 prompt，替代原生 prompt()
+function promptModal(message, placeholder = '') {
+  return new Promise(resolve => {
+    showModal(`<div style="max-width:360px;text-align:center;">
+      <p style="margin:16px 0;font-size:0.9rem;">${escapeHtml(message)}</p>
+      <input id="pm-input" type="text" placeholder="${escapeHtml(placeholder)}" style="width:100%;padding:8px;border:1px solid var(--border-color);border-radius:6px;margin-bottom:12px;background:var(--bg-secondary);color:var(--text-primary);" />
+      <div style="display:flex;gap:8px;justify-content:center;">
+        <button id="pm-confirm-btn" style="padding:6px 20px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;">确定</button>
+        <button id="pm-cancel-btn" style="padding:6px 20px;border:1px solid var(--border-color);border-radius:6px;cursor:pointer;">取消</button>
+      </div>
+    </div>`);
+    const input = document.getElementById('pm-input');
+    input.focus();
+    input.addEventListener('keydown', e => { if (e.key === 'Enter') { closeModal('modal-overlay'); resolve(input.value); } });
+    document.getElementById('pm-cancel-btn').onclick = () => { closeModal('modal-overlay'); resolve(null); };
+    document.getElementById('pm-confirm-btn').onclick = () => { closeModal('modal-overlay'); resolve(input.value); };
+  });
+}
+
 function showModal(htmlContent) {
   let overlay = document.getElementById('modal-overlay');
   if (!overlay) {
@@ -182,4 +240,59 @@ function showModal(htmlContent) {
   const html = (typeof htmlContent === 'string') ? htmlContent : String(htmlContent || '');
   document.getElementById('modal-content').innerHTML = html;
   overlay.style.display = 'flex';
+  // P2-11: focus trap — 聚焦到模态框内第一个可交互元素
+  setTimeout(() => {
+    const focusable = overlay.querySelector('button, input, textarea, select, a[href]');
+    if (focusable) focusable.focus();
+  }, 50);
 }
+
+// P2-11: ESC 关闭模态框
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    // 关闭通用 modal-overlay
+    const modalOverlay = document.getElementById('modal-overlay');
+    if (modalOverlay && modalOverlay.style.display !== 'none') {
+      closeModal('modal-overlay');
+      return;
+    }
+    // 关闭其他 overlay（new-session-modal, agora-modal, edit-message-modal 等）
+    const overlays = document.querySelectorAll('[id$="-overlay"], [id$="-modal"]');
+    for (const ov of overlays) {
+      if (ov.style.display !== 'none' && ov.style.display !== '') {
+        ov.style.display = 'none';
+        return;
+      }
+    }
+    // 关闭设置抽屉
+    const settingsDrawer = document.getElementById('settings-drawer');
+    if (settingsDrawer && settingsDrawer.style.display === 'flex') {
+      settingsDrawer.style.display = 'none';
+      return;
+    }
+    // 关闭历史侧边栏
+    const historySidebar = document.getElementById('history-sidebar');
+    if (historySidebar && historySidebar.style.display === 'flex') {
+      historySidebar.style.display = 'none';
+      return;
+    }
+  }
+});
+
+// P2-14: 全局断网检测
+let _offlineBanner = null;
+window.addEventListener('offline', () => {
+  if (!_offlineBanner) {
+    _offlineBanner = document.createElement('div');
+    _offlineBanner.style.cssText = 'position:fixed;top:0;left:0;right:0;background:var(--error-color);color:#fff;text-align:center;padding:6px;font-size:0.82rem;z-index:10000;';
+    _offlineBanner.textContent = '⚠ 网络已断开，部分功能不可用';
+    document.body.appendChild(_offlineBanner);
+  }
+  _offlineBanner.style.display = 'block';
+});
+window.addEventListener('online', () => {
+  if (_offlineBanner) {
+    _offlineBanner.style.display = 'none';
+  }
+  showToast('✓ 网络已恢复', 'success');
+});

@@ -3,7 +3,7 @@ title: "FROG"
 type: "methods"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
-tags: ["表征方法", "阿秒", "频率分辨", "#type/method", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature"]
+tags: ["表征方法", "阿秒", "频率分辨", "#type/method", "#topic/HHG", "#status/mature"]
 related: ["RABBITT"]
 aliases: ["FROG", "频率分辨光学门控", "frequency-resolved-optical-gating"]
 growth_stage: "mature"

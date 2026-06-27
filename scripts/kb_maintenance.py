@@ -21,12 +21,10 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from common import now_utc as _now_utc
+
 PROJECT_ROOT = Path(__file__).parent.parent
 KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
-
-
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _import_kb():

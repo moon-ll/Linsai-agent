@@ -484,6 +484,54 @@ def get_projects_overview() -> Dict[str, Any]:
     }
 
 
+def get_projects_list() -> List[Dict[str, Any]]:
+    """返回项目清单（供任务表单项目下拉框 + 总览页使用）。
+
+    聚合三个来源，去重：
+    1. NSFC hermes 项目（若存在）
+    2. 知识库 wiki/projects/ 下的子库目录
+    3. memory/working-context.json 的 active_projects
+
+    Returns:
+        [{name, source, status}]，name 唯一，按 source 优先级排序
+    """
+    seen = set()
+    projects = []
+
+    def _add(name: str, source: str, status: str = ""):
+        name = (name or "").strip()
+        if not name or name in seen:
+            return
+        seen.add(name)
+        projects.append({"name": name, "source": source, "status": status})
+
+    # 1. NSFC hermes 项目
+    if NSFC_DIR.exists():
+        _add("NSFC-强场超快", "hermes", "active")
+
+    # 2. 知识库 wiki/projects/ 子库
+    try:
+        wiki_projects = PROJECT_ROOT / "knowledge" / "wiki" / "projects"
+        if wiki_projects.exists():
+            for d in wiki_projects.iterdir():
+                if d.is_dir() and not d.name.startswith(".") and not d.name.startswith("_"):
+                    _add(d.name, "knowledge")
+    except OSError:
+        pass
+
+    # 3. working-context.json 的 active_projects
+    try:
+        wc_path = PROJECT_ROOT / "memory" / "working-context.json"
+        if wc_path.exists():
+            wc = json.loads(wc_path.read_text(encoding="utf-8"))
+            for p in wc.get("active_projects", []):
+                _add(p.get("name", ""), "working-context", p.get("status", ""))
+    except (json.JSONDecodeError, OSError):
+        pass
+
+    return projects
+
+
 # ============================================================
 # NSFC state.md 层次结构解析（v2.9.0 三层展开）
 # ============================================================

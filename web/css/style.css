@@ -821,6 +821,19 @@ body {
   margin: 8px 0 8px 20px;
 }
 
+/* v3.4.1: renderMarkdown 现支持标题，聊天气泡内约束标题尺寸避免过大 */
+.message-bubble h1, .message-bubble h2, .message-bubble h3 {
+  margin: 12px 0 6px;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+.message-bubble h1 { font-size: 1.15rem; }
+.message-bubble h2 { font-size: 1.05rem; }
+.message-bubble h3 { font-size: 0.95rem; }
+.message-bubble h1:first-child, .message-bubble h2:first-child, .message-bubble h3:first-child {
+  margin-top: 0;
+}
+
 .message-time {
   font-size: 0.7rem;
   color: var(--text-tertiary);
@@ -1296,6 +1309,29 @@ body {
   color: var(--text-inverse);
 }
 
+/* v3.4: 知识库引用标签 */
+.kb-citation {
+  margin-top: 6px;
+}
+.kb-cite-label {
+  font-weight: 600;
+  margin-right: 4px;
+}
+.kb-cite-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 0.7rem;
+  cursor: default;
+  transition: background 0.2s;
+}
+.kb-cite-tag:hover {
+  background: var(--accent-color);
+  color: var(--text-inverse);
+}
+
 /* ---- 聊天记录查看模式头部 ---- */
 .chat-archive-header {
   display: flex;
@@ -1371,10 +1407,13 @@ body {
     width: 280px;
     transform: translateX(100%);
     box-shadow: -2px 0 8px rgba(0,0,0,0.15);
+    flex-shrink: 0;
   }
   .sidebar.right.open {
     transform: translateX(0);
   }
+  /* P1-17: 移动端 kb-main 占满宽度 */
+  .kb-main { width: 100% !important; flex: 1 1 100% !important; }
   .sidebar.history { width: 100%; position: fixed; inset: 48px 0 72px; z-index: 60; }
   /* 移动端底部留出 tab 栏空间 */
   .statusbar { margin-bottom: 44px; }
@@ -2208,6 +2247,37 @@ body {
 [data-theme="dark"] .task-priority-high   { background: #4a3a1e; color: #fbbf24; }
 [data-theme="dark"] .task-priority-medium { background: #1e3a5f; color: #60a5fa; }
 [data-theme="dark"] .task-priority-low    { background: #2a2a3a; color: #9ca3af; }
+
+/* P2-20: 深色模式 placeholder 对比度提升 (WCAG AA) */
+[data-theme="dark"] input::placeholder,
+[data-theme="dark"] textarea::placeholder {
+  color: #9ca3af;
+  opacity: 0.8;
+}
+
+/* P2-21: 窄屏工具栏横向滚动 */
+@media (max-width: 900px) {
+  .toolbar {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+  }
+  .toolbar::-webkit-scrollbar { height: 3px; }
+  .toolbar-group { flex: 0 0 auto; }
+  .toolbar-btn { flex: 0 0 auto; min-width: 48px; }
+}
+
+/* P3-6: 标签列表间距 */
+.kb-preview-meta {
+  line-height: 1.8;
+}
+.kb-preview-tags {
+  line-height: 1.8;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
 
 /* ── 技能管理器 ── */
 .skill-row {

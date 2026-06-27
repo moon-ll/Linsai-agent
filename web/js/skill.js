@@ -134,8 +134,8 @@ async function saveSkillConfig() {
   }
 }
 
-function resetSkillConfig() {
-  if (!confirm('确定重置所有技能配置？')) return;
+async function resetSkillConfig() {
+  if (!await confirmModal('确定重置所有技能配置？')) return;
   _skillConfigCache = {};
   renderSkillList();
   updateSkillCount();

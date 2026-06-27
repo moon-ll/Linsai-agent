@@ -27,6 +27,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
 
+from common import now_utc as _now_utc, save_json as _write_json, load_json as _read_json
+
 
 def _get_project_root() -> Path:
     """返回项目根目录。"""
@@ -47,11 +49,6 @@ def _get_archived_dir() -> Path:
     return d
 
 
-def _now_utc() -> str:
-    """返回当前 UTC ISO 时间字符串。"""
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-
 def _clean_topic(topic: str) -> str:
     """将主题中的非法字符替换为短横线。"""
     # 保留中文、英文、数字，其余替换为 -
@@ -61,28 +58,7 @@ def _clean_topic(topic: str) -> str:
     return cleaned or "untitled"
 
 
-def _write_json(path: Path, data: Any) -> None:
-    """安全写入 JSON 文件。"""
-    try:
-        path.write_text(
-            json.dumps(data, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
-        )
-    except Exception as exc:  # noqa: BLE001
-        print(f"✗ 写入文件失败: {path} — {exc}")
-        raise
-
-
-def _read_json(path: Path) -> Any:
-    """安全读取 JSON 文件。"""
-    try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except Exception as exc:  # noqa: BLE001
-        print(f"✗ 读取文件失败: {path} — {exc}")
-        raise
-
-
-def create_session(topic: str, mode: str = "co-working") -> tuple[str, Path]:
+def create_session(topic: str, mode: str = "co-working", project_id: str = "") -> tuple[str, Path]:
     """创建新会话，返回 (session_id, session_dir)。
 
     session_id 格式: YYYYMMDD-主题（主题中的非法字符替换为-）
@@ -90,6 +66,9 @@ def create_session(topic: str, mode: str = "co-working") -> tuple[str, Path]:
     初始化 messages.json（空列表）和 state.json。
 
     若会话目录已存在，则直接返回已有 session_id，不重复创建。
+
+    Args:
+        project_id: 关联课题ID
     """
     date_prefix = datetime.now(timezone.utc).strftime("%Y%m%d")
     cleaned = _clean_topic(topic)
@@ -114,6 +93,7 @@ def create_session(topic: str, mode: str = "co-working") -> tuple[str, Path]:
             "started_at": _now_utc(),
             "last_active": _now_utc(),
             "status": "active",
+            "project_id": project_id,
         }
         state_path = session_dir / "state.json"
         _write_json(state_path, state)

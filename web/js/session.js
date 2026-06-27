@@ -60,14 +60,26 @@ function renderSessionList() {
 }
 
 async function switchSession(sessionId) {
+  // P1-10: 如果正在流式输出，取消旧 stream
+  if (State.isStreaming && State.currentReader) {
+    try { State.currentReader.cancel(); } catch (_) {}
+    State.isStreaming = false;
+    document.getElementById('typing-indicator').style.display = 'none';
+  }
+
   State.currentSessionId = sessionId;
   State.viewingArchive = false;
   renderSessionList();
 
-  document.getElementById('chat-archive-header').style.display = 'none';
-  document.querySelector('.input-area').style.display = 'block';
-  document.getElementById('welcome-screen').style.display = 'none';
-  document.getElementById('messages').innerHTML = '';
+  // Bug fix: 空指针防护
+  const archiveHeader = document.getElementById('chat-archive-header');
+  if (archiveHeader) archiveHeader.style.display = 'none';
+  const inputArea = document.querySelector('.input-area');
+  if (inputArea) inputArea.style.display = 'block';
+  const welcomeScreen = document.getElementById('welcome-screen');
+  if (welcomeScreen) welcomeScreen.style.display = 'none';
+  const messagesEl = document.getElementById('messages');
+  if (messagesEl) messagesEl.innerHTML = '';
 
   try {
     const data = await apiGet(`/api/sessions/${encodeURIComponent(sessionId)}/messages`);
@@ -90,6 +102,11 @@ async function switchSession(sessionId) {
   } catch (e) {
     console.error('加载消息失败:', e);
     showToast('加载消息失败', 'error');
+  }
+
+  // v3.4: 会话加载后注入林赛主动提醒
+  if (typeof injectProactiveOpening === 'function') {
+    injectProactiveOpening();
   }
 
   loadTasks();

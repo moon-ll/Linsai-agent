@@ -3,7 +3,7 @@ title: "HHG 光谱学原理与理论模型"
 type: "papers"
 created: "2026-05-19T00:00:00Z"
 updated: "2026-06-23T02:42:19Z"
-tags: ["HHG", "综述", "理论", "#type/report", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/mature"]
+tags: ["HHG", "综述", "理论", "#type/report", "#topic/HHG", "#status/mature"]
 related: ["Corkum", "Lewenstein模型", "RABBITT", "三步模型", "截止定律", "相位匹配", "高次谐波产生"]
 source_raw: ""
 growth_stage: "mature"

@@ -1,20 +1,19 @@
 /**
- * projects.js — 项目面板前端（v2.9.0：层次树 + 卡片流 + 反馈 + 确认）
+ * projects.js — 项目总控中心前端（v3.1.0：5 tab 总览/任务/意见/执行/同步+NSFC+文献）
  * 零框架依赖，原生 JavaScript，复用 app.js 的 apiGet/apiPost/showToast/escapeHtml。
  */
 
-const ProjectsState = { currentTab: 'papers' };  // 默认文献简报（最常用）
+const ProjectsState = { currentTab: 'overview' };  // v3.1.0 默认总览
 
 function openProjectsManager() {
   const overlay = document.getElementById('projects-overlay');
   if (!overlay) return;
   overlay.style.display = 'flex';
-  // 默认激活 papers tab
-  ProjectsState.currentTab = 'papers';
+  ProjectsState.currentTab = 'overview';
   document.querySelectorAll('.proj-tab-btn').forEach(btn => {
-    btn.style.background = btn.dataset.tab === 'papers' ? 'var(--bg-active)' : 'transparent';
+    btn.style.background = btn.dataset.tab === 'overview' ? 'var(--bg-active)' : 'transparent';
   });
-  loadProjectsTab('papers');
+  loadProjectsTab('overview');
 }
 
 function closeProjectsManager() {
@@ -34,12 +33,439 @@ async function loadProjectsTab(tab) {
   if (!body) return;
   body.innerHTML = '<p style="color:var(--text-tertiary);text-align:center;padding:40px;">◐ 加载中…</p>';
   try {
-    if (tab === 'nsfc') await renderNsfcTree(body);
+    if (tab === 'overview') await renderOverviewTab(body);
+    else if (tab === 'tasks') await renderTasksTab(body);
+    else if (tab === 'opinions') await renderOpinionsTab(body);
+    else if (tab === 'dispatches') await renderDispatchesTab(body);
+    else if (tab === 'nsfc') await renderNsfcTree(body);
     else if (tab === 'papers') await renderPapersCards(body);
     else if (tab === 'sync') await renderSyncTab(body);
   } catch (e) {
     body.innerHTML = `<p style="color:var(--error-color);">加载失败: ${escapeHtml(e.message)}</p>`;
   }
+}
+
+// ============================================
+// v3.1.0: 📊 总览 tab
+// ============================================
+async function renderOverviewTab(container) {
+  const data = await apiGet('/api/projects/overview');
+  const ts = data.task_stats || {};
+  const ds = data.dispatch_stats || {};
+
+  let html = '<h4 style="font-size:0.95rem;margin:0 0 12px;color:var(--text-primary);">📊 项目总览</h4>';
+
+  // 4 张统计卡
+  html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:20px;">';
+  // NSFC 进度卡
+  html += `<div style="padding:14px;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--accent-color);">
+    <div style="font-size:0.75rem;color:var(--text-tertiary);">🔬 NSFC 项目</div>
+    <div style="font-size:1.1rem;font-weight:600;margin-top:4px;">${data.nsfc_available ? escapeHtml(data.nsfc_phase || '进行中') : '未启用'}</div>
+    <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:2px;">${data.nsfc_available ? 'state.md 已加载' : '无 hermes 项目'}</div>
+  </div>`;
+  // 任务卡
+  const totalTasks = data.total_tasks || 0;
+  html += `<div style="padding:14px;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--info-color);">
+    <div style="font-size:0.75rem;color:var(--text-tertiary);">📋 项目任务</div>
+    <div style="font-size:1.1rem;font-weight:600;margin-top:4px;">${totalTasks} 个</div>
+    <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:2px;">○${ts.backlog||0} 待办 · ◐${ts.active||0} 进行 · ✓${ts.completed||0}</div>
+  </div>`;
+  // 意见卡
+  html += `<div style="padding:14px;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--warning-color);">
+    <div style="font-size:0.75rem;color:var(--text-tertiary);">💭 项目意见</div>
+    <div style="font-size:1.1rem;font-weight:600;margin-top:4px;">${ds.open_opinions||0} 待处理</div>
+    <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:2px;">共 ${ds.total_opinions||0} 条 · ${ds.fed_opinions||0} 已反馈</div>
+  </div>`;
+  // 执行卡
+  html += `<div style="padding:14px;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--success-color);">
+    <div style="font-size:0.75rem;color:var(--text-tertiary);">⚡ hermes 执行</div>
+    <div style="font-size:1.1rem;font-weight:600;margin-top:4px;">${ds.running_dispatches||0} 进行中</div>
+    <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:2px;">✓${ds.done_dispatches||0} 完成 · ✗${ds.failed_dispatches||0} 失败</div>
+  </div>`;
+  html += '</div>';
+
+  // 快捷新建区
+  html += '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">';
+  html += '<button onclick="switchProjectsTab(\'tasks\')" style="padding:10px 16px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">+ 新建项目任务</button>';
+  html += '<button onclick="switchProjectsTab(\'opinions\')" style="padding:10px 16px;border:1px solid var(--accent-color);background:transparent;color:var(--accent-color);border-radius:6px;cursor:pointer;font-size:0.85rem;">💬 提出意见</button>';
+  html += '<button onclick="switchProjectsTab(\'dispatches\')" style="padding:10px 16px;border:1px solid var(--border-color);background:transparent;color:var(--text-secondary);border-radius:6px;cursor:pointer;font-size:0.85rem;">⚡ 查看执行</button>';
+  html += '</div>';
+
+  // 任务分布表
+  const byProj = data.task_by_project || {};
+  const projKeys = Object.keys(byProj);
+  if (projKeys.length) {
+    html += '<div style="padding:12px;background:var(--bg-secondary);border-radius:6px;">';
+    html += '<div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:8px;">📁 任务按项目分布</div>';
+    for (const p of projKeys) {
+      const pct = totalTasks ? Math.round(byProj[p] / totalTasks * 100) : 0;
+      html += `<div style="display:flex;align-items:center;gap:8px;margin:4px 0;font-size:0.8rem;">
+        <span style="min-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(p)}</span>
+        <div style="flex:1;height:6px;background:var(--bg-tertiary);border-radius:3px;overflow:hidden;">
+          <div style="width:${pct}%;height:100%;background:var(--accent-color);"></div>
+        </div>
+        <span style="min-width:30px;text-align:right;color:var(--text-tertiary);">${byProj[p]}</span>
+      </div>`;
+    }
+    html += '</div>';
+  }
+
+  // 最近执行
+  const recent = ds.recent_dispatches || [];
+  if (recent.length) {
+    html += '<div style="margin-top:16px;"><div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:8px;">⚡ 最近执行</div>';
+    for (const d of recent.slice(0, 5)) {
+      const statusIcon = d.status === 'done' ? '✓' : d.status === 'failed' ? '✗' : d.status === 'timeout' ? '⏱' : '◐';
+      const statusColor = d.status === 'done' ? 'var(--success-color)' : (d.status === 'failed' || d.status === 'timeout') ? 'var(--error-color)' : 'var(--warning-color)';
+      html += `<div style="padding:6px 8px;font-size:0.78rem;border-left:2px solid ${statusColor};margin-bottom:4px;">
+        ${statusIcon} <span style="color:${statusColor};font-weight:500;">[${d.status}]</span> ${escapeHtml((d.prompt||'').slice(0,60))}…
+        <span style="color:var(--text-tertiary);margin-left:6px;">${escapeHtml(d.project||'通用')}</span>
+      </div>`;
+    }
+    html += '</div>';
+  }
+
+  container.innerHTML = html;
+}
+
+// ============================================
+// v3.1.0: 📋 项目任务 tab（核心）
+// ============================================
+async function renderTasksTab(container) {
+  // 并行加载任务列表 + 项目清单
+  const [tasksData, projectsData] = await Promise.all([
+    apiGet('/api/tasks'),
+    apiGet('/api/projects/list'),
+  ]);
+  const tasks = Array.isArray(tasksData) ? tasksData : [];
+  const projects = (projectsData.projects || []).map(p => p.name);
+  window._projList = projects;  // 缓存供表单用
+
+  let html = '';
+
+  // 新建任务表单（折叠）
+  html += `<details style="margin-bottom:16px;border:1px solid var(--accent-color);border-radius:8px;overflow:hidden;">
+    <summary style="padding:10px 14px;cursor:pointer;font-weight:600;font-size:0.85rem;background:var(--bg-secondary);color:var(--accent-color);">+ 新建项目任务</summary>
+    <div style="padding:14px;display:flex;flex-direction:column;gap:10px;">
+      <input type="text" id="ptask-title" placeholder="任务标题（必填）" style="width:100%;padding:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;box-sizing:border-box;">
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <select id="ptask-project" style="flex:1;min-width:140px;padding:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;">
+          <option value="">（通用，无项目）</option>
+          ${projects.map(p => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`).join('')}
+        </select>
+        <select id="ptask-priority" style="padding:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;">
+          <option value="medium">中</option><option value="high">高</option><option value="urgent">紧急</option><option value="low">低</option>
+        </select>
+        <input type="date" id="ptask-due" style="padding:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;">
+      </div>
+      <textarea id="ptask-desc" placeholder="任务描述（可选）" rows="2" style="width:100%;padding:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;box-sizing:border-box;resize:vertical;"></textarea>
+      <div style="display:flex;align-items:center;gap:16px;font-size:0.85rem;color:var(--text-secondary);">
+        <span>执行者:</span>
+        <label style="display:flex;align-items:center;gap:4px;cursor:pointer;"><input type="radio" name="ptask-assignee" value="myself" checked>我自己</label>
+        <label style="display:flex;align-items:center;gap:4px;cursor:pointer;"><input type="radio" name="ptask-assignee" value="hermes">派 hermes 执行</label>
+        <label style="display:flex;align-items:center;gap:4px;cursor:pointer;"><input type="radio" name="ptask-assignee" value="none">先不执行</label>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button id="ptask-create" style="flex:1;padding:10px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">✓ 创建任务</button>
+        <button id="ptask-cancel" style="padding:10px 16px;border:1px solid var(--border-color);background:transparent;color:var(--text-secondary);border-radius:6px;cursor:pointer;font-size:0.85rem;">清空</button>
+      </div>
+    </div>
+  </details>`;
+
+  // 按项目分组渲染任务卡片
+  const byProject = {};
+  for (const t of tasks) {
+    const p = t.project || '通用';
+    if (!byProject[p]) byProject[p] = [];
+    byProject[p].push(t);
+  }
+  const projNames = Object.keys(byProject).sort();
+  if (!projNames.length) {
+    html += '<p style="color:var(--text-tertiary);text-align:center;padding:30px;">暂无项目任务，点击上方「+ 新建项目任务」开始</p>';
+  } else {
+    for (const p of projNames) {
+      html += `<details open style="margin-bottom:12px;border:1px solid var(--border-color);border-radius:6px;overflow:hidden;">
+        <summary style="padding:8px 12px;cursor:pointer;font-weight:600;font-size:0.85rem;background:var(--bg-secondary);">
+          📁 ${escapeHtml(p)} <span style="font-weight:400;color:var(--text-tertiary);">(${byProject[p].length})</span>
+        </summary>
+        <div style="padding:8px;display:flex;flex-direction:column;gap:8px;">`;
+      for (const t of byProject[p]) {
+        html += renderProjectTaskCard(t);
+      }
+      html += '</div></details>';
+    }
+  }
+
+  container.innerHTML = html;
+
+  // 绑定新建按钮
+  const createBtn = document.getElementById('ptask-create');
+  if (createBtn) createBtn.onclick = createProjectTask;
+  const cancelBtn = document.getElementById('ptask-cancel');
+  if (cancelBtn) cancelBtn.onclick = () => {
+    ['ptask-title','ptask-desc'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    const projSel = document.getElementById('ptask-project'); if (projSel) projSel.value = '';
+    const priSel = document.getElementById('ptask-priority'); if (priSel) priSel.value = 'medium';
+  };
+}
+
+// 渲染单个项目任务卡片
+function renderProjectTaskCard(t) {
+  const statusLabels = { backlog: '○ 待办', active: '◐ 进行中', completed: '✓ 已完成', paused: '⏸ 暂停' };
+  const priColors = { urgent: 'var(--error-color)', high: 'var(--warning-color)', medium: 'var(--info-color)', low: 'var(--text-tertiary)' };
+  const priColor = priColors[t.priority] || 'var(--text-tertiary)';
+  const subDone = (t.subtasks || []).filter(s => s.done).length;
+  const subTotal = (t.subtasks || []).length;
+  const assigneeLabel = t.assignee === 'hermes' ? '⚡hermes' : t.assignee === 'none' ? '—' : '👤我';
+
+  // 查是否有进行中的派活
+  const hasRunning = t._runningDispatch;
+  const dispatchBtn = hasRunning
+    ? `<button onclick="viewTaskDispatch('${escapeHtml(t.task_id)}')" style="padding:3px 8px;border:1px solid var(--warning-color);border-radius:4px;background:transparent;color:var(--warning-color);cursor:pointer;font-size:0.72rem;">◐ 执行中</button>`
+    : `<button onclick="dispatchTask('${escapeHtml(t.task_id)}','${escapeHtml(t.project||'')}')" style="padding:3px 8px;border:1px solid var(--accent-color);border-radius:4px;background:transparent;color:var(--accent-color);cursor:pointer;font-size:0.72rem;">⚡ 派hermes</button>`;
+
+  return `<div style="padding:10px;background:var(--bg-tertiary);border-radius:6px;border-left:3px solid ${priColor};">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px;">
+      <div style="font-size:0.85rem;font-weight:600;flex:1;">${escapeHtml(t.title)}</div>
+      <span style="font-size:0.72rem;color:var(--text-tertiary);white-space:nowrap;">${statusLabels[t.status] || t.status}</span>
+    </div>
+    ${t.description ? `<div style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:6px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${escapeHtml(t.description)}</div>` : ''}
+    <div style="display:flex;align-items:center;gap:8px;font-size:0.72rem;color:var(--text-tertiary);margin-bottom:6px;">
+      <span>${assigneeLabel}</span>
+      ${t.due_date ? `<span>📅 ${escapeHtml(t.due_date)}</span>` : ''}
+      ${subTotal ? `<span>◯ ${subDone}/${subTotal}</span>` : ''}
+    </div>
+    ${subTotal ? `<div style="height:3px;background:var(--bg-secondary);border-radius:2px;overflow:hidden;margin-bottom:6px;"><div style="width:${Math.round(subDone/subTotal*100)}%;height:100%;background:var(--success-color);"></div></div>` : ''}
+    <div style="display:flex;gap:6px;flex-wrap:wrap;">
+      ${t.status !== 'completed' ? `<button onclick="cycleTaskStatus('${escapeHtml(t.task_id)}','${escapeHtml(t.status)}')" style="padding:3px 8px;border:1px solid var(--border-color);border-radius:4px;background:transparent;color:var(--text-secondary);cursor:pointer;font-size:0.72rem;">→ 推进</button>` : ''}
+      ${dispatchBtn}
+    </div>
+  </div>`;
+}
+
+// 创建项目任务
+async function createProjectTask() {
+  const title = document.getElementById('ptask-title')?.value.trim();
+  if (!title) { showToast('请填写任务标题', 'warning'); return; }
+  const project = document.getElementById('ptask-project')?.value || '';
+  const priority = document.getElementById('ptask-priority')?.value || 'medium';
+  const due_date = document.getElementById('ptask-due')?.value || '';
+  const description = document.getElementById('ptask-desc')?.value.trim();
+  const assignee = document.querySelector('input[name="ptask-assignee"]:checked')?.value || 'myself';
+
+  const btn = document.getElementById('ptask-create');
+  if (btn) { btn.disabled = true; btn.textContent = '◐ 创建中…'; }
+  try {
+    const resp = await apiPost('/api/tasks', { title, project, priority, due_date, description, assignee });
+    if (assignee === 'hermes' && resp.dispatch_id) {
+      showToast(`✓ 任务已创建并派给 hermes（执行追踪 #${resp.dispatch_id.slice(-6)}）`, 'success');
+      setTimeout(() => switchProjectsTab('dispatches'), 800);
+    } else {
+      showToast('✓ 任务已创建', 'success');
+    }
+    renderTasksTab(document.getElementById('projects-body'));
+  } catch (e) {
+    showToast(`✗ 创建失败: ${e.message}`, 'error');
+    if (btn) { btn.disabled = false; btn.textContent = '✓ 创建任务'; }
+  }
+}
+
+// 派任务给 hermes（卡片⚡按钮）
+async function dispatchTask(taskId, project) {
+  if (!await confirmModal('确定把这个任务派给 hermes 执行？（hermes 会在后台自主执行，可在执行追踪页查看结果）', '派发')) return;
+  showToast('◐ 派发中…', 'info');
+  try {
+    const resp = await apiPost(`/api/tasks/${encodeURIComponent(taskId)}/dispatch`, { project });
+    showToast(`✓ 已派给 hermes（追踪 #${resp.dispatch_id.slice(-6)}）`, 'success');
+    setTimeout(() => switchProjectsTab('dispatches'), 600);
+  } catch (e) {
+    showToast(`✗ 派发失败: ${e.message}`, 'error');
+  }
+}
+
+// 推进任务状态（backlog→active→completed），刷新项目面板视图（renderTasksTab）。
+// 注意：task.js 的 updateTaskStatus 也调用 PUT /api/tasks/{id}，但它面向任务看板
+// 侧栏（renderTaskBoard）并直接更新 State.tasks；二者后端调用相同但 UI/状态管理
+// 不同，故保持独立未合并。
+async function cycleTaskStatus(taskId, currentStatus) {
+  const next = currentStatus === 'backlog' ? 'active' : 'completed';
+  try {
+    await apiPut(`/api/tasks/${encodeURIComponent(taskId)}`, { status: next });
+    showToast(`✓ 已推进到「${next === 'active' ? '进行中' : '已完成'}」`, 'success');
+    renderTasksTab(document.getElementById('projects-body'));
+  } catch (e) {
+    showToast(`✗ 推进失败: ${e.message}`, 'error');
+  }
+}
+
+// 查看任务的派活输出
+async function viewTaskDispatch(taskId) {
+  switchProjectsTab('dispatches');
+  // dispatches 页会加载全部，这里可加高亮，简化处理直接跳转
+}
+
+// ============================================
+// v3.1.0: 💭 项目意见 tab
+// ============================================
+async function renderOpinionsTab(container) {
+  const [opinionsData, projectsData] = await Promise.all([
+    apiGet('/api/projects/opinions'),
+    apiGet('/api/projects/list'),
+  ]);
+  const opinions = opinionsData.opinions || [];
+  const projects = (projectsData.projects || []).map(p => p.name);
+
+  let html = '<div style="display:grid;grid-template-columns:1fr 1.4fr;gap:16px;">';
+
+  // 左：输入区
+  html += '<div>';
+  html += '<h4 style="font-size:0.9rem;margin:0 0 10px;color:var(--text-primary);">💬 提出项目意见</h4>';
+  html += `<select id="op-project" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;box-sizing:border-box;">
+    <option value="">（通用，无项目）</option>
+    ${projects.map(p => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`).join('')}
+  </select>`;
+  html += '<textarea id="op-content" placeholder="写下你对项目的意见、建议、想法…（必填）" rows="6" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;box-sizing:border-box;resize:vertical;"></textarea>';
+  html += '<label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-secondary);margin-bottom:10px;cursor:pointer;"><input type="checkbox" id="op-feed-hermes" checked style="width:auto;"> 同时反馈给 hermes（异步，不阻塞）</label>';
+  html += '<button id="op-submit" style="width:100%;padding:10px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">✓ 提交意见</button>';
+  html += '</div>';
+
+  // 右：意见列表
+  html += '<div>';
+  html += `<h4 style="font-size:0.9rem;margin:0 0 10px;color:var(--text-primary);">📜 意见记录（${opinions.length}）</h4>`;
+  if (!opinions.length) {
+    html += '<p style="color:var(--text-tertiary);font-size:0.82rem;padding:20px 0;text-align:center;">暂无意见</p>';
+  } else {
+    html += '<div style="display:flex;flex-direction:column;gap:8px;max-height:60vh;overflow-y:auto;">';
+    for (const o of opinions) {
+      const statusBadge = o.status === 'resolved'
+        ? '<span style="color:var(--success-color);">✓ 已解决</span>'
+        : '<span style="color:var(--warning-color);">○ 待处理</span>';
+      const fedBadge = o.fed_to_hermes ? '<span style="color:var(--info-color);">⚡已反馈</span>' : '';
+      html += `<div style="padding:10px;background:var(--bg-secondary);border-radius:6px;border-left:3px solid ${o.status === 'resolved' ? 'var(--success-color)' : 'var(--warning-color)'};">
+        <div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:0.72rem;">
+          <span style="color:var(--text-tertiary);">📁 ${escapeHtml(o.project || '通用')} · ${escapeHtml((o.created_at||'').slice(0,10))}</span>
+          <span>${statusBadge} ${fedBadge}</span>
+        </div>
+        <div style="font-size:0.82rem;color:var(--text-primary);margin-bottom:6px;white-space:pre-wrap;">${escapeHtml(o.content)}</div>
+        <div style="display:flex;gap:6px;">
+          ${o.status !== 'resolved' ? `<button onclick="resolveOpinion('${escapeHtml(o.id)}')" style="padding:3px 8px;border:1px solid var(--success-color);border-radius:4px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.72rem;">✓ 标记解决</button>` : ''}
+          <button onclick="discussOpinion('${escapeHtml(o.id)}','${escapeHtml((o.content||'').replace(/'/g,'')).slice(0,80)}')" style="padding:3px 8px;border:1px solid var(--border-color);border-radius:4px;background:transparent;color:var(--text-secondary);cursor:pointer;font-size:0.72rem;">🗨️ 转讨论</button>
+        </div>
+      </div>`;
+    }
+    html += '</div>';
+  }
+  html += '</div>';
+
+  html += '</div>';
+  container.innerHTML = html;
+
+  const submitBtn = document.getElementById('op-submit');
+  if (submitBtn) submitBtn.onclick = submitOpinion;
+}
+
+async function submitOpinion() {
+  const project = document.getElementById('op-project')?.value || '';
+  const content = document.getElementById('op-content')?.value.trim();
+  const feed_hermes = document.getElementById('op-feed-hermes')?.checked;
+  if (!content) { showToast('请填写意见内容', 'warning'); return; }
+  const btn = document.getElementById('op-submit');
+  if (btn) { btn.disabled = true; btn.textContent = '◐ 提交中…'; }
+  try {
+    await apiPost('/api/projects/opinions', { project, content, feed_hermes });
+    showToast(feed_hermes ? '✓ 意见已提交并反馈 hermes' : '✓ 意见已提交', 'success');
+    renderOpinionsTab(document.getElementById('projects-body'));
+  } catch (e) {
+    showToast(`✗ 提交失败: ${e.message}`, 'error');
+    if (btn) { btn.disabled = false; btn.textContent = '✓ 提交意见'; }
+  }
+}
+
+async function resolveOpinion(opId) {
+  try {
+    await apiPut(`/api/projects/opinions/${encodeURIComponent(opId)}/resolve`, {});
+    showToast('✓ 已标记解决', 'success');
+    renderOpinionsTab(document.getElementById('projects-body'));
+  } catch (e) {
+    showToast(`✗ 操作失败: ${e.message}`, 'error');
+  }
+}
+
+// 意见转讨论（填入聊天框）
+function discussOpinion(opId, contentSnippet) {
+  closeProjectsManager();
+  const input = document.getElementById('message-input');
+  if (input) {
+    input.value = `💭 关于项目意见「${contentSnippet}」，我想和林赛讨论：`;
+    input.focus();
+  }
+  showToast('💬 已填入聊天框，补充你的问题后发送', 'info');
+}
+
+// ============================================
+// v3.1.0: ⚡ 执行追踪 tab
+// ============================================
+async function renderDispatchesTab(container) {
+  const data = await apiGet('/api/projects/dispatches?limit=50');
+  const dispatches = data.dispatches || [];
+
+  let html = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">';
+  html += '<h4 style="font-size:0.9rem;margin:0;color:var(--text-primary);">⚡ hermes 执行追踪</h4>';
+  html += '<button onclick="renderDispatchesTab(document.getElementById(\'projects-body\'))" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:4px;background:transparent;color:var(--text-secondary);cursor:pointer;font-size:0.78rem;">🔄 刷新</button>';
+  html += '</div>';
+
+  if (!dispatches.length) {
+    html += '<div style="text-align:center;padding:40px 20px;color:var(--text-tertiary);">';
+    html += '<div style="font-size:2rem;margin-bottom:8px;">⚡</div>';
+    html += '<p style="font-size:0.85rem;">暂无派活记录</p>';
+    html += '<p style="font-size:0.78rem;margin-top:6px;">在「📋 项目任务」创建任务时选「派 hermes」，或点任务卡片的 ⚡ 按钮</p>';
+    html += '</div>';
+    container.innerHTML = html;
+    return;
+  }
+
+  html += '<div style="display:flex;flex-direction:column;gap:8px;">';
+  for (const d of dispatches) {
+    const statusMap = {
+      running: { icon: '◐', label: '执行中', color: 'var(--warning-color)' },
+      done: { icon: '✓', label: '完成', color: 'var(--success-color)' },
+      failed: { icon: '✗', label: '失败', color: 'var(--error-color)' },
+      timeout: { icon: '⏱', label: '超时', color: 'var(--error-color)' },
+    };
+    const st = statusMap[d.status] || statusMap.running;
+    const sourceLabel = d.source === 'create' ? '创建即派' : d.source === 'opinion' ? '意见派发' : '手动派发';
+    const duration = d.finished_at && d.started_at ? `· 耗时 ${calcDuration(d.started_at, d.finished_at)}` : '';
+
+    html += `<div style="padding:12px;background:var(--bg-secondary);border-radius:8px;border-left:3px solid ${st.color};">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;">
+        <div style="flex:1;">
+          <div style="font-size:0.85rem;font-weight:500;">${st.icon} <span style="color:${st.color};">[${st.label}]</span> ${escapeHtml((d.prompt||'').slice(0,70))}${(d.prompt||'').length > 70 ? '…' : ''}</div>
+          <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:3px;">📁 ${escapeHtml(d.project||'通用')} · ${sourceLabel} · ${escapeHtml((d.started_at||'').slice(0,16).replace('T',' '))} ${duration}</div>
+        </div>
+      </div>`;
+    if (d.output_snippet && d.status !== 'running') {
+      html += `<details style="margin-top:6px;"><summary style="cursor:pointer;font-size:0.72rem;color:var(--accent-color);">查看输出</summary>
+        <pre style="margin-top:6px;padding:8px;background:var(--bg-tertiary);border-radius:4px;font-size:0.72rem;max-height:240px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;">${escapeHtml(d.output_snippet)}</pre>
+      </details>`;
+    }
+    if (d.status === 'running') {
+      html += '<div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:4px;">◐ hermes 正在后台执行…点击上方「🔄 刷新」查看结果</div>';
+    }
+    html += '</div>';
+  }
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+function calcDuration(start, end) {
+  try {
+    const s = new Date(start.replace('Z','')).getTime();
+    const e = new Date(end.replace('Z','')).getTime();
+    const sec = Math.round((e - s) / 1000);
+    if (sec < 60) return `${sec}s`;
+    if (sec < 3600) return `${Math.round(sec/60)}m`;
+    return `${(sec/3600).toFixed(1)}h`;
+  } catch (e) { return '?'; }
 }
 
 // ============================================
@@ -508,8 +934,4 @@ function bindProjectsEvents() {
     btn.addEventListener('click', () => switchProjectsTab(btn.dataset.tab));
   });
   document.getElementById('proj-refresh')?.addEventListener('click', () => loadProjectsTab(ProjectsState.currentTab));
-}
-
-if (typeof escapeHtml === 'undefined') {
-  window.escapeHtml = function(s) { const d = document.createElement('div'); d.textContent = String(s); return d.innerHTML; };
 }

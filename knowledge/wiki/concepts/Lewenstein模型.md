@@ -3,7 +3,7 @@ title: "Lewenstein模型"
 type: "concepts"
 created: "2026-06-17T12:39:10Z"
 updated: "2026-06-23T02:42:18Z"
-tags: ["HHG", "理论模型", "SFA", "量子", "#type/concept", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/mature", "#status/growing", "#status/mature", "#status/mature"]
+tags: ["HHG", "理论模型", "SFA", "量子", "#type/concept", "#topic/HHG", "#status/mature", "#status/growing"]
 related: ["RABBITT", "三步模型", "截止定律", "高次谐波产生"]
 source_raw: ""
 growth_stage: "mature"

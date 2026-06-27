@@ -30,6 +30,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from common import now_utc as _now_utc
+
 PROJECT_ROOT = Path(__file__).parent.parent
 KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
 RAW_DIR = KNOWLEDGE_DIR / "raw"
@@ -51,10 +53,6 @@ _WIKI_RETRIES = 1
 # ---------------------------------------------------------------------------
 # 工具函数
 # ---------------------------------------------------------------------------
-
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
 
 def _parse_date(date_str: str) -> Optional[datetime]:
     """解析日期字符串。"""

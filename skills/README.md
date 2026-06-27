@@ -35,3 +35,4 @@
 | `hpc-computing` | 服务器、PBS、提交、计算、集群、qsub | HPC 计算工作流 |
 | `project-planning` | 项目、计划、分解、里程碑、roadmap | 项目拆解与规划 |
 | `agora-meeting` | 讨论、开会、Agora、历史人物、对话 | 多人物会议主持 |
+| `self-test` | 内测、测试、回归测试、self-test、影子用户、健康检查 | 内测系统：全量/分维度回归测试 |

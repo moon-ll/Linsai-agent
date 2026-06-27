@@ -44,6 +44,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from common import now_utc as _now_utc
+
 PROJECT_ROOT = Path(__file__).parent.parent
 KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
 RAW_PAPERS_DIR = KNOWLEDGE_DIR / "raw" / "papers"
@@ -53,11 +55,6 @@ PROJECT_TAG = "deepxiv-论文库"  # 归档论文默认子库（原"文献简报
 # hermes 简报产出目录
 HERMES_WORKSPACE = Path.home() / "Desktop" / "hermes_workspace"
 BRIEFINGS_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "briefings"
-
-
-def _now_utc() -> str:
-    """返回 UTC ISO 时间戳。"""
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _slugify(text: str, max_len: int = 50) -> str:

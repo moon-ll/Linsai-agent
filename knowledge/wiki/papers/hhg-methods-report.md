@@ -3,7 +3,7 @@ title: "HHG 光谱学研究进展调研报告——方法维度"
 type: "papers"
 created: "2026-06-23T02:42:19Z"
 updated: "2026-06-23T02:42:19Z"
-tags: ["HHG", "综述", "方法", "表征", "#type/report", "#topic/HHG", "#status/mature", "#status/mature"]
+tags: ["HHG", "综述", "方法", "表征", "#type/report", "#topic/HHG", "#status/mature"]
 related: ["COLTRIMS", "Corkum", "FROG", "Krausz", "RABBITT", "TDSE求解器", "VMI", "三步模型", "协方差映射", "截止定律", "拓扑绝缘体", "相位匹配", "瞬态吸收光谱", "高次谐波产生"]
 source_raw: ""
 growth_stage: "mature"

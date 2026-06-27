@@ -26,6 +26,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
+from common import now_utc as _now_utc
+
 PROJECT_ROOT = Path(__file__).parent.parent
 SCRIPTS_DIR = PROJECT_ROOT / "scripts"
 KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
@@ -35,10 +37,6 @@ CANDIDATES_PATH = MEMORY_DIR / "alias-candidates.json"
 
 # [[WikiLink|别名]] 模式
 _WIKILINK_ALIAS_RE = re.compile(r"\[\[([^\]\|]+)\|([^\]]+)\]\]")
-
-
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _load_aliases() -> Dict[str, List[str]]:

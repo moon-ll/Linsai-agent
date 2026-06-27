@@ -2,7 +2,7 @@
 
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
-> 最后更新：2026-05-11
+> 最后更新：2026-06-27
 
 ---
 
@@ -115,44 +115,77 @@ LinSai-CoPilot/
 │   └── {skill-name}/
 │       └── SKILL.md           # 技能定义：触发词、心智模型、表达 DNA
 │
+├── projects/                  # v3.5 课题指导模块数据
+│   ├── {project_id}.json      # 课题元数据
+│   └── {project_id}/          # 课题工作目录
+│       ├── PROJECT-MEMORY.md  # 核心记忆（≤100行，自动压缩）
+│       ├── units/             # 单元（含验收标准数组/风险/任务引用）
+│       ├── kb/                # 分层知识库（raw/parsed/summary）
+│       └── memory/            # 课题记忆（对话存档/片段/决策/风险）
+│
 ├── docs/                      # 项目文档与报告
-│   ├── PROJECT-PLAN.md        # 项目总策划案
-│   ├── DEEP-AUDIT-REPORT.md   # 深度评估报告
-│   ├── FUNCTIONAL-TEST-REPORT.md # 功能测试报告
+│   ├── README.md              # 文档索引
 │   ├── CLAUDE-CLI-ADMIN.md    # Claude CLI 人工管理指南
+│   ├── DEEP-AUDIT-REPORT-v1.7.2.md  # 深度评估报告
+│   ├── FUNCTIONAL-TEST-REPORT-v1.7.2.md # 功能测试报告
+│   ├── IMPLEMENTATION-PLAN-v2.1.0.md  # 工具协作者实施计划
+│   ├── IMPLEMENTATION-PLAN-v3.0.0.md  # v3.0 实施计划（已归档）
+│   ├── cognitive-loop-plan.md # v3.4 认知闭环设计稿
+│   ├── stability-ux-plan.md   # v3.3 稳定性与用户体验优化计划
+│   ├── kb-smart-management-plan.md # 知识库智能管理计划
+│   ├── deepxiv-knowledge-workflow.md # deepxiv 知识工作流
+│   ├── solid-HHG-*.md         # 固体HHG调研材料（3份）
 │   └── prompts/               # LLM prompt 模板与管理文档
 │
 ├── scripts/                   # 工具脚本（Python 3，零依赖）
+│   ├── __init__.py            # 包初始化（v3.4.1：使 scripts/ 成为 Python 包）
+│   ├── common.py              # 公共工具：now_utc/load_json/save_json/safe_filename/lazy_load
+│   ├── paths.py               # 路径工具：统一 PROJECT_ROOT 推导
 │   ├── session_manager.py     # 会话创建、存档、加载
 │   ├── memory_manager.py      # 记忆读写、索引、压缩
 │   ├── task_manager.py        # 任务 CRUD、状态流转
 │   ├── copilot_engine.py      # 核心引擎：prompt 构建、调用 LLM、响应解析
-│   ├── context_builder.py     # 上下文组装：人格 + 记忆 + 知识库 + 当前任务 + 会话历史
+│   ├── context_builder.py     # 上下文组装：人格 + 记忆 + 知识库 + 课题 + 会话历史
 │   ├── knowledge_base.py      # 知识库引擎：raw/wiki 分层、知识图谱、生长机制、别名、健康度
 │   ├── kb_capture.py          # 对话自动捕获：技术参数检测、零 LLM 开销
 │   ├── kb_maintenance.py      # 批处理维护：索引重建、孤儿清理、候选报告、周维护
+│   ├── kb_auto_sync.py        # 知识库自动同步
+│   ├── kb_categories.py       # 知识库分类管理
+│   ├── kb_importer.py         # 知识库批量导入
+│   ├── kb_linker.py           # 知识库关联链接
+│   ├── alias_learner.py       # 别名学习器
+│   ├── growth_engine.py       # 知识生长引擎
+│   ├── paper_pool.py          # 论文池管理
+│   ├── project_reader.py      # 项目文件读取器
 │   ├── research_profiler.py   # 研究方向感知器：TF-IDF关键词、7天自动重建
 │   ├── external_fetcher.py    # 统一信息获取：deepxiv + 联网检索 + raw扫描
 │   ├── learning_engine.py     # 自主学习核心：蒸馏/精读/概念整合/成本追踪
 │   ├── quality_evaluator.py   # 质量评估引擎：规则+LLM评估、三级决策
-│   ├── learning_quality_tracker.py  # 交互质量追踪器：质量评分/记忆召回率/人格漂移检测
 │   ├── logger.py              # 统一日志：控制台彩色输出 + 文件按日期轮转
 │   ├── proactive_engine.py    # 主动感知、心跳扫描
 │   ├── document_handler.py    # 文档读取、PDF提取、代码分析
+│   ├── project_dispatch.py    # 项目总控：意见+执行追踪持久化（v3.3.0）
 │   ├── agora_bridge.py        # Agora群聊桥接
+│   ├── hermes_bridge.py       # Hermes 桥接器
 │   ├── llm_router.py          # 多模型路由：MiniMax API + Kimi CLI + Claude CLI，自动降级
 │   ├── usage_tracker.py       # Token 用量追踪：API精确统计 + CLI字符估算
 │   ├── skill_manager.py       # 技能系统：扫描、匹配、注入、配置
 │   ├── slash_commands.py      # 斜杠命令系统：解析、路由、帮助
 │   ├── tool_engine.py         # 工具注册：file_read/write, calc, task_create, knowledge_query, run_command, hermes_chat
 │   ├── chat_archive.py        # 聊天记录归档浏览器
+│   ├── memory_reflow.py       # 认知回流引擎：hermes→记忆提炼、冷启动、增量回流（v3.4）
+│   ├── sync_engine.py         # 多端同步：hermes 会话/文献 → 知识库 + 认知回流
 │   ├── backup_manager.py      # 数据备份/恢复
 │   ├── upgrade.py             # 安全升级标准流程
 │   ├── version.py             # 版本号集中读取（VERSION 真相源）
+│   ├── project_manager.py     # v3.5 课题管理：CRUD、状态机、PROJECT-MEMORY.md
+│   ├── unit_manager.py        # v3.5 单元管理：验收标准数组、风险、状态机
+│   ├── project_kb.py          # v3.5 课题知识库：分层(raw/parsed/summary)、TF-IDF、标签
+│   ├── project_memory.py      # v3.5 课题记忆：对话存档、片段、决策、核心记忆
+│   ├── project_context.py     # v3.5 课题上下文：@语法解析、跨课题检索、上下文构建
+│   ├── project_workflow.py    # v3.5 课题工作流：规划→执行→验收→完成→总结
 │   ├── web_server.py          # Web 服务器（HTTP + SSE + API路由）
 │   ├── self_test.py           # 内测统一入口：全量/分维度/JSON/程序化
-│   ├── deep_audit.py          # 深度评估脚本：9维度架构稳定性审查
-│   ├── test_e2e_learning.py   # 端到端 arXiv 链路验证
 │   ├── test_e2e_learning_full.py  # 三来源端到端完整链路验证
 │   ├── deepxiv_knowledge/     # deepxiv 论文获取流水线（8 模块）
 │   ├── wiki_regenerator/      # wiki 报告重建（4 模块）
@@ -160,14 +193,26 @@ LinSai-CoPilot/
 │       ├── test_runner.py     # 零依赖轻量测试框架
 │       ├── test_core.py       # 核心模块单元测试（34个检查点）
 │       ├── test_scenarios.py  # 场景剧本测试（5类影子用户）
-│       └── test_persona.py    # 人格一致性静态抽检
+│       ├── test_persona.py    # 人格一致性静态抽检
+│       └── test_web_api.py    # Web API 接口测试
 │
 └── web/                       # 前端界面（零框架依赖）
     ├── index.html             # 单页应用入口
     ├── css/
     │   └── style.css          # 双主题样式（深色/浅色/自动）
     └── js/
-        └── app.js              # 原生 JavaScript（会话/聊天/流式SSE）
+        ├── app.js              # 主入口（会话/聊天/流式SSE/事件绑定）
+        ├── core.js             # 核心工具（API请求/模态框/Markdown渲染/toast）
+        ├── chat.js             # 聊天逻辑（消息收发/SSE流式/输入控制）
+        ├── session.js          # 会话管理（创建/切换/归档/历史加载）
+        ├── task.js             # 任务面板（CRUD/状态流转/看板视图）
+        ├── kb.js               # 知识库浏览器（文档列表/搜索/预览）
+        ├── skill.js            # 技能面板（自动/手动模式/模糊搜索/开关）
+        ├── settings.js         # 设置面板（主题/模型/自主级别）
+        ├── projects.js         # 项目面板（意见/执行追踪）
+        ├── hermes_console.js   # Hermes 控制台
+        ├── learning.js         # 学习管理器（日志/待审/统计/策略）
+        └── research.js         # v3.5 课题指导面板（单元时间线/知识库/记忆/工作流）
 ```
 
 ---
@@ -407,9 +452,28 @@ LinSai-CoPilot/
 - ✅ **hermes_chat 工具**：调用 Hermes LinSai profile 进行深度对话
 - ✅ **人格软链接**：Hermes SOUL.md → `persona/lin-sai-persona.md`
 - ✅ **工具引擎接入**：copilot_engine.chat_loop 集成 call_llm_with_tools
-- 多设备会话同步
-- 语音/富文本交互（如有需求）
-- 性能优化与生态扩展
+
+### Phase 9：认知闭环（v3.4.0）【✅ 阶段 1-2 已完成】
+- ✅ **认知回流引擎** — `scripts/memory_reflow.py`：从 hermes 会话提取记忆，集成到 sync_all()
+- ✅ **记忆冷启动** — 112 会话 → 26 记忆片段 + 10 研究方向 + 7 技能 + 12 关键洞察
+- ✅ **开场即主动** — heartbeat 增强 + 前端 banner + 会话注入主动提醒
+- ✅ **主动感知配置** — autonomy-level.json + learning-config.json
+- ✅ **浅输入人格锚定** — 问候/闲聊时注入记忆锚点，避免通用 AI 客服腔
+- ✅ **知识库命中埋点** — build_context 返回 kb_hits，SSE metadata 事件传递
+- ✅ **引用来源 UI** — 消息气泡下方显示知识库引用标签
+- ✅ **主动检索增强** — 接入 should_search_knowledge() 5 级智能判断
+- ⏳ **场景扩展**（阶段 3）：审稿回复助手、学生问答归档、实验方案协作
+
+### Phase 10：课题指导模块（v3.5.0）【✅ 已完成】
+- ✅ **课题管理** — `scripts/project_manager.py`：课题 CRUD、状态机（planning→active→paused/completed）、PROJECT-MEMORY.md 自动维护与压缩（≤100行）
+- ✅ **单元管理** — `scripts/unit_manager.py`：单元 CRUD、验收标准结构化数组、风险追踪、交付物管理、状态机（planning→executing→review→completed）
+- ✅ **分层知识库** — `scripts/project_kb.py`：raw/parsed/summary 三层、TF-IDF 倒排索引、标签索引、外部文件导入
+- ✅ **课题记忆** — `scripts/project_memory.py`：三级记忆（对话全文/片段/核心记忆）、决策记录、风险记录
+- ✅ **跨课题检索** — `scripts/project_context.py`：@课题知识库语法、跨课题搜索、课题上下文构建
+- ✅ **工作流编排** — `scripts/project_workflow.py`：plan_units → start_unit_execution → review_unit → complete_unit → generate_project_summary
+- ✅ **上下文注入** — `context_builder.py` 扩展：会话关联课题时自动注入课题记忆+知识库概览；@语法跨课题知识检索
+- ✅ **Web API** — `web_server.py` 新增 37 个路由（/api/research/ 前缀）
+- ✅ **前端面板** — `web/js/research.js`：课题列表/详情/单元时间线/知识库浏览器/记忆面板/工作流操作
 
 ---
 
@@ -564,7 +628,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：3.1.2*
-*日期：2026-06-17*
+*版本：3.5.0*
+*日期：2026-06-27*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

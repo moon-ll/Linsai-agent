@@ -37,7 +37,7 @@ function renderTaskBoard() {
 
     const card = document.createElement('div');
     card.className = 'task-card';
-    card.dataset.taskId = task.id;
+    card.dataset.taskId = task.task_id;  // v3.1.0: 修复字段名（后端用 task_id）
     card.draggable = true;
 
     const priorityClass = task.priority === 'high' ? 'priority-high' : task.priority === 'low' ? 'priority-low' : '';
@@ -48,14 +48,14 @@ function renderTaskBoard() {
       ${task.description ? `<div class="task-card-desc">${escapeHtml(task.description)}</div>` : ''}
       ${tags ? `<div class="task-card-tags">${tags}</div>` : ''}
       <div class="task-card-meta">
-        <span>${task.assignee || ''}</span>
+        <span>${task.assignee === 'hermes' ? '⚡hermes' : task.assignee === 'none' ? '' : '👤我'}</span>
         ${task.due_date ? `<span>${formatDate(task.due_date)}</span>` : ''}
       </div>
     `;
 
-    card.addEventListener('click', () => openTaskDetail(task.id));
+    card.addEventListener('click', () => openTaskDetail(task.task_id));
     card.addEventListener('dragstart', (e) => {
-      e.dataTransfer.setData('text/plain', task.id);
+      e.dataTransfer.setData('text/plain', task.task_id);
       card.classList.add('dragging');
     });
     card.addEventListener('dragend', () => card.classList.remove('dragging'));
@@ -79,10 +79,14 @@ function renderTaskBoard() {
   });
 }
 
+// 更新任务状态并刷新任务看板（task.js 侧栏视图）。
+// 注意：projects.js 的 cycleTaskStatus 也调用 PUT /api/tasks/{id}，但它面向项目
+// 面板视图（renderTasksTab）且含 backlog→active→completed 循环逻辑；二者后端调用
+// 相同但 UI/状态管理不同，故保持独立未合并。
 async function updateTaskStatus(taskId, newStatus) {
   try {
     await apiPut(`/api/tasks/${taskId}`, { status: newStatus });
-    const task = State.tasks.find(t => t.id === taskId);
+    const task = State.tasks.find(t => t.task_id === taskId);
     if (task) task.status = newStatus;
     renderTaskBoard();
     showToast('任务状态已更新');
@@ -105,7 +109,21 @@ async function createNewTask(title, description = '', priority = 'medium') {
       status: 'backlog',
       priority,
     });
-    State.tasks.push(task);
+    // P5-1: 防御性合并 — 确保 status/priority 等字段存在
+    const fullTask = {
+      task_id: task.task_id || '',
+      title: task.title || title,
+      description: task.description || description,
+      status: task.status || 'backlog',
+      priority: task.priority || priority,
+      assignee: task.assignee || 'myself',
+      progress: task.progress || 0,
+      subtasks: task.subtasks || [],
+      tags: task.tags || [],
+      project: task.project || '',
+      ...task,
+    };
+    State.tasks.push(fullTask);
     renderTaskBoard();
     showToast('任务已创建');
   } catch (e) {
@@ -115,11 +133,12 @@ async function createNewTask(title, description = '', priority = 'medium') {
 }
 
 async function openTaskDetail(taskId) {
-  const task = State.tasks.find(t => t.id === taskId);
+  const task = State.tasks.find(t => t.task_id === taskId);
   if (!task) return;
 
-  const statusLabels = { backlog: '待办', active: '进行中', completed: '已完成' };
-  const priorityLabels = { high: '高', medium: '中', low: '低' };
+  const statusLabels = { backlog: '待办', active: '进行中', completed: '已完成', paused: '暂停' };
+  const priorityLabels = { urgent: '紧急', high: '高', medium: '中', low: '低' };
+  const assigneeLabels = { myself: '我自己', hermes: 'hermes 执行', none: '未分配' };
 
   const html = `
     <div class="task-detail">
@@ -128,11 +147,12 @@ async function openTaskDetail(taskId) {
       <div class="task-detail-meta">
         <div>状态: ${escapeHtml(statusLabels[task.status] || task.status)}</div>
         <div>优先级: ${escapeHtml(priorityLabels[task.priority] || '中')}</div>
-        <div>负责人: ${escapeHtml(task.assignee || '未分配')}</div>
+        <div>执行者: ${escapeHtml(assigneeLabels[task.assignee] || task.assignee || '未分配')}</div>
+        ${task.project ? `<div>项目: ${escapeHtml(task.project)}</div>` : ''}
         ${task.due_date ? `<div>截止: ${formatDate(task.due_date)}</div>` : ''}
       </div>
       <div class="task-detail-actions">
-        <button onclick="deleteTask('${task.id}')" class="btn-danger">删除任务</button>
+        <button onclick="deleteTask('${task.task_id}')" class="btn-danger">删除任务</button>
       </div>
     </div>
   `;
@@ -140,10 +160,10 @@ async function openTaskDetail(taskId) {
 }
 
 async function deleteTask(taskId) {
-  if (!confirm('确定删除此任务？')) return;
+  if (!await confirmModal('确定删除此任务？')) return;
   try {
     await apiDelete(`/api/tasks/${taskId}`);
-    State.tasks = State.tasks.filter(t => t.id !== taskId);
+    State.tasks = State.tasks.filter(t => t.task_id !== taskId);
     renderTaskBoard();
     closeModal('modal-overlay');
     showToast('任务已删除');

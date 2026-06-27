@@ -38,6 +38,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List
 
+from common import now_utc as _now_utc
+
 PROJECT_ROOT = Path(__file__).parent.parent
 MEMORY_DIR = PROJECT_ROOT / "memory"
 SYNC_STATE_PATH = MEMORY_DIR / "sync-state.json"
@@ -50,10 +52,6 @@ LINSAI_SESSIONS = LINSAI_PROFILE / "sessions"
 # hermes 文献产出
 HERMES_WORKSPACE = Path.home() / "Desktop" / "hermes_workspace"
 BRIEFINGS_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "briefings"
-
-
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _load_sync_state() -> Dict[str, Any]:
@@ -244,7 +242,7 @@ def sync_all() -> Dict[str, Any]:
 
     # 同步后自动重建索引和图谱（v3.1 自维护闭环）
     if total_new > 0:
-        print("  [3/3] 重建索引和图谱...")
+        print("  [3/4] 重建索引和图谱...")
         try:
             import sys
             sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
@@ -254,7 +252,20 @@ def sync_all() -> Dict[str, Any]:
             cmd_rebuild_graph(kb)
         except Exception as e:
             print(f"  ⚠ 自动重建失败: {e}")
-        print(f"✓ 同步完成：新增 {total_new} 项，索引和图谱已更新")
+
+        # v3.4: 认知回流 — 从新同步的 hermes 会话中提炼记忆
+        print("  [4/4] 认知回流（记忆提炼）...")
+        try:
+            from memory_reflow import reflow_all
+            reflow_result = reflow_all(max_count=20)
+            if reflow_result.get("processed", 0) > 0:
+                print(f"    提炼 {reflow_result['processed']} 个会话 → {reflow_result['stats']['snippets']} 条记忆片段")
+            else:
+                print(f"    无新会话需提炼")
+        except Exception as e:
+            print(f"  ⚠ 认知回流失败: {e}")
+
+        print(f"✓ 同步完成：新增 {total_new} 项，索引/图谱/记忆已更新")
     else:
         print("✓ 同步完成：无新增（已是最新）")
 

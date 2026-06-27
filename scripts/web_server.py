@@ -21,6 +21,7 @@ import os
 import platform
 import queue
 import re
+import subprocess
 import sys
 import threading
 import time
@@ -68,7 +69,111 @@ import hermes_bridge as hb
 import sync_engine as se
 import paper_pool as pp  # v2.9.1: 候选池
 import kb_categories as kbc  # v3.1: 自定义分类
+import project_dispatch as pdh  # v3.1.0: 项目意见 + 执行追踪
 import usage_tracker as ut
+import backup_manager as bm  # v3.4.1: 提升为顶层导入，消除 3 处局部重复
+from common import lazy_load  # v3.4.1: 统一懒加载，消除 6 处 importlib 样板
+# v3.5: 课题指导模块
+import project_manager as pjm
+import unit_manager as um
+import project_kb as pkb
+import project_memory as pmm
+import project_workflow as pwf
+import project_context as pctx
+
+# P1-9: 全局文件写入锁，防止并发 read-modify-write 竞争
+_file_locks: Dict[str, threading.Lock] = {}
+_file_locks_guard = threading.Lock()
+
+def _get_file_lock(key: str) -> threading.Lock:
+    """获取指定文件的写入锁（线程安全）。"""
+    with _file_locks_guard:
+        if key not in _file_locks:
+            _file_locks[key] = threading.Lock()
+        return _file_locks[key]
+
+# P1-11: 同步/重建防重入标志
+_kb_busy = False
+_kb_busy_lock = threading.Lock()
+
+def _try_acquire_kb_busy() -> bool:
+    """尝试获取知识库忙标志，成功返回 True，已在忙返回 False。"""
+    global _kb_busy
+    with _kb_busy_lock:
+        if _kb_busy:
+            return False
+        _kb_busy = True
+        return True
+
+def _release_kb_busy() -> None:
+    """释放知识库忙标志。"""
+    global _kb_busy
+    with _kb_busy_lock:
+        _kb_busy = False
+
+
+# ---------------------------------------------------------------------------
+# v3.1.0: 项目总控 — hermes 反馈落点（plans/ 目录契约）+ 异步派活 worker
+# ---------------------------------------------------------------------------
+# hermes 工作区 plans/ 目录是 hermes 已声明的"按 task 顺序执行"契约入口
+# （见 ~/Desktop/hermes_workspace/plans/ 文件头声明 "For Hermes: 按 task 顺序执行"）
+_HERMES_PLANS_DIR = pr.HERMES_WORKSPACE / "plans"
+
+
+def _write_dispatch_to_hermes_plans(prompt: str, project: str, dispatch_id: str) -> str:
+    """把派活指令写入 hermes plans/ 目录（跨进程文件契约，让 hermes 能读到）。
+
+    文件名：{date}_linSai-dispatch.md（与 hermes cron 的 {date}_*.md 约定一致）
+    返回写入的相对路径（失败返回空串，不抛异常）。
+    """
+    try:
+        _HERMES_PLANS_DIR.mkdir(parents=True, exist_ok=True)
+        today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
+        fname = f"{today}_linSai-dispatch.md"
+        fpath = _HERMES_PLANS_DIR / fname
+        # 文件头契约：For Hermes 声明 + Task 结构
+        entry = (
+            f"\n\n## Task: {prompt[:80]}{'...' if len(prompt) > 80 else ''} 🌐 林赛CoPilot派活\n\n"
+            f"> **For Hermes:** 林赛 CoPilot 用户从项目总控派发的任务，请执行后更新对应项目状态。\n"
+            f"> **关联项目**: {project or '通用'}\n"
+            f"> **派活ID**: {dispatch_id}\n"
+            f"> **时间**: {datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')}\n\n"
+            f"**任务指令**:\n\n{prompt}\n\n"
+            f"---\n"
+        )
+        # 追加（同一天可能多个派活）
+        mode = "a" if fpath.exists() else "w"
+        with _get_file_lock(f"plans_{fname}"):
+            with open(fpath, mode, encoding="utf-8") as f:
+                f.write(entry)
+        return f"plans/{fname}"
+    except OSError:
+        return ""
+
+
+def _dispatch_hermes_async(dispatch_id: str, prompt: str, timeout: int = 300) -> None:
+    """异步派活给 hermes 并回写结果（daemon 线程，异常吞掉，结果写 project-dispatch.json）。
+
+    这是补齐 oneshot fire-and-forget 缺口的关键：oneshot 完成后把成功/失败/输出回写到
+    dispatch 记录，前端可通过 GET /api/projects/dispatches 查询状态。
+    """
+    try:
+        is_timeout = False
+        result = hb.oneshot(prompt, timeout=timeout)
+        if not result.get("success") and "超时" in result.get("error", ""):
+            is_timeout = True
+        pdh.finish_dispatch(
+            dispatch_id,
+            success=result.get("success", False),
+            output=result.get("output") or result.get("error", ""),
+            timeout=is_timeout,
+        )
+    except Exception as e:
+        pdh.finish_dispatch(dispatch_id, success=False, output=f"派活线程异常: {e}")
+
+# P1-12: 后台任务状态跟踪
+_bg_tasks: Dict[str, dict] = {}
+_bg_tasks_lock = threading.Lock()
 
 
 # ---------------------------------------------------------------------------
@@ -255,9 +360,37 @@ class RequestHandler(BaseHTTPRequestHandler):
         if path == "/api/heartbeat":
             try:
                 reminders = pe.heartbeat()
-                self._send_json({"status": "ok", "reminders": reminders})
+                # v3.4: 生成主动消息文案，让前端可直接展示
+                messages = []
+                for sig in reminders[:3]:
+                    try:
+                        msg = pe.generate_proactive_message(sig)
+                        messages.append({"type": sig.get("type",""), "severity": sig.get("severity","low"), "message": msg})
+                    except Exception:
+                        pass
+                self._send_json({"status": "ok", "reminders": reminders, "proactive_messages": messages})
             except Exception as e:
-                self._send_json({"status": "ok", "reminders": [], "error": str(e)})
+                self._send_json({"status": "ok", "reminders": [], "proactive_messages": [], "error": str(e)})
+            return
+
+        # v3.4: 记忆系统状态 API
+        if path == "/api/memory/status":
+            try:
+                from memory_reflow import get_memory_status
+                status = get_memory_status()
+                self._send_json(status)
+            except Exception as e:
+                self._send_json({"error": str(e)})
+            return
+
+        # v3.4: 手动触发认知回流
+        if path == "/api/memory/reflow":
+            try:
+                from memory_reflow import reflow_all
+                result = reflow_all(max_count=20)
+                self._send_json({"success": True, "result": result})
+            except Exception as e:
+                self._send_json({"success": False, "error": str(e)})
             return
 
         if path == "/api/references":
@@ -346,12 +479,8 @@ class RequestHandler(BaseHTTPRequestHandler):
 
         # 可用工具列表
         if path == "/api/tools":
-            import importlib.util
-            te_path = _SCRIPT_DIR / "tool_engine.py"
-            if te_path.exists():
-                spec = importlib.util.spec_from_file_location("tool_engine", te_path)
-                te_mod = importlib.util.module_from_spec(spec)
-                spec.loader.exec_module(te_mod)
+            te_mod = lazy_load("tool_engine")
+            if te_mod:
                 self._send_json({"tools": te_mod.list_tools()})
             else:
                 self._send_json({"tools": []})
@@ -423,12 +552,8 @@ class RequestHandler(BaseHTTPRequestHandler):
 
         if path == "/api/knowledge/captures":
             try:
-                import importlib.util
-                kc_path = _SCRIPT_DIR / "kb_capture.py"
-                if kc_path.exists():
-                    spec = importlib.util.spec_from_file_location("kb_capture", kc_path)
-                    kc = importlib.util.module_from_spec(spec)
-                    spec.loader.exec_module(kc)
+                kc = lazy_load("kb_capture")
+                if kc:
                     self._send_json({"captures": kc.list_captures()})
                 else:
                     self._send_json({"captures": []})
@@ -492,12 +617,8 @@ class RequestHandler(BaseHTTPRequestHandler):
 
         if path == "/api/learning/queue":
             try:
-                import importlib.util
-                qe_path = _SCRIPT_DIR / "quality_evaluator.py"
-                if qe_path.exists():
-                    spec = importlib.util.spec_from_file_location("quality_evaluator", qe_path)
-                    qe = importlib.util.module_from_spec(spec)
-                    spec.loader.exec_module(qe)
+                qe = lazy_load("quality_evaluator")
+                if qe:
                     queue = qe.get_pending_queue()
                     self._send_json({"queue": queue})
                 else:
@@ -526,6 +647,55 @@ class RequestHandler(BaseHTTPRequestHandler):
         # 项目概况
         if path == "/api/projects":
             self._send_json(pr.get_projects_overview())
+            return
+
+        # v3.1.0: 项目清单（供任务表单下拉框）
+        if path == "/api/projects/list":
+            self._send_json({"projects": pr.get_projects_list()})
+            return
+
+        # v3.1.0: 项目总控总览（聚合进度+任务+意见+执行）
+        if path == "/api/projects/overview":
+            all_tasks = tm.list_tasks()
+            task_by_status = {"backlog": 0, "active": 0, "completed": 0, "paused": 0}
+            task_by_project: Dict[str, int] = {}
+            for t in all_tasks:
+                st = t.get("status", "backlog")
+                task_by_status[st] = task_by_status.get(st, 0) + 1
+                proj = t.get("project", "") or "通用"
+                task_by_project[proj] = task_by_project.get(proj, 0) + 1
+            try:
+                nsfc = pr.parse_nsfc_state()
+            except Exception:
+                nsfc = {}
+            self._send_json({
+                "nsfc_phase": nsfc.get("phase", ""),
+                "nsfc_available": nsfc.get("available", False),
+                "task_stats": task_by_status,
+                "task_by_project": task_by_project,
+                "total_tasks": len(all_tasks),
+                "projects": pr.get_projects_list(),
+                "dispatch_stats": pdh.get_project_overview_stats(),
+            })
+            return
+
+        # v3.1.0: 项目意见列表
+        if path == "/api/projects/opinions":
+            qs = parse_qs(parsed.query)
+            self._send_json({"opinions": pdh.list_opinions(
+                project=qs.get("project", [""])[0],
+                status=qs.get("status", [""])[0],
+            )})
+            return
+
+        # v3.1.0: 执行追踪列表
+        if path == "/api/projects/dispatches":
+            qs = parse_qs(parsed.query)
+            self._send_json({"dispatches": pdh.list_dispatches(
+                project=qs.get("project", [""])[0],
+                status=qs.get("status", [""])[0],
+                limit=int(qs.get("limit", ["50"])[0]),
+            )})
             return
 
         # NSFC 仪表盘
@@ -621,16 +791,27 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json(se.get_sync_status())
             return
 
+        # P0-10: 备份列表 GET
+        if path == "/api/backup/list":
+            try:
+                backups = bm.list_backups()
+                self._send_json({"backups": [
+                    {"name": b.name, "size_kb": round(b.stat().st_size / 1024, 1),
+                     "modified": datetime.datetime.fromtimestamp(b.stat().st_mtime).isoformat()}
+                    for b in backups[:20]
+                ]})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
         # 自动同步状态（LaunchAgent + auto_sync_history）
         if path == "/api/sync/auto-status":
-            import json as _json
-            from pathlib import Path as _Path
-            agent_path = _Path.home() / "Library" / "LaunchAgents" / "com.linsai.kb-auto-sync.plist"
-            sync_state_path = _Path(__file__).parent.parent / "memory" / "sync-state.json"
+            agent_path = Path.home() / "Library" / "LaunchAgents" / "com.linsai.kb-auto-sync.plist"
+            sync_state_path = Path(__file__).parent.parent / "memory" / "sync-state.json"
             auto_history = []
             if sync_state_path.exists():
                 try:
-                    state = _json.loads(sync_state_path.read_text(encoding="utf-8"))
+                    state = json.loads(sync_state_path.read_text(encoding="utf-8"))
                     auto_history = state.get("auto_sync_history", [])[-5:]
                 except Exception:
                     pass
@@ -640,7 +821,175 @@ class RequestHandler(BaseHTTPRequestHandler):
             })
             return
 
+        # P1-12: 查询后台任务状态 (GET)
+        if path.startswith("/api/task-status/"):
+            task_id = path[len("/api/task-status/"):]
+            with _bg_tasks_lock:
+                task = _bg_tasks.get(task_id, {"status": "unknown"})
+            self._send_json(task)
+            return
+
+        # ============================================================
+        # v3.5: 课题指导模块 API（GET）
+        # ============================================================
+
+        # 课题列表
+        if path == "/api/research/projects":
+            self._send_json({"projects": pjm.list_projects()})
+            return
+
+        # 课题详情 / 课题状态概览
+        m = re.match(r"^/api/research/projects/([^/]+)$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                self._send_json(pjm.get_project(pid))
+            except FileNotFoundError:
+                self._send_json({"error": f"课题不存在: {pid}"}, 404)
+            return
+
+        # 课题完整状态（含单元+任务+统计）
+        m = re.match(r"^/api/research/projects/([^/]+)/status$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                self._send_json(pwf.get_project_status(pid))
+            except FileNotFoundError:
+                self._send_json({"error": f"课题不存在: {pid}"}, 404)
+            return
+
+        # 单元列表
+        m = re.match(r"^/api/research/projects/([^/]+)/units$", path)
+        if m:
+            pid = m.group(1)
+            self._send_json({"units": um.list_units(pid)})
+            return
+
+        # 单元详情
+        m = re.match(r"^/api/research/projects/([^/]+)/units/([^/]+)$", path)
+        if m:
+            pid, uid = m.group(1), m.group(2)
+            try:
+                self._send_json(um.get_unit(uid))
+            except FileNotFoundError:
+                self._send_json({"error": f"单元不存在: {uid}"}, 404)
+            return
+
+        # 知识库文档列表（支持 ?layer=&type=&tag=&unit= 过滤）
+        m = re.match(r"^/api/research/projects/([^/]+)/kb/documents$", path)
+        if m:
+            pid = m.group(1)
+            qs = parse_qs(parsed.query)
+            docs = pkb.list_documents(
+                pid,
+                layer=qs.get("layer", ["all"])[0],
+                doc_type=qs.get("type", [""])[0],
+                tag=qs.get("tag", [""])[0],
+                unit=qs.get("unit", [""])[0],
+            )
+            self._send_json({"documents": docs})
+            return
+
+        # 知识库搜索（?q=&layer=）
+        m = re.match(r"^/api/research/projects/([^/]+)/kb/search$", path)
+        if m:
+            pid = m.group(1)
+            qs = parse_qs(parsed.query)
+            q = qs.get("q", [""])[0]
+            layer = qs.get("layer", ["all"])[0]
+            results = pkb.search(pid, q, layer=layer) if q else []
+            self._send_json({"results": results})
+            return
+
+        # 知识库统计
+        m = re.match(r"^/api/research/projects/([^/]+)/kb/stats$", path)
+        if m:
+            pid = m.group(1)
+            self._send_json(pkb.get_kb_stats(pid))
+            return
+
+        # 知识库标签列表
+        m = re.match(r"^/api/research/projects/([^/]+)/kb/tags$", path)
+        if m:
+            pid = m.group(1)
+            self._send_json({"tags": pkb.get_tags(pid)})
+            return
+
+        # 知识库文档详情（path 参数是文档相对路径，URL 编码）
+        m = re.match(r"^/api/research/projects/([^/]+)/kb/doc/(.+)$", path)
+        if m:
+            pid, doc_path = m.group(1), m.group(2)
+            doc = pkb.get_document(pid, doc_path)
+            if doc:
+                self._send_json(doc)
+            else:
+                self._send_json({"error": "文档不存在"}, 404)
+            return
+
+        # 课题记忆上下文
+        m = re.match(r"^/api/research/projects/([^/]+)/memory$", path)
+        if m:
+            pid = m.group(1)
+            self._send_json({"context": pmm.get_project_context(pid)})
+            return
+
+        # 课题记忆统计
+        m = re.match(r"^/api/research/projects/([^/]+)/memory/stats$", path)
+        if m:
+            pid = m.group(1)
+            self._send_json(pmm.get_memory_stats(pid))
+            return
+
+        # 课题记忆片段列表
+        m = re.match(r"^/api/research/projects/([^/]+)/memory/snippets$", path)
+        if m:
+            pid = m.group(1)
+            self._send_json({"snippets": pmm.list_snippets(pid)})
+            return
+
+        # 课题对话记录列表
+        m = re.match(r"^/api/research/projects/([^/]+)/memory/conversations$", path)
+        if m:
+            pid = m.group(1)
+            self._send_json({"conversations": pmm.list_conversations(pid)})
+            return
+
+        # 课题长期记忆文件全文
+        m = re.match(r"^/api/research/projects/([^/]+)/memory/file$", path)
+        if m:
+            pid = m.group(1)
+            self._send_json({"content": pjm.get_project_memory(pid)})
+            return
+
+        # 跨课题搜索
+        if path == "/api/research/search":
+            qs = parse_qs(parsed.query)
+            q = qs.get("q", [""])[0]
+            results = pctx.search_across_projects(q) if q else []
+            self._send_json({"results": results})
+            return
+
         self._send_json({"error": f"Not found: {path}"}, 404)
+
+    def _do_dispatch_hermes(self, task_id: str, prompt: str, project: str, source: str = "manual") -> str:
+        """派活给 hermes 的统一入口：记录 dispatch → 写 plans/ → 起异步线程执行 → 回写结果。
+
+        返回 dispatch_id（供前端跳执行追踪页查询状态）。
+        """
+        dispatch = pdh.record_dispatch(task_id, prompt, project, source=source)
+        dispatch_id = dispatch["id"]
+        # 1. 写 hermes plans/ 目录（跨进程契约，让 hermes cron/agent 能读到）
+        try:
+            _write_dispatch_to_hermes_plans(prompt, project, dispatch_id)
+        except Exception:
+            pass
+        # 2. 起异步线程执行 oneshot 并回写结果（补齐 fire-and-forget 缺口）
+        threading.Thread(
+            target=_dispatch_hermes_async,
+            args=(dispatch_id, prompt, 300),
+            daemon=True,
+        ).start()
+        return dispatch_id
 
     def do_POST(self) -> None:
         """处理 POST 请求。"""
@@ -680,12 +1029,8 @@ class RequestHandler(BaseHTTPRequestHandler):
         # 学习触发
         if path == "/api/learning/trigger":
             try:
-                import importlib.util
-                le_path = _SCRIPT_DIR / "learning_engine.py"
-                if le_path.exists():
-                    spec = importlib.util.spec_from_file_location("learning_engine", le_path)
-                    le = importlib.util.module_from_spec(spec)
-                    spec.loader.exec_module(le)
+                le = lazy_load("learning_engine")
+                if le:
                     query = body.get("query")
                     sources = body.get("sources", ["arxiv", "wikipedia", "raw"])
                     max_items = body.get("max_items", 2)
@@ -700,12 +1045,8 @@ class RequestHandler(BaseHTTPRequestHandler):
         # 学习审批
         if path == "/api/learning/review":
             try:
-                import importlib.util
-                qe_path = _SCRIPT_DIR / "quality_evaluator.py"
-                if qe_path.exists():
-                    spec = importlib.util.spec_from_file_location("quality_evaluator", qe_path)
-                    qe = importlib.util.module_from_spec(spec)
-                    spec.loader.exec_module(qe)
+                qe = lazy_load("quality_evaluator")
+                if qe:
                     action = body.get("action", "")
                     wiki_path = body.get("wiki_path", "")
                     if action == "approve":
@@ -758,6 +1099,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                     system_prompt = context.get("system_prompt", "")
                     messages = context.get("messages", [])
 
+                    # v3.4: 发送知识库命中元数据（供前端展示引用来源）
+                    kb_hits = context.get("kb_hits", [])
+                    if kb_hits:
+                        q.put(("metadata", {"kb_hits": kb_hits}))
+
                     # 调用 LLM（支持工具调用）
                     response, usage, provider_name, tool_log = ce.call_llm_with_tools(system_prompt, messages)
 
@@ -801,6 +1147,9 @@ class RequestHandler(BaseHTTPRequestHandler):
                     full_response += data
                 elif event_type == "tools":
                     self._send_sse({"type": "tools", "calls": data})
+                elif event_type == "metadata":
+                    # v3.4: 知识库命中元数据
+                    self._send_sse({"type": "metadata", **data})
                 elif event_type == "done":
                     self._send_sse({"type": "done"})
                     full_response = data  # 使用完整原始文本
@@ -862,19 +1211,30 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"error": f"Provider {name} 不可用"}, 400)
             return
 
-        # 重建知识库索引
+        # 重建知识库索引 (P1-11/P1-12: 防重入 + 后台线程)
         if path == "/api/knowledge/reindex":
-            try:
-                idx = kb.build_index(force=True)
-                self._send_json({
-                    "success": True,
-                    "documents": len(idx.get("documents", {})),
-                    "terms": len(idx.get("inverted", {})),
-                })
-            except Exception as e:
-                if _log:
-                    _log.error(f"API 错误 {path}: {e}", exc_info=True)
-                self._send_json({"error": str(e)}, 500)
+            if not _try_acquire_kb_busy():
+                self._send_json({"error": "知识库正在执行其他操作，请稍后再试"}, 409)
+                return
+            # P1-12: 后台线程执行，避免长时间阻塞
+            task_id = f"reindex_{int(time.time())}"
+            def _reindex_worker():
+                try:
+                    idx = kb.build_index(force=True)
+                    with _bg_tasks_lock:
+                        _bg_tasks[task_id] = {
+                            "status": "done",
+                            "documents": len(idx.get("documents", {})),
+                            "terms": len(idx.get("inverted", {})),
+                            "finished_at": datetime.datetime.now().isoformat(),
+                        }
+                except Exception as e:
+                    with _bg_tasks_lock:
+                        _bg_tasks[task_id] = {"status": "error", "error": str(e)}
+                finally:
+                    _release_kb_busy()
+            threading.Thread(target=_reindex_worker, daemon=True).start()
+            self._send_json({"success": True, "message": "索引重建已在后台启动", "task_id": task_id})
             return
 
         # 知识库增强 POST API
@@ -947,14 +1307,10 @@ class RequestHandler(BaseHTTPRequestHandler):
         if path == "/api/knowledge/maintenance":
             task = body.get("task", "health")
             try:
-                import importlib.util
-                km_path = _SCRIPT_DIR / "kb_maintenance.py"
-                if not km_path.exists():
+                km = lazy_load("kb_maintenance")
+                if not km:
                     self._send_json({"error": "维护模块未找到"}, 500)
                     return
-                spec = importlib.util.spec_from_file_location("kb_maintenance", km_path)
-                km = importlib.util.module_from_spec(spec)
-                spec.loader.exec_module(km)
                 kb_mod = km._import_kb()
 
                 if task == "reindex":
@@ -1217,10 +1573,53 @@ class RequestHandler(BaseHTTPRequestHandler):
             self._send_json({"success": True, "results": results})
             return
 
-        # 触发多端同步
+        # 触发多端同步 (P1-11: 防重入)
         if path == "/api/sync/run":
-            result = se.sync_all()
-            self._send_json({"success": True, "result": result})
+            if not _try_acquire_kb_busy():
+                self._send_json({"error": "知识库正在执行其他操作，请稍后再试"}, 409)
+                return
+            try:
+                result = se.sync_all()
+                self._send_json({"success": True, "result": result})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            finally:
+                _release_kb_busy()
+            return
+
+        # P0-10: 备份 API
+        if path == "/api/backup":
+            action = body.get("action", "create")
+            try:
+                if action == "list":
+                    backups = bm.list_backups()
+                    self._send_json({"success": True, "backups": [
+                        {"name": b.name, "size_kb": round(b.stat().st_size / 1024, 1),
+                         "modified": datetime.datetime.fromtimestamp(b.stat().st_mtime).isoformat()}
+                        for b in backups[:20]
+                    ]})
+                elif action == "create":
+                    zip_path = bm.create_backup(label="web-manual")
+                    if zip_path:
+                        self._send_json({"success": True, "path": zip_path.name,
+                                         "size_kb": round(zip_path.stat().st_size / 1024, 1)})
+                    else:
+                        self._send_json({"error": "备份失败"}, 500)
+                elif action == "restore":
+                    name = body.get("name", "")
+                    if not name:
+                        self._send_json({"error": "缺少备份名称"}, 400)
+                        return
+                    backup_path = bm.BACKUPS_DIR / name
+                    if not backup_path.exists():
+                        self._send_json({"error": "备份不存在"}, 404)
+                        return
+                    ok = bm.restore_backup(backup_path)
+                    self._send_json({"success": ok})
+                else:
+                    self._send_json({"error": "未知操作"}, 400)
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
             return
 
         # v2.9.0: 文献反馈（👍感兴趣/👎跳过/📥归档）→ 归档+深分析+hermes偏好
@@ -1232,17 +1631,16 @@ class RequestHandler(BaseHTTPRequestHandler):
                 return
 
             # 记录反馈到本地（累积偏好）
-            import json as _json
             from datetime import datetime as _dt, timezone as _tz
             fb_path = _PROJECT_ROOT / "memory" / "paper-feedback.json"
             fb = []
             if fb_path.exists():
                 try:
-                    fb = _json.loads(fb_path.read_text(encoding="utf-8"))
+                    fb = json.loads(fb_path.read_text(encoding="utf-8"))
                 except Exception:
                     fb = []
             fb.append({"arxiv_id": arxiv_id, "action": action, "timestamp": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ")})
-            fb_path.write_text(_json.dumps(fb[-200:], ensure_ascii=False, indent=2), encoding="utf-8")
+            fb_path.write_text(json.dumps(fb[-200:], ensure_ascii=False, indent=2), encoding="utf-8")
 
             result = {"action": action, "arxiv_id": arxiv_id}
 
@@ -1321,20 +1719,19 @@ class RequestHandler(BaseHTTPRequestHandler):
         # v2.9.2: NSFC 待决策项操作（approve/reject/discuss）
         m = re.match(r"^/api/projects/nsfc/pending/(.+)$", path)
         if m:
-            import json as _json
             from datetime import datetime as _dt, timezone as _tz
             pid = m.group(1)
             action = body.get("action", "").strip()  # approve/reject/discuss
             dec_path = _PROJECT_ROOT / "memory" / "nsfc-decisions.json"
             decs = {}
             if dec_path.exists():
-                try: decs = _json.loads(dec_path.read_text(encoding="utf-8"))
+                try: decs = json.loads(dec_path.read_text(encoding="utf-8"))
                 except Exception: decs = {}
 
             if action == "discuss":
                 # 标记讨论中，返回该课题的知识库上下文供注入
                 decs[pid] = {"status": "discussing", "started_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
-                dec_path.write_text(_json.dumps(decs, ensure_ascii=False, indent=2), encoding="utf-8")
+                dec_path.write_text(json.dumps(decs, ensure_ascii=False, indent=2), encoding="utf-8")
                 title = body.get("title", "")
                 topic = body.get("related_topic", "")
                 # 收集该课题的 references 上下文
@@ -1347,7 +1744,7 @@ class RequestHandler(BaseHTTPRequestHandler):
             elif action in ("approve", "reject"):
                 decs[pid] = {"status": action, "decided_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
                              "summary": body.get("summary", "")}
-                dec_path.write_text(_json.dumps(decs, ensure_ascii=False, indent=2), encoding="utf-8")
+                dec_path.write_text(json.dumps(decs, ensure_ascii=False, indent=2), encoding="utf-8")
                 # 异步反馈 hermes
                 title = body.get("title", "")
                 try:
@@ -1365,7 +1762,6 @@ class RequestHandler(BaseHTTPRequestHandler):
 
         # v2.9.2: NSFC 讨论总结 → 写 discussions + 反馈 hermes
         if path == "/api/projects/nsfc/discuss-summary":
-            import json as _json
             from datetime import datetime as _dt, timezone as _tz
             pid = body.get("pending_id", "")
             title = body.get("title", "")
@@ -1393,11 +1789,11 @@ class RequestHandler(BaseHTTPRequestHandler):
             dec_path = _PROJECT_ROOT / "memory" / "nsfc-decisions.json"
             decs = {}
             if dec_path.exists():
-                try: decs = _json.loads(dec_path.read_text(encoding="utf-8"))
+                try: decs = json.loads(dec_path.read_text(encoding="utf-8"))
                 except Exception: decs = {}
             if pid:
                 decs[pid] = {"status": "discussed", "decided_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "summary": summary[:200]}
-                dec_path.write_text(_json.dumps(decs, ensure_ascii=False, indent=2), encoding="utf-8")
+                dec_path.write_text(json.dumps(decs, ensure_ascii=False, indent=2), encoding="utf-8")
 
             # 异步反馈 hermes
             try:
@@ -1417,14 +1813,256 @@ class RequestHandler(BaseHTTPRequestHandler):
             if not title:
                 self._send_json({"error": "缺少 title"}, 400)
                 return
+            project = body.get("project", "").strip()
+            assignee = body.get("assignee", "myself")
             tid, _ = tm.create_task(
                 title=title,
                 priority=body.get("priority", "medium"),
                 category=body.get("category", "general"),
                 due_date=body.get("due_date", ""),
                 description=body.get("description", ""),
+                project=project,
+                assignee=assignee,
             )
-            self._send_json({"success": True, "task_id": tid, "title": title})
+            # 创建即派发：assignee=hermes 时自动派给 hermes 执行
+            dispatch_id = ""
+            if assignee == "hermes":
+                prompt = body.get("prompt", "").strip() or f"请执行项目任务：{title}。" + (f"\n描述：{body.get('description','')}" if body.get("description") else "")
+                dispatch_id = self._do_dispatch_hermes(tid, prompt, project, source="create")
+            # P5-1: 返回完整任务对象，确保前端 createNewTask() 可直接 push 到 State.tasks
+            try:
+                task_obj = tm.get_task(tid)
+                task_obj["dispatch_id"] = dispatch_id
+                self._send_json(task_obj)
+            except Exception:
+                self._send_json({"success": True, "task_id": tid, "title": title, "status": "backlog", "dispatch_id": dispatch_id})
+            return
+
+        # v3.1.0: 派活给 hermes（任务卡片⚡按钮）
+        m = re.match(r"^/api/tasks/([^/]+)/dispatch$", path)
+        if m:
+            tid = m.group(1)
+            prompt = body.get("prompt", "").strip()
+            project = body.get("project", "")
+            if not prompt:
+                # 未给 prompt 时，从任务自动构造
+                try:
+                    task = tm.get_task(tid)
+                    prompt = f"请执行项目任务：{task.get('title','')}。" + (f"\n描述：{task.get('description','')}" if task.get("description") else "")
+                    project = project or task.get("project", "")
+                except Exception:
+                    self._send_json({"error": "任务不存在，且未提供 prompt"}, 400)
+                    return
+            dispatch_id = self._do_dispatch_hermes(tid, prompt, project, source="manual")
+            self._send_json({"success": True, "dispatch_id": dispatch_id})
+            return
+
+        # v3.1.0: 提交项目意见
+        if path == "/api/projects/opinions":
+            content = body.get("content", "").strip()
+            if not content:
+                self._send_json({"error": "缺少 content"}, 400)
+                return
+            project = body.get("project", "").strip()
+            feed_hermes = bool(body.get("feed_hermes", False))
+            op = pdh.add_opinion(project, content)
+            # 可选：反馈给 hermes（fire-and-forget）
+            if feed_hermes:
+                try:
+                    prompt = f"用户对项目「{project or '通用'}」提出意见：{content}。请知悉并考虑纳入后续工作。"
+                    hb.oneshot  # 仅校验可调用，真正执行在 daemon 线程
+                    threading.Thread(
+                        target=lambda: hb.oneshot(prompt, timeout=120),
+                        daemon=True,
+                    ).start()
+                    pdh.mark_opinion_fed(op["id"])
+                    op["fed_to_hermes"] = True
+                except Exception:
+                    pass
+            self._send_json({"success": True, "opinion": op})
+            return
+
+        # ============================================================
+        # v3.5: 课题指导模块 API（POST）
+        # ============================================================
+
+        # 创建课题
+        if path == "/api/research/projects":
+            try:
+                pid, _ = pjm.create_project(
+                    body.get("name", "新课题"),
+                    goal=body.get("goal", ""),
+                    description=body.get("description", ""),
+                )
+                self._send_json({"project_id": pid})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 创建单元
+        m = re.match(r"^/api/research/projects/([^/]+)/units$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                uid, _ = um.create_unit(
+                    pid,
+                    body.get("title", "新单元"),
+                    acceptance_criteria=body.get("acceptance_criteria", []),
+                    description=body.get("description", ""),
+                )
+                self._send_json({"unit_id": uid})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 知识库添加文档
+        m = re.match(r"^/api/research/projects/([^/]+)/kb/documents$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                rel_path = pkb.add_document(
+                    pid,
+                    layer=body.get("layer", ""),
+                    doc_type=body.get("doc_type", "references"),
+                    title=body.get("title", "未命名文档"),
+                    content=body.get("content", ""),
+                    tags=body.get("tags", []),
+                    unit=body.get("unit", ""),
+                    source_raw=body.get("source_raw", ""),
+                )
+                self._send_json({"path": rel_path})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 知识库导入外部文件
+        m = re.match(r"^/api/research/projects/([^/]+)/kb/import$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                rel_path = pkb.import_raw_file(
+                    pid,
+                    body.get("source_path", ""),
+                    doc_type=body.get("doc_type", "references"),
+                    title=body.get("title", ""),
+                    tags=body.get("tags", []),
+                )
+                self._send_json({"path": rel_path})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 添加记忆片段
+        m = re.match(r"^/api/research/projects/([^/]+)/memory/snippets$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                pmm.create_snippet(
+                    pid,
+                    trigger=body.get("trigger", ""),
+                    summary=body.get("summary", ""),
+                    source=body.get("source", ""),
+                    importance=body.get("importance", 3),
+                )
+                self._send_json({"success": True})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 保存对话记录
+        m = re.match(r"^/api/research/projects/([^/]+)/memory/conversations$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                pmm.save_conversation(
+                    pid,
+                    body.get("session_id", ""),
+                    body.get("messages", []),
+                    summary=body.get("summary", ""),
+                )
+                self._send_json({"success": True})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 添加决策记录
+        m = re.match(r"^/api/research/projects/([^/]+)/memory/decisions$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                pmm.add_decision(
+                    pid,
+                    title=body.get("title", ""),
+                    rationale=body.get("rationale", ""),
+                    unit_id=body.get("unit_id", ""),
+                )
+                self._send_json({"success": True})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 工作流：规划单元（批量）
+        m = re.match(r"^/api/research/projects/([^/]+)/workflow/plan$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                unit_ids = pwf.plan_units(pid, body.get("unit_specs", []))
+                self._send_json({"unit_ids": unit_ids})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 工作流：开始单元执行（创建任务）
+        m = re.match(r"^/api/research/projects/([^/]+)/workflow/execute$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                task_ids = pwf.start_unit_execution(
+                    pid,
+                    body.get("unit_id", ""),
+                    body.get("task_specs", []),
+                )
+                self._send_json({"task_ids": task_ids})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 工作流：单元验收
+        m = re.match(r"^/api/research/projects/([^/]+)/workflow/review$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                result = pwf.review_unit(pid, body.get("unit_id", ""))
+                self._send_json(result)
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 工作流：完成单元
+        m = re.match(r"^/api/research/projects/([^/]+)/workflow/complete$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                result = pwf.complete_unit(
+                    pid,
+                    body.get("unit_id", ""),
+                    review_notes=body.get("review_notes", ""),
+                    report_content=body.get("report_content", ""),
+                )
+                self._send_json(result)
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 工作流：生成课题总结
+        m = re.match(r"^/api/research/projects/([^/]+)/workflow/summary$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                report_path = pwf.generate_project_summary(pid)
+                self._send_json({"path": report_path})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)
@@ -1448,6 +2086,18 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"success": True})
             else:
                 self._send_json({"error": "消息未找到"}, 404)
+            return
+
+        # v3.1.0: PUT /api/tasks/<id> 通用字段更新（含 status 拖拽，修复 task.js:84 的 404 bug）
+        # 注意：严格匹配，排除 /subtasks /progress /dispatch 子路由
+        m = re.match(r"^/api/tasks/([^/]+)$", path)
+        if m and "/subtasks" not in path and "/progress" not in path and "/dispatch" not in path:
+            tid = m.group(1)
+            try:
+                updated = tm.update_task_fields(tid, **body)
+                self._send_json({"success": True, "task": updated})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
             return
 
         # PUT /api/tasks/<id>/subtasks
@@ -1474,6 +2124,91 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"error": str(e)}, 500)
             return
 
+        # v3.1.0: PUT /api/projects/opinions/<id>/resolve 标记意见已解决
+        m = re.match(r"^/api/projects/opinions/([^/]+)/resolve$", path)
+        if m:
+            op_id = m.group(1)
+            resolved = pdh.resolve_opinion(op_id)
+            if resolved:
+                self._send_json({"success": True, "opinion": resolved})
+            else:
+                self._send_json({"error": "意见不存在"}, 404)
+            return
+
+        # ============================================================
+        # v3.5: 课题指导模块 API（PUT）
+        # ============================================================
+
+        # 更新课题
+        m = re.match(r"^/api/research/projects/([^/]+)$", path)
+        if m and "/units/" not in path and "/workflow/" not in path and "/kb/" not in path and "/memory" not in path:
+            pid = m.group(1)
+            try:
+                updated = pjm.update_project(pid, **body)
+                self._send_json({"success": True, "project": updated})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 课题状态流转
+        m = re.match(r"^/api/research/projects/([^/]+)/transition$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                updated = pjm.transition_project(pid, body.get("status", ""))
+                self._send_json({"success": True, "project": updated})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 更新单元
+        m = re.match(r"^/api/research/projects/([^/]+)/units/([^/]+)$", path)
+        if m and "/transition" not in path and "/acceptance/" not in path:
+            pid, uid = m.group(1), m.group(2)
+            try:
+                updated = um.update_unit(uid, **body)
+                self._send_json({"success": True, "unit": updated})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 单元状态流转
+        m = re.match(r"^/api/research/projects/([^/]+)/units/([^/]+)/transition$", path)
+        if m:
+            pid, uid = m.group(1), m.group(2)
+            try:
+                updated = um.transition_unit(uid, body.get("status", ""))
+                self._send_json({"success": True, "unit": updated})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 验收标准勾选
+        m = re.match(r"^/api/research/projects/([^/]+)/units/([^/]+)/acceptance/([^/]+)$", path)
+        if m:
+            pid, uid, ac_id = m.group(1), m.group(2), m.group(3)
+            try:
+                updated = um.check_acceptance_criterion(
+                    uid, ac_id,
+                    met=body.get("met", True),
+                    notes=body.get("notes", ""),
+                )
+                self._send_json({"success": True, "unit": updated})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 更新课题长期记忆文件
+        m = re.match(r"^/api/research/projects/([^/]+)/memory/file$", path)
+        if m:
+            pid = m.group(1)
+            try:
+                pjm.update_project_memory(pid, body.get("content", ""))
+                self._send_json({"success": True})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_DELETE(self) -> None:
@@ -1492,14 +2227,30 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"error": "消息未找到"}, 404)
             return
 
-        # DELETE /api/knowledge/wiki/{path}
+        # DELETE /api/knowledge/wiki/{path}  (P0-9: 软删除到 .trash/)
         if path.startswith("/api/knowledge/wiki/"):
             wiki_rel = path[len("/api/knowledge/wiki/"):]
-            ok = kb.delete_wiki_page(f"wiki/{wiki_rel}")
-            if ok:
-                self._send_json({"success": True})
-            else:
+            # P0-9: 软删除 — 移到 .trash/ 而非直接 unlink
+            wiki_full = kb.KNOWLEDGE_DIR / f"wiki/{wiki_rel}"
+            if not wiki_full.exists():
                 self._send_json({"error": "Wiki 页面不存在"}, 404)
+                return
+            trash_dir = kb.KNOWLEDGE_DIR / ".trash"
+            trash_dir.mkdir(exist_ok=True)
+            trash_path = trash_dir / Path(wiki_rel).name
+            # 避免覆盖
+            if trash_path.exists():
+                trash_path = trash_dir / f"{Path(wiki_rel).stem}_{int(time.time())}.md"
+            try:
+                wiki_full.rename(trash_path)
+                # 清理图谱
+                page = kb.get_wiki_page(f"wiki/{wiki_rel}")
+                title = page["frontmatter"].get("title", "") if page else ""
+                if title:
+                    kb._remove_graph_node(title)
+                self._send_json({"success": True, "message": f"已移至回收站: {trash_path.name}"})
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
             return
 
         # v2.8.0: DELETE /api/tasks/<id>
@@ -1511,6 +2262,38 @@ class RequestHandler(BaseHTTPRequestHandler):
                 self._send_json({"success": True})
             else:
                 self._send_json({"error": "任务不存在"}, 404)
+            return
+
+        # ============================================================
+        # v3.5: 课题指导模块 API（DELETE）
+        # ============================================================
+
+        # 删除课题
+        m = re.match(r"^/api/research/projects/([^/]+)$", path)
+        if m and "/units/" not in path:
+            pid = m.group(1)
+            try:
+                ok = pjm.delete_project(pid, confirm=True)
+                if ok:
+                    self._send_json({"success": True})
+                else:
+                    self._send_json({"error": "删除失败"}, 500)
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
+            return
+
+        # 删除单元
+        m = re.match(r"^/api/research/projects/([^/]+)/units/([^/]+)$", path)
+        if m:
+            pid, uid = m.group(1), m.group(2)
+            try:
+                ok = um.delete_unit(uid, confirm=True)
+                if ok:
+                    self._send_json({"success": True})
+                else:
+                    self._send_json({"error": "删除失败"}, 500)
+            except Exception as e:
+                self._send_json({"error": str(e)}, 500)
             return
 
         self._send_json({"error": f"Not found: {path}"}, 404)
@@ -1534,41 +2317,50 @@ def _edit_message(session_id: str, msg_id: str, new_content: str) -> bool:
     msg_path = _PROJECT_ROOT / "sessions" / session_id / "messages.json"
     if not msg_path.exists():
         return False
+    lock = _get_file_lock(str(msg_path))  # P1-9: 文件锁
     try:
-        with open(msg_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        messages = data if isinstance(data, list) else data.get("messages", [])
-        for msg in messages:
-            if msg.get("msg_id") == msg_id:
-                msg["content"] = new_content
-                break
-        else:
-            return False
-        with open(msg_path, "w", encoding="utf-8") as f:
-            json.dump(data if isinstance(data, list) else {"messages": messages},
-                      f, ensure_ascii=False, indent=2)
-        return True
+        with lock:
+            with open(msg_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            messages = data if isinstance(data, list) else data.get("messages", [])
+            for msg in messages:
+                if msg.get("msg_id") == msg_id:
+                    msg["content"] = new_content
+                    break
+            else:
+                return False
+            with open(msg_path, "w", encoding="utf-8") as f:
+                json.dump(data if isinstance(data, list) else {"messages": messages},
+                          f, ensure_ascii=False, indent=2)
+            return True
     except Exception:
         return False
 
 
 def _delete_message(session_id: str, msg_id: str) -> bool:
-    """删除指定消息。"""
+    """删除指定消息（P0-9: 删除前自动备份）。"""
     msg_path = _PROJECT_ROOT / "sessions" / session_id / "messages.json"
     if not msg_path.exists():
         return False
+    lock = _get_file_lock(str(msg_path))  # P1-9: 文件锁
     try:
-        with open(msg_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        messages = data if isinstance(data, list) else data.get("messages", [])
-        original_len = len(messages)
-        messages = [m for m in messages if m.get("msg_id") != msg_id]
-        if len(messages) == original_len:
-            return False
-        with open(msg_path, "w", encoding="utf-8") as f:
-            json.dump(data if isinstance(data, list) else {"messages": messages},
-                      f, ensure_ascii=False, indent=2)
-        return True
+        with lock:
+            with open(msg_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            messages = data if isinstance(data, list) else data.get("messages", [])
+            original_len = len(messages)
+            messages = [m for m in messages if m.get("msg_id") != msg_id]
+            if len(messages) == original_len:
+                return False
+            # P0-9: 删除前备份
+            try:
+                bm.create_backup(targets=["sessions"], label="pre-delete-msg")
+            except Exception:
+                pass
+            with open(msg_path, "w", encoding="utf-8") as f:
+                json.dump(data if isinstance(data, list) else {"messages": messages},
+                          f, ensure_ascii=False, indent=2)
+            return True
     except Exception:
         return False
 

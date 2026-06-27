@@ -26,6 +26,8 @@ _PROJECT_ROOT = _SCRIPT_DIR.parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
+from common import now_utc as _now_utc, save_json as _write_json, load_json as _read_json
+
 try:
     from session_manager import list_sessions, load_session
     from task_manager import list_tasks, create_task, transition_task, delete_task
@@ -54,10 +56,6 @@ MODE_PATTERNS: dict[str, list[str]] = {
 # ---------------------------------------------------------------------------
 # 工具函数
 # ---------------------------------------------------------------------------
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-
 def _parse_utc(ts: str) -> datetime:
     if ts.endswith("Z"):
         ts = ts[:-1] + "+00:00"
@@ -68,19 +66,6 @@ def _autonomy_path() -> Path:
     d = _PROJECT_ROOT / "memory"
     d.mkdir(parents=True, exist_ok=True)
     return d / "autonomy-level.json"
-
-
-def _write_json(path: Path, data: Any) -> None:
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-
-def _read_json(path: Path, default: Any = None) -> Any:
-    if path.exists():
-        try:
-            return json.loads(path.read_text(encoding="utf-8"))
-        except Exception:
-            pass
-    return default if default is not None else {}
 
 
 # ---------------------------------------------------------------------------

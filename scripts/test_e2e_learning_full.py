@@ -14,22 +14,17 @@ import sys
 import subprocess
 import re
 from pathlib import Path
-from datetime import datetime, timezone
 
 PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
 from external_fetcher import fetch_arxiv
-from learning_engine import distill_content, auto_distill_raw, _extract_wiki_content
+from learning_engine import auto_distill_raw, _extract_wiki_content
 import knowledge_base as kb_module
 
 WIKI_DIR = PROJECT_ROOT / "knowledge" / "wiki"
 RAW_DIR = PROJECT_ROOT / "knowledge" / "raw"
 WIKI_DIR.mkdir(parents=True, exist_ok=True)
-
-
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _call_claude(system_prompt: str, prompt: str, timeout: int = 180) -> str:

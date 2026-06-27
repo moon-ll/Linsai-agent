@@ -66,9 +66,22 @@ function bindEvents() {
     showToast(`自主级别已设为: ${e.target.value}`);
   });
 
-  // 设置面板内备份按钮
-  document.getElementById('drawer-backup-btn').addEventListener('click', () => {
-    showToast('请在终端运行: python3 scripts/backup_manager.py', 'warning', 5000);
+  // P0-10: 设置面板内备份按钮 — 真正触发备份
+  document.getElementById('drawer-backup-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('drawer-backup-btn');
+    if (btn) { btn.disabled = true; btn.textContent = '◐ 备份中…'; }
+    try {
+      const data = await apiPost('/api/backup', { action: 'create' }, 60000);
+      if (data.success) {
+        showToast(`✓ 备份成功: ${data.path} (${data.size_kb} KB)`, 'success', 5000);
+      } else {
+        showToast('✗ 备份失败', 'error');
+      }
+    } catch (e) {
+      showToast('✗ 备份失败: ' + e.message, 'error');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = '💾 立即备份'; }
+    }
   });
 
   // 加载 LLM 状态
@@ -256,8 +269,22 @@ function bindEvents() {
   });
 
   // 底部按钮
-  document.getElementById('backup-btn').addEventListener('click', () => {
-    showToast('请在终端运行: python3 scripts/backup_manager.py', 'warning', 5000);
+  // P0-10: 底部备份按钮 — 真正触发备份
+  document.getElementById('backup-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('backup-btn');
+    if (btn) { btn.disabled = true; btn.textContent = '◐ 备份中…'; }
+    try {
+      const data = await apiPost('/api/backup', { action: 'create' }, 60000);
+      if (data.success) {
+        showToast(`✓ 备份成功: ${data.path} (${data.size_kb} KB)`, 'success', 5000);
+      } else {
+        showToast('✗ 备份失败', 'error');
+      }
+    } catch (e) {
+      showToast('✗ 备份失败: ' + e.message, 'error');
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = '💾 备份'; }
+    }
   });
   document.getElementById('export-btn').addEventListener('click', async () => {
     if (!State.currentSessionId) {
@@ -338,6 +365,7 @@ function bindKbManagerEvents() {
   toggleToolbarActive('toolbar-learning', 'learning-manager-overlay');
   toggleToolbarActive('toolbar-projects', 'projects-overlay');
   toggleToolbarActive('toolbar-hermes', 'hermes-overlay');
+  toggleToolbarActive('toolbar-research', 'research-overlay');
   document.getElementById('toolbar-tasks')?.addEventListener('click', () => {
     // P0-8: 修复窄屏失效 + 移除无效 flash
     const sidebar = document.getElementById('right-sidebar');
@@ -418,9 +446,10 @@ function bindKbManagerEvents() {
   // P0-2: 绑定学习配置保存按钮
   document.getElementById('save-learning-config')?.addEventListener('click', saveLearningConfig);
 
-  // 项目面板 + hermes 控制台
+  // 项目面板 + hermes 控制台 + 课题指导
   if (typeof bindProjectsEvents === 'function') bindProjectsEvents();
   if (typeof bindHermesEvents === 'function') bindHermesEvents();
+  if (typeof bindResearchEvents === 'function') bindResearchEvents();
 
   // 任务新建/删除
   document.getElementById('task-add-btn')?.addEventListener('click', () => {
@@ -432,7 +461,9 @@ function bindKbManagerEvents() {
   });
   document.getElementById('task-add-confirm')?.addEventListener('click', () => {
     const title = document.getElementById('task-add-title')?.value.trim();
-    if (title) createNewTask(title);
+    const priority = document.getElementById('task-add-priority')?.value || 'medium';  // v3.1.0: 修复 priority 被丢弃
+    if (title) createNewTask(title, '', priority);
+    document.getElementById('task-add-title').value = '';
     document.getElementById('task-add-form').style.display = 'none';
   });
   document.getElementById('task-add-cancel')?.addEventListener('click', () => {
@@ -441,7 +472,9 @@ function bindKbManagerEvents() {
   document.getElementById('task-add-title')?.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       const title = e.target.value.trim();
-      if (title) createNewTask(title);
+      const priority = document.getElementById('task-add-priority')?.value || 'medium';
+      if (title) createNewTask(title, '', priority);
+      document.getElementById('task-add-title').value = '';
       document.getElementById('task-add-form').style.display = 'none';
     }
   });
@@ -498,8 +531,6 @@ async function init() {
     const welcome = document.getElementById('welcome-screen');
     if (welcome) welcome.style.display = 'flex';
   }
-
-  console.log('✓ LinSai Web 界面已就绪');
 }
 
 // 启动

@@ -45,6 +45,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
+from common import now_utc as _now_utc
+
 # ─────────────────────────────────────────────
 # 路径与常量
 # ─────────────────────────────────────────────
@@ -167,10 +169,6 @@ def should_search_knowledge(query: str, session_mode: str = "co-working") -> boo
     return False
 
 
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-
 def _tokenize(text: str) -> List[str]:
     """分词：提取中文词组（2字以上）和英文单词、数字。"""
     tokens = []
@@ -277,8 +275,14 @@ def build_frontmatter(meta: Dict[str, Any]) -> str:
             if not val:
                 lines.append(f'{key}: []')
             else:
-                # YAML 标准数组格式，Obsidian 完全兼容
-                items = ', '.join(f'"{v}"' for v in val)
+                # P1-16: 去重保持顺序，防止标签重复累积
+                seen = set()
+                deduped = []
+                for v in val:
+                    if v not in seen:
+                        seen.add(v)
+                        deduped.append(v)
+                items = ', '.join(f'"{v}"' for v in deduped)
                 lines.append(f'{key}: [{items}]')
         elif isinstance(val, bool):
             lines.append(f'{key}: {"true" if val else "false"}')

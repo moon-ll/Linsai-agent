@@ -1,5 +1,354 @@
 # 变更记录
 
+## v3.5.0 - 2026-06-27 课题指导模块：结构化科研课题全流程管理
+
+### 维护：项目全面评估与清理
+- 清理冗余文件：4 个 `__pycache__` 目录（73 个 .pyc）、6 个 `.DS_Store`、`knowledge/.cache/`、2 份冗余备份、2 个测试报告目录、7 天前旧日志
+- 清理测试残留：8 个 `hhg_*.json` 数据文件（污染 tasks/active/）、23 个 E2E 测试任务、13 个测试会话（含归档）
+- 修复代码问题：清理 `project_context.py`/`project_workflow.py`/`test_e2e_learning_full.py` 的死导入；移除 `app.js`/`chat.js` 的 2 处 `console.log` 调试输出
+- 修复 `project_memory.py` 的 `get_project_context()` bug（units 列表按字符串 ID 处理而非字典）
+- 文档同步：更新 README.md（v3.1.2→v3.5.0，补全 Phase 8-10）、AGENTS.md（修正脚本清单+docs 结构+web/js 清单）、scripts/README.md（整体重写）、memory/README.md（补全 17 个文件）、skills/README.md（补 self-test）、docs/README.md（补 3 个文件）、新建 projects/README.md
+- 修复 CHANGELOG.md 重复版本号（v2.1.0→v2.1.1、v2.2.0→v2.0.1）
+
+### 核心新增：课题指导模块（Research Project Guidance）
+
+让林赛以"课题副导师"角色，协助用户将研究课题拆分为验收标准清晰的最小单元，分工推进、验收循环、自主管理分层知识库与课题记忆。
+
+### 新增模块（8 个文件）
+
+| 模块 | 职责 |
+|------|------|
+| `project_manager.py` | 课题 CRUD、状态机（planning→active→paused/completed）、PROJECT-MEMORY.md 自动维护与压缩 |
+| `unit_manager.py` | 单元 CRUD、验收标准结构化数组、风险追踪、交付物管理、状态机（planning→executing→review→completed） |
+| `project_kb.py` | 分层知识库引擎（raw/parsed/summary）、TF-IDF 倒排索引、标签索引、外部文件导入 |
+| `project_memory.py` | 三级记忆（对话全文/记忆片段/核心记忆）、决策记录、风险记录、上下文组装（≤2000字符） |
+| `project_context.py` | @课题知识库语法解析、跨课题检索、课题上下文构建（≤3000字符） |
+| `project_workflow.py` | 工作流编排：plan_units → start_unit_execution → review_unit → complete_unit → generate_project_summary |
+| `web/js/research.js` | 前端课题管理面板（课题列表/详情/单元时间线/知识库浏览器/记忆面板/工作流操作） |
+
+### 扩展现有模块（4 个文件）
+
+- **`task_manager.py`**：`create_task()` 新增 `unit_id` 参数，关联课题单元
+- **`session_manager.py`**：`create_session()` 新增 `project_id` 参数，关联课题
+- **`context_builder.py`**：新增课题上下文注入（会话关联课题时自动注入 PROJECT-MEMORY.md + 知识库概览）；新增 @课题知识库语法解析（用户输入含 `@PRJ-xxx` / `@课题知识库` 时自动检索跨课题知识）；新增 `project` 预算类别（2000 字符）
+- **`web_server.py`**：新增 37 个 API 路由（16 GET / 13 POST / 6 PUT / 2 DELETE），统一 `/api/research/` 前缀
+
+### 前端更新（3 个文件）
+
+- **`web/index.html`**：新增 🔬 课题工具栏按钮、课题指导模态框、research.js 脚本加载
+- **`web/js/app.js`**：新增课题按钮事件绑定与工具栏 active 联动
+- **`web/js/research.js`**（新建，~770 行）：4 tab 详情视图（单元/知识库/记忆/工作流），单元时间线带验收标准 checkbox，知识库浏览器带层级/类型/标签筛选 + Markdown 预览
+
+### 数据结构
+
+```
+projects/
+├── {project_id}.json              # 课题元数据
+└── {project_id}/
+    ├── PROJECT-MEMORY.md          # 核心记忆（≤100行，自动压缩）
+    ├── units/
+    │   └── UNIT-001.json          # 单元（含验收标准数组/风险/任务引用）
+    ├── kb/
+    │   ├── raw/                   # 原始材料（proposals/references/data）
+    │   ├── parsed/                # 林赛解析笔记（concepts/methods/literature）
+    │   ├── summary/               # 成果汇总（unit-reports/milestone-reviews/project-summary）
+    │   ├── index.json             # 倒排索引
+    │   └── tags.json              # 标签索引
+    └── memory/
+        ├── conversations/         # 对话全文存档
+        ├── snippets/              # 记忆片段
+        ├── decisions.md           # 决策记录
+        └── risks.md               # 风险记录
+```
+
+### 设计决策
+
+- **知识库隔离**：复用现有 knowledge_base 系统设计，每个课题独立子库，通过 `@课题知识库` 语法跨课题共享
+- **单元=任务容器**：单元是 task_manager 任务的逻辑分组，不另建任务系统
+- **验收标准=结构化数组**：`[{id, text, met, notes}]`，支持勾选/备注
+- **无课题模板**：不同课题的单元划分根据具体情况判断，通过课题推进积累经验
+
+### 验证结果
+- ✅ 全部 Python 文件通过 `py_compile`
+- ✅ 核心模块测试 34/34 通过
+- ✅ 人格一致性抽检 38/38 通过
+- ✅ 场景剧本测试 16/16 通过
+- ✅ 全量 88/88 通过（0.857s）
+- ✅ 6 个新模块自检全部通过（project_manager 5/5, unit_manager 8/8, project_kb 8/8, project_memory 9/9, project_context 4/4, project_workflow 6/6）
+- ✅ 前端 JS 语法检查通过
+
+## v3.4.1 - 2026-06-26 代码结构优化：消除系统性重复
+
+### 核心变更：激活已有的 common.py/paths.py，消除 50+ 处重复工具函数
+
+项目此前已建好 `common.py`（集中工具函数）和 `paths.py`（统一路径常量），但**零引用**——22 个脚本各自重复定义 `_now_utc`、`_read_json`、`_write_json`，web_server.py 有 6 处 importlib 动态加载样板。本次优化系统性消除了这些重复。
+
+### Python 后端（25 个文件）
+
+- **创建 `scripts/__init__.py`**：使 scripts/ 成为 Python 包，为后续标准 import 语法铺路
+- **激活 `common.py`**（22 个文件）：
+  - 23 处 `_now_utc` 定义 → `from common import now_utc as _now_utc`（消除 22 处重复）
+  - 5 处 `_write_json` 定义 → `from common import save_json as _write_json`
+  - 3 处 `_read_json` 定义 → `from common import load_json as _read_json`
+- **新增 `common.lazy_load()`**：统一懒加载函数，消除 importlib 样板
+- **`context_builder.py`**：3 段重复的 `_try_xxx` 懒导入块（24 行）→ 3 行 `from common import lazy_load` 调用
+- **`web_server.py`**（14 处清理）：
+  - 6 处 `importlib.util` 动态加载 → `lazy_load("module")` 单行调用
+  - 4 处 `import json as _json` 冗余导入 → 使用顶层 `json`
+  - 1 处 `from pathlib import Path as _Path` 冗余导入 → 使用顶层 `Path`
+  - 3 处局部 `import backup_manager as bm` → 提升为顶层导入
+
+### 前端 JavaScript（5 个文件）
+
+- **删除 `projects.js` 中的 `escapeHtml` 死代码**：core.js 已定义，兜底定义永不执行
+- **统一 Markdown 渲染**：
+  - `core.js` `renderMarkdown()` 增强：新增 h1/h2/h3 标题支持
+  - `kb.js` `openWikiDetail`：9 行内联正则 → `renderMarkdown()` + wikilink 后处理
+  - `kb.js` `openRawDetail`：8 行内联正则 → `renderMarkdown()`（XSS 防护完整保留）
+  - 3 套不一致的 Markdown 实现 → 1 套统一实现
+- **任务状态更新注释**：`task.js updateTaskStatus` 与 `projects.js cycleTaskStatus` 添加关系注释（差异较大，保持独立）
+- **`style.css`**：补充 `.message-bubble` 内标题尺寸约束
+
+### 量化改进
+
+| 指标 | 优化前 | 优化后 | 消除数 |
+|------|--------|--------|--------|
+| `_now_utc` 定义 | 23 处 | 1 处（common.py） | 22 |
+| `_write_json` 定义 | 5 处 | 0 处 | 5 |
+| `_read_json` 定义 | 3 处 | 0 处 | 3 |
+| web_server importlib 样板 | 6 处 | 0 处 | 6 |
+| web_server 冗余 json 导入 | 4 处 | 0 处 | 4 |
+| 前端 Markdown 实现 | 3 套 | 1 套 | 2 |
+| 前端死代码 | 1 处 | 0 处 | 1 |
+
+### 验证结果
+- ✅ 全部 Python 文件通过 `py_compile`
+- ✅ 核心模块测试 34/34 通过
+- ✅ 人格一致性抽检 38/38 通过
+- ✅ 场景剧本测试 16/16 通过
+- ✅ 总计 88/88 全量通过（0.869s）
+
+### 修改文件清单（28 个）
+- 新建：`scripts/__init__.py`
+- 修改 Python（23）：`common.py`、`context_builder.py`、`web_server.py`、`memory_reflow.py`、`sync_engine.py`、`knowledge_base.py`、`project_dispatch.py`、`task_manager.py`、`growth_engine.py`、`alias_learner.py`、`kb_categories.py`、`kb_auto_sync.py`、`kb_maintenance.py`、`kb_importer.py`、`session_manager.py`、`research_profiler.py`、`learning_engine.py`、`external_fetcher.py`、`quality_evaluator.py`、`proactive_engine.py`、`kb_capture.py`、`usage_tracker.py`、`memory_manager.py`、`agora_bridge.py`
+- 修改前端（5）：`core.js`、`kb.js`、`projects.js`、`task.js`、`style.css`
+- 更新：`VERSION`、`CHANGELOG.md`
+
+## v3.4.0 - 2026-06-25 认知闭环：从"功能完备"到"认知活跃"
+
+### 核心变更：打通 hermes→记忆→对话的认知回流通道
+
+林赛此前"建好了但没运行"——记忆系统空置、心跳信号被前端忽略、hermes 的 124 个会话从未反哺记忆。v3.4 让沉睡的资产在真实对话中活跃起来。
+
+### Phase 1：认知回流（5 项，涉及 8 个文件）
+
+- **P1-1 hermes→记忆提炼** — `scripts/memory_reflow.py`（新建）
+  - 扫描 hermes 会话，提取 memory 工具调用、用户决策、研究方向、CONTEXT COMPACTION 目标
+  - 从 112 个会话中提取 26 条记忆片段、6 条用户决策、10 个研究方向关键词
+  - 集成到 `sync_engine.py`：`sync_all()` 新增第 4 步认知回流，新同步会话自动触发记忆提炼
+  - CLI：`--cold-start`（回溯全部）/ `--reflow`（增量）/ `--status`（状态）/ `--self-check`（自检）
+
+- **P1-2 记忆冷启动** — 执行 `memory_reflow.py --cold-start`
+  - `user-profile.json`：research_field 从 [] → 10 个关键词，known_skills 从 [] → 7 个，preferences 新增 general + paper_interests
+  - `long-term-memory.json`：snippets 从 0 → 26 条，snippets_index 同步建立
+  - `working-context.json`：pending_decisions 从 1 条(含垃圾) → 3 条有效，key_insights 从 0 → 12 条
+
+- **P1-3 开场即主动** — `web_server.py` + `web/js/settings.js` + `web/js/session.js`
+  - `/api/heartbeat` 增强：返回 `proactive_messages` 数组（格式化中文文案，前端可直接展示）
+  - `checkHeartbeat()` 消费提醒：去重后展示 banner，30 秒轮询
+  - `injectProactiveOpening()`：会话加载时注入林赛主动消息气泡
+
+- **P1-4 补全主动感知配置** — `memory/autonomy-level.json` + `memory/learning-config.json`（新建）
+  - autonomy-level.json：默认 suggest 级别（observe/suggest/act 三级）
+  - learning-config.json：arXiv 关键词、日配额、成本限制、统计计数器
+
+- **P1-5 浅输入人格锚定** — `scripts/context_builder.py`
+  - `_is_small_talk()`：检测问候/闲聊/极短输入（7 类模式 + 长度阈值）
+  - `_build_persona_anchor()`：从记忆文件提取研究方向、活跃项目、最近记忆片段（去重），注入 system_prompt
+  - 浅输入时跳过技能匹配和知识库检索，避免无关开销
+  - 效果：用户说"你好"时，林赛能说"上次你提到固体HHG相位匹配，进展如何？"而非机械回复
+
+### Phase 2：知识库价值兑现（3 项，涉及 4 个文件）
+
+- **P2-1 知识库命中埋点** — `scripts/context_builder.py`
+  - `build_context()` 返回 `kb_hits` 数组：每条命中记录 title/source/stage/score/doc
+  - 同时返回 `is_small_talk` 标志，供调用方决策
+
+- **P2-2 回复标注引用来源** — `web_server.py` + `web/js/chat.js` + `web/css/style.css`
+  - SSE 流新增 `metadata` 事件类型：在 token 之前发送 kb_hits
+  - `chat.js` 处理 metadata 事件：在消息气泡下方渲染引用标签（📚 raw / 📝 wiki / 🔗 graph）
+  - CSS 样式：圆角标签，hover 高亮，深色/浅色主题适配
+
+- **P2-3 主动检索增强** — `scripts/context_builder.py`
+  - 接入 `knowledge_base.should_search_knowledge()`：休眠代码激活
+  - 5 级判断：长度过滤 → 闲聊过滤 → 明确请求 → 精确概念匹配 → 模式+技术术语
+  - 效果：非技术讨论（如"今天天气不错"）不再触发知识库检索，减少噪声注入
+
+### 新增 API 端点（2 个）
+
+- `GET /api/memory/status`：返回记忆系统状态摘要
+- `GET /api/memory/reflow`：手动触发认知回流
+
+### 验证结果
+- ✅ 全部 Python 文件通过 `py_compile`
+- ✅ 核心模块测试 34/34 通过
+- ✅ memory_reflow.py 自检通过（5 项检查）
+- ✅ 浅输入检测 7/7 测试用例通过
+- ✅ 记忆冷启动：112 会话 → 26 片段 + 10 研究方向 + 7 技能
+
+### 修改文件清单（13 个）
+- 新建：`scripts/memory_reflow.py`、`memory/autonomy-level.json`、`memory/learning-config.json`、`memory/reflow-state.json`
+- 修改：`scripts/context_builder.py`、`scripts/sync_engine.py`、`scripts/web_server.py`、`web/js/settings.js`、`web/js/session.js`、`web/js/chat.js`、`web/css/style.css`、`memory/user-profile.json`、`memory/working-context.json`、`memory/long-term-memory.json`、`VERSION`
+
+## v3.3.4 - 2026-06-24 第五轮端到端测试修复：2 个功能 bug
+
+### 修复内容（2 项，涉及 2 个文件）
+
+- **P5-1 (MEDIUM)**：任务创建 API 响应缺少字段，新建任务不渲染到看板
+  - **问题**：`POST /api/tasks` 返回 `{success, task_id, title, dispatch_id}`，缺少 `status`/`priority`/`description` 等字段，前端 `createNewTask()` 将不完整对象 push 到 `State.tasks`，`renderTaskBoard()` 因 `task.status` 为 undefined 无法匹配列
+  - **修复**：`web_server.py` 创建任务后调用 `tm.get_task(tid)` 返回完整任务对象；`task.js` `createNewTask()` 增加防御性合并，确保 `status`/`priority` 等字段存在
+  - **验证**：浏览器实测新建任务即时渲染到 backlog 列
+
+- **P5-2 (HIGH)**："在编辑器中打开"按钮无响应 — `subprocess` 模块未导入
+  - **问题**：`web_server.py` 第 1253 行使用 `subprocess.run(["open", str(full)])` 打开本地文件，但文件顶部未 `import subprocess`，导致 `NameError: name 'subprocess' is not defined`，API 返回 500 错误
+  - **修复**：`web_server.py` 导入区添加 `import subprocess`
+  - **影响范围**：Wiki 预览页"📂 在编辑器中打开"按钮、Raw 文件预览页"📂 在编辑器中打开"按钮
+  - **验证**：浏览器实测点击按钮显示"✓ 已打开本地文件"，文件在系统编辑器中打开
+
+### 验证结果
+- ✅ Python 文件通过 `py_compile`
+- ✅ 浏览器实测："在编辑器中打开"按钮正常工作
+- ✅ 浏览器实测：新建任务即时渲染到看板
+- ✅ 端到端测试 20 个功能模块中 19 个通过（此前 18 个通过 + 本次修复 1 个）
+
+## v3.3.3 - 2026-06-24 彻底检查修复：3 类遗留 bug
+
+### 修复内容（3 类 bug，涉及 7 个文件）
+- **Bug1 (P3-5 未完成)**：raw 文件树项目(30个)和 action 项目(3个)缺少 `tabindex="0"` 和 `role="button"`，键盘用户无法聚焦 → 全部补齐
+- **Bug2 (P0-9 未完成)**：6 个 `confirm()`/`prompt()` 调用未替换为模态框 → 新增 `confirmModal()`/`promptModal()` Promise 辅助函数，全部替换
+  - `kb.js`：删除分类确认、移除标签确认、新增标签输入
+  - `task.js`：删除任务确认
+  - `projects.js`：派发 hermes 任务确认
+  - `skill.js`：重置技能配置确认
+- **Bug3 (空指针防护)**：3 个函数缺少 null 检查，DOM 元素不存在时崩溃
+  - `core.js`：`showToast()` 检查 `toast-container` 存在性
+  - `core.js`：`applyTheme()` 检查 `theme-toggle` 按钮存在性
+  - `session.js`：`switchSession()` 检查 4 个 DOM 元素存在性
+
+### 验证结果
+- ✅ 11 个 JS 模块全部通过 `node --check`
+- ✅ 3 个 Python 文件通过 `py_compile`
+- ✅ 浏览器实测：raw/action 项目 tabindex=0(126个)、aria-label(150个)、confirmModal/promptModal 函数可用
+- ✅ self_test 86/86 全部通过
+- ✅ 控制台无应用错误
+
+## v3.3.2 - 2026-06-24 第三轮用户测试反馈修复
+
+### 修复内容（8 项全部完成）
+- **P1-16**：28 个 wiki 文件标签去重 + `build_frontmatter()` 写入去重逻辑防止复发
+- **P1-17**：移动端 `.kb-main` 占满宽度，右侧栏固定抽屉模式不挤压主内容
+- **P2-19**：SSE 流结束后检测空回复，显示错误提示 + 🔄 重试按钮 + toast
+- **P2-20**：深色模式 placeholder 对比度提升（`#9ca3af` opacity:0.8，符合 WCAG AA）
+- **P2-21**：窄屏工具栏改横向滚动（`flex-wrap:nowrap; overflow-x:auto`）
+- **P3-5**：知识库树项目加 `tabindex="0" role="button"` + Enter/Space 键盘事件
+- **P3-6**：标签列表 flex+gap 布局 + line-height:1.8 消除"文字墙"
+- **P3-7**：LLM Provider SSL 证书验证降级 + URLError 明确提示 SSL/网络错误
+
+### 验证结果
+- ✅ 11 个 JS 模块全部通过 `node --check`
+- ✅ Python `knowledge_base.py` / `llm_router.py` / `web_server.py` 通过 `py_compile`
+- ✅ 标签重复文件数：28 → 0
+- ✅ self_test 88/88 不回归
+
+## v3.3.1 - 2026-06-23 稳定性优化两轮完成 + 用户模拟测试
+
+### 稳定性优化（stability-ux-plan.md）
+- **第一轮 30 项全部完成**：P0 功能损坏 8 项 + P1 布局稳定性 8 项 + P2 功能融洽 7 项 + P3 视觉协调 4 项
+- **第二轮 14 项全部完成**：数据安全(P0-9/10) + 并发安全(P1-9/10/11) + 性能(P1-12) + XSS 防护(P1-13/14) + 状态一致性(P1-15) + 断网/超时(P2-14/16) + 无障碍(P2-10/11) + 术语词典(P2-18)
+- **第三轮用户模拟测试完成**：8 个模块端到端测试通过，发现 8 个新问题（P1×2, P2×3, P3×3）
+
+### 用户模拟测试结果
+- ✅ 首屏/布局/移动端 tab 正常
+- ✅ 会话/聊天/SSE 流式正常（LLM 后端环境问题除外）
+- ✅ 知识库文件树/预览/搜索正常
+- ✅ 任务看板/设置/备份/学习配置正常
+- ✅ 无障碍(aria-label 24 个, role=log, ESC 关模态)正常
+- ✅ XSS 链接阻断正常
+- ✅ 深色主题 A- 评级
+- 🔧 8 个新问题待修复（详见 stability-ux-plan.md 第十节）
+
+### 新发现问题（待修复）
+- **P1-16**：28 个 wiki 文件标签重复（#status/mature 重复 6-8 次）
+- **P1-17**：移动端右侧栏未隐藏，挤压主内容区
+- **P2-19**：LLM 超时后前端 typing indicator 持续显示无错误提示
+- **P2-20**：深色模式搜索框占位文字对比度不足
+- **P2-21**：工具栏按钮窄屏溢出无法点击
+- **P3-5**：知识库树项目不可键盘聚焦
+- **P3-6**：标签列表区域过于密集
+- **P3-7**：LLM Provider SSL 错误处理不足
+
+## v3.3.0 - 2026-06-23 项目总控中心：进度追踪+任务+意见+hermes 执行闭环
+
+### 核心定位
+📂 项目面板升级为「项目总控中心」——前端不只是看进度，还能**添加项目任务、提出项目意见、派活给后端 hermes 执行并全程追踪**。林赛 Web 正式成为双 hermes 工作流的指挥台。
+
+### 新布局（弹窗内 7 tab）
+```
+[📊总览] [📋项目任务] [💭项目意见] [⚡执行追踪] [🔬NSFC] [📄文献] [🔄同步]
+```
+
+### 新增能力
+
+**1. 📊 总览**（聚合仪表盘）
+- 4 张统计卡：NSFC 进度 / 任务 待办·进行·完成 / 待处理意见 / hermes 执行进行中
+- 任务按项目分布条形图 + 最近 5 条 hermes 执行记录
+- 快捷入口：新建任务 / 提意见 / 查执行
+
+**2. 📋 项目任务**（核心：任务↔项目↔hermes 三者打通）
+- 完整新建表单：标题/项目下拉/优先级(含紧急)/截止/描述/**执行者(我自己/派hermes/先不执行)**
+- 选「派 hermes」→ 创建即自动派发 + 跳执行追踪页
+- 任务卡片按项目分组，含进度条、子任务数、**⚡派给hermes 按钮**
+
+**3. 💭 项目意见**（独立于任务的想法沉淀）
+- 项目下拉 + 文本框 + ☑反馈给hermes
+- 意见列表（按项目分组，可标记解决、转讨论）
+
+**4. ⚡ 执行追踪**（补齐 oneshot fire-and-forget 缺口）
+- 时间线：状态(running◐/done✓/failed✗/timeout⏱)/耗时/可展开查看 hermes 完整输出
+
+### 后端改造
+
+**新增 `scripts/project_dispatch.py`**（意见+执行追踪持久化层）
+- `memory/project-dispatch.json`：opinions[] + dispatches[] 双数组，原子写
+- 7 个函数 + 6/6 自检通过
+
+**任务模型扩展 `scripts/task_manager.py`**
+- `create_task` 新增 `project` + `assignee` 字段
+- `list_tasks` 新增 `project` 过滤参数
+- 新增 `update_task_fields` 通用更新
+
+**`scripts/project_reader.py`** 新增 `get_projects_list()`
+- 聚合三来源去重：NSFC + 知识库子库 + working-context active_projects
+
+**`scripts/web_server.py`** 新增 7 API + 改造 2 个
+- `GET /api/projects/list|overview` / `GET|POST /api/projects/opinions` / `PUT /api/projects/opinions/<id>/resolve`
+- `GET /api/projects/dispatches` / `POST /api/tasks/<id>/dispatch`（核心派活闭环）
+- 改造 `POST /api/tasks`（补 project/assignee + 创建即派发）
+- 补 `PUT /api/tasks/<id>`（修复拖拽 404）
+
+**hermes 反馈闭环**（复刻 discuss-summary 四步模板）
+- 接收 → 持久化 → 写 hermes plans/ 目录（`{date}_linSai-dispatch.md`，hermes 已声明"For Hermes: 按 task 顺序执行"契约）→ daemon 线程 oneshot → 回写结果
+
+### 顺带修复的 Bug
+- **task.js 字段名 bug**：`task.id` → `task.task_id`（看板渲染/拖拽/详情全失效）
+- **PUT `/api/tasks/<id>` 路由缺失**：拖拽改状态一直 404
+- **priority 下拉值被丢弃**：app.js 只传 title
+- **task-add-form 提交后未清空**
+
+### 验证
+- `py_compile` 全量通过 + `self_test` 88/88 不回归 + `project_dispatch` 自检 6/6
+- 端到端 API：任务CRUD + 项目过滤 + 状态流转 + 意见CRUD + 派活记录 + 执行追踪 全链路通过
+
 ## v3.2.0 - 2026-06-21 代码简化与冗余清理
 
 ### Bug 修复（P0）
@@ -679,7 +1028,7 @@ hermes（+ profile linsai）是"大脑和手脚"——自主执行论文简报 c
 - 检索关键词：solid high harmonic generation theory Berry curvature semiconductor Bloch / high harmonic phase matching / high harmonic quantum optics
 - deepxiv reader.py 编码 bug 修复（latin-1 → utf-8）已在本轮调研前完成
 
-## v2.1.0 - 2026-05-19 deepxiv 知识库 v6 + PDF 全文增强
+## v2.1.1 - 2026-05-19 deepxiv 知识库 v6 + PDF 全文增强
 
 ### 新增（deepxiv 流水线）
 
@@ -1336,7 +1685,7 @@ python3 scripts/web_server.py
 
 ---
 
-## v2.2.0 - 2026-05-08 固体 HHG 理论方法文献调研
+## v2.0.1 - 2026-05-08 固体 HHG 理论方法文献调研
 
 ### 新增（knowledge base）
 

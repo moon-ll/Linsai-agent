@@ -3,7 +3,7 @@ title: "Krausz"
 type: "people"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
-tags: ["人物", "阿秒科学", "慕尼黑", "诺贝尔", "#type/person", "#status/mature", "#status/mature", "#status/growing", "#status/mature"]
+tags: ["人物", "阿秒科学", "慕尼黑", "诺贝尔", "#type/person", "#status/mature", "#status/growing"]
 related: ["高次谐波产生", "RABBITT"]
 aliases: ["Ferenc-Krausz", "克劳斯"]
 growth_stage: "mature"

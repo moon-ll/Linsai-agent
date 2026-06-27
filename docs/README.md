@@ -15,6 +15,9 @@
 | `solid-HHG-theory-methods-survey.md` | 固体 HHG 理论方法调研（按方法 A–H） |
 | `solid-HHG-computation-by-material.md` | 固体 HHG 计算方法（按材料体系） |
 | `solid-HHG-by-material-system.md` | 固体 HHG 方法完备性评估（9 大材料体系） |
+| `cognitive-loop-plan.md` | v3.4 认知闭环设计稿 |
+| `kb-smart-management-plan.md` | 知识库智能管理计划 |
+| `stability-ux-plan.md` | v3.3 稳定性与用户体验优化计划 |
 | `prompts/` | LLM prompt 模板（质量审查/维护审查/概念合并/论文精读） |
 
 ## 使用规范

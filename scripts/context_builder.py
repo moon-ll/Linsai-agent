@@ -8,18 +8,21 @@
 """
 
 import json
+import re
 import shutil
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
+from common import now_utc as _now_utc
+
 PROJECT_ROOT = Path(__file__).parent.parent
 
 # 预算与截断配置
-DEFAULT_BUDGETS = {"system": 8000, "memory": 6000, "context": 4000, "history": 10000, "input": 2000, "skills": 2000, "knowledge": 1200}
+DEFAULT_BUDGETS = {"system": 8000, "memory": 6000, "context": 4000, "history": 10000, "input": 2000, "skills": 2000, "knowledge": 1200, "project": 2000}
 DEFAULT_TOTAL, EMERGENCY_TOTAL = 30000, 50000
-TRUNCATION_ORDER = ["history", "memory", "skills", "knowledge", "context", "system"]
-MIN_KEEP = {"system": 2000, "memory": 0, "context": 0, "history": 0, "skills": 0, "knowledge": 0, "input": None}
+TRUNCATION_ORDER = ["history", "memory", "skills", "knowledge", "context", "project", "system"]
+MIN_KEEP = {"system": 2000, "memory": 0, "context": 0, "history": 0, "skills": 0, "knowledge": 0, "input": None, "project": 0}
 
 
 def _load_text(path: Path) -> str:
@@ -31,10 +34,6 @@ def _load_json(path: Path, default=None):
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
     return default if default is not None else {}
-
-
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _mode_instr(mode: str, now: str) -> str:
@@ -53,45 +52,12 @@ def _read_persona() -> str:
 
 
 # 尝试导入 memory_manager 的智能检索（如可用）
-_try_memory_manager = None
-try:
-    import importlib.util
-    _mm_path = Path(__file__).parent / "memory_manager.py"
-    if _mm_path.exists():
-        _spec = importlib.util.spec_from_file_location("memory_manager", _mm_path)
-        _mm_mod = importlib.util.module_from_spec(_spec)
-        _spec.loader.exec_module(_mm_mod)
-        _try_memory_manager = _mm_mod
-except Exception:
-    pass
+from common import lazy_load as _lazy_load
 
-
-# 尝试导入 skill_manager
-_try_skill_manager = None
-try:
-    import importlib.util
-    _sm_path = Path(__file__).parent / "skill_manager.py"
-    if _sm_path.exists():
-        _spec = importlib.util.spec_from_file_location("skill_manager", _sm_path)
-        _sm_mod = importlib.util.module_from_spec(_spec)
-        _spec.loader.exec_module(_sm_mod)
-        _try_skill_manager = _sm_mod
-except Exception:
-    pass
-
-
-# 尝试导入 knowledge_base
-_try_knowledge_base = None
-try:
-    import importlib.util
-    _kb_path = Path(__file__).parent / "knowledge_base.py"
-    if _kb_path.exists():
-        _spec = importlib.util.spec_from_file_location("knowledge_base", _kb_path)
-        _kb_mod = importlib.util.module_from_spec(_spec)
-        _spec.loader.exec_module(_kb_mod)
-        _try_knowledge_base = _kb_mod
-except Exception:
-    pass
+_try_memory_manager = _lazy_load("memory_manager")
+_try_skill_manager = _lazy_load("skill_manager")
+_try_knowledge_base = _lazy_load("knowledge_base")
+_try_project_context = _lazy_load("project_context")  # v3.5: 课题上下文注入
 
 
 def _read_profile() -> str:
@@ -198,6 +164,12 @@ def _read_history(session_id: str):
     return [{"role": m["role"], "content": m["content"]} for m in d.get("messages", []) if m.get("role") and m.get("content")]
 
 
+def _read_session_project_id(session_id: str) -> str:
+    """v3.5: 读取会话关联的课题ID（从 state.json）。"""
+    state = _load_json(PROJECT_ROOT / "sessions" / session_id / "state.json", default={})
+    return state.get("project_id", "") if isinstance(state, dict) else ""
+
+
 def _truncate_history(msgs, budget):
     total = sum(len(m["content"]) for m in msgs)
     if total <= budget:
@@ -256,6 +228,79 @@ def _allocate(actuals, bases, total):
     return budgets
 
 
+def _is_small_talk(text: str) -> bool:
+    """v3.4: 检测是否为问候/闲聊/极短输入。"""
+    text = text.strip()
+    if not text or len(text) < 8:
+        return True
+    patterns = [
+        r"^(你好|您好|嗨|哈喽|hello|hi|hey|在吗|在不在|忙吗|有空吗)",
+        r"^(谢谢|感谢|多谢|thanks|thank you)",
+        r"^(再见|拜拜|bye|晚安|早安|早上好|晚上好)",
+        r"^(嗯|哦|好|好的|ok|OK|行|收到)",
+    ]
+    for p in patterns:
+        if re.match(p, text, re.I):
+            return True
+    return False
+
+
+def _build_persona_anchor() -> str:
+    """v3.4: 构建人格锚点 — 林赛的当前状态摘要。
+
+    从记忆文件提取用户研究方向、活跃项目、最近记忆片段，
+    让林赛在"你好"时能说"上次你提到固体HHG相位匹配，进展如何？"
+    而不是机械回复"有什么可以帮你的"。
+    """
+    parts = []
+
+    # 用户研究领域 + 偏好
+    profile = _load_json(PROJECT_ROOT / "memory" / "user-profile.json", {})
+    research_fields = profile.get("research_field", [])
+    if research_fields:
+        parts.append(f"用户研究方向: {', '.join(research_fields[:5])}")
+    prefs = profile.get("preferences", {})
+    if isinstance(prefs, dict):
+        general = prefs.get("general", "")
+        if general:
+            parts.append(f"用户偏好: {general[:200]}")
+
+    # 活跃项目
+    ctx = _load_json(PROJECT_ROOT / "memory" / "working-context.json", {})
+    projects = ctx.get("active_projects", [])
+    active = [p.get("name", "") for p in projects if p.get("status") == "active"][:3]
+    if active:
+        parts.append(f"进行中项目: {'; '.join(active)}")
+
+    # 最近记忆片段（取最新 3 条，去重）
+    ltm = _load_json(PROJECT_ROOT / "memory" / "long-term-memory.json", {})
+    snippets = ltm.get("snippets", [])
+    recent = snippets[-6:] if snippets else []  # 多取一些用于去重
+    if recent:
+        seen = set()
+        snippet_texts = []
+        for s in reversed(recent):  # 从最新开始
+            text = s.get("summary", "")[:100]
+            if text and text not in seen:
+                seen.add(text)
+                snippet_texts.append(text)
+            if len(snippet_texts) >= 3:
+                break
+        if snippet_texts:
+            parts.append(f"最近记忆: {' | '.join(snippet_texts)}")
+
+    if not parts:
+        return ""
+
+    anchor = "\n".join(parts)
+    return (
+        f"\n\n[人格锚点 — 当前状态]\n{anchor}\n\n"
+        f"注意：用户发来了简短消息。请基于上述记忆自然地开启对话，"
+        "不要机械回复「有什么可以帮你的」。可以提及最近的工作或记忆，"
+        "让用户感受到你「记得」之前的交流。保持简洁，一两句即可。"
+    )
+
+
 def build_context(session_id, user_input, mode="co-working", emergency=False):
     """构建完整的 LLM 调用上下文。
 
@@ -264,24 +309,42 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
     """
     now = _now_utc()
     system_raw = _read_persona() + _mode_instr(mode, now)
+
+    # v3.4: 浅输入人格锚定 — 问候/闲聊时注入记忆锚点，跳过无关检索
+    is_small = _is_small_talk(user_input)
+    if is_small:
+        persona_anchor = _build_persona_anchor()
+        if persona_anchor:
+            system_raw += persona_anchor
+
     rel = _read_relevant_memories(session_id, user_input)
     profile = rel.get("profile_summary", "")
     lt = rel.get("related_snippets", "")
     memory_raw = "\n".join(p for p in (profile, lt) if p)
     context_raw = rel.get("work_context_summary", "")
 
-    # 技能上下文注入
+    # 技能上下文注入（浅输入时跳过）
     skills_raw = ""
-    if _try_skill_manager is not None:
+    if _try_skill_manager is not None and not is_small:
         try:
             skills_raw = _try_skill_manager.get_matched_context(user_input)
         except Exception:
             pass
 
     # 知识库检索注入（增强版：搜索结果 + 关联知识 + 缺失概念检测）
+    # v3.4: 接入 should_search_knowledge() 智能判断；命中埋点供前端引用展示
     knowledge_raw = ""
     missing_concepts = []
-    if _try_knowledge_base is not None:
+    kb_hits = []  # v3.4: 知识库命中埋点
+    should_search = not is_small
+    if should_search and _try_knowledge_base is not None:
+        try:
+            # v3.4: 使用 should_search_knowledge 精细化判断
+            if hasattr(_try_knowledge_base, "should_search_knowledge"):
+                should_search = _try_knowledge_base.should_search_knowledge(user_input, mode)
+        except Exception:
+            pass  # 判断失败时保持默认 True
+    if should_search and _try_knowledge_base is not None:
         try:
             # 优先使用增强上下文（含图谱关联）
             if hasattr(_try_knowledge_base, "get_enriched_context"):
@@ -295,13 +358,30 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
                     src_icon = "📚" if r.get("source") == "raw" else "📝"
                     stage = r.get("growth_stage", "")
                     stage_tag = f" [{stage}]" if stage else ""
-                    parts.append(f"{src_icon}【知识库{stage_tag}: {r.get('title', r['doc'])}】\n{r['text'][:400]}")
+                    title = r.get('title', r.get('doc', '未知'))
+                    parts.append(f"{src_icon}【知识库{stage_tag}: {title}】\n{r['text'][:400]}")
+                    # v3.4: 记录命中条目
+                    kb_hits.append({
+                        "title": title,
+                        "source": r.get("source", ""),
+                        "stage": stage,
+                        "score": r.get("score", 0),
+                        "doc": r.get("doc", ""),
+                    })
 
                 # 添加图谱关联知识（轻量）
                 if related:
                     parts.append("\n【关联知识】")
                     for rel in related[:2]:
-                        parts.append(f"  → {rel['title']}（{rel['relation']}）: {rel['text'][:200]}")
+                        rel_title = rel.get('title', '')
+                        parts.append(f"  → {rel_title}（{rel['relation']}）: {rel['text'][:200]}")
+                        kb_hits.append({
+                            "title": rel_title,
+                            "source": "graph",
+                            "stage": "",
+                            "score": 0,
+                            "relation": rel.get("relation", ""),
+                        })
 
                 knowledge_raw = "\n\n".join(parts)
 
@@ -314,8 +394,52 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
                 # 回退到基础搜索
                 results = _try_knowledge_base.search(user_input, top_k=2)
                 if results:
-                    parts = [f"【知识库: {r['doc']}】\n{r['text'][:400]}" for r in results]
+                    parts = []
+                    for r in results:
+                        title = r.get('title', r.get('doc', '未知'))
+                        parts.append(f"【知识库: {title}】\n{r['text'][:400]}")
+                        kb_hits.append({
+                            "title": title,
+                            "source": r.get("source", ""),
+                            "stage": r.get("growth_stage", ""),
+                            "score": r.get("score", 0),
+                            "doc": r.get("doc", ""),
+                        })
                     knowledge_raw = "\n\n".join(parts)
+        except Exception:
+            pass
+
+    # v3.5: 课题上下文注入 — 会话关联课题时自动注入课题记忆+知识库概览
+    project_ctx_raw = ""
+    project_id = _read_session_project_id(session_id)
+    if project_id and _try_project_context is not None:
+        try:
+            project_ctx_raw = _try_project_context.build_project_context(project_id, include_kb=True)
+        except Exception:
+            pass
+
+    # v3.5: @课题知识库 语法解析 — 用户输入中引用其他课题知识库
+    at_refs_raw = ""
+    if _try_project_context is not None:
+        try:
+            resolved_text, refs = _try_project_context.resolve_at_references(
+                user_input, current_project_id=project_id
+            )
+            if refs:
+                parts = []
+                for r in refs:
+                    title = r.get("title", "")
+                    snippet = r.get("snippet", "")[:300]
+                    src = r.get("project_id", "")
+                    parts.append(f"📚【{src}】{title}: {snippet}")
+                    kb_hits.append({
+                        "title": title,
+                        "source": "project_kb",
+                        "stage": "",
+                        "score": r.get("score", 0),
+                        "doc": r.get("path", ""),
+                    })
+                at_refs_raw = "\n".join(parts)
         except Exception:
             pass
 
@@ -330,6 +454,7 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
         "knowledge": len(knowledge_raw),
         "history": sum(len(m["content"]) for m in history_msgs),
         "input": len(input_raw),
+        "project": len(project_ctx_raw) + len(at_refs_raw),  # v3.5
     }
     total = EMERGENCY_TOTAL if emergency else DEFAULT_TOTAL
     budgets = _allocate(actuals, dict(DEFAULT_BUDGETS), total)
@@ -341,6 +466,9 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
     knowledge_final = _truncate_text(knowledge_raw, budgets["knowledge"])
     history_final = _truncate_history(history_msgs, budgets["history"])
     input_final = input_raw
+    # v3.5: 课题上下文截断（合并 project_ctx + at_refs，上限 2000）
+    project_combined = "\n\n".join(p for p in (project_ctx_raw, at_refs_raw) if p)
+    project_final = _truncate_text(project_combined, 2000)
 
     if len(input_final) > DEFAULT_BUDGETS["input"]:
         print(f"⚠ 当前输入长度 ({len(input_final)}) 超过建议预算 ({DEFAULT_BUDGETS['input']})")
@@ -354,6 +482,8 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
         system_prompt += f"\n\n[技能上下文]\n{skills_final}"
     if knowledge_final.strip():
         system_prompt += f"\n\n[相关知识]\n{knowledge_final}"
+    if project_final.strip():  # v3.5: 课题上下文注入
+        system_prompt += f"\n\n[课题上下文]\n{project_final}"
 
     messages = [{"role": m["role"], "content": m["content"]} for m in history_final]
     messages.append({"role": "user", "content": input_final})
@@ -370,9 +500,14 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
             "knowledge": {"budget": budgets["knowledge"], "actual": actuals["knowledge"], "final": len(knowledge_final)},
             "history": {"budget": budgets["history"], "actual": actuals["history"], "final": sum(len(m["content"]) for m in history_final)},
             "input": {"budget": budgets["input"], "actual": actuals["input"], "final": len(input_final)},
+            "project": {"budget": 2000, "actual": actuals["project"], "final": len(project_final)},
         },
         "total_final": len(system_prompt) + sum(len(m["content"]) for m in messages),
     }
+    # v3.4: 知识库命中埋点 — 供前端展示引用来源
+    result["kb_hits"] = kb_hits
+    result["is_small_talk"] = is_small
+    result["project_id"] = project_id  # v3.5: 课题关联（空串表示无课题）
     return result
 
 

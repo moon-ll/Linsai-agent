@@ -15,6 +15,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Optional, Tuple
 
+from common import now_utc as _now_utc, save_json as _write_json
+
 PROJECT_ROOT = Path(__file__).parent.parent
 TASKS_DIR = PROJECT_ROOT / "tasks"
 MEMORY_DIR = PROJECT_ROOT / "memory"
@@ -37,16 +39,8 @@ CATEGORY_DEFAULTS = {
 }
 
 
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-
 def _today_date() -> str:
     return datetime.now(timezone.utc).strftime("%Y-%m-%d")
-
-
-def _write_json(path: Path, data: dict) -> None:
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def _find_task_file(task_id: str) -> Optional[Path]:
@@ -89,14 +83,23 @@ def create_task(
     priority: str = "medium",
     description: str = "",
     related_session: str = "",
+    project: str = "",
+    assignee: str = "myself",
+    unit_id: str = "",
 ) -> Tuple[str, Path]:
-    """创建新任务，返回 (task_id, task_file_path)。"""
+    """创建新任务，返回 (task_id, task_file_path)。
+
+    Args:
+        project: 所属项目（如 "NSFC-强场超快"），空串表示通用任务
+        assignee: 执行者 "myself"(我自己) | "hermes"(派hermes) | "none"(先不执行)
+        unit_id: 所属单元ID（课题指导模块用）
+    """
     _ensure_dirs()
     category = _validate_category(category)
     defaults = CATEGORY_DEFAULTS.get(category, {})
     final_priority = defaults.get("priority", priority)
     final_priority = _validate_priority(final_priority)
-    tags = defaults.get("tags", [])
+    tags = list(defaults.get("tags", []))
 
     task_id = _generate_task_id(title)
     # 若 ID 已存在则加序号
@@ -121,7 +124,10 @@ def create_task(
         "updated_at": _now_utc(),
         "completed_at": None,
         "related_session": related_session,
-        "tags": list(tags),
+        "project": project.strip(),
+        "assignee": assignee if assignee in ("myself", "hermes", "none") else "myself",
+        "unit_id": unit_id,
+        "tags": tags,
     }
 
     path = STATUS_DIRS["backlog"] / f"{task_id}.json"
@@ -210,8 +216,50 @@ def transition_task(task_id: str, new_status: str) -> bool:
     return True
 
 
-def list_tasks(status: str = "all", sort_by: str = "due_date") -> List[dict]:
-    """列出任务。status: all/backlog/active/completed/paused。sort_by: due_date/priority/created_at。"""
+def update_task_fields(task_id: str, **fields) -> dict:
+    """通用字段更新（补 PUT 缺口）：支持 status/priority/description/due_date/project/assignee/tags 等。
+
+    status 走 transition_task 状态机（物理移动文件）；其余字段就地更新。
+    """
+    path = _find_task_file(task_id)
+    if path is None:
+        raise FileNotFoundError(f"✗ 未找到任务: {task_id}")
+
+    task = _load_task_file(path)
+
+    # status 单独走状态机（会移动文件）
+    if "status" in fields:
+        new_status = fields.pop("status")
+        if new_status != task.get("status"):
+            if not transition_task(task_id, new_status):
+                raise ValueError(f"✗ 状态流转不允许: {task.get('status')} → {new_status}")
+            # transition_task 已写盘，重新加载
+            path = _find_task_file(task_id)
+            if path is None:
+                raise FileNotFoundError(f"✗ 状态流转后任务丢失: {task_id}")
+            task = _load_task_file(path)
+
+    readonly = {"task_id", "created_at"}
+    for key, value in fields.items():
+        if key in readonly:
+            print(f"⚠ 字段 '{key}' 只读，已跳过")
+            continue
+        if key == "priority":
+            value = _validate_priority(value)
+        if key == "category":
+            value = _validate_category(value)
+        if key == "assignee" and value not in ("myself", "hermes", "none"):
+            value = "myself"
+        task[key] = value
+
+    task["updated_at"] = _now_utc()
+    _write_json(path, task)
+    print(f"✓ 任务字段已更新: {task_id}")
+    return task
+
+
+def list_tasks(status: str = "all", sort_by: str = "due_date", project: str = "") -> List[dict]:
+    """列出任务。status: all/backlog/active/completed/paused。sort_by: due_date/priority/created_at。project: 按项目过滤。"""
     tasks = []
     for subdir in ("backlog", "active", "completed"):
         if status != "all" and status != subdir and not (status == "paused" and subdir == "backlog"):
@@ -231,6 +279,9 @@ def list_tasks(status: str = "all", sort_by: str = "due_date") -> List[dict]:
             if status == "paused" and task.get("status") != "paused":
                 continue
             if status != "all" and status != "paused" and task.get("status") != status:
+                continue
+            # 按项目过滤（空串表示不过滤）
+            if project and task.get("project", "") != project:
                 continue
             tasks.append(task)
 

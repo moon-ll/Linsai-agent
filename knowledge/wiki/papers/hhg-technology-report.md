@@ -3,7 +3,7 @@ title: "HHG 光源与仪器技术进展"
 type: "papers"
 created: "2026-05-19T00:00:00Z"
 updated: "2026-06-19T00:00:00Z"
-tags: ["HHG", "综述", "技术", "#type/report", "#topic/HHG", "#status/mature", "#status/mature", "#status/mature", "#status/mature"]
+tags: ["HHG", "综述", "技术", "#type/report", "#topic/HHG", "#status/mature"]
 related: ["相位匹配", "水窗口"]
 growth_stage: "mature"
 confidence: 0.9

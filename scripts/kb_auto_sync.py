@@ -25,6 +25,8 @@ import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+from common import now_utc as _now_utc
+
 PROJECT_ROOT = Path(__file__).parent.parent
 SCRIPTS_DIR = PROJECT_ROOT / "scripts"
 MEMORY_DIR = PROJECT_ROOT / "memory"
@@ -33,10 +35,6 @@ SYNC_STATE_PATH = MEMORY_DIR / "sync-state.json"
 # LaunchAgent 配置
 LAUNCH_AGENT_ID = "com.linsai.kb-auto-sync"
 LAUNCH_AGENT_PATH = Path.home() / "Library" / "LaunchAgents" / f"{LAUNCH_AGENT_ID}.plist"
-
-
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _now_local() -> str:

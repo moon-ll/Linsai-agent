@@ -107,6 +107,7 @@ async function sendMessage(content) {
     }
 
     const reader = res.body.getReader();
+    State.currentReader = reader;  // P1-10: 保存 reader 引用
     const decoder = new TextDecoder();
     let buffer = '';
     let fullText = '';
@@ -176,6 +177,24 @@ async function sendMessage(content) {
             if (bubbleContainer && !bubbleContainer.querySelector('.tool-call-hint')) {
               bubbleContainer.insertBefore(hint, bubble);
             }
+          } else if (data.type === 'metadata' && data.kb_hits) {
+            // v3.4: 展示知识库引用来源
+            const hits = data.kb_hits;
+            if (hits.length > 0) {
+              const citeDiv = document.createElement('div');
+              citeDiv.className = 'kb-citation';
+              const tags = hits.map(h => {
+                const icon = h.source === 'raw' ? '📚' : h.source === 'graph' ? '🔗' : '📝';
+                const stage = h.stage ? `[${h.stage}]` : '';
+                return `<span class="kb-cite-tag" title="${escapeHtml(h.doc || '')}">${icon} ${escapeHtml(h.title)} ${stage}</span>`;
+              }).join('');
+              citeDiv.innerHTML = `<span class="kb-cite-label">引用来源:</span> ${tags}`;
+              citeDiv.style.cssText = 'font-size:0.72rem;color:var(--text-tertiary);padding:4px 0;margin-top:4px;display:flex;gap:4px;flex-wrap:wrap;align-items:center;';
+              const bubbleContainer = bubble.parentElement;
+              if (bubbleContainer && !bubbleContainer.querySelector('.kb-citation')) {
+                bubbleContainer.appendChild(citeDiv);
+              }
+            }
           } else if (data.type === 'done') {
             streamDone = true;
             break;
@@ -193,6 +212,12 @@ async function sendMessage(content) {
     }
 
     bubble.innerHTML = renderMarkdown(fullText);
+    // P2-19: 检测空回复（LLM 全部 provider 失败后返回空内容）
+    if (!fullText.trim()) {
+      bubble.innerHTML = `<p style="color:var(--error-color)">✗ 林赛暂时无法回复（LLM 服务可能不可用）</p>
+        <button onclick="sendMessage()" style="margin-top:8px;padding:4px 16px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">🔄 重试</button>`;
+      showToast('回复失败：LLM 服务不可用，请重试', 'error');
+    }
     updateStatus('就绪');
     loadSessions();
 
@@ -203,8 +228,8 @@ async function sendMessage(content) {
   } finally {
     if (streamTimeoutId) clearTimeout(streamTimeoutId);
     State.isStreaming = false;
+    State.currentReader = null;  // P1-10: 清除 reader 引用
     document.getElementById('typing-indicator').style.display = 'none';
-    console.log('[SSE] 流已结束，状态已重置');
   }
 }
 
@@ -429,21 +454,30 @@ async function saveEditMessage() {
 }
 
 async function deleteMessage(msgId) {
-  if (!confirm('确定删除这条消息？')) return;
+  // P0-9: 使用 showModal 替代 confirm 进行二次确认
   if (!State.currentSessionId) return;
-
-  try {
-    await fetch(`${API_BASE}/api/sessions/${encodeURIComponent(State.currentSessionId)}/messages/${msgId}`, {
-      method: 'DELETE',
-    });
-
-    const msgDiv = document.querySelector(`.message[data-msg-id="${msgId}"]`);
-    if (msgDiv) msgDiv.remove();
-    showToast('消息已删除');
-  } catch (e) {
-    console.error('删除失败:', e);
-    showToast('删除失败', 'error');
-  }
+  showModal(`<div style="max-width:360px;text-align:center;">
+    <p style="margin:16px 0;font-size:0.9rem;">确定删除这条消息？</p>
+    <div style="display:flex;gap:8px;justify-content:center;">
+      <button id="del-confirm-btn" style="padding:6px 20px;background:var(--error-color);color:#fff;border:none;border-radius:6px;cursor:pointer;">删除</button>
+      <button id="del-cancel-btn" style="padding:6px 20px;border:1px solid var(--border-color);border-radius:6px;cursor:pointer;">取消</button>
+    </div>
+  </div>`);
+  document.getElementById('del-cancel-btn').onclick = () => closeModal('modal-overlay');
+  document.getElementById('del-confirm-btn').onclick = async () => {
+    closeModal('modal-overlay');
+    try {
+      await fetch(`${API_BASE}/api/sessions/${encodeURIComponent(State.currentSessionId)}/messages/${msgId}`, {
+        method: 'DELETE',
+      });
+      const msgDiv = document.querySelector(`.message[data-msg-id="${msgId}"]`);
+      if (msgDiv) msgDiv.remove();
+      showToast('消息已删除');
+    } catch (e) {
+      console.error('删除失败:', e);
+      showToast('删除失败', 'error');
+    }
+  };
 }
 
 // ============================================

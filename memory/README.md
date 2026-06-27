@@ -10,7 +10,19 @@
 | `working-context.json` | 当前工作上下文：进行中的项目、关键决策、待办事项 |
 | `long-term-memory.json` | 跨会话记忆索引：会话摘要、记忆片段目录 |
 | `autonomy-level.json` | 自主级别配置：observe（仅记录）/ suggest（建议，默认）/ act（直接执行） |
+| `learning-config.json` | 自主学习配置：策略（保守/平衡/激进）、成本阈值、开关 |
+| `learning-cost.json` | 学习成本追踪：日/月 Token 配额与累计消耗 |
+| `llm-config.json` | LLM 路由配置：模型优先级与降级策略 |
+| `sync-state.json` | 多端同步状态：hermes 会话/文献同步进度 |
+| `reflow-state.json` | 认知回流状态：已处理会话、增量回流断点 |
+| `project-dispatch.json` | 项目总控状态：意见与执行追踪持久化（v3.3.0） |
+| `paper-pool.json` | 论文池：待精读/已读论文队列 |
+| `paper-feedback.json` | 论文反馈：用户对论文的评价记录 |
+| `nsfc-decisions.json` | NSFC 决策记录：基金申请相关关键决策 |
+| `alias-candidates.json` | 别名候选：从对话学习、待审核的同义词 |
+| `chat-archive-index.json` | 聊天归档索引：历史会话检索元数据 |
 | `snippets/` | 记忆片段目录：存储具体的 YAML Front Matter + Markdown 记忆内容 |
+| `usage/` | Token 用量统计目录：按日统计用量，含 `usage.json` |
 
 ## user-profile.json 结构
 
@@ -79,5 +91,5 @@
 
 ---
 
-*版本：1.0*  
-*日期：2026-05-08*
+*版本：3.5.0*  
+*日期：2026-06-27*

@@ -18,6 +18,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from common import now_utc as _now_utc
+
 PROJECT_ROOT = Path(__file__).parent.parent
 CAPTURE_DIR = PROJECT_ROOT / "knowledge" / "captures"
 SESSIONS_DIR = PROJECT_ROOT / "sessions"
@@ -43,10 +45,6 @@ _CHITCHAT_RE = re.compile(
     r"谢谢|多谢|感谢|不客气|再见|拜拜|goodbye|bye)[\s!！.。]*$",
     re.IGNORECASE,
 )
-
-
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _safe_filename(name: str) -> str:

@@ -138,6 +138,14 @@ LinSai-CoPilot/
 │   └── {skill-name}/
 │       └── SKILL.md
 │
+├── projects/                  # v3.5 课题指导模块数据
+│   ├── {project_id}.json      # 课题元数据
+│   └── {project_id}/          # 课题工作目录
+│       ├── PROJECT-MEMORY.md  # 核心记忆（≤100行，自动压缩）
+│       ├── units/             # 单元（验收标准/风险/任务引用）
+│       ├── kb/                # 分层知识库（raw/parsed/summary）
+│       └── memory/            # 课题记忆（对话存档/片段/决策/风险）
+│
 ├── docs/                      # 项目文档与报告
 │   ├── README.md              # 本目录说明与文件清单
 │   ├── CLAUDE-CLI-ADMIN.md    # Claude CLI 人工管理指南
@@ -149,48 +157,76 @@ LinSai-CoPilot/
 │   ├── solid-HHG-*.md         # 固体 HHG 调研报告（3 份）
 │   └── prompts/               # LLM prompt 模板
 │
-└── scripts/                   # 工具脚本（Python 3，零依赖，23 个主脚本 + 子包）
-    ├── session_manager.py     # 会话管理
-    ├── context_builder.py     # 上下文构建（Prompt组装）
-    ├── copilot_engine.py      # 核心引擎（LLM调用 + CLI）
-    ├── memory_manager.py      # 记忆系统
-    ├── task_manager.py        # 任务管理
-    ├── proactive_engine.py    # 主动感知
-    ├── document_handler.py    # 文档与代码协作
-    ├── agora_bridge.py        # Agora群聊桥接
-    ├── llm_router.py          # 多模型路由与自动降级
-    ├── usage_tracker.py       # Token 用量追踪
-    ├── skill_manager.py       # 技能系统管理
-    ├── slash_commands.py      # 斜杠命令系统
-    ├── tool_engine.py         # 子代理工具引擎
-    ├── knowledge_base.py      # 知识库引擎
-    ├── kb_capture.py          # 对话自动捕获
-    ├── kb_maintenance.py      # 知识库批处理维护
-    ├── research_profiler.py   # 研究方向感知器
-    ├── external_fetcher.py    # 统一信息获取
-    ├── learning_engine.py     # 自主学习核心
-    ├── quality_evaluator.py   # 质量评估引擎
-    ├── learning_quality_tracker.py  # 交互质量追踪
-    ├── logger.py              # 统一日志系统
-    ├── chat_archive.py        # 聊天记录归档浏览器
-    ├── backup_manager.py      # 数据备份/恢复
-    ├── upgrade.py             # 安全升级流程
-    ├── version.py             # 版本号集中读取
-    ├── self_test.py           # 内测统一入口
-    ├── deepxiv_knowledge/     # deepxiv 论文获取流水线（8 模块）
-    ├── wiki_regenerator/      # wiki 报告重建（4 模块）
-    └── tests/                 # 自动化测试套件
-        ├── test_runner.py
-        ├── test_core.py
-        ├── test_scenarios.py
-        └── test_persona.py
+├── scripts/                   # 工具脚本（Python 3，零依赖，48 个主脚本 + 子包）
+│   ├── session_manager.py     # 会话管理
+│   ├── context_builder.py     # 上下文构建（Prompt组装）
+│   ├── copilot_engine.py      # 核心引擎（LLM调用 + CLI）
+│   ├── memory_manager.py      # 记忆系统
+│   ├── task_manager.py        # 任务管理
+│   ├── proactive_engine.py    # 主动感知
+│   ├── document_handler.py    # 文档与代码协作
+│   ├── agora_bridge.py        # Agora群聊桥接
+│   ├── llm_router.py          # 多模型路由与自动降级
+│   ├── usage_tracker.py       # Token 用量追踪
+│   ├── skill_manager.py       # 技能系统管理
+│   ├── slash_commands.py      # 斜杠命令系统
+│   ├── tool_engine.py         # 子代理工具引擎
+│   ├── knowledge_base.py      # 知识库引擎
+│   ├── kb_capture.py          # 对话自动捕获
+│   ├── kb_maintenance.py      # 知识库批处理维护
+│   ├── research_profiler.py   # 研究方向感知器
+│   ├── external_fetcher.py    # 统一信息获取
+│   ├── learning_engine.py     # 自主学习核心
+│   ├── quality_evaluator.py   # 质量评估引擎
+│   ├── learning_quality_tracker.py  # 交互质量追踪
+│   ├── logger.py              # 统一日志系统
+│   ├── chat_archive.py        # 聊天记录归档浏览器
+│   ├── memory_reflow.py       # 认知回流引擎（hermes→记忆提炼）
+│   ├── sync_engine.py         # 多端同步（会话/文献→知识库+认知回流）
+│   ├── project_dispatch.py    # 项目总控（意见+执行追踪持久化）
+│   ├── project_manager.py     # v3.5 课题管理（CRUD/状态机/PROJECT-MEMORY）
+│   ├── unit_manager.py        # v3.5 单元管理（验收标准/风险/状态机）
+│   ├── project_kb.py          # v3.5 课题知识库（分层/TF-IDF/标签）
+│   ├── project_memory.py      # v3.5 课题记忆（对话/片段/决策/核心记忆）
+│   ├── project_context.py     # v3.5 课题上下文（@语法/跨课题检索）
+│   ├── project_workflow.py    # v3.5 课题工作流（规划→执行→验收→总结）
+│   ├── web_server.py          # Web 服务器（HTTP + SSE + API路由）
+│   ├── backup_manager.py      # 数据备份/恢复
+│   ├── upgrade.py             # 安全升级流程
+│   ├── version.py             # 版本号集中读取
+│   ├── self_test.py           # 内测统一入口
+│   ├── deepxiv_knowledge/     # deepxiv 论文获取流水线（8 模块）
+│   ├── wiki_regenerator/      # wiki 报告重建（4 模块）
+│   └── tests/                 # 自动化测试套件
+│       ├── test_runner.py
+│       ├── test_core.py
+│       ├── test_scenarios.py
+│       └── test_persona.py
+│
+└── web/                       # 前端界面（零框架依赖）
+    ├── index.html             # 单页应用入口
+    ├── css/
+    │   └── style.css          # 双主题样式（深色/浅色/自动）
+    └── js/
+        ├── app.js             # 主入口（会话/聊天/流式SSE）
+        ├── core.js            # 核心工具（请求/渲染/主题）
+        ├── chat.js            # 聊天交互
+        ├── session.js         # 会话管理
+        ├── task.js            # 任务面板
+        ├── kb.js              # 知识库浏览器
+        ├── skill.js           # 技能面板
+        ├── settings.js        # 设置面板
+        ├── projects.js        # 课题面板
+        ├── hermes_console.js  # Hermes 深度对话控制台
+        ├── learning.js        # 自主学习管理
+        └── research.js        # v3.5 课题指导面板（单元时间线/知识库/记忆/工作流）
 ```
 
 ---
 
 ## 核心功能
 
-### 已完成（Phase 0-5）
+### 已完成（Phase 0-10）
 
 | 功能 | 状态 | 说明 |
 |------|------|------|
@@ -218,6 +254,19 @@ LinSai-CoPilot/
 | **Obsidian 兼容** | ✅ | 双向链接 `[[WikiLink]]`、frontmatter、Vault 配置、模板 |
 | **自主学习引擎** | ✅ | arXiv/联网检索/raw 自动蒸馏、质量评估、概念整合、成本安全 |
 | **Claude CLI 配套** | ✅ | 人工管理指南 + 4 个 prompt 模板（质量审查/维护审查/概念合并/论文精读） |
+| **工具协作者** | ✅ | run_command（执行 CLI 命令）、hermes_chat（Hermes 深度对话）、人格软链接、工具引擎接入 copilot_engine |
+| **认知回流引擎** | ✅ | hermes 会话→记忆提炼、记忆冷启动（112 会话→26 记忆片段+10 研究方向+7 技能） |
+| **开场即主动** | ✅ | heartbeat 增强 + 前端 banner + 会话注入主动提醒 |
+| **浅输入人格锚定** | ✅ | 问候/闲聊注入记忆锚点，避免通用 AI 客服腔 |
+| **知识库命中埋点** | ✅ | build_context 返回 kb_hits，SSE metadata 事件传递、引用来源 UI |
+| **主动检索增强** | ✅ | should_search_knowledge() 5 级智能判断 |
+| **课题管理** | ✅ | 课题 CRUD、状态机（planning→active→paused/completed）、PROJECT-MEMORY.md 自动压缩 |
+| **单元管理** | ✅ | 单元 CRUD、验收标准结构化数组、风险追踪、状态机 |
+| **课题分层知识库** | ✅ | raw/parsed/summary 三层、TF-IDF 倒排索引、标签索引、外部文件导入 |
+| **课题记忆** | ✅ | 三级记忆（对话全文/片段/核心记忆）、决策记录、风险记录 |
+| **跨课题检索** | ✅ | @课题知识库语法、跨课题搜索、课题上下文构建 |
+| **课题工作流** | ✅ | 规划→执行→验收→完成→总结 全流程编排 |
+| **课题 Web 面板** | ✅ | 37 个 API 路由 + 前端面板（单元时间线/知识库浏览器/记忆面板/工作流操作） |
 
 ---
 
@@ -238,8 +287,9 @@ LinSai-CoPilot/
 | 层级 | 技术 | 说明 |
 |------|------|------|
 | 运行环境 | Python 3（仅标准库） | 零第三方依赖 |
-| 内容格式 | Markdown + JSON | 对话记录、记忆、任务 |
-| LLM接口 | Claude CLI / Kimi CLI | 本地subprocess调用 |
+| 内容格式 | Markdown（.md） | 对话记录、任务描述、记忆片段 |
+| 元数据 | JSON | 会话状态、记忆索引、任务追踪 |
+| LLM接口 | Kimi CLI / Claude CLI | 通过 subprocess 调用本地 CLI，不直接调 API |
 | 路径处理 | pathlib.Path | 禁止硬编码绝对路径 |
 
 ---
@@ -257,6 +307,9 @@ LinSai-CoPilot/
 | Phase 5.5 | **内测系统** — 影子用户自动化回归测试（88 检查点） | ✅ 完成 |
 | Phase 6 | **自主学习引擎** — 感知/蒸馏/评估/调度/展示（5 阶段） | ✅ 完成 |
 | Phase 7 | 性能优化 + 生态扩展 | ⏳ 待开发 |
+| Phase 8 | **工具协作者（v2.1.0）** — run_command/hermes_chat 工具、人格软链接、工具引擎接入 | ✅ 完成 |
+| Phase 9 | **认知闭环（v3.4.0）** — 认知回流引擎、记忆冷启动、开场即主动、浅输入人格锚定、知识库命中埋点、主动检索增强 | ✅ 完成 |
+| Phase 10 | **课题指导模块（v3.5.0）** — 课题/单元管理、分层知识库、课题记忆、跨课题检索、工作流编排、Web API + 前端面板 | ✅ 完成 |
 
 ### Web 界面特性
 
@@ -275,6 +328,11 @@ LinSai-CoPilot/
 | 子代理工具日志 | 消息旁显示工具调用提示，可展开查看执行详情 |
 | **侧边栏工具栏** | 📚 知识库 / 🎯 技能 / 📋 任务 / 📊 用量 独立快捷入口 |
 | **本地软连接** | Wiki/Raw 文件一键在系统编辑器中打开，支持复制路径 |
+| **引用来源标签** | 消息气泡下方显示知识库引用标签，点击跳转 |
+| **主动提醒 banner** | 会话开场注入主动提醒，前端横幅展示 |
+| **学习管理器** | 学习日志/待审队列/统计面板，策略设置与手动触发 |
+| **Hermes 控制台** | 调用 Hermes LinSai profile 进行深度对话 |
+| **课题指导面板** | 课题列表/详情、单元时间线、知识库浏览器、记忆面板、工作流操作 |
 | 移动端适配 | 侧边栏折叠、触摸优化 |
 
 ---
@@ -287,5 +345,5 @@ LinSai-CoPilot/
 
 ---
 
-*版本：3.1.2*  
-*日期：2026-06-17*
+*版本：3.5.0*  
+*日期：2026-06-27*

@@ -23,6 +23,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
+from common import now_utc as _now_utc
+
 PROJECT_ROOT = Path(__file__).parent.parent
 MEMORY_DIR = PROJECT_ROOT / "memory"
 TASKS_DIR = PROJECT_ROOT / "tasks"
@@ -61,10 +63,6 @@ _TECH_PATTERNS = [
     # 中文：2-8个连续汉字（可能是专业术语）
     re.compile(r"[\u4e00-\u9fff]{2,8}"),
 ]
-
-
-def _now_utc() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
 def _load_json(path: Path, default: Any = None) -> Any:

@@ -4,13 +4,21 @@
 
 // ============================================
 // 心跳检测 & 状态更新 (P0-6: 用 status-text 替代不存在的 status-dot)
+// v3.4: 消费 reminders，展示林赛主动提醒
 // ============================================
 let _heartbeatTimer = null;
+let _lastProactiveMsgs = [];
 
 async function checkHeartbeat() {
   try {
     const data = await apiGet('/api/heartbeat');
     updateStatus('就绪');
+    // v3.4: 消费主动提醒消息
+    const msgs = data.proactive_messages || [];
+    if (msgs.length > 0) {
+      _showProactiveReminders(msgs);
+    }
+    _lastProactiveMsgs = msgs;
     // 设置 30 秒后再次检测
     if (_heartbeatTimer) clearTimeout(_heartbeatTimer);
     _heartbeatTimer = setTimeout(checkHeartbeat, 30000);
@@ -19,6 +27,59 @@ async function checkHeartbeat() {
     if (_heartbeatTimer) clearTimeout(_heartbeatTimer);
     _heartbeatTimer = setTimeout(checkHeartbeat, 60000);
   }
+}
+
+// v3.4: 在聊天区顶部展示林赛的主动提醒
+function _showProactiveReminders(msgs) {
+  let banner = document.getElementById('proactive-banner');
+  if (!banner) {
+    banner = document.createElement('div');
+    banner.id = 'proactive-banner';
+    banner.style.cssText = 'padding:8px 14px;margin:0 0 8px 0;background:var(--bg-tertiary);border-left:3px solid var(--accent-color);border-radius:6px;font-size:0.85rem;display:none;';
+    const chatArea = document.getElementById('chat-messages') || document.querySelector('.chat-area');
+    if (chatArea) {
+      chatArea.parentElement.insertBefore(banner, chatArea);
+    }
+  }
+  // 去重：只显示新消息
+  const newMsgs = msgs.filter(m => !_lastProactiveMsgs.some(o => o.message === m.message));
+  if (newMsgs.length === 0) return;
+  const lines = newMsgs.map(m => {
+    const icon = m.severity === 'high' ? '⚠️' : m.severity === 'medium' ? '📌' : '💡';
+    return `${icon} ${escapeHtml(m.message)}`;
+  }).join('<br>');
+  banner.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+    <div>${lines}</div>
+    <span onclick="document.getElementById('proactive-banner').style.display='none'" style="cursor:pointer;color:var(--text-tertiary);font-size:1.1rem;flex-shrink:0;">✕</span>
+  </div>`;
+  banner.style.display = 'block';
+}
+
+// v3.4: 会话首次加载时注入开场白（主动提醒 + 林赛问候）
+async function injectProactiveOpening() {
+  try {
+    const data = await apiGet('/api/heartbeat');
+    const msgs = data.proactive_messages || [];
+    if (msgs.length === 0) return;
+    // 在消息区插入一条林赛主动消息
+    const chatArea = document.getElementById('chat-messages');
+    if (!chatArea) return;
+    const existing = chatArea.querySelector('.proactive-opening');
+    if (existing) return; // 避免重复
+    const lines = msgs.map(m => {
+      const icon = m.severity === 'high' ? '⚠️' : m.severity === 'medium' ? '📌' : '💡';
+      return `${icon} ${m.message}`;
+    }).join('\n\n');
+    const bubble = document.createElement('div');
+    bubble.className = 'message assistant proactive-opening';
+    bubble.style.cssText = 'opacity:0.85;margin-bottom:12px;';
+    bubble.innerHTML = `<div class="message-avatar">🔬</div>
+      <div class="message-bubble" style="background:var(--bg-tertiary);border:1px solid var(--border-color);">
+        <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:4px;">林赛主动提醒</p>
+        ${lines.split('\n\n').map(l => `<p style="margin:4px 0;">${escapeHtml(l)}</p>`).join('')}
+      </div>`;
+    chatArea.insertBefore(bubble, chatArea.firstChild);
+  } catch (e) { /* 静默 */ }
 }
 
 // P0-7: 补全所有模式映射

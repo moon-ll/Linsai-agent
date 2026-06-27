@@ -315,7 +315,12 @@ class LLMProvider:
         )
 
         try:
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
+            # P3-7: SSL 证书验证降级 — 企业网络/代理自签证书环境下允许跳过
+            import ssl as _ssl
+            ctx = _ssl.create_default_context()
+            ctx.check_hostname = False
+            ctx.verify_mode = _ssl.CERT_NONE
+            with urllib.request.urlopen(req, timeout=timeout, context=ctx) as resp:
                 data = json.loads(resp.read().decode("utf-8"))
                 text = data["choices"][0]["message"]["content"]
                 usage = data.get("usage")
@@ -323,6 +328,11 @@ class LLMProvider:
         except urllib.error.HTTPError as e:
             body = e.read().decode("utf-8")
             raise RuntimeError(f"API HTTP {e.code}: {body}")
+        except urllib.error.URLError as e:
+            # P3-7: SSL/网络错误明确提示
+            if "SSL" in str(e) or "CERTIFICATE" in str(e):
+                raise RuntimeError(f"SSL 证书验证失败: {e}")
+            raise RuntimeError(f"网络错误: {e}")
 
 
 # ---------------------------------------------------------------------------
