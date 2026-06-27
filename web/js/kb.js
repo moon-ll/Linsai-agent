@@ -789,3 +789,11 @@ async function searchKbToTree(query) {
     container.innerHTML = '<div style="color:var(--error-color);font-size:0.8rem;">搜索失败</div>';
   }
 }
+
+// v3.5.1: 注册模块初始化
+// kb.js 的 initKbMain() 已在 app.js init() 中手动调用，此处不重复注册以避免双重初始化
+if (typeof ModuleLoader !== 'undefined') {
+  ModuleLoader.register('kb', () => {
+    // 知识库模块初始化由 app.js initKbMain() 统一处理，此处保留接口供未来迁移
+  });
+}

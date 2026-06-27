@@ -172,3 +172,11 @@ async function deleteTask(taskId) {
     showToast('删除失败', 'error');
   }
 }
+
+// v3.5.1: 注册模块初始化
+// task.js 无独立 bind 函数，事件绑定在 app.js bindKbManagerEvents() 中完成
+if (typeof ModuleLoader !== 'undefined') {
+  ModuleLoader.register('task', () => {
+    // 任务模块事件绑定由 app.js 统一处理，此处保留接口供未来迁移
+  });
+}

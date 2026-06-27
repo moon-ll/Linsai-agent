@@ -1033,3 +1033,10 @@ function bindResearchEvents() {
     if (e.target === e.currentTarget) closeResearchManager();
   });
 }
+
+// v3.5.1: 注册模块初始化
+if (typeof ModuleLoader !== 'undefined') {
+  ModuleLoader.register('research', () => {
+    if (typeof bindResearchEvents === 'function') bindResearchEvents();
+  });
+}

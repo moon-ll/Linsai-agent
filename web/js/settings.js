@@ -247,3 +247,11 @@ async function saveLearningConfig() {
     if (statusEl) statusEl.textContent = '✗ 保存失败';
   }
 }
+
+// v3.5.1: 注册模块初始化
+// settings.js 无独立 bind 函数，事件绑定在 app.js bindEvents() 中完成
+if (typeof ModuleLoader !== 'undefined') {
+  ModuleLoader.register('settings', () => {
+    // 设置模块事件绑定由 app.js 统一处理，此处保留接口供未来迁移
+  });
+}

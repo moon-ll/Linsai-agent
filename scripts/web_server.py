@@ -228,6 +228,60 @@ def split_response_stream(text: str) -> List[str]:
 
 
 # ---------------------------------------------------------------------------
+# v3.5.1: 课题指导模块路由表（路由表模式验证）
+# 后续迭代逐步将其他路由迁移到此模式
+# 每条规则: (HTTP方法, URL正则模式, handler函数名)
+# handler 签名: GET/DELETE → (self, path, parsed, match)
+#               POST/PUT   → (self, path, parsed, body, match)
+# 返回 True 表示已处理（由 _dispatch_research_routes 调用）
+# ---------------------------------------------------------------------------
+
+_RESEARCH_ROUTES = [
+    # GET
+    ("GET", r"^/api/research/projects$", "_rg_get_projects"),
+    ("GET", r"^/api/research/projects/([^/]+)$", "_rg_get_project"),
+    ("GET", r"^/api/research/projects/([^/]+)/status$", "_rg_get_project_status"),
+    ("GET", r"^/api/research/projects/([^/]+)/units$", "_rg_get_units"),
+    ("GET", r"^/api/research/projects/([^/]+)/units/([^/]+)$", "_rg_get_unit"),
+    ("GET", r"^/api/research/projects/([^/]+)/kb/documents$", "_rg_get_kb_documents"),
+    ("GET", r"^/api/research/projects/([^/]+)/kb/search$", "_rg_get_kb_search"),
+    ("GET", r"^/api/research/projects/([^/]+)/kb/stats$", "_rg_get_kb_stats"),
+    ("GET", r"^/api/research/projects/([^/]+)/kb/tags$", "_rg_get_kb_tags"),
+    ("GET", r"^/api/research/projects/([^/]+)/kb/doc/(.+)$", "_rg_get_kb_doc"),
+    ("GET", r"^/api/research/projects/([^/]+)/memory$", "_rg_get_memory"),
+    ("GET", r"^/api/research/projects/([^/]+)/memory/stats$", "_rg_get_memory_stats"),
+    ("GET", r"^/api/research/projects/([^/]+)/memory/snippets$", "_rg_get_memory_snippets"),
+    ("GET", r"^/api/research/projects/([^/]+)/memory/conversations$", "_rg_get_memory_conversations"),
+    ("GET", r"^/api/research/projects/([^/]+)/memory/file$", "_rg_get_memory_file"),
+    ("GET", r"^/api/research/search$", "_rg_get_cross_search"),
+    # POST
+    ("POST", r"^/api/research/projects$", "_rg_post_project"),
+    ("POST", r"^/api/research/projects/([^/]+)/units$", "_rg_post_unit"),
+    ("POST", r"^/api/research/projects/([^/]+)/kb/documents$", "_rg_post_kb_document"),
+    ("POST", r"^/api/research/projects/([^/]+)/kb/import$", "_rg_post_kb_import"),
+    ("POST", r"^/api/research/projects/([^/]+)/memory/snippets$", "_rg_post_memory_snippet"),
+    ("POST", r"^/api/research/projects/([^/]+)/memory/conversations$", "_rg_post_memory_conversation"),
+    ("POST", r"^/api/research/projects/([^/]+)/memory/decisions$", "_rg_post_memory_decision"),
+    ("POST", r"^/api/research/projects/([^/]+)/workflow/plan$", "_rg_post_workflow_plan"),
+    ("POST", r"^/api/research/projects/([^/]+)/workflow/ai-plan$", "_rg_post_workflow_ai_plan"),
+    ("POST", r"^/api/research/projects/([^/]+)/workflow/execute$", "_rg_post_workflow_execute"),
+    ("POST", r"^/api/research/projects/([^/]+)/workflow/review$", "_rg_post_workflow_review"),
+    ("POST", r"^/api/research/projects/([^/]+)/workflow/complete$", "_rg_post_workflow_complete"),
+    ("POST", r"^/api/research/projects/([^/]+)/workflow/summary$", "_rg_post_workflow_summary"),
+    # PUT（更具体的路由放在前面，通用路由放后面）
+    ("PUT", r"^/api/research/projects/([^/]+)/transition$", "_rg_put_project_transition"),
+    ("PUT", r"^/api/research/projects/([^/]+)/units/([^/]+)/transition$", "_rg_put_unit_transition"),
+    ("PUT", r"^/api/research/projects/([^/]+)/units/([^/]+)/acceptance/([^/]+)$", "_rg_put_acceptance"),
+    ("PUT", r"^/api/research/projects/([^/]+)/memory/file$", "_rg_put_memory_file"),
+    ("PUT", r"^/api/research/projects/([^/]+)/units/([^/]+)$", "_rg_put_unit"),
+    ("PUT", r"^/api/research/projects/([^/]+)$", "_rg_put_project"),
+    # DELETE（更具体的路由放在前面）
+    ("DELETE", r"^/api/research/projects/([^/]+)/units/([^/]+)$", "_rg_delete_unit"),
+    ("DELETE", r"^/api/research/projects/([^/]+)$", "_rg_delete_project"),
+]
+
+
+# ---------------------------------------------------------------------------
 # 请求处理器
 # ---------------------------------------------------------------------------
 
@@ -296,6 +350,387 @@ class RequestHandler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
 
+    # ============================================================
+    # v3.5.1: 课题指导模块路由表分发 + handler（_rg_* 系列）
+    # ============================================================
+
+    def _dispatch_research_routes(self, method, path, parsed, body=None):
+        """v3.5.1: 课题指导模块路由表分发。返回 True 表示已处理。"""
+        for m, pattern, handler_name in _RESEARCH_ROUTES:
+            if m != method:
+                continue
+            match = re.match(pattern, path)
+            if match:
+                handler = getattr(self, handler_name, None)
+                if handler:
+                    if body is not None:
+                        handler(path, parsed, body, match)
+                    else:
+                        handler(path, parsed, match)
+                    return True
+        return False
+
+    # --- GET handlers ---
+
+    def _rg_get_projects(self, path, parsed, match):
+        """课题列表"""
+        self._send_json({"projects": pjm.list_projects()})
+
+    def _rg_get_project(self, path, parsed, match):
+        """课题详情"""
+        pid = match.group(1)
+        try:
+            self._send_json(pjm.get_project(pid))
+        except FileNotFoundError:
+            self._send_json({"error": f"课题不存在: {pid}"}, 404)
+
+    def _rg_get_project_status(self, path, parsed, match):
+        """课题状态概览"""
+        pid = match.group(1)
+        try:
+            self._send_json(pwf.get_project_status(pid))
+        except FileNotFoundError:
+            self._send_json({"error": f"课题不存在: {pid}"}, 404)
+
+    def _rg_get_units(self, path, parsed, match):
+        """单元列表"""
+        pid = match.group(1)
+        self._send_json({"units": um.list_units(pid)})
+
+    def _rg_get_unit(self, path, parsed, match):
+        """单元详情"""
+        pid, uid = match.group(1), match.group(2)
+        try:
+            self._send_json(um.get_unit(uid))
+        except FileNotFoundError:
+            self._send_json({"error": f"单元不存在: {uid}"}, 404)
+
+    def _rg_get_kb_documents(self, path, parsed, match):
+        """知识库文档列表（支持 ?layer=&type=&tag=&unit= 过滤）"""
+        pid = match.group(1)
+        qs = parse_qs(parsed.query)
+        docs = pkb.list_documents(
+            pid,
+            layer=qs.get("layer", ["all"])[0],
+            doc_type=qs.get("type", [""])[0],
+            tag=qs.get("tag", [""])[0],
+            unit=qs.get("unit", [""])[0],
+        )
+        self._send_json({"documents": docs})
+
+    def _rg_get_kb_search(self, path, parsed, match):
+        """知识库搜索（?q=&layer=）"""
+        pid = match.group(1)
+        qs = parse_qs(parsed.query)
+        q = qs.get("q", [""])[0]
+        layer = qs.get("layer", ["all"])[0]
+        results = pkb.search(pid, q, layer=layer) if q else []
+        self._send_json({"results": results})
+
+    def _rg_get_kb_stats(self, path, parsed, match):
+        """知识库统计"""
+        pid = match.group(1)
+        self._send_json(pkb.get_kb_stats(pid))
+
+    def _rg_get_kb_tags(self, path, parsed, match):
+        """知识库标签列表"""
+        pid = match.group(1)
+        self._send_json({"tags": pkb.get_tags(pid)})
+
+    def _rg_get_kb_doc(self, path, parsed, match):
+        """知识库文档详情（path 参数是文档相对路径，URL 编码）"""
+        pid, doc_path = match.group(1), match.group(2)
+        doc = pkb.get_document(pid, doc_path)
+        if doc:
+            self._send_json(doc)
+        else:
+            self._send_json({"error": "文档不存在"}, 404)
+
+    def _rg_get_memory(self, path, parsed, match):
+        """课题记忆上下文"""
+        pid = match.group(1)
+        self._send_json({"context": pmm.get_project_context(pid)})
+
+    def _rg_get_memory_stats(self, path, parsed, match):
+        """课题记忆统计"""
+        pid = match.group(1)
+        self._send_json(pmm.get_memory_stats(pid))
+
+    def _rg_get_memory_snippets(self, path, parsed, match):
+        """课题记忆片段列表"""
+        pid = match.group(1)
+        self._send_json({"snippets": pmm.list_snippets(pid)})
+
+    def _rg_get_memory_conversations(self, path, parsed, match):
+        """课题对话记录列表"""
+        pid = match.group(1)
+        self._send_json({"conversations": pmm.list_conversations(pid)})
+
+    def _rg_get_memory_file(self, path, parsed, match):
+        """课题长期记忆文件全文"""
+        pid = match.group(1)
+        self._send_json({"content": pjm.get_project_memory(pid)})
+
+    def _rg_get_cross_search(self, path, parsed, match):
+        """跨课题搜索"""
+        qs = parse_qs(parsed.query)
+        q = qs.get("q", [""])[0]
+        results = pctx.search_across_projects(q) if q else []
+        self._send_json({"results": results})
+
+    # --- POST handlers ---
+
+    def _rg_post_project(self, path, parsed, body, match):
+        """创建课题"""
+        try:
+            pid, _ = pjm.create_project(
+                body.get("name", "新课题"),
+                goal=body.get("goal", ""),
+                description=body.get("description", ""),
+            )
+            self._send_json({"project_id": pid})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_unit(self, path, parsed, body, match):
+        """创建单元"""
+        pid = match.group(1)
+        try:
+            uid, _ = um.create_unit(
+                pid,
+                body.get("title", "新单元"),
+                acceptance_criteria=body.get("acceptance_criteria", []),
+                description=body.get("description", ""),
+            )
+            self._send_json({"unit_id": uid})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_kb_document(self, path, parsed, body, match):
+        """知识库添加文档"""
+        pid = match.group(1)
+        try:
+            rel_path = pkb.add_document(
+                pid,
+                layer=body.get("layer", ""),
+                doc_type=body.get("doc_type", "references"),
+                title=body.get("title", "未命名文档"),
+                content=body.get("content", ""),
+                tags=body.get("tags", []),
+                unit=body.get("unit", ""),
+                source_raw=body.get("source_raw", ""),
+            )
+            self._send_json({"path": rel_path})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_kb_import(self, path, parsed, body, match):
+        """知识库导入外部文件"""
+        pid = match.group(1)
+        try:
+            rel_path = pkb.import_raw_file(
+                pid,
+                body.get("source_path", ""),
+                doc_type=body.get("doc_type", "references"),
+                title=body.get("title", ""),
+                tags=body.get("tags", []),
+            )
+            self._send_json({"path": rel_path})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_memory_snippet(self, path, parsed, body, match):
+        """添加记忆片段"""
+        pid = match.group(1)
+        try:
+            pmm.create_snippet(
+                pid,
+                trigger=body.get("trigger", ""),
+                summary=body.get("summary", ""),
+                source=body.get("source", ""),
+                importance=body.get("importance", 3),
+            )
+            self._send_json({"success": True})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_memory_conversation(self, path, parsed, body, match):
+        """保存对话记录"""
+        pid = match.group(1)
+        try:
+            pmm.save_conversation(
+                pid,
+                body.get("session_id", ""),
+                body.get("messages", []),
+                summary=body.get("summary", ""),
+            )
+            self._send_json({"success": True})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_memory_decision(self, path, parsed, body, match):
+        """添加决策记录"""
+        pid = match.group(1)
+        try:
+            pmm.add_decision(
+                pid,
+                title=body.get("title", ""),
+                rationale=body.get("rationale", ""),
+                unit_id=body.get("unit_id", ""),
+            )
+            self._send_json({"success": True})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_workflow_plan(self, path, parsed, body, match):
+        """工作流：规划单元（批量）"""
+        pid = match.group(1)
+        try:
+            unit_ids = pwf.plan_units(pid, body.get("unit_specs", []))
+            self._send_json({"unit_ids": unit_ids})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_workflow_ai_plan(self, path, parsed, body, match):
+        """工作流：AI 主动规划单元（返回建议，不直接创建）"""
+        pid = match.group(1)
+        try:
+            result = pwf.ai_plan_units(pid, max_units=body.get("max_units", 5))
+            self._send_json(result)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_workflow_execute(self, path, parsed, body, match):
+        """工作流：开始单元执行（创建任务）"""
+        pid = match.group(1)
+        try:
+            task_ids = pwf.start_unit_execution(
+                pid,
+                body.get("unit_id", ""),
+                body.get("task_specs", []),
+            )
+            self._send_json({"task_ids": task_ids})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_workflow_review(self, path, parsed, body, match):
+        """工作流：单元验收"""
+        pid = match.group(1)
+        try:
+            result = pwf.review_unit(pid, body.get("unit_id", ""))
+            self._send_json(result)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_workflow_complete(self, path, parsed, body, match):
+        """工作流：完成单元"""
+        pid = match.group(1)
+        try:
+            result = pwf.complete_unit(
+                pid,
+                body.get("unit_id", ""),
+                review_notes=body.get("review_notes", ""),
+                report_content=body.get("report_content", ""),
+            )
+            self._send_json(result)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_workflow_summary(self, path, parsed, body, match):
+        """工作流：生成课题总结"""
+        pid = match.group(1)
+        try:
+            report_path = pwf.generate_project_summary(pid)
+            self._send_json({"path": report_path})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    # --- PUT handlers ---
+
+    def _rg_put_project(self, path, parsed, body, match):
+        """更新课题"""
+        pid = match.group(1)
+        try:
+            updated = pjm.update_project(pid, **body)
+            self._send_json({"success": True, "project": updated})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_put_project_transition(self, path, parsed, body, match):
+        """课题状态流转"""
+        pid = match.group(1)
+        try:
+            updated = pjm.transition_project(pid, body.get("status", ""))
+            self._send_json({"success": True, "project": updated})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_put_unit(self, path, parsed, body, match):
+        """更新单元"""
+        pid, uid = match.group(1), match.group(2)
+        try:
+            updated = um.update_unit(uid, **body)
+            self._send_json({"success": True, "unit": updated})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_put_unit_transition(self, path, parsed, body, match):
+        """单元状态流转"""
+        pid, uid = match.group(1), match.group(2)
+        try:
+            updated = um.transition_unit(uid, body.get("status", ""))
+            self._send_json({"success": True, "unit": updated})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_put_acceptance(self, path, parsed, body, match):
+        """验收标准勾选"""
+        pid, uid, ac_id = match.group(1), match.group(2), match.group(3)
+        try:
+            updated = um.check_acceptance_criterion(
+                uid, ac_id,
+                met=body.get("met", True),
+                notes=body.get("notes", ""),
+            )
+            self._send_json({"success": True, "unit": updated})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_put_memory_file(self, path, parsed, body, match):
+        """更新课题长期记忆文件"""
+        pid = match.group(1)
+        try:
+            pjm.update_project_memory(pid, body.get("content", ""))
+            self._send_json({"success": True})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    # --- DELETE handlers ---
+
+    def _rg_delete_project(self, path, parsed, match):
+        """删除课题"""
+        pid = match.group(1)
+        try:
+            ok = pjm.delete_project(pid, confirm=True)
+            if ok:
+                self._send_json({"success": True})
+            else:
+                self._send_json({"error": "删除失败"}, 500)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_delete_unit(self, path, parsed, match):
+        """删除单元"""
+        pid, uid = match.group(1), match.group(2)
+        try:
+            ok = um.delete_unit(uid, confirm=True)
+            if ok:
+                self._send_json({"success": True})
+            else:
+                self._send_json({"error": "删除失败"}, 500)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
     def do_GET(self) -> None:
         """处理 GET 请求。"""
         parsed = urlparse(self.path)
@@ -309,6 +744,10 @@ class RequestHandler(BaseHTTPRequestHandler):
             return
         if path.startswith("/web/"):
             self._send_static(path[5:])
+            return
+
+        # v3.5.1: 课题模块路由表分发
+        if self._dispatch_research_routes("GET", path, parsed):
             return
 
         # API 路由
@@ -598,6 +1037,7 @@ class RequestHandler(BaseHTTPRequestHandler):
                 if cost_path.exists():
                     with open(cost_path, "r", encoding="utf-8") as f:
                         cost_data = json.load(f)
+                config_path = _PROJECT_ROOT / "memory" / "learning-config.json"
                 config = {}
                 if config_path.exists():
                     with open(config_path, "r", encoding="utf-8") as f:
@@ -608,8 +1048,12 @@ class RequestHandler(BaseHTTPRequestHandler):
                     "today_cost": cost_data.get("daily", {}).get(datetime.now().strftime("%Y-%m-%d"), 0),
                     "month_cost": cost_data.get("monthly", {}).get(datetime.now().strftime("%Y-%m"), 0),
                     "total_calls": cost_data.get("total_calls", 0),
+                    "total_tokens": cost_data.get("total_tokens", 0),
                     "today_quota_used": config.get("today_count", 0),
                     "today_quota_total": config.get("daily_quota", 1),
+                    "cost_daily": cost_data.get("daily", {}),
+                    "cost_monthly": cost_data.get("monthly", {}),
+                    "daily_budget": config.get("cost_limit_daily", 0),
                 })
             except Exception as e:
                 self._send_json({"error": str(e)}, 500)
@@ -828,147 +1272,6 @@ class RequestHandler(BaseHTTPRequestHandler):
                 task = _bg_tasks.get(task_id, {"status": "unknown"})
             self._send_json(task)
             return
-
-        # ============================================================
-        # v3.5: 课题指导模块 API（GET）
-        # ============================================================
-
-        # 课题列表
-        if path == "/api/research/projects":
-            self._send_json({"projects": pjm.list_projects()})
-            return
-
-        # 课题详情 / 课题状态概览
-        m = re.match(r"^/api/research/projects/([^/]+)$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                self._send_json(pjm.get_project(pid))
-            except FileNotFoundError:
-                self._send_json({"error": f"课题不存在: {pid}"}, 404)
-            return
-
-        # 课题完整状态（含单元+任务+统计）
-        m = re.match(r"^/api/research/projects/([^/]+)/status$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                self._send_json(pwf.get_project_status(pid))
-            except FileNotFoundError:
-                self._send_json({"error": f"课题不存在: {pid}"}, 404)
-            return
-
-        # 单元列表
-        m = re.match(r"^/api/research/projects/([^/]+)/units$", path)
-        if m:
-            pid = m.group(1)
-            self._send_json({"units": um.list_units(pid)})
-            return
-
-        # 单元详情
-        m = re.match(r"^/api/research/projects/([^/]+)/units/([^/]+)$", path)
-        if m:
-            pid, uid = m.group(1), m.group(2)
-            try:
-                self._send_json(um.get_unit(uid))
-            except FileNotFoundError:
-                self._send_json({"error": f"单元不存在: {uid}"}, 404)
-            return
-
-        # 知识库文档列表（支持 ?layer=&type=&tag=&unit= 过滤）
-        m = re.match(r"^/api/research/projects/([^/]+)/kb/documents$", path)
-        if m:
-            pid = m.group(1)
-            qs = parse_qs(parsed.query)
-            docs = pkb.list_documents(
-                pid,
-                layer=qs.get("layer", ["all"])[0],
-                doc_type=qs.get("type", [""])[0],
-                tag=qs.get("tag", [""])[0],
-                unit=qs.get("unit", [""])[0],
-            )
-            self._send_json({"documents": docs})
-            return
-
-        # 知识库搜索（?q=&layer=）
-        m = re.match(r"^/api/research/projects/([^/]+)/kb/search$", path)
-        if m:
-            pid = m.group(1)
-            qs = parse_qs(parsed.query)
-            q = qs.get("q", [""])[0]
-            layer = qs.get("layer", ["all"])[0]
-            results = pkb.search(pid, q, layer=layer) if q else []
-            self._send_json({"results": results})
-            return
-
-        # 知识库统计
-        m = re.match(r"^/api/research/projects/([^/]+)/kb/stats$", path)
-        if m:
-            pid = m.group(1)
-            self._send_json(pkb.get_kb_stats(pid))
-            return
-
-        # 知识库标签列表
-        m = re.match(r"^/api/research/projects/([^/]+)/kb/tags$", path)
-        if m:
-            pid = m.group(1)
-            self._send_json({"tags": pkb.get_tags(pid)})
-            return
-
-        # 知识库文档详情（path 参数是文档相对路径，URL 编码）
-        m = re.match(r"^/api/research/projects/([^/]+)/kb/doc/(.+)$", path)
-        if m:
-            pid, doc_path = m.group(1), m.group(2)
-            doc = pkb.get_document(pid, doc_path)
-            if doc:
-                self._send_json(doc)
-            else:
-                self._send_json({"error": "文档不存在"}, 404)
-            return
-
-        # 课题记忆上下文
-        m = re.match(r"^/api/research/projects/([^/]+)/memory$", path)
-        if m:
-            pid = m.group(1)
-            self._send_json({"context": pmm.get_project_context(pid)})
-            return
-
-        # 课题记忆统计
-        m = re.match(r"^/api/research/projects/([^/]+)/memory/stats$", path)
-        if m:
-            pid = m.group(1)
-            self._send_json(pmm.get_memory_stats(pid))
-            return
-
-        # 课题记忆片段列表
-        m = re.match(r"^/api/research/projects/([^/]+)/memory/snippets$", path)
-        if m:
-            pid = m.group(1)
-            self._send_json({"snippets": pmm.list_snippets(pid)})
-            return
-
-        # 课题对话记录列表
-        m = re.match(r"^/api/research/projects/([^/]+)/memory/conversations$", path)
-        if m:
-            pid = m.group(1)
-            self._send_json({"conversations": pmm.list_conversations(pid)})
-            return
-
-        # 课题长期记忆文件全文
-        m = re.match(r"^/api/research/projects/([^/]+)/memory/file$", path)
-        if m:
-            pid = m.group(1)
-            self._send_json({"content": pjm.get_project_memory(pid)})
-            return
-
-        # 跨课题搜索
-        if path == "/api/research/search":
-            qs = parse_qs(parsed.query)
-            q = qs.get("q", [""])[0]
-            results = pctx.search_across_projects(q) if q else []
-            self._send_json({"results": results})
-            return
-
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def _do_dispatch_hermes(self, task_id: str, prompt: str, project: str, source: str = "manual") -> str:
@@ -998,6 +1301,10 @@ class RequestHandler(BaseHTTPRequestHandler):
         body = self._read_json_body()
         if _log:
             _log.info(f"POST {path}")
+
+        # v3.5.1: 课题模块路由表分发
+        if self._dispatch_research_routes("POST", path, parsed, body):
+            return
 
         # 创建会话
         if path == "/api/sessions":
@@ -1881,190 +2188,6 @@ class RequestHandler(BaseHTTPRequestHandler):
                     pass
             self._send_json({"success": True, "opinion": op})
             return
-
-        # ============================================================
-        # v3.5: 课题指导模块 API（POST）
-        # ============================================================
-
-        # 创建课题
-        if path == "/api/research/projects":
-            try:
-                pid, _ = pjm.create_project(
-                    body.get("name", "新课题"),
-                    goal=body.get("goal", ""),
-                    description=body.get("description", ""),
-                )
-                self._send_json({"project_id": pid})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 创建单元
-        m = re.match(r"^/api/research/projects/([^/]+)/units$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                uid, _ = um.create_unit(
-                    pid,
-                    body.get("title", "新单元"),
-                    acceptance_criteria=body.get("acceptance_criteria", []),
-                    description=body.get("description", ""),
-                )
-                self._send_json({"unit_id": uid})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 知识库添加文档
-        m = re.match(r"^/api/research/projects/([^/]+)/kb/documents$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                rel_path = pkb.add_document(
-                    pid,
-                    layer=body.get("layer", ""),
-                    doc_type=body.get("doc_type", "references"),
-                    title=body.get("title", "未命名文档"),
-                    content=body.get("content", ""),
-                    tags=body.get("tags", []),
-                    unit=body.get("unit", ""),
-                    source_raw=body.get("source_raw", ""),
-                )
-                self._send_json({"path": rel_path})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 知识库导入外部文件
-        m = re.match(r"^/api/research/projects/([^/]+)/kb/import$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                rel_path = pkb.import_raw_file(
-                    pid,
-                    body.get("source_path", ""),
-                    doc_type=body.get("doc_type", "references"),
-                    title=body.get("title", ""),
-                    tags=body.get("tags", []),
-                )
-                self._send_json({"path": rel_path})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 添加记忆片段
-        m = re.match(r"^/api/research/projects/([^/]+)/memory/snippets$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                pmm.create_snippet(
-                    pid,
-                    trigger=body.get("trigger", ""),
-                    summary=body.get("summary", ""),
-                    source=body.get("source", ""),
-                    importance=body.get("importance", 3),
-                )
-                self._send_json({"success": True})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 保存对话记录
-        m = re.match(r"^/api/research/projects/([^/]+)/memory/conversations$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                pmm.save_conversation(
-                    pid,
-                    body.get("session_id", ""),
-                    body.get("messages", []),
-                    summary=body.get("summary", ""),
-                )
-                self._send_json({"success": True})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 添加决策记录
-        m = re.match(r"^/api/research/projects/([^/]+)/memory/decisions$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                pmm.add_decision(
-                    pid,
-                    title=body.get("title", ""),
-                    rationale=body.get("rationale", ""),
-                    unit_id=body.get("unit_id", ""),
-                )
-                self._send_json({"success": True})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 工作流：规划单元（批量）
-        m = re.match(r"^/api/research/projects/([^/]+)/workflow/plan$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                unit_ids = pwf.plan_units(pid, body.get("unit_specs", []))
-                self._send_json({"unit_ids": unit_ids})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 工作流：开始单元执行（创建任务）
-        m = re.match(r"^/api/research/projects/([^/]+)/workflow/execute$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                task_ids = pwf.start_unit_execution(
-                    pid,
-                    body.get("unit_id", ""),
-                    body.get("task_specs", []),
-                )
-                self._send_json({"task_ids": task_ids})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 工作流：单元验收
-        m = re.match(r"^/api/research/projects/([^/]+)/workflow/review$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                result = pwf.review_unit(pid, body.get("unit_id", ""))
-                self._send_json(result)
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 工作流：完成单元
-        m = re.match(r"^/api/research/projects/([^/]+)/workflow/complete$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                result = pwf.complete_unit(
-                    pid,
-                    body.get("unit_id", ""),
-                    review_notes=body.get("review_notes", ""),
-                    report_content=body.get("report_content", ""),
-                )
-                self._send_json(result)
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 工作流：生成课题总结
-        m = re.match(r"^/api/research/projects/([^/]+)/workflow/summary$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                report_path = pwf.generate_project_summary(pid)
-                self._send_json({"path": report_path})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_PUT(self) -> None:
@@ -2072,6 +2195,10 @@ class RequestHandler(BaseHTTPRequestHandler):
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
         body = self._read_json_body()
+
+        # v3.5.1: 课题模块路由表分发
+        if self._dispatch_research_routes("PUT", path, parsed, body):
+            return
 
         # PUT /api/sessions/<id>/messages/<msg_id>
         m = re.match(r"^/api/sessions/([^/]+)/messages/([^/]+)$", path)
@@ -2134,87 +2261,16 @@ class RequestHandler(BaseHTTPRequestHandler):
             else:
                 self._send_json({"error": "意见不存在"}, 404)
             return
-
-        # ============================================================
-        # v3.5: 课题指导模块 API（PUT）
-        # ============================================================
-
-        # 更新课题
-        m = re.match(r"^/api/research/projects/([^/]+)$", path)
-        if m and "/units/" not in path and "/workflow/" not in path and "/kb/" not in path and "/memory" not in path:
-            pid = m.group(1)
-            try:
-                updated = pjm.update_project(pid, **body)
-                self._send_json({"success": True, "project": updated})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 课题状态流转
-        m = re.match(r"^/api/research/projects/([^/]+)/transition$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                updated = pjm.transition_project(pid, body.get("status", ""))
-                self._send_json({"success": True, "project": updated})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 更新单元
-        m = re.match(r"^/api/research/projects/([^/]+)/units/([^/]+)$", path)
-        if m and "/transition" not in path and "/acceptance/" not in path:
-            pid, uid = m.group(1), m.group(2)
-            try:
-                updated = um.update_unit(uid, **body)
-                self._send_json({"success": True, "unit": updated})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 单元状态流转
-        m = re.match(r"^/api/research/projects/([^/]+)/units/([^/]+)/transition$", path)
-        if m:
-            pid, uid = m.group(1), m.group(2)
-            try:
-                updated = um.transition_unit(uid, body.get("status", ""))
-                self._send_json({"success": True, "unit": updated})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 验收标准勾选
-        m = re.match(r"^/api/research/projects/([^/]+)/units/([^/]+)/acceptance/([^/]+)$", path)
-        if m:
-            pid, uid, ac_id = m.group(1), m.group(2), m.group(3)
-            try:
-                updated = um.check_acceptance_criterion(
-                    uid, ac_id,
-                    met=body.get("met", True),
-                    notes=body.get("notes", ""),
-                )
-                self._send_json({"success": True, "unit": updated})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 更新课题长期记忆文件
-        m = re.match(r"^/api/research/projects/([^/]+)/memory/file$", path)
-        if m:
-            pid = m.group(1)
-            try:
-                pjm.update_project_memory(pid, body.get("content", ""))
-                self._send_json({"success": True})
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
         self._send_json({"error": f"Not found: {path}"}, 404)
 
     def do_DELETE(self) -> None:
         """处理 DELETE 请求（消息删除）。"""
         parsed = urlparse(self.path)
         path = unquote(parsed.path)
+
+        # v3.5.1: 课题模块路由表分发
+        if self._dispatch_research_routes("DELETE", path, parsed):
+            return
 
         # DELETE /api/sessions/<id>/messages/<msg_id>
         m = re.match(r"^/api/sessions/([^/]+)/messages/([^/]+)$", path)
@@ -2263,39 +2319,6 @@ class RequestHandler(BaseHTTPRequestHandler):
             else:
                 self._send_json({"error": "任务不存在"}, 404)
             return
-
-        # ============================================================
-        # v3.5: 课题指导模块 API（DELETE）
-        # ============================================================
-
-        # 删除课题
-        m = re.match(r"^/api/research/projects/([^/]+)$", path)
-        if m and "/units/" not in path:
-            pid = m.group(1)
-            try:
-                ok = pjm.delete_project(pid, confirm=True)
-                if ok:
-                    self._send_json({"success": True})
-                else:
-                    self._send_json({"error": "删除失败"}, 500)
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
-        # 删除单元
-        m = re.match(r"^/api/research/projects/([^/]+)/units/([^/]+)$", path)
-        if m:
-            pid, uid = m.group(1), m.group(2)
-            try:
-                ok = um.delete_unit(uid, confirm=True)
-                if ok:
-                    self._send_json({"success": True})
-                else:
-                    self._send_json({"error": "删除失败"}, 500)
-            except Exception as e:
-                self._send_json({"error": str(e)}, 500)
-            return
-
         self._send_json({"error": f"Not found: {path}"}, 404)
 
 

@@ -296,3 +296,27 @@ window.addEventListener('online', () => {
   }
   showToast('✓ 网络已恢复', 'success');
 });
+
+// ============================================
+// v3.5.1: 极简模块加载器
+// 每个模块通过 Loader.register 注册初始化函数，app.js 统一调用 Loader.init()
+// ============================================
+const ModuleLoader = {
+  _modules: [],
+  register(name, initFn) {
+    this._modules.push({ name, initFn });
+  },
+  init() {
+    let ok = 0, fail = 0;
+    this._modules.forEach(m => {
+      try {
+        if (typeof m.initFn === 'function') m.initFn();
+        ok++;
+      } catch (e) {
+        console.warn(`[ModuleLoader] ${m.name} 初始化失败:`, e);
+        fail++;
+      }
+    });
+    return { ok, fail, total: this._modules.length };
+  }
+};

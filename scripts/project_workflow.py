@@ -34,6 +34,11 @@ from project_manager import (
     get_project_overview, append_to_project_memory,
     _project_dir,
 )
+
+from common import lazy_load as _lazy_load
+_try_llm_router = _lazy_load("llm_router")
+_try_project_kb = _lazy_load("project_kb")
+
 from unit_manager import (
     create_unit, get_unit, update_unit, transition_unit,
     list_units, add_acceptance_criteria, check_acceptance_criterion,
@@ -102,6 +107,143 @@ def plan_units(project_id: str, unit_specs: List[dict]) -> List[str]:
 
     print(f"✓ 已创建 {len(unit_ids)} 个单元: {', '.join(unit_ids)}")
     return unit_ids
+
+
+def ai_plan_units(project_id: str, max_units: int = 5) -> dict:
+    """AI 根据课题知识库材料主动规划单元建议。
+
+    读取课题 raw 层材料，调用 LLM 生成单元拆分方案。
+    返回建议字典（不直接创建单元），供用户确认后调用 plan_units 执行。
+
+    Args:
+        project_id: 课题ID
+        max_units: 最大单元数建议（默认5）
+
+    Returns:
+        {
+            "project_id": str,
+            "materials_summary": str,  # 读取的材料摘要
+            "suggested_units": [       # LLM 建议的单元列表
+                {
+                    "title": str,
+                    "description": str,
+                    "acceptance_criteria": [str],
+                    "risks": [str],
+                }
+            ],
+            "rationale": str,          # LLM 的规划理由
+        }
+
+    Raises:
+        FileNotFoundError: 课题不存在
+        ValueError: 知识库无材料或 LLM 调用失败
+    """
+    # 1. 读取课题信息
+    project = get_project(project_id)
+
+    # 2. 读取知识库 raw 层材料
+    raw_docs = _try_project_kb.list_documents(project_id, layer="raw") if _try_project_kb else []
+    if not raw_docs:
+        raise ValueError(f"课题 {project_id} 知识库 raw 层无材料，请先上传初始资料")
+
+    # 3. 构建材料摘要（每个文档取前 500 字符）
+    materials_parts = []
+    for doc in raw_docs[:10]:  # 最多 10 个文档
+        title = doc.get("title", "未命名")
+        full_doc = _try_project_kb.get_document(project_id, doc.get("path", ""))
+        content = ""
+        if full_doc and isinstance(full_doc, dict):
+            content = full_doc.get("content", "")[:500]
+        materials_parts.append(f"### {title}\n{content}")
+    materials_summary = "\n\n".join(materials_parts)
+
+    # 4. 构建 LLM prompt
+    system_prompt = """你是林赛，一位强场超快光学/阿秒科学领域的独立PI。你的任务是根据用户提供的研究材料，将课题拆分为验收标准清晰的最小单元。
+
+拆分原则：
+1. 每个单元应该是可独立验收的最小工作包
+2. 验收标准必须具体、可量化（如"完成5篇文献精读"而非"阅读文献"）
+3. 单元之间有逻辑递进关系
+4. 风险标注要具体（如"数值收敛性问题"而非"可能有困难"）
+5. 单元数不超过指定数量
+
+输出格式（严格JSON）：
+{
+  "suggested_units": [
+    {
+      "title": "单元标题",
+      "description": "单元描述（1-2句）",
+      "acceptance_criteria": ["标准1", "标准2", "标准3"],
+      "risks": ["风险1", "风险2"]
+    }
+  ],
+  "rationale": "规划理由（说明为什么这样拆分）"
+}"""
+
+    user_prompt = f"""## 课题信息
+- 名称：{project.get('name', '')}
+- 目标：{project.get('goal', '')}
+- 描述：{project.get('description', '')}
+
+## 研究材料摘要
+{materials_summary}
+
+## 任务
+请根据以上材料，将课题拆分为最多 {max_units} 个单元。每个单元需要有明确的验收标准（3-5条）和风险标注。
+
+请输出严格JSON格式。"""
+
+    # 5. 调用 LLM（通过 llm_router.router.call_llm）
+    if _try_llm_router is None:
+        raise ValueError("llm_router 模块不可用，无法调用 LLM")
+
+    messages = [{"role": "user", "content": user_prompt}]
+    try:
+        response, _usage, _provider = _try_llm_router.router.call_llm(system_prompt, messages)
+    except Exception as e:
+        raise ValueError(f"LLM 调用失败: {e}")
+
+    if not response or not response.strip():
+        raise ValueError("LLM 返回空响应")
+
+    # 6. 解析 JSON 响应
+    import json as _json
+    import re as _re
+
+    # 尝试从响应中提取 JSON
+    text = response.strip()
+    # 去除可能的 markdown 代码块标记
+    text = _re.sub(r"^```(?:json)?\s*", "", text)
+    text = _re.sub(r"\s*```$", "", text)
+
+    try:
+        result = _json.loads(text)
+    except _json.JSONDecodeError:
+        # 尝试提取第一个 JSON 对象
+        match = _re.search(r'\{[\s\S]*\}', text)
+        if match:
+            try:
+                result = _json.loads(match.group())
+            except _json.JSONDecodeError as e:
+                raise ValueError(f"无法解析 LLM 响应为 JSON: {e}\n原始响应: {text[:500]}")
+        else:
+            raise ValueError(f"LLM 响应中未找到 JSON: {text[:500]}")
+
+    # 7. 验证并返回
+    suggested_units = result.get("suggested_units", [])
+    if not suggested_units:
+        raise ValueError("LLM 未返回有效的单元建议")
+
+    # 限制单元数
+    if len(suggested_units) > max_units:
+        suggested_units = suggested_units[:max_units]
+
+    return {
+        "project_id": project_id,
+        "materials_summary": materials_summary[:1000],  # 截断返回
+        "suggested_units": suggested_units,
+        "rationale": result.get("rationale", ""),
+    }
 
 
 def start_unit_execution(project_id: str, unit_id: str, task_specs: List[dict]) -> List[str]:
@@ -416,6 +558,8 @@ def _self_check() -> None:
 
     # 清理
     delete_project(pid, confirm=True)
+
+    # ai_plan_units 需要真实 LLM 调用，自检中跳过
     print("\n✓ project_workflow 自检完成")
 
 

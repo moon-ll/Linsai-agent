@@ -216,3 +216,11 @@ async function createNewSession(topic, mode) {
     showToast('创建会话失败', 'error');
   }
 }
+
+// v3.5.1: 注册模块初始化
+// session.js 无独立 bind 函数，事件绑定在 app.js bindEvents() 中完成
+if (typeof ModuleLoader !== 'undefined') {
+  ModuleLoader.register('session', () => {
+    // 会话模块事件绑定由 app.js 统一处理，此处保留接口供未来迁移
+  });
+}

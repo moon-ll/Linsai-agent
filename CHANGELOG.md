@@ -1,5 +1,31 @@
 # 变更记录
 
+## v3.5.1 - 2026-06-27 架构优化：8 项改进全部落地
+
+### 新增功能
+
+- **课题 AI 主动规划** — `project_workflow.ai_plan_units()`：读取课题知识库 raw 层材料，调用 LLM 生成单元拆分建议，返回 JSON 供用户确认后执行 `plan_units`。新增 API 路由 `/api/research/projects/{id}/workflow/ai-plan`。
+- **知识库统一检索** — `context_builder.py` 扩展：会话关联课题时同时检索全局知识库和课题知识库，课题 KB 结果降权 0.9 后合并注入 `[课题知识库]` 段落，kb_hits 同时返回两库来源。
+- **学习成本 SVG 趋势图** — `learning.js` 新增 `renderCostChart()`：纯 SVG 绘制最近 14 天 token 消耗柱状图，含预算线、超预算红色标记、月度汇总，适配深色/浅色主题。`web_server.py` 的 `/api/learning/status` 补充 `cost_daily`/`cost_monthly`/`daily_budget` 返回字段。
+
+### 架构优化
+
+- **web_server.py 路由表重构** — 课题模块 37 条路由从 if-elif 迁移到 `_RESEARCH_ROUTES` 路由表，新增 `_dispatch_research_routes()` 分发方法和 37 个 `_rg_*` handler 方法，删除约 430 行重复路由代码。`([^/]+)$` 正则天然排除子路径，消除原有守卫条件。其余路由保持 if-elif 不变，为后续全量迁移铺路。
+- **前端模块加载器** — `core.js` 新增 `ModuleLoader`（register/init），9 个模块 JS 自注册初始化函数，`app.js` 统一调用 `ModuleLoader.init()`。现有手动绑定保持不变，向后兼容。
+
+### 文档治理
+
+- `docs/` 目录治理：3 个 `solid-HHG-*.md` 调研材料移入 `knowledge/raw/notes/`，4 个历史版本文档移入 `docs/archive/`
+- `AGENTS.md` 测试策略更新为三层体系：单元回归（88）+ 模块自检（40）+ E2E 集成（167）
+- `AGENTS.md` docs/ 目录结构、头部日期同步更新
+
+### 验证结果
+- ✅ Python 编译全部通过
+- ✅ 12 个 JS 文件语法检查全部通过
+- ✅ 全量测试 88/88 通过（0.833s）
+- ✅ 6 个课题模块自检全部通过
+- ✅ web_server API 端到端验证通过（路由表 + 非 research 路由）
+
 ## v3.5.0 - 2026-06-27 课题指导模块：结构化科研课题全流程管理
 
 ### 维护：项目全面评估与清理

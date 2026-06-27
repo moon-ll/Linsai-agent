@@ -531,6 +531,14 @@ async function init() {
     const welcome = document.getElementById('welcome-screen');
     if (welcome) welcome.style.display = 'flex';
   }
+
+  // v3.5.1: 模块加载器统一初始化
+  if (typeof ModuleLoader !== 'undefined' && typeof ModuleLoader.init === 'function') {
+    const result = ModuleLoader.init();
+    if (result.fail > 0) {
+      console.warn(`[ModuleLoader] ${result.fail}/${result.total} 个模块初始化失败`);
+    }
+  }
 }
 
 // 启动

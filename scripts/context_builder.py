@@ -58,6 +58,7 @@ _try_memory_manager = _lazy_load("memory_manager")
 _try_skill_manager = _lazy_load("skill_manager")
 _try_knowledge_base = _lazy_load("knowledge_base")
 _try_project_context = _lazy_load("project_context")  # v3.5: 课题上下文注入
+_try_project_kb = _lazy_load("project_kb")  # v3.5.1: 课题知识库统一检索
 
 
 def _read_profile() -> str:
@@ -443,6 +444,30 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
         except Exception:
             pass
 
+    # v3.5.1: 课题知识库统一检索 — 同时检索课题KB，合并到 kb_hits
+    project_kb_results = []
+    if project_id and _try_project_kb is not None and not is_small:
+        try:
+            pkb_results = _try_project_kb.search(project_id, user_input)
+            for r in pkb_results[:5]:  # 最多取5条
+                project_kb_results.append({
+                    "title": r.get("title", ""),
+                    "source": "project_kb",
+                    "stage": r.get("layer", ""),
+                    "score": min(r.get("score", 0) * 0.9, 1.0),  # 略降权，避免淹没全局库
+                    "doc": r.get("path", ""),
+                    "snippet": r.get("snippet", ""),
+                })
+                kb_hits.append({
+                    "title": r.get("title", ""),
+                    "source": "project_kb",
+                    "stage": r.get("layer", ""),
+                    "score": min(r.get("score", 0) * 0.9, 1.0),
+                    "doc": r.get("path", ""),
+                })
+        except Exception:
+            pass
+
     history_msgs = _read_history(session_id)
     input_raw = user_input
 
@@ -454,7 +479,7 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
         "knowledge": len(knowledge_raw),
         "history": sum(len(m["content"]) for m in history_msgs),
         "input": len(input_raw),
-        "project": len(project_ctx_raw) + len(at_refs_raw),  # v3.5
+        "project": len(project_ctx_raw) + len(at_refs_raw) + sum(len(r.get("snippet", "")) for r in project_kb_results),  # v3.5.1
     }
     total = EMERGENCY_TOTAL if emergency else DEFAULT_TOTAL
     budgets = _allocate(actuals, dict(DEFAULT_BUDGETS), total)
@@ -482,6 +507,14 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
         system_prompt += f"\n\n[技能上下文]\n{skills_final}"
     if knowledge_final.strip():
         system_prompt += f"\n\n[相关知识]\n{knowledge_final}"
+    # v3.5.1: 课题知识库检索结果注入
+    if project_kb_results:
+        pkb_parts = []
+        for r in project_kb_results:
+            if r["score"] >= 0.4:
+                pkb_parts.append(f"[PKB] {r['title']} [{r['stage']}]: {r.get('snippet', '')[:200]}")
+        if pkb_parts:
+            system_prompt += f"\n\n[课题知识库]\n" + "\n".join(pkb_parts)
     if project_final.strip():  # v3.5: 课题上下文注入
         system_prompt += f"\n\n[课题上下文]\n{project_final}"
 

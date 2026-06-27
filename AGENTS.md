@@ -126,15 +126,11 @@ LinSai-CoPilot/
 ├── docs/                      # 项目文档与报告
 │   ├── README.md              # 文档索引
 │   ├── CLAUDE-CLI-ADMIN.md    # Claude CLI 人工管理指南
-│   ├── DEEP-AUDIT-REPORT-v1.7.2.md  # 深度评估报告
-│   ├── FUNCTIONAL-TEST-REPORT-v1.7.2.md # 功能测试报告
-│   ├── IMPLEMENTATION-PLAN-v2.1.0.md  # 工具协作者实施计划
-│   ├── IMPLEMENTATION-PLAN-v3.0.0.md  # v3.0 实施计划（已归档）
 │   ├── cognitive-loop-plan.md # v3.4 认知闭环设计稿
 │   ├── stability-ux-plan.md   # v3.3 稳定性与用户体验优化计划
 │   ├── kb-smart-management-plan.md # 知识库智能管理计划
 │   ├── deepxiv-knowledge-workflow.md # deepxiv 知识工作流
-│   ├── solid-HHG-*.md         # 固体HHG调研材料（3份）
+│   ├── archive/               # 历史版本文档归档
 │   └── prompts/               # LLM prompt 模板与管理文档
 │
 ├── scripts/                   # 工具脚本（Python 3，零依赖）
@@ -519,11 +515,18 @@ LinSai-CoPilot/
 - **无障碍**：语义化标签、键盘导航支持（Enter 发送、Shift+Enter 换行）
 
 ### 5. 测试策略
-- **自动化回归测试（影子用户）**：`scripts/self_test.py` + `scripts/tests/`
-  - 零依赖轻量框架，隔离环境，88 个检查点，0.06s 全量通过
-  - 三层覆盖：模块单元测试（31）/ 场景剧本测试（16）/ 人格一致性抽检（38）
-  - 命令行：`--module` / `--scenario` / `--persona` / `--json`
-  - 程序化：`from self_test import run_tests`
+- **三层测试体系**：
+  1. **单元回归测试**：`scripts/self_test.py` + `scripts/tests/`
+     - 零依赖轻量框架，隔离环境，88 个检查点，<1s 全量通过
+     - 三层覆盖：模块单元测试（34）/ 场景剧本测试（16）/ 人格一致性抽检（38）
+     - 命令行：`--module` / `--scenario` / `--persona` / `--json` / `--web`
+     - 程序化：`from self_test import run_tests`
+  2. **模块自检**：每个核心脚本包含 `_self_check()` 函数
+     - 6 个课题模块共 40 个检查点（project_manager 5 + unit_manager 8 + project_kb 8 + project_memory 9 + project_context 4 + project_workflow 6）
+     - 运行：`python3 scripts/{module}.py`
+  3. **E2E 集成测试**：模拟完整课题生命周期的端到端验证
+     - 167 个检查点，覆盖创建→规划→执行→验收→完成→知识库→记忆→@语法→上下文注入→结题全流程
+     - 包含边界条件与异常处理测试
 - 脚本自检（参数校验、错误处理）
 - 手动端到端测试（创建会话 → 多轮对话 → 检查存档完整性）
 - Web 界面测试（启动服务器 → API 连通性 → 静态文件服务 → 流式输出）
@@ -628,7 +631,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：3.5.0*
+*版本：3.5.1*
 *日期：2026-06-27*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*
