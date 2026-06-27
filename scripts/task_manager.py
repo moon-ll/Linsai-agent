@@ -16,10 +16,7 @@ from pathlib import Path
 from typing import List, Optional, Tuple
 
 from common import now_utc as _now_utc, save_json as _write_json
-
-PROJECT_ROOT = Path(__file__).parent.parent
-TASKS_DIR = PROJECT_ROOT / "tasks"
-MEMORY_DIR = PROJECT_ROOT / "memory"
+from paths import PROJECT_ROOT, TASKS_DIR, MEMORY_DIR
 
 STATUS_DIRS = {
     "backlog": TASKS_DIR / "backlog",

@@ -342,7 +342,7 @@ body {
   color: var(--text-tertiary);
 }
 .kb-category-item .cat-delete:hover {
-  color: #e74c3c;
+  color: var(--error-color);
 }
 .kb-category-form {
   border-top: 1px solid var(--border-color);
@@ -401,7 +401,7 @@ body {
 }
 .kb-tag-chip .tag-remove:hover {
   opacity: 1;
-  color: #e74c3c;
+  color: var(--error-color);
 }
 .kb-tag-add {
   padding: 2px 8px;
@@ -2334,4 +2334,34 @@ body {
 /* 深色模式 */
 [data-theme="dark"] .skill-row {
   background: var(--surface);
+}
+
+/* v3.5.2: 常用工具 class（替代高频内联 style） */
+.btn-sm {
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 0.78rem;
+}
+.btn-sm:hover { background: var(--bg-tertiary); }
+.btn-danger { border-color: var(--error-color); color: var(--error-color); }
+.btn-accent { border-color: var(--accent-color); color: var(--accent-color); }
+.btn-success { border-color: var(--success-color); color: var(--success-color); }
+.btn-primary { border: none; background: var(--accent-color); color: #fff; }
+.doc-item {
+  padding: 8px;
+  background: var(--bg-tertiary);
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: border-color 0.15s;
+}
+.doc-item:hover { border-color: var(--accent-color); }
+.research-card:focus-visible,
+.doc-item:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 2px;
 }

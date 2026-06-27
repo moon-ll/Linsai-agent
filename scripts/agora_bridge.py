@@ -22,17 +22,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-from common import now_utc as _now_utc
+from common import now_utc as _now_utc, load_json
 
 
 PROJECT_ROOT = Path(__file__).parent.parent.resolve()
 AGORA_DIR = PROJECT_ROOT / "sessions" / "agora_exports"
-
-
-def _load_json(path: Path, default: Any = None) -> Any:
-    if path.exists():
-        return json.loads(path.read_text(encoding="utf-8"))
-    return default if default is not None else {}
 
 
 def export_to_agora(
@@ -59,8 +53,8 @@ def export_to_agora(
     messages_path = session_path / "messages.json"
     state_path = session_path / "state.json"
 
-    messages = _load_json(messages_path, default=[])
-    state = _load_json(state_path, default={})
+    messages = load_json(messages_path, default=[])
+    state = load_json(state_path, default={})
 
     if isinstance(messages, dict):
         messages = messages.get("messages", [])
@@ -116,7 +110,7 @@ def import_from_agora(agora_file: Path | str) -> dict:
     可用于回流到 LinSai-CoPilot 的记忆系统。
     """
     path = Path(agora_file)
-    data = _load_json(path, default={})
+    data = load_json(path, default={})
 
     result = {
         "topic": data.get("topic", ""),
@@ -178,7 +172,7 @@ if __name__ == "__main__":
 
     # 3. 验证导出格式
     print("\n[2/3] 验证导出格式...")
-    exported = _load_json(export_path)
+    exported = load_json(export_path)
     assert exported["source"] == "LinSai-CoPilot"
     assert "费曼" in exported["invited_personas"]
     assert "狄拉克" in exported["invited_personas"]

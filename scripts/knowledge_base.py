@@ -47,18 +47,20 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 
 from common import now_utc as _now_utc
 
+# 日志接入（可选，logger 模块不存在时降级为静默）
+try:
+    from logger import get_logger
+    _log = get_logger("knowledge_base")
+except Exception:
+    _log = None
+from paths import (
+    PROJECT_ROOT, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR,
+    INDEX_PATH, GRAPH_PATH, GROWTH_LOG_PATH, ALIASES_PATH,
+)
+
 # ─────────────────────────────────────────────
 # 路径与常量
 # ─────────────────────────────────────────────
-
-PROJECT_ROOT = Path(__file__).parent.parent
-KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
-RAW_DIR = KNOWLEDGE_DIR / "raw"
-WIKI_DIR = KNOWLEDGE_DIR / "wiki"
-INDEX_PATH = KNOWLEDGE_DIR / "index.json"
-GRAPH_PATH = KNOWLEDGE_DIR / "graph.json"
-GROWTH_LOG_PATH = KNOWLEDGE_DIR / "growth-log.json"
-ALIASES_PATH = KNOWLEDGE_DIR / "aliases.json"
 
 _SUPPORTED_EXTS = {".md", ".txt", ".rst"}
 _WIKI_TYPES = {"concepts", "methods", "people", "papers", "projects"}
@@ -804,6 +806,8 @@ def ingest_raw(rel_path: str, auto_distill: bool = False) -> Dict[str, Any]:
         "message": f"已纳入索引: {raw_path.name}",
         "wiki_path": None,
     }
+    if _log:
+        _log.info(f"raw 文件已纳入知识库: {rel_path}" + ("（含自动蒸馏）" if auto_distill else ""))
 
     if auto_distill:
         wiki_path = distill_raw_to_wiki(rel_path)
@@ -863,6 +867,8 @@ def distill_raw_to_wiki(raw_rel_path: str,
 
     # 注意：实际 LLM 调用不在此模块中进行
     # 调用方应使用此 prompt 调用 LLM，然后将结果传给 save_distilled_wiki()
+    if _log:
+        _log.info(f"raw → wiki 蒸馏指令已生成: {raw_rel_path} → {wiki_rel}")
     return wiki_rel, distill_prompt
 
 
@@ -1050,6 +1056,8 @@ def create_wiki_stub(concept_name: str, context: str = "",
                f"对话中遇到新概念 '{concept_name}'，创建 seedling stub")
 
     build_index()
+    if _log:
+        _log.info(f"创建 wiki stub (seedling): {wiki_rel} ← 概念 '{concept_name}'")
     return wiki_rel
 
 
@@ -1304,6 +1312,8 @@ def build_index(force: bool = False) -> Dict[str, Any]:
     with open(INDEX_PATH, "w", encoding="utf-8") as f:
         json.dump(index_data, f, ensure_ascii=False, indent=2)
 
+    if _log:
+        _log.info(f"索引构建完成: 文档={len(docs)}, 词项={len(inverted)}, 图谱节点={graph_summary.get('node_count', 0)}")
     return index_data
 
 
@@ -1719,6 +1729,8 @@ def add_document(path: str, content: str) -> Dict[str, Any]:
     log_growth("ingest", str(target.relative_to(KNOWLEDGE_DIR)), "manual",
                f"通过 add_document 添加: {path}")
     build_index()
+    if _log:
+        _log.info(f"文档已添加到知识库: {path} → raw/notes/")
     return {"success": True, "path": str(target.relative_to(KNOWLEDGE_DIR))}
 
 

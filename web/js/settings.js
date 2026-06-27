@@ -36,7 +36,7 @@ function _showProactiveReminders(msgs) {
     banner = document.createElement('div');
     banner.id = 'proactive-banner';
     banner.style.cssText = 'padding:8px 14px;margin:0 0 8px 0;background:var(--bg-tertiary);border-left:3px solid var(--accent-color);border-radius:6px;font-size:0.85rem;display:none;';
-    const chatArea = document.getElementById('chat-messages') || document.querySelector('.chat-area');
+    const chatArea = document.getElementById('messages');
     if (chatArea) {
       chatArea.parentElement.insertBefore(banner, chatArea);
     }
@@ -50,7 +50,7 @@ function _showProactiveReminders(msgs) {
   }).join('<br>');
   banner.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
     <div>${lines}</div>
-    <span onclick="document.getElementById('proactive-banner').style.display='none'" style="cursor:pointer;color:var(--text-tertiary);font-size:1.1rem;flex-shrink:0;">✕</span>
+    <span onclick="document.getElementById('proactive-banner').style.display='none'" tabindex="0" role="button" aria-label="关闭提醒" style="cursor:pointer;color:var(--text-tertiary);font-size:1.1rem;flex-shrink:0;">✕</span>
   </div>`;
   banner.style.display = 'block';
 }
@@ -62,7 +62,7 @@ async function injectProactiveOpening() {
     const msgs = data.proactive_messages || [];
     if (msgs.length === 0) return;
     // 在消息区插入一条林赛主动消息
-    const chatArea = document.getElementById('chat-messages');
+    const chatArea = document.getElementById('messages');
     if (!chatArea) return;
     const existing = chatArea.querySelector('.proactive-opening');
     if (existing) return; // 避免重复

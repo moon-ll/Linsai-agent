@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 import math
 import re
 import shutil
@@ -31,6 +32,8 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 from common import now_utc as _now_utc
+
+_log = logging.getLogger(__name__)
 
 PROJECT_ROOT = Path(__file__).parent.parent
 KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
@@ -88,8 +91,8 @@ def _load_cache(cache_path: Path, ttl_hours: int) -> Optional[Any]:
             age_hours = (datetime.now(timezone.utc) - cached_dt).total_seconds() / 3600
             if age_hours <= ttl_hours:
                 return data.get("result")
-    except Exception:
-        pass
+    except (json.JSONDecodeError, KeyError, ValueError, OSError):
+        pass  # 容错：缓存损坏时返回默认值
     return None
 
 
@@ -107,8 +110,8 @@ def _file_sha256(fpath: Path) -> str:
     h = hashlib.sha256()
     try:
         h.update(fpath.read_bytes())
-    except Exception:
-        return ""
+    except OSError:
+        return ""  # 容错：文件不可读时返回空
     return h.hexdigest()
 
 
@@ -201,7 +204,8 @@ def _fetch_arxiv_trending(max_results: int = 5) -> List[Dict[str, Any]]:
 
         _save_cache(cache_path, papers)
         return papers
-    except Exception:
+    except Exception as e:
+        _log.debug("arXiv 检索失败: %s", e)
         return []
 
 
@@ -251,7 +255,8 @@ def fetch_arxiv_paper(arxiv_id: str) -> Optional[Dict[str, Any]]:
         _save_cache(cache_path, paper)
         return paper
 
-    except Exception:
+    except Exception as e:
+        _log.debug("arXiv 论文获取失败: %s", e)
         return None
 
 
@@ -288,10 +293,12 @@ def _fetch_deepxiv_wsearch(query: str, max_results: int = 5) -> List[Dict[str, A
                                 "fetched_at": _now_utc(),
                             })
                         return items
-                except Exception:
+                except Exception as e:
+                    _log.debug("deepxiv wsearch 单次失败: %s", e)
                     continue
         return []
-    except Exception:
+    except Exception as e:
+        _log.debug("deepxiv wsearch 失败: %s", e)
         return []
 
 
@@ -319,7 +326,8 @@ def _fetch_duckduckgo(query: str, max_results: int = 5) -> List[Dict[str, Any]]:
             if len(items) >= max_results:
                 break
         return items
-    except Exception:
+    except Exception as e:
+        _log.debug("DuckDuckGo 检索失败: %s", e)
         return []
 
 
@@ -350,8 +358,8 @@ def _fetch_wikipedia_fallback(title: str, lang: str = "en") -> Optional[Dict[str
         except urllib.error.HTTPError as e:
             if e.code == 404:
                 return None
-        except Exception:
-            pass
+        except Exception as e:
+            _log.debug("Wikipedia 获取失败: %s", e)
     return None
 
 
@@ -425,8 +433,8 @@ def scan_raw_changes() -> Dict[str, Any]:
     if RAW_INDEX_PATH.exists():
         try:
             old_index = json.loads(RAW_INDEX_PATH.read_text(encoding="utf-8"))
-        except Exception:
-            pass
+        except (json.JSONDecodeError, OSError):
+            pass  # 容错：文件损坏时返回默认值
 
     current: Dict[str, Dict[str, Any]] = {}
     if RAW_DIR.exists():
@@ -447,8 +455,8 @@ def scan_raw_changes() -> Dict[str, Any]:
                     "mtime": stat.st_mtime,
                     "sha256": _file_sha256(fpath),
                 }
-            except Exception:
-                continue
+            except (OSError, AttributeError):
+                continue  # 容错：文件不可访问时跳过
 
     added = []
     modified = []
@@ -485,8 +493,8 @@ def get_raw_pending_queue() -> List[Dict[str, Any]]:
     if RAW_QUEUE_PATH.exists():
         try:
             return json.loads(RAW_QUEUE_PATH.read_text(encoding="utf-8"))
-        except Exception:
-            pass
+        except (json.JSONDecodeError, OSError):
+            pass  # 容错：文件损坏时返回默认值
     return []
 
 
@@ -558,8 +566,8 @@ def score_opportunity(item: Dict[str, Any],
                 if results:
                     max_sim = results[0].get("score", 0)
                     novelty = max(0.0, 1.0 - max_sim)
-    except Exception:
-        pass
+    except Exception as e:
+        _log.debug("知识库相似度检测失败: %s", e)
 
     # 3. 可靠性：来源权重
     reliability_map = {
@@ -633,7 +641,8 @@ def discover_learning_opportunities(query: Optional[str] = None,
     try:
         from research_profiler import get_research_keywords
         research_keywords = get_research_keywords(top_k=10)
-    except Exception:
+    except Exception as e:
+        _log.debug("研究方向关键词获取失败: %s", e)
         research_keywords = []
 
     # 确定搜索词

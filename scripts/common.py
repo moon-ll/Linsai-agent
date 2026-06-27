@@ -10,7 +10,9 @@
 from __future__ import annotations
 
 import json
+import os
 import re
+import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Optional
@@ -33,10 +35,32 @@ def load_json(path: Path | str, default: Any = None) -> Any:
 
 
 def save_json(path: Path | str, data: Any) -> None:
-    """保存 JSON 文件（ensure_ascii=False, indent=2）。"""
+    """保存 JSON 文件（ensure_ascii=False, indent=2）。
+
+    采用原子写入：先写入同目录临时文件并 fsync，再 os.replace() 到目标路径。
+    os.replace() 在 POSIX 上是原子操作，保证文件要么完整更新要么保持不变，
+    避免写入中途崩溃导致数据损坏。
+    """
     p = Path(path)
     p.parent.mkdir(parents=True, exist_ok=True)
-    p.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+    content = json.dumps(data, ensure_ascii=False, indent=2)
+    # 原子写入：先写临时文件再 rename，保证目标文件不会出现半写状态
+    fd, tmp_path = tempfile.mkstemp(dir=str(p.parent), suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(content)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp_path, str(p))
+    except Exception:
+        # 写入失败时清理临时文件，避免残留
+        if os.path.exists(tmp_path):
+            os.unlink(tmp_path)
+        raise
+
+
+# 原子写入别名，供语义化调用
+atomic_save_json = save_json
 
 
 def safe_filename(name: str, separator: str = "_") -> str:

@@ -2,7 +2,7 @@
 
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
-> 最后更新：2026-06-27
+> 最后更新：2026-06-28
 
 ---
 
@@ -517,16 +517,17 @@ LinSai-CoPilot/
 ### 5. 测试策略
 - **三层测试体系**：
   1. **单元回归测试**：`scripts/self_test.py` + `scripts/tests/`
-     - 零依赖轻量框架，隔离环境，88 个检查点，<1s 全量通过
-     - 三层覆盖：模块单元测试（34）/ 场景剧本测试（16）/ 人格一致性抽检（38）
-     - 命令行：`--module` / `--scenario` / `--persona` / `--json` / `--web`
+     - 零依赖轻量框架，隔离环境，120 个检查点，<1s 全量通过
+     - 六层覆盖：模块单元测试（34+5+19+8）/ 场景剧本测试（16）/ 人格一致性抽检（38）
+     - 命令行：`--module` / `--scenario` / `--persona` / `--json` / `--web` / `--web-ci`
      - 程序化：`from self_test import run_tests`
   2. **模块自检**：每个核心脚本包含 `_self_check()` 函数
      - 6 个课题模块共 40 个检查点（project_manager 5 + unit_manager 8 + project_kb 8 + project_memory 9 + project_context 4 + project_workflow 6）
      - 运行：`python3 scripts/{module}.py`
-  3. **E2E 集成测试**：模拟完整课题生命周期的端到端验证
-     - 167 个检查点，覆盖创建→规划→执行→验收→完成→知识库→记忆→@语法→上下文注入→结题全流程
-     - 包含边界条件与异常处理测试
+  3. **E2E 集成测试**：`scripts/test_e2e_learning_full.py`
+     - 自主学习三来源端到端验证：arXiv 论文精读 / 联网检索蒸馏 / raw 自动蒸馏
+     - 验证 wiki frontmatter、来源链接、auto_grown/review_status 标记
+     - 需真实 Claude CLI 环境，非日常回归项
 - 脚本自检（参数校验、错误处理）
 - 手动端到端测试（创建会话 → 多轮对话 → 检查存档完整性）
 - Web 界面测试（启动服务器 → API 连通性 → 静态文件服务 → 流式输出）
@@ -631,7 +632,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：3.5.1*
-*日期：2026-06-27*
+*版本：3.5.4*
+*日期：2026-06-28*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

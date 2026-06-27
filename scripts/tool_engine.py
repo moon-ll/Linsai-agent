@@ -26,11 +26,12 @@
 import ast
 import json
 import re
+import shlex
 import subprocess
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-PROJECT_ROOT = Path(__file__).parent.parent
+from paths import PROJECT_ROOT
 
 # 允许 file_read 读取的目录（相对 PROJECT_ROOT）
 _READ_ALLOW_DIRS = {"", "knowledge", "references", "persona", "skills", "memory", "sessions", "tasks", "docs"}
@@ -593,6 +594,9 @@ _BLOCKED_PATTERNS = [
     r"chmod\s+-R\s+777\s+/",  # 过度开放权限
     r"wget.*\|\s*sh",          # 远程脚本执行
     r"curl.*\|\s*sh",          # 远程脚本执行
+    r"python3?\s+-c\b",        # 禁止 python -c 任意代码执行
+    r"\beval\s*\(",            # 禁止 eval
+    r"\bexec\s*\(",            # 禁止 exec
 ]
 
 
@@ -612,6 +616,8 @@ def _check_escape(command: str) -> tuple[bool, str]:
     允许：相对路径、仅在项目目录内的 cd
     禁止：cd /, cd ~, cd .. 用于逃离项目边界的组合
 
+    对复合命令（&&, ||, ;, |）的每一段都校验前缀。
+
     返回：(是否合规, 原因)
     """
     cmd = command.strip()
@@ -621,18 +627,27 @@ def _check_escape(command: str) -> tuple[bool, str]:
         "ls", "cat", "head", "tail", "grep", "find", "wc",
         "echo", "date", "pwd", "mkdir", "touch", "cp", "mv",
     )
-    # 检查是否以允许的命令开头
-    cmd_stripped = cmd.strip().split()[0] if cmd.strip() else ""
-    # 对于复合命令（&&, ||, ;, |）检查第一段
-    first_cmd = cmd_stripped.split("&&")[0].split("||")[0].split(";")[0].split("|")[0].strip()
-    if first_cmd not in ALLOWED_PREFIXES:
-        # 非预期命令类型，检查是否在黑名单
-        for bad in ["cd /", "cd /home", "cd /Users", "cd ~", "cd $HOME", "cd $HOME/"]:
-            if cmd.startswith(bad):
-                return False, f"禁止 cd 到项目目录外部 ({bad})"
-        # rm -rf 后面跟非项目路径
-        if re.search(r"rm\s+(-rf\s+)?/[^(]", cmd):
-            return False, "禁止删除项目目录外部的文件"
+    # 拆分复合命令（&&, ||, ;, |）
+    segments = re.split(r'\s*(?:&&|\|\||;|\|)\s*', cmd)
+    for seg in segments:
+        seg = seg.strip()
+        if not seg:
+            continue
+        first_cmd = seg.split()[0] if seg.split() else ""
+        if first_cmd not in ALLOWED_PREFIXES:
+            # 非白名单命令，检查是否试图逃离
+            for bad in ["cd /", "cd /home", "cd /Users", "cd ~", "cd $HOME"]:
+                if seg.startswith(bad):
+                    return False, f"禁止 cd 到项目目录外部 ({bad})"
+            # rm -rf 后面跟非项目路径
+            if re.search(r"rm\s+(-rf\s+)?/[^(]", seg):
+                return False, "禁止删除项目目录外部的文件"
+            # 禁止 python -c / python3 -c 形式（可执行任意代码）
+            if re.match(r'python3?\s+-c\b', seg):
+                return False, "禁止 python -c 形式（安全限制）"
+            # 禁止 eval/exec
+            if re.search(r'\b(eval|exec)\s*\(', seg):
+                return False, "禁止 eval/exec 形式（安全限制）"
     return True, ""
 
 
@@ -679,14 +694,28 @@ def tool_run_command(command: str, timeout: int = 60, cwd: str = "") -> str:
         return "✗ 路径越界：工作目录必须在项目目录内"
 
     try:
-        result = subprocess.run(
-            command,
-            shell=True,
-            capture_output=True,
-            text=True,
-            timeout=timeout,
-            cwd=str(target_cwd),
-        )
+        # 尝试 shell=False 模式（更安全，避免命令注入）
+        try:
+            args = shlex.split(command)
+            result = subprocess.run(
+                args,
+                shell=False,
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+                cwd=str(target_cwd),
+            )
+        except ValueError:
+            # shlex 解析失败（含 shell 特殊语法如管道、重定向），降级为 shell=True
+            # 此时依赖前面的安全检查（_is_command_safe + _check_escape）
+            result = subprocess.run(
+                command,
+                shell=True,
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+                cwd=str(target_cwd),
+            )
         # 合并 stdout 和 stderr
         output = result.stdout
         if result.stderr:

@@ -26,6 +26,13 @@ _PROJECT_ROOT = _SCRIPT_DIR.parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
+# 日志接入（可选，logger 模块不存在时降级为静默）
+try:
+    from logger import get_logger
+    _log = get_logger("project_manager")
+except Exception:
+    _log = None
+
 # 课题数据存储根目录
 PROJECTS_DIR = _PROJECT_ROOT / "projects"
 
@@ -141,10 +148,8 @@ def create_project(
     # 生成 PROJECT-MEMORY.md 骨架
     _init_project_memory(project_id, name, goal)
 
-    print(f"✓ 课题已创建: {project_id}")
-    print(f"  名称: {name}")
-    print(f"  目标: {goal}")
-    print(f"  状态: 规划中(planning)")
+    if _log:
+        _log.info(f"课题已创建: {project_id} | 名称={name} | 状态=planning")
     return project_id, path
 
 
@@ -250,13 +255,15 @@ def delete_project(project_id: str, confirm: bool = False) -> bool:
         confirm: 必须为 True 才执行删除（安全机制）
     """
     if not confirm:
-        print("⚠ 删除课题需要 confirm=True")
+        if _log:
+            _log.warning("删除课题需要 confirm=True")
         return False
 
     # 删除课题文件
     path = _project_path(project_id)
     if not path.exists():
-        print(f"✗ 未找到课题: {project_id}")
+        if _log:
+            _log.error(f"未找到课题: {project_id}")
         return False
 
     path.unlink()
@@ -267,7 +274,8 @@ def delete_project(project_id: str, confirm: bool = False) -> bool:
         import shutil
         shutil.rmtree(pdir, ignore_errors=True)
 
-    print(f"✓ 课题已删除: {project_id}")
+    if _log:
+        _log.info(f"课题已删除: {project_id}")
     return True
 
 
@@ -374,7 +382,8 @@ def add_milestone(project_id: str, name: str, target_unit: str = "", description
     }
     project.setdefault("milestones", []).append(milestone)
     update_project(project_id, milestones=project["milestones"])
-    print(f"✓ 里程碑已添加: {name}")
+    if _log:
+        _log.info(f"里程碑已添加: {name}（课题 {project_id}）")
     return milestone
 
 

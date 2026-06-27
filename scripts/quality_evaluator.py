@@ -22,7 +22,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from common import now_utc as _now_utc
+from common import now_utc as _now_utc, load_json, save_json
 
 PROJECT_ROOT = Path(__file__).parent.parent
 KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
@@ -90,21 +90,8 @@ def _import_le():
 
 
 # ---------------------------------------------------------------------------
-# 工具函数
+# 工具函数（load_json / save_json 已统一使用 common 模块）
 # ---------------------------------------------------------------------------
-
-def _load_json(path: Path, default: Any = None) -> Any:
-    if path.exists():
-        try:
-            return json.loads(path.read_text(encoding="utf-8"))
-        except Exception:
-            pass
-    return default if default is not None else {}
-
-
-def _save_json(path: Path, data: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def _file_sha256(text: str) -> str:
@@ -339,7 +326,7 @@ def evaluate_wiki(wiki_path: str,
 
 def _log_quality(result: Dict[str, Any]) -> None:
     """记录质量评估结果。"""
-    log = _load_json(QUALITY_LOG_PATH, [])
+    log = load_json(QUALITY_LOG_PATH, [])
     log.append({
         "wiki_path": result.get("wiki_path"),
         "overall": result.get("overall"),
@@ -348,12 +335,12 @@ def _log_quality(result: Dict[str, Any]) -> None:
     })
     # 保留最近 100 条
     log = log[-100:]
-    _save_json(QUALITY_LOG_PATH, log)
+    save_json(QUALITY_LOG_PATH, log)
 
 
 def _add_to_pending_queue(result: Dict[str, Any]) -> None:
     """将 pending 的 wiki 加入待审队列。"""
-    queue = _load_json(PENDING_QUEUE_PATH, [])
+    queue = load_json(PENDING_QUEUE_PATH, [])
     kb = _import_kb()
     fm, _ = kb.parse_frontmatter((KNOWLEDGE_DIR / result["wiki_path"]).read_text(encoding="utf-8"))
 
@@ -367,7 +354,7 @@ def _add_to_pending_queue(result: Dict[str, Any]) -> None:
         "preview": (KNOWLEDGE_DIR / result["wiki_path"]).read_text(encoding="utf-8")[:300],
     })
 
-    _save_json(PENDING_QUEUE_PATH, queue)
+    save_json(PENDING_QUEUE_PATH, queue)
 
 
 # ---------------------------------------------------------------------------
@@ -480,7 +467,7 @@ def detect_user_edits() -> Dict[str, Any]:
         }
     """
     kb = _import_kb()
-    edit_log = _load_json(USER_EDIT_LOG_PATH, {})
+    edit_log = load_json(USER_EDIT_LOG_PATH, {})
     edited = []
     unchanged = []
 
@@ -527,7 +514,7 @@ def detect_user_edits() -> Dict[str, Any]:
         }
         unchanged.append(path)
 
-    _save_json(USER_EDIT_LOG_PATH, edit_log)
+    save_json(USER_EDIT_LOG_PATH, edit_log)
 
     return {
         "edited": edited,
@@ -548,7 +535,7 @@ def _summarize_edit(path: str, old_hash: str, new_hash: str) -> str:
 
 def get_pending_queue() -> List[Dict[str, Any]]:
     """获取待审队列。"""
-    return _load_json(PENDING_QUEUE_PATH, [])
+    return load_json(PENDING_QUEUE_PATH, [])
 
 
 def approve_pending(wiki_path: str) -> bool:
@@ -572,9 +559,9 @@ def approve_pending(wiki_path: str) -> bool:
         full_path.write_text(new_text, encoding="utf-8")
 
         # 从待审队列移除
-        queue = _load_json(PENDING_QUEUE_PATH, [])
+        queue = load_json(PENDING_QUEUE_PATH, [])
         queue = [q for q in queue if q.get("path") != wiki_path]
-        _save_json(PENDING_QUEUE_PATH, queue)
+        save_json(PENDING_QUEUE_PATH, queue)
 
         kb.log_growth("review", wiki_path, "user", "用户审批通过")
         return True
@@ -603,9 +590,9 @@ def reject_pending(wiki_path: str) -> bool:
         pass
 
     # 从待审队列移除
-    queue = _load_json(PENDING_QUEUE_PATH, [])
+    queue = load_json(PENDING_QUEUE_PATH, [])
     queue = [q for q in queue if q.get("path") != wiki_path]
-    _save_json(PENDING_QUEUE_PATH, queue)
+    save_json(PENDING_QUEUE_PATH, queue)
 
     kb.log_growth("review", wiki_path, "user", "用户拒绝并删除")
     return True

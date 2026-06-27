@@ -117,8 +117,12 @@ function bindEvents() {
     }
   });
 
-  // 会话搜索
-  document.getElementById('session-search').addEventListener('input', renderSessionList);
+  // 会话搜索（P3: 300ms 防抖，减少高频输入时的重渲染开销）
+  let _sessionSearchTimer = null;
+  document.getElementById('session-search')?.addEventListener('input', () => {
+    clearTimeout(_sessionSearchTimer);
+    _sessionSearchTimer = setTimeout(() => renderSessionList(), 300);
+  });
 
   // 发送消息
   document.getElementById('send-btn').addEventListener('click', () => {
@@ -351,11 +355,17 @@ function bindKbManagerEvents() {
     const btn = document.getElementById(btnId);
     const overlay = document.getElementById(overlayId);
     if (!btn || !overlay) return;
+    // P2-21: 重复调用时先断开旧 observer，避免泄漏
+    if (overlay._toolbarObserver) {
+      overlay._toolbarObserver.disconnect();
+      overlay._toolbarObserver = null;
+    }
     const observer = new MutationObserver(() => {
       const isVisible = overlay.style.display !== 'none' && overlay.style.display !== '';
       btn.classList.toggle('active', isVisible);
     });
     observer.observe(overlay, { attributes: true, attributeFilter: ['style'] });
+    overlay._toolbarObserver = observer;  // P2-21: 保存引用供下次 disconnect
   }
 
   // 工具栏按钮
@@ -446,10 +456,7 @@ function bindKbManagerEvents() {
   // P0-2: 绑定学习配置保存按钮
   document.getElementById('save-learning-config')?.addEventListener('click', saveLearningConfig);
 
-  // 项目面板 + hermes 控制台 + 课题指导
-  if (typeof bindProjectsEvents === 'function') bindProjectsEvents();
-  if (typeof bindHermesEvents === 'function') bindHermesEvents();
-  if (typeof bindResearchEvents === 'function') bindResearchEvents();
+  // v3.5.2: projects/hermes/research 事件绑定已由 ModuleLoader 统一处理，此处不再重复调用
 
   // 任务新建/删除
   document.getElementById('task-add-btn')?.addEventListener('click', () => {
@@ -491,7 +498,12 @@ function bindKbManagerEvents() {
   });
   document.getElementById('skill-save-btn')?.addEventListener('click', saveSkillConfig);
   document.getElementById('skill-reset-btn')?.addEventListener('click', resetSkillConfig);
-  document.getElementById('skill-search-input')?.addEventListener('input', filterSkillList);
+  // P3: 300ms 防抖，减少高频输入时的重渲染开销
+  let _skillSearchTimer = null;
+  document.getElementById('skill-search-input')?.addEventListener('input', () => {
+    clearTimeout(_skillSearchTimer);
+    _skillSearchTimer = setTimeout(() => filterSkillList(), 300);
+  });
   document.querySelectorAll('input[name="skill-mode"]').forEach(radio => {
     radio.addEventListener('change', (e) => onSkillModeChange(e.target.value));
   });
@@ -516,6 +528,15 @@ async function init() {
   loadReferences();
   loadUsage();
   loadLLMStatus();
+
+  // v3.5.2: ModuleLoader 统一初始化（先于 bindEvents，避免重复绑定）
+  if (typeof ModuleLoader !== 'undefined' && typeof ModuleLoader.init === 'function') {
+    const result = ModuleLoader.init();
+    if (result.fail > 0) {
+      console.warn(`[ModuleLoader] ${result.fail}/${result.total} 个模块初始化失败`);
+    }
+  }
+
   bindEvents();
   initKbMain();
   initChatSidebar();
@@ -530,14 +551,6 @@ async function init() {
     // 无会话时显示欢迎页
     const welcome = document.getElementById('welcome-screen');
     if (welcome) welcome.style.display = 'flex';
-  }
-
-  // v3.5.1: 模块加载器统一初始化
-  if (typeof ModuleLoader !== 'undefined' && typeof ModuleLoader.init === 'function') {
-    const result = ModuleLoader.init();
-    if (result.fail > 0) {
-      console.warn(`[ModuleLoader] ${result.fail}/${result.total} 个模块初始化失败`);
-    }
   }
 }
 

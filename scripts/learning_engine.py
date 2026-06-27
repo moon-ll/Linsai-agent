@@ -23,7 +23,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from common import now_utc as _now_utc
+from common import now_utc as _now_utc, load_json, save_json, safe_filename
 
 PROJECT_ROOT = Path(__file__).parent.parent
 KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
@@ -109,28 +109,8 @@ def _import_rp():
 
 
 # ---------------------------------------------------------------------------
-# 工具函数
+# 工具函数（load_json / save_json / safe_filename 已统一使用 common 模块）
 # ---------------------------------------------------------------------------
-
-def _load_json(path: Path, default: Any = None) -> Any:
-    if path.exists():
-        try:
-            return json.loads(path.read_text(encoding="utf-8"))
-        except Exception:
-            pass
-    return default if default is not None else {}
-
-
-def _save_json(path: Path, data: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-
-
-def _safe_filename(name: str) -> str:
-    """生成安全的文件名。"""
-    safe = re.sub(r"[^\w\u4e00-\u9fff\-]", "_", name)
-    safe = safe.strip("_")
-    return safe if safe else "untitled"
 
 
 # ---------------------------------------------------------------------------
@@ -179,7 +159,7 @@ def _record_cost(cost_tracker: Dict[str, Any], source_type: str) -> None:
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     month = today[:7]
 
-    cost_data = _load_json(COST_PATH, {"daily": {}, "monthly": {}, "by_provider": {}, "by_source": {}, "total_calls": 0, "total_tokens": 0})
+    cost_data = load_json(COST_PATH, {"daily": {}, "monthly": {}, "by_provider": {}, "by_source": {}, "total_calls": 0, "total_tokens": 0})
 
     # 估算成本（USD）—— 简化：MiniMax ~ $0.0015/1K tokens，kimi CLI ~ $0.001/1K，claude ~ $0.003/1K
     tokens = cost_tracker.get("tokens", 0)
@@ -195,7 +175,7 @@ def _record_cost(cost_tracker: Dict[str, Any], source_type: str) -> None:
         cost_data["by_provider"][provider] = cost_data["by_provider"].get(provider, 0) + estimated_cost
     cost_data["by_source"][source_type] = cost_data["by_source"].get(source_type, 0) + estimated_cost
 
-    _save_json(COST_PATH, cost_data)
+    save_json(COST_PATH, cost_data)
 
 
 # ---------------------------------------------------------------------------
@@ -394,7 +374,7 @@ def distill_arxiv_paper(paper_data: Dict[str, Any],
 
     # 检查是否已存在
     kb = _import_kb()
-    safe_id = _safe_filename(arxiv_id)
+    safe_id = safe_filename(arxiv_id)
     wiki_rel = f"wiki/papers/{safe_id}.md"
     if (KNOWLEDGE_DIR / wiki_rel).exists():
         print(f"⚠ wiki/papers/{safe_id}.md 已存在，跳过")
@@ -429,7 +409,7 @@ def distill_web_search(web_data: Dict[str, Any],
         return None
 
     kb = _import_kb()
-    safe_name = _safe_filename(title)
+    safe_name = safe_filename(title)
     wiki_rel = f"wiki/concepts/{safe_name}.md"
     if (KNOWLEDGE_DIR / wiki_rel).exists():
         print(f"⚠ wiki/concepts/{safe_name}.md 已存在，跳过")
@@ -479,7 +459,7 @@ def auto_distill_raw(raw_rel_path: str,
         "type": wiki_type,
     }
 
-    safe_name = _safe_filename(raw_path.stem)
+    safe_name = safe_filename(raw_path.stem)
     wiki_rel = f"wiki/{wiki_type}/{safe_name}.md"
 
     if (KNOWLEDGE_DIR / wiki_rel).exists():
@@ -602,7 +582,7 @@ def _integrate_concept(concept_name: str, new_content: str,
         wiki 页面路径
     """
     kb = _import_kb()
-    safe_name = _safe_filename(concept_name)
+    safe_name = safe_filename(concept_name)
     wiki_rel = f"wiki/concepts/{safe_name}.md"
 
     if (KNOWLEDGE_DIR / wiki_rel).exists():
@@ -664,11 +644,11 @@ def check_cost_limit() -> Tuple[bool, str]:
     Returns:
         (是否允许继续, 原因)
     """
-    cost_data = _load_json(COST_PATH, {})
+    cost_data = load_json(COST_PATH, {})
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     month = today[:7]
 
-    config = _load_json(MEMORY_DIR / "learning-config.json", {})
+    config = load_json(MEMORY_DIR / "learning-config.json", {})
     daily_limit = config.get("cost_limit_daily", 0.5)
     monthly_limit = config.get("cost_limit_monthly", 10.0)
 
@@ -950,15 +930,15 @@ related: ["阿秒科学", "强场物理"]
     assert "体光伏效应" in concepts, "应提取加粗文字"
     print("   ✓ 概念提取通过")
 
-    print("\n[2/5] 测试 _safe_filename...")
-    assert _safe_filename("固体 HHG") == "固体_HHG"
-    assert _safe_filename("test/file") == "test_file"
+    print("\n[2/5] 测试 safe_filename...")
+    assert safe_filename("固体 HHG") == "固体_HHG"
+    assert safe_filename("test/file") == "test_file"
     print("   ✓ 文件名安全化通过")
 
-    print("\n[3/5] 测试 _load_json / _save_json...")
+    print("\n[3/5] 测试 load_json / save_json...")
     test_path = MEMORY_DIR / "test-learning.json"
-    _save_json(test_path, {"key": "value"})
-    data = _load_json(test_path)
+    save_json(test_path, {"key": "value"})
+    data = load_json(test_path)
     assert data.get("key") == "value"
     test_path.unlink()
     print("   ✓ JSON 读写通过")
@@ -988,7 +968,7 @@ related: ["阿秒科学", "强场物理"]
     print("\n[5/5] 测试成本记录...")
     ct = {"calls": 2, "tokens": 1000, "providers_used": ["minimax"]}
     _record_cost(ct, "arxiv")
-    cost_data = _load_json(COST_PATH, {})
+    cost_data = load_json(COST_PATH, {})
     assert "daily" in cost_data
     assert "total_calls" in cost_data
     print(f"   成本数据: {json.dumps(cost_data, ensure_ascii=False)[:100]}...")

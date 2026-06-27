@@ -85,7 +85,7 @@ function renderTaskBoard() {
 // 相同但 UI/状态管理不同，故保持独立未合并。
 async function updateTaskStatus(taskId, newStatus) {
   try {
-    await apiPut(`/api/tasks/${taskId}`, { status: newStatus });
+    await apiPut(`/api/tasks/${encodeURIComponent(taskId)}`, { status: newStatus });
     const task = State.tasks.find(t => t.task_id === taskId);
     if (task) task.status = newStatus;
     renderTaskBoard();
@@ -162,7 +162,7 @@ async function openTaskDetail(taskId) {
 async function deleteTask(taskId) {
   if (!await confirmModal('确定删除此任务？')) return;
   try {
-    await apiDelete(`/api/tasks/${taskId}`);
+    await apiDelete(`/api/tasks/${encodeURIComponent(taskId)}`);
     State.tasks = State.tasks.filter(t => t.task_id !== taskId);
     renderTaskBoard();
     closeModal('modal-overlay');

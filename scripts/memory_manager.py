@@ -10,7 +10,6 @@ memory_manager.py — 记忆管理器
 """
 from __future__ import annotations
 
-import json
 import re
 import shutil
 import sys
@@ -18,11 +17,11 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 _SCRIPT_DIR = Path(__file__).parent.resolve()
-_PROJECT_ROOT = _SCRIPT_DIR.parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
-from common import now_utc as _now_utc, save_json as _write_json
+from common import now_utc as _now_utc, save_json as _write_json, load_json
+from paths import PROJECT_ROOT as _PROJECT_ROOT
 
 try:
     from session_manager import load_session
@@ -49,15 +48,6 @@ def _sess_dir() -> Path:
     return d
 
 
-def _load_json(path: Path, default=None):
-    if path.exists():
-        try:
-            return json.loads(path.read_text(encoding="utf-8"))
-        except Exception:
-            pass
-    return default if default is not None else {}
-
-
 def _extract_matches(texts: list[str], patterns: list[str]) -> list[str]:
     results = []
     for p in patterns:
@@ -76,7 +66,7 @@ def update_user_profile(session_id: str) -> dict:
         raise
     user_contents = [m["content"] for m in messages if m.get("role") == "user"]
     profile_path = _mem_dir() / "user-profile.json"
-    profile = _load_json(profile_path, {})
+    profile = load_json(profile_path, {})
     confidence = profile.get("_confidence", {})
 
     # 研究领域 — 按精确度优先级排序，避免宽泛关键词误匹配
@@ -175,7 +165,7 @@ def update_working_context(session_id: str) -> dict:
         raise
     all_contents = [m["content"] for m in messages]
     ctx_path = _mem_dir() / "working-context.json"
-    ctx = _load_json(ctx_path, {"active_projects": [], "pending_decisions": [], "key_insights": []})
+    ctx = load_json(ctx_path, {"active_projects": [], "pending_decisions": [], "key_insights": []})
 
     proj_raw = _extract_matches(all_contents, [
         r"(?:我在做|我正在做|我是做|我在搞|我在研究)\s*([^。，\n]{2,40}?)(?:的(?:项目|课题)|项目|课题|。|$)",
@@ -209,7 +199,7 @@ def ensure_long_term_memory() -> dict:
     path = _mem_dir() / "long-term-memory.json"
     default = {"session_summaries": [], "snippets_index": [], "snippets": []}
     if path.exists():
-        data = _load_json(path, default)
+        data = load_json(path, default)
         for k in default:
             data.setdefault(k, default[k])
         _write_json(path, data)
@@ -353,8 +343,8 @@ def generate_session_summary(session_id: str) -> str:
 
 def get_relevant_memories(session_id: str, user_input: str) -> dict:
     """返回与用户输入相关的记忆摘要，供context_builder注入Prompt。"""
-    profile = _load_json(_mem_dir() / "user-profile.json", {})
-    work_ctx = _load_json(_mem_dir() / "working-context.json", {})
+    profile = load_json(_mem_dir() / "user-profile.json", {})
+    work_ctx = load_json(_mem_dir() / "working-context.json", {})
     parts = []
     if profile.get("research_field"):
         parts.append(f"用户是{profile['research_field']}研究者")

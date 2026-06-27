@@ -43,10 +43,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
 
-PROJECT_ROOT = Path(__file__).parent.parent
+from paths import PROJECT_ROOT
+
 BACKUPS_DIR = PROJECT_ROOT / "backups"
 # 备份范围：用户数据目录（与 .gitignore 排除范围一致 —— 用户数据不进 git，进备份）
-BACKUP_TARGETS = ["sessions", "memory", "tasks", "knowledge", "references"]
+BACKUP_TARGETS = ["sessions", "memory", "tasks", "knowledge", "references", "projects", "persona"]
 # 24 小时内已有备份则 auto_backup 跳过（避免每次启动都打包）
 AUTO_BACKUP_INTERVAL_HOURS = 24
 
@@ -127,9 +128,11 @@ def list_backups() -> list:
 
 
 def restore_backup(zip_path) -> bool:
-    """从备份恢复数据。
+    """从备份恢复数据（原子恢复模式）。
 
     恢复前自动创建一份当前状态的应急备份，防止误覆盖丢失数据。
+    采用"先解压到临时目录，再逐个替换目标目录"的原子恢复策略，
+    中途失败时不影响原有数据。
 
     Args:
         zip_path: 备份 zip 文件的路径。
@@ -142,17 +145,29 @@ def restore_backup(zip_path) -> bool:
         print("✗ 备份文件不存在: {}".format(zip_path))
         return False
 
-    # 1. 恢复前先备份当前状态（防止恢复错版本）
+    # 1. 恢复前先备份当前状态
     print("◐ 恢复前自动创建应急备份...")
     pre_backup = create_backup(label="pre-restore")
     if pre_backup:
         print("  应急备份: {}".format(pre_backup.name))
 
-    # 2. 解压恢复
+    # 2. 解压到临时目录
     print("◐ 从 {} 恢复...".format(zip_path.name))
+    import tempfile
+    import shutil
+    tmp_dir = Path(tempfile.mkdtemp(prefix="linsai-restore-"))
     try:
         with zipfile.ZipFile(zip_path, "r") as zf:
-            zf.extractall(PROJECT_ROOT)
+            zf.extractall(tmp_dir)
+        # 3. 逐个替换目标目录
+        for name in BACKUP_TARGETS:
+            src = tmp_dir / name
+            dst = PROJECT_ROOT / name
+            if not src.exists():
+                continue
+            if dst.exists():
+                shutil.rmtree(dst)
+            shutil.copytree(src, dst)
         print("✓ 恢复完成（来自 {}）".format(zip_path.name))
         if pre_backup:
             print("  若需撤销，可用应急备份: {}".format(pre_backup.name))
@@ -160,6 +175,8 @@ def restore_backup(zip_path) -> bool:
     except Exception as e:
         print("✗ 恢复失败: {}".format(e))
         return False
+    finally:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
 
 
 def auto_backup() -> Optional[Path]:
@@ -185,7 +202,7 @@ def auto_backup() -> Optional[Path]:
 
 
 def _self_check() -> None:
-    """自检：创建→列表→完整性校验→清理临时备份。"""
+    """自检：创建→列表→完整性校验→projects 目录验证→清理临时备份。"""
     print("◐ backup_manager 自检...")
     before = len(list_backups())
     tmp = create_backup(label="selfcheck")
@@ -195,6 +212,13 @@ def _self_check() -> None:
     # 验证 zip 可读
     with zipfile.ZipFile(tmp, "r") as zf:
         assert zf.testzip() is None, "zip 完整性校验失败"
+        # 验证 projects 目录已被纳入备份（若存在该目录）
+        projects_root = PROJECT_ROOT / "projects"
+        if projects_root.exists():
+            names = zf.namelist()
+            has_projects = any(n.startswith("projects/") for n in names)
+            assert has_projects, "projects 目录存在但未被纳入备份"
+            print("  ✓ projects 目录已纳入备份")
     # 清理临时备份
     tmp.unlink()
     assert len(list_backups()) == before, "清理后备份数量异常"

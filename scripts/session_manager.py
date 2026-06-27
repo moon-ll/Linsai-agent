@@ -28,11 +28,12 @@ from pathlib import Path
 from typing import Any, Optional
 
 from common import now_utc as _now_utc, save_json as _write_json, load_json as _read_json
+from paths import PROJECT_ROOT
 
 
 def _get_project_root() -> Path:
     """返回项目根目录。"""
-    return Path(__file__).parent.parent.resolve()
+    return PROJECT_ROOT
 
 
 def _get_sessions_dir() -> Path:

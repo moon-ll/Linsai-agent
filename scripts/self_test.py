@@ -7,17 +7,20 @@ self_test.py — LinSai-CoPilot 内测统一入口
     全量回归测试。覆盖模块功能、场景剧本、人格一致性三大维度。
 
 用法（命令行）：
-    $ python3 scripts/self_test.py              # 运行全量测试
+    $ python3 scripts/self_test.py              # 运行全量测试（不含 Web API）
     $ python3 scripts/self_test.py --module     # 仅运行核心模块测试
     $ python3 scripts/self_test.py --scenario   # 仅运行场景剧本
     $ python3 scripts/self_test.py --persona    # 仅运行人格抽检
+    $ python3 scripts/self_test.py --web        # 仅运行 Web API 测试
+    $ python3 scripts/self_test.py --web-ci     # 全量回归 + Web API（CI 环境）
     $ python3 scripts/self_test.py --verbose    # 显示详细通过信息
 
 用法（程序化）：
     >>> from self_test import run_tests
-    >>> result = run_tests()          # 全量
-    >>> result = run_tests(["module"]) # 仅核心模块
-    >>> print(result["summary"])       # 结构化结果
+    >>> result = run_tests()              # 全量（不含 Web API）
+    >>> result = run_tests(["module"])    # 仅核心模块
+    >>> result = run_tests(web_ci=True)   # 全量 + Web API（CI 模式）
+    >>> print(result["summary"])          # 结构化结果
 
 规范：
     - 仅使用 Python 3 标准库
@@ -82,11 +85,14 @@ def _run_selected(filters: List[str]) -> List[TestSuite]:
     return suites
 
 
-def run_tests(filters: Optional[List[str]] = None) -> Dict[str, Any]:
+def run_tests(filters: Optional[List[str]] = None, web_ci: bool = False) -> Dict[str, Any]:
     """程序化接口：运行内测并返回结构化结果。
 
     参数:
         filters: None 表示全量，或 ["module", "scenario", "persona"] 的子集
+        web_ci:  CI 模式标志。为 True 时，全量回归纳入 test_web_api
+                 （需启动子进程+端口）。默认 False 时全量跳过 test_web_api，
+                 由 --web 显式专项运行。
 
     返回:
         {
@@ -120,8 +126,10 @@ def run_tests(filters: Optional[List[str]] = None) -> Dict[str, Any]:
             mod_name = fpath.stem
             if mod_name == "test_runner":
                 continue
-            # test_web_api 需要启动子进程+端口，不纳入默认全量（用 --web 显式触发）
-            if mod_name == "test_web_api":
+            # test_web_api 需启动子进程+端口：默认全量跳过，
+            # --web-ci（web_ci=True）时纳入全量回归，--web 时由 _run_selected 专项运行
+            if mod_name == "test_web_api" and not web_ci:
+                print("○ 跳过 test_web_api（需启动子进程；使用 --web-ci 在全量中纳入）")
                 continue
             try:
                 mod = importlib.import_module(mod_name)
@@ -205,6 +213,8 @@ def main():
     parser.add_argument("--scenario", action="store_true", help="仅运行场景剧本")
     parser.add_argument("--persona", action="store_true", help="仅运行人格抽检")
     parser.add_argument("--web", action="store_true", help="仅运行 Web API 虚拟用户测试")
+    parser.add_argument("--web-ci", action="store_true",
+                        help="CI 模式：全量回归 + Web API 测试（启动子进程）")
     parser.add_argument("--verbose", action="store_true", help="详细输出")
     parser.add_argument("--json", action="store_true", help="输出 JSON 格式结果")
     args = parser.parse_args()
@@ -219,7 +229,18 @@ def main():
     if args.web:
         filters.append("web")
 
-    result = run_tests(filters if filters else None)
+    if args.web_ci:
+        # CI 模式：确保 Web API 测试纳入
+        if "web" not in filters:
+            filters.append("web")
+        # --web-ci 单独使用 → 全量回归 + Web API（走全量分支，web_ci=True）
+        if len(filters) == 1:
+            result = run_tests(None, web_ci=True)
+        else:
+            # 与其他 filter 组合 → 仅运行指定维度（含 web）
+            result = run_tests(filters)
+    else:
+        result = run_tests(filters if filters else None)
 
     if args.json:
         import json

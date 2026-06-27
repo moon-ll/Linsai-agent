@@ -8,15 +8,17 @@
 """
 
 import json
+import logging
 import re
 import shutil
 import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
-from common import now_utc as _now_utc
+from common import now_utc as _now_utc, load_json
+from paths import PROJECT_ROOT
 
-PROJECT_ROOT = Path(__file__).parent.parent
+_log = logging.getLogger(__name__)
 
 # 预算与截断配置
 DEFAULT_BUDGETS = {"system": 8000, "memory": 6000, "context": 4000, "history": 10000, "input": 2000, "skills": 2000, "knowledge": 1200, "project": 2000}
@@ -27,13 +29,6 @@ MIN_KEEP = {"system": 2000, "memory": 0, "context": 0, "history": 0, "skills": 0
 
 def _load_text(path: Path) -> str:
     return path.read_text(encoding="utf-8") if path.exists() else ""
-
-
-def _load_json(path: Path, default=None):
-    if path.exists():
-        with open(path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return default if default is not None else {}
 
 
 def _mode_instr(mode: str, now: str) -> str:
@@ -62,7 +57,7 @@ _try_project_kb = _lazy_load("project_kb")  # v3.5.1: 课题知识库统一检�
 
 
 def _read_profile() -> str:
-    d = _load_json(PROJECT_ROOT / "memory" / "user-profile.json", default={})
+    d = load_json(PROJECT_ROOT / "memory" / "user-profile.json", default={})
     parts = []
     if d.get("research_field"):
         parts.append(f"用户研究领域：{d['research_field']}")
@@ -78,7 +73,7 @@ def _read_profile() -> str:
 
 def _read_lt_mem() -> str:
     """读取长期记忆片段（Phase 2: 返回实际内容而非计数）。"""
-    d = _load_json(PROJECT_ROOT / "memory" / "long-term-memory.json", default={})
+    d = load_json(PROJECT_ROOT / "memory" / "long-term-memory.json", default={})
     snippets = d.get("snippets", [])
     if not snippets:
         return ""
@@ -96,7 +91,7 @@ def _read_lt_mem() -> str:
 def _read_work_ctx() -> str:
     """读取工作上下文（Phase 2: 过滤过期任务）。"""
     from datetime import date
-    d = _load_json(PROJECT_ROOT / "memory" / "working-context.json", default={})
+    d = load_json(PROJECT_ROOT / "memory" / "working-context.json", default={})
     parts = []
     today = date.today()
 
@@ -148,8 +143,8 @@ def _read_relevant_memories(session_id: str, user_input: str) -> dict:
     if _try_memory_manager is not None:
         try:
             return _try_memory_manager.get_relevant_memories(session_id, user_input)
-        except Exception:
-            pass
+        except Exception as e:
+            _log.debug("memory_manager 检索失败，回退到直接读取: %s", e)
     # 回退：直接读取文件
     return {
         "profile_summary": _read_profile(),
@@ -159,7 +154,7 @@ def _read_relevant_memories(session_id: str, user_input: str) -> dict:
 
 
 def _read_history(session_id: str):
-    d = _load_json(PROJECT_ROOT / "sessions" / session_id / "messages.json")
+    d = load_json(PROJECT_ROOT / "sessions" / session_id / "messages.json")
     if isinstance(d, list):
         return [{"role": m["role"], "content": m["content"]} for m in d if m.get("role") and m.get("content")]
     return [{"role": m["role"], "content": m["content"]} for m in d.get("messages", []) if m.get("role") and m.get("content")]
@@ -167,7 +162,7 @@ def _read_history(session_id: str):
 
 def _read_session_project_id(session_id: str) -> str:
     """v3.5: 读取会话关联的课题ID（从 state.json）。"""
-    state = _load_json(PROJECT_ROOT / "sessions" / session_id / "state.json", default={})
+    state = load_json(PROJECT_ROOT / "sessions" / session_id / "state.json", default={})
     return state.get("project_id", "") if isinstance(state, dict) else ""
 
 
@@ -256,7 +251,7 @@ def _build_persona_anchor() -> str:
     parts = []
 
     # 用户研究领域 + 偏好
-    profile = _load_json(PROJECT_ROOT / "memory" / "user-profile.json", {})
+    profile = load_json(PROJECT_ROOT / "memory" / "user-profile.json", {})
     research_fields = profile.get("research_field", [])
     if research_fields:
         parts.append(f"用户研究方向: {', '.join(research_fields[:5])}")
@@ -267,14 +262,14 @@ def _build_persona_anchor() -> str:
             parts.append(f"用户偏好: {general[:200]}")
 
     # 活跃项目
-    ctx = _load_json(PROJECT_ROOT / "memory" / "working-context.json", {})
+    ctx = load_json(PROJECT_ROOT / "memory" / "working-context.json", {})
     projects = ctx.get("active_projects", [])
     active = [p.get("name", "") for p in projects if p.get("status") == "active"][:3]
     if active:
         parts.append(f"进行中项目: {'; '.join(active)}")
 
     # 最近记忆片段（取最新 3 条，去重）
-    ltm = _load_json(PROJECT_ROOT / "memory" / "long-term-memory.json", {})
+    ltm = load_json(PROJECT_ROOT / "memory" / "long-term-memory.json", {})
     snippets = ltm.get("snippets", [])
     recent = snippets[-6:] if snippets else []  # 多取一些用于去重
     if recent:
@@ -329,8 +324,8 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
     if _try_skill_manager is not None and not is_small:
         try:
             skills_raw = _try_skill_manager.get_matched_context(user_input)
-        except Exception:
-            pass
+        except Exception as e:
+            _log.debug("技能匹配失败，跳过技能注入: %s", e)
 
     # 知识库检索注入（增强版：搜索结果 + 关联知识 + 缺失概念检测）
     # v3.4: 接入 should_search_knowledge() 智能判断；命中埋点供前端引用展示
@@ -343,8 +338,8 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
             # v3.4: 使用 should_search_knowledge 精细化判断
             if hasattr(_try_knowledge_base, "should_search_knowledge"):
                 should_search = _try_knowledge_base.should_search_knowledge(user_input, mode)
-        except Exception:
-            pass  # 判断失败时保持默认 True
+        except Exception as e:
+            _log.debug("should_search_knowledge 判断失败，保持默认 True: %s", e)  # 判断失败时保持默认 True
     if should_search and _try_knowledge_base is not None:
         try:
             # 优先使用增强上下文（含图谱关联）
@@ -407,8 +402,8 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
                             "doc": r.get("doc", ""),
                         })
                     knowledge_raw = "\n\n".join(parts)
-        except Exception:
-            pass
+        except Exception as e:
+            _log.debug("知识库检索失败，跳过知识注入: %s", e)
 
     # v3.5: 课题上下文注入 — 会话关联课题时自动注入课题记忆+知识库概览
     project_ctx_raw = ""
@@ -416,8 +411,8 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
     if project_id and _try_project_context is not None:
         try:
             project_ctx_raw = _try_project_context.build_project_context(project_id, include_kb=True)
-        except Exception:
-            pass
+        except Exception as e:
+            _log.debug("课题上下文构建失败，跳过课题注入: %s", e)
 
     # v3.5: @课题知识库 语法解析 — 用户输入中引用其他课题知识库
     at_refs_raw = ""
@@ -441,8 +436,8 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
                         "doc": r.get("path", ""),
                     })
                 at_refs_raw = "\n".join(parts)
-        except Exception:
-            pass
+        except Exception as e:
+            _log.debug("@课题知识库解析失败，跳过跨课题引用: %s", e)
 
     # v3.5.1: 课题知识库统一检索 — 同时检索课题KB，合并到 kb_hits
     project_kb_results = []
@@ -465,8 +460,8 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
                     "score": min(r.get("score", 0) * 0.9, 1.0),
                     "doc": r.get("path", ""),
                 })
-        except Exception:
-            pass
+        except Exception as e:
+            _log.debug("课题知识库统一检索失败，跳过: %s", e)
 
     history_msgs = _read_history(session_id)
     input_raw = user_input

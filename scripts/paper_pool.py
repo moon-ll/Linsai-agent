@@ -32,10 +32,10 @@
 
 from __future__ import annotations
 
-import json
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+from common import now_utc, load_json, save_json
 
 PROJECT_ROOT = Path(__file__).parent.parent
 POOL_PATH = PROJECT_ROOT / "memory" / "paper-pool.json"
@@ -47,23 +47,14 @@ STATUS_ARCHIVED = "archived"
 VALID_STATUSES = {STATUS_UNSEEN, STATUS_VIEWED, STATUS_ARCHIVED}
 
 
-def _now() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-
-
 def _load() -> Dict[str, Any]:
     """加载候选池（{arxiv_id: {status, title, ...}}）。"""
-    if not POOL_PATH.exists():
-        return {}
-    try:
-        return json.loads(POOL_PATH.read_text(encoding="utf-8"))
-    except Exception:
-        return {}
+    return load_json(POOL_PATH, {})
 
 
 def _save(pool: Dict[str, Any]) -> None:
-    POOL_PATH.parent.mkdir(parents=True, exist_ok=True)
-    POOL_PATH.write_text(json.dumps(pool, ensure_ascii=False, indent=2), encoding="utf-8")
+    """保存候选池（原子写入，避免半写损坏）。"""
+    save_json(POOL_PATH, pool)
 
 
 def add_candidates(candidates: Optional[List[Dict]] = None) -> int:
@@ -97,7 +88,7 @@ def add_candidates(candidates: Optional[List[Dict]] = None) -> int:
             "direction": p.get("direction", ""),
             "score": p.get("score_deepxiv", 0),
             "tldr": (p.get("tldr") or "")[:150],
-            "added_at": _now(),
+            "added_at": now_utc(),
         }
         added += 1
 
@@ -153,7 +144,7 @@ def update_status(arxiv_id: str, status: str, extra: Optional[Dict] = None) -> b
     if arxiv_id not in pool:
         return False
     pool[arxiv_id]["status"] = status
-    pool[arxiv_id]["updated_at"] = _now()
+    pool[arxiv_id]["updated_at"] = now_utc()
     if extra:
         pool[arxiv_id].update(extra)
     _save(pool)

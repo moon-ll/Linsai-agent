@@ -51,10 +51,11 @@ except Exception:
 # 路径与导入配置
 # ---------------------------------------------------------------------------
 _SCRIPT_DIR = Path(__file__).parent.resolve()
-_PROJECT_ROOT = _SCRIPT_DIR.parent.resolve()
 
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
+
+from paths import PROJECT_ROOT as _PROJECT_ROOT
 
 import llm_router as lr
 

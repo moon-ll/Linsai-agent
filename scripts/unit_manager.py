@@ -39,6 +39,13 @@ if str(_SCRIPT_DIR) not in sys.path:
 
 from project_manager import get_project, update_project, _project_dir  # noqa: E402
 
+# 日志接入（可选，logger 模块不存在时降级为静默）
+try:
+    from logger import get_logger
+    _log = get_logger("unit_manager")
+except Exception:
+    _log = None
+
 # 课题数据存储根目录（与 project_manager 保持一致）
 PROJECTS_DIR = _PROJECT_ROOT / "projects"
 
@@ -224,12 +231,8 @@ def create_unit(
         phase=f"unit_{seq}",
     )
 
-    print(f"✓ 单元已创建: {unit_id}")
-    print(f"  课题: {project_id}")
-    print(f"  标题: {title}")
-    print(f"  序号: {seq}")
-    print(f"  验收标准数: {len(criteria)}")
-    print(f"  状态: 规划中(planning)")
+    if _log:
+        _log.info(f"单元已创建: {unit_id} | 课题={project_id} | 序号={seq} | 验收标准={len(criteria)} | 状态=planning")
     return unit_id, path
 
 
@@ -258,13 +261,15 @@ def update_unit(unit_id: str, **fields) -> dict:
 
     for key, value in fields.items():
         if key in readonly:
-            print(f"⚠ 字段 '{key}' 只读，已跳过")
+            if _log:
+                _log.warning(f"字段 '{key}' 只读，已跳过")
             continue
         unit[key] = value
 
     unit["updated_at"] = _now_utc()
     _save_unit(unit, path)
-    print(f"✓ 单元已更新: {unit_id}")
+    if _log:
+        _log.info(f"单元已更新: {unit_id}")
     return unit
 
 
@@ -277,7 +282,8 @@ def transition_unit(unit_id: str, new_status: str) -> dict:
     old_status = unit.get("status", "planning")
 
     if new_status == old_status:
-        print(f"○ 单元已是该状态: {unit_id} ({old_status})")
+        if _log:
+            _log.info(f"单元已是该状态: {unit_id} ({old_status})")
         return unit
 
     if new_status not in UNIT_STATUS_FLOW.get(old_status, set()):
@@ -292,7 +298,8 @@ def transition_unit(unit_id: str, new_status: str) -> dict:
         unit["completed_at"] = _now_utc()
 
     _save_unit(unit, path)
-    print(f"✓ 状态流转: {unit_id} {old_status} → {new_status}")
+    if _log:
+        _log.info(f"状态流转: {unit_id} {old_status} → {new_status}")
     return unit
 
 
@@ -329,7 +336,8 @@ def delete_unit(unit_id: str, confirm: bool = False) -> bool:
     若被删除的是 current_unit，则 current_unit 置为 None。
     """
     if not confirm:
-        print("⚠ 删除单元需要 confirm=True")
+        if _log:
+            _log.warning("删除单元需要 confirm=True")
         return False
 
     unit, path = _load_unit(unit_id)
@@ -350,7 +358,8 @@ def delete_unit(unit_id: str, confirm: bool = False) -> bool:
         except FileNotFoundError:
             pass
 
-    print(f"✓ 单元已删除: {unit_id}")
+    if _log:
+        _log.info(f"单元已删除: {unit_id}")
     return True
 
 

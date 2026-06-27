@@ -73,6 +73,7 @@ import project_dispatch as pdh  # v3.1.0: 项目意见 + 执行追踪
 import usage_tracker as ut
 import backup_manager as bm  # v3.4.1: 提升为顶层导入，消除 3 处局部重复
 from common import lazy_load  # v3.4.1: 统一懒加载，消除 6 处 importlib 样板
+import common as _cms  # v3.5.2: 原子写入 + 并发锁
 # v3.5: 课题指导模块
 import project_manager as pjm
 import unit_manager as um
@@ -805,8 +806,8 @@ class RequestHandler(BaseHTTPRequestHandler):
                     try:
                         msg = pe.generate_proactive_message(sig)
                         messages.append({"type": sig.get("type",""), "severity": sig.get("severity","low"), "message": msg})
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        if _log: _log.debug("生成主动消息失败: %s", e)
                 self._send_json({"status": "ok", "reminders": reminders, "proactive_messages": messages})
             except Exception as e:
                 self._send_json({"status": "ok", "reminders": [], "proactive_messages": [], "error": str(e)})
@@ -1110,7 +1111,8 @@ class RequestHandler(BaseHTTPRequestHandler):
                 task_by_project[proj] = task_by_project.get(proj, 0) + 1
             try:
                 nsfc = pr.parse_nsfc_state()
-            except Exception:
+            except Exception as e:
+                if _log: _log.debug("解析 NSFC 状态失败: %s", e)
                 nsfc = {}
             self._send_json({
                 "nsfc_phase": nsfc.get("phase", ""),
@@ -1257,8 +1259,8 @@ class RequestHandler(BaseHTTPRequestHandler):
                 try:
                     state = json.loads(sync_state_path.read_text(encoding="utf-8"))
                     auto_history = state.get("auto_sync_history", [])[-5:]
-                except Exception:
-                    pass
+                except (json.JSONDecodeError, OSError):
+                    pass  # 容错：文件损坏时返回默认值
             self._send_json({
                 "launchagent_installed": agent_path.exists(),
                 "auto_sync_history": auto_history,
@@ -1284,8 +1286,8 @@ class RequestHandler(BaseHTTPRequestHandler):
         # 1. 写 hermes plans/ 目录（跨进程契约，让 hermes cron/agent 能读到）
         try:
             _write_dispatch_to_hermes_plans(prompt, project, dispatch_id)
-        except Exception:
-            pass
+        except Exception as e:
+            if _log: _log.debug("写入 hermes plans 失败: %s", e)
         # 2. 起异步线程执行 oneshot 并回写结果（补齐 fire-and-forget 缺口）
         threading.Thread(
             target=_dispatch_hermes_async,
@@ -1426,8 +1428,8 @@ class RequestHandler(BaseHTTPRequestHandler):
                     try:
                         full_prompt = system_prompt + "\n".join(m.get("content", "") for m in messages)
                         ut.record_usage(sid, provider_name, full_prompt, response, usage)
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        if _log: _log.debug("记录 token 用量失败: %s", e)
 
                     # 切分并流式输出
                     chunks = split_response_stream(response)
@@ -1940,14 +1942,15 @@ class RequestHandler(BaseHTTPRequestHandler):
             # 记录反馈到本地（累积偏好）
             from datetime import datetime as _dt, timezone as _tz
             fb_path = _PROJECT_ROOT / "memory" / "paper-feedback.json"
-            fb = []
-            if fb_path.exists():
-                try:
-                    fb = json.loads(fb_path.read_text(encoding="utf-8"))
-                except Exception:
-                    fb = []
-            fb.append({"arxiv_id": arxiv_id, "action": action, "timestamp": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ")})
-            fb_path.write_text(json.dumps(fb[-200:], ensure_ascii=False, indent=2), encoding="utf-8")
+            with _get_file_lock("paper-feedback"):
+                fb = []
+                if fb_path.exists():
+                    try:
+                        fb = json.loads(fb_path.read_text(encoding="utf-8"))
+                    except (json.JSONDecodeError, OSError):
+                        fb = []  # 容错：文件损坏时返回默认值
+                fb.append({"arxiv_id": arxiv_id, "action": action, "timestamp": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ")})
+                _cms.save_json(fb_path, fb[-200:])
 
             result = {"action": action, "arxiv_id": arxiv_id}
 
@@ -1971,11 +1974,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                     def _hermes_feedback():
                         try:
                             hb.oneshot(f"用户对 arXiv {arxiv_id}（{title}）标记为感兴趣，请更新研究偏好记忆。", timeout=120)
-                        except Exception:
-                            pass
+                        except Exception as e:
+                            if _log: _log.debug("hermes 偏好反馈失败: %s", e)
                     _th.Thread(target=_hermes_feedback, daemon=True).start()
-                except Exception:
-                    pass
+                except Exception as e:
+                    if _log: _log.debug("启动 hermes 反馈线程失败: %s", e)
             elif action in ("archive", "discuss_done"):
                 # 归档：深度阅读+讨论后的沉淀
                 # 归档候选到 raw
@@ -1994,11 +1997,11 @@ class RequestHandler(BaseHTTPRequestHandler):
                     def _hermes_pref():
                         try:
                             hb.oneshot(f"用户对 arXiv {arxiv_id} 标记为{label}，请更新偏好。", timeout=60)
-                        except Exception:
-                            pass
+                        except Exception as e:
+                            if _log: _log.debug("hermes 偏好反馈失败: %s", e)
                     _th.Thread(target=_hermes_pref, daemon=True).start()
-                except Exception:
-                    pass
+                except Exception as e:
+                    if _log: _log.debug("启动 hermes 偏好线程失败: %s", e)
 
             self._send_json({"success": True, "result": result})
             return
@@ -2030,41 +2033,44 @@ class RequestHandler(BaseHTTPRequestHandler):
             pid = m.group(1)
             action = body.get("action", "").strip()  # approve/reject/discuss
             dec_path = _PROJECT_ROOT / "memory" / "nsfc-decisions.json"
-            decs = {}
-            if dec_path.exists():
-                try: decs = json.loads(dec_path.read_text(encoding="utf-8"))
-                except Exception: decs = {}
+            with _get_file_lock("nsfc-decisions"):
+                decs = {}
+                if dec_path.exists():
+                    try: decs = json.loads(dec_path.read_text(encoding="utf-8"))
+                    except (json.JSONDecodeError, OSError): decs = {}  # 容错：文件损坏时返回默认值
 
-            if action == "discuss":
-                # 标记讨论中，返回该课题的知识库上下文供注入
-                decs[pid] = {"status": "discussing", "started_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
-                dec_path.write_text(json.dumps(decs, ensure_ascii=False, indent=2), encoding="utf-8")
-                title = body.get("title", "")
-                topic = body.get("related_topic", "")
-                # 收集该课题的 references 上下文
-                context_files = []
-                refs = pr.get_nsfc_references()
-                for r in refs.get("references", [])[:5]:
-                    context_files.append(r.get("path", ""))
-                self._send_json({"success": True, "status": "discussing", "title": title,
-                                 "context_files": context_files, "topic": topic})
-            elif action in ("approve", "reject"):
-                decs[pid] = {"status": action, "decided_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-                             "summary": body.get("summary", "")}
-                dec_path.write_text(json.dumps(decs, ensure_ascii=False, indent=2), encoding="utf-8")
-                # 异步反馈 hermes
-                title = body.get("title", "")
-                try:
-                    import threading as _th
-                    label = "通过" if action == "approve" else "否决"
-                    def _fb(): 
-                        try: hb.oneshot(f"用户对待决策项「{title}」标记为{label}。请更新项目状态。", timeout=120)
-                        except Exception: pass
-                    _th.Thread(target=_fb, daemon=True).start()
-                except Exception: pass
-                self._send_json({"success": True, "status": action})
-            else:
-                self._send_json({"error": "action 需为 approve/reject/discuss"}, 400)
+                if action == "discuss":
+                    # 标记讨论中，返回该课题的知识库上下文供注入
+                    decs[pid] = {"status": "discussing", "started_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
+                    _cms.save_json(dec_path, decs)
+                    title = body.get("title", "")
+                    topic = body.get("related_topic", "")
+                    # 收集该课题的 references 上下文
+                    context_files = []
+                    refs = pr.get_nsfc_references()
+                    for r in refs.get("references", [])[:5]:
+                        context_files.append(r.get("path", ""))
+                    self._send_json({"success": True, "status": "discussing", "title": title,
+                                     "context_files": context_files, "topic": topic})
+                elif action in ("approve", "reject"):
+                    decs[pid] = {"status": action, "decided_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                                 "summary": body.get("summary", "")}
+                    _cms.save_json(dec_path, decs)
+                    # 异步反馈 hermes
+                    title = body.get("title", "")
+                    try:
+                        import threading as _th
+                        label = "通过" if action == "approve" else "否决"
+                        def _fb():
+                            try: hb.oneshot(f"用户对待决策项「{title}」标记为{label}。请更新项目状态。", timeout=120)
+                            except Exception as e:
+                                if _log: _log.debug("hermes 反馈失败: %s", e)
+                        _th.Thread(target=_fb, daemon=True).start()
+                    except Exception as e:
+                        if _log: _log.debug("启动 hermes 反馈线程失败: %s", e)
+                    self._send_json({"success": True, "status": action})
+                else:
+                    self._send_json({"error": "action 需为 approve/reject/discuss"}, 400)
             return
 
         # v2.9.2: NSFC 讨论总结 → 写 discussions + 反馈 hermes
@@ -2094,22 +2100,25 @@ class RequestHandler(BaseHTTPRequestHandler):
 
             # 更新持久化状态
             dec_path = _PROJECT_ROOT / "memory" / "nsfc-decisions.json"
-            decs = {}
-            if dec_path.exists():
-                try: decs = json.loads(dec_path.read_text(encoding="utf-8"))
-                except Exception: decs = {}
-            if pid:
-                decs[pid] = {"status": "discussed", "decided_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "summary": summary[:200]}
-                dec_path.write_text(json.dumps(decs, ensure_ascii=False, indent=2), encoding="utf-8")
+            with _get_file_lock("nsfc-decisions"):
+                decs = {}
+                if dec_path.exists():
+                    try: decs = json.loads(dec_path.read_text(encoding="utf-8"))
+                    except (json.JSONDecodeError, OSError): decs = {}  # 容错：文件损坏时返回默认值
+                if pid:
+                    decs[pid] = {"status": "discussed", "decided_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "summary": summary[:200]}
+                    _cms.save_json(dec_path, decs)
 
             # 异步反馈 hermes
             try:
                 import threading as _th
                 def _fb2():
                     try: hb.oneshot(f"用户在林赛CoPilot讨论了「{title}」（课题{topic}），结论：{summary[:500]}。请据此更新 state.md 和后续 BRAIN 计划。", timeout=180)
-                    except Exception: pass
+                    except Exception as e:
+                        if _log: _log.debug("hermes 反馈失败: %s", e)
                 _th.Thread(target=_fb2, daemon=True).start()
-            except Exception: pass
+            except Exception as e:
+                if _log: _log.debug("启动 hermes 反馈线程失败: %s", e)
 
             self._send_json({"success": True, "written_to": str(disc_file.relative_to(pr.NSFC_DIR)), "pid": pid})
             return
@@ -2184,8 +2193,8 @@ class RequestHandler(BaseHTTPRequestHandler):
                     ).start()
                     pdh.mark_opinion_fed(op["id"])
                     op["fed_to_hermes"] = True
-                except Exception:
-                    pass
+                except Exception as e:
+                    if _log: _log.debug("意见反馈 hermes 失败: %s", e)
             self._send_json({"success": True, "opinion": op})
             return
         self._send_json({"error": f"Not found: {path}"}, 404)
@@ -2327,8 +2336,8 @@ def _update_memory_async(session_id: str) -> None:
     try:
         mm.update_user_profile(session_id)
         mm.update_working_context(session_id)
-    except Exception:
-        pass
+    except Exception as e:
+        if _log: _log.debug("异步更新记忆失败: %s", e)
 
 
 # ---------------------------------------------------------------------------
@@ -2378,8 +2387,8 @@ def _delete_message(session_id: str, msg_id: str) -> bool:
             # P0-9: 删除前备份
             try:
                 bm.create_backup(targets=["sessions"], label="pre-delete-msg")
-            except Exception:
-                pass
+            except Exception as e:
+                if _log: _log.debug("删除前备份失败: %s", e)
             with open(msg_path, "w", encoding="utf-8") as f:
                 json.dump(data if isinstance(data, list) else {"messages": messages},
                           f, ensure_ascii=False, indent=2)
@@ -2435,8 +2444,8 @@ def _handle_upload(body: Dict[str, Any]) -> Dict[str, Any]:
         # 更新索引
         try:
             dh.index_references()
-        except Exception:
-            pass
+        except Exception as e:
+            if _log: _log.debug("更新引用索引失败: %s", e)
 
         return {
             "success": True,
@@ -2458,8 +2467,8 @@ def _list_references() -> List[Dict[str, Any]]:
             with open(index_path, "r", encoding="utf-8") as f:
                 data = json.load(f)
             refs = data if isinstance(data, list) else data.get("entries", [])
-        except Exception:
-            pass
+        except (json.JSONDecodeError, OSError):
+            pass  # 容错：文件损坏时返回默认值
     return refs
 
 

@@ -3,6 +3,10 @@
  * 零框架依赖，原生 JavaScript，复用 app.js 的 apiGet/apiPost/showToast。
  */
 
+// P2-19: 模块级 reader 引用（供 closeHermesConsole 取消进行中的流）
+let _hermesReader = null;
+const HERMES_STREAM_TIMEOUT_MS = 120000;
+
 // ============================================
 // 面板打开/关闭
 // ============================================
@@ -14,6 +18,11 @@ function openHermesConsole() {
 }
 
 function closeHermesConsole() {
+  // P2-19: 关闭面板时取消进行中的 hermes 流，避免泄漏
+  if (_hermesReader) {
+    try { _hermesReader.cancel(); } catch (_) {}
+    _hermesReader = null;
+  }
   closeModal('hermes-overlay');
 }
 
@@ -128,16 +137,38 @@ function bindHermesRun() {
       outputEl.textContent = '◐ hermes agent 正在工作...\n（agent loop 可能需要 30s-5min）';
     }
 
+    let streamTimeoutId = null;
+    let streamDone = false;
     try {
       const resp = await fetch('/api/hermes/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt, timeout: 300 }),
       });
+
+      // P2-19: HTTP 错误状态码检查
+      if (!resp.ok) {
+        const err = await resp.json().catch(() => ({}));
+        throw new Error(err.error || `HTTP ${resp.status}`);
+      }
+
       const reader = resp.body.getReader();
+      _hermesReader = reader;  // P2-19: 保存 reader 引用供关闭时取消
       const decoder = new TextDecoder();
       let buffer = '';
       let fullText = '';
+
+      // P2-19: 120s 超时保护，避免无限等待
+      streamTimeoutId = setTimeout(() => {
+        if (!streamDone) {
+          console.warn('[hermes] 流超时，强制结束');
+          try { reader.cancel(); } catch (_) {}
+          showToast('hermes 响应超时，请重试', 'error');
+          if (outputEl) {
+            outputEl.textContent = fullText + '\n\n⚠ 响应超时';
+          }
+        }
+      }, HERMES_STREAM_TIMEOUT_MS);
 
       while (true) {
         const { done, value } = await reader.read();
@@ -169,9 +200,12 @@ function bindHermesRun() {
           } catch {}
         }
       }
+      streamDone = true;
     } catch (e) {
       showToast(`✗ 执行失败: ${e.message}`, 'error');
     } finally {
+      if (streamTimeoutId) clearTimeout(streamTimeoutId);
+      _hermesReader = null;
       runBtn.disabled = false;
       runBtn.textContent = '执行';
     }

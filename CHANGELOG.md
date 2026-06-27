@@ -1,5 +1,93 @@
 # 变更记录
 
+## v3.5.4 - 2026-06-28 全面质量优化：P0修复+P1安全+P2架构+P3打磨
+
+### P0 功能性 Bug 修复
+
+- **settings.js DOM ID 修复** — 主动提醒横幅和开场白注入引用了不存在的 `chat-messages` ID，导致 v3.4 认知闭环功能静默失效。修正为正确的 `messages` ID。
+- **sendMessage 重试按钮修复** — 空回复时的重试按钮 `onclick="sendMessage()"` 会因 content 为 undefined 抛 TypeError。改为 addEventListener 并传递原始内容。
+- **AGENTS.md 虚假声明修正** — 测试策略段声称"167 检查点 E2E 课题测试"实际不存在，修正为准确的 `test_e2e_learning_full.py` 描述。
+
+### P1 数据完整性与安全
+
+- **common.save_json 原子写入** — 改为 `tempfile.mkstemp` + `os.fsync` + `os.replace` 模式，保证写入要么完整成功要么不变。7 个文件的重复 `_save_json/_load_json` 定义统一到 common，自动获得原子写入。
+- **backup_manager 补全** — `BACKUP_TARGETS` 新增 `projects` 和 `persona`，restore 改为原子恢复模式（先解压到临时目录再逐目录替换），新增 pre-restore 应急备份。
+- **run_command 安全加固** — `shell=True` 改为优先 `shell=False`（shlex.split），`_check_escape` 对复合命令每一段都校验，新增 `python -c`/`eval`/`exec` 拦截规则。
+- **web_server 并发写加锁** — 4 处 daemon 线程 JSON 写入（paper-feedback/nsfc-decisions）加 `_get_file_lock` + `common.save_json` 原子写入。
+- **ModuleLoader 落地** — 修正 `init()` 与 `bindEvents()` 的事件重复绑定：ModuleLoader 统一在 `bindEvents` 前初始化，移除 `bindEvents` 中的三个重复 `bindXxx()` 调用。
+
+### P2 架构与代码质量
+
+- **paths.py 推广采纳** — 10 个文件的 `PROJECT_ROOT = Path(__file__).parent.parent` 替换为 `from paths import PROJECT_ROOT`，消除 50+ 处重复定义。
+- **except Exception:pass 收窄** — web_server（17处）、context_builder（7处）、external_fetcher（14处）的静默吞错改为具体异常类型或 debug 日志。
+- **logger 升级** — `FileHandler` 改为 `TimedRotatingFileHandler(when='midnight', backupCount=14)`，新增 `_JsonFormatter`。knowledge_base/project_manager/unit_manager 接入 logger。
+- **测试补齐** — 新增 32 个检查点（课题模块 19 + LLM 路由 5 + 工具引擎 8），test_web_api 通过 `--web-ci` 纳入回归。全量 120/120 通过，`--web-ci` 模式 146/146 通过。
+- **hermes SSE 加固** — 新增 res.ok 检查、120s 超时、reader 引用保存（closeHermesConsole 可取消流）。
+- **MutationObserver 修复** — chat.js 和 app.js 的 observer 保存引用并在重复调用时 disconnect，防止内存累积。
+- **API 路径参数编码** — task.js/chat.js 的 taskId/msgId 路径参数补全 encodeURIComponent。
+- **前端无障碍改进** — research.js 3 处可点击 div 添加 tabindex/role/键盘事件，settings.js 关闭按钮添加无障碍属性。
+- **CSS 工具 class** — 新增 `.btn-sm`/`.doc-item`/`.research-card:focus-visible` 等可复用 class，CSS 硬编码 `#e74c3c` 改为 `var(--error-color)`。
+- **输入防抖** — session-search 和 skill-search-input 添加 300ms 防抖。
+- **aria-label 补全** — history-search-input 添加 aria-label。
+
+### 延后项（高风险，需独立迭代）
+
+- web_server.py（2567行）和 knowledge_base.py（1780行）的文件拆分
+- 51 处内联 onclick 全量迁移到事件委托
+- 554 处内联 style 全量抽 CSS class
+
+### 验证结果
+
+- ✅ `python3 scripts/self_test.py` 全量 120/120 通过（0.925s）
+- ✅ `python3 scripts/self_test.py --web-ci` 146/146 通过
+- ✅ 14 个 Python 文件 py_compile 全部通过
+- ✅ 原子写入、命令注入拦截、并发锁专项验证通过
+
+## v3.5.3 - 2026-06-28 测试加固：v3.5 课题模块隔离用例 + Web API 回归接入
+
+### 测试补齐
+
+- **v3.5 课题模块链路隔离测试** — `scripts/tests/test_core.py` 新增 `ProjectModuleTests` 套件（19 个检查点）：使用 `create_isolated_env()` 创建隔离环境，重置并 monkey-patch 6 个课题模块（project_manager / unit_manager / project_kb / project_memory / project_context / project_workflow）根路径，覆盖「创建课题 → 创建单元 → 单元状态流转 planning→executing→review→completed → 知识库导入 import_raw_file → 知识库搜索 → 记忆保存 save_conversation → 记忆读取 get_project_context → @语法解析 resolve_at_references → 工作流规划 plan_units → 删除课题」全链路。
+- **LLM 路由器测试** — `test_core.py` 新增 `LLMRouterTests` 套件（5 个检查点）：模块导入、router 对象存在、providers 列表、get_status 返回字典、status 含 providers 键（不实际调用 LLM）。
+- **工具引擎测试** — `test_core.py` 新增 `ToolEngineTests` 套件（8 个检查点）：`_TOOL_REGISTRY` 注册表完整性（file_read/file_write/calc/run_command）、calc 求值、file_write/file_read 往返、`_is_command_safe` 拦截危险命令。patch PROJECT_ROOT 时使用 `.resolve()` 以兼容 macOS `/var`→`/private/var` 符号链接下的 `_safe_path` startswith 校验。
+
+### Web API 回归接入
+
+- **self_test.py 不再无条件跳过 test_web_api** — `run_tests()` 新增 `web_ci` 参数；全量模式由硬编码 `continue` 改为有条件跳过：默认打印「○ 跳过 test_web_api（需启动子进程；使用 --web-ci 在全量中纳入）」并跳过，`web_ci=True` 时纳入全量回归。
+- **新增 `--web-ci` 选项** — `main()` 新增 `--web-ci` 参数。单独使用触发「全量回归 + Web API」（走全量分支 `web_ci=True`）；与 `--module`/`--scenario`/`--persona` 组合时将 web 加入 filters 专项运行。`--web` 行为不变（仅 Web API）。
+
+### 验证结果
+- ✅ `python3 scripts/self_test.py` 全量 120/120 通过（1.037s，跳过 web）
+- ✅ `python3 scripts/self_test.py --module` 66/66 通过（原 34 + 新增 32）
+- ✅ `python3 scripts/self_test.py --web` 26/26 通过（仅 Web API）
+- ✅ `python3 scripts/self_test.py --web-ci` 146/146 通过（全量 + Web API）
+- ✅ `python3 scripts/self_test.py --web-ci --module` 92/92 通过（module + web）
+- ✅ `python3 scripts/self_test.py --json` 输出含 6 个套件（新增 3 个）
+- ✅ 新增 32 个检查点（课题链路 19 + LLM 路由 5 + 工具引擎 8）
+
+## v3.5.2 - 2026-06-28 数据安全加固：save_json 原子写入 + 工具函数去重
+
+### 数据安全
+
+- **common.save_json 原子写入** — `scripts/common.py` 的 `save_json` 改为原子写入模式：先写入同目录 `.tmp` 临时文件并 `fsync`，再 `os.replace()` 到目标路径（POSIX 原子操作），保证文件要么完整更新要么保持不变，避免写入中途崩溃导致 JSON 损坏。新增 `atomic_save_json` 别名供语义化调用。
+
+### 代码去重
+
+- 消除 7 个脚本中与 `common` 模块重复的 `_load_json` / `_save_json` / `_safe_filename` / `_now` 定义，统一改用 `common.load_json` / `save_json`（原子写入） / `safe_filename` / `now_utc`：
+  - `learning_engine.py`：删除 `_load_json` / `_save_json` / `_safe_filename`，15 处调用改为公共函数
+  - `quality_evaluator.py`：删除 `_load_json` / `_save_json`，11 处调用改为公共函数
+  - `research_profiler.py`：删除 `_load_json` / `_save_json`，4 处调用改为公共函数
+  - `memory_manager.py`：删除 `_load_json`，5 处调用改为 `load_json`（`_write_json` 已是 `save_json` 别名，自动获得原子写入）
+  - `context_builder.py`：删除 `_load_json`（改用更健壮的 `common.load_json`，异常时返回 default 而非崩溃），8 处调用改为公共函数
+  - `agora_bridge.py`：删除 `_load_json`，4 处调用改为公共函数
+  - `paper_pool.py`：删除 `_now`，`_load` / `_save` 改为委托 `common` 函数（`_save` 自动获得原子写入），清理未使用的 `json` / `datetime` 导入
+
+### 验证结果
+- ✅ Python 编译全部通过（common.py + 7 个修改文件）
+- ✅ 全量测试 88/88 通过（0.886s）
+- ✅ 原子写入功能验证通过（内容正确、无残留临时文件、别名可用）
+- ✅ 7 个模块导入正常
+
 ## v3.5.1 - 2026-06-27 架构优化：8 项改进全部落地
 
 ### 新增功能

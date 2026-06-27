@@ -22,11 +22,11 @@ from pathlib import Path
 from typing import Any
 
 _SCRIPT_DIR = Path(__file__).parent.resolve()
-_PROJECT_ROOT = _SCRIPT_DIR.parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
 from common import now_utc as _now_utc, save_json as _write_json, load_json as _read_json
+from paths import PROJECT_ROOT as _PROJECT_ROOT
 
 try:
     from session_manager import list_sessions, load_session

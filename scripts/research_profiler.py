@@ -23,7 +23,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
-from common import now_utc as _now_utc
+from common import now_utc as _now_utc, load_json, save_json
 
 PROJECT_ROOT = Path(__file__).parent.parent
 MEMORY_DIR = PROJECT_ROOT / "memory"
@@ -63,20 +63,6 @@ _TECH_PATTERNS = [
     # 中文：2-8个连续汉字（可能是专业术语）
     re.compile(r"[\u4e00-\u9fff]{2,8}"),
 ]
-
-
-def _load_json(path: Path, default: Any = None) -> Any:
-    if path.exists():
-        try:
-            return json.loads(path.read_text(encoding="utf-8"))
-        except Exception:
-            pass
-    return default if default is not None else {}
-
-
-def _save_json(path: Path, data: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 # ---------------------------------------------------------------------------
@@ -124,7 +110,7 @@ def _tfidf_weights(term_counter: Counter, all_counters: List[Counter]) -> Dict[s
 
 def _from_user_profile() -> Tuple[Counter, float]:
     """从用户画像提取研究关键词。"""
-    profile = _load_json(MEMORY_DIR / "user-profile.json", {})
+    profile = load_json(MEMORY_DIR / "user-profile.json", {})
     text_parts = []
 
     research_field = profile.get("research_field", "")
@@ -271,13 +257,13 @@ def build_research_profile() -> Dict[str, Any]:
         "version": "1.0",
     }
 
-    _save_json(PROFILE_PATH, result)
+    save_json(PROFILE_PATH, result)
     return result
 
 
 def get_research_keywords(top_k: int = 10) -> List[Tuple[str, float]]:
     """读取研究方向关键词。若不存在则重新构建。"""
-    profile = _load_json(PROFILE_PATH, {})
+    profile = load_json(PROFILE_PATH, {})
     if not profile:
         profile = build_research_profile()
     keywords = profile.get("keywords", [])
@@ -299,7 +285,7 @@ def update_if_stale(max_age_days: int = 7) -> Optional[Dict[str, Any]]:
     Returns:
         变化报告，或 None（如果未过期）
     """
-    profile = _load_json(PROFILE_PATH, {})
+    profile = load_json(PROFILE_PATH, {})
     built_at = profile.get("built_at", "")
     if not built_at:
         return build_research_profile()

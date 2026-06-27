@@ -215,7 +215,12 @@ async function sendMessage(content) {
     // P2-19: 检测空回复（LLM 全部 provider 失败后返回空内容）
     if (!fullText.trim()) {
       bubble.innerHTML = `<p style="color:var(--error-color)">✗ 林赛暂时无法回复（LLM 服务可能不可用）</p>
-        <button onclick="sendMessage()" style="margin-top:8px;padding:4px 16px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">🔄 重试</button>`;
+        <button id="retry-btn" style="margin-top:8px;padding:4px 16px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">🔄 重试</button>`;
+      const retryBtn = bubble.querySelector('#retry-btn');
+      if (retryBtn) retryBtn.addEventListener('click', () => {
+        bubble.innerHTML = '';
+        sendMessage(fullContent);
+      });
       showToast('回复失败：LLM 服务不可用，请重试', 'error');
     }
     updateStatus('就绪');
@@ -425,7 +430,7 @@ async function saveEditMessage() {
   }
 
   try {
-    await fetch(`${API_BASE}/api/sessions/${encodeURIComponent(State.currentSessionId)}/messages/${editingMsgId}`, {
+    await fetch(`${API_BASE}/api/sessions/${encodeURIComponent(State.currentSessionId)}/messages/${encodeURIComponent(editingMsgId)}`, {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ content: newContent }),
@@ -467,7 +472,7 @@ async function deleteMessage(msgId) {
   document.getElementById('del-confirm-btn').onclick = async () => {
     closeModal('modal-overlay');
     try {
-      await fetch(`${API_BASE}/api/sessions/${encodeURIComponent(State.currentSessionId)}/messages/${msgId}`, {
+      await fetch(`${API_BASE}/api/sessions/${encodeURIComponent(State.currentSessionId)}/messages/${encodeURIComponent(msgId)}`, {
         method: 'DELETE',
       });
       const msgDiv = document.querySelector(`.message[data-msg-id="${msgId}"]`);
@@ -484,10 +489,16 @@ async function deleteMessage(msgId) {
 // 聊天侧栏折叠 (P1-4: 折叠时显示未读徽标)
 // ============================================
 let _chatUnreadCount = 0;
+let _chatObserver = null;  // P2-21: 模块级引用，重复调用 initChatSidebar 时先 disconnect 旧 observer
 
 function initChatSidebar() {
   const sidebar = document.getElementById('chat-sidebar');
   if (!sidebar) return;
+  // P2-21: 重复调用时先断开旧 observer，避免泄漏
+  if (_chatObserver) {
+    _chatObserver.disconnect();
+    _chatObserver = null;
+  }
   if (localStorage.getItem('chat-collapsed') === 'true') {
     sidebar.classList.add('collapsed');
   }
@@ -505,13 +516,13 @@ function initChatSidebar() {
   // 监听新消息（折叠状态下计数）
   const messagesEl = document.getElementById('messages');
   if (messagesEl) {
-    const observer = new MutationObserver(() => {
+    _chatObserver = new MutationObserver(() => {
       if (sidebar.classList.contains('collapsed')) {
         _chatUnreadCount++;
         updateChatUnreadBadge();
       }
     });
-    observer.observe(messagesEl, { childList: true });
+    _chatObserver.observe(messagesEl, { childList: true });
   }
 }
 

@@ -83,7 +83,7 @@ async function renderProjectList(container) {
       for (const p of projects) {
         const st = researchStatusStyle(p.status);
         const unitCount = p.unit_count ?? p.units_count ?? '?';
-        html += `<div onclick="openProjectDetail('${escapeHtml(p.project_id)}')" style="padding:14px;background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border-color);border-left:3px solid ${st.color};cursor:pointer;transition:transform 0.15s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">`;
+        html += `<div class="research-card" tabindex="0" role="button" aria-label="打开课题 ${escapeHtml(p.name)}" onclick="openProjectDetail('${escapeHtml(p.project_id)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProjectDetail('${escapeHtml(p.project_id)}')}" style="padding:14px;background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border-color);border-left:3px solid ${st.color};cursor:pointer;transition:transform 0.15s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">`;
         html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;">';
         html += `<div style="font-size:0.9rem;font-weight:600;flex:1;color:var(--text-primary);">${escapeHtml(p.name)}</div>`;
         html += researchStatusBadge(p.status);
@@ -576,7 +576,7 @@ async function loadKbDocList(pid) {
     for (const d of docs) {
       const lc = layerColors[d.layer] || 'var(--text-tertiary)';
       const tags = (d.tags || []).slice(0, 3).map(t => `<span style="font-size:0.65rem;color:var(--text-tertiary);background:var(--bg-tertiary);padding:1px 5px;border-radius:8px;">${escapeHtml(t)}</span>`).join(' ');
-      html += `<div onclick="viewDocument('${escapeHtml(pid)}','${escapeHtml(d.path)}')" style="padding:8px;background:var(--bg-tertiary);border-radius:6px;cursor:pointer;border:1px solid transparent;" onmouseover="this.style.borderColor='var(--accent-color)'" onmouseout="this.style.borderColor='transparent'">`;
+      html += `<div tabindex="0" role="button" aria-label="查看文档 ${escapeHtml(d.title || d.path)}" onclick="viewDocument('${escapeHtml(pid)}','${escapeHtml(d.path)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewDocument('${escapeHtml(pid)}','${escapeHtml(d.path)}')}" style="padding:8px;background:var(--bg-tertiary);border-radius:6px;cursor:pointer;border:1px solid transparent;" onmouseover="this.style.borderColor='var(--accent-color)'" onmouseout="this.style.borderColor='transparent'">`;
       html += `<div style="font-size:0.8rem;font-weight:500;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(d.title || d.path)}</div>`;
       html += '<div style="display:flex;align-items:center;gap:6px;margin-top:3px;">';
       html += `<span style="font-size:0.65rem;padding:1px 6px;border-radius:8px;background:${lc};color:#fff;">${escapeHtml(d.layer || '')}</span>`;
@@ -605,7 +605,7 @@ async function searchKb(pid, query) {
     }
     let html = '<div style="display:flex;flex-direction:column;gap:4px;">';
     for (const r of results) {
-      html += `<div onclick="viewDocument('${escapeHtml(pid)}','${escapeHtml(r.path)}')" style="padding:8px;background:var(--bg-tertiary);border-radius:6px;cursor:pointer;border:1px solid transparent;" onmouseover="this.style.borderColor='var(--accent-color)'" onmouseout="this.style.borderColor='transparent'">`;
+      html += `<div tabindex="0" role="button" aria-label="查看文档 ${escapeHtml(r.title)}" onclick="viewDocument('${escapeHtml(pid)}','${escapeHtml(r.path)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewDocument('${escapeHtml(pid)}','${escapeHtml(r.path)}')}" style="padding:8px;background:var(--bg-tertiary);border-radius:6px;cursor:pointer;border:1px solid transparent;" onmouseover="this.style.borderColor='var(--accent-color)'" onmouseout="this.style.borderColor='transparent'">`;
       html += `<div style="font-size:0.8rem;font-weight:500;color:var(--text-primary);">${escapeHtml(r.title)}</div>`;
       html += `<div style="font-size:0.65rem;color:var(--text-tertiary);margin-top:2px;">${escapeHtml(r.layer || '')}${r.score !== undefined ? ' · ' + Math.round(r.score * 100) + '%' : ''}</div>`;
       if (r.snippet) html += `<div style="font-size:0.72rem;color:var(--text-secondary);margin-top:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${escapeHtml(r.snippet)}</div>`;
