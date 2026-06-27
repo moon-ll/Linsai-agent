@@ -48,7 +48,7 @@ function _showProactiveReminders(msgs) {
     const icon = m.severity === 'high' ? '⚠️' : m.severity === 'medium' ? '📌' : '💡';
     return `${icon} ${escapeHtml(m.message)}`;
   }).join('<br>');
-  banner.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">
+  banner.innerHTML = `<div class="d-flex jc-between ai-flex-start gap-8">
     <div>${lines}</div>
     <span onclick="document.getElementById('proactive-banner').style.display='none'" tabindex="0" role="button" aria-label="关闭提醒" style="cursor:pointer;color:var(--text-tertiary);font-size:1.1rem;flex-shrink:0;">✕</span>
   </div>`;
@@ -74,9 +74,9 @@ async function injectProactiveOpening() {
     bubble.className = 'message assistant proactive-opening';
     bubble.style.cssText = 'opacity:0.85;margin-bottom:12px;';
     bubble.innerHTML = `<div class="message-avatar">🔬</div>
-      <div class="message-bubble" style="background:var(--bg-tertiary);border:1px solid var(--border-color);">
-        <p style="font-size:0.82rem;color:var(--text-secondary);margin-bottom:4px;">林赛主动提醒</p>
-        ${lines.split('\n\n').map(l => `<p style="margin:4px 0;">${escapeHtml(l)}</p>`).join('')}
+      <div class="message-bubble bg-tertiary border-default">
+        <p class="fs-082 text-secondary mb-4">林赛主动提醒</p>
+        ${lines.split('\n\n').map(l => `<p class="m-4-0">${escapeHtml(l)}</p>`).join('')}
       </div>`;
     chatArea.insertBefore(bubble, chatArea.firstChild);
   } catch (e) { /* 静默 */ }
@@ -182,10 +182,10 @@ async function loadUsage() {
     const totalCost = total.cost || 0;
 
     el.innerHTML = `
-      <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <div class="d-flex gap-12 fw-wrap">
         <span>今日: <strong>${todayCalls}</strong> 次 · <strong>${todayTokens.toLocaleString()}</strong> tokens · ¥<strong>${todayCost.toFixed(2)}</strong></span>
       </div>
-      <div style="font-size:0.78rem;color:var(--text-tertiary);margin-top:4px;">
+      <div class="fs-078 text-tertiary mt-4">
         累计: ${totalTokens.toLocaleString()} tokens · ¥${totalCost.toFixed(2)}
       </div>
     `;

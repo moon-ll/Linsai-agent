@@ -111,8 +111,8 @@ async function loadBacklinks(title) {
     const data = await apiGet(`/api/knowledge/related?q=${encodeURIComponent(title)}`);
     const related = (data.concepts || data.related || []).filter(r => r !== title);
     if (related.length) {
-      region.innerHTML = `<div style="margin:8px 0;padding:6px 10px;background:var(--bg-tertiary);border-radius:6px;">
-        <span style="font-size:0.78rem;color:var(--text-secondary);">↩️ 被以下笔记关联：</span>
+      region.innerHTML = `<div class="m-8-0 pad-6-10 bg-tertiary br-6">
+        <span class="fs-078 text-secondary">↩️ 被以下笔记关联：</span>
         ${related.map(r => {
           // P1-8: 使用 data 属性替代 onclick 拼接
           return `<span class="kb-related-chip" data-wiki-title="${escapeHtml(String(r))}" title="点击跳转">${escapeHtml(r)}</span>`;
@@ -131,7 +131,7 @@ async function openRawDetail(rawPath) {
   if (defaultEl) defaultEl.style.display = 'none';
   if (detailEl) detailEl.style.display = 'block';
   titleEl.textContent = '📄 ' + rawPath.split('/').pop();
-  bodyEl.innerHTML = '<span style="color:var(--text-tertiary);">◐ 加载中…</span>';
+  bodyEl.innerHTML = '<span class="text-tertiary">◐ 加载中…</span>';
 
   try {
     const data = await apiGet(`/api/knowledge/file-content?path=${encodeURIComponent(rawPath)}`);
@@ -139,12 +139,12 @@ async function openRawDetail(rawPath) {
       // P1-14: renderMarkdown 内部已先 escapeHtml 再做 Markdown 替换，防止 raw HTML/SVG XSS
       let rendered = renderMarkdown(data.content);
       const safePath = rawPath.replace(/'/g, "\\'");
-      bodyEl.innerHTML = `<div style="margin-bottom:8px;"><button class="btn-text" onclick="openLocalFile('${safePath}')" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:4px;cursor:pointer;font-size:0.8rem;">📂 在编辑器中打开</button></div>${rendered.slice(0, 6000)}${data.size > 6000 ? '\n\n<p style="color:var(--text-tertiary);">... (截断)</p>' : ''}`;
+      bodyEl.innerHTML = `<div class="mb-8"><button class="btn-text" onclick="openLocalFile('${safePath}')" class="pad-4-10 border-default br-4 cursor-pointer fs-08">📂 在编辑器中打开</button></div>${rendered.slice(0, 6000)}${data.size > 6000 ? '\n\n<p class="text-tertiary">... (截断)</p>' : ''}`;
     } else {
-      bodyEl.innerHTML = '<span style="color:var(--error-color);">无法读取（' + escapeHtml(data.error || '未知错误') + '）</span>';
+      bodyEl.innerHTML = '<span class="state-error">无法读取（' + escapeHtml(data.error || '未知错误') + '）</span>';
     }
   } catch (e) {
-    bodyEl.innerHTML = '<span style="color:var(--error-color);">加载失败: ' + escapeHtml(e.message) + '</span>';
+    bodyEl.innerHTML = '<span class="state-error">加载失败: ' + escapeHtml(e.message) + '</span>';
   }
 }
 
@@ -187,12 +187,12 @@ window._kbSelectedFiles = [];
 window._pendingKbContext = null;
 
 async function openKbFilePicker() {
-  showModal('<div style="max-width:480px;"><h3 style="margin-bottom:8px;">🗂️ 选择知识库文件注入讨论</h3><p style="color:var(--text-secondary);font-size:0.82rem;margin-bottom:12px;">勾选要讨论的知识库内容，发送消息时会自动注入林赛上下文。</p><div id="kb-file-list" style="max-height:350px;overflow-y:auto;"><p style="color:var(--text-tertiary);">◐ 加载中…</p></div><div style="display:flex;gap:8px;margin-top:12px;"><button id="kb-pick-confirm" style="flex:1;padding:8px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;">确认选择</button><button id="kb-pick-cancel" style="padding:8px 16px;border:1px solid var(--border-color);border-radius:6px;cursor:pointer;">取消</button></div></div>');
+  showModal('<div class="mw-480"><h3 class="mb-8">🗂️ 选择知识库文件注入讨论</h3><p class="text-secondary fs-082 mb-12">勾选要讨论的知识库内容，发送消息时会自动注入林赛上下文。</p><div id="kb-file-list" class="maxh-350 overflow-y-auto"><p class="text-tertiary">◐ 加载中…</p></div><div class="d-flex gap-8 mt-12"><button id="kb-pick-confirm" class="flex-1 pad-8 bg-accent text-white border-none br-6 cursor-pointer">确认选择</button><button id="kb-pick-cancel" class="pad-8-16 border-default br-6 cursor-pointer">取消</button></div></div>');
   try {
     const files = await apiGet('/api/knowledge/files');
     const list = document.getElementById('kb-file-list');
     if (!list) return;
-    if (!files.length) { list.innerHTML = '<p style="color:var(--text-tertiary);">知识库为空</p>'; return; }
+    if (!files.length) { list.innerHTML = '<p class="text-tertiary">知识库为空</p>'; return; }
     const groups = {};
     files.forEach(f => { (groups[f.type] = groups[f.type] || []).push(f); });
     let html = '';
@@ -200,11 +200,11 @@ async function openKbFilePicker() {
       html += `<div style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin:8px 0 4px;">${type} (${items.length})</div>`;
       items.forEach(f => {
         const checked = window._kbSelectedFiles.some(s => s.path === f.path) ? 'checked' : '';
-        html += `<label style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:0.82rem;cursor:pointer;"><input type="checkbox" class="kb-file-cb" data-path="${escapeHtml(f.path)}" data-title="${escapeHtml(f.title)}" ${checked}><span>${escapeHtml(f.title)}</span><span style="color:var(--text-tertiary);font-size:0.72rem;">${f.project ? '['+f.project+']' : ''}</span></label>`;
+        html += `<label style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:0.82rem;cursor:pointer;"><input type="checkbox" class="kb-file-cb" data-path="${escapeHtml(f.path)}" data-title="${escapeHtml(f.title)}" ${checked}><span>${escapeHtml(f.title)}</span><span class="text-tertiary fs-072">${f.project ? '['+f.project+']' : ''}</span></label>`;
       });
     }
     list.innerHTML = html;
-  } catch (e) { document.getElementById('kb-file-list').innerHTML = `<p style="color:var(--error-color);">加载失败: ${e.message}</p>`; }
+  } catch (e) { document.getElementById('kb-file-list').innerHTML = `<p class="state-error">加载失败: ${e.message}</p>`; }
   document.getElementById('kb-pick-cancel').onclick = () => closeModal('modal-overlay');
   document.getElementById('kb-pick-confirm').onclick = () => {
     window._kbSelectedFiles = Array.from(document.querySelectorAll('.kb-file-cb:checked')).map(cb => ({path: cb.dataset.path, title: cb.dataset.title}));
@@ -525,18 +525,18 @@ function renderFilteredTree(pages) {
   const container = document.getElementById('kb-tree-content');
   if (!container) return;
   if (!pages.length) {
-    container.innerHTML = '<div style="padding:20px;text-align:center;color:var(--text-tertiary);">无匹配结果</div>';
+    container.innerHTML = '<div class="pad-20 ta-center text-tertiary">无匹配结果</div>';
     return;
   }
   const html = pages.map(p => {
     const stageIcon = STAGE_ICONS[p.growth_stage] || '○';
     // P1-8: 使用 data 属性替代 onclick 字符串拼接
-    return `<div class="kb-tree-item" data-wiki-path="${escapeHtml(p.path)}" style="padding:4px 8px;cursor:pointer;border-radius:4px;font-size:0.82rem;">
+    return `<div class="kb-tree-item" data-wiki-path="${escapeHtml(p.path)}" class="pad-4-8 cursor-pointer br-4 fs-082">
       ${stageIcon} ${escapeHtml(p.title)}
-      <span style="color:var(--text-tertiary);font-size:0.7rem;">${escapeHtml(p.type || '')}</span>
+      <span class="text-tertiary fs-07">${escapeHtml(p.type || '')}</span>
     </div>`;
   }).join('');
-  container.innerHTML = `<div style="padding:4px 8px;font-size:0.75rem;color:var(--text-tertiary);">筛选结果 (${pages.length})</div>` + html;
+  container.innerHTML = `<div class="pad-4-8 fs-075 text-tertiary">筛选结果 (${pages.length})</div>` + html;
 }
 
 async function handleKbCategory() {
@@ -559,10 +559,10 @@ async function handleKbCategory() {
         <option value="all">全部关键词匹配</option>
       </select>
       <input type="text" id="cat-desc-input" placeholder="描述（可选）">
-      <button class="kb-toolbar-btn" id="cat-create-btn" style="width:100%;margin-top:4px;">➕ 创建分类</button>
+      <button class="kb-toolbar-btn" id="cat-create-btn" class="w-100 mt-4">➕ 创建分类</button>
     </div>
-    <button class="kb-toolbar-btn" id="cat-rescan-btn" style="width:100%;margin-top:6px;">🔄 重新扫描全部</button>
-    <button class="kb-toolbar-btn" id="cat-close-btn" style="width:100%;margin-top:4px;">关闭</button>
+    <button class="kb-toolbar-btn" id="cat-rescan-btn" class="w-100 mt-6">🔄 重新扫描全部</button>
+    <button class="kb-toolbar-btn" id="cat-close-btn" class="w-100 mt-4">关闭</button>
   `;
   overlay.appendChild(modal);
   document.body.appendChild(overlay);
@@ -573,7 +573,7 @@ async function handleKbCategory() {
       const data = await apiGet('/api/knowledge/categories');
       const cats = data.categories || [];
       if (!cats.length) {
-        listEl.innerHTML = '<div style="color:var(--text-tertiary);font-size:0.82rem;">暂无自定义分类</div>';
+        listEl.innerHTML = '<div class="text-tertiary fs-082">暂无自定义分类</div>';
         return;
       }
       listEl.innerHTML = cats.map(c => `
@@ -753,7 +753,7 @@ async function renderKbTree() {
         rawFiles.slice(0, 30).forEach(f => {
           html += `<div class="kb-tree-item" data-raw-path="${escapeHtml(f.path)}" tabindex="0" role="button" aria-label="${escapeHtml(f.name)}" title="${escapeHtml(f.name)}">${escapeHtml(f.name.replace(/\.md$/, '').slice(0, 28))}</div>`;
         });
-        if (rawFiles.length > 30) html += `<div class="kb-tree-item" style="color:var(--text-tertiary);" aria-hidden="true">... 共 ${rawFiles.length} 篇</div>`;
+        if (rawFiles.length > 30) html += `<div class="kb-tree-item text-tertiary" aria-hidden="true">... 共 ${rawFiles.length} 篇</div>`;
         // P2-1: 交叉链接提示
         html += `<div class="kb-tree-item" data-action="open-projects" tabindex="0" role="button" aria-label="打开项目面板查看待决策文献" style="color:var(--accent-color);font-size:0.72rem;border-top:1px dashed var(--border-color);margin-top:4px;padding-top:4px;">📂 待决策文献 → 项目面板</div>`;
         html += `</details></div>`;
@@ -762,7 +762,7 @@ async function renderKbTree() {
 
     container.innerHTML = html;
   } catch (e) {
-    container.innerHTML = '<div style="color:var(--error-color);font-size:0.8rem;padding:8px;">加载失败</div>';
+    container.innerHTML = '<div class="text-error fs-08 pad-8">加载失败</div>';
   }
 }
 
@@ -774,10 +774,10 @@ async function searchKbToTree(query) {
     const data = await apiGet(`/api/knowledge/search?q=${encodeURIComponent(query)}&top_k=20`);
     const results = data.results || [];
     if (!results.length) {
-      container.innerHTML = `<div style="color:var(--text-tertiary);font-size:0.8rem;padding:8px;">🔍 未找到「${escapeHtml(query)}」</div>`;
+      container.innerHTML = `<div class="text-tertiary fs-08 pad-8">🔍 未找到「${escapeHtml(query)}」</div>`;
       return;
     }
-    let html = `<div style="font-size:0.78rem;color:var(--text-secondary);padding:4px 8px;">🔍 ${results.length} 条结果</div>`;
+    let html = `<div class="fs-078 text-secondary pad-4-8">🔍 ${results.length} 条结果</div>`;
     results.forEach(r => {
       const docPath = r.doc || r.path || '';
       // P1-8: 使用 data 属性替代 onclick 字符串拼接
@@ -786,7 +786,7 @@ async function searchKbToTree(query) {
     });
     container.innerHTML = html;
   } catch (e) {
-    container.innerHTML = '<div style="color:var(--error-color);font-size:0.8rem;">搜索失败</div>';
+    container.innerHTML = '<div class="text-error fs-08">搜索失败</div>';
   }
 }
 

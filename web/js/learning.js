@@ -42,12 +42,12 @@ function switchLearningTab(tab) {
 async function loadLearningLog() {
   const el = document.getElementById('learning-log-content');
   if (!el) return;
-  el.innerHTML = '<span style="color:var(--text-tertiary);">◐ 加载中…</span>';
+  el.innerHTML = '<span class="text-tertiary">◐ 加载中…</span>';
   try {
     const data = await apiGet('/api/learning/log');
     const log = (data && data.log) || [];
     if (!log.length) {
-      el.innerHTML = '<p style="color:var(--text-tertiary);text-align:center;padding:20px;">暂无学习记录</p>';
+      el.innerHTML = '<p class="text-tertiary ta-center pad-20">暂无学习记录</p>';
       return;
     }
     el.innerHTML = log.slice(-20).reverse().map(item => {
@@ -56,35 +56,35 @@ async function loadLearningLog() {
       const target = escapeHtml(item.target || item.title || item.concept || '');
       const status = item.success === false ? '⚠️' : '✓';
       return `<div style="padding:6px 0;border-bottom:1px solid var(--border-color);font-size:0.85rem;">
-        ${status} <span style="color:var(--text-tertiary);">${time}</span> ${action} → <strong>${target}</strong>
+        ${status} <span class="text-tertiary">${time}</span> ${action} → <strong>${target}</strong>
       </div>`;
     }).join('');
   } catch (e) {
-    el.innerHTML = `<p style="color:var(--error-color);">加载失败: ${escapeHtml(e.message)}</p>`;
+    el.innerHTML = `<p class="state-error">加载失败: ${escapeHtml(e.message)}</p>`;
   }
 }
   
   async function loadLearningReview() {
   const el = document.getElementById('learning-review-content');
   if (!el) return;
-  el.innerHTML = '<span style="color:var(--text-tertiary);">◐ 加载中…</span>';
+  el.innerHTML = '<span class="text-tertiary">◐ 加载中…</span>';
   try {
     const data = await apiGet('/api/learning/queue');
     const queue = (data && (data.queue || data.items)) || [];
     if (!queue.length) {
-      el.innerHTML = '<p style="color:var(--text-tertiary);text-align:center;padding:20px;">无待审内容</p>';
+      el.innerHTML = '<p class="text-tertiary ta-center pad-20">无待审内容</p>';
       return;
     }
     el.innerHTML = queue.map(item => {
       const title = escapeHtml(item.title || item.concept || '未知');
       const stage = escapeHtml(item.growth_stage || '');
-      return `<div style="padding:8px;margin:4px 0;background:var(--bg-secondary);border-radius:6px;">
+      return `<div class="pad-8 m-4-0 bg-secondary br-6">
         <div style="font-size:0.88rem;font-weight:500;">${title}</div>
-        <div style="font-size:0.75rem;color:var(--text-tertiary);">${stage}</div>
+        <div class="fs-075 text-tertiary">${stage}</div>
       </div>`;
     }).join('');
   } catch (e) {
-    el.innerHTML = `<p style="color:var(--error-color);">加载失败: ${escapeHtml(e.message)}</p>`;
+    el.innerHTML = `<p class="state-error">加载失败: ${escapeHtml(e.message)}</p>`;
   }
 }
 
@@ -92,14 +92,14 @@ async function loadLearningLog() {
 // 兼容两种数据格式：{date: number(cost)} 和 {date: {tokens, cost}}
 function renderCostChart(container, costData) {
   if (!costData || !costData.daily) {
-    container.innerHTML = '<p style="color:var(--text-tertiary);text-align:center;padding:20px;">暂无成本数据</p>';
+    container.innerHTML = '<p class="text-tertiary ta-center pad-20">暂无成本数据</p>';
     return;
   }
 
   // 取最近14天数据
   const days = Object.keys(costData.daily).sort().slice(-14);
   if (days.length === 0) {
-    container.innerHTML = '<p style="color:var(--text-tertiary);text-align:center;padding:20px;">暂无成本数据</p>';
+    container.innerHTML = '<p class="text-tertiary ta-center pad-20">暂无成本数据</p>';
     return;
   }
 
@@ -172,9 +172,9 @@ function renderCostChart(container, costData) {
   }
 
   container.innerHTML = `
-    <div style="margin-bottom:12px;">
-      <h4 style="color:var(--text-primary);font-size:0.85rem;margin-bottom:4px;">Token 消耗趋势（最近14天）</h4>
-      ${monthSummary ? `<p style="color:var(--text-secondary);font-size:0.75rem;">${monthSummary}</p>` : ''}
+    <div class="mb-12">
+      <h4 class="text-primary fs-085 mb-4">Token 消耗趋势（最近14天）</h4>
+      ${monthSummary ? `<p class="text-secondary fs-075">${monthSummary}</p>` : ''}
     </div>
     <svg viewBox="0 0 ${W} ${H}" style="width:100%;height:auto;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-secondary);">
       ${yLabels}
@@ -188,7 +188,7 @@ function renderCostChart(container, costData) {
 async function loadLearningStats() {
   const el = document.getElementById('learning-stats-content');
   if (!el) return;
-  el.innerHTML = '<span style="color:var(--text-tertiary);">◐ 加载中…</span>';
+  el.innerHTML = '<span class="text-tertiary">◐ 加载中…</span>';
   try {
     const data = await apiGet('/api/learning/status');
     const stats = data || {};
@@ -202,14 +202,14 @@ async function loadLearningStats() {
       ['策略', escapeHtml(stats.strategy || 'balanced')],
     ];
     fields.forEach(([k, v]) => {
-      html += `<div style="padding:10px;background:var(--bg-secondary);border-radius:6px;">
-        <div style="font-size:0.75rem;color:var(--text-tertiary);">${escapeHtml(k)}</div>
-        <div style="font-size:1.1rem;font-weight:600;margin-top:4px;">${v}</div>
+      html += `<div class="pad-10 bg-secondary br-6">
+        <div class="fs-075 text-tertiary">${escapeHtml(k)}</div>
+        <div class="fs-11 fw-600 mt-4">${v}</div>
       </div>`;
     });
     html += '</div>';
     // v3.5.1: 成本趋势图容器
-    html += '<div id="learning-cost-chart" style="margin-top:16px;"></div>';
+    html += '<div id="learning-cost-chart" class="mt-16"></div>';
     el.innerHTML = html;
     // v3.5.1: 渲染成本趋势图
     const chartContainer = document.getElementById('learning-cost-chart');
@@ -223,7 +223,7 @@ async function loadLearningStats() {
       renderCostChart(chartContainer, costData);
     }
   } catch (e) {
-    el.innerHTML = `<p style="color:var(--error-color);">加载失败: ${escapeHtml(e.message)}</p>`;
+    el.innerHTML = `<p class="state-error">加载失败: ${escapeHtml(e.message)}</p>`;
   }
 }
 

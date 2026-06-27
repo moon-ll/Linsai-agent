@@ -31,7 +31,7 @@ function switchProjectsTab(tab) {
 async function loadProjectsTab(tab) {
   const body = document.getElementById('projects-body');
   if (!body) return;
-  body.innerHTML = '<p style="color:var(--text-tertiary);text-align:center;padding:40px;">◐ 加载中…</p>';
+  body.innerHTML = '<p class="state-loading state-loading pad-40">◐ 加载中…</p>';
   try {
     if (tab === 'overview') await renderOverviewTab(body);
     else if (tab === 'tasks') await renderTasksTab(body);
@@ -41,7 +41,7 @@ async function loadProjectsTab(tab) {
     else if (tab === 'papers') await renderPapersCards(body);
     else if (tab === 'sync') await renderSyncTab(body);
   } catch (e) {
-    body.innerHTML = `<p style="color:var(--error-color);">加载失败: ${escapeHtml(e.message)}</p>`;
+    body.innerHTML = `<p class="state-error">加载失败: ${escapeHtml(e.message)}</p>`;
   }
 }
 
@@ -58,29 +58,29 @@ async function renderOverviewTab(container) {
   // 4 张统计卡
   html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:20px;">';
   // NSFC 进度卡
-  html += `<div style="padding:14px;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--accent-color);">
-    <div style="font-size:0.75rem;color:var(--text-tertiary);">🔬 NSFC 项目</div>
-    <div style="font-size:1.1rem;font-weight:600;margin-top:4px;">${data.nsfc_available ? escapeHtml(data.nsfc_phase || '进行中') : '未启用'}</div>
-    <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:2px;">${data.nsfc_available ? 'state.md 已加载' : '无 hermes 项目'}</div>
+  html += `<div class="stat-card">
+    <div class="meta-sm">🔬 NSFC 项目</div>
+    <div class="stat-value-lg">${data.nsfc_available ? escapeHtml(data.nsfc_phase || '进行中') : '未启用'}</div>
+    <div class="stat-sub">${data.nsfc_available ? 'state.md 已加载' : '无 hermes 项目'}</div>
   </div>`;
   // 任务卡
   const totalTasks = data.total_tasks || 0;
-  html += `<div style="padding:14px;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--info-color);">
-    <div style="font-size:0.75rem;color:var(--text-tertiary);">📋 项目任务</div>
-    <div style="font-size:1.1rem;font-weight:600;margin-top:4px;">${totalTasks} 个</div>
-    <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:2px;">○${ts.backlog||0} 待办 · ◐${ts.active||0} 进行 · ✓${ts.completed||0}</div>
+  html += `<div class="stat-card" style="--card-edge:var(--info-color);">
+    <div class="meta-sm">📋 项目任务</div>
+    <div class="stat-value-lg">${totalTasks} 个</div>
+    <div class="stat-sub">○${ts.backlog||0} 待办 · ◐${ts.active||0} 进行 · ✓${ts.completed||0}</div>
   </div>`;
   // 意见卡
-  html += `<div style="padding:14px;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--warning-color);">
-    <div style="font-size:0.75rem;color:var(--text-tertiary);">💭 项目意见</div>
-    <div style="font-size:1.1rem;font-weight:600;margin-top:4px;">${ds.open_opinions||0} 待处理</div>
-    <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:2px;">共 ${ds.total_opinions||0} 条 · ${ds.fed_opinions||0} 已反馈</div>
+  html += `<div class="stat-card" style="--card-edge:var(--warning-color);">
+    <div class="meta-sm">💭 项目意见</div>
+    <div class="stat-value-lg">${ds.open_opinions||0} 待处理</div>
+    <div class="stat-sub">共 ${ds.total_opinions||0} 条 · ${ds.fed_opinions||0} 已反馈</div>
   </div>`;
   // 执行卡
-  html += `<div style="padding:14px;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--success-color);">
-    <div style="font-size:0.75rem;color:var(--text-tertiary);">⚡ hermes 执行</div>
-    <div style="font-size:1.1rem;font-weight:600;margin-top:4px;">${ds.running_dispatches||0} 进行中</div>
-    <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:2px;">✓${ds.done_dispatches||0} 完成 · ✗${ds.failed_dispatches||0} 失败</div>
+  html += `<div class="stat-card" style="--card-edge:var(--success-color);">
+    <div class="meta-sm">⚡ hermes 执行</div>
+    <div class="stat-value-lg">${ds.running_dispatches||0} 进行中</div>
+    <div class="stat-sub">✓${ds.done_dispatches||0} 完成 · ✗${ds.failed_dispatches||0} 失败</div>
   </div>`;
   html += '</div>';
 
@@ -88,18 +88,18 @@ async function renderOverviewTab(container) {
   html += '<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;">';
   html += '<button onclick="switchProjectsTab(\'tasks\')" style="padding:10px 16px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">+ 新建项目任务</button>';
   html += '<button onclick="switchProjectsTab(\'opinions\')" style="padding:10px 16px;border:1px solid var(--accent-color);background:transparent;color:var(--accent-color);border-radius:6px;cursor:pointer;font-size:0.85rem;">💬 提出意见</button>';
-  html += '<button onclick="switchProjectsTab(\'dispatches\')" style="padding:10px 16px;border:1px solid var(--border-color);background:transparent;color:var(--text-secondary);border-radius:6px;cursor:pointer;font-size:0.85rem;">⚡ 查看执行</button>';
+  html += '<button onclick="switchProjectsTab(\'dispatches\')" class="btn-ghost-cancel-lg">⚡ 查看执行</button>';
   html += '</div>';
 
   // 任务分布表
   const byProj = data.task_by_project || {};
   const projKeys = Object.keys(byProj);
   if (projKeys.length) {
-    html += '<div style="padding:12px;background:var(--bg-secondary);border-radius:6px;">';
-    html += '<div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:8px;">📁 任务按项目分布</div>';
+    html += '<div class="pad-12 bg-secondary br-6">';
+    html += '<div class="label-sm-mb8">📁 任务按项目分布</div>';
     for (const p of projKeys) {
       const pct = totalTasks ? Math.round(byProj[p] / totalTasks * 100) : 0;
-      html += `<div style="display:flex;align-items:center;gap:8px;margin:4px 0;font-size:0.8rem;">
+      html += `<div class="d-flex ai-center gap-8 m-4-0 fs-08">
         <span style="min-width:140px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(p)}</span>
         <div style="flex:1;height:6px;background:var(--bg-tertiary);border-radius:3px;overflow:hidden;">
           <div style="width:${pct}%;height:100%;background:var(--accent-color);"></div>
@@ -113,13 +113,13 @@ async function renderOverviewTab(container) {
   // 最近执行
   const recent = ds.recent_dispatches || [];
   if (recent.length) {
-    html += '<div style="margin-top:16px;"><div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:8px;">⚡ 最近执行</div>';
+    html += '<div class="mt-16"><div class="label-sm-mb8">⚡ 最近执行</div>';
     for (const d of recent.slice(0, 5)) {
       const statusIcon = d.status === 'done' ? '✓' : d.status === 'failed' ? '✗' : d.status === 'timeout' ? '⏱' : '◐';
       const statusColor = d.status === 'done' ? 'var(--success-color)' : (d.status === 'failed' || d.status === 'timeout') ? 'var(--error-color)' : 'var(--warning-color)';
       html += `<div style="padding:6px 8px;font-size:0.78rem;border-left:2px solid ${statusColor};margin-bottom:4px;">
         ${statusIcon} <span style="color:${statusColor};font-weight:500;">[${d.status}]</span> ${escapeHtml((d.prompt||'').slice(0,60))}…
-        <span style="color:var(--text-tertiary);margin-left:6px;">${escapeHtml(d.project||'通用')}</span>
+        <span class="text-tertiary ml-6">${escapeHtml(d.project||'通用')}</span>
       </div>`;
     }
     html += '</div>';
@@ -144,30 +144,30 @@ async function renderTasksTab(container) {
   let html = '';
 
   // 新建任务表单（折叠）
-  html += `<details style="margin-bottom:16px;border:1px solid var(--accent-color);border-radius:8px;overflow:hidden;">
+  html += `<details class="mb-16 border-accent br-8 overflow-hidden">
     <summary style="padding:10px 14px;cursor:pointer;font-weight:600;font-size:0.85rem;background:var(--bg-secondary);color:var(--accent-color);">+ 新建项目任务</summary>
-    <div style="padding:14px;display:flex;flex-direction:column;gap:10px;">
-      <input type="text" id="ptask-title" placeholder="任务标题（必填）" style="width:100%;padding:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;box-sizing:border-box;">
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <select id="ptask-project" style="flex:1;min-width:140px;padding:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;">
+    <div class="pad-14 d-flex fd-col gap-10">
+      <input type="text" id="ptask-title" placeholder="任务标题（必填）" class="field-input">
+      <div class="d-flex gap-8 fw-wrap">
+        <select id="ptask-project" class="field-select" style="flex:1;min-width:140px;">
           <option value="">（通用，无项目）</option>
           ${projects.map(p => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`).join('')}
         </select>
-        <select id="ptask-priority" style="padding:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;">
+        <select id="ptask-priority" class="field-select">
           <option value="medium">中</option><option value="high">高</option><option value="urgent">紧急</option><option value="low">低</option>
         </select>
-        <input type="date" id="ptask-due" style="padding:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;">
+        <input type="date" id="ptask-due" class="field-select">
       </div>
-      <textarea id="ptask-desc" placeholder="任务描述（可选）" rows="2" style="width:100%;padding:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;box-sizing:border-box;resize:vertical;"></textarea>
+      <textarea id="ptask-desc" placeholder="任务描述（可选）" rows="2" class="field-textarea"></textarea>
       <div style="display:flex;align-items:center;gap:16px;font-size:0.85rem;color:var(--text-secondary);">
         <span>执行者:</span>
-        <label style="display:flex;align-items:center;gap:4px;cursor:pointer;"><input type="radio" name="ptask-assignee" value="myself" checked>我自己</label>
-        <label style="display:flex;align-items:center;gap:4px;cursor:pointer;"><input type="radio" name="ptask-assignee" value="hermes">派 hermes 执行</label>
-        <label style="display:flex;align-items:center;gap:4px;cursor:pointer;"><input type="radio" name="ptask-assignee" value="none">先不执行</label>
+        <label class="flex-ac-gap4"><input type="radio" name="ptask-assignee" value="myself" checked>我自己</label>
+        <label class="flex-ac-gap4"><input type="radio" name="ptask-assignee" value="hermes">派 hermes 执行</label>
+        <label class="flex-ac-gap4"><input type="radio" name="ptask-assignee" value="none">先不执行</label>
       </div>
-      <div style="display:flex;gap:8px;">
-        <button id="ptask-create" style="flex:1;padding:10px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">✓ 创建任务</button>
-        <button id="ptask-cancel" style="padding:10px 16px;border:1px solid var(--border-color);background:transparent;color:var(--text-secondary);border-radius:6px;cursor:pointer;font-size:0.85rem;">清空</button>
+      <div class="modal-btn-row">
+        <button id="ptask-create" class="flex-1 pad-10 bg-accent text-white border-none br-6 cursor-pointer fs-085">✓ 创建任务</button>
+        <button id="ptask-cancel" class="btn-ghost-cancel-lg">清空</button>
       </div>
     </div>
   </details>`;
@@ -181,14 +181,14 @@ async function renderTasksTab(container) {
   }
   const projNames = Object.keys(byProject).sort();
   if (!projNames.length) {
-    html += '<p style="color:var(--text-tertiary);text-align:center;padding:30px;">暂无项目任务，点击上方「+ 新建项目任务」开始</p>';
+    html += '<p class="state-loading">暂无项目任务，点击上方「+ 新建项目任务」开始</p>';
   } else {
     for (const p of projNames) {
-      html += `<details open style="margin-bottom:12px;border:1px solid var(--border-color);border-radius:6px;overflow:hidden;">
-        <summary style="padding:8px 12px;cursor:pointer;font-weight:600;font-size:0.85rem;background:var(--bg-secondary);">
-          📁 ${escapeHtml(p)} <span style="font-weight:400;color:var(--text-tertiary);">(${byProject[p].length})</span>
+      html += `<details open class="mb-12 border-default br-6 overflow-hidden">
+        <summary class="tab-item">
+          📁 ${escapeHtml(p)} <span class="fw-normal-tertiary">(${byProject[p].length})</span>
         </summary>
-        <div style="padding:8px;display:flex;flex-direction:column;gap:8px;">`;
+        <div class="pad8-col-gap8">`;
       for (const t of byProject[p]) {
         html += renderProjectTaskCard(t);
       }
@@ -221,23 +221,23 @@ function renderProjectTaskCard(t) {
   // 查是否有进行中的派活
   const hasRunning = t._runningDispatch;
   const dispatchBtn = hasRunning
-    ? `<button onclick="viewTaskDispatch('${escapeHtml(t.task_id)}')" style="padding:3px 8px;border:1px solid var(--warning-color);border-radius:4px;background:transparent;color:var(--warning-color);cursor:pointer;font-size:0.72rem;">◐ 执行中</button>`
-    : `<button onclick="dispatchTask('${escapeHtml(t.task_id)}','${escapeHtml(t.project||'')}')" style="padding:3px 8px;border:1px solid var(--accent-color);border-radius:4px;background:transparent;color:var(--accent-color);cursor:pointer;font-size:0.72rem;">⚡ 派hermes</button>`;
+    ? `<button onclick="viewTaskDispatch('${escapeHtml(t.task_id)}')" class="btn-xs btn-outline--warning-var">◐ 执行中</button>`
+    : `<button onclick="dispatchTask('${escapeHtml(t.task_id)}','${escapeHtml(t.project||'')}')" class="btn-xs btn-outline--accent">⚡ 派hermes</button>`;
 
   return `<div style="padding:10px;background:var(--bg-tertiary);border-radius:6px;border-left:3px solid ${priColor};">
-    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px;">
-      <div style="font-size:0.85rem;font-weight:600;flex:1;">${escapeHtml(t.title)}</div>
-      <span style="font-size:0.72rem;color:var(--text-tertiary);white-space:nowrap;">${statusLabels[t.status] || t.status}</span>
+    <div class="d-flex jc-between ai-flex-start gap-8 mb-4">
+      <div class="fs-085 fw-600 flex-1">${escapeHtml(t.title)}</div>
+      <span class="fs-072 text-tertiary ws-nowrap">${statusLabels[t.status] || t.status}</span>
     </div>
-    ${t.description ? `<div style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:6px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${escapeHtml(t.description)}</div>` : ''}
-    <div style="display:flex;align-items:center;gap:8px;font-size:0.72rem;color:var(--text-tertiary);margin-bottom:6px;">
+    ${t.description ? `<div class="clamp-2">${escapeHtml(t.description)}</div>` : ''}
+    <div class="d-flex ai-center gap-8 fs-072 text-tertiary mb-6">
       <span>${assigneeLabel}</span>
       ${t.due_date ? `<span>📅 ${escapeHtml(t.due_date)}</span>` : ''}
       ${subTotal ? `<span>◯ ${subDone}/${subTotal}</span>` : ''}
     </div>
     ${subTotal ? `<div style="height:3px;background:var(--bg-secondary);border-radius:2px;overflow:hidden;margin-bottom:6px;"><div style="width:${Math.round(subDone/subTotal*100)}%;height:100%;background:var(--success-color);"></div></div>` : ''}
-    <div style="display:flex;gap:6px;flex-wrap:wrap;">
-      ${t.status !== 'completed' ? `<button onclick="cycleTaskStatus('${escapeHtml(t.task_id)}','${escapeHtml(t.status)}')" style="padding:3px 8px;border:1px solid var(--border-color);border-radius:4px;background:transparent;color:var(--text-secondary);cursor:pointer;font-size:0.72rem;">→ 推进</button>` : ''}
+    <div class="flex-gap6-wrap">
+      ${t.status !== 'completed' ? `<button onclick="cycleTaskStatus('${escapeHtml(t.task_id)}','${escapeHtml(t.status)}')" class="btn-xs">→ 推进</button>` : ''}
       ${dispatchBtn}
     </div>
   </div>`;
@@ -319,37 +319,37 @@ async function renderOpinionsTab(container) {
 
   // 左：输入区
   html += '<div>';
-  html += '<h4 style="font-size:0.9rem;margin:0 0 10px;color:var(--text-primary);">💬 提出项目意见</h4>';
+  html += '<h4 class="h3-sm">💬 提出项目意见</h4>';
   html += `<select id="op-project" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;box-sizing:border-box;">
     <option value="">（通用，无项目）</option>
     ${projects.map(p => `<option value="${escapeHtml(p)}">${escapeHtml(p)}</option>`).join('')}
   </select>`;
   html += '<textarea id="op-content" placeholder="写下你对项目的意见、建议、想法…（必填）" rows="6" style="width:100%;padding:8px;margin-bottom:8px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;box-sizing:border-box;resize:vertical;"></textarea>';
-  html += '<label style="display:flex;align-items:center;gap:6px;font-size:0.8rem;color:var(--text-secondary);margin-bottom:10px;cursor:pointer;"><input type="checkbox" id="op-feed-hermes" checked style="width:auto;"> 同时反馈给 hermes（异步，不阻塞）</label>';
-  html += '<button id="op-submit" style="width:100%;padding:10px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">✓ 提交意见</button>';
+  html += '<label class="d-flex ai-center gap-6 fs-08 text-secondary mb-10 cursor-pointer"><input type="checkbox" id="op-feed-hermes" checked class="w-auto"> 同时反馈给 hermes（异步，不阻塞）</label>';
+  html += '<button id="op-submit" class="w-100 pad-10 bg-accent text-white border-none br-6 cursor-pointer fs-085">✓ 提交意见</button>';
   html += '</div>';
 
   // 右：意见列表
   html += '<div>';
-  html += `<h4 style="font-size:0.9rem;margin:0 0 10px;color:var(--text-primary);">📜 意见记录（${opinions.length}）</h4>`;
+  html += `<h4 class="h3-sm">📜 意见记录（${opinions.length}）</h4>`;
   if (!opinions.length) {
     html += '<p style="color:var(--text-tertiary);font-size:0.82rem;padding:20px 0;text-align:center;">暂无意见</p>';
   } else {
     html += '<div style="display:flex;flex-direction:column;gap:8px;max-height:60vh;overflow-y:auto;">';
     for (const o of opinions) {
       const statusBadge = o.status === 'resolved'
-        ? '<span style="color:var(--success-color);">✓ 已解决</span>'
-        : '<span style="color:var(--warning-color);">○ 待处理</span>';
-      const fedBadge = o.fed_to_hermes ? '<span style="color:var(--info-color);">⚡已反馈</span>' : '';
+        ? '<span class="text-success">✓ 已解决</span>'
+        : '<span class="text-warning">○ 待处理</span>';
+      const fedBadge = o.fed_to_hermes ? '<span class="text-info">⚡已反馈</span>' : '';
       html += `<div style="padding:10px;background:var(--bg-secondary);border-radius:6px;border-left:3px solid ${o.status === 'resolved' ? 'var(--success-color)' : 'var(--warning-color)'};">
-        <div style="display:flex;justify-content:space-between;margin-bottom:4px;font-size:0.72rem;">
-          <span style="color:var(--text-tertiary);">📁 ${escapeHtml(o.project || '通用')} · ${escapeHtml((o.created_at||'').slice(0,10))}</span>
+        <div class="d-flex jc-between mb-4 fs-072">
+          <span class="text-tertiary">📁 ${escapeHtml(o.project || '通用')} · ${escapeHtml((o.created_at||'').slice(0,10))}</span>
           <span>${statusBadge} ${fedBadge}</span>
         </div>
-        <div style="font-size:0.82rem;color:var(--text-primary);margin-bottom:6px;white-space:pre-wrap;">${escapeHtml(o.content)}</div>
-        <div style="display:flex;gap:6px;">
-          ${o.status !== 'resolved' ? `<button onclick="resolveOpinion('${escapeHtml(o.id)}')" style="padding:3px 8px;border:1px solid var(--success-color);border-radius:4px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.72rem;">✓ 标记解决</button>` : ''}
-          <button onclick="discussOpinion('${escapeHtml(o.id)}','${escapeHtml((o.content||'').replace(/'/g,'')).slice(0,80)}')" style="padding:3px 8px;border:1px solid var(--border-color);border-radius:4px;background:transparent;color:var(--text-secondary);cursor:pointer;font-size:0.72rem;">🗨️ 转讨论</button>
+        <div class="fs-082 text-primary mb-6 ws-pre-wrap">${escapeHtml(o.content)}</div>
+        <div class="flex-gap6">
+          ${o.status !== 'resolved' ? `<button onclick="resolveOpinion('${escapeHtml(o.id)}')" class="btn-xs btn-outline--success">✓ 标记解决</button>` : ''}
+          <button onclick="discussOpinion('${escapeHtml(o.id)}','${escapeHtml((o.content||'').replace(/'/g,'')).slice(0,80)}')" class="btn-xs">🗨️ 转讨论</button>
         </div>
       </div>`;
     }
@@ -409,22 +409,22 @@ async function renderDispatchesTab(container) {
   const data = await apiGet('/api/projects/dispatches?limit=50');
   const dispatches = data.dispatches || [];
 
-  let html = '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">';
-  html += '<h4 style="font-size:0.9rem;margin:0;color:var(--text-primary);">⚡ hermes 执行追踪</h4>';
-  html += '<button onclick="renderDispatchesTab(document.getElementById(\'projects-body\'))" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:4px;background:transparent;color:var(--text-secondary);cursor:pointer;font-size:0.78rem;">🔄 刷新</button>';
+  let html = '<div class="d-flex jc-between ai-center mb-12">';
+  html += '<h4 class="fs-09 m-0 text-primary">⚡ hermes 执行追踪</h4>';
+  html += '<button onclick="renderDispatchesTab(document.getElementById(\'projects-body\'))" class="btn-outline">🔄 刷新</button>';
   html += '</div>';
 
   if (!dispatches.length) {
-    html += '<div style="text-align:center;padding:40px 20px;color:var(--text-tertiary);">';
-    html += '<div style="font-size:2rem;margin-bottom:8px;">⚡</div>';
-    html += '<p style="font-size:0.85rem;">暂无派活记录</p>';
-    html += '<p style="font-size:0.78rem;margin-top:6px;">在「📋 项目任务」创建任务时选「派 hermes」，或点任务卡片的 ⚡ 按钮</p>';
+    html += '<div class="state-empty">';
+    html += '<div class="fs-2 mb-8">⚡</div>';
+    html += '<p class="fs-085">暂无派活记录</p>';
+    html += '<p class="fs-078 mt-6">在「📋 项目任务」创建任务时选「派 hermes」，或点任务卡片的 ⚡ 按钮</p>';
     html += '</div>';
     container.innerHTML = html;
     return;
   }
 
-  html += '<div style="display:flex;flex-direction:column;gap:8px;">';
+  html += '<div class="col-gap8">';
   for (const d of dispatches) {
     const statusMap = {
       running: { icon: '◐', label: '执行中', color: 'var(--warning-color)' },
@@ -437,19 +437,19 @@ async function renderDispatchesTab(container) {
     const duration = d.finished_at && d.started_at ? `· 耗时 ${calcDuration(d.started_at, d.finished_at)}` : '';
 
     html += `<div style="padding:12px;background:var(--bg-secondary);border-radius:8px;border-left:3px solid ${st.color};">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:6px;">
-        <div style="flex:1;">
-          <div style="font-size:0.85rem;font-weight:500;">${st.icon} <span style="color:${st.color};">[${st.label}]</span> ${escapeHtml((d.prompt||'').slice(0,70))}${(d.prompt||'').length > 70 ? '…' : ''}</div>
-          <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:3px;">📁 ${escapeHtml(d.project||'通用')} · ${sourceLabel} · ${escapeHtml((d.started_at||'').slice(0,16).replace('T',' '))} ${duration}</div>
+      <div class="d-flex jc-between ai-flex-start gap-8 mb-6">
+        <div class="flex-1">
+          <div class="fs-085 fw-500">${st.icon} <span style="color:${st.color};">[${st.label}]</span> ${escapeHtml((d.prompt||'').slice(0,70))}${(d.prompt||'').length > 70 ? '…' : ''}</div>
+          <div class="fs-072 text-tertiary mt-3">📁 ${escapeHtml(d.project||'通用')} · ${sourceLabel} · ${escapeHtml((d.started_at||'').slice(0,16).replace('T',' '))} ${duration}</div>
         </div>
       </div>`;
     if (d.output_snippet && d.status !== 'running') {
-      html += `<details style="margin-top:6px;"><summary style="cursor:pointer;font-size:0.72rem;color:var(--accent-color);">查看输出</summary>
+      html += `<details class="mt-6"><summary class="cursor-pointer fs-072 text-accent">查看输出</summary>
         <pre style="margin-top:6px;padding:8px;background:var(--bg-tertiary);border-radius:4px;font-size:0.72rem;max-height:240px;overflow-y:auto;white-space:pre-wrap;word-break:break-word;">${escapeHtml(d.output_snippet)}</pre>
       </details>`;
     }
     if (d.status === 'running') {
-      html += '<div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:4px;">◐ hermes 正在后台执行…点击上方「🔄 刷新」查看结果</div>';
+      html += '<div class="fs-072 text-tertiary mt-4">◐ hermes 正在后台执行…点击上方「🔄 刷新」查看结果</div>';
     }
     html += '</div>';
   }
@@ -484,86 +484,86 @@ async function renderNsfcTree(container) {
   const progressColors = { mature: 'var(--success-color)', growing: 'var(--info-color)', seedling: 'var(--warning-color)', empty: 'var(--text-tertiary)' };
   const progressLabels = { mature: '🌳 成熟', growing: '🌿 成长中', seedling: '🌱 起步', empty: '○ 空' };
 
-  html += '<h4 style="font-size:0.9rem;margin:0 0 8px;color:var(--text-primary);">📋 课题产物（点击展开浏览文档）</h4>';
+  html += '<h4 class="h3-xs">📋 课题产物（点击展开浏览文档）</h4>';
   html += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-bottom:20px;">';
   for (const t of (topics.topics || [])) {
     const color = progressColors[t.progress] || 'inherit';
-    html += `<details style="border:1px solid var(--border-color);border-radius:8px;overflow:hidden;background:var(--bg-secondary);">
+    html += `<details class="border-default br-8 overflow-hidden bg-secondary">
       <summary style="padding:8px 10px;cursor:pointer;font-size:0.82rem;font-weight:600;user-select:none;">
         <span style="color:${color};">${t.topic}</span> ${escapeHtml(t.name)}
-        <div style="font-size:0.72rem;font-weight:400;color:var(--text-tertiary);margin-top:2px;">
+        <div class="fs-072 fw-400 text-tertiary mt-2">
           ${progressLabels[t.progress]} · ${t.total_kb}KB · 📚${t.references_count}
         </div>
       </summary>
       <div style="padding:6px 8px;border-top:1px solid var(--border-color);">`;
     if (t.notes && t.notes.length) {
-      html += '<div style="font-size:0.72rem;color:var(--text-secondary);margin-bottom:4px;">📄 立项依据：</div>';
+      html += '<div class="fs-072 text-secondary mb-4">📄 立项依据：</div>';
       for (const n of t.notes) {
         html += `<div style="font-size:0.75rem;padding:2px 0;color:var(--text-secondary);">
-          ${escapeHtml(n.name).replace(/\.md$/,'')} <span style="color:var(--text-tertiary);">(${n.size_kb}KB, ${n.modified})</span>
+          ${escapeHtml(n.name).replace(/\.md$/,'')} <span class="text-tertiary">(${n.size_kb}KB, ${n.modified})</span>
         </div>`;
       }
     } else {
-      html += '<div style="font-size:0.75rem;color:var(--text-tertiary);">无文档</div>';
+      html += '<div class="meta-sm">无文档</div>';
     }
-    html += `<div style="font-size:0.72rem;margin-top:4px;color:var(--text-tertiary);">📚 ${t.references_count} 篇参考 · 🧠 ${t.decisions_count} 条决策</div>`;
+    html += `<div class="fs-072 mt-4 text-tertiary">📚 ${t.references_count} 篇参考 · 🧠 ${t.decisions_count} 条决策</div>`;
     html += `</div></details>`;
   }
   html += '</div>';
 
   // === 区域 2：调研资料（折叠列表）===
-  html += '<details style="margin-bottom:16px;border:1px solid var(--border-color);border-radius:6px;overflow:hidden;">';
-  html += '<summary style="padding:8px 12px;cursor:pointer;font-weight:600;font-size:0.85rem;background:var(--bg-secondary);">📚 调研资料</summary>';
+  html += '<details class="mb-16 border-default br-6 overflow-hidden">';
+  html += '<summary class="tab-item">📚 调研资料</summary>';
   html += '<div style="padding:8px 12px;">';
   // references
   if (refs.references && refs.references.length) {
-    html += `<div style="font-size:0.8rem;margin-bottom:4px;">参考文献笔记（${refs.references.length}）：</div>`;
+    html += `<div class="fs-08 mb-4">参考文献笔记（${refs.references.length}）：</div>`;
     for (const r of refs.references.slice(0, 10)) {
-      html += `<div style="font-size:0.75rem;padding:2px 0;">📄 ${escapeHtml(r.name)} <span style="color:var(--text-tertiary);">${r.size_kb}KB</span></div>`;
+      html += `<div class="subhead-sm">📄 ${escapeHtml(r.name)} <span class="text-tertiary">${r.size_kb}KB</span></div>`;
     }
-    if (refs.references.length > 10) html += `<div style="font-size:0.72rem;color:var(--text-tertiary);">... 共 ${refs.references.length} 篇</div>`;
+    if (refs.references.length > 10) html += `<div class="fs-072 text-tertiary">... 共 ${refs.references.length} 篇</div>`;
   }
   // knowledge_base
   const kb = refs.knowledge_base || {};
   for (const [type, items] of Object.entries(kb)) {
     if (items && items.length) {
-      html += `<div style="font-size:0.8rem;margin:6px 0 4px;">${type}（${items.length}）：</div>`;
+      html += `<div class="subhead">${type}（${items.length}）：</div>`;
       for (const it of items) {
-        html += `<div style="font-size:0.75rem;padding:2px 0;">📝 ${escapeHtml(it.name)} <span style="color:var(--text-tertiary);">${it.size_kb}KB</span></div>`;
+        html += `<div class="subhead-sm">📝 ${escapeHtml(it.name)} <span class="text-tertiary">${it.size_kb}KB</span></div>`;
       }
     }
   }
   // briefs
   if (refs.briefs && refs.briefs.length) {
-    html += `<div style="font-size:0.8rem;margin:6px 0 4px;">每日简报（${refs.briefs.length}）：</div>`;
+    html += `<div class="subhead">每日简报（${refs.briefs.length}）：</div>`;
     for (const b of refs.briefs.slice(0, 5)) {
-      html += `<div style="font-size:0.75rem;padding:2px 0;">📊 ${escapeHtml(b.date)} <span style="color:var(--text-tertiary);">${b.size_kb}KB</span></div>`;
+      html += `<div class="subhead-sm">📊 ${escapeHtml(b.date)} <span class="text-tertiary">${b.size_kb}KB</span></div>`;
     }
   }
   html += '</div></details>';
 
   // === 区域 3：待决策项（卡片）===
   const pendItems = pending.pending || [];
-  html += `<h4 style="font-size:0.9rem;margin:0 0 8px;color:var(--text-primary);">📌 待决策项（${pendItems.length}）</h4>`;
+  html += `<h4 class="h3-xs">📌 待决策项（${pendItems.length}）</h4>`;
   if (!pendItems.length) {
-    html += '<p style="color:var(--text-tertiary);font-size:0.82rem;padding:8px;">暂无待决策项 🎉</p>';
+    html += '<p class="text-tertiary fs-082 pad-8">暂无待决策项 🎉</p>';
   } else {
-    html += '<div style="display:flex;flex-direction:column;gap:8px;">';
+    html += '<div class="col-gap8">';
     for (const p of pendItems) {
       html += `<div style="padding:10px;background:var(--bg-secondary);border-radius:8px;border-left:3px solid var(--warning-color);">
-        <div style="font-size:0.85rem;font-weight:500;margin-bottom:4px;">📌 ${escapeHtml(p.title)}</div>
-        <div style="font-size:0.72rem;color:var(--text-tertiary);margin-bottom:6px;">${p.related_topic ? '课题 '+p.related_topic+' · ' : ''}来源 ${escapeHtml(p.source)}</div>
-        <div style="display:flex;gap:6px;">
-          <button onclick="nsfcDecide('${escapeHtml(p.id)}','approve','${escapeHtml(p.title).replace(/'/g,'')}')" style="padding:4px 10px;border:1px solid var(--success-color);border-radius:5px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.78rem;">✓ 通过</button>
-          <button onclick="nsfcDecide('${escapeHtml(p.id)}','reject','${escapeHtml(p.title).replace(/'/g,'')}')" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:5px;background:transparent;color:var(--text-tertiary);cursor:pointer;font-size:0.78rem;">✗ 否决</button>
-          <button onclick="nsfcDiscuss('${escapeHtml(p.id)}','${escapeHtml(p.title).replace(/'/g,'')}','${escapeHtml(p.related_topic)}')" style="padding:4px 10px;border:1px solid var(--accent-color);border-radius:5px;background:var(--accent-color);color:#fff;cursor:pointer;font-size:0.78rem;">💬 讨论</button>
+        <div class="fs-085 fw-500 mb-4">📌 ${escapeHtml(p.title)}</div>
+        <div class="meta-sm-mb">${p.related_topic ? '课题 '+p.related_topic+' · ' : ''}来源 ${escapeHtml(p.source)}</div>
+        <div class="flex-gap6">
+          <button onclick="nsfcDecide('${escapeHtml(p.id)}','approve','${escapeHtml(p.title).replace(/'/g,'')}')" class="btn-outline-5 btn-outline--success">✓ 通过</button>
+          <button onclick="nsfcDecide('${escapeHtml(p.id)}','reject','${escapeHtml(p.title).replace(/'/g,'')}')" class="btn-outline-5 btn-outline--tertiary">✗ 否决</button>
+          <button onclick="nsfcDiscuss('${escapeHtml(p.id)}','${escapeHtml(p.title).replace(/'/g,'')}','${escapeHtml(p.related_topic)}')" class="btn-filled-5">💬 讨论</button>
         </div>
       </div>`;
     }
     html += '</div>';
   }
 
-  html += `<div id="nsfc-file-viewer" style="margin-top:12px;display:none;"></div>`;
+  html += `<div id="nsfc-file-viewer" class="mt-12 d-none"></div>`;
   container.innerHTML = html;
 }
 
@@ -618,9 +618,9 @@ function showDiscussBar(pid, title) {
     bar.style.cssText = 'position:sticky;top:0;background:var(--bg-secondary);border:1px solid var(--accent-color);border-radius:6px;padding:6px 10px;margin-bottom:6px;display:flex;align-items:center;gap:8px;font-size:0.82rem;z-index:10;';
     document.querySelector('#messages')?.prepend(bar);
   }
-  bar.innerHTML = `<span style="color:var(--accent-color);">💬 正在讨论：${escapeHtml(title.slice(0,40))}</span>
+  bar.innerHTML = `<span class="text-accent">💬 正在讨论：${escapeHtml(title.slice(0,40))}</span>
     <button id="discuss-summarize-btn" style="margin-left:auto;padding:4px 12px;background:var(--accent-color);color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.78rem;">📝 总结讨论</button>
-    <button id="discuss-cancel-btn" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:4px;cursor:pointer;font-size:0.78rem;">取消</button>`;
+    <button id="discuss-cancel-btn" class="btn-outline">取消</button>`;
   bar.style.display = 'flex';
   document.getElementById('discuss-summarize-btn').onclick = () => summarizeDiscussion(pid, title);
   document.getElementById('discuss-cancel-btn').onclick = () => { bar.style.display = 'none'; window._discussContext = null; };
@@ -638,9 +638,9 @@ async function summarizeDiscussion(pid, title) {
   setTimeout(() => {
     const bar = document.getElementById('discuss-bar');
     if (bar) {
-      bar.innerHTML = `<span style="color:var(--accent-color);">⏳ 等待林赛总结...收到后点击提交</span>
+      bar.innerHTML = `<span class="text-accent">⏳ 等待林赛总结...收到后点击提交</span>
         <button id="submit-summary-btn" style="margin-left:auto;padding:4px 12px;background:var(--success-color);color:#fff;border:none;border-radius:4px;cursor:pointer;font-size:0.78rem;">✓ 提交总结到 discussions</button>
-        <button id="discuss-cancel-btn" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:4px;cursor:pointer;font-size:0.78rem;">取消</button>`;
+        <button id="discuss-cancel-btn" class="btn-outline">取消</button>`;
       document.getElementById('submit-summary-btn').onclick = submitDiscussionSummary;
       document.getElementById('discuss-cancel-btn').onclick = () => { bar.style.display = 'none'; };
     }
@@ -681,11 +681,11 @@ async function renderPapersCards(container) {
   const byStatus = pool.by_status || {};
 
   let html = `<div style="margin-bottom:12px;padding:8px 12px;background:var(--bg-secondary);border-radius:6px;font-size:0.8rem;color:var(--text-secondary);">
-    📊 候选池：<strong style="color:var(--info-color)">${byStatus.unseen||0}</strong> 未看 ·
-    <strong style="color:var(--warning-color)">${byStatus.viewed||0}</strong> 已看未讨论 ·
-    <strong style="color:var(--success-color)">${byStatus.archived||0}</strong> 已归档
-    <span style="margin-left:8px;color:var(--text-tertiary);">(共 ${pool.total} 篇，累积保留)</span>
-    <span style="margin-left:8px;color:var(--text-tertiary);">| 📚 沉淀后可在知识库浏览</span>
+    📊 候选池：<strong class="text-info">${byStatus.unseen||0}</strong> 未看 ·
+    <strong class="text-warning">${byStatus.viewed||0}</strong> 已看未讨论 ·
+    <strong class="text-success">${byStatus.archived||0}</strong> 已归档
+    <span class="ml-8-tertiary">(共 ${pool.total} 篇，累积保留)</span>
+    <span class="ml-8-tertiary">| 📚 沉淀后可在知识库浏览</span>
   </div>`;
 
   // 按状态分组
@@ -700,11 +700,11 @@ async function renderPapersCards(container) {
     const groupPapers = papers.filter(p => p.status === g.status);
     if (!groupPapers.length) continue;
     const openAttr = g.defaultOpen ? 'open' : '';
-    html += `<details ${openAttr} style="margin-bottom:10px;border:1px solid var(--border-color);border-radius:6px;overflow:hidden;">
+    html += `<details ${openAttr} class="mb-10 border-default br-6 overflow-hidden">
       <summary style="padding:8px 12px;cursor:pointer;font-weight:600;font-size:0.85rem;background:var(--bg-secondary);color:${g.color};">
-        ${g.label} <span style="font-weight:400;color:var(--text-tertiary);">(${groupPapers.length})</span>
+        ${g.label} <span class="fw-normal-tertiary">(${groupPapers.length})</span>
       </summary>
-      <div style="padding:8px;display:flex;flex-direction:column;gap:8px;">`;
+      <div class="pad8-col-gap8">`;
 
     for (const p of groupPapers) {
       const scorePct = Math.round((p.score || 0) * 100);
@@ -725,25 +725,25 @@ async function renderPapersCards(container) {
       html += `<div class="paper-card" id="card-${escapeHtml(p.arxiv_id)}" style="padding:10px;background:var(--bg-tertiary);border-radius:6px;border:1px solid var(--border-color);transition:opacity 0.3s;">`;
       // P2-2: 生命周期进度条
       html += `<div style="display:flex;align-items:center;gap:2px;margin-bottom:6px;">${lifecycleHtml}</div>`;
-      html += `<div style="display:flex;justify-content:space-between;margin-bottom:4px;">${lifecycleLabelHtml}</div>`;
+      html += `<div class="d-flex jc-between mb-4">${lifecycleLabelHtml}</div>`;
       html += `<div style="font-size:0.85rem;font-weight:600;line-height:1.4;margin-bottom:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${escapeHtml(p.title)}</div>`;
-      html += `<div style="font-size:0.72rem;color:var(--text-tertiary);margin-bottom:6px;">${escapeHtml(p.authors)} · ${escapeHtml(p.direction)} · ${scorePct}%</div>`;
+      html += `<div class="meta-sm-mb">${escapeHtml(p.authors)} · ${escapeHtml(p.direction)} · ${scorePct}%</div>`;
       if (p.tldr) {
-        html += `<div style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:6px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${escapeHtml(p.tldr)}</div>`;
+        html += `<div class="clamp-2">${escapeHtml(p.tldr)}</div>`;
       }
-      html += `<div style="display:flex;gap:6px;flex-wrap:wrap;">`;
+      html += `<div class="flex-gap6-wrap">`;
 
       if (g.status === 'unseen') {
-        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','interested',this)" style="padding:4px 10px;border:1px solid var(--success-color);border-radius:5px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.78rem;">👍 感兴趣</button>`;
+        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','interested',this)" class="btn-outline-5 btn-outline--success">👍 感兴趣</button>`;
         html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','later',this)" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:5px;background:transparent;color:var(--warning-color);cursor:pointer;font-size:0.78rem;">⏰ 稍后</button>`;
-        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','skip',this)" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:5px;background:transparent;color:var(--text-tertiary);cursor:pointer;font-size:0.78rem;">👎 跳过</button>`;
-        html += `<button onclick="discussPaper('${escapeHtml(p.arxiv_id)}','${escapeHtml(p.title).replace(/'/g,"")}')" style="padding:4px 10px;border:1px solid var(--accent-color);border-radius:5px;background:var(--accent-color);color:#fff;cursor:pointer;font-size:0.78rem;">💬 讨论</button>`;
+        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','skip',this)" class="btn-outline-5 btn-outline--tertiary">👎 跳过</button>`;
+        html += `<button onclick="discussPaper('${escapeHtml(p.arxiv_id)}','${escapeHtml(p.title).replace(/'/g,"")}')" class="btn-filled-5">💬 讨论</button>`;
       } else if (g.status === 'viewed') {
         // 已看未讨论：主要操作是讨论，讨论完可归档
-        html += `<button onclick="discussPaper('${escapeHtml(p.arxiv_id)}','${escapeHtml(p.title).replace(/'/g,"")}')" style="padding:4px 10px;border:1px solid var(--accent-color);border-radius:5px;background:var(--accent-color);color:#fff;cursor:pointer;font-size:0.78rem;">💬 讨论</button>`;
-        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','discuss_done',this)" style="padding:4px 10px;border:1px solid var(--success-color);border-radius:5px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.78rem;">📥 归档沉淀</button>`;
+        html += `<button onclick="discussPaper('${escapeHtml(p.arxiv_id)}','${escapeHtml(p.title).replace(/'/g,"")}')" class="btn-filled-5">💬 讨论</button>`;
+        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','discuss_done',this)" class="btn-outline-5 btn-outline--success">📥 归档沉淀</button>`;
       } else {
-        html += `<span style="font-size:0.75rem;color:var(--success-color);padding:4px 8px;">✓ 已深度沉淀</span>`;
+        html += `<span class="fs-075 text-success pad-4-8">✓ 已深度沉淀</span>`;
       }
       html += `</div></div>`;
     }
@@ -751,7 +751,7 @@ async function renderPapersCards(container) {
   }
 
   if (!papers.length) {
-    html = '<p style="color:var(--text-tertiary);text-align:center;padding:40px;">候选池为空</p>';
+    html = '<p class="state-loading state-loading pad-40">候选池为空</p>';
   }
   container.innerHTML = html;
 }
@@ -822,16 +822,16 @@ function showWikiGrowConfirm(suggestion) {
     return;  // 无建议，不弹窗
   }
 
-  let html = `<div style="max-width:500px;">
-    <h3 style="margin-bottom:8px;">📚 知识库生长建议</h3>
-    <p style="font-size:0.85rem;color:var(--text-secondary);margin-bottom:12px;">已归档 <strong>${escapeHtml(suggestion.title)}</strong>，以下内容可提取为知识库笔记：</p>`;
+  let html = `<div class="mw-500">
+    <h3 class="mb-8">📚 知识库生长建议</h3>
+    <p class="fs-085 text-secondary mb-12">已归档 <strong>${escapeHtml(suggestion.title)}</strong>，以下内容可提取为知识库笔记：</p>`;
 
   // concept 建议
   if (concepts.length) {
-    html += '<div style="margin-bottom:10px;"><div style="font-size:0.8rem;font-weight:600;margin-bottom:4px;">概念笔记：</div>';
+    html += '<div class="mb-10"><div class="label-bold-mb4">概念笔记：</div>';
     concepts.slice(0, 6).forEach((c, i) => {
       const checked = c.existing ? '' : 'checked';
-      const tag = c.existing ? `<span style="color:var(--info-color);font-size:0.72rem;">→ 连接已有「${escapeHtml(c.existing_title)}」</span>` : '<span style="color:var(--success-color);font-size:0.72rem;">新建</span>';
+      const tag = c.existing ? `<span class="text-info fs-072">→ 连接已有「${escapeHtml(c.existing_title)}」</span>` : '<span class="text-success fs-072">新建</span>';
       html += `<label style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:0.82rem;">
         <input type="checkbox" id="grow-c-${i}" ${checked} ${c.existing ? '' : ''}> 
         <span>${escapeHtml(c.name)}</span> ${tag}
@@ -842,7 +842,7 @@ function showWikiGrowConfirm(suggestion) {
 
   // relation 建议
   if (relations.length) {
-    html += '<div style="margin-bottom:10px;"><div style="font-size:0.8rem;font-weight:600;margin-bottom:4px;">图谱关联：</div>';
+    html += '<div class="mb-10"><div class="label-bold-mb4">图谱关联：</div>';
     relations.slice(0, 4).forEach((rel, i) => {
       html += `<label style="display:flex;align-items:center;gap:6px;padding:2px 0;font-size:0.8rem;">
         <input type="checkbox" id="grow-r-${i}" checked> 
@@ -852,9 +852,9 @@ function showWikiGrowConfirm(suggestion) {
     html += '</div>';
   }
 
-  html += `<div style="display:flex;gap:8px;margin-top:12px;">
-    <button id="grow-confirm-btn" style="flex:1;padding:8px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">✓ 确认生成</button>
-    <button id="grow-skip-btn" style="padding:8px 16px;border:1px solid var(--border-color);border-radius:6px;cursor:pointer;font-size:0.85rem;">跳过</button>
+  html += `<div class="d-flex gap-8 mt-12">
+    <button id="grow-confirm-btn" class="btn-confirm">✓ 确认生成</button>
+    <button id="grow-skip-btn" class="btn-ghost-cancel">跳过</button>
   </div></div>`;
 
   showModal(html);
@@ -892,17 +892,17 @@ function showWikiGrowConfirm(suggestion) {
 // ============================================
 async function renderSyncTab(container) {
   const status = await apiGet('/api/sync/status');
-  let html = '<div style="margin-bottom:16px;">';
-  html += `<div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:8px;">同步状态</div>`;
-  html += `<div style="padding:10px;background:var(--bg-secondary);border-radius:6px;">
-    <div style="font-size:0.85rem;">已同步会话: <strong>${status.synced_sessions_count}</strong></div>
-    <div style="font-size:0.85rem;margin-top:4px;">已同步文献: <strong>${status.synced_papers_count}</strong></div>
-    <div style="font-size:0.78rem;color:var(--text-tertiary);margin-top:4px;">上次同步: ${escapeHtml(status.last_sync || '从未')}</div>
+  let html = '<div class="mb-16">';
+  html += `<div class="label-sm-mb8">同步状态</div>`;
+  html += `<div class="pad-10 bg-secondary br-6">
+    <div class="fs-085">已同步会话: <strong>${status.synced_sessions_count}</strong></div>
+    <div class="fs-085 mt-4">已同步文献: <strong>${status.synced_papers_count}</strong></div>
+    <div class="fs-078 text-tertiary mt-4">上次同步: ${escapeHtml(status.last_sync || '从未')}</div>
   </div>`;
-  html += `<button id="sync-run-btn" style="margin-top:10px;padding:8px 16px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">🔄 立即同步</button>`;
+  html += `<button id="sync-run-btn" class="mt-10 pad-8-16 bg-accent text-white border-none br-6 cursor-pointer fs-085">🔄 立即同步</button>`;
   html += '</div>';
   if (status.history && status.history.length) {
-    html += '<div><div style="font-size:0.8rem;color:var(--text-secondary);margin-bottom:6px;">同步历史</div>';
+    html += '<div><div class="fs-08 text-secondary mb-6">同步历史</div>';
     status.history.forEach(h => {
       html += `<div style="padding:4px 0;font-size:0.78rem;color:var(--text-tertiary);">${h.timestamp.slice(0,16)} | 会话+${h.new_sessions} 文献+${h.new_papers}</div>`;
     });

@@ -54,13 +54,13 @@ async function loadHermesStatus() {
 async function loadCronList() {
   const container = document.getElementById('hermes-cron-list');
   if (!container) return;
-  container.innerHTML = '<p style="color:var(--text-tertiary);font-size:0.85rem;">加载中...</p>';
+  container.innerHTML = '<p class="text-tertiary fs-085">加载中...</p>';
 
   try {
     const data = await apiGet('/api/hermes/cron');
     const jobs = data.jobs || [];
     if (!jobs.length) {
-      container.innerHTML = '<p style="color:var(--text-tertiary);font-size:0.85rem;">无 cron 任务</p>';
+      container.innerHTML = '<p class="text-tertiary fs-085">无 cron 任务</p>';
       return;
     }
 
@@ -68,30 +68,30 @@ async function loadCronList() {
     jobs.forEach(job => {
       const isActive = job.status === 'active';
       const statusBadge = isActive
-        ? '<span style="color:var(--success-color);">● active</span>'
-        : '<span style="color:var(--text-tertiary);">○ paused</span>';
+        ? '<span class="text-success">● active</span>'
+        : '<span class="text-tertiary">○ paused</span>';
       const lastIcon = job.last_status === 'ok' ? '✅' : (job.last_status ? '⚠️' : '○');
 
-      html += `<div style="padding:8px 10px;margin:6px 0;background:var(--bg-secondary);border-radius:6px;">
+      html += `<div class="pad-8-10 m-6-0 bg-secondary br-6">
         <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;">
-          <div style="flex:1;">
-            <div style="font-size:0.85rem;font-weight:500;">${escapeHtml(job.name)}</div>
-            <div style="font-size:0.75rem;color:var(--text-tertiary);margin-top:2px;">
+          <div class="flex-1">
+            <div class="fs-085 fw-500">${escapeHtml(job.name)}</div>
+            <div class="fs-075 text-tertiary mt-2">
               ${statusBadge} | ⏰ ${escapeHtml(job.schedule || '?')} | ${lastIcon} ${escapeHtml(job.last_run ? job.last_run.slice(5,16) : '未运行')}
             </div>
           </div>
           <div style="display:flex;gap:4px;flex-shrink:0;">`;
       if (isActive) {
-        html += `<button onclick="controlCron('${job.id}','pause')" style="padding:3px 8px;font-size:0.75rem;cursor:pointer;border:1px solid var(--border-color);border-radius:4px;">暂停</button>`;
+        html += `<button onclick="controlCron('${job.id}','pause')" class="pad-3-8 fs-075 cursor-pointer border-default br-4">暂停</button>`;
       } else {
-        html += `<button onclick="controlCron('${job.id}','resume')" style="padding:3px 8px;font-size:0.75rem;cursor:pointer;border:1px solid var(--border-color);border-radius:4px;">恢复</button>`;
+        html += `<button onclick="controlCron('${job.id}','resume')" class="pad-3-8 fs-075 cursor-pointer border-default br-4">恢复</button>`;
       }
-      html += `<button onclick="controlCron('${job.id}','run')" style="padding:3px 8px;font-size:0.75rem;cursor:pointer;border:1px solid var(--border-color);border-radius:4px;background:var(--accent-color);color:#fff;">触发</button>`;
+      html += `<button onclick="controlCron('${job.id}','run')" class="pad-3-8 fs-075 cursor-pointer border-default br-4 bg-accent text-white">触发</button>`;
       html += `</div></div></div>`;
     });
     container.innerHTML = html;
   } catch (e) {
-    container.innerHTML = `<p style="color:var(--error-color);font-size:0.85rem;">加载失败: ${escapeHtml(e.message)}</p>`;
+    container.innerHTML = `<p class="text-error fs-085">加载失败: ${escapeHtml(e.message)}</p>`;
   }
 }
 

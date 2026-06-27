@@ -214,7 +214,7 @@ async function sendMessage(content) {
     bubble.innerHTML = renderMarkdown(fullText);
     // P2-19: 检测空回复（LLM 全部 provider 失败后返回空内容）
     if (!fullText.trim()) {
-      bubble.innerHTML = `<p style="color:var(--error-color)">✗ 林赛暂时无法回复（LLM 服务可能不可用）</p>
+      bubble.innerHTML = `<p class="state-error">✗ 林赛暂时无法回复（LLM 服务可能不可用）</p>
         <button id="retry-btn" style="margin-top:8px;padding:4px 16px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.85rem;">🔄 重试</button>`;
       const retryBtn = bubble.querySelector('#retry-btn');
       if (retryBtn) retryBtn.addEventListener('click', () => {
@@ -228,7 +228,7 @@ async function sendMessage(content) {
 
   } catch (e) {
     console.error('发送消息失败:', e);
-    bubble.innerHTML = `<p style="color:var(--error-color)">✗ 发送失败: ${escapeHtml(e.message)}</p>`;
+    bubble.innerHTML = `<p class="state-error">✗ 发送失败: ${escapeHtml(e.message)}</p>`;
     updateStatus('发送失败');
   } finally {
     if (streamTimeoutId) clearTimeout(streamTimeoutId);
@@ -461,11 +461,11 @@ async function saveEditMessage() {
 async function deleteMessage(msgId) {
   // P0-9: 使用 showModal 替代 confirm 进行二次确认
   if (!State.currentSessionId) return;
-  showModal(`<div style="max-width:360px;text-align:center;">
-    <p style="margin:16px 0;font-size:0.9rem;">确定删除这条消息？</p>
-    <div style="display:flex;gap:8px;justify-content:center;">
+  showModal(`<div class="mw-360 ta-center">
+    <p class="m-16-0 fs-09">确定删除这条消息？</p>
+    <div class="d-flex gap-8 jc-center">
       <button id="del-confirm-btn" style="padding:6px 20px;background:var(--error-color);color:#fff;border:none;border-radius:6px;cursor:pointer;">删除</button>
-      <button id="del-cancel-btn" style="padding:6px 20px;border:1px solid var(--border-color);border-radius:6px;cursor:pointer;">取消</button>
+      <button id="del-cancel-btn" class="pad-6-20 border-default br-6 cursor-pointer">取消</button>
     </div>
   </div>`);
   document.getElementById('del-cancel-btn').onclick = () => closeModal('modal-overlay');

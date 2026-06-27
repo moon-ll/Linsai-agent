@@ -194,11 +194,11 @@ function closeModal(id) { const el = document.getElementById(id); if (el) el.sty
 // P0-9: Promise 版 confirm，替代原生 confirm()
 function confirmModal(message, confirmText = '确定', cancelText = '取消') {
   return new Promise(resolve => {
-    showModal(`<div style="max-width:360px;text-align:center;">
-      <p style="margin:16px 0;font-size:0.9rem;">${escapeHtml(message)}</p>
-      <div style="display:flex;gap:8px;justify-content:center;">
+    showModal(`<div class="mw-360 ta-center">
+      <p class="m-16-0 fs-09">${escapeHtml(message)}</p>
+      <div class="d-flex gap-8 jc-center">
         <button id="cm-confirm-btn" style="padding:6px 20px;background:var(--error-color);color:#fff;border:none;border-radius:6px;cursor:pointer;">${escapeHtml(confirmText)}</button>
-        <button id="cm-cancel-btn" style="padding:6px 20px;border:1px solid var(--border-color);border-radius:6px;cursor:pointer;">${escapeHtml(cancelText)}</button>
+        <button id="cm-cancel-btn" class="pad-6-20 border-default br-6 cursor-pointer">${escapeHtml(cancelText)}</button>
       </div>
     </div>`);
     document.getElementById('cm-cancel-btn').onclick = () => { closeModal('modal-overlay'); resolve(false); };
@@ -209,12 +209,12 @@ function confirmModal(message, confirmText = '确定', cancelText = '取消') {
 // P0-9: Promise 版 prompt，替代原生 prompt()
 function promptModal(message, placeholder = '') {
   return new Promise(resolve => {
-    showModal(`<div style="max-width:360px;text-align:center;">
-      <p style="margin:16px 0;font-size:0.9rem;">${escapeHtml(message)}</p>
-      <input id="pm-input" type="text" placeholder="${escapeHtml(placeholder)}" style="width:100%;padding:8px;border:1px solid var(--border-color);border-radius:6px;margin-bottom:12px;background:var(--bg-secondary);color:var(--text-primary);" />
-      <div style="display:flex;gap:8px;justify-content:center;">
-        <button id="pm-confirm-btn" style="padding:6px 20px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;">确定</button>
-        <button id="pm-cancel-btn" style="padding:6px 20px;border:1px solid var(--border-color);border-radius:6px;cursor:pointer;">取消</button>
+    showModal(`<div class="mw-360 ta-center">
+      <p class="m-16-0 fs-09">${escapeHtml(message)}</p>
+      <input id="pm-input" type="text" placeholder="${escapeHtml(placeholder)}" class="w-100 pad-8 border-default br-6 mb-12 bg-secondary text-primary" />
+      <div class="d-flex gap-8 jc-center">
+        <button id="pm-confirm-btn" class="pad-6-20 bg-accent text-white border-none br-6 cursor-pointer">确定</button>
+        <button id="pm-cancel-btn" class="pad-6-20 border-default br-6 cursor-pointer">取消</button>
       </div>
     </div>`);
     const input = document.getElementById('pm-input');

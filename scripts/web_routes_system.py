@@ -1,0 +1,264 @@
+#!/usr/bin/env python3
+"""web_routes_system.py — 系统状态路由 Mixin。
+
+提供 SystemRoutesMixin，封装版本/心跳/记忆/LLM状态/Provider/用量/工具/
+同步/备份/后台任务等 HTTP 路由：
+    - GET  /api/version                版本号
+    - GET  /api/heartbeat              心跳 + 主动提醒
+    - GET  /api/memory/status          记忆系统状态
+    - GET  /api/memory/reflow          手动触发认知回流
+    - GET  /api/llm-status             LLM 状态
+    - GET  /api/providers              Provider 列表
+    - GET  /api/providers/current      当前 Provider
+    - GET  /api/usage                  Token 用量
+    - GET  /api/usage/daily            日用量
+    - GET  /api/tools                  可用工具列表
+    - GET+POST /api/sync/status        同步状态
+    - GET  /api/sync/auto-status       自动同步状态
+    - GET  /api/backup/list            备份列表
+    - GET  /api/task-status/{id}       后台任务状态
+    - POST /api/llm-provider           切换 LLM Provider
+    - POST /api/switch-provider        切换 LLM Provider（别名）
+    - POST /api/sync/run               触发同步
+    - POST /api/backup                 备份操作
+
+路由表格式：(HTTP方法, re.compile(正则), handler名)
+handler 签名：GET/DELETE → (self, parsed, body=None, **path_params)
+             POST/PUT   → (self, parsed, body, **path_params)
+仅使用 Python 标准库。
+"""
+
+import datetime
+import json
+import re
+from pathlib import Path
+
+import web_base
+from web_base import (
+    _log,
+    _try_acquire_kb_busy,
+    _release_kb_busy,
+    _bg_tasks,
+    _bg_tasks_lock,
+)
+from common import lazy_load
+
+import proactive_engine as pe
+import llm_router as lr
+import usage_tracker as ut
+import sync_engine as se
+import backup_manager as bm
+
+
+# ---------------------------------------------------------------------------
+# 路由表
+# ---------------------------------------------------------------------------
+_SYSTEM_ROUTES = [
+    # --- GET ---
+    ("GET", re.compile(r"^/api/version$"), "_sys_version"),
+    ("GET", re.compile(r"^/api/heartbeat$"), "_sys_heartbeat"),
+    ("GET", re.compile(r"^/api/memory/status$"), "_sys_memory_status"),
+    ("GET", re.compile(r"^/api/memory/reflow$"), "_sys_memory_reflow"),
+    ("GET", re.compile(r"^/api/llm-status$"), "_sys_llm_status"),
+    ("GET", re.compile(r"^/api/providers$"), "_sys_providers"),
+    ("GET", re.compile(r"^/api/providers/current$"), "_sys_providers_current"),
+    ("GET", re.compile(r"^/api/usage$"), "_sys_usage"),
+    ("GET", re.compile(r"^/api/usage/daily$"), "_sys_usage_daily"),
+    ("GET", re.compile(r"^/api/tools$"), "_sys_tools"),
+    ("GET", re.compile(r"^/api/sync/status$"), "_sys_sync_status"),
+    ("GET", re.compile(r"^/api/sync/auto-status$"), "_sys_sync_auto_status"),
+    ("GET", re.compile(r"^/api/backup/list$"), "_sys_backup_list"),
+    ("GET", re.compile(r"^/api/task-status/(?P<task_id>.+)$"), "_sys_task_status"),
+    # --- POST ---
+    ("POST", re.compile(r"^/api/llm-provider$"), "_sys_llm_provider"),
+    ("POST", re.compile(r"^/api/switch-provider$"), "_sys_llm_provider"),
+    ("POST", re.compile(r"^/api/sync/status$"), "_sys_sync_status"),
+    ("POST", re.compile(r"^/api/sync/run$"), "_sys_sync_run"),
+    ("POST", re.compile(r"^/api/backup$"), "_sys_backup"),
+]
+
+
+# ---------------------------------------------------------------------------
+# Mixin
+# ---------------------------------------------------------------------------
+class SystemRoutesMixin:
+    """系统状态路由 Mixin。"""
+
+    # --- GET ---
+
+    def _sys_version(self, parsed, body=None):
+        """版本号"""
+        version = (web_base._PROJECT_ROOT / "VERSION").read_text(encoding="utf-8").strip()
+        self._send_json({"version": version, "name": "LinSai-CoPilot"})
+
+    def _sys_heartbeat(self, parsed, body=None):
+        """心跳 + 主动提醒"""
+        try:
+            reminders = pe.heartbeat()
+            # v3.4: 生成主动消息文案，让前端可直接展示
+            messages = []
+            for sig in reminders[:3]:
+                try:
+                    msg = pe.generate_proactive_message(sig)
+                    messages.append({"type": sig.get("type", ""), "severity": sig.get("severity", "low"), "message": msg})
+                except Exception as e:
+                    if _log:
+                        _log.debug("生成主动消息失败: %s", e)
+            self._send_json({"status": "ok", "reminders": reminders, "proactive_messages": messages})
+        except Exception as e:
+            self._send_json({"status": "ok", "reminders": [], "proactive_messages": [], "error": str(e)})
+
+    def _sys_memory_status(self, parsed, body=None):
+        """记忆系统状态"""
+        try:
+            from memory_reflow import get_memory_status
+            status = get_memory_status()
+            self._send_json(status)
+        except Exception as e:
+            self._send_json({"error": str(e)})
+
+    def _sys_memory_reflow(self, parsed, body=None):
+        """手动触发认知回流"""
+        try:
+            from memory_reflow import reflow_all
+            result = reflow_all(max_count=20)
+            self._send_json({"success": True, "result": result})
+        except Exception as e:
+            self._send_json({"success": False, "error": str(e)})
+
+    def _sys_llm_status(self, parsed, body=None):
+        """LLM 状态"""
+        try:
+            self._send_json(lr.get_status())
+        except Exception as e:
+            self._send_json({"provider": "none", "model": "未配置", "error": str(e)})
+
+    def _sys_providers(self, parsed, body=None):
+        """Provider 列表"""
+        status = lr.get_status()
+        self._send_json({"providers": status.get("providers", [])})
+
+    def _sys_providers_current(self, parsed, body=None):
+        """当前 Provider"""
+        status = lr.get_status()
+        self._send_json({"current": status.get("force_provider") or "auto"})
+
+    def _sys_usage(self, parsed, body=None):
+        """Token 用量"""
+        self._send_json(ut.get_usage_summary())
+
+    def _sys_usage_daily(self, parsed, body=None):
+        """日用量"""
+        self._send_json(ut.get_stats("daily"))
+
+    def _sys_tools(self, parsed, body=None):
+        """可用工具列表"""
+        te_mod = lazy_load("tool_engine")
+        if te_mod:
+            self._send_json({"tools": te_mod.list_tools()})
+        else:
+            self._send_json({"tools": []})
+
+    def _sys_sync_status(self, parsed, body=None):
+        """同步状态（GET+POST 重复）"""
+        self._send_json(se.get_sync_status())
+
+    def _sys_sync_auto_status(self, parsed, body=None):
+        """自动同步状态（LaunchAgent + auto_sync_history）"""
+        agent_path = Path.home() / "Library" / "LaunchAgents" / "com.linsai.kb-auto-sync.plist"
+        sync_state_path = web_base._PROJECT_ROOT / "memory" / "sync-state.json"
+        auto_history = []
+        if sync_state_path.exists():
+            try:
+                state = json.loads(sync_state_path.read_text(encoding="utf-8"))
+                auto_history = state.get("auto_sync_history", [])[-5:]
+            except (json.JSONDecodeError, OSError):
+                pass  # 容错：文件损坏时返回默认值
+        self._send_json({
+            "launchagent_installed": agent_path.exists(),
+            "auto_sync_history": auto_history,
+        })
+
+    def _sys_backup_list(self, parsed, body=None):
+        """备份列表"""
+        try:
+            backups = bm.list_backups()
+            self._send_json({"backups": [
+                {"name": b.name, "size_kb": round(b.stat().st_size / 1024, 1),
+                 "modified": datetime.datetime.fromtimestamp(b.stat().st_mtime).isoformat()}
+                for b in backups[:20]
+            ]})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_task_status(self, parsed, body=None, task_id=None):
+        """后台任务状态"""
+        with _bg_tasks_lock:
+            task = _bg_tasks.get(task_id, {"status": "unknown"})
+        self._send_json(task)
+
+    # --- POST ---
+
+    def _sys_llm_provider(self, parsed, body):
+        """切换 LLM Provider"""
+        name = body.get("provider", "").strip()
+        if name == "auto" or name == "":
+            lr.router.set_auto()
+            self._send_json({"success": True, "mode": "auto", "active": lr.router.get_status()["active_provider"]})
+        elif name == "cli_auto":
+            if lr.router.set_provider("cli_auto"):
+                status = lr.router.get_status()
+                self._send_json({"success": True, "mode": "manual", "provider": "cli_auto", "active": status.get("active_provider", "")})
+            else:
+                self._send_json({"error": "没有可用的 CLI Provider"}, 400)
+        elif lr.router.set_provider(name):
+            self._send_json({"success": True, "mode": "manual", "provider": name})
+        else:
+            self._send_json({"error": f"Provider {name} 不可用"}, 400)
+
+    def _sys_sync_run(self, parsed, body):
+        """触发多端同步（防重入）"""
+        if not _try_acquire_kb_busy():
+            self._send_json({"error": "知识库正在执行其他操作，请稍后再试"}, 409)
+            return
+        try:
+            result = se.sync_all()
+            self._send_json({"success": True, "result": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+        finally:
+            _release_kb_busy()
+
+    def _sys_backup(self, parsed, body):
+        """备份操作（list/create/restore）"""
+        action = body.get("action", "create")
+        try:
+            if action == "list":
+                backups = bm.list_backups()
+                self._send_json({"success": True, "backups": [
+                    {"name": b.name, "size_kb": round(b.stat().st_size / 1024, 1),
+                     "modified": datetime.datetime.fromtimestamp(b.stat().st_mtime).isoformat()}
+                    for b in backups[:20]
+                ]})
+            elif action == "create":
+                zip_path = bm.create_backup(label="web-manual")
+                if zip_path:
+                    self._send_json({"success": True, "path": zip_path.name,
+                                     "size_kb": round(zip_path.stat().st_size / 1024, 1)})
+                else:
+                    self._send_json({"error": "备份失败"}, 500)
+            elif action == "restore":
+                name = body.get("name", "")
+                if not name:
+                    self._send_json({"error": "缺少备份名称"}, 400)
+                    return
+                backup_path = bm.BACKUPS_DIR / name
+                if not backup_path.exists():
+                    self._send_json({"error": "备份不存在"}, 404)
+                    return
+                ok = bm.restore_backup(backup_path)
+                self._send_json({"success": ok})
+            else:
+                self._send_json({"error": "未知操作"}, 400)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)

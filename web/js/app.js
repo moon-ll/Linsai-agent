@@ -407,13 +407,13 @@ function bindKbManagerEvents() {
       const totalTokens = total.tokens || 0;
       const totalCost = total.cost || 0;
       showModal(`<div style="padding:16px;line-height:1.8;">
-        <h3 style="margin-bottom:8px;">📊 Token 用量统计</h3>
-        <hr style="border:none;border-top:1px solid var(--border-color);margin:8px 0;">
+        <h3 class="mb-8">📊 Token 用量统计</h3>
+        <hr class="border-none bt-default m-8-0">
         <p><strong>今日</strong></p>
         <p>• 调用次数: ${todayCalls}</p>
         <p>• Token: ${todayTokens.toLocaleString()}</p>
         <p>• 费用: ¥${todayCost.toFixed(2)}</p>
-        <hr style="border:none;border-top:1px solid var(--border-color);margin:8px 0;">
+        <hr class="border-none bt-default m-8-0">
         <p><strong>累计</strong></p>
         <p>• Token: ${totalTokens.toLocaleString()}</p>
         <p>• 费用: ¥${totalCost.toFixed(2)}</p>

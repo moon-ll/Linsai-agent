@@ -1,5 +1,91 @@
 # 变更记录
 
+## v3.5.6 - 2026-06-28 web_server.py Mixin 架构拆分（11 子模块）
+
+### 架构重构：Web 服务器模块化
+
+将 `scripts/web_server.py`（2576 行）按业务域物理拆分为 11 个子模块，原文件瘦身为 321 行聚合器（87.5% 缩减），使用 Mixin 模式确保零破坏性。
+
+**新增子模块**：
+- `scripts/web_base.py` — 共享基础设施：全局状态（`_file_locks`/`_kb_busy`/`_bg_tasks`）、工具函数（`_get_file_lock`/`split_response_stream`/`_update_memory_async`）、`BaseRequestHandler` 基类（`_send_json`/`_send_sse`/`_send_static`/`_read_json_body`）
+- `scripts/web_routes_sessions.py` — 会话/消息路由（9 条）：`SessionRoutesMixin`，含 SSE 流式输出、`_edit_message`/`_delete_message` 模块级函数
+- `scripts/web_routes_tasks.py` — 任务路由（8 条）：`TaskRoutesMixin`，含 `_do_dispatch_hermes` 方法
+- `scripts/web_routes_kb.py` — 知识库路由（33 条）：`KbRoutesMixin`，18 GET + 14 POST + 1 DELETE
+- `scripts/web_routes_system.py` — 系统状态路由（19 条）：`SystemRoutesMixin`，版本/心跳/LLM状态/Provider/用量/同步/备份
+- `scripts/web_routes_skills.py` — 技能路由（5 条）：`SkillRoutesMixin`
+- `scripts/web_routes_learning.py` — 学习路由（7 条）：`LearningRoutesMixin`，lazy_load 延迟导入
+- `scripts/web_routes_projects.py` — 项目/NSFC/论文池路由（33 条）：`ProjectRoutesMixin`，含 `_write_dispatch_to_hermes_plans`/`_dispatch_hermes_async` 模块级函数
+- `scripts/web_routes_hermes.py` — Hermes 路由（4 条）：`HermesRoutesMixin`，修复 `_send_sse_raw` 未定义 bug
+- `scripts/web_routes_upload.py` — 上传/文件路由（5 条）：`UploadRoutesMixin`，含 `_handle_upload`/`_list_references` 模块级函数
+- `scripts/web_routes_research.py` — 课题指导模块路由（37 条）：`ResearchRoutesMixin`，整体迁移自原 `_RESEARCH_ROUTES` + 37 个 `_rg_*` handler + 独立分派器
+
+### 关键设计决策
+
+- **Mixin 模式**：每个域创建一个 Mixin 类，提供路由表和 handler 方法。`RequestHandler` 继承所有 Mixin + `BaseRequestHandler` + `BaseHTTPRequestHandler`。`do_GET`/`do_POST`/`do_PUT`/`do_DELETE` 依次调用各路由表的 `_dispatch_all` 方法。
+- **统一路由表格式**：`(HTTP方法, re.compile(正则), handler名)`，handler 签名 `GET/DELETE → (self, parsed, body=None, **path_params)` / `POST/PUT → (self, parsed, body, **path_params)`，正则使用命名捕获组提取路径参数。
+- **课题模块混合分派**：Research 路由保留原有字符串模式 + `match.group(N)` handler 签名，通过独立 `_dispatch_research_routes` 优先分派，与统一路由表互不干扰。
+- **`--root` 覆盖传播**：`_PROJECT_ROOT`/`_WEB_DIR` 定义在 `web_base.py` 中，`main()` 的 `--root` 参数直接修改 `web_base._PROJECT_ROOT`/`web_base._WEB_DIR`，所有 Mixin 通过 `web_base._PROJECT_ROOT` 引用（非 `from web_base import _PROJECT_ROOT`），确保隔离测试环境正确覆盖。
+- **POST 重复路由处理**：原 `do_POST` 中约 12 条 GET 路由的重复端点（如 `/api/projects`、`/api/knowledge/files`），通过在同一路由表中注册 GET+POST 两个条目指向同一 handler 实现，handler 签名统一为 `(self, parsed, body=None)`。
+- **`_send_sse_raw` bug 修复**：Hermes SSE 中 `self._send_sse_raw("data: [DONE]\n\n")` 改为 `self._send_sse({"type": "done"})`。
+- **不修改任何业务逻辑**，仅做物理分文件 + 路由表格式统一。
+
+### 验证结果
+
+- `py_compile` 12 个文件全部通过
+- `self_test.py` 全量 120/120 通过（耗时 1.092s）
+- `self_test.py --web-ci` 全量 146/146 通过（含 26 个 Web API 虚拟用户测试，耗时 2.240s）
+- `from web_server import RequestHandler` 导入正常，MRO 继承链正确
+- Web 服务器启动成功，`/api/version`、`/api/skills`、`/api/knowledge`、`/api/research/projects`、`/api/heartbeat`、静态文件、404 全部响应正确
+- `--self-check` 6 项全部通过（WEB_DIR/流式切分/代码块/空文本/路由表完整性 123 条/继承完整性）
+
+### 文件规模
+
+| 文件 | 行数 |
+|------|------|
+| web_server.py（原 2576 行） | 321 |
+| web_base.py | 227 |
+| web_routes_sessions.py | 292 |
+| web_routes_tasks.py | 181 |
+| web_routes_kb.py | 447 |
+| web_routes_system.py | 264 |
+| web_routes_skills.py | 74 |
+| web_routes_learning.py | 168 |
+| web_routes_projects.py | 470 |
+| web_routes_hermes.py | 78 |
+| web_routes_upload.py | 200 |
+| web_routes_research.py | 458 |
+| **合计** | **3180** |
+
+## v3.5.5 - 2026-06-28 knowledge_base.py 门面化拆分（5 子模块）
+
+### 架构重构：知识库引擎模块化
+
+将 `scripts/knowledge_base.py`（1792 行）按职责物理拆分为 5 个子模块，原文件保留为门面（Facade）确保向后兼容，外部模块 `import knowledge_base as kb` 无需任何改动。
+
+**新增子模块**：
+- `scripts/kb_text.py` — 文本处理基础工具：`_tokenize` / `_chunk_document` / `_compute_idf` / `parse_frontmatter` / `build_frontmatter` / `_safe_filename` / `_STOPWORDS` / `_FRONTMATTER_RE`
+- `scripts/kb_graph.py` — 知识图谱管理：`_load_graph` / `_save_graph` / `_remove_graph_node` / `update_graph_node` / `add_graph_edge` / `get_related_concepts` / `get_graph_summary` / `_inject_wikilinks` / `_extract_wikilinks` / `_get_aliases_for_concept`
+- `scripts/kb_index.py` — 索引与检索：`build_index` / `search` / `search_light` / `get_index_status` / `get_enriched_context` / `add_document` / `_should_index` / `list_raw_files` / `ingest_raw`
+- `scripts/kb_wiki.py` — Wiki 页面管理：`build_wiki_page` / `get_wiki_page` / `list_wiki_pages` / `save_wiki_page` / `delete_wiki_page` / `check_similar_concepts` / `create_wiki_stub` / `grow_wiki_prompt` / `apply_growth`
+- `scripts/kb_health.py` — 健康度与维护：`get_kb_health` / `_compute_graph_connectivity` / `_compute_category_coverage` / `_compute_alias_hit_rate` / `_count_graph_orphans`
+
+**门面保留的跨职责函数**：别名管理（`_load_aliases` / `_expand_query_with_aliases` / `_exact_concept_match` / `_has_tech_terms` / `should_search_knowledge`）、raw 蒸馏编排（`distill_raw_to_wiki` / `_build_distill_prompt` / `save_distilled_wiki`）、生长日志（`_load_growth_log` / `_save_growth_log` / `log_growth` / `get_growth_log` / `get_growth_candidates`）、目录初始化（`_ensure_dirs`）。
+
+### 关键设计决策
+
+- **门面注入模式解决子模块→门面依赖**：子模块不反向 `import knowledge_base`（兼容 `spec_from_file_location` 动态加载场景，避免双重实例），改由门面在加载完成后向子模块全局命名空间注入 `_ensure_dirs` / `log_growth` / `_load_aliases` / `distill_raw_to_wiki` / `get_wiki_page` / `get_growth_candidates` / `get_growth_log` / `_log`。函数体零改动。
+- **分层加载消除循环依赖**：`kb_text → kb_graph → kb_index → kb_wiki → kb_health → 门面`，kb_wiki↔kb_index 的互依赖通过单向 import + 门面注入 `get_wiki_page` 解决。
+- **私有函数全部 re-export**：`_load_graph` / `_save_graph` / `_remove_graph_node` / `_inject_wikilinks` / `_build_distill_prompt` / `_expand_query_with_aliases` 等被 kb_maintenance / alias_learner / test_e2e / context_builder 直接导入的私有函数，均通过门面 re-export 保持可用。
+- **sys.path 自举**：门面顶部将 `scripts/` 注入 `sys.path`，确保 `from kb_text import ...` 在任意加载上下文可用。
+
+### 验证结果
+
+- `py_compile` 6 个文件全部通过
+- `self_test.py` 全量 120/120 通过（耗时 0.996s）
+- 公开函数 29 个 + 私有函数 22 个 + 常量/路径 15 个，门面 re-export 完整
+- 动态加载（`spec_from_file_location`）场景下子模块注入生效，`search` / `get_kb_health` / `save_wiki_page` / `get_enriched_context` 运行时调用正常
+- `from knowledge_base import _load_graph, _save_graph, _remove_graph_node, _inject_wikilinks, _build_distill_prompt, _expand_query_with_aliases` 私有函数导入 OK
+
 ## v3.5.4 - 2026-06-28 全面质量优化：P0修复+P1安全+P2架构+P3打磨
 
 ### P0 功能性 Bug 修复
