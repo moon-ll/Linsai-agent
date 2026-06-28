@@ -192,7 +192,6 @@ LinSai-CoPilot/
 │   ├── sync_engine.py         # 多端同步：hermes 会话/文献 → 知识库 + 认知回流
 │   ├── backup_manager.py      # 数据备份/恢复
 │   ├── upgrade.py             # 安全升级标准流程
-│   ├── version.py             # 版本号集中读取（VERSION 真相源）
 │   ├── project_manager.py     # v3.5 课题管理：CRUD、状态机、PROJECT-MEMORY.md
 │   ├── unit_manager.py        # v3.5 单元管理：验收标准数组、风险、状态机
 │   ├── project_kb.py          # v3.5 课题知识库：分层(raw/parsed/summary)、TF-IDF、标签
@@ -511,6 +510,7 @@ LinSai-CoPilot/
 - ✅ **内联样式清理** — 426/554（76.8%）内联 style 替换为 CSS 类，新增 ~180 个工具类
 - ✅ **v3.5.7 安全与质量优化** — P0 线程安全+路径遍历修复、P1 原子写入+XSS 修复+测试扩展（129+171）、P2 导入清理+缓存+CSS 变量
 - ✅ **v3.5.8 第三轮安全修复** — P0 project_manager/_send_static 路径遍历、P1 文件锁+escapeAttr+42处onclick修复+测试扩展（137+207）、P2 内存泄漏+async+对比度
+- ✅ **v3.5.9 冗余内容清理** — 删除 version.py 死模块、合并 _safe_filename/_STOPWORDS 重复定义、删除 ~230 行死 CSS + 2 个死 JS 函数、修复 skill-count ID 不匹配 bug、清理数据残留、更新 4 个 README
 
 ---
 
@@ -674,7 +674,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：3.5.8*
+*版本：3.5.9*
 *日期：2026-06-28*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

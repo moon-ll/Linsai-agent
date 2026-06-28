@@ -638,16 +638,6 @@ body {
   justify-content: space-between;
 }
 
-.session-item .unread-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--accent-color);
-  border-radius: 50%;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
 /* ---- 对话区 ---- */
 .welcome-screen {
   flex: 1;
@@ -993,7 +983,7 @@ body {
   padding: 12px 0;
 }
 
-.task-list, .reference-list {
+.reference-list {
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -1688,50 +1678,6 @@ body {
   margin-bottom: 6px;
 }
 
-.task-overdue {
-  color: var(--error-color);
-  font-weight: 500;
-}
-
-.task-priority {
-  font-size: 0.65rem;
-  padding: 1px 6px;
-  border-radius: 10px;
-  font-weight: 500;
-}
-
-.task-priority-urgent { background: var(--urgent-bg); color: var(--urgent-text); }
-.task-priority-high   { background: var(--high-bg); color: var(--high-text); }
-.task-priority-medium { background: var(--medium-bg); color: var(--medium-text); }
-.task-priority-low    { background: var(--low-bg); color: var(--low-text); }
-
-.task-card-progress {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.progress-track {
-  flex: 1;
-  height: 4px;
-  background: var(--bg-tertiary);
-  border-radius: 2px;
-  overflow: hidden;
-}
-
-.progress-fill-bar {
-  height: 100%;
-  background: var(--accent-color);
-  border-radius: 2px;
-  transition: width 0.3s ease;
-}
-
-.progress-label {
-  font-size: 0.7rem;
-  color: var(--text-tertiary);
-  white-space: nowrap;
-}
-
 /* ---- 模态框 ---- */
 .modal-overlay {
   position: fixed;
@@ -1792,86 +1738,6 @@ body {
 
 .kb-panel.active {
   display: block;
-}
-
-.kb-stat-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.kb-stat-card {
-  background: var(--surface);
-  border-radius: 10px;
-  padding: 12px;
-  text-align: center;
-  border: 1px solid var(--border-color);
-}
-
-.kb-stat-value {
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--accent-color);
-}
-
-.kb-stat-label {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
-  margin-top: 4px;
-}
-
-.kb-list-item {
-  padding: 10px 12px;
-  border-radius: 8px;
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  margin-bottom: 8px;
-  cursor: pointer;
-  transition: all 0.15s;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.kb-list-item:hover {
-  border-color: var(--accent-color);
-  transform: translateX(2px);
-}
-
-.kb-list-title {
-  font-weight: 500;
-  font-size: 0.9rem;
-  color: var(--text-primary);
-}
-
-.kb-list-meta {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
-  margin-top: 2px;
-}
-
-.kb-badge {
-  display: inline-block;
-  padding: 1px 6px;
-  border-radius: 4px;
-  font-size: 0.7rem;
-  font-weight: 500;
-  margin-left: 6px;
-}
-
-.kb-badge-seedling { background: var(--seedling-bg); color: var(--seedling-text); }
-.kb-badge-growing { background: var(--growing-bg); color: var(--growing-text); }
-.kb-badge-mature { background: var(--mature-bg); color: var(--mature-text); }
-.kb-badge-raw { background: var(--raw-badge-bg); color: var(--raw-badge-text); }
-
-.kb-section-title {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  margin: 16px 0 8px;
-  padding-bottom: 4px;
-  border-bottom: 1px solid var(--border-color);
 }
 
 .kb-empty {
@@ -2039,22 +1905,6 @@ body {
   color: var(--accent-color);
 }
 
-/* P2-7: 统一 loading 按钮样式 */
-.btn-loading {
-  opacity: 0.7;
-  pointer-events: none;
-  position: relative;
-}
-.btn-loading::after {
-  content: "◐";
-  margin-left: 4px;
-  animation: spin 1s linear infinite;
-  display: inline-block;
-}
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
 /* ---- 图标 Tooltip（hover 立即显示功能名称）---- */
 /* 仅在支持 hover 的设备（桌面端）启用，移动端用原生 title 兜底 */
 @media (hover: hover) {
@@ -2106,39 +1956,6 @@ body {
   }
 }
 
-/* ---- 知识库管理器轻量化优化 ---- */
-.kb-list-main {
-  flex: 1;
-  min-width: 0;
-}
-
-.kb-list-actions {
-  display: flex;
-  gap: 6px;
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-
-.kb-list-item:hover .kb-list-actions {
-  opacity: 1;
-}
-
-.kb-action-btn {
-  padding: 2px 6px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-color);
-  border-radius: 4px;
-  font-size: 0.75rem;
-  cursor: pointer;
-  color: var(--text-secondary);
-  white-space: nowrap;
-}
-
-.kb-action-btn:hover {
-  border-color: var(--accent-color);
-  color: var(--accent-color);
-}
-
 /* v2.9.5: 双向链接与关联 chip */
 .kb-wikilink {
   color: var(--accent-color);
@@ -2176,72 +1993,7 @@ body {
   border-bottom: 1px solid var(--border-color);
 }
 
-/* ── 知识库健康度仪表盘 ── */
-.kb-health-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  gap: 12px;
-  margin-bottom: 16px;
-}
-
-.kb-health-card {
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 12px 8px;
-  text-align: center;
-}
-
-.kb-health-value {
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.kb-health-label {
-  font-size: 0.7rem;
-  color: var(--text-secondary);
-  margin-top: 4px;
-}
-
-.kb-health-section {
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  border-radius: 10px;
-  padding: 12px 16px;
-  margin-top: 12px;
-}
-
-.kb-health-row {
-  display: flex;
-  justify-content: space-between;
-  padding: 6px 0;
-  font-size: 0.85rem;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.kb-health-row:last-child {
-  border-bottom: none;
-}
-
-/* ── 别名管理 ── */
-.alias-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 8px;
-  background: var(--surface);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-}
-
-.alias-row input {
-  font-size: 0.85rem;
-}
-
 /* P2: badge/priority 深色模式已通过 CSS 变量自动切换，无需重复覆盖 */
-
-/* P3-1: task-priority 深色模式适配（已通过变量自动切换） */
 
 /* P2-20: 深色模式 placeholder 对比度提升 (WCAG AA) */
 [data-theme="dark"] input::placeholder,
@@ -2263,45 +2015,7 @@ body {
   .toolbar-btn { flex: 0 0 auto; min-width: 48px; }
 }
 
-/* P3-6: 标签列表间距 */
-.kb-preview-meta {
-  line-height: 1.8;
-}
-.kb-preview-tags {
-  line-height: 1.8;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px;
-}
-
 /* ── 技能管理器 ── */
-.skill-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 10px 12px;
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-  background: var(--surface);
-  margin-bottom: 8px;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-
-.skill-row:hover {
-  border-color: var(--accent-color);
-  background: var(--bg-primary);
-}
-
-.skill-row input[type="checkbox"] {
-  margin-top: 2px;
-  width: 18px;
-  height: 18px;
-  accent-color: var(--accent-color);
-  cursor: pointer;
-  flex-shrink: 0;
-}
-
 .skill-info {
   flex: 1;
   min-width: 0;
@@ -2320,42 +2034,9 @@ body {
   line-height: 1.4;
 }
 
-.skill-triggers {
-  font-size: 0.75rem;
-  color: var(--text-tertiary);
-  margin-top: 4px;
-}
-
-/* 深色模式 */
-[data-theme="dark"] .skill-row {
-  background: var(--surface);
-}
-
 /* v3.5.2: 常用工具 class（替代高频内联 style） */
-.btn-sm {
-  padding: 4px 10px;
-  border-radius: 6px;
-  border: 1px solid var(--border-color);
-  background: transparent;
-  color: var(--text-primary);
-  cursor: pointer;
-  font-size: 0.78rem;
-}
-.btn-sm:hover { background: var(--bg-tertiary); }
 .btn-danger { border-color: var(--error-color); color: var(--error-color); }
-.btn-accent { border-color: var(--accent-color); color: var(--accent-color); }
-.btn-success { border-color: var(--success-color); color: var(--success-color); }
-.doc-item {
-  padding: 8px;
-  background: var(--bg-tertiary);
-  border-radius: 6px;
-  cursor: pointer;
-  border: 1px solid transparent;
-  transition: border-color 0.15s;
-}
-.doc-item:hover { border-color: var(--accent-color); }
-.research-card:focus-visible,
-.doc-item:focus-visible {
+.research-card:focus-visible {
   outline: 2px solid var(--accent-color);
   outline-offset: 2px;
 }
@@ -2460,13 +2141,6 @@ body {
   border-left: 3px solid var(--card-edge, var(--accent-color));
 }
 
-.detail-card {
-  padding: 12px;
-  background: var(--bg-secondary);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
-}
-
 /* 模态框骨架 */
 .modal-form {
   display: flex;
@@ -2535,10 +2209,6 @@ body {
 }
 
 /* 标签/元信息 */
-.meta-tiny {
-  font-size: 0.72rem;
-  color: var(--text-tertiary);
-}
 .chip {
   font-size: 0.65rem;
   padding: 1px 6px;

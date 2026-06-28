@@ -58,6 +58,7 @@ from common import (
     save_json as _write_json,
     safe_filename as _safe_fname,
 )
+from kb_text import _STOPWORDS
 from project_manager import (
     _project_dir,
     get_project,
@@ -96,17 +97,6 @@ _LAYER_TYPES: Dict[str, Tuple[str, ...]] = {
 _TEXT_EXTS = {
     ".md", ".txt", ".rst", ".json", ".csv", ".py", ".js", ".ts",
     ".sh", ".yaml", ".yml", ".tex", ".bib", ".log", ".ini", ".toml",
-}
-
-# 简化停用词表
-_STOPWORDS = {
-    "的", "了", "是", "在", "我", "有", "和", "就", "不", "人",
-    "都", "一", "上", "也", "很", "到", "说", "要", "去", "你",
-    "会", "着", "看", "好", "这", "那", "可以", "他", "她", "它",
-    "们", "与", "及", "或", "但是", "因为", "所以", "如果", "则",
-    "而", "于", "以", "为", "之", "其", "将", "被", "把", "让",
-    "the", "a", "an", "of", "to", "in", "on", "for", "and", "or",
-    "is", "are", "was", "were", "be", "been", "with", "by", "as",
 }
 
 _FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n?(.*)$", re.DOTALL)
@@ -234,7 +224,11 @@ def _safe_filename(name: str) -> str:
 def _tokenize(text: str) -> List[str]:
     """分词：中文 2-3 字 gram + 英文单词 + 数字。
 
-    与 knowledge_base._tokenize 思路一致但保持独立简化版。
+    保留独立版本而非直接复用 kb_text._tokenize：
+    kb_text 使用 2,3,4 字 gram（含 4-gram），而课题知识库索引用 2,3 字 gram。
+    gram 大小直接影响 TF-IDF 倒排索引的粒度与搜索评分，替换为 4-gram 版本
+    会改变既有课题索引的 token 分布与排序结果，故保持独立。
+    _STOPWORDS 已统一从 kb_text 导入（合并版）。
     """
     tokens: List[str] = []
     # 中文字符串：提取 2 字和 3 字 gram

@@ -101,18 +101,12 @@ function updateSkillCount() {
   const mode = State.currentMode || 'co-working';
   const modeConfig = (_skillConfigCache && _skillConfigCache[mode]) || { enabled: [] };
   const count = modeConfig.enabled?.length || 0;
-  const el = document.getElementById('skill-count');
+  const el = document.getElementById('skill-active-count');
   if (el) el.textContent = `${count} 个技能已启用`;
 }
 
 function filterSkillList() {
   renderSkillList();
-}
-
-function getSelectedSkillNames() {
-  const mode = State.currentMode || 'co-working';
-  const modeConfig = (_skillConfigCache && _skillConfigCache[mode]) || { enabled: [] };
-  return modeConfig.enabled || [];
 }
 
 function onSkillModeChange(mode) {

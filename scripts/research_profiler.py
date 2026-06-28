@@ -24,34 +24,13 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 from common import now_utc as _now_utc, load_json, save_json
+from kb_text import _STOPWORDS
 
 PROJECT_ROOT = Path(__file__).parent.parent
 MEMORY_DIR = PROJECT_ROOT / "memory"
 TASKS_DIR = PROJECT_ROOT / "tasks"
 SESSIONS_DIR = PROJECT_ROOT / "sessions"
 PROFILE_PATH = MEMORY_DIR / "research-profile.json"
-
-# 中英文通用停用词
-_STOPWORDS = {
-    "the", "a", "an", "is", "are", "was", "were", "be", "been", "being",
-    "have", "has", "had", "do", "does", "did", "will", "would", "could",
-    "should", "may", "might", "must", "shall", "can", "need", "dare",
-    "of", "to", "in", "for", "on", "with", "at", "by", "from", "as",
-    "into", "through", "during", "before", "after", "above", "below",
-    "between", "under", "again", "further", "then", "once", "here",
-    "there", "when", "where", "why", "how", "all", "any", "both", "each",
-    "few", "more", "most", "other", "some", "such", "no", "nor", "not",
-    "only", "own", "same", "so", "than", "too", "very", "just", "and",
-    "but", "if", "or", "because", "until", "while", "about", "against",
-    "this", "that", "these", "those", "i", "me", "my", "myself", "we",
-    "our", "you", "your", "he", "him", "his", "she", "her", "it", "its",
-    "they", "them", "their", "的", "了", "在", "是", "我", "有", "和",
-    "就", "不", "人", "都", "一", "一个", "上", "也", "很", "到", "说",
-    "要", "去", "你", "会", "着", "没有", "看", "好", "自己", "这",
-    "那", "个", "为", "之", "与", "及", "等", "可", "能", "让", "给",
-    "把", "被", "对", "将", "还", "可以", "我们", "你们", "他们",
-    "什么", "怎么", "为什么", "如何", "还是", "或者", "以及", "但是",
-}
 
 # 技术术语模式
 _TECH_PATTERNS = [

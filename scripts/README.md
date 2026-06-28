@@ -19,7 +19,6 @@
 | `__init__.py` | 7 | 包初始化 |
 | `common.py` | 66 | 公共工具：now_utc / load_json / save_json / safe_filename / lazy_load |
 | `paths.py` | 42 | 路径工具：PROJECT_ROOT 与各子目录路径常量 |
-| `version.py` | 96 | 版本号集中读取（VERSION 文件为唯一真相源） |
 | `logger.py` | 139 | 统一日志：彩色控制台输出 + 文件按日期轮转 |
 | `backup_manager.py` | 254 | 数据备份与恢复 |
 | `upgrade.py` | 316 | 安全升级标准流程（检查 / 模拟 / 执行） |
@@ -32,7 +31,7 @@
 | `slash_commands.py` | 686 | 斜杠命令系统：/research /ingest /check /skill 等 9 个命令 |
 | `tool_engine.py` | 966 | 工具引擎：11个工具注册、权限模型、工具循环 |
 | `context_builder.py` | 608 | 上下文组装：人格 + 记忆 + 知识库 + 技能 + 会话历史 + 预算控制 |
-| `web_server.py` | 2544 | Web 服务器：HTTP + SSE 流式输出 + API 路由（双主题前端） |
+| `web_server.py` | 321 | Web 服务器聚合器（Mixin 架构，10 路由 Mixin，160 路由） |
 
 ## 数据管理
 
@@ -48,7 +47,7 @@
 
 | 脚本 | 行数 | 说明 |
 |------|------|------|
-| `knowledge_base.py` | 1780 | 知识库引擎：raw/wiki分层、frontmatter、知识图谱、搜索、生长机制 |
+| `knowledge_base.py` | 534 | 知识库引擎门面（re-export 5 子模块：kb_text/kb_graph/kb_index/kb_wiki/kb_health） |
 | `kb_capture.py` | 316 | 对话自动捕获：技术参数检测、零LLM开销 |
 | `kb_maintenance.py` | 286 | 批处理维护：索引重建、孤儿清理、候选报告、周维护 |
 | `kb_auto_sync.py` | 227 | 知识库自动同步 |
@@ -98,7 +97,7 @@
 | `hermes_bridge.py` | 243 | Hermes 桥接器：调用 Hermes LinSai profile 深度对话 |
 | `skill_manager.py` | 299 | 项目级技能系统：skills/ 目录、关键词匹配 |
 | `proactive_engine.py` | 553 | 主动感知：心跳扫描、压力信号检测、主动提醒 |
-| `self_test.py` | 247 | 统一自检入口：88项全量回归 |
+| `self_test.py` | 247 | 统一自检入口：137+207 项全量回归 |
 
 ## deepxiv 知识库流水线
 
@@ -120,7 +119,7 @@
 | 脚本 | 说明 |
 |------|------|
 | `test_runner.py` | 轻量测试框架：隔离环境、中文报告 |
-| `test_core.py` | 核心模块单元测试（34个检查点） |
+| `test_core.py` | 核心模块单元测试（137个检查点） |
 | `test_scenarios.py` | 场景剧本测试（16个检查点） |
 | `test_persona.py` | 人格一致性静态抽检（38个检查点） |
 | `test_web_api.py` | Web API 端到端测试 |
@@ -130,5 +129,5 @@
 **总计：scripts/ 根目录 49 个 .py 文件（含 `__init__.py`）+ tests/ 目录 6 个 .py 文件 + deepxiv_knowledge（8 模块）/ wiki_regenerator（4 模块）两个流水线包。**
 
 ---
-*版本：3.5.0*
-*日期：2026-06-27*
+*版本：3.5.8*
+*日期：2026-06-28*

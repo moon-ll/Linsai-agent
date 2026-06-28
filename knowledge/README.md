@@ -8,7 +8,7 @@
 knowledge/
 ├── raw/                    # 原始材料（只读）
 │   ├── papers/             # arXiv 论文元数据（deepxiv 流水线抓取）
-│   │   └── [year]-[arxiv_id]-[slug].md  # 61 篇 HHG 论文，project: deepxiv-论文库
+│   │   └── [year]-[arxiv_id]-[slug].md  # 106 篇 HHG 论文，project: deepxiv-论文库
 │   ├── notes/              # 用户手写笔记
 │   └── webclips/           # 网页剪藏
 ├── wiki/                   # 结构化知识（林赛研究笔记）
@@ -21,7 +21,7 @@ knowledge/
 │       └── NSFC-强场超快/   # NSFC 课题相关论文
 ├── templates/              # Obsidian 模板（含 project 字段）
 ├── index.json              # 倒排索引（程序生成，含 project 字段）
-├── graph.json              # 知识图谱（27 节点 26 边，程序生成）
+├── graph.json              # 知识图谱（141 节点 307 边，程序生成）
 ├── aliases.json            # 别名映射（25 组中英对照）
 └── growth-log.json         # 知识生长日志
 ```
@@ -29,7 +29,7 @@ knowledge/
 ## project 字段与子库分类
 
 每篇文档的 frontmatter 含 `project` 字段，标识归属子库：
-- `deepxiv-论文库`：deepxiv 流水线从 arXiv 抓取的论文元数据（raw 层，55 篇）
+- `deepxiv-论文库`：deepxiv 流水线从 arXiv 抓取的论文元数据（raw 层，100 篇）
 - `NSFC-强场超快`：NSFC 强场超快课题相关论文（raw 层，6 篇）
 - 检索时可按子库过滤：`search(query, project="NSFC-强场超快")`
 
@@ -39,9 +39,9 @@ knowledge/
 
 | 文件 | 内容 | 规模 |
 |------|------|------|
-| `docs/solid-HHG-theory-methods-survey.md` | 固体 HHG 理论模型与数值方法调研（按理论模型分类）| **23.5 KB / 579 行** |
-| `docs/solid-HHG-by-material-system.md` | 凝聚态 HHG 计算方法调研（按材料体系分类，v3）【9 大体系，31 KB / 831 行，全文原文提取】| **31 KB / 831 行** |
-| `docs/solid-HHG-computation-by-material.md` | 固体 HHG 计算与分析方法调研（按理论模型分类，v2）| **28.7 KB / 850 行** |
+| `raw/notes/solid-HHG-theory-methods-survey.md` | 固体 HHG 理论模型与数值方法调研（按理论模型分类）| **23.5 KB / 579 行** |
+| `raw/notes/solid-HHG-by-material-system.md` | 凝聚态 HHG 计算方法调研（按材料体系分类，v3）【9 大体系，31 KB / 831 行，全文原文提取】| **31 KB / 831 行** |
+| `raw/notes/solid-HHG-computation-by-material.md` | 固体 HHG 计算与分析方法调研（按理论模型分类，v2）| **28.7 KB / 850 行** |
 
 ### 当前调研覆盖的理论方向
 

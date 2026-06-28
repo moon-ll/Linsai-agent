@@ -18,19 +18,38 @@ import math
 import re
 from typing import Any, Dict, List, Set, Tuple
 
+from common import safe_filename as _safe_filename
+
 
 # ─────────────────────────────────────────────
 # 常量
 # ─────────────────────────────────────────────
 
 _STOPWORDS: Set[str] = {
+    # 中文停用词（合并自 kb_text / research_profiler / project_kb 三处定义）
     "的", "了", "是", "在", "我", "有", "和", "就", "不", "人",
     "都", "一", "一个", "上", "也", "很", "到", "说", "要", "去",
     "你", "会", "着", "没有", "看", "好", "自己", "这", "那",
     "可以", "他", "她", "它", "们", "与", "及", "或", "但是", "因为",
     "所以", "如果", "则", "而", "于", "以", "为", "之", "其", "将",
-    "被", "把", "让", "向", "从", "到", "对", "关于", "根据", "按照",
+    "被", "把", "让", "向", "从", "对", "关于", "根据", "按照",
     "我们", "这个", "那个", "什么", "怎么", "如何", "为什么",
+    "个", "等", "可", "能", "给", "还", "你们", "他们",
+    "还是", "或者", "以及",
+    # 英文停用词（合并自 research_profiler / project_kb）
+    "the", "a", "an", "is", "are", "was", "were", "be", "been", "being",
+    "have", "has", "had", "do", "does", "did", "will", "would", "could",
+    "should", "may", "might", "must", "shall", "can", "need", "dare",
+    "of", "to", "in", "for", "on", "with", "at", "by", "from", "as",
+    "into", "through", "during", "before", "after", "above", "below",
+    "between", "under", "again", "further", "then", "once", "here",
+    "there", "when", "where", "why", "how", "all", "any", "both", "each",
+    "few", "more", "most", "other", "some", "such", "no", "nor", "not",
+    "only", "own", "same", "so", "than", "too", "very", "just", "and",
+    "but", "if", "or", "because", "until", "while", "about", "against",
+    "this", "that", "these", "those", "i", "me", "my", "myself", "we",
+    "our", "you", "your", "he", "him", "his", "she", "her", "it", "its",
+    "they", "them", "their",
 }
 
 
@@ -155,13 +174,6 @@ def _compute_idf(doc_count: int, term_doc_freq: Dict[str, int]) -> Dict[str, flo
     for term, freq in term_doc_freq.items():
         idf[term] = math.log(doc_count / (freq + 1)) + 1
     return idf
-
-
-def _safe_filename(name: str) -> str:
-    """将概念名转换为安全的文件名（保留中文）。"""
-    # 移除危险字符，但保留中文
-    safe = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "", name).strip()
-    return safe if safe else "untitled"
 
 
 # ─────────────────────────────────────────────

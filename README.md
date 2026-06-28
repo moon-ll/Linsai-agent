@@ -149,12 +149,9 @@ LinSai-CoPilot/
 ├── docs/                      # 项目文档与报告
 │   ├── README.md              # 本目录说明与文件清单
 │   ├── CLAUDE-CLI-ADMIN.md    # Claude CLI 人工管理指南
-│   ├── IMPLEMENTATION-PLAN-v2.1.0.md   # 工具型协作者计划（已实现，归档）
-│   ├── IMPLEMENTATION-PLAN-v3.0.0.md   # 旧版计划（已废弃）
-│   ├── DEEP-AUDIT-REPORT-v1.7.2.md     # 深度评估报告（归档）
-│   ├── FUNCTIONAL-TEST-REPORT-v1.7.2.md # 功能测试报告（归档）
+│   ├── cognitive-loop-plan.md # v3.4 认知闭环设计稿
 │   ├── deepxiv-knowledge-workflow.md   # deepxiv 知识库流水线设计
-│   ├── solid-HHG-*.md         # 固体 HHG 调研报告（3 份）
+│   ├── archive/               # 历史版本文档归档
 │   └── prompts/               # LLM prompt 模板
 │
 ├── scripts/                   # 工具脚本（Python 3，零依赖，48 个主脚本 + 子包）
@@ -178,7 +175,6 @@ LinSai-CoPilot/
 │   ├── external_fetcher.py    # 统一信息获取
 │   ├── learning_engine.py     # 自主学习核心
 │   ├── quality_evaluator.py   # 质量评估引擎
-│   ├── learning_quality_tracker.py  # 交互质量追踪
 │   ├── logger.py              # 统一日志系统
 │   ├── chat_archive.py        # 聊天记录归档浏览器
 │   ├── memory_reflow.py       # 认知回流引擎（hermes→记忆提炼）
@@ -190,10 +186,9 @@ LinSai-CoPilot/
 │   ├── project_memory.py      # v3.5 课题记忆（对话/片段/决策/核心记忆）
 │   ├── project_context.py     # v3.5 课题上下文（@语法/跨课题检索）
 │   ├── project_workflow.py    # v3.5 课题工作流（规划→执行→验收→总结）
-│   ├── web_server.py          # Web 服务器（HTTP + SSE + API路由）
+│   ├── web_server.py          # Web 服务器聚合器（Mixin 架构，321 行 + 10 路由 Mixin）
 │   ├── backup_manager.py      # 数据备份/恢复
 │   ├── upgrade.py             # 安全升级流程
-│   ├── version.py             # 版本号集中读取
 │   ├── self_test.py           # 内测统一入口
 │   ├── deepxiv_knowledge/     # deepxiv 论文获取流水线（8 模块）
 │   ├── wiki_regenerator/      # wiki 报告重建（4 模块）
@@ -249,7 +244,7 @@ LinSai-CoPilot/
 | **任务看板增强** | ✅ | 三列看板、进度条、子任务、里程碑 |
 | **子代理调用** | ✅ | 5 工具（file_read/write, calc, task_create, knowledge_query），安全白名单 |
 | **智能知识库** | ✅ | raw/wiki 分层、知识图谱、交互触发生长、林赛视角 |
-| **内测系统** | ✅ | 88 检查点自动化回归测试（影子用户），零依赖轻量框架 |
+| **内测系统** | ✅ | 137+207 检查点自动化回归测试（单元+Web API），零依赖轻量框架 |
 | **深度评估** | ✅ | 9 维度架构稳定性审查，风险评分 150/1000 |
 | **Obsidian 兼容** | ✅ | 双向链接 `[[WikiLink]]`、frontmatter、Vault 配置、模板 |
 | **自主学习引擎** | ✅ | arXiv/联网检索/raw 自动蒸馏、质量评估、概念整合、成本安全 |
@@ -304,7 +299,7 @@ LinSai-CoPilot/
 | Phase 3 | 主动感知 + 自主提醒 + 模式识别 | ✅ 完成 |
 | Phase 4 | 文档协作 + 代码协作 + Agora集成 + Web界面 | ✅ 完成 |
 | Phase 5 | Token统计 + 技能系统 + **知识库精细化** + 子代理调用 | ✅ 完成 |
-| Phase 5.5 | **内测系统** — 影子用户自动化回归测试（88 检查点） | ✅ 完成 |
+| Phase 5.5 | **内测系统** — 影子用户自动化回归测试（137+207 检查点） | ✅ 完成 |
 | Phase 6 | **自主学习引擎** — 感知/蒸馏/评估/调度/展示（5 阶段） | ✅ 完成 |
 | Phase 7 | 性能优化 + 生态扩展 | ⏳ 待开发 |
 | Phase 8 | **工具协作者（v2.1.0）** — run_command/hermes_chat 工具、人格软链接、工具引擎接入 | ✅ 完成 |
@@ -345,5 +340,5 @@ LinSai-CoPilot/
 
 ---
 
-*版本：3.5.0*  
-*日期：2026-06-27*
+*版本：3.5.8*  
+*日期：2026-06-28*

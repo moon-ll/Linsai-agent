@@ -134,17 +134,6 @@ async function loadLLMStatus() {
   }
 }
 
-async function switchProvider(provider) {
-  try {
-    await apiPost('/api/llm-provider', { provider });
-    showToast(`已切换到 ${provider}`);
-    loadLLMStatus();
-  } catch (e) {
-    console.error('切换失败:', e);
-    showToast('切换失败', 'error');
-  }
-}
-
 // ============================================
 // 历史消息提示
 // ============================================

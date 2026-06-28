@@ -404,9 +404,13 @@ def fetch_web_search(query: str, max_results: int = 5) -> List[Dict[str, Any]]:
     return []
 
 
-# 保留旧接口以兼容
+# 兼容接口：learning_engine.py 仍在调用，保留供 Wikipedia 词条蒸馏使用
 def fetch_wikipedia(title: str, lang: str = "en") -> Optional[Dict[str, Any]]:
-    """【已弃用】请使用 fetch_web_search()。保留此接口以兼容现有代码。"""
+    """获取 Wikipedia 词条摘要（封装 _fetch_wikipedia_fallback，标记 source）。
+
+    learning_engine.py 的概念蒸馏流程调用此接口获取百科释义。
+    如需多源联网检索，请使用 fetch_web_search()。
+    """
     result = _fetch_wikipedia_fallback(title, lang)
     if result:
         result["source"] = "wikipedia"

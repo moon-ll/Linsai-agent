@@ -21,7 +21,7 @@
 | `nsfc-decisions.json` | NSFC 决策记录：基金申请相关关键决策 |
 | `alias-candidates.json` | 别名候选：从对话学习、待审核的同义词 |
 | `chat-archive-index.json` | 聊天归档索引：历史会话检索元数据 |
-| `snippets/` | 记忆片段目录：存储具体的 YAML Front Matter + Markdown 记忆内容 |
+| `snippets/` | 记忆片段目录（当前为空，实际片段存储在 `long-term-memory.json` 的 snippets 字段中） |
 | `usage/` | Token 用量统计目录：按日统计用量，含 `usage.json` |
 
 ## user-profile.json 结构
@@ -91,5 +91,5 @@
 
 ---
 
-*版本：3.5.0*  
-*日期：2026-06-27*
+*版本：3.5.8*  
+*日期：2026-06-28*

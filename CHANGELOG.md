@@ -1,5 +1,34 @@
 # 变更记录
 
+## v3.5.9 - 2026-06-28 冗余内容清理
+
+### 后端死代码清理
+- **删除 version.py**：经确认完全未被任何文件 import，upgrade.py 自行实现了 read_version()
+- **合并 _safe_filename**：kb_text.py/kb_capture.py 的本地定义改为从 common.py 导入
+- **合并 _STOPWORDS**：kb_text.py（权威版）、research_profiler.py、project_kb.py 三处重复定义合并为 kb_text 统一导出
+- **修正 fetch_wikipedia 弃用标注**：learning_engine.py 仍在调用，移除"【已弃用】"标记
+
+### 前端死代码清理
+- **删除 ~230 行死 CSS**：19 类未使用规则（旧 KB 列表/健康/统计视图、旧任务优先级徽标、旧进度条、旧技能行等）
+- **删除 2 个死 JS 函数**：settings.js switchProvider()、skill.js getSelectedSkillNames()
+- **移除死 HTML 元素**：context-info/context-panel 从未被 JS 引用
+- **修复 skill-count ID 不匹配 bug**：skill.js 查找 'skill-count' 但 HTML 定义 'skill-active-count'，技能激活计数从不更新
+
+### 数据残留清理
+- 删除 3 个空测试会话目录（messages.json 为空）
+- 删除 2 对重复 backlog 任务文件
+- 清理 graph.json 中 2 个孤儿节点（测试概念/门面测试）和 1 条关联边
+- git rm --cached knowledge/raw/checkpoint.json（.gitignore 已忽略但仍被追踪）
+- 删除 59 个 __pycache__ 缓存文件
+- 删除空 sessions/archived/ 目录、1 个旧备份、6 个旧日志
+
+### 文档清理
+- 归档 stability-ux-plan.md、kb-smart-management-plan.md 到 docs/archive/
+- 更新 4 个 README：版本号 3.5.0→3.5.8、统计数据修正（论文 61→106、图谱 27→141 节点）、路径修正（solid-HHG 从 docs/ 到 raw/notes/）、删除不存在的文件引用（version.py/learning_quality_tracker.py）、行数修正（web_server.py 2544→321、knowledge_base.py 1780→534）
+
+### 验证
+- 137/137 单元测试 + 207/207 Web API 测试全量通过
+
 ## v3.5.8 - 2026-06-28 第三轮安全修复与质量优化
 
 ### P0 灾难性漏洞修复
