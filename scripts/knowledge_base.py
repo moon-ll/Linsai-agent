@@ -66,6 +66,7 @@ if str(_SCRIPTS_DIR) not in _sys.path:
     _sys.path.insert(0, str(_SCRIPTS_DIR))
 
 from common import now_utc as _now_utc
+import common as _cms
 
 # 日志接入（可选，logger 模块不存在时降级为静默）
 try:
@@ -244,8 +245,7 @@ def _load_growth_log() -> List[Dict[str, Any]]:
 
 def _save_growth_log(log: List[Dict[str, Any]]) -> None:
     """保存生长日志。"""
-    with open(GROWTH_LOG_PATH, "w", encoding="utf-8") as f:
-        json.dump(log, f, ensure_ascii=False, indent=2)
+    _cms.save_json(GROWTH_LOG_PATH, log)
 
 
 def log_growth(action: str, target: str, trigger: str, reason: str = "") -> None:
@@ -303,7 +303,7 @@ def get_growth_candidates() -> List[Dict[str, Any]]:
 # ─────────────────────────────────────────────
 
 def distill_raw_to_wiki(raw_rel_path: str,
-                        target_wiki: Optional[str] = None) -> Optional[str]:
+                        target_wiki: Optional[str] = None) -> Optional[Tuple[str, str]]:
     """将 raw 文件提炼为林赛视角的 wiki 页面。
 
     注意：此函数生成提炼 prompt，实际 LLM 调用由 copilot_engine 完成。

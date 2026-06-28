@@ -53,7 +53,7 @@ function appendMessage(role, rawContent, timestamp, animate = true, msgId = null
 
 function scrollToBottom() {
   const container = document.getElementById('messages');
-  container.scrollTop = container.scrollHeight;
+  if (container) container.scrollTop = container.scrollHeight;
 }
 
 // ============================================
@@ -81,10 +81,12 @@ async function sendMessage(content) {
   }
 
   appendMessage('user', content);
-  document.getElementById('message-input').value = '';
+  const _msgInput = document.getElementById('message-input');
+  if (_msgInput) _msgInput.value = '';
 
   State.isStreaming = true;
-  document.getElementById('typing-indicator').style.display = 'flex';
+  const _typingIndicator = document.getElementById('typing-indicator');
+  if (_typingIndicator) _typingIndicator.style.display = 'flex';
   updateStatus('林赛正在思考…');
 
   const assistantDiv = appendMessage('assistant', '', null, true);
@@ -141,7 +143,8 @@ async function sendMessage(content) {
         console.warn('[SSE] 流超时，强制结束');
         try { reader.cancel(); } catch (_) {}
         State.isStreaming = false;
-        document.getElementById('typing-indicator').style.display = 'none';
+        const _ti = document.getElementById('typing-indicator');
+        if (_ti) _ti.style.display = 'none';
         updateStatus('响应超时');
         showToast('林赛响应超时，请重试', 'error');
       }
@@ -234,7 +237,8 @@ async function sendMessage(content) {
     if (streamTimeoutId) clearTimeout(streamTimeoutId);
     State.isStreaming = false;
     State.currentReader = null;  // P1-10: 清除 reader 引用
-    document.getElementById('typing-indicator').style.display = 'none';
+    const _tiFinally = document.getElementById('typing-indicator');
+    if (_tiFinally) _tiFinally.style.display = 'none';
   }
 }
 
@@ -247,13 +251,13 @@ async function uploadFiles(files) {
   const progressBar = document.getElementById('upload-progress');
   const progressFill = document.getElementById('progress-fill');
   const progressText = document.getElementById('progress-text');
-  progressBar.style.display = 'flex';
+  if (progressBar) progressBar.style.display = 'flex';
 
   for (let i = 0; i < files.length; i++) {
     const file = files[i];
     const pct = Math.round(((i) / files.length) * 100);
-    progressFill.style.width = pct + '%';
-    progressText.textContent = pct + '%';
+    if (progressFill) progressFill.style.width = pct + '%';
+    if (progressText) progressText.textContent = pct + '%';
 
     try {
       const isText = file.type.startsWith('text/') || file.name.endsWith('.md') || file.name.endsWith('.txt');
@@ -300,11 +304,11 @@ async function uploadFiles(files) {
     }
   }
 
-  progressFill.style.width = '100%';
-  progressText.textContent = '100%';
+  if (progressFill) progressFill.style.width = '100%';
+  if (progressText) progressText.textContent = '100%';
   setTimeout(() => {
-    progressBar.style.display = 'none';
-    progressFill.style.width = '0%';
+    if (progressBar) progressBar.style.display = 'none';
+    if (progressFill) progressFill.style.width = '0%';
   }, 800);
 }
 
@@ -344,8 +348,10 @@ function renderReferenceList(refs) {
       const path = el.dataset.path;
       if (path) {
         const input = document.getElementById('message-input');
-        input.value = `/read ${path}`;
-        input.focus();
+        if (input) {
+          input.value = `/read ${path}`;
+          input.focus();
+        }
       }
     });
   });
@@ -394,7 +400,8 @@ async function handleAgoraExport() {
   }
 
   try {
-    document.getElementById('confirm-agora').textContent = '导出中…';
+    const _confirmAgora = document.getElementById('confirm-agora');
+    if (_confirmAgora) _confirmAgora.textContent = '导出中…';
     const data = await apiPost('/api/agora', {
       session_id: State.currentSessionId,
       topic: '',
@@ -406,7 +413,8 @@ async function handleAgoraExport() {
     console.error('Agora 导出失败:', e);
     showToast(`导出失败: ${e.message}`, 'error');
   } finally {
-    document.getElementById('confirm-agora').textContent = '导出';
+    const _confirmAgoraFinally = document.getElementById('confirm-agora');
+    if (_confirmAgoraFinally) _confirmAgoraFinally.textContent = '导出';
   }
 }
 
@@ -417,13 +425,14 @@ let editingMsgId = null;
 
 function openEditMessage(msgId, content) {
   editingMsgId = msgId;
-  document.getElementById('edit-message-content').value = content;
+  const _editInput = document.getElementById('edit-message-content');
+  if (_editInput) _editInput.value = content;
   openModal('edit-message-modal');
 }
 
 async function saveEditMessage() {
   if (!editingMsgId || !State.currentSessionId) return;
-  const newContent = document.getElementById('edit-message-content').value.trim();
+  const newContent = document.getElementById('edit-message-content')?.value?.trim() || '';
   if (!newContent) {
     showToast('内容不能为空', 'warning');
     return;

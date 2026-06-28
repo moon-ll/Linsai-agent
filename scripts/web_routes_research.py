@@ -27,9 +27,9 @@ import project_context as pctx
 
 
 # ---------------------------------------------------------------------------
-# 路由表（字符串模式，保留原格式不动）
+# 路由表（P2: 预编译正则，与其他路由模块一致）
 # ---------------------------------------------------------------------------
-_RESEARCH_ROUTES = [
+_RESEARCH_ROUTES_RAW = [
     # GET
     ("GET", r"^/api/research/projects$", "_rg_get_projects"),
     ("GET", r"^/api/research/projects/([^/]+)$", "_rg_get_project"),
@@ -73,6 +73,9 @@ _RESEARCH_ROUTES = [
     ("DELETE", r"^/api/research/projects/([^/]+)$", "_rg_delete_project"),
 ]
 
+# 预编译正则
+_RESEARCH_ROUTES = [(m, re.compile(p), h) for m, p, h in _RESEARCH_ROUTES_RAW]
+
 
 # ---------------------------------------------------------------------------
 # Mixin
@@ -82,10 +85,10 @@ class ResearchRoutesMixin:
 
     def _dispatch_research_routes(self, method, path, parsed, body=None):
         """课题指导模块路由表分发。返回 True 表示已处理。"""
-        for m, pattern, handler_name in _RESEARCH_ROUTES:
+        for m, compiled_re, handler_name in _RESEARCH_ROUTES:
             if m != method:
                 continue
-            match = re.match(pattern, path)
+            match = compiled_re.match(path)
             if match:
                 handler = getattr(self, handler_name, None)
                 if handler:

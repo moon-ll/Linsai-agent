@@ -53,8 +53,10 @@ from web_base import (
     _release_kb_busy,
     _bg_tasks,
     _bg_tasks_lock,
+    _safe_join,
 )
 from common import lazy_load
+import common as _cms
 
 import knowledge_base as kb
 import kb_importer as ki
@@ -135,7 +137,13 @@ class KbRoutesMixin:
 
     def _kb_wiki_get(self, parsed, body=None, wiki_rel=None):
         """读取 wiki 页"""
-        page = kb.get_wiki_page(f"wiki/{wiki_rel}")
+        try:
+            safe_path = _safe_join(kb.KNOWLEDGE_DIR, "wiki", wiki_rel)
+        except ValueError:
+            self._send_json({"error": "非法路径"}, 400)
+            return
+        wiki_rel_safe = str(safe_path.relative_to(kb.KNOWLEDGE_DIR.resolve() / "wiki"))
+        page = kb.get_wiki_page(f"wiki/{wiki_rel_safe}")
         if page:
             self._send_json(page)
         else:
@@ -314,8 +322,7 @@ class KbRoutesMixin:
         aliases = body.get("aliases", {})
         aliases_path = web_base._PROJECT_ROOT / "knowledge" / "aliases.json"
         try:
-            with open(aliases_path, "w", encoding="utf-8") as f:
-                json.dump(aliases, f, ensure_ascii=False, indent=2)
+            _cms.save_json(aliases_path, aliases)
             self._send_json({"success": True, "aliases": aliases})
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
@@ -425,7 +432,11 @@ class KbRoutesMixin:
 
     def _kb_wiki_delete(self, parsed, body=None, wiki_rel=None):
         """软删除 wiki 页（移到 .trash/）"""
-        wiki_full = kb.KNOWLEDGE_DIR / f"wiki/{wiki_rel}"
+        try:
+            wiki_full = _safe_join(kb.KNOWLEDGE_DIR, "wiki", wiki_rel)
+        except ValueError:
+            self._send_json({"error": "非法路径"}, 400)
+            return
         if not wiki_full.exists():
             self._send_json({"error": "Wiki 页面不存在"}, 404)
             return
@@ -438,7 +449,8 @@ class KbRoutesMixin:
         try:
             wiki_full.rename(trash_path)
             # 清理图谱
-            page = kb.get_wiki_page(f"wiki/{wiki_rel}")
+            wiki_rel_safe = str(wiki_full.relative_to(kb.KNOWLEDGE_DIR.resolve() / "wiki"))
+            page = kb.get_wiki_page(f"wiki/{wiki_rel_safe}")
             title = page["frontmatter"].get("title", "") if page else ""
             if title:
                 kb._remove_graph_node(title)

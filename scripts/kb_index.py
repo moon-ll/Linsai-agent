@@ -31,6 +31,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from common import now_utc as _now_utc
+import common as _cms
 from paths import INDEX_PATH, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR
 from kb_text import parse_frontmatter, _chunk_document, _tokenize, _compute_idf
 from kb_graph import get_graph_summary, get_related_concepts
@@ -295,8 +296,7 @@ def build_index(force: bool = False) -> Dict[str, Any]:
         "graph_summary": graph_summary,
     }
 
-    with open(INDEX_PATH, "w", encoding="utf-8") as f:
-        json.dump(index_data, f, ensure_ascii=False, indent=2)
+    _cms.save_json(INDEX_PATH, index_data)
 
     if _log:
         _log.info(f"索引构建完成: 文档={len(docs)}, 词项={len(inverted)}, 图谱节点={graph_summary.get('node_count', 0)}")
@@ -542,3 +542,138 @@ def add_document(path: str, content: str) -> Dict[str, Any]:
     if _log:
         _log.info(f"文档已添加到知识库: {path} → raw/notes/")
     return {"success": True, "path": str(target.relative_to(KNOWLEDGE_DIR))}
+
+
+# ─────────────────────────────────────────────
+# 自检
+# ─────────────────────────────────────────────
+
+def _self_check() -> bool:
+    """自检：验证索引构建 / TF-IDF 搜索 / 索引状态 / raw 文件列表。
+
+    使用临时目录隔离，patch 路径常量并注入门面依赖桩。
+    """
+    import tempfile
+    import shutil
+
+    print("=" * 50)
+    print("◐ kb_index 自检")
+    print("=" * 50)
+
+    passed = 0
+    total = 0
+    tmp_dir = tempfile.mkdtemp(prefix="kb_index_test_")
+    tmp_kb = Path(tmp_dir) / "knowledge"
+    (tmp_kb / "raw" / "papers").mkdir(parents=True, exist_ok=True)
+    (tmp_kb / "raw" / "notes").mkdir(parents=True, exist_ok=True)
+    (tmp_kb / "wiki" / "concepts").mkdir(parents=True, exist_ok=True)
+
+    # 保存原始路径常量，测试后恢复
+    global INDEX_PATH, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR, _ensure_dirs, log_growth, _load_aliases, _log
+    _orig = {
+        "INDEX_PATH": INDEX_PATH, "KNOWLEDGE_DIR": KNOWLEDGE_DIR,
+        "RAW_DIR": RAW_DIR, "WIKI_DIR": WIKI_DIR,
+    }
+    INDEX_PATH = tmp_kb / "index.json"
+    KNOWLEDGE_DIR = tmp_kb
+    RAW_DIR = tmp_kb / "raw"
+    WIKI_DIR = tmp_kb / "wiki"
+
+    # patch kb_graph 路径（build_index 调用 get_graph_summary）
+    import kb_graph as _kg
+    _orig_kg_graph = _kg.GRAPH_PATH
+    _kg.GRAPH_PATH = tmp_kb / "graph.json"
+
+    # 保存原始注入依赖，测试后恢复
+    _orig_deps = {
+        "_ensure_dirs": _ensure_dirs, "log_growth": log_growth,
+        "_load_aliases": _load_aliases, "_log": _log,
+    }
+
+    try:
+        # 注入门面依赖桩
+        def _stub_ensure_dirs():
+            for d in [RAW_DIR / "papers", RAW_DIR / "notes", RAW_DIR / "webclips"]:
+                d.mkdir(parents=True, exist_ok=True)
+            for t in ["concepts", "methods", "people", "papers", "projects"]:
+                (WIKI_DIR / t).mkdir(parents=True, exist_ok=True)
+
+        _ensure_dirs = _stub_ensure_dirs
+        log_growth = lambda *a, **kw: None
+        _load_aliases = lambda: {}
+        _log = None
+
+        # 准备测试文件
+        (RAW_DIR / "notes" / "test_note.md").write_text(
+            "固体高次谐波产生 HHG 相位匹配条件研究笔记", encoding="utf-8")
+        (WIKI_DIR / "concepts" / "固体高次谐波.md").write_text(
+            '---\ntitle: "固体高次谐波"\ntype: "concepts"\ngrowth_stage: "mature"\ntags: ["HHG"]\n---\n'
+            '固体高次谐波产生是强场超快光学的重要课题', encoding="utf-8")
+
+        # [1/5] 索引构建
+        total += 1
+        idx = build_index(force=True)
+        docs = idx.get("documents", {})
+        if len(docs) >= 2 and "inverted" in idx:
+            passed += 1
+            print(f"  [1/{total}] ✓ 索引构建: {len(docs)} 文档, {len(idx['inverted'])} 词项")
+        else:
+            print(f"  [1/{total}] ✗ 索引构建: docs={len(docs)}")
+
+        # [2/5] TF-IDF 搜索
+        total += 1
+        results = search("固体高次谐波", top_k=3)
+        if len(results) >= 1 and results[0]["score"] > 0:
+            passed += 1
+            print(f"  [2/{total}] ✓ 搜索: 命中 {len(results)} 条 (top score={results[0]['score']:.2f})")
+        else:
+            print(f"  [2/{total}] ✗ 搜索: results={len(results)}")
+
+        # [3/5] 轻量搜索
+        total += 1
+        light = search_light("HHG", top_k=2)
+        if isinstance(light, list) and all("summary" in r for r in light):
+            passed += 1
+            print(f"  [3/{total}] ✓ 轻量搜索: {len(light)} 条 (含 summary)")
+        else:
+            print(f"  [3/{total}] ✗ 轻量搜索: light={light}")
+
+        # [4/5] 索引状态
+        total += 1
+        status = get_index_status()
+        if status.get("indexed") and status.get("raw_count", 0) >= 1:
+            passed += 1
+            print(f"  [4/{total}] ✓ 索引状态: raw={status['raw_count']}, wiki={status.get('wiki_count', 0)}")
+        else:
+            print(f"  [4/{total}] ✗ 索引状态: status={status}")
+
+        # [5/5] raw 文件列表
+        total += 1
+        raw_files = list_raw_files()
+        if len(raw_files) >= 1 and raw_files[0]["name"] == "test_note.md":
+            passed += 1
+            print(f"  [5/{total}] ✓ raw 列表: {len(raw_files)} 文件")
+        else:
+            print(f"  [5/{total}] ✗ raw 列表: {raw_files}")
+    finally:
+        # 恢复路径常量
+        INDEX_PATH = _orig["INDEX_PATH"]
+        KNOWLEDGE_DIR = _orig["KNOWLEDGE_DIR"]
+        RAW_DIR = _orig["RAW_DIR"]
+        WIKI_DIR = _orig["WIKI_DIR"]
+        _kg.GRAPH_PATH = _orig_kg_graph
+        # 恢复注入依赖
+        _ensure_dirs = _orig_deps["_ensure_dirs"]
+        log_growth = _orig_deps["log_growth"]
+        _load_aliases = _orig_deps["_load_aliases"]
+        _log = _orig_deps["_log"]
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    ok = passed == total
+    print(f"\n{'✓' if ok else '✗'} kb_index: {passed}/{total} 通过")
+    return ok
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(0 if _self_check() else 1)

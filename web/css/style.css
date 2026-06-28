@@ -44,6 +44,15 @@
   --text-base: 0.85rem;
   --text-md: 0.95rem;
   --text-lg: 1.1rem;
+  /* P2: 语义色变量（badge/priority） */
+  --urgent-bg: #fee2e2; --urgent-text: #dc2626;
+  --high-bg: #fef3c7; --high-text: #d97706;
+  --medium-bg: #dbeafe; --medium-text: #2563eb;
+  --low-bg: #f3f4f6; --low-text: #6b7280;
+  --seedling-bg: #e8f5e9; --seedling-text: #2e7d32;
+  --growing-bg: #e3f2fd; --growing-text: #1565c0;
+  --mature-bg: #ede7f6; --mature-text: #6a1b9a;
+  --raw-badge-bg: #fff3e0; --raw-badge-text: #e65100;
 }
 
 /* ---- 深色主题 ---- */
@@ -76,6 +85,15 @@
   --code-text: #cdd6f4;
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  /* P2: 语义色变量（深色主题） */
+  --urgent-bg: #4a1e1e; --urgent-text: #f87171;
+  --high-bg: #4a3a1e; --high-text: #fbbf24;
+  --medium-bg: #1e3a5f; --medium-text: #60a5fa;
+  --low-bg: #2a2a3a; --low-text: #9ca3af;
+  --seedling-bg: #1b3a1c; --seedling-text: #81c784;
+  --growing-bg: #0d2b3e; --growing-text: #64b5f6;
+  --mature-bg: #2a1b3d; --mature-text: #ba68c8;
+  --raw-badge-bg: #3e2723; --raw-badge-text: #ffab91;
 }
 
 /* ---- 重置与基础 ---- */
@@ -1694,10 +1712,10 @@ body {
   font-weight: 500;
 }
 
-.task-priority-urgent { background: #fee2e2; color: #dc2626; }
-.task-priority-high   { background: #fef3c7; color: #d97706; }
-.task-priority-medium { background: #dbeafe; color: #2563eb; }
-.task-priority-low    { background: #f3f4f6; color: #6b7280; }
+.task-priority-urgent { background: var(--urgent-bg); color: var(--urgent-text); }
+.task-priority-high   { background: var(--high-bg); color: var(--high-text); }
+.task-priority-medium { background: var(--medium-bg); color: var(--medium-text); }
+.task-priority-low    { background: var(--low-bg); color: var(--low-text); }
 
 .task-card-progress {
   display: flex;
@@ -1851,10 +1869,10 @@ body {
   margin-left: 6px;
 }
 
-.kb-badge-seedling { background: #e8f5e9; color: #2e7d32; }
-.kb-badge-growing { background: #e3f2fd; color: #1565c0; }
-.kb-badge-mature { background: #ede7f6; color: #6a1b9a; }
-.kb-badge-raw { background: #fff3e0; color: #e65100; }
+.kb-badge-seedling { background: var(--seedling-bg); color: var(--seedling-text); }
+.kb-badge-growing { background: var(--growing-bg); color: var(--growing-text); }
+.kb-badge-mature { background: var(--mature-bg); color: var(--mature-text); }
+.kb-badge-raw { background: var(--raw-badge-bg); color: var(--raw-badge-text); }
 
 .kb-section-title {
   font-size: 0.85rem;
@@ -2236,17 +2254,9 @@ body {
   font-size: 0.85rem;
 }
 
-/* ── 深色模式适配 ── */
-[data-theme="dark"] .kb-badge-seedling { background: #1b3a1c; color: #81c784; }
-[data-theme="dark"] .kb-badge-growing { background: #0d2b3e; color: #64b5f6; }
-[data-theme="dark"] .kb-badge-mature { background: #2a1b3d; color: #ba68c8; }
-[data-theme="dark"] .kb-badge-raw { background: #3e2723; color: #ffab91; }
+/* P2: badge/priority 深色模式已通过 CSS 变量自动切换，无需重复覆盖 */
 
-/* P3-1: task-priority 深色模式适配 */
-[data-theme="dark"] .task-priority-urgent { background: #4a1e1e; color: #f87171; }
-[data-theme="dark"] .task-priority-high   { background: #4a3a1e; color: #fbbf24; }
-[data-theme="dark"] .task-priority-medium { background: #1e3a5f; color: #60a5fa; }
-[data-theme="dark"] .task-priority-low    { background: #2a2a3a; color: #9ca3af; }
+/* P3-1: task-priority 深色模式适配（已通过变量自动切换） */
 
 /* P2-20: 深色模式 placeholder 对比度提升 (WCAG AA) */
 [data-theme="dark"] input::placeholder,
@@ -2350,7 +2360,6 @@ body {
 .btn-danger { border-color: var(--error-color); color: var(--error-color); }
 .btn-accent { border-color: var(--accent-color); color: var(--accent-color); }
 .btn-success { border-color: var(--success-color); color: var(--success-color); }
-.btn-primary { border: none; background: var(--accent-color); color: #fff; }
 .doc-item {
   padding: 8px;
   background: var(--bg-tertiary);

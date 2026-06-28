@@ -35,6 +35,22 @@ _SCRIPT_DIR = Path(__file__).parent.resolve()
 _PROJECT_ROOT = _SCRIPT_DIR.parent.resolve()
 _WEB_DIR = _PROJECT_ROOT / "web"
 
+
+def _safe_join(base: Path, *parts: str) -> Path:
+    """安全拼接路径，确保结果在 base 目录内，防止路径遍历。
+
+    用法: _safe_join(_PROJECT_ROOT / "knowledge", "wiki", wiki_rel)
+    返回: 拼接后的绝对路径
+    异常: ValueError — 如果结果逃逸出 base 目录
+    """
+    joined = base.joinpath(*parts).resolve()
+    base_resolved = base.resolve()
+    try:
+        joined.relative_to(base_resolved)
+    except ValueError:
+        raise ValueError(f"路径遍历攻击: {parts} 逃逸出 {base_resolved}")
+    return joined
+
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
@@ -211,12 +227,17 @@ class BaseRequestHandler:
         self.wfile.write(data)
 
     def _read_json_body(self) -> Dict[str, Any]:
-        """读取请求体并解析为 JSON。"""
+        """读取请求体并解析为 JSON。损坏的 JSON 返回空字典。"""
         length = int(self.headers.get("Content-Length", 0))
         if length == 0:
             return {}
         body = self.rfile.read(length).decode("utf-8")
-        return json.loads(body)
+        try:
+            return json.loads(body)
+        except (json.JSONDecodeError, ValueError) as e:
+            if _log:
+                _log.warning("JSON 解析失败: %s", e)
+            return {}
 
     def do_OPTIONS(self) -> None:
         """处理 CORS 预检请求。"""
@@ -225,3 +246,74 @@ class BaseRequestHandler:
         self.send_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type")
         self.end_headers()
+
+
+# ---------------------------------------------------------------------------
+# 自检
+# ---------------------------------------------------------------------------
+def _self_check() -> bool:
+    """自检：验证 _safe_join 路径拼接/遍历拦截 + split_response_stream 切分。"""
+    import tempfile
+    import shutil
+
+    print("=" * 50)
+    print("◐ web_base 自检")
+    print("=" * 50)
+
+    passed = 0
+    total = 0
+    tmp_dir = tempfile.mkdtemp(prefix="web_base_test_")
+
+    try:
+        # [1/4] _safe_join 正常拼接
+        total += 1
+        base = Path(tmp_dir)
+        joined = _safe_join(base, "subdir", "file.txt")
+        if str(joined).startswith(str(base.resolve())):
+            passed += 1
+            print(f"  [1/{total}] ✓ 正常拼接: {joined.name}")
+        else:
+            print(f"  [1/{total}] ✗ 正常拼接: {joined}")
+
+        # [2/4] _safe_join 路径遍历拦截
+        total += 1
+        try:
+            _safe_join(base, "../../etc", "passwd")
+            print(f"  [2/{total}] ✗ 路径遍历: 未抛出 ValueError")
+        except ValueError:
+            passed += 1
+            print(f"  [2/{total}] ✓ 路径遍历拦截: 抛出 ValueError")
+        except Exception as e:
+            print(f"  [2/{total}] ✗ 路径遍历: 抛出 {type(e).__name__} 而非 ValueError")
+
+        # [3/4] split_response_stream 句子切分
+        total += 1
+        text = "第一句话。第二句话！第三句话？"
+        chunks = split_response_stream(text)
+        if len(chunks) >= 3:
+            passed += 1
+            print(f"  [3/{total}] ✓ 句子切分: {len(chunks)} 块")
+        else:
+            print(f"  [3/{total}] ✗ 句子切分: chunks={chunks}")
+
+        # [4/4] split_response_stream 代码块保留
+        total += 1
+        text_with_code = "说明如下。\n```python\nprint('hello')\n```\n结束。"
+        chunks = split_response_stream(text_with_code)
+        has_code = any("```" in c for c in chunks)
+        if has_code and len(chunks) >= 2:
+            passed += 1
+            print(f"  [4/{total}] ✓ 代码块保留: {len(chunks)} 块 (含代码块)")
+        else:
+            print(f"  [4/{total}] ✗ 代码块保留: chunks={chunks}")
+    finally:
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    ok = passed == total
+    print(f"\n{'✓' if ok else '✗'} web_base: {passed}/{total} 通过")
+    return ok
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(0 if _self_check() else 1)

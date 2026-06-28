@@ -279,6 +279,54 @@ class WebApiSuite(TestSuite):
         code, _ = c.get("/api/providers/current")
         self.assert_status(code, 200, "GET 当前 provider")
 
+        # === v3.5 课题指导路由（research）===
+        code, data = c.get("/api/research/projects")
+        self.assert_status(code, 200, "GET /api/research/projects 列表")
+        self.assert_json_field(data, "projects", "research 列表含 projects 字段")
+
+        code, data = c.post("/api/research/projects", {
+            "name": "WebAPI自检课题", "goal": "验证课题路由",
+        })
+        self.assert_status(code, 200, "POST /api/research/projects 创建")
+        research_pid = data.get("project_id", "") if isinstance(data, dict) else ""
+        self.assert_true(bool(research_pid), "research 课题ID非空")
+
+        if research_pid:
+            code, data = c.get(f"/api/research/projects/{research_pid}")
+            self.assert_status(code, 200, "GET /api/research/projects/{id} 详情")
+            self.assert_json_field(data, "project_id", "research 详情含 project_id")
+
+            # 清理：删除测试课题
+            code, _ = c.delete(f"/api/research/projects/{research_pid}")
+            self.assert_status(code, 200, "DELETE /api/research/projects/{id} 清理")
+
+        # === 自主学习路由（learning）===
+        code, data = c.get("/api/learning/log")
+        self.assert_status(code, 200, "GET /api/learning/log")
+        self.assert_json_field(data, "log", "learning log 含 log 字段")
+
+        code, data = c.get("/api/learning/queue")
+        self.assert_status(code, 200, "GET /api/learning/queue")
+        self.assert_json_field(data, "queue", "learning queue 含 queue 字段")
+
+        # === 上传路由（upload）===
+        code, data = c.post("/api/upload", {
+            "filename": "webapi_test.txt",
+            "content": "WebAPI 自检上传测试文件",
+            "category": "notes",
+        })
+        self.assert_status(code, 200, "POST /api/upload 文件上传")
+        self.assert_json_field(data, "success", "upload 返回 success 字段")
+
+        # === 系统路由（system）===
+        code, data = c.get("/api/heartbeat")
+        self.assert_status(code, 200, "GET /api/heartbeat 系统心跳")
+
+        # === 知识库 wiki 列表（字段校验）===
+        code, data = c.get("/api/knowledge/wiki")
+        self.assert_status(code, 200, "GET /api/knowledge/wiki 列表（复测）")
+        self.assert_json_field(data, "pages", "wiki 列表含 pages 字段")
+
 
 if __name__ == "__main__":
     suite = WebApiSuite()

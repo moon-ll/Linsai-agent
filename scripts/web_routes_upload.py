@@ -50,7 +50,12 @@ def _handle_upload(body: Dict[str, Any]) -> Dict[str, Any]:
     if not safe_name:
         safe_name = "uploaded_file"
 
-    dest_dir = web_base._PROJECT_ROOT / "references" / category
+    # P1-2: 路径遍历防护
+    try:
+        from web_base import _safe_join
+        dest_dir = _safe_join(web_base._PROJECT_ROOT / "references", category)
+    except ValueError:
+        return {"success": False, "error": "非法分类路径"}
     dest_dir.mkdir(parents=True, exist_ok=True)
     dest_path = dest_dir / safe_name
 

@@ -29,6 +29,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+import common as _cms
 
 # 统一日志
 try:
@@ -526,8 +527,7 @@ class LLMRouter:
                 pass
         config["force_provider"] = self.force_provider
         _CONFIG_PATH.parent.mkdir(parents=True, exist_ok=True)
-        with open(_CONFIG_PATH, "w", encoding="utf-8") as f:
-            json.dump(config, f, ensure_ascii=False, indent=2)
+        _cms.save_json(_CONFIG_PATH, config)
 
     def load_force_provider(self) -> None:
         """从 llm-config.json 读取持久化的强制选择。"""

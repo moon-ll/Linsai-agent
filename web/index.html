@@ -91,7 +91,7 @@
   <aside class="sidebar history" id="history-sidebar" style="display:none;">
     <div class="sidebar-header">
       <h3>📚 聊天记录</h3>
-      <button id="close-history" class="icon-btn">✕</button>
+      <button id="close-history" class="icon-btn" aria-label="关闭历史" title="关闭历史">✕</button>
     </div>
     <div class="history-search-box">
       <input type="text" id="history-search-input" placeholder="🔍 搜索所有历史消息…" autocomplete="off" aria-label="搜索历史消息">
@@ -109,9 +109,9 @@
       <div class="kb-tree-header">
         <input type="text" id="kb-tree-search" placeholder="🔍 搜索知识库…" autocomplete="off" style="width:100%;padding:5px 10px;border-radius:6px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);font-size:0.82rem;box-sizing:border-box;">
         <div class="kb-toolbar" id="kb-toolbar">
-          <button class="kb-toolbar-btn" id="kb-sync-btn" title="一键同步 hermes 产出 + 重建索引和图谱">🔄 同步</button>
-          <button class="kb-toolbar-btn" id="kb-health-btn" title="知识库健康检查">📊 健康</button>
-          <button class="kb-toolbar-btn" id="kb-category-btn" title="分类管理">🏷️ 分类</button>
+          <button class="kb-toolbar-btn" id="kb-sync-btn" title="一键同步 hermes 产出 + 重建索引和图谱" aria-label="同步知识库">🔄 同步</button>
+          <button class="kb-toolbar-btn" id="kb-health-btn" title="知识库健康检查" aria-label="知识库健康检查">📊 健康</button>
+          <button class="kb-toolbar-btn" id="kb-category-btn" title="分类管理" aria-label="分类管理">🏷️ 分类</button>
           <span class="kb-sync-indicator" id="kb-sync-indicator" title="自动同步状态"></span>
         </div>
         <div class="kb-filter-bar" id="kb-filter-bar" style="display:none;">
@@ -119,7 +119,7 @@
           <select id="kb-filter-stage" class="kb-filter-select" title="按阶段筛选"><option value="">全部阶段</option></select>
           <select id="kb-filter-project" class="kb-filter-select" title="按子库筛选"><option value="">全部子库</option></select>
           <select id="kb-filter-tag" class="kb-filter-select" title="按标签筛选"><option value="">全部标签</option></select>
-          <button class="kb-toolbar-btn" id="kb-filter-clear" title="清除筛选">✕</button>
+          <button class="kb-toolbar-btn" id="kb-filter-clear" title="清除筛选" aria-label="清除筛选">✕</button>
         </div>
       </div>
       <div class="kb-tree-content" id="kb-tree-content">
@@ -210,10 +210,10 @@
       <!-- 输入区 -->
       <div class="input-area">
         <div class="command-bar">
-          <button class="cmd-btn" data-cmd="/mode" title="切换模式">/mode</button>
-          <button class="cmd-btn" data-cmd="/read" title="读取文档">/read</button>
-          <button class="cmd-btn" data-cmd="/agora" title="Agora群聊">/agora</button>
-          <button class="cmd-btn" data-cmd="/summary" title="会话摘要">/summary</button>
+          <button class="cmd-btn" data-cmd="/mode" title="切换模式" aria-label="切换模式">/mode</button>
+          <button class="cmd-btn" data-cmd="/read" title="读取文档" aria-label="读取文档">/read</button>
+          <button class="cmd-btn" data-cmd="/agora" title="Agora群聊" aria-label="Agora群聊">/agora</button>
+          <button class="cmd-btn" data-cmd="/summary" title="会话摘要" aria-label="会话摘要">/summary</button>
           <button class="cmd-btn" id="upload-btn" title="上传文件" data-tooltip="上传文件" aria-label="上传文件">📎</button>
           <button class="cmd-btn" id="kb-context-btn" title="选择知识库文件注入讨论" data-tooltip="@知识库文件" aria-label="选择知识库文件注入讨论">🗂️</button>
         </div>
@@ -241,7 +241,7 @@
   <!-- 右侧栏：协同 -->
   <aside class="sidebar right" id="right-sidebar">
     <div class="panel" id="task-panel">
-      <h3>📋 任务看板 <button id="task-add-btn" style="float:right;font-size:0.8rem;padding:2px 8px;cursor:pointer;border:1px solid var(--border-color);border-radius:4px;background:var(--bg-primary);">+ 新建</button></h3>
+      <h3>📋 任务看板 <button id="task-add-btn" aria-label="新建任务" style="float:right;font-size:0.8rem;padding:2px 8px;cursor:pointer;border:1px solid var(--border-color);border-radius:4px;background:var(--bg-primary);">+ 新建</button></h3>
       <div id="task-add-form" style="display:none;padding:8px;margin-bottom:8px;background:var(--bg-secondary);border-radius:6px;">
         <input type="text" id="task-add-title" placeholder="任务标题" style="width:100%;padding:6px;margin-bottom:6px;border:1px solid var(--border-color);border-radius:4px;background:var(--bg-primary);color:var(--text-primary);font-size:0.85rem;box-sizing:border-box;">
         <div style="display:flex;gap:6px;">

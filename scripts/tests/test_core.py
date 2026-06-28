@@ -470,3 +470,228 @@ class ToolEngineTests(TestSuite):
         # 8. 危险命令拦截
         safe, reason = self.te._is_command_safe("rm -rf /")
         self.assert_true(not safe, "危险命令 rm -rf / 被拦截", reason)
+
+
+# ---------------------------------------------------------------------------
+# kb_* 子模块单元测试（隔离环境）
+# ---------------------------------------------------------------------------
+class KbSubmoduleTests(TestSuite):
+    """kb_text / kb_graph / kb_health 子模块单元测试。
+
+    测试 v3.5.5 拆分后的子模块核心功能：
+        - kb_text: 分词、frontmatter 解析/生成
+        - kb_graph: 图节点 CRUD、关联概念遍历
+        - kb_health: 健康度计算、连通性、孤儿节点
+    使用临时目录隔离，patch 路径常量并注入门面依赖桩。
+    """
+
+    def __init__(self):
+        super().__init__("kb_* 子模块单元测试")
+        self.tmp_root = None
+        self.kbt = None  # kb_text
+        self.kbg = None  # kb_graph
+        self.kbh = None  # kb_health
+        self._orig = {}  # 保存原始值用于恢复
+
+    def setup(self):
+        self.tmp_root = create_isolated_env()
+        kb_dir = self.tmp_root / "knowledge"
+        # 清除 create_isolated_env 复制的真实数据文件，确保空白起点
+        for fname in ["graph.json", "aliases.json", "index.json", "growth-log.json"]:
+            f = kb_dir / fname
+            if f.exists():
+                f.unlink()
+        # 创建子模块所需的目录结构
+        for sub in ["wiki/concepts", "wiki/methods", "wiki/people",
+                     "wiki/papers", "wiki/projects",
+                     "raw/papers", "raw/notes", "raw/webclips",
+                     "captures"]:
+            (kb_dir / sub).mkdir(parents=True, exist_ok=True)
+
+        # 导入子模块
+        import kb_text, kb_graph, kb_index, kb_wiki, kb_health
+        self.kbt = kb_text
+        self.kbg = kb_graph
+        self.kbh = kb_health
+
+        # —— patch kb_graph 路径 ——
+        self._orig["kb_graph.GRAPH_PATH"] = kb_graph.GRAPH_PATH
+        self._orig["kb_graph.ALIASES_PATH"] = kb_graph.ALIASES_PATH
+        kb_graph.GRAPH_PATH = kb_dir / "graph.json"
+        kb_graph.ALIASES_PATH = kb_dir / "aliases.json"
+
+        # —— patch kb_index 路径 ——
+        self._orig["kb_index.INDEX_PATH"] = kb_index.INDEX_PATH
+        self._orig["kb_index.KNOWLEDGE_DIR"] = kb_index.KNOWLEDGE_DIR
+        self._orig["kb_index.RAW_DIR"] = kb_index.RAW_DIR
+        self._orig["kb_index.WIKI_DIR"] = kb_index.WIKI_DIR
+        kb_index.INDEX_PATH = kb_dir / "index.json"
+        kb_index.KNOWLEDGE_DIR = kb_dir
+        kb_index.RAW_DIR = kb_dir / "raw"
+        kb_index.WIKI_DIR = kb_dir / "wiki"
+
+        # —— patch kb_wiki 路径 ——
+        self._orig["kb_wiki.KNOWLEDGE_DIR"] = kb_wiki.KNOWLEDGE_DIR
+        self._orig["kb_wiki.WIKI_DIR"] = kb_wiki.WIKI_DIR
+        kb_wiki.KNOWLEDGE_DIR = kb_dir
+        kb_wiki.WIKI_DIR = kb_dir / "wiki"
+
+        # —— patch kb_health 路径 ——
+        self._orig["kb_health.KNOWLEDGE_DIR"] = kb_health.KNOWLEDGE_DIR
+        kb_health.KNOWLEDGE_DIR = kb_dir
+
+        # —— 注入门面依赖桩（kb_index）——
+        self._orig["kb_index._ensure_dirs"] = kb_index._ensure_dirs
+        self._orig["kb_index.log_growth"] = kb_index.log_growth
+        self._orig["kb_index._load_aliases"] = kb_index._load_aliases
+        self._orig["kb_index._log"] = kb_index._log
+
+        def _stub_ensure_dirs():
+            for d in [kb_dir / "raw" / "papers", kb_dir / "raw" / "notes",
+                      kb_dir / "raw" / "webclips"]:
+                d.mkdir(parents=True, exist_ok=True)
+            for t in ["concepts", "methods", "people", "papers", "projects"]:
+                (kb_dir / "wiki" / t).mkdir(parents=True, exist_ok=True)
+
+        kb_index._ensure_dirs = _stub_ensure_dirs
+        kb_index.log_growth = lambda *a, **kw: None
+        kb_index._load_aliases = lambda: {}
+        kb_index._log = None
+
+        # —— 注入门面依赖桩（kb_wiki）——
+        self._orig["kb_wiki._ensure_dirs"] = kb_wiki._ensure_dirs
+        self._orig["kb_wiki.log_growth"] = kb_wiki.log_growth
+        self._orig["kb_wiki._log"] = kb_wiki._log
+        kb_wiki._ensure_dirs = _stub_ensure_dirs
+        kb_wiki.log_growth = lambda *a, **kw: None
+        kb_wiki._log = None
+
+        # —— 注入门面依赖桩（kb_health）——
+        self._orig["kb_health.get_growth_candidates"] = kb_health.get_growth_candidates
+        self._orig["kb_health.get_growth_log"] = kb_health.get_growth_log
+        kb_health.get_growth_candidates = lambda: []
+        kb_health.get_growth_log = lambda limit=50, target=None: []
+
+    def teardown(self):
+        # 恢复所有 patch 的值
+        import kb_graph, kb_index, kb_wiki, kb_health
+        kb_graph.GRAPH_PATH = self._orig["kb_graph.GRAPH_PATH"]
+        kb_graph.ALIASES_PATH = self._orig["kb_graph.ALIASES_PATH"]
+        kb_index.INDEX_PATH = self._orig["kb_index.INDEX_PATH"]
+        kb_index.KNOWLEDGE_DIR = self._orig["kb_index.KNOWLEDGE_DIR"]
+        kb_index.RAW_DIR = self._orig["kb_index.RAW_DIR"]
+        kb_index.WIKI_DIR = self._orig["kb_index.WIKI_DIR"]
+        kb_index._ensure_dirs = self._orig["kb_index._ensure_dirs"]
+        kb_index.log_growth = self._orig["kb_index.log_growth"]
+        kb_index._load_aliases = self._orig["kb_index._load_aliases"]
+        kb_index._log = self._orig["kb_index._log"]
+        kb_wiki.KNOWLEDGE_DIR = self._orig["kb_wiki.KNOWLEDGE_DIR"]
+        kb_wiki.WIKI_DIR = self._orig["kb_wiki.WIKI_DIR"]
+        kb_wiki._ensure_dirs = self._orig["kb_wiki._ensure_dirs"]
+        kb_wiki.log_growth = self._orig["kb_wiki.log_growth"]
+        kb_wiki._log = self._orig["kb_wiki._log"]
+        kb_health.KNOWLEDGE_DIR = self._orig["kb_health.KNOWLEDGE_DIR"]
+        kb_health.get_growth_candidates = self._orig["kb_health.get_growth_candidates"]
+        kb_health.get_growth_log = self._orig["kb_health.get_growth_log"]
+        # 清理临时目录
+        import shutil
+        if self.tmp_root and self.tmp_root.exists():
+            shutil.rmtree(self.tmp_root, ignore_errors=True)
+
+    def run_tests(self):
+        print(f"\n▶ {self.name}")
+        try:
+            self._test_kb_text()
+            self._test_kb_graph()
+            self._test_kb_health()
+        except Exception as e:
+            self.results.append(
+                TestResult("_kb_submodule", False, 0.0, f"{type(e).__name__}: {e}")
+            )
+
+    # ------------------------------------------------------------------
+    # kb_text：分词 + frontmatter
+    # ------------------------------------------------------------------
+    def _test_kb_text(self):
+        # 1. 分词：中英文混合
+        tokens = self.kbt._tokenize("固体高次谐波 HHG")
+        self.assert_true(
+            any("高次" in t for t in tokens) and "hhg" in tokens,
+            "kb_text 分词中英文混合",
+        )
+        # 2. frontmatter 解析
+        fm, body = self.kbt.parse_frontmatter(
+            '---\ntitle: "测试"\nconfidence: 0.9\ngrowth_stage: "mature"\n---\n正文'
+        )
+        self.assert_eq(fm.get("title"), "测试", "kb_text frontmatter 解析 title")
+        self.assert_eq(fm.get("growth_stage"), "mature", "kb_text frontmatter 解析 stage")
+
+    # ------------------------------------------------------------------
+    # kb_graph：节点 CRUD + 关联遍历
+    # ------------------------------------------------------------------
+    def _test_kb_graph(self):
+        # 3. 节点创建 + 边添加
+        self.kbg.update_graph_node("概念X", "concepts", "wiki/concepts/概念X.md", "growing")
+        self.kbg.update_graph_node("概念Y", "concepts", "wiki/concepts/概念Y.md", "mature")
+        self.kbg.add_graph_edge("概念X", "概念Y", "related")
+        graph = self.kbg._load_graph()
+        self.assert_true(
+            "概念X" in graph["nodes"] and "概念Y" in graph["nodes"],
+            "kb_graph 节点创建",
+        )
+        # 4. 关联概念遍历
+        related = self.kbg.get_related_concepts("概念X", depth=1)
+        self.assert_true(
+            len(related) >= 1 and related[0]["title"] == "概念Y",
+            "kb_graph 关联遍历",
+        )
+        # 5. 节点删除（级联清理边）
+        self.kbg._remove_graph_node("概念Y")
+        graph = self.kbg._load_graph()
+        self.assert_true(
+            "概念Y" not in graph["nodes"] and len(graph["edges"]) == 0,
+            "kb_graph 节点删除+边清理",
+        )
+
+    # ------------------------------------------------------------------
+    # kb_health：健康度计算
+    # ------------------------------------------------------------------
+    def _test_kb_health(self):
+        import json
+        kb_dir = self.tmp_root / "knowledge"
+
+        # 准备图谱数据：2 节点连通 + 1 孤儿
+        graph_data = {
+            "nodes": {
+                "节点A": {"type": "concepts", "path": "wiki/concepts/节点A.md", "growth_stage": "mature"},
+                "节点B": {"type": "concepts", "path": "wiki/concepts/节点B.md", "growth_stage": "growing"},
+                "孤儿节点": {"type": "concepts", "path": "wiki/concepts/不存在.md", "growth_stage": "seedling"},
+            },
+            "edges": [{"from": "节点A", "to": "节点B", "relation": "related"}],
+        }
+        self.kbg._save_graph(graph_data)
+        # 创建对应的 wiki 文件（节点A、B 存在，孤儿不存在）
+        for name in ["节点A", "节点B"]:
+            (kb_dir / "wiki" / "concepts" / f"{name}.md").write_text(
+                f'---\ntitle: "{name}"\ntype: "concepts"\n---\n内容', encoding="utf-8")
+        # 准备索引数据
+        import kb_index
+        kb_index._cms.save_json(kb_dir / "index.json", {
+            "documents": {"wiki/concepts/节点A.md": {"source": "wiki"}},
+            "inverted": {}, "idf": {}, "doc_count": 1,
+            "built_at": "2026-06-28T00:00:00Z",
+            "graph_summary": {"node_count": 3, "edge_count": 1, "growth_stages": {}},
+        })
+
+        # 6. 孤儿节点计数
+        orphans = self.kbh._count_graph_orphans()
+        self.assert_eq(orphans, 1, "kb_health 孤儿节点计数")
+        # 7. 图谱连通性
+        conn = self.kbh._compute_graph_connectivity()
+        self.assert_true(
+            isinstance(conn, float) and 0.6 <= conn <= 0.7,
+            "kb_health 连通性计算",
+        )
+        # 8. 综合健康度
+        health = self.kbh.get_kb_health()
+        self.assert_eq(health.get("graph_nodes"), 3, "kb_health 综合节点数")

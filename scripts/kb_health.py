@@ -22,7 +22,10 @@
     - 不修改任何函数逻辑，自 knowledge_base.py 物理迁移而来
 """
 
-from datetime import datetime, timezone
+import json
+from collections import defaultdict, deque
+from datetime import datetime, timezone, timedelta
+from pathlib import Path
 from typing import Any, Dict
 
 from paths import KNOWLEDGE_DIR
@@ -57,7 +60,6 @@ def get_kb_health() -> Dict[str, Any]:
     log = get_growth_log(limit=200)
     week_count = 0
     try:
-        from datetime import timedelta
         now = datetime.now(timezone.utc)
         week_ago = now - timedelta(days=7)
         for entry in log:
@@ -121,7 +123,6 @@ def _compute_graph_connectivity() -> float:
         return 0.0
 
     # 构建邻接表
-    from collections import defaultdict, deque
     adj: Dict[str, set] = defaultdict(set)
     for edge in edges:
         f = edge.get("from", "")
@@ -154,12 +155,11 @@ def _compute_graph_connectivity() -> float:
 
 def _compute_category_coverage() -> Dict[str, Any]:
     """计算分类覆盖率：被自定义分类覆盖的 wiki 页面比例。"""
-    import json as _json
     cat_path = KNOWLEDGE_DIR / "categories.json"
     if not cat_path.exists():
         return {"total_categories": 0, "covered_pages": 0, "coverage_rate": 0.0}
     try:
-        data = _json.loads(cat_path.read_text(encoding="utf-8"))
+        data = json.loads(cat_path.read_text(encoding="utf-8"))
         cats = data.get("categories", [])
         covered = set()
         for cat in cats:
@@ -177,12 +177,11 @@ def _compute_category_coverage() -> Dict[str, Any]:
 
 def _compute_alias_hit_rate() -> Dict[str, Any]:
     """计算别名命中率：aliases.json 中的别名在 wiki 中被使用的比例。"""
-    import json as _json
     aliases_path = KNOWLEDGE_DIR / "aliases.json"
     if not aliases_path.exists():
         return {"total_aliases": 0, "used_aliases": 0, "hit_rate": 0.0}
     try:
-        aliases = _json.loads(aliases_path.read_text(encoding="utf-8"))
+        aliases = json.loads(aliases_path.read_text(encoding="utf-8"))
         total = 0
         used = 0
         # 收集所有 wiki 文本
@@ -217,3 +216,171 @@ def _count_graph_orphans() -> int:
         if path and not (KNOWLEDGE_DIR / path).exists():
             orphans += 1
     return orphans
+
+
+# ─────────────────────────────────────────────
+# 自检
+# ─────────────────────────────────────────────
+
+def _self_check() -> bool:
+    """自检：验证健康度计算 / 图谱连通性 / 孤儿节点 / 别名命中率。
+
+    使用临时目录隔离，patch 多模块路径常量并注入门面依赖桩。
+    """
+    import tempfile
+    import shutil
+
+    print("=" * 50)
+    print("◐ kb_health 自检")
+    print("=" * 50)
+
+    passed = 0
+    total = 0
+    tmp_dir = tempfile.mkdtemp(prefix="kb_health_test_")
+    tmp_kb = Path(tmp_dir) / "knowledge"
+    (tmp_kb / "wiki" / "concepts").mkdir(parents=True, exist_ok=True)
+    (tmp_kb / "raw" / "notes").mkdir(parents=True, exist_ok=True)
+    (tmp_kb / "captures").mkdir(parents=True, exist_ok=True)
+
+    # 保存原始路径常量
+    global KNOWLEDGE_DIR, get_growth_candidates, get_growth_log
+    _orig_kbh = {"KNOWLEDGE_DIR": KNOWLEDGE_DIR}
+    KNOWLEDGE_DIR = tmp_kb
+
+    # patch kb_index 路径
+    import kb_index as _ki
+    _orig_ki = {
+        "INDEX_PATH": _ki.INDEX_PATH, "KNOWLEDGE_DIR": _ki.KNOWLEDGE_DIR,
+        "RAW_DIR": _ki.RAW_DIR, "WIKI_DIR": _ki.WIKI_DIR,
+    }
+    _ki.INDEX_PATH = tmp_kb / "index.json"
+    _ki.KNOWLEDGE_DIR = tmp_kb
+    _ki.RAW_DIR = tmp_kb / "raw"
+    _ki.WIKI_DIR = tmp_kb / "wiki"
+
+    # patch kb_graph 路径
+    import kb_graph as _kg
+    _orig_kg = {"GRAPH_PATH": _kg.GRAPH_PATH, "ALIASES_PATH": _kg.ALIASES_PATH}
+    _kg.GRAPH_PATH = tmp_kb / "graph.json"
+    _kg.ALIASES_PATH = tmp_kb / "aliases.json"
+
+    # patch kb_wiki 路径
+    import kb_wiki as _kw
+    _orig_kw = {"KNOWLEDGE_DIR": _kw.KNOWLEDGE_DIR, "WIKI_DIR": _kw.WIKI_DIR}
+    _kw.KNOWLEDGE_DIR = tmp_kb
+    _kw.WIKI_DIR = tmp_kb / "wiki"
+
+    # 保存原始注入依赖
+    _orig_deps = {"get_growth_candidates": get_growth_candidates, "get_growth_log": get_growth_log}
+
+    try:
+        # 注入门面依赖桩
+        get_growth_candidates = lambda: []
+        get_growth_log = lambda limit=50, target=None: []
+
+        # 准备测试数据：图谱（2 节点 + 1 边，全连通）
+        import json
+        graph_data = {
+            "nodes": {
+                "概念A": {"type": "concepts", "path": "wiki/concepts/概念A.md", "growth_stage": "mature"},
+                "概念B": {"type": "concepts", "path": "wiki/concepts/概念B.md", "growth_stage": "growing"},
+                "孤儿概念": {"type": "concepts", "path": "wiki/concepts/不存在.md", "growth_stage": "seedling"},
+            },
+            "edges": [
+                {"from": "概念A", "to": "概念B", "relation": "related"},
+            ],
+        }
+        _kg._save_graph(graph_data)
+
+        # 创建对应的 wiki 文件（概念A、概念B 存在，孤儿概念不存在）
+        for name in ["概念A", "概念B"]:
+            (tmp_kb / "wiki" / "concepts" / f"{name}.md").write_text(
+                f'---\ntitle: "{name}"\ntype: "concepts"\ngrowth_stage: "mature"\n---\n内容', encoding="utf-8")
+
+        # 准备索引数据
+        index_data = {
+            "documents": {
+                "wiki/concepts/概念A.md": {"source": "wiki", "chunks": 1},
+                "raw/notes/test.md": {"source": "raw", "chunks": 1},
+            },
+            "inverted": {}, "idf": {}, "doc_count": 2,
+            "built_at": "2026-06-28T00:00:00Z",
+            "graph_summary": {"node_count": 3, "edge_count": 1, "growth_stages": {"mature": 2}},
+        }
+        _ki._cms.save_json(tmp_kb / "index.json", index_data)
+
+        # 准备别名
+        (tmp_kb / "aliases.json").write_text(
+            json.dumps({"概念A": ["CA", "A概念"]}, ensure_ascii=False), encoding="utf-8")
+
+        # [1/5] 图谱连通性
+        total += 1
+        conn = _compute_graph_connectivity()
+        # 概念A-B 连通（2节点），孤儿概念独立（1节点），最大分量=2，总=3，连通性=0.67
+        if isinstance(conn, float) and 0.6 <= conn <= 0.7:
+            passed += 1
+            print(f"  [1/{total}] ✓ 连通性: {conn} (最大分量 2/3)")
+        else:
+            print(f"  [1/{total}] ✗ 连通性: conn={conn}")
+
+        # [2/5] 孤儿节点计数
+        total += 1
+        orphans = _count_graph_orphans()
+        if orphans == 1:
+            passed += 1
+            print(f"  [2/{total}] ✓ 孤儿节点: {orphans} 个")
+        else:
+            print(f"  [2/{total}] ✗ 孤儿节点: orphans={orphans}")
+
+        # [3/5] 别名命中率
+        total += 1
+        alias_rate = _compute_alias_hit_rate()
+        # 别名 "CA" 和 "A概念" 在 wiki 正文（"内容"）中未出现 → hit_rate=0.0
+        if alias_rate["total_aliases"] == 2 and alias_rate["hit_rate"] == 0.0:
+            passed += 1
+            print(f"  [3/{total}] ✓ 别名命中率: {alias_rate['hit_rate']} (总 {alias_rate['total_aliases']})")
+        else:
+            print(f"  [3/{total}] ✗ 别名命中率: {alias_rate}")
+
+        # [4/5] 分类覆盖率（无 categories.json → 空结果）
+        total += 1
+        cat_cov = _compute_category_coverage()
+        if cat_cov["total_categories"] == 0 and cat_cov["coverage_rate"] == 0.0:
+            passed += 1
+            print(f"  [4/{total}] ✓ 分类覆盖率: 空配置返回 0.0")
+        else:
+            print(f"  [4/{total}] ✗ 分类覆盖率: {cat_cov}")
+
+        # [5/5] 综合健康度
+        total += 1
+        health = get_kb_health()
+        if (health.get("graph_nodes") == 3 and health.get("graph_orphans") == 1
+                and health.get("indexed") is True):
+            passed += 1
+            print(f"  [5/{total}] ✓ 综合健康度: nodes={health['graph_nodes']}, orphans={health['graph_orphans']}")
+        else:
+            print(f"  [5/{total}] ✗ 综合健康度: {health}")
+    finally:
+        # 恢复所有路径常量
+        KNOWLEDGE_DIR = _orig_kbh["KNOWLEDGE_DIR"]
+        _ki.INDEX_PATH = _orig_ki["INDEX_PATH"]
+        _ki.KNOWLEDGE_DIR = _orig_ki["KNOWLEDGE_DIR"]
+        _ki.RAW_DIR = _orig_ki["RAW_DIR"]
+        _ki.WIKI_DIR = _orig_ki["WIKI_DIR"]
+        _kg.GRAPH_PATH = _orig_kg["GRAPH_PATH"]
+        _kg.ALIASES_PATH = _orig_kg["ALIASES_PATH"]
+        _kw.KNOWLEDGE_DIR = _orig_kw["KNOWLEDGE_DIR"]
+        _kw.WIKI_DIR = _orig_kw["WIKI_DIR"]
+        # 恢复注入依赖
+        get_growth_candidates = _orig_deps["get_growth_candidates"]
+        get_growth_log = _orig_deps["get_growth_log"]
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    ok = passed == total
+    print(f"\n{'✓' if ok else '✗'} kb_health: {passed}/{total} 通过")
+    return ok
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(0 if _self_check() else 1)

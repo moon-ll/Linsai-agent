@@ -59,6 +59,32 @@ from paths import PROJECT_ROOT as _PROJECT_ROOT
 
 import llm_router as lr
 
+# 同目录模块静态导入（替代原 importlib 动态加载，scripts/ 已是 Python 包）
+try:
+    import tool_engine as te
+except ImportError:
+    te = None
+
+try:
+    import agora_bridge as ab
+except ImportError:
+    ab = None
+
+try:
+    import proactive_engine as pe
+except ImportError:
+    pe = None
+
+try:
+    import memory_manager as mm
+except ImportError:
+    mm = None
+
+try:
+    import kb_capture as kc
+except ImportError:
+    kc = None
+
 try:
     from session_manager import (
         create_session,
@@ -207,13 +233,7 @@ def call_llm_with_tools(system_prompt: str, messages: list, timeout: int = 120):
         (response_text, usage_dict, provider_name, tool_log)
         - tool_log: 工具调用记录列表，每项为 {"name", "args", "result"}
     """
-    try:
-        import importlib.util
-        te_path = Path(__file__).parent / "tool_engine.py"
-        spec = importlib.util.spec_from_file_location("tool_engine", te_path)
-        te = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(te)
-    except Exception:
+    if te is None:
         # 工具引擎不可用，降级为普通调用
         text, usage, provider = lr.call_llm(system_prompt, messages)
         return text, usage, provider, []
@@ -378,17 +398,12 @@ def chat_loop(session_id: str, mode: str = "co-working") -> None:
             personas = [p.strip() for p in personas_str.split(",") if p.strip()]
             if personas:
                 try:
-                    import importlib.util
-                    ab_path = _PROJECT_ROOT / "scripts" / "agora_bridge.py"
-                    if ab_path.exists():
-                        spec = importlib.util.spec_from_file_location("agora_bridge", ab_path)
-                        ab = importlib.util.module_from_spec(spec)
-                        spec.loader.exec_module(ab)
+                    if ab is None:
+                        print("✗ agora_bridge 模块不可用")
+                    else:
                         path = ab.export_to_agora(session_id, personas)
                         print(f"✓ 已导出到 Agora: {path.name}")
                         print(f"  邀请人物: {', '.join(personas)}")
-                    else:
-                        print("✗ agora_bridge 模块不可用")
                 except Exception as exc:
                     print(f"✗ Agora 导出失败: {exc}")
             else:
@@ -397,12 +412,7 @@ def chat_loop(session_id: str, mode: str = "co-working") -> None:
 
         # 模式自动识别（仅在未明确切换时）
         try:
-            import importlib.util
-            pe_path = _PROJECT_ROOT / "scripts" / "proactive_engine.py"
-            if pe_path.exists():
-                spec = importlib.util.spec_from_file_location("proactive_engine", pe_path)
-                pe = importlib.util.module_from_spec(spec)
-                spec.loader.exec_module(pe)
+            if pe is not None:
                 detected = pe.classify_mode(user_input)
                 if detected and detected != mode and detected != "unknown":
                     mode = detected
@@ -458,12 +468,7 @@ def chat_loop(session_id: str, mode: str = "co-working") -> None:
 
         # 每轮对话后尝试更新记忆（静默执行，失败不影响对话）
         try:
-            import importlib.util
-            mm_path = _PROJECT_ROOT / "scripts" / "memory_manager.py"
-            if mm_path.exists():
-                spec = importlib.util.spec_from_file_location("memory_manager", mm_path)
-                mm = importlib.util.module_from_spec(spec)
-                spec.loader.exec_module(mm)
+            if mm is not None:
                 mm.update_user_profile(session_id)
                 mm.update_working_context(session_id)
         except Exception:
@@ -471,12 +476,7 @@ def chat_loop(session_id: str, mode: str = "co-working") -> None:
 
         # 每轮对话后尝试捕获知识片段（静默执行）
         try:
-            import importlib.util
-            kc_path = _PROJECT_ROOT / "scripts" / "kb_capture.py"
-            if kc_path.exists():
-                spec = importlib.util.spec_from_file_location("kb_capture", kc_path)
-                kc = importlib.util.module_from_spec(spec)
-                spec.loader.exec_module(kc)
+            if kc is not None:
                 result = kc.capture_from_session(session_id, topic_hint=topic)
                 if result.get("captured"):
                     print(f"  📎 已捕获知识片段: {result['path']}")
@@ -527,13 +527,8 @@ def parse_args(argv=None) -> argparse.Namespace:
 def _run_heartbeat() -> list[str]:
     """启动时运行心跳扫描，返回需要显示的提醒消息列表。"""
     try:
-        import importlib.util
-        pe_path = _PROJECT_ROOT / "scripts" / "proactive_engine.py"
-        if not pe_path.exists():
+        if pe is None:
             return []
-        spec = importlib.util.spec_from_file_location("proactive_engine", pe_path)
-        pe = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(pe)
         signals = pe.heartbeat()
         if not signals:
             return []

@@ -37,6 +37,7 @@ import copilot_engine as ce
 import usage_tracker as ut
 import chat_archive as ca
 import backup_manager as bm  # _delete_message 删除前备份
+import common as _cms  # P1-3: 原子化 JSON 写入
 
 
 # ---------------------------------------------------------------------------
@@ -64,7 +65,12 @@ _SESSION_ROUTES = [
 # ---------------------------------------------------------------------------
 def _edit_message(session_id: str, msg_id: str, new_content: str) -> bool:
     """编辑指定消息。"""
-    msg_path = web_base._PROJECT_ROOT / "sessions" / session_id / "messages.json"
+    # P1-1: 路径遍历防护
+    try:
+        from web_base import _safe_join
+        msg_path = _safe_join(web_base._PROJECT_ROOT / "sessions", session_id, "messages.json")
+    except ValueError:
+        return False
     if not msg_path.exists():
         return False
     lock = _get_file_lock(str(msg_path))  # P1-9: 文件锁
@@ -79,9 +85,8 @@ def _edit_message(session_id: str, msg_id: str, new_content: str) -> bool:
                     break
             else:
                 return False
-            with open(msg_path, "w", encoding="utf-8") as f:
-                json.dump(data if isinstance(data, list) else {"messages": messages},
-                          f, ensure_ascii=False, indent=2)
+            _cms.save_json(msg_path,
+                          data if isinstance(data, list) else {"messages": messages})
             return True
     except Exception:
         return False
@@ -89,7 +94,12 @@ def _edit_message(session_id: str, msg_id: str, new_content: str) -> bool:
 
 def _delete_message(session_id: str, msg_id: str) -> bool:
     """删除指定消息（P0-9: 删除前自动备份）。"""
-    msg_path = web_base._PROJECT_ROOT / "sessions" / session_id / "messages.json"
+    # P1-1: 路径遍历防护
+    try:
+        from web_base import _safe_join
+        msg_path = _safe_join(web_base._PROJECT_ROOT / "sessions", session_id, "messages.json")
+    except ValueError:
+        return False
     if not msg_path.exists():
         return False
     lock = _get_file_lock(str(msg_path))  # P1-9: 文件锁
@@ -108,9 +118,8 @@ def _delete_message(session_id: str, msg_id: str) -> bool:
             except Exception as e:
                 if _log:
                     _log.debug("删除前备份失败: %s", e)
-            with open(msg_path, "w", encoding="utf-8") as f:
-                json.dump(data if isinstance(data, list) else {"messages": messages},
-                          f, ensure_ascii=False, indent=2)
+            _cms.save_json(msg_path,
+                          data if isinstance(data, list) else {"messages": messages})
             return True
     except Exception:
         return False

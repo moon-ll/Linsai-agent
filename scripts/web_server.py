@@ -254,7 +254,7 @@ def _self_check() -> bool:
 
     # 5. 路由表完整性
     total_routes = sum(len(t) for t in _ALL_ROUTE_TABLES)
-    if total_routes >= 80:
+    if total_routes >= 120:
         print(f"✓ 路由表完整: {total_routes} 条")
     else:
         print(f"✗ 路由表不完整: 仅 {total_routes} 条")

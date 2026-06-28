@@ -75,6 +75,18 @@ LinSai-CoPilot/
 │   ├── working-context.json   # 当前工作上下文（进行中的项目、关键决策）
 │   ├── long-term-memory.json  # 跨会话记忆索引
 │   ├── autonomy-level.json    # 自主级别配置
+│   ├── learning-config.json   # 学习引擎配置
+│   ├── learning-cost.json     # 学习成本追踪
+│   ├── llm-config.json        # LLM 路由配置
+│   ├── nsfc-decisions.json    # NSFC 决策记录
+│   ├── paper-feedback.json    # 论文反馈
+│   ├── paper-pool.json        # 论文池
+│   ├── project-dispatch.json  # 项目调度
+│   ├── reflow-state.json      # 认知回流状态
+│   ├── research-profile.json  # 研究方向画像
+│   ├── sync-state.json        # 同步状态
+│   ├── alias-candidates.json  # 别名候选
+│   ├── chat-archive-index.json # 聊天归档索引
 │   └── snippets/              # 记忆片段（用户的名言、关键事件）
 │       └── README.md
 │
@@ -108,7 +120,9 @@ LinSai-CoPilot/
 │   ├── aliases.json           # 别名映射（查询自动展开）
 │   ├── index.json             # 统一倒排索引
 │   ├── graph.json             # 知识图谱
-│   └── growth-log.json        # 知识生长日志
+│   ├── growth-log.json        # 知识生长日志
+│   ├── categories.json        # 分类管理数据
+│   └── .cache/                # 搜索缓存
 │
 ├── skills/                    # 技能目录（每个技能一个子目录）
 │   ├── README.md
@@ -493,8 +507,9 @@ LinSai-CoPilot/
 - ✅ **v3.5.3 测试扩展** — 单元测试 88→120 检查点（新增课题链路 19 + LLM 路由 5 + 工具引擎 8），`--web-ci` 集成 Web API 测试（146/146）
 - ✅ **v3.5.4 全面质量优化** — P0 修复（settings.js DOM ID、sendMessage TypeError、AGENTS.md 虚假声明）、P1 安全（run_command 注入防护、backup 覆盖 projects/persona、并发文件锁）、P2 架构（paths.py 统一、except Exception 治理、logger TimedRotatingFileHandler）、P3 打磨（防抖、无障碍 tabindex、CSS 变量统一）
 - ✅ **v3.5.5 知识库门面化拆分** — `knowledge_base.py` 1792→534 行门面 + 5 子模块（kb_text/kb_graph/kb_index/kb_wiki/kb_health），门面注入模式解决循环依赖
-- ✅ **v3.5.6 Web 服务器 Mixin 拆分** — `web_server.py` 2576→321 行聚合器 + `web_base.py` + 10 路由 Mixin（共 130 路由），零行为变更
+- ✅ **v3.5.6 Web 服务器 Mixin 拆分** — `web_server.py` 2576→321 行聚合器 + `web_base.py` + 10 路由 Mixin（共 160 路由（9 个路由 Mixin 123 条 + research 路由 37 条）），零行为变更
 - ✅ **内联样式清理** — 426/554（76.8%）内联 style 替换为 CSS 类，新增 ~180 个工具类
+- ✅ **v3.5.7 安全与质量优化** — P0 线程安全+路径遍历修复、P1 原子写入+XSS 修复+测试扩展（129+171）、P2 导入清理+缓存+CSS 变量
 
 ---
 
@@ -542,8 +557,8 @@ LinSai-CoPilot/
 ### 5. 测试策略
 - **三层测试体系**：
   1. **单元回归测试**：`scripts/self_test.py` + `scripts/tests/`
-     - 零依赖轻量框架，隔离环境，120 个检查点，<1s 全量通过
-     - 六层覆盖：模块单元测试（34+5+19+8）/ 场景剧本测试（16）/ 人格一致性抽检（38）
+     - 零依赖轻量框架，隔离环境，129 个检查点，<1s 全量通过
+     - 七层覆盖：模块单元测试（34+9+5+19+8）/ 场景剧本测试（16）/ 人格一致性抽检（38）
      - 命令行：`--module` / `--scenario` / `--persona` / `--json` / `--web` / `--web-ci`
      - 程序化：`from self_test import run_tests`
   2. **模块自检**：每个核心脚本包含 `_self_check()` 函数
@@ -657,7 +672,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：3.5.6*
+*版本：3.5.7*
 *日期：2026-06-28*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

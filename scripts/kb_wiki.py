@@ -24,6 +24,7 @@
 """
 
 from typing import Any, Dict, List, Optional, Tuple
+from pathlib import Path
 
 from common import now_utc as _now_utc
 from paths import KNOWLEDGE_DIR, WIKI_DIR
@@ -376,3 +377,117 @@ def apply_growth(wiki_rel_path: str, llm_output: str,
 
     build_index()
     return wiki_rel_path
+
+
+# ─────────────────────────────────────────────
+# 自检
+# ─────────────────────────────────────────────
+
+def _self_check() -> bool:
+    """自检：验证 wiki 页面构建 / 保存 / 读取 / 列表 / 删除。
+
+    使用临时目录隔离，patch 路径常量并注入门面依赖桩。
+    """
+    import tempfile
+    import shutil
+
+    print("=" * 50)
+    print("◐ kb_wiki 自检")
+    print("=" * 50)
+
+    passed = 0
+    total = 0
+    tmp_dir = tempfile.mkdtemp(prefix="kb_wiki_test_")
+    tmp_kb = Path(tmp_dir) / "knowledge"
+    (tmp_kb / "wiki" / "concepts").mkdir(parents=True, exist_ok=True)
+
+    # 保存原始路径常量，测试后恢复
+    global KNOWLEDGE_DIR, WIKI_DIR, _ensure_dirs, log_growth, _log
+    _orig = {"KNOWLEDGE_DIR": KNOWLEDGE_DIR, "WIKI_DIR": WIKI_DIR}
+    KNOWLEDGE_DIR = tmp_kb
+    WIKI_DIR = tmp_kb / "wiki"
+
+    # patch kb_graph 路径（save_wiki_page 调用图谱函数）
+    import kb_graph as _kg
+    _orig_kg = {"GRAPH_PATH": _kg.GRAPH_PATH, "ALIASES_PATH": _kg.ALIASES_PATH}
+    _kg.GRAPH_PATH = tmp_kb / "graph.json"
+    _kg.ALIASES_PATH = tmp_kb / "aliases.json"
+
+    # 保存原始注入依赖，测试后恢复
+    _orig_deps = {"_ensure_dirs": _ensure_dirs, "log_growth": log_growth, "_log": _log}
+
+    try:
+        # 注入门面依赖桩
+        def _stub_ensure_dirs():
+            for t in ["concepts", "methods", "people", "papers", "projects"]:
+                (WIKI_DIR / t).mkdir(parents=True, exist_ok=True)
+        _ensure_dirs = _stub_ensure_dirs
+        log_growth = lambda *a, **kw: None
+        _log = None
+
+        # [1/5] 构建页面文本
+        total += 1
+        page_text = build_wiki_page("测试概念", "concepts", "这是测试内容", {"confidence": 0.7})
+        if "---" in page_text and "测试概念" in page_text and "这是测试内容" in page_text:
+            passed += 1
+            print(f"  [1/{total}] ✓ 页面构建: 含 frontmatter + 正文")
+        else:
+            print(f"  [1/{total}] ✗ 页面构建: text={page_text[:60]}")
+
+        # [2/5] 保存页面
+        total += 1
+        rel = save_wiki_page(
+            "wiki/concepts/测试概念.md", "林赛的研究笔记内容", {"title": "测试概念"})
+        saved_path = tmp_kb / rel
+        if saved_path.exists():
+            passed += 1
+            print(f"  [2/{total}] ✓ 页面保存: {rel}")
+        else:
+            print(f"  [2/{total}] ✗ 页面保存: {saved_path}")
+
+        # [3/5] 读取页面
+        total += 1
+        page = get_wiki_page("wiki/concepts/测试概念.md")
+        if page and page["frontmatter"].get("title") == "测试概念":
+            passed += 1
+            print(f"  [3/{total}] ✓ 页面读取: title={page['frontmatter']['title']}")
+        else:
+            print(f"  [3/{total}] ✗ 页面读取: page={page}")
+
+        # [4/5] 列表页面
+        total += 1
+        pages = list_wiki_pages("concepts")
+        if len(pages) >= 1 and pages[0]["title"] == "测试概念":
+            passed += 1
+            print(f"  [4/{total}] ✓ 页面列表: {len(pages)} 篇")
+        else:
+            print(f"  [4/{total}] ✗ 页面列表: pages={pages}")
+
+        # [5/5] 删除页面
+        total += 1
+        deleted = delete_wiki_page("wiki/concepts/测试概念.md")
+        if deleted and not (tmp_kb / "wiki/concepts/测试概念.md").exists():
+            passed += 1
+            print(f"  [5/{total}] ✓ 页面删除: 文件已清除")
+        else:
+            print(f"  [5/{total}] ✗ 页面删除: deleted={deleted}")
+    finally:
+        # 恢复路径常量
+        KNOWLEDGE_DIR = _orig["KNOWLEDGE_DIR"]
+        WIKI_DIR = _orig["WIKI_DIR"]
+        _kg.GRAPH_PATH = _orig_kg["GRAPH_PATH"]
+        _kg.ALIASES_PATH = _orig_kg["ALIASES_PATH"]
+        # 恢复注入依赖
+        _ensure_dirs = _orig_deps["_ensure_dirs"]
+        log_growth = _orig_deps["log_growth"]
+        _log = _orig_deps["_log"]
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    ok = passed == total
+    print(f"\n{'✓' if ok else '✗'} kb_wiki: {passed}/{total} 通过")
+    return ok
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(0 if _self_check() else 1)

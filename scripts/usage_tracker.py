@@ -22,6 +22,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from common import now_utc as _now_utc
+import common as _cms
 
 PROJECT_ROOT = Path(__file__).parent.parent
 USAGE_DIR = PROJECT_ROOT / "memory" / "usage"
@@ -53,8 +54,7 @@ def _load_usage() -> Dict[str, Any]:
 
 def _save_usage(data: Dict[str, Any]) -> None:
     _ensure_dir()
-    with open(USAGE_PATH, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
+    _cms.save_json(USAGE_PATH, data)
 
 
 def _estimate_tokens(text: str) -> int:

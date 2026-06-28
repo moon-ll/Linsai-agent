@@ -28,6 +28,7 @@ if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
 import llm_router as lr
+import common as _cms
 
 
 # ---------------------------------------------------------------------------
@@ -230,8 +231,7 @@ def extract_keywords(session_id: str, force: bool = False) -> List[str]:
         "message_count": len(messages),
     }
     try:
-        with open(kw_path, "w", encoding="utf-8") as f:
-            json.dump(kw_data, f, ensure_ascii=False, indent=2)
+        _cms.save_json(kw_path, kw_data)
     except Exception:
         pass
 
@@ -364,8 +364,7 @@ def build_archive_index() -> Dict[str, Any]:
 
     try:
         _ARCHIVE_INDEX.parent.mkdir(parents=True, exist_ok=True)
-        with open(_ARCHIVE_INDEX, "w", encoding="utf-8") as f:
-            json.dump(index, f, ensure_ascii=False, indent=2)
+        _cms.save_json(_ARCHIVE_INDEX, index)
     except Exception as e:
         print(f"✗ 索引保存失败: {e}")
 

@@ -63,6 +63,15 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+// P3-1: 通用 debounce 函数，供各模块复用（替代手动 timer 管理）
+function debounce(fn, ms = 300) {
+  let timer = null;
+  return function(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), ms);
+  };
+}
+
 function formatTime(iso) {
   if (!iso) return '';
   const d = new Date(iso);

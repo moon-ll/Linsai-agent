@@ -23,6 +23,7 @@ import re
 import web_base
 from web_base import _log
 from common import lazy_load
+import common as _cms
 
 
 # ---------------------------------------------------------------------------
@@ -126,8 +127,7 @@ class LearningRoutesMixin:
             for field in allowed_fields:
                 if field in body:
                     config[field] = body[field]
-            with open(config_path, "w", encoding="utf-8") as f:
-                json.dump(config, f, ensure_ascii=False, indent=2)
+            _cms.save_json(config_path, config)
             self._send_json({"success": True, "config": config})
         except Exception as e:
             self._send_json({"error": str(e)}, 500)

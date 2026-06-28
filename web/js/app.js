@@ -117,12 +117,8 @@ function bindEvents() {
     }
   });
 
-  // 会话搜索（P3: 300ms 防抖，减少高频输入时的重渲染开销）
-  let _sessionSearchTimer = null;
-  document.getElementById('session-search')?.addEventListener('input', () => {
-    clearTimeout(_sessionSearchTimer);
-    _sessionSearchTimer = setTimeout(() => renderSessionList(), 300);
-  });
+  // 会话搜索（P3-1: 使用通用 debounce，减少高频输入时的重渲染开销）
+  document.getElementById('session-search')?.addEventListener('input', debounce(() => renderSessionList(), 300));
 
   // 发送消息
   document.getElementById('send-btn').addEventListener('click', () => {
@@ -136,14 +132,10 @@ function bindEvents() {
     }
   });
 
-  // 输入时实时检测激活的技能
-  let _skillDebounce = null;
-  document.getElementById('message-input').addEventListener('input', (e) => {
-    clearTimeout(_skillDebounce);
-    _skillDebounce = setTimeout(() => {
-      updateSkillBadge(e.target.value);
-    }, 300);
-  });
+  // 输入时实时检测激活的技能（P3-1: 使用通用 debounce）
+  document.getElementById('message-input').addEventListener('input', debounce((e) => {
+    updateSkillBadge(e.target.value);
+  }, 300));
 
   // 快捷命令按钮
   document.querySelectorAll('.cmd-btn').forEach(btn => {
@@ -498,12 +490,8 @@ function bindKbManagerEvents() {
   });
   document.getElementById('skill-save-btn')?.addEventListener('click', saveSkillConfig);
   document.getElementById('skill-reset-btn')?.addEventListener('click', resetSkillConfig);
-  // P3: 300ms 防抖，减少高频输入时的重渲染开销
-  let _skillSearchTimer = null;
-  document.getElementById('skill-search-input')?.addEventListener('input', () => {
-    clearTimeout(_skillSearchTimer);
-    _skillSearchTimer = setTimeout(() => filterSkillList(), 300);
-  });
+  // P3-1: 使用通用 debounce，减少高频输入时的重渲染开销
+  document.getElementById('skill-search-input')?.addEventListener('input', debounce(() => filterSkillList(), 300));
   document.querySelectorAll('input[name="skill-mode"]').forEach(radio => {
     radio.addEventListener('change', (e) => onSkillModeChange(e.target.value));
   });

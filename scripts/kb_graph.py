@@ -17,11 +17,18 @@
 """
 
 import json
+import os
 import re
+from pathlib import Path
 from typing import Any, Dict, List, Set
 
+import common as _cms
 from paths import GRAPH_PATH, ALIASES_PATH
 from kb_text import parse_frontmatter, build_frontmatter
+
+# P2-6: 图谱文件缓存（避免每次操作都读磁盘）
+_graph_cache: Dict[str, Any] = None
+_graph_mtime: float = 0.0
 
 
 # ─────────────────────────────────────────────
@@ -125,24 +132,36 @@ def _inject_wikilinks(page_text: str) -> str:
 # ─────────────────────────────────────────────
 
 def _load_graph() -> Dict[str, Any]:
-    """加载知识图谱。"""
+    """加载知识图谱（带 mtime 缓存，避免频繁磁盘 I/O）。"""
+    global _graph_cache, _graph_mtime
     if not GRAPH_PATH.exists():
         return {"nodes": {}, "edges": []}
     try:
+        current_mtime = os.path.getmtime(GRAPH_PATH)
+        # 缓存命中：文件未修改
+        if _graph_cache is not None and current_mtime == _graph_mtime:
+            return _graph_cache
         with open(GRAPH_PATH, "r", encoding="utf-8") as f:
             data = json.load(f)
         # 确保结构完整
         if "nodes" not in data or "edges" not in data:
-            return {"nodes": {}, "edges": []}
+            data = {"nodes": {}, "edges": []}
+        _graph_cache = data
+        _graph_mtime = current_mtime
         return data
     except Exception:
         return {"nodes": {}, "edges": []}
 
 
 def _save_graph(graph: Dict[str, Any]) -> None:
-    """保存知识图谱。"""
-    with open(GRAPH_PATH, "w", encoding="utf-8") as f:
-        json.dump(graph, f, ensure_ascii=False, indent=2)
+    """保存知识图谱并更新缓存。"""
+    global _graph_cache, _graph_mtime
+    _cms.save_json(GRAPH_PATH, graph)
+    _graph_cache = graph
+    try:
+        _graph_mtime = os.path.getmtime(GRAPH_PATH)
+    except OSError:
+        pass
 
 
 def _remove_graph_node(title: str) -> None:
@@ -235,3 +254,96 @@ def get_graph_summary() -> Dict[str, Any]:
         "edge_count": len(graph["edges"]),
         "growth_stages": stages,
     }
+
+
+# ─────────────────────────────────────────────
+# 自检
+# ─────────────────────────────────────────────
+
+def _self_check() -> bool:
+    """自检：验证图谱节点 CRUD / 边添加 / 关联概念遍历 / WikiLink 提取。
+
+    使用临时目录隔离，patch GRAPH_PATH 和 ALIASES_PATH 到临时路径。
+    """
+    import tempfile
+    import shutil
+
+    print("=" * 50)
+    print("◐ kb_graph 自检")
+    print("=" * 50)
+
+    passed = 0
+    total = 0
+    tmp_dir = tempfile.mkdtemp(prefix="kb_graph_test_")
+
+    # 保存原始路径常量，测试后恢复
+    global GRAPH_PATH, ALIASES_PATH
+    _orig_graph = GRAPH_PATH
+    _orig_aliases = ALIASES_PATH
+    GRAPH_PATH = Path(tmp_dir) / "graph.json"
+    ALIASES_PATH = Path(tmp_dir) / "aliases.json"
+
+    try:
+        # [1/5] 节点创建
+        total += 1
+        update_graph_node("固体高次谐波", "concepts", "wiki/concepts/固体高次谐波.md", "growing")
+        update_graph_node("阿秒脉冲", "concepts", "wiki/concepts/阿秒脉冲.md", "mature")
+        graph = _load_graph()
+        if "固体高次谐波" in graph["nodes"] and "阿秒脉冲" in graph["nodes"]:
+            passed += 1
+            print(f"  [1/{total}] ✓ 节点创建: {len(graph['nodes'])} 个")
+        else:
+            print(f"  [1/{total}] ✗ 节点创建: nodes={list(graph['nodes'].keys())}")
+
+        # [2/5] 边添加（去重）
+        total += 1
+        add_graph_edge("固体高次谐波", "阿秒脉冲", "related")
+        add_graph_edge("固体高次谐波", "阿秒脉冲", "related")  # 重复，应去重
+        graph = _load_graph()
+        edge_count = len(graph["edges"])
+        if edge_count == 1:
+            passed += 1
+            print(f"  [2/{total}] ✓ 边去重: {edge_count} 条")
+        else:
+            print(f"  [2/{total}] ✗ 边去重: 实际 {edge_count} 条")
+
+        # [3/5] 关联概念遍历
+        total += 1
+        related = get_related_concepts("固体高次谐波", depth=1)
+        if len(related) >= 1 and related[0]["title"] == "阿秒脉冲":
+            passed += 1
+            print(f"  [3/{total}] ✓ 关联遍历: {len(related)} 条 (首条={related[0]['title']})")
+        else:
+            print(f"  [3/{total}] ✗ 关联遍历: related={related}")
+
+        # [4/5] 图谱概览
+        total += 1
+        summary = get_graph_summary()
+        if summary["node_count"] == 2 and summary["edge_count"] == 1:
+            passed += 1
+            print(f"  [4/{total}] ✓ 概览: nodes={summary['node_count']}, edges={summary['edge_count']}")
+        else:
+            print(f"  [4/{total}] ✗ 概览: summary={summary}")
+
+        # [5/5] 节点删除（级联清理边）
+        total += 1
+        _remove_graph_node("阿秒脉冲")
+        graph = _load_graph()
+        if "阿秒脉冲" not in graph["nodes"] and len(graph["edges"]) == 0:
+            passed += 1
+            print(f"  [5/{total}] ✓ 节点删除: 边级联清理 (剩余边={len(graph['edges'])})")
+        else:
+            print(f"  [5/{total}] ✗ 节点删除: nodes={list(graph['nodes'].keys())}, edges={len(graph['edges'])}")
+    finally:
+        GRAPH_PATH = _orig_graph
+        ALIASES_PATH = _orig_aliases
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    ok = passed == total
+    print(f"\n{'✓' if ok else '✗'} kb_graph: {passed}/{total} 通过")
+    return ok
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(0 if _self_check() else 1)

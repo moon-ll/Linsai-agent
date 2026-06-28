@@ -1,6 +1,46 @@
 # 变更记录
 
-## v3.5.6 - 2026-06-28 web_server.py Mixin 架构拆分（11 子模块）
+## v3.5.7 - 2026-06-28 全面安全修复与质量优化
+
+### P0 安全修复
+- **hermes 线程安全**：`web_routes_hermes.py` 后台线程直接写 `wfile` 改为 `queue.Queue` 模式，主线程负责所有 SSE 写入，避免 `BrokenPipeError` 和数据损坏
+- **路径遍历漏洞**：新增 `web_base._safe_join()` 通用路径安全函数，修复 `web_routes_kb.py`（wiki_rel）、`web_routes_sessions.py`（session_id）、`web_routes_upload.py`（category）三处路径遍历，防止任意文件读取/删除
+
+### P1 安全与质量
+- **原子化写入**：10+ 处 `json.dump` 迁移到 `common.save_json`（原子写入），覆盖用户消息、别名映射、知识图谱、索引、用量追踪、LLM 配置、技能配置、归档索引
+- **JSON 解析容错**：`web_base._read_json_body` 添加异常处理，损坏 JSON 返回空字典而非 500 错误
+- **前端 XSS 修复**：`kb.js` frontmatter 的 tags/wikiPath/error 均补充 `escapeHtml` 转义
+- **onclick 注入修复**：`kb.js` 路径参数改用 `data-*` 属性 + 事件委托，替代脆弱的单引号替换
+- **CSS 重复定义**：删除 `.btn-primary` 第 2353 行重复定义
+- **chat.js null 安全**：12 处 `getElementById().value/.style` 添加可选链或 null 守卫
+- **debounce 提取**：`core.js` 新增通用 `debounce()` 函数，`app.js` 3 处手动防抖替换
+
+### P1 测试扩展（120→129 + 146→171）
+- 新增 6 个模块 `_self_check()`：kb_text(5) + kb_graph(5) + kb_index(5) + kb_wiki(5) + kb_health(5) + web_base(4) = 29 个检查点
+- `test_core.py` 新增 `KbSubmoduleTests` 类（9 个检查点）
+- `test_web_api.py` 新增 16 个路由测试断言（research/learning/upload/system/kb），覆盖率 17.5%→26.3%
+
+### P1 文档修正
+- AGENTS.md 路由数修正（130→160）、memory/ 目录补全（5→17 个文件）、knowledge/ 目录补全（categories.json + .cache/）
+- CHANGELOG 补录内联样式清理（426/554，v3.5.4 延后项）
+- `web_server.py` self-check 路由阈值提升（80→120）
+- `index.html` 10 个按钮补充 `aria-label`
+
+### P2 代码质量
+- `copilot_engine.py`：6 处 `importlib.util` 动态导入改为静态 `import`，保留 `try/except ImportError` 降级
+- `kb_graph.py`：`_load_graph` 添加 mtime 缓存，避免频繁磁盘 I/O
+- `web_routes_research.py`：路由表预编译正则，与其他 9 个路由模块一致
+- `web_routes_projects.py`：删除 7 处函数内重复导入
+- `kb_health.py`：函数内导入提到模块级
+- `knowledge_base.py`：`distill_raw_to_wiki` 返回类型标注修正
+- CSS 语义色提取为变量（badge/priority），删除 8 处深色模式重复覆盖
+
+### 验证结果
+- 单元测试：129/129 通过（1.144s）
+- Web API 测试：171/171 通过（2.109s）
+- 语法验证：全部通过
+
+## v3.5.6 - 2026-06-28 web_server.py Mixin 架构拆分（10 路由 Mixin + 1 基础模块）
 
 ### 架构重构：Web 服务器模块化
 
@@ -55,6 +95,11 @@
 | web_routes_upload.py | 200 |
 | web_routes_research.py | 458 |
 | **合计** | **3180** |
+
+### 内联样式清理（v3.5.4 延后项，已完成）
+- 426/554（76.8%）内联 style 替换为 CSS 类
+- 新增 ~180 个工具类（按钮/卡片/模态框/表单/状态指示器/原子工具类）
+- 涉及文件：research.js（189处）、projects.js（157处）、kb.js、learning.js、chat.js 等
 
 ## v3.5.5 - 2026-06-28 knowledge_base.py 门面化拆分（5 子模块）
 

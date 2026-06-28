@@ -60,17 +60,17 @@ async function openWikiDetail(wikiPath) {
 
     bodyEl.innerHTML = `
       <div class="kb-detail-actions">
-        <button class="btn-text" onclick="openLocalFile('${wikiPath.replace(/'/g, "\\'")}')">📂 在编辑器中打开</button>
-        <button class="btn-text" onclick="copyToClipboard('${wikiPath.replace(/'/g, "\\'")}')">📋 复制路径</button>
+        <button class="btn-text" data-open-path="${escapeHtml(wikiPath)}">📂 在编辑器中打开</button>
+        <button class="btn-text" data-copy-path="${escapeHtml(wikiPath)}">📋 复制路径</button>
       </div>
       <div class="kb-frontmatter">
-        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">类型</span><span class="kb-frontmatter-value">${fm.type || '-'}</span></div>
+        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">类型</span><span class="kb-frontmatter-value">${escapeHtml(fm.type || '-')}</span></div>
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">生长阶段</span><span class="kb-frontmatter-value">${stage}</span></div>
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">确信度</span><span class="kb-frontmatter-value">${((fm.confidence ?? 0) * 100).toFixed(0)}%</span></div>
-        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">标签</span><span class="kb-frontmatter-value">${(fm.tags || []).join(', ') || '-'}</span></div>
+        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">标签</span><span class="kb-frontmatter-value">${escapeHtml((fm.tags || []).join(', ') || '-')}</span></div>
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">关联</span><span class="kb-frontmatter-value">${relatedHtml}</span></div>
         <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">更新</span><span class="kb-frontmatter-value">${fm.updated ? new Date(fm.updated).toLocaleString() : '-'}</span></div>
-        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">路径</span><span class="kb-frontmatter-value">${wikiPath}</span></div>
+        <div class="kb-frontmatter-item"><span class="kb-frontmatter-key">路径</span><span class="kb-frontmatter-value">${escapeHtml(wikiPath)}</span></div>
       </div>
       ${renderTagEditor(fm, wikiPath)}
       <div id="kb-backlinks-region"></div>
@@ -80,7 +80,7 @@ async function openWikiDetail(wikiPath) {
     bindTagEditor(fm, wikiPath);
     loadBacklinks(fm.title || '');
   } catch (e) {
-    bodyEl.innerHTML = `<div class="kb-empty">✗ 加载失败: ${e.message}</div>`;
+    bodyEl.innerHTML = `<div class="kb-empty">✗ 加载失败: ${escapeHtml(e.message)}</div>`;
   }
 }
 
@@ -90,7 +90,7 @@ function openWikiByTitle(title) {
     apiGet('/api/knowledge/wiki').then(data => {
       KBManager.wikiPages = data.pages || [];
       openWikiByTitle(title);
-    });
+    }).catch(e => { console.warn('加载 wiki 列表失败:', e.message); });
     return;
   }
   let found = pages.find(p => p.title === title);
@@ -138,8 +138,8 @@ async function openRawDetail(rawPath) {
     if (data.content) {
       // P1-14: renderMarkdown 内部已先 escapeHtml 再做 Markdown 替换，防止 raw HTML/SVG XSS
       let rendered = renderMarkdown(data.content);
-      const safePath = rawPath.replace(/'/g, "\\'");
-      bodyEl.innerHTML = `<div class="mb-8"><button class="btn-text" onclick="openLocalFile('${safePath}')" class="pad-4-10 border-default br-4 cursor-pointer fs-08">📂 在编辑器中打开</button></div>${rendered.slice(0, 6000)}${data.size > 6000 ? '\n\n<p class="text-tertiary">... (截断)</p>' : ''}`;
+      // P1-2: 使用 data 属性 + 事件委托替代 onclick 拼接，防止属性闭合注入
+      bodyEl.innerHTML = `<div class="mb-8"><button class="btn-text" data-open-path="${escapeHtml(rawPath)}" class="pad-4-10 border-default br-4 cursor-pointer fs-08">📂 在编辑器中打开</button></div>${rendered.slice(0, 6000)}${data.size > 6000 ? '\n\n<p class="text-tertiary">... (截断)</p>' : ''}`;
     } else {
       bodyEl.innerHTML = '<span class="state-error">无法读取（' + escapeHtml(data.error || '未知错误') + '）</span>';
     }
@@ -356,8 +356,21 @@ async function initKbMain() {
     treeSearchTimer = setTimeout(() => searchKbToTree(q), 300);
   });
 
-  // P1-8: 预览面板事件委托（wikilinks + related chips + backlinks）
+  // P1-8: 预览面板事件委托（wikilinks + related chips + backlinks + P1-2: 打开/复制按钮）
   document.getElementById('kb-preview-body')?.addEventListener('click', (e) => {
+    // P1-2: 事件委托处理"打开本地文件"和"复制路径"按钮（替代 onclick 拼接）
+    const openBtn = e.target.closest('[data-open-path]');
+    if (openBtn) {
+      e.preventDefault();
+      openLocalFile(openBtn.dataset.openPath);
+      return;
+    }
+    const copyBtn = e.target.closest('[data-copy-path]');
+    if (copyBtn) {
+      e.preventDefault();
+      copyToClipboard(copyBtn.dataset.copyPath);
+      return;
+    }
     const link = e.target.closest('[data-wiki-title]');
     if (link) {
       e.preventDefault();

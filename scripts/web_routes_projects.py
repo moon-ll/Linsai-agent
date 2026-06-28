@@ -264,7 +264,6 @@ class ProjectRoutesMixin:
             return
 
         # 记录反馈到本地（累积偏好）
-        from datetime import datetime as _dt, timezone as _tz
         fb_path = web_base._PROJECT_ROOT / "memory" / "paper-feedback.json"
         with _get_file_lock("paper-feedback"):
             fb = []
@@ -273,7 +272,7 @@ class ProjectRoutesMixin:
                     fb = json.loads(fb_path.read_text(encoding="utf-8"))
                 except (json.JSONDecodeError, OSError):
                     fb = []  # 容错：文件损坏时返回默认值
-            fb.append({"arxiv_id": arxiv_id, "action": action, "timestamp": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ")})
+            fb.append({"arxiv_id": arxiv_id, "action": action, "timestamp": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")})
             _cms.save_json(fb_path, fb[-200:])
 
         result: Dict[str, Any] = {"action": action, "arxiv_id": arxiv_id}
@@ -292,7 +291,6 @@ class ProjectRoutesMixin:
             # 感兴趣：仅记录偏好，不归档（归档需充分讨论后）
             # 异步反馈 hermes 偏好
             try:
-                import threading as _th
                 title = body.get("title", arxiv_id)
                 def _hermes_feedback():
                     try:
@@ -300,7 +298,7 @@ class ProjectRoutesMixin:
                     except Exception as e:
                         if _log:
                             _log.debug("hermes 偏好反馈失败: %s", e)
-                _th.Thread(target=_hermes_feedback, daemon=True).start()
+                threading.Thread(target=_hermes_feedback, daemon=True).start()
             except Exception as e:
                 if _log:
                     _log.debug("启动 hermes 反馈线程失败: %s", e)
@@ -316,7 +314,6 @@ class ProjectRoutesMixin:
         elif action in ("skip", "later"):
             # 异步反馈偏好
             try:
-                import threading as _th
                 label = "不感兴趣（跳过）" if action == "skip" else "稍后讨论"
                 def _hermes_pref():
                     try:
@@ -324,7 +321,7 @@ class ProjectRoutesMixin:
                     except Exception as e:
                         if _log:
                             _log.debug("hermes 偏好反馈失败: %s", e)
-                _th.Thread(target=_hermes_pref, daemon=True).start()
+                threading.Thread(target=_hermes_pref, daemon=True).start()
             except Exception as e:
                 if _log:
                     _log.debug("启动 hermes 偏好线程失败: %s", e)
@@ -333,7 +330,6 @@ class ProjectRoutesMixin:
 
     def _proj_nsfc_pending_action(self, parsed, body, pid):
         """NSFC 待决策项操作（approve/reject/discuss）"""
-        from datetime import datetime as _dt, timezone as _tz
         action = body.get("action", "").strip()  # approve/reject/discuss
         dec_path = web_base._PROJECT_ROOT / "memory" / "nsfc-decisions.json"
         with _get_file_lock("nsfc-decisions"):
@@ -346,7 +342,7 @@ class ProjectRoutesMixin:
 
             if action == "discuss":
                 # 标记讨论中，返回该课题的知识库上下文供注入
-                decs[pid] = {"status": "discussing", "started_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
+                decs[pid] = {"status": "discussing", "started_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")}
                 _cms.save_json(dec_path, decs)
                 title = body.get("title", "")
                 topic = body.get("related_topic", "")
@@ -358,13 +354,12 @@ class ProjectRoutesMixin:
                 self._send_json({"success": True, "status": "discussing", "title": title,
                                  "context_files": context_files, "topic": topic})
             elif action in ("approve", "reject"):
-                decs[pid] = {"status": action, "decided_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+                decs[pid] = {"status": action, "decided_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
                              "summary": body.get("summary", "")}
                 _cms.save_json(dec_path, decs)
                 # 异步反馈 hermes
                 title = body.get("title", "")
                 try:
-                    import threading as _th
                     label = "通过" if action == "approve" else "否决"
                     def _fb():
                         try:
@@ -372,7 +367,7 @@ class ProjectRoutesMixin:
                         except Exception as e:
                             if _log:
                                 _log.debug("hermes 反馈失败: %s", e)
-                    _th.Thread(target=_fb, daemon=True).start()
+                    threading.Thread(target=_fb, daemon=True).start()
                 except Exception as e:
                     if _log:
                         _log.debug("启动 hermes 反馈线程失败: %s", e)
@@ -382,7 +377,6 @@ class ProjectRoutesMixin:
 
     def _proj_nsfc_discuss_summary(self, parsed, body):
         """NSFC 讨论总结 → 写 discussions + 反馈 hermes"""
-        from datetime import datetime as _dt, timezone as _tz
         pid = body.get("pending_id", "")
         title = body.get("title", "")
         summary = body.get("summary", "").strip()
@@ -392,14 +386,14 @@ class ProjectRoutesMixin:
             return
 
         # 写回 discussions/{date}_decisions.md
-        today = _dt.now(_tz.utc).strftime("%Y-%m-%d")
+        today = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d")
         disc_dir = pr.NSFC_DIR / "discussions"
         disc_file = disc_dir / f"{today}_decisions.md"
         disc_dir.mkdir(parents=True, exist_ok=True)
         entry = f"\n\n## 决策: {title} 🌐 林赛CoPilot讨论捕获\n\n"
         entry += f"**决策**: ✅ 已讨论（{topic}）\n\n"
         entry += f"**讨论总结**:\n\n{summary}\n\n"
-        entry += f"**来源**: 林赛CoPilot Web 讨论({_dt.now(_tz.utc).strftime('%Y-%m-%dT%H:%M:%SZ')})\n"
+        entry += f"**来源**: 林赛CoPilot Web 讨论({datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ')})\n"
         entry += f"**可推翻**: 用户可在后续讨论中调整\n\n---\n"
         mode = "a" if disc_file.exists() else "w"
         with open(disc_file, mode, encoding="utf-8") as f:
@@ -415,19 +409,18 @@ class ProjectRoutesMixin:
                 except (json.JSONDecodeError, OSError):
                     decs = {}
             if pid:
-                decs[pid] = {"status": "discussed", "decided_at": _dt.now(_tz.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "summary": summary[:200]}
+                decs[pid] = {"status": "discussed", "decided_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "summary": summary[:200]}
                 _cms.save_json(dec_path, decs)
 
         # 异步反馈 hermes
         try:
-            import threading as _th
             def _fb2():
                 try:
                     hb.oneshot(f"用户在林赛CoPilot讨论了「{title}」（课题{topic}），结论：{summary[:500]}。请据此更新 state.md 和后续 BRAIN 计划。", timeout=180)
                 except Exception as e:
                     if _log:
                         _log.debug("hermes 反馈失败: %s", e)
-            _th.Thread(target=_fb2, daemon=True).start()
+            threading.Thread(target=_fb2, daemon=True).start()
         except Exception as e:
             if _log:
                 _log.debug("启动 hermes 反馈线程失败: %s", e)

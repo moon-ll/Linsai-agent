@@ -20,6 +20,7 @@ import json
 import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+import common as _cms
 
 PROJECT_ROOT = Path(__file__).parent.parent
 SKILLS_DIR = PROJECT_ROOT / "skills"
@@ -47,8 +48,7 @@ def _load_skill_state() -> Dict[str, Any]:
 def _save_skill_state(state: Dict[str, Any]) -> None:
     """保存技能配置状态。"""
     SKILLS_STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
-    with open(SKILLS_STATE_PATH, "w", encoding="utf-8") as f:
-        json.dump(state, f, ensure_ascii=False, indent=2)
+    _cms.save_json(SKILLS_STATE_PATH, state)
 
 
 def get_skill_config() -> Dict[str, Any]:

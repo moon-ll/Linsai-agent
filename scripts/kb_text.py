@@ -162,3 +162,88 @@ def _safe_filename(name: str) -> str:
     # 移除危险字符，但保留中文
     safe = re.sub(r'[<>:"/\\|?*\x00-\x1f]', "", name).strip()
     return safe if safe else "untitled"
+
+
+# ─────────────────────────────────────────────
+# 自检
+# ─────────────────────────────────────────────
+
+def _self_check() -> bool:
+    """自检：验证 tokenize/chunk/IDF/frontmatter 解析等文本工具。
+
+    使用临时目录隔离，测试核心功能的正确性。
+    """
+    import tempfile
+
+    print("=" * 50)
+    print("◐ kb_text 自检")
+    print("=" * 50)
+
+    passed = 0
+    total = 0
+    tmp_dir = tempfile.mkdtemp(prefix="kb_text_test_")
+
+    try:
+        # [1/5] 分词：中文词组 + 英文单词
+        total += 1
+        tokens = _tokenize("固体高次谐波产生 HHG")
+        has_cjk = any("高次" in t or "固体" in t for t in tokens)
+        has_en = "hhg" in tokens
+        if has_cjk and has_en:
+            passed += 1
+            print(f"  [1/{total}] ✓ 分词: 中文+英文 (tokens={len(tokens)})")
+        else:
+            print(f"  [1/{total}] ✗ 分词: has_cjk={has_cjk}, has_en={has_en}")
+
+        # [2/5] 文档分块
+        total += 1
+        long_text = "段落一内容。\n\n段落二内容。\n\n段落三内容。"
+        chunks = _chunk_document(long_text, max_chars=20)
+        if len(chunks) >= 2 and all("text" in c and "id" in c for c in chunks):
+            passed += 1
+            print(f"  [2/{total}] ✓ 分块: {len(chunks)} 块")
+        else:
+            print(f"  [2/{total}] ✗ 分块: chunks={len(chunks)}")
+
+        # [3/5] IDF 计算
+        total += 1
+        idf = _compute_idf(10, {"激光": 2, "相位": 5})
+        if isinstance(idf, dict) and "激光" in idf and idf["激光"] > idf["相位"]:
+            passed += 1
+            print(f"  [3/{total}] ✓ IDF: 低频词权重更高 (激光={idf['激光']:.2f}, 相位={idf['相位']:.2f})")
+        else:
+            print(f"  [3/{total}] ✗ IDF: idf={idf}")
+
+        # [4/5] frontmatter 解析
+        total += 1
+        fm_text = '---\ntitle: "测试"\ntags: ["HHG", "固体"]\nconfidence: 0.8\ngrowth_stage: "mature"\n---\n正文内容'
+        fm, body = parse_frontmatter(fm_text)
+        if (fm.get("title") == "测试" and fm.get("confidence") == 0.8
+                and fm.get("growth_stage") == "mature" and "正文" in body):
+            passed += 1
+            print(f"  [4/{total}] ✓ frontmatter 解析: title={fm['title']}, tags={fm.get('tags')}")
+        else:
+            print(f"  [4/{total}] ✗ frontmatter 解析: fm={fm}")
+
+        # [5/5] frontmatter 生成（往返一致性）
+        total += 1
+        meta = {"title": "往返测试", "tags": ["a", "b"], "confidence": True}
+        built = build_frontmatter(meta)
+        fm2, _ = parse_frontmatter(built + "\n正文")
+        if fm2.get("title") == "往返测试" and fm2.get("tags") == ["a", "b"] and fm2.get("confidence") is True:
+            passed += 1
+            print(f"  [5/{total}] ✓ frontmatter 往返: 标签去重+类型保持")
+        else:
+            print(f"  [5/{total}] ✗ frontmatter 往返: fm2={fm2}")
+    finally:
+        import shutil
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    ok = passed == total
+    print(f"\n{'✓' if ok else '✗'} kb_text: {passed}/{total} 通过")
+    return ok
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(0 if _self_check() else 1)
