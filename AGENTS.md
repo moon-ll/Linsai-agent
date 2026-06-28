@@ -217,7 +217,7 @@ LinSai-CoPilot/
 │   ├── wiki_regenerator/      # wiki 报告重建（4 模块）
 │   └── tests/                 # 自动化测试套件
 │       ├── test_runner.py     # 零依赖轻量测试框架
-│       ├── test_core.py       # 核心模块单元测试（34个检查点）
+│       ├── test_core.py       # 核心模块单元测试（83个检查点（6 个测试类：核心34+课题19+LLM5+工具8+kb子模块9+安全8））
 │       ├── test_scenarios.py  # 场景剧本测试（5类影子用户）
 │       ├── test_persona.py    # 人格一致性静态抽检
 │       └── test_web_api.py    # Web API 接口测试
@@ -510,6 +510,7 @@ LinSai-CoPilot/
 - ✅ **v3.5.6 Web 服务器 Mixin 拆分** — `web_server.py` 2576→321 行聚合器 + `web_base.py` + 10 路由 Mixin（共 160 路由（9 个路由 Mixin 123 条 + research 路由 37 条）），零行为变更
 - ✅ **内联样式清理** — 426/554（76.8%）内联 style 替换为 CSS 类，新增 ~180 个工具类
 - ✅ **v3.5.7 安全与质量优化** — P0 线程安全+路径遍历修复、P1 原子写入+XSS 修复+测试扩展（129+171）、P2 导入清理+缓存+CSS 变量
+- ✅ **v3.5.8 第三轮安全修复** — P0 project_manager/_send_static 路径遍历、P1 文件锁+escapeAttr+42处onclick修复+测试扩展（137+207）、P2 内存泄漏+async+对比度
 
 ---
 
@@ -557,11 +558,12 @@ LinSai-CoPilot/
 ### 5. 测试策略
 - **三层测试体系**：
   1. **单元回归测试**：`scripts/self_test.py` + `scripts/tests/`
-     - 零依赖轻量框架，隔离环境，129 个检查点，<1s 全量通过
-     - 七层覆盖：模块单元测试（34+9+5+19+8）/ 场景剧本测试（16）/ 人格一致性抽检（38）
+     - 零依赖轻量框架，隔离环境，137 个检查点，<1s 全量通过
+     - 八层覆盖：模块单元测试（34+9+5+19+8+8）/ 场景剧本测试（16）/ 人格一致性抽检（38）
      - 命令行：`--module` / `--scenario` / `--persona` / `--json` / `--web` / `--web-ci`
+     - `--web-ci` 全量回归含 Web API 测试，共 207 个检查点（含 70 个 Web API 测试）
      - 程序化：`from self_test import run_tests`
-  2. **模块自检**：每个核心脚本包含 `_self_check()` 函数
+  2. **模块自检**：核心脚本逐步补充 `_self_check()` 函数（已有 29 个，含 v3.5.7 新增 6 个子模块）
      - 6 个课题模块共 40 个检查点（project_manager 5 + unit_manager 8 + project_kb 8 + project_memory 9 + project_context 4 + project_workflow 6）
      - 运行：`python3 scripts/{module}.py`
   3. **E2E 集成测试**：`scripts/test_e2e_learning_full.py`
@@ -672,7 +674,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：3.5.7*
+*版本：3.5.8*
 *日期：2026-06-28*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

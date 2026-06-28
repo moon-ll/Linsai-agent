@@ -7,6 +7,7 @@
 // ============================================
 function appendMessage(role, rawContent, timestamp, animate = true, msgId = null) {
   const container = document.getElementById('messages');
+  if (!container) return;
   const div = document.createElement('div');
   div.className = `message ${role}`;
   if (msgId) div.dataset.msgId = msgId;
@@ -328,6 +329,7 @@ async function loadReferences() {
 
 function renderReferenceList(refs) {
   const container = document.getElementById('reference-list');
+  if (!container) return;
   if (!Array.isArray(refs) || refs.length === 0) {
     container.innerHTML = '<p class="empty">暂无引用</p>';
     return;
@@ -371,6 +373,7 @@ let selectedPersonas = [];
 
 function renderPersonaGrid() {
   const grid = document.getElementById('persona-grid');
+  if (!grid) return;
   grid.innerHTML = AGORA_PERSONAS.map(p => `
     <div class="persona-item" data-name="${escapeHtml(p)}">${escapeHtml(p)}</div>
   `).join('');

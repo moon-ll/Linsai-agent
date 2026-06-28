@@ -92,10 +92,14 @@ class ResearchRoutesMixin:
             if match:
                 handler = getattr(self, handler_name, None)
                 if handler:
-                    if body is not None:
-                        handler(path, parsed, body, match)
-                    else:
-                        handler(path, parsed, match)
+                    try:
+                        if body is not None:
+                            handler(path, parsed, body, match)
+                        else:
+                            handler(path, parsed, match)
+                    except ValueError as e:
+                        # 路径遍历等安全校验失败
+                        self._send_json({"error": str(e)}, 400)
                     return True
         return False
 

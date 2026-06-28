@@ -28,10 +28,28 @@ import json
 import re
 import shlex
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from paths import PROJECT_ROOT
+
+# 确保 scripts/ 目录在 sys.path（支持静态导入同目录模块）
+_SCRIPT_DIR = Path(__file__).parent.resolve()
+if str(_SCRIPT_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPT_DIR))
+
+# 同目录模块静态导入（替代原 importlib 动态加载，scripts/ 已是 Python 包）
+# 与 v3.5.7 copilot_engine 修复保持一致；导入失败时降级为 None，由调用处兜底。
+try:
+    import task_manager as tm
+except ImportError:
+    tm = None
+
+try:
+    import knowledge_base as kb
+except ImportError:
+    kb = None
 
 # 允许 file_read 读取的目录（相对 PROJECT_ROOT）
 _READ_ALLOW_DIRS = {"", "knowledge", "references", "persona", "skills", "memory", "sessions", "tasks", "docs"}
@@ -143,11 +161,8 @@ def tool_calc(expression: str) -> str:
 def tool_task_create(title: str, due_date: str = "", priority: str = "medium", description: str = "") -> str:
     """创建新任务。"""
     try:
-        import importlib.util
-        tm_path = Path(__file__).parent / "task_manager.py"
-        spec = importlib.util.spec_from_file_location("task_manager", tm_path)
-        tm = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(tm)
+        if tm is None:
+            return "✗ 创建任务失败: task_manager 模块不可用"
         task_id, _ = tm.create_task(title, category="general", due_date=due_date, priority=priority, description=description)
         return f"✓ 已创建任务: {task_id}"
     except Exception as e:
@@ -157,11 +172,8 @@ def tool_task_create(title: str, due_date: str = "", priority: str = "medium", d
 def tool_knowledge_query(query: str) -> str:
     """查询本地知识库。"""
     try:
-        import importlib.util
-        kb_path = Path(__file__).parent / "knowledge_base.py"
-        spec = importlib.util.spec_from_file_location("knowledge_base", kb_path)
-        kb = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(kb)
+        if kb is None:
+            return "✗ 查询失败: knowledge_base 模块不可用"
         results = kb.search(query, top_k=2)
         if not results:
             return "○ 知识库中未找到相关内容"
@@ -192,13 +204,10 @@ def tool_knowledge_research(topic: str, depth: str = "full", timeout: int = 300)
         tool_knowledge_research("二维材料中太赫兹波产生的最新方法", "quick", 120)
     """
     try:
-        import importlib.util
         from datetime import datetime, timezone
 
-        kb_path = Path(__file__).parent / "knowledge_base.py"
-        spec = importlib.util.spec_from_file_location("knowledge_base", kb_path)
-        kb = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(kb)
+        if kb is None:
+            return "✗ 调研失败: knowledge_base 模块不可用"
 
         # 第一步：通过 Hermes 调研
         depth_instruction = "" if depth == "full" else "简要调研，3-5个关键点即可。"
@@ -333,13 +342,10 @@ def tool_knowledge_ingest(folder: str = "raw", timeout: int = 300) -> str:
         tool_knowledge_ingest("raw", 120)
     """
     try:
-        import importlib.util
         from datetime import datetime, timezone
 
-        kb_path = Path(__file__).parent / "knowledge_base.py"
-        spec = importlib.util.spec_from_file_location("knowledge_base", kb_path)
-        kb = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(kb)
+        if kb is None:
+            return "✗ 整理失败: knowledge_base 模块不可用"
 
         # 确保 raw 目录存在
         raw_base = PROJECT_ROOT / "knowledge" / "raw"
@@ -476,12 +482,8 @@ def tool_knowledge_create(concept_name: str, context: str = "", timeout: int = 6
         tool_knowledge_create("能谷极化", "用户提到了能谷极化效应在固体HHG中的作用", 60)
     """
     try:
-        import importlib.util
-
-        kb_path = Path(__file__).parent / "knowledge_base.py"
-        spec = importlib.util.spec_from_file_location("knowledge_base", kb_path)
-        kb = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(kb)
+        if kb is None:
+            return "✗ 创建失败: knowledge_base 模块不可用"
 
         wiki_rel = kb.create_wiki_stub(concept_name, context, trigger="conversation")
         return (f"✓ 已创建 seedling stub: {wiki_rel}\n"

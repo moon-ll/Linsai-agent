@@ -49,6 +49,7 @@ async function loadProjectsTab(tab) {
 // v3.1.0: 📊 总览 tab
 // ============================================
 async function renderOverviewTab(container) {
+  try {
   const data = await apiGet('/api/projects/overview');
   const ts = data.task_stats || {};
   const ds = data.dispatch_stats || {};
@@ -126,12 +127,16 @@ async function renderOverviewTab(container) {
   }
 
   container.innerHTML = html;
+  } catch (e) {
+    console.warn('renderOverviewTab 失败:', e.message);
+  }
 }
 
 // ============================================
 // v3.1.0: 📋 项目任务 tab（核心）
 // ============================================
 async function renderTasksTab(container) {
+  try {
   // 并行加载任务列表 + 项目清单
   const [tasksData, projectsData] = await Promise.all([
     apiGet('/api/tasks'),
@@ -207,6 +212,9 @@ async function renderTasksTab(container) {
     const projSel = document.getElementById('ptask-project'); if (projSel) projSel.value = '';
     const priSel = document.getElementById('ptask-priority'); if (priSel) priSel.value = 'medium';
   };
+  } catch (e) {
+    console.warn('renderTasksTab 失败:', e.message);
+  }
 }
 
 // 渲染单个项目任务卡片
@@ -221,8 +229,8 @@ function renderProjectTaskCard(t) {
   // 查是否有进行中的派活
   const hasRunning = t._runningDispatch;
   const dispatchBtn = hasRunning
-    ? `<button onclick="viewTaskDispatch('${escapeHtml(t.task_id)}')" class="btn-xs btn-outline--warning-var">◐ 执行中</button>`
-    : `<button onclick="dispatchTask('${escapeHtml(t.task_id)}','${escapeHtml(t.project||'')}')" class="btn-xs btn-outline--accent">⚡ 派hermes</button>`;
+    ? `<button onclick="viewTaskDispatch('${escapeAttr(t.task_id)}')" class="btn-xs btn-outline--warning-var">◐ 执行中</button>`
+    : `<button onclick="dispatchTask('${escapeAttr(t.task_id)}','${escapeAttr(t.project||'')}')" class="btn-xs btn-outline--accent">⚡ 派hermes</button>`;
 
   return `<div style="padding:10px;background:var(--bg-tertiary);border-radius:6px;border-left:3px solid ${priColor};">
     <div class="d-flex jc-between ai-flex-start gap-8 mb-4">
@@ -237,7 +245,7 @@ function renderProjectTaskCard(t) {
     </div>
     ${subTotal ? `<div style="height:3px;background:var(--bg-secondary);border-radius:2px;overflow:hidden;margin-bottom:6px;"><div style="width:${Math.round(subDone/subTotal*100)}%;height:100%;background:var(--success-color);"></div></div>` : ''}
     <div class="flex-gap6-wrap">
-      ${t.status !== 'completed' ? `<button onclick="cycleTaskStatus('${escapeHtml(t.task_id)}','${escapeHtml(t.status)}')" class="btn-xs">→ 推进</button>` : ''}
+      ${t.status !== 'completed' ? `<button onclick="cycleTaskStatus('${escapeAttr(t.task_id)}','${escapeAttr(t.status)}')" class="btn-xs">→ 推进</button>` : ''}
       ${dispatchBtn}
     </div>
   </div>`;
@@ -300,14 +308,19 @@ async function cycleTaskStatus(taskId, currentStatus) {
 
 // 查看任务的派活输出
 async function viewTaskDispatch(taskId) {
+  try {
   switchProjectsTab('dispatches');
   // dispatches 页会加载全部，这里可加高亮，简化处理直接跳转
+  } catch (e) {
+    console.warn('viewTaskDispatch 失败:', e.message);
+  }
 }
 
 // ============================================
 // v3.1.0: 💭 项目意见 tab
 // ============================================
 async function renderOpinionsTab(container) {
+  try {
   const [opinionsData, projectsData] = await Promise.all([
     apiGet('/api/projects/opinions'),
     apiGet('/api/projects/list'),
@@ -348,8 +361,8 @@ async function renderOpinionsTab(container) {
         </div>
         <div class="fs-082 text-primary mb-6 ws-pre-wrap">${escapeHtml(o.content)}</div>
         <div class="flex-gap6">
-          ${o.status !== 'resolved' ? `<button onclick="resolveOpinion('${escapeHtml(o.id)}')" class="btn-xs btn-outline--success">✓ 标记解决</button>` : ''}
-          <button onclick="discussOpinion('${escapeHtml(o.id)}','${escapeHtml((o.content||'').replace(/'/g,'')).slice(0,80)}')" class="btn-xs">🗨️ 转讨论</button>
+          ${o.status !== 'resolved' ? `<button onclick="resolveOpinion('${escapeAttr(o.id)}')" class="btn-xs btn-outline--success">✓ 标记解决</button>` : ''}
+          <button onclick="discussOpinion('${escapeAttr(o.id)}','${escapeAttr((o.content||'').slice(0,80))}')" class="btn-xs">🗨️ 转讨论</button>
         </div>
       </div>`;
     }
@@ -362,6 +375,9 @@ async function renderOpinionsTab(container) {
 
   const submitBtn = document.getElementById('op-submit');
   if (submitBtn) submitBtn.onclick = submitOpinion;
+  } catch (e) {
+    console.warn('renderOpinionsTab 失败:', e.message);
+  }
 }
 
 async function submitOpinion() {
@@ -472,6 +488,7 @@ function calcDuration(start, end) {
 // NSFC 三区面板（v2.9.2：课题产物 + 调研资料 + 待决策项）
 // ============================================
 async function renderNsfcTree(container) {
+  try {
   const [topics, refs, pending] = await Promise.all([
     apiGet('/api/projects/nsfc/topics'),
     apiGet('/api/projects/nsfc/references'),
@@ -554,9 +571,9 @@ async function renderNsfcTree(container) {
         <div class="fs-085 fw-500 mb-4">📌 ${escapeHtml(p.title)}</div>
         <div class="meta-sm-mb">${p.related_topic ? '课题 '+p.related_topic+' · ' : ''}来源 ${escapeHtml(p.source)}</div>
         <div class="flex-gap6">
-          <button onclick="nsfcDecide('${escapeHtml(p.id)}','approve','${escapeHtml(p.title).replace(/'/g,'')}')" class="btn-outline-5 btn-outline--success">✓ 通过</button>
-          <button onclick="nsfcDecide('${escapeHtml(p.id)}','reject','${escapeHtml(p.title).replace(/'/g,'')}')" class="btn-outline-5 btn-outline--tertiary">✗ 否决</button>
-          <button onclick="nsfcDiscuss('${escapeHtml(p.id)}','${escapeHtml(p.title).replace(/'/g,'')}','${escapeHtml(p.related_topic)}')" class="btn-filled-5">💬 讨论</button>
+          <button onclick="nsfcDecide('${escapeAttr(p.id)}','approve','${escapeAttr(p.title)}')" class="btn-outline-5 btn-outline--success">✓ 通过</button>
+          <button onclick="nsfcDecide('${escapeAttr(p.id)}','reject','${escapeAttr(p.title)}')" class="btn-outline-5 btn-outline--tertiary">✗ 否决</button>
+          <button onclick="nsfcDiscuss('${escapeAttr(p.id)}','${escapeAttr(p.title)}','${escapeAttr(p.related_topic)}')" class="btn-filled-5">💬 讨论</button>
         </div>
       </div>`;
     }
@@ -565,6 +582,9 @@ async function renderNsfcTree(container) {
 
   html += `<div id="nsfc-file-viewer" class="mt-12 d-none"></div>`;
   container.innerHTML = html;
+  } catch (e) {
+    console.warn('renderNsfcTree 失败:', e.message);
+  }
 }
 
 // NSFC 决策（通过/否决）
@@ -677,6 +697,7 @@ async function submitDiscussionSummary() {
 // 文献候选池（v2.9.1：三状态分组 + 持久化）
 // ============================================
 async function renderPapersCards(container) {
+  try {
   const pool = await apiGet('/api/projects/papers/pool');
   const byStatus = pool.by_status || {};
 
@@ -734,14 +755,14 @@ async function renderPapersCards(container) {
       html += `<div class="flex-gap6-wrap">`;
 
       if (g.status === 'unseen') {
-        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','interested',this)" class="btn-outline-5 btn-outline--success">👍 感兴趣</button>`;
-        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','later',this)" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:5px;background:transparent;color:var(--warning-color);cursor:pointer;font-size:0.78rem;">⏰ 稍后</button>`;
-        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','skip',this)" class="btn-outline-5 btn-outline--tertiary">👎 跳过</button>`;
-        html += `<button onclick="discussPaper('${escapeHtml(p.arxiv_id)}','${escapeHtml(p.title).replace(/'/g,"")}')" class="btn-filled-5">💬 讨论</button>`;
+        html += `<button onclick="paperFeedback('${escapeAttr(p.arxiv_id)}','interested',this)" class="btn-outline-5 btn-outline--success">👍 感兴趣</button>`;
+        html += `<button onclick="paperFeedback('${escapeAttr(p.arxiv_id)}','later',this)" style="padding:4px 10px;border:1px solid var(--border-color);border-radius:5px;background:transparent;color:var(--warning-color);cursor:pointer;font-size:0.78rem;">⏰ 稍后</button>`;
+        html += `<button onclick="paperFeedback('${escapeAttr(p.arxiv_id)}','skip',this)" class="btn-outline-5 btn-outline--tertiary">👎 跳过</button>`;
+        html += `<button onclick="discussPaper('${escapeAttr(p.arxiv_id)}','${escapeAttr(p.title)}')" class="btn-filled-5">💬 讨论</button>`;
       } else if (g.status === 'viewed') {
         // 已看未讨论：主要操作是讨论，讨论完可归档
-        html += `<button onclick="discussPaper('${escapeHtml(p.arxiv_id)}','${escapeHtml(p.title).replace(/'/g,"")}')" class="btn-filled-5">💬 讨论</button>`;
-        html += `<button onclick="paperFeedback('${escapeHtml(p.arxiv_id)}','discuss_done',this)" class="btn-outline-5 btn-outline--success">📥 归档沉淀</button>`;
+        html += `<button onclick="discussPaper('${escapeAttr(p.arxiv_id)}','${escapeAttr(p.title)}')" class="btn-filled-5">💬 讨论</button>`;
+        html += `<button onclick="paperFeedback('${escapeAttr(p.arxiv_id)}','discuss_done',this)" class="btn-outline-5 btn-outline--success">📥 归档沉淀</button>`;
       } else {
         html += `<span class="fs-075 text-success pad-4-8">✓ 已深度沉淀</span>`;
       }
@@ -754,6 +775,9 @@ async function renderPapersCards(container) {
     html = '<p class="state-loading state-loading pad-40">候选池为空</p>';
   }
   container.innerHTML = html;
+  } catch (e) {
+    console.warn('renderPapersCards 失败:', e.message);
+  }
 }
 
 // 讨论某篇文献（跳到聊天框 + 注入上下文）

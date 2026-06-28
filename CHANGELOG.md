@@ -1,5 +1,51 @@
 # 变更记录
 
+## v3.5.8 - 2026-06-28 第三轮安全修复与质量优化
+
+### P0 灾难性漏洞修复
+- **project_manager 路径遍历**：新增 `_validate_project_id()` 安全校验，`DELETE /api/research/projects/..` 不再能删除项目目录
+- **unit_manager 路径遍历**：新增 `_validate_unit_id()` 安全校验
+- **_send_static 路径遍历**：`GET /web/../../.ssh/id_rsa` 不再能读取任意文件，改用 `_safe_join`
+- **research 路由统一安全捕获**：`_dispatch_research_routes` 添加 ValueError 捕获，非法 ID 返回 400
+
+### P1 后端安全
+- **文件锁保护**：kb_graph/task_manager/project_manager/unit_manager 的读-改-写操作全部加锁，防止并发丢更新
+- **tool_engine 导入清理**：5 处 `importlib.util` 动态导入改为静态 import
+- **wiki 删除顺序修复**：先读取 title 再 rename，图谱节点正确清理
+
+### P1 前端安全
+- **escapeAttr 函数**：`core.js` 新增 `escapeAttr()` 转义单引号+双引号，专门用于 onclick 属性
+- **onclick 注入全面修复**：hermes_console.js(3处)、task.js(1处)、projects.js(14处)、research.js(24处) 共 42 处内联事件处理器修复
+- **kb.js escapeHtml 补全**：6 处 innerHTML 注入点补全转义
+- **CSS 重复选择器合并**：.drawer-overlay/.chat-archive-header/.kb-list-item 3 个重复块合并
+
+### P1 测试扩展（137+207）
+- `test_core.py` 新增 `SecurityTests` 类（8 检查点：_safe_join 路径遍历 + save_json 原子写入）
+- `test_web_api.py` 新增 5 个测试方法（28 检查点：research/tasks/skills/system/kb 路由）
+- 路由覆盖率 18%→26%（42/160 唯一路由）
+
+### P1 文档修正
+- AGENTS.md "每个核心脚本包含 _self_check()" 虚假声明修正
+- test_core.py 检查点数修正（34→83）
+- --web-ci 检查点数补充标注（207）
+
+### P2 代码质量
+- `_bg_tasks` 内存泄漏修复：新增 `_prune_bg_tasks()` 自动清理已完成超 1 小时的任务
+- `projects.js`(6处)/`research.js`(3处) async 函数补充 try-catch
+- `session.js`/`chat.js` null 检查补全
+- CSS 硬编码 `#c9a227` 改为 `var(--warning-color)`
+- 浅色主题 `--text-tertiary` 对比度修复（#888→#6b6b，满足 WCAG AA 4.5:1）
+
+### P3 优化
+- `web_routes_hermes.py` 新增服务端最大 timeout 上限（600s）
+- `kb_graph.py` _self_check 缓存重置
+- `app.js` debounce 绑定添加可选链
+- pycache 清理
+
+### 验证结果
+- 单元测试：137/137 通过（1.154s）
+- Web API 测试：207/207 通过（2.903s）
+
 ## v3.5.7 - 2026-06-28 全面安全修复与质量优化
 
 ### P0 安全修复

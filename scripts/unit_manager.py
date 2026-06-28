@@ -78,8 +78,18 @@ def _units_dir(project_id: str) -> Path:
     return _project_dir(project_id) / "units"
 
 
+def _validate_unit_id(unit_id: str) -> str:
+    """校验 unit_id 安全性，防止路径遍历。"""
+    if not unit_id or not isinstance(unit_id, str):
+        raise ValueError("unit_id 不能为空")
+    if "/" in unit_id or "\\" in unit_id or ".." in unit_id:
+        raise ValueError(f"非法 unit_id: {unit_id}")
+    return unit_id
+
+
 def _unit_path(project_id: str, unit_id: str) -> Path:
     """单元 JSON 文件路径。"""
+    _validate_unit_id(unit_id)
     return _units_dir(project_id) / f"{unit_id}.json"
 
 
@@ -114,6 +124,17 @@ def _load_unit(unit_id: str) -> Tuple[dict, Path]:
 def _save_unit(unit: dict, path: Path) -> None:
     """保存单元 JSON 文件。"""
     _write_json(path, unit)
+
+
+def _unit_file_lock():
+    """获取单元写入锁（延迟导入 web_base，避免循环依赖）。
+
+    使用独立的单元锁键（PROJECTS_DIR + "::units"），与 project_manager 的课题锁键
+    区分，避免 create_unit/delete_unit 内部调用 update_project 时发生不可重入死锁
+    （threading.Lock 不可重入）。单元操作恒以 单元锁→课题锁 顺序获取，无反向，安全。
+    """
+    import web_base
+    return web_base._get_file_lock(str(PROJECTS_DIR) + "::units")
 
 
 def _gen_ac_id(unit: dict) -> str:
@@ -183,53 +204,57 @@ def create_unit(
            phase 设为 f"unit_{seq}"
         6. 如果 acceptance_criteria 为 None，初始化为空列表
     """
-    # 1. 读取课题信息（验证课题存在）
-    project = get_project(project_id)
-    existing_units = project.get("units", [])
+    # 加锁保护 读取课题→生成unit_id→写单元文件→更新课题 的读-改-写，
+    # 防止并发创建产生重复 unit_id 或 units 列表互相覆盖。
+    # 内部调用 update_project 会获取课题锁，锁键不同，无死锁。
+    with _unit_file_lock():
+        # 1. 读取课题信息（验证课题存在）
+        project = get_project(project_id)
+        existing_units = project.get("units", [])
 
-    # 2. 生成 unit_id（课题内自增）
-    seq = len(existing_units) + 1
-    unit_id = f"UNIT-{seq:03d}"
+        # 2. 生成 unit_id（课题内自增）
+        seq = len(existing_units) + 1
+        unit_id = f"UNIT-{seq:03d}"
 
-    # 3. 创建单元目录
-    udir = _units_dir(project_id)
-    udir.mkdir(parents=True, exist_ok=True)
+        # 3. 创建单元目录
+        udir = _units_dir(project_id)
+        udir.mkdir(parents=True, exist_ok=True)
 
-    # 6. 初始化验收标准
-    criteria = _normalize_criteria(acceptance_criteria)
+        # 6. 初始化验收标准
+        criteria = _normalize_criteria(acceptance_criteria)
 
-    # 4. 构造单元数据
-    now = _now_utc()
-    unit = {
-        "unit_id": unit_id,
-        "project_id": project_id,
-        "title": title,
-        "description": description,
-        "sequence": seq,
-        "status": "planning",
-        "acceptance_criteria": criteria,
-        "tasks": [],  # task_id 列表，引用 task_manager 的任务
-        "risks": [],
-        "deliverables": [],
-        "review_notes": "",
-        "progress_report": "",
-        "created_at": now,
-        "updated_at": now,
-        "completed_at": None,
-    }
+        # 4. 构造单元数据
+        now = _now_utc()
+        unit = {
+            "unit_id": unit_id,
+            "project_id": project_id,
+            "title": title,
+            "description": description,
+            "sequence": seq,
+            "status": "planning",
+            "acceptance_criteria": criteria,
+            "tasks": [],  # task_id 列表，引用 task_manager 的任务
+            "risks": [],
+            "deliverables": [],
+            "review_notes": "",
+            "progress_report": "",
+            "created_at": now,
+            "updated_at": now,
+            "completed_at": None,
+        }
 
-    path = _unit_path(project_id, unit_id)
-    _save_unit(unit, path)
+        path = _unit_path(project_id, unit_id)
+        _save_unit(unit, path)
 
-    # 5. 更新课题: units / current_unit / phase
-    new_units = list(existing_units)
-    new_units.append(unit_id)
-    update_project(
-        project_id,
-        units=new_units,
-        current_unit=unit_id,
-        phase=f"unit_{seq}",
-    )
+        # 5. 更新课题: units / current_unit / phase
+        new_units = list(existing_units)
+        new_units.append(unit_id)
+        update_project(
+            project_id,
+            units=new_units,
+            current_unit=unit_id,
+            phase=f"unit_{seq}",
+        )
 
     if _log:
         _log.info(f"单元已创建: {unit_id} | 课题={project_id} | 序号={seq} | 验收标准={len(criteria)} | 状态=planning")
@@ -248,26 +273,29 @@ def update_unit(unit_id: str, **fields) -> dict:
     status 字段走状态机校验（调用 transition_unit），
     unit_id / project_id / created_at 为只读字段。
     """
-    unit, path = _load_unit(unit_id)
+    # 加锁保护 读取-修改-写回，防止并发更新互相覆盖。
+    # status 分支调用 transition_unit（未单独加锁），在持锁状态下执行，安全。
+    with _unit_file_lock():
+        unit, path = _load_unit(unit_id)
 
-    readonly = {"unit_id", "project_id", "created_at"}
+        readonly = {"unit_id", "project_id", "created_at"}
 
-    # status 单独走状态机
-    if "status" in fields:
-        new_status = fields.pop("status")
-        old_status = unit.get("status", "planning")
-        if new_status != old_status:
-            return transition_unit(unit_id, new_status)
+        # status 单独走状态机
+        if "status" in fields:
+            new_status = fields.pop("status")
+            old_status = unit.get("status", "planning")
+            if new_status != old_status:
+                return transition_unit(unit_id, new_status)
 
-    for key, value in fields.items():
-        if key in readonly:
-            if _log:
-                _log.warning(f"字段 '{key}' 只读，已跳过")
-            continue
-        unit[key] = value
+        for key, value in fields.items():
+            if key in readonly:
+                if _log:
+                    _log.warning(f"字段 '{key}' 只读，已跳过")
+                continue
+            unit[key] = value
 
-    unit["updated_at"] = _now_utc()
-    _save_unit(unit, path)
+        unit["updated_at"] = _now_utc()
+        _save_unit(unit, path)
     if _log:
         _log.info(f"单元已更新: {unit_id}")
     return unit
@@ -340,23 +368,26 @@ def delete_unit(unit_id: str, confirm: bool = False) -> bool:
             _log.warning("删除单元需要 confirm=True")
         return False
 
-    unit, path = _load_unit(unit_id)
-    project_id = unit.get("project_id", "")
+    # 加锁保护 删除单元文件 + 同步课题 units 列表的读-改-写。
+    # 内部调用 update_project 会获取课题锁，锁键不同，无死锁。
+    with _unit_file_lock():
+        unit, path = _load_unit(unit_id)
+        project_id = unit.get("project_id", "")
 
-    # 删除单元文件
-    path.unlink()
+        # 删除单元文件
+        path.unlink()
 
-    # 从课题 units 列表移除引用
-    if project_id:
-        try:
-            project = get_project(project_id)
-            units_list = [u for u in project.get("units", []) if u != unit_id]
-            update_fields: Dict[str, Any] = {"units": units_list}
-            if project.get("current_unit") == unit_id:
-                update_fields["current_unit"] = None
-            update_project(project_id, **update_fields)
-        except FileNotFoundError:
-            pass
+        # 从课题 units 列表移除引用
+        if project_id:
+            try:
+                project = get_project(project_id)
+                units_list = [u for u in project.get("units", []) if u != unit_id]
+                update_fields: Dict[str, Any] = {"units": units_list}
+                if project.get("current_unit") == unit_id:
+                    update_fields["current_unit"] = None
+                update_project(project_id, **update_fields)
+            except FileNotFoundError:
+                pass
 
     if _log:
         _log.info(f"单元已删除: {unit_id}")

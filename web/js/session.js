@@ -20,7 +20,7 @@ async function loadSessions() {
 
 function renderSessionList() {
   const container = document.getElementById('session-list');
-  const search = document.getElementById('session-search').value.toLowerCase();
+  const search = (document.getElementById('session-search')?.value || '').toLowerCase();
 
   let sessions = Array.isArray(State.sessions) ? State.sessions : [];
   if (search) {
@@ -64,7 +64,8 @@ async function switchSession(sessionId) {
   if (State.isStreaming && State.currentReader) {
     try { State.currentReader.cancel(); } catch (_) {}
     State.isStreaming = false;
-    document.getElementById('typing-indicator').style.display = 'none';
+    const _typingEl = document.getElementById('typing-indicator');
+    if (_typingEl) _typingEl.style.display = 'none';
   }
 
   State.currentSessionId = sessionId;
@@ -119,10 +120,14 @@ async function viewArchiveSession(sessionId) {
   State.viewingArchive = true;
   renderSessionList();
 
-  document.getElementById('chat-archive-header').style.display = 'flex';
-  document.querySelector('.input-area').style.display = 'none';
-  document.getElementById('welcome-screen').style.display = 'none';
-  document.getElementById('messages').innerHTML = '';
+  const _archiveHeader = document.getElementById('chat-archive-header');
+  if (_archiveHeader) _archiveHeader.style.display = 'flex';
+  const _inputArea = document.querySelector('.input-area');
+  if (_inputArea) _inputArea.style.display = 'none';
+  const _welcomeScreen = document.getElementById('welcome-screen');
+  if (_welcomeScreen) _welcomeScreen.style.display = 'none';
+  const _messagesEl = document.getElementById('messages');
+  if (_messagesEl) _messagesEl.innerHTML = '';
 
   try {
     const data = await apiGet(`/api/sessions/${encodeURIComponent(sessionId)}/messages`);
@@ -150,8 +155,10 @@ async function viewArchiveSession(sessionId) {
 // ============================================
 async function searchHistory() {
   const input = document.getElementById('history-search-input');
+  if (!input) return;
   const query = input.value.trim();
   const container = document.getElementById('history-results');
+  if (!container) return;
 
   if (!query) {
     container.innerHTML = '<p class="empty">输入关键词搜索历史记录</p>';

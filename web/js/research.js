@@ -30,7 +30,7 @@ function researchStatusStyle(status) {
     planning:  { label: '○ 规划中', color: 'var(--info-color)' },
     active:    { label: '◐ 进行中', color: 'var(--success-color)' },
     executing: { label: '⚡ 执行中', color: 'var(--warning-color)' },
-    review:    { label: '🔍 待验收', color: '#c9a227' },
+    review:    { label: '🔍 待验收', color: 'var(--warning-color)' },
     completed: { label: '✓ 已完成', color: 'var(--text-tertiary)' },
     paused:    { label: '⏸ 已暂停', color: 'var(--text-tertiary)' },
   };
@@ -83,7 +83,7 @@ async function renderProjectList(container) {
       for (const p of projects) {
         const st = researchStatusStyle(p.status);
         const unitCount = p.unit_count ?? p.units_count ?? '?';
-        html += `<div class="research-card" tabindex="0" role="button" aria-label="打开课题 ${escapeHtml(p.name)}" onclick="openProjectDetail('${escapeHtml(p.project_id)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProjectDetail('${escapeHtml(p.project_id)}')}" style="padding:14px;background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border-color);border-left:3px solid ${st.color};cursor:pointer;transition:transform 0.15s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">`;
+        html += `<div class="research-card" tabindex="0" role="button" aria-label="打开课题 ${escapeHtml(p.name)}" onclick="openProjectDetail('${escapeAttr(p.project_id)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openProjectDetail('${escapeAttr(p.project_id)}')}" style="padding:14px;background:var(--bg-secondary);border-radius:8px;border:1px solid var(--border-color);border-left:3px solid ${st.color};cursor:pointer;transition:transform 0.15s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">`;
         html += '<div class="row-between-top">';
         html += `<div class="fs-09 fw-600 flex-1 text-primary">${escapeHtml(p.name)}</div>`;
         html += researchStatusBadge(p.status);
@@ -164,8 +164,8 @@ async function renderProjectDetail(container) {
     html += `<button onclick="renderProjectList(document.getElementById('research-body'))" class="pad-4-10 border-default br-6 bg-transparent text-secondary cursor-pointer fs-08">← 返回</button>`;
     html += `<h4 class="fs-095 m-0 flex-1 text-primary">${escapeHtml(project.name)}</h4>`;
     html += researchStatusBadge(project.status);
-    html += `<button onclick="transitionProject('${escapeHtml(pid)}','${escapeHtml(project.status)}')" class="pad-4-10 border-accent br-6 bg-transparent text-accent cursor-pointer fs-078">→ 流转</button>`;
-    html += `<button onclick="deleteProject('${escapeHtml(pid)}')" style="padding:4px 10px;border:1px solid var(--error-color);border-radius:6px;background:transparent;color:var(--error-color);cursor:pointer;font-size:0.78rem;">✕ 删除</button>`;
+    html += `<button onclick="transitionProject('${escapeAttr(pid)}','${escapeAttr(project.status)}')" class="pad-4-10 border-accent br-6 bg-transparent text-accent cursor-pointer fs-078">→ 流转</button>`;
+    html += `<button onclick="deleteProject('${escapeAttr(pid)}')" style="padding:4px 10px;border:1px solid var(--error-color);border-radius:6px;background:transparent;color:var(--error-color);cursor:pointer;font-size:0.78rem;">✕ 删除</button>`;
     html += '</div>';
     if (project.goal) {
       html += `<div class="label-sm">🎯 ${escapeHtml(project.goal)}</div>`;
@@ -229,8 +229,8 @@ async function renderUnitsTab(container, pid) {
   const data = await apiGet(`/api/research/projects/${encodeURIComponent(pid)}/status`);
   const units = data.units || [];
   let html = '<div class="d-flex gap-8 mb-14 fw-wrap">';
-  html += `<button onclick="addUnit('${escapeHtml(pid)}')" class="btn-top-action">+ 添加单元</button>`;
-  html += `<button onclick="planUnits('${escapeHtml(pid)}')" style="padding:6px 14px;border:1px solid var(--accent-color);background:transparent;color:var(--accent-color);border-radius:6px;cursor:pointer;font-size:0.82rem;">📋 规划单元</button>`;
+  html += `<button onclick="addUnit('${escapeAttr(pid)}')" class="btn-top-action">+ 添加单元</button>`;
+  html += `<button onclick="planUnits('${escapeAttr(pid)}')" style="padding:6px 14px;border:1px solid var(--accent-color);background:transparent;color:var(--accent-color);border-radius:6px;cursor:pointer;font-size:0.82rem;">📋 规划单元</button>`;
   html += '</div>';
 
   if (!units.length) {
@@ -269,7 +269,7 @@ async function renderUnitsTab(container, pid) {
         const text = ac.text ?? ac.title ?? ac.criterion ?? ac.summary ?? String(ac);
         if (acId) {
           html += `<label style="display:flex;align-items:flex-start;gap:6px;padding:3px 0;font-size:0.78rem;cursor:pointer;color:${met ? 'var(--text-tertiary)' : 'var(--text-primary)'};${met ? 'text-decoration:line-through;' : ''}">`;
-          html += `<input type="checkbox" ${met ? 'checked' : ''} onchange="toggleAcceptance('${escapeHtml(pid)}','${escapeHtml(u.unit_id)}','${escapeHtml(String(acId))}',${met})" class="mt-2 w-auto">`;
+          html += `<input type="checkbox" ${met ? 'checked' : ''} onchange="toggleAcceptance('${escapeAttr(pid)}','${escapeAttr(u.unit_id)}','${escapeAttr(String(acId))}',${met})" class="mt-2 w-auto">`;
           html += `<span>${escapeHtml(text)}</span></label>`;
         } else {
           html += `<div style="display:flex;align-items:flex-start;gap:6px;padding:3px 0;font-size:0.78rem;color:${met ? 'var(--text-tertiary)' : 'var(--text-primary)'};${met ? 'text-decoration:line-through;' : ''}">`;
@@ -300,10 +300,10 @@ async function renderUnitsTab(container, pid) {
 
     // 操作
     html += '<div class="d-flex gap-6 mt-8 fw-wrap">';
-    html += `<button onclick="startExecution('${escapeHtml(pid)}','${escapeHtml(u.unit_id)}')" class="btn-xs btn-outline--accent">⚡ 执行</button>`;
-    html += `<button onclick="reviewUnit('${escapeHtml(pid)}','${escapeHtml(u.unit_id)}')" class="btn-xs btn-outline--warning-var">🔍 验收</button>`;
-    html += `<button onclick="completeUnit('${escapeHtml(pid)}','${escapeHtml(u.unit_id)}')" class="btn-xs btn-outline--success">✓ 完成</button>`;
-    html += `<button onclick="deleteUnit('${escapeHtml(pid)}','${escapeHtml(u.unit_id)}')" class="btn-xs">✕</button>`;
+    html += `<button onclick="startExecution('${escapeAttr(pid)}','${escapeAttr(u.unit_id)}')" class="btn-xs btn-outline--accent">⚡ 执行</button>`;
+    html += `<button onclick="reviewUnit('${escapeAttr(pid)}','${escapeAttr(u.unit_id)}')" class="btn-xs btn-outline--warning-var">🔍 验收</button>`;
+    html += `<button onclick="completeUnit('${escapeAttr(pid)}','${escapeAttr(u.unit_id)}')" class="btn-xs btn-outline--success">✓ 完成</button>`;
+    html += `<button onclick="deleteUnit('${escapeAttr(pid)}','${escapeAttr(u.unit_id)}')" class="btn-xs">✕</button>`;
     html += '</div>';
     html += '</div></div>';
   });
@@ -527,7 +527,7 @@ async function renderKbTab(container, pid) {
   let html = '<div class="d-flex gap-10 mb-10 fw-wrap ai-center">';
   html += `<input type="text" id="rk-search" placeholder="🔍 搜索知识库…" style="flex:1;min-width:180px;padding:6px 10px;border:1px solid var(--border-color);border-radius:6px;background:var(--bg-primary);color:var(--text-primary);font-size:0.82rem;">`;
   html += `<button id="rk-search-btn" style="padding:6px 12px;border:1px solid var(--border-color);border-radius:6px;background:transparent;color:var(--text-secondary);cursor:pointer;font-size:0.82rem;">搜索</button>`;
-  html += `<button onclick="addDocument('${escapeHtml(pid)}')" style="padding:6px 12px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.82rem;">+ 添加文档</button>`;
+  html += `<button onclick="addDocument('${escapeAttr(pid)}')" style="padding:6px 12px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:0.82rem;">+ 添加文档</button>`;
   html += '</div>';
 
   // 层级筛选
@@ -576,7 +576,7 @@ async function loadKbDocList(pid) {
     for (const d of docs) {
       const lc = layerColors[d.layer] || 'var(--text-tertiary)';
       const tags = (d.tags || []).slice(0, 3).map(t => `<span style="font-size:0.65rem;color:var(--text-tertiary);background:var(--bg-tertiary);padding:1px 5px;border-radius:8px;">${escapeHtml(t)}</span>`).join(' ');
-      html += `<div tabindex="0" role="button" aria-label="查看文档 ${escapeHtml(d.title || d.path)}" onclick="viewDocument('${escapeHtml(pid)}','${escapeHtml(d.path)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewDocument('${escapeHtml(pid)}','${escapeHtml(d.path)}')}" class="clickable-item" onmouseover="this.style.borderColor='var(--accent-color)'" onmouseout="this.style.borderColor='transparent'">`;
+      html += `<div tabindex="0" role="button" aria-label="查看文档 ${escapeHtml(d.title || d.path)}" onclick="viewDocument('${escapeAttr(pid)}','${escapeAttr(d.path)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewDocument('${escapeAttr(pid)}','${escapeAttr(d.path)}')}" class="clickable-item" onmouseover="this.style.borderColor='var(--accent-color)'" onmouseout="this.style.borderColor='transparent'">`;
       html += `<div style="font-size:0.8rem;font-weight:500;color:var(--text-primary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(d.title || d.path)}</div>`;
       html += '<div class="d-flex ai-center gap-6 mt-3">';
       html += `<span style="font-size:0.65rem;padding:1px 6px;border-radius:8px;background:${lc};color:#fff;">${escapeHtml(d.layer || '')}</span>`;
@@ -605,7 +605,7 @@ async function searchKb(pid, query) {
     }
     let html = '<div class="col-gap4">';
     for (const r of results) {
-      html += `<div tabindex="0" role="button" aria-label="查看文档 ${escapeHtml(r.title)}" onclick="viewDocument('${escapeHtml(pid)}','${escapeHtml(r.path)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewDocument('${escapeHtml(pid)}','${escapeHtml(r.path)}')}" class="clickable-item" onmouseover="this.style.borderColor='var(--accent-color)'" onmouseout="this.style.borderColor='transparent'">`;
+      html += `<div tabindex="0" role="button" aria-label="查看文档 ${escapeHtml(r.title)}" onclick="viewDocument('${escapeAttr(pid)}','${escapeAttr(r.path)}')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();viewDocument('${escapeAttr(pid)}','${escapeAttr(r.path)}')}" class="clickable-item" onmouseover="this.style.borderColor='var(--accent-color)'" onmouseout="this.style.borderColor='transparent'">`;
       html += `<div class="fs-08 fw-500 text-primary">${escapeHtml(r.title)}</div>`;
       html += `<div class="fs-065 text-tertiary mt-2">${escapeHtml(r.layer || '')}${r.score !== undefined ? ' · ' + Math.round(r.score * 100) + '%' : ''}</div>`;
       if (r.snippet) html += `<div style="font-size:0.72rem;color:var(--text-secondary);margin-top:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${escapeHtml(r.snippet)}</div>`;
@@ -727,7 +727,7 @@ async function renderMemoryTab(container, pid) {
 
     // 记忆片段
     const snippets = snippetsData.snippets || [];
-    html += `<div class="mb-14"><div class="row-between"><span class="label-bold">🧩 记忆片段（${snippets.length}）</span><button onclick="addSnippet('${escapeHtml(pid)}')" class="btn-outline-075">+ 添加</button></div>`;
+    html += `<div class="mb-14"><div class="row-between"><span class="label-bold">🧩 记忆片段（${snippets.length}）</span><button onclick="addSnippet('${escapeAttr(pid)}')" class="btn-outline-075">+ 添加</button></div>`;
     if (snippets.length) {
       html += '<div class="d-flex fd-col gap-6 maxh-200 overflow-y-auto">';
       for (const s of snippets) {
@@ -741,7 +741,7 @@ async function renderMemoryTab(container, pid) {
     html += '</div>';
 
     // 决策记录
-    html += `<div><div class="row-between"><span class="label-bold">📌 决策记录</span><button onclick="addDecision('${escapeHtml(pid)}')" style="padding:3px 10px;border:1px solid var(--success-color);border-radius:4px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.75rem;">+ 添加</button></div>`;
+    html += `<div><div class="row-between"><span class="label-bold">📌 决策记录</span><button onclick="addDecision('${escapeAttr(pid)}')" style="padding:3px 10px;border:1px solid var(--success-color);border-radius:4px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.75rem;">+ 添加</button></div>`;
     html += `<p class="meta-sm-pad8">决策记录写入 PROJECT-MEMORY.md（共 ${escapeHtml(String(stats.decision_count ?? 0))} 条），可在上方编辑器查看与编辑</p>`;
     html += '</div>';
 
@@ -896,14 +896,14 @@ async function renderWorkflowTab(container, pid) {
 
     // 工作流操作按钮
     html += '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin-bottom:12px;">';
-    html += `<button onclick="planUnits('${escapeHtml(pid)}')" style="padding:10px;border:1px solid var(--info-color);border-radius:6px;background:transparent;color:var(--info-color);cursor:pointer;font-size:0.82rem;text-align:center;">📋 规划单元<br><span class="meta-xs">批量拆解课题</span></button>`;
-    html += `<button onclick="workflowExecutePick('${escapeHtml(pid)}')" class="pad-10 border-accent br-6 bg-transparent text-accent cursor-pointer fs-082 ta-center">⚡ 执行单元<br><span class="meta-xs">分配任务分工</span></button>`;
-    html += `<button onclick="workflowReviewPick('${escapeHtml(pid)}')" style="padding:10px;border:1px solid var(--warning-color);border-radius:6px;background:transparent;color:var(--warning-color);cursor:pointer;font-size:0.82rem;text-align:center;">🔍 验收单元<br><span class="meta-xs">检查达标情况</span></button>`;
-    html += `<button onclick="workflowCompletePick('${escapeHtml(pid)}')" style="padding:10px;border:1px solid var(--success-color);border-radius:6px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.82rem;text-align:center;">✓ 完成单元<br><span class="meta-xs">归档并推进</span></button>`;
+    html += `<button onclick="planUnits('${escapeAttr(pid)}')" style="padding:10px;border:1px solid var(--info-color);border-radius:6px;background:transparent;color:var(--info-color);cursor:pointer;font-size:0.82rem;text-align:center;">📋 规划单元<br><span class="meta-xs">批量拆解课题</span></button>`;
+    html += `<button onclick="workflowExecutePick('${escapeAttr(pid)}')" class="pad-10 border-accent br-6 bg-transparent text-accent cursor-pointer fs-082 ta-center">⚡ 执行单元<br><span class="meta-xs">分配任务分工</span></button>`;
+    html += `<button onclick="workflowReviewPick('${escapeAttr(pid)}')" style="padding:10px;border:1px solid var(--warning-color);border-radius:6px;background:transparent;color:var(--warning-color);cursor:pointer;font-size:0.82rem;text-align:center;">🔍 验收单元<br><span class="meta-xs">检查达标情况</span></button>`;
+    html += `<button onclick="workflowCompletePick('${escapeAttr(pid)}')" style="padding:10px;border:1px solid var(--success-color);border-radius:6px;background:transparent;color:var(--success-color);cursor:pointer;font-size:0.82rem;text-align:center;">✓ 完成单元<br><span class="meta-xs">归档并推进</span></button>`;
     html += '</div>';
 
     // 生成总结
-    html += `<button onclick="generateSummary('${escapeHtml(pid)}')" class="w-100 pad-10 bg-secondary border-default br-6 text-primary cursor-pointer fs-082">📝 生成课题总结报告</button>`;
+    html += `<button onclick="generateSummary('${escapeAttr(pid)}')" class="w-100 pad-10 bg-secondary border-default br-6 text-primary cursor-pointer fs-082">📝 生成课题总结报告</button>`;
 
     // 单元进度列表
     if (units.length) {
@@ -952,18 +952,30 @@ function pickUnit(pid, title) {
 }
 
 async function workflowExecutePick(pid) {
+  try {
   const uid = await pickUnit(pid, '选择要执行的单元');
   if (uid) startExecution(pid, uid);
+  } catch (e) {
+    console.warn('workflowExecutePick 失败:', e.message);
+  }
 }
 
 async function workflowReviewPick(pid) {
+  try {
   const uid = await pickUnit(pid, '选择要验收的单元');
   if (uid) reviewUnit(pid, uid);
+  } catch (e) {
+    console.warn('workflowReviewPick 失败:', e.message);
+  }
 }
 
 async function workflowCompletePick(pid) {
+  try {
   const uid = await pickUnit(pid, '选择要完成的单元');
   if (uid) completeUnit(pid, uid);
+  } catch (e) {
+    console.warn('workflowCompletePick 失败:', e.message);
+  }
 }
 
 async function generateSummary(pid) {
@@ -1005,7 +1017,7 @@ function transitionProject(pid, currentStatus) {
   let html = `<div class="mw-340"><h3 class="h3-mb10">→ 课题状态流转</h3><div class="col-gap6">`;
   for (const s of options) {
     const st = researchStatusStyle(s);
-    html += `<button onclick="doTransitionProject('${escapeHtml(pid)}','${escapeHtml(s)}')" class="pad-8 bg-secondary border-default br-6 cursor-pointer fs-082 ta-left text-primary"><span style="color:${st.color};">●</span> ${escapeHtml(st.label)}</button>`;
+    html += `<button onclick="doTransitionProject('${escapeAttr(pid)}','${escapeAttr(s)}')" class="pad-8 bg-secondary border-default br-6 cursor-pointer fs-082 ta-left text-primary"><span style="color:${st.color};">●</span> ${escapeHtml(st.label)}</button>`;
   }
   html += `</div><button id="tp-cancel" class="btn-full-sm">取消</button></div>`;
   showModal(html);

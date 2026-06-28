@@ -104,9 +104,22 @@ def _release_kb_busy() -> None:
         _kb_busy = False
 
 
-# P1-12: 后台任务状态跟踪
+# P1-12: 后台任务状态跟踪（P2: 自动清理已完成超 1 小时的任务）
 _bg_tasks: Dict[str, dict] = {}
 _bg_tasks_lock = threading.Lock()
+_BG_TASK_TTL = 3600  # 1 小时后自动清理
+
+
+def _prune_bg_tasks() -> None:
+    """清理已完成且超过 TTL 的后台任务，防止内存泄漏。"""
+    import time
+    now = time.time()
+    with _bg_tasks_lock:
+        expired = [tid for tid, info in _bg_tasks.items()
+                   if info.get("status") in ("done", "failed", "error")
+                   and now - info.get("finished_at", now) > _BG_TASK_TTL]
+        for tid in expired:
+            del _bg_tasks[tid]
 
 
 # ---------------------------------------------------------------------------
@@ -211,7 +224,11 @@ class BaseRequestHandler:
 
     def _send_static(self, rel_path: str) -> None:
         """发送静态文件。"""
-        fpath = _WEB_DIR / rel_path.lstrip("/")
+        try:
+            fpath = _safe_join(_WEB_DIR, rel_path.lstrip("/"))
+        except ValueError:
+            self._send_json({"error": "非法路径"}, 403)
+            return
         if not fpath.exists() or not fpath.is_file():
             self._send_json({"error": "Not found"}, 404)
             return

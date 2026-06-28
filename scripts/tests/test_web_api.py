@@ -327,6 +327,143 @@ class WebApiSuite(TestSuite):
         self.assert_status(code, 200, "GET /api/knowledge/wiki 列表（复测）")
         self.assert_json_field(data, "pages", "wiki 列表含 pages 字段")
 
+        # === 路由覆盖扩展（v3.5.7）：提升路由覆盖率 18% → 25%+ ===
+        for _t in [
+            self.test_research_extended_routes,
+            self.test_tasks_crud_routes,
+            self.test_skills_routes,
+            self.test_system_routes,
+            self.test_kb_extended_routes,
+        ]:
+            try:
+                _t()
+            except Exception as e:
+                self.results.append(
+                    self._result(_t.__name__, False, f"{type(e).__name__}: {e}")
+                )
+
+    # ------------------------------------------------------------------
+    # 路由覆盖扩展（v3.5.7）
+    # ------------------------------------------------------------------
+
+    def test_research_extended_routes(self):
+        """research 路由扩展：单元列表/创建、课题记忆、工作流规划。
+
+        需先创建临时课题，测试完成后在 finally 中删除，避免残留。
+        """
+        c = self.client
+        code, data = c.post("/api/research/projects", {
+            "name": "路由扩展自检课题", "goal": "验证扩展路由",
+        })
+        self.assert_status(code, 200, "POST research 创建课题（扩展）")
+        pid = data.get("project_id", "") if isinstance(data, dict) else ""
+        self.assert_true(bool(pid), "research 课题ID非空（扩展）")
+        if not pid:
+            return
+        try:
+            # GET 单元列表
+            code, data = c.get(f"/api/research/projects/{pid}/units")
+            self.assert_status(code, 200, "GET /api/research/projects/{id}/units")
+            self.assert_json_field(data, "units", "units 列表含 units 字段")
+
+            # POST 创建单元
+            code, data = c.post(f"/api/research/projects/{pid}/units", {
+                "title": "扩展测试单元",
+                "acceptance_criteria": ["验证路由可达"],
+            })
+            self.assert_status(code, 200, "POST /api/research/projects/{id}/units")
+            self.assert_json_field(data, "unit_id", "创建单元含 unit_id")
+
+            # GET 课题记忆
+            code, data = c.get(f"/api/research/projects/{pid}/memory")
+            self.assert_status(code, 200, "GET /api/research/projects/{id}/memory")
+            self.assert_json_field(data, "context", "memory 含 context 字段")
+
+            # POST 工作流规划（批量规划单元）
+            code, data = c.post(f"/api/research/projects/{pid}/workflow/plan", {
+                "unit_specs": [
+                    {"title": "规划单元A", "acceptance_criteria": ["完成调研"]},
+                ],
+            })
+            self.assert_status(code, 200, "POST /api/research/projects/{id}/workflow/plan")
+            self.assert_json_field(data, "unit_ids", "workflow/plan 含 unit_ids")
+        finally:
+            # 清理：删除测试课题（含其单元/知识库/记忆）
+            c.delete(f"/api/research/projects/{pid}")
+
+    def test_tasks_crud_routes(self):
+        """tasks 路由扩展：创建/更新/删除。
+
+        创建后记录 task_id，测试完成后删除；异常时尝试清理。
+        """
+        c = self.client
+        code, data = c.post("/api/tasks", {
+            "title": "WebAPI扩展自检任务", "priority": "medium",
+        })
+        self.assert_status(code, 200, "POST /api/tasks 创建（扩展）")
+        tid = data.get("task_id", "") if isinstance(data, dict) else ""
+        self.assert_true(bool(tid), "任务ID非空（扩展）")
+        if not tid:
+            return
+        try:
+            # PUT 更新任务字段
+            code, data = c.put(f"/api/tasks/{tid}", {"priority": "high"})
+            self.assert_status(code, 200, "PUT /api/tasks/{id} 更新")
+            self.assert_json_field(data, "success", "更新返回 success")
+
+            # DELETE 删除任务
+            code, data = c.delete(f"/api/tasks/{tid}")
+            self.assert_status(code, 200, "DELETE /api/tasks/{id} 删除")
+            self.assert_json_field(data, "success", "删除返回 success")
+        except Exception:
+            # 异常时尝试清理，避免残留任务
+            try:
+                c.delete(f"/api/tasks/{tid}")
+            except Exception:
+                pass
+            raise
+
+    def test_skills_routes(self):
+        """skills 路由：列表与配置。"""
+        c = self.client
+        code, _ = c.get("/api/skills")
+        self.assert_status(code, 200, "GET /api/skills 列表（扩展）")
+        code, data = c.get("/api/skills/config")
+        self.assert_status(code, 200, "GET /api/skills/config 配置")
+        self.assert_json_field(data, "mode", "skills config 含 mode")
+
+    def test_system_routes(self):
+        """system 路由扩展：健康检查、版本信息、工具与用量。
+
+        /api/system/health、/api/system/version 无独立路由，
+        分别映射到 /api/heartbeat、/api/version。
+        """
+        c = self.client
+        # 健康检查（/api/system/health → /api/heartbeat）
+        code, _ = c.get("/api/heartbeat")
+        self.assert_status(code, 200, "GET /api/heartbeat 健康检查（扩展）")
+        # 版本信息（/api/system/version → /api/version）
+        code, data = c.get("/api/version")
+        self.assert_status(code, 200, "GET /api/version 版本信息（扩展）")
+        self.assert_json_field(data, "version", "version 含版本号（扩展）")
+        # 额外系统路由覆盖
+        code, _ = c.get("/api/tools")
+        self.assert_status(code, 200, "GET /api/tools 工具列表")
+        code, _ = c.get("/api/usage")
+        self.assert_status(code, 200, "GET /api/usage 用量统计")
+
+    def test_kb_extended_routes(self):
+        """kb 路由扩展：文件列表、搜索、图谱、健康度。"""
+        c = self.client
+        code, _ = c.get("/api/knowledge/files")
+        self.assert_status(code, 200, "GET /api/knowledge/files 文件列表")
+        code, _ = c.get("/api/knowledge/search?q=test")
+        self.assert_status(code, 200, "GET /api/knowledge/search?q=test 搜索（扩展）")
+        code, _ = c.get("/api/knowledge/graph")
+        self.assert_status(code, 200, "GET /api/knowledge/graph 图谱")
+        code, _ = c.get("/api/knowledge/health")
+        self.assert_status(code, 200, "GET /api/knowledge/health 健康度")
+
 
 if __name__ == "__main__":
     suite = WebApiSuite()

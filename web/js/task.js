@@ -152,7 +152,7 @@ async function openTaskDetail(taskId) {
         ${task.due_date ? `<div>截止: ${formatDate(task.due_date)}</div>` : ''}
       </div>
       <div class="task-detail-actions">
-        <button onclick="deleteTask('${task.task_id}')" class="btn-danger">删除任务</button>
+        <button onclick="deleteTask('${escapeAttr(task.task_id)}')" class="btn-danger">删除任务</button>
       </div>
     </div>
   `;

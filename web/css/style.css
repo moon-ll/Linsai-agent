@@ -13,7 +13,7 @@
   --bg-active: #dbeafe;
   --text-primary: #1a1a1a;
   --text-secondary: #555555;
-  --text-tertiary: #888888;
+  --text-tertiary: #6b6b6b;
   --text-inverse: #ffffff;
   --border-color: #e0e0e0;
   --accent-color: #2563eb;
@@ -1086,13 +1086,9 @@ body {
   background: rgba(0,0,0,0.4);
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   z-index: 200;
   animation: fadeIn 0.2s ease;
-}
-
-.drawer-overlay {
-  justify-content: flex-end;
 }
 
 .modal, .drawer {
@@ -1355,10 +1351,12 @@ body {
   display: flex;
   align-items: center;
   gap: 12px;
-  padding: 8px 20px;
+  padding: 8px 16px;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-color);
   flex-shrink: 0;
+  justify-content: space-between;
+  font-size: 0.85rem;
 }
 
 .chat-archive-header .archive-topic {
@@ -1588,16 +1586,6 @@ body {
 }
 
 /* ---- 归档浏览头部 ---- */
-.chat-archive-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 16px;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-color);
-  font-size: 0.85rem;
-}
-
 .chat-archive-header .archive-info {
   display: flex;
   align-items: center;
@@ -1841,6 +1829,9 @@ body {
   margin-bottom: 8px;
   cursor: pointer;
   transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .kb-list-item:hover {
@@ -2116,12 +2107,6 @@ body {
 }
 
 /* ---- 知识库管理器轻量化优化 ---- */
-.kb-list-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .kb-list-main {
   flex: 1;
   min-width: 0;
@@ -2390,7 +2375,7 @@ body {
 .btn-outline:hover { background: var(--bg-tertiary); }
 .btn-outline--accent { --btn-color: var(--accent-color); }
 .btn-outline--success { --btn-color: var(--success-color); }
-.btn-outline--warning { --btn-color: #c9a227; }
+.btn-outline--warning { --btn-color: var(--warning-color); }
 .btn-outline--danger { --btn-color: var(--error-color); }
 .btn-outline--info { --btn-color: var(--info-color); }
 .btn-outline--warning-var { --btn-color: var(--warning-color); }
@@ -2944,7 +2929,7 @@ body {
 
 /* color 补充 */
 .text-info { color: var(--info-color); }
-.text-warning-2 { color: #c9a227; }
+.text-warning-2 { color: var(--warning-color); }
 
 /* margin 补充 */
 .m-8-0 { margin: 8px 0; }

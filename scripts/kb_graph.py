@@ -164,37 +164,50 @@ def _save_graph(graph: Dict[str, Any]) -> None:
         pass
 
 
+def _graph_file_lock():
+    """获取图谱文件的写入锁（延迟导入 web_base，避免循环依赖）。
+
+    web_base 位于同目录，提供 _get_file_lock 读写锁；
+    包裹读-改-写操作可防止并发请求丢更新。
+    """
+    import web_base
+    return web_base._get_file_lock(str(GRAPH_PATH))
+
+
 def _remove_graph_node(title: str) -> None:
     """从图谱中移除节点及其关联边。"""
-    graph = _load_graph()
-    if title in graph["nodes"]:
-        del graph["nodes"][title]
-    graph["edges"] = [e for e in graph["edges"] if e.get("from") != title and e.get("to") != title]
-    _save_graph(graph)
+    with _graph_file_lock():
+        graph = _load_graph()
+        if title in graph["nodes"]:
+            del graph["nodes"][title]
+        graph["edges"] = [e for e in graph["edges"] if e.get("from") != title and e.get("to") != title]
+        _save_graph(graph)
 
 
 def update_graph_node(title: str, wiki_type: str, path: str,
                       growth_stage: str = "seedling") -> None:
     """更新或创建知识图谱节点。"""
-    graph = _load_graph()
-    graph["nodes"][title] = {
-        "type": wiki_type,
-        "path": path,
-        "growth_stage": growth_stage,
-    }
-    _save_graph(graph)
+    with _graph_file_lock():
+        graph = _load_graph()
+        graph["nodes"][title] = {
+            "type": wiki_type,
+            "path": path,
+            "growth_stage": growth_stage,
+        }
+        _save_graph(graph)
 
 
 def add_graph_edge(from_node: str, to_node: str, relation: str = "related") -> None:
     """添加知识图谱边（去重）。"""
-    graph = _load_graph()
-    exists = any(
-        e.get("from") == from_node and e.get("to") == to_node and e.get("relation") == relation
-        for e in graph["edges"]
-    )
-    if not exists:
-        graph["edges"].append({"from": from_node, "to": to_node, "relation": relation})
-        _save_graph(graph)
+    with _graph_file_lock():
+        graph = _load_graph()
+        exists = any(
+            e.get("from") == from_node and e.get("to") == to_node and e.get("relation") == relation
+            for e in graph["edges"]
+        )
+        if not exists:
+            graph["edges"].append({"from": from_node, "to": to_node, "relation": relation})
+            _save_graph(graph)
 
 
 def get_related_concepts(title: str, depth: int = 1) -> List[Dict[str, Any]]:
@@ -337,6 +350,10 @@ def _self_check() -> bool:
     finally:
         GRAPH_PATH = _orig_graph
         ALIASES_PATH = _orig_aliases
+        # P3: 重置缓存，避免测试数据残留
+        global _graph_cache, _graph_mtime
+        _graph_cache = None
+        _graph_mtime = 0.0
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
     ok = passed == total

@@ -63,6 +63,13 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+// 安全转义函数：用于 HTML 属性值（特别是 onclick/onkeydown 等事件处理器内的参数）
+// 相比 escapeHtml，额外转义单引号(')和双引号(")，防止属性闭合或 JS 字符串逃逸注入
+function escapeAttr(s) {
+  if (s == null) return '';
+  return String(s).replace(/&/g,'&amp;').replace(/'/g,'&#39;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
 // P3-1: 通用 debounce 函数，供各模块复用（替代手动 timer 管理）
 function debounce(fn, ms = 300) {
   let timer = null;

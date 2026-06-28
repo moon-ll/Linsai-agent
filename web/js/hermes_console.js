@@ -82,11 +82,11 @@ async function loadCronList() {
           </div>
           <div style="display:flex;gap:4px;flex-shrink:0;">`;
       if (isActive) {
-        html += `<button onclick="controlCron('${job.id}','pause')" class="pad-3-8 fs-075 cursor-pointer border-default br-4">暂停</button>`;
+        html += `<button onclick="controlCron('${escapeAttr(job.id)}','pause')" class="pad-3-8 fs-075 cursor-pointer border-default br-4">暂停</button>`;
       } else {
-        html += `<button onclick="controlCron('${job.id}','resume')" class="pad-3-8 fs-075 cursor-pointer border-default br-4">恢复</button>`;
+        html += `<button onclick="controlCron('${escapeAttr(job.id)}','resume')" class="pad-3-8 fs-075 cursor-pointer border-default br-4">恢复</button>`;
       }
-      html += `<button onclick="controlCron('${job.id}','run')" class="pad-3-8 fs-075 cursor-pointer border-default br-4 bg-accent text-white">触发</button>`;
+      html += `<button onclick="controlCron('${escapeAttr(job.id)}','run')" class="pad-3-8 fs-075 cursor-pointer border-default br-4 bg-accent text-white">触发</button>`;
       html += `</div></div></div>`;
     });
     container.innerHTML = html;

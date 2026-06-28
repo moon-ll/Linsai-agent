@@ -695,3 +695,117 @@ class KbSubmoduleTests(TestSuite):
         # 8. 综合健康度
         health = self.kbh.get_kb_health()
         self.assert_eq(health.get("graph_nodes"), 3, "kb_health 综合节点数")
+
+
+# ---------------------------------------------------------------------------
+# 安全与原子写入测试（v3.5.7）
+# ---------------------------------------------------------------------------
+class SecurityTests(TestSuite):
+    """安全相关单元测试：_safe_join 路径遍历防护、save_json 原子写入。
+
+    覆盖：
+        - _safe_join 正常拼接（返回路径在 base 目录内）
+        - _safe_join 路径遍历拦截（../../etc/passwd 抛 ValueError）
+        - _safe_join 空路径处理
+        - common.save_json 原子写入（写入后文件存在且内容正确）
+        - common.save_json 覆盖写入（旧内容被新内容替换）
+
+    导入方式（按规范）：from web_base import _safe_join；import common
+    """
+
+    def __init__(self):
+        super().__init__("安全与原子写入测试")
+        self.tmp_root = None
+        self._safe_join = None
+        self.common = None
+
+    def setup(self):
+        self.tmp_root = create_isolated_env()
+        # 按规范使用 from web_base import _safe_join 和 import common
+        from web_base import _safe_join
+        import common
+        self._safe_join = _safe_join
+        self.common = common
+
+    def teardown(self):
+        import shutil
+        if self.tmp_root and self.tmp_root.exists():
+            shutil.rmtree(self.tmp_root, ignore_errors=True)
+
+    def run_tests(self):
+        print(f"\n▶ {self.name}")
+        tests = [
+            self._test_safe_join_normal,
+            self._test_safe_join_traversal,
+            self._test_safe_join_empty,
+            self._test_save_json_atomic,
+            self._test_save_json_overwrite,
+        ]
+        for t in tests:
+            try:
+                t()
+            except Exception as e:
+                self.results.append(
+                    TestResult(t.__name__, False, 0.0, f"{type(e).__name__}: {e}")
+                )
+
+    # ------------------------------------------------------------------
+    # _safe_join：正常拼接
+    # ------------------------------------------------------------------
+    def _test_safe_join_normal(self):
+        base = self.tmp_root / "knowledge"
+        base.mkdir(parents=True, exist_ok=True)
+        result = self._safe_join(base, "wiki", "concept.md")
+        # 返回的路径应在 base 目录内
+        self.assert_true(
+            str(result).startswith(str(base.resolve())),
+            "_safe_join 正常拼接在 base 内",
+        )
+
+    # ------------------------------------------------------------------
+    # _safe_join：路径遍历拦截
+    # ------------------------------------------------------------------
+    def _test_safe_join_traversal(self):
+        base = self.tmp_root / "knowledge"
+        base.mkdir(parents=True, exist_ok=True)
+        raised = False
+        try:
+            self._safe_join(base, "../../etc/passwd")
+        except ValueError:
+            raised = True
+        self.assert_true(raised, "_safe_join 拦截路径遍历 ../../etc/passwd")
+
+    # ------------------------------------------------------------------
+    # _safe_join：空路径处理
+    # ------------------------------------------------------------------
+    def _test_safe_join_empty(self):
+        base = self.tmp_root / "data"
+        base.mkdir(parents=True, exist_ok=True)
+        result = self._safe_join(base)
+        self.assert_eq(
+            result.resolve(), base.resolve(), "_safe_join 空路径等于 base"
+        )
+
+    # ------------------------------------------------------------------
+    # common.save_json：原子写入
+    # ------------------------------------------------------------------
+    def _test_save_json_atomic(self):
+        import json
+        target = self.tmp_root / "out" / "atomic.json"
+        self.common.save_json(target, {"name": "林赛", "value": 42})
+        self.assert_true(target.exists(), "save_json 原子写入后文件存在")
+        loaded = json.loads(target.read_text(encoding="utf-8"))
+        self.assert_eq(loaded.get("name"), "林赛", "save_json 内容正确 name")
+        self.assert_eq(loaded.get("value"), 42, "save_json 内容正确 value")
+
+    # ------------------------------------------------------------------
+    # common.save_json：覆盖写入
+    # ------------------------------------------------------------------
+    def _test_save_json_overwrite(self):
+        import json
+        target = self.tmp_root / "out2" / "overwrite.json"
+        self.common.save_json(target, {"version": 1, "old": True})
+        self.common.save_json(target, {"version": 2})
+        loaded = json.loads(target.read_text(encoding="utf-8"))
+        self.assert_eq(loaded.get("version"), 2, "save_json 覆盖写入新内容")
+        self.assert_true("old" not in loaded, "save_json 覆盖后旧字段已清除")

@@ -60,6 +60,19 @@ def _ensure_dirs() -> None:
     PROJECTS_DIR.mkdir(parents=True, exist_ok=True)
 
 
+def _project_file_lock():
+    """获取课题写入锁（延迟导入 web_base，避免循环依赖）。
+
+    使用全局课题锁键（PROJECTS_DIR），包裹读-改-写操作可防止并发请求丢更新
+    （如并发创建产生重复 project_id、并发更新互相覆盖）。
+
+    注意：unit_manager 使用独立的单元锁键，避免 create_unit/delete_unit
+    内部调用 update_project 时发生不可重入死锁。
+    """
+    import web_base
+    return web_base._get_file_lock(str(PROJECTS_DIR))
+
+
 def _gen_project_id(name: str) -> str:
     """生成课题ID: PRJ-YYYYMMDD-名称前10字。"""
     date_prefix = _now_utc()[:10].replace("-", "")
@@ -67,13 +80,33 @@ def _gen_project_id(name: str) -> str:
     return f"PRJ-{date_prefix}-{safe_name}"
 
 
+def _validate_project_id(project_id: str) -> str:
+    """校验 project_id 安全性，防止路径遍历。
+
+    project_id 必须形如 PRJ-YYYYMMDD-xxx，只含字母/数字/横杠/下划线/中文。
+    返回校验后的 project_id，不合法则抛 ValueError。
+    """
+    if not project_id or not isinstance(project_id, str):
+        raise ValueError("project_id 不能为空")
+    # 禁止路径分隔符和点号序列
+    if "/" in project_id or "\\" in project_id or ".." in project_id:
+        raise ValueError(f"非法 project_id: {project_id}")
+    # 验证字符集（允许字母/数字/横杠/下划线/中文/点号但非连续点）
+    import re
+    if not re.match(r'^[\w\u4e00-\u9fff.\-]+$', project_id):
+        raise ValueError(f"非法 project_id 字符: {project_id}")
+    return project_id
+
+
 def _project_path(project_id: str) -> Path:
     """课题数据文件路径。"""
+    _validate_project_id(project_id)
     return PROJECTS_DIR / f"{project_id}.json"
 
 
 def _project_dir(project_id: str) -> Path:
     """课题工作目录（知识库/记忆库/长期记忆存放于此）。"""
+    _validate_project_id(project_id)
     return PROJECTS_DIR / project_id
 
 
@@ -111,42 +144,45 @@ def create_project(
         3. 状态设为 planning
     """
     _ensure_dirs()
-    project_id = _gen_project_id(name)
 
-    # ID 去重
-    counter = 1
-    base_id = project_id
-    while _project_path(project_id).exists():
-        project_id = f"{base_id}-{counter}"
-        counter += 1
+    # 加锁保护 ID 去重 + 写盘 + 记忆初始化的读-改-写，防止并发创建产生重复 project_id
+    with _project_file_lock():
+        project_id = _gen_project_id(name)
 
-    pdir = _ensure_project_dirs(project_id)
+        # ID 去重
+        counter = 1
+        base_id = project_id
+        while _project_path(project_id).exists():
+            project_id = f"{base_id}-{counter}"
+            counter += 1
 
-    project = {
-        "project_id": project_id,
-        "name": name,
-        "goal": goal,
-        "description": description,
-        "status": "planning",
-        "phase": "init",  # init / unit_N / completed
-        "created_at": _now_utc(),
-        "updated_at": _now_utc(),
-        "completed_at": None,
-        "knowledge_vault": f"projects/{project_id}/kb/",
-        "memory_archive": f"projects/{project_id}/memory/",
-        "project_memory": f"projects/{project_id}/PROJECT-MEMORY.md",
-        "current_unit": None,
-        "units": [],
-        "milestones": [],
-        "members": {"user": "PI", "lin_sai": "副导师"},
-        "tags": [],
-    }
+        pdir = _ensure_project_dirs(project_id)
 
-    path = _project_path(project_id)
-    _write_json(path, project)
+        project = {
+            "project_id": project_id,
+            "name": name,
+            "goal": goal,
+            "description": description,
+            "status": "planning",
+            "phase": "init",  # init / unit_N / completed
+            "created_at": _now_utc(),
+            "updated_at": _now_utc(),
+            "completed_at": None,
+            "knowledge_vault": f"projects/{project_id}/kb/",
+            "memory_archive": f"projects/{project_id}/memory/",
+            "project_memory": f"projects/{project_id}/PROJECT-MEMORY.md",
+            "current_unit": None,
+            "units": [],
+            "milestones": [],
+            "members": {"user": "PI", "lin_sai": "副导师"},
+            "tags": [],
+        }
 
-    # 生成 PROJECT-MEMORY.md 骨架
-    _init_project_memory(project_id, name, goal)
+        path = _project_path(project_id)
+        _write_json(path, project)
+
+        # 生成 PROJECT-MEMORY.md 骨架
+        _init_project_memory(project_id, name, goal)
 
     if _log:
         _log.info(f"课题已创建: {project_id} | 名称={name} | 状态=planning")
@@ -194,32 +230,34 @@ def update_project(project_id: str, **fields) -> dict:
 
     status 字段会走状态机校验，其余字段直接更新。
     """
-    path = _project_path(project_id)
-    if not path.exists():
-        raise FileNotFoundError(f"✗ 未找到课题: {project_id}")
+    # 加锁保护 读取-修改-写回，防止并发更新互相覆盖
+    with _project_file_lock():
+        path = _project_path(project_id)
+        if not path.exists():
+            raise FileNotFoundError(f"✗ 未找到课题: {project_id}")
 
-    project = _read_json(path, default={})
-    if not project:
-        raise ValueError(f"✗ 课题文件损坏: {project_id}")
+        project = _read_json(path, default={})
+        if not project:
+            raise ValueError(f"✗ 课题文件损坏: {project_id}")
 
-    # status 走状态机
-    if "status" in fields:
-        new_status = fields["status"]
-        old_status = project.get("status", "planning")
-        if new_status not in PROJECT_STATUS_FLOW.get(old_status, set()):
-            raise ValueError(
-                f"✗ 状态流转不允许: {old_status} → {new_status}。"
-                f"允许的后续状态: {PROJECT_STATUS_FLOW.get(old_status, set())}"
-            )
+        # status 走状态机
+        if "status" in fields:
+            new_status = fields["status"]
+            old_status = project.get("status", "planning")
+            if new_status not in PROJECT_STATUS_FLOW.get(old_status, set()):
+                raise ValueError(
+                    f"✗ 状态流转不允许: {old_status} → {new_status}。"
+                    f"允许的后续状态: {PROJECT_STATUS_FLOW.get(old_status, set())}"
+                )
 
-    for key, value in fields.items():
-        project[key] = value
+        for key, value in fields.items():
+            project[key] = value
 
-    project["updated_at"] = _now_utc()
-    if fields.get("status") == "completed":
-        project["completed_at"] = _now_utc()
+        project["updated_at"] = _now_utc()
+        if fields.get("status") == "completed":
+            project["completed_at"] = _now_utc()
 
-    _write_json(path, project)
+        _write_json(path, project)
     return project
 
 
@@ -259,20 +297,22 @@ def delete_project(project_id: str, confirm: bool = False) -> bool:
             _log.warning("删除课题需要 confirm=True")
         return False
 
-    # 删除课题文件
-    path = _project_path(project_id)
-    if not path.exists():
-        if _log:
-            _log.error(f"未找到课题: {project_id}")
-        return False
+    # 加锁保护 查找-删除-清理目录，防止并发操作竞争
+    with _project_file_lock():
+        # 删除课题文件
+        path = _project_path(project_id)
+        if not path.exists():
+            if _log:
+                _log.error(f"未找到课题: {project_id}")
+            return False
 
-    path.unlink()
+        path.unlink()
 
-    # 删除工作目录
-    pdir = _project_dir(project_id)
-    if pdir.exists():
-        import shutil
-        shutil.rmtree(pdir, ignore_errors=True)
+        # 删除工作目录
+        pdir = _project_dir(project_id)
+        if pdir.exists():
+            import shutil
+            shutil.rmtree(pdir, ignore_errors=True)
 
     if _log:
         _log.info(f"课题已删除: {project_id}")

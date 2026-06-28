@@ -53,6 +53,7 @@ from web_base import (
     _release_kb_busy,
     _bg_tasks,
     _bg_tasks_lock,
+    _prune_bg_tasks,
     _safe_join,
 )
 from common import lazy_load
@@ -252,11 +253,12 @@ class KbRoutesMixin:
                         "status": "done",
                         "documents": len(idx.get("documents", {})),
                         "terms": len(idx.get("inverted", {})),
-                        "finished_at": datetime.datetime.now().isoformat(),
+                        "finished_at": time.time(),
+                        "finished_at_iso": datetime.datetime.now().isoformat(),
                     }
             except Exception as e:
                 with _bg_tasks_lock:
-                    _bg_tasks[task_id] = {"status": "error", "error": str(e)}
+                    _bg_tasks[task_id] = {"status": "error", "error": str(e), "finished_at": time.time()}
             finally:
                 _release_kb_busy()
 
@@ -447,11 +449,14 @@ class KbRoutesMixin:
         if trash_path.exists():
             trash_path = trash_dir / f"{Path(wiki_rel).stem}_{int(time.time())}.md"
         try:
-            wiki_full.rename(trash_path)
-            # 清理图谱
+            # 先读取标题（rename 移走文件后 get_wiki_page 会找不到文件返回 None，
+            # 导致图谱节点无法清理），必须在 rename 之前完成读取
             wiki_rel_safe = str(wiki_full.relative_to(kb.KNOWLEDGE_DIR.resolve() / "wiki"))
             page = kb.get_wiki_page(f"wiki/{wiki_rel_safe}")
             title = page["frontmatter"].get("title", "") if page else ""
+            # 再移至回收站
+            wiki_full.rename(trash_path)
+            # 清理图谱
             if title:
                 kb._remove_graph_node(title)
             self._send_json({"success": True, "message": f"已移至回收站: {trash_path.name}"})

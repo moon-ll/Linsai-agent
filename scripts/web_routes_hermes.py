@@ -64,7 +64,7 @@ class HermesRoutesMixin:
         if not prompt:
             self._send_json({"error": "缺少 prompt"}, 400)
             return
-        timeout = int(body.get("timeout", 300))
+        timeout = min(int(body.get("timeout", 300)), 600)  # P3: 服务端最大 600s 上限
         # 进入 SSE 流
         self._send_sse_header()
 

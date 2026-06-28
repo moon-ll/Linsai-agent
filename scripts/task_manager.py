@@ -73,6 +73,16 @@ def _ensure_dirs() -> None:
         d.mkdir(parents=True, exist_ok=True)
 
 
+def _task_file_lock():
+    """获取任务写入锁（延迟导入 web_base，避免循环依赖）。
+
+    使用全局任务锁键（TASKS_DIR），包裹读-改-写操作可防止并发请求丢更新
+    （如并发创建产生重复 task_id、并发更新互相覆盖）。
+    """
+    import web_base
+    return web_base._get_file_lock(str(TASKS_DIR))
+
+
 def create_task(
     title: str,
     category: str = "general",
@@ -98,37 +108,39 @@ def create_task(
     final_priority = _validate_priority(final_priority)
     tags = list(defaults.get("tags", []))
 
-    task_id = _generate_task_id(title)
-    # 若 ID 已存在则加序号
-    counter = 1
-    base_id = task_id
-    while _find_task_file(task_id):
-        task_id = f"{base_id}-{counter}"
-        counter += 1
+    # 加锁保护 ID 去重 + 写盘的读-改-写，防止并发创建产生重复 task_id
+    with _task_file_lock():
+        task_id = _generate_task_id(title)
+        # 若 ID 已存在则加序号
+        counter = 1
+        base_id = task_id
+        while _find_task_file(task_id):
+            task_id = f"{base_id}-{counter}"
+            counter += 1
 
-    task = {
-        "task_id": task_id,
-        "title": title,
-        "category": category,
-        "status": "backlog",
-        "priority": final_priority,
-        "description": description,
-        "due_date": due_date,
-        "progress": 0,
-        "subtasks": [],
-        "milestones": [],
-        "created_at": _now_utc(),
-        "updated_at": _now_utc(),
-        "completed_at": None,
-        "related_session": related_session,
-        "project": project.strip(),
-        "assignee": assignee if assignee in ("myself", "hermes", "none") else "myself",
-        "unit_id": unit_id,
-        "tags": tags,
-    }
+        task = {
+            "task_id": task_id,
+            "title": title,
+            "category": category,
+            "status": "backlog",
+            "priority": final_priority,
+            "description": description,
+            "due_date": due_date,
+            "progress": 0,
+            "subtasks": [],
+            "milestones": [],
+            "created_at": _now_utc(),
+            "updated_at": _now_utc(),
+            "completed_at": None,
+            "related_session": related_session,
+            "project": project.strip(),
+            "assignee": assignee if assignee in ("myself", "hermes", "none") else "myself",
+            "unit_id": unit_id,
+            "tags": tags,
+        }
 
-    path = STATUS_DIRS["backlog"] / f"{task_id}.json"
-    _write_json(path, task)
+        path = STATUS_DIRS["backlog"] / f"{task_id}.json"
+        _write_json(path, task)
     print(f"✓ 任务已创建: {task_id} → {path.name}")
     return task_id, path
 
@@ -143,24 +155,26 @@ def get_task(task_id: str) -> dict:
 
 def update_task(task_id: str, **fields) -> dict:
     """更新任务字段，自动更新 updated_at。"""
-    path = _find_task_file(task_id)
-    if path is None:
-        raise FileNotFoundError(f"✗ 未找到任务: {task_id}")
+    # 加锁保护 读取-修改-写回，防止并发更新互相覆盖
+    with _task_file_lock():
+        path = _find_task_file(task_id)
+        if path is None:
+            raise FileNotFoundError(f"✗ 未找到任务: {task_id}")
 
-    task = _load_task_file(path)
-    readonly = {"task_id", "created_at", "status"}
-    for key, value in fields.items():
-        if key in readonly:
-            print(f"⚠ 字段 '{key}' 只读，已跳过")
-            continue
-        if key == "priority":
-            value = _validate_priority(value)
-        if key == "category":
-            value = _validate_category(value)
-        task[key] = value
+        task = _load_task_file(path)
+        readonly = {"task_id", "created_at", "status"}
+        for key, value in fields.items():
+            if key in readonly:
+                print(f"⚠ 字段 '{key}' 只读，已跳过")
+                continue
+            if key == "priority":
+                value = _validate_priority(value)
+            if key == "category":
+                value = _validate_category(value)
+            task[key] = value
 
-    task["updated_at"] = _now_utc()
-    _write_json(path, task)
+        task["updated_at"] = _now_utc()
+        _write_json(path, task)
     print(f"✓ 任务已更新: {task_id}")
     return task
 
@@ -311,11 +325,13 @@ def check_overdue_tasks() -> List[dict]:
 
 def delete_task(task_id: str) -> bool:
     """删除任务文件，返回是否成功。"""
-    path = _find_task_file(task_id)
-    if path is None:
-        print(f"✗ 未找到任务: {task_id}")
-        return False
-    path.unlink()
+    # 加锁保护 查找-删除，防止并发操作竞争同一文件
+    with _task_file_lock():
+        path = _find_task_file(task_id)
+        if path is None:
+            print(f"✗ 未找到任务: {task_id}")
+            return False
+        path.unlink()
     print(f"✓ 任务已删除: {task_id}")
     return True
 

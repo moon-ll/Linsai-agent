@@ -133,7 +133,7 @@ function bindEvents() {
   });
 
   // 输入时实时检测激活的技能（P3-1: 使用通用 debounce）
-  document.getElementById('message-input').addEventListener('input', debounce((e) => {
+  document.getElementById('message-input')?.addEventListener('input', debounce((e) => {
     updateSkillBadge(e.target.value);
   }, 300));
 

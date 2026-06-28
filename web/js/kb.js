@@ -200,11 +200,11 @@ async function openKbFilePicker() {
       html += `<div style="font-size:0.8rem;font-weight:600;color:var(--text-secondary);margin:8px 0 4px;">${type} (${items.length})</div>`;
       items.forEach(f => {
         const checked = window._kbSelectedFiles.some(s => s.path === f.path) ? 'checked' : '';
-        html += `<label style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:0.82rem;cursor:pointer;"><input type="checkbox" class="kb-file-cb" data-path="${escapeHtml(f.path)}" data-title="${escapeHtml(f.title)}" ${checked}><span>${escapeHtml(f.title)}</span><span class="text-tertiary fs-072">${f.project ? '['+f.project+']' : ''}</span></label>`;
+        html += `<label style="display:flex;align-items:center;gap:6px;padding:3px 0;font-size:0.82rem;cursor:pointer;"><input type="checkbox" class="kb-file-cb" data-path="${escapeHtml(f.path)}" data-title="${escapeHtml(f.title)}" ${checked}><span>${escapeHtml(f.title)}</span><span class="text-tertiary fs-072">${f.project ? '['+escapeHtml(f.project)+']' : ''}</span></label>`;
       });
     }
     list.innerHTML = html;
-  } catch (e) { document.getElementById('kb-file-list').innerHTML = `<p class="state-error">加载失败: ${e.message}</p>`; }
+  } catch (e) { document.getElementById('kb-file-list').innerHTML = `<p class="state-error">加载失败: ${escapeHtml(e.message)}</p>`; }
   document.getElementById('kb-pick-cancel').onclick = () => closeModal('modal-overlay');
   document.getElementById('kb-pick-confirm').onclick = () => {
     window._kbSelectedFiles = Array.from(document.querySelectorAll('.kb-file-cb:checked')).map(cb => ({path: cb.dataset.path, title: cb.dataset.title}));
@@ -591,9 +591,9 @@ async function handleKbCategory() {
       }
       listEl.innerHTML = cats.map(c => `
         <div class="kb-category-item">
-          <span class="cat-name">📂 ${c.name}</span>
+          <span class="cat-name">📂 ${escapeHtml(c.name)}</span>
           <span class="cat-count">${(c.matched_paths || []).length} 篇</span>
-          <span class="cat-delete" data-name="${c.name}">✕</span>
+          <span class="cat-delete" data-name="${escapeAttr(c.name)}">✕</span>
         </div>
       `).join('');
       listEl.querySelectorAll('.cat-delete').forEach(btn => {
@@ -651,10 +651,10 @@ function renderTagEditor(frontmatter, pagePath) {
   const projectList = typeof project === 'string' ? (project ? [project] : []) : project;
 
   const tagChips = tags.map(t => `
-    <span class="kb-tag-chip">${t}<span class="tag-remove" data-tag="${t}" data-type="tag">✕</span></span>
+    <span class="kb-tag-chip">${escapeHtml(t)}<span class="tag-remove" data-tag="${escapeAttr(t)}" data-type="tag">✕</span></span>
   `).join('');
   const projChips = projectList.map(p => `
-    <span class="kb-tag-chip" style="background:var(--accent);color:white;border-color:var(--accent);">${p}<span class="tag-remove" data-tag="${p}" data-type="project">✕</span></span>
+    <span class="kb-tag-chip" style="background:var(--accent);color:white;border-color:var(--accent);">${escapeHtml(p)}<span class="tag-remove" data-tag="${escapeAttr(p)}" data-type="project">✕</span></span>
   `).join('');
 
   return `<div class="kb-tag-editor" id="kb-tag-editor">
