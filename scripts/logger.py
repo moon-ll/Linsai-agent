@@ -10,7 +10,7 @@
 
 规范:
     - 仅使用 Python 标准库 logging
-    - 日志文件按日期轮转（午夜切割，保留 14 天）：logs/linsai.log
+    - 日志文件按日期轮转（午夜切割，保留 30 天）：logs/linsai.log
     - 同时输出到控制台（彩色）和文件
     - 支持可选 JSON 格式文件日志（setup_logging(json_format=True)）
     - 避免在循环中高频调用 debug（性能敏感路径）
@@ -122,10 +122,10 @@ def setup_logging(level: int = logging.INFO, file_level: int = logging.DEBUG,
     console.setFormatter(_ColoredFormatter())
     root.addHandler(console)
 
-    # 文件 handler（按日期轮转，午夜切割，保留 14 天）
+    # 文件 handler（按日期轮转，午夜切割，保留 30 天）
     log_file = _get_log_file()
     file_handler = TimedRotatingFileHandler(
-        str(log_file), when='midnight', backupCount=14, encoding="utf-8"
+        str(log_file), when='midnight', backupCount=30, encoding="utf-8"
     )
     file_handler.setLevel(file_level)
     file_handler.setFormatter(_JsonFormatter() if json_format else _PlainFormatter())

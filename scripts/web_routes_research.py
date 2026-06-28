@@ -152,13 +152,18 @@ class ResearchRoutesMixin:
         self._send_json({"documents": docs})
 
     def _rg_get_kb_search(self, path, parsed, match):
-        """知识库搜索（?q=&layer=）"""
+        """知识库搜索（?q=&layer=&top_k=&offset=）"""
         pid = match.group(1)
         qs = parse_qs(parsed.query)
         q = qs.get("q", [""])[0]
         layer = qs.get("layer", ["all"])[0]
-        results = pkb.search(pid, q, layer=layer) if q else []
-        self._send_json({"results": results})
+        top_k = int(qs.get("top_k", ["5"])[0])
+        offset = int(qs.get("offset", ["0"])[0])
+        if not q:
+            self._send_json({"results": [], "total": 0, "offset": offset, "limit": top_k})
+            return
+        result = pkb.search(pid, q, layer=layer, top_k=top_k, offset=offset)
+        self._send_json(result)
 
     def _rg_get_kb_stats(self, path, parsed, match):
         """知识库统计"""

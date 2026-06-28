@@ -1,5 +1,35 @@
 # 变更记录
 
+## v3.6.0 - 2026-06-28 知识库分区策略 + 基础设施增强
+
+### 知识库分区策略（核心特性）
+- **后端分区检索**：`kb_index.py search()` 新增 `doc_type`/`tag`/`stage`/`offset` 参数，支持五维分区过滤（source/project/type/tag/stage）+ 分页，返回 `{results, total, offset, limit}` 字典格式
+- **API 暴露分区参数**：`GET /api/knowledge/search` 支持 `project`/`type`/`tag`/`stage`/`offset` 查询参数（原仅 `q`/`top_k`/`source`）
+- **项目感知检索**：`context_builder.py` 会话关联课题时，全局 KB 检索自动传入 `project_id` 过滤，优先返回课题相关知识；不足时补充全局检索
+- **课题 KB 分页**：`project_kb.py search()` 增加 `offset` 参数，返回字典格式
+- **前端统一搜索+筛选**：`kb.js` 搜索与筛选下拉框联动，搜索时自动携带当前筛选条件
+- **前端分页控件**：搜索结果底部显示页码导航（上一页/页码窗口/下一页），支持键盘可达
+- **前端分区选择器**：知识库管理器顶部新增 6 选项分区下拉框（全部/课题库/论文库/概念库/方法库/学者库），一键切换检索范围
+
+### captures/ 空目录修复
+- **根因**：`kb_capture.capture_from_session()` 只在 CLI 模式调用，Web SSE 流程未接入
+- **修复**：`web_base.py _update_memory_async()` 中接入 capture 调用，Web 流程与 CLI 一致
+
+### paths.py 迁移收尾
+- 28 个文件（23 个 scripts/ 直接子文件 + 5 个子目录文件）全部改为 `from paths import PROJECT_ROOT, ...`
+- `scripts/` 目录下已无任何 `PROJECT_ROOT = Path(__file__)` 遗留定义
+
+### 健康检查端点
+- 新增 `GET /api/health`：聚合版本号、LLM Provider 状态、知识库统计、关键目录可访问性，返回 `ok`/`degraded`
+
+### 日志与配置
+- `logger.py` 日志保留天数 14→30 天
+- `.gitignore` 新增 `knowledge/.obsidian/`，取消追踪 4 个 Obsidian 配置文件
+
+### 测试扩展（141+211）
+- 单元测试 137→141（+4：kb_index search 字典格式、project_kb search 分页）
+- Web API 测试 207→211（+4：分区参数透传、分页返回格式）
+
 ## v3.5.9 - 2026-06-28 冗余内容清理
 
 ### 后端死代码清理

@@ -12,6 +12,17 @@ const KBManager = {
   graph: {},
   growthLog: [],
   candidates: [],
+  kbSource: 'all',  // 知识库来源：all|raw|wiki
+};
+
+// ============================================
+// KB 搜索状态（统一搜索+筛选+分页）
+// ============================================
+const KbSearchState = {
+  query: '',
+  offset: 0,
+  limit: 10,
+  filters: { type: '', stage: '', project: '', tag: '' },
 };
 
 function openKbManager() {
@@ -313,6 +324,15 @@ async function initKbMain() {
 
   // 事件委托：确保 <details>/<summary> 点击切换始终生效 + P1-8: data 属性事件委托
   document.getElementById('kb-tree-content')?.addEventListener('click', (e) => {
+    // 分页按钮点击 → 跳转到对应页
+    const pageBtn = e.target.closest('.kb-page-btn[data-page]');
+    if (pageBtn && !pageBtn.disabled) {
+      e.preventDefault();
+      const page = parseInt(pageBtn.dataset.page, 10);
+      const newOffset = (page - 1) * KbSearchState.limit;
+      searchKbToTree(KbSearchState.query, newOffset);
+      return;
+    }
     // P2-1: 交叉链接 → 打开项目面板
     const projectsLink = e.target.closest('[data-action="open-projects"]');
     if (projectsLink) {
@@ -340,7 +360,7 @@ async function initKbMain() {
   // P3-5: 键盘可达 — Enter/Space 触发点击
   document.getElementById('kb-tree-content')?.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      const item = e.target.closest('[data-wiki-path], [data-raw-path], [data-action]');
+      const item = e.target.closest('[data-wiki-path], [data-raw-path], [data-action], .kb-page-btn[data-page]');
       if (item) {
         e.preventDefault();
         item.click();
@@ -352,8 +372,12 @@ async function initKbMain() {
   document.getElementById('kb-tree-search')?.addEventListener('input', (e) => {
     clearTimeout(treeSearchTimer);
     const q = e.target.value.trim();
-    if (!q) { renderKbTree(); return; }
-    treeSearchTimer = setTimeout(() => searchKbToTree(q), 300);
+    if (!q) {
+      // 搜索框清空 → 若有筛选走筛选列表，否则恢复文件树
+      applyKbFilters();
+      return;
+    }
+    treeSearchTimer = setTimeout(() => searchKbToTree(q, 0), 300);
   });
 
   // P1-8: 预览面板事件委托（wikilinks + related chips + backlinks + P1-2: 打开/复制按钮）
@@ -392,6 +416,7 @@ async function initKbMain() {
   ['kb-filter-type', 'kb-filter-stage', 'kb-filter-project', 'kb-filter-tag'].forEach(id => {
     document.getElementById(id)?.addEventListener('change', applyKbFilters);
   });
+  document.getElementById('kb-partition-select')?.addEventListener('change', applyKbPartition);
   loadSyncIndicator();
   loadKbFilters();
 }
@@ -496,24 +521,35 @@ async function loadKbFilters() {
 }
 
 async function applyKbFilters() {
-  const filters = {};
+  // 读取当前筛选值
   const type = document.getElementById('kb-filter-type')?.value;
   const stage = document.getElementById('kb-filter-stage')?.value;
   const project = document.getElementById('kb-filter-project')?.value;
   const tag = document.getElementById('kb-filter-tag')?.value;
-  if (type) filters.type = type;
-  if (stage) filters.stage = stage;
-  if (project) filters.project = project;
-  if (tag) filters.tag = tag;
+  const hasFilter = !!(type || stage || project || tag);
 
-  const hasFilter = Object.keys(filters).length > 0;
   const filterBar = document.getElementById('kb-filter-bar');
   if (filterBar) filterBar.style.display = hasFilter ? 'flex' : 'none';
 
+  // 搜索框有内容 → 带筛选统一搜索（重置到第一页）
+  const searchBox = document.getElementById('kb-tree-search');
+  const query = searchBox?.value?.trim() || '';
+  if (query) {
+    searchKbToTree(query, 0);
+    return;
+  }
+
+  // 无搜索词 → 走原有 filter 列表
   if (!hasFilter) {
     renderKbTree();
     return;
   }
+
+  const filters = {};
+  if (type) filters.type = type;
+  if (stage) filters.stage = stage;
+  if (project) filters.project = project;
+  if (tag) filters.tag = tag;
 
   const container = document.getElementById('kb-tree-content');
   if (container) container.innerHTML = '◐ 筛选中…';
@@ -530,8 +566,55 @@ function clearKbFilters() {
     const sel = document.getElementById(id);
     if (sel) sel.value = '';
   });
-  document.getElementById('kb-filter-bar').style.display = 'none';
+  const partitionSel = document.getElementById('kb-partition-select');
+  if (partitionSel) partitionSel.value = 'all';
+  const filterBar = document.getElementById('kb-filter-bar');
+  if (filterBar) filterBar.style.display = 'none';
+  // 重置搜索状态
+  KbSearchState.query = '';
+  KbSearchState.offset = 0;
   renderKbTree();
+}
+
+// 分区快捷选择器：设置对应筛选参数并触发搜索/刷新
+function applyKbPartition() {
+  const sel = document.getElementById('kb-partition-select');
+  if (!sel) return;
+  const value = sel.value;
+
+  // 先清除所有筛选下拉框
+  ['kb-filter-type', 'kb-filter-stage', 'kb-filter-project', 'kb-filter-tag'].forEach(id => {
+    const s = document.getElementById(id);
+    if (s) s.value = '';
+  });
+
+  if (value && value !== 'all') {
+    // value 格式: key:val（如 project:NSFC-强场超快 / type:concepts）
+    const idx = value.indexOf(':');
+    if (idx > 0) {
+      const key = value.slice(0, idx);
+      const val = value.slice(idx + 1);
+      const targetId = key === 'project' ? 'kb-filter-project' : 'kb-filter-type';
+      const targetSel = document.getElementById(targetId);
+      if (targetSel) {
+        // 若下拉框中无此选项，动态添加（分区值可能不在 filters 接口返回的列表中）
+        if (!Array.from(targetSel.options).some(o => o.value === val)) {
+          const o = document.createElement('option');
+          o.value = val;
+          o.textContent = val;
+          targetSel.appendChild(o);
+        }
+        targetSel.value = val;
+      }
+    }
+  }
+
+  // 显示/隐藏筛选条
+  const filterBar = document.getElementById('kb-filter-bar');
+  if (filterBar) filterBar.style.display = (value && value !== 'all') ? 'flex' : 'none';
+
+  // 触发搜索/刷新（搜索框有内容则带筛选搜索，否则走筛选列表/文件树）
+  applyKbFilters();
 }
 
 function renderFilteredTree(pages) {
@@ -779,28 +862,112 @@ async function renderKbTree() {
   }
 }
 
-async function searchKbToTree(query) {
+async function searchKbToTree(query, offset = 0) {
   const container = document.getElementById('kb-tree-content');
   if (!container) return;
   container.innerHTML = '◐ 搜索中…';
+
+  // 读取当前筛选值（与 4 个下拉框联动）
+  const typeFilter = document.getElementById('kb-filter-type')?.value || '';
+  const stageFilter = document.getElementById('kb-filter-stage')?.value || '';
+  const projectFilter = document.getElementById('kb-filter-project')?.value || '';
+  const tagFilter = document.getElementById('kb-filter-tag')?.value || '';
+
+  // 保存搜索状态（供分页复用）
+  KbSearchState.query = query;
+  KbSearchState.offset = offset;
+  KbSearchState.filters = { type: typeFilter, stage: stageFilter, project: projectFilter, tag: tagFilter };
+
+  const params = new URLSearchParams({
+    q: query,
+    top_k: String(KbSearchState.limit),
+    source: KBManager.kbSource || 'all',
+  });
+  if (offset) params.set('offset', String(offset));
+  if (typeFilter) params.set('type', typeFilter);
+  if (stageFilter) params.set('stage', stageFilter);
+  if (projectFilter) params.set('project', projectFilter);
+  if (tagFilter) params.set('tag', tagFilter);
+
   try {
-    const data = await apiGet(`/api/knowledge/search?q=${encodeURIComponent(query)}&top_k=20`);
-    const results = data.results || [];
-    if (!results.length) {
-      container.innerHTML = `<div class="text-tertiary fs-08 pad-8">🔍 未找到「${escapeHtml(query)}」</div>`;
-      return;
-    }
-    let html = `<div class="fs-078 text-secondary pad-4-8">🔍 ${results.length} 条结果</div>`;
-    results.forEach(r => {
-      const docPath = r.doc || r.path || '';
-      // P1-8: 使用 data 属性替代 onclick 字符串拼接
-      const attr = r.source === 'wiki' ? `data-wiki-path="${escapeHtml(docPath)}"` : `data-raw-path="${escapeHtml(docPath)}"`;
-      html += `<div class="kb-tree-item" ${attr} title="${escapeHtml(r.text||'').slice(0,60)}">${r.source === 'wiki' ? '📝' : '📄'} ${escapeHtml(r.title || r.doc)}</div>`;
-    });
-    container.innerHTML = html;
+    // data 格式: {results: [...], total: N, offset: 0, limit: 10}
+    const data = await apiGet(`/api/knowledge/search?${params}`);
+    renderKbSearchResults(data);
   } catch (e) {
     container.innerHTML = '<div class="text-error fs-08">搜索失败</div>';
   }
+}
+
+// 渲染搜索结果（含分页控件）
+function renderKbSearchResults(data) {
+  const container = document.getElementById('kb-tree-content');
+  if (!container) return;
+  const results = data.results || [];
+  const total = data.total || 0;
+  const limit = data.limit || KbSearchState.limit;
+  const offset = data.offset || 0;
+
+  if (!results.length) {
+    const activeFilters = Object.entries(KbSearchState.filters).filter(([, v]) => v);
+    const filterDesc = activeFilters.length ? `（筛选: ${activeFilters.map(([, v]) => v).join('/')}）` : '';
+    container.innerHTML = `<div class="text-tertiary fs-08 pad-8">🔍 未找到「${escapeHtml(KbSearchState.query)}」${filterDesc}</div>`;
+    return;
+  }
+
+  // 筛选描述
+  const activeFilters = Object.entries(KbSearchState.filters).filter(([, v]) => v);
+  const filterDesc = activeFilters.length ? ` · 筛选 ${activeFilters.map(([, v]) => v).join('/')}` : '';
+
+  let html = `<div class="fs-078 text-secondary pad-4-8">🔍 共 ${total} 条结果${filterDesc}</div>`;
+  results.forEach(r => {
+    const docPath = r.doc || r.path || '';
+    // P1-8: 使用 data 属性替代 onclick 字符串拼接
+    const attr = r.source === 'wiki' ? `data-wiki-path="${escapeHtml(docPath)}"` : `data-raw-path="${escapeHtml(docPath)}"`;
+    const stageIcon = STAGE_ICONS[r.growth_stage] || (r.source === 'wiki' ? '📝' : '📄');
+    html += `<div class="kb-tree-item" ${attr} tabindex="0" role="button" aria-label="${escapeHtml(r.title || r.doc)}" title="${escapeHtml((r.text||'').slice(0,60))}">${stageIcon} ${escapeHtml(r.title || r.doc)}</div>`;
+  });
+
+  // 分页控件
+  if (total > limit) {
+    html += renderKbPagination(total, offset, limit);
+  }
+
+  container.innerHTML = html;
+}
+
+// 渲染分页控件（上一页/页码/下一页）
+function renderKbPagination(total, offset, limit) {
+  const currentPage = Math.floor(offset / limit) + 1;
+  const totalPages = Math.ceil(total / limit);
+
+  const buttons = [];
+  // 上一页
+  const prevDisabled = currentPage <= 1;
+  buttons.push(`<button class="kb-page-btn${prevDisabled ? ' disabled' : ''}" data-page="${currentPage - 1}" ${prevDisabled ? 'disabled' : ''} tabindex="0" aria-label="上一页">‹</button>`);
+
+  // 页码窗口（最多 5 个，当前页居中）
+  let startPage = Math.max(1, currentPage - 2);
+  let endPage = Math.min(totalPages, startPage + 4);
+  if (endPage - startPage < 4) startPage = Math.max(1, endPage - 4);
+
+  if (startPage > 1) {
+    buttons.push(`<button class="kb-page-btn" data-page="1" tabindex="0" aria-label="第1页">1</button>`);
+    if (startPage > 2) buttons.push(`<span class="kb-page-ellipsis" aria-hidden="true">…</span>`);
+  }
+  for (let p = startPage; p <= endPage; p++) {
+    const isCurrent = p === currentPage;
+    buttons.push(`<button class="kb-page-btn${isCurrent ? ' active' : ''}" data-page="${p}" tabindex="0" aria-label="第${p}页"${isCurrent ? ' aria-current="page"' : ''}>${p}</button>`);
+  }
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) buttons.push(`<span class="kb-page-ellipsis" aria-hidden="true">…</span>`);
+    buttons.push(`<button class="kb-page-btn" data-page="${totalPages}" tabindex="0" aria-label="第${totalPages}页">${totalPages}</button>`);
+  }
+
+  // 下一页
+  const nextDisabled = currentPage >= totalPages;
+  buttons.push(`<button class="kb-page-btn${nextDisabled ? ' disabled' : ''}" data-page="${currentPage + 1}" ${nextDisabled ? 'disabled' : ''} tabindex="0" aria-label="下一页">›</button>`);
+
+  return `<div class="kb-pagination" role="navigation" aria-label="搜索结果分页">${buttons.join('')}<span class="kb-page-info">${currentPage}/${totalPages}</span></div>`;
 }
 
 // v3.5.1: 注册模块初始化

@@ -175,6 +175,7 @@ def tool_knowledge_query(query: str) -> str:
         if kb is None:
             return "✗ 查询失败: knowledge_base 模块不可用"
         results = kb.search(query, top_k=2)
+        results = results.get("results", []) if isinstance(results, dict) else results
         if not results:
             return "○ 知识库中未找到相关内容"
         parts = []

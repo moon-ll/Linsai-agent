@@ -39,8 +39,7 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-PROJECT_ROOT = Path(__file__).parent.parent
-SCRIPTS_DIR = PROJECT_ROOT / "scripts"
+from paths import PROJECT_ROOT, SCRIPTS_DIR
 VERSION_FILE = PROJECT_ROOT / "VERSION"
 MIGRATE_SCRIPT = SCRIPTS_DIR / "migrate.py"
 SELF_TEST_SCRIPT = SCRIPTS_DIR / "self_test.py"

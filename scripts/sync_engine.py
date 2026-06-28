@@ -40,8 +40,7 @@ from typing import Any, Dict, List
 
 from common import now_utc as _now_utc
 
-PROJECT_ROOT = Path(__file__).parent.parent
-MEMORY_DIR = PROJECT_ROOT / "memory"
+from paths import PROJECT_ROOT, MEMORY_DIR
 SYNC_STATE_PATH = MEMORY_DIR / "sync-state.json"
 
 # hermes linsai profile 路径

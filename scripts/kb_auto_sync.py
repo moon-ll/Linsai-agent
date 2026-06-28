@@ -27,9 +27,7 @@ from pathlib import Path
 
 from common import now_utc as _now_utc
 
-PROJECT_ROOT = Path(__file__).parent.parent
-SCRIPTS_DIR = PROJECT_ROOT / "scripts"
-MEMORY_DIR = PROJECT_ROOT / "memory"
+from paths import PROJECT_ROOT, SCRIPTS_DIR, MEMORY_DIR
 SYNC_STATE_PATH = MEMORY_DIR / "sync-state.json"
 
 # LaunchAgent 配置

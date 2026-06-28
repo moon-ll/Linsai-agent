@@ -511,6 +511,7 @@ LinSai-CoPilot/
 - ✅ **v3.5.7 安全与质量优化** — P0 线程安全+路径遍历修复、P1 原子写入+XSS 修复+测试扩展（129+171）、P2 导入清理+缓存+CSS 变量
 - ✅ **v3.5.8 第三轮安全修复** — P0 project_manager/_send_static 路径遍历、P1 文件锁+escapeAttr+42处onclick修复+测试扩展（137+207）、P2 内存泄漏+async+对比度
 - ✅ **v3.5.9 冗余内容清理** — 删除 version.py 死模块、合并 _safe_filename/_STOPWORDS 重复定义、删除 ~230 行死 CSS + 2 个死 JS 函数、修复 skill-count ID 不匹配 bug、清理数据残留、更新 4 个 README
+- ✅ **v3.6.0 知识库分区策略 + 基础设施增强** — search() 五维分区过滤+分页、API 暴露分区参数、context_builder 项目感知检索、前端统一搜索+筛选联动+分页控件+分区选择器、captures/ 修复、paths.py 迁移收尾（28文件）、/api/health 端点、日志保留 30 天
 
 ---
 
@@ -674,7 +675,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：3.5.9*
+*版本：3.6.0*
 *日期：2026-06-28*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

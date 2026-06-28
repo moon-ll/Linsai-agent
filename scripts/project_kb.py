@@ -513,7 +513,8 @@ def search(
     query: str,
     layer: str = "all",
     top_k: int = 5,
-) -> List[dict]:
+    offset: int = 0,
+) -> Dict[str, Any]:
     """在课题知识库中搜索。
 
     复用 knowledge_base 的搜索逻辑，但限定在课题目录内。
@@ -522,11 +523,14 @@ def search(
     Args:
         query: 查询文本
         layer: "all" | "raw" | "parsed" | "summary"
-        top_k: 返回最相关的 K 条
+        top_k: 返回最相关的 K 条（每页数量）
+        offset: 分页偏移量，默认0
 
     Returns:
-        [{title, path, layer, score, snippet}]
+        {"results": [...], "total": N, "offset": offset, "limit": top_k}
+        results 每项含 title, path, layer, score, snippet
     """
+    empty = {"results": [], "total": 0, "offset": offset, "limit": top_k}
     kb_dir = get_kb_dir(project_id)
     index_path = kb_dir / "index.json"
     if not index_path.exists():
@@ -534,11 +538,11 @@ def search(
 
     index = _read_json(index_path, default={})
     if not index:
-        return []
+        return empty
 
     query_terms = _tokenize(query)
     if not query_terms:
-        return []
+        return empty
 
     # 聚合每个文档的得分
     scores: Dict[str, float] = {}
@@ -554,10 +558,12 @@ def search(
                     continue
             scores[p] = scores.get(p, 0.0) + entry.get("score", 0.0)
 
-    ranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)[:top_k]
+    ranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+    total = len(ranked)
+    paged = ranked[offset:offset + top_k]
 
     results: List[dict] = []
-    for path, score in ranked:
+    for path, score in paged:
         doc_layer = path.split("/")[0] if "/" in path else ""
         title = Path(path).stem
         snippet = ""
@@ -573,7 +579,7 @@ def search(
             "score": round(score, 4),
             "snippet": snippet,
         })
-    return results
+    return {"results": results, "total": total, "offset": offset, "limit": top_k}
 
 
 # ─────────────────────────────────────────────
@@ -809,7 +815,8 @@ def _self_check() -> None:
         print(f"  路径: {rel3}")
 
         print("\n[5/8] 搜索 '测试概念'...")
-        results = search(pid, "测试概念", top_k=5)
+        res = search(pid, "测试概念", top_k=5)
+        results = res.get("results", []) if isinstance(res, dict) else res
         print(f"  命中: {len(results)} 条")
         for r in results:
             print(f"    [{r['layer']}] {r['title']} score={r['score']} "
@@ -879,6 +886,7 @@ if __name__ == "__main__":
         print(json.dumps(get_kb_stats(args.stats), ensure_ascii=False, indent=2))
     elif args.search:
         pid, query = args.search
-        for r in search(pid, query):
+        res = search(pid, query)
+        for r in res.get("results", []) if isinstance(res, dict) else res:
             print(f"  [{r['layer']}] {r['title']} (score={r['score']})")
             print(f"    {r['snippet']}")

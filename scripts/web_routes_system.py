@@ -56,6 +56,7 @@ import backup_manager as bm
 _SYSTEM_ROUTES = [
     # --- GET ---
     ("GET", re.compile(r"^/api/version$"), "_sys_version"),
+    ("GET", re.compile(r"^/api/health$"), "_sys_health"),
     ("GET", re.compile(r"^/api/heartbeat$"), "_sys_heartbeat"),
     ("GET", re.compile(r"^/api/memory/status$"), "_sys_memory_status"),
     ("GET", re.compile(r"^/api/memory/reflow$"), "_sys_memory_reflow"),
@@ -90,6 +91,72 @@ class SystemRoutesMixin:
         """版本号"""
         version = (web_base._PROJECT_ROOT / "VERSION").read_text(encoding="utf-8").strip()
         self._send_json({"version": version, "name": "LinSai-CoPilot"})
+
+    def _sys_health(self, parsed, body=None):
+        """系统健康检查：聚合版本、LLM、知识库、关键目录状态。"""
+        import os
+        from paths import KNOWLEDGE_DIR, MEMORY_DIR, SESSIONS_DIR, TASKS_DIR
+
+        health = {
+            "status": "ok",
+            "version": "",
+            "llm": {},
+            "knowledge_base": {},
+            "directories": {},
+        }
+
+        # 版本
+        try:
+            version_path = web_base._PROJECT_ROOT / "VERSION"
+            health["version"] = version_path.read_text(encoding="utf-8").strip()
+        except Exception:
+            health["version"] = "unknown"
+
+        # LLM 状态
+        try:
+            status = lr.get_status()
+            health["llm"] = {
+                "active_provider": status.get("active_provider", ""),
+                "providers": [
+                    {"name": p["name"], "available": p["available"]}
+                    for p in status.get("providers", [])
+                ],
+            }
+        except Exception as e:
+            health["llm"] = {"error": str(e)}
+
+        # 知识库统计
+        try:
+            import knowledge_base as kb
+            summary = kb.get_kb_health()
+            health["knowledge_base"] = {
+                "total_docs": summary.get("raw_count", 0) + summary.get("wiki_count", 0),
+                "wiki_count": summary.get("wiki_count", 0),
+                "raw_count": summary.get("raw_count", 0),
+                "graph_nodes": summary.get("graph_nodes", 0),
+            }
+        except Exception as e:
+            health["knowledge_base"] = {"error": str(e)}
+
+        # 关键目录可访问性
+        for name, path in [
+            ("knowledge", KNOWLEDGE_DIR),
+            ("memory", MEMORY_DIR),
+            ("sessions", SESSIONS_DIR),
+            ("tasks", TASKS_DIR),
+        ]:
+            health["directories"][name] = {
+                "exists": path.exists(),
+                "writable": os.access(str(path), os.W_OK) if path.exists() else False,
+            }
+
+        # 总体状态：LLM 至少一个可用 + 知识库无错误 + 目录全部存在
+        llm_ok = any(p.get("available") for p in health["llm"].get("providers", []))
+        kb_ok = "error" not in health["knowledge_base"]
+        dirs_ok = all(d["exists"] for d in health["directories"].values())
+        health["status"] = "ok" if (llm_ok and kb_ok and dirs_ok) else "degraded"
+
+        self._send_json(health)
 
     def _sys_heartbeat(self, parsed, body=None):
         """心跳 + 主动提醒"""

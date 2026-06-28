@@ -26,10 +26,7 @@ from typing import Any, Dict, List, Tuple
 from common import now_utc as _now_utc, load_json, save_json
 from kb_text import _STOPWORDS
 
-PROJECT_ROOT = Path(__file__).parent.parent
-MEMORY_DIR = PROJECT_ROOT / "memory"
-TASKS_DIR = PROJECT_ROOT / "tasks"
-SESSIONS_DIR = PROJECT_ROOT / "sessions"
+from paths import PROJECT_ROOT, MEMORY_DIR, TASKS_DIR, SESSIONS_DIR
 PROFILE_PATH = MEMORY_DIR / "research-profile.json"
 
 # 技术术语模式

@@ -97,7 +97,9 @@ class CoreModuleTests(TestSuite):
         patch_module_root("knowledge_base", REAL_ROOT)
         kb = importlib.import_module("knowledge_base")
         results = kb.search("HHG", top_k=3)
-        self.assert_true(isinstance(results, list), "搜索返回列表")
+        self.assert_true(isinstance(results, dict), "搜索返回字典")
+        self.assert_in("results", results, "搜索结果含 results 字段")
+        self.assert_in("total", results, "搜索结果含 total 字段")
 
     def _test_kb_aliases(self):
         patch_module_root("knowledge_base", REAL_ROOT)
@@ -332,8 +334,11 @@ class ProjectModuleTests(TestSuite):
         self.assert_true(bool(rel), "知识库导入返回路径", f"rel={rel}")
 
         # 5. 课题知识库搜索
-        results = self.pkb.search(pid, "相位匹配", top_k=5)
-        self.assert_true(isinstance(results, list), "知识库搜索返回列表")
+        res = self.pkb.search(pid, "相位匹配", top_k=5)
+        self.assert_true(isinstance(res, dict), "知识库搜索返回字典")
+        self.assert_in("results", res, "课题搜索含 results 字段")
+        self.assert_in("total", res, "课题搜索含 total 字段")
+        results = res.get("results", [])
         self.assert_true(len(results) >= 1, "知识库搜索命中", f"命中 {len(results)} 条")
 
         # 6. 课题记忆保存

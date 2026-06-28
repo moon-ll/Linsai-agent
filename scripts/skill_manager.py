@@ -22,7 +22,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 import common as _cms
 
-PROJECT_ROOT = Path(__file__).parent.parent
+from paths import PROJECT_ROOT
 SKILLS_DIR = PROJECT_ROOT / "skills"
 SKILLS_STATE_PATH = PROJECT_ROOT / "memory" / "skills-state.json"
 

@@ -25,7 +25,7 @@ from typing import Any
 from common import now_utc as _now_utc, load_json
 
 
-PROJECT_ROOT = Path(__file__).parent.parent.resolve()
+from paths import PROJECT_ROOT
 AGORA_DIR = PROJECT_ROOT / "sessions" / "agora_exports"
 
 

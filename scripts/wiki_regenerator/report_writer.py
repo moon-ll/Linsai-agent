@@ -14,14 +14,21 @@ report_writer.py — wiki 报告生成器
 """
 
 import re
+import sys
 from pathlib import Path
 from datetime import datetime, timezone
+
+# 确保 scripts/ 在 sys.path 中，以便 import paths
+_SCRIPTS_DIR = Path(__file__).parent.parent.resolve()
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
+
 try:
     from .paper_reader import load_all_papers, build_by_tag, build_by_year  # 包模式
 except ImportError:
     from paper_reader import load_all_papers, build_by_tag, build_by_year   # 脚本模式
 
-PROJECT_ROOT = Path(__file__).parent.parent.parent
+from paths import PROJECT_ROOT
 WIKI_DIR = PROJECT_ROOT / "knowledge" / "wiki" / "papers"
 
 # ============================================================

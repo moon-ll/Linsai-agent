@@ -10,6 +10,10 @@ from pathlib import Path
 _SCRIPT_DIR = Path(__file__).parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
+# 确保 scripts/ 在 sys.path 中，以便 import paths
+_SCRIPTS_DIR = _SCRIPT_DIR.parent
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
 
 try:  # 包模式优先，脚本模式回退
     from .fetch_core import fetch_head, fetch_preview, _extract_sections_from_head, _extract_sections_from_preview
@@ -20,7 +24,7 @@ except ImportError:
     from checkpoint import Checkpoint
     from paper_writer import write_paper
 
-PROJECT_ROOT = Path(__file__).parent.parent.parent
+from paths import PROJECT_ROOT
 OUT_DIR = PROJECT_ROOT / "knowledge" / "raw" / "papers"
 CKPT_PATH = PROJECT_ROOT / "knowledge" / "raw" / "checkpoint.json"
 

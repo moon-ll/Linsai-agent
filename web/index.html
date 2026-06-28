@@ -108,6 +108,17 @@
     <div class="kb-tree-panel">
       <div class="kb-tree-header">
         <input type="text" id="kb-tree-search" placeholder="🔍 搜索知识库…" autocomplete="off" style="width:100%;padding:5px 10px;border-radius:6px;border:1px solid var(--border-color);background:var(--surface);color:var(--text-primary);font-size:0.82rem;box-sizing:border-box;">
+        <!-- 分区快捷选择器 -->
+        <div class="kb-partition-bar">
+          <select id="kb-partition-select" class="kb-partition-select" title="知识库分区" aria-label="选择知识库分区">
+            <option value="all">🗂️ 全部知识库</option>
+            <option value="project:NSFC-强场超快">🔬 课题知识库</option>
+            <option value="project:deepxiv-论文库">📄 论文库</option>
+            <option value="type:concepts">📐 概念库</option>
+            <option value="type:methods">🛠️ 方法库</option>
+            <option value="type:people">👤 学者库</option>
+          </select>
+        </div>
         <div class="kb-toolbar" id="kb-toolbar">
           <button class="kb-toolbar-btn" id="kb-sync-btn" title="一键同步 hermes 产出 + 重建索引和图谱" aria-label="同步知识库">🔄 同步</button>
           <button class="kb-toolbar-btn" id="kb-health-btn" title="知识库健康检查" aria-label="知识库健康检查">📊 健康</button>

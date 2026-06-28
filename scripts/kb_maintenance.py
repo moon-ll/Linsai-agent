@@ -23,8 +23,7 @@ from typing import Any, Dict, List, Optional
 
 from common import now_utc as _now_utc
 
-PROJECT_ROOT = Path(__file__).parent.parent
-KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
+from paths import PROJECT_ROOT, KNOWLEDGE_DIR
 
 
 def _import_kb():

@@ -312,6 +312,31 @@ body {
   border-color: var(--accent);
 }
 
+/* v3.5.10: 分区快捷选择器 */
+.kb-partition-bar {
+  margin-top: 6px;
+  display: flex;
+}
+.kb-partition-select {
+  flex: 1;
+  padding: 4px 8px;
+  font-size: 0.78rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--surface);
+  color: var(--text-primary);
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.kb-partition-select:hover {
+  border-color: var(--accent);
+}
+.kb-partition-select:focus-visible {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
 /* v3.1: 分类管理弹窗 */
 .kb-category-modal {
   position: fixed;
@@ -469,6 +494,64 @@ body {
 .kb-tree-item:hover { background: var(--bg-active); }
 .kb-tree-item.active { background: var(--bg-active); color: var(--accent-color); font-weight: 500; }
 .kb-tree-item.is-moc { color: var(--accent-color); font-weight: 500; }
+
+/* v3.5.10: 搜索结果分页控件 */
+.kb-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+  padding: 8px 4px 4px;
+  border-top: 1px dashed var(--border-color);
+}
+.kb-page-btn {
+  min-width: 26px;
+  height: 26px;
+  padding: 0 6px;
+  font-size: 0.75rem;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  background: var(--surface);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.kb-page-btn:hover:not(.disabled):not(.active) {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+.kb-page-btn:active:not(.disabled) {
+  transform: scale(0.94);
+}
+.kb-page-btn.active {
+  background: var(--accent-color);
+  color: white;
+  border-color: var(--accent-color);
+  font-weight: 600;
+  cursor: default;
+}
+.kb-page-btn.disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.kb-page-ellipsis {
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  padding: 0 2px;
+  user-select: none;
+}
+.kb-page-info {
+  margin-left: 6px;
+  font-size: 0.72rem;
+  color: var(--text-tertiary);
+  white-space: nowrap;
+}
 
 .kb-preview-panel {
   flex: 1;

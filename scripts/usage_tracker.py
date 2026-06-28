@@ -24,7 +24,7 @@ from typing import Any, Dict, List, Optional
 from common import now_utc as _now_utc
 import common as _cms
 
-PROJECT_ROOT = Path(__file__).parent.parent
+from paths import PROJECT_ROOT
 USAGE_DIR = PROJECT_ROOT / "memory" / "usage"
 USAGE_PATH = USAGE_DIR / "usage.json"
 

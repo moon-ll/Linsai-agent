@@ -50,8 +50,7 @@ from typing import Any, Dict, List, Optional
 
 from common import now_utc as _now_utc
 
-PROJECT_ROOT = Path(__file__).parent.parent
-MEMORY_DIR = PROJECT_ROOT / "memory"
+from paths import PROJECT_ROOT, MEMORY_DIR
 DATA_FILE = MEMORY_DIR / "project-dispatch.json"
 
 # 意见状态

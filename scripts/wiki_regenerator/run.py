@@ -9,6 +9,10 @@ from pathlib import Path
 _SCRIPT_DIR = Path(__file__).parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
+# 确保 scripts/ 在 sys.path 中，以便 import paths
+_SCRIPTS_DIR = _SCRIPT_DIR.parent
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
 
 try:  # 包模式优先，脚本模式回退
     from .report_writer import (
@@ -31,7 +35,7 @@ except ImportError:
     )
     from paper_reader import load_all_papers
 
-PROJECT_ROOT = Path(__file__).parent.parent.parent
+from paths import PROJECT_ROOT
 WIKI_DIR = PROJECT_ROOT / "knowledge" / "wiki" / "papers"
 EXISTING_METHODS = WIKI_DIR / "hhg-methods-report.md"
 

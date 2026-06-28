@@ -37,7 +37,7 @@ from typing import Any, Dict, List, Optional
 
 from common import now_utc, load_json, save_json
 
-PROJECT_ROOT = Path(__file__).parent.parent
+from paths import PROJECT_ROOT
 POOL_PATH = PROJECT_ROOT / "memory" / "paper-pool.json"
 
 # 三状态

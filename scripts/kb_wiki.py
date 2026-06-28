@@ -220,6 +220,7 @@ def check_similar_concepts(concept_name: str, threshold: float = 0.9) -> List[Di
         相似概念列表，每项含 title, doc, score, path
     """
     results = search(concept_name, top_k=5)
+    results = results.get("results", []) if isinstance(results, dict) else results
     similar = []
     for r in results:
         score = r.get("score", 0)

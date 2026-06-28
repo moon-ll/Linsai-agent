@@ -14,6 +14,10 @@ from pathlib import Path
 
 _SCRIPT_DIR = Path(__file__).parent.resolve()
 sys.path.insert(0, str(_SCRIPT_DIR))
+# 确保 scripts/ 在 sys.path 中，以便 import paths
+_SCRIPTS_DIR = _SCRIPT_DIR.parent
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
 
 try:
     from .pdf_extractor import extract_from_pdf  # 包模式
@@ -26,7 +30,7 @@ except Exception as e:
         print(f"⚠️  PDF 提取模块不可用: {e2}")
         HAS_PDF = False
 
-PROJECT_ROOT = _SCRIPT_DIR.parent.parent
+from paths import PROJECT_ROOT
 RAW_DIR = PROJECT_ROOT / "knowledge" / "raw" / "papers"
 CKPT_PATH = PROJECT_ROOT / "knowledge" / "raw" / "checkpoint.json"
 OUT_WIKI = PROJECT_ROOT / "knowledge" / "wiki" / "papers"

@@ -173,13 +173,27 @@ def split_response_stream(text: str) -> List[str]:
 
 
 def _update_memory_async(session_id: str) -> None:
-    """异步更新用户画像和工作上下文。"""
+    """异步更新用户画像和工作上下文，并捕获知识片段。
+
+    本函数在 _sess_send_message 中以 daemon 线程方式调用，不阻塞 SSE 响应。
+    除记忆更新外，还接入 kb_capture.capture_from_session()，使 Web SSE 流程
+    与 CLI chat_loop 保持一致，避免 knowledge/captures/ 始终为空。
+    """
     try:
         mm.update_user_profile(session_id)
         mm.update_working_context(session_id)
     except Exception as e:
         if _log:
             _log.debug("异步更新记忆失败: %s", e)
+    # 捕获知识片段（零 LLM 开销，静默执行）
+    try:
+        import kb_capture as kc
+        result = kc.capture_from_session(session_id)
+        if result.get("captured") and _log:
+            _log.info("已捕获知识片段: %s", result.get("path", ""))
+    except Exception as e:
+        if _log:
+            _log.debug("捕获知识片段失败: %s", e)
 
 
 # ---------------------------------------------------------------------------

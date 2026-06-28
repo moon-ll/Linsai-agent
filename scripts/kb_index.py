@@ -303,30 +303,38 @@ def build_index(force: bool = False) -> Dict[str, Any]:
     return index_data
 
 
-def search(query: str, top_k: int = 3, source: str = "all", project: str = "") -> List[Dict[str, Any]]:
+def search(query: str, top_k: int = 3, source: str = "all", project: str = "",
+           doc_type: str = "", tag: str = "", stage: str = "",
+           offset: int = 0) -> Dict[str, Any]:
     """根据查询检索相关知识段落（增强版）。
 
     Args:
         query: 用户输入的查询文本
-        top_k: 返回最相关的 K 个段落
+        top_k: 返回最相关的 K 个段落（每页数量）
         source: "all" | "raw" | "wiki" — 只返回指定来源的结果
         project: 只返回属于指定项目子库的结果（v2.7.0，空字符串=不过滤）
+        doc_type: 按文档类型过滤（concepts/methods/people/papers/projects），空串=不过滤
+        tag: 按 frontmatter tags 过滤，空串=不过滤
+        stage: 按 growth_stage 过滤（seedling/growing/mature），空串=不过滤
+        offset: 分页偏移量，默认0
 
     Returns:
-        段落列表，每项含 text, doc, score, source, title, growth_stage, project
+        {"results": [...], "total": N, "offset": offset, "limit": top_k}
+        results 每项含 text, doc, score, source, title, growth_stage, project
     """
+    empty = {"results": [], "total": 0, "offset": offset, "limit": top_k}
     if not INDEX_PATH.exists():
-        return []
+        return empty
 
     try:
         with open(INDEX_PATH, "r", encoding="utf-8") as f:
             index_data = json.load(f)
     except Exception:
-        return []
+        return empty
 
     query_terms = _tokenize(query)
     if not query_terms:
-        return []
+        return empty
 
     # 别名扩展：将查询中的别名替换为 canonical 形式
     aliases = _load_aliases()
@@ -373,6 +381,26 @@ def search(query: str, top_k: int = 3, source: str = "all", project: str = "") -
             elif doc_project != project:
                 continue
 
+        # 文档类型过滤（按 wiki 子目录推断：wiki/{doc_type}/...）
+        if doc_type:
+            doc_path_parts = Path(doc_info.get("path", doc_name)).parts
+            doc_t = doc_path_parts[1] if len(doc_path_parts) >= 2 and doc_path_parts[0] == "wiki" else ""
+            if doc_t != doc_type:
+                continue
+
+        # 标签过滤（按 frontmatter tags）
+        if tag:
+            doc_tags = doc_info.get("tags", [])
+            if not isinstance(doc_tags, list):
+                doc_tags = [doc_tags] if doc_tags else []
+            if tag not in doc_tags:
+                continue
+
+        # 生长阶段过滤
+        if stage:
+            if doc_info.get("growth_stage", "") != stage:
+                continue
+
         chunk_id = info["chunk_id"]
         chunk_text = ""
         chunk_keywords = []
@@ -414,17 +442,25 @@ def search(query: str, top_k: int = 3, source: str = "all", project: str = "") -
         })
 
     scored.sort(key=lambda x: x["score"], reverse=True)
-    return scored[:top_k]
+    total = len(scored)
+    paged = scored[offset:offset + top_k]
+    return {"results": paged, "total": total, "offset": offset, "limit": top_k}
 
 
-def search_light(query: str, top_k: int = 3, source: str = "all") -> List[Dict[str, Any]]:
+def search_light(query: str, top_k: int = 3, source: str = "all",
+                 project: str = "", doc_type: str = "", tag: str = "",
+                 stage: str = "", offset: int = 0) -> Dict[str, Any]:
     """轻量检索：只返回标题、摘要、路径和分数，不返回全文。
 
     用于快速判断是否需要注入上下文，节省内存和序列化开销。
+
+    Returns:
+        {"results": [...], "total": N, "offset": offset, "limit": top_k}
     """
-    results = search(query, top_k=top_k, source=source)
+    result = search(query, top_k=top_k, source=source, project=project,
+                    doc_type=doc_type, tag=tag, stage=stage, offset=offset)
     light = []
-    for r in results:
+    for r in result.get("results", []):
         text = r.get("text", "")
         # 生成一句话摘要（取第一句或前 80 字符）
         summary = text.split("。")[0] if "。" in text else text[:80]
@@ -438,7 +474,12 @@ def search_light(query: str, top_k: int = 3, source: str = "all") -> List[Dict[s
             "growth_stage": r.get("growth_stage", ""),
             "summary": summary,
         })
-    return light
+    return {
+        "results": light,
+        "total": result.get("total", 0),
+        "offset": result.get("offset", offset),
+        "limit": result.get("limit", top_k),
+    }
 
 
 def get_index_status() -> Dict[str, Any]:
@@ -474,8 +515,14 @@ def get_index_status() -> Dict[str, Any]:
 # 上下文构建增强：关联知识拉取
 # ─────────────────────────────────────────────
 
-def get_enriched_context(query: str, top_k: int = 3) -> Dict[str, Any]:
+def get_enriched_context(query: str, top_k: int = 3, project: str = "") -> Dict[str, Any]:
     """获取增强的上下文：搜索结果 + 关联知识。
+
+    Args:
+        query: 查询文本
+        top_k: 直接搜索结果数
+        project: 课题分区过滤（空串=全局检索）。非空时先按课题检索，
+                 不足 top_k 则补充全局检索，保证不丢失全局知识。
 
     Returns:
         {
@@ -484,7 +531,16 @@ def get_enriched_context(query: str, top_k: int = 3) -> Dict[str, Any]:
             "missing_concepts": [...],  # 查询中可能缺失的新概念
         }
     """
-    results = search(query, top_k=top_k, source="all")
+    # 项目感知检索：先按课题分区检索，不足则补充全局检索
+    if project:
+        kb_result = search(query, top_k=top_k, project=project)
+        results = kb_result.get("results", [])
+        if len(results) < top_k:
+            extra = search(query, top_k=top_k - len(results))
+            results.extend(extra.get("results", []))
+    else:
+        kb_result = search(query, top_k=top_k, source="all")
+        results = kb_result.get("results", [])
 
     # 通过图谱拉取关联知识
     related = []
@@ -622,16 +678,18 @@ def _self_check() -> bool:
 
         # [2/5] TF-IDF 搜索
         total += 1
-        results = search("固体高次谐波", top_k=3)
-        if len(results) >= 1 and results[0]["score"] > 0:
+        res = search("固体高次谐波", top_k=3)
+        results = res.get("results", [])
+        if isinstance(res, dict) and "total" in res and len(results) >= 1 and results[0]["score"] > 0:
             passed += 1
-            print(f"  [2/{total}] ✓ 搜索: 命中 {len(results)} 条 (top score={results[0]['score']:.2f})")
+            print(f"  [2/{total}] ✓ 搜索: 命中 {len(results)} 条 total={res['total']} (top score={results[0]['score']:.2f})")
         else:
-            print(f"  [2/{total}] ✗ 搜索: results={len(results)}")
+            print(f"  [2/{total}] ✗ 搜索: res={res}")
 
         # [3/5] 轻量搜索
         total += 1
-        light = search_light("HHG", top_k=2)
+        light_res = search_light("HHG", top_k=2)
+        light = light_res.get("results", []) if isinstance(light_res, dict) else light_res
         if isinstance(light, list) and all("summary" in r for r in light):
             passed += 1
             print(f"  [3/{total}] ✓ 轻量搜索: {len(light)} 条 (含 summary)")

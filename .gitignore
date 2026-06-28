@@ -38,6 +38,7 @@ knowledge/index.json
 knowledge/graph.json
 knowledge/growth-log.json
 knowledge/.cache/
+knowledge/.obsidian/
 
 # === 运行时数据 ===
 memory/usage/

@@ -28,10 +28,7 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 
 from common import now_utc as _now_utc
 
-PROJECT_ROOT = Path(__file__).parent.parent
-SCRIPTS_DIR = PROJECT_ROOT / "scripts"
-KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
-MEMORY_DIR = PROJECT_ROOT / "memory"
+from paths import PROJECT_ROOT, SCRIPTS_DIR, KNOWLEDGE_DIR, MEMORY_DIR
 ALIASES_PATH = KNOWLEDGE_DIR / "aliases.json"
 CANDIDATES_PATH = MEMORY_DIR / "alias-candidates.json"
 

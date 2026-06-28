@@ -37,7 +37,7 @@ import subprocess
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-PROJECT_ROOT = Path(__file__).parent.parent
+from paths import PROJECT_ROOT
 
 # hermes profile 路径
 HERMES_HOME = Path.home() / ".hermes"

@@ -25,10 +25,8 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from common import now_utc as _now_utc, load_json, save_json, safe_filename
 
-PROJECT_ROOT = Path(__file__).parent.parent
-KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
+from paths import PROJECT_ROOT, KNOWLEDGE_DIR, MEMORY_DIR
 WIKI_PAPERS_DIR = KNOWLEDGE_DIR / "wiki" / "papers"
-MEMORY_DIR = PROJECT_ROOT / "memory"
 COST_PATH = MEMORY_DIR / "learning-cost.json"
 
 # 动态导入 knowledge_base

@@ -120,12 +120,33 @@ class KbRoutesMixin:
         self._send_json(kb.get_index_status())
 
     def _kb_search(self, parsed, body=None):
-        """搜索"""
-        query = parse_qs(parsed.query).get("q", [""])[0]
-        source = parse_qs(parsed.query).get("source", ["all"])[0]
-        top_k = int(parse_qs(parsed.query).get("top_k", ["3"])[0])
-        results = kb.search(query, top_k=top_k, source=source)
-        self._send_json({"query": query, "results": results})
+        """搜索（支持分区过滤与分页）
+
+        查询参数：
+            q        — 查询文本
+            top_k    — 每页数量（默认5）
+            source   — all|raw|wiki
+            project  — 课题分区过滤
+            type     — 文档类型过滤（concepts/methods/people/papers/projects）
+            tag      — frontmatter tags 过滤
+            stage    — growth_stage 过滤（seedling/growing/mature）
+            offset   — 分页偏移量（默认0）
+        """
+        qs = parse_qs(parsed.query)
+        query = qs.get("q", [""])[0]
+        top_k = int(qs.get("top_k", ["5"])[0])
+        source = qs.get("source", ["all"])[0]
+        project = qs.get("project", [""])[0]
+        doc_type = qs.get("type", [""])[0]
+        tag = qs.get("tag", [""])[0]
+        stage = qs.get("stage", [""])[0]
+        offset = int(qs.get("offset", ["0"])[0])
+        if not query:
+            self._send_json({"results": [], "total": 0, "offset": offset, "limit": top_k})
+            return
+        result = kb.search(query, top_k=top_k, source=source, project=project,
+                           doc_type=doc_type, tag=tag, stage=stage, offset=offset)
+        self._send_json(result)
 
     def _kb_raw_files(self, parsed, body=None):
         """原始文件列表"""

@@ -332,6 +332,8 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
     knowledge_raw = ""
     missing_concepts = []
     kb_hits = []  # v3.4: 知识库命中埋点
+    # v3.5.10: 提前读取课题ID，供全局 KB 项目感知检索使用
+    project_id = _read_session_project_id(session_id)
     should_search = not is_small
     if should_search and _try_knowledge_base is not None:
         try:
@@ -344,7 +346,7 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
         try:
             # 优先使用增强上下文（含图谱关联）
             if hasattr(_try_knowledge_base, "get_enriched_context"):
-                enriched = _try_knowledge_base.get_enriched_context(user_input, top_k=2)
+                enriched = _try_knowledge_base.get_enriched_context(user_input, top_k=2, project=project_id)
                 results = enriched.get("results", [])
                 related = enriched.get("related", [])
                 missing_concepts = enriched.get("missing_concepts", [])
@@ -387,8 +389,17 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
                     missing_str = "、".join(missing_concepts[:3])
                     knowledge_raw += f"\n\n[林赛的认知边界] 你提到的 '{missing_str}' 在我的知识库中还没有系统的研究笔记。如果你愿意，我们可以一起把它记录下来，成为我知识体系的一部分。"
             else:
-                # 回退到基础搜索
-                results = _try_knowledge_base.search(user_input, top_k=2)
+                # 回退到基础搜索（项目感知：先按课题检索，不足则补充全局）
+                if project_id:
+                    kb_res = _try_knowledge_base.search(user_input, top_k=2, project=project_id)
+                    results = kb_res.get("results", []) if isinstance(kb_res, dict) else kb_res
+                    if len(results) < 2:
+                        extra = _try_knowledge_base.search(user_input, top_k=2 - len(results))
+                        extra_list = extra.get("results", []) if isinstance(extra, dict) else extra
+                        results.extend(extra_list)
+                else:
+                    kb_res = _try_knowledge_base.search(user_input, top_k=2)
+                    results = kb_res.get("results", []) if isinstance(kb_res, dict) else kb_res
                 if results:
                     parts = []
                     for r in results:
@@ -407,7 +418,6 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
 
     # v3.5: 课题上下文注入 — 会话关联课题时自动注入课题记忆+知识库概览
     project_ctx_raw = ""
-    project_id = _read_session_project_id(session_id)
     if project_id and _try_project_context is not None:
         try:
             project_ctx_raw = _try_project_context.build_project_context(project_id, include_kb=True)
@@ -443,7 +453,8 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
     project_kb_results = []
     if project_id and _try_project_kb is not None and not is_small:
         try:
-            pkb_results = _try_project_kb.search(project_id, user_input)
+            pkb_raw = _try_project_kb.search(project_id, user_input)
+            pkb_results = pkb_raw.get("results", []) if isinstance(pkb_raw, dict) else pkb_raw
             for r in pkb_results[:5]:  # 最多取5条
                 project_kb_results.append({
                     "title": r.get("title", ""),

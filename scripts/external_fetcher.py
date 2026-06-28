@@ -35,9 +35,7 @@ from common import now_utc as _now_utc
 
 _log = logging.getLogger(__name__)
 
-PROJECT_ROOT = Path(__file__).parent.parent
-KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
-RAW_DIR = KNOWLEDGE_DIR / "raw"
+from paths import PROJECT_ROOT, KNOWLEDGE_DIR, RAW_DIR
 CACHE_DIR = KNOWLEDGE_DIR / ".cache"
 CACHE_DIR_ARXIV = CACHE_DIR / "arxiv"
 CACHE_DIR_WIKI = CACHE_DIR / "wikipedia"
@@ -567,6 +565,7 @@ def score_opportunity(item: Dict[str, Any],
             spec.loader.exec_module(kb)
             if hasattr(kb, "search_light"):
                 results = kb.search_light(title, top_k=1)
+                results = results.get("results", []) if isinstance(results, dict) else results
                 if results:
                     max_sim = results[0].get("score", 0)
                     novelty = max(0.0, 1.0 - max_sim)

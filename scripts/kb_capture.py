@@ -20,9 +20,8 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from common import now_utc as _now_utc, safe_filename as _safe_filename
 
-PROJECT_ROOT = Path(__file__).parent.parent
+from paths import PROJECT_ROOT, SESSIONS_DIR
 CAPTURE_DIR = PROJECT_ROOT / "knowledge" / "captures"
-SESSIONS_DIR = PROJECT_ROOT / "sessions"
 
 # 技术参数模式：数字 + 单位（如 800nm, 3mJ, 1kHz, 100μm）
 _TECH_PARAM_RE = re.compile(

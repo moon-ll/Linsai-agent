@@ -27,10 +27,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from common import now_utc as _now_utc
 
-PROJECT_ROOT = Path(__file__).parent.parent
-SCRIPTS_DIR = PROJECT_ROOT / "scripts"
-KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
-MEMORY_DIR = PROJECT_ROOT / "memory"
+from paths import PROJECT_ROOT, SCRIPTS_DIR, KNOWLEDGE_DIR, MEMORY_DIR
 GROWTH_LOG_PATH = KNOWLEDGE_DIR / "growth-log.json"
 
 

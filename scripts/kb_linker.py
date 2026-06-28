@@ -25,9 +25,7 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
-PROJECT_ROOT = Path(__file__).parent.parent
-SCRIPTS_DIR = PROJECT_ROOT / "scripts"
-KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
+from paths import PROJECT_ROOT, SCRIPTS_DIR, KNOWLEDGE_DIR
 
 # [[WikiLink]] 模式（不含别名用法）
 _WIKILINK_RE = re.compile(r"\[\[([^\]\|]+)(?:\|[^\]]+)?\]\]")

@@ -24,9 +24,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from common import now_utc as _now_utc, load_json, save_json
 
-PROJECT_ROOT = Path(__file__).parent.parent
-KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
-MEMORY_DIR = PROJECT_ROOT / "memory"
+from paths import PROJECT_ROOT, KNOWLEDGE_DIR, MEMORY_DIR
 QUALITY_LOG_PATH = MEMORY_DIR / "learning-quality-log.json"
 PENDING_QUEUE_PATH = MEMORY_DIR / "learning-pending-queue.json"
 USER_EDIT_LOG_PATH = MEMORY_DIR / "learning-user-edits.json"

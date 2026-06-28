@@ -34,7 +34,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-PROJECT_ROOT = Path(__file__).parent.parent
+from paths import PROJECT_ROOT
 
 # hermes 工作区
 HERMES_WORKSPACE = Path.home() / "Desktop" / "hermes_workspace"

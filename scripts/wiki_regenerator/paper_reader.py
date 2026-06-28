@@ -3,10 +3,16 @@ paper_reader.py — 读取所有 raw papers，构建知识库索引
 """
 
 import json, re
+import sys
 from pathlib import Path
 from typing import Dict, List
 
-PROJECT_ROOT = Path(__file__).parent.parent.parent
+# 确保 scripts/ 在 sys.path 中，以便 import paths
+_SCRIPTS_DIR = Path(__file__).parent.parent.resolve()
+if str(_SCRIPTS_DIR) not in sys.path:
+    sys.path.insert(0, str(_SCRIPTS_DIR))
+
+from paths import PROJECT_ROOT
 RAW_DIR = PROJECT_ROOT / "knowledge" / "raw" / "papers"
 
 

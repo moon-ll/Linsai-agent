@@ -46,8 +46,7 @@ from typing import Any, Dict, List, Optional
 
 from common import now_utc as _now_utc
 
-PROJECT_ROOT = Path(__file__).parent.parent
-KNOWLEDGE_DIR = PROJECT_ROOT / "knowledge"
+from paths import PROJECT_ROOT, KNOWLEDGE_DIR
 RAW_PAPERS_DIR = KNOWLEDGE_DIR / "raw" / "papers"
 WIKI_PROJECTS_DIR = KNOWLEDGE_DIR / "wiki" / "projects" / "deepxiv-论文库"
 PROJECT_TAG = "deepxiv-论文库"  # 归档论文默认子库（原"文献简报"，v2.9.3 重命名避免与每日简报混淆）
