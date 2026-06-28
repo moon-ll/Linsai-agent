@@ -433,18 +433,22 @@ def build_context(session_id, user_input, mode="co-working", emergency=False):
             )
             if refs:
                 parts = []
-                for r in refs:
-                    title = r.get("title", "")
-                    snippet = r.get("snippet", "")[:300]
-                    src = r.get("project_id", "")
-                    parts.append(f"📚【{src}】{title}: {snippet}")
-                    kb_hits.append({
-                        "title": title,
-                        "source": "project_kb",
-                        "stage": "",
-                        "score": r.get("score", 0),
-                        "doc": r.get("path", ""),
-                    })
+                for ref in refs:
+                    src = ref.get("project_id", "")
+                    ref_results = ref.get("results", [])
+                    if not isinstance(ref_results, list):
+                        continue
+                    for r in ref_results:
+                        title = r.get("title", "")
+                        snippet = r.get("snippet", "")[:300]
+                        parts.append(f"📚【{src}】{title}: {snippet}")
+                        kb_hits.append({
+                            "title": title,
+                            "source": "project_kb",
+                            "stage": "",
+                            "score": r.get("score", 0),
+                            "doc": r.get("path", ""),
+                        })
                 at_refs_raw = "\n".join(parts)
         except Exception as e:
             _log.debug("@课题知识库解析失败，跳过跨课题引用: %s", e)

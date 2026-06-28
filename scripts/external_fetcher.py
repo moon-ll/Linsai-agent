@@ -557,18 +557,13 @@ def score_opportunity(item: Dict[str, Any],
     # 尝试导入 knowledge_base 的 search 函数
     novelty = 0.8  # 默认高新颖性
     try:
-        import importlib.util
-        kb_path = Path(__file__).parent / "knowledge_base.py"
-        if kb_path.exists():
-            spec = importlib.util.spec_from_file_location("knowledge_base", kb_path)
-            kb = importlib.util.module_from_spec(spec)
-            spec.loader.exec_module(kb)
-            if hasattr(kb, "search_light"):
-                results = kb.search_light(title, top_k=1)
-                results = results.get("results", []) if isinstance(results, dict) else results
-                if results:
-                    max_sim = results[0].get("score", 0)
-                    novelty = max(0.0, 1.0 - max_sim)
+        import knowledge_base as kb
+        if hasattr(kb, "search_light"):
+            results = kb.search_light(title, top_k=1)
+            results = results.get("results", []) if isinstance(results, dict) else results
+            if results:
+                max_sim = results[0].get("score", 0)
+                novelty = max(0.0, 1.0 - max_sim)
     except Exception as e:
         _log.debug("知识库相似度检测失败: %s", e)
 

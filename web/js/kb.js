@@ -627,10 +627,7 @@ function renderFilteredTree(pages) {
   const html = pages.map(p => {
     const stageIcon = STAGE_ICONS[p.growth_stage] || '○';
     // P1-8: 使用 data 属性替代 onclick 字符串拼接
-    return `<div class="kb-tree-item" data-wiki-path="${escapeHtml(p.path)}" class="pad-4-8 cursor-pointer br-4 fs-082">
-      ${stageIcon} ${escapeHtml(p.title)}
-      <span class="text-tertiary fs-07">${escapeHtml(p.type || '')}</span>
-    </div>`;
+    return `<div class="kb-tree-item pad-4-8 cursor-pointer br-4 fs-082" data-wiki-path="${escapeHtml(p.path)}" tabindex="0" role="button" aria-label="${escapeHtml(p.title)}">${stageIcon} ${escapeHtml(p.title)} <span class="text-tertiary fs-07">${escapeHtml(p.type || '')}</span></div>`;
   }).join('');
   container.innerHTML = `<div class="pad-4-8 fs-075 text-tertiary">筛选结果 (${pages.length})</div>` + html;
 }

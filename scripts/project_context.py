@@ -121,7 +121,8 @@ def resolve_at_references(text: str, current_project_id: str = "") -> Tuple[str,
         layer = "summary" if ref["type"] == "project_results" else "all"
 
         try:
-            results = _kb_search(pid, query, layer=layer, top_k=3)
+            raw = _kb_search(pid, query, layer=layer, top_k=3)
+            results = raw.get("results", []) if isinstance(raw, dict) else (raw if isinstance(raw, list) else [])
         except Exception:
             results = []
 
@@ -216,7 +217,8 @@ def search_across_projects(query: str, top_k: int = 5) -> List[dict]:
         if not pid:
             continue
         try:
-            hits = _kb_search(pid, query, layer="all", top_k=2)
+            raw = _kb_search(pid, query, layer="all", top_k=2)
+            hits = raw.get("results", []) if isinstance(raw, dict) else (raw if isinstance(raw, list) else [])
             for hit in hits:
                 results.append({
                     "project_id": pid,

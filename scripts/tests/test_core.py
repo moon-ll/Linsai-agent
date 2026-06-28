@@ -362,6 +362,10 @@ class ProjectModuleTests(TestSuite):
         enriched, refs = self.pctx.resolve_at_references(text, pid)
         self.assert_true(isinstance(refs, list), "@解析返回 references 列表")
         self.assert_true(len(refs) >= 1, "@解析检索到结果", f"refs={len(refs)}")
+        # 验证 refs 内部结构：results 应为列表（非 Dict）
+        if refs:
+            inner = refs[0].get("results", [])
+            self.assert_true(isinstance(inner, list), "@refs[0].results 为列表（非 Dict）")
 
         # 9. 工作流规划（plan_units）
         unit_ids = self.pwf.plan_units(pid, [
