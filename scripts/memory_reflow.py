@@ -228,12 +228,28 @@ def _apply_extraction(extraction: dict, profile: dict, ctx: dict, ltm: dict) -> 
     ts = extraction.get("session_start", _now_utc())
 
     # 1. memory 工具调用 → snippets + preferences
+    # v4.0: 提取已有 snippet 的内容前缀集合，用于去重
+    existing_snippet_keys = set()
+    for s in ltm.get("snippets", []):
+        text = s.get("summary", s.get("content", ""))
+        if text:
+            existing_snippet_keys.add(text[:60].strip().lower())
+
     for mc in extraction["memory_calls"]:
         content = mc.get("content", "").strip()
         if not content:
             continue
+        # v4.0: 质量过滤 — 跳过过短的碎片
+        if len(content) < 20:
+            continue
         action = mc.get("action", "")
         target = mc.get("target", "")
+
+        # v4.0: 去重检查 — 内容前60字符与已有 snippet 相似则跳过
+        dedup_key = content[:60].strip().lower()
+        if dedup_key in existing_snippet_keys:
+            continue  # 已有相似内容，跳过
+        existing_snippet_keys.add(dedup_key)
 
         # 写入 snippets
         snippet_id = f"reflow_{session_id}_{len(ltm['snippets'])}"
@@ -272,11 +288,24 @@ def _apply_extraction(extraction: dict, profile: dict, ctx: dict, ltm: dict) -> 
             stats["skills"] += 1
 
     # 3. 用户决策 → pending_decisions + snippets
+    # v4.0: 已有决策去重集合
+    existing_decision_keys = set()
+    for d in ctx.get("pending_decisions", []):
+        t = d.get("topic", "")
+        if t:
+            existing_decision_keys.add(t[:40].strip().lower())
+
     for decision in extraction["user_decisions"][:5]:  # 每会话最多5条
         # 质量过滤：排除碎片化文本
         decision = decision.strip().rstrip("：:，,。.**")
         if len(decision) < 8:
             continue
+        # v4.0: 去重检查
+        dec_key = decision[:40].strip().lower()
+        if dec_key in existing_decision_keys or dec_key in existing_snippet_keys:
+            continue
+        existing_decision_keys.add(dec_key)
+        existing_snippet_keys.add(dec_key)
         # 写入 snippets
         snippet_id = f"decision_{session_id}_{len(ltm['snippets'])}"
         ltm["snippets"].append({
