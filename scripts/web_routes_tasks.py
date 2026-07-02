@@ -42,6 +42,7 @@ _TASK_ROUTES = [
     ("GET", re.compile(r"^/api/tasks/(?P<tid>[^/]+)$"), "_task_get"),
     # POST
     ("POST", re.compile(r"^/api/tasks$"), "_task_create"),
+    ("POST", re.compile(r"^/api/tasks/ai-assist$"), "_task_ai_assist"),
     ("POST", re.compile(r"^/api/tasks/(?P<tid>[^/]+)/dispatch$"), "_task_dispatch"),
     # PUT（更具体的路由放在前面）
     ("PUT", re.compile(r"^/api/tasks/(?P<tid>[^/]+)/subtasks$"), "_task_subtasks"),
@@ -96,6 +97,67 @@ class TaskRoutesMixin:
 
     # --- POST ---
 
+    def _task_ai_assist(self, parsed, body):
+        """AI 辅助任务指派：根据用户输入的目标，生成完整的任务描述 + hermes 派活 prompt。
+
+        用户只需提供 task_goal（任务目标）和 requirements（要求，可选），
+        AI 会自动生成：
+          - description: 结构化的任务描述（背景/目标/交付物/约束）
+          - hermes_prompt: 可直接派给 hermes 的执行指令
+          - suggested_project: 建议归属项目
+          - suggested_priority: 建议优先级
+        """
+        goal = body.get("goal", "").strip()
+        if not goal:
+            self._send_json({"error": "请提供任务目标"}, 400)
+            return
+        requirements = body.get("requirements", "").strip()
+        project = body.get("project", "")
+
+        # 构建 AI 辅助 prompt
+        sys_prompt = (
+            "你是林赛，强场超快光学独立PI。用户想创建一个科研任务并可能派给 hermes agent 执行。"
+            "请根据用户的任务目标，生成结构化的任务描述和 hermes 派活指令。\n\n"
+            "输出格式（严格JSON）：\n"
+            '{"description": "3-5句话的任务描述，包含背景和目标", '
+            '"deliverables": "预期产出物（如报告/数据/文档）", '
+            '"constraints": "约束条件（如时间/方法/格式）", '
+            '"hermes_prompt": "可直接派给hermes的完整执行指令（包含目标/步骤/产出格式）", '
+            '"suggested_priority": "high/medium/low"}\n'
+            "只输出JSON，不要其他内容。"
+        )
+        user_msg = f"任务目标：{goal}"
+        if requirements:
+            user_msg += f"\n额外要求：{requirements}"
+        if project:
+            user_msg += f"\n归属项目：{project}"
+
+        try:
+            import llm_router as lr
+            router = lr.LLMRouter()
+            messages = [{"role": "user", "content": user_msg}]
+            resp, usage, provider = router.call_llm(sys_prompt, messages)
+            # 解析 JSON
+            import json as _json
+            # 清理可能的 markdown 代码块包裹
+            resp_clean = resp.strip()
+            if resp_clean.startswith("```"):
+                resp_clean = resp_clean.split("\n", 1)[1] if "\n" in resp_clean else resp_clean[3:]
+            if resp_clean.endswith("```"):
+                resp_clean = resp_clean.rsplit("```", 1)[0]
+            resp_clean = resp_clean.strip()
+            result = _json.loads(resp_clean)
+            result["goal"] = goal
+            result["success"] = True
+            self._send_json(result)
+        except _json.JSONDecodeError:
+            # LLM 返回的不是合法 JSON，返回原始文本
+            self._send_json({"success": True, "description": resp[:500], "hermes_prompt": resp[:500],
+                             "deliverables": "", "constraints": "", "suggested_priority": "medium",
+                             "goal": goal, "raw": True})
+        except Exception as e:
+            self._send_json({"error": f"AI 辅助失败: {e}"}, 500)
+
     def _task_create(self, parsed, body):
         """创建任务（assignee=hermes 时自动派活）"""
         title = body.get("title", "").strip()
@@ -116,7 +178,8 @@ class TaskRoutesMixin:
         # 创建即派发：assignee=hermes 时自动派给 hermes 执行
         dispatch_id = ""
         if assignee == "hermes":
-            prompt = body.get("prompt", "").strip() or f"请执行项目任务：{title}。" + (f"\n描述：{body.get('description','')}" if body.get("description") else "")
+            # 优先使用 AI 生成的 hermes_prompt，其次 body.prompt，最后从 title+description 构造
+            prompt = body.get("hermes_prompt", "").strip() or body.get("prompt", "").strip() or f"请执行项目任务：{title}。" + (f"\n描述：{body.get('description','')}" if body.get("description") else "")
             dispatch_id = self._do_dispatch_hermes(tid, prompt, project, source="create")
         # P5-1: 返回完整任务对象，确保前端 createNewTask() 可直接 push 到 State.tasks
         try:

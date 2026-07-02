@@ -152,6 +152,16 @@ async function renderTasksTab(container) {
   html += `<details class="mb-16 border-accent br-8 overflow-hidden">
     <summary style="padding:10px 14px;cursor:pointer;font-weight:600;font-size:0.85rem;background:var(--bg-secondary);color:var(--accent-color);">+ 新建项目任务</summary>
     <div class="pad-14 d-flex fd-col gap-10">
+
+      <!-- AI 辅助指派 -->
+      <div style="background:var(--bg-tertiary);border-radius:8px;padding:10px;border:1px solid var(--border-color);">
+        <div style="font-size:0.8rem;font-weight:600;color:var(--accent-color);margin-bottom:6px;">🤖 AI 辅助指派（只说目标，AI 补充细节）</div>
+        <input type="text" id="ptask-ai-goal" placeholder="任务目标，如：调研MoS2圆偏振HHG的最新进展" class="field-input" style="margin-bottom:6px;">
+        <input type="text" id="ptask-ai-req" placeholder="额外要求（可选），如：聚焦2024-2026年/需要对比表" class="field-input" style="margin-bottom:8px;">
+        <button id="ptask-ai-gen" class="flex-1 pad-8 bg-accent text-white border-none br-6 cursor-pointer fs-085" style="width:100%;">🤖 AI 生成任务详情</button>
+        <div id="ptask-ai-result" style="display:none;margin-top:8px;font-size:0.8rem;"></div>
+      </div>
+
       <input type="text" id="ptask-title" placeholder="任务标题（必填）" class="field-input">
       <div class="d-flex gap-8 fw-wrap">
         <select id="ptask-project" class="field-select" style="flex:1;min-width:140px;">
@@ -208,6 +218,13 @@ async function renderTasksTab(container) {
   if (createBtn) createBtn.onclick = createProjectTask;
   const cancelBtn = document.getElementById('ptask-cancel');
   if (cancelBtn) cancelBtn.onclick = () => {
+    ['ptask-title','ptask-desc','ptask-ai-goal','ptask-ai-req'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+    document.getElementById('ptask-ai-result').style.display = 'none';
+  };
+  // AI 辅助生成
+  const aiBtn = document.getElementById('ptask-ai-gen');
+  if (aiBtn) aiBtn.onclick = aiAssistTask;
+  if (cancelBtn) cancelBtn.onclick = () => {
     ['ptask-title','ptask-desc'].forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
     const projSel = document.getElementById('ptask-project'); if (projSel) projSel.value = '';
     const priSel = document.getElementById('ptask-priority'); if (priSel) priSel.value = 'medium';
@@ -251,6 +268,61 @@ function renderProjectTaskCard(t) {
   </div>`;
 }
 
+// AI 辅助任务指派：根据目标自动生成描述+hermes prompt
+async function aiAssistTask() {
+  const goal = document.getElementById('ptask-ai-goal')?.value.trim();
+  if (!goal) { showToast('请输入任务目标', 'warning'); return; }
+  const req = document.getElementById('ptask-ai-req')?.value.trim();
+  const project = document.getElementById('ptask-project')?.value || '';
+
+  const btn = document.getElementById('ptask-ai-gen');
+  if (btn) { btn.disabled = true; btn.textContent = '◐ AI 生成中…'; }
+  const resultDiv = document.getElementById('ptask-ai-result');
+  if (resultDiv) { resultDiv.style.display = 'block'; resultDiv.innerHTML = '<span style="color:var(--text-tertiary);">◐ 林赛正在生成任务详情…</span>'; }
+
+  try {
+    const data = await apiPost('/api/tasks/ai-assist', { goal, requirements: req, project });
+    if (data.error) { showToast('✗ ' + data.error, 'error'); return; }
+
+    // 自动填充表单
+    const titleEl = document.getElementById('ptask-title');
+    if (titleEl && !titleEl.value) titleEl.value = goal.slice(0, 60);
+
+    const descEl = document.getElementById('ptask-desc');
+    if (descEl) {
+      let desc = data.description || '';
+      if (data.deliverables) desc += `\n📊 交付物：${data.deliverables}`;
+      if (data.constraints) desc += `\n⚠️ 约束：${data.constraints}`;
+      descEl.value = desc.trim();
+    }
+
+    // 优先级建议
+    if (data.suggested_priority) {
+      const prioEl = document.getElementById('ptask-priority');
+      if (prioEl) prioEl.value = data.suggested_priority;
+    }
+
+    // hermes prompt 存入隐藏字段，创建任务时如果选 hermes 则使用
+    window._aiHermesPrompt = data.hermes_prompt || '';
+
+    // 显示生成结果摘要
+    if (resultDiv) {
+      let html = '<div style="border-top:1px solid var(--border-color);padding-top:6px;">';
+      html += `<div style="margin-bottom:4px;">📝 ${escapeHtml(data.description || '').slice(0, 100)}</div>`;
+      if (data.hermes_prompt) html += `<div style="color:var(--accent-color);font-size:0.75rem;margin-bottom:4px;">⚡ hermes指令已生成（${data.hermes_prompt.length}字）</div>`;
+      html += '<div style="font-size:0.72rem;color:var(--text-tertiary);">✓ 已自动填充表单，可直接创建或修改后创建</div>';
+      html += '</div>';
+      resultDiv.innerHTML = html;
+    }
+    showToast('✓ AI 已生成任务详情并填充表单', 'success');
+  } catch (e) {
+    showToast('✗ AI 生成失败: ' + e.message, 'error');
+    if (resultDiv) resultDiv.innerHTML = '<span style="color:var(--error-color);">生成失败</span>';
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '🤖 AI 生成任务详情'; }
+  }
+}
+
 // 创建项目任务
 async function createProjectTask() {
   const title = document.getElementById('ptask-title')?.value.trim();
@@ -264,7 +336,10 @@ async function createProjectTask() {
   const btn = document.getElementById('ptask-create');
   if (btn) { btn.disabled = true; btn.textContent = '◐ 创建中…'; }
   try {
-    const resp = await apiPost('/api/tasks', { title, project, priority, due_date, description, assignee });
+    // 如果 AI 生成了 hermes_prompt 且选了 hermes 执行，用 AI 的 prompt
+    const hermesPrompt = (assignee === 'hermes' && window._aiHermesPrompt) ? window._aiHermesPrompt : '';
+    const resp = await apiPost('/api/tasks', { title, project, priority, due_date, description, assignee, hermes_prompt: hermesPrompt });
+    window._aiHermesPrompt = '';  // 清除
     if (assignee === 'hermes' && resp.dispatch_id) {
       showToast(`✓ 任务已创建并派给 hermes（执行追踪 #${resp.dispatch_id.slice(-6)}）`, 'success');
       setTimeout(() => switchProjectsTab('dispatches'), 800);
