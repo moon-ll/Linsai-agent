@@ -2,7 +2,7 @@
 
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
-> 最后更新：2026-06-28
+> 最后更新：2026-07-02
 
 ---
 
@@ -189,7 +189,8 @@ LinSai-CoPilot/
 │   ├── tool_engine.py         # 工具注册：file_read/write, calc, task_create, knowledge_query, run_command, hermes_chat
 │   ├── chat_archive.py        # 聊天记录归档浏览器
 │   ├── memory_reflow.py       # 认知回流引擎：hermes→记忆提炼、冷启动、增量回流（v3.4）
-│   ├── sync_engine.py         # 多端同步：hermes 会话/文献 → 知识库 + 认知回流
+│   ├── sync_engine.py         # 多端同步：hermes 会话/文献 → 知识库 + 认知回流 + 简报双向同步
+│   ├── briefing_sync.py       # v4.1 文献简报双向同步：CoPilot↔hermes 状态映射、只升不降、重试队列
 │   ├── backup_manager.py      # 数据备份/恢复
 │   ├── upgrade.py             # 安全升级标准流程
 │   ├── project_manager.py     # v3.5 课题管理：CRUD、状态机、PROJECT-MEMORY.md
@@ -513,6 +514,19 @@ LinSai-CoPilot/
 - ✅ **v3.5.9 冗余内容清理** — 删除 version.py 死模块、合并 _safe_filename/_STOPWORDS 重复定义、删除 ~230 行死 CSS + 2 个死 JS 函数、修复 skill-count ID 不匹配 bug、清理数据残留、更新 4 个 README
 - ✅ **v3.6.0 知识库分区策略 + 基础设施增强** — search() 五维分区过滤+分页、API 暴露分区参数、context_builder 项目感知检索、前端统一搜索+筛选联动+分页控件+分区选择器、captures/ 修复、paths.py 迁移收尾（28文件）、/api/health 端点、日志保留 30 天
 
+### Phase 12：文献简报双向同步（v4.1.0）【✅ 已完成】
+- ✅ **双向同步引擎** — `scripts/briefing_sync.py`（417 行）：CoPilot `paper-pool.json` ↔ hermes `status.json` 状态双向同步
+  - 反向同步（CoPilot→hermes）：用户操作时实时回写 `discussion_started`/`discussion_archived_at`
+  - 正向同步（hermes→CoPilot）：`sync_all()` 批量拉取 hermes 工作流状态，`analyzed_at`→viewed、`discussion_archived_at`→archived
+  - 只升不降规则：`unseen(0) → viewed(1) → archived(2)` 单向流转
+  - 冲突策略：CoPilot 优先（用户意图 > hermes 自动流程）
+  - 待同步队列：失败请求记入 `reverse_sync_pending`，max 5 次重试
+  - 文件锁 + 原子写入，线程安全
+- ✅ **paper_pool 扩展** — 新增 `get_paper_status(arxiv_id)` 供正向同步查询
+- ✅ **sync_engine 集成** — `sync_all()` 新增 `[0/5]` 待同步重试 + `[2.5/5]` 正向同步
+- ✅ **Web 路由集成** — `_proj_papers_feedback` 操作后自动触发反向同步，失败不阻塞
+- ✅ **测试覆盖** — `BriefingSyncTests` 20 个检查点，全量 232/232 通过
+
 ---
 
 ## 开发约定
@@ -675,7 +689,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：3.6.0*
-*日期：2026-06-28*
+*版本：4.1.0*
+*日期：2026-07-02*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

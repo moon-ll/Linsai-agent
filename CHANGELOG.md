@@ -1,5 +1,32 @@
 # 变更记录
 
+## v4.1.0 - 2026-07-02 文献简报双向同步引擎
+
+### 核心特性：CoPilot ↔ hermes 状态双向同步
+
+此前 CoPilot 与 hermes 的文献简报状态完全隔离（CoPilot 在 `paper-pool.json`，hermes 在 `status.json`），用户在 Web 界面标记的"感兴趣/归档"等操作不会同步到 hermes 工作流，反之亦然。本次实现双向同步，打通两端状态。
+
+### 新增文件
+- **`scripts/briefing_sync.py`**（417 行）：双向同步引擎
+  - `sync_to_hermes()`：反向同步（CoPilot→hermes），用户操作时实时回写 hermes `status.json`
+  - `sync_from_hermes()`：正向同步（hermes→CoPilot），`sync_all()` 执行时批量拉取 hermes 工作流状态
+  - `flush_pending_reverse()`：待同步队列重试（max 5 次），处理 hermes 未运行时的失败请求
+  - 状态映射：`viewed → discussion_started=true`，`archived → discussion_archived_at=<时间戳>`
+  - 只升不降规则：`unseen(0) → viewed(1) → archived(2)` 单向流转
+  - 冲突策略：CoPilot 优先（用户意图 > hermes 自动流程）
+  - 文件锁 + 原子写入，线程安全
+
+### 修改文件
+- **`scripts/paper_pool.py`**：新增 `get_paper_status(arxiv_id)` 函数，供正向同步查询当前状态
+- **`scripts/sync_engine.py`**：`sync_all()` 新增 `[0/5] flush_pending_reverse()`（前置重试）+ `[2.5/5] sync_from_hermes()`（正向同步），自检新增 briefing_sync 就绪检查
+- **`scripts/web_routes_projects.py`**：`_proj_papers_feedback` 在 `pp.update_status()` 后调用 `bsync.sync_to_hermes()`，失败不阻塞用户操作
+- **`scripts/tests/test_core.py`**：新增 `BriefingSyncTests`（20 个检查点），覆盖状态升级判断、反向同步、待同步队列、重试、正向同步、幂等性
+
+### 验证
+- `briefing_sync._self_check()`：5/5 通过
+- `self_test --module`：108/108 通过（含新增 20 个 BriefingSync 测试）
+- `self_test --web-ci`：232/232 通过
+
 ## v4.0.0 - 2026-07-01 认知层清洗 + 记忆去重防护
 
 ### 阶段1：数据清洗（让记忆可信）

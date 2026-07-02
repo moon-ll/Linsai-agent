@@ -818,3 +818,188 @@ class SecurityTests(TestSuite):
         loaded = json.loads(target.read_text(encoding="utf-8"))
         self.assert_eq(loaded.get("version"), 2, "save_json 覆盖写入新内容")
         self.assert_true("old" not in loaded, "save_json 覆盖后旧字段已清除")
+
+
+# ---------------------------------------------------------------------------
+# v3.7 文献简报双向同步测试（隔离环境）
+# ---------------------------------------------------------------------------
+class BriefingSyncTests(TestSuite):
+    """briefing_sync 双向同步引擎：状态映射、只升不降、重试队列、正向同步。"""
+
+    def __init__(self):
+        super().__init__("文献简报双向同步测试")
+        self.tmp_root = None
+        self.bsync = None
+        self.pp = None
+
+    def setup(self):
+        self.tmp_root = create_isolated_env()
+        # 重新导入模块
+        for mod_name in ["briefing_sync", "paper_pool"]:
+            if mod_name in sys.modules:
+                del sys.modules[mod_name]
+        self.bsync = importlib.import_module("briefing_sync")
+        self.pp = importlib.import_module("paper_pool")
+        # patch 路径到隔离环境
+        patch_module_root("paper_pool", self.tmp_root)
+        self.pp.POOL_PATH = self.tmp_root / "memory" / "paper-pool.json"
+        # patch briefing_sync 的全局路径
+        self.bsync.HERMES_STATUS_PATH = self.tmp_root / "hermes_status.json"
+        self.bsync.SYNC_STATE_PATH = self.tmp_root / "memory" / "sync-state.json"
+
+    def teardown(self):
+        import shutil
+        if self.tmp_root and self.tmp_root.exists():
+            shutil.rmtree(self.tmp_root, ignore_errors=True)
+
+    def run_tests(self):
+        print(f"\n▶ {self.name}")
+        try:
+            self._test_can_upgrade()
+        except Exception as e:
+            self.results.append(TestResult("_test_can_upgrade", False, 0.0, f"{type(e).__name__}: {e}"))
+        try:
+            self._test_sync_to_hermes()
+        except Exception as e:
+            self.results.append(TestResult("_test_sync_to_hermes", False, 0.0, f"{type(e).__name__}: {e}"))
+        try:
+            self._test_pending_queue()
+        except Exception as e:
+            self.results.append(TestResult("_test_pending_queue", False, 0.0, f"{type(e).__name__}: {e}"))
+        try:
+            self._test_flush_pending()
+        except Exception as e:
+            self.results.append(TestResult("_test_flush_pending", False, 0.0, f"{type(e).__name__}: {e}"))
+        try:
+            self._test_sync_from_hermes()
+        except Exception as e:
+            self.results.append(TestResult("_test_sync_from_hermes", False, 0.0, f"{type(e).__name__}: {e}"))
+        try:
+            self._test_get_paper_status()
+        except Exception as e:
+            self.results.append(TestResult("_test_get_paper_status", False, 0.0, f"{type(e).__name__}: {e}"))
+
+    def _test_can_upgrade(self):
+        """状态升级判断：只升不降。"""
+        self.assert_true(self.bsync._can_upgrade("unseen", "viewed"), "unseen→viewed 可升级")
+        self.assert_true(self.bsync._can_upgrade("unseen", "archived"), "unseen→archived 可升级")
+        self.assert_true(self.bsync._can_upgrade("viewed", "archived"), "viewed→archived 可升级")
+        self.assert_true(not self.bsync._can_upgrade("archived", "viewed"), "archived→viewed 不可降级")
+        self.assert_true(not self.bsync._can_upgrade("viewed", "viewed"), "同级不可升级")
+        self.assert_true(not self.bsync._can_upgrade("archived", "unseen"), "archived→unseen 不可降级")
+
+    def _test_sync_to_hermes(self):
+        """反向同步：CoPilot archived → hermes discussion_archived_at。"""
+        # 准备 hermes status.json
+        hermes_data = {
+            "date": "2026-07-02",
+            "papers": {
+                "2403.15337": {
+                    "title": "测试论文",
+                    "pushed_at": "2026-07-02T08:35:00+08:00",
+                    "discussion_started": False,
+                    "discussion_archived_at": None,
+                    "analyzed_at": None,
+                }
+            }
+        }
+        self.bsync.save_json(self.bsync.HERMES_STATUS_PATH, hermes_data)
+
+        # 反向同步 archived
+        result = self.bsync.sync_to_hermes("2403.15337", "archived", "discuss_done")
+        self.assert_true(result.get("success"), "反向同步 archived 成功")
+
+        # 验证 hermes status.json 已更新
+        updated = self.bsync.load_json(self.bsync.HERMES_STATUS_PATH, {})
+        info = updated.get("papers", {}).get("2403.15337", {})
+        self.assert_true(info.get("discussion_archived_at") is not None, "discussion_archived_at 已设置")
+        self.assert_true(info.get("discussion_started") is True, "discussion_started 隐含设为 True")
+
+    def _test_pending_queue(self):
+        """论文不在 hermes 工作流 → 记入待同步队列。"""
+        # hermes status.json 中没有该论文
+        result = self.bsync.sync_to_hermes("9999.99999", "viewed", "interested")
+        self.assert_true(not result.get("success"), "不在工作流的论文同步失败")
+        self.assert_in("reason", result, "失败结果含 reason")
+
+        # 验证待同步队列
+        state = self.bsync._load_sync_state()
+        pending = state.get("reverse_sync_pending", [])
+        self.assert_true(len(pending) >= 1, "待同步队列有记录")
+        self.assert_eq(pending[-1].get("arxiv_id"), "9999.99999", "队列记录 arxiv_id")
+
+    def _test_flush_pending(self):
+        """flush_pending_reverse 重试成功。"""
+        # 先确保 9999.99999 在待同步队列（上一个测试添加的）
+        # 在 hermes status.json 中添加该论文
+        hermes_data = self.bsync.load_json(self.bsync.HERMES_STATUS_PATH, {})
+        if "papers" not in hermes_data:
+            hermes_data["papers"] = {}
+        hermes_data["papers"]["9999.99999"] = {
+            "title": "重试测试论文",
+            "pushed_at": "2026-07-02T08:35:00+08:00",
+            "discussion_started": False,
+            "discussion_archived_at": None,
+            "analyzed_at": None,
+        }
+        self.bsync.save_json(self.bsync.HERMES_STATUS_PATH, hermes_data)
+
+        # 执行重试
+        flush_result = self.bsync.flush_pending_reverse()
+        self.assert_true(flush_result.get("flushed", 0) >= 1, "flush 重试至少 1 条成功")
+
+        # 验证 hermes status.json 已更新
+        updated = self.bsync.load_json(self.bsync.HERMES_STATUS_PATH, {})
+        info = updated.get("papers", {}).get("9999.99999", {})
+        self.assert_true(info.get("discussion_started") is True, "重试后 discussion_started 为 True")
+
+    def _test_sync_from_hermes(self):
+        """正向同步：hermes analyzed → CoPilot viewed（只升不降）。"""
+        # 在 CoPilot paper-pool 中添加一篇 unseen 论文
+        self.pp._save({"2403.15337": {
+            "status": "unseen",
+            "title": "测试论文",
+            "added_at": "2026-07-02T00:00:00Z",
+        }})
+
+        # 设置 hermes 状态：已分析 → 应映射为 viewed
+        hermes_data = {
+            "date": "2026-07-02",
+            "papers": {
+                "2403.15337": {
+                    "title": "测试论文",
+                    "pushed_at": "2026-07-02T08:35:00+08:00",
+                    "discussion_started": False,
+                    "discussion_archived_at": None,
+                    "analyzed_at": "2026-07-02T10:00:00+08:00",
+                }
+            }
+        }
+        self.bsync.save_json(self.bsync.HERMES_STATUS_PATH, hermes_data)
+
+        # 执行正向同步
+        result = self.bsync.sync_from_hermes()
+        self.assert_true(result.get("synced", 0) >= 1, "正向同步至少 1 篇")
+
+        # 验证 CoPilot paper-pool 状态已升级
+        status = self.pp.get_paper_status("2403.15337")
+        self.assert_eq(status, "viewed", "CoPilot 状态升级为 viewed")
+
+        # 再次同步不应重复升级（幂等）
+        result2 = self.bsync.sync_from_hermes()
+        self.assert_eq(result2.get("synced", -1), 0, "再次同步无新增（幂等）")
+
+    def _test_get_paper_status(self):
+        """paper_pool.get_paper_status 查询。"""
+        # 不存在的论文返回 None
+        status = self.pp.get_paper_status("nonexist.00000")
+        self.assert_true(status is None, "不存在的论文返回 None")
+
+        # 已存在的论文返回状态
+        self.pp._save({"2403.99999": {
+            "status": "archived",
+            "title": "已归档论文",
+            "added_at": "2026-07-02T00:00:00Z",
+        }})
+        status = self.pp.get_paper_status("2403.99999")
+        self.assert_eq(status, "archived", "已存在论文返回正确状态")

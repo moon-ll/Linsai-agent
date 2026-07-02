@@ -287,6 +287,16 @@ class ProjectRoutesMixin:
         }
         pp.update_status(arxiv_id, pool_status_map.get(action, pp.STATUS_VIEWED))
 
+        # v3.7: 反向同步状态到 hermes status.json（失败记入待同步队列，不阻塞用户操作）
+        try:
+            import briefing_sync as bsync
+            sync_result = bsync.sync_to_hermes(arxiv_id, pool_status_map.get(action, pp.STATUS_VIEWED), action)
+            result["hermes_synced"] = sync_result.get("success", False)
+        except Exception as e:
+            if _log:
+                _log.warning("反向同步 hermes 失败: %s", e)
+            result["hermes_synced"] = False
+
         if action == "interested":
             # 感兴趣：仅记录偏好，不归档（归档需充分讨论后）
             # 异步反馈 hermes 偏好

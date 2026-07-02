@@ -212,20 +212,46 @@ def sync_hermes_outputs() -> Dict[str, Any]:
 
 
 def sync_all() -> Dict[str, Any]:
-    """全量同步：会话 + 文献产出。
+    """全量同步：待同步重试 + 会话 + 文献产出 + 简报状态。
 
     Returns:
         {new_sessions, new_papers, skipped_sessions, skipped_papers, errors, timestamp}
     """
     print("◐ 开始多端同步...")
 
-    print("  [1/2] 同步 hermes 会话...")
+    # [0/5] 重试失败的反向同步（CoPilot→hermes）
+    print("  [0/5] 重试待同步队列...")
+    try:
+        import briefing_sync as bsync
+        flush_result = bsync.flush_pending_reverse()
+        if flush_result.get("flushed", 0) > 0:
+            print(f"    重试成功 {flush_result['flushed']} 条，剩余 {flush_result['remaining']} 条")
+        elif flush_result.get("remaining", 0) > 0:
+            print(f"    仍有 {flush_result['remaining']} 条待重试")
+        else:
+            print(f"    无待同步项")
+    except Exception as e:
+        print(f"  ⚠ 待同步重试失败: {e}")
+
+    print("  [1/5] 同步 hermes 会话...")
     sess_result = sync_hermes_sessions()
     print(f"    新增 {sess_result['new_sessions']} 会话, 跳过 {sess_result['skipped']}")
 
-    print("  [2/2] 同步文献产出...")
+    print("  [2/5] 同步文献产出...")
     paper_result = sync_hermes_outputs()
     print(f"    新增 {paper_result['new_papers']} 文献, 跳过 {paper_result['skipped']}")
+
+    # [2.5/5] 正向同步简报状态（hermes→CoPilot）
+    print("  [2.5/5] 同步简报状态（hermes→CoPilot）...")
+    briefing_result = {"synced": 0, "skipped": 0}
+    try:
+        briefing_result = bsync.sync_from_hermes()
+        if briefing_result.get("synced", 0) > 0:
+            print(f"    状态升级 {briefing_result['synced']} 篇，跳过 {briefing_result['skipped']} 篇")
+        else:
+            print(f"    无状态需升级（跳过 {briefing_result.get('skipped', 0)} 篇）")
+    except Exception as e:
+        print(f"  ⚠ 简报状态同步失败: {e}")
 
     # 记录同步历史
     state = _load_sync_state()
@@ -233,6 +259,7 @@ def sync_all() -> Dict[str, Any]:
         "timestamp": _now_utc(),
         "new_sessions": sess_result["new_sessions"],
         "new_papers": paper_result["new_papers"],
+        "briefing_synced": briefing_result.get("synced", 0),
     })
     state["history"] = state["history"][-20:]  # 保留最近 20 次记录
     _save_sync_state(state)
@@ -241,7 +268,7 @@ def sync_all() -> Dict[str, Any]:
 
     # 同步后自动重建索引和图谱（v3.1 自维护闭环）
     if total_new > 0:
-        print("  [3/4] 重建索引和图谱...")
+        print("  [3/5] 重建索引和图谱...")
         try:
             import sys
             sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
@@ -253,7 +280,7 @@ def sync_all() -> Dict[str, Any]:
             print(f"  ⚠ 自动重建失败: {e}")
 
         # v3.4: 认知回流 — 从新同步的 hermes 会话中提炼记忆
-        print("  [4/4] 认知回流（记忆提炼）...")
+        print("  [4/5] 认知回流（记忆提炼）...")
         try:
             from memory_reflow import reflow_all
             reflow_result = reflow_all(max_count=20)
@@ -271,6 +298,7 @@ def sync_all() -> Dict[str, Any]:
     return {
         "new_sessions": sess_result["new_sessions"],
         "new_papers": paper_result["new_papers"],
+        "briefing_synced": briefing_result.get("synced", 0),
         "skipped_sessions": sess_result["skipped"],
         "skipped_papers": paper_result["skipped"],
         "errors": sess_result["errors"] + paper_result["errors"],
@@ -295,20 +323,21 @@ def _self_check() -> None:
     print("◐ sync_engine 自检")
     print("=" * 50)
 
-    print("\n[1/4] 检查数据源...")
+    print("\n[1/5] 检查数据源...")
     print(f"  hermes sessions: {'✓' if LINSAI_SESSIONS.exists() else '✗'}")
     if LINSAI_SESSIONS.exists():
         count = len(list(LINSAI_SESSIONS.glob("*.json")))
         print(f"    {count} 个会话文件")
     print(f"  hermes 文献产出: {'✓' if BRIEFINGS_DIR.exists() else '✗'}")
 
-    print("\n[2/4] 同步状态文件...")
+    print("\n[2/5] 同步状态文件...")
     state = _load_sync_state()
     print(f"  已同步会话: {len(state.get('synced_sessions', []))}")
     print(f"  已同步文献: {len(state.get('synced_papers', []))}")
+    print(f"  待同步队列: {len(state.get('reverse_sync_pending', []))} 条")
     print(f"  上次同步: {state.get('last_sync', '从未')}")
 
-    print("\n[3/4] 验证去重机制...")
+    print("\n[3/5] 验证去重机制...")
     # 模拟：连续调用 sync_all 应幂等（第二次无新增）
     # 不实际调用（会修改状态），只验证函数可用
     assert callable(sync_all), "sync_all 不可调用"
@@ -316,7 +345,17 @@ def _self_check() -> None:
     assert callable(sync_hermes_outputs), "sync_hermes_outputs 不可调用"
     print("  ✓ 同步函数就绪")
 
-    print("\n[4/4] 同步状态查询...")
+    print("\n[4/5] 双向同步模块...")
+    try:
+        import briefing_sync as bsync
+        assert callable(bsync.sync_to_hermes), "sync_to_hermes 不可调用"
+        assert callable(bsync.sync_from_hermes), "sync_from_hermes 不可调用"
+        assert callable(bsync.flush_pending_reverse), "flush_pending_reverse 不可调用"
+        print("  ✓ briefing_sync 就绪")
+    except ImportError:
+        print("  ⚠ briefing_sync 未安装")
+
+    print("\n[5/5] 同步状态查询...")
     status = get_sync_status()
     print(f"  历史记录: {len(status['history'])} 条")
 

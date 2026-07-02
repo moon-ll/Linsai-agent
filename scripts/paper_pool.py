@@ -127,6 +127,23 @@ def get_pool(status: str = "") -> Dict[str, Any]:
     }
 
 
+def get_paper_status(arxiv_id: str) -> Optional[str]:
+    """查询单篇论文状态（不存在返回 None）。
+
+    供 briefing_sync 正向同步使用：判断当前状态是否可升级。
+
+    Args:
+        arxiv_id: 论文 ID
+
+    Returns:
+        unseen/viewed/archived，或 None（不在池中）
+    """
+    pool = _load()
+    if arxiv_id not in pool:
+        return None
+    return pool[arxiv_id].get("status", STATUS_UNSEEN)
+
+
 def update_status(arxiv_id: str, status: str, extra: Optional[Dict] = None) -> bool:
     """更新候选状态。
 
@@ -179,7 +196,11 @@ def _self_check() -> None:
 
     print("\n[3/3] API 函数验证...")
     assert callable(get_pool) and callable(update_status)
-    print("  ✓ get_pool / update_status 就绪")
+    assert callable(get_paper_status)
+    # get_paper_status：不存在的 ID 返回 None
+    _test_aid = "test_nonexist_0000"
+    assert get_paper_status(_test_aid) is None, "不存在论文应返回 None"
+    print("  ✓ get_pool / update_status / get_paper_status 就绪")
     print("\n✓ paper_pool 自检通过")
 
 
