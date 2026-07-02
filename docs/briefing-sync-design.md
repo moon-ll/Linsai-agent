@@ -292,11 +292,26 @@ Step 5: 测试
 
 ### 3.4 验收标准
 
-- [ ] 用户在 CoPilot 点"归档" → hermes status.json 对应论文 `discussion_archived_at` 被填充
-- [ ] hermes agent 归档讨论 → CoPilot paper-pool.json 对应论文 status 变为 `archived`
-- [ ] 反向同步失败（hermes 未运行）→ 记入待同步队列，下次 sync_all 重试
-- [ ] hermes `init_briefing_status.py` 覆盖后 → 正向同步检测 date 变化，重新对齐
-- [ ] 全量测试 142+212 通过，新增 ~5 个断言
+- [x] 用户在 CoPilot 点"归档" → hermes status.json 对应论文 `discussion_archived_at` 被填充
+- [x] hermes agent 归档讨论 → CoPilot paper-pool.json 对应论文 status 变为 `archived`
+- [x] 反向同步失败（hermes 未运行）→ 记入待同步队列，下次 sync_all 重试
+- [x] hermes `init_briefing_status.py` 覆盖后 → 正向同步检测 date 变化，重新对齐
+- [x] 全量测试 232/232 通过（含新增 20 个 BriefingSync 检查点）
+
+### 3.5 实测验证（2026-07-03）
+
+使用 hermes status.json（10 篇论文）与 CoPilot paper-pool.json（142 篇）的真实数据验证：
+
+| 测试项 | 操作 | 预期 | 实际 | 结果 |
+|--------|------|------|------|------|
+| 正向同步（初始） | sync_from_hermes() | synced=0（hermes 均未 analyzed） | synced=0 | ✓ |
+| 反向同步 viewed | sync_to_hermes(aid, "viewed") | discussion_started=True | True | ✓ |
+| 反向同步 archived | sync_to_hermes(aid, "archived") | discussion_archived_at=时间戳 | 2026-07-03T00:03:56+08:00 | ✓ |
+| 正向同步升级 | hermes archived → CoPilot unseen | 升级为 archived | archived | ✓ |
+| 幂等性 | 重复正向同步 | synced=0 | synced=0, skipped=1 | ✓ |
+| 待同步队列 | 论文不在 hermes 工作流 | 记入队列 | 队列 1 条 | ✓ |
+
+**沙盒限制**：TRAE 沙盒不允许写入 `hermes_workspace/` 目录，实测通过将 hermes `status.json` 复制到 CoPilot 目录内完成。生产环境（web_server 独立运行）不受此限制。
 
 ---
 
