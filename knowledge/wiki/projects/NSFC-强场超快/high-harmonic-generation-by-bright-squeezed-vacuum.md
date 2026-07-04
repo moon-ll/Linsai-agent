@@ -1,5 +1,5 @@
 ---
-title: "High Harmonic Generation by Bright Squeezed Vacuum"
+title: "[NSFC] High Harmonic Generation by Bright Squeezed Vacuum"
 type: "papers"
 arxiv_id: "2403.15337"
 authors: "Andrei Rasputnyi, Zhaopin Chen, Michael Birk, Oren Cohen, Ido Kaminer, Michael Kruger, Denis Seletskiy, Maria Chekhova, Francesco Tani"
