@@ -142,6 +142,10 @@ _PROJECT_ROUTES = [
     ("POST", re.compile(r"^/api/projects/nsfc/pending/(?P<pid>.+)$"), "_proj_nsfc_pending_action"),
     ("POST", re.compile(r"^/api/projects/nsfc/discuss-summary$"), "_proj_nsfc_discuss_summary"),
     ("POST", re.compile(r"^/api/projects/opinions$"), "_proj_opinions_post"),
+    # v4.1: 文献讨论归档
+    ("POST", re.compile(r"^/api/paper-discussion/archive$"), "_paper_discussion_archive"),
+    # v4.1: 轻量对话（讨论弹窗用）
+    ("POST", re.compile(r"^/api/chat/simple$"), "_chat_simple"),
     # --- PUT ---
     ("PUT", re.compile(r"^/api/projects/opinions/(?P<op_id>[^/]+)/resolve$"), "_proj_opinion_resolve"),
 ]
@@ -471,3 +475,173 @@ class ProjectRoutesMixin:
             self._send_json({"success": True, "opinion": resolved})
         else:
             self._send_json({"error": "意见不存在"}, 404)
+
+    # ===================================================================
+    # v4.1: 文献讨论独立窗口支持
+    # ===================================================================
+
+    def _chat_simple(self, parsed, body):
+        """轻量对话端点（文献讨论弹窗用，不走 session/工具链，直接 LLM）。"""
+        import llm_router as lr
+        sys_prompt = body.get("system_prompt", "你是林赛，强场超快光学独立PI。")
+        messages = body.get("messages", [])
+        if not messages:
+            self._send_json({"error": "缺少 messages"}, 400)
+            return
+        try:
+            router = lr.LLMRouter()
+            resp, usage, provider = router.call_llm(sys_prompt, messages)
+            self._send_json({"response": resp, "provider": provider, "usage": usage})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _paper_discussion_archive(self, parsed, body):
+        """文献讨论归档：全文→整理→凝练→概念。
+
+        mode:
+          auto — 全自动四步
+          step1_summarize — 只做整理（返回摘要供用户确认）
+          step2_finalize — 用户确认后凝练+提取概念
+        """
+        import llm_router as lr
+        from datetime import datetime, timezone
+        import kb_importer as ki
+        import knowledge_base as kb
+
+        arxiv_id = body.get("arxiv_id", "")
+        title = body.get("title", "")
+        mode = body.get("mode", "auto")
+        now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        today = datetime.now().strftime("%Y%m%d")
+
+        # 收集对话全文
+        messages = body.get("messages", [])
+        full_text = "\n\n".join([f"{'🧑用户' if m['role']=='user' else '🔬林赛'}: {m['content']}" for m in messages])
+
+        if mode in ("auto", "step1_summarize"):
+            # 第一步：AI 整理讨论为结构化摘要
+            sys_prompt = (
+                "你是林赛。请把以下关于论文的讨论整理为结构化摘要。\n"
+                "输出格式（JSON）：\n"
+                '{"summary": "3-5段讨论摘要（核心观点/分歧/结论）", '
+                '"key_points": ["核心观点1", "核心观点2", ...], '
+                '"concepts": ["应提取为知识库概念的关键术语1", ...], '
+                '"open_questions": ["未解决的问题1", ...]}\n'
+                "只输出JSON。"
+            )
+            user_msg = f"论文：{title} (arXiv:{arxiv_id})\n\n讨论全文：\n{full_text[:6000]}"
+            try:
+                router = lr.LLMRouter()
+                resp, _, _ = router.call_llm(sys_prompt, [{"role": "user", "content": user_msg}])
+                import json as _json
+                resp_clean = resp.strip()
+                if resp_clean.startswith("```"): resp_clean = resp_clean.split("\n", 1)[1]
+                if resp_clean.endswith("```"): resp_clean = resp_clean.rsplit("```", 1)[0]
+                parsed_result = _json.loads(resp_clean.strip())
+            except _json.JSONDecodeError:
+                parsed_result = {"summary": resp[:1000], "key_points": [], "concepts": [], "open_questions": []}
+            except Exception as e:
+                self._send_json({"error": f"AI整理失败: {e}"}, 500)
+                return
+
+            if mode == "step1_summarize":
+                self._send_json({"success": True, "summary": parsed_result.get("summary", ""),
+                                 "concepts_suggested": parsed_result.get("concepts", []),
+                                 "key_points": parsed_result.get("key_points", [])})
+                return
+
+            # auto 模式继续往下
+            summary = parsed_result.get("summary", "")
+            concepts = parsed_result.get("concepts", [])
+
+        elif mode == "step2_finalize":
+            summary = body.get("summary", "")
+            concepts = body.get("concepts_suggested", [])
+        else:
+            self._send_json({"error": "未知 mode"}, 400)
+            return
+
+        # 第二步：保存讨论全文 + 摘要到知识库
+        disc_dir = web_base._PROJECT_ROOT / "knowledge" / "wiki" / "projects" / "deepxiv-论文库" / "讨论记录"
+        disc_dir.mkdir(parents=True, exist_ok=True)
+        disc_file = disc_dir / f"讨论-{today}-{arxiv_id}.md"
+
+        content = f"""---
+title: "讨论：{title[:40]}"
+type: "papers"
+arxiv_id: "{arxiv_id}"
+created: "{now}"
+updated: "{now}"
+tags: ["讨论记录", "文献阅读"]
+related: ["高次谐波产生"]
+project: ["deepxiv-论文库"]
+growth_stage: "mature"
+confidence: 0.85
+---
+
+# 讨论：{title}
+
+**arXiv**: [{arxiv_id}](https://arxiv.org/abs/{arxiv_id})
+
+## 讨论摘要
+
+{summary}
+
+## 核心观点
+
+"""
+        for kp in (parsed_result.get("key_points", []) if mode == "auto" else []):
+            content += f"- {kp}\n"
+        content += f"\n## 开放问题\n\n"
+        for oq in (parsed_result.get("open_questions", []) if mode == "auto" else []):
+            content += f"- {oq}\n"
+        content += f"\n## 讨论全文\n\n{full_text[:8000]}\n"
+
+        disc_file.write_text(content, encoding="utf-8")
+
+        # 第三步：提取概念条目（生成 seedling 笔记）
+        concepts_generated = 0
+        for concept_name in concepts[:5]:
+            concept_name = concept_name.strip()
+            if not concept_name or len(concept_name) < 2:
+                continue
+            # 检查是否已存在
+            existing = kb.list_wiki_pages("concepts")
+            if any(p["title"] == concept_name for p in existing):
+                continue  # 已有则跳过
+            # 生成 seedling 概念笔记
+            stub_content = f"""---
+title: "{concept_name}"
+type: "concepts"
+created: "{now}"
+updated: "{now}"
+tags: ["自动提取", "文献讨论"]
+related: ["{title[:20]}"]
+project: ["deepxiv-论文库"]
+source_arxiv: "{arxiv_id}"
+growth_stage: "seedling"
+confidence: 0.4
+---
+
+# {concept_name}
+
+> 从讨论 arXiv:{arxiv_id} 中提取的种子概念，待补充。
+
+## 来源
+
+- 讨论：{title}
+- arXiv: [{arxiv_id}](https://arxiv.org/abs/{arxiv_id})
+
+## 林赛的理解
+
+（待补充——请基于讨论内容完善此概念笔记）
+"""
+            try:
+                kb.save_wiki_page(concept_name, "concepts", stub_content)
+                concepts_generated += 1
+            except Exception:
+                pass
+
+        self._send_json({"success": True, "file": str(disc_file.name),
+                         "concepts_generated": concepts_generated,
+                         "summary": summary[:200]})

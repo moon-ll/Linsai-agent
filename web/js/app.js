@@ -528,6 +528,7 @@ async function init() {
   bindEvents();
   initKbMain();
   initChatSidebar();
+  if (typeof bindPaperDiscussionEvents === 'function') bindPaperDiscussionEvents();
 
   // P1-2: 自动选择第一个会话或显示欢迎页
   if (State.sessions.length > 0) {

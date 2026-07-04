@@ -857,22 +857,9 @@ async function renderPapersCards(container) {
 
 // 讨论某篇文献（跳到聊天框 + 注入上下文）
 async function discussPaper(arxivId, title) {
+  // v4.1: 打开独立讨论弹窗（不再填入侧栏聊天）
   closeProjectsManager();
-  showToast(`💬 正在加载 ${title.slice(0,30)}... 到讨论`, 'info');
-  // 把文献信息注入聊天输入框，用户可补充问题后发送
-  const input = document.getElementById('message-input');
-  if (input) {
-    input.value = `基于 arXiv:${arxivId}（${title}）的内容，`;
-    input.focus();
-    input.setSelectionRange(input.value.length, input.value.length);
-  }
-  // 异步加载该论文的 raw 内容到 KB 上下文（通过 @机制）
-  try {
-    const resp = await apiGet(`/api/knowledge/search?q=${arxivId}`);
-    if (resp.results && resp.results.length) {
-      window._pendingKbContext = resp.results.slice(0, 2);  // 暂存，发送时注入
-    }
-  } catch (e) { /* 静默 */ }
+  openPaperDiscussion(arxivId, title);
 }
 
 // 文献反馈处理
