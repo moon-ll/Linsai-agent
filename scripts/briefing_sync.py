@@ -134,6 +134,24 @@ def sync_to_hermes(arxiv_id: str, copilot_status: str, action: str = "") -> Dict
 
             # 写回（原子写入）
             hermes_status["papers"][arxiv_id] = info
+            _atomic_write(HERMES_STATUS_PATH, hermes_status)
+
+            # v4.2: 同时写统一状态 item-status.json
+            try:
+                import state_sync as ss
+                # action → 统一状态枚举映射
+                unified_map = {
+                    "interested": "interested", "skip": "skipped",
+                    "later": "viewed", "archive": "archived",
+                    "discuss_done": "archived",
+                }
+                unified_status = unified_map.get(action, copilot_status)
+                title = info.get("title", "")
+                direction = info.get("direction", "")
+                ss.update_item_status(arxiv_id, unified_status, updated_by="copilot",
+                                      title=title, direction=direction)
+            except Exception:
+                pass  # item-status.json 同步失败不阻塞主流程
             save_json(HERMES_STATUS_PATH, hermes_status)
 
         # 更新同步水位
