@@ -823,7 +823,7 @@ async function renderPapersCards(container) {
       html += `<div style="display:flex;align-items:center;gap:2px;margin-bottom:6px;">${lifecycleHtml}</div>`;
       html += `<div class="d-flex jc-between mb-4">${lifecycleLabelHtml}</div>`;
       html += `<div style="font-size:0.85rem;font-weight:600;line-height:1.4;margin-bottom:3px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">${escapeHtml(p.title)}</div>`;
-      html += `<div class="meta-sm-mb">${escapeHtml(p.authors)} · ${escapeHtml(p.direction)} · ${scorePct}%</div>`;
+      html += `<div class="meta-sm-mb">${escapeHtml(p.authors)} · ${escapeHtml(p.direction)} · ${scorePct}%${p.pushed_to_feishu ? ' · <span style="color:var(--info-color);">📡已推送飞书</span>' : ''}${p.unified_status && p.unified_status !== p.status ? ' · <span style="color:var(--accent-color);">'+escapeHtml(p.unified_status)+'</span>' : ''}</div>`;
       if (p.tldr) {
         html += `<div class="clamp-2">${escapeHtml(p.tldr)}</div>`;
       }

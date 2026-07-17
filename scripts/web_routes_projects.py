@@ -249,9 +249,24 @@ class ProjectRoutesMixin:
         self._send_json(pr.get_candidates())
 
     def _proj_papers_pool(self, parsed, body=None):
-        """候选池（三状态持久化）（GET+POST 重复）"""
+        """候选池（三状态持久化）+ v4.2 统一状态合并"""
         status_filter = parse_qs(parsed.query).get("status", [""])[0]
-        self._send_json(pp.get_pool(status=status_filter))
+        pool_data = pp.get_pool(status=status_filter)
+        # v4.2: 合并 item-status.json 的统一状态（推送标记等）
+        try:
+            import state_sync as ss
+            for paper in pool_data.get("papers", []):
+                aid = paper.get("arxiv_id", "")
+                info = ss.get_item_info(aid)
+                if info:
+                    paper["unified_status"] = info.get("status", "")
+                    paper["pushed_to_feishu"] = info.get("status", "") == "pushed" or \
+                        any(h.get("status") == "pushed" for h in info.get("history", []))
+                    paper["updated_by"] = info.get("updated_by", "")
+            pool_data["status_summary_unified"] = ss.get_status_summary()
+        except Exception:
+            pass
+        self._send_json(pool_data)
 
     def _proj_papers_briefings(self, parsed, body=None):
         """文献简报列表（GET+POST 重复）"""
