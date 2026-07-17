@@ -1,5 +1,31 @@
 # 变更记录
 
+## v4.2.2 - 2026-07-17 统一状态同步 + 文献独立讨论 + AI辅助指派 + 清理
+
+### 统一状态同步架构（Copilot = hermes 操作台）
+- **state_sync.py**（410行）：统一论文状态（item-status.json），Copilot 和 hermes 共用
+- 9种状态枚举（pool→archived），不可逆状态优先
+- Copilot 操作（感兴趣/归档/跳过）→ 实时写回 item-status.json
+- hermes select_candidates.py 改造：检索跳过已处理论文 + 推送标记 pushed
+- NSFC 决策同步写 .copilot-sync.json（hermes BRAIN 可读）
+- 前端文献卡片显示 📡已推送飞书标记
+
+### 文献独立讨论窗口（v4.1）
+- 大弹窗模式：论文信息+讨论区+检索面板（双栏）
+- 检索增强：本地知识库优先，deepxiv 检索兜底
+- 归档链路：全文→整理→凝练→概念（全自动+半自动）
+- 归档产出：讨论记录.md + 概念 seedling 笔记
+
+### AI 辅助任务指派
+- 只说目标+要求，AI 自动生成任务描述 + hermes 执行指令
+- 自动填充表单（标题/描述/优先级/hermes prompt）
+
+### 清理
+- 删除空壳配置（llm-config.json）
+- 归档4篇 cron 机器日志讨论（JSON 混入正文）
+- 归档已执行完的计划文档
+- 清理旧日志（>7天）
+
 ## v4.1.0 - 2026-07-02 文献简报双向同步引擎
 
 ### 核心特性：CoPilot ↔ hermes 状态双向同步
