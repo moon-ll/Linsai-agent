@@ -360,6 +360,14 @@ class ProjectRoutesMixin:
                 _cms.save_json(dec_path, decs)
                 title = body.get("title", "")
                 topic = body.get("related_topic", "")
+                # v4.2: 同步到项目 .copilot-sync.json
+                try:
+                    import state_sync as ss
+                    nsfc_dir = str(pr.NSFC_DIR)
+                    ss.register_project(nsfc_dir, "NSFC-强场超快")
+                    ss.update_decision_status(nsfc_dir, pid, "discussing", decided_by="copilot", title=title)
+                except Exception:
+                    pass
                 # 收集该课题的 references 上下文
                 context_files = []
                 refs = pr.get_nsfc_references()
@@ -371,6 +379,15 @@ class ProjectRoutesMixin:
                 decs[pid] = {"status": action, "decided_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
                              "summary": body.get("summary", "")}
                 _cms.save_json(dec_path, decs)
+                # v4.2: 同步到项目 .copilot-sync.json
+                try:
+                    import state_sync as ss
+                    nsfc_dir = str(pr.NSFC_DIR)
+                    ss.register_project(nsfc_dir, "NSFC-强场超快")
+                    ss.update_decision_status(nsfc_dir, pid, action, decided_by="copilot",
+                                             title=body.get("title", ""))
+                except Exception:
+                    pass
                 # 异步反馈 hermes
                 title = body.get("title", "")
                 try:
