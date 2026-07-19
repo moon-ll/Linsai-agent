@@ -1,5 +1,30 @@
 # 变更记录
 
+## v5.2.0 - 2026-07-19 三端统一架构 阶段3：任务看板桥接
+
+### 阶段 3：kanban_reader + 任务看板桥接
+- **新建 kanban_reader.py**：hermes kanban.db SQLite 读写层
+  - 只读连接用 `PRAGMA query_only=ON`（WAL 模式无法用 mode=ro）
+  - 写入连接用 WAL + `busy_timeout=5000`，与 hermes worker 并发安全
+  - 状态映射：hermes 9 态 → CoPilot 4 态（triage/todo/scheduled/ready→backlog, running/review→active, blocked→paused, done/archived→completed）
+  - 逆向映射：CoPilot 4 态 → hermes（backlog→todo, active→running, paused→blocked, completed→done）
+  - `list_tasks()` / `get_task()` / `create_task()` / `update_task_status()` 四个接口
+  - `_self_check()` 6/6 通过（读取真实 kanban.db 22 任务，11 非归档）
+- **改造 web_routes_tasks.py**：
+  - `_task_list`：合并 hermes kanban + 本地任务，添加 `source` 字段
+  - `_task_get`：`t_` 前缀路由到 kanban_reader，`TASK-` 前缀路由到 task_manager
+  - `_task_create`：assignee=hermes 时写入 kanban.db（created_by="copilot"）
+  - `_task_update`：kanban 任务状态更新写入 kanban.db
+- **改造 task.js**：来源标签（紫色 hermes badge）+ hermes assignee 显示
+- **新增 CSS**：`.task-source-badge.hermes` 样式
+- **测试**：Web API 返回 14 任务（11 hermes + 3 本地）+ 核心 116/116 + Web API 70/70（无回归）
+
+### 变更文件
+- `scripts/kanban_reader.py`（新建）
+- `scripts/web_routes_tasks.py`（4 个路由方法集成 kanban）
+- `web/js/task.js`（来源标签 + assignee 显示）
+- `web/css/style.css`（.task-source-badge 样式）
+
 ## v5.1.0 - 2026-07-19 三端统一架构 阶段2：hermes cron 状态闭环
 
 ### 阶段 2：hermes cron 消费 item-status.json

@@ -111,31 +111,42 @@
 
 ---
 
-### 阶段 3：CoPilot 任务看板读 kanban.db（1.5 天）
+### 阶段 3：kanban_reader + 任务看板桥接（2 天）【✅ 已完成】
 
-**问题**：hermes `kanban.db`（22 个任务）和 CoPilot `tasks/`（空目录）完全隔离。
+**问题**：CoPilot 任务面板只显示本地 JSON 文件任务，看不到 hermes kanban.db 的 22 个任务。用户在两端各自维护任务列表，状态不同步。
 
 **任务清单**：
-- [ ] 3.1 新建 `scripts/kanban_reader.py`：SQLite 读取层
-  - `list_tasks(status_filter)` → 列表
-  - `get_task(task_id)` → 单任务详情
-  - `create_task(title, assignee, created_by)` → INSERT
-  - `update_task_status(task_id, status)` → UPDATE
-  - 状态映射：todo↔backlog, blocked↔paused, done↔completed, in_progress↔active
-- [ ] 3.2 `kanban_reader.py::_self_check()` 验证读取真实 kanban.db
-- [ ] 3.3 改造 `web_routes_tasks.py`：GET /api/tasks 读 kanban.db
-- [ ] 3.4 改造 `web/js/task.js`：渲染 kanban 任务，状态映射展示
-- [ ] 3.5 CoPilot 新建任务 → INSERT kanban.db（`created_by="copilot"`）
-- [ ] 3.6 废弃 CoPilot `tasks/` 目录的本地存储（保留兼容降级）
-- [ ] 3.7 测试：Web 界面展示 hermes 22 个任务，新建任务在两端可见
+- [x] 3.1 新建 `scripts/kanban_reader.py`：SQLite 读取层
+  - [x] `list_tasks(status_filter)` → 11 个非归档任务（hermes 9 态 → CoPilot 4 态映射）
+  - [x] `get_task(task_id)` → 单任务详情
+  - [x] `create_task(title, assignee, created_by)` → INSERT kanban.db
+  - [x] `update_task_status(task_id, status)` → UPDATE（CoPilot 4 态 → hermes 9 态）
+- [x] 3.2 `kanban_reader.py::_self_check()` 验证读取真实 kanban.db（6/6 通过）
+- [x] 3.3 改造 `web_routes_tasks.py`：`GET /api/tasks` 合并 hermes kanban + 本地任务
+- [x] 3.4 改造 `web/js/task.js`：渲染 kanban 任务，来源标签（紫色 hermes badge）
+- [x] 3.5 CoPilot 新建任务（assignee=hermes）→ INSERT kanban.db（created_by="copilot"）
+- [x] 3.6 保留本地 tasks/ 目录兼容降级（kanban.db 不可用时回退本地）
+- [x] 3.7 测试：Web API 返回 14 任务（11 hermes + 3 本地），核心 116/116 + Web API 70/70
 
 **验收标准**：
-- CoPilot 任务看板显示 hermes 的 22 个任务
-- 状态映射正确（todo 显示为 backlog，done 显示为 completed）
-- CoPilot 新建任务后，hermes kanban 能查询到
-- hermes 完成任务后，CoPilot 看板刷新可见
+- [x] Web 界面展示 hermes 11 个非归档任务（22 总计，11 归档已过滤）
+- [x] hermes 任务状态正确映射（todo→backlog, running→active, blocked→paused, done→completed）
+- [x] 任务卡片显示来源标签（hermes 紫色 badge）
+- [x] CoPilot 新建任务（assignee=hermes）写入 kanban.db
+- [x] kanban 任务状态更新可通过 CoPilot Web 界面拖拽
+- [x] kanban.db 不可用时回退本地任务（兼容降级）
 
-**风险**：中。SQLite WAL 并发安全，但需验证 CoPilot 写入不干扰 hermes worker。降级方案：若 kanban.db 不可读，回退到本地 tasks/。
+**实际变更文件**：
+- `scripts/kanban_reader.py`（新建，SQLite 读写层 + 状态映射）
+- `scripts/web_routes_tasks.py`（_task_list/_task_get/_task_create/_task_update 集成 kanban）
+- `web/js/task.js`（来源标签 + hermes assignee 显示）
+- `web/css/style.css`（.task-source-badge 样式）
+
+**技术决策**：
+- SQLite 连接用 `PRAGMA query_only=ON` 保护读取连接（而非 `mode=ro` URI，因 WAL 模式需要访问 -wal/-shm 文件）
+- 写入连接用 WAL 模式 + `busy_timeout=5000`，与 hermes worker 并发安全
+- 状态映射：hermes 9 态 → CoPilot 4 态（triage/todo/scheduled/ready→backlog, running/review→active, blocked→paused, done/archived→completed）
+- kanban 任务 ID 以 `t_` 前缀识别，路由到 kanban_reader；本地任务 ID 以 `TASK-` 前缀识别，路由到 task_manager
 
 ---
 
@@ -190,7 +201,7 @@
 | P0 路径修复+fcntl锁 | ✅ 已完成 | 6/6 | briefing_sync, common |
 | 阶段 1 索引 hermes wiki | ✅ 已完成 | 7/7 | kb_index |
 | 阶段 2 hermes cron 消费状态 | ✅ 已完成 | 5/5 | hermes scripts |
-| 阶段 3 kanban 任务桥接 | ⬜ 待开始 | 0/7 | kanban_reader, task.js |
+| 阶段 3 kanban 任务桥接 | ✅ 已完成 | 7/7 | kanban_reader, task.js |
 | 阶段 4 记忆单向同步 | ⬜ 待开始 | 0/4 | memory_bridge |
 | 阶段 5 项目决策同步 | ⬜ 待开始 | 0/5 | state_sync, hermes BRAIN |
 

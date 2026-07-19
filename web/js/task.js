@@ -42,13 +42,21 @@ function renderTaskBoard() {
 
     const priorityClass = task.priority === 'high' ? 'priority-high' : task.priority === 'low' ? 'priority-low' : '';
     const tags = (task.tags || []).map(t => `<span class="task-tag">${escapeHtml(t)}</span>`).join('');
+    // v5.2: 来源标识（hermes kanban / 本地）
+    const sourceBadge = task.source === 'hermes'
+      ? '<span class="task-source-badge hermes">hermes</span>'
+      : '';
+    // v5.2: hermes 任务的 assignee 可能是 analyst/researcher/writer
+    const assigneeText = task.source === 'hermes'
+      ? `⚡${escapeHtml(task.assignee || 'hermes')}`
+      : (task.assignee === 'hermes' ? '⚡hermes' : task.assignee === 'none' ? '' : '👤我');
 
     card.innerHTML = `
-      <div class="task-card-title ${priorityClass}">${escapeHtml(task.title)}</div>
+      <div class="task-card-title ${priorityClass}">${sourceBadge}${escapeHtml(task.title)}</div>
       ${task.description ? `<div class="task-card-desc">${escapeHtml(task.description)}</div>` : ''}
       ${tags ? `<div class="task-card-tags">${tags}</div>` : ''}
       <div class="task-card-meta">
-        <span>${task.assignee === 'hermes' ? '⚡hermes' : task.assignee === 'none' ? '' : '👤我'}</span>
+        <span>${assigneeText}</span>
         ${task.due_date ? `<span>${formatDate(task.due_date)}</span>` : ''}
       </div>
     `;

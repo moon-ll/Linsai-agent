@@ -29,6 +29,8 @@ from web_base import _log
 import task_manager as tm
 import project_dispatch as pdh
 import hermes_bridge as hb  # noqa: F401  (派活链路依赖，保持显式导入)
+# v5.2: kanban_reader 桥接 hermes kanban.db
+import kanban_reader as kr
 # _do_dispatch_hermes 依赖 projects 模块中的跨进程派活函数
 from web_routes_projects import _write_dispatch_to_hermes_plans, _dispatch_hermes_async
 
@@ -83,12 +85,37 @@ class TaskRoutesMixin:
     # --- GET ---
 
     def _task_list(self, parsed):
-        """任务列表"""
-        tasks = tm.list_tasks()
+        """任务列表（v5.2: 合并 hermes kanban.db + 本地任务）"""
+        # v5.2: 优先从 hermes kanban.db 读取
+        tasks = []
+        if kr.is_available():
+            try:
+                kanban_tasks = kr.list_tasks()
+                tasks.extend(kanban_tasks)
+            except Exception as e:
+                if _log:
+                    _log.warning("读取 kanban.db 失败，回退本地: %s", e)
+        # 合并本地任务（兼容降级）
+        try:
+            local_tasks = tm.list_tasks()
+            for t in local_tasks:
+                t["source"] = "local"
+            tasks.extend(local_tasks)
+        except Exception:
+            pass
         self._send_json(tasks)
 
     def _task_get(self, parsed, tid):
-        """单个任务详情"""
+        """单个任务详情（v5.2: kanban 任务用 t_ 前缀识别）"""
+        # v5.2: kanban 任务
+        if tid.startswith("t_") and kr.is_available():
+            task = kr.get_task(tid)
+            if task:
+                self._send_json(task)
+                return
+            self._send_json({"error": f"kanban 任务不存在: {tid}"}, 404)
+            return
+        # 本地任务
         try:
             task = tm.get_task(tid)
             self._send_json(task)
@@ -159,13 +186,42 @@ class TaskRoutesMixin:
             self._send_json({"error": f"AI 辅助失败: {e}"}, 500)
 
     def _task_create(self, parsed, body):
-        """创建任务（assignee=hermes 时自动派活）"""
+        """创建任务（v5.2: 支持 kanban.db 创建，assignee=hermes 时写入 kanban）"""
         title = body.get("title", "").strip()
         if not title:
             self._send_json({"error": "缺少 title"}, 400)
             return
         project = body.get("project", "").strip()
         assignee = body.get("assignee", "myself")
+
+        # v5.2: assignee=hermes 或 source=hermes 时写入 kanban.db
+        if (assignee == "hermes" or body.get("source") == "hermes") and kr.is_available():
+            kanban_id = kr.create_task(
+                title=title,
+                description=body.get("description", ""),
+                assignee=body.get("kanban_assignee", "copilot"),
+                priority=body.get("priority", "medium"),
+                copilot_status="backlog",
+                created_by="copilot",
+            )
+            if kanban_id:
+                task_obj = kr.get_task(kanban_id) or {
+                    "task_id": kanban_id, "title": title,
+                    "status": "backlog", "source": "hermes",
+                }
+                # 派活给 hermes
+                dispatch_id = ""
+                if assignee == "hermes":
+                    prompt = body.get("hermes_prompt", "").strip() or body.get("prompt", "").strip() or f"请执行项目任务：{title}。"
+                    dispatch_id = self._do_dispatch_hermes(kanban_id, prompt, project, source="create")
+                task_obj["dispatch_id"] = dispatch_id
+                self._send_json(task_obj)
+                return
+            # kanban 创建失败，回退本地
+            if _log:
+                _log.warning("kanban.db 创建失败，回退本地任务")
+
+        # 本地任务创建
         tid, _ = tm.create_task(
             title=title,
             priority=body.get("priority", "medium"),
@@ -184,10 +240,11 @@ class TaskRoutesMixin:
         # P5-1: 返回完整任务对象，确保前端 createNewTask() 可直接 push 到 State.tasks
         try:
             task_obj = tm.get_task(tid)
+            task_obj["source"] = "local"
             task_obj["dispatch_id"] = dispatch_id
             self._send_json(task_obj)
         except Exception:
-            self._send_json({"success": True, "task_id": tid, "title": title, "status": "backlog", "dispatch_id": dispatch_id})
+            self._send_json({"success": True, "task_id": tid, "title": title, "status": "backlog", "source": "local", "dispatch_id": dispatch_id})
 
     def _task_dispatch(self, parsed, body, tid):
         """派活给 hermes（任务卡片⚡按钮）"""
@@ -208,7 +265,24 @@ class TaskRoutesMixin:
     # --- PUT ---
 
     def _task_update(self, parsed, body, tid):
-        """通用字段更新（含 status 拖拽，修复 task.js:84 的 404 bug）"""
+        """通用字段更新（含 status 拖拽）。
+
+        v5.2: kanban 任务（t_ 前缀）更新状态到 kanban.db
+        """
+        # v5.2: kanban 任务状态更新
+        if tid.startswith("t_") and kr.is_available():
+            new_status = body.get("status", "")
+            if new_status:
+                ok = kr.update_task_status(tid, new_status)
+                if ok:
+                    task = kr.get_task(tid)
+                    self._send_json({"success": True, "task": task})
+                    return
+                self._send_json({"error": "kanban 状态更新失败"}, 500)
+                return
+            # 非状态更新（如 title/description）暂不支持 kanban 任务
+            self._send_json({"error": "kanban 任务仅支持状态更新"}, 400)
+            return
         try:
             updated = tm.update_task_fields(tid, **body)
             self._send_json({"success": True, "task": updated})
