@@ -55,6 +55,9 @@ _RESEARCH_ROUTES_RAW = [
     ("POST", r"^/api/research/projects/([^/]+)/memory/snippets$", "_rg_post_memory_snippet"),
     ("POST", r"^/api/research/projects/([^/]+)/memory/conversations$", "_rg_post_memory_conversation"),
     ("POST", r"^/api/research/projects/([^/]+)/memory/decisions$", "_rg_post_memory_decision"),
+    # v5.4: 项目决策同步（.copilot-sync.json）
+    ("GET", r"^/api/research/projects/([^/]+)/sync-decisions$", "_rg_get_sync_decisions"),
+    ("POST", r"^/api/research/projects/([^/]+)/sync-decisions$", "_rg_post_sync_decision"),
     ("POST", r"^/api/research/projects/([^/]+)/workflow/plan$", "_rg_post_workflow_plan"),
     ("POST", r"^/api/research/projects/([^/]+)/workflow/ai-plan$", "_rg_post_workflow_ai_plan"),
     ("POST", r"^/api/research/projects/([^/]+)/workflow/execute$", "_rg_post_workflow_execute"),
@@ -317,6 +320,58 @@ class ResearchRoutesMixin:
                 unit_id=body.get("unit_id", ""),
             )
             self._send_json({"success": True})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    # v5.4: 项目决策同步（.copilot-sync.json）
+    def _rg_get_sync_decisions(self, path, parsed, match):
+        """获取项目的同步决策列表（.copilot-sync.json）"""
+        pid = match.group(1)
+        try:
+            project_dir = str(pjm._project_dir(pid))
+            from state_sync import load_project_sync
+            data = load_project_sync(project_dir)
+            decisions = data.get("decisions", {})
+            # 转为列表并按时间排序
+            decision_list = []
+            for did, d in decisions.items():
+                d_copy = dict(d)
+                d_copy["decision_id"] = did
+                decision_list.append(d_copy)
+            decision_list.sort(key=lambda x: x.get("decided_at", ""), reverse=True)
+            self._send_json({
+                "project": pid,
+                "decisions": decision_list,
+                "last_hermes_update": data.get("last_hermes_update", ""),
+                "last_copilot_view": data.get("last_copilot_view", ""),
+            })
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _rg_post_sync_decision(self, path, parsed, body, match):
+        """创建项目同步决策（写入 .copilot-sync.json，供 hermes 消费）"""
+        pid = match.group(1)
+        title = body.get("title", "").strip()
+        if not title:
+            self._send_json({"error": "缺少 title"}, 400)
+            return
+        try:
+            project_dir = str(pjm._project_dir(pid))
+            from state_sync import update_decision_status
+            import time as _time
+            decision_id = f"dc_{int(_time.time())}_{pid[-4:]}"
+            status = body.get("status", "pending")
+            decision = update_decision_status(
+                project_dir,
+                decision_id,
+                status=status,
+                decided_by="copilot",
+                title=title,
+                rationale=body.get("rationale", ""),
+                action=body.get("action", ""),
+                target=body.get("target", ""),
+            )
+            self._send_json({"success": True, "decision_id": decision_id, "decision": decision})
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 

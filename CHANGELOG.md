@@ -1,5 +1,33 @@
 # 变更记录
 
+## v5.4.0 - 2026-07-19 三端统一架构 阶段5：项目决策同步
+
+### 阶段 5：.copilot-sync.json 项目决策同步
+- **CoPilot Web API 新增 2 条路由**（`web_routes_research.py`）：
+  - `GET /api/research/projects/{pid}/sync-decisions`：获取项目的同步决策列表
+  - `POST /api/research/projects/{pid}/sync-decisions`：创建决策（写入 `.copilot-sync.json`）
+  - 复用 `state_sync.py` 已有的 `update_decision_status()` / `load_project_sync()`
+  - 路径遍历保护：通过 `pjm._project_dir(pid)` 校验 project_id
+- **新建 hermes 消费脚本 `consume_copilot_decisions.py`**（hermes_workspace/knowledge_base/scripts/）：
+  - 扫描 CoPilot `projects/*/` 目录下的 `.copilot-sync.json`
+  - 发现 `decided_by=copilot` 且未消费的 pending 决策
+  - 写回 `consumed_by_hermes_at` + `consumed_by=hermes` + `last_hermes_update` 时间戳
+  - 采用"只标记消费时间戳，不改变 status"策略，避免与 CoPilot 的 status 流转冲突
+  - 原子写入：`tempfile.mkstemp` + `f.flush()` + `os.fsync(f.fileno())` + `os.replace`
+  - `--dry-run` 模式 + `_self_check()` 5/5 通过
+- **端到端链路测试**（`test_stage5_flow.py`）：
+  - CoPilot 创建决策 → `.copilot-sync.json`
+  - hermes 扫描 → 发现 pending 决策
+  - hermes 消费 → 写回 `consumed_by_hermes_at`
+  - CoPilot 读取 → 验证状态已回传
+  - 幂等性验证：已消费决策不再重复处理
+- **测试**：核心 116/116 + 全量 240/240（无回归）
+
+### 变更文件
+- `scripts/web_routes_research.py`（新增 2 条路由 + 2 个 handler）
+- `docs/v5-three-tier-unification-plan.md`（Stage 5 标记完成 + 完成总结）
+- hermes 侧：`knowledge_base/scripts/consume_copilot_decisions.py`（新建）
+
 ## v5.3.0 - 2026-07-19 三端统一架构 阶段4：记忆单向同步
 
 ### 阶段 4：memory_bridge 记忆单向同步

@@ -182,24 +182,32 @@
 
 ---
 
-### 阶段 5：.copilot-sync.json 落地 + 项目决策同步（2 天）
+### 阶段 5：.copilot-sync.json 落地 + 项目决策同步（2 天）【✅ 已完成】
 
 **问题**：`state_sync.py` 设计了 `.copilot-sync.json` 机制但从未创建；NSFC 决策纯本地。
 
 **任务清单**：
-- [ ] 5.1 `state_sync.py::register_project()` 对 hermes NSFC 项目目录执行注册
-- [ ] 5.2 CoPilot NSFC 决策操作（approve/reject/discuss）写入 `.copilot-sync.json`
-- [ ] 5.3 hermes BRAIN cron 读取 `.copilot-sync.json` 同步 CoPilot 决策
-- [ ] 5.4 前端 NSFC 面板展示决策来源（copilot/hermes/feishu）
-- [ ] 5.5 测试：CoPilot approve 一个决策 → hermes 感知 → hermes 修改 → CoPilot 可见
+- [x] 5.1 CoPilot Web API：`GET/POST /api/research/projects/{pid}/sync-decisions`（`web_routes_research.py`）
+- [x] 5.2 CoPilot 决策操作写入 `.copilot-sync.json`（`state_sync.update_decision_status()`，decided_by=copilot）
+- [x] 5.3 hermes 消费脚本 `consume_copilot_decisions.py`：扫描 pending 决策，写回 `consumed_by_hermes_at`
+- [x] 5.4 `_self_check()` 验证扫描/消费/dry-run/幂等性（5/5 通过）
+- [x] 5.5 端到端测试：CoPilot 创建决策 → hermes 消费 → 状态回传（`test_stage5_flow.py` 全通过）
 
 **验收标准**：
-- `.copilot-sync.json` 在 hermes NSFC 项目目录下创建
-- CoPilot 决策操作实时同步到 hermes
-- hermes 决策变更 CoPilot 可见
-- `decided_by` 字段正确标记来源
+- ✅ `.copilot-sync.json` 在 CoPilot 项目目录下自动创建（首次写入决策时）
+- ✅ CoPilot 决策操作通过 Web API 实时写入 `.copilot-sync.json`
+- ✅ hermes 消费脚本扫描 pending 决策，写回 `consumed_by_hermes_at` + `last_hermes_update`
+- ✅ `decided_by` 字段正确标记来源（copilot/hermes）
+- ✅ 幂等性：已消费决策不再重复处理
+- ✅ CoPilot 测试套件全量通过（240/240）
 
-**风险**：中。双向同步需处理冲突（CoPilot 优先），需在 hermes BRAIN cron 中增加读取逻辑。
+**实现说明**：
+- 复用 `state_sync.py` 已有的 `.copilot-sync.json` 机制（`update_decision_status`/`load_project_sync`）
+- hermes 侧 `consume_copilot_decisions.py` 采用"只标记消费时间戳，不改变 status"策略，
+  避免与 CoPilot 的 status 流转冲突；具体执行由 hermes BRAIN 根据 `action/target` 字段决定
+- 原子写入：`tempfile.mkstemp` + `f.flush()` + `os.fsync(f.fileno())` + `os.replace`
+
+**风险**：低。单向消费（hermes 只读 CoPilot 的 `.copilot-sync.json`，写回时间戳字段）。
 
 ---
 
@@ -212,7 +220,7 @@
 | 阶段 2 hermes cron 消费状态 | ✅ 已完成 | 5/5 | hermes scripts |
 | 阶段 3 kanban 任务桥接 | ✅ 已完成 | 7/7 | kanban_reader, task.js |
 | 阶段 4 记忆单向同步 | ✅ 已完成 | 4/4 | memory_bridge |
-| 阶段 5 项目决策同步 | ⬜ 待开始 | 0/5 | state_sync, hermes BRAIN |
+| 阶段 5 项目决策同步 | ✅ 已完成 | 5/5 | state_sync, consume_copilot_decisions |
 
 ---
 
@@ -234,7 +242,7 @@
 | 阶段 2 | hermes `select_candidates.py` 是否读取 `item-status.json` | 若无，从 2.1 开始 |
 | 阶段 3 | `scripts/kanban_reader.py` 是否存在 | 若无，从 3.1 开始 |
 | 阶段 4 | `scripts/memory_bridge.py` 是否存在 | 若无，从 4.1 开始 |
-| 阶段 5 | hermes NSFC 目录下是否有 `.copilot-sync.json` | 若无，从 5.1 开始 |
+| 阶段 5 | `consume_copilot_decisions.py` 是否存在于 hermes scripts | 若无，从 5.1 开始 |
 
 ### 回滚策略
 
@@ -254,4 +262,48 @@
 
 ---
 
+## 六、完成总结
+
+**v5.0 三层统一架构已于 2026-07-19 全部完成。**
+
+### 交付清单
+
+| 阶段 | 交付物 | 关键文件 |
+|------|--------|---------|
+| P0 | fcntl 跨进程锁 + briefing_sync 路径修复 | `common.py`, `state_sync.py`, `briefing_sync.py` |
+| 阶段 1 | hermes wiki 索引（69 文件）+ 前端源标记 | `kb_index.py`, `paths.py`, `web_routes_kb.py`, `kb.js` |
+| 阶段 2 | hermes cron 统一消费 item-status.json | `item_status_helper.py`, `select_candidates.py`, `mark_deep_analyzed.py`, `archive_discussion.py` |
+| 阶段 3 | kanban 任务桥接（9→4 状态映射） | `kanban_reader.py`, `web_routes_tasks.py`, `task.js` |
+| 阶段 4 | hermes 记忆单向同步（快照+关键词） | `memory_bridge.py`, `sync_engine.py` |
+| 阶段 5 | .copilot-sync.json 项目决策同步 | `web_routes_research.py`, `consume_copilot_decisions.py` |
+
+### 测试覆盖
+
+- CoPilot 核心模块：116/116 通过
+- CoPilot 全量（含 Web API）：240/240 通过
+- hermes `item_status_helper.py` 自检：5/5 通过
+- hermes `consume_copilot_decisions.py` 自检：5/5 通过
+- Stage 5 端到端链路测试：全通过
+
+### 架构现状
+
+```
+飞书（移动端）────────┐
+                     ↓
+hermes（后端/总控）──→ item-status.json ←──→ CoPilot（仪表盘/Web）
+  ├─ kanban.db ───────────────────────────→ kanban_reader.py
+  ├─ MEMORY.md/USER.md ─────────────────→ memory_bridge.py
+  ├─ AI_wiki/02-wiki/ ──────────────────→ kb_index.py
+  ├─ knowledge_base/scripts/ ───────────→ item_status_helper.py
+  │                                        consume_copilot_decisions.py
+  └─ cron 定时任务 ────→ item-status.json（fcntl 锁保护）
+```
+
+**同步方向**：单向为主（hermes → CoPilot），决策同步为 CoPilot → hermes（单向消费）。
+**并发保护**：`/tmp/linsai-copilot-item-status.lock` 跨进程 fcntl 锁。
+**原子写入**：`tempfile.mkstemp` + `os.fsync` + `os.replace`。
+
+---
+
 *最后更新：2026-07-19*
+*v5.0 三层统一架构完成*
