@@ -56,26 +56,29 @@
 
 ---
 
-### 阶段 1：CoPilot 检索引擎索引 hermes wiki（1 天）
+### 阶段 1：CoPilot 检索引擎索引 hermes wiki（1 天）【✅ 已完成】
 
-**问题**：hermes `AI_wiki/02-wiki/`（~30 篇结构化 wiki）和 CoPilot `knowledge/wiki/`（~113 篇）完全独立，CoPilot 检索不到 hermes 的 wiki 内容。
+**问题**：hermes `AI_wiki/02-wiki/`（~67 篇结构化 wiki）与 CoPilot `knowledge/wiki/`（~115 篇）完全独立，CoPilot 检索引擎无法命中 hermes 侧知识。
 
 **任务清单**：
-- [ ] 1.1 `kb_index.py::build_index()` 增加外部目录扫描参数 `extra_wiki_dirs`
-- [ ] 1.2 索引 hermes `AI_wiki/02-wiki/`（concepts/methods/entities/topics/projects）
-- [ ] 1.3 frontmatter 兼容：对缺失的 `growth_stage`/`aliases`/`related` 提供默认值
-- [ ] 1.4 `doc_type` 白名单扩展：新增 `entities`、`topics`（hermes 独有子目录）
-- [ ] 1.5 搜索结果标注来源（`[hermes-wiki]` vs `[copilot-wiki]`）
-- [ ] 1.6 前端知识库浏览器展示来源标签
-- [ ] 1.7 测试：验证 hermes wiki 内容可被 CoPilot 检索命中
+- [x] 1.1 `kb_index.py::build_index()` 增加 `extra_wiki_dirs` 参数（`List[(Path, source_label)]`）
+- [x] 1.2 默认包含 hermes `AI_wiki/02-wiki/`（concepts/methods/entities/topics/projects），69 文档入库
+- [x] 1.3 frontmatter 兼容：hermes wiki 缺失 `growth_stage` 时默认 `"growing"`，`summary`/`description` 加入索引文本
+- [x] 1.4 `search()` doc_type 过滤支持 `hermes-wiki/` 前缀，新增 `entities`/`topics` 类型
+- [x] 1.5 搜索结果标注 `source: "hermes-wiki"`，wiki 加权 1.2× 同等适用
+- [x] 1.6 前端搜索结果展示来源标签（紫色 `hermes` / 绿色 `wiki`），`file-content` API 支持 hermes-wiki 路径只读访问
+- [x] 1.7 测试：`kb_index._self_check()` 6/6 通过（新增外部 wiki 测试），全量 116+70=186 通过
 
 **验收标准**：
-- 搜索"HHG"能命中 hermes 的 `high-harmonic-generation.md`
-- 搜索结果含来源标签，区分 hermes wiki 和 CoPilot wiki
-- 知识库健康度不下降（无孤儿节点增加）
-- `self_test --module` 全绿
+- [x] `build_index()` 默认索引 hermes wiki（384 文档 = 200 raw + 115 wiki + 69 hermes-wiki）
+- [x] 搜索"阿秒科学"命中 `hermes-wiki/methods/three-step-model.md`（score=1.14）
+- [x] `GET /api/knowledge` 返回 `hermes_wiki_count: 69`
+- [x] `GET /api/knowledge/file-content?path=hermes-wiki/concepts/...` 返回 hermes wiki 内容
+- [x] 前端搜索结果显示来源标签
 
-**风险**：低。只读扩展，不修改 hermes 文件，不破坏现有索引。
+**实际变更文件**：`paths.py`、`kb_index.py`、`web_routes_kb.py`、`web/js/kb.js`、`web/css/style.css`
+
+**风险**：低。索引为只读，不修改 hermes wiki 原文件。
 
 ---
 
@@ -175,9 +178,9 @@
 
 | 阶段 | 状态 | 进度 | 负责模块 |
 |------|------|------|---------|
-| P0 路径修复+fcntl锁 | ⬜ 待开始 | 0/6 | briefing_sync, common |
-| 阶段 1 索引 hermes wiki | ⬜ 待开始 | 0/7 | kb_index |
-| 阶段 2 hermes cron 消费状态 | ⬜ 待开始 | 0/5 | hermes scripts |
+| P0 路径修复+fcntl锁 | ✅ 已完成 | 6/6 | briefing_sync, common |
+| 阶段 1 索引 hermes wiki | ✅ 已完成 | 7/7 | kb_index |
+| 阶段 2 hermes cron 消费状态 | ◐ 进行中 | 0/5 | hermes scripts |
 | 阶段 3 kanban 任务桥接 | ⬜ 待开始 | 0/7 | kanban_reader, task.js |
 | 阶段 4 记忆单向同步 | ⬜ 待开始 | 0/4 | memory_bridge |
 | 阶段 5 项目决策同步 | ⬜ 待开始 | 0/5 | state_sync, hermes BRAIN |

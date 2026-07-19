@@ -36,7 +36,11 @@ ALIASES_PATH = KNOWLEDGE_DIR / "aliases.json"
 GROWTH_LOG_PATH = KNOWLEDGE_DIR / "growth-log.json"
 CATEGORIES_PATH = KNOWLEDGE_DIR / "categories.json"
 
-# Hermes 工作区
+# Hermes 工作区（文件系统路径）
+HERMES_WORKSPACE = Path.home() / "Desktop" / "hermes_workspace"
+HERMES_WIKI_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "02-wiki"
+
+# Hermes 配置目录（~/.kimi，旧版路径，部分模块仍使用）
 HERMES_HOME = Path.home() / ".kimi"
 LINSAI_PROFILE = HERMES_HOME / "profiles" / "linsai"
 BRIEFINGS_DIR = LINSAI_PROFILE / "briefings" if LINSAI_PROFILE.exists() else HERMES_HOME / "briefings"

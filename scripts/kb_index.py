@@ -32,7 +32,7 @@ from typing import Any, Dict, List, Optional
 
 from common import now_utc as _now_utc
 import common as _cms
-from paths import INDEX_PATH, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR
+from paths import INDEX_PATH, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR, HERMES_WIKI_DIR
 from kb_text import parse_frontmatter, _chunk_document, _tokenize, _compute_idf
 from kb_graph import get_graph_summary, get_related_concepts
 
@@ -141,16 +141,26 @@ def ingest_raw(rel_path: str, auto_distill: bool = False) -> Dict[str, Any]:
 # 索引系统（增强版：同时索引 raw + wiki）
 # ─────────────────────────────────────────────
 
-def build_index(force: bool = False) -> Dict[str, Any]:
+def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = None) -> Dict[str, Any]:
     """扫描 knowledge/raw/ 和 knowledge/wiki/ 目录，构建统一倒排索引。
+
+    v5.0: 支持索引外部 wiki 目录（如 hermes AI_wiki/02-wiki/），
+          使 CoPilot 检索引擎能命中 hermes 侧的结构化知识。
 
     Args:
         force: 为 True 时强制全量重建
+        extra_wiki_dirs: 外部 wiki 目录列表，每项为 (Path, source_label) 元组。
+            默认 None 时自动包含 hermes wiki（标签 "hermes-wiki"）。
+            传空列表 [] 则不索引任何外部目录（用于测试隔离）。
 
     Returns:
         索引数据字典
     """
     _ensure_dirs()
+
+    # v5.0: 默认包含 hermes wiki
+    if extra_wiki_dirs is None:
+        extra_wiki_dirs = [(HERMES_WIKI_DIR, "hermes-wiki")] if HERMES_WIKI_DIR.exists() else []
 
     # 加载旧索引
     old_index: Dict[str, Any] = {}
@@ -171,12 +181,44 @@ def build_index(force: bool = False) -> Dict[str, Any]:
                 if _should_index(fpath):
                     all_files.append(fpath)
 
+    # v5.0: 收集外部 wiki 文件
+    external_map: Dict[Path, str] = {}  # fpath → source_label
+    for wiki_dir, source_label in extra_wiki_dirs:
+        if wiki_dir.exists():
+            for fpath in wiki_dir.rglob("*"):
+                if _should_index(fpath):
+                    all_files.append(fpath)
+                    external_map[fpath] = source_label
+
     docs: Dict[str, Dict[str, Any]] = {}
     all_chunks: List[Dict[str, Any]] = []
-    term_doc_freq: Dict[str, int] = {}
 
     for file_path in sorted(all_files):
-        rel_key = str(file_path.relative_to(KNOWLEDGE_DIR))
+        # v5.0: 计算 rel_key 和 source（支持外部 wiki）
+        source_label = external_map.get(file_path, "")
+        if source_label:
+            # 外部 wiki 文件：用 source_label/ 作为前缀
+            wiki_dir = None
+            for wd, sl in extra_wiki_dirs:
+                if sl == source_label:
+                    wiki_dir = wd
+                    break
+            if wiki_dir:
+                try:
+                    rel = file_path.relative_to(wiki_dir)
+                    rel_key = f"{source_label}/{rel}"
+                    source = source_label
+                except ValueError:
+                    rel_key = str(file_path)
+                    source = source_label
+            else:
+                rel_key = str(file_path)
+                source = source_label
+        else:
+            # CoPilot 内部文件
+            rel_key = str(file_path.relative_to(KNOWLEDGE_DIR))
+            source = "wiki" if "wiki/" in rel_key else "raw"
+
         mtime = file_path.stat().st_mtime
         old_doc = old_docs.get(rel_key)
 
@@ -199,30 +241,30 @@ def build_index(force: bool = False) -> Dict[str, Any]:
         except Exception:
             continue
 
-        # 判断来源（raw 还是 wiki）
-        source = "wiki" if "wiki/" in rel_key else "raw"
-
-        # 解析 frontmatter 获取额外元数据（wiki 必解析；raw 也尝试解析 project/tags）
+        # 解析 frontmatter 获取额外元数据（wiki 和 hermes-wiki 共用）
         title = file_path.stem
         tags: List[str] = []
         growth_stage = ""
         project: Any = ""
-        if source == "wiki":
+        if source in ("wiki", "hermes-wiki"):
             try:
                 fm, body = parse_frontmatter(text)
                 title = fm.get("title", title)
                 tags = fm.get("tags", [])
-                growth_stage = fm.get("growth_stage", "")
+                # hermes wiki 缺失 growth_stage，默认 "growing"（结构化但未完全整合）
+                growth_stage = fm.get("growth_stage", "growing" if source == "hermes-wiki" else "")
                 project = fm.get("project", "")
-                # 索引时包含 frontmatter 中的标签
-                text = body + " " + " ".join(tags)
+                # 将 summary/description 加入索引文本（hermes wiki 特有字段）
+                summary = fm.get("summary", "")
+                description = fm.get("description", "")
+                text = body + " " + " ".join(tags) + " " + summary + " " + description
                 if growth_stage:
                     text += " " + growth_stage
             except Exception:
                 pass
 
         # 推断 project（v2.7.0）：若 frontmatter 未声明，从路径 wiki/projects/<项目名>/ 推断
-        if not project and source == "wiki":
+        if not project and source in ("wiki", "hermes-wiki"):
             parts = Path(rel_key).parts
             if len(parts) >= 3 and parts[1] == "projects":
                 project = parts[2]  # wiki/projects/<项目名>/...
@@ -267,6 +309,7 @@ def build_index(force: bool = False) -> Dict[str, Any]:
             docs[rel_key]["growth_stage"] = growth_stage
 
     # 计算 IDF
+    term_doc_freq: Dict[str, int] = {}
     for chunk in all_chunks:
         for term in chunk["keywords"]:
             term_doc_freq[term] = term_doc_freq.get(term, 0) + 1
@@ -311,9 +354,9 @@ def search(query: str, top_k: int = 3, source: str = "all", project: str = "",
     Args:
         query: 用户输入的查询文本
         top_k: 返回最相关的 K 个段落（每页数量）
-        source: "all" | "raw" | "wiki" — 只返回指定来源的结果
+        source: "all" | "raw" | "wiki" | "hermes-wiki" — 只返回指定来源的结果
         project: 只返回属于指定项目子库的结果（v2.7.0，空字符串=不过滤）
-        doc_type: 按文档类型过滤（concepts/methods/people/papers/projects），空串=不过滤
+        doc_type: 按文档类型过滤（concepts/methods/people/papers/projects/entities/topics），空串=不过滤
         tag: 按 frontmatter tags 过滤，空串=不过滤
         stage: 按 growth_stage 过滤（seedling/growing/mature），空串=不过滤
         offset: 分页偏移量，默认0
@@ -381,10 +424,13 @@ def search(query: str, top_k: int = 3, source: str = "all", project: str = "",
             elif doc_project != project:
                 continue
 
-        # 文档类型过滤（按 wiki 子目录推断：wiki/{doc_type}/...）
+        # 文档类型过滤（按 wiki 子目录推断：wiki/{doc_type}/... 或 hermes-wiki/{doc_type}/...）
         if doc_type:
             doc_path_parts = Path(doc_info.get("path", doc_name)).parts
-            doc_t = doc_path_parts[1] if len(doc_path_parts) >= 2 and doc_path_parts[0] == "wiki" else ""
+            if len(doc_path_parts) >= 2 and doc_path_parts[0] in ("wiki", "hermes-wiki"):
+                doc_t = doc_path_parts[1]
+            else:
+                doc_t = ""
             if doc_t != doc_type:
                 continue
 
@@ -424,8 +470,8 @@ def search(query: str, top_k: int = 3, source: str = "all", project: str = "",
             idf_val = idf.get(term, 1)
             score += tf * idf_val
 
-        # wiki 结果加权（结构化知识优先）
-        if doc_source == "wiki":
+        # wiki 结果加权（结构化知识优先，含 hermes-wiki）
+        if doc_source in ("wiki", "hermes-wiki"):
             score *= 1.2
             # mature 阶段再加权
             if doc_info.get("growth_stage") == "mature":
@@ -497,12 +543,14 @@ def get_index_status() -> Dict[str, Any]:
         docs = data.get("documents", {})
         raw_count = sum(1 for d in docs.values() if d.get("source") == "raw")
         wiki_count = sum(1 for d in docs.values() if d.get("source") == "wiki")
+        hermes_wiki_count = sum(1 for d in docs.values() if d.get("source") == "hermes-wiki")
         total_chunks = sum(d.get("chunks", 0) for d in docs.values())
         graph = data.get("graph_summary", {})
         return {
             "indexed": True,
             "raw_count": raw_count,
             "wiki_count": wiki_count,
+            "hermes_wiki_count": hermes_wiki_count,
             "chunks": total_chunks,
             "built_at": data.get("built_at", ""),
             "graph": graph,
@@ -625,15 +673,16 @@ def _self_check() -> bool:
     (tmp_kb / "wiki" / "concepts").mkdir(parents=True, exist_ok=True)
 
     # 保存原始路径常量，测试后恢复
-    global INDEX_PATH, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR, _ensure_dirs, log_growth, _load_aliases, _log
+    global INDEX_PATH, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR, HERMES_WIKI_DIR, _ensure_dirs, log_growth, _load_aliases, _log
     _orig = {
         "INDEX_PATH": INDEX_PATH, "KNOWLEDGE_DIR": KNOWLEDGE_DIR,
-        "RAW_DIR": RAW_DIR, "WIKI_DIR": WIKI_DIR,
+        "RAW_DIR": RAW_DIR, "WIKI_DIR": WIKI_DIR, "HERMES_WIKI_DIR": HERMES_WIKI_DIR,
     }
     INDEX_PATH = tmp_kb / "index.json"
     KNOWLEDGE_DIR = tmp_kb
     RAW_DIR = tmp_kb / "raw"
     WIKI_DIR = tmp_kb / "wiki"
+    HERMES_WIKI_DIR = tmp_kb / "nonexistent-hermes-wiki"  # v5.0: 隔离，不索引真实 hermes wiki
 
     # patch kb_graph 路径（build_index 调用 get_graph_summary）
     import kb_graph as _kg
@@ -668,7 +717,7 @@ def _self_check() -> bool:
 
         # [1/5] 索引构建
         total += 1
-        idx = build_index(force=True)
+        idx = build_index(force=True, extra_wiki_dirs=[])  # v5.0: 隔离外部 wiki
         docs = idx.get("documents", {})
         if len(docs) >= 2 and "inverted" in idx:
             passed += 1
@@ -713,12 +762,36 @@ def _self_check() -> bool:
             print(f"  [5/{total}] ✓ raw 列表: {len(raw_files)} 文件")
         else:
             print(f"  [5/{total}] ✗ raw 列表: {raw_files}")
+
+        # [6/6] v5.0: 外部 wiki 目录索引
+        total += 1
+        ext_wiki = Path(tmp_dir) / "external-wiki"
+        (ext_wiki / "concepts").mkdir(parents=True, exist_ok=True)
+        (ext_wiki / "concepts" / "阿秒科学.md").write_text(
+            '---\ntitle: "阿秒科学"\ntype: "concept"\ntags: ["attosecond"]\n'
+            'summary: "阿秒科学是研究阿秒时间尺度电子动力学的学科"\n---\n'
+            '阿秒科学研究阿秒（10^-18秒）时间尺度的电子动力学', encoding="utf-8")
+        idx2 = build_index(force=True, extra_wiki_dirs=[(ext_wiki, "hermes-wiki")])
+        docs2 = idx2.get("documents", {})
+        ext_docs = {k: v for k, v in docs2.items() if v.get("source") == "hermes-wiki"}
+        if len(ext_docs) >= 1:
+            # 验证搜索能命中外部 wiki
+            res2 = search("阿秒科学", top_k=3)
+            hit_external = any(r.get("source") == "hermes-wiki" for r in res2.get("results", []))
+            if hit_external:
+                passed += 1
+                print(f"  [6/{total}] ✓ 外部 wiki 索引: {len(ext_docs)} 文档, 搜索命中")
+            else:
+                print(f"  [6/{total}] ✗ 外部 wiki 索引成功但搜索未命中")
+        else:
+            print(f"  [6/{total}] ✗ 外部 wiki 未被索引: docs2 keys={list(docs2.keys())[:5]}")
     finally:
         # 恢复路径常量
         INDEX_PATH = _orig["INDEX_PATH"]
         KNOWLEDGE_DIR = _orig["KNOWLEDGE_DIR"]
         RAW_DIR = _orig["RAW_DIR"]
         WIKI_DIR = _orig["WIKI_DIR"]
+        HERMES_WIKI_DIR = _orig["HERMES_WIKI_DIR"]
         _kg.GRAPH_PATH = _orig_kg_graph
         # 恢复注入依赖
         _ensure_dirs = _orig_deps["_ensure_dirs"]

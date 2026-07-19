@@ -918,10 +918,17 @@ function renderKbSearchResults(data) {
   let html = `<div class="fs-078 text-secondary pad-4-8">🔍 共 ${total} 条结果${filterDesc}</div>`;
   results.forEach(r => {
     const docPath = r.doc || r.path || '';
-    // P1-8: 使用 data 属性替代 onclick 字符串拼接
-    const attr = r.source === 'wiki' ? `data-wiki-path="${escapeHtml(docPath)}"` : `data-raw-path="${escapeHtml(docPath)}"`;
-    const stageIcon = STAGE_ICONS[r.growth_stage] || (r.source === 'wiki' ? '📝' : '📄');
-    html += `<div class="kb-tree-item" ${attr} tabindex="0" role="button" aria-label="${escapeHtml(r.title || r.doc)}" title="${escapeHtml((r.text||'').slice(0,60))}">${stageIcon} ${escapeHtml(r.title || r.doc)}</div>`;
+    // v5.0: hermes-wiki 使用 data-raw-path（通过 file-content API 只读访问）
+    const isWiki = r.source === 'wiki' || r.source === 'hermes-wiki';
+    const attr = r.source === 'wiki'
+      ? `data-wiki-path="${escapeHtml(docPath)}"`
+      : `data-raw-path="${escapeHtml(docPath)}"`;
+    const stageIcon = STAGE_ICONS[r.growth_stage] || (isWiki ? '📝' : '📄');
+    // v5.0: 来源标签（hermes-wiki / wiki / raw）
+    const sourceBadge = r.source === 'hermes-wiki'
+      ? '<span class="kb-source-badge hermes">hermes</span>'
+      : (r.source === 'wiki' ? '<span class="kb-source-badge copilot">wiki</span>' : '');
+    html += `<div class="kb-tree-item" ${attr} tabindex="0" role="button" aria-label="${escapeHtml(r.title || r.doc)}" title="${escapeHtml((r.text||'').slice(0,60))}">${stageIcon} ${sourceBadge} ${escapeHtml(r.title || r.doc)}</div>`;
   });
 
   // 分页控件

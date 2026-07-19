@@ -2,6 +2,14 @@
 
 ## v5.0.0 - 2026-07-19 三端统一架构 P0：路径修复 + 跨进程锁
 
+### 阶段 1：CoPilot 检索引擎索引 hermes wiki
+- **跨库检索**：`kb_index.build_index()` 新增 `extra_wiki_dirs` 参数，默认索引 hermes `AI_wiki/02-wiki/`（69 篇结构化 wiki）
+- **frontmatter 兼容**：hermes wiki 缺失 `growth_stage` 时默认 `"growing"`，`summary`/`description` 纳入索引文本
+- **搜索加权**：`source="hermes-wiki"` 与 `"wiki"` 同等享受 1.2× 加权，`doc_type` 过滤支持 `hermes-wiki/` 前缀
+- **前端来源标签**：搜索结果展示紫色 `hermes` / 绿色 `wiki` 徽章，`file-content` API 支持 hermes-wiki 路径只读访问
+- **路径遍历防护**：hermes-wiki 文件读取含 `resolve().relative_to()` 安全检查
+- **测试**：`kb_index._self_check()` 5→6 检查点（新增外部 wiki 索引验证），全量 186/186 通过
+
 ### P0：briefing_sync 路径错配修复 + fcntl 跨进程锁
 - **修复 v4.1 重大 bug**：`briefing_sync.py` 的 `HERMES_STATUS_PATH` 指向从未存在的 `status.json`，导致 v4.1 双向同步完全失效
 - **委托 state_sync**：briefing_sync 不再维护独立路径，直接委托 `state_sync.update_item_status()` / `_load_item_status()` 读写共享的 `item-status.json`

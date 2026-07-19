@@ -244,6 +244,24 @@ class KbRoutesMixin:
         if not fpath:
             self._send_json({"error": "缺少 path"}, 400)
             return
+
+        # v5.0: 支持 hermes-wiki 路径（读取 hermes 工作区文件，只读）
+        if fpath.startswith("hermes-wiki/"):
+            from paths import HERMES_WIKI_DIR
+            rel = fpath[len("hermes-wiki/"):]
+            full = HERMES_WIKI_DIR / rel
+            try:
+                full.resolve().relative_to(HERMES_WIKI_DIR.resolve())
+            except ValueError:
+                self._send_json({"error": "路径越界"}, 403)
+                return
+            if not full.exists():
+                self._send_json({"error": "文件不存在"}, 404)
+                return
+            content = full.read_text(encoding="utf-8")[:8000]
+            self._send_json({"path": fpath, "content": content, "size": len(content), "source": "hermes-wiki"})
+            return
+
         full = web_base._PROJECT_ROOT / "knowledge" / fpath
         # 安全检查：防路径穿越
         try:
