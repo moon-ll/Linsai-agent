@@ -1,5 +1,21 @@
 # 变更记录
 
+## v5.1.0 - 2026-07-19 三端统一架构 阶段2：hermes cron 状态闭环
+
+### 阶段 2：hermes cron 消费 item-status.json
+- **新建 hermes 端共享模块**：`item_status_helper.py`（hermes_workspace/knowledge_base/scripts/），与 CoPilot `state_sync.py` 共用 `/tmp/linsai-copilot-item-status.lock` 锁文件，确保跨进程安全
+- **修复 v4.2 并发安全隐患**：`select_candidates.py` 的 item-status.json 读写从无锁 json 模块改为通过 helper 的 fcntl 锁保护
+- **深度分析状态同步**（v5.0 新增）：`mark_deep_analyzed.py` 分析完成后调用 `update_item_status(status="interested")`，CoPilot 可感知 hermes 已深度分析的论文
+- **归档状态同步**（v5.0 新增）：`archive_discussion.py` 归档成功后调用 `update_item_status(status="archived", discussion_path=...)`，CoPilot 看板可同步归档状态
+- **只升不降规则**：hermes 端与 CoPilot 端使用完全一致的 STATUS_ORDER + 只升不降逻辑，避免状态回退
+- **测试**：helper 自检 5/5 + 三个脚本功能验证 + CoPilot 核心测试 116/116 + Web API 70/70（无回归）
+
+### 变更文件（hermes 端，原文件备份在 .v5-backup-20260719/）
+- `knowledge_base/scripts/item_status_helper.py`（新建）
+- `knowledge_base/scripts/select_candidates.py`（改用 helper，加 fcntl 锁）
+- `knowledge_base/scripts/mark_deep_analyzed.py`（新增 item-status → interested 同步）
+- `knowledge_base/scripts/archive_discussion.py`（新增 item-status → archived 同步）
+
 ## v5.0.0 - 2026-07-19 三端统一架构 P0：路径修复 + 跨进程锁
 
 ### 阶段 1：CoPilot 检索引擎索引 hermes wiki

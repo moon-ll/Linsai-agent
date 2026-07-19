@@ -82,23 +82,32 @@
 
 ---
 
-### 阶段 2：hermes cron 消费 item-status.json（1 天）
+### 阶段 2：hermes cron 消费 item-status.json（1 天）【✅ 已完成】
 
 **问题**：hermes cron 检索入池时重复推送已处理论文；推送后不更新状态；CoPilot 写入的 `item-status.json` hermes 不读。
 
 **任务清单**：
-- [ ] 2.1 改造 `select_candidates.py`：读取 `item-status.json`，跳过 `status ≥ viewed` 的论文
-- [ ] 2.2 改造推送 cron：推送后调用 `update_item_status(updated_by="hermes-cron", status="pushed")`
-- [ ] 2.3 改造深度分析 cron：分析后调用 `update_item_status(updated_by="hermes-cron", status="interested")`
-- [ ] 2.4 改造归档 cron：归档后调用 `update_item_status(updated_by="hermes-cron", status="archived")`
-- [ ] 2.5 验证：模拟 cron 执行，确认状态文件正确更新
+- [x] 2.1 改造 `select_candidates.py`：读取 `item-status.json`，跳过 `status ≥ viewed` 的论文（v4.2 已实现，v5.0 改用 helper 统一锁机制）
+- [x] 2.2 改造推送 cron：推送后调用 `update_item_status(updated_by="hermes-cron", status="pushed")`（v4.2 已实现，v5.0 改用 helper 统一锁机制）
+- [x] 2.3 改造深度分析 cron：分析后调用 `update_item_status(updated_by="hermes-cron", status="interested")`（v5.0 新增）
+- [x] 2.4 改造归档 cron：归档后调用 `update_item_status(updated_by="hermes-cron", status="archived")`（v5.0 新增）
+- [x] 2.5 验证：三个脚本均通过功能测试，item-status.json 正确更新
 
 **验收标准**：
-- 已归档论文不再被推送
-- 推送/分析/归档操作后 `item-status.json` 的 `updated_by` 字段正确标记
-- `state_sync.py` 的 `get_processed_ids()` 返回的 ID 被 cron 正确跳过
+- [x] 已归档论文不再被推送（`get_processed_ids()` 返回 11 篇，select_candidates 正确跳过 1 篇）
+- [x] 推送/分析/归档操作后 `item-status.json` 的 `updated_by` 字段正确标记为 `hermes-cron`
+- [x] `state_sync.py` 的 `get_processed_ids()` 返回的 ID 被 cron 正确跳过
+- [x] 新建 `item_status_helper.py` 共享模块：与 CoPilot 共用 `/tmp/linsai-copilot-item-status.lock` 锁文件
+- [x] select_candidates.py 的 v4.2 并发安全隐患已修复（从无锁 json 读写改为 fcntl 锁保护）
+- [x] CoPilot 侧测试无回归：核心 116/116 + Web API 70/70
 
-**风险**：中。改 hermes 端脚本，需在测试环境验证后灰度切换。需读取 `~/.hermes/profiles/linsai/cron/jobs.json` 确认 cron 调用的脚本路径。
+**实际变更文件**（hermes 端）：
+- `knowledge_base/scripts/item_status_helper.py`（新建，hermes 端统一状态助手）
+- `knowledge_base/scripts/select_candidates.py`（改用 helper，加 fcntl 锁）
+- `knowledge_base/scripts/mark_deep_analyzed.py`（新增 item-status 同步 → interested）
+- `knowledge_base/scripts/archive_discussion.py`（新增 item-status 同步 → archived）
+
+**风险**：低。hermes 端原文件已备份到 `.v5-backup-20260719/`。
 
 ---
 
@@ -180,7 +189,7 @@
 |------|------|------|---------|
 | P0 路径修复+fcntl锁 | ✅ 已完成 | 6/6 | briefing_sync, common |
 | 阶段 1 索引 hermes wiki | ✅ 已完成 | 7/7 | kb_index |
-| 阶段 2 hermes cron 消费状态 | ◐ 进行中 | 0/5 | hermes scripts |
+| 阶段 2 hermes cron 消费状态 | ✅ 已完成 | 5/5 | hermes scripts |
 | 阶段 3 kanban 任务桥接 | ⬜ 待开始 | 0/7 | kanban_reader, task.js |
 | 阶段 4 记忆单向同步 | ⬜ 待开始 | 0/4 | memory_bridge |
 | 阶段 5 项目决策同步 | ⬜ 待开始 | 0/5 | state_sync, hermes BRAIN |
