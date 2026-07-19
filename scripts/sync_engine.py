@@ -291,6 +291,21 @@ def sync_all() -> Dict[str, Any]:
         except Exception as e:
             print(f"  ⚠ 认知回流失败: {e}")
 
+        # v5.3: 记忆单向同步 — hermes MEMORY.md/USER.md → CoPilot
+        print("  [5/5] 记忆单向同步（hermes → CoPilot）...")
+        try:
+            from memory_bridge import sync_memory
+            mem_result = sync_memory()
+            if mem_result.get("synced"):
+                if mem_result.get("skipped"):
+                    print(f"    记忆无变化，跳过")
+                else:
+                    print(f"    快照已更新（memory: {mem_result['memory_md_size']}B, 关键词: {mem_result['keywords_extracted']}）")
+            else:
+                print(f"    ⚠ 记忆同步失败: {mem_result.get('error', '未知')}")
+        except Exception as e:
+            print(f"  ⚠ 记忆同步失败: {e}")
+
         print(f"✓ 同步完成：新增 {total_new} 项，索引/图谱/记忆已更新")
     else:
         print("✓ 同步完成：无新增（已是最新）")

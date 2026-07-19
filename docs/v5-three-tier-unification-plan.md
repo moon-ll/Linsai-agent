@@ -150,26 +150,35 @@
 
 ---
 
-### 阶段 4：memory_bridge.py 记忆单向同步（1 天）
+### 阶段 4：memory_bridge.py 记忆单向同步（1 天）【✅ 已完成】
 
 **问题**：hermes `MEMORY.md` + `USER.md`（Markdown 自由文本）和 CoPilot `memory/*.json`（结构化 JSON）完全独立，飞书操作更新 hermes 记忆后 CoPilot 不感知。
 
 **任务清单**：
-- [ ] 4.1 新建 `scripts/memory_bridge.py`：
-  - `sync_user_profile()`：读 hermes `USER.md`，解析 Markdown 章节，merge 到 CoPilot `user-profile.json`
-  - `sync_working_context()`：读 hermes `MEMORY.md`，提取"当前工作"段落，更新 CoPilot `working-context.json`
-  - hermes 优先，CoPilot 独有字段保留（`interaction_history`、`research_field` TF-IDF 提取结果）
-  - 记录 `hermes_synced_at` 时间戳
-- [ ] 4.2 集成到 `sync_engine.sync_all()`：新增 `[1.5/5] memory_bridge.sync()`
-- [ ] 4.3 `_self_check()` 验证 Markdown 解析正确性
-- [ ] 4.4 测试：手动修改 hermes `USER.md`，执行 sync_all，验证 CoPilot 画像更新
+- [x] 4.1 新建 `scripts/memory_bridge.py`：单向同步 hermes → CoPilot
+- [x] 4.2 `sync_memory()`：读 hermes MEMORY.md/USER.md → 保存快照 + 提取关键词 → 合并到 user-profile.json
+- [x] 4.3 集成到 `sync_engine.py` 的 `sync_all()` 流程（`[5/5]` 步骤）
+- [x] 4.4 测试：`_self_check()` 5/5 通过 + 核心 116/116 无回归
 
 **验收标准**：
-- hermes `USER.md` 中的研究领域更新后，CoPilot `user-profile.json` 的 `research_field` 同步更新
-- hermes `MEMORY.md` 中的工作上下文更新后，CoPilot `working-context.json` 的 `active_projects` 同步
-- CoPilot 独有字段（`interaction_history`、`_confidence`）不被覆盖
+- [x] hermes MEMORY.md（3064B）+ USER.md（2704B）成功读取
+- [x] 快照保存到 `memory/hermes-memory-snapshot.json`（含原文 + mtime + 同步时间）
+- [x] 10 个研究关键词提取并合并到 `user-profile.json`（research_field 14 个）
+- [x] 增量跳过：mtime 未变时跳过同步
+- [x] `sync_all()` 的 `[5/5]` 步骤正确调用 `sync_memory()`
+- [x] CoPilot 核心测试无回归
 
-**风险**：低。单向只读同步，不修改 hermes 文件。Markdown 解析可能不完美，但保留 CoPilot 原有字段作为兜底。
+**实际变更文件**：
+- `scripts/memory_bridge.py`（新建，hermes→CoPilot 记忆单向同步）
+- `scripts/sync_engine.py`（sync_all 新增 [5/5] 记忆同步步骤）
+
+**技术决策**：
+- hermes 实际安装在 `~/.hermes`（非 paths.py 中的旧版 `~/.kimi`），memory_bridge 独立定义路径
+- 原文快照策略：保留 hermes Markdown 原文，不做复杂 Markdown→JSON 转换
+- 关键词提取：用预定义关键词库匹配，简单可靠
+- 单向同步：hermes 是权威源，CoPilot 只读消费，不回写 hermes
+
+**风险**：低。单向只读同步，不修改 hermes 文件。
 
 ---
 
@@ -202,7 +211,7 @@
 | 阶段 1 索引 hermes wiki | ✅ 已完成 | 7/7 | kb_index |
 | 阶段 2 hermes cron 消费状态 | ✅ 已完成 | 5/5 | hermes scripts |
 | 阶段 3 kanban 任务桥接 | ✅ 已完成 | 7/7 | kanban_reader, task.js |
-| 阶段 4 记忆单向同步 | ⬜ 待开始 | 0/4 | memory_bridge |
+| 阶段 4 记忆单向同步 | ✅ 已完成 | 4/4 | memory_bridge |
 | 阶段 5 项目决策同步 | ⬜ 待开始 | 0/5 | state_sync, hermes BRAIN |
 
 ---

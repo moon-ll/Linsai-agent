@@ -1,5 +1,22 @@
 # 变更记录
 
+## v5.3.0 - 2026-07-19 三端统一架构 阶段4：记忆单向同步
+
+### 阶段 4：memory_bridge 记忆单向同步
+- **新建 memory_bridge.py**：hermes → CoPilot 记忆单向同步
+  - 读取 hermes linsai profile 的 MEMORY.md（3064B）+ USER.md（2704B）
+  - 原文快照保存到 `memory/hermes-memory-snapshot.json`（含 mtime + 同步时间）
+  - 关键词提取（预定义研究关键词库匹配）→ 合并到 `user-profile.json` 的 research_field
+  - 增量跳过：文件 mtime 未变时跳过同步
+  - `get_hermes_memory_text()` 供 context_builder 注入 prompt
+- **集成 sync_engine.py**：sync_all() 新增 `[5/5]` 记忆同步步骤
+- **路径修正**：hermes 实际在 `~/.hermes`（非 paths.py 中的旧版 `~/.kimi`）
+- **测试**：_self_check 5/5 + 核心 116/116（无回归）
+
+### 变更文件
+- `scripts/memory_bridge.py`（新建）
+- `scripts/sync_engine.py`（sync_all 新增 [5/5] 步骤）
+
 ## v5.2.0 - 2026-07-19 三端统一架构 阶段3：任务看板桥接
 
 ### 阶段 3：kanban_reader + 任务看板桥接
