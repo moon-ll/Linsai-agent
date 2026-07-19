@@ -13,9 +13,18 @@ import json
 import os
 import re
 import tempfile
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Iterator, Optional
+
+# fcntl 为 POSIX 标准库（macOS/Linux 可用，Windows 无）
+try:
+    import fcntl as _fcntl
+    _HAS_FCNTL = True
+except ImportError:
+    _fcntl = None
+    _HAS_FCNTL = False
 
 
 def now_utc() -> str:
@@ -61,6 +70,37 @@ def save_json(path: Path | str, data: Any) -> None:
 
 # 原子写入别名，供语义化调用
 atomic_save_json = save_json
+
+
+@contextmanager
+def file_lock(lock_name: str = "global") -> Iterator[None]:
+    """跨进程文件锁（fcntl.flock，独占）。
+
+    用于 CoPilot web_server 与 hermes cron 等独立进程之间的互斥。
+    进程内并发由 threading.Lock 处理；跨进程并发由 fcntl.flock 处理。
+    非 POSIX 环境（无 fcntl）降级为无锁，仅依赖原子写入防损坏。
+
+    Args:
+        lock_name: 锁名称，不同名称对应不同锁文件，互不阻塞。
+            常用值："item-status"、"paper-pool"、"sync-state"。
+
+    用法:
+        >>> with file_lock("item-status"):
+        ...     data = load_json(path)
+        ...     data["key"] = "value"
+        ...     save_json(path, data)
+    """
+    lock_path = Path(tempfile.gettempdir()) / f"linsai-copilot-{lock_name}.lock"
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    f = open(lock_path, "w")
+    try:
+        if _HAS_FCNTL:
+            _fcntl.flock(f.fileno(), _fcntl.LOCK_EX)
+        yield
+    finally:
+        if _HAS_FCNTL:
+            _fcntl.flock(f.fileno(), _fcntl.LOCK_UN)
+        f.close()
 
 
 def safe_filename(name: str, separator: str = "_") -> str:

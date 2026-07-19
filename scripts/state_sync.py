@@ -92,6 +92,9 @@ def update_item_status(
 ) -> Dict[str, Any]:
     """更新论文统一状态，写入 hermes 的 item-status.json。
 
+    v5.0: 使用 common.file_lock 跨进程锁保护 read-modify-write 临界区，
+    防止 CoPilot web_server 与 hermes cron 并发写导致丢失更新。
+
     Args:
         arxiv_id: arXiv 论文 ID
         new_status: 新状态（pool/candidate/pushed/viewed/interested/discussing/discussed/archived/skipped）
@@ -102,42 +105,44 @@ def update_item_status(
     Returns:
         更新后的 item dict
     """
-    data = _load_item_status()
-    items = data.setdefault("items", {})
+    from common import file_lock
+    with file_lock("item-status"):
+        data = _load_item_status()
+        items = data.setdefault("items", {})
 
-    item = items.get(arxiv_id, {})
-    # 首次注册时填充元数据
-    if not item:
-        item = {
-            "arxiv_id": arxiv_id,
-            "title": title,
-            "direction": direction,
-            "score": score,
-            "first_seen": _now(),
-            "history": [],
-        }
+        item = items.get(arxiv_id, {})
+        # 首次注册时填充元数据
+        if not item:
+            item = {
+                "arxiv_id": arxiv_id,
+                "title": title,
+                "direction": direction,
+                "score": score,
+                "first_seen": _now(),
+                "history": [],
+            }
 
-    # 状态合并：如果新状态的"不可逆性"低于已有状态，保留已有（除非 updated_by 明确覆盖）
-    old_status = item.get("status", "")
-    old_order = STATUS_ORDER.get(old_status, -1)
-    new_order = STATUS_ORDER.get(new_status, -1)
-    if old_order > new_order and old_status not in ("", "pool", "candidate"):
-        # 已有状态更"高级"，不降级（除非显式要求）
-        pass
-    else:
-        item["status"] = new_status
+        # 状态合并：如果新状态的"不可逆性"低于已有状态，保留已有（除非 updated_by 明确覆盖）
+        old_status = item.get("status", "")
+        old_order = STATUS_ORDER.get(old_status, -1)
+        new_order = STATUS_ORDER.get(new_status, -1)
+        if old_order > new_order and old_status not in ("", "pool", "candidate"):
+            # 已有状态更"高级"，不降级（除非显式要求）
+            pass
+        else:
+            item["status"] = new_status
 
-    item["last_updated"] = _now()
-    item["updated_by"] = updated_by
-    item.update(extra)
+        item["last_updated"] = _now()
+        item["updated_by"] = updated_by
+        item.update(extra)
 
-    # 记录历史
-    item.setdefault("history", []).append({
-        "status": new_status, "by": updated_by, "at": _now(),
-    })
+        # 记录历史
+        item.setdefault("history", []).append({
+            "status": new_status, "by": updated_by, "at": _now(),
+        })
 
-    items[arxiv_id] = item
-    _save_item_status(data)
+        items[arxiv_id] = item
+        _save_item_status(data)
     return item
 
 
@@ -292,77 +297,81 @@ def update_task_status(
 def initialize_from_existing() -> int:
     """从现有 paper-pool + briefing_state 合并初始化 item-status.json。
 
+    v5.0: 使用 file_lock 保护批量合并，防止与并发 update_item_status 冲突。
+
     Returns:
         初始化的论文数量
     """
-    data = _load_item_status()
-    items = data.setdefault("items", {})
+    from common import file_lock
+    with file_lock("item-status"):
+        data = _load_item_status()
+        items = data.setdefault("items", {})
 
-    # 1. 从 Copilot paper-pool.json 导入
-    pool_path = PROJECT_ROOT / "memory" / "paper-pool.json"
-    if pool_path.exists():
-        try:
-            pool = json.loads(pool_path.read_text(encoding="utf-8"))
-            for aid, p in pool.items():
-                if aid not in items:
-                    items[aid] = {
-                        "arxiv_id": aid,
-                        "title": p.get("title", ""),
-                        "direction": p.get("direction", ""),
-                        "score": p.get("score", 0),
-                        "status": p.get("status", "pool"),
-                        "first_seen": p.get("added_at", _now()),
-                        "last_updated": p.get("updated_at", _now()),
-                        "updated_by": "copilot",
-                        "history": [],
-                    }
-        except Exception:
-            pass
+        # 1. 从 Copilot paper-pool.json 导入
+        pool_path = PROJECT_ROOT / "memory" / "paper-pool.json"
+        if pool_path.exists():
+            try:
+                pool = json.loads(pool_path.read_text(encoding="utf-8"))
+                for aid, p in pool.items():
+                    if aid not in items:
+                        items[aid] = {
+                            "arxiv_id": aid,
+                            "title": p.get("title", ""),
+                            "direction": p.get("direction", ""),
+                            "score": p.get("score", 0),
+                            "status": p.get("status", "pool"),
+                            "first_seen": p.get("added_at", _now()),
+                            "last_updated": p.get("updated_at", _now()),
+                            "updated_by": "copilot",
+                            "history": [],
+                        }
+            except Exception:
+                pass
 
-    # 2. 从 hermes daily_candidates.json 导入（补充 pool/candidate 状态）
-    candidates_path = BRIEFINGS_DIR / "daily_candidates.json"
-    if candidates_path.exists():
-        try:
-            cands = json.loads(candidates_path.read_text(encoding="utf-8"))
-            for p in cands.get("papers", []):
-                aid = p.get("arxiv_id", "")
-                if aid and aid not in items:
-                    items[aid] = {
-                        "arxiv_id": aid,
-                        "title": p.get("title", ""),
-                        "direction": p.get("direction", ""),
-                        "score": p.get("score_deepxiv", 0),
-                        "status": "candidate",
-                        "first_seen": _now(),
-                        "last_updated": _now(),
-                        "updated_by": "hermes-cron",
-                        "history": [],
-                    }
-        except Exception:
-            pass
+        # 2. 从 hermes daily_candidates.json 导入（补充 pool/candidate 状态）
+        candidates_path = BRIEFINGS_DIR / "daily_candidates.json"
+        if candidates_path.exists():
+            try:
+                cands = json.loads(candidates_path.read_text(encoding="utf-8"))
+                for p in cands.get("papers", []):
+                    aid = p.get("arxiv_id", "")
+                    if aid and aid not in items:
+                        items[aid] = {
+                            "arxiv_id": aid,
+                            "title": p.get("title", ""),
+                            "direction": p.get("direction", ""),
+                            "score": p.get("score_deepxiv", 0),
+                            "status": "candidate",
+                            "first_seen": _now(),
+                            "last_updated": _now(),
+                            "updated_by": "hermes-cron",
+                            "history": [],
+                        }
+            except Exception:
+                pass
 
-    # 3. 从 Copilot paper-feedback.json 补充 history
-    fb_path = PROJECT_ROOT / "memory" / "paper-feedback.json"
-    if fb_path.exists():
-        try:
-            feedbacks = json.loads(fb_path.read_text(encoding="utf-8"))
-            for fb in feedbacks:
-                aid = fb.get("arxiv_id", "")
-                action = fb.get("action", "")
-                if aid in items and action:
-                    status_map = {
-                        "interested": "interested", "skip": "skipped",
-                        "later": "viewed", "archive": "archived",
-                        "discuss_done": "archived",
-                    }
-                    s = status_map.get(action, "viewed")
-                    items[aid].setdefault("history", []).append({
-                        "status": s, "by": "copilot", "at": fb.get("timestamp", _now()),
-                    })
-        except Exception:
-            pass
+        # 3. 从 Copilot paper-feedback.json 补充 history
+        fb_path = PROJECT_ROOT / "memory" / "paper-feedback.json"
+        if fb_path.exists():
+            try:
+                feedbacks = json.loads(fb_path.read_text(encoding="utf-8"))
+                for fb in feedbacks:
+                    aid = fb.get("arxiv_id", "")
+                    action = fb.get("action", "")
+                    if aid in items and action:
+                        status_map = {
+                            "interested": "interested", "skip": "skipped",
+                            "later": "viewed", "archive": "archived",
+                            "discuss_done": "archived",
+                        }
+                        s = status_map.get(action, "viewed")
+                        items[aid].setdefault("history", []).append({
+                            "status": s, "by": "copilot", "at": fb.get("timestamp", _now()),
+                        })
+            except Exception:
+                pass
 
-    _save_item_status(data)
+        _save_item_status(data)
     return len(items)
 
 

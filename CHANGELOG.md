@@ -1,5 +1,21 @@
 # 变更记录
 
+## v5.0.0 - 2026-07-19 三端统一架构 P0：路径修复 + 跨进程锁
+
+### P0：briefing_sync 路径错配修复 + fcntl 跨进程锁
+- **修复 v4.1 重大 bug**：`briefing_sync.py` 的 `HERMES_STATUS_PATH` 指向从未存在的 `status.json`，导致 v4.1 双向同步完全失效
+- **委托 state_sync**：briefing_sync 不再维护独立路径，直接委托 `state_sync.update_item_status()` / `_load_item_status()` 读写共享的 `item-status.json`
+- **状态映射重构**：基于 item-status.json 的 9 级状态枚举（pool→archived），替代旧版的时间戳字段推断
+- **跨进程锁**：`common.py` 新增 `file_lock(lock_name)` 上下文管理器（fcntl.flock 独占锁），保护 CoPilot web_server 与 hermes cron 的并发写
+- **state_sync 加锁**：`update_item_status` / `initialize_from_existing` 的 read-modify-write 临界区使用 `file_lock("item-status")` 保护
+- **测试扩展**：BriefingSyncTests 从 20→28 检查点（新增 `_test_new_paper_register`），全量 240/240 通过
+
+### 变更文件
+- `scripts/common.py`：新增 `file_lock()` fcntl 上下文管理器
+- `scripts/state_sync.py`：`update_item_status` / `initialize_from_existing` 加锁
+- `scripts/briefing_sync.py`：v5.0 完整重构（移除 HERMES_STATUS_PATH，委托 state_sync）
+- `scripts/tests/test_core.py`：BriefingSyncTests 适配 item-status.json schema
+
 ## v4.2.2 - 2026-07-17 统一状态同步 + 文献独立讨论 + AI辅助指派 + 清理
 
 ### 统一状态同步架构（Copilot = hermes 操作台）

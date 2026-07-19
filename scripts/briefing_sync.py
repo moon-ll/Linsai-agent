@@ -1,21 +1,28 @@
 #!/usr/bin/env python3
-"""briefing_sync.py — 文献简报双向同步引擎。
+"""briefing_sync.py — 文献简报双向同步引擎（v5.0 重构）。
 
-实现 CoPilot paper-pool.json 与 hermes status.json 之间的双向状态同步：
-    - 正向同步（hermes → CoPilot）：sync_all() 执行时批量拉取 hermes 工作流状态
-    - 反向同步（CoPilot → hermes）：用户操作时实时回写 hermes status.json
+v5.0 重大变更：
+    - 修复 v4.1 的路径 bug（HERMES_STATUS_PATH 指向不存在的 status.json）
+    - 直接委托 state_sync 读写共享的 item-status.json，不再维护独立路径
+    - state_sync 内部使用 common.file_lock（fcntl.flock）跨进程锁保护
+    - 状态映射基于 item-status.json 的 9 级状态枚举，而非旧版的时间戳字段推断
+
+同步方向：
+    - 反向同步（CoPilot → item-status.json）：用户操作时实时回写统一状态
+      sync_to_hermes() 委托 state_sync.update_item_status()
+    - 正向同步（item-status.json → CoPilot）：sync_all() 批量拉取统一状态
+      sync_from_hermes() 读取 state_sync._load_item_status() 并更新 paper-pool
     - 失败重试：反向同步失败记入 reverse_sync_pending 队列，下次 sync_all 重试
 
-状态映射规则：
-    CoPilot viewed   →  hermes discussion_started = true
-    CoPilot archived →  hermes discussion_archived_at = <时间戳>
-    hermes analyzed  →  CoPilot unseen → viewed（只升不降）
-    hermes archived  →  CoPilot → archived
+状态映射规则（统一状态 → CoPilot 三态）：
+    pool/candidate/pushed    →  跳过（未处理）
+    viewed/interested/
+    discussing/skipped       →  CoPilot viewed（已看，保留可追溯）
+    discussed/archived       →  CoPilot archived（已归档）
 
 冲突策略：
     - CoPilot 优先（用户意图 > hermes 自动流程）
     - 只升不降（unseen → viewed → archived 单向流转）
-    - init 防护：检测 hermes status.json 的 date 变化
 
 用法示例：
     >>> from briefing_sync import sync_to_hermes, sync_from_hermes, flush_pending_reverse
@@ -28,10 +35,8 @@
 
 from __future__ import annotations
 
-import json
-from datetime import datetime, timezone, timedelta
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from common import now_utc, load_json, save_json
 from paths import PROJECT_ROOT, MEMORY_DIR
@@ -40,25 +45,42 @@ from paths import PROJECT_ROOT, MEMORY_DIR
 # 路径定义
 # ─────────────────────────────────────────────
 
-HERMES_WORKSPACE = Path.home() / "Desktop" / "hermes_workspace"
-HERMES_STATUS_PATH = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "briefings" / "status.json"
+# v5.0: 不再维护 HERMES_STATUS_PATH（旧 status.json 从未存在）
+# 统一状态文件由 state_sync.ITEM_STATUS_PATH 管理，briefing_sync 委托读写
 SYNC_STATE_PATH = MEMORY_DIR / "sync-state.json"
 
-# 状态等级（用于"只升不降"判断）
+# CoPilot 三状态等级（用于"只升不降"判断）
 _STATUS_RANK = {"unseen": 0, "viewed": 1, "archived": 2}
 
-# 本地时区（hermes status.json 用 +08:00 时区）
-_LOCAL_TZ = timezone(timedelta(hours=8))
+# CoPilot 操作 → 统一状态映射（反向同步用）
+_ACTION_TO_UNIFIED = {
+    "interested": "interested",
+    "skip": "skipped",
+    "later": "viewed",
+    "archive": "archived",
+    "discuss_done": "archived",
+}
+
+# CoPilot 三状态 → 统一状态映射（action 为空时回退）
+_COPILOT_TO_UNIFIED = {
+    "viewed": "viewed",
+    "archived": "archived",
+}
+
+# 统一状态 → CoPilot 三状态映射（正向同步用）
+_UNIFIED_TO_COPILOT = {
+    "viewed": "viewed",
+    "interested": "viewed",
+    "discussing": "viewed",
+    "skipped": "viewed",       # skip 保留为 viewed，可追溯
+    "discussed": "archived",   # 讨论完成 → 归档
+    "archived": "archived",    # 已归档到知识库
+}
 
 
 # ─────────────────────────────────────────────
 # 辅助函数
 # ─────────────────────────────────────────────
-
-def _now_local_iso() -> str:
-    """返回本地时区（+08:00）的 ISO 时间戳，与 hermes 格式一致。"""
-    return datetime.now(_LOCAL_TZ).strftime("%Y-%m-%dT%H:%M:%S+08:00")
-
 
 def _can_upgrade(current: str, target: str) -> bool:
     """判断状态是否可升级（只升不降）。"""
@@ -80,89 +102,61 @@ def _save_sync_state(state: Dict[str, Any]) -> None:
     save_json(SYNC_STATE_PATH, state)
 
 
-def _get_file_lock(key: str):
-    """获取文件锁（复用 web_base 的锁机制，防止并发写冲突）。"""
-    try:
-        import web_base
-        return web_base._get_file_lock(key)
-    except Exception:
-        import threading
-        return threading.Lock()
-
-
 # ─────────────────────────────────────────────
-# 反向同步：CoPilot → hermes
+# 反向同步：CoPilot → item-status.json（委托 state_sync）
 # ─────────────────────────────────────────────
 
 def sync_to_hermes(arxiv_id: str, copilot_status: str, action: str = "") -> Dict[str, Any]:
-    """反向同步：CoPilot 状态 → hermes status.json。
+    """反向同步：CoPilot 操作 → 统一状态 item-status.json。
 
-    使用增量更新（read-modify-write），不触发 init 覆盖。
-    若 hermes status.json 不存在或论文不在工作流中，记入待同步队列。
+    v5.0 重构：直接委托 state_sync.update_item_status 写入共享的 item-status.json。
+    state_sync 内部使用 file_lock 跨进程锁保护 read-modify-write 临界区。
+    写入失败（权限/磁盘）时记入待同步队列，不阻塞用户操作。
 
     Args:
         arxiv_id: 论文 arXiv ID
-        copilot_status: CoPilot 状态（viewed/archived）
+        copilot_status: CoPilot 状态（viewed/archived，action 为空时用于回退映射）
         action: 触发动作（interested/skip/archive/later/discuss_done）
 
     Returns:
-        {"success": bool, "arxiv_id": str, "reason": str}
+        {"success": bool, "arxiv_id": str, "status": str, "reason": str}
     """
-    if not HERMES_STATUS_PATH.exists():
-        _add_to_pending(arxiv_id, copilot_status, action, "hermes status.json 不存在")
-        return {"success": False, "arxiv_id": arxiv_id, "reason": "hermes status.json 不存在"}
+    # 确定统一状态：优先使用 action 映射，回退到 copilot_status
+    unified_status = _ACTION_TO_UNIFIED.get(action, "")
+    if not unified_status:
+        unified_status = _COPILOT_TO_UNIFIED.get(copilot_status, "viewed")
 
     try:
-        with _get_file_lock("hermes_status"):
-            hermes_status = load_json(HERMES_STATUS_PATH, {})
-            papers = hermes_status.get("papers", {})
+        import state_sync as ss
 
-            # 论文不在 hermes 当日工作流中
-            if arxiv_id not in papers:
-                _add_to_pending(arxiv_id, copilot_status, action, "论文不在 hermes 工作流中")
-                return {"success": False, "arxiv_id": arxiv_id, "reason": "论文不在 hermes 工作流中"}
+        # 从 CoPilot paper-pool 获取论文元数据（首次注册时填入）
+        title = ""
+        direction = ""
+        try:
+            import paper_pool as pp
+            pool = pp._load()
+            if arxiv_id in pool:
+                title = pool[arxiv_id].get("title", "")
+                direction = pool[arxiv_id].get("direction", "")
+        except Exception:
+            pass
 
-            # 按映射规则更新
-            info = papers[arxiv_id]
-            now_local = _now_local_iso()
-
-            if copilot_status == "archived":
-                info["discussion_archived_at"] = now_local
-                info["discussion_started"] = True  # 归档隐含已讨论
-            elif copilot_status == "viewed":
-                info["discussion_started"] = True  # 用户已关注
-
-            # 写回
-            hermes_status["papers"][arxiv_id] = info
-
-            # v4.2: 同时写统一状态 item-status.json（在 save_json 之前，失败不阻塞）
-            try:
-                import state_sync as ss
-                unified_map = {
-                    "interested": "interested", "skip": "skipped",
-                    "later": "viewed", "archive": "archived",
-                    "discuss_done": "archived",
-                }
-                unified_status = unified_map.get(action, copilot_status)
-                title = info.get("title", "")
-                direction = info.get("direction", "")
-                ss.update_item_status(arxiv_id, unified_status, updated_by="copilot",
-                                      title=title, direction=direction)
-            except Exception:
-                pass  # item-status.json 同步失败不阻塞主流程
-
-            save_json(HERMES_STATUS_PATH, hermes_status)
-
-        # 更新同步水位
-        state = _load_sync_state()
-        state["last_reverse_sync"] = now_utc()
-        _save_sync_state(state)
-
-        return {"success": True, "arxiv_id": arxiv_id, "status": copilot_status}
-
+        ss.update_item_status(
+            arxiv_id, unified_status,
+            updated_by="copilot",
+            title=title,
+            direction=direction,
+        )
     except Exception as e:
         _add_to_pending(arxiv_id, copilot_status, action, str(e))
         return {"success": False, "arxiv_id": arxiv_id, "reason": str(e)}
+
+    # 更新同步水位
+    state = _load_sync_state()
+    state["last_reverse_sync"] = now_utc()
+    _save_sync_state(state)
+
+    return {"success": True, "arxiv_id": arxiv_id, "status": unified_status}
 
 
 def _add_to_pending(arxiv_id: str, copilot_status: str, action: str, reason: str) -> None:
@@ -186,45 +180,44 @@ def _add_to_pending(arxiv_id: str, copilot_status: str, action: str, reason: str
 
 
 # ─────────────────────────────────────────────
-# 正向同步：hermes → CoPilot
+# 正向同步：item-status.json → CoPilot paper-pool.json
 # ─────────────────────────────────────────────
 
 def sync_from_hermes() -> Dict[str, Any]:
-    """正向同步：hermes status.json → CoPilot paper-pool.json。
+    """正向同步：统一状态 item-status.json → CoPilot paper-pool.json。
 
-    遍历 hermes status.json 的 papers，按状态映射规则
+    v5.0 重构：从 state_sync 读取 item-status.json，按统一状态枚举映射
     更新 CoPilot paper-pool.json 中对应论文的 status。
-    只升级不降级（unseen→viewed→archived 单向流转）。
+    只升级不降级（unseen → viewed → archived 单向流转）。
 
     Returns:
         {"synced": int, "skipped": int, "date": str}
     """
     import paper_pool as pp
+    import state_sync as ss
 
-    if not HERMES_STATUS_PATH.exists():
-        return {"synced": 0, "skipped": 0, "date": "", "reason": "hermes status.json 不存在"}
+    if not ss.ITEM_STATUS_PATH.exists():
+        return {"synced": 0, "skipped": 0, "date": "", "reason": "item-status.json 不存在"}
 
     try:
-        hermes_status = load_json(HERMES_STATUS_PATH, {})
+        data = ss._load_item_status()
     except Exception:
-        return {"synced": 0, "skipped": 0, "date": "", "reason": "hermes status.json 读取失败"}
+        return {"synced": 0, "skipped": 0, "date": "", "reason": "item-status.json 读取失败"}
 
-    hermes_date = hermes_status.get("date", "")
-    papers = hermes_status.get("papers", {})
-    if not papers:
-        return {"synced": 0, "skipped": 0, "date": hermes_date, "reason": "无论文记录"}
+    items = data.get("items", {})
+    updated_at = data.get("updated_at", "")
+    if not items:
+        return {"synced": 0, "skipped": 0, "date": updated_at, "reason": "无论文记录"}
 
     synced = 0
     skipped = 0
 
-    for aid, info in papers.items():
-        # 映射规则：hermes 工作流状态 → CoPilot 三态
-        if info.get("discussion_archived_at"):
-            target = pp.STATUS_ARCHIVED
-        elif info.get("analyzed_at") or info.get("discussion_started"):
-            target = pp.STATUS_VIEWED
-        else:
-            continue  # 仅 pushed，不同步
+    for aid, item in items.items():
+        unified_status = item.get("status", "")
+        # 映射规则：统一状态 → CoPilot 三态
+        target = _UNIFIED_TO_COPILOT.get(unified_status)
+        if not target:
+            continue  # pool/candidate/pushed 不同步
 
         # 查询当前 CoPilot 状态
         current = pp.get_paper_status(aid)
@@ -236,7 +229,7 @@ def sync_from_hermes() -> Dict[str, Any]:
         if _can_upgrade(current, target):
             pp.update_status(aid, target, extra={
                 "hermes_synced_at": now_utc(),
-                "hermes_date": hermes_date,
+                "unified_status": unified_status,
             })
             synced += 1
         else:
@@ -244,10 +237,10 @@ def sync_from_hermes() -> Dict[str, Any]:
 
     # 更新水位
     state = _load_sync_state()
-    state["reverse_sync_watermark"] = hermes_date
+    state["reverse_sync_watermark"] = updated_at
     _save_sync_state(state)
 
-    return {"synced": synced, "skipped": skipped, "date": hermes_date}
+    return {"synced": synced, "skipped": skipped, "date": updated_at}
 
 
 # ─────────────────────────────────────────────
@@ -257,7 +250,7 @@ def sync_from_hermes() -> Dict[str, Any]:
 def flush_pending_reverse() -> Dict[str, Any]:
     """重试待同步队列中失败的反向同步。
 
-    在 sync_all() 执行时前置调用，处理之前因 hermes 未运行等原因
+    在 sync_all() 执行时前置调用，处理之前因 item-status.json 不可写等原因
     失败的反向同步请求。
 
     Returns:
@@ -314,7 +307,7 @@ def _self_check() -> bool:
     import shutil
 
     print("=" * 50)
-    print("◐ briefing_sync 自检")
+    print("◐ briefing_sync 自检（v5.0 item-status.json schema）")
     print("=" * 50)
 
     passed = 0
@@ -323,11 +316,19 @@ def _self_check() -> bool:
     tmp_dir = tempfile.mkdtemp(prefix="briefing_sync_test_")
 
     # 保存原始路径，测试后恢复
-    global HERMES_STATUS_PATH, SYNC_STATE_PATH
-    _orig_hermes = HERMES_STATUS_PATH
+    global SYNC_STATE_PATH
     _orig_sync = SYNC_STATE_PATH
-    HERMES_STATUS_PATH = Path(tmp_dir) / "status.json"
     SYNC_STATE_PATH = Path(tmp_dir) / "sync-state.json"
+
+    # patch state_sync 路径到临时目录
+    import state_sync as ss
+    _orig_item_path = ss.ITEM_STATUS_PATH
+    ss.ITEM_STATUS_PATH = Path(tmp_dir) / "item-status.json"
+
+    # patch paper_pool 路径到临时目录
+    import paper_pool as pp
+    _orig_pool_path = pp.POOL_PATH
+    pp.POOL_PATH = Path(tmp_dir) / "paper-pool.json"
 
     try:
         # [1/5] _can_upgrade 状态升级判断
@@ -343,90 +344,89 @@ def _self_check() -> bool:
         else:
             print(f"  [1/{total}] ✗ _can_upgrade 判断错误")
 
-        # [2/5] 反向同步：CoPilot archived → hermes
+        # [2/5] 反向同步：CoPilot archived → item-status.json
         total += 1
-        hermes_data = {
-            "date": "2026-07-02",
-            "papers": {
-                "2403.15337": {
-                    "title": "测试论文",
-                    "pushed_at": "2026-07-02T08:35:00+08:00",
-                    "selected_for_analysis": False,
-                    "analyzed_at": None,
-                    "analysis_file": None,
-                    "discussion_started": False,
-                    "discussion_archived_at": None,
-                    "archived_file": None,
-                    "keywords_extracted": False,
-                    "keywords_file": None,
-                }
-            }
-        }
-        save_json(HERMES_STATUS_PATH, hermes_data)
+        # 先在 paper-pool 中添加论文（提供元数据）
+        pp._save({"2403.15337": {
+            "status": "viewed",
+            "title": "测试论文",
+            "direction": "固体HHG",
+            "added_at": now_utc(),
+        }})
         result = sync_to_hermes("2403.15337", "archived", "discuss_done")
         if result.get("success"):
-            # 验证 hermes status.json 已更新
-            updated = load_json(HERMES_STATUS_PATH, {})
-            info = updated.get("papers", {}).get("2403.15337", {})
-            if info.get("discussion_archived_at") and info.get("discussion_started"):
+            info = ss.get_item_info("2403.15337")
+            if info and info.get("status") == "archived":
                 passed += 1
-                print(f"  [2/{total}] ✓ 反向同步 archived 成功")
+                print(f"  [2/{total}] ✓ 反向同步 archived 成功（item-status.json status=archived）")
             else:
-                print(f"  [2/{total}] ✗ 反向同步后字段未更新: {info}")
+                print(f"  [2/{total}] ✗ 反向同步后状态错误: {info}")
         else:
             print(f"  [2/{total}] ✗ 反向同步失败: {result}")
 
-        # [3/5] 反向同步：论文不在 hermes 工作流 → 记入待同步队列
+        # [3/5] 反向同步：新论文（不在 item-status 中）→ 自动注册
         total += 1
-        result = sync_to_hermes("9999.99999", "viewed", "interested")
-        state = _load_sync_state()
-        pending = state.get("reverse_sync_pending", [])
-        if not result.get("success") and len(pending) >= 1:
-            passed += 1
-            print(f"  [3/{total}] ✓ 论文不在工作流 → 记入待同步队列 ({len(pending)} 条)")
+        result = sync_to_hermes("9999.88888", "viewed", "interested")
+        if result.get("success"):
+            info = ss.get_item_info("9999.88888")
+            if info and info.get("status") == "interested":
+                passed += 1
+                print(f"  [3/{total}] ✓ 新论文自动注册（status=interested）")
+            else:
+                print(f"  [3/{total}] ✗ 新论文注册状态错误: {info}")
         else:
-            print(f"  [3/{total}] ✗ 待同步队列未记录: result={result}, pending={pending}")
+            print(f"  [3/{total}] ✗ 新论文同步失败: {result}")
 
         # [4/5] flush_pending_reverse 重试
         total += 1
-        # 先在 hermes status.json 中添加该论文
-        hermes_data["papers"]["9999.99999"] = hermes_data["papers"]["2403.15337"].copy()
-        hermes_data["papers"]["9999.99999"]["title"] = "重试测试论文"
-        save_json(HERMES_STATUS_PATH, hermes_data)
-        # 重置 discussion_started 以验证重试后更新
-        hermes_data["papers"]["9999.99999"]["discussion_started"] = False
-        save_json(HERMES_STATUS_PATH, hermes_data)
-
+        # 直接添加一条 pending 记录（模拟之前写失败的场景）
+        _add_to_pending("7777.77777", "viewed", "later", "模拟写失败")
         flush_result = flush_pending_reverse()
         if flush_result.get("flushed", 0) >= 1:
-            passed += 1
-            print(f"  [4/{total}] ✓ flush_pending_reverse 重试成功 (flushed={flush_result['flushed']})")
+            # 验证 item-status.json 已更新
+            info = ss.get_item_info("7777.77777")
+            if info and info.get("status") == "viewed":
+                passed += 1
+                print(f"  [4/{total}] ✓ flush_pending_reverse 重试成功 (flushed={flush_result['flushed']})")
+            else:
+                print(f"  [4/{total}] ✗ flush 后状态错误: {info}")
         else:
             print(f"  [4/{total}] ✗ flush_pending_reverse 失败: {flush_result}")
 
         # [5/5] 正向同步映射逻辑验证
         total += 1
-        # 设置 hermes 状态：已分析但未归档 → 应映射为 viewed
-        hermes_data["papers"]["2403.15337"]["analyzed_at"] = "2026-07-02T10:00:00+08:00"
-        hermes_data["papers"]["2403.15337"]["discussion_archived_at"] = None
-        save_json(HERMES_STATUS_PATH, hermes_data)
-        # 由于 paper_pool 是全局的，这里只验证映射逻辑不报错
-        # 正向同步会调用 paper_pool.update_status，论文可能不在池中
+        # 设置 item-status.json：一篇 viewed、一篇 archived
+        ss.update_item_status("2403.15337", "viewed", updated_by="hermes-cron")
+        ss.update_item_status("1111.22222", "archived", updated_by="hermes-cron",
+                              title="归档测试", direction="测试")
+        # 确保 CoPilot pool 中有这些论文（1111.22222 设为 unseen 以验证升级）
+        pool = pp._load()
+        pool["1111.22222"] = {"status": "unseen", "title": "归档测试", "added_at": now_utc()}
+        pp._save(pool)
+
         sync_result = sync_from_hermes()
         if "synced" in sync_result and "skipped" in sync_result:
-            passed += 1
-            print(f"  [5/{total}] ✓ 正向同步映射逻辑正常 (synced={sync_result['synced']}, skipped={sync_result['skipped']})")
+            # 验证 1111.22222 从 unseen 升级为 archived
+            final_status = pp.get_paper_status("1111.22222")
+            if final_status == "archived":
+                passed += 1
+                print(f"  [5/{total}] ✓ 正向同步映射正常 (synced={sync_result['synced']}, skipped={sync_result['skipped']})")
+            else:
+                print(f"  [5/{total}] ✗ 正向同步后状态错误: {final_status}")
         else:
             print(f"  [5/{total}] ✗ 正向同步异常: {sync_result}")
 
     finally:
-        HERMES_STATUS_PATH = _orig_hermes
+        # 恢复路径
         SYNC_STATE_PATH = _orig_sync
+        ss.ITEM_STATUS_PATH = _orig_item_path
+        pp.POOL_PATH = _orig_pool_path
+        # 清理临时目录
         shutil.rmtree(tmp_dir, ignore_errors=True)
 
-    ok = passed == total
-    print(f"\n{'✓' if ok else '✗'} briefing_sync: {passed}/{total} 通过")
-    return ok
+    all_ok = passed == total
+    print(f"\n{'✓' if all_ok else '✗'} briefing_sync: {passed}/{total} 通过")
+    return all_ok
 
 
 if __name__ == "__main__":
