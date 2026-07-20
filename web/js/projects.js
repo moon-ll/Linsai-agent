@@ -775,16 +775,19 @@ async function renderPapersCards(container) {
   try {
   const pool = await apiGet('/api/projects/papers/pool');
   const byStatus = pool.by_status || {};
+  const unseenCount = (byStatus.unseen||0) + (byStatus.pushed||0) + (byStatus.candidate||0) + (byStatus.interested||0);
+  const pushedCount = byStatus.pushed || 0;
 
   let html = `<div style="margin-bottom:12px;padding:8px 12px;background:var(--bg-secondary);border-radius:6px;font-size:0.8rem;color:var(--text-secondary);">
-    📊 候选池：<strong class="text-info">${byStatus.unseen||0}</strong> 未看 ·
+    📊 候选池：<strong class="text-info">${unseenCount}</strong> 未看 ·
     <strong class="text-warning">${byStatus.viewed||0}</strong> 已看未讨论 ·
-    <strong class="text-success">${byStatus.archived||0}</strong> 已归档
+    <strong class="text-success">${byStatus.archived||0}</strong> 已归档${pushedCount > 0 ? ` · <span class="text-info">📡 ${pushedCount} 篇已推送飞书</span>` : ''}
     <span class="ml-8-tertiary">(共 ${pool.total} 篇，累积保留)</span>
     <span class="ml-8-tertiary">| 📚 沉淀后可在知识库浏览</span>
   </div>`;
 
-  // 按状态分组
+  // 按状态分组（pushed/candidate/interested 归入未看，因为都是还没处理的新论文）
+  const UNSEEN_STATUSES = ['unseen', 'pushed', 'candidate', 'interested'];
   const groups = [
     {status: 'unseen', label: '🔔 未看（待你决定）', color: 'var(--info-color)', defaultOpen: true},
     {status: 'viewed', label: '📖 已看未讨论（感兴趣/待深读，讨论后归档）', color: 'var(--warning-color)', defaultOpen: false},
@@ -793,7 +796,9 @@ async function renderPapersCards(container) {
 
   const papers = pool.papers || [];
   for (const g of groups) {
-    const groupPapers = papers.filter(p => p.status === g.status);
+    const groupPapers = g.status === 'unseen'
+      ? papers.filter(p => UNSEEN_STATUSES.includes(p.status))
+      : papers.filter(p => p.status === g.status);
     if (!groupPapers.length) continue;
     const openAttr = g.defaultOpen ? 'open' : '';
     html += `<details ${openAttr} class="mb-10 border-default br-6 overflow-hidden">
