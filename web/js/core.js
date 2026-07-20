@@ -3,6 +3,22 @@
  * 所有模块的基础依赖，必须最先加载
  */
 
+// v5.5.1: 全局错误捕获——把所有未处理的异常显示在页面上
+window.addEventListener('error', (e) => {
+  const div = document.createElement('div');
+  div.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:99999;background:#dc2626;color:#fff;padding:8px 16px;font-size:0.82rem;font-family:monospace;white-space:pre-wrap;';
+  div.textContent = '❌ JS错误: ' + (e.message || '未知') + (e.filename ? ' @ ' + e.filename.split('/').pop() + ':' + e.lineno : '');
+  document.body?.prepend(div);
+  setTimeout(() => div.remove(), 10000);
+});
+window.addEventListener('unhandledrejection', (e) => {
+  const div = document.createElement('div');
+  div.style.cssText = 'position:fixed;top:40px;left:0;right:0;z-index:99999;background:#d97706;color:#fff;padding:8px 16px;font-size:0.82rem;font-family:monospace;';
+  div.textContent = '⚠️ 异步错误: ' + (e.reason?.message || e.reason || '未知');
+  document.body?.prepend(div);
+  setTimeout(() => div.remove(), 10000);
+});
+
 // ============================================
 // 全局状态
 // ============================================

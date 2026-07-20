@@ -512,7 +512,7 @@ async function init() {
 
   await loadSessions();
   loadSessionKeywords();
-  await checkHeartbeat();
+  checkHeartbeat();  // v5.5.1: 不 await，避免 heartbeat 慢（55s）卡死整个初始化
   loadReferences();
   loadUsage();
   loadLLMStatus();
