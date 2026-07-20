@@ -168,27 +168,17 @@ async function openTaskDetail(taskId) {
 }
 
 async function deleteTask(taskId) {
-  console.log('[deleteTask] 开始, taskId:', taskId);
   const ok = await confirmModal('确定删除此任务？');
-  console.log('[deleteTask] confirmModal返回:', ok);
   if (!ok) return;
   try {
-    // 先试 DELETE，失败则用 POST _method=DELETE 兜底
-    try {
-      const result = await apiDelete(`/api/tasks/${encodeURIComponent(taskId)}`);
-      console.log('[deleteTask] DELETE结果:', result);
-    } catch (delErr) {
-      console.log('[deleteTask] DELETE失败，尝试POST兜底:', delErr.message);
-      // 兜底：用 POST + action=delete
-      const result = await apiPost(`/api/tasks/${encodeURIComponent(taskId)}`, { action: 'delete' });
-      console.log('[deleteTask] POST兜底结果:', result);
-    }
+    // 直接用 POST action=delete（某些环境 DELETE 方法被拦截）
+    const result = await apiPost(`/api/tasks/${encodeURIComponent(taskId)}`, { action: 'delete' });
     State.tasks = State.tasks.filter(t => t.task_id !== taskId);
     renderTaskBoard();
     closeModal('modal-overlay');
     showToast('✓ 任务已删除', 'success');
   } catch (e) {
-    console.error('[deleteTask] 失败:', e.message, e.stack);
+    console.error('[deleteTask] 失败:', e);
     showToast('删除失败: ' + e.message, 'error');
   }
 }
