@@ -263,6 +263,38 @@ def create_task(
         return None
 
 
+def delete_task(task_id: str) -> bool:
+    """从 hermes kanban.db 删除任务（含关联的事件/评论/附件）。
+
+    Args:
+        task_id: hermes 任务 ID（t_xxxxxxxx）
+
+    Returns:
+        是否成功
+    """
+    if not KANBAN_DB_PATH.exists():
+        return False
+    try:
+        conn = _connect_writable()
+        # 检查任务是否存在
+        row = conn.execute("SELECT id FROM tasks WHERE id = ?", (task_id,)).fetchone()
+        if row is None:
+            conn.close()
+            return False
+        # 删除关联数据 + 任务本身
+        conn.execute("DELETE FROM task_events WHERE task_id = ?", (task_id,))
+        conn.execute("DELETE FROM task_comments WHERE task_id = ?", (task_id,))
+        conn.execute("DELETE FROM task_runs WHERE task_id = ?", (task_id,))
+        conn.execute("DELETE FROM task_attachments WHERE task_id = ?", (task_id,))
+        conn.execute("DELETE FROM task_links WHERE parent_id = ? OR child_id = ?", (task_id, task_id))
+        conn.execute("DELETE FROM tasks WHERE id = ?", (task_id,))
+        conn.commit()
+        conn.close()
+        return True
+    except Exception:
+        return False
+
+
 def update_task_status(task_id: str, copilot_status: str) -> bool:
     """更新 hermes kanban 任务状态。
 

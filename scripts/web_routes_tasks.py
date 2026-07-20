@@ -314,8 +314,20 @@ class TaskRoutesMixin:
         """POST 兜底路由（action=delete 等）"""
         action = body.get("action", "")
         if action == "delete":
-            ok = tm.delete_task(tid)
-            if ok:
+            # v5.5: 判断任务来源——kanban.db 的 t_xxx 用 kr，本地的 TASK-xxx 用 tm
+            deleted = False
+            if tid.startswith("t_") and kr.is_available():
+                try:
+                    deleted = kr.delete_task(tid)
+                except Exception as e:
+                    if _log:
+                        _log.warning("kanban 删除失败，尝试本地: %s", e)
+            if not deleted:
+                # 本地任务文件删除
+                ok = tm.delete_task(tid)
+                if ok:
+                    deleted = True
+            if deleted:
                 self._send_json({"success": True})
             else:
                 self._send_json({"error": "任务不存在"}, 404)
@@ -323,9 +335,16 @@ class TaskRoutesMixin:
             self._send_json({"error": "未知 action"}, 400)
 
     def _task_delete(self, parsed, tid):
-        """删除任务"""
-        ok = tm.delete_task(tid)
-        if ok:
+        """删除任务（v5.5: 区分 kanban.db 和本地文件）"""
+        deleted = False
+        if tid.startswith("t_") and kr.is_available():
+            try:
+                deleted = kr.delete_task(tid)
+            except Exception:
+                pass
+        if not deleted:
+            deleted = tm.delete_task(tid)
+        if deleted:
             self._send_json({"success": True})
         else:
             self._send_json({"error": "任务不存在"}, 404)
