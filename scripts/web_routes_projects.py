@@ -249,24 +249,83 @@ class ProjectRoutesMixin:
         self._send_json(pr.get_candidates())
 
     def _proj_papers_pool(self, parsed, body=None):
-        """候选池（三状态持久化）+ v4.2 统一状态合并"""
+        """候选池 — v5.5: 以 item-status.json 为单一真相源，合并 paper-pool 本地缓存。
+
+        状态同步规则：
+          - item-status.json 是权威源（hermes cron 和 Copilot 共写）
+          - paper-pool.json 是 Copilot 本地缓存（旧数据）
+          - hermes 推送的新论文（pushed/candidate）自动出现在 Copilot
+          - Copilot 操作（viewed/interested/archived）同步回 item-status
+        """
         status_filter = parse_qs(parsed.query).get("status", [""])[0]
-        pool_data = pp.get_pool(status=status_filter)
-        # v4.2: 合并 item-status.json 的统一状态（推送标记等）
+
+        # 1. 读权威状态 item-status.json
         try:
             import state_sync as ss
-            for paper in pool_data.get("papers", []):
-                aid = paper.get("arxiv_id", "")
-                info = ss.get_item_info(aid)
-                if info:
-                    paper["unified_status"] = info.get("status", "")
-                    paper["pushed_to_feishu"] = info.get("status", "") == "pushed" or \
-                        any(h.get("status") == "pushed" for h in info.get("history", []))
-                    paper["updated_by"] = info.get("updated_by", "")
-            pool_data["status_summary_unified"] = ss.get_status_summary()
+            all_items = ss.get_items_by_status()
         except Exception:
-            pass
-        self._send_json(pool_data)
+            all_items = []
+
+        # 2. 读 Copilot 本地缓存 paper-pool（补充 tldr 等元数据）
+        pool_data = pp.get_pool(status="")
+        pool_map = {p.get("arxiv_id"): p for p in pool_data.get("papers", [])}
+
+        # 3. 合并：item-status 为权威，paper-pool 补充
+        merged_papers = []
+        seen_aids = set()
+        for item in all_items:
+            aid = item.get("arxiv_id", "")
+            if not aid:
+                continue
+            seen_aids.add(aid)
+            pool_item = pool_map.get(aid, {})
+            paper = {
+                "arxiv_id": aid,
+                "title": item.get("title", pool_item.get("title", "")),
+                "authors": item.get("authors", pool_item.get("authors", "")),
+                "direction": item.get("direction", pool_item.get("direction", "")),
+                "score": item.get("score", pool_item.get("score", 0)),
+                "tldr": pool_item.get("tldr", item.get("tldr", "")),
+                "status": item.get("status", "unseen"),
+                "added_at": item.get("first_seen", pool_item.get("added_at", "")),
+                "updated_at": item.get("last_updated", ""),
+                "updated_by": item.get("updated_by", ""),
+                "pushed_to_feishu": item.get("status") == "pushed" or
+                    any(h.get("status") == "pushed" for h in item.get("history", [])),
+            }
+            if item.get("discussion_path"):
+                paper["discussion_path"] = item["discussion_path"]
+            merged_papers.append(paper)
+
+        # 补充 paper-pool 里有但 item-status 没有的（旧数据迁移期）
+        for aid, p in pool_map.items():
+            if aid not in seen_aids:
+                merged_papers.append(p)
+
+        # 状态过滤
+        if status_filter:
+            merged_papers = [p for p in merged_papers if p.get("status") == status_filter]
+
+        # 按分数排序
+        merged_papers.sort(key=lambda x: x.get("score", 0), reverse=True)
+
+        from collections import Counter
+        by_status = Counter(p.get("status", "unseen") for p in merged_papers)
+
+        # 同步新论文回 paper-pool（持久化缓存）
+        new_aids = [p["arxiv_id"] for p in merged_papers if p["arxiv_id"] not in pool_map]
+        if new_aids:
+            try:
+                pp.add_candidates()
+            except Exception:
+                pass
+
+        self._send_json({
+            "total": len(merged_papers),
+            "by_status": dict(by_status),
+            "papers": merged_papers,
+            "source": "item-status+paper-pool merged",
+        })
 
     def _proj_papers_briefings(self, parsed, body=None):
         """文献简报列表（GET+POST 重复）"""
