@@ -173,9 +173,16 @@ async function deleteTask(taskId) {
   console.log('[deleteTask] confirmModal返回:', ok);
   if (!ok) return;
   try {
-    console.log('[deleteTask] 调用 apiDelete...');
-    const result = await apiDelete(`/api/tasks/${encodeURIComponent(taskId)}`);
-    console.log('[deleteTask] 删除结果:', result);
+    // 先试 DELETE，失败则用 POST _method=DELETE 兜底
+    try {
+      const result = await apiDelete(`/api/tasks/${encodeURIComponent(taskId)}`);
+      console.log('[deleteTask] DELETE结果:', result);
+    } catch (delErr) {
+      console.log('[deleteTask] DELETE失败，尝试POST兜底:', delErr.message);
+      // 兜底：用 POST + action=delete
+      const result = await apiPost(`/api/tasks/${encodeURIComponent(taskId)}`, { action: 'delete' });
+      console.log('[deleteTask] POST兜底结果:', result);
+    }
     State.tasks = State.tasks.filter(t => t.task_id !== taskId);
     renderTaskBoard();
     closeModal('modal-overlay');

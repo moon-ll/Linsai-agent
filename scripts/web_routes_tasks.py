@@ -45,6 +45,7 @@ _TASK_ROUTES = [
     # POST
     ("POST", re.compile(r"^/api/tasks$"), "_task_create"),
     ("POST", re.compile(r"^/api/tasks/ai-assist$"), "_task_ai_assist"),
+    ("POST", re.compile(r"^/api/tasks/(?P<tid>[^/]+)$"), "_task_post_action"),  # 兜底：POST删除等
     ("POST", re.compile(r"^/api/tasks/(?P<tid>[^/]+)/dispatch$"), "_task_dispatch"),
     # PUT（更具体的路由放在前面）
     ("PUT", re.compile(r"^/api/tasks/(?P<tid>[^/]+)/subtasks$"), "_task_subtasks"),
@@ -308,6 +309,18 @@ class TaskRoutesMixin:
             self._send_json({"error": str(e)}, 500)
 
     # --- DELETE ---
+
+    def _task_post_action(self, parsed, body, tid):
+        """POST 兜底路由（action=delete 等）"""
+        action = body.get("action", "")
+        if action == "delete":
+            ok = tm.delete_task(tid)
+            if ok:
+                self._send_json({"success": True})
+            else:
+                self._send_json({"error": "任务不存在"}, 404)
+        else:
+            self._send_json({"error": "未知 action"}, 400)
 
     def _task_delete(self, parsed, tid):
         """删除任务"""
