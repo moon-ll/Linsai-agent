@@ -168,16 +168,21 @@ async function openTaskDetail(taskId) {
 }
 
 async function deleteTask(taskId) {
-  if (!await confirmModal('确定删除此任务？')) return;
+  console.log('[deleteTask] 开始, taskId:', taskId);
+  const ok = await confirmModal('确定删除此任务？');
+  console.log('[deleteTask] confirmModal返回:', ok);
+  if (!ok) return;
   try {
-    await apiDelete(`/api/tasks/${encodeURIComponent(taskId)}`);
+    console.log('[deleteTask] 调用 apiDelete...');
+    const result = await apiDelete(`/api/tasks/${encodeURIComponent(taskId)}`);
+    console.log('[deleteTask] 删除结果:', result);
     State.tasks = State.tasks.filter(t => t.task_id !== taskId);
     renderTaskBoard();
     closeModal('modal-overlay');
-    showToast('任务已删除');
+    showToast('✓ 任务已删除', 'success');
   } catch (e) {
-    console.error('删除任务失败:', e);
-    showToast('删除失败', 'error');
+    console.error('[deleteTask] 失败:', e.message, e.stack);
+    showToast('删除失败: ' + e.message, 'error');
   }
 }
 
