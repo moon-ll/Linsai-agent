@@ -227,13 +227,16 @@ function bindEvents() {
       const target = tab.dataset.target;
       document.querySelectorAll('.mobile-tab').forEach(t => t.classList.remove('active'));
       tab.classList.add('active');
-      const kbMain = document.getElementById('kb-main');
+      const kbPage = document.getElementById('kb-page');
+      const dashPage = document.getElementById('dashboard-page');
       const chatSidebar = document.getElementById('chat-sidebar');
-      if (target === 'kb-main') {
-        kbMain?.classList.remove('mobile-hidden');
+      if (target === 'kb-page') {
+        kbPage?.classList.remove('mobile-hidden');
+        dashPage?.classList.add('mobile-hidden');
         chatSidebar?.classList.remove('mobile-visible');
       } else {
-        kbMain?.classList.add('mobile-hidden');
+        kbPage?.classList.add('mobile-hidden');
+        dashPage?.classList.add('mobile-hidden');
         chatSidebar?.classList.add('mobile-visible');
       }
     });
@@ -529,6 +532,28 @@ async function init() {
   initKbMain();
   initChatSidebar();
   if (typeof bindPaperDiscussionEvents === 'function') bindPaperDiscussionEvents();
+
+  // v6.0: 导航按钮绑定
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view;
+      if (view === 'settings') {
+        // 设置打开抽屉
+        document.getElementById('settings-drawer').style.display = 'flex';
+        return;
+      }
+      if (view === 'hermes') {
+        // hermes 工作台
+        switchToView('hermes');
+        if (typeof initHermesWorkspace === 'function') initHermesWorkspace();
+        return;
+      }
+      switchToView(view);
+    });
+  });
+
+  // v6.0: 默认显示仪表盘
+  initDashboard();
 
   // P1-2: 自动选择第一个会话或显示欢迎页
   if (State.sessions.length > 0) {

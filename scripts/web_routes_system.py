@@ -56,6 +56,7 @@ import backup_manager as bm
 _SYSTEM_ROUTES = [
     # --- GET ---
     ("GET", re.compile(r"^/api/version$"), "_sys_version"),
+    ("GET", re.compile(r"^/api/dashboard$"), "_sys_dashboard"),
     ("GET", re.compile(r"^/api/health$"), "_sys_health"),
     ("GET", re.compile(r"^/api/heartbeat$"), "_sys_heartbeat"),
     ("GET", re.compile(r"^/api/memory/status$"), "_sys_memory_status"),
@@ -91,6 +92,75 @@ class SystemRoutesMixin:
         """版本号"""
         version = (web_base._PROJECT_ROOT / "VERSION").read_text(encoding="utf-8").strip()
         self._send_json({"version": version, "name": "LinSai-CoPilot"})
+
+    def _sys_dashboard(self, parsed, body=None):
+        """v6.0 仪表盘聚合：今日文献/任务/决策/hermes状态，一次请求返回。"""
+        result = {"papers": {}, "tasks": {}, "decisions": [], "hermes": {}}
+
+        # 1. 文献候选统计（从 item-status.json）
+        try:
+            import state_sync as ss
+            summary = ss.get_status_summary()
+            result["papers"] = {
+                "total": sum(summary.values()),
+                "unseen": summary.get("unseen", 0) + summary.get("pushed", 0) + summary.get("candidate", 0) + summary.get("interested", 0),
+                "pushed": summary.get("pushed", 0),
+                "viewed": summary.get("viewed", 0),
+                "archived": summary.get("archived", 0),
+            }
+            # 取前3篇 pushed/unseen 的论文
+            items = ss.get_items_by_status()
+            top = sorted([i for i in items if i.get("status") in ("pushed", "unseen", "candidate")],
+                        key=lambda x: x.get("score", 0), reverse=True)[:3]
+            result["papers"]["preview"] = [{"arxiv_id": p.get("arxiv_id", ""), "title": p.get("title", ""),
+                                           "direction": p.get("direction", ""), "pushed": p.get("status") == "pushed"}
+                                          for p in top]
+        except Exception:
+            result["papers"] = {"total": 0, "unseen": 0, "preview": []}
+
+        # 2. 任务统计
+        try:
+            import task_manager as tm
+            tasks = tm.list_tasks()
+            active = [t for t in tasks if t.get("status") == "active"]
+            backlog = [t for t in tasks if t.get("status") == "backlog"]
+            result["tasks"] = {
+                "total": len(tasks),
+                "active": len(active),
+                "backlog": len(backlog),
+                "preview": [{"task_id": t.get("task_id", ""), "title": t.get("title", "")[:40],
+                            "status": t.get("status", ""), "assignee": t.get("assignee", "")}
+                           for t in (active + backlog)[:3]],
+            }
+        except Exception:
+            result["tasks"] = {"total": 0, "active": 0, "preview": []}
+
+        # 3. NSFC 待决策项
+        try:
+            import project_reader as pr
+            pending = pr.get_nsfc_pending()
+            result["decisions"] = [{"id": p["id"], "title": p["title"][:60], "topic": p.get("related_topic", "")}
+                                  for p in pending[:3]]
+            result["decisions_total"] = len(pending)
+        except Exception:
+            result["decisions"] = []
+
+        # 4. hermes cron 状态
+        try:
+            import hermes_bridge as hb
+            jobs = hb.cron_list()
+            active_jobs = [j for j in jobs if j.get("status") == "active"]
+            result["hermes"] = {
+                "available": hb.check_hermes_available().get("hermes_cli", False),
+                "cron_active": len(active_jobs),
+                "cron_total": len(jobs),
+                "jobs": [{"name": j["name"][:30], "schedule": j.get("schedule", ""),
+                         "last_status": j.get("last_status", "")} for j in active_jobs[:3]],
+            }
+        except Exception:
+            result["hermes"] = {"available": False, "cron_active": 0}
+
+        self._send_json(result)
 
     def _sys_health(self, parsed, body=None):
         """系统健康检查：聚合版本、LLM、知识库、关键目录状态。"""
