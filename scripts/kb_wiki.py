@@ -120,6 +120,7 @@ def list_wiki_pages(wiki_type: Optional[str] = None) -> List[Dict[str, Any]]:
                     "updated": fm.get("updated", ""),
                     "tags": fm.get("tags", []),
                     "project": fm.get("project", ""),
+                    "related": fm.get("related", []),
                 })
             except Exception:
                 continue

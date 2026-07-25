@@ -170,14 +170,13 @@ def cmd_rebuild_graph(kb) -> None:
     edge_set: set = set()  # (from, to, relation) 去重
 
     for page in pages:
-        fm = page.get("frontmatter", {})
-        title = fm.get("title", "")
+        title = page.get("title", "")
         if not title:
             # 从文件名推导标题
             title = page.get("path", "").rsplit("/", 1)[-1].replace(".md", "")
 
-        wiki_type = fm.get("type", "")
-        growth_stage = fm.get("growth_stage", "seedling")
+        wiki_type = page.get("type", "")
+        growth_stage = page.get("growth_stage", "seedling")
         path = page.get("path", "")
 
         # 创建节点
@@ -188,7 +187,7 @@ def cmd_rebuild_graph(kb) -> None:
         }
 
         # 从 related 字段创建边
-        related = fm.get("related", [])
+        related = page.get("related", [])
         if isinstance(related, str):
             related = [related]
         if isinstance(related, list):
@@ -200,7 +199,7 @@ def cmd_rebuild_graph(kb) -> None:
                         edges.append({"from": title, "to": target, "relation": "related"})
 
         # 从 project 字段创建边
-        project = fm.get("project", "")
+        project = page.get("project", "")
         if isinstance(project, str) and project:
             project = [project]
         if isinstance(project, list):
