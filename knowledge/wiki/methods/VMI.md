@@ -1,6 +1,6 @@
 ---
 title: "VMI"
-type: "methods"
+type: "method"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-23T02:42:19Z"
 tags: ["表征方法", "光电子", "动量成像", "#type/method", "#topic/HHG", "#status/mature", "#status/growing"]

@@ -1,6 +1,6 @@
 ---
 title: "🗺️ NSFC 强场超快课题"
-type: "projects"
+type: "moc"
 created: "2026-06-19T00:00:00Z"
 updated: "2026-06-23T02:42:18Z"
 tags: ["MOC", "NSFC", "索引", "强场超快", "#type/MOC", "#status/mature"]

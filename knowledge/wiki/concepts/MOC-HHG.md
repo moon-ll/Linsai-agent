@@ -1,6 +1,6 @@
 ---
 title: "🗺️ HHG 知识地图"
-type: "concepts"
+type: "concept"
 created: "2026-06-19T00:00:00Z"
 updated: "2026-06-23T02:42:18Z"
 tags: ["MOC", "HHG", "索引", "#type/concept", "#topic/HHG", "#status/mature"]

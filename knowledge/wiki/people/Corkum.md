@@ -1,6 +1,6 @@
 ---
 title: "Corkum"
-type: "people"
+type: "person"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
 tags: ["人物", "三步模型", "加拿大", "#type/person", "#status/mature"]

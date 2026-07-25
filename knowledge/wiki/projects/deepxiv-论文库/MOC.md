@@ -1,6 +1,6 @@
 ---
 title: "🗺️ deepxiv 论文库"
-type: "projects"
+type: "moc"
 created: "2026-06-19T00:00:00Z"
 updated: "2026-06-23T02:42:18Z"
 tags: ["MOC", "论文库", "索引", "#type/MOC", "#status/mature"]

@@ -1,6 +1,6 @@
 ---
 title: "COLTRIMS"
-type: "methods"
+type: "method"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
 tags: ["表征方法", "动量谱", "冷靶反冲", "#type/method", "#topic/HHG", "#status/mature", "#status/growing"]

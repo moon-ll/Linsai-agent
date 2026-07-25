@@ -1,6 +1,6 @@
 ---
 title: "TDSE求解器"
-type: "methods"
+type: "method"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
 tags: ["计算方法", "TDSE", "数值模拟", "#type/method", "#topic/HHG", "#status/mature", "#status/growing"]

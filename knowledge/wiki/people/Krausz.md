@@ -1,6 +1,6 @@
 ---
 title: "Krausz"
-type: "people"
+type: "person"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
 tags: ["人物", "阿秒科学", "慕尼黑", "诺贝尔", "#type/person", "#status/mature", "#status/growing"]

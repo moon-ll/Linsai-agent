@@ -1,6 +1,6 @@
 ---
 title: "RABBITT"
-type: "methods"
+type: "method"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-17T12:40:33Z"
 tags: ["表征方法", "阿秒", "干涉", "#type/method", "#topic/HHG", "#status/mature"]

@@ -1,6 +1,6 @@
 ---
 title: "LHuillier"
-type: "people"
+type: "person"
 created: "2026-06-17T12:40:33Z"
 updated: "2026-06-23T02:42:18Z"
 tags: ["人物", "HHG理论", "瑞典", "诺贝尔", "#type/person", "#status/mature"]

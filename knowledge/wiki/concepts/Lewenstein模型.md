@@ -1,6 +1,6 @@
 ---
 title: "Lewenstein模型"
-type: "concepts"
+type: "concept"
 created: "2026-06-17T12:39:10Z"
 updated: "2026-06-23T02:42:18Z"
 tags: ["HHG", "理论模型", "SFA", "量子", "#type/concept", "#topic/HHG", "#status/mature", "#status/growing"]
