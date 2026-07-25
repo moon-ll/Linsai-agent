@@ -1,5 +1,30 @@
 # 变更记录
 
+## v6.1.0 - 2026-07-25 知识库结构重构 + 界面精简
+
+### v6.1.0 知识库结构重构
+- 目录迁移：papers→reviews / 讨论记录→discussions / 论文→analyses / T1-T5→topics
+- type 统一：113 个文件复数→单数、管道符→单值
+- 图谱重建：116 节点 374 边（从 0 边恢复）
+- 模板补充：新增方法/人物/讨论/深度分析 4 个模板
+- 索引重建：384 文档
+
+### v6.0.0 界面精简
+- 仪表盘首页（dashboard.js）：打开看到今日待处理（文献/任务/决策/hermes状态）
+- 3 导航（🏠仪表盘/📚知识库/🔧hermes）替代 8 按钮工具栏
+- 删除右侧栏（任务看板+文档引用），知识库预览更宽
+- hermes 工作台页面（任务管理+cron+手动派活）
+- 后端新增 /api/dashboard 聚合 API
+
+### v5.5.0 统一文献简报
+- item-status.json 为单一真相源（Copilot+hermes 共用）
+- hermes 推送的论文自动出现在 Copilot，无需手动同步
+- pushed/candidate/interested 归入未看组
+
+### v5.4.0-v5.0.0 三端统一架构
+- CoPilot 检索引擎索引 hermes wiki
+- hermes cron 状态闭环 + kanban 桥接 + 记忆单向同步 + 项目决策同步
+
 ## v5.4.0 - 2026-07-19 三端统一架构 阶段5：项目决策同步
 
 ### 阶段 5：.copilot-sync.json 项目决策同步
