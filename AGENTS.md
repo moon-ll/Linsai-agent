@@ -199,7 +199,7 @@ LinSai-CoPilot/
 │   ├── project_memory.py      # v3.5 课题记忆：对话存档、片段、决策、核心记忆
 │   ├── project_context.py     # v3.5 课题上下文：@语法解析、跨课题检索、上下文构建
 │   ├── project_workflow.py    # v3.5 课题工作流：规划→执行→验收→完成→总结
-│   ├── web_server.py          # Web 服务器聚合器（v3.5.6 Mixin 架构，321行）：RequestHandler 继承 10 个路由 Mixin
+│   ├── web_server.py          # Web 服务器聚合器（v6.2 Mixin 架构）：RequestHandler 继承 11 个路由 Mixin
 │   ├── web_base.py            # v3.5.6 Web 基础设施：BaseRequestHandler/文件锁/SSE工具/静态文件
 │   ├── web_routes_sessions.py # v3.5.6 会话路由 Mixin（9 路由，含 SSE 流式）
 │   ├── web_routes_kb.py       # v3.5.6 知识库路由 Mixin（33 路由）
@@ -211,6 +211,20 @@ LinSai-CoPilot/
 │   ├── web_routes_skills.py   # v3.5.6 技能路由 Mixin（5 路由）
 │   ├── web_routes_hermes.py   # v3.5.6 Hermes 路由 Mixin（4 路由）
 │   ├── web_routes_upload.py   # v3.5.6 上传路由 Mixin（5 路由）
+│   ├── web_routes_pipeline.py # v6.2 研究管线路由 Mixin（39 路由）
+│   ├── artifact_manager.py    # v6.2 产物版本管理：生命周期状态机/diff/回滚/快照
+│   ├── lineage_tracker.py     # v6.2 血缘追踪：双向溯源/影响分析/BFS遍历/DOT导出
+│   ├── taste_engine.py        # v6.2 学术品味引擎：五维模型/WMA更新/相似度匹配
+│   ├── pipeline_orchestrator.py # v6.2 管线编排：六阶段状态机/六道门禁/推进回滚
+│   ├── gap_analyzer.py        # v6.2 研究缺口分析：覆盖度扫描/四类缺口/优先级评分
+│   ├── citation_manager.py    # v6.2 引文管理：NSFC格式/扫描验证/占位符注入/BibTeX
+│   ├── topic_generator.py     # v6.2 课题生成：缺口映射/品味评分/课题演化
+│   ├── question_architect.py  # v6.2 科学问题架构：五要素体系/问题分解/五维验证
+│   ├── proposal_inspector.py  # v6.2 申请书自检：六维检查/四级策略/迭代追踪
+│   ├── proposal_writer.py     # v6.2 申请书撰写：NSFC格式/模板组装/品味调整
+│   ├── methodology_manual.py  # v6.2.1 方法学手册：17种方法库/自动扫描/KB关联/Markdown导出
+│   ├── agent_team.py          # v6.2.1 Agent团队管理：12智能体/状态机/性能追踪/团队扩展
+│   ├── check_boundary.py      # v6.2.1 边界违规检测：导入/写入/KB只读/API前缀静态扫描
 │   ├── self_test.py           # 内测统一入口：全量/分维度/JSON/程序化
 │   ├── test_e2e_learning_full.py  # 三来源端到端完整链路验证
 │   ├── deepxiv_knowledge/     # deepxiv 论文获取流水线（8 模块）
@@ -238,7 +252,8 @@ LinSai-CoPilot/
         ├── projects.js         # 项目面板（意见/执行追踪）
         ├── hermes_console.js   # Hermes 控制台
         ├── learning.js         # 学习管理器（日志/待审/统计/策略）
-        └── research.js         # v3.5 课题指导面板（单元时间线/知识库/记忆/工作流）
+        ├── research.js         # v3.5 课题指导面板（单元时间线/知识库/记忆/工作流）
+        ├── pipeline.js         # v6.2 研究管线面板（六阶段/缺口/课题/问题/申请书/方法学/自检/引文/团队）
 ```
 
 ---
@@ -527,6 +542,29 @@ LinSai-CoPilot/
 - ✅ **Web 路由集成** — `_proj_papers_feedback` 操作后自动触发反向同步，失败不阻塞
 - ✅ **测试覆盖** — `BriefingSyncTests` 20 个检查点，全量 232/232 通过
 
+### Phase 13：研究全链路自动化管线（v6.2.0）【✅ 已完成】
+- ✅ **Wave 1 基础层** — 3 模块：`artifact_manager.py`（产物版本管理/diff/回滚）、`lineage_tracker.py`（双向溯源/影响分析）、`taste_engine.py`（五维品味模型/WMA更新/相似度匹配）
+- ✅ **Wave 2 调度层** — 3 模块：`pipeline_orchestrator.py`（六阶段状态机/六道门禁）、`gap_analyzer.py`（覆盖度扫描/四类缺口/优先级评分）、`citation_manager.py`（NSFC GB/T 7714 格式/扫描验证/BibTeX 导出）
+- ✅ **Wave 3 课题层** — 3 模块：`topic_generator.py`（缺口→课题/品味评分/演化）、`question_architect.py`（五要素体系/问题分解/五维验证）、`proposal_inspector.py`（六维检查/四级优化策略/迭代追踪）
+- ✅ **Wave 4 撰写层** — 3 模块：`proposal_writer.py`（NSFC格式六章节/模板组装/品味调整）、`web_routes_pipeline.py`（39 路由 Mixin）、`web/js/pipeline.js`（七子面板前端）
+- ✅ **集成** — `web_server.py` 新增 PipelineRoutesMixin（11 个 Mixin）、`_dispatch_pipeline_routes` 分派器
+- ✅ **测试** — 10 个 Python 模块自检全部通过（累计 159 个检查点），全量回归 116/116 单元 + 170/170 Web CI，零回归
+
+### Phase 13.1：方法学手册 + Agent 团队管理（v6.2.1）【✅ 已完成】
+- ✅ **方法学手册** — `methodology_manual.py`（2701 行）：17 种内置方法数据库（理论 7 + 计算 3 + 实验 4 + 分析 3），自动扫描申请书方法关键词，KB 关联 + 引文关联 + Markdown 导出，15/15 自检通过
+- ✅ **Agent 团队管理** — `agent_team.py`：12 个智能体（6 核心管线 + 4 支撑 + 2 成长槽），状态机（idle→working→blocked→offline），性能追踪（成功率/平均耗时/近期任务），团队扩展（新增/升级/激活），20/20 自检通过
+- ✅ **Web 路由扩展** — `web_routes_pipeline.py` 从 39 条扩展到 54 条（+10 Agent + 5 方法学），17/17 自检通过
+- ✅ **前端面板扩展** — `pipeline.js` 从 7 个扩展到 9 个子面板（+🤖团队面板+📖方法学面板），团队三层卡片网格 + 方法学左右布局
+- ✅ **边界检测** — `check_boundary.py` 覆盖 14 个管线模块，零严重违规
+- ✅ **测试** — 全量回归 116/116 + Web CI 170/170，零回归
+
+### Phase 13.2：全链路测试验证 + 使用手册（v6.2.2）【✅ 已完成】
+- ✅ **全链路测试** — 12 个管线模块自检全部通过（~150+ 检查点），边界检测零严重违规
+- ✅ **核心回归** — 116/116 单元 + 170/170 Web CI，零回归
+- ✅ **Web API 实测** — 54 条管线路由全部正常响应（智能体团队/方法学手册/管线编排三大链路）
+- ✅ **前端验证** — 9 个子面板渲染函数完整确认
+- ✅ **使用手册** — 新增 HTML 格式项目使用手册，覆盖全部功能模块与操作指南
+
 ---
 
 ## 开发约定
@@ -589,6 +627,157 @@ LinSai-CoPilot/
 - 手动端到端测试（创建会话 → 多轮对话 → 检查存档完整性）
 - Web 界面测试（启动服务器 → API 连通性 → 静态文件服务 → 流式输出）
 - 人格一致性测试（确保响应符合 lin-sai-persona.md 中定义的风格）
+
+### 6. 研究管线边界规范（v6.2+）
+
+研究管线（Phase 13，12 个新模块）与 CoPilot 核心共存于 `scripts/` 目录，通过以下规则保持隔离，避免相互污染。
+
+#### 6.1 模块分类标识
+
+| 分类 | 命名前缀 | 示例 | 可被谁导入 |
+|------|----------|------|-----------|
+| **CoPilot 核心** | 无特定前缀 | `session_manager.py`, `copilot_engine.py`, `context_builder.py` | 核心模块互相导入；管线模块**不可导入** |
+| **研究管线** | 管线特有 | `artifact_manager.py`, `pipeline_orchestrator.py`, `gap_analyzer.py` 等 | 管线模块互相导入；核心模块**不可导入**管线模块 |
+| **共享基础设施** | 无特定前缀 | `common.py`, `paths.py` | 双方均可导入 |
+| **知识库引擎** | `kb_` 前缀 | `kb_index.py`, `kb_wiki.py` | 管线模块**只读导入**（详见 6.3） |
+| **Web 路由 Mixin** | `web_routes_` 前缀 | `web_routes_pipeline.py`, `web_routes_research.py` | 仅被 `web_server.py` 聚合器导入 |
+
+#### 6.2 导入边界矩阵
+
+管线模块的导入范围严格限定为以下三层：
+
+```
+┌─────────────────────────────────────────────┐
+│ 研究管线模块（12 个）                          │
+│                                             │
+│  允许导入：                                   │
+│  ① 共享基础设施: common, paths               │
+│  ② 管线内部模块: artifact_manager,           │
+│     lineage_tracker, taste_engine,           │
+│     pipeline_orchestrator, gap_analyzer,     │
+│     citation_manager, topic_generator,       │
+│     question_architect, proposal_inspector,  │
+│     proposal_writer                          │
+│  ③ 只读依赖（详见 6.3）                       │
+│                                             │
+│  禁止导入：                                   │
+│  ✗ session_manager                           │
+│  ✗ copilot_engine                            │
+│  ✗ context_builder                           │
+│  ✗ memory_manager                            │
+│  ✗ proactive_engine                          │
+│  ✗ llm_router（管线不直接调 LLM）              │
+│  ✗ learning_engine                           │
+│  ✗ skill_manager / slash_commands            │
+│  ✗ tool_engine                               │
+│  ✗ sync_engine / briefing_sync               │
+│  ✗ agora_bridge / hermes_bridge              │
+└─────────────────────────────────────────────┘
+```
+
+CoPilot 核心模块**禁止反向导入**管线模块。唯一例外是 `web_server.py` 作为聚合器导入 `web_routes_pipeline.py`（Mixin 模式，非业务逻辑导入）。
+
+#### 6.3 知识库与论文池访问规则
+
+管线模块对 CoPilot 积累的数据资产采用**只读消费**策略：
+
+| 数据资产 | 管线访问方式 | 允许操作 | 禁止操作 |
+|----------|-------------|----------|----------|
+| `knowledge/wiki/` | `kb_wiki.list_wiki_pages()` `kb_wiki.get_wiki_page()` | 读取页面、遍历概念 | 创建/修改/删除 wiki 页面 |
+| `knowledge/index.json` | `kb_index.search()` `kb_index.build_index()` | 检索、查询 | 修改索引结构 |
+| `knowledge/graph.json` | `kb_graph` 只读方法 | 查询节点/边 | 增删节点/边 |
+| `memory/paper-pool.json` | `paper_pool` 只读方法 | 查询论文元数据 | 修改论文状态 |
+| `memory/research-profile.json` | 直接 `load_json` 读取 | 读取研究方向关键词 | 修改画像 |
+| `memory/user-profile.json` | 直接 `load_json` 读取 | 读取用户偏好 | 修改用户画像 |
+
+**例外**：管线产出的知识（如论文精读结果）如需写入知识库，必须通过 `learning_engine` 的标准接口完成，管线模块不直接写 KB 文件。
+
+#### 6.4 数据存储隔离
+
+```
+LinSai-CoPilot/
+├── sessions/              ← CoPilot 核心：会话存档
+├── memory/                ← CoPilot 核心：长期记忆、用户画像
+├── tasks/                 ← CoPilot 核心：任务管理
+├── knowledge/             ← 共享：知识库（管线只读）
+├── projects/              ← CoPilot 核心：v3.5 课题管理
+│
+├── research_proposals/    ← 研究管线：独立数据域
+│   └── {proposal_id}/
+│       ├── 00_pipeline/   ← 管线状态、产物注册表
+│       ├── 01_literature/ ← 文献调研产物
+│       ├── 02_topic/      ← 缺口分析、课题列表
+│       ├── 03_question/   ← 科学问题框架
+│       ├── 04_proposal/   ← 申请书章节、参考文献
+│       └── 05_review/     ← 自检报告、迭代历史
+│
+└── scripts/
+    ├── [核心模块 50+]
+    └── [管线模块 12 个]    ← 文件名即边界标识
+```
+
+**规则**：
+- 管线模块的所有写入操作限定在 `research_proposals/{proposal_id}/` 目录内
+- 管线模块的配置文件（如品味模型）存放在 `research_proposals/.config/` 下
+- CoPilot 核心模块不读写 `research_proposals/` 目录
+
+#### 6.5 Web API 命名空间隔离
+
+| 命名空间 | 归属 | 示例 |
+|----------|------|------|
+| `/api/sessions/` | CoPilot 核心 | 会话管理 |
+| `/api/kb/` | CoPilot 核心 | 知识库 |
+| `/api/tasks/` | CoPilot 核心 | 任务管理 |
+| `/api/research/` | CoPilot 核心 (v3.5) | 课题指导 |
+| `/api/learning/` | CoPilot 核心 | 自主学习 |
+| `/api/skills/` | CoPilot 核心 | 技能系统 |
+| `/api/hermes/` | CoPilot 核心 | Hermes 桥接 |
+| `/api/pipeline/` | **研究管线 (v6.2)** | 管线编排、缺口、课题、问题、申请书、自检、引文 |
+
+**规则**：
+- 管线路由统一使用 `/api/pipeline/` 前缀
+- 管线路由全部在 `web_routes_pipeline.py` 中定义，不分散到其他 Mixin
+- 路由 ID 校验使用独立的 `_validate_proposal_id()`，不复用核心模块的 `_validate_project_id()`
+
+#### 6.6 前端隔离
+
+| 前端模块 | 归属 | 全局命名空间 |
+|----------|------|-------------|
+| `app.js`, `core.js`, `chat.js`, `session.js` | CoPilot 核心 | `window.App`, `window.Chat`, `window.Session` |
+| `task.js`, `kb.js`, `skill.js`, `settings.js` | CoPilot 核心 | `window.Task`, `window.KB`, `window.Skill` |
+| `research.js`, `learning.js`, `projects.js` | CoPilot 核心 | `window.Research`, `window.Learning` |
+| `pipeline.js` | **研究管线** | `window.Pipeline` |
+
+**规则**：
+- `pipeline.js` 通过 ModuleLoader 自注册，不修改 `index.html` 的导航结构
+- 管线面板使用独立 overlay（动态创建 DOM），不复用核心面板的容器
+- 管线前端只调用 `/api/pipeline/` 端点，不调用核心 API
+
+#### 6.7 测试隔离
+
+| 测试层 | CoPilot 核心 | 研究管线 |
+|--------|-------------|----------|
+| 模块自检 | `python3 scripts/{module}.py --self-check` | 同左，独立计数 |
+| 单元回归 | `self_test.py --module` (116 项) | 管线模块自检不纳入 `--module` |
+| Web CI | `self_test.py --web-ci` (170 项) | 管线路由测试独立于核心 Web API 测试 |
+| E2E | `test_e2e_learning_full.py` | 管线 E2E 待后续补充 |
+
+**规则**：
+- 管线模块的 `_self_check()` 函数独立运行，不依赖 CoPilot 核心测试框架
+- `self_test.py --module` 的回归范围不含管线模块，避免管线变更影响核心回归
+- 管线模块的回归基线独立维护
+
+#### 6.8 边界违规检测
+
+新增脚本准入检查清单（Phase 13 补充）：
+
+- [ ] 管线模块头部 docstring 标注 `# v6.2 研究管线` 注释
+- [ ] 管线模块的导入语句不包含 6.2 禁止清单中的任何模块名
+- [ ] 管线模块的文件写入路径以 `research_proposals/` 为根
+- [ ] 管线 Web 路由以 `/api/pipeline/` 为前缀
+- [ ] 管线模块通过 `--self-check` 且不触发核心模块测试失败
+- [ ] 管线模块不修改 `knowledge/` 目录下任何文件（只读）
+- [ ] 管线模块不修改 `memory/` 目录下任何文件（只读）
 
 ---
 
@@ -689,7 +878,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.1.0*
-*日期：2026-07-25*
+*版本：6.2.2*
+*日期：2026-07-26*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

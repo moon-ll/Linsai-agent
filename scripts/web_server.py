@@ -18,6 +18,7 @@ v3.5.6: 拆分为 Mixin 架构。本文件仅负责：
     - web_routes_hermes.py           Hermes 路由
     - web_routes_upload.py           上传/文件路由
     - web_routes_research.py         课题指导模块路由（独立分派器）
+    - web_routes_pipeline.py         研究管线路由（独立分派器）
 
 用法：
     python3 scripts/web_server.py              # 默认端口 8080
@@ -49,6 +50,7 @@ from web_routes_projects import ProjectRoutesMixin, _PROJECT_ROUTES
 from web_routes_hermes import HermesRoutesMixin, _HERMES_ROUTES
 from web_routes_upload import UploadRoutesMixin, _UPLOAD_ROUTES
 from web_routes_research import ResearchRoutesMixin
+from web_routes_pipeline import PipelineRoutesMixin
 
 
 # ---------------------------------------------------------------------------
@@ -81,6 +83,7 @@ class RequestHandler(
     HermesRoutesMixin,
     UploadRoutesMixin,
     ResearchRoutesMixin,
+    PipelineRoutesMixin,
     BaseRequestHandler,
     BaseHTTPRequestHandler,
 ):
@@ -137,6 +140,10 @@ class RequestHandler(
         if self._dispatch_research_routes("GET", path, parsed):
             return
 
+        # 研究管线路由（独立分派器）
+        if self._dispatch_pipeline_routes("GET", path, parsed):
+            return
+
         # 其他域路由表（编译正则模式）
         if self._dispatch_all("GET", path, parsed):
             return
@@ -153,6 +160,10 @@ class RequestHandler(
 
         # 课题模块路由（独立分派器，字符串模式）
         if self._dispatch_research_routes("POST", path, parsed, body):
+            return
+
+        # 研究管线路由（独立分派器）
+        if self._dispatch_pipeline_routes("POST", path, parsed, body):
             return
 
         # 其他域路由表（编译正则模式）
@@ -173,6 +184,10 @@ class RequestHandler(
         if self._dispatch_research_routes("PUT", path, parsed, body):
             return
 
+        # 研究管线路由（独立分派器）
+        if self._dispatch_pipeline_routes("PUT", path, parsed, body):
+            return
+
         # 其他域路由表（编译正则模式）
         if self._dispatch_all("PUT", path, parsed, body):
             return
@@ -188,6 +203,10 @@ class RequestHandler(
 
         # 课题模块路由（独立分派器，字符串模式）
         if self._dispatch_research_routes("DELETE", path, parsed):
+            return
+
+        # 研究管线路由（独立分派器）
+        if self._dispatch_pipeline_routes("DELETE", path, parsed):
             return
 
         # 其他域路由表（编译正则模式）
@@ -264,6 +283,7 @@ def _self_check() -> bool:
     try:
         assert hasattr(RequestHandler, "_dispatch_all"), "缺少 _dispatch_all"
         assert hasattr(RequestHandler, "_dispatch_research_routes"), "缺少 _dispatch_research_routes"
+        assert hasattr(RequestHandler, "_dispatch_pipeline_routes"), "缺少 _dispatch_pipeline_routes"
         assert hasattr(RequestHandler, "_send_json"), "缺少 _send_json"
         assert hasattr(RequestHandler, "_send_sse"), "缺少 _send_sse"
         assert hasattr(RequestHandler, "do_GET"), "缺少 do_GET"

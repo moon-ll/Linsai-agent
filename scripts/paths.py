@@ -44,3 +44,7 @@ HERMES_WIKI_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "02-wiki"
 HERMES_HOME = Path.home() / ".kimi"
 LINSAI_PROFILE = HERMES_HOME / "profiles" / "linsai"
 BRIEFINGS_DIR = LINSAI_PROFILE / "briefings" if LINSAI_PROFILE.exists() else HERMES_HOME / "briefings"
+
+# 研究管线数据目录（v6.2，独立数据域，与 CoPilot 核心隔离）
+RESEARCH_PROPOSALS_DIR = PROJECT_ROOT / "research_proposals"
+PIPELINE_CONFIG_DIR = RESEARCH_PROPOSALS_DIR / ".config"
