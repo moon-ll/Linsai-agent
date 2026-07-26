@@ -180,8 +180,13 @@ def _record_cost(cost_tracker: Dict[str, Any], source_type: str) -> None:
 # Prompt 构建
 # ---------------------------------------------------------------------------
 
-def _build_arxiv_distill_prompt(paper_data: Dict[str, Any]) -> str:
-    """构建 arXiv 论文精读 prompt。"""
+def _build_arxiv_distill_prompt(paper_data: Dict[str, Any], pdf_text: str = "") -> str:
+    """构建 arXiv 论文精读 prompt。
+
+    Args:
+        paper_data: 论文元数据
+        pdf_text: PDF 全文文本（可选，提供时注入 prompt 提升蒸馏质量）
+    """
     title = paper_data.get("title", "")
     abstract = paper_data.get("abstract", "")
     tldr = paper_data.get("tldr", "")
@@ -189,6 +194,15 @@ def _build_arxiv_distill_prompt(paper_data: Dict[str, Any]) -> str:
     date = paper_data.get("date", "")
     arxiv_id = paper_data.get("arxiv_id", "")
     pdf_url = paper_data.get("url", f"https://arxiv.org/pdf/{arxiv_id}")
+
+    # 如果有 PDF 全文，截取前 8000 字符注入 prompt
+    pdf_section = ""
+    if pdf_text and len(pdf_text) > 200:
+        excerpt = pdf_text[:8000]
+        pdf_section = f"""
+- PDF 全文摘录（前 8000 字符）：
+{excerpt}
+"""
 
     return f"""你是一位强场超快光学独立 PI（林赛），正在阅读一篇最新的 arXiv 论文。
 
@@ -203,7 +217,7 @@ def _build_arxiv_distill_prompt(paper_data: Dict[str, Any]) -> str:
 - 发表日期：{date}
 - 摘要：{abstract[:2000]}
 - TLDR：{tldr[:1000]}
-- PDF 链接：{pdf_url}
+- PDF 链接：{pdf_url}{pdf_section}
 
 请输出完整的 wiki 页面，包含 YAML frontmatter 和以下章节。
 
@@ -334,7 +348,7 @@ def distill_content(source_type: str, source_data: Dict[str, Any],
     messages = [{"role": "user", "content": ""}]
 
     if source_type == "arxiv_paper":
-        messages[0]["content"] = _build_arxiv_distill_prompt(source_data)
+        messages[0]["content"] = _build_arxiv_distill_prompt(source_data, source_data.get("_pdf_text", ""))
     elif source_type == "web_search":
         messages[0]["content"] = _build_web_search_distill_prompt(source_data)
     elif source_type in ("raw_note", "raw_webclip"):
@@ -360,8 +374,15 @@ def distill_content(source_type: str, source_data: Dict[str, Any],
 # ---------------------------------------------------------------------------
 
 def distill_arxiv_paper(paper_data: Dict[str, Any],
-                        cost_tracker: Optional[Dict[str, Any]] = None) -> Optional[str]:
+                        cost_tracker: Optional[Dict[str, Any]] = None,
+                        ensure_pdf: bool = True) -> Optional[str]:
     """将 arXiv 论文蒸馏为 wiki/papers/ 页面。
+
+    Args:
+        paper_data: 论文元数据（含 arxiv_id, title, abstract 等）
+        cost_tracker: 成本追踪字典
+        ensure_pdf: 是否在蒸馏前下载 PDF 原文（默认 True）。
+                    PDF 全文将注入 prompt 提升蒸馏质量，并关联到生成的 wiki。
 
     Returns:
         生成的 wiki 页面路径，或 None（如果失败）
@@ -377,6 +398,30 @@ def distill_arxiv_paper(paper_data: Dict[str, Any],
     if (KNOWLEDGE_DIR / wiki_rel).exists():
         print(f"⚠ wiki/papers/{safe_id}.md 已存在，跳过")
         return wiki_rel
+
+    # 下载 PDF 原文并提取文本（提升蒸馏质量）
+    if ensure_pdf:
+        try:
+            import importlib.util
+            pdf_mgr_path = Path(__file__).parent / "pdf_manager.py"
+            spec = importlib.util.spec_from_file_location("pdf_manager", pdf_mgr_path)
+            pdf_mod = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(pdf_mod)
+            lib = pdf_mod.get_library()
+
+            title = paper_data.get("title", "")
+            entry = lib.ensure_pdf(arxiv_id, title=title)
+            if entry:
+                print(f"  ✓ PDF 原文已就绪: {arxiv_id}")
+                # 提取全文文本注入蒸馏 prompt
+                pdf_text = lib.get_pdf_text(arxiv_id)
+                if pdf_text and len(pdf_text) > 500:
+                    paper_data["_pdf_text"] = pdf_text
+                    print(f"  ✓ PDF 全文已提取 ({len(pdf_text)} 字符)，注入蒸馏 prompt")
+                # 关联 PDF 与 wiki（wiki 尚未生成，先记录 wiki_rel）
+                lib.link_wiki(arxiv_id, wiki_rel)
+        except Exception as e:
+            print(f"  ⚠ PDF 下载/提取失败（不影响蒸馏）: {e}")
 
     wiki_text, concepts, hints = distill_content("arxiv_paper", paper_data, cost_tracker)
 

@@ -36,6 +36,10 @@ ALIASES_PATH = KNOWLEDGE_DIR / "aliases.json"
 GROWTH_LOG_PATH = KNOWLEDGE_DIR / "growth-log.json"
 CATEGORIES_PATH = KNOWLEDGE_DIR / "categories.json"
 
+# PDF 原文库（v6.3.0，文献 PDF 原文管理）
+PDF_DIR = RAW_DIR / "pdfs"
+PDF_LIBRARY_PATH = MEMORY_DIR / "pdf-library.json"
+
 # Hermes 工作区（文件系统路径）
 HERMES_WORKSPACE = Path.home() / "Desktop" / "hermes_workspace"
 HERMES_WIKI_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "02-wiki"

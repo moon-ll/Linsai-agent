@@ -171,6 +171,7 @@ LinSai-CoPilot/
 │   ├── alias_learner.py       # 别名学习器
 │   ├── growth_engine.py       # 知识生长引擎
 │   ├── paper_pool.py          # 论文池管理
+│   ├── pdf_manager.py         # v6.3 PDF 原文库管理器：存储/检索/文本提取/知识库关联
 │   ├── project_reader.py      # 项目文件读取器
 │   ├── research_profiler.py   # 研究方向感知器：TF-IDF关键词、7天自动重建
 │   ├── external_fetcher.py    # 统一信息获取：deepxiv + 联网检索 + raw扫描
@@ -202,7 +203,7 @@ LinSai-CoPilot/
 │   ├── web_server.py          # Web 服务器聚合器（v6.2 Mixin 架构）：RequestHandler 继承 11 个路由 Mixin
 │   ├── web_base.py            # v3.5.6 Web 基础设施：BaseRequestHandler/文件锁/SSE工具/静态文件
 │   ├── web_routes_sessions.py # v3.5.6 会话路由 Mixin（9 路由，含 SSE 流式）
-│   ├── web_routes_kb.py       # v3.5.6 知识库路由 Mixin（33 路由）
+│   ├── web_routes_kb.py       # v3.5.6 知识库路由 Mixin（43 路由，含 v6.3 PDF 管理 10 路由）
 │   ├── web_routes_projects.py # v3.5.6 项目路由 Mixin（33 路由）
 │   ├── web_routes_research.py # v3.5.6 课题路由 Mixin（37 路由）
 │   ├── web_routes_system.py   # v3.5.6 系统路由 Mixin（19 路由）
@@ -565,6 +566,20 @@ LinSai-CoPilot/
 - ✅ **前端验证** — 9 个子面板渲染函数完整确认
 - ✅ **使用手册** — 新增 HTML 格式项目使用手册，覆盖全部功能模块与操作指南
 
+### Phase 14：文献 PDF 原文管理（v6.3.0）【✅ 已完成】
+- ✅ **PDF 原文库管理器** — `scripts/pdf_manager.py`：PdfLibrary 类，管理文献 PDF 原文的存储/检索/文本提取/元数据维护
+  - 三级来源积累：arXiv 自动下载（`ensure_pdf`）/ 用户上传（`store_bytes`）/ 工作流产出
+  - SHA-256 去重：相同内容 PDF 不重复存储
+  - 三级文本提取：deepxiv PyPDF2 → 系统 pdftotext → 正则回退，提取后缓存
+  - 知识库关联：自动查找已有 wiki 摘要并关联，支持手动 `link_wiki()`
+  - 论文池关联：`list_with_paper_pool()` 合并展示 PDF 原文与简报卡信息
+- ✅ **Web API 路由** — `web_routes_kb.py` 新增 10 个 PDF 管理路由（列表/统计/信息/文本/下载/摘要/上传/ensure/关联/删除）
+- ✅ **论文池扩展** — `paper_pool.py` 新增 `has_local_pdf()` / `get_pool_with_pdf_status()`
+- ✅ **学习引擎集成** — `learning_engine.py` 的 `distill_arxiv_paper()` 蒸馏前自动下载 PDF，全文注入 prompt 提升质量
+- ✅ **前端 PDF 管理面板** — `web/js/kb.js` 新增 `openPdfManager()` 模态框（列表/上传/下载/查看文本/查看摘要/删除）
+- ✅ **基础设施** — `paths.py` 新增 `PDF_DIR` / `PDF_LIBRARY_PATH`；`common.py` 新增 `file_sha256()` / `copy_file()`
+- ✅ **测试** — pdf_manager 自检 23/23 + paper_pool 自检通过 + 单元 116/116 + Web CI 170/170，零回归
+
 ---
 
 ## 开发约定
@@ -878,7 +893,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.2.2*
+*版本：6.3.0*
 *日期：2026-07-26*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

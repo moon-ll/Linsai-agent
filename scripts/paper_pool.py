@@ -178,6 +178,47 @@ def remove(arxiv_id: str) -> bool:
     return False
 
 
+def has_local_pdf(arxiv_id: str) -> bool:
+    """检查论文是否已有本地 PDF 原文。
+
+    供前端展示"查看原文"按钮、learning_engine 决定是否需要下载使用。
+
+    Args:
+        arxiv_id: 论文 ID
+
+    Returns:
+        True 表示 PDF 已存储在本地
+    """
+    try:
+        import sys
+        if str(PROJECT_ROOT / "scripts") not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+        from pdf_manager import get_library
+        return get_library().has_pdf(arxiv_id)
+    except Exception:
+        return False
+
+
+def get_pool_with_pdf_status(status: str = "") -> Dict[str, Any]:
+    """返回论文池数据，每篇附加 has_pdf 字段。
+
+    Args:
+        status: 按状态过滤（空字符串=全部）
+
+    Returns:
+        与 get_pool 相同结构，但每篇论文多一个 has_pdf 布尔字段
+    """
+    pool = _load()
+    result = {}
+    for aid, entry in pool.items():
+        if status and entry.get("status") != status:
+            continue
+        entry = dict(entry)
+        entry["has_pdf"] = has_local_pdf(aid)
+        result[aid] = entry
+    return result
+
+
 def _self_check() -> None:
     """自检。"""
     print("=" * 50)
@@ -197,10 +238,14 @@ def _self_check() -> None:
     print("\n[3/3] API 函数验证...")
     assert callable(get_pool) and callable(update_status)
     assert callable(get_paper_status)
+    assert callable(has_local_pdf)
+    assert callable(get_pool_with_pdf_status)
     # get_paper_status：不存在的 ID 返回 None
     _test_aid = "test_nonexist_0000"
     assert get_paper_status(_test_aid) is None, "不存在论文应返回 None"
-    print("  ✓ get_pool / update_status / get_paper_status 就绪")
+    # has_local_pdf：不存在的 ID 返回 False
+    assert has_local_pdf(_test_aid) is False, "不存在论文应返回 False"
+    print("  ✓ get_pool / update_status / get_paper_status / has_local_pdf 就绪")
     print("\n✓ paper_pool 自检通过")
 
 

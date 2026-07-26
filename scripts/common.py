@@ -9,9 +9,11 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import os
 import re
+import shutil
 import tempfile
 from contextlib import contextmanager
 from datetime import datetime, timezone
@@ -128,3 +130,52 @@ def lazy_load(module_name: str):
         return _mod
     except Exception:
         return None
+
+
+def file_sha256(path: Path | str) -> str:
+    """计算文件的 SHA-256 哈希值（分块读取，支持大文件）。
+
+    用于 PDF 原文去重和完整性校验。
+
+    Args:
+        path: 文件路径
+
+    Returns:
+        十六进制哈希字符串（64 字符）
+
+    用法:
+        >>> h = file_sha256("/path/to/paper.pdf")
+        >>> "a1b2c3..."
+    """
+    h = hashlib.sha256()
+    with open(path, "rb") as f:
+        while True:
+            chunk = f.read(65536)  # 64KB 分块
+            if not chunk:
+                break
+            h.update(chunk)
+    return h.hexdigest()
+
+
+def copy_file(src: Path | str, dst: Path | str, overwrite: bool = False) -> bool:
+    """安全复制文件（支持二进制文件如 PDF）。
+
+    Args:
+        src: 源文件路径
+        dst: 目标文件路径
+        overwrite: 是否覆盖已存在文件（默认 False，不覆盖返回 False）
+
+    Returns:
+        True 表示复制成功，False 表示目标已存在且 overwrite=False
+
+    用法:
+        >>> copy_file("/tmp/upload.pdf", PDF_DIR / "2403.15337.pdf")
+    """
+    src_p, dst_p = Path(src), Path(dst)
+    if not src_p.exists():
+        raise FileNotFoundError(f"源文件不存在: {src_p}")
+    if dst_p.exists() and not overwrite:
+        return False
+    dst_p.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(src_p, dst_p)
+    return True

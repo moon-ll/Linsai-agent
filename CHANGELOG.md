@@ -1,5 +1,46 @@
 # 变更记录
 
+## v6.3.0 - 2026-07-26 文献 PDF 原文管理
+
+### v6.3.0 新增功能
+- **PDF 原文库管理器** — `scripts/pdf_manager.py`（817 行）
+  - `PdfLibrary` 类：管理文献 PDF 原文的存储、检索、文本提取与元数据维护
+  - 三级来源积累：arXiv 自动下载 / 用户上传 / 工作流产出
+  - SHA-256 去重：相同内容 PDF 不重复存储，节省磁盘空间
+  - 三级文本提取策略：deepxiv PyPDF2 → 系统 pdftotext → 正则回退
+  - 文本缓存：提取后缓存为 .txt，避免重复解析大文件
+  - 知识库关联：自动查找已有 wiki 摘要页面并关联，支持手动链接
+  - 论文池关联：`list_with_paper_pool()` 合并展示 PDF 原文与简报卡信息
+  - 自检 23 项检查点全部通过
+- **Web API 路由** — `web_routes_kb.py` 新增 10 个 PDF 管理路由
+  - `GET /api/knowledge/pdfs` — 列出所有 PDF（含论文池关联）
+  - `GET /api/knowledge/pdfs/stats` — PDF 库统计信息
+  - `GET /api/knowledge/pdfs/{id}/info` — 单篇 PDF 元数据
+  - `GET /api/knowledge/pdfs/{id}/text` — 提取的全文文本
+  - `GET /api/knowledge/pdfs/{id}/download` — 下载 PDF 原文
+  - `GET /api/knowledge/pdfs/{id}/summary` — 关联的知识库摘要
+  - `POST /api/knowledge/pdfs/upload` — 上传 PDF（base64）
+  - `POST /api/knowledge/pdfs/ensure` — 下载 arXiv PDF
+  - `POST /api/knowledge/pdfs/{id}/link` — 关联 PDF 与 wiki 摘要
+  - `DELETE /api/knowledge/pdfs/{id}` — 删除 PDF 及元数据
+- **论文池扩展** — `paper_pool.py` 新增 `has_local_pdf()` / `get_pool_with_pdf_status()`
+- **学习引擎集成** — `learning_engine.py` 的 `distill_arxiv_paper()` 蒸馏前自动下载 PDF
+  - PDF 全文注入蒸馏 prompt（前 8000 字符），提升精读笔记质量
+  - 自动关联 PDF 与生成的 wiki 摘要页面
+- **前端 PDF 管理面板** — `web/js/kb.js` 新增 `openPdfManager()` 模态框
+  - PDF 列表（含来源/大小/文本缓存/摘要关联状态）
+  - 上传 PDF（文件选择器 + base64 编码）
+  - 下载 arXiv PDF（输入 ID）
+  - 查看/下载/删除操作
+  - 全文文本查看 + 知识库摘要查看
+- **基础设施** — `paths.py` 新增 `PDF_DIR` / `PDF_LIBRARY_PATH`；`common.py` 新增 `file_sha256()` / `copy_file()`
+
+### v6.3.0 测试结果
+- pdf_manager.py 自检：23/23 通过
+- paper_pool.py 自检：通过（含 has_local_pdf 验证）
+- 单元回归测试：116/116 通过（1.6s）
+- Web CI 回归测试：170/170 通过（1.4s），零回归
+
 ## v6.2.2 - 2026-07-26 全链路测试验证 + 使用手册
 
 ### v6.2.2 测试验证

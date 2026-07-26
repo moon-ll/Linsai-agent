@@ -62,6 +62,7 @@ import common as _cms
 import knowledge_base as kb
 import kb_importer as ki
 import kb_categories as kbc
+import pdf_manager as pdf_lib
 
 
 # ---------------------------------------------------------------------------
@@ -102,6 +103,17 @@ _KB_ROUTES = [
     ("POST", re.compile(r"^/api/knowledge/file-content$"), "_kb_file_content"),
     ("POST", re.compile(r"^/api/knowledge/grow$"), "_kb_grow"),
     ("POST", re.compile(r"^/api/knowledge/suggest$"), "_kb_suggest"),
+    # --- PDF 原文管理 (v6.3.0) ---
+    ("GET", re.compile(r"^/api/knowledge/pdfs$"), "_kb_pdf_list"),
+    ("GET", re.compile(r"^/api/knowledge/pdfs/stats$"), "_kb_pdf_stats"),
+    ("GET", re.compile(r"^/api/knowledge/pdfs/(?P<pdf_id>[^/]+)/info$"), "_kb_pdf_info"),
+    ("GET", re.compile(r"^/api/knowledge/pdfs/(?P<pdf_id>[^/]+)/text$"), "_kb_pdf_text"),
+    ("GET", re.compile(r"^/api/knowledge/pdfs/(?P<pdf_id>[^/]+)/download$"), "_kb_pdf_download"),
+    ("GET", re.compile(r"^/api/knowledge/pdfs/(?P<pdf_id>[^/]+)/summary$"), "_kb_pdf_summary"),
+    ("POST", re.compile(r"^/api/knowledge/pdfs/upload$"), "_kb_pdf_upload"),
+    ("POST", re.compile(r"^/api/knowledge/pdfs/ensure$"), "_kb_pdf_ensure"),
+    ("POST", re.compile(r"^/api/knowledge/pdfs/(?P<pdf_id>[^/]+)/link$"), "_kb_pdf_link"),
+    ("DELETE", re.compile(r"^/api/knowledge/pdfs/(?P<pdf_id>[^/]+)$"), "_kb_pdf_delete"),
     # --- DELETE ---
     ("DELETE", re.compile(r"^/api/knowledge/wiki/(?P<wiki_rel>.+)$"), "_kb_wiki_delete"),
 ]
@@ -225,6 +237,166 @@ class KbRoutesMixin:
             self._send_json(kb.get_kb_health())
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
+
+    # --- PDF 原文管理 (v6.3.0) ---
+
+    def _kb_pdf_list(self, parsed, body=None):
+        """列出所有 PDF 原文（含论文池关联信息）"""
+        qs = parse_qs(parsed.query)
+        source = qs.get("source", [None])[0]
+        with_pool = qs.get("with_pool", ["true"])[0].lower() != "false"
+        lib = pdf_lib.get_library()
+        if with_pool:
+            pdfs = lib.list_with_paper_pool()
+        else:
+            pdfs = lib.list_pdfs(source=source)
+        self._send_json({"pdfs": pdfs, "total": len(pdfs)})
+
+    def _kb_pdf_stats(self, parsed, body=None):
+        """PDF 库统计信息"""
+        lib = pdf_lib.get_library()
+        self._send_json(lib.stats())
+
+    def _kb_pdf_info(self, parsed, body=None, pdf_id=None):
+        """获取单篇 PDF 元数据"""
+        lib = pdf_lib.get_library()
+        info = lib.get_info(pdf_id)
+        if not info:
+            self._send_json({"error": "PDF 不存在"}, 404)
+            return
+        self._send_json(info)
+
+    def _kb_pdf_text(self, parsed, body=None, pdf_id=None):
+        """获取 PDF 提取的全文文本（带缓存）
+
+        查询参数 force=true 强制重新提取
+        """
+        qs = parse_qs(parsed.query)
+        force = qs.get("force", ["false"])[0].lower() == "true"
+        lib = pdf_lib.get_library()
+        text = lib.get_pdf_text(pdf_id, force=force)
+        if text is None:
+            self._send_json({"error": "文本提取失败或 PDF 不存在"}, 404)
+            return
+        self._send_json({"pdf_id": pdf_id, "text": text, "length": len(text)})
+
+    def _kb_pdf_download(self, parsed, body=None, pdf_id=None):
+        """下载 PDF 原文文件"""
+        lib = pdf_lib.get_library()
+        pdf_path = lib.get_pdf_path(pdf_id)
+        if not pdf_path or not pdf_path.exists():
+            self._send_json({"error": "PDF 文件不存在"}, 404)
+            return
+        try:
+            data = pdf_path.read_bytes()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/pdf")
+            self.send_header("Content-Length", str(len(data)))
+            self.send_header("Content-Disposition", f'inline; filename="{pdf_id}.pdf"')
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(data)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _kb_pdf_summary(self, parsed, body=None, pdf_id=None):
+        """获取 PDF 关联的知识库摘要（wiki 页面内容）"""
+        lib = pdf_lib.get_library()
+        summary = lib.get_linked_summary(pdf_id)
+        if summary is None:
+            self._send_json({"error": "无关联摘要或 PDF 不存在"}, 404)
+            return
+        self._send_json({"pdf_id": pdf_id, "summary": summary, "length": len(summary)})
+
+    def _kb_pdf_upload(self, parsed, body):
+        """上传 PDF 文件（base64 编码）
+
+        请求体:
+            filename: 文件名
+            content_base64: base64 编码的 PDF 内容
+            title: 论文标题（可选）
+            arxiv_id: 关联 arXiv ID（可选）
+        """
+        import base64
+
+        filename = body.get("filename", "")
+        content_b64 = body.get("content_base64", "")
+        title = body.get("title", "")
+        arxiv_id = body.get("arxiv_id", "").strip() or None
+
+        if not content_b64:
+            self._send_json({"error": "缺少 content_base64"}, 400)
+            return
+
+        try:
+            pdf_bytes = base64.b64decode(content_b64)
+        except Exception:
+            self._send_json({"error": "base64 解码失败"}, 400)
+            return
+
+        if not title:
+            title = filename.rsplit(".", 1)[0] if filename else "用户上传"
+
+        lib = pdf_lib.get_library()
+        try:
+            entry = lib.store_bytes(
+                pdf_bytes,
+                title=title,
+                source=pdf_lib.SOURCE_UPLOAD,
+                arxiv_id=arxiv_id,
+            )
+            self._send_json({"success": True, "entry": entry})
+        except ValueError as e:
+            self._send_json({"error": str(e)}, 400)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _kb_pdf_ensure(self, parsed, body):
+        """确保 arXiv 论文 PDF 已下载到本地
+
+        请求体:
+            arxiv_id: arXiv 论文 ID
+            title: 论文标题（可选）
+            force: 是否强制重新下载（可选，默认 false）
+        """
+        arxiv_id = body.get("arxiv_id", "").strip()
+        title = body.get("title", "")
+        force = body.get("force", False)
+
+        if not arxiv_id:
+            self._send_json({"error": "缺少 arxiv_id"}, 400)
+            return
+
+        lib = pdf_lib.get_library()
+        entry = lib.ensure_pdf(arxiv_id, title=title, force=force)
+        if entry is None:
+            self._send_json({"error": "PDF 下载失败"}, 500)
+            return
+        self._send_json({"success": True, "entry": entry})
+
+    def _kb_pdf_link(self, parsed, body, pdf_id=None):
+        """将 PDF 与 wiki 摘要页面关联
+
+        请求体:
+            wiki_path: wiki 页面相对路径
+        """
+        wiki_path = body.get("wiki_path", "").strip()
+        if not wiki_path:
+            self._send_json({"error": "缺少 wiki_path"}, 400)
+            return
+        lib = pdf_lib.get_library()
+        if lib.link_wiki(pdf_id, wiki_path):
+            self._send_json({"success": True, "pdf_id": pdf_id, "wiki_path": wiki_path})
+        else:
+            self._send_json({"error": "PDF 不存在"}, 404)
+
+    def _kb_pdf_delete(self, parsed, body=None, pdf_id=None):
+        """删除 PDF 原文及其元数据"""
+        lib = pdf_lib.get_library()
+        if lib.delete_pdf(pdf_id):
+            self._send_json({"success": True, "pdf_id": pdf_id})
+        else:
+            self._send_json({"error": "PDF 不存在"}, 404)
 
     def _kb_categories(self, parsed, body=None):
         """分类列表"""

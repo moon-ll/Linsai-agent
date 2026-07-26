@@ -412,6 +412,7 @@ async function initKbMain() {
   document.getElementById('kb-sync-btn')?.addEventListener('click', handleKbSync);
   document.getElementById('kb-health-btn')?.addEventListener('click', handleKbHealth);
   document.getElementById('kb-category-btn')?.addEventListener('click', handleKbCategory);
+  document.getElementById('kb-pdf-btn')?.addEventListener('click', openPdfManager);
   document.getElementById('kb-filter-clear')?.addEventListener('click', clearKbFilters);
   ['kb-filter-type', 'kb-filter-stage', 'kb-filter-project', 'kb-filter-tag'].forEach(id => {
     document.getElementById(id)?.addEventListener('change', applyKbFilters);
@@ -980,4 +981,215 @@ if (typeof ModuleLoader !== 'undefined') {
   ModuleLoader.register('kb', () => {
     // 知识库模块初始化由 app.js initKbMain() 统一处理，此处保留接口供未来迁移
   });
+}
+
+// ============================================
+// PDF 原文管理 (v6.3.0)
+// ============================================
+
+/**
+ * 打开 PDF 原文管理面板。
+ * 功能：列出本地 PDF、上传新 PDF、下载/查看原文、提取全文文本、查看关联摘要。
+ */
+async function openPdfManager() {
+  const overlay = document.createElement('div');
+  overlay.className = 'kb-modal-overlay';
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+
+  const modal = document.createElement('div');
+  modal.className = 'kb-category-modal';
+  modal.style.maxWidth = '720px';
+  modal.onclick = (e) => e.stopPropagation();
+  modal.innerHTML = `
+    <h3>📄 PDF 原文管理</h3>
+    <div id="pdf-stats" class="pad-8 mb-8" style="background:var(--bg-color-secondary);border-radius:8px;font-size:0.82rem;">加载中…</div>
+    <div class="mb-8" style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="kb-toolbar-btn" id="pdf-upload-btn">📤 上传 PDF</button>
+      <button class="kb-toolbar-btn" id="pdf-ensure-btn">⬇️ 下载 arXiv PDF</button>
+      <button class="kb-toolbar-btn" id="pdf-refresh-btn">🔄 刷新</button>
+      <button class="kb-toolbar-btn" id="pdf-close-btn">关闭</button>
+    </div>
+    <div id="pdf-list" style="max-height:440px;overflow-y:auto;">加载中…</div>
+  `;
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+
+  document.getElementById('pdf-close-btn').onclick = () => overlay.remove();
+  document.getElementById('pdf-refresh-btn').onclick = () => refreshPdfList();
+
+  // 上传 PDF
+  document.getElementById('pdf-upload-btn').onclick = () => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.pdf';
+    input.onchange = async () => {
+      const file = input.files[0];
+      if (!file) return;
+      if (file.size > 50 * 1024 * 1024) {
+        showToast('文件超过 50MB 限制', 'error');
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = async () => {
+        const b64 = reader.result.split(',')[1];
+        try {
+          await apiPost('/api/knowledge/pdfs/upload', {
+            filename: file.name,
+            content_base64: b64,
+            title: file.name.replace(/\.pdf$/i, ''),
+          });
+          showToast('✓ PDF 上传成功');
+          refreshPdfList();
+        } catch (e) {
+          showToast('✗ 上传失败: ' + (e.message || e), 'error');
+        }
+      };
+      reader.readAsDataURL(file);
+    };
+    input.click();
+  };
+
+  // 下载 arXiv PDF
+  document.getElementById('pdf-ensure-btn').onclick = async () => {
+    const arxivId = await promptModal('输入 arXiv 论文 ID：', '如 2403.15337');
+    if (!arxivId || !arxivId.trim()) return;
+    try {
+      showToast('◐ 正在下载 PDF…');
+      const result = await apiPost('/api/knowledge/pdfs/ensure', { arxiv_id: arxivId.trim() });
+      if (result.success) {
+        showToast(`✓ PDF 已下载: ${arxivId.trim()}`);
+        refreshPdfList();
+      } else {
+        showToast('✗ 下载失败', 'error');
+      }
+    } catch (e) {
+      showToast('✗ 下载失败: ' + (e.message || e), 'error');
+    }
+  };
+
+  async function refreshPdfList() {
+    const listEl = document.getElementById('pdf-list');
+    const statsEl = document.getElementById('pdf-stats');
+    listEl.innerHTML = '◐ 加载中…';
+    try {
+      const [listData, statsData] = await Promise.all([
+        apiGet('/api/knowledge/pdfs'),
+        apiGet('/api/knowledge/pdfs/stats'),
+      ]);
+      const pdfs = listData.pdfs || [];
+      // 统计
+      statsEl.innerHTML = `
+        共 <strong>${statsData.total_pdfs || 0}</strong> 篇 PDF ·
+        <strong>${statsData.total_size_mb || 0}</strong> MB ·
+        文本已缓存 ${statsData.text_cached || 0} 篇 ·
+        关联摘要 ${statsData.linked_wiki || 0} 篇
+      `;
+      // 列表
+      if (!pdfs.length) {
+        listEl.innerHTML = '<div class="text-tertiary pad-20 ta-center">暂无 PDF 原文</div>';
+        return;
+      }
+      listEl.innerHTML = pdfs.map(p => {
+        const title = escapeHtml(p.pool_title || p.title || p.pdf_id);
+        const arxivId = escapeHtml(p.arxiv_id || '');
+        const sizeKb = Math.round((p.pdf_size_bytes || 0) / 1024);
+        const sourceLabel = { arxiv_download: 'arXiv', user_upload: '上传', workflow: '工作流' }[p.pdf_source] || p.pdf_source;
+        const hasText = p.text_cached ? '✓ 文本' : '— 文本';
+        const hasSummary = p.has_summary ? '✓ 摘要' : '— 摘要';
+        const fileMissing = p.file_exists === false ? ' <span style="color:var(--error-color);">⚠ 文件缺失</span>' : '';
+        return `<div class="kb-category-item" style="display:block;padding:8px;margin-bottom:4px;border:1px solid var(--border-color);border-radius:6px;">
+          <div style="display:flex;justify-content:space-between;align-items:start;gap:8px;">
+            <div style="flex:1;min-width:0;">
+              <div style="font-weight:600;font-size:0.88rem;word-break:break-word;">${title}${fileMissing}</div>
+              <div style="font-size:0.75rem;color:var(--text-color-tertiary);margin-top:2px;">
+                ${arxivId ? `arXiv: ${arxivId} · ` : ''}${sourceLabel} · ${sizeKb}KB
+              </div>
+              <div style="font-size:0.72rem;color:var(--text-color-tertiary);margin-top:2px;">${hasText} · ${hasSummary}</div>
+            </div>
+            <div style="display:flex;gap:4px;flex-shrink:0;">
+              <button class="kb-toolbar-btn" data-pdf-download="${escapeAttr(p.pdf_id)}" style="padding:2px 8px;font-size:0.75rem;" title="下载/查看原文">📥</button>
+              <button class="kb-toolbar-btn" data-pdf-text="${escapeAttr(p.pdf_id)}" style="padding:2px 8px;font-size:0.75rem;" title="提取全文文本">📝</button>
+              <button class="kb-toolbar-btn" data-pdf-summary="${escapeAttr(p.pdf_id)}" style="padding:2px 8px;font-size:0.75rem;" title="查看知识库摘要">📖</button>
+              <button class="kb-toolbar-btn" data-pdf-delete="${escapeAttr(p.pdf_id)}" style="padding:2px 8px;font-size:0.75rem;color:var(--error-color);" title="删除">🗑</button>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+      // 绑定事件
+      listEl.querySelectorAll('[data-pdf-download]').forEach(btn => {
+        btn.onclick = () => {
+          window.open(`/api/knowledge/pdfs/${encodeURIComponent(btn.dataset.pdfDownload)}/download`, '_blank');
+        };
+      });
+      listEl.querySelectorAll('[data-pdf-text]').forEach(btn => {
+        btn.onclick = async () => {
+          const pdfId = btn.dataset.pdfText;
+          btn.textContent = '◐';
+          try {
+            const data = await apiGet(`/api/knowledge/pdfs/${encodeURIComponent(pdfId)}/text`);
+            if (data.text) {
+              showPdfTextModal(pdfId, data.text);
+            } else {
+              showToast('文本提取失败', 'error');
+            }
+          } catch (e) {
+            showToast('✗ 获取文本失败', 'error');
+          }
+          btn.textContent = '📝';
+        };
+      });
+      listEl.querySelectorAll('[data-pdf-summary]').forEach(btn => {
+        btn.onclick = async () => {
+          const pdfId = btn.dataset.pdfSummary;
+          try {
+            const data = await apiGet(`/api/knowledge/pdfs/${encodeURIComponent(pdfId)}/summary`);
+            if (data.summary) {
+              showPdfTextModal(pdfId, data.summary, '知识库摘要');
+            } else {
+              showToast('无关联摘要', 'info');
+            }
+          } catch (e) {
+            showToast('✗ 无关联摘要', 'error');
+          }
+        };
+      });
+      listEl.querySelectorAll('[data-pdf-delete]').forEach(btn => {
+        btn.onclick = async () => {
+          const pdfId = btn.dataset.pdfDelete;
+          if (!await confirmModal(`删除 PDF "${pdfId}"？\n将同时删除 PDF 文件、文本缓存和元数据。`)) return;
+          try {
+            await apiDelete(`/api/knowledge/pdfs/${encodeURIComponent(pdfId)}`);
+            showToast('✓ 已删除');
+            refreshPdfList();
+          } catch (e) {
+            showToast('✗ 删除失败', 'error');
+          }
+        };
+      });
+    } catch (e) {
+      listEl.innerHTML = '<div class="text-error pad-8">加载失败</div>';
+    }
+  }
+
+  refreshPdfList();
+}
+
+/** 显示 PDF 文本/摘要内容的模态框 */
+function showPdfTextModal(pdfId, text, title = '全文文本') {
+  const overlay = document.createElement('div');
+  overlay.className = 'kb-modal-overlay';
+  overlay.onclick = (e) => { if (e.target === overlay) overlay.remove(); };
+  const modal = document.createElement('div');
+  modal.className = 'kb-category-modal';
+  modal.style.maxWidth = '680px';
+  modal.style.maxHeight = '80vh';
+  modal.onclick = (e) => e.stopPropagation();
+  modal.innerHTML = `
+    <h3>📄 ${escapeHtml(title)} — ${escapeHtml(pdfId)}</h3>
+    <div style="max-height:55vh;overflow-y:auto;background:var(--bg-color-secondary);padding:12px;border-radius:6px;font-size:0.82rem;line-height:1.6;white-space:pre-wrap;word-break:break-word;">${escapeHtml(text.slice(0, 20000))}${text.length > 20000 ? '\n\n...(截断，共 ' + text.length + ' 字符)' : ''}</div>
+    <button class="kb-toolbar-btn w-100 mt-8" id="pdf-text-close">关闭</button>
+  `;
+  overlay.appendChild(modal);
+  document.body.appendChild(overlay);
+  document.getElementById('pdf-text-close').onclick = () => overlay.remove();
 }
