@@ -603,6 +603,11 @@ class HermesPipeline:
         incremental_ctx = self._build_incremental_context(stage)
         if incremental_ctx:
             prompt += incremental_ctx
+        # v6.4.2 针对性检索：撰写环节自动引用已有检索报告
+        if stage in (4, 5):  # 申请书撰写 + 质量自检
+            research_ctx = self._build_research_context_for_writing()
+            if research_ctx:
+                prompt += research_ctx
         if extra_context:
             prompt += f"\n\n=== 额外上下文 ===\n{extra_context}\n"
 
@@ -728,6 +733,131 @@ class HermesPipeline:
             "results": results,
             "reason": "管线全部完成",
         }
+
+    # ------------------------------------------------------------------
+    # 针对性检索（撰写时按需检索）
+    # ------------------------------------------------------------------
+
+    def targeted_research(
+        self,
+        topic: str,
+        context: str = "",
+        depth: str = "standard",
+        timeout: int = 300,
+    ) -> Dict[str, Any]:
+        """针对性检索：撰写申请书/方法学手册时，对特定主题做精准文献检索。
+
+        与文献简报（广撒网被动积累）不同，针对性检索是"精准打击"——
+        基于当前撰写需求，检索最新、最相关的论文和资料。
+
+        派活给 researcher profile（具备 web_search + DeepXiv 能力），
+        结果写入 proposal 目录供撰写环节引用。
+
+        Args:
+            topic: 检索主题（如"BSV 驱动 HHG 的量子几何修正"）
+            context: 撰写上下文（如"正在写立项依据，需要 BSV-HHG 实验证据"）
+            depth: 检索深度（quick=3篇/standard=8篇/deep=15篇）
+            timeout: hermes agent loop 超时
+
+        Returns:
+            {success, report_path, paper_count, output_preview, error}
+        """
+        max_papers = {"quick": 3, "standard": 8, "deep": 15}.get(depth, 8)
+
+        # 生成检索报告路径
+        import hashlib
+        topic_hash = hashlib.md5(topic.encode()).hexdigest()[:8]
+        report_dir = self.proposal_dir / "02_literature" / "targeted-research"
+        report_dir.mkdir(parents=True, exist_ok=True)
+        report_path = report_dir / f"research_{topic_hash}.md"
+
+        prompt = (
+            f"你是专业文献调研员。请针对以下主题做精准检索：\n\n"
+            f"【检索主题】{topic}\n"
+            f"【撰写上下文】{context or '（无额外上下文）'}\n"
+            f"【检索深度】{depth}（需 {max_papers} 篇核心论文）\n\n"
+            f"请执行以下步骤：\n"
+            f"1. 使用 web_search 和 DeepXiv 工具检索该主题的最新论文（2023-2026）\n"
+            f"2. 对每篇论文评分（相关性/新颖性/可靠性/时效性，各 0-1 分）\n"
+            f"3. 提取每篇论文的关键发现（与检索主题的相关性）\n"
+            f"4. 总结该主题的当前研究现状和关键争议\n\n"
+            f"输出格式：\n"
+            f"# 针对性检索报告：{topic}\n"
+            f"## 检索策略\n- 关键词组合：...\n- 数据源：...\n\n"
+            f"## 论文清单（按相关性排序）\n"
+            f"| arxiv_id/DOI | 标题 | 相关性 | 关键发现 |\n"
+            f"|-------------|------|--------|---------|\n\n"
+            f"## 研究现状总结\n...\n\n"
+            f"## 关键争议/未解决问题\n...\n\n"
+            f"## 对撰写的建议\n哪些论文应该引用、引用在哪一章\n\n"
+            f"将报告写入文件：{report_path}\n"
+        )
+
+        # 追加上游产物上下文（如果已有缺口分析/问题框架）
+        incremental_ctx = self._build_incremental_context(2)  # 参考缺口分析阶段
+        if incremental_ctx:
+            prompt += incremental_ctx
+
+        if _log:
+            _log.info(f"针对性检索: topic={topic[:40]} depth={depth}")
+
+        result = self._run_hermes("researcher", prompt, timeout=timeout)
+
+        # 检查产物
+        artifacts_ok = report_path.exists() and report_path.stat().st_size >= 50
+
+        return {
+            "success": result["success"],
+            "report_path": str(report_path.relative_to(self.proposal_dir)) if artifacts_ok else "",
+            "artifacts_ok": artifacts_ok,
+            "paper_count": max_papers,
+            "output_preview": (result.get("output", "") or "")[:500],
+            "elapsed_s": result.get("elapsed_s", 0),
+            "error": result.get("error", ""),
+        }
+
+    def list_targeted_research(self) -> List[Dict[str, Any]]:
+        """列出已有的针对性检索报告。"""
+        research_dir = self.proposal_dir / "02_literature" / "targeted-research"
+        if not research_dir.exists():
+            return []
+        results = []
+        for f in sorted(research_dir.glob("*.md")):
+            size = f.stat().st_size
+            # 从文件第一行提取主题
+            topic = ""
+            try:
+                first_line = f.read_text(encoding="utf-8").split("\n", 1)[0]
+                topic = first_line.replace("#", "").replace("针对性检索报告：", "").strip()
+            except Exception:
+                pass
+            results.append({
+                "file": f.name,
+                "topic": topic,
+                "size": size,
+                "path": str(f.relative_to(self.proposal_dir)),
+            })
+        return results
+
+    def _build_research_context_for_writing(self) -> str:
+        """为撰写环节构建针对性检索结果的上下文。
+
+        如果已有针对性检索报告，在撰写 prompt 中引用它们，
+        让 writer profile 能基于最新检索结果撰写。
+
+        Returns:
+            附加到撰写 prompt 的上下文字符串
+        """
+        research_reports = self.list_targeted_research()
+        if not research_reports:
+            return ""
+
+        lines = ["📚 已有针对性检索报告（撰写时请参考这些最新检索结果）："]
+        for r in research_reports:
+            lines.append(f"  - {r['path']}（{r['size']} 字节，主题：{r['topic'][:50]}）")
+        lines.append("\n请在撰写时引用这些报告中的论文，确保引文准确、时效性强。")
+
+        return "\n\n=== 针对性检索参考 ===\n\n" + "\n".join(lines) + "\n"
 
     # ------------------------------------------------------------------
     # 自动化 cron 配置
@@ -872,6 +1002,10 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--import", nargs=2, metavar=("PROPOSAL_ID", "SOURCE_NAME"),
                         dest="import_proposal",
                         help="从 hermes_workspace 导入已有 proposal 作为初始内容")
+    parser.add_argument("--research", nargs="+", metavar=("PROPOSAL_ID", "TOPIC"),
+                        help="针对性检索（--research PROPOSAL_ID TOPIC [--depth standard] [--context '正在写立项依据']）")
+    parser.add_argument("--list-research", metavar="PROPOSAL_ID",
+                        help="列出已有的针对性检索报告")
     args = parser.parse_args(argv)
 
     if args.self_check:
@@ -936,6 +1070,45 @@ def main(argv: Optional[List[str]] = None) -> int:
         if result.get("error"):
             print(f"错误: {result['error']}")
         return 0 if result.get("imported", 0) > 0 else 1
+
+    if args.research:
+        # --research PROPOSAL_ID TOPIC [--depth X] [--context Y]
+        research_args = args.research
+        if len(research_args) < 2:
+            print("用法: --research PROPOSAL_ID TOPIC [--depth standard] [--context '正在写立项依据']")
+            return 1
+        proposal_id = research_args[0]
+        topic = research_args[1]
+        depth = "standard"
+        context = ""
+        i = 2
+        while i < len(research_args):
+            if research_args[i] == "--depth" and i + 1 < len(research_args):
+                depth = research_args[i + 1]
+                i += 2
+            elif research_args[i] == "--context" and i + 1 < len(research_args):
+                context = research_args[i + 1]
+                i += 2
+            else:
+                topic += " " + research_args[i]
+                i += 1
+        pipe = HermesPipeline(proposal_id)
+        result = pipe.targeted_research(topic, context=context, depth=depth)
+        print(f"针对性检索: {'✓' if result.get('artifacts_ok') else '✗'}")
+        print(f"报告: {result.get('report_path', '(未生成)')}")
+        print(f"耗时: {result.get('elapsed_s', 0)}s")
+        if result.get("error"):
+            print(f"错误: {result['error']}")
+        return 0 if result.get("artifacts_ok") else 1
+
+    if args.list_research:
+        pipe = HermesPipeline(args.list_research)
+        reports = pipe.list_targeted_research()
+        print(f"=== 针对性检索报告（{len(reports)} 个）===")
+        for r in reports:
+            print(f"  {r['size']:6d} 字节  {r['topic'][:50]}")
+            print(f"           路径: {r['path']}")
+        return 0
 
     parser.print_help()
     return 0

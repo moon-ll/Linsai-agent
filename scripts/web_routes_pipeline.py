@@ -158,6 +158,9 @@ _PIPELINE_ROUTES_RAW = [
     ("POST", r"^/api/pipeline/hermes/([^/]+)/dispatch/([^/]+)$", "_pl_hermes_dispatch"),
     ("POST", r"^/api/pipeline/hermes/([^/]+)/run$", "_pl_hermes_run"),
     ("POST", r"^/api/pipeline/hermes/([^/]+)/cron$", "_pl_hermes_setup_cron"),
+    # 针对性检索（撰写时按需检索）
+    ("GET", r"^/api/pipeline/hermes/([^/]+)/research$", "_pl_hermes_list_research"),
+    ("POST", r"^/api/pipeline/hermes/([^/]+)/research$", "_pl_hermes_research"),
 ]
 
 # 预编译正则
@@ -1402,6 +1405,39 @@ class PipelineRoutesMixin:
             from hermes_pipeline import HermesPipeline
             pipe = HermesPipeline(proposal_id)
             result = pipe.setup_cron(schedule=schedule, deliver=deliver)
+            self._send_json({"status": "ok", "data": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _pl_hermes_list_research(self, path, parsed, match):
+        """列出已有的针对性检索报告"""
+        proposal_id = match.group(1)
+        try:
+            from hermes_pipeline import HermesPipeline
+            pipe = HermesPipeline(proposal_id)
+            reports = pipe.list_targeted_research()
+            self._send_json({"status": "ok", "reports": reports})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _pl_hermes_research(self, path, parsed, body, match):
+        """针对性检索（撰写时按需检索）
+
+        body 必填：topic（检索主题）
+        body 可选：context（撰写上下文）, depth（quick/standard/deep）, timeout
+        """
+        proposal_id = match.group(1)
+        if not body or "topic" not in body:
+            self._send_json({"error": "缺少 topic 字段"}, 400)
+            return
+        topic = body["topic"]
+        context = body.get("context", "")
+        depth = body.get("depth", "standard")
+        timeout = body.get("timeout", 300)
+        try:
+            from hermes_pipeline import HermesPipeline
+            pipe = HermesPipeline(proposal_id)
+            result = pipe.targeted_research(topic, context=context, depth=depth, timeout=timeout)
             self._send_json({"status": "ok", "data": result})
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
