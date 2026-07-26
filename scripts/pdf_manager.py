@@ -56,7 +56,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from common import file_lock, file_sha256, load_json, now_utc, save_json, safe_filename
-from paths import KNOWLEDGE_DIR, MEMORY_DIR, PDF_DIR, PDF_LIBRARY_PATH
+from paths import KNOWLEDGE_DIR, MEMORY_DIR, PDF_DIR, PDF_LIBRARY_PATH, WIKI_DIR
 
 # ---------------------------------------------------------------------------
 # 常量
@@ -270,6 +270,11 @@ class PdfLibrary:
         - 新格式：2403.15337 → https://arxiv.org/pdf/2403.15337.pdf
         - 旧格式：physics/9906053 → https://arxiv.org/pdf/physics/9906053.pdf
 
+        下载策略（三级降级）：
+        1. urllib.request（标准库，可能因 SSL 证书问题失败）
+        2. curl 命令（系统命令，使用系统证书，macOS 推荐）
+        3. 返回 None
+
         Args:
             arxiv_id: arXiv 论文 ID
 
@@ -284,6 +289,7 @@ class PdfLibrary:
         else:
             url = ARXIV_PDF_URL.format(arxiv_id=arxiv_id)
 
+        # 策略 1：urllib.request
         try:
             req = urllib.request.Request(
                 url,
@@ -291,12 +297,26 @@ class PdfLibrary:
             )
             with urllib.request.urlopen(req, timeout=DOWNLOAD_TIMEOUT) as resp:
                 pdf_bytes = resp.read()
-                if len(pdf_bytes) < 1000:
-                    # 太小，可能不是有效 PDF
-                    return None
-                return pdf_bytes
+                if len(pdf_bytes) > 1000:
+                    return pdf_bytes
         except Exception:
-            return None
+            pass  # 降级到 curl
+
+        # 策略 2：curl 命令（解决 macOS Python SSL 证书问题）
+        try:
+            result = subprocess.run(
+                ["curl", "-sL", "-o", "-", "--max-time", str(DOWNLOAD_TIMEOUT),
+                 "-H", "User-Agent: LinSai-CoPilot/6.3 (PDF Library)",
+                 url],
+                capture_output=True,
+                timeout=DOWNLOAD_TIMEOUT + 10,
+            )
+            if result.returncode == 0 and len(result.stdout) > 1000:
+                return result.stdout
+        except Exception:
+            pass
+
+        return None
 
     # ------------------------------------------------------------------
     # PDF 检索
@@ -474,7 +494,9 @@ class PdfLibrary:
             )
             if result.returncode == 0 and result.stdout.strip():
                 text = result.stdout.strip()
-                if len(text) > 100:  # 有效文本应有一定长度
+                # 过滤错误输出：deepxiv 在 PyPDF2 不可用时会输出错误信息到 stdout
+                _ERROR_MARKERS = ("not available", "错误:", "Error:", "Traceback", "PDF: 0 chars")
+                if len(text) > 200 and not any(m in text for m in _ERROR_MARKERS):
                     return text
             return None
         except Exception:

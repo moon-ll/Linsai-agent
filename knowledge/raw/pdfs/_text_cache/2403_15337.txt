@@ -1,0 +1,1025 @@
+High Harmonic Generation by Bright Squeezed
+Vacuum
+Andrei Rasputnyi1,2 , Zhaopin Chen3,4,5 , Michael Birk3,4,5 ,
+Oren Cohen3,4,5 , Ido Kaminer4,5,6 , Michael Krüger3,4,5 ,
+Denis Seletskiy7 , Maria Chekhova1,2,6*, Francesco Tani1,8
+
+arXiv:2403.15337v2 [quant-ph] 9 Apr 2024
+
+1 Max Planck Institute for the Science of Light, Staudtstr. 2, Erlangen,
+
+91058, Germany.
+2 Friedrich-Alexander Universität Erlangen-Nürnberg, Staudtstr. 7/B2,
+
+Erlangen, 91058, Germany.
+3 Department of Physics, Technion – Israel Institute of Technology,
+
+Technion City, Haifa, 32000, Israel.
+4 Solid State Institute, Technion – Israel Institute of Technology,
+
+Technion City, Haifa, 32000, Israel.
+5 Helen Diller Quantum Center, Technion – Israel Institute of
+
+Technology, Technion City, Haifa, 32000, Israel.
+6 Faculty of Electrical and Computer Engineering, Technion – Israel
+
+Institute of Technology, Technion City, Haifa, 32000, Israel.
+7 femtoQ Laboratory, Department of Engineering Physics, Polytechnique
+
+Montréal, Montréal, Québec H3T 1J4, Canada.
+8 Univ. Lille, CNRS, UMR 8523—PhLAM—Physique des Lasers Atomes
+
+et Molécules, Lille, F-59000, France.
+*Corresponding author(s). E-mail(s): maria.chekhova@mpl.mpg.de;
+Abstract
+We observe non-perturbative high harmonic generation in solids driven by a
+macroscopic quantum state of light, bright squeezed vacuum (BSV), which we
+generate in a single spatiotemporal mode. The BSV-driven process is considerably more efficient in the generation of high harmonics than classical light of
+the same mean intensity. Due to its broad photon-number distribution, covering
+states from 0 to 2 × 1013 photons per pulse, and sub-cycle electric field fluctuations over ±1V/Å, BSV provides access to free carrier dynamics within a much
+broader range of peak intensities than accessible with classical light. Our findings
+
+1
+
+contribute to recent developments of quantum optics with extreme intensities,
+moving beyond its traditional focus on low photon numbers, and providing a new
+method for exploring extreme nonlinearities in solids.
+Keywords: Extreme Quantum Optics, High Harmonic Generation, Bright Squeezed
+Vacuum, Photon Statistics
+
+1 Bright squeezed vacuum as a driver of high
+harmonic generation
+High harmonic generation (HHG) lies at the foundation of attosecond science, extreme
+nonlinear optics, and an increasing number of applications [1–3]. Initially observed
+by irradiating gases [1–4], with intense ultrashort near-infrared (IR) pulses, nowadays, harmonics are generated also from liquids [5, 6] and solids [7–9], using pump
+lasers with wavelengths spanning from the far-IR to the ultraviolet (UV) [10–12]. This
+non-perturbative process has applications for sources delivering high-photon energy
+radiation reaching beyond the x-ray water window [4, 13, 14], and for creating attosecond light pulses [15, 16]. By leveraging on its intrinsic sub-cycle nature, HHG is now
+being exploited for observing charge dynamics in matter at unprecedentedly short
+timescales, providing radically new and powerful tools for studying phenomena such
+as multi-electron correlations, phase transitions, and topological effects [17–20]. As a
+result, over the past decade, HHG in solids has been used for a wide range of studies
+such as all-optical energy band structure retrieval [8, 21], extreme ultraviolet spectroscopy [22–24], laser picoscopy of the valence electron structure [25], investigations
+of quantum phase transitions [26], and Berry phases [27].
+Despite the wide range of experimental conditions under which it has been observed
+and its many applications, HHG has been described mainly in semiclassical terms. A
+precise description of HHG depends on the quantum properties of matter (e.g., solid
+crystals or gas molecules). However, the intense light field driving HHG is usually
+considered to be classical. Meanwhile, recent works have revealed quantum-optical
+features of the high harmonics [28–31] and of their driving field following their generation [32–34]. Still, all these works deal with the HHG from classical (coherent)
+pulses of light. The use of quantum light for driving HHG has been considered theoretically [35, 36] but not realized, since HHG requires intensities on the order of
+1 TW cm−2 , or photon numbers about 1013 , in a short pulse of just tens of femtoseconds or shorter. Such extreme conditions have remained so far inaccessible for
+quantum state engineering. Indeed, quantum states of light produced in quantum
+optics typically contain only a few photons per mode. Macroscopic quantum states
+can be obtained by adding a strong coherent component to a squeezed vacuum [37] or
+to a single photon [38, 39], but even in this case, most of the energy is contained in
+the classical part [40].
+An exception is bright squeezed vacuum (BSV), a macroscopic quantum state
+of light generated at the output of a strongly pumped unseeded optical parametric
+amplifier. BSV is a quantum superposition of even-photon-number states extending
+2
+
+Classical
+
+Quantum
+
+(a) Electric field
+
+(c)
+
+(b) Electric field
+
+Time
+
+Time
+
+Coherent radiation
+Oscillation of mean electric field
+
+Bright squeezed vacuum
+Oscillation of electric field variance
+
+Conduction
+band
+electron
+
+hole
+Valence
+band
+
+(d)
+Ee
+ke
+
+Tunneling
+Acceleration
+Recombination
+
+Fig. 1 (a) The electric field of a coherent pulse exhibits a mean value oscillating at the optical
+frequency and a constant variance. (b) The electric field of a bright squeezed vacuum pulse: the
+mean value is constantly zero, while the variance oscillates at twice the carrier frequency. (c) High
+harmonic generation by coherent light in a semiconductor in the interband mechanism. An electronhole pair emerges via perturbative (multiphoton) or non-perturbative excitation, is accelerated by the
+electric field, gaining energy, and finally recombines, emitting high-energy photons. (d) High harmonic
+generation by bright squeezed vacuum in a semiconductor. Due to the extremely large uncertainty
+of the BSV field during half a cycle, the high harmonic generation is driven by a continuum of paths
+for electron-hole pairs.
+
+to high photon numbers. Recent experiments have achieved BSV pulses with mean
+photon number ⟨N ⟩ as high as 1013 [41, 42], and with the photon-number probability
+distribution so broad that photon numbers exceeding the mean by a factor of 6 or
+more occurred with 2 % probability. This feature is in striking contrast with the
+photon-number
+distribution of classical (coherent-state) light, whose width is as small
+p
+as ∆N = ⟨N ⟩ (the shot-noise limit). This implies that for classical light with ⟨N ⟩ =
+1013 , the probability of an event exceeding the mean by a factor of 6 or more is
+13
+∼ 10−10 .
+In addition, BSV has been shown to manifest non-classical features as subshot-noise photon-number correlations [43] and polarization entanglement [44]. It
+was also predicted to enhance sub-cycle sensing of quantum optical fields [45]. The
+broad photon-number probability distribution of BSV leads to superbunching [46]:
+its intensity correlation function of order n, g (n) ≡ ⟨: N n :⟩/⟨N ⟩n , is considerably
+higher than for thermal light. This feature becomes more pronounced at large n:
+
+3
+
+(n)
+
+while for thermal light, the correlation functions are gth = n!, for BSV they are
+(n)
+gBSV = (2n − 1)!!. Superbunching enhances multiphoton effects, such as perturbative
+harmonic generation [41] or nonlinear electron emission from nanotips [47].
+All these properties suggest that BSV is an intriguing and interesting alternative
+driver for the harmonics providing a new route to combine strong-field physics and
+quantum optics, exploring new phenomena accessible only with quantum light, and,
+possibly, enhancing HHG. Recently, these prospects have triggered theoretical works
+proposing applications of BSV in strong-field physics, predicting an extended plateau
+for HHG [35], modification of electron dynamics [36, 48], HHG selection rules [49],
+and quadrature squeezing in the extreme ultraviolet spectral range [50].
+In this work, we report the first observation of HHG driven by quantum light.
+Specifically, we demonstrate BSV-driven high harmonics from solids and show that
+compared to classical light, BSV enhances the harmonic yield, revealing a boost of
+multiphoton processes. These experimental results are supported by numerical investigations, that extend BSV-driven HHG simulations in gases [28, 35] to solids and show
+that these can reproduce the main trend. Furthermore, we show that the sparse nature
+of BSV light provides a simple and convenient route for suppressing sample damage,
+enabling to probe electron dynamics in solids in a previously inaccessible regime.
+In contrast to a bright classical light pulse, which has a well-defined amplitude of
+the electric field with very weak fluctuations (Fig. 1(a)), the mean electric field of the
+BSV remains at zero for all times, while its variance oscillates at twice the light frequency (Figure 1(b)) [51, 52]. This feature indicates strong quantum fluctuations of
+the field on a sub-cycle timescale. As a result, while classical light can drive electrons
+and quasiparticles with only a well-defined quasimomentum k at the time, BSV pulses
+can excite and drive quasiparticles in a superposition of quasi-momentum states. We
+illustrate the difference between the two cases in (Fig.1 (c)) and (Fig.1 (d)) by depicting BSV-excited quasiparticles moving simultaneously in opposite directions (Fig. 1
+(d)). Accordingly, within half of the optical cycle, the electron-hole pairs can be driven
+to spread all over the energy bands, emitting a broad spectrum of harmonic radiation.
+Large variance of the BSV drive also implies that each pulse has a Keldysh parameter [53] with a large uncertainty, thus affecting the competition between multi-photon
+and tunneling excitation.
+
+2 Spectra of harmonics driven by quantum light
+We compare HHG from solid targets driven by ultrashort pulses of classical coherent
+and quantum light. Both pulses are centred at 1.6 µm (0.77 eV), with the former
+having a duration of 70 fs at full-width half maximum (FWHM) and the latter of 25
+fs (FWHM). As targets we use: 6 µm-thick x-cut Mg:LiNbO3 (LN) and 1 µm-thick
+amorphous silicon (a-Si), observing emission of harmonics up to the 7th order.
+The HHG spectrum of LN (Fig. 2(a)) shows both odd and even harmonics, due to
+the non-centrosymmetric crystal structure. The photon energies of the 2nd to the 5th
+harmonic from LN are below the direct bandgap (4.2 eV [54]), and the 6th and 7th
+harmonics are above the direct bandgap (Fig. 2(a)). Despite the shorter duration, the
+
+4
+
+(c)
+
+Coherent pump
+
+N6ω
+
+N6ω
+
+Nω
+
+Nω
+
+Pump photon number
+
+Harmonic photon number
+
+2ω 3ω 4ω 5ω 6ω 7ω
+Direct
+bandgap
+
+Harmonic photon number
+
+(b)
+
+(a)
+
+BSV
+N
+
+N
+
+Pump photon number
+
+Fig. 2 (a) The spectrum of harmonics generated in a 6 µm x-cut doped lithium niobate crystal by
+bright squeezed vacuum (solid line) and by coherent radiation (dashed line). The photon energies of
+the 6th and the 7th harmonics exceed the direct energy bandgap of doped lithium niobate. Upper
+panel: Harmonic yield enhancement factor BSV vs. coherent pump for the same mean intensity
+(∼ 2 TW cm−2 ). We show experimental (solid bars) and simulated (dashed bars) factors. (b,c) Joint
+photon-number probability distribution of the input pump (b, coherent radiation, c, bright squeezed
+vacuum) and the 6th harmonic for two different mean pump photon numbers (red and black). In the
+case of coherent pump, the joint photon-number distribution is Gaussian while the photon statistics
+in the BSV case show non-trivial features.
+
+BSV-generated 4th-7h harmonics show at least 5 to 15 times higher yield than the
+same harmonics driven by coherent pulses with identical mean intensity (2 TW cm−2 ).
+Simulations based on the semiconductor-Bloch equations and accounting for the
+BSV photon statistics shows a similar behavior, an overall increase of the enhancement
+up to the 5th harmonic and a lower enhancement for 6th and 7th harmonics (see
+Fig. 2(a) and Methods).
+Besides measuring the mean value of the harmonic yield, we also study the joint
+photon-number statistics between the input pump light and the harmonic radiation.
+For this purpose, we measure the shot-to-shot input light intensity and the resulting
+harmonic intensities (see Methods). Figures 2(b,c) show the measured two-dimensional
+photon-number distributions between the pump and the 6th harmonic from LN in the
+case of the coherent pump (panel b) and BSV pump (panel c) for two different mean
+photon numbers (red and black points). The photon-number probability distribution
+for classical light is narrow and Gaussian, centered at the mean photon number ⟨Nω ⟩.
+The photon-number probability distribution of the harmonic is also Gaussian with the
+mean photon number ⟨N6ω ⟩ (Figure 2(b)). The increase of the pump’s mean photon
+number shifts the center of the joint probability distribution without significantly
+changing its width. The measurement of the mean photon number is thus sufficient
+to find the harmonic yield ⟨N6ω ⟩/⟨Nω ⟩, but obtaining the power scaling requires a
+systematic scan of the pump mean photon number.
+As opposed to coherent radiation, BSV has a broad photon-number distribution
+with its maximum at zero photon number. The photon-number distribution of the
+harmonic is non-trivial and differs from that of the driving pulses but it inherits the
+large width; moreover, there is a correlation between the BSV photon number and
+the harmonic photon number (Fig. 2(c)). As a result, the large variance of the BSV
+
+5
+
+photon number reveals the entire power dependence through a single joint probability
+distribution measurement. In other words, a scan of the mean photon number of the
+BSV excitation is not required, underscored by the fact that both low and high BSV
+setting (red vs black in Figure 2(c)) can reveal the entire power dependence.
+Additionally, within a single optical cycle of BSV, the superposition of its photonnumber states is mapped to the quasi-momentum of an electron; therefore, its
+wavefunction is distributed over the whole energy band. This implies that the joint
+photon-number distribution between the BSV and its harmonic, which results from
+the electron-hole recombination, contains information of a large part of the (or even
+the entire) sample band structure and electron dynamics.
+
+3 Power scaling of the high harmonics
+
+(b)
+
+(c)
+
+(d)
+
+(e)
+
+(f )
+
+(g)
+
+(h)
+
+Classical radiation
+
+(a)
+
+Bright squeezed
+vacuum
+
+In Fig. 3, we show the yield of the 4th-7th harmonics generated by pumping LN with
+BSV light (top row) and classical light (bottom row) measured per each laser shot
+and the corresponding simulations. At low pump intensities, the power of harmonics
+with frequency below the direct bandgap (4th and 5th) scales with the power equal
+to the harmonic order, typical of the perturbative regime. As the intensity increases,
+the scaling changes and becomes non-perturbative. When using the classical pump,
+deviations from the perturbative scaling can be observed at intensities below 1 TW
+cm−2 (Fig. 3(e,f)).
+
+Fig. 3 Power scaling of the 4th-7th harmonics generated in x-cut lithium niobate by bright squeezed
+vacuum (a-d) and by coherent radiation (e-h). Solid lines: mean photon number of the harmonics, with
+the shading indicating the photon-number uncertainty. Dotted lines: numerical simulation. Dashed
+lines: power law fit. For coherent light excitation, the range above 3 TW cm−2 is inaccessible because
+of the sample damage.
+
+In contrast, the same harmonics generated by BSV exhibit a perturbative power
+scaling over a broader range of intensities and a deviation from it at around 2 TW
+cm−2 . The yield of the 6th and 7th harmonics (with frequencies above the direct
+bandgap) follows a non-perturbative power scaling over the whole intensity range
+with both coherent and BSV pumps, but with some differences (Fig. 3(c,d,g,h)). The
+6
+
+(c)
+
+(d)
+
+squeezed
+Coherent radiation Bright
+vacuum
+
+(b)
+
+optical damage
+
+(a)
+
+optical damage
+
+classical-light generated harmonics scale with a fixed exponent, but this one changes
+with intensity when generating the harmonics with BSV light. While at low intensities,
+the 6th harmonic power scales with a comparable exponent (∼3.4) for both pumps, we
+observe two different exponents for the 7th harmonic: 2.0 with coherent and 3.4 with
+BSV. Above 1.5 TW cm−2 , the scaling exhibits two plateaus, especially pronounced
+for the 4th and 7th harmonics, likely originating from quantum path interference of
+short and long trajectories generated in the HHG process [55]. These features are visible only in the case of the BSV pump, due to its possibility of ‘non-invasive’ testing.
+Numerical simulations can reproduce our experimental results fairly well for both classical and BSV excitations (see Fig. 3 and Methods). At low pump intensities (below
+∼ 2 TWcm−2 ) and for the 4th - 6th harmonics, the agreement between experimental data and simulations is excellent. However, the two depart from each other as the
+intensity increases, and for the 7th harmonic in general. We attribute these deviations to the simplified bandstructure model, where we only take into account a single
+conduction band (see Methods and Supplementary Information).
+
+Fig. 4 Power scaling of the 5th and 7th harmonics generated in amorphous silicon by bright squeezed
+vacuum (a,b) and by coherent radiation (c,d). Solid lines: mean photon number of harmonics, with
+the shading showing the photon-number uncertainty. For coherent light excitation, the range above
+2 TW cm−2 is inaccessible because of the sample damage.
+
+The differences in the power scaling of harmonics driven by BSV and by classical
+light become even more striking when we replace LN with a-Si, which has a lower
+direct bandgap (in the range between 1.5 eV and 2 eV). Because of the amorphous
+material structure, only odd harmonics can be generated from this sample. Figure 4
+shows the (shot-to-shot) power scaling of the above-bandgap 5th and 7th harmonics
+generated by BSV (a,b) and classical radiation (c,d) in a-Si. Under coherent-state
+irradiation of the sample, we observe a non-perturbative scaling of the photon number
+for both harmonics: N5ω ∝ Nω2.8 , N7ω ∝ Nω2.7 . However, when using BSV, we obtain
+a different scaling. The yield of the 5th harmonic initially scales with the 5th power
+
+7
+
+of the pump photon number, N5ω ∝ Nω5 , indicating a perturbative scaling, and then
+saturates at pump intensities above ∼ 2 TW cm−2 .
+Although the yield of the BSV-generated 7th harmonic already shows the nonperturbative scaling as a sign of tunneling scenario, its exponent is larger than in the
+case of coherent pump, which points to a possible competition between the 7-photon
+multiphoton process and the non-peturbative regime of HHG.
+We attribute the differences in the power scaling of the two types of light to the
+superbunched photon statistics of BSV, which leads to the enhancement of n-photon
+(n)
+processes by a factor of gBSV , compared to coherent-state (classical) light [41]. This
+enhancement offers an explanation for the broader intensity range over which the
+harmonic yield follows a perturbative scaling as well as the higher exponent of the
+BSV-generated 7th harmonic at low pump intensities. Furthermore, this interpretation
+also explains the lower statistical enhancement of the harmonics generated above the
+direct bandgap compared to the 5th harmonic (Fig. 2a). A power scaling with an
+(3)
+exponent around 3 leads to an enhancement by only a factor of gBSV = 15, instead of
+(5)
+gBSV = 945 in the case of the 5th harmonic.
+Another feature of HHG driven by BSV is the saturation of the yield, which we
+attribute to the strong depletion of the valence band population. Remarkably, this
+is not observed in the case of coherent-state pump due to the optical damage of the
+sample.
+
+4 Discussion
+The harmonic power scalings obtained with both samples show that using BSV we
+generate harmonics over a wide range of pump intensities extending beyond 10 TW
+cm−2 without causing optical damage. On the other hand, with coherent light, considerably lower pump intensities (∼ 2 TW cm−2 ) can induce damage in the samples.
+Such striking difference cannot be entirely explained by the longer duration of the
+coherent pulses and is mostly a consequence of the diverse photon distribution of the
+two pulses.
+Under coherent light irradiation, each pulse contains a well-defined amount of
+photons, which will cause optical damage to the sample above a certain threshold.
+In contrast, BSV pulses possess a broad photon-number distribution, implying that
+each pulse contains an uncertain number of photons, with the mean value far below
+the damage threshold. The large-photon-number events in the tail of the distribution,
+however, can drive HHG and probe the material without damaging it within a single
+laser shot or multiple laser shots. Often, continuous irradiation of the sample within
+temporal intervals shorter than its relaxation time can result in optical damage to the
+sample. The BSV photon-number distribution also implies a longer temporal interval
+between intense events, thus effectively providing the sample with sufficient time to
+relax to its initial state.
+Additional experiments (not shown) reveal that by decreasing the laser repetition
+rate, the sample damage threshold increases, and we can generate high harmonics
+using brighter classical light. However, covering a comparable intensity range as BSV
+requires reducing the repetition rate to the Hz level, increasing significantly the already
+8
+
+longer acquisition time. The observation indicates that opportunely modulating the
+shot-to-shot power of a coherent source would allow using it for HHG and acquiring data within times and intensity ranges comparable to those achieved with BSV.
+However, this would come at the cost of increasing complexity, especially for sources
+of few-cycle pulses operating at high repetition rates. On the other hand, the natural sparsity of BSV provides an alternative and more powerful route to using optical
+modulators to study the interaction of intense light with matter, allowing, in a fashion
+similar to sparse sampling, the collection of sufficient data within a short time (minutes using a 1 kHz repetition rate pump laser) without damaging the solid sample nor
+adding any experimental complexity.
+Thus, the excitation of a material with BSV is more gentle than with coherent
+light. It enables the study of solid-state samples in extreme regimes, such as the
+harmonic yield saturation in amorphous silicon (Fig. 4(a, b)), which can be related to
+the creation of an electron-hole plasma.
+
+5 Conclusion and outlook
+In conclusion, our observation of non-perturbative HHG driven by BSV demonstrates
+that experiments with quantum light are now able to access the strong-field regime
+of quantum optics. BSV enables a strong enhancement of solid-state HHG compared
+to coherent light and allows for the observation of electron-hole dynamics beyond the
+conventional damage threshold. The approach we developed may become a new spectroscopic tool based on photon-number statistics, heralding the emergence of extreme
+nonlinear quantum spectroscopy. Our BSV source can also attain sufficient intensities
+to drive HHG in gases, liquids, and wide-bandgap solids, reaching the XUV spectral
+regime, and we expect that can also be employed for controlling HHG, based on subcycle quantum noise engineering, in a similar fashion to control through sub-cycle field
+engineering.
+In the future, the giant uncertainty of the BSV’s electric field magnitude and the
+massive amount of photon pairs contained in each BSV pulse will find use in the
+observation of quantum interference effects and of many-body correlations in solids,
+with applications in quantum state engineering. Finally, since HHG occurs on subcycle timescales, it goes beyond conventional descriptions of single-mode quantum
+optics, which is insufficient over such short temporal spans. Our findings will further
+stimulate discussions in this direction and expand the realm of quantum and extreme
+nonlinear optics to new uncharted territories.
+
+6 Methods
+6.1 Experimental setup
+Figure 5(a) shows a sketch of our experimental setup for HHG in solids. For comparison, we use two linearly polarised pump sources delivering (i) coherent pulses and (ii)
+BSV pulses both centered at 1600 nm. As a pump laser for both sources, we use a
+titanium sapphire amplifier laser system (Coherent Legend) with a central wavelength
+of 800 nm, 45 fs FWHM pulse duration, and a repetition rate of 1 kHz. Combining
+9
+
+this laser with a femtosecond optical parametric amplifier (Light Conversion, TOPAS
+Prime), we obtain coherent pulses with a duration of 70 fs (FWHM).
+(a)
+
+(b)
+
+Mirror
+
+(c)
+
+Fig. 5 (a) Experimental setup for HHG by coherent radiation and BSV. (b) Photon-number distribution of BSV. The solid line is a theoretical fit, which corresponds to single-mode BSV, the only
+fitting parameter being the mean photon number (dashed line). (c) Measured averaged FROG trace
+of BSV.
+
+In a parallel setup, after reducing the pump laser beam diameter to 3 mm (1/e2 ),
+we generate BSV in a 3-mm-thick BBO crystal cut for type-I collinear frequencydegenerate phase matching via high-gain parametric down-conversion. Here, the BBO
+crystal is tuned out of the exact phase matching to reduce the frequency bandwidth
+of the BSV, so that the BSV becomes single-mode temporally. However, at this stage,
+BSV pulses still contain around 150 spatial modes. In order to make it single-mode also
+spatially, we reflect both the BSV and the pump back into the same crystal with a plane
+silver mirror placed at a distance of 75 cm from the crystal. Back at the BBO, only the
+BSV spatial mode with the lowest diffraction (e.g., the fundamental mode) overlaps
+significantly with the pump beam and undergoes phase-sensitive amplification, while
+all the higher-order modes diffract faster without being further amplified [56]. After
+the amplification, the BSV pulses exhibit a spectral bandwidth of 150 nm centered
+around 1.6 µm. We separate them from the residual 800 nm light using a shortpass
+dichroic mirror (Thorlabs DMSP1180) and two longpass filters (Thorlabs FELH1000).
+
+10
+
+To characterize the temporal profile of the coherent and BSV pulses, and thus
+determine the actual intensity of the light irradiating the sample, we use a homebuild device for second-harmonic frequency-resolved optical gating (SH-FROG). The
+retrieved FROG traces reveal that both pulses are almost transform-limited with a
+duration of 70 fs FWHM for the coherent pulses and 25 fs FWHM for the BSV pulses.
+The measured FROG trace of the latter is shown in Fig. 5(c).
+Figure 5(b) displays the photon-number distribution of BSV measured with a fast
+InGaAs photodiode (Thorlabs PDA20C2) without spatial or spectral filtering. The
+data are well fitted with a theoretical single-mode distribution [41] (black line), with
+the mean number of photons per pulse 2 · 1012 (dashed vertical line), confirming that
+the BSV is single-mode. The distribution stretches up to photon numbers of 2 · 1013 ,
+corresponding to pulse energies of 9 µJ.
+For HHG, either the BSV or the coherent-state radiation is focused into a 30 µm
+spot (diameter at 1/e2 ) on the sample with a silver off-axis parabolic mirror (Edmund
+Optics, f = 25.4 mm) in order to drive HHG. The spot size has been determined
+from a knife-edge measurement for both sources. We use two samples: an x-cut 6 µm
+Mg:LiNbO3 crystal on a 1 mm fused silica substrate and a 1 µm a-Si layer on a 1 mm
+fused silica substrate. We mount the samples so that the substrate faces the pump
+pulses. Because fused silica has a significantly higher bandgap, it does not contribute to
+the outcome of the HHG measurement. After the samples, the harmonics and the pump
+light are collimated by a UV-enhanced aluminum off-axis parabolic mirror (Thorlabs
+MPD119-F01, f = 25.4 mm) and sent to a MgF2 prism. After this, the harmonics are
+focused by a UV-enhanced aluminum spherical mirror (Thorlabs CM254-250-F01) to
+different positions.
+We detect the 4th–7th harmonics by a fast UV-enhanced silicon avalanche photodiode (Thorlabs APD440A2) separately by rotating the spherical mirror within
+a range of 1°. Additionally, we place bandpass filters for the 4th harmonic (Thorlabs FBH400-40), the 5th harmonic (Edmund Optics 12094, BP325/50) and the 6th
+harmonic (Edmund Optics 39313, BP266/10), and also an iris (1 mm opening) in
+front of the detector to reduce the contribution of the scattered light. We acquire
+200,000 single-shot records of driver pulses (classical or BSV) and each harmonic
+synchronously.
+
+6.2 Numerical simulation
+To simulate and elucidate our experimental findings, we utilize the semiconductor
+Bloch equations (SBEs) [57] to describe the interaction between BSV (or classical)
+light and LiNbO3 along Γ-Z:
+∂P (k, t)
+1
+= [ϵc (k) − ϵv (k) + iE(t)∇k ]P (k, t) − (1 − fke − fvh )dk · E(t) − i P (k, t), (1)
+∂t
+T2
+e(h)
+
+∂fk
+
+(k, t)
+e(h)
+= −2Im[dk · E(t) · Pk∗ ] + eE(t)∇k fk (k, t).
+∂t
+
+11
+
+(2)
+
+Here, P (k, t) represents a dimensionless polarization depending on the time t and
+e(h)
+the quasi-momentum k. fk
+denotes the population of electrons and holes in the
+conduction and valence bands, respectively. The energy-momentum relation for the
+conduction band ϵc (k) and the valence band ϵv (k), as well as the transition dipole
+moment (TDM) dk , are derived from density functional theory (DFT) calculations [58],
+with some modifications. Most importantly, we set the bandgap manually to 4.2 eV,
+corresponding to the direct bandgap of doped LN, which is the relevant gap for the
+HHG process. The exact bandstructure and transition dipole moments are plotted in
+the Supplementary Information.
+To eliminate multiple recollision interferences and maintain the pronounced harmonic structure in our 1D simulation, we set the phenomenological decoherence time
+to half of the optical cycle duration of the pump laser, T2 = 0.5Tpump . Extending
+the decoherence time to one optical cycle Tpump does not notably alter our results. In
+general, a longer decoherence time exceeding a few cycles allows electrons to return
+over longer durations than a laser cycle, leading to unphysical anharmonic photon
+emission, whereas a shorter decoherence time less than a quarter cycle 0.25Tpump may
+significantly suppress long trajectories.
+Considering LiNbO3 ’s ferroelectric nature, we account for the spontaneous polarization effect, which breaks the material’s symmetry and allows for even-order
+harmonics generation (see Ref. [58] and the Supplementary Information for more
+details). The HHG spectrum is computed as
+SHHG (ω) ∼
+where
+
+Z ∞
+
+2
+
+[Jinter + iJintra ]eiωt dt ,
+
+(3)
+
+dk · P (k, t)dk + c.c.
+
+(4)
+
+−∞
+
+Z
+
+Jinter =
+
+d
+dt
+
+Jintra =
+
+X Z
+
+and
+
+n=c,v
+
+νn (k) · fn (k, t)dk
+
+(5)
+
+denote, respectively, the interband and intraband contributions to the HHG yield, and
+νn (k) = ∇k ϵn (k) represents the group velocity of the electrons.
+For simulating the BSV-driven HHG spectrum underlying the enhancement plot
+(Fig. 2(a)), we employ the Husimi Q function for BSV [35]:
+
+
+
+|ϵα |2
+exp −
+.
+2|ϵ̄|2
+2π|ϵ̄|2
+
+Q(ϵα ) ≈ p
+
+2
+
+(6)
+
+Here, ϵα is the electric field amplitude for coherent parameter α, and ϵ̄ the mean
+value of the absolute field amplitude of BSV. ϵα is taken to be real along the direction of antisqueezing, and the distribution is integrated over the axis of squeezing in
+advance, so that the distribution in Eq. 6 is one-dimensional. This is justified as the
+squeezed axis of the Husimi distribution is infinitely narrow in terms of the electric
+field amplitude, and hence does not contribute to the spectrum.
+12
+
+The BSV-driven HHG spectrum is obtained by integrating the coherent HHG
+spectra with the Q function distribution [35]:
+Z
+BSV
+coh
+SHHG
+(ω, ϵ̄) = dϵα Q(ϵα )SHHG
+(ω, ϵα ).
+(7)
+
+Data availability. All data that support the plots within this paper and other
+findings of this study are available from the corresponding author upon reasonable
+request.
+Acknowledgements. F.T., M.C. and A.R. thank Philip St.J. Russell for supporting the project. The authors thank Matan Even Tzur and Misha Ivanov for fruitful
+discussions. A.R. thanks Patrick Cusson for the help with the FROG measurement
+and Isaac Soward for the help at the first stage of the experiment. A.R. acknowledges
+funding from the International Max Planck Research School for Physics of Light. D.S.
+acknowledges partial support by the European Union’s Horizon Europe Research and
+Innovation Programme under agreement 101070700 (project MIRAQLS). Z.C., M.B.,
+O.C., I.K. and M.K. thank the Helen Diller Quantum Center for partial financial
+support.
+Author contributions. M.C. and F.T. conceived the project, supervised the work
+and acquired the funding. A.R., F.T. and M.C. designed the experiment. A.R. carried
+out the experiment under supervision of M.C., F.T. and D.S. Z.C. and M.B. developed the theory and carried out the numerical simulations under the supervision of
+M.K., I.K. and O.C. A.R., M.C., D.S., M.K. and F.T. wrote the article. All authors
+contributed to discussions and the interpretation of the results.
+Declarations.
+
+The authors declare no competing interests.
+
+References
+[1] Ferray, M. et al. Multiple-harmonic conversion of 1064 nm radiation in rare gases.
+J. Phys. B: At. Mol. Opt. Phys. 21, L31–L35 (1988). URL https://doi.org/10.
+1088/0953-4075/21/3/001.
+[2] McPherson, A. et al. Studies of multiphoton production of vacuum-ultraviolet
+radiation in the rare gases. J. Opt. Soc. Am. B 4, 595–601 (1987). URL https:
+//doi.org/10.1364/JOSAB.4.000595.
+[3] Krausz, F. & Ivanov, M. Attosecond physics. Rev. Mod. Phys. 81, 163–234
+(2009). URL https://link.aps.org/doi/10.1103/RevModPhys.81.163.
+[4] Popmintchev, T. et al. Bright coherent ultrahigh harmonics in the kev x-ray
+regime from mid-infrared femtosecond lasers. Science 336, 1287–1291 (2012).
+URL https://www.science.org/doi/abs/10.1126/science.1218497.
+[5] Luu, T. T. et al.
+Extreme–ultraviolet high–harmonic generation in liquids. Nature Communications 9, 3723 (2018). URL https://doi.org/10.1038/
+s41467-018-06040-4.
+13
+
+[6] Mondal, A. et al. High-harmonic generation in liquids with few-cycle pulses:
+effect of laser-pulse duration on the cut-off energy. Opt. Express 31, 34348–34361
+(2023). URL https://opg.optica.org/oe/abstract.cfm?URI=oe-31-21-34348.
+[7] Ghimire, S. et al. Observation of high-order harmonic generation in a bulk crystal.
+Nature Physics 7, 138–141 (2011). URL https://doi.org/10.1038/nphys1847.
+[8] Vampa, G. et al. All-optical reconstruction of crystal band structure. Phys. Rev.
+Lett. 115, 193603 (2015). URL https://link.aps.org/doi/10.1103/PhysRevLett.
+115.193603.
+[9] Goulielmakis, E. & Brabec, T. High harmonic generation in condensed matter. Nature Photonics 16, 411–421 (2022). URL https://doi.org/10.1038/
+s41566-022-00988-y.
+[10] Ganeev, R. A., Elouga Bom, L. B. & Ozaki, T. High-order harmonic generation
+from plasma plume pumped by 400nm wavelength laser. Applied Physics Letters
+91, 131104 (2007). URL https://doi.org/10.1063/1.2783480.
+[11] Popmintchev, D. et al. Ultraviolet surprise: Efficient soft x-ray high-harmonic
+generation in multiply ionized plasmas. Science 350, 1225–1231 (2015). URL
+https://www.science.org/doi/abs/10.1126/science.aac9755.
+[12] Marceau, C., Hammond, T. J., Naumov, A. Y., Corkum, P. B. & Villeneuve, D. M.
+Wavelength scaling of high harmonic generation for 267 nm, 400 nm and 800 nm
+driving laser pulses. Journal of Physics Communications 1, 015009 (2017). URL
+https://dx.doi.org/10.1088/2399-6528/aa74f6.
+[13] Teichmann, S. M., Silva, F., Cousin, S. L., Hemmer, M. & Biegert, J. 0.5-kev
+soft x-ray attosecond continua. Nature Communications 7, 11493 (2016). URL
+https://doi.org/10.1038/ncomms11493.
+[14] Cousin, S. L. et al. High-flux table-top soft x-ray source driven by sub-2-cycle, cep
+stable, 1.85-µm 1-khz pulses for carbon k-edge spectroscopy. Opt. Lett. 39, 5383–
+5386 (2014). URL https://opg.optica.org/ol/abstract.cfm?URI=ol-39-18-5383.
+[15] Paul, P. M. et al. Observation of a train of attosecond pulses from high harmonic generation. Science 292, 1689–1692 (2001). URL https://doi.org/10.1126/
+science.1059413.
+[16] Hentschel, M. et al. Attosecond metrology. Nature 414, 509–513 (2001). URL
+https://doi.org/10.1038/35107000.
+[17] Imai, S., Ono, A. & Ishihara, S. High harmonic generation in a correlated electron
+system. Phys. Rev. Lett. 124, 157404 (2020). URL https://link.aps.org/doi/10.
+1103/PhysRevLett.124.157404.
+
+14
+
+[18] Schmid, C. P. et al. Tunable non-integer high-harmonic generation in a topological insulator. Nature 593, 385–390 (2021). URL https://doi.org/10.1038/
+s41586-021-03466-7.
+[19] Heide, C. et al. Probing topological phase transitions using high-harmonic generation. Nature Photonics 16, 620–624 (2022). URL https://doi.org/10.1038/
+s41566-022-01050-7.
+[20] Shao, C. et al. High-harmonic generation approaching the quantum critical point
+of strongly correlated systems. Phys. Rev. Lett. 128, 047401 (2022). URL https:
+//link.aps.org/doi/10.1103/PhysRevLett.128.047401.
+[21] Hohenleutner, M. et al. Real-time observation of interfering crystal electrons in
+high-harmonic generation. Nature 523, 572–575 (2015). URL https://doi.org/
+10.1038/nature14652.
+[22] Tzallas, P., Skantzakis, E., Nikolopoulos, L. A. A., Tsakiris, G. D. & Charalambidis, D. Extreme-ultraviolet pump–probe studies of one-femtosecond-scale
+electron dynamics. Nature Physics 7, 781–784 (2011). URL https://doi.org/10.
+1038/nphys2033.
+[23] Luu, T. T. et al. Extreme ultraviolet high-harmonic spectroscopy of solids. Nature
+521, 498–502 (2015). URL https://doi.org/10.1038/nature14456.
+[24] Nisoli, M., Decleva, P., Calegari, F., Palacios, A. & Martı́n, F. Attosecond electron
+dynamics in molecules. Chemical Reviews 117, 10760–10825 (2017). URL https:
+//doi.org/10.1021/acs.chemrev.6b00453.
+[25] Lakhotia, H. et al. Laser picoscopy of valence electrons in solids. Nature 583,
+55–59 (2020). URL https://doi.org/10.1038/s41586-020-2429-z.
+[26] Alcalà, J. et al. High-harmonic spectroscopy of quantum phase transitions in
+a high-tc superconductor. Proceedings of the National Academy of Sciences
+119, e2207766119 (2022). URL https://www.pnas.org/doi/abs/10.1073/pnas.
+2207766119.
+[27] Uzan-Narovlansky, A. J. et al. Observation of interband berry phase in laserdriven crystals. Nature 626, 66–71 (2024). URL https://doi.org/10.1038/
+s41586-023-06828-5.
+[28] Gorlach, A., Neufeld, O., Rivera, N., Cohen, O. & Kaminer, I. The quantumoptical nature of high harmonic generation. Nature Communications 11, 4598
+(2020). URL htps://doi.org/10.1038/s41467-020-18218-w.
+[29] Sloan, J. et al. Entangling extreme ultraviolet photons through strong field pair
+generation. ArXiv preprint 2309.16466 (2023). URL https://doi.org/10.48550/
+arXiv.2309.16466.
+
+15
+
+[30] Yi, S., Babushkin, I., Smirnova, O. & Ivanov, M. Generation of massively entangled bright states of light during harmonic generation in resonant media. ArXiv
+preprint 2401.02817 (2024). URL https://doi.org/10.48550/arXiv.2401.02817.
+[31] Stammer, P. et al. Entanglement and squeezing of the optical field modes in
+high harmonic generation. Phys. Rev. Lett. 132, 143603 (2024). URL https:
+//link.aps.org/doi/10.1103/PhysRevLett.132.143603.
+[32] Tsatrafyllis, N., Kominis, I. K., Gonoskov, I. A. & Tzallas, P. High-order harmonics measured by the photon statistics of the infrared driving-field exiting
+the atomic medium. Nature Communications 8, 15170 (2017). URL https:
+//doi.org/10.1038/ncomms15170.
+[33] Tsatrafyllis, N. et al. Quantum optical signatures in a strong laser pulse after
+interaction with semiconductors. Phys. Rev. Lett. 122, 193602 (2019). URL
+https://link.aps.org/doi/10.1103/PhysRevLett.122.193602.
+[34] Lewenstein, M. et al. Generation of optical schrödinger cat states in intense
+laser–matter interactions. Nature Physics 17, 1104–1108 (2021). URL https:
+//doi.org/10.1038/s41567-021-01317-w.
+[35] Gorlach, A. et al.
+High-harmonic generation driven by quantum light.
+Nature Physics 19, 1689–1696 (2023).
+URL https://doi.org/10.1038/
+s41567-023-02127-y.
+[36] Even Tzur, M. et al. Photon-statistics force in ultrafast electron dynamics. Nature Photonics 17, 501–509 (2023). URL https://doi.org/10.1038/
+s41566-023-01209-w.
+[37] Vahlbruch, H., Mehmet, M., Danzmann, K. & Schnabel, R. Detection of 15
+db squeezed states of light and their application for the absolute calibration of
+photoelectric quantum efficiency. Phys. Rev. Lett. 117, 110801 (2016). URL
+https://doi.org/10.1103/PhysRevLett.117.110801.
+[38] Bruno, N. et al. Displacement of entanglement back and forth between the micro
+and macro domains. Nature Physics 9, 545–548 (2013). URL https://doi.org/10.
+1038/nphys2681.
+[39] Lvovsky, A. I., Ghobadi, R., Chandra, A., Prasad, A. S. & Simon, C. Observation
+of micro–macro entanglement of light. Nature Physics 9, 541–544 (2013). URL
+https://doi.org/10.1038/nphys2682.
+[40] Laghaout, A., Neergaard-Nielsen, J. S. & Andersen, U. L. Assessments of macroscopicity for quantum optical states. Optics Communications 337, 96–101 (2015).
+URL https://doi.org/10.1016/j.optcom.2014.07.046. Macroscopic quantumness:
+theory and applications in optical sciences.
+
+16
+
+[41] Spasibko, K. Y. et al. Multiphoton effects enhanced due to ultrafast photonnumber fluctuations. Phys. Rev. Lett. 119, 223603 (2017). URL https://doi.org/
+10.1103/PhysRevLett.119.223603.
+[42] Manceau, M., Spasibko, K. Y., Leuchs, G., Filip, R. & Chekhova, M. V. Indefinitemean pareto photon distribution from amplified quantum noise. Phys. Rev. Lett.
+123, 123606 (2019). URL 10.1103/PhysRevLett.123.123606.
+[43] Finger, M. A., Iskhakov, T. S., Joly, N. Y., Chekhova, M. V. & Russell, P. S. J.
+Raman-free, noble-gas-filled photonic-crystal fiber source for ultrafast, very bright
+twin-beam squeezed vacuum. Phys. Rev. Lett. 115, 143602 (2015). URL https:
+//link.aps.org/doi/10.1103/PhysRevLett.115.143602.
+[44] Iskhakov, T. S., Agafonov, I. N., Chekhova, M. V. & Leuchs, G. Polarizationentangled light pulses of 105 photons. Phys. Rev. Lett. 109, 150502 (2012). URL
+https://doi.org/10.1103/PhysRevLett.109.150502.
+[45] Virally, S., Cusson, P. & Seletskiy, D. V. Enhanced electro-optic sampling with
+quantum probes. Phys. Rev. Lett. 127, 270504 (2021). URL https://doi.org/10.
+1103/PhysRevLett.127.270504.
+[46] Iskhakov, T. S., Pérez, A. M., Spasibko, K. Y., Chekhova, M. V. & Leuchs, G.
+Superbunched bright squeezed vacuum state. Opt. Lett. 37, 1919–1921 (2012).
+URL https://doi.org/10.1364/OL.37.001919.
+[47] Heimerl, J. et al. Multiphoton electron emission with non-classical light. Nature
+Physics (2024). URL https://doi.org/10.1038/s41567-024-02472-6.
+[48] Even Tzur, M. & Cohen, O. Motion of charged particles in bright squeezed
+vacuum. Light: Science & Applications 13, 41 (2024). URL https://doi.org/10.
+1038/s41377-024-01381-w.
+[49] Hegazi, A., Tzur, M. E. & Cohen, O. Quantum state of high harmonics driven by
+quantum light: Dynamical symmetries and selection rules. ATTO 9 Conference
+Contribution (2023).
+[50] Tzur, M. E. et al. Generation of squeezed high-order harmonics. ArXiv preprint
+2311.11257 (2023). URL https://doi.org/10.48550/arXiv.2311.11257.
+[51] Riek, C. et al. Direct sampling of electric-field vacuum fluctuations. Science 350,
+420–423 (2015). URL https://www.science.org/doi/abs/10.1126/science.aac9788.
+[52] Riek, C. et al. Subcycle quantum electrodynamics. Nature 541, 376–379 (2017).
+URL https://doi.org/10.1038/nature21024.
+[53] Keldysh, L. V. Ionization in the field of a strong electromagnetic wave. Sov. Phys.
+JETP 20, 1307–1314 (1965). URL http://www.jetp.ras.ru/cgi-bin/e/index/e/
+
+17
+
+20/5/p1307?a=list.
+[54] Kase, S. & Ohi, K. Optical absorption and interband faraday rotation in LiTaO3
+and LiNbO3. Ferroelectrics 8, 419–420 (1974). URL https://doi.org/10.1080/
+00150197408234114.
+[55] Kim, Y. W. et al. Spectral interference in high harmonic generation from solids.
+ACS Photonics 6, 851–857 (2019). URL https://doi.org/10.1021/acsphotonics.
+9b00019.
+[56] Pérez, A. M. et al. Bright squeezed-vacuum source with 1.1 spatial mode. Opt.
+Lett. 39, 2403–2406 (2014). URL https://doi.org/10.1364/OL.39.002403.
+[57] Luu, T. T. & Wörner, H. J. High-order harmonic generation in solids: A unifying
+approach. Phys. Rev. B 94, 115164 (2016). URL https://link.aps.org/doi/10.
+1103/PhysRevB.94.115164.
+[58] Shao, T.-J., Hu, F. & Chen, H.-B. Spontaneous polarization effects on solid high
+harmonic generation in ferroelectric lithium niobate crystals. J. Phys. B: At. Mol.
+Opt. Phys. 54, 245402 (2021). URL https://doi.org/10.1088/1361-6455/ac43f5.
+
+18
+
+1
+
+2
+
+5
+
+Andrei Rasputnyi1,2 , Zhaopin Chen3,4,5 , Michael Birk3,4,5 ,
+Oren Cohen3,4,5 , Ido Kaminer4,5,6 , Michael Krüger3,4,5 ,
+Denis Seletskiy7 , Maria Chekhova1,2,6*, Francesco Tani1,8
+
+6
+
+1 Max Planck Institute for the Science of Light, Staudtstr. 2, Erlangen,
+
+3
+4
+
+arXiv:2403.15337v2 [quant-ph] 9 Apr 2024
+
+High Harmonic Generation by Bright Squeezed
+Vacuum
+
+7
+
+91058, Germany.
+
+8
+
+2 Friedrich-Alexander Universität Erlangen-Nürnberg, Staudtstr. 7/B2,
+
+9
+
+Erlangen, 91058, Germany.
+
+10
+
+3 Department of Physics, Technion – Israel Institute of Technology,
+
+11
+
+Technion City, Haifa, 32000, Israel.
+
+12
+
+4 Solid State Institute, Technion – Israel Institute of Technology,
+
+13
+
+Technion City, Haifa, 32000, Israel.
+
+14
+
+5 Helen Diller Quantum Center, Technion – Israel Institute of
+
+15
+
+Technology, Technion City, Haifa, 32000, Israel.
+
+16
+
+6 Faculty of Electrical and Computer Engineering, Technion – Israel
+
+17
+
+Institute of Technology, Technion City, Haifa, 32000, Israel.
+
+18
+
+7 femtoQ Laboratory, Department of Engineering Physics, Polytechnique
+
+19
+
+Montréal, Montréal, Québec H3T 1J4, Canada.
+
+20
+
+8 Univ. Lille, CNRS, UMR 8523—PhLAM—Physique des Lasers Atomes
+
+21
+
+et Molécules, Lille, F-59000, France.
+
+22
+
+*Corresponding author(s). E-mail(s): maria.chekhova@mpl.mpg.de;
+
+23
+
+Supplementary information
+
+24
+
+Damage threshold
+
+25
+26
+27
+
+In our work, we define the damage threshold as the coherent-state pump intensity
+after which we observe an irreversible decrease in the harmonic yield. We measure the
+power scaling of the 6th harmonic from LN at increasing and decreasing pump peak
+
+1
+
+28
+29
+30
+31
+32
+33
+34
+35
+36
+
+intensity, with gradually increasing maximal energy as shown in Fig. 1(a). To isolate
+the damage caused by a single shot from that caused by multiple shots and identify the
+corresponding thresholds, we repeat these measurements for various repetition rates of
+the coherent-state pump from 1 kHz down to 0.5 Hz. Figure 1(b) shows that the yield
+of the 6th harmonic cannot be recovered after reaching 3 TW cm−2 of pump peak
+intensity. At the higher repetition rates, we observe sample damage at intensities as
+low as 1.5 TW cm−2 , however, operating the source at 0.5 Hz, the damage threshold
+increased to to values comparable to what we achieved when irradiating the sample
+with BSV light.
+(a)
+
+(b)
+decrease of harmonic
+yield at 3 TW/cm2
+of pump intensity
+
+Fig. 1 (a) The change of the peak intensity of coherent pump during the measurement of the 6th
+harmonic power scaling from LN. (b) The 6th harmonic power scaling for different maximum peak
+intensities.
+
+37
+
+Model band structure for numerical calculations
+
+43
+
+The two-band band structure of Mg-doped lithium niobate in our numerical simulation
+is obtained from Ref. [? ], with a modification of the bandgap at the Γ point equal to
+4.2 eV, a value which is close to the absorption edge of the Mg-doped LiNbO3 sample,
+as depicted in Fig. 2(a). An appropriate transition dipole moment is considered in
+the paper with a maximum value of 6.8 atomic units, the distribution of which is
+illustrated in Fig. 2(b).
+
+44
+
+Spontaneous polarization
+
+38
+39
+40
+41
+42
+
+45
+46
+47
+48
+49
+
+Given the ferroelectric behaviour of lithium niobate, we incorporate spontaneous polarization into the model [? ]. Spontaneous polarization induces a first-order Stark shift
+of the bandgap, expressed by Eg (F ) = Eg (0)−µ1 F (t), where Eg (0) corresponds to the
+bandgap energy without an external field, F (t) is the laser field, and the spontaneous
+polarization parameter µ1 is taken to be 7.33197 atomic units, as described in Ref. [?
+
+2
+
+51
+52
+53
+
+54
+
+]. This temporal Stark shift breaks the inversion symmetry, thereby facilitating the
+generation of even harmonics. Since the temporal Stark shift can not significantly alter
+the bandgap under high-intensity conditions, we introduce a saturation term for the
+spontaneous polarization coefficient µ(I) = √ µ1
+, where I is the peak intensity
+1+I/Isat
+
+of the pump pulse and Isat = 6 TW cm−2 .
+7
+6.5
+6
+
+dvc
+
+50
+
+5.5
+5
+4.5
+4
+3.5
+-0.5
+
+0
+k/kc
+
+0.5
+
+Fig. 2 (a) Model band structure of Mg-doped lithium niobate in the Γ − Z orientation; (b) Corresponding transition dipole moment in atomic units along the same orientation of (a).
+
+3
