@@ -25,9 +25,11 @@
 - **文献定向补充（P1-2）** — 严谨性 <0.70 或有文献缺口时触发 researcher
   - 按缺口检索 2-3 篇近 2 年论文，写入 targeted-research 目录
 - **方法学手册联动（P2）** — writer 按章节同步更新方法学手册
-- **GLM-5.2 升级** — linsai/pipeline-runner/critic 从 glm-5.1 升级到 glm-5.2
-  - 1M 无损上下文，长程任务更稳定
-  - 实际 hermes oneshot 测试通过
+- **GLM-5.2 + MiniMax-M3 升级** — 全团队模型升级
+  - 6 个 profile（linsai/runner/analyst/writer/critic/reviewer）使用 GLM-5.2（1M 无损上下文，长程任务更稳定）
+  - researcher 使用 MiniMax-M3（编码与智能体评测行业顶尖）
+  - analyst/writer/reviewer 补充 zai provider 配置
+  - 实际 hermes oneshot 测试全部通过
 
 ### v6.6.0 核心变更
 - **CoPilot 团队 Profile 状态面板** — `hermes_bridge.py` 新增 `list_team_profiles()`

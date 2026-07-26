@@ -274,7 +274,7 @@ LinSai-CoPilot/
 | **提案生命周期** | ✅ | drafts→optimizing→pending_review→archived 四阶段流转 |
 | **对抗优化引擎** | ✅ | 分模块单轮+文献驱动筛选+多维度评分+全模块胜利达标 |
 | **Hermes 团队编排** | ✅ | 7 个 profile 协作，每日编排器自动驱动 |
-| **GLM-5.2 升级** | ✅ | linsai/runner/critic 使用 GLM-5.2（1M 上下文） |
+| **GLM-5.2 + MiniMax-M3 升级** | ✅ | 6个profile使用GLM-5.2（1M上下文），researcher使用MiniMax-M3 |
 
 ---
 
@@ -295,11 +295,11 @@ researcher ← analyst ← writer ↔ critic → reviewer
 |---------|------|------|---------|
 | `linsai` | GLM-5.2 | 方向校准/总控/简报 | 常驻 gateway |
 | `pipeline-runner` | GLM-5.2 | 管线编排/每日触发 | 常驻 gateway |
-| `researcher` | MiniMax-M2.7 | 文献调研/定向检索 | 按需 oneshot |
-| `analyst` | MiniMax-M2.7 | 缺口分析/科学问题 | 按需 oneshot |
-| `writer` | MiniMax-M2.7 | 申请书撰写/修订 | 按需 oneshot |
+| `researcher` | MiniMax-M3 | 文献调研/定向检索 | 按需 oneshot |
+| `analyst` | GLM-5.2 | 缺口分析/科学问题 | 按需 oneshot |
+| `writer` | GLM-5.2 | 申请书撰写/修订 | 按需 oneshot |
 | `critic` | GLM-5.2 | 对抗式评审（红队） | 按需 oneshot |
-| `reviewer` | MiniMax-M2.7 | 质量终审 | 按需 oneshot |
+| `reviewer` | GLM-5.2 | 质量终审 | 按需 oneshot |
 
 ### 研究管线六阶段
 
@@ -366,7 +366,7 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 | 运行环境 | Python 3（仅标准库） | 零第三方依赖 |
 | 内容格式 | Markdown（.md） | 对话记录、任务描述、记忆片段 |
 | 元数据 | JSON | 会话状态、记忆索引、任务追踪 |
-| LLM接口 | GLM-5.2 / MiniMax-M2.7 | 通过 hermes CLI 调用，Coding Plan 订阅 |
+| LLM接口 | GLM-5.2 / MiniMax-M3 | 通过 hermes CLI 调用，Coding Plan 订阅 |
 | 路径处理 | pathlib.Path | 禁止硬编码绝对路径 |
 
 ---
