@@ -137,34 +137,42 @@ class ProposalLifecycle:
         return None
 
     # ------------------------------------------------------------------
-    # 课题命名规则（v6.5.3）
+    # 课题命名规则（v6.5.4）
     # ------------------------------------------------------------------
 
-    # 命名规则：nsfc-{年份}-{领域缩写}[-{序号}]
-    # 示例：nsfc-2026-hhg / nsfc-2026-bsv-01 / nsfc-2027-topo-photon
+    # 命名规则：{项目类型}-{课题名称}-{启动日期}
+    # 示例：general-hhg-20260726 / key-quantum-geometry-20260726
+    # 项目类型简称：general(面上) / key(重点) / major(重大)
     _NAMING_PATTERN = None  # 编译时初始化
+
+    # 项目类型 → 简称映射
+    PROJECT_TYPE_SHORT = {
+        "general": "general",
+        "key": "key",
+        "major": "major",
+    }
 
     @classmethod
     def _get_naming_pattern(cls):
         if cls._NAMING_PATTERN is None:
             import re
-            # nsfc-2026-hhg / nsfc-2026-bsv-01 / nsfc-2027-topo-photon
+            # general-hhg-20260726 / key-quantum-geometry-20260726 / major-bsv-20260726-02
+            # 项目类型-课题名称-日期(YYYYMMDD)[-序号]
             cls._NAMING_PATTERN = re.compile(
-                r"^nsfc-(\d{4})-([a-z][a-z0-9-]{1,20})(?:-(\d{2,3}))?$"
+                r"^(general|key|major)-([a-z][a-z0-9-]{1,30})-(\d{4})(\d{2})(\d{2})(?:-(\d{2}))?$"
             )
         return cls._NAMING_PATTERN
 
     def validate_proposal_id(self, proposal_id: str) -> Dict[str, Any]:
         """校验课题 ID 是否符合命名规则。
 
-        规则：nsfc-{年份}-{领域缩写}[-{序号}]
-        - nsfc：固定前缀
-        - 年份：4位数字
-        - 领域缩写：2-20位小写字母/数字/连字符
-        - 序号：可选，2-3位数字
+        规则：{项目类型}-{课题名称}-{启动日期}
+        - 项目类型：general(面上) / key(重点) / major(重大)
+        - 课题名称：2-30位小写字母/数字/连字符
+        - 启动日期：YYYYMMDD 格式
 
         Returns:
-            {valid, reason, parsed: {year, domain, seq}}
+            {valid, reason, parsed: {project_type, name, date}}
         """
         pattern = self._get_naming_pattern()
         match = pattern.match(proposal_id)
@@ -172,8 +180,9 @@ class ProposalLifecycle:
             return {
                 "valid": False,
                 "reason": (
-                    f"命名不符合规则。正确格式：nsfc-{{年份}}-{{领域缩写}}[-序号]\n"
-                    f"示例：nsfc-2026-hhg / nsfc-2026-bsv-01 / nsfc-2027-topo-photon\n"
+                    f"命名不符合规则。正确格式：{{项目类型}}-{{课题名称}}-{{YYYYMMDD}}\n"
+                    f"项目类型：general(面上) / key(重点) / major(重大)\n"
+                    f"示例：general-hhg-20260726 / key-quantum-geometry-20260726\n"
                     f"收到：{proposal_id}"
                 ),
                 "parsed": None,
@@ -182,47 +191,51 @@ class ProposalLifecycle:
             "valid": True,
             "reason": "命名合规",
             "parsed": {
-                "year": match.group(1),
-                "domain": match.group(2),
-                "seq": match.group(3),
+                "project_type": match.group(1),
+                "name": match.group(2),
+                "date": f"{match.group(3)}-{match.group(4)}-{match.group(5)}",
+                "date_raw": match.group(3) + match.group(4) + match.group(5),
+                "seq": match.group(6),
             },
         }
 
     def generate_proposal_id(
         self,
-        domain: str,
-        year: Optional[int] = None,
+        name: str,
+        project_type: str = "general",
+        date_str: Optional[str] = None,
     ) -> str:
         """自动生成课题 ID。
 
         Args:
-            domain: 领域缩写（如 hhg, bsv, topo-photon）
-            year: 年份（默认当前年份）
+            name: 课题名称缩写（如 hhg, bsv, quantum-geometry）
+            project_type: 项目类型（general/key/major）
+            date_str: 启动日期 YYYYMMDD（默认今天）
 
         Returns:
             符合命名规则的课题 ID
         """
-        if year is None:
+        if date_str is None:
             import datetime
-            year = datetime.datetime.now().year
+            date_str = datetime.datetime.now().strftime("%Y%m%d")
 
-        domain = domain.lower().strip()
-        base = f"nsfc-{year}-{domain}"
+        name = name.lower().strip()
+        type_short = self.PROJECT_TYPE_SHORT.get(project_type, "general")
+        base = f"{type_short}-{name}-{date_str}"
 
-        # 检查是否已存在，如果存在则加序号
+        # 如果已存在，加序号后缀（-02, -03...）
         state = self._load_state()
         existing_ids = set(state["proposals"].keys())
 
         if base not in existing_ids:
-            # 同时检查目录是否存在（可能已注册但状态文件丢失）
             for stage in LIFECYCLE_STAGES:
                 if (self.root / stage / base).exists():
                     break
             else:
                 return base
 
-        # 加序号
-        for seq in range(1, 100):
+        # 同一天同名课题加序号
+        for seq in range(2, 100):
             candidate = f"{base}-{seq:02d}"
             if candidate not in existing_ids:
                 exists_in_dir = False
@@ -233,7 +246,7 @@ class ProposalLifecycle:
                 if not exists_in_dir:
                     return candidate
 
-        return f"{base}-99"  # 极端情况
+        return f"{base}-99"
 
     # ------------------------------------------------------------------
     # 注册新 proposal
@@ -245,22 +258,22 @@ class ProposalLifecycle:
         project_type: str = "general",
         source: str = "new",
         source_detail: str = "",
-        domain: str = "",
-        year: Optional[int] = None,
+        name: str = "",
+        date_str: Optional[str] = None,
         validate: bool = True,
     ) -> Dict[str, Any]:
         """注册新 proposal 到初稿区。
 
-        命名规则：nsfc-{年份}-{领域缩写}[-{序号}]
-        可通过 proposal_id 直接指定，或通过 domain 自动生成。
+        命名规则：{项目类型}-{课题名称}-{启动日期}
+        可通过 proposal_id 直接指定，或通过 name+project_type 自动生成。
 
         Args:
-            proposal_id: 课题 ID（为空时从 domain 自动生成）
+            proposal_id: 课题 ID（为空时从 name+project_type 自动生成）
             project_type: 项目类型（general/key/major）
             source: 来源（new=全新/expansion=扩展归档课题）
             source_detail: 来源详情
-            domain: 领域缩写（proposal_id 为空时使用，如 hhg/bsv/topo-photon）
-            year: 年份（默认当前年份）
+            name: 课题名称缩写（proposal_id 为空时使用，如 hhg/quantum-geometry）
+            date_str: 启动日期 YYYYMMDD（默认今天）
             validate: 是否校验命名规则
 
         Returns:
@@ -271,9 +284,9 @@ class ProposalLifecycle:
 
         # 自动生成 proposal_id
         if not proposal_id:
-            if not domain:
-                return {"success": False, "error": "需要 proposal_id 或 domain"}
-            proposal_id = self.generate_proposal_id(domain, year)
+            if not name:
+                return {"success": False, "error": "需要 proposal_id 或 name"}
+            proposal_id = self.generate_proposal_id(name, project_type, date_str)
 
         # 校验命名规则
         if validate:

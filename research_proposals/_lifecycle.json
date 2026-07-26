@@ -1,12 +1,12 @@
 {
   "proposals": {
-    "nsfc-2026-hhg": {
+    "general-hhg-20260726": {
       "status": "drafts",
       "project_type": "general",
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-07-26T10:25:04Z",
+      "updated_at": "2026-07-26T11:34:27Z",
       "optimization_rounds": 0,
       "last_score": 0.0,
       "score_history": [],
@@ -20,5 +20,5 @@
       ]
     }
   },
-  "updated_at": "2026-07-26T10:54:55Z"
+  "updated_at": "2026-07-26T11:34:27Z"
 }
