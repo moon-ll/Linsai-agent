@@ -43,6 +43,18 @@ from paths import PROJECT_ROOT
 HERMES_HOME = Path.home() / ".hermes"
 LINSAI_PROFILE = HERMES_HOME / "profiles" / "linsai"
 LINSAI_CRON_JOBS = LINSAI_PROFILE / "cron" / "jobs.json"
+PROFILES_DIR = HERMES_HOME / "profiles"
+
+# 团队 profile 定义（名称→角色标签）
+TEAM_PROFILES = {
+    "linsai": {"label": "林赛·总控", "icon": "🧭", "role": "方向校准/总控", "stage": 0},
+    "pipeline-runner": {"label": "管线编排器", "icon": "⚡", "role": "全链路编排", "stage": None},
+    "researcher": {"label": "研究员", "icon": "📚", "role": "文献调研", "stage": 1},
+    "analyst": {"label": "分析师", "icon": "🔍", "role": "缺口分析+科学问题", "stage": None},
+    "writer": {"label": "撰写者", "icon": "✍️", "role": "申请书撰写", "stage": 4},
+    "critic": {"label": "对抗评审", "icon": "⚔️", "role": "对抗式优化", "stage": None},
+    "reviewer": {"label": "终审员", "icon": "✅", "role": "质量自检", "stage": 5},
+}
 
 # hermes CLI 命令前缀（linsai profile）
 HERMES_CMD = ["hermes", "--profile", "linsai"]
@@ -211,6 +223,112 @@ def check_hermes_available() -> Dict[str, Any]:
         "gateway_status": gateway_status,
         "cron_jobs_count": len(cron_list()),
     }
+
+
+def list_team_profiles() -> List[Dict[str, Any]]:
+    """列出团队所有 profile 的状态（v6.6.0）。
+
+    汇总每个 profile 的：
+    - 基本信息（名称/角色/SOUL.md 描述）
+    - 网关运行状态（gateway_state.json）
+    - cron 任务数和最近执行状态
+    - 最近会话时间（sessions/ 目录）
+    - 心跳活跃度（ticker_heartbeat）
+
+    Returns:
+        [{name, label, icon, role, stage, exists, gateway_running,
+          cron_count, cron_active, last_cron_status,
+          last_session, heartbeat_alive, soul_brief}]
+    """
+    import time as _time
+    profiles = []
+
+    for name, meta in TEAM_PROFILES.items():
+        profile_dir = PROFILES_DIR / name
+        info = {
+            "name": name,
+            "label": meta["label"],
+            "icon": meta["icon"],
+            "role": meta["role"],
+            "stage": meta["stage"],
+            "exists": profile_dir.exists(),
+            "gateway_running": False,
+            "cron_count": 0,
+            "cron_active": 0,
+            "last_cron_status": "",
+            "last_session": "",
+            "heartbeat_alive": False,
+            "soul_brief": "",
+        }
+
+        if not profile_dir.exists():
+            profiles.append(info)
+            continue
+
+        # 网关状态
+        gw_path = profile_dir / "gateway_state.json"
+        if gw_path.exists():
+            try:
+                gs = json.loads(gw_path.read_text(encoding="utf-8"))
+                info["gateway_running"] = gs.get("gateway_state") == "running" or bool(gs.get("pid"))
+            except Exception:
+                pass
+
+        # cron 任务
+        cron_dir = profile_dir / "cron"
+        jobs_path = cron_dir / "jobs.json"
+        if jobs_path.exists():
+            try:
+                jd = json.loads(jobs_path.read_text(encoding="utf-8"))
+                jobs = jd.get("jobs", []) if isinstance(jd, dict) else (jd if isinstance(jd, list) else [])
+                info["cron_count"] = len(jobs)
+                info["cron_active"] = sum(1 for j in jobs if j.get("enabled", True))
+                # 最近执行状态
+                for j in jobs:
+                    if j.get("last_status"):
+                        info["last_cron_status"] = j["last_status"]
+                        break
+            except Exception:
+                pass
+
+        # 最近会话
+        sessions_dir = profile_dir / "sessions"
+        if sessions_dir.exists():
+            try:
+                sessions = sorted(sessions_dir.glob("*.jsonl"), reverse=True)
+                if sessions:
+                    stat = sessions[0].stat()
+                    info["last_session"] = _time.strftime(
+                        "%Y-%m-%d %H:%M", _time.localtime(stat.st_mtime)
+                    )
+            except Exception:
+                pass
+
+        # 心跳（ticker_heartbeat，5分钟内有更新视为活跃）
+        hb_path = cron_dir / "ticker_heartbeat"
+        if hb_path.exists():
+            try:
+                hb_time = float(hb_path.read_text().strip())
+                info["heartbeat_alive"] = (_time.time() - hb_time) < 300
+            except Exception:
+                pass
+
+        # SOUL.md 摘要（第一段非注释行）
+        soul_path = profile_dir / "SOUL.md"
+        if soul_path.exists():
+            try:
+                lines = soul_path.read_text(encoding="utf-8").split("\n")
+                for line in lines:
+                    stripped = line.strip()
+                    if stripped and not stripped.startswith("#") and not stripped.startswith(">") and len(stripped) > 10:
+                        info["soul_brief"] = stripped[:80]
+                        break
+            except Exception:
+                pass
+
+        profiles.append(info)
+
+    return profiles
 
 
 def _self_check() -> None:

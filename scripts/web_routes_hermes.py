@@ -32,6 +32,7 @@ import hermes_bridge as hb
 _HERMES_ROUTES = [
     # GET
     ("GET", re.compile(r"^/api/hermes/cron$"), "_her_cron_list"),
+    ("GET", re.compile(r"^/api/hermes/profiles$"), "_her_profiles"),
     # POST（GET 重复 + 独有）
     ("POST", re.compile(r"^/api/hermes/cron$"), "_her_cron_list"),
     ("POST", re.compile(r"^/api/hermes/cron/(?P<job_id>[^/]+)/(?P<action>pause|resume|run)$"), "_her_cron_control"),
@@ -48,6 +49,14 @@ class HermesRoutesMixin:
     def _her_cron_list(self, parsed, body=None):
         """hermes cron job 列表（GET+POST 重复）"""
         self._send_json({"jobs": hb.cron_list(), "status": hb.check_hermes_available()})
+
+    def _her_profiles(self, parsed, body=None, **kwargs):
+        """团队 profile 状态面板（v6.6.0）"""
+        try:
+            profiles = hb.list_team_profiles()
+            self._send_json({"status": "ok", "profiles": profiles})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
 
     def _her_cron_control(self, parsed, body, job_id, action):
         """hermes cron 控制（暂停/恢复/触发）"""

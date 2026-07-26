@@ -235,6 +235,10 @@ async function initHermesWorkspace() {
 
   let html = '';
 
+  // === 团队 Profile 状态区（v6.6.0）===
+  html += '<div style="margin-bottom:20px;"><h3 style="font-size:0.9rem;margin-bottom:8px;">👥 团队 Profile 状态</h3>';
+  html += '<div id="hw-profiles" style="color:var(--text-tertiary);font-size:0.85rem;">◐ 加载中…</div></div>';
+
   // === 任务管理区 ===
   html += '<div style="margin-bottom:20px;"><h3 style="font-size:0.9rem;margin-bottom:8px;">📋 任务管理</h3>';
   html += '<div id="hw-tasks" style="color:var(--text-tertiary);font-size:0.85rem;">◐ 加载中…</div></div>';
@@ -253,6 +257,35 @@ async function initHermesWorkspace() {
   html += '</div>';
 
   container.innerHTML = html;
+
+  // 加载团队 Profile 状态（v6.6.0）
+  try {
+    const data = await apiGet('/api/hermes/profiles');
+    const profiles = data.profiles || [];
+    const profDiv = document.getElementById('hw-profiles');
+    if (!profiles.length) {
+      profDiv.innerHTML = '<span style="color:var(--text-tertiary);">无 profile 数据</span>';
+    } else {
+      profDiv.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;">' +
+        profiles.map(p => {
+          const gwIcon = p.gateway_running ? '🟢' : '⚪';
+          const hbIcon = p.heartbeat_alive ? '💚' : '';
+          const cronInfo = p.cron_count > 0 ? `cron ${p.cron_active}/${p.cron_count}` : '无cron';
+          const sessionInfo = p.last_session ? `· ${p.last_session.slice(5)}` : '';
+          return `<div style="padding:8px 10px;background:var(--bg-secondary);border-radius:6px;border:1px solid var(--border-color);">
+            <div style="display:flex;align-items:center;gap:4px;margin-bottom:2px;">
+              <span style="font-size:1rem;">${p.icon}</span>
+              <span style="font-size:0.82rem;font-weight:600;">${escapeHtml(p.label)}</span>
+              <span style="margin-left:auto;">${gwIcon}${hbIcon}</span>
+            </div>
+            <div style="font-size:0.72rem;color:var(--text-tertiary);">${escapeHtml(p.role)}</div>
+            <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:2px;">${cronInfo} ${sessionInfo}</div>
+          </div>`;
+        }).join('') + '</div>';
+    }
+  } catch (e) {
+    document.getElementById('hw-profiles').innerHTML = '<span style="color:var(--error-color);">加载失败</span>';
+  }
 
   // 加载任务
   try {
