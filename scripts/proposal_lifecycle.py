@@ -348,6 +348,7 @@ class ProposalLifecycle:
             "optimization_rounds": 0,
             "last_score": 0.0,
             "score_history": [],
+            "section_passes": {},  # P1-3: 各模块对抗胜利状态
             "human_feedback_count": 0,
             "transition_history": [
                 {"to": "drafts", "at": now_utc(), "reason": "注册新 proposal"}
@@ -806,18 +807,34 @@ class ProposalLifecycle:
         dim_scores = self._extract_dimension_scores(critic_result)  # P0-2: 多维度
         weakest_dim = self._get_weakest_dimension(dim_scores)
 
+        # P1-1: 确定本轮模块 key
+        section_key = focus_section["key"] if focus_section else "full_review"
+
+        # P1-3: 判断该模块是否"对抗胜利"（分数达标 + 各维度无短板）
+        min_score = threshold.get("min_overall_score", DEFAULT_SCORE_THRESHOLD)
+        weak_dims = [
+            k for k, floor in self.DIMENSION_FLOOR.items()
+            if k in dim_scores and dim_scores[k] < floor
+        ]
+        section_passed = score_after >= min_score and len(weak_dims) == 0
+
         # 4. 更新状态
         with file_lock(f"proposal-{proposal_id}"):
             prop_state = self._get_proposal_state(proposal_id)
             prop_state["optimization_rounds"] = current_round + 1
             prop_state["last_score"] = score_after
             prop_state["last_dim_scores"] = dim_scores  # P0-2: 记录维度分数
+            # P1-3: 记录各模块对抗胜利状态
+            section_passes = prop_state.get("section_passes", {})
+            section_passes[section_key] = section_passed
+            prop_state["section_passes"] = section_passes
             prop_state["score_history"].append({
                 "round": current_round + 1,
                 "score": score_after,
                 "dim_scores": dim_scores,  # P0-2
                 "weakest_dim": weakest_dim,  # P0-2
-                "focus_section": focus_section["key"] if focus_section else "full_review",  # P1-1
+                "focus_section": section_key,  # P1-1
+                "section_passed": section_passed,  # P1-3
                 "issues_count": len(issues),
                 "high_issues": sum(1 for i in issues if i.get("severity") == "high"),
                 "at": now_utc(),
@@ -1144,48 +1161,51 @@ class ProposalLifecycle:
     # 达标判定
     # ------------------------------------------------------------------
 
+    # 所有模块必须全部通过才算达标（P1-3）
+    REQUIRED_SECTIONS = ["rationale", "content", "method", "full_review"]
+
     def _check_done(self, proposal_id: str, threshold: Dict[str, Any]) -> Dict[str, Any]:
-        """判定 proposal 是否达到输出标准或无法继续提升（P0-2: 含维度短板检测）。"""
+        """判定 proposal 是否达到输出标准（P1-3: 所有模块对抗胜利才算达标）。
+
+        达标条件：3个章节（立项依据/研究内容/研究方案）+ 整体审查，共4个模块全部通过。
+        每个模块"通过"= 分数达标 + 各维度无短板。
+        """
         prop_state = self._get_proposal_state(proposal_id)
         if not prop_state:
             return {"done": False, "reason": "状态不存在"}
 
         last_score = prop_state.get("last_score", 0.0)
         score_history = prop_state.get("score_history", [])
-        dim_scores = prop_state.get("last_dim_scores", {})  # P0-2
+        section_passes = prop_state.get("section_passes", {})  # P1-3
         min_score = threshold.get("min_overall_score", DEFAULT_SCORE_THRESHOLD)
-        max_high = threshold.get("max_high_issues", 0)
         rounds = prop_state.get("optimization_rounds", 0)
 
-        # 条件1：总分达标 + 各维度无短板（P0-2: 增加维度 floor 检查）
-        if last_score >= min_score:
-            recent = score_history[-1] if score_history else {}
-            if recent.get("high_issues", 99) <= max_high:
-                # P0-2: 检查各维度是否都达到 floor
-                weak_dims = [
-                    k for k, floor in self.DIMENSION_FLOOR.items()
-                    if k in dim_scores and dim_scores[k] < floor
-                ]
-                if weak_dims:
-                    return {
-                        "done": False,
-                        "reason": f"总分{last_score:.2f}达标，但维度短板：{','.join(weak_dims)}",
-                    }
-                return {"done": True, "reason": f"达标：分数{last_score:.2f}≥{min_score}，各维度无短板"}
+        # 条件1（P1-3）：所有模块对抗胜利
+        passed_sections = [s for s in self.REQUIRED_SECTIONS if section_passes.get(s)]
+        all_passed = len(passed_sections) == len(self.REQUIRED_SECTIONS)
+        if all_passed:
+            return {"done": True, "reason": f"全部{len(self.REQUIRED_SECTIONS)}个模块对抗胜利（{','.join(passed_sections)}）"}
 
-        # 条件2：连续N轮无提升
+        # 条件2：连续N轮无提升（逃生阀）
         no_improve_limit = DEFAULT_NO_IMPROVEMENT_LIMIT
         if len(score_history) >= no_improve_limit + 1:
             recent_scores = [h["score"] for h in score_history[-(no_improve_limit + 1):]]
             deltas = [recent_scores[i + 1] - recent_scores[i] for i in range(len(recent_scores) - 1)]
             if all(d < 0.02 for d in deltas):
-                return {"done": True, "reason": f"连续{no_improve_limit}轮无显著提升（Δ<0.02）"}
+                passed_str = f"（已通过{len(passed_sections)}/{len(self.REQUIRED_SECTIONS)}模块）"
+                return {"done": True, "reason": f"连续{no_improve_limit}轮无显著提升{passed_str}"}
 
-        # 条件3：达到最大轮数
+        # 条件3：达到最大轮数（逃生阀）
         if rounds >= DEFAULT_MAX_ROUNDS:
-            return {"done": True, "reason": f"达到最大轮数{DEFAULT_MAX_ROUNDS}"}
+            passed_str = f"（已通过{len(passed_sections)}/{len(self.REQUIRED_SECTIONS)}模块）"
+            return {"done": True, "reason": f"达到最大轮数{DEFAULT_MAX_ROUNDS}{passed_str}"}
 
-        return {"done": False, "reason": f"未达标：分数{last_score:.2f}<{min_score}，已优化{rounds}轮"}
+        # 未达标：报告进度
+        missing = [s for s in self.REQUIRED_SECTIONS if not section_passes.get(s)]
+        return {
+            "done": False,
+            "reason": f"已通过{len(passed_sections)}/{len(self.REQUIRED_SECTIONS)}模块，待通过: {','.join(missing)}",
+        }
 
     def auto_optimize_and_advance(self, proposal_id: str) -> Dict[str, Any]:
         """自动优化循环：反复执行对抗直到达标或无法提升，然后移入待校验。
