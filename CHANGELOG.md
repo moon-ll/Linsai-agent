@@ -1,5 +1,71 @@
 # 变更记录
 
+## v6.4.0 - 2026-07-26 Hermes 驱动的管线架构（CoPilot=操作台，hermes=执行端）
+
+### v6.4.0 核心架构变更
+- **架构定位重塑** — 从"CoPilot 自己干活"转向"hermes 执行，CoPilot 监控"
+  - **此前**：pipeline_orchestrator 在 Python 进程内直接调用模块 + llm_gateway 裸 LLM API
+  - **此后**：hermes_pipeline 通过 hermes CLI 派活给 agent profiles（agent loop 自主规划+调工具）
+  - **智能升级**：从单次 LLM API 调用 → 完整 agent loop（多轮规划+工具链+自主纠错）
+- **新增 hermes_pipeline.py** — Hermes 驱动的研究管线操作台（480 行）
+  - `HermesPipeline` 类：将六阶段任务派给对应 hermes profile
+  - 阶段→profile 映射：linsai(方向校准) / researcher(文献) / analyst(缺口+问题) / writer(撰写) / reviewer(自检)
+  - `dispatch_stage()`：派活给 hermes profile（subprocess 调 `hermes --profile X -z <prompt>`）
+  - `check_stage()`：产物文件检查（存在 + ≥50 字节）
+  - `run_pipeline()`：一键全链路（依次派活 + 产物检查 + 状态追踪）
+  - `setup_cron()`：配置 hermes cron 实现自动化（`hermes cron create`）
+  - `dispatch_to_profile()`：直接派活给任意 profile（不限预定义阶段）
+  - 状态持久化：`hermes-pipeline-state.json`（阶段状态/派活时间/完成时间/输出预览）
+  - 清除 PYTHONHOME/PYTHONPATH 环境变量，避免 hermes venv 冲突
+- **agent_team.py 增强** — 每个 agent 新增 `hermes_profile` 字段
+  - agent_001 方向校准官 → hermes_profile: linsai
+  - agent_002 文献调研员 → hermes_profile: researcher
+  - agent_003 课题凝练师 → hermes_profile: analyst
+  - agent_004 问题架构师 → hermes_profile: analyst
+  - agent_005 申请书撰写员 → hermes_profile: writer
+  - agent_006 质量审查官 → hermes_profile: reviewer
+  - delegate_module 保留（指向 CoPilot 模块，作为降级回退）
+
+### v6.4.0 Hermes Profile 能力映射
+| Profile | SOUL.md 职责 | 管线角色 | agent loop 能力 |
+|---------|-------------|---------|----------------|
+| linsai | 总控/人格锚点 | 方向校准 | 自主规划+调工具+深度推理 |
+| researcher | 搜索/阅读/总结论文 | 文献调研 | web_search + DeepXiv + 结构化输出 |
+| analyst | 综合/去重/排名/提炼 | 缺口分析+问题架构 | 综合分析 + 明确结论 |
+| writer | 按风格撰写报告 | 申请书撰写 | 逻辑连贯 + 精炼表达 |
+| reviewer | 审阅/找错/给建议 | 质量自检 | 严格核查 + 分级标注 |
+
+### v6.4.0 自动化机制
+- **hermes cron 驱动**：通过 `setup_cron()` 在 linsai profile 创建定时任务
+  - cron 表达式触发 → hermes agent loop 自主执行全链路
+  - 产物文件检查保证链路畅通（产物到位才推进下一阶段）
+  - 已有 cron 基础：linsai 已运行 4 个 cron job（每日简报/检索入池/推送/健康检查）
+
+### v6.4.0 测试结果
+- hermes_pipeline 自检：6/6 通过
+- agent_team 自检：全部通过（含 hermes_profile 字段验证）
+- 单元回归测试：116/116 通过，零回归
+
+### v6.4.0 架构关系
+```
+CoPilot 操作台（hermes_pipeline.py）
+  ├── dispatch_stage()     → 派活给 hermes profile
+  ├── check_artifacts()    → 产物文件检查（≥50字节）
+  ├── get_status()         → 实时状态追踪
+  └── setup_cron()         → 配置 hermes cron 自动化
+
+hermes 执行端（5 个 profile，agent loop 自主执行）
+  ├── linsai profile      → 方向校准（读取画像，校准方向）
+  ├── researcher profile  → 文献调研（web_search + DeepXiv）
+  ├── analyst profile     → 缺口分析 + 问题架构
+  ├── writer profile      → 申请书撰写（NSFC 格式）
+  └── reviewer profile    → 质量自检（六维审查）
+
+双引擎共存：
+  ├── hermes_pipeline.py  → 主引擎（hermes agent loop，智能上限高）
+  └── pipeline_orchestrator.py → 降级引擎（CoPilot 模块 + llm_gateway，离线可用）
+```
+
 ## v6.3.2 - 2026-07-26 管线关键环节接入 LLM"大脑"
 
 ### v6.3.2 核心变更

@@ -609,6 +609,19 @@ LinSai-CoPilot/
 - ✅ **端到端验证** — 真实 LLM 调用四环节全部生效，产出从模板占位文本升级为实质学术论述
 - ✅ **回归测试** — llm_gateway 自检 5/5 + 单元 116/116 + 边界检查通过，零回归
 
+### Phase 17：Hermes 驱动的管线架构（v6.4.0）【✅ 已完成】
+- ✅ **架构定位重塑** — 从"CoPilot 自己干活"转向"hermes 执行，CoPilot 监控"
+  - hermes 是真正的 agent loop（自主规划+调工具+多轮纠错），远超裸 LLM API 调用
+- ✅ **hermes_pipeline.py** — Hermes 驱动的研究管线操作台（480 行）
+  - 阶段→profile 映射：linsai/researcher/analyst/writer/reviewer 五个 agent
+  - `dispatch_stage()`：派活给 hermes profile（subprocess 调 `hermes --profile X -z`）
+  - `check_stage()`：产物文件检查（存在 + ≥50 字节），保证链路畅通
+  - `run_pipeline()`：一键全链路（依次派活 + 产物检查 + 状态追踪）
+  - `setup_cron()`：配置 hermes cron 实现自动化
+- ✅ **agent_team.py 增强** — 6 个核心 agent 新增 `hermes_profile` 字段，delegate_module 保留作降级
+- ✅ **双引擎共存** — hermes_pipeline（主引擎，智能高）+ pipeline_orchestrator（降级引擎，离线可用）
+- ✅ **测试** — hermes_pipeline 自检 6/6 + agent_team 自检 + 单元 116/116，零回归
+
 ---
 
 ## 开发约定
@@ -924,7 +937,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.3.2*
+*版本：6.4.0*
 *日期：2026-07-26*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

@@ -94,6 +94,7 @@ _MAX_RECENT_TASKS = 10  # recent_tasks 最大保留数量
 # ---------------------------------------------------------------------------
 DEFAULT_AGENTS: List[Dict[str, Any]] = [
     # --- 核心管线智能体（6，每阶段一个）---
+    # v6.4：delegate_module 指向 CoPilot 模块，hermes_profile 指向 hermes 执行端
     {
         "agent_id": "agent_001",
         "name": "方向校准官",
@@ -101,6 +102,7 @@ DEFAULT_AGENTS: List[Dict[str, Any]] = [
         "role": "direction_calibration",
         "stage": 0,
         "delegate_module": "research_profiler",
+        "hermes_profile": "linsai",
         "description": "分析用户研究方向，校准管线目标与用户画像的对齐度",
         "capabilities": ["研究方向关键词提取", "用户画像读取", "方向对齐评估", "TF-IDF分析"],
         "icon": "🧭",
@@ -114,6 +116,7 @@ DEFAULT_AGENTS: List[Dict[str, Any]] = [
         "role": "literature_research",
         "stage": 1,
         "delegate_module": "external_fetcher",
+        "hermes_profile": "researcher",
         "description": "多源文献检索、评分排序、全文下载与简报生成",
         "capabilities": ["arXiv检索", "联网搜索", "论文评分", "简报生成", "全文下载"],
         "icon": "📚",
@@ -127,6 +130,7 @@ DEFAULT_AGENTS: List[Dict[str, Any]] = [
         "role": "topic_refinement",
         "stage": 2,
         "delegate_module": "gap_analyzer",
+        "hermes_profile": "analyst",
         "description": "知识库覆盖度扫描、研究缺口识别、课题生成与评分",
         "capabilities": ["覆盖度分析", "缺口识别", "课题生成", "品味评分", "课题演化"],
         "icon": "🔬",
@@ -140,6 +144,7 @@ DEFAULT_AGENTS: List[Dict[str, Any]] = [
         "role": "question_construction",
         "stage": 3,
         "delegate_module": "question_architect",
+        "hermes_profile": "analyst",
         "description": "五要素体系构建、科学问题分解与验证",
         "capabilities": ["五要素框架构建", "问题分解", "五维验证", "证据链接"],
         "icon": "🏗️",
@@ -153,6 +158,7 @@ DEFAULT_AGENTS: List[Dict[str, Any]] = [
         "role": "proposal_writing",
         "stage": 4,
         "delegate_module": "proposal_writer",
+        "hermes_profile": "writer",
         "description": "NSFC格式申请书章节撰写、引文注入、风格调整",
         "capabilities": ["章节模板组装", "引文占位符注入", "品味风格调整", "章节版本管理"],
         "icon": "✍️",
@@ -166,6 +172,7 @@ DEFAULT_AGENTS: List[Dict[str, Any]] = [
         "role": "self_check_optimization",
         "stage": 5,
         "delegate_module": "proposal_inspector",
+        "hermes_profile": "reviewer",
         "description": "六维自检、问题识别、优化策略生成与迭代追踪",
         "capabilities": ["六维检查", "问题分级", "策略生成", "迭代追踪", "引文验证"],
         "icon": "🔍",
