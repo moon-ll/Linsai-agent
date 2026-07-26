@@ -186,6 +186,9 @@ LinSai-CoPilot/
 │   ├── project_memory.py      # v3.5 课题记忆（对话/片段/决策/核心记忆）
 │   ├── project_context.py     # v3.5 课题上下文（@语法/跨课题检索）
 │   ├── project_workflow.py    # v3.5 课题工作流（规划→执行→验收→总结）
+│   ├── hermes_bridge.py       # hermes CLI 桥接（cron控制/oneshot/团队profile状态）
+│   ├── hermes_pipeline.py     # NSFC 研究管线（六阶段→7个hermes profile）
+│   ├── proposal_lifecycle.py  # 提案生命周期（drafts→optimizing→archived + 对抗优化引擎）
 │   ├── web_server.py          # Web 服务器聚合器（Mixin 架构，321 行 + 10 路由 Mixin）
 │   ├── backup_manager.py      # 数据备份/恢复
 │   ├── upgrade.py             # 安全升级流程
@@ -267,6 +270,80 @@ LinSai-CoPilot/
 | **AI辅助任务指派** | ✅ | 只说目标+要求，AI自动生成任务描述+hermes执行指令 |
 | **统一状态同步** | ✅ | Copilot与hermes共享item-status.json，操作双向同步（Copilot=hermes操作台） |
 | **知识库自维护** | ✅ | 五维过滤/分页/自定义分类/别名发现/阶段晋升/自动连边 |
+| **NSFC 研究管线** | ✅ | 六阶段全自动链路：方向校准→文献→缺口→科学问题→申请书→自检 |
+| **提案生命周期** | ✅ | drafts→optimizing→pending_review→archived 四阶段流转 |
+| **对抗优化引擎** | ✅ | 分模块单轮+文献驱动筛选+多维度评分+全模块胜利达标 |
+| **Hermes 团队编排** | ✅ | 7 个 profile 协作，每日编排器自动驱动 |
+| **GLM-5.2 升级** | ✅ | linsai/runner/critic 使用 GLM-5.2（1M 上下文） |
+
+---
+
+## Hermes 团队架构（v6.6.2）
+
+林赛 CoPilot 通过 **hermes** 协调 7 个专业 profile，形成研究管线团队：
+
+```
+linsai（总控）          pipeline-runner（编排器）
+  │                        │
+  │ 简报 cron               │ 每日编排 cron
+  ↓                        ↓
+researcher ← analyst ← writer ↔ critic → reviewer
+（文献调研）  （缺口分析）（撰写）  （对抗）（终审）
+```
+
+| Profile | 模型 | 职责 | 运行方式 |
+|---------|------|------|---------|
+| `linsai` | GLM-5.2 | 方向校准/总控/简报 | 常驻 gateway |
+| `pipeline-runner` | GLM-5.2 | 管线编排/每日触发 | 常驻 gateway |
+| `researcher` | MiniMax-M2.7 | 文献调研/定向检索 | 按需 oneshot |
+| `analyst` | MiniMax-M2.7 | 缺口分析/科学问题 | 按需 oneshot |
+| `writer` | MiniMax-M2.7 | 申请书撰写/修订 | 按需 oneshot |
+| `critic` | GLM-5.2 | 对抗式评审（红队） | 按需 oneshot |
+| `reviewer` | MiniMax-M2.7 | 质量终审 | 按需 oneshot |
+
+### 研究管线六阶段
+
+每个新课题从 `drafts` 区开始，执行六阶段全自动链路：
+
+1. **方向校准**（linsai）— 明确研究方向和切入点
+2. **文献调研**（researcher）— 系统检索、精读、综述
+3. **缺口分析**（analyst）— 识别研究空白、确定科学问题
+4. **科学问题**（analyst）— 结构化科学问题框架
+5. **申请书撰写**（writer）— 按项目类型模板生成申请书 + 方法学手册
+6. **质量自检**（reviewer）— 终审通过后进入优化区
+
+### 提案生命周期
+
+```
+drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）→ archived（归档）
+```
+
+人工确认 drafts 课题思路可行后流转到 optimizing，由每日编排器自动优化。
+
+### 对抗优化引擎（v6.6.2）
+
+每天 9:00 pipeline-runner 自动触发每日编排器：
+
+```
+① 健康检查
+② 文献-课题匹配：读最新简报关键词 → 匹配 optimizing 课题（只优化命中的）
+③ 对命中的每个课题做4轮（错峰90秒间隔）：
+   轮1: 立项依据 → critic审 → writer改
+   轮2: 研究内容 → critic审 → writer改
+   轮3: 研究方案 → critic审 → writer改
+   轮4: 整体审查 → critic审 → writer改
+   中途达标提前结束
+④ 最终健康检查
+```
+
+**单轮对抗流程**：
+- critic 输出 4 维度评分（创新性/可行性/严谨性/完整性）
+- 严谨性 <0.70 时触发 researcher 定向检索补充文献
+- writer 聚焦最弱维度修订 + 同步方法学手册
+
+**达标条件**：4 个模块（3 章节 + 整体审查）全部对抗胜利（分数达标 + 各维度无短板）才算 done。
+
+**资源控制**：日均 15-25 prompts，适配 GLM Coding Plan Pro 套餐限额。
 
 ---
 
@@ -289,7 +366,7 @@ LinSai-CoPilot/
 | 运行环境 | Python 3（仅标准库） | 零第三方依赖 |
 | 内容格式 | Markdown（.md） | 对话记录、任务描述、记忆片段 |
 | 元数据 | JSON | 会话状态、记忆索引、任务追踪 |
-| LLM接口 | Kimi CLI / Claude CLI | 通过 subprocess 调用本地 CLI，不直接调 API |
+| LLM接口 | GLM-5.2 / MiniMax-M2.7 | 通过 hermes CLI 调用，Coding Plan 订阅 |
 | 路径处理 | pathlib.Path | 禁止硬编码绝对路径 |
 
 ---
@@ -312,6 +389,7 @@ LinSai-CoPilot/
 | Phase 10 | **课题指导模块（v3.5.0）** — 课题/单元管理、分层知识库、课题记忆、跨课题检索、工作流编排、Web API + 前端面板 | ✅ 完成 |
 | Phase 11 | **知识库主舞台+认知闭环（v3.6-v4.0）** — 知识库独立界面、MOC/双链/自维护、记忆清洗+去重防护 | ✅ 完成 |
 | Phase 12 | **协作操作台（v4.1-v4.2）** — 文献独立讨论、AI辅助指派、统一状态同步（Copilot↔hermes） | ✅ 完成 |
+| Phase 13 | **NSFC 研究管线（v6.4-v6.6）** — hermes 团队7 profile、六阶段管线、提案生命周期、对抗优化引擎、文献驱动筛选、GLM-5.2 | ✅ 完成 |
 
 ### Web 界面特性
 
@@ -335,6 +413,8 @@ LinSai-CoPilot/
 | **学习管理器** | 学习日志/待审队列/统计面板，策略设置与手动触发 |
 | **Hermes 控制台** | 调用 Hermes LinSai profile 进行深度对话 |
 | **课题指导面板** | 课题列表/详情、单元时间线、知识库浏览器、记忆面板、工作流操作 |
+| **Hermes 工作台** | 团队 Profile 状态面板（7个profile网关/cron/心跳）+ 任务管理 + cron控制 + 手动派活 |
+| **生命周期操作台** | 四阶段仪表盘统计 + 课题列表 + 流转/优化/反馈/注册操作 |
 | 移动端适配 | 侧边栏折叠、触摸优化 |
 
 ---

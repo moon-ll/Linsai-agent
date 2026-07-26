@@ -94,7 +94,9 @@
 | `document_handler.py` | 486 | Markdown/TXT读取、PDF基础提取、代码分析 |
 | `project_reader.py` | 923 | 项目文件读取器：跨课题/跨目录文件聚合读取 |
 | `agora_bridge.py` | 206 | Agora群聊桥接：上下文导出/导入 |
-| `hermes_bridge.py` | 243 | Hermes 桥接器：调用 Hermes LinSai profile 深度对话 |
+| `hermes_bridge.py` | 340 | Hermes 桥接器：cron控制/oneshot派活/团队profile状态（v6.6） |
+| `hermes_pipeline.py` | 1050+ | NSFC 研究管线：六阶段全链路→7个hermes profile协作 |
+| `proposal_lifecycle.py` | 1700+ | 提案生命周期：四阶段流转+对抗优化引擎+文献驱动筛选 |
 | `skill_manager.py` | 299 | 项目级技能系统：skills/ 目录、关键词匹配 |
 | `proactive_engine.py` | 553 | 主动感知：心跳扫描、压力信号检测、主动提醒 |
 | `self_test.py` | 247 | 统一自检入口：137+207 项全量回归 |
