@@ -57,6 +57,15 @@ if str(_SCRIPT_DIR) not in sys.path:
 
 from common import now_utc, load_json, save_json, file_lock, lazy_load
 
+# v6.3.2 接入 LLM 网关（共享基础设施层），让自检具备语义评估能力
+try:
+    from llm_gateway import is_llm_available, llm_json
+    _LLM_OK = is_llm_available()
+except Exception:
+    _LLM_OK = False
+    def llm_json(*a, **kw):  # type: ignore
+        return False, None, {}
+
 __all__ = [
     "ProposalInspector",
     "DIMENSIONS",
@@ -618,6 +627,74 @@ class ProposalInspector:
         save_json(self.state_path, state)
 
     # ------------------------------------------------------------------
+    # v6.3.2 LLM 语义评估补充
+    # ------------------------------------------------------------------
+
+    def _llm_semantic_review(
+        self,
+        sections: Dict[str, str],
+        rule_report: Dict[str, Any],
+    ) -> Dict[str, Any]:
+        """用 LLM 对申请书进行语义层面的深度评审。
+
+        规则检查覆盖格式/结构，LLM 覆盖学术深度/逻辑/创新性等语义维度。
+        失败时返回空 dict（调用方降级为纯规则结果）。
+        """
+        if not _LLM_OK:
+            return {}
+
+        # 拼接章节摘要（避免超长 prompt）
+        parts = []
+        total_chars = 0
+        for name in ("立项依据", "研究内容", "研究方案", "特色与创新"):
+            text = sections.get(name, "")
+            if text:
+                # 截取前 1500 字符
+                snippet = text[:1500]
+                parts.append(f"### {name}\n{snippet}")
+                total_chars += len(snippet)
+                if total_chars > 5000:
+                    break
+        if not parts:
+            return {}
+        proposal_text = "\n\n".join(parts)
+
+        rule_score = rule_report.get("overall_score", 0.0)
+        rule_issues = rule_report.get("total_issues", 0)
+
+        sys_prompt = (
+            "你是 NSFC 面上项目的会评专家，深耕强场超快光学/阿秒科学领域。"
+            "你擅长从学术深度、逻辑严密性、创新性、可行性等语义层面评审申请书，"
+            "并给出具体的、可操作的修改建议。"
+        )
+        user_prompt = (
+            f"请对以下申请书内容进行语义层面的深度评审。\n\n"
+            f"=== 申请书内容（节选）===\n{proposal_text}\n\n"
+            f"=== 规则引擎检查结果 ===\n"
+            f"规则总分：{rule_score:.2f}　问题数：{rule_issues}\n\n"
+            f"请从以下五个语义维度评审，并输出严格 JSON：\n"
+            f"{{\n"
+            f'  "academic_depth_score": 0.0-1.0,  // 学术深度：论述是否有实质物理内容\n'
+            f'  "logical_rigor_score": 0.0-1.0,    // 逻辑严密性：论证链条是否完整\n'
+            f'  "innovation_clarity_score": 0.0-1.0, // 创新性：创新点是否具体可信\n'
+            f'  "feasibility_score": 0.0-1.0,      // 可行性：方案是否可落地\n'
+            f'  "overall_comment": "一句话总评",\n'
+            f'  "key_strengths": ["优点1", "优点2"],\n'
+            f'  "key_weaknesses": ["不足1", "不足2"],\n'
+            f'  "improvement_suggestions": ["建议1", "建议2"]\n'
+            f"}}\n"
+            f"只输出 JSON，不要解释。"
+        )
+
+        try:
+            ok, data, _ = llm_json(sys_prompt, user_prompt, timeout=120)
+            if ok and isinstance(data, dict):
+                return data
+        except Exception:
+            pass
+        return {}
+
+    # ------------------------------------------------------------------
     # 核心检查接口
     # ------------------------------------------------------------------
 
@@ -695,6 +772,30 @@ class ProposalInspector:
             "passed": passed,
             "manual_review_recommended": False,
         }
+        # v6.3.2 LLM 语义评审补充（锦上添花，失败不阻塞）
+        llm_review = self._llm_semantic_review(sections, report)
+        if llm_review:
+            report["llm_review"] = llm_review
+            # 若 LLM 给出语义分数，融合进总分（规则 0.6 + LLM 0.4）
+            llm_scores = []
+            for k in ("academic_depth_score", "logical_rigor_score",
+                      "innovation_clarity_score", "feasibility_score"):
+                v = llm_review.get(k)
+                if isinstance(v, (int, float)) and 0.0 <= v <= 1.0:
+                    llm_scores.append(float(v))
+            if llm_scores:
+                llm_avg = sum(llm_scores) / len(llm_scores)
+                report["overall_score"] = round(overall * 0.6 + llm_avg * 0.4, 3)
+                report["score_breakdown"] = {
+                    "rule_score": round(overall, 3),
+                    "llm_score": round(llm_avg, 3),
+                    "fusion": "rule*0.6 + llm*0.4",
+                }
+                # 重新判定 passed
+                report["passed"] = (
+                    report["overall_score"] >= SCORE_THRESHOLDS["pass"]
+                    and critical == 0
+                )
         self._record_iteration(report, sections, issues)
         return report
 

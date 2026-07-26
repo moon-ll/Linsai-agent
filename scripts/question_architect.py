@@ -73,6 +73,15 @@ if str(_SCRIPT_DIR) not in sys.path:
 
 from common import now_utc, load_json, save_json, file_lock, lazy_load
 
+# v6.3.2 接入 LLM 网关（共享基础设施层），让科学问题构建具备"大脑"
+try:
+    from llm_gateway import is_llm_available, safe_llm_complete
+    _LLM_OK = is_llm_available()
+except Exception:
+    _LLM_OK = False
+    def safe_llm_complete(*a, **kw):  # type: ignore
+        return kw.get("fallback", "")
+
 __all__ = [
     "QuestionArchitect",
     "QUESTION_TYPES",
@@ -548,6 +557,74 @@ class QuestionArchitect:
     # 核心接口：构建 / 分解 / 验证
     # ------------------------------------------------------------------
 
+    def _llm_enrich_questions(
+        self,
+        topic: Dict[str, Any],
+        placeholders: Dict[str, str],
+        template_questions: Dict[str, str],
+    ) -> Dict[str, str]:
+        """v6.3.2 用 LLM 生成更具科学深度的科学问题表述。
+
+        Args:
+            topic: 课题字典。
+            placeholders: 占位符。
+            template_questions: {element: 模板生成的问题文本}
+
+        Returns:
+            {element: LLM 增强后的问题文本}，失败时回退到模板文本。
+        """
+        if not _LLM_OK:
+            return dict(template_questions)
+
+        topic_title = topic.get("title", "")
+        keywords = topic.get("keywords", [])
+        methods = topic.get("methods", [])
+        concept = placeholders.get("concept", "")
+        phenomenon = placeholders.get("phenomenon", "")
+
+        # 构造五要素问题列表供 LLM 优化
+        q_list = "\n".join(
+            f"- {elem}：{text}" for elem, text in template_questions.items()
+        )
+        kw_str = "、".join(keywords[:6]) if keywords else concept
+        m_str = "、".join(methods[:4]) if methods else "（待定）"
+
+        sys_prompt = (
+            "你是强场超快光学/阿秒科学/固体高次谐波领域的资深科学家，"
+            "擅长凝练具有科学深度、可检验、新颖且聚焦的核心科学问题。"
+            "你熟悉 NSFC 面上项目的科学问题表述风格。"
+        )
+        user_prompt = (
+            f"请基于以下课题，为五个要素各优化一个科学问题的表述。\n\n"
+            f"【课题】{topic_title}\n"
+            f"【关键词】{kw_str}\n"
+            f"【方法】{m_str}\n"
+            f"【核心概念】{concept}　【关键现象】{phenomenon}\n\n"
+            f"【模板生成的问题（请在此基础上优化）】\n{q_list}\n\n"
+            f"要求：\n"
+            f"1. 每个问题要具体、可检验，避免空泛\n"
+            f"2. 保留原有要素的侧重点（立项依据/科学问题/研究内容/研究方案/特色与创新）\n"
+            f"3. 输出严格的 JSON 格式：{{\"立项依据\": \"...\", \"科学问题\": \"...\", "
+            f"\"研究内容\": \"...\", \"研究方案\": \"...\", \"特色与创新\": \"...\"}}\n"
+            f"4. 只输出 JSON，不要任何解释"
+        )
+
+        try:
+            from llm_gateway import llm_json
+            ok, data, _ = llm_json(sys_prompt, user_prompt, timeout=90)
+            if ok and isinstance(data, dict):
+                result = {}
+                for elem in template_questions:
+                    val = data.get(elem)
+                    if isinstance(val, str) and val.strip():
+                        result[elem] = val.strip()
+                    else:
+                        result[elem] = template_questions[elem]
+                return result
+        except Exception:
+            pass
+        return dict(template_questions)
+
     def construct_questions(
         self,
         topic: Dict[str, Any],
@@ -593,15 +670,23 @@ class QuestionArchitect:
         main_questions: List[str] = []
         qid_counter = 0
 
+        # v6.3.2 先用模板生成全部五要素问题，再用 LLM 批量优化
+        template_questions: Dict[str, str] = {}
+        for element in QUESTION_ELEMENTS:
+            tmpl_info = QUESTION_TEMPLATES[element]
+            try:
+                template_questions[element] = tmpl_info["template"].format(**placeholders)
+            except (KeyError, IndexError):
+                template_questions[element] = tmpl_info["template"]
+        enriched = self._llm_enrich_questions(topic, placeholders, template_questions)
+
         for element in QUESTION_ELEMENTS:
             qid_counter += 1
             qid = f"q_{qid_counter:03d}"
             tmpl_info = QUESTION_TEMPLATES[element]
             q_type = tmpl_info["type"]
-            try:
-                text = tmpl_info["template"].format(**placeholders)
-            except (KeyError, IndexError):
-                text = tmpl_info["template"]
+            # 优先使用 LLM 优化后的问题文本
+            text = enriched.get(element, template_questions[element])
 
             evidence = self._link_evidence(q_type, element, topic, gap_map)
             hypothesis = self._derive_hypothesis(element, placeholders)

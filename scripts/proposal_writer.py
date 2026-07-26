@@ -66,6 +66,15 @@ if str(_SCRIPT_DIR) not in sys.path:
 
 from common import now_utc, load_json, save_json, file_lock, lazy_load
 
+# v6.3.2 接入 LLM 网关（共享基础设施层），让申请书撰写具备"大脑"
+try:
+    from llm_gateway import is_llm_available, safe_llm_complete
+    _LLM_OK = is_llm_available()
+except Exception:
+    _LLM_OK = False
+    def safe_llm_complete(*a, **kw):  # type: ignore
+        return kw.get("fallback", "")
+
 __all__ = [
     "ProposalWriter",
     "SECTION_DEFINITIONS",
@@ -789,6 +798,145 @@ _SECTION_ASSEMBLERS = {
 
 
 # ---------------------------------------------------------------------------
+# v6.3.2 LLM 章节增强 — 让申请书具备学术深度与实质论述
+# ---------------------------------------------------------------------------
+
+# 各章节的 LLM 增强指令（角色 + 任务 + 约束）
+_LLM_SECTION_PROMPTS: Dict[str, Dict[str, str]] = {
+    "立项依据": {
+        "role": (
+            "你是资深的 NSFC 面上项目评审专家与学术写作导师，深耕强场超快光学/"
+            "阿秒科学/固体高次谐波领域。你擅长将零散的研究缺口与问题框架，"
+            "凝练为逻辑严密、论证充分、符合国家自然科学基金规范的立项依据。"
+        ),
+        "task": (
+            "请基于下方「模板草稿」，重写一份高质量的「立项依据」章节。\n"
+            "要求：\n"
+            "1. 保留原草稿的结构骨架（研究背景/国内外研究现状/科学意义/拟解决的关键科学问题）\n"
+            "2. 将占位式表述替换为实质性的学术论述，补充物理机制解释与因果逻辑\n"
+            "3. 国内外研究现状部分要体现领域发展脉络，而非简单罗列\n"
+            "4. 保留所有 [CITE:xxx] 引文占位符原样不动\n"
+            "5. 字数 800-1500 字，段落分明，避免空话套话\n"
+            "6. 直接输出 Markdown 正文，不要加 ``` 代码块"
+        ),
+    },
+    "研究内容": {
+        "role": (
+            "你是 NSFC 项目研究内容设计专家，擅长将科学问题分解为具体、可操作、"
+            "层次分明的研究内容模块。"
+        ),
+        "task": (
+            "请基于下方「模板草稿」，重写「研究内容」章节。\n"
+            "要求：\n"
+            "1. 明确研究目标（1 段）\n"
+            "2. 将研究内容拆分为 3-4 个递进的子内容，每个子内容含目标与方法要点\n"
+            "3. 阐述各子内容之间的逻辑关系\n"
+            "4. 保留 [CITE:xxx] 占位符\n"
+            "5. 字数 600-1000 字，直接输出 Markdown"
+        ),
+    },
+    "研究方案": {
+        "role": (
+            "你是实验物理与方法学设计专家，擅长设计严谨可行的技术路线与实验方案。"
+        ),
+        "task": (
+            "请基于下方「模板草稿」，重写「研究方案」章节。\n"
+            "要求：\n"
+            "1. 总体技术路线（含逻辑框图描述）\n"
+            "2. 关键技术与方法（3-4 项，每项含原理简述）\n"
+            "3. 可行性分析（理论/技术/设备三方面）\n"
+            "4. 保留 [CITE:xxx] 占位符\n"
+            "5. 字数 800-1200 字，直接输出 Markdown"
+        ),
+    },
+    "特色与创新": {
+        "role": "你是学术创新点提炼专家，擅长从研究内容中凝练出鲜明、可信的创新点。",
+        "task": (
+            "请基于下方「模板草稿」，重写「特色与创新之处」章节。\n"
+            "要求：\n"
+            "1. 提炼 2-3 个创新点，每个创新点含：创新内容 + 与现有工作的区别\n"
+            "2. 避免空泛的\"首次\"\"填补空白\"，要具体说明新在哪里\n"
+            "3. 保留 [CITE:xxx] 占位符\n"
+            "4. 字数 400-600 字，直接输出 Markdown"
+        ),
+    },
+}
+
+
+def _llm_enhance_section(
+    section_name: str,
+    draft_content: str,
+    framework: Dict[str, Any],
+    placeholders: Dict[str, str],
+    gap_report: Optional[Dict[str, Any]],
+) -> tuple:
+    """用 LLM 增强章节内容（锦上添花模式：失败则返回模板草稿）。
+
+    Returns:
+        (enhanced_content, meta) 其中 meta = {enhanced, provider, reason}
+    """
+    # LLM 不可用时直接降级
+    if not _LLM_OK:
+        return draft_content, {"enhanced": False, "reason": "LLM 不可用"}
+
+    prompt_cfg = _LLM_SECTION_PROMPTS.get(section_name)
+    if not prompt_cfg:
+        # 无增强指令的章节（年度计划/预期成果）保留模板
+        return draft_content, {"enhanced": False, "reason": "该章节无需 LLM 增强"}
+
+    # 构建上下文：课题、缺口、关键概念
+    topic_title = framework.get("topic_title", "")
+    concept = placeholders.get("concept", "")
+    phenomenon = placeholders.get("phenomenon", "")
+
+    gap_summary = ""
+    if gap_report and isinstance(gap_report, dict):
+        gaps = gap_report.get("gaps", [])
+        if isinstance(gaps, list):
+            gap_lines = []
+            for g in gaps[:5]:
+                if isinstance(g, dict):
+                    desc = g.get("description") or g.get("gap_id", "")
+                    if desc:
+                        gap_lines.append(f"- {desc}")
+            gap_summary = "\n".join(gap_lines)
+
+    context_block = f"【课题】{topic_title}\n【核心概念】{concept}\n【关键现象】{phenomenon}\n"
+    if gap_summary:
+        context_block += f"【已知研究缺口】\n{gap_summary}\n"
+
+    user_prompt = (
+        f"{prompt_cfg['task']}\n\n"
+        f"=== 课题上下文 ===\n{context_block}\n"
+        f"=== 模板草稿（请在此基础上重写）===\n{draft_content}\n"
+    )
+
+    fallback = draft_content
+    enhanced = safe_llm_complete(
+        prompt_cfg["role"],
+        user_prompt,
+        fallback=fallback,
+        timeout=120,
+    )
+
+    # 校验：LLM 输出必须保留原草稿中的引文占位符（防止 LLM 删掉引用）
+    if enhanced and enhanced != fallback:
+        original_cites = set(re.findall(r"\[CITE:[^\]]+\]", draft_content))
+        if original_cites:
+            new_cites = set(re.findall(r"\[CITE:[^\]]+\]", enhanced))
+            missing = original_cites - new_cites
+            if missing:
+                # 引文丢失，降级回模板（保证引用完整性）
+                return fallback, {
+                    "enhanced": False,
+                    "reason": f"LLM 输出丢失引文占位符: {missing}",
+                }
+        return enhanced, {"enhanced": True, "provider": "llm"}
+
+    return fallback, {"enhanced": False, "reason": "LLM 返回空或未变化"}
+
+
+# ---------------------------------------------------------------------------
 # ProposalWriter 类
 # ---------------------------------------------------------------------------
 
@@ -1016,6 +1164,11 @@ class ProposalWriter:
         # 应用 taste 风格
         content = _apply_taste_style(content, section_name, taste_profile)
 
+        # v6.3.2 LLM 增强：让章节内容具备学术深度与实质论述
+        content, llm_meta = _llm_enhance_section(
+            section_name, content, framework, placeholders, gap_report
+        )
+
         # 提取关联问题 ID
         question_ids: List[str] = []
         for element in section_def.get("source_elements", []):
@@ -1047,6 +1200,8 @@ class ProposalWriter:
             "version": version,
             "status": "draft",
             "question_ids": question_ids,
+            "llm_enhanced": llm_meta.get("enhanced", False),
+            "llm_provider": llm_meta.get("provider", ""),
             "created_at": existing.get("created_at", timestamp) if existing else timestamp,
             "updated_at": timestamp,
             "update_history": existing.get("update_history", []) if existing else [],

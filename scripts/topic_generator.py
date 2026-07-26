@@ -65,6 +65,17 @@ from common import now_utc, load_json, save_json, file_lock, lazy_load
 # 从 gap_analyzer 导入方向维度定义与缺口类型标签
 from gap_analyzer import DIRECTION_DIMENSIONS, GAP_TYPE_LABELS
 
+# v6.3.2 接入 LLM 网关（共享基础设施层），让选题具备"大脑"
+try:
+    from llm_gateway import is_llm_available, safe_llm_complete, llm_json
+    _LLM_OK = is_llm_available()
+except Exception:
+    _LLM_OK = False
+    def safe_llm_complete(*a, **kw):  # type: ignore
+        return kw.get("fallback", "")
+    def llm_json(*a, **kw):  # type: ignore
+        return False, None, {}
+
 __all__ = [
     "TopicGenerator",
     "TOPIC_STATUS",
@@ -298,6 +309,58 @@ class TopicGenerator:
 
         return ranked
 
+    def _llm_enrich_topic(
+        self,
+        gap: Dict[str, Any],
+        concept: str,
+        direction_name: str,
+        template_title: str,
+        template_rq: str,
+    ) -> Dict[str, str]:
+        """v6.3.2 用 LLM 生成更具学术价值的课题标题与研究问题。
+
+        Returns:
+            {"title": ..., "research_question": ...}，失败时回退模板。
+        """
+        if not _LLM_OK:
+            return {"title": template_title, "research_question": template_rq}
+
+        gap_desc = gap.get("description", "")
+        gap_type = gap.get("type", "conceptual")
+        dir_label = direction_name or "强场超快光学"
+
+        sys_prompt = (
+            "你是强场超快光学/阿秒科学/固体高次谐波领域的资深 PI，"
+            "擅长从研究缺口中凝练出科学价值高、可行性强、新颖度好的课题。"
+            "你熟悉 NSFC 面上项目课题标题的表述规范。"
+        )
+        user_prompt = (
+            f"请基于以下研究缺口，优化课题标题与研究问题。\n\n"
+            f"【缺口类型】{gap_type}\n"
+            f"【缺口描述】{gap_desc}\n"
+            f"【关键概念】{concept}\n"
+            f"【研究方向】{dir_label}\n"
+            f"【模板标题】{template_title}\n"
+            f"【模板研究问题】{template_rq}\n\n"
+            f"要求：\n"
+            f"1. 标题要体现\"现象+机制+方法\"，避免泛化\n"
+            f"2. 研究问题要具体、可检验\n"
+            f"3. 输出严格 JSON：{{\"title\": \"...\", \"research_question\": \"...\"}}\n"
+            f"4. 只输出 JSON"
+        )
+
+        try:
+            ok, data, _ = llm_json(sys_prompt, user_prompt, timeout=90)
+            if ok and isinstance(data, dict):
+                title = data.get("title", "")
+                rq = data.get("research_question", "")
+                if isinstance(title, str) and title.strip() and len(title) <= 80:
+                    if isinstance(rq, str) and rq.strip():
+                        return {"title": title.strip(), "research_question": rq.strip()}
+        except Exception:
+            pass
+        return {"title": template_title, "research_question": template_rq}
+
     def _gap_to_topics(
         self,
         gap: Dict[str, Any],
@@ -329,6 +392,9 @@ class TopicGenerator:
         # 生成主课题
         title1 = self._generate_title(gap_type, concept, dir_name, 0)
         rq1 = self._generate_research_question(gap_type, concept, dir_name, 0)
+        # v6.3.2 LLM 增强课题标题与研究问题
+        enriched1 = self._llm_enrich_topic(gap, concept, dir_name, title1, rq1)
+        title1, rq1 = enriched1["title"], enriched1["research_question"]
         alignment1 = self._compute_direction_alignment(
             gap, direction, title1, rq1)
         topic1: Dict[str, Any] = {
@@ -357,6 +423,9 @@ class TopicGenerator:
         if gap_type in ("conceptual", "theoretical"):
             title2 = self._generate_title(gap_type, concept, dir_name, 1)
             rq2 = self._generate_research_question(gap_type, concept, dir_name, 1)
+            # v6.3.2 LLM 增强备选课题
+            enriched2 = self._llm_enrich_topic(gap, concept, dir_name, title2, rq2)
+            title2, rq2 = enriched2["title"], enriched2["research_question"]
             alignment2 = self._compute_direction_alignment(
                 gap, direction, title2, rq2)
             topic2 = dict(topic1)

@@ -595,6 +595,19 @@ LinSai-CoPilot/
 - ✅ **产出质量验证** — 缺口报告 10 个缺口 / 自检报告 0.70 分 3 问题 / 申请书六章节完整
 - ✅ **回归测试** — pipeline_orchestrator 自检 + 单元 116/116 + Web CI 170/170，零回归
 
+### Phase 16：管线关键环节接入 LLM"大脑"（v6.3.2）【✅ 已完成】
+- ✅ **LLM 网关（共享基础设施层）** — 新增 `scripts/llm_gateway.py`
+  - 归入「共享基础设施」分类（§6.1），核心与管线模块均可导入
+  - 封装 llm_router 降级策略，提供 `llm_complete()` / `llm_chat()` / `safe_llm_complete()` / `llm_json()`
+  - 永不抛异常：LLM 失败时返回结构化错误，支持降级到模板模式
+- ✅ **边界规则更新** — §6.1/§6.2 将 llm_gateway 归入共享层，管线通过它间接调用 LLM
+- ✅ **选题 LLM 增强** — `topic_generator.py`：LLM 优化课题标题与研究问题（JSON 校验 + 模板回退）
+- ✅ **科学问题 LLM 增强** — `question_architect.py`：LLM 批量优化五要素科学问题表述
+- ✅ **申请书撰写 LLM 增强** — `proposal_writer.py`：4 章节由 LLM 重写实质内容（引文占位符保护）
+- ✅ **自检 LLM 语义评审** — `proposal_inspector.py`：LLM 四维语义评审 + 总分融合（规则 0.6 + LLM 0.4）
+- ✅ **端到端验证** — 真实 LLM 调用四环节全部生效，产出从模板占位文本升级为实质学术论述
+- ✅ **回归测试** — llm_gateway 自检 5/5 + 单元 116/116 + 边界检查通过，零回归
+
 ---
 
 ## 开发约定
@@ -668,7 +681,7 @@ LinSai-CoPilot/
 |------|----------|------|-----------|
 | **CoPilot 核心** | 无特定前缀 | `session_manager.py`, `copilot_engine.py`, `context_builder.py` | 核心模块互相导入；管线模块**不可导入** |
 | **研究管线** | 管线特有 | `artifact_manager.py`, `pipeline_orchestrator.py`, `gap_analyzer.py` 等 | 管线模块互相导入；核心模块**不可导入**管线模块 |
-| **共享基础设施** | 无特定前缀 | `common.py`, `paths.py` | 双方均可导入 |
+| **共享基础设施** | 无特定前缀 | `common.py`, `paths.py`, `llm_gateway.py` | 双方均可导入 |
 | **知识库引擎** | `kb_` 前缀 | `kb_index.py`, `kb_wiki.py` | 管线模块**只读导入**（详见 6.3） |
 | **Web 路由 Mixin** | `web_routes_` 前缀 | `web_routes_pipeline.py`, `web_routes_research.py` | 仅被 `web_server.py` 聚合器导入 |
 
@@ -681,7 +694,9 @@ LinSai-CoPilot/
 │ 研究管线模块（12 个）                          │
 │                                             │
 │  允许导入：                                   │
-│  ① 共享基础设施: common, paths               │
+│  ① 共享基础设施: common, paths, llm_gateway   │
+│     （llm_gateway 封装 llm_router，管线通过   │
+│      它调用 LLM，仍禁止直接导入 llm_router）  │
 │  ② 管线内部模块: artifact_manager,           │
 │     lineage_tracker, taste_engine,           │
 │     pipeline_orchestrator, gap_analyzer,     │
@@ -696,7 +711,7 @@ LinSai-CoPilot/
 │  ✗ context_builder                           │
 │  ✗ memory_manager                            │
 │  ✗ proactive_engine                          │
-│  ✗ llm_router（管线不直接调 LLM）              │
+│  ✗ llm_router（须通过 llm_gateway 间接调用）   │
 │  ✗ learning_engine                           │
 │  ✗ skill_manager / slash_commands            │
 │  ✗ tool_engine                               │
@@ -908,7 +923,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.3.1*
+*版本：6.3.2*
 *日期：2026-07-26*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

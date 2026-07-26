@@ -1,0 +1,759 @@
+{
+  "iterations": [
+    {
+      "iteration": 1,
+      "timestamp": "2026-07-26T03:54:40Z",
+      "sections_before": {
+        "立项依据": "675ca07116e8812b",
+        "研究内容": "3efda83df7c0822d",
+        "研究方案": "41599b12b3df819c",
+        "特色与创新": "d11575d150dc9768"
+      },
+      "issues_found": [
+        {
+          "issue_id": "issue_001",
+          "dimension": "logical_consistency",
+          "severity": "minor",
+          "section": "立项依据",
+          "description": "第3段含无引用支撑的论断句"
+        },
+        {
+          "issue_id": "issue_002",
+          "dimension": "logical_consistency",
+          "severity": "minor",
+          "section": "立项依据",
+          "description": "第4段含无引用支撑的论断句"
+        },
+        {
+          "issue_id": "issue_003",
+          "dimension": "logical_consistency",
+          "severity": "minor",
+          "section": "立项依据",
+          "description": "第5段含无引用支撑的论断句"
+        },
+        {
+          "issue_id": "issue_004",
+          "dimension": "logical_consistency",
+          "severity": "minor",
+          "section": "立项依据",
+          "description": "第8段含无引用支撑的论断句"
+        },
+        {
+          "issue_id": "issue_005",
+          "dimension": "logical_consistency",
+          "severity": "minor",
+          "section": "研究内容",
+          "description": "第12段含无引用支撑的论断句"
+        },
+        {
+          "issue_id": "issue_006",
+          "dimension": "logical_consistency",
+          "severity": "minor",
+          "section": "研究内容",
+          "description": "第15段含无引用支撑的论断句"
+        },
+        {
+          "issue_id": "issue_007",
+          "dimension": "logical_consistency",
+          "severity": "minor",
+          "section": "研究方案",
+          "description": "第6段含无引用支撑的论断句"
+        },
+        {
+          "issue_id": "issue_008",
+          "dimension": "evidence_sufficiency",
+          "severity": "major",
+          "section": "立项依据",
+          "description": "第3段含论断但无任何文献引用支撑"
+        },
+        {
+          "issue_id": "issue_009",
+          "dimension": "evidence_sufficiency",
+          "severity": "major",
+          "section": "立项依据",
+          "description": "第4段含论断但无任何文献引用支撑"
+        },
+        {
+          "issue_id": "issue_010",
+          "dimension": "evidence_sufficiency",
+          "severity": "major",
+          "section": "立项依据",
+          "description": "第5段含论断但无任何文献引用支撑"
+        },
+        {
+          "issue_id": "issue_011",
+          "dimension": "evidence_sufficiency",
+          "severity": "major",
+          "section": "立项依据",
+          "description": "第8段含论断但无任何文献引用支撑"
+        },
+        {
+          "issue_id": "issue_012",
+          "dimension": "evidence_sufficiency",
+          "severity": "major",
+          "section": "研究内容",
+          "description": "第12段含论断但无任何文献引用支撑"
+        },
+        {
+          "issue_id": "issue_013",
+          "dimension": "evidence_sufficiency",
+          "severity": "major",
+          "section": "研究内容",
+          "description": "第15段含论断但无任何文献引用支撑"
+        },
+        {
+          "issue_id": "issue_014",
+          "dimension": "evidence_sufficiency",
+          "severity": "major",
+          "section": "研究方案",
+          "description": "第6段含论断但无任何文献引用支撑"
+        },
+        {
+          "issue_id": "issue_015",
+          "dimension": "expression_quality",
+          "severity": "minor",
+          "section": "立项依据",
+          "description": "第5段过长（376字符），建议拆分"
+        }
+      ],
+      "issue_count": 15,
+      "strategy": {
+        "level": "structural_adjustment",
+        "level_label": "结构调整",
+        "reason": "逻辑一致性分数 0.44 < 0.6",
+        "actions": [
+          {
+            "issue_id": "issue_001",
+            "dimension": "logical_consistency",
+            "section": "立项依据",
+            "paragraph_index": 2,
+            "severity": "minor",
+            "description": "第3段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_002",
+            "dimension": "logical_consistency",
+            "section": "立项依据",
+            "paragraph_index": 3,
+            "severity": "minor",
+            "description": "第4段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_003",
+            "dimension": "logical_consistency",
+            "section": "立项依据",
+            "paragraph_index": 4,
+            "severity": "minor",
+            "description": "第5段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_004",
+            "dimension": "logical_consistency",
+            "section": "立项依据",
+            "paragraph_index": 7,
+            "severity": "minor",
+            "description": "第8段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_005",
+            "dimension": "logical_consistency",
+            "section": "研究内容",
+            "paragraph_index": 11,
+            "severity": "minor",
+            "description": "第12段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_006",
+            "dimension": "logical_consistency",
+            "section": "研究内容",
+            "paragraph_index": 14,
+            "severity": "minor",
+            "description": "第15段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_007",
+            "dimension": "logical_consistency",
+            "section": "研究方案",
+            "paragraph_index": 5,
+            "severity": "minor",
+            "description": "第6段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_008",
+            "dimension": "evidence_sufficiency",
+            "section": "立项依据",
+            "paragraph_index": 2,
+            "severity": "major",
+            "description": "第3段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_009",
+            "dimension": "evidence_sufficiency",
+            "section": "立项依据",
+            "paragraph_index": 3,
+            "severity": "major",
+            "description": "第4段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_010",
+            "dimension": "evidence_sufficiency",
+            "section": "立项依据",
+            "paragraph_index": 4,
+            "severity": "major",
+            "description": "第5段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_011",
+            "dimension": "evidence_sufficiency",
+            "section": "立项依据",
+            "paragraph_index": 7,
+            "severity": "major",
+            "description": "第8段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_012",
+            "dimension": "evidence_sufficiency",
+            "section": "研究内容",
+            "paragraph_index": 11,
+            "severity": "major",
+            "description": "第12段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_013",
+            "dimension": "evidence_sufficiency",
+            "section": "研究内容",
+            "paragraph_index": 14,
+            "severity": "major",
+            "description": "第15段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_014",
+            "dimension": "evidence_sufficiency",
+            "section": "研究方案",
+            "paragraph_index": 5,
+            "severity": "major",
+            "description": "第6段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true,
+            "fix_type": "structural_change"
+          },
+          {
+            "issue_id": "issue_015",
+            "dimension": "expression_quality",
+            "section": "立项依据",
+            "paragraph_index": 4,
+            "severity": "minor",
+            "description": "第5段过长（376字符），建议拆分",
+            "suggestion": "将长段落拆分为 2-3 个短段落",
+            "auto_fixable": false,
+            "fix_type": "structural_change"
+          }
+        ],
+        "estimated_improvement": 0.2
+      },
+      "score": 0.543,
+      "sections_after": null,
+      "optimized": false,
+      "score_change": 0.0,
+      "improved": false
+    }
+  ],
+  "latest_report": {
+    "report_id": "rpt_001",
+    "timestamp": "2026-07-26T03:54:40Z",
+    "iteration": 1,
+    "sections_checked": [
+      "立项依据",
+      "研究内容",
+      "研究方案",
+      "特色与创新"
+    ],
+    "dimensions": {
+      "logical_consistency": {
+        "dimension": "logical_consistency",
+        "score": 0.43999999999999995,
+        "issues": [
+          {
+            "issue_id": "issue_001",
+            "dimension": "logical_consistency",
+            "section": "立项依据",
+            "paragraph_index": 2,
+            "severity": "minor",
+            "description": "第3段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_002",
+            "dimension": "logical_consistency",
+            "section": "立项依据",
+            "paragraph_index": 3,
+            "severity": "minor",
+            "description": "第4段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_003",
+            "dimension": "logical_consistency",
+            "section": "立项依据",
+            "paragraph_index": 4,
+            "severity": "minor",
+            "description": "第5段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_004",
+            "dimension": "logical_consistency",
+            "section": "立项依据",
+            "paragraph_index": 7,
+            "severity": "minor",
+            "description": "第8段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_005",
+            "dimension": "logical_consistency",
+            "section": "研究内容",
+            "paragraph_index": 11,
+            "severity": "minor",
+            "description": "第12段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_006",
+            "dimension": "logical_consistency",
+            "section": "研究内容",
+            "paragraph_index": 14,
+            "severity": "minor",
+            "description": "第15段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_007",
+            "dimension": "logical_consistency",
+            "section": "研究方案",
+            "paragraph_index": 5,
+            "severity": "minor",
+            "description": "第6段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true
+          }
+        ],
+        "details": {
+          "contradictions_found": 0,
+          "unsupported_claims": 7,
+          "circular_reasoning": 0
+        }
+      },
+      "evidence_sufficiency": {
+        "dimension": "evidence_sufficiency",
+        "score": 0.0,
+        "issues": [
+          {
+            "issue_id": "issue_008",
+            "dimension": "evidence_sufficiency",
+            "section": "立项依据",
+            "paragraph_index": 2,
+            "severity": "major",
+            "description": "第3段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_009",
+            "dimension": "evidence_sufficiency",
+            "section": "立项依据",
+            "paragraph_index": 3,
+            "severity": "major",
+            "description": "第4段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_010",
+            "dimension": "evidence_sufficiency",
+            "section": "立项依据",
+            "paragraph_index": 4,
+            "severity": "major",
+            "description": "第5段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_011",
+            "dimension": "evidence_sufficiency",
+            "section": "立项依据",
+            "paragraph_index": 7,
+            "severity": "major",
+            "description": "第8段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_012",
+            "dimension": "evidence_sufficiency",
+            "section": "研究内容",
+            "paragraph_index": 11,
+            "severity": "major",
+            "description": "第12段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_013",
+            "dimension": "evidence_sufficiency",
+            "section": "研究内容",
+            "paragraph_index": 14,
+            "severity": "major",
+            "description": "第15段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_014",
+            "dimension": "evidence_sufficiency",
+            "section": "研究方案",
+            "paragraph_index": 5,
+            "severity": "major",
+            "description": "第6段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true
+          }
+        ],
+        "details": {
+          "total_claim_paragraphs": 7,
+          "paragraphs_with_citations": 0,
+          "paragraphs_without_citations": 7
+        }
+      },
+      "innovation": {
+        "dimension": "innovation",
+        "score": 0.6666666666666666,
+        "issues": [],
+        "details": {
+          "novelty_keywords_found": 2,
+          "novelty_keywords_list": [
+            "首次",
+            "创新"
+          ]
+        }
+      },
+      "feasibility": {
+        "dimension": "feasibility",
+        "score": 1.0,
+        "issues": [],
+        "details": {
+          "method_mentions": 10,
+          "methods_found": [
+            "方法",
+            "技术",
+            "实验",
+            "计算",
+            "测量",
+            "TDDFT",
+            "DFT",
+            "第一性原理",
+            "光谱",
+            "观测"
+          ],
+          "timeline_indicators": 3,
+          "has_timeline": true
+        }
+      },
+      "academic_norms": {
+        "dimension": "academic_norms",
+        "score": 1.0,
+        "issues": [],
+        "details": {
+          "citation_markers": 0,
+          "malformed_citations": 0,
+          "section_headers": 18,
+          "missing_headers_sections": []
+        }
+      },
+      "expression_quality": {
+        "dimension": "expression_quality",
+        "score": 0.9422090457804743,
+        "issues": [
+          {
+            "issue_id": "issue_015",
+            "dimension": "expression_quality",
+            "section": "立项依据",
+            "paragraph_index": 4,
+            "severity": "minor",
+            "description": "第5段过长（376字符），建议拆分",
+            "suggestion": "将长段落拆分为 2-3 个短段落",
+            "auto_fixable": false
+          }
+        ],
+        "details": {
+          "total_sentences": 74,
+          "long_sentences": 27,
+          "total_paragraphs": 49,
+          "long_paragraphs": 1,
+          "informal_markers": 0
+        }
+      }
+    },
+    "overall_score": 0.543,
+    "total_issues": 15,
+    "critical_count": 0,
+    "major_count": 7,
+    "minor_count": 8,
+    "suggestion_count": 0,
+    "strategy": {
+      "level": "structural_adjustment",
+      "level_label": "结构调整",
+      "reason": "逻辑一致性分数 0.44 < 0.6",
+      "actions": [
+        {
+          "issue_id": "issue_001",
+          "dimension": "logical_consistency",
+          "section": "立项依据",
+          "paragraph_index": 2,
+          "severity": "minor",
+          "description": "第3段含无引用支撑的论断句",
+          "suggestion": "补充文献引用 [N] 或理论推导依据",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_002",
+          "dimension": "logical_consistency",
+          "section": "立项依据",
+          "paragraph_index": 3,
+          "severity": "minor",
+          "description": "第4段含无引用支撑的论断句",
+          "suggestion": "补充文献引用 [N] 或理论推导依据",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_003",
+          "dimension": "logical_consistency",
+          "section": "立项依据",
+          "paragraph_index": 4,
+          "severity": "minor",
+          "description": "第5段含无引用支撑的论断句",
+          "suggestion": "补充文献引用 [N] 或理论推导依据",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_004",
+          "dimension": "logical_consistency",
+          "section": "立项依据",
+          "paragraph_index": 7,
+          "severity": "minor",
+          "description": "第8段含无引用支撑的论断句",
+          "suggestion": "补充文献引用 [N] 或理论推导依据",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_005",
+          "dimension": "logical_consistency",
+          "section": "研究内容",
+          "paragraph_index": 11,
+          "severity": "minor",
+          "description": "第12段含无引用支撑的论断句",
+          "suggestion": "补充文献引用 [N] 或理论推导依据",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_006",
+          "dimension": "logical_consistency",
+          "section": "研究内容",
+          "paragraph_index": 14,
+          "severity": "minor",
+          "description": "第15段含无引用支撑的论断句",
+          "suggestion": "补充文献引用 [N] 或理论推导依据",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_007",
+          "dimension": "logical_consistency",
+          "section": "研究方案",
+          "paragraph_index": 5,
+          "severity": "minor",
+          "description": "第6段含无引用支撑的论断句",
+          "suggestion": "补充文献引用 [N] 或理论推导依据",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_008",
+          "dimension": "evidence_sufficiency",
+          "section": "立项依据",
+          "paragraph_index": 2,
+          "severity": "major",
+          "description": "第3段含论断但无任何文献引用支撑",
+          "suggestion": "补充相关文献引用 [N]",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_009",
+          "dimension": "evidence_sufficiency",
+          "section": "立项依据",
+          "paragraph_index": 3,
+          "severity": "major",
+          "description": "第4段含论断但无任何文献引用支撑",
+          "suggestion": "补充相关文献引用 [N]",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_010",
+          "dimension": "evidence_sufficiency",
+          "section": "立项依据",
+          "paragraph_index": 4,
+          "severity": "major",
+          "description": "第5段含论断但无任何文献引用支撑",
+          "suggestion": "补充相关文献引用 [N]",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_011",
+          "dimension": "evidence_sufficiency",
+          "section": "立项依据",
+          "paragraph_index": 7,
+          "severity": "major",
+          "description": "第8段含论断但无任何文献引用支撑",
+          "suggestion": "补充相关文献引用 [N]",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_012",
+          "dimension": "evidence_sufficiency",
+          "section": "研究内容",
+          "paragraph_index": 11,
+          "severity": "major",
+          "description": "第12段含论断但无任何文献引用支撑",
+          "suggestion": "补充相关文献引用 [N]",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_013",
+          "dimension": "evidence_sufficiency",
+          "section": "研究内容",
+          "paragraph_index": 14,
+          "severity": "major",
+          "description": "第15段含论断但无任何文献引用支撑",
+          "suggestion": "补充相关文献引用 [N]",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_014",
+          "dimension": "evidence_sufficiency",
+          "section": "研究方案",
+          "paragraph_index": 5,
+          "severity": "major",
+          "description": "第6段含论断但无任何文献引用支撑",
+          "suggestion": "补充相关文献引用 [N]",
+          "auto_fixable": true,
+          "fix_type": "structural_change"
+        },
+        {
+          "issue_id": "issue_015",
+          "dimension": "expression_quality",
+          "section": "立项依据",
+          "paragraph_index": 4,
+          "severity": "minor",
+          "description": "第5段过长（376字符），建议拆分",
+          "suggestion": "将长段落拆分为 2-3 个短段落",
+          "auto_fixable": false,
+          "fix_type": "structural_change"
+        }
+      ],
+      "estimated_improvement": 0.2
+    },
+    "passed": false,
+    "manual_review_recommended": false,
+    "llm_review": {
+      "academic_depth_score": 0.5,
+      "logical_rigor_score": 0.42,
+      "innovation_clarity_score": 0.18,
+      "feasibility_score": 0.55,
+      "overall_comment": "选题处于强场超快与凝聚态几何物理交叉前沿，立项依据物理图像大体清晰，但申请书存在多处致命缺陷：创新点章节完全为问题列表而非具体创新陈述，多处文本明显截断，量子度规进入SBEs的几何耦合项缺乏严格推导且公式形式存疑，全文充斥[CITE:xxx]占位符，需大幅修改方可进入实质评审。",
+      "key_strengths": [
+        "选题精准切入'量子几何量调制固体HHG偏振'这一国际前沿空白，物理问题具有基础性与时效性",
+        "三阶段递进式技术路线（几何量提取→动力学演化→偏振解析）逻辑骨架清晰",
+        "采用紧束缚+SBEs与RT-TDDFT双轨交叉验证的策略，有助于规避模型依赖性",
+        "将实验可观测量（椭偏率、螺旋度、Stokes参量）作为研究终点，体现理论与实验结合意识"
+      ],
+      "key_weaknesses": [
+        "创新点章节为致命缺陷：所列四条'创新点'实为评审问题清单而非创新陈述，且与现有工作的比较段落仅为空洞断言，不具任何说服力",
+        "多处文本严重截断（'晶体取'、'实验数'、'技术可'等），说明稿件未完成即提交，逻辑链条多处断裂",
+        "关键技术公式 iΩ_mn g_mn^{ij} E_i E_j 缺乏从刘维尔方程或速度规范变换的严格推导，该形式在物理上可疑——量子度规通常通过跃迁振幅的非对角修正或反常速度的高阶项进入非线性响应，而非以E_iE_j双线性场耦合形式简单相乘",
+        "全文CITE:xxx占位符密布，无法判断文献支撑是否充分，更无法验证关键论断的优先权归属",
+        "缺乏任何定量预研结果或与已知实验（如SiO₂、MoS₂、WSe₂体系HHG偏振数据）的对比校验，研究目标的'定量预测'承诺无前期数据支撑"
+      ],
+      "improvement_suggestions": [
+        "彻底重写创新点章节：每条创新须给出'本工作首次揭示/建立/预测了X，与现有工作的Y相比，区别在于Z'的句式，并附具体物理判据（如某材料的特定谐波阶次椭偏率符号反转等可检验预言）",
+        "补充从含时刘维尔方程出发的严格推导，明确量子度规通过何种物理通道（反常速度高阶项？跃迁偶极矩规范修正？相干项演化？）进入谐波电流，避免凭空写出耦合项",
+        "完成所有截断章节，并提供至少一个材料体系（如MgO或hBN）的预研计算结果，与已发表实验/理论数据对比，证明方法可重复性",
+        "补充全部文献引用，删除所有[CITE:xxx]占位符，特别须引用Ghimire 2011、Vampa 2015、Lodahl相关实验以及Morimoto-Nagaosa量子几何非线性响应系列原文",
+        "明确区分本项目与近期预印本/已发表工作（如可能涉及的相关组在PRL/PRB上的量子度规HHG工作）的边界，证明科学问题的原创性"
+      ]
+    },
+    "score_breakdown": {
+      "rule_score": 0.629,
+      "llm_score": 0.412,
+      "fusion": "rule*0.6 + llm*0.4"
+    }
+  },
+  "stagnation_count": 0,
+  "report_seq": 1,
+  "updated_at": "2026-07-26T03:55:04Z"
+}

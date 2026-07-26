@@ -1,0 +1,123 @@
+{
+  "artifacts": {
+    "qf_fw_001": {
+      "artifact_id": "qf_fw_001",
+      "artifact_type": "question_framework",
+      "stage": 3,
+      "version": "v0.1",
+      "seq": 1,
+      "status": "draft",
+      "file_path": "03_question/question-framework.md",
+      "content_hash": "sha256:548fa1434b4d867c9dd81b439722a0888a9b0e7892c6fc0cc0fd833598ba99af",
+      "created_at": "2026-07-26T03:51:25Z",
+      "locked_at": null,
+      "author": "pipeline_stage3",
+      "lineage": {
+        "upstream": [],
+        "downstream": []
+      }
+    },
+    "sec_01_v0.1": {
+      "artifact_id": "sec_01_v0.1",
+      "artifact_type": "proposal_section",
+      "stage": 4,
+      "version": "v0.1",
+      "seq": 2,
+      "status": "draft",
+      "file_path": "04_proposal/sections/sec_01.md",
+      "content_hash": "sha256:675ca07116e8812b1adb2deb9144d7feb2c97d9b0077bad3306208097b2d42e0",
+      "created_at": "2026-07-26T03:54:40Z",
+      "locked_at": null,
+      "author": "proposal_writer",
+      "lineage": {
+        "upstream": [],
+        "downstream": []
+      }
+    },
+    "sec_02_v0.1": {
+      "artifact_id": "sec_02_v0.1",
+      "artifact_type": "proposal_section",
+      "stage": 4,
+      "version": "v0.1",
+      "seq": 3,
+      "status": "draft",
+      "file_path": "04_proposal/sections/sec_02.md",
+      "content_hash": "sha256:3efda83df7c0822d792a4b78d56162ddbd49d8f1db70e406958ab2ad5b57c4fd",
+      "created_at": "2026-07-26T03:54:40Z",
+      "locked_at": null,
+      "author": "proposal_writer",
+      "lineage": {
+        "upstream": [],
+        "downstream": []
+      }
+    },
+    "sec_03_v0.1": {
+      "artifact_id": "sec_03_v0.1",
+      "artifact_type": "proposal_section",
+      "stage": 4,
+      "version": "v0.1",
+      "seq": 4,
+      "status": "draft",
+      "file_path": "04_proposal/sections/sec_03.md",
+      "content_hash": "sha256:41599b12b3df819c330319d3e091e5627850d93e12651358eb0b1a70fc6aa3f8",
+      "created_at": "2026-07-26T03:54:40Z",
+      "locked_at": null,
+      "author": "proposal_writer",
+      "lineage": {
+        "upstream": [],
+        "downstream": []
+      }
+    },
+    "sec_04_v0.1": {
+      "artifact_id": "sec_04_v0.1",
+      "artifact_type": "proposal_section",
+      "stage": 4,
+      "version": "v0.1",
+      "seq": 5,
+      "status": "draft",
+      "file_path": "04_proposal/sections/sec_04.md",
+      "content_hash": "sha256:d11575d150dc97684f83bd1fbcac424c979696144ef80b2099184771af2f92d4",
+      "created_at": "2026-07-26T03:54:40Z",
+      "locked_at": null,
+      "author": "proposal_writer",
+      "lineage": {
+        "upstream": [],
+        "downstream": []
+      }
+    },
+    "sec_05_v0.1": {
+      "artifact_id": "sec_05_v0.1",
+      "artifact_type": "proposal_section",
+      "stage": 4,
+      "version": "v0.1",
+      "seq": 6,
+      "status": "draft",
+      "file_path": "04_proposal/sections/sec_05.md",
+      "content_hash": "sha256:80a7a8ecffa46457d9f27770e1c31b10287b5cefadbaf2dd9e2ad094e97fbc74",
+      "created_at": "2026-07-26T03:54:40Z",
+      "locked_at": null,
+      "author": "proposal_writer",
+      "lineage": {
+        "upstream": [],
+        "downstream": []
+      }
+    },
+    "sec_06_v0.1": {
+      "artifact_id": "sec_06_v0.1",
+      "artifact_type": "proposal_section",
+      "stage": 4,
+      "version": "v0.1",
+      "seq": 7,
+      "status": "draft",
+      "file_path": "04_proposal/sections/sec_06.md",
+      "content_hash": "sha256:da3b922db2e4e115af723aecefc621abf74f0bf30b8d3bc9498e804d8fb52f18",
+      "created_at": "2026-07-26T03:54:40Z",
+      "locked_at": null,
+      "author": "proposal_writer",
+      "lineage": {
+        "upstream": [],
+        "downstream": []
+      }
+    }
+  }
+}
