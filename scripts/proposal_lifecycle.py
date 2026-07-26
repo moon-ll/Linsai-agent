@@ -43,6 +43,7 @@ from __future__ import annotations
 
 import json
 import os
+import time as _time
 import shutil
 import subprocess
 import sys
@@ -84,6 +85,14 @@ PROJECT_TYPES = ["general", "key", "major"]
 DEFAULT_MAX_ROUNDS = 10
 DEFAULT_SCORE_THRESHOLD = 0.80  # 默认达标分数（会被项目类型标准覆盖）
 DEFAULT_NO_IMPROVEMENT_LIMIT = 3  # 连续3轮无提升则判定无法提升
+DEFAULT_STAGGER_SECONDS = 90  # 错峰间隔（秒），课题间留间隔避免扎堆（P0-1）
+
+# 申请书章节定义（P1-1: 章节级对抗）
+PROPOSAL_SECTIONS = [
+    {"key": "rationale", "title": "（一）立项依据", "cn": "立项依据", "desc": "科学意义、前人研究局限性"},
+    {"key": "content", "title": "（二）研究内容", "cn": "研究内容", "desc": "研究内容、特色与创新点"},
+    {"key": "method", "title": "（三）研究方案", "cn": "研究方案", "desc": "技术路线、可行性"},
+]
 
 
 class ProposalLifecycle:
@@ -742,6 +751,15 @@ class ProposalLifecycle:
         if current_round >= max_rounds:
             return {"success": False, "error": f"已达最大轮数 {max_rounds}"}
 
+        # P1-1: 确定本轮聚焦章节（轮转 + 每4轮整体审查）
+        section_cycle = current_round % (len(PROPOSAL_SECTIONS) + 1)
+        if section_cycle < len(PROPOSAL_SECTIONS):
+            focus_section = PROPOSAL_SECTIONS[section_cycle]
+            is_full_review = False
+        else:
+            focus_section = None  # 第4轮做整体一致性审查
+            is_full_review = True
+
         # 读取当前申请书
         proposal_path = prop_dir / "04_proposal" / "proposal-draft.md"
         if not proposal_path.exists():
@@ -751,30 +769,55 @@ class ProposalLifecycle:
 
         # 1. critic 评审
         if _log:
-            _log.info(f"[{proposal_id}] 对抗轮 {current_round + 1}: critic 评审")
+            section_name = focus_section["cn"] if focus_section else "整体一致性"
+            _log.info(f"[{proposal_id}] 对抗轮 {current_round + 1}: critic 评审（聚焦：{section_name}）")
         critic_result = self._run_critic(
-            proposal_id, prop_dir, project_type, current_round + 1, critic_timeout
+            proposal_id, prop_dir, project_type, current_round + 1, critic_timeout,
+            focus_section=focus_section, is_full_review=is_full_review,  # P1-1
         )
+
+        # 预解析维度分数，供 writer 聚焦（P0-2）
+        pre_dims = self._extract_dimension_scores(critic_result)
+        pre_weakest = self._get_weakest_dimension(pre_dims)
+
+        # P1-2: 文献定向补充（严谨性不足时触发 researcher 检索）
+        lit_supplement = ""
+        if pre_dims.get("rigor", 1.0) < 0.70 or self._has_lit_gap(critic_result):
+            if _log:
+                _log.info(f"[{proposal_id}] 对抗轮 {current_round + 1}: researcher 定向检索文献缺口")
+            lit_supplement = self._run_researcher_targeted(
+                proposal_id, prop_dir, critic_result, focus_section,
+                timeout=300,
+            )
 
         # 2. writer 根据评审意见优化
         if _log:
             _log.info(f"[{proposal_id}] 对抗轮 {current_round + 1}: writer 优化")
         writer_result = self._run_writer_optimize(
-            proposal_id, prop_dir, project_type, critic_result, writer_timeout
+            proposal_id, prop_dir, project_type, critic_result, writer_timeout,
+            weakest_dim=pre_weakest, dim_scores=pre_dims,  # P0-2
+            focus_section=focus_section, is_full_review=is_full_review,  # P1-1
+            lit_supplement=lit_supplement,  # P1-2
         )
 
         # 3. 解析新分数
         score_after = self._extract_score(critic_result)
         issues = self._extract_issues(critic_result)
+        dim_scores = self._extract_dimension_scores(critic_result)  # P0-2: 多维度
+        weakest_dim = self._get_weakest_dimension(dim_scores)
 
         # 4. 更新状态
         with file_lock(f"proposal-{proposal_id}"):
             prop_state = self._get_proposal_state(proposal_id)
             prop_state["optimization_rounds"] = current_round + 1
             prop_state["last_score"] = score_after
+            prop_state["last_dim_scores"] = dim_scores  # P0-2: 记录维度分数
             prop_state["score_history"].append({
                 "round": current_round + 1,
                 "score": score_after,
+                "dim_scores": dim_scores,  # P0-2
+                "weakest_dim": weakest_dim,  # P0-2
+                "focus_section": focus_section["key"] if focus_section else "full_review",  # P1-1
                 "issues_count": len(issues),
                 "high_issues": sum(1 for i in issues if i.get("severity") == "high"),
                 "at": now_utc(),
@@ -797,6 +840,8 @@ class ProposalLifecycle:
             "score_before": score_before,
             "score_after": score_after,
             "score_delta": round(score_after - score_before, 4),
+            "dim_scores": dim_scores,  # P0-2
+            "weakest_dim": weakest_dim,  # P0-2
             "issues_found": len(issues),
             "high_issues": sum(1 for i in issues if i.get("severity") == "high"),
             "done": done_result["done"],
@@ -811,29 +856,119 @@ class ProposalLifecycle:
         project_type: str,
         round_num: int,
         timeout: int,
+        focus_section: Optional[Dict[str, str]] = None,
+        is_full_review: bool = False,
     ) -> Dict[str, Any]:
-        """派活给 critic profile 做对抗评审。"""
+        """派活给 critic profile 做对抗评审。
+
+        P1-1: 支持章节级评审（focus_section）和整体审查（is_full_review）。
+        """
         proposal_path = prop_dir / "04_proposal" / "proposal-draft.md"
         standards_path = str(self.standards_path.relative_to(PROJECT_ROOT))
         report_path = prop_dir / "05_review" / f"critic-round-{round_num}.md"
         report_path.parent.mkdir(parents=True, exist_ok=True)
 
+        # P1-1: 构建章节聚焦指令
+        if focus_section:
+            focus_text = (
+                f"\n【本轮聚焦章节】{focus_section['title']}（{focus_section['desc']}）\n"
+                f"请重点深入评审该章节，其他章节只做简要一致性检查。\n"
+                f"对该章节的评审应细致到段落级别。\n\n"
+            )
+        elif is_full_review:
+            focus_text = (
+                f"\n【本轮为整体一致性审查】\n"
+                f"请检查三个章节之间的逻辑衔接、术语一致性、内容冗余/矛盾。\n"
+                f"不需要逐段细审，聚焦整体连贯性。\n\n"
+            )
+        else:
+            focus_text = ""
+
         prompt = (
             f"请对以下 NSFC 申请书做第 {round_num} 轮对抗评审。\n\n"
             f"【项目类型】{project_type}\n"
             f"【质量标准】请读取 {standards_path} 中 project_types.{project_type} 的标准\n\n"
-            f"【申请书文件】{proposal_path}\n\n"
+            f"【申请书文件】{proposal_path}\n"
+            f"{focus_text}"
             f"请执行：\n"
             f"1. 读取申请书全文\n"
             f"2. 读取质量标准配置文件\n"
             f"3. 按项目类型标准做红队评审，尽可能找出问题\n"
             f"4. 每个问题给出具体、可执行的修改建议\n"
-            f"5. 按严重程度分级（critical/high/medium/low）\n"
-            f"6. 给出加权综合评分（0-1）\n\n"
+            f"5. 按严重程度分级（critical/high/medium/low）\n\n"
+            f"【多维度评分（必填）】\n"
+            f"请从以下 4 个维度分别评分（0-1），并指出每个维度的主要短板：\n"
+            f"  - 创新性（innovation）：科学问题是否新颖、方法是否有突破\n"
+            f"  - 可行性（feasibility）：技术路线能否落地、是否有支撑\n"
+            f"  - 严谨性（rigor）：逻辑链条、文献支撑是否充分\n"
+            f"  - 完整性（completeness）：章节是否齐全、格式是否规范\n\n"
+            f"在评审报告末尾，必须包含如下格式的评分块（供程序解析）：\n"
+            f"```\n"
+            f"## 评分\n"
+            f"创新性：0.85\n"
+            f"可行性：0.80\n"
+            f"严谨性：0.75\n"
+            f"完整性：0.90\n"
+            f"综合评分：0.82\n"
+            f"```\n"
             f"将评审报告写入：{report_path}\n"
         )
 
         return self._run_hermes("critic", prompt, timeout)
+
+    # P1-2: 文献缺口检测和定向检索
+    def _has_lit_gap(self, critic_result: Dict[str, Any]) -> bool:
+        """检测 critic 是否指出了文献缺口。"""
+        output = critic_result.get("output", "")
+        gap_keywords = ["文献不足", "缺乏文献", "文献缺口", "缺少引用", "引用不足",
+                        "支撑不足", "无文献", "需补充文献", "文献支撑", "缺乏近"]
+        return any(kw in output for kw in gap_keywords)
+
+    def _run_researcher_targeted(
+        self,
+        proposal_id: str,
+        prop_dir: Path,
+        critic_result: Dict[str, Any],
+        focus_section: Optional[Dict[str, str]],
+        timeout: int = 300,
+    ) -> str:
+        """派活给 researcher profile 做定向文献检索（P1-2）。
+
+        根据 critic 指出的文献缺口，检索 3-5 篇相关论文，
+        结果写入 targeted-research 目录供 writer 引用。
+        """
+        # 生成检索 prompt
+        section_hint = f"聚焦章节：{focus_section['cn']}\n" if focus_section else ""
+        critic_output = critic_result.get("output", "")[:2000]  # 限制长度
+
+        # 结果保存路径
+        target_dir = prop_dir / "02_literature" / "targeted-research"
+        target_dir.mkdir(parents=True, exist_ok=True)
+        import time as _t
+        result_path = target_dir / f"lit-gap-{int(_t.time())}.md"
+
+        prompt = (
+            f"请做定向文献检索（补充评审指出的文献缺口）。\n\n"
+            f"【课题】{proposal_id}\n"
+            f"{section_hint}"
+            f"【评审指出的文献缺口】\n{critic_output}\n\n"
+            f"请执行：\n"
+            f"1. 从评审报告中提取文献缺口（哪些论点缺支撑、哪些方向缺引用）\n"
+            f"2. 针对每个缺口，检索 2-3 篇最相关的近2年论文\n"
+            f"3. 每篇论文给出：标题、作者、年份、核心结论、如何支撑该论点\n"
+            f"4. 将检索结果写入：{result_path}\n"
+            f"5. 格式：每个缺口一段，列出推荐引用的论文\n"
+        )
+
+        result = self._run_hermes("researcher", prompt, timeout)
+        if result.get("success"):
+            if _log:
+                _log.info(f"[{proposal_id}] 文献补充完成: {result_path.name}")
+            return f"\n【文献补充（researcher 定向检索）】\n请参考 {result_path} 中的新文献，在修订时引用。\n"
+        else:
+            if _log:
+                _log.warning(f"[{proposal_id}] 文献补充失败: {result.get('error', '')[:100]}")
+            return ""
 
     def _run_writer_optimize(
         self,
@@ -842,8 +977,17 @@ class ProposalLifecycle:
         project_type: str,
         critic_result: Dict[str, Any],
         timeout: int,
+        weakest_dim: str = "",
+        dim_scores: Optional[Dict[str, float]] = None,
+        focus_section: Optional[Dict[str, str]] = None,
+        is_full_review: bool = False,
+        lit_supplement: str = "",
     ) -> Dict[str, Any]:
-        """派活给 writer profile 根据评审意见优化申请书。"""
+        """派活给 writer profile 根据评审意见优化申请书。
+
+        P0-2: 聚焦最弱维度，针对性改进。
+        P1-1: 支持章节级修订（focus_section）。
+        """
         proposal_path = prop_dir / "04_proposal" / "proposal-draft.md"
         standards_path = str(self.standards_path.relative_to(PROJECT_ROOT))
         # 找最新的 critic 报告
@@ -851,20 +995,52 @@ class ProposalLifecycle:
         critic_reports = sorted(review_dir.glob("critic-round-*.md"), reverse=True)
         latest_critic = str(critic_reports[0]) if critic_reports else ""
 
+        # P0-2: 构建维度聚焦提示
+        dim_focus = ""
+        if weakest_dim and dim_scores:
+            dim_cn = {"innovation": "创新性", "feasibility": "可行性", "rigor": "严谨性", "completeness": "完整性"}
+            weakest_cn = dim_cn.get(weakest_dim, weakest_dim)
+            dim_scores_str = "、".join(f"{dim_cn.get(k,k)} {v:.2f}" for k, v in dim_scores.items())
+            dim_focus = (
+                f"\n【维度评分（本轮聚焦）】\n"
+                f"各维度：{dim_scores_str}\n"
+                f"⚠️ 最弱维度：{weakest_cn}（{dim_scores[weakest_dim]:.2f}）\n"
+                f"请优先改进 {weakest_cn} 相关的问题，这是本轮的聚焦重点。\n"
+            )
+
+        # P1-1: 构建章节聚焦指令
+        section_focus = ""
+        if focus_section:
+            section_focus = (
+                f"\n【本轮聚焦章节】{focus_section['title']}\n"
+                f"请只修改该章节相关的问题，不要改动其他章节的内容。\n"
+                f"其他章节如有跨章节引用需要调整，才可微调。\n"
+            )
+        elif is_full_review:
+            section_focus = (
+                f"\n【本轮为整体一致性修订】\n"
+                f"请只做章节间的衔接、术语统一、冗余删减，不要大幅改动内容。\n"
+            )
+
         prompt = (
             f"请根据对抗评审意见优化申请书。\n\n"
             f"【申请书文件】{proposal_path}\n"
             f"【项目类型】{project_type}\n"
             f"【质量标准】请读取 {standards_path}\n"
-            f"【评审报告】{latest_critic}\n\n"
+            f"【评审报告】{latest_critic}\n"
+            f"{dim_focus}"
+            f"{section_focus}"
+            f"{lit_supplement}\n"
             f"请执行：\n"
             f"1. 读取申请书当前版本\n"
             f"2. 读取评审报告中的所有问题\n"
             f"3. 逐条解决每个问题（按严重程度优先）\n"
-            f"4. 保持已有内容的优势，只修改有问题的部分（增量优化）\n"
-            f"5. 优化后覆盖写入原文件：{proposal_path}\n"
-            f"6. 同时生成/更新方法学手册：{prop_dir}/04_proposal/methodology-manual.md\n"
+            f"4. 重点改进最弱维度相关的问题\n"
+            f"5. 只修改聚焦章节（或整体衔接），保持其他内容不变（增量优化）\n"
+            f"6. 优化后覆盖写入原文件：{proposal_path}\n"
+            f"7. 同步更新方法学手册：{prop_dir}/04_proposal/methodology-manual.md\n"
             f"   （申请书重思路，方法学手册重细节：公式推导/参数表/技术路线图）\n"
+            f"   ⚠️ 方法学手册也按章节组织，只更新与聚焦章节对应的细节部分。\n"
         )
 
         return self._run_hermes("writer", prompt, timeout)
@@ -899,10 +1075,10 @@ class ProposalLifecycle:
             return {"success": False, "output": "", "error": str(e), "elapsed_s": 0}
 
     def _extract_score(self, critic_result: Dict[str, Any]) -> float:
-        """从 critic 输出中提取评分。"""
+        """从 critic 输出中提取综合评分。"""
         output = critic_result.get("output", "")
-        # 尝试匹配 "综合评分：0.85" 或 "score: 0.85"
         import re
+        # 优先匹配 "综合评分：0.85"
         patterns = [
             r"综合评分[：:]\s*(0\.\d+)",
             r"score[：:]\s*(0\.\d+)",
@@ -913,7 +1089,46 @@ class ProposalLifecycle:
             match = re.search(pattern, output)
             if match:
                 return float(match.group(1))
+
+        # 回退：如果有维度分数，取加权平均
+        dims = self._extract_dimension_scores(critic_result)
+        if dims:
+            weights = {"innovation": 0.30, "feasibility": 0.25, "rigor": 0.25, "completeness": 0.20}
+            total = sum(dims.get(k, 0) * w for k, w in weights.items())
+            return round(total, 4)
         return 0.0
+
+    # 维度中英文映射
+    _DIM_MAP = {
+        "创新性": "innovation", "创新": "innovation", "innovation": "innovation",
+        "可行性": "feasibility", "feasibility": "feasibility",
+        "严谨性": "rigor", "rigor": "rigor",
+        "完整性": "completeness", "completeness": "completeness",
+    }
+    # 各维度短板阈值（低于此值视为短板）
+    DIMENSION_FLOOR = {"innovation": 0.65, "feasibility": 0.65, "rigor": 0.65, "completeness": 0.60}
+
+    def _extract_dimension_scores(self, critic_result: Dict[str, Any]) -> Dict[str, float]:
+        """从 critic 输出中提取 4 维度分数（P0-2）。
+
+        Returns:
+            {innovation, feasibility, rigor, completeness}
+        """
+        output = critic_result.get("output", "")
+        import re
+        dims: Dict[str, float] = {}
+        for cn_name, en_key in self._DIM_MAP.items():
+            pattern = rf"{cn_name}[：:]\s*(0\.\d+)"
+            match = re.search(pattern, output)
+            if match:
+                dims[en_key] = float(match.group(1))
+        return dims
+
+    def _get_weakest_dimension(self, dims: Dict[str, float]) -> str:
+        """找出最弱的维度（P0-2，供 writer 聚焦改进）。"""
+        if not dims:
+            return ""
+        return min(dims, key=dims.get)
 
     def _extract_issues(self, critic_result: Dict[str, Any]) -> List[Dict[str, Any]]:
         """从 critic 输出中提取问题列表（简化版，只提取严重程度）。"""
@@ -930,22 +1145,33 @@ class ProposalLifecycle:
     # ------------------------------------------------------------------
 
     def _check_done(self, proposal_id: str, threshold: Dict[str, Any]) -> Dict[str, Any]:
-        """判定 proposal 是否达到输出标准或无法继续提升。"""
+        """判定 proposal 是否达到输出标准或无法继续提升（P0-2: 含维度短板检测）。"""
         prop_state = self._get_proposal_state(proposal_id)
         if not prop_state:
             return {"done": False, "reason": "状态不存在"}
 
         last_score = prop_state.get("last_score", 0.0)
         score_history = prop_state.get("score_history", [])
+        dim_scores = prop_state.get("last_dim_scores", {})  # P0-2
         min_score = threshold.get("min_overall_score", DEFAULT_SCORE_THRESHOLD)
         max_high = threshold.get("max_high_issues", 0)
         rounds = prop_state.get("optimization_rounds", 0)
 
-        # 条件1：分数达标
+        # 条件1：总分达标 + 各维度无短板（P0-2: 增加维度 floor 检查）
         if last_score >= min_score:
             recent = score_history[-1] if score_history else {}
             if recent.get("high_issues", 99) <= max_high:
-                return {"done": True, "reason": f"达标：分数{last_score:.2f}≥{min_score}，high问题≤{max_high}"}
+                # P0-2: 检查各维度是否都达到 floor
+                weak_dims = [
+                    k for k, floor in self.DIMENSION_FLOOR.items()
+                    if k in dim_scores and dim_scores[k] < floor
+                ]
+                if weak_dims:
+                    return {
+                        "done": False,
+                        "reason": f"总分{last_score:.2f}达标，但维度短板：{','.join(weak_dims)}",
+                    }
+                return {"done": True, "reason": f"达标：分数{last_score:.2f}≥{min_score}，各维度无短板"}
 
         # 条件2：连续N轮无提升
         no_improve_limit = DEFAULT_NO_IMPROVEMENT_LIMIT
@@ -1231,11 +1457,12 @@ class ProposalLifecycle:
     # cron 自动驱动（多 cron 分解架构，v6.5.2）
     # ------------------------------------------------------------------
 
-    def run_cron_sweep(self) -> Dict[str, Any]:
+    def run_cron_sweep(self, stagger_seconds: int = DEFAULT_STAGGER_SECONDS) -> Dict[str, Any]:
         """cron 扫描：逐个处理 optimizing 区的 proposal，各执行一轮优化。
 
         容错设计：单个 proposal 失败不影响其他 proposal。
         持续流转：只要 optimizing 区有 proposal，就不会停转。
+        错峰调度（P0-1）：课题间留间隔，避免模型同时阻塞。
         """
         optimizing = self.list_by_status("optimizing")
         if not optimizing:
@@ -1248,10 +1475,11 @@ class ProposalLifecycle:
         fail_count = 0
         advanced_count = 0
 
-        for prop in optimizing:
+        total = len(optimizing)
+        for idx, prop in enumerate(optimizing):
             pid = prop["proposal_id"]
             if _log:
-                _log.info(f"cron 扫描: 优化 {pid}")
+                _log.info(f"cron 扫描: 优化 {pid} ({idx + 1}/{total})")
             try:
                 result = self.optimize_cycle(pid)
                 results.append({"proposal_id": pid, "result": result})
@@ -1271,6 +1499,12 @@ class ProposalLifecycle:
                 fail_count += 1
                 # 记录失败到 proposal 状态，但不中断循环
                 self._record_cron_failure(pid, str(e))
+
+            # 错峰调度：非最后一个课题时，等待间隔再处理下一个（P0-1）
+            if idx < total - 1 and stagger_seconds > 0:
+                if _log:
+                    _log.info(f"cron 扫描: 错峰等待 {stagger_seconds}s 后处理下一个课题")
+                _time.sleep(stagger_seconds)
 
         return {
             "success": fail_count < success_count,  # 只要有一个成功就算成功
