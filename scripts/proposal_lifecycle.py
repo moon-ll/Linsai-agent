@@ -1458,11 +1458,12 @@ class ProposalLifecycle:
     # ------------------------------------------------------------------
 
     def run_cron_sweep(self, stagger_seconds: int = DEFAULT_STAGGER_SECONDS) -> Dict[str, Any]:
-        """cron 扫描：逐个处理 optimizing 区的 proposal，各执行一轮优化。
+        """cron 扫描：逐个对 optimizing 区的 proposal 做深度对抗优化。
 
+        聚焦模式（v6.6.1）：一个时段聚焦一个课题，连续多轮对抗直到达标或无法提升。
+        每轮包含章节级评审+整体审查（立项依据→研究内容→研究方案→整体审查循环）。
         容错设计：单个 proposal 失败不影响其他 proposal。
-        持续流转：只要 optimizing 区有 proposal，就不会停转。
-        错峰调度（P0-1）：课题间留间隔，避免模型同时阻塞。
+        错峰调度：课题间留间隔，避免模型同时阻塞。
         """
         optimizing = self.list_by_status("optimizing")
         if not optimizing:
@@ -1479,19 +1480,23 @@ class ProposalLifecycle:
         for idx, prop in enumerate(optimizing):
             pid = prop["proposal_id"]
             if _log:
-                _log.info(f"cron 扫描: 优化 {pid} ({idx + 1}/{total})")
+                _log.info(f"cron 扫描: 深度对抗 {pid} ({idx + 1}/{total}) — 聚焦模式")
             try:
-                result = self.optimize_cycle(pid)
+                # 聚焦模式：连续多轮对抗（章节轮转+整体审查），直到达标或无法提升
+                result = self.auto_optimize_and_advance(pid)
                 results.append({"proposal_id": pid, "result": result})
-                success_count += 1
-                # 如果达标，自动移入待校验
-                if result.get("done"):
-                    transition = self.transition(
-                        pid, "pending_review", reason=result.get("reason", "达标")
-                    )
-                    advanced_count += 1
-                    if _log:
-                        _log.info(f"cron 扫描: {pid} 达标 → pending_review")
+                if result.get("success"):
+                    success_count += 1
+                    if result.get("advanced"):
+                        advanced_count += 1
+                        if _log:
+                            _log.info(
+                                f"cron 扫描: {pid} 深度对抗完成 → "
+                                f"{result['rounds']}轮, 分数{result.get('final_score', 0):.2f}, "
+                                f"移入 pending_review"
+                            )
+                else:
+                    fail_count += 1
             except Exception as e:
                 if _log:
                     _log.error(f"cron 扫描 {pid} 失败: {e}")
@@ -1500,14 +1505,14 @@ class ProposalLifecycle:
                 # 记录失败到 proposal 状态，但不中断循环
                 self._record_cron_failure(pid, str(e))
 
-            # 错峰调度：非最后一个课题时，等待间隔再处理下一个（P0-1）
+            # 错峰调度：非最后一个课题时，等待间隔再处理下一个
             if idx < total - 1 and stagger_seconds > 0:
                 if _log:
                     _log.info(f"cron 扫描: 错峰等待 {stagger_seconds}s 后处理下一个课题")
                 _time.sleep(stagger_seconds)
 
         return {
-            "success": fail_count < success_count,  # 只要有一个成功就算成功
+            "success": fail_count < success_count,
             "swept": len(results),
             "success_count": success_count,
             "fail_count": fail_count,
@@ -1681,10 +1686,14 @@ class ProposalLifecycle:
             "1. 运行 `python3 scripts/proposal_lifecycle.py --daily-orchestrate`\n"
             "2. 该命令会：\n"
             "   a. 健康检查（检测异常和空转）\n"
-            "   b. 优化扫描（逐个处理 optimizing 区 proposal）\n"
+            "   b. 深度对抗（逐个聚焦优化 optimizing 区 proposal，每个连续多轮直到达标）\n"
             "   c. 达标的自动移入待校验\n"
             "   d. 最终健康检查（确认结果和告警）\n"
             "3. 输出编排摘要\n\n"
+            "执行说明：\n"
+            "- 每个课题会连续执行多轮深度对抗（章节轮转+整体审查）\n"
+            "- 课题间有90秒错峰间隔，避免模型阻塞\n"
+            "- 整个过程可能耗时1-4小时，请耐心等待\n\n"
             "容错说明：单个 proposal 失败不影响其他 proposal。\n"
             "如果 optimizing 区为空，输出健康检查结果和告警即可。\n"
             "如果有 pending_review 的 proposal，提醒人工核验。"
