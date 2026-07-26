@@ -782,6 +782,82 @@ class ProposalLifecycle:
 
         return {"success": True, "archived_dir": str(archived_dir), "meta": meta}
 
+    # ------------------------------------------------------------------
+    # cron 自动驱动
+    # ------------------------------------------------------------------
+
+    def run_cron_sweep(self) -> Dict[str, Any]:
+        """cron 扫描：处理所有 optimizing 区的 proposal，各执行一轮优化。
+
+        适用于 pipeline-runner 的每日 cron。
+        """
+        optimizing = self.list_by_status("optimizing")
+        if not optimizing:
+            if _log:
+                _log.info("cron 扫描: optimizing 区为空，无操作")
+            return {"success": True, "swept": 0, "results": []}
+
+        results = []
+        for prop in optimizing:
+            pid = prop["proposal_id"]
+            if _log:
+                _log.info(f"cron 扫描: 优化 {pid}")
+            try:
+                result = self.optimize_cycle(pid)
+                results.append({"proposal_id": pid, "result": result})
+                # 如果达标，自动移入待校验
+                if result.get("done"):
+                    self.transition(pid, "pending_review", reason=result.get("reason", "达标"))
+            except Exception as e:
+                if _log:
+                    _log.error(f"cron 扫描 {pid} 失败: {e}")
+                results.append({"proposal_id": pid, "error": str(e)})
+
+        return {"success": True, "swept": len(results), "results": results}
+
+    def setup_optimization_cron(self, schedule: str = "0 9 * * *") -> Dict[str, Any]:
+        """在 pipeline-runner 上配置每日自动优化 cron。
+
+        Args:
+            schedule: cron 表达式（默认每天 09:00）
+
+        Returns:
+            {success, message}
+        """
+        prompt = (
+            "请执行每日提案优化扫描：\n\n"
+            "1. 运行 `python3 scripts/proposal_lifecycle.py --cron-sweep`\n"
+            "2. 该命令会扫描所有 optimizing 区的 proposal，各执行一轮 writer-critic 对抗\n"
+            "3. 达标的 proposal 自动移入 pending_review\n"
+            "4. 输出扫描结果摘要\n\n"
+            "如果 optimizing 区为空，输出'今日无优化任务'即可。"
+        )
+
+        env = dict(os.environ)
+        env.pop("PYTHONHOME", None)
+        env.pop("PYTHONPATH", None)
+
+        cmd = [
+            "hermes", "--profile", "pipeline-runner", "cron", "create",
+            schedule, prompt,
+            "--name", "每日提案优化扫描",
+            "--deliver", "local",
+            "--workdir", str(PROJECT_ROOT),
+        ]
+        try:
+            result = subprocess.run(
+                cmd, capture_output=True, text=True, timeout=30, env=env,
+            )
+            if result.returncode == 0:
+                return {
+                    "success": True,
+                    "message": f"✓ 优化 cron 已创建: {schedule}",
+                    "output": result.stdout.strip()[:300],
+                }
+            return {"success": False, "message": f"✗ {result.stderr.strip()[:200]}"}
+        except Exception as e:
+            return {"success": False, "message": f"✗ {e}"}
+
 
 # ---------------------------------------------------------------------------
 # CLI
@@ -802,6 +878,10 @@ def main(argv: Optional[List[str]] = None) -> int:
                         help="提交人工反馈（--feedback ID 意见文件路径）")
     parser.add_argument("--verdict", default="major_revision",
                         help="审核结论（approve/minor_revision/major_revision/reject/redirect）")
+    parser.add_argument("--cron-sweep", action="store_true",
+                        help="执行 cron 扫描（扫描 optimizing 区，各执行一轮优化）")
+    parser.add_argument("--setup-cron", nargs="?", const="0 9 * * *", metavar="SCHEDULE",
+                        help="配置每日自动优化 cron（默认 0 9 * * *）")
     args = parser.parse_args(argv)
 
     lc = ProposalLifecycle()
@@ -878,6 +958,25 @@ def main(argv: Optional[List[str]] = None) -> int:
             if sf.get("structured"):
                 issues = sf["structured"].get("issues", [])
                 print(f"结构化: {len(issues)} 个 issue")
+        return 0 if result.get("success") else 1
+
+    if args.cron_sweep:
+        result = lc.run_cron_sweep()
+        print(f"=== cron 扫描完成: {result.get('swept', 0)} 个 proposal ===")
+        for r in result.get("results", []):
+            pid = r["proposal_id"]
+            if "error" in r:
+                print(f"  ✗ {pid}: {r['error']}")
+            else:
+                res = r["result"]
+                print(f"  {'✓' if res.get('done') else '◐'} {pid}: "
+                      f"轮{res.get('round', '?')} score={res.get('score_after', 0):.2f} "
+                      f"{'→ 待校验' if res.get('done') else '继续优化'}")
+        return 0
+
+    if args.setup_cron is not None:
+        result = lc.setup_optimization_cron(schedule=args.setup_cron)
+        print(result.get("message", ""))
         return 0 if result.get("success") else 1
 
     parser.print_help()

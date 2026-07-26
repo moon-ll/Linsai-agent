@@ -77,6 +77,14 @@ _SYSTEM_ROUTES = [
     ("POST", re.compile(r"^/api/sync/status$"), "_sys_sync_status"),
     ("POST", re.compile(r"^/api/sync/run$"), "_sys_sync_run"),
     ("POST", re.compile(r"^/api/backup$"), "_sys_backup"),
+    # --- 生命周期管理（v6.5.0）---
+    ("GET", re.compile(r"^/api/lifecycle/dashboard$"), "_sys_lifecycle_dashboard"),
+    ("GET", re.compile(r"^/api/lifecycle/list/(?P<status>.+)$"), "_sys_lifecycle_list"),
+    ("POST", re.compile(r"^/api/lifecycle/register$"), "_sys_lifecycle_register"),
+    ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/transition$"), "_sys_lifecycle_transition"),
+    ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/optimize$"), "_sys_lifecycle_optimize"),
+    ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/feedback$"), "_sys_lifecycle_feedback"),
+    ("POST", re.compile(r"^/api/lifecycle/cron-sweep$"), "_sys_lifecycle_cron_sweep"),
 ]
 
 
@@ -325,6 +333,113 @@ class SystemRoutesMixin:
                  "modified": datetime.datetime.fromtimestamp(b.stat().st_mtime).isoformat()}
                 for b in backups[:20]
             ]})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    # ------------------------------------------------------------------
+    # 生命周期管理（v6.5.0）
+    # ------------------------------------------------------------------
+
+    def _sys_lifecycle_dashboard(self, parsed, body=None):
+        """生命周期仪表盘"""
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            lc = ProposalLifecycle()
+            dashboard = lc.get_dashboard()
+            self._send_json({"status": "ok", "data": dashboard})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_list(self, parsed, body=None):
+        """按状态列出 proposal"""
+        status = parsed.group("status") if hasattr(parsed, "group") else None
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            lc = ProposalLifecycle()
+            proposals = lc.list_by_status(status)
+            self._send_json({"status": "ok", "proposals": proposals})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_register(self, parsed, body=None):
+        """注册新 proposal
+
+        body 必填：proposal_id
+        body 可选：project_type（general/key/major）
+        """
+        if not body or "proposal_id" not in body:
+            self._send_json({"error": "缺少 proposal_id"}, 400)
+            return
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            lc = ProposalLifecycle()
+            result = lc.register(
+                body["proposal_id"],
+                project_type=body.get("project_type", "general"),
+                source=body.get("source", "new"),
+                source_detail=body.get("source_detail", ""),
+            )
+            self._send_json({"status": "ok", "data": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_transition(self, parsed, body=None):
+        """流转 proposal
+
+        body 必填：to_stage
+        body 可选：reason
+        """
+        proposal_id = parsed.group("proposal_id")
+        if not body or "to_stage" not in body:
+            self._send_json({"error": "缺少 to_stage"}, 400)
+            return
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            lc = ProposalLifecycle()
+            result = lc.transition(proposal_id, body["to_stage"], body.get("reason", ""))
+            self._send_json({"status": "ok", "data": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_optimize(self, parsed, body=None):
+        """执行一轮对抗优化"""
+        proposal_id = parsed.group("proposal_id")
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            lc = ProposalLifecycle()
+            result = lc.optimize_cycle(proposal_id)
+            self._send_json({"status": "ok", "data": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_feedback(self, parsed, body=None):
+        """提交人工反馈
+
+        body 必填：feedback_text
+        body 可选：verdict（默认 major_revision）
+        """
+        proposal_id = parsed.group("proposal_id")
+        if not body or "feedback_text" not in body:
+            self._send_json({"error": "缺少 feedback_text"}, 400)
+            return
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            lc = ProposalLifecycle()
+            result = lc.submit_feedback(
+                proposal_id, body["feedback_text"],
+                verdict=body.get("verdict", "major_revision"),
+            )
+            self._send_json({"status": "ok", "data": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_cron_sweep(self, parsed, body=None):
+        """执行 cron 扫描"""
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            lc = ProposalLifecycle()
+            result = lc.run_cron_sweep()
+            self._send_json({"status": "ok", "data": result})
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 
