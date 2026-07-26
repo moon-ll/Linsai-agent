@@ -350,7 +350,7 @@ class SystemRoutesMixin:
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 
-    def _sys_lifecycle_list(self, parsed, body=None):
+    def _sys_lifecycle_list(self, parsed, body=None, **kwargs):
         """按状态列出 proposal"""
         status = parsed.group("status") if hasattr(parsed, "group") else None
         try:
@@ -383,7 +383,7 @@ class SystemRoutesMixin:
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 
-    def _sys_lifecycle_transition(self, parsed, body=None):
+    def _sys_lifecycle_transition(self, parsed, body=None, **kwargs):
         """流转 proposal
 
         body 必填：to_stage
@@ -401,7 +401,7 @@ class SystemRoutesMixin:
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 
-    def _sys_lifecycle_optimize(self, parsed, body=None):
+    def _sys_lifecycle_optimize(self, parsed, body=None, **kwargs):
         """执行一轮对抗优化"""
         proposal_id = parsed.group("proposal_id")
         try:
@@ -412,7 +412,7 @@ class SystemRoutesMixin:
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 
-    def _sys_lifecycle_feedback(self, parsed, body=None):
+    def _sys_lifecycle_feedback(self, parsed, body=None, **kwargs):
         """提交人工反馈
 
         body 必填：feedback_text

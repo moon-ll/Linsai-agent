@@ -111,15 +111,22 @@ async function renderLifecycleList() {
   try {
     let proposals = [];
 
-    if (_lcCurrentFilter === 'all') {
-      // 加载所有阶段
-      const results = await Promise.all(
-        LC_STAGES.map(s => apiGet(`/api/lifecycle/list/${s.key}`).catch(() => ({ proposals: [] })))
-      );
-      proposals = results.flatMap(r => r.proposals || []);
-    } else {
-      const data = await apiGet(`/api/lifecycle/list/${_lcCurrentFilter}`);
-      proposals = data.proposals || [];
+    // 统一从 dashboard 获取全部课题，前端筛选
+    const dashData = await apiGet('/api/lifecycle/dashboard');
+    const allProposals = dashData.data?.proposals || [];
+    // 转换格式：dashboard 返回的是 {pid: {...}} 字典
+    proposals = Object.entries(allProposals).map(([pid, data]) => ({
+      proposal_id: pid,
+      status: data.status,
+      project_type: data.project_type || 'general',
+      optimization_rounds: data.optimization_rounds || 0,
+      last_score: data.last_score || 0,
+      updated_at: data.updated_at || '',
+    }));
+
+    // 按阶段筛选
+    if (_lcCurrentFilter !== 'all') {
+      proposals = proposals.filter(p => p.status === _lcCurrentFilter);
     }
 
     if (proposals.length === 0) {
