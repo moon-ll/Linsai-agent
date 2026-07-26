@@ -1457,19 +1457,131 @@ class ProposalLifecycle:
     # cron 自动驱动（多 cron 分解架构，v6.5.2）
     # ------------------------------------------------------------------
 
-    def run_cron_sweep(self, stagger_seconds: int = DEFAULT_STAGGER_SECONDS) -> Dict[str, Any]:
-        """cron 扫描：逐个对 optimizing 区的 proposal 做深度对抗优化。
+    def match_proposals_with_brief(
+        self,
+        brief_path: Optional[str] = None,
+        brief_content: Optional[str] = None,
+    ) -> List[str]:
+        """文献-课题匹配（v6.6.2）：判断当天简报与哪些 optimizing 课题相关。
 
-        聚焦模式（v6.6.1）：一个时段聚焦一个课题，连续多轮对抗直到达标或无法提升。
-        每轮包含章节级评审+整体审查（立项依据→研究内容→研究方案→整体审查循环）。
+        匹配逻辑：提取简报关键词（子方向/related标签），与每个课题的
+        proposal-brief（标题+核心问题+创新点）做关键词重叠匹配。
+
+        Args:
+            brief_path: 简报文件路径；为None时自动找最新简报
+            brief_content: 直接传入简报文本（优先于 brief_path）
+
+        Returns:
+            命中的 proposal_id 列表；无命中则返回全部 optimizing 课题（fallback）
+        """
+        import re
+
+        # 1. 获取简报内容
+        if brief_content is None:
+            if brief_path is None:
+                brief_dir = PROJECT_ROOT / "knowledge" / "wiki" / "reviews"
+                briefs = sorted(brief_dir.glob("briefing-*.md"), reverse=True)
+                if not briefs:
+                    if _log:
+                        _log.warning("文献匹配: 未找到简报，返回全部 optimizing 课题")
+                    return [p["proposal_id"] for p in self.list_by_status("optimizing")]
+                brief_path = str(briefs[0])
+            try:
+                brief_content = Path(brief_path).read_text(encoding="utf-8")
+            except Exception:
+                return [p["proposal_id"] for p in self.list_by_status("optimizing")]
+
+        # 2. 提取简报关键词（子方向 + related 标签 + 正文高频词）
+        brief_keywords = set()
+        # related 标签
+        for m in re.finditer(r'related:\s*\[([^\]]*)\]', brief_content):
+            for kw in m.group(1).split(","):
+                kw = kw.strip().strip('"').strip("'").strip()
+                if len(kw) > 1:
+                    brief_keywords.add(kw.lower())
+        # 覆盖子方向行
+        for m in re.finditer(r'覆盖子方向[：:]\s*(.+)', brief_content):
+            for kw in re.split(r'[、，,;；]', m.group(1)):
+                kw = kw.strip()
+                if len(kw) > 1:
+                    brief_keywords.add(kw.lower())
+        # 正文 ## 标题
+        for m in re.finditer(r'^##\s+(.+)', brief_content, re.MULTILINE):
+            for kw in re.split(r'[\s/]', m.group(1)):
+                kw = kw.strip()
+                if len(kw) > 2:
+                    brief_keywords.add(kw.lower())
+
+        if not brief_keywords:
+            if _log:
+                _log.info("文献匹配: 简报无关键词，返回全部 optimizing 课题")
+            return [p["proposal_id"] for p in self.list_by_status("optimizing")]
+
+        if _log:
+            _log.info(f"文献匹配: 简报关键词({len(brief_keywords)}): {', '.join(list(brief_keywords)[:10])}...")
+
+        # 3. 逐个课题匹配
+        matched = []
+        for prop in self.list_by_status("optimizing"):
+            pid = prop["proposal_id"]
+            # 读取 proposal-brief
+            prop_dir = self._find_proposal_dir(pid)
+            if not prop_dir:
+                continue
+            brief_file = prop_dir / "00_proposal-brief.md"
+            if not brief_file.exists():
+                continue
+            try:
+                prop_content = brief_file.read_text(encoding="utf-8").lower()
+            except Exception:
+                continue
+
+            # 计算关键词命中数
+            hits = sum(1 for kw in brief_keywords if kw in prop_content)
+            hit_ratio = hits / len(brief_keywords) if brief_keywords else 0
+
+            if hits >= 2 or hit_ratio >= 0.1:  # 至少命中2个关键词 或 10%覆盖率
+                matched.append(pid)
+                if _log:
+                    _log.info(f"文献匹配: {pid} 命中({hits}个关键词, {hit_ratio:.0%})")
+
+        # fallback：如果无命中，返回全部（保证不空转）
+        if not matched:
+            if _log:
+                _log.info("文献匹配: 无课题命中今日简报，fallback 返回全部 optimizing 课题")
+            return [p["proposal_id"] for p in self.list_by_status("optimizing")]
+
+        return matched
+
+    def run_cron_sweep(
+        self,
+        stagger_seconds: int = DEFAULT_STAGGER_SECONDS,
+        target_proposals: Optional[List[str]] = None,
+    ) -> Dict[str, Any]:
+        """cron 扫描：对 optimizing 区的 proposal 做每日一轮全模块对抗。
+
+        模式（v6.6.2）：文献驱动筛选 + 每课题每天4轮（3模块各1轮+整体审查1轮）。
+        不做深度连续对抗（避免触顶模型限额），每天迭代一轮即可。
         容错设计：单个 proposal 失败不影响其他 proposal。
         错峰调度：课题间留间隔，避免模型同时阻塞。
+
+        Args:
+            stagger_seconds: 课题间错峰间隔（秒）
+            target_proposals: 文献匹配命中的课题ID列表；为None则全量扫描
         """
         optimizing = self.list_by_status("optimizing")
         if not optimizing:
             if _log:
                 _log.info("cron 扫描: optimizing 区为空")
             return {"success": True, "swept": 0, "results": [], "empty": True}
+
+        # 文献驱动筛选：只优化命中的课题
+        if target_proposals is not None:
+            optimizing = [p for p in optimizing if p["proposal_id"] in target_proposals]
+            if not optimizing:
+                if _log:
+                    _log.info("cron 扫描: 今日无文献匹配的课题，跳过优化")
+                return {"success": True, "swept": 0, "results": [], "empty": True, "reason": "无文献匹配"}
 
         results = []
         success_count = 0
@@ -1480,29 +1592,40 @@ class ProposalLifecycle:
         for idx, prop in enumerate(optimizing):
             pid = prop["proposal_id"]
             if _log:
-                _log.info(f"cron 扫描: 深度对抗 {pid} ({idx + 1}/{total}) — 聚焦模式")
+                _log.info(f"cron 扫描: 每日全模块对抗 {pid} ({idx + 1}/{total})")
             try:
-                # 聚焦模式：连续多轮对抗（章节轮转+整体审查），直到达标或无法提升
-                result = self.auto_optimize_and_advance(pid)
-                results.append({"proposal_id": pid, "result": result})
-                if result.get("success"):
+                # 每课题4轮：立项依据→研究内容→研究方案→整体审查
+                section_results = []
+                for section_idx in range(len(PROPOSAL_SECTIONS) + 1):
+                    result = self.optimize_cycle(pid)
+                    if result.get("success"):
+                        section_results.append(result)
+                    else:
+                        if _log:
+                            _log.warning(f"cron 扫描: {pid} 第{section_idx+1}轮失败: {result.get('error','')[:80]}")
+                        break
+                    # 如果中途达标，提前结束
+                    if result.get("done"):
+                        break
+
+                last_result = section_results[-1] if section_results else {"success": False, "error": "所有轮次失败"}
+
+                results.append({"proposal_id": pid, "result": last_result, "rounds_done": len(section_results)})
+                if last_result.get("success"):
                     success_count += 1
-                    if result.get("advanced"):
+                    # 达标则自动移入待校验
+                    if last_result.get("done"):
+                        transition = self.transition(
+                            pid, "pending_review", reason=last_result.get("reason", "达标")
+                        )
                         advanced_count += 1
                         if _log:
-                            _log.info(
-                                f"cron 扫描: {pid} 深度对抗完成 → "
-                                f"{result['rounds']}轮, 分数{result.get('final_score', 0):.2f}, "
-                                f"移入 pending_review"
-                            )
-                else:
-                    fail_count += 1
+                            _log.info(f"cron 扫描: {pid} 达标 → pending_review（{len(section_results)}轮）")
             except Exception as e:
                 if _log:
                     _log.error(f"cron 扫描 {pid} 失败: {e}")
                 results.append({"proposal_id": pid, "error": str(e)})
                 fail_count += 1
-                # 记录失败到 proposal 状态，但不中断循环
                 self._record_cron_failure(pid, str(e))
 
             # 错峰调度：非最后一个课题时，等待间隔再处理下一个
@@ -1631,10 +1754,15 @@ class ProposalLifecycle:
         # 1. 初始健康检查
         health_before = self.run_health_check()
 
-        # 2. 优化扫描
-        sweep_result = self.run_cron_sweep()
+        # 2. 文献-课题匹配（v6.6.2：只优化与当天文献相关的课题）
+        target_proposals = self.match_proposals_with_brief()
+        if _log:
+            _log.info(f"每日编排: 文献匹配命中 {len(target_proposals)} 个课题")
 
-        # 3. 最终健康检查
+        # 3. 优化扫描（文献驱动）
+        sweep_result = self.run_cron_sweep(target_proposals=target_proposals)
+
+        # 4. 最终健康检查
         health_after = self.run_health_check()
 
         # 汇总
