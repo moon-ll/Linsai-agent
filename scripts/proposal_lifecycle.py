@@ -141,7 +141,10 @@ class ProposalLifecycle:
     # ------------------------------------------------------------------
 
     # 命名规则：{项目类型}-{课题名称}-{启动日期}
-    # 示例：general-hhg-20260726 / key-quantum-geometry-20260726
+    # 课题名称取自课题的具体科学问题或核心方法（而非大的研究领域）
+    # 示例：general-quantum-geometry-inversion-20260726
+    #       key-bsv-driven-hhg-20260726
+    #       major-topological-photoresponse-mapping-20260726
     # 项目类型简称：general(面上) / key(重点) / major(重大)
     _NAMING_PATTERN = None  # 编译时初始化
 
@@ -156,23 +159,31 @@ class ProposalLifecycle:
     def _get_naming_pattern(cls):
         if cls._NAMING_PATTERN is None:
             import re
-            # general-hhg-20260726 / key-quantum-geometry-20260726 / major-bsv-20260726-02
-            # 项目类型-课题名称-日期(YYYYMMDD)[-序号]
+            # general-quantum-geometry-inversion-20260726
+            # 项目类型-课题名称(基于科学问题/核心方法)-日期(YYYYMMDD)[-序号]
             cls._NAMING_PATTERN = re.compile(
-                r"^(general|key|major)-([a-z][a-z0-9-]{1,30})-(\d{4})(\d{2})(\d{2})(?:-(\d{2}))?$"
+                r"^(general|key|major)-([a-z][a-z0-9-]{1,40})-(\d{4})(\d{2})(\d{2})(?:-(\d{2}))?$"
             )
         return cls._NAMING_PATTERN
 
     def validate_proposal_id(self, proposal_id: str) -> Dict[str, Any]:
         """校验课题 ID 是否符合命名规则。
 
-        规则：{项目类型}-{课题名称}-{启动日期}
+        规则：{项目类型}-{课题名称}-{启动日期}[-序号]
         - 项目类型：general(面上) / key(重点) / major(重大)
-        - 课题名称：2-30位小写字母/数字/连字符
+        - 课题名称：取自课题的具体科学问题或核心方法（非研究领域），
+                    2-40位小写字母/数字/连字符
         - 启动日期：YYYYMMDD 格式
+        - 序号：可选，同一天同名的第二个起加序号
+
+        命名要点：
+          ✓ quantum-geometry-inversion（量子几何反演——具体方法）
+          ✓ bsv-driven-hhg（BSV驱动的高次谐波——具体问题）
+          ✗ hhg（太泛，是研究领域不是课题内容）
+          ✗ optics（太泛）
 
         Returns:
-            {valid, reason, parsed: {project_type, name, date}}
+            {valid, reason, parsed: {project_type, name, date, seq}}
         """
         pattern = self._get_naming_pattern()
         match = pattern.match(proposal_id)
@@ -182,7 +193,8 @@ class ProposalLifecycle:
                 "reason": (
                     f"命名不符合规则。正确格式：{{项目类型}}-{{课题名称}}-{{YYYYMMDD}}\n"
                     f"项目类型：general(面上) / key(重点) / major(重大)\n"
-                    f"示例：general-hhg-20260726 / key-quantum-geometry-20260726\n"
+                    f"课题名称：取自具体科学问题/核心方法，非研究领域\n"
+                    f"示例：general-quantum-geometry-inversion-20260726\n"
                     f"收到：{proposal_id}"
                 ),
                 "parsed": None,
