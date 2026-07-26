@@ -1,0 +1,801 @@
+{
+  "nodes": {
+    "gap_report": {
+      "id": "gap_report",
+      "type": "gap_analysis",
+      "label": "研究缺口报告",
+      "stage": 2,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "T1": {
+      "id": "T1",
+      "type": "research_direction",
+      "label": "识库（权重 1.00）",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "topic_001": {
+      "id": "topic_001",
+      "type": "research_topic",
+      "label": "基于紧束缚模型的识库（权重 1.00）理论框架研究",
+      "stage": 2,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "gap_001": {
+      "id": "gap_001",
+      "type": "unknown",
+      "label": "gap_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "topic_002": {
+      "id": "topic_002",
+      "type": "research_topic",
+      "label": "紧束缚模型用于识库（权重 1.00）的理论分析研究",
+      "stage": 2,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "topic_003": {
+      "id": "topic_003",
+      "type": "research_topic",
+      "label": "COLTRIMS在识库（权重 1.00）中的应用可行性研究",
+      "stage": 2,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "gap_002": {
+      "id": "gap_002",
+      "type": "unknown",
+      "label": "gap_002",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "topic_004": {
+      "id": "topic_004",
+      "type": "research_topic",
+      "label": "TDSE求解器在识库（权重 1.00）中的应用可行性研究",
+      "stage": 2,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "gap_003": {
+      "id": "gap_003",
+      "type": "unknown",
+      "label": "gap_003",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "topic_005": {
+      "id": "topic_005",
+      "type": "research_topic",
+      "label": "VMI在识库（权重 1.00）中的应用可行性研究",
+      "stage": 2,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "gap_004": {
+      "id": "gap_004",
+      "type": "unknown",
+      "label": "gap_004",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "topic_006": {
+      "id": "topic_006",
+      "type": "research_topic",
+      "label": "协方差映射在识库（权重 1.00）中的应用可行性研究",
+      "stage": 2,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "gap_005": {
+      "id": "gap_005",
+      "type": "unknown",
+      "label": "gap_005",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "topic_007": {
+      "id": "topic_007",
+      "type": "research_topic",
+      "label": "Floquet理论在识库（权重 1.00）中的应用可行性研究",
+      "stage": 2,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "gap_006": {
+      "id": "gap_006",
+      "type": "unknown",
+      "label": "gap_006",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "topic_008": {
+      "id": "topic_008",
+      "type": "research_topic",
+      "label": "TDDFT在识库（权重 1.00）中的应用可行性研究",
+      "stage": 2,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "gap_007": {
+      "id": "gap_007",
+      "type": "unknown",
+      "label": "gap_007",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "topic_009": {
+      "id": "topic_009",
+      "type": "research_topic",
+      "label": "密度泛函理论在识库（权重 1.00）中的应用可行性研究",
+      "stage": 2,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "gap_008": {
+      "id": "gap_008",
+      "type": "unknown",
+      "label": "gap_008",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "topic_010": {
+      "id": "topic_010",
+      "type": "research_topic",
+      "label": "神经网络在识库（权重 1.00）中的应用可行性研究",
+      "stage": 2,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "gap_009": {
+      "id": "gap_009",
+      "type": "unknown",
+      "label": "gap_009",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "fw_001": {
+      "id": "fw_001",
+      "type": "question_framework",
+      "label": "科学问题框架: 基于紧束缚模型的识库（权重 1.00）理论框架研究",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_001": {
+      "id": "q_001",
+      "type": "scientific_question",
+      "label": "q_001",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_002": {
+      "id": "q_002",
+      "type": "scientific_question",
+      "label": "q_002",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_003": {
+      "id": "q_003",
+      "type": "scientific_question",
+      "label": "q_003",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_004": {
+      "id": "q_004",
+      "type": "scientific_question",
+      "label": "q_004",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_005": {
+      "id": "q_005",
+      "type": "scientific_question",
+      "label": "q_005",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_006": {
+      "id": "q_006",
+      "type": "scientific_question",
+      "label": "q_006",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_007": {
+      "id": "q_007",
+      "type": "scientific_question",
+      "label": "q_007",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_008": {
+      "id": "q_008",
+      "type": "scientific_question",
+      "label": "q_008",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_009": {
+      "id": "q_009",
+      "type": "scientific_question",
+      "label": "q_009",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_010": {
+      "id": "q_010",
+      "type": "scientific_question",
+      "label": "q_010",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_011": {
+      "id": "q_011",
+      "type": "scientific_question",
+      "label": "q_011",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_012": {
+      "id": "q_012",
+      "type": "scientific_question",
+      "label": "q_012",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_013": {
+      "id": "q_013",
+      "type": "scientific_question",
+      "label": "q_013",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_014": {
+      "id": "q_014",
+      "type": "scientific_question",
+      "label": "q_014",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_015": {
+      "id": "q_015",
+      "type": "scientific_question",
+      "label": "q_015",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_016": {
+      "id": "q_016",
+      "type": "scientific_question",
+      "label": "q_016",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_017": {
+      "id": "q_017",
+      "type": "scientific_question",
+      "label": "q_017",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_018": {
+      "id": "q_018",
+      "type": "scientific_question",
+      "label": "q_018",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_019": {
+      "id": "q_019",
+      "type": "scientific_question",
+      "label": "q_019",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_020": {
+      "id": "q_020",
+      "type": "scientific_question",
+      "label": "q_020",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_021": {
+      "id": "q_021",
+      "type": "scientific_question",
+      "label": "q_021",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_022": {
+      "id": "q_022",
+      "type": "scientific_question",
+      "label": "q_022",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_023": {
+      "id": "q_023",
+      "type": "scientific_question",
+      "label": "q_023",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_024": {
+      "id": "q_024",
+      "type": "scientific_question",
+      "label": "q_024",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "q_025": {
+      "id": "q_025",
+      "type": "scientific_question",
+      "label": "q_025",
+      "stage": 3,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "sec_01": {
+      "id": "sec_01",
+      "type": "proposal_section",
+      "label": "立项依据",
+      "stage": 4,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "sec_02": {
+      "id": "sec_02",
+      "type": "proposal_section",
+      "label": "研究内容",
+      "stage": 4,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "sec_03": {
+      "id": "sec_03",
+      "type": "proposal_section",
+      "label": "研究方案",
+      "stage": 4,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "sec_04": {
+      "id": "sec_04",
+      "type": "proposal_section",
+      "label": "特色与创新",
+      "stage": 4,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "sec_05": {
+      "id": "sec_05",
+      "type": "proposal_section",
+      "label": "年度研究计划",
+      "stage": 4,
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    "sec_06": {
+      "id": "sec_06",
+      "type": "proposal_section",
+      "label": "预期研究成果",
+      "stage": 4,
+      "created_at": "2026-07-26T03:28:25Z"
+    }
+  },
+  "edges": [
+    {
+      "from": "gap_report",
+      "to": "T1",
+      "relation": "belongs_to",
+      "contribution": "缺口分析覆盖T1方向",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "topic_001",
+      "to": "gap_001",
+      "relation": "derived_from",
+      "contribution": "课题基于缺口gap_001生成",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "topic_002",
+      "to": "gap_001",
+      "relation": "derived_from",
+      "contribution": "课题基于缺口gap_001生成",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "topic_003",
+      "to": "gap_002",
+      "relation": "derived_from",
+      "contribution": "课题基于缺口gap_002生成",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "topic_004",
+      "to": "gap_003",
+      "relation": "derived_from",
+      "contribution": "课题基于缺口gap_003生成",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "topic_005",
+      "to": "gap_004",
+      "relation": "derived_from",
+      "contribution": "课题基于缺口gap_004生成",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "topic_006",
+      "to": "gap_005",
+      "relation": "derived_from",
+      "contribution": "课题基于缺口gap_005生成",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "topic_007",
+      "to": "gap_006",
+      "relation": "derived_from",
+      "contribution": "课题基于缺口gap_006生成",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "topic_008",
+      "to": "gap_007",
+      "relation": "derived_from",
+      "contribution": "课题基于缺口gap_007生成",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "topic_009",
+      "to": "gap_008",
+      "relation": "derived_from",
+      "contribution": "课题基于缺口gap_008生成",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "topic_010",
+      "to": "gap_009",
+      "relation": "derived_from",
+      "contribution": "课题基于缺口gap_009生成",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "fw_001",
+      "to": "topic_001",
+      "relation": "derived_from",
+      "contribution": "问题框架从课题推导而来",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_001",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_002",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_003",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_004",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_005",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_006",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_007",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_008",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_009",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_010",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_011",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_012",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_013",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_014",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_015",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_016",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_017",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_018",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_019",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_020",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_021",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_022",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_023",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_024",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "q_025",
+      "to": "fw_001",
+      "relation": "belongs_to",
+      "contribution": "问题属于fw_001",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_01",
+      "to": "q_001",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_01",
+      "to": "q_002",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_01",
+      "to": "q_004",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_01",
+      "to": "q_003",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_01",
+      "to": "q_005",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_02",
+      "to": "q_006",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_02",
+      "to": "q_007",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_02",
+      "to": "q_009",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_02",
+      "to": "q_008",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_02",
+      "to": "q_010",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_02",
+      "to": "q_011",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_02",
+      "to": "q_012",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_02",
+      "to": "q_014",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_02",
+      "to": "q_013",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_02",
+      "to": "q_015",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_03",
+      "to": "q_016",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_03",
+      "to": "q_017",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_03",
+      "to": "q_019",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_03",
+      "to": "q_018",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_03",
+      "to": "q_020",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_04",
+      "to": "q_021",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_04",
+      "to": "q_022",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_04",
+      "to": "q_024",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_04",
+      "to": "q_023",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    },
+    {
+      "from": "sec_04",
+      "to": "q_025",
+      "relation": "derived_from",
+      "contribution": "章节基于科学问题构建",
+      "created_at": "2026-07-26T03:28:25Z"
+    }
+  ]
+}

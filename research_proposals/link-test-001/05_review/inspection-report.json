@@ -1,0 +1,258 @@
+{
+  "iterations": [
+    {
+      "iteration": 1,
+      "timestamp": "2026-07-26T03:28:25Z",
+      "sections_before": {
+        "立项依据": "e194e4f485fc58e8",
+        "研究内容": "7a8972c81b66c332",
+        "研究方案": "a3288815ad6f54b0",
+        "特色与创新": "38ba8b03ba9e27c9",
+        "年度研究计划": "55fbf9ebe6e3307f",
+        "预期研究成果": "b2cdf11d4b78734e"
+      },
+      "issues_found": [
+        {
+          "issue_id": "issue_001",
+          "dimension": "logical_consistency",
+          "severity": "minor",
+          "section": "立项依据",
+          "description": "第3段含无引用支撑的论断句"
+        },
+        {
+          "issue_id": "issue_002",
+          "dimension": "logical_consistency",
+          "severity": "major",
+          "section": "立项依据",
+          "description": "第6段以转折词开头，缺少前置论断支撑"
+        },
+        {
+          "issue_id": "issue_003",
+          "dimension": "evidence_sufficiency",
+          "severity": "major",
+          "section": "立项依据",
+          "description": "第3段含论断但无任何文献引用支撑"
+        }
+      ],
+      "issue_count": 3,
+      "strategy": {
+        "level": "targeted_repair",
+        "level_label": "定向修复",
+        "reason": "严重问题 0，重要问题 2 ≤ 2",
+        "actions": [
+          {
+            "issue_id": "issue_001",
+            "dimension": "logical_consistency",
+            "section": "立项依据",
+            "paragraph_index": 2,
+            "severity": "minor",
+            "description": "第3段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true,
+            "fix_type": "manual_fix"
+          },
+          {
+            "issue_id": "issue_002",
+            "dimension": "logical_consistency",
+            "section": "立项依据",
+            "paragraph_index": 5,
+            "severity": "major",
+            "description": "第6段以转折词开头，缺少前置论断支撑",
+            "suggestion": "补充前置论断或将转折表述移至段落内部",
+            "auto_fixable": false,
+            "fix_type": "manual_fix"
+          },
+          {
+            "issue_id": "issue_003",
+            "dimension": "evidence_sufficiency",
+            "section": "立项依据",
+            "paragraph_index": 2,
+            "severity": "major",
+            "description": "第3段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true,
+            "fix_type": "append_citation_marker"
+          }
+        ],
+        "estimated_improvement": 0.09
+      },
+      "score": 0.7037115384615384,
+      "sections_after": null,
+      "optimized": false,
+      "score_change": 0.0,
+      "improved": false
+    }
+  ],
+  "latest_report": {
+    "report_id": "rpt_001",
+    "timestamp": "2026-07-26T03:28:25Z",
+    "iteration": 1,
+    "sections_checked": [
+      "立项依据",
+      "研究内容",
+      "研究方案",
+      "特色与创新",
+      "年度研究计划",
+      "预期研究成果"
+    ],
+    "dimensions": {
+      "logical_consistency": {
+        "dimension": "logical_consistency",
+        "score": 0.77,
+        "issues": [
+          {
+            "issue_id": "issue_001",
+            "dimension": "logical_consistency",
+            "section": "立项依据",
+            "paragraph_index": 2,
+            "severity": "minor",
+            "description": "第3段含无引用支撑的论断句",
+            "suggestion": "补充文献引用 [N] 或理论推导依据",
+            "auto_fixable": true
+          },
+          {
+            "issue_id": "issue_002",
+            "dimension": "logical_consistency",
+            "section": "立项依据",
+            "paragraph_index": 5,
+            "severity": "major",
+            "description": "第6段以转折词开头，缺少前置论断支撑",
+            "suggestion": "补充前置论断或将转折表述移至段落内部",
+            "auto_fixable": false
+          }
+        ],
+        "details": {
+          "contradictions_found": 1,
+          "unsupported_claims": 1,
+          "circular_reasoning": 0
+        }
+      },
+      "evidence_sufficiency": {
+        "dimension": "evidence_sufficiency",
+        "score": 0.0,
+        "issues": [
+          {
+            "issue_id": "issue_003",
+            "dimension": "evidence_sufficiency",
+            "section": "立项依据",
+            "paragraph_index": 2,
+            "severity": "major",
+            "description": "第3段含论断但无任何文献引用支撑",
+            "suggestion": "补充相关文献引用 [N]",
+            "auto_fixable": true
+          }
+        ],
+        "details": {
+          "total_claim_paragraphs": 1,
+          "paragraphs_with_citations": 0,
+          "paragraphs_without_citations": 1
+        }
+      },
+      "innovation": {
+        "dimension": "innovation",
+        "score": 0.6666666666666666,
+        "issues": [],
+        "details": {
+          "novelty_keywords_found": 2,
+          "novelty_keywords_list": [
+            "新机制",
+            "创新"
+          ]
+        }
+      },
+      "feasibility": {
+        "dimension": "feasibility",
+        "score": 1.0,
+        "issues": [],
+        "details": {
+          "method_mentions": 6,
+          "methods_found": [
+            "方法",
+            "技术",
+            "实验",
+            "计算",
+            "测量",
+            "观测"
+          ],
+          "timeline_indicators": 4,
+          "has_timeline": true
+        }
+      },
+      "academic_norms": {
+        "dimension": "academic_norms",
+        "score": 1.0,
+        "issues": [],
+        "details": {
+          "citation_markers": 0,
+          "malformed_citations": 0,
+          "section_headers": 24,
+          "missing_headers_sections": []
+        }
+      },
+      "expression_quality": {
+        "dimension": "expression_quality",
+        "score": 0.9980769230769231,
+        "issues": [],
+        "details": {
+          "total_sentences": 78,
+          "long_sentences": 1,
+          "total_paragraphs": 51,
+          "long_paragraphs": 0,
+          "informal_markers": 0
+        }
+      }
+    },
+    "overall_score": 0.7037115384615384,
+    "total_issues": 3,
+    "critical_count": 0,
+    "major_count": 2,
+    "minor_count": 1,
+    "suggestion_count": 0,
+    "strategy": {
+      "level": "targeted_repair",
+      "level_label": "定向修复",
+      "reason": "严重问题 0，重要问题 2 ≤ 2",
+      "actions": [
+        {
+          "issue_id": "issue_001",
+          "dimension": "logical_consistency",
+          "section": "立项依据",
+          "paragraph_index": 2,
+          "severity": "minor",
+          "description": "第3段含无引用支撑的论断句",
+          "suggestion": "补充文献引用 [N] 或理论推导依据",
+          "auto_fixable": true,
+          "fix_type": "manual_fix"
+        },
+        {
+          "issue_id": "issue_002",
+          "dimension": "logical_consistency",
+          "section": "立项依据",
+          "paragraph_index": 5,
+          "severity": "major",
+          "description": "第6段以转折词开头，缺少前置论断支撑",
+          "suggestion": "补充前置论断或将转折表述移至段落内部",
+          "auto_fixable": false,
+          "fix_type": "manual_fix"
+        },
+        {
+          "issue_id": "issue_003",
+          "dimension": "evidence_sufficiency",
+          "section": "立项依据",
+          "paragraph_index": 2,
+          "severity": "major",
+          "description": "第3段含论断但无任何文献引用支撑",
+          "suggestion": "补充相关文献引用 [N]",
+          "auto_fixable": true,
+          "fix_type": "append_citation_marker"
+        }
+      ],
+      "estimated_improvement": 0.09
+    },
+    "passed": false,
+    "manual_review_recommended": false
+  },
+  "stagnation_count": 0,
+  "report_seq": 1,
+  "updated_at": "2026-07-26T03:28:25Z"
+}

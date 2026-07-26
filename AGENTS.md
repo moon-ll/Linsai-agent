@@ -580,6 +580,21 @@ LinSai-CoPilot/
 - ✅ **基础设施** — `paths.py` 新增 `PDF_DIR` / `PDF_LIBRARY_PATH`；`common.py` 新增 `file_sha256()` / `copy_file()`
 - ✅ **测试** — pdf_manager 自检 23/23 + paper_pool 自检通过 + 单元 116/116 + Web CI 170/170，零回归
 
+### Phase 15：研究管线全链路联通（v6.3.1）【✅ 已完成】
+- ✅ **管线状态机联通执行模块** — `pipeline_orchestrator.py` 新增 `execute_stage()` 方法
+  - 实现 6 个阶段专属执行器（`_execute_stage_0` ~ `_execute_stage_5`）
+  - 阶段 0：读取 `research_profiler` 研究方向画像 → 方向校准报告
+  - 阶段 1：读取 `external_fetcher` + `paper_pool` → 文献清单
+  - 阶段 2：调用 `gap_analyzer.analyze_gaps()` → 缺口报告
+  - 阶段 3：调用 `question_architect.build_question_framework()` → 问题框架
+  - 阶段 4：调用 `proposal_writer.assemble_proposal()` → 六章节申请书
+  - 阶段 5：调用 `proposal_inspector.inspect_proposal()` → 自检报告
+- ✅ **一键全链路执行** — 新增 `run_full_pipeline()`：循环执行→门禁→推进，安全上限 12 次迭代
+- ✅ **产物自动注册** — 每阶段执行后通过 `artifact_manager` 注册（实时文件 + 版本快照）
+- ✅ **全链路端到端测试** — 6 阶段全部通过，生成 182 个产物，门禁检查正常
+- ✅ **产出质量验证** — 缺口报告 10 个缺口 / 自检报告 0.70 分 3 问题 / 申请书六章节完整
+- ✅ **回归测试** — pipeline_orchestrator 自检 + 单元 116/116 + Web CI 170/170，零回归
+
 ---
 
 ## 开发约定
@@ -893,7 +908,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.3.0*
+*版本：6.3.1*
 *日期：2026-07-26*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

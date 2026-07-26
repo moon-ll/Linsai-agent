@@ -634,6 +634,598 @@ class PipelineManager:
         state = self._load_state()
         return [dict(e) for e in state.get("history", [])]
 
+    # ------------------------------------------------------------------
+    # 阶段执行（联通委托模块）
+    # ------------------------------------------------------------------
+    def execute_stage(self, stage: Optional[int] = None) -> Dict[str, Any]:
+        """执行指定阶段（或当前阶段）的委托模块，生成产物。
+
+        这是联通管线各阶段的核心方法。每个阶段对应一个 _execute_stage_N() 方法，
+        负责调用委托模块（或读取数据文件）生成产物，并通过 ArtifactManager 注册。
+
+        阶段0-1：委托模块为 CoPilot 核心模块（research_profiler/external_fetcher），
+                 管线不可直接导入，改为只读读取其产出文件（memory/*.json）。
+        阶段2-5：委托模块为研究管线模块，通过懒导入调用。
+
+        Args:
+            stage: 要执行的阶段编号；None 时执行当前阶段。
+
+        Returns:
+            {"executed": bool, "stage": int, "summary": str,
+             "artifacts_created": list, "reason": str（失败时）}
+        """
+        state = self._load_state()
+        if stage is None:
+            stage = state["current_stage"]
+
+        if stage < 0 or stage >= len(STAGES):
+            return {"executed": False, "stage": stage,
+                    "summary": "", "artifacts_created": [],
+                    "reason": f"非法阶段编号: {stage}"}
+
+        if state["status"] == "paused":
+            return {"executed": False, "stage": stage,
+                    "summary": "", "artifacts_created": [],
+                    "reason": "管线已暂停"}
+        if state["status"] == "completed":
+            return {"executed": False, "stage": stage,
+                    "summary": "", "artifacts_created": [],
+                    "reason": "管线已完成"}
+
+        stage_info = STAGES[stage]
+        executor = getattr(self, f"_execute_stage_{stage}", None)
+        if executor is None:
+            return {"executed": False, "stage": stage,
+                    "summary": "", "artifacts_created": [],
+                    "reason": f"阶段{stage}无执行器"}
+
+        try:
+            result = executor()
+        except Exception as e:
+            result = {
+                "executed": False, "stage": stage,
+                "summary": "", "artifacts_created": [],
+                "reason": f"执行异常: {e}",
+            }
+
+        # 记录历史
+        with file_lock(self._lock_name):
+            state = self._load_state()
+            if result.get("executed"):
+                self._add_history(
+                    state, "stage_executed", stage,
+                    f"阶段{stage}({stage_info['name']})执行完成: {result.get('summary', '')}",
+                )
+            else:
+                self._add_history(
+                    state, "stage_execution_failed", stage,
+                    f"阶段{stage}({stage_info['name']})执行失败: {result.get('reason', '')}",
+                )
+            self._save_state(state)
+
+        return result
+
+    def _read_artifact_content(self, artifact_id: str) -> str:
+        """读取产物文件内容（通过 file_path 从磁盘读取）。"""
+        am = self._get_artifact_manager()
+        if am is None:
+            return ""
+        art = am.get_artifact(artifact_id)
+        if not art:
+            return ""
+        file_path = art.get("file_path", "")
+        if not file_path:
+            return ""
+        live = self.proposal_dir / file_path
+        if live.exists():
+            return live.read_text(encoding="utf-8")
+        return ""
+
+    def _execute_stage_0(self) -> Dict[str, Any]:
+        """阶段0: 方向校准 — 读取研究画像与用户画像，创建产物。
+
+        边界处理：research_profiler 是核心模块，管线不可导入。
+        改为只读读取 memory/research-profile.json 和 memory/user-profile.json。
+        """
+        import json as _json
+
+        am = self._get_artifact_manager()
+        if am is None:
+            return {"executed": False, "stage": 0, "summary": "",
+                    "artifacts_created": [], "reason": "ArtifactManager 不可用"}
+
+        from paths import MEMORY_DIR
+
+        profile_data = load_json(MEMORY_DIR / "research-profile.json", default={})
+        user_data = load_json(MEMORY_DIR / "user-profile.json", default={})
+
+        keywords = profile_data.get("keywords", [])
+        research_field = user_data.get("research_field", [])
+
+        if not keywords and not research_field:
+            return {"executed": False, "stage": 0, "summary": "",
+                    "artifacts_created": [],
+                    "reason": "研究画像和用户画像均为空，请先运行 research_profiler"}
+
+        keyword_lines = [f"- {k[0]}（权重 {k[1]:.2f}）" for k in keywords[:20]] if keywords else []
+        field_lines = [f"- {f}" for f in research_field]
+
+        direction_content = (
+            "# 方向校准报告\n\n"
+            "## 研究方向关键词\n\n"
+            + "\n".join(keyword_lines if keyword_lines else ["（无关键词）"])
+            + "\n\n## 用户研究领域\n\n"
+            + "\n".join(field_lines if field_lines else ["（无领域）"])
+            + f"\n\n## 校准结论\n\n"
+            f"基于研究画像与用户画像，确定主要研究方向为："
+            f"{research_field[0] if research_field else '未确定'}\n"
+        )
+
+        am.create_artifact(
+            f"dir_{self.proposal_id}_v0.1", "direction_calibration", 0,
+            direction_content, "01_direction/direction-calibration.md",
+            author="pipeline_stage0",
+        )
+
+        user_content = _json.dumps(user_data, ensure_ascii=False, indent=2)
+        am.create_artifact(
+            f"up_{self.proposal_id}_v0.1", "user_profile", 0,
+            user_content, "01_direction/user-profile-snapshot.json",
+            author="pipeline_stage0",
+        )
+
+        return {
+            "executed": True, "stage": 0,
+            "summary": f"方向校准完成，提取{len(keywords)}个关键词、{len(research_field)}个研究领域",
+            "artifacts_created": ["direction_calibration", "user_profile"],
+        }
+
+    def _execute_stage_1(self) -> Dict[str, Any]:
+        """阶段1: 文献调研 — 读取论文池，创建文献简报产物。
+
+        边界处理：external_fetcher 是核心模块，管线不可导入。
+        改为只读读取 memory/paper-pool.json 中已积累的文献。
+        """
+        am = self._get_artifact_manager()
+        if am is None:
+            return {"executed": False, "stage": 1, "summary": "",
+                    "artifacts_created": [], "reason": "ArtifactManager 不可用"}
+
+        from paths import MEMORY_DIR
+
+        paper_pool = load_json(MEMORY_DIR / "paper-pool.json", default={})
+
+        if not paper_pool:
+            return {"executed": False, "stage": 1, "summary": "",
+                    "artifacts_created": [],
+                    "reason": "论文池为空，请先通过 hermes/learning_engine 积累文献"}
+
+        count = 0
+        for arxiv_id, paper in paper_pool.items():
+            title = paper.get("title", arxiv_id)
+            direction = paper.get("direction", "未分类")
+            score = paper.get("score", 0)
+            tldr = paper.get("tldr", "")
+            status = paper.get("status", "unknown")
+
+            briefing_content = (
+                f"# 文献简报: {title}\n\n"
+                f"- **arXiv ID**: {arxiv_id}\n"
+                f"- **方向**: {direction}\n"
+                f"- **评分**: {score:.2f}\n"
+                f"- **状态**: {status}\n\n"
+                f"## 摘要\n\n{tldr}\n"
+            )
+
+            safe_id = arxiv_id.replace(".", "_").replace("/", "_")
+            am.create_artifact(
+                f"lb_{safe_id}_v0.1", "literature_briefing", 1,
+                briefing_content, f"02_literature/{safe_id}.md",
+                author="pipeline_stage1",
+            )
+            count += 1
+
+        return {
+            "executed": True, "stage": 1,
+            "summary": f"文献调研完成，生成{count}篇文献简报",
+            "artifacts_created": ["literature_briefing"] * count,
+        }
+
+    def _execute_stage_2(self) -> Dict[str, Any]:
+        """阶段2: 课题凝练 — 调用 gap_analyzer 和 topic_generator。
+
+        两个均为管线模块，可直接懒导入。
+        """
+        am = self._get_artifact_manager()
+        if am is None:
+            return {"executed": False, "stage": 2, "summary": "",
+                    "artifacts_created": [], "reason": "ArtifactManager 不可用"}
+
+        # 从阶段0产物中提取研究方向
+        research_direction = "固体HHG"
+        dir_arts = am.list_artifacts(stage=0, artifact_type="direction_calibration")
+        if dir_arts:
+            content = self._read_artifact_content(dir_arts[0]["artifact_id"])
+            if content:
+                for line in content.split("\n"):
+                    stripped = line.strip()
+                    if stripped.startswith("- ") and stripped != "- （无领域）":
+                        research_direction = stripped[2:].strip()
+                        break
+
+        directions = [{"id": "T1", "name": research_direction}]
+
+        # 调用 gap_analyzer
+        try:
+            from gap_analyzer import GapAnalyzer
+            analyzer = GapAnalyzer(self.proposal_dir, research_directions=directions)
+            gap_report = analyzer.analyze()
+        except Exception as e:
+            return {"executed": False, "stage": 2, "summary": "",
+                    "artifacts_created": [],
+                    "reason": f"gap_analyzer 执行失败: {e}"}
+
+        # 创建 gap_analysis 产物
+        gap_content = analyzer.export_gap_report(format="markdown")
+        am.create_artifact(
+            f"gap_{self.proposal_id}_v0.1", "gap_analysis", 2,
+            gap_content, "02_topic/gap-report.md",
+            author="pipeline_stage2",
+        )
+
+        # 调用 topic_generator
+        topics: List[Dict[str, Any]] = []
+        try:
+            from topic_generator import TopicGenerator
+            gen = TopicGenerator(self.proposal_dir)
+            topics = gen.generate_topics(gap_report, direction=directions[0])
+        except Exception:
+            # topic_generator 失败时用 gap_report 手动构建课题
+            if gap_report.get("gaps"):
+                top_gap = gap_report["gaps"][0]
+                topics = [{
+                    "topic_id": "topic_001",
+                    "title": top_gap.get("description", "研究课题")[:100],
+                    "keywords": [research_direction],
+                    "methods": top_gap.get("suggested_approach", ""),
+                    "literature": [],
+                    "priority_score": top_gap.get("priority_score", 0.5),
+                }]
+
+        # 创建 topic 产物
+        if topics:
+            top_topic = topics[0]
+            topic_content = (
+                f"# 研究课题: {top_topic.get('title', '未命名课题')}\n\n"
+                f"- **课题ID**: {top_topic.get('topic_id', 'topic_001')}\n"
+                f"- **优先级**: {top_topic.get('priority_score', 0):.2f}\n"
+                f"- **关键词**: {', '.join(top_topic.get('keywords', []))}\n\n"
+                f"## 建议方法\n\n{top_topic.get('methods', '待补充')}\n"
+            )
+            am.create_artifact(
+                f"topic_{self.proposal_id}_v0.1", "topic", 2,
+                topic_content, "02_topic/topic-001.md",
+                author="pipeline_stage2",
+            )
+
+        return {
+            "executed": True, "stage": 2,
+            "summary": f"课题凝练完成，识别{len(gap_report.get('gaps', []))}个缺口，生成{len(topics)}个课题",
+            "artifacts_created": ["gap_analysis", "topic"] if topics else ["gap_analysis"],
+        }
+
+    def _execute_stage_3(self) -> Dict[str, Any]:
+        """阶段3: 科学问题构建 — 调用 question_architect。"""
+        am = self._get_artifact_manager()
+        if am is None:
+            return {"executed": False, "stage": 3, "summary": "",
+                    "artifacts_created": [], "reason": "ArtifactManager 不可用"}
+
+        # 读取 gap_report（阶段2产出）
+        gap_report = None
+        try:
+            from gap_analyzer import GapAnalyzer
+            analyzer = GapAnalyzer(self.proposal_dir)
+            gap_report = analyzer.get_gap_report()
+        except Exception:
+            pass
+
+        # 从阶段2产物中构建课题输入
+        topic: Dict[str, Any] = {
+            "topic_id": "topic_001",
+            "title": "固体高次谐波产生中的量子几何效应",
+            "keywords": ["HHG", "量子几何", "Berry曲率"],
+            "methods": "TDDFT数值模拟",
+            "literature": [],
+        }
+        topic_arts = am.list_artifacts(stage=2, artifact_type="topic")
+        if topic_arts:
+            content = self._read_artifact_content(topic_arts[0]["artifact_id"])
+            if content:
+                for line in content.split("\n"):
+                    if line.startswith("# 研究课题:"):
+                        topic["title"] = line.replace("# 研究课题:", "").strip()
+                        break
+
+        # 调用 question_architect
+        try:
+            from question_architect import QuestionArchitect
+            architect = QuestionArchitect(self.proposal_dir)
+            framework = architect.construct_questions(topic, gap_report)
+        except Exception as e:
+            return {"executed": False, "stage": 3, "summary": "",
+                    "artifacts_created": [],
+                    "reason": f"question_architect 执行失败: {e}"}
+
+        # 创建 scientific_question 产物
+        main_questions = framework.get("main_questions", [])
+        q_content = architect.export_framework(format="markdown")
+        am.create_artifact(
+            f"sq_{self.proposal_id}_v0.1", "scientific_question", 3,
+            q_content, "03_question/question-framework.md",
+            author="pipeline_stage3",
+        )
+
+        # 创建 question_validation 产物
+        validation = framework.get("validation_summary", {})
+        val_lines = [f"- **{dim}**: {score:.2f}" for dim, score in validation.get("by_dimension", {}).items()]
+        validation_content = (
+            "# 科学问题验证报告\n\n"
+            f"- **问题总数**: {validation.get('total_questions', 0)}\n"
+            f"- **平均评分**: {validation.get('avg_overall', 0):.2f}\n\n"
+            "## 各维度评分\n\n"
+            + "\n".join(val_lines if val_lines else ["（无维度数据）"])
+            + "\n"
+        )
+        am.create_artifact(
+            f"qv_{self.proposal_id}_v0.1", "question_validation", 3,
+            validation_content, "03_question/validation.md",
+            author="pipeline_stage3",
+        )
+
+        return {
+            "executed": True, "stage": 3,
+            "summary": f"科学问题构建完成，生成{len(main_questions)}个主问题",
+            "artifacts_created": ["scientific_question", "question_validation"],
+        }
+
+    def _execute_stage_4(self) -> Dict[str, Any]:
+        """阶段4: 申请书撰写 — 调用 proposal_writer。"""
+        am = self._get_artifact_manager()
+        if am is None:
+            return {"executed": False, "stage": 4, "summary": "",
+                    "artifacts_created": [], "reason": "ArtifactManager 不可用"}
+
+        # 读取 question_framework（阶段3产出）
+        framework = None
+        try:
+            from question_architect import QuestionArchitect
+            architect = QuestionArchitect(self.proposal_dir)
+            framework = architect.get_framework()
+        except Exception:
+            pass
+
+        if not framework or not framework.get("main_questions"):
+            return {"executed": False, "stage": 4, "summary": "",
+                    "artifacts_created": [],
+                    "reason": "科学问题框架为空，请先执行阶段3"}
+
+        # 读取 gap_report（可选上下文）
+        gap_report = None
+        try:
+            from gap_analyzer import GapAnalyzer
+            analyzer = GapAnalyzer(self.proposal_dir)
+            gap_report = analyzer.get_gap_report()
+        except Exception:
+            pass
+
+        # 调用 proposal_writer
+        try:
+            from proposal_writer import ProposalWriter
+            writer = ProposalWriter(self.proposal_dir)
+            result = writer.write_proposal(framework, gap_report)
+        except Exception as e:
+            return {"executed": False, "stage": 4, "summary": "",
+                    "artifacts_created": [],
+                    "reason": f"proposal_writer 执行失败: {e}"}
+
+        # 为每个章节创建 proposal_section 产物
+        sections = writer.get_sections()
+        count = 0
+        for section_name, section_data in sections.items():
+            content = section_data.get("content", "")
+            section_id = section_data.get("section_id", f"sec_{count + 1}")
+            safe_name = safe_filename(section_name)
+
+            am.create_artifact(
+                f"sec_{safe_name}_v0.1", "proposal_section", 4,
+                content, f"04_proposal/sections/{section_id}.md",
+                author="pipeline_stage4",
+            )
+            count += 1
+
+        return {
+            "executed": True, "stage": 4,
+            "summary": f"申请书撰写完成，生成{count}个章节（总字数{result.get('total_word_count', 0)}）",
+            "artifacts_created": ["proposal_section"] * count,
+        }
+
+    def _execute_stage_5(self) -> Dict[str, Any]:
+        """阶段5: 自检优化 — 调用 proposal_inspector。"""
+        am = self._get_artifact_manager()
+        if am is None:
+            return {"executed": False, "stage": 5, "summary": "",
+                    "artifacts_created": [], "reason": "ArtifactManager 不可用"}
+
+        # 读取申请书章节（阶段4产出）
+        sections_with_content: Dict[str, str] = {}
+        try:
+            from proposal_writer import ProposalWriter
+            writer = ProposalWriter(self.proposal_dir)
+            sections = writer.get_sections()
+            for name, data in sections.items():
+                sections_with_content[name] = data.get("content", "")
+        except Exception:
+            pass
+
+        if not sections_with_content:
+            return {"executed": False, "stage": 5, "summary": "",
+                    "artifacts_created": [],
+                    "reason": "申请书章节为空，请先执行阶段4"}
+
+        # 读取 question_framework（可选上下文）
+        question_framework = None
+        try:
+            from question_architect import QuestionArchitect
+            architect = QuestionArchitect(self.proposal_dir)
+            question_framework = architect.get_framework()
+        except Exception:
+            pass
+
+        # 调用 proposal_inspector
+        try:
+            from proposal_inspector import ProposalInspector
+            inspector = ProposalInspector(self.proposal_dir)
+            report = inspector.inspect(sections_with_content, question_framework)
+        except Exception as e:
+            return {"executed": False, "stage": 5, "summary": "",
+                    "artifacts_created": [],
+                    "reason": f"proposal_inspector 执行失败: {e}"}
+
+        # 创建 self_check 产物
+        report_md = inspector.export_report(format="markdown")
+        am.create_artifact(
+            f"sc_{self.proposal_id}_v0.1", "self_check", 5,
+            report_md, "05_review/inspection-report.md",
+            author="pipeline_stage5",
+        )
+
+        # 创建 issue_resolution 产物
+        total_issues = report.get("total_issues", 0)
+        strategy = report.get("strategy", {})
+        action_lines = [f"- {a}" for a in strategy.get("actions", [])]
+        resolution_content = (
+            "# 问题解决报告\n\n"
+            f"- **总问题数**: {total_issues}\n"
+            f"- **严重**: {report.get('critical_count', 0)}\n"
+            f"- **主要**: {report.get('major_count', 0)}\n"
+            f"- **次要**: {report.get('minor_count', 0)}\n"
+            f"- **建议**: {report.get('suggestion_count', 0)}\n\n"
+            "## 优化策略\n\n"
+            f"- **级别**: {strategy.get('level_label', '未确定')}\n"
+            f"- **原因**: {strategy.get('reason', '')}\n\n"
+            "## 行动项\n\n"
+            + "\n".join(action_lines if action_lines else ["（无行动项）"])
+            + "\n"
+        )
+        am.create_artifact(
+            f"ir_{self.proposal_id}_v0.1", "issue_resolution", 5,
+            resolution_content, "05_review/issue-resolution.md",
+            author="pipeline_stage5",
+        )
+
+        return {
+            "executed": True, "stage": 5,
+            "summary": f"自检优化完成，总分{report.get('overall_score', 0):.2f}，"
+                       f"识别{total_issues}个问题",
+            "artifacts_created": ["self_check", "issue_resolution"],
+        }
+
+    def run_stage(self) -> Dict[str, Any]:
+        """一键执行当前阶段：执行委托模块 → 门禁校验 → 推进。
+
+        Returns:
+            {"executed": dict, "gate": dict, "advanced": dict|None}
+        """
+        current = self._load_state()["current_stage"]
+
+        # 1. 执行阶段
+        exec_result = self.execute_stage(current)
+        if not exec_result.get("executed"):
+            return {"executed": exec_result, "gate": None, "advanced": None}
+
+        # 2. 门禁校验
+        gate_result = self.run_gate(current, "rule")
+
+        # 3. 推进（门禁通过时）
+        advance_result = None
+        if gate_result.get("passed"):
+            advance_result = self.advance_stage()
+
+        return {
+            "executed": exec_result,
+            "gate": gate_result,
+            "advanced": advance_result,
+        }
+
+    def run_full_pipeline(self) -> Dict[str, Any]:
+        """一键执行全部六阶段：循环 run_stage 直到完成或失败。
+
+        Returns:
+            {"completed": bool, "stages_executed": int,
+             "final_stage": int, "results": list, "reason": str}
+        """
+        results: List[Dict[str, Any]] = []
+        max_iterations = 12  # 安全上限（6阶段 × 2容错）
+
+        for _ in range(max_iterations):
+            state = self._load_state()
+            if state["status"] == "completed":
+                return {
+                    "completed": True,
+                    "stages_executed": len(results),
+                    "final_stage": state["current_stage"],
+                    "results": results,
+                    "reason": "管线全部完成",
+                }
+            if state["status"] == "paused":
+                return {
+                    "completed": False,
+                    "stages_executed": len(results),
+                    "final_stage": state["current_stage"],
+                    "results": results,
+                    "reason": "管线已暂停",
+                }
+
+            step_result = self.run_stage()
+            results.append(step_result)
+
+            # 执行失败或门禁未通过时停止
+            if not step_result["executed"].get("executed"):
+                return {
+                    "completed": False,
+                    "stages_executed": len(results),
+                    "final_stage": state["current_stage"],
+                    "results": results,
+                    "reason": f"阶段{state['current_stage']}执行失败: "
+                              f"{step_result['executed'].get('reason', '')}",
+                }
+            if step_result["gate"] and not step_result["gate"].get("passed"):
+                return {
+                    "completed": False,
+                    "stages_executed": len(results),
+                    "final_stage": state["current_stage"],
+                    "results": results,
+                    "reason": f"阶段{state['current_stage']}门禁未通过: "
+                              f"{'; '.join(step_result['gate'].get('issues', []))}",
+                }
+            if not step_result.get("advanced"):
+                return {
+                    "completed": False,
+                    "stages_executed": len(results),
+                    "final_stage": state["current_stage"],
+                    "results": results,
+                    "reason": "推进失败",
+                }
+
+        return {
+            "completed": False,
+            "stages_executed": len(results),
+            "final_stage": self._load_state()["current_stage"],
+            "results": results,
+            "reason": f"达到最大迭代次数({max_iterations})",
+        }
+
 
 # ---------------------------------------------------------------------------
 # 自检

@@ -1,0 +1,56 @@
+{
+  "communication_style": {
+    "avg_input_length": 14,
+    "uses_formulas": false
+  },
+  "interaction_history": {
+    "total_sessions": 13,
+    "total_messages": 87,
+    "hermes_sessions_reflowed": 209
+  },
+  "research_field": [
+    "高次谐波",
+    "HHG",
+    "固体HHG",
+    "阿秒",
+    "谷电子学",
+    "强场",
+    "attosecond",
+    "超快",
+    "拓扑绝缘体",
+    "相位匹配",
+    "能谷电子学",
+    "valleytronics",
+    "拍赫兹",
+    "TMD"
+  ],
+  "known_skills": [
+    "feishu",
+    "research-daily-briefing",
+    "literature",
+    "karpathy-kb-workflow",
+    "hermes-agent",
+    "lin-sai-persona",
+    "kanban-orchestrator"
+  ],
+  "preferences": {
+    "paper_interests": {
+      "interested_count": 8,
+      "later_count": 4,
+      "total_feedback": 16
+    },
+    "general": "Lin Sai (林赛) — 31岁男性，强场超快光学独立PI，研究固体HHG/阿秒科学/能谷电子学。飞书是主要通信平台，消息限制≈800字（中文字符），940-1000字必截断。用户对\"消息被截断\"问题非常敏感，曾多次反馈。偏好：回复简洁，不喜欢冗长输出；超过3步的项目用writing-plans skill；简报需要最新研究进展。中红外供应链断裂是课题方案设计的关键约束。LinSai-CoPilot项目（~/Desktop/LinSai-CoPilot）是用户自己写的Python虚拟合作者应用，与Hermes是不同定位。"
+  },
+  "_confidence": {},
+  "last_updated": "2026-07-25T15:13:48Z",
+  "hermes_preferences": {
+    "keywords": [
+      "回复简洁",
+      "writing-plans",
+      "简报",
+      "不为空洞鼓励"
+    ],
+    "last_synced": "2026-07-25T15:13:48Z"
+  },
+  "hermes_memory_synced_at": "2026-07-25T15:13:48Z"
+}
