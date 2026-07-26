@@ -45,6 +45,15 @@ from typing import Any, Dict, List, Optional, Tuple
 from common import now_utc, load_json, save_json, file_lock
 from paths import PIPELINE_CONFIG_DIR
 
+# v6.3.2 接入 LLM 网关（共享基础设施层），让学术品味评估具备语义理解能力
+try:
+    from llm_gateway import is_llm_available, llm_json
+    _LLM_OK = is_llm_available()
+except Exception:
+    _LLM_OK = False
+    def llm_json(*a, **kw):  # type: ignore
+        return False, None, {}
+
 # ---------------------------------------------------------------------------
 # 常量
 # ---------------------------------------------------------------------------
@@ -345,6 +354,101 @@ class TasteEngine:
         cosine = dot / (norm_a * norm_b)
         # 归一化到 [0, 1]
         return round(max(0.0, min(1.0, (cosine + 1) / 2)), 4)
+
+    def llm_qualitative_assessment(
+        self,
+        topic_title: str,
+        topic_features: Dict[str, Any],
+        topic_description: str = "",
+    ) -> Dict[str, Any]:
+        """v6.3.2 LLM 辅助的定性学术品味评估。
+
+        余弦相似度只能比较数值向量，无法理解课题的语义内容。
+        本方法用 LLM 从语义层面评估课题与用户学术品味的匹配度，
+        并给出具体的匹配理由与改进建议。
+
+        Args:
+            topic_title: 课题标题。
+            topic_features: 课题五维特征（与 get_similarity_score 相同）。
+            topic_description: 课题描述（可选，提供更多上下文）。
+
+        Returns:
+            {
+                "match_score": float,       # LLM 评估的匹配度 [0, 1]
+                "match_reason": str,        # 匹配/不匹配的原因
+                "alignment": {              # 五维逐项评估
+                    "novelty": str, "methodology": str, ...
+                },
+                "suggestion": str,          # 改进建议
+            }
+            LLM 不可用时返回空 dict，调用方降级为纯数值相似度。
+        """
+        if not _LLM_OK:
+            return {}
+
+        # 获取数值相似度作为 LLM 的参考
+        numeric_score = self.get_similarity_score(topic_features)
+
+        # 导出品味画像摘要供 LLM 参考
+        model = self.model
+        taste_summary = (
+            f"创新性偏好: {model.get('novelty', 0.5):.2f}, "
+            f"方法论(理论/实验/计算): "
+            f"{model.get('methodology', {}).get('theoretical', 0.5):.2f}/"
+            f"{model.get('methodology', {}).get('experimental', 0.5):.2f}/"
+            f"{model.get('methodology', {}).get('computational', 0.5):.2f}, "
+            f"理论深度: {model.get('theoretical_depth', 0.5):.2f}, "
+            f"跨学科性: {model.get('interdisciplinarity', {}).get('value', 0.5):.2f}, "
+            f"风险偏好: {model.get('risk_appetite', {}).get('value', 0.5):.2f}"
+        )
+
+        feat_summary = (
+            f"创新性: {topic_features.get('novelty', 0.5):.2f}, "
+            f"理论深度: {topic_features.get('theoretical_depth', 0.5):.2f}, "
+            f"跨学科性: {topic_features.get('interdisciplinarity', 0.5):.2f}, "
+            f"风险: {topic_features.get('risk_appetite', 0.5):.2f}"
+        )
+
+        sys_prompt = (
+            "你是强场超快光学/阿秒科学领域的资深 PI，深谙学术品味与课题选择的奥妙。"
+            "你能从课题的科学价值、创新性、可行性、与研究者品味的匹配度等语义层面"
+            "做出细致的定性判断。"
+        )
+        user_prompt = (
+            f"请评估以下课题与研究者学术品味的匹配度。\n\n"
+            f"【课题标题】{topic_title}\n"
+            f"【课题描述】{topic_description or '（无）'}\n"
+            f"【课题特征】{feat_summary}\n"
+            f"【研究者品味画像】{taste_summary}\n"
+            f"【数值相似度】{numeric_score:.2f}（仅参考，余弦相似度）\n\n"
+            f"请从语义层面评估，输出严格 JSON：\n"
+            f"{{\n"
+            f'  "match_score": 0.0-1.0,\n'
+            f'  "match_reason": "一句话说明匹配或不匹配的核心原因",\n'
+            f'  "alignment": {{\n'
+            f'    "novelty": "高/中/低 + 理由",\n'
+            f'    "methodology": "高/中/低 + 理由",\n'
+            f'    "theoretical_depth": "高/中/低 + 理由",\n'
+            f'    "interdisciplinarity": "高/中/低 + 理由",\n'
+            f'    "risk_appetite": "高/中/低 + 理由"\n'
+            f'  }},\n'
+            f'  "suggestion": "如何调整课题以更好匹配品味的建议"\n'
+            f"}}\n"
+            f"只输出 JSON。"
+        )
+
+        try:
+            ok, data, _ = llm_json(sys_prompt, user_prompt, timeout=90)
+            if ok and isinstance(data, dict):
+                # 校验 match_score 合法性
+                score = data.get("match_score")
+                if isinstance(score, (int, float)) and 0.0 <= score <= 1.0:
+                    data["match_score"] = round(float(score), 3)
+                    data["numeric_similarity"] = numeric_score
+                    return data
+        except Exception:
+            pass
+        return {}
 
     # ------------------------------------------------------------------
     # 反馈解析

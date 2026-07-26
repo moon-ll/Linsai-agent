@@ -605,6 +605,7 @@ LinSai-CoPilot/
 - ✅ **科学问题 LLM 增强** — `question_architect.py`：LLM 批量优化五要素科学问题表述
 - ✅ **申请书撰写 LLM 增强** — `proposal_writer.py`：4 章节由 LLM 重写实质内容（引文占位符保护）
 - ✅ **自检 LLM 语义评审** — `proposal_inspector.py`：LLM 四维语义评审 + 总分融合（规则 0.6 + LLM 0.4）
+- ✅ **学术品味 LLM 辅助** — `taste_engine.py`：新增 `llm_qualitative_assessment()` 语义层品味评估（补充数值相似度的语义盲区）
 - ✅ **端到端验证** — 真实 LLM 调用四环节全部生效，产出从模板占位文本升级为实质学术论述
 - ✅ **回归测试** — llm_gateway 自检 5/5 + 单元 116/116 + 边界检查通过，零回归
 

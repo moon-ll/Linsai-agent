@@ -45,6 +45,13 @@
 - **引文完整性保护**：申请书 LLM 重写后校验引文占位符，丢失则降级
 - **边界合规**：通过共享基础设施层 llm_gateway 间接调用 LLM，不破坏 §6 隔离原则
 
+### v6.3.2 补充：学术品味 LLM 辅助（taste_engine.py）
+- **定性品味评估** — `taste_engine.py` 新增 `llm_qualitative_assessment()`
+  - 余弦相似度只能比较数值向量，LLM 从语义层面评估课题与品味的匹配度
+  - 输出 match_score / match_reason / 五维逐项 alignment / 改进建议
+  - 端到端验证：LLM 评估"量子度规对固体HHG偏振特性的调制"match_score=0.38，给出"过于激进和抽象"的定性判断与具体调整建议
+  - LLM 不可用时返回空 dict，调用方降级为纯数值相似度
+
 ## v6.3.1 - 2026-07-26 研究管线全链路联通
 
 ### v6.3.1 核心变更
