@@ -55,6 +55,8 @@
 
 from __future__ import annotations
 
+import hashlib
+import json
 import os
 import subprocess
 import sys
@@ -179,10 +181,11 @@ STAGE_PROMPTS: Dict[int, str] = {
         "你是 NSFC 申请书撰写专家。请完成以下任务：\n\n"
         "1. 读取科学问题框架（{proposal_dir}/03_question/question-framework.md）\n"
         "2. 读取缺口分析报告（{proposal_dir}/02_topic/gap-report.md）\n"
-        "3. 按 NSFC 面上项目格式撰写六章节申请书：\n"
-        "   立项依据 / 研究内容 / 研究方案 / 特色与创新 / 年度计划 / 预期成果\n"
+        "3. 按「项目类型标准」中的章节结构撰写申请书（见下方项目类型标准）\n"
         "4. 要求：学术论述充实、逻辑严密、引文用 [CITE:ref_key] 标注\n"
-        "5. 输出申请书草稿，写入：{proposal_dir}/04_proposal/proposal-draft.md\n"
+        "5. 输出申请书正文，写入：{proposal_dir}/04_proposal/proposal-draft.md\n"
+        "6. 同时生成方法学手册，写入：{proposal_dir}/04_proposal/methodology-manual.md\n"
+        "   （申请书重思路，方法学手册重细节：公式推导/参数表/技术路线图/收敛性分析）\n"
     ),
     5: (
         "你是 NSFC 项目评审专家。请完成以下任务：\n\n"
@@ -214,15 +217,50 @@ class HermesPipeline:
         """初始化管线操作台。
 
         Args:
-            proposal_id: 课题 ID（如 "nsfc-2026-001"）
+            proposal_id: 课题 ID（如 "general-quantum-geometry-inversion-20260726"）
         """
         self.proposal_id = proposal_id
-        self.proposal_dir = PROJECT_ROOT / "research_proposals" / proposal_id
+        # 兼容：proposal 可能在 lifecycle 管理的 drafts/optimizing/... 目录下
+        proposals_root = PROJECT_ROOT / "research_proposals"
+        self.proposal_dir = proposals_root / proposal_id
+        # 如果根目录没有，在 lifecycle 各阶段目录中查找
+        if not self.proposal_dir.exists():
+            for stage in ["drafts", "optimizing", "pending_review", "archived"]:
+                candidate = proposals_root / stage / proposal_id
+                if candidate.exists():
+                    self.proposal_dir = candidate
+                    break
         self.state_path = self.proposal_dir / "00_pipeline" / "hermes-pipeline-state.json"
         self.proposal_dir.mkdir(parents=True, exist_ok=True)
         (self.proposal_dir / "00_pipeline").mkdir(parents=True, exist_ok=True)
         # 已有 proposal 来源（hermes_workspace 下的历史项目）
         self._hermes_proposals = Path.home() / "Desktop" / "hermes_workspace" / "research_proposals"
+
+        # 从命名规则解析项目类型（general/key/major）
+        self.project_type = self._detect_project_type()
+
+    def _detect_project_type(self) -> str:
+        """从课题 ID 命名规则解析项目类型。
+
+        命名规则：{项目类型}-{课题名称}-{日期}
+        """
+        # 优先从 lifecycle 状态读取
+        lifecycle_path = proposals_root_lifecycle = (
+            PROJECT_ROOT / "research_proposals" / "_lifecycle.json"
+        )
+        if lifecycle_path.exists():
+            try:
+                lc_state = json.loads(lifecycle_path.read_text(encoding="utf-8"))
+                prop = lc_state.get("proposals", {}).get(self.proposal_id, {})
+                if prop.get("project_type"):
+                    return prop["project_type"]
+            except Exception:
+                pass
+        # 从 ID 前缀解析
+        for ptype in ["general", "key", "major"]:
+            if self.proposal_id.startswith(ptype + "-"):
+                return ptype
+        return "general"
 
     # ------------------------------------------------------------------
     # 已有 proposal 导入（增量优化模式）
@@ -608,6 +646,10 @@ class HermesPipeline:
             research_ctx = self._build_research_context_for_writing()
             if research_ctx:
                 prompt += research_ctx
+            # v6.6.0 按项目类型注入撰写模板和质量标准
+            type_ctx = self._build_project_type_context()
+            if type_ctx:
+                prompt += type_ctx
         if extra_context:
             prompt += f"\n\n=== 额外上下文 ===\n{extra_context}\n"
 
@@ -858,6 +900,71 @@ class HermesPipeline:
         lines.append("\n请在撰写时引用这些报告中的论文，确保引文准确、时效性强。")
 
         return "\n\n=== 针对性检索参考 ===\n\n" + "\n".join(lines) + "\n"
+
+    def _build_project_type_context(self) -> str:
+        """按项目类型构建撰写模板和质量标准上下文（v6.6.0）。
+
+        从 memory/nsfc-standards.json 读取对应项目类型的：
+        - 撰写模板（章节结构、子节、写作提示）
+        - 质量标准（评审维度权重、质量阈值）
+        - 评审清单
+
+        让 writer/critic 按项目类型标准工作。
+        """
+        standards_path = PROJECT_ROOT / "memory" / "nsfc-standards.json"
+        if not standards_path.exists():
+            return ""
+
+        try:
+            standards = json.loads(standards_path.read_text(encoding="utf-8"))
+        except Exception as e:
+            if _log:
+                _log.error(f"_build_project_type_context 读取标准失败: {e}")
+            return ""
+
+        ptype = self.project_type
+        templates = standards.get("proposal_templates", {})
+        template = templates.get(ptype, {})
+        project_types_cfg = standards.get("project_types", {})
+        type_cfg = project_types_cfg.get(ptype, {})
+
+        if not template and not type_cfg:
+            return ""
+
+        lines = [f"\n📋 项目类型：{ptype}（{type_cfg.get('name_cn', '')}）"]
+
+        # 撰写模板
+        if template:
+            lines.append(f"正文结构：{template.get('_structure', '')}")
+            lines.append(f"页数限制：{template.get('_page_limit', '不限')}")
+            lines.append("\n章节结构：")
+            for sec in template.get("sections", []):
+                lines.append(f"  {sec['title']}")
+                lines.append(f"    要求：{sec.get('requirement', '')}")
+                for sub in sec.get("subsections", []):
+                    lines.append(f"    - {sub}")
+                if sec.get("writing_tips"):
+                    lines.append(f"    写作提示：{sec['writing_tips']}")
+
+        # 评审维度权重
+        eval_focus = type_cfg.get("evaluation_focus", {})
+        if eval_focus:
+            lines.append("\n评审维度权重：")
+            for dim, weight in eval_focus.items():
+                lines.append(f"  {dim}: {weight}")
+
+        # 质量阈值
+        threshold = type_cfg.get("quality_threshold", {})
+        if threshold:
+            lines.append(f"\n质量阈值：综合分≥{threshold.get('min_overall_score', '?')}, "
+                         f"high问题≤{threshold.get('max_high_issues', '?')}, "
+                         f"medium问题≤{threshold.get('max_medium_issues', '?')}")
+
+        # 方法手册要求
+        lines.append("\n同时生成方法学手册（methodology-manual.md）：申请书重思路，"
+                     "公式推导/参数表/技术路线图等细节放方法学手册。")
+
+        return "\n\n=== 项目类型标准 ===\n" + "\n".join(lines) + "\n"
 
     # ------------------------------------------------------------------
     # 自动化 cron 配置

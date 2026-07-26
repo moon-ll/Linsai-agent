@@ -317,6 +317,18 @@ class ProposalLifecycle:
         target_dir = self.root / "drafts" / proposal_id
         target_dir.mkdir(parents=True, exist_ok=True)
 
+        # 创建标准目录结构（v6.6.0 漏洞2修复）
+        standard_dirs = [
+            "01_direction",
+            "02_literature/targeted-research",
+            "02_topic",
+            "03_question",
+            "04_proposal",
+            "05_review",
+        ]
+        for d in standard_dirs:
+            (target_dir / d).mkdir(parents=True, exist_ok=True)
+
         state_data = {
             "status": "drafts",
             "project_type": project_type,
@@ -333,6 +345,12 @@ class ProposalLifecycle:
             ],
         }
         self._set_proposal_state(proposal_id, state_data)
+
+        # 自动初始化 proposal-brief（v6.6.0 漏洞5修复）
+        try:
+            self.update_proposal_brief(proposal_id)
+        except Exception:
+            pass
 
         if _log:
             _log.info(f"注册 proposal: {proposal_id} type={project_type} → drafts")
@@ -1149,20 +1167,65 @@ class ProposalLifecycle:
         archived_dir = self.root / "archived" / proposal_id
 
         # 写入归档元信息
+        prop_state = self._get_proposal_state(proposal_id) or {}
         meta = {
             "proposal_id": proposal_id,
+            "project_type": prop_state.get("project_type", "general"),
             "archived_at": now_utc(),
             "verdict": verdict,
             "approval_comment": approval_comment,
+            "final_score": prop_state.get("last_score", 0),
+            "optimization_rounds": prop_state.get("optimization_rounds", 0),
             "final_files": [str(f.relative_to(archived_dir)) for f in archived_dir.rglob("*.md")],
         }
         meta_path = archived_dir / "_archive-meta.json"
         save_json(meta_path, meta)
 
-        if _log:
-            _log.info(f"归档 {proposal_id}: {len(meta['final_files'])} 个文件")
+        # 纳入知识库（v6.6.0 漏洞4修复）
+        kb_result = self._integrate_into_knowledge_base(proposal_id, archived_dir, meta)
 
-        return {"success": True, "archived_dir": str(archived_dir), "meta": meta}
+        if _log:
+            _log.info(f"归档 {proposal_id}: {len(meta['final_files'])} 个文件, 知识库: {kb_result.get('success', False)}")
+
+        return {"success": True, "archived_dir": str(archived_dir), "meta": meta, "knowledge_base": kb_result}
+
+    def _integrate_into_knowledge_base(
+        self, proposal_id: str, archived_dir: Path, meta: Dict[str, Any]
+    ) -> Dict[str, Any]:
+        """将归档课题纳入知识库，供后续新课题引用。
+
+        在 knowledge/wiki/projects/ 下创建课题索引，
+        提取核心信息（科学问题/创新点/方法）供新课题发现和引用。
+        """
+        try:
+            kb_dir = PROJECT_ROOT / "knowledge" / "wiki" / "projects"
+            kb_dir.mkdir(parents=True, exist_ok=True)
+
+            # 提取课题核心信息
+            title = self._extract_proposal_title(archived_dir)
+            core_questions = self._extract_core_questions(archived_dir)
+            innovations = self._extract_innovations(archived_dir)
+
+            # 创建知识库索引文件
+            kb_entry = {
+                "proposal_id": proposal_id,
+                "title": title,
+                "project_type": meta.get("project_type", "general"),
+                "archived_at": meta.get("archived_at", ""),
+                "final_score": meta.get("final_score", 0),
+                "core_questions": core_questions,
+                "innovations": innovations,
+                "archived_path": str(archived_dir.relative_to(PROJECT_ROOT)),
+            }
+            kb_path = kb_dir / f"{proposal_id}.json"
+            save_json(kb_path, kb_entry)
+
+            if _log:
+                _log.info(f"知识库索引: {kb_path.name}")
+
+            return {"success": True, "kb_path": str(kb_path.relative_to(PROJECT_ROOT))}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
 
     # ------------------------------------------------------------------
     # cron 自动驱动（多 cron 分解架构，v6.5.2）
