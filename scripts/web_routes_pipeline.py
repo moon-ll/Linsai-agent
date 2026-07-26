@@ -149,6 +149,15 @@ _PIPELINE_ROUTES_RAW = [
     # ---- PUT ----
     ("PUT", r"^/api/pipeline/([^/]+)/proposal/sections/([^/]+)$", "_pl_put_section"),
     ("PUT", r"^/api/pipeline/([^/]+)/methodology/([^/]+)$", "_pl_put_methodology_update"),
+
+    # ---- Hermes 驱动管线（v6.4.1）----
+    ("GET", r"^/api/pipeline/hermes/proposals$", "_pl_hermes_list_importable"),
+    ("GET", r"^/api/pipeline/hermes/([^/]+)/status$", "_pl_hermes_status"),
+    ("GET", r"^/api/pipeline/hermes/([^/]+)/check/([^/]+)$", "_pl_hermes_check_stage"),
+    ("POST", r"^/api/pipeline/hermes/([^/]+)/import$", "_pl_hermes_import"),
+    ("POST", r"^/api/pipeline/hermes/([^/]+)/dispatch/([^/]+)$", "_pl_hermes_dispatch"),
+    ("POST", r"^/api/pipeline/hermes/([^/]+)/run$", "_pl_hermes_run"),
+    ("POST", r"^/api/pipeline/hermes/([^/]+)/cron$", "_pl_hermes_setup_cron"),
 ]
 
 # 预编译正则
@@ -1283,6 +1292,119 @@ class PipelineRoutesMixin:
         }
         self._pipeline_save_sections(proposal_id, data)
         self._send_json({"status": "ok", "data": sections[section_name]})
+
+    # ==================================================================
+    # Hermes 驱动管线 handlers（v6.4.1）
+    # ==================================================================
+
+    def _pl_hermes_list_importable(self, path, parsed, match):
+        """列出可导入的已有 proposal（hermes_workspace）"""
+        try:
+            from hermes_pipeline import HermesPipeline
+            pipe = HermesPipeline("__tmp__")
+            proposals = pipe.list_importable_proposals()
+            import shutil
+            shutil.rmtree(pipe.proposal_dir, ignore_errors=True)
+            self._send_json({"status": "ok", "proposals": proposals})
+        except ImportError:
+            self._send_json({"error": "hermes_pipeline 模块不可用"}, 500)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _pl_hermes_status(self, path, parsed, match):
+        """获取 hermes 管线状态"""
+        proposal_id = match.group(1)
+        try:
+            from hermes_pipeline import HermesPipeline
+            pipe = HermesPipeline(proposal_id)
+            status = pipe.get_status()
+            self._send_json({"status": "ok", "data": status})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _pl_hermes_check_stage(self, path, parsed, match):
+        """检查指定阶段的产物状态"""
+        proposal_id, stage_str = match.group(1), match.group(2)
+        try:
+            stage = int(stage_str)
+            from hermes_pipeline import HermesPipeline
+            pipe = HermesPipeline(proposal_id)
+            result = pipe.check_stage(stage)
+            self._send_json({"status": "ok", "data": result})
+        except ValueError:
+            self._send_json({"error": f"非法阶段编号: {stage_str}"}, 400)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _pl_hermes_import(self, path, parsed, body, match):
+        """从 hermes_workspace 导入已有 proposal
+
+        body 必填：source_name（hermes_workspace/research_proposals/ 下的目录名）
+        body 可选：max_files（最大导入文件数，默认 50）
+        """
+        proposal_id = match.group(1)
+        if not body or "source_name" not in body:
+            self._send_json({"error": "缺少 source_name 字段"}, 400)
+            return
+        source_name = body["source_name"]
+        max_files = body.get("max_files", 50)
+        try:
+            from hermes_pipeline import HermesPipeline
+            pipe = HermesPipeline(proposal_id)
+            result = pipe.import_existing_proposal(source_name, max_files=max_files)
+            self._send_json({"status": "ok", "data": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _pl_hermes_dispatch(self, path, parsed, body, match):
+        """派活指定阶段给 hermes profile
+
+        body 可选：extra_context, timeout
+        """
+        proposal_id, stage_str = match.group(1), match.group(2)
+        try:
+            stage = int(stage_str)
+            extra_context = (body or {}).get("extra_context", "")
+            timeout = (body or {}).get("timeout", 600)
+            from hermes_pipeline import HermesPipeline
+            pipe = HermesPipeline(proposal_id)
+            result = pipe.dispatch_stage(stage, extra_context=extra_context, timeout=timeout)
+            self._send_json({"status": "ok", "data": result})
+        except ValueError:
+            self._send_json({"error": f"非法阶段编号: {stage_str}"}, 400)
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _pl_hermes_run(self, path, parsed, body, match):
+        """一键执行 hermes 全链路
+
+        body 可选：timeout_per_stage（每阶段超时，默认 600s）
+        """
+        proposal_id = match.group(1)
+        timeout_per_stage = (body or {}).get("timeout_per_stage", 600)
+        try:
+            from hermes_pipeline import HermesPipeline
+            pipe = HermesPipeline(proposal_id)
+            result = pipe.run_pipeline(timeout_per_stage=timeout_per_stage)
+            self._send_json({"status": "ok", "data": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _pl_hermes_setup_cron(self, path, parsed, body, match):
+        """配置 hermes cron 自动触发
+
+        body 可选：schedule（cron 表达式，默认每周一 09:00）, deliver
+        """
+        proposal_id = match.group(1)
+        schedule = (body or {}).get("schedule", "0 9 * * 1")
+        deliver = (body or {}).get("deliver", "local")
+        try:
+            from hermes_pipeline import HermesPipeline
+            pipe = HermesPipeline(proposal_id)
+            result = pipe.setup_cron(schedule=schedule, deliver=deliver)
+            self._send_json({"status": "ok", "data": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
 
 
 # ---------------------------------------------------------------------------

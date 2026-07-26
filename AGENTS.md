@@ -622,6 +622,13 @@ LinSai-CoPilot/
 - ✅ **双引擎共存** — hermes_pipeline（主引擎，智能高）+ pipeline_orchestrator（降级引擎，离线可用）
 - ✅ **测试** — hermes_pipeline 自检 6/6 + agent_team 自检 + 单元 116/116，零回归
 
+### Phase 17.1：Hermes 管线完善（v6.4.1）【✅ 已完成】
+- ✅ **pipeline-runner 独立 profile** — 新建 hermes profile 专职管线编排，与简报子系统隔离
+- ✅ **已有 proposal 导入** — `import_existing_proposal()` 从 hermes_workspace 选择性导入高价值文件（草稿/精读报告/立项依据）
+- ✅ **增量优化模式** — `_build_incremental_context()` 每阶段自动构建上下文（已有产物 + 导入内容 + 上游依赖），agent 先读取再优化
+- ✅ **Web API 路由** — 新增 7 个 `/api/pipeline/hermes/` 路由（导入/状态/检查/派活/执行/cron）
+- ✅ **测试** — 自检 6/6 + 导入 44 文件 + 单元 116/116 + Web CI 170/170，零回归
+
 ---
 
 ## 开发约定
@@ -937,7 +944,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.4.0*
+*版本：6.4.1*
 *日期：2026-07-26*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

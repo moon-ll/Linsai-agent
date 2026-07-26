@@ -100,13 +100,14 @@ STAGES = [
 ]
 
 # 阶段 → hermes profile 映射
+# pipeline-runner 是管线编排 profile，负责协调；具体执行委派给专业 profile
 STAGE_PROFILE_MAP: Dict[int, str] = {
-    0: "linsai",
-    1: "researcher",
-    2: "analyst",
-    3: "analyst",
-    4: "writer",
-    5: "reviewer",
+    0: "pipeline-runner",   # 方向校准：编排器自己读取画像执行
+    1: "researcher",        # 文献调研：专业检索 profile
+    2: "analyst",           # 缺口分析：专业分析 profile
+    3: "analyst",           # 科学问题：专业分析 profile
+    4: "writer",            # 申请书撰写：专业写作 profile
+    5: "reviewer",          # 质量自检：专业审阅 profile
 }
 
 # 阶段 → 预期产物文件（相对于 proposal_dir）
@@ -220,6 +221,184 @@ class HermesPipeline:
         self.state_path = self.proposal_dir / "00_pipeline" / "hermes-pipeline-state.json"
         self.proposal_dir.mkdir(parents=True, exist_ok=True)
         (self.proposal_dir / "00_pipeline").mkdir(parents=True, exist_ok=True)
+        # 已有 proposal 来源（hermes_workspace 下的历史项目）
+        self._hermes_proposals = Path.home() / "Desktop" / "hermes_workspace" / "research_proposals"
+
+    # ------------------------------------------------------------------
+    # 已有 proposal 导入（增量优化模式）
+    # ------------------------------------------------------------------
+
+    def list_importable_proposals(self) -> List[Dict[str, Any]]:
+        """列出 hermes_workspace 中可导入的已有 proposal。
+
+        Returns:
+            [{id, name, file_count, latest_mtime, has_drafts, has_reports}]
+        """
+        results = []
+        if not self._hermes_proposals.exists():
+            return results
+        for d in sorted(self._hermes_proposals.iterdir()):
+            if not d.is_dir() or d.name.startswith("."):
+                continue
+            files = list(d.rglob("*.md"))
+            has_drafts = any("draft" in str(f).lower() or "nsfc" in f.name.lower() for f in files)
+            has_reports = any("report" in f.name.lower() or "精读" in f.name for f in files)
+            latest_mtime = max((f.stat().st_mtime for f in files), default=0)
+            results.append({
+                "id": d.name,
+                "name": d.name,
+                "file_count": len(files),
+                "latest_mtime": latest_mtime,
+                "has_drafts": has_drafts,
+                "has_reports": has_reports,
+            })
+        return results
+
+    def import_existing_proposal(
+        self,
+        source_name: str,
+        max_files: int = 50,
+    ) -> Dict[str, Any]:
+        """从 hermes_workspace 导入已有 proposal 作为管线初始内容。
+
+        选择性导入最有价值的文件（申请书草稿、精读报告、立项依据、课题方向），
+        避免全量复制（日报等历史文件意义不大）。
+
+        Args:
+            source_name: hermes_workspace/research_proposals/ 下的目录名
+            max_files: 最大导入文件数
+
+        Returns:
+            {imported, skipped, detail}
+        """
+        source_dir = self._hermes_proposals / source_name
+        if not source_dir.exists():
+            return {"imported": 0, "skipped": 0, "error": f"源目录不存在: {source_dir}"}
+
+        # 导入策略：按价值优先级选择文件
+        priority_patterns = [
+            ("drafts/", "申请书草稿"),
+            ("reports/", "精读报告"),
+            ("立项依据", "立项依据"),
+            ("candidate_directions", "候选方向"),
+            ("candidate_pool", "候选池"),
+            ("topics/", "课题方向"),
+            ("knowledge_base/", "知识库"),
+            ("references/notes/", "论文笔记"),
+        ]
+
+        imported_files = []
+        for pattern, label in priority_patterns:
+            matches = list(source_dir.rglob(f"*{pattern}*"))
+            for f in matches:
+                if f.is_file() and f.suffix == ".md":
+                    if len(imported_files) >= max_files:
+                        break
+                    # 计算目标路径：保留相对结构
+                    rel = f.relative_to(source_dir)
+                    target = self.proposal_dir / "00_imported" / rel
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    try:
+                        target.write_text(f.read_text(encoding="utf-8"), encoding="utf-8")
+                        imported_files.append({
+                            "source": str(rel),
+                            "target": str(target.relative_to(self.proposal_dir)),
+                            "label": label,
+                        })
+                    except Exception:
+                        pass
+
+        # 记录导入元信息
+        import_meta = {
+            "source": source_name,
+            "source_path": str(source_dir),
+            "imported_at": now_utc(),
+            "file_count": len(imported_files),
+            "files": imported_files[:20],  # 保留前 20 条记录
+        }
+        meta_path = self.proposal_dir / "00_imported" / "import-meta.json"
+        meta_path.parent.mkdir(parents=True, exist_ok=True)
+        save_json(meta_path, import_meta)
+
+        if _log:
+            _log.info(f"导入 {source_name}: {len(imported_files)} 个文件")
+
+        return {
+            "imported": len(imported_files),
+            "skipped": max(0, max_files - len(imported_files)),
+            "detail": import_meta,
+        }
+
+    def _build_incremental_context(self, stage: int) -> str:
+        """为指定阶段构建增量优化上下文（读取已有产物 + 导入内容）。
+
+        如果该阶段产物已存在，提示 agent 做增量优化而非从零生成。
+        如果有导入内容，提供相关文件路径供 agent 参考。
+
+        Returns:
+            附加到 prompt 的上下文字符串
+        """
+        context_parts = []
+
+        # 检查当前阶段是否已有产物（增量优化模式）
+        artifacts = STAGE_ARTIFACTS.get(stage, [])
+        existing_artifacts = []
+        for rel_path in artifacts:
+            full = self.proposal_dir / rel_path
+            if full.exists() and full.stat().st_size >= 50:
+                existing_artifacts.append(rel_path)
+
+        if existing_artifacts:
+            context_parts.append(
+                "⚠ 增量优化模式：以下产物已存在，请先读取理解，再融合最新信息优化，不要推倒重来：\n"
+                + "\n".join(f"  - {p}" for p in existing_artifacts)
+            )
+
+        # 检查导入的历史内容
+        import_dir = self.proposal_dir / "00_imported"
+        if import_dir.exists():
+            imported_files = list(import_dir.rglob("*.md"))
+            if imported_files:
+                # 按阶段相关性筛选
+                stage_keywords = {
+                    0: ["方向", "direction", "candidate_directions"],
+                    1: ["论文", "paper", "精读", "references"],
+                    2: ["缺口", "gap", "竞争", "landscape"],
+                    3: ["问题", "question", "topics"],
+                    4: ["申请书", "draft", "nsfc", "立项依据"],
+                    5: ["验收", "review", "检查"],
+                }
+                keywords = stage_keywords.get(stage, [])
+                relevant = [
+                    f for f in imported_files
+                    if any(kw in str(f).lower() or kw in f.name.lower() for kw in keywords)
+                ][:10]  # 最多 10 个相关文件
+                if relevant:
+                    context_parts.append(
+                        "📁 已有历史内容可供参考（来自之前的工作积累）：\n"
+                        + "\n".join(
+                            f"  - {f.relative_to(self.proposal_dir)}"
+                            for f in relevant
+                        )
+                    )
+
+        # 检查上游阶段产物（链路依赖）
+        if stage > 0:
+            upstream_artifacts = STAGE_ARTIFACTS.get(stage - 1, [])
+            existing_upstream = []
+            for rel_path in upstream_artifacts:
+                full = self.proposal_dir / rel_path
+                if full.exists() and full.stat().st_size >= 50:
+                    existing_upstream.append(rel_path)
+            if existing_upstream:
+                context_parts.append(
+                    "📋 上游阶段产物（本阶段的输入）：\n"
+                    + "\n".join(f"  - {p}" for p in existing_upstream)
+                )
+
+        if context_parts:
+            return "\n\n=== 增量上下文 ===\n\n" + "\n\n".join(context_parts) + "\n"
+        return ""
 
     # ------------------------------------------------------------------
     # 状态管理
@@ -420,6 +599,10 @@ class HermesPipeline:
         profile = STAGE_PROFILE_MAP[stage]
         prompt_template = STAGE_PROMPTS.get(stage, "")
         prompt = prompt_template.format(proposal_dir=str(self.proposal_dir))
+        # v6.4.1 增量优化：自动追加已有产物 + 导入内容 + 上游依赖的上下文
+        incremental_ctx = self._build_incremental_context(stage)
+        if incremental_ctx:
+            prompt += incremental_ctx
         if extra_context:
             prompt += f"\n\n=== 额外上下文 ===\n{extra_context}\n"
 
@@ -578,7 +761,7 @@ class HermesPipeline:
         env.pop("PYTHONPATH", None)
 
         cmd = [
-            "hermes", "--profile", "linsai", "cron", "create",
+            "hermes", "--profile", "pipeline-runner", "cron", "create",
             schedule,
             prompt,
             "--name", f"研究管线自动执行-{self.proposal_id}",
@@ -626,13 +809,13 @@ def _self_check() -> None:
     assert len(STAGE_ARTIFACTS) == 6
     assert len(STAGE_PROMPTS) == 6
     for i in range(6):
-        assert STAGE_PROFILE_MAP[i] in ("linsai", "researcher", "analyst", "writer", "reviewer")
+        assert STAGE_PROFILE_MAP[i] in ("pipeline-runner", "linsai", "researcher", "analyst", "writer", "reviewer")
         assert "{proposal_dir}" in STAGE_PROMPTS[i]
     print("✓")
 
     # 2. profile 映射合理性
     print("[2] profile 映射...", end=" ")
-    assert STAGE_PROFILE_MAP[0] == "linsai"       # 方向校准 → 总控
+    assert STAGE_PROFILE_MAP[0] == "pipeline-runner"  # 方向校准 → 编排器
     assert STAGE_PROFILE_MAP[1] == "researcher"   # 文献调研 → researcher
     assert STAGE_PROFILE_MAP[4] == "writer"       # 申请书 → writer
     assert STAGE_PROFILE_MAP[5] == "reviewer"     # 自检 → reviewer
@@ -684,6 +867,11 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--run", metavar="PROPOSAL_ID", help="一键执行全链路")
     parser.add_argument("--setup-cron", nargs=2, metavar=("PROPOSAL_ID", "SCHEDULE"),
                         help="配置 cron 自动触发")
+    parser.add_argument("--list-importable", action="store_true",
+                        help="列出可导入的已有 proposal")
+    parser.add_argument("--import", nargs=2, metavar=("PROPOSAL_ID", "SOURCE_NAME"),
+                        dest="import_proposal",
+                        help="从 hermes_workspace 导入已有 proposal 作为初始内容")
     args = parser.parse_args(argv)
 
     if args.self_check:
@@ -726,6 +914,28 @@ def main(argv: Optional[List[str]] = None) -> int:
         result = pipe.setup_cron(schedule=schedule)
         print(f"cron 配置: {result}")
         return 0 if result.get("success") else 1
+
+    if args.list_importable:
+        pipe = HermesPipeline("__tmp__")
+        proposals = pipe.list_importable_proposals()
+        print(f"=== 可导入的已有 proposal（{len(proposals)} 个）===")
+        for p in proposals:
+            drafts = "✓草稿" if p["has_drafts"] else ""
+            reports = "✓报告" if p["has_reports"] else ""
+            print(f"  {p['name']:40s} {p['file_count']:4d} 文件  {drafts} {reports}")
+        # 清理临时目录
+        import shutil
+        shutil.rmtree(pipe.proposal_dir, ignore_errors=True)
+        return 0
+
+    if args.import_proposal:
+        proposal_id, source_name = args.import_proposal
+        pipe = HermesPipeline(proposal_id)
+        result = pipe.import_existing_proposal(source_name)
+        print(f"导入结果: 导入 {result.get('imported', 0)} 个文件")
+        if result.get("error"):
+            print(f"错误: {result['error']}")
+        return 0 if result.get("imported", 0) > 0 else 1
 
     parser.print_help()
     return 0

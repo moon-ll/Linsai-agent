@@ -1,5 +1,55 @@
 # 变更记录
 
+## v6.4.1 - 2026-07-26 Hermes 管线完善：独立 profile + 已有 proposal 导入 + 增量优化 + Web API
+
+### v6.4.1 核心变更
+- **pipeline-runner 独立 profile** — 新建 hermes profile 专职管线编排
+  - SOUL.md 定义角色：研究管线编排器，协调六阶段，委派给专业 profile
+  - config.yaml 复制自 analyst（配置完整），与简报子系统隔离
+  - 阶段0 方向校准改由 pipeline-runner 执行（不再占用 linsai）
+  - 全自动链路 cron 在 pipeline-runner 上创建，不干扰 linsai 的 4 个简报 cron
+- **已有 proposal 导入** — `hermes_pipeline.py` 新增 `import_existing_proposal()`
+  - 从 hermes_workspace/research_proposals/ 选择性导入高价值文件（草稿/精读报告/立项依据/课题方向）
+  - 按优先级模式筛选：drafts > reports > 立项依据 > candidate_directions > topics > knowledge_base
+  - 避免全量复制（日报等历史文件意义不大），默认最多 50 文件
+  - 导入元信息记录到 `00_imported/import-meta.json`
+  - 测试：从 2026_NSFG_strongfield_ultrafast 成功导入 44 个文件
+- **增量优化模式** — `hermes_pipeline.py` 新增 `_build_incremental_context()`
+  - 每阶段派活前自动构建上下文：已有产物 + 导入内容 + 上游依赖
+  - 产物已存在时提示 agent"先读取理解，再融合最新信息优化，不推倒重来"
+  - 导入内容按阶段相关性筛选（方向/论文/缺口/问题/申请书/验收）
+  - 上游产物作为本阶段输入自动提示
+- **Web API 路由** — `web_routes_pipeline.py` 新增 7 个 hermes 管线路由
+  - `GET /api/pipeline/hermes/proposals` — 列出可导入的已有 proposal
+  - `GET /api/pipeline/hermes/{id}/status` — hermes 管线状态
+  - `GET /api/pipeline/hermes/{id}/check/{stage}` — 阶段产物检查
+  - `POST /api/pipeline/hermes/{id}/import` — 导入已有 proposal
+  - `POST /api/pipeline/hermes/{id}/dispatch/{stage}` — 派活指定阶段
+  - `POST /api/pipeline/hermes/{id}/run` — 一键执行全链路
+  - `POST /api/pipeline/hermes/{id}/cron` — 配置 cron 自动触发
+
+### v6.4.1 测试结果
+- hermes_pipeline 自检：6/6 通过
+- 导入测试：从 2026_NSFG_strongfield_ultrafast 导入 44 文件成功
+- 单元回归：116/116 通过
+- Web CI 回归：170/170 通过（含新增 7 条 hermes 路由）
+- 零回归
+
+### v6.4.1 完整工作流
+```
+1. 用户创建 proposal：POST /api/pipeline/hermes/nsfc-2026-hhg/import
+   → 导入 2026_NSFG_strongfield_ultrafast 的 44 个高价值文件
+
+2. 一键执行：POST /api/pipeline/hermes/nsfc-2026-hhg/run
+   → pipeline-runner 协调六阶段，每阶段委派给专业 profile
+   → 增量优化：读取已有产物 + 导入内容，融合最新信息
+   → 产物检查：每阶段 ≥50 字节才推进
+
+3. 自动化：POST /api/pipeline/hermes/nsfc-2026-hhg/cron
+   → 在 pipeline-runner 上创建 cron job（每周一 09:00）
+   → 与 linsai 的简报 cron 完全隔离
+```
+
 ## v6.4.0 - 2026-07-26 Hermes 驱动的管线架构（CoPilot=操作台，hermes=执行端）
 
 ### v6.4.0 核心架构变更
