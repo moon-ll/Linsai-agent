@@ -783,21 +783,26 @@ class ProposalLifecycle:
         return {"success": True, "archived_dir": str(archived_dir), "meta": meta}
 
     # ------------------------------------------------------------------
-    # cron 自动驱动
+    # cron 自动驱动（多 cron 分解架构，v6.5.2）
     # ------------------------------------------------------------------
 
     def run_cron_sweep(self) -> Dict[str, Any]:
-        """cron 扫描：处理所有 optimizing 区的 proposal，各执行一轮优化。
+        """cron 扫描：逐个处理 optimizing 区的 proposal，各执行一轮优化。
 
-        适用于 pipeline-runner 的每日 cron。
+        容错设计：单个 proposal 失败不影响其他 proposal。
+        持续流转：只要 optimizing 区有 proposal，就不会停转。
         """
         optimizing = self.list_by_status("optimizing")
         if not optimizing:
             if _log:
-                _log.info("cron 扫描: optimizing 区为空，无操作")
-            return {"success": True, "swept": 0, "results": []}
+                _log.info("cron 扫描: optimizing 区为空")
+            return {"success": True, "swept": 0, "results": [], "empty": True}
 
         results = []
+        success_count = 0
+        fail_count = 0
+        advanced_count = 0
+
         for prop in optimizing:
             pid = prop["proposal_id"]
             if _log:
@@ -805,18 +810,186 @@ class ProposalLifecycle:
             try:
                 result = self.optimize_cycle(pid)
                 results.append({"proposal_id": pid, "result": result})
+                success_count += 1
                 # 如果达标，自动移入待校验
                 if result.get("done"):
-                    self.transition(pid, "pending_review", reason=result.get("reason", "达标"))
+                    transition = self.transition(
+                        pid, "pending_review", reason=result.get("reason", "达标")
+                    )
+                    advanced_count += 1
+                    if _log:
+                        _log.info(f"cron 扫描: {pid} 达标 → pending_review")
             except Exception as e:
                 if _log:
                     _log.error(f"cron 扫描 {pid} 失败: {e}")
                 results.append({"proposal_id": pid, "error": str(e)})
+                fail_count += 1
+                # 记录失败到 proposal 状态，但不中断循环
+                self._record_cron_failure(pid, str(e))
 
-        return {"success": True, "swept": len(results), "results": results}
+        return {
+            "success": fail_count < success_count,  # 只要有一个成功就算成功
+            "swept": len(results),
+            "success_count": success_count,
+            "fail_count": fail_count,
+            "advanced_count": advanced_count,
+            "results": results,
+            "empty": False,
+        }
+
+    def _record_cron_failure(self, proposal_id: str, error: str) -> None:
+        """记录 cron 失败到 proposal 状态（不中断循环）。"""
+        try:
+            with file_lock(f"proposal-{proposal_id}"):
+                prop_state = self._get_proposal_state(proposal_id)
+                if prop_state:
+                    failures = prop_state.get("cron_failures", [])
+                    failures.append({"at": now_utc(), "error": error[:200]})
+                    # 只保留最近 5 次失败记录
+                    prop_state["cron_failures"] = failures[-5:]
+                    prop_state["updated_at"] = now_utc()
+                    self._set_proposal_state(proposal_id, prop_state)
+        except Exception:
+            pass
+
+    def run_health_check(self) -> Dict[str, Any]:
+        """健康检查：扫描整个生命周期系统状态，检测异常并报警。
+
+        检查项：
+        1. optimizing 区空了 → 需要新课题或人工确认初稿
+        2. proposal 卡在某个状态太久 → 需要关注
+        3. pending_review 有 proposal → 提醒人工核验
+        4. cron 失败累积 → 需要排查
+        """
+        state = self._load_state()
+        alerts = []
+        stats = {
+            "total": len(state["proposals"]),
+            "by_status": {},
+            "stuck_proposals": [],
+            "pending_human_action": [],
+        }
+
+        for stage in LIFECYCLE_STAGES:
+            count = sum(
+                1 for d in state["proposals"].values() if d.get("status") == stage
+            )
+            stats["by_status"][stage] = count
+
+        # 检查1：optimizing 区为空但 drafts 有 proposal → 需要人工确认
+        if stats["by_status"]["optimizing"] == 0 and stats["by_status"]["drafts"] > 0:
+            drafts = self.list_by_status("drafts")
+            alerts.append({
+                "level": "info",
+                "type": "awaiting_confirmation",
+                "message": f"{len(drafts)} 个初稿等待人工确认思路后进入优化",
+                "proposals": [p["proposal_id"] for p in drafts],
+            })
+
+        # 检查2：整个系统完全空转（没有任何活跃 proposal）
+        active_count = sum(stats["by_status"][s] for s in ["drafts", "optimizing", "pending_review"])
+        if active_count == 0:
+            alerts.append({
+                "level": "warning",
+                "type": "system_idle",
+                "message": "系统完全空转：没有任何活跃 proposal。需要启动新课题或从文献简报中发现方向。",
+            })
+
+        # 检查3：pending_review 有 proposal → 提醒人工核验
+        if stats["by_status"]["pending_review"] > 0:
+            pending = self.list_by_status("pending_review")
+            alerts.append({
+                "level": "info",
+                "type": "pending_review",
+                "message": f"{len(pending)} 个 proposal 等待人工核验",
+                "proposals": [
+                    {"id": p["proposal_id"], "score": p["last_score"],
+                     "rounds": p["optimization_rounds"]}
+                    for p in pending
+                ],
+            })
+
+        # 检查4：proposal 卡在 optimizing 超过阈值
+        for pid, data in state["proposals"].items():
+            if data.get("status") == "optimizing":
+                updated = data.get("updated_at", "")
+                cron_failures = data.get("cron_failures", [])
+                if len(cron_failures) >= 3:
+                    alerts.append({
+                        "level": "error",
+                        "type": "repeated_cron_failure",
+                        "message": f"{pid} 连续失败 {len(cron_failures)} 次，需要人工排查",
+                        "proposal_id": pid,
+                        "last_error": cron_failures[-1].get("error", ""),
+                    })
+
+        return {
+            "healthy": len([a for a in alerts if a["level"] == "error"]) == 0,
+            "alerts": alerts,
+            "stats": stats,
+            "checked_at": now_utc(),
+        }
+
+    def run_daily_orchestrator(self) -> Dict[str, Any]:
+        """每日编排器：一个入口执行全部 cron 任务，各环节独立、容错。
+
+        这是系统的心跳——每天执行一次，确保持续流转。
+        即使某个环节失败，其他环节照常运行。
+
+        执行顺序：
+        1. 健康检查（先发现问题）
+        2. 优化扫描（处理 optimizing 区）
+        3. 再次健康检查（确认结果）
+        """
+        if _log:
+            _log.info("=== 每日编排器启动 ===")
+
+        # 1. 初始健康检查
+        health_before = self.run_health_check()
+
+        # 2. 优化扫描
+        sweep_result = self.run_cron_sweep()
+
+        # 3. 最终健康检查
+        health_after = self.run_health_check()
+
+        # 汇总
+        summary = {
+            "orchestrated_at": now_utc(),
+            "health_before": {
+                "healthy": health_before["healthy"],
+                "alert_count": len(health_before["alerts"]),
+            },
+            "sweep": {
+                "swept": sweep_result.get("swept", 0),
+                "success": sweep_result.get("success_count", 0),
+                "failed": sweep_result.get("fail_count", 0),
+                "advanced": sweep_result.get("advanced_count", 0),
+                "empty": sweep_result.get("empty", False),
+            },
+            "health_after": {
+                "healthy": health_after["healthy"],
+                "alert_count": len(health_after["alerts"]),
+                "alerts": health_after["alerts"],
+            },
+        }
+
+        if _log:
+            _log.info(
+                f"每日编排器完成: "
+                f"扫描{sweep_result.get('swept', 0)}个 "
+                f"成功{sweep_result.get('success_count', 0)} "
+                f"达标{sweep_result.get('advanced_count', 0)} "
+                f"告警{len(health_after['alerts'])}个"
+            )
+
+        return summary
 
     def setup_optimization_cron(self, schedule: str = "0 9 * * *") -> Dict[str, Any]:
-        """在 pipeline-runner 上配置每日自动优化 cron。
+        """在 pipeline-runner 上配置每日编排 cron。
+
+        采用单一编排器入口（run_daily_orchestrator），内部分解为
+        健康检查 + 优化扫描 + 结果确认，各环节独立容错。
 
         Args:
             schedule: cron 表达式（默认每天 09:00）
@@ -825,12 +998,17 @@ class ProposalLifecycle:
             {success, message}
         """
         prompt = (
-            "请执行每日提案优化扫描：\n\n"
-            "1. 运行 `python3 scripts/proposal_lifecycle.py --cron-sweep`\n"
-            "2. 该命令会扫描所有 optimizing 区的 proposal，各执行一轮 writer-critic 对抗\n"
-            "3. 达标的 proposal 自动移入 pending_review\n"
-            "4. 输出扫描结果摘要\n\n"
-            "如果 optimizing 区为空，输出'今日无优化任务'即可。"
+            "请执行每日提案系统编排：\n\n"
+            "1. 运行 `python3 scripts/proposal_lifecycle.py --daily-orchestrate`\n"
+            "2. 该命令会：\n"
+            "   a. 健康检查（检测异常和空转）\n"
+            "   b. 优化扫描（逐个处理 optimizing 区 proposal）\n"
+            "   c. 达标的自动移入待校验\n"
+            "   d. 最终健康检查（确认结果和告警）\n"
+            "3. 输出编排摘要\n\n"
+            "容错说明：单个 proposal 失败不影响其他 proposal。\n"
+            "如果 optimizing 区为空，输出健康检查结果和告警即可。\n"
+            "如果有 pending_review 的 proposal，提醒人工核验。"
         )
 
         env = dict(os.environ)
@@ -840,7 +1018,7 @@ class ProposalLifecycle:
         cmd = [
             "hermes", "--profile", "pipeline-runner", "cron", "create",
             schedule, prompt,
-            "--name", "每日提案优化扫描",
+            "--name", "每日提案系统编排",
             "--deliver", "local",
             "--workdir", str(PROJECT_ROOT),
         ]
@@ -851,7 +1029,7 @@ class ProposalLifecycle:
             if result.returncode == 0:
                 return {
                     "success": True,
-                    "message": f"✓ 优化 cron 已创建: {schedule}",
+                    "message": f"✓ 编排 cron 已创建: {schedule}",
                     "output": result.stdout.strip()[:300],
                 }
             return {"success": False, "message": f"✗ {result.stderr.strip()[:200]}"}
@@ -880,8 +1058,12 @@ def main(argv: Optional[List[str]] = None) -> int:
                         help="审核结论（approve/minor_revision/major_revision/reject/redirect）")
     parser.add_argument("--cron-sweep", action="store_true",
                         help="执行 cron 扫描（扫描 optimizing 区，各执行一轮优化）")
+    parser.add_argument("--health-check", action="store_true",
+                        help="执行健康检查（检测异常和空转）")
+    parser.add_argument("--daily-orchestrate", action="store_true",
+                        help="每日编排（健康检查+优化扫描+结果确认，容错）")
     parser.add_argument("--setup-cron", nargs="?", const="0 9 * * *", metavar="SCHEDULE",
-                        help="配置每日自动优化 cron（默认 0 9 * * *）")
+                        help="配置每日编排 cron（默认 0 9 * * *）")
     args = parser.parse_args(argv)
 
     lc = ProposalLifecycle()
@@ -963,6 +1145,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     if args.cron_sweep:
         result = lc.run_cron_sweep()
         print(f"=== cron 扫描完成: {result.get('swept', 0)} 个 proposal ===")
+        if result.get("empty"):
+            print("  optimizing 区为空")
         for r in result.get("results", []):
             pid = r["proposal_id"]
             if "error" in r:
@@ -972,6 +1156,43 @@ def main(argv: Optional[List[str]] = None) -> int:
                 print(f"  {'✓' if res.get('done') else '◐'} {pid}: "
                       f"轮{res.get('round', '?')} score={res.get('score_after', 0):.2f} "
                       f"{'→ 待校验' if res.get('done') else '继续优化'}")
+        return 0
+
+    if args.health_check:
+        result = lc.run_health_check()
+        status_icon = "🟢" if result["healthy"] else "🔴"
+        print(f"{status_icon} 健康检查: {'健康' if result['healthy'] else '有告警'}")
+        print(f"告警数: {len(result['alerts'])}")
+        for alert in result["alerts"]:
+            level_icon = {"error": "🔴", "warning": "🟡", "info": "🔵"}.get(alert["level"], "⚪")
+            print(f"  {level_icon} [{alert['type']}] {alert['message']}")
+            if "proposals" in alert:
+                for p in alert["proposals"]:
+                    if isinstance(p, dict):
+                        print(f"      - {p.get('id', '?')} score={p.get('score', 0):.2f}")
+                    else:
+                        print(f"      - {p}")
+        print(f"\n状态统计:")
+        for stage, count in result["stats"]["by_status"].items():
+            print(f"  {stage}: {count}")
+        return 0 if result["healthy"] else 1
+
+    if args.daily_orchestrate:
+        result = lc.run_daily_orchestrator()
+        print("=== 每日编排完成 ===")
+        sweep = result.get("sweep", {})
+        print(f"优化扫描: {sweep.get('swept', 0)}个 "
+              f"(成功{sweep.get('success', 0)} 失败{sweep.get('failed', 0)} "
+              f"达标{sweep.get('advanced', 0)})")
+        if sweep.get("empty"):
+            print("  optimizing 区为空")
+        health = result.get("health_after", {})
+        status = "🟢" if health.get("healthy") else "🔴"
+        print(f"{status} 最终健康: {'健康' if health.get('healthy') else '有告警'} "
+              f"({health.get('alert_count', 0)}个告警)")
+        for alert in health.get("alerts", []):
+            level_icon = {"error": "🔴", "warning": "🟡", "info": "🔵"}.get(alert["level"], "⚪")
+            print(f"  {level_icon} {alert['message']}")
         return 0
 
     if args.setup_cron is not None:
