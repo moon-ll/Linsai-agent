@@ -108,7 +108,7 @@ def _release_kb_busy() -> None:
 
 # P1-12: 后台任务状态跟踪（P2: 自动清理已完成超 1 小时的任务）
 _bg_tasks: Dict[str, dict] = {}
-_bg_tasks_lock = threading.Lock()
+_bg_tasks_lock = threading.RLock()  # v6.7.2: 嵌套调用 _save_bg_tasks() 不会死锁
 _BG_TASK_TTL = 3600  # 1 小时后自动清理
 
 

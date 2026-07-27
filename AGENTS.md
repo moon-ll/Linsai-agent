@@ -67,7 +67,7 @@ LinSai-CoPilot/
 ├── AGENTS.md                  # 本文件。AI 代理必读指南
 ├── README.md                  # 人类可读的项目说明
 ├── CHANGELOG.md               # 变更记录
-├── VERSION                    # 版本号唯一真相源（当前 6.7.1）
+├── VERSION                    # 版本号唯一真相源（当前 6.7.2）
 ├── .env                       # 本地 API 密钥（gitignore，不提交）
 ├── .gitignore                 # Git 忽略规则：用户数据、自动生成文件、敏感配置
 │
@@ -260,7 +260,7 @@ LinSai-CoPilot/
 │   ├── proposal_inspector.py  # v6.2 申请书自检
 │   ├── proposal_writer.py     # v6.2 申请书撰写
 │   ├── proposal_lifecycle.py  # v6.5+ 提案生命周期：四阶段 + writer-critic 对抗优化
-│   ├── rebuild_lifecycle.py   # v6.7.1 基于 critic 报告重建 _lifecycle.json 的修复工具
+│   ├── rebuild_lifecycle.py   # v6.7.1+ 基于 critic 报告重建 _lifecycle.json / 规范化轮次编号
 │   ├── orchestrator.py        # v6.7 林赛总控核心：仪表盘 / 失败分析 / 策略建议 / 链路监控
 │   ├── profile_health.py      # v6.7 profile 健康度：idle/working/blocked/offline + 成功率/耗时
 │   ├── failure_analyzer.py    # v6.7 失败模式分析：8 种模式聚类 + prompt 修正建议
@@ -360,9 +360,14 @@ python3 scripts/memory_reflow.py --reflow
 # 同步 hermes 产出
 python3 scripts/sync_engine.py
 
-# 修复 _lifecycle.json 与实际 critic 报告不一致（v6.7.1）
-python3 scripts/rebuild_lifecycle.py --dry-run  # 预览
-python3 scripts/rebuild_lifecycle.py            # 执行重建
+# 修复 _lifecycle.json 与实际 critic 报告不一致（v6.7.1+）
+python3 scripts/rebuild_lifecycle.py --dry-run              # 预览 lifecycle 重建
+python3 scripts/rebuild_lifecycle.py                        # 执行重建
+python3 scripts/rebuild_lifecycle.py --normalize-rounds     # 重命名 critic 文件为连续编号
+
+# 检查生命周期一致性（v6.7.2）
+python3 -c "from orchestrator import check_lifecycle_consistency; \
+            import json; print(json.dumps(check_lifecycle_consistency(), ensure_ascii=False, indent=2))"
 ```
 
 ### 语法检查
@@ -626,7 +631,7 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 
 ### 版本号规范
 
-- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.7.1`）。
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.7.2`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -637,7 +642,7 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 ```bash
 git init
 git add .
-git commit -m "v6.7.1 初始版本"
+git commit -m "v6.7.2 初始版本"
 ```
 
 - 用户数据（`sessions/`、`memory/`、`tasks/`、`references/`）已被 `.gitignore` 排除，不会意外提交。
@@ -695,7 +700,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.7.1*
+*版本：6.7.2*
 *日期：2026-07-27*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

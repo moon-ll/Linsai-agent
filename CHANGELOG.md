@@ -1,5 +1,48 @@
 # 变更记录
 
+## v6.7.2 - 2026-07-27 链路架构修复（死锁 + 生命周期一致性 + 数据清理）
+
+### 修复内容
+- **后台任务锁死锁修复** — `scripts/web_base.py`
+  - `_bg_tasks_lock` 由 `threading.Lock()` 改为 `threading.RLock()`
+  - 解决 `_save_bg_tasks()` 在 `with _bg_tasks_lock:` 块内被嵌套调用导致的死锁风险
+- **生命周期一致性检查增强** — `scripts/orchestrator.py`
+  - `check_lifecycle_consistency()` 新增轮次缺口检测（如 [1,3] 缺 2）
+  - 新增异常大轮次编号检测（如 round-99）
+  - 新增孤儿 proposal 目录检测（含 research_proposals/ 根目录下非阶段目录）
+  - `_self_check()` 增加对一致性检查的验证
+- **critic 报告轮次规范化工具** — `scripts/rebuild_lifecycle.py`
+  - 新增 `detect_round_anomalies()` 扫描轮次异常
+  - 新增 `normalize_critic_rounds()` 按 mtime 重命名 critic 文件为连续编号
+  - CLI 新增 `--normalize-rounds` / `--normalize-rounds --dry-run`
+- **数据清理**
+  - 运行 `rebuild_lifecycle.py --normalize-rounds` 修复当前数据：
+    - `key-transient-quantum-phase-optical-20260726`: round-3 → round-2
+    - `general-moire-strong-field-probe-20260726`: round-3 → round-1
+    - `general-bsv-driven-hhg-quantum-20260726`: round-99 → round-1
+  - `_lifecycle.json` 已重建，optimization_rounds / score_history 与实际 critic 文件一致
+  - 将未注册的遗留空壳 `2026_NSFG_strongfield_ultrafast` 移至 `research_proposals/archived/`
+
+### 验证结果
+- `python3 -m py_compile scripts/*.py` 通过
+- `python3 scripts/self_test.py --module` 116/116 通过
+- `scripts/web_server.py --self-check` / `profile_health.py --self-check` / `orchestrator.py --self-check` / `rebuild_lifecycle.py --self-check` 全部通过
+- `check_lifecycle_consistency()` 报告：inconsistent_count=0，仅剩 1 个归档孤儿目录（预期内）
+
+## v6.7.1 - 2026-07-27 生命周期状态一致性修复
+
+### 修复内容
+- `scripts/proposal_lifecycle.py`: 移除嵌套锁、增加状态写入校验与重试、critic 返回后等待报告文件稳定、stdout 截断阈值提升至 50KB
+- `scripts/web_base.py` + `scripts/web_routes_system.py`: 后台任务状态持久化到 `memory/background-tasks.json`，异常记录到日志
+- `scripts/profile_health.py`: 修复 duration_s 解析，匹配 v6.7.1 日志格式
+- `scripts/orchestrator.py`: 新增 `check_lifecycle_consistency()` 与 dashboard 集成
+- `scripts/rebuild_lifecycle.py`: 新建基于 critic 报告重建 `_lifecycle.json` 的修复工具
+- `research_proposals/_lifecycle.json`: 已重建，与实际 critic 报告一致
+
+### 验证结果
+- 单元测试 116/116 通过
+- 各模块 `--self-check` 通过
+
 ## v6.7.0 - 2026-07-27 林赛总控能力（监控 + 调优 + 失败分析 + 链路成长）
 
 ### v6.7.0 核心变更

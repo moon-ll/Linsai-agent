@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
-"""rebuild_lifecycle.py — 基于现有 critic 报告重建 _lifecycle.json（v6.7.1 修复工具）
+"""rebuild_lifecycle.py — 基于现有 critic 报告重建 _lifecycle.json（v6.7.2 修复工具）
 
 用途:
     当 _lifecycle.json 中的 score_history / optimization_rounds 与实际 critic 报告
     不一致时，扫描 05_review/critic-round-*.md 重新计算并修复状态文件。
 
+    v6.7.2 新增：检测并修复 critic 报告轮次编号异常（如 [1,3] 缺 2、round-99 等）。
+
 用法:
-    python3 scripts/rebuild_lifecycle.py --dry-run   # 预览变更
-    python3 scripts/rebuild_lifecycle.py             # 执行重建
+    python3 scripts/rebuild_lifecycle.py --dry-run              # 预览 lifecycle 重建
+    python3 scripts/rebuild_lifecycle.py                        # 执行 lifecycle 重建
+    python3 scripts/rebuild_lifecycle.py --normalize-rounds     # 重命名 critic 文件为连续编号
+    python3 scripts/rebuild_lifecycle.py --normalize-rounds --dry-run  # 预览重命名
 
 设计原则:
     - 只修改 score_history / last_score / last_dim_scores / section_passes /
@@ -24,7 +28,7 @@ import shutil
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 from common import now_utc, load_json, save_json, file_lock
 from paths import PROJECT_ROOT
@@ -196,8 +200,118 @@ def rebuild_lifecycle(dry_run: bool = False) -> Dict[str, Any]:
     }
 
 
+def _extract_rounds_from_files(critic_files: List[Path]) -> List[Tuple[int, Path]]:
+    """提取 (round_num, path) 列表并按原编号排序。"""
+    rounds: List[Tuple[int, Path]] = []
+    for f in critic_files:
+        m = re.search(r"critic-round-(\d+)\.md$", f.name)
+        if m:
+            rounds.append((int(m.group(1)), f))
+    return sorted(rounds, key=lambda x: x[0])
+
+
+def detect_round_anomalies(proposals: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """扫描所有 proposal 的 critic 报告，返回轮次异常信息。
+
+    异常类型：
+    - round_gap: 编号不连续（如 1,3 缺 2）
+    - round_outlier: 异常大编号（>50 或 >实际数量+5）
+    """
+    anomalies: List[Dict[str, Any]] = []
+    for pid, state in proposals.items():
+        prop_dir = _find_proposal_dir(pid)
+        if not prop_dir:
+            continue
+        review_dir = prop_dir / "05_review"
+        critic_files = sorted(review_dir.glob("critic-round-*.md")) if review_dir.exists() else []
+        rounds = _extract_rounds_from_files(critic_files)
+        if not rounds:
+            continue
+        nums = [r[0] for r in rounds]
+        expected = list(range(min(nums), max(nums) + 1))
+        missing = [r for r in expected if r not in nums]
+        if missing:
+            anomalies.append({
+                "proposal_id": pid,
+                "type": "round_gap",
+                "detail": f"critic 报告轮次不连续，缺失 {missing}",
+                "round_nums": nums,
+                "missing": missing,
+            })
+        if max(nums) > 50 or max(nums) > len(rounds) + 5:
+            anomalies.append({
+                "proposal_id": pid,
+                "type": "round_outlier",
+                "detail": f"存在异常轮次编号 {max(nums)}（实际仅 {len(rounds)} 份报告）",
+                "round_nums": nums,
+            })
+    return anomalies
+
+
+def normalize_critic_rounds(dry_run: bool = False) -> Dict[str, Any]:
+    """将 critic 报告文件按时间顺序重命名为 sequential 编号，并重建 lifecycle。
+
+    规则：
+    - 按文件 mtime 排序（最早的为 round 1）
+    - 仅当编号不连续或存在异常时才重命名
+    - 重命名后调用 rebuild_lifecycle() 重建状态
+    """
+    if not LIFECYCLE_PATH.exists():
+        return {"error": "_lifecycle.json 不存在"}
+
+    lifecycle = load_json(LIFECYCLE_PATH, default={"proposals": {}})
+    proposals = lifecycle.get("proposals", {})
+
+    renames: List[Dict[str, Any]] = []
+    for pid, state in proposals.items():
+        prop_dir = _find_proposal_dir(pid)
+        if not prop_dir:
+            continue
+        review_dir = prop_dir / "05_review"
+        if not review_dir.exists():
+            continue
+        critic_files = sorted(review_dir.glob("critic-round-*.md"))
+        rounds = _extract_rounds_from_files(critic_files)
+        if not rounds:
+            continue
+
+        nums = [r[0] for r in rounds]
+        expected = list(range(1, len(rounds) + 1))
+        if nums == expected:
+            continue  # 已连续，无需处理
+
+        # 按 mtime 排序后重新编号
+        rounds_by_time = sorted(rounds, key=lambda x: x[1].stat().st_mtime)
+        for new_idx, (_, old_path) in enumerate(rounds_by_time, start=1):
+            new_path = review_dir / f"critic-round-{new_idx}.md"
+            if old_path == new_path:
+                continue
+            renames.append({
+                "proposal_id": pid,
+                "old": str(old_path.relative_to(PROJECT_ROOT)),
+                "new": str(new_path.relative_to(PROJECT_ROOT)),
+            })
+            if not dry_run:
+                # 若目标已存在（理论上不会，因为已连续编号不会冲突），先临时移动
+                if new_path.exists():
+                    temp_path = review_dir / f"critic-round-{new_idx}-tmp.md"
+                    new_path.rename(temp_path)
+                    new_path = review_dir / f"critic-round-{new_idx}.md"
+                old_path.rename(new_path)
+
+    rebuild_result: Dict[str, Any] = {"changes": []}
+    if not dry_run and renames:
+        rebuild_result = rebuild_lifecycle(dry_run=False)
+
+    return {
+        "dry_run": dry_run,
+        "renames": renames,
+        "rebuild": rebuild_result,
+    }
+
+
 def _self_check() -> None:
-    """自检：验证重建逻辑基本可用。"""
+    """自检：验证重建逻辑与异常检测基本可用。"""
     print("=== rebuild_lifecycle._self_check ===")
     result = rebuild_lifecycle(dry_run=True)
     assert "changes" in result
@@ -205,12 +319,21 @@ def _self_check() -> None:
     for c in result["changes"][:3]:
         print(f"  - {c['proposal_id']}: rounds {c['old_rounds']} → {c['new_rounds']}, "
               f"score {c['old_last_score']:.2f} → {c['new_last_score']:.2f}")
+
+    anomalies = detect_round_anomalies(load_json(LIFECYCLE_PATH, default={"proposals": {}}).get("proposals", {}))
+    print(f"  轮次异常: {len(anomalies)} 条")
+    for a in anomalies[:3]:
+        print(f"  - {a['proposal_id']}: {a['type']} -> {a['detail']}")
     print("=== 通过 ===")
 
 
 if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1] == "--self-check":
         _self_check()
+    elif len(sys.argv) > 1 and sys.argv[1] == "--normalize-rounds":
+        dry = len(sys.argv) > 2 and sys.argv[2] == "--dry-run"
+        result = normalize_critic_rounds(dry_run=dry)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
     else:
         dry = len(sys.argv) > 1 and sys.argv[1] == "--dry-run"
         result = rebuild_lifecycle(dry_run=dry)

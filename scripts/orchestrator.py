@@ -215,8 +215,23 @@ def _extract_score_from_text(text: str) -> Optional[float]:
     return None
 
 
+def _extract_round_numbers(critic_files: List[Path]) -> List[int]:
+    """从 critic 文件名中提取轮次编号并排序。"""
+    rounds: List[int] = []
+    for f in critic_files:
+        m = re.search(r"critic-round-(\d+)\.md$", f.name)
+        if m:
+            rounds.append(int(m.group(1)))
+    return sorted(rounds)
+
+
 def check_lifecycle_consistency() -> Dict[str, Any]:
     """检查 _lifecycle.json 与实际 critic 报告产物是否一致。
+
+    v6.7.2 增强：
+    - 检测轮次编号不连续（如 [1,3] 缺 2）
+    - 检测异常大轮次编号（如 99）
+    - 检测 _lifecycle.json 未记录的孤儿 proposal 目录
 
     Returns:
         {
@@ -224,15 +239,39 @@ def check_lifecycle_consistency() -> Dict[str, Any]:
           'inconsistencies': [
             {proposal_id, type, detail, lifecycle_rounds, actual_files}
           ],
-          'summary': {total, inconsistent_count}
+          'summary': {total, inconsistent_count, orphan_dirs}
         }
     """
     inconsistencies: List[Dict[str, Any]] = []
     if not LIFECYCLE_PATH.exists():
-        return {"checked_at": now_utc(), "inconsistencies": [], "summary": {"total": 0}}
+        return {"checked_at": now_utc(), "inconsistencies": [], "summary": {"total": 0, "orphan_dirs": []}}
 
     lifecycle = load_json(LIFECYCLE_PATH, default={"proposals": {}})
     proposals = lifecycle.get("proposals", {})
+
+    # 收集磁盘上所有 proposal 目录（含四阶段子目录 + research_proposals/ 根目录下的孤儿目录）
+    disk_proposal_dirs: Dict[str, Path] = {}
+    if RESEARCH_PROPOSALS_DIR.exists():
+        # 1. 四阶段目录
+        for stage_dir in RESEARCH_PROPOSALS_DIR.iterdir():
+            if (
+                stage_dir.is_dir()
+                and not stage_dir.name.startswith("_")
+                and not stage_dir.name.startswith(".")
+                and stage_dir.name in ["drafts", "optimizing", "pending_review", "archived"]
+            ):
+                for prop_dir in stage_dir.iterdir():
+                    if prop_dir.is_dir():
+                        disk_proposal_dirs[prop_dir.name] = prop_dir
+        # 2. 根目录下非阶段目录的 proposal 目录（如早期遗留的 2026_NSFG_strongfield_ultrafast）
+        for prop_dir in RESEARCH_PROPOSALS_DIR.iterdir():
+            if (
+                prop_dir.is_dir()
+                and not prop_dir.name.startswith("_")
+                and not prop_dir.name.startswith(".")
+                and prop_dir.name not in ["drafts", "optimizing", "pending_review", "archived", ".config"]
+            ):
+                disk_proposal_dirs[prop_dir.name] = prop_dir
 
     for pid, state in proposals.items():
         prop_dir = None
@@ -249,6 +288,8 @@ def check_lifecycle_consistency() -> Dict[str, Any]:
             })
             continue
 
+        disk_proposal_dirs.pop(pid, None)  # 已注册，移除孤儿标记
+
         review_dir = prop_dir / "05_review"
         critic_files = sorted(review_dir.glob("critic-round-*.md")) if review_dir.exists() else []
         actual_rounds = len(critic_files)
@@ -262,6 +303,28 @@ def check_lifecycle_consistency() -> Dict[str, Any]:
                 "lifecycle_rounds": lifecycle_rounds,
                 "actual_files": [f.name for f in critic_files],
             })
+
+        round_nums = _extract_round_numbers(critic_files)
+        if round_nums:
+            # 检测不连续
+            expected = list(range(min(round_nums), max(round_nums) + 1))
+            missing = [r for r in expected if r not in round_nums]
+            if missing:
+                inconsistencies.append({
+                    "proposal_id": pid,
+                    "type": "round_gap",
+                    "detail": f"critic 报告轮次不连续，缺失 {missing}",
+                    "round_nums": round_nums,
+                    "missing": missing,
+                })
+            # 检测异常大编号：最大编号显著大于实际数量，或任意编号超过 50
+            if max(round_nums) > 50 or max(round_nums) > actual_rounds + 5:
+                inconsistencies.append({
+                    "proposal_id": pid,
+                    "type": "round_outlier",
+                    "detail": f"critic 报告存在异常轮次编号 {max(round_nums)}（实际仅 {actual_rounds} 份报告）",
+                    "round_nums": round_nums,
+                })
 
         # 检查 score_history 中 score 为 0 但实际报告有非零评分
         score_history = state.get("score_history", [])
@@ -283,12 +346,24 @@ def check_lifecycle_consistency() -> Dict[str, Any]:
                     })
                     break
 
+    # 孤儿目录：存在但未在 _lifecycle.json 中注册
+    orphan_dirs = []
+    for pid, prop_dir in disk_proposal_dirs.items():
+        # 忽略 .DS_Store 等隐藏文件所在的空目录判断
+        orphan_dirs.append({
+            "proposal_id": pid,
+            "path": str(prop_dir.relative_to(PROJECT_ROOT)),
+            "detail": "磁盘存在但该 proposal 未在 _lifecycle.json 中注册",
+        })
+
     return {
         "checked_at": now_utc(),
         "inconsistencies": inconsistencies,
+        "orphan_dirs": orphan_dirs,
         "summary": {
             "total": len(proposals),
             "inconsistent_count": len(inconsistencies),
+            "orphan_count": len(orphan_dirs),
         },
     }
 
@@ -395,6 +470,11 @@ def _self_check() -> None:
     # 还原
     import proposal_lifecycle as pl
     pl.DEFAULT_STAGGER_SECONDS = 90
+
+    print("--- check_lifecycle_consistency ---")
+    lc = check_lifecycle_consistency()
+    assert "inconsistencies" in lc and "summary" in lc
+    print(f"  total={lc['summary']['total']}, inconsistent={lc['summary']['inconsistent_count']}, orphans={lc['summary'].get('orphan_count', 0)}")
     print("=== 通过 ===")
 
 
