@@ -1,5 +1,31 @@
 # 变更记录
 
+## v6.7.3 - 2026-07-27 导入 hermes workspace 课题雏形并激活全自动链路
+
+### 新增内容
+- **Hermes 课题导入脚本** — `scripts/import_hermes_topics.py`
+  - 扫描 hermes workspace `research_proposals/2026_NSFG_strongfield_ultrafast/topics/`
+  - 将 T1（量子几何）、T2（能谷/莫尔）、T3（能带动力学）、T4（序参量读出）内容映射到标准六阶段目录
+  - 注册新 proposal `general-order-parameter-ultrafast-readout-20260727`
+  - 充实 BSV 驱动 HHG 申请书（覆盖原占位符草稿）
+  - 支持 `--dry-run` / `--import` / `--activate` / `--self-check`
+
+### 数据与链路状态
+- 5 个 proposal 全部迁移到 `optimizing` 区：
+  - `general-quantum-geometry-inversion-20260726`
+  - `general-moire-strong-field-probe-20260726`
+  - `key-transient-quantum-phase-optical-20260726`
+  - `general-bsv-driven-hhg-quantum-20260726`
+  - `general-order-parameter-ultrafast-readout-20260727`
+- 已启动 cron sweep（后台 PID 43658）执行每日全模块对抗
+- 已配置每日编排 cron：`57 8 * * *`（`pipeline-runner` profile）
+- `orchestrator.check_lifecycle_consistency()`：inconsistent_count=0
+
+### 验证结果
+- `python3 -m py_compile scripts/*.py` 通过
+- `python3 scripts/self_test.py --module` 116/116 通过
+- `python3 scripts/import_hermes_topics.py --self-check` 通过
+
 ## v6.7.2 - 2026-07-27 链路架构修复（死锁 + 生命周期一致性 + 数据清理）
 
 ### 修复内容
