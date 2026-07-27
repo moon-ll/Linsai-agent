@@ -1,15 +1,60 @@
 {
   "proposals": {
     "general-quantum-geometry-inversion-20260726": {
-      "status": "optimizing",
+      "status": "pending_review",
       "project_type": "general",
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-07-26T15:12:19Z",
-      "optimization_rounds": 0,
+      "updated_at": "2026-07-27T06:39:13Z",
+      "optimization_rounds": 4,
       "last_score": 0.0,
-      "score_history": [],
+      "score_history": [
+        {
+          "round": 1,
+          "score": 0.58,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T05:58:26Z"
+        },
+        {
+          "round": 2,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "content",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T06:09:38Z"
+        },
+        {
+          "round": 3,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "method",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T06:24:38Z"
+        },
+        {
+          "round": 4,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "full_review",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T06:39:13Z"
+        }
+      ],
       "human_feedback_count": 0,
       "transition_history": [
         {
@@ -22,8 +67,21 @@
           "to": "optimizing",
           "at": "2026-07-26T15:12:19Z",
           "reason": "批量确认思路可行，进入优化"
+        },
+        {
+          "from": "optimizing",
+          "to": "pending_review",
+          "at": "2026-07-27T06:39:13Z",
+          "reason": "连续3轮无显著提升（已通过0/4模块）"
         }
-      ]
+      ],
+      "last_dim_scores": {},
+      "section_passes": {
+        "rationale": false,
+        "content": false,
+        "method": false,
+        "full_review": false
+      }
     },
     "key-transient-quantum-phase-optical-20260726": {
       "status": "optimizing",
@@ -31,10 +89,66 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-26T15:12:19Z",
-      "optimization_rounds": 0,
+      "updated_at": "2026-07-27T11:02:51Z",
+      "optimization_rounds": 5,
       "last_score": 0.0,
-      "score_history": [],
+      "score_history": [
+        {
+          "round": 1,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T10:41:16Z"
+        },
+        {
+          "round": 2,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "content",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T10:41:26Z"
+        },
+        {
+          "round": 3,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "method",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T10:51:31Z"
+        },
+        {
+          "round": 4,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "full_review",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T10:52:23Z"
+        },
+        {
+          "round": 5,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T11:02:51Z"
+        }
+      ],
       "human_feedback_count": 0,
       "transition_history": [
         {
@@ -48,7 +162,17 @@
           "at": "2026-07-26T15:12:19Z",
           "reason": "批量确认思路可行，进入优化"
         }
-      ]
+      ],
+      "assigned_agent": "writer+critic",
+      "writer_profile": "writer",
+      "critic_profile": "critic",
+      "last_dim_scores": {},
+      "section_passes": {
+        "rationale": false,
+        "content": false,
+        "method": false,
+        "full_review": false
+      }
     },
     "general-moire-strong-field-probe-20260726": {
       "status": "optimizing",
@@ -56,10 +180,44 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-26T15:12:19Z",
-      "optimization_rounds": 0,
+      "updated_at": "2026-07-27T10:40:30Z",
+      "optimization_rounds": 3,
       "last_score": 0.0,
-      "score_history": [],
+      "score_history": [
+        {
+          "round": 1,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T10:29:16Z"
+        },
+        {
+          "round": 2,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "content",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T10:29:31Z"
+        },
+        {
+          "round": 3,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "method",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T10:40:30Z"
+        }
+      ],
       "human_feedback_count": 0,
       "transition_history": [
         {
@@ -73,7 +231,16 @@
           "at": "2026-07-26T15:12:19Z",
           "reason": "批量确认思路可行，进入优化"
         }
-      ]
+      ],
+      "assigned_agent": "writer+critic",
+      "writer_profile": "writer",
+      "critic_profile": "critic",
+      "last_dim_scores": {},
+      "section_passes": {
+        "rationale": false,
+        "content": false,
+        "method": false
+      }
     },
     "general-bsv-driven-hhg-quantum-20260726": {
       "status": "optimizing",
@@ -81,10 +248,22 @@
       "source": "expansion",
       "source_detail": "候选4：量子光场驱动的HHG，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-26T15:12:19Z",
-      "optimization_rounds": 0,
+      "updated_at": "2026-07-27T10:26:13Z",
+      "optimization_rounds": 1,
       "last_score": 0.0,
-      "score_history": [],
+      "score_history": [
+        {
+          "round": 1,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-27T10:26:13Z"
+        }
+      ],
       "human_feedback_count": 0,
       "transition_history": [
         {
@@ -98,8 +277,15 @@
           "at": "2026-07-26T15:12:19Z",
           "reason": "批量确认思路可行，进入优化"
         }
-      ]
+      ],
+      "assigned_agent": "writer+critic",
+      "writer_profile": "writer",
+      "critic_profile": "critic",
+      "last_dim_scores": {},
+      "section_passes": {
+        "rationale": false
+      }
     }
   },
-  "updated_at": "2026-07-26T15:12:19Z"
+  "updated_at": "2026-07-27T11:02:51Z"
 }

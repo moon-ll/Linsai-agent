@@ -54,7 +54,7 @@ _SCRIPT_DIR = Path(__file__).parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
-from common import now_utc, load_json, save_json, file_lock
+from common import now_utc, load_json, save_json, file_lock, clean_subprocess_env
 from paths import PROJECT_ROOT
 
 __all__ = [
@@ -801,10 +801,26 @@ class ProposalLifecycle:
             lit_supplement=lit_supplement,  # P1-2
         )
 
-        # 3. 解析新分数
-        score_after = self._extract_score(critic_result)
-        issues = self._extract_issues(critic_result)
-        dim_scores = self._extract_dimension_scores(critic_result)  # P0-2: 多维度
+        # 3. 解析新分数（v6.6.3：优先从 critic 写入的 report_path 文件读取，
+        #    hermes stdout 摘要通常只截取前几行，遗漏末尾的"## 评分"代码块）
+        report_path = prop_dir / "05_review" / f"critic-round-{current_round + 1}.md"
+        if report_path.exists() and report_path.stat().st_size > 100:
+            try:
+                file_content = report_path.read_text(encoding="utf-8")
+                file_result = {"output": file_content}
+                score_after = self._extract_score(file_result)
+                dim_scores = self._extract_dimension_scores(file_result)  # P0-2
+                issues = self._extract_issues(file_result)
+            except Exception:
+                # 回退：使用 hermes stdout 摘要
+                score_after = self._extract_score(critic_result)
+                dim_scores = self._extract_dimension_scores(critic_result)
+                issues = self._extract_issues(critic_result)
+        else:
+            # 文件未生成（critic 未写盘），用 stdout 摘要
+            score_after = self._extract_score(critic_result)
+            dim_scores = self._extract_dimension_scores(critic_result)
+            issues = self._extract_issues(critic_result)
         weakest_dim = self._get_weakest_dimension(dim_scores)
 
         # P1-1: 确定本轮模块 key
@@ -1064,9 +1080,9 @@ class ProposalLifecycle:
 
     def _run_hermes(self, profile: str, prompt: str, timeout: int) -> Dict[str, Any]:
         """执行 hermes oneshot。"""
-        env = dict(os.environ)
-        env.pop("PYTHONHOME", None)
-        env.pop("PYTHONPATH", None)
+        # v6.6.3 修复：TRAE/IDE 注入的 Python 环境变量会让 hermes 内部 Python 启动崩溃，
+        # 必须清理全部 Python 相关变量（不只是 PYTHONHOME/PYTHONPATH）
+        env = clean_subprocess_env()
 
         import time
         cmd = ["hermes", "--profile", profile, "-z", prompt]
@@ -1095,15 +1111,17 @@ class ProposalLifecycle:
         """从 critic 输出中提取综合评分。"""
         output = critic_result.get("output", "")
         import re
-        # 优先匹配 "综合评分：0.85"
+        # 优先匹配 "综合评分：0.85" / "综合分 0.85"（v6.6.3：兼容 GLM-5.2 的简化输出）
         patterns = [
             r"综合评分[：:]\s*(0\.\d+)",
+            r"综合分[：:]?\s*(0\.\d+)",
+            r"overall[\s_]*score[：:\s]+(0\.\d+)",
             r"score[：:]\s*(0\.\d+)",
             r"评分[：:]\s*(0\.\d+)",
-            r"(0\.\d+)\s*/\s*1",
+            r"(0\.\d+)\s*/\s*1(?:\.0+)?\b",  # 0.07 / 1 或 0.07 / 1.00
         ]
         for pattern in patterns:
-            match = re.search(pattern, output)
+            match = re.search(pattern, output, re.IGNORECASE)
             if match:
                 return float(match.group(1))
 
@@ -1128,17 +1146,33 @@ class ProposalLifecycle:
     def _extract_dimension_scores(self, critic_result: Dict[str, Any]) -> Dict[str, float]:
         """从 critic 输出中提取 4 维度分数（P0-2）。
 
+        兼容 v6.6.3 GLM-5.2 输出格式：
+        - `| 创新性（innovation） | 0.05 |` （markdown 表格 + 括号别名）
+        - `创新性：0.85` / `创新性 0.85` / `创新性（innovation） 0.85`
+        - 表格对齐：`| 创新性（innovation） | 0.05 | 主要短板 |`
+
         Returns:
             {innovation, feasibility, rigor, completeness}
         """
         output = critic_result.get("output", "")
         import re
         dims: Dict[str, float] = {}
+        # 收集所有"维度名+分数"对（去重，每个维度只取第一个匹配）
         for cn_name, en_key in self._DIM_MAP.items():
-            pattern = rf"{cn_name}[：:]\s*(0\.\d+)"
-            match = re.search(pattern, output)
-            if match:
-                dims[en_key] = float(match.group(1))
+            if en_key in dims:
+                continue
+            # 多种格式：行内/表格都支持
+            patterns = [
+                rf"\|\s*{cn_name}[（(]?{en_key}[）)]?\s*\|\s*(0\.\d+)",  # | 创新性（innovation） | 0.05 |
+                rf"{cn_name}[（(]{en_key}[）)]\s*[：:|]?\s*(0\.\d+)",   # 创新性（innovation） 0.05
+                rf"{cn_name}[：:]\s*(0\.\d+)",                            # 创新性：0.05
+                rf"{cn_name}\s+(0\.\d+)",                                 # 创新性 0.05
+            ]
+            for pat in patterns:
+                m = re.search(pat, output, re.IGNORECASE)
+                if m:
+                    dims[en_key] = float(m.group(1))
+                    break
         return dims
 
     def _get_weakest_dimension(self, dims: Dict[str, float]) -> str:
@@ -1847,9 +1881,7 @@ class ProposalLifecycle:
             "如果有 pending_review 的 proposal，提醒人工核验。"
         )
 
-        env = dict(os.environ)
-        env.pop("PYTHONHOME", None)
-        env.pop("PYTHONPATH", None)
+        env = clean_subprocess_env()
 
         cmd = [
             "hermes", "--profile", "pipeline-runner", "cron", "create",

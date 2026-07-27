@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LinSai-CoPilot 使用手册 — 林赛协作引擎 v6.6.2</title>
+<title>LinSai-CoPilot 使用手册 — 林赛协作引擎 v6.7.0</title>
 <style>
 @font-face {
   font-family: 'IBMPlexSerif';
@@ -181,6 +181,8 @@ footer p { font-size: 0.85rem; color: var(--muted); }
     <li><a href="#ch9">命令行工具</a></li>
     <li><a href="#ch10">测试与维护</a></li>
     <li><a href="#ch11">常见问题</a></li>
+    <li><a href="#ch12">v6.6.3 调度关键 bug 修复</a></li>
+    <li><a href="#ch13">v6.7.0 林赛总控能力（监控+调优+失败分析+链路成长）</a></li>
   </ol>
 </nav>
 
@@ -609,9 +611,137 @@ python3 scripts/proposal_lifecycle.py --optimize &lt;pid&gt;</code></pre>
 
 </section>
 
+<!-- ==================== Chapter 12: v6.6.3 调度修复 ==================== -->
+<section id="ch12">
+<h2>十二、v6.6.3 调度关键 bug 修复（2026-07-27）</h2>
+
+<h3>12.1 问题描述</h3>
+<p>v6.6.2 文献驱动优化体系上线后，cron 每日扫描在 optimizing 区跑出 4 轮对抗，但所有轮次的 <code>score</code> 和 <code>dim_scores</code> 字段都是空。原因有两层：</p>
+
+<div class="callout accent2">
+  <div class="callout-title">🔍 根因 1：TRAE 集成环境导致 hermes 子进程崩溃</div>
+  <p>TRAE 在 shell 里注入了 <code>PYTHONHOME=.../python@3.13/...</code> 和 <code>PYTHONPATH=.../python@3.13/lib/python3.13/site-packages</code>。当 <code>proposal_lifecycle._call_hermes_oneshot()</code> 通过 <code>subprocess.run(["hermes", ...])</code> 启动 hermes 时：</p>
+  <ol>
+    <li>hermes 内部使用 <code>~/.hermes/hermes-agent/venv/bin/python3</code>（Python 3.11 venv）</li>
+    <li>但宿主的 PYTHONHOME 指向 Python 3.13，hermes 子进程按宿主版本去 <code>lib/python3.11/</code> 找 stdlib</li>
+    <li>hermes venv 里只有它自己的版本（3.11），找不到 3.11 stdlib 中的 <code>encodings</code> 等核心模块</li>
+    <li>子进程启动崩溃：<code>Fatal Python error: init_fs_encoding: No module named 'encodings'</code></li>
+  </ol>
+  <p><strong>结果</strong>：从 cron 第 2 轮开始，所有 hermes 派活都失败，score_history 全是 0.0 / {}。</p>
+</div>
+
+<div class="callout accent2">
+  <div class="callout-title">🔍 根因 2：critic 评分提取正则与 GLM-5.2 输出格式不匹配</div>
+  <p>即使 hermes 派活成功（v6.6.2 测试时已通过），critic 的输出格式与原 <code>_extract_score</code> / <code>_extract_dimension_scores</code> 的正则不匹配：</p>
+  <ul>
+    <li>正则只匹配 <code>综合评分：0.85</code>，但 GLM-5.2 输出 <code>综合分 0.06</code>（少了一个字）</li>
+    <li>维度正则只匹配 <code>创新性：0.05</code>，但 GLM-5.2 输出 markdown 表格 <code>| 创新性（innovation） | 0.05 |</code>（带括号别名）</li>
+  </ul>
+</div>
+
+<h3>12.2 修复方案</h3>
+<p>三项修复：</p>
+
+<ol>
+  <li><strong><code>clean_subprocess_env()</code>（scripts/common.py）</strong> — pop 22 个 Python 变量（PYTHONHOME/PYTHONPATH/PYTHONIOENCODING/PYTHONUTF8/PYTHONBREAKPOINT/PYTHONDONTWRITEBYTECODE 等），保留 PATH/HOME/LANG。三个文件统一调用：<code>proposal_lifecycle._run_hermes</code> / <code>proposal_lifecycle.run_daily_orchestrator</code> / <code>hermes_pipeline._execute_hermes_oneshot</code> / <code>hermes_pipeline.setup_cron</code> / <code>hermes_bridge.cron_control</code> / <code>hermes_bridge.oneshot</code>。</li>
+  <li><strong>评分提取正则扩展</strong> — 支持 <code>综合分</code> / <code>overall_score</code> / <code>0.07 / 1.00</code> 等格式；维度正则支持 markdown 表格 + 括号别名。</li>
+  <li><strong>score_after 优先从文件读取</strong> — hermes stdout 摘要只截取前 8000 字符，遗漏 critic 写在文件末尾的 <code>## 评分</code> 代码块。修复后先读 <code>critic-round-N.md</code>，文件不存在才回退到 stdout 摘要。</li>
+</ol>
+
+<h3>12.3 验证结果</h3>
+<ul>
+  <li><code>clean_subprocess_env</code> 单元测试：22 个 Python 变量全部 pop，PATH/HOME 保留 ✓</li>
+  <li>hermes oneshot 端到端：GLM-5.2 正常返回（之前因污染返回 stderr 崩溃信息） ✓</li>
+  <li>完整 <code>optimize_cycle</code> 链路：critic 评审 + writer 优化 + 报告写入全通，elapsed 600s ✓</li>
+  <li>评分提取：用真实 <code>critic-round-3.md</code>（21148 字节）验证能正确提取 score=0.54 + 4 维度分数 ✓</li>
+</ul>
+
+</section>
+
+<!-- ==================== Chapter 13: 林赛总控能力 ==================== -->
+<section id="ch13">
+<h2>十三、林赛总控能力 v6.7.0（监控+调优+失败分析+链路成长）</h2>
+
+<h3>13.1 核心思想</h3>
+<p>林赛从"方向校准官"升级为<strong>研究管线总控</strong>。四大能力围绕一个核心问题：<em>"系统每天自动运行时，林赛能否发现瓶颈、识别失败、推荐调优？"</em>答案是<strong>四区仪表盘</strong>。</p>
+
+<h3>13.2 四大能力</h3>
+<div class="card-grid">
+  <div class="card">
+    <div class="card-title">📊 跨 Profile 仪表盘</div>
+    <p>7 个 profile（linsai/pipeline-runner/researcher/analyst/writer/critic/reviewer）的实时健康度：状态/成功率/平均耗时/最近错误/建议</p>
+  </div>
+  <div class="card">
+    <div class="card-title">⚠️ 失败模式分析</div>
+    <p>从 linsai.log 聚类 8 个内置失败模式（连续 0 分/草稿空/环境污染/超时/文件缺失/代码 bug/限流/低内容），每个模式关联建议的 prompt 修改</p>
+  </div>
+  <div class="card">
+    <div class="card-title">⚙️ 调度策略自调优</div>
+    <p>基于历史活动自动建议 stagger_seconds / max_rounds / score_threshold / timeout 调整。风险分级 low/medium/high，<strong>仅建议，不自动应用</strong></p>
+  </div>
+  <div class="card">
+    <div class="card-title">🔗 Pipeline 状态机成长</div>
+    <p>监控所有 proposal 的 6 阶段产物质量，自动生成成长建议（质量 &lt; 0.6 的阶段标"待重做"）</p>
+  </div>
+</div>
+
+<h3>13.3 新增模块</h3>
+<div class="table-wrap">
+<table>
+  <tr><th>模块</th><th>路径</th><th>职责</th></tr>
+  <tr><td>orchestrator.py</td><td>scripts/orchestrator.py</td><td>总控核心：compute_dashboard / monitor_pipeline / apply_strategies</td></tr>
+  <tr><td>profile_health.py</td><td>scripts/profile_health.py</td><td>单 profile 健康度：成功率/平均耗时/最近错误</td></tr>
+  <tr><td>failure_analyzer.py</td><td>scripts/failure_analyzer.py</td><td>失败模式聚类 + prompt 修正建议</td></tr>
+  <tr><td>strategy_optimizer.py</td><td>scripts/strategy_optimizer.py</td><td>5 条调优规则 + 风险分级</td></tr>
+  <tr><td>web_routes_orchestrator.py</td><td>scripts/web_routes_orchestrator.py</td><td>Web API 8 条路由</td></tr>
+  <tr><td>orchestrator.js</td><td>web/js/orchestrator.js</td><td>前端总控台（5 个子面板）</td></tr>
+</table>
+</div>
+
+<h3>13.4 Web API 路由</h3>
+<pre><code>GET  /api/orchestrator/dashboard               # 总仪表盘（4 区合一）
+GET  /api/orchestrator/profiles/health         # 7 profile 健康度
+GET  /api/orchestrator/failures/patterns       # 失败模式聚类
+GET  /api/orchestrator/strategies              # 调度策略建议
+GET  /api/orchestrator/pipeline/quality        # 所有 proposal 链路质量
+GET  /api/orchestrator/pipeline/quality/{id}   # 单个 proposal 链路质量
+GET  /api/orchestrator/tuning-log              # 调优历史
+POST /api/orchestrator/strategies/apply        # 应用新策略（人工确认）</code></pre>
+
+<h3>13.5 使用方法</h3>
+<ol>
+  <li>浏览器打开 Web 界面，调用 <code>Orchestrator.open()</code> 打开总控台</li>
+  <li>查看"总仪表盘"快速了解全局状态</li>
+  <li>切到"调度策略"标签 → 看到当前 vs 建议对比 → 点击"应用建议"按钮人工确认</li>
+  <li>切到"失败模式"标签 → 阅读每个模式的 prompt 修正建议 → 手动更新 proposal_lifecycle.py 的对应 prompt</li>
+  <li>切到"链路质量"标签 → 给低质量 proposal 触发重跑</li>
+</ol>
+
+<h3>13.6 调优建议规则</h3>
+<div class="table-wrap">
+<table>
+  <tr><th>触发条件</th><th>建议调整</th></tr>
+  <tr><td>每天派活 &gt; 5 次 且平均耗时 &gt; 500s</td><td>stagger_seconds += 30</td></tr>
+  <tr><td>7 天内超时 &gt; 5 次</td><td>critic/writer timeout × 1.5</td></tr>
+  <tr><td>成功率 &lt; 60%</td><td>max_rounds -= 2（避免重复无效轮次）</td></tr>
+  <tr><td>平均分 &lt; 0.3</td><td>score_threshold -= 0.05（避免大量"无提升退出"）</td></tr>
+  <tr><td>平均分 &gt; 0.7</td><td>score_threshold += 0.05（提升质量门槛）</td></tr>
+</table>
+</div>
+
+<h3>13.7 设计原则</h3>
+<ul>
+  <li><strong>建议模式</strong> — orchestrator 只输出建议，<strong>永远不自动应用</strong>。人工通过 Web API <code>POST /api/orchestrator/strategies/apply</code> 确认。</li>
+  <li><strong>可观测优先</strong> — 4 区仪表盘是所有调优的起点；先看到问题，再调优。</li>
+  <li><strong>模式而非规则</strong> — 失败分析用模式聚类（pattern_id + suggested_prompt_change），让用户/AI 决定如何应用。</li>
+  <li><strong>链路可成长</strong> — <code>monitor_pipeline</code> 自动给低质量产物生成 <code>growth_actions</code>，提示人工或自动重跑。</li>
+</ul>
+
+</section>
+
 <footer>
-  <p>LinSai-CoPilot v6.6.2 · 林赛协作引擎 · 2026-07-27</p>
-  <p>GLM-5.2 + MiniMax-M3 · Hermes 7-Profile Team</p>
+  <p>LinSai-CoPilot v6.7.0 · 林赛协作引擎 · 2026-07-27</p>
+  <p>GLM-5.2 + MiniMax-M3 · Hermes 7-Profile Team · 林赛总控台 v6.7</p>
 </footer>
 
 </div>

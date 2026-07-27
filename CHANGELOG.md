@@ -1,5 +1,73 @@
 # 变更记录
 
+## v6.7.0 - 2026-07-27 林赛总控能力（监控 + 调优 + 失败分析 + 链路成长）
+
+### v6.7.0 核心变更
+- **林赛总控核心模块** — `scripts/orchestrator.py`（400 行）
+  - `compute_dashboard()` — 4 区合一的总仪表盘（profile 健康 + 失败分析 + 策略建议 + 链路质量）
+  - `monitor_pipeline()` — 监控所有 proposal 的 6 阶段产物质量 + 自动生成成长建议
+  - `apply_strategies()` — 建议模式下应用调度策略（人工确认 + tuning-log 记录）
+- **profile 健康度** — `scripts/profile_health.py`（250 行）
+  - 读取 hermes_bridge.list_team_profiles()（status / gateway / heartbeat）
+  - 解析 linsai.log 最近 24h 派活记录（成功率/平均耗时/最近错误）
+  - 派生 4 态：working / idle / blocked / offline
+  - 关联 _lifecycle.json 的 cron_failures
+- **失败模式分析** — `scripts/failure_analyzer.py`（240 行）
+  - 8 个内置模式（score-zero-streak / empty-draft / env-pollution / profile-timeout /
+    file-missing / code-bug / rate-limit / low-content-after-rewrite）
+  - 每个模式关联：occurrences / 涉及 proposals / 建议 prompt 修改 / 预期效果
+  - v6.6.3 的 env-pollution 模式标记为"已修复"
+- **调度策略自调优** — `scripts/strategy_optimizer.py`（220 行）
+  - 5 条调优规则：高频派活 → +stagger / 频繁超时 → +timeout / 成功率低 → -max_rounds /
+    评分低 → -threshold / 评分高 → +threshold
+  - 风险分级：low / medium / high
+  - 仅建议，不自动应用（人工通过 Web API 确认）
+- **Web API 路由** — `scripts/web_routes_orchestrator.py`（220 行，OrchestratorRoutesMixin）
+  - 8 条路由：dashboard / profiles/health / failures/patterns / strategies / pipeline/quality（+id）/
+    tuning-log / strategies/apply
+  - 集成到 web_server.py 的 GET/POST 分派器
+- **前端总控台** — `web/js/orchestrator.js`（432 行）+ `web/css/style.css` 新增 orch-* 样式
+  - 5 个子面板：总仪表盘 / Profile 健康 / 失败模式 / 调度策略 / 链路质量
+  - "应用建议"按钮触发 POST /api/orchestrator/strategies/apply
+  - 调优历史从 /api/orchestrator/tuning-log 实时读取
+- **设计文档** — `docs/linsai-orchestrator-design.md`（260 行）
+
+### v6.7.0 测试结果
+- 4 个新模块 _self_check 全部通过
+- 8 条 Web API 路由集成测试通过
+- orchestrator.compute_dashboard() 端到端测试：4 区数据全部填充
+- profile_health.compute_profile_health()：7 个 profile 全部有状态
+- failure_analyzer.analyze_failures()：检测出 3 次"empty-draft"模式
+- strategy_optimizer.suggest_strategies()：当前无建议（活动数据不足）
+- 0 回归
+
+### v6.7.0 设计原则
+- **建议模式** — orchestrator 只输出建议，人工通过 Web API `POST /api/orchestrator/strategies/apply` 确认
+- **可观测优先** — 4 区仪表盘是所有调优的起点
+- **模式而非规则** — 失败分析用模式聚类（pattern_id + suggested_prompt_change），让用户/AI 决定如何应用
+- **链路可成长** — monitor_pipeline 自动给低质量产物生成 growth_actions，提示人工或自动重跑
+
+## v6.6.3 - 2026-07-27 调度关键 bug 修复
+
+### v6.6.3 核心修复
+- **TRAE 集成环境导致 hermes 子进程崩溃** — 三大模块的环境清理全部从 `pop("PYTHONHOME")/pop("PYTHONPATH")` 改为 `clean_subprocess_env()`
+  - **根因**：TRAE 在 shell 里设了 `PYTHONHOME=.../python@3.13/...`，hermes 用了 venv 内的 python3.11 解释器，被宿主的 PYTHONHOME 误导去 `lib/python3.11/` 找 stdlib，但 hermes venv 只有它自己的版本 → `No module named 'encodings'` → 子进程崩溃
+  - **修复**：`scripts/common.py` 新增 `clean_subprocess_env()`，pop 22 个 Python 相关变量（PYTHONHOME/PYTHONPATH/PYTHONIOENCODING/PYTHONUTF8/PYTHONBREAKPOINT/__PYVENV_LAUNCHER__ 等），保留 PATH/HOME/LANG 等必要变量
+  - **影响范围**：`proposal_lifecycle.py`（_run_hermes + run_daily_orchestrator）、`hermes_pipeline.py`（_execute_hermes_oneshot + setup_cron）、`hermes_bridge.py`（cron_control + oneshot）
+  - **验证**：18:27 之前所有 cron 调用从第 2 轮开始全部失败；修复后 hermes oneshot 100% 跑通（用时 112-655 秒），GLM-5.2 正常返回
+- **critic 评分提取正则扩展** — 兼容 GLM-5.2 的简化输出
+  - 综合评分正则新增 `综合分`、`overall_score`、`0.07 / 1.00` 等格式
+  - 维度分数正则新增 markdown 表格 `| 创新性（innovation） | 0.05 |`、括号别名 `（innovation）` 等格式
+- **score_after 优先从 critic 报告文件读取** — `_extract_score` 不再依赖 hermes stdout 摘要
+  - hermes stdout 摘要只截取前 8000 字符，常遗漏 critic 写在文件末尾的 `## 评分` 代码块
+  - 修复：先读 `critic-round-N.md` 文件内容，文件不存在/空才回退到 stdout 摘要
+
+### v6.6.3 调度验证
+- `clean_subprocess_env` 单元测试：6 个变量全部 pop，PATH/HOME 保留
+- hermes oneshot 端到端：GLM-5.2 返回 `综合评分：0.10` 等评分内容（之前返回的 stdout 因污染为空）
+- 完整 `optimize_cycle` 链路：critic 评审 + writer 优化 + 报告写入全通，elapsed 600s
+- 评分提取：用 critic-round-3.md 真实文件（21148 字节）验证能正确提取 score=0.54 + 4 维度分数
+
 ## v6.6.2 - 2026-07-27 文献驱动优化体系 + GLM-5.2 升级
 
 ### v6.6.2 核心变更

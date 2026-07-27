@@ -157,6 +157,40 @@ def file_sha256(path: Path | str) -> str:
     return h.hexdigest()
 
 
+def clean_subprocess_env(extra: Optional[dict] = None) -> dict:
+    """构造一个干净的子进程环境，避免宿主 Python/TRAE 环境变量污染 hermes 等工具。
+
+    关键场景：TRAE 等 IDE 在 shell 里设置了 PYTHONHOME/PYTHONPATH 指向 IDE 自己的 Python
+    （如 3.13），但 hermes 等工具自带 venv（如 3.11）。当宿主 Python 变量被子进程继承时，
+    子进程会按宿主 Python 版本去查找 stdlib（如 lib/python3.11），而 hermes venv 里只有
+    自己的版本，找不到 encodings 等核心模块 → 子进程启动崩溃。
+
+    解法：pop 全部 Python 相关变量，让 hermes 完全用自己 venv 里的解释器和 stdlib。
+    同时保留 HOME/PATH/LANG 等必要变量，确保可执行文件能找到。
+
+    Args:
+        extra: 额外覆盖/补充的环境变量（如 {"PATH": "/custom/bin"}）
+
+    Returns:
+        可直接传给 subprocess.run(env=...) 的字典
+    """
+    env = dict(os.environ)
+    # 清理全部 Python 变量（这些会让子进程用错误的 Python 版本启动）
+    _PYTHON_VARS = (
+        "PYTHONHOME", "PYTHONPATH", "PYTHONIOENCODING", "PYTHONUTF8",
+        "PYTHONSTARTUP", "PYTHONBREAKPOINT", "PYTHONCASEOK", "PYTHONINSPECT",
+        "PYTHONDEBUG", "PYTHONOPTIMIZE", "PYTHONDONTWRITEBYTECODE", "PYTHONUNBUFFERED",
+        "PYTHONHASHSEED", "PYTHONTRACEMALLOC", "PYTHONMALLOCSTATS",
+        "PYTHONNOUSERSITE", "PYTHONUSERBASE", "PYTHONWARNINGS",
+        "__PYVENV_LAUNCHER__", "_PYTHON_PROJECT_BASE", "_PYTHON_LAUNCHER_ENV",
+    )
+    for k in _PYTHON_VARS:
+        env.pop(k, None)
+    if extra:
+        env.update(extra)
+    return env
+
+
 def copy_file(src: Path | str, dst: Path | str, overwrite: bool = False) -> bool:
     """安全复制文件（支持二进制文件如 PDF）。
 

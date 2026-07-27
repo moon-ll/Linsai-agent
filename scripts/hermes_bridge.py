@@ -38,6 +38,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from paths import PROJECT_ROOT
+from common import clean_subprocess_env
 
 # hermes profile 路径
 HERMES_HOME = Path.home() / ".hermes"

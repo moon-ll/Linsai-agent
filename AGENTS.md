@@ -2,15 +2,20 @@
 
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
-> 最后更新：2026-07-02
+> 最后更新：2026-07-27
 
 ---
 
 ## 项目概述
 
-**LinSai-CoPilot**（林赛协作引擎）是一个**虚拟合作者系统**——让林赛（Lin Sai）作为用户的专属 AI 协作者，1对1 深度协作，共同推进实际工作。
+**LinSai-CoPilot**（林赛协作引擎）是一个**虚拟合作者系统**——让林赛（Lin Sai）作为用户的专属 AI 协作者，1 对 1 深度协作，共同推进实际工作。
 
 **核心比喻**：钢铁侠的贾维斯（J.A.R.V.I.S.）。不是群聊里的旁观者，而是随时待命、深度参与、主动感知的个人合作者。
+
+**当前架构定位（v6.6+）**：
+- CoPilot 是**操作台/监控层**：提供 Web 界面、会话管理、知识库、任务追踪、提案生命周期可视化和人工决策入口。
+- hermes 是**执行端**：通过 7 个专业 profile 运行 agent loop，负责文献调研、缺口分析、申请书撰写、对抗优化等重脑力工作。
+- 两者通过 `state_sync.py`（论文统一状态）、`memory_bridge.py`（记忆同步）、`hermes_pipeline.py`（管线派活）协同。
 
 ### 与相关项目的关系
 
@@ -18,7 +23,8 @@
 |------|------|------|
 | **virtu-LinSai** | 人格资产生产端 | 上游。通过 190 万字自传叙事生长出林赛的完整人格（SOUL.md / SKILL.md / 林赛-perspective）。本项目**引用但不修改**其资产。 |
 | **persona-discussion (Agora)** | 历史人物群聊应用 | 参考架构。Agora 是"多人会议室"，本项目是"专属办公室"。可复用其池管理/状态机思想，但交互模型完全不同。 |
-| **LinSai-CoPilot** | 虚拟合作者应用 | 本项目。消费 virtu-LinSai 的人格资产，以 1v1 CoPilot 模式服务用户。 |
+| **hermes** | 本地 agent 执行引擎 | 下游/搭档。CoPilot 通过 hermes CLI 调用其 profile 完成多轮 agent loop 任务。 |
+| **LinSai-CoPilot** | 虚拟合作者应用 | 本项目。消费 virtu-LinSai 人格资产，以 1v1 CoPilot 模式服务用户，并作为 hermes 的指挥台。 |
 
 ### 核心差异（为什么不是 Agora 的变体）
 
@@ -30,6 +36,7 @@
 | **主动性** | 被动响应用户提问 | 主动感知、主动提醒、主动推进 |
 | **目标** | 获取多角度建议 | **一起完成具体工作** |
 | **时间感** | 历史人物活在各自时代 | 林赛活在"当下"（2026 年），与用户同步时间 |
+| **执行架构** | 单次 LLM 调用 | CoPilot 监控 + hermes agent loop 执行 |
 
 ---
 
@@ -37,13 +44,18 @@
 
 | 层级 | 技术 | 说明 |
 |------|------|------|
-| 运行环境 | Python 3（仅标准库） | 同 virtu-LinSai，零第三方依赖 |
-| 内容格式 | Markdown（.md） | 对话记录、任务描述、记忆片段 |
-| 元数据 | JSON | 会话状态、记忆索引、任务追踪 |
-| LLM 接口 | Kimi CLI / Claude CLI | 通过 subprocess 调用本地 CLI，不直接调 API |
-| 路径处理 | pathlib.Path | 禁止硬编码绝对路径 |
+| 运行环境 | Python 3（仅标准库） | 同 virtu-LinSai，零第三方依赖。无 `requirements.txt`、`pyproject.toml`、`package.json`、`Cargo.toml` 等构建文件。 |
+| 内容格式 | Markdown（.md） | 对话记录、任务描述、记忆片段、知识库笔记。 |
+| 元数据 | JSON | 会话状态、记忆索引、任务追踪、管线状态。 |
+| LLM 接口 | GLM-5.2 / MiniMax-M3 / Kimi CLI / Claude CLI | 本地 CLI / API 路由，通过 `llm_router.py` / `llm_gateway.py` 自动降级。 |
+| Web 服务器 | Python `http.server.ThreadingHTTPServer` | 零第三方依赖，REST API + SSE 流式输出。 |
+| 前端 | 原生 HTML/CSS/JS | 零框架依赖，CSS 变量 + `data-theme` 切换深色/浅色/自动主题。 |
+| 路径处理 | `pathlib.Path` | 禁止硬编码绝对路径（用户 home 下的 hermes 工作区除外，统一在 `paths.py` 中声明）。 |
+| 进程锁 | `fcntl.flock`（POSIX） | macOS/Linux 跨进程锁；Windows 环境降级为无锁 + 原子写入。 |
 
-**关键约束**：同 virtu-LinSai，所有脚本仅使用标准库，不引入 `requirements.txt` 或 `pyproject.toml`。
+**关键约束**：
+- 所有 Python 脚本仅使用标准库，不引入第三方包。
+- 敏感凭据（API Key）只存放在本地 `.env` 和 `memory/llm-config.json`，两者均已加入 `.gitignore`。
 
 ---
 
@@ -55,7 +67,9 @@ LinSai-CoPilot/
 ├── AGENTS.md                  # 本文件。AI 代理必读指南
 ├── README.md                  # 人类可读的项目说明
 ├── CHANGELOG.md               # 变更记录
-├── VERSION                    # 版本号唯一真相源
+├── VERSION                    # 版本号唯一真相源（当前 6.7.0）
+├── .env                       # 本地 API 密钥（gitignore，不提交）
+├── .gitignore                 # Git 忽略规则：用户数据、自动生成文件、敏感配置
 │
 ├── persona/                   # 林赛人格资产（注入材料）
 │   ├── README.md              # 资产来源说明与更新规范
@@ -77,14 +91,18 @@ LinSai-CoPilot/
 │   ├── autonomy-level.json    # 自主级别配置
 │   ├── learning-config.json   # 学习引擎配置
 │   ├── learning-cost.json     # 学习成本追踪
-│   ├── llm-config.json        # LLM 路由配置
+│   ├── llm-config.json        # LLM 路由配置（gitignore）
 │   ├── nsfc-decisions.json    # NSFC 决策记录
+│   ├── nsfc-standards.json    # NSFC 三类项目（面上/重点/重大）质量标准与模板
+│   ├── feedback-standards.json# 反馈质量标准
 │   ├── paper-feedback.json    # 论文反馈
 │   ├── paper-pool.json        # 论文池
+│   ├── pdf-library.json       # PDF 原文库索引
 │   ├── project-dispatch.json  # 项目调度
 │   ├── reflow-state.json      # 认知回流状态
 │   ├── research-profile.json  # 研究方向画像
 │   ├── sync-state.json        # 同步状态
+│   ├── hermes-memory-snapshot.json # hermes 记忆原文快照
 │   ├── alias-candidates.json  # 别名候选
 │   ├── chat-archive-index.json # 聊天归档索引
 │   └── snippets/              # 记忆片段（用户的名言、关键事件）
@@ -96,28 +114,29 @@ LinSai-CoPilot/
 │   ├── backlog/               # 待办任务
 │   └── completed/             # 已完成任务
 │
-├── references/                # 用户提供的参考资料
+├── references/                # 用户提供的参考资料（默认只读）
 │   ├── README.md
 │   ├── papers/                # 论文/文献
 │   ├── notes/                 # 用户笔记
 │   └── index.json             # 文献索引
 │
 ├── knowledge/                 # 林赛的知识库（Obsidian Vault）
-│   ├── README.md              # 知识库使用指南（含 Obsidian 说明）
+│   ├── README.md              # 知识库使用指南
 │   ├── raw/                   # 用户原始材料（只读）
 │   │   ├── papers/            # 论文 PDF/笔记
 │   │   ├── notes/             # 用户手写笔记
+│   │   ├── pdfs/              # PDF 原文库（v6.3）
 │   │   └── webclips/          # 网页剪藏
-│   ├── wiki/                  # LLM 管理的结构化知识（林赛研究笔记）
+│   ├── wiki/                  # LLM 管理的结构化知识
 │   │   ├── concepts/          # 核心概念
 │   │   ├── methods/           # 实验方法
 │   │   ├── people/            # 学者评价
 │   │   ├── papers/            # 论文精读
 │   │   └── projects/          # 项目聚合
-│   ├── .obsidian/             # Obsidian 配置（主题、插件、CSS）
+│   ├── captures/              # 对话自动捕获片段
+│   ├── .obsidian/             # Obsidian 配置
 │   ├── templates/             # Obsidian 笔记模板
-│   ├── captures/              # 对话自动捕获片段（零 LLM 开销）
-│   ├── aliases.json           # 别名映射（查询自动展开）
+│   ├── aliases.json           # 别名映射
 │   ├── index.json             # 统一倒排索引
 │   ├── graph.json             # 知识图谱
 │   ├── growth-log.json        # 知识生长日志
@@ -126,639 +145,366 @@ LinSai-CoPilot/
 │
 ├── skills/                    # 技能目录（每个技能一个子目录）
 │   ├── README.md
+│   ├── self-test/             # 内测系统 skill 说明
 │   └── {skill-name}/
 │       └── SKILL.md           # 技能定义：触发词、心智模型、表达 DNA
 │
-├── projects/                  # v3.5 课题指导模块数据
-│   ├── {project_id}.json      # 课题元数据
-│   └── {project_id}/          # 课题工作目录
-│       ├── PROJECT-MEMORY.md  # 核心记忆（≤100行，自动压缩）
-│       ├── units/             # 单元（含验收标准数组/风险/任务引用）
-│       ├── kb/                # 分层知识库（raw/parsed/summary）
-│       └── memory/            # 课题记忆（对话存档/片段/决策/风险）
+├── projects/                  # v3.5 课题指导模块数据（当前为空，功能由 research_proposals 承接）
+│   └── README.md
+│
+├── proposals/                 # 早期 proposal 草稿（历史目录，逐渐被 research_proposals 替代）
+│
+├── research_proposals/        # v6.2+ 研究管线数据域（独立，与 CoPilot 核心隔离）
+│   ├── _lifecycle.json        # 提案生命周期总状态
+│   ├── .config/               # 管线配置（品味模型等）
+│   ├── drafts/                # 初稿区
+│   ├── optimizing/            # 优化中区
+│   ├── pending_review/        # 待校验区
+│   ├── archived/              # 归档区
+│   └── {proposal_id}/         # 单个提案目录
+│       ├── 00_pipeline/       # 管线状态、产物注册表
+│       ├── 01_literature/     # 文献调研产物（或 01_direction）
+│       ├── 02_topic/          # 缺口分析、课题列表
+│       ├── 03_question/       # 科学问题框架
+│       ├── 04_proposal/       # 申请书章节、参考文献
+│       └── 05_review/         # 自检报告、迭代历史
 │
 ├── docs/                      # 项目文档与报告
-│   ├── README.md              # 文档索引
+│   ├── README.md
 │   ├── CLAUDE-CLI-ADMIN.md    # Claude CLI 人工管理指南
-│   ├── cognitive-loop-plan.md # v3.4 认知闭环设计稿
-│   ├── stability-ux-plan.md   # v3.3 稳定性与用户体验优化计划
-│   ├── kb-smart-management-plan.md # 知识库智能管理计划
-│   ├── deepxiv-knowledge-workflow.md # deepxiv 知识工作流
-│   ├── archive/               # 历史版本文档归档
-│   └── prompts/               # LLM prompt 模板与管理文档
+│   ├── deepxiv-knowledge-workflow.md
+│   ├── unified-state-sync-design.md
+│   ├── v5-three-tier-unification-plan.md
+│   ├── linsai-orchestrator-design.md # v6.7 林赛总控设计文档
+│   ├── prompts/               # LLM prompt 模板
+│   └── archive/               # 历史文档归档
+│
+├── linsai-copilot-manual/     # 项目使用手册（HTML）
+├── pipeline-deep-design/      # 管线深度设计稿（HTML）
+├── research-pipeline-architecture/ # 研究管线架构图（HTML）
 │
 ├── scripts/                   # 工具脚本（Python 3，零依赖）
-│   ├── __init__.py            # 包初始化（v3.4.1：使 scripts/ 成为 Python 包）
-│   ├── common.py              # 公共工具：now_utc/load_json/save_json/safe_filename/lazy_load
-│   ├── paths.py               # 路径工具：统一 PROJECT_ROOT 推导
+│   ├── __init__.py            # 包初始化
+│   ├── common.py              # 公共工具：now_utc/load_json/save_json/safe_filename/file_lock
+│   ├── paths.py               # 路径常量：PROJECT_ROOT 及所有数据目录
+│   ├── logger.py              # 统一日志：控制台彩色输出 + 文件按日期轮转
+│   │
+│   ├── copilot_engine.py      # 核心引擎：prompt 构建、调用 LLM、响应解析、CLI 入口
+│   ├── context_builder.py     # 上下文组装：人格 + 记忆 + 知识库 + 会话历史
 │   ├── session_manager.py     # 会话创建、存档、加载
 │   ├── memory_manager.py      # 记忆读写、索引、压缩
 │   ├── task_manager.py        # 任务 CRUD、状态流转
-│   ├── copilot_engine.py      # 核心引擎：prompt 构建、调用 LLM、响应解析
-│   ├── context_builder.py     # 上下文组装：人格 + 记忆 + 知识库 + 课题 + 会话历史
-│   ├── knowledge_base.py      # 知识库引擎门面（v3.5.5 门面化）：re-export 子模块全部函数
-│   ├── kb_text.py             # v3.5.5 知识库文本工具：tokenize/chunk/IDF/frontmatter
-│   ├── kb_graph.py            # v3.5.5 知识图谱：节点CRUD/关联概念/wikilink注入
-│   ├── kb_index.py            # v3.5.5 知识库索引：build_index/search/search_light/raw管理
-│   ├── kb_wiki.py             # v3.5.5 wiki页面：CRUD/stub创建/生长阶段
-│   ├── kb_health.py           # v3.5.5 知识库健康度：连通性/覆盖率/指标
-│   ├── kb_capture.py          # 对话自动捕获：技术参数检测、零 LLM 开销
-│   ├── kb_maintenance.py      # 批处理维护：索引重建、孤儿清理、候选报告、周维护
+│   ├── proactive_engine.py    # 主动感知、心跳扫描
+│   ├── document_handler.py    # 文档读取、PDF 提取、代码分析
+│   ├── skill_manager.py       # 技能系统：扫描、匹配、注入、配置
+│   ├── slash_commands.py      # 斜杠命令系统
+│   ├── tool_engine.py         # 工具注册：file_read/write, calc, task_create, knowledge_query, run_command, hermes_chat
+│   ├── chat_archive.py        # 聊天记录归档浏览器
+│   │
+│   ├── knowledge_base.py      # 知识库引擎门面：re-export 子模块全部函数
+│   ├── kb_text.py             # 文本工具：tokenize/chunk/IDF/frontmatter
+│   ├── kb_graph.py            # 知识图谱：节点 CRUD、关联概念、wikilink 注入
+│   ├── kb_index.py            # 索引：build_index/search/search_light/raw 管理
+│   ├── kb_wiki.py             # wiki 页面：CRUD/stub 创建/生长阶段
+│   ├── kb_health.py           # 知识库健康度
+│   ├── kb_capture.py          # 对话自动捕获
+│   ├── kb_maintenance.py      # 批处理维护
 │   ├── kb_auto_sync.py        # 知识库自动同步
-│   ├── kb_categories.py       # 知识库分类管理
-│   ├── kb_importer.py         # 知识库批量导入
-│   ├── kb_linker.py           # 知识库关联链接
+│   ├── kb_categories.py       # 分类管理
+│   ├── kb_importer.py         # 批量导入
+│   ├── kb_linker.py           # 关联链接
+│   │
 │   ├── alias_learner.py       # 别名学习器
 │   ├── growth_engine.py       # 知识生长引擎
 │   ├── paper_pool.py          # 论文池管理
-│   ├── pdf_manager.py         # v6.3 PDF 原文库管理器：存储/检索/文本提取/知识库关联
-│   ├── project_reader.py      # 项目文件读取器
-│   ├── research_profiler.py   # 研究方向感知器：TF-IDF关键词、7天自动重建
-│   ├── external_fetcher.py    # 统一信息获取：deepxiv + 联网检索 + raw扫描
+│   ├── pdf_manager.py         # v6.3 PDF 原文库管理器
+│   ├── research_profiler.py   # 研究方向感知器：TF-IDF 关键词、7 天自动重建
+│   ├── external_fetcher.py    # 统一信息获取：deepxiv + 联网检索 + raw 扫描
 │   ├── learning_engine.py     # 自主学习核心：蒸馏/精读/概念整合/成本追踪
-│   ├── quality_evaluator.py   # 质量评估引擎：规则+LLM评估、三级决策
-│   ├── logger.py              # 统一日志：控制台彩色输出 + 文件按日期轮转
-│   ├── proactive_engine.py    # 主动感知、心跳扫描
-│   ├── document_handler.py    # 文档读取、PDF提取、代码分析
-│   ├── project_dispatch.py    # 项目总控：意见+执行追踪持久化（v3.3.0）
-│   ├── agora_bridge.py        # Agora群聊桥接
-│   ├── hermes_bridge.py       # Hermes 桥接器
+│   ├── quality_evaluator.py   # 质量评估引擎
+│   ├── usage_tracker.py       # Token 用量追踪
+│   │
+│   ├── agora_bridge.py        # Agora 群聊桥接
+│   ├── hermes_bridge.py       # Hermes 桥接器：cron 控制 / oneshot 派活 / 团队 profile 状态
+│   ├── hermes_pipeline.py     # v6.4 Hermes 驱动研究管线：导入 / 派活 / 执行 / cron
+│   ├── sync_engine.py         # 多端同步
+│   ├── briefing_sync.py       # v4.1 文献简报双向同步
+│   ├── state_sync.py          # v5+ 论文统一状态总线（CoPilot ↔ hermes）
+│   ├── memory_bridge.py       # hermes → CoPilot 记忆单向同步
+│   │
+│   ├── project_dispatch.py    # 项目总控：意见 + 执行追踪持久化
+│   ├── project_manager.py     # v3.5 课题管理
+│   ├── unit_manager.py        # v3.5 单元管理
+│   ├── project_kb.py          # v3.5 课题知识库
+│   ├── project_memory.py      # v3.5 课题记忆
+│   ├── project_context.py     # v3.5 课题上下文
+│   ├── project_workflow.py    # v3.5 课题工作流
+│   ├── project_reader.py      # 项目文件读取器
+│   ├── kanban_reader.py       # 看板数据读取
+│   │
 │   ├── llm_router.py          # 多模型路由：MiniMax API + Kimi CLI + Claude CLI，自动降级
-│   ├── usage_tracker.py       # Token 用量追踪：API精确统计 + CLI字符估算
-│   ├── skill_manager.py       # 技能系统：扫描、匹配、注入、配置
-│   ├── slash_commands.py      # 斜杠命令系统：解析、路由、帮助
-│   ├── tool_engine.py         # 工具注册：file_read/write, calc, task_create, knowledge_query, run_command, hermes_chat
-│   ├── chat_archive.py        # 聊天记录归档浏览器
-│   ├── memory_reflow.py       # 认知回流引擎：hermes→记忆提炼、冷启动、增量回流（v3.4）
-│   ├── sync_engine.py         # 多端同步：hermes 会话/文献 → 知识库 + 认知回流 + 简报双向同步
-│   ├── briefing_sync.py       # v4.1 文献简报双向同步：CoPilot↔hermes 状态映射、只升不降、重试队列
+│   ├── llm_gateway.py         # v6.3.2 共享 LLM 网关（核心与管线均可调用）
 │   ├── backup_manager.py      # 数据备份/恢复
 │   ├── upgrade.py             # 安全升级标准流程
-│   ├── project_manager.py     # v3.5 课题管理：CRUD、状态机、PROJECT-MEMORY.md
-│   ├── unit_manager.py        # v3.5 单元管理：验收标准数组、风险、状态机
-│   ├── project_kb.py          # v3.5 课题知识库：分层(raw/parsed/summary)、TF-IDF、标签
-│   ├── project_memory.py      # v3.5 课题记忆：对话存档、片段、决策、核心记忆
-│   ├── project_context.py     # v3.5 课题上下文：@语法解析、跨课题检索、上下文构建
-│   ├── project_workflow.py    # v3.5 课题工作流：规划→执行→验收→完成→总结
-│   ├── web_server.py          # Web 服务器聚合器（v6.2 Mixin 架构）：RequestHandler 继承 11 个路由 Mixin
-│   ├── web_base.py            # v3.5.6 Web 基础设施：BaseRequestHandler/文件锁/SSE工具/静态文件
-│   ├── web_routes_sessions.py # v3.5.6 会话路由 Mixin（9 路由，含 SSE 流式）
-│   ├── web_routes_kb.py       # v3.5.6 知识库路由 Mixin（43 路由，含 v6.3 PDF 管理 10 路由）
-│   ├── web_routes_projects.py # v3.5.6 项目路由 Mixin（33 路由）
-│   ├── web_routes_research.py # v3.5.6 课题路由 Mixin（37 路由）
-│   ├── web_routes_system.py   # v3.5.6 系统路由 Mixin（19 路由）
-│   ├── web_routes_tasks.py    # v3.5.6 任务路由 Mixin（8 路由）
-│   ├── web_routes_learning.py # v3.5.6 学习路由 Mixin（7 路由）
-│   ├── web_routes_skills.py   # v3.5.6 技能路由 Mixin（5 路由）
-│   ├── web_routes_hermes.py   # v3.5.6 Hermes 路由 Mixin（4 路由）
-│   ├── web_routes_upload.py   # v3.5.6 上传路由 Mixin（5 路由）
-│   ├── web_routes_pipeline.py # v6.2 研究管线路由 Mixin（39 路由）
-│   ├── artifact_manager.py    # v6.2 产物版本管理：生命周期状态机/diff/回滚/快照
-│   ├── lineage_tracker.py     # v6.2 血缘追踪：双向溯源/影响分析/BFS遍历/DOT导出
-│   ├── taste_engine.py        # v6.2 学术品味引擎：五维模型/WMA更新/相似度匹配
-│   ├── pipeline_orchestrator.py # v6.2 管线编排：六阶段状态机/六道门禁/推进回滚
-│   ├── gap_analyzer.py        # v6.2 研究缺口分析：覆盖度扫描/四类缺口/优先级评分
-│   ├── citation_manager.py    # v6.2 引文管理：NSFC格式/扫描验证/占位符注入/BibTeX
-│   ├── topic_generator.py     # v6.2 课题生成：缺口映射/品味评分/课题演化
-│   ├── question_architect.py  # v6.2 科学问题架构：五要素体系/问题分解/五维验证
-│   ├── proposal_inspector.py  # v6.2 申请书自检：六维检查/四级策略/迭代追踪
-│   ├── proposal_writer.py     # v6.2 申请书撰写：NSFC格式/模板组装/品味调整
-│   ├── methodology_manual.py  # v6.2.1 方法学手册：17种方法库/自动扫描/KB关联/Markdown导出
-│   ├── agent_team.py          # v6.2.1 Agent团队管理：12智能体/状态机/性能追踪/团队扩展
-│   ├── check_boundary.py      # v6.2.1 边界违规检测：导入/写入/KB只读/API前缀静态扫描
-│   ├── self_test.py           # 内测统一入口：全量/分维度/JSON/程序化
-│   ├── test_e2e_learning_full.py  # 三来源端到端完整链路验证
-│   ├── deepxiv_knowledge/     # deepxiv 论文获取流水线（8 模块）
-│   ├── wiki_regenerator/      # wiki 报告重建（4 模块）
+│   ├── self_test.py           # 内测统一入口
+│   ├── test_e2e_learning_full.py # 三来源端到端完整链路验证
+│   │
+│   ├── artifact_manager.py    # v6.2 产物版本管理
+│   ├── lineage_tracker.py     # v6.2 血缘追踪
+│   ├── taste_engine.py        # v6.2 学术品味引擎
+│   ├── pipeline_orchestrator.py # v6.2 管线编排：六阶段状态机/六道门禁
+│   ├── gap_analyzer.py        # v6.2 研究缺口分析
+│   ├── citation_manager.py    # v6.2 引文管理
+│   ├── topic_generator.py     # v6.2 课题生成
+│   ├── question_architect.py  # v6.2 科学问题架构
+│   ├── proposal_inspector.py  # v6.2 申请书自检
+│   ├── proposal_writer.py     # v6.2 申请书撰写
+│   ├── proposal_lifecycle.py  # v6.5+ 提案生命周期：四阶段 + writer-critic 对抗优化
+│   ├── orchestrator.py        # v6.7 林赛总控核心：仪表盘 / 失败分析 / 策略建议 / 链路监控
+│   ├── profile_health.py      # v6.7 profile 健康度：idle/working/blocked/offline + 成功率/耗时
+│   ├── failure_analyzer.py    # v6.7 失败模式分析：8 种模式聚类 + prompt 修正建议
+│   ├── strategy_optimizer.py  # v6.7 调度策略自调优：建议模式，人工确认后应用
+│   ├── web_routes_orchestrator.py # v6.7 林赛总控路由 Mixin（8 条路由）
+│   ├── methodology_manual.py  # v6.2.1 方法学手册
+│   ├── agent_team.py          # v6.2.1 Agent 团队管理
+│   ├── check_boundary.py      # v6.2.1 边界违规检测
+│   │
+│   ├── deepxiv_knowledge/     # deepxiv 论文获取流水线
+│   ├── wiki_regenerator/      # wiki 报告重建
 │   └── tests/                 # 自动化测试套件
 │       ├── test_runner.py     # 零依赖轻量测试框架
-│       ├── test_core.py       # 核心模块单元测试（83个检查点（6 个测试类：核心34+课题19+LLM5+工具8+kb子模块9+安全8））
-│       ├── test_scenarios.py  # 场景剧本测试（5类影子用户）
-│       ├── test_persona.py    # 人格一致性静态抽检
+│       ├── test_core.py       # 核心模块单元测试
+│       ├── test_scenarios.py  # 场景剧本测试
+│       ├── test_persona.py    # 人格一致性抽检
 │       └── test_web_api.py    # Web API 接口测试
 │
 └── web/                       # 前端界面（零框架依赖）
     ├── index.html             # 单页应用入口
     ├── css/
-    │   └── style.css          # 双主题样式（深色/浅色/自动）
+    │   └── style.css          # 双主题样式
     └── js/
-        ├── app.js              # 主入口（会话/聊天/流式SSE/事件绑定）
-        ├── core.js             # 核心工具（API请求/模态框/Markdown渲染/toast）
-        ├── chat.js             # 聊天逻辑（消息收发/SSE流式/输入控制）
-        ├── session.js          # 会话管理（创建/切换/归档/历史加载）
-        ├── task.js             # 任务面板（CRUD/状态流转/看板视图）
-        ├── kb.js               # 知识库浏览器（文档列表/搜索/预览）
-        ├── skill.js            # 技能面板（自动/手动模式/模糊搜索/开关）
-        ├── settings.js         # 设置面板（主题/模型/自主级别）
-        ├── projects.js         # 项目面板（意见/执行追踪）
+        ├── app.js              # 主入口
+        ├── core.js             # 核心工具（API 请求/渲染/主题/toast）
+        ├── chat.js             # 聊天逻辑
+        ├── session.js          # 会话管理
+        ├── task.js             # 任务面板
+        ├── kb.js               # 知识库浏览器
+        ├── skill.js            # 技能面板
+        ├── settings.js         # 设置面板
+        ├── projects.js         # 项目面板
         ├── hermes_console.js   # Hermes 控制台
-        ├── learning.js         # 学习管理器（日志/待审/统计/策略）
-        ├── research.js         # v3.5 课题指导面板（单元时间线/知识库/记忆/工作流）
-        ├── pipeline.js         # v6.2 研究管线面板（六阶段/缺口/课题/问题/申请书/方法学/自检/引文/团队）
+        ├── learning.js         # 学习管理器
+        ├── research.js         # 课题指导面板
+        ├── pipeline.js         # 研究管线面板
+        ├── dashboard.js        # v6.0 仪表盘首页
+        ├── lifecycle.js        # v6.6 提案生命周期面板
+        ├── orchestrator.js     # v6.7 林赛总控台（仪表盘 / Profile 健康 / 失败模式 / 策略 / 链路质量）
+        └── paper_discussion.js # v4.1 文献独立讨论弹窗
 ```
 
 ---
 
-## 人格注入方案
+## 运行与构建
 
-### 资产来源
+**无构建步骤**。Python 脚本直接运行，无编译、无打包、无依赖安装。
 
-林赛的人格资产全部来自 `~/Desktop/hermes_workspace/sandbox/virtu-LinSai/`（virtu-LinSai 项目），具体包括：
+### 启动 Web 界面（推荐）
 
-| 源文件 | 路径（virtu-LinSai 内） | 用途 |
-|--------|------------------------|------|
-| SOUL.md | `EXTRAITS/SKILL-blueprints/SOUL.md` | 科研灵魂蓝图：使命、价值层级、认知承诺 |
-| SKILL.md | `EXTRAITS/SKILL-blueprints/SKILL.md` | 科研技能蓝图：技能架构、评价矩阵 |
-| WORKSTYLE.md | `EXTRAITS/SKILL-blueprints/WORKSTYLE.md` | 工作模式：策划者/思想者、时间分配、压力应对 |
-| 林赛-perspective | `.kimi/skills/林赛-perspective/SKILL.md` | 视角 Skill：6 个心智模型、8 条决策启发式、表达 DNA |
-| ai-collaboration | `PERSONA/ai-collaboration.md` | AI 协作哲学：Prompt 策略、输出评估、质量控制 |
+```bash
+# 方式一：直接启动（默认端口 8080）
+python3 scripts/web_server.py
 
-### 资产使用规范
+# 方式二：指定端口
+python3 scripts/web_server.py --port 9000
 
-1. **单向复制**：从 virtu-LinSai 复制到本项目的 `persona/` 目录，**不允许反向修改**。
-2. **版本追踪**：`source-manifest.json` 记录每次复制的源版本和日期。
-3. **更新流程**：virtu-LinSai 更新后，由维护者手动评估是否需要同步到本项目。
-4. **注入文件**：`lin-sai-persona.md` 是整合精简版，供 prompt 直接注入。避免每次调用时读取 5 个文件。
+# 方式三：一键启动（自动打开浏览器）
+./scripts/launch.sh
+./scripts/launch.sh 9000  # 指定端口
+```
 
-### 人格锚点（不可更改）
+打开 `http://localhost:8080`。
 
-以下设定为项目根基，**任何代理不得修改**：
-- **姓名**：林赛（Lin Sai），男，1995 年生于广东珠海，31 岁（2026 年）
-- **身份**：强场超快光学 / 阿秒科学 / 固体高次谐波 / 拍赫兹电子学独立 PI
-- **家庭**：父亲林建国（钳工），母亲周慧芳（纺织工），已婚，有女儿
-- **核心信条**："What I cannot create, I do not understand"
-- **人格五维**：认知驱动 9.5 / 坚持力 9.0 / 务实主义 8.5 / 碰撞意识 8.0 / 边界意识 7.5
-- **时间冻结**：人物知识截至 2026 年，无"未来"信息
+### 启动 CLI 对话
+
+```bash
+# 新建会话
+python3 scripts/copilot_engine.py --start "固体HHG实验方案设计"
+
+# 继续上一个会话
+python3 scripts/copilot_engine.py --continue
+
+# 列出会话
+python3 scripts/copilot_engine.py --list
+```
+
+### 常用维护命令
+
+```bash
+# 手动备份（自动备份每 24 小时触发一次）
+python3 scripts/backup_manager.py
+python3 scripts/backup_manager.py --list
+python3 scripts/backup_manager.py --restore backups/2026-07-27T10-00-00Z.zip
+
+# 安全升级（备份 → 拉取 → 验证 → 检查迁移）
+python3 scripts/upgrade.py --check
+python3 scripts/upgrade.py --simulate
+python3 scripts/upgrade.py
+
+# 知识库周维护
+python3 scripts/kb_maintenance.py --weekly
+
+# 认知回流
+python3 scripts/memory_reflow.py --reflow
+
+# 同步 hermes 产出
+python3 scripts/sync_engine.py
+```
+
+### 语法检查
+
+```bash
+python3 -m py_compile scripts/*.py
+```
 
 ---
 
-## 交互模式设计
+## 测试策略
 
-### 模式一：并肩工作（Co-Working）【默认模式】
+采用**三层测试体系**：
 
-用户和林赛一起推进一个具体任务。
+### 1. 单元/核心回归测试
 
-**典型场景**：
-- 用户："我在写一个固体 HHG 的实验方案，帮我看看光路设计有没有遗漏"
-- 林赛：从实验系统搭建经验出发，追问关键参数，指出潜在风险
+```bash
+# 全量（不含 Web API）
+python3 scripts/self_test.py
 
-**行为特征**：
-- 追问"为什么"——不满足于用户给的方案，追问设计背后的物理假设
-- 先画框图再动手——要求用户先给出整体结构，再进入细节
-- 具体 > 抽象——用"我当时搭系统时遇到 X"来支撑建议
-- 诚实标注边界——"但这只是我的经验，你的系统参数可能不同"
+# 分维度
+python3 scripts/self_test.py --module     # 核心模块（当前 116 个检查点）
+python3 scripts/self_test.py --scenario   # 场景剧本（当前 16 个检查点）
+python3 scripts/self_test.py --persona    # 人格一致性（当前 38 个检查点）
+python3 scripts/self_test.py --web        # Web API 专项（需启动子进程）
+python3 scripts/self_test.py --web-ci     # CI 模式：全量 + Web API
 
-### 模式二：深度对话（Deep Talk）
+# JSON 输出
+python3 scripts/self_test.py --module --json
 
-用户遇到学术/人生困惑，需要林赛的视角来梳理。
+# 程序化调用
+python3 -c "from self_test import run_tests; print(run_tests(['module'])['summary'])"
+```
 
-**典型场景**：
-- 用户："PRL 又被拒了，我开始怀疑这个方向是不是错了"
-- 林赛：分享自己 PRL 被拒的经历，帮助用户区分"方向错了"和"只是不适合这个期刊"
+**当前基线**：
+- `--module`：116/116 通过（含核心模块、课题链路、LLM 路由、工具引擎、安全、kb 子模块等）
+- `--scenario`：16/16 通过
+- `--persona`：38/38 通过
+- `--web-ci`：Web API 虚拟用户测试（启动 web_server 子进程，覆盖所有主要 API 命名空间）
 
-**行为特征**：
-- 经验映射——从自己的经历中找到最相似的事件作为锚点
-- 不直接给建议——"我当时试了 Y，结果是 Z。你可以考虑……"
-- 元认知引导——帮助用户分析自己的思维过程，而不是替用户决策
+### 2. 模块自检
 
-### 模式三：主动感知（Proactive）
+大量核心脚本和管线索脚本包含 `_self_check()`，可直接运行：
 
-林赛基于长期记忆和工作上下文，主动向用户发起交互。
+```bash
+python3 scripts/{module}.py --self-check
+```
 
-**触发条件**：
-- 用户三天前提到"下周要交 DFG 申请"，今天是截止日期前 2 天
-- 用户正在进行中的任务长时间无进展
-- 用户在会话中表现出压力信号（如"连续三天失眠"、"对数据麻木"）
+例如：
 
-**行为特征**：
-- 温和提醒，不强迫——"你之前提到这周要处理 X，需要我帮忙看看吗？"
-- 基于已知上下文——引用之前的对话内容，而不是泛泛而谈
-- 尊重边界——如果用户说"现在不想聊这个"，立即退回被动模式
+```bash
+python3 scripts/web_server.py --self-check
+python3 scripts/pdf_manager.py --self-check
+python3 scripts/hermes_pipeline.py --self-check
+python3 scripts/proposal_lifecycle.py --self-check
+python3 scripts/orchestrator.py --self-check
+python3 scripts/profile_health.py --self-check
+python3 scripts/failure_analyzer.py --self-check
+python3 scripts/strategy_optimizer.py --self-check
+python3 scripts/agent_team.py --self-check
+python3 scripts/methodology_manual.py --self-check
+```
 
-### 模式四：快速验证（Quick Check）
+### 3. E2E 集成测试
 
-用户对某个具体问题需要快速反馈。
+```bash
+# 自主学习三来源端到端验证（需真实 Claude CLI 环境，非日常回归项）
+python3 scripts/test_e2e_learning_full.py
+```
 
-**典型场景**：
-- 用户："这个推导的量纲对吗？"
-- 林赛：快速检查，给出是/否 + 关键问题
+### 测试设计原则
 
-**行为特征**：
-- 简洁直接——"量纲对，但第三个等号有个隐藏假设……"
-- 不展开长篇大论——除非用户追问
+- **零污染**：所有测试在临时隔离目录运行，结束后自动清理，不触碰真实会话/任务/记忆。
+- **零成本**：不调用 LLM API，纯本地代码逻辑验证。
+- **自动发现**：在 `scripts/tests/` 下新增 `test_*.py` 并继承 `TestSuite` 即可自动纳入回归。
 
 ---
 
-## 记忆与上下文管理
+## 代码规范
 
-### 记忆层级
+### Python 脚本
 
-```
-短期上下文（当前会话）
-  └── 最近 20 条消息（约 4000 字符）
+- **仅使用标准库**，禁止新增 `requirements.txt` 或 `pyproject.toml`。
+- 头部中文 docstring，说明用途和用法示例。
+- 路径处理使用 `pathlib.Path`；`PROJECT_ROOT` 通过 `Path(__file__).parent.parent` 推导。
+- JSON 文件必须 `ensure_ascii=False, indent=2`。
+- 时间戳使用 UTC ISO 格式：`%Y-%m-%dT%H:%M:%SZ`。
+- 输出使用中文，状态图标统一：
+  - `✓` 成功
+  - `✗` 失败
+  - `⚠` 警告
+  - `○` 待处理
+  - `◐` 进行中
+- 原子写入：`common.save_json` 使用 tempfile + fsync + `os.replace()`。
+- 跨进程并发：使用 `common.file_lock("name")`（基于 `fcntl.flock`）。
 
-中期记忆（本次会话的累积）
-  └── 会话摘要 + 关键决策 + 待办事项
+### Web 前端
 
-长期记忆（跨会话）
-  ├── 用户画像（偏好、习惯、已知技能、研究领域）
-  ├── 工作上下文（进行中的项目、关键里程碑）
-  ├── 记忆片段（用户的名言、关键事件、重要决策）
-  └── 关系历史（用户与林赛的交互模式演变）
-```
+- **零框架依赖**：原生 HTML/CSS/JavaScript。
+- **主题系统**：CSS 变量 + `data-theme` 属性切换（`light`/`dark`/`auto`）。
+- **通信协议**：REST API + SSE（Server-Sent Events）流式输出，不引入 WebSocket。
+- **移动端优先**：侧边栏可折叠、触摸目标 ≥ 40px、响应式断点 680px/900px。
+- **无障碍**：语义化标签、键盘导航（Enter 发送、Shift+Enter 换行）。
+- 前端工具类前缀统一，避免内联 style；新增 CSS 类优先于内联样式。
 
-### 上下文注入策略
+### 会话记录
 
-每次调用 LLM 时，按优先级组装 prompt：
-
-```
-[系统指令]        ← 林赛人格注入（lin-sai-persona.md）
-[长期记忆]        ← 用户画像 + 相关记忆片段（≤6000 字符）
-[工作上下文]      ← 当前进行中的任务和关键决策（≤4000 字符）
-[技能上下文]      ← 匹配用户输入的 SKILL.md 内容（≤2000 字符）
-[相关知识]        ← 知识库检索结果 + 图谱关联知识（≤1200 字符）
-[会话历史]        ← 本次会话的最近消息（≤10000 字符）
-[当前输入]        ← 用户的最新消息
-```
-
-**知识库注入策略**（v1.7.1 精细化）：
-- **智能触发**：闲聊/问候自动跳过检索，技术讨论才浮现知识库
-- **别名扩展**：查询前自动展开同义词（如 HHG → 高次谐波产生）
-- **分级注入**：
-  - score ≥ 0.8（高相关）：注入全文摘要 300 字
-  - 0.4 ≤ score < 0.8（中相关）：只注入标题 + 一句话 + 路径链接
-  - score < 0.4（低相关）：不注入
-- **紧凑格式**：`[KB] 标题 [source:stage]: 摘要`（节省 ~30% prompt 空间）
-- 优先返回 wiki 页面（结构化知识 > raw 原材料），wiki 加权 1.2×，mature 再加权 1.1×
-- 通过知识图谱拉取关联概念（深度=1，仅高相关结果触发）
-- 缺失概念检测：如果用户提到知识库中没有的概念，林赛会标注"认知边界"
-
-**总量控制**：注入内容总计不超过 30000 字符（约 7500-10000 tokens），充分利用 LLM 上下文能力（Kimi K2.5 支持 256K tokens），同时避免过度稀释注意力。
-
-### 记忆压缩策略
-
-- 单会话超过 20 条消息后，触发摘要生成，压缩为结构化摘要
-- 长期记忆每 10 次会话触发一次整合，去重并升级关键信息
-- 记忆片段采用"触发词 + 摘要"索引，按需检索
-
----
-
-## 核心开发阶段
-
-### Phase 0：基础框架【✅ 已完成】
-- ✅ 项目目录结构
-- ✅ AGENTS.md 项目指南
-- ✅ 人格资产复制与整合（lin-sai-persona.md）
-
-### Phase 1：最小可用产品（MVP）【✅ 已完成】
-- ✅ 会话管理（创建、存档、加载）— `scripts/session_manager.py`
-- ✅ 基础上下文构建（人格 + 会话历史 + 当前输入）— `scripts/context_builder.py`
-- ✅ CLI 交互界面（终端对话）— `scripts/copilot_engine.py`
-- ✅ 简单记忆（单会话内保持上下文）
-
-### Phase 2：长期记忆【✅ 已完成】
-- ✅ 用户画像构建与更新 — `scripts/memory_manager.py`
-- ✅ 跨会话记忆加载 — `scripts/memory_manager.py`
-- ✅ 记忆压缩与摘要生成 — `scripts/memory_manager.py`
-- ✅ 工作上下文追踪 — `scripts/memory_manager.py`
-- ✅ 任务拆解与追踪 — `scripts/task_manager.py`
-
-### Phase 3：主动感知【✅ 已完成】
-- ✅ 任务截止日期追踪 — `scripts/proactive_engine.py`
-- ✅ 压力信号检测 — `scripts/proactive_engine.py`
-- ✅ 主动提醒机制 — `scripts/proactive_engine.py`
-- ✅ 模式切换（被动/主动）— `scripts/proactive_engine.py`
-
-### Phase 4：多模态协作【✅ 已完成】
-- ✅ 文档附件处理（用户上传论文/笔记）— `scripts/document_handler.py`
-- ✅ 代码协作（读取、分析、建议）— `scripts/document_handler.py`
-- ✅ Agora 集成（"让我们开个会问问费曼和狄拉克"）— `scripts/agora_bridge.py`
-- ✅ **Web 界面** — `scripts/web_server.py` + `web/`
-  - 浏览器交互替代终端，双主题切换（深色/浅色/自动）
-  - SSE 流式输出，Markdown 渲染，移动端适配
-  - 右侧栏集成任务面板与文档引用
-
-### Phase 5：智能知识库【✅ 已完成】
-- ✅ **raw/wiki 分层知识库** — `scripts/knowledge_base.py`
-  - raw/：用户原始材料（论文、笔记、剪藏），保留原貌
-  - wiki/：林赛研究笔记（concepts/methods/people/papers/projects），第一人称视角
-  - captures/：对话自动捕获片段，零 LLM 开销
-  - 标准 frontmatter 格式：title, type, growth_stage, confidence, related, tags
-- ✅ **知识图谱** — `knowledge/graph.json`
-  - 概念节点 + 关联边，支持深度遍历拉取关联知识
-- ✅ **别名映射** — `knowledge/aliases.json`
-  - 查询时自动展开同义词（如 HHG → 高次谐波产生）
-- ✅ **知识库精细化**（v1.7.1）
-  - 智能检索触发：闲聊跳过，技术讨论才浮现知识库
-  - 分级上下文注入：高相关全文 / 中相关摘要 / 低相关忽略
-  - 紧凑注入格式：`[KB] 标题 [source:stage]: 摘要`
-  - 对话自动捕获：`scripts/kb_capture.py`，检测技术参数和明确请求
-  - 相似概念检测：创建 wiki stub 前检查重复，防膨胀
-  - 批处理维护：`scripts/kb_maintenance.py --weekly`
-- ✅ **技能面板**（Web 界面）
-  - 自动/手动模式切换：自动模式下关键词匹配，手动模式下只注入选中技能
-  - 模糊搜索：实时过滤技能名称/描述/触发词
-  - 技能开关：独立启用/禁用每个技能，视觉反馈（未选中变暗）
-- ✅ **统一日志系统** — `scripts/logger.py`
-  - 控制台彩色输出（INFO 级别）+ 文件按日期轮转（DEBUG 级别）
-  - 已接入：web_server、copilot_engine、llm_router
-- ✅ **上下文集成** — `scripts/context_builder.py`
-  - 检索结果优先 wiki（结构化知识 > raw 原材料）
-  - 图谱关联知识自动拉取
-  - 缺失概念检测：标注"认知边界"，邀请用户一起记录
-
-### Phase 6：自主学习引擎【✅ 已完成】
-- ✅ **研究方向感知** — `scripts/research_profiler.py`
-  - 从用户画像 / 活跃任务 / 近期会话动态提取 TF-IDF 研究关键词
-  - 7 天自动重建，漂移检测
-- ✅ **外部信息获取** — `scripts/external_fetcher.py`
-  - deepxiv arXiv 检索、多源联网检索（wsearch → DuckDuckGo → Wikipedia fallback）
-  - raw/ 目录变更扫描、四级评分排序（相关性/新颖性/可靠性/时效性）
-- ✅ **学习核心编排** — `scripts/learning_engine.py`
-  - 统一蒸馏接口：论文精读 → wiki/papers/、词条蒸馏 → wiki/concepts/、raw 自动蒸馏
-  - 概念提取与整合、知识图谱边自动发现（supported_by/supports/extends/contradicts）
-  - 成本追踪（日/月配额）、一键回滚、待审队列
-- ✅ **质量评估** — `scripts/quality_evaluator.py`
-  - 规则评估 + LLM 评估，三级决策（accept/pending/reject）
-  - 对抗性多轮蒸馏（G→C→D→S）、用户编辑 diff 闭环
-- ✅ **主动感知扩展** — `scripts/proactive_engine.py`
-  - heartbeat() 新增第 5 类信号 `learning_opportunity`
-  - 保守/平衡/激进三策略，成本阈值自动暂停
-- ✅ **Web 前端集成**
-  - 学习管理器（日志/待审/统计）、策略设置面板、手动触发学习
-
-### Phase 7：高级功能【⏳ 待开发】
-
-### Phase 8：工具协作者（v2.1.0）【✅ 已完成】
-- ✅ **run_command 工具**：执行 CLI 命令（hermes / claude / python / git），Claude Code 权限模型
-- ✅ **hermes_chat 工具**：调用 Hermes LinSai profile 进行深度对话
-- ✅ **人格软链接**：Hermes SOUL.md → `persona/lin-sai-persona.md`
-- ✅ **工具引擎接入**：copilot_engine.chat_loop 集成 call_llm_with_tools
-
-### Phase 9：认知闭环（v3.4.0）【✅ 阶段 1-2 已完成】
-- ✅ **认知回流引擎** — `scripts/memory_reflow.py`：从 hermes 会话提取记忆，集成到 sync_all()
-- ✅ **记忆冷启动** — 112 会话 → 26 记忆片段 + 10 研究方向 + 7 技能 + 12 关键洞察
-- ✅ **开场即主动** — heartbeat 增强 + 前端 banner + 会话注入主动提醒
-- ✅ **主动感知配置** — autonomy-level.json + learning-config.json
-- ✅ **浅输入人格锚定** — 问候/闲聊时注入记忆锚点，避免通用 AI 客服腔
-- ✅ **知识库命中埋点** — build_context 返回 kb_hits，SSE metadata 事件传递
-- ✅ **引用来源 UI** — 消息气泡下方显示知识库引用标签
-- ✅ **主动检索增强** — 接入 should_search_knowledge() 5 级智能判断
-- ⏳ **场景扩展**（阶段 3）：审稿回复助手、学生问答归档、实验方案协作
-
-### Phase 10：课题指导模块（v3.5.0）【✅ 已完成】
-- ✅ **课题管理** — `scripts/project_manager.py`：课题 CRUD、状态机（planning→active→paused/completed）、PROJECT-MEMORY.md 自动维护与压缩（≤100行）
-- ✅ **单元管理** — `scripts/unit_manager.py`：单元 CRUD、验收标准结构化数组、风险追踪、交付物管理、状态机（planning→executing→review→completed）
-- ✅ **分层知识库** — `scripts/project_kb.py`：raw/parsed/summary 三层、TF-IDF 倒排索引、标签索引、外部文件导入
-- ✅ **课题记忆** — `scripts/project_memory.py`：三级记忆（对话全文/片段/核心记忆）、决策记录、风险记录
-- ✅ **跨课题检索** — `scripts/project_context.py`：@课题知识库语法、跨课题搜索、课题上下文构建
-- ✅ **工作流编排** — `scripts/project_workflow.py`：plan_units → start_unit_execution → review_unit → complete_unit → generate_project_summary
-- ✅ **上下文注入** — `context_builder.py` 扩展：会话关联课题时自动注入课题记忆+知识库概览；@语法跨课题知识检索
-- ✅ **Web API** — `web_server.py` 新增 37 个路由（/api/research/ 前缀）
-- ✅ **前端面板** — `web/js/research.js`：课题列表/详情/单元时间线/知识库浏览器/记忆面板/工作流操作
-
-### Phase 11：架构重构与质量优化（v3.5.1 → v3.5.6）【✅ 已完成】
-- ✅ **v3.5.1 架构优化** — 路由表重构（37 条 if-elif → 结构化路由表）、ModuleLoader 前端模块自注册、ai_plan_units LLM 驱动规划、统一知识库检索（全局+课题加权）、学习成本 SVG 可视化、AGENTS.md 测试策略更新、docs 目录清理
-- ✅ **v3.5.2 原子化写入** — `common.save_json` 改用 tempfile+fsync+replace 原子模式，防崩溃损坏
-- ✅ **v3.5.3 测试扩展** — 单元测试 88→120 检查点（新增课题链路 19 + LLM 路由 5 + 工具引擎 8），`--web-ci` 集成 Web API 测试（146/146）
-- ✅ **v3.5.4 全面质量优化** — P0 修复（settings.js DOM ID、sendMessage TypeError、AGENTS.md 虚假声明）、P1 安全（run_command 注入防护、backup 覆盖 projects/persona、并发文件锁）、P2 架构（paths.py 统一、except Exception 治理、logger TimedRotatingFileHandler）、P3 打磨（防抖、无障碍 tabindex、CSS 变量统一）
-- ✅ **v3.5.5 知识库门面化拆分** — `knowledge_base.py` 1792→534 行门面 + 5 子模块（kb_text/kb_graph/kb_index/kb_wiki/kb_health），门面注入模式解决循环依赖
-- ✅ **v3.5.6 Web 服务器 Mixin 拆分** — `web_server.py` 2576→321 行聚合器 + `web_base.py` + 10 路由 Mixin（共 160 路由（9 个路由 Mixin 123 条 + research 路由 37 条）），零行为变更
-- ✅ **内联样式清理** — 426/554（76.8%）内联 style 替换为 CSS 类，新增 ~180 个工具类
-- ✅ **v3.5.7 安全与质量优化** — P0 线程安全+路径遍历修复、P1 原子写入+XSS 修复+测试扩展（129+171）、P2 导入清理+缓存+CSS 变量
-- ✅ **v3.5.8 第三轮安全修复** — P0 project_manager/_send_static 路径遍历、P1 文件锁+escapeAttr+42处onclick修复+测试扩展（137+207）、P2 内存泄漏+async+对比度
-- ✅ **v3.5.9 冗余内容清理** — 删除 version.py 死模块、合并 _safe_filename/_STOPWORDS 重复定义、删除 ~230 行死 CSS + 2 个死 JS 函数、修复 skill-count ID 不匹配 bug、清理数据残留、更新 4 个 README
-- ✅ **v3.6.0 知识库分区策略 + 基础设施增强** — search() 五维分区过滤+分页、API 暴露分区参数、context_builder 项目感知检索、前端统一搜索+筛选联动+分页控件+分区选择器、captures/ 修复、paths.py 迁移收尾（28文件）、/api/health 端点、日志保留 30 天
-
-### Phase 12：文献简报双向同步（v4.1.0）【✅ 已完成】
-- ✅ **双向同步引擎** — `scripts/briefing_sync.py`（417 行）：CoPilot `paper-pool.json` ↔ hermes `status.json` 状态双向同步
-  - 反向同步（CoPilot→hermes）：用户操作时实时回写 `discussion_started`/`discussion_archived_at`
-  - 正向同步（hermes→CoPilot）：`sync_all()` 批量拉取 hermes 工作流状态，`analyzed_at`→viewed、`discussion_archived_at`→archived
-  - 只升不降规则：`unseen(0) → viewed(1) → archived(2)` 单向流转
-  - 冲突策略：CoPilot 优先（用户意图 > hermes 自动流程）
-  - 待同步队列：失败请求记入 `reverse_sync_pending`，max 5 次重试
-  - 文件锁 + 原子写入，线程安全
-- ✅ **paper_pool 扩展** — 新增 `get_paper_status(arxiv_id)` 供正向同步查询
-- ✅ **sync_engine 集成** — `sync_all()` 新增 `[0/5]` 待同步重试 + `[2.5/5]` 正向同步
-- ✅ **Web 路由集成** — `_proj_papers_feedback` 操作后自动触发反向同步，失败不阻塞
-- ✅ **测试覆盖** — `BriefingSyncTests` 20 个检查点，全量 232/232 通过
-
-### Phase 13：研究全链路自动化管线（v6.2.0）【✅ 已完成】
-- ✅ **Wave 1 基础层** — 3 模块：`artifact_manager.py`（产物版本管理/diff/回滚）、`lineage_tracker.py`（双向溯源/影响分析）、`taste_engine.py`（五维品味模型/WMA更新/相似度匹配）
-- ✅ **Wave 2 调度层** — 3 模块：`pipeline_orchestrator.py`（六阶段状态机/六道门禁）、`gap_analyzer.py`（覆盖度扫描/四类缺口/优先级评分）、`citation_manager.py`（NSFC GB/T 7714 格式/扫描验证/BibTeX 导出）
-- ✅ **Wave 3 课题层** — 3 模块：`topic_generator.py`（缺口→课题/品味评分/演化）、`question_architect.py`（五要素体系/问题分解/五维验证）、`proposal_inspector.py`（六维检查/四级优化策略/迭代追踪）
-- ✅ **Wave 4 撰写层** — 3 模块：`proposal_writer.py`（NSFC格式六章节/模板组装/品味调整）、`web_routes_pipeline.py`（39 路由 Mixin）、`web/js/pipeline.js`（七子面板前端）
-- ✅ **集成** — `web_server.py` 新增 PipelineRoutesMixin（11 个 Mixin）、`_dispatch_pipeline_routes` 分派器
-- ✅ **测试** — 10 个 Python 模块自检全部通过（累计 159 个检查点），全量回归 116/116 单元 + 170/170 Web CI，零回归
-
-### Phase 13.1：方法学手册 + Agent 团队管理（v6.2.1）【✅ 已完成】
-- ✅ **方法学手册** — `methodology_manual.py`（2701 行）：17 种内置方法数据库（理论 7 + 计算 3 + 实验 4 + 分析 3），自动扫描申请书方法关键词，KB 关联 + 引文关联 + Markdown 导出，15/15 自检通过
-- ✅ **Agent 团队管理** — `agent_team.py`：12 个智能体（6 核心管线 + 4 支撑 + 2 成长槽），状态机（idle→working→blocked→offline），性能追踪（成功率/平均耗时/近期任务），团队扩展（新增/升级/激活），20/20 自检通过
-- ✅ **Web 路由扩展** — `web_routes_pipeline.py` 从 39 条扩展到 54 条（+10 Agent + 5 方法学），17/17 自检通过
-- ✅ **前端面板扩展** — `pipeline.js` 从 7 个扩展到 9 个子面板（+🤖团队面板+📖方法学面板），团队三层卡片网格 + 方法学左右布局
-- ✅ **边界检测** — `check_boundary.py` 覆盖 14 个管线模块，零严重违规
-- ✅ **测试** — 全量回归 116/116 + Web CI 170/170，零回归
-
-### Phase 13.2：全链路测试验证 + 使用手册（v6.2.2）【✅ 已完成】
-- ✅ **全链路测试** — 12 个管线模块自检全部通过（~150+ 检查点），边界检测零严重违规
-- ✅ **核心回归** — 116/116 单元 + 170/170 Web CI，零回归
-- ✅ **Web API 实测** — 54 条管线路由全部正常响应（智能体团队/方法学手册/管线编排三大链路）
-- ✅ **前端验证** — 9 个子面板渲染函数完整确认
-- ✅ **使用手册** — 新增 HTML 格式项目使用手册，覆盖全部功能模块与操作指南
-
-### Phase 14：文献 PDF 原文管理（v6.3.0）【✅ 已完成】
-- ✅ **PDF 原文库管理器** — `scripts/pdf_manager.py`：PdfLibrary 类，管理文献 PDF 原文的存储/检索/文本提取/元数据维护
-  - 三级来源积累：arXiv 自动下载（`ensure_pdf`）/ 用户上传（`store_bytes`）/ 工作流产出
-  - SHA-256 去重：相同内容 PDF 不重复存储
-  - 三级文本提取：deepxiv PyPDF2 → 系统 pdftotext → 正则回退，提取后缓存
-  - 知识库关联：自动查找已有 wiki 摘要并关联，支持手动 `link_wiki()`
-  - 论文池关联：`list_with_paper_pool()` 合并展示 PDF 原文与简报卡信息
-- ✅ **Web API 路由** — `web_routes_kb.py` 新增 10 个 PDF 管理路由（列表/统计/信息/文本/下载/摘要/上传/ensure/关联/删除）
-- ✅ **论文池扩展** — `paper_pool.py` 新增 `has_local_pdf()` / `get_pool_with_pdf_status()`
-- ✅ **学习引擎集成** — `learning_engine.py` 的 `distill_arxiv_paper()` 蒸馏前自动下载 PDF，全文注入 prompt 提升质量
-- ✅ **前端 PDF 管理面板** — `web/js/kb.js` 新增 `openPdfManager()` 模态框（列表/上传/下载/查看文本/查看摘要/删除）
-- ✅ **基础设施** — `paths.py` 新增 `PDF_DIR` / `PDF_LIBRARY_PATH`；`common.py` 新增 `file_sha256()` / `copy_file()`
-- ✅ **测试** — pdf_manager 自检 23/23 + paper_pool 自检通过 + 单元 116/116 + Web CI 170/170，零回归
-
-### Phase 15：研究管线全链路联通（v6.3.1）【✅ 已完成】
-- ✅ **管线状态机联通执行模块** — `pipeline_orchestrator.py` 新增 `execute_stage()` 方法
-  - 实现 6 个阶段专属执行器（`_execute_stage_0` ~ `_execute_stage_5`）
-  - 阶段 0：读取 `research_profiler` 研究方向画像 → 方向校准报告
-  - 阶段 1：读取 `external_fetcher` + `paper_pool` → 文献清单
-  - 阶段 2：调用 `gap_analyzer.analyze_gaps()` → 缺口报告
-  - 阶段 3：调用 `question_architect.build_question_framework()` → 问题框架
-  - 阶段 4：调用 `proposal_writer.assemble_proposal()` → 六章节申请书
-  - 阶段 5：调用 `proposal_inspector.inspect_proposal()` → 自检报告
-- ✅ **一键全链路执行** — 新增 `run_full_pipeline()`：循环执行→门禁→推进，安全上限 12 次迭代
-- ✅ **产物自动注册** — 每阶段执行后通过 `artifact_manager` 注册（实时文件 + 版本快照）
-- ✅ **全链路端到端测试** — 6 阶段全部通过，生成 182 个产物，门禁检查正常
-- ✅ **产出质量验证** — 缺口报告 10 个缺口 / 自检报告 0.70 分 3 问题 / 申请书六章节完整
-- ✅ **回归测试** — pipeline_orchestrator 自检 + 单元 116/116 + Web CI 170/170，零回归
-
-### Phase 16：管线关键环节接入 LLM"大脑"（v6.3.2）【✅ 已完成】
-- ✅ **LLM 网关（共享基础设施层）** — 新增 `scripts/llm_gateway.py`
-  - 归入「共享基础设施」分类（§6.1），核心与管线模块均可导入
-  - 封装 llm_router 降级策略，提供 `llm_complete()` / `llm_chat()` / `safe_llm_complete()` / `llm_json()`
-  - 永不抛异常：LLM 失败时返回结构化错误，支持降级到模板模式
-- ✅ **边界规则更新** — §6.1/§6.2 将 llm_gateway 归入共享层，管线通过它间接调用 LLM
-- ✅ **选题 LLM 增强** — `topic_generator.py`：LLM 优化课题标题与研究问题（JSON 校验 + 模板回退）
-- ✅ **科学问题 LLM 增强** — `question_architect.py`：LLM 批量优化五要素科学问题表述
-- ✅ **申请书撰写 LLM 增强** — `proposal_writer.py`：4 章节由 LLM 重写实质内容（引文占位符保护）
-- ✅ **自检 LLM 语义评审** — `proposal_inspector.py`：LLM 四维语义评审 + 总分融合（规则 0.6 + LLM 0.4）
-- ✅ **学术品味 LLM 辅助** — `taste_engine.py`：新增 `llm_qualitative_assessment()` 语义层品味评估（补充数值相似度的语义盲区）
-- ✅ **端到端验证** — 真实 LLM 调用四环节全部生效，产出从模板占位文本升级为实质学术论述
-- ✅ **回归测试** — llm_gateway 自检 5/5 + 单元 116/116 + 边界检查通过，零回归
-
-### Phase 17：Hermes 驱动的管线架构（v6.4.0）【✅ 已完成】
-- ✅ **架构定位重塑** — 从"CoPilot 自己干活"转向"hermes 执行，CoPilot 监控"
-  - hermes 是真正的 agent loop（自主规划+调工具+多轮纠错），远超裸 LLM API 调用
-- ✅ **hermes_pipeline.py** — Hermes 驱动的研究管线操作台（480 行）
-  - 阶段→profile 映射：linsai/researcher/analyst/writer/reviewer 五个 agent
-  - `dispatch_stage()`：派活给 hermes profile（subprocess 调 `hermes --profile X -z`）
-  - `check_stage()`：产物文件检查（存在 + ≥50 字节），保证链路畅通
-  - `run_pipeline()`：一键全链路（依次派活 + 产物检查 + 状态追踪）
-  - `setup_cron()`：配置 hermes cron 实现自动化
-- ✅ **agent_team.py 增强** — 6 个核心 agent 新增 `hermes_profile` 字段，delegate_module 保留作降级
-- ✅ **双引擎共存** — hermes_pipeline（主引擎，智能高）+ pipeline_orchestrator（降级引擎，离线可用）
-- ✅ **测试** — hermes_pipeline 自检 6/6 + agent_team 自检 + 单元 116/116，零回归
-
-### Phase 17.1：Hermes 管线完善（v6.4.1）【✅ 已完成】
-- ✅ **pipeline-runner 独立 profile** — 新建 hermes profile 专职管线编排，与简报子系统隔离
-- ✅ **已有 proposal 导入** — `import_existing_proposal()` 从 hermes_workspace 选择性导入高价值文件（草稿/精读报告/立项依据）
-- ✅ **增量优化模式** — `_build_incremental_context()` 每阶段自动构建上下文（已有产物 + 导入内容 + 上游依赖），agent 先读取再优化
-- ✅ **Web API 路由** — 新增 7 个 `/api/pipeline/hermes/` 路由（导入/状态/检查/派活/执行/cron）
-- ✅ **测试** — 自检 6/6 + 导入 44 文件 + 单元 116/116 + Web CI 170/170，零回归
-
----
-
-## 开发约定
-
-### 1. 脚本规范
-- 仅使用 Python 标准库
-- 头部中文 docstring，说明用途和用法示例
-- 路径处理使用 `pathlib.Path`，PROJECT_ROOT 通过 `Path(__file__).parent.parent` 推导
-- 输出使用中文，状态图标：`✓` 成功、`✗` 失败、`⚠` 警告、`○` 待处理、`◐` 进行中
-- JSON 文件必须 `ensure_ascii=False, indent=2`
-- 时间戳使用 UTC ISO 格式：`%Y-%m-%dT%H:%M:%SZ`
-
-### 2. 会话记录规范
-- 每个会话独立目录，`sessions/YYYYMMDD-主题/`
-- `messages.json` 格式：
+- 每个会话独立目录：`sessions/YYYYMMDD-主题/`。
+- `messages.json` 单条消息格式：
   ```json
   {
     "msg_id": "msg_001",
     "role": "user",
     "content": "...",
-    "timestamp": "2026-05-08T09:00:00Z",
+    "timestamp": "2026-07-27T09:00:00Z",
     "mode": "co-working"
   }
   ```
-- `state.json` 记录会话元信息（主题、模式、开始时间、最后活跃）
+- `state.json` 记录会话元信息（主题、模式、开始时间、最后活跃）。
 
-### 3. 变更记录
-- 所有修改在 `CHANGELOG.md` 中记录
-- 格式同 virtu-LinSai：
+### 变更记录
+
+- 所有修改在 `CHANGELOG.md` 中记录。
+- 格式：
   ```markdown
-  ## vX.Y - YYYY-MM-DD 简短描述
+  ## vX.Y.Z - YYYY-MM-DD 简短描述
   - 修改内容
   - 验证结果
   ```
 
-### 4. 前端规范
-- **零框架依赖**：纯原生 HTML/CSS/JavaScript，不引入 React/Vue/Angular
-- **主题系统**：CSS 变量 + `data-theme` 属性切换（`light`/`dark`/`auto`）
-- **通信协议**：REST API + SSE（Server-Sent Events）流式输出，不引入 WebSocket
-- **服务器**：Python `http.server` + `socketserver.ThreadingMixIn`，零第三方依赖
-- **移动端优先**：侧边栏可折叠、触摸目标 ≥ 40px、响应式断点 680px/900px
-- **无障碍**：语义化标签、键盘导航支持（Enter 发送、Shift+Enter 换行）
+---
 
-### 5. 测试策略
-- **三层测试体系**：
-  1. **单元回归测试**：`scripts/self_test.py` + `scripts/tests/`
-     - 零依赖轻量框架，隔离环境，137 个检查点，<1s 全量通过
-     - 八层覆盖：模块单元测试（34+9+5+19+8+8）/ 场景剧本测试（16）/ 人格一致性抽检（38）
-     - 命令行：`--module` / `--scenario` / `--persona` / `--json` / `--web` / `--web-ci`
-     - `--web-ci` 全量回归含 Web API 测试，共 207 个检查点（含 70 个 Web API 测试）
-     - 程序化：`from self_test import run_tests`
-  2. **模块自检**：核心脚本逐步补充 `_self_check()` 函数（已有 29 个，含 v3.5.7 新增 6 个子模块）
-     - 6 个课题模块共 40 个检查点（project_manager 5 + unit_manager 8 + project_kb 8 + project_memory 9 + project_context 4 + project_workflow 6）
-     - 运行：`python3 scripts/{module}.py`
-  3. **E2E 集成测试**：`scripts/test_e2e_learning_full.py`
-     - 自主学习三来源端到端验证：arXiv 论文精读 / 联网检索蒸馏 / raw 自动蒸馏
-     - 验证 wiki frontmatter、来源链接、auto_grown/review_status 标记
-     - 需真实 Claude CLI 环境，非日常回归项
-- 脚本自检（参数校验、错误处理）
-- 手动端到端测试（创建会话 → 多轮对话 → 检查存档完整性）
-- Web 界面测试（启动服务器 → API 连通性 → 静态文件服务 → 流式输出）
-- 人格一致性测试（确保响应符合 lin-sai-persona.md 中定义的风格）
+## 架构说明
 
-### 6. 研究管线边界规范（v6.2+）
+### 1. 模块分类与导入边界
 
-研究管线（Phase 13，12 个新模块）与 CoPilot 核心共存于 `scripts/` 目录，通过以下规则保持隔离，避免相互污染。
+| 分类 | 命名约定 | 可被谁导入 |
+|------|----------|-----------|
+| **CoPilot 核心** | 无前缀，如 `session_manager.py`、`copilot_engine.py` | 核心模块互相导入；研究管线模块**不可导入**。 |
+| **研究管线** | 管线特有文件名，如 `pipeline_orchestrator.py`、`gap_analyzer.py` | 管线模块互相导入；核心模块**不可导入**（`web_server.py` 作为聚合器导入 `web_routes_pipeline.py` 除外）。 |
+| **共享基础设施** | `common.py`、`paths.py`、`llm_gateway.py` | 双方均可导入。 |
+| **知识库引擎** | `kb_*.py` | 管线模块**只读导入**；写操作须通过 `learning_engine` 标准接口。 |
+| **Web 路由 Mixin** | `web_routes_*.py` | 仅被 `web_server.py` 聚合器导入。 |
 
-#### 6.1 模块分类标识
+**研究管线模块禁止导入**：`session_manager`、`copilot_engine`、`context_builder`、`memory_manager`、`proactive_engine`、`llm_router`（须通过 `llm_gateway`）、`learning_engine`、`skill_manager`、`slash_commands`、`tool_engine`、`sync_engine`、`briefing_sync`、`agora_bridge`、`hermes_bridge`。
 
-| 分类 | 命名前缀 | 示例 | 可被谁导入 |
-|------|----------|------|-----------|
-| **CoPilot 核心** | 无特定前缀 | `session_manager.py`, `copilot_engine.py`, `context_builder.py` | 核心模块互相导入；管线模块**不可导入** |
-| **研究管线** | 管线特有 | `artifact_manager.py`, `pipeline_orchestrator.py`, `gap_analyzer.py` 等 | 管线模块互相导入；核心模块**不可导入**管线模块 |
-| **共享基础设施** | 无特定前缀 | `common.py`, `paths.py`, `llm_gateway.py` | 双方均可导入 |
-| **知识库引擎** | `kb_` 前缀 | `kb_index.py`, `kb_wiki.py` | 管线模块**只读导入**（详见 6.3） |
-| **Web 路由 Mixin** | `web_routes_` 前缀 | `web_routes_pipeline.py`, `web_routes_research.py` | 仅被 `web_server.py` 聚合器导入 |
-
-#### 6.2 导入边界矩阵
-
-管线模块的导入范围严格限定为以下三层：
-
-```
-┌─────────────────────────────────────────────┐
-│ 研究管线模块（12 个）                          │
-│                                             │
-│  允许导入：                                   │
-│  ① 共享基础设施: common, paths, llm_gateway   │
-│     （llm_gateway 封装 llm_router，管线通过   │
-│      它调用 LLM，仍禁止直接导入 llm_router）  │
-│  ② 管线内部模块: artifact_manager,           │
-│     lineage_tracker, taste_engine,           │
-│     pipeline_orchestrator, gap_analyzer,     │
-│     citation_manager, topic_generator,       │
-│     question_architect, proposal_inspector,  │
-│     proposal_writer                          │
-│  ③ 只读依赖（详见 6.3）                       │
-│                                             │
-│  禁止导入：                                   │
-│  ✗ session_manager                           │
-│  ✗ copilot_engine                            │
-│  ✗ context_builder                           │
-│  ✗ memory_manager                            │
-│  ✗ proactive_engine                          │
-│  ✗ llm_router（须通过 llm_gateway 间接调用）   │
-│  ✗ learning_engine                           │
-│  ✗ skill_manager / slash_commands            │
-│  ✗ tool_engine                               │
-│  ✗ sync_engine / briefing_sync               │
-│  ✗ agora_bridge / hermes_bridge              │
-└─────────────────────────────────────────────┘
-```
-
-CoPilot 核心模块**禁止反向导入**管线模块。唯一例外是 `web_server.py` 作为聚合器导入 `web_routes_pipeline.py`（Mixin 模式，非业务逻辑导入）。
-
-#### 6.3 知识库与论文池访问规则
-
-管线模块对 CoPilot 积累的数据资产采用**只读消费**策略：
-
-| 数据资产 | 管线访问方式 | 允许操作 | 禁止操作 |
-|----------|-------------|----------|----------|
-| `knowledge/wiki/` | `kb_wiki.list_wiki_pages()` `kb_wiki.get_wiki_page()` | 读取页面、遍历概念 | 创建/修改/删除 wiki 页面 |
-| `knowledge/index.json` | `kb_index.search()` `kb_index.build_index()` | 检索、查询 | 修改索引结构 |
-| `knowledge/graph.json` | `kb_graph` 只读方法 | 查询节点/边 | 增删节点/边 |
-| `memory/paper-pool.json` | `paper_pool` 只读方法 | 查询论文元数据 | 修改论文状态 |
-| `memory/research-profile.json` | 直接 `load_json` 读取 | 读取研究方向关键词 | 修改画像 |
-| `memory/user-profile.json` | 直接 `load_json` 读取 | 读取用户偏好 | 修改用户画像 |
-
-**例外**：管线产出的知识（如论文精读结果）如需写入知识库，必须通过 `learning_engine` 的标准接口完成，管线模块不直接写 KB 文件。
-
-#### 6.4 数据存储隔离
+### 2. 数据域隔离
 
 ```
 LinSai-CoPilot/
@@ -766,92 +512,116 @@ LinSai-CoPilot/
 ├── memory/                ← CoPilot 核心：长期记忆、用户画像
 ├── tasks/                 ← CoPilot 核心：任务管理
 ├── knowledge/             ← 共享：知识库（管线只读）
-├── projects/              ← CoPilot 核心：v3.5 课题管理
-│
+├── projects/              ← CoPilot 核心：v3.5 课题管理（当前未启用）
 ├── research_proposals/    ← 研究管线：独立数据域
-│   └── {proposal_id}/
-│       ├── 00_pipeline/   ← 管线状态、产物注册表
-│       ├── 01_literature/ ← 文献调研产物
-│       ├── 02_topic/      ← 缺口分析、课题列表
-│       ├── 03_question/   ← 科学问题框架
-│       ├── 04_proposal/   ← 申请书章节、参考文献
-│       └── 05_review/     ← 自检报告、迭代历史
-│
-└── scripts/
-    ├── [核心模块 50+]
-    └── [管线模块 12 个]    ← 文件名即边界标识
+│   ├── drafts/optimizing/pending_review/archived  ← 生命周期四阶段
+│   └── {proposal_id}/00_pipeline ... 05_review    ← 六阶段产物
+└── scripts/               ← 所有模块
 ```
 
-**规则**：
-- 管线模块的所有写入操作限定在 `research_proposals/{proposal_id}/` 目录内
-- 管线模块的配置文件（如品味模型）存放在 `research_proposals/.config/` 下
-- CoPilot 核心模块不读写 `research_proposals/` 目录
+- 管线模块的所有写入操作限定在 `research_proposals/{proposal_id}/` 内。
+- 管线模块不直接修改 `knowledge/` 和 `memory/` 下的文件。
 
-#### 6.5 Web API 命名空间隔离
+### 3. Web API 命名空间
 
-| 命名空间 | 归属 | 示例 |
+| 命名空间 | 归属 | 说明 |
 |----------|------|------|
-| `/api/sessions/` | CoPilot 核心 | 会话管理 |
-| `/api/kb/` | CoPilot 核心 | 知识库 |
-| `/api/tasks/` | CoPilot 核心 | 任务管理 |
+| `/api/sessions/` | CoPilot 核心 | 会话管理、消息、聊天记录 |
+| `/api/tasks/` | CoPilot 核心 | 任务 CRUD、状态流转、AI 辅助指派 |
+| `/api/knowledge/` | CoPilot 核心 | 知识库搜索、wiki、图谱、健康、PDF |
+| `/api/skills/` | CoPilot 核心 | 技能列表、配置 |
+| `/api/learning/` | CoPilot 核心 | 学习日志、待审队列、统计 |
+| `/api/projects/` | CoPilot 核心 | 项目面板、NSFC 决策、论文池 |
 | `/api/research/` | CoPilot 核心 (v3.5) | 课题指导 |
-| `/api/learning/` | CoPilot 核心 | 自主学习 |
-| `/api/skills/` | CoPilot 核心 | 技能系统 |
-| `/api/hermes/` | CoPilot 核心 | Hermes 桥接 |
-| `/api/pipeline/` | **研究管线 (v6.2)** | 管线编排、缺口、课题、问题、申请书、自检、引文 |
+| `/api/hermes/` | CoPilot 核心 | hermes cron、oneshot、团队 profile 状态 |
+| `/api/sync/`、`/api/backup/`、`/api/usage/` 等 | CoPilot 核心 | 系统状态 |
+| `/api/lifecycle/` | CoPilot 核心 (v6.5+) | 提案生命周期仪表盘、注册、流转、优化 |
+| `/api/orchestrator/` | CoPilot 核心 (v6.7+) | 林赛总控：仪表盘、profile 健康、失败模式、调度策略、链路质量 |
+| `/api/pipeline/` | 研究管线 (v6.2+) | 管线编排、Agent 团队、缺口、课题、问题、申请书、自检、引文、方法学、hermes 驱动管线 |
 
-**规则**：
-- 管线路由统一使用 `/api/pipeline/` 前缀
-- 管线路由全部在 `web_routes_pipeline.py` 中定义，不分散到其他 Mixin
-- 路由 ID 校验使用独立的 `_validate_proposal_id()`，不复用核心模块的 `_validate_project_id()`
+Web 服务器使用 Mixin 架构聚合 12 个路由模块；`research` 和 `pipeline` 使用独立分派器，其余走统一路由表。
 
-#### 6.6 前端隔离
+### 4. hermes 协作架构
 
-| 前端模块 | 归属 | 全局命名空间 |
-|----------|------|-------------|
-| `app.js`, `core.js`, `chat.js`, `session.js` | CoPilot 核心 | `window.App`, `window.Chat`, `window.Session` |
-| `task.js`, `kb.js`, `skill.js`, `settings.js` | CoPilot 核心 | `window.Task`, `window.KB`, `window.Skill` |
-| `research.js`, `learning.js`, `projects.js` | CoPilot 核心 | `window.Research`, `window.Learning` |
-| `pipeline.js` | **研究管线** | `window.Pipeline` |
+7 个专业 profile 组成研究管线团队：
 
-**规则**：
-- `pipeline.js` 通过 ModuleLoader 自注册，不修改 `index.html` 的导航结构
-- 管线面板使用独立 overlay（动态创建 DOM），不复用核心面板的容器
-- 管线前端只调用 `/api/pipeline/` 端点，不调用核心 API
+```
+linsai（总控）          pipeline-runner（编排器）
+  │                        │
+  │ 简报 cron               │ 每日编排 cron
+  ↓                        ↓
+researcher ← analyst ← writer ↔ critic → reviewer
+（文献调研）  （缺口分析）（撰写）  （对抗）（终审）
+```
 
-#### 6.7 测试隔离
+| Profile | 模型 | 职责 |
+|---------|------|------|
+| `linsai` | GLM-5.2 | 方向校准 / 总控 / 简报 |
+| `pipeline-runner` | GLM-5.2 | 管线编排 / 每日触发 |
+| `researcher` | MiniMax-M3 | 文献调研 / 定向检索 |
+| `analyst` | GLM-5.2 | 缺口分析 / 科学问题 |
+| `writer` | GLM-5.2 | 申请书撰写 / 修订 |
+| `critic` | GLM-5.2 | 对抗式评审（红队） |
+| `reviewer` | GLM-5.2 | 质量终审 |
 
-| 测试层 | CoPilot 核心 | 研究管线 |
-|--------|-------------|----------|
-| 模块自检 | `python3 scripts/{module}.py --self-check` | 同左，独立计数 |
-| 单元回归 | `self_test.py --module` (116 项) | 管线模块自检不纳入 `--module` |
-| Web CI | `self_test.py --web-ci` (170 项) | 管线路由测试独立于核心 Web API 测试 |
-| E2E | `test_e2e_learning_full.py` | 管线 E2E 待后续补充 |
+关键协作文件：
+- `state_sync.py`：论文统一状态总线（`item-status.json`），CoPilot 与 hermes 共享。
+- `memory_bridge.py`：将 hermes `MEMORY.md` / `USER.md` 同步到 CoPilot `memory/`。
+- `hermes_pipeline.py`：将六阶段派活给对应 profile，支持增量优化、产物检查、cron 自动化。
+- `proposal_lifecycle.py`：四阶段（drafts → optimizing → pending_review → archived）+ writer-critic 对抗优化循环。
 
-**规则**：
-- 管线模块的 `_self_check()` 函数独立运行，不依赖 CoPilot 核心测试框架
-- `self_test.py --module` 的回归范围不含管线模块，避免管线变更影响核心回归
-- 管线模块的回归基线独立维护
+### 5. 提案生命周期
 
-#### 6.8 边界违规检测
+```
+drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）→ archived（归档）
+```
 
-新增脚本准入检查清单（Phase 13 补充）：
+- **命名规则**：`{项目类型}-{课题名称}-{YYYYMMDD}[-序号]`，项目类型 `general`/`key`/`major`。
+- **对抗优化**：每天 pipeline-runner 触发 cron sweep，按章节（立项依据→研究内容→研究方案→整体审查）轮转，critic 4 维度评分（创新/可行/严谨/完整），writer 聚焦最弱维度修订；达标需全模块通过。
+- **文献驱动**：优先优化与当天简报关键词匹配的课题，节省模型限额。
+- **质量标准**：`memory/nsfc-standards.json` 定义面上/重点/重大三类项目的评分权重、页数限制、模板结构。
 
-- [ ] 管线模块头部 docstring 标注 `# v6.2 研究管线` 注释
-- [ ] 管线模块的导入语句不包含 6.2 禁止清单中的任何模块名
-- [ ] 管线模块的文件写入路径以 `research_proposals/` 为根
-- [ ] 管线 Web 路由以 `/api/pipeline/` 为前缀
-- [ ] 管线模块通过 `--self-check` 且不触发核心模块测试失败
-- [ ] 管线模块不修改 `knowledge/` 目录下任何文件（只读）
-- [ ] 管线模块不修改 `memory/` 目录下任何文件（只读）
+### 6. 林赛总控层（v6.7+）
+
+在 hermes 执行层之上新增**监控 + 调优 + 失败分析 + 链路成长**总控层，由 `orchestrator.py` 统一入口：
+
+| 子模块 | 职责 | 输出 |
+|--------|------|------|
+| `profile_health.py` | 读取 hermes profile 状态、`linsai.log` 派活记录、`_lifecycle.json` cron 失败记录 | 7 个 profile 的 idle/working/blocked/offline 状态、24h 成功率、平均耗时、最近错误 |
+| `failure_analyzer.py` | 聚类日志失败模式 | 8 种模式（score-zero-streak / empty-draft / env-pollution / profile-timeout / file-missing / code-bug / rate-limit / low-content-after-rewrite）+ 建议 prompt 修改 |
+| `strategy_optimizer.py` | 基于历史数据给出调度参数建议 | stagger / max_rounds / score_threshold / timeout 等调优建议（仅建议，不自动应用） |
+| `orchestrator.py` | 整合以上 + pipeline 质量监控 | `compute_dashboard()` 4 区合一总仪表盘；`monitor_pipeline()` 生成低质量产物 growth_actions |
+
+**交互入口**：
+- Web API：`/api/orchestrator/dashboard`、`/api/orchestrator/profiles/health`、`/api/orchestrator/failures/patterns`、`/api/orchestrator/strategies`、`/api/orchestrator/strategies/apply`、`/api/orchestrator/pipeline/quality`、`/api/orchestrator/tuning-log`
+- 前端：`web/js/orchestrator.js` 五子面板（总仪表盘 / Profile 健康 / 失败模式 / 调度策略 / 链路质量）
+
+**设计原则**：
+- **建议模式**：`strategy_optimizer` 只输出建议，人工通过 `POST /api/orchestrator/strategies/apply` 确认后写入 `tuning-log.json`。
+- **可观测优先**：所有调优以 4 区仪表盘为起点。
+- **模式而非规则**：失败分析用模式聚类，给出 `suggested_prompt_change`，由用户/AI 决定如何应用。
+- **链路可成长**：`monitor_pipeline` 自动给低质量产物生成 `growth_actions`，提示人工重跑或自动优化。
 
 ---
 
-## 版本管理与升级规范
+## 安全与隐私
 
-### 版本号规范（SemVer）
+- **无敏感凭据入仓**：API Key 只存于本地 `.env` 和 `memory/llm-config.json`，均已加入 `.gitignore`。
+- **本地优先**：所有数据（会话、记忆、任务、论文池、提案）仅存于本地文件系统，不上传云端。
+- **用户数据边界**：`references/` 目录默认只读；知识库 `raw/` 保留原貌。
+- **路径遍历防护**：所有 Web 路由和文件操作使用安全校验（`_safe_join`、`_validate_proposal_id`、禁止 `..`）。
+- **并发安全**：关键数据读写使用 `common.file_lock`（POSIX `fcntl.flock`）+ 原子写入。
+- **XSS 防护**：前端使用 `escapeHtml` / `escapeAttr` 输出用户可控内容；事件处理避免内联 `onclick` 传递未转义参数。
+- **命令执行白名单**：`tool_engine.run_command` 仅允许白名单命令前缀，禁止任意 shell。
+- **记忆隔离**：不同用户（如有）的记忆完全隔离，不共享。
 
-- **版本号来源**：`VERSION` 文件为唯一真相源，所有脚本和文档应从此读取
+---
+
+## 版本与升级
+
+### 版本号规范
+
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.7.0`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -860,16 +630,14 @@ LinSai-CoPilot/
 ### Git 管理策略
 
 ```bash
-# 初始化（仅需一次）
 git init
 git add .
-git commit -m "v1.0.0 初始版本"
+git commit -m "v6.7.0 初始版本"
 ```
 
-**提交规则**：
-- 用户数据（`sessions/`、`memory/`、`tasks/`、`references/`）已被 `.gitignore` 排除，不会意外提交
-- 每次功能迭代一个 commit，消息格式：`vX.Y.Z - 简短描述`
-- 重要变更同步更新 `CHANGELOG.md`
+- 用户数据（`sessions/`、`memory/`、`tasks/`、`references/`）已被 `.gitignore` 排除，不会意外提交。
+- 每次功能迭代一个 commit，消息格式：`vX.Y.Z - 简短描述`。
+- 重要变更同步更新 `CHANGELOG.md`。
 
 ### 数据安全原则
 
@@ -880,33 +648,19 @@ git commit -m "v1.0.0 初始版本"
 | **恢复可验证** | 备份包必须能完整恢复 |
 | **升级可回滚** | 升级失败时能一键回到之前状态 |
 
-### 标准升级流程（SOP）
+### 标准升级流程
 
-**方式一：使用升级助手（推荐）**
 ```bash
-# 1. 检查当前版本
+# 方式一：升级助手（推荐）
 python3 scripts/upgrade.py --check
-
-# 2. 模拟升级（查看会做什么，不实际执行）
 python3 scripts/upgrade.py --simulate
-
-# 3. 执行升级
 python3 scripts/upgrade.py
-```
 
-**方式二：手动升级**
-```bash
-# 1. 备份数据
+# 方式二：手动
 python3 scripts/backup_manager.py
-
-# 2. 获取新代码（git pull 或手动覆盖）
 git pull
-
-# 3. 验证语法
 python3 -m py_compile scripts/*.py
-
-# 4. 检查是否需要迁移
-# 如 VERSION 变化且存在 scripts/migrate.py，执行之
+# 如存在 scripts/migrate.py 且 VERSION 变化则执行
 python3 scripts/migrate.py
 ```
 
@@ -916,19 +670,11 @@ python3 scripts/migrate.py
 - [ ] 头部中文 docstring 含用法示例
 - [ ] 包含 `_self_check()` 函数并通过
 - [ ] 不引入第三方依赖
-- [ ] 路径使用 `pathlib.Path`，PROJECT_ROOT 通过 `Path(__file__).parent.parent` 推导
+- [ ] 路径使用 `pathlib.Path`，`PROJECT_ROOT` 通过 `Path(__file__).parent.parent` 推导
 - [ ] JSON 输出使用 `ensure_ascii=False, indent=2`
 - [ ] 不破坏现有数据结构格式
-- [ ] 已在 CHANGELOG.md 中记录
-
----
-
-## 安全与隐私
-
-- **无敏感凭据**：本项目不含 API Key、密码等。LLM 调用通过本地 CLI 完成。
-- **本地优先**：所有数据（会话、记忆、任务）仅存于本地文件系统，不上传云端。
-- **用户数据边界**：`references/` 目录存放用户提供的资料，脚本默认只读，不写回。
-- **记忆隔离**：不同用户（如有）的记忆完全隔离，不共享。
+- [ ] 研究管线模块遵守 §6 导入边界与数据隔离规则
+- [ ] 已在 `CHANGELOG.md` 中记录
 
 ---
 
@@ -944,7 +690,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.4.1*
-*日期：2026-07-26*
+*版本：6.7.0*
+*日期：2026-07-27*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

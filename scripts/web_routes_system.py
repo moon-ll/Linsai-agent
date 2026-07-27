@@ -402,15 +402,24 @@ class SystemRoutesMixin:
             self._send_json({"error": str(e)}, 500)
 
     def _sys_lifecycle_optimize(self, parsed, body=None, **kwargs):
-        """执行一轮对抗优化"""
+        """执行一轮对抗优化（后台异步，因为 hermes oneshot 需要 30s-5min）"""
         proposal_id = parsed.group("proposal_id")
-        try:
-            from proposal_lifecycle import ProposalLifecycle
-            lc = ProposalLifecycle()
-            result = lc.optimize_cycle(proposal_id)
-            self._send_json({"status": "ok", "data": result})
-        except Exception as e:
-            self._send_json({"error": str(e)}, 500)
+        import threading, uuid
+        task_id = f"opt_{uuid.uuid4().hex[:8]}"
+        with _bg_tasks_lock:
+            _bg_tasks[task_id] = {"status": "running", "proposal_id": proposal_id, "started_at": _now_utc()}
+        def _worker():
+            try:
+                from proposal_lifecycle import ProposalLifecycle
+                lc = ProposalLifecycle()
+                result = lc.optimize_cycle(proposal_id)
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {"status": "done", "result": result, "finished_at": _now_utc()}
+            except Exception as e:
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {"status": "failed", "error": str(e), "finished_at": _now_utc()}
+        threading.Thread(target=_worker, daemon=True).start()
+        self._send_json({"status": "accepted", "task_id": task_id, "message": "优化已启动（后台执行，hermes oneshot 需要 1-5 分钟）"})
 
     def _sys_lifecycle_feedback(self, parsed, body=None, **kwargs):
         """提交人工反馈
@@ -434,14 +443,23 @@ class SystemRoutesMixin:
             self._send_json({"error": str(e)}, 500)
 
     def _sys_lifecycle_cron_sweep(self, parsed, body=None):
-        """执行 cron 扫描"""
-        try:
-            from proposal_lifecycle import ProposalLifecycle
-            lc = ProposalLifecycle()
-            result = lc.run_cron_sweep()
-            self._send_json({"status": "ok", "data": result})
-        except Exception as e:
-            self._send_json({"error": str(e)}, 500)
+        """执行 cron 扫描（后台异步，因为多个课题的 hermes oneshot 需要很长时间）"""
+        import threading, uuid
+        task_id = f"sweep_{uuid.uuid4().hex[:8]}"
+        with _bg_tasks_lock:
+            _bg_tasks[task_id] = {"status": "running", "type": "cron_sweep", "started_at": _now_utc()}
+        def _worker():
+            try:
+                from proposal_lifecycle import ProposalLifecycle
+                lc = ProposalLifecycle()
+                result = lc.run_cron_sweep()
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {"status": "done", "result": result, "finished_at": _now_utc()}
+            except Exception as e:
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {"status": "failed", "error": str(e), "finished_at": _now_utc()}
+        threading.Thread(target=_worker, daemon=True).start()
+        self._send_json({"status": "accepted", "task_id": task_id, "message": "cron 扫描已启动（后台执行）"})
 
     def _sys_task_status(self, parsed, body=None, task_id=None):
         """后台任务状态"""

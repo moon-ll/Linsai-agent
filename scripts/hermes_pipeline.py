@@ -68,7 +68,7 @@ _SCRIPT_DIR = Path(__file__).parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
-from common import now_utc, load_json, save_json, file_lock
+from common import now_utc, load_json, save_json, file_lock, clean_subprocess_env
 from paths import PROJECT_ROOT
 
 __all__ = [
@@ -993,9 +993,7 @@ class HermesPipeline:
             f"如果某阶段产物已存在且非空，可跳过该阶段。\n"
         )
 
-        env = dict(os.environ)
-        env.pop("PYTHONHOME", None)
-        env.pop("PYTHONPATH", None)
+        env = clean_subprocess_env()
 
         cmd = [
             "hermes", "--profile", "pipeline-runner", "cron", "create",
