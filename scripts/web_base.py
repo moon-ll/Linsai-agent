@@ -34,6 +34,8 @@ from typing import Any, Dict, List
 _SCRIPT_DIR = Path(__file__).parent.resolve()
 _PROJECT_ROOT = _SCRIPT_DIR.parent.resolve()
 _WEB_DIR = _PROJECT_ROOT / "web"
+_MEMORY_DIR = _PROJECT_ROOT / "memory"
+_BG_TASKS_PATH = _MEMORY_DIR / "background-tasks.json"
 
 
 def _safe_join(base: Path, *parts: str) -> Path:
@@ -110,6 +112,33 @@ _bg_tasks_lock = threading.Lock()
 _BG_TASK_TTL = 3600  # 1 小时后自动清理
 
 
+def _load_bg_tasks() -> None:
+    """从文件恢复后台任务状态。"""
+    global _bg_tasks
+    try:
+        if _BG_TASKS_PATH.exists():
+            data = json.loads(_BG_TASKS_PATH.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                with _bg_tasks_lock:
+                    _bg_tasks.update(data)
+    except Exception:
+        pass
+
+
+def _save_bg_tasks() -> None:
+    """持久化后台任务状态到文件。"""
+    try:
+        _MEMORY_DIR.mkdir(parents=True, exist_ok=True)
+        with _bg_tasks_lock:
+            snapshot = dict(_bg_tasks)
+        _BG_TASKS_PATH.write_text(
+            json.dumps(snapshot, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+    except Exception:
+        pass
+
+
 def _prune_bg_tasks() -> None:
     """清理已完成且超过 TTL 的后台任务，防止内存泄漏。"""
     import time
@@ -120,6 +149,11 @@ def _prune_bg_tasks() -> None:
                    and now - info.get("finished_at", now) > _BG_TASK_TTL]
         for tid in expired:
             del _bg_tasks[tid]
+    _save_bg_tasks()
+
+
+# 启动时恢复
+_load_bg_tasks()
 
 
 # ---------------------------------------------------------------------------

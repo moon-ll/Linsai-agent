@@ -40,6 +40,7 @@ from web_base import (
     _release_kb_busy,
     _bg_tasks,
     _bg_tasks_lock,
+    _save_bg_tasks,
 )
 from common import lazy_load
 
@@ -407,7 +408,8 @@ class SystemRoutesMixin:
         import threading, uuid
         task_id = f"opt_{uuid.uuid4().hex[:8]}"
         with _bg_tasks_lock:
-            _bg_tasks[task_id] = {"status": "running", "proposal_id": proposal_id, "started_at": _now_utc()}
+            _bg_tasks[task_id] = {"status": "running", "proposal_id": proposal_id, "started_at": _now_utc(), "type": "optimize"}
+            _save_bg_tasks()
         def _worker():
             try:
                 from proposal_lifecycle import ProposalLifecycle
@@ -415,9 +417,16 @@ class SystemRoutesMixin:
                 result = lc.optimize_cycle(proposal_id)
                 with _bg_tasks_lock:
                     _bg_tasks[task_id] = {"status": "done", "result": result, "finished_at": _now_utc()}
+                if _log:
+                    _log.info(f"[bg-task] {task_id} optimize {proposal_id} 完成")
             except Exception as e:
+                err_msg = str(e)
                 with _bg_tasks_lock:
-                    _bg_tasks[task_id] = {"status": "failed", "error": str(e), "finished_at": _now_utc()}
+                    _bg_tasks[task_id] = {"status": "failed", "error": err_msg, "finished_at": _now_utc()}
+                if _log:
+                    _log.error(f"[bg-task] {task_id} optimize {proposal_id} 失败: {err_msg}")
+            finally:
+                _save_bg_tasks()
         threading.Thread(target=_worker, daemon=True).start()
         self._send_json({"status": "accepted", "task_id": task_id, "message": "优化已启动（后台执行，hermes oneshot 需要 1-5 分钟）"})
 
@@ -448,6 +457,7 @@ class SystemRoutesMixin:
         task_id = f"sweep_{uuid.uuid4().hex[:8]}"
         with _bg_tasks_lock:
             _bg_tasks[task_id] = {"status": "running", "type": "cron_sweep", "started_at": _now_utc()}
+            _save_bg_tasks()
         def _worker():
             try:
                 from proposal_lifecycle import ProposalLifecycle
@@ -455,9 +465,16 @@ class SystemRoutesMixin:
                 result = lc.run_cron_sweep()
                 with _bg_tasks_lock:
                     _bg_tasks[task_id] = {"status": "done", "result": result, "finished_at": _now_utc()}
+                if _log:
+                    _log.info(f"[bg-task] {task_id} cron_sweep 完成")
             except Exception as e:
+                err_msg = str(e)
                 with _bg_tasks_lock:
-                    _bg_tasks[task_id] = {"status": "failed", "error": str(e), "finished_at": _now_utc()}
+                    _bg_tasks[task_id] = {"status": "failed", "error": err_msg, "finished_at": _now_utc()}
+                if _log:
+                    _log.error(f"[bg-task] {task_id} cron_sweep 失败: {err_msg}")
+            finally:
+                _save_bg_tasks()
         threading.Thread(target=_worker, daemon=True).start()
         self._send_json({"status": "accepted", "task_id": task_id, "message": "cron 扫描已启动（后台执行）"})
 

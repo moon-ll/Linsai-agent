@@ -36,12 +36,13 @@ from strategy_optimizer import suggest_strategies
 # ============================================================
 
 def compute_dashboard(window_hours: int = 24) -> Dict[str, Any]:
-    """总仪表盘 = profile 健康度 + 失败分析 + 策略建议 + 链路质量。"""
+    """总仪表盘 = profile 健康度 + 失败分析 + 策略建议 + 链路质量 + 一致性检查。"""
     return {
         "profiles": compute_profile_health(window_hours=window_hours),
         "failures": analyze_failures(window_hours=window_hours),
         "strategies": suggest_strategies(window_hours=max(window_hours, 168)),
         "pipeline_quality": monitor_pipeline(),
+        "lifecycle_consistency": check_lifecycle_consistency(),
         "computed_at": now_utc(),
     }
 
@@ -191,7 +192,109 @@ def monitor_pipeline(proposal_id: Optional[str] = None) -> Dict[str, Any]:
 
 
 # ============================================================
-# 3. 应用策略（人工确认后调用）
+# 3. 生命周期一致性检查（v6.7.1）
+# ============================================================
+
+LIFECYCLE_PATH = RESEARCH_PROPOSALS_DIR / "_lifecycle.json"
+
+
+def _extract_score_from_text(text: str) -> Optional[float]:
+    """从 critic 报告文本中简单提取综合评分（不依赖 proposal_lifecycle）。"""
+    patterns = [
+        r"综合评分[：:]\s*(0\.\d+)",
+        r"综合分[：:]?\s*(0\.\d+)",
+        r"overall[\s_]*score[：:\s]+(0\.\d+)",
+        r"score[：:]\s*(0\.\d+)",
+        r"评分[：:]\s*(0\.\d+)",
+        r"(0\.\d+)\s*/\s*1(?:\.0+)?\b",
+    ]
+    for pat in patterns:
+        m = re.search(pat, text, re.IGNORECASE)
+        if m:
+            return float(m.group(1))
+    return None
+
+
+def check_lifecycle_consistency() -> Dict[str, Any]:
+    """检查 _lifecycle.json 与实际 critic 报告产物是否一致。
+
+    Returns:
+        {
+          'checked_at': ISO,
+          'inconsistencies': [
+            {proposal_id, type, detail, lifecycle_rounds, actual_files}
+          ],
+          'summary': {total, inconsistent_count}
+        }
+    """
+    inconsistencies: List[Dict[str, Any]] = []
+    if not LIFECYCLE_PATH.exists():
+        return {"checked_at": now_utc(), "inconsistencies": [], "summary": {"total": 0}}
+
+    lifecycle = load_json(LIFECYCLE_PATH, default={"proposals": {}})
+    proposals = lifecycle.get("proposals", {})
+
+    for pid, state in proposals.items():
+        prop_dir = None
+        for stage in ["optimizing", "pending_review", "drafts", "archived"]:
+            d = RESEARCH_PROPOSALS_DIR / stage / pid
+            if d.exists():
+                prop_dir = d
+                break
+        if not prop_dir:
+            inconsistencies.append({
+                "proposal_id": pid,
+                "type": "missing_dir",
+                "detail": "_lifecycle.json 中存在但目录不存在",
+            })
+            continue
+
+        review_dir = prop_dir / "05_review"
+        critic_files = sorted(review_dir.glob("critic-round-*.md")) if review_dir.exists() else []
+        actual_rounds = len(critic_files)
+        lifecycle_rounds = state.get("optimization_rounds", 0)
+
+        if actual_rounds != lifecycle_rounds:
+            inconsistencies.append({
+                "proposal_id": pid,
+                "type": "round_mismatch",
+                "detail": f"_lifecycle.json 记录 {lifecycle_rounds} 轮，实际有 {actual_rounds} 份 critic 报告",
+                "lifecycle_rounds": lifecycle_rounds,
+                "actual_files": [f.name for f in critic_files],
+            })
+
+        # 检查 score_history 中 score 为 0 但实际报告有非零评分
+        score_history = state.get("score_history", [])
+        zero_score_rounds = [h["round"] for h in score_history if h.get("score", 0) == 0]
+        if zero_score_rounds and critic_files:
+            for f in critic_files:
+                try:
+                    text = f.read_text(encoding="utf-8")
+                    score = _extract_score_from_text(text)
+                except Exception:
+                    score = None
+                if score and score > 0:
+                    inconsistencies.append({
+                        "proposal_id": pid,
+                        "type": "score_lost",
+                        "detail": f"critic 报告 {f.name} 评分 {score}，但 _lifecycle.json 中存在 score=0 的记录",
+                        "file": f.name,
+                        "file_score": score,
+                    })
+                    break
+
+    return {
+        "checked_at": now_utc(),
+        "inconsistencies": inconsistencies,
+        "summary": {
+            "total": len(proposals),
+            "inconsistent_count": len(inconsistencies),
+        },
+    }
+
+
+# ============================================================
+# 4. 应用策略（人工确认后调用）
 # ============================================================
 
 TUNING_LOG_PATH = MEMORY_DIR / "tuning-log.json"

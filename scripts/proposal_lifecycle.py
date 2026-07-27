@@ -131,11 +131,35 @@ class ProposalLifecycle:
         state = self._load_state()
         return state["proposals"].get(proposal_id)
 
-    def _set_proposal_state(self, proposal_id: str, data: Dict[str, Any]) -> None:
-        with file_lock("proposal-lifecycle"):
-            state = self._load_state()
-            state["proposals"][proposal_id] = data
-            self._save_state(state)
+    def _set_proposal_state(self, proposal_id: str, data: Dict[str, Any]) -> bool:
+        """持久化单个 proposal 状态，返回是否成功。
+
+        v6.7.1 修复：
+        - 写入后重新读取校验，避免并发覆盖导致的状态丢失
+        - 校验失败时最多重试 2 次
+        """
+        for attempt in range(3):
+            try:
+                with file_lock("proposal-lifecycle"):
+                    state = self._load_state()
+                    state["proposals"][proposal_id] = data
+                    self._save_state(state)
+
+                    # 写入后校验：重新读取确认 proposal 数据已持久化
+                    verify = self._load_state()
+                    persisted = verify["proposals"].get(proposal_id, {})
+                    if persisted.get("updated_at") == data.get("updated_at"):
+                        return True
+                    # 校验失败：可能被其他进程覆盖，重试
+                    if _log:
+                        _log.warning(
+                            f"[_set_proposal_state] {proposal_id} 写入校验失败，"
+                            f"第 {attempt + 1} 次重试"
+                        )
+            except Exception as e:
+                if _log:
+                    _log.error(f"[_set_proposal_state] {proposal_id} 写入异常: {e}")
+        return False
 
     def _find_proposal_dir(self, proposal_id: str) -> Optional[Path]:
         """在四个阶段目录中查找 proposal 目录。"""
@@ -776,6 +800,12 @@ class ProposalLifecycle:
             proposal_id, prop_dir, project_type, current_round + 1, critic_timeout,
             focus_section=focus_section, is_full_review=is_full_review,  # P1-1
         )
+        if _log:
+            elapsed = critic_result.get("elapsed_s", 0)
+            _log.info(
+                f"[{proposal_id}] 对抗轮 {current_round + 1}: critic 完成 "
+                f"success={critic_result.get('success')} elapsed={elapsed}s"
+            )
 
         # 预解析维度分数，供 writer 聚焦（P0-2）
         pre_dims = self._extract_dimension_scores(critic_result)
@@ -800,10 +830,23 @@ class ProposalLifecycle:
             focus_section=focus_section, is_full_review=is_full_review,  # P1-1
             lit_supplement=lit_supplement,  # P1-2
         )
+        if _log:
+            elapsed = writer_result.get("elapsed_s", 0)
+            _log.info(
+                f"[{proposal_id}] 对抗轮 {current_round + 1}: writer 完成 "
+                f"success={writer_result.get('success')} elapsed={elapsed}s"
+            )
 
         # 3. 解析新分数（v6.6.3：优先从 critic 写入的 report_path 文件读取，
         #    hermes stdout 摘要通常只截取前几行，遗漏末尾的"## 评分"代码块）
         report_path = prop_dir / "05_review" / f"critic-round-{current_round + 1}.md"
+
+        # v6.7.1: critic 通过 hermes agent loop 异步写盘，等待文件生成且稳定
+        if not (report_path.exists() and report_path.stat().st_size > 100):
+            waited = self._wait_for_critic_report(report_path, timeout=30)
+            if waited and _log:
+                _log.info(f"[{proposal_id}] critic 报告已生成: {report_path.name}")
+
         if report_path.exists() and report_path.stat().st_size > 100:
             try:
                 file_content = report_path.read_text(encoding="utf-8")
@@ -811,13 +854,17 @@ class ProposalLifecycle:
                 score_after = self._extract_score(file_result)
                 dim_scores = self._extract_dimension_scores(file_result)  # P0-2
                 issues = self._extract_issues(file_result)
-            except Exception:
+            except Exception as e:
+                if _log:
+                    _log.warning(f"[{proposal_id}] 读取 critic 报告失败: {e}，回退到 stdout")
                 # 回退：使用 hermes stdout 摘要
                 score_after = self._extract_score(critic_result)
                 dim_scores = self._extract_dimension_scores(critic_result)
                 issues = self._extract_issues(critic_result)
         else:
             # 文件未生成（critic 未写盘），用 stdout 摘要
+            if _log:
+                _log.warning(f"[{proposal_id}] critic 报告未生成，使用 stdout 摘要评分")
             score_after = self._extract_score(critic_result)
             dim_scores = self._extract_dimension_scores(critic_result)
             issues = self._extract_issues(critic_result)
@@ -835,28 +882,31 @@ class ProposalLifecycle:
         section_passed = score_after >= min_score and len(weak_dims) == 0
 
         # 4. 更新状态
-        with file_lock(f"proposal-{proposal_id}"):
-            prop_state = self._get_proposal_state(proposal_id)
-            prop_state["optimization_rounds"] = current_round + 1
-            prop_state["last_score"] = score_after
-            prop_state["last_dim_scores"] = dim_scores  # P0-2: 记录维度分数
-            # P1-3: 记录各模块对抗胜利状态
-            section_passes = prop_state.get("section_passes", {})
-            section_passes[section_key] = section_passed
-            prop_state["section_passes"] = section_passes
-            prop_state["score_history"].append({
-                "round": current_round + 1,
-                "score": score_after,
-                "dim_scores": dim_scores,  # P0-2
-                "weakest_dim": weakest_dim,  # P0-2
-                "focus_section": section_key,  # P1-1
-                "section_passed": section_passed,  # P1-3
-                "issues_count": len(issues),
-                "high_issues": sum(1 for i in issues if i.get("severity") == "high"),
-                "at": now_utc(),
-            })
-            prop_state["updated_at"] = now_utc()
-            self._set_proposal_state(proposal_id, prop_state)
+        # v6.7.1：_set_proposal_state 内部已加 file_lock("proposal-lifecycle")，
+        # 不再外层包 file_lock(f"proposal-{proposal_id}")，避免嵌套锁和潜在竞态
+        prop_state = self._get_proposal_state(proposal_id)
+        prop_state["optimization_rounds"] = current_round + 1
+        prop_state["last_score"] = score_after
+        prop_state["last_dim_scores"] = dim_scores  # P0-2: 记录维度分数
+        # P1-3: 记录各模块对抗胜利状态
+        section_passes = prop_state.get("section_passes", {})
+        section_passes[section_key] = section_passed
+        prop_state["section_passes"] = section_passes
+        prop_state["score_history"].append({
+            "round": current_round + 1,
+            "score": score_after,
+            "dim_scores": dim_scores,  # P0-2
+            "weakest_dim": weakest_dim,  # P0-2
+            "focus_section": section_key,  # P1-1
+            "section_passed": section_passed,  # P1-3
+            "issues_count": len(issues),
+            "high_issues": sum(1 for i in issues if i.get("severity") == "high"),
+            "at": now_utc(),
+        })
+        prop_state["updated_at"] = now_utc()
+        persisted = self._set_proposal_state(proposal_id, prop_state)
+        if not persisted and _log:
+            _log.error(f"[{proposal_id}] _lifecycle.json 状态更新失败")
 
         # 4.5 更新 proposal-brief（贯穿全生命周期的元信息）
         try:
@@ -1095,8 +1145,10 @@ class ProposalLifecycle:
             elapsed = round(time.time() - t0, 2)
             if result.returncode == 0:
                 output = result.stdout.strip()
-                if len(output) > 8000:
-                    output = output[:8000] + f"\n... (截断，共{len(output)}字符)"
+                # v6.7.1: 提高截断阈值，避免 critic 评分代码块被截断
+                # critic 报告通常 10-25KB，50KB 可保留完整评分
+                if len(output) > 50000:
+                    output = output[:50000] + f"\n... (截断，共{len(output)}字符)"
                 return {"success": True, "output": output, "elapsed_s": elapsed}
             return {
                 "success": False, "output": result.stdout[:2000],
@@ -1106,6 +1158,48 @@ class ProposalLifecycle:
             return {"success": False, "output": "", "error": f"超时({timeout}s)", "elapsed_s": timeout}
         except Exception as e:
             return {"success": False, "output": "", "error": str(e), "elapsed_s": 0}
+
+    def _wait_for_critic_report(
+        self,
+        report_path: Path,
+        timeout: int = 30,
+        stable_interval: float = 1.0,
+    ) -> bool:
+        """等待 critic 报告文件生成并稳定。
+
+        hermes critic profile 通过 agent loop 异步写盘，Python 进程返回时
+        文件可能尚未生成或仍在写入。轮询等待文件存在且大小稳定。
+
+        Args:
+            report_path: 期望的 critic 报告路径
+            timeout: 最大等待秒数
+            stable_interval: 连续两次大小不变的间隔秒数
+
+        Returns:
+            True 表示文件已生成且稳定；False 表示超时
+        """
+        import time
+        deadline = time.time() + timeout
+        last_size = -1
+        stable_since = None
+
+        while time.time() < deadline:
+            if report_path.exists():
+                try:
+                    current_size = report_path.stat().st_size
+                except Exception:
+                    current_size = -1
+                if current_size > 100 and current_size == last_size:
+                    if stable_since is None:
+                        stable_since = time.time()
+                    elif time.time() - stable_since >= stable_interval:
+                        return True
+                else:
+                    stable_since = None
+                last_size = current_size
+            time.sleep(0.5)
+
+        return False
 
     def _extract_score(self, critic_result: Dict[str, Any]) -> float:
         """从 critic 输出中提取综合评分。"""

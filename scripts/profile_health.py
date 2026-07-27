@@ -41,6 +41,10 @@ TEAM_PROFILE_NAMES = ["linsai", "pipeline-runner", "researcher", "analyst", "wri
 def _parse_log_records(window_hours: int = 24) -> List[Dict[str, Any]]:
     """从 linsai.log 解析最近 N 小时的派活记录。
 
+    匹配 proposal_lifecycle v6.7.1 日志格式：
+    - [timestamp] [INFO] [linsai.proposal_lifecycle] [proposal_id] 对抗轮 N: critic 评审...
+    - [timestamp] [INFO] [linsai.proposal_lifecycle] 对抗轮 N: critic 完成 success=X elapsed=Ns
+
     每条记录包含：{at, profile, action, success, duration_s, error}
     """
     log_file = LOGS_DIR / "linsai.log"
@@ -50,26 +54,34 @@ def _parse_log_records(window_hours: int = 24) -> List[Dict[str, Any]]:
     cutoff = datetime.now(timezone.utc) - timedelta(hours=window_hours)
     records: List[Dict[str, Any]] = []
 
-    # 匹配派活行：[INFO] [profile.linsai] 派活给 xxx profile
-    # 匹配完成行：[INFO] xxx 优化完成 / [ERROR] xxx 失败
+    # 启动行：提取 profile 和 proposal_id
     dispatch_pattern = re.compile(
-        r"\[(?P<at>[\d\-T:Z]+)\] \[(?P<level>\w+)\] \[(?P<mod>[\w\.]+)\] "
-        r".*?(?P<profile>writer|critic|researcher|analyst|reviewer|linsai|pipeline-runner|writer) profile",
-        re.IGNORECASE
+        r"\[(?P<at>\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2})\] \[(?P<level>\w+)\] "
+        r"\[linsai\.proposal_lifecycle\] \[(?P<proposal_id>[\w\-]+)\] "
+        r"对抗轮\s+\d+:\s*(?P<profile>critic|writer|researcher) "
+        r"(评审|优化|定向检索)",
+        re.IGNORECASE,
     )
-    # 简单成功率：从 ERROR 行反推
+    # 完成行：提取 profile、success、elapsed
+    complete_pattern = re.compile(
+        r"\[(?P<at>\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2})\] \[(?P<level>\w+)\] "
+        r"\[linsai\.proposal_lifecycle\] 对抗轮\s+\d+:\s*(?P<profile>critic|writer|researcher) 完成 "
+        r"success=(?P<success>True|False) elapsed=(?P<elapsed>\d+(?:\.\d+)?)s",
+        re.IGNORECASE,
+    )
+    # ERROR 行：匹配 proposal_lifecycle 模块错误
     error_pattern = re.compile(
-        r"\[(?P<at>[\d\-T:Z]+)\] \[(?P<level>ERROR|WARNING)\] \[(?P<mod>[\w\.]+)\] (?P<msg>.*)"
+        r"\[(?P<at>\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2})\] \[(?P<level>ERROR)\] "
+        r"\[linsai\.proposal_lifecycle\] (?P<msg>.*)"
     )
 
     try:
         with open(log_file, "r", encoding="utf-8", errors="replace") as f:
             for line in f:
-                # 仅处理最近 window_hours 内的日志
                 m = dispatch_pattern.search(line)
                 if m:
                     try:
-                        at = datetime.fromisoformat(m.group("at").replace("Z", "+00:00"))
+                        at = datetime.fromisoformat(m.group("at").replace(" ", "T") + "+00:00")
                     except Exception:
                         continue
                     if at < cutoff:
@@ -77,23 +89,42 @@ def _parse_log_records(window_hours: int = 24) -> List[Dict[str, Any]]:
                     records.append({
                         "at": at.isoformat(),
                         "profile": m.group("profile").lower(),
-                        "level": m.group("level"),
+                        "proposal_id": m.group("proposal_id"),
                         "action": "dispatch",
                     })
+                    continue
 
-                m2 = error_pattern.search(line)
+                m2 = complete_pattern.search(line)
                 if m2:
                     try:
-                        at = datetime.fromisoformat(m2.group("at").replace("Z", "+00:00"))
+                        at = datetime.fromisoformat(m2.group("at").replace(" ", "T") + "+00:00")
                     except Exception:
                         continue
                     if at < cutoff:
                         continue
-                    # 找到对应 profile 记录（最近的 dispatch）
+                    profile = m2.group("profile").lower()
+                    # 找到最近一条同 profile 且未完成的 dispatch
                     for r in reversed(records):
-                        if r.get("profile") and not r.get("completed"):
-                            r["success"] = m2.group("level") != "ERROR"
-                            r["error"] = m2.group("msg")[:200] if not r["success"] else ""
+                        if r.get("profile") == profile and not r.get("completed"):
+                            r["success"] = m2.group("success").lower() == "true"
+                            r["duration_s"] = float(m2.group("elapsed"))
+                            r["completed"] = True
+                            break
+                    continue
+
+                m3 = error_pattern.search(line)
+                if m3:
+                    try:
+                        at = datetime.fromisoformat(m3.group("at").replace(" ", "T") + "+00:00")
+                    except Exception:
+                        continue
+                    if at < cutoff:
+                        continue
+                    # 找到最近一条未完成的 dispatch 标记为失败
+                    for r in reversed(records):
+                        if not r.get("completed"):
+                            r["success"] = False
+                            r["error"] = m3.group("msg")[:200]
                             r["completed"] = True
                             break
     except Exception:
