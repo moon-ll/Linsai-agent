@@ -228,136 +228,141 @@ function bindHermesEvents() {
   bindHermesRun();
 }
 
-// v6.0: hermes 工作台页面渲染（在 hermes-page 内）
+// v6.7.7: hermes 工作台页面渲染（新风格）
 async function initHermesWorkspace() {
   const container = document.getElementById('hermes-workspace-content');
   if (!container) return;
 
-  let html = '';
+  container.innerHTML = `
+    <div class="hw-header">
+      <div>
+        <div class="hw-title">⚡ hermes 工作台</div>
+        <div class="hw-subtitle" id="hw-status">◐ 检查 hermes 状态中…</div>
+      </div>
+      <div class="hw-actions">
+        <button class="hw-btn" id="hw-refresh">🔄 刷新</button>
+      </div>
+    </div>
+    <div class="hw-grid">
+      <div class="hw-panel hw-panel-cron">
+        <div class="hw-panel-title">定时任务（cron）</div>
+        <div id="hw-cron-list"><p class="hw-empty">◐ 加载中…</p></div>
+      </div>
+      <div class="hw-panel hw-panel-run">
+        <div class="hw-panel-title">🤖 手动派活</div>
+        <p class="hw-hint">输入任务目标，hermes 将用对应 profile 执行 agent loop。</p>
+        <textarea id="hw-prompt" class="hw-textarea" rows="4" placeholder="例如：深读 arXiv 2403.15337，提炼三个创新点"></textarea>
+        <button id="hw-run" class="hw-run-btn">执行</button>
+        <div id="hw-output" class="hw-output" style="display:none;"></div>
+      </div>
+    </div>
+  `;
 
-  // === 团队 Profile 状态区（v6.6.0）===
-  html += '<div style="margin-bottom:20px;"><h3 style="font-size:0.9rem;margin-bottom:8px;">👥 团队 Profile 状态</h3>';
-  html += '<div id="hw-profiles" style="color:var(--text-tertiary);font-size:0.85rem;">◐ 加载中…</div></div>';
+  await loadHermesWorkspaceData();
 
-  // === 任务管理区 ===
-  html += '<div style="margin-bottom:20px;"><h3 style="font-size:0.9rem;margin-bottom:8px;">📋 任务管理</h3>';
-  html += '<div id="hw-tasks" style="color:var(--text-tertiary);font-size:0.85rem;">◐ 加载中…</div></div>';
+  document.getElementById('hw-refresh')?.addEventListener('click', loadHermesWorkspaceData);
+  document.getElementById('hw-run')?.addEventListener('click', runHermesTask);
+}
 
-  // === cron 定时任务区（复用 hermes_console 的 loadCronList） ===
-  html += '<div style="margin-bottom:20px;"><h3 style="font-size:0.9rem;margin-bottom:8px;">⚡ 定时任务（cron）</h3>';
-  html += '<div id="hw-cron" style="color:var(--text-tertiary);font-size:0.85rem;">◐ 加载中…</div></div>';
-
-  // === 手动派活区 ===
-  html += '<div style="margin-bottom:20px;"><h3 style="font-size:0.9rem;margin-bottom:8px;">🤖 手动派活</h3>';
-  html += '<div style="display:flex;gap:8px;margin-bottom:8px;">';
-  html += '<input type="text" id="hw-prompt" placeholder="输入任务目标…" style="flex:1;padding:8px 10px;border:1px solid var(--border-color);border-radius:6px;background:var(--surface);color:var(--text-primary);font-size:0.85rem;">';
-  html += '<button id="hw-run" style="padding:8px 16px;background:var(--accent-color);color:#fff;border:none;border-radius:6px;cursor:pointer;">执行</button>';
-  html += '</div>';
-  html += '<div id="hw-output" style="background:var(--bg-secondary);border-radius:6px;padding:12px;min-height:60px;max-height:300px;overflow-y:auto;font-size:0.82rem;white-space:pre-wrap;display:none;"></div>';
-  html += '</div>';
-
-  container.innerHTML = html;
-
-  // 加载团队 Profile 状态（v6.6.0）
+async function loadHermesWorkspaceData() {
+  // 状态栏
+  const statusEl = document.getElementById('hw-status');
   try {
-    const data = await apiGet('/api/hermes/profiles');
-    const profiles = data.profiles || [];
-    const profDiv = document.getElementById('hw-profiles');
-    if (!profiles.length) {
-      profDiv.innerHTML = '<span style="color:var(--text-tertiary);">无 profile 数据</span>';
-    } else {
-      profDiv.innerHTML = '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;">' +
-        profiles.map(p => {
-          const gwIcon = p.gateway_running ? '🟢' : '⚪';
-          const hbIcon = p.heartbeat_alive ? '💚' : '';
-          const cronInfo = p.cron_count > 0 ? `cron ${p.cron_active}/${p.cron_count}` : '无cron';
-          const sessionInfo = p.last_session ? `· ${p.last_session.slice(5)}` : '';
-          return `<div style="padding:8px 10px;background:var(--bg-secondary);border-radius:6px;border:1px solid var(--border-color);">
-            <div style="display:flex;align-items:center;gap:4px;margin-bottom:2px;">
-              <span style="font-size:1rem;">${p.icon}</span>
-              <span style="font-size:0.82rem;font-weight:600;">${escapeHtml(p.label)}</span>
-              <span style="margin-left:auto;">${gwIcon}${hbIcon}</span>
-            </div>
-            <div style="font-size:0.72rem;color:var(--text-tertiary);">${escapeHtml(p.role)}</div>
-            <div style="font-size:0.72rem;color:var(--text-tertiary);margin-top:2px;">${cronInfo} ${sessionInfo}</div>
-          </div>`;
-        }).join('') + '</div>';
-    }
+    const data = await apiGet('/api/hermes/cron');
+    const s = data.status || {};
+    const parts = [];
+    if (s.hermes_cli) parts.push('✓ CLI');
+    if (s.linsai_profile) parts.push('✓ profile');
+    if (s.gateway_status === 'running') parts.push('✓ 网关');
+    parts.push(`${s.cron_jobs_count || 0} 个 cron`);
+    if (statusEl) statusEl.textContent = parts.join(' | ');
   } catch (e) {
-    document.getElementById('hw-profiles').innerHTML = '<span style="color:var(--error-color);">加载失败</span>';
+    if (statusEl) statusEl.textContent = '✗ 无法连接 hermes';
   }
 
-  // 加载任务
-  try {
-    const tasks = await apiGet('/api/tasks');
-    const taskList = Array.isArray(tasks) ? tasks : [];
-    const taskDiv = document.getElementById('hw-tasks');
-    if (!taskList.length) {
-      taskDiv.innerHTML = '<span style="color:var(--text-tertiary);">暂无任务</span>';
-    } else {
-      taskDiv.innerHTML = taskList.slice(0, 8).map(t => {
-        const icon = t.status === 'active' ? '◐' : t.status === 'completed' ? '✓' : '○';
-        return `<div style="padding:4px 0;font-size:0.82rem;">${icon} ${escapeHtml(t.title || '')} <span style="color:var(--text-tertiary);font-size:0.75rem;">${escapeHtml(t.status || '')}</span></div>`;
-      }).join('');
-    }
-  } catch (e) {
-    document.getElementById('hw-tasks').innerHTML = '<span style="color:var(--error-color);">加载失败</span>';
-  }
-
-  // 加载 cron（复用 hermes_console 的 loadCronList 但渲染到 hw-cron）
+  // cron 列表
+  const listEl = document.getElementById('hw-cron-list');
+  if (!listEl) return;
   try {
     const data = await apiGet('/api/hermes/cron');
     const jobs = data.jobs || [];
-    const cronDiv = document.getElementById('hw-cron');
     if (!jobs.length) {
-      cronDiv.innerHTML = '<span style="color:var(--text-tertiary);">无定时任务</span>';
-    } else {
-      cronDiv.innerHTML = jobs.map(j => {
-        const isActive = j.status === 'active';
-        const badge = isActive ? '●' : '○';
-        const color = isActive ? 'var(--success-color)' : 'var(--text-tertiary)';
-        return `<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:0.82rem;">
-          <span><span style="color:${color};">${badge}</span> ${escapeHtml(j.name)}</span>
-          <span style="color:var(--text-tertiary);">${escapeHtml(j.schedule || '')}</span>
-        </div>`;
-      }).join('');
+      listEl.innerHTML = '<p class="hw-empty">无 cron 任务</p>';
+      return;
     }
+    listEl.innerHTML = jobs.map(j => {
+      const isActive = j.status === 'active';
+      const statusClass = isActive ? 'hw-status-active' : 'hw-status-paused';
+      const statusText = isActive ? 'active' : 'paused';
+      const lastIcon = j.last_status === 'ok' ? '✅' : (j.last_status ? '⚠️' : '○');
+      const lastText = j.last_run ? formatDate(j.last_run) : '未运行';
+      return `
+        <div class="hw-cron-item">
+          <div class="hw-cron-main">
+            <div class="hw-cron-name">${escapeHtml(j.name)}</div>
+            <div class="hw-cron-meta">
+              <span class="hw-cron-status ${statusClass}">${statusText}</span>
+              <span>⏰ ${escapeHtml(j.schedule || '?')}</span>
+              <span>${lastIcon} ${lastText}</span>
+            </div>
+          </div>
+          <div class="hw-cron-actions">
+            ${isActive
+              ? `<button class="hw-mini-btn" onclick="controlHermesCron('${escapeAttr(j.id)}','pause')">暂停</button>`
+              : `<button class="hw-mini-btn" onclick="controlHermesCron('${escapeAttr(j.id)}','resume')">恢复</button>`}
+            <button class="hw-mini-btn hw-mini-btn-primary" onclick="controlHermesCron('${escapeAttr(j.id)}','run')">触发</button>
+          </div>
+        </div>
+      `;
+    }).join('');
   } catch (e) {
-    document.getElementById('hw-cron').innerHTML = '<span style="color:var(--error-color);">加载失败</span>';
+    listEl.innerHTML = `<p class="hw-empty">加载失败: ${escapeHtml(e.message)}</p>`;
   }
+}
 
-  // 绑定手动派活（复用 hermes_console 的 bindHermesRun 逻辑）
-  const runBtn = document.getElementById('hw-run');
+async function runHermesTask() {
   const promptInput = document.getElementById('hw-prompt');
   const outputEl = document.getElementById('hw-output');
-  if (runBtn && promptInput) {
-    runBtn.addEventListener('click', async () => {
-      const prompt = promptInput.value.trim();
-      if (!prompt) { showToast('请输入任务目标', 'warning'); return; }
-      runBtn.disabled = true; runBtn.textContent = '执行中…';
-      if (outputEl) { outputEl.style.display = 'block'; outputEl.textContent = '◐ hermes agent 执行中…'; }
-      try {
-        const resp = await fetch('/api/hermes/run', {
-          method: 'POST', headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ prompt, timeout: 300 }),
-        });
-        const reader = resp.body.getReader();
-        const decoder = new TextDecoder();
-        let full = '';
-        while (true) {
-          const { done, value } = await reader.read();
-          if (done) break;
-          for (const line of decoder.decode(value, { stream: true }).split('\n')) {
-            if (line.startsWith('data: ')) {
-              try { const evt = JSON.parse(line.slice(6)); if (evt.type === 'token') full += evt.content; } catch {}
-            }
-          }
-          if (outputEl) { outputEl.textContent = full; outputEl.scrollTop = outputEl.scrollHeight; }
-        }
-        showToast('✓ 完成', 'success');
-      } catch (e) { showToast('✗ ' + e.message, 'error'); }
-      finally { runBtn.disabled = false; runBtn.textContent = '执行'; }
+  const runBtn = document.getElementById('hw-run');
+  const prompt = promptInput?.value.trim();
+  if (!prompt) { showToast('请输入任务目标', 'warning'); return; }
+
+  runBtn.disabled = true; runBtn.textContent = '执行中…';
+  if (outputEl) { outputEl.style.display = 'block'; outputEl.textContent = '◐ hermes agent 执行中…'; }
+  try {
+    const resp = await fetch('/api/hermes/run', {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ prompt, timeout: 300 }),
     });
+    const reader = resp.body.getReader();
+    const decoder = new TextDecoder();
+    let full = '';
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      for (const line of decoder.decode(value, { stream: true }).split('\n')) {
+        if (line.startsWith('data: ')) {
+          try { const evt = JSON.parse(line.slice(6)); if (evt.type === 'token') full += evt.content; } catch {}
+        }
+      }
+      if (outputEl) { outputEl.textContent = full; outputEl.scrollTop = outputEl.scrollHeight; }
+    }
+    showToast('✓ 完成', 'success');
+  } catch (e) { showToast('✗ ' + e.message, 'error'); }
+  finally { runBtn.disabled = false; runBtn.textContent = '执行'; }
+}
+
+async function controlHermesCron(jobId, action) {
+  try {
+    const data = await apiPost(`/api/hermes/cron/${encodeURIComponent(jobId)}/${action}`, {});
+    if (data.success) {
+      showToast(`✓ 已${action === 'run' ? '触发' : (action === 'pause' ? '暂停' : '恢复')}`, 'success');
+      loadHermesWorkspaceData();
+    } else {
+      showToast(data.error || '操作失败', 'error');
+    }
+  } catch (e) {
+    showToast('操作失败: ' + e.message, 'error');
   }
 }
 

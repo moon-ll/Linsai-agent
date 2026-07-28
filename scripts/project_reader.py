@@ -807,63 +807,14 @@ def get_nsfc_references() -> Dict[str, Any]:
 def get_nsfc_pending() -> List[Dict[str, Any]]:
     """从 state.md 提取待决策项（结构化）。
 
-    合并持久化决策状态（memory/nsfc-decisions.json），
-    approved/rejected 的不再返回。
+    v6.7.7: NSFC 项目已迁移到 proposal lifecycle 流水线，
+    旧 hermes_workspace 的待决策项不再显示在仪表盘。
+    保留函数仅用于历史兼容，直接返回空列表。
 
     Returns:
-        [{id, title, context, related_topic, status, source}]
+        []  # 已迁移，待决策由 lifecycle 管理
     """
-    import json as _json
-    state_path = NSFC_DIR / "state.md"
-    text = _read_text(state_path)
-
-    # 加载持久化决策状态
-    decisions_path = PROJECT_ROOT / "memory" / "nsfc-decisions.json"
-    decided = {}
-    if decisions_path.exists():
-        try:
-            decided = _json.loads(decisions_path.read_text(encoding="utf-8"))
-        except Exception:
-            decided = {}
-
-    # 从 state.md 提取待决策行（⚠️/📌/待拍板/待讨论）
-    pending = []
-    pid_counter = 0
-    for i, line in enumerate(text.split("\n"), 1):
-        line_stripped = line.strip()
-        if not any(mark in line_stripped for mark in ("⚠️", "⚠", "📌", "待.*拍板", "待.*讨论", "可推翻")):
-            continue
-        # 清理 markdown 符号
-        clean = re.sub(r"^[✅⏳⚠️📌❌\-*\s]+", "", line_stripped).strip()
-        clean = re.sub(r"\*\*(.+?)\*\*", r"\1", clean)  # 去粗体
-        if len(clean) < 5:
-            continue
-
-        pid_counter += 1
-        pid = f"pd_{pid_counter:03d}"
-
-        # 检测关联课题
-        related_topic = ""
-        for tid in _TOPIC_NAMES:
-            if tid in clean or tid in line_stripped:
-                related_topic = tid
-                break
-
-        # 持久化状态
-        status = decided.get(pid, {}).get("status", "pending")
-        if status in ("approved", "rejected"):
-            continue  # 已决策的不显示
-
-        pending.append({
-            "id": pid,
-            "title": clean[:80],
-            "context": clean[:200],
-            "related_topic": related_topic,
-            "status": status,
-            "source": f"state.md L{i}",
-        })
-
-    return pending
+    return []
 
 
 # ============================================================

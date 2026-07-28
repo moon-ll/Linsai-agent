@@ -148,19 +148,11 @@
     </div>
   </main>
 
-  <!-- v6.0: hermes 工作台页面 -->
-  <main class="kb-main" id="hermes-page" style="display:none;flex-direction:column;">
-    <div style="padding:16px 20px;overflow-y:auto;flex:1;">
-      <div id="hermes-workspace-content" style="margin-bottom:20px;">
-        <!-- hermes_console.js 填充 cron + 任务 + 追踪 -->
-        <p style="color:var(--text-tertiary);text-align:center;padding:40px;">◐ 加载中…</p>
-      </div>
-      <!-- v6.6.0: 提案生命周期入口 -->
-      <div style="margin-bottom:16px;">
-        <button class="btn-primary pad-6-12 br-6" onclick="openLifecycle()" style="cursor:pointer;font-size:0.85rem;">
-          🔬 提案生命周期 · 操作台
-        </button>
-      </div>
+  <!-- v6.7.7: hermes 工作台页面（新风格） -->
+  <main class="kb-main" id="hermes-page" style="display:none;flex-direction:column;overflow-y:auto;padding:20px;">
+    <div id="hermes-workspace-content">
+      <!-- hermes_console.js 填充状态栏、cron 列表、手动派活 -->
+      <p style="color:var(--text-tertiary);text-align:center;padding:40px;">◐ 加载中…</p>
     </div>
   </main>
 
