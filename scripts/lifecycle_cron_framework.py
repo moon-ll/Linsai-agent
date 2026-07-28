@@ -62,7 +62,7 @@ HERMES_PROFILE = "linsai"  # cron 统一挂在 linsai profile，便于 hermes_br
 
 # worker / repair / orchestrate 的默认 cron 表达式
 DEFAULT_ORCHESTRATE_SCHEDULE = "55 8 * * *"
-DEFAULT_WORKER_INTERVAL = "*/20 * * * *"
+DEFAULT_WORKER_INTERVAL = "47 * * * *"
 DEFAULT_REPAIR_SCHEDULE = "0 */6 * * *"
 
 # checkpoint 状态

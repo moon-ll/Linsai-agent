@@ -2056,6 +2056,8 @@ def main(argv: Optional[List[str]] = None) -> int:
                         help="与 --repair 联用：只预览不修改")
     parser.add_argument("--setup-cron-v2", action="store_true",
                         help="安装 v2 cron 框架（orchestrate + repair + per-proposal workers）")
+    parser.add_argument("--worker-schedule", default="47 * * * *", metavar="CRON",
+                        help="worker cron 调度表达式（默认 47 * * * *，即每小时 47 分）")
     parser.add_argument("--teardown-cron-v2", action="store_true",
                         help="卸载所有 v2 lifecycle cron")
     args = parser.parse_args(argv)
@@ -2095,8 +2097,9 @@ def main(argv: Optional[List[str]] = None) -> int:
             return 0
 
         if args.setup_cron_v2:
-            result = ctrl.setup_cron_framework()
+            result = ctrl.setup_cron_framework(worker_interval=args.worker_schedule)
             print("=== v2 cron 框架安装结果 ===")
+            print(f"worker schedule: {args.worker_schedule}")
             print(f"removed_old: {result.get('removed_old', [])}")
             print(f"orchestrate: {result.get('orchestrate', {}).get('message')}")
             print(f"repair: {result.get('repair', {}).get('message')}")
