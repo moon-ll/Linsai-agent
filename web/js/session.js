@@ -42,19 +42,49 @@ function renderSessionList() {
     return `
     <div class="session-item ${sid === State.currentSessionId && !State.viewingArchive ? 'active' : ''}"
          data-id="${escapeHtml(sid)}">
-      <div class="session-topic">${escapeHtml(topic)}</div>
-      <div class="session-meta">
-        <span>${formatDate(lastActive)}</span>
-        <span>${msgCount} 条</span>
+      <div class="session-item-main">
+        <div class="session-topic">${escapeHtml(topic)}</div>
+        <div class="session-meta">
+          <span>${formatDate(lastActive)}</span>
+          <span>${msgCount} 条</span>
+        </div>
+        ${kwHtml}
       </div>
-      ${kwHtml}
+      <button class="session-delete-btn" title="删除会话" data-id="${escapeHtml(sid)}">✕</button>
     </div>
   `}).join('');
 
   container.querySelectorAll('.session-item').forEach(el => {
-    el.addEventListener('click', () => {
+    el.addEventListener('click', (e) => {
+      if (e.target.closest('.session-delete-btn')) return;
       const sid = el.dataset.id;
       switchSession(sid);
+    });
+  });
+
+  container.querySelectorAll('.session-delete-btn').forEach(btn => {
+    btn.addEventListener('click', async (e) => {
+      e.stopPropagation();
+      const sid = btn.dataset.id;
+      const topic = btn.closest('.session-item')?.querySelector('.session-topic')?.textContent || sid;
+      if (!confirm(`确定删除会话「${topic}」？\n删除后会备份到 archived/_deleted/。`)) return;
+      try {
+        const resp = await fetch(`/api/sessions/${encodeURIComponent(sid)}`, { method: 'DELETE' });
+        const data = await resp.json();
+        if (data.success) {
+          showToast('会话已删除', 'success');
+          await loadSessions();
+          if (State.currentSessionId === sid) {
+            State.currentSessionId = null;
+            document.getElementById('messages').innerHTML = '';
+            document.getElementById('welcome-screen').style.display = 'flex';
+          }
+        } else {
+          showToast(data.error || '删除失败', 'error');
+        }
+      } catch (e) {
+        showToast('删除失败: ' + e.message, 'error');
+      }
     });
   });
 }

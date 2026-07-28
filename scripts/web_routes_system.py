@@ -970,7 +970,9 @@ class SystemRoutesMixin:
         """GET /api/console/agents — agent / profile 工作状态。"""
         try:
             from profile_health import compute_profile_health
-            profiles = compute_profile_health(window_hours=24)
+            health = compute_profile_health(window_hours=24)
+            # profile_health 返回的字典包含 profiles / alerts / window_hours / computed_at 等元数据
+            profiles = health.get("profiles", {}) if isinstance(health, dict) else {}
 
             # 当前 cron 任务作为 agent 当前工作
             try:

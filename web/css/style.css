@@ -769,6 +769,9 @@ body {
   margin-bottom: 4px;
   transition: background var(--transition);
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .session-item:hover {
@@ -777,6 +780,11 @@ body {
 
 .session-item.active {
   background: var(--bg-active);
+}
+
+.session-item-main {
+  flex: 1;
+  min-width: 0;
 }
 
 .session-item .session-topic {
@@ -793,6 +801,31 @@ body {
   margin-top: 2px;
   display: flex;
   justify-content: space-between;
+}
+
+.session-delete-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  font-size: 0.75rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition), background var(--transition), color var(--transition);
+}
+
+.session-item:hover .session-delete-btn {
+  opacity: 1;
+}
+
+.session-delete-btn:hover {
+  background: var(--error-color);
+  color: #fff;
 }
 
 /* ---- 对话区 ---- */

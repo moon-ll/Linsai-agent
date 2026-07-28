@@ -301,6 +301,39 @@ def archive_session(session_id: str) -> bool:
         return False
 
 
+def delete_session(session_id: str) -> bool:
+    """彻底删除会话目录（先归档备份到 sessions/archived/_deleted/）。"""
+    sessions_dir = _get_sessions_dir()
+    archived_dir = _get_archived_dir()
+    src = sessions_dir / session_id
+
+    if not src.exists():
+        # 也可能在 archived 里
+        archived_src = archived_dir / session_id
+        if archived_src.exists():
+            src = archived_src
+        else:
+            print(f"✗ 会话不存在，无法删除: {session_id}")
+            return False
+
+    # 删除前备份到 archived/_deleted/{session_id}_{timestamp}
+    deleted_dir = archived_dir / "_deleted"
+    deleted_dir.mkdir(parents=True, exist_ok=True)
+    ts = datetime.now(timezone.utc).strftime("%Y%m%d%H%M%S")
+    backup_name = f"{session_id}_{ts}"
+    backup_path = deleted_dir / backup_name
+
+    try:
+        import shutil
+        shutil.copytree(src, backup_path)
+        shutil.rmtree(src)
+        print(f"✓ 会话已删除并备份: {session_id} -> {backup_path}")
+        return True
+    except Exception as exc:  # noqa: BLE001
+        print(f"✗ 删除会话失败: {exc}")
+        return False
+
+
 if __name__ == "__main__":
     print("=" * 50)
     print("◐ 开始 session_manager 自检")

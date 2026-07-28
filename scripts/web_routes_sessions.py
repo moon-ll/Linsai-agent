@@ -57,6 +57,7 @@ _SESSION_ROUTES = [
     ("PUT", re.compile(r"^/api/sessions/(?P<sid>[^/]+)/messages/(?P<msg_id>[^/]+)$"), "_sess_edit_message"),
     # DELETE
     ("DELETE", re.compile(r"^/api/sessions/(?P<sid>[^/]+)/messages/(?P<msg_id>[^/]+)$"), "_sess_delete_message"),
+    ("DELETE", re.compile(r"^/api/sessions/(?P<sid>[^/]+)$"), "_sess_delete_session"),
 ]
 
 
@@ -299,3 +300,11 @@ class SessionRoutesMixin:
             self._send_json({"success": True})
         else:
             self._send_json({"error": "消息未找到"}, 404)
+
+    def _sess_delete_session(self, parsed, sid):
+        """删除会话（含备份）"""
+        ok = sm.delete_session(sid)
+        if ok:
+            self._send_json({"success": True})
+        else:
+            self._send_json({"error": "会话未找到或删除失败"}, 404)
