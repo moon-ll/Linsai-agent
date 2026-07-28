@@ -63,7 +63,9 @@ except Exception:
 # 常量
 # ---------------------------------------------------------------------------
 
-HERMES_SCRIPTS_DIR = Path.home() / ".hermes" / "scripts"
+# hermes CLI 在执行 --script 时会在 ~/.hermes/profiles/<profile>/scripts/ 下查找，
+# 因此包装脚本必须写到对应 profile 目录，而不是全局 ~/.hermes/scripts/
+HERMES_SCRIPTS_DIR = Path.home() / ".hermes" / "profiles" / "linsai" / "scripts"
 HERMES_PROFILE = "linsai"  # cron 统一挂在 linsai profile，便于 hermes_bridge 读取
 
 # worker / repair / orchestrate / weekend 的默认 cron 表达式
@@ -115,7 +117,7 @@ def _ensure_hermes_scripts_dir() -> Path:
 
 
 def _write_wrapper_script(name: str, content: str) -> Path:
-    """把包装脚本写入 ~/.hermes/scripts/，并返回路径。"""
+    """把包装脚本写入 ~/.hermes/profiles/linsai/scripts/，并返回路径。"""
     _ensure_hermes_scripts_dir()
     path = HERMES_SCRIPTS_DIR / name
     path.write_text(content, encoding="utf-8")
@@ -1204,7 +1206,7 @@ python3 scripts/weekend_orchestrator.py --reflection
             (WEEKEND_JOB_OUTPUT, output_schedule),
             (WEEKEND_JOB_REFLECTION, reflection_schedule),
         ]:
-            script_name = f"lc_weekend_{job_key}.sh"
+            script_name = f"lc_{job_key}.sh"
             cron_name = f"lc-weekend-{job_key.replace('_', '-')}"
             res = hb.cron_create_no_agent(
                 script_name=script_name,

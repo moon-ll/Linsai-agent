@@ -228,7 +228,8 @@ def cron_create_no_agent(
     """创建一个不经过 LLM agent、直接执行本地脚本的 hermes cron job。
 
     Args:
-        script_name: ~/.hermes/scripts/ 下的脚本文件名
+        script_name: ~/.hermes/profiles/<profile>/scripts/ 下的脚本文件名；
+                    hermes 要求相对路径，并会在 profile 脚本目录下查找
         name: cron job 名称
         schedule: cron 表达式，如 "*/20 * * * *"
         workdir: 工作目录

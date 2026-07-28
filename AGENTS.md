@@ -3,6 +3,7 @@
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
 > 最后更新：2026-07-28
+> 提示：完整目录结构见 `docs/PROJECT-STRUCTURE.md`，完整架构说明见 `docs/ARCHITECTURE.md`。
 
 ---
 
@@ -10,7 +11,7 @@
 
 **LinSai-CoPilot**（林赛协作引擎）是一个**虚拟合作者系统**——让林赛（Lin Sai）作为用户的专属 AI 协作者，1 对 1 深度协作，共同推进实际工作。
 
-**核心比喻**：钢铁侠的贾维斯（J.A.R.V.I.S.）。不是群聊里的旁观者，而是随时待命、深度参与、主动感知的个人合作者。
+**核心比喻**：钢铁侠的贾维斯（J.A.R.V.I.S）。不是群聊里的旁观者，而是随时待命、深度参与、主动感知的个人合作者。
 
 **当前架构定位（v6.6+）**：
 - CoPilot 是**操作台/监控层**：提供 Web 界面、会话管理、知识库、任务追踪、提案生命周期可视化和人工决策入口。
@@ -59,261 +60,6 @@
 
 ---
 
-## 目录结构
-
-```
-LinSai-CoPilot/
-│
-├── AGENTS.md                  # 本文件。AI 代理必读指南
-├── README.md                  # 人类可读的项目说明
-├── CHANGELOG.md               # 变更记录
-├── VERSION                    # 版本号唯一真相源（当前 6.7.7）
-├── .env                       # 本地 API 密钥（gitignore，不提交）
-├── .gitignore                 # Git 忽略规则：用户数据、自动生成文件、敏感配置
-│
-├── persona/                   # 林赛人格资产（注入材料）
-│   ├── README.md              # 资产来源说明与更新规范
-│   ├── lin-sai-persona.md     # 整合版人格注入文件（主 prompt 素材）
-│   └── source-manifest.json   # 来源追踪：记录复制自 virtu-LinSai 的版本
-│
-├── sessions/                  # 对话会话存档
-│   ├── README.md
-│   └── YYYYMMDD-会话主题/     # 每次会话一个目录
-│       ├── messages.json      # 消息日志
-│       ├── state.json         # 会话状态
-│       └── summary.md         # 会话摘要
-│
-├── memory/                    # 长期记忆与上下文
-│   ├── README.md
-│   ├── user-profile.json      # 用户画像（偏好、习惯、已知技能）
-│   ├── working-context.json   # 当前工作上下文（进行中的项目、关键决策）
-│   ├── long-term-memory.json  # 跨会话记忆索引
-│   ├── autonomy-level.json    # 自主级别配置
-│   ├── learning-config.json   # 学习引擎配置
-│   ├── learning-cost.json     # 学习成本追踪
-│   ├── llm-config.json        # LLM 路由配置（gitignore）
-│   ├── nsfc-decisions.json    # NSFC 决策记录
-│   ├── nsfc-standards.json    # NSFC 三类项目（面上/重点/重大）质量标准与模板
-│   ├── feedback-standards.json# 反馈质量标准
-│   ├── paper-feedback.json    # 论文反馈
-│   ├── paper-pool.json        # 论文池
-│   ├── pdf-library.json       # PDF 原文库索引
-│   ├── project-dispatch.json  # 项目调度
-│   ├── reflow-state.json      # 认知回流状态
-│   ├── research-profile.json  # 研究方向画像
-│   ├── sync-state.json        # 同步状态
-│   ├── hermes-memory-snapshot.json # hermes 记忆原文快照
-│   ├── alias-candidates.json  # 别名候选
-│   ├── chat-archive-index.json # 聊天归档索引
-│   └── snippets/              # 记忆片段（用户的名言、关键事件）
-│       └── README.md
-│
-├── tasks/                     # 工作项与项目管理
-│   ├── README.md
-│   ├── active/                # 进行中任务
-│   ├── backlog/               # 待办任务
-│   └── completed/             # 已完成任务
-│
-├── references/                # 用户提供的参考资料（默认只读）
-│   ├── README.md
-│   ├── papers/                # 论文/文献
-│   ├── notes/                 # 用户笔记
-│   └── index.json             # 文献索引
-│
-├── knowledge/                 # 林赛的知识库（Obsidian Vault）
-│   ├── README.md              # 知识库使用指南
-│   ├── raw/                   # 用户原始材料（只读）
-│   │   ├── papers/            # 论文 PDF/笔记
-│   │   ├── notes/             # 用户手写笔记
-│   │   ├── pdfs/              # PDF 原文库（v6.3）
-│   │   └── webclips/          # 网页剪藏
-│   ├── wiki/                  # LLM 管理的结构化知识
-│   │   ├── concepts/          # 核心概念
-│   │   ├── methods/           # 实验方法
-│   │   ├── people/            # 学者评价
-│   │   ├── papers/            # 论文精读
-│   │   └── projects/          # 项目聚合
-│   ├── captures/              # 对话自动捕获片段
-│   ├── .obsidian/             # Obsidian 配置
-│   ├── templates/             # Obsidian 笔记模板
-│   ├── aliases.json           # 别名映射
-│   ├── index.json             # 统一倒排索引
-│   ├── graph.json             # 知识图谱
-│   ├── growth-log.json        # 知识生长日志
-│   ├── categories.json        # 分类管理数据
-│   └── .cache/                # 搜索缓存
-│
-├── skills/                    # 技能目录（每个技能一个子目录）
-│   ├── README.md
-│   ├── self-test/             # 内测系统 skill 说明
-│   └── {skill-name}/
-│       └── SKILL.md           # 技能定义：触发词、心智模型、表达 DNA
-│
-├── projects/                  # v3.5 课题指导模块数据（当前为空，功能由 research_proposals 承接）
-│   └── README.md
-│
-├── proposals/                 # 早期 proposal 草稿（历史目录，逐渐被 research_proposals 替代）
-│
-├── research_proposals/        # v6.2+ 研究管线数据域（独立，与 CoPilot 核心隔离）
-│   ├── _lifecycle.json        # 提案生命周期总状态
-│   ├── .config/               # 管线配置（品味模型等）
-│   ├── drafts/                # 初稿区
-│   ├── optimizing/            # 优化中区
-│   ├── pending_review/        # 待校验区
-│   ├── archived/              # 归档区
-│   └── {proposal_id}/         # 单个提案目录
-│       ├── 00_pipeline/       # 管线状态、产物注册表
-│       ├── 01_literature/     # 文献调研产物（或 01_direction）
-│       ├── 02_topic/          # 缺口分析、课题列表
-│       ├── 03_question/       # 科学问题框架
-│       ├── 04_proposal/       # 申请书章节、参考文献
-│       └── 05_review/         # 自检报告、迭代历史
-│
-├── docs/                      # 项目文档与报告
-│   ├── README.md
-│   ├── CLAUDE-CLI-ADMIN.md    # Claude CLI 人工管理指南
-│   ├── deepxiv-knowledge-workflow.md
-│   ├── unified-state-sync-design.md
-│   ├── v5-three-tier-unification-plan.md
-│   ├── linsai-orchestrator-design.md # v6.7 林赛总控设计文档
-│   ├── prompts/               # LLM prompt 模板
-│   └── archive/               # 历史文档归档
-│
-├── linsai-copilot-manual/     # 项目使用手册（HTML）
-├── pipeline-deep-design/      # 管线深度设计稿（HTML）
-├── research-pipeline-architecture/ # 研究管线架构图（HTML）
-│
-├── scripts/                   # 工具脚本（Python 3，零依赖）
-│   ├── __init__.py            # 包初始化
-│   ├── common.py              # 公共工具：now_utc/load_json/save_json/safe_filename/file_lock
-│   ├── paths.py               # 路径常量：PROJECT_ROOT 及所有数据目录
-│   ├── logger.py              # 统一日志：控制台彩色输出 + 文件按日期轮转
-│   │
-│   ├── copilot_engine.py      # 核心引擎：prompt 构建、调用 LLM、响应解析、CLI 入口
-│   ├── context_builder.py     # 上下文组装：人格 + 记忆 + 知识库 + 会话历史
-│   ├── session_manager.py     # 会话创建、存档、加载
-│   ├── memory_manager.py      # 记忆读写、索引、压缩
-│   ├── task_manager.py        # 任务 CRUD、状态流转
-│   ├── proactive_engine.py    # 主动感知、心跳扫描
-│   ├── document_handler.py    # 文档读取、PDF 提取、代码分析
-│   ├── skill_manager.py       # 技能系统：扫描、匹配、注入、配置
-│   ├── slash_commands.py      # 斜杠命令系统
-│   ├── tool_engine.py         # 工具注册：file_read/write, calc, task_create, knowledge_query, run_command, hermes_chat
-│   ├── chat_archive.py        # 聊天记录归档浏览器
-│   │
-│   ├── knowledge_base.py      # 知识库引擎门面：re-export 子模块全部函数
-│   ├── kb_text.py             # 文本工具：tokenize/chunk/IDF/frontmatter
-│   ├── kb_graph.py            # 知识图谱：节点 CRUD、关联概念、wikilink 注入
-│   ├── kb_index.py            # 索引：build_index/search/search_light/raw 管理
-│   ├── kb_wiki.py             # wiki 页面：CRUD/stub 创建/生长阶段
-│   ├── kb_health.py           # 知识库健康度
-│   ├── kb_capture.py          # 对话自动捕获
-│   ├── kb_maintenance.py      # 批处理维护
-│   ├── kb_auto_sync.py        # 知识库自动同步
-│   ├── kb_categories.py       # 分类管理
-│   ├── kb_importer.py         # 批量导入
-│   ├── kb_linker.py           # 关联链接
-│   │
-│   ├── alias_learner.py       # 别名学习器
-│   ├── growth_engine.py       # 知识生长引擎
-│   ├── paper_pool.py          # 论文池管理
-│   ├── pdf_manager.py         # v6.3 PDF 原文库管理器
-│   ├── research_profiler.py   # 研究方向感知器：TF-IDF 关键词、7 天自动重建
-│   ├── external_fetcher.py    # 统一信息获取：deepxiv + 联网检索 + raw 扫描
-│   ├── learning_engine.py     # 自主学习核心：蒸馏/精读/概念整合/成本追踪
-│   ├── quality_evaluator.py   # 质量评估引擎
-│   ├── usage_tracker.py       # Token 用量追踪
-│   │
-│   ├── agora_bridge.py        # Agora 群聊桥接
-│   ├── hermes_bridge.py       # Hermes 桥接器：cron 控制 / oneshot 派活 / 团队 profile 状态
-│   ├── hermes_pipeline.py     # v6.4 Hermes 驱动研究管线：导入 / 派活 / 执行 / cron
-│   ├── sync_engine.py         # 多端同步
-│   ├── briefing_sync.py       # v4.1 文献简报双向同步
-│   ├── state_sync.py          # v5+ 论文统一状态总线（CoPilot ↔ hermes）
-│   ├── memory_bridge.py       # hermes → CoPilot 记忆单向同步
-│   │
-│   ├── project_dispatch.py    # 项目总控：意见 + 执行追踪持久化
-│   ├── project_manager.py     # v3.5 课题管理
-│   ├── unit_manager.py        # v3.5 单元管理
-│   ├── project_kb.py          # v3.5 课题知识库
-│   ├── project_memory.py      # v3.5 课题记忆
-│   ├── project_context.py     # v3.5 课题上下文
-│   ├── project_workflow.py    # v3.5 课题工作流
-│   ├── project_reader.py      # 项目文件读取器
-│   ├── kanban_reader.py       # 看板数据读取
-│   │
-│   ├── llm_router.py          # 多模型路由：MiniMax API + Kimi CLI + Claude CLI，自动降级
-│   ├── llm_gateway.py         # v6.3.2 共享 LLM 网关（核心与管线均可调用）
-│   ├── backup_manager.py      # 数据备份/恢复
-│   ├── upgrade.py             # 安全升级标准流程
-│   ├── self_test.py           # 内测统一入口
-│   ├── test_e2e_learning_full.py # 三来源端到端完整链路验证
-│   │
-│   ├── artifact_manager.py    # v6.2 产物版本管理
-│   ├── lineage_tracker.py     # v6.2 血缘追踪
-│   ├── taste_engine.py        # v6.2 学术品味引擎
-│   ├── pipeline_orchestrator.py # v6.2 管线编排：六阶段状态机/六道门禁
-│   ├── gap_analyzer.py        # v6.2 研究缺口分析
-│   ├── citation_manager.py    # v6.2 引文管理
-│   ├── topic_generator.py     # v6.2 课题生成
-│   ├── question_architect.py  # v6.2 科学问题架构
-│   ├── proposal_inspector.py  # v6.2 申请书自检
-│   ├── proposal_writer.py     # v6.2 申请书撰写
-│   ├── proposal_lifecycle.py  # v6.5+ 提案生命周期：四阶段 + writer-critic 对抗优化
-│   ├── rebuild_lifecycle.py   # v6.7.1+ 基于 critic 报告重建 _lifecycle.json / 规范化轮次编号
-│   ├── import_hermes_topics.py # v6.7.3 将 hermes workspace 课题雏形导入全自动链路
-│   ├── idea_generator.py      # v6.7.7 输入端：自动/手动研究设想生成、缺口识别、对比融合
-│   ├── knowledge_output.py    # v6.7.7 输出端：归档知识萃取、可靠源 KB 写入
-│   ├── weekend_orchestrator.py # v6.7.7 周末总控：输入/输出/反思任务调度
-│   ├── kb_health_weekend.py   # v6.7.7 周末 KB 健康检查与 derived 内容降级
-│   ├── orchestrator.py        # v6.7 林赛总控核心：仪表盘 / 失败分析 / 策略建议 / 链路监控
-│   ├── profile_health.py      # v6.7 profile 健康度：idle/working/blocked/offline + 成功率/耗时
-│   ├── failure_analyzer.py    # v6.7 失败模式分析：8 种模式聚类 + prompt 修正建议
-│   ├── strategy_optimizer.py  # v6.7 调度策略自调优：建议模式，人工确认后应用
-│   ├── web_routes_orchestrator.py # v6.7 林赛总控路由 Mixin（8 条路由）
-│   ├── web_routes_system.py   # v6.7.7 生命周期输入/输出端路由（incoming/weekend）
-│   ├── web_routes_settings.py # v6.7.7 设置中心路由 Mixin（链路/模板/Agent/任务/学习/自主/KB输出）
-│   ├── methodology_manual.py  # v6.2.1 方法学手册
-│   ├── agent_team.py          # v6.2.1 Agent 团队管理
-│   ├── check_boundary.py      # v6.2.1 边界违规检测
-│   │
-│   ├── deepxiv_knowledge/     # deepxiv 论文获取流水线
-│   ├── wiki_regenerator/      # wiki 报告重建
-│   └── tests/                 # 自动化测试套件
-│       ├── test_runner.py     # 零依赖轻量测试框架
-│       ├── test_core.py       # 核心模块单元测试
-│       ├── test_scenarios.py  # 场景剧本测试
-│       ├── test_persona.py    # 人格一致性抽检
-│       └── test_web_api.py    # Web API 接口测试
-│
-└── web/                       # 前端界面（零框架依赖）
-    ├── index.html             # 单页应用入口
-    ├── css/
-    │   └── style.css          # 双主题样式
-    └── js/
-        ├── app.js              # 主入口
-        ├── core.js             # 核心工具（API 请求/渲染/主题/toast）
-        ├── chat.js             # 聊天逻辑
-        ├── session.js          # 会话管理
-        ├── task.js             # 任务面板
-        ├── kb.js               # 知识库浏览器
-        ├── skill.js            # 技能面板
-        ├── settings.js         # 设置面板
-        ├── projects.js         # 项目面板
-        ├── hermes_console.js   # Hermes 控制台
-        ├── learning.js         # 学习管理器
-        ├── research.js         # 课题指导面板
-        ├── pipeline.js         # 研究管线面板
-        ├── dashboard.js        # v6.0 仪表盘首页
-        ├── lifecycle.js        # v6.6 提案生命周期面板
-        ├── orchestrator.js     # v6.7 林赛总控台（仪表盘 / Profile 健康 / 失败模式 / 策略 / 链路质量）
-        ├── console.js          # v6.7.7 林赛控制台：全链路流水线 / Agent 状态 / 告警 / 快捷操作
-        ├── settings_center.js  # v6.7.7 设置中心：链路/模板/Agent/任务/学习/自主/KB输出可视化配置
-        └── paper_discussion.js # v4.1 文献独立讨论弹窗
-```
-
----
-
 ## 运行与构建
 
 **无构建步骤**。Python 脚本直接运行，无编译、无打包、无依赖安装。
@@ -321,15 +67,9 @@ LinSai-CoPilot/
 ### 启动 Web 界面（推荐）
 
 ```bash
-# 方式一：直接启动（默认端口 8080）
-python3 scripts/web_server.py
-
-# 方式二：指定端口
-python3 scripts/web_server.py --port 9000
-
-# 方式三：一键启动（自动打开浏览器）
-./scripts/launch.sh
-./scripts/launch.sh 9000  # 指定端口
+python3 scripts/web_server.py              # 默认端口 8080
+python3 scripts/web_server.py --port 9000  # 指定端口
+./scripts/launch.sh                        # 一键启动（自动打开浏览器）
 ```
 
 打开 `http://localhost:8080`。
@@ -337,66 +77,31 @@ python3 scripts/web_server.py --port 9000
 ### 启动 CLI 对话
 
 ```bash
-# 新建会话
 python3 scripts/copilot_engine.py --start "固体HHG实验方案设计"
-
-# 继续上一个会话
 python3 scripts/copilot_engine.py --continue
-
-# 列出会话
 python3 scripts/copilot_engine.py --list
 ```
 
 ### 常用维护命令
 
 ```bash
-# 手动备份（自动备份每 24 小时触发一次）
-python3 scripts/backup_manager.py
-python3 scripts/backup_manager.py --list
-python3 scripts/backup_manager.py --restore backups/2026-07-27T10-00-00Z.zip
-
-# 安全升级（备份 → 拉取 → 验证 → 检查迁移）
-python3 scripts/upgrade.py --check
+python3 scripts/backup_manager.py                         # 手动备份
+python3 scripts/upgrade.py --check                        # 升级检查
 python3 scripts/upgrade.py --simulate
 python3 scripts/upgrade.py
-
-# 知识库周维护
-python3 scripts/kb_maintenance.py --weekly
-
-# 认知回流
-python3 scripts/memory_reflow.py --reflow
-
-# 同步 hermes 产出
-python3 scripts/sync_engine.py
-
-# 修复 _lifecycle.json 与实际 critic 报告不一致（v6.7.1+）
-python3 scripts/rebuild_lifecycle.py --dry-run              # 预览 lifecycle 重建
-python3 scripts/rebuild_lifecycle.py                        # 执行重建
-python3 scripts/rebuild_lifecycle.py --normalize-rounds     # 重命名 critic 文件为连续编号
-
-# 检查生命周期一致性（v6.7.2）
-python3 -c "from orchestrator import check_lifecycle_consistency; \
-            import json; print(json.dumps(check_lifecycle_consistency(), ensure_ascii=False, indent=2))"
-
-# 导入 hermes workspace 课题雏形并激活全自动链路（v6.7.3）
-python3 scripts/import_hermes_topics.py --dry-run   # 预览
-python3 scripts/import_hermes_topics.py --activate  # 导入 + 迁移到 optimizing + 启动 cron sweep
-
-# 配置每日编排 cron（默认 57 8 * * *）
-python3 scripts/proposal_lifecycle.py --setup-cron "57 8 * * *"
-
-# 配置/拆除周末任务 cron（输入/输出/反思，v6.7.7）
-python3 scripts/proposal_lifecycle.py --setup-weekend
-python3 scripts/proposal_lifecycle.py --teardown-weekend
-
-# 手动触发周末任务（输入/输出/反思，v6.7.7）
-python3 scripts/weekend_orchestrator.py --input --dry-run
+python3 scripts/kb_maintenance.py --weekly                # 知识库周维护
+python3 scripts/memory_reflow.py --reflow                 # 认知回流
+python3 scripts/sync_engine.py                            # 同步 hermes 产出
+python3 scripts/rebuild_lifecycle.py --dry-run            # 修复 lifecycle 不一致（预览）
+python3 scripts/rebuild_lifecycle.py
+python3 scripts/import_hermes_topics.py --dry-run         # 导入 hermes 课题（预览）
+python3 scripts/import_hermes_topics.py --activate
+python3 scripts/proposal_lifecycle.py --setup-cron "57 8 * * *"   # 每日编排 cron
+python3 scripts/proposal_lifecycle.py --setup-weekend     # 周末任务 cron
+python3 scripts/weekend_orchestrator.py --input --dry-run # 手动触发周末输入
 python3 scripts/weekend_orchestrator.py --output --dry-run
 python3 scripts/weekend_orchestrator.py --reflection --dry-run
-
-# 手动生成研究设想并注册 drafts（v6.7.7）
-python3 scripts/idea_generator.py --auto --dry-run
-python3 scripts/idea_generator.py --manual "我想研究强场激光驱动的谷极化超快动力学"
+python3 scripts/idea_generator.py --auto --dry-run        # 自动生成研究设想
 ```
 
 ### 语法检查
@@ -411,67 +116,17 @@ python3 -m py_compile scripts/*.py
 
 采用**三层测试体系**：
 
-### 1. 单元/核心回归测试
-
-```bash
-# 全量（不含 Web API）
-python3 scripts/self_test.py
-
-# 分维度
-python3 scripts/self_test.py --module     # 核心模块（当前 116 个检查点）
-python3 scripts/self_test.py --scenario   # 场景剧本（当前 16 个检查点）
-python3 scripts/self_test.py --persona    # 人格一致性（当前 38 个检查点）
-python3 scripts/self_test.py --web        # Web API 专项（需启动子进程）
-python3 scripts/self_test.py --web-ci     # CI 模式：全量 + Web API
-
-# JSON 输出
-python3 scripts/self_test.py --module --json
-
-# 程序化调用
-python3 -c "from self_test import run_tests; print(run_tests(['module'])['summary'])"
-```
+1. **单元/核心回归测试**：`python3 scripts/self_test.py`，支持 `--module`、`--scenario`、`--persona`、`--web`、`--web-ci`。
+2. **模块自检**：大量脚本支持 `--self-check`，运行 `python3 scripts/{module}.py --self-check`。
+3. **E2E 集成测试**：`python3 scripts/test_e2e_learning_full.py`（需真实 Claude CLI 环境，非日常回归项）。
 
 **当前基线**：
-- `--module`：116/116 通过（含核心模块、课题链路、LLM 路由、工具引擎、安全、kb 子模块等）
+- `--module`：116/116 通过
 - `--scenario`：16/16 通过
 - `--persona`：38/38 通过
-- `--web-ci`：Web API 虚拟用户测试（启动 web_server 子进程，覆盖所有主要 API 命名空间）
+- `--web-ci`：Web API 虚拟用户测试覆盖所有主要 API 命名空间
 
-### 2. 模块自检
-
-大量核心脚本和管线索脚本包含 `_self_check()`，可直接运行：
-
-```bash
-python3 scripts/{module}.py --self-check
-```
-
-例如：
-
-```bash
-python3 scripts/web_server.py --self-check
-python3 scripts/pdf_manager.py --self-check
-python3 scripts/hermes_pipeline.py --self-check
-python3 scripts/proposal_lifecycle.py --self-check
-python3 scripts/orchestrator.py --self-check
-python3 scripts/profile_health.py --self-check
-python3 scripts/failure_analyzer.py --self-check
-python3 scripts/strategy_optimizer.py --self-check
-python3 scripts/agent_team.py --self-check
-python3 scripts/methodology_manual.py --self-check
-```
-
-### 3. E2E 集成测试
-
-```bash
-# 自主学习三来源端到端验证（需真实 Claude CLI 环境，非日常回归项）
-python3 scripts/test_e2e_learning_full.py
-```
-
-### 测试设计原则
-
-- **零污染**：所有测试在临时隔离目录运行，结束后自动清理，不触碰真实会话/任务/记忆。
-- **零成本**：不调用 LLM API，纯本地代码逻辑验证。
-- **自动发现**：在 `scripts/tests/` 下新增 `test_*.py` 并继承 `TestSuite` 即可自动纳入回归。
+**测试设计原则**：零污染（临时隔离目录运行）、零成本（不调用 LLM API）、自动发现（新增 `scripts/tests/test_*.py` 自动纳入回归）。
 
 ---
 
@@ -484,12 +139,7 @@ python3 scripts/test_e2e_learning_full.py
 - 路径处理使用 `pathlib.Path`；`PROJECT_ROOT` 通过 `Path(__file__).parent.parent` 推导。
 - JSON 文件必须 `ensure_ascii=False, indent=2`。
 - 时间戳使用 UTC ISO 格式：`%Y-%m-%dT%H:%M:%SZ`。
-- 输出使用中文，状态图标统一：
-  - `✓` 成功
-  - `✗` 失败
-  - `⚠` 警告
-  - `○` 待处理
-  - `◐` 进行中
+- 输出使用中文，状态图标统一：`✓` 成功、`✗` 失败、`⚠` 警告、`○` 待处理、`◐` 进行中。
 - 原子写入：`common.save_json` 使用 tempfile + fsync + `os.replace()`。
 - 跨进程并发：使用 `common.file_lock("name")`（基于 `fcntl.flock`）。
 
@@ -529,171 +179,41 @@ python3 scripts/test_e2e_learning_full.py
 
 ---
 
-## 架构说明
+## 架构说明（摘要）
 
-### 1. 模块分类与导入边界
+模块与数据域、API、协作关系、生命周期、总控层、控制台等详细内容已拆分至 `docs/ARCHITECTURE.md`，本节仅保留摘要。AI 编码代理在涉及架构细节时应优先查阅该文件。
 
-| 分类 | 命名约定 | 可被谁导入 |
-|------|----------|-----------|
-| **CoPilot 核心** | 无前缀，如 `session_manager.py`、`copilot_engine.py` | 核心模块互相导入；研究管线模块**不可导入**。 |
-| **研究管线** | 管线特有文件名，如 `pipeline_orchestrator.py`、`gap_analyzer.py` | 管线模块互相导入；核心模块**不可导入**（`web_server.py` 作为聚合器导入 `web_routes_pipeline.py` 除外）。 |
-| **共享基础设施** | `common.py`、`paths.py`、`llm_gateway.py` | 双方均可导入。 |
-| **知识库引擎** | `kb_*.py` | 管线模块**只读导入**；写操作须通过 `learning_engine` 标准接口。 |
-| **Web 路由 Mixin** | `web_routes_*.py` | 仅被 `web_server.py` 聚合器导入。 |
+### 模块分类与导入边界
 
-**研究管线模块禁止导入**：`session_manager`、`copilot_engine`、`context_builder`、`memory_manager`、`proactive_engine`、`llm_router`（须通过 `llm_gateway`）、`learning_engine`、`skill_manager`、`slash_commands`、`tool_engine`、`sync_engine`、`briefing_sync`、`agora_bridge`、`hermes_bridge`。
+模块分为 **CoPilot 核心**、**研究管线**、**共享基础设施**、**知识库引擎**、**Web 路由 Mixin** 五类。核心模块与研究管线模块互相隔离，仅共享基础设施可双向导入；研究管线禁止直接导入会话、记忆、LLM 路由等核心模块，LLM 统一走 `llm_gateway`。详见 `docs/ARCHITECTURE.md` §1。
 
-### 2. 数据域隔离
+### 数据域隔离
 
-```
-LinSai-CoPilot/
-├── sessions/              ← CoPilot 核心：会话存档
-├── memory/                ← CoPilot 核心：长期记忆、用户画像
-├── tasks/                 ← CoPilot 核心：任务管理
-├── knowledge/             ← 共享：知识库（管线只读）
-├── projects/              ← CoPilot 核心：v3.5 课题管理（当前未启用）
-├── research_proposals/    ← 研究管线：独立数据域
-│   ├── drafts/optimizing/pending_review/archived  ← 生命周期四阶段
-│   └── {proposal_id}/00_pipeline ... 05_review    ← 六阶段产物
-└── scripts/               ← 所有模块
-```
+- CoPilot 核心数据域：`sessions/`、`memory/`、`tasks/`。
+- 共享只读域：`knowledge/`（管线只读，写须通过 `learning_engine`）。
+- 研究管线独立域：`research_proposals/`（含 drafts/optimizing/pending_review/archived 及每个 proposal 的 00-05 阶段产物）。
 
-- 管线模块的所有写入操作限定在 `research_proposals/{proposal_id}/` 内。
-- 管线模块不直接修改 `knowledge/` 和 `memory/` 下的文件。
+详见 `docs/ARCHITECTURE.md` §2。
 
-### 3. Web API 命名空间
+### Web API 命名空间
 
-| 命名空间 | 归属 | 说明 |
-|----------|------|------|
-| `/api/sessions/` | CoPilot 核心 | 会话管理、消息、聊天记录 |
-| `/api/tasks/` | CoPilot 核心 | 任务 CRUD、状态流转、AI 辅助指派 |
-| `/api/knowledge/` | CoPilot 核心 | 知识库搜索、wiki、图谱、健康、PDF |
-| `/api/skills/` | CoPilot 核心 | 技能列表、配置 |
-| `/api/learning/` | CoPilot 核心 | 学习日志、待审队列、统计 |
-| `/api/projects/` | CoPilot 核心 | 项目面板、NSFC 决策、论文池 |
-| `/api/research/` | CoPilot 核心 (v3.5) | 课题指导 |
-| `/api/hermes/` | CoPilot 核心 | hermes cron、oneshot、团队 profile 状态 |
-| `/api/sync/`、`/api/backup/`、`/api/usage/` 等 | CoPilot 核心 | 系统状态 |
-| `/api/lifecycle/` | CoPilot 核心 (v6.5+) | 提案生命周期仪表盘、注册、流转、优化、agent scores、monitor 历史、负反馈告警清除 |
-| `/api/orchestrator/` | CoPilot 核心 (v6.7+) | 林赛总控：仪表盘、profile 健康、失败模式、调度策略、链路质量 |
-| `/api/console/` | CoPilot 核心 (v6.7.7+) | 林赛控制台：流水线总览、Agent 工作状态、告警 inbox、一键修复/编排/优化 |
-| `/api/settings/` | CoPilot 核心 (v6.7.7+) | 设置中心：链路/模板/Agent/任务/学习/自主/KB输出 7 类配置读写与变更预览 |
-| `/api/pipeline/` | 研究管线 (v6.2+) | 管线编排、Agent 团队、缺口、课题、问题、申请书、自检、引文、方法学、hermes 驱动管线 |
+Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属分为 CoPilot 核心（sessions/tasks/knowledge/skills/learning/projects/research/hermes/lifecycle/orchestrator/console/settings）与研究管线（pipeline）。详见 `docs/ARCHITECTURE.md` §3。
 
-Web 服务器使用 Mixin 架构聚合 12 个路由模块；`research` 和 `pipeline` 使用独立分派器，其余走统一路由表。
+### hermes 协作架构
 
-### 4. hermes 协作架构
+由 `linsai`、`pipeline-runner`、`researcher`、`analyst`、`writer`、`critic`、`reviewer` 7 个 profile 组成。关键协作文件包括 `state_sync.py`（论文状态总线）、`memory_bridge.py`（记忆同步）、`hermes_pipeline.py`（六阶段派活）、`proposal_lifecycle.py`（四阶段生命周期）、`adversarial_governance.py`（对抗奖惩）。详见 `docs/ARCHITECTURE.md` §4。
 
-7 个专业 profile 组成研究管线团队：
+### 提案生命周期
 
-```
-linsai（总控）          pipeline-runner（编排器）
-  │                        │
-  │ 简报 cron               │ 每日编排 cron
-  ↓                        ↓
-researcher ← analyst ← writer ↔ critic → reviewer
-（文献调研）  （缺口分析）（撰写）  （对抗）（终审）
-```
+四阶段：`drafts → optimizing → pending_review → archived`。采用 writer-critic 对抗优化，critic 4 维度评分，writer 聚焦最弱维度修订。v6.7.5+ 改为每个 optimizing proposal 一个独立 worker cron；v6.7.6+ 引入 monitor meta-review 与 agent 分数奖惩；v6.7.7+ 增加输入端 `idea_generator`、输出端 `knowledge_output` 与周末模式。详见 `docs/ARCHITECTURE.md` §5。
 
-| Profile | 模型 | 职责 |
-|---------|------|------|
-| `linsai` | GLM-5.2 | 方向校准 / 总控 / 简报 |
-| `pipeline-runner` | GLM-5.2 | 管线编排 / 每日触发 |
-| `researcher` | MiniMax-M3 | 文献调研 / 定向检索 |
-| `analyst` | GLM-5.2 | 缺口分析 / 科学问题 |
-| `writer` | GLM-5.2 | 申请书撰写 / 修订 |
-| `critic` | GLM-5.2 | 对抗式评审（红队） |
-| `reviewer` | GLM-5.2 | 质量终审 |
+### 林赛总控层（v6.7+）
 
-关键协作文件：
-- `state_sync.py`：论文统一状态总线（`item-status.json`），CoPilot 与 hermes 共享。
-- `memory_bridge.py`：将 hermes `MEMORY.md` / `USER.md` 同步到 CoPilot `memory/`。
-- `hermes_pipeline.py`：将六阶段派活给对应 profile，支持增量优化、产物检查、cron 自动化。
-- `proposal_lifecycle.py`：四阶段（drafts → optimizing → pending_review → archived）+ writer-critic 对抗优化循环。
-- `adversarial_governance.py`（v6.7.6）：对抗评审奖惩与监察引擎，管理 agent 分数、禁止清单、monitor meta-review、负反馈检测。
+在 hermes 之上新增监控/调优/失败分析/链路成长层，由 `orchestrator.py` 统一入口，整合 `profile_health.py`（profile 健康）、`failure_analyzer.py`（失败模式聚类）、`strategy_optimizer.py`（调度策略建议）。策略仅输出建议，人工确认后写入 `tuning-log.json`。详见 `docs/ARCHITECTURE.md` §6。
 
-### 5. 提案生命周期
+### 林赛控制台与设置中心（v6.7.7）
 
-```
-drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）→ archived（归档）
-```
-
-- **命名规则**：`{项目类型}-{课题名称}-{YYYYMMDD}[-序号]`，项目类型 `general`/`key`/`major`。
-- **对抗优化**：按章节（立项依据→研究内容→研究方案→整体审查）轮转，critic 4 维度评分（创新/可行/严谨/完整），writer 聚焦最弱维度修订；达标需全模块通过。
-- **小型化 cron 框架（v6.7.5+）**：
-  - 不再使用单一大型 `pipeline-runner` cron sweep；改为每个 optimizing proposal 一个独立 worker cron，每次只执行下一个 pending 小步骤。
-  - 每日编排 cron（`lc-daily-orchestrate`）只生成 checkpoint、确保 worker 存在，自身不调用 LLM。
-  - 修复 cron（`lc-repair`）每 6 小时扫描：重置 stuck running、重试 failed（最多 3 次）、补齐缺失 worker、超过重试则告警。
-  - checkpoint 持久化在 `_lifecycle.json` 的 `pipeline_jobs` 中，单步骤失败可单独重跑，不污染整体状态。
-  - v6.7.6：worker cron 自动错开 6 分钟（基于 proposal_id hash 分配 47/53/59/05/11...），`--repair` 会检测 schedule 变化并自动更新。
-  - v6.7.7：worker cron 默认仅工作日运行（schedule = `{minute} * * * 1-5`），周末暂停；新增 `--setup-weekend` / `--teardown-weekend` 创建/删除 3 个周末任务 cron（输入/输出/反思）。
-  - v6.7.7：`run_repair()` 区分工作日与周末：工作日修复 worker/编排，周末修复输入/输出/反思任务。
-- **对抗评审奖惩与监察（v6.7.6）**：
-  - 每轮 checkpoint 拆为 critic → writer → monitor 三步骤，monitor 作为独立第三方 reviewer 做 meta-review。
-  - `memory/agent-scores.json` 维护 writer/critic 全局奖惩分数（初始 100，上限 150，下限 0）。
-  - 禁止清单（writer：占位符/模板僵化/表面修改；critic：消极评审/僵化评分/评分与内容矛盾）由规则层兜底，monitor 结合上下文判定。
-  - 奖惩计算综合规则层 delta、monitor 建议、串通惩罚、校准奖励/惩罚。
-  - 负反馈检测：monitor 独立分数连续下降 / 本地双降 / 连续串通 / 全局分数低于 50 触发告警，暂停自动流转，等待人工清除。
-- **生命周期与知识库聚合（v6.7.6）**：
-  - `scripts/proposal_kb_sync.py` 将各生命周期阶段 proposal 的核心信息（标题、状态、分数、核心问题、创新点、关键产物）同步到 `knowledge/wiki/projects/NSFC-强场超快/proposals/`，并自动生成索引，实现链路数据与全链路知识库聚合。
-  - 已归档（approved）的 proposal 仍会通过 `proposal_lifecycle._archive_proposal` 生成独立归档元信息。
-- **输入端与输出端重构（v6.7.7）**：
-  - 输入端：`scripts/idea_generator.py` 从文献简报/论文池/归档讨论识别研究缺口，生成研究设想；新设想先进入 `drafts`，人工确认后再进 `optimizing`；若与现有课题关联，给出有机融合建议。
-  - 输出端：`scripts/knowledge_output.py` 归档 proposal 知识萃取，并将可靠来源信息写入 KB；AI 生成内容标记为 `derived`，无来源信息禁止入库。
-  - 周末模式：worker cron 仅工作日运行（`Mon-Fri`），周末专门执行输入发现、输出萃取、链路反思和 KB 健康检查。
-- **文献驱动**：优先优化与当天简报关键词匹配的课题，节省模型限额。
-- **质量标准**：`memory/nsfc-standards.json` 定义面上/重点/重大三类项目的评分权重、页数限制、模板结构。
-
-### 6. 林赛总控层（v6.7+）
-
-在 hermes 执行层之上新增**监控 + 调优 + 失败分析 + 链路成长**总控层，由 `orchestrator.py` 统一入口：
-
-| 子模块 | 职责 | 输出 |
-|--------|------|------|
-| `profile_health.py` | 读取 hermes profile 状态、`linsai.log` 派活记录、`_lifecycle.json` cron 失败记录 | 7 个 profile 的 idle/working/blocked/offline 状态、24h 成功率、平均耗时、最近错误 |
-| `failure_analyzer.py` | 聚类日志失败模式 | 8 种模式（score-zero-streak / empty-draft / env-pollution / profile-timeout / file-missing / code-bug / rate-limit / low-content-after-rewrite）+ 建议 prompt 修改 |
-| `strategy_optimizer.py` | 基于历史数据给出调度参数建议 | stagger / max_rounds / score_threshold / timeout 等调优建议（仅建议，不自动应用） |
-| `orchestrator.py` | 整合以上 + pipeline 质量监控 | `compute_dashboard()` 4 区合一总仪表盘；`monitor_pipeline()` 生成低质量产物 growth_actions |
-
-**交互入口**：
-- Web API：`/api/orchestrator/dashboard`、`/api/orchestrator/profiles/health`、`/api/orchestrator/failures/patterns`、`/api/orchestrator/strategies`、`/api/orchestrator/strategies/apply`、`/api/orchestrator/pipeline/quality`、`/api/orchestrator/tuning-log`
-- 前端：`web/js/orchestrator.js` 五子面板（总仪表盘 / Profile 健康 / 失败模式 / 调度策略 / 链路质量）
-
-**设计原则**：
-- **建议模式**：`strategy_optimizer` 只输出建议，人工通过 `POST /api/orchestrator/strategies/apply` 确认后写入 `tuning-log.json`。
-- **可观测优先**：所有调优以 4 区仪表盘为起点。
-- **模式而非规则**：失败分析用模式聚类，给出 `suggested_prompt_change`，由用户/AI 决定如何应用。
-- **链路可成长**：`monitor_pipeline` 自动给低质量产物生成 `growth_actions`，提示人工重跑或自动优化。
-
-### 7. 林赛控制台与设置中心（v6.7.7）
-
-在总控层之上新增**面向用户的统一操作界面**，把「看状态」和「调配置」合并到一个入口：
-
-| 子模块 | 职责 | 输出 |
-|--------|------|------|
-| `web_routes_system.py`（`/api/console/*`） | 流水线 / Agent / 告警 三视图 API | `/api/console/flow` 六阶段流水线；`/api/console/agents` profile + cron 状态；`/api/console/alerts` 负反馈/失败/待审 inbox |
-| `web_routes_settings.py`（`/api/settings/*`） | 7 类配置统一读写 | `/api/settings/categories` 分类列表；`/:category` 读取/保存；`/:category/preview` 变更差异预览 |
-| `web/js/console.js` | 控制台前端 | 流水线看板、Agent 卡片、告警列表、一键操作（修复/编排/优化/清除告警） |
-| `web/js/settings_center.js` | 设置中心前端 | 7 类配置表单化编辑、JSON 源码切换、保存前差异预览、自动备份提示 |
-
-**配置分类**：
-- `pipeline`：达标分数、最大轮数、维度短板阈值、worker 错峰间隔。
-- `templates`：NSFC 三类项目质量标准、撰写模板、方法学手册要求。
-- `agents`：各 profile 默认 Provider、超时、模型、路由策略。
-- `tasks`：默认任务参数、hermes 自动派活开关。
-- `learning`：自主学习引擎参数、来源、配额。
-- `autonomy`：CoPilot 自主决策级别与提醒频率。
-- `kb_output`：可靠来源规则、derived 内容过期时间、归档萃取字段。
-
-**交互入口**：
-- Web API：`/api/console/flow`、`/api/console/agents`、`/api/console/alerts`、`/api/console/action`、`/api/settings/categories`、`/api/settings/:category`、`/api/settings/:category/preview`
-- 前端：`index.html` 导航栏新增「控制台」「课题生命周期」入口；`settings.js` 抽屉保留轻量设置，`settings_center.js` 提供完整配置页面。
-- 聊天斜杠命令：`/status`、`/config`、`/template`、`/pipeline` 可快速查看状态或唤起配置。
-
-**设计原则**：
-- **可观测 + 可操作合一**：控制台不仅能看，还能直接触发 repair/orchestrate/optimize/clear-alert。
-- **配置变更可控**：设置中心保存前强制 preview，写操作前自动备份旧文件到 `memory/.settings-backup/`。
-- **Agent 辅助配置**：用户可在前端手动调整，也可在聊天中通过 `/config` 等命令让林赛辅助完成配置修改。
+面向用户的统一操作界面：`web_routes_system.py` 提供 `/api/console/*`（流水线/Agent/告警），`web_routes_settings.py` 提供 `/api/settings/*`（7 类配置读写与变更预览）。前端对应 `web/js/console.js` 与 `web/js/settings_center.js`，支持一键触发 repair/orchestrate/optimize/clear-alert。详见 `docs/ARCHITECTURE.md` §7。
 
 ---
 
@@ -721,12 +241,6 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
   - `PATCH`：缺陷修复、文档更新、性能优化
 
 ### Git 管理策略
-
-```bash
-git init
-git add .
-git commit -m "v6.7.4 初始版本"
-```
 
 - 用户数据（`sessions/`、`memory/`、`tasks/`、`references/`）已被 `.gitignore` 排除，不会意外提交。
 - 每次功能迭代一个 commit，消息格式：`vX.Y.Z - 简短描述`。
