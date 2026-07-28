@@ -336,12 +336,19 @@ def oneshot(prompt: str, timeout: int = ONESHOT_TIMEOUT) -> Dict[str, Any]:
         {success, output, error}
     """
     cmd = HERMES_CMD + ["-z", prompt]
+    # v6.7.7 修复：hermes profile 默认使用 zai provider，若仅有 GLM_API_KEY 则透传为 ZAI_API_KEY
+    extra_env = {}
+    zai_key = os.environ.get("ZAI_API_KEY") or os.environ.get("GLM_API_KEY")
+    if zai_key:
+        extra_env["ZAI_API_KEY"] = zai_key
+    env = clean_subprocess_env(extra=extra_env)
     try:
         result = subprocess.run(
             cmd,
             capture_output=True,
             text=True,
             timeout=timeout,
+            env=env,
         )
         if result.returncode == 0:
             output = result.stdout.strip()

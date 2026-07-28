@@ -902,8 +902,8 @@ class ProposalLifecycle:
         self,
         proposal_id: str,
         max_rounds: int = DEFAULT_MAX_ROUNDS,
-        critic_timeout: int = 300,
-        writer_timeout: int = 600,
+        critic_timeout: int = 600,
+        writer_timeout: int = 900,
     ) -> Dict[str, Any]:
         """执行一轮 writer-critic 对抗优化循环。
 
@@ -1308,7 +1308,13 @@ class ProposalLifecycle:
         """执行 hermes oneshot。"""
         # v6.6.3 修复：TRAE/IDE 注入的 Python 环境变量会让 hermes 内部 Python 启动崩溃，
         # 必须清理全部 Python 相关变量（不只是 PYTHONHOME/PYTHONPATH）
-        env = clean_subprocess_env()
+        # v6.7.7 修复：hermes profile 默认使用 zai provider（glm-5.2），依赖 ZAI_API_KEY；
+        # 若用户未设置 ZAI_API_KEY 但配置了 GLM_API_KEY，则自动透传，避免回退到超时中的 MiniMax
+        extra_env = {}
+        zai_key = os.environ.get("ZAI_API_KEY") or os.environ.get("GLM_API_KEY")
+        if zai_key:
+            extra_env["ZAI_API_KEY"] = zai_key
+        env = clean_subprocess_env(extra=extra_env)
 
         import time
         cmd = ["hermes", "--profile", profile, "-z", prompt]

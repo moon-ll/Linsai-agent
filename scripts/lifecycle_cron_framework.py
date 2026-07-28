@@ -464,7 +464,7 @@ python3 scripts/weekend_orchestrator.py --reflection
         is_full_review = section["key"] == "full_review"
 
         result = self._run_critic(
-            proposal_id, prop_dir, project_type, round_num, 600,
+            proposal_id, prop_dir, project_type, round_num, 900,
             focus_section=focus_section, is_full_review=is_full_review,
         )
         if not result.get("success"):
@@ -530,7 +530,7 @@ python3 scripts/weekend_orchestrator.py --reflection
         report = self._read_critic_report(prop_dir, round_num)
         critic_result = {"output": report["output"], "success": True}
         lit = self._run_researcher_targeted(
-            proposal_id, prop_dir, critic_result, focus_section, timeout=600
+            proposal_id, prop_dir, critic_result, focus_section, timeout=900
         )
         return {"success": bool(lit), "lit_path": lit}
 
@@ -577,7 +577,7 @@ python3 scripts/weekend_orchestrator.py --reflection
         writer_result = self._run_writer_optimize(
             proposal_id, prop_dir, project_type,
             critic_result={"output": report["output"]},
-            timeout=600,
+            timeout=900,
             weakest_dim=weakest_dim,
             dim_scores=dim_scores,
             focus_section=focus_section,
