@@ -228,7 +228,12 @@ class AdversarialGovernance:
 
     def _call_reviewer(self, prompt: str, timeout: int = MONITOR_TIMEOUT) -> Dict[str, Any]:
         """调用 reviewer profile 执行 monitor 任务。"""
+        from common import clean_subprocess_env
+        import time
+
+        env = clean_subprocess_env()
         cmd = ["hermes", "--profile", "reviewer", "-z", prompt]
+        t0 = time.time()
         try:
             result = subprocess.run(
                 cmd,
@@ -236,8 +241,9 @@ class AdversarialGovernance:
                 text=True,
                 timeout=timeout,
                 cwd=str(PROJECT_ROOT),
+                env=env,
             )
-            elapsed = round(timeout if isinstance(result, subprocess.TimeoutExpired) else 0, 2)
+            elapsed = round(time.time() - t0, 2)
             if result.returncode == 0:
                 output = result.stdout.strip()
                 if len(output) > 50000:
@@ -252,7 +258,7 @@ class AdversarialGovernance:
         except subprocess.TimeoutExpired:
             return {"success": False, "output": "", "error": f"超时({timeout}s)", "elapsed_s": timeout}
         except Exception as e:
-            return {"success": False, "output": "", "error": str(e), "elapsed_s": 0}
+            return {"success": False, "output": "", "error": str(e), "elapsed_s": round(time.time() - t0, 2)}
 
     # ------------------------------------------------------------------
     # 禁止清单（规则层）

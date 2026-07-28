@@ -377,6 +377,12 @@ class ProposalLifecycle:
             "transition_history": [
                 {"to": "drafts", "at": now_utc(), "reason": "注册新 proposal"}
             ],
+            # v6.7.6: 对抗评审奖惩与监察相关字段
+            "monitor_history": [],
+            "negative_feedback_alert": False,
+            "negative_feedback_reasons": [],
+            "negative_feedback_cleared": [],
+            "worker_minute": None,
         }
         self._set_proposal_state(proposal_id, state_data)
 

@@ -787,7 +787,7 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
         使多个 worker 自然错开，且不依赖外部 hermes cron 列表。
         """
         prop_state = self._get_proposal_state(proposal_id)
-        if prop_state and "worker_minute" in prop_state:
+        if prop_state and prop_state.get("worker_minute") is not None:
             return int(prop_state["worker_minute"])
 
         offset = hash(proposal_id) % 10
