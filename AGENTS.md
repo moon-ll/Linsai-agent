@@ -597,11 +597,12 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 
 - **命名规则**：`{项目类型}-{课题名称}-{YYYYMMDD}[-序号]`，项目类型 `general`/`key`/`major`。
 - **对抗优化**：按章节（立项依据→研究内容→研究方案→整体审查）轮转，critic 4 维度评分（创新/可行/严谨/完整），writer 聚焦最弱维度修订；达标需全模块通过。
-- **小型化 cron 框架（v6.7.5）**：
+- **小型化 cron 框架（v6.7.5+）**：
   - 不再使用单一大型 `pipeline-runner` cron sweep；改为每个 optimizing proposal 一个独立 worker cron，每次只执行下一个 pending 小步骤。
   - 每日编排 cron（`lc-daily-orchestrate`）只生成 checkpoint、确保 worker 存在，自身不调用 LLM。
   - 修复 cron（`lc-repair`）每 6 小时扫描：重置 stuck running、重试 failed（最多 3 次）、补齐缺失 worker、超过重试则告警。
   - checkpoint 持久化在 `_lifecycle.json` 的 `pipeline_jobs` 中，单步骤失败可单独重跑，不污染整体状态。
+  - v6.7.6：worker cron 自动错开 6 分钟（基于 proposal_id hash 分配 47/53/59/05/11...），`--repair` 会检测 schedule 变化并自动更新。
 - **对抗评审奖惩与监察（v6.7.6）**：
   - 每轮 checkpoint 拆为 critic → writer → monitor 三步骤，monitor 作为独立第三方 reviewer 做 meta-review。
   - `memory/agent-scores.json` 维护 writer/critic 全局奖惩分数（初始 100，上限 150，下限 0）。

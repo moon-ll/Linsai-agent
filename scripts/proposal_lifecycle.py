@@ -2104,8 +2104,8 @@ def main(argv: Optional[List[str]] = None) -> int:
                         help="与 --repair 联用：只预览不修改")
     parser.add_argument("--setup-cron-v2", action="store_true",
                         help="安装 v2 cron 框架（orchestrate + repair + per-proposal workers）")
-    parser.add_argument("--worker-schedule", default="47 * * * *", metavar="CRON",
-                        help="worker cron 调度表达式（默认 47 * * * *，即每小时 47 分）")
+    parser.add_argument("--worker-schedule", default="", metavar="CRON",
+                        help="强制统一 worker cron 调度表达式（默认留空，自动按 6 分钟间隔错开）")
     parser.add_argument("--teardown-cron-v2", action="store_true",
                         help="卸载所有 v2 lifecycle cron")
     args = parser.parse_args(argv)

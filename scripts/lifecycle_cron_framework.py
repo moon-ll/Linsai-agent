@@ -779,8 +779,33 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
         jobs = hb.cron_list_profile(HERMES_PROFILE)
         return [j for j in jobs if j.get("name", "").startswith(self._lifecycle_cron_prefix())]
 
-    def schedule_worker(self, proposal_id: str, interval: str = DEFAULT_WORKER_INTERVAL) -> Dict[str, Any]:
-        """为 proposal 创建/更新 worker cron。幂等（按名称去重）。"""
+    def _compute_worker_minute(self, proposal_id: str) -> int:
+        """为 proposal 计算 worker cron 触发分钟，多个 worker 之间错开 6 分钟。
+
+        优先读取 proposal state 中已持久化的 worker_minute，保证删除重建后不变。
+        首次创建时基于 proposal_id hash 分配固定偏移（0-9），再映射到 47, 53, 59, 05, ...，
+        使多个 worker 自然错开，且不依赖外部 hermes cron 列表。
+        """
+        prop_state = self._get_proposal_state(proposal_id)
+        if prop_state and "worker_minute" in prop_state:
+            return int(prop_state["worker_minute"])
+
+        offset = hash(proposal_id) % 10
+        minute = (47 + offset * 6) % 60
+
+        # 持久化到 proposal state
+        if prop_state:
+            prop_state["worker_minute"] = minute
+            prop_state["updated_at"] = now_utc()
+            self._set_proposal_state(proposal_id, prop_state)
+
+        return minute
+
+    def schedule_worker(self, proposal_id: str, interval: Optional[str] = None) -> Dict[str, Any]:
+        """为 proposal 创建/更新 worker cron。幂等（按名称去重）。
+
+        默认自动错开：多个 worker 之间间隔 6 分钟。可通过 interval 参数强制指定。
+        """
         script_path = self._worker_script_for_proposal(proposal_id)
         name = f"lc-worker-{proposal_id}"
         # 先检查是否已存在 active
@@ -789,10 +814,16 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
             if job.get("name") == name and job.get("status") == "active":
                 return {"success": True, "message": "worker 已存在", "cron_job_id": job.get("id")}
 
+        if interval:
+            schedule = interval
+        else:
+            minute = self._compute_worker_minute(proposal_id)
+            schedule = f"{minute} * * * *"
+
         result = hb.cron_create_no_agent(
             script_name=script_path.name,
             name=name,
-            schedule=interval,
+            schedule=schedule,
             workdir=str(PROJECT_ROOT),
             profile=HERMES_PROFILE,
         )
@@ -879,7 +910,7 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
                 if not dry_run:
                     self.sync_checkpoint(pid)
 
-                # 2. 检查 worker cron 是否存在且 active
+                # 2. 检查 worker cron 是否存在且 active，并校验 schedule 是否需要更新
                 worker_name = f"lc-worker-{pid}"
                 if worker_name not in active_worker_names:
                     if not dry_run:
@@ -887,6 +918,21 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
                         item["actions"].append(" recreated worker cron")
                     else:
                         item["actions"].append(" missing worker cron (dry-run)")
+                else:
+                    # v6.7.6: schedule 错开策略变化后，自动更新已有 worker 的触发时间
+                    expected_minute = self._compute_worker_minute(pid)
+                    expected_schedule = f"{expected_minute} * * * *"
+                    existing = next(
+                        (j for j in lifecycle_crons if j.get("name") == worker_name), None
+                    )
+                    current_schedule = existing.get("schedule", "") if existing else ""
+                    if current_schedule and current_schedule != expected_schedule:
+                        if not dry_run:
+                            hb.cron_delete(existing.get("id"), profile=HERMES_PROFILE)
+                            self.schedule_worker(pid)
+                        item["actions"].append(
+                            f" updated worker schedule {current_schedule} -> {expected_schedule}"
+                        )
 
                 # 3. 处理 stuck / failed jobs
                 jobs = self._get_jobs(pid)
@@ -936,7 +982,12 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
         worker_interval: str = DEFAULT_WORKER_INTERVAL,
         repair_schedule: str = DEFAULT_REPAIR_SCHEDULE,
     ) -> Dict[str, Any]:
-        """安装 v2 cron 框架：删除旧单一 cron，创建 orchestrate + repair + workers。"""
+        """安装 v2 cron 框架：删除旧单一 cron，创建 orchestrate + repair + workers。
+
+        worker_interval 参数保留以兼容 CLI，但实际 worker schedule 由
+        schedule_worker 自动错开（默认 47 分起，每新增一个 worker 偏移 6 分钟），
+        避免多个 worker 同时触发造成资源争抢。
+        """
         self._write_generic_wrappers()
 
         # 删除旧的大 cron（兼容 v6.7.4 及之前）

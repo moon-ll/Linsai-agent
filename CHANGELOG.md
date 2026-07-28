@@ -21,6 +21,8 @@
   - writer 优化前自动备份当前申请书，供 monitor 比对。
   - monitor 作为每轮收尾：更新 agent 分数、记录 monitor history、判定负反馈；未触发负反馈
     时才检查达标并移入 `pending_review`。
+  - worker cron 自动错开：基于 proposal_id hash 分配触发分钟（47/53/59/05/11...），多个
+    worker 之间间隔 6 分钟，避免同时触发造成资源争抢；`--repair` 自动更新已有 worker。
 - **负反馈告警与清除** — `scripts/proposal_lifecycle.py`
   - `run_health_check()` 新增 `negative_feedback` 告警。
   - CLI/API 支持 `--clear-negative-feedback <proposal_id>` 与

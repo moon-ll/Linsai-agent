@@ -175,6 +175,25 @@ class LifecycleCronTests(TestSuite):
         result = c.sync_checkpoint(pid)
         self.assert_eq(result.get("added"), 0, "drafts 不生成 checkpoint")
 
+    def _test_worker_minute_stagger(self):
+        c = self._make_controller()
+        pids = [
+            "general-stagger-a-20260101",
+            "general-stagger-b-20260101",
+            "general-stagger-c-20260101",
+            "general-stagger-d-20260101",
+            "general-stagger-e-20260101",
+        ]
+        minutes = set()
+        for pid in pids:
+            self._register_proposal(c, pid, "optimizing")
+            minute = c._compute_worker_minute(pid)
+            minutes.add(minute)
+            # 持久化后重建应保持一致
+            self.assert_eq(c._compute_worker_minute(pid), minute, f"{pid} worker_minute 已持久化")
+        # 多个 worker 应错开（至少存在 3 个不同分钟）
+        self.assert_true(len(minutes) >= 3, f"worker 分钟错开，实际 {len(minutes)} 个不同值: {sorted(minutes)}")
+
     def run_tests(self):
         self._test_checkpoint_generation()
         self._test_pick_next_job()
@@ -184,3 +203,4 @@ class LifecycleCronTests(TestSuite):
         self._test_stale_running_repair()
         self._test_max_rounds_no_new_jobs()
         self._test_non_optimizing_no_jobs()
+        self._test_worker_minute_stagger()
