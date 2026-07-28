@@ -541,9 +541,8 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
 
         score_before = prop_state.get("last_score", 0.0)
 
-        # 更新 proposal 状态
+        # 更新 proposal 状态（writer 只记录本轮输出质量，不推进轮次；轮次在 monitor 收尾后推进）
         prop_state = self._get_proposal_state(proposal_id)
-        prop_state["optimization_rounds"] = round_num
         prop_state["last_score"] = score_after
         prop_state["last_dim_scores"] = dim_scores
         section_passes = prop_state.get("section_passes", {})
@@ -586,6 +585,15 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
         if AdversarialGovernance is None:
             if _log:
                 _log.warning(f"[{proposal_id}] adversarial_governance 未加载，monitor 跳过")
+            # 降级处理：虽未启用监察模块，仍推进轮次，避免链路僵死
+            prop_state = self._get_proposal_state(proposal_id)
+            if prop_state:
+                prop_state["optimization_rounds"] = max(
+                    prop_state.get("optimization_rounds", 0), round_num
+                )
+                prop_state["last_monitor_assessment"] = "adversarial_governance 未加载，monitor 跳过"
+                prop_state["updated_at"] = now_utc()
+                self._set_proposal_state(proposal_id, prop_state)
             return {"success": True, "skipped": True, "reason": "adversarial_governance 未加载"}
 
         prop_dir = self._find_proposal_dir(proposal_id)
@@ -659,6 +667,12 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
             monitor_result=monitor_result,
             deltas=deltas,
         )
+
+        # 本轮完整闭环结束，推进轮次（负反馈告警时除外）
+        if not prop_state.get("negative_feedback_alert"):
+            prop_state["optimization_rounds"] = max(
+                prop_state.get("optimization_rounds", 0), round_num
+            )
 
         # 写入 monitor 简要摘要到 proposal 状态
         prop_state["last_monitor_at"] = now_utc()
@@ -734,8 +748,9 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
 
         if result.get("success"):
             self._update_job(proposal_id, job, JOB_STATUS_DONE)
-            # writer 完成后可能需要为下一轮生成 checkpoint
-            if step == STEP_WRITER:
+            # monitor 是每轮完整闭环的收尾步骤；只有 monitor 成功后，
+            # 才推进 optimization_rounds 并生成下一轮 checkpoint。
+            if step == STEP_MONITOR and not result.get("negative_feedback_alert"):
                 self.sync_checkpoint(proposal_id)
         else:
             self._update_job(proposal_id, job, JOB_STATUS_FAILED, result.get("error", ""))

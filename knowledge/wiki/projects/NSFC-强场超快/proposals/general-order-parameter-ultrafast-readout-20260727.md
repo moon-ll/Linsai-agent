@@ -3,12 +3,12 @@ title: "序参量（Order Parameter）** 描述凝聚态物质的相变与对称
 type: "proposal"
 project: ["NSFC-强场超快"]
 proposal_id: "general-order-parameter-ultrafast-readout-20260727"
-status: "pending_review"
+status: "optimizing"
 project_type: "general"
 optimization_rounds: 3
 last_score: 0.42
-synced_at: "2026-07-28T07:17:14Z"
-growth_stage: "reviewing"
+synced_at: "2026-07-28T07:37:35Z"
+growth_stage: "growing"
 confidence: 1.0
 ---
 
@@ -16,7 +16,7 @@ confidence: 1.0
 
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`  
 **项目类型**：general  
-**生命周期状态**：待校验  
+**生命周期状态**：优化中  
 **优化轮次**：3  
 **当前分数**：0.42  
 **同步时间**：2026-07-28
@@ -31,14 +31,14 @@ confidence: 1.0
 
 ## 关键产物
 
-- [proposal-brief](research_proposals/pending_review/general-order-parameter-ultrafast-readout-20260727/00_proposal-brief.md)
-- [question-framework](research_proposals/pending_review/general-order-parameter-ultrafast-readout-20260727/03_question/question-framework.md)
-- [proposal-draft](research_proposals/pending_review/general-order-parameter-ultrafast-readout-20260727/04_proposal/proposal-draft.md)
-- [methodology-manual](research_proposals/pending_review/general-order-parameter-ultrafast-readout-20260727/04_proposal/methodology-manual.md)
+- [proposal-brief](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/00_proposal-brief.md)
+- [question-framework](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/03_question/question-framework.md)
+- [proposal-draft](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/04_proposal/proposal-draft.md)
+- [methodology-manual](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/04_proposal/methodology-manual.md)
 
 ## 状态说明
 
-- 处于 **待校验** 阶段
+- 处于 **优化中** 阶段
 - 最后得分：0.42
 - 累计对抗轮次：3
 

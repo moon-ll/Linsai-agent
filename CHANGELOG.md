@@ -1,5 +1,26 @@
 # 变更记录
 
+## v6.7.6-fix - 2026-07-28 轮次计数逻辑修复
+
+### 问题根因
+- `lifecycle_cron_framework.py` 中 `_run_writer_step` 在 writer 完成后就把
+  `optimization_rounds` 推进到当前 round，并立即调用 `sync_checkpoint` 生成下一轮 jobs。
+- 这导致一轮完整的 critic → writer → monitor 闭环还没结束，轮次就已经 +1；
+  如果 monitor 随后触发负反馈告警，统计上仍显示该轮已完成，造成轮次失真。
+
+### 修复内容
+- **writer 不再推进轮次**：仅记录本轮输出质量（`last_score`、`score_history`、
+  `section_passes`），不修改 `optimization_rounds`。
+- **monitor 作为轮次收尾**：`_run_monitor_step` 成功且未触发负反馈告警时，
+  才将 `optimization_rounds` 推进到当前 round，并调用 `sync_checkpoint` 生成下一轮 checkpoint。
+- **降级兼容**：若 `adversarial_governance` 未加载，monitor 跳过但仍推进轮次，
+  避免链路因模块缺失而僵死。
+
+### 验证结果
+- `python3 -m py_compile scripts/*.py` 通过
+- `python3 scripts/self_test.py --module` 181/181 通过
+- `python3 scripts/proposal_lifecycle.py --repair` 全部 5 个 optimizing proposal 状态正常
+
 ## v6.7.6 - 2026-07-28 对抗评审奖惩与监察机制
 
 ### 问题根因
