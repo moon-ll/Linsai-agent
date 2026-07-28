@@ -33,6 +33,7 @@
 from __future__ import annotations
 
 import json
+import re
 import subprocess
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -158,6 +159,166 @@ def cron_control(job_id: str, action: str, timeout: int = 30) -> Dict[str, Any]:
         return {"success": False, "message": "✗ 未找到 hermes 命令，请确认已安装"}
     except Exception as e:
         return {"success": False, "message": f"✗ 执行异常: {e}"}
+
+
+def cron_jobs_path(profile: str = "linsai") -> Path:
+    """返回指定 hermes profile 的 cron jobs.json 路径。"""
+    return PROFILES_DIR / profile / "cron" / "jobs.json"
+
+
+def cron_list_profile(profile: str = "linsai") -> List[Dict[str, Any]]:
+    """读取指定 profile 的 cron job 列表。
+
+    签名与 cron_list() 一致，方便 lifecycle cron 框架使用非 linsai profile。
+    """
+    path = cron_jobs_path(profile)
+    if not path.exists():
+        return []
+
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return []
+
+    jobs_raw = data.get("jobs", []) if isinstance(data, dict) else data
+    if not isinstance(jobs_raw, list):
+        return []
+
+    jobs = []
+    for j in jobs_raw:
+        enabled = j.get("enabled", True)
+        paused_at = j.get("paused_at")
+        if not enabled or paused_at:
+            status = "paused"
+        else:
+            status = "active"
+
+        schedule = j.get("schedule", {})
+        schedule_display = ""
+        if isinstance(schedule, dict):
+            schedule_display = schedule.get("display", schedule.get("expr", ""))
+        elif isinstance(schedule, str):
+            schedule_display = schedule
+
+        jobs.append({
+            "id": j.get("id", ""),
+            "name": j.get("name", ""),
+            "schedule": schedule_display,
+            "status": status,
+            "next_run": j.get("next_run_at", ""),
+            "last_run": j.get("last_run_at", ""),
+            "last_status": j.get("last_status", ""),
+            "deliver": j.get("deliver", ""),
+            "paused_at": paused_at or "",
+        })
+
+    jobs.sort(key=lambda x: (x["status"] != "active", x["name"]))
+    return jobs
+
+
+def cron_create_no_agent(
+    script_name: str,
+    name: str,
+    schedule: str,
+    workdir: str,
+    profile: str = "linsai",
+    repeat: Optional[int] = None,
+    timeout: int = 30,
+) -> Dict[str, Any]:
+    """创建一个不经过 LLM agent、直接执行本地脚本的 hermes cron job。
+
+    Args:
+        script_name: ~/.hermes/scripts/ 下的脚本文件名
+        name: cron job 名称
+        schedule: cron 表达式，如 "*/20 * * * *"
+        workdir: 工作目录
+        profile: hermes profile（默认 linsai）
+        repeat: 重复次数，None 表示无限
+        timeout: hermes CLI 调用超时
+
+    Returns:
+        {success, cron_job_id, message, output}
+    """
+    cmd = [
+        "hermes", "--profile", profile, "cron", "create",
+        schedule,
+        "--name", name,
+        "--script", script_name,
+        "--no-agent",
+        "--deliver", "local",
+        "--workdir", workdir,
+    ]
+    if repeat is not None:
+        cmd += ["--repeat", str(repeat)]
+
+    try:
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=timeout,
+        )
+        if result.returncode == 0:
+            # 尝试从输出中提取 job id（hermes 通常会在成功信息里打印 id）
+            output = result.stdout.strip()
+            job_id = ""
+            for line in output.splitlines():
+                m = re.search(r"[0-9a-f]{12,}", line)
+                if m:
+                    job_id = m.group(0)
+                    break
+            return {
+                "success": True,
+                "cron_job_id": job_id,
+                "message": f"✓ 已创建 cron: {name}",
+                "output": output[:300],
+            }
+        return {
+            "success": False,
+            "cron_job_id": "",
+            "message": f"✗ {result.stderr.strip()[:200] or result.stdout.strip()[:200]}",
+            "output": result.stdout.strip()[:300],
+        }
+    except subprocess.TimeoutExpired:
+        return {"success": False, "cron_job_id": "", "message": f"✗ 创建 cron 超时（{timeout}s）"}
+    except FileNotFoundError:
+        return {"success": False, "cron_job_id": "", "message": "✗ 未找到 hermes 命令"}
+    except Exception as e:
+        return {"success": False, "cron_job_id": "", "message": f"✗ 异常: {e}"}
+
+
+def cron_delete(job_id: str, profile: str = "linsai", timeout: int = 30) -> Dict[str, Any]:
+    """删除指定 hermes cron job。"""
+    cmd = ["hermes", "--profile", profile, "cron", "delete", job_id]
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+        if result.returncode == 0:
+            return {"success": True, "message": f"✓ 已删除 job {job_id}", "output": result.stdout.strip()[:200]}
+        return {
+            "success": False,
+            "message": f"✗ 删除失败: {result.stderr.strip()[:200] or result.stdout.strip()[:200]}",
+        }
+    except subprocess.TimeoutExpired:
+        return {"success": False, "message": f"✗ 删除超时（{timeout}s）"}
+    except FileNotFoundError:
+        return {"success": False, "message": "✗ 未找到 hermes 命令"}
+    except Exception as e:
+        return {"success": False, "message": f"✗ 异常: {e}"}
+
+
+def cron_delete_by_name_prefix(prefix: str, profile: str = "linsai") -> Dict[str, Any]:
+    """按名称前缀批量删除 cron job。"""
+    removed = []
+    failed = []
+    for job in cron_list_profile(profile):
+        name = job.get("name", "")
+        if name.startswith(prefix):
+            res = cron_delete(job.get("id"), profile=profile)
+            if res.get("success"):
+                removed.append(name)
+            else:
+                failed.append({"name": name, "error": res.get("message", "")})
+    return {"success": len(failed) == 0, "removed": removed, "failed": failed}
 
 
 def oneshot(prompt: str, timeout: int = ONESHOT_TIMEOUT) -> Dict[str, Any]:

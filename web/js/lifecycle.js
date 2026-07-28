@@ -81,6 +81,13 @@ async function renderLifecycleDashboard() {
     html += `<span class="ml-auto btn-text" onclick="lcFilterStage('all')" style="cursor:pointer;">显示全部</span>`;
     html += '</div>';
 
+    // v6.7.5: cron 框架操作
+    html += `<div class="d-flex gap-8 mb-12">`;
+    html += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcOrchestrate()">🔄 手动编排</button>`;
+    html += `<button class="btn-text fs-072" style="color:var(--warning-color);" onclick="lcRepair()">🔧 手动修复</button>`;
+    html += `<button class="btn-text fs-072" style="color:var(--text-secondary);" onclick="lcShowJobs()">📋 查看 cron</button>`;
+    html += `</div>`;
+
     container.innerHTML = html;
 
     // === 课题列表 ===
@@ -168,6 +175,10 @@ function renderProposalCard(p) {
   const namePart = (p.proposal_id || '').split('-').slice(1, -1).join('-') || p.proposal_id;
 
   let actions = '';
+  // v6.7.5: optimizing 状态可查看 checkpoints
+  if (p.status === 'optimizing') {
+    actions += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcToggleCheckpoints('${p.proposal_id}')">◐ checkpoints</button>`;
+  }
   // 根据状态显示不同操作
   if (p.status === 'drafts') {
     actions += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcTransition('${p.proposal_id}','optimizing','确认思路可行')">→ 优化中</button>`;
@@ -195,6 +206,7 @@ function renderProposalCard(p) {
       <div class="d-flex gap-6">
         ${actions}
       </div>
+      <div id="lc-checkpoints-${p.proposal_id}" class="d-none mt-6 fs-072 text-secondary"></div>
     </div>`;
 }
 
@@ -352,6 +364,98 @@ async function lcRegister() {
     } else {
       throw new Error(result.error || '注册失败');
     }
+  } catch (e) {
+    showToast(`✗ ${e.message}`, 'error');
+  }
+}
+
+// ============================================
+// v6.7.5: checkpoint / orchestrate / repair / jobs
+// ============================================
+async function lcToggleCheckpoints(proposalId) {
+  const el = document.getElementById(`lc-checkpoints-${proposalId}`);
+  if (!el) return;
+  if (!el.classList.contains('d-none')) {
+    el.classList.add('d-none');
+    el.innerHTML = '';
+    return;
+  }
+  el.classList.remove('d-none');
+  el.innerHTML = '<div class="pad-8">加载 checkpoints...</div>';
+  try {
+    const result = await apiGet(`/api/lifecycle/checkpoints/${proposalId}`);
+    if (result.status !== 'ok') throw new Error(result.error || '获取失败');
+    const jobs = result.data || [];
+    if (jobs.length === 0) {
+      el.innerHTML = '<div class="pad-8">暂无 checkpoint</div>';
+      return;
+    }
+    let html = '<div class="d-flex fd-col gap-4">';
+    for (const job of jobs) {
+      const statusMap = {
+        pending: { icon: '○', color: 'var(--text-tertiary)' },
+        running: { icon: '◐', color: 'var(--info-color)' },
+        done: { icon: '✓', color: 'var(--success-color)' },
+        failed: { icon: '✗', color: 'var(--error-color)' },
+      };
+      const s = statusMap[job.status] || statusMap.pending;
+      html += `
+        <div class="d-flex ai-center gap-8">
+          <span style="color:${s.color};">${s.icon} ${job.step}</span>
+          <span class="text-tertiary">r${job.round} · ${job.section_key}</span>
+          <span class="ml-auto text-tertiary">${job.attempts || 0} 次</span>
+        </div>`;
+    }
+    html += '</div>';
+    el.innerHTML = html;
+  } catch (e) {
+    el.innerHTML = `<div class="pad-8 text-error">加载失败：${escapeHtml(e.message)}</div>`;
+  }
+}
+
+async function lcOrchestrate() {
+  try {
+    showToast('每日编排已启动（后台执行）', 'info');
+    const result = await apiPost('/api/lifecycle/orchestrate', {});
+    if (result.status === 'accepted') {
+      showToast(`✓ 编排任务已提交：${result.task_id}`, 'success');
+    } else {
+      throw new Error(result.error || '提交失败');
+    }
+  } catch (e) {
+    showToast(`✗ ${e.message}`, 'error');
+  }
+}
+
+async function lcRepair() {
+  try {
+    showToast('修复扫描已启动（后台执行）', 'info');
+    const result = await apiPost('/api/lifecycle/repair', {});
+    if (result.status === 'accepted') {
+      showToast(`✓ 修复任务已提交：${result.task_id}`, 'success');
+    } else {
+      throw new Error(result.error || '提交失败');
+    }
+  } catch (e) {
+    showToast(`✗ ${e.message}`, 'error');
+  }
+}
+
+async function lcShowJobs() {
+  try {
+    const result = await apiGet('/api/lifecycle/jobs');
+    if (result.status !== 'ok') throw new Error(result.error || '获取失败');
+    const jobs = result.data || [];
+    let html = `<div class="d-flex fd-col gap-4 fs-082" style="max-height:300px;overflow:auto;">`;
+    if (jobs.length === 0) {
+      html += '<div class="text-tertiary">暂无 lifecycle cron</div>';
+    } else {
+      for (const job of jobs) {
+        html += `<div>${job.status === 'active' ? '🟢' : '⏸'} ${escapeHtml(job.name)} <span class="text-tertiary">${job.schedule}</span></div>`;
+      }
+    }
+    html += '</div>';
+    await confirmModal(html, 'Lifecycle Cron Jobs', '关闭');
   } catch (e) {
     showToast(`✗ ${e.message}`, 'error');
   }

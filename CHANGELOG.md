@@ -1,5 +1,32 @@
 # 变更记录
 
+## v6.7.5 - 2026-07-28 生命周期 cron 小型化与自修复框架
+
+### 问题根因
+- 原来的每日编排是一个**大而全的单一 cron**：`python3 scripts/proposal_lifecycle.py --daily-orchestrate` 内部串行执行健康检查、文献匹配、多 proposal 多轮 `optimize_cycle`。
+- 单点失败会导致当天所有课题优化丢失；critic/writer/researcher 虽然走了不同 profile，但没有在 cron 层显式拆分；无法对单个失败步骤做细粒度修复。
+
+### 新增内容
+- **生命周期 cron 框架** — `scripts/lifecycle_cron_framework.py`
+  - `LifecycleCronController`：在 `ProposalLifecycle` 之上增加 checkpoint（`pipeline_jobs`）+ worker + repair。
+  - 每个 optimizing proposal 拥有独立 worker cron，每次只执行**下一个 pending 小步骤**（critic / researcher / writer）。
+  - 每日编排 cron（`lc-daily-orchestrate`）只负责生成 checkpoint 与确保 worker 存在，自身不调用 LLM。
+  - 修复 cron（`lc-repair`）每 6 小时扫描一次：重置 stuck running、重试 failed（<3 次）、补齐缺失 worker、超过重试次数则告警。
+- **Hermes no-agent cron 支持** — `scripts/hermes_bridge.py`
+  - 新增 `cron_list_profile()`、`cron_create_no_agent()`、`cron_delete()`、`cron_delete_by_name_prefix()`。
+  - lifecycle cron 统一挂在 `linsai` profile，使用 `--script --no-agent` 模式直接执行本地脚本，不经过 LLM agent。
+- **CLI 扩展** — `scripts/proposal_lifecycle.py`
+  - 新增 `--worker-step <id>`、`--orchestrate`、`--repair [--dry-run]`、`--setup-cron-v2`、`--teardown-cron-v2`。
+- **Web API / 前端**
+  - 新增 `GET /api/lifecycle/checkpoints/{id}`、`POST /api/lifecycle/orchestrate`、`POST /api/lifecycle/repair`、`GET /api/lifecycle/jobs`。
+  - `web/js/lifecycle.js` 增加 checkpoints 展开、手动编排/修复/查看 cron 按钮。
+- **测试**
+  - 新增 `scripts/tests/test_lifecycle_cron.py`（19 个检查点），纳入 `--module` 维度。
+
+### 验证结果
+- `python3 -m py_compile scripts/*.py scripts/tests/*.py` 通过
+- `python3 scripts/self_test.py --module` 135/135 通过（原 116 + 新增 19）
+
 ## v6.7.4 - 2026-07-28 修复 critic 超时导致 lifecycle 状态污染
 
 ### 问题根因

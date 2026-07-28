@@ -53,34 +53,37 @@ def _run_selected(filters: List[str]) -> List[TestSuite]:
 
     suites = []
     mapping = {
-        "module": "test_core",
+        "module": ["test_core", "test_lifecycle_cron"],
         "scenario": "test_scenarios",
         "persona": "test_persona",
         "web": "test_web_api",
     }
 
-    for key, mod_name in mapping.items():
+    for key, mod_names in mapping.items():
         if key not in filters:
             continue
-        try:
-            mod = importlib.import_module(mod_name)
-        except Exception as e:
-            print(f"⚠ 无法加载 {mod_name}: {e}")
-            continue
-        for attr_name in dir(mod):
-            attr = getattr(mod, attr_name)
+        if isinstance(mod_names, str):
+            mod_names = [mod_names]
+        for mod_name in mod_names:
             try:
-                if (isinstance(attr, type) and issubclass(attr, TestSuite)
-                        and attr is not TestSuite):
-                    instance = attr()
-                    t0 = __import__("time").time()
-                    instance.setup()
-                    instance.run_tests()
-                    instance.teardown()
-                    instance.duration = __import__("time").time() - t0
-                    suites.append(instance)
+                mod = importlib.import_module(mod_name)
             except Exception as e:
-                print(f"⚠ 运行 {attr_name} 失败: {e}")
+                print(f"⚠ 无法加载 {mod_name}: {e}")
+                continue
+            for attr_name in dir(mod):
+                attr = getattr(mod, attr_name)
+                try:
+                    if (isinstance(attr, type) and issubclass(attr, TestSuite)
+                            and attr is not TestSuite):
+                        instance = attr()
+                        t0 = __import__("time").time()
+                        instance.setup()
+                        instance.run_tests()
+                        instance.teardown()
+                        instance.duration = __import__("time").time() - t0
+                        suites.append(instance)
+                except Exception as e:
+                    print(f"⚠ 运行 {attr_name} 失败: {e}")
 
     return suites
 

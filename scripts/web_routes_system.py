@@ -86,6 +86,11 @@ _SYSTEM_ROUTES = [
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/optimize$"), "_sys_lifecycle_optimize"),
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/feedback$"), "_sys_lifecycle_feedback"),
     ("POST", re.compile(r"^/api/lifecycle/cron-sweep$"), "_sys_lifecycle_cron_sweep"),
+    # v6.7.5: checkpoint + 小型 cron 框架
+    ("GET", re.compile(r"^/api/lifecycle/checkpoints/(?P<proposal_id>[^/]+)$"), "_sys_lifecycle_checkpoints"),
+    ("POST", re.compile(r"^/api/lifecycle/orchestrate$"), "_sys_lifecycle_orchestrate"),
+    ("POST", re.compile(r"^/api/lifecycle/repair$"), "_sys_lifecycle_repair"),
+    ("GET", re.compile(r"^/api/lifecycle/jobs$"), "_sys_lifecycle_jobs"),
 ]
 
 
@@ -477,6 +482,82 @@ class SystemRoutesMixin:
                 _save_bg_tasks()
         threading.Thread(target=_worker, daemon=True).start()
         self._send_json({"status": "accepted", "task_id": task_id, "message": "cron 扫描已启动（后台执行）"})
+
+    def _sys_lifecycle_checkpoints(self, parsed, body=None, **kwargs):
+        """获取指定 proposal 的 checkpoint 列表"""
+        proposal_id = parsed.group("proposal_id")
+        try:
+            from lifecycle_cron_framework import LifecycleCronController
+            ctrl = LifecycleCronController()
+            jobs = ctrl._get_jobs(proposal_id)
+            self._send_json({"status": "ok", "data": jobs})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_orchestrate(self, parsed, body=None):
+        """手动触发每日编排（后台异步）"""
+        import threading, uuid
+        task_id = f"lc_orch_{uuid.uuid4().hex[:8]}"
+        with _bg_tasks_lock:
+            _bg_tasks[task_id] = {"status": "running", "type": "lifecycle_orchestrate", "started_at": _now_utc()}
+            _save_bg_tasks()
+        def _worker():
+            try:
+                from lifecycle_cron_framework import LifecycleCronController
+                ctrl = LifecycleCronController()
+                result = ctrl.run_orchestrator()
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {"status": "done", "result": result, "finished_at": _now_utc()}
+                if _log:
+                    _log.info(f"[bg-task] {task_id} lifecycle_orchestrate 完成")
+            except Exception as e:
+                err_msg = str(e)
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {"status": "failed", "error": err_msg, "finished_at": _now_utc()}
+                if _log:
+                    _log.error(f"[bg-task] {task_id} lifecycle_orchestrate 失败: {err_msg}")
+            finally:
+                _save_bg_tasks()
+        threading.Thread(target=_worker, daemon=True).start()
+        self._send_json({"status": "accepted", "task_id": task_id, "message": "每日编排已启动（后台执行）"})
+
+    def _sys_lifecycle_repair(self, parsed, body=None):
+        """手动触发修复扫描（后台异步）"""
+        import threading, uuid
+        dry_run = bool(body and body.get("dry_run"))
+        task_id = f"lc_repair_{uuid.uuid4().hex[:8]}"
+        with _bg_tasks_lock:
+            _bg_tasks[task_id] = {"status": "running", "type": "lifecycle_repair", "dry_run": dry_run, "started_at": _now_utc()}
+            _save_bg_tasks()
+        def _worker():
+            try:
+                from lifecycle_cron_framework import LifecycleCronController
+                ctrl = LifecycleCronController()
+                result = ctrl.run_repair(dry_run=dry_run)
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {"status": "done", "result": result, "finished_at": _now_utc()}
+                if _log:
+                    _log.info(f"[bg-task] {task_id} lifecycle_repair 完成")
+            except Exception as e:
+                err_msg = str(e)
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {"status": "failed", "error": err_msg, "finished_at": _now_utc()}
+                if _log:
+                    _log.error(f"[bg-task] {task_id} lifecycle_repair 失败: {err_msg}")
+            finally:
+                _save_bg_tasks()
+        threading.Thread(target=_worker, daemon=True).start()
+        self._send_json({"status": "accepted", "task_id": task_id, "message": f"修复扫描已启动（dry_run={dry_run}）"})
+
+    def _sys_lifecycle_jobs(self, parsed, body=None):
+        """列出当前 lifecycle 相关 hermes cron jobs"""
+        try:
+            from lifecycle_cron_framework import LifecycleCronController
+            ctrl = LifecycleCronController()
+            jobs = ctrl.list_lifecycle_crons()
+            self._send_json({"status": "ok", "data": jobs})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
 
     def _sys_task_status(self, parsed, body=None, task_id=None):
         """后台任务状态"""

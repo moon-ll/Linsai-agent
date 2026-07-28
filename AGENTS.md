@@ -67,7 +67,7 @@ LinSai-CoPilot/
 ├── AGENTS.md                  # 本文件。AI 代理必读指南
 ├── README.md                  # 人类可读的项目说明
 ├── CHANGELOG.md               # 变更记录
-├── VERSION                    # 版本号唯一真相源（当前 6.7.4）
+├── VERSION                    # 版本号唯一真相源（当前 6.7.5）
 ├── .env                       # 本地 API 密钥（gitignore，不提交）
 ├── .gitignore                 # Git 忽略规则：用户数据、自动生成文件、敏感配置
 │
@@ -595,7 +595,12 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 ```
 
 - **命名规则**：`{项目类型}-{课题名称}-{YYYYMMDD}[-序号]`，项目类型 `general`/`key`/`major`。
-- **对抗优化**：每天 pipeline-runner 触发 cron sweep，按章节（立项依据→研究内容→研究方案→整体审查）轮转，critic 4 维度评分（创新/可行/严谨/完整），writer 聚焦最弱维度修订；达标需全模块通过。
+- **对抗优化**：按章节（立项依据→研究内容→研究方案→整体审查）轮转，critic 4 维度评分（创新/可行/严谨/完整），writer 聚焦最弱维度修订；达标需全模块通过。
+- **小型化 cron 框架（v6.7.5）**：
+  - 不再使用单一大型 `pipeline-runner` cron sweep；改为每个 optimizing proposal 一个独立 worker cron，每次只执行下一个 pending 小步骤（critic / researcher / writer）。
+  - 每日编排 cron（`lc-daily-orchestrate`）只生成 checkpoint、确保 worker 存在，自身不调用 LLM。
+  - 修复 cron（`lc-repair`）每 6 小时扫描：重置 stuck running、重试 failed（最多 3 次）、补齐缺失 worker、超过重试则告警。
+  - checkpoint 持久化在 `_lifecycle.json` 的 `pipeline_jobs` 中，critic/writer 失败可单独重跑，不污染整体状态。
 - **文献驱动**：优先优化与当天简报关键词匹配的课题，节省模型限额。
 - **质量标准**：`memory/nsfc-standards.json` 定义面上/重点/重大三类项目的评分权重、页数限制、模板结构。
 
@@ -639,7 +644,7 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 
 ### 版本号规范
 
-- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.7.4`）。
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.7.5`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -708,7 +713,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.7.4*
+*版本：6.7.5*
 *日期：2026-07-28*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

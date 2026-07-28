@@ -2045,9 +2045,70 @@ def main(argv: Optional[List[str]] = None) -> int:
                         help="每日编排（健康检查+优化扫描+结果确认，容错）")
     parser.add_argument("--setup-cron", nargs="?", const="0 9 * * *", metavar="SCHEDULE",
                         help="配置每日编排 cron（默认 0 9 * * *）")
+    # v6.7.5: 小型化 cron 框架 CLI
+    parser.add_argument("--worker-step", metavar="ID",
+                        help="worker 入口：执行指定 proposal 的下一个 pending checkpoint job")
+    parser.add_argument("--orchestrate", action="store_true",
+                        help="手动触发每日编排（v2：生成 checkpoint + 确保 worker cron）")
+    parser.add_argument("--repair", action="store_true",
+                        help="手动触发修复扫描（处理 stuck/failed checkpoint 与缺失 worker）")
+    parser.add_argument("--dry-run", action="store_true",
+                        help="与 --repair 联用：只预览不修改")
+    parser.add_argument("--setup-cron-v2", action="store_true",
+                        help="安装 v2 cron 框架（orchestrate + repair + per-proposal workers）")
+    parser.add_argument("--teardown-cron-v2", action="store_true",
+                        help="卸载所有 v2 lifecycle cron")
     args = parser.parse_args(argv)
 
     lc = ProposalLifecycle()
+
+    # v6.7.5: 新 cron 框架命令使用 LifecycleCronController
+    if any([args.worker_step, args.orchestrate, args.repair, args.setup_cron_v2, args.teardown_cron_v2]):
+        # 延迟导入避免循环依赖
+        from lifecycle_cron_framework import LifecycleCronController
+        ctrl = LifecycleCronController()
+
+        if args.worker_step:
+            result = ctrl.execute_next_job(args.worker_step)
+            print(f"worker {args.worker_step}: executed={result.get('executed')} "
+                  f"success={result.get('success')} job={result.get('job_id', '-')}")
+            if result.get('error'):
+                print(f"  error: {result['error']}")
+            return 0 if result.get('success') else 1
+
+        if args.orchestrate:
+            result = ctrl.run_orchestrator()
+            print(f"=== 每日编排完成 (v2) ===")
+            print(f"optimizing: {result.get('optimizing_count')} "
+                  f"workers_created: {result.get('workers_created')} "
+                  f"checkpoints_added: {result.get('checkpoints_added')}")
+            print(f"health_after: {'🟢' if result['health_after']['healthy'] else '🔴'} "
+                  f"({result['health_after']['alerts']} alerts)")
+            return 0
+
+        if args.repair:
+            result = ctrl.run_repair(dry_run=args.dry_run)
+            print(f"=== 修复扫描完成 (dry_run={result.get('dry_run')}) ===")
+            for item in result.get("repaired", []):
+                actions = item.get("actions", [])
+                print(f"  {item['proposal_id']}: {actions if actions else 'ok'}")
+            return 0
+
+        if args.setup_cron_v2:
+            result = ctrl.setup_cron_framework()
+            print("=== v2 cron 框架安装结果 ===")
+            print(f"removed_old: {result.get('removed_old', [])}")
+            print(f"orchestrate: {result.get('orchestrate', {}).get('message')}")
+            print(f"repair: {result.get('repair', {}).get('message')}")
+            print(f"first_orchestrate: optimizing={result.get('first_orchestrate', {}).get('optimizing_count')}")
+            return 0 if result.get("success") else 1
+
+        if args.teardown_cron_v2:
+            result = ctrl.teardown_cron_framework()
+            print(f"=== 已卸载 v2 cron: {result.get('removed', [])} ===")
+            return 0
+
+    # 原有命令继续走 ProposalLifecycle
 
     if args.dashboard:
         dashboard = lc.get_dashboard()
