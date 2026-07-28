@@ -66,10 +66,24 @@ except Exception:
 HERMES_SCRIPTS_DIR = Path.home() / ".hermes" / "scripts"
 HERMES_PROFILE = "linsai"  # cron 统一挂在 linsai profile，便于 hermes_bridge 读取
 
-# worker / repair / orchestrate 的默认 cron 表达式
+# worker / repair / orchestrate / weekend 的默认 cron 表达式
 DEFAULT_ORCHESTRATE_SCHEDULE = "55 8 * * *"
-DEFAULT_WORKER_INTERVAL = "47 * * * *"
+DEFAULT_WORKER_INTERVAL = "47 * * * 1-5"  # v6.7.7: 周中运行，周末暂停
 DEFAULT_REPAIR_SCHEDULE = "0 */6 * * *"
+
+# 周末任务 cron 表达式（周六输入/输出，周日反思）
+DEFAULT_WEEKEND_INPUT_SCHEDULE = "0 9 * * 6"
+DEFAULT_WEEKEND_OUTPUT_SCHEDULE = "0 14 * * 6"
+DEFAULT_WEEKEND_REFLECTION_SCHEDULE = "0 9 * * 0"
+
+# 周末任务状态（与 pipeline_jobs 类似，用于 repair 扫描）
+WEEKEND_JOB_INPUT = "weekend_input"
+WEEKEND_JOB_OUTPUT = "weekend_output"
+WEEKEND_JOB_REFLECTION = "weekend_reflection"
+WEEKEND_JOBS = [WEEKEND_JOB_INPUT, WEEKEND_JOB_OUTPUT, WEEKEND_JOB_REFLECTION]
+
+# weekend_jobs 状态文件路径
+WEEKEND_JOBS_PATH = PROJECT_ROOT / "memory" / "weekend-jobs.json"
 
 # checkpoint 状态
 JOB_STATUS_PENDING = "pending"
@@ -151,6 +165,28 @@ def _short_uuid() -> str:
     return uuid.uuid4().hex[:8]
 
 
+def _load_weekend_jobs() -> Dict[str, Any]:
+    """加载周末任务状态。"""
+    if WEEKEND_JOBS_PATH.exists():
+        try:
+            return load_json(WEEKEND_JOBS_PATH, default={"jobs": {}})
+        except Exception:
+            pass
+    return {"jobs": {}}
+
+
+def _save_weekend_jobs(data: Dict[str, Any]) -> None:
+    """保存周末任务状态。"""
+    WEEKEND_JOBS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    data["updated_at"] = now_utc()
+    save_json(WEEKEND_JOBS_PATH, data)
+
+
+def _is_weekend() -> bool:
+    """判断当前是否为周末（周六或周日）。"""
+    return datetime.now(timezone.utc).weekday() >= 5
+
+
 # ---------------------------------------------------------------------------
 # CronController
 # ---------------------------------------------------------------------------
@@ -164,7 +200,7 @@ class LifecycleCronController(ProposalLifecycle):
     # ------------------------------------------------------------------
 
     def _write_generic_wrappers(self) -> Dict[str, Path]:
-        """生成 orchestrate / repair / worker 三类通用包装脚本。"""
+        """生成 orchestrate / repair / worker / weekend 通用包装脚本。"""
         project = str(PROJECT_ROOT)
         orchestrate = """#!/bin/bash
 set -e
@@ -187,10 +223,31 @@ PID="${{PID%.sh}}"
 python3 scripts/proposal_lifecycle.py --worker-step "$PID"
 """.format(project=project)
 
+        weekend_input = """#!/bin/bash
+set -e
+cd {project}
+python3 scripts/weekend_orchestrator.py --input
+""".format(project=project)
+
+        weekend_output = """#!/bin/bash
+set -e
+cd {project}
+python3 scripts/weekend_orchestrator.py --output
+""".format(project=project)
+
+        weekend_reflection = """#!/bin/bash
+set -e
+cd {project}
+python3 scripts/weekend_orchestrator.py --reflection
+""".format(project=project)
+
         return {
             "orchestrate": _write_wrapper_script("lc_orchestrate.sh", orchestrate),
             "repair": _write_wrapper_script("lc_repair.sh", repair),
             "worker": _write_wrapper_script("lc_worker.sh", worker),
+            "weekend_input": _write_wrapper_script("lc_weekend_input.sh", weekend_input),
+            "weekend_output": _write_wrapper_script("lc_weekend_output.sh", weekend_output),
+            "weekend_reflection": _write_wrapper_script("lc_weekend_reflection.sh", weekend_reflection),
         }
 
     def _worker_script_for_proposal(self, proposal_id: str) -> Path:
@@ -821,7 +878,8 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
     def schedule_worker(self, proposal_id: str, interval: Optional[str] = None) -> Dict[str, Any]:
         """为 proposal 创建/更新 worker cron。幂等（按名称去重）。
 
-        默认自动错开：多个 worker 之间间隔 6 分钟。可通过 interval 参数强制指定。
+        默认自动错开且仅在周中运行：多个 worker 之间间隔 6 分钟，schedule 为
+        `{minute} * * * 1-5`。可通过 interval 参数强制指定。
         """
         script_path = self._worker_script_for_proposal(proposal_id)
         name = f"lc-worker-{proposal_id}"
@@ -835,7 +893,7 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
             schedule = interval
         else:
             minute = self._compute_worker_minute(proposal_id)
-            schedule = f"{minute} * * * *"
+            schedule = f"{minute} * * * 1-5"
 
         result = hb.cron_create_no_agent(
             script_name=script_path.name,
@@ -907,12 +965,23 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
         return summary
 
     def run_repair(self, dry_run: bool = False) -> Dict[str, Any]:
-        """修复 cron：扫描 stuck/failed checkpoint 与缺失 worker。"""
-        if _log:
-            _log.info(f"=== 修复扫描（dry_run={dry_run}）===")
+        """修复 cron：扫描 stuck/failed checkpoint 与缺失 worker。
 
-        optimizing = self.list_by_status("optimizing")
+        v6.7.7: 区分工作日与周末。
+        - 工作日：扫描 optimizing proposal worker jobs。
+        - 周末：扫描 weekend_input/output/reflection 任务状态，并修复周末 cron。
+        """
+        if _log:
+            _log.info(f"=== 修复扫描（dry_run={dry_run}, weekend={_is_weekend()}）===")
+
         lifecycle_crons = self.list_lifecycle_crons()
+
+        # 周末模式：扫描周末任务
+        if _is_weekend():
+            return self._run_weekend_repair(dry_run=dry_run, lifecycle_crons=lifecycle_crons)
+
+        # 工作日模式：扫描 optimizing proposal worker jobs
+        optimizing = self.list_by_status("optimizing")
         active_worker_names = {
             j["name"] for j in lifecycle_crons
             if j.get("name", "").startswith("lc-worker-") and j.get("status") == "active"
@@ -927,7 +996,7 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
                 if not dry_run:
                     self.sync_checkpoint(pid)
 
-                # 2. 检查 worker cron 是否存在且 active，并校验 schedule 是否需要更新
+                # 2. 检查 worker cron 是否存在且 active，并校验 schedule 是否为周中
                 worker_name = f"lc-worker-{pid}"
                 if worker_name not in active_worker_names:
                     if not dry_run:
@@ -936,9 +1005,8 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
                     else:
                         item["actions"].append(" missing worker cron (dry-run)")
                 else:
-                    # v6.7.6: schedule 错开策略变化后，自动更新已有 worker 的触发时间
                     expected_minute = self._compute_worker_minute(pid)
-                    expected_schedule = f"{expected_minute} * * * *"
+                    expected_schedule = f"{expected_minute} * * * 1-5"
                     existing = next(
                         (j for j in lifecycle_crons if j.get("name") == worker_name), None
                     )
@@ -989,6 +1057,58 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
 
         return {"success": True, "dry_run": dry_run, "repaired": repaired, "at": now_utc()}
 
+    def _run_weekend_repair(
+        self,
+        dry_run: bool = False,
+        lifecycle_crons: Optional[List[Dict[str, Any]]] = None,
+    ) -> Dict[str, Any]:
+        """周末专用修复：扫描输入/输出/反思任务状态，并确保周末 cron 存在。"""
+        if lifecycle_crons is None:
+            lifecycle_crons = self.list_lifecycle_crons()
+
+        active_names = {j.get("name") for j in lifecycle_crons if j.get("status") == "active"}
+        weekend_jobs = _load_weekend_jobs()
+        repaired = []
+
+        for job_key in WEEKEND_JOBS:
+            job_state = weekend_jobs.get("jobs", {}).get(job_key, {})
+            actions = []
+
+            # 1. 检查任务是否 stuck
+            if _is_stale(job_state):
+                actions.append(f" stale {job_key} -> failed")
+                if not dry_run:
+                    job_state["status"] = JOB_STATUS_FAILED
+                    job_state["finished_at"] = now_utc()
+                    job_state["last_error"] = "运行超时/进程僵死"
+                    job_state["attempts"] = job_state.get("attempts", 0) + 1
+                    weekend_jobs.setdefault("jobs", {})[job_key] = job_state
+
+            # 2. 检查 failed 重试
+            elif job_state.get("status") == JOB_STATUS_FAILED and job_state.get("attempts", 0) < MAX_JOB_ATTEMPTS:
+                actions.append(f" retry {job_key} (attempt {job_state.get('attempts', 0)})")
+                if not dry_run:
+                    job_state["status"] = JOB_STATUS_PENDING
+                    job_state["started_at"] = ""
+                    job_state["finished_at"] = ""
+                    job_state["last_error"] = ""
+                    weekend_jobs.setdefault("jobs", {})[job_key] = job_state
+
+            elif job_state.get("status") == JOB_STATUS_FAILED and job_state.get("attempts", 0) >= MAX_JOB_ATTEMPTS:
+                actions.append(f" {job_key} 超过重试次数，需人工介入")
+
+            # 3. 确保对应 cron 存在（仅检查，不立即创建；setup_weekend_crontab 负责安装）
+            cron_name = f"lc-weekend-{job_key.replace('_', '-')}"
+            if cron_name not in active_names:
+                actions.append(f" missing cron {cron_name}")
+
+            repaired.append({"job": job_key, "actions": actions, "status": job_state.get("status", "unknown")})
+
+        if not dry_run:
+            _save_weekend_jobs(weekend_jobs)
+
+        return {"success": True, "dry_run": dry_run, "mode": "weekend", "repaired": repaired, "at": now_utc()}
+
     # ------------------------------------------------------------------
     # 安装 / 卸载
     # ------------------------------------------------------------------
@@ -998,12 +1118,13 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
         orchestrate_schedule: str = DEFAULT_ORCHESTRATE_SCHEDULE,
         worker_interval: str = DEFAULT_WORKER_INTERVAL,
         repair_schedule: str = DEFAULT_REPAIR_SCHEDULE,
+        install_weekend: bool = True,
     ) -> Dict[str, Any]:
-        """安装 v2 cron 框架：删除旧单一 cron，创建 orchestrate + repair + workers。
+        """安装 v2 cron 框架：删除旧单一 cron，创建 orchestrate + repair + workers + weekend。
 
         worker_interval 参数保留以兼容 CLI，但实际 worker schedule 由
         schedule_worker 自动错开（默认 47 分起，每新增一个 worker 偏移 6 分钟），
-        避免多个 worker 同时触发造成资源争抢。
+        且仅在周中运行（1-5），周末暂停。
         """
         self._write_generic_wrappers()
 
@@ -1036,7 +1157,7 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
         # 立即执行一次 orchestrate，确保当天 worker 就位
         orch_now = self.run_orchestrator()
 
-        return {
+        result = {
             "success": orch.get("success") and rep.get("success"),
             "removed_old": removed,
             "orchestrate": orch,
@@ -1044,8 +1165,70 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
             "first_orchestrate": orch_now,
         }
 
+        # 安装周末任务 cron
+        if install_weekend:
+            weekend = self.setup_weekend_crontab()
+            result["weekend"] = weekend
+            result["success"] = result["success"] and all(
+                c.get("result", {}).get("success") for c in weekend.get("created", [])
+            )
+
+        return result
+
+    def setup_weekend_crontab(
+        self,
+        input_schedule: str = DEFAULT_WEEKEND_INPUT_SCHEDULE,
+        output_schedule: str = DEFAULT_WEEKEND_OUTPUT_SCHEDULE,
+        reflection_schedule: str = DEFAULT_WEEKEND_REFLECTION_SCHEDULE,
+    ) -> Dict[str, Any]:
+        """安装周末任务 cron：输入（周六早）/ 输出（周六午）/ 反思（周日早）。"""
+        self._write_generic_wrappers()
+
+        # 确保 weekend_jobs 状态文件存在
+        weekend_jobs = _load_weekend_jobs()
+        for job_key in WEEKEND_JOBS:
+            weekend_jobs.setdefault("jobs", {}).setdefault(job_key, {
+                "status": JOB_STATUS_PENDING,
+                "last_run": "",
+                "started_at": "",
+                "finished_at": "",
+                "last_error": "",
+                "attempts": 0,
+            })
+        _save_weekend_jobs(weekend_jobs)
+
+        created = []
+        for job_key, schedule in [
+            (WEEKEND_JOB_INPUT, input_schedule),
+            (WEEKEND_JOB_OUTPUT, output_schedule),
+            (WEEKEND_JOB_REFLECTION, reflection_schedule),
+        ]:
+            script_name = f"lc_weekend_{job_key}.sh"
+            cron_name = f"lc-weekend-{job_key.replace('_', '-')}"
+            res = hb.cron_create_no_agent(
+                script_name=script_name,
+                name=cron_name,
+                schedule=schedule,
+                workdir=str(PROJECT_ROOT),
+                profile=HERMES_PROFILE,
+            )
+            created.append({"job": job_key, "cron": cron_name, "result": res})
+
+        return {"success": True, "created": created}
+
+    def teardown_weekend_crontab(self) -> Dict[str, Any]:
+        """卸载所有 lc-weekend- 开头的 cron。"""
+        removed = []
+        for cron in self.list_lifecycle_crons():
+            name = cron.get("name", "")
+            if name.startswith("lc-weekend-"):
+                res = hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)
+                if res.get("success"):
+                    removed.append(name)
+        return {"success": True, "removed": removed}
+
     def teardown_cron_framework(self) -> Dict[str, Any]:
-        """卸载所有 lc- 开头的 lifecycle cron。"""
+        """卸载所有 lc- 开头的 lifecycle cron（含周末任务）。"""
         removed = []
         for cron in self.list_lifecycle_crons():
             res = hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)

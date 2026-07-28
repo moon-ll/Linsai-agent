@@ -52,6 +52,37 @@ import backup_manager as bm
 
 
 # ---------------------------------------------------------------------------
+# 工具函数
+# ---------------------------------------------------------------------------
+
+def _find_idea_by_id(idea_id: str):
+    """根据 idea_id 从 research_proposals/_incoming/ideas-*.json 中查找设想。"""
+    from pathlib import Path
+    import re
+    project_root = Path(__file__).parent.parent
+    incoming_dir = project_root / "research_proposals" / "_incoming"
+    if not incoming_dir.exists():
+        return None
+    # idea_id 形如 ideas-20260728-0
+    m = re.match(r"^(ideas-\d{8})-(\d+)$", idea_id)
+    if not m:
+        return None
+    file_name = m.group(1) + ".json"
+    idx = int(m.group(2))
+    file_path = incoming_dir / file_name
+    if not file_path.exists():
+        return None
+    try:
+        data = json.loads(file_path.read_text(encoding="utf-8"))
+        ideas = data.get("ideas", [])
+        if 0 <= idx < len(ideas):
+            return ideas[idx]
+    except Exception:
+        pass
+    return None
+
+
+# ---------------------------------------------------------------------------
 # 路由表
 # ---------------------------------------------------------------------------
 _SYSTEM_ROUTES = [
@@ -95,6 +126,17 @@ _SYSTEM_ROUTES = [
     ("GET", re.compile(r"^/api/lifecycle/agent-scores$"), "_sys_lifecycle_agent_scores"),
     ("GET", re.compile(r"^/api/lifecycle/monitor/(?P<proposal_id>[^/]+)$"), "_sys_lifecycle_monitor"),
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/clear-alert$"), "_sys_lifecycle_clear_alert"),
+    # v6.7.7: 输入端研究设想
+    ("GET", re.compile(r"^/api/lifecycle/incoming$"), "_sys_lifecycle_incoming"),
+    ("POST", re.compile(r"^/api/lifecycle/incoming/expand$"), "_sys_lifecycle_incoming_expand"),
+    ("POST", re.compile(r"^/api/lifecycle/incoming/(?P<idea_id>[^/]+)/accept$"), "_sys_lifecycle_incoming_accept"),
+    ("POST", re.compile(r"^/api/lifecycle/incoming/(?P<idea_id>[^/]+)/merge/(?P<proposal_id>[^/]+)$"), "_sys_lifecycle_incoming_merge"),
+    ("POST", re.compile(r"^/api/lifecycle/incoming/(?P<idea_id>[^/]+)/reject$"), "_sys_lifecycle_incoming_reject"),
+    # v6.7.7: 周末任务
+    ("GET", re.compile(r"^/api/lifecycle/weekend/status$"), "_sys_lifecycle_weekend_status"),
+    ("POST", re.compile(r"^/api/lifecycle/weekend/input$"), "_sys_lifecycle_weekend_input"),
+    ("POST", re.compile(r"^/api/lifecycle/weekend/output$"), "_sys_lifecycle_weekend_output"),
+    ("POST", re.compile(r"^/api/lifecycle/weekend/reflection$"), "_sys_lifecycle_weekend_reflection"),
 ]
 
 
@@ -622,6 +664,148 @@ class SystemRoutesMixin:
             self._send_json({"status": "ok", "data": result})
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_incoming(self, parsed, body=None):
+        """列出最近生成的研究设想摘要"""
+        try:
+            incoming_dir = Path(__import__("paths").PROJECT_ROOT) / "research_proposals" / "_incoming"
+            ideas_files = sorted(incoming_dir.glob("ideas-*.json"), reverse=True)[:5]
+            ideas = []
+            for f in ideas_files:
+                try:
+                    data = json.loads(f.read_text(encoding="utf-8"))
+                    for i, idea in enumerate(data.get("ideas", [])):
+                        ideas.append({
+                            "id": f"{f.stem}-{i}",
+                            "title": idea.get("title", ""),
+                            "background": idea.get("background", "")[:120],
+                            "gap": idea.get("gap", "")[:120],
+                            "generated_at": data.get("generated_at", ""),
+                        })
+                except Exception:
+                    continue
+            self._send_json({"status": "ok", "count": len(ideas), "ideas": ideas})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_incoming_expand(self, parsed, body=None):
+        """手动扩展初步思路为结构化设想"""
+        title = body.get("title", "") if body else ""
+        sketch = body.get("sketch", "") if body else ""
+        if not title:
+            self._send_json({"error": "缺少 title"}, 400)
+            return
+        try:
+            from idea_generator import expand_manual_idea
+            result = expand_manual_idea(title, sketch, dry_run=False)
+            self._send_json({"status": "ok", "data": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_incoming_accept(self, parsed, body=None, **kwargs):
+        """接受某个设想为新 proposal"""
+        idea_id = parsed.group("idea_id")
+        try:
+            idea = _find_idea_by_id(idea_id)
+            if not idea:
+                self._send_json({"error": "设想不存在"}, 404)
+                return
+            from idea_generator import register_new_idea
+            result = register_new_idea(idea, dry_run=False)
+            self._send_json({"status": "ok", "data": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_incoming_merge(self, parsed, body=None, **kwargs):
+        """将设想融合到现有 proposal"""
+        idea_id = parsed.group("idea_id")
+        proposal_id = parsed.group("proposal_id")
+        try:
+            idea = _find_idea_by_id(idea_id)
+            if not idea:
+                self._send_json({"error": "设想不存在"}, 404)
+                return
+            from idea_generator import merge_into_existing
+            result = merge_into_existing(idea, proposal_id, dry_run=False)
+            self._send_json({"status": "ok", "data": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_incoming_reject(self, parsed, body=None, **kwargs):
+        """拒绝某个设想（仅记录，不删除文件）"""
+        idea_id = parsed.group("idea_id")
+        reason = body.get("reason", "") if body else ""
+        try:
+            # 记录拒绝到 incoming 目录
+            incoming_dir = Path(__import__("paths").PROJECT_ROOT) / "research_proposals" / "_incoming"
+            rejected_path = incoming_dir / "rejected-ideas.json"
+            rejected = {"rejected": []}
+            if rejected_path.exists():
+                try:
+                    rejected = json.loads(rejected_path.read_text(encoding="utf-8"))
+                except Exception:
+                    pass
+            rejected["rejected"].append({"idea_id": idea_id, "reason": reason, "at": _now_utc()})
+            rejected_path.write_text(json.dumps(rejected, ensure_ascii=False, indent=2), encoding="utf-8")
+            self._send_json({"status": "ok", "idea_id": idea_id})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_weekend_status(self, parsed, body=None):
+        """获取周末任务状态"""
+        try:
+            from lifecycle_cron_framework import _load_weekend_jobs
+            data = _load_weekend_jobs()
+            self._send_json({"status": "ok", "data": data})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_weekend_input(self, parsed, body=None):
+        """手动触发周末输入任务（后台异步）"""
+        self._run_weekend_task("input")
+
+    def _sys_lifecycle_weekend_output(self, parsed, body=None):
+        """手动触发周末输出任务（后台异步）"""
+        self._run_weekend_task("output")
+
+    def _sys_lifecycle_weekend_reflection(self, parsed, body=None):
+        """手动触发周末反思任务（后台异步）"""
+        self._run_weekend_task("reflection")
+
+    def _run_weekend_task(self, task_name: str):
+        """启动后台周末任务"""
+        import threading, uuid
+        task_id = f"lc_weekend_{task_name}_{uuid.uuid4().hex[:8]}"
+        with _bg_tasks_lock:
+            _bg_tasks[task_id] = {"status": "running", "type": f"weekend_{task_name}", "started_at": _now_utc()}
+            _save_bg_tasks()
+
+        def _worker():
+            try:
+                from weekend_orchestrator import (
+                    run_input_task, run_output_task, run_reflection_task
+                )
+                if task_name == "input":
+                    result = run_input_task(dry_run=False)
+                elif task_name == "output":
+                    result = run_output_task(dry_run=False)
+                else:
+                    result = run_reflection_task(dry_run=False)
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {"status": "done", "result": result, "finished_at": _now_utc()}
+                if _log:
+                    _log.info(f"[bg-task] {task_id} 完成")
+            except Exception as e:
+                err_msg = str(e)
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {"status": "failed", "error": err_msg, "finished_at": _now_utc()}
+                if _log:
+                    _log.error(f"[bg-task] {task_id} 失败: {err_msg}")
+            finally:
+                _save_bg_tasks()
+
+        threading.Thread(target=_worker, daemon=True).start()
+        self._send_json({"status": "accepted", "task_id": task_id, "message": f"周末任务 {task_name} 已启动"})
 
     def _sys_task_status(self, parsed, body=None, task_id=None):
         """后台任务状态"""

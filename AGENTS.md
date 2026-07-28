@@ -2,7 +2,7 @@
 
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
-> 最后更新：2026-07-27
+> 最后更新：2026-07-28
 
 ---
 
@@ -67,7 +67,7 @@ LinSai-CoPilot/
 ├── AGENTS.md                  # 本文件。AI 代理必读指南
 ├── README.md                  # 人类可读的项目说明
 ├── CHANGELOG.md               # 变更记录
-├── VERSION                    # 版本号唯一真相源（当前 6.7.6）
+├── VERSION                    # 版本号唯一真相源（当前 6.7.7）
 ├── .env                       # 本地 API 密钥（gitignore，不提交）
 ├── .gitignore                 # Git 忽略规则：用户数据、自动生成文件、敏感配置
 │
@@ -262,11 +262,16 @@ LinSai-CoPilot/
 │   ├── proposal_lifecycle.py  # v6.5+ 提案生命周期：四阶段 + writer-critic 对抗优化
 │   ├── rebuild_lifecycle.py   # v6.7.1+ 基于 critic 报告重建 _lifecycle.json / 规范化轮次编号
 │   ├── import_hermes_topics.py # v6.7.3 将 hermes workspace 课题雏形导入全自动链路
+│   ├── idea_generator.py      # v6.7.7 输入端：自动/手动研究设想生成、缺口识别、对比融合
+│   ├── knowledge_output.py    # v6.7.7 输出端：归档知识萃取、可靠源 KB 写入
+│   ├── weekend_orchestrator.py # v6.7.7 周末总控：输入/输出/反思任务调度
+│   ├── kb_health_weekend.py   # v6.7.7 周末 KB 健康检查与 derived 内容降级
 │   ├── orchestrator.py        # v6.7 林赛总控核心：仪表盘 / 失败分析 / 策略建议 / 链路监控
 │   ├── profile_health.py      # v6.7 profile 健康度：idle/working/blocked/offline + 成功率/耗时
 │   ├── failure_analyzer.py    # v6.7 失败模式分析：8 种模式聚类 + prompt 修正建议
 │   ├── strategy_optimizer.py  # v6.7 调度策略自调优：建议模式，人工确认后应用
 │   ├── web_routes_orchestrator.py # v6.7 林赛总控路由 Mixin（8 条路由）
+│   ├── web_routes_system.py   # v6.7.7 生命周期输入/输出端路由（incoming/weekend）
 │   ├── methodology_manual.py  # v6.2.1 方法学手册
 │   ├── agent_team.py          # v6.2.1 Agent 团队管理
 │   ├── check_boundary.py      # v6.2.1 边界违规检测
@@ -376,6 +381,19 @@ python3 scripts/import_hermes_topics.py --activate  # 导入 + 迁移到 optimiz
 
 # 配置每日编排 cron（默认 57 8 * * *）
 python3 scripts/proposal_lifecycle.py --setup-cron "57 8 * * *"
+
+# 配置/拆除周末任务 cron（输入/输出/反思，v6.7.7）
+python3 scripts/proposal_lifecycle.py --setup-weekend
+python3 scripts/proposal_lifecycle.py --teardown-weekend
+
+# 手动触发周末任务（输入/输出/反思，v6.7.7）
+python3 scripts/weekend_orchestrator.py --input --dry-run
+python3 scripts/weekend_orchestrator.py --output --dry-run
+python3 scripts/weekend_orchestrator.py --reflection --dry-run
+
+# 手动生成研究设想并注册 drafts（v6.7.7）
+python3 scripts/idea_generator.py --auto --dry-run
+python3 scripts/idea_generator.py --manual "我想研究强场激光驱动的谷极化超快动力学"
 ```
 
 ### 语法检查
@@ -603,6 +621,8 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
   - 修复 cron（`lc-repair`）每 6 小时扫描：重置 stuck running、重试 failed（最多 3 次）、补齐缺失 worker、超过重试则告警。
   - checkpoint 持久化在 `_lifecycle.json` 的 `pipeline_jobs` 中，单步骤失败可单独重跑，不污染整体状态。
   - v6.7.6：worker cron 自动错开 6 分钟（基于 proposal_id hash 分配 47/53/59/05/11...），`--repair` 会检测 schedule 变化并自动更新。
+  - v6.7.7：worker cron 默认仅工作日运行（schedule = `{minute} * * * 1-5`），周末暂停；新增 `--setup-weekend` / `--teardown-weekend` 创建/删除 3 个周末任务 cron（输入/输出/反思）。
+  - v6.7.7：`run_repair()` 区分工作日与周末：工作日修复 worker/编排，周末修复输入/输出/反思任务。
 - **对抗评审奖惩与监察（v6.7.6）**：
   - 每轮 checkpoint 拆为 critic → writer → monitor 三步骤，monitor 作为独立第三方 reviewer 做 meta-review。
   - `memory/agent-scores.json` 维护 writer/critic 全局奖惩分数（初始 100，上限 150，下限 0）。
@@ -612,6 +632,10 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 - **生命周期与知识库聚合（v6.7.6）**：
   - `scripts/proposal_kb_sync.py` 将各生命周期阶段 proposal 的核心信息（标题、状态、分数、核心问题、创新点、关键产物）同步到 `knowledge/wiki/projects/NSFC-强场超快/proposals/`，并自动生成索引，实现链路数据与全链路知识库聚合。
   - 已归档（approved）的 proposal 仍会通过 `proposal_lifecycle._archive_proposal` 生成独立归档元信息。
+- **输入端与输出端重构（v6.7.7）**：
+  - 输入端：`scripts/idea_generator.py` 从文献简报/论文池/归档讨论识别研究缺口，生成研究设想；新设想先进入 `drafts`，人工确认后再进 `optimizing`；若与现有课题关联，给出有机融合建议。
+  - 输出端：`scripts/knowledge_output.py` 归档 proposal 知识萃取，并将可靠来源信息写入 KB；AI 生成内容标记为 `derived`，无来源信息禁止入库。
+  - 周末模式：worker cron 仅工作日运行（`Mon-Fri`），周末专门执行输入发现、输出萃取、链路反思和 KB 健康检查。
 - **文献驱动**：优先优化与当天简报关键词匹配的课题，节省模型限额。
 - **质量标准**：`memory/nsfc-standards.json` 定义面上/重点/重大三类项目的评分权重、页数限制、模板结构。
 
@@ -655,7 +679,7 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 
 ### 版本号规范
 
-- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.7.6`）。
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.7.7`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -724,7 +748,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.7.6*
+*版本：6.7.7*
 *日期：2026-07-28*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

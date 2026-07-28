@@ -403,6 +403,157 @@ class ProposalLifecycle:
             "path": str(target_dir.relative_to(PROJECT_ROOT)),
         }
 
+    def register_from_idea(
+        self,
+        idea: Dict[str, Any],
+        project_type: str = "general",
+    ) -> Dict[str, Any]:
+        """从研究设想注册新 proposal（进入 drafts）。
+
+        v6.7.7: 输入端自动/手动生成的研究设想，经对比判定为新课题后调用。
+        """
+        import re
+        from common import safe_filename
+
+        title = idea.get("title", "")
+        # 生成 proposal_id：从标题提取 safe name
+        name = safe_filename(title)[:40].strip("-").lower()
+        name = re.sub(r"[^a-z0-9-]+", "-", name).strip("-")
+        if not name:
+            name = "new-idea"
+
+        proposal_id = self.generate_proposal_id(name=name, project_type=project_type)
+        reg = self.register(
+            proposal_id=proposal_id,
+            project_type=project_type,
+            source="auto_idea",
+            source_detail=f"来自研究设想生成: {title}",
+        )
+        if not reg.get("success"):
+            return reg
+
+        self.enrich_from_idea(proposal_id, idea)
+        return {
+            "success": True,
+            "proposal_id": proposal_id,
+            "status": "drafts",
+            "action": "new",
+        }
+
+    def enrich_from_idea(
+        self,
+        proposal_id: str,
+        idea: Dict[str, Any],
+        duplicate_threshold: float = 0.70,
+    ) -> Dict[str, Any]:
+        """将研究设想追加到现有 proposal，追加前做句子级去重。
+
+        v6.7.7: 保证每个课题任何时刻都具备独立完整结构，且避免过度冗余。
+        """
+        prop_dir = self._find_proposal_dir(proposal_id)
+        if not prop_dir:
+            return {"success": False, "error": "proposal 目录不存在"}
+
+        def _tokenize(text: str) -> set:
+            words = set(re.findall(r"[a-zA-Z]{3,}", text.lower()))
+            words.update(re.findall(r"[\u4e00-\u9fff]{2,8}", text))
+            return words
+
+        def _sentence_similarity(paragraph: str, existing_text: str) -> float:
+            if not existing_text:
+                return 0.0
+            sentences = [s.strip() for s in re.split(r"[。\n]", existing_text) if len(s.strip()) > 10]
+            if not sentences:
+                return 0.0
+            set_p = _tokenize(paragraph)
+            return max(
+                len(set_p & _tokenize(s)) / len(set_p | _tokenize(s))
+                if set_p or _tokenize(s) else 0.0
+                for s in sentences
+            )
+
+        def _deduplicate_append(path: Path, new_section: str) -> bool:
+            existing = ""
+            if path.exists():
+                existing = path.read_text(encoding="utf-8")
+            paragraphs = [p for p in new_section.split("\n\n") if p.strip()]
+            unique = []
+            for p in paragraphs:
+                if len(p.strip()) < 20:
+                    continue
+                if _sentence_similarity(p, existing) < duplicate_threshold:
+                    unique.append(p)
+            if not unique:
+                return False
+            new_content = "\n\n".join(unique) + "\n"
+            with path.open("a", encoding="utf-8") as f:
+                if existing and not existing.endswith("\n"):
+                    f.write("\n")
+                f.write("\n" + new_content)
+            return True
+
+        date_str = now_utc()[:10]
+
+        # 方向校准
+        direction_section = f"""## 周末输入补充（{date_str}）
+
+**来源**：研究设想生成
+**可靠性**：{idea.get('reliability', 'derived')}
+
+### 研究背景与动机
+{idea.get('background', '')}
+
+### 现存研究空白
+{idea.get('gap', '')}
+"""
+        _deduplicate_append(prop_dir / "01_direction" / "direction-calibration.md", direction_section)
+
+        # 缺口分析
+        gap_section = f"""## 周末输入补充（{date_str}）
+
+**拟解决空白**：{idea.get('gap', '')}
+
+**相关创新方向**：{', '.join(idea.get('innovations', []))}
+"""
+        _deduplicate_append(prop_dir / "02_topic" / "gap-report.md", gap_section)
+
+        # 科学问题框架
+        question_items = "\n".join(f"- {q}" for q in idea.get("content", []))
+        question_section = f"""## 周末输入补充（{date_str}）
+
+{question_items}
+"""
+        _deduplicate_append(prop_dir / "03_question" / "question-framework.md", question_section)
+
+        # 申请书草稿
+        sources_str = "\n".join(
+            f"- [{s.get('source_type', 'unknown')}] {s.get('title', '')}"
+            for s in idea.get("sources", [])
+        )
+        proposal_section = f"""## 周末输入补充（{date_str}）
+
+### 拟开展研究内容
+{chr(10).join(f"- {c}" for c in idea.get('content', []))}
+
+### 拟采用技术路线
+{idea.get('approach', '')}
+
+### 创新点
+{chr(10).join(f"- {inv}" for inv in idea.get('innovations', []))}
+
+### 来源
+{sources_str}
+"""
+        _deduplicate_append(prop_dir / "04_proposal" / "proposal-draft.md", proposal_section)
+
+        # 更新 brief
+        try:
+            self.update_proposal_brief(proposal_id)
+        except Exception:
+            pass
+
+        return {"success": True, "proposal_id": proposal_id, "action": "merge"}
+
     # ------------------------------------------------------------------
     # proposal-brief 元信息文件（贯穿全生命周期）
     # ------------------------------------------------------------------
@@ -2109,17 +2260,22 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--dry-run", action="store_true",
                         help="与 --repair 联用：只预览不修改")
     parser.add_argument("--setup-cron-v2", action="store_true",
-                        help="安装 v2 cron 框架（orchestrate + repair + per-proposal workers）")
+                        help="安装 v2 cron 框架（orchestrate + repair + per-proposal workers + weekend）")
     parser.add_argument("--worker-schedule", default="", metavar="CRON",
-                        help="强制统一 worker cron 调度表达式（默认留空，自动按 6 分钟间隔错开）")
+                        help="强制统一 worker cron 调度表达式（默认留空，自动按 6 分钟间隔错开，周中运行）")
     parser.add_argument("--teardown-cron-v2", action="store_true",
                         help="卸载所有 v2 lifecycle cron")
+    parser.add_argument("--setup-weekend", action="store_true",
+                        help="安装周末任务 cron（输入/输出/反思）")
+    parser.add_argument("--teardown-weekend", action="store_true",
+                        help="卸载周末任务 cron")
     args = parser.parse_args(argv)
 
     lc = ProposalLifecycle()
 
     # v6.7.5: 新 cron 框架命令使用 LifecycleCronController
-    if any([args.worker_step, args.orchestrate, args.repair, args.setup_cron_v2, args.teardown_cron_v2]):
+    if any([args.worker_step, args.orchestrate, args.repair, args.setup_cron_v2, args.teardown_cron_v2,
+            args.setup_weekend, args.teardown_weekend]):
         # 延迟导入避免循环依赖
         from lifecycle_cron_framework import LifecycleCronController
         ctrl = LifecycleCronController()
@@ -2153,16 +2309,35 @@ def main(argv: Optional[List[str]] = None) -> int:
         if args.setup_cron_v2:
             result = ctrl.setup_cron_framework(worker_interval=args.worker_schedule)
             print("=== v2 cron 框架安装结果 ===")
-            print(f"worker schedule: {args.worker_schedule}")
+            print(f"worker schedule: {args.worker_schedule or '自动错开，周中运行（Mon-Fri）'}")
             print(f"removed_old: {result.get('removed_old', [])}")
             print(f"orchestrate: {result.get('orchestrate', {}).get('message')}")
             print(f"repair: {result.get('repair', {}).get('message')}")
             print(f"first_orchestrate: optimizing={result.get('first_orchestrate', {}).get('optimizing_count')}")
+            weekend = result.get("weekend", {})
+            if weekend:
+                print("weekend crons:")
+                for c in weekend.get("created", []):
+                    cron_res = c.get("result", {})
+                    print(f"  {c['cron']}: {cron_res.get('message', cron_res.get('error', '?'))}")
             return 0 if result.get("success") else 1
 
         if args.teardown_cron_v2:
             result = ctrl.teardown_cron_framework()
             print(f"=== 已卸载 v2 cron: {result.get('removed', [])} ===")
+            return 0
+
+        if args.setup_weekend:
+            result = ctrl.setup_weekend_crontab()
+            print("=== 周末任务 cron 安装结果 ===")
+            for c in result.get("created", []):
+                cron_res = c.get("result", {})
+                print(f"  {c['cron']}: {cron_res.get('message', cron_res.get('error', '?'))}")
+            return 0 if result.get("success") else 1
+
+        if args.teardown_weekend:
+            result = ctrl.teardown_weekend_crontab()
+            print(f"=== 已卸载周末 cron: {result.get('removed', [])} ===")
             return 0
 
     # 原有命令继续走 ProposalLifecycle

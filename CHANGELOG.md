@@ -1,5 +1,58 @@
 # 变更记录
 
+## v6.7.7 - 2026-07-28 自动化链路输入/输出端重构 + 周末任务模式
+
+### 问题根因
+- 全自动链路只有中段（optimizing 对抗循环），缺少清晰的**输入端**（研究设想从哪里来）和**输出端**（归档后知识如何回流到 KB）。
+- worker cron 每天运行，周末也在消耗模型限额，但周末更适合做批量输入发现、输出萃取和链路反思。
+- 新研究设想如果直接注册进 optimizing，会跳过人工确认，风险不可控。
+
+### 新增内容
+- **输入端：研究设想生成器** — `scripts/idea_generator.py`
+  - 自动模式：读取近期文献简报/论文池/已归档讨论，识别研究缺口，生成多个研究设想。
+  - 手动模式：接收用户粗略思路，LLM 辅助完善为规范研究设想。
+  - 与现有课题对比：标题/核心问题/技术路线相似度 + 是否可融合到已有 proposal 的判定。
+  - 新课题自动注册为 `drafts`（不直接进入 optimizing），融合建议写入已有 proposal 的 `扩展建议`。
+  - 句子级去重：追加到已有 draft 前去除重复句子，避免内容膨胀。
+- **输出端：可靠知识萃取与 KB 生长** — `scripts/knowledge_output.py`
+  - 归档 proposal 知识萃取：标题、核心问题、创新点、关键产物、达标章节写入 `knowledge/wiki/projects/NSFC-强场超快/proposals/`。
+  - 日常可靠来源萃取：从简报/论文池/归档讨论提取有来源的信息，按 `reliable`/`derived`/`unverified` 三级可信度写入 KB。
+  - 禁止污染：无来源或不可靠信息不进入 KB；AI 生成内容标记为 `derived`。
+- **周末总控器** — `scripts/weekend_orchestrator.py`
+  - 周六上午跑输入端（`weekend-input`），周六下午跑输出端（`weekend-output`），周日上午跑链路反思（`weekend-reflection`）。
+  - 维护 `memory/weekend-jobs.json` 任务状态；失败任务由 `lc-repair` 周末扫描重试。
+- **周末 KB 健康检查** — `scripts/kb_health_weekend.py`
+  - derived 内容过期降级、重复概念检测、unverified claims 汇总报告。
+- **Cron 框架改造** — `scripts/lifecycle_cron_framework.py` + `scripts/proposal_lifecycle.py`
+  - worker cron 默认 schedule 改为 `Mon-Fri`（`{minute} * * * 1-5`），周末暂停。
+  - 新增 `--setup-weekend` / `--teardown-weekend` CLI，自动创建/删除 3 个周末 cron。
+  - `run_repair()` 区分工作日与周末：工作日修复 worker/编排，周末修复输入/输出/反思任务。
+  - 多个 worker 自动按 proposal_id hash 错开 6 分钟（47/53/59/05/11...）。
+- **Web API 扩展** — `scripts/web_routes_system.py`
+  - `GET /api/lifecycle/incoming`：列出 drafts/新设想。
+  - `POST /api/lifecycle/incoming/register`：从设想注册 draft。
+  - `POST /api/lifecycle/incoming/enrich`：将设想融合到已有 proposal。
+  - `GET/POST /api/lifecycle/weekend/jobs`：查看/触发周末任务。
+
+### 验证结果
+- `python3 -m py_compile scripts/*.py scripts/tests/*.py` 通过
+- `python3 scripts/self_test.py --module` 181/181 通过
+- `python3 scripts/proposal_lifecycle.py --repair`：5 个 optimizing proposal 的 worker schedule 从 `* * * *` 更新为 `* * * * 1-5`
+- `python3 scripts/proposal_lifecycle.py --setup-weekend`：成功创建 3 个周末 cron
+  - `lc-weekend-weekend-input`: `0 9 * * 6`
+  - `lc-weekend-weekend-output`: `0 14 * * 6`
+  - `lc-weekend-weekend-reflection`: `0 9 * * 0`
+
+### 设计原则
+- **输入端先草稿后优化**：所有新设想必须先进入 `drafts`，人工确认后再进 `optimizing`。
+- **输出端可靠优先**：KB 只接收有可靠来源的知识，AI 生成内容明确降级为 `derived`。
+- **周末集中处理批量任务**：工作日专注课题对抗优化，周末做输入发现、输出萃取和链路反思。
+- **LLM 失败自动降级**：输入/输出端调用 `llm_gateway`，超时或解析失败时返回空结果，不阻塞链路。
+
+### 已知限制
+- 自动输入端依赖 `llm_gateway` 可用性；若 LLM 连续失败，当次周末输入可能为空。
+- 前端 `weekend.js` 尚未实现，当前通过 CLI / API 管理周末任务。
+
 ## v6.7.6-fix - 2026-07-28 轮次计数逻辑修复
 
 ### 问题根因
