@@ -462,7 +462,7 @@ python3 scripts/weekend_orchestrator.py --reflection
         is_full_review = section["key"] == "full_review"
 
         result = self._run_critic(
-            proposal_id, prop_dir, project_type, round_num, 300,
+            proposal_id, prop_dir, project_type, round_num, 600,
             focus_section=focus_section, is_full_review=is_full_review,
         )
         if not result.get("success"):
@@ -528,7 +528,7 @@ python3 scripts/weekend_orchestrator.py --reflection
         report = self._read_critic_report(prop_dir, round_num)
         critic_result = {"output": report["output"], "success": True}
         lit = self._run_researcher_targeted(
-            proposal_id, prop_dir, critic_result, focus_section, timeout=300
+            proposal_id, prop_dir, critic_result, focus_section, timeout=600
         )
         return {"success": bool(lit), "lit_path": lit}
 
@@ -862,9 +862,10 @@ python3 scripts/weekend_orchestrator.py --reflection
         if prop_state and prop_state.get("worker_minute") is not None:
             return int(prop_state["worker_minute"])
 
-        # 使用混合函数让 hash 分布更均匀，避免连续相似 ID 落在同一 bucket
-        h = hash(proposal_id)
-        offset = ((h * 2654435761) % (1 << 32)) % 10
+        # 使用稳定哈希让分布均匀且跨运行一致，避免连续相似 ID 落在同一 bucket
+        import hashlib
+        h = int(hashlib.md5(proposal_id.encode("utf-8")).hexdigest(), 16)
+        offset = h % 10
         minute = (47 + offset * 6) % 60
 
         # 持久化到 proposal state

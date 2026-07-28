@@ -84,6 +84,11 @@
 - `python3 scripts/self_test.py --web-ci` 235/235 通过。
 - 手动 curl 验证：`/api/settings/categories`、`/api/settings/pipeline`、`/api/settings/pipeline/preview` 返回正常。
 
+### v6.7.7 修复（cron 框架）
+- **critic / researcher 步骤超时**：`lifecycle_cron_framework.py` 中 critic 与定向 researcher 的 hermes oneshot 超时仅 300s，实际 critic 需读取申请书全文并输出多维度评审报告，复杂 proposal 频繁超时，导致所有 worker cron 最近状态为 error。已统一延长至 600s（与 writer 一致）。
+- **worker schedule 不稳定**：`_compute_worker_minute` 使用 Python 内置 `hash()`，受 `PYTHONHASHSEED` 随机化影响，每次 orchestrator/repair 运行会重新分配分钟，实际观察到 17/35/47/29 等不规律分布。改为 `hashlib.md5` 稳定哈希，确保错开 6 分钟（47/53/59/05/11/17/23/29/35/41）。
+- **修复后状态**：清除 5 个 optimizing proposal 的持久化 `worker_minute`，运行 `--repair` 后 worker schedule 已更新为稳定值。
+
 ### v6.7.7 修复（LLM 调用）
 - **timeout 参数未生效**：`llm_gateway.py` 的 `llm_complete`/`llm_chat` 声明了 `timeout` 参数，但调用 `llm_router.call_llm` 时未传递，导致实际始终使用配置默认 60s，复杂 prompt 易超时。
 - **kimi CLI 命令格式错误**：`llm_router.py` 使用 `kimi -c <prompt>`，但 `-c` 在 kimi CLI 中表示"继续上回会话"，应使用 `-p <prompt> --output-format text`。
