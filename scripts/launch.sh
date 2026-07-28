@@ -13,7 +13,7 @@ PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$PROJECT_ROOT"
 
 PORT="${1:-8080}"
-URL="http://127.0.0.1:${PORT}"
+URL="http://127.0.0.1:${PORT}?nocache=1"
 
 # 检查端口是否被占用
 if lsof -Pi ":${PORT}" -sTCP:LISTEN -t >/dev/null 2>&1; then
@@ -40,7 +40,7 @@ for i in {1..15}; do
     sleep 0.3
 done
 
-# 打开浏览器
+# 打开浏览器（带 cache-busting，避免夸克等浏览器使用旧版缓存）
 if command -v open >/dev/null 2>&1; then
     open "$URL"
 elif command -v xdg-open >/dev/null 2>&1; then
