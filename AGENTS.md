@@ -609,6 +609,9 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
   - 禁止清单（writer：占位符/模板僵化/表面修改；critic：消极评审/僵化评分/评分与内容矛盾）由规则层兜底，monitor 结合上下文判定。
   - 奖惩计算综合规则层 delta、monitor 建议、串通惩罚、校准奖励/惩罚。
   - 负反馈检测：monitor 独立分数连续下降 / 本地双降 / 连续串通 / 全局分数低于 50 触发告警，暂停自动流转，等待人工清除。
+- **生命周期与知识库聚合（v6.7.6）**：
+  - `scripts/proposal_kb_sync.py` 将各生命周期阶段 proposal 的核心信息（标题、状态、分数、核心问题、创新点、关键产物）同步到 `knowledge/wiki/projects/NSFC-强场超快/proposals/`，并自动生成索引，实现链路数据与全链路知识库聚合。
+  - 已归档（approved）的 proposal 仍会通过 `proposal_lifecycle._archive_proposal` 生成独立归档元信息。
 - **文献驱动**：优先优化与当天简报关键词匹配的课题，节省模型限额。
 - **质量标准**：`memory/nsfc-standards.json` 定义面上/重点/重大三类项目的评分权重、页数限制、模板结构。
 

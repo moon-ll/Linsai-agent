@@ -790,7 +790,9 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
         if prop_state and prop_state.get("worker_minute") is not None:
             return int(prop_state["worker_minute"])
 
-        offset = hash(proposal_id) % 10
+        # 使用混合函数让 hash 分布更均匀，避免连续相似 ID 落在同一 bucket
+        h = hash(proposal_id)
+        offset = ((h * 2654435761) % (1 << 32)) % 10
         minute = (47 + offset * 6) % 60
 
         # 持久化到 proposal state

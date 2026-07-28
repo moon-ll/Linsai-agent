@@ -32,8 +32,13 @@
     `POST /api/lifecycle/<id>/clear-alert`。
   - `web/js/lifecycle.js` 增加 agent scores 概览、课题卡片「监察」按钮、monitor 历史弹窗、
     负反馈告警清除按钮。
+- **Proposal 知识库同步**
+  - 新增 `scripts/proposal_kb_sync.py`：将 `research_proposals/` 下各课题状态、核心问题、
+    创新点、关键产物同步到 `knowledge/wiki/projects/NSFC-强场超快/proposals/`，并生成
+    `proposals-index.md` 索引，实现生命周期数据与全链路知识库聚合。
 - **测试**
   - 新增 `scripts/tests/test_adversarial_governance.py`（14 个检查点），纳入 `--module` 维度。
+  - 新增 `scripts/tests/test_proposal_kb_sync.py`（11 个检查点）。
   - 更新 `test_lifecycle_cron.py` 以适配 critic/writer/monitor 三步骤结构。
 
 ### 验证结果
