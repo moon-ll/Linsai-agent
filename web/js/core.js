@@ -330,6 +330,65 @@ window.addEventListener('online', () => {
 });
 
 // ============================================
+// v6.7.7: 统一轮询服务（供控制台、告警等需要定时刷新的模块使用）
+// ============================================
+const PollService = {
+  _timers: {},
+  _handlers: {},
+  _visible: true,
+
+  register(name, fn, intervalMs = 30000) {
+    if (this._timers[name]) clearInterval(this._timers[name]);
+    this._handlers[name] = { fn, intervalMs };
+    const run = async () => {
+      if (!this._visible) return;
+      try { await fn(); } catch (e) { console.warn(`[PollService] ${name} 失败:`, e); }
+    };
+    run();
+    this._timers[name] = setInterval(run, intervalMs);
+  },
+
+  unregister(name) {
+    if (this._timers[name]) { clearInterval(this._timers[name]); delete this._timers[name]; }
+    delete this._handlers[name];
+  },
+
+  pause() { this._visible = false; },
+  resume() {
+    this._visible = true;
+    Object.values(this._handlers).forEach(h => h.fn());
+  },
+};
+
+// 页面不可见时暂停轮询，可见时恢复
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) PollService.pause(); else PollService.resume();
+});
+
+// 通用状态色映射
+function statusColorClass(status) {
+  const map = {
+    ok: 'text-success', success: 'text-success', done: 'text-success',
+    working: 'text-info', running: 'text-info', active: 'text-info',
+    warning: 'text-warning', warn: 'text-warning', blocked: 'text-warning',
+    error: 'text-error', failed: 'text-error', offline: 'text-error',
+    idle: 'text-tertiary', pending: 'text-tertiary',
+  };
+  return map[status] || 'text-tertiary';
+}
+
+function statusDot(status) {
+  const color = {
+    ok: '#5b9a5b', success: '#5b9a5b', done: '#5b9a5b',
+    working: '#3b82f6', running: '#3b82f6', active: '#3b82f6',
+    warning: '#c46b3d', warn: '#c46b3d', blocked: '#c46b3d',
+    error: '#aa3a3a', failed: '#aa3a3a', offline: '#aa3a3a',
+    idle: '#888', pending: '#888',
+  }[status] || '#888';
+  return `<span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${color};margin-right:6px;"></span>`;
+}
+
+// ============================================
 // v3.5.1: 极简模块加载器
 // 每个模块通过 Loader.register 注册初始化函数，app.js 统一调用 Loader.init()
 // ============================================

@@ -272,6 +272,7 @@ LinSai-CoPilot/
 │   ├── strategy_optimizer.py  # v6.7 调度策略自调优：建议模式，人工确认后应用
 │   ├── web_routes_orchestrator.py # v6.7 林赛总控路由 Mixin（8 条路由）
 │   ├── web_routes_system.py   # v6.7.7 生命周期输入/输出端路由（incoming/weekend）
+│   ├── web_routes_settings.py # v6.7.7 设置中心路由 Mixin（链路/模板/Agent/任务/学习/自主/KB输出）
 │   ├── methodology_manual.py  # v6.2.1 方法学手册
 │   ├── agent_team.py          # v6.2.1 Agent 团队管理
 │   ├── check_boundary.py      # v6.2.1 边界违规检测
@@ -306,6 +307,8 @@ LinSai-CoPilot/
         ├── dashboard.js        # v6.0 仪表盘首页
         ├── lifecycle.js        # v6.6 提案生命周期面板
         ├── orchestrator.js     # v6.7 林赛总控台（仪表盘 / Profile 健康 / 失败模式 / 策略 / 链路质量）
+        ├── console.js          # v6.7.7 林赛控制台：全链路流水线 / Agent 状态 / 告警 / 快捷操作
+        ├── settings_center.js  # v6.7.7 设置中心：链路/模板/Agent/任务/学习/自主/KB输出可视化配置
         └── paper_discussion.js # v4.1 文献独立讨论弹窗
 ```
 
@@ -573,6 +576,8 @@ LinSai-CoPilot/
 | `/api/sync/`、`/api/backup/`、`/api/usage/` 等 | CoPilot 核心 | 系统状态 |
 | `/api/lifecycle/` | CoPilot 核心 (v6.5+) | 提案生命周期仪表盘、注册、流转、优化、agent scores、monitor 历史、负反馈告警清除 |
 | `/api/orchestrator/` | CoPilot 核心 (v6.7+) | 林赛总控：仪表盘、profile 健康、失败模式、调度策略、链路质量 |
+| `/api/console/` | CoPilot 核心 (v6.7.7+) | 林赛控制台：流水线总览、Agent 工作状态、告警 inbox、一键修复/编排/优化 |
+| `/api/settings/` | CoPilot 核心 (v6.7.7+) | 设置中心：链路/模板/Agent/任务/学习/自主/KB输出 7 类配置读写与变更预览 |
 | `/api/pipeline/` | 研究管线 (v6.2+) | 管线编排、Agent 团队、缺口、课题、问题、申请书、自检、引文、方法学、hermes 驱动管线 |
 
 Web 服务器使用 Mixin 架构聚合 12 个路由模块；`research` 和 `pipeline` 使用独立分派器，其余走统一路由表。
@@ -659,6 +664,36 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 - **可观测优先**：所有调优以 4 区仪表盘为起点。
 - **模式而非规则**：失败分析用模式聚类，给出 `suggested_prompt_change`，由用户/AI 决定如何应用。
 - **链路可成长**：`monitor_pipeline` 自动给低质量产物生成 `growth_actions`，提示人工重跑或自动优化。
+
+### 7. 林赛控制台与设置中心（v6.7.7）
+
+在总控层之上新增**面向用户的统一操作界面**，把「看状态」和「调配置」合并到一个入口：
+
+| 子模块 | 职责 | 输出 |
+|--------|------|------|
+| `web_routes_system.py`（`/api/console/*`） | 流水线 / Agent / 告警 三视图 API | `/api/console/flow` 六阶段流水线；`/api/console/agents` profile + cron 状态；`/api/console/alerts` 负反馈/失败/待审 inbox |
+| `web_routes_settings.py`（`/api/settings/*`） | 7 类配置统一读写 | `/api/settings/categories` 分类列表；`/:category` 读取/保存；`/:category/preview` 变更差异预览 |
+| `web/js/console.js` | 控制台前端 | 流水线看板、Agent 卡片、告警列表、一键操作（修复/编排/优化/清除告警） |
+| `web/js/settings_center.js` | 设置中心前端 | 7 类配置表单化编辑、JSON 源码切换、保存前差异预览、自动备份提示 |
+
+**配置分类**：
+- `pipeline`：达标分数、最大轮数、维度短板阈值、worker 错峰间隔。
+- `templates`：NSFC 三类项目质量标准、撰写模板、方法学手册要求。
+- `agents`：各 profile 默认 Provider、超时、模型、路由策略。
+- `tasks`：默认任务参数、hermes 自动派活开关。
+- `learning`：自主学习引擎参数、来源、配额。
+- `autonomy`：CoPilot 自主决策级别与提醒频率。
+- `kb_output`：可靠来源规则、derived 内容过期时间、归档萃取字段。
+
+**交互入口**：
+- Web API：`/api/console/flow`、`/api/console/agents`、`/api/console/alerts`、`/api/console/action`、`/api/settings/categories`、`/api/settings/:category`、`/api/settings/:category/preview`
+- 前端：`index.html` 导航栏新增「控制台」「课题生命周期」入口；`settings.js` 抽屉保留轻量设置，`settings_center.js` 提供完整配置页面。
+- 聊天斜杠命令：`/status`、`/config`、`/template`、`/pipeline` 可快速查看状态或唤起配置。
+
+**设计原则**：
+- **可观测 + 可操作合一**：控制台不仅能看，还能直接触发 repair/orchestrate/optimize/clear-alert。
+- **配置变更可控**：设置中心保存前强制 preview，写操作前自动备份旧文件到 `memory/.settings-backup/`。
+- **Agent 辅助配置**：用户可在前端手动调整，也可在聊天中通过 `/config` 等命令让林赛辅助完成配置修改。
 
 ---
 

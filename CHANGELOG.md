@@ -49,6 +49,41 @@
 - **周末集中处理批量任务**：工作日专注课题对抗优化，周末做输入发现、输出萃取和链路反思。
 - **LLM 失败自动降级**：输入/输出端调用 `llm_gateway`，超时或解析失败时返回空结果，不阻塞链路。
 
+### v6.7.7 前端重构：林赛控制台 + 设置中心
+
+#### 问题根因
+- 总控层（orchestrator）只有只读仪表盘，缺乏「看状态 → 直接操作」的闭环入口。
+- 链路/模板/Agent/任务等关键配置分散在多个 JSON 文件，用户无法在前端统一调整。
+- 聊天侧缺少快速查看系统状态或唤起配置的斜杠命令。
+
+#### 新增内容
+- **林赛控制台** — `web/js/console.js` + `scripts/web_routes_system.py` `/api/console/*`
+  - 流水线视图：`/api/console/flow` 聚合输入端 → drafts → optimizing → pending_review → archived → 输出端六阶段，高亮负反馈告警。
+  - Agent 视图：`/api/console/agents` 聚合 profile 健康度与当前 cron 任务，显示运行中/卡住/离线状态。
+  - 告警视图：`/api/console/alerts` 汇总负反馈告警、cron 失败、待人工确认的 drafts/设想。
+  - 快捷操作：`/api/console/action` 支持 `repair`、`orchestrate`、`optimize`、`clear-alert`、`weekend-input/output/reflection`。
+- **设置中心** — `web/js/settings_center.js` + `scripts/web_routes_settings.py` `/api/settings/*`
+  - 7 类配置：pipeline、templates、agents、tasks、learning、autonomy、kb_output。
+  - 每个分类支持 GET 读取、POST 保存、POST `/preview` 差异预览。
+  - 保存前自动备份旧文件到 `memory/.settings-backup/`，失败不覆盖原文件。
+- **导航与首页改造** — `web/index.html` + `web/js/dashboard.js`
+  - 左侧导航扩展为 6 项：仪表盘、控制台、知识库、课题生命周期、hermes 工作台、设置。
+  - 仪表盘瘦身为首页，添加快捷入口卡片和状态概览。
+  - 生命周期从弹窗升级为独立页面。
+- **聊天斜杠命令** — `web/js/slash_commands.js` + `web/js/chat.js`
+  - `/status`：查看当前链路状态。
+  - `/config`：快速打开设置中心指定分类。
+  - `/template`：查看/编辑 NSFC 模板要求。
+  - `/pipeline`：查看流水线或触发编排/修复。
+- **核心工具增强** — `web/js/core.js`
+  - 新增 `PollService` 统一轮询，控制台/设置中心共享自动刷新与暂停逻辑。
+  - 新增 `statusColorClass` / `statusDot` 统一状态着色。
+
+#### 验证结果
+- `python3 -m py_compile scripts/*.py scripts/tests/*.py` 通过。
+- `python3 scripts/self_test.py --web-ci` 235/235 通过。
+- 手动 curl 验证：`/api/settings/categories`、`/api/settings/pipeline`、`/api/settings/pipeline/preview` 返回正常。
+
 ### v6.7.7 修复（LLM 调用）
 - **timeout 参数未生效**：`llm_gateway.py` 的 `llm_complete`/`llm_chat` 声明了 `timeout` 参数，但调用 `llm_router.call_llm` 时未传递，导致实际始终使用配置默认 60s，复杂 prompt 易超时。
 - **kimi CLI 命令格式错误**：`llm_router.py` 使用 `kimi -c <prompt>`，但 `-c` 在 kimi CLI 中表示"继续上回会话"，应使用 `-p <prompt> --output-format text`。

@@ -53,6 +53,7 @@ from web_routes_upload import UploadRoutesMixin, _UPLOAD_ROUTES
 from web_routes_research import ResearchRoutesMixin
 from web_routes_pipeline import PipelineRoutesMixin
 from web_routes_orchestrator import OrchestratorRoutesMixin
+from web_routes_settings import SettingsRoutesMixin, _SETTINGS_ROUTES
 
 
 # ---------------------------------------------------------------------------
@@ -68,6 +69,7 @@ _ALL_ROUTE_TABLES = [
     _PROJECT_ROUTES,
     _HERMES_ROUTES,
     _UPLOAD_ROUTES,
+    _SETTINGS_ROUTES,
 ]
 
 
@@ -87,6 +89,7 @@ class RequestHandler(
     ResearchRoutesMixin,
     PipelineRoutesMixin,
     OrchestratorRoutesMixin,
+    SettingsRoutesMixin,
     BaseRequestHandler,
     BaseHTTPRequestHandler,
 ):

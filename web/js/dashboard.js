@@ -96,24 +96,18 @@ async function renderDashboard() {
       html += '</div></div>';
     }
 
-    // === hermes 状态区 ===
-    const h = data.hermes;
+    // === 控制台快捷入口 ===
     html += `<div class="dash-section dash-section-compact">
-      <div class="dash-section-header" onclick="switchToView('hermes')">
-        <span class="dash-section-icon">📡</span>
-        <span class="dash-section-title">hermes</span>
-        <span class="dash-section-count">${h.available ? `${h.cron_active} 个定时任务运行中` : '⚠️ 未连接'}</span>
+      <div class="dash-section-header" onclick="switchToView('console')">
+        <span class="dash-section-icon">🎛️</span>
+        <span class="dash-section-title">控制台</span>
+        <span class="dash-section-count">全链路监控 · 告警处理</span>
         <span class="dash-section-arrow">→</span>
-      </div>`;
-    if (h.jobs && h.jobs.length) {
-      html += '<div class="dash-list dash-list-compact">';
-      for (const job of h.jobs) {
-        const ok = job.last_status === 'ok';
-        html += `<div class="dash-list-item"><span class="${ok ? 'dash-dot-ok' : 'dash-dot-warn'}">●</span> ${escapeHtml(job.name)} <span class="dash-list-meta">${escapeHtml(job.schedule)}</span></div>`;
-      }
-      html += '</div>';
-    }
-    html += '</div>';
+      </div>
+      <div class="dash-list dash-list-compact">
+        <div class="dash-list-item">查看 agent 工作状态、流水线、待处理告警</div>
+      </div>
+    </div>`;
 
     container.innerHTML = html;
   } catch (e) {
@@ -134,9 +128,9 @@ async function quickDecide(pid, action) {
   }
 }
 
-// 导航切换（仪表盘/知识库/hermes）
+// 导航切换（仪表盘/控制台/知识库/生命周期/hermes/设置）
 function switchToView(view) {
-  const views = ['dashboard', 'kb', 'hermes'];
+  const views = ['dashboard', 'console', 'kb', 'lifecycle', 'hermes', 'settings'];
   views.forEach(v => {
     const el = document.getElementById(v + '-page');
     if (el) el.style.display = v === view ? 'flex' : 'none';
@@ -145,7 +139,6 @@ function switchToView(view) {
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.classList.toggle('nav-btn-active', btn.dataset.view === view);
   });
-  // 切到知识库时不重新渲染（常驻）
   // 切到仪表盘时刷新数据
   if (view === 'dashboard') renderDashboard();
 }

@@ -71,6 +71,20 @@ async function sendMessage(content) {
   }
   if (!content.trim()) return;
 
+  // v6.7.7: 斜杠命令拦截
+  if (typeof window._interceptSlashCommand === 'function') {
+    const slashResult = await window._interceptSlashCommand(content);
+    if (slashResult && slashResult.handled) {
+      appendMessage('user', content);
+      const assistantDiv = appendMessage('assistant', '', null, true);
+      assistantDiv.querySelector('.message-bubble').innerHTML = renderMarkdown(slashResult.content);
+      const input = document.getElementById('message-input');
+      if (input) input.value = '';
+      scrollToBottom();
+      return;
+    }
+  }
+
   let fullContent = content;
   if (window._kbSelectedFiles.length || window._pendingKbContext) {
     const kbCtx = await injectKbContext();

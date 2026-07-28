@@ -35,8 +35,20 @@ const LC_TYPE_COLORS = { general: 'var(--info-color)', key: 'var(--accent-color)
 // 打开/关闭
 // ============================================
 function openLifecycle() {
-  openModal('lifecycle-overlay');
+  // v6.7.7: 生命周期已升级为页面
+  switchToView('lifecycle');
   renderLifecycleDashboard();
+}
+
+// v6.7.7: 页面初始化
+function initLifecyclePage() {
+  const page = document.getElementById('lifecycle-page');
+  if (!page) return;
+  // 导航点击由 app.js 统一处理，这里监听页面是否可见并在可见时刷新
+  const observer = new MutationObserver(() => {
+    if (page.style.display === 'flex') renderLifecycleDashboard();
+  });
+  observer.observe(page, { attributes: true, attributeFilter: ['style'] });
 }
 
 // ============================================
@@ -54,6 +66,7 @@ async function renderLifecycleDashboard() {
     const d = data.data;
 
     let html = '';
+    html += '<div class="d-flex ai-center jc-between mb-12"><h2 style="margin:0;">🔬 提案生命周期</h2><button class="btn-text" style="color:var(--accent-color);" onclick="lcRegister()">+ 注册新课题</button></div>';
 
     // === 四阶段统计卡片 ===
     html += '<div class="d-grid gap-8 mb-12" style="grid-template-columns:repeat(4,1fr);">';
@@ -578,11 +591,6 @@ async function lcClearAlert(proposalId) {
 // ============================================
 if (typeof ModuleLoader !== 'undefined') {
   ModuleLoader.register('lifecycle', () => {
-    // 关闭按钮
-    const closeBtn = document.getElementById('lifecycle-close');
-    if (closeBtn) closeBtn.addEventListener('click', () => closeModal('lifecycle-overlay'));
-    // 注册按钮
-    const regBtn = document.getElementById('lifecycle-register-btn');
-    if (regBtn) regBtn.addEventListener('click', () => lcRegister());
+    initLifecyclePage();
   });
 }

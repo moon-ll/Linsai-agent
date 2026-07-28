@@ -533,17 +533,11 @@ async function init() {
   initChatSidebar();
   if (typeof bindPaperDiscussionEvents === 'function') bindPaperDiscussionEvents();
 
-  // v6.0: 导航按钮绑定
+  // v6.7.7: 导航按钮绑定（设置改为页面，不再打开抽屉）
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       const view = btn.dataset.view;
-      if (view === 'settings') {
-        // 设置打开抽屉
-        document.getElementById('settings-drawer').style.display = 'flex';
-        return;
-      }
       if (view === 'hermes') {
-        // hermes 工作台
         switchToView('hermes');
         if (typeof initHermesWorkspace === 'function') initHermesWorkspace();
         return;

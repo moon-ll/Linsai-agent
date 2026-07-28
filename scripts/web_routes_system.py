@@ -137,6 +137,11 @@ _SYSTEM_ROUTES = [
     ("POST", re.compile(r"^/api/lifecycle/weekend/input$"), "_sys_lifecycle_weekend_input"),
     ("POST", re.compile(r"^/api/lifecycle/weekend/output$"), "_sys_lifecycle_weekend_output"),
     ("POST", re.compile(r"^/api/lifecycle/weekend/reflection$"), "_sys_lifecycle_weekend_reflection"),
+    # v6.7.7: 控制台统一 API
+    ("GET", re.compile(r"^/api/console/flow$"), "_sys_console_flow"),
+    ("GET", re.compile(r"^/api/console/agents$"), "_sys_console_agents"),
+    ("GET", re.compile(r"^/api/console/alerts$"), "_sys_console_alerts"),
+    ("POST", re.compile(r"^/api/console/action$"), "_sys_console_action"),
 ]
 
 
@@ -877,4 +882,253 @@ class SystemRoutesMixin:
             else:
                 self._send_json({"error": "未知操作"}, 400)
         except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    # ---------------------------------------------------------------------------
+    # v6.7.7: 控制台统一 API
+    # ---------------------------------------------------------------------------
+
+    def _sys_console_flow(self, parsed, body=None):
+        """GET /api/console/flow — 全链路流水线总览。"""
+        try:
+            from lifecycle_cron_framework import LifecycleCronController
+            from proposal_lifecycle import ProposalLifecycle
+
+            lc = ProposalLifecycle()
+            ctrl = LifecycleCronController()
+            state = lc._load_state()
+            proposals = state.get("proposals", {})
+
+            stages = {
+                "incoming": {"label": "输入端", "count": 0, "items": [], "status": "ok"},
+                "drafts": {"label": "初稿", "count": 0, "items": [], "status": "ok"},
+                "optimizing": {"label": "优化中", "count": 0, "items": [], "status": "ok"},
+                "pending_review": {"label": "待校验", "count": 0, "items": [], "status": "ok"},
+                "archived": {"label": "归档", "count": 0, "items": [], "status": "ok"},
+                "output": {"label": "输出端", "count": 0, "items": [], "status": "ok"},
+            }
+
+            for pid, pdata in proposals.items():
+                status = pdata.get("status", "drafts")
+                if status in stages:
+                    stages[status]["count"] += 1
+                    item = {
+                        "proposal_id": pid,
+                        "project_type": pdata.get("project_type", "general"),
+                        "rounds": pdata.get("optimization_rounds", 0),
+                        "last_score": pdata.get("last_score"),
+                        "updated_at": pdata.get("updated_at", ""),
+                    }
+                    if status == "optimizing":
+                        item["section_passes"] = pdata.get("section_passes", {})
+                        item["negative_feedback_alert"] = pdata.get("negative_feedback_alert", False)
+                    stages[status]["items"].append(item)
+
+            # 输入端：待确认的新设想
+            try:
+                incoming_dir = PROJECT_ROOT / "research_proposals" / "_incoming"
+                ideas_files = sorted(incoming_dir.glob("ideas-*.json"), reverse=True)[:3]
+                for f in ideas_files:
+                    try:
+                        data = json.loads(f.read_text(encoding="utf-8"))
+                        for i, idea in enumerate(data.get("ideas", [])):
+                            stages["incoming"]["count"] += 1
+                            stages["incoming"]["items"].append({
+                                "id": f"{f.stem}-{i}",
+                                "title": idea.get("title", ""),
+                                "generated_at": data.get("generated_at", ""),
+                            })
+                    except Exception:
+                        continue
+            except Exception:
+                pass
+
+            # 输出端：最近归档 + 待输出任务
+            try:
+                from lifecycle_cron_framework import _load_weekend_jobs
+                weekend = _load_weekend_jobs()
+                stages["output"]["items"].append({
+                    "type": "weekend_jobs",
+                    "jobs": weekend.get("jobs", {}),
+                })
+            except Exception:
+                pass
+
+            # 健康状态判定
+            if stages["optimizing"]["count"] > 0:
+                stuck = [p for p in stages["optimizing"]["items"] if p.get("negative_feedback_alert")]
+                if stuck:
+                    stages["optimizing"]["status"] = "warning"
+
+            self._send_json({"status": "ok", "stages": stages})
+        except Exception as e:
+            if _log:
+                _log.error(f"console/flow 失败: {e}")
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_console_agents(self, parsed, body=None):
+        """GET /api/console/agents — agent / profile 工作状态。"""
+        try:
+            from profile_health import compute_profile_health
+            profiles = compute_profile_health(window_hours=24)
+
+            # 当前 cron 任务作为 agent 当前工作
+            try:
+                from lifecycle_cron_framework import LifecycleCronController
+                ctrl = LifecycleCronController()
+                crons = ctrl.list_lifecycle_crons()
+            except Exception:
+                crons = []
+
+            running = []
+            for job in crons:
+                if job.get("status") == "active":
+                    running.append({
+                        "name": job.get("name", ""),
+                        "schedule": job.get("schedule", ""),
+                        "last_status": job.get("last_status", ""),
+                        "last_run": job.get("last_run", ""),
+                    })
+
+            self._send_json({"status": "ok", "profiles": profiles, "cron_jobs": running})
+        except Exception as e:
+            if _log:
+                _log.error(f"console/agents 失败: {e}")
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_console_alerts(self, parsed, body=None):
+        """GET /api/console/alerts — 告警与待处理 inbox。"""
+        alerts = []
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            lc = ProposalLifecycle()
+            state = lc._load_state()
+            for pid, pdata in state.get("proposals", {}).items():
+                # 负反馈告警
+                if pdata.get("negative_feedback_alert"):
+                    alerts.append({
+                        "type": "negative_feedback",
+                        "level": "error",
+                        "proposal_id": pid,
+                        "message": "触发负反馈告警，需人工介入",
+                        "reasons": pdata.get("negative_feedback_reasons", []),
+                        "action": "clear_alert",
+                    })
+                # pending_review 待人工审查
+                if pdata.get("status") == "pending_review":
+                    alerts.append({
+                        "type": "pending_review",
+                        "level": "warning",
+                        "proposal_id": pid,
+                        "message": "课题已达标，等待人工校验",
+                        "action": "review",
+                    })
+                # optimizing 中长时间未更新
+                updated_at = pdata.get("updated_at", "")
+                if pdata.get("status") == "optimizing" and updated_at:
+                    try:
+                        from datetime import datetime, timezone
+                        t = datetime.fromisoformat(updated_at.replace("Z", "+00:00"))
+                        hours = (datetime.now(timezone.utc) - t).total_seconds() / 3600
+                        if hours > 48:
+                            alerts.append({
+                                "type": "stuck",
+                                "level": "warning",
+                                "proposal_id": pid,
+                                "message": f"已 {int(hours)} 小时无更新，可能卡住",
+                                "action": "repair",
+                            })
+                    except Exception:
+                        pass
+
+            # 输入端新设想
+            try:
+                incoming_dir = PROJECT_ROOT / "research_proposals" / "_incoming"
+                for f in sorted(incoming_dir.glob("ideas-*.json"), reverse=True)[:5]:
+                    try:
+                        data = json.loads(f.read_text(encoding="utf-8"))
+                        for i, idea in enumerate(data.get("ideas", [])):
+                            alerts.append({
+                                "type": "incoming_idea",
+                                "level": "info",
+                                "idea_id": f"{f.stem}-{i}",
+                                "proposal_id": None,
+                                "message": f"新研究设想待确认：{idea.get('title', '')}",
+                                "action": "review_idea",
+                            })
+                    except Exception:
+                        continue
+            except Exception:
+                pass
+
+            # 周末任务失败
+            try:
+                from lifecycle_cron_framework import _load_weekend_jobs
+                weekend = _load_weekend_jobs()
+                for name, job in weekend.get("jobs", {}).items():
+                    if job.get("status") == "failed":
+                        alerts.append({
+                            "type": "weekend_failed",
+                            "level": "error",
+                            "proposal_id": None,
+                            "message": f"周末任务 {name} 失败",
+                            "action": "retry_weekend",
+                            "task_name": name,
+                        })
+            except Exception:
+                pass
+
+            self._send_json({"status": "ok", "alerts": alerts})
+        except Exception as e:
+            if _log:
+                _log.error(f"console/alerts 失败: {e}")
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_console_action(self, parsed, body):
+        """POST /api/console/action — 统一处理动作。"""
+        action = body.get("action") if body else None
+        if not action:
+            self._send_json({"error": "缺少 action"}, 400)
+            return
+
+        try:
+            from lifecycle_cron_framework import LifecycleCronController
+            from proposal_lifecycle import ProposalLifecycle
+
+            ctrl = LifecycleCronController()
+            lc = ProposalLifecycle()
+
+            if action == "orchestrate":
+                result = ctrl.run_orchestrator(dry_run=False)
+                self._send_json({"status": "ok", "result": result})
+            elif action == "repair":
+                result = ctrl.run_repair(dry_run=False)
+                self._send_json({"status": "ok", "result": result})
+            elif action == "clear_alert":
+                pid = body.get("proposal_id", "")
+                result = lc.clear_negative_feedback(pid, reason="控制台一键清除")
+                self._send_json({"status": "ok", "result": result})
+            elif action == "transition":
+                pid = body.get("proposal_id", "")
+                to_status = body.get("to_status", "")
+                result = lc.transition(pid, to_status)
+                self._send_json({"status": "ok", "result": result})
+            elif action in ("weekend_input", "weekend_output", "weekend_reflection"):
+                task_name = action.replace("weekend_", "")
+                return self._run_weekend_task(task_name)
+            elif action == "sync_kb":
+                import sync_engine as se
+                if not _try_acquire_kb_busy():
+                    self._send_json({"error": "知识库正忙"}, 409)
+                    return
+                try:
+                    result = se.sync_all()
+                    self._send_json({"status": "ok", "result": result})
+                finally:
+                    _release_kb_busy()
+            else:
+                self._send_json({"error": f"未知 action: {action}"}, 400)
+        except Exception as e:
+            if _log:
+                _log.error(f"console/action {action} 失败: {e}")
             self._send_json({"error": str(e)}, 500)
