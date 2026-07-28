@@ -288,6 +288,11 @@ class BaseRequestHandler:
         self.send_response(200)
         self.send_header("Content-Type", mime)
         self.send_header("Content-Length", str(len(data)))
+        # v6.7.7: 对 HTML/JS/CSS 禁用缓存，避免前端更新后浏览器仍显示旧版
+        if ext in (".html", ".js", ".css"):
+            self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+            self.send_header("Pragma", "no-cache")
+            self.send_header("Expires", "0")
         self.end_headers()
         self.wfile.write(data)
 
