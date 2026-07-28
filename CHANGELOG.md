@@ -49,6 +49,11 @@
 - **周末集中处理批量任务**：工作日专注课题对抗优化，周末做输入发现、输出萃取和链路反思。
 - **LLM 失败自动降级**：输入/输出端调用 `llm_gateway`，超时或解析失败时返回空结果，不阻塞链路。
 
+### v6.7.7 修复（LLM 调用）
+- **timeout 参数未生效**：`llm_gateway.py` 的 `llm_complete`/`llm_chat` 声明了 `timeout` 参数，但调用 `llm_router.call_llm` 时未传递，导致实际始终使用配置默认 60s，复杂 prompt 易超时。
+- **kimi CLI 命令格式错误**：`llm_router.py` 使用 `kimi -c <prompt>`，但 `-c` 在 kimi CLI 中表示"继续上回会话"，应使用 `-p <prompt> --output-format text`。
+- **修复结果**：`idea_generator.py --auto --dry-run` 从"生成 0 个设想/解析失败"变为稳定生成 2 个结构化研究设想；`kimi` CLI 单独调用正常返回。
+
 ### 已知限制
 - 自动输入端依赖 `llm_gateway` 可用性；若 LLM 连续失败，当次周末输入可能为空。
 - 前端 `weekend.js` 尚未实现，当前通过 CLI / API 管理周末任务。

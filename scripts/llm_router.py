@@ -243,7 +243,7 @@ class LLMProvider:
         prompt_text = "\n\n".join(prompt_parts)
 
         result = subprocess.run(
-            ["kimi", "-c", prompt_text],
+            ["kimi", "-p", prompt_text, "--output-format", "text"],
             capture_output=True,
             text=True,
             timeout=timeout,
@@ -351,12 +351,18 @@ class LLMRouter:
         self._last_used: Optional[str] = None       # 记录上次实际使用的 Provider
         self.load_force_provider()
 
-    def call_llm(self, system_prompt: str, messages: List[Dict[str, str]]):
+    def call_llm(
+        self,
+        system_prompt: str,
+        messages: List[Dict[str, str]],
+        timeout: Optional[int] = None,
+    ):
         """调用 LLM。若 force_provider 已设置则直接使用；否则按策略自动选择。
 
         Args:
             system_prompt: 系统提示词
             messages: 消息列表 [{role, content}, ...]
+            timeout: 单次调用超时（秒），None 则使用配置默认值。
 
         Returns:
             LLM 生成的文本
@@ -364,7 +370,7 @@ class LLMRouter:
         Raises:
             RuntimeError: 所有 Provider 均失败
         """
-        timeout = int(self.config.get("timeout", 60))
+        timeout = int(timeout or self.config.get("timeout", 60))
         retry = int(self.config.get("retry", 1))
         used_provider_name = ""
 

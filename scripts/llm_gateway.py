@@ -177,7 +177,7 @@ def llm_complete(
     messages = [{"role": "user", "content": user_prompt}]
     t0 = time.time()
     try:
-        result, usage, provider_name = router.call_llm(system_prompt, messages)
+        result, usage, provider_name = router.call_llm(system_prompt, messages, timeout=timeout)
         elapsed = round(time.time() - t0, 2)
         _log_info(f"LLM 调用成功 provider={provider_name} elapsed={elapsed}s")
         return True, result or "", {
@@ -216,7 +216,7 @@ def llm_chat(
 
     t0 = time.time()
     try:
-        result, usage, provider_name = router.call_llm(system_prompt, messages)
+        result, usage, provider_name = router.call_llm(system_prompt, messages, timeout=timeout)
         elapsed = round(time.time() - t0, 2)
         _log_info(f"LLM 多轮调用成功 provider={provider_name} elapsed={elapsed}s")
         return True, result or "", {
