@@ -47,6 +47,12 @@ from proposal_lifecycle import (
 
 import hermes_bridge as hb
 
+# v6.7.6: 引入对抗评审奖惩与监察机制
+try:
+    from adversarial_governance import AdversarialGovernance
+except Exception:
+    AdversarialGovernance = None  # type: ignore[misc,assignment]
+
 try:
     from logger import get_logger
     _log = get_logger("lifecycle_cron")
@@ -75,6 +81,7 @@ JOB_STATUS_FAILED = "failed"
 STEP_CRITIC = "critic"
 STEP_RESEARCHER = "researcher"
 STEP_WRITER = "writer"
+STEP_MONITOR = "monitor"  # v6.7.6: 全局监察步骤
 
 # stale 阈值：running 超过该秒数视为死锁
 STALE_RUNNING_SECONDS = 3600
@@ -229,10 +236,11 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
         round_num: int,
         section: Dict[str, str],
     ) -> List[Dict[str, Any]]:
-        """为下一轮生成 critic + writer 两个基础 job。"""
+        """为下一轮生成 critic + writer + monitor 三个基础 job。"""
         section_key = section["key"]
         critic_id = _make_job_id(proposal_id, round_num, section_key, STEP_CRITIC)
         writer_id = _make_job_id(proposal_id, round_num, section_key, STEP_WRITER)
+        monitor_id = _make_job_id(proposal_id, round_num, section_key, STEP_MONITOR)
         return [
             {
                 "job_id": critic_id,
@@ -257,6 +265,21 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
                 "round": round_num,
                 "status": JOB_STATUS_PENDING,
                 "depends_on": [critic_id],
+                "attempts": 0,
+                "scheduled_at": "",
+                "started_at": "",
+                "finished_at": "",
+                "last_error": "",
+                "cron_job_id": "",
+            },
+            {
+                "job_id": monitor_id,
+                "proposal_id": proposal_id,
+                "step": STEP_MONITOR,
+                "section_key": section_key,
+                "round": round_num,
+                "status": JOB_STATUS_PENDING,
+                "depends_on": [writer_id],
                 "attempts": 0,
                 "scheduled_at": "",
                 "started_at": "",
@@ -472,6 +495,15 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
         dim_scores = report["dim_scores"]
         weakest_dim = self._get_weakest_dimension(dim_scores)
 
+        # v6.7.6: writer 修改前备份当前申请书，供 monitor 比对
+        proposal_path = prop_dir / "04_proposal" / "proposal-draft.md"
+        backup_path = prop_dir / "04_proposal" / f"proposal-draft-r{round_num - 1}.md"
+        if proposal_path.exists() and proposal_path.stat().st_size > 100:
+            try:
+                shutil.copy2(str(proposal_path), str(backup_path))
+            except Exception:
+                pass
+
         # 构造 lit_supplement：使用本 proposal 下 targeted-research 目录最新文件
         lit_supplement = ""
         targeted_dir = prop_dir / "02_literature" / "targeted-research"
@@ -536,18 +568,145 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
         except Exception:
             pass
 
-        # 检查是否达标并流转
-        done_result = self._check_done(proposal_id, threshold)
-        if done_result["done"]:
-            self.transition(proposal_id, "pending_review", reason=done_result["reason"])
-
+        # v6.7.6: 达标判定与流转移至 monitor 步骤，由 monitor 综合评估后决定
         return {
             "success": True,
             "round": round_num,
             "score_before": score_before,
             "score_after": score_after,
-            "done": done_result["done"],
-            "reason": done_result["reason"],
+            "section_passed": section_passed,
+        }
+
+    def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
+        """执行 monitor（全局监察）步骤：评分、奖惩、达标判定、流转。
+
+        v6.7.6: monitor 作为每轮 writer-critic 之后的收尾步骤，独立评估质量，
+        更新 agent 分数，检测负反馈，最终决定是否达标并移入 pending_review。
+        """
+        if AdversarialGovernance is None:
+            if _log:
+                _log.warning(f"[{proposal_id}] adversarial_governance 未加载，monitor 跳过")
+            return {"success": True, "skipped": True, "reason": "adversarial_governance 未加载"}
+
+        prop_dir = self._find_proposal_dir(proposal_id)
+        if not prop_dir:
+            return {"success": False, "error": "proposal 目录不存在"}
+
+        prop_state = self._get_proposal_state(proposal_id)
+        if not prop_state:
+            return {"success": False, "error": "proposal 状态不存在"}
+
+        project_type = prop_state.get("project_type", "general")
+        round_num = job["round"]
+        section_key = job["section_key"]
+        section = _section_for_round(round_num)
+        section_name = section.get("cn", section_key)
+
+        score_after = prop_state.get("last_score", 0.0)
+        dim_scores = prop_state.get("last_dim_scores", {})
+
+        # 找上一轮的 score 作为 score_before
+        score_before = 0.0
+        score_history = prop_state.get("score_history", [])
+        for h in reversed(score_history[:-1]):
+            if h.get("round") < round_num:
+                score_before = h.get("score", 0.0)
+                break
+
+        # 找 writer 修改前的备份文件作为 prev_draft
+        prev_draft_path = prop_dir / "04_proposal" / f"proposal-draft-r{round_num - 1}.md"
+        if not prev_draft_path.exists():
+            prev_draft_path = None
+
+        ag = AdversarialGovernance()
+        monitor_result = ag.run_monitor_step(
+            proposal_id=proposal_id,
+            prop_dir=prop_dir,
+            project_type=project_type,
+            round_num=round_num,
+            section_key=section_key,
+            section_name=section_name,
+            score_before=score_before,
+            score_after=score_after,
+            dim_scores=dim_scores,
+            prev_draft_path=prev_draft_path,
+        )
+
+        if not monitor_result.get("success"):
+            return {
+                "success": False,
+                "error": monitor_result.get("error", "monitor 调用失败"),
+                "monitor_result": monitor_result,
+            }
+
+        deltas = ag.apply_monitor_result(
+            proposal_id=proposal_id,
+            round_num=round_num,
+            section_key=section_key,
+            score_before=score_before,
+            score_after=score_after,
+            dim_scores=dim_scores,
+            monitor_result=monitor_result,
+            proposal_state=prop_state,
+        )
+
+        prop_state = ag.record_monitor_history(
+            proposal_state=prop_state,
+            round_num=round_num,
+            section_key=section_key,
+            score_before=score_before,
+            score_after=score_after,
+            monitor_result=monitor_result,
+            deltas=deltas,
+        )
+
+        # 写入 monitor 简要摘要到 proposal 状态
+        prop_state["last_monitor_at"] = now_utc()
+        prop_state["last_monitor_score"] = monitor_result.get("monitor_independent_score", score_after)
+        prop_state["last_monitor_assessment"] = monitor_result.get("overall_assessment", "")[:300]
+        self._set_proposal_state(proposal_id, prop_state)
+
+        # 负反馈告警：不流转，等待人工介入
+        if prop_state.get("negative_feedback_alert"):
+            reasons = prop_state.get("negative_feedback_reasons", [])
+            if _log:
+                _log.warning(
+                    f"[{proposal_id}] 触发负反馈告警: {', '.join(reasons)}; "
+                    f"暂停自动流转，等待人工清除"
+                )
+            return {
+                "success": True,
+                "negative_feedback_alert": True,
+                "reasons": reasons,
+                "writer_delta": deltas.get("writer_delta"),
+                "critic_delta": deltas.get("critic_delta"),
+                "monitor_score": monitor_result.get("monitor_independent_score"),
+            }
+
+        # 未触发负反馈：检查是否达标并流转
+        threshold = self._get_quality_threshold(project_type)
+        done_result = self._check_done(proposal_id, threshold)
+        if done_result["done"]:
+            transition_result = self.transition(
+                proposal_id, "pending_review", reason=done_result["reason"]
+            )
+            return {
+                "success": True,
+                "done": True,
+                "reason": done_result["reason"],
+                "transition": transition_result,
+                "writer_delta": deltas.get("writer_delta"),
+                "critic_delta": deltas.get("critic_delta"),
+                "monitor_score": monitor_result.get("monitor_independent_score"),
+            }
+
+        return {
+            "success": True,
+            "done": False,
+            "reason": done_result.get("reason", "未达标"),
+            "writer_delta": deltas.get("writer_delta"),
+            "critic_delta": deltas.get("critic_delta"),
+            "monitor_score": monitor_result.get("monitor_independent_score"),
         }
 
     def execute_job(self, job: Dict[str, Any]) -> Dict[str, Any]:
@@ -566,6 +725,8 @@ python3 scripts/proposal_lifecycle.py --worker-step "$PID"
                 result = self._run_researcher_step(proposal_id, job)
             elif step == STEP_WRITER:
                 result = self._run_writer_step(proposal_id, job)
+            elif step == STEP_MONITOR:
+                result = self._run_monitor_step(proposal_id, job)
             else:
                 result = {"success": False, "error": f"未知步骤 {step}"}
         except Exception as e:

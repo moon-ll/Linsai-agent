@@ -80,12 +80,13 @@ class LifecycleCronTests(TestSuite):
 
         result = c.sync_checkpoint(pid)
         self.assert_true(result.get("success"), "sync_checkpoint 成功", result)
-        self.assert_eq(result.get("added"), 2, "round 1 生成 2 个 job")
+        self.assert_eq(result.get("added"), 3, "round 1 生成 3 个 job")
 
         jobs = c._get_jobs(pid)
-        self.assert_eq(len(jobs), 2, "checkpoint 列表长度")
+        self.assert_eq(len(jobs), 3, "checkpoint 列表长度")
         self.assert_eq(jobs[0]["step"], "critic", "第一个 job 是 critic")
         self.assert_eq(jobs[1]["step"], "writer", "第二个 job 是 writer")
+        self.assert_eq(jobs[2]["step"], "monitor", "第三个 job 是 monitor")
         self.assert_eq(jobs[0]["section_key"], "rationale", "round 1 聚焦立项依据")
 
     def _test_pick_next_job(self):
@@ -105,7 +106,7 @@ class LifecycleCronTests(TestSuite):
         c.sync_checkpoint(pid)
         result = c.sync_checkpoint(pid)
         self.assert_eq(result.get("added"), 0, "重复 sync 不新增")
-        self.assert_eq(len(c._get_jobs(pid)), 2, "job 数量保持 2")
+        self.assert_eq(len(c._get_jobs(pid)), 3, "job 数量保持 3")
 
     def _test_dependency_respected(self):
         c = self._make_controller()
@@ -131,7 +132,7 @@ class LifecycleCronTests(TestSuite):
         # 直接插入 researcher job（模拟 critic 完成后的行为）
         c._insert_researcher_job(pid, 1, "rationale")
         jobs = c._get_jobs(pid)
-        self.assert_eq(len(jobs), 3, "插入 researcher 后共 3 个 job")
+        self.assert_eq(len(jobs), 4, "插入 researcher 后共 4 个 job")
         self.assert_eq(jobs[1]["step"], "researcher", "中间 job 是 researcher")
         self.assert_in(jobs[1]["job_id"], jobs[2]["depends_on"], "writer 依赖 researcher")
 

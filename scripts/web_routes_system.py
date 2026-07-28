@@ -91,6 +91,10 @@ _SYSTEM_ROUTES = [
     ("POST", re.compile(r"^/api/lifecycle/orchestrate$"), "_sys_lifecycle_orchestrate"),
     ("POST", re.compile(r"^/api/lifecycle/repair$"), "_sys_lifecycle_repair"),
     ("GET", re.compile(r"^/api/lifecycle/jobs$"), "_sys_lifecycle_jobs"),
+    # v6.7.6: 对抗评审奖惩与监察
+    ("GET", re.compile(r"^/api/lifecycle/agent-scores$"), "_sys_lifecycle_agent_scores"),
+    ("GET", re.compile(r"^/api/lifecycle/monitor/(?P<proposal_id>[^/]+)$"), "_sys_lifecycle_monitor"),
+    ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/clear-alert$"), "_sys_lifecycle_clear_alert"),
 ]
 
 
@@ -556,6 +560,66 @@ class SystemRoutesMixin:
             ctrl = LifecycleCronController()
             jobs = ctrl.list_lifecycle_crons()
             self._send_json({"status": "ok", "data": jobs})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_agent_scores(self, parsed, body=None):
+        """获取 writer/critic 的当前奖惩分数"""
+        try:
+            from adversarial_governance import AdversarialGovernance
+            ag = AdversarialGovernance()
+            scores = ag.load_agent_scores()
+            # 移除过长的历史明细，保留概要
+            summary = {}
+            for role, data in scores.items():
+                if role in ("updated_at",):
+                    continue
+                summary[role] = {
+                    "score": data.get("score", 100),
+                    "initial_score": data.get("initial_score", 100),
+                    "history_count": len(data.get("history", [])),
+                    "recent_history": data.get("history", [])[-5:],
+                    "violations_count": len(data.get("prohibition_violations", [])),
+                    "recent_violations": data.get("prohibition_violations", [])[-5:],
+                    "updated_at": data.get("updated_at", ""),
+                }
+            self._send_json({"status": "ok", "scores": summary, "updated_at": scores.get("updated_at", "")})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_monitor(self, parsed, body=None, **kwargs):
+        """获取指定 proposal 的 monitor 历史与当前负反馈状态"""
+        proposal_id = parsed.group("proposal_id")
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            lc = ProposalLifecycle()
+            prop_state = lc._get_proposal_state(proposal_id)
+            if not prop_state:
+                self._send_json({"error": "proposal 未注册"}, 404)
+                return
+            self._send_json({
+                "status": "ok",
+                "proposal_id": proposal_id,
+                "negative_feedback_alert": prop_state.get("negative_feedback_alert", False),
+                "negative_feedback_reasons": prop_state.get("negative_feedback_reasons", []),
+                "negative_feedback_cleared": prop_state.get("negative_feedback_cleared", []),
+                "monitor_history": prop_state.get("monitor_history", []),
+                "last_monitor_score": prop_state.get("last_monitor_score"),
+                "last_monitor_at": prop_state.get("last_monitor_at"),
+                "last_monitor_assessment": prop_state.get("last_monitor_assessment", ""),
+            })
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_clear_alert(self, parsed, body=None, **kwargs):
+        """清除指定 proposal 的负反馈告警"""
+        proposal_id = parsed.group("proposal_id")
+        reason = body.get("reason", "") if body else ""
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            lc = ProposalLifecycle()
+            result = lc.clear_negative_feedback(proposal_id, reason=reason or "Web 端清除")
+            self._send_json({"status": "ok", "data": result})
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 

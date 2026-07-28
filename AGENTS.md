@@ -67,7 +67,7 @@ LinSai-CoPilot/
 ├── AGENTS.md                  # 本文件。AI 代理必读指南
 ├── README.md                  # 人类可读的项目说明
 ├── CHANGELOG.md               # 变更记录
-├── VERSION                    # 版本号唯一真相源（当前 6.7.5）
+├── VERSION                    # 版本号唯一真相源（当前 6.7.6）
 ├── .env                       # 本地 API 密钥（gitignore，不提交）
 ├── .gitignore                 # Git 忽略规则：用户数据、自动生成文件、敏感配置
 │
@@ -553,7 +553,7 @@ LinSai-CoPilot/
 | `/api/research/` | CoPilot 核心 (v3.5) | 课题指导 |
 | `/api/hermes/` | CoPilot 核心 | hermes cron、oneshot、团队 profile 状态 |
 | `/api/sync/`、`/api/backup/`、`/api/usage/` 等 | CoPilot 核心 | 系统状态 |
-| `/api/lifecycle/` | CoPilot 核心 (v6.5+) | 提案生命周期仪表盘、注册、流转、优化 |
+| `/api/lifecycle/` | CoPilot 核心 (v6.5+) | 提案生命周期仪表盘、注册、流转、优化、agent scores、monitor 历史、负反馈告警清除 |
 | `/api/orchestrator/` | CoPilot 核心 (v6.7+) | 林赛总控：仪表盘、profile 健康、失败模式、调度策略、链路质量 |
 | `/api/pipeline/` | 研究管线 (v6.2+) | 管线编排、Agent 团队、缺口、课题、问题、申请书、自检、引文、方法学、hermes 驱动管线 |
 
@@ -587,6 +587,7 @@ researcher ← analyst ← writer ↔ critic → reviewer
 - `memory_bridge.py`：将 hermes `MEMORY.md` / `USER.md` 同步到 CoPilot `memory/`。
 - `hermes_pipeline.py`：将六阶段派活给对应 profile，支持增量优化、产物检查、cron 自动化。
 - `proposal_lifecycle.py`：四阶段（drafts → optimizing → pending_review → archived）+ writer-critic 对抗优化循环。
+- `adversarial_governance.py`（v6.7.6）：对抗评审奖惩与监察引擎，管理 agent 分数、禁止清单、monitor meta-review、负反馈检测。
 
 ### 5. 提案生命周期
 
@@ -597,10 +598,16 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 - **命名规则**：`{项目类型}-{课题名称}-{YYYYMMDD}[-序号]`，项目类型 `general`/`key`/`major`。
 - **对抗优化**：按章节（立项依据→研究内容→研究方案→整体审查）轮转，critic 4 维度评分（创新/可行/严谨/完整），writer 聚焦最弱维度修订；达标需全模块通过。
 - **小型化 cron 框架（v6.7.5）**：
-  - 不再使用单一大型 `pipeline-runner` cron sweep；改为每个 optimizing proposal 一个独立 worker cron，每次只执行下一个 pending 小步骤（critic / researcher / writer）。
+  - 不再使用单一大型 `pipeline-runner` cron sweep；改为每个 optimizing proposal 一个独立 worker cron，每次只执行下一个 pending 小步骤。
   - 每日编排 cron（`lc-daily-orchestrate`）只生成 checkpoint、确保 worker 存在，自身不调用 LLM。
   - 修复 cron（`lc-repair`）每 6 小时扫描：重置 stuck running、重试 failed（最多 3 次）、补齐缺失 worker、超过重试则告警。
-  - checkpoint 持久化在 `_lifecycle.json` 的 `pipeline_jobs` 中，critic/writer 失败可单独重跑，不污染整体状态。
+  - checkpoint 持久化在 `_lifecycle.json` 的 `pipeline_jobs` 中，单步骤失败可单独重跑，不污染整体状态。
+- **对抗评审奖惩与监察（v6.7.6）**：
+  - 每轮 checkpoint 拆为 critic → writer → monitor 三步骤，monitor 作为独立第三方 reviewer 做 meta-review。
+  - `memory/agent-scores.json` 维护 writer/critic 全局奖惩分数（初始 100，上限 150，下限 0）。
+  - 禁止清单（writer：占位符/模板僵化/表面修改；critic：消极评审/僵化评分/评分与内容矛盾）由规则层兜底，monitor 结合上下文判定。
+  - 奖惩计算综合规则层 delta、monitor 建议、串通惩罚、校准奖励/惩罚。
+  - 负反馈检测：monitor 独立分数连续下降 / 本地双降 / 连续串通 / 全局分数低于 50 触发告警，暂停自动流转，等待人工清除。
 - **文献驱动**：优先优化与当天简报关键词匹配的课题，节省模型限额。
 - **质量标准**：`memory/nsfc-standards.json` 定义面上/重点/重大三类项目的评分权重、页数限制、模板结构。
 
@@ -644,7 +651,7 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 
 ### 版本号规范
 
-- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.7.5`）。
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.7.6`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -713,7 +720,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.7.5*
+*版本：6.7.6*
 *日期：2026-07-28*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

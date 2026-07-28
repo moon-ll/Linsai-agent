@@ -1,5 +1,44 @@
 # 变更记录
 
+## v6.7.6 - 2026-07-28 对抗评审奖惩与监察机制
+
+### 问题根因
+- writer-critic 对抗循环只有「critic 评分 → writer 修改」两端，缺乏第三方独立评估，容易出
+  现：writer 表面修改、critic 消极/僵化评分、双方串通放水、质量持续走低无法及时发现。
+
+### 新增内容
+- **对抗评审奖惩与监察引擎** — `scripts/adversarial_governance.py`
+  - `AdversarialGovernance`：管理 writer/critic 全局奖惩分数（初始 100，上限 150，下限 0）。
+  - 全局监察员 `monitor`：调用独立 reviewer profile 对每轮修改做 meta-review，输出独立评分
+    与 4 维度分数、writer/critic 评估、串通风险、负反馈判定。
+  - 上下文敏感禁止清单：writer（占位符、模板僵化、表面修改）、critic（消极评审、僵化评分、
+    评分与内容矛盾）由规则层兜底，monitor 可结合质量上下文做最终判定。
+  - 奖惩计算：规则层 delta（进度、问题减少、违规扣分、校准奖励/惩罚）与 monitor 建议混合
+    （±15 限制）；串通风险 medium/high 额外惩罚。
+  - 负反馈检测：monitor 独立分数连续下降 / 本地双降 / 连续串通 / 全局分数低于 50 触发告警。
+- **生命周期 cron 接入 monitor 步骤** — `scripts/lifecycle_cron_framework.py`
+  - 每轮 checkpoint 拆为 critic → writer → monitor 三个串行小步骤。
+  - writer 优化前自动备份当前申请书，供 monitor 比对。
+  - monitor 作为每轮收尾：更新 agent 分数、记录 monitor history、判定负反馈；未触发负反馈
+    时才检查达标并移入 `pending_review`。
+- **负反馈告警与清除** — `scripts/proposal_lifecycle.py`
+  - `run_health_check()` 新增 `negative_feedback` 告警。
+  - CLI/API 支持 `--clear-negative-feedback <proposal_id>` 与
+    `POST /api/lifecycle/<id>/clear-alert`，人工确认后恢复链路。
+- **Web API / 前端**
+  - 新增 `GET /api/lifecycle/agent-scores`、`GET /api/lifecycle/monitor/<id>`、
+    `POST /api/lifecycle/<id>/clear-alert`。
+  - `web/js/lifecycle.js` 增加 agent scores 概览、课题卡片「监察」按钮、monitor 历史弹窗、
+    负反馈告警清除按钮。
+- **测试**
+  - 新增 `scripts/tests/test_adversarial_governance.py`（14 个检查点），纳入 `--module` 维度。
+  - 更新 `test_lifecycle_cron.py` 以适配 critic/writer/monitor 三步骤结构。
+
+### 验证结果
+- `python3 -m py_compile scripts/*.py scripts/tests/*.py` 通过
+- `python3 scripts/self_test.py --module` 164/164 通过
+- `python3 -c "from adversarial_governance import _self_check; print(_self_check())"` 通过
+
 ## v6.7.5 - 2026-07-28 生命周期 cron 小型化与自修复框架
 
 ### 问题根因

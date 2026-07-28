@@ -1897,12 +1897,57 @@ class ProposalLifecycle:
                         "last_error": cron_failures[-1].get("error", ""),
                     })
 
+        # 检查5：v6.7.6 负反馈告警（writer-critic 进入负反馈循环）
+        for pid, data in state["proposals"].items():
+            if data.get("status") == "optimizing" and data.get("negative_feedback_alert"):
+                reasons = data.get("negative_feedback_reasons", [])
+                alerts.append({
+                    "level": "error",
+                    "type": "negative_feedback",
+                    "message": f"{pid} 触发负反馈告警，需人工介入后清除",
+                    "proposal_id": pid,
+                    "reasons": reasons,
+                    "local_writer_score": data.get("monitor_history", [])[-1].get("local_writer_score") if data.get("monitor_history") else None,
+                    "local_critic_score": data.get("monitor_history", [])[-1].get("local_critic_score") if data.get("monitor_history") else None,
+                })
+
         return {
             "healthy": len([a for a in alerts if a["level"] == "error"]) == 0,
             "alerts": alerts,
             "stats": stats,
             "checked_at": now_utc(),
         }
+
+    def clear_negative_feedback(self, proposal_id: str, reason: str = "") -> Dict[str, Any]:
+        """清除指定 proposal 的负反馈告警，允许链路继续运转。
+
+        人工确认问题已修复后调用，会重置 negative_feedback_alert 并记录清除历史。
+        """
+        prop_state = self._get_proposal_state(proposal_id)
+        if not prop_state:
+            return {"success": False, "error": f"proposal 未注册: {proposal_id}"}
+
+        if not prop_state.get("negative_feedback_alert"):
+            return {"success": True, "message": "无负反馈告警需清除", "proposal_id": proposal_id}
+
+        cleared_entry = {
+            "cleared_at": now_utc(),
+            "previous_reasons": prop_state.get("negative_feedback_reasons", []),
+            "reason": reason,
+        }
+        cleared_history = prop_state.get("negative_feedback_cleared", [])
+        cleared_history.append(cleared_entry)
+
+        prop_state["negative_feedback_alert"] = False
+        prop_state["negative_feedback_reasons"] = []
+        prop_state["negative_feedback_cleared"] = cleared_history[-10:]
+        prop_state["updated_at"] = now_utc()
+        self._set_proposal_state(proposal_id, prop_state)
+
+        if _log:
+            _log.info(f"清除负反馈告警: {proposal_id} ({reason})")
+
+        return {"success": True, "proposal_id": proposal_id, "cleared_at": cleared_entry["cleared_at"]}
 
     def run_daily_orchestrator(self) -> Dict[str, Any]:
         """每日编排器：一个入口执行全部 cron 任务，各环节独立、容错。
@@ -2045,6 +2090,9 @@ def main(argv: Optional[List[str]] = None) -> int:
                         help="每日编排（健康检查+优化扫描+结果确认，容错）")
     parser.add_argument("--setup-cron", nargs="?", const="0 9 * * *", metavar="SCHEDULE",
                         help="配置每日编排 cron（默认 0 9 * * *）")
+    # v6.7.6: 负反馈告警清除
+    parser.add_argument("--clear-negative-feedback", metavar="ID",
+                        help="清除指定 proposal 的负反馈告警（需人工确认后使用）")
     # v6.7.5: 小型化 cron 框架 CLI
     parser.add_argument("--worker-step", metavar="ID",
                         help="worker 入口：执行指定 proposal 的下一个 pending checkpoint job")
@@ -2243,6 +2291,16 @@ def main(argv: Optional[List[str]] = None) -> int:
     if args.setup_cron is not None:
         result = lc.setup_optimization_cron(schedule=args.setup_cron)
         print(result.get("message", ""))
+        return 0 if result.get("success") else 1
+
+    if args.clear_negative_feedback:
+        result = lc.clear_negative_feedback(args.clear_negative_feedback, reason="人工确认后清除")
+        if result.get("success"):
+            print(f"✓ 已清除 {args.clear_negative_feedback} 的负反馈告警")
+            if result.get("cleared_at"):
+                print(f"  清除时间: {result['cleared_at']}")
+        else:
+            print(f"✗ 清除失败: {result.get('error', '')}")
         return 0 if result.get("success") else 1
 
     parser.print_help()

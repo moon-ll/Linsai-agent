@@ -10,6 +10,9 @@
  *   POST /api/lifecycle/{id}/optimize      执行一轮优化
  *   POST /api/lifecycle/{id}/feedback      提交人工反馈
  *   POST /api/lifecycle/cron-sweep         cron 扫描
+ *   GET  /api/lifecycle/agent-scores       writer/critic 奖惩分数
+ *   GET  /api/lifecycle/monitor/{id}       monitor 历史与负反馈状态
+ *   POST /api/lifecycle/{id}/clear-alert   清除负反馈告警
  */
 
 // ============================================
@@ -88,7 +91,13 @@ async function renderLifecycleDashboard() {
     html += `<button class="btn-text fs-072" style="color:var(--text-secondary);" onclick="lcShowJobs()">📋 查看 cron</button>`;
     html += `</div>`;
 
+    // v6.7.6: agent scores 概览（异步加载）
+    html += `<div id="lc-agent-scores" class="mb-12 fs-082 text-secondary">加载对抗评审分数...</div>`;
+
     container.innerHTML = html;
+
+    // 异步加载 agent scores
+    lcLoadAgentScores();
 
     // === 课题列表 ===
     await renderLifecycleList();
@@ -162,6 +171,34 @@ async function renderLifecycleList() {
 }
 
 // ============================================
+// v6.7.6: Agent Scores 概览
+// ============================================
+async function lcLoadAgentScores() {
+  const el = document.getElementById('lc-agent-scores');
+  if (!el) return;
+  try {
+    const result = await apiGet('/api/lifecycle/agent-scores');
+    if (result.status !== 'ok') throw new Error(result.error || '获取失败');
+    const scores = result.scores || {};
+    const writer = scores.writer || {};
+    const critic = scores.critic || {};
+    const wScore = writer.score ?? 100;
+    const cScore = critic.score ?? 100;
+    const wColor = wScore >= 100 ? 'var(--success-color)' : wScore >= 70 ? 'var(--warning-color)' : 'var(--error-color)';
+    const cColor = cScore >= 100 ? 'var(--success-color)' : cScore >= 70 ? 'var(--warning-color)' : 'var(--error-color)';
+    el.innerHTML = `
+      <div class="d-flex ai-center gap-12 pad-8 bg-secondary br-6">
+        <span class="fw-500">对抗评审分数</span>
+        <span>writer: <strong style="color:${wColor};">${wScore.toFixed(1)}</strong></span>
+        <span>critic: <strong style="color:${cColor};">${cScore.toFixed(1)}</strong></span>
+        <span class="text-tertiary">(${writer.history_count || 0} 轮记录)</span>
+      </div>`;
+  } catch (e) {
+    el.innerHTML = `<span class="text-tertiary">对抗评审分数加载失败：${escapeHtml(e.message)}</span>`;
+  }
+}
+
+// ============================================
 // 单个课题卡片
 // ============================================
 function renderProposalCard(p) {
@@ -175,9 +212,10 @@ function renderProposalCard(p) {
   const namePart = (p.proposal_id || '').split('-').slice(1, -1).join('-') || p.proposal_id;
 
   let actions = '';
-  // v6.7.5: optimizing 状态可查看 checkpoints
+  // v6.7.5: optimizing 状态可查看 checkpoints / monitor
   if (p.status === 'optimizing') {
     actions += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcToggleCheckpoints('${p.proposal_id}')">◐ checkpoints</button>`;
+    actions += `<button class="btn-text fs-072" style="color:var(--accent-color);" onclick="lcShowMonitor('${p.proposal_id}')">🔍 监察</button>`;
   }
   // 根据状态显示不同操作
   if (p.status === 'drafts') {
@@ -456,6 +494,80 @@ async function lcShowJobs() {
     }
     html += '</div>';
     await confirmModal(html, 'Lifecycle Cron Jobs', '关闭');
+  } catch (e) {
+    showToast(`✗ ${e.message}`, 'error');
+  }
+}
+
+// ============================================
+// v6.7.6: monitor 详情与负反馈告警
+// ============================================
+async function lcShowMonitor(proposalId) {
+  try {
+    const result = await apiGet(`/api/lifecycle/monitor/${proposalId}`);
+    if (result.status !== 'ok') throw new Error(result.error || '获取失败');
+
+    const alert = result.negative_feedback_alert;
+    const reasons = result.negative_feedback_reasons || [];
+    const history = result.monitor_history || [];
+
+    let html = `<div class="d-flex fd-col gap-8 fs-082" style="max-height:400px;overflow:auto;">`;
+
+    if (alert) {
+      html += `
+        <div class="pad-10 bg-error br-6" style="color:#fff;">
+          <div class="fw-600 mb-4">⚠️ 负反馈告警</div>
+          <ul class="ma-0 pl-16">
+            ${reasons.map(r => `<li>${escapeHtml(r)}</li>`).join('')}
+          </ul>
+          <button class="btn-text mt-8" style="color:#fff;text-decoration:underline;" onclick="lcClearAlert('${proposalId}')">清除告警（需人工确认）</button>
+        </div>`;
+    }
+
+    html += `<div class="fw-500">Monitor 历史（最近 ${history.length} 条）</div>`;
+    if (history.length === 0) {
+      html += '<div class="text-tertiary">暂无 monitor 记录</div>';
+    } else {
+      html += '<div class="d-flex fd-col gap-4">';
+      for (const h of history.slice().reverse()) {
+        const alertClass = h.negative_feedback ? 'text-error fw-600' : 'text-secondary';
+        html += `
+          <div class="pad-8 bg-tertiary br-4">
+            <div class="d-flex ai-center gap-8 ${alertClass}">
+              <span>r${h.round} · ${escapeHtml(h.section_key)}</span>
+              <span class="ml-auto">monitor ${(h.monitor_independent_score || 0).toFixed(2)}</span>
+            </div>
+            <div class="fs-072 text-tertiary mt-2">
+              writer Δ${h.writer_delta ?? 0} / critic Δ${h.critic_delta ?? 0}
+              · 本地 w${h.local_writer_score ?? 100} / c${h.local_critic_score ?? 100}
+              · 串通风险 ${h.collusion_risk || 'none'}
+            </div>
+            ${h.overall_assessment ? `<div class="fs-072 mt-2">${escapeHtml(h.overall_assessment)}</div>` : ''}
+          </div>`;
+      }
+      html += '</div>';
+    }
+
+    html += '</div>';
+    await confirmModal(html, `监察：${escapeHtml(proposalId)}`, '关闭');
+  } catch (e) {
+    showToast(`✗ ${e.message}`, 'error');
+  }
+}
+
+async function lcClearAlert(proposalId) {
+  const reason = await promptModal('请输入清除负反馈告警的原因（已确认问题已修复）：', '已人工检查，问题已修复');
+  if (reason === null) return;
+
+  try {
+    showToast('清除告警中...', 'info');
+    const result = await apiPost(`/api/lifecycle/${proposalId}/clear-alert`, { reason });
+    if (result.status === 'ok') {
+      showToast('✓ 负反馈告警已清除', 'success');
+      renderLifecycleDashboard();
+    } else {
+      throw new Error(result.error || '清除失败');
+    }
   } catch (e) {
     showToast(`✗ ${e.message}`, 'error');
   }
