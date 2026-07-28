@@ -1,12 +1,12 @@
 {
   "proposals": {
     "general-quantum-geometry-inversion-20260726": {
-      "status": "optimizing",
+      "status": "pending_review",
       "project_type": "general",
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-07-27T13:41:12Z",
+      "updated_at": "2026-07-28T02:49:04Z",
       "optimization_rounds": 1,
       "last_score": 0.58,
       "score_history": [
@@ -51,6 +51,12 @@
           "to": "optimizing",
           "at": "2026-07-27T13:41:12Z",
           "reason": "从 hermes workspace 导入内容后激活全自动优化"
+        },
+        {
+          "from": "optimizing",
+          "to": "pending_review",
+          "at": "2026-07-27T14:19:03Z",
+          "reason": "连续3轮无显著提升（已通过0/4模块）"
         }
       ],
       "last_dim_scores": {
@@ -64,12 +70,12 @@
       }
     },
     "key-transient-quantum-phase-optical-20260726": {
-      "status": "optimizing",
+      "status": "pending_review",
       "project_type": "key",
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-27T12:39:11Z",
+      "updated_at": "2026-07-28T02:49:04Z",
       "optimization_rounds": 2,
       "last_score": 0.54,
       "score_history": [
@@ -118,6 +124,12 @@
           "to": "optimizing",
           "at": "2026-07-26T15:12:19Z",
           "reason": "批量确认思路可行，进入优化"
+        },
+        {
+          "from": "optimizing",
+          "to": "pending_review",
+          "at": "2026-07-27T14:37:07Z",
+          "reason": "连续3轮无显著提升（已通过0/4模块）"
         }
       ],
       "assigned_agent": "writer+critic",
@@ -140,9 +152,9 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-27T12:39:11Z",
-      "optimization_rounds": 1,
-      "last_score": 0.31,
+      "updated_at": "2026-07-28T02:49:04Z",
+      "optimization_rounds": 5,
+      "last_score": 0.4,
       "score_history": [
         {
           "round": 1,
@@ -159,6 +171,70 @@
           "issues_count": 6,
           "high_issues": 5,
           "at": "2026-07-27T10:34:02Z"
+        },
+        {
+          "round": 2,
+          "score": 0.34,
+          "dim_scores": {
+            "innovation": 0.5,
+            "feasibility": 0.45,
+            "rigor": 0.35,
+            "completeness": 0.2
+          },
+          "weakest_dim": "completeness",
+          "focus_section": "content",
+          "section_passed": false,
+          "issues_count": 13,
+          "high_issues": 3,
+          "at": "2026-07-27T14:41:39Z"
+        },
+        {
+          "round": 3,
+          "score": 0.55,
+          "dim_scores": {
+            "innovation": 0.65,
+            "feasibility": 0.55,
+            "rigor": 0.55,
+            "completeness": 0.35
+          },
+          "weakest_dim": "completeness",
+          "focus_section": "method",
+          "section_passed": false,
+          "issues_count": 23,
+          "high_issues": 10,
+          "at": "2026-07-27T14:45:56Z"
+        },
+        {
+          "round": 4,
+          "score": 0.52,
+          "dim_scores": {
+            "innovation": 0.62,
+            "feasibility": 0.5,
+            "rigor": 0.45,
+            "completeness": 0.3
+          },
+          "weakest_dim": "completeness",
+          "focus_section": "full_review",
+          "section_passed": false,
+          "issues_count": 19,
+          "high_issues": 8,
+          "at": "2026-07-27T14:50:08Z"
+        },
+        {
+          "round": 5,
+          "score": 0.4,
+          "dim_scores": {
+            "innovation": 0.55,
+            "feasibility": 0.3,
+            "rigor": 0.3,
+            "completeness": 0.2
+          },
+          "weakest_dim": "completeness",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 13,
+          "high_issues": 6,
+          "at": "2026-07-27T14:57:17Z"
         }
       ],
       "human_feedback_count": 0,
@@ -181,11 +257,14 @@
       "last_dim_scores": {
         "innovation": 0.55,
         "feasibility": 0.3,
-        "rigor": 0.25,
-        "completeness": 0.15
+        "rigor": 0.3,
+        "completeness": 0.2
       },
       "section_passes": {
-        "rationale": false
+        "rationale": false,
+        "content": false,
+        "method": false,
+        "full_review": false
       }
     },
     "general-bsv-driven-hhg-quantum-20260726": {
@@ -194,9 +273,9 @@
       "source": "expansion",
       "source_detail": "候选4：量子光场驱动的HHG，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-27T12:39:11Z",
-      "optimization_rounds": 1,
-      "last_score": 0.06,
+      "updated_at": "2026-07-28T02:49:04Z",
+      "optimization_rounds": 4,
+      "last_score": 0.71,
       "score_history": [
         {
           "round": 1,
@@ -213,6 +292,54 @@
           "issues_count": 12,
           "high_issues": 5,
           "at": "2026-07-27T10:28:48Z"
+        },
+        {
+          "round": 2,
+          "score": 0.48,
+          "dim_scores": {
+            "innovation": 0.55,
+            "feasibility": 0.45,
+            "rigor": 0.5,
+            "completeness": 0.4
+          },
+          "weakest_dim": "completeness",
+          "focus_section": "method",
+          "section_passed": false,
+          "issues_count": 23,
+          "high_issues": 12,
+          "at": "2026-07-27T15:09:27Z"
+        },
+        {
+          "round": 3,
+          "score": 0.63,
+          "dim_scores": {
+            "innovation": 0.7,
+            "feasibility": 0.6,
+            "rigor": 0.6,
+            "completeness": 0.55
+          },
+          "weakest_dim": "completeness",
+          "focus_section": "method",
+          "section_passed": false,
+          "issues_count": 21,
+          "high_issues": 8,
+          "at": "2026-07-27T15:13:20Z"
+        },
+        {
+          "round": 4,
+          "score": 0.71,
+          "dim_scores": {
+            "innovation": 0.75,
+            "feasibility": 0.68,
+            "rigor": 0.65,
+            "completeness": 0.72
+          },
+          "weakest_dim": "rigor",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 99,
+          "high_issues": 29,
+          "at": "2026-07-27T15:26:55Z"
         }
       ],
       "human_feedback_count": 0,
@@ -233,26 +360,80 @@
       "writer_profile": "writer",
       "critic_profile": "critic",
       "last_dim_scores": {
-        "innovation": 0.0,
-        "feasibility": 0.1,
-        "rigor": 0.05,
-        "completeness": 0.05
+        "innovation": 0.75,
+        "feasibility": 0.68,
+        "rigor": 0.65,
+        "completeness": 0.72
       },
       "section_passes": {
-        "rationale": false
+        "rationale": false,
+        "method": false
       }
     },
     "general-order-parameter-ultrafast-readout-20260727": {
-      "status": "optimizing",
+      "status": "pending_review",
       "project_type": "general",
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-07-27T13:41:12Z",
-      "optimization_rounds": 0,
-      "last_score": 0.0,
-      "score_history": [],
-      "section_passes": {},
+      "updated_at": "2026-07-28T02:49:04Z",
+      "optimization_rounds": 3,
+      "last_score": 0.42,
+      "score_history": [
+        {
+          "round": 1,
+          "score": 0.72,
+          "dim_scores": {
+            "innovation": 0.82,
+            "feasibility": 0.65,
+            "rigor": 0.62,
+            "completeness": 0.78
+          },
+          "weakest_dim": "rigor",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 18,
+          "high_issues": 5,
+          "at": "2026-07-27T15:36:59Z"
+        },
+        {
+          "round": 2,
+          "score": 0.68,
+          "dim_scores": {
+            "innovation": 0.78,
+            "feasibility": 0.55,
+            "rigor": 0.58,
+            "completeness": 0.65
+          },
+          "weakest_dim": "feasibility",
+          "focus_section": "content",
+          "section_passed": false,
+          "issues_count": 19,
+          "high_issues": 8,
+          "at": "2026-07-27T15:40:02Z"
+        },
+        {
+          "round": 3,
+          "score": 0.42,
+          "dim_scores": {
+            "innovation": 0.65,
+            "feasibility": 0.3,
+            "rigor": 0.4,
+            "completeness": 0.25
+          },
+          "weakest_dim": "completeness",
+          "focus_section": "method",
+          "section_passed": false,
+          "issues_count": 22,
+          "high_issues": 8,
+          "at": "2026-07-27T15:49:41Z"
+        }
+      ],
+      "section_passes": {
+        "rationale": false,
+        "content": false,
+        "method": false
+      },
       "human_feedback_count": 0,
       "transition_history": [
         {
@@ -265,9 +446,21 @@
           "to": "optimizing",
           "at": "2026-07-27T13:41:12Z",
           "reason": "从 hermes workspace 导入内容后激活全自动优化"
+        },
+        {
+          "from": "optimizing",
+          "to": "pending_review",
+          "at": "2026-07-27T16:00:21Z",
+          "reason": "连续3轮无显著提升（已通过0/4模块）"
         }
-      ]
+      ],
+      "last_dim_scores": {
+        "innovation": 0.65,
+        "feasibility": 0.3,
+        "rigor": 0.4,
+        "completeness": 0.25
+      }
     }
   },
-  "updated_at": "2026-07-27T13:41:12Z"
+  "updated_at": "2026-07-28T02:49:04Z"
 }

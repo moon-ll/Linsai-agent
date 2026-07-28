@@ -67,7 +67,7 @@ LinSai-CoPilot/
 ├── AGENTS.md                  # 本文件。AI 代理必读指南
 ├── README.md                  # 人类可读的项目说明
 ├── CHANGELOG.md               # 变更记录
-├── VERSION                    # 版本号唯一真相源（当前 6.7.3）
+├── VERSION                    # 版本号唯一真相源（当前 6.7.4）
 ├── .env                       # 本地 API 密钥（gitignore，不提交）
 ├── .gitignore                 # Git 忽略规则：用户数据、自动生成文件、敏感配置
 │
@@ -639,7 +639,7 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 
 ### 版本号规范
 
-- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.7.3`）。
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.7.4`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -650,7 +650,7 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 ```bash
 git init
 git add .
-git commit -m "v6.7.3 初始版本"
+git commit -m "v6.7.4 初始版本"
 ```
 
 - 用户数据（`sessions/`、`memory/`、`tasks/`、`references/`）已被 `.gitignore` 排除，不会意外提交。
@@ -708,7 +708,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.7.3*
-*日期：2026-07-27*
+*版本：6.7.4*
+*日期：2026-07-28*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

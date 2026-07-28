@@ -807,6 +807,25 @@ class ProposalLifecycle:
                 f"success={critic_result.get('success')} elapsed={elapsed}s"
             )
 
+        # v6.7.4 修复：critic 失败/超时（如 elapsed=300s success=False）时不应计入一轮，
+        # 否则 lifecycle 的 optimization_rounds 与实际 critic 报告文件脱节，导致一致性检查失败。
+        if not critic_result.get("success"):
+            err = critic_result.get("error", "unknown")
+            if _log:
+                _log.warning(
+                    f"[{proposal_id}] 对抗轮 {current_round + 1}: critic 失败（{err[:80]}），"
+                    f"不计入本轮，跳过 writer"
+                )
+            return {
+                "success": False,
+                "round": current_round + 1,
+                "score_before": score_before,
+                "score_after": score_before,
+                "score_delta": 0.0,
+                "error": err,
+                "reason": "critic 失败，未修改状态",
+            }
+
         # 预解析维度分数，供 writer 聚焦（P0-2）
         pre_dims = self._extract_dimension_scores(critic_result)
         pre_weakest = self._get_weakest_dimension(pre_dims)

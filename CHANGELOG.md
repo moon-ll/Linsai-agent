@@ -1,5 +1,24 @@
 # 变更记录
 
+## v6.7.4 - 2026-07-28 修复 critic 超时导致 lifecycle 状态污染
+
+### 问题根因
+- `proposal_lifecycle.optimize_cycle()` 中，critic profile 默认 300s 超时；超时返回 `success=False` 后，代码**未检查**该状态，继续执行 writer 并递增 `optimization_rounds`、写入 `score_history`（score=0）。
+- 结果：`_lifecycle.json` 记录轮次/分数与实际 `05_review/critic-round-*.md` 文件严重脱节，一致性检查出现 `round_mismatch` / `score_lost` / `round_gap` 等 9 处不一致。
+
+### 修复内容
+- `scripts/proposal_lifecycle.py`：在 critic 返回 `success=False` 时提前返回，**不递增轮次、不写 score_history、不调用 writer**，避免状态污染。
+- 使用 `scripts/rebuild_lifecycle.py --normalize-rounds` 重建 `_lifecycle.json` 并规范化 critic 文件编号：
+  - `general-quantum-geometry-inversion-20260726`: rounds 4→1, last_score 0.0→0.58
+  - `key-transient-quantum-phase-optical-20260726`: rounds 5→2, last_score 0.0→0.54
+  - `general-bsv-driven-hhg-quantum-20260726`: rounds 5→4, last_score 0.71→0.71
+  - `general-order-parameter-ultrafast-readout-20260727`: rounds 4→3, last_score 0.0→0.42
+
+### 验证结果
+- `python3 -m py_compile scripts/*.py` 通过
+- `python3 scripts/self_test.py --module` 116/116 通过
+- `orchestrator.check_lifecycle_consistency()`: inconsistent_count=0
+
 ## v6.7.3 - 2026-07-27 导入 hermes workspace 课题雏形并激活全自动链路
 
 ### 新增内容
