@@ -3,7 +3,7 @@
 
 支持:
     - CLI 后端: claude, kimi
-    - HTTP API 后端: OpenAI 兼容格式 (MiniMax, Kimi/Moonshot, DeepSeek, Groq, Azure, GLM 等)
+    - HTTP API 后端: OpenAI 兼容格式 (MiniMax, Kimi coding plan, DeepSeek, Groq, Azure, GLM 等)
 
 配置优先级（高优先覆盖低优先）:
     1. 环境变量（os.environ）
@@ -46,6 +46,7 @@ _SCRIPT_DIR = Path(__file__).parent.resolve()
 _PROJECT_ROOT = _SCRIPT_DIR.parent.resolve()
 _CONFIG_PATH = _PROJECT_ROOT / "memory" / "llm-config.json"
 _ENV_PATH = _PROJECT_ROOT / ".env"
+_HERMES_ENV_PATH = Path.home() / ".hermes" / ".env"
 
 
 # ---------------------------------------------------------------------------
@@ -66,6 +67,12 @@ def _load_env_file(path: Path) -> Dict[str, str]:
                 k, v = line.split("=", 1)
                 result[k.strip()] = v.strip().strip('"').strip("'")
     return result
+
+
+def _load_hermes_env_key(key: str) -> Optional[str]:
+    """从 hermes 的 .env 读取指定 key（作为项目 .env 的兜底）。"""
+    hermes_env = _load_env_file(_HERMES_ENV_PATH)
+    return hermes_env.get(key)
 
 
 def _strip_think_tags(text: str) -> str:
@@ -162,7 +169,7 @@ def _build_config() -> Dict[str, Any]:
             })
 
     # 4. 如果环境变量中有其他 OpenAI 兼容配置，自动添加
-    # GLM 默认 priority=3（与 kimi-api 同级，排在 minimax 之后）
+    # GLM 默认 priority=3（与 kimi-coding 同级，排在 minimax 之后）
     for prefix in ["OPENAI", "DEEPSEEK", "GROQ", "AZURE", "GLM"]:
         key = env_vars.get(f"{prefix}_API_KEY")
         if key:
@@ -179,17 +186,19 @@ def _build_config() -> Dict[str, Any]:
                     "priority": env_vars.get(f"{prefix}_PRIORITY", default_prio),
                 })
 
-    # 5. 如果环境变量中有 Kimi API 配置（Moonshot Coding Plan），自动添加
-    #    注意与本地 kimi CLI 区分，API provider 命名为 kimi-api
-    if env_vars.get("KIMI_API_KEY"):
-        has_kimi_api = any(p.get("name") == "kimi-api" for p in config["providers"])
-        if not has_kimi_api:
+    # 5. 如果环境变量中有 Kimi coding plan 配置，自动添加
+    #    hermes 中 provider 名为 kimi-coding，base_url=https://api.kimi.com/coding
+    #    优先读项目 .env/os.environ 的 KIMI_API_KEY，找不到则兜底读 ~/.hermes/.env
+    kimi_api_key = env_vars.get("KIMI_API_KEY") or _load_hermes_env_key("KIMI_API_KEY")
+    if kimi_api_key:
+        has_kimi_coding = any(p.get("name") == "kimi-coding" for p in config["providers"])
+        if not has_kimi_coding:
             config["providers"].append({
-                "name": "kimi-api",
+                "name": "kimi-coding",
                 "type": "api",
-                "base_url": env_vars.get("KIMI_BASE_URL", "https://api.moonshot.cn/v1"),
-                "api_key": env_vars["KIMI_API_KEY"],
-                "model": env_vars.get("KIMI_MODEL", "kimi-k2-7-code"),
+                "base_url": env_vars.get("KIMI_BASE_URL", "https://api.kimi.com/coding"),
+                "api_key": kimi_api_key,
+                "model": env_vars.get("KIMI_MODEL", "kimi-k2.7-code"),
                 "priority": env_vars.get("KIMI_PRIORITY", "3"),
             })
 
