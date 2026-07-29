@@ -455,19 +455,17 @@ def run_kb_health_check() -> Dict[str, Any]:
 
 
 def run_weekly_output(dry_run: bool = False) -> Dict[str, Any]:
-    """周末输出入口：归档萃取 + 日常萃取 + 健康检查。"""
-    _ensure_dirs()
-    _log_info("开始周末知识输出")
+    """周末输出入口：归档萃取 + 日常萃取 + 健康检查。
 
-    archive_result = process_archived_proposals(dry_run=dry_run)
-    daily_result = process_daily_sources(dry_run=dry_run)
-    health_result = run_kb_health_check() if not dry_run else {"dry_run": True}
-
+    v6.7.7: 委托给 WeekendPipeline 的 output 阶段，保留旧函数签名以兼容 CLI/Web。
+    """
+    from weekend_pipeline import WeekendPipeline
+    pipeline = WeekendPipeline()
+    pipeline.sync_stage_jobs("output")
+    result = pipeline.run_stage("output", dry_run=dry_run)
     return {
-        "success": True,
-        "archive": archive_result,
-        "daily": daily_result,
-        "health": health_result,
+        "success": result.get("success", True),
+        "pipeline_result": result,
         "at": now_utc(),
     }
 

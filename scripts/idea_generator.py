@@ -493,51 +493,24 @@ def add_expansion_candidate(idea: Dict[str, Any], target_id: str, dry_run: bool 
 
 
 def run_auto_idea_generation(dry_run: bool = False, max_ideas: int = 3) -> Dict[str, Any]:
-    """周末自动研究设想生成入口。"""
-    _ensure_dirs()
-    _log_info("开始周末自动研究设想生成")
+    """周末自动研究设想生成入口。
 
-    materials = collect_source_materials(days=7)
-    gaps = identify_gaps(materials)
-    ideas = generate_research_ideas(materials, gaps)
+    v6.7.7: 委托给 WeekendPipeline 的 input 阶段，保留旧函数签名以兼容 CLI/Web。
+    """
+    from weekend_pipeline import WeekendPipeline
+    pipeline = WeekendPipeline()
+    pipeline.sync_stage_jobs("input")
+    result = pipeline.run_stage("input", dry_run=dry_run)
 
-    if not ideas:
-        _log_info("未生成新研究设想")
-        return {"success": True, "ideas_count": 0, "actions": []}
-
-    proposals = _load_existing_proposals()
-
-    actions = []
-    date_str = now_utc()[:10]
-    for idea in ideas[:max_ideas]:
-        comparisons = compare_with_existing(idea, proposals)
-        decision = decide_action(idea, comparisons)
-
-        if decision["action"] == "new":
-            result = register_new_idea(idea, dry_run=dry_run)
-        elif decision["action"] == "merge":
-            result = merge_into_existing(idea, decision["target_id"], dry_run=dry_run)
-        else:
-            result = add_expansion_candidate(idea, decision["target_id"], dry_run=dry_run)
-
-        actions.append({
-            "idea_title": idea.get("title"),
-            "decision": decision,
-            "result": result,
-            "top_comparisons": comparisons[:3],
-        })
-
-        # 如果注册了新 proposal，更新 proposals 列表以便后续 idea 能对比
-        if result.get("proposal_id") and not dry_run:
-            proposals = _load_existing_proposals()
-
-    # 保存 ideas 摘要
-    if not dry_run:
-        ideas_file = INCOMING_DIR / f"ideas-{date_str}.json"
-        save_json(ideas_file, {"generated_at": now_utc(), "ideas": ideas, "actions": actions})
-        _write_weekly_review(date_str, ideas, actions)
-
-    return {"success": True, "ideas_count": len(ideas), "actions": actions}
+    # 兼容旧返回结构
+    ideas_file = INCOMING_DIR / f"ideas-{now_utc()[:10]}.json"
+    ideas_data = load_json(ideas_file, default={"actions": []}) if ideas_file.exists() else {"actions": []}
+    return {
+        "success": result.get("success", True),
+        "ideas_count": len(ideas_data.get("actions", [])),
+        "actions": ideas_data.get("actions", []),
+        "pipeline_result": result,
+    }
 
 
 def _write_weekly_review(date_str: str, ideas: List[Dict[str, Any]], actions: List[Dict[str, Any]]) -> None:

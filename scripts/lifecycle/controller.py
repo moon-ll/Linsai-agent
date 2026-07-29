@@ -124,6 +124,12 @@ cd {project}
 python3 scripts/weekend_orchestrator.py --reflection
 """.format(project=project)
 
+        weekend_worker = """#!/bin/bash
+set -e
+cd {project}
+python3 scripts/weekend_pipeline.py --run-next
+""".format(project=project)
+
         return {
             "orchestrate": _write_wrapper_script("lc_orchestrate.sh", orchestrate),
             "repair": _write_wrapper_script("lc_repair.sh", repair),
@@ -131,6 +137,7 @@ python3 scripts/weekend_orchestrator.py --reflection
             "weekend_input": _write_wrapper_script("lc_weekend_input.sh", weekend_input),
             "weekend_output": _write_wrapper_script("lc_weekend_output.sh", weekend_output),
             "weekend_reflection": _write_wrapper_script("lc_weekend_reflection.sh", weekend_reflection),
+            "weekend_worker": _write_wrapper_script("lc_weekend_worker.sh", weekend_worker),
         }
 
     def _worker_script_for_proposal(self, proposal_id: str) -> Path:

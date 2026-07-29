@@ -20,6 +20,9 @@ from .constants import (
 )
 from .utils import _is_stale, _is_weekend, _load_weekend_jobs, _make_job_id, _save_weekend_jobs, _section_for_round
 
+from weekend_pipeline.state import load_pipeline_state, save_pipeline_state
+from weekend_pipeline.executor import repair_stale_and_failed as repair_weekend_pipeline
+
 try:
     from logger import get_logger
     _log = get_logger("lifecycle_cron")
@@ -255,7 +258,25 @@ def _run_weekend_repair(
     if not dry_run:
         _save_weekend_jobs(weekend_jobs)
 
-    return {"success": True, "dry_run": dry_run, "mode": "weekend", "repaired": repaired, "at": now_utc()}
+    # v6.7.7: 同时扫描 weekend-pipeline.json 的 checkpoint job
+    pipeline_repaired = []
+    try:
+        pipeline_state = load_pipeline_state()
+        pipeline_repaired = repair_weekend_pipeline(pipeline_state)
+        if not dry_run:
+            save_pipeline_state(pipeline_state)
+    except Exception as e:
+        if _log:
+            _log.warning(f"扫描 weekend-pipeline.json 失败: {e}")
+
+    return {
+        "success": True,
+        "dry_run": dry_run,
+        "mode": "weekend",
+        "repaired": repaired,
+        "pipeline_repaired": pipeline_repaired,
+        "at": now_utc(),
+    }
 
 def run_health_check(self) -> Dict[str, Any]:
     """委托给 ProposalLifecycle 的健康检查。"""

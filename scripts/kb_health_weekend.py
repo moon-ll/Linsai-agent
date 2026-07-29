@@ -115,10 +115,14 @@ def _summarize_unverified() -> Dict[str, Any]:
 
 
 def run_weekend_kb_health(apply: bool = False) -> Dict[str, Any]:
-    """周末知识库健康检查入口。"""
+    """周末知识库健康检查入口。
+
+    v6.7.7: 基础检查仍复用 knowledge_output.run_kb_health_check（与 WeekendPipeline
+    output 阶段的 output_kb_health_check 共用同一实现），深度检查保留为本文件的独立 wrapper。
+    """
     _log_info("开始周末知识库深度健康检查")
 
-    # 基础健康检查
+    # 基础健康检查（与 WeekendPipeline output 阶段 health job 共用逻辑）
     base_health = run_kb_health_check()
 
     # 深度检查

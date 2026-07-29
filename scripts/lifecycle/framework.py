@@ -22,6 +22,10 @@ from .constants import (
     WEEKEND_JOB_REFLECTION,
     WEEKEND_JOBS,
 )
+from weekend_pipeline.constants import (
+    DEFAULT_WORKER_SCHEDULE as WEEKEND_DEFAULT_WORKER_SCHEDULE,
+    WEEKEND_WORKER_CRON_NAME,
+)
 from .utils import _load_weekend_jobs, _save_weekend_jobs, _write_wrapper_script
 
 try:
@@ -131,6 +135,16 @@ def setup_weekend_crontab(
             profile=HERMES_PROFILE,
         )
         created.append({"job": job_key, "cron": cron_name, "result": res})
+
+    # 新增 weekend worker：每 20 分钟执行一个 pending job
+    worker_res = hb.cron_create_no_agent(
+        script_name="lc_weekend_worker.sh",
+        name=WEEKEND_WORKER_CRON_NAME,
+        schedule=WEEKEND_DEFAULT_WORKER_SCHEDULE,
+        workdir=str(PROJECT_ROOT),
+        profile=HERMES_PROFILE,
+    )
+    created.append({"job": "weekend_worker", "cron": WEEKEND_WORKER_CRON_NAME, "result": worker_res})
 
     return {"success": True, "created": created}
 

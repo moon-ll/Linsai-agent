@@ -123,6 +123,34 @@
 - **kimi CLI 命令格式错误**：`llm_router.py` 使用 `kimi -c <prompt>`，但 `-c` 在 kimi CLI 中表示"继续上回会话"，应使用 `-p <prompt> --output-format text`。
 - **修复结果**：`idea_generator.py --auto --dry-run` 从"生成 0 个设想/解析失败"变为稳定生成 2 个结构化研究设想；`kimi` CLI 单独调用正常返回。
 
+### v6.7.7 周末任务流水线重构
+- **目标**：将大而全的周末任务（`idea_generator --auto`、`knowledge_output --weekly`、`kb_health_weekend`、`weekend_orchestrator --reflection`）拆分为可独立执行、可失败重试、可依赖 Knowledge Base 的小 checkpoint job。
+- **新增 `scripts/weekend_pipeline/` 包**：
+  - `constants.py`：任务状态、阶段、默认路径、可靠性标签。
+  - `state.py`：加载/保存 `memory/weekend-pipeline.json`，记录 `processed_sources`，提供 job 查找/更新 helper。
+  - `jobs.py`：定义 input/output/reflection 三阶段的 job 模板与依赖图。
+  - `sources.py`：统一收集简报、论文池、captures、参考笔记，并通过 `knowledge_base.list_wiki_pages()`/`search()` 拉取现有 concepts/methods/papers。
+  - `pipeline.py`：`WeekendPipeline` 类，提供 `sync_stage_jobs()`、`run_next()`、`run_stage()`、`repair()`。
+  - `executor.py`：`pick_next_job()`、job 执行、stale/failed 检测与重试。
+  - `input_jobs.py` / `output_jobs.py` / `reflection_jobs.py`：各阶段 job 的具体实现，每个 LLM 调用拆成独立 job。
+  - `cli.py` / `scripts/weekend_pipeline.py`：CLI 入口 `--stage/--ensure-jobs/--run-next/--run-all/--list/--repair`。
+- **向后兼容**：
+  - `idea_generator.py --auto` 委托给 WeekendPipeline input 阶段，`--manual` 保留原行为。
+  - `knowledge_output.py --weekly` 委托给 WeekendPipeline output 阶段，`--archive/--daily/--health` 保留原行为。
+  - `weekend_orchestrator.py --input/--output/--reflection/--weekly` 调用 `WeekendPipeline` 对应阶段。
+  - `kb_health_weekend.py` 保留独立 deep-health wrapper，复用 `knowledge_output.run_kb_health_check` 作为基础检查。
+- **生命周期 cron 集成**：
+  - `lifecycle/controller.py` 新增 `lc_weekend_worker.sh` 包装脚本，执行 `python3 scripts/weekend_pipeline.py --run-next`。
+  - `lifecycle/framework.py` `setup_weekend_crontab()` 保留 input/output/reflection 入口 cron，并新增 `lc-weekend-worker`（`*/20 * * * 6,0`）。
+  - `lifecycle/orchestrator.py` `_run_weekend_repair()` 扩展为同时扫描 `memory/weekend-pipeline.json`，处理 stale running 与 failed job 重试。
+- **Knowledge Base 联动**：
+  - 来源收集阶段读取 KB concepts/methods/papers，避免重复处理。
+  - `input_retrieve_supplementary` 优先 `knowledge_base.search()` 检索，复用已有 paper 页面。
+  - `input_direction_select` 读取 `knowledge/wiki/projects/NSFC-强场超快/proposals/*.md` 与现有课题对比。
+  - `output_sync_proposals_to_kb` 调用 `proposal_kb_sync` 同步全部 proposal。
+  - `output_extract_daily_knowledge` 调用 `knowledge_base.check_similar_concepts()`，相似则追加而非新建。
+- **验证**：`python3 -m py_compile scripts/weekend_pipeline/*.py` 通过；`python3 scripts/self_test.py --module` 全量通过（198/198）；`python3 scripts/weekend_pipeline.py --stage input --dry-run --ensure-jobs` 可正确创建 input job；`python3 scripts/proposal_lifecycle.py --repair` 对 weekday proposals 仍正常工作。
+
 ### 已知限制
 - 自动输入端依赖 `llm_gateway` 可用性；若 LLM 连续失败，当次周末输入可能为空。
 - 前端 `weekend.js` 尚未实现，当前通过 CLI / API 管理周末任务。

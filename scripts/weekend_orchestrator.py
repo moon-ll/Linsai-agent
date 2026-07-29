@@ -90,11 +90,16 @@ def _update_job_status(job_key: str, status: str, error: str = "") -> None:
 
 
 def run_input_task(dry_run: bool = False) -> Dict[str, Any]:
-    """运行周末输入任务。"""
-    from idea_generator import run_auto_idea_generation
+    """运行周末输入任务。
+
+    v6.7.7: 委托给 WeekendPipeline input 阶段，同时保持 weekend-jobs.json 状态兼容。
+    """
+    from weekend_pipeline import WeekendPipeline
+    pipeline = WeekendPipeline()
     _update_job_status(WEEKEND_JOB_INPUT, JOB_STATUS_RUNNING)
     try:
-        result = run_auto_idea_generation(dry_run=dry_run)
+        pipeline.sync_stage_jobs("input")
+        result = pipeline.run_stage("input", dry_run=dry_run)
         _update_job_status(WEEKEND_JOB_INPUT, JOB_STATUS_DONE)
         return result
     except Exception as e:
@@ -104,11 +109,16 @@ def run_input_task(dry_run: bool = False) -> Dict[str, Any]:
 
 
 def run_output_task(dry_run: bool = False) -> Dict[str, Any]:
-    """运行周末输出任务。"""
-    from knowledge_output import run_weekly_output
+    """运行周末输出任务。
+
+    v6.7.7: 委托给 WeekendPipeline output 阶段，同时保持 weekend-jobs.json 状态兼容。
+    """
+    from weekend_pipeline import WeekendPipeline
+    pipeline = WeekendPipeline()
     _update_job_status(WEEKEND_JOB_OUTPUT, JOB_STATUS_RUNNING)
     try:
-        result = run_weekly_output(dry_run=dry_run)
+        pipeline.sync_stage_jobs("output")
+        result = pipeline.run_stage("output", dry_run=dry_run)
         _update_job_status(WEEKEND_JOB_OUTPUT, JOB_STATUS_DONE)
         return result
     except Exception as e:
@@ -118,49 +128,18 @@ def run_output_task(dry_run: bool = False) -> Dict[str, Any]:
 
 
 def run_reflection_task(dry_run: bool = False) -> Dict[str, Any]:
-    """运行周末反思任务。"""
+    """运行周末反思任务。
+
+    v6.7.7: 委托给 WeekendPipeline reflection 阶段，同时保持 weekend-jobs.json 状态兼容。
+    """
+    from weekend_pipeline import WeekendPipeline
+    pipeline = WeekendPipeline()
     _update_job_status(WEEKEND_JOB_REFLECTION, JOB_STATUS_RUNNING)
     try:
-        from proposal_lifecycle import ProposalLifecycle
-        from orchestrator import compute_dashboard
-        from failure_analyzer import analyze_failures
-        from strategy_optimizer import suggest_strategies
-
-        lc = ProposalLifecycle()
-
-        # 1. 仪表盘
-        dashboard = compute_dashboard()
-
-        # 2. 失败模式聚类
-        failures = analyze_failures(window_hours=168)
-
-        # 3. 策略建议
-        strategies = suggest_strategies(window_hours=168)
-
-        # 4. 各 proposal 进度
-        progress = lc.list_by_status()
-
-        report = {
-            "generated_at": now_utc(),
-            "dashboard": dashboard,
-            "failure_patterns": failures,
-            "strategy_suggestions": strategies,
-            "proposal_progress": progress,
-            "next_actions": [
-                "查看 dashboard 中的红色告警",
-                "review pending_review 课题",
-                "确认 expansion-candidates.json 中的扩展建议",
-                "检查 weekend-jobs.json 是否有 failed 任务",
-            ],
-        }
-
-        report_path = PROJECT_ROOT / "memory" / f"weekend-reflection-{now_utc()[:10]}.json"
-        report_path.parent.mkdir(parents=True, exist_ok=True)
-        save_json(report_path, report)
-
+        pipeline.sync_stage_jobs("reflection")
+        result = pipeline.run_stage("reflection", dry_run=dry_run)
         _update_job_status(WEEKEND_JOB_REFLECTION, JOB_STATUS_DONE)
-        _log_info("周末反思任务完成")
-        return {"success": True, "report_path": str(report_path.relative_to(PROJECT_ROOT)), "report": report}
+        return result
     except Exception as e:
         _update_job_status(WEEKEND_JOB_REFLECTION, JOB_STATUS_FAILED, str(e))
         _log_warn(f"周末反思任务失败: {e}")
