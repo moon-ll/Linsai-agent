@@ -186,6 +186,20 @@ def _build_config() -> Dict[str, Any]:
                     "priority": env_vars.get(f"{prefix}_PRIORITY", default_prio),
                 })
 
+    # 4.5 GLM 降级模型（例如 GLM-5.1 作为 GLM-5.2 fallback），与主力共用同一 API Key / base_url
+    glm_key = env_vars.get("GLM_API_KEY")
+    glm_fallback_model = env_vars.get("GLM_FALLBACK_MODEL")
+    has_glm_fallback = any(p.get("name") == "glm-fallback" for p in config["providers"])
+    if glm_key and glm_fallback_model and not has_glm_fallback:
+        config["providers"].append({
+            "name": "glm-fallback",
+            "type": "api",
+            "base_url": env_vars.get("GLM_BASE_URL", "https://open.bigmodel.cn/api/coding/paas/v4"),
+            "api_key": glm_key,
+            "model": glm_fallback_model,
+            "priority": env_vars.get("GLM_FALLBACK_PRIORITY", "4"),
+        })
+
     # 5. 如果环境变量中有 Kimi coding plan 配置，自动添加
     #    hermes 中 provider 名为 kimi-coding，base_url=https://api.kimi.com/coding
     #    优先读项目 .env/os.environ 的 KIMI_API_KEY，找不到则兜底读 ~/.hermes/.env

@@ -128,6 +128,7 @@
   - 默认 base_url：`https://api.kimi.com/coding`（从 hermes `credential_pool` 读取到的实际 endpoint，不是 `api.moonshot.cn`）。
   - 默认 priority：`3`（与 GLM 同级备选，排在 MiniMax 之后）。
   - API Key 读取：优先取项目 `.env` / `os.environ` 的 `KIMI_API_KEY`，未找到时兜底读取 `~/.hermes/.env` 中的 `KIMI_API_KEY`，避免重复配置。
+- **GLM 模型升级 + fallback**：项目 `.env` 中 `GLM_MODEL` 从 `GLM-5.1` 改为 `GLM-5.2`，并新增 `GLM_FALLBACK_MODEL=GLM-5.1`；`llm_router.py` 新增 `glm-fallback` provider（priority 4），在 GLM-5.2 失败时自动降级到 GLM-5.1。
 - **修复结果**：`idea_generator.py --auto --dry-run` 从"生成 0 个设想/解析失败"变为稳定生成 2 个结构化研究设想；`kimi` CLI 单独调用正常返回。
 
 ### v6.7.7 周末任务流水线重构
