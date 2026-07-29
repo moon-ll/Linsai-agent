@@ -226,16 +226,20 @@ def hermes_subprocess_env(extra: Optional[dict] = None, env_path: Optional[Path]
     """
     from paths import PROJECT_ROOT
 
-    env = dict(os.environ)
     if env_path is None:
         env_path = PROJECT_ROOT / ".env"
-    env.update(load_env_file(env_path))
 
-    zai_key = env.get("ZAI_API_KEY") or env.get("GLM_API_KEY") or env.get("Z_AI_API_KEY")
+    # 合并 .env 变量与显式 extra，确保 cron 等无 shell 环境也能读到 API Key
+    merged_extra: Dict[str, str] = {}
+    merged_extra.update(load_env_file(env_path))
+    if extra:
+        merged_extra.update(extra)
+
+    zai_key = merged_extra.get("ZAI_API_KEY") or merged_extra.get("GLM_API_KEY") or merged_extra.get("Z_AI_API_KEY")
     if zai_key:
-        env["ZAI_API_KEY"] = zai_key
+        merged_extra["ZAI_API_KEY"] = zai_key
 
-    return clean_subprocess_env(extra=extra)
+    return clean_subprocess_env(extra=merged_extra)
 
 
 def copy_file(src: Path | str, dst: Path | str, overwrite: bool = False) -> bool:
