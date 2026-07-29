@@ -6,9 +6,9 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-07-28T12:34:48Z",
-      "optimization_rounds": 1,
-      "last_score": 0.58,
+      "updated_at": "2026-07-29T03:47:52Z",
+      "optimization_rounds": 4,
+      "last_score": 0.78,
       "score_history": [
         {
           "round": 1,
@@ -25,6 +25,49 @@
           "issues_count": 12,
           "high_issues": 4,
           "at": "2026-07-27T05:48:14Z"
+        },
+        {
+          "round": 2,
+          "score": 0.66,
+          "dim_scores": {
+            "innovation": 0.78,
+            "feasibility": 0.68,
+            "rigor": 0.7,
+            "completeness": 0.78
+          },
+          "weakest_dim": "feasibility",
+          "focus_section": "content",
+          "section_passed": false,
+          "issues_count": 47,
+          "high_issues": 14,
+          "at": "2026-07-28T16:55:19Z"
+        },
+        {
+          "round": 3,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "method",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-28T19:50:56Z"
+        },
+        {
+          "round": 4,
+          "score": 0.78,
+          "dim_scores": {
+            "innovation": 0.85,
+            "feasibility": 0.72,
+            "rigor": 0.78,
+            "completeness": 0.78
+          },
+          "weakest_dim": "feasibility",
+          "focus_section": "full_review",
+          "section_passed": false,
+          "issues_count": 15,
+          "high_issues": 4,
+          "at": "2026-07-28T22:52:24Z"
         }
       ],
       "human_feedback_count": 0,
@@ -66,13 +109,16 @@
         }
       ],
       "last_dim_scores": {
-        "innovation": 0.78,
-        "feasibility": 0.45,
-        "rigor": 0.55,
-        "completeness": 0.65
+        "innovation": 0.85,
+        "feasibility": 0.72,
+        "rigor": 0.78,
+        "completeness": 0.78
       },
       "section_passes": {
-        "rationale": false
+        "rationale": false,
+        "content": false,
+        "method": false,
+        "full_review": false
       },
       "pipeline_jobs": [
         {
@@ -96,14 +142,14 @@
           "step": "researcher",
           "section_key": "content",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r2-content-critic"
           ],
-          "attempts": 0,
+          "attempts": 1,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-28T15:47:24Z",
+          "finished_at": "2026-07-28T15:47:37Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -113,15 +159,15 @@
           "step": "writer",
           "section_key": "content",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r2-content-critic",
             "general-quantum-geometry-inversion-20260726-r2-content-researcher"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-28T16:47:33Z",
+          "finished_at": "2026-07-28T16:55:19Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -131,9 +177,156 @@
           "step": "monitor",
           "section_key": "content",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r2-content-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-28T17:47:42Z",
+          "finished_at": "2026-07-28T17:49:50Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-method-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "method",
+          "round": 3,
+          "status": "done",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-28T18:47:52Z",
+          "finished_at": "2026-07-28T18:53:12Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-method-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "method",
+          "round": 3,
+          "status": "done",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-method-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-28T19:47:01Z",
+          "finished_at": "2026-07-28T19:50:56Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-method-monitor",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "monitor",
+          "section_key": "method",
+          "round": 3,
+          "status": "done",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-method-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-28T20:47:10Z",
+          "finished_at": "2026-07-28T20:48:53Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r4-full_review-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "full_review",
+          "round": 4,
+          "status": "done",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-28T21:47:19Z",
+          "finished_at": "2026-07-28T21:52:57Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r4-full_review-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "full_review",
+          "round": 4,
+          "status": "done",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r4-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-28T22:47:28Z",
+          "finished_at": "2026-07-28T22:52:24Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r4-full_review-monitor",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "monitor",
+          "section_key": "full_review",
+          "round": 4,
+          "status": "done",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r4-full_review-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-28T23:47:38Z",
+          "finished_at": "2026-07-28T23:52:30Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r5-rationale-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "rationale",
+          "round": 5,
+          "status": "pending",
+          "depends_on": [],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r5-rationale-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "rationale",
+          "round": 5,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r5-rationale-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r5-rationale-monitor",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "monitor",
+          "section_key": "rationale",
+          "round": 5,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r5-rationale-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -143,7 +336,84 @@
           "cron_job_id": ""
         }
       ],
-      "worker_minute": 47
+      "worker_minute": 47,
+      "monitor_history": [
+        {
+          "round": 2,
+          "section_key": "content",
+          "proposal_score_before": 0.58,
+          "proposal_score_after": 0.66,
+          "monitor_independent_score": 0.7,
+          "writer_delta": 3.2,
+          "critic_delta": 8.4,
+          "local_writer_score": 103.2,
+          "local_critic_score": 108.4,
+          "writer_prohibitions": [],
+          "critic_prohibitions": [],
+          "collusion_risk": "none",
+          "negative_feedback": false,
+          "overall_assessment": "本轮 writer-critic 对抗质量较高：\n- writer 不是表面修改（占位符、模板句、删 critic 评论），而是在 §2.1/2.2/2.3/2.4/2.5 五处做了实质性论证收紧——具体表现为：5 行数学推导主线、Sala 2025 验证声明、双源正向模型重构、4 参数截止公式、R3/R3' 分层策略、ALM 迭代 + f-sum rule 分级阈值 + PINN 边际价值论证；\n- critic 评审未放水：本轮新发现 2 critical + 7 high + 11 medium + 3 low，且 critical 中的 R2 物理自洽性与 Sala 2025 引文一致性是真正的方法学级问题，不是吹毛求疵；\n- 评分一致性：critic 综合 0.66 与本 monitor 独立评估 0.70 接近（差距源于我对 §2.4 R3/R3' 分层策略化解 timeline 倒挂给予略高可行性分），4 维评分方向一致（创新性 ≈ 0.78、可行性 0.68-0.70、严谨性 0.68-0.70、完整性 0.74-0.78）；\n- 距离 NSFC 面上项目 min_ov",
+          "high_issues_after": 14,
+          "at": "2026-07-28T17:49:50Z"
+        },
+        {
+          "round": 3,
+          "section_key": "method",
+          "proposal_score_before": 0.66,
+          "proposal_score_after": 0.0,
+          "monitor_independent_score": 0.75,
+          "writer_delta": 17.0,
+          "critic_delta": 5.88,
+          "local_writer_score": 120.2,
+          "local_critic_score": 114.28,
+          "writer_prohibitions": [
+            "surface_change"
+          ],
+          "critic_prohibitions": [
+            "critic 评分 0.00 与申请书实际质量（聚焦章节 §3 在 r5 已成熟稳定，质量约 0.75）严重脱节——若该评分真实存在且无报告内容支撑，则属于评分失真/无依据评分。critic 必须为每一项评分提供可核对的报告内容，0.00 评分需要列出'全文所有维度均不达标'的具体证据，单纯给一个数字不符合评审规范。"
+          ],
+          "collusion_risk": "none",
+          "negative_feedback": true,
+          "overall_assessment": "本轮 writer-critic 对抗存在严重的流程异常：(1) critic-round-3.md 报告文件缺失，无法核对'综合 0.00'评分的具体依据；(2) writer 修改前 vs 修改后两份申请书字节完全相同，意味着 writer 本轮未对 §3 做任何修改，与 critic '应触发新一轮优化'的工作流矛盾；(3) '0.66 → 0.00'的骤降与申请书实际质量（聚焦章节 §3 评分约 0.75）严重脱节。综合判断：本轮对抗流程不成立。独立评分基于申请书实际内容给出：综合 0.75（4 维度：创新 0.78 / 可行 0.78 / 严谨 0.72 / 完整 0.78），聚焦章节 §3 在 r5 优化后已达到 NSFC general 标准的较高水位（接近 min_overall_score=0.80 阈值），但仍残留 2 个 critic-round-2 标记的 critical 问题（R2 sin/cos 数学自洽性、Sala 2025 引文真实性）通过'前置 Go/No-Go'和'联网核实声明'做降级处理未根本解决。建议：(a) 补全 critic-round-3",
+          "high_issues_after": 2,
+          "at": "2026-07-28T20:48:53Z"
+        },
+        {
+          "round": 4,
+          "section_key": "full_review",
+          "proposal_score_before": 0.0,
+          "proposal_score_after": 0.78,
+          "monitor_independent_score": 0.56,
+          "writer_delta": -12.9,
+          "critic_delta": -12.9,
+          "local_writer_score": 107.3,
+          "local_critic_score": 101.38,
+          "writer_prohibitions": [
+            "未经证据支持地补写合作团队、共同发表、设备基础和预研数据",
+            "保留具体姓名占位符、内部[CITE]标签、回应评审措辞及优化日志",
+            "将部分修订或未修改事项宣称为“全部修复”",
+            "采用未经核验的物理术语替换和错误量子态公式",
+            "提交预算超限或训练成本算术互相矛盾的方案",
+            "使用未经人工核实的生成式AI内容作为申请书事实"
+          ],
+          "critic_prohibitions": [
+            "将相位匹配极化类型与频率简并性混为一谈并据此给出强制改写",
+            "在未读取最新原始文献的情况下认可或否定关键引文",
+            "遗漏可直接计算验证的数学矛盾和跨章节直接冲突",
+            "问题数量、维度体系和综合分数计算前后不一致",
+            "在仍有重大事实与可行性问题时给出接近达标的虚高评分"
+          ],
+          "collusion_risk": "medium",
+          "negative_feedback": true,
+          "overall_assessment": "本轮存在真实修改，但只是部分回应，且新增内容引入了预算超限、GPU成本算术矛盾、合作信息占位/疑似杜撰及BSV量子态错误等更严重问题。当前稿不符合general项目“创新性+扎实基础、小切口深挖掘、三段式且人工核实”的标准：正文仍按六大章展开、创新点达到4项、任务横跨量子光源、固体HHG、拓扑绝缘体、CDW、tdDMFT和PINN，范围仍偏大。writer与critic之间没有直接串通证据，但writer几乎照单全收critic的错误BSV建议，critic又对明显未解决和新引入的问题给出偏高评价，形成了相互强化的放水信号，因此风险评为medium而非直接认定串通。提交前至少应完成独立文献核验、删除无法举证的合作与预研声明、重算预算和训练成本、修正双模/单模量子态描述、统一1.5 μm物理定位、补齐R3'路线，并将正文重组为2026要求的三段式。",
+          "high_issues_after": 3,
+          "at": "2026-07-28T23:52:30Z"
+        }
+      ],
+      "negative_feedback_alert": false,
+      "last_monitor_at": "2026-07-28T23:52:30Z",
+      "last_monitor_score": 0.56,
+      "last_monitor_assessment": "本轮存在真实修改，但只是部分回应，且新增内容引入了预算超限、GPU成本算术矛盾、合作信息占位/疑似杜撰及BSV量子态错误等更严重问题。当前稿不符合general项目“创新性+扎实基础、小切口深挖掘、三段式且人工核实”的标准：正文仍按六大章展开、创新点达到4项、任务横跨量子光源、固体HHG、拓扑绝缘体、CDW、tdDMFT和PINN，范围仍偏大。writer与critic之间没有直接串通证据，但writer几乎照单全收critic的错误BSV建议，critic又对明显未解决和新引入的问题给出偏高评价，形成了相互强化的放水信号，因此风险评为medium而非直接认定串通。提交前至少应完成独立文献核验"
     },
     "key-transient-quantum-phase-optical-20260726": {
       "status": "optimizing",
@@ -151,9 +421,9 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-28T10:54:22Z",
+      "updated_at": "2026-07-29T04:00:14Z",
       "optimization_rounds": 2,
-      "last_score": 0.54,
+      "last_score": 0.71,
       "score_history": [
         {
           "round": 1,
@@ -186,6 +456,22 @@
           "issues_count": 13,
           "high_issues": 5,
           "at": "2026-07-27T10:46:27Z"
+        },
+        {
+          "round": 3,
+          "score": 0.71,
+          "dim_scores": {
+            "innovation": 0.78,
+            "feasibility": 0.72,
+            "rigor": 0.68,
+            "completeness": 0.65
+          },
+          "weakest_dim": "completeness",
+          "focus_section": "method",
+          "section_passed": false,
+          "issues_count": 30,
+          "high_issues": 12,
+          "at": "2026-07-28T14:59:51Z"
         }
       ],
       "human_feedback_count": 0,
@@ -218,10 +504,10 @@
       "writer_profile": "writer",
       "critic_profile": "critic",
       "last_dim_scores": {
-        "innovation": 0.82,
-        "feasibility": 0.4,
-        "rigor": 0.6,
-        "completeness": 0.35
+        "innovation": 0.78,
+        "feasibility": 0.72,
+        "rigor": 0.68,
+        "completeness": 0.65
       },
       "section_passes": {
         "rationale": false,
@@ -234,12 +520,29 @@
           "step": "critic",
           "section_key": "method",
           "round": 3,
-          "status": "pending",
+          "status": "done",
           "depends_on": [],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-28T13:17:00Z",
+          "finished_at": "2026-07-28T13:20:59Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r3-method-researcher",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "researcher",
+          "section_key": "method",
+          "round": 3,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r3-method-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-28T13:59:08Z",
+          "finished_at": "2026-07-28T13:59:51Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -249,14 +552,15 @@
           "step": "writer",
           "section_key": "method",
           "round": 3,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
-            "key-transient-quantum-phase-optical-20260726-r3-method-critic"
+            "key-transient-quantum-phase-optical-20260726-r3-method-critic",
+            "key-transient-quantum-phase-optical-20260726-r3-method-researcher"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-28T14:59:16Z",
+          "finished_at": "2026-07-28T14:59:51Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -270,7 +574,7 @@
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r3-method-writer"
           ],
-          "attempts": 0,
+          "attempts": 1,
           "scheduled_at": "",
           "started_at": "",
           "finished_at": "",
@@ -278,17 +582,23 @@
           "cron_job_id": ""
         }
       ],
-      "worker_minute": 59
+      "worker_minute": 59,
+      "cron_failures": [
+        {
+          "at": "2026-07-29T03:46:56Z",
+          "error": "key-transient-quantum-phase-optical-20260726-r3-method-monitor: hermes -z: agent failed: No usable credentials found for provider 'zai'. Set GLM_API_KEY, ZAI_API_KEY, Z_AI_API_KEY.\n"
+        }
+      ]
     },
     "general-moire-strong-field-probe-20260726": {
-      "status": "optimizing",
+      "status": "pending_review",
       "project_type": "general",
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-28T10:54:22Z",
-      "optimization_rounds": 5,
-      "last_score": 0.4,
+      "updated_at": "2026-07-29T03:55:43Z",
+      "optimization_rounds": 6,
+      "last_score": 0.35,
       "score_history": [
         {
           "round": 1,
@@ -369,6 +679,22 @@
           "issues_count": 13,
           "high_issues": 6,
           "at": "2026-07-27T14:57:17Z"
+        },
+        {
+          "round": 6,
+          "score": 0.35,
+          "dim_scores": {
+            "innovation": 0.5,
+            "feasibility": 0.3,
+            "rigor": 0.25,
+            "completeness": 0.2
+          },
+          "weakest_dim": "completeness",
+          "focus_section": "content",
+          "section_passed": false,
+          "issues_count": 17,
+          "high_issues": 7,
+          "at": "2026-07-28T17:01:52Z"
         }
       ],
       "human_feedback_count": 0,
@@ -383,15 +709,21 @@
           "to": "optimizing",
           "at": "2026-07-26T15:12:19Z",
           "reason": "批量确认思路可行，进入优化"
+        },
+        {
+          "from": "optimizing",
+          "to": "pending_review",
+          "at": "2026-07-29T03:55:43Z",
+          "reason": "连续3轮无显著提升（已通过0/4模块）"
         }
       ],
       "assigned_agent": "writer+critic",
       "writer_profile": "writer",
       "critic_profile": "critic",
       "last_dim_scores": {
-        "innovation": 0.55,
+        "innovation": 0.5,
         "feasibility": 0.3,
-        "rigor": 0.3,
+        "rigor": 0.25,
         "completeness": 0.2
       },
       "section_passes": {
@@ -407,12 +739,29 @@
           "step": "critic",
           "section_key": "content",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "2026-07-28T14:53:16Z",
+          "finished_at": "2026-07-28T14:53:41Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-content-researcher",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "researcher",
+          "section_key": "content",
+          "round": 6,
+          "status": "done",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-content-critic"
+          ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-28T15:53:25Z",
+          "finished_at": "2026-07-28T15:54:06Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -422,14 +771,15 @@
           "step": "writer",
           "section_key": "content",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
-            "general-moire-strong-field-probe-20260726-r6-content-critic"
+            "general-moire-strong-field-probe-20260726-r6-content-critic",
+            "general-moire-strong-field-probe-20260726-r6-content-researcher"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-28T16:55:19Z",
+          "finished_at": "2026-07-28T17:01:52Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -439,19 +789,55 @@
           "step": "monitor",
           "section_key": "content",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r6-content-writer"
           ],
-          "attempts": 0,
+          "attempts": 2,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-29T03:53:14Z",
+          "finished_at": "2026-07-29T03:55:43Z",
           "last_error": "",
           "cron_job_id": ""
         }
       ],
-      "worker_minute": 53
+      "worker_minute": 53,
+      "monitor_history": [
+        {
+          "round": 6,
+          "section_key": "content",
+          "proposal_score_before": 0.4,
+          "proposal_score_after": 0.35,
+          "monitor_independent_score": 0.46,
+          "writer_delta": 5.6,
+          "critic_delta": 7.95,
+          "local_writer_score": 105.6,
+          "local_critic_score": 107.95,
+          "writer_prohibitions": [
+            "[critical] 不得把研究内容的特色与创新点、年度研究计划、预期成果继续放在（三）研究方案的3.6-3.8下；应重构为（二）研究内容的2.3-2.5，或明确采用项目实际模板允许的自主结构并保持章节语义一致。",
+            "[high] 必须将所有[CITE:...]占位符替换为经过人工核实的完整参考文献，核对作者、题名、期刊、年份及文献是否真正支持对应断言。",
+            "[high] 必须补写立项依据正文和研究基础，当前申请书仍不满足general项目“创新性+扎实基础”的核心要求。",
+            "[medium] 统一关键指标：2.1/2.2中的扭转角分辨率±0.05度与3.6中±0.02度必须给出统一口径或解释不同验证阶段。",
+            "[medium] 校正4年时间轴：启动日期为2026-07-26时，应说明年度计划为何从2027年1月开始，或按实际四年期给出完整区间。"
+          ],
+          "critic_prohibitions": [
+            "[critical] 不得继续以r5的文件状态代替当前draft进行评审；必须先核对当前文件内容和版本差异。",
+            "[high] 不得把已补写的2.1和2.2继续报告为“§二整章0行”；该事实判断已被当前文件直接否定。",
+            "[high] 必须区分“修改前缺失”与“修改后仍未满足结构要求”，不能把writer已完成的实质改动全部计为无改善。",
+            "[medium] 应检查当前稿中的引用占位符、数值冲突、章节归属和研究基础缺失，而不应重复堆叠同一条“整章空缺”问题。",
+            "[medium] 应依据general标准的实际结构说明问题；不能把critic报告中自行扩展的固定五小节要求当作唯一依据而忽略标准文件的“自主撰写”表述。"
+          ],
+          "collusion_risk": "none",
+          "negative_feedback": true,
+          "overall_assessment": "本轮存在真实且幅度较大的writer改进，但申请书尚未达到NSFC面上项目可提交质量。writer已解决“研究目标和研究内容完全为空”的最直接缺陷，却通过将2.3-2.5放入3.6-3.8留下结构性问题，并且立项依据、研究基础和引用核验仍是硬伤。critic的核心问题意识基本可信，但本轮报告明显评审了修改前版本，属于版本核对失效，不能作为当前稿的有效评分依据。综合判断不存在writer-critic串通证据：writer确有实质增量，critic也并非放水，而是发生了严重的评审对象错配。当前应判定为“部分修复，必须继续修改”，而非通过。",
+          "high_issues_after": 12,
+          "at": "2026-07-29T03:55:43Z"
+        }
+      ],
+      "negative_feedback_alert": false,
+      "last_monitor_at": "2026-07-29T03:55:43Z",
+      "last_monitor_score": 0.46,
+      "last_monitor_assessment": "本轮存在真实且幅度较大的writer改进，但申请书尚未达到NSFC面上项目可提交质量。writer已解决“研究目标和研究内容完全为空”的最直接缺陷，却通过将2.3-2.5放入3.6-3.8留下结构性问题，并且立项依据、研究基础和引用核验仍是硬伤。critic的核心问题意识基本可信，但本轮报告明显评审了修改前版本，属于版本核对失效，不能作为当前稿的有效评分依据。综合判断不存在writer-critic串通证据：writer确有实质增量，critic也并非放水，而是发生了严重的评审对象错配。当前应判定为“部分修复，必须继续修改”，而非通过。"
     },
     "general-bsv-driven-hhg-quantum-20260726": {
       "status": "optimizing",
@@ -459,9 +845,9 @@
       "source": "expansion",
       "source_detail": "候选4：量子光场驱动的HHG，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-28T12:30:18Z",
-      "optimization_rounds": 4,
-      "last_score": 0.71,
+      "updated_at": "2026-07-29T04:17:00Z",
+      "optimization_rounds": 5,
+      "last_score": 0.72,
       "score_history": [
         {
           "round": 1,
@@ -526,6 +912,22 @@
           "issues_count": 99,
           "high_issues": 29,
           "at": "2026-07-27T15:26:55Z"
+        },
+        {
+          "round": 5,
+          "score": 0.72,
+          "dim_scores": {
+            "innovation": 0.74,
+            "feasibility": 0.66,
+            "rigor": 0.66,
+            "completeness": 0.75
+          },
+          "weakest_dim": "feasibility",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 57,
+          "high_issues": 19,
+          "at": "2026-07-28T15:23:51Z"
         }
       ],
       "human_feedback_count": 0,
@@ -546,10 +948,10 @@
       "writer_profile": "writer",
       "critic_profile": "critic",
       "last_dim_scores": {
-        "innovation": 0.75,
-        "feasibility": 0.68,
-        "rigor": 0.65,
-        "completeness": 0.72
+        "innovation": 0.74,
+        "feasibility": 0.66,
+        "rigor": 0.66,
+        "completeness": 0.75
       },
       "section_passes": {
         "rationale": false,
@@ -577,14 +979,14 @@
           "step": "researcher",
           "section_key": "rationale",
           "round": 5,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r5-rationale-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-28T13:29:36Z",
+          "finished_at": "2026-07-28T13:40:39Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -594,15 +996,15 @@
           "step": "writer",
           "section_key": "rationale",
           "round": 5,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r5-rationale-critic",
             "general-bsv-driven-hhg-quantum-20260726-r5-rationale-researcher"
           ],
-          "attempts": 0,
+          "attempts": 1,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-28T15:23:20Z",
+          "finished_at": "2026-07-28T15:23:51Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -612,9 +1014,58 @@
           "step": "monitor",
           "section_key": "rationale",
           "round": 5,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r5-rationale-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-29T04:14:35Z",
+          "finished_at": "2026-07-29T04:17:00Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r6-content-critic",
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "step": "critic",
+          "section_key": "content",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r6-content-writer",
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "step": "writer",
+          "section_key": "content",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-bsv-driven-hhg-quantum-20260726-r6-content-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r6-content-monitor",
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "step": "monitor",
+          "section_key": "content",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-bsv-driven-hhg-quantum-20260726-r6-content-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -624,7 +1075,49 @@
           "cron_job_id": ""
         }
       ],
-      "worker_minute": 23
+      "worker_minute": 23,
+      "cron_failures": [
+        {
+          "at": "2026-07-29T04:14:22Z",
+          "error": "general-bsv-driven-hhg-quantum-20260726-r5-rationale-monitor: hermes -z: agent failed: No usable credentials found for provider 'zai'. Set GLM_API_KEY, ZAI_API_KEY, Z_AI_API_KEY.\n"
+        }
+      ],
+      "monitor_history": [
+        {
+          "round": 5,
+          "section_key": "rationale",
+          "proposal_score_before": 0.71,
+          "proposal_score_after": 0.72,
+          "monitor_independent_score": 0.64,
+          "writer_delta": 3.3,
+          "critic_delta": 1.0,
+          "local_writer_score": 103.3,
+          "local_critic_score": 101.0,
+          "writer_prohibitions": [
+            "仅修改标题、元数据或分隔线，未修改本轮聚焦章节，却作为一轮修订提交",
+            "保留已明确指出的 Q_F 经典极限物理矛盾",
+            "保留“国内几乎空白”“填补国内空白”“首次系统化”等未经检索或文献核实的强断言",
+            "保留引用信息不完整且未核实来源内容的表述",
+            "立项依据承诺反演量子相变，而后文章节又明确声明不作该承诺，形成跨章节冲突"
+          ],
+          "critic_prohibitions": [
+            "将同一根因重复拆分并多次计数，造成问题数量和严重性膨胀",
+            "把合理的探索性措辞机械要求改成确定性承诺",
+            "将探针与参数扫描或控制的并存未经条件分析直接判为物理冲突",
+            "把未经原始文献验证的 BSV 定义、光子数量级和物理解释写成确定事实",
+            "综合分 0.712 错误四舍五入为 0.72，并给出与大量 critical/high 问题不匹配的偏高评分"
+          ],
+          "collusion_risk": "none",
+          "negative_feedback": true,
+          "overall_assessment": "本轮不是有效的 writer-critic 对抗：critic 提供了大量意见，其中包含若干真实硬伤，也夹杂重复计数和过度批评；writer 随后完全没有修改立项依据正文，只做了格式和元数据调整。独立评分为 0.64，低于 NSFC 面上项目 0.80 门槛，也低于 critic 的 0.72。未发现双方放水串通的证据，因为 critic 总体上相当严厉；更符合“writer 修订链路失效或未执行”的系统性非响应。下一轮必须先修复 Q_F 定义与经典极限、经典光 HHG 多体能力口径、TMDC 分类、量子相变承诺冲突和未经核实的创新性断言，再重新进行独立评审。",
+          "high_issues_after": 5,
+          "at": "2026-07-29T04:17:00Z"
+        }
+      ],
+      "negative_feedback_alert": false,
+      "last_monitor_at": "2026-07-29T04:17:00Z",
+      "last_monitor_score": 0.64,
+      "last_monitor_assessment": "本轮不是有效的 writer-critic 对抗：critic 提供了大量意见，其中包含若干真实硬伤，也夹杂重复计数和过度批评；writer 随后完全没有修改立项依据正文，只做了格式和元数据调整。独立评分为 0.64，低于 NSFC 面上项目 0.80 门槛，也低于 critic 的 0.72。未发现双方放水串通的证据，因为 critic 总体上相当严厉；更符合“writer 修订链路失效或未执行”的系统性非响应。下一轮必须先修复 Q_F 定义与经典极限、经典光 HHG 多体能力口径、TMDC 分类、量子相变承诺冲突和未经核实的创新性断言，再重新进行独立评审。"
     },
     "general-order-parameter-ultrafast-readout-20260727": {
       "status": "optimizing",
@@ -632,9 +1125,9 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-07-28T12:22:54Z",
-      "optimization_rounds": 3,
-      "last_score": 0.42,
+      "updated_at": "2026-07-29T04:17:17Z",
+      "optimization_rounds": 4,
+      "last_score": 0.0,
       "score_history": [
         {
           "round": 1,
@@ -683,12 +1176,40 @@
           "issues_count": 22,
           "high_issues": 8,
           "at": "2026-07-27T15:49:41Z"
+        },
+        {
+          "round": 4,
+          "score": 0.45,
+          "dim_scores": {
+            "innovation": 0.65,
+            "feasibility": 0.3,
+            "rigor": 0.4,
+            "completeness": 0.35
+          },
+          "weakest_dim": "feasibility",
+          "focus_section": "full_review",
+          "section_passed": false,
+          "issues_count": 24,
+          "high_issues": 7,
+          "at": "2026-07-28T14:17:28Z"
+        },
+        {
+          "round": 5,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-28T22:29:42Z"
         }
       ],
       "section_passes": {
         "rationale": false,
         "content": false,
-        "method": false
+        "method": false,
+        "full_review": false
       },
       "human_feedback_count": 0,
       "transition_history": [
@@ -716,12 +1237,7 @@
           "reason": ""
         }
       ],
-      "last_dim_scores": {
-        "innovation": 0.65,
-        "feasibility": 0.3,
-        "rigor": 0.4,
-        "completeness": 0.25
-      },
+      "last_dim_scores": {},
       "pipeline_jobs": [
         {
           "job_id": "general-order-parameter-ultrafast-readout-20260727-r4-full_review-critic",
@@ -744,14 +1260,14 @@
           "step": "researcher",
           "section_key": "full_review",
           "round": 4,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r4-full_review-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-28T13:20:59Z",
+          "finished_at": "2026-07-28T13:29:36Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -761,15 +1277,15 @@
           "step": "writer",
           "section_key": "full_review",
           "round": 4,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r4-full_review-critic",
             "general-order-parameter-ultrafast-readout-20260727-r4-full_review-researcher"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-28T14:17:11Z",
+          "finished_at": "2026-07-28T14:17:28Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -779,20 +1295,95 @@
           "step": "monitor",
           "section_key": "full_review",
           "round": 4,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r4-full_review-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
+          "started_at": "2026-07-28T15:17:19Z",
+          "finished_at": "2026-07-28T15:17:46Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-rationale-critic",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "critic",
+          "section_key": "rationale",
+          "round": 5,
+          "status": "done",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-28T16:17:29Z",
+          "finished_at": "2026-07-28T16:21:11Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-rationale-writer",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "writer",
+          "section_key": "rationale",
+          "round": 5,
+          "status": "done",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r5-rationale-critic"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "2026-07-28T22:17:24Z",
+          "finished_at": "2026-07-28T22:29:42Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-rationale-monitor",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "monitor",
+          "section_key": "rationale",
+          "round": 5,
+          "status": "running",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r5-rationale-writer"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "2026-07-29T04:17:17Z",
           "finished_at": "",
           "last_error": "",
           "cron_job_id": ""
         }
       ],
-      "worker_minute": 17
+      "worker_minute": 17,
+      "monitor_history": [
+        {
+          "round": 4,
+          "section_key": "full_review",
+          "proposal_score_before": 0.42,
+          "proposal_score_after": 0.45,
+          "monitor_independent_score": 0.0,
+          "writer_delta": -13.4,
+          "critic_delta": -13.0,
+          "local_writer_score": 86.6,
+          "local_critic_score": 87.0,
+          "writer_prohibitions": [
+            "surface_change"
+          ],
+          "critic_prohibitions": [],
+          "collusion_risk": "none",
+          "negative_feedback": false,
+          "overall_assessment": "",
+          "high_issues_after": 0,
+          "at": "2026-07-28T15:17:46Z"
+        }
+      ],
+      "negative_feedback_alert": false,
+      "last_monitor_at": "2026-07-28T15:17:46Z",
+      "last_monitor_score": 0.0,
+      "last_monitor_assessment": ""
     }
   },
-  "updated_at": "2026-07-28T12:34:48Z"
+  "updated_at": "2026-07-29T04:17:17Z"
 }
