@@ -225,9 +225,11 @@ function renderProposalCard(p) {
   const namePart = (p.proposal_id || '').split('-').slice(1, -1).join('-') || p.proposal_id;
 
   let actions = '';
+  // v6.7.8: 查看课题详情（申请书正文 + 反馈 + 操作）
+  actions += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcViewDetail('${p.proposal_id}')">👁 查看详情</button>`;
   // v6.7.5: optimizing 状态可查看 checkpoints / monitor
   if (p.status === 'optimizing') {
-    actions += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcToggleCheckpoints('${p.proposal_id}')">◐ checkpoints</button>`;
+    actions += `<button class="btn-text fs-072" style="color:var(--accent-color);" onclick="lcToggleCheckpoints('${p.proposal_id}')">◐ checkpoints</button>`;
     actions += `<button class="btn-text fs-072" style="color:var(--accent-color);" onclick="lcShowMonitor('${p.proposal_id}')">🔍 监察</button>`;
   }
   // 根据状态显示不同操作
@@ -259,6 +261,21 @@ function renderProposalCard(p) {
       </div>
       <div id="lc-checkpoints-${p.proposal_id}" class="d-none mt-6 fs-072 text-secondary"></div>
     </div>`;
+}
+
+// ============================================
+// v6.7.8: 查看课题详情（打开研究管线申请书面板）
+// ============================================
+function lcViewDetail(proposalId) {
+  if (typeof openPipelineManager === 'function') {
+    openPipelineManager(proposalId);
+    // 切换到申请书标签页
+    if (window.Pipeline && typeof window.Pipeline.switchTo === 'function') {
+      setTimeout(() => window.Pipeline.switchTo('proposal'), 50);
+    }
+  } else {
+    showToast('研究管线模块未加载', 'error');
+  }
 }
 
 // ============================================

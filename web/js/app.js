@@ -542,6 +542,15 @@ async function init() {
         if (typeof initHermesWorkspace === 'function') initHermesWorkspace();
         return;
       }
+      // v6.7.8: 研究管线是模态面板，不是页面
+      if (view === 'pipeline') {
+        if (typeof openPipelineManager === 'function') {
+          openPipelineManager();
+        } else {
+          showToast('研究管线模块未加载', 'error');
+        }
+        return;
+      }
       switchToView(view);
     });
   });

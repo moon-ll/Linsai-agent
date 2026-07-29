@@ -131,6 +131,12 @@
 - **GLM 模型升级 + fallback**：项目 `.env` 中 `GLM_MODEL` 从 `GLM-5.1` 改为 `GLM-5.2`，并新增 `GLM_FALLBACK_MODEL=GLM-5.1`；`llm_router.py` 新增 `glm-fallback` provider（priority 4），在 GLM-5.2 失败时自动降级到 GLM-5.1。
 - **修复结果**：`idea_generator.py --auto --dry-run` 从"生成 0 个设想/解析失败"变为稳定生成 2 个结构化研究设想；`kimi` CLI 单独调用正常返回。
 
+### v6.7.8 前端操作台增强（Phase 1：课题可读）
+- **问题**：课题生命周期页面只能看到课题名称和分数，无法阅读申请书正文；研究管线 `pipeline.js` 功能完整但缺少前端入口，处于悬空状态。
+- **新增研究管线导航入口**：`web/index.html` 左侧导航新增"🧭 研究管线"按钮；`web/js/app.js` 点击该按钮直接打开研究管线模态面板。
+- **课题卡片新增"查看详情"**：`web/js/lifecycle.js` 每个课题卡片增加"👁 查看详情"按钮，点击后打开研究管线面板并自动切换到"申请书"标签页，可直接阅读各章节 Markdown 正文，也支持"编辑本章"和"导出申请书"。
+- **验证**：`python3 scripts/self_test.py --module` 198/198 通过；`python3 scripts/self_test.py --web-ci` 252/252 通过。
+
 ### v6.7.7 周末任务流水线重构
 - **目标**：将大而全的周末任务（`idea_generator --auto`、`knowledge_output --weekly`、`kb_health_weekend`、`weekend_orchestrator --reflection`）拆分为可独立执行、可失败重试、可依赖 Knowledge Base 的小 checkpoint job。
 - **新增 `scripts/weekend_pipeline/` 包**：
