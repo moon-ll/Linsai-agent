@@ -162,7 +162,7 @@ def _build_config() -> Dict[str, Any]:
             })
 
     # 4. 如果环境变量中有其他 OpenAI 兼容配置，自动添加
-    # GLM 默认 priority=3（备选，排在 minimax/kimi 之后）
+    # GLM 默认 priority=3（与 kimi-api 同级，排在 minimax 之后）
     for prefix in ["OPENAI", "DEEPSEEK", "GROQ", "AZURE", "GLM"]:
         key = env_vars.get(f"{prefix}_API_KEY")
         if key:
@@ -189,8 +189,8 @@ def _build_config() -> Dict[str, Any]:
                 "type": "api",
                 "base_url": env_vars.get("KIMI_BASE_URL", "https://api.moonshot.cn/v1"),
                 "api_key": env_vars["KIMI_API_KEY"],
-                "model": env_vars.get("KIMI_MODEL", "kimi-k2"),
-                "priority": env_vars.get("KIMI_PRIORITY", "2"),
+                "model": env_vars.get("KIMI_MODEL", "kimi-k2-7-code"),
+                "priority": env_vars.get("KIMI_PRIORITY", "3"),
             })
 
     # 6. 自动检测本地 CLI（始终执行，与 API provider 无关）
