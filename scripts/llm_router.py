@@ -393,11 +393,15 @@ class LLMRouter:
             else:
                 provider = self._get_provider(target_name)
             if provider and self._is_available(provider):
+                if _log:
+                    _log.info(f"LLM 路由: 强制使用 provider={provider.name}")
                 for attempt in range(retry + 1):
                     try:
                         result, usage = provider.call(system_prompt, messages, timeout)
                         provider.failure_count = 0
                         self._last_used = provider.name
+                        if _log:
+                            _log.info(f"LLM 路由成功: provider={provider.name} (强制指定)")
                         return result, usage, provider.name
                     except Exception as e:
                         provider.failure_count += 1
@@ -420,13 +424,24 @@ class LLMRouter:
             available = available[idx:] + available[:idx]
             self._round_robin_idx = (self._round_robin_idx + 1) % len(available)
 
+        ordered_names = ", ".join([p.name for p in available])
+        primary_name = available[0].name
+        if _log:
+            _log.info(f"LLM 路由: 可用 providers=[{ordered_names}]，主模型={primary_name}")
+
         last_error = ""
-        for provider in available:
+        for idx, provider in enumerate(available):
+            is_fallback = idx > 0
             for attempt in range(retry + 1):
                 try:
                     result, usage = provider.call(system_prompt, messages, timeout)
                     provider.failure_count = 0
                     self._last_used = provider.name
+                    if _log:
+                        if is_fallback:
+                            _log.info(f"LLM 路由成功: provider={provider.name} (从 {primary_name} 降级/fallback)")
+                        else:
+                            _log.info(f"LLM 路由成功: provider={provider.name} (主模型)")
                     return result, usage, provider.name
                 except urllib.error.HTTPError as e:
                     provider.failure_count += 1
