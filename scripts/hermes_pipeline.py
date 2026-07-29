@@ -572,10 +572,9 @@ class HermesPipeline:
             {success, output, error, elapsed_s}
         """
         import time
-        env = dict(os.environ)
-        # 清除可能导致 hermes venv 冲突的环境变量
-        env.pop("PYTHONHOME", None)
-        env.pop("PYTHONPATH", None)
+        # v6.7.7 修复：统一使用 hermes_subprocess_env，自动读取 .env 并透传 ZAI_API_KEY
+        from common import hermes_subprocess_env
+        env = hermes_subprocess_env()
 
         cmd = self._build_hermes_cmd(profile, prompt)
         t0 = time.time()

@@ -39,26 +39,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from paths import PROJECT_ROOT
-from common import clean_subprocess_env
-
-
-def _load_env_file(path: Path) -> Dict[str, str]:
-    """简单解析 .env 文件（不需要 python-dotenv）。"""
-    result: Dict[str, str] = {}
-    if not path.exists():
-        return result
-    try:
-        with open(path, "r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if not line or line.startswith("#"):
-                    continue
-                if "=" in line:
-                    k, v = line.split("=", 1)
-                    result[k.strip()] = v.strip().strip('"').strip("'")
-    except Exception:
-        pass
-    return result
+from common import hermes_subprocess_env
 
 # hermes profile 路径
 HERMES_HOME = Path.home() / ".hermes"
@@ -355,15 +336,8 @@ def oneshot(prompt: str, timeout: int = ONESHOT_TIMEOUT) -> Dict[str, Any]:
         {success, output, error}
     """
     cmd = HERMES_CMD + ["-z", prompt]
-    # v6.7.7 修复：hermes profile 默认使用 zai provider，若仅有 GLM_API_KEY 则透传为 ZAI_API_KEY
-    # 手动派活时可能没有继承 .env，需要显式读取
-    env_vars = dict(os.environ)
-    env_vars.update(_load_env_file(PROJECT_ROOT / ".env"))
-    extra_env = {}
-    zai_key = env_vars.get("ZAI_API_KEY") or env_vars.get("GLM_API_KEY")
-    if zai_key:
-        extra_env["ZAI_API_KEY"] = zai_key
-    env = clean_subprocess_env(extra=extra_env)
+    # v6.7.7 修复：hermes profile 默认使用 zai provider，cron/手动派活时自动读取 .env 并透传 ZAI_API_KEY
+    env = hermes_subprocess_env()
     try:
         result = subprocess.run(
             cmd,

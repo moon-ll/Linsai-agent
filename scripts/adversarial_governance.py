@@ -228,10 +228,11 @@ class AdversarialGovernance:
 
     def _call_reviewer(self, prompt: str, timeout: int = MONITOR_TIMEOUT) -> Dict[str, Any]:
         """调用 reviewer profile 执行 monitor 任务。"""
-        from common import clean_subprocess_env
+        from common import hermes_subprocess_env
         import time
 
-        env = clean_subprocess_env()
+        # v6.7.7 修复：cron/无 shell 环境时自动读取 .env 并透传 ZAI_API_KEY
+        env = hermes_subprocess_env()
         cmd = ["hermes", "--profile", "reviewer", "-z", prompt]
         t0 = time.time()
         try:

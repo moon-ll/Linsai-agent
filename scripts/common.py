@@ -18,7 +18,7 @@ import tempfile
 from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Iterator, Optional
+from typing import Any, Dict, Iterator, Optional
 
 # fcntl 为 POSIX 标准库（macOS/Linux 可用，Windows 无）
 try:
@@ -189,6 +189,53 @@ def clean_subprocess_env(extra: Optional[dict] = None) -> dict:
     if extra:
         env.update(extra)
     return env
+
+
+def load_env_file(path: Path) -> Dict[str, str]:
+    """简单解析 .env 文件（不需要 python-dotenv）。"""
+    result: Dict[str, str] = {}
+    if not path.exists():
+        return result
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if not line or line.startswith("#"):
+                    continue
+                if "=" in line:
+                    k, v = line.split("=", 1)
+                    result[k.strip()] = v.strip().strip('"').strip("'")
+    except Exception:
+        pass
+    return result
+
+
+def hermes_subprocess_env(extra: Optional[dict] = None, env_path: Optional[Path] = None) -> dict:
+    """构造供 hermes CLI 使用的子进程环境。
+
+    - 清理 Python 相关变量（避免 venv 冲突）
+    - 自动读取项目根目录 .env，解决 cron 等无 shell 环境时读不到 API Key 的问题
+    - 若配置了 GLM_API_KEY 但未配置 ZAI_API_KEY，自动透传，使 hermes 的 zai provider 可用
+
+    Args:
+        extra: 额外覆盖/补充的环境变量
+        env_path: 指定 .env 文件路径，默认使用 PROJECT_ROOT/.env
+
+    Returns:
+        可直接传给 subprocess.run(env=...) 的字典
+    """
+    from paths import PROJECT_ROOT
+
+    env = dict(os.environ)
+    if env_path is None:
+        env_path = PROJECT_ROOT / ".env"
+    env.update(load_env_file(env_path))
+
+    zai_key = env.get("ZAI_API_KEY") or env.get("GLM_API_KEY") or env.get("Z_AI_API_KEY")
+    if zai_key:
+        env["ZAI_API_KEY"] = zai_key
+
+    return clean_subprocess_env(extra=extra)
 
 
 def copy_file(src: Path | str, dst: Path | str, overwrite: bool = False) -> bool:

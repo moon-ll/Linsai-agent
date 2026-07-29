@@ -54,7 +54,7 @@ _SCRIPT_DIR = Path(__file__).parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
-from common import now_utc, load_json, save_json, file_lock, clean_subprocess_env
+from common import now_utc, load_json, save_json, file_lock, hermes_subprocess_env
 from paths import PROJECT_ROOT
 
 __all__ = [
@@ -1304,39 +1304,11 @@ class ProposalLifecycle:
 
         return self._run_hermes("writer", prompt, timeout)
 
-    def _load_env_for_hermes(self) -> Dict[str, str]:
-        """从 .env 文件读取环境变量，供 cron 等无 shell 环境使用。"""
-        env_path = PROJECT_ROOT / ".env"
-        result: Dict[str, str] = {}
-        if not env_path.exists():
-            return result
-        try:
-            with open(env_path, "r", encoding="utf-8") as f:
-                for line in f:
-                    line = line.strip()
-                    if not line or line.startswith("#"):
-                        continue
-                    if "=" in line:
-                        k, v = line.split("=", 1)
-                        result[k.strip()] = v.strip().strip('"').strip("'")
-        except Exception:
-            pass
-        return result
-
     def _run_hermes(self, profile: str, prompt: str, timeout: int) -> Dict[str, Any]:
         """执行 hermes oneshot。"""
-        # v6.6.3 修复：TRAE/IDE 注入的 Python 环境变量会让 hermes 内部 Python 启动崩溃，
-        # 必须清理全部 Python 相关变量（不只是 PYTHONHOME/PYTHONPATH）
-        # v6.7.7 修复：hermes profile 默认使用 zai provider（glm-5.2），依赖 ZAI_API_KEY；
-        # 若用户未设置 ZAI_API_KEY 但配置了 GLM_API_KEY，则自动透传，避免回退到超时中的 MiniMax
-        # cron 启动的 worker 可能没有继承 shell 的 .env 变量，需要显式读取
-        env_vars = dict(os.environ)
-        env_vars.update(self._load_env_for_hermes())
-        extra_env = {}
-        zai_key = env_vars.get("ZAI_API_KEY") or env_vars.get("GLM_API_KEY")
-        if zai_key:
-            extra_env["ZAI_API_KEY"] = zai_key
-        env = clean_subprocess_env(extra=extra_env)
+        # v6.6.3 + v6.7.7 修复：清理 Python 变量 + 自动读取 .env + 透传 ZAI_API_KEY，
+        # 避免 cron 等无 shell 环境因缺少 API Key 而失败
+        env = hermes_subprocess_env()
 
         import time
         cmd = ["hermes", "--profile", profile, "-z", prompt]
