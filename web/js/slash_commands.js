@@ -218,8 +218,11 @@
       if (!brief) return { handled: true, content: `未找到课题 **${proposalId}**。可用 /status 查看当前课题列表。` };
 
       // 打开研究管线面板到申请书页
-      if (typeof openPipelineManager === 'function') {
-        openPipelineManager(proposalId);
+      const opener = (typeof openPipelineManager === 'function')
+        ? openPipelineManager
+        : (window.Pipeline && typeof window.Pipeline.open === 'function' ? window.Pipeline.open : null);
+      if (typeof opener === 'function') {
+        opener(proposalId);
         if (window.Pipeline && typeof window.Pipeline.switchTo === 'function') {
           setTimeout(() => window.Pipeline.switchTo('proposal'), 50);
         }
@@ -297,8 +300,11 @@
       const target = items.find(p => p.proposal_id === proposalId);
       if (!target) return { handled: true, content: `**${proposalId}** 当前不在「待校验」阶段。` };
 
-      if (typeof openPipelineManager === 'function') {
-        openPipelineManager(proposalId);
+      const opener = (typeof openPipelineManager === 'function')
+        ? openPipelineManager
+        : (window.Pipeline && typeof window.Pipeline.open === 'function' ? window.Pipeline.open : null);
+      if (typeof opener === 'function') {
+        opener(proposalId);
         if (window.Pipeline && typeof window.Pipeline.switchTo === 'function') {
           setTimeout(() => window.Pipeline.switchTo('inspection'), 50);
         }

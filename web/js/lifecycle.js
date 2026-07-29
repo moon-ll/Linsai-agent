@@ -66,26 +66,29 @@ async function renderLifecycleDashboard() {
     const d = data.data;
 
     let html = '';
-    html += '<div class="d-flex ai-center jc-between mb-12"><h2 style="margin:0;">🔬 提案生命周期</h2><button class="btn-text" style="color:var(--accent-color);" onclick="lcRegister()">+ 注册新课题</button></div>';
+    html += `<div class="lc-header">
+      <h2>🔬 提案生命周期</h2>
+      <button class="btn-text" style="color:var(--accent-color);" onclick="lcRegister()">+ 注册新课题</button>
+    </div>`;
 
     // === 四阶段统计卡片 ===
-    html += '<div class="d-grid gap-8 mb-12" style="grid-template-columns:repeat(4,1fr);">';
+    html += '<div class="lc-stages-grid">';
     for (const stage of LC_STAGES) {
       const count = d.by_status?.[stage.key] || 0;
       const active = _lcCurrentFilter === stage.key;
       html += `
-        <div class="stat-card br-8 pad-12 cursor-pointer" 
-             style="border-left:3px solid ${stage.color};${active ? 'background:var(--bg-active);' : ''}"
+        <div class="lc-stage-card ${active ? 'active' : ''}"
+             style="border-left:3px solid ${stage.color};"
              onclick="lcFilterStage('${stage.key}')">
-          <div class="fs-072 text-tertiary">${stage.icon} ${stage.label}</div>
-          <div class="fs-1.4 fw-600" style="color:${count > 0 ? stage.color : 'var(--text-tertiary)'};">${count}</div>
-          <div class="fs-072 text-tertiary">${stage.desc}</div>
+          <div class="lc-stage-label">${stage.icon} ${stage.label}</div>
+          <div class="lc-stage-count" style="color:${count > 0 ? stage.color : 'var(--text-tertiary)'};">${count}</div>
+          <div class="lc-stage-desc">${stage.desc}</div>
         </div>`;
     }
     html += '</div>';
 
     // === 类型分布 + 总数 ===
-    html += '<div class="d-flex ai-center gap-12 mb-8 fs-082 text-secondary">';
+    html += '<div class="lc-meta-bar">';
     html += `<span>总计 <strong>${d.total || 0}</strong> 个课题</span>`;
     html += '<span>·</span>';
     for (const [type, label] of Object.entries(LC_TYPE_LABELS)) {
@@ -94,18 +97,18 @@ async function renderLifecycleDashboard() {
         html += `<span style="color:${LC_TYPE_COLORS[type]};">${label} ${count}</span>`;
       }
     }
-    html += `<span class="ml-auto btn-text" onclick="lcFilterStage('all')" style="cursor:pointer;">显示全部</span>`;
+    html += `<span class="ml-auto btn-text" onclick="lcFilterStage('all')">显示全部</span>`;
     html += '</div>';
 
     // v6.7.5: cron 框架操作
-    html += `<div class="d-flex gap-8 mb-12">`;
+    html += `<div class="lc-actions-bar">`;
     html += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcOrchestrate()">🔄 手动编排</button>`;
     html += `<button class="btn-text fs-072" style="color:var(--warning-color);" onclick="lcRepair()">🔧 手动修复</button>`;
     html += `<button class="btn-text fs-072" style="color:var(--text-secondary);" onclick="lcShowJobs()">📋 查看 cron</button>`;
     html += `</div>`;
 
     // v6.7.6: agent scores 概览（异步加载）
-    html += `<div id="lc-agent-scores" class="mb-12 fs-082 text-secondary">加载对抗评审分数...</div>`;
+    html += `<div id="lc-agent-scores" class="lc-scores-bar">加载对抗评审分数...</div>`;
 
     container.innerHTML = html;
 
@@ -170,7 +173,7 @@ async function renderLifecycleList() {
     // 按更新时间排序
     proposals.sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
 
-    let html = '<div class="d-flex fd-col gap-6">';
+    let html = '<div class="lc-proposal-list">';
     for (const p of proposals) {
       html += renderProposalCard(p);
     }
@@ -246,17 +249,17 @@ function renderProposalCard(p) {
   }
 
   return `
-    <div class="bg-secondary border-default br-8 pad-10" style="border-left:3px solid ${stage.color};">
-      <div class="d-flex ai-center gap-8 mb-4">
-        <span class="fs-082 fw-600">${escapeHtml(namePart)}</span>
-        <span class="fs-072 pad-2-6 br-4" style="background:var(--bg-tertiary);color:${typeColor};">${typeLabel}</span>
-        <span class="fs-072" style="color:${stage.color};">${stage.icon} ${stage.label}</span>
-        ${score > 0 ? `<span class="fs-072 ml-auto" style="color:${scoreColor};">score ${score.toFixed(2)}</span>` : ''}
+    <div class="lc-proposal-card" style="border-left:3px solid ${stage.color};">
+      <div class="lc-proposal-header">
+        <span class="lc-proposal-name">${escapeHtml(namePart)}</span>
+        <span class="lc-proposal-type" style="color:${typeColor};">${typeLabel}</span>
+        <span class="lc-proposal-status" style="color:${stage.color};">${stage.icon} ${stage.label}</span>
+        ${score > 0 ? `<span class="lc-proposal-score" style="color:${scoreColor};">score ${score.toFixed(2)}</span>` : ''}
       </div>
-      <div class="fs-072 text-tertiary mb-4">
+      <div class="lc-proposal-meta">
         ${p.optimization_rounds || 0} 轮优化 · ${(p.updated_at || '').slice(0, 10)}
       </div>
-      <div class="d-flex gap-6">
+      <div class="lc-proposal-actions">
         ${actions}
       </div>
       <div id="lc-checkpoints-${p.proposal_id}" class="d-none mt-6 fs-072 text-secondary"></div>
@@ -267,13 +270,20 @@ function renderProposalCard(p) {
 // v6.7.8: 查看课题详情（打开研究管线申请书面板）
 // ============================================
 function lcViewDetail(proposalId) {
-  if (typeof openPipelineManager === 'function') {
-    openPipelineManager(proposalId);
-    // 切换到申请书标签页
+  // 优先使用全局函数；若尚未暴露，则通过 window.Pipeline 对象兜底
+  const opener = (typeof openPipelineManager === 'function')
+    ? openPipelineManager
+    : (window.Pipeline && typeof window.Pipeline.open === 'function'
+      ? window.Pipeline.open
+      : null);
+
+  if (typeof opener === 'function') {
+    opener(proposalId);
     if (window.Pipeline && typeof window.Pipeline.switchTo === 'function') {
       setTimeout(() => window.Pipeline.switchTo('proposal'), 50);
     }
   } else {
+    console.error('lcViewDetail: pipeline manager not available');
     showToast('研究管线模块未加载', 'error');
   }
 }

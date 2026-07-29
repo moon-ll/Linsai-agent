@@ -236,8 +236,11 @@ function dashOpenStage(stage) {
 // 打开课题详情
 function dashOpenProposal(proposalId) {
   if (!proposalId) return;
-  if (typeof openPipelineManager === 'function') {
-    openPipelineManager(proposalId);
+  const opener = (typeof openPipelineManager === 'function')
+    ? openPipelineManager
+    : (window.Pipeline && typeof window.Pipeline.open === 'function' ? window.Pipeline.open : null);
+  if (typeof opener === 'function') {
+    opener(proposalId);
     if (window.Pipeline && typeof window.Pipeline.switchTo === 'function') {
       setTimeout(() => window.Pipeline.switchTo('proposal'), 50);
     }

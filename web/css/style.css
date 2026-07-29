@@ -3,178 +3,11 @@
    支持深色/浅色/自动三种主题
    ============================================ */
 
-/* v6.7.8: 仪表盘样式重设计 */
-.dash-greeting { margin-bottom: 20px; }
-.dash-greeting-text { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); }
-.dash-greeting-sub { font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px; }
-
-.dash-stats-row {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.dash-stat-card {
-    background: var(--surface);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 16px;
-    cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s;
-    display: flex;
-    flex-direction: column;
-}
-
-.dash-stat-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    border-color: var(--accent-color);
-}
-
-.dash-stat-icon { font-size: 1.4rem; margin-bottom: 8px; }
-.dash-stat-number { font-size: 1.8rem; font-weight: 700; line-height: 1; margin-bottom: 4px; }
-.dash-stat-label { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 8px; }
-.dash-stat-action { font-size: 0.78rem; color: var(--accent-color); margin-top: auto; }
-
-.dash-main-grid {
-    display: grid;
-    grid-template-columns: 1.4fr 1fr;
-    gap: 16px;
-    margin-bottom: 20px;
-}
-
-.dash-funnel-panel,
-.dash-action-panel {
-    background: var(--surface);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 16px;
-}
-
-.dash-panel-title {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 14px;
-    color: var(--text-primary);
-}
-
-.dash-funnel {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.dash-funnel-stage {
-    width: var(--stage-width);
-    min-width: 120px;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-color);
-    border-left: 3px solid var(--stage-color);
-    border-radius: 8px;
-    padding: 10px 12px;
-    cursor: pointer;
-    transition: background 0.15s;
-}
-
-.dash-funnel-stage:hover {
-    background: var(--bg-active);
-}
-
-.dash-funnel-bar {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 4px;
-}
-
-.dash-funnel-icon { font-size: 1rem; }
-.dash-funnel-name { font-size: 0.85rem; font-weight: 500; flex: 1; }
-.dash-funnel-count { font-size: 1rem; font-weight: 700; }
-.dash-funnel-preview {
-    font-size: 0.72rem;
-    color: var(--text-tertiary);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.dash-action-list { display: flex; flex-direction: column; gap: 8px; }
-
-.dash-action-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 12px;
-    background: var(--bg-secondary);
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.15s;
-}
-
-.dash-action-item:hover { background: var(--bg-active); }
-.dash-action-icon { font-size: 1.1rem; }
-.dash-action-body { flex: 1; min-width: 0; }
-.dash-action-label { font-size: 0.82rem; font-weight: 500; }
-.dash-action-desc { font-size: 0.75rem; color: var(--text-tertiary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.dash-action-arrow { color: var(--text-tertiary); font-size: 0.9rem; }
-.dash-action-empty { padding: 20px; text-align: center; color: var(--text-tertiary); font-size: 0.85rem; }
-
-.dash-preview-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-}
-
-.dash-preview-card {
-    background: var(--surface);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 14px;
-    min-height: 180px;
-}
-
-.dash-preview-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-weight: 600;
-    font-size: 0.9rem;
-    margin-bottom: 10px;
-    cursor: pointer;
-}
-
-.dash-preview-header:hover { color: var(--accent-color); }
-.dash-preview-count { font-size: 0.78rem; color: var(--text-tertiary); font-weight: 400; }
-.dash-preview-row { padding: 8px 0; border-bottom: 1px solid var(--border-color); cursor: pointer; }
-.dash-preview-row:last-child { border-bottom: none; }
-.dash-preview-row:hover .dash-preview-title { color: var(--accent-color); }
-.dash-preview-title { font-size: 0.8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 2px; }
-.dash-preview-meta { font-size: 0.72rem; color: var(--text-tertiary); }
-.dash-preview-empty { padding: 16px 0; text-align: center; color: var(--text-tertiary); font-size: 0.8rem; }
-.dash-preview-tag { display: inline-block; padding: 1px 6px; background: var(--bg-tertiary); border-radius: 8px; font-size: 0.7rem; color: var(--accent-color); margin-top: 4px; }
-.dash-preview-actions { display: flex; gap: 4px; }
-.dash-preview-btn { padding: 2px 8px; border: 1px solid var(--border-color); border-radius: 4px; cursor: pointer; font-size: 0.75rem; background: transparent; }
-.dash-preview-btn.approve { color: var(--success-color); border-color: var(--success-color); }
-.dash-preview-btn.reject { color: var(--text-tertiary); }
-.dash-decision-row { display: flex; align-items: center; gap: 8px; }
-
-@media (max-width: 1100px) {
-    .dash-stats-row { grid-template-columns: repeat(2, 1fr); }
-    .dash-main-grid { grid-template-columns: 1fr; }
-    .dash-preview-grid { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 600px) {
-    .dash-stats-row { grid-template-columns: 1fr; }
-}
-
 /* v6.0: 导航按钮 */
 .nav-toolbar { justify-content: space-around; }
 .nav-btn { flex: 1; padding: 8px 4px; font-size: 1.2rem; border: 1px solid transparent; border-radius: 8px; background: transparent; cursor: pointer; text-align: center; line-height: 1; transition: all 0.15s; opacity: 0.5; }
 .nav-btn:hover { background: var(--bg-primary); transform: translateY(-1px); opacity: 0.8; }
 .nav-btn-active { background: var(--bg-active); border-color: var(--border-color); opacity: 1; }
-   ============================================ */
 
 /* ---- CSS 变量（浅色默认）---- */
 :root {
@@ -291,6 +124,271 @@ body {
   flex-direction: column;
   overflow: hidden;
   transition: background var(--transition), color var(--transition);
+}
+
+/* ============================================
+   v6.7.8: 仪表盘 & 课题生命周期 页面样式
+   ============================================ */
+
+/* ---- 仪表盘 ---- */
+.dash-greeting { margin-bottom: 20px; }
+.dash-greeting-text { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); }
+.dash-greeting-sub { font-size: 0.9rem; color: var(--text-secondary); margin-top: 4px; }
+
+.dash-stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.dash-stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    display: flex;
+    flex-direction: column;
+    min-height: 120px;
+}
+
+.dash-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-color);
+}
+
+.dash-stat-icon { font-size: 1.4rem; margin-bottom: 8px; }
+.dash-stat-number { font-size: 1.8rem; font-weight: 700; line-height: 1; margin-bottom: 4px; }
+.dash-stat-label { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 8px; }
+.dash-stat-action { font-size: 0.78rem; color: var(--accent-color); margin-top: auto; }
+
+.dash-main-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+    align-items: start;
+}
+
+.dash-funnel-panel,
+.dash-action-panel {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.dash-panel-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--text-primary);
+}
+
+.dash-funnel {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dash-funnel-stage {
+    width: 100%;
+    max-width: var(--stage-width);
+    min-width: 120px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--stage-color);
+    border-radius: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.dash-funnel-stage:hover {
+    background: var(--bg-active);
+    transform: translateX(2px);
+}
+
+.dash-funnel-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.dash-funnel-icon { font-size: 1rem; }
+.dash-funnel-name { font-size: 0.85rem; font-weight: 500; flex: 1; }
+.dash-funnel-count { font-size: 1rem; font-weight: 700; }
+.dash-funnel-preview {
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dash-action-list { display: flex; flex-direction: column; gap: 8px; }
+
+.dash-action-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.dash-action-item:hover { background: var(--bg-active); }
+.dash-action-icon { font-size: 1.1rem; }
+.dash-action-body { flex: 1; min-width: 0; }
+.dash-action-label { font-size: 0.82rem; font-weight: 500; }
+.dash-action-desc { font-size: 0.75rem; color: var(--text-tertiary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.dash-action-arrow { color: var(--text-tertiary); font-size: 0.9rem; }
+.dash-action-empty { padding: 20px; text-align: center; color: var(--text-tertiary); font-size: 0.85rem; }
+
+.dash-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: start;
+}
+
+.dash-preview-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 14px;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dash-preview-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.dash-preview-header:hover { color: var(--accent-color); }
+.dash-preview-count { font-size: 0.78rem; color: var(--text-tertiary); font-weight: 400; }
+.dash-preview-row { padding: 8px 0; border-bottom: 1px solid var(--border-color); cursor: pointer; }
+.dash-preview-row:last-child { border-bottom: none; }
+.dash-preview-row:hover .dash-preview-title { color: var(--accent-color); }
+.dash-preview-title { font-size: 0.8rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; margin-bottom: 2px; }
+.dash-preview-meta { font-size: 0.72rem; color: var(--text-tertiary); }
+.dash-preview-empty { padding: 16px 0; text-align: center; color: var(--text-tertiary); font-size: 0.8rem; }
+.dash-preview-tag { display: inline-block; padding: 1px 6px; background: var(--bg-tertiary); border-radius: 8px; font-size: 0.7rem; color: var(--accent-color); margin-top: 4px; }
+.dash-preview-actions { display: flex; gap: 4px; }
+.dash-preview-btn { padding: 2px 8px; border: 1px solid var(--border-color); border-radius: 4px; cursor: pointer; font-size: 0.75rem; background: transparent; }
+.dash-preview-btn.approve { color: var(--success-color); border-color: var(--success-color); }
+.dash-preview-btn.reject { color: var(--text-tertiary); }
+.dash-decision-row { display: flex; align-items: center; gap: 8px; }
+
+/* ---- 课题生命周期 ---- */
+.lc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+.lc-header h2 { margin: 0; font-size: 1.25rem; }
+
+.lc-stages-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.lc-stage-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 12px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+}
+
+.lc-stage-card:hover { transform: translateY(-1px); }
+.lc-stage-card.active { background: var(--bg-active); }
+
+.lc-stage-label { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 4px; }
+.lc-stage-count { font-size: 1.4rem; font-weight: 600; margin-bottom: 2px; }
+.lc-stage-desc { font-size: 0.72rem; color: var(--text-tertiary); }
+
+.lc-meta-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+}
+
+.lc-actions-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.lc-scores-bar {
+    margin-bottom: 14px;
+    font-size: 0.82rem;
+}
+
+.lc-proposal-list { display: flex; flex-direction: column; gap: 10px; }
+
+.lc-proposal-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 12px 14px;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.lc-proposal-card:hover { border-color: var(--accent-color); }
+
+.lc-proposal-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+    flex-wrap: wrap;
+}
+
+.lc-proposal-name { font-size: 0.9rem; font-weight: 600; }
+.lc-proposal-type {
+    font-size: 0.72rem;
+    padding: 2px 8px;
+    border-radius: 6px;
+    background: var(--bg-tertiary);
+}
+.lc-proposal-status { font-size: 0.78rem; }
+.lc-proposal-score { font-size: 0.78rem; margin-left: auto; }
+.lc-proposal-meta { font-size: 0.75rem; color: var(--text-tertiary); margin-bottom: 8px; }
+.lc-proposal-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+@media (max-width: 1100px) {
+    .dash-stats-row { grid-template-columns: repeat(2, 1fr); }
+    .dash-main-grid { grid-template-columns: 1fr; }
+    .dash-preview-grid { grid-template-columns: 1fr; }
+    .lc-stages-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .dash-stats-row { grid-template-columns: 1fr; }
+    .lc-stages-grid { grid-template-columns: 1fr; }
 }
 
 /* ---- 顶部栏 ---- */
