@@ -200,13 +200,20 @@ LinSai-CoPilot/
 │   ├── question_architect.py  # v6.2 科学问题架构
 │   ├── proposal_inspector.py  # v6.2 申请书自检
 │   ├── proposal_writer.py     # v6.2 申请书撰写
-│   ├── proposal_lifecycle.py  # v6.5+ 提案生命周期：四阶段 + writer-critic 对抗优化
+│   ├── proposal_lifecycle.py  # v6.7.7 薄 shim：提案生命周期 CLI/导入入口，实现位于 proposal_lifecycle/ 包
+│   ├── proposal_lifecycle/    # v6.7.7 提案生命周期包：state/naming/registration/optimize/cron 等 mixin
+│   ├── adversarial_governance.py # v6.7.7 薄 shim：对抗评审奖惩导入入口，实现位于 adversarial/ 包
+│   ├── adversarial/           # v6.7.7 对抗评审奖惩包
+│   ├── lifecycle_cron_framework.py # v6.7.7 薄 shim：生命周期 cron 导入入口，实现位于 lifecycle/ 包
+│   ├── lifecycle/             # v6.7.7 生命周期 cron 包：controller/scheduler/orchestrator/executor/utils
 │   ├── rebuild_lifecycle.py   # v6.7.1+ 基于 critic 报告重建 _lifecycle.json / 规范化轮次编号
 │   ├── import_hermes_topics.py # v6.7.3 将 hermes workspace 课题雏形导入全自动链路
-│   ├── idea_generator.py      # v6.7.7 输入端：自动/手动研究设想生成、缺口识别、对比融合
-│   ├── knowledge_output.py    # v6.7.7 输出端：归档知识萃取、可靠源 KB 写入
-│   ├── weekend_orchestrator.py # v6.7.7 周末总控：输入/输出/反思任务调度
-│   ├── kb_health_weekend.py   # v6.7.7 周末 KB 健康检查与 derived 内容降级
+│   ├── idea_generator.py      # v6.7.7 输入端薄 shim：--auto 委托给 weekend_pipeline input 阶段；--manual 保留
+│   ├── knowledge_output.py    # v6.7.7 输出端薄 shim：--weekly 委托给 weekend_pipeline output 阶段；其他模式保留
+│   ├── weekend_orchestrator.py # v6.7.7 周末总控薄 shim：调用 weekend_pipeline 各阶段
+│   ├── weekend_pipeline.py    # v6.7.7 周末任务流水线入口脚本（供 hermes cron 调用）
+│   ├── weekend_pipeline/      # v6.7.7 周末任务流水线包：input/output/reflection 小任务与 KB 联动
+│   ├── kb_health_weekend.py   # v6.7.7 周末 KB 深度健康检查（基础检查复用 knowledge_output）
 │   ├── orchestrator.py        # v6.7 林赛总控核心：仪表盘 / 失败分析 / 策略建议 / 链路监控
 │   ├── profile_health.py      # v6.7 profile 健康度：idle/working/blocked/offline + 成功率/耗时
 │   ├── failure_analyzer.py    # v6.7 失败模式分析：8 种模式聚类 + prompt 修正建议
@@ -221,11 +228,13 @@ LinSai-CoPilot/
 │   ├── deepxiv_knowledge/     # deepxiv 论文获取流水线
 │   ├── wiki_regenerator/      # wiki 报告重建
 │   └── tests/                 # 自动化测试套件
-│       ├── test_runner.py     # 零依赖轻量测试框架
-│       ├── test_core.py       # 核心模块单元测试
-│       ├── test_scenarios.py  # 场景剧本测试
-│       ├── test_persona.py    # 人格一致性抽检
-│       └── test_web_api.py    # Web API 接口测试
+│       ├── test_runner.py            # 零依赖轻量测试框架
+│       ├── test_core.py              # 核心模块单元测试
+│       ├── test_scenarios.py         # 场景剧本测试
+│       ├── test_persona.py           # 人格一致性抽检
+│       ├── test_web_api.py           # Web API 接口测试
+│       ├── test_lifecycle_cron.py    # 生命周期 cron 框架测试
+│       └── test_weekend_pipeline.py  # 周末任务流水线测试
 │
 └── web/                       # 前端界面（零框架依赖）
     ├── index.html             # 单页应用入口

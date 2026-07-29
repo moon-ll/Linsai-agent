@@ -80,8 +80,9 @@ researcher ← analyst ← writer ↔ critic → reviewer
 - `state_sync.py`：论文统一状态总线（`item-status.json`），CoPilot 与 hermes 共享。
 - `memory_bridge.py`：将 hermes `MEMORY.md` / `USER.md` 同步到 CoPilot `memory/`。
 - `hermes_pipeline.py`：将六阶段派活给对应 profile，支持增量优化、产物检查、cron 自动化。
-- `proposal_lifecycle.py`：四阶段（drafts → optimizing → pending_review → archived）+ writer-critic 对抗优化循环。
-- `adversarial_governance.py`（v6.7.6）：对抗评审奖惩与监察引擎，管理 agent 分数、禁止清单、monitor meta-review、负反馈检测。
+- `proposal_lifecycle/` 包（薄 shim `proposal_lifecycle.py` 保留 CLI 与导入）：四阶段（drafts → optimizing → pending_review → archived）+ writer-critic 对抗优化循环。
+- `adversarial/` 包（薄 shim `adversarial_governance.py` 保留导入）（v6.7.6）：对抗评审奖惩与监察引擎，管理 agent 分数、禁止清单、monitor meta-review、负反馈检测。
+- `weekend_pipeline/` 包（薄入口 `weekend_pipeline.py`）（v6.7.7）：周末输入/输出/反思小任务流水线，由 `lc-weekend-worker` 每 20 分钟执行一个 pending job。
 
 ### 5. 提案生命周期
 
@@ -97,8 +98,8 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
   - 修复 cron（`lc-repair`）每 6 小时扫描：重置 stuck running、重试 failed（最多 3 次）、补齐缺失 worker、超过重试则告警。
   - checkpoint 持久化在 `_lifecycle.json` 的 `pipeline_jobs` 中，单步骤失败可单独重跑，不污染整体状态。
   - v6.7.6：worker cron 自动错开 6 分钟（基于 proposal_id hash 分配 47/53/59/05/11...），`--repair` 会检测 schedule 变化并自动更新。
-  - v6.7.7：worker cron 默认仅工作日运行（schedule = `{minute} * * * 1-5`），周末暂停；新增 `--setup-weekend` / `--teardown-weekend` 创建/删除 3 个周末任务 cron（输入/输出/反思）。
-  - v6.7.7：`run_repair()` 区分工作日与周末：工作日修复 worker/编排，周末修复输入/输出/反思任务。
+  - v6.7.7：worker cron 默认仅工作日运行（schedule = `{minute} * * * 1-5`），周末暂停；新增 `--setup-weekend` / `--teardown-weekend` 创建/删除 3 个周末任务入口 cron（输入/输出/反思）以及 `lc-weekend-worker`（每 20 分钟执行一个 pending 小任务）。
+  - v6.7.7：`run_repair()` 区分工作日与周末：工作日修复 worker/编排，周末修复输入/输出/反思任务及 `weekend-pipeline.json` 中的 checkpoint job。
 - **对抗评审奖惩与监察（v6.7.6）**：
   - 每轮 checkpoint 拆为 critic → writer → monitor 三步骤，monitor 作为独立第三方 reviewer 做 meta-review。
   - `memory/agent-scores.json` 维护 writer/critic 全局奖惩分数（初始 100，上限 150，下限 0）。
@@ -109,9 +110,9 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
   - `scripts/proposal_kb_sync.py` 将各生命周期阶段 proposal 的核心信息（标题、状态、分数、核心问题、创新点、关键产物）同步到 `knowledge/wiki/projects/NSFC-强场超快/proposals/`，并自动生成索引，实现链路数据与全链路知识库聚合。
   - 已归档（approved）的 proposal 仍会通过 `proposal_lifecycle._archive_proposal` 生成独立归档元信息。
 - **输入端与输出端重构（v6.7.7）**：
-  - 输入端：`scripts/idea_generator.py` 从文献简报/论文池/归档讨论识别研究缺口，生成研究设想；新设想先进入 `drafts`，人工确认后再进 `optimizing`；若与现有课题关联，给出有机融合建议。
-  - 输出端：`scripts/knowledge_output.py` 归档 proposal 知识萃取，并将可靠来源信息写入 KB；AI 生成内容标记为 `derived`，无来源信息禁止入库。
-  - 周末模式：worker cron 仅工作日运行（`Mon-Fri`），周末专门执行输入发现、输出萃取、链路反思和 KB 健康检查。
+  - 输入端：`scripts/idea_generator.py`（`--auto` 已委托给 `weekend_pipeline` input 阶段）从文献简报/论文池/归档讨论/知识库识别研究缺口，生成研究设想；新设想先进入 `drafts`，人工确认后再进 `optimizing`；若与现有课题关联，给出有机融合建议。
+  - 输出端：`scripts/knowledge_output.py`（`--weekly` 已委托给 `weekend_pipeline` output 阶段）归档 proposal 知识萃取，并将可靠来源信息写入 KB；AI 生成内容标记为 `derived`，无来源信息禁止入库。
+  - 周末模式：worker cron 仅工作日运行（`Mon-Fri`），周末由 `weekend_pipeline/` 小任务流水线执行输入发现、输出萃取、链路反思和 KB 健康检查；`lc-weekend-worker` 每 20 分钟推进一个 pending job。
 - **文献驱动**：优先优化与当天简报关键词匹配的课题，节省模型限额。
 - **质量标准**：`memory/nsfc-standards.json` 定义面上/重点/重大三类项目的评分权重、页数限制、模板结构。
 
