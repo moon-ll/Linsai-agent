@@ -11,6 +11,7 @@ from common import now_utc
 from proposal_lifecycle import DEFAULT_MAX_ROUNDS
 
 from .constants import (
+    HERMES_PROFILE,
     JOB_STATUS_FAILED,
     JOB_STATUS_PENDING,
     JOB_STATUS_RUNNING,

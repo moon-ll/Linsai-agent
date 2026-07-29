@@ -49,6 +49,35 @@
 - **周末集中处理批量任务**：工作日专注课题对抗优化，周末做输入发现、输出萃取和链路反思。
 - **LLM 失败自动降级**：输入/输出端调用 `llm_gateway`，超时或解析失败时返回空结果，不阻塞链路。
 
+### v6.7.7 代码结构拆分：proposal_lifecycle.py → 包
+
+#### 问题根因
+- `scripts/proposal_lifecycle.py` 长达 2625 行，单体文件难以维护。
+- 状态管理、命名注册、优化循环、反馈归档、cron 编排等职责耦合在同一类中。
+
+#### 拆分方案
+- 新建 `scripts/proposal_lifecycle/` 包：
+  - `constants.py` — 常量与默认参数
+  - `state.py` — 生命周期状态管理
+  - `naming.py` — 课题 ID 命名与校验
+  - `registration.py` — 注册 / 从设想导入 / 有机融合
+  - `metadata.py` — proposal 元信息提取
+  - `transitions.py` — 四阶段流转与仪表盘
+  - `optimize.py` — writer-critic 对抗优化循环
+  - `completion.py` — 达标判定与自动推进
+  - `feedback_archive.py` — 人工反馈 / 归档 / 知识库回流
+  - `cron.py` — cron 编排 / 健康检查 / 负反馈告警
+  - `cli.py` — 命令行入口
+  - `__init__.py` — `ProposalLifecycle` 类聚合所有 mixin
+- `scripts/proposal_lifecycle.py` 保留为 6 行薄 shim，向后兼容：`from proposal_lifecycle import ProposalLifecycle, LIFECYCLE_STAGES, main`。
+- `scripts/lifecycle/orchestrator.py` 补全缺失的 `HERMES_PROFILE` 导入（修复 `--repair` 在删除 stale worker 时的 `NameError`）。
+
+#### 验证结果
+- `python3 -m py_compile scripts/proposal_lifecycle.py` 通过
+- `python3 scripts/self_test.py --module` 181/181 通过
+- `python3 scripts/proposal_lifecycle.py --dashboard` 正常输出 4 optimizing + 1 pending_review
+- `python3 scripts/proposal_lifecycle.py --repair` 4 个真实 proposal 均为 `ok`
+
 ### v6.7.7 前端重构：林赛控制台 + 设置中心
 
 #### 问题根因
