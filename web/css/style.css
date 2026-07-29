@@ -3242,6 +3242,66 @@ body {
 
 .settings-template-title { font-weight: 600; margin-bottom: 10px; }
 
+.settings-template-tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.settings-template-tab {
+    padding: 6px 12px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.settings-template-tab.active {
+    color: var(--accent-color);
+    border-bottom-color: var(--accent-color);
+}
+
+.settings-textarea,
+.settings-json-editor {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.82rem;
+    line-height: 1.5;
+    box-sizing: border-box;
+    resize: vertical;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.settings-checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.settings-checklist-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.settings-checklist-num {
+    color: var(--text-tertiary);
+    font-size: 0.82rem;
+    min-width: 20px;
+}
+
+.settings-json-editor {
+    min-height: 400px;
+    white-space: pre;
+}
+
 .settings-preview {
     margin-top: 16px;
     border: 1px dashed var(--border-color);

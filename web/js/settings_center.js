@@ -52,7 +52,11 @@
       ],
     },
     templates: {
-      description: 'NSFC 三类项目质量标准与撰写模板。复杂模板建议通过对话让 agent 辅助修改。',
+      description: 'NSFC 三类项目质量标准、撰写模板与评审清单。',
+      customRender: true,
+    },
+    rules: {
+      description: '人工反馈意见标准、问题类型、严重级别与整理 prompt。',
       customRender: true,
     },
     agents: {
@@ -258,53 +262,207 @@
   }
 
   // ============================================
-  // 自定义渲染：templates
+  // 自定义渲染：templates / rules
   // ============================================
 
   function renderCustom(category) {
-    if (category === 'templates') {
-      const types = SettingsState.data.project_types || {};
-      const templates = SettingsState.data.proposal_templates || {};
-      let html = '<div class="settings-desc">可调整各项目类型的分数阈值与页数限制。完整模板结构建议通过对话让 agent 辅助修改，避免误改。</div>';
-      html += '<div class="settings-template-list">';
-      for (const [key, info] of Object.entries(types)) {
-        html += `
-          <div class="settings-template-card">
-            <div class="settings-template-title">${escapeHtml(info.name_cn || key)}</div>
-            <div class="settings-fields">
-              <div class="settings-field"><label>页数限制</label><input type="number" class="settings-input stg-tpl-num" data-type="${escapeAttr(key)}" data-field="page_limit" value="${info.page_limit != null ? info.page_limit : ''}"></div>
-              <div class="settings-field"><label>达标分数</label><input type="number" class="settings-input stg-tpl-num" data-type="${escapeAttr(key)}" data-field="min_overall_score" value="${info.quality_threshold?.min_overall_score ?? ''}" min="0" max="1" step="0.01"></div>
-              <div class="settings-field"><label>允许 high 问题数</label><input type="number" class="settings-input stg-tpl-num" data-type="${escapeAttr(key)}" data-field="max_high_issues" value="${info.quality_threshold?.max_high_issues ?? ''}" min="0"></div>
-              <div class="settings-field"><label>允许 medium 问题数</label><input type="number" class="settings-input stg-tpl-num" data-type="${escapeAttr(key)}" data-field="max_medium_issues" value="${info.quality_threshold?.max_medium_issues ?? ''}" min="0"></div>
-            </div>
-          </div>
-        `;
-      }
-      html += '</div>';
-      return html;
-    }
+    if (category === 'templates') return renderTemplatesEditor();
+    if (category === 'rules') return renderRulesEditor();
     return '<div class="settings-desc">该分类暂不支持可视化编辑，请通过对话让 agent 修改。</div>';
   }
 
   function bindCustom(category) {
-    if (category !== 'templates') return;
+    if (category === 'templates') bindTemplatesEditor();
+    else if (category === 'rules') bindRulesEditor();
+  }
+
+  // ---------- templates ----------
+
+  const TEMPLATE_TABS = ['基础参数', '撰写要求', '评审清单'];
+  let tplActiveTab = '基础参数';
+
+  function renderTemplatesEditor() {
+    const types = SettingsState.data.project_types || {};
+    let html = '<div class="settings-desc">可调整各项目类型的分数阈值、页数限制、撰写风格与评审清单。</div>';
+    html += '<div class="settings-template-list">';
+    for (const [key, info] of Object.entries(types)) {
+      html += `
+        <div class="settings-template-card" data-type="${escapeAttr(key)}">
+          <div class="settings-template-title">${escapeHtml(info.name_cn || key)} <span class="text-tertiary fs-072">(${escapeHtml(key)})</span></div>
+          <div class="settings-template-tabs">
+            ${TEMPLATE_TABS.map(t => `<button class="settings-template-tab ${t === tplActiveTab ? 'active' : ''}" data-tab="${escapeAttr(t)}" data-type="${escapeAttr(key)}">${escapeHtml(t)}</button>`).join('')}
+          </div>
+          <div class="settings-template-body" data-type="${escapeAttr(key)}">
+            ${renderTemplateTabContent(key, info)}
+          </div>
+        </div>
+      `;
+    }
+    html += '</div>';
+    return html;
+  }
+
+  function renderTemplateTabContent(typeKey, info) {
+    if (tplActiveTab === '基础参数') {
+      return `
+        <div class="settings-fields">
+          <div class="settings-field"><label>资助上限（万元）</label><input type="number" class="settings-input stg-tpl-num" data-type="${escapeAttr(typeKey)}" data-field="funding_max_wan" value="${info.funding_max_wan != null ? info.funding_max_wan : ''}"></div>
+          <div class="settings-field"><label>执行年限（年）</label><input type="number" class="settings-input stg-tpl-num" data-type="${escapeAttr(typeKey)}" data-field="duration_years" value="${info.duration_years != null ? info.duration_years : ''}"></div>
+          <div class="settings-field"><label>页数限制</label><input type="number" class="settings-input stg-tpl-num" data-type="${escapeAttr(typeKey)}" data-field="page_limit" value="${info.page_limit != null ? info.page_limit : ''}"></div>
+          <div class="settings-field"><label>达标分数</label><input type="number" class="settings-input stg-tpl-num" data-type="${escapeAttr(typeKey)}" data-field="min_overall_score" value="${info.quality_threshold?.min_overall_score ?? ''}" min="0" max="1" step="0.01"></div>
+          <div class="settings-field"><label>允许 high 问题数</label><input type="number" class="settings-input stg-tpl-num" data-type="${escapeAttr(typeKey)}" data-field="max_high_issues" value="${info.quality_threshold?.max_high_issues ?? ''}" min="0"></div>
+          <div class="settings-field"><label>允许 medium 问题数</label><input type="number" class="settings-input stg-tpl-num" data-type="${escapeAttr(typeKey)}" data-field="max_medium_issues" value="${info.quality_threshold?.max_medium_issues ?? ''}" min="0"></div>
+          <div class="settings-field" style="grid-column:1/-1;"><label>核心要求</label><textarea class="settings-textarea stg-tpl-text" data-type="${escapeAttr(typeKey)}" data-field="core_requirement" rows="2">${escapeHtml(info.core_requirement || '')}</textarea></div>
+          <div class="settings-field" style="grid-column:1/-1;"><label>结构要求</label><textarea class="settings-textarea stg-tpl-text" data-type="${escapeAttr(typeKey)}" data-field="structure" rows="2">${escapeHtml(info.structure || '')}</textarea></div>
+        </div>
+      `;
+    }
+    if (tplActiveTab === '撰写要求') {
+      const style = info.writing_style || {};
+      let html = '<div class="settings-fields">';
+      for (const section of ['立项依据', '研究内容', '研究方案', '特色创新', '年度研究计划', '预期研究成果']) {
+        html += `<div class="settings-field" style="grid-column:1/-1;"><label>${escapeHtml(section)}</label><textarea class="settings-textarea stg-tpl-style" data-type="${escapeAttr(typeKey)}" data-section="${escapeAttr(section)}" rows="2">${escapeHtml(style[section] || '')}</textarea></div>`;
+      }
+      html += '</div>';
+      return html;
+    }
+    if (tplActiveTab === '评审清单') {
+      const checklist = info.review_checklist || [];
+      let html = `<div class="settings-checklist" data-type="${escapeAttr(typeKey)}">`;
+      checklist.forEach((item, idx) => {
+        html += `
+          <div class="settings-checklist-item">
+            <span class="settings-checklist-num">${idx + 1}.</span>
+            <input type="text" class="settings-input stg-tpl-checklist" data-type="${escapeAttr(typeKey)}" data-idx="${idx}" value="${escapeAttr(item)}">
+            <button class="btn-text stg-tpl-checklist-del" data-type="${escapeAttr(typeKey)}" data-idx="${idx}">✕</button>
+          </div>`;
+      });
+      html += `<button class="btn-text stg-tpl-checklist-add" data-type="${escapeAttr(typeKey)}">+ 添加评审项</button>`;
+      html += '</div>';
+      return html;
+    }
+    return '';
+  }
+
+  function bindTemplatesEditor() {
     const container = document.getElementById('settings-form');
-    container.querySelectorAll('.stg-tpl-num').forEach(el => {
+    if (!container) return;
+
+    // 标签切换
+    container.querySelectorAll('.settings-template-tab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        tplActiveTab = btn.dataset.tab;
+        paintSettingsCenter();
+      });
+    });
+
+    // 数值 / 文本字段
+    container.querySelectorAll('.stg-tpl-num, .stg-tpl-text').forEach(el => {
       el.addEventListener('change', () => {
         const type = el.dataset.type;
         const field = el.dataset.field;
-        const val = el.value === '' ? null : (el.step && el.step.includes('.') ? parseFloat(el.value) : parseInt(el.value));
-        if (!SettingsState.data.project_types) SettingsState.data.project_types = {};
-        if (!SettingsState.data.project_types[type]) SettingsState.data.project_types[type] = {};
-        if (!SettingsState.data.project_types[type].quality_threshold) SettingsState.data.project_types[type].quality_threshold = {};
-        if (field === 'page_limit') {
-          SettingsState.data.project_types[type].page_limit = val;
+        let val;
+        if (el.type === 'number') {
+          val = el.value === '' ? null : (el.step && el.step.includes('.') ? parseFloat(el.value) : parseInt(el.value));
         } else {
+          val = el.value;
+        }
+        ensurePath(SettingsState.data, ['project_types', type]);
+        if (['min_overall_score', 'max_high_issues', 'max_medium_issues'].includes(field)) {
+          ensurePath(SettingsState.data, ['project_types', type, 'quality_threshold']);
           SettingsState.data.project_types[type].quality_threshold[field] = val;
+        } else {
+          SettingsState.data.project_types[type][field] = val;
         }
         SettingsState.unsaved = true;
       });
     });
+
+    // 撰写风格
+    container.querySelectorAll('.stg-tpl-style').forEach(el => {
+      el.addEventListener('change', () => {
+        const type = el.dataset.type;
+        const section = el.dataset.section;
+        ensurePath(SettingsState.data, ['project_types', type, 'writing_style']);
+        SettingsState.data.project_types[type].writing_style[section] = el.value;
+        SettingsState.unsaved = true;
+      });
+    });
+
+    // 评审清单
+    container.querySelectorAll('.stg-tpl-checklist').forEach(el => {
+      el.addEventListener('change', () => {
+        const type = el.dataset.type;
+        const idx = parseInt(el.dataset.idx);
+        ensurePath(SettingsState.data, ['project_types', type, 'review_checklist'], []);
+        SettingsState.data.project_types[type].review_checklist[idx] = el.value;
+        SettingsState.unsaved = true;
+      });
+    });
+    container.querySelectorAll('.stg-tpl-checklist-del').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.type;
+        const idx = parseInt(btn.dataset.idx);
+        ensurePath(SettingsState.data, ['project_types', type, 'review_checklist'], []);
+        SettingsState.data.project_types[type].review_checklist.splice(idx, 1);
+        SettingsState.unsaved = true;
+        paintSettingsCenter();
+      });
+    });
+    container.querySelectorAll('.stg-tpl-checklist-add').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const type = btn.dataset.type;
+        ensurePath(SettingsState.data, ['project_types', type, 'review_checklist'], []);
+        SettingsState.data.project_types[type].review_checklist.push('');
+        SettingsState.unsaved = true;
+        paintSettingsCenter();
+      });
+    });
+  }
+
+  // ---------- rules ----------
+
+  function renderRulesEditor() {
+    let html = '<div class="settings-desc">编辑人工反馈标准。可直接修改 JSON 文本，保存前会校验格式。</div>';
+    html += '<textarea id="stg-rules-json" class="settings-json-editor" rows="28">' + escapeHtml(JSON.stringify(SettingsState.data, null, 2)) + '</textarea>';
+    html += '<div id="stg-rules-error" class="text-error mt-8" style="display:none;"></div>';
+    return html;
+  }
+
+  function bindRulesEditor() {
+    const container = document.getElementById('settings-form');
+    if (!container) return;
+    const textarea = document.getElementById('stg-rules-json');
+    const errorEl = document.getElementById('stg-rules-error');
+    if (!textarea) return;
+
+    const apply = () => {
+      try {
+        const parsed = JSON.parse(textarea.value);
+        SettingsState.data = parsed;
+        SettingsState.unsaved = true;
+        errorEl.style.display = 'none';
+        errorEl.textContent = '';
+      } catch (e) {
+        errorEl.style.display = 'block';
+        errorEl.textContent = 'JSON 格式错误：' + e.message;
+      }
+    };
+    textarea.addEventListener('change', apply);
+    textarea.addEventListener('input', apply);
+  }
+
+  // ---------- helpers ----------
+
+  function ensurePath(obj, path, defaultValue) {
+    let cur = obj;
+    for (let i = 0; i < path.length - 1; i++) {
+      const k = path[i];
+      if (!cur[k] || typeof cur[k] !== 'object') cur[k] = {};
+      cur = cur[k];
+    }
+    const last = path[path.length - 1];
+    if (cur[last] === undefined && defaultValue !== undefined) cur[last] = defaultValue;
   }
 
   // ============================================

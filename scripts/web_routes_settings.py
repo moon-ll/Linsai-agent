@@ -68,6 +68,13 @@ SETTINGS_CATEGORIES: Dict[str, Dict[str, Any]] = {
             "nsfc_standards": PROJECT_ROOT / "memory" / "nsfc-standards.json",
         },
     },
+    "rules": {
+        "label": "评审规则配置",
+        "description": "人工反馈意见标准、问题类型、严重级别、整理 prompt",
+        "files": {
+            "feedback_standards": PROJECT_ROOT / "memory" / "feedback-standards.json",
+        },
+    },
     "agents": {
         "label": "Agent / Profile 配置",
         "description": "各 profile 默认 Provider、超时、模型，以及路由策略",

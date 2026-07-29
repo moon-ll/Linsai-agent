@@ -144,6 +144,14 @@
   - `/review <id>`：打开课题自检/待校验面板。
   - `/rule <自然语言>`：记录规则修改请求（后续接入 agent 执行）。
   - `/template` 增强：支持通过聊天调整页数限制和达标分。
+
+### v6.7.8 前端操作台增强（Phase 3：设置中心增强）
+- **内容/模板配置可视化**：`web/js/settings_center.js` 的 `templates` 分类改造为可折叠项目类型卡片，每个类型分「基础参数 / 撰写要求 / 评审清单」三个标签页：
+  - 基础参数：资助上限、执行年限、页数限制、达标分、问题数限制、核心要求、结构要求。
+  - 撰写要求：各章节（立项依据/研究内容/研究方案/特色创新等）的撰写风格文本框。
+  - 评审清单：可增删改的评审检查项列表。
+- **新增「评审规则配置」分类**：`scripts/web_routes_settings.py` 增加 `rules` 分类，对应 `memory/feedback-standards.json`；前端提供 JSON 编辑器并实时校验格式。
+- **样式支持**：`web/css/style.css` 新增模板标签页、文本域、评审清单、JSON 编辑器样式。
 - **验证**：`python3 scripts/self_test.py --module` 198/198 通过；`python3 scripts/self_test.py --web-ci` 252/252 通过。
 
 ### v6.7.7 周末任务流水线重构
