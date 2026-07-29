@@ -152,6 +152,13 @@
   - 评审清单：可增删改的评审检查项列表。
 - **新增「评审规则配置」分类**：`scripts/web_routes_settings.py` 增加 `rules` 分类，对应 `memory/feedback-standards.json`；前端提供 JSON 编辑器并实时校验格式。
 - **样式支持**：`web/css/style.css` 新增模板标签页、文本域、评审清单、JSON 编辑器样式。
+
+### v6.7.8 前端操作台增强（Phase 4：仪表盘重设计）
+- **结构重设计** `web/js/dashboard.js`：
+  - 顶部：问候语 + 4 个大数字统计卡片（文献待处理 / 任务待办 / 待决策 / 告警异常）。
+  - 中段：左侧「全链路漏斗」展示输入端 → 初稿 → 优化中 → 待校验 → 归档 → 输出端六阶段及数量；右侧「需要你」行动列表按优先级展示待校验课题、新初稿、待决策、告警、文献、任务。
+  - 底部：三列快捷预览（文献简报 / 任务 / NSFC 待决策）。
+- **样式重设计** `web/css/style.css`：卡片化、圆角、阴影、hover 动效，移动端响应式适配。
 - **验证**：`python3 scripts/self_test.py --module` 198/198 通过；`python3 scripts/self_test.py --web-ci` 252/252 通过。
 
 ### v6.7.7 周末任务流水线重构
