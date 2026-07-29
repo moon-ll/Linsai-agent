@@ -56,6 +56,7 @@ if str(_SCRIPT_DIR) not in sys.path:
 
 from common import now_utc, load_json, save_json, file_lock, hermes_subprocess_env
 from paths import PROJECT_ROOT
+from proposal_sections import ProposalSections, PROPOSAL_SECTIONS
 
 __all__ = [
     "ProposalLifecycle",
@@ -88,13 +89,6 @@ DEFAULT_NO_IMPROVEMENT_LIMIT = 3  # 连续3轮无提升则判定无法提升
 DEFAULT_STAGGER_SECONDS = 90  # 错峰间隔（秒），课题间留间隔避免扎堆（P0-1）
 
 # 申请书章节定义（P1-1: 章节级对抗）
-PROPOSAL_SECTIONS = [
-    {"key": "rationale", "title": "（一）立项依据", "cn": "立项依据", "desc": "科学意义、前人研究局限性"},
-    {"key": "content", "title": "（二）研究内容", "cn": "研究内容", "desc": "研究内容、特色与创新点"},
-    {"key": "method", "title": "（三）研究方案", "cn": "研究方案", "desc": "技术路线、可行性"},
-]
-
-
 class ProposalLifecycle:
     """提案生命周期管理器。"""
 
@@ -1121,36 +1115,56 @@ class ProposalLifecycle:
         """派活给 critic profile 做对抗评审。
 
         P1-1: 支持章节级评审（focus_section）和整体审查（is_full_review）。
+        v6.7.7: 默认按章节拆分文件读取，降低单次 LLM 负载、减少超时。
         """
-        proposal_path = prop_dir / "04_proposal" / "proposal-draft.md"
+        sections = ProposalSections(prop_dir)
+        sections.ensure_split()  # 兼容旧格式：自动拆分
         standards_path = str(self.standards_path.relative_to(PROJECT_ROOT))
         report_path = prop_dir / "05_review" / f"critic-round-{round_num}.md"
         report_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # P1-1: 构建章节聚焦指令
-        if focus_section:
-            focus_text = (
-                f"\n【本轮聚焦章节】{focus_section['title']}（{focus_section['desc']}）\n"
-                f"请重点深入评审该章节，其他章节只做简要一致性检查。\n"
-                f"对该章节的评审应细致到段落级别。\n\n"
-            )
-        elif is_full_review:
+        # v6.7.7: 构建要读取的文件列表
+        if is_full_review:
             focus_text = (
                 f"\n【本轮为整体一致性审查】\n"
                 f"请检查三个章节之间的逻辑衔接、术语一致性、内容冗余/矛盾。\n"
                 f"不需要逐段细审，聚焦整体连贯性。\n\n"
             )
+            files_to_read = [
+                str(prop_dir / "04_proposal" / "sections" / f"{s['key']}.md")
+                for s in PROPOSAL_SECTIONS
+                if sections.section_exists(s['key'])
+            ]
+            read_instruction = (
+                "【申请书章节文件】\n" +
+                "\n".join(f"- {p}" for p in files_to_read) +
+                "\n\n请读取以上全部章节文件，做整体一致性审查。\n"
+            )
+        elif focus_section:
+            focus_text = (
+                f"\n【本轮聚焦章节】{focus_section['title']}（{focus_section['desc']}）\n"
+                f"请重点深入评审该章节，其他章节只做简要一致性检查。\n"
+                f"对该章节的评审应细致到段落级别。\n\n"
+            )
+            section_file = prop_dir / "04_proposal" / "sections" / f"{focus_section['key']}.md"
+            files_to_read = [str(section_file)]
+            read_instruction = (
+                f"【申请书聚焦章节文件】{section_file}\n"
+                f"请主要读取以上聚焦章节文件；如需检查跨章节一致性，可简要读取其他章节。\n\n"
+            )
         else:
             focus_text = ""
+            files_to_read = [str(prop_dir / "04_proposal" / "proposal-draft.md")]
+            read_instruction = f"【申请书文件】{files_to_read[0]}\n"
 
         prompt = (
             f"请对以下 NSFC 申请书做第 {round_num} 轮对抗评审。\n\n"
             f"【项目类型】{project_type}\n"
             f"【质量标准】请读取 {standards_path} 中 project_types.{project_type} 的标准\n\n"
-            f"【申请书文件】{proposal_path}\n"
+            f"{read_instruction}"
             f"{focus_text}"
             f"请执行：\n"
-            f"1. 读取申请书全文\n"
+            f"1. 读取指定的申请书文件（章节级评审只读聚焦章节，整体审查读全部章节）\n"
             f"2. 读取质量标准配置文件\n"
             f"3. 按项目类型标准做红队评审，尽可能找出问题\n"
             f"4. 每个问题给出具体、可执行的修改建议\n"
@@ -1183,6 +1197,110 @@ class ProposalLifecycle:
                         "支撑不足", "无文献", "需补充文献", "文献支撑", "缺乏近"]
         return any(kw in output for kw in gap_keywords)
 
+    def _run_gap_identifier(
+        self,
+        proposal_id: str,
+        prop_dir: Path,
+        critic_result: Dict[str, Any],
+        focus_section: Optional[Dict[str, str]],
+        timeout: int = 120,
+    ) -> Optional[Path]:
+        """v6.7.7: 从 critic 报告中识别文献缺口，输出结构化 gap analysis。
+
+        将 researcher 拆分为两步：
+        1. gap_identifier（轻量，快速）：分析 critic 报告，提取需要补充文献的论点
+        2. literature_searcher（重）：根据 gap analysis 执行定向检索
+
+        Returns:
+            gap analysis JSON 文件路径；失败返回 None
+        """
+        section_hint = f"聚焦章节：{focus_section['cn']}\n" if focus_section else ""
+        critic_output = critic_result.get("output", "")[:3000]
+
+        target_dir = prop_dir / "02_literature" / "gap-analysis"
+        target_dir.mkdir(parents=True, exist_ok=True)
+        import time as _t
+        gap_path = target_dir / f"gap-analysis-r{int(_t.time())}.json"
+
+        prompt = (
+            f"请分析以下评审报告，识别需要补充文献支撑的具体缺口。\n\n"
+            f"【课题】{proposal_id}\n"
+            f"{section_hint}"
+            f"【评审报告内容】\n{critic_output}\n\n"
+            f"请执行：\n"
+            f"1. 逐条阅读评审报告中指出的文献/引用/支撑不足问题\n"
+            f"2. 对每个问题，明确：论点是什么、缺什么类型的文献、建议检索关键词\n"
+            f"3. 忽略与文献无关的问题（如逻辑、格式等）\n"
+            f"4. 输出严格的 JSON 文件到：{gap_path}\n"
+            f"JSON 格式：\n"
+            f"{{\n"
+            f"  \"gaps\": [\n"
+            f"    {{\n"
+            f"      \"claim\": \"需要支撑的论点\",\n"
+            f"      \"missing_evidence\": \"缺少什么证据/文献\",\n"
+            f"      \"search_keywords\": [\"keyword1\", \"keyword2\"],\n"
+            f"      \"priority\": \"high|medium|low\"\n"
+            f"    }}\n"
+            f"  ]\n"
+            f"}}\n"
+        )
+
+        result = self._run_hermes("researcher", prompt, timeout)
+        if result.get("success") and gap_path.exists():
+            if _log:
+                _log.info(f"[{proposal_id}] 文献缺口识别完成: {gap_path.name}")
+            return gap_path
+        else:
+            if _log:
+                _log.warning(f"[{proposal_id}] 文献缺口识别失败: {result.get('error', '')[:100]}")
+            return None
+
+    def _run_literature_searcher(
+        self,
+        proposal_id: str,
+        prop_dir: Path,
+        gap_path: Path,
+        focus_section: Optional[Dict[str, str]],
+        timeout: int = 300,
+    ) -> Optional[Path]:
+        """v6.7.7: 根据 gap analysis 执行定向文献检索。
+
+        Args:
+            gap_path: _run_gap_identifier 生成的 JSON 文件路径
+
+        Returns:
+            lit-gap markdown 文件路径；失败返回 None
+        """
+        section_hint = f"聚焦章节：{focus_section['cn']}\n" if focus_section else ""
+
+        target_dir = prop_dir / "02_literature" / "targeted-research"
+        target_dir.mkdir(parents=True, exist_ok=True)
+        import time as _t
+        result_path = target_dir / f"lit-gap-{int(_t.time())}.md"
+
+        prompt = (
+            f"请根据文献缺口分析，执行定向文献检索。\n\n"
+            f"【课题】{proposal_id}\n"
+            f"{section_hint}"
+            f"【文献缺口分析文件】{gap_path}\n"
+            f"【输出文件】{result_path}\n\n"
+            f"请执行：\n"
+            f"1. 读取 {gap_path} 中的 JSON 缺口列表\n"
+            f"2. 针对每个 high/medium 优先级缺口，检索 2-3 篇最相关的近2年论文\n"
+            f"3. 每篇论文给出：标题、作者、年份、期刊/arXiv、核心结论、如何支撑该论点\n"
+            f"4. 将检索结果写入 {result_path}，格式：每个缺口一段，列出推荐引用论文\n"
+        )
+
+        result = self._run_hermes("researcher", prompt, timeout)
+        if result.get("success") and result_path.exists():
+            if _log:
+                _log.info(f"[{proposal_id}] 文献检索完成: {result_path.name}")
+            return result_path
+        else:
+            if _log:
+                _log.warning(f"[{proposal_id}] 文献检索失败: {result.get('error', '')[:100]}")
+            return None
+
     def _run_researcher_targeted(
         self,
         proposal_id: str,
@@ -1191,43 +1309,25 @@ class ProposalLifecycle:
         focus_section: Optional[Dict[str, str]],
         timeout: int = 300,
     ) -> str:
-        """派活给 researcher profile 做定向文献检索（P1-2）。
+        """v6.7.7: researcher 入口——先识别缺口，再执行检索，保持单 job 节奏。
 
-        根据 critic 指出的文献缺口，检索 3-5 篇相关论文，
-        结果写入 targeted-research 目录供 writer 引用。
+        内部拆分为 _run_gap_identifier + _run_literature_searcher，
+        但对外仍是一个 job 调用，避免 worker cron 节奏变慢。
         """
-        # 生成检索 prompt
-        section_hint = f"聚焦章节：{focus_section['cn']}\n" if focus_section else ""
-        critic_output = critic_result.get("output", "")[:2000]  # 限制长度
-
-        # 结果保存路径
-        target_dir = prop_dir / "02_literature" / "targeted-research"
-        target_dir.mkdir(parents=True, exist_ok=True)
-        import time as _t
-        result_path = target_dir / f"lit-gap-{int(_t.time())}.md"
-
-        prompt = (
-            f"请做定向文献检索（补充评审指出的文献缺口）。\n\n"
-            f"【课题】{proposal_id}\n"
-            f"{section_hint}"
-            f"【评审指出的文献缺口】\n{critic_output}\n\n"
-            f"请执行：\n"
-            f"1. 从评审报告中提取文献缺口（哪些论点缺支撑、哪些方向缺引用）\n"
-            f"2. 针对每个缺口，检索 2-3 篇最相关的近2年论文\n"
-            f"3. 每篇论文给出：标题、作者、年份、核心结论、如何支撑该论点\n"
-            f"4. 将检索结果写入：{result_path}\n"
-            f"5. 格式：每个缺口一段，列出推荐引用的论文\n"
+        # 第一步：识别缺口（轻量，默认 120s）
+        gap_path = self._run_gap_identifier(
+            proposal_id, prop_dir, critic_result, focus_section, timeout=120
         )
-
-        result = self._run_hermes("researcher", prompt, timeout)
-        if result.get("success"):
-            if _log:
-                _log.info(f"[{proposal_id}] 文献补充完成: {result_path.name}")
-            return f"\n【文献补充（researcher 定向检索）】\n请参考 {result_path} 中的新文献，在修订时引用。\n"
-        else:
-            if _log:
-                _log.warning(f"[{proposal_id}] 文献补充失败: {result.get('error', '')[:100]}")
+        if not gap_path:
             return ""
+
+        # 第二步：执行检索（重量，剩余超时）
+        result_path = self._run_literature_searcher(
+            proposal_id, prop_dir, gap_path, focus_section, timeout=max(timeout - 120, 180)
+        )
+        if result_path:
+            return f"\n【文献补充（researcher 定向检索）】\n请参考 {result_path} 中的新文献，在修订时引用。\n"
+        return ""
 
     def _run_writer_optimize(
         self,
@@ -1246,8 +1346,10 @@ class ProposalLifecycle:
 
         P0-2: 聚焦最弱维度，针对性改进。
         P1-1: 支持章节级修订（focus_section）。
+        v6.7.7: 章节级修订只写入对应 section 文件，再自动组装 proposal-draft.md。
         """
-        proposal_path = prop_dir / "04_proposal" / "proposal-draft.md"
+        sections = ProposalSections(prop_dir)
+        sections.ensure_split()
         standards_path = str(self.standards_path.relative_to(PROJECT_ROOT))
         # 找最新的 critic 报告
         review_dir = prop_dir / "05_review"
@@ -1267,23 +1369,42 @@ class ProposalLifecycle:
                 f"请优先改进 {weakest_cn} 相关的问题，这是本轮的聚焦重点。\n"
             )
 
-        # P1-1: 构建章节聚焦指令
-        section_focus = ""
+        # v6.7.7: 构建写入目标与读取文件列表
+        section_files = [
+            str(prop_dir / "04_proposal" / "sections" / f"{s['key']}.md")
+            for s in PROPOSAL_SECTIONS
+            if sections.section_exists(s['key'])
+        ]
+
         if focus_section:
+            target_section_file = prop_dir / "04_proposal" / "sections" / f"{focus_section['key']}.md"
             section_focus = (
                 f"\n【本轮聚焦章节】{focus_section['title']}\n"
-                f"请只修改该章节相关的问题，不要改动其他章节的内容。\n"
-                f"其他章节如有跨章节引用需要调整，才可微调。\n"
+                f"请只修改该章节文件：{target_section_file}\n"
+                f"不要修改其他章节文件。\n"
+                f"修改完成后，将优化后的完整章节内容覆盖写入 {target_section_file}\n"
+                f"系统会自动根据章节文件重新组装 proposal-draft.md。\n"
             )
+            primary_read = str(target_section_file)
         elif is_full_review:
+            target_section_file = None
             section_focus = (
                 f"\n【本轮为整体一致性修订】\n"
                 f"请只做章节间的衔接、术语统一、冗余删减，不要大幅改动内容。\n"
+                f"可修改任意章节文件（在 {prop_dir}/04_proposal/sections/ 下），\n"
+                f"但请保持各章节文件独立，系统会自动组装 proposal-draft.md。\n"
             )
+            primary_read = str(prop_dir / "04_proposal" / "proposal-draft.md")
+        else:
+            target_section_file = None
+            section_focus = ""
+            primary_read = str(prop_dir / "04_proposal" / "proposal-draft.md")
 
         prompt = (
             f"请根据对抗评审意见优化申请书。\n\n"
-            f"【申请书文件】{proposal_path}\n"
+            f"【主读取文件】{primary_read}\n"
+            f"【所有章节文件】\n" +
+            "\n".join(f"- {p}" for p in section_files) + "\n\n"
             f"【项目类型】{project_type}\n"
             f"【质量标准】请读取 {standards_path}\n"
             f"【评审报告】{latest_critic}\n"
@@ -1291,18 +1412,30 @@ class ProposalLifecycle:
             f"{section_focus}"
             f"{lit_supplement}\n"
             f"请执行：\n"
-            f"1. 读取申请书当前版本\n"
+            f"1. 读取主读取文件（章节级修订只读聚焦章节，整体修订可读全部章节）\n"
             f"2. 读取评审报告中的所有问题\n"
             f"3. 逐条解决每个问题（按严重程度优先）\n"
             f"4. 重点改进最弱维度相关的问题\n"
-            f"5. 只修改聚焦章节（或整体衔接），保持其他内容不变（增量优化）\n"
-            f"6. 优化后覆盖写入原文件：{proposal_path}\n"
+            f"5. 只修改聚焦章节文件（或整体衔接涉及的章节文件），保持其他章节不变（增量优化）\n"
+            f"6. 将优化后的内容覆盖写入对应章节 .md 文件（不是 proposal-draft.md）\n"
             f"7. 同步更新方法学手册：{prop_dir}/04_proposal/methodology-manual.md\n"
             f"   （申请书重思路，方法学手册重细节：公式推导/参数表/技术路线图）\n"
             f"   ⚠️ 方法学手册也按章节组织，只更新与聚焦章节对应的细节部分。\n"
         )
 
-        return self._run_hermes("writer", prompt, timeout)
+        result = self._run_hermes("writer", prompt, timeout)
+
+        # v6.7.7: writer 返回后，自动从 sections/ 重新组装 proposal-draft.md
+        if result.get("success"):
+            try:
+                sections.assemble_draft()
+                if _log:
+                    _log.info(f"[{proposal_id}] 已从 sections/ 重新组装 proposal-draft.md")
+            except Exception as e:
+                if _log:
+                    _log.warning(f"[{proposal_id}] 组装 proposal-draft.md 失败: {e}")
+
+        return result
 
     def _run_hermes(self, profile: str, prompt: str, timeout: int) -> Dict[str, Any]:
         """执行 hermes oneshot。"""

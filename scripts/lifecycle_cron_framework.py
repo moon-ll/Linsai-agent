@@ -40,10 +40,10 @@ from paths import PROJECT_ROOT
 # 从 proposal_lifecycle 导入基类与常量
 from proposal_lifecycle import (
     ProposalLifecycle,
-    PROPOSAL_SECTIONS,
     DEFAULT_MAX_ROUNDS,
     DEFAULT_NO_IMPROVEMENT_LIMIT,
 )
+from proposal_sections import PROPOSAL_SECTIONS
 
 import hermes_bridge as hb
 

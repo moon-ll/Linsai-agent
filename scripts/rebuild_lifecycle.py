@@ -35,7 +35,8 @@ from paths import PROJECT_ROOT
 
 # 复用 proposal_lifecycle 的评分提取逻辑
 sys.path.insert(0, str(Path(__file__).parent))
-from proposal_lifecycle import ProposalLifecycle, PROPOSAL_SECTIONS
+from proposal_lifecycle import ProposalLifecycle
+from proposal_sections import PROPOSAL_SECTIONS
 
 RESEARCH_PROPOSALS_DIR = PROJECT_ROOT / "research_proposals"
 LIFECYCLE_PATH = RESEARCH_PROPOSALS_DIR / "_lifecycle.json"
