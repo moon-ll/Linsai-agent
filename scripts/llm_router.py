@@ -3,7 +3,7 @@
 
 支持:
     - CLI 后端: claude, kimi
-    - HTTP API 后端: OpenAI 兼容格式 (MiniMax, DeepSeek, Groq, Azure 等)
+    - HTTP API 后端: OpenAI 兼容格式 (MiniMax, Kimi/Moonshot, DeepSeek, Groq, Azure, GLM 等)
 
 配置优先级（高优先覆盖低优先）:
     1. 环境变量（os.environ）
@@ -162,7 +162,7 @@ def _build_config() -> Dict[str, Any]:
             })
 
     # 4. 如果环境变量中有其他 OpenAI 兼容配置，自动添加
-    # GLM 默认 priority=3（备选，排在 kimi/minimax/claude 之后）
+    # GLM 默认 priority=3（备选，排在 minimax/kimi 之后）
     for prefix in ["OPENAI", "DEEPSEEK", "GROQ", "AZURE", "GLM"]:
         key = env_vars.get(f"{prefix}_API_KEY")
         if key:
@@ -179,7 +179,21 @@ def _build_config() -> Dict[str, Any]:
                     "priority": env_vars.get(f"{prefix}_PRIORITY", default_prio),
                 })
 
-    # 5. 自动检测本地 CLI（始终执行，与 API provider 无关）
+    # 5. 如果环境变量中有 Kimi API 配置（Moonshot Coding Plan），自动添加
+    #    注意与本地 kimi CLI 区分，API provider 命名为 kimi-api
+    if env_vars.get("KIMI_API_KEY"):
+        has_kimi_api = any(p.get("name") == "kimi-api" for p in config["providers"])
+        if not has_kimi_api:
+            config["providers"].append({
+                "name": "kimi-api",
+                "type": "api",
+                "base_url": env_vars.get("KIMI_BASE_URL", "https://api.moonshot.cn/v1"),
+                "api_key": env_vars["KIMI_API_KEY"],
+                "model": env_vars.get("KIMI_MODEL", "kimi-k2"),
+                "priority": env_vars.get("KIMI_PRIORITY", "2"),
+            })
+
+    # 6. 自动检测本地 CLI（始终执行，与 API provider 无关）
     cli_detected = _detect_cli_providers()
     existing_names = {p["name"] for p in config["providers"]}
     for p in cli_detected:
