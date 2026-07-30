@@ -552,7 +552,10 @@ class PipelineRoutesMixin:
         if mgr is None:
             self._pipeline_module_unavailable("pipeline_orchestrator")
             return
-        self._send_json({"status": "ok", "data": mgr.get_state()})
+        # v6.7.9: 与前端 pipeline.js 对齐，返回 flat 结构
+        result = mgr.get_state() or {}
+        result["status"] = "ok"
+        self._send_json(result)
 
     def _pl_get_progress(self, path, parsed, match):
         """获取进度摘要"""
@@ -561,7 +564,9 @@ class PipelineRoutesMixin:
         if mgr is None:
             self._pipeline_module_unavailable("pipeline_orchestrator")
             return
-        self._send_json({"status": "ok", "data": mgr.get_progress()})
+        result = mgr.get_progress() or {}
+        result["status"] = "ok"
+        self._send_json(result)
 
     def _pl_get_timeline(self, path, parsed, match):
         """获取执行时间线"""
