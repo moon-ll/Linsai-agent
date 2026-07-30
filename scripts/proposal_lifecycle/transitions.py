@@ -69,6 +69,17 @@ class TransitionsMixin:
         if _log:
             _log.info(f"流转 {proposal_id}: {from_stage} → {to_stage} ({reason})")
 
+        # v6.7.10: 进入 optimizing 时自动执行初始化，确保四大产物和 7 个申请书模块就位
+        init_result = None
+        if to_stage == "optimizing":
+            try:
+                init_result = self.initialize_for_optimization(proposal_id)
+                if _log and init_result.get("success"):
+                    _log.info(f"[{proposal_id}] 进入 optimizing 后自动初始化完成")
+            except Exception as e:
+                if _log:
+                    _log.warning(f"[{proposal_id}] 进入 optimizing 后初始化失败: {e}")
+
         # 更新 proposal-brief（状态变更后）
         try:
             self.update_proposal_brief(proposal_id)
@@ -81,6 +92,7 @@ class TransitionsMixin:
             "from_stage": from_stage,
             "to_stage": to_stage,
             "path": str(to_dir.relative_to(_pl.PROJECT_ROOT)),
+            "init_result": init_result,
         }
 
     # ------------------------------------------------------------------

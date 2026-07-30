@@ -9,20 +9,22 @@ from proposal_lifecycle.constants import (
     DEFAULT_SCORE_THRESHOLD,
 )
 
+from proposal_sections import SECTION_KEYS
+
 
 class CompletionMixin:
     # ------------------------------------------------------------------
     # 达标判定
     # ------------------------------------------------------------------
 
-    # 所有模块必须全部通过才算达标（P1-3）
-    REQUIRED_SECTIONS = ["rationale", "content", "method", "full_review"]
+    # v6.7.10: 7 个申请书模块 + 整体审查全部通过才算达标
+    REQUIRED_SECTIONS = SECTION_KEYS + ["full_review"]
 
     def _check_done(self, proposal_id: str, threshold: Dict[str, Any]) -> Dict[str, Any]:
         """判定 proposal 是否达到输出标准（P1-3: 所有模块对抗胜利才算达标）。
 
-        达标条件：3个章节（立项依据/研究内容/研究方案）+ 整体审查，共4个模块全部通过。
-        每个模块"通过"= 分数达标 + 各维度无短板。
+        达标条件：7 个章节（立项依据/研究内容/研究方案/特色与创新/年度研究计划/预期研究成果/参考文献）
+        + 整体审查，共 8 个模块全部通过。每个模块"通过"= 分数达标 + 各维度无短板。
         """
         prop_state = self._get_proposal_state(proposal_id)
         if not prop_state:

@@ -28,6 +28,7 @@ from proposal_lifecycle.state import StateMixin
 from proposal_lifecycle.naming import NamingMixin
 from proposal_lifecycle.registration import RegistrationMixin
 from proposal_lifecycle.metadata import MetadataMixin
+from proposal_lifecycle.initialization import InitializerMixin
 from proposal_lifecycle.transitions import TransitionsMixin
 from proposal_lifecycle.optimize import OptimizeMixin
 from proposal_lifecycle.completion import CompletionMixin
@@ -40,6 +41,7 @@ class ProposalLifecycle(
     NamingMixin,
     RegistrationMixin,
     MetadataMixin,
+    InitializerMixin,
     TransitionsMixin,
     OptimizeMixin,
     CompletionMixin,

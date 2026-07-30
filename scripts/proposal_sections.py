@@ -33,16 +33,21 @@ from typing import Dict, List, Optional
 # NSFC 申请书标准章节定义（与 proposal_lifecycle 解耦，避免循环导入）
 PROPOSAL_SECTIONS = [
     {"key": "rationale", "title": "（一）立项依据", "cn": "立项依据", "desc": "科学意义、前人研究局限性"},
-    {"key": "content", "title": "（二）研究内容", "cn": "研究内容", "desc": "研究内容、特色与创新点"},
-    {"key": "method", "title": "（三）研究方案", "cn": "研究方案", "desc": "技术路线、可行性"},
+    {"key": "content", "title": "（二）研究内容", "cn": "研究内容", "desc": "研究内容、科学目标、关键问题"},
+    {"key": "method", "title": "（三）研究方案", "cn": "研究方案", "desc": "技术路线、可行性、风险"},
+    {"key": "innovation", "title": "（四）特色与创新", "cn": "特色与创新", "desc": "创新点、差异化"},
+    {"key": "plan", "title": "（五）年度研究计划", "cn": "年度研究计划", "desc": "四年进度安排"},
+    {"key": "outcome", "title": "（六）预期研究成果", "cn": "预期研究成果", "desc": "论文、专利、数据集等"},
+    {"key": "references", "title": "（七）参考文献", "cn": "参考文献", "desc": "引文列表"},
 ]
+
+# 章节 key 列表（常用遍历）
+SECTION_KEYS = [s["key"] for s in PROPOSAL_SECTIONS]
+SECTION_TITLES = [s["title"] for s in PROPOSAL_SECTIONS]
 
 
 class ProposalSections:
     """管理 proposal 的章节拆分与组装。"""
-
-    # 匹配中文章节标题：## （一）立项依据
-    SECTION_HEADER_RE = re.compile(r"^##\s*（[一二三四五六七八九十]+）\s*(.+)$", re.MULTILINE)
 
     def __init__(self, proposal_dir: Path) -> None:
         """Args:
@@ -57,10 +62,66 @@ class ProposalSections:
             s["key"]: s for s in PROPOSAL_SECTIONS
         }
         # 标题前缀 -> key，用于解析旧 draft
+        # v6.7.10: 同时兼容 （一）/一、/节 1： 等常见编号前缀
         self.title_to_key: Dict[str, str] = {}
-        for s in PROPOSAL_SECTIONS:
+        cn_nums = ["一", "二", "三", "四", "五", "六", "七"]
+        for idx, s in enumerate(PROPOSAL_SECTIONS):
             self.title_to_key[s["title"]] = s["key"]
             self.title_to_key[s["cn"]] = s["key"]
+            # 添加别名：一、立项依据 / 节 1：立项依据 / 1. 立项依据
+            self.title_to_key[f"{cn_nums[idx]}、{s['cn']}"] = s["key"]
+            self.title_to_key[f"节 {idx + 1}：{s['cn']}"] = s["key"]
+            self.title_to_key[f"节 {idx+1}：{s['cn']}"] = s["key"]
+            self.title_to_key[f"{idx + 1}. {s['cn']}"] = s["key"]
+            self.title_to_key[f"{idx + 1}、{s['cn']}"] = s["key"]
+
+        # v6.7.10: 添加 writer agent 常用的非标准标题别名（用于解析旧 draft）
+        extra_aliases: Dict[str, List[str]] = {
+            "rationale": [
+                "科学意义与研究价值", "国内外研究现状及发展动态分析",
+                "国内外研究现状", "研究背景与科学意义", "研究背景与意义",
+                "项目背景", "立项依据与研究意义",
+            ],
+            "content": [
+                "关键科学问题凝练", "研究内容与研究目标",
+                "拟解决的关键科学问题", "研究目标与内容", "关键科学问题",
+            ],
+            "method": [
+                "技术路线", "研究思路", "实施方案", "总体技术路线",
+                "研究方法与技术路线",
+            ],
+            "innovation": [
+                "发展新方法的重要性和必要性", "创新点", "方法学创新",
+                "研究特色与创新点", "特色创新", "创新性",
+            ],
+            "plan": [
+                "年度计划", "研究计划", "进度安排", "四年研究计划",
+            ],
+            "outcome": [
+                "预期成果", "预期研究目标", "研究成果", "预期研究产出",
+            ],
+            "references": [
+                "参考文献", "引文列表", "文献目录", "参考文献目录",
+            ],
+        }
+        for key, aliases in extra_aliases.items():
+            for alias in aliases:
+                self.title_to_key[alias] = key
+                # v6.7.10: 为每个别名添加所有可能编号前缀（1-7），
+                # 因为 writer 可能用节 3 表示研究内容、节 4 表示创新等
+                for n in range(1, 8):
+                    self.title_to_key[f"{cn_nums[n-1]}、{alias}"] = key
+                    self.title_to_key[f"节 {n}：{alias}"] = key
+                    self.title_to_key[f"{n}. {alias}"] = key
+                    self.title_to_key[f"{n}、{alias}"] = key
+
+        # 构建章节标题边界正则：匹配 ## 后接任意已知标题（长标题优先，避免子串误匹配）
+        # 允许标题后带括号说明，如 "节 3：关键科学问题凝练（申请书级深度）"
+        sorted_titles = sorted(self.title_to_key.keys(), key=len, reverse=True)
+        titles_pattern = "|".join(re.escape(t) for t in sorted_titles)
+        self.section_header_re = re.compile(
+            rf"^##\s*(?:{titles_pattern})(?:\s*[（(][^）)]*[）)])?\s*$", re.MULTILINE
+        )
 
     def is_split(self) -> bool:
         """是否已拆分为 sections/ 目录。"""
@@ -89,6 +150,9 @@ class ProposalSections:
     def ensure_split(self) -> bool:
         """如果尚未拆分，自动将 proposal-draft.md 拆分为 sections/。
 
+        v6.7.10: 兼容旧 3 章格式；对新增 4 个模块（特色与创新/年度计划/预期成果/参考文献）
+        若 draft 中不存在，则创建占位文件，便于后续 writer 补齐。
+
         Returns:
             True 表示执行了拆分，False 表示已拆分或没有 draft 可拆
         """
@@ -100,7 +164,7 @@ class ProposalSections:
         full_draft = self.draft_path.read_text(encoding="utf-8")
         self.sections_dir.mkdir(parents=True, exist_ok=True)
 
-        # 解析每个章节并写入
+        # 解析每个章节并写入；旧 draft 中不存在的章节创建空占位文件
         for key in self.section_map:
             content = self._extract_section(full_draft, key)
             (self.sections_dir / f"{key}.md").write_text(content, encoding="utf-8")
@@ -164,22 +228,36 @@ class ProposalSections:
         return ""
 
     def _extract_section(self, full_draft: str, key: str) -> str:
-        """从完整 draft 中按中文章节标题提取单个章节。"""
+        """从完整 draft 中按中文章节标题提取单个章节。
+
+        v6.7.10: 兼容标准标题（一）立项依据 和别名（一、立项依据 / 节 1：立项依据 等）。
+        """
         target = self.section_map.get(key)
         if not target:
             return ""
 
-        title = target["title"]
-        # 构造匹配模式：## （一）立项依据
-        pattern = re.escape(title)
-        match = re.search(rf"^##\s*{pattern}\s*$", full_draft, re.MULTILINE)
+        # 收集该章节所有可能标题（标准 + 别名），按长度降序避免子串误匹配
+        titles = [t for t, k in self.title_to_key.items() if k == key]
+        titles.sort(key=len, reverse=True)
+
+        match = None
+        for title in titles:
+            pattern = re.escape(title)
+            # 允许标题后带括号说明
+            m = re.search(
+                rf"^##\s*{pattern}(?:\s*[（(][^）)]*[）)])?\s*$",
+                full_draft, re.MULTILINE
+            )
+            if m:
+                match = m
+                break
         if not match:
             return ""
 
         start = match.start()
-        # 找下一个同格式章节标题
+        # 找下一个已知章节标题作为边界
         next_match = None
-        for m in self.SECTION_HEADER_RE.finditer(full_draft, match.end()):
+        for m in self.section_header_re.finditer(full_draft, match.end()):
             if m.start() > start:
                 next_match = m
                 break

@@ -88,9 +88,13 @@ class OptimizeMixin:
         if _log:
             section_name = focus_section["cn"] if focus_section else "整体一致性"
             _log.info(f"[{proposal_id}] 对抗轮 {current_round + 1}: critic 评审（聚焦：{section_name}）")
+        # v6.7.10: 读取初始化后的缺失模块列表，供 critic 重点检查
+        missing_sections = prop_state.get("missing_sections", [])
+
         critic_result = self._run_critic(
             proposal_id, prop_dir, project_type, current_round + 1, critic_timeout,
             focus_section=focus_section, is_full_review=is_full_review,  # P1-1
+            missing_sections=missing_sections,
         )
         if _log:
             elapsed = critic_result.get("elapsed_s", 0)
@@ -140,6 +144,7 @@ class OptimizeMixin:
             weakest_dim=pre_weakest, dim_scores=pre_dims,  # P0-2
             focus_section=focus_section, is_full_review=is_full_review,  # P1-1
             lit_supplement=lit_supplement,  # P1-2
+            missing_sections=missing_sections,
         )
         if _log:
             elapsed = writer_result.get("elapsed_s", 0)
@@ -252,6 +257,7 @@ class OptimizeMixin:
         timeout: int,
         focus_section: Optional[Dict[str, str]] = None,
         is_full_review: bool = False,
+        missing_sections: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """派活给 critic profile 做对抗评审。
 
@@ -298,13 +304,27 @@ class OptimizeMixin:
             files_to_read = [str(prop_dir / "04_proposal" / "proposal-draft.md")]
             read_instruction = f"【申请书文件】{files_to_read[0]}\n"
 
+        # v6.7.10: 模块完整性检查提示
+        section_key_to_cn = {s["key"]: s["cn"] for s in PROPOSAL_SECTIONS}
+        missing_cn = [section_key_to_cn.get(k, k) for k in (missing_sections or [])]
+        completeness_hint = ""
+        if missing_cn:
+            completeness_hint = (
+                f"\n【模块完整性警告】当前申请书缺失以下模块：{', '.join(missing_cn)}。\n"
+                f"请在「完整性」维度大幅扣分（缺 1 个模块不高于 0.5，缺 2 个及以上不高于 0.3），\n"
+                f"并将每个缺失模块标记为 [critical] issue，要求 writer 必须补齐。\n"
+            )
+
         prompt = (
             f"请对以下 NSFC 申请书做第 {round_num} 轮对抗评审。\n\n"
             f"【项目类型】{project_type}\n"
             f"【质量标准】请读取 {standards_path} 中 project_types.{project_type} 的标准\n\n"
             f"{read_instruction}"
             f"{focus_text}"
+            f"{completeness_hint}\n"
             f"请执行：\n"
+            f"0. 模块完整性检查：确认申请书是否包含 7 个标准模块（立项依据/研究内容/研究方案/特色与创新/年度研究计划/预期研究成果/参考文献）。\n"
+            f"   对缺失或内容少于 200 字的模块，在「完整性」维度扣分，并标记为 [critical] 或 [high] issue。\n"
             f"1. 读取指定的申请书文件（章节级评审只读聚焦章节，整体审查读全部章节）\n"
             f"2. 读取质量标准配置文件\n"
             f"3. 按项目类型标准做红队评审，尽可能找出问题\n"
@@ -315,7 +335,7 @@ class OptimizeMixin:
             f"  - 创新性（innovation）：科学问题是否新颖、方法是否有突破\n"
             f"  - 可行性（feasibility）：技术路线能否落地、是否有支撑\n"
             f"  - 严谨性（rigor）：逻辑链条、文献支撑是否充分\n"
-            f"  - 完整性（completeness）：章节是否齐全、格式是否规范\n\n"
+            f"  - 完整性（completeness）：章节是否齐全、格式是否规范（重点考核 7 个标准模块是否都有实质内容）\n\n"
             f"在评审报告末尾，必须包含如下格式的评分块（供程序解析）：\n"
             f"```\n"
             f"## 评分\n"
@@ -467,6 +487,16 @@ class OptimizeMixin:
             proposal_id, prop_dir, gap_path, focus_section, timeout=max(timeout - 120, 180)
         )
         if result_path:
+            # v6.7.10: 自动将检索结果导入文献阅读笔记
+            try:
+                from literature_notes import LiteratureNotes
+                ln = LiteratureNotes(prop_dir)
+                imported = ln.import_from_report(result_path)
+                if _log and imported:
+                    _log.info(f"[{proposal_id}] 已导入 {imported} 条文献阅读笔记")
+            except Exception as e:
+                if _log:
+                    _log.warning(f"[{proposal_id}] 导入文献阅读笔记失败: {e}")
             return f"\n【文献补充（researcher 定向检索）】\n请参考 {result_path} 中的新文献，在修订时引用。\n"
         return ""
 
@@ -482,6 +512,7 @@ class OptimizeMixin:
         focus_section: Optional[Dict[str, str]] = None,
         is_full_review: bool = False,
         lit_supplement: str = "",
+        missing_sections: Optional[List[str]] = None,
     ) -> Dict[str, Any]:
         """派活给 writer profile 根据评审意见优化申请书。
 
@@ -517,6 +548,22 @@ class OptimizeMixin:
             if sections.section_exists(s['key'])
         ]
 
+        # v6.7.10: 构建缺失模块提示
+        section_key_to_cn = {s["key"]: s["cn"] for s in PROPOSAL_SECTIONS}
+        missing_cn = [section_key_to_cn.get(k, k) for k in (missing_sections or [])]
+        missing_hint = ""
+        if missing_cn:
+            missing_hint = (
+                f"\n【缺失模块必须补齐】当前申请书还缺少以下模块：{', '.join(missing_cn)}。\n"
+                f"若本轮聚焦章节在缺失列表中，请先生成完整内容；\n"
+                f"若其他缺失模块已有相关素材（如研究方案中包含预期成果描述），请拆分并补充独立文件。\n"
+            )
+
+        # 四大产物路径
+        research_idea_path = prop_dir / "00_research_idea.md"
+        methodology_manual_path = prop_dir / "04_proposal" / "methodology-manual.md"
+        reading_notes_path = prop_dir / "02_literature" / "reading-notes.md"
+
         if focus_section:
             target_section_file = prop_dir / "04_proposal" / "sections" / f"{focus_section['key']}.md"
             section_focus = (
@@ -551,6 +598,7 @@ class OptimizeMixin:
             f"【评审报告】{latest_critic}\n"
             f"{dim_focus}"
             f"{section_focus}"
+            f"{missing_hint}"
             f"{lit_supplement}\n"
             f"请执行：\n"
             f"1. 读取主读取文件（章节级修订只读聚焦章节，整体修订可读全部章节）\n"
@@ -559,9 +607,16 @@ class OptimizeMixin:
             f"4. 重点改进最弱维度相关的问题\n"
             f"5. 只修改聚焦章节文件（或整体衔接涉及的章节文件），保持其他章节不变（增量优化）\n"
             f"6. 将优化后的内容覆盖写入对应章节 .md 文件（不是 proposal-draft.md）\n"
-            f"7. 同步更新方法学手册：{prop_dir}/04_proposal/methodology-manual.md\n"
-            f"   （申请书重思路，方法学手册重细节：公式推导/参数表/技术路线图）\n"
-            f"   ⚠️ 方法学手册也按章节组织，只更新与聚焦章节对应的细节部分。\n"
+            f"7. 补齐缺失模块：若当前聚焦章节或 missing 列表中的模块为空，必须生成完整内容\n"
+            f"8. 同步更新四大产物：\n"
+            f"   a) 课题设想：{research_idea_path}\n"
+            f"      若研究内容、技术路线、创新点有重大调整，同步更新课题设想对应部分。\n"
+            f"   b) 方法学手册：{methodology_manual_path}\n"
+            f"      申请书重思路，方法学手册重细节（公式推导/参数表/技术路线图/局限性）。\n"
+            f"      只更新与聚焦章节对应的细节部分。\n"
+            f"   c) 文献阅读笔记：{reading_notes_path}\n"
+            f"      若本轮使用了新文献（尤其是 {lit_supplement[:80] if lit_supplement else '定向检索结果'}），\n"
+            f"      请在笔记中追加一条记录：阅读日期、文献标题、来源、核心结论、与课题关联、已引用位置。\n"
         )
 
         result = self._run_hermes("writer", prompt, timeout)
