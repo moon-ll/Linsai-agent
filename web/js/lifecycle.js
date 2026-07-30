@@ -343,6 +343,37 @@ async function lcOptimize(proposalId) {
 }
 
 // ============================================
+// 后台任务轮询（feedback / optimize 通用）
+// ============================================
+function pollLifecycleTask(taskId, proposalId, onDone, onError) {
+  const interval = 3000;
+  const maxAttempts = 120; // 最多 6 分钟
+  let attempts = 0;
+  const timer = setInterval(async () => {
+    attempts += 1;
+    try {
+      const status = await apiGet(`/api/task-status/${encodeURIComponent(taskId)}`);
+      if (status.status === 'done') {
+        clearInterval(timer);
+        onDone(status.result);
+      } else if (status.status === 'failed') {
+        clearInterval(timer);
+        onError(status.error || '后台任务失败');
+      } else if (attempts >= maxAttempts) {
+        clearInterval(timer);
+        onError('处理时间较长，请稍后刷新页面查看结果');
+      }
+    } catch (e) {
+      // 继续轮询，除非已超时
+      if (attempts >= maxAttempts) {
+        clearInterval(timer);
+        onError('轮询任务状态失败：' + e.message);
+      }
+    }
+  }, interval);
+}
+
+// ============================================
 // 操作：通过（归档）
 // ============================================
 async function lcApprove(proposalId) {
@@ -355,7 +386,20 @@ async function lcApprove(proposalId) {
       feedback_text: comment,
       verdict: 'approve',
     });
-    if (result.status === 'ok') {
+    if (result.status === 'accepted' && result.task_id) {
+      showToast('归档已提交，后台处理中...', 'info', 5000);
+      pollLifecycleTask(result.task_id, proposalId, (res) => {
+        if (res?.success) {
+          showToast('✓ 已归档，已纳入知识库', 'success');
+        } else {
+          showToast('✗ 归档失败：' + (res?.error || '未知错误'), 'error');
+        }
+        renderLifecycleDashboard();
+      }, (err) => {
+        showToast('✗ ' + err, 'error');
+        renderLifecycleDashboard();
+      });
+    } else if (result.status === 'ok') {
       showToast('✓ 已归档，已纳入知识库', 'success');
       renderLifecycleDashboard();
     } else {
@@ -379,7 +423,18 @@ async function lcFeedback(proposalId) {
       feedback_text: feedback,
       verdict: 'major_revision',
     });
-    if (result.status === 'ok') {
+    if (result.status === 'accepted' && result.task_id) {
+      showToast('反馈已提交，writer 正在结构化...', 'info', 5000);
+      pollLifecycleTask(result.task_id, proposalId, (res) => {
+        const sf = res?.structured_feedback;
+        const issueCount = sf?.structured?.issues?.length || sf?.issues?.length || 0;
+        showToast(`✓ 已退回优化（整理为 ${issueCount} 个 issue）`, 'success');
+        renderLifecycleDashboard();
+      }, (err) => {
+        showToast('✗ ' + err, 'error');
+        renderLifecycleDashboard();
+      });
+    } else if (result.status === 'ok') {
       const sf = result.data?.structured_feedback;
       const issueCount = sf?.structured?.issues?.length || sf?.issues?.length || 0;
       showToast(`✓ 已退回优化（整理为 ${issueCount} 个 issue）`, 'success');

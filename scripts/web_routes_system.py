@@ -42,7 +42,7 @@ from web_base import (
     _bg_tasks_lock,
     _save_bg_tasks,
 )
-from common import lazy_load
+from common import lazy_load, now_utc as _now_utc
 
 import proactive_engine as pe
 import llm_router as lr
@@ -409,7 +409,7 @@ class SystemRoutesMixin:
 
     def _sys_lifecycle_list(self, parsed, body=None, **kwargs):
         """按状态列出 proposal"""
-        status = parsed.group("status") if hasattr(parsed, "group") else None
+        status = kwargs.get("status")
         try:
             from proposal_lifecycle import ProposalLifecycle
             lc = ProposalLifecycle()
@@ -446,7 +446,7 @@ class SystemRoutesMixin:
         body 必填：to_stage
         body 可选：reason
         """
-        proposal_id = parsed.group("proposal_id")
+        proposal_id = kwargs.get("proposal_id")
         if not body or "to_stage" not in body:
             self._send_json({"error": "缺少 to_stage"}, 400)
             return
@@ -460,7 +460,7 @@ class SystemRoutesMixin:
 
     def _sys_lifecycle_optimize(self, parsed, body=None, **kwargs):
         """执行一轮对抗优化（后台异步，因为 hermes oneshot 需要 30s-5min）"""
-        proposal_id = parsed.group("proposal_id")
+        proposal_id = kwargs.get("proposal_id")
         import threading, uuid
         task_id = f"opt_{uuid.uuid4().hex[:8]}"
         with _bg_tasks_lock:
@@ -487,25 +487,71 @@ class SystemRoutesMixin:
         self._send_json({"status": "accepted", "task_id": task_id, "message": "优化已启动（后台执行，hermes oneshot 需要 1-5 分钟）"})
 
     def _sys_lifecycle_feedback(self, parsed, body=None, **kwargs):
-        """提交人工反馈
+        """提交人工反馈（后台异步，避免 hermes writer 结构化反馈超时导致前端失败）。
 
         body 必填：feedback_text
         body 可选：verdict（默认 major_revision）
+        返回：{status: "accepted", task_id, message}
+        通过 /api/task-status/{task_id} 轮询结果。
         """
-        proposal_id = parsed.group("proposal_id")
+        proposal_id = kwargs.get("proposal_id")
         if not body or "feedback_text" not in body:
             self._send_json({"error": "缺少 feedback_text"}, 400)
             return
-        try:
-            from proposal_lifecycle import ProposalLifecycle
-            lc = ProposalLifecycle()
-            result = lc.submit_feedback(
-                proposal_id, body["feedback_text"],
-                verdict=body.get("verdict", "major_revision"),
-            )
-            self._send_json({"status": "ok", "data": result})
-        except Exception as e:
-            self._send_json({"error": str(e)}, 500)
+
+        import threading, uuid
+        task_id = f"fb_{uuid.uuid4().hex[:8]}"
+        with _bg_tasks_lock:
+            _bg_tasks[task_id] = {
+                "status": "running",
+                "proposal_id": proposal_id,
+                "type": "lifecycle_feedback",
+                "verdict": body.get("verdict", "major_revision"),
+                "started_at": _now_utc(),
+            }
+            _save_bg_tasks()
+
+        def _worker():
+            try:
+                from proposal_lifecycle import ProposalLifecycle
+                lc = ProposalLifecycle()
+                result = lc.submit_feedback(
+                    proposal_id, body["feedback_text"],
+                    verdict=body.get("verdict", "major_revision"),
+                )
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {
+                        "status": "done",
+                        "proposal_id": proposal_id,
+                        "type": "lifecycle_feedback",
+                        "result": result,
+                        "finished_at": _now_utc(),
+                    }
+                    _save_bg_tasks()
+                if _log:
+                    _log.info(f"[bg-task] {task_id} feedback {proposal_id} 完成")
+            except Exception as e:
+                err_msg = str(e)
+                with _bg_tasks_lock:
+                    _bg_tasks[task_id] = {
+                        "status": "failed",
+                        "proposal_id": proposal_id,
+                        "type": "lifecycle_feedback",
+                        "error": err_msg,
+                        "finished_at": _now_utc(),
+                    }
+                    _save_bg_tasks()
+                if _log:
+                    _log.error(f"[bg-task] {task_id} feedback {proposal_id} 失败: {err_msg}")
+            finally:
+                _save_bg_tasks()
+
+        threading.Thread(target=_worker, daemon=True).start()
+        self._send_json({
+            "status": "accepted",
+            "task_id": task_id,
+            "message": "反馈已提交（后台处理，hermes writer 结构化约需 0.5-2 分钟）",
+        })
 
     def _sys_lifecycle_cron_sweep(self, parsed, body=None):
         """执行 cron 扫描（后台异步，因为多个课题的 hermes oneshot 需要很长时间）"""
@@ -536,7 +582,7 @@ class SystemRoutesMixin:
 
     def _sys_lifecycle_checkpoints(self, parsed, body=None, **kwargs):
         """获取指定 proposal 的 checkpoint 列表"""
-        proposal_id = parsed.group("proposal_id")
+        proposal_id = kwargs.get("proposal_id")
         try:
             from lifecycle_cron_framework import LifecycleCronController
             ctrl = LifecycleCronController()
@@ -636,7 +682,7 @@ class SystemRoutesMixin:
 
     def _sys_lifecycle_monitor(self, parsed, body=None, **kwargs):
         """获取指定 proposal 的 monitor 历史与当前负反馈状态"""
-        proposal_id = parsed.group("proposal_id")
+        proposal_id = kwargs.get("proposal_id")
         try:
             from proposal_lifecycle import ProposalLifecycle
             lc = ProposalLifecycle()
@@ -660,7 +706,7 @@ class SystemRoutesMixin:
 
     def _sys_lifecycle_clear_alert(self, parsed, body=None, **kwargs):
         """清除指定 proposal 的负反馈告警"""
-        proposal_id = parsed.group("proposal_id")
+        proposal_id = kwargs.get("proposal_id")
         reason = body.get("reason", "") if body else ""
         try:
             from proposal_lifecycle import ProposalLifecycle
@@ -709,7 +755,7 @@ class SystemRoutesMixin:
 
     def _sys_lifecycle_incoming_accept(self, parsed, body=None, **kwargs):
         """接受某个设想为新 proposal"""
-        idea_id = parsed.group("idea_id")
+        idea_id = kwargs.get("idea_id")
         try:
             idea = _find_idea_by_id(idea_id)
             if not idea:
@@ -723,8 +769,8 @@ class SystemRoutesMixin:
 
     def _sys_lifecycle_incoming_merge(self, parsed, body=None, **kwargs):
         """将设想融合到现有 proposal"""
-        idea_id = parsed.group("idea_id")
-        proposal_id = parsed.group("proposal_id")
+        idea_id = kwargs.get("idea_id")
+        proposal_id = kwargs.get("proposal_id")
         try:
             idea = _find_idea_by_id(idea_id)
             if not idea:
@@ -738,7 +784,7 @@ class SystemRoutesMixin:
 
     def _sys_lifecycle_incoming_reject(self, parsed, body=None, **kwargs):
         """拒绝某个设想（仅记录，不删除文件）"""
-        idea_id = parsed.group("idea_id")
+        idea_id = kwargs.get("idea_id")
         reason = body.get("reason", "") if body else ""
         try:
             # 记录拒绝到 incoming 目录

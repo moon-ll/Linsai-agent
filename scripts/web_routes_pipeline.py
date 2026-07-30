@@ -208,13 +208,13 @@ class PipelineRoutesMixin:
     def _pipeline_read_dir(self, proposal_id: str) -> Path:
         """获取用于读取的 proposal 目录。
 
-        优先使用 pipeline 原生 proposals/ 目录；若该目录不存在或为空，
+        优先使用 pipeline 原生 proposals/ 目录；若该目录不存在或没有申请书实质内容，
         则回退到 lifecycle 管理的 research_proposals/{status}/{proposal_id} 目录，
         使用户能在 pipeline 面板查看已通过 lifecycle 生成的课题内容。
         """
         self._validate_proposal_id(proposal_id)
         native = self._pipeline_proposal_dir(proposal_id)
-        if native.exists() and any(native.iterdir()):
+        if self._pipeline_has_content(native):
             return native
 
         lc_root = web_base._PROJECT_ROOT / "research_proposals"
@@ -227,7 +227,7 @@ class PipelineRoutesMixin:
                 status = prop.get("status")
                 if status:
                     candidate = lc_root / status / proposal_id
-                    if candidate.exists():
+                    if self._pipeline_has_content(candidate):
                         return candidate
             except Exception:
                 pass
@@ -236,10 +236,19 @@ class PipelineRoutesMixin:
         if lc_root.exists():
             for stage in ("drafts", "optimizing", "pending_review", "archived", "_incoming"):
                 candidate = lc_root / stage / proposal_id
-                if candidate.exists():
+                if self._pipeline_has_content(candidate):
                     return candidate
 
         return native
+
+    def _pipeline_has_content(self, pdir: Path) -> bool:
+        """判断 proposal 目录是否包含实质内容（申请书或评审报告）。"""
+        if not pdir.exists():
+            return False
+        proposal_file = pdir / "04_proposal" / "sections.json"
+        draft_file = pdir / "04_proposal" / "proposal-draft.md"
+        review_file = pdir / "05_review" / "critic-round-1.md"
+        return proposal_file.exists() or draft_file.exists() or review_file.exists()
 
     def _pipeline_ensure_dirs(self, proposal_id: str) -> Path:
         """确保 proposal 目录结构存在，返回 proposal 根目录。"""
@@ -377,22 +386,50 @@ class PipelineRoutesMixin:
     def _pipeline_parse_draft_to_sections(
         self, proposal_id: str, draft_path: Path
     ) -> Dict[str, Any]:
-        """将 proposal-draft.md 解析为 sections.json 兼容结构。"""
+        """将 proposal-draft.md 解析为 sections.json 兼容结构。
+
+        支持 H1/H2 标题，并兼容中文编号前缀（如 ## （一）立项依据）。
+        解析后章节名会去掉编号前缀，尽量与 _EXPECTED_SECTIONS 对齐。
+        """
         try:
             text = draft_path.read_text(encoding="utf-8")
         except Exception:
             return {"sections": {}, "updated_at": ""}
+
+        import re as _re
+
+        def _normalize_section_name(name: str) -> str:
+            """去掉中文编号前缀，保留核心章节名。"""
+            name = name.strip()
+            # 去掉 （一）、(1)、1.、1、等前缀
+            name = _re.sub(r"^[（(]?[一二三四五六七八九十0-9]+[）).、]\s*", "", name)
+            # 统一 NSFC 常见大标题到 _EXPECTED_SECTIONS
+            aliases = {
+                "立项依据": "立项依据",
+                "研究内容": "研究内容",
+                "研究内容、研究目标及拟解决的关键科学问题": "研究内容",
+                "研究方案": "研究方案",
+                "研究方案与技术路线": "研究方案",
+                "特色与创新": "特色与创新",
+                "特色与创新之处": "特色与创新",
+                "研究基础": "研究基础",
+                "研究基础与工作条件": "研究基础",
+            }
+            return aliases.get(name, name)
+
         sections: Dict[str, Any] = {}
         current_name = None
         current_lines: List[str] = []
         for line in text.splitlines():
-            if line.startswith("# ") and not line.startswith("## "):
+            # 匹配 H1 或 H2，但不匹配更深标题
+            if _re.match(r"^#{1,2}\s+", line):
                 if current_name is not None:
                     sections[current_name] = {
                         "content": "\n".join(current_lines).strip(),
                         "updated_at": "",
                     }
-                current_name = line[2:].strip()
+                raw_name = _re.sub(r"^#{1,2}\s+", "", line).strip()
+                current_name = _normalize_section_name(raw_name)
                 current_lines = []
             elif current_name is not None:
                 current_lines.append(line)
