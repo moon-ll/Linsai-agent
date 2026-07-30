@@ -272,9 +272,9 @@ async function quickDecide(pid, action) {
   }
 }
 
-// 导航切换（仪表盘/控制台/知识库/生命周期/hermes/设置）
+// 导航切换（仪表盘/控制台/知识库/生命周期/研究管线/hermes/设置）
 function switchToView(view) {
-  const views = ['dashboard', 'console', 'kb', 'lifecycle', 'hermes', 'settings'];
+  const views = ['dashboard', 'console', 'kb', 'lifecycle', 'pipeline', 'hermes', 'settings'];
   views.forEach(v => {
     const el = document.getElementById(v + '-page');
     if (el) el.style.display = v === view ? 'flex' : 'none';

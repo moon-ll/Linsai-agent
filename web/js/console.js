@@ -87,8 +87,14 @@
         ConsoleState.flow = data.stages;
         renderFlow();
         if (ConsoleState.selectedStage) renderStageDetail(ConsoleState.selectedStage);
+        updateLastUpdateTime();
       }
     } catch (e) { console.error('console flow:', e); }
+  }
+
+  function updateLastUpdateTime() {
+    const el = document.getElementById('console-last-update');
+    if (el) el.textContent = '更新于 ' + formatTime(new Date().toISOString());
   }
 
   async function loadConsoleAgents() {
@@ -139,13 +145,26 @@
     const page = document.getElementById('console-page');
     if (!page) return;
     page.innerHTML = `
-      <div class="console-toolbar">
-        <button class="console-btn" data-action="orchestrate">🔄 手动编排</button>
-        <button class="console-btn" data-action="repair">🔧 手动修复</button>
-        <button class="console-btn" data-action="weekend_input">📥 周末输入</button>
-        <button class="console-btn" data-action="weekend_output">📤 周末输出</button>
-        <button class="console-btn" data-action="sync_kb">🔄 同步知识库</button>
-        <span class="console-last-update" id="console-last-update">—</span>
+      <div class="console-header">
+        <div>
+          <h2 class="console-title">🎛️ 控制台</h2>
+          <div class="console-subtitle">全链路状态 · 告警 · Agent 工作负载</div>
+        </div>
+        <div class="console-toolbar">
+          <button class="console-btn primary" data-action="orchestrate">🔄 手动编排</button>
+          <button class="console-btn" data-action="repair">🔧 修复扫描</button>
+          <button class="console-btn" data-action="sync_kb">🔄 同步知识库</button>
+          <button class="console-btn" data-action="weekend_menu" id="console-weekend-btn">📅 周末任务 ▾</button>
+        </div>
+      </div>
+      <div class="console-weekend-menu" id="console-weekend-menu" style="display:none;">
+        <button class="console-menu-item" data-action="weekend_input">📥 执行输入任务</button>
+        <button class="console-menu-item" data-action="weekend_output">📤 执行输出任务</button>
+        <button class="console-menu-item" data-action="weekend_reflection">📝 执行反思任务</button>
+      </div>
+      <div class="console-meta-bar">
+        <span id="console-last-update">更新于 —</span>
+        <button class="console-refresh-btn" id="console-refresh-btn">🔄 刷新</button>
       </div>
       <div class="console-grid">
         <div class="console-col console-col-left">
@@ -166,13 +185,39 @@
       </div>
     `;
 
-    page.querySelectorAll('.console-btn').forEach(btn => {
-      btn.addEventListener('click', () => runAction(btn.dataset.action));
+    page.querySelectorAll('.console-btn[data-action]').forEach(btn => {
+      if (btn.dataset.action === 'weekend_menu') {
+        btn.addEventListener('click', toggleWeekendMenu);
+      } else {
+        btn.addEventListener('click', () => runAction(btn.dataset.action));
+      }
+    });
+    page.querySelectorAll('.console-menu-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        hideWeekendMenu();
+        runAction(btn.dataset.action);
+      });
+    });
+    document.getElementById('console-refresh-btn')?.addEventListener('click', () => {
+      loadConsoleFlow();
+      loadConsoleAgents();
+      loadConsoleAlerts();
     });
 
     loadConsoleFlow();
     loadConsoleAgents();
     loadConsoleAlerts();
+  }
+
+  function toggleWeekendMenu() {
+    const menu = document.getElementById('console-weekend-menu');
+    if (!menu) return;
+    menu.style.display = menu.style.display === 'none' ? 'flex' : 'none';
+  }
+
+  function hideWeekendMenu() {
+    const menu = document.getElementById('console-weekend-menu');
+    if (menu) menu.style.display = 'none';
   }
 
   // ============================================
@@ -224,8 +269,11 @@
       html += '<div class="console-detail-list">';
       for (const it of stage.items) {
         const title = it.title || it.proposal_id || '未命名';
+        const pid = it.proposal_id || '';
+        const ideaId = it.idea_id || '';
+        const clickable = (key === 'optimizing' || key === 'pending_review') && pid;
         html += `
-          <div class="console-detail-item">
+          <div class="console-detail-item ${clickable ? 'clickable' : ''}" data-pid="${escapeAttr(pid)}" data-idea="${escapeAttr(ideaId)}" data-stage="${escapeAttr(key)}">
             <div class="console-detail-title">${escapeHtml(title)}</div>
             ${it.rounds !== undefined ? `<div class="console-detail-meta">轮次: ${it.rounds} · 分数: ${it.last_score != null ? it.last_score.toFixed(2) : '—'}</div>` : ''}
             ${it.generated_at ? `<div class="console-detail-meta">生成时间: ${formatDate(it.generated_at)}</div>` : ''}
@@ -235,6 +283,18 @@
       html += '</div>';
     }
     container.innerHTML = html;
+
+    container.querySelectorAll('.console-detail-item.clickable').forEach(el => {
+      el.addEventListener('click', () => {
+        const pid = el.dataset.pid;
+        const stageKey = el.dataset.stage;
+        if (stageKey === 'pending_review' && pid) {
+          lcReview(pid);
+        } else if (pid) {
+          lcViewDetail(pid);
+        }
+      });
+    });
   }
 
   // ============================================
@@ -353,7 +413,7 @@
     const countEl = document.getElementById('console-alert-count');
     if (!container) return;
 
-    const alerts = ConsoleState.alerts || [];
+    let alerts = ConsoleState.alerts || [];
     if (countEl) countEl.textContent = String(alerts.length);
 
     if (alerts.length === 0) {
@@ -361,13 +421,18 @@
       return;
     }
 
+    // 按级别排序：error > warning > info
+    const levelOrder = { error: 0, warning: 1, info: 2 };
+    alerts = alerts.slice().sort((a, b) => (levelOrder[a.level] || 2) - (levelOrder[b.level] || 2));
+
     container.innerHTML = '<div class="console-alert-list">' + alerts.map((a, idx) => {
       const levelClass = a.level === 'error' ? 'console-alert-error' : a.level === 'warning' ? 'console-alert-warning' : 'console-alert-info';
+      const levelLabel = a.level === 'error' ? '错误' : a.level === 'warning' ? '警告' : '提醒';
       let actions = '';
       if (a.action === 'clear_alert') {
-        actions = `<button class="console-mini-btn" data-idx="${idx}" data-cmd="clear_alert" data-pid="${escapeAttr(a.proposal_id)}">清除告警</button>`;
+        actions = `<button class="console-mini-btn" data-idx="${idx}" data-cmd="clear_alert" data-pid="${escapeAttr(a.proposal_id)}">清除</button>`;
       } else if (a.action === 'review') {
-        actions = `<button class="console-mini-btn" data-idx="${idx}" data-cmd="review" data-pid="${escapeAttr(a.proposal_id)}">去审查</button>`;
+        actions = `<button class="console-mini-btn" data-idx="${idx}" data-cmd="review" data-pid="${escapeAttr(a.proposal_id)}">审核</button>`;
       } else if (a.action === 'repair') {
         actions = `<button class="console-mini-btn" data-idx="${idx}" data-cmd="repair" data-pid="${escapeAttr(a.proposal_id)}">修复</button>`;
       } else if (a.action === 'review_idea') {
@@ -377,6 +442,10 @@
       }
       return `
         <div class="console-alert ${levelClass}">
+          <div class="console-alert-header">
+            <span class="console-alert-level">${levelLabel}</span>
+            <span class="console-alert-time">${a.time ? formatTime(a.time) : ''}</span>
+          </div>
           <div class="console-alert-message">${escapeHtml(a.message)}</div>
           ${a.reasons ? `<div class="console-alert-reasons">${a.reasons.map(r => `<div>· ${escapeHtml(r)}</div>`).join('')}</div>` : ''}
           <div class="console-alert-actions">${actions}</div>

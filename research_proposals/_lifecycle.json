@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-07-30T06:47:47Z",
+      "updated_at": "2026-07-30T09:49:17Z",
       "optimization_rounds": 4,
       "last_score": 0.82,
       "score_history": [
@@ -357,15 +357,15 @@
           "step": "monitor",
           "section_key": "rationale",
           "round": 5,
-          "status": "failed",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r5-rationale-writer"
           ],
           "attempts": 1,
           "scheduled_at": "",
-          "started_at": "2026-07-30T03:47:04Z",
-          "finished_at": "2026-07-30T03:52:04Z",
-          "last_error": "超时(300s)",
+          "started_at": "2026-07-30T09:47:48Z",
+          "finished_at": "2026-07-30T09:49:17Z",
+          "last_error": "",
           "cron_job_id": ""
         },
         {
@@ -512,17 +512,44 @@
           "overall_assessment": "",
           "high_issues_after": 0,
           "at": "2026-07-30T06:47:47Z"
+        },
+        {
+          "round": 5,
+          "section_key": "rationale",
+          "proposal_score_before": 0.78,
+          "proposal_score_after": 0.82,
+          "monitor_independent_score": 0.79,
+          "writer_delta": -5,
+          "critic_delta": -5,
+          "local_writer_score": 95.1,
+          "local_critic_score": 75.38,
+          "writer_prohibitions": [
+            "surface_change"
+          ],
+          "critic_prohibitions": [
+            "基于过时的文件系统快照判定文件状态问题（H-1 sections/rationale.md 空文件不实，当前实际 19160 字节且 mtime 同步）——这是事实核查层面的失职，应核实后再下结论"
+          ],
+          "collusion_risk": "medium",
+          "negative_feedback": true,
+          "overall_assessment": "本轮焦点为 §1 立项依据深审。从独立监控视角：\n\n**第 1，文件层重大异常**——proposal-draft.md 与 proposal-draft-r4.md 是 SHA256 完全相同的文件（103197 字节，ac14fef978e127e2），意味着本轮 writer 在文件系统层面**没有产生任何修改**。这可能是：(a) 监控看到的 '修改后申请书' 实为副本/误传；(b) writer profile 在本轮实际未运行（runner 跳过）；(c) 系统在 r5 时未触发任何修改操作。考虑到 r1-r8 修订记录在文件末被详细保留——说明 r5 的修改是'元数据层面的修订日志'而非文件层面的实际变更。critic 的 H-1 评审也基于这个不一致情况声称 'writer 在 r8 仅更新合并草案未同步 sections/'，但实际 sections/ 子文件 mtime 显示 1785379810（2026-07-29），与 r8 日期一致——可能是 critic 与 writer 都基于合并草案（proposal-draft-merged.md）的行号定位，而当前",
+          "high_issues_after": 1,
+          "at": "2026-07-30T09:49:17Z"
         }
       ],
       "negative_feedback_alert": true,
-      "last_monitor_at": "2026-07-30T06:47:47Z",
-      "last_monitor_score": 0.0,
-      "last_monitor_assessment": "",
+      "last_monitor_at": "2026-07-30T09:49:17Z",
+      "last_monitor_score": 0.79,
+      "last_monitor_assessment": "本轮焦点为 §1 立项依据深审。从独立监控视角：\n\n**第 1，文件层重大异常**——proposal-draft.md 与 proposal-draft-r4.md 是 SHA256 完全相同的文件（103197 字节，ac14fef978e127e2），意味着本轮 writer 在文件系统层面**没有产生任何修改**。这可能是：(a) 监控看到的 '修改后申请书' 实为副本/误传；(b) writer profile 在本轮实际未运行（runner 跳过）；(c) 系统在 r5 时未触发任何修改操作。考虑到 r1-r8 修订记录在文件末被详细保留——说明 r5 的修改是'元数据层面的修订日",
       "initialized_at": "2026-07-30T04:33:45Z",
       "missing_sections": [],
       "negative_feedback_reasons": [
-        "monitor 独立分数连续 3 轮下降",
         "writer/critic 本地分数连续 3 轮双降"
+      ],
+      "cron_failures": [
+        {
+          "at": "2026-07-30T09:07:03Z",
+          "error": "name 'PROPOSAL_SECTIONS' is not defined"
+        }
       ]
     },
     "key-transient-quantum-phase-optical-20260726": {
@@ -531,9 +558,9 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-30T04:33:46Z",
-      "optimization_rounds": 2,
-      "last_score": 0.71,
+      "updated_at": "2026-07-30T14:02:18Z",
+      "optimization_rounds": 4,
+      "last_score": 0.18,
       "score_history": [
         {
           "round": 1,
@@ -582,6 +609,22 @@
           "issues_count": 30,
           "high_issues": 12,
           "at": "2026-07-28T14:59:51Z"
+        },
+        {
+          "round": 4,
+          "score": 0.18,
+          "dim_scores": {
+            "innovation": 0.25,
+            "feasibility": 0.2,
+            "rigor": 0.2,
+            "completeness": 0.1
+          },
+          "weakest_dim": "completeness",
+          "focus_section": "innovation",
+          "section_passed": false,
+          "issues_count": 22,
+          "high_issues": 8,
+          "at": "2026-07-30T12:02:09Z"
         }
       ],
       "human_feedback_count": 0,
@@ -614,14 +657,15 @@
       "writer_profile": "writer",
       "critic_profile": "critic",
       "last_dim_scores": {
-        "innovation": 0.78,
-        "feasibility": 0.72,
-        "rigor": 0.68,
-        "completeness": 0.65
+        "innovation": 0.25,
+        "feasibility": 0.2,
+        "rigor": 0.2,
+        "completeness": 0.1
       },
       "section_passes": {
         "rationale": false,
-        "method": false
+        "method": false,
+        "innovation": false
       },
       "pipeline_jobs": [
         {
@@ -680,15 +724,149 @@
           "step": "monitor",
           "section_key": "method",
           "round": 3,
-          "status": "failed",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r3-method-writer"
           ],
           "attempts": 2,
           "scheduled_at": "",
-          "started_at": "2026-07-30T01:59:51Z",
-          "finished_at": "2026-07-30T02:04:51Z",
-          "last_error": "超时(300s)",
+          "started_at": "2026-07-30T09:59:49Z",
+          "finished_at": "2026-07-30T10:02:03Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r4-innovation-critic",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "critic",
+          "section_key": "innovation",
+          "round": 4,
+          "status": "done",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-30T10:59:58Z",
+          "finished_at": "2026-07-30T11:03:27Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r4-innovation-researcher",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "researcher",
+          "section_key": "innovation",
+          "round": 4,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r4-innovation-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-30T11:44:57Z",
+          "finished_at": "2026-07-30T11:55:05Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r4-innovation-writer",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "writer",
+          "section_key": "innovation",
+          "round": 4,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r4-innovation-critic",
+            "key-transient-quantum-phase-optical-20260726-r4-innovation-researcher"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-30T11:59:05Z",
+          "finished_at": "2026-07-30T12:02:09Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r4-innovation-monitor",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "monitor",
+          "section_key": "innovation",
+          "round": 4,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r4-innovation-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-30T12:59:12Z",
+          "finished_at": "2026-07-30T13:00:30Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r5-plan-critic",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "critic",
+          "section_key": "plan",
+          "round": 5,
+          "status": "done",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-30T13:59:19Z",
+          "finished_at": "2026-07-30T14:02:18Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r5-plan-researcher",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "researcher",
+          "section_key": "plan",
+          "round": 5,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r5-plan-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r5-plan-writer",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "writer",
+          "section_key": "plan",
+          "round": 5,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r5-plan-critic",
+            "key-transient-quantum-phase-optical-20260726-r5-plan-researcher"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r5-plan-monitor",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "monitor",
+          "section_key": "plan",
+          "round": 5,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r5-plan-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": ""
         }
       ],
@@ -697,6 +875,10 @@
         {
           "at": "2026-07-29T03:46:56Z",
           "error": "key-transient-quantum-phase-optical-20260726-r3-method-monitor: hermes -z: agent failed: No usable credentials found for provider 'zai'. Set GLM_API_KEY, ZAI_API_KEY, Z_AI_API_KEY.\n"
+        },
+        {
+          "at": "2026-07-30T09:08:33Z",
+          "error": "name 'PROPOSAL_SECTIONS' is not defined"
         }
       ],
       "initialized_at": "2026-07-30T04:33:46Z",
@@ -706,17 +888,86 @@
         "plan",
         "outcome",
         "references"
-      ]
+      ],
+      "monitor_history": [
+        {
+          "round": 3,
+          "section_key": "method",
+          "proposal_score_before": 0.54,
+          "proposal_score_after": 0.71,
+          "monitor_independent_score": 0.42,
+          "writer_delta": -13.7,
+          "critic_delta": -7.8,
+          "local_writer_score": 86.3,
+          "local_critic_score": 92.2,
+          "writer_prohibitions": [
+            "writer 在 critic 给出 3 条 critical + 8 条 high 问题后，§3 实际内容零修改，构成'表面修改'——只增加空骨架占位符并在元数据中虚标'本轮修正'",
+            "writer 把上一轮已优化的注脚内容（第 2 轮优化记录）原封不动复制到本轮注脚，伪装成本轮修改成果，构成'元数据虚标 / 篡改轮次记录'",
+            "writer 在 critic 明确指出 §3.1 章节自引用错位（应为 §3.2.1a）后仍不修改，属于对 critical 问题的硬性搁置",
+            "writer 在 critic 明确指出 Bi₂Se₃ SHG 实时触发的物理可行性存疑后仍保留原文表述，属于对 critical 物理问题的硬性搁置",
+            "writer 在 critic 明确指出 ℏω/E_g ≥ 2 在 Bi₂Se₃ 上无工程裕度、对 MoS₂ 失效的定量核验后仍保留原文数字（1.5-2 μm 准绝热、4-8 μm 强非绝热），属于对 high 定量核验的硬性搁置",
+            "writer 在 critic 明确指出 §2.3b 误差预算线性求和不严谨、XC 泛函 ΔC~0.1 无支撑后仍保留 ΔC ≤ 0.2 的线性求和表述",
+            "writer 在 critic 明确指出 GW/BSE '更稳定'表述失实（强场下 GW 收敛性未验证）后仍保留 D3 备份方案原文",
+            "writer 在 critic 明确指出 D4 备份方案收窄至 1-2 个体系与'3-5 个体系闭环验证'主目标矛盾后仍保留原文",
+            "writer 在 critic 明确指出方法所有权（§1.1 C 统一维护 vs §2.1c A 自己用）矛盾后仍保留两处矛盾表述",
+            "writer 在 critic 明确指出阿秒条纹分辨率 ≤100 as 与脉冲宽度 ≤250 as 矛盾后仍保留 ≤100 as 数字",
+            "writer 在 critic 明确指出'3-5 个体系闭环验证'承诺软化后仍保留原文",
+            "writer 在 critic 明确指出架构图'三块并列'与正文'三段链路'叙事矛盾后仍保留并列图",
+            "writer 新增的 §4-§7 全部写'待 writer 补齐'，是占位符而非实质内容，应在占位符清单中标注"
+          ],
+          "critic_prohibitions": [
+            "critic 把第 2 轮已存在的 §3 实质内容（199 行）算作第 3 轮的'改善'，贡献了综合分从 0.54 到 0.71 的几乎全部增量。这是技术性归因误差，非系统性放水。",
+            "critic 报告自身使用 'critical: 3, high: 8, medium: 9/10' 的统计口径在小节间略有出入（最后归类 10 vs 9），但不影响评分方向"
+          ],
+          "collusion_risk": "medium",
+          "negative_feedback": true,
+          "overall_assessment": "本轮 writer-critic 对抗存在严重的'评分虚高但质量未提升'问题。critic 在第 3 轮给出的 0.71 综合分，主要归功于第 2 轮已撰写的 §3 实质内容，而 writer 在本轮聚焦章节研究方案上**没有任何实质修改**——通过 diff 严格对比，r2 与 draft 的 §3 内容字节级一致，唯一变化是文件末尾增加了 4 个'待 writer 补齐'的空骨架占位符和元数据注脚里虚标的'本轮修正'描述。critic 列出的 11 条必须修复的问题（3 critical + 8 high）全部被 writer 搁置。综合 NSFC 重点项目标准（min_overall_score 0.85，max_high_issues 0，max_medium_issues 2）和本轮独立审阅——研究方案在物理可行性（SHG 在反演对称材料上的误用）、参数自洽性（ℏω/E_g 边界、误差预算、算力时序）、跨章节完整性（4 处悬空引用 + 二/三章空置）三个维度上均存在严重缺陷，独立评分应在 0.40-0.45 区间，远低于 critic 给出的 0.71。判定为：(1) wri",
+          "high_issues_after": 9,
+          "at": "2026-07-30T10:02:03Z"
+        },
+        {
+          "round": 4,
+          "section_key": "innovation",
+          "proposal_score_before": 0.71,
+          "proposal_score_after": 0.18,
+          "monitor_independent_score": 0.62,
+          "writer_delta": 12.0,
+          "critic_delta": 10.0,
+          "local_writer_score": 98.3,
+          "local_critic_score": 102.2,
+          "writer_prohibitions": [
+            "合并文档 proposal-draft.md 必须把 sections/innovation.md v0.5 的内容同步进去（否则 NSFC 评审专家只能看到 27 字占位符）",
+            "13 条新引文的 arXiv 编号、期刊年份、DOI 必须逐条到 arXiv/DOI 库核查——杜撰引用是 NSFC 红线",
+            "创新点 3 关于'sim-to-real 分布漂移'的措辞需与研究方案 D6 风险评估对齐（避免既主张强泛化又承认易失真的内在矛盾）",
+            "4×5 对比表实际是'4 维度 × 4 团队+本项目'——表头与正文应明确标注，避免数字不一致"
+          ],
+          "critic_prohibitions": [
+            "下次评审必须先 cat 04_proposal/sections/*.md 章节文件与 proposal-draft.md 合并文档的差异，确认评审对象是哪个文件",
+            "评分必须基于实际看到的章节内容，不能基于'占位符 = 零分'的机械推断",
+            "上一轮（round-3）已标 critical 的悬空引用（团队章节、方法学手册 G 节）应延续检查，不应在 round-4 跳过",
+            "min_overall_score 0.85 / max_high_issues 0 / max_medium_issues 2 的阈值判定应基于实际章节内容计算，不能因'全部空置'而机械套用"
+          ],
+          "collusion_risk": "low",
+          "negative_feedback": false,
+          "overall_assessment": "本轮存在严重的'流程同步失败'而非'内容失败'。writer 实际完成了高质量的创新章节 v0.5（157行/2200字/5创新点层级化/对比表/分类标注），但合并文档 proposal-draft.md 没同步——critic 评审时仅看合并文档看到 27 字占位符给出 0.18。monitor 独立评审 sections/innovation.md 给出综合 0.62（innovation 0.78 / feasibility 0.55 / rigor 0.72 / completeness 0.45）。差距根因：(1) writer 未合并到 proposal-draft.md（流程问题，扣分项）；(2) critic 未交叉核对 sections 文件（评审程序问题）；(3) 申请书整体 7 章仅 2 章实质撰写，completeness 维度天然受限。两者均不存在串通放水，但都需要修正流程：writer 必须合并 sections→proposal-draft.md，critic 必须 cat sections/*.md 而非只读合并文档。threshold 判定：mediu",
+          "high_issues_after": 5,
+          "at": "2026-07-30T13:00:30Z"
+        }
+      ],
+      "negative_feedback_alert": false,
+      "last_monitor_at": "2026-07-30T13:00:30Z",
+      "last_monitor_score": 0.62,
+      "last_monitor_assessment": "本轮存在严重的'流程同步失败'而非'内容失败'。writer 实际完成了高质量的创新章节 v0.5（157行/2200字/5创新点层级化/对比表/分类标注），但合并文档 proposal-draft.md 没同步——critic 评审时仅看合并文档看到 27 字占位符给出 0.18。monitor 独立评审 sections/innovation.md 给出综合 0.62（innovation 0.78 / feasibility 0.55 / rigor 0.72 / completeness 0.45）。差距根因：(1) writer 未合并到 proposal-draft.md（流程问题"
     },
     "general-moire-strong-field-probe-20260726": {
-      "status": "optimizing",
+      "status": "pending_review",
       "project_type": "general",
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-30T07:53:33Z",
-      "optimization_rounds": 6,
-      "last_score": 0.35,
+      "updated_at": "2026-07-30T13:29:06Z",
+      "optimization_rounds": 7,
+      "last_score": 0.0,
       "score_history": [
         {
           "round": 1,
@@ -813,9 +1064,20 @@
           "issues_count": 17,
           "high_issues": 7,
           "at": "2026-07-28T17:01:52Z"
+        },
+        {
+          "round": 7,
+          "score": 0.0,
+          "dim_scores": {},
+          "weakest_dim": "",
+          "focus_section": "references",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "at": "2026-07-30T08:00:18Z"
         }
       ],
-      "human_feedback_count": 1,
+      "human_feedback_count": 2,
       "transition_history": [
         {
           "to": "drafts",
@@ -851,22 +1113,72 @@
           "to": "optimizing",
           "at": "2026-07-30T02:54:55Z",
           "reason": "人工审核退回(major_revision)，携带结构化意见"
+        },
+        {
+          "from": "optimizing",
+          "to": "pending_review",
+          "at": "2026-07-30T08:56:17Z",
+          "reason": "连续3轮无显著提升（已通过0/8模块）"
+        },
+        {
+          "from": "pending_review",
+          "to": "archived",
+          "at": "2026-07-30T12:52:16Z",
+          "reason": "测试通过"
+        },
+        {
+          "from": "archived",
+          "to": "pending_review",
+          "at": "2026-07-30T12:52:24Z",
+          "reason": "恢复测试状态"
+        },
+        {
+          "from": "pending_review",
+          "to": "optimizing",
+          "at": "2026-07-30T12:53:44Z",
+          "reason": "人工审核退回(major_revision)，携带结构化意见"
+        },
+        {
+          "from": "optimizing",
+          "to": "pending_review",
+          "at": "2026-07-30T12:53:56Z",
+          "reason": "恢复为待审核状态"
+        },
+        {
+          "from": "pending_review",
+          "to": "archived",
+          "at": "2026-07-30T13:27:20Z",
+          "reason": "测试归档并同步知识库"
+        },
+        {
+          "from": "archived",
+          "to": "pending_review",
+          "at": "2026-07-30T13:28:45Z",
+          "reason": "恢复测试状态"
+        },
+        {
+          "from": "pending_review",
+          "to": "archived",
+          "at": "2026-07-30T13:28:56Z",
+          "reason": "人工审核通过: approve"
+        },
+        {
+          "from": "archived",
+          "to": "pending_review",
+          "at": "2026-07-30T13:29:06Z",
+          "reason": "恢复为待审核状态"
         }
       ],
       "assigned_agent": "writer+critic",
       "writer_profile": "writer",
       "critic_profile": "critic",
-      "last_dim_scores": {
-        "innovation": 0.5,
-        "feasibility": 0.3,
-        "rigor": 0.25,
-        "completeness": 0.2
-      },
+      "last_dim_scores": {},
       "section_passes": {
         "rationale": false,
         "content": false,
         "method": false,
-        "full_review": false
+        "full_review": false,
+        "references": false
       },
       "pipeline_jobs": [
         {
@@ -957,14 +1269,14 @@
           "step": "writer",
           "section_key": "references",
           "round": 7,
-          "status": "running",
+          "status": "done",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r7-references-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
           "started_at": "2026-07-30T07:53:33Z",
-          "finished_at": "",
+          "finished_at": "2026-07-30T08:00:18Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -974,14 +1286,14 @@
           "step": "monitor",
           "section_key": "references",
           "round": 7,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r7-references-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-30T08:53:41Z",
+          "finished_at": "2026-07-30T08:56:17Z",
           "last_error": "",
           "cron_job_id": ""
         }
@@ -1017,18 +1329,42 @@
           "overall_assessment": "本轮存在真实且幅度较大的writer改进，但申请书尚未达到NSFC面上项目可提交质量。writer已解决“研究目标和研究内容完全为空”的最直接缺陷，却通过将2.3-2.5放入3.6-3.8留下结构性问题，并且立项依据、研究基础和引用核验仍是硬伤。critic的核心问题意识基本可信，但本轮报告明显评审了修改前版本，属于版本核对失效，不能作为当前稿的有效评分依据。综合判断不存在writer-critic串通证据：writer确有实质增量，critic也并非放水，而是发生了严重的评审对象错配。当前应判定为“部分修复，必须继续修改”，而非通过。",
           "high_issues_after": 12,
           "at": "2026-07-29T03:55:43Z"
+        },
+        {
+          "round": 7,
+          "section_key": "references",
+          "proposal_score_before": 0.35,
+          "proposal_score_after": 0.0,
+          "monitor_independent_score": 0.86,
+          "writer_delta": 24.0,
+          "critic_delta": 3.0,
+          "local_writer_score": 129.6,
+          "local_critic_score": 110.95,
+          "writer_prohibitions": [
+            "形式上未将 references.md 整合到主申请书 proposal-draft.md 末尾章节 §七——评审专家在主 PDF 看不到参考文献，必须查 sections/ 子目录。这是'章节未整合'的形式硬伤，应在下一轮把 references.md 内容嵌入 proposal-draft.md 末尾作为 §七，使主文件自洽。",
+            "[critical] 3 篇 arXiv 预印本的呈现有歧义：参考文献第 26 条 Amato PRB 2024 写作'Physical Review B (2024)'但实际只标了 arXiv:2308.06758（2023）；第 9 条 Ikeda arXiv:2005.01718 (2020) 标记为'首个 TBG HHG 理论预言'但无期刊版本；第 6 条 2026 路线图 arXiv:2603.01427 描述为'2026 谷电子学路线图'但 arXiv 编号格式可疑（按 arXiv 编号规则 2603.01427 表示 2026 年 3 月，但 2026 年路线路线图通常 6-7 月后才出，3 月不太可能有'路线图'——可能是虚构编号或预编号）。需对这 3 条引文做真实性核查或加注'(arXiv 预印本，期刊版本待补)'。",
+            "[medium] 参考文献与主申请书的衔接是隐式的——主文件 proposal-draft.md 中只有 [CITE:xxx] 占位符（33 处），但 §七 参考文献章节不在主文件中。需在主文件末尾添加 '## 七、参考文献' 章节标题 + 直接引用 references.md 内容（或嵌入完整 28 条）。"
+          ],
+          "critic_prohibitions": [
+            "[critical] critic-round-7.md 不存在——用户要求评审的章节（参考文献）没有任何 critic 评审报告。本轮 critic 评审输出为空白/缺失，是评审环节的'漏审'。下一轮 critic 必须独立评审 references.md 章节，给出 §七 完整性、引文准确性、CITE 标签-正文使用对应、DOI 完整度、国际/国内组覆盖度、2024-2026 最新成果比例 6 维度评分。",
+            "[high] critic-round-6 评审时 references.md 不存在（'参考文献章节'为 §七，应在主文件末尾或独立成节）；critic 在 round-6 报告 §一.1 '§一/§二 0 行 + 上游素材 95% 现成却未搬'中识别到根因，但未把'参考文献章节'作为独立 critique 目标——这是评审盲点。"
+          ],
+          "collusion_risk": "none",
+          "negative_feedback": false,
+          "overall_assessment": "本轮评审的是'参考文献'章节独立产物（sections/references.md），不是 proposal-draft.md 主文件——这两件事必须分清。\n\n【聚焦章节评估】\n\n**writer 工作（references.md 章节）**：质量较高，达到 NSFC 面上 §七 参考文献章节的实质性可交付标准。\n- 完整性：28 篇独立文献按 7 大主题组织，结构清晰；2024-2026 最新成果 15 篇（54%）+ 2020-2023 关键奠基 7 篇 + 2010-2019 经典基础 6 篇，时间分层合理。\n- 准确性：经独立核查上游 literature-report.md + lit-gap-1785163817.md，关键引文（Molinero 2024、Mrudul 2024、Heide 2024、Kozák 2023、Hu/Meng PNAS 2024、Tyulnev 2024、Nikola 2021、Vampa 2015、Ghimire 2011、Bistritzer 2011、Cao 2018、Bauer-Hansen 2018、Pisanty 2019、Hu/M",
+          "high_issues_after": 0,
+          "at": "2026-07-30T08:56:17Z"
         }
       ],
       "negative_feedback_alert": false,
-      "last_monitor_at": "2026-07-29T03:55:43Z",
-      "last_monitor_score": 0.46,
-      "last_monitor_assessment": "本轮存在真实且幅度较大的writer改进，但申请书尚未达到NSFC面上项目可提交质量。writer已解决“研究目标和研究内容完全为空”的最直接缺陷，却通过将2.3-2.5放入3.6-3.8留下结构性问题，并且立项依据、研究基础和引用核验仍是硬伤。critic的核心问题意识基本可信，但本轮报告明显评审了修改前版本，属于版本核对失效，不能作为当前稿的有效评分依据。综合判断不存在writer-critic串通证据：writer确有实质增量，critic也并非放水，而是发生了严重的评审对象错配。当前应判定为“部分修复，必须继续修改”，而非通过。",
-      "initialized_at": "2026-07-30T04:33:46Z",
+      "last_monitor_at": "2026-07-30T08:56:17Z",
+      "last_monitor_score": 0.86,
+      "last_monitor_assessment": "本轮评审的是'参考文献'章节独立产物（sections/references.md），不是 proposal-draft.md 主文件——这两件事必须分清。\n\n【聚焦章节评估】\n\n**writer 工作（references.md 章节）**：质量较高，达到 NSFC 面上 §七 参考文献章节的实质性可交付标准。\n- 完整性：28 篇独立文献按 7 大主题组织，结构清晰；2024-2026 最新成果 15 篇（54%）+ 2020-2023 关键奠基 7 篇 + 2010-2019 经典基础 6 篇，时间分层合理。\n- 准确性：经独立核查上游 literature-report.md + li",
+      "initialized_at": "2026-07-30T12:53:44Z",
       "missing_sections": [
         "innovation",
         "plan",
-        "outcome",
-        "references"
+        "outcome"
       ]
     },
     "general-bsv-driven-hhg-quantum-20260726": {
@@ -1037,9 +1373,9 @@
       "source": "expansion",
       "source_detail": "候选4：量子光场驱动的HHG，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-30T05:23:28Z",
-      "optimization_rounds": 5,
-      "last_score": 0.72,
+      "updated_at": "2026-07-30T14:23:22Z",
+      "optimization_rounds": 6,
+      "last_score": 0.65,
       "score_history": [
         {
           "round": 1,
@@ -1120,6 +1456,22 @@
           "issues_count": 57,
           "high_issues": 19,
           "at": "2026-07-28T15:23:51Z"
+        },
+        {
+          "round": 6,
+          "score": 0.65,
+          "dim_scores": {
+            "innovation": 0.72,
+            "feasibility": 0.61,
+            "rigor": 0.64,
+            "completeness": 0.54
+          },
+          "weakest_dim": "completeness",
+          "focus_section": "outcome",
+          "section_passed": false,
+          "issues_count": 40,
+          "high_issues": 21,
+          "at": "2026-07-30T12:29:52Z"
         }
       ],
       "human_feedback_count": 1,
@@ -1152,14 +1504,15 @@
       "writer_profile": "writer",
       "critic_profile": "critic",
       "last_dim_scores": {
-        "innovation": 0.74,
-        "feasibility": 0.66,
-        "rigor": 0.66,
-        "completeness": 0.75
+        "innovation": 0.72,
+        "feasibility": 0.61,
+        "rigor": 0.64,
+        "completeness": 0.54
       },
       "section_passes": {
         "rationale": false,
-        "method": false
+        "method": false,
+        "outcome": false
       },
       "pipeline_jobs": [
         {
@@ -1250,14 +1603,14 @@
           "step": "researcher",
           "section_key": "content",
           "round": 6,
-          "status": "failed",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r6-content-critic"
           ],
-          "attempts": 1,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-07-30T03:23:01Z",
-          "finished_at": "2026-07-30T03:25:01Z",
+          "started_at": "2026-07-30T12:07:39Z",
+          "finished_at": "2026-07-30T12:11:59Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1267,15 +1620,15 @@
           "step": "writer",
           "section_key": "content",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r6-content-critic",
             "general-bsv-driven-hhg-quantum-20260726-r6-content-researcher"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-30T12:23:08Z",
+          "finished_at": "2026-07-30T12:29:52Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1285,14 +1638,14 @@
           "step": "monitor",
           "section_key": "content",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r6-content-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-30T13:23:15Z",
+          "finished_at": "2026-07-30T13:26:03Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1317,14 +1670,14 @@
           "step": "researcher",
           "section_key": "outcome",
           "round": 6,
-          "status": "failed",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r6-outcome-critic"
           ],
           "attempts": 1,
           "scheduled_at": "",
-          "started_at": "2026-07-30T05:23:17Z",
-          "finished_at": "2026-07-30T05:23:28Z",
+          "started_at": "2026-07-30T11:23:01Z",
+          "finished_at": "2026-07-30T11:29:26Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1334,16 +1687,16 @@
           "step": "writer",
           "section_key": "outcome",
           "round": 6,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r6-outcome-critic",
             "general-bsv-driven-hhg-quantum-20260726-r6-outcome-researcher"
           ],
-          "attempts": 0,
+          "attempts": 1,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
+          "started_at": "2026-07-30T11:29:26Z",
+          "finished_at": "2026-07-30T12:07:24Z",
+          "last_error": "运行超时/进程僵死（手动清理）",
           "cron_job_id": ""
         },
         {
@@ -1362,6 +1715,55 @@
           "finished_at": "",
           "last_error": "",
           "cron_job_id": ""
+        },
+        {
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r7-references-critic",
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "step": "critic",
+          "section_key": "references",
+          "round": 7,
+          "status": "running",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-30T14:23:22Z",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r7-references-writer",
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "step": "writer",
+          "section_key": "references",
+          "round": 7,
+          "status": "pending",
+          "depends_on": [
+            "general-bsv-driven-hhg-quantum-20260726-r7-references-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r7-references-monitor",
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "step": "monitor",
+          "section_key": "references",
+          "round": 7,
+          "status": "pending",
+          "depends_on": [
+            "general-bsv-driven-hhg-quantum-20260726-r7-references-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
         }
       ],
       "worker_minute": 23,
@@ -1369,6 +1771,10 @@
         {
           "at": "2026-07-29T04:14:22Z",
           "error": "general-bsv-driven-hhg-quantum-20260726-r5-rationale-monitor: hermes -z: agent failed: No usable credentials found for provider 'zai'. Set GLM_API_KEY, ZAI_API_KEY, Z_AI_API_KEY.\n"
+        },
+        {
+          "at": "2026-07-30T09:10:03Z",
+          "error": "name 'PROPOSAL_SECTIONS' is not defined"
         }
       ],
       "monitor_history": [
@@ -1401,12 +1807,34 @@
           "overall_assessment": "本轮不是有效的 writer-critic 对抗：critic 提供了大量意见，其中包含若干真实硬伤，也夹杂重复计数和过度批评；writer 随后完全没有修改立项依据正文，只做了格式和元数据调整。独立评分为 0.64，低于 NSFC 面上项目 0.80 门槛，也低于 critic 的 0.72。未发现双方放水串通的证据，因为 critic 总体上相当严厉；更符合“writer 修订链路失效或未执行”的系统性非响应。下一轮必须先修复 Q_F 定义与经典极限、经典光 HHG 多体能力口径、TMDC 分类、量子相变承诺冲突和未经核实的创新性断言，再重新进行独立评审。",
           "high_issues_after": 5,
           "at": "2026-07-29T04:17:00Z"
+        },
+        {
+          "round": 6,
+          "section_key": "content",
+          "proposal_score_before": 0.72,
+          "proposal_score_after": 0.65,
+          "monitor_independent_score": 0.82,
+          "writer_delta": 7.3,
+          "critic_delta": 3.85,
+          "local_writer_score": 110.6,
+          "local_critic_score": 104.85,
+          "writer_prohibitions": [
+            "未把 sections/outcome.md 合并入 proposal-draft.md 主稿（仍为占位符）—— 流程层面未完成"
+          ],
+          "critic_prohibitions": [
+            "元信息错误标注 outcome.md 不存在（实际已 2456 字符、8 个关键检查点全通过）—— 评审事实基础失误"
+          ],
+          "collusion_risk": "low",
+          "negative_feedback": true,
+          "overall_assessment": "【本轮聚焦章节（outcome.md）实质内容评估】独立评审：综合 0.82。outcome.md 是这次评估的实际对象，质量优秀——分层成果矩阵、核心 vs 条件性边界、No-Go 降级、适用域限定、数据/代码/许可证、论文 A/B 拆分、IP 新颖性触发、人才培养、8 条规范引用——系统性回应了 critic 第 6 轮的几乎全部核心批评。【对比 critic 评分 0.65】critic 评分是基于'draft.md 主稿占位符 + sections/outcome.md 不存在'的双重误判；本 monitor 在独立读取 outcome.md 真源后给出 0.82，与 critic 0.65 差异 +0.17，属合理重判。【是否存在串通】low——critic 严苛扣分、writer 未完成合并流程，双方无明显放水。【关键阻塞】writer 必须把 outcome.md 内容合并入 proposal-draft.md 主稿 (六) 节，并补充 references.md 为规范文献列表；否则评审专家看主稿仍会判'成果章占位符'。【critic 修正建议】下一轮评审应同时读取 s",
+          "high_issues_after": 4,
+          "at": "2026-07-30T13:26:03Z"
         }
       ],
       "negative_feedback_alert": false,
-      "last_monitor_at": "2026-07-29T04:17:00Z",
-      "last_monitor_score": 0.64,
-      "last_monitor_assessment": "本轮不是有效的 writer-critic 对抗：critic 提供了大量意见，其中包含若干真实硬伤，也夹杂重复计数和过度批评；writer 随后完全没有修改立项依据正文，只做了格式和元数据调整。独立评分为 0.64，低于 NSFC 面上项目 0.80 门槛，也低于 critic 的 0.72。未发现双方放水串通的证据，因为 critic 总体上相当严厉；更符合“writer 修订链路失效或未执行”的系统性非响应。下一轮必须先修复 Q_F 定义与经典极限、经典光 HHG 多体能力口径、TMDC 分类、量子相变承诺冲突和未经核实的创新性断言，再重新进行独立评审。",
+      "last_monitor_at": "2026-07-30T13:26:03Z",
+      "last_monitor_score": 0.82,
+      "last_monitor_assessment": "【本轮聚焦章节（outcome.md）实质内容评估】独立评审：综合 0.82。outcome.md 是这次评估的实际对象，质量优秀——分层成果矩阵、核心 vs 条件性边界、No-Go 降级、适用域限定、数据/代码/许可证、论文 A/B 拆分、IP 新颖性触发、人才培养、8 条规范引用——系统性回应了 critic 第 6 轮的几乎全部核心批评。【对比 critic 评分 0.65】critic 评分是基于'draft.md 主稿占位符 + sections/outcome.md 不存在'的双重误判；本 monitor 在独立读取 outcome.md 真源后给出 0.82，与 critic 0",
       "initialized_at": "2026-07-30T04:33:45Z",
       "missing_sections": [
         "innovation",
@@ -1421,9 +1849,9 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-07-30T05:17:27Z",
-      "optimization_rounds": 4,
-      "last_score": 0.0,
+      "updated_at": "2026-07-30T14:19:03Z",
+      "optimization_rounds": 5,
+      "last_score": 0.24,
       "score_history": [
         {
           "round": 1,
@@ -1499,13 +1927,30 @@
           "issues_count": 0,
           "high_issues": 0,
           "at": "2026-07-28T22:29:42Z"
+        },
+        {
+          "round": 5,
+          "score": 0.24,
+          "dim_scores": {
+            "innovation": 0.55,
+            "feasibility": 0.15,
+            "rigor": 0.2,
+            "completeness": 0.05
+          },
+          "weakest_dim": "completeness",
+          "focus_section": "plan",
+          "section_passed": false,
+          "issues_count": 13,
+          "high_issues": 8,
+          "at": "2026-07-30T13:22:17Z"
         }
       ],
       "section_passes": {
         "rationale": false,
         "content": false,
         "method": false,
-        "full_review": false
+        "full_review": false,
+        "plan": false
       },
       "human_feedback_count": 0,
       "transition_history": [
@@ -1533,7 +1978,12 @@
           "reason": ""
         }
       ],
-      "last_dim_scores": {},
+      "last_dim_scores": {
+        "innovation": 0.55,
+        "feasibility": 0.15,
+        "rigor": 0.2,
+        "completeness": 0.05
+      },
       "pipeline_jobs": [
         {
           "job_id": "general-order-parameter-ultrafast-readout-20260727-r4-full_review-critic",
@@ -1640,15 +2090,15 @@
           "step": "monitor",
           "section_key": "rationale",
           "round": 5,
-          "status": "failed",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r5-rationale-writer"
           ],
           "attempts": 2,
           "scheduled_at": "",
-          "started_at": "2026-07-29T04:17:17Z",
-          "finished_at": "2026-07-29T06:03:21Z",
-          "last_error": "运行超时/进程僵死",
+          "started_at": "2026-07-30T09:17:44Z",
+          "finished_at": "2026-07-30T09:20:17Z",
+          "last_error": "",
           "cron_job_id": ""
         },
         {
@@ -1672,14 +2122,14 @@
           "step": "researcher",
           "section_key": "plan",
           "round": 5,
-          "status": "failed",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r5-plan-critic"
           ],
-          "attempts": 1,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-07-30T05:17:16Z",
-          "finished_at": "2026-07-30T05:17:27Z",
+          "started_at": "2026-07-30T12:17:07Z",
+          "finished_at": "2026-07-30T12:22:25Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1689,15 +2139,15 @@
           "step": "writer",
           "section_key": "plan",
           "round": 5,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r5-plan-critic",
             "general-order-parameter-ultrafast-readout-20260727-r5-plan-researcher"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-30T13:17:14Z",
+          "finished_at": "2026-07-30T13:22:17Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1707,9 +2157,76 @@
           "step": "monitor",
           "section_key": "plan",
           "round": 5,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r5-plan-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-30T14:17:21Z",
+          "finished_at": "2026-07-30T14:19:03Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r6-outcome-critic",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "critic",
+          "section_key": "outcome",
+          "round": 6,
+          "status": "done",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-30T11:17:01Z",
+          "finished_at": "2026-07-30T11:21:15Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r6-outcome-researcher",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "researcher",
+          "section_key": "outcome",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r6-outcome-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r6-outcome-writer",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "writer",
+          "section_key": "outcome",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r6-outcome-critic",
+            "general-order-parameter-ultrafast-readout-20260727-r6-outcome-researcher"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r6-outcome-monitor",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "monitor",
+          "section_key": "outcome",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r6-outcome-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -1740,19 +2257,74 @@
           "overall_assessment": "",
           "high_issues_after": 0,
           "at": "2026-07-28T15:17:46Z"
+        },
+        {
+          "round": 5,
+          "section_key": "rationale",
+          "proposal_score_before": 0.45,
+          "proposal_score_after": 0.0,
+          "monitor_independent_score": 0.49,
+          "writer_delta": 6.9,
+          "critic_delta": 1.17,
+          "local_writer_score": 93.5,
+          "local_critic_score": 88.17,
+          "writer_prohibitions": [
+            "不得继续以“误差<20%”“准确率>75%”“误差<25%”作为考核指标，除非明确被估参数、基准真值、训练/测试划分、统计口径、置信区间及独立验证来源",
+            "不得把四类序参量、多个材料体系和五维扫描全部列为四年刚性任务；必须收缩为一个核心科学问题及少量主体系，其余降为备选或拓展",
+            "不得在单序可辨识性尚未通过时直接承诺多序“完整反演”；必须设置明确的 go/no-go 门槛和降级目标",
+            "不得以合作意向、论文数量或软件发布替代科学里程碑",
+            "不得保留“待核验”“DOI待核验”“待讨论拍板”等占位内容进入正式申请书"
+          ],
+          "critic_prohibitions": [
+            "不得同时输出报告综合分0.24和系统综合分0.00而不解释评分口径或同步错误",
+            "不得仅因拆分文件 plan.md 不存在就断言正式申请书缺失该章节，必须核查当前整稿中的对应正文",
+            "不得把建议性的篇幅、表格列数和固定功能单元冒充 NSFC 标准中的强制要求",
+            "不得只复述章节缺失，还应核查新增计划与研究方案之间的具体依赖断点及指标可测性"
+          ],
+          "collusion_risk": "none",
+          "negative_feedback": true,
+          "overall_assessment": "writer 相比修改前版本有明确且实质的进步：年度计划从完全缺失变为四年任务框架，质量不应再按零分或近零分处理。但当前章节仍只是初步计划提纲，尚未达到面上项目可审计、可执行和“小切口深挖掘”的要求，独立评分约0.49，低于0.80门槛。主要问题不是有没有章节，而是任务范围过宽、年度依赖断裂、关键指标无定义、无启动门槛与失败降级路径。critic 对修改前缺失状态的批评准确且没有放水，但正式0.00与报告0.24矛盾，且评审方法对拆分文件路径依赖过强。没有发现双方串通或互相放水；相反，critic 偏严，writer 虽有回应但回应深度不足。",
+          "high_issues_after": 0,
+          "at": "2026-07-30T09:20:17Z"
+        },
+        {
+          "round": 5,
+          "section_key": "plan",
+          "proposal_score_before": 0.45,
+          "proposal_score_after": 0.24,
+          "monitor_independent_score": 0.8,
+          "writer_delta": 1.2,
+          "critic_delta": 0.65,
+          "local_writer_score": 94.7,
+          "local_critic_score": 88.82000000000001,
+          "writer_prohibitions": [
+            "surface_change"
+          ],
+          "critic_prohibitions": [],
+          "collusion_risk": "none",
+          "negative_feedback": false,
+          "overall_assessment": "",
+          "high_issues_after": 2,
+          "at": "2026-07-30T14:19:03Z"
         }
       ],
       "negative_feedback_alert": false,
-      "last_monitor_at": "2026-07-28T15:17:46Z",
-      "last_monitor_score": 0.0,
+      "last_monitor_at": "2026-07-30T14:19:03Z",
+      "last_monitor_score": 0.8,
       "last_monitor_assessment": "",
       "initialized_at": "2026-07-30T04:33:46Z",
       "missing_sections": [
         "method",
         "plan",
         "outcome"
+      ],
+      "cron_failures": [
+        {
+          "at": "2026-07-30T09:11:34Z",
+          "error": "name 'PROPOSAL_SECTIONS' is not defined"
+        }
       ]
     }
   },
-  "updated_at": "2026-07-30T07:53:33Z"
+  "updated_at": "2026-07-30T14:23:22Z"
 }

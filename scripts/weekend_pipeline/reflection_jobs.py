@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from typing import Any, Dict
+from typing import Any, Dict, List
 
 from common import load_json, now_utc, save_json
 from paths import PROJECT_ROOT
@@ -22,21 +22,35 @@ def _ensure_reflection_dir() -> None:
     WEEKEND_REFLECTION_DIR.mkdir(parents=True, exist_ok=True)
 
 
+def _date_str() -> str:
+    return now_utc()[:10]
+
+
+def _collected_state_path() -> Any:
+    return WEEKEND_REFLECTION_DIR / f"collected-state-{_date_str()}.json"
+
+
+def _analyzed_patterns_path() -> Any:
+    return WEEKEND_REFLECTION_DIR / f"analyzed-patterns-{_date_str()}.json"
+
+
+def _reflection_report_path() -> Any:
+    return WEEKEND_REFLECTION_DIR / f"weekend-reflection-{_date_str()}.json"
+
+
 # ---------------------------------------------------------------------------
-# Job handlers
+# 数据收集
 # ---------------------------------------------------------------------------
 
 
-def run_reflection_report(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
-    """生成反思报告（合并 collect/analyze/report 三个子步骤的结果）。"""
-    _ensure_reflection_dir()
-
+def _collect_raw_state(state: Dict[str, Any]) -> Dict[str, Any]:
+    """收集反思所需的全部原始状态。"""
     try:
         from orchestrator import compute_dashboard
         from failure_analyzer import analyze_failures
         from strategy_optimizer import suggest_strategies
     except Exception as e:
-        return {"success": False, "error": f"无法导入反思依赖: {e}"}
+        return {"error": f"无法导入反思依赖: {e}"}
 
     try:
         dashboard = compute_dashboard()
@@ -67,34 +81,160 @@ def run_reflection_report(state: Dict[str, Any], job: Dict[str, Any], dry_run: b
         "stage_status": state.get("stage_status", {}),
     }
 
-    report = {
-        "generated_at": now_utc(),
+    return {
+        "collected_at": now_utc(),
         "dashboard": dashboard,
         "failure_patterns": failures,
         "strategy_suggestions": strategies,
         "proposal_progress": progress,
         "pipeline_state_summary": pipeline_state_summary,
-        "next_actions": [
-            "查看 dashboard 中的红色告警",
-            "review pending_review 课题",
-            "确认 expansion-candidates.json 中的扩展建议",
-            "检查 weekend-pipeline.json 是否有 failed 任务",
-        ],
     }
 
-    date_str = now_utc()[:10]
+
+def run_reflection_collect_state(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
+    """收集原始状态并落盘，供后续 analyze/report 使用。"""
+    _ensure_reflection_dir()
+    collected = _collect_raw_state(state)
+    if "error" in collected:
+        return {"success": False, "error": collected["error"]}
+
     if not dry_run:
-        save_json(WEEKEND_REFLECTION_DIR / f"weekend-reflection-{date_str}.json", report)
+        save_json(_collected_state_path(), collected)
+
+    return {"success": True, "collected_at": collected.get("collected_at"), "dry_run": dry_run}
+
+
+# ---------------------------------------------------------------------------
+# 模式分析
+# ---------------------------------------------------------------------------
+
+
+def _analyze_collected_state(collected: Dict[str, Any]) -> Dict[str, Any]:
+    """对收集到的状态进行轻量级模式分析（无需 LLM）。"""
+    patterns: List[Dict[str, Any]] = []
+    next_actions: List[str] = []
+
+    dashboard = collected.get("dashboard") or {}
+    if isinstance(dashboard, dict):
+        alerts = dashboard.get("alerts") or []
+        if alerts:
+            error_alerts = [a for a in alerts if isinstance(a, dict) and a.get("level") == "error"]
+            if error_alerts:
+                patterns.append({
+                    "type": "alert",
+                    "severity": "error",
+                    "count": len(error_alerts),
+                    "description": f"当前有 {len(error_alerts)} 个错误级告警",
+                })
+                next_actions.append("查看 dashboard 中的红色告警")
+
+    failures = collected.get("failure_patterns") or {}
+    if isinstance(failures, dict):
+        top_patterns = failures.get("patterns") or []
+        if top_patterns:
+            patterns.append({
+                "type": "failure_pattern",
+                "count": len(top_patterns),
+                "description": f"最近一周发现 {len(top_patterns)} 类失败模式",
+            })
+            next_actions.append("review failure_analyzer 给出的前 3 类失败模式")
+
+    progress = collected.get("proposal_progress") or []
+    if isinstance(progress, list):
+        pending_review = [p for p in progress if isinstance(p, dict) and p.get("status") == "pending_review"]
+        optimizing = [p for p in progress if isinstance(p, dict) and p.get("status") == "optimizing"]
+        stuck = [p for p in progress if isinstance(p, dict) and p.get("negative_feedback_alert")]
+        if pending_review:
+            patterns.append({"type": "proposal", "status": "pending_review", "count": len(pending_review)})
+            next_actions.append("review pending_review 课题")
+        if optimizing:
+            patterns.append({"type": "proposal", "status": "optimizing", "count": len(optimizing)})
+        if stuck:
+            patterns.append({"type": "proposal", "status": "negative_feedback", "count": len(stuck)})
+            next_actions.append("处理触发负反馈告警的课题")
+
+    pipeline_summary = collected.get("pipeline_state_summary") or {}
+    failed_jobs = pipeline_summary.get("failed", 0)
+    if failed_jobs:
+        patterns.append({"type": "weekend_pipeline", "status": "failed", "count": failed_jobs})
+        next_actions.append("检查 weekend-pipeline.json 是否有 failed 任务")
+
+    if not next_actions:
+        next_actions.append("链路运转平稳，继续观察")
+
+    return {
+        "analyzed_at": now_utc(),
+        "patterns": patterns,
+        "next_actions": next_actions,
+    }
+
+
+def run_reflection_analyze_patterns(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
+    """读取收集的状态，分析模式并落盘。"""
+    _ensure_reflection_dir()
+    collected = load_json(_collected_state_path(), default={})
+    if not collected:
+        # 兜底：若未找到已收集状态，现场收集
+        collected = _collect_raw_state(state)
+        if "error" in collected:
+            return {"success": False, "error": collected["error"]}
+        if not dry_run:
+            save_json(_collected_state_path(), collected)
+
+    analyzed = _analyze_collected_state(collected)
+
+    if not dry_run:
+        save_json(_analyzed_patterns_path(), analyzed)
+
+    return {"success": True, "patterns_count": len(analyzed.get("patterns", [])), "dry_run": dry_run}
+
+
+# ---------------------------------------------------------------------------
+# 报告生成
+# ---------------------------------------------------------------------------
+
+
+def run_reflection_report(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
+    """生成反思报告。优先使用已分析的模式，否则现场计算。"""
+    _ensure_reflection_dir()
+
+    analyzed = load_json(_analyzed_patterns_path(), default={})
+    if not analyzed:
+        # 兜底：若前面小任务未生成，现场完成收集+分析
+        collected = _collect_raw_state(state)
+        if "error" in collected:
+            return {"success": False, "error": collected["error"]}
+        analyzed = _analyze_collected_state(collected)
+
+    collected = load_json(_collected_state_path(), default={})
+
+    report = {
+        "generated_at": now_utc(),
+        "dashboard": collected.get("dashboard", {}),
+        "failure_patterns": collected.get("failure_patterns", {}),
+        "strategy_suggestions": collected.get("strategy_suggestions", {}),
+        "proposal_progress": collected.get("proposal_progress", []),
+        "pipeline_state_summary": collected.get("pipeline_state_summary", {}),
+        "patterns": analyzed.get("patterns", []),
+        "next_actions": analyzed.get("next_actions", []),
+    }
+
+    if not dry_run:
+        save_json(_reflection_report_path(), report)
 
     return {"success": True, "report": report, "dry_run": dry_run}
+
+
+# ---------------------------------------------------------------------------
+# 行动建议
+# ---------------------------------------------------------------------------
 
 
 def run_reflection_recommend(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
     """生成并保存具体 next actions。"""
     _ensure_reflection_dir()
 
-    report_path = WEEKEND_REFLECTION_DIR / f"weekend-reflection-{now_utc()[:10]}.json"
-    report = load_json(report_path, default={})
+    report = load_json(_reflection_report_path(), default={})
 
     actions = []
     failed_jobs = [j for j in state.get("jobs", []) if j.get("status") == "failed"]
@@ -118,6 +258,13 @@ def run_reflection_recommend(state: Dict[str, Any], job: Dict[str, Any], dry_run
     except Exception:
         pass
 
+    # 从反思报告中继承建议
+    for action_text in report.get("next_actions", []):
+        actions.append({
+            "type": "report_suggestion",
+            "description": action_text,
+        })
+
     actions_data = {
         "generated_at": now_utc(),
         "actions": actions,
@@ -125,6 +272,6 @@ def run_reflection_recommend(state: Dict[str, Any], job: Dict[str, Any], dry_run
     }
 
     if not dry_run:
-        save_json(WEEKEND_REFLECTION_DIR / f"weekend-actions-{now_utc()[:10]}.json", actions_data)
+        save_json(WEEKEND_REFLECTION_DIR / f"weekend-actions-{_date_str()}.json", actions_data)
 
     return {"success": True, "actions_count": len(actions), "dry_run": dry_run}

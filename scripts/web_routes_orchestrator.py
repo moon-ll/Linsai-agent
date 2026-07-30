@@ -83,9 +83,9 @@ class OrchestratorRoutesMixin:
             from orchestrator import compute_dashboard
             window = int(parsed.get("window_hours", ["24"])[0]) if parsed.get("window_hours") else 24
             data = compute_dashboard(window_hours=window)
-            return self._json_response(200, data)
+            return self._send_json(data, 200)
         except Exception as e:
-            return self._json_response(500, {"error": str(e)})
+            return self._send_json({"error": str(e)}, 500)
 
     def _orch_get_profiles_health(self, path, parsed, match):
         """GET /api/orchestrator/profiles/health — 7 个 profile 健康度。"""
@@ -93,9 +93,9 @@ class OrchestratorRoutesMixin:
             from profile_health import compute_profile_health
             window = int(parsed.get("window_hours", ["24"])[0]) if parsed.get("window_hours") else 24
             data = compute_profile_health(window_hours=window)
-            return self._json_response(200, data)
+            return self._send_json(data, 200)
         except Exception as e:
-            return self._json_response(500, {"error": str(e)})
+            return self._send_json({"error": str(e)}, 500)
 
     def _orch_get_failure_patterns(self, path, parsed, match):
         """GET /api/orchestrator/failures/patterns — 失败模式聚类。"""
@@ -103,9 +103,9 @@ class OrchestratorRoutesMixin:
             from failure_analyzer import analyze_failures
             window = int(parsed.get("window_hours", ["24"])[0]) if parsed.get("window_hours") else 24
             data = analyze_failures(window_hours=window)
-            return self._json_response(200, data)
+            return self._send_json(data, 200)
         except Exception as e:
-            return self._json_response(500, {"error": str(e)})
+            return self._send_json({"error": str(e)}, 500)
 
     def _orch_get_strategies(self, path, parsed, match):
         """GET /api/orchestrator/strategies — 调度策略建议。"""
@@ -113,18 +113,18 @@ class OrchestratorRoutesMixin:
             from strategy_optimizer import suggest_strategies
             window = int(parsed.get("window_hours", ["168"])[0]) if parsed.get("window_hours") else 168
             data = suggest_strategies(window_hours=window)
-            return self._json_response(200, data)
+            return self._send_json(data, 200)
         except Exception as e:
-            return self._json_response(500, {"error": str(e)})
+            return self._send_json({"error": str(e)}, 500)
 
     def _orch_get_pipeline_quality(self, path, parsed, match):
         """GET /api/orchestrator/pipeline/quality — 所有 proposal 链路质量。"""
         try:
             from orchestrator import monitor_pipeline
             data = monitor_pipeline()
-            return self._json_response(200, data)
+            return self._send_json(data, 200)
         except Exception as e:
-            return self._json_response(500, {"error": str(e)})
+            return self._send_json({"error": str(e)}, 500)
 
     def _orch_get_pipeline_quality_one(self, path, parsed, match):
         """GET /api/orchestrator/pipeline/quality/{proposal_id} — 单个 proposal 链路质量。"""
@@ -132,9 +132,9 @@ class OrchestratorRoutesMixin:
             from orchestrator import monitor_pipeline
             proposal_id = match.group(1)
             data = monitor_pipeline(proposal_id=proposal_id)
-            return self._json_response(200, data)
+            return self._send_json(data, 200)
         except Exception as e:
-            return self._json_response(500, {"error": str(e)})
+            return self._send_json({"error": str(e)}, 500)
 
     def _orch_get_tuning_log(self, path, parsed, match):
         """GET /api/orchestrator/tuning-log — 调优历史。"""
@@ -143,13 +143,13 @@ class OrchestratorRoutesMixin:
             from common import load_json
             log_path = MEMORY_DIR / "tuning-log.json"
             if not log_path.exists():
-                return self._json_response(200, {"history": [], "count": 0})
+                return self._send_json({"history": [], "count": 0}, 200)
             history = load_json(log_path)
             if not isinstance(history, list):
                 history = []
-            return self._json_response(200, {"history": history, "count": len(history)})
+            return self._send_json({"history": history, "count": len(history)}, 200)
         except Exception as e:
-            return self._json_response(500, {"error": str(e)})
+            return self._send_json({"error": str(e)}, 500)
 
     # -----------------------------------------------------------------
     # POST handlers
@@ -158,13 +158,13 @@ class OrchestratorRoutesMixin:
         """POST /api/orchestrator/strategies/apply — 应用新策略（人工确认后）。"""
         try:
             if not isinstance(body, dict):
-                return self._json_response(400, {"error": "请求体必须是 JSON 对象"})
+                return self._send_json({"error": "请求体必须是 JSON 对象"}, 400)
             new_strats = body.get("strategies", {})
             confirmed_by = body.get("confirmed_by", "human")
             if not new_strats:
-                return self._json_response(400, {"error": "缺少 strategies 字段"})
+                return self._send_json({"error": "缺少 strategies 字段"}, 400)
             from orchestrator import apply_strategies
             result = apply_strategies(new_strats, confirmed_by=confirmed_by)
-            return self._json_response(200, result)
+            return self._send_json(result, 200)
         except Exception as e:
-            return self._json_response(500, {"error": str(e)})
+            return self._send_json({"error": str(e)}, 500)

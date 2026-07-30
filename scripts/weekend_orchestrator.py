@@ -28,7 +28,7 @@ _SCRIPT_DIR = Path(__file__).parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(_SCRIPT_DIR))
 
-from common import load_json, now_utc, save_json
+from common import file_lock, load_json, now_utc, save_json
 from paths import PROJECT_ROOT
 
 try:
@@ -61,32 +61,35 @@ def _log_warn(msg: str) -> None:
 
 
 def _load_weekend_jobs() -> Dict[str, Any]:
-    if WEEKEND_JOBS_PATH.exists():
-        try:
-            return load_json(WEEKEND_JOBS_PATH, default={"jobs": {}})
-        except Exception:
-            pass
+    with file_lock("weekend-jobs"):
+        if WEEKEND_JOBS_PATH.exists():
+            try:
+                return load_json(WEEKEND_JOBS_PATH, default={"jobs": {}})
+            except Exception:
+                pass
     return {"jobs": {}}
 
 
 def _save_weekend_jobs(data: Dict[str, Any]) -> None:
-    WEEKEND_JOBS_PATH.parent.mkdir(parents=True, exist_ok=True)
-    data["updated_at"] = now_utc()
-    save_json(WEEKEND_JOBS_PATH, data)
+    with file_lock("weekend-jobs"):
+        WEEKEND_JOBS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        data["updated_at"] = now_utc()
+        save_json(WEEKEND_JOBS_PATH, data)
 
 
 def _update_job_status(job_key: str, status: str, error: str = "") -> None:
-    data = _load_weekend_jobs()
-    job = data.setdefault("jobs", {}).setdefault(job_key, {})
-    job["status"] = status
-    job["last_error"] = error[:500]
-    if status == JOB_STATUS_RUNNING:
-        job["started_at"] = now_utc()
-    if status in (JOB_STATUS_DONE, JOB_STATUS_FAILED):
-        job["finished_at"] = now_utc()
-    if status == JOB_STATUS_FAILED:
-        job["attempts"] = job.get("attempts", 0) + 1
-    _save_weekend_jobs(data)
+    with file_lock("weekend-jobs"):
+        data = _load_weekend_jobs()
+        job = data.setdefault("jobs", {}).setdefault(job_key, {})
+        job["status"] = status
+        job["last_error"] = error[:500]
+        if status == JOB_STATUS_RUNNING:
+            job["started_at"] = now_utc()
+        if status in (JOB_STATUS_DONE, JOB_STATUS_FAILED):
+            job["finished_at"] = now_utc()
+        if status == JOB_STATUS_FAILED:
+            job["attempts"] = job.get("attempts", 0) + 1
+        _save_weekend_jobs(data)
 
 
 def run_input_task(dry_run: bool = False) -> Dict[str, Any]:

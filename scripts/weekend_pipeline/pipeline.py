@@ -54,7 +54,7 @@ class WeekendPipeline:
 
     def _register_handlers(self) -> None:
         self.handlers = {
-            # input
+            # input (按 step 注册)
             "collect": input_jobs.run_input_collect,
             "summarize": input_jobs.run_input_summarize,
             "analyze": input_jobs.run_input_gap_analysis,
@@ -62,14 +62,17 @@ class WeekendPipeline:
             "retrieve": input_jobs.run_input_retrieve_supplementary,
             "deep_read": input_jobs.run_input_deep_read,
             "compose": input_jobs.run_input_compose,
-            # output
+            # output (按 step 注册；collect step 与 input/reflection 冲突，按 job_id 注册)
             "sync": output_jobs.run_output_sync_proposals,
             "extract": output_jobs.run_output_extract,
             "health": output_jobs.run_output_kb_health,
             "weekly_report": output_jobs.run_output_generate_weekly_report,
-            # reflection
+            "output_collect_daily_sources": output_jobs.run_output_collect_daily_sources,
+            # reflection (report/recommend 按 step；collect/analyze 与 input 冲突，按 job_id 注册)
             "report": reflection_jobs.run_reflection_report,
             "recommend": reflection_jobs.run_reflection_recommend,
+            "reflection_collect_state": reflection_jobs.run_reflection_collect_state,
+            "reflection_analyze_patterns": reflection_jobs.run_reflection_analyze_patterns,
         }
 
     def sync_stage_jobs(self, stage: str) -> Dict[str, Any]:

@@ -1107,7 +1107,7 @@ class SystemRoutesMixin:
 
             # 输入端：待确认的新设想
             try:
-                incoming_dir = PROJECT_ROOT / "research_proposals" / "_incoming"
+                incoming_dir = web_base._PROJECT_ROOT / "research_proposals" / "_incoming"
                 ideas_files = sorted(incoming_dir.glob("ideas-*.json"), reverse=True)[:3]
                 for f in ideas_files:
                     try:
@@ -1226,7 +1226,7 @@ class SystemRoutesMixin:
 
             # 输入端新设想
             try:
-                incoming_dir = PROJECT_ROOT / "research_proposals" / "_incoming"
+                incoming_dir = web_base._PROJECT_ROOT / "research_proposals" / "_incoming"
                 for f in sorted(incoming_dir.glob("ideas-*.json"), reverse=True)[:5]:
                     try:
                         data = json.loads(f.read_text(encoding="utf-8"))
@@ -1282,7 +1282,7 @@ class SystemRoutesMixin:
             lc = ProposalLifecycle()
 
             if action == "orchestrate":
-                result = ctrl.run_orchestrator(dry_run=False)
+                result = ctrl.run_orchestrator()
                 self._send_json({"status": "ok", "result": result})
             elif action == "repair":
                 result = ctrl.run_repair(dry_run=False)

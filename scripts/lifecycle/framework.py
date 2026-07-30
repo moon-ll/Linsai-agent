@@ -105,6 +105,8 @@ def setup_weekend_crontab(
 ) -> Dict[str, Any]:
     """安装周末任务 cron：输入（周六早）/ 输出（周六午）/ 反思（周日早）。"""
     self._write_generic_wrappers()
+    # 先清理已存在的 weekend cron，避免重复安装
+    self.teardown_weekend_crontab()
 
     # 确保 weekend_jobs 状态文件存在
     weekend_jobs = _load_weekend_jobs()

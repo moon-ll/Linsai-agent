@@ -53,17 +53,17 @@ def _compute_worker_minute(self, proposal_id: str) -> int:
     return minute
 
 def schedule_worker(self, proposal_id: str, interval: Optional[str] = None) -> Dict[str, Any]:
-    """为 proposal 创建/更新 worker cron。幂等（按名称去重）。
+    """为 proposal 创建/更新 worker cron。幂等（按名称去重，无论 active/paused）。
 
     默认自动错开且仅在周中运行：多个 worker 之间间隔 6 分钟，schedule 为
     `{minute} * * * 1-5`。可通过 interval 参数强制指定。
     """
     script_path = self._worker_script_for_proposal(proposal_id)
     name = f"lc-worker-{proposal_id}"
-    # 先检查是否已存在 active
+    # 按名称查重：无论 active 还是 paused，都视为已存在，避免重复创建
     existing = self.list_lifecycle_crons()
     for job in existing:
-        if job.get("name") == name and job.get("status") == "active":
+        if job.get("name") == name:
             return {"success": True, "message": "worker 已存在", "cron_job_id": job.get("id")}
 
     if interval:
@@ -84,7 +84,12 @@ def schedule_worker(self, proposal_id: str, interval: Optional[str] = None) -> D
 def remove_worker(self, proposal_id: str) -> Dict[str, Any]:
     name = f"lc-worker-{proposal_id}"
     existing = self.list_lifecycle_crons()
+    removed = []
     for job in existing:
         if job.get("name") == name:
-            return hb.cron_delete(job.get("id"), profile=HERMES_PROFILE)
+            res = hb.cron_delete(job.get("id"), profile=HERMES_PROFILE)
+            if res.get("success"):
+                removed.append(job.get("id"))
+    if removed:
+        return {"success": True, "message": f"已删除 {len(removed)} 个 worker cron", "removed": removed}
     return {"success": True, "message": "worker 不存在"}

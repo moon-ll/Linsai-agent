@@ -8,7 +8,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from common import load_json, now_utc, save_json
+from common import file_lock, load_json, now_utc, save_json
 from paths import PROJECT_ROOT
 from proposal_sections import PROPOSAL_SECTIONS
 
@@ -89,19 +89,21 @@ def _short_uuid() -> str:
 
 def _load_weekend_jobs() -> Dict[str, Any]:
     """加载周末任务状态。"""
-    if WEEKEND_JOBS_PATH.exists():
-        try:
-            return load_json(WEEKEND_JOBS_PATH, default={"jobs": {}})
-        except Exception:
-            pass
+    with file_lock("weekend-jobs"):
+        if WEEKEND_JOBS_PATH.exists():
+            try:
+                return load_json(WEEKEND_JOBS_PATH, default={"jobs": {}})
+            except Exception:
+                pass
     return {"jobs": {}}
 
 
 def _save_weekend_jobs(data: Dict[str, Any]) -> None:
     """保存周末任务状态。"""
-    WEEKEND_JOBS_PATH.parent.mkdir(parents=True, exist_ok=True)
-    data["updated_at"] = now_utc()
-    save_json(WEEKEND_JOBS_PATH, data)
+    with file_lock("weekend-jobs"):
+        WEEKEND_JOBS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        data["updated_at"] = now_utc()
+        save_json(WEEKEND_JOBS_PATH, data)
 
 
 def _is_weekend() -> bool:

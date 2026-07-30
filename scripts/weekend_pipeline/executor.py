@@ -99,13 +99,17 @@ def execute_job(
     handlers: Dict[str, Callable[[Dict[str, Any], Dict[str, Any], bool], Dict[str, Any]]],
     dry_run: bool = False,
 ) -> Dict[str, Any]:
-    """执行单个任务。"""
+    """执行单个任务。
+
+    优先按 job_id 精确匹配，再按 step 回退，避免 input/output/reflection
+    阶段出现同名 step 的 handler 冲突。
+    """
     job_id = job["job_id"]
     step = job.get("step", "")
-    handler = handlers.get(step)
+    handler = handlers.get(job_id) or handlers.get(step)
 
     if not handler:
-        error = f"未找到 step={step} 的执行器"
+        error = f"未找到 job_id={job_id} / step={step} 的执行器"
         update_job(state, job_id, JOB_STATUS_FAILED, error)
         return {"success": False, "error": error, "job_id": job_id}
 

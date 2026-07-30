@@ -96,8 +96,8 @@ python3 scripts/rebuild_lifecycle.py --dry-run            # 修复 lifecycle 不
 python3 scripts/rebuild_lifecycle.py
 python3 scripts/import_hermes_topics.py --dry-run         # 导入 hermes 课题（预览）
 python3 scripts/import_hermes_topics.py --activate
-python3 scripts/proposal_lifecycle.py --setup-cron "57 8 * * *"          # 每日编排 cron
-python3 scripts/proposal_lifecycle.py --setup-weekend                  # 周末任务 cron
+python3 scripts/proposal_lifecycle.py --setup-cron-v2                  # 安装 v2 cron 框架（每日编排 + 修复 + per-proposal workers + 周末任务）
+python3 scripts/proposal_lifecycle.py --setup-weekend                  # 单独安装/重置周末任务 cron
 python3 scripts/weekend_pipeline.py --stage input --dry-run --ensure-jobs   # 手动创建周末输入任务
 python3 scripts/weekend_pipeline.py --stage output --dry-run --ensure-jobs  # 手动创建周末输出任务
 python3 scripts/weekend_pipeline.py --stage reflection --dry-run --ensure-jobs  # 手动创建周末反思任务

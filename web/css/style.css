@@ -3206,11 +3206,30 @@ body {
    v6.7.7: 控制台 (Console)
    ============================================ */
 
+.console-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.console-title {
+    margin: 0 0 4px 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.console-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+}
+
 .console-toolbar {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     align-items: center;
-    margin-bottom: 16px;
     flex-wrap: wrap;
 }
 
@@ -3220,17 +3239,60 @@ body {
     border-radius: 6px;
     background: var(--surface);
     color: var(--text-primary);
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     cursor: pointer;
+    transition: all 0.15s;
 }
 
 .console-btn:hover { background: var(--bg-active); }
+.console-btn.primary {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+    color: #fff;
+}
+.console-btn.primary:hover { opacity: 0.9; }
 
-.console-last-update {
-    margin-left: auto;
-    font-size: 0.8rem;
+.console-weekend-menu {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+    padding: 8px;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.console-menu-item {
+    padding: 5px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--text-primary);
+    font-size: 0.78rem;
+    cursor: pointer;
+}
+.console-menu-item:hover { background: var(--bg-active); }
+
+.console-meta-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    font-size: 0.78rem;
     color: var(--text-tertiary);
 }
+
+.console-refresh-btn {
+    padding: 3px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: var(--surface);
+    color: var(--text-secondary);
+    font-size: 0.75rem;
+    cursor: pointer;
+}
+.console-refresh-btn:hover { background: var(--bg-active); color: var(--text-primary); }
 
 .console-grid {
     display: grid;
@@ -3336,6 +3398,18 @@ body {
     border-radius: 6px;
     background: var(--bg-secondary);
     font-size: 0.85rem;
+    border: 1px solid transparent;
+    transition: all 0.15s;
+}
+
+.console-detail-item.clickable {
+    cursor: pointer;
+    border-color: var(--border-color);
+}
+
+.console-detail-item.clickable:hover {
+    background: var(--bg-active);
+    border-color: var(--accent-color);
 }
 
 .console-detail-title { font-weight: 500; }
@@ -3432,7 +3506,30 @@ body {
 .console-alert-warning { border-left: 3px solid var(--warning-color); }
 .console-alert-info { border-left: 3px solid var(--info-color); }
 
-.console-alert-message { font-weight: 500; margin-bottom: 4px; }
+.console-alert-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.console-alert-level {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    padding: 1px 5px;
+    border-radius: 4px;
+    background: var(--bg-tertiary);
+    color: var(--text-tertiary);
+}
+
+.console-alert-error .console-alert-level { background: var(--error-color); color: #fff; }
+.console-alert-warning .console-alert-level { background: var(--warning-color); color: #fff; }
+.console-alert-info .console-alert-level { background: var(--info-color); color: #fff; }
+
+.console-alert-time { font-size: 0.7rem; color: var(--text-tertiary); }
+
+.console-alert-message { font-weight: 500; margin-bottom: 4px; font-size: 0.85rem; }
 .console-alert-reasons { font-size: 0.78rem; color: var(--text-tertiary); margin-bottom: 6px; }
 .console-alert-actions { display: flex; gap: 6px; }
 
