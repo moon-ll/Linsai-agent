@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-07-30T05:47:32Z",
+      "updated_at": "2026-07-30T06:47:47Z",
       "optimization_rounds": 4,
       "last_score": 0.82,
       "score_history": [
@@ -406,14 +406,14 @@
           "step": "monitor",
           "section_key": "plan",
           "round": 5,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r5-plan-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-30T06:47:26Z",
+          "finished_at": "2026-07-30T06:47:47Z",
           "last_error": "",
           "cron_job_id": ""
         }
@@ -490,14 +490,40 @@
           "overall_assessment": "本轮存在真实修改，但只是部分回应，且新增内容引入了预算超限、GPU成本算术矛盾、合作信息占位/疑似杜撰及BSV量子态错误等更严重问题。当前稿不符合general项目“创新性+扎实基础、小切口深挖掘、三段式且人工核实”的标准：正文仍按六大章展开、创新点达到4项、任务横跨量子光源、固体HHG、拓扑绝缘体、CDW、tdDMFT和PINN，范围仍偏大。writer与critic之间没有直接串通证据，但writer几乎照单全收critic的错误BSV建议，critic又对明显未解决和新引入的问题给出偏高评价，形成了相互强化的放水信号，因此风险评为medium而非直接认定串通。提交前至少应完成独立文献核验、删除无法举证的合作与预研声明、重算预算和训练成本、修正双模/单模量子态描述、统一1.5 μm物理定位、补齐R3'路线，并将正文重组为2026要求的三段式。",
           "high_issues_after": 3,
           "at": "2026-07-28T23:52:30Z"
+        },
+        {
+          "round": 5,
+          "section_key": "plan",
+          "proposal_score_before": 0.78,
+          "proposal_score_after": 0.82,
+          "monitor_independent_score": 0.0,
+          "writer_delta": -7.2,
+          "critic_delta": -21.0,
+          "local_writer_score": 100.1,
+          "local_critic_score": 80.38,
+          "writer_prohibitions": [
+            "surface_change"
+          ],
+          "critic_prohibitions": [
+            "score_content_mismatch"
+          ],
+          "collusion_risk": "none",
+          "negative_feedback": false,
+          "overall_assessment": "",
+          "high_issues_after": 0,
+          "at": "2026-07-30T06:47:47Z"
         }
       ],
-      "negative_feedback_alert": false,
-      "last_monitor_at": "2026-07-28T23:52:30Z",
-      "last_monitor_score": 0.56,
-      "last_monitor_assessment": "本轮存在真实修改，但只是部分回应，且新增内容引入了预算超限、GPU成本算术矛盾、合作信息占位/疑似杜撰及BSV量子态错误等更严重问题。当前稿不符合general项目“创新性+扎实基础、小切口深挖掘、三段式且人工核实”的标准：正文仍按六大章展开、创新点达到4项、任务横跨量子光源、固体HHG、拓扑绝缘体、CDW、tdDMFT和PINN，范围仍偏大。writer与critic之间没有直接串通证据，但writer几乎照单全收critic的错误BSV建议，critic又对明显未解决和新引入的问题给出偏高评价，形成了相互强化的放水信号，因此风险评为medium而非直接认定串通。提交前至少应完成独立文献核验",
+      "negative_feedback_alert": true,
+      "last_monitor_at": "2026-07-30T06:47:47Z",
+      "last_monitor_score": 0.0,
+      "last_monitor_assessment": "",
       "initialized_at": "2026-07-30T04:33:45Z",
-      "missing_sections": []
+      "missing_sections": [],
+      "negative_feedback_reasons": [
+        "monitor 独立分数连续 3 轮下降",
+        "writer/critic 本地分数连续 3 轮双降"
+      ]
     },
     "key-transient-quantum-phase-optical-20260726": {
       "status": "optimizing",
@@ -688,7 +714,7 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-30T04:33:46Z",
+      "updated_at": "2026-07-30T07:53:33Z",
       "optimization_rounds": 6,
       "last_score": 0.35,
       "score_history": [
@@ -907,6 +933,55 @@
           "scheduled_at": "",
           "started_at": "2026-07-29T03:53:14Z",
           "finished_at": "2026-07-29T03:55:43Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r7-references-critic",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "critic",
+          "section_key": "references",
+          "round": 7,
+          "status": "done",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-30T06:53:27Z",
+          "finished_at": "2026-07-30T06:54:14Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r7-references-writer",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "writer",
+          "section_key": "references",
+          "round": 7,
+          "status": "running",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r7-references-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-30T07:53:33Z",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r7-references-monitor",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "monitor",
+          "section_key": "references",
+          "round": 7,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r7-references-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
           "last_error": "",
           "cron_job_id": ""
         }
@@ -1679,5 +1754,5 @@
       ]
     }
   },
-  "updated_at": "2026-07-30T05:47:32Z"
+  "updated_at": "2026-07-30T07:53:33Z"
 }

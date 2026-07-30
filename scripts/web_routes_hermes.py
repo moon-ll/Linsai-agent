@@ -19,6 +19,7 @@ handler 签名：GET/DELETE → (self, parsed, body=None, **path_params)
 import queue
 import re
 import threading
+from pathlib import Path
 from typing import Any, Tuple
 
 from web_base import _log, split_response_stream
@@ -33,11 +34,74 @@ _HERMES_ROUTES = [
     # GET
     ("GET", re.compile(r"^/api/hermes/cron$"), "_her_cron_list"),
     ("GET", re.compile(r"^/api/hermes/profiles$"), "_her_profiles"),
+    ("GET", re.compile(r"^/api/hermes/profiles/(?P<profile>[^/]+)/model$"), "_her_profile_model_get"),
     # POST（GET 重复 + 独有）
     ("POST", re.compile(r"^/api/hermes/cron$"), "_her_cron_list"),
     ("POST", re.compile(r"^/api/hermes/cron/(?P<job_id>[^/]+)/(?P<action>pause|resume|run)$"), "_her_cron_control"),
     ("POST", re.compile(r"^/api/hermes/run$"), "_her_run"),
+    ("POST", re.compile(r"^/api/hermes/profiles/(?P<profile>[^/]+)/model$"), "_her_profile_model_set"),
 ]
+
+# 允许前端切换的模型选项
+_HERMES_MODEL_OPTIONS = [
+    {"provider": "minimax-cn", "model": "MiniMax-M3", "label": "MiniMax-M3"},
+    {"provider": "minimax-cn", "model": "MiniMax-M2.7", "label": "MiniMax-M2.7"},
+    {"provider": "zai", "model": "glm-5.2", "label": "GLM-5.2"},
+    {"provider": "zai", "model": "glm-5.1", "label": "GLM-5.1"},
+    {"provider": "kimi-for-coding", "model": "k2.7 code", "label": "Kimi k2.7 code"},
+]
+
+
+def _profile_config_path(profile: str) -> Path:
+    return Path.home() / ".hermes" / "profiles" / profile / "config.yaml"
+
+
+def _read_profile_model(profile: str) -> dict:
+    cfg = _profile_config_path(profile)
+    if not cfg.exists():
+        return {"error": "profile 不存在"}
+    text = cfg.read_text(encoding="utf-8")
+    default = re.search(r"^  default: (.*)$", text, re.MULTILINE)
+    provider = re.search(r"^  provider: (.*)$", text, re.MULTILINE)
+    return {
+        "provider": provider.group(1).strip() if provider else "",
+        "model": default.group(1).strip() if default else "",
+        "options": _HERMES_MODEL_OPTIONS,
+    }
+
+
+def _write_profile_model(profile: str, provider: str, model: str) -> dict:
+    cfg = _profile_config_path(profile)
+    if not cfg.exists():
+        return {"success": False, "error": "profile 不存在"}
+    text = cfg.read_text(encoding="utf-8")
+
+    # 更新 model 主模型
+    text = re.sub(
+        r"^model:\n  default: .*\n  provider: .*\n",
+        f"model:\n  default: {model}\n  provider: {provider}\n",
+        text,
+        flags=re.MULTILINE,
+    )
+
+    # 更新 fallback_providers：当前选择以外的所有选项作为 fallback
+    others = [opt for opt in _HERMES_MODEL_OPTIONS
+              if not (opt["provider"] == provider and opt["model"] == model)]
+    fb_lines = ["fallback_providers:"]
+    for opt in others:
+        fb_lines.append(f"- provider: {opt['provider']}")
+        fb_lines.append(f"  model: {opt['model']}")
+    fb_block = "\n".join(fb_lines) + "\n"
+
+    text = re.sub(
+        r"^fallback_providers:\n(?:- provider: .*\n  model: .*\n)*",
+        fb_block,
+        text,
+        flags=re.MULTILINE,
+    )
+
+    cfg.write_text(text, encoding="utf-8")
+    return {"success": True, "profile": profile, "provider": provider, "model": model}
 
 
 # ---------------------------------------------------------------------------
@@ -55,6 +119,38 @@ class HermesRoutesMixin:
         try:
             profiles = hb.list_team_profiles()
             self._send_json({"status": "ok", "profiles": profiles})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _her_profile_model_get(self, parsed, body=None, profile=None, **kwargs):
+        """GET /api/hermes/profiles/{profile}/model — 读取主模型配置。"""
+        try:
+            result = _read_profile_model(profile)
+            if "error" in result:
+                self._send_json(result, 404)
+            else:
+                self._send_json({"status": "ok", **result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _her_profile_model_set(self, parsed, body, profile=None, **kwargs):
+        """POST /api/hermes/profiles/{profile}/model — 切换主模型与 fallback。"""
+        try:
+            provider = body.get("provider", "").strip()
+            model = body.get("model", "").strip()
+            if not provider or not model:
+                self._send_json({"error": "缺少 provider 或 model"}, 400)
+                return
+            valid = any(opt["provider"] == provider and opt["model"] == model
+                        for opt in _HERMES_MODEL_OPTIONS)
+            if not valid:
+                self._send_json({"error": "不支持的模型组合"}, 400)
+                return
+            result = _write_profile_model(profile, provider, model)
+            if result.get("success"):
+                self._send_json({"status": "ok", **result})
+            else:
+                self._send_json(result, 400)
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 

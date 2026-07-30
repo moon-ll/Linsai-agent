@@ -3314,6 +3314,34 @@ body {
 .console-agent-meta { color: var(--text-tertiary); font-size: 0.75rem; }
 .console-agent-task { color: var(--info-color); margin-top: 4px; font-size: 0.75rem; }
 .console-agent-error { color: var(--error-color); margin-top: 4px; font-size: 0.72rem; overflow: hidden; text-overflow: ellipsis; }
+.console-agent-model {
+    margin-top: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+.console-agent-model label {
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+}
+.console-agent-model select {
+    font-size: 0.72rem;
+    padding: 3px 4px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    width: 100%;
+}
+.console-agent-model select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+.console-agent-model-saved {
+    font-size: 0.65rem;
+    color: var(--success-color);
+    height: 0.8rem;
+}
 
 .console-cron-jobs { font-size: 0.82rem; }
 .console-cron-list { display: flex; flex-direction: column; gap: 6px; }

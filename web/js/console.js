@@ -22,6 +22,8 @@
     agents: null,
     alerts: [],
     selectedStage: null,
+    profileModels: {},
+    profileModelsLoading: false,
   };
 
   const STAGE_ORDER = ['incoming', 'drafts', 'optimizing', 'pending_review', 'archived', 'output'];
@@ -95,8 +97,28 @@
       if (data.status === 'ok') {
         ConsoleState.agents = data;
         renderAgents();
+        loadProfileModels();
       }
     } catch (e) { console.error('console agents:', e); }
+  }
+
+  async function loadProfileModels() {
+    if (ConsoleState.profileModelsLoading) return;
+    const profiles = ConsoleState.agents?.profiles || {};
+    const names = Object.keys(profiles);
+    if (names.length === 0) return;
+    ConsoleState.profileModelsLoading = true;
+    for (const name of names) {
+      if (ConsoleState.profileModels[name]) continue;
+      try {
+        const data = await apiGet(`/api/hermes/profiles/${encodeURIComponent(name)}/model`);
+        if (data.status === 'ok') {
+          ConsoleState.profileModels[name] = data;
+        }
+      } catch (e) { console.error(`profile model ${name}:`, e); }
+    }
+    ConsoleState.profileModelsLoading = false;
+    renderAgents();
   }
 
   async function loadConsoleAlerts() {
@@ -234,14 +256,16 @@
     for (const [name, info] of profilesList) {
       const status = info.status || 'offline';
       const rate = info.success_rate_24h != null ? (info.success_rate_24h * 100).toFixed(0) + '%' : '—';
+      const modelHtml = renderProfileModelSelect(name);
       html += `
-        <div class="console-agent-card">
+        <div class="console-agent-card" data-profile="${escapeAttr(name)}">
           <div class="console-agent-header">
             ${statusDot(status)}
             <span class="console-agent-name">${escapeHtml(name)}</span>
             <span class="console-agent-status ${statusColorClass(status)}">${escapeHtml(status)}</span>
           </div>
           <div class="console-agent-meta">24h 成功率: ${rate}</div>
+          ${modelHtml}
           ${info.current_task ? `<div class="console-agent-task">◐ ${escapeHtml(info.current_task)}</div>` : ''}
           ${info.recent_error ? `<div class="console-agent-error" title="${escapeAttr(info.recent_error)}">${escapeHtml(info.recent_error.slice(0, 40))}</div>` : ''}
         </div>
@@ -249,6 +273,7 @@
     }
     html += '</div>';
     container.innerHTML = html;
+    bindProfileModelSelects();
 
     // cron jobs
     const cronContainer = document.getElementById('console-cron-jobs');
@@ -266,6 +291,57 @@
         `).join('') + '</div>';
       }
     }
+  }
+
+  function renderProfileModelSelect(name) {
+    const cfg = ConsoleState.profileModels[name];
+    if (!cfg) {
+      return `<div class="console-agent-model"><label>主模型</label><select disabled><option>加载中…</option></select></div>`;
+    }
+    const currentKey = `${cfg.provider}|${cfg.model}`;
+    const options = (cfg.options || []).map(opt => {
+      const key = `${opt.provider}|${opt.model}`;
+      return `<option value="${escapeAttr(key)}" ${key === currentKey ? 'selected' : ''}>${escapeHtml(opt.label)}</option>`;
+    }).join('');
+    return `
+      <div class="console-agent-model">
+        <label>主模型</label>
+        <select data-profile="${escapeAttr(name)}">
+          ${options}
+        </select>
+        <div class="console-agent-model-saved"></div>
+      </div>
+    `;
+  }
+
+  function bindProfileModelSelects() {
+    document.querySelectorAll('.console-agent-model select[data-profile]').forEach(sel => {
+      sel.addEventListener('change', async (e) => {
+        const name = e.target.dataset.profile;
+        const [provider, model] = e.target.value.split('|');
+        const savedEl = e.target.parentElement.querySelector('.console-agent-model-saved');
+        e.target.disabled = true;
+        if (savedEl) savedEl.textContent = '保存中…';
+        try {
+          const result = await apiPost(`/api/hermes/profiles/${encodeURIComponent(name)}/model`, { provider, model });
+          if (result.status === 'ok') {
+            ConsoleState.profileModels[name] = { ...ConsoleState.profileModels[name], provider, model };
+            if (savedEl) savedEl.textContent = '已保存';
+            setTimeout(() => { if (savedEl) savedEl.textContent = ''; }, 2000);
+          } else {
+            throw new Error(result.error || '保存失败');
+          }
+        } catch (err) {
+          console.error('save profile model:', err);
+          if (savedEl) savedEl.textContent = '保存失败: ' + err.message;
+          // 恢复选择
+          const cfg = ConsoleState.profileModels[name];
+          if (cfg) e.target.value = `${cfg.provider}|${cfg.model}`;
+        } finally {
+          e.target.disabled = false;
+        }
+      });
+    });
   }
 
   // ============================================
