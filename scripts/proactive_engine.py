@@ -251,6 +251,18 @@ def generate_proactive_message(signal: dict) -> str:
         candidates = signal.get("candidates", [])
         topics = "、".join(c["title"][:20] for c in candidates[:2])
         return f"我在浏览最新文献时发现了几个可能相关的方向：{topics}（相关度 {top_score:.0%}）。要启动自主学习吗？"
+    if sig_type == "pending_review":
+        pid = signal.get("proposal_id", "某个课题")
+        score = signal.get("score", 0)
+        rounds = signal.get("rounds", 0)
+        return f"课题 '{pid}' 已完成 {rounds} 轮优化（score {score:.2f}），等待你审核。要现在看看吗？"
+    if sig_type == "optimizing_stalled":
+        pid = signal.get("proposal_id", "某个课题")
+        days = signal.get("days", "几")
+        return f"课题 '{pid}' 已 {days} 天没有新的优化结果，可能卡住了。要去生命周期页面检查一下吗？"
+    if sig_type == "negative_feedback_alert":
+        pid = signal.get("proposal_id", "某个课题")
+        return f"课题 '{pid}' 的 writer/critic 对抗评审触发负反馈告警，建议人工介入查看。"
     return "有件事想提醒你，有空的时候看看？"
 
 
@@ -292,6 +304,76 @@ def handle_user_feedback(feedback: str) -> str:
     _write_json(_autonomy_path(), data)
     print("⚠ 未识别反馈意图，保持当前级别")
     return data.get("level", "suggest")
+
+
+# ---------------------------------------------------------------------------
+# 生命周期 / 课题流水线信号检测（v6.7.11）
+# ---------------------------------------------------------------------------
+
+def _check_lifecycle_signals() -> list[dict]:
+    """检测课题生命周期中需要用户关注或主管介入的信号。"""
+    signals = []
+    now = datetime.now(timezone.utc)
+
+    try:
+        from proposal_lifecycle import ProposalLifecycle
+        lc = ProposalLifecycle()
+        dashboard = lc.get_dashboard()
+        proposals = dashboard.get("proposals", {})
+    except Exception:
+        return signals
+
+    # 1. pending_review 课题等待人工审核
+    for pid, p in proposals.items():
+        if p.get("status") == "pending_review":
+            signals.append({
+                "type": "pending_review",
+                "severity": "high",
+                "source": pid,
+                "description": f"课题 '{pid}' 已通过自动优化，等待人工审核",
+                "suggested_action": "建议进入课题生命周期页面点击『审核』进行核验",
+                "proposal_id": pid,
+                "rounds": p.get("optimization_rounds", 0),
+                "score": p.get("last_score", 0),
+            })
+
+    # 2. optimizing 课题长期无进展（>3天未更新）
+    stall_cutoff = now - timedelta(days=3)
+    for pid, p in proposals.items():
+        if p.get("status") != "optimizing":
+            continue
+        updated = p.get("updated_at", "")
+        if not updated:
+            continue
+        try:
+            updated_dt = _parse_utc(updated)
+        except Exception:
+            continue
+        if updated_dt < stall_cutoff:
+            days_stalled = (now - updated_dt).days
+            signals.append({
+                "type": "optimizing_stalled",
+                "severity": "medium" if days_stalled > 7 else "low",
+                "source": pid,
+                "description": f"课题 '{pid}' 已 {days_stalled} 天未产生新的优化结果",
+                "suggested_action": "检查是否有 cron 任务失败、模型限流或负反馈告警",
+                "proposal_id": pid,
+                "days": days_stalled,
+            })
+
+    # 3. 负反馈告警（对抗评审进入负反馈）
+    for pid, p in proposals.items():
+        if p.get("negative_feedback_alert"):
+            signals.append({
+                "type": "negative_feedback_alert",
+                "severity": "high",
+                "source": pid,
+                "description": f"课题 '{pid}' 触发负反馈告警，writer/critic 分数持续走低",
+                "suggested_action": "建议人工查看监察记录并决定是否清除告警或调整策略",
+                "proposal_id": pid,
+            })
+
+    return signals
 
 
 # ---------------------------------------------------------------------------
@@ -439,6 +521,9 @@ def heartbeat() -> list[dict]:
 
     # 5. 自主学习机会（learning opportunity）
     signals.extend(_check_learning_opportunities())
+
+    # v6.7.11: 生命周期/课题流水线信号
+    signals.extend(_check_lifecycle_signals())
 
     print(f"✓ 心跳扫描完成，检测到 {len(signals)} 个信号")
     return signals

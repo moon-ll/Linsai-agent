@@ -77,7 +77,9 @@ class LiteratureNotes:
     def import_from_report(self, report_path: Path | str) -> int:
         """从 literature-report.md 或 lit-gap-*.md 中导入条目。
 
-        简单规则：每行以 '- ' 开头的视为一条文献标题。
+        v6.7.11: 兼容 researcher 输出的两种格式
+          - 以 '- ' 开头的简洁标题行
+          - 以 '**N. ' 开头的详细文献条目（如 '**1. Author (Year). Title...'）
         返回导入条数。
         """
         report_path = Path(report_path)
@@ -92,16 +94,37 @@ class LiteratureNotes:
         count = 0
         for line in text.split("\n"):
             line = line.strip()
-            if line.startswith("-") and len(line) > 10:
+            if not line or len(line) <= 10:
+                continue
+
+            title = ""
+            source = ""
+
+            # 格式 1：'- Author (Year). Title...'
+            if line.startswith("-"):
                 title = line.lstrip("-").strip()
-                # 简单提取标题和来源（如果有 [source] 标记）
-                source = ""
-                m = re.search(r"\[(.+?)\]", title)
-                if m:
-                    source = m.group(1)
-                    title = re.sub(r"\[.+?\]", "", title).strip()
-                self.append_note(title=title, source=source or str(report_path.name))
-                count += 1
+            # 格式 2：'**N. Author (Year). Title...**'（researcher 定向检索报告常用）
+            elif re.match(r"^\*\*\d+\.\s+", line):
+                # 去掉首尾 ** 和编号
+                title = re.sub(r"^\*\*\d+\.\s+", "", line).rstrip("*").strip()
+            else:
+                continue
+
+            if not title:
+                continue
+
+            # 过滤掉非标题行（核心结论/支撑作用/来源等以 '- ' 开头的说明）
+            if title.startswith(("核心结论", "支撑作用", "来源", "作者隶属")):
+                continue
+
+            # 简单提取来源标记（如果有 [source] 标记）
+            m = re.search(r"\[(.+?)\]", title)
+            if m:
+                source = m.group(1)
+                title = re.sub(r"\[.+?\]", "", title).strip()
+
+            self.append_note(title=title, source=source or str(report_path.name))
+            count += 1
         return count
 
     def list_notes(self) -> List[Dict[str, Any]]:

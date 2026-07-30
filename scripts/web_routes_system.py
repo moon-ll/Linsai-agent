@@ -116,6 +116,8 @@ _SYSTEM_ROUTES = [
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/transition$"), "_sys_lifecycle_transition"),
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/optimize$"), "_sys_lifecycle_optimize"),
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/feedback$"), "_sys_lifecycle_feedback"),
+    ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/review-session$"), "_sys_lifecycle_review_session"),
+    ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/review-verdict$"), "_sys_lifecycle_review_verdict"),
     ("POST", re.compile(r"^/api/lifecycle/cron-sweep$"), "_sys_lifecycle_cron_sweep"),
     # v6.7.5: checkpoint + 小型 cron 框架
     ("GET", re.compile(r"^/api/lifecycle/checkpoints/(?P<proposal_id>[^/]+)$"), "_sys_lifecycle_checkpoints"),
@@ -552,6 +554,139 @@ class SystemRoutesMixin:
             "task_id": task_id,
             "message": "反馈已提交（后台处理，hermes writer 结构化约需 0.5-2 分钟）",
         })
+
+    def _sys_lifecycle_review_session(self, parsed, body=None, **kwargs):
+        """为 pending_review 课题创建审核会话。
+
+        返回：{status: "ok", session_id, topic, mode}
+        """
+        proposal_id = kwargs.get("proposal_id")
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            from pathlib import Path
+            import session_manager as sm
+
+            lc = ProposalLifecycle()
+            prop_state = lc._get_proposal_state(proposal_id)
+            if not prop_state:
+                self._send_json({"error": "课题不存在"}, 404)
+                return
+            if prop_state.get("status") != "pending_review":
+                self._send_json({"error": "课题不在待审核阶段"}, 400)
+                return
+
+            prop_dir = lc._find_proposal_dir(proposal_id)
+            if not prop_dir:
+                self._send_json({"error": "课题目录不存在"}, 404)
+                return
+
+            # 读取申请书关键内容
+            proposal_path = prop_dir / "04_proposal" / "proposal-draft.md"
+            proposal_text = ""
+            if proposal_path.exists():
+                proposal_text = proposal_path.read_text(encoding="utf-8", errors="ignore")[:8000]
+
+            # 读取方法学手册
+            method_path = prop_dir / "04_proposal" / "methodology-manual.md"
+            method_text = ""
+            if method_path.exists():
+                method_text = method_path.read_text(encoding="utf-8", errors="ignore")[:4000]
+
+            # 读取评分历史
+            score_history = prop_state.get("score_history", [])
+            last_score = prop_state.get("last_score", 0.0)
+            rounds = prop_state.get("optimization_rounds", 0)
+
+            # 创建审核会话
+            title = prop_state.get("title", proposal_id) or proposal_id
+            topic = f"审核：{title}"
+            sid, _ = sm.create_session(topic, mode="review", project_id=proposal_id)
+
+            # 写入初始审核上下文（assistant 角色）
+            review_context = (
+                f"【课题审核】\n"
+                f"课题ID：{proposal_id}\n"
+                f"标题：{title}\n"
+                f"优化轮次：{rounds}\n"
+                f"最新评分：{last_score:.2f}\n\n"
+                f"【评分历史】\n"
+            )
+            if score_history:
+                for h in score_history[-3:]:
+                    review_context += (
+                        f"- 轮次 {h.get('round', '?')}：{h.get('score', 0):.2f} "
+                        f"（聚焦：{h.get('focus_section', '-')}, "
+                        f"问题数：{h.get('issues_count', 0)}）\n"
+                    )
+            else:
+                review_context += "（无评分历史）\n"
+
+            review_context += (
+                f"\n【申请书节选】\n{proposal_text[:4000]}\n\n"
+                f"【方法学手册节选】\n{method_text[:2000]}\n\n"
+                f"---\n"
+                f"请你作为审核人，审阅以上课题内容。你可以：\n"
+                f"1. 直接说「通过」或「归档」来批准课题；\n"
+                f"2. 说「退回修改」或「不通过」并给出修改意见，系统会自动将意见传递给优化环节；\n"
+                f"3. 说「暂停」或「稍后处理」来保持当前状态，不触发任何流转；\n"
+                f"4. 也可以先讨论任何你想确认的问题，再给出最终结论。\n"
+            )
+
+            sm.append_message(sid, "assistant", review_context, mode="review")
+
+            self._send_json({
+                "status": "ok",
+                "session_id": sid,
+                "topic": topic,
+                "mode": "review",
+                "proposal_id": proposal_id,
+            })
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_review_verdict(self, parsed, body=None, **kwargs):
+        """提交审核结论并执行流转。
+
+        body 必填：verdict（approve / reject / pause）
+        body 可选：reason
+        """
+        proposal_id = kwargs.get("proposal_id")
+        if not body or "verdict" not in body:
+            self._send_json({"error": "缺少 verdict"}, 400)
+            return
+
+        verdict = body["verdict"]
+        reason = body.get("reason", "")
+
+        if verdict not in ("approve", "reject", "pause"):
+            self._send_json({"error": "verdict 必须是 approve/reject/pause 之一"}, 400)
+            return
+
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            lc = ProposalLifecycle()
+            prop_state = lc._get_proposal_state(proposal_id)
+            if not prop_state:
+                self._send_json({"error": "课题不存在"}, 404)
+                return
+            if prop_state.get("status") != "pending_review":
+                self._send_json({"error": "课题不在待审核阶段"}, 400)
+                return
+
+            if verdict == "approve":
+                # v6.7.11: 调用归档流程，自动写入 _archive-meta.json 并纳入知识库 raw/wiki
+                result = lc.archive_proposal(proposal_id, reason or "用户审核通过", verdict)
+                self._send_json({"status": "ok", "action": "archived", "data": result})
+            elif verdict == "reject":
+                # 保存审核意见为 feedback，然后回到 optimizing
+                feedback_text = reason or "用户审核不通过，请根据审核意见修改。"
+                lc.submit_feedback(proposal_id, feedback_text, verdict="major_revision")
+                result = lc.transition(proposal_id, "optimizing", reason or "用户审核退回修改")
+                self._send_json({"status": "ok", "action": "optimizing", "data": result})
+            else:  # pause
+                self._send_json({"status": "ok", "action": "paused", "message": "已暂停，保持待审核状态"})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
 
     def _sys_lifecycle_cron_sweep(self, parsed, body=None):
         """执行 cron 扫描（后台异步，因为多个课题的 hermes oneshot 需要很长时间）"""

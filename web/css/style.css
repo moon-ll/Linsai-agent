@@ -1330,6 +1330,66 @@ body {
   color: var(--accent-color);
 }
 
+/* v6.7.11: review 模式快捷审核按钮 */
+.review-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding: 8px 10px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  flex-wrap: wrap;
+}
+
+.review-action-label {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  margin-right: 4px;
+}
+
+.review-action-btn {
+  padding: 5px 12px;
+  font-size: 0.82rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+}
+
+.review-action-btn.approve {
+  border-color: var(--success-color);
+  color: var(--success-color);
+}
+
+.review-action-btn.approve:hover {
+  background: var(--success-color);
+  color: #fff;
+}
+
+.review-action-btn.reject {
+  border-color: var(--warning-color);
+  color: var(--warning-color);
+}
+
+.review-action-btn.reject:hover {
+  background: var(--warning-color);
+  color: #fff;
+}
+
+.review-action-btn.pause {
+  border-color: var(--text-tertiary);
+  color: var(--text-tertiary);
+}
+
+.review-action-btn.pause:hover {
+  background: var(--text-tertiary);
+  color: #fff;
+}
+
 .input-row {
   display: flex;
   gap: 8px;

@@ -29,6 +29,14 @@ WIKI_DIR = KNOWLEDGE_DIR / "wiki"
 RAW_DIR = KNOWLEDGE_DIR / "raw"
 CAPTURES_DIR = KNOWLEDGE_DIR / "captures"
 
+# v6.7.11: 规范知识库三层结构
+RAW_PROJECTS_DIR = RAW_DIR / "projects"      # 课题库（归档课题完整文件）
+RAW_PAPERS_DIR = RAW_DIR / "papers"          # 文献库（论文元数据）
+QA_DIR = KNOWLEDGE_DIR / "qa"                 # 问答模块（用户讨论归档）
+QA_PAPER_DIR = QA_DIR / "paper-discussions"
+QA_PROPOSAL_DIR = QA_DIR / "proposal-discussions"
+QA_PROJECT_DIR = QA_DIR / "project-discussions"
+
 # 知识库核心文件
 INDEX_PATH = KNOWLEDGE_DIR / "index.json"
 GRAPH_PATH = KNOWLEDGE_DIR / "graph.json"

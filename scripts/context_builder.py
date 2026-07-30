@@ -37,6 +37,7 @@ def _mode_instr(mode: str, now: str) -> str:
         "deep-talk": "深度对话模式。从自身经历找锚点，不直接给建议，提供元认知引导。",
         "quick-check": "快速验证模式。简洁直接，给出是/否加关键问题，不展开长篇大论。",
         "proactive": "主动感知模式。温和主动，引用过往对话，尊重用户边界。",
+        "review": "课题审核模式。以审核人视角审阅课题申请书，给出通过/退回/暂停的明确结论，并简要说明理由。不展开无关讨论。",
     }
     desc = descs.get(mode, descs["co-working"])
     return f"\n\n---\n【当前交互模式】{mode}\n【实时时间】{now}\n\n【模式说明】\n{desc}\n\n注意：你的知识截至2026年。"

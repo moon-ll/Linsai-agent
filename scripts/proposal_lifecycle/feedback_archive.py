@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 from typing import Any, Dict
 
@@ -13,6 +14,8 @@ from proposal_lifecycle.constants import (
     LIFECYCLE_STAGES,
     PROPOSALS_ROOT,
 )
+
+from paths import RAW_PROJECTS_DIR
 
 
 class FeedbackArchiveMixin:
@@ -63,7 +66,7 @@ class FeedbackArchiveMixin:
 
         if verdict == "approve":
             # 通过 → 归档
-            archive_result = self._archive_proposal(proposal_id, feedback_text, verdict)
+            archive_result = self.archive_proposal(proposal_id, feedback_text, verdict)
             return {
                 "success": True,
                 "verdict": "approve",
@@ -152,13 +155,13 @@ class FeedbackArchiveMixin:
     # 归档
     # ------------------------------------------------------------------
 
-    def _archive_proposal(
+    def archive_proposal(
         self,
         proposal_id: str,
         approval_comment: str,
         verdict: str,
     ) -> Dict[str, Any]:
-        """归档 proposal：移入归档区 + 写入元信息。"""
+        """归档 proposal：移入归档区 + 写入元信息 + 纳入知识库。"""
         prop_dir = self._find_proposal_dir(proposal_id)
         if not prop_dir:
             return {"success": False, "error": "目录不存在"}
@@ -198,10 +201,38 @@ class FeedbackArchiveMixin:
     ) -> Dict[str, Any]:
         """将归档课题纳入知识库，供后续新课题引用。
 
-        在 knowledge/wiki/projects/ 下创建课题索引，
+        v6.7.11 规范：
+        1. 在 knowledge/raw/projects/{proposal_id}/ 保存完整课题源文件（raw 模块）。
+        2. 在 knowledge/wiki/projects/ 下创建课题索引（wiki 模块，AI 整理）。
         提取核心信息（科学问题/创新点/方法）供新课题发现和引用。
         """
         try:
+            # 1. 写入 raw/projects（源模块，完整归档）
+            kb_project_dir = RAW_PROJECTS_DIR / proposal_id
+            kb_project_dir.mkdir(parents=True, exist_ok=True)
+            if kb_project_dir.exists() and any(kb_project_dir.iterdir()):
+                # 已存在则先清空，避免旧文件残留
+                for child in kb_project_dir.iterdir():
+                    if child.is_dir():
+                        shutil.rmtree(child)
+                    else:
+                        child.unlink()
+            shutil.copytree(archived_dir, kb_project_dir, dirs_exist_ok=True)
+
+            # 写入结构说明
+            readme_path = kb_project_dir / "_README.md"
+            readme_path.write_text(
+                f"# {proposal_id}\n\n"
+                f"本目录为该课题的归档源文件，属于知识库 **raw（源模块）**。\n\n"
+                f"- 归档时间：{meta.get('archived_at', '')}\n"
+                f"- 最终评分：{meta.get('final_score', 0)}\n"
+                f"- 优化轮次：{meta.get('optimization_rounds', 0)}\n"
+                f"- 原始归档路径：`{str(archived_dir.relative_to(_pl.PROJECT_ROOT))}`\n\n"
+                f"> 注意：raw 模块原则上只读，如需修改请通过前端/对话由 agent 协助处理。\n",
+                encoding="utf-8",
+            )
+
+            # 2. 写入 wiki/projects（智能整理模块，索引卡片）
             kb_dir = _pl.PROJECT_ROOT / "knowledge" / "wiki" / "projects"
             kb_dir.mkdir(parents=True, exist_ok=True)
 
@@ -217,16 +248,22 @@ class FeedbackArchiveMixin:
                 "project_type": meta.get("project_type", "general"),
                 "archived_at": meta.get("archived_at", ""),
                 "final_score": meta.get("final_score", 0),
+                "optimization_rounds": meta.get("optimization_rounds", 0),
                 "core_questions": core_questions,
                 "innovations": innovations,
                 "archived_path": str(archived_dir.relative_to(_pl.PROJECT_ROOT)),
+                "kb_project_path": str(kb_project_dir.relative_to(_pl.PROJECT_ROOT)),
             }
             kb_path = kb_dir / f"{proposal_id}.json"
             save_json(kb_path, kb_entry)
 
             if _log:
-                _log.info(f"知识库索引: {kb_path.name}")
+                _log.info(f"知识库索引: {kb_path.name}, raw 归档: {kb_project_dir.name}")
 
-            return {"success": True, "kb_path": str(kb_path.relative_to(_pl.PROJECT_ROOT))}
+            return {
+                "success": True,
+                "kb_path": str(kb_path.relative_to(_pl.PROJECT_ROOT)),
+                "kb_project_path": str(kb_project_dir.relative_to(_pl.PROJECT_ROOT)),
+            }
         except Exception as e:
             return {"success": False, "error": str(e)}

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Set
 
 import subprocess
 
@@ -230,6 +230,18 @@ class OptimizeMixin:
         except Exception:
             pass
 
+        # v6.7.11: full_review 轮同步更新课题设想、方法学手册、文献阅读笔记
+        if is_full_review and writer_result.get("success"):
+            try:
+                sync_result = self._sync_derivative_artifacts(proposal_id, prop_dir, timeout=300)
+                if _log:
+                    _log.info(
+                        f"[{proposal_id}] 同步产物完成 success={sync_result.get('success')}"
+                    )
+            except Exception as e:
+                if _log:
+                    _log.warning(f"[{proposal_id}] 同步产物失败: {e}")
+
         # 5. 判定是否达标
         done_result = self._check_done(proposal_id, threshold)
 
@@ -424,7 +436,7 @@ class OptimizeMixin:
         focus_section: Optional[Dict[str, str]],
         timeout: int = 300,
     ) -> Optional[Path]:
-        """v6.7.7: 根据 gap analysis 执行定向文献检索。
+        """v6.7.11: 根据 gap analysis 执行定向文献检索（知识库优先 + 精确联网补充）。
 
         Args:
             gap_path: _run_gap_identifier 生成的 JSON 文件路径
@@ -439,17 +451,26 @@ class OptimizeMixin:
         import time as _t
         result_path = target_dir / f"lit-gap-{int(_t.time())}.md"
 
+        # v6.7.11: 先查询本地知识库，减少无效联网检索
+        kb_context = self._build_kb_context_from_gap(gap_path)
+
         prompt = (
             f"请根据文献缺口分析，执行定向文献检索。\n\n"
             f"【课题】{proposal_id}\n"
             f"{section_hint}"
             f"【文献缺口分析文件】{gap_path}\n"
             f"【输出文件】{result_path}\n\n"
+            f"【本地知识库预检索结果】\n"
+            f"{kb_context}\n\n"
             f"请执行：\n"
             f"1. 读取 {gap_path} 中的 JSON 缺口列表\n"
-            f"2. 针对每个 high/medium 优先级缺口，检索 2-3 篇最相关的近2年论文\n"
-            f"3. 每篇论文给出：标题、作者、年份、期刊/arXiv、核心结论、如何支撑该论点\n"
-            f"4. 将检索结果写入 {result_path}，格式：每个缺口一段，列出推荐引用论文\n"
+            f"2. 优先使用【本地知识库预检索结果】中的文献支撑每个缺口；"
+            f"若本地文献的摘要/结论已足够支撑该论点，直接使用，无需联网\n"
+            f"3. 仅当本地知识库确实没有相关文献、或需要最新近2年文献、或需要原文细节时，"
+            f"才使用 web_search 工具联网补充，每个缺口最多补充 1 篇\n"
+            f"4. 每篇推荐论文给出：标题、作者、年份、期刊/arXiv、核心结论、如何支撑该论点、来源（本地知识库/联网检索）\n"
+            f"5. 格式要求：每个缺口一段，每篇推荐文献的标题行必须以 '- ' 开头（例如：'- Author (Year). Title. arXiv:xxx'），方便系统解析入库\n"
+            f"6. 严格控制总量：每个缺口最终推荐文献不超过 2 篇，避免堆砌低相关文献\n"
         )
 
         result = self._run_hermes("researcher", prompt, timeout)
@@ -461,6 +482,181 @@ class OptimizeMixin:
             if _log:
                 _log.warning(f"[{proposal_id}] 文献检索失败: {result.get('error', '')[:100]}")
             return None
+
+    def _build_kb_context_from_gap(
+        self,
+        gap_path: Path,
+        top_k_per_gap: int = 3,
+        max_total: int = 15,
+    ) -> str:
+        """v6.7.11: 根据 gap analysis 预检索本地知识资产（paper-pool + raw papers + KB）。
+
+        检索层级：
+          1. paper-pool.json（每日文献简报已沉淀的候选论文）
+          2. knowledge/raw/papers/（已有元数据的论文）
+          3. knowledge_base.search()（wiki 笔记、概念、方法）
+
+        对每个命中条目标注：是否有本地 PDF、arXiv ID、来源层级。
+        Returns:
+            结构化本地知识文本；失败返回提示语
+        """
+        try:
+            import json
+            import re
+            import knowledge_base as kb
+            from common import load_json
+            from paths import PROJECT_ROOT
+
+            gap_data = json.loads(gap_path.read_text(encoding="utf-8"))
+            gaps = gap_data.get("gaps", [])
+            if not gaps:
+                return "（无预检索结果）"
+
+            # 加载 paper-pool
+            paper_pool = load_json(PROJECT_ROOT / "memory" / "paper-pool.json", default={})
+
+            # 加载 PDF 库（检查本地是否有 PDF 全文）
+            try:
+                from pdf_manager import PdfLibrary
+                pdf_lib = PdfLibrary()
+            except Exception:
+                pdf_lib = None
+
+            # 收集所有命中条目 {arxiv_id: {title, source, has_pdf, snippet}}
+            hits: Dict[str, Dict[str, Any]] = {}
+
+            def _add_hit(arxiv_id: str, title: str, source: str, snippet: str) -> None:
+                key = arxiv_id or title
+                if key in hits:
+                    # 合并来源，保留更详细信息
+                    old = hits[key]
+                    if source not in old["source"]:
+                        old["source"] += f" + {source}"
+                    return
+                has_pdf = False
+                if pdf_lib and arxiv_id:
+                    has_pdf = pdf_lib.has_pdf(arxiv_id)
+                hits[key] = {
+                    "arxiv_id": arxiv_id,
+                    "title": title,
+                    "source": source,
+                    "has_pdf": has_pdf,
+                    "snippet": snippet[:400].replace("\n", " "),
+                }
+
+            for gap in gaps:
+                priority = gap.get("priority", "medium")
+                if priority == "low":
+                    continue
+                keywords = gap.get("search_keywords", [])
+                query = " ".join(keywords) if keywords else gap.get("claim", "")
+                if not query:
+                    continue
+                query_terms = [t.lower() for t in re.split(r"\W+", query) if len(t) > 2]
+
+                # 1) paper-pool 匹配
+                try:
+                    for aid, info in paper_pool.items():
+                        text = " ".join([
+                            info.get("title", ""),
+                            info.get("direction", ""),
+                            info.get("tldr", ""),
+                            info.get("note", ""),
+                        ]).lower()
+                        if not text:
+                            continue
+                        score = sum(1 for t in query_terms if t in text)
+                        if score >= max(2, len(query_terms) * 0.3):
+                            _add_hit(
+                                arxiv_id=str(aid),
+                                title=info.get("title", "无标题"),
+                                source="paper-pool",
+                                snippet=info.get("tldr", "") or info.get("title", ""),
+                            )
+                except Exception:
+                    pass
+
+                # 2) knowledge/raw/papers/ 元数据匹配
+                try:
+                    raw_papers_dir = PROJECT_ROOT / "knowledge" / "raw" / "papers"
+                    if raw_papers_dir.exists():
+                        for md_file in raw_papers_dir.glob("*.md"):
+                            text = md_file.read_text(encoding="utf-8", errors="ignore").lower()
+                            score = sum(1 for t in query_terms if t in text)
+                            if score >= max(2, len(query_terms) * 0.3):
+                                # 解析 frontmatter 取 title / arxiv_id
+                                fm_title = ""
+                                fm_arxiv = ""
+                                fm_tldr = ""
+                                if text.startswith("---"):
+                                    parts = text.split("---", 2)
+                                    if len(parts) >= 3:
+                                        fm_text = parts[1]
+                                        for line in fm_text.splitlines():
+                                            if line.startswith("title:"):
+                                                fm_title = line.split(":", 1)[1].strip().strip('"').strip("'")
+                                            elif line.startswith("arxiv_id:"):
+                                                fm_arxiv = line.split(":", 1)[1].strip().strip('"').strip("'")
+                                            elif line.startswith("tldr:"):
+                                                fm_tldr = line.split(":", 1)[1].strip().strip('"').strip("'")
+                                if not fm_title:
+                                    fm_title = md_file.stem
+                                # 如果 tldr 为空，取正文前 300 字作为摘要
+                                if not fm_tldr and len(parts) >= 3:
+                                    body = parts[2].strip()
+                                    # 跳过标题和"摘要"标记，取第一段有效文本
+                                    body_lines = [l.strip() for l in body.splitlines() if l.strip() and not l.strip().startswith("#")]
+                                    if body_lines:
+                                        fm_tldr = body_lines[0][:300]
+                                _add_hit(
+                                    arxiv_id=fm_arxiv,
+                                    title=fm_title,
+                                    source="raw/papers",
+                                    snippet=fm_tldr or md_file.stem,
+                                )
+                except Exception:
+                    pass
+
+                # 3) knowledge_base 检索
+                try:
+                    result = kb.search(query, top_k=top_k_per_gap, source="all")
+                    for r in result.get("results", []):
+                        title = r.get("title", "无标题")
+                        doc = r.get("doc", "")
+                        text = (r.get("text", "") or "")[:400]
+                        source = r.get("source", "unknown")
+                        # 尝试从文本或 doc 中提取 arxiv_id
+                        arxiv_match = re.search(r"(\d{4}\.\d{4,5})", f"{title} {doc} {text}")
+                        arxiv_id = arxiv_match.group(1) if arxiv_match else ""
+                        _add_hit(
+                            arxiv_id=arxiv_id,
+                            title=title,
+                            source=f"kb/{source}",
+                            snippet=text,
+                        )
+                except Exception:
+                    pass
+
+                if len(hits) >= max_total:
+                    break
+
+            if not hits:
+                return "（本地知识库未命中相关文献，请联网检索补充）"
+
+            # 组装输出
+            lines: List[str] = []
+            for h in list(hits.values())[:max_total]:
+                pdf_tag = "【本地有 PDF 全文】" if h["has_pdf"] else ""
+                arxiv_tag = f"arXiv:{h['arxiv_id']}" if h["arxiv_id"] else ""
+                lines.append(
+                    f"- {h['title']} {arxiv_tag} {pdf_tag}\n"
+                    f"  来源：{h['source']} | 摘要：{h['snippet']}"
+                )
+            return "\n\n".join(lines)
+        except Exception as e:
+            if _log:
+                _log.warning(f"知识库预检索失败: {e}")
+            return "（知识库预检索失败，请联网检索补充）"
 
     def _run_researcher_targeted(
         self,
@@ -475,16 +671,16 @@ class OptimizeMixin:
         内部拆分为 _run_gap_identifier + _run_literature_searcher，
         但对外仍是一个 job 调用，避免 worker cron 节奏变慢。
         """
-        # 第一步：识别缺口（轻量，默认 120s）
+        # 第一步：识别缺口（轻量，默认 300s）
         gap_path = self._run_gap_identifier(
-            proposal_id, prop_dir, critic_result, focus_section, timeout=120
+            proposal_id, prop_dir, critic_result, focus_section, timeout=300
         )
         if not gap_path:
             return ""
 
         # 第二步：执行检索（重量，剩余超时）
         result_path = self._run_literature_searcher(
-            proposal_id, prop_dir, gap_path, focus_section, timeout=max(timeout - 120, 180)
+            proposal_id, prop_dir, gap_path, focus_section, timeout=max(timeout - 300, 180)
         )
         if result_path:
             # v6.7.10: 自动将检索结果导入文献阅读笔记
@@ -631,6 +827,49 @@ class OptimizeMixin:
                 if _log:
                     _log.warning(f"[{proposal_id}] 组装 proposal-draft.md 失败: {e}")
 
+        return result
+
+    def _sync_derivative_artifacts(
+        self,
+        proposal_id: str,
+        prop_dir: Path,
+        timeout: int = 300,
+    ) -> Dict[str, Any]:
+        """v6.7.11: 根据最新申请书同步更新课题设想、方法学手册、文献阅读笔记。
+
+        只在 full_review 轮调用，避免每轮都增加 hermes 开销。
+        """
+        research_idea_path = prop_dir / "00_research_idea.md"
+        methodology_manual_path = prop_dir / "04_proposal" / "methodology-manual.md"
+        reading_notes_path = prop_dir / "02_literature" / "reading-notes.md"
+        proposal_path = prop_dir / "04_proposal" / "proposal-draft.md"
+
+        # 确保目录存在
+        reading_notes_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # 读取现有内容长度，判断是否跳过
+        ri_len = len(research_idea_path.read_text(encoding="utf-8").strip()) if research_idea_path.exists() else 0
+        mm_len = len(methodology_manual_path.read_text(encoding="utf-8").strip()) if methodology_manual_path.exists() else 0
+        rn_len = len(reading_notes_path.read_text(encoding="utf-8").strip()) if reading_notes_path.exists() else 0
+
+        # 如果课题设想已经比较完整（>2000字符）且方法学手册也完整（>5000字符），则跳过
+        if ri_len > 2000 and mm_len > 5000:
+            return {"success": True, "skipped": True, "reason": "课题设想和方法学手册已较完整"}
+
+        prompt = (
+            f"请根据最新申请书，同步更新以下三个配套文件。\n\n"
+            f"【申请书】{proposal_path}\n"
+            f"【现有课题设想】{research_idea_path}（当前 {ri_len} 字符）\n"
+            f"【现有方法学手册】{methodology_manual_path}（当前 {mm_len} 字符）\n"
+            f"【现有文献阅读笔记】{reading_notes_path}（当前 {rn_len} 字符）\n\n"
+            f"更新要求：\n"
+            f"1. {research_idea_path}：课题设想。包含标题、研究背景与动机、现存研究空白/瓶颈、拟开展研究内容和方案、拟采用技术路线、创新点。基于申请书提炼，不添加申请书中未出现的内容。\n"
+            f"2. {methodology_manual_path}：方法学手册。重方法细节（公式推导/参数表/技术路线图/局限性/误差分析）。若已较完整，只补充申请书新增或调整部分对应的方法细节。\n"
+            f"3. {reading_notes_path}：文献阅读笔记。若申请书引用了新文献而笔记中未记录，请按时间倒序追加一条记录，包含：阅读日期、文献标题、来源、核心结论、与课题关联、已引用位置。\n\n"
+            f"请直接覆盖写入对应文件，不需要在 stdout 中输出全文。"
+        )
+
+        result = self._run_hermes("writer", prompt, timeout)
         return result
 
     def _run_hermes(self, profile: str, prompt: str, timeout: int) -> Dict[str, Any]:

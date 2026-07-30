@@ -180,7 +180,7 @@ def _run_researcher_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
     report = self._read_critic_report(prop_dir, round_num)
     critic_result = {"output": report["output"], "success": True}
     lit = self._run_researcher_targeted(
-        proposal_id, prop_dir, critic_result, focus_section, timeout=900
+        proposal_id, prop_dir, critic_result, focus_section, timeout=1200
     )
     return {"success": bool(lit), "lit_path": lit}
 

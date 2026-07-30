@@ -9,6 +9,8 @@
  *   POST /api/lifecycle/{id}/transition    流转
  *   POST /api/lifecycle/{id}/optimize      执行一轮优化
  *   POST /api/lifecycle/{id}/feedback      提交人工反馈
+ *   POST /api/lifecycle/{id}/review-session 创建审核会话
+ *   POST /api/lifecycle/{id}/review-verdict 提交审核结论
  *   POST /api/lifecycle/cron-sweep         cron 扫描
  *   GET  /api/lifecycle/agent-scores       writer/critic 奖惩分数
  *   GET  /api/lifecycle/monitor/{id}       monitor 历史与负反馈状态
@@ -244,8 +246,8 @@ function renderProposalCard(p) {
     actions += `<button class="btn-text fs-072" style="color:var(--warning-color);" onclick="lcTransition('${p.proposal_id}','pending_review','手动送审')">→ 送审</button>`;
   }
   if (p.status === 'pending_review') {
-    actions += `<button class="btn-text fs-072" style="color:var(--success-color);" onclick="lcApprove('${p.proposal_id}')">✓ 通过</button>`;
-    actions += `<button class="btn-text fs-072" style="color:var(--warning-color);" onclick="lcFeedback('${p.proposal_id}')">↩ 退回修改</button>`;
+    // v6.7.11: 改为对话式审核，点击进入审核会话
+    actions += `<button class="btn-text fs-072" style="color:var(--warning-color);" onclick="lcReview('${p.proposal_id}')">🔍 审核</button>`;
   }
 
   return `
@@ -441,6 +443,57 @@ async function lcFeedback(proposalId) {
       renderLifecycleDashboard();
     } else {
       throw new Error(result.error || '反馈失败');
+    }
+  } catch (e) {
+    showToast(`✗ ${e.message}`, 'error');
+  }
+}
+
+// ============================================
+// v6.7.11: 操作：打开审核会话
+// ============================================
+async function lcReview(proposalId) {
+  try {
+    showToast('创建审核会话...', 'info');
+    const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/review-session`, {});
+    if (result.status !== 'ok' || !result.session_id) {
+      throw new Error(result.error || '创建审核会话失败');
+    }
+    showToast('✓ 审核会话已创建', 'success');
+    // 打开聊天视图并切换到该会话
+    if (typeof switchToView === 'function') {
+      switchToView('chat');
+    }
+    if (typeof loadSession === 'function') {
+      await loadSession(result.session_id);
+    } else if (typeof openChat === 'function') {
+      openChat(result.session_id);
+    } else {
+      console.warn('lcReview: 未找到会话加载函数');
+    }
+  } catch (e) {
+    showToast(`✗ ${e.message}`, 'error');
+  }
+}
+
+// ============================================
+// v6.7.11: 操作：提交审核结论
+// ============================================
+async function lcReviewVerdict(proposalId, verdict, reason = '') {
+  if (!['approve', 'reject', 'pause'].includes(verdict)) return;
+  try {
+    showToast('提交审核结论...', 'info');
+    const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/review-verdict`, {
+      verdict,
+      reason,
+    });
+    if (result.status !== 'ok') {
+      throw new Error(result.error || '审核结论提交失败');
+    }
+    const labels = { approve: '✓ 已通过并归档', reject: '↩ 已退回优化', pause: '⏸ 已暂停' };
+    showToast(labels[verdict], 'success');
+    if (typeof renderLifecycleDashboard === 'function') {
+      renderLifecycleDashboard();
     }
   } catch (e) {
     showToast(`✗ ${e.message}`, 'error');

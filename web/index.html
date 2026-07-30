@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>林赛协作引擎</title>
-<link rel="stylesheet" href="/web/css/style.css?v=6.7.8">
+<link rel="stylesheet" href="/web/css/style.css?v=6.7.11">
 </head>
 <body>
 
@@ -109,6 +109,9 @@
         <div class="kb-partition-bar">
           <select id="kb-partition-select" class="kb-partition-select" title="知识库分区" aria-label="选择知识库分区">
             <option value="all">🗂️ 全部知识库</option>
+            <option value="source:raw">📚 源模块（raw）</option>
+            <option value="source:wiki">📝 智能整理（wiki）</option>
+            <option value="source:qa">💬 问答归档（qa）</option>
             <option value="project:NSFC-强场超快">🔬 课题知识库</option>
             <option value="project:deepxiv-论文库">📄 论文库</option>
             <option value="type:concepts">📐 概念库</option>
@@ -249,6 +252,13 @@
         <div class="upload-progress" id="upload-progress" style="display:none;">
           <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
           <span class="progress-text" id="progress-text">0%</span>
+        </div>
+        <!-- v6.7.11: review 模式快捷操作栏 -->
+        <div class="review-action-bar" id="review-action-bar" style="display:none;">
+          <span class="review-action-label">审核结论：</span>
+          <button class="review-action-btn approve" id="review-approve-btn" title="通过并归档">✓ 通过</button>
+          <button class="review-action-btn reject" id="review-reject-btn" title="退回修改">↩ 退回修改</button>
+          <button class="review-action-btn pause" id="review-pause-btn" title="保持待审核状态">⏸ 暂停</button>
         </div>
         <!-- P2-3: @知识库注入透明化 chip 列表 -->
         <div class="kb-context-chips" id="kb-context-chips" style="display:none;"></div>
@@ -583,13 +593,13 @@
 </div>
 
 <script src="/web/js/core.js?v=6.0"></script>
-<script src="/web/js/session.js?v=6.0"></script>
+<script src="/web/js/session.js?v=6.7.11"></script>
 <script src="/web/js/slash_commands.js?v=6.7.9"></script>
 <script src="/web/js/chat.js?v=6.7.7"></script>
 <script src="/web/js/task.js?v=6.0"></script>
 <script src="/web/js/settings.js?v=6.0"></script>
 <script src="/web/js/skill.js?v=6.0"></script>
-<script src="/web/js/kb.js?v=6.0"></script>
+<script src="/web/js/kb.js?v=6.7.11"></script>
 <script src="/web/js/learning.js?v=6.0"></script>
 <script src="/web/js/app.js?v=6.7.8"></script>
 <script src="/web/js/projects.js?v=6.0"></script>

@@ -117,6 +117,10 @@ async function switchSession(sessionId) {
     State.currentMode = data.mode || 'co-working';
     updateModeBadge(State.currentMode);
 
+    // v6.7.11: review 模式绑定快捷审核按钮
+    State.currentReviewProposalId = data.project_id || null;
+    renderReviewActionBar();
+
     if (data.messages && data.messages.length > 0) {
       data.messages.forEach(msg => {
         appendMessage(msg.role, msg.content, msg.timestamp, false, msg.msg_id);
@@ -148,7 +152,10 @@ async function switchSession(sessionId) {
 // ============================================
 async function viewArchiveSession(sessionId) {
   State.viewingArchive = true;
+  State.currentReviewProposalId = null;
   renderSessionList();
+  const bar = document.getElementById('review-action-bar');
+  if (bar) bar.style.display = 'none';
 
   const _archiveHeader = document.getElementById('chat-archive-header');
   if (_archiveHeader) _archiveHeader.style.display = 'flex';
@@ -251,6 +258,78 @@ async function createNewSession(topic, mode) {
   } catch (e) {
     console.error('创建会话失败:', e);
     showToast('创建会话失败', 'error');
+  }
+}
+
+// v6.7.11: 根据当前会话模式渲染/隐藏审核快捷按钮
+function renderReviewActionBar() {
+  const bar = document.getElementById('review-action-bar');
+  if (!bar) return;
+
+  // 非 review 模式或只读归档浏览时隐藏
+  if (State.viewingArchive || State.currentMode !== 'review' || !State.currentReviewProposalId) {
+    bar.style.display = 'none';
+    return;
+  }
+
+  bar.style.display = 'flex';
+  const proposalId = State.currentReviewProposalId;
+
+  const approveBtn = document.getElementById('review-approve-btn');
+  const rejectBtn = document.getElementById('review-reject-btn');
+  const pauseBtn = document.getElementById('review-pause-btn');
+
+  // 解绑旧事件：克隆替换
+  const cloneApprove = approveBtn.cloneNode(true);
+  const cloneReject = rejectBtn.cloneNode(true);
+  const clonePause = pauseBtn.cloneNode(true);
+  approveBtn.parentNode.replaceChild(cloneApprove, approveBtn);
+  rejectBtn.parentNode.replaceChild(cloneReject, rejectBtn);
+  pauseBtn.parentNode.replaceChild(clonePause, pauseBtn);
+
+  cloneApprove.addEventListener('click', () => handleReviewVerdict(proposalId, 'approve'));
+  cloneReject.addEventListener('click', () => handleReviewVerdict(proposalId, 'reject'));
+  clonePause.addEventListener('click', () => handleReviewVerdict(proposalId, 'pause'));
+}
+
+async function handleReviewVerdict(proposalId, verdict) {
+  const labels = {
+    approve: { action: '通过并归档', prompt: '请输入批准意见（可选）：', defaultReason: '审核通过，同意归档。' },
+    reject: { action: '退回修改', prompt: '请输入修改意见（可选）：', defaultReason: '请根据审核意见继续优化。' },
+    pause: { action: '暂停审核', prompt: '请输入暂停原因（可选）：', defaultReason: '稍后处理。' },
+  };
+  const cfg = labels[verdict];
+  const confirmed = await confirmModal(
+    `<div class="ta-left">确认<strong>${cfg.action}</strong>？</div>`,
+    '确认', '取消'
+  );
+  if (!confirmed) return;
+
+  const reason = await promptModal(cfg.prompt, cfg.defaultReason);
+  if (reason === null) return;
+
+  try {
+    showToast('提交审核结论...', 'info');
+    const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/review-verdict`, {
+      verdict,
+      reason,
+    });
+    if (result.status !== 'ok') {
+      throw new Error(result.error || '审核结论提交失败');
+    }
+    const toastLabels = { approve: '✓ 已通过并归档', reject: '↩ 已退回优化', pause: '⏸ 已暂停' };
+    showToast(toastLabels[verdict], 'success');
+    // 归档或暂停后隐藏审核栏
+    if (verdict !== 'pause') {
+      const bar = document.getElementById('review-action-bar');
+      if (bar) bar.style.display = 'none';
+    }
+    // 刷新生命周期仪表盘
+    if (typeof renderLifecycleDashboard === 'function') {
+      renderLifecycleDashboard();
+    }
+  } catch (e) {
+    showToast(`✗ ${e.message}`, 'error');
   }
 }
 

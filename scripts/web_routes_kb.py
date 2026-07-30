@@ -137,7 +137,7 @@ class KbRoutesMixin:
         查询参数：
             q        — 查询文本
             top_k    — 每页数量（默认5）
-            source   — all|raw|wiki
+            source   — all|raw|wiki|qa
             project  — 课题分区过滤
             type     — 文档类型过滤（concepts/methods/people/papers/projects）
             tag      — frontmatter tags 过滤

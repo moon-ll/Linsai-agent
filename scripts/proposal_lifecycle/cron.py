@@ -17,6 +17,7 @@ from proposal_lifecycle.constants import (
     PROJECT_TYPES,
     PROPOSALS_ROOT,
 )
+from proposal_sections import PROPOSAL_SECTIONS
 
 
 class CronMixin:

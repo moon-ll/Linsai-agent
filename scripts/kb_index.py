@@ -32,7 +32,7 @@ from typing import Any, Dict, List, Optional
 
 from common import now_utc as _now_utc
 import common as _cms
-from paths import INDEX_PATH, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR, HERMES_WIKI_DIR
+from paths import INDEX_PATH, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR, QA_DIR, HERMES_WIKI_DIR
 from kb_text import parse_frontmatter, _chunk_document, _tokenize, _compute_idf
 from kb_graph import get_graph_summary, get_related_concepts
 
@@ -173,9 +173,9 @@ def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = No
 
     old_docs = old_index.get("documents", {})
 
-    # 收集所有待索引文件
+    # 收集所有待索引文件（v6.7.11: 加入 qa 模块）
     all_files: List[Path] = []
-    for base_dir in [RAW_DIR, WIKI_DIR]:
+    for base_dir in [RAW_DIR, WIKI_DIR, QA_DIR]:
         if base_dir.exists():
             for fpath in base_dir.rglob("*"):
                 if _should_index(fpath):
@@ -217,7 +217,12 @@ def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = No
         else:
             # CoPilot 内部文件
             rel_key = str(file_path.relative_to(KNOWLEDGE_DIR))
-            source = "wiki" if "wiki/" in rel_key else "raw"
+            if "qa/" in rel_key:
+                source = "qa"
+            elif "wiki/" in rel_key:
+                source = "wiki"
+            else:
+                source = "raw"
 
         mtime = file_path.stat().st_mtime
         old_doc = old_docs.get(rel_key)
@@ -246,7 +251,7 @@ def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = No
         tags: List[str] = []
         growth_stage = ""
         project: Any = ""
-        if source in ("wiki", "hermes-wiki"):
+        if source in ("wiki", "hermes-wiki", "qa"):
             try:
                 fm, body = parse_frontmatter(text)
                 title = fm.get("title", title)

@@ -155,6 +155,7 @@ class SessionRoutesMixin:
             "session_id": sid,
             "topic": state.get("topic", ""),
             "mode": state.get("mode", "co-working"),
+            "project_id": state.get("project_id", ""),
             "messages": messages,
         })
 

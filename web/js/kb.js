@@ -12,7 +12,7 @@ const KBManager = {
   graph: {},
   growthLog: [],
   candidates: [],
-  kbSource: 'all',  // 知识库来源：all|raw|wiki
+  kbSource: 'all',  // 知识库来源：all|raw|wiki|qa
 };
 
 // ============================================
@@ -589,23 +589,31 @@ function applyKbPartition() {
     if (s) s.value = '';
   });
 
+  // 默认 source 为 all
+  KBManager.kbSource = 'all';
+
   if (value && value !== 'all') {
-    // value 格式: key:val（如 project:NSFC-强场超快 / type:concepts）
+    // value 格式: key:val（如 source:raw / project:NSFC-强场超快 / type:concepts）
     const idx = value.indexOf(':');
     if (idx > 0) {
       const key = value.slice(0, idx);
       const val = value.slice(idx + 1);
-      const targetId = key === 'project' ? 'kb-filter-project' : 'kb-filter-type';
-      const targetSel = document.getElementById(targetId);
-      if (targetSel) {
-        // 若下拉框中无此选项，动态添加（分区值可能不在 filters 接口返回的列表中）
-        if (!Array.from(targetSel.options).some(o => o.value === val)) {
-          const o = document.createElement('option');
-          o.value = val;
-          o.textContent = val;
-          targetSel.appendChild(o);
+      if (key === 'source') {
+        // v6.7.11: source 分区直接设置全局来源
+        KBManager.kbSource = val;
+      } else {
+        const targetId = key === 'project' ? 'kb-filter-project' : 'kb-filter-type';
+        const targetSel = document.getElementById(targetId);
+        if (targetSel) {
+          // 若下拉框中无此选项，动态添加（分区值可能不在 filters 接口返回的列表中）
+          if (!Array.from(targetSel.options).some(o => o.value === val)) {
+            const o = document.createElement('option');
+            o.value = val;
+            o.textContent = val;
+            targetSel.appendChild(o);
+          }
+          targetSel.value = val;
         }
-        targetSel.value = val;
       }
     }
   }
