@@ -380,35 +380,37 @@ class PipelineRoutesMixin:
         if isinstance(data, dict) and "sections" in data:
             return data
 
-        # v6.7.9: 优先使用 ProposalSections（sections/{key}.md 新格式）
         proposal_dir = pdir / "04_proposal"
+        sections: Dict[str, Any] = {}
+
+        # v6.7.9: 同时读取 ProposalSections（sections/{key}.md 新格式）和完整 draft，
+        # 合并取并集，避免 sections/ 目录只有部分章节时漏掉 draft 中的其余章节。
         sections_dir = proposal_dir / "sections"
         if sections_dir.exists():
             try:
                 from proposal_sections import ProposalSections
                 ps = ProposalSections(proposal_dir)
-                sections: Dict[str, Any] = {}
                 for s in ps.section_map.values():
                     content = ps.read_section(s["key"])
                     if content and len(content.strip()) > 20:
                         sections[s["cn"]] = {"content": content, "updated_at": ""}
-                if sections:
-                    return {"sections": sections, "updated_at": ""}
             except Exception:
                 pass
 
-        # 兼容旧格式：从 proposal-draft.md 解析
-        draft_path = proposal_dir / "proposal-draft.md"
-        if draft_path.exists() and draft_path.stat().st_size > 100:
-            return self._pipeline_parse_draft_to_sections(proposal_id, draft_path)
+        # 兼容旧格式：从 proposal-draft.md / merged / 历史版本解析，补充缺失章节
+        draft_candidates = ["proposal-draft.md", "proposal-draft-merged.md", "proposal-draft-r5.md",
+                            "proposal-draft-r4.md", "proposal-draft-r3.md", "proposal-draft-r2.md",
+                            "proposal-draft-r1.md"]
+        for draft_name in draft_candidates:
+            draft_path = proposal_dir / draft_name
+            if draft_path.exists() and draft_path.stat().st_size > 100:
+                parsed = self._pipeline_parse_draft_to_sections(proposal_id, draft_path)
+                for name, info in parsed.get("sections", {}).items():
+                    if name not in sections and isinstance(info, dict) and info.get("content"):
+                        sections[name] = info
 
-        # 兜底：尝试合并后的 draft 或历史版本
-        for fallback_name in ("proposal-draft-merged.md", "proposal-draft-r5.md", "proposal-draft-r4.md",
-                              "proposal-draft-r3.md", "proposal-draft-r2.md", "proposal-draft-r1.md"):
-            fallback = proposal_dir / fallback_name
-            if fallback.exists() and fallback.stat().st_size > 100:
-                return self._pipeline_parse_draft_to_sections(proposal_id, fallback)
-
+        if sections:
+            return {"sections": sections, "updated_at": ""}
         return {"sections": {}, "updated_at": ""}
 
     def _pipeline_parse_draft_to_sections(
@@ -416,8 +418,13 @@ class PipelineRoutesMixin:
     ) -> Dict[str, Any]:
         """将 proposal-draft.md 解析为 sections.json 兼容结构。
 
-        支持 H1/H2 标题，并兼容中文编号前缀（如 ## （一）立项依据）。
-        解析后章节名会去掉编号前缀，尽量与 _EXPECTED_SECTIONS 对齐。
+        v6.7.10 增强：
+        - 识别 H1/H2/H3，支持更深子章节（如 ### 3.6 特色与创新点）。
+        - 扩展中文编号前缀清洗：节 1：、（一）、1.、第1节 等。
+        - 扩展别名映射，把 writer agent 常用的非标准标题统一归到 7 个标准名。
+        - 合并同类章节（多个原始标题映射到同一标准名时内容拼接）。
+        - 保留未识别的非标准标题，让前端可展示原始结构。
+        - 若标准章节缺失但有原始内容，提供「完整申请书」兜底视图。
         """
         try:
             text = draft_path.read_text(encoding="utf-8")
@@ -426,46 +433,143 @@ class PipelineRoutesMixin:
 
         import re as _re
 
-        def _normalize_section_name(name: str) -> str:
-            """去掉中文编号前缀，保留核心章节名。"""
-            name = name.strip()
-            # 去掉 （一）、(1)、1.、1、等前缀
-            name = _re.sub(r"^[（(]?[一二三四五六七八九十0-9]+[）).、]\s*", "", name)
-            # 统一 NSFC 常见大标题到 _EXPECTED_SECTIONS
-            aliases = {
-                "立项依据": "立项依据",
-                "研究内容": "研究内容",
-                "研究内容、研究目标及拟解决的关键科学问题": "研究内容",
-                "研究方案": "研究方案",
-                "研究方案与技术路线": "研究方案",
-                "特色与创新": "特色与创新",
-                "特色与创新之处": "特色与创新",
-                "研究基础": "研究基础",
-                "研究基础与工作条件": "研究基础",
-            }
-            return aliases.get(name, name)
+        # 与前端 PROPOSAL_SECTIONS 对齐的 7 个标准名
+        STD_NAMES = [
+            "立项依据", "研究内容", "研究方案", "特色与创新",
+            "年度研究计划", "预期研究成果", "参考文献",
+        ]
 
-        sections: Dict[str, Any] = {}
-        current_name = None
+        # 别名映射：标准名 -> 可匹配的原始标题关键词列表
+        ALIASES: Dict[str, List[str]] = {
+            "立项依据": [
+                "立项依据", "科学意义与研究价值", "国内外研究现状",
+                "国内外研究现状及发展动态分析", "研究背景与科学意义",
+                "研究背景与意义", "项目背景", "立项依据与研究意义",
+                "科学意义", "研究现状", "背景与意义",
+            ],
+            "研究内容": [
+                "研究内容", "关键科学问题凝练", "研究内容与研究目标",
+                "拟解决的关键科学问题", "研究目标与内容", "关键科学问题",
+                "科学问题", "研究目标",
+            ],
+            "研究方案": [
+                "研究方案", "技术路线", "研究思路", "实施方案",
+                "总体技术路线", "研究方法与技术路线", "研究方法",
+            ],
+            "特色与创新": [
+                "特色与创新", "特色与创新之处", "创新点", "方法学创新",
+                "研究特色与创新点", "发展新方法的重要性和必要性",
+                "重要性和必要性", "特色创新", "创新之处", "创新性",
+            ],
+            "年度研究计划": [
+                "年度研究计划", "年度计划", "研究计划", "进度安排",
+                "四年研究计划", "年度研究计划与进度安排", "年度工作安排",
+            ],
+            "预期研究成果": [
+                "预期研究成果", "预期成果", "预期研究目标", "研究成果",
+                "预期研究产出", "预期产出", "研究产出",
+            ],
+            "参考文献": [
+                "参考文献", "引文列表", "文献目录", "参考文献目录",
+                "引用文献", "文献列表",
+            ],
+        }
+
+        def _normalize_section_name(name: str) -> Optional[str]:
+            """把原始标题归一化为标准名；无法识别返回 None。"""
+            name = name.strip()
+            if not name:
+                return None
+
+            # 去掉常见编号前缀：节 1：、第1节、（一）、1.、1、等
+            name = _re.sub(r"^第\s*[一二三四五六七八九十0-9]+\s*[章节]\s*[：:]?\s*", "", name)
+            name = _re.sub(r"^(?:节|章)\s*[一二三四五六七八九十0-9]+\s*[：:]?\s*", "", name)
+            name = _re.sub(r"^[（(]?[一二三四五六七八九十0-9]+[）).、]\s*", "", name)
+            name = _re.sub(r"^\d+[\.\)、．]\s*", "", name)
+            name = name.strip()
+
+            # 去掉尾部括号补充说明，如 "（申请书级深度）"
+            name = _re.sub(r"[（(][^）)]*[）)]\s*$", "", name).strip()
+
+            # 精确别名匹配：原始标题完全匹配某个别名
+            for std, alist in ALIASES.items():
+                if name in alist:
+                    return std
+
+            # 模糊别名匹配：别名是原始标题的子串，或原始标题包含标准名
+            for std, alist in ALIASES.items():
+                if std in name:
+                    return std
+                for alias in alist:
+                    if alias and alias in name:
+                        return std
+
+            return None
+
+        # 先按标准名收集内容，同时保留未识别标题
+        std_sections: Dict[str, List[str]] = {s: [] for s in STD_NAMES}
+        raw_sections: Dict[str, List[str]] = {}
+        current_std: Optional[str] = None
+        current_raw: Optional[str] = None
         current_lines: List[str] = []
+
+        def _flush():
+            content = "\n".join(current_lines).strip()
+            if not content:
+                return
+            if current_std:
+                std_sections[current_std].append(content)
+            elif current_raw and current_raw not in STD_NAMES:
+                raw_sections.setdefault(current_raw, []).append(content)
+
         for line in text.splitlines():
-            # 匹配 H1 或 H2，但不匹配更深标题
-            if _re.match(r"^#{1,2}\s+", line):
-                if current_name is not None:
-                    sections[current_name] = {
-                        "content": "\n".join(current_lines).strip(),
-                        "updated_at": "",
-                    }
-                raw_name = _re.sub(r"^#{1,2}\s+", "", line).strip()
-                current_name = _normalize_section_name(raw_name)
-                current_lines = []
-            elif current_name is not None:
+            m = _re.match(r"^(#{1,3})\s+(.+)$", line)
+            if m:
+                level = len(m.group(1))
+                raw_name = m.group(2).strip()
+                norm = _normalize_section_name(raw_name)
+                if level <= 2:
+                    # H1/H2 始终作为章节边界
+                    _flush()
+                    current_std = norm
+                    current_raw = raw_name if norm is None else None
+                    current_lines = []
+                else:
+                    # H3 仅在明确匹配标准名时才切分；否则作为当前章节内容
+                    if norm:
+                        _flush()
+                        current_std = norm
+                        current_raw = None
+                        current_lines = []
+                    else:
+                        current_lines.append(line)
+            else:
                 current_lines.append(line)
-        if current_name is not None:
-            sections[current_name] = {
-                "content": "\n".join(current_lines).strip(),
-                "updated_at": "",
-            }
+        _flush()
+
+        # 组装结果
+        sections: Dict[str, Any] = {}
+        for std in STD_NAMES:
+            if std_sections[std]:
+                sections[std] = {
+                    "content": "\n\n".join(std_sections[std]).strip(),
+                    "updated_at": "",
+                }
+
+        # 保留未识别的非标准标题（前端可展示为其他章节）
+        for raw_name, contents in raw_sections.items():
+            if raw_name and contents:
+                sections[raw_name] = {
+                    "content": "\n\n".join(contents).strip(),
+                    "updated_at": "",
+                }
+
+        # 兜底：如果 7 个标准名都没识别到任何内容，把整个 draft 作为「完整申请书」
+        if not any(s in sections for s in STD_NAMES):
+            stripped = text.strip()
+            if stripped:
+                sections["完整申请书"] = {"content": stripped, "updated_at": ""}
+
         return {"sections": sections, "updated_at": ""}
 
     def _pipeline_save_sections(self, proposal_id: str, data: Dict[str, Any]) -> None:

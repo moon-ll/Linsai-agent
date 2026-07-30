@@ -1198,16 +1198,35 @@
             html += `<button onclick="Pipeline._exportProposal()" class="btn-outline btn-outline--info" style="padding:6px 14px;font-size:0.82rem;" tabindex="0" role="button" aria-label="导出申请书">📤 导出</button>`;
             html += '</div>';
 
-            // 章节标签
+            // 章节标签：先显示 7 个标准名，再显示 API 返回的其他非标准章节
             html += '<div class="d-flex gap-6 mb-14 fw-wrap bb-default" style="padding-bottom:8px;">';
+            const displayedSections = [];
             for (const secName of PROPOSAL_SECTIONS) {
+                displayedSections.push(secName);
                 const isActive = proposalSectionTab === secName;
                 const sec = sectionMap[secName];
                 const hasContent = sec && sec.content && sec.content.length > 0;
                 const dot = hasContent ? '●' : '○';
                 html += `<button class="research-tab-btn" data-section="${escapeAttr(secName)}" onclick="Pipeline._switchSection('${escapeAttr(secName)}')" style="padding:6px 12px;border:none;border-bottom:2px solid ${isActive ? 'var(--accent-color)' : 'transparent'};background:transparent;color:${isActive ? 'var(--accent-color)' : 'var(--text-secondary)'};cursor:pointer;font-size:0.82rem;" tabindex="0" role="tab" aria-selected="${isActive}">${dot} ${escapeHtml(secName)}</button>`;
             }
+            // 追加 API 返回但未在标准 7 个中的章节
+            for (const s of proposalSections) {
+                const secName = s.section || s.name || s.title || '';
+                if (!secName || displayedSections.includes(secName)) continue;
+                if (!s.content || s.content.length === 0) continue;
+                displayedSections.push(secName);
+                const isActive = proposalSectionTab === secName;
+                html += `<button class="research-tab-btn" data-section="${escapeAttr(secName)}" onclick="Pipeline._switchSection('${escapeAttr(secName)}')" style="padding:6px 12px;border:none;border-bottom:2px solid ${isActive ? 'var(--accent-color)' : 'transparent'};background:transparent;color:${isActive ? 'var(--text-secondary)' : 'var(--text-secondary)'};cursor:pointer;font-size:0.82rem;" tabindex="0" role="tab" aria-selected="${isActive}">● ${escapeHtml(secName)}</button>`;
+            }
             html += '</div>';
+
+            // 若当前选中的章节不存在或无内容，默认切换到第一个有内容的章节
+            if (!sectionMap[proposalSectionTab] || !sectionMap[proposalSectionTab].content) {
+                const firstWithContent = proposalSections.find(s => s.content && s.content.length > 0);
+                if (firstWithContent) {
+                    proposalSectionTab = firstWithContent.section || firstWithContent.name || firstWithContent.title || '立项依据';
+                }
+            }
 
             // 当前章节内容
             const currentSec = sectionMap[proposalSectionTab] || {};
