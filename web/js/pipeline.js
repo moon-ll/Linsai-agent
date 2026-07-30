@@ -153,6 +153,7 @@
     // 章节状态标签
     const SECTION_STATUS_LABELS = {
         empty: { label: '未撰写', color: 'var(--text-tertiary)' },
+        placeholder: { label: '待补齐', color: 'var(--error-color)' },
         draft: { label: '草稿', color: 'var(--warning-color)' },
         reviewing: { label: '审阅中', color: 'var(--info-color)' },
         final: { label: '定稿', color: 'var(--success-color)' },
@@ -1171,6 +1172,24 @@
     // 5. 申请书撰写面板
     // ============================================
 
+    // v6.7.10: 判断章节内容是否实质（超过 200 字符且不是占位符）
+    function _isSubstantialContent(content) {
+        if (!content || content.length < 20) return false;
+        const stripped = content
+            .replace(/^#+\s+/gm, '')
+            .replace(/[（(]待\s*writer\s*补齐[）)]/g, '')
+            .replace(/[（(]待填写[）)]/g, '')
+            .replace(/\(待 writer 补齐\)/g, '')
+            .trim();
+        return stripped.length >= 200;
+    }
+
+    function _sectionStatus(content) {
+        if (!content || content.length === 0) return 'empty';
+        if (!_isSubstantialContent(content)) return 'placeholder';
+        return 'draft';
+    }
+
     async function renderProposal(container) {
         container.innerHTML = '<p class="state-loading">◐ 加载申请书…</p>';
         try {
@@ -1205,24 +1224,25 @@
                 displayedSections.push(secName);
                 const isActive = proposalSectionTab === secName;
                 const sec = sectionMap[secName];
-                const hasContent = sec && sec.content && sec.content.length > 0;
-                const dot = hasContent ? '●' : '○';
+                const hasContent = sec && _isSubstantialContent(sec.content);
+                const isPlaceholder = sec && sec.content && sec.content.length > 0 && !hasContent;
+                const dot = hasContent ? '●' : (isPlaceholder ? '◐' : '○');
                 html += `<button class="research-tab-btn" data-section="${escapeAttr(secName)}" onclick="Pipeline._switchSection('${escapeAttr(secName)}')" style="padding:6px 12px;border:none;border-bottom:2px solid ${isActive ? 'var(--accent-color)' : 'transparent'};background:transparent;color:${isActive ? 'var(--accent-color)' : 'var(--text-secondary)'};cursor:pointer;font-size:0.82rem;" tabindex="0" role="tab" aria-selected="${isActive}">${dot} ${escapeHtml(secName)}</button>`;
             }
             // 追加 API 返回但未在标准 7 个中的章节
             for (const s of proposalSections) {
                 const secName = s.section || s.name || s.title || '';
                 if (!secName || displayedSections.includes(secName)) continue;
-                if (!s.content || s.content.length === 0) continue;
+                if (!_isSubstantialContent(s.content)) continue;
                 displayedSections.push(secName);
                 const isActive = proposalSectionTab === secName;
                 html += `<button class="research-tab-btn" data-section="${escapeAttr(secName)}" onclick="Pipeline._switchSection('${escapeAttr(secName)}')" style="padding:6px 12px;border:none;border-bottom:2px solid ${isActive ? 'var(--accent-color)' : 'transparent'};background:transparent;color:${isActive ? 'var(--text-secondary)' : 'var(--text-secondary)'};cursor:pointer;font-size:0.82rem;" tabindex="0" role="tab" aria-selected="${isActive}">● ${escapeHtml(secName)}</button>`;
             }
             html += '</div>';
 
-            // 若当前选中的章节不存在或无内容，默认切换到第一个有内容的章节
-            if (!sectionMap[proposalSectionTab] || !sectionMap[proposalSectionTab].content) {
-                const firstWithContent = proposalSections.find(s => s.content && s.content.length > 0);
+            // 若当前选中的章节不存在或无实质内容，默认切换到第一个有实质内容的章节
+            if (!sectionMap[proposalSectionTab] || !_isSubstantialContent(sectionMap[proposalSectionTab].content)) {
+                const firstWithContent = proposalSections.find(s => _isSubstantialContent(s.content));
                 if (firstWithContent) {
                     proposalSectionTab = firstWithContent.section || firstWithContent.name || firstWithContent.title || '立项依据';
                 }
@@ -1234,7 +1254,7 @@
             const wordCount = currentSec.word_count ?? (content ? content.length : 0);
             const citationCount = currentSec.citation_count ?? 0;
             const version = currentSec.version ?? 'v0.1';
-            const status = currentSec.status || 'empty';
+            const status = _sectionStatus(content);
 
             html += '<div id="proposal-section-content">';
             html += '<div class="d-flex gap-8 mb-10 fw-wrap ai-center">';
@@ -1247,10 +1267,12 @@
             html += `<button onclick="Pipeline._editSection('${escapeAttr(proposalSectionTab)}')" class="btn-outline" style="padding:4px 10px;font-size:0.78rem;" tabindex="0" role="button" aria-label="编辑章节">✎ 编辑</button>`;
             html += '</div>';
 
-            if (content) {
-                html += `<div style="padding:12px;background:var(--bg-secondary);border-radius:6px;font-size:0.85rem;line-height:1.7;color:var(--text-primary);max-height:400px;overflow-y:auto;">${renderMarkdown(content)}</div>`;
-            } else {
+            if (status === 'empty') {
                 html += '<div class="state-empty" style="padding:30px;"><div style="font-size:1.4rem;margin-bottom:6px;">✍️</div><p>该章节尚未撰写</p><p class="meta-sm" style="margin-top:4px;">点击「撰写」生成初稿，或「编辑」手动输入</p></div>';
+            } else if (status === 'placeholder') {
+                html += '<div class="state-empty" style="padding:30px;border-left:3px solid var(--error-color);"><div style="font-size:1.4rem;margin-bottom:6px;">◐</div><p>该章节仅有占位内容，需要补齐</p><p class="meta-sm" style="margin-top:4px;">点击「撰写」让 writer 生成实质内容</p></div>';
+            } else {
+                html += `<div style="padding:12px;background:var(--bg-secondary);border-radius:6px;font-size:0.85rem;line-height:1.7;color:var(--text-primary);max-height:400px;overflow-y:auto;">${renderMarkdown(content)}</div>`;
             }
             html += '</div>';
 
