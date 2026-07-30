@@ -208,17 +208,15 @@ class PipelineRoutesMixin:
     def _pipeline_read_dir(self, proposal_id: str) -> Path:
         """获取用于读取的 proposal 目录。
 
-        优先使用 pipeline 原生 proposals/ 目录；若该目录不存在或没有申请书实质内容，
-        则回退到 lifecycle 管理的 research_proposals/{status}/{proposal_id} 目录，
-        使用户能在 pipeline 面板查看已通过 lifecycle 生成的课题内容。
+        v6.7.9 修正：lifecycle 现在是课题的主要来源，优先使用 lifecycle 管理的
+        research_proposals/{status}/{proposal_id} 目录；仅当 lifecycle 没有内容时
+        才回退到 pipeline 原生 proposals/ 目录。
         """
         self._validate_proposal_id(proposal_id)
         native = self._pipeline_proposal_dir(proposal_id)
-        if self._pipeline_has_content(native):
-            return native
-
         lc_root = web_base._PROJECT_ROOT / "research_proposals"
-        # 优先根据 lifecycle 状态定位
+
+        # 1. 根据 lifecycle 状态定位（优先）
         lifecycle_state_path = lc_root / "_lifecycle.json"
         if lifecycle_state_path.exists():
             try:
@@ -232,12 +230,16 @@ class PipelineRoutesMixin:
             except Exception:
                 pass
 
-        # 兜底：扫描各阶段目录
+        # 2. 兜底：扫描各 lifecycle 阶段目录
         if lc_root.exists():
             for stage in ("drafts", "optimizing", "pending_review", "archived", "_incoming"):
                 candidate = lc_root / stage / proposal_id
                 if self._pipeline_has_content(candidate):
                     return candidate
+
+        # 3. 回退到 pipeline 原生目录
+        if self._pipeline_has_content(native):
+            return native
 
         return native
 
@@ -375,13 +377,39 @@ class PipelineRoutesMixin:
         pdir = self._pipeline_read_dir(proposal_id)
         path = pdir / "04_proposal" / "sections.json"
         data = load_json(path, default=None)
-        if not isinstance(data, dict) or "sections" not in data:
-            # 兼容旧格式：如果没有 sections.json，尝试从 proposal-draft.md 解析
-            draft_path = pdir / "04_proposal" / "proposal-draft.md"
-            if draft_path.exists():
-                return self._pipeline_parse_draft_to_sections(proposal_id, draft_path)
-            return {"sections": {}, "updated_at": ""}
-        return data
+        if isinstance(data, dict) and "sections" in data:
+            return data
+
+        # v6.7.9: 优先使用 ProposalSections（sections/{key}.md 新格式）
+        proposal_dir = pdir / "04_proposal"
+        sections_dir = proposal_dir / "sections"
+        if sections_dir.exists():
+            try:
+                from proposal_sections import ProposalSections
+                ps = ProposalSections(proposal_dir)
+                sections: Dict[str, Any] = {}
+                for s in ps.section_map.values():
+                    content = ps.read_section(s["key"])
+                    if content and len(content.strip()) > 20:
+                        sections[s["cn"]] = {"content": content, "updated_at": ""}
+                if sections:
+                    return {"sections": sections, "updated_at": ""}
+            except Exception:
+                pass
+
+        # 兼容旧格式：从 proposal-draft.md 解析
+        draft_path = proposal_dir / "proposal-draft.md"
+        if draft_path.exists() and draft_path.stat().st_size > 100:
+            return self._pipeline_parse_draft_to_sections(proposal_id, draft_path)
+
+        # 兜底：尝试合并后的 draft 或历史版本
+        for fallback_name in ("proposal-draft-merged.md", "proposal-draft-r5.md", "proposal-draft-r4.md",
+                              "proposal-draft-r3.md", "proposal-draft-r2.md", "proposal-draft-r1.md"):
+            fallback = proposal_dir / fallback_name
+            if fallback.exists() and fallback.stat().st_size > 100:
+                return self._pipeline_parse_draft_to_sections(proposal_id, fallback)
+
+        return {"sections": {}, "updated_at": ""}
 
     def _pipeline_parse_draft_to_sections(
         self, proposal_id: str, draft_path: Path
