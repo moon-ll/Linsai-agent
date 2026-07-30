@@ -52,9 +52,9 @@ async function renderDashboard() {
 
     // === 统计卡片 ===
     html += '<div class="dash-stats-row">';
-    html += renderStatCard('📄', '文献待处理', data.papers.unseen || 0, '查看简报', "switchToView('papers')", 'var(--info-color)');
+    html += renderStatCard('📄', '文献待处理', data.papers.unseen || 0, '查看简报', "switchToView('kb')", 'var(--info-color)');
     html += renderStatCard('📋', '任务待办', (data.tasks.active || 0) + (data.tasks.backlog || 0), '查看任务', "switchToView('hermes')", 'var(--warning-color)');
-    html += renderStatCard('📌', '待决策', data.decisions_total || 0, '去决策', "switchToView('papers')", 'var(--accent-color)');
+    html += renderStatCard('📌', '待决策', data.decisions_total || 0, '去决策', "dashOpenDecisions()", 'var(--accent-color)');
     html += renderStatCard('🎛️', '告警/异常', alerts.length, '控制台', "switchToView('console')", alerts.length ? 'var(--error-color)' : 'var(--success-color)');
     html += '</div>';
 
@@ -137,7 +137,7 @@ function renderActionList(data, stages, alerts) {
   }
   // 3. 待决策
   if (data.decisions_total) {
-    html += renderActionItem('📌', 'NSFC 待决策', `${data.decisions_total} 项待拍板`, "switchToView('papers')", 'var(--accent-color)');
+    html += renderActionItem('📌', 'NSFC 待决策', `${data.decisions_total} 项待拍板`, "dashOpenDecisions()", 'var(--accent-color)');
   }
   // 4. 告警
   if (alerts.length) {
@@ -146,7 +146,7 @@ function renderActionList(data, stages, alerts) {
   }
   // 5. 文献
   if (data.papers.unseen) {
-    html += renderActionItem('📄', '文献简报', `${data.papers.unseen} 篇待处理`, "switchToView('papers')", 'var(--info-color)');
+    html += renderActionItem('📄', '文献简报', `${data.papers.unseen} 篇待处理`, "switchToView('kb')", 'var(--info-color)');
   }
   // 6. 任务
   if (data.tasks.backlog) {
@@ -174,7 +174,7 @@ function renderActionItem(icon, label, desc, action, color) {
 
 function renderPapersPreview(papers) {
   let html = '<div class="dash-preview-card">';
-  html += `<div class="dash-preview-header" onclick="switchToView('papers')"><span>📄 文献简报</span><span class="dash-preview-count">${papers.unseen || 0} 待处理</span></div>`;
+  html += `<div class="dash-preview-header" onclick="switchToView('kb')"><span>📄 文献简报</span><span class="dash-preview-count">${papers.unseen || 0} 待处理</span></div>`;
   if (papers.preview && papers.preview.length) {
     for (const paper of papers.preview) {
       html += `<div class="dash-preview-row" onclick="openPaperDiscussion('${escapeAttr(paper.arxiv_id)}','${escapeAttr(paper.title)}')">
@@ -209,7 +209,7 @@ function renderTasksPreview(tasks) {
 
 function renderDecisionsPreview(decs, total) {
   let html = '<div class="dash-preview-card">';
-  html += `<div class="dash-preview-header" onclick="switchToView('papers')"><span>📌 NSFC 待决策</span><span class="dash-preview-count">${total} 项</span></div>`;
+  html += `<div class="dash-preview-header" onclick="dashOpenDecisions()"><span>📌 NSFC 待决策</span><span class="dash-preview-count">${total} 项</span></div>`;
   if (decs.length) {
     for (const dec of decs) {
       html += `<div class="dash-preview-row dash-decision-row">
@@ -244,6 +244,18 @@ function dashOpenProposal(proposalId) {
     if (window.Pipeline && typeof window.Pipeline.switchTo === 'function') {
       setTimeout(() => window.Pipeline.switchTo('proposal'), 50);
     }
+  }
+}
+
+// 打开 NSFC 待决策面板
+function dashOpenDecisions() {
+  if (typeof openProjectsManager === 'function') {
+    openProjectsManager();
+    if (typeof switchProjectsTab === 'function') {
+      setTimeout(() => switchProjectsTab('nsfc'), 50);
+    }
+  } else {
+    showToast('项目总控中心未加载', 'error');
   }
 }
 

@@ -205,13 +205,82 @@ class PipelineRoutesMixin:
         # 使用 _safe_join 防止路径遍历（二次防护）
         return _safe_join(root, proposal_id)
 
+    def _pipeline_read_dir(self, proposal_id: str) -> Path:
+        """获取用于读取的 proposal 目录。
+
+        优先使用 pipeline 原生 proposals/ 目录；若该目录不存在或为空，
+        则回退到 lifecycle 管理的 research_proposals/{status}/{proposal_id} 目录，
+        使用户能在 pipeline 面板查看已通过 lifecycle 生成的课题内容。
+        """
+        self._validate_proposal_id(proposal_id)
+        native = self._pipeline_proposal_dir(proposal_id)
+        if native.exists() and any(native.iterdir()):
+            return native
+
+        lc_root = web_base._PROJECT_ROOT / "research_proposals"
+        # 优先根据 lifecycle 状态定位
+        lifecycle_state_path = lc_root / "_lifecycle.json"
+        if lifecycle_state_path.exists():
+            try:
+                lc_state = json.loads(lifecycle_state_path.read_text(encoding="utf-8"))
+                prop = lc_state.get("proposals", {}).get(proposal_id, {})
+                status = prop.get("status")
+                if status:
+                    candidate = lc_root / status / proposal_id
+                    if candidate.exists():
+                        return candidate
+            except Exception:
+                pass
+
+        # 兜底：扫描各阶段目录
+        if lc_root.exists():
+            for stage in ("drafts", "optimizing", "pending_review", "archived", "_incoming"):
+                candidate = lc_root / stage / proposal_id
+                if candidate.exists():
+                    return candidate
+
+        return native
+
     def _pipeline_ensure_dirs(self, proposal_id: str) -> Path:
         """确保 proposal 目录结构存在，返回 proposal 根目录。"""
         pdir = self._pipeline_proposal_dir(proposal_id)
         for sub in ("00_pipeline", "01_direction", "02_topic", "03_question",
                      "04_proposal", "05_review"):
             (pdir / sub).mkdir(parents=True, exist_ok=True)
+        # v6.7.8: 若当前 proposals/ 下无实质内容，从 lifecycle 目录自动同步，
+        # 使 pipeline 面板能查看已生成的课题内容
+        self._pipeline_sync_from_lifecycle_if_empty(proposal_id, pdir)
         return pdir
+
+    def _pipeline_sync_from_lifecycle_if_empty(self, proposal_id: str, pdir: Path) -> None:
+        """当 proposals/ 目录为空时，从 research_proposals 对应状态目录同步内容。"""
+        proposal_file = pdir / "04_proposal" / "sections.json"
+        draft_file = pdir / "04_proposal" / "proposal-draft.md"
+        if proposal_file.exists() or draft_file.exists():
+            return
+
+        source_dir = self._pipeline_read_dir(proposal_id)
+        if source_dir == pdir or not source_dir.exists():
+            return
+
+        try:
+            import shutil
+            for sub in ("00_pipeline", "01_direction", "02_topic", "03_question",
+                        "04_proposal", "05_review", "06_feedback"):
+                src = source_dir / sub
+                dst = pdir / sub
+                if src.exists():
+                    if not dst.exists():
+                        shutil.copytree(src, dst)
+                    else:
+                        for f in src.iterdir():
+                            if f.is_file() and not (dst / f.name).exists():
+                                shutil.copy2(f, dst / f.name)
+            if _log:
+                _log.info(f"[pipeline] 已从 lifecycle 同步 {proposal_id}: {source_dir}")
+        except Exception as e:
+            if _log:
+                _log.warning(f"[pipeline] 同步 {proposal_id} 失败: {e}")
 
     def _pipeline_load_module(self, name: str):
         """懒加载管线子模块，返回模块对象或 None。
@@ -293,11 +362,46 @@ class PipelineRoutesMixin:
 
     def _pipeline_load_sections(self, proposal_id: str) -> Dict[str, Any]:
         """加载申请书章节（纯读，不加锁）。"""
-        path = self._pipeline_sections_path(proposal_id)
+        # v6.7.8: 读取时支持 lifecycle 目录回退
+        pdir = self._pipeline_read_dir(proposal_id)
+        path = pdir / "04_proposal" / "sections.json"
         data = load_json(path, default=None)
         if not isinstance(data, dict) or "sections" not in data:
+            # 兼容旧格式：如果没有 sections.json，尝试从 proposal-draft.md 解析
+            draft_path = pdir / "04_proposal" / "proposal-draft.md"
+            if draft_path.exists():
+                return self._pipeline_parse_draft_to_sections(proposal_id, draft_path)
             return {"sections": {}, "updated_at": ""}
         return data
+
+    def _pipeline_parse_draft_to_sections(
+        self, proposal_id: str, draft_path: Path
+    ) -> Dict[str, Any]:
+        """将 proposal-draft.md 解析为 sections.json 兼容结构。"""
+        try:
+            text = draft_path.read_text(encoding="utf-8")
+        except Exception:
+            return {"sections": {}, "updated_at": ""}
+        sections: Dict[str, Any] = {}
+        current_name = None
+        current_lines: List[str] = []
+        for line in text.splitlines():
+            if line.startswith("# ") and not line.startswith("## "):
+                if current_name is not None:
+                    sections[current_name] = {
+                        "content": "\n".join(current_lines).strip(),
+                        "updated_at": "",
+                    }
+                current_name = line[2:].strip()
+                current_lines = []
+            elif current_name is not None:
+                current_lines.append(line)
+        if current_name is not None:
+            sections[current_name] = {
+                "content": "\n".join(current_lines).strip(),
+                "updated_at": "",
+            }
+        return {"sections": sections, "updated_at": ""}
 
     def _pipeline_save_sections(self, proposal_id: str, data: Dict[str, Any]) -> None:
         """保存申请书章节（原子写入 + 文件锁）。"""

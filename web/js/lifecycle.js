@@ -300,7 +300,7 @@ async function lcTransition(proposalId, toStage, reason = '') {
 
   try {
     showToast('流转中...', 'info');
-    const result = await apiPost(`/api/lifecycle/${proposalId}/transition`, { to_stage: toStage, reason });
+    const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/transition`, { to_stage: toStage, reason });
     if (result.status === 'ok') {
       showToast(`✓ 已移入${LC_STAGES.find(s => s.key === toStage)?.label}`, 'success');
       renderLifecycleDashboard();
@@ -324,7 +324,7 @@ async function lcOptimize(proposalId) {
 
   try {
     showToast('⚡ 优化中（writer-critic 对抗，请等待）...', 'info', 5000);
-    const result = await apiPost(`/api/lifecycle/${proposalId}/optimize`, {}, 600000);
+    const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/optimize`, {}, 600000);
     if (result.status === 'ok') {
       const d = result.data;
       const score = d.score_after || 0;
@@ -351,7 +351,7 @@ async function lcApprove(proposalId) {
 
   try {
     showToast('归档中...', 'info');
-    const result = await apiPost(`/api/lifecycle/${proposalId}/feedback`, {
+    const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/feedback`, {
       feedback_text: comment,
       verdict: 'approve',
     });
@@ -375,13 +375,13 @@ async function lcFeedback(proposalId) {
 
   try {
     showToast('提交反馈中...', 'info');
-    const result = await apiPost(`/api/lifecycle/${proposalId}/feedback`, {
+    const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/feedback`, {
       feedback_text: feedback,
       verdict: 'major_revision',
     });
     if (result.status === 'ok') {
       const sf = result.data?.structured_feedback;
-      const issueCount = sf?.issues?.length || 0;
+      const issueCount = sf?.structured?.issues?.length || sf?.issues?.length || 0;
       showToast(`✓ 已退回优化（整理为 ${issueCount} 个 issue）`, 'success');
       renderLifecycleDashboard();
     } else {
@@ -461,7 +461,7 @@ async function lcToggleCheckpoints(proposalId) {
   el.classList.remove('d-none');
   el.innerHTML = '<div class="pad-8">加载 checkpoints...</div>';
   try {
-    const result = await apiGet(`/api/lifecycle/checkpoints/${proposalId}`);
+    const result = await apiGet(`/api/lifecycle/checkpoints/${encodeURIComponent(proposalId)}`);
     if (result.status !== 'ok') throw new Error(result.error || '获取失败');
     const jobs = result.data || [];
     if (jobs.length === 0) {
@@ -544,7 +544,7 @@ async function lcShowJobs() {
 // ============================================
 async function lcShowMonitor(proposalId) {
   try {
-    const result = await apiGet(`/api/lifecycle/monitor/${proposalId}`);
+    const result = await apiGet(`/api/lifecycle/monitor/${encodeURIComponent(proposalId)}`);
     if (result.status !== 'ok') throw new Error(result.error || '获取失败');
 
     const alert = result.negative_feedback_alert;
@@ -601,7 +601,7 @@ async function lcClearAlert(proposalId) {
 
   try {
     showToast('清除告警中...', 'info');
-    const result = await apiPost(`/api/lifecycle/${proposalId}/clear-alert`, { reason });
+    const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/clear-alert`, { reason });
     if (result.status === 'ok') {
       showToast('✓ 负反馈告警已清除', 'success');
       renderLifecycleDashboard();
