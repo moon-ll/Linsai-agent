@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-07-30T04:33:45Z",
+      "updated_at": "2026-07-30T05:47:32Z",
       "optimization_rounds": 4,
       "last_score": 0.82,
       "score_history": [
@@ -84,6 +84,22 @@
           "issues_count": 21,
           "high_issues": 4,
           "at": "2026-07-30T02:51:41Z"
+        },
+        {
+          "round": 5,
+          "score": 0.82,
+          "dim_scores": {
+            "innovation": 0.88,
+            "feasibility": 0.8,
+            "rigor": 0.82,
+            "completeness": 0.8
+          },
+          "weakest_dim": "feasibility",
+          "focus_section": "plan",
+          "section_passed": true,
+          "issues_count": 21,
+          "high_issues": 4,
+          "at": "2026-07-30T05:47:32Z"
         }
       ],
       "human_feedback_count": 0,
@@ -134,7 +150,8 @@
         "rationale": true,
         "content": false,
         "method": false,
-        "full_review": false
+        "full_review": false,
+        "plan": true
       },
       "pipeline_jobs": [
         {
@@ -349,6 +366,55 @@
           "started_at": "2026-07-30T03:47:04Z",
           "finished_at": "2026-07-30T03:52:04Z",
           "last_error": "超时(300s)",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r5-plan-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "plan",
+          "round": 5,
+          "status": "done",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-30T04:47:11Z",
+          "finished_at": "2026-07-30T04:48:18Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r5-plan-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "plan",
+          "round": 5,
+          "status": "done",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r5-plan-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-30T05:47:19Z",
+          "finished_at": "2026-07-30T05:47:32Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r5-plan-monitor",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "monitor",
+          "section_key": "plan",
+          "round": 5,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r5-plan-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": ""
         }
       ],
@@ -896,7 +962,7 @@
       "source": "expansion",
       "source_detail": "候选4：量子光场驱动的HHG，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-30T04:33:45Z",
+      "updated_at": "2026-07-30T05:23:28Z",
       "optimization_rounds": 5,
       "last_score": 0.72,
       "score_history": [
@@ -1176,14 +1242,14 @@
           "step": "researcher",
           "section_key": "outcome",
           "round": 6,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r6-outcome-critic"
           ],
-          "attempts": 0,
+          "attempts": 1,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-30T05:23:17Z",
+          "finished_at": "2026-07-30T05:23:28Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1280,7 +1346,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-07-30T04:33:46Z",
+      "updated_at": "2026-07-30T05:17:27Z",
       "optimization_rounds": 4,
       "last_score": 0.0,
       "score_history": [
@@ -1531,14 +1597,14 @@
           "step": "researcher",
           "section_key": "plan",
           "round": 5,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r5-plan-critic"
           ],
-          "attempts": 0,
+          "attempts": 1,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-07-30T05:17:16Z",
+          "finished_at": "2026-07-30T05:17:27Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1613,5 +1679,5 @@
       ]
     }
   },
-  "updated_at": "2026-07-30T04:33:46Z"
+  "updated_at": "2026-07-30T05:47:32Z"
 }

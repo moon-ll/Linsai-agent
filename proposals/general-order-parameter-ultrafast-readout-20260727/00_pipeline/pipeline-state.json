@@ -1,0 +1,27 @@
+{
+  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+  "current_stage": 0,
+  "status": "running",
+  "stage_status": {
+    "0": "in_progress",
+    "1": "pending",
+    "2": "pending",
+    "3": "pending",
+    "4": "pending",
+    "5": "pending"
+  },
+  "gate_results": {},
+  "history": [
+    {
+      "event": "init",
+      "stage": 0,
+      "timestamp": "2026-07-30T02:55:53Z",
+      "detail": "管线初始化: general-order-parameter-ultrafast-readout-20260727"
+    }
+  ],
+  "created_at": "2026-07-30T02:55:53Z",
+  "updated_at": "2026-07-30T02:55:53Z",
+  "paused_at": null,
+  "pause_reason": null,
+  "resumed_at": null
+}
