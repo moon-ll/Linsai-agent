@@ -251,7 +251,7 @@
     const sectionName = parts.slice(1).join(' ');
     try {
       const data = await apiGet(`/api/pipeline/${encodeURIComponent(proposalId)}/proposal/sections/${encodeURIComponent(sectionName)}`);
-      const content = data.content || data.section?.content || '';
+      const content = data.content || data.data?.content || '';
       if (!content) return { handled: true, content: `课题 **${proposalId}** 的「${sectionName}」章节暂无内容。` };
       const wordCount = content.length;
       return {

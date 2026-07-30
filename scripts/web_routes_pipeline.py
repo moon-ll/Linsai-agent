@@ -680,20 +680,28 @@ class PipelineRoutesMixin:
     # ==================================================================
 
     def _pl_get_sections(self, path, parsed, match):
-        """列出所有章节"""
+        """列出所有章节（含正文，供前端面板直接渲染）。"""
         proposal_id = match.group(1)
         data = self._pipeline_load_sections(proposal_id)
         sections = data.get("sections", {})
-        # 返回章节名 + 元信息（不含正文，减少传输量）
-        summary = [
-            {
-                "name": name,
-                "updated_at": info.get("updated_at", "") if isinstance(info, dict) else "",
-                "char_count": len(info.get("content", "")) if isinstance(info, dict) else len(str(info)),
-            }
-            for name, info in sections.items()
-        ]
-        self._send_json({"status": "ok", "data": summary, "updated_at": data.get("updated_at", "")})
+        # v6.7.8: 返回完整章节对象（含 content），与 pipeline.js / slash_commands 兼容
+        section_list = []
+        for name, info in sections.items():
+            if isinstance(info, dict):
+                section_list.append({
+                    "name": name,
+                    "content": info.get("content", ""),
+                    "updated_at": info.get("updated_at", ""),
+                    "char_count": len(info.get("content", "")),
+                })
+            else:
+                section_list.append({
+                    "name": name,
+                    "content": str(info),
+                    "updated_at": "",
+                    "char_count": len(str(info)),
+                })
+        self._send_json({"status": "ok", "sections": section_list, "updated_at": data.get("updated_at", "")})
 
     def _pl_get_section(self, path, parsed, match):
         """获取单个章节"""
@@ -703,7 +711,15 @@ class PipelineRoutesMixin:
         if section_name not in sections:
             self._send_json({"error": f"章节不存在: {section_name}"}, 404)
             return
-        self._send_json({"status": "ok", "data": sections[section_name]})
+        info = sections[section_name]
+        if isinstance(info, dict):
+            self._send_json({
+                "status": "ok",
+                "content": info.get("content", ""),
+                "updated_at": info.get("updated_at", ""),
+            })
+        else:
+            self._send_json({"status": "ok", "content": str(info), "updated_at": ""})
 
     def _pl_get_proposal_export(self, path, parsed, match):
         """导出申请书（?format=markdown|json）"""
