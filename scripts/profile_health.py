@@ -188,35 +188,34 @@ def compute_profile_health(window_hours: int = 24) -> Dict[str, Any]:
         cur = current_by_name.get(name, {})
         recs = by_profile.get(name, [])
 
-        # 状态派生：基于 exists / gateway_running / heartbeat_alive
+        # 先计算失败记录，供状态派生和建议使用
+        completed_recs = [r for r in recs if r.get("completed")]
+        failed_recs = [r for r in recs if r.get("completed") and not r.get("success")]
+        recent_error = failed_recs[-1]["error"] if failed_recs else ""
+
+        # 状态派生：基于 exists / heartbeat_alive / 实际失败证据
+        # v6.7.10 修复：pipeline 使用 hermes --profile -z 一次性调用，不依赖常驻 gateway。
+        # 因此 gateway_running 不再作为 blocked 依据；blocked 仅由最近失败记录触发。
         if not cur or not cur.get("exists", True):
             status = "offline"
         elif cur.get("heartbeat_alive"):
             status = "working"
-        elif cur.get("gateway_running"):
-            status = "idle"
-        else:
+        elif failed_recs:
             status = "blocked"
+        else:
+            status = "idle"
 
         # 成功率
-        if recs:
-            completed = [r for r in recs if r.get("completed")]
-            if completed:
-                success_count = sum(1 for r in completed if r.get("success"))
-                total = len(completed)
-                success_rate = round(success_count / total, 3)
-            else:
-                success_rate = None
+        if completed_recs:
+            success_count = sum(1 for r in completed_recs if r.get("success"))
+            total = len(completed_recs)
+            success_rate = round(success_count / total, 3)
         else:
             success_rate = None
 
         # 平均耗时（仅完整记录的）
         durations = [r.get("duration_s", 0) for r in recs if r.get("duration_s")]
         avg_duration = round(sum(durations) / len(durations), 1) if durations else 0
-
-        # 最近错误
-        failed_recs = [r for r in recs if r.get("completed") and not r.get("success")]
-        recent_error = failed_recs[-1]["error"] if failed_recs else ""
 
         # 建议
         suggestion = ""

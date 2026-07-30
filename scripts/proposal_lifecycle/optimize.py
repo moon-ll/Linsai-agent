@@ -133,7 +133,7 @@ class OptimizeMixin:
                 _log.info(f"[{proposal_id}] 对抗轮 {current_round + 1}: researcher 定向检索文献缺口")
             lit_supplement = self._run_researcher_targeted(
                 proposal_id, prop_dir, critic_result, focus_section,
-                timeout=300,
+                timeout=600,
             )
 
         # 2. writer 根据评审意见优化
