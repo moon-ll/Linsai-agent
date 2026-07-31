@@ -135,8 +135,8 @@ class SessionRoutesMixin:
     # --- GET ---
 
     def _sess_list(self, parsed):
-        """会话列表"""
-        sessions = sm.list_sessions()
+        """会话列表（仅活跃会话）"""
+        sessions = sm.list_sessions(status="active")
         self._send_json([{
             "session_id": s["session_id"],
             "topic": s.get("topic", ""),

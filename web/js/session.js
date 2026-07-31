@@ -321,16 +321,23 @@ async function handleReviewVerdict(proposalId, verdict) {
     const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/review-verdict`, {
       verdict,
       reason,
+      session_id: State.currentSessionId,
     });
     if (result.status !== 'ok') {
       throw new Error(result.error || '审核结论提交失败');
     }
     const toastLabels = { approve: '✓ 已通过并归档', reject: '↩ 已退回优化', pause: '⏸ 已暂停' };
     showToast(toastLabels[verdict], 'success');
-    // 归档或暂停后隐藏审核栏
+    // 归档或退回后隐藏审核栏并刷新会话列表
     if (verdict !== 'pause') {
       const bar = document.getElementById('review-action-bar');
       if (bar) bar.style.display = 'none';
+      State.currentSessionId = null;
+      await loadSessions();
+      const welcomeScreen = document.getElementById('welcome-screen');
+      if (welcomeScreen) welcomeScreen.style.display = 'flex';
+      const messagesEl = document.getElementById('messages');
+      if (messagesEl) messagesEl.innerHTML = '';
     }
     // 刷新生命周期仪表盘
     if (typeof renderLifecycleDashboard === 'function') {
@@ -380,10 +387,16 @@ async function handleReviewFinalize(proposalId) {
     appendMessage('assistant', `【审核意见整理】\n结论：${result.verdict}\n说明：${summary}${detail}`, null, false);
     scrollToBottom();
 
-    // 归档或退回后隐藏审核栏
+    // 归档或退回后隐藏审核栏并刷新会话列表
     if (result.action !== 'paused') {
       const bar = document.getElementById('review-action-bar');
       if (bar) bar.style.display = 'none';
+      State.currentSessionId = null;
+      await loadSessions();
+      const welcomeScreen = document.getElementById('welcome-screen');
+      if (welcomeScreen) welcomeScreen.style.display = 'flex';
+      const messagesEl = document.getElementById('messages');
+      if (messagesEl) messagesEl.innerHTML = '';
     }
     // 刷新生命周期仪表盘
     if (typeof renderLifecycleDashboard === 'function') {

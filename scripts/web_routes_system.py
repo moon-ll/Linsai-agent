@@ -49,6 +49,7 @@ import llm_router as lr
 import usage_tracker as ut
 import sync_engine as se
 import backup_manager as bm
+import session_manager as sm
 
 
 # ---------------------------------------------------------------------------
@@ -674,14 +675,22 @@ class SystemRoutesMixin:
                 self._send_json({"error": "课题不在待审核阶段"}, 400)
                 return
 
+            session_id = body.get("session_id", "")
+
             if verdict == "approve":
                 # v6.7.11: 调用归档流程，自动写入 _archive-meta.json 并纳入知识库 raw/wiki
                 result = lc.archive_proposal(proposal_id, reason or "用户审核通过", verdict)
+                # v6.7.12: 审核完成后归档会话
+                if session_id:
+                    sm.archive_session(session_id)
                 self._send_json({"status": "ok", "action": "archived", "data": result})
             elif verdict == "reject":
                 # 保存审核意见为 feedback；submit_feedback 内部已完成到 optimizing 的流转
                 feedback_text = reason or "用户审核不通过，请根据审核意见修改。"
                 result = lc.submit_feedback(proposal_id, feedback_text, verdict="major_revision")
+                # v6.7.12: 退回修改后归档会话，由 worker 重新创建新会话
+                if session_id:
+                    sm.archive_session(session_id)
                 self._send_json({"status": "ok", "action": "optimizing", "data": result})
             else:  # pause
                 self._send_json({"status": "ok", "action": "paused", "message": "已暂停，保持待审核状态"})
@@ -778,6 +787,10 @@ class SystemRoutesMixin:
                 action = "optimizing"
             else:
                 action = "paused"
+
+            # v6.7.12: 审核完成后归档会话，暂停除外
+            if action != "paused" and session_id:
+                sm.archive_session(session_id)
 
             self._send_json({
                 "status": "ok",
