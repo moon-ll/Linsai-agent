@@ -4056,3 +4056,186 @@ body {
     line-height: 1.5;
     white-space: pre-wrap;
 }
+
+/* ============================================================
+   v6.8.0 前端适配新链路补充样式
+   ============================================================ */
+
+/* 课题卡片聚焦高亮 */
+.lc-proposal-focused {
+  box-shadow: 0 0 0 2px var(--accent-color), 0 4px 12px rgba(0,0,0,0.08);
+  background: var(--bg-secondary);
+}
+
+.lc-focus-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  background: var(--accent-color);
+  color: #fff;
+  font-weight: 500;
+  margin-right: 8px;
+}
+
+.lc-next-job {
+  display: inline-block;
+  margin-left: 12px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  background: var(--bg-tertiary);
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+/* 5 模块进度条/芯片 */
+.lc-section-bars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 6px;
+}
+
+.lc-section-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  transition: all 0.2s ease;
+}
+
+.lc-section-chip.passed {
+  background: rgba(var(--success-rgb, 34, 197, 94), 0.12);
+  color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.lc-section-chip.pending {
+  background: var(--bg-tertiary);
+  color: var(--text-tertiary);
+}
+
+/* 审核页底部操作栏 */
+.review-action-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 20px;
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-secondary);
+  flex-shrink: 0;
+}
+
+.review-action-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.review-action-bar .btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: filter 0.15s ease;
+}
+
+.review-action-bar .btn:hover {
+  filter: brightness(1.05);
+}
+
+.review-action-bar .btn-success {
+  background: var(--success-color);
+  color: #fff;
+}
+
+.review-action-bar .btn-warning {
+  background: var(--warning-color);
+  color: #fff;
+}
+
+.review-action-bar .btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+.review-action-bar .btn-info {
+  background: var(--info-color);
+  color: #fff;
+}
+
+/* 审核页左侧内容区优化 */
+.review-content-body {
+  padding: 16px 20px;
+  line-height: 1.7;
+}
+
+.review-content-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 0.9rem;
+}
+
+.review-content-body th,
+.review-content-body td {
+  border: 1px solid var(--border-color);
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.review-content-body th {
+  background: var(--bg-tertiary);
+  font-weight: 600;
+}
+
+/* 仪表盘当前聚焦卡片 */
+.dash-focus-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 10px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  margin-bottom: 16px;
+}
+
+.dash-focus-icon {
+  font-size: 1.5rem;
+}
+
+.dash-focus-body {
+  flex: 1;
+}
+
+.dash-focus-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.dash-focus-meta {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+}
+
+/* 漏斗阶段宽度自适应 */
+.dash-funnel-stage {
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.dash-funnel-stage:hover {
+  transform: translateX(4px);
+}

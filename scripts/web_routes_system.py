@@ -126,6 +126,8 @@ _SYSTEM_ROUTES = [
     ("POST", re.compile(r"^/api/lifecycle/orchestrate$"), "_sys_lifecycle_orchestrate"),
     ("POST", re.compile(r"^/api/lifecycle/repair$"), "_sys_lifecycle_repair"),
     ("GET", re.compile(r"^/api/lifecycle/jobs$"), "_sys_lifecycle_jobs"),
+    # v6.8.0: 微调度器当前聚焦
+    ("GET", re.compile(r"^/api/lifecycle/focus$"), "_sys_lifecycle_focus"),
     # v6.7.6: 对抗评审奖惩与监察
     ("GET", re.compile(r"^/api/lifecycle/agent-scores$"), "_sys_lifecycle_agent_scores"),
     ("GET", re.compile(r"^/api/lifecycle/monitor/(?P<proposal_id>[^/]+)$"), "_sys_lifecycle_monitor"),
@@ -904,6 +906,16 @@ class SystemRoutesMixin:
             ctrl = LifecycleCronController()
             jobs = ctrl.list_lifecycle_crons()
             self._send_json({"status": "ok", "data": jobs})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_focus(self, parsed, body=None):
+        """v6.8.0: 返回全局微调度器当前聚焦 proposal 与下一 pending job。"""
+        try:
+            from lifecycle.controller import LifecycleCronController
+            ctrl = LifecycleCronController()
+            focus = ctrl.get_current_focus()
+            self._send_json({"status": "ok", "focus": focus})
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 

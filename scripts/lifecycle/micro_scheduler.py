@@ -425,3 +425,41 @@ def pause_old_worker_crons(self) -> Dict[str, Any]:
             if res.get("success"):
                 paused.append(name)
     return {"success": True, "paused": paused}
+
+
+def get_current_focus(self) -> Dict[str, Any]:
+    """v6.8.0: 查询当前微调度器聚焦 proposal 与下一 pending job（只读，不执行）。"""
+    slot_info = _current_focus_slot()
+    if slot_info is None:
+        return {"in_slot": False, "focus_proposal": None, "next_job": None}
+
+    slot_index, (slot_start, slot_end) = slot_info
+    try:
+        optimizing = self.list_by_status("optimizing")
+    except Exception:
+        optimizing = []
+
+    if not optimizing:
+        return {"in_slot": True, "focus_proposal": None, "next_job": None, "slot": f"{slot_start}-{slot_end}"}
+
+    focus_pid = self._focus_proposal_for_slot(slot_index, optimizing)
+    next_job = None
+    if focus_pid:
+        ready = self._list_ready_jobs_for_proposal(focus_pid)
+        if ready:
+            job = ready[0]["job"]
+            next_job = {
+                "proposal_id": focus_pid,
+                "job_id": job.get("job_id"),
+                "step": job.get("step"),
+                "section_key": job.get("section_key"),
+                "round": job.get("round"),
+            }
+
+    return {
+        "in_slot": True,
+        "slot_index": slot_index,
+        "slot": f"{slot_start}-{slot_end}",
+        "focus_proposal": focus_pid,
+        "next_job": next_job,
+    }

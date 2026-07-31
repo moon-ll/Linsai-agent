@@ -21,6 +21,7 @@
 // 状态
 // ============================================
 let _lcCurrentFilter = 'all';  // 当前筛选的阶段
+let _lcFocusInfo = null;       // v6.8.0: 当前微调度器聚焦信息
 
 // 阶段配置
 const LC_STAGES = [
@@ -32,6 +33,31 @@ const LC_STAGES = [
 
 const LC_TYPE_LABELS = { general: '面上', key: '重点', major: '重大' };
 const LC_TYPE_COLORS = { general: 'var(--info-color)', key: 'var(--accent-color)', major: 'var(--error-color)' };
+
+// v6.8.0: 申请书 5 模块（与后端 proposal_sections.PROPOSAL_SECTIONS 对齐）
+const LC_SECTIONS = [
+  { key: 'rationale', cn: '立项依据', icon: '📖' },
+  { key: 'content', cn: '研究内容', icon: '📋' },
+  { key: 'scheme', cn: '研究方案', icon: '🔬' },
+  { key: 'full_review', cn: '整体一致性', icon: '🔍' },
+  { key: 'references', cn: '参考文献', icon: '📚' },
+];
+const LC_SECTION_KEY_TO_CN = Object.fromEntries(LC_SECTIONS.map(s => [s.key, s.cn]));
+
+// ============================================
+// v6.8.0: 加载微调度器聚焦信息
+// ============================================
+async function lcLoadFocusInfo() {
+  try {
+    const result = await apiGet('/api/lifecycle/jobs');
+    if (result.status !== 'ok') return;
+    // 从 cron jobs 中无法直接获取聚焦，因此通过单独状态接口获取
+    const focusRes = await apiGet('/api/lifecycle/focus').catch(() => ({}));
+    _lcFocusInfo = focusRes.focus || null;
+  } catch (e) {
+    _lcFocusInfo = null;
+  }
+}
 
 // ============================================
 // 打开/关闭
@@ -146,17 +172,33 @@ async function renderLifecycleList() {
     let proposals = [];
 
     // 统一从 dashboard 获取全部课题，前端筛选
-    const dashData = await apiGet('/api/lifecycle/dashboard');
-    const allProposals = dashData.data?.proposals || [];
+    const [dashData, focusRes] = await Promise.all([
+      apiGet('/api/lifecycle/dashboard'),
+      apiGet('/api/lifecycle/focus').catch(() => ({ status: 'ok', focus: null })),
+    ]);
+    _lcFocusInfo = focusRes.focus || null;
+    const focusPid = _lcFocusInfo?.focus_proposal;
+
+    const allProposals = dashData.data?.proposals || {};
     // 转换格式：dashboard 返回的是 {pid: {...}} 字典
-    proposals = Object.entries(allProposals).map(([pid, data]) => ({
-      proposal_id: pid,
-      status: data.status,
-      project_type: data.project_type || 'general',
-      optimization_rounds: data.optimization_rounds || 0,
-      last_score: data.last_score || 0,
-      updated_at: data.updated_at || '',
-    }));
+    proposals = Object.entries(allProposals).map(([pid, data]) => {
+      const rawJobs = data.pipeline_jobs || [];
+      const pendingJobs = rawJobs.filter(j => j.status === 'pending');
+      // 找第一个依赖已满足的 pending job 作为下一任务提示
+      const doneIds = new Set(rawJobs.filter(j => j.status === 'done').map(j => j.job_id));
+      const nextPending = pendingJobs.find(j => (j.depends_on || []).every(d => doneIds.has(d)));
+      return {
+        proposal_id: pid,
+        status: data.status,
+        project_type: data.project_type || 'general',
+        optimization_rounds: data.optimization_rounds || 0,
+        last_score: data.last_score || 0,
+        updated_at: data.updated_at || '',
+        section_passes: data.section_passes || {},
+        is_focused: pid === focusPid,
+        next_pending_job: nextPending || null,
+      };
+    });
 
     // 按阶段筛选
     if (_lcCurrentFilter !== 'all') {
@@ -172,8 +214,12 @@ async function renderLifecycleList() {
       return;
     }
 
-    // 按更新时间排序
-    proposals.sort((a, b) => (b.updated_at || '').localeCompare(a.updated_at || ''));
+    // 排序：当前聚焦排第一，其余按更新时间倒序
+    proposals.sort((a, b) => {
+      if (a.is_focused && !b.is_focused) return -1;
+      if (!a.is_focused && b.is_focused) return 1;
+      return (b.updated_at || '').localeCompare(a.updated_at || '');
+    });
 
     let html = '<div class="lc-proposal-list">';
     for (const p of proposals) {
@@ -225,12 +271,26 @@ function renderProposalCard(p) {
   const typeColor = LC_TYPE_COLORS[p.project_type] || 'var(--text-secondary)';
   const score = p.last_score || 0;
   const scoreColor = score >= 0.85 ? 'var(--success-color)' : score >= 0.7 ? 'var(--warning-color)' : 'var(--text-tertiary)';
+  const isFocused = p.is_focused;
+  const nextJob = p.next_pending_job;
 
   // 解析课题名称（从 ID 提取）
   const namePart = (p.proposal_id || '').split('-').slice(1, -1).join('-') || p.proposal_id;
 
+  // v6.8.0: 5 模块进度
+  let sectionBars = '';
+  if (p.status === 'optimizing' && p.section_passes) {
+    const passes = p.section_passes || {};
+    sectionBars = '<div class="lc-section-bars">' +
+      LC_SECTIONS.map(s => {
+        const passed = passes[s.key] === true;
+        return `<span class="lc-section-chip ${passed ? 'passed' : 'pending'}" title="${s.cn}">${s.icon} ${s.cn}</span>`;
+      }).join('') +
+      '</div>';
+  }
+
   let actions = '';
-  // v6.7.8: 查看课题详情（申请书正文 + 反馈 + 操作）
+  // v6.8.0: 查看课题详情（直接打开审核/详情视图，不再依赖 pipeline.js）
   actions += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcViewDetail('${p.proposal_id}')">👁 查看详情</button>`;
   // v6.7.5: optimizing 状态可查看 checkpoints / monitor
   if (p.status === 'optimizing') {
@@ -250,17 +310,27 @@ function renderProposalCard(p) {
     actions += `<button class="btn-text fs-072" style="color:var(--warning-color);" onclick="lcReview('${p.proposal_id}')">🔍 审核</button>`;
   }
 
+  const focusBadge = isFocused
+    ? `<span class="lc-focus-badge" title="当前时段微调度器聚焦此课题">⚡ 当前聚焦</span>`
+    : '';
+  const nextJobHtml = nextJob
+    ? `<span class="lc-next-job">下一任务: ${escapeHtml(nextJob.step || '')} · ${escapeHtml(LC_SECTION_KEY_TO_CN[nextJob.section_key] || nextJob.section_key || '')}</span>`
+    : '';
+
   return `
-    <div class="lc-proposal-card" style="border-left:3px solid ${stage.color};">
+    <div class="lc-proposal-card ${isFocused ? 'lc-proposal-focused' : ''}" style="border-left:3px solid ${stage.color};">
       <div class="lc-proposal-header">
         <span class="lc-proposal-name">${escapeHtml(namePart)}</span>
+        ${focusBadge}
         <span class="lc-proposal-type" style="color:${typeColor};">${typeLabel}</span>
         <span class="lc-proposal-status" style="color:${stage.color};">${stage.icon} ${stage.label}</span>
         ${score > 0 ? `<span class="lc-proposal-score" style="color:${scoreColor};">score ${score.toFixed(2)}</span>` : ''}
       </div>
       <div class="lc-proposal-meta">
         ${p.optimization_rounds || 0} 轮优化 · ${(p.updated_at || '').slice(0, 10)}
+        ${nextJobHtml}
       </div>
+      ${sectionBars}
       <div class="lc-proposal-actions">
         ${actions}
       </div>
@@ -269,24 +339,64 @@ function renderProposalCard(p) {
 }
 
 // ============================================
-// v6.7.8: 查看课题详情（打开研究管线申请书面板）
+// v6.8.0: 查看课题详情（弹窗显示 5 模块进度 + checkpoints + monitor）
 // ============================================
-function lcViewDetail(proposalId) {
-  // 优先使用全局函数；若尚未暴露，则通过 window.Pipeline 对象兜底
-  const opener = (typeof openPipelineManager === 'function')
-    ? openPipelineManager
-    : (window.Pipeline && typeof window.Pipeline.open === 'function'
-      ? window.Pipeline.open
-      : null);
+async function lcViewDetail(proposalId) {
+  try {
+    const [dashRes, cpRes, monitorRes] = await Promise.all([
+      apiGet('/api/lifecycle/dashboard'),
+      apiGet(`/api/lifecycle/checkpoints/${encodeURIComponent(proposalId)}`),
+      apiGet(`/api/lifecycle/monitor/${encodeURIComponent(proposalId)}`).catch(() => ({ status: 'ok' })),
+    ]);
 
-  if (typeof opener === 'function') {
-    opener(proposalId);
-    if (window.Pipeline && typeof window.Pipeline.switchTo === 'function') {
-      setTimeout(() => window.Pipeline.switchTo('proposal'), 50);
+    const data = dashRes.data?.proposals?.[proposalId] || {};
+    const checkpoints = cpRes.data || [];
+    const monitorAlert = monitorRes.negative_feedback_alert;
+    const monitorReasons = monitorRes.negative_feedback_reasons || [];
+
+    const passes = data.section_passes || {};
+    const sectionHtml = LC_SECTIONS.map(s => {
+      const passed = passes[s.key] === true;
+      return `<span class="lc-section-chip ${passed ? 'passed' : 'pending'}">${s.icon} ${s.cn}</span>`;
+    }).join('');
+
+    let cpHtml = '<div class="fs-082 text-tertiary">暂无 checkpoints</div>';
+    if (checkpoints.length) {
+      cpHtml = '<div class="d-flex fd-col gap-4 fs-082">' + checkpoints.slice(0, 15).map(j => {
+        const statusMap = {
+          pending: { icon: '○', color: 'var(--text-tertiary)' },
+          running: { icon: '◐', color: 'var(--info-color)' },
+          done: { icon: '✓', color: 'var(--success-color)' },
+          failed: { icon: '✗', color: 'var(--error-color)' },
+        };
+        const s = statusMap[j.status] || statusMap.pending;
+        return `<div class="d-flex ai-center gap-8"><span style="color:${s.color};">${s.icon} ${j.step}</span><span class="text-tertiary">${LC_SECTION_KEY_TO_CN[j.section_key] || j.section_key}</span><span class="ml-auto text-tertiary">r${j.round}</span></div>`;
+      }).join('') + '</div>';
     }
-  } else {
-    console.error('lcViewDetail: pipeline manager not available');
-    showToast('研究管线模块未加载', 'error');
+
+    let alertHtml = '';
+    if (monitorAlert) {
+      alertHtml = `<div class="pad-10 bg-error br-6" style="color:#fff;margin-bottom:12px;"><div class="fw-600 mb-4">⚠️ 负反馈告警</div><ul class="ma-0 pl-16">${monitorReasons.map(r => `<li>${escapeHtml(r)}</li>`).join('')}</ul></div>`;
+    }
+
+    const namePart = proposalId.split('-').slice(1, -1).join('-') || proposalId;
+    const html = `
+      <div class="d-flex fd-col gap-12" style="max-height:60vh;overflow:auto;">
+        ${alertHtml}
+        <div>
+          <div class="fw-600 mb-6">课题: ${escapeHtml(namePart)}</div>
+          <div class="fs-082 text-secondary mb-8">${data.optimization_rounds || 0} 轮优化 · score ${(data.last_score || 0).toFixed(2)}</div>
+          <div class="lc-section-bars">${sectionHtml}</div>
+        </div>
+        <div>
+          <div class="fw-600 mb-6 fs-092">Checkpoints</div>
+          ${cpHtml}
+        </div>
+      </div>`;
+
+    await confirmModal(html, '课题详情', '关闭');
+  } catch (e) {
+    showToast(`加载详情失败：${e.message}`, 'error');
   }
 }
 
@@ -509,7 +619,7 @@ async function openReviewWorkspace(proposalId, sessionId) {
   }
 }
 
-// v6.7.12: 加载申请书章节到左侧内容区
+// v6.8.0: 加载申请书章节到左侧内容区（固定 5 模块，按顺序显示）
 async function loadReviewContent(proposalId) {
   const bodyEl = document.getElementById('review-content-body');
   const tabsEl = document.getElementById('review-content-tabs');
@@ -523,9 +633,16 @@ async function loadReviewContent(proposalId) {
     if (result.status !== 'ok') throw new Error(result.error || '获取申请书失败');
 
     const sections = result.sections || [];
-    _reviewSections = {};
+    const rawMap = {};
     for (const s of sections) {
-      if (s.name && s.content) _reviewSections[s.name] = s.content;
+      if (s.name && s.content) rawMap[s.name] = s.content;
+    }
+
+    // v6.8.0: 只保留 5 模块，并按固定顺序排列
+    const sectionOrder = ['立项依据', '研究内容', '研究方案', '整体一致性', '参考文献'];
+    _reviewSections = {};
+    for (const name of sectionOrder) {
+      if (rawMap[name]) _reviewSections[name] = rawMap[name];
     }
 
     if (Object.keys(_reviewSections).length === 0) {
@@ -623,18 +740,64 @@ async function lcReviewVerdict(proposalId, verdict, reason = '') {
   if (!['approve', 'reject', 'pause'].includes(verdict)) return;
   try {
     showToast('提交审核结论...', 'info');
-    const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/review-verdict`, {
-      verdict,
-      reason,
-    });
+    const payload = { verdict, reason };
+    // v6.8.0: 传递当前审核会话 ID，便于后端归档会话
+    if (_reviewCurrentSessionId && proposalId === _reviewCurrentProposalId) {
+      payload.session_id = _reviewCurrentSessionId;
+    }
+    const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/review-verdict`, payload);
     if (result.status !== 'ok') {
       throw new Error(result.error || '审核结论提交失败');
     }
     const labels = { approve: '✓ 已通过并归档', reject: '↩ 已退回优化', pause: '⏸ 已暂停' };
     showToast(labels[verdict], 'success');
-    if (typeof renderLifecycleDashboard === 'function') {
-      renderLifecycleDashboard();
+    // v6.8.0: 审核完成后切换回生命周期视图（会话归档由后端在 review-verdict 中处理）
+    _reviewCurrentProposalId = null;
+    _reviewCurrentSessionId = null;
+    _reviewSections = {};
+    if (typeof switchToView === 'function') switchToView('lifecycle');
+    if (typeof renderLifecycleDashboard === 'function') renderLifecycleDashboard();
+  } catch (e) {
+    showToast(`✗ ${e.message}`, 'error');
+  }
+}
+
+// ============================================
+// v6.8.0: 操作：根据对话整理审核意见
+// ============================================
+async function lcReviewFinalize(proposalId) {
+  if (!proposalId || !_reviewCurrentSessionId) {
+    showToast('未找到审核会话', 'error');
+    return;
+  }
+  try {
+    showToast('正在整理审核意见...', 'info');
+    const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/review-finalize`, {
+      session_id: _reviewCurrentSessionId,
+    });
+    if (result.status !== 'ok') {
+      throw new Error(result.error || '整理意见失败');
     }
+    const decision = result.decision || {};
+    const verdict = decision.verdict || 'pause';
+    const reason = decision.reason || '';
+    const structured = decision.structured_feedback || {};
+    const issues = structured.issues || [];
+
+    let html = '<div class="d-flex fd-col gap-10" style="max-height:50vh;overflow:auto;">';
+    html += `<div><strong>结论：</strong><span class="${verdict === 'approve' ? 'text-success' : verdict === 'reject' ? 'text-warning' : 'text-secondary'}">${verdict === 'approve' ? '通过' : verdict === 'reject' ? '退回修改' : '暂停'}</span></div>`;
+    if (reason) html += `<div><strong>说明：</strong>${escapeHtml(reason)}</div>`;
+    if (structured.overall_comment) html += `<div><strong>整体评价：</strong>${escapeHtml(structured.overall_comment)}</div>`;
+    if (issues.length) {
+      html += '<div><strong>结构化问题：</strong></div><ul>';
+      for (const issue of issues.slice(0, 10)) {
+        html += `<li><strong>[${escapeHtml(issue.section || '')}]</strong> ${escapeHtml(issue.description || '')}<br><em>指令：${escapeHtml(issue.instruction || '')}</em></li>`;
+      }
+      html += '</ul>';
+    }
+    html += '</div>';
+
+    await confirmModal(html, '整理后的审核意见', '关闭');
   } catch (e) {
     showToast(`✗ ${e.message}`, 'error');
   }

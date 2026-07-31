@@ -31,11 +31,31 @@
   - `reflection_jobs.py`：报告按新 5 模块统计模块状态。
   - `proposal_kb_sync.py`：同步路径适配新目录结构。
 
+### 前端适配（v6.8.0 第二批次）
+- **导航精简** — `web/index.html` / `web/js/app.js`
+  - 主导航固定为 5 项：仪表盘 / 控制台 / 全链路 / 知识库 / 设置。
+  - 移除 hermes / pipeline 页面入口的特殊点击处理，避免跳转失败或空白页。
+  - 所有前端静态资源版本号统一为 `v=6.8.0`，防止浏览器缓存旧代码。
+- **全链路页面适配 5 模块** — `web/js/lifecycle.js`
+  - 课题卡片展示新 5 模块进度芯片（立项依据/研究内容/研究方案/整体一致性/参考文献）。
+  - 新增 `/api/lifecycle/focus` 调用，高亮当前微调度器聚焦课题并显示下一 pending job。
+  - 课题详情弹窗展示 5 模块进度、checkpoints、monitor 告警，不再依赖旧的 pipeline.js 面板。
+- **对话式审核页面修复** — `web/index.html` / `web/js/session.js` / `web/js/slash_commands.js`
+  - 审核操作栏（通过/退回/暂停/整理意见）集中到 `review-page`，移除 `chat-sidebar` 内重复 id，避免 DOM 冲突和按钮失效。
+  - `session.js` 中旧审核按钮绑定逻辑清理，仅保留 review 会话状态；DOM 渲染由 `lifecycle.js` 接管。
+  - `/proposal` 和 `/review` 快捷命令改为调用 `lcViewDetail` / `lcReview`，不再打开已废弃的 pipeline 面板。
+- **仪表盘修复** — `web/js/dashboard.js`
+  - 修复待办任务/任务预览仍指向已移除 `hermes` 视图的问题，统一跳转到控制台。
+  - 新增当前聚焦卡片和周末任务状态卡片。
+- **后端路由修复** — `scripts/web_routes_system.py`
+  - `GET /api/lifecycle/focus` 改为从 `lifecycle.controller.LifecycleCronController` 调用 `get_current_focus()`，修复 `MicroScheduler` 类不存在的 500 错误。
+
 ### 验证结果
-- `python3 -m py_compile scripts/*.py` 通过。
+- `python3 -m py_compile scripts/*.py scripts/lifecycle/*.py scripts/web_routes_*.py` 通过。
+- `node --check web/js/*.js` 全通过。
 - `python3 scripts/self_test.py --web-ci` 252/252 通过。
-- `python3 scripts/proposal_lifecycle.py --repair --dry-run` 全 OK。
-- 手动触发微调度器：`general-quantum-geometry-inversion-20260726` 的 `r6-rationale-critic` 在 216.4s 内完成，生成 `critic-round-6.md`（27KB）。
+- `python3 scripts/web_server.py --self-check` 通过。
+- `LifecycleCronController.get_current_focus()` 手动调用返回当前聚焦：`general-quantum-geometry-inversion-20260726`，时段 18:30-22:30。
 
 ### 设计原则
 - **结构先于文采**：先把申请书模块固定化，writer 必须补齐缺失内容，critic 将"内容缺失"作为重要评分维度。

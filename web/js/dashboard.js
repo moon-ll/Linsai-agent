@@ -1,5 +1,5 @@
 /**
- * dashboard.js — v6.7.8 仪表盘首页重设计
+ * dashboard.js — v6.8.0 仪表盘首页重设计
  * 目标：结构清晰、美观、行动导向
  * - 顶部统计卡片
  * - 中段六阶段漏斗
@@ -28,14 +28,18 @@ async function renderDashboard() {
   container.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-tertiary);">◐ 加载中…</div>';
 
   try {
-    const [data, flowData, alertsData] = await Promise.all([
+    const [data, flowData, alertsData, focusRes, weekendRes] = await Promise.all([
       apiGet('/api/dashboard'),
       apiGet('/api/console/flow').catch(() => ({ status: 'ok', stages: {} })),
       apiGet('/api/console/alerts').catch(() => ({ alerts: [] })),
+      apiGet('/api/lifecycle/focus').catch(() => ({ status: 'ok', focus: null })),
+      apiGet('/api/lifecycle/weekend/status').catch(() => ({ status: 'ok', jobs: {} })),
     ]);
 
     const stages = flowData.status === 'ok' ? (flowData.stages || {}) : {};
     const alerts = alertsData.alerts || [];
+    const focus = focusRes.focus || {};
+    const weekendJobs = weekendRes.jobs || {};
 
     // 林赛主动开场
     const hour = new Date().getHours();
@@ -54,9 +58,25 @@ async function renderDashboard() {
     html += '<div class="dash-stats-row">';
     html += renderStatCard('📄', '文献待处理', data.papers.unseen || 0, '查看简报', "switchToView('kb')", 'var(--info-color)');
     html += renderStatCard('🔬', '待校验课题', stages.pending_review?.count || 0, '去审核', "switchToView('lifecycle')", 'var(--warning-color)');
-    html += renderStatCard('📋', '任务待办', (data.tasks.active || 0) + (data.tasks.backlog || 0), '查看任务', "switchToView('hermes')", 'var(--accent-color)');
+    html += renderStatCard('🔄', '优化中课题', stages.optimizing?.count || 0, '查看链路', "switchToView('lifecycle')", 'var(--accent-color)');
     html += renderStatCard('🎛️', '告警/异常', alerts.length, '控制台', "switchToView('console')", alerts.length ? 'var(--error-color)' : 'var(--success-color)');
     html += '</div>';
+
+    // === 当前聚焦卡片 ===
+    if (focus.in_slot && focus.focus_proposal) {
+      const namePart = focus.focus_proposal.split('-').slice(1, -1).join('-') || focus.focus_proposal;
+      const nextStep = focus.next_job
+        ? `${focus.next_job.step || ''} · ${focus.next_job.section_key || ''}`
+        : '本轮已完成/无待执行 job';
+      html += `<div class="dash-focus-card" onclick="switchToView('lifecycle')">
+        <div class="dash-focus-icon">⚡</div>
+        <div class="dash-focus-body">
+          <div class="dash-focus-title">当前聚焦：${escapeHtml(namePart)}</div>
+          <div class="dash-focus-meta">时段 ${focus.slot} · 下一任务：${escapeHtml(nextStep)}</div>
+        </div>
+        <div style="color:var(--accent-color);">→</div>
+      </div>`;
+    }
 
     // === 中段：漏斗 + 行动区 ===
     html += '<div class="dash-main-grid">';
@@ -79,6 +99,9 @@ async function renderDashboard() {
     html += '</div>';
 
     html += '</div>';
+
+    // === 周末任务状态 ===
+    html += renderWeekendStatus(weekendJobs);
 
     // === 底部：文献/任务快捷预览 ===
     html += '<div class="dash-preview-grid">';
@@ -145,7 +168,7 @@ function renderActionList(data, stages, alerts) {
   }
   // 6. 任务
   if (data.tasks.backlog) {
-    html += renderActionItem('📋', '待办任务', `${data.tasks.backlog} 项待办`, "switchToView('hermes')", 'var(--warning-color)');
+    html += renderActionItem('📋', '待办任务', `${data.tasks.backlog} 项待办`, "switchToView('console')", 'var(--warning-color)');
   }
 
   if (pendingReview.length === 0 && drafts.length === 0 && !alerts.length && !data.papers.unseen && !data.tasks.backlog) {
@@ -186,7 +209,7 @@ function renderPapersPreview(papers) {
 
 function renderTasksPreview(tasks) {
   let html = '<div class="dash-preview-card">';
-  html += `<div class="dash-preview-header" onclick="switchToView('hermes')"><span>📋 任务</span><span class="dash-preview-count">${tasks.active || 0} 进行中 · ${tasks.backlog || 0} 待办</span></div>`;
+  html += `<div class="dash-preview-header" onclick="switchToView('console')"><span>📋 任务</span><span class="dash-preview-count">${tasks.active || 0} 进行中 · ${tasks.backlog || 0} 待办</span></div>`;
   if (tasks.preview && tasks.preview.length) {
     for (const task of tasks.preview) {
       const tag = task.assignee === 'hermes' ? '<span class="dash-preview-tag">hermes</span>' : '';
@@ -208,26 +231,27 @@ function dashOpenStage(stage) {
   if (window.ConsoleState) window.ConsoleState.selectedStage = stage;
 }
 
-// 打开课题详情
+// 打开课题详情（v6.8.0: 使用 lifecycle 详情弹窗，不再依赖 pipeline.js）
 function dashOpenProposal(proposalId) {
   if (!proposalId) return;
-  const opener = (typeof openPipelineManager === 'function')
-    ? openPipelineManager
-    : (window.Pipeline && typeof window.Pipeline.open === 'function' ? window.Pipeline.open : null);
-  if (typeof opener === 'function') {
-    opener(proposalId);
-    if (window.Pipeline && typeof window.Pipeline.switchTo === 'function') {
-      setTimeout(() => window.Pipeline.switchTo('proposal'), 50);
-    }
+  if (typeof lcViewDetail === 'function') {
+    lcViewDetail(proposalId);
+  } else {
+    switchToView('lifecycle');
   }
 }
 
-// 导航切换（仪表盘/控制台/知识库/生命周期/研究管线/hermes/设置/审核）
+// 导航切换（仪表盘/控制台/知识库/全链路/设置/审核）
 function switchToView(view) {
-  const views = ['dashboard', 'console', 'kb', 'lifecycle', 'pipeline', 'hermes', 'settings', 'review'];
+  const views = ['dashboard', 'console', 'kb', 'lifecycle', 'settings', 'review'];
   views.forEach(v => {
     const el = document.getElementById(v + '-page');
     if (el) el.style.display = v === view ? 'flex' : 'none';
+  });
+  // 隐藏已移除的视图（兼容旧页面）
+  ['pipeline', 'hermes'].forEach(v => {
+    const el = document.getElementById(v + '-page');
+    if (el) el.style.display = 'none';
   });
   // 更新导航按钮样式（review 不是主导航，取消全部高亮）
   document.querySelectorAll('.nav-btn').forEach(btn => {
@@ -239,6 +263,31 @@ function switchToView(view) {
   });
   // 切到仪表盘时刷新数据
   if (view === 'dashboard') renderDashboard();
+  if (view === 'lifecycle') renderLifecycleDashboard();
+}
+
+// v6.8.0: 周末任务状态卡片
+function renderWeekendStatus(jobs) {
+  const items = [
+    { key: 'weekend_input', label: '输入端', icon: '📥' },
+    { key: 'weekend_output', label: '输出端', icon: '📤' },
+    { key: 'weekend_reflection', label: '链路反思', icon: '🪞' },
+  ];
+  let html = '<div class="dash-preview-card" style="margin-bottom:16px;">';
+  html += '<div class="dash-preview-header"><span>🗓️ 周末任务</span></div>';
+  html += '<div style="display:flex;gap:12px;padding:12px;flex-wrap:wrap;">';
+  for (const item of items) {
+    const job = jobs[item.key] || {};
+    const status = job.status || 'pending';
+    const statusColor = status === 'done' ? 'var(--success-color)' : status === 'failed' ? 'var(--error-color)' : 'var(--text-tertiary)';
+    html += `<div style="flex:1;min-width:120px;padding:10px;border-radius:8px;background:var(--bg-tertiary);text-align:center;">
+      <div style="font-size:1.2rem;">${item.icon}</div>
+      <div style="font-size:0.85rem;margin-top:4px;">${item.label}</div>
+      <div style="font-size:0.78rem;color:${statusColor};margin-top:2px;">${status}</div>
+    </div>`;
+  }
+  html += '</div></div>';
+  return html;
 }
 
 // 初始化仪表盘（页面加载时调用）

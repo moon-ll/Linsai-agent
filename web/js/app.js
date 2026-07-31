@@ -533,28 +533,10 @@ async function init() {
   initChatSidebar();
   if (typeof bindPaperDiscussionEvents === 'function') bindPaperDiscussionEvents();
 
-  // v6.7.7: 导航按钮绑定（设置改为页面，不再打开抽屉）
+  // v6.8.0: 导航按钮绑定（已精简为仪表盘/控制台/全链路/知识库/设置）
   document.querySelectorAll('.nav-btn').forEach(btn => {
     btn.addEventListener('click', () => {
-      const view = btn.dataset.view;
-      if (view === 'hermes') {
-        switchToView('hermes');
-        if (typeof initHermesWorkspace === 'function') initHermesWorkspace();
-        return;
-      }
-      // v6.7.8: 研究管线是模态面板，不是页面
-      if (view === 'pipeline') {
-        const opener = (typeof openPipelineManager === 'function')
-          ? openPipelineManager
-          : (window.Pipeline && typeof window.Pipeline.open === 'function' ? window.Pipeline.open : null);
-        if (typeof opener === 'function') {
-          opener();
-        } else {
-          showToast('研究管线模块未加载', 'error');
-        }
-        return;
-      }
-      switchToView(view);
+      switchToView(btn.dataset.view);
     });
   });
 

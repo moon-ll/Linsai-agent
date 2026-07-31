@@ -217,22 +217,18 @@
       ]);
       if (!brief) return { handled: true, content: `未找到课题 **${proposalId}**。可用 /status 查看当前课题列表。` };
 
-      // 打开研究管线面板到申请书页
-      const opener = (typeof openPipelineManager === 'function')
-        ? openPipelineManager
-        : (window.Pipeline && typeof window.Pipeline.open === 'function' ? window.Pipeline.open : null);
-      if (typeof opener === 'function') {
-        opener(proposalId);
-        if (window.Pipeline && typeof window.Pipeline.switchTo === 'function') {
-          setTimeout(() => window.Pipeline.switchTo('proposal'), 50);
-        }
+      // v6.8.0: 打开全链路详情弹窗（不再使用旧 pipeline 面板）
+      if (typeof lcViewDetail === 'function') {
+        lcViewDetail(proposalId);
+      } else {
+        switchToView('lifecycle');
       }
 
       const filledSections = (sections.sections || []).filter(s => s.content && s.content.length > 0).map(s => s.section || s.name);
       const sectionList = filledSections.length ? filledSections.join('、') : '（暂无内容）';
       return {
         handled: true,
-        content: `**${proposalId}**\n\n状态：**${brief.status}** · 类型：**${brief.project_type}** · 轮次：**${brief.optimization_rounds || 0}** · 分数：**${(brief.last_score || 0).toFixed(2)}**\n\n已撰写章节：${sectionList}\n\n已为你打开研究管线面板。可以继续说：\n- "/section ${proposalId} 立项依据" 查看某一章节\n- "/feedback ${proposalId} 请加强创新点论述" 提交修改意见`,
+        content: `**${proposalId}**\n\n状态：**${brief.status}** · 类型：**${brief.project_type}** · 轮次：**${brief.optimization_rounds || 0}** · 分数：**${(brief.last_score || 0).toFixed(2)}**\n\n已撰写章节：${sectionList}\n\n已为你打开课题详情。可以继续说：\n- "/section ${proposalId} 立项依据" 查看某一章节\n- "/feedback ${proposalId} 请加强创新点论述" 提交修改意见`,
       };
     } catch (e) {
       return { handled: true, content: `打开课题失败：${e.message}` };
@@ -288,7 +284,7 @@
   }
 
   // ============================================
-  // /review <id> — 打开待校验视图
+  // /review <id> — 打开对话式审核页面
   // ============================================
 
   async function handleReview(args) {
@@ -300,18 +296,15 @@
       const target = items.find(p => p.proposal_id === proposalId);
       if (!target) return { handled: true, content: `**${proposalId}** 当前不在「待校验」阶段。` };
 
-      const opener = (typeof openPipelineManager === 'function')
-        ? openPipelineManager
-        : (window.Pipeline && typeof window.Pipeline.open === 'function' ? window.Pipeline.open : null);
-      if (typeof opener === 'function') {
-        opener(proposalId);
-        if (window.Pipeline && typeof window.Pipeline.switchTo === 'function') {
-          setTimeout(() => window.Pipeline.switchTo('inspection'), 50);
-        }
+      // v6.8.0: 使用新的对话式审核工作区
+      if (typeof lcReview === 'function') {
+        lcReview(proposalId);
+      } else {
+        switchToView('lifecycle');
       }
       return {
         handled: true,
-        content: `**${proposalId}** 已打开自检/待校验面板。\n\n分数：**${(target.last_score || 0).toFixed(2)}** · 轮次：**${target.optimization_rounds || 0}**\n\n你可以：\n- 在研究管线面板查看「自检」标签页的评审问题\n- 说 "/feedback ${proposalId} ..." 退回修改\n- 说意见后由我帮你归档`,
+        content: `**${proposalId}** 已打开对话式审核页面。\n\n分数：**${(target.last_score || 0).toFixed(2)}** · 轮次：**${target.optimization_rounds || 0}**\n\n你可以：\n- 在左侧查看申请书内容，右侧讨论区给出审核意见\n- 点击底部「通过 / 退回修改 / 暂停」完成审核\n- 或点击「整理意见」由我根据对话自动整理并执行`,
       };
     } catch (e) {
       return { handled: true, content: `打开待校验视图失败：${e.message}` };

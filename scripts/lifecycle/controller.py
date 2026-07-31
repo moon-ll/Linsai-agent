@@ -70,6 +70,7 @@ from .micro_scheduler import (
     _load_focus_state,
     _refresh_stale_jobs,
     _save_focus_state,
+    get_current_focus,
     pause_old_worker_crons,
     remove_micro_scheduler,
     run_micro_scheduler,
@@ -320,6 +321,7 @@ python3 scripts/weekend_pipeline.py --run-next
     schedule_micro_scheduler = schedule_micro_scheduler
     remove_micro_scheduler = remove_micro_scheduler
     pause_old_worker_crons = pause_old_worker_crons
+    get_current_focus = get_current_focus
 
     # ------------------------------------------------------------------
     # 安装 / 卸载（从 framework 模块绑定为方法）

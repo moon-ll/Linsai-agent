@@ -33,6 +33,7 @@ const State = {
   viewingArchive: false,
   sessionKeywords: {},
   currentReader: null,  // P1-10: SSE reader 引用，切换会话时取消
+  currentReviewProposalId: null,  // v6.8.0: 当前 review 会话关联的 proposal
 };
 
 const API_BASE = '';
