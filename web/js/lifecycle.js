@@ -450,7 +450,7 @@ async function lcFeedback(proposalId) {
 }
 
 // ============================================
-// v6.7.11: 操作：打开审核会话
+// v6.7.12: 操作：打开审核会话（分屏：左侧申请书 / 右侧讨论）
 // ============================================
 async function lcReview(proposalId) {
   try {
@@ -460,20 +460,111 @@ async function lcReview(proposalId) {
       throw new Error(result.error || '创建审核会话失败');
     }
     showToast('✓ 审核会话已创建', 'success');
-    // 打开聊天视图并切换到该会话
-    if (typeof switchToView === 'function') {
-      switchToView('chat');
-    }
-    if (typeof loadSession === 'function') {
-      await loadSession(result.session_id);
-    } else if (typeof openChat === 'function') {
-      openChat(result.session_id);
-    } else {
-      console.warn('lcReview: 未找到会话加载函数');
-    }
+    await openReviewWorkspace(proposalId, result.session_id);
   } catch (e) {
     showToast(`✗ ${e.message}`, 'error');
   }
+}
+
+// v6.7.12: 打开分屏审核工作区
+let _reviewCurrentProposalId = null;
+let _reviewCurrentSessionId = null;
+let _reviewSections = {};
+
+async function openReviewWorkspace(proposalId, sessionId) {
+  _reviewCurrentProposalId = proposalId;
+  _reviewCurrentSessionId = sessionId;
+
+  // 展开聊天侧栏
+  const chatSidebar = document.getElementById('chat-sidebar');
+  if (chatSidebar) {
+    chatSidebar.classList.remove('collapsed');
+    localStorage.setItem('chat-collapsed', 'false');
+  }
+
+  // 切换到审核视图
+  if (typeof switchToView === 'function') {
+    switchToView('review');
+  }
+
+  // 加载会话到右侧讨论区
+  if (typeof loadSession === 'function') {
+    await loadSession(sessionId);
+  } else if (typeof openChat === 'function') {
+    openChat(sessionId);
+  }
+
+  // 加载左侧申请书内容
+  await loadReviewContent(proposalId);
+
+  // 绑定返回按钮
+  const backBtn = document.getElementById('review-page-back-btn');
+  if (backBtn) {
+    backBtn.onclick = () => {
+      _reviewCurrentProposalId = null;
+      _reviewCurrentSessionId = null;
+      _reviewSections = {};
+      if (typeof switchToView === 'function') switchToView('lifecycle');
+    };
+  }
+}
+
+// v6.7.12: 加载申请书章节到左侧内容区
+async function loadReviewContent(proposalId) {
+  const bodyEl = document.getElementById('review-content-body');
+  const tabsEl = document.getElementById('review-content-tabs');
+  if (!bodyEl || !tabsEl) return;
+
+  bodyEl.innerHTML = '<div class="ta-center pad-40 text-tertiary">加载申请书内容...</div>';
+  tabsEl.innerHTML = '';
+
+  try {
+    const result = await apiGet(`/api/pipeline/${encodeURIComponent(proposalId)}/proposal/sections`);
+    if (result.status !== 'ok') throw new Error(result.error || '获取申请书失败');
+
+    const sections = result.sections || [];
+    _reviewSections = {};
+    for (const s of sections) {
+      if (s.name && s.content) _reviewSections[s.name] = s.content;
+    }
+
+    if (Object.keys(_reviewSections).length === 0) {
+      bodyEl.innerHTML = '<div class="ta-center pad-40 text-tertiary">暂无申请书内容</div>';
+      return;
+    }
+
+    // 渲染章节标签
+    let first = true;
+    for (const name of Object.keys(_reviewSections)) {
+      const btn = document.createElement('button');
+      btn.className = 'review-content-tab' + (first ? ' active' : '');
+      btn.textContent = name;
+      btn.onclick = () => {
+        tabsEl.querySelectorAll('.review-content-tab').forEach(t => t.classList.remove('active'));
+        btn.classList.add('active');
+        renderReviewSection(name);
+      };
+      tabsEl.appendChild(btn);
+      if (first) renderReviewSection(name);
+      first = false;
+    }
+  } catch (e) {
+    bodyEl.innerHTML = `<div class="ta-center pad-40 text-error">加载失败：${escapeHtml(e.message)}</div>`;
+  }
+}
+
+function renderReviewSection(name) {
+  const bodyEl = document.getElementById('review-content-body');
+  if (!bodyEl) return;
+  const content = _reviewSections[name] || '（本章节暂无内容）';
+  // 简单 markdown 换行与标题着色
+  const html = escapeHtml(content)
+    .replace(/\n/g, '<br>')
+    .replace(/^(#{1,6})\s+(.+)$/gm, (_, hashes, title) => {
+      const level = Math.min(hashes.length + 1, 6);
+      return `<h${level} style="margin:12px 0 6px;color:var(--text-primary);">${escapeHtml(title)}</h${level}>`;
+    });
+  bodyEl.innerHTML = `<div class="review-section-title" style="font-weight:600;margin-bottom:12px;color:var(--accent-color);">${escapeHtml(name)}</div><div>${html}</div>`;
 }
 
 // ============================================

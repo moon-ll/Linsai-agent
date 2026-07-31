@@ -118,6 +118,7 @@ _SYSTEM_ROUTES = [
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/feedback$"), "_sys_lifecycle_feedback"),
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/review-session$"), "_sys_lifecycle_review_session"),
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/review-verdict$"), "_sys_lifecycle_review_verdict"),
+    ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/review-finalize$"), "_sys_lifecycle_review_finalize"),
     ("POST", re.compile(r"^/api/lifecycle/cron-sweep$"), "_sys_lifecycle_cron_sweep"),
     # v6.7.5: checkpoint + 小型 cron 框架
     ("GET", re.compile(r"^/api/lifecycle/checkpoints/(?P<proposal_id>[^/]+)$"), "_sys_lifecycle_checkpoints"),
@@ -685,6 +686,109 @@ class SystemRoutesMixin:
                 self._send_json({"status": "ok", "action": "optimizing", "data": result})
             else:  # pause
                 self._send_json({"status": "ok", "action": "paused", "message": "已暂停，保持待审核状态"})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_review_finalize(self, parsed, body=None, **kwargs):
+        """根据审核对话自动整理意见并执行结论。
+
+        body 必填：session_id
+        返回：{status, action, verdict, reason, structured_feedback}
+        """
+        proposal_id = kwargs.get("proposal_id")
+        if not body or "session_id" not in body:
+            self._send_json({"error": "缺少 session_id"}, 400)
+            return
+
+        session_id = body["session_id"]
+
+        try:
+            import session_manager as sm
+            messages, _state = sm.load_session(session_id)
+
+            # 取最近 30 条 user/assistant 对话作为上下文
+            turns = []
+            for m in messages:
+                role = m.get("role")
+                if role in ("user", "assistant"):
+                    turns.append(f"{role}: {m.get('content', '')}")
+            conversation = "\n\n".join(turns[-30:])
+
+            system_prompt = (
+                "你是一名课题审核助理。请根据用户与审核助手的对话，判断用户对课题的最终审核结论，"
+                "并整理出结构化审核意见。\n\n"
+                "必须返回 JSON（不要包含其他说明文字）：\n"
+                "{\n"
+                '  "verdict": "approve|reject|pause",\n'
+                '  "reason": "审核结论的简要说明（50-200字）",\n'
+                '  "structured_feedback": {\n'
+                '    "verdict": "approve|major_revision|minor_revision",\n'
+                '    "overall_comment": "整体评价",\n'
+                '    "issues": [\n'
+                '      {"section":"章节名","severity":"high|medium|low","issue_type":"","description":"具体问题","instruction":"可执行指令","action":"rewrite|add|remove|check","target_passage":""}\n'
+                '    ],\n'
+                '    "suggestions": ["建议1","建议2"]\n'
+                "  }\n"
+                "}\n\n"
+                "规则：\n"
+                "- 如果用户明确说「通过」「归档」「同意」「ok」「可以」等，verdict=approve。\n"
+                "- 如果用户说「退回」「不通过」「修改」「问题很多」「再改」等，verdict=reject。\n"
+                "- 如果用户说「暂停」「稍后」「再考虑」「没空」，verdict=pause。\n"
+                "- 若结论不明确，默认 verdict=pause，reason 说明待进一步确认。\n"
+            )
+
+            user_prompt = f"请根据以下对话整理审核意见：\n\n{conversation}"
+            llm_text, _usage, _provider = lr.call_llm(
+                system_prompt, [{"role": "user", "content": user_prompt}], timeout=120
+            )
+
+            # 提取 JSON
+            import re
+            match = re.search(r"```json\s*([\s\S]*?)\s*```", llm_text)
+            json_str = match.group(1) if match else llm_text.strip().strip("`").strip()
+            decision = json.loads(json_str)
+
+            verdict = decision.get("verdict", "pause")
+            reason = decision.get("reason", "")
+            structured = decision.get("structured_feedback")
+            if structured and not isinstance(structured, dict):
+                structured = None
+
+            from proposal_lifecycle import ProposalLifecycle
+            lc = ProposalLifecycle()
+            prop_state = lc._get_proposal_state(proposal_id)
+            if not prop_state:
+                self._send_json({"error": "课题不存在"}, 404)
+                return
+            if prop_state.get("status") != "pending_review":
+                self._send_json({"error": "课题不在待审核阶段"}, 400)
+                return
+
+            if verdict == "approve":
+                result = lc.archive_proposal(proposal_id, reason or "用户审核通过", verdict)
+                action = "archived"
+            elif verdict == "reject":
+                feedback_text = reason or "用户审核不通过，请根据审核意见修改。"
+                lc.submit_feedback(
+                    proposal_id,
+                    feedback_text,
+                    verdict="major_revision",
+                    structured_feedback=structured,
+                )
+                lc.transition(proposal_id, "optimizing", reason or "用户审核退回修改")
+                action = "optimizing"
+            else:
+                action = "paused"
+
+            self._send_json({
+                "status": "ok",
+                "action": action,
+                "verdict": verdict,
+                "reason": reason,
+                "structured_feedback": structured,
+            })
+        except json.JSONDecodeError as e:
+            self._send_json({"error": f"LLM 返回无法解析为 JSON: {e}"}, 500)
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 

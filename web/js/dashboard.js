@@ -274,14 +274,18 @@ async function quickDecide(pid, action) {
 
 // 导航切换（仪表盘/控制台/知识库/生命周期/研究管线/hermes/设置）
 function switchToView(view) {
-  const views = ['dashboard', 'console', 'kb', 'lifecycle', 'pipeline', 'hermes', 'settings'];
+  const views = ['dashboard', 'console', 'kb', 'lifecycle', 'pipeline', 'hermes', 'settings', 'review'];
   views.forEach(v => {
     const el = document.getElementById(v + '-page');
     if (el) el.style.display = v === view ? 'flex' : 'none';
   });
-  // 更新导航按钮样式
+  // 更新导航按钮样式（review 不是主导航，取消全部高亮）
   document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.classList.toggle('nav-btn-active', btn.dataset.view === view);
+    if (view === 'review') {
+      btn.classList.remove('nav-btn-active');
+    } else {
+      btn.classList.toggle('nav-btn-active', btn.dataset.view === view);
+    }
   });
   // 切到仪表盘时刷新数据
   if (view === 'dashboard') renderDashboard();

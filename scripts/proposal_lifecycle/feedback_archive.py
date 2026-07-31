@@ -28,6 +28,7 @@ class FeedbackArchiveMixin:
         proposal_id: str,
         feedback_text: str,
         verdict: str = "major_revision",
+        structured_feedback: Dict[str, Any] = None,
     ) -> Dict[str, Any]:
         """提交人工审核反馈。
 
@@ -75,9 +76,15 @@ class FeedbackArchiveMixin:
             }
 
         # 不通过 → writer 整理结构化意见 → 返回优化中
-        structured = self._structure_feedback(
-            proposal_id, prop_dir, feedback_text, verdict, feedback_num
-        )
+        if structured_feedback and isinstance(structured_feedback, dict):
+            # v6.7.12: 外部已提供结构化意见（如对话式审核自动整理），直接落盘
+            structured_path = prop_dir / "06_feedback" / f"feedback-{feedback_num}-structured.json"
+            save_json(structured_path, structured_feedback)
+            structured = structured_feedback
+        else:
+            structured = self._structure_feedback(
+                proposal_id, prop_dir, feedback_text, verdict, feedback_num
+            )
 
         # 更新反馈计数
         with file_lock(f"proposal-{proposal_id}"):

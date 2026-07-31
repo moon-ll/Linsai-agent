@@ -290,6 +290,14 @@ function renderReviewActionBar() {
   cloneApprove.addEventListener('click', () => handleReviewVerdict(proposalId, 'approve'));
   cloneReject.addEventListener('click', () => handleReviewVerdict(proposalId, 'reject'));
   clonePause.addEventListener('click', () => handleReviewVerdict(proposalId, 'pause'));
+
+  // v6.7.12: 绑定「整理意见」按钮
+  const finalizeBtn = document.getElementById('review-finalize-btn');
+  if (finalizeBtn) {
+    const cloneFinalize = finalizeBtn.cloneNode(true);
+    finalizeBtn.parentNode.replaceChild(cloneFinalize, finalizeBtn);
+    cloneFinalize.addEventListener('click', () => handleReviewFinalize(proposalId));
+  }
 }
 
 async function handleReviewVerdict(proposalId, verdict) {
@@ -330,6 +338,59 @@ async function handleReviewVerdict(proposalId, verdict) {
     }
   } catch (e) {
     showToast(`✗ ${e.message}`, 'error');
+  }
+}
+
+// v6.7.12: 根据对话自动整理审核意见并执行
+async function handleReviewFinalize(proposalId) {
+  const sessionId = State.currentSessionId;
+  if (!sessionId) {
+    showToast('未找到当前审核会话', 'error');
+    return;
+  }
+
+  const confirmed = await confirmModal(
+    '<div class="ta-left">确认根据当前对话自动整理审核意见？<br><span class="text-tertiary fs-078">系统会调用 LLM 从对话中提取结论并执行归档/退回/暂停。</span></div>',
+    '确认整理', '取消'
+  );
+  if (!confirmed) return;
+
+  try {
+    showToast('正在整理审核意见...', 'info', 5000);
+    const result = await apiPost(`/api/lifecycle/${encodeURIComponent(proposalId)}/review-finalize`, {
+      session_id: sessionId,
+    }, 120000);
+
+    if (result.status !== 'ok') {
+      throw new Error(result.error || '整理失败');
+    }
+
+    const actionLabels = {
+      archived: '✓ 已通过并归档',
+      optimizing: '↩ 已退回优化',
+      paused: '⏸ 已暂停（保持待审核）',
+    };
+    showToast(actionLabels[result.action] || '审核意见已整理', 'success');
+
+    // 在对话中追加整理结果
+    const summary = result.reason || '已根据对话整理审核意见。';
+    const detail = result.structured_feedback
+      ? `\n\n结构化意见：\n${JSON.stringify(result.structured_feedback, null, 2)}`
+      : '';
+    appendMessage('assistant', `【审核意见整理】\n结论：${result.verdict}\n说明：${summary}${detail}`, null, false);
+    scrollToBottom();
+
+    // 归档或退回后隐藏审核栏
+    if (result.action !== 'paused') {
+      const bar = document.getElementById('review-action-bar');
+      if (bar) bar.style.display = 'none';
+    }
+    // 刷新生命周期仪表盘
+    if (typeof renderLifecycleDashboard === 'function') {
+      renderLifecycleDashboard();
+    }
+  } catch (e) {
+    showToast(`✗ ${e.message}`, 'error', 5000);
   }
 }
 
