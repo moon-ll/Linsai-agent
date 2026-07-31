@@ -61,20 +61,20 @@ def _log_warn(msg: str) -> None:
 
 
 def _load_weekend_jobs() -> Dict[str, Any]:
-    with file_lock("weekend-jobs"):
-        if WEEKEND_JOBS_PATH.exists():
-            try:
-                return load_json(WEEKEND_JOBS_PATH, default={"jobs": {}})
-            except Exception:
-                pass
+    """加载 weekend-jobs 状态（调用方需自行加锁）。"""
+    if WEEKEND_JOBS_PATH.exists():
+        try:
+            return load_json(WEEKEND_JOBS_PATH, default={"jobs": {}})
+        except Exception:
+            pass
     return {"jobs": {}}
 
 
 def _save_weekend_jobs(data: Dict[str, Any]) -> None:
-    with file_lock("weekend-jobs"):
-        WEEKEND_JOBS_PATH.parent.mkdir(parents=True, exist_ok=True)
-        data["updated_at"] = now_utc()
-        save_json(WEEKEND_JOBS_PATH, data)
+    """保存 weekend-jobs 状态（调用方需自行加锁）。"""
+    WEEKEND_JOBS_PATH.parent.mkdir(parents=True, exist_ok=True)
+    data["updated_at"] = now_utc()
+    save_json(WEEKEND_JOBS_PATH, data)
 
 
 def _update_job_status(job_key: str, status: str, error: str = "") -> None:

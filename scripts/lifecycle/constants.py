@@ -49,6 +49,10 @@ STEP_LIT_SEARCH = "lit_search"
 STEP_LIT_READ = "lit_read"
 STEP_LIT_NOTE = "lit_note"
 
+# v6.8.0: 一轮结束后的衍生更新步骤
+STEP_UPDATE_VISION = "update_vision"
+STEP_UPDATE_METHOD_MANUAL = "update_method_manual"
+
 # 微调度器 cron 名称与默认调度（每 5 分钟）
 MICRO_SCHEDULER_NAME = "lc-micro-scheduler"
 MICRO_SCHEDULER_SCHEDULE = "*/5 * * * 1-5"  # 工作日每 5 分钟一次

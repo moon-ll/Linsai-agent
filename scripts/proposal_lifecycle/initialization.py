@@ -170,6 +170,7 @@ class InitializerMixin:
 
         # v6.7.10: 补齐仍然缺失的章节占位文件
         created_placeholders: List[str] = []
+        sections.sections_dir.mkdir(parents=True, exist_ok=True)
         for s in sections.section_map.values():
             section_file = sections.sections_dir / f"{s['key']}.md"
             if not section_file.exists():

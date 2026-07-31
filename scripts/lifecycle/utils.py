@@ -10,7 +10,7 @@ from typing import Any, Dict, List, Optional
 
 from common import file_lock, load_json, now_utc, save_json
 from paths import PROJECT_ROOT
-from proposal_sections import PROPOSAL_SECTIONS
+
 
 from .constants import (
     HERMES_SCRIPTS_DIR,
@@ -63,14 +63,6 @@ def _is_stale(job: Dict[str, Any], stale_seconds: int = STALE_RUNNING_SECONDS) -
     if not started:
         return True
     return (datetime.now(timezone.utc) - started).total_seconds() > stale_seconds
-
-
-def _section_for_round(round_num: int) -> Dict[str, str]:
-    """根据轮次确定聚焦章节（与 ProposalLifecycle.optimize_cycle 一致）。"""
-    cycle = (round_num - 1) % (len(PROPOSAL_SECTIONS) + 1)
-    if cycle < len(PROPOSAL_SECTIONS):
-        return PROPOSAL_SECTIONS[cycle]
-    return {"key": "full_review", "title": "整体一致性审查", "cn": "整体一致性", "desc": "跨章节衔接与一致性"}
 
 
 def _make_job_id(proposal_id: str, round_num: int, section_key: str, step: str) -> str:

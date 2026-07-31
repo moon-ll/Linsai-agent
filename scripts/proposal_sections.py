@@ -31,14 +31,16 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 # NSFC 申请书标准章节定义（与 proposal_lifecycle 解耦，避免循环导入）
+# v6.8.0: 申请书模块重划
+# - 合并研究方案/特色与创新/预期研究成果为 scheme 模块
+# - 去掉年度研究计划
+# - references 作为一致性审查后的独立检验模块
 PROPOSAL_SECTIONS = [
     {"key": "rationale", "title": "（一）立项依据", "cn": "立项依据", "desc": "科学意义、前人研究局限性"},
     {"key": "content", "title": "（二）研究内容", "cn": "研究内容", "desc": "研究内容、科学目标、关键问题"},
-    {"key": "method", "title": "（三）研究方案", "cn": "研究方案", "desc": "技术路线、可行性、风险"},
-    {"key": "innovation", "title": "（四）特色与创新", "cn": "特色与创新", "desc": "创新点、差异化"},
-    {"key": "plan", "title": "（五）年度研究计划", "cn": "年度研究计划", "desc": "四年进度安排"},
-    {"key": "outcome", "title": "（六）预期研究成果", "cn": "预期研究成果", "desc": "论文、专利、数据集等"},
-    {"key": "references", "title": "（七）参考文献", "cn": "参考文献", "desc": "引文列表"},
+    {"key": "scheme", "title": "（三）研究方案、特色与创新、预期研究成果", "cn": "研究方案", "desc": "技术路线、可行性、创新点、预期成果"},
+    {"key": "full_review", "title": "整体一致性审查", "cn": "整体一致性", "desc": "跨模块衔接与连贯性"},
+    {"key": "references", "title": "参考文献检验", "cn": "参考文献", "desc": "引文准确性、相关性与格式"},
 ]
 
 # 章节 key 列表（常用遍历）
@@ -86,18 +88,11 @@ class ProposalSections:
                 "关键科学问题凝练", "研究内容与研究目标",
                 "拟解决的关键科学问题", "研究目标与内容", "关键科学问题",
             ],
-            "method": [
+            "scheme": [
                 "技术路线", "研究思路", "实施方案", "总体技术路线",
                 "研究方法与技术路线",
-            ],
-            "innovation": [
                 "发展新方法的重要性和必要性", "创新点", "方法学创新",
                 "研究特色与创新点", "特色创新", "创新性",
-            ],
-            "plan": [
-                "年度计划", "研究计划", "进度安排", "四年研究计划",
-            ],
-            "outcome": [
                 "预期成果", "预期研究目标", "研究成果", "预期研究产出",
             ],
             "references": [

@@ -81,6 +81,31 @@ def _collect_raw_state(state: Dict[str, Any]) -> Dict[str, Any]:
         "stage_status": state.get("stage_status", {}),
     }
 
+    # v6.8.0: 按新 5 模块统计各 proposal 的模块完成状态
+    module_status_summary = {}
+    try:
+        from proposal_sections import PROPOSAL_SECTIONS
+        module_keys = [s["key"] for s in PROPOSAL_SECTIONS]
+        for p in progress:
+            if not isinstance(p, dict):
+                continue
+            pid = p.get("proposal_id", "")
+            pstate = lc._get_proposal_state(pid) if pid else {}
+            jobs = pstate.get("pipeline_jobs", [])
+            module_status_summary[pid] = {}
+            for key in module_keys:
+                section_jobs = [j for j in jobs if j.get("section_key") == key]
+                if not section_jobs:
+                    module_status_summary[pid][key] = "not_started"
+                elif all(j.get("status") == "done" for j in section_jobs):
+                    module_status_summary[pid][key] = "done"
+                elif any(j.get("status") == "failed" for j in section_jobs):
+                    module_status_summary[pid][key] = "failed"
+                else:
+                    module_status_summary[pid][key] = "in_progress"
+    except Exception:
+        module_status_summary = {"error": "无法统计模块状态"}
+
     return {
         "collected_at": now_utc(),
         "dashboard": dashboard,
@@ -88,6 +113,7 @@ def _collect_raw_state(state: Dict[str, Any]) -> Dict[str, Any]:
         "strategy_suggestions": strategies,
         "proposal_progress": progress,
         "pipeline_state_summary": pipeline_state_summary,
+        "module_status_summary": module_status_summary,
     }
 
 
@@ -215,6 +241,7 @@ def run_reflection_report(state: Dict[str, Any], job: Dict[str, Any], dry_run: b
         "strategy_suggestions": collected.get("strategy_suggestions", {}),
         "proposal_progress": collected.get("proposal_progress", []),
         "pipeline_state_summary": collected.get("pipeline_state_summary", {}),
+        "module_status_summary": collected.get("module_status_summary", {}),
         "patterns": analyzed.get("patterns", []),
         "next_actions": analyzed.get("next_actions", []),
     }

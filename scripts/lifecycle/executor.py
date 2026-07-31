@@ -23,9 +23,11 @@ from .constants import (
     STEP_LIT_SEARCH,
     STEP_MONITOR,
     STEP_RESEARCHER,
+    STEP_UPDATE_METHOD_MANUAL,
+    STEP_UPDATE_VISION,
     STEP_WRITER,
 )
-from .utils import _is_stale, _make_job_id, _section_for_round
+from .utils import _is_stale, _make_job_id
 
 try:
     from adversarial_governance import AdversarialGovernance
@@ -119,9 +121,11 @@ def _run_critic_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     prop_state = self._get_proposal_state(proposal_id)
     project_type = prop_state.get("project_type", "general")
     round_num = job["round"]
-    section = _section_for_round(round_num)
-    focus_section = section if section["key"] != "full_review" else None
-    is_full_review = section["key"] == "full_review"
+    section_key = job.get("section_key", "rationale")
+    from proposal_sections import PROPOSAL_SECTIONS
+    section = next((s for s in PROPOSAL_SECTIONS if s["key"] == section_key), None)
+    focus_section = section
+    is_full_review = section_key == "full_review"
 
     result = self._run_critic(
         proposal_id, prop_dir, project_type, round_num, 900,
@@ -214,8 +218,10 @@ def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[
     if not prop_dir:
         return {"success": False, "error": "proposal 目录不存在"}
     round_num = job["round"]
-    section = _section_for_round(round_num)
-    focus_section = section if section["key"] != "full_review" else None
+    section_key = job.get("section_key", "rationale")
+    from proposal_sections import PROPOSAL_SECTIONS
+    section = next((s for s in PROPOSAL_SECTIONS if s["key"] == section_key), None)
+    focus_section = section if section_key != "full_review" else None
     report = self._read_critic_report(prop_dir, round_num)
     critic_output = report.get("output", "")[:3000]
 
@@ -289,8 +295,10 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
     if not prop_dir:
         return {"success": False, "error": "proposal 目录不存在"}
     round_num = job["round"]
-    section = _section_for_round(round_num)
-    focus_section = section if section["key"] != "full_review" else None
+    section_key = job.get("section_key", "rationale")
+    from proposal_sections import PROPOSAL_SECTIONS
+    section = next((s for s in PROPOSAL_SECTIONS if s["key"] == section_key), None)
+    focus_section = section if section_key != "full_review" else None
 
     # 找到本轮最新的 gap-analysis JSON
     gap_dir = prop_dir / "02_literature" / "gap-analysis"
@@ -366,8 +374,10 @@ def _run_researcher_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
     if not prop_dir:
         return {"success": False, "error": "proposal 目录不存在"}
     round_num = job["round"]
-    section = _section_for_round(round_num)
-    focus_section = section if section["key"] != "full_review" else None
+    section_key = job.get("section_key", "rationale")
+    from proposal_sections import PROPOSAL_SECTIONS
+    section = next((s for s in PROPOSAL_SECTIONS if s["key"] == section_key), None)
+    focus_section = section if section_key != "full_review" else None
     report = self._read_critic_report(prop_dir, round_num)
     critic_result = {"output": report["output"], "success": True}
     lit = self._run_researcher_targeted(
@@ -384,8 +394,9 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     prop_state = self._get_proposal_state(proposal_id)
     project_type = prop_state.get("project_type", "general")
     round_num = job["round"]
-    section = _section_for_round(round_num)
-    section_key = section["key"]
+    section_key = job.get("section_key", "rationale")
+    from proposal_sections import PROPOSAL_SECTIONS
+    section = next((s for s in PROPOSAL_SECTIONS if s["key"] == section_key), None)
     focus_section = section if section_key != "full_review" else None
     is_full_review = section_key == "full_review"
     threshold = self._get_quality_threshold(project_type)
@@ -476,6 +487,70 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         "section_passed": section_passed,
     }
 
+def _run_update_vision_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
+    """v6.8.0: 根据最终申请书更新研究设想（proposal-brief）。"""
+    prop_dir = self._find_proposal_dir(proposal_id)
+    if not prop_dir:
+        return {"success": False, "error": "proposal 目录不存在"}
+
+    proposal_path = prop_dir / "04_proposal" / "proposal-draft.md"
+    if not proposal_path.exists():
+        return {"success": False, "error": "申请书不存在"}
+
+    brief_path = prop_dir / "00_proposal-brief.md"
+    draft = proposal_path.read_text(encoding="utf-8")[:8000]
+
+    prompt = (
+        f"请根据以下申请书内容，更新课题设想/研究概要（{brief_path}）。\n\n"
+        f"要求：\n"
+        f"1. 用凝练的叙述风格概括研究问题、科学意义、核心创新、预期贡献\n"
+        f"2. 不要罗列细节，突出研究思路主线\n"
+        f"3. 输出为 markdown，包含 # 标题 和 > 项目类型等元信息\n"
+        f"4. 直接写入文件 {brief_path}\n\n"
+        f"【申请书内容】\n{draft}\n"
+    )
+    result = self._run_hermes("writer", prompt, timeout=300)
+    if not result.get("success"):
+        return {"success": False, "error": result.get("error", "更新研究设想失败")}
+    return {"success": True, "brief_path": str(brief_path)}
+
+
+def _run_update_method_manual_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
+    """v6.8.0: 根据申请书更新方法学手册，在方法层面补充细节。"""
+    prop_dir = self._find_proposal_dir(proposal_id)
+    if not prop_dir:
+        return {"success": False, "error": "proposal 目录不存在"}
+
+    proposal_path = prop_dir / "04_proposal" / "proposal-draft.md"
+    if not proposal_path.exists():
+        return {"success": False, "error": "申请书不存在"}
+
+    method_dir = prop_dir / "03_method"
+    method_dir.mkdir(parents=True, exist_ok=True)
+    manual_path = method_dir / "method-manual.md"
+
+    # 优先读取 scheme 模块的 writer 输出，若不存在则读完整 draft
+    scheme_path = prop_dir / "04_proposal" / "sections" / "scheme.md"
+    if scheme_path.exists():
+        method_source = scheme_path.read_text(encoding="utf-8")[:8000]
+    else:
+        method_source = proposal_path.read_text(encoding="utf-8")[:8000]
+
+    prompt = (
+        f"请根据以下申请书的研究方案部分，撰写方法学手册（{manual_path}）。\n\n"
+        f"要求：\n"
+        f"1. 在申请书思路基础上，补充具体方法细节：算法/实验步骤、关键参数、验证方式\n"
+        f"2. 说明潜在风险和替代方案\n"
+        f"3. 方法学手册是方法层面的补充文档，不要重复申请书的思路性叙述\n"
+        f"4. 直接写入文件 {manual_path}\n\n"
+        f"【研究方案内容】\n{method_source}\n"
+    )
+    result = self._run_hermes("writer", prompt, timeout=300)
+    if not result.get("success"):
+        return {"success": False, "error": result.get("error", "更新方法学手册失败")}
+    return {"success": True, "manual_path": str(manual_path)}
+
+
 def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
     """执行 monitor（全局监察）步骤：评分、奖惩、达标判定、流转。
 
@@ -507,8 +582,9 @@ def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, 
     project_type = prop_state.get("project_type", "general")
     round_num = job["round"]
     section_key = job["section_key"]
-    section = _section_for_round(round_num)
-    section_name = section.get("cn", section_key)
+    from proposal_sections import PROPOSAL_SECTIONS
+    section = next((s for s in PROPOSAL_SECTIONS if s["key"] == section_key), None)
+    section_name = section.get("cn", section_key) if section else section_key
 
     score_after = prop_state.get("last_score", 0.0)
     dim_scores = prop_state.get("last_dim_scores", {})
@@ -637,6 +713,8 @@ def execute_job(self, job: Dict[str, Any]) -> Dict[str, Any]:
         STEP_WRITER: "优化",
         STEP_RESEARCHER: "定向检索",
         STEP_MONITOR: "监察",
+        STEP_UPDATE_VISION: "更新研究设想",
+        STEP_UPDATE_METHOD_MANUAL: "更新方法学手册",
     }.get(step, step)
     if _log:
         _log.info(f"[{proposal_id}] 对抗轮 {round_num}: {step} {step_verb}")
@@ -661,6 +739,10 @@ def execute_job(self, job: Dict[str, Any]) -> Dict[str, Any]:
             result = self._run_writer_step(proposal_id, job)
         elif step == STEP_MONITOR:
             result = self._run_monitor_step(proposal_id, job)
+        elif step == STEP_UPDATE_VISION:
+            result = self._run_update_vision_step(proposal_id, job)
+        elif step == STEP_UPDATE_METHOD_MANUAL:
+            result = self._run_update_method_manual_step(proposal_id, job)
         else:
             result = {"success": False, "error": f"未知步骤 {step}"}
     except Exception as e:

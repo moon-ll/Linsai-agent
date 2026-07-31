@@ -27,7 +27,13 @@ from .constants import (
     HERMES_PROFILE,
     JOB_STATUS_PENDING,
     STEP_CRITIC,
+    STEP_GAP_IDENTIFY,
+    STEP_LIT_NOTE,
+    STEP_LIT_READ,
+    STEP_LIT_SEARCH,
     STEP_MONITOR,
+    STEP_UPDATE_METHOD_MANUAL,
+    STEP_UPDATE_VISION,
     STEP_WRITER,
 )
 from .executor import (
@@ -43,6 +49,8 @@ from .executor import (
     _run_researcher_step,
     _run_writer_step,
     _run_monitor_step,
+    _run_update_vision_step,
+    _run_update_method_manual_step,
     execute_job,
     execute_next_job,
 )
@@ -53,9 +61,15 @@ from .framework import (
     teardown_cron_framework,
 )
 from .micro_scheduler import (
+    _current_focus_slot,
+    _focus_proposal_for_slot,
+    _is_round_complete,
     _job_priority_key,
-    _list_ready_jobs,
+    _list_ready_jobs_for_proposal,
+    _load_focus_slots,
+    _load_focus_state,
     _refresh_stale_jobs,
+    _save_focus_state,
     pause_old_worker_crons,
     remove_micro_scheduler,
     run_micro_scheduler,
@@ -83,7 +97,6 @@ from .utils import (
     _save_jobs,
     _job_by_id,
     _make_job_id,
-    _section_for_round,
 )
 
 try:
@@ -166,64 +179,84 @@ python3 scripts/weekend_pipeline.py --run-next
         target.chmod(0o755)
         return target
 
-    def _build_next_round_jobs(
+    def _build_full_round_jobs(
         self,
         proposal_id: str,
         round_num: int,
-        section: Dict[str, str],
     ) -> List[Dict[str, Any]]:
-        """为下一轮生成 critic + writer + monitor 三个基础 job。"""
-        section_key = section["key"]
-        critic_id = _make_job_id(proposal_id, round_num, section_key, STEP_CRITIC)
-        writer_id = _make_job_id(proposal_id, round_num, section_key, STEP_WRITER)
-        monitor_id = _make_job_id(proposal_id, round_num, section_key, STEP_MONITOR)
-        return [
-            {
-                "job_id": critic_id,
+        """v6.8.0: 为下一轮生成完整申请书优化链（25 个 job）。
+
+        模块顺序：rationale → content → scheme → full_review → references → monitor → derived
+        其中 rationale/content/scheme 各包含 critic + 4 个 researcher 子任务 + writer。
+        """
+        from proposal_sections import PROPOSAL_SECTIONS
+
+        def _job(section_key: str, step: str, depends_on: List[str]) -> Dict[str, Any]:
+            return {
+                "job_id": _make_job_id(proposal_id, round_num, section_key, step),
                 "proposal_id": proposal_id,
-                "step": STEP_CRITIC,
+                "step": step,
                 "section_key": section_key,
                 "round": round_num,
                 "status": JOB_STATUS_PENDING,
-                "depends_on": [],
+                "depends_on": depends_on,
                 "attempts": 0,
                 "scheduled_at": "",
                 "started_at": "",
                 "finished_at": "",
                 "last_error": "",
                 "cron_job_id": "",
-            },
-            {
-                "job_id": writer_id,
-                "proposal_id": proposal_id,
-                "step": STEP_WRITER,
-                "section_key": section_key,
-                "round": round_num,
-                "status": JOB_STATUS_PENDING,
-                "depends_on": [critic_id],
-                "attempts": 0,
-                "scheduled_at": "",
-                "started_at": "",
-                "finished_at": "",
-                "last_error": "",
-                "cron_job_id": "",
-            },
-            {
-                "job_id": monitor_id,
-                "proposal_id": proposal_id,
-                "step": STEP_MONITOR,
-                "section_key": section_key,
-                "round": round_num,
-                "status": JOB_STATUS_PENDING,
-                "depends_on": [writer_id],
-                "attempts": 0,
-                "scheduled_at": "",
-                "started_at": "",
-                "finished_at": "",
-                "last_error": "",
-                "cron_job_id": "",
-            },
-        ]
+            }
+
+        jobs: List[Dict[str, Any]] = []
+        prev_writer_id = ""
+
+        # 3 个主模块：每个 critic + 4 researcher + writer
+        for section in PROPOSAL_SECTIONS[:3]:
+            section_key = section["key"]
+            critic_id = _make_job_id(proposal_id, round_num, section_key, STEP_CRITIC)
+            gap_id = _make_job_id(proposal_id, round_num, section_key, STEP_GAP_IDENTIFY)
+            search_id = _make_job_id(proposal_id, round_num, section_key, STEP_LIT_SEARCH)
+            read_id = _make_job_id(proposal_id, round_num, section_key, STEP_LIT_READ)
+            note_id = _make_job_id(proposal_id, round_num, section_key, STEP_LIT_NOTE)
+            writer_id = _make_job_id(proposal_id, round_num, section_key, STEP_WRITER)
+
+            # critic 依赖上一模块的 writer
+            critic_deps = [prev_writer_id] if prev_writer_id else []
+            jobs.append(_job(section_key, STEP_CRITIC, critic_deps))
+            jobs.append(_job(section_key, STEP_GAP_IDENTIFY, [critic_id]))
+            jobs.append(_job(section_key, STEP_LIT_SEARCH, [gap_id]))
+            jobs.append(_job(section_key, STEP_LIT_READ, [search_id]))
+            jobs.append(_job(section_key, STEP_LIT_NOTE, [read_id]))
+            jobs.append(_job(section_key, STEP_WRITER, [critic_id, note_id]))
+
+            prev_writer_id = writer_id
+
+        # full_review: critic → writer
+        full_key = "full_review"
+        full_critic_id = _make_job_id(proposal_id, round_num, full_key, STEP_CRITIC)
+        full_writer_id = _make_job_id(proposal_id, round_num, full_key, STEP_WRITER)
+        jobs.append(_job(full_key, STEP_CRITIC, [prev_writer_id]))
+        jobs.append(_job(full_key, STEP_WRITER, [full_critic_id]))
+
+        # references: critic → writer
+        ref_key = "references"
+        ref_critic_id = _make_job_id(proposal_id, round_num, ref_key, STEP_CRITIC)
+        ref_writer_id = _make_job_id(proposal_id, round_num, ref_key, STEP_WRITER)
+        jobs.append(_job(ref_key, STEP_CRITIC, [full_writer_id]))
+        jobs.append(_job(ref_key, STEP_WRITER, [ref_critic_id]))
+
+        # monitor（全局监察，独立 section_key）
+        monitor_id = _make_job_id(proposal_id, round_num, "monitor", STEP_MONITOR)
+        jobs.append(_job("monitor", STEP_MONITOR, [ref_writer_id]))
+
+        # 衍生更新
+        vision_id = _make_job_id(proposal_id, round_num, "derived", STEP_UPDATE_VISION)
+        manual_id = _make_job_id(proposal_id, round_num, "derived", STEP_UPDATE_METHOD_MANUAL)
+        jobs.append(_job("derived", STEP_UPDATE_VISION, [monitor_id]))
+        jobs.append(_job("derived", STEP_UPDATE_METHOD_MANUAL, [vision_id]))
+
+        return jobs
 
     # ------------------------------------------------------------------
     # checkpoint 工具函数（从 utils 模块绑定为方法）
@@ -247,6 +280,8 @@ python3 scripts/weekend_pipeline.py --run-next
     _run_researcher_step = _run_researcher_step
     _run_writer_step = _run_writer_step
     _run_monitor_step = _run_monitor_step
+    _run_update_vision_step = _run_update_vision_step
+    _run_update_method_manual_step = _run_update_method_manual_step
     execute_job = execute_job
     execute_next_job = execute_next_job
 
@@ -272,9 +307,15 @@ python3 scripts/weekend_pipeline.py --run-next
     # ------------------------------------------------------------------
     # 微调度器（从 micro_scheduler 模块绑定为方法）
     # ------------------------------------------------------------------
-    _refresh_stale_jobs = _refresh_stale_jobs
+    _current_focus_slot = _current_focus_slot
+    _focus_proposal_for_slot = _focus_proposal_for_slot
+    _is_round_complete = _is_round_complete
     _job_priority_key = _job_priority_key
-    _list_ready_jobs = _list_ready_jobs
+    _list_ready_jobs_for_proposal = _list_ready_jobs_for_proposal
+    _load_focus_slots = _load_focus_slots
+    _load_focus_state = _load_focus_state
+    _refresh_stale_jobs = _refresh_stale_jobs
+    _save_focus_state = _save_focus_state
     run_micro_scheduler = run_micro_scheduler
     schedule_micro_scheduler = schedule_micro_scheduler
     remove_micro_scheduler = remove_micro_scheduler

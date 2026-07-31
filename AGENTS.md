@@ -2,7 +2,7 @@
 
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
-> 最后更新：2026-07-29
+> 最后更新：2026-07-31
 > 提示：完整目录结构见 `docs/PROJECT-STRUCTURE.md`，完整架构说明见 `docs/ARCHITECTURE.md`。
 
 ---
@@ -13,10 +13,11 @@
 
 **核心比喻**：钢铁侠的贾维斯（J.A.R.V.I.S）。不是群聊里的旁观者，而是随时待命、深度参与、主动感知的个人合作者。
 
-**当前架构定位（v6.6+）**：
+**当前架构定位（v6.8+）**：
 - CoPilot 是**操作台/监控层**：提供 Web 界面、会话管理、知识库、任务追踪、提案生命周期可视化和人工决策入口。
 - hermes 是**执行端**：通过 7 个专业 profile 运行 agent loop，负责文献调研、缺口分析、申请书撰写、对抗优化等重脑力工作。
 - 两者通过 `state_sync.py`（论文统一状态）、`memory_bridge.py`（记忆同步）、`hermes_pipeline.py`（管线派活）协同。
+- 全自动链路（v6.8+）以**课题生命周期**为核心：按 4 个时段轮转推进每个 optimizing proposal，每个时段聚焦一个课题直至完成完整一轮（按章节评审 + 整体一致性评审 + 参考文献校验）。
 
 ### 与相关项目的关系
 
@@ -98,14 +99,12 @@ python3 scripts/import_hermes_topics.py --dry-run         # 导入 hermes 课题
 python3 scripts/import_hermes_topics.py --activate
 python3 scripts/proposal_lifecycle.py --setup-cron-v2                  # 安装 v2 cron 框架（每日编排 + 修复 + per-proposal workers + 周末任务）
 python3 scripts/proposal_lifecycle.py --setup-weekend                  # 单独安装/重置周末任务 cron
-python3 scripts/weekend_pipeline.py --stage input --dry-run --ensure-jobs   # 手动创建周末输入任务
-python3 scripts/weekend_pipeline.py --stage output --dry-run --ensure-jobs  # 手动创建周末输出任务
-python3 scripts/weekend_pipeline.py --stage reflection --dry-run --ensure-jobs  # 手动创建周末反思任务
-python3 scripts/weekend_pipeline.py --run-next --dry-run               # 手动执行下一个周末小任务
-python3 scripts/weekend_orchestrator.py --input --dry-run              # 兼容入口：周末输入
-python3 scripts/weekend_orchestrator.py --output --dry-run
-python3 scripts/weekend_orchestrator.py --reflection --dry-run
-python3 scripts/idea_generator.py --auto --dry-run                     # 兼容入口：自动生成研究设想
+python3 scripts/weekend_orchestrator.py --input --dry-run              # 周末输入端 dry-run
+python3 scripts/weekend_orchestrator.py --output --dry-run             # 周末输出端 dry-run
+python3 scripts/weekend_orchestrator.py --reflection --dry-run         # 周末链路反思 dry-run
+python3 scripts/proposal_lifecycle.py --orchestrate                    # 手动执行每日编排
+python3 scripts/proposal_lifecycle.py --micro-scheduler                # 手动触发微调度器
+python3 scripts/proposal_lifecycle.py --repair --dry-run               # 链路修复 dry-run
 ```
 
 ### 语法检查
@@ -124,8 +123,8 @@ python3 -m py_compile scripts/*.py
 2. **模块自检**：大量脚本支持 `--self-check`，运行 `python3 scripts/{module}.py --self-check`。
 3. **E2E 集成测试**：`python3 scripts/test_e2e_learning_full.py`（需真实 Claude CLI 环境，非日常回归项）。
 
-**当前基线**：
-- `--module`：198/198 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线）
+**当前基线（v6.8.0）**：
+- `--module`：252/252 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器）
 - `--scenario`：16/16 通过
 - `--persona`：38/38 通过
 - `--web-ci`：252/252 通过（Web API 虚拟用户测试覆盖所有主要 API 命名空间）
@@ -209,7 +208,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 ### 提案生命周期
 
-四阶段：`drafts → optimizing → pending_review → archived`。采用 writer-critic 对抗优化，critic 4 维度评分，writer 聚焦最弱维度修订。v6.7.5+ 改为每个 optimizing proposal 一个独立 worker cron；v6.7.6+ 引入 monitor meta-review 与 agent 分数奖惩；v6.7.7+ 增加输入端 `idea_generator`、输出端 `knowledge_output` 与周末模式，并将 `proposal_lifecycle.py` 拆分为 `proposal_lifecycle/` 包；v6.7.7+ 周末任务进一步拆分为 `weekend_pipeline/` 小任务流水线（输入/输出/反思），由 `lc-weekend-worker` 每 20 分钟执行一个 pending job。详见 `docs/ARCHITECTURE.md` §5。
+四阶段：`drafts → optimizing → pending_review → archived`。v6.8+ 将申请书拆为 5 模块：立项依据（rationale）、研究内容（content）、研究方案含特色创新与预期成果（scheme）、整篇一致性审查（full_review）、参考文献校验（references）。一轮完整优化依次执行：① 三章节并行撰写/评审 → ② 整篇一致性修订 → ③ 参考文献校验/补充 → ④ monitor meta-review。工作日按 4 个时段轮转（00:30-03:30 / 04:00-08:00 / 08:30-12:30 / 18:30-22:30），每个时段聚焦一个 proposal，未完成则下一时段继续，已完成则切换下一个。周末暂停 worker，集中执行输入端（研究设想发现）、输出端（归档知识萃取）与链路反思任务。v6.7.5+ 改为每个 optimizing proposal 一个独立 worker cron；v6.7.6+ 引入 monitor meta-review 与 agent 分数奖惩；v6.7.7+ 增加输入端 `idea_generator`、输出端 `knowledge_output` 与周末模式，并将 `proposal_lifecycle.py` 拆分为 `proposal_lifecycle/` 包。详见 `docs/ARCHITECTURE.md` §5。
 
 ### 林赛总控层（v6.7+）
 
@@ -301,7 +300,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.7.7*
-*日期：2026-07-28*
+*版本：6.8.0*
+*日期：2026-07-31*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

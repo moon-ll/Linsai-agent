@@ -1,5 +1,49 @@
 # 变更记录
 
+## v6.8.0 - 2026-07-31 申请书五模块化 + 微调度器 + 周末任务适配
+
+### 问题根因
+- 旧版申请书按 7 模块拆分（立项依据/研究内容/研究方案/特色与创新/预期研究成果/年度研究计划/参考文献），模块过细，导致撰写与评审碎片化，一致性差。
+- worker 每小时无脑挑一个 pending job 执行，不保证同一 proposal 的连贯推进，经常出现"一天跑不完一轮"的情况。
+- monitor 任务 checkpoint 的 `section_key` 误用为 `references`，与 section 占位符不匹配，导致 monitor job_id 冲突。
+- 周末输入/输出/反思任务与新的 proposal 目录结构（`00_proposal-brief.md`、`03_method/method-manual.md`、`02_literature/reading-notes.md`）不完全适配。
+
+### 改造内容
+- **申请书五模块化** — `scripts/proposal_sections.py` / `scripts/proposal_lifecycle/`
+  - 新 5 模块：立项依据（rationale）、研究内容（content）、研究方案含特色创新与预期成果（scheme）、整篇一致性审查（full_review）、参考文献校验（references）。
+  - 移除独立 `innovation` / `outcome` / `plan` 模块，将特色创新与预期成果并入 `scheme`。
+  - 新增 `scripts/migrate_sections_v680.py`，自动将 5 个 optimizing proposal 的旧 7 模块目录迁移到新结构，旧文件备份到 `backups/sections-migration-20260731/`。
+- **章节评审 + 整体评审 + 参考文献校验**
+  - 三章节（rationale/content/scheme）先并行进行 writer-critic 对抗。
+  - 全部章节达标后进入 `full_review`，只聚焦连贯性和统一性，不再重写具体章节。
+  - `references` 作为独立模块放到一致性审查之后，校验引用准确性、补充遗漏文献。
+- **微调度器 + 四时段轮转** — `scripts/lifecycle/micro_scheduler.py`
+  - 工作日 4 个时段：00:30-03:30、04:00-08:00、08:30-12:30、18:30-22:30。
+  - 每个时段只聚焦一个 proposal；若该 proposal 完成完整一轮，下一时段切换新 proposal；否则继续聚焦。
+  - 通过 `lifecycle-focus.json` 记录聚焦历史，保证断点续传。
+- **Monitor checkpoint 修复** — `scripts/lifecycle/controller.py`
+  - monitor job 的 `section_key` 从 `references` 修正为 `"monitor"`，避免与 references 模块冲突。
+  - 重新生成 5 个 optimizing proposal 的 25-job checkpoint。
+- **周末任务适配** — `scripts/weekend_pipeline/`
+  - `registration.py`：新课题注册时初始化 `00_proposal-brief.md`、`03_method/method-manual.md`、`02_literature/reading-notes.md`。
+  - `enrich_from_idea()` 写入 draft 后自动按新 5 模块拆分。
+  - `output_jobs.py`：归档 proposal 时把核心产物复制到 `knowledge/raw/projects/{proposal_id}/`，并从申请书+方法学手册萃取知识写入 wiki。
+  - `reflection_jobs.py`：报告按新 5 模块统计模块状态。
+  - `proposal_kb_sync.py`：同步路径适配新目录结构。
+
+### 验证结果
+- `python3 -m py_compile scripts/*.py` 通过。
+- `python3 scripts/self_test.py --web-ci` 252/252 通过。
+- `python3 scripts/proposal_lifecycle.py --repair --dry-run` 全 OK。
+- 手动触发微调度器：`general-quantum-geometry-inversion-20260726` 的 `r6-rationale-critic` 在 216.4s 内完成，生成 `critic-round-6.md`（27KB）。
+
+### 设计原则
+- **结构先于文采**：先把申请书模块固定化，writer 必须补齐缺失内容，critic 将"内容缺失"作为重要评分维度。
+- **一轮完整闭环**：同一时段内聚焦同一 proposal，确保一天能完成一整轮优化（章节评审 → 整体评审 → 参考文献 → monitor）。
+- **周末不做对抗优化**：工作日跑对抗循环，周末做输入发现、输出萃取、链路反思与 KB 健康维护。
+
+---
+
 ## v6.7.7 - 2026-07-28 自动化链路输入/输出端重构 + 周末任务模式
 
 ### 问题根因

@@ -22,7 +22,7 @@ from .constants import (
     STEP_WRITER,
     WEEKEND_JOBS,
 )
-from .utils import _is_stale, _is_weekend, _load_weekend_jobs, _make_job_id, _save_weekend_jobs, _section_for_round
+from .utils import _is_stale, _is_weekend, _load_weekend_jobs, _make_job_id, _save_weekend_jobs
 
 from weekend_pipeline.state import load_pipeline_state, save_pipeline_state
 from weekend_pipeline.executor import repair_stale_and_failed as repair_weekend_pipeline
@@ -35,10 +35,10 @@ except Exception:
 
 
 def _compute_actual_round(self, proposal_id: str, jobs: List[Dict[str, Any]]) -> int:
-    """根据已完成的 job 计算实际闭环轮次，修复 optimization_rounds 滞后。
+    """v6.8.0: 根据已完成的 job 计算实际闭环轮次，修复 optimization_rounds 滞后。
 
-    从当前 optimization_rounds+1 开始向上扫描，若某轮的 critic/writer/monitor
-    全部 done，则认为该轮已闭环。返回应推进到的轮次。
+    从当前 optimization_rounds+1 开始向上扫描，若某轮全部 25 个 job 都 done，
+    则认为该轮已闭环。返回应推进到的轮次。
     """
     prop_state = self._get_proposal_state(proposal_id)
     current_round = prop_state.get("optimization_rounds", 0) if prop_state else 0
@@ -49,18 +49,14 @@ def _compute_actual_round(self, proposal_id: str, jobs: List[Dict[str, Any]]) ->
     round_num = current_round + 1
     # 安全上限：避免无限制扫描
     while round_num <= current_round + 20:
-        section = _section_for_round(round_num)
-        section_key = section["key"]
-        required = [
-            _make_job_id(proposal_id, round_num, section_key, STEP_CRITIC),
-            _make_job_id(proposal_id, round_num, section_key, STEP_WRITER),
-            _make_job_id(proposal_id, round_num, section_key, STEP_MONITOR),
-        ]
-        statuses = {}
-        for job in jobs:
-            if job["job_id"] in required:
-                statuses[job["job_id"]] = job.get("status")
-        if len(statuses) == len(required) and all(s == JOB_STATUS_DONE for s in statuses.values()):
+        expected_jobs = self._build_full_round_jobs(proposal_id, round_num)
+        expected_ids = {j["job_id"] for j in expected_jobs}
+        statuses = {
+            job["job_id"]: job.get("status")
+            for job in jobs
+            if job["job_id"] in expected_ids
+        }
+        if len(statuses) == len(expected_ids) and all(s == JOB_STATUS_DONE for s in statuses.values()):
             actual = round_num
             round_num += 1
         else:
@@ -105,8 +101,7 @@ def sync_checkpoint(self, proposal_id: str) -> Dict[str, Any]:
     if current_round >= DEFAULT_MAX_ROUNDS:
         return {"success": True, "reason": "已达最大轮数", "added": 0, "round_advanced": round_advanced}
 
-    section = _section_for_round(next_round)
-    needed = self._build_next_round_jobs(proposal_id, next_round, section)
+    needed = self._build_full_round_jobs(proposal_id, next_round)
 
     added = 0
     for job in needed:

@@ -73,17 +73,32 @@ class RegistrationMixin:
         target_dir = self.root / "drafts" / proposal_id
         target_dir.mkdir(parents=True, exist_ok=True)
 
-        # 创建标准目录结构（v6.6.0 漏洞2修复）
+        # 创建标准目录结构（v6.8.0: 5 模块 + 研究设想 + 方法学手册 + 阅读笔记）
         standard_dirs = [
             "01_direction",
             "02_literature/targeted-research",
             "02_topic",
             "03_question",
+            "03_method",
             "04_proposal",
             "05_review",
         ]
         for d in standard_dirs:
             (target_dir / d).mkdir(parents=True, exist_ok=True)
+
+        # v6.8.0: 初始化核心产物占位
+        (target_dir / "00_proposal-brief.md").write_text(
+            f"# {proposal_id}\n\n> 项目类型：{project_type}\n\n## 研究设想\n\n待补充。\n",
+            encoding="utf-8",
+        )
+        (target_dir / "03_method" / "method-manual.md").write_text(
+            "# 方法学手册\n\n待课题进入优化环节后，根据申请书研究方案补充具体方法细节。\n",
+            encoding="utf-8",
+        )
+        (target_dir / "02_literature" / "reading-notes.md").write_text(
+            "# 文献阅读笔记\n\n记录课题优化过程中补充阅读的文献。\n",
+            encoding="utf-8",
+        )
 
         state_data = {
             "status": "drafts",
@@ -268,6 +283,14 @@ class RegistrationMixin:
 {sources_str}
 """
         _deduplicate_append(prop_dir / "04_proposal" / "proposal-draft.md", proposal_section)
+
+        # v6.8.0: 确保按新 5 模块结构拆分
+        try:
+            from proposal_sections import ProposalSections
+            ps = ProposalSections(prop_dir / "04_proposal")
+            ps.ensure_split()
+        except Exception:
+            pass
 
         # 更新 brief
         try:

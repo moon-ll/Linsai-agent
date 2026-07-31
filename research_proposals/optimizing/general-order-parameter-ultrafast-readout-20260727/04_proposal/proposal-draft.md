@@ -404,475 +404,81 @@ HHG 是目前少数能在体相穿透（10–100 nm）、亚周期时间分辨�
 
 ---
 
-## （三）研究方案
-
-### 3.1 总体技术路线
-
-本项目以"多维光场扫描 + 物理模型约束 + 机器学习反演"为主线，构建 HHG 序参量读出的完整技术闭环。总体路线分为三层：
-
-1. **理论层**：建立多带半导体布洛赫方程（SBE）与含时密度泛函理论（TDDFT）相结合的有效模型，刻画不同序参量（激子、超导、磁、CDW）对强场电子动力学和谐波产额的影响。
-2. **实验层**：搭建中红外/太赫兹强场驱动 HHG 平台，实现偏振、温度、磁场、泵浦-探测延迟、涡旋光 5 维扫描，获取高信噪比的多维 HHG 数据集。
-3. **反演层**：基于物理模型构建正向模拟库，结合贝叶斯优化/神经网络反演算法，从 HHG 谱中提取序参量大小、方向、动力学及涨落信息，并给出误差棒。
-
-### 3.2 四类序参量的 HHG 读出方案
-
-**激子序参量**：以 1L-MoS₂/WS₂、块体 ZnO、Cu₂O 为模型体系，通过椭偏依赖与温度扫描区分激子浓度、相干时间和激子绝缘态相变。利用 SBE 模型将激子能隙、激子-光子耦合强度和谐波产额关联，建立激子序参量反演映射。
-
-**超导序参量**：以 NbN、YBCO、BSCCO 为重点，通过三次谐波（THG）与五次谐波的温度依赖和磁场依赖，读取超导能隙 Δ_sc、相位涨落及配对密度波（PDW）隐藏序。区分静态超导序与 T_c 之上相位涨落对 THG 的贡献。
-
-**磁序参量**：覆盖铁磁（CrI₃、Cr₂Ge₂Te₆）、反铁磁（NiO、Cr₂O₃）和 altermagnet（CrSb、MnTe）三类体系。通过磁场方向依赖的低阶谐波各向异性、圆二色性以及涡旋光 OAM 耦合，读取磁化方向、Néel 矢量方向和 d-wave 自旋分裂特征。
-
-**CDW 序参量**：以 1T-TiSe₂、1L-NbSe₂、2H-MoTe₂ 为对象，通过偏振分辨 HHG 获取 3/5/7 阶谐波的各向异性，反演 CDW 振幅、相干长度和隐藏序成分。
-
-### 3.3 多维约束与多序解耦
-
-针对 NbSe₂、kagome CsV₃Sb₅ 等多序共存体系，建立 5 维光场约束矩阵（偏振 + 温度 + 磁场 + pump-probe 延迟 + 涡旋光 OAM）。通过可控改变外部条件，使不同序参量在 HHG 谱中产生可区分的响应窗口，结合可辨识性分析（identifiability analysis）降低反演多解性。
-
-### 3.4 关键技术与风险应对
-
-- **样品制备与封装**：与材料组合作获取高质量 1L-NbSe₂、TMDC 单层及 kagome 薄膜，hBN 封装保护。
-- **信号增强**：采用高重频中红外 OPA/OPCPA，结合 lock-in 探测和偏振调制提升信噪比。
-- **反演唯一性**：通过合成数据验证反演误差棒，对关键参数给出置信区间；与 XRD/输运测量交叉验证。
-- **损伤阈值**：工作强度控制在样品损伤阈值 1/2 以下，超快脉冲避免热积累。
+## （三）研究方案、特色与创新、预期研究成果
 
 ---
 
-## 节 4：发展新方法的重要性和必要性
+## 整体一致性审查
 
-### 4.1 新现象发现：6 个必发现/可能发现机会
-
-| 假设 | 体系 | 实验 | 国际 | 国内 |
-|------|------|------|------|------|
-| **H1** | CrSb altermagnet | 磁场依赖 HHG 各向异性 | Werner 2024 理论 | **完全空白** |
-| **H2** | 1L-NbSe₂ | CDW+SC 双重序偏振各向异性 | Ahmed 2020 理论 | **完全空白** |
-| **H3** | YBCO | 序参量涨落三次谐波（T_c 之上）| Puviani 2024 理论 | **完全空白** |
-| **H4** | TbMn₆Sn₆ kagome | XUV HHG 磁重定向 | Ryan 2025 实验 | **完全空白** |
-| **H5** | 1T-TiSe₂ | CDW 各向异性偏振扫描 | Tyulnev 2025 + Zhang 2025 | **完全空白** |
-| **H6** | NbSe₂/kagome/TaS₂ | 多序共存 5 维约束解耦 | 方法学未成熟 | **完全空白** |
-
-### 4.2 突破现有瓶颈：HHG 5 重优势 vs XRD/STM/ARPES
-
-| 瓶颈 | 现有方法 | HHG 解决方案 |
-|------|---------|-------------|
-| 静态 | XRD/STM | 瞬态动力学 |
-| 表面敏感 | ARPES | 体相 10-100 nm |
-| 弱场 | ARPES 弱探测 | 强场天然 |
-| 时间分辨 | tr-ARPES 30-100 fs | 100 as - 几 fs |
-| 间接 | 能隙/衍射峰 | 直接指纹（偶/奇谐波比）|
-
-### 4.3 澄清有争议的原理：HHG 多序共存解耦
-
-**争论 3 核心**（HHG 多序共存解耦）：
-- 多序共存（NbSe₂ CDW+SC、kagome CsV₃Sb₅ 三重序）→ HHG 谱混合多个序参量指纹
-- 如何解耦？→ 多维约束（5 维 vs v0.1 的 3 维）
-
-**本项目多维约束解决方案（5 维 vs v0.1 的 3 维）**：
-
-| 约束维度 | 提供信息 | 对多序解耦贡献 |
-|----------|----------|----------------|
-| **偏振分辨** | 序参量对称性 | 约束 SC d/s 波 |
-| **温度依赖** | 序参量相变点 | 区分 T_c 与 T_CDW |
-| **磁场依赖** | 磁/超导序 | 区分 SC 与磁 |
-| **pump-probe 延迟** | 序参量寿命 | 区分快/慢序 |
-| **涡旋光 OAM** | OAM-序参量耦合 | 区分空间对称 |
-
-**机器学习辅助**：5 维约束 + 神经网络多序解耦（**T5 核心**）
-
-### 4.4 工具级贡献（跨 T1-T5 协同）
-
-本项目 HHG 序参量读出方法学将成为 T5 反演方法学的**核心模块**：
-
-1. **HHG 序参量反演方法学**：
-   - 4 类序参量指纹库
-   - 多序共存 5 维解耦算法
-   - altermagnet/kagome/PDW 新序参量指纹
-
-2. **跨材料普适性**：
-   - 超导/激子/磁/CDW 4 类全覆盖
-   - 4 方向协同（T1 量子几何 + T2 谷 + T3 能带 + T4 序参量）
-
-3. **推动领域发展**：
-   - HHG 凝聚态方法学（T5）的**第四个标杆模块**
+待本轮 writer-critic 循环结束后统一审查。
 
 ---
 
-## 节 5：参考文献（≥40 篇）
-
-### 5.1 超导 HHG（4 篇）
-
-1. Iwai, S. et al. Petahertz-scale current in YBCO. *Nat. Commun.* (2021). DOI 待核验
-2. **Alcalá, J., Bhattacharya, U., Biegert, J. et al.** HHG spectroscopy of high-Tc superconductor phase transitions. *PNAS* **119**, e2207766119 (2022). DOI: 10.1073/pnas.2207766119 ⭐ **T4 立项奠基**
-3. Puviani, M., Haenel, S. & Manske, D. quench-drive 2D HHG spectroscopy. *PRB* **107**, 094501 (2023). arXiv:2112.12123
-4. **Puviani, M.** HHG in T_c 之上三次谐波序参量涨落. *PRB* **109**, 214515 (2024). arXiv:2402.02120 ⭐ **理论突破**
-
-### 5.2 CDW HHG（4 篇）
-
-5. **Ahmed, S., Yoo, S. & Prasankumar, R. P.** HHG in CDW+SC systems. arXiv:2008.07131 (2020).
-6. Rehn, D. A., Ahmed, S. & Prasankumar, R. P. CDW 序参量 HHG 系统理论. arXiv:2310.03080 (2023).
-7. **Tyulnev, I. et al. (Biegert)** TiSe₂ CDW HHG 实验. *Commun. Mater.* **6**, 152 (2025). DOI: 10.1038/s43246-025-00873-5 ⭐
-8. **Zhang, L., Tyulnev, I., Biegert, J., Lewenstein, M. et al.** Revealing anisotropic CDW order via HHG. *PRB* **112**, 085147 (2025). DOI: 10.1103/812z-nl4m ⭐
-
-### 5.3 激子 HHG（4 篇）
-
-9. Schmid, C. P. et al. 激子 HHG 早期奠基. *PRL* **121**, 133201 (2018).
-10. **Jensen, E. T. L., Madsen, L. B., Rubio, A. & Tancogne-Dejean, P.** ab initio TDDFT-BSE 激子反演. *PRA* **109**, 063104 (2024). arXiv:2307.14693
-11. Jessen, Mero, Vrakking (MBI). 块体 ZnO 激子 HHG. arXiv:2508.09364 (2025).
-12. **Hu, S. et al. (孟胜)** MoS₂ 相干声子耦合 HHG. *PRL* **133**, 156901 (2024). DOI: 10.1103/PhysRevLett.133.156901 ⭐ **国内孟胜 PRL 2024**
-
-### 5.4 磁 HHG（5 篇）
-
-13. Takayoshi, S., Murakami, Y. & Werner, P. 磁 HHG 奠基理论. *PRB* **99**, 094303 (2019). arXiv:1901.07588
-14. **Werner, P., Lysne, M. & Murakami, Y.** **altermagnet HHG 理论先驱**. *PRB* **110**, 235101 (2024). DOI: 10.1103/PhysRevB.110.235101 ⭐
-15. Leeb, V., Mook, A., Šmejkal, L. & Knolle, J. altermagnetism from orbital ordering. *PRL* **132**, 236701 (2024). DOI: 10.1103/PhysRevLett.132.236701
-16. **Šmejkal, L. et al.** altermagnet 实验确认. *Nature* (2022). DOI: 10.1038/s41586-023-06907-7
-17. **Ryan, S., Grafov, A., Na Li (SLAC + Columbia)** **XUV HHG 探测 kagome 铁磁重定向**. *Nat. Commun.* (2025). arXiv:2407.18894 ⭐
-18. Magnetic dynamics driven integer and fractional HHG. *J. Phys. CM* (2024-2025). DOI: 10.1088/1361-648X/adf930
-
-### 5.5 反演方法学（4 篇）
-
-19. **Hu, Y., Zhao, J. & Meng, S.** HHG 多维反演费米面+电声耦合（H₃S）. *PNAS* **121**, e2301234121 (2024). ⭐ **T5 核心**
-20. Hu, S., Biegert, J. et al. BCS 反演. arXiv:2003.02698.
-21. Hansen, K. K. & Madsen, L. B. 1D Hubbard 掺杂依赖. arXiv:2209.04311 (2022).
-22. Klemt, S. et al. NbN 超导量子比特 + HHG 兼容. arXiv:2303.04960 (2023) / NPJ Quantum Mater (2024).
-
-### 5.6 **v0.2 新增 2024-2026 突破** ⭐
-
-23. **Biegert 集团 2024 YBCO HHG 实验**（ICMAB 新闻报道，Nature 2024 突破）⭐⭐ **T4 立项最强证据**
-24. Dziurawiec, Biegert et al. pump-probe HHG 横跨 Mott-CDW. arXiv:2404.14411 (2024).
-25. Erhardt, Beaulieu et al. MoTe₂ 强场声子. arXiv:2508.12239 (2025).
-26. Werner, P. HHG in SCES (Mott insulators). APW 2025 邀请报告.
-
-### 5.7 综述（3 篇）
-
-27. Ghimire, S. & Reis, D. A. HHG from solids. *Nat. Phys.* **15**, 10 (2019).
-28. 李亮、兰鹏飞、陆培祥. HHG in solids: particle and wave perspectives. *Rep. Prog. Phys.* (2024).
-29. Biegert, J. (综述) HHG in correlated materials. arXiv 待核验.
-
-### 5.8 经典基础（4 篇）
-
-30. Ghimire, S. et al. ZnO HHG 奠基. *Nat. Phys.* **7**, 138 (2011).
-31. Vampa, G. et al. HHG 重碰撞模型. *Nature* (2015).
-32. Xiao, D. et al. Berry phase effects. *RMP* (2010).
-33. Hasan, M. Z. & Kane, C. L. Colloquium: Topological insulators. *RMP* (2010).
-
-### 5.9 统计信息（v0.2）
-
-- **总论文数**：**33+ 篇**（v0.1 + v0.2 新增 6-8 篇）
-- **2024-2026**：**9 篇**（v0.1 仅 4 篇，**v0.2 翻倍**）
-- **国内**：3 篇（孟胜 PRL 2024 ⭐ + 孟胜 PNAS 2024 ⭐ + 李亮 RPP 2024）
-
----
-
-## 附录 A：样品池（13 个候选，按 4 类序参量分类）
-
-| 序参量 | 优先级 | 样品 | 商业可得性 | 关键挑战 |
-|--------|--------|------|-----------|----------|
-| **超导** | ★★★★★ | **YBCO 单晶** | ✅ CrysTec / 合肥科晶 | T_c=93K |
-| 超导 | ★★★★ | NbN 薄膜 | ✅ Star Cryoelectronics | T_c=15K |
-| 超导 | ★★★ | BSCCO 单晶 | ✅（待核验）| PDW 隐藏序 |
-| **激子** | ★★★★ | **1L-MoS₂/WS₂** | ✅ CVD 商业（2D Semiconductors）| 单层均匀性 |
-| 激子 | ★★★ | 块体 ZnO | ✅ CrysTec | 激子寿命 |
-| 激子 | ★★ | Cu₂O 单晶 | ✅ 合肥科晶 | 1S 激子 150meV |
-| **磁** | ★★★★★ | **CrI₃ 单晶** | ✅ 2D Semiconductors | T_c=61K |
-| 磁 | ★★★★ | Cr₂Ge₂Te₆ 单晶 | ✅ 2D Semiconductors | 范德华剥离 |
-| 磁 | ★★★★ | **TbMn₆Sn₆**（kagome）| ✅ 商业单晶 | Ryan 2025 验证 |
-| **altermagnet** | ★★★★★ | **CrSb** | ✅ 合肥科晶 / HQ Graphene | d-wave 特征 |
-| altermagnet | ★★★★ | **MnTe** | ✅ 合肥科晶 | T_N=307K |
-| altermagnet | ★★★ | Mn₅Si₃ | ✅ 商业 | i-wave |
-| **CDW** | ★★★★★ | **1T-TiSe₂** | ✅ HQ Graphene | T_CDW=200K |
-| CDW | ★★★★★ | **1L-NbSe₂** | ✅ CVD 商业 | T_CDW=33K, T_c=3K |
-| CDW | ★★★ | 2H-MoTe₂ | ✅ HQ Graphene | 强场声子 |
-
-**全部商业可得或可自制备 ✅**
-
----
-
-## 附录 B：合作者建议（不替用户决策）
-
-### B.1 国内
-- **孟胜组（IOP CAS）**——首选（已有 PRL 2024 + PNAS 2024 + Nature 2023 基础）
-
-### B.2 国际
-- **Biegert 集团（ICFO + ICMAB + GTIIT）**——首选（YBCO 2024 + TiSe₂ 2025 + MoS₂ 涡旋 2024 + altermagnet 2024）**必合作**
-- Werner + Murakami（Fribourg + Tokyo）——altermagnet HHG 理论
-- Puviani（MPI Stuttgart）——超导序参量涨落理论
-- Ryan（SLAC）——kagome 磁重定向
-
-### B.3 关键判断
-
-- **国际合作优先级**：Biegert 集团 > Werner > Puviani
-- **Biegert 集团是 T4 必合作**（YBCO 2024 + TiSe₂ 2025 双发）
-
----
-
-## 附录 C：与 T5 反演方法学接口
-
-```
-HHG 谱 → 4 类序参量反演路径：
-├─ 偏振（序参量对称性：s/d/CDW/磁各向异性）
-├─ 温度（T_c, T_CDW, T_N, T_ex 区分）
-├─ 磁场（SC/磁区分）
-├─ pump-probe（序参量寿命：快 vs 慢）
-└─ 涡旋光 OAM（OAM-序参量耦合）
-    ↓
-物理模型：
-├─ 超导：BCS 紧束缚 + Anderson 赝自旋
-├─ CDW：现象学平均场（Zhang 2025 PRB 模式）
-├─ 磁：k·p + Heisenberg 哈密顿量
-└─ 激子：GW + BSE（孟胜组合作）
-    ↓
-反演算法：
-├─ 贝叶斯（4 类序参量联合反演）
-├─ 神经网络（5 维约束 → 序参量大小/方向/相位）
-└─ 多序解耦（NbSe₂ CDW+SC, kagome 三重序）
-    ↓
-输出：4 类序参量大小/方向/动力学/涨落 + 多解性概率
-    ↓
-验证：与 XRD/STM/ARPES/输运独立对比
-```
-
----
-
-## v0.2 关键升级总结
-
-| 维度 | v0.1 | v0.2 |
-|------|------|------|
-| **2024-2026 新论文** | 4 篇 | **9 篇**（+125%） |
-| **总参考文献** | 30+ 篇 | **33+ 篇** |
-| **关键发现机会** | 5 个 | 6 个（+altermagnet HHG） |
-| **样品池** | 13 个 | 13 个（细化+ altermagnet MnTe/Mn₅Si₃） |
-| **蓝海度** | 半蓝海 | **高蓝海**（4 大新方向） |
-| **申请书级"为什么"** | 1-2 句 | 4-5 段（5 重优势 + 1 重挑战） |
-| **T5 接口** | 1 段 | 完整反演路径图（5 维约束） |
-| **国际合作** | Biegert | Biegert + Werner + Puviani + Ryan |
-
----
-
-*T4 v0.2 完成时间：2026-06-14 15:30*
-*总字数：约 35-40KB*
-*状态：待 6/15 12:30 讨论拍板*
-*v0.1 → v0.2 关键变化：altermagnet HHG（Werner 2024）+ YBCO 序参量涨落（Biegert 2024）+ TiSe₂ CDW 双发（Tyulnev+Zhang 2025）+ kagome 磁（Ryan 2025）4 大新方向*
-
----
-
-## （五）年度研究计划
-
-### Y1（2027.01–2027.12）：平台搭建与理论就绪
-
-- **任务 1**：完成中红外/太赫兹 HHG 平台搭建，实现偏振、温度、磁场 3 维扫描。
-- **任务 2**：建立激子/磁/CDW 序参量的 SBE 正向模型，完成 1L-MoS₂/WS₂、CrI₃、TiSe₂ 基准计算。
-- **任务 3**：完成样品合作对接，获取 1L-NbSe₂、CrSb、MnTe 候选样品。
-- **考核指标**：HHG 平台信噪比满足探测需求；SBE 模型复现 2-3 个文献基准；样品合作意向签订。
-
-### Y2（2028.01–2028.12）：单序参量 HHG 读出验证
-
-- **任务 1**：激子序参量 HHG 读出：1L-MoS₂/WS₂ 温度依赖与椭偏依赖实验。
-- **任务 2**：磁序参量 HHG 读出：CrI₃、CrSb 磁场方向依赖与圆二色性。
-- **任务 3**：CDW 序参量 HHG 读出：TiSe₂ 偏振分辨 HHG 复现与扩展。
-- **考核指标**：3 类单序参量体系均获得可定量分析的 HHG 数据集；反演算法在合成数据上误差 <20%。
-
-### Y3（2029.01–2029.12）：多序共存解耦与超导序参量突破
-
-- **任务 1**：1L-NbSe₂ CDW+SC 双重序 HHG 解耦实验与模型反演。
-- **任务 2**：YBCO 序参量涨落 HHG 指纹测量（T_c 之上三次谐波）。
-- **任务 3**：altermagnet CrSb/MnTe 首次固体 HHG 实验尝试。
-- **考核指标**：双重序解耦准确率 >75%；YBCO THG 温度依赖曲线获得；altermagnet HHG 信号可辨识。
-
-### Y4（2030.01–2030.12）：方法学整合、闭环校准与产出
-
-- **任务 1**：5 维光场约束反演框架整合，误差棒量化。
-- **任务 2**：多序共存体系（NbSe₂/kagome）完整反演与交叉验证。
-- **任务 3**：论文、专利、软件与数据集整理发布。
-- **考核指标**：反演算法在实测数据上误差 <25%；4 篇以上核心论文发表；1 套开源软件发布。
-
----
-
-## （六）预期研究成果
-
-### 6.1 论文发表
-
-按"基础产出（必达）+ 目标产出（高回报）+ 拓展产出（择优）"分层：
-
-**基础产出（4 年 4-6 篇）**：
-- Y2 末：1 篇 altermagnet HHG 理论/实验（Phys. Rev. B 或 New J. Phys. 级别）
-- Y3 末：1 篇 1L-NbSe₂ CDW+SC 双重序 HHG 解耦（Phys. Rev. Lett. 或 Nat. Commun. 级别）
-- Y3 末：1 篇 YBCO 序参量涨落 HHG 指纹（Phys. Rev. Lett. 级别）
-- Y4 末：1 篇多序共存 HHG 解耦方法学（Nat. Commun. 或 PRL 级别）
-
-**目标产出（高风险高回报）**：
-- Y4 末：1 篇 Nature/Science 级别论文，报道首例 altermagnet 固体 HHG 实验或 NbSe₂ 双重序完整反演。
-
-**拓展产出（1-2 篇）**：
-- kagome 磁材料 HHG-XUV 探测、TiSe₂ CDW 各向异性等 Phys. Rev. B 级别论文。
-
-### 6.2 专利与软件
-
-- **专利 1**：多维光场 HHG 序参量反演算法（Y3 申请）
-- **专利 2**：强场超快序参量读出装置与方法（Y4 申请）
-- **软件 1**：HHG 序参量反演开源工具包（GitHub + 文档，Y4 发布）
-- **数据集 1**：4 类序参量 HHG 多维扫描数据集（开放发布）
-
-### 6.3 人才培养
-
-- 博士生 2-3 名（Y1-Y2 入学，Y4-Y5 毕业）
-- 硕士生 3-4 名
-- 博士后 1-2 名（从事反演算法与超快光谱实验）
-
----
-
-## 节 5：参考文献（≥40 篇）
-
-### 5.1 超导 HHG（4 篇）
-
-1. Iwai, S. et al. Petahertz-scale current in YBCO. *Nat. Commun.* (2021). DOI 待核验
-2. **Alcalá, J., Bhattacharya, U., Biegert, J. et al.** HHG spectroscopy of high-Tc superconductor phase transitions. *PNAS* **119**, e2207766119 (2022). DOI: 10.1073/pnas.2207766119 ⭐ **T4 立项奠基**
-3. Puviani, M., Haenel, S. & Manske, D. quench-drive 2D HHG spectroscopy. *PRB* **107**, 094501 (2023). arXiv:2112.12123
-4. **Puviani, M.** HHG in T_c 之上三次谐波序参量涨落. *PRB* **109**, 214515 (2024). arXiv:2402.02120 ⭐ **理论突破**
-
-### 5.2 CDW HHG（4 篇）
-
-5. **Ahmed, S., Yoo, S. & Prasankumar, R. P.** HHG in CDW+SC systems. arXiv:2008.07131 (2020).
-6. Rehn, D. A., Ahmed, S. & Prasankumar, R. P. CDW 序参量 HHG 系统理论. arXiv:2310.03080 (2023).
-7. **Tyulnev, I. et al. (Biegert)** TiSe₂ CDW HHG 实验. *Commun. Mater.* **6**, 152 (2025). DOI: 10.1038/s43246-025-00873-5 ⭐
-8. **Zhang, L., Tyulnev, I., Biegert, J., Lewenstein, M. et al.** Revealing anisotropic CDW order via HHG. *PRB* **112**, 085147 (2025). DOI: 10.1103/812z-nl4m ⭐
-
-### 5.3 激子 HHG（4 篇）
-
-9. Schmid, C. P. et al. 激子 HHG 早期奠基. *PRL* **121**, 133201 (2018).
-10. **Jensen, E. T. L., Madsen, L. B., Rubio, A. & Tancogne-Dejean, P.** ab initio TDDFT-BSE 激子反演. *PRA* **109**, 063104 (2024). arXiv:2307.14693
-11. Jessen, Mero, Vrakking (MBI). 块体 ZnO 激子 HHG. arXiv:2508.09364 (2025).
-12. **Hu, S. et al. (孟胜)** MoS₂ 相干声子耦合 HHG. *PRL* **133**, 156901 (2024). DOI: 10.1103/PhysRevLett.133.156901 ⭐ **国内孟胜 PRL 2024**
-
-### 5.4 磁 HHG（5 篇）
-
-13. Takayoshi, S., Murakami, Y. & Werner, P. 磁 HHG 奠基理论. *PRB* **99**, 094303 (2019). arXiv:1901.07588
-14. **Werner, P., Lysne, M. & Murakami, Y.** **altermagnet HHG 理论先驱**. *PRB* **110**, 235101 (2024). DOI: 10.1103/PhysRevB.110.235101 ⭐
-15. Leeb, V., Mook, A., Šmejkal, L. & Knolle, J. altermagnetism from orbital ordering. *PRL* **132**, 236701 (2024). DOI: 10.1103/PhysRevLett.132.236701
-16. **Šmejkal, L. et al.** altermagnet 实验确认. *Nature* (2022). DOI: 10.1038/s41586-023-06907-7
-17. **Ryan, S., Grafov, A., Na Li (SLAC + Columbia)** **XUV HHG 探测 kagome 铁磁重定向**. *Nat. Commun.* (2025). arXiv:2407.18894 ⭐
-18. Magnetic dynamics driven integer and fractional HHG. *J. Phys. CM* (2024-2025). DOI: 10.1088/1361-648X/adf930
-
-### 5.5 反演方法学（4 篇）
-
-19. **Hu, Y., Zhao, J. & Meng, S.** HHG 多维反演费米面+电声耦合（H₃S）. *PNAS* **121**, e2301234121 (2024). ⭐ **T5 核心**
-20. Hu, S., Biegert, J. et al. BCS 反演. arXiv:2003.02698.
-21. Hansen, K. K. & Madsen, L. B. 1D Hubbard 掺杂依赖. arXiv:2209.04311 (2022).
-22. Klemt, S. et al. NbN 超导量子比特 + HHG 兼容. arXiv:2303.04960 (2023) / NPJ Quantum Mater (2024).
-
-### 5.6 **v0.2 新增 2024-2026 突破** ⭐
-
-23. **Biegert 集团 2024 YBCO HHG 实验**（ICMAB 新闻报道，Nature 2024 突破）⭐⭐ **T4 立项最强证据**
-24. Dziurawiec, Biegert et al. pump-probe HHG 横跨 Mott-CDW. arXiv:2404.14411 (2024).
-25. Erhardt, Beaulieu et al. MoTe₂ 强场声子. arXiv:2508.12239 (2025).
-26. Werner, P. HHG in SCES (Mott insulators). APW 2025 邀请报告.
-
-### 5.7 综述（3 篇）
-
-27. Ghimire, S. & Reis, D. A. HHG from solids. *Nat. Phys.* **15**, 10 (2019).
-28. 李亮、兰鹏飞、陆培祥. HHG in solids: particle and wave perspectives. *Rep. Prog. Phys.* (2024).
-29. Biegert, J. (综述) HHG in correlated materials. arXiv 待核验.
-
-### 5.8 经典基础（4 篇）
-
-30. Ghimire, S. et al. ZnO HHG 奠基. *Nat. Phys.* **7**, 138 (2011).
-31. Vampa, G. et al. HHG 重碰撞模型. *Nature* (2015).
-32. Xiao, D. et al. Berry phase effects. *RMP* (2010).
-33. Hasan, M. Z. & Kane, C. L. Colloquium: Topological insulators. *RMP* (2010).
-
-### 5.9 统计信息（v0.2）
-
-- **总论文数**：**33+ 篇**（v0.1 + v0.2 新增 6-8 篇）
-- **2024-2026**：**9 篇**（v0.1 仅 4 篇，**v0.2 翻倍**）
-- **国内**：3 篇（孟胜 PRL 2024 ⭐ + 孟胜 PNAS 2024 ⭐ + 李亮 RPP 2024）
-
----
-
-## 附录 A：样品池（13 个候选，按 4 类序参量分类）
-
-| 序参量 | 优先级 | 样品 | 商业可得性 | 关键挑战 |
-|--------|--------|------|-----------|----------|
-| **超导** | ★★★★★ | **YBCO 单晶** | ✅ CrysTec / 合肥科晶 | T_c=93K |
-| 超导 | ★★★★ | NbN 薄膜 | ✅ Star Cryoelectronics | T_c=15K |
-| 超导 | ★★★ | BSCCO 单晶 | ✅（待核验）| PDW 隐藏序 |
-| **激子** | ★★★★ | **1L-MoS₂/WS₂** | ✅ CVD 商业（2D Semiconductors）| 单层均匀性 |
-| 激子 | ★★★ | 块体 ZnO | ✅ CrysTec | 激子寿命 |
-| 激子 | ★★ | Cu₂O 单晶 | ✅ 合肥科晶 | 1S 激子 150meV |
-| **磁** | ★★★★★ | **CrI₃ 单晶** | ✅ 2D Semiconductors | T_c=61K |
-| 磁 | ★★★★ | Cr₂Ge₂Te₆ 单晶 | ✅ 2D Semiconductors | 范德华剥离 |
-| 磁 | ★★★★ | **TbMn₆Sn₆**（kagome）| ✅ 商业单晶 | Ryan 2025 验证 |
-| **altermagnet** | ★★★★★ | **CrSb** | ✅ 合肥科晶 / HQ Graphene | d-wave 特征 |
-| altermagnet | ★★★★ | **MnTe** | ✅ 合肥科晶 | T_N=307K |
-| altermagnet | ★★★ | Mn₅Si₃ | ✅ 商业 | i-wave |
-| **CDW** | ★★★★★ | **1T-TiSe₂** | ✅ HQ Graphene | T_CDW=200K |
-| CDW | ★★★★★ | **1L-NbSe₂** | ✅ CVD 商业 | T_CDW=33K, T_c=3K |
-| CDW | ★★★ | 2H-MoTe₂ | ✅ HQ Graphene | 强场声子 |
-
-**全部商业可得或可自制备 ✅**
-
----
-
-## 附录 B：合作者建议（不替用户决策）
-
-### B.1 国内
-- **孟胜组（IOP CAS）**——首选（已有 PRL 2024 + PNAS 2024 + Nature 2023 基础）
-
-### B.2 国际
-- **Biegert 集团（ICFO + ICMAB + GTIIT）**——首选（YBCO 2024 + TiSe₂ 2025 + MoS₂ 涡旋 2024 + altermagnet 2024）**必合作**
-- Werner + Murakami（Fribourg + Tokyo）——altermagnet HHG 理论
-- Puviani（MPI Stuttgart）——超导序参量涨落理论
-- Ryan（SLAC）——kagome 磁重定向
-
-### B.3 关键判断
-
-- **国际合作优先级**：Biegert 集团 > Werner > Puviani
-- **Biegert 集团是 T4 必合作**（YBCO 2024 + TiSe₂ 2025 双发）
-
----
-
-## 附录 C：与 T5 反演方法学接口
-
-```
-HHG 谱 → 4 类序参量反演路径：
-├─ 偏振（序参量对称性：s/d/CDW/磁各向异性）
-├─ 温度（T_c, T_CDW, T_N, T_ex 区分）
-├─ 磁场（SC/磁区分）
-├─ pump-probe（序参量寿命：快 vs 慢）
-└─ 涡旋光 OAM（OAM-序参量耦合）
-    ↓
-物理模型：
-├─ 超导：BCS 紧束缚 + Anderson 赝自旋
-├─ CDW：现象学平均场（Zhang 2025 PRB 模式）
-├─ 磁：k·p + Heisenberg 哈密顿量
-└─ 激子：GW + BSE（孟胜组合作）
-    ↓
-反演算法：
-├─ 贝叶斯（4 类序参量联合反演）
-├─ 神经网络（5 维约束 → 序参量大小/方向/相位）
-└─ 多序解耦（NbSe₂ CDW+SC, kagome 三重序）
-    ↓
-输出：4 类序参量大小/方向/动力学/涨落 + 多解性概率
-    ↓
-验证：与 XRD/STM/ARPES/输运独立对比
-```
-
----
-
-## v0.2 关键升级总结
-
-| 维度 | v0.1 | v0.2 |
-|------|------|------|
-| **2024-2026 新论文** | 4 篇 | **9 篇**（+125%） |
-| **总参考文献** | 30+ 篇 | **33+ 篇** |
-| **关键发现机会** | 5 个 | 6 个（+altermagnet HHG） |
-| **样品池** | 13 个 | 13 个（细化+ altermagnet MnTe/Mn₅Si₃） |
-| **蓝海度** | 半蓝海 | **高蓝海**（4 大新方向） |
-| **申请书级"为什么"** | 1-2 句 | 4-5 段（5 重优势 + 1 重挑战） |
-| **T5 接口** | 1 段 | 完整反演路径图（5 维约束） |
-| **国际合作** | Biegert | Biegert + Werner + Puviani + Ryan |
-
----
-
-*T4 v0.2 完成时间：2026-06-14 15:30*
-*总字数：约 35-40KB*
-*状态：待 6/15 12:30 讨论拍板*
-*v0.1 → v0.2 关键变化：altermagnet HHG（Werner 2024）+ YBCO 序参量涨落（Biegert 2024）+ TiSe₂ CDW 双发（Tyulnev+Zhang 2025）+ kagome 磁（Ryan 2025）4 大新方向*
+## （七）参考文献
+
+### 1. 超导与耦合序的非线性谐波响应
+
+1. Kawakami, Y. et al. Symmetry breaking driven by petahertz electron acceleration in a centrosymmetric organic superconductor. *Nat. Photonics* (2020). DOI: 10.1038/s41566-020-00717-3; arXiv:2007.10762.
+2. Matsunaga, R. et al. Polarization-resolved terahertz third-harmonic generation in a superconductor NbN: Dominance of the Higgs mode beyond the BCS approximation. *Phys. Rev. B* **96**, 020505 (2017). DOI: 10.1103/PhysRevB.96.020505; arXiv:1703.02815.
+3. Alcalá, J. et al. High-harmonic spectroscopy of high-temperature superconductor phase transitions. *Proc. Natl. Acad. Sci. U.S.A.* **119**, e2207766119 (2022). DOI: 10.1073/pnas.2207766119.
+4. Puviani, M., Haenel, R. & Manske, D. Quench-drive spectroscopy and high-harmonic generation in BCS superconductors. *Phys. Rev. B* **107**, 094501 (2023). DOI: 10.1103/PhysRevB.107.094501; arXiv:2112.12123.
+5. Puviani, M. Theory of symmetry-resolved quench-drive spectroscopy: Nonlinear response of phase-fluctuating superconductors. *Phys. Rev. B* **109**, 214515 (2024). arXiv:2402.02120.
+6. Feng, X. et al. Dissecting coupled orders in a terahertz-driven electron-doped cuprate. arXiv:2504.11947 (2025) [预印本].
+7. Li, X. & Weng, Z.-Y. Terahertz nonlinear response in cuprate superconductors and the Higgs field in a d-wave superconductor. arXiv:2509.08370 (2025) [预印本]. DOI: 10.1103/dvy6-r5sr.
+8. Xu, S. et al. Multimodal THz spectroscopy of the pairing symmetry and normal-state pseudogap. arXiv:2604.04421 (2026) [预印本].
+
+### 2. 电荷密度波、Mott 相变与强关联体系
+
+9. Ahmed, S., Yoo, J., Prasankumar, R. P. & Zhu, J.-X. High-harmonic generation in a charge-density-wave system. arXiv:2008.07131 (2020) [预印本].
+10. Rehn, D. A. et al. Theoretical study of high-harmonic generation in monolayer NbSe₂. *J. Phys. Chem. C* (2025). DOI: 10.1021/acs.jpcc.5c05450; arXiv:2310.03080.
+11. Tyulnev, I. et al. High harmonic spectroscopy reveals anisotropy of the Mott-to-charge-density-wave phase transition in TiSe₂. *Commun. Mater.* **6**, 152 (2025). DOI: 10.1038/s43246-025-00873-5; arXiv:2409.04216.
+12. Zhang, L. et al. Revealing the anisotropic charge-density-wave order of TiSe₂ through high harmonic generation. *Phys. Rev. B* **112**, 085147 (2025). DOI: 10.1103/PhysRevB.112.085147; arXiv:2412.13329.
+13. Dziurawiec, M. et al. High harmonic tracking of ultrafast electron dynamics across the Mott-to-charge-density-wave phase transition. arXiv:2404.14411 (2024) [预印本].
+14. Girotto Erhardt, N. et al. Ultrafast nonequilibrium enhancement of electron-phonon interaction in 2H-MoTe₂. arXiv:2508.12239 (2025) [预印本].
+15. Hansen, T. & Madsen, L. B. Doping effects in high-harmonic generation from correlated systems. *Phys. Rev. B* **106**, 235142 (2022). DOI: 10.1103/PhysRevB.106.235142; arXiv:2209.04311.
+16. Murakami, Y., Hansen, T., Takayoshi, S., Madsen, L. B. & Werner, P. High-harmonic generation in a Hubbard ladder: Effects of spin dynamics. *Phys. Rev. Lett.* **134**, 096504 (2025). arXiv:2407.01936.
+17. Murakami, Y., Eckstein, M. & Werner, P. High-harmonic generation in Mott insulators. *Phys. Rev. Lett.* **121**, 057405 (2018). DOI: 10.1103/PhysRevLett.121.057405.
+18. Du, T. et al. Tracking doublon-holon dynamics in high-harmonic generation from Mott insulators. arXiv:2605.01388 (2026) [预印本].
+
+### 3. 激子与电子—声子耦合
+
+19. Schmid, C. P. et al. Tunable non-integer high-harmonic generation in a monolayer semiconductor. *Phys. Rev. Lett.* **121**, 133201 (2018). DOI: 10.1103/PhysRevLett.121.133201.
+20. Jensen, S. V. B., Madsen, L. B., Rubio, A. & Tancogne-Dejean, N. High-harmonic spectroscopy of strongly bound excitons in solids. *Phys. Rev. A* **109**, 063104 (2024). DOI: 10.1103/PhysRevA.109.063104; arXiv:2307.14693.
+21. Jessen, S. P. S. et al. The interplay between high-harmonic generation and photoluminescence in ZnO: Anisotropic spectral properties of harmonic emission and the role of excitons. arXiv:2508.09364 (2025) [预印本].
+22. Hu, S.-Q., Chen, D.-Q., Du, L.-L. & Meng, S. Solid-state high-harmonic spectroscopy for all-optical band-structure probing of high-pressure quantum states. *Proc. Natl. Acad. Sci. U.S.A.* **121**, e2316775121 (2024). DOI: 10.1073/pnas.2316775121.
+
+### 4. 磁序与交错磁体
+
+23. Takayoshi, S., Murakami, Y. & Werner, P. High-harmonic generation in quantum spin systems. *Phys. Rev. B* **99**, 184303 (2019). DOI: 10.1103/PhysRevB.99.184303; arXiv:1901.07588.
+24. Werner, P., Lysne, M. & Murakami, Y. High harmonic generation in altermagnets. arXiv:2407.07752 (2024) [预印本].
+25. Šmejkal, L., Sinova, J. & Jungwirth, T. Altermagnetic lifting of Kramers spin degeneracy. *Phys. Rev. X* **12**, 040006 (2022). DOI: 10.1103/PhysRevX.12.040006; arXiv:2204.10844.
+26. Leeb, V., Mook, A., Šmejkal, L. & Knolle, J. Spontaneous formation of altermagnetism from orbital ordering. *Phys. Rev. Lett.* **132**, 236701 (2024). DOI: 10.1103/PhysRevLett.132.236701; arXiv:2312.10839.
+27. Ryan, S. A. et al. Uncovering the timescales of spin reorientation in TbMn₆Sn₆. arXiv:2407.18894 (2024) [预印本].
+28. Garcia-Gaitan, F., Feiguin, A. E. & Nikolić, B. K. Light-driven Néel-vector and nonequilibrium magnetization dynamics in NiO accompanied by integer and noninteger harmonics. arXiv:2502.00849 (2025) [预印本].
+29. Gabriele, F., Ortix, C., Cuoco, M. & Forte, F. High-harmonic signatures of spin textures and dynamical rotational-symmetry breaking. arXiv:2501.04545 (2025) [预印本].
+30. Ly, O. et al. High-order spin- and charge-pumping harmonics driven by altermagnetic-order dynamics. arXiv:2602.09738 (2026) [预印本].
+31. Cheng, H. et al. Ultrafast altermagnetophononics. arXiv:2607.13863 (2026) [预印本].
+
+### 5. 反演、时空结构光与实验方法
+
+32. Uzan, A. J. et al. Multi-band petahertz currents resolved via high-harmonic generation spectroscopy. arXiv:1812.02498 (2018) [预印本].
+33. Locher, R. et al. Self-attention-enabled quantum-path analysis of high-harmonic generation in solids. arXiv:2510.12443 (2025) [预印本].
+34. Broughton, N. et al. Beyond the plateau: A phenomenological review of the cutoff in solid high-harmonic generation. *J. Phys. Photonics* (2026). DOI: 10.1088/2515-7647/ae7f5a.
+35. Granados, C. et al. Carrier-envelope-phase control of orbital angular momentum in solid-state high-harmonic generation. arXiv:2607.23652 (2026) [预印本].
+36. Mandal, S., Kumar, A., Pi, L., Kim, H., Zhan, M. & Goulielmakis, E. A precision apparatus for high-harmonic spectroscopy in bulk solids. arXiv:2512.13311 (2025) [预印本].
+37. Pisanty, E. et al. Formation and control of optical hopfions in high-harmonic generation. arXiv:2410.06032 (2024) [预印本].
+
+### 6. 综述与路线图
+
+38. Ghimire, S. & Reis, D. A. High-harmonic generation from solids. *Nat. Phys.* **15**, 10–16 (2019). DOI: 10.1038/s41567-019-0674-z.
+39. Li, L., Lan, P., Zhu, X. & Lu, P. High harmonic generation in solids: Particle and wave perspectives. *Rep. Prog. Phys.* **86**, 084401 (2023). DOI: 10.1088/1361-6633/acf144; arXiv:2304.12547.
+40. Borrego Varillas, R. et al. Solid-state high-order harmonic generation: Emerging frontiers in ultrafast and quantum light science. arXiv:2510.15207 (2025) [预印本].
+41. Borrego Varillas, R. et al. Roadmap on attosecond science. arXiv:2604.15085 (2026) [预印本].
+
+### 7. 固态 HHG、Berry 相位与拓扑基础
+
+42. Ghimire, S. et al. Observation of high-order harmonic generation in a bulk crystal. *Nat. Phys.* **7**, 138–141 (2011). DOI: 10.1038/nphys1847.
+43. Vampa, G. et al. Linking high harmonics from gases and solids. *Nature* **522**, 462–464 (2015). DOI: 10.1038/nature14517.
+44. Xiao, D., Chang, M.-C. & Niu, Q. Berry phase effects on electronic properties. *Rev. Mod. Phys.* **82**, 1959–2007 (2010). DOI: 10.1103/RevModPhys.82.1959.
+45. Hasan, M. Z. & Kane, C. L. Colloquium: Topological insulators. *Rev. Mod. Phys.* **82**, 3045–3067 (2010). DOI: 10.1103/RevModPhys.82.3045.
+46. Qi, X.-L. & Zhang, S.-C. Topological insulators and superconductors. *Rev. Mod. Phys.* **83**, 1057–1110 (2011). DOI: 10.1103/RevModPhys.83.1057.

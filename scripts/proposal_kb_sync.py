@@ -117,8 +117,9 @@ def _extract_key_files(prop_dir: Path) -> List[Dict[str, str]]:
     key_paths = [
         ("proposal-brief", "00_proposal-brief.md"),
         ("question-framework", "03_question/question-framework.md"),
+        ("method-manual", "03_method/method-manual.md"),
+        ("reading-notes", "02_literature/reading-notes.md"),
         ("proposal-draft", "04_proposal/proposal-draft.md"),
-        ("methodology-manual", "04_proposal/methodology-manual.md"),
     ]
     for label, rel_path in key_paths:
         p = prop_dir / rel_path

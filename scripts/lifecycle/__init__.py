@@ -39,7 +39,6 @@ from .utils import (
     _make_job_id,
     _save_jobs,
     _save_weekend_jobs,
-    _section_for_round,
     _write_wrapper_script,
 )
 
@@ -78,6 +77,5 @@ __all__ = [
     "_make_job_id",
     "_save_jobs",
     "_save_weekend_jobs",
-    "_section_for_round",
     "_write_wrapper_script",
 ]

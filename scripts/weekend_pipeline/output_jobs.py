@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import re
+import shutil
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List
@@ -154,8 +155,31 @@ def run_output_extract(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool
     return {"success": False, "error": f"未知 extract job: {job_id}"}
 
 
+def _archive_proposal_files(proposal_id: str, prop_dir: Path) -> Dict[str, Any]:
+    """将 proposal 核心产物复制到 knowledge/raw/projects/{proposal_id}/。"""
+    archive_dir = PROJECT_ROOT / "knowledge" / "raw" / "projects" / proposal_id
+    archive_dir.mkdir(parents=True, exist_ok=True)
+
+    files_to_archive = [
+        ("00_proposal-brief.md", "研究设想"),
+        ("03_method/method-manual.md", "方法学手册"),
+        ("02_literature/reading-notes.md", "文献阅读笔记"),
+        ("04_proposal/proposal-draft.md", "申请书"),
+    ]
+
+    archived = []
+    for rel_path, label in files_to_archive:
+        src = prop_dir / rel_path
+        if src.exists():
+            dst = archive_dir / src.name
+            shutil.copy2(src, dst)
+            archived.append({"label": label, "path": str(dst.relative_to(PROJECT_ROOT))})
+
+    return {"success": True, "archive_dir": str(archive_dir.relative_to(PROJECT_ROOT)), "archived": archived}
+
+
 def _extract_archived_proposal(proposal_id: str, dry_run: bool = False) -> Dict[str, Any]:
-    """从已归档 proposal 萃取可靠知识。"""
+    """从已归档 proposal 萃取可靠知识，并归档核心产物。"""
     lc = ProposalLifecycle()
     prop_dir = lc._find_proposal_dir(proposal_id)
     if not prop_dir:
@@ -168,17 +192,26 @@ def _extract_archived_proposal(proposal_id: str, dry_run: bool = False) -> Dict[
     if dry_run:
         return {"success": True, "proposal_id": proposal_id, "dry_run": True, "message": "dry-run 跳过归档萃取"}
 
+    # 1. 归档核心产物到 knowledge/raw/projects/
+    archive_result = _archive_proposal_files(proposal_id, prop_dir)
+
     if not is_llm_available():
-        return {"success": False, "error": "LLM 不可用"}
+        return {"success": False, "error": "LLM 不可用", "archive_result": archive_result}
+
+    # 2. 从申请书 + 方法学手册萃取可靠知识
+    method_text = _read_text(prop_dir / "03_method" / "method-manual.md", 4000)
+    combined_text = proposal_text[:4000]
+    if method_text:
+        combined_text += f"\n\n【方法学手册补充】\n{method_text[:2000]}"
 
     system = (
         "你是林赛，擅长从归档申请书中萃取可靠知识。只提取有明确依据的概念、方法、关键论文和创新点。"
         "输出合法 JSON。"
     )
-    user = f"""请从以下已归档 NSFC 申请书中萃取知识：
+    user = f"""请从以下已归档 NSFC 申请书（含方法学手册）中萃取知识：
 
 ```
-{proposal_text[:4000]}
+{combined_text}
 ```
 
 输出格式：
@@ -191,9 +224,6 @@ def _extract_archived_proposal(proposal_id: str, dry_run: bool = False) -> Dict[
 """
     extracted = _llm_json(system, user, timeout=120) or {}
 
-    if dry_run:
-        return {"success": True, "extracted": extracted, "dry_run": True}
-
     results: Dict[str, List[Dict[str, Any]]] = {"concepts": [], "methods": [], "people": [], "papers": []}
     source_meta = {"title": proposal_id, "source_type": "archived_proposal"}
     for c in extracted.get("concepts", []):
@@ -205,7 +235,7 @@ def _extract_archived_proposal(proposal_id: str, dry_run: bool = False) -> Dict[
     for p in extracted.get("papers", []):
         results["papers"].append(_write_wiki_page("paper", p["title"], p.get("authors", ""), [source_meta], RELIABILITY_RELIABLE))
 
-    return {"success": True, "proposal_id": proposal_id, "results": results}
+    return {"success": True, "proposal_id": proposal_id, "archive_result": archive_result, "results": results}
 
 
 def run_output_collect_daily_sources(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
