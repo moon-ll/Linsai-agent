@@ -679,10 +679,9 @@ class SystemRoutesMixin:
                 result = lc.archive_proposal(proposal_id, reason or "用户审核通过", verdict)
                 self._send_json({"status": "ok", "action": "archived", "data": result})
             elif verdict == "reject":
-                # 保存审核意见为 feedback，然后回到 optimizing
+                # 保存审核意见为 feedback；submit_feedback 内部已完成到 optimizing 的流转
                 feedback_text = reason or "用户审核不通过，请根据审核意见修改。"
-                lc.submit_feedback(proposal_id, feedback_text, verdict="major_revision")
-                result = lc.transition(proposal_id, "optimizing", reason or "用户审核退回修改")
+                result = lc.submit_feedback(proposal_id, feedback_text, verdict="major_revision")
                 self._send_json({"status": "ok", "action": "optimizing", "data": result})
             else:  # pause
                 self._send_json({"status": "ok", "action": "paused", "message": "已暂停，保持待审核状态"})
@@ -769,13 +768,13 @@ class SystemRoutesMixin:
                 action = "archived"
             elif verdict == "reject":
                 feedback_text = reason or "用户审核不通过，请根据审核意见修改。"
+                # submit_feedback 内部已完成到 optimizing 的流转
                 lc.submit_feedback(
                     proposal_id,
                     feedback_text,
                     verdict="major_revision",
                     structured_feedback=structured,
                 )
-                lc.transition(proposal_id, "optimizing", reason or "用户审核退回修改")
                 action = "optimizing"
             else:
                 action = "paused"

@@ -553,18 +553,67 @@ async function loadReviewContent(proposalId) {
   }
 }
 
+// v6.7.13: 轻量 Markdown 渲染（支持常用语法，不依赖外部库）
+function renderMarkdown(text) {
+  if (!text) return '';
+  // 先整体 HTML 转义，再逐步替换为 HTML 标签
+  let html = escapeHtml(text);
+
+  // 1. 代码块 ```...```
+  html = html.replace(/```([\s\S]*?)```/g, (_, code) => {
+    return `<pre style="background:var(--bg-tertiary);padding:10px;border-radius:6px;overflow-x:auto;font-size:0.82rem;line-height:1.5;"><code>${code.replace(/^\n|\n$/g, '')}</code></pre>`;
+  });
+
+  // 2. 行内代码 `...`
+  html = html.replace(/`([^`]+)`/g, '<code style="background:var(--bg-tertiary);padding:2px 4px;border-radius:4px;font-size:0.85em;">$1</code>');
+
+  // 3. 标题 #..######
+  html = html.replace(/^#{6}\s+(.*)$/gm, '<h6 style="margin:14px 0 6px;color:var(--text-primary);">$1</h6>');
+  html = html.replace(/^#{5}\s+(.*)$/gm, '<h5 style="margin:14px 0 6px;color:var(--text-primary);">$1</h5>');
+  html = html.replace(/^#{4}\s+(.*)$/gm, '<h4 style="margin:14px 0 6px;color:var(--text-primary);">$1</h4>');
+  html = html.replace(/^#{3}\s+(.*)$/gm, '<h3 style="margin:16px 0 8px;color:var(--text-primary);">$1</h3>');
+  html = html.replace(/^#{2}\s+(.*)$/gm, '<h2 style="margin:18px 0 10px;color:var(--text-primary);">$1</h2>');
+  html = html.replace(/^#{1}\s+(.*)$/gm, '<h1 style="margin:20px 0 12px;color:var(--text-primary);">$1</h1>');
+
+  // 4. 粗体、斜体
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+  html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+  html = html.replace(/_([^_]+)_/g, '<em>$1</em>');
+
+  // 5. 链接 [text](url)
+  html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener" style="color:var(--accent-color);">$1</a>');
+
+  // 6. 引用 >
+  html = html.replace(/^&gt;\s+(.*)$/gm, '<blockquote style="border-left:3px solid var(--accent-color);padding-left:10px;margin:8px 0;color:var(--text-secondary);">$1</blockquote>');
+
+  // 7. 分隔线 --- / *** / ___
+  html = html.replace(/^(\s*[-*_]{3,}\s*)$/gm, '<hr style="border:none;border-top:1px solid var(--border-color);margin:16px 0;">');
+
+  // 8. 列表：先按段落处理
+  const paragraphs = html.split(/\n\n+/);
+  const processed = paragraphs.map(p => {
+    const lines = p.split('\n');
+    if (lines.every(l => /^\s*[-*+]\s/.test(l))) {
+      const items = lines.map(l => l.replace(/^\s*[-*+]\s+(.*)$/, '<li style="margin:4px 0;">$1</li>')).join('');
+      return `<ul style="padding-left:1.5em;margin:8px 0;">${items}</ul>`;
+    }
+    if (lines.every(l => /^\s*\d+\.\s/.test(l))) {
+      const items = lines.map(l => l.replace(/^\s*\d+\.\s+(.*)$/, '<li style="margin:4px 0;">$1</li>')).join('');
+      return `<ol style="padding-left:1.5em;margin:8px 0;">${items}</ol>`;
+    }
+    // 普通段落：将内部单换行转成 <br>
+    return `<p style="margin:0 0 0.8em 0;line-height:1.7;">${p.replace(/\n/g, '<br>')}</p>`;
+  });
+
+  return processed.join('\n');
+}
+
 function renderReviewSection(name) {
   const bodyEl = document.getElementById('review-content-body');
   if (!bodyEl) return;
   const content = _reviewSections[name] || '（本章节暂无内容）';
-  // 简单 markdown 换行与标题着色
-  const html = escapeHtml(content)
-    .replace(/\n/g, '<br>')
-    .replace(/^(#{1,6})\s+(.+)$/gm, (_, hashes, title) => {
-      const level = Math.min(hashes.length + 1, 6);
-      return `<h${level} style="margin:12px 0 6px;color:var(--text-primary);">${escapeHtml(title)}</h${level}>`;
-    });
-  bodyEl.innerHTML = `<div class="review-section-title" style="font-weight:600;margin-bottom:12px;color:var(--accent-color);">${escapeHtml(name)}</div><div>${html}</div>`;
+  bodyEl.innerHTML = `<div class="review-section-title" style="font-weight:600;margin-bottom:12px;color:var(--accent-color);">${escapeHtml(name)}</div><div>${renderMarkdown(content)}</div>`;
 }
 
 // ============================================

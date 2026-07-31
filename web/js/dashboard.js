@@ -40,7 +40,7 @@ async function renderDashboard() {
     // 林赛主动开场
     const hour = new Date().getHours();
     const greeting = hour < 6 ? '夜深了' : hour < 12 ? '早上好' : hour < 18 ? '下午好' : '晚上好';
-    const totalPending = (data.papers.unseen || 0) + (data.tasks.active || 0) + (data.tasks.backlog || 0) + (data.decisions_total || 0) + alerts.length;
+    const totalPending = (data.papers.unseen || 0) + (data.tasks.active || 0) + (data.tasks.backlog || 0) + (stages.pending_review?.count || 0) + alerts.length;
 
     let html = '';
 
@@ -53,8 +53,8 @@ async function renderDashboard() {
     // === 统计卡片 ===
     html += '<div class="dash-stats-row">';
     html += renderStatCard('📄', '文献待处理', data.papers.unseen || 0, '查看简报', "switchToView('kb')", 'var(--info-color)');
-    html += renderStatCard('📋', '任务待办', (data.tasks.active || 0) + (data.tasks.backlog || 0), '查看任务', "switchToView('hermes')", 'var(--warning-color)');
-    html += renderStatCard('📌', '待决策', data.decisions_total || 0, '去决策', "dashOpenDecisions()", 'var(--accent-color)');
+    html += renderStatCard('🔬', '待校验课题', stages.pending_review?.count || 0, '去审核', "switchToView('lifecycle')", 'var(--warning-color)');
+    html += renderStatCard('📋', '任务待办', (data.tasks.active || 0) + (data.tasks.backlog || 0), '查看任务', "switchToView('hermes')", 'var(--accent-color)');
     html += renderStatCard('🎛️', '告警/异常', alerts.length, '控制台', "switchToView('console')", alerts.length ? 'var(--error-color)' : 'var(--success-color)');
     html += '</div>';
 
@@ -80,11 +80,10 @@ async function renderDashboard() {
 
     html += '</div>';
 
-    // === 底部：文献/任务/决策快捷预览 ===
+    // === 底部：文献/任务快捷预览 ===
     html += '<div class="dash-preview-grid">';
     html += renderPapersPreview(data.papers);
     html += renderTasksPreview(data.tasks);
-    html += renderDecisionsPreview(data.decisions || [], data.decisions_total || 0);
     html += '</div>';
 
     container.innerHTML = html;
@@ -135,11 +134,7 @@ function renderActionList(data, stages, alerts) {
     const p = drafts[0];
     html += renderActionItem('📝', '新初稿待确认', (p.title || p.proposal_id || ''), `dashOpenProposal('${escapeAttr(p.proposal_id || '')}')`, 'var(--text-tertiary)');
   }
-  // 3. 待决策
-  if (data.decisions_total) {
-    html += renderActionItem('📌', 'NSFC 待决策', `${data.decisions_total} 项待拍板`, "dashOpenDecisions()", 'var(--accent-color)');
-  }
-  // 4. 告警
+  // 3. 告警
   if (alerts.length) {
     const a = alerts[0];
     html += renderActionItem('🎛️', '链路告警', (a.title || a.message || `${alerts.length} 项异常`), "switchToView('console')", 'var(--error-color)');
@@ -153,7 +148,7 @@ function renderActionList(data, stages, alerts) {
     html += renderActionItem('📋', '待办任务', `${data.tasks.backlog} 项待办`, "switchToView('hermes')", 'var(--warning-color)');
   }
 
-  if (pendingReview.length === 0 && drafts.length === 0 && !data.decisions_total && !alerts.length && !data.papers.unseen && !data.tasks.backlog) {
+  if (pendingReview.length === 0 && drafts.length === 0 && !alerts.length && !data.papers.unseen && !data.tasks.backlog) {
     html += '<div class="dash-action-empty">✓ 当前没有需要你立即处理的事项</div>';
   }
   html += '</div>';
@@ -207,26 +202,6 @@ function renderTasksPreview(tasks) {
   return html;
 }
 
-function renderDecisionsPreview(decs, total) {
-  let html = '<div class="dash-preview-card">';
-  html += `<div class="dash-preview-header" onclick="dashOpenDecisions()"><span>📌 NSFC 待决策</span><span class="dash-preview-count">${total} 项</span></div>`;
-  if (decs.length) {
-    for (const dec of decs) {
-      html += `<div class="dash-preview-row dash-decision-row">
-        <div class="dash-preview-title">${escapeHtml(dec.title)}</div>
-        <div class="dash-preview-actions">
-          <button class="dash-preview-btn approve" onclick="event.stopPropagation();quickDecide('${escapeAttr(dec.id)}','approve')">✓</button>
-          <button class="dash-preview-btn reject" onclick="event.stopPropagation();quickDecide('${escapeAttr(dec.id)}','reject')">✗</button>
-        </div>
-      </div>`;
-    }
-  } else {
-    html += '<div class="dash-preview-empty">暂无待决策</div>';
-  }
-  html += '</div>';
-  return html;
-}
-
 // 点击漏斗阶段：打开控制台并选中该阶段
 function dashOpenStage(stage) {
   switchToView('console');
@@ -247,32 +222,7 @@ function dashOpenProposal(proposalId) {
   }
 }
 
-// 打开 NSFC 待决策面板
-function dashOpenDecisions() {
-  if (typeof openProjectsManager === 'function') {
-    openProjectsManager();
-    if (typeof switchProjectsTab === 'function') {
-      setTimeout(() => switchProjectsTab('nsfc'), 50);
-    }
-  } else {
-    showToast('项目总控中心未加载', 'error');
-  }
-}
-
-// 快速决策（仪表盘上的✓/✗按钮）
-async function quickDecide(pid, action) {
-  const label = action === 'approve' ? '通过' : '否决';
-  showToast(`◐ ${label}中…`, 'info');
-  try {
-    await apiPost(`/api/projects/nsfc/pending/${pid}`, { action, title: '' });
-    showToast(`✓ 已${label}`, 'success');
-    renderDashboard(); // 刷新
-  } catch (e) {
-    showToast(`✗ ${e.message}`, 'error');
-  }
-}
-
-// 导航切换（仪表盘/控制台/知识库/生命周期/研究管线/hermes/设置）
+// 导航切换（仪表盘/控制台/知识库/生命周期/研究管线/hermes/设置/审核）
 function switchToView(view) {
   const views = ['dashboard', 'console', 'kb', 'lifecycle', 'pipeline', 'hermes', 'settings', 'review'];
   views.forEach(v => {

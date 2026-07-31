@@ -3,9 +3,9 @@
 **课题名称**：（1）莫尔超晶格的强场响应理论
 **项目类型**：面上项目
 **课题 ID**：`general-moire-strong-field-probe-20260726`
-**当前状态**：待校验（等待人工核验）
+**当前状态**：优化中（第7轮，score 0.00）
 **启动日期**：2026-07-26
-**最后更新**：2026-07-30
+**最后更新**：2026-07-31
 
 ---
 
@@ -48,10 +48,12 @@ Y1（2027.01–2027.12）：理论就绪 + 样品对接
 - 2026-07-30: archived → pending_review (恢复测试状态)
 - 2026-07-30: pending_review → archived (人工审核通过: approve)
 - 2026-07-30: archived → pending_review (恢复为待审核状态)
+- 2026-07-31: pending_review → optimizing (人工审核退回(major_revision)，携带结构化意见)
 
 ## 人工审核记录
 - 第1次审核: major_revision（1个问题）
 - 第2次审核: major_revision（1个问题）
+- 第3次审核: major_revision（1个问题）
 
 ---
 
