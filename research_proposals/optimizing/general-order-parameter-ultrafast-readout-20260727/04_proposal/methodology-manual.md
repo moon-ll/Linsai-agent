@@ -797,15 +797,99 @@ Y2-Y3 实测反演留 2× 余量：Y2 末合成数据 < 20%；Y3 末实测数据
 | Y3 末 | NbSe₂ 双重序反演结果 | Biegert 集团或 Puviani 组 | 盲测（提供合成数据，让第三方独立反演）| Y3 末 |
 | Y4 末 | 5 维约束反演方法学 | 国际合作方共同 | 双方独立反演同一组数据，对比精度 | Y4 末 |
 
+### M.6.3 人才培养技术细节（与 outcome.md §6.4 对应）
+
+**博士生研究方向（4 年内可结题，Y5 后由单位 / 合作方继续资助，不写入项目经费口径）**：
+
+| 博士生 | 入学 | 研究方向 | 对应 H | 关键里程碑 | 反演 / 实验模块分工 |
+|--------|------|---------|-------|-----------|--------------------|
+| 博士 1 | Y1 入 | altermagnet HHG + 5 维约束反演方法学 | H1 + H6 | Y4 末开题完成 + ≥ 1 篇 PRB 投稿 | HHG-OPRKit 反演核心代码 + CrSb 数据反演主责 |
+| 博士 2 | Y1 入 | 1L-NbSe₂ 双重序解耦 + 多体 HHG | H2 | Y4 末开题完成 + ≥ 1 篇 PRB 投稿 | NbSe₂ 数据采集 + 双重序解耦算法主责 |
+
+**硕士生分工（4 年内完成答辩）**：
+
+| 硕士生 | 入学 | 分工 | 对应 H |
+|--------|------|------|-------|
+| 硕士 1 | Y1 入 | 贝叶斯-神经网络联合反演算法 + HHG-OPRKit 软件开发 | H6 |
+| 硕士 2 | Y1 入 | 1T-TiSe₂ CDW 实验 + 样品表征 | H5 |
+| 硕士 3 | Y2 入 | 装置搭建 + 实验操作 + YBCO 实验辅助 | H3 |
+
+**博士后（Y2 末入职，2 年聘期覆盖 Y3-Y4）**：贝叶斯-神经网络联合反演 + HHG-OPRKit 软件开发 + YBCO 序参量涨落反演示证（Y3 任务 2 主责）；Y4 末聘期完成 + 反演核心代码交付。
+
+**国际联培（Y3 期间 6-12 个月海外）**：博士 1 或 2 选派 1 名赴 Biegert 集团（ICFO Barcelona）或 Werner 组（Fribourg）联合培养；海外经费由合作方承担，不写入本项目经费口径。
+
+### M.6.4 Nature/Science 顶刊承诺三级判据技术细节（与 outcome.md §6.1 + plan.md §5.4 对应）
+
+| 等级 | 候选内容 | 验收口径（量化）| 候选期刊 | 反演示证体系 |
+|------|---------|--------------|---------|------------|
+| **A 类（理想）** | 首例 altermagnet（CrSb）固体 HHG 实验完整论文 | ≥ 3 级指纹（外磁场开关 2nd/4th 偶次谐波 + 谐波圆二色性 + 各向异性自旋极化）+ 磁场依赖定量 + 合作方 Werner 组理论背书 | *Nature* / *Science* | 仅 CrSb 体系 |
+| **B 类（保底）** | 多序共存 5 维约束反演方法学 | 唯一性证明（可辨识性分析）+ 95% 置信区间贝叶斯后验概率 + NbSe₂/YBCO/CrSb 三类实测数据反演精度对比（误差 < 25%）| *Phys. Rev. Lett.*（首选）；若涉及材料体系拓展 + NbSe₂ 反演示证则备选 *Nat. Commun.* | NbSe₂ + YBCO + CrSb 三类实测数据 |
+| **C 类（负结果承认）** | 方法学 PRL + 1 篇 altermagnet HHG 物理 PRB（首次实验报告 + 负结果承认）| 基础产出 4 篇 PRB 仍可达成 + HHG-OPRKit / HHG-MultiOrder-v1 发布说明显式记录负结果数据 | *Phys. Rev. Lett.* + *Phys. Rev. B* | 仅方法学（不依赖任何材料体系顶刊）|
+
+**A 类判据技术依据**：参考 Werner 2024 PRB 110, 235101 + Ly 2026 arXiv:2602.09738 + Ultrafast altermagnetophononics 2026 arXiv:2607.13863（CrSb/MnTe 候选材料可行性论证）。
+
+**B 类判据技术依据**：参考 Locher et al. 2025 arXiv:2510.12443（Transformer self-attention 谱内多体分解）+ Broughton et al. 2026 *J. Phys. Photonics* DOI 10.1088/2515-7647/ae7f5a（cutoff 反演综述，典型误差 5-15%）+ Hu et al. 2024 PNAS 121, e2316775121（多维反演方法学锚定）。
+
+**C 类判据技术依据**：本项目基础产出 4 篇 PRB（论文 1-4）+ 软件 + 数据集 + 培养承诺 4 年内均可结题，**总产出可考核**。
+
+### M.6.5 失败承认机制技术细节（与 outcome.md §6.6 对应）
+
+**显式负结果承诺**：若 Y3 末 CrSb/MnTe HHG 信号未达 PRB 门槛 + NbSe₂ 双重序解耦准确率 < 50% + YBCO THG 与 Biegert 集团 2024 数据完全不一致（三重失败），本项目：
+
+1. **论文层**：提交 1 篇方法学 PRL（仅方法学，无材料体系顶刊承诺）+ 1 篇 altermagnet HHG 物理 PRB（"首次实验报告 + 负结果"），承认国际首例实验未达顶刊门槛；
+2. **软件层**：HHG-OPRKit 发布说明显式记录三重失败对应的反演算法版本 + 误差数据；
+3. **数据集层**：HHG-MultiOrder-v1 保留全部原始数据（含负结果），DOI 元数据明确标注"含负结果数据集"，公开给学界作为后续研究的对照基线；
+4. **学术影响层**：综述论文（Y4 末）将"失败案例与替代解释排除方法学"作为独立章节，明确负结果的方法学价值。
+
+**保底承诺**：基础产出 4 篇 PRB（论文 1-4）+ 软件 + 数据集 + 人才培养 + 综述（Y4 末）仍可达成，**项目总产出可考核**；与 plan.md §5.6 风险分级表 + outcome.md §6.6 失败承认机制三处口径严格一致。
+
+### M.6.6 学术影响与合作技术细节（与 outcome.md §6.5 对应）
+
+**国际合作矩阵（4 年内具体形式）**：
+
+| 合作方 | 形式 | 预期产出 | 时间 |
+|--------|------|---------|------|
+| **Biegert 集团（ICFO + ICMAB + GTIIT）** | 联合投稿 altermagnet HHG 实验论文（A 类顶刊候选）+ 联合培养博士生 6–12 个月 + 共享 NbSe₂ / TiSe₂ / YBCO HHG 实验数据 | Nature/Science（A 类）或 PRL/NC（B 类）共同署名论文 | Y3-Y4 |
+| **Werner / Murakami 组（Fribourg + Tokyo）** | altermagnet HHG 理论背书 + CrSb/MnTe 候选材料可行性论证 + 联合投稿 | A 类顶刊候选理论合著 | Y3-Y4 |
+| **Puviani 组（MPI Stuttgart）** | YBCO 序参量涨落 HHG 理论对照 + 第三方盲测 | B 类方法学论文反演示证 | Y3 末 |
+| **孟胜组（IOP CAS，国内）** | 1L-MoS₂/WS₂ 样品 + TDDFT-BSE 联合反演 + 数据集共享 | 基础论文 1 共同署名 + HHG-MultiOrder-v1 数据集共建 | Y2-Y4 |
+
+**综述论文（1 篇，Y4 末）**：
+
+- **方向**：HHG 序参量读出方法学综述（覆盖 altermagnet / YBCO 序参量涨落 / 多序解耦三个本项目重点方向）
+- **候选期刊**：*Rev. Mod. Phys.* / *Phys. Rep.* / *Adv. Phys.*（对标 Ciappina et al. 2025 arXiv:2510.15207 *Adv. Phys.* 邀稿综述 + Tyulnev et al. 2026 arXiv:2604.15085 阿秒科学 Roadmap 的综述级别）
+- **形式**：邀稿综述优先（依托本项目 Y4 末已建立的 HHG-MultiOrder-v1 数据集 + 与 Biegert 集团合作基础）；自投稿综述次之
+- **合作形式**：邀请 Ciappina / Tyulnev / Werner / Puviani 等头部组联合撰写（参考 Ciappina 综述由 Lewenstein 主导的合作模式）
+
+**受邀报告（≥ 3 次国际会议，4 年内）**：
+
+| # | 会议 | 时机 | 报告内容 |
+|---|------|------|---------|
+| 1 | APS March Meeting | Y3 末 | altermagnet HHG 首次实验结果（A 类顶刊投稿配套）|
+| 2 | ICAP（International Conference on Atomic Physics）| Y3 末或 Y4 末 | 5 维约束反演方法学 |
+| 3 | CLEO QELS | Y4 末 | HHG-OPRKit 软件 + HHG-MultiOrder-v1 数据集 |
+| 4（备选）| Ultrafast Phenomena / EQEC | Y3 末或 Y4 末 | NbSe₂ 双重序解耦 |
+
 ## M.7 参考文献（与 plan.md 严格对应，2026-07-30 引用）
 
 1. Mandal, Kumar, Pi, Kim, Zhan, Goulielmakis (2025). A precision apparatus for high harmonic spectroscopy in bulk solids. arXiv:2512.13311
 2. Ciappina et al. (2025). Solid-State HHG: Emerging Frontiers in Ultrafast and Quantum Light Science. arXiv:2510.15207, *Advances in Physics*（invited review）
 3. Werner, Lysne, Murakami (2024). High harmonic generation in altermagnets. arXiv:2407.07752, *PRB* 110, 235101
 4. Tyulnev, Zhang, Vamos, Poborska, Bhattacharya, Chhajlany et al. (Biegert group) (2024/2025). High harmonic spectroscopy reveals anisotropy of the Mott to CDW phase transition in TiSe₂. arXiv:2409.04216, *Commun. Mater.* 6, 152
+5. Cheng, Zhang, Liu et al. (2026). Ultrafast altermagnetophononics. arXiv:2607.13863（**R6 outcome 修订新增**：CrSb/MnTe 候选材料可行性）
+6. Locher, Tancogne-Dejean et al. (2025). Self-attention enabled quantum path analysis of HHG in solids. arXiv:2510.12443v2（**R6 outcome 修订新增**：ML+HHG 反演方法学先例，方法学 B 类依据）
+7. Broughton, Allegre, Marangos, Tisch, Matthews (2026). Beyond the plateau: a phenomenological review of the cutoff in solid HHG. *J. Phys. Photonics* DOI 10.1088/2515-7647/ae7f5a（**R6 outcome 修订新增**：cutoff 反演综述，B 类误差 5-15% 基线）
+8. Hu, Chen, Du, Meng (2024). Solid-state high harmonic spectroscopy for all-optical band structure probing of high-pressure quantum states. *PNAS* 121, e2316775121（**R6 outcome 修订新增**：多维反演方法学锚定，作者列表已校正）
+9. Jensen, Madsen, Rubio, Tancogne-Dejean (2024). High-harmonic spectroscopy of strongly bound excitons in solids. *PRA* 109, 063104, arXiv:2307.14693（**R6 outcome 修订新增**：作者名 Jensen 而非 Jessen）
+10. episanty/RB-SFA (2018/持续维护). RB-SFA: Recursion-Based Strong-Field Approximation. GitHub: github.com/episanty/RB-SFA（**R6 outcome 修订新增**：HHG-OPRKit 工程标准对照）
+11. Ahmed, Yoo, Prasankumar (2020) + Rehn, Ahmed, Yoo, Prasankumar (2023). Theoretical study of HHG in monolayer NbSe₂. arXiv:2008.07131 + arXiv:2310.03080（**R6 outcome 修订新增**：NbSe₂ 双重序理论）
+12. Ly 2026. arXiv:2602.09738（**R6 outcome 修订新增**：altermagnet 高阶自旋/电荷泵浦谐波）
+13. Feng, Zhang, Priessnitz, Cao, Sarkar, de Oliveira, Ponomaryov et al. (2025). Dissecting coupled orders in a terahertz-driven electron-doped cuprate. arXiv:2504.11947（**R6 outcome 修订新增**：THz 多序解耦范式，E1 涡旋光 OAM 耦合基础）
+14. Ryan, Grafov, Li, Nembach, Shaw, Bhandari et al. (2025). Uncovering the Timescales of Spin Reorientation in TbMn₆Sn₆. arXiv:2407.18894, *Nat. Commun.*（**R6 outcome 修订新增**：kagome HHG-XUV 探针，E2 异质结 HHG 框架）
 
 ---
 
-*v0.2 附录 M 追加 — 2026-07-30 R6 critic-round-6 修订轮*
-*对应 plan.md §5.1 / §5.2 / §5.5.3 / §5.6*
+*v0.3 附录 M 追加 — 2026-07-30 R6 critic-round-6 修订轮 outcome.md 完整性维度*
+*对应 plan.md §5.1 / §5.2 / §5.4 / §5.5 / §5.6 + outcome.md §6.0–§6.6*
+*新增：M.6.3 人才培养技术细节 + M.6.4 顶刊三级判据技术细节 + M.6.5 失败承认机制技术细节 + M.6.6 学术影响与合作技术细节 + M.7 参考文献 14 篇（v0.2 4 篇 → v0.3 14 篇）*
 *用途：申请书重思路，方法学手册重细节——本附录提供 plan.md 涉及的完整技术参数、数据规范、风险分级阈值、国际合作矩阵*

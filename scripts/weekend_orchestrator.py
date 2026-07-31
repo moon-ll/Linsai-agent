@@ -92,6 +92,14 @@ def _update_job_status(job_key: str, status: str, error: str = "") -> None:
         _save_weekend_jobs(data)
 
 
+def _stage_actually_done(pipeline, stage: str) -> bool:
+    """检查 weekend-pipeline 中某阶段是否全部 job 都已完成。"""
+    stage_jobs = [j for j in pipeline.list_jobs(stage=stage) if j.get("stage") == stage]
+    if not stage_jobs:
+        return False
+    return all(j.get("status") == JOB_STATUS_DONE for j in stage_jobs)
+
+
 def run_input_task(dry_run: bool = False) -> Dict[str, Any]:
     """运行周末输入任务。
 
@@ -103,7 +111,13 @@ def run_input_task(dry_run: bool = False) -> Dict[str, Any]:
     try:
         pipeline.sync_stage_jobs("input")
         result = pipeline.run_stage("input", dry_run=dry_run)
-        _update_job_status(WEEKEND_JOB_INPUT, JOB_STATUS_DONE)
+        if _stage_actually_done(pipeline, "input"):
+            _update_job_status(WEEKEND_JOB_INPUT, JOB_STATUS_DONE)
+        else:
+            stage_status = pipeline.state.get("stage_status", {}).get("input", "unknown")
+            _update_job_status(WEEKEND_JOB_INPUT, JOB_STATUS_FAILED, f"阶段未全部完成: {stage_status}")
+            result["success"] = False
+            result["error"] = f"阶段未全部完成: {stage_status}"
         return result
     except Exception as e:
         _update_job_status(WEEKEND_JOB_INPUT, JOB_STATUS_FAILED, str(e))
@@ -122,7 +136,13 @@ def run_output_task(dry_run: bool = False) -> Dict[str, Any]:
     try:
         pipeline.sync_stage_jobs("output")
         result = pipeline.run_stage("output", dry_run=dry_run)
-        _update_job_status(WEEKEND_JOB_OUTPUT, JOB_STATUS_DONE)
+        if _stage_actually_done(pipeline, "output"):
+            _update_job_status(WEEKEND_JOB_OUTPUT, JOB_STATUS_DONE)
+        else:
+            stage_status = pipeline.state.get("stage_status", {}).get("output", "unknown")
+            _update_job_status(WEEKEND_JOB_OUTPUT, JOB_STATUS_FAILED, f"阶段未全部完成: {stage_status}")
+            result["success"] = False
+            result["error"] = f"阶段未全部完成: {stage_status}"
         return result
     except Exception as e:
         _update_job_status(WEEKEND_JOB_OUTPUT, JOB_STATUS_FAILED, str(e))
@@ -141,7 +161,13 @@ def run_reflection_task(dry_run: bool = False) -> Dict[str, Any]:
     try:
         pipeline.sync_stage_jobs("reflection")
         result = pipeline.run_stage("reflection", dry_run=dry_run)
-        _update_job_status(WEEKEND_JOB_REFLECTION, JOB_STATUS_DONE)
+        if _stage_actually_done(pipeline, "reflection"):
+            _update_job_status(WEEKEND_JOB_REFLECTION, JOB_STATUS_DONE)
+        else:
+            stage_status = pipeline.state.get("stage_status", {}).get("reflection", "unknown")
+            _update_job_status(WEEKEND_JOB_REFLECTION, JOB_STATUS_FAILED, f"阶段未全部完成: {stage_status}")
+            result["success"] = False
+            result["error"] = f"阶段未全部完成: {stage_status}"
         return result
     except Exception as e:
         _update_job_status(WEEKEND_JOB_REFLECTION, JOB_STATUS_FAILED, str(e))

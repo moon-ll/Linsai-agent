@@ -334,6 +334,7 @@ class WebApiSuite(TestSuite):
             self.test_skills_routes,
             self.test_system_routes,
             self.test_kb_extended_routes,
+            self.test_lifecycle_console_orchestrator_pipeline_routes,
         ]:
             try:
                 _t()
@@ -463,6 +464,70 @@ class WebApiSuite(TestSuite):
         self.assert_status(code, 200, "GET /api/knowledge/graph 图谱")
         code, _ = c.get("/api/knowledge/health")
         self.assert_status(code, 200, "GET /api/knowledge/health 健康度")
+
+    def test_lifecycle_console_orchestrator_pipeline_routes(self):
+        """生命周期 / 控制台 / 总控 / 管线路由冒烟测试。
+
+        注册临时 proposal，验证相关端点可达且返回预期字段，
+        测试完成后归档并删除临时目录（隔离环境最终也会清理）。
+        """
+        c = self.client
+        test_pid = "webapi-lifecycle-test"
+
+        # 注册课题
+        code, data = c.post("/api/lifecycle/register", {
+            "proposal_id": test_pid,
+            "project_type": "general",
+        })
+        self.assert_status(code, 200, "POST /api/lifecycle/register 注册课题")
+
+        try:
+            # 生命周期仪表盘
+            code, data = c.get("/api/lifecycle/dashboard")
+            self.assert_status(code, 200, "GET /api/lifecycle/dashboard")
+            self.assert_json_field(data, "status", "lifecycle dashboard 含 status", expected="ok")
+
+            # 按状态列表
+            code, data = c.get("/api/lifecycle/list/drafts")
+            self.assert_status(code, 200, "GET /api/lifecycle/list/drafts")
+
+            # 控制台
+            code, data = c.get("/api/console/flow")
+            self.assert_status(code, 200, "GET /api/console/flow")
+            self.assert_json_field(data, "status", "console/flow 含 status", expected="ok")
+
+            code, data = c.get("/api/console/agents")
+            self.assert_status(code, 200, "GET /api/console/agents")
+            self.assert_json_field(data, "status", "console/agents 含 status", expected="ok")
+
+            code, data = c.get("/api/console/alerts")
+            self.assert_status(code, 200, "GET /api/console/alerts")
+            self.assert_json_field(data, "status", "console/alerts 含 status", expected="ok")
+
+            # 总控面板
+            code, data = c.get("/api/orchestrator/dashboard")
+            self.assert_status(code, 200, "GET /api/orchestrator/dashboard")
+
+            # 管线
+            code, data = c.get("/api/pipeline/stages")
+            self.assert_status(code, 200, "GET /api/pipeline/stages")
+
+            code, data = c.get(f"/api/pipeline/{test_pid}/state")
+            self.assert_status(code, 200, f"GET /api/pipeline/{test_pid}/state")
+        finally:
+            # 归档并删除临时课题，避免污染
+            try:
+                c.post(f"/api/lifecycle/{test_pid}/transition", {"to_stage": "archived", "reason": "webapi test cleanup"})
+            except Exception:
+                pass
+            try:
+                import shutil
+                from pathlib import Path
+                archive_dir = self.tmp_root / "research_proposals" / "archived" / test_pid
+                if archive_dir.exists():
+                    shutil.rmtree(archive_dir)
+            except Exception:
+                pass
 
 
 if __name__ == "__main__":

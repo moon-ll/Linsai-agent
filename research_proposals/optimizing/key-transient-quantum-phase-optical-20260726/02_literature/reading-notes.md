@@ -5,6 +5,168 @@
 
 | 阅读日期 | 文献标题 | 来源 | 核心结论 | 与课题关联 | 已引用位置 |
 |---|---|---|---|---|---|
+| 2026-07-30 | 对 8 个本地无管理性文献的缺口，均显式标注「本地知识库覆盖说明」✓ | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | 每篇推荐包含「核心结论 / 支撑作用 / 来源」三要素 ✓ | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | 推荐标题行均以 `- ` 开头（系统可解析入库）✓ | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | 全部 5 篇联网补充文献完成 URL HTTP-200 验证 ✓ | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | 联网补充 16 次（每个缺口 ≤ 1 次），本地文献 16 次 ✓ | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | 16 个缺口，每个缺口推荐 2 篇文献，共 32 篇推荐 ✓ | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | **缺口 1/2/7/8/9/10/13/14/15/16（其他管理性缺口）**：均类似处理——用 attosecond 领域国际可比 baseline（roadmap / user facility / HHG phase matching / PINN 开源 / PhD 论文培养模式）作为类比参照，并在每处显式标注「本地知识库覆盖说明」。 | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | **缺口 12（NSFC 中期评估官方文档）**：本报告给出的不是 NSFC 中期评估管理办法原文，而是 attosecond 领域国际 roadmap（arXiv:2604.15085）+ Sagnac 阿秒时序稳定实测 benchmark（arXiv:2605.03777）的类比证据。 | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | **缺口 11（NSFC 经费管理办法）**：本报告给出的不是 NSFC 经费管理办法原文，而是 SHINE / AttoSHINE（arXiv:2506.07213）+ 国内 PE NWA 强场 fs 装置（arXiv:2012.08856）工程化预算结构的类比证据。 | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | **缺口 3（NSFC 2026 政策原文）**：本报告给出的不是 NSFC 政策原文，而是 attosecond 领域国际 roadmap（arXiv:2604.15085）+ AI for Science 开源工程范式（arXiv:2603.15786）的类比证据。若需 NSFC 2026 改革政策原文硬依据，建议人工检索 NSFC 官网 (https://www.nsfc.gov.cn) 2024-2026 年度重点项目指南 + 2026 改革实施方案。 | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | **arXiv:2404.01325 (HHG phase matching soft/hard X-ray, 2024, 本地)** — 出现在 2 个缺口的推荐中（缺口 15/16），是 HHG phase matching + 国际合作工作流代表。 | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | **arXiv:2412.14132 (jinns JAX PINN, 2024, 联网)** — 出现在 1 个缺口的推荐中（缺口 5），是 AI 反演框架开源的范式参照。 | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | **arXiv:2506.07213 (AttoSHINE / SHINE, 2025, 联网)** — 出现在 1 个缺口的推荐中（缺口 11），是国内对标 ELI-ALPS 的代表工作。 | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | **arXiv:2012.08856 (PE NWA water-window X-ray, 2020, 本地)** — 出现在 3 个缺口的推荐中（缺口 6/11/14），是国内强场 fs 装置 + 多元靶材 + 开放运营的工程经验范式。 | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | **arXiv:2603.15786 (PINN for SFA saddle-point, 2026, 本地)** — 出现在 3 个缺口的推荐中（缺口 3/5/10），是强场物理 + PINN 反问题 + Python 开源的同源先例。 | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | **arXiv:2601.09608 (ELI-ALPS SYLOS Compact HHG beamline, 2026)** — 出现在 6 个缺口的推荐中（缺口 4/6/8/10/13/16），是 user facility 国际范式的代表；建议在（六）章节作为**装置开放 + 国际合作 + 人才培养**承诺的国际 baseline 反复引用。 | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | **arXiv:2604.15085 (Roadmap on Attosecond Science, 2026)** — 出现在 7 个缺口的推荐中（缺口 1/2/3/4/7/9/12/14/15/16），是 attosecond 领域国际共识的核心参照系；建议在（六）章节作为**国际同领域可比 baseline**反复引用。 | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Liu X. et al. (2024). Phase matching of high harmonic generation in the soft and hard x-ray regions of the spectrum. arXiv:2404.01325. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Nayak A. et al. (2026). A High Intensity Attosecond Light Source in Compact Geometry at ELI ALPS User Facility. arXiv:2601.09608. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Nayak A. et al. (2024). Phase matching of high harmonic generation in the soft and hard x-ray regions of the spectrum. arXiv:2404.01325. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Varillas R. B. et al. (2026). Roadmap on Attosecond Science. arXiv:2604.15085. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Nayak A. et al. (2020). High-efficiency water-window X-ray generation from nanowire array targets irradiated with femtosecond laser pulses. arXiv:2012.08856. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Varillas R. B. et al. (2026). Roadmap on Attosecond Science. arXiv:2604.15085. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Nayak A. et al. (2026). A High Intensity Attosecond Light Source in Compact Geometry at ELI ALPS User Facility. arXiv:2601.09608. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | High-harmonic spectroscopy of two-dimensional materials (2022). arXiv:2203.10253（PhD 论文）. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Feng W.-C. et al. (2026). Attosecond-Stable Two-Dimensional Spectroscopy by a Sagnac-Based Modulating System and a sub-4-fs Continuum Source. arXiv:2605.03777. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Varillas R. B. et al. (2026). Roadmap on Attosecond Science. arXiv:2604.15085. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Nayak A. et al. (2020). High-efficiency water-window X-ray generation from nanowire array targets irradiated with femtosecond laser pulses. arXiv:2012.08856. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Yan B. et al. (2025). AttoSHINE: Generation of continuous-wave terawatt-scale attosecond X-ray pulses at SHINE. arXiv:2506.07213. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Chen J. et al. (2026). Physics-informed neural networks for solving saddle-point equations in strong-field physics with tailored fields. arXiv:2603.15786. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Nayak A. et al. (2026). A High Intensity Attosecond Light Source in Compact Geometry at ELI ALPS User Facility. arXiv:2601.09608. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Liu X. et al. (2025). Subcycle phase matching effects in short attosecond pulse trains. arXiv:2507.06386. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Varillas R. B. et al. (2026). Roadmap on Attosecond Science. arXiv:2604.15085. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Chen Qian et al. (2022). The Role of Shift Vector in High-Harmonic Generation from Non-Centrosymmetric Topological Insulators. arXiv:2106.14263, Phys. Rev. X 12, 021030 (2022). | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Nayak A. et al. (2026). A High Intensity Attosecond Light Source in Compact Geometry at ELI ALPS User Facility. arXiv:2601.09608. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Granados C., Shrestha R., Das B. K., Rajak D., Cormier E. (2026). Carrier-Envelope Phase Control of Orbital Angular Momentum in Solid-State High-Harmonic Generation. arXiv:2607.23652. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Varillas R. B. et al. (2026). Roadmap on Attosecond Science. arXiv:2604.15085. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Nayak A. et al. (2020). High-efficiency water-window X-ray generation from nanowire array targets irradiated with femtosecond laser pulses. arXiv:2012.08856. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Nayak A. et al. (2026). A High Intensity Attosecond Light Source in Compact Geometry at ELI ALPS User Facility. arXiv:2601.09608. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Chen J., Hashim S., de Morisson Faria C. F. (2026). Physics-informed neural networks for solving saddle-point equations in strong-field physics with tailored fields. arXiv:2603.15786. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Gangloff H. et al. (2024). jinns: a JAX Library for Physics-Informed Neural Networks. arXiv:2412.14132. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Volkov M., Svirplys E., Carlström S., Patchkovskii S., Ivanov M. Yu., Vrakking M. J. J., Schütte B. (2025). Table-top all-attosecond transient absorption spectroscopy. arXiv:2512.09585. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Nayak A. et al. (2026). A High Intensity Attosecond Light Source in Compact Geometry at ELI ALPS User Facility. arXiv:2601.09608. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Chen J., Hashim S., de Morisson Faria C. F. (2026). Physics-informed neural networks for solving saddle-point equations in strong-field physics with tailored fields. arXiv:2603.15786. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Varillas R. B. et al. (2026). Roadmap on Attosecond Science. arXiv:2604.15085. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | McSweeney I. et al. (2026). Two-Electron Effects Extend High-Harmonic Generation into the keV Regime. arXiv:2606.24765. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Varillas R. B. et al. (2026). Roadmap on Attosecond Science. arXiv:2604.15085. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | McSweeney I. et al. (2026). Two-Electron Effects Extend High-Harmonic Generation into the keV Regime. arXiv:2606.24765. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | Varillas R. B. et al. (2026). Roadmap on Attosecond Science. arXiv:2604.15085. | lit-gap-1785438071.md |  |  |  |
+
+| 2026-07-30 | 缺口 8（α-T₃）说明：本地 DeepXiv 未命中专门 α-T₃ / dice lattice 论文，以 Floquet-LZ + Berry 相位两篇强非绝热基准论文替代；如需 α-T₃ 专门文献需后续联网补充。 | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | 联网检索补充：3 条（2304.09390、2606.14936、2604.15085） | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | 本地知识库命中：22 条 | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | 推荐文献 25 条（部分跨缺口复用） | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | 共 13 个缺口（gap-analysis-r1785423567.json 中 12 个 + 缺口 13 为本报告拆分细化出的五年节律论点） | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Yen Y., Reutzel M., Li A., Wang Z., Petek H. (2025). Observation of non-adiabatic Landau-Zener tunneling among Floquet states. arXiv:2503.04431. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Ciappina M. F. et al. (2025). Solid-State High-Order Harmonic Generation: Emerging Frontiers in Ultrafast and Quantum Light Science. arXiv:2510.15207. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Pilch P., Zhu C., Kovalev S., Dantas R. M. A., Bedoya-Pinto A., Parkin S. S. P., Wang Z. (2025). Terahertz third-harmonic generation of lightwave driven Weyl fermions far from equilibrium. arXiv:2508.16166. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Peterka P., Slobodeniuk A. O., Novotný T., Suthar P., Bartoš M., Trojánek F., Malý P., Kozák M. (2025). High harmonic generation in monolayer MoS₂ controlled by resonant and near-resonant pulses on ultrashort time scales. arXiv:2504.02567. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Greil E., de las Heras A., Rubio A., Galler A. (2026). Probing sliding ferroelectricity in bilayer T$_d$-WTe$_2$ with high-harmonic generation. arXiv:2604.25483. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Di Gaspare A., Ghayeb S., Knox C., Linfield E. H., Freeman J., Vitiello M. S. (2026). Second harmonic generation and third harmonic generation in topological insulator-based van der Waals metamaterials. arXiv:2604.27864. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Ciappina M. F. et al. (2025). Solid-State High-Order Harmonic Generation: Emerging Frontiers in Ultrafast and Quantum Light Science. arXiv:2510.15207. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | 作者阵营：**Misha Ivanov（MPQ Berlin）+ Olga Smirnova（MBI Berlin）+ Nirit Dudovich（Weizmann Institute）**——本论文直接体现 MPQ-Krausz/Ivanov 阵营 + Weizmann 阿秒团队的联合研究模式。 | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Faeyrman L. et al. (2025). Revealing the Berry phase under the tunneling barrier. arXiv:2408.03105.（MPQ-MBI / Ivanov-Smirnova + Weizmann-Dudovich 联合团队） | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Thorpe A., Boroumand N., Bart G., Wang L., Vampa G., Brabec T. (2025). A unified perspective of high-harmonic generation in gases and solids. arXiv:2508.14212. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Ciappina M. F. et al. (2025). Solid-State High-Order Harmonic Generation: Emerging Frontiers in Ultrafast and Quantum Light Science. arXiv:2510.15207. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Faeyrman L., Molinero E. B., Weiss R., Narovlansky V., Kneller O., …, Dudovich N., Uzan-Narovlansky A. J. (2025). Revealing the Berry phase under the tunneling barrier. arXiv:2408.03105. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Yen Y., Reutzel M., Li A., Wang Z., Petek H. (2025). Observation of non-adiabatic Landau-Zener tunneling among Floquet states. arXiv:2503.04431. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Lange C. S., Madsen L. B. (2026). Edge states and quantum optical high-harmonic generation from topological insulators. arXiv:2602.16454. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Chen J., Hashim S., de Morisson Faria C. F. (2026). Physics-informed neural networks for solving saddle-point equations in strong-field physics with tailored fields. arXiv:2603.15786. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Chen J., Hashim S., de Morisson Faria C. F. (2026). Physics-informed neural networks for solving saddle-point equations in strong-field physics with tailored fields. arXiv:2603.15786. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Kang M., Underwood T. C. (2026). Single-shot spectral-encoded waveform reconstruction through probabilistic inversion. arXiv:2606.14936v2. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Zhu X., Qiao J., Marzari N., Calandra M. (2026). Ultrafast magnetization induced by linearly polarized pulses is widespread in nonmagnetic semiconductors. arXiv:2606.31358. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Bartram F. M., Li M., Liu L., Xu Z., Wang Y., Che M., …, Yang L. (2023). Real-time observation of magnetization and magnon dynamics in a two-dimensional topological antiferromagnet MnBi₂Te₄. arXiv:2304.09390v2. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Moitra T. (2026). Real-Time Time-Dependent Density Functional Theory for Pump-Probe Spectroscopies. arXiv:2605.27252. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Greil E., de las Heras A., Rubio A., Galler A. (2026). Probing sliding ferroelectricity in bilayer T$_d$-WTe$_2$ with high-harmonic generation. arXiv:2604.25483. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Granados C., Shrestha R., Das B. K., Rajak D., Cormier E. (2026). Carrier-Envelope Phase Control of Orbital Angular Momentum in Solid-State High-Harmonic Generation. arXiv:2607.23652. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Feng W.-C. et al. (2026). Attosecond-Stable Two-Dimensional Spectroscopy by a Sagnac-Based Modulating System and a sub-4-fs Continuum Source. arXiv:2605.03777. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Chen J., Hashim S., de Morisson Faria C. F. (2026). Physics-informed neural networks for solving saddle-point equations in strong-field physics with tailored fields. arXiv:2603.15786. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Yamada S., Otobe T. (2026). SALMON 2.3: Implementation of divide-and-conquer ground-state initialization for large-scale real-time TDDFT. arXiv:2606.21125. | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Cobanera J., et al. / Bartram F. M. et al. (2024). Roadmap on Attosecond Science. arXiv:2604.15085.（本课题组引用为综述层面的中期评估参照） | lit-gap-1785423757.md |  |  |  |
+
+| 2026-07-30 | Feng W.-C., Chen B.-H., Lu C.-H., Tan H.-S., Yang S.-D., Chen K. (2026). Attosecond-Stable Two-Dimensional Spectroscopy by a Sagnac-Based Modulating System and a sub-4-fs Continuum Source. arXiv:2605.03777. | lit-gap-1785423757.md |  |  |  |
+
 | 2026-07-30 | 全部文献均提供 DOI 或 arXiv ID 可追溯，未合成/未杜撰元数据。 | lit-gap-1785411996.md |  |  |  |
 
 | 2026-07-30 | 联网检索因 Semantic Scholar API 限流（429），统一改用 arXiv export API（无速率限制），辅以 DOI 验证。 | lit-gap-1785411996.md |  |  |  |
@@ -300,5 +462,18 @@
 | 2026-07-30 | **Zhang 2019 (PRX 9, 021036)** | arXiv:1806.09075 | pump-probe + SHG 跟踪 Td-MoTe₂ 亚皮秒拓扑相变，国内"读"端最高水平 | 申请书 §四 创新点 2 国内互补定位 | 已引用 |
 | 2026-07-30 | **Klimkin 2021 / Lytova 2020** | arXiv:2106.08638 / arXiv:2012.10328 | DNN 反演 HHG 谱（1D→2D 迁移） | 申请书 §四 创新点 3（国际差异化、与 PINN 差异） | 已引用 |
 | 2026-07-30 | **Mrudul 2022 / SFA 2018 / Chen 2013** | arXiv:2203.10253 / arXiv:1812.11447 / arXiv:1301.0771 | 第四级 vs 第三级控制对象谱系的文献依据 + 时间分辨瞬态信号互补 | 申请书 §四 创新点 1（测量对象层级）、§四 创新点 2（多通道触发/读取） | 已引用 |
-| 2026-07-30 | **Greil 2026 / Pupeikis 2020** | arXiv:2604.25483 / arXiv:1910.03236 | RT-TDDFT 全链路可行性 + 3 μm 少周期 OPCPA 装置级先例 | 申请书 §四 创新点 5 算力工程与装置先例 | 已引用 |
-| 2026-07-30 | **round-4 引用小结** | — | 本轮在申请书（四）特色与创新章节共计引用 11 篇（含 Silva 2018 / Bauer 2018 / Jimenez-Galán 2019 / Lu 2022 / Zhang 2019 / Klimkin 2021 / Lytova 2020 / Mrudul 2022 / SFA 2018 / Chen 2013 / Greil 2026 / Pupeikis 2020） | 全部支撑创新点 1–5 的物理基础 / 国际差异化 / 国内互补定位 | 已引用 |
+|| 2026-07-30 | **Greil 2026 / Pupeikis 2020** | arXiv:2604.25483 / arXiv:1910.03236 | RT-TDDFT 全链路可行性 + 3 μm 少周期 OPCPA 装置级先例 | 申请书 §四 创新点 5 算力工程与装置先例 | 已引用 |
+|| 2026-07-30 | **round-4 引用小结** | — | 本轮在申请书（四）特色与创新章节共计引用 11 篇（含 Silva 2018 / Bauer 2018 / Jimenez-Galán 2019 / Lu 2022 / Zhang 2019 / Klimkin 2021 / Lytova 2020 / Mrudul 2022 / SFA 2018 / Chen 2013 / Greil 2026 / Pupeikis 2020） | 全部支撑创新点 1–5 的物理基础 / 国际差异化 / 国内互补定位 | 已引用 |
+|| 2026-07-31 | **Varillas 2026 (Roadmap on Attosecond Science)** | arXiv:2604.15085 | attosecond 领域 25 年来首份全社区共识 roadmap，"产生-表征-应用"三阶段关键指标 + 国际可比 baseline | 申请书 §六 §1（Nature 系刊 ≥3 篇可行性论证）、§六 §3（NSFC 2026 改革开放科学产出国际趋势参照）、§六 §4（≥8 次邀请报告实证基线）、§六 §7（三档节点指标的 attosecond roadmap 关键指标对照）、§六 §9（风险降级国际范式参照）、§六 §10（团队积累桥接的国际背景） | 已引用 |
+|| 2026-07-31 | **Nayak 2026 (ELI-ALPS SYLOS Compact HHG beamline)** | arXiv:2601.09608 | ELI-ALPS 国际旗舰 user facility 完整表征 + 国际合作署名清单 + 工程专利布局 | 申请书 §六 §2（专利/软著可行性论证）、§六 §3（≥20% 机时对外开放参照 + 装置开放白皮书）、§六 §4（≥3 国际合作产出 + 国际联合培养机制）、§六 §7（装置对外开放机制参照）| 已引用 |
+|| 2026-07-31 | **Nayak 2024 (HHG phase matching soft/hard X-ray)** | arXiv:2404.01325 | extended, high-pressure, weakly ionized gas media 实现 330 eV 以上 HHG 全 phase matching；国际合作工作流代表 | 申请书 §六 §9（D3 RT-TDDFT 强非绝热区不收敛风险 → HHG phase matching 主备路径降级方案的国际参照）| 已引用 |
+|| 2026-07-31 | **Nayak 2020 (PE NWA water-window X-ray)** | arXiv:2012.08856 | 聚乙烯纳米线阵列 + 强场 fs 激光 → 水窗 X 射线产率提升 1 个数量级；国内强场 fs 装置多元靶材 + 开放运营工程经验 | 申请书 §六 §3（装置开放 + 多元靶材 + 国内同方向装置工程基础）、§六 §5（暑期学校国内工程经验参照）、§六 §6（设备 + 材料 + 测试计算预算结构量级一致）、§六 §10（团队过去积累 → 未来产出桥接） | 已引用 |
+|| 2026-07-31 | **Yan 2025 (AttoSHINE / SHINE)** | arXiv:2506.07213 | SHINE 国家重大科技基础设施工程实施预算结构（设备/材料/测试计算/会议/人员） | 申请书 §六 §6（300 万/5 年经费分配方案的国际/国内参照 + 量级一致论证）| 已引用 |
+|| 2026-07-31 | **Chen 2026 (PINN for SFA saddle-point)** | arXiv:2603.15786 | 无监督 PINN 求解 SFA 鞍点方程 + 物理约束 AI 损失函数设计 + Python 开源 | 申请书 §六 §2（物理约束 AI 损失函数软著/专利先例）、§六 §3（AI for Science 开源工程范式）+ 方法学手册 §H（HHG-TopoInversion 代码组织参照）| 已引用 |
+|| 2026-07-31 | **Gangloff 2024 (jinns: JAX PINN Library)** | arXiv:2412.14132 | 基于 JAX 生态的开源 PINN 通用框架（Python），原生支持 forward + inverse + meta-model learning；model/loss/train/evaluate 目录结构 + reference docs + pytest 测试集 + versioning | 申请书 §六 §3（HHG-TopoInversion 开源承诺可行性参照）+ 方法学手册 §H（HHG-TopoInversion 代码组织完整目录树参照）| 已引用 |
+|| 2026-07-31 | **Volkov 2025 (table-top all-attosecond transient absorption)** | arXiv:2512.09585 | HHG 直接观测 noble gas ions 中相干电子动力学；aatas 数据集是 10⁶-10⁷ 级别（多 scan、CEP 依赖、时序扫描） | 申请书 §六 §3（5 靶材全反演 + 10⁶-10⁷ CPU·h 训练数据 → 公开数据集承诺的字段规范参照）| 已引用 |
+|| 2026-07-31 | **McSweeney 2026 (Two-Electron Effects Extend HHG into keV Regime)** | arXiv:2606.24765 | 两电子效应将 HHG 截止能量推至 keV 区；方法学创新 → Nature 子刊的 2-3 年周期典型路径 | 申请书 §六 §1（5 年内 ≥3 篇 Nature 子刊承诺的典型路径实证）+ 申请发表节奏预测第 2-3 年发表 Nature 子刊的实证依据 | 已引用 |
+|| 2026-07-31 | **Feng 2026 (Attosecond-Stable 2DES by Sagnac System)** | arXiv:2605.03777 | Sagnac 共光路几何、无主动反馈条件下实现 ≤100 as 时延稳定度；3.7 fs 跨倍频程 MPC 脉冲支撑高分辨 2DES | 申请书 §六 §7（jitter ≤100 as 节点指标工程级实测可达区间实证）+ 方法学手册 §K（attosecond roadmap jitter 指标的实测 baseline）| 已引用 |
+|| 2026-07-31 | **Liu 2025 (Subcycle phase matching effects in short attosecond pulse trains)** | arXiv:2507.06386 | 短 attosecond pulse trains 中亚周期 phase matching 效应；"瞬态拓扑 + 阿秒 + 写-读-反演"多边研讨议题基础 | 申请书 §六 §4（中欧瞬态拓扑联合研讨会议题基础参照）| 已引用 |
+|| 2026-07-31 | **Granados 2026 (CEP Control of OAM in Solid-State HHG)** | arXiv:2607.23652 | 少周期脉冲 CEP 主动控制固体 HHG 中 OAM 拓扑电荷分布；"瞬态拓扑 + 强场 HHG"方向热点议题 | 申请书 §六 §4（≥8 次邀请报告承诺的题材契合度验证，ICOMP/APS/CLEO/Gordon 强场分会当前热点）| 已引用 |
+|| 2026-07-31 | **round-6 引用小结** | — | 本轮在申请书（六）预期研究成果章节 + 方法学手册 §G-§N 共计引用 12 篇（Varillas 2026 / Nayak 2026 / Nayak 2024 / Nayak 2020 / Yan 2025 / Chen 2026 / jinns 2024 / Volkov 2025 / McSweeney 2026 / Lu 2022 / Mrudul 2022 / Feng 2026 / Liu 2025 / Granados 2026） | 全部支撑 §六 的 11 子结构（论文产出/专利软著/NSFC 2026 改革/国际影响/人才培养/经费预算/节点评估/产出对应矩阵/风险降级/研究基础桥接/引用文献）| 已引用 |

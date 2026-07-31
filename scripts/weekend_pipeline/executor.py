@@ -86,11 +86,17 @@ def pick_next_job(state: Dict[str, Any], stage: Optional[str] = None) -> Optiona
 
 
 def reset_failed_job(job: Dict[str, Any]) -> None:
-    """重置失败任务为 pending（用于重试）。"""
+    """重置失败任务为 pending（用于重试）。
+
+    重置 attempts 给下一轮执行机会；新增 repair_attempts 记录修复轮次，
+    防止无限重试。
+    """
     job["status"] = JOB_STATUS_PENDING
     job["started_at"] = ""
     job["finished_at"] = ""
     job["last_error"] = ""
+    job["attempts"] = 0
+    job["repair_attempts"] = job.get("repair_attempts", 0) + 1
 
 
 def execute_job(
@@ -162,7 +168,7 @@ def repair_stale_and_failed(state: Dict[str, Any]) -> List[Dict[str, Any]]:
         if is_stale(job):
             update_job(state, job["job_id"], JOB_STATUS_FAILED, "运行超时/进程僵死")
             repaired.append({"job_id": job["job_id"], "action": "stale -> failed"})
-        elif job.get("status") == JOB_STATUS_FAILED and job.get("attempts", 0) < MAX_JOB_ATTEMPTS:
+        elif job.get("status") == JOB_STATUS_FAILED and job.get("repair_attempts", 0) < MAX_JOB_ATTEMPTS:
             reset_failed_job(job)
-            repaired.append({"job_id": job["job_id"], "action": "retry", "attempts": job.get("attempts", 0)})
+            repaired.append({"job_id": job["job_id"], "action": "retry", "repair_attempts": job.get("repair_attempts", 0)})
     return repaired

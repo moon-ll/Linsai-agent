@@ -5,13 +5,14 @@ from __future__ import annotations
 
 from typing import Any, Callable, Dict, List, Optional
 
-from common import now_utc
+from common import file_lock, now_utc, save_json
 from proposal_lifecycle import ProposalLifecycle
 
 from .constants import (
     JOB_STATUS_DONE,
     JOB_STATUS_PENDING,
     JOB_STATUS_RUNNING,
+    PIPELINE_STATE_PATH,
     STAGE_INPUT,
     STAGE_OUTPUT,
     STAGE_REFLECTION,
@@ -51,6 +52,13 @@ class WeekendPipeline:
 
     def _save(self) -> None:
         save_pipeline_state(self.state, self.state_path)
+
+    def _save_unlocked(self) -> None:
+        """在已持有 weekend-pipeline 锁的上下文中使用，避免嵌套锁死锁。"""
+        path = self.state_path or PIPELINE_STATE_PATH
+        path.parent.mkdir(parents=True, exist_ok=True)
+        self.state["updated_at"] = now_utc()
+        save_json(path, self.state)
 
     def _register_handlers(self) -> None:
         self.handlers = {
@@ -101,36 +109,46 @@ class WeekendPipeline:
         return {"success": True, "stage": stage, "added": len(added), "jobs": added}
 
     def run_next(self, stage: Optional[str] = None, dry_run: bool = False) -> Dict[str, Any]:
-        """执行下一个 pending 且依赖满足的任务。"""
-        job = pick_next_job(self.state, stage=stage)
-        if not job:
-            return {"success": True, "message": "没有可执行任务", "executed": 0}
+        """执行下一个 pending 且依赖满足的任务。
 
-        result = execute_job(self.state, job, self.handlers, dry_run=dry_run)
-        self._save()
-        return {"success": result.get("success"), "job_id": job["job_id"], "result": result, "executed": 1}
+        加全局锁并重新加载状态，避免与 run_stage 或其它 worker 并发冲突。
+        """
+        with file_lock("weekend-pipeline"):
+            self.state = load_pipeline_state(self.state_path)
+            job = pick_next_job(self.state, stage=stage)
+            if not job:
+                return {"success": True, "message": "没有可执行任务", "executed": 0}
+
+            result = execute_job(self.state, job, self.handlers, dry_run=dry_run)
+            self._save_unlocked()
+            return {"success": result.get("success"), "job_id": job["job_id"], "result": result, "executed": 1}
 
     def run_stage(self, stage: str, dry_run: bool = False) -> Dict[str, Any]:
-        """顺序执行阶段内所有 pending 任务。"""
+        """顺序执行阶段内所有 pending 任务。
+
+        加全局锁并重新加载状态，避免与 worker cron 并发冲突。
+        """
         if stage not in STAGES:
             raise ValueError(f"未知阶段: {stage}")
 
-        set_stage_status(self.state, stage, JOB_STATUS_RUNNING)
-        self._save()
+        with file_lock("weekend-pipeline"):
+            self.state = load_pipeline_state(self.state_path)
+            set_stage_status(self.state, stage, JOB_STATUS_RUNNING)
+            self._save_unlocked()
 
-        result = run_pending_jobs(self.state, self.handlers, stage=stage, dry_run=dry_run)
+            result = run_pending_jobs(self.state, self.handlers, stage=stage, dry_run=dry_run)
 
-        # 更新阶段状态：若该阶段全部 done，则标记 done
-        stage_jobs = find_jobs_by_stage(self.state, stage)
-        if stage_jobs and all(j.get("status") == JOB_STATUS_DONE for j in stage_jobs):
-            set_stage_status(self.state, stage, JOB_STATUS_DONE)
-        elif any(j.get("status") == JOB_STATUS_FAILED for j in stage_jobs):
-            set_stage_status(self.state, stage, JOB_STATUS_FAILED)
-        else:
-            set_stage_status(self.state, stage, JOB_STATUS_PENDING)
-        self._save()
+            # 更新阶段状态：若该阶段全部 done，则标记 done
+            stage_jobs = find_jobs_by_stage(self.state, stage)
+            if stage_jobs and all(j.get("status") == JOB_STATUS_DONE for j in stage_jobs):
+                set_stage_status(self.state, stage, JOB_STATUS_DONE)
+            elif any(j.get("status") == JOB_STATUS_FAILED for j in stage_jobs):
+                set_stage_status(self.state, stage, JOB_STATUS_FAILED)
+            else:
+                set_stage_status(self.state, stage, JOB_STATUS_PENDING)
+            self._save_unlocked()
 
-        return {"success": True, "stage": stage, "dry_run": dry_run, **result}
+            return {"success": True, "stage": stage, "dry_run": dry_run, **result}
 
     def list_jobs(self, stage: Optional[str] = None) -> List[Dict[str, Any]]:
         """列出任务。"""

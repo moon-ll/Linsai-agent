@@ -177,20 +177,27 @@ def run_repair(self, dry_run: bool = False) -> Dict[str, Any]:
                     if not dry_run:
                         self._update_job(pid, job, JOB_STATUS_FAILED, "运行超时/进程僵死")
                     item["actions"].append(f" stale job {job['job_id']} -> failed")
-                elif job.get("status") == JOB_STATUS_FAILED and job.get("attempts", 0) < MAX_JOB_ATTEMPTS:
-                    # 重置为 pending，worker 下次会重试
-                    if not dry_run:
-                        job["status"] = JOB_STATUS_PENDING
-                        job["started_at"] = ""
-                        job["finished_at"] = ""
-                        job["last_error"] = ""
-                        self._save_jobs(pid, jobs)
-                    item["actions"].append(f" retry job {job['job_id']} (attempt {job.get('attempts', 0)})")
-                elif job.get("status") == JOB_STATUS_FAILED and job.get("attempts", 0) >= MAX_JOB_ATTEMPTS:
-                    item["actions"].append(f" job {job['job_id']} 超过重试次数，需人工介入")
-                    # 记录到 cron_failures 供 health_check 告警
-                    if not dry_run:
-                        self._record_cron_failure(pid, f"{job['job_id']}: {job.get('last_error', '')}")
+                elif job.get("status") == JOB_STATUS_FAILED:
+                    # 使用 repair_attempts 跟踪修复轮次；每次 repair 重置 attempts，
+                    # 给 job 3 次执行机会，但超过 MAX_JOB_ATTEMPTS 轮 repair 后人工介入。
+                    repair_attempts = job.get("repair_attempts", 0)
+                    if repair_attempts < MAX_JOB_ATTEMPTS:
+                        if not dry_run:
+                            job["status"] = JOB_STATUS_PENDING
+                            job["started_at"] = ""
+                            job["finished_at"] = ""
+                            job["last_error"] = ""
+                            job["attempts"] = 0
+                            job["repair_attempts"] = repair_attempts + 1
+                            self._save_jobs(pid, jobs)
+                        item["actions"].append(
+                            f" retry job {job['job_id']} (repair_attempt {repair_attempts + 1}/{MAX_JOB_ATTEMPTS})"
+                        )
+                    else:
+                        item["actions"].append(f" job {job['job_id']} 超过修复重试次数，需人工介入")
+                        # 记录到 cron_failures 供 health_check 告警
+                        if not dry_run:
+                            self._record_cron_failure(pid, f"{job['job_id']}: {job.get('last_error', '')}")
         except Exception as e:
             item["actions"].append(f" error: {e}")
         repaired.append(item)
