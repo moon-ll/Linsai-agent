@@ -49,6 +49,7 @@ from .framework import (
     teardown_cron_framework,
 )
 from .orchestrator import (
+    _compute_actual_round,
     sync_checkpoint,
     run_orchestrator,
     run_repair,
@@ -244,6 +245,7 @@ python3 scripts/weekend_pipeline.py --run-next
     # ------------------------------------------------------------------
     # 编排与修复（从 orchestrator 模块绑定为方法）
     # ------------------------------------------------------------------
+    _compute_actual_round = _compute_actual_round
     sync_checkpoint = sync_checkpoint
     run_orchestrator = run_orchestrator
     run_repair = run_repair

@@ -434,13 +434,25 @@ def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, 
 
 def execute_job(self, job: Dict[str, Any]) -> Dict[str, Any]:
     """执行一个 checkpoint job（不获取锁，调用方负责锁）。"""
+    import time
+
     proposal_id = job["proposal_id"]
     step = job["step"]
+    round_num = job.get("round", 0)
+
+    # v6.7.12: 保持与 optimize.py 相同的日志格式，供 profile_health 统计
+    step_verb = {
+        STEP_CRITIC: "评审",
+        STEP_WRITER: "优化",
+        STEP_RESEARCHER: "定向检索",
+        STEP_MONITOR: "监察",
+    }.get(step, step)
     if _log:
-        _log.info(f"[{proposal_id}] 执行 job {job['job_id']} ({step})")
+        _log.info(f"[{proposal_id}] 对抗轮 {round_num}: {step} {step_verb}")
 
     self._update_job(proposal_id, job, JOB_STATUS_RUNNING)
 
+    t0 = time.time()
     try:
         if step == STEP_CRITIC:
             result = self._run_critic_step(proposal_id, job)
@@ -454,6 +466,7 @@ def execute_job(self, job: Dict[str, Any]) -> Dict[str, Any]:
             result = {"success": False, "error": f"未知步骤 {step}"}
     except Exception as e:
         result = {"success": False, "error": str(e)}
+    elapsed = round(time.time() - t0, 2)
 
     if result.get("success"):
         self._update_job(proposal_id, job, JOB_STATUS_DONE)
@@ -466,8 +479,8 @@ def execute_job(self, job: Dict[str, Any]) -> Dict[str, Any]:
 
     if _log:
         _log.info(
-            f"[{proposal_id}] job {job['job_id']} 完成: "
-            f"success={result.get('success')} error={result.get('error', '')[:80]}"
+            f"[{proposal_id}] 对抗轮 {round_num}: {step} 完成 "
+            f"success={result.get('success')} elapsed={elapsed}s"
         )
     return result
 

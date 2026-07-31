@@ -12,10 +12,14 @@ from proposal_lifecycle import DEFAULT_MAX_ROUNDS
 
 from .constants import (
     HERMES_PROFILE,
+    JOB_STATUS_DONE,
     JOB_STATUS_FAILED,
     JOB_STATUS_PENDING,
     JOB_STATUS_RUNNING,
     MAX_JOB_ATTEMPTS,
+    STEP_CRITIC,
+    STEP_MONITOR,
+    STEP_WRITER,
     WEEKEND_JOBS,
 )
 from .utils import _is_stale, _is_weekend, _load_weekend_jobs, _make_job_id, _save_weekend_jobs, _section_for_round
@@ -30,8 +34,47 @@ except Exception:
     _log = None
 
 
+def _compute_actual_round(self, proposal_id: str, jobs: List[Dict[str, Any]]) -> int:
+    """根据已完成的 job 计算实际闭环轮次，修复 optimization_rounds 滞后。
+
+    从当前 optimization_rounds+1 开始向上扫描，若某轮的 critic/writer/monitor
+    全部 done，则认为该轮已闭环。返回应推进到的轮次。
+    """
+    prop_state = self._get_proposal_state(proposal_id)
+    current_round = prop_state.get("optimization_rounds", 0) if prop_state else 0
+    if not jobs:
+        return current_round
+
+    actual = current_round
+    round_num = current_round + 1
+    # 安全上限：避免无限制扫描
+    while round_num <= current_round + 20:
+        section = _section_for_round(round_num)
+        section_key = section["key"]
+        required = [
+            _make_job_id(proposal_id, round_num, section_key, STEP_CRITIC),
+            _make_job_id(proposal_id, round_num, section_key, STEP_WRITER),
+            _make_job_id(proposal_id, round_num, section_key, STEP_MONITOR),
+        ]
+        statuses = {}
+        for job in jobs:
+            if job["job_id"] in required:
+                statuses[job["job_id"]] = job.get("status")
+        if len(statuses) == len(required) and all(s == JOB_STATUS_DONE for s in statuses.values()):
+            actual = round_num
+            round_num += 1
+        else:
+            break
+    return actual
+
+
 def sync_checkpoint(self, proposal_id: str) -> Dict[str, Any]:
-    """为指定 proposal 补齐下一轮的 checkpoint。幂等。"""
+    """为指定 proposal 补齐下一轮的 checkpoint。幂等。
+
+    v6.7.12: 新增对 optimization_rounds 滞后的自动修复。
+    当负反馈告警被清除后，pipeline_jobs 中可能已有更高轮次完成，
+    但 optimization_rounds 未推进，导致无法生成新 checkpoint。
+    """
     prop_state = self._get_proposal_state(proposal_id)
     if not prop_state:
         return {"success": False, "error": "proposal 未注册"}
@@ -40,13 +83,27 @@ def sync_checkpoint(self, proposal_id: str) -> Dict[str, Any]:
         return {"success": True, "reason": "不在优化中，无需 checkpoint", "added": 0}
 
     jobs = self._get_jobs(proposal_id)
+
+    # v6.7.12: 修复 optimization_rounds 滞后
+    actual_round = self._compute_actual_round(proposal_id, jobs)
     current_round = prop_state.get("optimization_rounds", 0)
+    round_advanced = False
+    if actual_round > current_round:
+        prop_state["optimization_rounds"] = actual_round
+        current_round = actual_round
+        round_advanced = True
+        if _log:
+            _log.info(f"[{proposal_id}] checkpoint 修复: optimization_rounds 推进到 {actual_round}")
+        self._set_proposal_state(proposal_id, prop_state)
+        # 重新加载 jobs（_set_proposal_state 可能并发修改）
+        jobs = self._get_jobs(proposal_id)
+
     next_round = current_round + 1
 
     # 如果已经达到最大轮数或已达标，不需要新 checkpoint
     # （writer 完成后会负责 transition）
     if current_round >= DEFAULT_MAX_ROUNDS:
-        return {"success": True, "reason": "已达最大轮数", "added": 0}
+        return {"success": True, "reason": "已达最大轮数", "added": 0, "round_advanced": round_advanced}
 
     section = _section_for_round(next_round)
     needed = self._build_next_round_jobs(proposal_id, next_round, section)
@@ -60,7 +117,13 @@ def sync_checkpoint(self, proposal_id: str) -> Dict[str, Any]:
     if added:
         self._save_jobs(proposal_id, jobs)
 
-    return {"success": True, "proposal_id": proposal_id, "next_round": next_round, "added": added}
+    return {
+        "success": True,
+        "proposal_id": proposal_id,
+        "next_round": next_round,
+        "added": added,
+        "round_advanced": round_advanced,
+    }
 
 
 def run_orchestrator(self) -> Dict[str, Any]:

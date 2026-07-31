@@ -54,10 +54,14 @@ def _parse_log_records(window_hours: int = 24) -> List[Dict[str, Any]]:
     cutoff = datetime.now(timezone.utc) - timedelta(hours=window_hours)
     records: List[Dict[str, Any]] = []
 
+    # v6.7.12: 同时兼容 optimize.py 旧日志与 lifecycle/executor.py 新日志
+    logger_part = r"\[linsai\.(?:proposal_lifecycle|lifecycle_cron)\]"
+
     # 启动行：提取 profile 和 proposal_id
     dispatch_pattern = re.compile(
         r"\[(?P<at>\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2})\] \[(?P<level>\w+)\] "
-        r"\[linsai\.proposal_lifecycle\] \[(?P<proposal_id>[\w\-]+)\] "
+        + logger_part
+        + r" \[(?P<proposal_id>[\w\-]+)\] "
         r"对抗轮\s+\d+:\s*(?P<profile>critic|writer|researcher) "
         r"(评审|优化|定向检索)",
         re.IGNORECASE,
@@ -65,14 +69,16 @@ def _parse_log_records(window_hours: int = 24) -> List[Dict[str, Any]]:
     # 完成行：提取 profile、success、elapsed
     complete_pattern = re.compile(
         r"\[(?P<at>\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2})\] \[(?P<level>\w+)\] "
-        r"\[linsai\.proposal_lifecycle\] 对抗轮\s+\d+:\s*(?P<profile>critic|writer|researcher) 完成 "
+        + logger_part
+        + r" \[(?P<proposal_id>[\w\-]+)\] 对抗轮\s+\d+:\s*(?P<profile>critic|writer|researcher) 完成 "
         r"success=(?P<success>True|False) elapsed=(?P<elapsed>\d+(?:\.\d+)?)s",
         re.IGNORECASE,
     )
-    # ERROR 行：匹配 proposal_lifecycle 模块错误
+    # ERROR 行：匹配 proposal_lifecycle / lifecycle_cron 模块错误
     error_pattern = re.compile(
         r"\[(?P<at>\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}:\d{2})\] \[(?P<level>ERROR)\] "
-        r"\[linsai\.proposal_lifecycle\] (?P<msg>.*)"
+        + logger_part
+        + r" (?P<msg>.*)"
     )
 
     try:
@@ -191,7 +197,7 @@ def compute_profile_health(window_hours: int = 24) -> Dict[str, Any]:
         # 先计算失败记录，供状态派生和建议使用
         completed_recs = [r for r in recs if r.get("completed")]
         failed_recs = [r for r in recs if r.get("completed") and not r.get("success")]
-        recent_error = failed_recs[-1]["error"] if failed_recs else ""
+        recent_error = failed_recs[-1].get("error", "") if failed_recs else ""
 
         # 状态派生：基于 exists / heartbeat_alive / 实际失败证据
         # v6.7.10 修复：pipeline 使用 hermes --profile -z 一次性调用，不依赖常驻 gateway。
