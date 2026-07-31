@@ -127,17 +127,19 @@ def sync_checkpoint(self, proposal_id: str) -> Dict[str, Any]:
 
 
 def run_orchestrator(self) -> Dict[str, Any]:
-    """每日编排：生成 checkpoint + 确保每个 optimizing proposal 有 worker。"""
+    """每日编排（v6.7.12）：生成 checkpoint + 确保全局微调度器就位。
+
+    v6.7.12 起不再为每个 proposal 创建独立 worker，而是使用单一全局
+    微调度器每 5 分钟扫描并执行一个最优先的 pending job。
+    """
     if _log:
-        _log.info("=== 每日编排器（v2）启动 ===")
+        _log.info("=== 每日编排器（v6.7.12）启动 ===")
 
     health_before = self.run_health_check()
     target_proposals = self.match_proposals_with_brief()
 
     optimizing = self.list_by_status("optimizing")
-    # 文献匹配只是优先级提示，v2 仍保证所有 optimizing 都有 worker
     results = []
-    workers_created = 0
     checkpoints_added = 0
 
     for prop in optimizing:
@@ -145,13 +147,9 @@ def run_orchestrator(self) -> Dict[str, Any]:
         try:
             cp = self.sync_checkpoint(pid)
             checkpoints_added += cp.get("added", 0)
-            wr = self.schedule_worker(pid)
-            if wr.get("cron_job_id"):
-                workers_created += 1
             results.append({
                 "proposal_id": pid,
                 "checkpoint": cp,
-                "worker": wr,
                 "priority": pid in target_proposals,
             })
         except Exception as e:
@@ -159,14 +157,41 @@ def run_orchestrator(self) -> Dict[str, Any]:
                 _log.error(f"[orchestrate] {pid} 处理失败: {e}")
             results.append({"proposal_id": pid, "error": str(e)})
 
+    # 确保全局微调度器存在
+    scheduler_ok = True
+    scheduler_msg = "微调度器已存在"
+    try:
+        existing = {
+            c.get("name") for c in self.list_lifecycle_crons()
+            if c.get("status") == "active"
+        }
+        if "lc-micro-scheduler" not in existing:
+            res = self.schedule_micro_scheduler()
+            scheduler_ok = res.get("success", False)
+            scheduler_msg = res.get("message", "unknown")
+    except Exception as e:
+        scheduler_ok = False
+        scheduler_msg = str(e)
+
+    # 暂停旧的 per-proposal worker，避免与微调度器并发
+    try:
+        pause_res = self.pause_old_worker_crons()
+        paused_workers = pause_res.get("paused", [])
+    except Exception as e:
+        paused_workers = []
+        if _log:
+            _log.warning(f"[orchestrate] 暂停旧 worker 失败: {e}")
+
     health_after = self.run_health_check()
 
     summary = {
         "orchestrated_at": now_utc(),
         "optimizing_count": len(optimizing),
         "target_count": len(target_proposals),
-        "workers_created": workers_created,
         "checkpoints_added": checkpoints_added,
+        "scheduler_ok": scheduler_ok,
+        "scheduler_message": scheduler_msg,
+        "paused_workers": paused_workers,
         "health_before": {"healthy": health_before["healthy"], "alerts": len(health_before["alerts"])},
         "health_after": {"healthy": health_after["healthy"], "alerts": len(health_after["alerts"])},
         "results": results,
@@ -174,7 +199,8 @@ def run_orchestrator(self) -> Dict[str, Any]:
     if _log:
         _log.info(
             f"每日编排器完成: optimizing={len(optimizing)} "
-            f"workers={workers_created} checkpoints_added={checkpoints_added}"
+            f"checkpoints_added={checkpoints_added} "
+            f"scheduler_ok={scheduler_ok} paused_workers={len(paused_workers)}"
         )
     return summary
 
@@ -194,46 +220,45 @@ def run_repair(self, dry_run: bool = False) -> Dict[str, Any]:
     if _is_weekend():
         return self._run_weekend_repair(dry_run=dry_run, lifecycle_crons=lifecycle_crons)
 
-    # 工作日模式：扫描 optimizing proposal worker jobs
+    # 工作日模式（v6.7.12）：确保微调度器 + 清理旧 worker + 修复 jobs
     optimizing = self.list_by_status("optimizing")
-    active_worker_names = {
-        j["name"] for j in lifecycle_crons
-        if j.get("name", "").startswith("lc-worker-") and j.get("status") == "active"
-    }
 
-    repaired = []
+    # 1. 确保全局微调度器存在
+    scheduler_action = ""
+    active_names = {c.get("name") for c in lifecycle_crons if c.get("status") == "active"}
+    if "lc-micro-scheduler" not in active_names:
+        if not dry_run:
+            res = self.schedule_micro_scheduler()
+            scheduler_action = f"created micro-scheduler: {res.get('message', '')}"
+        else:
+            scheduler_action = "missing micro-scheduler (dry-run)"
+    else:
+        scheduler_action = "micro-scheduler ok"
+
+    repaired = [{"proposal_id": "_scheduler", "actions": [scheduler_action]}]
+
+    # 2. 清理已不在 optimizing 状态或多余的 lc-worker-* cron
+    optimizing_ids = {p["proposal_id"] for p in optimizing}
+    removed_workers = []
+    for cron in lifecycle_crons:
+        name = cron.get("name", "")
+        if name.startswith("lc-worker-"):
+            pid = name[len("lc-worker-"):]
+            if pid not in optimizing_ids:
+                if not dry_run:
+                    hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)
+                removed_workers.append(name)
+    if removed_workers:
+        repaired.append({"proposal_id": "_workers", "actions": [f"removed stale workers: {removed_workers}"]})
+
+    # 3. 修复每个 optimizing proposal 的 checkpoint 和 stuck/failed jobs
     for prop in optimizing:
         pid = prop["proposal_id"]
         item = {"proposal_id": pid, "actions": []}
         try:
-            # 1. 同步 checkpoint
             if not dry_run:
                 self.sync_checkpoint(pid)
 
-            # 2. 检查 worker cron 是否存在且 active，并校验 schedule 是否为周中
-            worker_name = f"lc-worker-{pid}"
-            if worker_name not in active_worker_names:
-                if not dry_run:
-                    self.schedule_worker(pid)
-                    item["actions"].append(" recreated worker cron")
-                else:
-                    item["actions"].append(" missing worker cron (dry-run)")
-            else:
-                expected_minute = self._compute_worker_minute(pid)
-                expected_schedule = f"{expected_minute} * * * 1-5"
-                existing = next(
-                    (j for j in lifecycle_crons if j.get("name") == worker_name), None
-                )
-                current_schedule = existing.get("schedule", "") if existing else ""
-                if current_schedule and current_schedule != expected_schedule:
-                    if not dry_run:
-                        hb.cron_delete(existing.get("id"), profile=HERMES_PROFILE)
-                        self.schedule_worker(pid)
-                    item["actions"].append(
-                        f" updated worker schedule {current_schedule} -> {expected_schedule}"
-                    )
-
-            # 3. 处理 stuck / failed jobs
             jobs = self._get_jobs(pid)
             for job in jobs:
                 if _is_stale(job):
@@ -241,8 +266,6 @@ def run_repair(self, dry_run: bool = False) -> Dict[str, Any]:
                         self._update_job(pid, job, JOB_STATUS_FAILED, "运行超时/进程僵死")
                     item["actions"].append(f" stale job {job['job_id']} -> failed")
                 elif job.get("status") == JOB_STATUS_FAILED:
-                    # 使用 repair_attempts 跟踪修复轮次；每次 repair 重置 attempts，
-                    # 给 job 3 次执行机会，但超过 MAX_JOB_ATTEMPTS 轮 repair 后人工介入。
                     repair_attempts = job.get("repair_attempts", 0)
                     if repair_attempts < MAX_JOB_ATTEMPTS:
                         if not dry_run:
@@ -258,23 +281,11 @@ def run_repair(self, dry_run: bool = False) -> Dict[str, Any]:
                         )
                     else:
                         item["actions"].append(f" job {job['job_id']} 超过修复重试次数，需人工介入")
-                        # 记录到 cron_failures 供 health_check 告警
                         if not dry_run:
                             self._record_cron_failure(pid, f"{job['job_id']}: {job.get('last_error', '')}")
         except Exception as e:
             item["actions"].append(f" error: {e}")
         repaired.append(item)
-
-    # 4. 清理已不在 optimizing 状态的 worker cron
-    optimizing_ids = {p["proposal_id"] for p in optimizing}
-    for cron in lifecycle_crons:
-        name = cron.get("name", "")
-        if name.startswith("lc-worker-"):
-            pid = name[len("lc-worker-"):]
-            if pid not in optimizing_ids:
-                if not dry_run:
-                    hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)
-                repaired.append({"proposal_id": pid, "actions": ["removed stale worker cron"]})
 
     return {"success": True, "dry_run": dry_run, "repaired": repaired, "at": now_utc()}
 

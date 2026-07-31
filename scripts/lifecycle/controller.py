@@ -35,7 +35,11 @@ from .executor import (
     _update_job,
     _read_critic_report,
     _run_critic_step,
-    _insert_researcher_job,
+    _insert_researcher_pipeline,
+    _run_gap_identify_step,
+    _run_lit_search_step,
+    _run_lit_read_step,
+    _run_lit_note_step,
     _run_researcher_step,
     _run_writer_step,
     _run_monitor_step,
@@ -47,6 +51,15 @@ from .framework import (
     setup_weekend_crontab,
     teardown_weekend_crontab,
     teardown_cron_framework,
+)
+from .micro_scheduler import (
+    _job_priority_key,
+    _list_ready_jobs,
+    _refresh_stale_jobs,
+    pause_old_worker_crons,
+    remove_micro_scheduler,
+    run_micro_scheduler,
+    schedule_micro_scheduler,
 )
 from .orchestrator import (
     _compute_actual_round,
@@ -226,7 +239,11 @@ python3 scripts/weekend_pipeline.py --run-next
     _update_job = _update_job
     _read_critic_report = _read_critic_report
     _run_critic_step = _run_critic_step
-    _insert_researcher_job = _insert_researcher_job
+    _insert_researcher_pipeline = _insert_researcher_pipeline
+    _run_gap_identify_step = _run_gap_identify_step
+    _run_lit_search_step = _run_lit_search_step
+    _run_lit_read_step = _run_lit_read_step
+    _run_lit_note_step = _run_lit_note_step
     _run_researcher_step = _run_researcher_step
     _run_writer_step = _run_writer_step
     _run_monitor_step = _run_monitor_step
@@ -251,6 +268,17 @@ python3 scripts/weekend_pipeline.py --run-next
     run_repair = run_repair
     _run_weekend_repair = _run_weekend_repair
     run_health_check = run_health_check
+
+    # ------------------------------------------------------------------
+    # 微调度器（从 micro_scheduler 模块绑定为方法）
+    # ------------------------------------------------------------------
+    _refresh_stale_jobs = _refresh_stale_jobs
+    _job_priority_key = _job_priority_key
+    _list_ready_jobs = _list_ready_jobs
+    run_micro_scheduler = run_micro_scheduler
+    schedule_micro_scheduler = schedule_micro_scheduler
+    remove_micro_scheduler = remove_micro_scheduler
+    pause_old_worker_crons = pause_old_worker_crons
 
     # ------------------------------------------------------------------
     # 安装 / 卸载（从 framework 模块绑定为方法）

@@ -43,6 +43,16 @@ STEP_RESEARCHER = "researcher"
 STEP_WRITER = "writer"
 STEP_MONITOR = "monitor"  # v6.7.6: 全局监察步骤
 
+# v6.7.12: researcher 拆分为 4 个连贯子步骤
+STEP_GAP_IDENTIFY = "gap_identify"
+STEP_LIT_SEARCH = "lit_search"
+STEP_LIT_READ = "lit_read"
+STEP_LIT_NOTE = "lit_note"
+
+# 微调度器 cron 名称与默认调度（每 5 分钟）
+MICRO_SCHEDULER_NAME = "lc-micro-scheduler"
+MICRO_SCHEDULER_SCHEDULE = "*/5 * * * 1-5"  # 工作日每 5 分钟一次
+
 # stale 阈值：running 超过该秒数视为死锁
 STALE_RUNNING_SECONDS = 3600
 

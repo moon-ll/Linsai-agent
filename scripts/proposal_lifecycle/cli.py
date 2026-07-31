@@ -56,13 +56,21 @@ def main(argv: Optional[List[str]] = None) -> int:
                         help="安装周末任务 cron（输入/输出/反思）")
     parser.add_argument("--teardown-weekend", action="store_true",
                         help="卸载周末任务 cron")
+    # v6.7.12: 全局微调度器（5 分钟一轮， researcher 4 子任务连贯执行）
+    parser.add_argument("--micro-scheduler", action="store_true",
+                        help="手动运行一次全局微调度器")
+    parser.add_argument("--setup-micro-scheduler", action="store_true",
+                        help="安装全局微调度器 cron（每 5 分钟）")
+    parser.add_argument("--remove-micro-scheduler", action="store_true",
+                        help="卸载全局微调度器 cron")
     args = parser.parse_args(argv)
 
     lc = ProposalLifecycle()
 
     # v6.7.5: 新 cron 框架命令使用 LifecycleCronController
     if any([args.worker_step, args.orchestrate, args.repair, args.setup_cron_v2, args.teardown_cron_v2,
-            args.setup_weekend, args.teardown_weekend]):
+            args.setup_weekend, args.teardown_weekend,
+            args.micro_scheduler, args.setup_micro_scheduler, args.remove_micro_scheduler]):
         # 延迟导入避免循环依赖
         from lifecycle_cron_framework import LifecycleCronController
         ctrl = LifecycleCronController()
@@ -125,6 +133,29 @@ def main(argv: Optional[List[str]] = None) -> int:
         if args.teardown_weekend:
             result = ctrl.teardown_weekend_crontab()
             print(f"=== 已卸载周末 cron: {result.get('removed', [])} ===")
+            return 0
+
+        if args.micro_scheduler:
+            result = ctrl.run_micro_scheduler()
+            print("=== 全局微调度器执行完成 ===")
+            print(f"executed_count: {result.get('executed_count', 0)}")
+            for item in result.get('executed', []):
+                print(f"  {item.get('proposal_id')} {item.get('job_id')} "
+                      f"step={item.get('step')} success={item.get('success')}")
+                if item.get('error'):
+                    print(f"    error: {item['error']}")
+            return 0 if result.get('success') else 1
+
+        if args.setup_micro_scheduler:
+            result = ctrl.schedule_micro_scheduler()
+            print(f"=== 全局微调度器 cron 安装结果 ===")
+            print(f"message: {result.get('message')}")
+            print(f"cron_id: {result.get('cron_job_id')}")
+            return 0 if result.get('success') else 1
+
+        if args.remove_micro_scheduler:
+            result = ctrl.remove_micro_scheduler()
+            print(f"=== 已卸载微调度器 cron: {result.get('removed', [])} ===")
             return 0
 
     # 原有命令继续走 ProposalLifecycle

@@ -129,12 +129,18 @@ class LifecycleCronTests(TestSuite):
         self._register_proposal(c, pid, "optimizing")
         c.sync_checkpoint(pid)
 
-        # 直接插入 researcher job（模拟 critic 完成后的行为）
-        c._insert_researcher_job(pid, 1, "rationale")
+        # 直接插入 researcher 流水线（模拟 critic 完成后的行为）
+        c._insert_researcher_pipeline(pid, 1, "rationale")
         jobs = c._get_jobs(pid)
-        self.assert_eq(len(jobs), 4, "插入 researcher 后共 4 个 job")
-        self.assert_eq(jobs[1]["step"], "researcher", "中间 job 是 researcher")
-        self.assert_in(jobs[1]["job_id"], jobs[2]["depends_on"], "writer 依赖 researcher")
+        self.assert_eq(len(jobs), 7, "插入 researcher 流水线后共 7 个 job")
+        self.assert_eq(jobs[0]["step"], "critic", "第 1 个 job 是 critic")
+        self.assert_eq(jobs[1]["step"], "gap_identify", "第 2 个 job 是 gap_identify")
+        self.assert_eq(jobs[2]["step"], "lit_search", "第 3 个 job 是 lit_search")
+        self.assert_eq(jobs[3]["step"], "lit_read", "第 4 个 job 是 lit_read")
+        self.assert_eq(jobs[4]["step"], "lit_note", "第 5 个 job 是 lit_note")
+        self.assert_eq(jobs[5]["step"], "writer", "第 6 个 job 是 writer")
+        self.assert_eq(jobs[6]["step"], "monitor", "第 7 个 job 是 monitor")
+        self.assert_in(jobs[4]["job_id"], jobs[5]["depends_on"], "writer 依赖 lit_note")
 
     def _test_stale_running_repair(self):
         c = self._make_controller()

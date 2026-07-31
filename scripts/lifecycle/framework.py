@@ -42,11 +42,10 @@ def setup_cron_framework(
     repair_schedule: str = DEFAULT_REPAIR_SCHEDULE,
     install_weekend: bool = True,
 ) -> Dict[str, Any]:
-    """安装 v2 cron 框架：删除旧单一 cron，创建 orchestrate + repair + workers + weekend。
+    """安装 v6.7.12 cron 框架：删除旧单一 cron，创建 orchestrate + repair + 全局微调度器 + weekend。
 
-    worker_interval 参数保留以兼容 CLI，但实际 worker schedule 由
-    schedule_worker 自动错开（默认 47 分起，每新增一个 worker 偏移 6 分钟），
-    且仅在周中运行（1-5），周末暂停。
+    worker_interval 参数保留以兼容 CLI，但实际 worker 已由全局微调度器替代，
+    每 5 分钟从所有 optimizing proposal 中挑选一个最优先的 pending job 执行。
     """
     self._write_generic_wrappers()
 
@@ -76,14 +75,22 @@ def setup_cron_framework(
         profile=HERMES_PROFILE,
     )
 
-    # 立即执行一次 orchestrate，确保当天 worker 就位
+    # 全局微调度器 cron（每 5 分钟执行一个 job）
+    micro = self.schedule_micro_scheduler()
+
+    # 暂停旧的 per-proposal worker，避免并发
+    pause_res = self.pause_old_worker_crons()
+
+    # 立即执行一次 orchestrate，确保 checkpoint 就位
     orch_now = self.run_orchestrator()
 
     result = {
-        "success": orch.get("success") and rep.get("success"),
+        "success": orch.get("success") and rep.get("success") and micro.get("success"),
         "removed_old": removed,
         "orchestrate": orch,
         "repair": rep,
+        "micro_scheduler": micro,
+        "paused_workers": pause_res.get("paused", []),
         "first_orchestrate": orch_now,
     }
 

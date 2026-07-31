@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-07-31T04:50:17Z",
+      "updated_at": "2026-07-31T06:26:27Z",
       "optimization_rounds": 5,
       "last_score": 0.82,
       "score_history": [
@@ -166,23 +166,6 @@
           "scheduled_at": "",
           "started_at": "2026-07-28T12:29:40Z",
           "finished_at": "2026-07-28T12:34:48Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-quantum-geometry-inversion-20260726-r2-content-researcher",
-          "proposal_id": "general-quantum-geometry-inversion-20260726",
-          "step": "researcher",
-          "section_key": "content",
-          "round": 2,
-          "status": "done",
-          "depends_on": [
-            "general-quantum-geometry-inversion-20260726-r2-content-critic"
-          ],
-          "attempts": 1,
-          "scheduled_at": "",
-          "started_at": "2026-07-28T15:47:24Z",
-          "finished_at": "2026-07-28T15:47:37Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -423,8 +406,76 @@
           "step": "critic",
           "section_key": "outcome",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-31T05:47:09Z",
+          "finished_at": "2026-07-31T05:50:58Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r6-outcome-gap_identify",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "gap_identify",
+          "section_key": "outcome",
+          "round": 6,
+          "status": "failed",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r6-outcome-critic"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "2026-07-31T06:25:31Z",
+          "finished_at": "2026-07-31T06:26:27Z",
+          "last_error": "'tuple' object has no attribute 'strip'",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r6-outcome-lit_search",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_search",
+          "section_key": "outcome",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r6-outcome-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r6-outcome-lit_read",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_read",
+          "section_key": "outcome",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r6-outcome-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r6-outcome-lit_note",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_note",
+          "section_key": "outcome",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r6-outcome-lit_read"
+          ],
           "attempts": 0,
           "scheduled_at": "",
           "started_at": "",
@@ -440,7 +491,8 @@
           "round": 6,
           "status": "pending",
           "depends_on": [
-            "general-quantum-geometry-inversion-20260726-r6-outcome-critic"
+            "general-quantum-geometry-inversion-20260726-r6-outcome-critic",
+            "general-quantum-geometry-inversion-20260726-r6-outcome-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -460,6 +512,23 @@
             "general-quantum-geometry-inversion-20260726-r6-outcome-writer"
           ],
           "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-content-researcher",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "researcher",
+          "section_key": "content",
+          "round": 2,
+          "status": "done",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-content-critic"
+          ],
+          "attempts": 1,
           "scheduled_at": "",
           "started_at": "",
           "finished_at": "",
@@ -614,7 +683,7 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-31T04:50:29Z",
+      "updated_at": "2026-07-31T06:25:31Z",
       "optimization_rounds": 6,
       "last_score": 0.08,
       "score_history": [
@@ -774,23 +843,6 @@
           "cron_job_id": ""
         },
         {
-          "job_id": "key-transient-quantum-phase-optical-20260726-r3-method-researcher",
-          "proposal_id": "key-transient-quantum-phase-optical-20260726",
-          "step": "researcher",
-          "section_key": "method",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "key-transient-quantum-phase-optical-20260726-r3-method-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-07-28T13:59:08Z",
-          "finished_at": "2026-07-28T13:59:51Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
           "job_id": "key-transient-quantum-phase-optical-20260726-r3-method-writer",
           "proposal_id": "key-transient-quantum-phase-optical-20260726",
           "step": "writer",
@@ -837,23 +889,6 @@
           "scheduled_at": "",
           "started_at": "2026-07-30T10:59:58Z",
           "finished_at": "2026-07-30T11:03:27Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "key-transient-quantum-phase-optical-20260726-r4-innovation-researcher",
-          "proposal_id": "key-transient-quantum-phase-optical-20260726",
-          "step": "researcher",
-          "section_key": "innovation",
-          "round": 4,
-          "status": "done",
-          "depends_on": [
-            "key-transient-quantum-phase-optical-20260726-r4-innovation-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-07-30T11:44:57Z",
-          "finished_at": "2026-07-30T11:55:05Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -908,23 +943,6 @@
           "cron_job_id": ""
         },
         {
-          "job_id": "key-transient-quantum-phase-optical-20260726-r5-plan-researcher",
-          "proposal_id": "key-transient-quantum-phase-optical-20260726",
-          "step": "researcher",
-          "section_key": "plan",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "key-transient-quantum-phase-optical-20260726-r5-plan-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-07-30T14:59:27Z",
-          "finished_at": "2026-07-30T15:12:39Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
           "job_id": "key-transient-quantum-phase-optical-20260726-r5-plan-writer",
           "proposal_id": "key-transient-quantum-phase-optical-20260726",
           "step": "writer",
@@ -975,23 +993,6 @@
           "cron_job_id": ""
         },
         {
-          "job_id": "key-transient-quantum-phase-optical-20260726-r6-outcome-researcher",
-          "proposal_id": "key-transient-quantum-phase-optical-20260726",
-          "step": "researcher",
-          "section_key": "outcome",
-          "round": 6,
-          "status": "done",
-          "depends_on": [
-            "key-transient-quantum-phase-optical-20260726-r6-outcome-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-07-30T18:59:02Z",
-          "finished_at": "2026-07-30T19:13:15Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
           "job_id": "key-transient-quantum-phase-optical-20260726-r6-outcome-writer",
           "proposal_id": "key-transient-quantum-phase-optical-20260726",
           "step": "writer",
@@ -1032,8 +1033,76 @@
           "step": "critic",
           "section_key": "references",
           "round": 7,
-          "status": "pending",
+          "status": "done",
           "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-31T04:59:02Z",
+          "finished_at": "2026-07-31T05:12:24Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r7-references-gap_identify",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "gap_identify",
+          "section_key": "references",
+          "round": 7,
+          "status": "failed",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r7-references-critic"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "2026-07-31T06:24:53Z",
+          "finished_at": "2026-07-31T06:25:31Z",
+          "last_error": "'tuple' object has no attribute 'strip'",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r7-references-lit_search",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_search",
+          "section_key": "references",
+          "round": 7,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r7-references-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r7-references-lit_read",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_read",
+          "section_key": "references",
+          "round": 7,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r7-references-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r7-references-lit_note",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_note",
+          "section_key": "references",
+          "round": 7,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r7-references-lit_read"
+          ],
           "attempts": 0,
           "scheduled_at": "",
           "started_at": "",
@@ -1049,7 +1118,8 @@
           "round": 7,
           "status": "pending",
           "depends_on": [
-            "key-transient-quantum-phase-optical-20260726-r7-references-critic"
+            "key-transient-quantum-phase-optical-20260726-r7-references-critic",
+            "key-transient-quantum-phase-optical-20260726-r7-references-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -1069,6 +1139,74 @@
             "key-transient-quantum-phase-optical-20260726-r7-references-writer"
           ],
           "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r3-method-researcher",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "researcher",
+          "section_key": "method",
+          "round": 3,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r3-method-critic"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r4-innovation-researcher",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "researcher",
+          "section_key": "innovation",
+          "round": 4,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r4-innovation-critic"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r5-plan-researcher",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "researcher",
+          "section_key": "plan",
+          "round": 5,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r5-plan-critic"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r6-outcome-researcher",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "researcher",
+          "section_key": "outcome",
+          "round": 6,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r6-outcome-critic"
+          ],
+          "attempts": 1,
           "scheduled_at": "",
           "started_at": "",
           "finished_at": "",
@@ -1228,7 +1366,7 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-31T04:53:01Z",
+      "updated_at": "2026-07-31T06:21:32Z",
       "optimization_rounds": 7,
       "last_score": 0.0,
       "score_history": [
@@ -1466,23 +1604,6 @@
           "cron_job_id": ""
         },
         {
-          "job_id": "general-moire-strong-field-probe-20260726-r6-content-researcher",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "researcher",
-          "section_key": "content",
-          "round": 6,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r6-content-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-07-28T15:53:25Z",
-          "finished_at": "2026-07-28T15:54:06Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
           "job_id": "general-moire-strong-field-probe-20260726-r6-content-writer",
           "proposal_id": "general-moire-strong-field-probe-20260726",
           "step": "writer",
@@ -1582,18 +1703,69 @@
           "cron_job_id": ""
         },
         {
-          "job_id": "general-moire-strong-field-probe-20260726-r8-full_review-researcher",
+          "job_id": "general-moire-strong-field-probe-20260726-r8-full_review-gap_identify",
           "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "researcher",
+          "step": "gap_identify",
           "section_key": "full_review",
           "round": 8,
-          "status": "running",
+          "status": "failed",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r8-full_review-critic"
           ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "2026-07-31T06:18:32Z",
+          "finished_at": "2026-07-31T06:21:32Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r8-full_review-lit_search",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "lit_search",
+          "section_key": "full_review",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r8-full_review-gap_identify"
+          ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-07-31T04:53:01Z",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r8-full_review-lit_read",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "lit_read",
+          "section_key": "full_review",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r8-full_review-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r8-full_review-lit_note",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "lit_note",
+          "section_key": "full_review",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r8-full_review-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
           "finished_at": "",
           "last_error": "",
           "cron_job_id": ""
@@ -1607,7 +1779,7 @@
           "status": "pending",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r8-full_review-critic",
-            "general-moire-strong-field-probe-20260726-r8-full_review-researcher"
+            "general-moire-strong-field-probe-20260726-r8-full_review-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -1627,6 +1799,23 @@
             "general-moire-strong-field-probe-20260726-r8-full_review-writer"
           ],
           "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-content-researcher",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "researcher",
+          "section_key": "content",
+          "round": 6,
+          "status": "done",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-content-critic"
+          ],
+          "attempts": 1,
           "scheduled_at": "",
           "started_at": "",
           "finished_at": "",
@@ -1709,7 +1898,7 @@
       "source": "expansion",
       "source_detail": "候选4：量子光场驱动的HHG，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-07-31T04:54:45Z",
+      "updated_at": "2026-07-31T06:24:32Z",
       "optimization_rounds": 6,
       "last_score": 0.65,
       "score_history": [
@@ -1895,23 +2084,6 @@
           "cron_job_id": ""
         },
         {
-          "job_id": "general-bsv-driven-hhg-quantum-20260726-r5-rationale-researcher",
-          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
-          "step": "researcher",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-bsv-driven-hhg-quantum-20260726-r5-rationale-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-07-28T13:29:36Z",
-          "finished_at": "2026-07-28T13:40:39Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
           "job_id": "general-bsv-driven-hhg-quantum-20260726-r5-rationale-writer",
           "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
           "step": "writer",
@@ -1958,23 +2130,6 @@
           "scheduled_at": "",
           "started_at": "2026-07-30T02:23:55Z",
           "finished_at": "2026-07-30T02:33:17Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-bsv-driven-hhg-quantum-20260726-r6-content-researcher",
-          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
-          "step": "researcher",
-          "section_key": "content",
-          "round": 6,
-          "status": "done",
-          "depends_on": [
-            "general-bsv-driven-hhg-quantum-20260726-r6-content-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-07-30T12:07:39Z",
-          "finished_at": "2026-07-30T12:11:59Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2029,23 +2184,6 @@
           "cron_job_id": ""
         },
         {
-          "job_id": "general-bsv-driven-hhg-quantum-20260726-r6-outcome-researcher",
-          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
-          "step": "researcher",
-          "section_key": "outcome",
-          "round": 6,
-          "status": "done",
-          "depends_on": [
-            "general-bsv-driven-hhg-quantum-20260726-r6-outcome-critic"
-          ],
-          "attempts": 1,
-          "scheduled_at": "",
-          "started_at": "2026-07-30T11:23:01Z",
-          "finished_at": "2026-07-30T11:29:26Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
           "job_id": "general-bsv-driven-hhg-quantum-20260726-r6-outcome-writer",
           "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
           "step": "writer",
@@ -2096,19 +2234,70 @@
           "cron_job_id": ""
         },
         {
-          "job_id": "general-bsv-driven-hhg-quantum-20260726-r7-references-researcher",
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r7-references-gap_identify",
           "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
-          "step": "researcher",
+          "step": "gap_identify",
           "section_key": "references",
           "round": 7,
           "status": "failed",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r7-references-critic"
           ],
-          "attempts": 2,
+          "attempts": 1,
           "scheduled_at": "",
-          "started_at": "2026-07-31T04:51:00Z",
-          "finished_at": "2026-07-31T04:54:45Z",
+          "started_at": "2026-07-31T06:21:32Z",
+          "finished_at": "2026-07-31T06:24:32Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r7-references-lit_search",
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "step": "lit_search",
+          "section_key": "references",
+          "round": 7,
+          "status": "pending",
+          "depends_on": [
+            "general-bsv-driven-hhg-quantum-20260726-r7-references-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r7-references-lit_read",
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "step": "lit_read",
+          "section_key": "references",
+          "round": 7,
+          "status": "pending",
+          "depends_on": [
+            "general-bsv-driven-hhg-quantum-20260726-r7-references-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r7-references-lit_note",
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "step": "lit_note",
+          "section_key": "references",
+          "round": 7,
+          "status": "pending",
+          "depends_on": [
+            "general-bsv-driven-hhg-quantum-20260726-r7-references-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2121,7 +2310,7 @@
           "status": "pending",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r7-references-critic",
-            "general-bsv-driven-hhg-quantum-20260726-r7-references-researcher"
+            "general-bsv-driven-hhg-quantum-20260726-r7-references-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -2141,6 +2330,57 @@
             "general-bsv-driven-hhg-quantum-20260726-r7-references-writer"
           ],
           "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r5-rationale-researcher",
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "step": "researcher",
+          "section_key": "rationale",
+          "round": 5,
+          "status": "done",
+          "depends_on": [
+            "general-bsv-driven-hhg-quantum-20260726-r5-rationale-critic"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r6-content-researcher",
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "step": "researcher",
+          "section_key": "content",
+          "round": 6,
+          "status": "done",
+          "depends_on": [
+            "general-bsv-driven-hhg-quantum-20260726-r6-content-critic"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-bsv-driven-hhg-quantum-20260726-r6-outcome-researcher",
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "step": "researcher",
+          "section_key": "outcome",
+          "round": 6,
+          "status": "done",
+          "depends_on": [
+            "general-bsv-driven-hhg-quantum-20260726-r6-outcome-critic"
+          ],
+          "attempts": 1,
           "scheduled_at": "",
           "started_at": "",
           "finished_at": "",
@@ -2255,7 +2495,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-07-31T04:50:29Z",
+      "updated_at": "2026-07-31T06:33:08Z",
       "optimization_rounds": 7,
       "last_score": 0.36,
       "score_history": [
@@ -2441,23 +2681,6 @@
           "cron_job_id": ""
         },
         {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r4-full_review-researcher",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "researcher",
-          "section_key": "full_review",
-          "round": 4,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r4-full_review-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-07-28T13:20:59Z",
-          "finished_at": "2026-07-28T13:29:36Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
           "job_id": "general-order-parameter-ultrafast-readout-20260727-r4-full_review-writer",
           "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
           "step": "writer",
@@ -2557,23 +2780,6 @@
           "cron_job_id": ""
         },
         {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-plan-researcher",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "researcher",
-          "section_key": "plan",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-plan-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-07-30T12:17:07Z",
-          "finished_at": "2026-07-30T12:22:25Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
           "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-plan-writer",
           "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
           "step": "writer",
@@ -2620,23 +2826,6 @@
           "scheduled_at": "",
           "started_at": "2026-07-30T11:17:01Z",
           "finished_at": "2026-07-30T11:21:15Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r6-outcome-researcher",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "researcher",
-          "section_key": "outcome",
-          "round": 6,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r6-outcome-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-07-30T15:17:30Z",
-          "finished_at": "2026-07-30T15:34:07Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2691,23 +2880,6 @@
           "cron_job_id": ""
         },
         {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r7-references-researcher",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "researcher",
-          "section_key": "references",
-          "round": 7,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r7-references-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-07-30T19:17:05Z",
-          "finished_at": "2026-07-30T19:23:15Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
           "job_id": "general-order-parameter-ultrafast-readout-20260727-r7-references-writer",
           "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
           "step": "writer",
@@ -2748,8 +2920,76 @@
           "step": "critic",
           "section_key": "full_review",
           "round": 8,
-          "status": "pending",
+          "status": "done",
           "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-31T05:17:05Z",
+          "finished_at": "2026-07-31T05:25:39Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-full_review-gap_identify",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "gap_identify",
+          "section_key": "full_review",
+          "round": 8,
+          "status": "done",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-07-31T06:26:27Z",
+          "finished_at": "2026-07-31T06:27:59Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-full_review-lit_search",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_search",
+          "section_key": "full_review",
+          "round": 8,
+          "status": "failed",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-full_review-gap_identify"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "2026-07-31T06:28:07Z",
+          "finished_at": "2026-07-31T06:33:08Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-full_review-lit_read",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_read",
+          "section_key": "full_review",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-full_review-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-full_review-lit_note",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_note",
+          "section_key": "full_review",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-full_review-lit_read"
+          ],
           "attempts": 0,
           "scheduled_at": "",
           "started_at": "",
@@ -2765,7 +3005,8 @@
           "round": 8,
           "status": "pending",
           "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r8-full_review-critic"
+            "general-order-parameter-ultrafast-readout-20260727-r8-full_review-critic",
+            "general-order-parameter-ultrafast-readout-20260727-r8-full_review-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -2785,6 +3026,74 @@
             "general-order-parameter-ultrafast-readout-20260727-r8-full_review-writer"
           ],
           "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r4-full_review-researcher",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "researcher",
+          "section_key": "full_review",
+          "round": 4,
+          "status": "done",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r4-full_review-critic"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-plan-researcher",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "researcher",
+          "section_key": "plan",
+          "round": 5,
+          "status": "done",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r5-plan-critic"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r6-outcome-researcher",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "researcher",
+          "section_key": "outcome",
+          "round": 6,
+          "status": "done",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r6-outcome-critic"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r7-references-researcher",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "researcher",
+          "section_key": "references",
+          "round": 7,
+          "status": "done",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r7-references-critic"
+          ],
+          "attempts": 1,
           "scheduled_at": "",
           "started_at": "",
           "finished_at": "",
@@ -2939,5 +3248,5 @@
       ]
     }
   },
-  "updated_at": "2026-07-31T04:54:45Z"
+  "updated_at": "2026-07-31T06:33:08Z"
 }

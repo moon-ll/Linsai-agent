@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import json
 import shutil
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -16,6 +17,10 @@ from .constants import (
     JOB_STATUS_RUNNING,
     STALE_RUNNING_SECONDS,
     STEP_CRITIC,
+    STEP_GAP_IDENTIFY,
+    STEP_LIT_NOTE,
+    STEP_LIT_READ,
+    STEP_LIT_SEARCH,
     STEP_MONITOR,
     STEP_RESEARCHER,
     STEP_WRITER,
@@ -26,6 +31,11 @@ try:
     from adversarial_governance import AdversarialGovernance
 except Exception:
     AdversarialGovernance = None  # type: ignore[misc,assignment]
+
+try:
+    from llm_router import router as llm_router
+except Exception:
+    llm_router = None  # type: ignore[misc,assignment]
 
 try:
     from logger import get_logger
@@ -128,49 +138,230 @@ def _run_critic_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     # 解析报告，决定是否需要 researcher
     report = self._read_critic_report(prop_dir, round_num)
     if report["dim_scores"].get("rigor", 1.0) < 0.70 or self._has_lit_gap({"output": report["output"]}):
-        self._insert_researcher_job(proposal_id, round_num, section["key"])
+        self._insert_researcher_pipeline(proposal_id, round_num, section["key"])
 
     return {"success": True, "score": report["score"]}
 
-def _insert_researcher_job(self, proposal_id: str, round_num: int, section_key: str) -> None:
-    """在 critic 与 writer 之间插入 researcher job。幂等。"""
+def _insert_researcher_pipeline(self, proposal_id: str, round_num: int, section_key: str) -> None:
+    """v6.7.12: 在 critic 与 writer 之间插入 researcher 的 4 个子步骤流水线。幂等。"""
     jobs = self._get_jobs(proposal_id)
     writer_id = _make_job_id(proposal_id, round_num, section_key, STEP_WRITER)
+
+    sub_steps = [
+        (STEP_GAP_IDENTIFY, STEP_CRITIC),
+        (STEP_LIT_SEARCH, STEP_GAP_IDENTIFY),
+        (STEP_LIT_READ, STEP_LIT_SEARCH),
+        (STEP_LIT_NOTE, STEP_LIT_READ),
+    ]
+
+    # 如果已经存在旧版 researcher job，先不动它，保持向后兼容
     researcher_id = _make_job_id(proposal_id, round_num, section_key, STEP_RESEARCHER)
     if self._job_by_id(jobs, researcher_id):
         return
-    # 找到 writer job，把 researcher 插入它前面
+
+    # 如果任一子步骤已存在，说明已经插入过，直接跳过
+    if any(
+        self._job_by_id(jobs, _make_job_id(proposal_id, round_num, section_key, step))
+        for step, _ in sub_steps
+    ):
+        return
+
+    # 找到 writer job 的索引
     writer_idx = None
     for i, j in enumerate(jobs):
         if j["job_id"] == writer_id:
             writer_idx = i
             break
-    researcher_job = {
-        "job_id": researcher_id,
-        "proposal_id": proposal_id,
-        "step": STEP_RESEARCHER,
-        "section_key": section_key,
-        "round": round_num,
-        "status": JOB_STATUS_PENDING,
-        "depends_on": [_make_job_id(proposal_id, round_num, section_key, STEP_CRITIC)],
-        "attempts": 0,
-        "scheduled_at": "",
-        "started_at": "",
-        "finished_at": "",
-        "last_error": "",
-        "cron_job_id": "",
-    }
+
+    new_jobs = []
+    prev_dep = _make_job_id(proposal_id, round_num, section_key, STEP_CRITIC)
+    for step, dep in sub_steps:
+        job_id = _make_job_id(proposal_id, round_num, section_key, step)
+        new_jobs.append({
+            "job_id": job_id,
+            "proposal_id": proposal_id,
+            "step": step,
+            "section_key": section_key,
+            "round": round_num,
+            "status": JOB_STATUS_PENDING,
+            "depends_on": [prev_dep],
+            "attempts": 0,
+            "scheduled_at": "",
+            "started_at": "",
+            "finished_at": "",
+            "last_error": "",
+            "cron_job_id": "",
+        })
+        prev_dep = job_id
+
     if writer_idx is not None:
-        jobs.insert(writer_idx, researcher_job)
-        # writer 依赖 researcher
-        jobs[writer_idx + 1]["depends_on"].append(researcher_id)
-        # 去重
-        jobs[writer_idx + 1]["depends_on"] = list(dict.fromkeys(jobs[writer_idx + 1]["depends_on"]))
+        for j in reversed(new_jobs):
+            jobs.insert(writer_idx, j)
+        # writer 依赖最后一个子步骤
+        jobs[writer_idx + len(new_jobs)]["depends_on"].append(prev_dep)
+        jobs[writer_idx + len(new_jobs)]["depends_on"] = list(
+            dict.fromkeys(jobs[writer_idx + len(new_jobs)]["depends_on"])
+        )
     else:
-        jobs.append(researcher_job)
+        jobs.extend(new_jobs)
+
     self._save_jobs(proposal_id, jobs)
 
+
+def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
+    """v6.7.12: 文献缺口识别（直接调用 LLM 路由，避免 hermes agent loop 超时）。"""
+    prop_dir = self._find_proposal_dir(proposal_id)
+    if not prop_dir:
+        return {"success": False, "error": "proposal 目录不存在"}
+    round_num = job["round"]
+    section = _section_for_round(round_num)
+    focus_section = section if section["key"] != "full_review" else None
+    report = self._read_critic_report(prop_dir, round_num)
+    critic_output = report.get("output", "")[:3000]
+
+    target_dir = prop_dir / "02_literature" / "gap-analysis"
+    target_dir.mkdir(parents=True, exist_ok=True)
+    import time as _t
+    gap_path = target_dir / f"gap-analysis-r{int(_t.time())}.json"
+
+    section_hint = f"聚焦章节：{focus_section['cn']}\n" if focus_section else ""
+    prompt = (
+        f"请分析以下评审报告，识别需要补充文献支撑的具体缺口。\n\n"
+        f"【课题】{proposal_id}\n"
+        f"{section_hint}"
+        f"【评审报告内容】\n{critic_output}\n\n"
+        f"请执行：\n"
+        f"1. 逐条阅读评审报告中指出的文献/引用/支撑不足问题\n"
+        f"2. 对每个问题，明确：论点是什么、缺什么类型的文献、建议检索关键词\n"
+        f"3. 忽略与文献无关的问题（如逻辑、格式等）\n"
+        f"4. 直接输出严格 JSON（不要 markdown 代码块），格式如下：\n"
+        f"{{\n"
+        f"  \"gaps\": [\n"
+        f"    {{\n"
+        f"      \"claim\": \"需要支撑的论点\",\n"
+        f"      \"missing_evidence\": \"缺少什么证据/文献\",\n"
+        f"      \"search_keywords\": [\"keyword1\", \"keyword2\"],\n"
+        f"      \"priority\": \"high|medium|low\"\n"
+        f"    }}\n"
+        f"  ]\n"
+        f"}}\n"
+    )
+
+    if llm_router is None:
+        return {"success": False, "error": "llm_router 未加载"}
+
+    try:
+        call_result = llm_router.call_llm(
+            "你是一位严谨的学术研究助手，只输出合法 JSON。",
+            [{"role": "user", "content": prompt}],
+            timeout=120,
+        )
+        # call_llm 返回 (result, usage, provider_name) tuple
+        raw = call_result[0] if isinstance(call_result, tuple) else call_result
+        # 去除可能的 markdown 代码块
+        text = raw.strip()
+        if text.startswith("```"):
+            lines = text.splitlines()
+            if lines[0].startswith("```"):
+                lines = lines[1:]
+            if lines and lines[-1].startswith("```"):
+                lines = lines[:-1]
+            text = "\n".join(lines).strip()
+
+        data = json.loads(text)
+        if not isinstance(data, dict) or "gaps" not in data:
+            return {"success": False, "error": "LLM 返回 JSON 缺少 gaps 字段"}
+
+        gap_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+        if _log:
+            _log.info(f"[{proposal_id}] 文献缺口识别完成: {gap_path.name}")
+        return {"success": True, "gap_path": str(gap_path)}
+    except Exception as e:
+        err = str(e)[:300]
+        if _log:
+            _log.warning(f"[{proposal_id}] 文献缺口识别失败: {err}")
+        return {"success": False, "error": err}
+
+
+def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
+    """v6.7.12: 针对文献缺口的检索。"""
+    prop_dir = self._find_proposal_dir(proposal_id)
+    if not prop_dir:
+        return {"success": False, "error": "proposal 目录不存在"}
+    round_num = job["round"]
+    section = _section_for_round(round_num)
+    focus_section = section if section["key"] != "full_review" else None
+
+    # 找到本轮最新的 gap-analysis JSON
+    gap_dir = prop_dir / "02_literature" / "gap-analysis"
+    gap_files = sorted(gap_dir.glob("gap-analysis-r*.json"), reverse=True)
+    if not gap_files:
+        return {"success": False, "error": "未找到 gap analysis 文件"}
+    gap_path = gap_files[0]
+
+    result_path = self._run_literature_searcher(
+        proposal_id, prop_dir, gap_path, focus_section, timeout=300
+    )
+    return {"success": bool(result_path), "result_path": str(result_path) if result_path else ""}
+
+
+def _run_lit_read_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
+    """v6.7.12: 文献深度阅读。"""
+    prop_dir = self._find_proposal_dir(proposal_id)
+    if not prop_dir:
+        return {"success": False, "error": "proposal 目录不存在"}
+
+    # 找到本轮最新的 lit-gap 报告
+    targeted_dir = prop_dir / "02_literature" / "targeted-research"
+    lit_files = sorted(targeted_dir.glob("lit-gap-*.md"), reverse=True)
+    if not lit_files:
+        return {"success": False, "error": "未找到文献检索报告"}
+    lit_path = lit_files[0]
+
+    # 生成阅读笔记草稿
+    notes_path = prop_dir / "02_literature" / "reading-notes.md"
+    notes_path.parent.mkdir(parents=True, exist_ok=True)
+
+    prompt = (
+        f"请阅读以下定向文献检索报告，并整理为结构化的文献阅读笔记。\n\n"
+        f"【检索报告】{lit_path}\n"
+        f"【输出笔记】{notes_path}\n\n"
+        f"要求：\n"
+        f"1. 读取 {lit_path} 中推荐的每篇文献\n"
+        f"2. 对每篇文献总结：标题、作者、年份、来源、核心结论、与课题的关联\n"
+        f"3. 如果推荐文献在本地知识库或 paper-pool 中有更详细信息，可补充\n"
+        f"4. 将阅读笔记追加写入 {notes_path}，按时间倒序\n"
+        f"5. 如果检索报告为空或没有可阅读文献，直接返回 success 但不追加内容\n"
+    )
+    result = self._run_hermes("researcher", prompt, timeout=300)
+    return {"success": result.get("success", False), "notes_path": str(notes_path)}
+
+
+def _run_lit_note_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
+    """v6.7.12: 将阅读笔记整理并导入课题文献库。"""
+    prop_dir = self._find_proposal_dir(proposal_id)
+    if not prop_dir:
+        return {"success": False, "error": "proposal 目录不存在"}
+
+    targeted_dir = prop_dir / "02_literature" / "targeted-research"
+    lit_files = sorted(targeted_dir.glob("lit-gap-*.md"), reverse=True)
+    if lit_files:
+        try:
+            from literature_notes import LiteratureNotes
+            ln = LiteratureNotes(prop_dir)
+            imported = ln.import_from_report(lit_files[0])
+            if _log and imported:
+                _log.info(f"[{proposal_id}] 已导入 {imported} 条文献阅读笔记")
+            return {"success": True, "imported": imported}
+        except Exception as e:
+            if _log:
+                _log.warning(f"[{proposal_id}] 导入文献阅读笔记失败: {e}")
+            return {"success": False, "error": str(e)}
+    return {"success": True, "reason": "无检索报告可导入"}
+
+
 def _run_researcher_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
+    """向后兼容：旧版 researcher job 仍然执行完整流程。"""
     prop_dir = self._find_proposal_dir(proposal_id)
     if not prop_dir:
         return {"success": False, "error": "proposal 目录不存在"}
@@ -458,6 +649,14 @@ def execute_job(self, job: Dict[str, Any]) -> Dict[str, Any]:
             result = self._run_critic_step(proposal_id, job)
         elif step == STEP_RESEARCHER:
             result = self._run_researcher_step(proposal_id, job)
+        elif step == STEP_GAP_IDENTIFY:
+            result = self._run_gap_identify_step(proposal_id, job)
+        elif step == STEP_LIT_SEARCH:
+            result = self._run_lit_search_step(proposal_id, job)
+        elif step == STEP_LIT_READ:
+            result = self._run_lit_read_step(proposal_id, job)
+        elif step == STEP_LIT_NOTE:
+            result = self._run_lit_note_step(proposal_id, job)
         elif step == STEP_WRITER:
             result = self._run_writer_step(proposal_id, job)
         elif step == STEP_MONITOR:
