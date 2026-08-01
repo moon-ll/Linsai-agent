@@ -213,7 +213,13 @@ def _insert_researcher_pipeline(self, proposal_id: str, round_num: int, section_
 
 
 def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
-    """v6.7.12: 文献缺口识别（直接调用 LLM 路由，避免 hermes agent loop 超时）。"""
+    """v6.7.12 + v6.8.1: 文献缺口识别。
+
+    混合策略（方案A+B融合）：
+    1. 优先尝试 hermes researcher agent loop（方案A）
+    2. 失败/超时降级为直接 LLM 调用（方案B，兜底）
+    3. 无论成功失败，回写 researcher profile 记忆，促进持续成长
+    """
     prop_dir = self._find_proposal_dir(proposal_id)
     if not prop_dir:
         return {"success": False, "error": "proposal 目录不存在"}
@@ -231,7 +237,32 @@ def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[
     gap_path = target_dir / f"gap-analysis-r{int(_t.time())}.json"
 
     section_hint = f"聚焦章节：{focus_section['cn']}\n" if focus_section else ""
-    prompt = (
+    section_name = focus_section['cn'] if focus_section else "整篇"
+
+    # 构建给 researcher 的 agent loop prompt
+    agent_prompt = (
+        f"你是一位专业研究助手（Researcher）。请分析以下评审报告，"
+        f"识别课题「{proposal_id}」在「{section_name}」部分需要补充文献支撑的具体缺口。\n\n"
+        f"【评审报告内容】\n{critic_output}\n\n"
+        f"请执行：\n"
+        f"1. 逐条阅读评审报告中指出的文献/引用/支撑不足问题\n"
+        f"2. 对每个问题，明确：论点是什么、缺什么类型的文献、建议检索关键词\n"
+        f"3. 忽略与文献无关的问题（如逻辑、格式等）\n"
+        f"4. 输出严格 JSON，格式如下：\n"
+        f"{{\n"
+        f"  \"gaps\": [\n"
+        f"    {{\n"
+        f"      \"claim\": \"需要支撑的论点\",\n"
+        f"      \"missing_evidence\": \"缺少什么证据/文献\",\n"
+        f"      \"search_keywords\": [\"keyword1\", \"keyword2\"],\n"
+        f"      \"priority\": \"high|medium|low\"\n"
+        f"    }}\n"
+        f"  ]\n"
+        f"}}\n"
+    )
+
+    # 备用 prompt（直调用，更简洁）
+    fallback_prompt = (
         f"请分析以下评审报告，识别需要补充文献支撑的具体缺口。\n\n"
         f"【课题】{proposal_id}\n"
         f"{section_hint}"
@@ -253,19 +284,56 @@ def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[
         f"}}\n"
     )
 
-    if llm_router is None:
-        return {"success": False, "error": "llm_router 未加载"}
+    # 步骤1：尝试 hermes researcher agent loop
+    from hermes_memory import _run_hermes_agent, _write_memory
+    agent_result = _run_hermes_agent("researcher", agent_prompt, timeout=300)
+    agent_success = agent_result.get("success", False)
+    raw_text = ""
 
+    if agent_success:
+        raw_text = agent_result.get("output", "")
+        if _log:
+            _log.info(
+                f"[{proposal_id}] gap_identify agent loop 成功 "
+                f"elapsed={agent_result.get('elapsed_s', 0)}s"
+            )
+    else:
+        # 步骤2：降级为直接 LLM 调用（兜底）
+        if _log:
+            _log.warning(
+                f"[{proposal_id}] gap_identify agent loop 失败，降级直调: "
+                f"{agent_result.get('error', '')}"
+            )
+        if llm_router is None:
+            # 记录失败的记忆
+            _write_memory("researcher",
+                f"[{now_utc()}] gap_identify 失败（课题：{proposal_id}，轮次：{round_num}，"
+                f"章节：{section_name}）— llm_router 未加载"
+            )
+            return {"success": False, "error": "llm_router 未加载，agent loop 也失败"}
+
+        try:
+            call_result = llm_router.call_llm(
+                "你是一位严谨的学术研究助手，只输出合法 JSON。",
+                [{"role": "user", "content": fallback_prompt}],
+                timeout=120,
+            )
+            raw = call_result[0] if isinstance(call_result, tuple) else call_result
+            raw_text = raw.strip()
+        except Exception as e:
+            err = str(e)[:300]
+            # 记录失败记忆
+            _write_memory("researcher",
+                f"[{now_utc()}] gap_identify 失败（课题：{proposal_id}，轮次：{round_num}，"
+                f"章节：{section_name}）— 直调也失败: {err}"
+            )
+            if _log:
+                _log.warning(f"[{proposal_id}] 文献缺口识别（直调降级）失败: {err}")
+            return {"success": False, "error": err}
+
+    # 解析输出
     try:
-        call_result = llm_router.call_llm(
-            "你是一位严谨的学术研究助手，只输出合法 JSON。",
-            [{"role": "user", "content": prompt}],
-            timeout=120,
-        )
-        # call_llm 返回 (result, usage, provider_name) tuple
-        raw = call_result[0] if isinstance(call_result, tuple) else call_result
-        # 去除可能的 markdown 代码块
-        text = raw.strip()
+        text = raw_text.strip()
         if text.startswith("```"):
             lines = text.splitlines()
             if lines[0].startswith("```"):
@@ -276,23 +344,46 @@ def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[
 
         data = json.loads(text)
         if not isinstance(data, dict) or "gaps" not in data:
-            return {"success": False, "error": "LLM 返回 JSON 缺少 gaps 字段"}
+            return {"success": False, "error": "返回 JSON 缺少 gaps 字段"}
 
         gap_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+        # 步骤3：回写 researcher profile 记忆
+        gap_count = len(data["gaps"])
+        high_pri = sum(1 for g in data["gaps"] if g.get("priority") == "high")
+        keywords = []
+        for g in data["gaps"]:
+            keywords.extend(g.get("search_keywords", []))
+        keyword_summary = "、".join(list(dict.fromkeys(keywords))[:5])
+
+        method_tag = "agent_loop" if agent_success else "direct_fallback"
+        _write_memory("researcher",
+            f"[{now_utc()}] gap_identify 完成（{method_tag}）— 课题：{proposal_id}，"
+            f"轮次：{round_num}，章节：{section_name}，识别缺口 {gap_count} 个"
+            f"（高优先级 {high_pri} 个），关键词：{keyword_summary}"
+        )
+
         if _log:
-            _log.info(f"[{proposal_id}] 文献缺口识别完成: {gap_path.name}")
-        return {"success": True, "gap_path": str(gap_path)}
+            _log.info(f"[{proposal_id}] 文献缺口识别完成: {gap_path.name}（{method_tag}）")
+        return {"success": True, "gap_path": str(gap_path), "method": method_tag}
     except Exception as e:
         err = str(e)[:300]
+        _write_memory("researcher",
+            f"[{now_utc()}] gap_identify 解析失败（课题：{proposal_id}，轮次：{round_num}，"
+            f"章节：{section_name}）— {err}"
+        )
         if _log:
-            _log.warning(f"[{proposal_id}] 文献缺口识别失败: {err}")
+            _log.warning(f"[{proposal_id}] 文献缺口识别解析失败: {err}")
         return {"success": False, "error": err}
 
 
 def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
-    """v6.7.12: 针对文献缺口的检索。
+    """v6.7.12 + v6.8.1: 针对文献缺口的检索。
 
-    改造：通过 LiteratureService.search() 统一检索。
+    混合策略（方案A+B融合）：
+    1. 优先尝试 hermes researcher agent loop 联网检索
+    2. 失败/超时降级为 LiteratureService.search()（兜底）
+    3. 无论成功失败，回写 researcher profile 记忆
     """
     prop_dir = self._find_proposal_dir(proposal_id)
     if not prop_dir:
@@ -302,6 +393,7 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
     from proposal_sections import PROPOSAL_SECTIONS
     section = next((s for s in PROPOSAL_SECTIONS if s["key"] == section_key), None)
     focus_section = section if section_key != "full_review" else None
+    section_name = focus_section['cn'] if focus_section else "整篇"
 
     # 找到本轮最新的 gap-analysis JSON
     gap_dir = prop_dir / "02_literature" / "gap-analysis"
@@ -310,21 +402,71 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
         return {"success": False, "error": "未找到 gap analysis 文件"}
     gap_path = gap_files[0]
 
-    # 改造：通过 LiteratureService 检索
     import json
-    from literature_service import LiteratureService
-    svc = LiteratureService()
-
-    # 解析 gap 关键词
     gap_data = json.loads(gap_path.read_text(encoding="utf-8"))
     gaps = gap_data.get("gaps", [])
     all_keywords = []
     for g in gaps:
         all_keywords.extend(g.get("search_keywords", []))
     gap_keywords = list(dict.fromkeys(all_keywords))[:10]
+    keyword_str = "、".join(gap_keywords)
 
-    # 执行检索
-    papers = svc.search(keywords=gap_keywords, source="pipeline", proposal_id=proposal_id)
+    # 步骤1：尝试 hermes researcher agent loop 联网检索
+    from hermes_memory import _run_hermes_agent, _write_memory
+    agent_success = False
+    papers = []
+
+    agent_prompt = (
+        f"你是一位专业研究助手（Researcher）。请针对课题「{proposal_id}」的"
+        f"「{section_name}」部分，检索以下关键词的最新论文。\n\n"
+        f"【检索关键词】\n{keyword_str}\n\n"
+        f"请执行：\n"
+        f"1. 使用 web_search 工具逐一检索每个关键词\n"
+        f"2. 对每篇论文，提取完整信息：arxiv_id、标题、作者、年份、TL;DR\n"
+        f"3. 优先选择 2024-2026 年的最新论文\n"
+        f"4. 输出格式：每行一个结果，用 | 分隔，格式：\n"
+        f"   - arxiv_id | 标题 | 作者 | 年份 | 相关性评分(0-1) | 一句话摘要 | 来源：联网检索\n"
+    )
+
+    try:
+        agent_result = _run_hermes_agent("researcher", agent_prompt, timeout=360)
+        if agent_result.get("success"):
+            agent_success = True
+            output = agent_result.get("output", "")
+            # 解析 agent 输出中的论文列表
+            from literature_service import LiteratureService
+            svc = LiteratureService()
+            papers = svc._parse_researcher_output(output)
+            if _log:
+                _log.info(
+                    f"[{proposal_id}] lit_search agent loop 成功，"
+                    f"解析到 {len(papers)} 篇论文"
+                )
+    except Exception as e:
+        if _log:
+            _log.warning(f"[{proposal_id}] lit_search agent loop 异常: {e}")
+
+    # 步骤2：如果 agent loop 失败或未获取到论文，降级为 LiteratureService
+    if not agent_success or not papers:
+        if not agent_success and _log:
+            _log.warning(
+                f"[{proposal_id}] lit_search agent loop 失败，降级 LiteratureService"
+            )
+        try:
+            from literature_service import LiteratureService
+            svc = LiteratureService()
+            papers = svc.search(
+                keywords=gap_keywords, source="pipeline", proposal_id=proposal_id
+            )
+        except Exception as e:
+            err = str(e)[:300]
+            _write_memory("researcher",
+                f"[{now_utc()}] lit_search 失败（课题：{proposal_id}，轮次：{round_num}，"
+                f"章节：{section_name}）— 降级检索也失败: {err}"
+            )
+            if _log:
+                _log.warning(f"[{proposal_id}] lit_search 降级检索失败: {err}")
+            return {"success": False, "error": err}
 
     # 写入 lit-gap-*.md 文件
     target_dir = prop_dir / "02_literature" / "targeted-research"
@@ -333,7 +475,7 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
     result_path = target_dir / f"lit-gap-{int(_t.time())}.md"
 
     lines = [f"# 定向文献检索报告\n", f"## 课题\n{proposal_id}\n"]
-    lines.append(f"## 检索关键词\n- {'、'.join(gap_keywords)}\n")
+    lines.append(f"## 检索关键词\n- {keyword_str}\n")
     lines.append(f"## 检索结果\n")
     for p in papers:
         arxiv_id = p.get("arxiv_id", "")
@@ -346,13 +488,30 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
         lines.append(f"- {arxiv_id} | {title} | {authors} | {year} | {score} | {tldr} | 来源：{source_tag}")
 
     result_path.write_text("\n".join(lines), encoding="utf-8")
-    return {"success": bool(papers), "result_path": str(result_path)}
+
+    # 步骤3：回写 researcher profile 记忆
+    method_tag = "agent_loop" if agent_success else "direct_fallback"
+    paper_count = len(papers)
+    paper_ids = [p.get("arxiv_id", "") for p in papers[:5] if p.get("arxiv_id")]
+    paper_summary = "、".join(paper_ids) if paper_ids else "无"
+    _write_memory("researcher",
+        f"[{now_utc()}] lit_search 完成（{method_tag}）— 课题：{proposal_id}，"
+        f"轮次：{round_num}，章节：{section_name}，关键词：{keyword_str}，"
+        f"检索到 {paper_count} 篇论文，示例：{paper_summary}"
+    )
+
+    if _log:
+        _log.info(f"[{proposal_id}] lit_search 完成: {result_path.name}（{method_tag}）")
+    return {"success": bool(papers), "result_path": str(result_path), "method": method_tag}
 
 
 def _run_lit_read_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
-    """v6.7.12: 文献深度阅读。
+    """v6.7.12 + v6.8.1: 文献深度阅读。
 
-    改造：通过 LiteratureService.read() 统一深度阅读。
+    混合策略（方案A+B融合）：
+    1. 优先尝试 hermes researcher agent loop 深度阅读
+    2. 失败/超时降级为 LiteratureService.read()（兜底）
+    3. 无论成功失败，回写 researcher profile 记忆
     """
     prop_dir = self._find_proposal_dir(proposal_id)
     if not prop_dir:
@@ -365,26 +524,112 @@ def _run_lit_read_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str,
         return {"success": False, "error": "未找到文献检索报告"}
     lit_path = lit_files[0]
 
-    # 改造：通过 LiteratureService.read() 深度阅读每篇论文
     import re
-    from literature_service import LiteratureService
-    svc = LiteratureService()
-
     text = lit_path.read_text(encoding="utf-8")
     arxiv_ids = re.findall(r"(\d{4}\.\d{4,5})", text)
 
+    if not arxiv_ids:
+        return {"success": True, "notes_path": "", "read_count": 0, "reason": "无论文可读"}
+
     notes = []
-    for aid in arxiv_ids:
-        result = svc.read(aid, proposal_id=proposal_id)
-        if result.get("content"):
-            notes.append(f"## {aid}\n\n{result['content']}\n")
+    read_count = 0
+    agent_success = False
+
+    # 步骤1：尝试 hermes researcher agent loop 深度阅读（每篇论文单独派活）
+    from hermes_memory import _run_hermes_agent, _write_memory
+
+    for aid in arxiv_ids[:5]:  # 每轮最多深度阅读 5 篇，避免超时
+        agent_prompt = (
+            f"你是一位专业研究助手（Researcher）。请深度阅读以下论文"
+            f"（课题：{proposal_id}），并整理为结构化笔记。\n\n"
+            f"【arXiv ID】{aid}\n\n"
+            f"请执行：\n"
+            f"1. 使用 web_search 获取论文的完整信息（标题、作者、摘要等）\n"
+            f"2. 输出格式：\n"
+            f"   ## 核心结论\n"
+            f"   ## 方法与创新\n"
+            f"   ## 与课题关联\n"
+            f"   ## 关键图表/数据\n"
+            f"   ## 局限性\n"
+        )
+        try:
+            agent_result = _run_hermes_agent("researcher", agent_prompt, timeout=240)
+            if agent_result.get("success"):
+                agent_success = True
+                output = agent_result.get("output", "")
+                notes.append(f"## {aid}\n\n{output}\n")
+                read_count += 1
+                if _log:
+                    _log.info(f"[{proposal_id}] lit_read agent loop 成功: {aid}")
+            else:
+                # agent loop 失败，对该论文降级为 LiteratureService
+                if _log:
+                    _log.warning(
+                        f"[{proposal_id}] lit_read agent loop 失败 {aid}，降级直读: "
+                        f"{agent_result.get('error', '')}"
+                    )
+                try:
+                    from literature_service import LiteratureService
+                    svc = LiteratureService()
+                    result = svc.read(aid, proposal_id=proposal_id)
+                    if result.get("content"):
+                        notes.append(f"## {aid}\n\n{result['content']}\n")
+                        read_count += 1
+                except Exception as e2:
+                    if _log:
+                        _log.warning(f"[{proposal_id}] lit_read 降级直读失败 {aid}: {e2}")
+        except Exception as e:
+            if _log:
+                _log.warning(f"[{proposal_id}] lit_read agent loop 异常 {aid}: {e}")
+            # 异常时降级
+            try:
+                from literature_service import LiteratureService
+                svc = LiteratureService()
+                result = svc.read(aid, proposal_id=proposal_id)
+                if result.get("content"):
+                    notes.append(f"## {aid}\n\n{result['content']}\n")
+                    read_count += 1
+            except Exception:
+                pass
+
+    # 如果 agent loop 完全没有成功，对所有论文执行一次批量降级
+    if not agent_success and read_count == 0:
+        if _log:
+            _log.warning(
+                f"[{proposal_id}] lit_read agent loop 全部失败，批量降级 LiteratureService"
+            )
+        try:
+            from literature_service import LiteratureService
+            svc = LiteratureService()
+            for aid in arxiv_ids[:5]:
+                result = svc.read(aid, proposal_id=proposal_id)
+                if result.get("content"):
+                    notes.append(f"## {aid}\n\n{result['content']}\n")
+                    read_count += 1
+        except Exception as e:
+            err = str(e)[:300]
+            _write_memory("researcher",
+                f"[{now_utc()}] lit_read 失败（课题：{proposal_id}）— "
+                f"批量降级也失败: {err}"
+            )
+            return {"success": False, "error": err}
 
     notes_path = prop_dir / "02_literature" / "reading-notes.md"
     notes_path.parent.mkdir(parents=True, exist_ok=True)
     if notes:
         notes_path.write_text("\n\n".join(notes), encoding="utf-8")
 
-    return {"success": True, "notes_path": str(notes_path), "read_count": len(notes)}
+    # 步骤2：回写 researcher profile 记忆
+    method_tag = "agent_loop" if agent_success else "direct_fallback"
+    _write_memory("researcher",
+        f"[{now_utc()}] lit_read 完成（{method_tag}）— 课题：{proposal_id}，"
+        f"论文 {read_count}/{len(arxiv_ids[:5])} 篇，"
+        f"论文ID：{'、'.join(arxiv_ids[:3])}"
+    )
+
+    if _log:
+        _log.info(f"[{proposal_id}] lit_read 完成: {read_count} 篇（{method_tag}）")
+    return {"success": True, "notes_path": str(notes_path), "read_count": read_count, "method": method_tag}
 
 
 def _run_lit_note_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:

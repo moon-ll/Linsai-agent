@@ -1,5 +1,28 @@
 # 变更记录
 
+## v6.8.2 - 2026-08-02 Researcher Profile 混合调用与记忆回写
+
+### 改动内容
+
+#### 新增模块
+- **`scripts/hermes_memory.py`** — 新增 Hermes Profile 记忆回写工具模块，提供：
+  - `_run_hermes_agent(profile, prompt, timeout)` — 调用 hermes agent loop（oneshot 模式）
+  - `_write_memory(profile, content)` — 追加记忆条目到 profile 的 MEMORY.md（原子写入）
+  - `_write_memory_batch(profile, entries)` — 批量追加多条记忆
+  - `_inject_minimax_env(env)` — 自动透传 MiniMax API Key 到 hermes 子进程环境
+
+#### 生命周期执行器改造
+- **`scripts/lifecycle/executor.py`** — 三个 researcher 子步骤改为混合策略（方案A+B融合）：
+  - `_run_gap_identify_step`：优先 hermes researcher agent loop → 失败降级 llm_router 直调 → 回写记忆
+  - `_run_lit_search_step`：优先 hermes researcher agent loop 联网检索 → 失败降级 LiteratureService.search() → 回写记忆
+  - `_run_lit_read_step`：优先 hermes researcher agent loop 深度阅读 → 失败降级 LiteratureService.read() → 回写记忆
+  - 每次回写记忆包含：任务类型、课题ID、轮次、章节、结果摘要、执行方式（agent_loop / direct_fallback）
+
+### 验证结果
+- 语法检查：`python3 -m py_compile` 通过（hermes_memory.py + executor.py）
+- 自检：`python3 scripts/hermes_memory.py` ✓ 通过
+- 回归测试：`python3 scripts/self_test.py --module` 192/192 通过
+
 ## v6.8.1 - 2026-08-02 文献系统统一架构重构
 
 ### 改动内容
