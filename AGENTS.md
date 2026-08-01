@@ -2,7 +2,7 @@
 
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
-> 最后更新：2026-07-31
+> 最后更新：2026-08-01
 > 提示：完整目录结构见 `docs/PROJECT-STRUCTURE.md`，完整架构说明见 `docs/ARCHITECTURE.md`。
 
 ---
@@ -123,7 +123,7 @@ python3 -m py_compile scripts/*.py
 2. **模块自检**：大量脚本支持 `--self-check`，运行 `python3 scripts/{module}.py --self-check`。
 3. **E2E 集成测试**：`python3 scripts/test_e2e_learning_full.py`（需真实 Claude CLI 环境，非日常回归项）。
 
-**当前基线（v6.8.0）**：
+**当前基线（v6.8.1）**：
 - `--module`：252/252 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器）
 - `--scenario`：16/16 通过
 - `--persona`：38/38 通过
@@ -210,7 +210,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 ### 提案生命周期
 
-四阶段：`drafts → optimizing → pending_review → archived`。v6.8+ 将申请书拆为 5 模块：立项依据（rationale）、研究内容（content）、研究方案含特色创新与预期成果（scheme）、整篇一致性审查（full_review）、参考文献校验（references）。一轮完整优化依次执行：① 三章节并行撰写/评审 → ② 整篇一致性修订 → ③ 参考文献校验/补充 → ④ monitor meta-review。工作日按 4 个时段轮转（00:30-03:30 / 04:00-08:00 / 08:30-12:30 / 18:30-22:30），每个时段聚焦一个 proposal，未完成则下一时段继续，已完成则切换下一个。周末暂停 worker，集中执行输入端（研究设想发现）、输出端（归档知识萃取）与链路反思任务。v6.7.5+ 改为每个 optimizing proposal 一个独立 worker cron；v6.7.6+ 引入 monitor meta-review 与 agent 分数奖惩；v6.7.7+ 增加输入端 `idea_generator`、输出端 `knowledge_output` 与周末模式，并将 `proposal_lifecycle.py` 拆分为 `proposal_lifecycle/` 包。详见 `docs/ARCHITECTURE.md` §5。
+四阶段：`drafts → optimizing → pending_review → archived`。v6.8+ 将申请书拆为 5 模块：立项依据（rationale）、研究内容（content）、研究方案含特色创新与预期成果（scheme）、整篇一致性审查（full_review）、参考文献校验（references）。一轮完整优化依次执行：① 三章节并行撰写/评审 → ② 整篇一致性修订 → ③ 参考文献校验/补充 → ④ monitor meta-review。工作日按 4 个时段轮转（00:30-03:30 / 04:00-08:00 / 08:30-12:30 / 18:30-22:30），每个时段聚焦一个 proposal，未完成则下一时段继续，已完成则切换下一个。v6.8.1 新增：失败任务自动重试（attempts < 3）、跨周轮转内容感知（`last_proposal_id` 校准）、系统看板文件（`memory/system-kanban.json`）、每轮优化报告（`05_review/optimization-report-round-N.md`）。周末暂停 worker，集中执行输入端（研究设想发现）、输出端（归档知识萃取）与链路反思任务。v6.7.5+ 改为每个 optimizing proposal 一个独立 worker cron；v6.7.6+ 引入 monitor meta-review 与 agent 分数奖惩；v6.7.7+ 增加输入端 `idea_generator`、输出端 `knowledge_output` 与周末模式，并将 `proposal_lifecycle.py` 拆分为 `proposal_lifecycle/` 包。详见 `docs/ARCHITECTURE.md` §5。
 
 ### 林赛总控层（v6.7+）
 
@@ -239,7 +239,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 ### 版本号规范
 
-- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.7.7`）。
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.8.1`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -302,7 +302,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.8.0*
-*日期：2026-07-31*
+*版本：6.8.1*
+*日期：2026-08-01*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

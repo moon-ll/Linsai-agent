@@ -92,7 +92,7 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 
 - **命名规则**：`{项目类型}-{课题名称}-{YYYYMMDD}[-序号]`，项目类型 `general`/`key`/`major`。
 - **对抗优化**：按章节（立项依据→研究内容→研究方案→整体审查）轮转，critic 4 维度评分（创新/可行/严谨/完整），writer 聚焦最弱维度修订；达标需全模块通过。
-- **小型化 cron 框架（v6.7.5+）**：
+- **小型化 cron 框架（v6.7.5+）+ 微调度器（v6.8.0+）**：
   - 不再使用单一大型 `pipeline-runner` cron sweep；改为每个 optimizing proposal 一个独立 worker cron，每次只执行下一个 pending 小步骤。
   - 每日编排 cron（`lc-daily-orchestrate`）只生成 checkpoint、确保 worker 存在，自身不调用 LLM。
   - 修复 cron（`lc-repair`）每 6 小时扫描：重置 stuck running、重试 failed（最多 3 次）、补齐缺失 worker、超过重试则告警。
@@ -100,6 +100,8 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
   - v6.7.6：worker cron 自动错开 6 分钟（基于 proposal_id hash 分配 47/53/59/05/11...），`--repair` 会检测 schedule 变化并自动更新。
   - v6.7.7：worker cron 默认仅工作日运行（schedule = `{minute} * * * 1-5`），周末暂停；新增 `--setup-weekend` / `--teardown-weekend` 创建/删除 3 个周末任务入口 cron（输入/输出/反思）以及 `lc-weekend-worker`（每 20 分钟执行一个 pending 小任务）。
   - v6.7.7：`run_repair()` 区分工作日与周末：工作日修复 worker/编排，周末修复输入/输出/反思任务及 `weekend-pipeline.json` 中的 checkpoint job。
+  - **v6.8.0 微调度器**：`scripts/lifecycle/micro_scheduler.py` 引入全局微调度器，工作日按 4 个时段（00:30-03:30 / 04:00-08:00 / 08:30-12:30 / 18:30-22:30）轮流聚焦单个 proposal，每个时段只执行聚焦 proposal 的 pending job，保证同一 proposal 连贯推进。
+  - **v6.8.1 微调度器增强**：失败任务自动重试（attempts < MAX_JOB_ATTEMPTS）、跨周轮转内容感知（`last_proposal_id` 校准）、系统看板文件（`memory/system-kanban.json`）同步任务进展、每轮优化完成后自动生成优化报告（`05_review/optimization-report-round-N.md`）。
 - **对抗评审奖惩与监察（v6.7.6）**：
   - 每轮 checkpoint 拆为 critic → writer → monitor 三步骤，monitor 作为独立第三方 reviewer 做 meta-review。
   - `memory/agent-scores.json` 维护 writer/critic 全局奖惩分数（初始 100，上限 150，下限 0）。

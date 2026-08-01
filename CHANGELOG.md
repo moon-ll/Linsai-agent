@@ -1,5 +1,34 @@
 # 变更记录
 
+## v6.8.1 - 2026-08-01 修复 score 类型错误与跨周重新平衡机制
+
+### 问题根因
+- `literature_service.py` 中 `_get_paper_info` 返回的 score 字段可能为字符串或空字符串，排序时 `float("")` 抛出 ValueError/TypeError，导致 lit_search job 失败。
+- `_parse_researcher_output` 使用 `.replace(".", "").isdigit()` 判断 score，对科学计数法、负数等格式不兼容。
+- `paper_pool.py` 排序同样使用 `float(x[1].get("score", 0))`，未处理字符串 score。
+- `micro_scheduler.py` 使用纯数字索引 `last_proposal_index` 追踪轮转位置，当 optimizing 列表跨周变化（新增/删除 proposal）时指向错误 proposal。
+
+### 修复内容
+- **score 类型安全转换** — `scripts/literature_service.py`
+  - 新增 `_safe_float()` 静态方法，安全处理 None/空字符串/字符串数字/各类输入。
+  - `_get_paper_info`、`_parse_researcher_output` 及 3 处排序（`_build_local_knowledge_context`、`_search_raw_papers`、`_search_researcher`）均使用 `_safe_float` 转换。
+- **paper_pool.py 排序安全** — `scripts/paper_pool.py`
+  - 排序时使用局部 `_safe_score` 函数安全转换 score。
+- **跨周重新平衡机制** — `scripts/lifecycle/micro_scheduler.py`
+  - 新增 `_rebalance_index()` 函数：根据 `last_proposal_id` 重新校准轮转索引，当 optimizing 列表跨周变化时自动找到正确位置。
+  - `_load_focus_state` 增加 `last_proposal_id` 字段追踪。
+  - `_focus_proposal_for_slot` 每次进入先调用 `_rebalance_index` 校准索引，推进时同步保存 `last_proposal_id`。
+
+### 验证结果
+- `python3 -m py_compile scripts/literature_service.py scripts/paper_pool.py scripts/lifecycle/micro_scheduler.py` 通过。
+- `python3 scripts/self_test.py --module` 187/187 通过。
+
+### 设计原则
+- **防御性编程**：所有外部输入（文件读取、LLM 输出）的数值字段一律经过安全转换，避免类型错误阻塞链路。
+- **内容感知索引**：轮转位置追踪从纯数字索引改为 `last_proposal_id` 内容感知，适应灵活的 proposal 列表变化。
+
+---
+
 ## v6.8.0 - 2026-07-31 申请书五模块化 + 微调度器 + 周末任务适配
 
 ### 问题根因
