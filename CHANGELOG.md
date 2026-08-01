@@ -1,5 +1,42 @@
 # 变更记录
 
+## v6.8.1 - 2026-08-02 文献简报→知识库零拷贝通路
+
+### 问题根因
+- hermes linsai profile 每日产出的文献简报（`daily_candidates.json`）只存在于 hermes workspace，CoPilot 知识库看不到。
+- `kb_auto_sync` LaunchAgent 从未安装，`sync_engine` 同步链路断裂 7 天。
+- 旧的"同步搬运"方案（拷贝 JSON → 转换 .md → 写入 raw/papers/）笨重、有延迟、有冗余。
+
+### 设计原则
+- **零拷贝**：CoPilot 直接读取 hermes 产出目录，不做数据搬运。
+- **惰性物化**：首次访问时自动在 `raw/papers/` 生成对应 .md，幂等。
+- **显示器定位**：CoPilot 是 hermes 产出的消费者/显示器，不是数据仓库。
+- **不破坏现有规则**：数据域隔离、管线只读、状态管理不变。
+
+### 改动内容
+- **hermes Job 1 prompt 更新** — `cron edit 636145dbddac`
+  - 新增 Step 2：为新入池论文生成完整知识库简报（摘要+背景+发现+方法+创新+结论），写入 `briefings/papers/{arxiv_id}.md`。
+  - 飞书推送的极简卡片格式不变。
+- **路径常量** — `scripts/paths.py`
+  - 新增 `HERMES_BRIEFINGS_DIR` 和 `HERMES_BRIEFING_PAPERS_DIR`。
+- **索引引擎零拷贝扩展** — `scripts/kb_index.py`
+  - `build_index()` 默认追加 `briefings/papers/` 目录，标签 `hermes-briefings`。
+  - 测试隔离同步更新。
+- **文献服务合并双源** — `scripts/literature_service.py`
+  - `_scan_local_raw_papers()` 合并 `raw/papers/` + `briefings/papers/` 两个源。
+  - 新增 `_materialize_from_briefing()`：惰性物化 hermes 简报为 CoPilot 格式 .md。
+  - 新增 `_build_note_from_hermes_analysis()`：从 `deep_analysis_{aid}.json` 构建 wiki 阅读笔记。
+  - `read()` 方法优先使用 hermes 深度分析 JSON（零延迟），无则降级联网检索。
+
+### 验证结果
+- `python3 -m py_compile` 语法检查全部通过。
+- `python3 scripts/self_test.py --module` 192/192 通过。
+- `python3 scripts/self_test.py --web-ci` 246/246 通过。
+- `python3 scripts/self_test.py --scenario` 16/16 通过。
+- 端到端验证：hermes 深度分析 JSON 成功转为 3276 字符阅读笔记；合并扫描 220 篇论文正常。
+
+---
+
 ## v6.8.1 - 2026-08-01 任务系统打通 + 看板增强
 
 ### 问题根因

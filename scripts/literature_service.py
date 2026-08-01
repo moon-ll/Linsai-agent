@@ -34,7 +34,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 
 from common import now_utc, load_json, save_json, file_lock
-from paths import PROJECT_ROOT, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR, QA_DIR
+from paths import PROJECT_ROOT, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR, QA_DIR, HERMES_BRIEFING_PAPERS_DIR, HERMES_BRIEFINGS_DIR
 
 try:
     from logger import get_logger
@@ -269,8 +269,11 @@ class LiteratureService:
                     "cached": True,
                 }
 
-        # 3. 调用 hermes researcher 深度阅读
-        note_content = self._dispatch_deep_read(arxiv_id)
+        # v6.8.1: 优先使用 hermes 深度分析 JSON（已有 5 维结构化数据）
+        note_content = self._build_note_from_hermes_analysis(arxiv_id)
+        if not note_content:
+            # 3. 调用 hermes researcher 深度阅读
+            note_content = self._dispatch_deep_read(arxiv_id)
 
         # 4. 通过 kb_wiki.save_wiki_page() 写入 wiki/papers/
         if note_content:
@@ -508,28 +511,184 @@ class LiteratureService:
         return exclude
 
     def _scan_local_raw_papers(self) -> Dict[str, Dict[str, Any]]:
-        """扫描本地 raw/papers/ 目录，返回 {arxiv_id: info}。"""
-        papers: Dict[str, Dict[str, Any]] = {}
-        if not RAW_PAPERS_DIR.exists():
-            return papers
+        """扫描本地文献源，返回 {arxiv_id: info}。
 
-        for f in RAW_PAPERS_DIR.glob("*.md"):
-            try:
-                from kb_text import parse_frontmatter
-                text = f.read_text(encoding="utf-8")
-                fm, _ = parse_frontmatter(text)
-                arxiv_id = fm.get("arxiv_id", "") or self._extract_arxiv_from_filename(f.name)
-                if arxiv_id:
-                    papers[arxiv_id] = {
-                        "title": fm.get("title", ""),
-                        "has_pdf": fm.get("has_pdf", False),
-                        "read_status": fm.get("read_status", "unread"),
-                        "score": fm.get("score_deepxiv", fm.get("score", 0)),
-                        "used_by_proposals": fm.get("used_by_proposals", []),
-                    }
-            except Exception:
-                pass
+        v6.8.1: 合并两个源 —
+        1. knowledge/raw/papers/（CoPilot 原生）
+        2. hermes briefings/papers/（hermes 简报产出，零拷贝读取）
+        对于仅在 hermes 源中的论文，惰性物化到 raw/papers/。
+        """
+        papers: Dict[str, Dict[str, Any]] = {}
+
+        # 源 1: CoPilot 原生 raw/papers/
+        if RAW_PAPERS_DIR.exists():
+            for f in RAW_PAPERS_DIR.glob("*.md"):
+                try:
+                    from kb_text import parse_frontmatter
+                    text = f.read_text(encoding="utf-8")
+                    fm, _ = parse_frontmatter(text)
+                    arxiv_id = fm.get("arxiv_id", "") or self._extract_arxiv_from_filename(f.name)
+                    if arxiv_id:
+                        papers[arxiv_id] = {
+                            "title": fm.get("title", ""),
+                            "has_pdf": fm.get("has_pdf", False),
+                            "read_status": fm.get("read_status", "unread"),
+                            "score": fm.get("score_deepxiv", fm.get("score", 0)),
+                            "used_by_proposals": fm.get("used_by_proposals", []),
+                            "source": "raw",
+                        }
+                except Exception:
+                    pass
+
+        # 源 2: hermes briefings/papers/（零拷贝读取 + 惰性物化）
+        if HERMES_BRIEFING_PAPERS_DIR.exists():
+            for f in HERMES_BRIEFING_PAPERS_DIR.glob("*.md"):
+                try:
+                    from kb_text import parse_frontmatter
+                    text = f.read_text(encoding="utf-8")
+                    fm, _ = parse_frontmatter(text)
+                    arxiv_id = fm.get("arxiv_id", "") or self._extract_arxiv_from_filename(f.name)
+                    if arxiv_id and arxiv_id not in papers:
+                        papers[arxiv_id] = {
+                            "title": fm.get("title", ""),
+                            "has_pdf": False,
+                            "read_status": "unread",
+                            "score": fm.get("score", 0),
+                            "used_by_proposals": [],
+                            "source": "hermes-briefing",
+                        }
+                        # 惰性物化：在 raw/papers/ 中创建对应 .md
+                        self._materialize_from_briefing(arxiv_id, f, fm)
+                except Exception:
+                    pass
+
         return papers
+
+    def _materialize_from_briefing(self, arxiv_id: str, briefing_path: Path, fm: Dict[str, Any]) -> None:
+        """惰性物化：将 hermes 简报 .md 复制为 raw/papers/ 格式。
+
+        幂等：目标文件已存在则跳过。
+        """
+        try:
+            raw_dir = RAW_DIR / "papers"
+            raw_dir.mkdir(parents=True, exist_ok=True)
+            year = fm.get("year", "")
+            title = fm.get("title", arxiv_id)
+            slug = self._safe_filename(f"{year}-{arxiv_id}-{title}") if hasattr(self, '_safe_filename') else f"{year}-{arxiv_id}"
+            raw_path = raw_dir / f"{slug}.md"
+            if raw_path.exists():
+                return
+            # 构建 CoPilot 格式的 frontmatter
+            from kb_text import build_frontmatter
+            copilot_fm = {
+                "title": fm.get("title", ""),
+                "arxiv_id": arxiv_id,
+                "authors": fm.get("authors", ""),
+                "year": year,
+                "tags": ["deepxiv-论文库"],
+                "project": ["NSFC-强场超快"],
+                "direction": fm.get("direction", ""),
+                "source": "hermes-briefing",
+                "imported_at": now_utc(),
+                "score_deepxiv": fm.get("score", 0.5),
+                "status": "unseen",
+                "read_status": "unread",
+                "has_pdf": False,
+            }
+            fm_str = build_frontmatter(copilot_fm)
+            # 读取 briefing 正文（去掉原始 frontmatter）
+            text = briefing_path.read_text(encoding="utf-8")
+            body = re.sub(r'^---\n.*?\n---\n', '', text, flags=re.DOTALL).strip()
+            raw_path.write_text(f"{fm_str}\n{body}", encoding="utf-8")
+            if _log:
+                _log.info(f"[LiteratureService] 惰性物化: {arxiv_id} → {raw_path.name}")
+        except Exception as e:
+            if _log:
+                _log.warning(f"[LiteratureService] 物化 {arxiv_id} 失败: {e}")
+
+    def _build_note_from_hermes_analysis(self, arxiv_id: str) -> Optional[str]:
+        """v6.8.1: 从 hermes deep_analysis_{aid}.json 构建阅读笔记。
+
+        hermes 的深度分析已包含 5 维结构化数据（why_notable, core_findings,
+        new_methods, what_next, linsai_connection），直接转换为 wiki/papers/ 格式。
+        无需联网调用 researcher，零延迟。
+
+        Returns:
+            阅读笔记 markdown 内容，或 None（JSON 不存在时）
+        """
+        analysis_path = HERMES_BRIEFINGS_DIR / f"deep_analysis_{arxiv_id}.json"
+        if not analysis_path.exists():
+            return None
+
+        try:
+            data = json.loads(analysis_path.read_text(encoding="utf-8"))
+        except Exception:
+            return None
+
+        if not data or not data.get("arxiv_id"):
+            return None
+
+        title = data.get("title", arxiv_id)
+        authors = data.get("authors", [])
+        if isinstance(authors, list):
+            authors_str = ", ".join(authors)
+        else:
+            authors_str = str(authors)
+
+        lines = [
+            f"# {title}",
+            f"",
+            f"**arXiv ID**: {arxiv_id}",
+            f"**作者**: {authors_str}",
+            f"**日期**: {data.get('date', '')}",
+            f"**方向**: {data.get('direction', '')}",
+            f"",
+            f"## 为什么值得关注",
+            f"",
+            data.get("why_notable", "（无数据）"),
+            f"",
+            f"## 核心发现",
+            f"",
+        ]
+
+        findings = data.get("core_findings", [])
+        if isinstance(findings, list):
+            for f in findings:
+                lines.append(f"- {f}")
+        else:
+            lines.append(str(findings))
+
+        lines.extend([
+            f"",
+            f"## 方法与创新",
+            f"",
+        ])
+        methods = data.get("new_methods", [])
+        if isinstance(methods, list):
+            for m in methods:
+                lines.append(f"- {m}")
+        else:
+            lines.append(str(methods))
+
+        lines.extend([
+            f"",
+            f"## 林赛的理解",
+            f"",
+            data.get("linsai_connection", "（无数据）"),
+            f"",
+            f"## 开放问题与后续",
+            f"",
+        ])
+        what_next = data.get("what_next", [])
+        if isinstance(what_next, list):
+            for w in what_next:
+                lines.append(f"- {w}")
+        else:
+            lines.append(str(what_next))
+
+        if _log:
+            _log.info(f"[LiteratureService] 从 hermes 深度分析构建笔记: {arxiv_id}")
+        return "\n".join(lines)
 
     def _build_search_prompt(
         self,

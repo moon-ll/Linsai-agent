@@ -52,6 +52,10 @@ PDF_LIBRARY_PATH = MEMORY_DIR / "pdf-library.json"
 HERMES_WORKSPACE = Path.home() / "Desktop" / "hermes_workspace"
 HERMES_WIKI_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "02-wiki"
 
+# v6.8.1: hermes 简报产出目录（完整知识库简报 + 候选列表 + 深度分析）
+HERMES_BRIEFINGS_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "briefings"
+HERMES_BRIEFING_PAPERS_DIR = HERMES_BRIEFINGS_DIR / "papers"
+
 # Hermes 配置目录（~/.kimi，旧版路径，部分模块仍使用）
 HERMES_HOME = Path.home() / ".kimi"
 LINSAI_PROFILE = HERMES_HOME / "profiles" / "linsai"

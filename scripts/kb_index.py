@@ -32,7 +32,7 @@ from typing import Any, Dict, List, Optional
 
 from common import now_utc as _now_utc
 import common as _cms
-from paths import INDEX_PATH, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR, QA_DIR, HERMES_WIKI_DIR
+from paths import INDEX_PATH, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR, QA_DIR, HERMES_WIKI_DIR, HERMES_BRIEFING_PAPERS_DIR
 from kb_text import parse_frontmatter, _chunk_document, _tokenize, _compute_idf
 from kb_graph import get_graph_summary, get_related_concepts
 
@@ -158,9 +158,13 @@ def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = No
     """
     _ensure_dirs()
 
-    # v5.0: 默认包含 hermes wiki
+    # v5.0: 默认包含 hermes wiki + v6.8.1: 包含 hermes 简报论文
     if extra_wiki_dirs is None:
-        extra_wiki_dirs = [(HERMES_WIKI_DIR, "hermes-wiki")] if HERMES_WIKI_DIR.exists() else []
+        extra_wiki_dirs = []
+        if HERMES_WIKI_DIR.exists():
+            extra_wiki_dirs.append((HERMES_WIKI_DIR, "hermes-wiki"))
+        if HERMES_BRIEFING_PAPERS_DIR.exists():
+            extra_wiki_dirs.append((HERMES_BRIEFING_PAPERS_DIR, "hermes-briefings"))
 
     # 加载旧索引
     old_index: Dict[str, Any] = {}
@@ -678,16 +682,18 @@ def _self_check() -> bool:
     (tmp_kb / "wiki" / "concepts").mkdir(parents=True, exist_ok=True)
 
     # 保存原始路径常量，测试后恢复
-    global INDEX_PATH, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR, HERMES_WIKI_DIR, _ensure_dirs, log_growth, _load_aliases, _log
+    global INDEX_PATH, KNOWLEDGE_DIR, RAW_DIR, WIKI_DIR, HERMES_WIKI_DIR, HERMES_BRIEFING_PAPERS_DIR, _ensure_dirs, log_growth, _load_aliases, _log
     _orig = {
         "INDEX_PATH": INDEX_PATH, "KNOWLEDGE_DIR": KNOWLEDGE_DIR,
         "RAW_DIR": RAW_DIR, "WIKI_DIR": WIKI_DIR, "HERMES_WIKI_DIR": HERMES_WIKI_DIR,
+        "HERMES_BRIEFING_PAPERS_DIR": HERMES_BRIEFING_PAPERS_DIR,
     }
     INDEX_PATH = tmp_kb / "index.json"
     KNOWLEDGE_DIR = tmp_kb
     RAW_DIR = tmp_kb / "raw"
     WIKI_DIR = tmp_kb / "wiki"
     HERMES_WIKI_DIR = tmp_kb / "nonexistent-hermes-wiki"  # v5.0: 隔离，不索引真实 hermes wiki
+    HERMES_BRIEFING_PAPERS_DIR = tmp_kb / "nonexistent-hermes-briefings"  # v6.8.1: 隔离
 
     # patch kb_graph 路径（build_index 调用 get_graph_summary）
     import kb_graph as _kg
@@ -797,6 +803,7 @@ def _self_check() -> bool:
         RAW_DIR = _orig["RAW_DIR"]
         WIKI_DIR = _orig["WIKI_DIR"]
         HERMES_WIKI_DIR = _orig["HERMES_WIKI_DIR"]
+        HERMES_BRIEFING_PAPERS_DIR = _orig["HERMES_BRIEFING_PAPERS_DIR"]
         _kg.GRAPH_PATH = _orig_kg_graph
         # 恢复注入依赖
         _ensure_dirs = _orig_deps["_ensure_dirs"]
