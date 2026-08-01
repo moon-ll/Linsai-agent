@@ -128,6 +128,10 @@ _SYSTEM_ROUTES = [
     ("GET", re.compile(r"^/api/lifecycle/jobs$"), "_sys_lifecycle_jobs"),
     # v6.8.0: 微调度器当前聚焦
     ("GET", re.compile(r"^/api/lifecycle/focus$"), "_sys_lifecycle_focus"),
+    ("GET", re.compile(r"^/api/lifecycle/kanban$"), "_sys_lifecycle_kanban"),
+    ("POST", re.compile(r"^/api/lifecycle/sync-tasks$"), "_sys_lifecycle_sync_tasks"),
+    ("POST", re.compile(r"^/api/lifecycle/sync-task-history$"), "_sys_lifecycle_sync_task_history"),
+    ("POST", re.compile(r"^/api/lifecycle/reset-stuck/(?P<proposal_id>[^/]+)$"), "_sys_lifecycle_reset_stuck"),
     # v6.7.6: 对抗评审奖惩与监察
     ("GET", re.compile(r"^/api/lifecycle/agent-scores$"), "_sys_lifecycle_agent_scores"),
     ("GET", re.compile(r"^/api/lifecycle/monitor/(?P<proposal_id>[^/]+)$"), "_sys_lifecycle_monitor"),
@@ -916,6 +920,69 @@ class SystemRoutesMixin:
             ctrl = LifecycleCronController()
             focus = ctrl.get_current_focus()
             self._send_json({"status": "ok", "focus": focus})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_kanban(self, parsed, body=None):
+        """v6.8.1: 返回系统看板内容。"""
+        try:
+            from common import load_json
+            from paths import PROJECT_ROOT
+            path = PROJECT_ROOT / "memory" / "system-kanban.json"
+            if not path.exists():
+                self._send_json({"status": "ok", "data": {"initialized": False, "note": "看板尚未初始化"}})
+                return
+            kanban = load_json(path, default={})
+            self._send_json({"status": "ok", "data": kanban})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_sync_tasks(self, parsed, body=None):
+        """v6.8.1: 同步生命周期状态到任务系统。"""
+        try:
+            from lifecycle.controller import LifecycleCronController
+            ctrl = LifecycleCronController()
+            result = ctrl.sync_lifecycle_to_task_manager()
+            self._send_json({"status": "ok", "result": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_sync_task_history(self, parsed, body=None):
+        """v6.8.1: 同步历史优化轮次到任务系统。"""
+        try:
+            from lifecycle.controller import LifecycleCronController
+            ctrl = LifecycleCronController()
+            result = ctrl.sync_lifecycle_history_tasks()
+            self._send_json({"status": "ok", "result": result})
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_reset_stuck(self, parsed, body=None, **kwargs):
+        """v6.8.1: 强制重置指定 proposal 的 failed job。"""
+        try:
+            proposal_id = kwargs.get("proposal_id", "")
+            if not proposal_id:
+                self._send_json({"error": "缺少 proposal_id"}, 400)
+                return
+            from lifecycle.controller import LifecycleCronController
+            ctrl = LifecycleCronController()
+            retried = ctrl._auto_retry_failed_jobs(proposal_id)
+            if retried > 0:
+                self._send_json({"status": "ok", "message": f"已重置 {retried} 个 failed job", "retried": retried})
+                return
+            jobs = ctrl._get_jobs(proposal_id)
+            forced = 0
+            for j in jobs:
+                if j.get("status") == "failed":
+                    j["status"] = "pending"
+                    j["last_error"] = ""
+                    j["attempts"] = 0
+                    forced += 1
+            if forced:
+                ctrl._save_jobs(proposal_id, jobs)
+                self._send_json({"status": "ok", "message": f"强制重置 {forced} 个 failed job", "retried": forced})
+            else:
+                self._send_json({"status": "ok", "message": "无 failed job 需要重置", "retried": 0})
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 

@@ -102,6 +102,7 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
   - v6.7.7：`run_repair()` 区分工作日与周末：工作日修复 worker/编排，周末修复输入/输出/反思任务及 `weekend-pipeline.json` 中的 checkpoint job。
   - **v6.8.0 微调度器**：`scripts/lifecycle/micro_scheduler.py` 引入全局微调度器，工作日按 4 个时段（00:30-03:30 / 04:00-08:00 / 08:30-12:30 / 18:30-22:30）轮流聚焦单个 proposal，每个时段只执行聚焦 proposal 的 pending job，保证同一 proposal 连贯推进。
   - **v6.8.1 微调度器增强**：失败任务自动重试（attempts < MAX_JOB_ATTEMPTS）、跨周轮转内容感知（`last_proposal_id` 校准）、系统看板文件（`memory/system-kanban.json`）同步任务进展、每轮优化完成后自动生成优化报告（`05_review/optimization-report-round-N.md`）。
+  - **v6.8.1 任务系统集成**：微调度器与 task_manager 打通，每次执行后自动同步生命周期状态到任务系统。每个 optimizing proposal 的当前轮次自动创建/更新 task，支持 `backlog → active → completed` 状态流转。提供 `--sync-lifecycle-tasks` / `--sync-lifecycle-history` CLI 命令和 `POST /api/lifecycle/sync-tasks` / `sync-task-history` Web API。看板（`system-kanban.json`）增强 `task_sync` 字段，包含全局统计和映射数量。
 - **对抗评审奖惩与监察（v6.7.6）**：
   - 每轮 checkpoint 拆为 critic → writer → monitor 三步骤，monitor 作为独立第三方 reviewer 做 meta-review。
   - `memory/agent-scores.json` 维护 writer/critic 全局奖惩分数（初始 100，上限 150，下限 0）。

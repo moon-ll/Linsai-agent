@@ -46,6 +46,9 @@ from .utils import _is_stale, _make_job_id
 # 看板文件路径
 KANBAN_PATH = PROJECT_ROOT / "memory" / "system-kanban.json"
 
+# 生命周期任务映射（lifecycle job → task_manager task）
+LIFECYCLE_TASK_MAP_PATH = PROJECT_ROOT / "memory" / "lifecycle-task-map.json"
+
 try:
     from logger import get_logger
     _log = get_logger("lifecycle_cron")
@@ -118,21 +121,61 @@ def _current_focus_slot() -> Optional[Tuple[int, Tuple[str, str]]]:
 
 
 def _load_focus_state() -> Dict[str, Any]:
-    """加载聚焦轮询状态。"""
+    """加载聚焦轮询状态（加锁）。"""
     FOCUS_STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
-    return load_json(FOCUS_STATE_PATH, default={
-        "last_slot_index": -1,
-        "last_proposal_index": 0,
-        "last_proposal_id": "",
-        "focus_history": [],
-    })
+    with file_lock("lifecycle-focus-state"):
+        return load_json(FOCUS_STATE_PATH, default={
+            "last_slot_index": -1,
+            "last_proposal_index": 0,
+            "last_proposal_id": "",
+            "queue": [],
+            "focus_history": [],
+        })
 
 
 def _save_focus_state(state: Dict[str, Any]) -> None:
-    """保存聚焦轮询状态。"""
+    """保存聚焦轮询状态（加锁）。"""
     FOCUS_STATE_PATH.parent.mkdir(parents=True, exist_ok=True)
     state["updated_at"] = now_utc()
-    save_json(FOCUS_STATE_PATH, state)
+    with file_lock("lifecycle-focus-state"):
+        save_json(FOCUS_STATE_PATH, state)
+
+
+def _sync_queue(state: Dict[str, Any], optimizing: List[Dict[str, Any]]) -> List[str]:
+    """同步队列与 optimizing 列表。
+
+    规则：
+    - 从 queue 中移除不在 optimizing 中的 proposal。
+    - 将 optimizing 中新增的 proposal 追加到 queue 末尾。
+    - 保持 queue 中已有的顺序。
+    - 若 queue 为空，用 optimizing 顺序初始化。
+    """
+    opt_ids = [p["proposal_id"] for p in optimizing]
+    queue = state.get("queue", [])
+
+    # 移除已不在 optimizing 中的 proposal
+    queue = [pid for pid in queue if pid in opt_ids]
+
+    # 追加新增 proposal
+    for pid in opt_ids:
+        if pid not in queue:
+            queue.append(pid)
+
+    # 若 queue 为空则用 optimizing 初始化
+    if not queue:
+        queue = list(opt_ids)
+
+    state["queue"] = queue
+    return queue
+
+
+def _move_to_queue_end(state: Dict[str, Any], proposal_id: str) -> None:
+    """将完成的 proposal 移动到队列末尾。"""
+    queue = state.get("queue", [])
+    if proposal_id in queue:
+        queue.remove(proposal_id)
+        queue.append(proposal_id)
+    state["queue"] = queue
 
 
 def _is_round_complete(jobs: List[Dict[str, Any]], proposal_id: str, round_num: int) -> bool:
@@ -149,17 +192,27 @@ def _get_current_day_key() -> str:
 
 
 def _auto_retry_failed_jobs(self, proposal_id: str) -> int:
-    """扫描 proposal 的 failed job，若 attempts < MAX_JOB_ATTEMPTS 则重置为 pending。
+    """扫描 proposal 的 failed job，只重试阻塞 pending 任务的 failed 依赖。
 
+    若某个 failed job 被 pending 任务的 depends_on 引用，才重置为 pending。
+    避免无差别重试所有 failed job，减少无意义执行。
     返回重置的 job 数量。
     """
     jobs = self._get_jobs(proposal_id)
     if not jobs:
         return 0
+
+    # 收集所有 pending job 的依赖集合
+    pending_deps: set = set()
+    for job in jobs:
+        if job.get("status") == JOB_STATUS_PENDING:
+            for dep in job.get("depends_on", []):
+                pending_deps.add(dep)
+
     changed = False
     retry_count = 0
     for job in jobs:
-        if job.get("status") == JOB_STATUS_FAILED:
+        if job.get("status") == JOB_STATUS_FAILED and job.get("job_id") in pending_deps:
             attempts = job.get("attempts", 0)
             if attempts < MAX_JOB_ATTEMPTS:
                 job["status"] = JOB_STATUS_PENDING
@@ -170,7 +223,7 @@ def _auto_retry_failed_jobs(self, proposal_id: str) -> int:
                 changed = True
                 if _log:
                     _log.info(
-                        f"[{proposal_id}] 自动重试 job {job['job_id']} "
+                        f"[{proposal_id}] 依赖链重试 job {job['job_id']} "
                         f"(attempt {attempts + 1}/{MAX_JOB_ATTEMPTS})"
                     )
     if changed:
@@ -179,24 +232,52 @@ def _auto_retry_failed_jobs(self, proposal_id: str) -> int:
 
 
 def _is_proposal_stuck(self, proposal_id: str) -> bool:
-    """检查 proposal 是否被卡住（有 failed job 且达到最大重试次数）。"""
+    """检查 proposal 是否被卡住。
+
+    仅当有 failed job 达到最大重试次数，且该 job 阻塞了某个 pending 任务时，
+    才视为卡住。孤立 orphaned failed job 不阻塞进度。
+    """
     jobs = self._get_jobs(proposal_id)
     if not jobs:
         return False
+
+    # 收集 pending 任务的依赖集合
+    pending_deps: set = set()
+    for job in jobs:
+        if job.get("status") == JOB_STATUS_PENDING:
+            for dep in job.get("depends_on", []):
+                pending_deps.add(dep)
+
     for job in jobs:
         if job.get("status") == JOB_STATUS_FAILED:
             attempts = job.get("attempts", 0)
-            if attempts >= MAX_JOB_ATTEMPTS:
+            if attempts >= MAX_JOB_ATTEMPTS and job.get("job_id") in pending_deps:
                 return True
     return False
 
 
 def _has_any_ready_or_failed_job(self, proposal_id: str) -> bool:
-    """检查 proposal 是否有待执行或可重试的 job（用于判断是否还有工作可做）。"""
+    """检查 proposal 是否有待执行或可重试的 job。
+
+    只计入 pending job 和阻塞 pending 任务的 failed job。
+    孤立 orphaned failed job 不计入，避免误判为"还有工作可做"。
+    """
     jobs = self._get_jobs(proposal_id)
+    if not jobs:
+        return False
+
+    pending_deps: set = set()
+    for job in jobs:
+        if job.get("status") == JOB_STATUS_PENDING:
+            pending_deps.add(job["job_id"])
+            for dep in job.get("depends_on", []):
+                pending_deps.add(dep)
+
     for job in jobs:
         status = job.get("status", "")
-        if status in (JOB_STATUS_PENDING, JOB_STATUS_FAILED):
+        if status == JOB_STATUS_PENDING:
+            return True
+        if status == JOB_STATUS_FAILED and job.get("job_id") in pending_deps:
             return True
     return False
 
@@ -326,6 +407,269 @@ def _generate_round_report(self, proposal_id: str, round_num: int) -> Optional[s
     return str(report_path)
 
 
+def _check_and_transition(self, proposal_id: str) -> Optional[Dict[str, Any]]:
+    """检查 proposal 是否达标，若达标则 transition 到 pending_review。
+
+    在生成优化报告后调用。
+    返回 transition 结果，若未达标返回 None。
+    """
+    try:
+        prop_state = self._get_proposal_state(proposal_id)
+        if not prop_state:
+            return None
+        threshold = self._get_quality_threshold(prop_state.get("project_type", "general"))
+        done_result = self._check_done(proposal_id, threshold)
+        if done_result.get("done"):
+            if _log:
+                _log.info(
+                    f"[{proposal_id}] 达标，流转到 pending_review: {done_result['reason']}"
+                )
+            transition_result = self.transition(
+                proposal_id, "pending_review", reason=done_result["reason"]
+            )
+            return {
+                "done": True,
+                "reason": done_result["reason"],
+                "transition": transition_result,
+            }
+    except Exception as e:
+        if _log:
+            _log.warning(f"[{proposal_id}] 达标检查失败: {e}")
+    return None
+
+
+# ---------------------------------------------------------------------------
+# 任务系统集成（lifecycle → task_manager）
+# ---------------------------------------------------------------------------
+
+_LIFECYCLE_TASK_CACHE: Optional[Dict[str, str]] = None
+
+
+def _load_lifecycle_task_map() -> Dict[str, str]:
+    """加载生命周期任务映射（惰性加载 + 缓存）。"""
+    global _LIFECYCLE_TASK_CACHE
+    if _LIFECYCLE_TASK_CACHE is None:
+        LIFECYCLE_TASK_MAP_PATH.parent.mkdir(parents=True, exist_ok=True)
+        _LIFECYCLE_TASK_CACHE = load_json(LIFECYCLE_TASK_MAP_PATH, default={})
+    return _LIFECYCLE_TASK_CACHE
+
+
+def _save_lifecycle_task_map() -> None:
+    """持久化生命周期任务映射。"""
+    global _LIFECYCLE_TASK_CACHE
+    if _LIFECYCLE_TASK_CACHE is not None:
+        LIFECYCLE_TASK_MAP_PATH.parent.mkdir(parents=True, exist_ok=True)
+        with file_lock("lifecycle-task-map"):
+            save_json(LIFECYCLE_TASK_MAP_PATH, _LIFECYCLE_TASK_CACHE)
+
+
+def _get_lifecycle_task_id(proposal_id: str, round_num: int) -> Optional[str]:
+    """从映射中获取 lifecycle 任务 ID。"""
+    mapping = _load_lifecycle_task_map()
+    return mapping.get(f"{proposal_id}:r{round_num}")
+
+
+def _set_lifecycle_task_id(proposal_id: str, round_num: int, task_id: str) -> None:
+    """在映射中记录 lifecycle 任务 ID。"""
+    mapping = _load_lifecycle_task_map()
+    mapping[f"{proposal_id}:r{round_num}"] = task_id
+    _save_lifecycle_task_map()
+
+
+def _sync_lifecycle_to_task_manager(self) -> Dict[str, Any]:
+    """同步生命周期状态到 task_manager 任务系统。
+
+    为每个 optimizing proposal 的当前 round 创建/更新任务，
+    让用户可以在 Web 任务面板看到生命周期优化进度。
+    """
+    try:
+        import task_manager as tm
+    except ImportError:
+        return {"synced": 0, "error": "task_manager 不可用"}
+
+    try:
+        # 同步 pending_review 和 archived 的已完成任务
+        synced_all = []
+        for status_name in ("optimizing", "pending_review", "archived"):
+            try:
+                proposals = self.list_by_status(status_name)
+            except Exception:
+                continue
+            for prop in proposals:
+                pid = prop["proposal_id"]
+                result = _sync_single_proposal_to_task(self, tm, pid, status_name)
+                if result:
+                    synced_all.append(result)
+
+        return {"synced": len(synced_all), "details": synced_all}
+    except Exception as e:
+        if _log:
+            _log.warning(f"[task-sync] 同步失败: {e}")
+        return {"synced": 0, "error": str(e)}
+
+
+def _sync_single_proposal_to_task(
+    self, tm: Any, proposal_id: str, status_name: str,
+) -> Optional[Dict[str, Any]]:
+    """同步单个 proposal 到 task_manager。"""
+    prop_state = self._get_proposal_state(proposal_id)
+    if not prop_state:
+        return None
+
+    current_round = prop_state.get("optimization_rounds", 0) + 1
+    jobs = self._get_jobs(proposal_id)
+    round_jobs = [j for j in jobs if j.get("round") == current_round]
+    total = len(round_jobs)
+    done = sum(1 for j in round_jobs if j.get("status") == JOB_STATUS_DONE)
+    failed = sum(1 for j in round_jobs if j.get("status") == JOB_STATUS_FAILED)
+    progress = int(done / total * 100) if total > 0 else 0
+    round_complete = total > 0 and done == total
+
+    # 检查是否已有 task
+    existing_task_id = _get_lifecycle_task_id(proposal_id, current_round)
+
+    # 若 proposal 已不在 optimizing 中，检查是否有未完成的 task
+    is_optimizing = status_name == "optimizing"
+
+    title = f"「优化」{proposal_id} 第{current_round}轮"
+    desc_lines = [
+        f"生命周期自动优化任务",
+        f"Proposal: {proposal_id}",
+        f"轮次: {current_round}",
+        f"状态: {'优化中' if is_optimizing else status_name}",
+        f"进度: {done}/{total} job 完成 ({failed} 失败)",
+    ]
+    if round_jobs:
+        # 按模块分组
+        sections = {}
+        for j in round_jobs:
+            sk = j.get("section_key", "unknown")
+            if sk not in sections:
+                sections[sk] = {"done": 0, "total": 0}
+            sections[sk]["total"] += 1
+            if j.get("status") == JOB_STATUS_DONE:
+                sections[sk]["done"] += 1
+        desc_lines.append("")
+        desc_lines.append("模块进度:")
+        for sk, st in sections.items():
+            desc_lines.append(f"  {sk}: {st['done']}/{st['total']}")
+    description = "\n".join(desc_lines)
+
+    if existing_task_id:
+        # 更新已有任务
+        try:
+            task = tm.get_task(existing_task_id)
+        except Exception:
+            task = None
+
+        if task:
+            try:
+                tm.update_task(existing_task_id, progress=progress, description=description)
+                if round_complete and task.get("status") != "completed":
+                    tm.transition_task(existing_task_id, "completed")
+                elif not round_complete and task.get("status") == "backlog":
+                    tm.transition_task(existing_task_id, "active")
+                return {
+                    "proposal_id": proposal_id,
+                    "round": current_round,
+                    "action": "updated",
+                    "task_id": existing_task_id,
+                    "progress": progress,
+                }
+            except Exception as e:
+                if _log:
+                    _log.warning(f"[task-sync] 更新任务 {existing_task_id} 失败: {e}")
+                return None
+
+    # 创建新任务
+    try:
+        score = prop_state.get("last_score", 0.0)
+        project_name = proposal_id[:20]
+        task_id, path = tm.create_task(
+            title=title,
+            category="research",
+            priority="medium",
+            description=description,
+            project=project_name,
+            assignee="hermes",
+        )
+        # 记录映射
+        _set_lifecycle_task_id(proposal_id, current_round, task_id)
+
+        # 如果已经开始执行，设为 active
+        if round_complete or done > 0:
+            tm.transition_task(task_id, "active")
+        if round_complete:
+            tm.transition_task(task_id, "completed")
+        else:
+            tm.update_progress(task_id, progress)
+
+        if _log:
+            _log.info(f"[task-sync] 创建任务 {task_id} 用于 {proposal_id} r{current_round}")
+        return {
+            "proposal_id": proposal_id,
+            "round": current_round,
+            "action": "created",
+            "task_id": task_id,
+            "progress": progress,
+        }
+    except Exception as e:
+        if _log:
+            _log.warning(f"[task-sync] 创建任务失败: {e}")
+        return None
+
+
+def _sync_previous_rounds_to_task_manager(self) -> Dict[str, Any]:
+    """同步历史轮次（已完成但未创建 task 的轮次）到 task_manager。
+
+    在首次启用集成时，补全之前已完成轮次的任务记录。
+    """
+    try:
+        import task_manager as tm
+    except ImportError:
+        return {"synced": 0}
+
+    synced = []
+    for status_name in ("optimizing", "pending_review", "archived"):
+        try:
+            proposals = self.list_by_status(status_name)
+        except Exception:
+            continue
+        for prop in proposals:
+            pid = prop["proposal_id"]
+            prop_state = self._get_proposal_state(pid)
+            if not prop_state:
+                continue
+            rounds_done = prop_state.get("optimization_rounds", 0)
+            for r in range(1, rounds_done + 1):
+                if _get_lifecycle_task_id(pid, r) is not None:
+                    continue  # 已有映射
+                # 创建已完成的历史任务
+                title = f"「优化」{pid} 第{r}轮"
+                description = (
+                    f"生命周期自动优化任务（历史同步）\n"
+                    f"Proposal: {pid}\n"
+                    f"轮次: {r}\n状态: 已完成"
+                )
+                project_name = pid[:20]
+                try:
+                    task_id, path = tm.create_task(
+                        title=title, category="research", priority="medium",
+                        description=description, project=project_name,
+                        assignee="hermes",
+                    )
+                    _set_lifecycle_task_id(pid, r, task_id)
+                    # backlog → active → completed 两步流转
+                    tm.transition_task(task_id, "active")
+                    tm.transition_task(task_id, "completed")
+                    synced.append({"proposal_id": pid, "round": r, "task_id": task_id})
+                except Exception as e:
+                    if _log:
+                        _log.warning(f"[task-sync] 创建历史任务 {pid} r{r} 失败: {e}")
+                    continue
+    return {"synced": len(synced), "details": synced}
+
+
 def _update_kanban(
     slot_info: Optional[Tuple[int, Tuple[str, str]]],
     focus_pid: Optional[str],
@@ -358,6 +702,23 @@ def _update_kanban(
                 j = ready[0]["job"]
                 next_job = f"{j.get('step')}/{j.get('section_key')}"
 
+        # 查询 task_manager 中对应的任务状态
+        task_status = None
+        task_progress = 0
+        task_id_val = _get_lifecycle_task_id(pid, round_num)
+        if task_id_val:
+            try:
+                import task_manager as _tm
+                try:
+                    task = _tm.get_task(task_id_val)
+                    if task:
+                        task_status = task.get("status", "unknown")
+                        task_progress = task.get("progress", 0)
+                except Exception:
+                    pass
+            except ImportError:
+                pass
+
         proposals_status.append({
             "proposal_id": pid,
             "round": round_num,
@@ -367,6 +728,9 @@ def _update_kanban(
             "pending": pending,
             "stuck": stuck,
             "next_job": next_job,
+            "task_id": task_id_val,
+            "task_status": task_status,
+            "task_progress": task_progress,
         })
 
     # 读取现有看板，保留历史记录
@@ -386,6 +750,25 @@ def _update_kanban(
     # 最多保留 200 条历史记录
     history = history[-200:]
 
+    # 收集 task_manager 全局统计
+    task_stats = {}
+    try:
+        import task_manager as _tm
+        try:
+            all_tasks = _tm.list_tasks()
+            task_stats = {
+                "total": len(all_tasks),
+                "backlog": sum(1 for t in all_tasks if t.get("status") == "backlog"),
+                "active": sum(1 for t in all_tasks if t.get("status") == "active"),
+                "completed": sum(1 for t in all_tasks if t.get("status") == "completed"),
+                "lifecycle_tasks": sum(1 for t in all_tasks
+                                       if t.get("title", "").startswith("「优化」")),
+            }
+        except Exception:
+            pass
+    except ImportError:
+        pass
+
     kanban = {
         "updated_at": now,
         "updated_at_local": now_local,
@@ -399,6 +782,11 @@ def _update_kanban(
         "proposals": proposals_status,
         "execution_history": history,
         "day_key": _get_current_day_key(),
+        "task_sync": {
+            "enabled": True,
+            "stats": task_stats,
+            "mapping_count": len(_load_lifecycle_task_map()),
+        },
     }
     try:
         KANBAN_PATH.parent.mkdir(parents=True, exist_ok=True)
@@ -416,29 +804,30 @@ def _rebalance_index(
 
     当 optimizing 列表跨周发生变化（新增/删除 proposal）时，
     确保轮转位置正确：
-    - 若 last_proposal_id 在列表中，找到其索引。
-    - 若不在列表中，保持 last_proposal_index（列表缩短时回绕）。
+    - 先同步队列（移除已归档的，追加新增的）。
+    - 若 last_proposal_id 在队列中，找到其索引。
+    - 若不在队列中，重置索引到队列头部。
     - 若索引超出范围，回绕到 0。
     """
+    queue = _sync_queue(state, optimizing)
+
     last_id = state.get("last_proposal_id", "")
     last_index = state.get("last_proposal_index", 0)
-    n = len(optimizing)
+    n = len(queue)
     if n == 0:
         return 0
 
-    # 优先通过 last_proposal_id 定位
+    # 优先通过 last_proposal_id 在队列中定位
     if last_id:
-        for i, prop in enumerate(optimizing):
-            if prop.get("proposal_id") == last_id:
+        for i, pid in enumerate(queue):
+            if pid == last_id:
                 if i != last_index:
                     state["last_proposal_index"] = i
                 return i
 
-    # last_proposal_id 不在列表中（被归档等），检查索引是否有效
-    if last_index >= n:
-        state["last_proposal_index"] = 0
-        return 0
-    return last_index
+    # last_proposal_id 不在队列中（被归档），重置到队列头部
+    state["last_proposal_index"] = 0
+    return 0
 
 
 def _focus_proposal_for_slot(
@@ -446,14 +835,14 @@ def _focus_proposal_for_slot(
     slot_index: int,
     optimizing: List[Dict[str, Any]],
 ) -> Optional[str]:
-    """确定当前时段应聚焦的 proposal。
+    """确定当前时段应聚焦的 proposal（v6.8.2 循环队列）。
 
-    规则（v6.8.1）：
-    - 跨天/跨周时通过 last_proposal_id 重新校准轮转位置。
-    - 先自动重试所有 failed job（attempts < MAX_JOB_ATTEMPTS）。
+    规则：
+    - 使用循环队列管理课题轮转。
+    - 跨天保持队列不变，跨周同步队列（移除已归档，追加新增）。
     - 若上一个时段聚焦的 proposal 本轮未完成，继续聚焦它。
-    - 若已完成或卡住（达到最大重试次数），则推进到下一个 proposal。
-    - 跳过被卡住的 proposal（failed job 达到最大重试次数）。
+    - 若已完成或卡住，将其移动到队列末尾，聚焦下一个。
+    - 跳过被卡住的 proposal。
     """
     if not optimizing:
         return None
@@ -469,15 +858,15 @@ def _focus_proposal_for_slot(
         state["last_day_key"] = current_day
         _save_focus_state(state)
 
-    # 跨周重新平衡：用 last_proposal_id 校准索引
+    # 同步队列并重新校准索引
+    queue = _sync_queue(state, optimizing)
     last_proposal_index = _rebalance_index(state, optimizing)
     last_slot_index = state.get("last_slot_index", -1)
 
     # 当前时段与上一时段不同，可能需要切换 proposal
     if slot_index != last_slot_index:
         # 先自动重试上一个 proposal 的 failed job
-        prev_index = last_proposal_index % len(optimizing)
-        prev_pid = optimizing[prev_index]["proposal_id"]
+        prev_pid = queue[last_proposal_index % len(queue)]
         try:
             retried = _auto_retry_failed_jobs(self, prev_pid)
             if retried > 0 and _log:
@@ -499,26 +888,47 @@ def _focus_proposal_for_slot(
                 return prev_pid
         except Exception:
             pass
-        # 已完成或卡住，推进到下一个
-        next_index = (last_proposal_index + 1) % len(optimizing)
+        # 已完成或卡住：移动到队列末尾，推进到下一个
+        _move_to_queue_end(state, prev_pid)
+        queue = state.get("queue", [])
+        # 找到 prev_pid 移尾后的新队列中，下一个应聚焦的 proposal
+        # prev_pid 已被移尾，所以下一个就是队列头
+        next_pid = queue[0] if queue else None
+        if next_pid is None:
+            return None
+        # 找出 next_pid 的索引
+        next_index = 0
+        for i, pid in enumerate(queue):
+            if pid == next_pid:
+                next_index = i
+                break
         state["last_slot_index"] = slot_index
         state["last_proposal_index"] = next_index
-        state["last_proposal_id"] = optimizing[next_index]["proposal_id"]
+        state["last_proposal_id"] = next_pid
         _save_focus_state(state)
+        pid = next_pid
     else:
         # 同一时段内，保持当前聚焦
-        next_index = last_proposal_index % len(optimizing)
+        pid = queue[last_proposal_index % len(queue)]
 
     # 检查选中的 proposal 是否卡住，若卡住则跳过
-    pid = optimizing[next_index]["proposal_id"]
     if _is_proposal_stuck(self, pid):
         if _log:
             _log.warning(f"[{pid}] 被卡住（达到最大重试次数），跳过到下一个")
-        next_index = (next_index + 1) % len(optimizing)
+        _move_to_queue_end(state, pid)
+        queue = state.get("queue", [])
+        next_pid = queue[0] if queue else None
+        if next_pid is None:
+            return None
+        next_index = 0
+        for i, p in enumerate(queue):
+            if p == next_pid:
+                next_index = i
+                break
         state["last_proposal_index"] = next_index
-        state["last_proposal_id"] = optimizing[next_index]["proposal_id"]
+        state["last_proposal_id"] = next_pid
         _save_focus_state(state)
-        pid = optimizing[next_index]["proposal_id"]
+        pid = next_pid
 
     # 记录历史
     history = state.get("focus_history", [])
@@ -665,13 +1075,37 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
         msg = f"{focus_pid} 本轮已完成，时段空闲"
         if _log:
             _log.info(msg)
+        # 递增 optimization_rounds（微调度器路径）
+        if prop_state:
+            prop_state["optimization_rounds"] = current_round
+            self._set_proposal_state(focus_pid, prop_state)
         # 生成优化报告
         report_path = _generate_round_report(self, focus_pid, current_round)
         if report_path:
             generated_reports.append(report_path)
+        # 检查是否达标，达标则 transition 到 pending_review
+        transition_result = _check_and_transition(self, focus_pid)
+        if transition_result:
+            if _log:
+                _log.info(
+                    f"[{focus_pid}] 达标已流转到 pending_review: {transition_result['reason']}"
+                )
+            # 达标后从队列中移除（不再在 optimizing 中）
+            state = _load_focus_state()
+            queue = state.get("queue", [])
+            if focus_pid in queue:
+                queue.remove(focus_pid)
+            state["queue"] = queue
+            _save_focus_state(state)
+        else:
+            # 未达标但本轮完成，移动到队列末尾
+            state = _load_focus_state()
+            _move_to_queue_end(state, focus_pid)
+            _save_focus_state(state)
         _update_kanban(slot_info, focus_pid, optimizing, [], self)
         return {"success": True, "executed_count": 0, "executed": [], "reason": msg,
-                "generated_reports": generated_reports}
+                "generated_reports": generated_reports,
+                "transitioned": transition_result is not None}
 
     # 5. 只执行聚焦 proposal 的 pending job
     with file_lock("lifecycle-micro-scheduler"):
@@ -712,13 +1146,38 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
                 # 如果执行成功，检查本轮是否已完成，生成优化报告
                 if result.get("success"):
                     post_jobs = self._get_jobs(proposal_id)
-                    post_round = prop_state.get("optimization_rounds", 0) + 1 if prop_state else 1
+                    # 刷新 prop_state，避免使用过时数据
+                    post_prop_state = self._get_proposal_state(proposal_id)
+                    post_round = post_prop_state.get("optimization_rounds", 0) + 1 if post_prop_state else 1
                     if _is_round_complete(post_jobs, proposal_id, post_round):
+                        # 递增 optimization_rounds（微调度器路径）
+                        if post_prop_state:
+                            post_prop_state["optimization_rounds"] = post_round
+                            self._set_proposal_state(proposal_id, post_prop_state)
                         report_path = _generate_round_report(self, proposal_id, post_round)
                         if report_path:
                             generated_reports.append(report_path)
                             if _log:
                                 _log.info(f"已生成优化报告: {report_path}")
+                        # 检查是否达标，达标则 transition 到 pending_review
+                        transition_result = _check_and_transition(self, proposal_id)
+                        if transition_result:
+                            if _log:
+                                _log.info(
+                                    f"[{proposal_id}] 达标已流转到 pending_review"
+                                )
+                            # 达标后从队列中移除
+                            state = _load_focus_state()
+                            queue = state.get("queue", [])
+                            if proposal_id in queue:
+                                queue.remove(proposal_id)
+                            state["queue"] = queue
+                            _save_focus_state(state)
+                        else:
+                            # 未达标但本轮完成，移动到队列末尾
+                            state = _load_focus_state()
+                            _move_to_queue_end(state, proposal_id)
+                            _save_focus_state(state)
 
     summary = {
         "success": True,
@@ -734,6 +1193,17 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
 
     # 更新看板
     _update_kanban(slot_info, focus_pid, optimizing, executed, self)
+
+    # 同步生命周期状态到 task_manager 任务系统
+    try:
+        task_sync_result = _sync_lifecycle_to_task_manager(self)
+        if task_sync_result.get("synced", 0) > 0:
+            summary["task_sync"] = task_sync_result
+            if _log:
+                _log.info(f"[task-sync] 同步了 {task_sync_result['synced']} 个任务")
+    except Exception as e:
+        if _log:
+            _log.warning(f"[task-sync] 同步异常: {e}")
 
     if _log:
         _log.info(f"微调度器完成: 执行 {len(executed)} 个 job, 聚焦 {focus_pid}")

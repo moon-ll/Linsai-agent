@@ -61,8 +61,13 @@ from .framework import (
     teardown_cron_framework,
 )
 from .micro_scheduler import (
+    _auto_retry_failed_jobs,
     _current_focus_slot,
     _focus_proposal_for_slot,
+    _generate_round_report,
+    _get_current_day_key,
+    _has_any_ready_or_failed_job,
+    _is_proposal_stuck,
     _is_round_complete,
     _job_priority_key,
     _list_ready_jobs_for_proposal,
@@ -70,6 +75,9 @@ from .micro_scheduler import (
     _load_focus_state,
     _refresh_stale_jobs,
     _save_focus_state,
+    _sync_lifecycle_to_task_manager,
+    _sync_previous_rounds_to_task_manager,
+    _update_kanban,
     get_current_focus,
     pause_old_worker_crons,
     remove_micro_scheduler,
@@ -77,6 +85,7 @@ from .micro_scheduler import (
     schedule_micro_scheduler,
 )
 from .orchestrator import (
+    _cleanup_old_round_jobs,
     _compute_actual_round,
     sync_checkpoint,
     run_orchestrator,
@@ -308,8 +317,13 @@ python3 scripts/weekend_pipeline.py --run-next
     # ------------------------------------------------------------------
     # 微调度器（从 micro_scheduler 模块绑定为方法）
     # ------------------------------------------------------------------
+    _auto_retry_failed_jobs = _auto_retry_failed_jobs
     _current_focus_slot = _current_focus_slot
     _focus_proposal_for_slot = _focus_proposal_for_slot
+    _generate_round_report = _generate_round_report
+    _get_current_day_key = _get_current_day_key
+    _has_any_ready_or_failed_job = _has_any_ready_or_failed_job
+    _is_proposal_stuck = _is_proposal_stuck
     _is_round_complete = _is_round_complete
     _job_priority_key = _job_priority_key
     _list_ready_jobs_for_proposal = _list_ready_jobs_for_proposal
@@ -317,11 +331,14 @@ python3 scripts/weekend_pipeline.py --run-next
     _load_focus_state = _load_focus_state
     _refresh_stale_jobs = _refresh_stale_jobs
     _save_focus_state = _save_focus_state
+    _update_kanban = _update_kanban
     run_micro_scheduler = run_micro_scheduler
     schedule_micro_scheduler = schedule_micro_scheduler
     remove_micro_scheduler = remove_micro_scheduler
     pause_old_worker_crons = pause_old_worker_crons
     get_current_focus = get_current_focus
+    sync_lifecycle_to_task_manager = _sync_lifecycle_to_task_manager
+    sync_lifecycle_history_tasks = _sync_previous_rounds_to_task_manager
 
     # ------------------------------------------------------------------
     # 安装 / 卸载（从 framework 模块绑定为方法）

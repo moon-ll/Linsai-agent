@@ -11,6 +11,45 @@ from proposal_lifecycle import (
 )
 
 
+def _update_kanban_task_sync(ctrl) -> None:
+    """更新看板中的 task_sync 字段，在 CLI 同步任务后调用。"""
+    try:
+        from common import load_json, save_json, now_utc
+        from paths import PROJECT_ROOT
+        kanban_path = PROJECT_ROOT / "memory" / "system-kanban.json"
+        if not kanban_path.exists():
+            return
+        kanban = load_json(kanban_path, default={})
+        # 收集 task_manager 统计
+        try:
+            import task_manager as tm
+            all_tasks = tm.list_tasks()
+            task_stats = {
+                "total": len(all_tasks),
+                "backlog": sum(1 for t in all_tasks if t.get("status") == "backlog"),
+                "active": sum(1 for t in all_tasks if t.get("status") == "active"),
+                "completed": sum(1 for t in all_tasks if t.get("status") == "completed"),
+                "lifecycle_tasks": sum(1 for t in all_tasks if t.get("title", "").startswith("「优化」")),
+            }
+        except Exception:
+            task_stats = {}
+        # 从 lifecycle 映射获取映射数量
+        try:
+            from lifecycle.micro_scheduler import _load_lifecycle_task_map
+            mapping_count = len(_load_lifecycle_task_map())
+        except Exception:
+            mapping_count = 0
+        kanban["task_sync"] = {
+            "enabled": True,
+            "stats": task_stats,
+            "mapping_count": mapping_count,
+            "last_sync_at": now_utc(),
+        }
+        save_json(kanban_path, kanban)
+    except Exception:
+        pass
+
+
 def main(argv: Optional[List[str]] = None) -> int:
     import argparse
     parser = argparse.ArgumentParser(description="提案生命周期管理")
@@ -63,6 +102,16 @@ def main(argv: Optional[List[str]] = None) -> int:
                         help="安装全局微调度器 cron（每 5 分钟）")
     parser.add_argument("--remove-micro-scheduler", action="store_true",
                         help="卸载全局微调度器 cron")
+    # v6.8.1: 看板与故障恢复
+    parser.add_argument("--kanban", action="store_true",
+                        help="显示系统看板状态")
+    parser.add_argument("--reset-stuck", metavar="ID",
+                        help="强制重置指定 proposal 的 failed job（--reset-stuck ID）")
+    # v6.8.1: 任务系统集成
+    parser.add_argument("--sync-lifecycle-tasks", action="store_true",
+                        help="同步当前生命周期状态到任务系统")
+    parser.add_argument("--sync-lifecycle-history", action="store_true",
+                        help="同步历史优化轮次到任务系统")
     args = parser.parse_args(argv)
 
     lc = ProposalLifecycle()
@@ -70,7 +119,9 @@ def main(argv: Optional[List[str]] = None) -> int:
     # v6.7.5: 新 cron 框架命令使用 LifecycleCronController
     if any([args.worker_step, args.orchestrate, args.repair, args.setup_cron_v2, args.teardown_cron_v2,
             args.setup_weekend, args.teardown_weekend,
-            args.micro_scheduler, args.setup_micro_scheduler, args.remove_micro_scheduler]):
+            args.micro_scheduler, args.setup_micro_scheduler, args.remove_micro_scheduler,
+            args.kanban, args.reset_stuck,
+            args.sync_lifecycle_tasks, args.sync_lifecycle_history]):
         # 延迟导入避免循环依赖
         from lifecycle_cron_framework import LifecycleCronController
         ctrl = LifecycleCronController()
@@ -156,6 +207,92 @@ def main(argv: Optional[List[str]] = None) -> int:
         if args.remove_micro_scheduler:
             result = ctrl.remove_micro_scheduler()
             print(f"=== 已卸载微调度器 cron: {result.get('removed', [])} ===")
+            return 0
+
+        if args.sync_lifecycle_tasks:
+            result = ctrl.sync_lifecycle_to_task_manager()
+            print(f"=== 生命周期任务同步完成 ===")
+            print(f"同步数量: {result.get('synced', 0)}")
+            for detail in result.get("details", []):
+                print(f"  {detail.get('action', '?')}: {detail.get('proposal_id')} "
+                      f"r{detail.get('round')} → {detail.get('task_id')} "
+                      f"进度 {detail.get('progress', 0)}%")
+            if result.get("error"):
+                print(f"错误: {result['error']}")
+            # 更新看板中的 task_sync 字段
+            _update_kanban_task_sync(ctrl)
+            return 0
+
+        if args.sync_lifecycle_history:
+            result = ctrl.sync_lifecycle_history_tasks()
+            print(f"=== 历史轮次同步完成 ===")
+            print(f"同步数量: {result.get('synced', 0)}")
+            for detail in result.get("details", []):
+                print(f"  {detail.get('proposal_id')} r{detail.get('round')} "
+                      f"→ {detail.get('task_id')}")
+            if result.get("error"):
+                print(f"错误: {result['error']}")
+            # 更新看板中的 task_sync 字段
+            _update_kanban_task_sync(ctrl)
+            return 0
+
+        if args.kanban:
+            from common import load_json
+            from paths import PROJECT_ROOT
+            kanban_path = PROJECT_ROOT / "memory" / "system-kanban.json"
+            if not kanban_path.exists():
+                print("看板文件不存在，请先运行微调度器")
+                return 1
+            kanban = load_json(kanban_path, default={})
+            print("=== 系统看板 ===")
+            print(f"更新时间: {kanban.get('updated_at_local', '?')}")
+            print(f"日期: {kanban.get('day_key', '?')}")
+            current = kanban.get("current", {})
+            print(f"时段: {current.get('slot', '不在时段内')}")
+            print(f"聚焦课题: {current.get('focus_proposal', '无')}")
+            print(f"优化中课题数: {current.get('proposals_in_optimizing', 0)}")
+            print()
+            proposals = kanban.get("proposals", [])
+            if proposals:
+                print(f"课题状态 ({len(proposals)} 个):")
+                print(f"{'课题ID':36s} {'轮次':4s} {'分数':5s} {'Job进度':10s} {'失败':4s} {'卡住':4s} {'下一Job':20s}")
+                print("-" * 90)
+                for p in proposals:
+                    stuck = "⚠" if p.get("stuck") else "✓"
+                    print(f"{p['proposal_id']:36s} {p['round']:4d} {p['score']:5.2f} {p['jobs']:10s} {p['failed']:4d} {stuck:4s} {p.get('next_job', '-') or '-':20s}")
+            history = kanban.get("execution_history", [])
+            print(f"\n最近执行 ({len(history)} 条):")
+            print(f"{'时间':22s} {'课题':36s} {'步骤':20s} {'结果':6s} {'错误'}")
+            print("-" * 100)
+            for h in history[-10:]:
+                at = h.get("at", "?")[11:19] if len(h.get("at", "")) >= 19 else h.get("at", "?")
+                pid = (h.get("proposal_id") or "?")[:36]
+                step = (h.get("step") or "?")[:20]
+                ok = "✓" if h.get("success") else "✗"
+                err = (h.get("error") or "")[:30]
+                print(f"{at:22s} {pid:36s} {step:20s} {ok:6s} {err}")
+            return 0
+
+        if args.reset_stuck:
+            pid = args.reset_stuck
+            retried = ctrl._auto_retry_failed_jobs(pid)
+            if retried > 0:
+                print(f"已重置 {pid} 的 {retried} 个 failed job 为 pending")
+            else:
+                # 强制重置所有 failed job（即使达到最大重试次数）
+                jobs = ctrl._get_jobs(pid)
+                forced = 0
+                for j in jobs:
+                    if j.get("status") == "failed":
+                        j["status"] = "pending"
+                        j["last_error"] = ""
+                        j["attempts"] = 0
+                        forced += 1
+                if forced:
+                    ctrl._save_jobs(pid, jobs)
+                    print(f"强制重置 {pid} 的 {forced} 个 failed job 为 pending（重置重试计数）")
+                else:
+                    print(f"{pid} 无 failed job 需要重置")
             return 0
 
     # 原有命令继续走 ProposalLifecycle

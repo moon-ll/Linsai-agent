@@ -1,5 +1,52 @@
 # 变更记录
 
+## v6.8.1 - 2026-08-01 任务系统打通 + 看板增强
+
+### 问题根因
+- 微调度器与 task_manager 任务系统完全隔离，生命周期优化进度在 Web 任务面板不可见。
+- 用户无法在 Web 界面查看/触发生命周期状态同步。
+- 看板（system-kanban.json）不包含任务系统统计信息，缺少 task_sync 字段。
+
+### 新增功能
+- **任务系统集成（lifecycle → task_manager）** — `scripts/lifecycle/micro_scheduler.py`
+  - 新增 `_load_lifecycle_task_map` / `_save_lifecycle_task_map` / `_get_lifecycle_task_id` / `_set_lifecycle_task_id`：管理 proposal 轮次与 task_id 的映射关系。
+  - 新增 `_sync_lifecycle_to_task_manager`：微调度器每次执行后自动同步所有 optimizing/pending_review/archived 的 proposal 到 task_manager，创建/更新任务并记录进度。
+  - 新增 `_sync_previous_rounds_to_task_manager`：补全历史轮次（已完成但未创建 task 的轮次），支持首次启用时一键同步。
+  - 新增 `_sync_single_proposal_to_task`：单个 proposal 的同步逻辑，支持创建/更新/状态流转（backlog→active→completed）。
+  - 微调度器 `run_micro_scheduler` 末尾自动调用 `_sync_lifecycle_to_task_manager`。
+- **看板增强** — `scripts/lifecycle/micro_scheduler.py`
+  - `_update_kanban` 新增 `task_sync` 字段，包含 `enabled`、`stats`（全局统计）、`mapping_count`、`last_sync_at`。
+  - 每个 proposal 的看板状态新增 `task_id`、`task_status`、`task_progress` 字段。
+  - 收集 `task_manager` 全局统计（total/backlog/active/completed/lifecycle_tasks）。
+- **CLI 命令** — `scripts/proposal_lifecycle/cli.py`
+  - 新增 `--sync-lifecycle-tasks`：同步当前生命周期状态到任务系统。
+  - 新增 `--sync-lifecycle-history`：同步历史优化轮次到任务系统。
+  - 新增 `_update_kanban_task_sync` 辅助函数，同步后自动更新看板。
+- **Web API 路由** — `scripts/web_routes_system.py`
+  - 新增 `POST /api/lifecycle/sync-tasks`：触发生命周期任务同步。
+  - 新增 `POST /api/lifecycle/sync-task-history`：触发历史轮次同步。
+- **Controller 暴露** — `scripts/lifecycle/controller.py`
+  - `LifecycleCronController` 绑定 `sync_lifecycle_to_task_manager` 和 `sync_lifecycle_history_tasks`。
+
+### 修复内容
+- `_sync_previous_rounds_to_task_manager` 中历史任务状态流转改为 `backlog → active → completed` 两步（原 `backlog → completed` 被状态机拒绝）。
+- `_sync_lifecycle_to_task_manager` 中的 `_sync_single_proposal_to_task` 修复完成轮次未标记 completed 的问题。
+
+### 验证结果
+- `python3 -m py_compile` 语法检查全部通过。
+- `python3 scripts/self_test.py --module` 192/192 通过。
+- `python3 scripts/self_test.py --web-ci` 246/246 通过。
+- `python3 scripts/self_test.py --scenario` 16/16 通过。
+- 端到端验证：CLI 命令成功创建 39 个任务（5 个当前轮次 + 31 个历史轮次），Web API 路由正常响应。
+
+### 设计原则
+- **自动同步**：微调度器每次执行后自动同步，无需手动触发。
+- **惰性加载**：`_load_lifecycle_task_map` 使用模块级缓存，仅在首次调用时加载文件。
+- **并发安全**：`_save_lifecycle_task_map` 使用 `file_lock` 保护写盘操作。
+- **幂等性**：`_sync_single_proposal_to_task` 先检查映射是否存在，存在则更新而非重复创建。
+
+---
+
 ## v6.8.1 - 2026-08-01 修复 score 类型错误与跨周重新平衡机制
 
 ### 问题根因
