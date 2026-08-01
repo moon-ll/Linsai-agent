@@ -17,14 +17,14 @@ class CompletionMixin:
     # 达标判定
     # ------------------------------------------------------------------
 
-    # v6.7.10: 7 个申请书模块 + 整体审查全部通过才算达标
-    REQUIRED_SECTIONS = SECTION_KEYS + ["full_review"]
+    # v6.8.0: 5 个申请书模块（含整体审查）全部通过才算达标
+    REQUIRED_SECTIONS = SECTION_KEYS
 
     def _check_done(self, proposal_id: str, threshold: Dict[str, Any]) -> Dict[str, Any]:
         """判定 proposal 是否达到输出标准（P1-3: 所有模块对抗胜利才算达标）。
 
-        达标条件：7 个章节（立项依据/研究内容/研究方案/特色与创新/年度研究计划/预期研究成果/参考文献）
-        + 整体审查，共 8 个模块全部通过。每个模块"通过"= 分数达标 + 各维度无短板。
+        达标条件：5 个章节（立项依据/研究内容/研究方案/整体一致性审查/参考文献）
+        共 5 个模块全部通过。每个模块"通过"= 分数达标 + 各维度无短板。
         """
         prop_state = self._get_proposal_state(proposal_id)
         if not prop_state:
@@ -47,7 +47,7 @@ class CompletionMixin:
         if len(score_history) >= no_improve_limit + 1:
             recent_scores = [h["score"] for h in score_history[-(no_improve_limit + 1):]]
             deltas = [recent_scores[i + 1] - recent_scores[i] for i in range(len(recent_scores) - 1)]
-            if all(d < 0.02 for d in deltas):
+            if all(d <= 0 for d in deltas):
                 passed_str = f"（已通过{len(passed_sections)}/{len(self.REQUIRED_SECTIONS)}模块）"
                 return {"done": True, "reason": f"连续{no_improve_limit}轮无显著提升{passed_str}"}
 
