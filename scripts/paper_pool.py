@@ -67,13 +67,11 @@ def add_candidates(candidates: Optional[List[Dict]] = None) -> int:
         新增入池的数量
     """
     if candidates is None:
-        # 从 hermes 产出读取
-        import sys
-        if str(PROJECT_ROOT / "scripts") not in sys.path:
-            sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
-        from kb_importer import _load_candidates
-        data = _load_candidates()
-        candidates = data.get("papers", [])
+        # 委托 LiteratureService 获取每日简报候选论文
+        from literature_service import LiteratureService
+        svc = LiteratureService()
+        papers = svc.search(keywords=[""], source="briefing")
+        candidates = papers
 
     pool = _load()
     added = 0
@@ -119,7 +117,12 @@ def get_pool(status: str = "") -> Dict[str, Any]:
             by_status[s] += 1
 
     # 按分数排序
-    sorted_papers = sorted(papers.items(), key=lambda x: x[1].get("score", 0), reverse=True)
+    def _safe_score(v: Any) -> float:
+        try:
+            return float(v) if v is not None else 0.0
+        except (ValueError, TypeError):
+            return 0.0
+    sorted_papers = sorted(papers.items(), key=lambda x: _safe_score(x[1].get("score", 0)), reverse=True)
     return {
         "total": len(pool),
         "by_status": by_status,

@@ -14,7 +14,7 @@
 from __future__ import annotations
 
 import time
-from datetime import datetime, timezone
+from datetime import datetime, date, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -24,8 +24,10 @@ from paths import PROJECT_ROOT
 from .constants import (
     HERMES_PROFILE,
     JOB_STATUS_DONE,
+    JOB_STATUS_FAILED,
     JOB_STATUS_PENDING,
     JOB_STATUS_RUNNING,
+    MAX_JOB_ATTEMPTS,
     MICRO_SCHEDULER_NAME,
     MICRO_SCHEDULER_SCHEDULE,
     STALE_RUNNING_SECONDS,
@@ -36,8 +38,13 @@ from .constants import (
     STEP_LIT_SEARCH,
     STEP_MONITOR,
     STEP_WRITER,
+    STEP_UPDATE_VISION,
+    STEP_UPDATE_METHOD_MANUAL,
 )
 from .utils import _is_stale, _make_job_id
+
+# 看板文件路径
+KANBAN_PATH = PROJECT_ROOT / "memory" / "system-kanban.json"
 
 try:
     from logger import get_logger
@@ -116,6 +123,7 @@ def _load_focus_state() -> Dict[str, Any]:
     return load_json(FOCUS_STATE_PATH, default={
         "last_slot_index": -1,
         "last_proposal_index": 0,
+        "last_proposal_id": "",
         "focus_history": [],
     })
 
@@ -135,6 +143,304 @@ def _is_round_complete(jobs: List[Dict[str, Any]], proposal_id: str, round_num: 
     return all(j.get("status") == JOB_STATUS_DONE for j in round_jobs)
 
 
+def _get_current_day_key() -> str:
+    """返回当前日期键（YYYY-MM-DD），用于跨天轮转追踪。"""
+    return datetime.now().strftime("%Y-%m-%d")
+
+
+def _auto_retry_failed_jobs(self, proposal_id: str) -> int:
+    """扫描 proposal 的 failed job，若 attempts < MAX_JOB_ATTEMPTS 则重置为 pending。
+
+    返回重置的 job 数量。
+    """
+    jobs = self._get_jobs(proposal_id)
+    if not jobs:
+        return 0
+    changed = False
+    retry_count = 0
+    for job in jobs:
+        if job.get("status") == JOB_STATUS_FAILED:
+            attempts = job.get("attempts", 0)
+            if attempts < MAX_JOB_ATTEMPTS:
+                job["status"] = JOB_STATUS_PENDING
+                job["attempts"] = attempts + 1
+                job["last_error"] = ""
+                job["repair_attempts"] = job.get("repair_attempts", 0) + 1
+                retry_count += 1
+                changed = True
+                if _log:
+                    _log.info(
+                        f"[{proposal_id}] 自动重试 job {job['job_id']} "
+                        f"(attempt {attempts + 1}/{MAX_JOB_ATTEMPTS})"
+                    )
+    if changed:
+        self._save_jobs(proposal_id, jobs)
+    return retry_count
+
+
+def _is_proposal_stuck(self, proposal_id: str) -> bool:
+    """检查 proposal 是否被卡住（有 failed job 且达到最大重试次数）。"""
+    jobs = self._get_jobs(proposal_id)
+    if not jobs:
+        return False
+    for job in jobs:
+        if job.get("status") == JOB_STATUS_FAILED:
+            attempts = job.get("attempts", 0)
+            if attempts >= MAX_JOB_ATTEMPTS:
+                return True
+    return False
+
+
+def _has_any_ready_or_failed_job(self, proposal_id: str) -> bool:
+    """检查 proposal 是否有待执行或可重试的 job（用于判断是否还有工作可做）。"""
+    jobs = self._get_jobs(proposal_id)
+    for job in jobs:
+        status = job.get("status", "")
+        if status in (JOB_STATUS_PENDING, JOB_STATUS_FAILED):
+            return True
+    return False
+
+
+def _generate_round_report(self, proposal_id: str, round_num: int) -> Optional[str]:
+    """为指定 proposal 的 round 生成优化报告，保存到 proposal 目录。
+
+    返回报告文件路径，若无需生成则返回 None。
+    """
+    prop_dir = self._find_proposal_dir(proposal_id)
+    if not prop_dir:
+        return None
+    prop_state = self._get_proposal_state(proposal_id)
+    if not prop_state:
+        return None
+
+    # 收集本轮评分历史
+    score_history = prop_state.get("score_history", [])
+    round_scores = [h for h in score_history if h.get("round") == round_num]
+
+    # 收集本轮执行统计
+    jobs = self._get_jobs(proposal_id)
+    round_jobs = [j for j in jobs if j.get("round") == round_num]
+    total_jobs = len(round_jobs)
+    done_jobs = sum(1 for j in round_jobs if j.get("status") == JOB_STATUS_DONE)
+    failed_jobs = sum(1 for j in round_jobs if j.get("status") == JOB_STATUS_FAILED)
+    elapsed_total = 0.0
+    for j in round_jobs:
+        started = j.get("started_at", "")
+        finished = j.get("finished_at", "")
+        if started and finished:
+            try:
+                st = datetime.fromisoformat(started.replace("Z", "+00:00"))
+                ft = datetime.fromisoformat(finished.replace("Z", "+00:00"))
+                elapsed_total += (ft - st).total_seconds()
+            except Exception:
+                pass
+
+    # 计算分数变化
+    final_score = prop_state.get("last_score", 0.0)
+    prev_scores = [h for h in score_history if h.get("round", 0) < round_num]
+    prev_score = prev_scores[-1]["score"] if prev_scores else 0.0
+
+    report_lines = [
+        f"# 优化报告：{proposal_id}",
+        f"",
+        f"## 概述",
+        f"- **轮次**: 第 {round_num} 轮",
+        f"- **完成时间**: {now_utc()}",
+        f"- **状态**: {'✓ 完成' if done_jobs == total_jobs else '◐ 进行中'}"
+        f" ({done_jobs}/{total_jobs} job 完成)",
+        f"- **失败 job**: {failed_jobs}",
+        f"- **总耗时**: {elapsed_total:.0f}s",
+        f"",
+        f"## 评分变化",
+        f"| 指标 | 上一轮 | 本轮 | 变化 |",
+        f"|------|--------|------|------|",
+    ]
+
+    # 维度评分
+    if round_scores:
+        latest = round_scores[-1]
+        dim_scores = latest.get("dim_scores", {})
+        prev_dim = prev_scores[-1].get("dim_scores", {}) if prev_scores else {}
+        for dim, score in dim_scores.items():
+            prev = prev_dim.get(dim, 0.0)
+            delta = score - prev
+            delta_str = f"+{delta:.2f}" if delta > 0 else f"{delta:.2f}"
+            report_lines.append(f"| {dim} | {prev:.2f} | {score:.2f} | {delta_str} |")
+
+    report_lines.extend([
+        f"| **总分** | **{prev_score:.2f}** | **{final_score:.2f}** | **{final_score - prev_score:+.2f}** |",
+        f"",
+        f"## 执行详情",
+    ])
+
+    # 按模块分组
+    section_map = {}
+    for j in round_jobs:
+        sk = j.get("section_key", "unknown")
+        if sk not in section_map:
+            section_map[sk] = []
+        section_map[sk].append(j)
+
+    for sk, sjobs in section_map.items():
+        report_lines.append(f"### {sk}")
+        report_lines.append(f"| Job | 状态 | 耗时 | 错误 |")
+        report_lines.append(f"|-----|------|------|------|")
+        for j in sjobs:
+            step = j.get("step", "?")
+            status = j.get("status", "?")
+            started = j.get("started_at", "")
+            finished = j.get("finished_at", "")
+            elapsed = ""
+            if started and finished:
+                try:
+                    st = datetime.fromisoformat(started.replace("Z", "+00:00"))
+                    ft = datetime.fromisoformat(finished.replace("Z", "+00:00"))
+                    elapsed = f"{(ft - st).total_seconds():.0f}s"
+                except Exception:
+                    pass
+            err = (j.get("last_error", "") or "")[:60]
+            report_lines.append(f"| {step} | {status} | {elapsed} | {err} |")
+
+    # 弱维度分析
+    if round_scores:
+        latest = round_scores[-1]
+        weakest = latest.get("weakest_dim", "无")
+        high_issues = latest.get("high_issues", 0)
+        report_lines.extend([
+            f"",
+            f"## 问题分析",
+            f"- **最弱维度**: {weakest}",
+            f"- **高优先级问题**: {high_issues} 个",
+            f"- **总问题数**: {latest.get('issues_count', 0)} 个",
+        ])
+
+    report_dir = prop_dir / "05_review"
+    report_dir.mkdir(parents=True, exist_ok=True)
+    report_path = report_dir / f"optimization-report-round-{round_num}.md"
+
+    # 避免重复生成
+    if report_path.exists():
+        return str(report_path)
+
+    report_path.write_text("\n".join(report_lines), encoding="utf-8")
+    return str(report_path)
+
+
+def _update_kanban(
+    slot_info: Optional[Tuple[int, Tuple[str, str]]],
+    focus_pid: Optional[str],
+    optimizing: List[Dict[str, Any]],
+    executed: List[Dict[str, Any]],
+    self,
+) -> None:
+    """更新系统看板文件（memory/system-kanban.json），同步微调度器状态。"""
+    now_local = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now = now_utc()
+
+    # 收集所有 optimizing proposal 的当前状态
+    proposals_status = []
+    for prop in optimizing:
+        pid = prop["proposal_id"]
+        prop_state = self._get_proposal_state(pid)
+        jobs = self._get_jobs(pid)
+        round_num = prop_state.get("optimization_rounds", 0) + 1 if prop_state else 1
+        score = prop_state.get("last_score", 0.0) if prop_state else 0.0
+        failed = sum(1 for j in jobs if j.get("status") == JOB_STATUS_FAILED)
+        pending = sum(1 for j in jobs if j.get("status") == JOB_STATUS_PENDING)
+        done = sum(1 for j in jobs if j.get("status") == JOB_STATUS_DONE)
+        total = len(jobs)
+        stuck = _is_proposal_stuck(self, pid)
+
+        next_job = None
+        if not stuck:
+            ready = self._list_ready_jobs_for_proposal(pid)
+            if ready:
+                j = ready[0]["job"]
+                next_job = f"{j.get('step')}/{j.get('section_key')}"
+
+        proposals_status.append({
+            "proposal_id": pid,
+            "round": round_num,
+            "score": round(score, 2),
+            "jobs": f"{done}/{total}",
+            "failed": failed,
+            "pending": pending,
+            "stuck": stuck,
+            "next_job": next_job,
+        })
+
+    # 读取现有看板，保留历史记录
+    existing = load_json(KANBAN_PATH, default={})
+    history = existing.get("execution_history", [])
+    if executed:
+        for e in executed:
+            history.append({
+                "at": now,
+                "proposal_id": e.get("proposal_id"),
+                "job_id": e.get("job_id"),
+                "step": e.get("step"),
+                "success": e.get("success"),
+                "error": (e.get("error") or "")[:100],
+            })
+
+    # 最多保留 200 条历史记录
+    history = history[-200:]
+
+    kanban = {
+        "updated_at": now,
+        "updated_at_local": now_local,
+        "current": {
+            "in_slot": slot_info is not None,
+            "slot_index": slot_info[0] if slot_info else None,
+            "slot": f"{slot_info[1][0]}-{slot_info[1][1]}" if slot_info else None,
+            "focus_proposal": focus_pid,
+            "proposals_in_optimizing": len(optimizing),
+        },
+        "proposals": proposals_status,
+        "execution_history": history,
+        "day_key": _get_current_day_key(),
+    }
+    try:
+        KANBAN_PATH.parent.mkdir(parents=True, exist_ok=True)
+        save_json(KANBAN_PATH, kanban)
+    except Exception as e:
+        if _log:
+            _log.warning(f"更新看板失败: {e}")
+
+
+def _rebalance_index(
+    state: Dict[str, Any],
+    optimizing: List[Dict[str, Any]],
+) -> int:
+    """根据 last_proposal_id 重新校准 last_proposal_index。
+
+    当 optimizing 列表跨周发生变化（新增/删除 proposal）时，
+    确保轮转位置正确：
+    - 若 last_proposal_id 在列表中，找到其索引。
+    - 若不在列表中，保持 last_proposal_index（列表缩短时回绕）。
+    - 若索引超出范围，回绕到 0。
+    """
+    last_id = state.get("last_proposal_id", "")
+    last_index = state.get("last_proposal_index", 0)
+    n = len(optimizing)
+    if n == 0:
+        return 0
+
+    # 优先通过 last_proposal_id 定位
+    if last_id:
+        for i, prop in enumerate(optimizing):
+            if prop.get("proposal_id") == last_id:
+                if i != last_index:
+                    state["last_proposal_index"] = i
+                return i
+
+    # last_proposal_id 不在列表中（被归档等），检查索引是否有效
+    if last_index >= n:
+        state["last_proposal_index"] = 0
+        return 0
+    return last_index
+
+
 def _focus_proposal_for_slot(
     self,
     slot_index: int,
@@ -142,10 +448,12 @@ def _focus_proposal_for_slot(
 ) -> Optional[str]:
     """确定当前时段应聚焦的 proposal。
 
-    规则：
-    - 按轮询顺序选择下一个 proposal。
+    规则（v6.8.1）：
+    - 跨天/跨周时通过 last_proposal_id 重新校准轮转位置。
+    - 先自动重试所有 failed job（attempts < MAX_JOB_ATTEMPTS）。
     - 若上一个时段聚焦的 proposal 本轮未完成，继续聚焦它。
-    - 若已完成，则推进到下一个 proposal。
+    - 若已完成或卡住（达到最大重试次数），则推进到下一个 proposal。
+    - 跳过被卡住的 proposal（failed job 达到最大重试次数）。
     """
     if not optimizing:
         return None
@@ -153,33 +461,64 @@ def _focus_proposal_for_slot(
     state = _load_focus_state()
     last_slot_index = state.get("last_slot_index", -1)
     last_proposal_index = state.get("last_proposal_index", 0)
+    last_day_key = state.get("last_day_key", "")
+
+    # 跨天保持轮转位置
+    current_day = _get_current_day_key()
+    if current_day != last_day_key:
+        state["last_day_key"] = current_day
+        _save_focus_state(state)
+
+    # 跨周重新平衡：用 last_proposal_id 校准索引
+    last_proposal_index = _rebalance_index(state, optimizing)
+    last_slot_index = state.get("last_slot_index", -1)
 
     # 当前时段与上一时段不同，可能需要切换 proposal
     if slot_index != last_slot_index:
-        # 检查上一时段聚焦的 proposal 是否已完成本轮
+        # 先自动重试上一个 proposal 的 failed job
         prev_index = last_proposal_index % len(optimizing)
         prev_pid = optimizing[prev_index]["proposal_id"]
         try:
+            retried = _auto_retry_failed_jobs(self, prev_pid)
+            if retried > 0 and _log:
+                _log.info(f"[{prev_pid}] 自动重试了 {retried} 个 failed job")
+        except Exception:
+            pass
+
+        # 检查上一时段聚焦的 proposal 是否已完成本轮或卡住
+        try:
             prev_jobs = self._get_jobs(prev_pid)
             prev_state = self._get_proposal_state(prev_pid)
-            current_round = prev_state.get("optimization_rounds", 0) + 1
-            if not _is_round_complete(prev_jobs, prev_pid, current_round):
-                # 未完成，继续聚焦上一个
+            current_round = prev_state.get("optimization_rounds", 0) + 1 if prev_state else 1
+            stuck = _is_proposal_stuck(self, prev_pid)
+            if not stuck and not _is_round_complete(prev_jobs, prev_pid, current_round):
+                # 未完成也未卡住，继续聚焦上一个
                 state["last_slot_index"] = slot_index
+                state["last_proposal_id"] = prev_pid
                 _save_focus_state(state)
                 return prev_pid
         except Exception:
             pass
-        # 已完成，推进到下一个
+        # 已完成或卡住，推进到下一个
         next_index = (last_proposal_index + 1) % len(optimizing)
         state["last_slot_index"] = slot_index
         state["last_proposal_index"] = next_index
+        state["last_proposal_id"] = optimizing[next_index]["proposal_id"]
         _save_focus_state(state)
     else:
         # 同一时段内，保持当前聚焦
         next_index = last_proposal_index % len(optimizing)
 
+    # 检查选中的 proposal 是否卡住，若卡住则跳过
     pid = optimizing[next_index]["proposal_id"]
+    if _is_proposal_stuck(self, pid):
+        if _log:
+            _log.warning(f"[{pid}] 被卡住（达到最大重试次数），跳过到下一个")
+        next_index = (next_index + 1) % len(optimizing)
+        state["last_proposal_index"] = next_index
+        state["last_proposal_id"] = optimizing[next_index]["proposal_id"]
+        _save_focus_state(state)
+        pid = optimizing[next_index]["proposal_id"]
 
     # 记录历史
     history = state.get("focus_history", [])
@@ -237,11 +576,16 @@ def _list_ready_jobs_for_proposal(
     self,
     proposal_id: str,
 ) -> List[Dict[str, Any]]:
-    """扫描指定 proposal，返回所有依赖满足且 pending 的 job。"""
+    """扫描指定 proposal，返回所有依赖满足且 pending 的 job。
+
+    自动重试 failed job（attempts < MAX_JOB_ATTEMPTS）。
+    """
     ready: List[Dict[str, Any]] = []
     try:
         self._refresh_stale_jobs(proposal_id)
         self.sync_checkpoint(proposal_id)
+        # 自动重试 failed job
+        _auto_retry_failed_jobs(self, proposal_id)
         jobs = self._get_jobs(proposal_id)
 
         done_ids = {j["job_id"] for j in jobs if j.get("status") == JOB_STATUS_DONE}
@@ -268,12 +612,13 @@ def _list_ready_jobs_for_proposal(
 
 
 def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dict[str, Any]:
-    """v6.8.0 全局微调度器入口：时段聚焦 + 单任务节流。"""
+    """v6.8.1 全局微调度器入口：时段聚焦 + 单任务节流 + 自动重试 + 看板 + 报告。"""
     if _log:
         _log.info("=== 微调度器启动 ===")
 
     started_at = time.time()
     executed: List[Dict[str, Any]] = []
+    generated_reports: List[str] = []
 
     # 1. 时段检查
     slot_info = _current_focus_slot()
@@ -295,6 +640,7 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
 
     if not optimizing:
         msg = "optimizing 区为空"
+        _update_kanban(slot_info, None, [], [], self)
         if _log:
             _log.info(msg)
         return {"success": True, "executed_count": 0, "executed": [], "reason": msg}
@@ -303,6 +649,7 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
     focus_pid = self._focus_proposal_for_slot(slot_index, optimizing)
     if not focus_pid:
         msg = "无法确定聚焦 proposal"
+        _update_kanban(slot_info, None, optimizing, [], self)
         if _log:
             _log.info(msg)
         return {"success": True, "executed_count": 0, "executed": [], "reason": msg}
@@ -318,7 +665,13 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
         msg = f"{focus_pid} 本轮已完成，时段空闲"
         if _log:
             _log.info(msg)
-        return {"success": True, "executed_count": 0, "executed": [], "reason": msg}
+        # 生成优化报告
+        report_path = _generate_round_report(self, focus_pid, current_round)
+        if report_path:
+            generated_reports.append(report_path)
+        _update_kanban(slot_info, focus_pid, optimizing, [], self)
+        return {"success": True, "executed_count": 0, "executed": [], "reason": msg,
+                "generated_reports": generated_reports}
 
     # 5. 只执行聚焦 proposal 的 pending job
     with file_lock("lifecycle-micro-scheduler"):
@@ -356,6 +709,17 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
                     "error": result.get("error", "")[:200],
                 })
 
+                # 如果执行成功，检查本轮是否已完成，生成优化报告
+                if result.get("success"):
+                    post_jobs = self._get_jobs(proposal_id)
+                    post_round = prop_state.get("optimization_rounds", 0) + 1 if prop_state else 1
+                    if _is_round_complete(post_jobs, proposal_id, post_round):
+                        report_path = _generate_round_report(self, proposal_id, post_round)
+                        if report_path:
+                            generated_reports.append(report_path)
+                            if _log:
+                                _log.info(f"已生成优化报告: {report_path}")
+
     summary = {
         "success": True,
         "executed_count": len(executed),
@@ -365,7 +729,12 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
         "slot": f"{slot_start}-{slot_end}",
         "elapsed_s": round(time.time() - started_at, 2),
         "at": now_utc(),
+        "generated_reports": generated_reports,
     }
+
+    # 更新看板
+    _update_kanban(slot_info, focus_pid, optimizing, executed, self)
+
     if _log:
         _log.info(f"微调度器完成: 执行 {len(executed)} 个 job, 聚焦 {focus_pid}")
     return summary
