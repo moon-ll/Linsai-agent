@@ -8,7 +8,7 @@
 |------|----------|-----------|
 | **CoPilot 核心** | 无前缀，如 `session_manager.py`、`copilot_engine.py` | 核心模块互相导入；研究管线模块**不可导入**。 |
 | **研究管线** | 管线特有文件名，如 `pipeline_orchestrator.py`、`gap_analyzer.py` | 管线模块互相导入；核心模块**不可导入**（`web_server.py` 作为聚合器导入 `web_routes_pipeline.py` 除外）。 |
-| **共享基础设施** | `common.py`、`paths.py`、`llm_gateway.py` | 双方均可导入。 |
+| **共享基础设施** | `common.py`、`paths.py`、`llm_gateway.py`、`hermes_memory.py` | 双方均可导入。 |
 | **知识库引擎** | `kb_*.py` | 管线模块**只读导入**；写操作须通过 `learning_engine` 标准接口。 |
 | **Web 路由 Mixin** | `web_routes_*.py` | 仅被 `web_server.py` 聚合器导入。 |
 

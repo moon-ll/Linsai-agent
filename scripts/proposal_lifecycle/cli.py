@@ -149,7 +149,14 @@ def main(argv: Optional[List[str]] = None) -> int:
             print(f"=== 修复扫描完成 (dry_run={result.get('dry_run')}) ===")
             for item in result.get("repaired", []):
                 actions = item.get("actions", [])
-                print(f"  {item['proposal_id']}: {actions if actions else 'ok'}")
+                label = item.get("proposal_id") or item.get("job", "?")
+                print(f"  {label}: {actions if actions else 'ok'}")
+            pipeline_repaired = result.get("pipeline_repaired", [])
+            if pipeline_repaired:
+                for item in pipeline_repaired:
+                    actions = item.get("actions", [])
+                    label = item.get("proposal_id") or item.get("job", "?")
+                    print(f"  [pipeline] {label}: {actions if actions else 'ok'}")
             return 0
 
         if args.setup_cron_v2:

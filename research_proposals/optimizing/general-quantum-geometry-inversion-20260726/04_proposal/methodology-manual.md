@@ -79,6 +79,81 @@ Rasputnyi 2024（固体 BSV-HHG 实验，无几何反演）
 本项目目标：BSV-SBE 理论框架 + 量子几何反演
 ```
 
+#### 1A.5 Q1 三层因果链：光场统计 → HHG 谱可观测项 → Ω/g Fisher 信息
+
+立项依据 §1.2 给出的 Q1 是三层因果链，本节展开技术细节。
+
+**第一层：BSV 光场密度矩阵 → 期望电流算符**
+
+BSV 场是单模压缩真空态 $\ket{\xi}_s = \cosh^{-1}r \sum_n (\tanh r)^n \ket{nn}$，密度矩阵 $\hat{\rho}_{\text{BSV}}$ 在 P 表示下为
+
+$$\hat{\rho}_{\text{BSV}} = \int d^2\alpha\, P_{\text{BSV}}(\alpha) \ket{\alpha}\bra{\alpha}, \quad P_{\text{BSV}}(\alpha) = \frac{1}{\pi \bar{n}} \exp\!\left(-\frac{|\alpha|^2}{\bar{n}}\right)$$
+
+其中 $\bar{n} = \sinh^2 r$，$g^{(2)}(0) = 1 + 1/\bar{n}$。HHG 电流期望值为
+
+$$\langle \hat{\mathbf{J}}(t) \rangle = \text{Tr}\!\left[\hat{\rho}_{\text{BSV}} \cdot \hat{\mathbf{J}}(t)\right], \quad \hat{\mathbf{J}}(t) = \frac{e}{m} \sum_{\mathbf{k}} \hat{\psi}^{\dagger}(\mathbf{k},t)\,\hat{\mathbf{v}}\,\hat{\psi}(\mathbf{k},t)$$
+
+与经典场下的电流期望相比，BSV 引入 $P_{\text{BSV}}(\alpha)$ 的非平凡权重，导致产额、偏振、二阶相关 $g^{(2)}_{\text{HHG}}(\tau)$ 都成为 $r$、$\bar{n}$ 的函数。
+
+**第二层：HHG 谱可观测项 → Ω/g 的信号载体**
+
+在经典光下，Liu-Fu-Kais [7] 给出 $\Omega(\mathbf{k})$ 通过异常速度项 $\mathbf{v}_{\perp} \sim \Omega(\mathbf{k})\times\mathbf{E}(t)$ 进入偶次谐波偏振，$g(\mathbf{k})$ 通过波函数重叠积分进入偶次谐波强度调制——但二者纠缠不可分。BSV 场提供了三个新的可观测通道：
+
+| 可观测项 | BSV 下特征 | 与 Ω/g 的耦合 |
+|----------|-----------|--------------|
+| 截止阶次 $N_{\text{cutoff}}$ | Ghalgaoui 修正 $\alpha(\hat{\rho}) > 3.17$ [9] | 不直接耦合 Ω/g（材料无关） |
+| 偶次谐波偏振旋转角 $\theta_n$ | 涨落使偏振统计展宽 $\Delta\theta_n \propto r$ | 主要反映 $\Omega(\mathbf{k})$ |
+| $g^{(2)}_{\text{HHG}}(\tau)$ | Lange-Madsen [23] 证明压缩光的 HHG 编码 | 反映 $\Omega/g$ 的非微扰相位 |
+
+**第三层：Ω/g 的 Fisher 信息 / 后验方差**
+
+定义 BSV 与经典光场下 $\Omega(\mathbf{k})$ 的 Fisher 信息：
+
+$$\mathcal{I}_{\Omega}^{\text{BSV}} = \mathbb{E}\!\left[\left(\frac{\partial \log P(S|\Omega)}{\partial \Omega}\right)^{\!2}\right], \quad \mathcal{R}_{\Omega} = \frac{\mathcal{I}_{\Omega}^{\text{BSV}}}{\mathcal{I}_{\Omega}^{\text{cl}}}$$
+
+CRLB 给出 $\text{Var}(\hat{\Omega}) \geq 1/\mathcal{I}_{\Omega}$。本项目的核心定量判据为：
+
+$$\mathcal{R}_{\Omega, g} \geq 2 \quad \text{（即 BSV 相对经典光对 Ω/g 后验方差的收缩比 ≥ 2）}$$
+
+- **若 $\mathcal{R}_{\Omega, g} \geq 2$**：BSV 提供材料无关的"加性增强"，Q1→Q2 闭环成立，进入 R3' 实验验证；
+- **若 $1 < \mathcal{R}_{\Omega, g} < 2$**：BSV 增强是材料依赖的"乘性增强"，需在每个 CDW 样品上单独校准；
+- **若 $\mathcal{R}_{\Omega, g} \leq 1$**：BSV 仅增加产额但不改善 Ω/g 反演精度，Q2 限于经典光可辨识性边界报告，PINN 不强行扩展。
+
+这一判据在 §2.2 R1（Year 1 Q2）的 BSV-SBE 模拟中计算 Si 模型基准，在 §3 R3'（Year 2 Q3）通过 BSV-HHG 实验在拓扑绝缘体上实测。
+
+#### 1A.6 Q2 可辨识性边界的 PINN 估计流程
+
+立项依据 §1.2 重写 Q2 为可证伪科学问题：本节给出 PINN 估计"在何种 Hubbard-U/W 与温度区间，HHG 偏振响应仍保留可独立辨识的 Ω/g 信息"的计算流程。
+
+**Step 1：定义可辨识性**
+
+对任意 $(U/W, T)$，由 1D Hubbard tdDMFT（Ikeda [20] 路径）生成 HHG 谱 $S(\omega; U, T)$，PINN 的预测谱为 $S_{\text{NN}}(\omega; \boldsymbol{\theta})$，定义**辨识失效点**为
+
+$$\Delta(U, T) \equiv \left\langle \frac{|S(\omega; U, T) - S_{\text{NN}}(\omega; \boldsymbol{\theta}_{\text{opt}})|^2}{|S(\omega; U, T)|^2} \right\rangle_{\omega} \geq 0.1$$
+
+此时 PINN 无法从谱中恢复 $(U, T)$ 与 $(\Omega, g)$ 的独立坐标。辨识边界 $U_c(T)$ 由 $\Delta(U_c, T) = 0.1$ 给出。
+
+**Step 2：PINN 架构与三重物理约束**
+
+PINN 输入为 HHG 谱的 (谐波阶次, 偏振角, 强度) 三元组；输出为 $(\Omega, g, U, T)$。损失函数包含三重物理约束：
+
+$$\mathcal{L} = \mathcal{L}_{\text{data}} + \lambda_1 \mathcal{L}_{\text{f-sum}} + \lambda_2 \mathcal{L}_{\text{CDW}} + \lambda_3 \mathcal{L}_{\text{BI}}$$
+
+其中
+- $\mathcal{L}_{\text{data}}$：MSE 拟合 HHG 谱
+- $\mathcal{L}_{\text{f-sum}}$：f-sum rule 约束（弱关联硬约束 < 5% 偏离、中关联软约束 $\sim U/W$ 标度律）
+- $\mathcal{L}_{\text{CDW}}$：CDW 序参量对低阶谐波偏振的调制（Tyulnev [14] 14-300 K 全温区数据为先验）
+- $\mathcal{L}_{\text{BI}}$：Baur 镜像对称性约束（[19] NbSe₂/MoS₂ 对照基线）
+
+**Step 3：辨识边界相图**
+
+PINN 训练完成后，对 $(U/W, T)$ 二维网格扫描，输出辨识相图：
+- **可辨识区**（$\Delta < 0.1$）：$\Omega$、$g$ 可独立恢复；
+- **临界区**（$0.05 < \Delta < 0.1$）：PINN 给出 $\Omega$、$g$ 的联合不确定度，可作 Bayesian 边界；
+- **失效区**（$\Delta \geq 0.1$）：多体效应使 $\Omega$、$g$ 不可独立辨识，Q2 的科学边界在此明确报告。
+
+训练/推理耗时：V100 单卡 8 h/epoch × 500 epochs + MC Dropout 4 h；总预算 50 GPU-day，团队 V100×2 可达。
+
 ### 1B. 量子几何量的物理定义与 HHG 耦合通道
 
 #### 1B.1 Berry 曲率与量子度规的定义

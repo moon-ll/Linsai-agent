@@ -1,6 +1,6 @@
 # 变更记录
 
-## v6.8.2 - 2026-08-02 Researcher Profile 混合调用与记忆回写
+## v6.8.2 - 2026-08-02 Researcher Profile 混合调用与记忆回写 + 健康检查修复
 
 ### 改动内容
 
@@ -18,10 +18,17 @@
   - `_run_lit_read_step`：优先 hermes researcher agent loop 深度阅读 → 失败降级 LiteratureService.read() → 回写记忆
   - 每次回写记忆包含：任务类型、课题ID、轮次、章节、结果摘要、执行方式（agent_loop / direct_fallback）
 
+#### 缺陷修复
+- **`scripts/proposal_lifecycle/cli.py`** — 修复周末模式 `--repair --dry-run` 时 KeyError: 'proposal_id'，周末修复结果返回的条目使用 `job` 键而非 `proposal_id` 键，已兼容处理两种结构。
+
 ### 验证结果
-- 语法检查：`python3 -m py_compile` 通过（hermes_memory.py + executor.py）
-- 自检：`python3 scripts/hermes_memory.py` ✓ 通过
-- 回归测试：`python3 scripts/self_test.py --module` 192/192 通过
+- 语法检查：171/171 脚本通过（含 `scripts/lifecycle/` 子包）
+- 自检：`python3 scripts/hermes_memory.py` ✓ 通过 | `python3 scripts/hermes_bridge.py` ✓ 通过
+- 回归测试：`--module` 192/192 | `--scenario` 16/16 | `--persona` 38/38 | `--web-ci` 246/246 全量通过
+- Profile 健康：7 个 profile 均正常（linsai/pipeline-runner/researcher/analyst/writer/critic/reviewer）
+- 生命周期修复：周末模式 dry-run 无异常，3 个周末任务均 done
+- 知识库健康：226 raw / 153 wiki / 4658 chunks / 0 orphan / 0.79 图连通率
+- 无未修复问题
 
 ## v6.8.1 - 2026-08-02 文献系统统一架构重构
 

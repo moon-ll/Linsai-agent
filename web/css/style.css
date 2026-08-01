@@ -4122,6 +4122,349 @@ body {
   color: var(--text-tertiary);
 }
 
+/* ===== 优化进度可视化 UI（v6.8.0+） ===== */
+
+/* 卡片级：分数条 + 轮次条并列 */
+.lc-card-metrics {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 6px 0 4px;
+}
+
+/* 卡片级：分数条 */
+.lc-card-score-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  max-width: 160px;
+}
+.lc-card-score-track {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.lc-card-score-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+.lc-card-score-text {
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* 卡片级：轮次条 */
+.lc-card-round-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+  max-width: 120px;
+}
+.lc-card-round-track {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.lc-card-round-fill {
+  height: 100%;
+  background: var(--info-color);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+.lc-card-round-text {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* 详情弹窗布局 */
+.lc-detail-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.lc-detail-header {
+  margin-bottom: 4px;
+}
+.lc-detail-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.lc-detail-meta {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.lc-detail-section {
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.lc-detail-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.lc-detail-row {
+  display: flex;
+  gap: 12px;
+}
+.lc-detail-row .lc-detail-section {
+  flex: 1;
+}
+
+/* 轮次进度条 */
+.lc-round-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.lc-round-track {
+  flex: 1;
+  height: 10px;
+  background: var(--bg-secondary);
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+.lc-round-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--info-color), var(--accent-color));
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
+.lc-round-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+/* 分数趋势图 */
+.lc-score-trend {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 60px;
+  padding: 4px 0;
+}
+.lc-score-bar {
+  flex: 1;
+  min-width: 12px;
+  border-radius: 3px 3px 0 0;
+  transition: height 0.3s ease;
+  cursor: help;
+}
+.lc-score-labels {
+  display: flex;
+  gap: 3px;
+  justify-content: center;
+}
+.lc-score-labels span {
+  flex: 1;
+  text-align: center;
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  min-width: 12px;
+}
+
+/* 维度评分 */
+.lc-dim-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.lc-dim-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.lc-dim-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  width: 48px;
+  flex-shrink: 0;
+}
+.lc-dim-track {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.lc-dim-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+.lc-dim-val {
+  font-size: 0.75rem;
+  font-weight: 600;
+  width: 32px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Job 链概览 */
+.lc-round-summary {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+.lc-round-stat {
+  font-size: 0.78rem;
+  font-weight: 500;
+}
+.lc-job-chain {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.lc-job-section-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+.lc-job-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+.lc-job-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  cursor: help;
+}
+.lc-job-step.active {
+  background: var(--info-color);
+  color: #fff !important;
+  border-color: var(--info-color);
+  animation: lc-pulse 1.5s ease-in-out infinite;
+}
+@keyframes lc-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+/* 失败项 */
+.lc-fail-item {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.lc-fail-item:last-child {
+  border-bottom: none;
+}
+
+/* 历史轮次 */
+.lc-round-history {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.lc-round-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  padding: 3px 0;
+  border-bottom: 1px solid var(--border-color);
+}
+.lc-round-row:last-child {
+  border-bottom: none;
+}
+.lc-round-num {
+  font-weight: 600;
+  min-width: 28px;
+}
+.lc-round-score {
+  font-weight: 600;
+  min-width: 36px;
+}
+.lc-round-section {
+  color: var(--text-secondary);
+  min-width: 80px;
+}
+.lc-round-issues {
+  color: var(--text-tertiary);
+  min-width: 48px;
+}
+.lc-round-weakest {
+  font-size: 0.72rem;
+}
+
+/* 详情弹窗底部操作 */
+.lc-detail-actions {
+  display: flex;
+  gap: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-color);
+  flex-wrap: wrap;
+}
+
+/* 申请书内容弹窗 */
+.lc-content-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.lc-content-section {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 16px;
+}
+.lc-content-section:last-child {
+  border-bottom: none;
+}
+.lc-content-section-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--accent-color);
+}
+.lc-content-body {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+.lc-content-body h1,
+.lc-content-body h2,
+.lc-content-body h3 {
+  margin: 14px 0 8px;
+}
+.lc-content-body p {
+  margin: 0 0 0.6em;
+}
+.lc-content-body ul,
+.lc-content-body ol {
+  padding-left: 1.5em;
+  margin: 6px 0;
+}
+.lc-content-body li {
+  margin: 3px 0;
+}
+
 /* 审核页底部操作栏 */
 .review-action-bar {
   display: flex;

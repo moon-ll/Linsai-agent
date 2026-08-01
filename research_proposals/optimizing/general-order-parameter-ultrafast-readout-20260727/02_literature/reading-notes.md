@@ -369,3 +369,6 @@
 | 2026-07-30 | TiSe2 CDW HHG 实验（缺口 2，独立记录）| arXiv:2409.04216 (Tyulnev et al. 2025 *Commun. Mater.* 6, 152; DOI: 10.1038/s43246-025-00873-5) | 偏振分辨 HHG 在 TiSe2 进入 CDW 相后出现各向异性谐波分量，并对 CDW 相内部随降温的电子重排敏感；理论配对文章（Zhang et al. arXiv:2412.13329, *PRB* 2025）复现 3/5/7 次谐波的强偏振不对称 | Y2 任务 3 复现 Tyulnev 2025 实验 + 各向异性扩展；与 Zhang 2025 PRB 112, 085147 理论对比验证本项目 SBE 模型 | plan.md §5.2 任务 3 + §5.2 末考核; methodology-manual.md §M.3.3 |
 | 2026-07-30 | **申请书独立性**：详见 v0.1 重生附录 C.4 | literature-report.md | | | |
 
+
+---
+> migrated: true

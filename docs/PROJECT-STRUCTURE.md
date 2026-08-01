@@ -167,6 +167,7 @@ LinSai-CoPilot/
 │   │
 │   ├── agora_bridge.py        # Agora 群聊桥接
 │   ├── hermes_bridge.py       # Hermes 桥接器：cron 控制 / oneshot 派活 / 团队 profile 状态
+│   ├── hermes_memory.py       # Hermes 记忆回写：agent loop 调用 / 记忆原子写入
 │   ├── hermes_pipeline.py     # v6.4 Hermes 驱动研究管线：导入 / 派活 / 执行 / cron
 │   ├── sync_engine.py         # 多端同步
 │   ├── briefing_sync.py       # v4.1 文献简报双向同步

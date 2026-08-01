@@ -477,3 +477,6 @@
 || 2026-07-31 | **Liu 2025 (Subcycle phase matching effects in short attosecond pulse trains)** | arXiv:2507.06386 | 短 attosecond pulse trains 中亚周期 phase matching 效应；"瞬态拓扑 + 阿秒 + 写-读-反演"多边研讨议题基础 | 申请书 §六 §4（中欧瞬态拓扑联合研讨会议题基础参照）| 已引用 |
 || 2026-07-31 | **Granados 2026 (CEP Control of OAM in Solid-State HHG)** | arXiv:2607.23652 | 少周期脉冲 CEP 主动控制固体 HHG 中 OAM 拓扑电荷分布；"瞬态拓扑 + 强场 HHG"方向热点议题 | 申请书 §六 §4（≥8 次邀请报告承诺的题材契合度验证，ICOMP/APS/CLEO/Gordon 强场分会当前热点）| 已引用 |
 || 2026-07-31 | **round-6 引用小结** | — | 本轮在申请书（六）预期研究成果章节 + 方法学手册 §G-§N 共计引用 12 篇（Varillas 2026 / Nayak 2026 / Nayak 2024 / Nayak 2020 / Yan 2025 / Chen 2026 / jinns 2024 / Volkov 2025 / McSweeney 2026 / Lu 2022 / Mrudul 2022 / Feng 2026 / Liu 2025 / Granados 2026） | 全部支撑 §六 的 11 子结构（论文产出/专利软著/NSFC 2026 改革/国际影响/人才培养/经费预算/节点评估/产出对应矩阵/风险降级/研究基础桥接/引用文献）| 已引用 |
+
+---
+> migrated: true

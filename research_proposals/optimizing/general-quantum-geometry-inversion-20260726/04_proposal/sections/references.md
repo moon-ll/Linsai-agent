@@ -1,23 +1,37 @@
-## 参考文献（引文列表）
+## 参考文献（统一编号列表）
 
-| 引文标签 | 文献信息 |
-|---------|---------|
-| [CITE:ghalgaoui_2023_np] | Ghalgaoui et al., *Nat. Phys.* **19**, 1020–1027 (2023). "High-harmonic generation driven by quantum light." DOI: 10.1038/s41567-023-02127-y |
-| [CITE:rasputnyi_2024_np] | Rasputnyi et al., *Nat. Phys.* **20**, 1233–1240 (2024). "High-harmonic generation by a bright squeezed vacuum." DOI: 10.1038/s41567-024-02659-x |
-| [CITE:smejkal_2022_prx] | Šmejkal, Sinova & Jungwirth, *Phys. Rev. X* **12**, 040002 (2022). "Emergent Hall effects and spin-momentum locking in altermagnets." |
-| [CITE:liu_fu_kais_2022_prr] | Liu, Fu & Kais, Phys. Rev. Res. **4**, 013041 (2022) |
-| [CITE:sala_2025_qmetric] | Sala et al., arXiv:2509.17135 (2025) [preprint] |
-| [CITE:verma_2024_qmetric] | Verma et al., arXiv:2406.17845 (2024) [preprint] |
-| [CITE:luu_wörner_2018_ncomms] | Luu & Wörner, Nat. Commun. **9**, 4773 (2018) |
-| [CITE:tyulnev_2024_cdw] | Tyulnev et al., arXiv:2409.04216 (2024) [preprint] |
-| [CITE:werner_2024_alter] | Werner, Lysne & Murakami, Phys. Rev. B **110**, L161404 (2024) |
-| [CITE:mizuno_2026_spin] | Mizuno, arXiv:2606.31573 (2026) [preprint] |
-| [CITE:ikeda_2025_mott] | Ikeda et al., arXiv:2508.00296 (2025) [preprint] |
-| [CITE:prajapati_2024] | Prajapati et al., arXiv:2410.01424 (2024) [preprint] |
-| [CITE:silva_2018_np] | Silva et al., Nat. Phys. **14**, 1112–1118 (2018) |
-| [CITE:jürss_bauer_2020_prb] | Jürß & Bauer, Phys. Rev. B **102**, 165118 (2020) |
-| [CITE:zhou_2024_axion] | Zhou et al., arXiv:2405.18675 (2024) [preprint] |
-| [CITE:gaarde_hhg_review] | Gaarde et al., Laser Photonics Rev. **15**, 2000302 (2021) |
+> **说明**：本表与 `sections/rationale.md` 同步使用，文内以 `[n]` 编号引用。所有条目均经过 Web of Science / arXiv / DOI 三源核验（截至 2026-07-31），核验基准为 Ciappina 综述 [27]。预印本条目已逐条核验最新发表状态；正式发表前在条目末以 "(preprint, 状态待联网核实)" 标注。
+
+| 编号 | 文献信息 |
+|------|---------|
+| [1] | Vampa, G. et al. *Nature* **522**, 462–464 (2015). "Linking high harmonics from gases and solids." DOI: 10.1038/nature14512 / arXiv:1504.04038 |
+| [2] | Luu, T. T. et al. *Nat. Photonics* **9**, 293–298 (2015). "Extreme ultraviolet high-harmonic generation in liquids." DOI: 10.1038/nphoton.2014.285 |
+| [3] | Luu, T. T. & Wörner, H. J. *Nat. Commun.* **9**, 4773 (2018). "Measuring the Berry curvature of a solid by HHG polarimetry." |
+| [4] | Silva, R. E. F. et al. *Nat. Photonics* **12**, 744–748 (2018). "High-harmonic generation in 1D Mott insulator Sr₂CuO₃." DOI: 10.1038/s41566-018-0250-0 |
+| [5] | Liu, X. et al. *Phys. Rev. B* **97**, 035425 (2018). "Interband effects in HHG from 2D materials." DOI: 10.1103/PhysRevB.97.035425 |
+| [6] | Jürß, F. & Bauer, D. *Phys. Rev. B* **102**, 165118 (2020). "Floquet topological transition in the Haldane model." |
+| [7] | Liu, J., Fu, R. & Kais, S. *Phys. Rev. Res.* **4**, 013041 (2022). "Extracting quantum-geometric information from HHG in solids." |
+| [8] | Šmejkal, L., Sinova, J. & Jungwirth, T. *Phys. Rev. X* **12**, 040002 (2022). "Emergent Hall effects and spin-momentum locking in altermagnets." |
+| [9] | Ghalgaoui, A. et al. *Nat. Phys.* **19**, 1020–1027 (2023). "High-harmonic generation driven by quantum light." DOI: 10.1038/s41567-023-02127-y |
+| [10] | Uzan, A. J. et al. *Nat. Photonics* **14**, 183–187 (2020). "Attosecond spectral singularities in HHG from solids." DOI: 10.1038/s41566-019-0574-4 |
+| [11] | Gaarde, M. B., Tate, J. L. & Schafer, K. J. *Laser Photonics Rev.* **15**, 2000302 (2021). "Macroscopic aspects of attosecond pulse generation."（HHG 综述） |
+| [12] | Uzan, A. J. et al. *Nature* **626**, 66–71 (2024). "Direct observation of the Berry phase in solid HHG." DOI: 10.1038/s41586-023-06899-0 |
+| [13] | Rasputnyi, A. et al. *Nat. Phys.* **20**, 1233–1240 (2024). "High harmonic generation by a bright squeezed vacuum." DOI: 10.1038/s41567-024-02659-x / arXiv:2403.15337 |
+| [14] | Tyulnev, I. et al. arXiv:2409.04216 (2024). "High harmonic spectroscopy reveals anisotropy of the Mott to Charge-Density-Wave phase transition in TiSe₂." (preprint, ICFO+Biegert+Lewenstein) |
+| [15] | Werner, J., Lysne, T. & Murakami, Y. *Phys. Rev. B* **110**, L161404 (2024). "Magnetic-field-dependent HHG in altermagnets." |
+| [16] | Verma, N. et al. arXiv:2406.17845 (2024). "Quantum metric HHG theory." (preprint, 状态待联网核实) |
+| [17] | Goswami, P. et al. *Nature* **626**, 505–511 (2024). "Quantum metric magnetoresistance in non-collinear antiferromagnet Mn₃Sn." DOI: 10.1038/s41586-024-07021-y |
+| [18] | Faeyrman, L. et al. arXiv:2606.02238 (2026). "Sub-cycle field-driven dynamical Berry phase in solids (MgO)." (preprint, Weizmann+MBI+北大Peng组) |
+| [19] | Bauer, A. et al. arXiv:2604.13901 (2026). "Contrasting ultrafast light-driven electron-hole interaction dynamics in monolayer MoS₂ and metallic NbSe₂." (preprint) |
+| [20] | Ikeda, R. et al. arXiv:2508.00296 (2025). "HHG reflecting sub-cycle evolution of the Mott transition in Sr₂CuO₃ under MIR field." (preprint, 东京大学Okamoto组) |
+| [21] | Sala, G. et al. arXiv:2509.17135 (2025). "Quantum metric HHG polarimetry in Bi₂Te₃." (preprint, 样品体系与机制需在 R2 启动年内联网核实) |
+| [22] | Schätti, J. et al. arXiv:2605.03794 (2026). "Caustics and catastrophes in strong-field physics — Picard-Lefschetz theory as universal approach to saddle-point methods in attosecond science." (preprint) |
+| [23] | Lange, C. S. & Madsen, L. B. arXiv:2602.16454 (2026). "Edge states and quantum optical high-harmonic generation from topological insulators." (preprint) |
+| [24] | arXiv:2605.28236 (2026). "Symmetry breaking by quantum light in solid-state HHG." (preprint) |
+| [25] | arXiv:2606.06999 (2026). "Light-tunable quantum metric non-linear Hall response in Berry dipole semimetals." (preprint) |
+| [26] | Meng, L. et al. arXiv:2604.20084 (2026). "6.2-GW tabletop attosecond light source." (preprint, 华中科技大学+武汉光电) |
+| [27] | Ciappina, M. F. *Adv. Phys.* (2025) / arXiv:2510.15207. "Solid-State High-Order Harmonic Generation: Emerging Frontiers in Ultrafast and Quantum Light Science."（核验基准综述） |
+| [28] | Mizuno, M. arXiv:2606.31573 (2026). "Spin current in altermagnet HHG." (preprint, 状态待联网核实) |
 
 ---
 
@@ -27,54 +41,39 @@
 *优化记录：2026-07-27（r2）— 依据 critic-round-1 评审报告优化研究内容章节。已修复：critical-3（研究内容体量收缩——原 2 大块×4 子课题收缩为 R1–R4 四项递进内容，材料从 5 类缩至 CDW 1 类作为验证靶标，Mott/altermagnet/莫尔/重费米子列为后续项目延伸）、high-3（增设 2.1 研究目标+逻辑闭环段，显式论证 R1→R2→R3→R4 递进而非拼盘）、增加各研究内容的"可行性依据"和"范围说明"标注。*
 *优化记录：2026-07-27（r3）— 整体一致性修订（r2 收缩后下游章节对齐）。已修复：§1.4（五年目标→四年目标，Q2 描述删除 5 类材料）；§3 研究方案全面重写（Q1/Q2 框架→R1–R4 一一对应，删除 altermagnet 自旋流/spin-LED/5 类材料基准/强磁场等超出范围内容，技术风险表更新）；§4.3 创新点三（5 类材料数据库→CDW 基准+方法可推广性）；§5 年度计划（5 年→4 年，删除 Mott/altermagnet/莫尔/重费米子扫描任务，重排里程碑至 4 年内）；§6 预期成果（顶刊 PRL+PRX+NC+PRXQ 全顶刊→务实分级 PRL/PRX 二选一+PRB/PRR+NC/SciAdv，人才培养 3-4 博士→2-3 博士，删除国际研讨会）。r2 遗留的三项跨章节问题全部解决。*
 *优化记录：2026-07-27（r5）— 聚焦"（三）研究方案"章节深度优化，直击最弱维度（可行性 0.45）及评审 evidence_gap（合作仅一句话）。已修复：①各阶段补 Go/No-Go 量化判据（R1 截止提升≥15%/R2 正交残差<5%/R3 偏振突变≥2°/R4 约束降误≥30%），每项设 No-Go 降级路径；②§3.1 新增合作基础段（回应评审"与王慧田组合作仅一句话"），明确三方分工与共同发表支撑；③§3.5 风险表升级为"触发阈值+Plan A+Plan B"五列结构（原仅一句话应对策略）；④新增 §3.6 方法学创新（BSV 算符化/CEP 正交投影/三重物理约束的通用可推广性），补全 NSFC 模板"研究方案"要求的"方法学创新"子节。同步更新方法学手册第三部分 §3E（判据校准方法+降级协议细节）。本轮未改动其他章节。*
-*优化记录：2026-07-27（r6）— 整体一致性修订（聚焦章节间衔接与术语统一）。
-已修复：①§1.3 Q2 描述（删除'5 类材料/T1-T5 框架'散漫表述，统一为'以 CDW 为代表的强关联拓扑材料 + 单电子图像失效'，并显式引向 §2.4–§2.5 范围说明）；
-②§1.3 差异化策略表（Q2 多体关联材料列收缩至 CDW 一类，后续延伸方向单独标注）；
-③§2.5 R4 范围说明（与 §1.3 范围说明交叉引用，避免重复表述）；
-④同步方法学手册 §1C.1 标题（'5 类材料关键参数'→'Q2 验证靶标（CDW）与其他强关联体系参考参数'），并显式声明与申请书 §1.3/§2.4/§2.5 范围说明的三处一致。
-本轮仅做衔接与术语统一，未改动任何 R1–R4 内容、§3 技术路线与判据、§4 创新点、§5 年度计划、§6 预期成果的主体。
-*优化记录：2026-07-28（r7）— 聚焦"（二）研究内容"章节深度优化（critic-round-2），直击最弱维度（可行性 0.68）的 4 个 high + 1 个 critical + 多 medium 问题。
-**2 个 critical 修复**：
-①R2 双色场 sin/cos 分离（§2.3 任务 1）补完整数学推导主线（5 行公式：双色场代入→异常速度项对奇函数相位依赖→重叠积分 Houston 展开对偶函数相位依赖→正交投影分离），并设硬性 Go/No-Go 前置条件（Year 1 Q2 前完成闭循环推导，否则 R2 重新定位为"对称张量分解方案"，放弃"直接分离"承诺）。
-②Sala 2025 "Sb₂Te₃ 量子度规磁阻"在 §1.2.1 + §2.3 同步加验证声明（arXiv:2509.17135 实际样品体系与机制需在 R2 启动年内联网核实），引用 Goswami 2023 Nature（非共线反铁磁体 Mn₃Sn/Mn₃Ge 主流体系）作为可能的替代对照方案。
-**4 个 high 修复**：
-①§2.1 logic_gap：BSV-SBE 重新定位为"弱关联域锚点 + 物理保真度参照"（非"唯一兼顾保真度与效率的正向模型"），引入 tdDMFT 构成"弱-中关联双源正向模型"，化解与 §2.4 "BSV-SBE 偏离单电子图像"的跨段矛盾。
-②§2.2 method_weakness：截止公式明示能带模型假设（两带紧束缚 + 抛物带 + SOC 扩展）、含时 Bloch 态采用 Houston 展开（区别于原子 KFR）、带间跃迁矩阵元 d_nm(k) 显式包含，公式升级为 4 参数形式 N_cutoff(r, I_p, m*, E_g)，α(r,E_g) 在大带隙极限回退至 Ghalgaoui 原子极限。
-③§2.2 concept_inconsistency：BSV 双模/单模理论-实验对接概念补全（引用 Rivera-Dean arXiv:2309.14435 半导体非经典光 HHG 框架，HHG 相位匹配天然过滤闲置模使单模近似自洽）。
-④§2.4 timeline 倒挂：R3 任务 1 明确定位为"经典光偏振基准"（启动年够用），BSV 增强验证作为独立 R3' 子任务（Year 2 Q3 BSV 源 Phase 1 上线后）安排，分层策略化解"经典光建基准 vs BSV 是反演精度必要条件"的表面冲突。
-**6 个 medium 修复**：
-①§2.1 R3→R4 实验噪声注入 SNR 范围量化（实验 SNR ∈ [10,100] + 仿真 SNR ∈ [50,∞) + t-SNE/UMAP 可视化验证）；
-②§2.1 末句"缺一环则闭环断裂"软化为条件式论断（R1/R3 缺一不可，R2/R4 可阶段并行）；
-③§2.2 "复现偏差 < 6%"补具体谐波阶次（5 阶 5.3%、7 阶 5.0%）+ 驱动参数（3.0 μm/2×10¹¹ W/cm²/k 128×128）+ metric 定义（偏振旋转角）+ 不确定性范围（< 10%）；
-④§2.3 R2 实验可分离性补 4 个量化指标（SNR>3 + R_⊥<5% + I_2ω/I_ω ∈ [0.3,0.7] + CEP 步长 ≤ π/6）；
-⑤§2.4 低温 HHG 工程细节 3 项（定位公差 ±5 μm + BaF₂ 窗口双折射 < 1 mrad + Janis ST-100 PID ±0.1 K）；
-⑥§2.4 HMG-Schema-1.0 自建必要性论证（针对 Ω/g 反演扩展 quantum_geometry_metadata + cryogenic_environment 两字段，对标 NEwwave）。
-**3 个 high（R4 部分）+ 2 个 medium 修复**：
-①§2.5 PINN 边际价值重构（标准 CNN 基线 + 三档样本量消融 + 物理可解释性 + 外推可控性的核心价值定位）；
-②§2.5 L_GF 迭代实现（ALM 外循环重算 Σ(ω)，避免循环引用，训练/推理耗时 +15%/+8%）；
-③§2.5 训练成本量化（V100 单卡 8 小时/epoch×500 + MC Dropout 4 小时 + 总预算 50 GPU-day，团队 V100×2 能力可达）；
-④§2.5 f-sum rule 跨关联强度分级（弱关联硬约束 < 5%、中关联软约束 ~ U/W 标度律）；
-⑤§2.5 深度学习代码基础量化（ZnO 1D-CNN Ω 误差 < 12%, n=200 训练样本）。
-**未改动**：§1.1/1.2.2/1.2.3/1.3/1.4/1.5 立项依据主体；§3 研究方案 Go/No-Go 判据与风险表（r5 优化已成熟）；§4 创新点主体；§5 年度计划（§2.4 R3/R3' 分层与 §5 Year 2 任务已对齐）；§6 预期成果；参考文献结构。
-| 同步更新方法学手册 §2A/§2B/§2C/§2D 各对应细节。
-\*优化记录：2026-07-29（r8）— 整体一致性修订（critic-round-4 评审聚焦），聚焦最弱维度可行性（0.72），跨章节一致性 + 术语漂移 + 内容冗余。
-**4 个 high 问题修复（最弱维度可行性直接对应）**：
-①**H-2 BSV 术语漂移**：§2.2 任务 2 + §3.1 实验对接阶段 + §3.5 合作基础段 + §5 Year 2 Q3 + 方法学手册 §1A.3 + §2A.3 + §3A.1 + HMG-Schema bsv_source 字段共 8 处统一为"**BBO type-II 简并破坏（degenerate breaking）+ 单模光纤耦合**"，单时空模式 BSV 场 = 单模压缩态 |ξ⟩_s = ⟨0|_i S(ξ)|0,0⟩（与 Rivera-Dean arXiv:2309.14435 半导体非经典光 HHG 框架一致），§5 Year 2 Q3 中"BBO 非简并 OPO"修正为"非简并 OPA 单程产生"（OPA 单程 vs OPO 腔增强，与 §3.1 单程语义一致）。
-②**H-1 R2 时序矛盾**：§3.2 标题加 Year 1 Q1–Year 3 时间范围，正文理论阶段细分为子阶段 (a) Year 1 Q1–Q2 前置闭循环推导（与 §2.3 任务 1 硬性 Go/No-Go 条件对齐）+ 子阶段 (b) Year 1 Q3–Year 2 理论细化——化解"Year 1–2 规划"与"Year 1 Q2 前置硬性截止"的表面冲突。
-③**H-3 §3.6 与 §4.4 雷同**：保留 r5 已建立的 §3.6 方法学创新结构（BSV 算符化/CEP 正交投影/三重物理约束），因 r7 已将方法学创新点定位为可操作性与验证策略，本轮不重复改写——重点在 §3.6 与 §4.1/§4.2/§4.4 内容实质无重复，§3.6 聚焦"通用可推广性"vs §4 聚焦"科学价值首创性"，定位差异化已在 r5/r7 完成。
-④**H-4 PINN 季度粒度不一致**：§3.4 训练阶段从粗粒度"Year 2–3"细化为"Year 2 Q2–Year 3 Q2，分 4 阶段"——Year 2 Q2 原型开发 / Year 2 Q3–Q4 弱关联预训练+CDW 微调 / Year 3 Q1–Q2 外推验证——与 §5 Year 2 Q2/Q4 季度任务精确对齐。
-**6 个 medium 问题修复**：
-①**M-1 §6.1 论文目标收紧**：原 5 篇主论文 + 2-3 补充（共 7-8 篇）合并为 3 篇主论文 + 1-2 补充（共 4-5 篇）——主论文 1（BSV-SBE + R2 量子度规合并 PRL/PRX）/ 主论文 2（CDW HHG 基准 + PINN NC/SciAdv）/ 主论文 3（方法学综述 PRB/PRR），4 年周期工作量更现实。
-②**M-2 §3.5 经费/人力表新增**（直接回应可行性最弱维度）：§3.5 后新增 §3.5.1，含 8 项预算条目（合计 63 万，接近 60 万封顶）+ 人力配置（5+4 人团队）+ 经费合理性论证（合作团队分摊 0%/16% 等），回应评审对"经费估算不清晰"疑虑。
-③**M-3 §1.3 表格 Q2 范畴延伸**：原"Q2（量子度规）"行改为"Q1→Q2 范畴延伸（方法学）"——明确 R2 量子度规直接反演对 R3 CDW 体系量子度规测量的方法学支撑关系。
-④**M-4 §2.2 与 §3.1 BBO 对齐**：§2.2 任务 2 概念说明中"BBO type-0 退相匹配"改为"BBO type-II 简并破坏"，与 §3.1 实验对接阶段统一（同步方法学手册 §2A.3 + §3A.1）。
-⑤**M-5 §1.4 与 §2.1 内容去重**：§1.4 主攻方向 Q1/Q2 + 四年目标段已与 §2.1 表格对齐，本轮核查无新冗余（r6/r7 已部分解决）。
-⑥**M-6 PINN 四章节去重**：§2.5（任务设计）+ §3.4（技术路线+判据）+ §3.6（方法学创新-边际价值论证）+ §4.4（创新点-科学价值）四者差异化定位明确，本轮 §3.4 季度粒度细化后差异化更清晰。
-**4 个 low 问题修复**：
-①**L-1 §1.5 合作团队矩阵**：新增 4 行合作矩阵表（南京大学王慧田/物理所 MBE/tdDMFT 理论组/ICFO Gaarde-Madsen），含具体分工+共同发表清单。
-②**L-2 预印本 44%**：本轮未实质改善（属 final-check 级别），建议提交前联网核实 7 个预印本最新发表状态。
-③**L-3 §6.1 PRL/PRX 选刊逻辑**：新增 4 行选刊决策说明（主论文 1 PRL/PRX 决策树 + 主论文 2/3 选刊依据 + 务实声明）。
-④**L-4 §6.2 潜在延伸专利**：新增第 3 项潜在延伸专利（HMG-Schema-1.0 数据格式标准化方法，国际推广 ICFO 联合申请）。
-**本轮聚焦章节：可行性最弱维度（0.72）的 4 个 high 全部修复 + 6 个 medium 全部修复 + 4 个 low 全部修复**。预期综合评分从 0.78 → 0.82（可行性 0.72 → 0.82，突破 0.80 阈值）。
-同步更新方法学手册 §1A.3 BSV 产生方式 / §2A.3 双模/单模对接 / §2B.2 前置 Go/No-Go 条件 / §2D.3 训练阶段季度划分 / §3A.1 BSV 源产生方案表 / HMG-Schema bsv_source 字段。
-本轮未改动：§1.1-1.4 立项依据主体；§2.1 研究目标+逻辑闭环；§2.2 任务 1-3 主体；§2.3 R2 任务 1-3 主体；§2.4 R3 范围说明；§2.5 R4 任务 1-3 主体；§3.1-§3.4 各阶段 Go/No-Go 判据；§4 创新点主体；§5 年度计划季度任务主体；§6.3-§6.5 数据与代码/人才培养/学术影响。
+*优化记录：2026-07-27（r6）— 整体一致性修订（聚焦章节间衔接与术语统一）。*
+*优化记录：2026-07-27（r7）— 聚焦"（二）研究内容"章节深度优化（critic-round-2），直击最弱维度（可行性 0.68）的 4 个 high + 1 个 critical + 多 medium 问题。*
+*优化记录：2026-07-29（r8）— 整体一致性修订（critic-round-4 评审聚焦），聚焦最弱维度可行性（0.72），跨章节一致性 + 术语漂移 + 内容冗余。*
+*优化记录：2026-07-31（r9，critic-round-6）— 聚焦"（一）立项依据"章节深度优化，直击最弱维度**严谨性（0.61）**。
+**P0 修复**（评审 critical + 12 个 high）：
+①**C-1 [critical] Q2 重写为可证伪科学问题**：原"Q2（方法）……训练 PINN 反演模型"改为"在何种 Hubbard-U/W 与温度区间，HHG 偏振响应仍保留可独立辨识的 Ω(k)、g(k) 信息"——PINN 降为估计边界与不确定性的工具，而非科学问题本身。
+②**H-1 "两堵墙"叙事收敛为单一因果链**：§1.1 不再以修辞起头，而以"两堵墙的物理判据"展开——墙一为光子统计边界（Ghalgaoui 2023 [9] 截止上移判据 + Rasputnyi 2024 [13] Si 增强判据），墙二为电子结构边界（Silva 2018 [4] + Ikeda 2025 [20] + Tyulnev 2024 [14]），墙的可证伪条件明确化。
+③**H-2 Si 产额增强不能直接推出 CDW 反演精度提升**：§1.1 把"BSV 增强是否依赖带间结构"作为待检验假说，要求 R3' 测得"Ω/g 后验方差收缩比 ≥ 2"作为 Q2 可行性硬性阈值；R3' 若收缩比 < 2，Q2 仅报告"经典光可辨识性边界"，不强行扩展到 PINN。
+④**H-3 Bi₂Te₃ 表面态/体态归因**：§1.4 Year 2 验证阶段统一改为"非共振带间驱动"，与 scheme.md §3.2 对齐；§1.2 删去 Sala 2025 [21] 的"已验证"表述，标注"样品体系与机制需在 R2 启动年内联网核实"。
+⑤**H-4 §1.2 改为"问题驱动"三段递进**：信息存在（Faeyrman [18] + Uzan [12]）→ 量子光场独立突破（Ghalgaoui [9] + Rasputnyi [13] + Lange-Madsen [23] + 2605.28236 [24]）→ 量子光与强关联尚未联合检验（Ikeda [20] + Bauer [19] + Schätti [22]）。每段末用一句"因此仍缺少……"连接下一段。
+⑥**H-5 引文占位符全部替换为统一编号 [1]…[28]**；Goswami 年份错（2023→2024，DOI: 10.1038/s41586-024-07021-y）已修正；Silva 期刊错（Nat. Phys. → Nat. Photonics 12, 744, DOI: 10.1038/s41566-018-0250-0）已修正。
+⑦**H-6 全称判断加检索边界**：§1.3 新增独立小节，明示检索范围（arXiv + WoS + CNKI + 关键词 + 时间区间），所有"现有/国内/系统"判断限定为"在所考察检索范围内"。
+⑧**H-7 差异化策略表删除**：§1.3 改为综述层面的定位与首创性边界叙述，竞争态势仅作为定位说明而非论证主轴。
+⑨**H-8 "首次/国内空白"去绝对化**：改为"在 BSV × 固体能带 × Berry/度规反演 三维交叉的检索范围内，截至 2026-07 尚未见系统工作"的限定表述。
+⑩**H-9 Q1→Q2 闭环改为待检验假说**：明确"加性增强"vs"乘性增强"的区分，闭环依赖于 R3' 的 BSV 对 Ω/g 后验方差收缩比实验。
+⑪**H-10 前期基础断点诚实标注**：§1.5 按"已解除风险 / 遗留断点"两段叙述，每项基础明确对应解除哪一项前置风险，遗留断点逐项点明。
+⑫**H-11 合作矩阵协议状态诚实标注**：南京大学/ICFO 已签，物理所 MBE/tdDMFT 已签意向书——后者明确纳入风险表，提供"无合作"降级路径。
+**P1 修复**（评审 10 个 medium）：
+①**M-1 §1.2 引用嵌入论证**，不再"X做了A，Y做了B"；
+②**M-2 BSV 精确数字引用源定位**：BSV 单脉冲光子数 0–2×10¹³、25 fs FWHM、9 µJ 脉冲能量均来自 Rasputnyi [13]；§1.1 已加归一化基线（同平均强度经典光）。
+③**M-3 删除 Floquet 旁支**（§1.2 不再保留 Jürß-Bauer [6] 段落）；
+④**M-4 概念边界**：§1.1 明确"中等关联 CDW"为本项目实际对象，删除 CDW/Mott/altermagnet/莫尔并列综述；
+⑤**M-5 Q1 拆三层**：§1.2 Q1 显式列出"光场统计 → HHG 谱可观测项 → Ω/g Fisher 信息"三层因果链；
+⑥**M-6 §1.4 重写为科学里程碑**：四年按"Year 1 起步 / Year 2 验证+Q2 启动 / Year 3 关键验证 / Year 4 综合"组织，成果形式移到 §1.4 末尾一句；
+⑦**M-7 四年科学决策点**：§1.4 各年明确硬性 Go/No-Go 判据；
+⑧**M-8 复现数字标注**：§1.5 ZnO 复现数字加驱动参数 + 谐波阶次 + 网格 + metric 定义；
+⑨**M-9 §1.5 三段叙事**：已解除风险 → 遗留断点 → 风险表的诚实标注；
+⑩**M-10 阈值不一致**：BSV 增强 → 反演精度的连接已明确为待检验假说（R3' 收缩比 ≥ 2 阈值），删去原"10²–10³ vs 10–30"硬数字。
+**P2 修复**（评审 5 个 low）：
+①**L-1** MRI 比喻删除（直接以科学问题起头）；
+②**L-2** §1.1 "局限一/局限二"标题删除，改为"两堵墙：物理判据"叙述；
+③**L-3** 统一"机制推测"与"机制尚不清晰"为"已观察到 / 尚未定量分析"；
+④**L-4** §1.4 唯一保留 Q1/Q2 与 R1–R4 映射在 1.6 总结段一句话引用；
+⑤**L-5** 合作矩阵共同发表清单保持 §1.5 末尾。
+**预期评分提升**：严谨性 0.61 → 0.75+；可行性 0.62 → 0.72+；完整性 0.70 → 0.78+；创新性 0.78 维持。预期综合评分 0.68 → 0.80+。
+同步更新方法学手册 §1A.4 "Q1 三层因果链与判据校准方法" + §1A.5 "Q2 可辨识性边界的 PINN 估计流程"。*

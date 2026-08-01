@@ -277,6 +277,34 @@ function renderProposalCard(p) {
   // 解析课题名称（从 ID 提取）
   const namePart = (p.proposal_id || '').split('-').slice(1, -1).join('-') || p.proposal_id;
 
+  // v6.8.0+: 轮次进度条
+  const rounds = p.optimization_rounds || 0;
+  const maxRounds = 10;
+  const roundPct = Math.min((rounds / maxRounds) * 100, 100);
+  let roundBarHtml = '';
+  if (p.status === 'optimizing' && rounds > 0) {
+    roundBarHtml = `
+      <div class="lc-card-round-bar">
+        <div class="lc-card-round-track">
+          <div class="lc-card-round-fill" style="width:${roundPct}%"></div>
+        </div>
+        <span class="lc-card-round-text">${rounds}/${maxRounds}</span>
+      </div>`;
+  }
+
+  // v6.8.0+: 分数指示条
+  let scoreBarHtml = '';
+  if (score > 0) {
+    const scorePct = Math.min(score * 100, 100);
+    scoreBarHtml = `
+      <div class="lc-card-score-bar">
+        <div class="lc-card-score-track">
+          <div class="lc-card-score-fill" style="width:${scorePct}%;background:${scoreColor};"></div>
+        </div>
+        <span class="lc-card-score-text" style="color:${scoreColor};">${(score * 100).toFixed(0)}分</span>
+      </div>`;
+  }
+
   // v6.8.0: 5 模块进度
   let sectionBars = '';
   if (p.status === 'optimizing' && p.section_passes) {
@@ -284,20 +312,17 @@ function renderProposalCard(p) {
     sectionBars = '<div class="lc-section-bars">' +
       LC_SECTIONS.map(s => {
         const passed = passes[s.key] === true;
-        return `<span class="lc-section-chip ${passed ? 'passed' : 'pending'}" title="${s.cn}">${s.icon} ${s.cn}</span>`;
+        return `<span class="lc-section-chip ${passed ? 'passed' : 'pending'}" title="${s.cn}">${s.icon}</span>`;
       }).join('') +
       '</div>';
   }
 
   let actions = '';
-  // v6.8.0: 查看课题详情（直接打开审核/详情视图，不再依赖 pipeline.js）
-  actions += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcViewDetail('${p.proposal_id}')">👁 查看详情</button>`;
-  // v6.7.5: optimizing 状态可查看 checkpoints / monitor
+  actions += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcViewDetail('${p.proposal_id}')">👁 详情</button>`;
+  actions += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcViewProposalContent('${p.proposal_id}')">📄 申请书</button>`;
   if (p.status === 'optimizing') {
-    actions += `<button class="btn-text fs-072" style="color:var(--accent-color);" onclick="lcToggleCheckpoints('${p.proposal_id}')">◐ checkpoints</button>`;
     actions += `<button class="btn-text fs-072" style="color:var(--accent-color);" onclick="lcShowMonitor('${p.proposal_id}')">🔍 监察</button>`;
   }
-  // 根据状态显示不同操作
   if (p.status === 'drafts') {
     actions += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcTransition('${p.proposal_id}','optimizing','确认思路可行')">→ 优化中</button>`;
   }
@@ -306,7 +331,6 @@ function renderProposalCard(p) {
     actions += `<button class="btn-text fs-072" style="color:var(--warning-color);" onclick="lcTransition('${p.proposal_id}','pending_review','手动送审')">→ 送审</button>`;
   }
   if (p.status === 'pending_review') {
-    // v6.7.11: 改为对话式审核，点击进入审核会话
     actions += `<button class="btn-text fs-072" style="color:var(--warning-color);" onclick="lcReview('${p.proposal_id}')">🔍 审核</button>`;
   }
 
@@ -324,11 +348,14 @@ function renderProposalCard(p) {
         ${focusBadge}
         <span class="lc-proposal-type" style="color:${typeColor};">${typeLabel}</span>
         <span class="lc-proposal-status" style="color:${stage.color};">${stage.icon} ${stage.label}</span>
-        ${score > 0 ? `<span class="lc-proposal-score" style="color:${scoreColor};">score ${score.toFixed(2)}</span>` : ''}
       </div>
       <div class="lc-proposal-meta">
-        ${p.optimization_rounds || 0} 轮优化 · ${(p.updated_at || '').slice(0, 10)}
+        ${rounds} 轮优化 · ${(p.updated_at || '').slice(0, 10)}
         ${nextJobHtml}
+      </div>
+      <div class="lc-card-metrics">
+        ${scoreBarHtml}
+        ${roundBarHtml}
       </div>
       ${sectionBars}
       <div class="lc-proposal-actions">
@@ -339,7 +366,7 @@ function renderProposalCard(p) {
 }
 
 // ============================================
-// v6.8.0: 查看课题详情（弹窗显示 5 模块进度 + checkpoints + monitor）
+// v6.8.0+: 查看课题详情（优化进度可视化 + 5 模块进度 + 申请书内容）
 // ============================================
 async function lcViewDetail(proposalId) {
   try {
@@ -354,49 +381,219 @@ async function lcViewDetail(proposalId) {
     const monitorAlert = monitorRes.negative_feedback_alert;
     const monitorReasons = monitorRes.negative_feedback_reasons || [];
 
+    const namePart = proposalId.split('-').slice(1, -1).join('-') || proposalId;
+    const rounds = data.optimization_rounds || 0;
+    const lastScore = data.last_score || 0;
+    const scoreHistory = data.score_history || [];
+    const dimScores = data.last_dim_scores || {};
     const passes = data.section_passes || {};
+    const status = data.status || '';
+
+    // === 轮次进度条 ===
+    const maxRounds = 10;
+    const roundPct = Math.min((rounds / maxRounds) * 100, 100);
+    let roundBarHtml = '';
+    if (status === 'optimizing' && rounds > 0) {
+      roundBarHtml = `
+        <div class="lc-detail-section">
+          <div class="lc-detail-label">优化轮次</div>
+          <div class="lc-round-bar">
+            <div class="lc-round-track">
+              <div class="lc-round-fill" style="width:${roundPct}%"></div>
+            </div>
+            <span class="lc-round-text">${rounds} / ${maxRounds} 轮</span>
+          </div>
+        </div>`;
+    }
+
+    // === 分数趋势（简单色块） ===
+    let scoreTrendHtml = '';
+    if (scoreHistory.length > 0) {
+      const recent = scoreHistory.slice(-8);
+      const maxScore = Math.max(...recent.map(s => s.score || 0), 1);
+      scoreTrendHtml = `
+        <div class="lc-detail-section">
+          <div class="lc-detail-label">分数趋势</div>
+          <div class="lc-score-trend">
+            ${recent.map(s => {
+              const h = Math.max((s.score / maxScore) * 100, 8);
+              const color = s.score >= 0.80 ? 'var(--success-color)' : s.score >= 0.60 ? 'var(--warning-color)' : 'var(--error-color)';
+              return `<div class="lc-score-bar" style="height:${h}%;background:${color};" title="r${s.round}: ${(s.score * 100).toFixed(0)}分"></div>`;
+            }).join('')}
+          </div>
+          <div class="lc-score-labels">${recent.map(s => `<span>r${s.round}</span>`).join('')}</div>
+        </div>`;
+    }
+
+    // === 当前分数与维度 ===
+    const dimNames = { innovation: '创新性', feasibility: '可行性', rigor: '严谨性', completeness: '完整性' };
+    let dimHtml = '';
+    if (Object.keys(dimScores).length > 0) {
+      dimHtml = '<div class="lc-detail-section"><div class="lc-detail-label">维度评分</div><div class="lc-dim-grid">';
+      for (const [key, val] of Object.entries(dimScores)) {
+        const cn = dimNames[key] || key;
+        const color = val >= 0.80 ? 'var(--success-color)' : val >= 0.60 ? 'var(--warning-color)' : 'var(--error-color)';
+        const pct = ((val || 0) * 100).toFixed(0);
+        dimHtml += `<div class="lc-dim-item"><span class="lc-dim-label">${cn}</span><div class="lc-dim-track"><div class="lc-dim-fill" style="width:${pct}%;background:${color};"></div></div><span class="lc-dim-val" style="color:${color};">${pct}分</span></div>`;
+      }
+      dimHtml += '</div></div>';
+    }
+
+    // === 5 模块进度 ===
     const sectionHtml = LC_SECTIONS.map(s => {
       const passed = passes[s.key] === true;
-      return `<span class="lc-section-chip ${passed ? 'passed' : 'pending'}">${s.icon} ${s.cn}</span>`;
+      return `<span class="lc-section-chip ${passed ? 'passed' : 'pending'}" title="${s.cn}">${s.icon} ${s.cn}</span>`;
     }).join('');
 
-    let cpHtml = '<div class="fs-082 text-tertiary">暂无 checkpoints</div>';
-    if (checkpoints.length) {
-      cpHtml = '<div class="d-flex fd-col gap-4 fs-082">' + checkpoints.slice(0, 15).map(j => {
-        const statusMap = {
-          pending: { icon: '○', color: 'var(--text-tertiary)' },
-          running: { icon: '◐', color: 'var(--info-color)' },
-          done: { icon: '✓', color: 'var(--success-color)' },
-          failed: { icon: '✗', color: 'var(--error-color)' },
-        };
-        const s = statusMap[j.status] || statusMap.pending;
-        return `<div class="d-flex ai-center gap-8"><span style="color:${s.color};">${s.icon} ${j.step}</span><span class="text-tertiary">${LC_SECTION_KEY_TO_CN[j.section_key] || j.section_key}</span><span class="ml-auto text-tertiary">r${j.round}</span></div>`;
-      }).join('') + '</div>';
+    // === 当前 job 链状态 ===
+    const stepOrder = ['critic', 'gap_identify', 'lit_search', 'lit_read', 'lit_note', 'writer'];
+    const sectionOrder = ['rationale', 'content', 'scheme', 'full_review', 'references'];
+    let jobChainHtml = '';
+    if (checkpoints.length > 0) {
+      // 找到最新的 round 和当前活跃的 job
+      const maxRound = Math.max(...checkpoints.map(j => j.round || 0));
+      const currentJobs = checkpoints.filter(j => j.round === maxRound);
+      const runningJob = currentJobs.find(j => j.status === 'running');
+      const pendingCount = currentJobs.filter(j => j.status === 'pending').length;
+      const doneCount = currentJobs.filter(j => j.status === 'done').length;
+      const failedCount = currentJobs.filter(j => j.status === 'failed').length;
+      const totalInRound = currentJobs.length;
+
+      jobChainHtml = `
+        <div class="lc-detail-section">
+          <div class="lc-detail-label">当前轮次进度（r${maxRound}）</div>
+          <div class="lc-round-summary">
+            <span class="lc-round-stat" style="color:var(--success-color);">✓ ${doneCount} 完成</span>
+            <span class="lc-round-stat" style="color:var(--info-color);">◐ ${runningJob ? 1 : 0} 进行中</span>
+            <span class="lc-round-stat" style="color:var(--text-tertiary);">○ ${pendingCount} 待处理</span>
+            ${failedCount > 0 ? `<span class="lc-round-stat" style="color:var(--error-color);">✗ ${failedCount} 失败</span>` : ''}
+          </div>
+          <div class="lc-job-chain">`;
+
+      // 按模块显示 job 链
+      for (const sk of sectionOrder) {
+        const secJobs = currentJobs.filter(j => j.section_key === sk);
+        if (secJobs.length === 0) continue;
+        const secCn = LC_SECTION_KEY_TO_CN[sk] || sk;
+        jobChainHtml += `<div class="lc-job-section-label">${secCn}</div><div class="lc-job-row">`;
+        for (const step of stepOrder) {
+          const job = secJobs.find(j => j.step === step);
+          if (!job) continue;
+          const statusIcon = job.status === 'done' ? '✓' : job.status === 'running' ? '◐' : job.status === 'failed' ? '✗' : '○';
+          const statusColor = job.status === 'done' ? 'var(--success-color)' : job.status === 'running' ? 'var(--info-color)' : job.status === 'failed' ? 'var(--error-color)' : 'var(--text-tertiary)';
+          const isActive = job.status === 'running';
+          jobChainHtml += `<span class="lc-job-step ${isActive ? 'active' : ''}" style="color:${statusColor};" title="${job.job_id}">${statusIcon} ${step}</span>`;
+        }
+        jobChainHtml += '</div>';
+      }
+
+      jobChainHtml += '</div></div>';
+
+      // 最新失败 job 详情
+      const recentFailures = checkpoints.filter(j => j.status === 'failed').slice(-3);
+      if (recentFailures.length > 0) {
+        jobChainHtml += '<div class="lc-detail-section"><div class="lc-detail-label">最近失败</div>';
+        for (const f of recentFailures) {
+          jobChainHtml += `<div class="lc-fail-item">✗ <strong>r${f.round}</strong> ${f.step} · ${LC_SECTION_KEY_TO_CN[f.section_key] || f.section_key}${f.last_error ? `<br><span class="fs-072 text-tertiary">${escapeHtml(f.last_error.slice(0, 80))}</span>` : ''}</div>`;
+        }
+        jobChainHtml += '</div>';
+      }
     }
 
+    // === 历史轮次概览 ===
+    let roundHistoryHtml = '';
+    if (scoreHistory.length > 0) {
+      roundHistoryHtml = '<div class="lc-detail-section"><div class="lc-detail-label">各轮次结果</div><div class="lc-round-history">';
+      for (const h of scoreHistory) {
+        const rColor = h.score >= 0.80 ? 'var(--success-color)' : h.score >= 0.60 ? 'var(--warning-color)' : 'var(--error-color)';
+        const sectionPassed = h.section_passed ? '✓' : '○';
+        roundHistoryHtml += `<div class="lc-round-row">
+          <span class="lc-round-num" style="color:${rColor};">r${h.round}</span>
+          <span class="lc-round-score" style="color:${rColor};">${(h.score * 100).toFixed(0)}分</span>
+          <span class="lc-round-section">${sectionPassed} ${LC_SECTION_KEY_TO_CN[h.focus_section] || h.focus_section || ''}</span>
+          <span class="lc-round-issues">${h.issues_count || 0} issues</span>
+          <span class="lc-round-weakest" style="color:var(--warning-color);">短板: ${dimNames[h.weakest_dim] || h.weakest_dim || ''}</span>
+        </div>`;
+      }
+      roundHistoryHtml += '</div></div>';
+    }
+
+    // === 负反馈告警 ===
     let alertHtml = '';
     if (monitorAlert) {
-      alertHtml = `<div class="pad-10 bg-error br-6" style="color:#fff;margin-bottom:12px;"><div class="fw-600 mb-4">⚠️ 负反馈告警</div><ul class="ma-0 pl-16">${monitorReasons.map(r => `<li>${escapeHtml(r)}</li>`).join('')}</ul></div>`;
+      alertHtml = `<div class="pad-10 bg-error br-6" style="color:#fff;margin-bottom:12px;"><div class="fw-600 mb-4">⚠️ 负反馈告警</div><ul class="ma-0 pl-16">${monitorReasons.map(r => `<li>${escapeHtml(r)}</li>`).join('')}</ul>
+        <button class="btn-text mt-8" style="color:#fff;text-decoration:underline;" onclick="lcClearAlert('${proposalId}')">清除告警</button>
+      </div>`;
     }
 
-    const namePart = proposalId.split('-').slice(1, -1).join('-') || proposalId;
     const html = `
-      <div class="d-flex fd-col gap-12" style="max-height:60vh;overflow:auto;">
+      <div class="lc-detail-modal" style="max-height:70vh;overflow-y:auto;">
         ${alertHtml}
-        <div>
-          <div class="fw-600 mb-6">课题: ${escapeHtml(namePart)}</div>
-          <div class="fs-082 text-secondary mb-8">${data.optimization_rounds || 0} 轮优化 · score ${(data.last_score || 0).toFixed(2)}</div>
-          <div class="lc-section-bars">${sectionHtml}</div>
+        <div class="lc-detail-header">
+          <div class="lc-detail-title">${escapeHtml(namePart)}</div>
+          <div class="lc-detail-meta">${rounds} 轮优化 · score ${(lastScore * 100).toFixed(0)}分</div>
         </div>
-        <div>
-          <div class="fw-600 mb-6 fs-092">Checkpoints</div>
-          ${cpHtml}
+        <div class="lc-section-bars" style="margin-bottom:12px;">${sectionHtml}</div>
+        ${roundBarHtml}
+        <div class="lc-detail-row">
+          ${scoreTrendHtml}
+          ${dimHtml}
+        </div>
+        ${jobChainHtml}
+        ${roundHistoryHtml}
+        <div class="lc-detail-actions">
+          <button class="btn-text" style="color:var(--info-color);font-size:0.85rem;" onclick="lcViewProposalContent('${proposalId}')">📄 查看申请书</button>
+          <button class="btn-text" style="color:var(--accent-color);font-size:0.85rem;" onclick="lcShowMonitor('${proposalId}')">🔍 监察详情</button>
+          ${status === 'optimizing' ? `<button class="btn-text" style="color:var(--accent-color);font-size:0.85rem;" onclick="lcOptimize('${proposalId}')">⚡ 优化一轮</button>` : ''}
         </div>
       </div>`;
 
     await confirmModal(html, '课题详情', '关闭');
   } catch (e) {
     showToast(`加载详情失败：${e.message}`, 'error');
+  }
+}
+
+// ============================================
+// v6.8.0+: 查看申请书内容（适用于所有阶段）
+// ============================================
+async function lcViewProposalContent(proposalId) {
+  try {
+    const result = await apiGet(`/api/pipeline/${encodeURIComponent(proposalId)}/proposal/sections`);
+    if (result.status !== 'ok') throw new Error(result.error || '获取申请书失败');
+
+    const sections = result.sections || [];
+    const rawMap = {};
+    for (const s of sections) {
+      if (s.name && s.content) rawMap[s.name] = s.content;
+    }
+
+    // 按 5 模块顺序排列
+    const sectionOrder = ['立项依据', '研究内容', '研究方案', '整体一致性', '参考文献'];
+    let hasContent = false;
+    let html = '<div class="lc-content-modal" style="max-height:70vh;overflow-y:auto;">';
+
+    for (const name of sectionOrder) {
+      const content = rawMap[name];
+      if (!content) continue;
+      hasContent = true;
+      html += `
+        <div class="lc-content-section">
+          <div class="lc-content-section-title">${name}</div>
+          <div class="lc-content-body">${renderMarkdown(content)}</div>
+        </div>`;
+    }
+
+    html += '</div>';
+
+    if (!hasContent) {
+      html = '<div class="ta-center pad-40 text-tertiary">暂无申请书内容</div>';
+    }
+
+    const namePart = proposalId.split('-').slice(1, -1).join('-') || proposalId;
+    await confirmModal(html, `📄 ${escapeHtml(namePart)} - 申请书全文`, '关闭');
+  } catch (e) {
+    showToast(`✗ 加载申请书失败：${e.message}`, 'error');
   }
 }
 

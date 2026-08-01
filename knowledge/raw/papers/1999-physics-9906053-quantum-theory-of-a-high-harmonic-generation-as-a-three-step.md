@@ -1,20 +1,25 @@
 ---
-arxiv_id: physics/9906053
-status: verified
-fetched_via: 
-fetched_at: 2026-05-19T08:25:18Z
-title: Quantum theory of a high harmonic generation as a three-step process
-authors: M. Yu. Kuchiev, V. N. Ostrovsky
-year: 1999
-journal: Physical Review A
-doi: 
-arxiv_url: https://arxiv.org/abs/physics/9906053
-pdf_url: https://arxiv.org/pdf/physics/9906053
-categories: physics.atom-ph
-tags: theory, three-step, quantum-model
-citation_count: 40
-tldr: [theoretical physics research paper] Proposes a fully quantum, three-step framework for high harmonic generation (HHG) that explicitly links above-threshold ionization (ATI) and laser-assisted recombination (LAR) via coherent amplitude contributions. All stages—ATI, electron propagation in the laser-dressed continuum, and recombination—are described by analytical expressions that preserve physical consistency (no off-energy-shell states), enabling quantitative agreement with benchmark calculations for H⁻ ion HHG. The model achieves precise agreement between length and velocity gauge results, validating its robustness and offering a physically transparent alternative to classical or semi-quantum approximations.
-project: ["deepxiv-论文库"]
+arxiv_id: "physics/9906053"
+status: "verified"
+fetched_via: ""
+fetched_at: "2026-05-19T08:25:18Z"
+title: "Quantum theory of a high harmonic generation as a three-step process"
+authors: "M. Yu. Kuchiev, V. N. Ostrovsky"
+year: "1999"
+journal: "Physical Review A"
+doi: ""
+arxiv_url: "https://arxiv.org/abs/physics/9906053"
+pdf_url: "https://arxiv.org/pdf/physics/9906053"
+categories: "physics.atom-ph"
+tags: []
+citation_count: "40"
+tldr: ["theoretical physics research paper] Proposes a fully quantum", "three-step framework for high harmonic generation (HHG) that explicitly links above-threshold ionization (ATI) and laser-assisted recombination (LAR) via coherent amplitude contributions. All stages—ATI", "electron propagation in the laser-dressed continuum", "and recombination—are described by analytical expressions that preserve physical consistency (no off-energy-shell states)", "enabling quantitative agreement with benchmark calculations for H⁻ ion HHG. The model achieves precise agreement between length and velocity gauge results", "validating its robustness and offering a physically transparent alternative to classical or semi-quantum approximations."]
+project: []
+unified_status: "pool"
+read_status: "unread"
+used_by_proposals: []
+has_pdf: false
+status_history: [{"status": "pool", "at": "2026-07-31T14:26:16Z", "by": "hermes"}]
 ---
 
 # Quantum theory of a high harmonic generation as a three-step process
