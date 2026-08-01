@@ -36,7 +36,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
-PROJECT_ROOT = Path(__file__).parent.parent
+from paths import PROJECT_ROOT
 HERMES_WORKSPACE = Path.home() / "Desktop" / "hermes_workspace"
 BRIEFINGS_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "briefings"
 ITEM_STATUS_PATH = BRIEFINGS_DIR / "item-status.json"

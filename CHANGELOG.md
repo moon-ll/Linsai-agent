@@ -1,5 +1,60 @@
 # 变更记录
 
+## v6.8.1 - 2026-08-02 文献系统统一架构重构
+
+### 改动内容
+
+#### 文献笔记后端迁移
+- **`scripts/literature_notes.py`** — 阅读笔记存储后端从 `{proposal_dir}/02_literature/reading-notes.md` 迁移到 `knowledge/wiki/papers/{arxiv_id}.md`，按 `### {proposal_id}` 分段写入。原路径改为动态生成的只读兼容视图。
+- **`scripts/kb_wiki.py`** — 新增 wiki/papers/ 页面管理辅助函数，支持按 arxiv_id 查找/创建/更新论文 wiki 页面。
+
+#### 知识库导入器增强
+- **`scripts/kb_importer.py`** — 新增 `has_pdf` 自动检测（扫描 PDF_DIR）；frontmatter 扩展 `read_status`、`used_by_proposals`、`has_pdf` 字段；新增 `WIKI_PAPERS_DIR` 常量支持 wiki/papers/ 双向写入。
+
+#### 知识库门面扩展
+- **`scripts/knowledge_base.py`** — 新增 `_slugify()`、`_render_proposal_body()`、`save_extracted_knowledge()` 等函数，支持 proposal wiki 页面渲染和知识萃取统一入口。
+
+#### 研究管线接入 LiteratureService
+- **`scripts/proposal_lifecycle/optimize.py`** — `_run_lit_search()` 改为通过 `LiteratureService.search()` + `get_context()` 统一检索/入库/状态查询，替换原有直接调用 `_build_kb_context_from_gap` + `_run_hermes("researcher")` 的逻辑。
+
+#### 提案知识库同步增强
+- **`scripts/proposal_kb_sync.py`** — 重构同步逻辑，通过 `save_extracted_knowledge()` 门面写入 wiki 页面，自动构建 frontmatter 和图谱关联。
+
+#### 知识萃取输出改造
+- **`scripts/knowledge_output.py`** — `_write_wiki_page()` 委托 `knowledge_base.save_extracted_knowledge()` 处理，统一 frontmatter 构建、双向链接注入和生长日志记录。
+
+#### 周末流水线增强
+- **`scripts/weekend_pipeline/output_jobs.py`** — `run_output_generate_weekly_report()` 增强为汇总各 job 执行结果的结构化报告。
+- **`scripts/weekend_pipeline/pipeline.py`** — 新增依赖链修复逻辑。
+- **`scripts/weekend_pipeline/executor.py`** — 执行器增强。
+- **`scripts/weekend_pipeline/reflection_jobs.py`** — 反思阶段新增健康检查任务。
+- **`scripts/weekend_pipeline/jobs.py`** — Job 定义微调。
+- **`scripts/tests/test_weekend_pipeline.py`** — 测试用例同步更新。
+
+#### 生命周期增强
+- **`scripts/lifecycle/executor.py`** — 执行器逻辑增强。
+- **`scripts/lifecycle/orchestrator.py`** — 编排器新增方法。
+
+#### 基础设施改进
+- **`scripts/sync_engine.py`** — `_save_sync_state()` 加跨进程 `file_lock`，防止多实例并发写入丢失历史。
+- **`scripts/tool_engine.py`** — 命令执行白名单和错误处理优化。
+- **`scripts/web_routes_projects.py`** — 项目路由增强。
+- **`scripts/hermes_pipeline.py`** — 管线派活逻辑微调。
+
+#### 数据迁移工具
+- **`scripts/migrate_literature_unified.py`**（新增）— 文献统一架构数据迁移脚本，支持 `--dry-run` 预览和 `--backup` 自动备份。迁移步骤：合并 paper-pool 状态到 KB frontmatter、合并 item-status 历史到 KB frontmatter、迁移深度解析到 wiki/papers/、迁移 per-proposal 阅读笔记到 wiki/papers/、迁移讨论记录到 qa/ 层、重建索引和图谱。含 `_self_check()` 自检。
+
+#### 其他微调
+- `scripts/state_sync.py`、`scripts/project_context.py`、`scripts/project_reader.py`、`scripts/proposal_lifecycle/constants.py` — 路径引用和常量同步更新。
+
+### 验证结果
+- `python3 -m py_compile scripts/*.py` 语法检查全部通过。
+- `python3 scripts/self_test.py --module` 192/192 通过。
+- `python3 scripts/self_test.py --web-ci` 246/246 通过（含人格 38/38 + 场景 16/16）。
+- `python3 scripts/migrate_literature_unified.py --self-check` 自检全部通过。
+
+---
+
 ## v6.8.1 - 2026-08-02 文献简报→知识库零拷贝通路
 
 ### 问题根因

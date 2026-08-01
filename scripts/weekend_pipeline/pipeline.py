@@ -5,6 +5,8 @@ from __future__ import annotations
 
 from typing import Any, Callable, Dict, List, Optional
 
+from datetime import datetime, timezone
+
 from common import file_lock, now_utc, save_json
 from proposal_lifecycle import ProposalLifecycle
 
@@ -76,17 +78,69 @@ class WeekendPipeline:
             "health": output_jobs.run_output_kb_health,
             "weekly_report": output_jobs.run_output_generate_weekly_report,
             "output_collect_daily_sources": output_jobs.run_output_collect_daily_sources,
-            # reflection (report/recommend 按 step；collect/analyze 与 input 冲突，按 job_id 注册)
+            # reflection (report/recommend 按 step；collect/analyze/health 与 input/output 冲突，按 job_id 注册)
             "report": reflection_jobs.run_reflection_report,
             "recommend": reflection_jobs.run_reflection_recommend,
+            "reflection_health_check": reflection_jobs.run_reflection_health_check,
             "reflection_collect_state": reflection_jobs.run_reflection_collect_state,
             "reflection_analyze_patterns": reflection_jobs.run_reflection_analyze_patterns,
         }
 
+    def _reset_stage_for_new_week(self, stage: str) -> int:
+        """检查是否跨周，若是则重置该阶段所有 job 为 pending。
+
+        当 pipeline 上次更新距今超过 6 天时，视为新一周开始，
+        将该阶段所有 job 重置为 pending，清除执行记录。
+
+        Returns: 重置的 job 数量
+        """
+        updated_at_str = self.state.get("updated_at", "")
+        if not updated_at_str:
+            return 0
+
+        try:
+            updated = datetime.fromisoformat(updated_at_str.replace("Z", "+00:00"))
+            now = datetime.now(timezone.utc)
+            delta_days = (now - updated).days
+            if delta_days < 6:
+                return 0
+        except Exception:
+            return 0
+
+        if _log:
+            _log.info(
+                f"[weekend-pipeline] 检测到跨周（上次更新距今 {delta_days} 天），"
+                f"重置 {stage} 阶段 job"
+            )
+
+        reset_count = 0
+        for job in self.state.get("jobs", []):
+            if job.get("stage") == stage:
+                job["status"] = JOB_STATUS_PENDING
+                job["started_at"] = ""
+                job["finished_at"] = ""
+                job["last_error"] = ""
+                job["attempts"] = 0
+                if "result" in job:
+                    del job["result"]
+                reset_count += 1
+
+        if reset_count > 0:
+            self._save()
+
+        return reset_count
+
     def sync_stage_jobs(self, stage: str) -> Dict[str, Any]:
-        """幂等地为指定阶段创建任务。"""
+        """幂等地为指定阶段创建任务。
+
+        自动检测跨周：若上次 pipeline 更新距今超过 6 天，
+        先将该阶段所有 job 重置为 pending 再创建新任务。
+        """
         if stage not in STAGES:
             raise ValueError(f"未知阶段: {stage}")
+
+        # 跨周检测：重置已完成 job，避免新一周无任务可执行
+        self._reset_stage_for_new_week(stage)
 
         existing_ids = {j.get("job_id") for j in self.state.get("jobs", [])}
         archived_ids: List[str] = []

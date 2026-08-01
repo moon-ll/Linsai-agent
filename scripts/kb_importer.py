@@ -46,8 +46,9 @@ from typing import Any, Dict, List, Optional
 
 from common import now_utc as _now_utc
 
-from paths import PROJECT_ROOT, KNOWLEDGE_DIR
+from paths import PROJECT_ROOT, KNOWLEDGE_DIR, PDF_DIR, RAW_DIR, WIKI_DIR
 RAW_PAPERS_DIR = KNOWLEDGE_DIR / "raw" / "papers"
+WIKI_PAPERS_DIR = WIKI_DIR / "papers"
 WIKI_PROJECTS_DIR = KNOWLEDGE_DIR / "wiki" / "projects" / "deepxiv-论文库"
 PROJECT_TAG = "deepxiv-论文库"  # 归档论文默认子库（原"文献简报"，v2.9.3 重命名避免与每日简报混淆）
 
@@ -140,43 +141,77 @@ def import_candidate(arxiv_id: str, project: str = "") -> Optional[str]:
         print(f"⚠ 已存在，跳过: {filename}")
         return str(out_path.relative_to(KNOWLEDGE_DIR))
 
-    # 生成 frontmatter + 正文
+    # has_pdf 检测：检查 PDF_DIR 中是否存在对应 PDF
+    has_pdf = False
+    pdf_candidates = [
+        PDF_DIR / f"{arxiv_id}.pdf",
+        PDF_DIR / f"{arxiv_id}.PDF",
+        PDF_DIR / f"{arxiv_id}v1.pdf",
+        PDF_DIR / f"{arxiv_id}v2.pdf",
+    ]
+    for pdf_path in pdf_candidates:
+        if pdf_path.exists():
+            has_pdf = True
+            break
+
+    # 生成 frontmatter + 正文（扩展字段 v6.7.10+）
     tags = [PROJECT_TAG]
     if direction:
         tags.append(direction)
 
-    content = f"""---
-title: "{title}"
-arxiv_id: "{arxiv_id}"
-authors: "{authors}"
-year: "{year}"
-tags: {json.dumps(tags, ensure_ascii=False)}
-project: ["{project}"]
-direction: "{direction}"
-source: "hermes-简报"
-imported_at: "{_now_utc()}"
-score_deepxiv: {score}
----
+    # 构建 status_history 列表（Python 对象，用于 json.dumps）
+    status_history = [
+        {
+            "status": "unseen",
+            "timestamp": _now_utc(),
+            "source": "hermes-简报",
+        },
+    ]
 
-# {title}
-
-**arXiv**: [{arxiv_id}](https://arxiv.org/abs/{arxiv_id})
-**作者**: {authors}
-**方向**: {direction}
-**deepxiv 评分**: {score}
-
-## TL;DR
-
-{tldr}
-
-## 摘要
-
-{abstract}
-
-## AI 评价
-
-{ai_reason}
-"""
+    # 构建 frontmatter（手动拼接 YAML 避免 f-string 嵌套问题）
+    abstract_short = (abstract[:200] if abstract else "").replace('"', '\\"')
+    fm_lines = [
+        "---",
+        f'title: "{title}"',
+        f'arxiv_id: "{arxiv_id}"',
+        f'authors: "{authors}"',
+        f'year: "{year}"',
+        f"tags: {json.dumps(tags, ensure_ascii=False)}",
+        f'project: ["{project}"]',
+        f'direction: "{direction}"',
+        f'source: "hermes-简报"',
+        f'imported_at: "{_now_utc()}"',
+        f"score_deepxiv: {score}",
+        f'abstract: "{abstract_short}"',
+        "status: \"unseen\"",
+        "unified_status: \"pool\"",
+        "read_status: \"unread\"",
+        "used_by_proposals: []",
+        f"has_pdf: {json.dumps(has_pdf)}",
+        "discussed_in_briefing: false",
+        f"status_history: {json.dumps(status_history, ensure_ascii=False)}",
+        "---",
+        "",
+        f"# {title}",
+        "",
+        f"**arXiv**: [{arxiv_id}](https://arxiv.org/abs/{arxiv_id})",
+        f"**作者**: {authors}",
+        f"**方向**: {direction}",
+        f"**deepxiv 评分**: {score}",
+        "",
+        "## TL;DR",
+        "",
+        tldr,
+        "",
+        "## 摘要",
+        "",
+        abstract,
+        "",
+        "## AI 评价",
+        "",
+        ai_reason,
+    ]
+    content = "\n".join(fm_lines)
 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     out_path.write_text(content, encoding="utf-8")
@@ -185,10 +220,10 @@ score_deepxiv: {score}
 
 
 def import_deep_analysis(arxiv_id: str, project: str = "") -> Optional[str]:
-    """导入深度解析到 wiki/projects/文献简报/ 子库。
+    """导入深度解析到 wiki/papers/{arxiv_id}.md 的 ## 深度解析 段落。
 
     将 hermes 的深度分析（why_notable / core_findings / linsai_connection）
-    转换为林赛视角的结构化 wiki 页面。
+    转换为林赛视角的结构化内容，追加到论文 wiki 页面。
 
     Args:
         arxiv_id: arXiv 论文 ID
@@ -197,6 +232,8 @@ def import_deep_analysis(arxiv_id: str, project: str = "") -> Optional[str]:
     Returns:
         生成的 wiki 文件相对路径；无深度解析返回 None。
     """
+    from kb_wiki import save_wiki_page, get_wiki_page, build_wiki_page
+
     analysis = _load_deep_analysis(arxiv_id)
     if not analysis:
         print(f"○ 无深度解析: {arxiv_id}")
@@ -216,15 +253,9 @@ def import_deep_analysis(arxiv_id: str, project: str = "") -> Optional[str]:
     what_next = analysis.get("what_next", [])
     linsai_connection = analysis.get("linsai_connection", "")
 
-    slug = _slugify(title)
-    filename = f"{slug}.md"
-    # 按推断的 project 归入对应子库目录
-    out_dir = KNOWLEDGE_DIR / "wiki" / "projects" / project
-    out_path = out_dir / filename
-
-    tags = [PROJECT_TAG, "深度解析"]
-    if direction:
-        tags.append(direction)
+    # 目标路径：wiki/papers/{arxiv_id}.md
+    rel_path = f"wiki/papers/{arxiv_id}.md"
+    wiki_path = WIKI_PAPERS_DIR / f"{arxiv_id}.md"
 
     # 渲染列表项（容错：None / 非 list / 空）
     def _list_items(items) -> str:
@@ -236,56 +267,84 @@ def import_deep_analysis(arxiv_id: str, project: str = "") -> Optional[str]:
             return str(items)
         return "\n".join(f"- {item}" for item in items)
 
-    content = f"""---
-title: "{title}"
-type: "papers"
-arxiv_id: "{arxiv_id}"
-authors: "{authors}"
-date: "{date}"
-direction: "{direction}"
-tags: {json.dumps(tags, ensure_ascii=False)}
-project: ["{project}"]
-source: "hermes-深度解析"
-imported_at: "{_now_utc()}"
-growth_stage: "growing"
-confidence: 0.8
-related: []
----
+    # 构建深度解析段落
+    deep_analysis_section = f"""## 深度解析
 
-# {title}
-
-**arXiv**: [{arxiv_id}](https://arxiv.org/abs/{arxiv_id}) | **方向**: {direction}
-
-## 为什么值得关注
+### 为什么值得关注
 
 {why_notable}
 
-## 核心发现
+### 核心发现
 
 {_list_items(core_findings)}
 
-## 新方法
+### 新方法
 
 {_list_items(new_methods)}
 
-## 林赛的理解
+### 林赛的理解
 
 {linsai_connection}
 
-## 开放问题
+### 开放问题
 
 {_list_items(what_next)}
 
-## 来源
+### 来源
 
 - [arXiv {arxiv_id}](https://arxiv.org/abs/{arxiv_id})
 - 导入自 hermes 深度分析（{_now_utc()}）
 """
 
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    out_path.write_text(content, encoding="utf-8")
-    print(f"✓ 深度解析已导入子库: wiki/projects/{project}/{filename}")
-    return str(out_path.relative_to(KNOWLEDGE_DIR))
+    if wiki_path.exists():
+        # 已存在：追加 ## 深度解析 段落
+        existing = get_wiki_page(rel_path)
+        if existing:
+            existing_body = existing.get("body", "")
+            # 检查是否已有深度解析，避免重复追加
+            if "## 深度解析" not in existing_body:
+                save_wiki_page(rel_path, deep_analysis_section, append=True)
+                print(f"✓ 深度解析已追加: wiki/papers/{arxiv_id}.md")
+            else:
+                print(f"○ 深度解析已存在，跳过: wiki/papers/{arxiv_id}.md")
+    else:
+        # 不存在：创建新页面（含论文元数据 + 深度解析）
+        tags = [PROJECT_TAG, "深度解析"]
+        if direction:
+            tags.append(direction)
+
+        meta = {
+            "title": title,
+            "type": "papers",
+            "arxiv_id": arxiv_id,
+            "authors": authors,
+            "date": date,
+            "direction": direction,
+            "tags": tags,
+            "project": [project],
+            "source": "hermes-深度解析",
+            "imported_at": _now_utc(),
+            "growth_stage": "growing",
+            "confidence": 0.8,
+            "related": [],
+            "status": "unseen",
+            "unified_status": "pool",
+            "read_status": "unread",
+            "used_by_proposals": [],
+            "has_pdf": False,
+            "discussed_in_briefing": False,
+            "status_history": [],
+        }
+        body = f"""# {title}
+
+**arXiv**: [{arxiv_id}](https://arxiv.org/abs/{arxiv_id}) | **方向**: {direction}
+
+{deep_analysis_section}
+"""
+        save_wiki_page(rel_path, body, meta)
+        print(f"✓ 深度解析已创建新页面: wiki/papers/{arxiv_id}.md")
+
+    return str(rel_path)
 
 
 def import_all_candidates(project: str = "", with_analysis: bool = False) -> List[str]:
@@ -320,19 +379,27 @@ def import_all_candidates(project: str = "", with_analysis: bool = False) -> Lis
     return imported
 
 
-def import_session_discussion(session_path: Path, project: str = PROJECT_TAG) -> Optional[str]:
-    """导入 hermes 会话为林赛讨论记录。
+def import_session_discussion(session_path: Path, project: str = PROJECT_TAG,
+                              qa_type: str = "paper-discussion",
+                              related_papers: Optional[List[str]] = None,
+                              related_proposals: Optional[List[str]] = None) -> Optional[str]:
+    """导入 hermes 会话为林赛讨论记录（qa/ 层）。
 
     将 hermes 的单文件会话 JSON 提取为林赛格式的讨论 markdown，
-    沉淀到对应项目的子库，标记来源平台。
+    通过 save_qa_page() 沉淀到 qa/ 层。
 
     Args:
         session_path: hermes 会话文件路径
         project: 归属项目标签
+        qa_type: 讨论类型（"paper-discussion" / "proposal-discussion" / "project-discussion"）
+        related_papers: 关联论文 arxiv_id 列表
+        related_proposals: 关联 proposal_id 列表
 
     Returns:
         生成的讨论记录路径；失败返回 None。
     """
+    from kb_wiki import save_qa_page
+
     session_path = Path(session_path)
     if not session_path.exists():
         return None
@@ -350,16 +417,11 @@ def import_session_discussion(session_path: Path, project: str = PROJECT_TAG) ->
     if not messages:
         return None
 
-    # 生成讨论记录
-    out_dir = WIKI_PROJECTS_DIR / "讨论记录"
-    out_dir.mkdir(parents=True, exist_ok=True)
+    # 生成讨论正文
     date_str = datetime.now().strftime("%Y%m%d")
-    filename = f"讨论-{date_str}-{session_id[:8]}.md"
-    out_path = out_dir / filename
+    slug = f"讨论-{date_str}-{session_id[:8]}"
 
     lines = [
-        f"# 讨论记录（来源：{platform}）",
-        "",
         f"**会话 ID**: `{session_id}`  ",
         f"**平台**: {platform}  ",
         f"**模型**: {model}  ",
@@ -372,15 +434,30 @@ def import_session_discussion(session_path: Path, project: str = PROJECT_TAG) ->
     for m in messages:
         role = m.get("role", "unknown")
         content = m.get("content", "")
-        label = "🧑 用户" if role == "user" else "🔬 林赛"
+        label = "用户" if role == "user" else "林赛"
         lines.append(f"### {label}")
         lines.append("")
         lines.append(content[:2000])  # 截断超长消息
         lines.append("")
 
-    out_path.write_text("\n".join(lines), encoding="utf-8")
-    print(f"✓ 讨论记录已导入: {filename}")
-    return str(out_path.relative_to(KNOWLEDGE_DIR))
+    body = "\n".join(lines)
+
+    # 通过 save_qa_page 写入
+    title = f"讨论记录 {date_str} ({session_id[:8]})"
+    try:
+        rel_path = save_qa_page(
+            slug=slug,
+            title=title,
+            qa_type=qa_type,
+            body=body,
+            related_papers=related_papers,
+            related_proposals=related_proposals,
+        )
+        print(f"✓ 讨论记录已导入: {rel_path}")
+        return rel_path
+    except Exception as e:
+        print(f"✗ 讨论记录导入失败: {e}")
+        return None
 
 
 # ============================================================

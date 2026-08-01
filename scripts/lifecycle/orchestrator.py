@@ -64,6 +64,29 @@ def _compute_actual_round(self, proposal_id: str, jobs: List[Dict[str, Any]]) ->
     return actual
 
 
+def _cleanup_old_round_jobs(self, proposal_id: str, current_round: int) -> int:
+    """清理指定 proposal 的旧轮次 job，保留 round >= current_round - 1。
+
+    避免 pipeline_jobs 跨轮次线性累积导致性能下降。
+    monitor 成功后 sync_checkpoint 生成下一轮时自动调用。
+
+    Returns: 清理的 job 数量
+    """
+    jobs = self._get_jobs(proposal_id)
+    if not jobs:
+        return 0
+
+    keep_round = max(0, current_round - 1)
+    before = len(jobs)
+    jobs[:] = [j for j in jobs if j.get("round", 0) >= keep_round]
+    cleaned = before - len(jobs)
+
+    if cleaned > 0:
+        self._save_jobs(proposal_id, jobs)
+
+    return cleaned
+
+
 def sync_checkpoint(self, proposal_id: str) -> Dict[str, Any]:
     """为指定 proposal 补齐下一轮的 checkpoint。幂等。
 
@@ -112,11 +135,17 @@ def sync_checkpoint(self, proposal_id: str) -> Dict[str, Any]:
     if added:
         self._save_jobs(proposal_id, jobs)
 
+    # 清理旧轮次 job（仅保留当前轮和上一轮，避免线性累积）
+    cleaned = _cleanup_old_round_jobs(self, proposal_id, current_round)
+    if cleaned > 0 and _log:
+        _log.info(f"[{proposal_id}] 清理了 {cleaned} 个旧轮次 job (保留 round {current_round-1}~{current_round})")
+
     return {
         "success": True,
         "proposal_id": proposal_id,
         "next_round": next_round,
         "added": added,
+        "cleaned": cleaned,
         "round_advanced": round_advanced,
     }
 

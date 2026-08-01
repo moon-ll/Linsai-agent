@@ -420,17 +420,134 @@ def run_output_kb_health(state: Dict[str, Any], job: Dict[str, Any], dry_run: bo
 
 
 def run_output_generate_weekly_report(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
-    """生成周末输出报告。"""
+    """生成周末输出报告，汇总各 job 执行结果。"""
+    from datetime import datetime as dt_module
+
     date_str = now_utc()[:10]
     report_path = WEEKEND_OUTPUT_DIR / f"weekend-output-report-{date_str}.md"
+
+    jobs = state.get("jobs", [])
+
+    # 统计各 job 状态
+    output_jobs = [j for j in jobs if j.get("stage") == "output"]
+    done = sum(1 for j in output_jobs if j.get("status") == "done")
+    failed = sum(1 for j in output_jobs if j.get("status") == "failed")
+    pending = sum(1 for j in output_jobs if j.get("status") == "pending")
+    total = len(output_jobs)
+
+    # 收集各 job 的结果摘要
+    summaries = []
+    for j in output_jobs:
+        jid = j.get("job_id", "?")
+        status = j.get("status", "?")
+        result = j.get("result", {})
+        step = j.get("step", "?")
+        error = (j.get("last_error", "") or "")[:100]
+
+        if status == "done":
+            if step == "sync":
+                synced = result.get("synced_count", 0)
+                summaries.append(f"- **{jid}**: ✓ 同步 {synced} 个 proposal 到 KB")
+            elif step == "extract":
+                if "archived_proposal" in jid:
+                    summaries.append(f"- **{jid}**: ✓ 已归档 proposal 萃取完成")
+                elif "daily_knowledge" in jid:
+                    extracted = result.get("results", {})
+                    concepts = len(extracted.get("concepts", []))
+                    methods = len(extracted.get("methods", []))
+                    people = len(extracted.get("people", []))
+                    papers = len(extracted.get("papers", []))
+                    unverified = result.get("unverified_count", 0)
+                    summaries.append(
+                        f"- **{jid}**: ✓ 日常知识萃取 "
+                        f"({concepts}概念, {methods}方法, {people}学者, {papers}论文, "
+                        f"{unverified}未验证声明)"
+                    )
+                else:
+                    summaries.append(f"- **{jid}**: ✓ 完成")
+            elif step == "collect":
+                count = result.get("source_count", 0)
+                summaries.append(f"- **{jid}**: ✓ 收集 {count} 条来源")
+            elif step == "health":
+                report = result.get("report", {})
+                overdue = report.get("derived_overdue_count", 0)
+                health = report.get("health", {})
+                total_pages = health.get("total_pages", 0) if isinstance(health, dict) else 0
+                summaries.append(
+                    f"- **{jid}**: ✓ KB 健康检查 "
+                    f"(共 {total_pages} 页, {overdue} 页过期待更新)"
+                )
+            elif step == "weekly_report":
+                summaries.append(f"- **{jid}**: ✓ 周报生成完成")
+            else:
+                summaries.append(f"- **{jid}**: ✓ 完成")
+        elif status == "failed":
+            summaries.append(f"- **{jid}**: ✗ 失败 - {error}")
+        elif status == "pending":
+            summaries.append(f"- **{jid}**: ○ 待执行")
+        else:
+            summaries.append(f"- **{jid}**: ◐ 进行中")
+
+    # 健康报告摘要
+    health_report = load_json(HEALTH_REPORT_PATH, default={})
+    health_lines = []
+    health = health_report.get("health", {})
+    if isinstance(health, dict):
+        total_pages = health.get("total_pages", 0)
+        by_type = health.get("by_type", {})
+        health_lines.append(f"- 知识库共 {total_pages} 页")
+        for t, count in sorted(by_type.items()):
+            health_lines.append(f"  - {t}: {count} 页")
+    overdue = health_report.get("derived_overdue", [])
+    if overdue:
+        health_lines.append(f"- 超过 30 天未更新的派生知识: {len(overdue)} 条")
+        for o in overdue[:5]:
+            health_lines.append(f"  - {o.get('title', '?')} ({o.get('days_old', 0)} 天)")
+
     lines = [
         f"# 周末知识输出报告（{date_str}）",
         "",
         "本报告汇总周末 output 阶段执行结果。",
         "",
+        "---",
+        "",
+        f"## 执行概况",
+        f"",
+        f"- 总 job: {total}",
+        f"- 完成: {done}",
+        f"- 失败: {failed}",
+        f"- 待执行: {pending}",
+        f"",
+        "## 任务详情",
+        "",
     ]
+    lines.extend(summaries)
+
+    lines.extend([
+        "",
+        "## 知识库健康",
+        "",
+    ])
+    lines.extend(health_lines)
+
+    lines.extend([
+        "",
+        "---",
+        "",
+        f"*报告生成时间: {now_utc()}*",
+    ])
 
     if not dry_run:
         report_path.write_text("\n".join(lines), encoding="utf-8")
 
-    return {"success": True, "report_path": str(report_path.relative_to(PROJECT_ROOT)), "dry_run": dry_run}
+    return {
+        "success": True,
+        "report_path": str(report_path.relative_to(PROJECT_ROOT)),
+        "dry_run": dry_run,
+        "summary": {
+            "total": total,
+            "done": done,
+            "failed": failed,
+            "pending": pending,
+        },
+    }

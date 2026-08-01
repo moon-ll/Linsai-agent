@@ -22,6 +22,8 @@ if str(_SCRIPT_DIR) not in sys.path:
 
 from common import load_json, now_utc, save_json
 from paths import PROJECT_ROOT
+from knowledge_base import save_proposal_sync, _slugify
+import kb_wiki
 
 try:
     from logger import get_logger
@@ -179,64 +181,29 @@ class ProposalKbSync:
         rounds = prop_state.get("optimization_rounds", 0)
         last_score = prop_state.get("last_score", 0.0)
 
-        # 生成知识库 markdown
-        kb_path = self.proposals_kb_dir / f"{proposal_id}.md"
-        content = f"""---
-title: "{title}"
-type: "proposal"
-project: ["NSFC-强场超快"]
-proposal_id: "{proposal_id}"
-status: "{status}"
-project_type: "{project_type}"
-optimization_rounds: {rounds}
-last_score: {last_score}
-synced_at: "{now_utc()}"
-growth_stage: "{('mature' if status == 'archived' else 'growing' if status == 'optimizing' else 'reviewing')}"
-confidence: 1.0
----
-
-# {title}
-
-**课题 ID**：`{proposal_id}`  
-**项目类型**：{project_type}  
-**生命周期状态**：{self._map_status_cn(status)}  
-**优化轮次**：{rounds}  
-**当前分数**：{last_score:.2f}  
-**同步时间**：{now_utc()[:10]}
-
-## 核心问题
-
-{core_questions or '（待提取）'}
-
-## 创新点
-
-{innovations or '（待提取）'}
-
-## 关键产物
-
-{chr(10).join(f'- [{f["label"]}]({f["path"]})' for f in key_files) or '（暂无）'}
-
-## 状态说明
-
-- 处于 **{self._map_status_cn(status)}** 阶段
-- 最后得分：{last_score:.2f}
-- 累计对抗轮次：{rounds}
-
-<!-- linsai-wikilinks -->
-## 关联概念
-
-- [[固体高次谐波]]
-- [[NSFC-强场超快]]
-<!-- /linsai-wikilinks -->
-"""
+        # 构建 metadata 字典，由 knowledge_base.save_proposal_sync 门面统一处理
+        metadata = {
+            "title": title,
+            "proposal_id": proposal_id,
+            "status": status,
+            "project_type": project_type,
+            "optimization_rounds": rounds,
+            "last_score": last_score,
+            "core_questions": core_questions,
+            "innovations": innovations,
+            "key_files": key_files,
+        }
 
         if not dry_run:
-            kb_path.write_text(content, encoding="utf-8")
+            kb_path = save_proposal_sync(proposal_id, metadata)
+        else:
+            slug = _slugify(proposal_id)
+            kb_path = f"wiki/projects/NSFC-强场超快/proposals/{slug}.md"
 
         return {
             "success": True,
             "proposal_id": proposal_id,
-            "kb_path": str(kb_path.relative_to(PROJECT_ROOT)),
+            "kb_path": kb_path,
             "title": title,
             "status": status,
         }
@@ -263,8 +230,6 @@ confidence: 1.0
 
     def _update_index(self, results: List[Dict[str, Any]], dry_run: bool = False) -> None:
         """更新 proposals-index.md 索引。"""
-        index_path = self.nsfc_dir / INDEX_FILENAME
-
         rows = []
         for r in sorted(results, key=lambda x: x.get("proposal_id", "")):
             if not r.get("success"):
@@ -279,17 +244,7 @@ confidence: 1.0
             md_path = f"{PROPOSALS_KB_SUBDIR}/{pid}.md"
             rows.append(f"| [{display_title}]({md_path}) | `{pid}` | {status} |")
 
-        content = f"""---
-title: "NSFC 课题生命周期索引"
-type: "index"
-project: ["NSFC-强场超快"]
-created: "{now_utc()}"
-updated: "{now_utc()}"
-growth_stage: "growing"
-confidence: 1.0
----
-
-# NSFC 课题生命周期索引
+        body = f"""# NSFC 课题生命周期索引
 
 本页自动聚合 `research_proposals/` 中各课题的状态与核心信息。
 
@@ -301,9 +256,22 @@ confidence: 1.0
 
 > 由 `scripts/proposal_kb_sync.py` 自动生成，请勿手动修改本表。
 """
+        index_meta = {
+            "title": "NSFC 课题生命周期索引",
+            "type": "index",
+            "project": ["NSFC-强场超快"],
+            "created": now_utc(),
+            "updated": now_utc(),
+            "growth_stage": "growing",
+            "confidence": 1.0,
+        }
 
         if not dry_run:
-            index_path.write_text(content, encoding="utf-8")
+            kb_wiki.save_wiki_page(
+                f"wiki/projects/NSFC-强场超快/{INDEX_FILENAME}",
+                body,
+                index_meta,
+            )
 
 
 def _self_check() -> Dict[str, Any]:

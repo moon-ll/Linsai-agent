@@ -233,7 +233,7 @@ def search_across_projects(query: str, top_k: int = 5) -> List[dict]:
             continue
 
     # 按分数排序，取 top_k
-    results.sort(key=lambda x: x.get("score", 0), reverse=True)
+    results.sort(key=lambda x: float(x.get("score", 0)), reverse=True)
     return results[:top_k]
 
 

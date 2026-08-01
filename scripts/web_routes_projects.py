@@ -43,6 +43,10 @@ import hermes_bridge as hb
 import kb_importer as ki
 import task_manager as tm
 import common as _cms
+try:
+    import kb_wiki as _kbw
+except ImportError:
+    _kbw = None
 
 
 # ---------------------------------------------------------------------------
@@ -307,7 +311,7 @@ class ProjectRoutesMixin:
             merged_papers = [p for p in merged_papers if p.get("status") == status_filter]
 
         # 按分数排序
-        merged_papers.sort(key=lambda x: x.get("score", 0), reverse=True)
+        merged_papers.sort(key=lambda x: float(x.get("score", 0)), reverse=True)
 
         from collections import Counter
         by_status = Counter(p.get("status", "unseen") for p in merged_papers)
@@ -653,24 +657,11 @@ class ProjectRoutesMixin:
             return
 
         # 第二步：保存讨论全文 + 摘要到知识库
-        disc_dir = web_base._PROJECT_ROOT / "knowledge" / "wiki" / "projects" / "deepxiv-论文库" / "讨论记录"
-        disc_dir.mkdir(parents=True, exist_ok=True)
-        disc_file = disc_dir / f"讨论-{today}-{arxiv_id}.md"
+        # v6.8.0+：走 qa/paper-discussions/ 规范位置 + kb_wiki.save_qa_page() 门面
+        slug = f"讨论-{today}-{arxiv_id}"
+        qa_type = "paper-discussion"
 
-        content = f"""---
-title: "讨论：{title[:40]}"
-type: "papers"
-arxiv_id: "{arxiv_id}"
-created: "{now}"
-updated: "{now}"
-tags: ["讨论记录", "文献阅读"]
-related: ["高次谐波产生"]
-project: ["deepxiv-论文库"]
-growth_stage: "mature"
-confidence: 0.85
----
-
-# 讨论：{title}
+        body_md = f"""# 讨论：{title}
 
 **arXiv**: [{arxiv_id}](https://arxiv.org/abs/{arxiv_id})
 
@@ -682,13 +673,42 @@ confidence: 0.85
 
 """
         for kp in (parsed_result.get("key_points", []) if mode == "auto" else []):
-            content += f"- {kp}\n"
-        content += f"\n## 开放问题\n\n"
+            body_md += f"- {kp}\n"
+        body_md += "\n## 开放问题\n\n"
         for oq in (parsed_result.get("open_questions", []) if mode == "auto" else []):
-            content += f"- {oq}\n"
-        content += f"\n## 讨论全文\n\n{full_text[:8000]}\n"
+            body_md += f"- {oq}\n"
+        body_md += f"\n## 讨论全文\n\n{full_text[:8000]}\n"
 
-        disc_file.write_text(content, encoding="utf-8")
+        if _kbw is not None:
+            try:
+                rel_qa = _kbw.save_qa_page(
+                    slug=slug,
+                    title=f"讨论：{title[:40]}",
+                    qa_type=qa_type,
+                    body=body_md,
+                    related_papers=[arxiv_id],
+                    related_proposals=[],
+                )
+            except Exception as e:
+                _log(f"[projects] save_qa_page 失败: {e}")
+                rel_qa = None
+        else:
+            # 降级：原路径（已不推荐，但保留以防 kb_wiki 不可用）
+            disc_dir = web_base._PROJECT_ROOT / "knowledge" / "wiki" / "projects" / "deepxiv-论文库" / "讨论记录"
+            disc_dir.mkdir(parents=True, exist_ok=True)
+            legacy_file = disc_dir / f"{slug}.md"
+            legacy_content = f"""---
+title: "讨论：{title[:40]}"
+type: "papers"
+arxiv_id: "{arxiv_id}"
+created: "{now}"
+updated: "{now}"
+---
+{body_md}"""
+            legacy_file.write_text(legacy_content, encoding="utf-8")
+            rel_qa = str(legacy_file.relative_to(web_base._PROJECT_ROOT / "knowledge"))
+
+        disc_file_name = rel_qa.split('/')[-1] if rel_qa else f"{slug}.md"
 
         # 第三步：提取概念条目（生成 seedling 笔记）
         concepts_generated = 0
@@ -733,6 +753,6 @@ confidence: 0.4
             except Exception:
                 pass
 
-        self._send_json({"success": True, "file": str(disc_file.name),
+        self._send_json({"success": True, "file": disc_file_name,
                          "concepts_generated": concepts_generated,
                          "summary": summary[:200]})

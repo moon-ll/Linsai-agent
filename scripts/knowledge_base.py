@@ -201,6 +201,161 @@ def _has_tech_terms(query: str) -> bool:
     ))
 
 
+def _slugify(name: str) -> str:
+    """将任意字符串转为安全的文件名 slug。
+
+    移除特殊字符，空格替换为连字符，全部小写，长度限制 200 字符。
+    """
+    s = name.strip().lower()
+    s = re.sub(r"[^\w\s-]", "", s)
+    s = re.sub(r"[-\s]+", "-", s)
+    s = s.strip("-")
+    return s[:200]
+
+
+def _render_proposal_body(metadata: Dict[str, Any]) -> str:
+    """渲染 proposal wiki 页面的 Markdown 正文（不含 frontmatter）。
+
+    Args:
+        metadata: 包含 title / proposal_id / status / project_type /
+                  optimization_rounds / last_score / core_questions /
+                  innovations / key_files 等字段的字典。
+    """
+    title = metadata.get("title", "")
+    proposal_id = metadata.get("proposal_id", "")
+    project_type = metadata.get("project_type", "general")
+    status = metadata.get("status", "drafts")
+    rounds = metadata.get("optimization_rounds", 0)
+    last_score = metadata.get("last_score", 0.0)
+    core_questions = metadata.get("core_questions", "")
+    innovations = metadata.get("innovations", "")
+    key_files = metadata.get("key_files", [])
+
+    _status_map = {
+        "drafts": "初稿",
+        "optimizing": "优化中",
+        "pending_review": "待校验",
+        "archived": "已归档",
+    }
+    status_cn = _status_map.get(status, status)
+
+    lines = [
+        f"# {title}",
+        "",
+        f"**课题 ID**：`{proposal_id}`  ",
+        f"**项目类型**：{project_type}  ",
+        f"**生命周期状态**：{status_cn}  ",
+        f"**优化轮次**：{rounds}  ",
+        f"**当前分数**：{last_score:.2f}  ",
+        f"**同步时间**：{_now_utc()[:10]}",
+        "",
+        "## 核心问题",
+        "",
+        core_questions or "（待提取）",
+        "",
+        "## 创新点",
+        "",
+        innovations or "（待提取）",
+        "",
+        "## 关键产物",
+        "",
+    ]
+    if key_files:
+        for f in key_files:
+            lines.append(f'- [{f["label"]}]({f["path"]})')
+    else:
+        lines.append("（暂无）")
+    lines.extend([
+        "",
+        "## 状态说明",
+        "",
+        f"- 处于 **{status_cn}** 阶段",
+        f"- 最后得分：{last_score:.2f}",
+        f"- 累计对抗轮次：{rounds}",
+        "",
+        "<!-- linsai-wikilinks -->",
+        "## 关联概念",
+        "",
+        "- [[固体高次谐波]]",
+        "- [[NSFC-强场超快]]",
+        "<!-- /linsai-wikilinks -->",
+    ])
+    return "\n".join(lines)
+
+
+def save_proposal_sync(proposal_id: str,
+                       metadata: Dict[str, Any]) -> str:
+    """将 proposal 同步到知识库 wiki（门面方法）。
+
+    封装 kb_wiki.save_wiki_page() 调用，自动设置 type="proposal"、
+    project=["NSFC-强场超快"]，确保双向链接注入、图谱更新、生长日志记录。
+
+    Args:
+        proposal_id: 课题 ID
+        metadata: 元数据字典（含 title / status / project_type / …）
+
+    Returns:
+        save_wiki_page 返回的保存路径（相对 knowledge/）
+    """
+    slug = _slugify(proposal_id)
+    rel_path = f"wiki/projects/NSFC-强场超快/proposals/{slug}.md"
+    body = _render_proposal_body(metadata)
+    meta = {
+        "title": metadata.get("title", proposal_id),
+        "type": "proposal",
+        "proposal_id": proposal_id,
+        "status": metadata.get("status", "drafts"),
+        "project": ["NSFC-强场超快"],
+        "project_type": metadata.get("project_type", "general"),
+        "optimization_rounds": metadata.get("optimization_rounds", 0),
+        "last_score": metadata.get("last_score", 0.0),
+        "synced_at": _now_utc(),
+    }
+    return _kb_wiki_mod.save_wiki_page(rel_path, body, meta)
+
+
+# ktype → wiki 子目录映射
+_KIND_DIR_MAP = {
+    "concept": "concepts",
+    "method": "methods",
+    "person": "people",
+    "paper": "papers",
+}
+
+
+def save_extracted_knowledge(title: str, ktype: str,
+                             content: str,
+                             sources: List[Dict[str, str]],
+                             reliability: str = "derived") -> str:
+    """保存归档萃取知识到 KB wiki（门面方法）。
+
+    ktype 取值: "concept" / "method" / "person" / "paper"
+    reliability 取值: "reliable" / "derived" / "unverified"
+
+    Args:
+        title: 知识条目标题
+        ktype: 知识类型（concept/method/person/paper）
+        content: Markdown 正文
+        sources: 来源列表，每项含 title / source_type 等
+        reliability: 可靠性等级
+
+    Returns:
+        save_wiki_page 返回的保存路径（相对 knowledge/）
+    """
+    slug = _slugify(title)
+    subdir = _KIND_DIR_MAP.get(ktype, ktype + "s")
+    rel_path = f"wiki/{subdir}/{slug}.md"
+    meta = {
+        "title": title,
+        "type": ktype,
+        "source_reliability": reliability,
+        "sources": sources,
+        "updated_at": _now_utc(),
+        "created_at": _now_utc(),
+    }
+    return _kb_wiki_mod.save_wiki_page(rel_path, content, meta)
+
+
 def should_search_knowledge(query: str, session_mode: str = "co-working") -> bool:
     """判断当前查询是否需要检索知识库。"""
     text = query.strip()

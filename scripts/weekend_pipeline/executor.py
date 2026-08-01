@@ -54,10 +54,43 @@ def dependencies_satisfied(job: Dict[str, Any], state: Dict[str, Any]) -> bool:
     return True
 
 
+def _resolve_blocking_deps(state: Dict[str, Any], stage: Optional[str] = None) -> int:
+    """修复阻塞 pending 任务的 failed 依赖。
+
+    扫描所有 pending 任务，若其 depends_on 中的某个依赖是 failed 状态
+    且 repair_attempts < MAX_JOB_ATTEMPTS，则立即重置为 pending。
+    确保"失败不跳过，必须先重试成功"的严格顺序语义。
+
+    返回修复的依赖数量。
+    """
+    jobs = state.get("jobs", [])
+    resolved = 0
+
+    for job in jobs:
+        if job.get("status") != JOB_STATUS_PENDING:
+            continue
+        if stage and job.get("stage") != stage:
+            continue
+        for dep_id in job.get("depends_on", []):
+            dep_job = find_job(state, dep_id)
+            if dep_job and dep_job.get("status") == JOB_STATUS_FAILED:
+                repair_attempts = dep_job.get("repair_attempts", 0)
+                if repair_attempts < MAX_JOB_ATTEMPTS:
+                    reset_failed_job(dep_job)
+                    resolved += 1
+                    if _log:
+                        _log.info(
+                            f"[weekend_pipeline] 依赖链修复: {dep_id} (failed→pending, "
+                            f"repair_attempt {repair_attempts + 1}/{MAX_JOB_ATTEMPTS})"
+                        )
+    return resolved
+
+
 def pick_next_job(state: Dict[str, Any], stage: Optional[str] = None) -> Optional[Dict[str, Any]]:
     """挑选下一个可执行的 pending 任务。
 
-    先处理 stale running 任务，然后返回第一个依赖满足且 pending 的任务。
+    先处理 stale running 任务，然后修复阻塞 pending 任务的 failed 依赖，
+    最后返回第一个依赖满足且 pending 的任务。
     """
     jobs = state.get("jobs", [])
 
@@ -69,12 +102,16 @@ def pick_next_job(state: Dict[str, Any], stage: Optional[str] = None) -> Optiona
             update_job(state, job["job_id"], JOB_STATUS_FAILED, "运行超时/进程僵死")
             break
 
-    # 重载后挑选
+    # 重载后，先修复阻塞 pending 任务的 failed 依赖
     jobs = state.get("jobs", [])
     running = [j for j in jobs if j.get("status") == JOB_STATUS_RUNNING]
     if running:
         return None
 
+    _resolve_blocking_deps(state, stage)
+
+    # 挑选第一个 pending 且依赖满足的任务
+    jobs = state.get("jobs", [])
     for job in jobs:
         if job.get("status") != JOB_STATUS_PENDING:
             continue

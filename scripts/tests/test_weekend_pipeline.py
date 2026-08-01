@@ -121,6 +121,32 @@ class WeekendPipelineTests(TestSuite):
         self.assert_eq(jobs_after[0]["status"], "failed", "stale running 变成 failed")
         self.assert_eq(jobs_after[1]["status"], "pending", "failed 重置为 pending")
 
+    def _test_pick_next_job_retries_blocking_deps(self):
+        """验证 pick_next_job 自动修复阻塞 pending 的 failed 依赖。"""
+        p = self._make_pipeline()
+        p.sync_stage_jobs("input")
+        jobs = p.list_jobs(stage="input")
+
+        # 模拟：collect 已完成，summarize 失败，gap_analysis 等待 summarize
+        jobs[0]["status"] = "done"  # input_collect_sources
+        jobs[1]["status"] = "failed"  # input_summarize_new_papers
+        jobs[1]["attempts"] = 1
+        jobs[1]["repair_attempts"] = 0
+        p._save()
+
+        from weekend_pipeline.executor import pick_next_job
+        job = pick_next_job(p.state, stage="input")
+
+        # pick_next_job 应发现 summarize 是 failed 且阻塞 gap_analysis → 重置为 pending
+        self.assert_true(job is not None, "应返回一个 job")
+        self.assert_eq(job["job_id"], "input_summarize_new_papers", "应返回被修复的 failed 依赖")
+        self.assert_eq(job["status"], "pending", "被修复的 job 应为 pending")
+        self.assert_eq(job["repair_attempts"], 1, "repair_attempts 应 +1")
+
+        # 验证 gap_analysis 的依赖现在满足
+        gap = next(j for j in p.state.get("jobs", []) if j["job_id"] == "input_gap_analysis")
+        self.assert_eq(gap["status"], "pending", "gap_analysis 仍为 pending")
+
     def _test_output_stage_creates_archived_extract_jobs(self):
         p = self._make_pipeline()
         # 创建最小 archived proposal
@@ -149,4 +175,5 @@ class WeekendPipelineTests(TestSuite):
         self._test_pick_next_job_respects_deps()
         self._test_run_next_dry_run_no_writes()
         self._test_repair_stale_and_failed()
+        self._test_pick_next_job_retries_blocking_deps()
         self._test_output_stage_creates_archived_extract_jobs()

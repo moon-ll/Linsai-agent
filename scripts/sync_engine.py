@@ -38,7 +38,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List
 
-from common import now_utc as _now_utc
+from common import now_utc as _now_utc, file_lock as _file_lock
 
 from paths import PROJECT_ROOT, MEMORY_DIR
 SYNC_STATE_PATH = MEMORY_DIR / "sync-state.json"
@@ -69,12 +69,14 @@ def _load_sync_state() -> Dict[str, Any]:
 
 
 def _save_sync_state(state: Dict[str, Any]) -> None:
-    """保存同步状态。"""
+    """保存同步状态（v6.8.0+：加跨进程锁，避免 syncEngine 多实例并发写入）。"""
     state["last_sync"] = _now_utc()
     MEMORY_DIR.mkdir(parents=True, exist_ok=True)
-    SYNC_STATE_PATH.write_text(
-        json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8"
-    )
+    # v6.8.0+: 跨进程锁，防止同步引擎并发写导致丢失历史
+    with _file_lock("sync-state"):
+        SYNC_STATE_PATH.write_text(
+            json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
 
 
 def _import_kb_helper():

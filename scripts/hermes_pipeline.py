@@ -636,6 +636,19 @@ class HermesPipeline:
         profile = STAGE_PROFILE_MAP[stage]
         prompt_template = STAGE_PROMPTS.get(stage, "")
         prompt = prompt_template.format(proposal_dir=str(self.proposal_dir))
+        # 改造：stage 1（文献调研）注入已处理论文 ID，避免重复检索
+        if stage == 1:
+            try:
+                import state_sync as _ss
+                processed_ids = _ss.get_processed_ids()
+                if processed_ids:
+                    exclude_str = (
+                        f"\n\n【请跳过以下已处理论文（共 {len(processed_ids)} 篇）】\n"
+                        + "\n".join(sorted(processed_ids))
+                    )
+                    prompt += exclude_str
+            except Exception:
+                pass
         # v6.4.1 增量优化：自动追加已有产物 + 导入内容 + 上游依赖的上下文
         incremental_ctx = self._build_incremental_context(stage)
         if incremental_ctx:

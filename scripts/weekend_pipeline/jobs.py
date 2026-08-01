@@ -121,7 +121,8 @@ def output_stage_jobs(archived_proposal_ids: List[str]) -> List[Dict[str, Any]]:
 def reflection_stage_jobs() -> List[Dict[str, Any]]:
     """反思阶段任务模板。"""
     return [
-        _base_job("reflection_collect_state", STAGE_REFLECTION, STEP_COLLECT, []),
+        _base_job("reflection_health_check", STAGE_REFLECTION, STEP_HEALTH, []),
+        _base_job("reflection_collect_state", STAGE_REFLECTION, STEP_COLLECT, ["reflection_health_check"]),
         _base_job("reflection_analyze_patterns", STAGE_REFLECTION, STEP_ANALYZE, ["reflection_collect_state"]),
         _base_job("reflection_generate_report", STAGE_REFLECTION, STEP_REPORT, ["reflection_analyze_patterns"]),
         _base_job("reflection_recommend_actions", STAGE_REFLECTION, STEP_RECOMMEND, ["reflection_generate_report"]),

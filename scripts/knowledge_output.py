@@ -23,7 +23,7 @@ import json
 import re
 import sys
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 _SCRIPT_DIR = Path(__file__).parent.resolve()
 if str(_SCRIPT_DIR) not in sys.path:
@@ -31,6 +31,7 @@ if str(_SCRIPT_DIR) not in sys.path:
 
 from common import load_json, now_utc, save_json, safe_filename
 from paths import PROJECT_ROOT
+from knowledge_base import save_extracted_knowledge
 
 from llm_gateway import llm_complete, is_llm_available
 
@@ -125,44 +126,24 @@ def _build_wiki_path(kind: str, title: str) -> Path:
 
 def _write_wiki_page(kind: str, title: str, body: str, sources: List[Dict[str, Any]],
                      reliability: str = RELIABILITY_DERIVED) -> Dict[str, Any]:
-    """写入 wiki 页面，带 frontmatter 标记来源与可靠性。"""
-    _ensure_dirs()
-    path = _build_wiki_path(kind, title)
+    """写入 wiki 页面，带 frontmatter 标记来源与可靠性。
 
+    委托给 knowledge_base.save_extracted_knowledge() 门面处理，
+    自动构建 frontmatter、注入双向链接、更新图谱、记录生长日志。
+    """
+    _ensure_dirs()
+
+    # 读取现有内容，追加而非覆盖
+    path = _build_wiki_path(kind, title)
     existing = _read_text(path)
     if existing:
-        # 追加而非覆盖
         existing_fm, existing_body = _extract_frontmatter(existing)
         body = existing_body + "\n\n---\n\n" + body
         sources = existing_fm.get("sources", []) + sources
 
-    frontmatter = {
-        "title": title,
-        "type": kind,
-        "source_reliability": reliability,
-        "sources": sources,
-        "updated_at": now_utc(),
-        "created_at": existing and _extract_frontmatter(existing)[0].get("created_at", now_utc()) or now_utc(),
-    }
+    rel_path = save_extracted_knowledge(title, kind, body, sources, reliability)
 
-    fm_lines = ["---"]
-    for k, v in frontmatter.items():
-        if isinstance(v, list):
-            fm_lines.append(f"{k}:")
-            for item in v:
-                if isinstance(item, dict):
-                    fm_lines.append(f"  - title: \"{item.get('title', '')}\"")
-                    fm_lines.append(f"    source_type: {item.get('source_type', '')}")
-                else:
-                    fm_lines.append(f"  - {item}")
-        else:
-            fm_lines.append(f'{k}: "{v}"')
-    fm_lines.append("---")
-
-    content = "\n".join(fm_lines) + "\n\n" + body
-    path.write_text(content, encoding="utf-8")
-
-    return {"success": True, "path": str(path.relative_to(PROJECT_ROOT)), "reliability": reliability}
+    return {"success": True, "path": rel_path, "reliability": reliability}
 
 
 # ---------------------------------------------------------------------------

@@ -416,7 +416,7 @@ def get_candidates() -> Dict[str, Any]:
         })
 
     # 按分数降序
-    papers.sort(key=lambda x: x["score"], reverse=True)
+    papers.sort(key=lambda x: float(x["score"]), reverse=True)
 
     return {
         "available": True,

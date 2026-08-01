@@ -33,6 +33,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from paths import PROJECT_ROOT
+from kb_wiki import save_wiki_page, save_qa_page
 
 # 确保 scripts/ 目录在 sys.path（支持静态导入同目录模块）
 _SCRIPT_DIR = Path(__file__).parent.resolve()
@@ -291,31 +292,33 @@ review_status: "pending"
         if not safe_name:
             safe_name = "untitled"
         wiki_rel = f"wiki/concepts/{safe_name}.md"
-        wiki_path = PROJECT_ROOT / "knowledge" / wiki_rel
 
-        # 确保目录存在
-        wiki_path.parent.mkdir(parents=True, exist_ok=True)
+        # v6.8.0+: 走 kb_wiki.save_wiki_page() 门面（自动注入双向链接、更新图谱、写 growth-log）
+        # 解析 LLM 输出的 frontmatter 以保留其元数据
+        _raw_fm, _raw_body = kb.parse_frontmatter(research_result)
+        meta = {
+            "title": _raw_fm.get("title", safe_name) or safe_name,
+            "type": "concepts",
+            "growth_stage": _raw_fm.get("growth_stage", "growing"),
+            "confidence": _raw_fm.get("confidence", 0.7),
+            "tags": _raw_fm.get("tags", []),
+            "related": _raw_fm.get("related", []),
+            "source_raw": _raw_fm.get("source_raw", ""),
+            "auto_grown": True,
+            "review_status": "pending",
+        }
+        # 沿用 LLM 输出的正文（去除重复 frontmatter），由 save_wiki_page 重新组装
+        body_text = _raw_body if _raw_body else research_result
+        save_wiki_page(wiki_rel, body_text, meta=meta)
 
-        # 写入文件（注入双向链接）
-        wiki_path.write_text(research_result, encoding="utf-8")
-        final_text = kb._inject_wikilinks(research_result)
-        wiki_path.write_text(final_text, encoding="utf-8")
-
-        # 更新图谱
-        fm, _ = kb.parse_frontmatter(final_text)
-        title = fm.get("title", safe_name)
-        kb.update_graph_node(title, "concepts", wiki_rel, fm.get("growth_stage", "growing"))
-        for related in fm.get("related", []):
-            if related:
-                kb.add_graph_edge(title, related, "related")
-
-        # 重建索引
+        # 重建索引（与原等价）
         kb.build_index()
         kb.log_growth("create", wiki_rel, "auto_research",
                       f"自动调研主题 '{topic}' 生成")
 
+        _title = meta["title"]
         return (f"✓ 调研完成，已写入知识库: {wiki_rel}\n"
-                f"  标题: {title}\n"
+                f"  标题: {_title}\n"
                 f"  路径: knowledge/{wiki_rel}\n"
                 f"  调研结果摘要: {research_result[:300]}...")
 
@@ -424,21 +427,22 @@ review_status: "pending"
                 results.append(f"  ⚠ 提炼失败: {fpath.name}")
                 continue
 
-            # 保存 wiki
+            # 保存 wiki（v6.8.0+：走 kb_wiki.save_wiki_page() 门面）
             wiki_rel = f"wiki/{wiki_type}/{safe_name}.md"
-            wiki_path = PROJECT_ROOT / "knowledge" / wiki_rel
-            wiki_path.parent.mkdir(parents=True, exist_ok=True)
-            wiki_path.write_text(distilled, encoding="utf-8")
-            final_text = kb._inject_wikilinks(distilled)
-            wiki_path.write_text(final_text, encoding="utf-8")
-
-            # 更新图谱
-            fm, _ = kb.parse_frontmatter(final_text)
-            title = fm.get("title", safe_name)
-            kb.update_graph_node(title, wiki_type, wiki_rel, "growing")
-            for related in fm.get("related", []):
-                if related:
-                    kb.add_graph_edge(title, related, "related")
+            _raw_fm, _raw_body = kb.parse_frontmatter(distilled)
+            meta = {
+                "title": _raw_fm.get("title", title_guess) or title_guess,
+                "type": wiki_type,
+                "growth_stage": _raw_fm.get("growth_stage", "growing"),
+                "confidence": _raw_fm.get("confidence", 0.7),
+                "tags": _raw_fm.get("tags", []),
+                "related": _raw_fm.get("related", []),
+                "source_raw": _raw_fm.get("source_raw", fpath.name),
+                "auto_grown": True,
+                "review_status": "pending",
+            }
+            body_text = _raw_body if _raw_body else distilled
+            save_wiki_page(wiki_rel, body_text, meta=meta)
 
             results.append(f"  ✓ {fpath.name} → wiki/{wiki_type}/{safe_name}.md")
 

@@ -193,6 +193,73 @@ def save_wiki_page(rel_path: str, content: str, meta: Optional[Dict[str, Any]] =
     return str(rel_path)
 
 
+def save_qa_page(slug: str, title: str, qa_type: str, body: str,
+                 related_papers: Optional[List[str]] = None,
+                 related_proposals: Optional[List[str]] = None) -> str:
+    """保存讨论记录到 qa/ 层。
+
+    Args:
+        slug: 唯一标识（用于文件名）
+        title: 页面标题
+        qa_type: "paper-discussion" / "proposal-discussion" / "project-discussion"
+        body: Markdown 正文内容
+        related_papers: 关联论文 arxiv_id 列表
+        related_proposals: 关联 proposal_id 列表
+
+    Returns:
+        保存的文件路径（相对 knowledge/）
+    """
+    from paths import QA_DIR
+    # qa_type 到目录名的映射（paper-discussion → paper-discussions）
+    type_to_dir = {
+        "paper-discussion": "paper-discussions",
+        "proposal-discussion": "proposal-discussions",
+        "project-discussion": "project-discussions",
+    }
+    subdir_name = type_to_dir.get(qa_type, f"{qa_type}s")
+    qa_subdir = QA_DIR / subdir_name
+    qa_subdir.mkdir(parents=True, exist_ok=True)
+
+    filename = f"{slug}.md"
+    path = qa_subdir / filename
+
+    # 构建包含双向链接的正文
+    body_with_links = body.strip()
+    if related_papers:
+        for aid in related_papers:
+            body_with_links += f"\n\n[[{aid}]]"
+    if related_proposals:
+        for pid in related_proposals:
+            body_with_links += f"\n\n[[{pid}]]"
+
+    # 构建 frontmatter
+    meta: Dict[str, Any] = {
+        "title": title,
+        "type": qa_type,
+        "slug": slug,
+        "created": _now_utc(),
+        "updated": _now_utc(),
+        "related_papers": related_papers or [],
+        "related_proposals": related_proposals or [],
+        "tags": [qa_type],
+    }
+    page_text = build_wiki_page(title, qa_type, body_with_links, meta)
+    path.write_text(page_text, encoding="utf-8")
+
+    # 更新 graph.json 中的关联边
+    rel_path = str(path.relative_to(KNOWLEDGE_DIR))
+    update_graph_node(title, qa_type, rel_path, "mature")
+    for aid in (related_papers or []):
+        if aid:
+            add_graph_edge(title, aid, "references")
+    for pid in (related_proposals or []):
+        if pid:
+            add_graph_edge(title, pid, "references")
+
+    print(f"✓ QA 讨论已保存: qa/{subdir_name}/{filename}")
+    return rel_path
+
+
 def delete_wiki_page(rel_path: str) -> bool:
     """删除 wiki 页面，同时清理图谱中的关联。"""
     path = KNOWLEDGE_DIR / rel_path

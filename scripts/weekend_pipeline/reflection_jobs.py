@@ -38,6 +38,70 @@ def _reflection_report_path() -> Any:
     return WEEKEND_REFLECTION_DIR / f"weekend-reflection-{_date_str()}.json"
 
 
+def _health_report_path() -> Any:
+    return WEEKEND_REFLECTION_DIR / f"reflection-health-{_date_str()}.json"
+
+
+# ---------------------------------------------------------------------------
+# 健康检查
+# ---------------------------------------------------------------------------
+
+
+def run_reflection_health_check(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
+    """反思阶段健康检查：检查系统整体状态、告警、失败模式。"""
+    _ensure_reflection_dir()
+
+    try:
+        from orchestrator import compute_dashboard
+    except Exception as e:
+        return {"success": False, "error": f"无法导入 orchestrator: {e}"}
+
+    try:
+        dashboard = compute_dashboard()
+    except Exception as e:
+        return {"success": False, "error": f"compute_dashboard 失败: {e}"}
+
+    alerts = dashboard.get("alerts", []) if isinstance(dashboard, dict) else []
+    error_alerts = [a for a in alerts if isinstance(a, dict) and a.get("level") == "error"]
+    warning_alerts = [a for a in alerts if isinstance(a, dict) and a.get("level") == "warning"]
+
+    # 检查 proposal 状态
+    lc = ProposalLifecycle()
+    try:
+        optimizing = lc.list_by_status("optimizing")
+        pending_review = lc.list_by_status("pending_review")
+        archived = lc.list_by_status("archived")
+    except Exception:
+        optimizing = []
+        pending_review = []
+        archived = []
+
+    # 检查 pipeline 中是否有 failed job
+    pipeline_jobs = state.get("jobs", [])
+    failed_jobs = [j for j in pipeline_jobs if j.get("status") == "failed"]
+
+    health = {
+        "checked_at": now_utc(),
+        "status": "healthy" if not error_alerts else "degraded",
+        "alerts": {
+            "error": len(error_alerts),
+            "warning": len(warning_alerts),
+        },
+        "proposals": {
+            "optimizing": len(optimizing),
+            "pending_review": len(pending_review),
+            "archived": len(archived),
+        },
+        "pipeline_failed_jobs": len(failed_jobs),
+        "dashboard": dashboard,
+    }
+
+    if not dry_run:
+        save_json(_health_report_path(), health)
+
+    return {"success": True, "health": health, "dry_run": dry_run}
+
+
 # ---------------------------------------------------------------------------
 # 数据收集
 # ---------------------------------------------------------------------------

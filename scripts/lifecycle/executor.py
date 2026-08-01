@@ -290,7 +290,10 @@ def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[
 
 
 def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
-    """v6.7.12: 针对文献缺口的检索。"""
+    """v6.7.12: 针对文献缺口的检索。
+
+    改造：通过 LiteratureService.search() 统一检索。
+    """
     prop_dir = self._find_proposal_dir(proposal_id)
     if not prop_dir:
         return {"success": False, "error": "proposal 目录不存在"}
@@ -307,14 +310,50 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
         return {"success": False, "error": "未找到 gap analysis 文件"}
     gap_path = gap_files[0]
 
-    result_path = self._run_literature_searcher(
-        proposal_id, prop_dir, gap_path, focus_section, timeout=300
-    )
-    return {"success": bool(result_path), "result_path": str(result_path) if result_path else ""}
+    # 改造：通过 LiteratureService 检索
+    import json
+    from literature_service import LiteratureService
+    svc = LiteratureService()
+
+    # 解析 gap 关键词
+    gap_data = json.loads(gap_path.read_text(encoding="utf-8"))
+    gaps = gap_data.get("gaps", [])
+    all_keywords = []
+    for g in gaps:
+        all_keywords.extend(g.get("search_keywords", []))
+    gap_keywords = list(dict.fromkeys(all_keywords))[:10]
+
+    # 执行检索
+    papers = svc.search(keywords=gap_keywords, source="pipeline", proposal_id=proposal_id)
+
+    # 写入 lit-gap-*.md 文件
+    target_dir = prop_dir / "02_literature" / "targeted-research"
+    target_dir.mkdir(parents=True, exist_ok=True)
+    import time as _t
+    result_path = target_dir / f"lit-gap-{int(_t.time())}.md"
+
+    lines = [f"# 定向文献检索报告\n", f"## 课题\n{proposal_id}\n"]
+    lines.append(f"## 检索关键词\n- {'、'.join(gap_keywords)}\n")
+    lines.append(f"## 检索结果\n")
+    for p in papers:
+        arxiv_id = p.get("arxiv_id", "")
+        title = p.get("title", "")
+        authors = p.get("authors", "")
+        year = p.get("year", "")
+        score = p.get("score", 0.5)
+        tldr = p.get("tldr", "")
+        source_tag = "本地知识库" if not p.get("is_new", True) else "联网检索"
+        lines.append(f"- {arxiv_id} | {title} | {authors} | {year} | {score} | {tldr} | 来源：{source_tag}")
+
+    result_path.write_text("\n".join(lines), encoding="utf-8")
+    return {"success": bool(papers), "result_path": str(result_path)}
 
 
 def _run_lit_read_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
-    """v6.7.12: 文献深度阅读。"""
+    """v6.7.12: 文献深度阅读。
+
+    改造：通过 LiteratureService.read() 统一深度阅读。
+    """
     prop_dir = self._find_proposal_dir(proposal_id)
     if not prop_dir:
         return {"success": False, "error": "proposal 目录不存在"}
@@ -326,27 +365,33 @@ def _run_lit_read_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str,
         return {"success": False, "error": "未找到文献检索报告"}
     lit_path = lit_files[0]
 
-    # 生成阅读笔记草稿
+    # 改造：通过 LiteratureService.read() 深度阅读每篇论文
+    import re
+    from literature_service import LiteratureService
+    svc = LiteratureService()
+
+    text = lit_path.read_text(encoding="utf-8")
+    arxiv_ids = re.findall(r"(\d{4}\.\d{4,5})", text)
+
+    notes = []
+    for aid in arxiv_ids:
+        result = svc.read(aid, proposal_id=proposal_id)
+        if result.get("content"):
+            notes.append(f"## {aid}\n\n{result['content']}\n")
+
     notes_path = prop_dir / "02_literature" / "reading-notes.md"
     notes_path.parent.mkdir(parents=True, exist_ok=True)
+    if notes:
+        notes_path.write_text("\n\n".join(notes), encoding="utf-8")
 
-    prompt = (
-        f"请阅读以下定向文献检索报告，并整理为结构化的文献阅读笔记。\n\n"
-        f"【检索报告】{lit_path}\n"
-        f"【输出笔记】{notes_path}\n\n"
-        f"要求：\n"
-        f"1. 读取 {lit_path} 中推荐的每篇文献\n"
-        f"2. 对每篇文献总结：标题、作者、年份、来源、核心结论、与课题的关联\n"
-        f"3. 如果推荐文献在本地知识库或 paper-pool 中有更详细信息，可补充\n"
-        f"4. 将阅读笔记追加写入 {notes_path}，按时间倒序\n"
-        f"5. 如果检索报告为空或没有可阅读文献，直接返回 success 但不追加内容\n"
-    )
-    result = self._run_hermes("researcher", prompt, timeout=300)
-    return {"success": result.get("success", False), "notes_path": str(notes_path)}
+    return {"success": True, "notes_path": str(notes_path), "read_count": len(notes)}
 
 
 def _run_lit_note_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
-    """v6.7.12: 将阅读笔记整理并导入课题文献库。"""
+    """v6.7.12: 将阅读笔记整理并导入课题文献库。
+
+    改造：通过 LiteratureService.link_to_proposal() 统一关联。
+    """
     prop_dir = self._find_proposal_dir(proposal_id)
     if not prop_dir:
         return {"success": False, "error": "proposal 目录不存在"}
@@ -355,15 +400,24 @@ def _run_lit_note_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str,
     lit_files = sorted(targeted_dir.glob("lit-gap-*.md"), reverse=True)
     if lit_files:
         try:
-            from literature_notes import LiteratureNotes
-            ln = LiteratureNotes(prop_dir)
-            imported = ln.import_from_report(lit_files[0])
+            import re
+            from literature_service import LiteratureService
+            svc = LiteratureService()
+
+            text = lit_files[0].read_text(encoding="utf-8")
+            arxiv_ids = re.findall(r"(\d{4}\.\d{4,5})", text)
+
+            imported = 0
+            for aid in arxiv_ids:
+                if svc.link_to_proposal(aid, proposal_id, citation_location="adversarial-review"):
+                    imported += 1
+
             if _log and imported:
-                _log.info(f"[{proposal_id}] 已导入 {imported} 条文献阅读笔记")
+                _log.info(f"[{proposal_id}] 已关联 {imported} 篇论文到课题")
             return {"success": True, "imported": imported}
         except Exception as e:
             if _log:
-                _log.warning(f"[{proposal_id}] 导入文献阅读笔记失败: {e}")
+                _log.warning(f"[{proposal_id}] 关联论文到课题失败: {e}")
             return {"success": False, "error": str(e)}
     return {"success": True, "reason": "无检索报告可导入"}
 
