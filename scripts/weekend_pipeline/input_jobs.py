@@ -145,7 +145,9 @@ def run_input_gap_analysis(state: Dict[str, Any], job: Dict[str, Any], dry_run: 
 输出 JSON 数组：
 [{{"title": "...", "gap": "...", "keywords": ["..."], "related_sources": ["..."]}}]
 """
-    directions = _llm_json(system, user, timeout=120) or []
+    directions = _llm_json(system, user, timeout=120)
+    if directions is None:
+        return {"success": False, "error": "LLM 不可用或调用失败"}
 
     _ensure_input_dir()
     if not dry_run:
@@ -160,7 +162,7 @@ def run_input_direction_select(state: Dict[str, Any], job: Dict[str, Any], dry_r
     directions = load_json(directions_path, default={}).get("directions", [])
 
     if dry_run:
-        return {"success": True, "decisions_count": 0, "dry_run": True, "message": "dry-run 跳过方向选择"}
+        return {"success": True, "decisions_count": len(directions), "dry_run": True, "message": "dry-run 跳过方向选择"}
 
     # 读取 KB 中的 proposal 页面
     proposals_kb_dir = PROJECT_ROOT / "knowledge" / "wiki" / "projects" / "NSFC-强场超快" / "proposals"

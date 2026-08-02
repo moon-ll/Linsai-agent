@@ -157,6 +157,9 @@ def extract_from_archived_proposal(proposal_id: str, prop_dir: Path, dry_run: bo
     if not proposal_text:
         return {"success": False, "error": "申请书为空"}
 
+    if dry_run:
+        return {"success": True, "dry_run": True, "message": "dry-run 跳过归档知识萃取"}
+
     if not is_llm_available():
         _log_warn("LLM 不可用，跳过归档知识萃取")
         return {"success": False, "error": "LLM 不可用"}
@@ -196,9 +199,6 @@ def extract_from_archived_proposal(proposal_id: str, prop_dir: Path, dry_run: bo
         extracted = json.loads(json_str)
     except Exception as e:
         return {"success": False, "error": f"解析失败: {e}", "raw": text[:500]}
-
-    if dry_run:
-        return {"success": True, "extracted": extracted, "dry_run": True}
 
     results = {"concepts": [], "methods": [], "people": [], "papers": []}
     source_meta = {"title": proposal_id, "source_type": "archived_proposal"}
@@ -285,6 +285,9 @@ def process_daily_sources(dry_run: bool = False, days: int = 7) -> Dict[str, Any
     if not sources:
         return {"success": True, "processed": 0, "message": "无日常来源"}
 
+    if dry_run:
+        return {"success": True, "dry_run": True, "message": "dry-run 跳过日常知识萃取"}
+
     if not is_llm_available():
         _log_warn("LLM 不可用，跳过日常知识萃取")
         return {"success": False, "error": "LLM 不可用"}
@@ -331,9 +334,6 @@ def process_daily_sources(dry_run: bool = False, days: int = 7) -> Dict[str, Any
         extracted = json.loads(json_str)
     except Exception as e:
         return {"success": False, "error": f"解析失败: {e}", "raw": text[:500]}
-
-    if dry_run:
-        return {"success": True, "extracted": extracted, "dry_run": True}
 
     results = {"concepts": [], "methods": [], "people": [], "papers": []}
 

@@ -493,7 +493,13 @@ def _sync_lifecycle_to_task_manager(self) -> Dict[str, Any]:
         for status_name in ("optimizing", "pending_review", "archived"):
             try:
                 proposals = self.list_by_status(status_name)
-            except Exception:
+            except Exception as e:
+                if _log:
+                    _log.warning(f"[task-sync] 获取 {status_name} 列表失败: {e}")
+                continue
+            if not proposals:
+                if _log:
+                    _log.info(f"[task-sync] {status_name} 区为空，跳过")
                 continue
             for prop in proposals:
                 pid = prop["proposal_id"]
@@ -501,6 +507,8 @@ def _sync_lifecycle_to_task_manager(self) -> Dict[str, Any]:
                 if result:
                     synced_all.append(result)
 
+        if _log:
+            _log.info(f"[task-sync] 完成: 同步 {len(synced_all)} 个 proposal")
         return {"synced": len(synced_all), "details": synced_all}
     except Exception as e:
         if _log:
@@ -633,7 +641,13 @@ def _sync_previous_rounds_to_task_manager(self) -> Dict[str, Any]:
     for status_name in ("optimizing", "pending_review", "archived"):
         try:
             proposals = self.list_by_status(status_name)
-        except Exception:
+        except Exception as e:
+            if _log:
+                _log.warning(f"[task-sync-history] 获取 {status_name} 列表失败: {e}")
+            continue
+        if not proposals:
+            if _log:
+                _log.info(f"[task-sync-history] {status_name} 区为空，跳过")
             continue
         for prop in proposals:
             pid = prop["proposal_id"]
@@ -1036,7 +1050,7 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
         msg = "当前不在工作时段内，跳过"
         if _log:
             _log.info(msg)
-        return {"success": True, "executed_count": 0, "executed": [], "reason": msg}
+        return {"success": True, "executed_count": 0, "executed": [], "reason": msg, "skip_reason": "out_of_slot"}
 
     slot_index, (slot_start, slot_end) = slot_info
     if _log:
@@ -1045,7 +1059,9 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
     # 2. 获取 optimizing proposal 列表
     try:
         optimizing = self.list_by_status("optimizing")
-    except Exception:
+    except Exception as e:
+        if _log:
+            _log.warning(f"[micro-scheduler] 获取 optimizing 列表失败: {e}")
         optimizing = []
 
     if not optimizing:
@@ -1053,7 +1069,7 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
         _update_kanban(slot_info, None, [], [], self)
         if _log:
             _log.info(msg)
-        return {"success": True, "executed_count": 0, "executed": [], "reason": msg}
+        return {"success": True, "executed_count": 0, "executed": [], "reason": msg, "skip_reason": "no_optimizing"}
 
     # 3. 选择聚焦 proposal
     focus_pid = self._focus_proposal_for_slot(slot_index, optimizing)
@@ -1062,7 +1078,7 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
         _update_kanban(slot_info, None, optimizing, [], self)
         if _log:
             _log.info(msg)
-        return {"success": True, "executed_count": 0, "executed": [], "reason": msg}
+        return {"success": True, "executed_count": 0, "executed": [], "reason": msg, "skip_reason": "no_focus"}
 
     if _log:
         _log.info(f"聚焦 proposal: {focus_pid}")
@@ -1104,8 +1120,8 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
             _save_focus_state(state)
         _update_kanban(slot_info, focus_pid, optimizing, [], self)
         return {"success": True, "executed_count": 0, "executed": [], "reason": msg,
-                "generated_reports": generated_reports,
-                "transitioned": transition_result is not None}
+                "skip_reason": "round_complete", "transitioned": transition_result is not None,
+                "generated_reports": generated_reports}
 
     # 5. 只执行聚焦 proposal 的 pending job
     with file_lock("lifecycle-micro-scheduler"):

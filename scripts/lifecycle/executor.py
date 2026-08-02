@@ -664,7 +664,9 @@ def _run_lit_note_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str,
             if _log:
                 _log.warning(f"[{proposal_id}] 关联论文到课题失败: {e}")
             return {"success": False, "error": str(e)}
-    return {"success": True, "reason": "无检索报告可导入"}
+    if _log:
+        _log.warning(f"[{proposal_id}] lit_note 跳过: 无检索报告可导入")
+    return {"success": True, "imported": 0, "reason": "无检索报告可导入", "skipped": True}
 
 
 def _run_researcher_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
