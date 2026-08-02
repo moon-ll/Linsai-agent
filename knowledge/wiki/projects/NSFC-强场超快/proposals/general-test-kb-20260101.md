@@ -2,7 +2,7 @@
 title: "测试课题"
 type: "proposal"
 created: "2026-07-31T16:43:09Z"
-updated: "2026-08-01T17:21:37Z"
+updated: "2026-08-01T17:26:27Z"
 tags: []
 related: []
 source_raw: ""
@@ -14,7 +14,7 @@ project: ["NSFC-强场超快"]
 project_type: "general"
 optimization_rounds: 1
 last_score: 0.65
-synced_at: "2026-08-01T17:21:37Z"
+synced_at: "2026-08-01T17:26:27Z"
 ---
 
 # 测试课题
