@@ -169,6 +169,27 @@ class WeekendPipelineTests(TestSuite):
         self.assert_in("output_sync_proposals_to_kb", job_ids, "output 包含 sync job")
         self.assert_in("output_extract_archived_proposal_general-test-archived-20260101", job_ids, "output 包含 archived extract job")
 
+    def _test_verify_artifacts_resets_missing_output(self):
+        """验证 output 阶段产物缺失时自动重置 job 为 pending。"""
+        p = self._make_pipeline()
+        p.sync_stage_jobs("output")
+
+        # 模拟 dry-run 残留：所有 output job 标记 done，但无产物文件
+        for job in p.list_jobs(stage="output"):
+            job["status"] = "done"
+            job["result"] = {"dry_run": True, "success": True}
+        p._save()
+
+        # 再次 sync — 应触发产物检测，重置为 pending
+        p.sync_stage_jobs("output")
+        jobs_after = p.list_jobs(stage="output")
+        done_count = sum(1 for j in jobs_after if j.get("status") == "done")
+        pending_count = sum(1 for j in jobs_after if j.get("status") == "pending")
+
+        self.assert_true(pending_count > 0, f"应有 job 被重置为 pending（当前 {pending_count} 个）")
+        # 有 artifact_map 条目的 job 及其下游应全部重置
+        self.assert_eq(done_count, 0, f"所有 output job 都应重置为 pending（当前 {done_count} 个 done）")
+
     def run_tests(self):
         self._test_sync_stage_jobs_idempotent()
         self._test_dependency_order()
@@ -177,3 +198,4 @@ class WeekendPipelineTests(TestSuite):
         self._test_repair_stale_and_failed()
         self._test_pick_next_job_retries_blocking_deps()
         self._test_output_stage_creates_archived_extract_jobs()
+        self._test_verify_artifacts_resets_missing_output()

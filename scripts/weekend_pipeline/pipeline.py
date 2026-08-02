@@ -8,17 +8,20 @@ from typing import Any, Callable, Dict, List, Optional
 from datetime import datetime, timezone
 
 from common import file_lock, now_utc, save_json
+from paths import PROJECT_ROOT
 from proposal_lifecycle import ProposalLifecycle
 
 from .constants import (
     JOB_STATUS_DONE,
     JOB_STATUS_PENDING,
     JOB_STATUS_RUNNING,
+    NSFC_PROPOSALS_KB_DIR,
     PIPELINE_STATE_PATH,
     STAGE_INPUT,
     STAGE_OUTPUT,
     STAGE_REFLECTION,
     STAGES,
+    WEEKEND_OUTPUT_DIR,
 )
 from .executor import execute_job, pick_next_job, repair_stale_and_failed, run_pending_jobs
 from .jobs import stage_job_templates
@@ -130,11 +133,111 @@ class WeekendPipeline:
 
         return reset_count
 
+    def _build_reverse_deps(self) -> Dict[str, List[str]]:
+        """构建反向依赖图：job_id → 依赖它的下游 job_id 列表。"""
+        reverse: Dict[str, List[str]] = {}
+        for j in self.state.get("jobs", []):
+            for dep in j.get("depends_on", []):
+                reverse.setdefault(dep, []).append(j["job_id"])
+        return reverse
+
+    def _verify_artifacts(self, stage: str) -> int:
+        """检查已完成 job 的产物是否实际存在，不存在则重置为 pending。
+
+        对 output 阶段，每个 job 产生确定路径的文件。如果状态标记为 done
+        但文件不存在（如先前 dry-run 留下的假完成），则重置该 job 及其
+        下游依赖，确保下一轮执行时重新生成。
+
+        Returns: 重置的 job 数量
+        """
+        if stage != STAGE_OUTPUT:
+            return 0
+
+        today = now_utc()[:10]
+        health_cache = PROJECT_ROOT / "knowledge" / ".cache" / "kb-health-weekly.json"
+
+        # job_id → (产物路径, 描述)
+        artifact_map: Dict[str, tuple] = {
+            "output_sync_proposals_to_kb": (
+                NSFC_PROPOSALS_KB_DIR / "proposals-index.md",
+                "proposals-index.md",
+            ),
+            "output_collect_daily_sources": (
+                WEEKEND_OUTPUT_DIR / f"daily-sources-{today}.json",
+                f"daily-sources-{today}.json",
+            ),
+            "output_kb_health_check": (
+                health_cache,
+                "kb-health-weekly.json",
+            ),
+            "output_generate_weekly_report": (
+                WEEKEND_OUTPUT_DIR / f"weekend-output-report-{today}.md",
+                f"weekend-output-report-{today}.md",
+            ),
+        }
+
+        # 收集需要重置的 job_id（含级联下游）
+        to_reset: set = set()
+        for job in self.state.get("jobs", []):
+            if job.get("stage") != STAGE_OUTPUT:
+                continue
+            if job.get("status") != JOB_STATUS_DONE:
+                continue
+            jid = job.get("job_id", "")
+            entry = artifact_map.get(jid)
+            if not entry:
+                continue
+            artifact_path, desc = entry
+            if not artifact_path.exists():
+                to_reset.add(jid)
+                if _log:
+                    _log.warning(
+                        f"[weekend-pipeline] 产物缺失: {jid} ({desc})，重置为 pending"
+                    )
+
+        # 级联重置：下游依赖也需重置，避免用旧数据生成
+        if to_reset:
+            reverse = self._build_reverse_deps()
+            cascade = list(to_reset)
+            for jid in cascade:
+                for downstream in reverse.get(jid, []):
+                    downstream_job = find_job(self.state, downstream)
+                    if downstream_job and downstream_job.get("status") == JOB_STATUS_DONE:
+                        to_reset.add(downstream)
+                        cascade.append(downstream)
+                        if _log:
+                            _log.info(
+                                f"[weekend-pipeline] 级联重置: {downstream} (依赖 {jid})"
+                            )
+
+        # 执行重置
+        reset_count = 0
+        for jid in to_reset:
+            job = find_job(self.state, jid)
+            if not job:
+                continue
+            job["status"] = JOB_STATUS_PENDING
+            job["started_at"] = ""
+            job["finished_at"] = ""
+            job["last_error"] = ""
+            job["attempts"] = 0
+            if "result" in job:
+                del job["result"]
+            reset_count += 1
+
+        if reset_count > 0:
+            self._save()
+
+        return reset_count
+
     def sync_stage_jobs(self, stage: str) -> Dict[str, Any]:
         """幂等地为指定阶段创建任务。
 
         自动检测跨周：若上次 pipeline 更新距今超过 6 天，
         先将该阶段所有 job 重置为 pending 再创建新任务。
+
+        检测 output 阶段产物缺失：若 job 标记为 done 但产物文件
+        不存在（如 dry-run 残留），级联重置为 pending 确保重跑。
         """
         if stage not in STAGES:
             raise ValueError(f"未知阶段: {stage}")
@@ -157,6 +260,10 @@ class WeekendPipeline:
             if t["job_id"] not in existing_ids:
                 self.state.setdefault("jobs", []).append(t)
                 added.append(t["job_id"])
+
+        # 产物检测：output 阶段特有的自愈逻辑
+        if stage == STAGE_OUTPUT:
+            self._verify_artifacts(stage)
 
         set_stage_status(self.state, stage, JOB_STATUS_PENDING)
         self._save()
