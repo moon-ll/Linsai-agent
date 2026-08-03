@@ -112,6 +112,10 @@ def main(argv: Optional[List[str]] = None) -> int:
                         help="同步当前生命周期状态到任务系统")
     parser.add_argument("--sync-lifecycle-history", action="store_true",
                         help="同步历史优化轮次到任务系统")
+    parser.add_argument("--setup-monitor", action="store_true",
+                        help="安装每小时监控 cron（看板更新+异常飞书通知）")
+    parser.add_argument("--teardown-monitor", action="store_true",
+                        help="卸载每小时监控 cron")
     args = parser.parse_args(argv)
 
     lc = ProposalLifecycle()
@@ -121,7 +125,8 @@ def main(argv: Optional[List[str]] = None) -> int:
             args.setup_weekend, args.teardown_weekend,
             args.micro_scheduler, args.setup_micro_scheduler, args.remove_micro_scheduler,
             args.kanban, args.reset_stuck,
-            args.sync_lifecycle_tasks, args.sync_lifecycle_history]):
+            args.sync_lifecycle_tasks, args.sync_lifecycle_history,
+            args.setup_monitor, args.teardown_monitor]):
         # 延迟导入避免循环依赖
         from lifecycle_cron_framework import LifecycleCronController
         ctrl = LifecycleCronController()
@@ -300,6 +305,44 @@ def main(argv: Optional[List[str]] = None) -> int:
                     print(f"强制重置 {pid} 的 {forced} 个 failed job 为 pending（重置重试计数）")
                 else:
                     print(f"{pid} 无 failed job 需要重置")
+            return 0
+
+        if args.setup_monitor:
+            import hermes_bridge as hb
+            from lifecycle.constants import HERMES_PROFILE
+            from paths import PROJECT_ROOT
+            from lifecycle.utils import _write_wrapper_script, _ensure_hermes_scripts_dir
+
+            _ensure_hermes_scripts_dir()
+            project = str(PROJECT_ROOT)
+            monitor_script = """#!/bin/bash
+set -e
+cd {project}
+python3 scripts/lifecycle_monitor.py
+""".format(project=project)
+            _write_wrapper_script("lc_monitor.sh", monitor_script)
+
+            res = hb.cron_create_no_agent(
+                script_name="lc_monitor.sh",
+                name="lc-hourly-monitor",
+                schedule="0 * * * *",
+                workdir=str(PROJECT_ROOT),
+                profile=HERMES_PROFILE,
+            )
+            print("=== 每小时监控 cron 安装结果 ===")
+            print(f"schedule: 0 * * * *（每小时整点）")
+            print(f"message: {res.get('message', res.get('error', '?'))}")
+            return 0 if res.get("success") else 1
+
+        if args.teardown_monitor:
+            import hermes_bridge as hb
+            from lifecycle.constants import HERMES_PROFILE
+            removed = []
+            for cron in hb.cron_list_profile(HERMES_PROFILE):
+                if cron.get("name") == "lc-hourly-monitor":
+                    hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)
+                    removed.append(cron.get("name"))
+            print(f"=== 已卸载监控 cron: {removed} ===")
             return 0
 
     # 原有命令继续走 ProposalLifecycle
