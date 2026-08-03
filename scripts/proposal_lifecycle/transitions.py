@@ -64,6 +64,13 @@ class TransitionsMixin:
         prop_state["transition_history"].append({
             "from": from_stage, "to": to_stage, "at": now_utc(), "reason": reason
         })
+
+        # 审核退回：pending_review → optimizing 时归零优化轮次
+        if from_stage == "pending_review" and to_stage == "optimizing":
+            prop_state["optimization_rounds"] = 0
+            if _log:
+                _log.info(f"[{proposal_id}] 审核退回，归零 optimization_rounds")
+
         self._set_proposal_state(proposal_id, prop_state)
 
         if _log:
