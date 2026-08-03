@@ -437,6 +437,9 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
             from literature_service import LiteratureService
             svc = LiteratureService()
             papers = svc._parse_researcher_output(output)
+            # 联网检索的论文标记为 is_new=True
+            for p in papers:
+                p["is_new"] = True
             if _log:
                 _log.info(
                     f"[{proposal_id}] lit_search agent loop 成功，"
@@ -489,7 +492,20 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
 
     result_path.write_text("\n".join(lines), encoding="utf-8")
 
-    # 步骤3：回写 researcher profile 记忆
+    # 步骤3：新论文入库到 knowledge/raw/papers/
+    new_papers = [p for p in papers if p.get("is_new", False)]
+    if new_papers:
+        try:
+            from literature_service import LiteratureService
+            svc = LiteratureService()
+            svc._ingest_new_papers(new_papers, source="pipeline", proposal_id=proposal_id)
+            if _log:
+                _log.info(f"[{proposal_id}] lit_search 新入库 {len(new_papers)} 篇论文到知识库")
+        except Exception as e:
+            if _log:
+                _log.warning(f"[{proposal_id}] lit_search 新论文入库失败: {e}")
+
+    # 步骤4：回写 researcher profile 记忆
     method_tag = "agent_loop" if agent_success else "direct_fallback"
     paper_count = len(papers)
     paper_ids = [p.get("arxiv_id", "") for p in papers[:5] if p.get("arxiv_id")]
