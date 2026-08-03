@@ -1,5 +1,30 @@
 # 变更记录
 
+## v6.8.2 - 2026-08-03 根因防御: 健康检查新增 cron 检测 + 升级流程自动安装 cron
+
+### 改动内容
+
+#### 根因分析
+- cron 未安装的根因是升级流程(upgrade.py)未包含 cron 安装步骤，且每日健康检查
+  (daily_health_check.py) 也未检测 cron 是否存在，导致用户升级后不知需手动执行
+  `--setup-cron-v2`。
+
+#### 修复措施
+- **`scripts/daily_health_check.py`**: 新增第 7 段"生命周期 cron"检测，检查
+  lc-micro-scheduler 和 lc-weekend-* 是否已通过 hermes_bridge 注册（读取 profile
+  cron jobs.json 而非系统 crontab）。缺失时在建议动作中提示修复命令。
+- **`scripts/upgrade.py`**: 新增步骤 5，升级完成后自动通过 `_ensure_cron_installed()`
+  检查生命周期 cron 是否注册，缺失则调用 `setup_cron_framework()` 自动安装。失败时
+  提示人工运行 `python3 scripts/proposal_lifecycle.py --setup-cron-v2`。
+
+#### 两项遗留处理
+- 执行 `kb_maintenance.py --weekly`，知识库综合分 0.651 → 0.673
+- 确认 5 个生命周期 cron 已通过 hermes_bridge 注册（lc-micro-scheduler + 4 个 weekend crons）
+
+### 验证结果
+- 194 模块测试 / 248 Web-CI 测试全部通过
+- `daily_health_check.py --dry-run` 显示 cron✓ 检测正常
+
 ## v6.8.2 - 2026-08-02 Researcher Profile 混合调用与记忆回写 + 健康检查修复
 
 ### 改动内容
