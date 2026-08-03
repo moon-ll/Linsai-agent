@@ -181,7 +181,7 @@ class LiteratureService:
             all_exclude = processed_ids | local_ids
             exclude_prompt = (
                 f"\n\n【请跳过以下已处理论文（共 {len(all_exclude)} 篇）】\n"
-                + "\n".join(sorted(all_exclude))
+                + "\n".join(sorted(str(x) for x in all_exclude))
             )
 
         # 4. 委托 hermes 联网检索
@@ -520,6 +520,12 @@ class LiteratureService:
         """
         papers: Dict[str, Dict[str, Any]] = {}
 
+        def _coerce_arxiv_id(val: Any) -> str:
+            """确保 arxiv_id 始终为字符串（YAML 无引号数字会被解析为 float）。"""
+            if not val:
+                return ""
+            return str(val)
+
         # 源 1: CoPilot 原生 raw/papers/
         if RAW_PAPERS_DIR.exists():
             for f in RAW_PAPERS_DIR.glob("*.md"):
@@ -527,7 +533,7 @@ class LiteratureService:
                     from kb_text import parse_frontmatter
                     text = f.read_text(encoding="utf-8")
                     fm, _ = parse_frontmatter(text)
-                    arxiv_id = fm.get("arxiv_id", "") or self._extract_arxiv_from_filename(f.name)
+                    arxiv_id = _coerce_arxiv_id(fm.get("arxiv_id", "")) or self._extract_arxiv_from_filename(f.name)
                     if arxiv_id:
                         papers[arxiv_id] = {
                             "title": fm.get("title", ""),
@@ -547,7 +553,7 @@ class LiteratureService:
                     from kb_text import parse_frontmatter
                     text = f.read_text(encoding="utf-8")
                     fm, _ = parse_frontmatter(text)
-                    arxiv_id = fm.get("arxiv_id", "") or self._extract_arxiv_from_filename(f.name)
+                    arxiv_id = _coerce_arxiv_id(fm.get("arxiv_id", "")) or self._extract_arxiv_from_filename(f.name)
                     if arxiv_id and arxiv_id not in papers:
                         papers[arxiv_id] = {
                             "title": fm.get("title", ""),
