@@ -1,0 +1,149 @@
+{
+  "environment": {
+    "status": "✓",
+    "python": "3.10.20",
+    "disk_free_gb": 308.0,
+    "missing_dirs": []
+  },
+  "credentials": {
+    "status": "✓",
+    "providers": {
+      "MINIMAX_API_KEY": {
+        "present": true,
+        "masked": "sk-c...mGDU"
+      },
+      "GLM_API_KEY": {
+        "present": true,
+        "masked": "1883...H7Qm"
+      }
+    }
+  },
+  "lifecycle": {
+    "status": "✓",
+    "state_counts": {
+      "drafts": 0,
+      "optimizing": 5,
+      "pending_review": 0,
+      "archived": 0
+    },
+    "alerts": [],
+    "artifacts": [
+      {
+        "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+        "missing_stages": [],
+        "complete": true
+      },
+      {
+        "proposal_id": "general-moire-strong-field-probe-20260726",
+        "missing_stages": [],
+        "complete": true
+      },
+      {
+        "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+        "missing_stages": [],
+        "complete": true
+      },
+      {
+        "proposal_id": "general-quantum-geometry-inversion-20260726",
+        "missing_stages": [],
+        "complete": true
+      },
+      {
+        "proposal_id": "key-transient-quantum-phase-optical-20260726",
+        "missing_stages": [],
+        "complete": true
+      }
+    ],
+    "incomplete_count": 0
+  },
+  "profiles": {
+    "status": "✓",
+    "profiles": {
+      "linsai": {
+        "status": "working",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "pipeline-runner": {
+        "status": "working",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "researcher": {
+        "status": "idle",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "analyst": {
+        "status": "idle",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "writer": {
+        "status": "idle",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "critic": {
+        "status": "idle",
+        "success_rate_24h": 1.0,
+        "dispatch_count_24h": 6,
+        "avg_duration_s": 425.8,
+        "recent_error": "",
+        "suggestion": ""
+      },
+      "reviewer": {
+        "status": "idle",
+        "success_rate_24h": null,
+        "dispatch_count_24h": 0,
+        "avg_duration_s": 0,
+        "recent_error": "",
+        "suggestion": ""
+      }
+    },
+    "blocked": [],
+    "offline": [],
+    "computed_at": "2026-08-03T01:53:30Z"
+  },
+  "kb": {
+    "status": "⚠",
+    "composite_health": 0.673,
+    "components": {
+      "connectivity": 0.6133333333333334,
+      "category_coverage": 0.59,
+      "alias_hit_rate": 0.56,
+      "orphan_rate": 0.0
+    },
+    "summary": {
+      "raw_count": 231,
+      "wiki_count": 154,
+      "graph_nodes": 99,
+      "graph_edges": 245,
+      "graph_orphans": 0,
+      "week_new": 0,
+      "pending_distill": 231
+    }
+  },
+  "failures": {
+    "status": "✓",
+    "total_errors": 0,
+    "total_warnings": 108,
+    "top_pattern": "env-pollution",
+    "patterns": []
+  }
+}

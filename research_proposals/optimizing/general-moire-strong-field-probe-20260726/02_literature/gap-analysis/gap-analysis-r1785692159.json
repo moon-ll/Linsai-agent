@@ -1,0 +1,103 @@
+{
+  "gaps": [
+    {
+      "claim": "现有三个研究方向虽已取得进展，但仍未形成从莫尔量子态非线性光学读出到主动调控的一体化方案。",
+      "missing_evidence": "§1.2虽密集列出约13篇文献，但缺少按“已有能力—适用条件—关键局限—本项目拟突破点”组织的比较性证据。需要近期综述及各方向的代表性原始论文，证明现有工作分别解决了什么、尚未解决什么，而非仅将文献作为并列参照。",
+      "search_keywords": [
+        "moiré superlattice strong-field nonlinear optical probe review",
+        "moiré materials high-harmonic spectroscopy active control",
+        "twisted materials nonlinear optics quantum-state readout",
+        "strong-field control moiré quantum states review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3所列四项研究空白均是当前领域中真实且尚未解决的关键缺口。",
+      "missing_evidence": "每项空白均缺少“最接近的已有工作及其明确局限”的直接引文，也缺少近期综述或领域路线图对这些瓶颈的确认。需要为四项空白分别建立文献证据链，避免仅凭概括性判断宣称研究空白。",
+      "search_keywords": [
+        "moiré strong-field physics open questions review",
+        "moiré nonlinear spectroscopy unresolved challenges",
+        "high-harmonic generation twisted materials limitations",
+        "strong-field control moiré superlattice research gaps"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目提出的三段式降阶模型相对于现有莫尔强场动力学建模方法具有实质性创新。",
+      "missing_evidence": "缺少与最接近模型工作的逐项比较，以及证明降阶后仍能保留关键能带、几何相位和强场动力学信息的文献或基准结果。需补充莫尔体系强场建模、有效哈密顿量、模型降阶及误差验证方面的代表性研究。",
+      "search_keywords": [
+        "reduced-order model moiré strong-field dynamics",
+        "effective Hamiltonian twisted bilayer strong-field response",
+        "model reduction high-harmonic generation solids",
+        "multiscale simulation moiré nonlinear optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "多观测联合反演能够比现有单一非线性光学观测提供更唯一、更稳健的莫尔量子态参数读出。",
+      "missing_evidence": "缺少与现有HHG或非线性光谱反演工作的边界比较，也缺少关于可辨识性、参数退化、噪声鲁棒性和多观测互补性的理论或实验文献。需要证明联合观测确实增加独立信息，而非简单增加测量通道。",
+      "search_keywords": [
+        "multi-observable inversion high-harmonic spectroscopy solids",
+        "identifiability inverse problem nonlinear optical spectroscopy",
+        "joint inversion moiré band structure Berry phase",
+        "multimodal spectroscopy quantum-state reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "所提出的闭环调控协议超越了现有莫尔体系非线性光学探测或强场控制方案。",
+      "missing_evidence": "缺少与Mrudul 2024、Molinero 2024、Tyulnev 2024等最接近工作的明确对照，尚未说明这些工作是否已包含反馈、优化、波形控制或状态改写，以及本项目新增的闭环能力具体是什么。需要补充闭环量子控制和莫尔强场调控的直接先例与局限分析。",
+      "search_keywords": [
+        "Mrudul 2024 moiré high-harmonic generation",
+        "Molinero 2024 moiré nonlinear optics",
+        "Tyulnev 2024 moiré strong-field control",
+        "closed-loop coherent control moiré materials"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "项目预期实现约四个数量级的性能跨度或提升。",
+      "missing_evidence": "该数量级承诺缺少已发表实验或理论结果给出的基线、动态范围、灵敏度上限和物理机制依据，也缺少合成数据或误差分析。需要同类强场非线性光谱和莫尔材料测量的定量性能基准。",
+      "search_keywords": [
+        "moiré nonlinear spectroscopy dynamic range sensitivity",
+        "high-harmonic spectroscopy four orders of magnitude",
+        "strong-field optical probe quantitative benchmark solids",
+        "nonlinear optical detection moiré materials sensitivity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "多观测反演或模型预测的误差可以控制在15%以内。",
+      "missing_evidence": "缺少误差定义、训练或拟合数据范围、噪声模型、置信区间和外部验证依据。需要引用同类光谱反演、参数估计或机器学习重构研究中的误差基准，并用合成数据或实验数据说明15%阈值的可实现性。",
+      "search_keywords": [
+        "high-harmonic spectrum inversion uncertainty benchmark",
+        "nonlinear spectroscopy parameter retrieval error",
+        "moire parameter reconstruction noise robustness",
+        "physics-informed inverse problem spectroscopy uncertainty"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "项目能够达到约±0.05°的莫尔扭角辨识或调控精度。",
+      "missing_evidence": "缺少现有扭角制备、标定和光学反演方法的精度上限及误差来源文献，也没有说明非线性光学信号对0.05°角度变化是否具有足够灵敏度。需要扭角计量、莫尔光谱标定和角度敏感非线性响应的实验基准。",
+      "search_keywords": [
+        "moiré twist angle metrology 0.05 degree",
+        "twist angle reconstruction nonlinear optical spectroscopy",
+        "twisted bilayer angle calibration precision",
+        "high-harmonic response twist-angle sensitivity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目将“建立首个”“发展首个”相关方法，并“首次将”相关技术用于莫尔超晶格强场量子调控。",
+      "missing_evidence": "这些首创性表述缺少系统的全球先行工作检索和可核验的最近邻文献比较。需要覆盖莫尔非线性光学、固体HHG、量子态反演、闭环强场控制及相邻二维材料体系的近期综述和原始论文；若无法排除先例，应改为有文献限定的“尚缺乏系统研究”或“现有工作尚未实现”。",
+      "search_keywords": [
+        "moiré superlattice high-harmonic generation",
+        "strong-field quantum control twisted materials",
+        "nonlinear optical tomography moiré quantum states",
+        "closed-loop high-harmonic control two-dimensional materials"
+      ],
+      "priority": "high"
+    }
+  ]
+}
