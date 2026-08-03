@@ -416,10 +416,27 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
     agent_success = False
     papers = []
 
+    # 复用 LiteratureService 的去重机制：获取已有论文 ID 集合
+    from literature_service import LiteratureService
+    _svc = LiteratureService()
+    _local_ids = set(_svc._scan_local_raw_papers().keys())
+    _exclude_ids = _svc._get_exclude_ids(proposal_id)
+    _all_known = _local_ids | _exclude_ids
+    _exclude_count = len(_all_known)
+
+    # 构建 exclude_prompt 注入 agent prompt（复用简报去重策略）
+    _exclude_prompt = ""
+    if _all_known:
+        _exclude_prompt = (
+            f"\n\n【请跳过以下已处理论文（共 {_exclude_count} 篇）】\n"
+            + "\n".join(sorted(str(x) for x in _all_known))
+        )
+
     agent_prompt = (
         f"你是一位专业研究助手（Researcher）。请针对课题「{proposal_id}」的"
         f"「{section_name}」部分，检索以下关键词的最新论文。\n\n"
-        f"【检索关键词】\n{keyword_str}\n\n"
+        f"【检索关键词】\n{keyword_str}\n"
+        f"{_exclude_prompt}\n\n"
         f"请执行：\n"
         f"1. 使用 web_search 工具逐一检索每个关键词\n"
         f"2. 对每篇论文，提取完整信息：arxiv_id、标题、作者、年份、TL;DR\n"
@@ -433,13 +450,11 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
         if agent_result.get("success"):
             agent_success = True
             output = agent_result.get("output", "")
-            # 解析 agent 输出中的论文列表
-            from literature_service import LiteratureService
-            svc = LiteratureService()
-            papers = svc._parse_researcher_output(output)
-            # 联网检索的论文标记为 is_new=True
+            papers = _svc._parse_researcher_output(output)
+            # 复用去重：按 arxiv_id 比对本地知识库，准确标记 is_new
             for p in papers:
-                p["is_new"] = True
+                aid = p.get("arxiv_id", "")
+                p["is_new"] = bool(aid and aid not in _local_ids)
             if _log:
                 _log.info(
                     f"[{proposal_id}] lit_search agent loop 成功，"
@@ -456,9 +471,7 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
                 f"[{proposal_id}] lit_search agent loop 失败，降级 LiteratureService"
             )
         try:
-            from literature_service import LiteratureService
-            svc = LiteratureService()
-            papers = svc.search(
+            papers = _svc.search(
                 keywords=gap_keywords, source="pipeline", proposal_id=proposal_id
             )
         except Exception as e:
@@ -496,9 +509,7 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
     new_papers = [p for p in papers if p.get("is_new", False)]
     if new_papers:
         try:
-            from literature_service import LiteratureService
-            svc = LiteratureService()
-            svc._ingest_new_papers(new_papers, source="pipeline", proposal_id=proposal_id)
+            _svc._ingest_new_papers(new_papers, source="pipeline", proposal_id=proposal_id)
             if _log:
                 _log.info(f"[{proposal_id}] lit_search 新入库 {len(new_papers)} 篇论文到知识库")
         except Exception as e:
