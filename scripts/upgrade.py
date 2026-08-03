@@ -213,6 +213,7 @@ def do_simulate() -> None:
     print("  2. [验证] py_compile 校验 scripts/ 下所有 .py 语法")
     print("  3. [迁移] 若 VERSION 变化且存在 scripts/migrate.py，执行迁移")
     print("  4. [自测] 运行 self_test.py 确认回归通过")
+    print("  5. [cron] 检查生命周期 cron 是否注册，缺失则自动安装")
     print("\n失败处理：任一步骤失败即中止；已创建的备份可用于回滚：")
     print("  python3 scripts/backup_manager.py --restore <备份文件>")
     print("\n模拟完成。去掉 --simulate 执行真实升级。")
@@ -264,6 +265,11 @@ def do_upgrade() -> int:
     test_ok = run_self_test()
     print()
 
+    # 步骤 5：确保生命周期 cron 已安装
+    print("--- 步骤 5/5：检查生命周期 cron ---")
+    cron_ok = _ensure_cron_installed()
+    print()
+
     version_after = read_version()
     print("=== 升级完成 ===")
     print("版本: {} → {}".format(version_before or "?", version_after or "?"))
@@ -271,8 +277,50 @@ def do_upgrade() -> int:
         print("⚠ 自测未全通过，请人工运行 python3 scripts/self_test.py 检查")
         print("  如需回滚: python3 scripts/backup_manager.py --restore {}".format(backup_path.name))
         return 4
+    if not cron_ok:
+        print("⚠ 生命周期 cron 安装失败，请人工运行:")
+        print("  python3 scripts/proposal_lifecycle.py --setup-cron-v2")
+        return 5
     print("✓ 升级成功，所有检查通过")
     return 0
+
+
+def _ensure_cron_installed() -> bool:
+    """检查生命周期 cron 是否已注册，缺失则自动安装。"""
+    try:
+        sys.path.insert(0, str(SCRIPTS_DIR))
+        import hermes_bridge as hb
+
+        crons = hb.cron_list_profile("linsai")
+        has_micro = any(c.get("name", "").startswith("lc-micro-scheduler") for c in crons)
+        has_weekend = any(c.get("name", "").startswith("lc-weekend-") for c in crons)
+
+        if has_micro and has_weekend:
+            print("✓ 生命周期 cron 已注册（{} 个）".format(len(crons)))
+            return True
+
+        # 缺失 → 自动安装
+        missing = []
+        if not has_micro:
+            missing.append("lc-micro-scheduler")
+        if not has_weekend:
+            missing.append("lc-weekend-*")
+        print("◐ 缺失 cron: {}，自动安装...".format(", ".join(missing)))
+
+        # 导入 lifecycle controller 并安装
+        from lifecycle_cron_framework import LifecycleCronController
+        ctrl = LifecycleCronController()
+        result = ctrl.setup_cron_framework()
+
+        if result.get("success"):
+            print("✓ 生命周期 cron 安装成功")
+            return True
+        else:
+            print("✗ 生命周期 cron 安装失败: {}".format(result))
+            return False
+    except Exception as e:
+        print("⚠ 检查/安装 cron 异常: {}".format(e))
+        return False
 
 
 def _self_check() -> None:

@@ -5,13 +5,14 @@
 proposal_lifecycle.run_health_check），加 4 段自检（环境/产物/凭据/队列），
 汇成一份 markdown 报告 + 3 行推送口径。
 
-检查维度（6 段）：
+检查维度（7 段）：
 1. 环境 — Python 版本、磁盘用量、关键目录存在
 2. Provider 凭据 — MINIMAX_API_KEY / GLM_API_KEY 是否在 .env 且非空
 3. 提案生命周期 — 4 个状态 proposal 数、pending_review 告警、optimizing 孤儿
 4. 6 阶段产物完整性 — 每个 optimizing proposal 关键产物是否存在/非空
 5. Profile 健康 — 7 个 profile 状态/24h 成功率
 6. 知识库 + 失败模式 — KB 综合健康度 + 24h 错误聚类
+7. 生命周期 cron — 检查 lc-micro-scheduler / lc-weekend-* 是否已注册
 
 用法:
     python3 scripts/daily_health_check.py                  # 跑全量 + 写报告
@@ -58,6 +59,11 @@ try:
 except Exception as e:  # pragma: no cover
     analyze_failures = None
     _FAILURE_ANALYZER_IMPORT_ERR = e
+try:
+    import hermes_bridge as hb
+except Exception as e:  # pragma: no cover
+    hb = None
+    _HB_IMPORT_ERR = e
 try:
     from proposal_lifecycle import ProposalLifecycle
 except Exception as e:  # pragma: no cover
@@ -306,6 +312,51 @@ def check_failures() -> Dict[str, Any]:
 
 
 # ─────────────────────────────────────────────
+# 7. 生命周期 cron 状态
+# ─────────────────────────────────────────────
+def check_cron() -> Dict[str, Any]:
+    """检查生命周期 cron 是否已注册。"""
+    if hb is None:
+        return {"status": WARN, "reason": f"无法导入 hermes_bridge: {_HB_IMPORT_ERR}"}
+
+    try:
+        crons = hb.cron_list_profile("linsai")
+    except Exception as e:
+        return {"status": WARN, "reason": f"cron_list_profile 失败: {e}"}
+
+    # 期望的生命周期 cron 名称前缀
+    required_prefixes = ["lc-micro-scheduler", "lc-weekend-"]
+    found: List[str] = []
+    missing: List[str] = []
+
+    for prefix in required_prefixes:
+        matched = [c.get("name", "") for c in crons if c.get("name", "").startswith(prefix)]
+        if matched:
+            found.extend(matched)
+        else:
+            missing.append(prefix)
+
+    # 至少需要 micro-scheduler 和 1 个 weekend cron 才算正常
+    has_micro = any("lc-micro-scheduler" in n for n in found)
+    has_weekend = any("lc-weekend" in n for n in found)
+
+    if has_micro and has_weekend:
+        status = OK
+    elif not has_micro and not has_weekend:
+        status = FAIL
+    else:
+        status = WARN
+
+    return {
+        "status": status,
+        "found": found,
+        "missing": missing,
+        "count": len(crons),
+        "setup_command": "python3 scripts/proposal_lifecycle.py --setup-cron-v2",
+    }
+
+
+# ─────────────────────────────────────────────
 # 汇总 + 渲染 markdown
 # ─────────────────────────────────────────────
 def render_report(sections: Dict[str, Dict[str, Any]], date_str: str) -> Tuple[str, str]:
@@ -316,6 +367,7 @@ def render_report(sections: Dict[str, Dict[str, Any]], date_str: str) -> Tuple[s
     prof = sections["profiles"]
     kb = sections["kb"]
     fail = sections["failures"]
+    cron = sections.get("cron", {"status": PEND, "found": []})
 
     # 整体状态：任一 FAIL 则 FAIL，并列 WARN 则 WARN
     statuses = [s["status"] for s in sections.values()]
@@ -341,6 +393,7 @@ def render_report(sections: Dict[str, Dict[str, Any]], date_str: str) -> Tuple[s
         f"| 4. Profile | {prof['status']} | blocked={len(prof.get('blocked', []))}, offline={len(prof.get('offline', []))} |",
         f"| 5. 知识库 | {kb['status']} | 综合分 {kb.get('composite_health', '?')} |",
         f"| 6. 失败模式 | {fail['status']} | 24h 错误 {fail.get('total_errors', 0)} |",
+        f"| 7. 生命周期 cron | {cron['status']} | 已注册 {len(cron.get('found', []))} 个, 缺 {len(cron.get('missing', []))} 个 |",
         "",
     ]
 
@@ -433,6 +486,21 @@ def render_report(sections: Dict[str, Dict[str, Any]], date_str: str) -> Tuple[s
             md.append(f"| `{p['id']}` | {p.get('category', '')} | {p.get('occurrences', 0)} |")
     md.append("")
 
+    # 7. 生命周期 cron
+    md += [
+        "## 7. 生命周期 cron",
+        "",
+        f"- **总 cron 数**: {cron.get('count', '?')}",
+        f"- **已注册**: {', '.join(cron.get('found', [])) or '无'}",
+        f"- **缺失前缀**: {', '.join(cron.get('missing', [])) or '无'}",
+        "",
+    ]
+    if cron.get("missing"):
+        md += [
+            f"- 修复命令: `{cron['setup_command']}`",
+            "",
+        ]
+
     # 建议动作（按优先级排序）
     actions = []
     if cred["status"] != OK:
@@ -448,6 +516,8 @@ def render_report(sections: Dict[str, Dict[str, Any]], date_str: str) -> Tuple[s
         actions.append(f"检查 blocked profile: {', '.join(prof['blocked'])}")
     if kb["status"] != OK:
         actions.append(f"知识库综合分 {kb.get('composite_health', '?')} 偏低，建议执行 kb_maintenance.py --weekly")
+    if cron.get("missing"):
+        actions.append(f"生命周期 cron 缺失前缀: {', '.join(cron['missing'])}，执行 {cron['setup_command']}")
     if not actions:
         actions.append("全绿，无需即时动作")
 
@@ -465,7 +535,8 @@ def render_report(sections: Dict[str, Dict[str, Any]], date_str: str) -> Tuple[s
     headline = (
         f"[{overall}] 全链路体检完成 — "
         f"环境{env['status']} 凭据{cred['status']} 链路{lc['status']} "
-        f"profiles{prof['status']} KB{kb['status']} 失败{fail['status']}"
+        f"profiles{prof['status']} KB{kb['status']} 失败{fail['status']} "
+        f"cron{cron['status']}"
     )
     if overall != OK:
         headline += f"\n→ 首要动作: {actions[0]}"
@@ -492,6 +563,7 @@ def main() -> int:
         ("profiles", check_profiles),
         ("kb", check_kb),
         ("failures", check_failures),
+        ("cron", check_cron),
     ]:
         print(f"  [{name}] running...", flush=True)
         try:
