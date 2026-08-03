@@ -756,18 +756,39 @@ class LiteratureService:
         return results
 
     def _parse_researcher_output(self, text: str) -> List[Dict[str, Any]]:
-        """解析 researcher 输出的论文列表。"""
+        """解析 researcher 输出的论文列表。
+
+        兼容两种格式：
+        - 无编号: - arxiv_id | 标题 | ...
+        - 编号: 1. arxiv_id | 标题 | ...
+        - 编号带括号: 1) arxiv_id | 标题 | ...
+        - 纯文本: arxiv_id | 标题 | ...（含数字.arxiv_id 模式）
+        """
+        import re
         papers: List[Dict[str, Any]] = []
+        # 匹配 arxiv_id 模式：数字.数字(至少4位)
+        arxiv_pattern = re.compile(r"(\d{4}\.\d{4,5})")
+
         for line in text.split("\n"):
             line = line.strip()
-            if not line.startswith("- "):
+            if not line:
                 continue
-            parts = line[2:].split("|")
+
+            # 去除常见前缀："- ", "1. ", "1) ", "* ", "• "
+            # 注意：不贪吃数字，保留 arxiv_id（如 2403.15337）
+            stripped = re.sub(r"^(?:[-*•] |\d+[.)] )", "", line).strip()
+            if not stripped:
+                continue
+
+            parts = stripped.split("|")
             if len(parts) >= 2:
-                arxiv_id = self._extract_arxiv_id({"title": parts[0].strip()})
+                # 直接从第一个字段提取 arxiv_id
+                first_field = parts[0].strip()
+                arxiv_match = arxiv_pattern.search(first_field)
+                arxiv_id = arxiv_match.group(1) if arxiv_match else ""
                 paper = {
-                    "arxiv_id": arxiv_id or parts[0].strip(),
-                    "title": parts[1].strip() if len(parts) > 1 else parts[0].strip(),
+                    "arxiv_id": arxiv_id,
+                    "title": parts[1].strip() if len(parts) > 1 else first_field,
                     "authors": parts[2].strip() if len(parts) > 2 else "",
                     "year": parts[3].strip() if len(parts) > 3 else "",
                     "score": self._safe_float(parts[4].strip()) if len(parts) > 4 else 0.5,
@@ -777,6 +798,26 @@ class LiteratureService:
                     "read_status": "unread",
                 }
                 papers.append(paper)
+            elif arxiv_pattern.search(stripped):
+                # 没有管道符但有 arxiv_id，尝试提取
+                match = arxiv_pattern.search(stripped)
+                rest = stripped[match.end():].strip(" :,-")
+                # 尝试按 | 分割 rest 部分
+                if "|" in rest:
+                    sub_parts = rest.split("|")
+                    paper = {
+                        "arxiv_id": match.group(1),
+                        "title": sub_parts[0].strip().lstrip(" :"),
+                        "authors": sub_parts[1].strip() if len(sub_parts) > 1 else "",
+                        "year": sub_parts[2].strip() if len(sub_parts) > 2 else "",
+                        "score": self._safe_float(sub_parts[3].strip()) if len(sub_parts) > 3 else 0.5,
+                        "tldr": sub_parts[4].strip() if len(sub_parts) > 4 else "",
+                        "is_new": False,
+                        "has_local_pdf": False,
+                        "read_status": "unread",
+                    }
+                    papers.append(paper)
+
         return papers
 
     def _extract_arxiv_id(self, paper: Dict[str, Any]) -> str:
