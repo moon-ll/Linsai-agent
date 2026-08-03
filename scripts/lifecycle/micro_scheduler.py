@@ -1071,7 +1071,17 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
             _log.info(msg)
         return {"success": True, "executed_count": 0, "executed": [], "reason": msg, "skip_reason": "no_optimizing"}
 
-    # 3. 选择聚焦 proposal
+    # 3. 全局 stale job 清理（对所有 optimizing proposal，防止 stuck job 长期占用）
+    for p in optimizing:
+        pid = p.get("proposal_id", "")
+        if pid:
+            try:
+                self._refresh_stale_jobs(pid)
+            except Exception as e:
+                if _log:
+                    _log.warning(f"[micro-scheduler] stale 清理 {pid} 失败: {e}")
+
+    # 4. 选择聚焦 proposal
     focus_pid = self._focus_proposal_for_slot(slot_index, optimizing)
     if not focus_pid:
         msg = "无法确定聚焦 proposal"
