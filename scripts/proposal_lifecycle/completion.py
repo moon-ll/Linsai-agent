@@ -23,8 +23,12 @@ class CompletionMixin:
     def _check_done(self, proposal_id: str, threshold: Dict[str, Any]) -> Dict[str, Any]:
         """判定 proposal 是否达到输出标准（P1-3: 所有模块对抗胜利才算达标）。
 
-        达标条件：5 个章节（立项依据/研究内容/研究方案/整体一致性审查/参考文献）
-        共 5 个模块全部通过。每个模块"通过"= 分数达标 + 各维度无短板。
+        达标条件：
+        1. 条件1（达标）：5 个章节全部通过（分数达标 + 各维度无短板）
+        2. 条件2（逃生阀）：连续N轮无显著提升
+        3. 条件3（逃生阀）：达到最大轮数
+
+        逃生阀触发时，如果分数低于达标线，附加 quality_warning 标记。
         """
         prop_state = self._get_proposal_state(proposal_id)
         if not prop_state:
@@ -35,6 +39,13 @@ class CompletionMixin:
         section_passes = prop_state.get("section_passes", {})  # P1-3
         min_score = threshold.get("min_overall_score", DEFAULT_SCORE_THRESHOLD)
         rounds = prop_state.get("optimization_rounds", 0)
+
+        # v6.8.3: 获取 monitor 独立评分作为校准参考
+        monitor_history = prop_state.get("monitor_history", [])
+        monitor_score = 0.0
+        if monitor_history:
+            last_monitor = monitor_history[-1]
+            monitor_score = last_monitor.get("monitor_independent_score", 0.0)
 
         # 条件1（P1-3）：所有模块对抗胜利
         passed_sections = [s for s in self.REQUIRED_SECTIONS if section_passes.get(s)]
@@ -49,12 +60,35 @@ class CompletionMixin:
             deltas = [recent_scores[i + 1] - recent_scores[i] for i in range(len(recent_scores) - 1)]
             if all(d <= 0 for d in deltas):
                 passed_str = f"（已通过{len(passed_sections)}/{len(self.REQUIRED_SECTIONS)}模块）"
-                return {"done": True, "reason": f"连续{no_improve_limit}轮无显著提升{passed_str}"}
+                # v6.8.3: 逃生阀触发时附加质量警告
+                quality_warning = ""
+                if last_score < min_score:
+                    quality_warning = (
+                        f"⚠ 质量警告: 分数{last_score:.2f}低于达标线{min_score:.2f}。"
+                        f"已通过{len(passed_sections)}/{len(self.REQUIRED_SECTIONS)}模块。"
+                        f"monitor评分{monitor_score:.2f}。建议人工审核。"
+                    )
+                return {
+                    "done": True,
+                    "reason": f"连续{no_improve_limit}轮无显著提升{passed_str}",
+                    "quality_warning": quality_warning if quality_warning else None,
+                }
 
         # 条件3：达到最大轮数（逃生阀）
         if rounds >= DEFAULT_MAX_ROUNDS:
             passed_str = f"（已通过{len(passed_sections)}/{len(self.REQUIRED_SECTIONS)}模块）"
-            return {"done": True, "reason": f"达到最大轮数{DEFAULT_MAX_ROUNDS}{passed_str}"}
+            quality_warning = ""
+            if last_score < min_score:
+                quality_warning = (
+                    f"⚠ 质量警告: 达到最大轮数{DEFAULT_MAX_ROUNDS}，分数{last_score:.2f}低于达标线{min_score:.2f}。"
+                    f"已通过{len(passed_sections)}/{len(self.REQUIRED_SECTIONS)}模块。"
+                    f"monitor评分{monitor_score:.2f}。建议人工审核。"
+                )
+            return {
+                "done": True,
+                "reason": f"达到最大轮数{DEFAULT_MAX_ROUNDS}{passed_str}",
+                "quality_warning": quality_warning if quality_warning else None,
+            }
 
         # 未达标：报告进度
         missing = [s for s in self.REQUIRED_SECTIONS if not section_passes.get(s)]

@@ -144,7 +144,11 @@ def fetch_arxiv(query: str, max_results: int = 5) -> List[Dict[str, Any]]:
             print(f"⚠ deepxiv search 失败: {result.stderr[:200]}", file=sys.stderr)
             return []
 
-        data = json.loads(result.stdout)
+        try:
+            data = json.loads(result.stdout)
+        except json.JSONDecodeError:
+            print(f"⚠ deepxiv 返回非 JSON: {result.stdout[:100]}", file=sys.stderr)
+            return []
         papers = data.get("result", [])
         if not papers:
             # 尝试 trending 作为 fallback

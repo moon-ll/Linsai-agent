@@ -476,7 +476,10 @@ class OptimizeMixin:
         svc = LiteratureService()
 
         # 解析 gap 关键词
-        gap_data = json.loads(gap_path.read_text(encoding="utf-8"))
+        try:
+            gap_data = json.loads(gap_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, OSError) as e:
+            gap_data = {"gaps": []}
         gaps = gap_data.get("gaps", [])
         all_keywords = []
         for g in gaps:
@@ -893,7 +896,8 @@ class OptimizeMixin:
         "完整性": "completeness", "completeness": "completeness",
     }
     # 各维度短板阈值（低于此值视为短板）
-    DIMENSION_FLOOR = {"innovation": 0.65, "feasibility": 0.65, "rigor": 0.65, "completeness": 0.60}
+    # v6.8.3: 提升阈值，避免偏科通过（原 0.65/0.60 → 0.70/0.65）
+    DIMENSION_FLOOR = {"innovation": 0.70, "feasibility": 0.70, "rigor": 0.70, "completeness": 0.65}
 
     def _extract_dimension_scores(self, critic_result: Dict[str, Any]) -> Dict[str, float]:
         """从 critic 输出中提取 4 维度分数（P0-2）。

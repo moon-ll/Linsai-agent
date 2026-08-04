@@ -247,41 +247,31 @@ def _check_cron_status() -> Optional[Dict[str, Any]]:
 
 
 def _update_kanban(stats: List[Dict[str, Any]], focus: Optional[Dict[str, Any]]) -> None:
-    """更新系统看板。"""
+    """更新系统看板 — 合并到 scheduler 的看板格式，不覆盖已有字段。"""
     total_done = sum(s["done"] for s in stats)
     total_failed = sum(s["failed"] for s in stats)
     total_pending = sum(s["pending"] for s in stats)
     total_running = sum(s["running"] for s in stats)
 
-    kanban = {
-        "updated_at": now_utc(),
-        "hourly_monitor": {
-            "timestamp": now_utc(),
-            "total_proposals": len(stats),
-            "total_done": total_done,
-            "total_failed": total_failed,
-            "total_pending": total_pending,
-            "total_running": total_running,
-        },
-        "proposals": {
-            s["proposal_id"]: {
-                "rounds": s["rounds"],
-                "score": s["score"],
-                "done": s["done"],
-                "failed": s["failed"],
-                "pending": s["pending"],
-                "running": s["running"],
-                "progress_pct": s["progress_pct"],
-            }
-            for s in stats
-        },
+    # 读取现有看板（scheduler 写入的详细格式），保留其结构
+    existing = load_json(KANBAN_PATH, default={})
+
+    # 只更新 hourly_monitor 和 updated_at 字段，不破坏 scheduler 的格式
+    existing["updated_at"] = now_utc()
+    existing["hourly_monitor"] = {
+        "timestamp": now_utc(),
+        "total_proposals": len(stats),
+        "total_done": total_done,
+        "total_failed": total_failed,
+        "total_pending": total_pending,
+        "total_running": total_running,
     }
 
     if focus:
-        kanban["focus"] = focus
+        existing["monitor_focus"] = focus
 
     KANBAN_PATH.parent.mkdir(parents=True, exist_ok=True)
-    save_json(KANBAN_PATH, kanban)
+    save_json(KANBAN_PATH, existing)
     if _log:
         _log.info(f"看板已更新: done={total_done} failed={total_failed} pending={total_pending} running={total_running}")
 

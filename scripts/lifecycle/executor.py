@@ -83,6 +83,20 @@ def pick_next_job(self, proposal_id: str) -> Optional[Dict[str, Any]]:
             return job
     return None
 
+def _mark_degradation(self, proposal_id: str, step: str, detail: str) -> None:
+    """v6.8.3: 记录降级事件到 proposal_state（质量可追溯）。"""
+    try:
+        prop_state = self._get_proposal_state(proposal_id)
+        if not prop_state:
+            return
+        degradations = prop_state.get("degradation_events", [])
+        degradations.append({"step": step, "detail": detail, "at": now_utc()})
+        # 只保留最近 20 条
+        prop_state["degradation_events"] = degradations[-20:]
+        self._save_proposal_state(proposal_id, prop_state)
+    except Exception:
+        pass  # 非关键路径，不影响主流程
+
 def _update_job(self, proposal_id: str, job: Dict[str, Any], status: str, error: str = "") -> None:
     jobs = self._get_jobs(proposal_id)
     existing = self._job_by_id(jobs, job["job_id"])
@@ -248,17 +262,11 @@ def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[
         f"1. 逐条阅读评审报告中指出的文献/引用/支撑不足问题\n"
         f"2. 对每个问题，明确：论点是什么、缺什么类型的文献、建议检索关键词\n"
         f"3. 忽略与文献无关的问题（如逻辑、格式等）\n"
-        f"4. 输出严格 JSON，格式如下：\n"
-        f"{{\n"
-        f"  \"gaps\": [\n"
-        f"    {{\n"
-        f"      \"claim\": \"需要支撑的论点\",\n"
-        f"      \"missing_evidence\": \"缺少什么证据/文献\",\n"
-        f"      \"search_keywords\": [\"keyword1\", \"keyword2\"],\n"
-        f"      \"priority\": \"high|medium|low\"\n"
-        f"    }}\n"
-        f"  ]\n"
-        f"}}\n"
+        f"4. **必须**输出 JSON 格式（不要 markdown 代码块标记，不要其他文字）：\n"
+        f'{{"gaps": [{{"claim": "需要支撑的论点", "missing_evidence": "缺少什么证据/文献", "search_keywords": ["关键词1", "关键词2"], "priority": "high"}}]}}\n\n'
+        f"示例输出：\n"
+        f'{{"gaps": [{{"claim": "固体中HHG效率与晶体对称性的关系尚不清楚", "missing_evidence": "缺乏实验测量不同晶体取向下HHG效率的数据", "search_keywords": ["solid-state HHG crystal orientation", "HHG efficiency anisotropy"], "priority": "high"}}, {{"claim": "Berry曲率对非线性光学的贡献", "missing_evidence": "缺少Berry曲率与高次谐波产生关系的理论计算", "search_keywords": ["Berry curvature harmonic generation", "nonlinear optical Berry phase"], "priority": "medium"}}]}}\n\n'
+        f"注意：只输出 JSON，不要输出任何其他文字。如果没有文献缺口，输出空 gaps 数组。"
     )
 
     # 备用 prompt（直调用，更简洁）
@@ -292,6 +300,12 @@ def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[
 
     if agent_success:
         raw_text = agent_result.get("output", "")
+        # 记录原始输出便于 debug
+        if _log:
+            _log.info(
+                f"[{proposal_id}] gap_identify agent loop 原始输出（{len(raw_text)}字）: "
+                f"{raw_text[:500]}"
+            )
         if _log:
             _log.info(
                 f"[{proposal_id}] gap_identify agent loop 成功 "
@@ -319,6 +333,8 @@ def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[
                 timeout=120,
             )
             raw = call_result[0] if isinstance(call_result, tuple) else call_result
+            # v6.8.3: 记录降级事件到 proposal_state
+            self._mark_degradation(proposal_id, "gap_identify", "agent_loop_failed→llm_direct")
             raw_text = raw.strip()
         except Exception as e:
             err = str(e)[:300]
@@ -334,6 +350,14 @@ def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[
     # 解析输出
     try:
         text = raw_text.strip()
+        if not text:
+            if _log:
+                _log.warning(f"[{proposal_id}] gap_identify agent 输出为空，跳过")
+            # 空 output 时写一个默认空 gap 文件，让后续步骤可以继续
+            default_data = {"gaps": [], "note": "agent loop 输出为空，使用 critic 报告原始关键词"}
+            gap_path.write_text(json.dumps(default_data, ensure_ascii=False, indent=2), encoding="utf-8")
+            return {"success": True, "gap_path": str(gap_path), "method": "empty_fallback", "gap_count": 0}
+
         if text.startswith("```"):
             lines = text.splitlines()
             if lines[0].startswith("```"):
@@ -342,9 +366,32 @@ def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[
                 lines = lines[:-1]
             text = "\n".join(lines).strip()
 
-        data = json.loads(text)
-        if not isinstance(data, dict) or "gaps" not in data:
-            return {"success": False, "error": "返回 JSON 缺少 gaps 字段"}
+        # 尝试从文本中提取 JSON（可能嵌在自然语言中）
+        data = None
+        # 直接解析
+        try:
+            data = json.loads(text)
+        except json.JSONDecodeError:
+            # 尝试找到 JSON 对象
+            for start in range(len(text)):
+                if text[start] == '{':
+                    depth = 0
+                    for end in range(start, len(text)):
+                        if text[end] == '{':
+                            depth += 1
+                        elif text[end] == '}':
+                            depth -= 1
+                            if depth == 0:
+                                try:
+                                    data = json.loads(text[start:end + 1])
+                                    break
+                                except json.JSONDecodeError:
+                                    pass
+                    if data:
+                        break
+
+        if not data or not isinstance(data, dict) or "gaps" not in data:
+            return {"success": False, "error": f"返回 JSON 缺少 gaps 字段（原文前200字: {text[:200]}）"}
 
         gap_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
@@ -441,8 +488,12 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
         f"1. 使用 web_search 工具逐一检索每个关键词\n"
         f"2. 对每篇论文，提取完整信息：arxiv_id、标题、作者、年份、TL;DR\n"
         f"3. 优先选择 2024-2026 年的最新论文\n"
-        f"4. 输出格式：每行一个结果，用 | 分隔，格式：\n"
-        f"   - arxiv_id | 标题 | 作者 | 年份 | 相关性评分(0-1) | 一句话摘要 | 来源：联网检索\n"
+        f"4. **必须**输出 JSON 数组格式（不要 markdown 代码块标记，不要其他格式）：\n"
+        f"   [{{\"arxiv_id\": \"2403.15337\", \"title\": \"论文标题\", \"authors\": \"作者等\", \"year\": \"2024\", \"score\": 0.9, \"tldr\": \"一句话摘要\"}}]\n\n"
+        f"示例输出：\n"
+        f'[{{"arxiv_id": "2401.12345", "title": "Strong-field HHG in solids", "authors": "Zhang et al.", "year": "2024", "score": 0.85, "tldr": "发现固体高次谐波产生的新机制"}}]'
+        f'\n[{{"arxiv_id": "2402.67890", "title": "Berry phase effects in ultrafast dynamics", "authors": "Li et al.", "year": "2024", "score": 0.80, "tldr": "贝里相位在超快动力学中的作用"}}]\n\n'
+        f"注意：只输出 JSON 数组，不要输出任何其他文字。如果检索不到论文，输出空数组 []。"
     )
 
     try:
@@ -450,6 +501,12 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
         if agent_result.get("success"):
             agent_success = True
             output = agent_result.get("output", "")
+            # 记录原始输出前 500 字，便于 debug 解析失败原因
+            if _log:
+                _log.info(
+                    f"[{proposal_id}] lit_search agent loop 原始输出（{len(output)}字）: "
+                    f"{output[:500]}"
+                )
             papers = _svc._parse_researcher_output(output)
             # 复用去重：按 arxiv_id 比对本地知识库，准确标记 is_new
             for p in papers:
@@ -464,12 +521,15 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
         if _log:
             _log.warning(f"[{proposal_id}] lit_search agent loop 异常: {e}")
 
-    # 步骤2：如果 agent loop 失败或未获取到论文，降级为 LiteratureService
-    if not agent_success or not papers:
-        if not agent_success and _log:
+    # 步骤2：如果 agent loop 失败（非成功），降级为 LiteratureService
+    # 注意：agent 成功但解析 0 篇不触发降级（可能确实无新论文）
+    if not agent_success:
+        if _log:
             _log.warning(
                 f"[{proposal_id}] lit_search agent loop 失败，降级 LiteratureService"
             )
+        # v6.8.3: 记录降级事件
+        self._mark_degradation(proposal_id, "lit_search", "agent_loop_failed→LiteratureService")
         try:
             papers = _svc.search(
                 keywords=gap_keywords, source="pipeline", proposal_id=proposal_id
@@ -529,7 +589,8 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
 
     if _log:
         _log.info(f"[{proposal_id}] lit_search 完成: {result_path.name}（{method_tag}）")
-    return {"success": bool(papers), "result_path": str(result_path), "method": method_tag}
+    # agent 成功执行即视为 success（0 篇论文不等于失败）
+    return {"success": True, "result_path": str(result_path), "method": method_tag, "paper_count": len(papers)}
 
 
 def _run_lit_read_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
@@ -556,6 +617,8 @@ def _run_lit_read_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str,
     arxiv_ids = re.findall(r"(\d{4}\.\d{4,5})", text)
 
     if not arxiv_ids:
+        if _log:
+            _log.info(f"[{proposal_id}] lit_read 跳过: 无 arxiv_id 可读（lit_search 未返回论文）")
         return {"success": True, "notes_path": "", "read_count": 0, "reason": "无论文可读"}
 
     notes = []
@@ -692,7 +755,7 @@ def _run_lit_note_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str,
                 _log.warning(f"[{proposal_id}] 关联论文到课题失败: {e}")
             return {"success": False, "error": str(e)}
     if _log:
-        _log.warning(f"[{proposal_id}] lit_note 跳过: 无检索报告可导入")
+        _log.info(f"[{proposal_id}] lit_note 跳过: 无检索报告可导入")
     return {"success": True, "imported": 0, "reason": "无检索报告可导入", "skipped": True}
 
 
@@ -1008,10 +1071,20 @@ def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, 
         transition_result = self.transition(
             proposal_id, "pending_review", reason=done_result["reason"]
         )
+        # v6.8.3: 逃生阀触发的质量警告写入 proposal_state
+        quality_warning = done_result.get("quality_warning")
+        if quality_warning:
+            prop_state = self._get_proposal_state(proposal_id)
+            if prop_state:
+                prop_state["quality_warning"] = quality_warning
+                self._save_proposal_state(proposal_id, prop_state)
+                if _log:
+                    _log.warning(f"[{proposal_id}] {quality_warning}")
         return {
             "success": True,
             "done": True,
             "reason": done_result["reason"],
+            "quality_warning": quality_warning,
             "transition": transition_result,
             "writer_delta": deltas.get("writer_delta"),
             "critic_delta": deltas.get("critic_delta"),

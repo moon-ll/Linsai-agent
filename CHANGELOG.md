@@ -1,5 +1,22 @@
 # 变更记录
 
+## v6.8.3 - 2026-08-04 质量保障: 逃生阀质量警告 + JSON 解析增强 + 降级追溯
+
+### 改动内容
+
+- **completion.py**: 逃生阀（连续无提升/达到最大轮数）触发时，若分数低于达标线，附加 quality_warning 标记写入 proposal_state 并传递至 transition 结果
+- **executor.py**: 新增 `_mark_degradation()` 记录降级事件到 proposal_state（gap_identify→llm_direct、lit_search→LiteratureService）；gap_identify/lit_search prompt 改为 JSON 格式输出 + 多层兜底解析（JSON对象提取、markdown代码块剥离、空输出默认空gaps）；lit_search agent 成功执行即视为 success（0篇论文不等于失败）
+- **literature_service.py**: `_parse_researcher_output` 重构为多格式兼容（JSON数组 > 管道符 > Markdown表格 > 自然语言提取）；`_dispatch_researcher` 改为 hermes CLI oneshot 优先 + LLM网关降级；`_import_to_kb` 跳过缺元数据条目防污染；`deep_read` 统一降级链
+- **optimize.py**: gap_data 解析增加 try/except 兜底；DIMENSION_FLOOR 阈值提升（0.65/0.60 → 0.70/0.65）避免偏科通过
+- **constants.py**: DEFAULT_MAX_ROUNDS 5→8、DEFAULT_NO_IMPROVEMENT_LIMIT 3→5，给予更多优化空间
+- **lifecycle_monitor.py**: 看板更新改为读-改-写，不覆盖 scheduler 写入的详细格式
+- **external_fetcher.py**: deepxiv JSON 解析增加异常捕获
+- **退回残缺 proposal**: key-transient-quantum-phase-optical-20260726（5模块全false、分数0.15、3个模块为占位符<100字节）从 pending_review 退回 optimizing，轮次归零
+
+### 验证结果
+- `python3 -m py_compile scripts/*.py` 全部通过
+- `self_test.py --module` 194/194 通过（含生命周期cron、对抗评审、周末任务、微调度器）
+
 ## v6.8.2 - 2026-08-03 根因防御: 健康检查新增 cron 检测 + 升级流程自动安装 cron
 
 ### 改动内容

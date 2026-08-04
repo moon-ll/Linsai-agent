@@ -715,8 +715,9 @@ class LiteratureService:
             f"1. 使用 web_search 和 DeepXiv 工具检索 arXiv 论文\n"
             f"2. 对每篇论文给出：arxiv_id、标题、作者、年份、评分(0-1)、TL;DR\n"
             f"3. 按评分从高到低排序\n"
-            f"4. 每篇论文的标题行必须以 '- ' 开头，格式为：\n"
-            f"   '- arxiv_id | 标题 | 作者 | 年份 | score | TL;DR'\n"
+            f"4. **必须**输出 JSON 数组格式（不要 markdown 代码块标记）：\n"
+            f'   [{{"arxiv_id": "2403.15337", "title": "标题", "authors": "作者", "year": "2024", "score": 0.9, "tldr": "摘要"}}]\n'
+            f"5. 如果检索不到论文，输出空数组 []\n"
             f"{exclude_prompt}"
         )
         return prompt
@@ -724,71 +725,195 @@ class LiteratureService:
     def _dispatch_researcher(self, prompt: str, source: str) -> List[Dict[str, Any]]:
         """委托 hermes researcher 联网检索并解析返回结果。
 
-        若 LLM 不可用，返回空列表。
+        优先通过 hermes CLI oneshot 模式（与简报一致），
+        不可用时降级为 LLM 网关直调。
         """
+        results: List[Dict[str, Any]] = []
+
+        # 方案 A：通过 hermes CLI oneshot 模式（与简报工作流一致）
+        try:
+            from hermes_memory import _run_hermes_agent
+            agent_result = _run_hermes_agent("researcher", prompt, timeout=300)
+            if agent_result.get("success"):
+                text = agent_result.get("output", "")
+                results = self._parse_researcher_output(text)
+                if results:
+                    return results
+        except Exception as e:
+            if _log:
+                _log.warning(f"[LiteratureService] hermes agent 调用失败，降级 LLM: {e}")
+
+        # 方案 B（降级）：直接通过 LLM 网关（无联网能力，仅能基于已有知识回答）
         try:
             from llm_gateway import llm_complete, is_llm_available
             if not is_llm_available():
-                if _log:
-                    _log.warning("[LiteratureService] LLM 不可用，跳过联网检索")
-                return []
-        except Exception:
-            pass
-
-        results: List[Dict[str, Any]] = []
-        try:
-            # 尝试通过 hermes_bridge 派活
-            from hermes_bridge import dispatch_to_profile
-            result = dispatch_to_profile("researcher", prompt, timeout=300)
-            if result and result.get("success"):
-                text = result.get("output", "")
+                return results
+            ok, text, _ = llm_complete("researcher", prompt, timeout=300)
+            if ok and text:
                 results = self._parse_researcher_output(text)
-        except Exception:
-            # 降级：直接通过 LLM 网关检索
-            try:
-                from llm_gateway import llm_complete
-                resp = llm_complete("researcher", prompt, timeout=300)
-                if resp:
-                    results = self._parse_researcher_output(resp)
-            except Exception:
-                pass
+        except Exception as e:
+            if _log:
+                _log.warning(f"[LiteratureService] LLM 网关降级也失败: {e}")
 
         return results
 
     def _parse_researcher_output(self, text: str) -> List[Dict[str, Any]]:
         """解析 researcher 输出的论文列表。
 
-        兼容两种格式：
-        - 无编号: - arxiv_id | 标题 | ...
-        - 编号: 1. arxiv_id | 标题 | ...
-        - 编号带括号: 1) arxiv_id | 标题 | ...
-        - 纯文本: arxiv_id | 标题 | ...（含数字.arxiv_id 模式）
+        多格式兼容（按优先级尝试）：
+        1. JSON 数组格式: [{"arxiv_id": ..., "title": ...}, ...]
+        2. 管道符格式: - arxiv_id | 标题 | 作者 | 年份 | 评分 | 摘要
+        3. Markdown 表格格式: | 2403.15337 | 标题 | ... |
+        4. 自然语言提取: arXiv:2403.15337 出现在文本任意位置
         """
         import re
-        papers: List[Dict[str, Any]] = []
-        # 匹配 arxiv_id 模式：数字.数字(至少4位)
+        if not text or not text.strip():
+            return []
+
         arxiv_pattern = re.compile(r"(\d{4}\.\d{4,5})")
+
+        # ── 格式 1: JSON 数组 ──
+        json_papers = self._try_parse_json(text, arxiv_pattern)
+        if json_papers:
+            return json_papers
+
+        # ── 格式 2 + 3: 管道符 / Markdown 表格 / 编号列表 ──
+        pipe_papers = self._try_parse_pipe_or_table(text, arxiv_pattern)
+        if pipe_papers:
+            return pipe_papers
+
+        # ── 格式 4: 自然语言提取（兜底） ──
+        nl_papers = self._try_parse_natural_language(text, arxiv_pattern)
+        return nl_papers
+
+    def _try_parse_json(self, text: str, arxiv_pattern) -> List[Dict[str, Any]]:
+        """尝试从文本中提取 JSON 数组。"""
+        import re
+        cleaned = text.strip()
+        # 去除 markdown 代码块标记
+        if cleaned.startswith("```"):
+            lines = cleaned.splitlines()
+            if lines[0].startswith("```"):
+                lines = lines[1:]
+            if lines and lines[-1].strip().startswith("```"):
+                lines = lines[:-1]
+            cleaned = "\n".join(lines).strip()
+
+        # 尝试找到 JSON 数组（支持嵌套在文本中的情况）
+        for start in range(len(cleaned)):
+            if cleaned[start] == '[':
+                # 找到匹配的 ]
+                depth = 0
+                for end in range(start, len(cleaned)):
+                    if cleaned[end] == '[':
+                        depth += 1
+                    elif cleaned[end] == ']':
+                        depth -= 1
+                        if depth == 0:
+                            try:
+                                data = json.loads(cleaned[start:end + 1])
+                                if isinstance(data, list):
+                                    papers = []
+                                    for item in data:
+                                        if not isinstance(item, dict):
+                                            continue
+                                        arxiv_id = str(item.get("arxiv_id", ""))
+                                        m = arxiv_pattern.search(arxiv_id)
+                                        if m:
+                                            arxiv_id = m.group(1)
+                                        papers.append({
+                                            "arxiv_id": arxiv_id,
+                                            "title": str(item.get("title", item.get("name", ""))),
+                                            "authors": str(item.get("authors", "")),
+                                            "year": str(item.get("year", "")),
+                                            "score": self._safe_float(item.get("score", 0.5)),
+                                            "tldr": str(item.get("tldr", item.get("summary", item.get("abstract", "")))),
+                                            "is_new": False,
+                                            "has_local_pdf": False,
+                                            "read_status": "unread",
+                                        })
+                                    if papers:
+                                        return papers
+                            except (json.JSONDecodeError, KeyError, TypeError):
+                                pass
+                break
+        return []
+
+    def _try_parse_pipe_or_table(self, text: str, arxiv_pattern) -> List[Dict[str, Any]]:
+        """尝试管道符格式和 Markdown 表格格式。"""
+        import re
+        papers: List[Dict[str, Any]] = []
+        in_table = False
+        header_parsed = False
 
         for line in text.split("\n"):
             line = line.strip()
             if not line:
+                # 表格结束
+                if in_table:
+                    in_table = False
                 continue
 
+            # 检测 Markdown 表格分隔行（|---|---|）
+            if re.match(r"^\|[\s\-:|]+\|$", line):
+                in_table = True
+                header_parsed = True
+                continue
+
+            # 检测 Markdown 表格数据行（以 | 开头）
+            if line.startswith("|") and "|" in line[1:]:
+                if not header_parsed:
+                    # 这是表头行，跳过
+                    in_table = True
+                    continue
+                # 表格数据行：split by | but skip empty first field
+                parts = [p.strip() for p in line.strip("|").split("|")]
+                # 查找含 arxiv_id 的字段
+                arxiv_id = ""
+                title_idx = -1
+                for idx, p in enumerate(parts):
+                    m = arxiv_pattern.search(p)
+                    if m and not arxiv_id:
+                        arxiv_id = m.group(1)
+                    if not p and idx > 0:
+                        continue
+                    if title_idx < 0 and p and not arxiv_pattern.match(p.strip()):
+                        title_idx = idx
+                if title_idx < 0:
+                    title_idx = 1 if len(parts) > 1 else 0
+                paper = {
+                    "arxiv_id": arxiv_id,
+                    "title": parts[title_idx] if title_idx < len(parts) else "",
+                    "authors": parts[title_idx + 1] if title_idx + 1 < len(parts) else "",
+                    "year": "",
+                    "score": 0.5,
+                    "tldr": parts[title_idx + 2] if title_idx + 2 < len(parts) else "",
+                    "is_new": False,
+                    "has_local_pdf": False,
+                    "read_status": "unread",
+                }
+                if arxiv_id or paper["title"]:
+                    papers.append(paper)
+                continue
+
+            # 非表格行，检查管道符格式（- arxiv_id | title | ...）
+            in_table = False
+            header_parsed = False
             # 去除常见前缀："- ", "1. ", "1) ", "* ", "• "
-            # 注意：不贪吃数字，保留 arxiv_id（如 2403.15337）
             stripped = re.sub(r"^(?:[-*•] |\d+[.)] )", "", line).strip()
             if not stripped:
                 continue
 
             parts = stripped.split("|")
             if len(parts) >= 2:
-                # 直接从第一个字段提取 arxiv_id
                 first_field = parts[0].strip()
                 arxiv_match = arxiv_pattern.search(first_field)
                 arxiv_id = arxiv_match.group(1) if arxiv_match else ""
-                paper = {
+                # 标题可能是第二个字段
+                title = parts[1].strip() if len(parts) > 1 else first_field
+                papers.append({
                     "arxiv_id": arxiv_id,
-                    "title": parts[1].strip() if len(parts) > 1 else first_field,
+                    "title": title,
                     "authors": parts[2].strip() if len(parts) > 2 else "",
                     "year": parts[3].strip() if len(parts) > 3 else "",
                     "score": self._safe_float(parts[4].strip()) if len(parts) > 4 else 0.5,
@@ -796,28 +921,37 @@ class LiteratureService:
                     "is_new": False,
                     "has_local_pdf": False,
                     "read_status": "unread",
-                }
-                papers.append(paper)
-            elif arxiv_pattern.search(stripped):
-                # 没有管道符但有 arxiv_id，尝试提取
-                match = arxiv_pattern.search(stripped)
-                rest = stripped[match.end():].strip(" :,-")
-                # 尝试按 | 分割 rest 部分
-                if "|" in rest:
-                    sub_parts = rest.split("|")
-                    paper = {
-                        "arxiv_id": match.group(1),
-                        "title": sub_parts[0].strip().lstrip(" :"),
-                        "authors": sub_parts[1].strip() if len(sub_parts) > 1 else "",
-                        "year": sub_parts[2].strip() if len(sub_parts) > 2 else "",
-                        "score": self._safe_float(sub_parts[3].strip()) if len(sub_parts) > 3 else 0.5,
-                        "tldr": sub_parts[4].strip() if len(sub_parts) > 4 else "",
-                        "is_new": False,
-                        "has_local_pdf": False,
-                        "read_status": "unread",
-                    }
-                    papers.append(paper)
+                })
 
+        return papers
+
+    def _try_parse_natural_language(self, text: str, arxiv_pattern) -> List[Dict[str, Any]]:
+        """兜底：从自然语言中提取所有 arXiv ID。
+
+        注意：自然语言提取只返回 arXiv ID，不编造标题/作者等字段。
+        调用方应通过后端（如 DeepXiv API）补充完整元数据后再入库。
+        标题标记为"(需补充元数据)"，避免低质量数据污染知识库。
+        """
+        import re
+        papers: List[Dict[str, Any]] = []
+        seen_ids: set = set()
+        for m in arxiv_pattern.finditer(text):
+            aid = m.group(1)
+            if aid in seen_ids:
+                continue
+            seen_ids.add(aid)
+            papers.append({
+                "arxiv_id": aid,
+                "title": "(需补充元数据)",
+                "authors": "",
+                "year": "",
+                "score": 0.3,
+                "tldr": "",
+                "is_new": False,
+                "has_local_pdf": False,
+                "read_status": "unread",
+                "_needs_metadata": True,  # 标记需要后续补充
+            })
         return papers
 
     def _extract_arxiv_id(self, paper: Dict[str, Any]) -> str:
@@ -857,10 +991,15 @@ class LiteratureService:
         source: str,
         proposal_id: Optional[str] = None,
     ) -> None:
-        """将新论文入库 KB。"""
+        """将新论文入库 KB。跳过需要补充元数据的条目。"""
         for paper in papers:
             arxiv_id = self._extract_arxiv_id(paper)
             if not arxiv_id:
+                continue
+            # v6.8.3: 跳过自然语言提取的缺元数据条目，不污染知识库
+            if paper.get("_needs_metadata"):
+                if _log:
+                    _log.info(f"[LiteratureService] 跳过缺元数据论文: {arxiv_id}，需通过 DeepXiv 补充")
                 continue
             try:
                 import kb_importer as ki
@@ -1050,15 +1189,18 @@ class LiteratureService:
             f"   ## 局限性\n"
         )
         try:
-            from hermes_bridge import dispatch_to_profile
-            result = dispatch_to_profile("researcher", prompt, timeout=300)
-            if result and result.get("success"):
-                return result.get("output", f"# Paper: {arxiv_id}\n\n> 阅读完成，但未返回内容\n")
-        except Exception:
+            from hermes_memory import _run_hermes_agent
+            agent_result = _run_hermes_agent("researcher", prompt, timeout=300)
+            if agent_result.get("success"):
+                return agent_result.get("output", f"# Paper: {arxiv_id}\n\n> 阅读完成，但未返回内容\n")
+        except Exception as e:
+            if _log:
+                _log.warning(f"[LiteratureService] deep_read hermes 调用失败，降级 LLM: {e}")
             try:
-                resp = llm_complete("researcher", prompt, timeout=300)
-                if resp:
-                    return resp
+                from llm_gateway import llm_complete
+                ok, text, _ = llm_complete("researcher", prompt, timeout=300)
+                if ok and text:
+                    return text
             except Exception:
                 pass
 
