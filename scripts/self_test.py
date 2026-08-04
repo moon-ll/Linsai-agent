@@ -53,7 +53,7 @@ def _run_selected(filters: List[str]) -> List[TestSuite]:
 
     suites = []
     mapping = {
-        "module": ["test_core", "test_lifecycle_cron", "test_adversarial_governance", "test_proposal_kb_sync", "test_weekend_pipeline", "test_literature_service"],
+        "module": ["test_core", "test_lifecycle_cron", "test_adversarial_governance", "test_proposal_kb_sync", "test_weekend_pipeline", "test_literature_service", "test_optimize_sections"],
         "scenario": "test_scenarios",
         "persona": "test_persona",
         "web": "test_web_api",

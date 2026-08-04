@@ -196,30 +196,75 @@ def _check_proposals() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
         stats.append(stat)
 
         # 异常检测
-        # 1. 有 failed job 达到最大重试次数（卡住）
         from lifecycle.constants import MAX_JOB_ATTEMPTS
-        stuck_jobs = [j for j in jobs if j["status"] == "failed" and j.get("attempts", 0) >= MAX_JOB_ATTEMPTS]
-        if stuck_jobs:
-            for sj in stuck_jobs:
+        # 1. 有 failed job（不论 attempts 数，任何 failed 都应关注）
+        failed_jobs = [j for j in jobs if j["status"] == "failed"]
+        if failed_jobs:
+            for sj in failed_jobs:
                 err = sj.get("last_error", "")[:120]
+                attempts = sj.get("attempts", 0)
+                severity = "stuck" if attempts >= MAX_JOB_ATTEMPTS else "failed"
                 anomalies.append({
-                    "type": "stuck",
+                    "type": severity,
                     "proposal_id": pid,
                     "job_id": sj["job_id"],
-                    "attempts": sj.get("attempts", 0),
+                    "attempts": attempts,
                     "error": err,
-                    "message": f"课题 {pid[:30]} 的 {sj['job_id'].split('-')[-1]} 卡住（{sj.get('attempts', 0)}次重试均失败）: {err}",
+                    "message": f"课题 {pid[:30]} 的 {sj['job_id'].split('-')[-1]} {severity}（attempts={attempts}）: {err}",
                 })
 
-        # 2. 连续多次 lit_search 失败（即使未达最大重试）
-        lit_search_failed = [j for j in jobs if j["status"] == "failed" and j.get("step") == "lit_search"]
-        if len(lit_search_failed) >= 2:
-            anomalies.append({
-                "type": "repeated_lit_search_failure",
-                "proposal_id": pid,
-                "count": len(lit_search_failed),
-                "message": f"课题 {pid[:30]} 有 {len(lit_search_failed)} 个 lit_search 失败",
-            })
+        # 2. 连续同类 step 失败（不限 lit_search，扩展到所有 step）
+        from collections import Counter
+        failed_steps = [j.get("step", "") for j in jobs if j["status"] == "failed"]
+        step_counts = Counter(failed_steps)
+        for step_name, count in step_counts.items():
+            if count >= 2:
+                anomalies.append({
+                    "type": "repeated_step_failure",
+                    "proposal_id": pid,
+                    "step": step_name,
+                    "count": count,
+                    "message": f"课题 {pid[:30]} 有 {count} 个 {step_name} 失败",
+                })
+
+        # 3. 检测执行历史中的系统性错误（429 限流、权限错误等）
+        try:
+            kanban_data = load_json(KANBAN_PATH, default={})
+            history = kanban_data.get("execution_history", [])
+            # 只看最近 2 小时的记录
+            from datetime import timezone
+            now_dt = datetime.now(timezone.utc)
+            recent = []
+            for h in history:
+                try:
+                    h_dt = datetime.fromisoformat(h.get("at", "").replace("Z", "+00:00"))
+                    if (now_dt - h_dt).total_seconds() < 7200 and not h.get("success", True):
+                        recent.append(h)
+                except Exception:
+                    pass
+
+            if recent:
+                # 检查是否有 429/限流/权限错误模式
+                rate_limit_errors = [h for h in recent if "429" in h.get("error", "") or "Token Plan" in h.get("error", "") or "用量上限" in h.get("error", "")]
+                if len(rate_limit_errors) >= 2:
+                    anomalies.append({
+                        "type": "api_rate_limit",
+                        "proposal_id": pid,
+                        "count": len(rate_limit_errors),
+                        "message": f"课题 {pid[:30]} 近 2h 内 {len(rate_limit_errors)} 次 API 限流（429/Token Plan 上限）",
+                    })
+
+                # 检查是否有权限/操作不允许错误
+                perm_errors = [h for h in recent if "Operation not permitted" in h.get("error", "") or "Permission" in h.get("error", "")]
+                if perm_errors:
+                    anomalies.append({
+                        "type": "permission_error",
+                        "proposal_id": pid,
+                        "count": len(perm_errors),
+                        "message": f"课题 {pid[:30]} 近 2h 内 {len(perm_errors)} 次权限错误",
+                    })
+        except Exception:
+            pass
 
     return stats, anomalies
 

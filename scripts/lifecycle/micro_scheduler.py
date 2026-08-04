@@ -178,6 +178,28 @@ def _move_to_queue_end(state: Dict[str, Any], proposal_id: str) -> None:
     state["queue"] = queue
 
 
+def _count_consecutive_slots(state: Dict[str, Any], proposal_id: str) -> int:
+    """统计 proposal_id 在聚焦历史中已连续聚焦几个不同时段。
+
+    从最近一条往回数，统计连续相同 proposal_id 的不同 slot_index 数量。
+    """
+    history = state.get("focus_history", [])
+    if not history:
+        return 0
+
+    seen_slots = set()
+    count = 0
+    for h in reversed(history):
+        if h.get("proposal_id") == proposal_id:
+            slot_idx = h.get("slot_index", -1)
+            if slot_idx not in seen_slots:
+                seen_slots.add(slot_idx)
+                count += 1
+        else:
+            break
+    return count
+
+
 def _is_round_complete(jobs: List[Dict[str, Any]], proposal_id: str, round_num: int) -> bool:
     """检查 proposal 的指定 round 是否全部 job 都 done。"""
     round_jobs = [j for j in jobs if j.get("round") == round_num]
@@ -888,13 +910,31 @@ def _focus_proposal_for_slot(
         except Exception:
             pass
 
-        # 检查上一时段聚焦的 proposal 是否已完成本轮或卡住
+        # 检查上一时段聚焦的 proposal 是否应让出时段
         try:
             prev_jobs = self._get_jobs(prev_pid)
             prev_state = self._get_proposal_state(prev_pid)
-            current_round = prev_state.get("optimization_rounds", 0) + 1 if prev_state else 1
+            completed_rounds = prev_state.get("optimization_rounds", 0) if prev_state else 0
             stuck = _is_proposal_stuck(self, prev_pid)
-            if not stuck and not _is_round_complete(prev_jobs, prev_pid, current_round):
+
+            # 统计该 proposal 已连续聚焦几个时段
+            consecutive = _count_consecutive_slots(state, prev_pid)
+
+            # 让出时段条件（满足任一则切换到下一个课题）：
+            # 1. 已卡住
+            # 2. 上一时段完成了一整轮（最近完成的轮次全部 done）
+            # 3. 连续聚焦已达上限（最多 2 个时段）
+            max_consecutive = 2
+            round_done_this_slot = (
+                completed_rounds > 0
+                and _is_round_complete(prev_jobs, prev_pid, completed_rounds)
+            )
+            should_switch = (
+                stuck
+                or round_done_this_slot
+                or consecutive >= max_consecutive
+            )
+            if not should_switch:
                 # 未完成也未卡住，继续聚焦上一个
                 state["last_slot_index"] = slot_index
                 state["last_proposal_id"] = prev_pid

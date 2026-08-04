@@ -1,0 +1,27 @@
+---
+title: "2407.07752"
+type: "concepts"
+created: "2026-07-31T14:08:20Z"
+updated: "2026-07-31T14:26:16Z"
+tags: []
+related: []
+source_raw: ""
+growth_stage: "seedling"
+confidence: 0.5
+used_by_proposals: ["general-order-parameter-ultrafast-readout-20260727"]
+read_status: "skimmed"
+---
+
+## 阅读笔记
+
+### general-order-parameter-ultrafast-readout-20260727
+- 核心结论：给出交错磁体低阶谐波磁场依赖及高阶平台的理论预言；截至检索时未确认正式 PRB 发表。
+- 与课题关联：将错误的 PRB 卷期改为明确预印本状态，支撑交错磁体实验方案的信号判据。
+- 已引用位置：references.md §4 [24]
+- 阅读日期：2026-07-31
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+_暂无关联概念_
+<!-- /linsai-wikilinks -->

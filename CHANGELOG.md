@@ -1,5 +1,52 @@
 # 变更记录
 
+## v6.8.3-fix3 - 2026-08-05 健康检查增强 + 微调度器修复 + 知识库修复
+
+### 改动内容
+
+- **lifecycle_monitor.py**: 健康检查全面增强
+  - cron 完整性检测：从仅检查 2 个前缀扩展到检查 4 个核心前缀（orchestrate/repair/micro/monitor）+ weekend
+  - cron 执行新鲜度检测：关键调度 cron 超过 2h 未执行则告警
+  - 全链路零进展检测：done 不变且 pending>0 超过 3h 告警
+  - cron 缺失自动修复：自动调用 `--setup-cron-v2` 重建框架
+  - failed job 检测：从仅 `attempts>=3` 改为任何 failed 立即告警
+  - 同类 step 连续失败：从仅检查 lit_search 扩展到所有 step
+  - 系统性错误检测：扫描执行历史中 429 限流和权限错误模式
+
+- **micro_scheduler.py**: 微调度器轮转修复
+  - 新增 `_count_consecutive_slots()` 函数，限制单课题最多连续聚焦 2 个时段
+  - 修复"完成一轮后立即开始下一轮导致霸占时段"的 bug：改为检查最近完成的一轮是否全部 done，若是则让出时段
+
+- **executor.py**: gap_identify 容错增强
+  - 当 researcher agent 返回非 JSON（自然语言分析）时，不再报错，生成空 gaps 兜底文件让流程继续
+
+- **knowledge/**: 知识库批量修复（通过 `kb_health_repair.py` 和 `kb_fill_wiki_notes.py`）
+  - 删除 3 组重复论文文件，修正 5 篇 NSFC 论文的 project 标记
+  - 清除 7 篇 2607.xxx 系列错误标记，删除测试残留
+  - 补齐 39 篇深度分析未落盘的 wiki 笔记（34→73 篇）
+
+- **AGENTS.md / docs/ARCHITECTURE.md**: 更新所有 profile 模型为 MiniMax-M3
+
+- **hermes profile researcher**: 配置 fallback 链（glm-5.2 → MiniMax-M2.7）
+
+- **_lifecycle.json**: 修复 4 个 proposal 的 transition_history 与 status 不一致
+
+### 验证结果
+- `self_test.py --module` 220/220 通过
+
+## v6.8.3-fix2 - 2026-08-05 健康检查修复: ProposalSections 路径错误导致 full_review 读不到申请书
+
+### 改动内容
+
+- **optimize.py**: 修复 `_run_critic`（第279行）和 `_run_writer`（第619行）中 `ProposalSections(prop_dir)` 误用顶层 proposal 目录
+  - 根因：`prop_dir` 为 `{stage}/{proposal_id}`（如 `optimizing/general-xxx-20260726`），但 `ProposalSections` 期望传入 `04_proposal` 子目录。误传导致 `sections_dir` 指向顶层空的 `sections/` 目录（历史残留 0 字节文件），`section_exists()` 对所有章节返回 False
+  - 影响：`is_full_review`（整体一致性审查）模式下，critic 的 `files_to_read` 列表为空——**评审 agent 收不到任何申请书内容文件路径**，在无内容基础上产出空泛评审。writer 的 `section_files` 列表同样为空，`assemble_draft()` 也写入错误位置
+  - 触发场景：任一 proposal 完成三章节评审后进入 full_review 步骤即触发
+
+### 验证结果
+- `python3 -m py_compile scripts/proposal_lifecycle/optimize.py` 通过
+- `self_test.py --module` 220/220 通过（含新增 5 个章节路径正确性测试）
+
 ## v6.8.3-fix1 - 2026-08-04 健康检查修复: 方法名拼写 + JSON解析遗漏
 
 ### 改动内容

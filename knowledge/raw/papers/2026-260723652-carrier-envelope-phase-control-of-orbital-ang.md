@@ -4,7 +4,7 @@ arxiv_id: "2607.23652"
 authors: "Camilo Granados, Rajaram Shrestha, Bikash Kumar Das, Debobrata Rajak, Eric Cormier"
 year: 2026
 tags: ["deepxiv-论文库"]
-project: ["NSFC-强场超快"]
+project: []
 direction: "固体HHG"
 source: "hermes-briefing"
 imported_at: "2026-08-02T16:36:50Z"

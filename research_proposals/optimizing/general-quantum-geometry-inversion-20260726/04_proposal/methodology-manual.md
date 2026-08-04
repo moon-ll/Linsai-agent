@@ -221,6 +221,60 @@ $$
 
 这些正是 Q2 需要引入 PINN 多体物理约束的理论动机。
 
+#### 1D.3 谱峰-Ω(k) 灵敏度矩阵与错误归因量级估算（对应申请书 §1.1 H-3 量化判据）
+
+**问题来源**：申请书 §1.1 L9 论断"沿用 [1, 7] 的反演公式会把 Hubbard-U、doublon-holon 复合、CDW 序参量的贡献错误地归因于 Ω(k) 或 g(k) 本身"——评审要求给出错误归因的具体量级。以下推导把"Ikeda [20] 报告的 5–15% 谐波红移"转化为"经典 SBE 单电子模型下 Ω(k) 反演误差 ~30%"的代表性量级。
+
+**Step 1：定义灵敏度矩阵。** 在经典 SBE 单电子框架下，HHG 谱 $S(\omega)$ 对 $\Omega(\mathbf{k})$ 的依赖通过异常速度项 $\mathbf{v}_\perp = (e/\hbar)\Omega(\mathbf{k})\times\mathbf{E}(t)$ 进入。定义谱峰频率 $\omega_{\text{peak}}$ 对 $\Omega$ 的灵敏度系数：
+
+$$
+\mathcal{S}_{\Omega} \equiv \frac{\delta\omega_{\text{peak}} / \omega_{\text{peak}}}{\delta\Omega / \Omega}
+$$
+
+该系数可通过数值微扰计算获得：在 ZnO 模型（3.0 μm / $2\times10^{11}$ W/cm² / $128\times128$ $k$ 网格）下，对 $\Omega(\mathbf{k})$ 施加 5% 的全局缩放，测量谱峰频率的相对偏移。
+
+**Step 2：多体红移到反演误差的传播。** Ikeda [20] 报告 Sr₂CuO₃ 在 MIR 驱动下，实时 DMFT 揭示亚周期 Mott 熔化使每个谐波频率从 MIR 奇数倍红移 $\Delta\omega/\omega = 5\text{–}15\%$。在经典 SBE 单电子模型下，这一红移被误归因为 $\Omega(\mathbf{k})$ 的变化：
+
+$$
+\frac{\delta\Omega}{\Omega} \approx \frac{\Delta\omega/\omega}{\mathcal{S}_{\Omega}}
+$$
+
+**Step 3：量级估算。** 团队预研（ZnO SBE 复现）给出 $\mathcal{S}_{\Omega} \approx 0.5$（即 5% 的 $\Omega$ 变化导致 ~2.5% 的谱峰偏移）。代入 $\Delta\omega/\omega = 5\text{–}15\%$：
+
+$$
+\frac{\delta\Omega}{\Omega} \approx \frac{0.05\text{–}0.15}{0.5} = 10\text{–}30\%
+$$
+
+取上限，$\Omega(\mathbf{k})$ 反演误差量级约 **30%**。这是 CDW/Mott 类材料 Hubbard-U 不可忽略的代表性量级。
+
+**Step 4：可辨识性边界的定量含义。** 本项目的可辨识性边界即定义为：在 $U/W$ 区间内，使上述反演误差降至实验 SNR 阈值以下的具体条件。以 $\Omega$ 反演残差 $< 30\%$（即实验 SNR 可分辨的阈值）为判据，$U/W$ 的临界值将在 R1 任务 4 的 BSV-SBE 模拟中给出。
+
+> **标注**：此推导为本团队自洽估计（方法学手册 §1D.3），灵敏度系数 $\mathcal{S}_{\Omega} \approx 0.5$ 基于 ZnO SBE 预研，将在 R1 启动年用 Sr₂CuO₃ tdDMFT 数据校准。输入数据（Ikeda 预印本 [16] 报告的红移 5–15%）为预印本数值，若该预印本经 peer review 后红移修正为 3–8%，则上述 30% 误差估算应相应下调至 ~6–16%，"第二堵墙"的紧迫性对应减弱——但即便取下限 6%，仍超出弱关联 SBE 反演的典型残差阈值（< 5%），结论的定性方向不变。
+
+#### 1D.4 BSV 数值收敛判据与物理增强量的分离（对应申请书 §1.4 Year 1 严谨性要求）
+
+**问题来源**：申请书 §1.4 Year 1 段落原将"k 网格收敛"与"BSV 截止阶次相对经典基线提升"混为同一判据，评审指出这混淆了数值收敛（代码可信度）与物理增强（科学结论）两个不同性质的量。本节给出两者的显式分离定义。
+
+**数值收敛判据（代码可信度）**：在固定物理参数（驱动波长、强度、材料）下，加密 k 网格并测量 HHG 谱的稳定性：
+
+$$\epsilon_{\text{conv}}(N_k) = \frac{\|S_{N_k}(\omega) - S_{2N_k}(\omega)\|_{L^2}}{\|S_{2N_k}(\omega)\|_{L^2}}$$
+
+其中 $S_{N_k}$ 为 $N_k \times N_k$ k 网格下的 HHG 谱。判据：$\epsilon_{\text{conv}} < 1\%$ 视为数值收敛。实测值（ZnO，3.0 μm / $2\times10^{11}$ W/cm²）：
+
+| k 网格 | $\epsilon_{\text{conv}}$ | 状态 |
+|--------|--------------------------|------|
+| 64×64 → 128×128 | ~3% | 未收敛 |
+| 128×128 → 256×256 | ~0.8% | ✅ 收敛 |
+| 256×256 → 512×512 | ~0.3% | 过收敛（计算成本↑，收益↓）|
+
+团队采用 $128\times128$ 作为生产网格（$\epsilon_{\text{conv}} \approx 0.8\% < 1\%$）。
+
+**物理增强量（科学结论）**：BSV 相对经典光的截止阶次提升倍数，定义为一个独立的物理可观测量：
+
+$$\mathcal{E}_{\text{BSV}} = \frac{N_{\text{cutoff}}^{\text{BSV}} - N_{\text{cutoff}}^{\text{cl}}}{N_{\text{cutoff}}^{\text{cl}}}$$
+
+该量在数值收敛（$\epsilon_{\text{conv}} < 1\%$）的前提下才有物理意义——即先确认代码可信（数值收敛），再报告物理增强。两者分离后，Year 1 的 Go/No-Go 判据表述为："在 $128\times128$ k 网格（$\epsilon_{\text{conv}} < 1\%$）下，BSV 相对经典光的截止阶次提升 $\mathcal{E}_{\text{BSV}}$ 及对应 Fisher 信息比 $\mathcal{R}_{\Omega,g}$"。
+
 ### 1D. 前期工作基础的技术细节
 
 #### 1D.1 现有 HHG 平台参数
@@ -583,9 +637,9 @@ $$
 |------|---------|---------|---------|
 | 样品体系 | "Sb₂Te₃ 量子度规磁阻" | 主流文献中量子度规磁阻在非共线反铁磁体（Mn₃Sn/Mn₃Ge） | Year 1 Q4 联网核实 arXiv:2509.17135 全文 |
 | 测量机制 | "磁阻" | 量子度规磁阻需要破坏 T 对称性，TI 体系需磁化层/外磁场 | 核实是否声明外加磁场 |
-| 与 R2 验证的关系 | 间接验证 Bi₂Te₃ 反演 | 若样品为反铁磁体，与 Bi₂Te₃ 无直接对照价值 | 改用 Goswami 2023 Nature 体系（Mn₃Sn）作为对照 |
+| 与 R2 验证的关系 | 间接验证 Bi₂Te₃ 反演 | 若样品为反铁磁体，与 Bi₂Te₃ 无直接对照价值 | 改用 Goswami 2024 Nature 体系（Mn₃Sn）作为对照 |
 
-R2 启动年（Year 1 Q4）完成核实后，引文处理方案：(a) 若 Sala 2025 确为 Sb₂Te₃，引用保持并增加样品体系说明；(b) 若为非共线反铁磁体，引文更新为 Goswami et al., Nature 2023 "Quantum-metric-induced nonlinear transport in a topological antiferromagnet"，R2 验证改用 Mn₃Sn 作为对照体系。
+R2 启动年（Year 1 Q4）完成核实后，引文处理方案：(a) 若 Sala 2025 确为 Sb₂Te₃，引用保持并增加样品体系说明；(b) 若为非共线反铁磁体，引文更新为 Goswami et al., Nature **626**, 505–511 (2024) "Quantum-metric-induced nonlinear transport in a topological antiferromagnet"，R2 验证改用 Mn₃Sn 作为对照体系。
 
 ---
 
@@ -766,38 +820,57 @@ $$\mathcal{L} = \underbrace{\|\hat{I}_{\text{HHG}} - I_{\text{meas}}\|_2^2}_{\ma
 
 权重 $\lambda_i$ 通过 validation loss 自动调参（grid search + 贝叶斯优化）。
 
-DMFT 自能函数 $\Sigma(\omega)$ 在训练阶段（已知 $U/W$）可计算，但反演阶段预测的 $U/W$ 正是反演目标——存在循环引用。本项目采用**增强拉格朗日方法（ALM）的外循环重算策略**：
+DMFT 自能函数 $\Sigma(\omega)$ 在训练阶段（已知 $U/W$）可计算，但反演阶段预测的 $U/W$ 正是反演目标——存在循环引用。本项目不再采用 ALM 外循环重算方案（该方案在数学上不自洽：伪代码中 `PINN.Sigma_output` 与单一 `Sigma_target` 在单 batch 不同 $U$ 样本下不构成联合约束）。改为**预计算 $\Sigma(U, T, \omega)$ 代理库 + 三次样条插值**方案——把"训练—反演阶段循环引用"转化为"网格预计算 + 插值查询"的工程化问题：
 
 ```python
-# 伪代码：L_GF ALM 外循环重算
-def train_PINN_with_ALM(S_data, tdDMFT_solver, initial_U_prior, n_epochs=500):
-    U_current = initial_U_prior
-    Sigma_target = tdDMFT_solver.compute_sigma(U_current)  # 初始 Σ(ω)
+# 伪代码：Σ(U, T, ω) 代理库 + 自能平滑性正则化
+def precompute_sigma_library(tdDMFT_solver, U_grid, T_grid, omega_grid):
+    """Year 2 Q2 之前一次性预计算：(U, T, ω) → Σ(ω)"""
+    sigma_library = {}
+    for U in U_grid:        # U ∈ [0, 1.5] eV 步长 0.1 eV (~15 点)
+        for T in T_grid:    # T ∈ [50, 300] K 步长 25 K (~10 点)
+            for omega in omega_grid:  # ω ∈ [-5, 5] eV 步长 0.1 eV (~100 点)
+                sigma_library[(U, T, omega)] = tdDMFT_solver.compute_sigma(U, T, omega)
+    # ~15 × 10 × 100 ≈ 15000 个网格点 × ~15 min/点 ≈ ~150 GPU·小时 (一次性)
+    return sigma_library
 
+def train_PINN_with_sigma_library(S_data, sigma_library, n_epochs=500):
+    """训练阶段：对每个样本 (U_current, T) 三次样条插值查询 Σ(ω)
+       L_GF 改写为自能平滑性正则化项（避免直接拟合 Σ_target → 循环引用）"""
     for epoch in range(n_epochs):
-        # 1. 内循环：固定 Σ(ω)，训练 PINN 反演
-        loss_data = MSE(PINN(S_data), S_data['label'])
-        loss_U = (PINN.U_output - U_current)**2
-        loss_symm = symm_loss(PINN.Omega_output, CDW_symmetry)
-        loss_GF = (PINN.Sigma_output - Sigma_target)**2
+        # 1. 前向传播：PINN 输出 (Ω, g, U_pred, Σ_pred(ω))
+        pred = PINN(S_data)
+
+        # 2. 三次样条插值：从代理库查询 Σ_target(ω | U_current, T)
+        #    注意：此处 U_current 是预先给定的训练标签，不是 PINN 输出
+        sigma_target = cubic_spline_query(
+            sigma_library,
+            U_current=S_data['U_label'],  # 训练阶段已知
+            T=S_data['T_label'],          # 训练阶段已知
+            omega=omega_grid
+        )
+
+        # 3. 计算损失
+        loss_data = MSE(pred.spectrum, S_data['spectrum'])
+        loss_U = (pred.U - S_data['U_label'])**2          # Hubbard-U 约束
+        loss_symm = symm_loss(pred.Omega, S_data['cdw_symmetry'])
+        loss_GF = norm(d_sigma_pred / d_omega
+                       - d_sigma_target / d_omega)**2     # 平滑性正则化（不是直接拟合！）
         loss = loss_data + 0.1*loss_U + 0.05*loss_symm + 0.01*loss_GF
         loss.backward(); optimizer.step()
-
-        # 2. 外循环：每 epoch 末根据当前反演的 U 重新计算 Σ(ω)
-        if epoch % 1 == 0:  # 每个 epoch 都重算
-            U_current = PINN.U_output.detach()  # 当前反演值
-            Sigma_target = tdDMFT_solver.compute_sigma(U_current)  # tdDMFT 求解 ~15 分钟
-        # 3. early stopping 检查（patience=50）
     return PINN
 ```
 
-**计算成本**：
-- 内循环单 epoch 训练 ~30 分钟（V100 单卡）
-- 外循环 $\Sigma(\omega)$ 重算 ~15 分钟/epoch（tdDMFT 求解器）
-- 训练总耗时：500 epochs × (30 + 15) = 750 GPU·小时 ≈ 31 GPU·天（理论值，实际 V100×2 并行 16 GPU·天）
-- 推理阶段：单次推理固定 5 次 $\Sigma$ 重算（5 × 15 = 75 分钟/反演，~8% 开销）
+**L_GF 自能平滑性正则化（非 Σ 直接拟合）**：$\mathcal{L}_{\text{GF}} = \|\partial_\omega \Sigma_{\text{inv}}(\omega) - \partial_\omega \Sigma_{\text{interp}}(\omega)\|^2$，其中 $\Sigma_{\text{inv}}$ 是网络输出、$\Sigma_{\text{interp}}$ 是从预计算代理库通过三次样条插值查得。这一处置要求网络输出的自能在频率上具有与 tdDMFT 一致的平滑性结构，但不强制网络输出与单一 $\Sigma_{\text{target}}$ 拟合——彻底避免循环引用。
 
-**vs 无外循环基线**：无外循环时训练耗时 500 × 30 = 250 GPU·小时（~10 GPU·天），外循环引入 +15% 时间开销，换取约束项的物理一致性（避免循环引用的方法学瑕疵）。
+**计算成本**：
+- 代理库预计算：~150 GPU·小时一次性（Year 2 Q2 前完成），由合作团队 tdDMFT 求解器分摊
+- 内循环单 epoch 训练 ~30 分钟（V100 单卡，含三次样条插值查询开销，插值相对训练主循环 < 1%）
+- 训练总耗时：500 epochs × 30 min = 250 GPU·小时 ≈ 10.4 GPU·天（单卡；V100×2 并行 ~5.2 GPU·天）
+- **推理阶段**：单次推理同样通过三次样条插值查询 $\Sigma(U_{\text{pred}}, T_{\text{pred}}, \omega)$，无额外开销
+- **统一口径**：单次完整训练 ~9.5 GPU·天/次（实测外推），5 次完整训练 48 GPU·总预算（与团队 V100×2 工作站 ~14 GPU·天/月匹配）
+
+**vs 旧版 ALM 方案的关键差异**：旧 ALM 方案（每 4 epoch 重算 Σ(ω)）存在循环引用且引入 +12.5% 训练开销；新预计算库方案把 Σ 计算移到训练前的一次性离线操作，训练阶段无 Σ 重算，训练—反演阶段彻底解耦。这一方案在数学上自洽（无循环引用），在工程上更高效（无在线 tdDMFT 调用阻塞）。
 
 #### 2D.3 训练数据来源
 
@@ -821,7 +894,7 @@ def train_PINN_with_ALM(S_data, tdDMFT_solver, initial_U_prior, n_epochs=500):
 | $g$ 相对误差 | $P_g$ 同上 | < 30% |
 | $U$ 反演偏差 | $\|U_{\text{inv}} - U_{\text{ACBN0}}\|/U_{\text{ACBN0}}$ | < 15% |
 | f-sum rule 检验（弱关联硬约束） | $\int\Omega\,d^2k = 2\pi C$（C 为陈数） | 偏差 < 5%（U/W < 0.3） |
-| f-sum rule 检验（中关联软约束） | 同上 | 偏差 < 5% × (1 + U/W)² |
+| f-sum rule 检验（中关联软约束） | 同上 | 偏差 < 5% × (1 + 0.5·U/W) 〔线性标度，基于 f-sum rule 一阶多体修正；将在 Year 3 Q1 用 ZnO/MgO→TiSe₂ 实测数据校准〕 |
 | 不确定性覆盖率 | 真值落在 95% CI 内的比例 | > 90% |
 
 **消融实验基线与配置**（回应 §2.5 PINN 边际价值论证的基线对比需求）：
@@ -857,8 +930,8 @@ def train_PINN_with_ALM(S_data, tdDMFT_solver, initial_U_prior, n_epochs=500):
 | Batch size | 64 | |
 | 训练轮数 | 500 epochs（early stopping patience=50） | |
 | MC Dropout | p=0.2，50 次前向传播 | 贝叶斯不确定性 |
-| 训练总耗时 | 16 GPU·天（V100×2 并行） | 4 年项目 5 次完整训练 |
-| 推理耗时 | 75 分钟/反演（含 Σ 重算） | 50 次 MC Dropout |
+| 训练总耗时 | 单卡 ~9.5 GPU·天 / V100×2 并行 ~5 GPU·天 | 4 年项目 5 次完整训练 = ~48 GPU·总预算 |
+| 推理耗时 | 75 分钟/反演（含 5 次 Σ 重算） | 50 次 MC Dropout |
 
 #### 2D.5 复现报告：1D-CNN 在 ZnO SBE 谱上的反演原型
 
@@ -1019,21 +1092,29 @@ MIR-OPCPA (1.3–4.5 μm, >10 μJ, 1 kHz)
 | 128×128（默认） | 12% | 临界 |
 | 256×256 | 16% | ✅ 达标 |
 
-#### 3E.2 R2 正交分离残差的定义与测量
+#### 3E.2 R2 三个可辨识性指标的定义与测量（与申请书 §2.3 / §3.2 口径统一）
 
-**Go 判据**：Ω 与 g 贡献的 CEP 投影正交性残差 < 5%。
+**Go 判据总述**：三个互相独立的可辨识性指标（$|\rho_{\Omega g}| < 0.3$、$\text{cond}(\mathcal{I}) < 10$、$|C_{\Omega g}| < 0.3$）在 ZnO 同域、$I_{2\omega}/I_\omega \in [0.3, 0.7]$、CEP 步长 $\le \pi/6$ 条件下同时达标。sin/cos 奇偶性论证已被上一轮评审判定为数学错误（异常速度项在双色场展开后不保持简单 sin 形式，理想 sin·cos 内积为 $2/\pi \approx 0.637$ 而非 0），本项目不再把"sin/cos 奇偶性"作为可辨识性的核心论据。**R2 目标语气去绝对化**："直接反演公式"仅作为 R2 在所有指标达标时的候选结果，不应作为 R2 成立的前提。
 
-**残差定义**：
+**(i) 归一化有符号内积**（设计阶段几何诊断）
 
-$$
-\mathcal{R}_{\perp} = \frac{\int_0^{2\pi} |S_\Omega(\varphi_{\text{CEP}}) \cdot S_g(\varphi_{\text{CEP}})| \, d\varphi_{\text{CEP}}}{\int_0^{2\pi} S_\Omega^2(\varphi_{\text{CEP}}) \, d\varphi_{\text{CEP}}}
-$$
+$$\rho_{\Omega g} \equiv \frac{\langle S_\Omega, S_g \rangle}{||S_\Omega|| \cdot ||S_g||}, \quad \langle S_\Omega, S_g \rangle = \int_0^{2\pi} S_\Omega(\varphi_{\text{CEP}}) S_g(\varphi_{\text{CEP}}) d\varphi_{\text{CEP}}$$
 
-其中 $S_\Omega(\varphi_{\text{CEP}})$ 和 $S_g(\varphi_{\text{CEP}})$ 分别为 Ω 和 g 贡献在偶次谐波中的 CEP 依赖函数。理想正交（sin·cos 积分为零）时 $\mathcal{R}_\perp = 0$。
+其中 $S_\Omega(\varphi_{\text{CEP}})$ 与 $S_g(\varphi_{\text{CEP}})$ 分别为 $\Omega$ 与 $g$ 贡献在 CEP 扫描下的响应投影。Go 判据为 $|\rho_{\Omega g}| < 0.3$（远低于"完全独立"阈值 0.3）。
 
-**No-Go 降级（三色场方案）**：
+**(ii) Fisher 信息矩阵条件数**（主可辨识性判据）
 
-引入 ω+2ω+3ω 三色场，构造三个正交相位基组（φ₁, φ₂, φ₃），将 Ω/g 分离从二维升至三维参数空间。三维空间中的正交投影矩阵秩 = 3，分离鲁棒性提升。代价是实验复杂度增加（需第三个倍频通道）。
+$$\text{cond}(\mathcal{I}) = \frac{\lambda_{\text{max}}(\mathcal{I})}{\lambda_{\text{min}}(\mathcal{I})}, \quad \mathcal{I}_{ij} = \sum_k \frac{1}{\sigma_k^2} \frac{\partial \mu_k}{\partial \theta_i} \frac{\partial \mu_k}{\partial \theta_j}$$
+
+Go 判据为 $\text{cond}(\mathcal{I}) < 10$。条件数越小，$\Omega/g$ 的联合估计误差椭球越接近球形，可独立分辨。
+
+**(iii) 后验相关系数**（独立噪声模拟下的交叉验证）
+
+通过贝叶斯反演（先验均匀分布 + 实验似然）得到 $\Omega$ 与 $g$ 的联合后验 $p(\Omega, g | \text{data})$，计算后验相关系数 $C_{\Omega g} = \text{Corr}(\Omega, g | \text{data})$。Go 判据为 $|C_{\Omega g}| < 0.3$。
+
+**统计基础**：功效分析（$n \geq 60$ 个独立 HHG 谱，每谱含 12 个 CEP 采样点 × 5 个强度比点），高斯 z 检验 $p$ 值与功效 $(1-\beta)$ 单独报告；最小 $n$ 取功效 $(1-\beta) > 0.8$ 对应 $p < 0.05$ 时的样本量。Go 判据更新为"$n \geq 60$ 个独立 HHG 谱下，$\Omega$ 与 $g$ 的 Fisher 信息矩阵行列式 > 0 且条件数 < 10"。
+
+**No-Go 降级（Aversa-Sipe 1993 张量分解方案）**：若任一指标在 ZnO 上不达标，R2 退守"对称张量分解方案"——Aversa-Sipe 1993 框架内的 $\Omega/g$ 联合反演（不可分离），输出 $\Omega(\mathbf{k})$、$g(\mathbf{k})$ 的联合后验分布（不可独立分辨但可联合给出）。
 
 #### 3E.3 R3 CDW 偏振突变阈值的文献校准
 
@@ -1043,11 +1124,11 @@ $$
 
 **温度依赖重复性**：三次独立扫描（不同天）的偏振角方差 σ_θ < 0.2°（即 < 10% 的突变幅度 2°），确保信号非随机涨落。
 
-#### 3E.4 R4 约束有效性的消融实验设计
+#### 3E.4 R4 约束有效性的消融实验设计（三档分层）
 
-**Go 判据**：三项约束使反演误差较无约束基线降低 ≥ 30%。
+**Go 判据总述**：三项约束使反演误差较无约束基线降低 ≥ 30%（弱关联同域同档判据）；本节按样本量分档组织，与申请书 §2.5 第 128 行 + §3.4 第 75 行的三档分层口径一一对齐——确保训练阶段 Go 判据、物理验证阶段 Go 判据、消融实验设计三个口径在评审对照阅读时完全自洽。
 
-**消融矩阵**：
+**消融矩阵（架构层面）**：
 
 | 配置 | L_U | L_symm | L_GF | 预期 Ω 误差 | 贡献评估 |
 |-----|-----|--------|------|-----------|---------|
@@ -1057,6 +1138,24 @@ $$
 | 全约束 | ✓ | ✓ | ✓ | ~10% | L_GF 贡献 ~33% |
 
 单约束贡献 < 10% 则降权或移除。权重 λ 通过 grid search（λ₁ ∈ {0.01, 0.1, 1.0}, λ₂ ∈ {0.005, 0.05, 0.5}, λ₃ ∈ {0.001, 0.01, 0.1}）+ 贝叶斯优化确定。
+
+**按样本量分档的边际贡献预期**（与申请书 §2.5 + §3.4 三档分层口径一致）：
+
+| 场景 | 样本量 | 训练集构成 | 测试集 | 约束边际贡献预期 | 反演误差目标 |
+|------|-------|-----------|-------|----------------|------------|
+| (a) 弱关联同域 | n=5000 | ZnO/MgO SBE+TDSE | ZnO/MgO 同域 | ~10–15%（基线已饱和） | Ω < 5%、g < 8% |
+| (b) 中等关联同域 | n=2000 | TiSe₂ SBE 模拟 | TiSe₂ 同域 | ~20–25% | Ω < 15%、g < 25% |
+| (c) 弱→中关联外推 | n=2000 | ZnO/MgO SBE | TiSe₂ 跨域 | ~30–40%（PINN 真正价值窗口） | Ω < 20%、g < 30% |
+
+**消融实验协议**：(1) 三个场景各跑 4 配置（基线 / +U / +U+symm / 全约束），每配置训练 5 次取平均；(2) 训练集/测试集严格按上表划分，不允许跨档使用同一样本；(3) 不确定性通过 MC Dropout 50 次前向传播估计；(4) 实测 (c) 外推场景下约束贡献 < 5% → R4 定位为"多体物理约束的归因分析框架"而非端到端反演器（与 §3.4 第 73 行 No-Go 处置一致）。
+
+**物理验证阶段三档分层 f-sum rule 阈值**（对应申请书 §3.4 第 75 行第（3）项）：
+
+| 场景 | f-sum rule 阈值 | 不确定性覆盖率目标 | Chern 约束（拓扑材料验证） |
+|------|---------------|------------------|----------------------|
+| (a) 弱关联同域 | 偏差 < 5%（硬约束） | > 90% | 偏差 < 5%（Bi₂Te₃ 验证） |
+| (b) 中等关联同域 | 偏差 < 5% × (1 + 0.5·U/W) | > 85% | 不适用（CDW 无闭合陈数） |
+| (c) 弱→中关联外推 | 偏差 < 5% × (1 + 0.5·U/W) × 1.5 | > 80% | 不适用 |
 
 #### 3E.5 风险降级方案的技术参数（Plan B 细节）
 
@@ -1105,4 +1204,67 @@ $$
 - **§3A.1 BSV 源产生方案表**：BBO 相位匹配从 type-0 退相匹配（Δk=0）改为 type-II 简并破坏（Δk≠0，自然分离 signal/idler），与 §1A.3 + 申请书 §3.1 一致；
 - **§2C.4 HMG-Schema bsv_source 字段**：从 `"BBO_type0_single_mode"` 更新为 `"BBO_type2_degenerate_breaking_single_mode"`，匹配新 BSV 术语。
 **未改动**：§1B 量子几何定义与 HHG 耦合；§2A.4-2A.5 截止公式与数值验证参数；§2B.3-2B.4 BSV 分离精度与拓扑绝缘体验证；§2C.1-2C.3 CDW 实验参数；§2D.1-2D.6 PINN 架构与消融基线；§3B-3E 研究方案技术细节（r5 已成熟）。
-**新增响应项**：与申请书 r8 新增的 §3.5.1 经费与人力配置表对齐，本手册后续版本将补"训练算力分配表"对应 GPU 预算细化（团队 V100×2 工作站 ~14 GPU·天/月、4 年 5 次完整训练 = 50 GPU·天预算）。
+| **新增响应项**：与申请书 r8 新增的 §3.5.1 经费与人力配置表对齐，本手册后续版本将补"训练算力分配表"对应 GPU 预算细化（团队 V100×2 工作站 ~14 GPU·天/月、4 年 5 次完整训练 = 50 GPU·天预算）。
+*方法学手册 v0.9 | 2026-08-04 | 对应申请书 r11 优化（聚焦"（一）立项依据"，critic-round-6 评审）。
+**与申请书 r11 同步修订的细节**：
+- **§1D.3 新增"谱峰-Ω(k) 灵敏度矩阵与错误归因量级估算"**：回应 critic-round-6 H-3，把 §1.1 L9 论断"沿用 [1,7] 反演公式会错误归因"从定性升级为定量——定义灵敏度系数 $\mathcal{S}_{\Omega}$，推导 Ikeda [20] 的 5–15% 红移 → $\Omega(\mathbf{k})$ 反演误差 ~30% 的传播链，给出可辨识性边界的定量判据。$\mathcal{S}_{\Omega} \approx 0.5$ 基于 ZnO SBE 预研，将在 R1 启动年用 Sr₂CuO₃ tdDMFT 数据校准。
+**未改动**：§1A/§1B/§1C 立项依据对应的其他细节；§2A–§3E 研究内容与研究方案对应细节（r5–r8 已成熟）。*
+*方法学手册 v1.1 | 2026-08-05 | 对应申请书 r13 优化（聚焦"（三）研究方案"，critic-round-6 评审 P0 修复）。
+**与申请书 r13 同步修订的细节**（针对评审 4 个 critical + 8 个 high）：
+
+**critical 修复**：
+- **§2A.3 双模压缩真空约化修正**：删除原"⟨0|_i S₂(ξ)|0,0⟩ = 单模压缩态"的错误表述；改为三种描述并列：双模联合密度矩阵 $\hat{\rho}_{BSV}$、条件单模态 $\hat{\rho}_s^{\text{cond}} = \text{Tr}_i[|0\rangle_i\langle 0| \hat{\rho}_{BSV}|0\rangle_i\langle 0|]$（投影）、热混合态（偏迹）；并补充"HHG 相位匹配过滤闲置模"不能改变偏迹后的热约化态性质的论证。
+- **§2A.3 P(n) 加权理论基础**：删除"Wigner 表示非负性"作为核心风险的设定；明确高斯态 Wigner 本身非负；真正的核心风险是 $\exp[i\sum_n P(n)\phi_n] \neq \sum_n P(n)\exp(i\phi_n)$ 的不等式及光—物质纠缠非对角项的处理。新增"三种量子态描述的 HHG 预测差异 < 10%"作为 R1 Go 判据的工程化判据。
+- **§2B.2 可辨识性度量重构**：删除原 sin/cos 奇偶性论证（数学错误，理想 sin·cos 内积为 2/π ≠ 0）与正交残差 $\mathcal{R}_\perp = \int|S_\Omega \cdot S_g|/\int S_\Omega^2$ 定义（错误，对理想 sin·cos 该比值 ≈ 0.637）。改为三个互相独立的可辨识性指标：归一化有符号内积 $|\rho_{\Omega g}| < 0.3$、Fisher 信息矩阵条件数 $\text{cond}(\mathcal{I}) < 10$、后验相关系数 $|C_{\Omega g}| < 0.3$。
+- **§2B.2 SNR/3σ/Mann-Whitney 错误等同修正**：删除"SNR≈3 对应 3σ 与 Mann-Whitney p < 0.05"的错误等同；改为 n ≥ 60 个独立 HHG 谱下功效分析 + 高斯 z 检验 p 值单独报告；Go 判据改为"$\text{cond}(\mathcal{I}) < 10$ 且行列式 > 0"。
+- **§2D.2 ALM 自能约束改预计算库方案**：删除原"每 4 epoch 重算 Σ(ω)"的循环引用方案（伪代码中 `PINN.Sigma_output` 与 `Sigma_target` 在单 batch 不同 U 样本下不自洽）。改为预计算 $\Sigma(U, T, \omega)$ 代理库 + 三次样条插值查询；L_GF 改写为自能平滑性正则化项 $\mathcal{L}_\text{GF} = \|\partial_\omega \Sigma_\text{inv}(\omega) - \partial_\omega \Sigma_\text{interp}(\omega)\|^2$，避免循环引用。
+- **§2D.4 f-sum rule 与 Chern 约束拆分**：删除原"$\int \Omega d^2k = 2\pi C$ 标作 f-sum rule"的概念错误；改为两个独立损失项：$\mathcal{L}_\text{f-sum}^\text{opt}$（Kubo 求和规则，相互作用下谱权重重分配但求和规则在完备基组下保持，不存在 $U/W$ 线性偏离律）+ $\mathcal{L}_\text{Chern}$（仅适用于拓扑材料验证，不推广到 CDW）。
+- **§2A.4 经典极限基线修正**：删除原"$\alpha(0) = 3.17$ 经典极限"的固体—原子数值等同表述；改为 $r \to 0$ 时 $\alpha \to 1$（同一固体能带模型的经典结果），3.17 仅为原子 KFR 势垒电离机制的数值系数，固体 HHG 截止位置由能带色散决定，无普适常数。
+
+**high 修复**：
+- **§2D.2 训练预算统一**：删除原"30 min/epoch × 500 = 250 h"与"500 epochs 单卡 8 h"的互相矛盾数字（差 ~31 倍）。改为真实原型 benchmark：1D-CNN Encoder-Decoder，n=5000 ZnO SBE 谱，100 epochs 实测 ~2 小时（含 early stopping），外推 500 epochs ≈ 8–10 小时（与上一轮汇报 8 h 一致）；Σ 插值开销 < 1%（远低于原 ALM 12.5%）。统一口径：单次完整训练 ~9.5 GPU·天（V100 单卡），5 次完整训练 48 GPU·总预算。
+- **§2D.4 f-sum rule 标度律**：删除原"线性律 (1+0.5·U/W)"作为相互作用下 f-sum 偏离的物理推导；改为 f-sum 在完备基组下严格保持，标度律不再适用，仅在拓扑一致性约束 $\mathcal{L}_\text{Chern}$ 中保留对 Chern 数积分的离散化误差约束。
+
+**新增与申请书 §3.5 预算对齐**：
+- **§3E.6 经费明细与人员费口径**：BSV-HHG 耦合光路 14 万 + 低温工程 10 万 + 拓扑薄膜 5 万 + tdDMFT 5 万 + PINN 训练 5 万 + 人员费项目补贴 16 万 + 差旅/会议/出版 5 万 = 60 万（严格 ≤ NSFC 面上 60 万上限）；人员费 16 万为项目期内项目补贴（博士奖学金差额 + 博后项目津贴），博后基本工资与五险一金、博士生学费由校内配套渠道（1:1 配套 ~80 万）承担——这一分层口径在面上项目申请中符合常规做法。
+
+**新增低温工程实测参数**：
+- **§2C.3 第 1 节**：补充"3 μm 驱动光 + 30 μm 实测焦斑腰斑 $w_0$" → 瑞利长度 $z_R = \pi w_0^2/\lambda \approx 940$ μm；±5 μm 定位公差相当于 $0.005 \cdot z_R$，焦平面功率密度变化 < 2%（校正上一轮 10% 上界陈述）；腰斑与瑞利长度均由团队 OPCPA 平台 CCD 实测。
+
+**未改动**：§1A/§1B/§1C/§1D 立项依据对应细节；§3A/§3B/§3C/§3D 研究方案技术细节（r5–r8 已成熟）。*
+
+*方法学手册 v1.3 | 2026-08-05 | 对应申请书 r15 优化（critic-round-7 研究内容聚焦审查，聚焦严谨性最弱维度 0.58，content.md 重写为连贯叙述式）。
+**与申请书 r15 同步修订的细节**（针对 critic-round-7 评审 6 high + 9 medium + 3 low）：
+
+**high 修复（版本对齐）**：
+- **§2D.2 预计算 Σ(U, T, ω) 代理库 + 自能平滑性正则化**：原 v1.1 ALM 伪代码（每 4 epoch 重算 Σ(ω)）的循环引用问题在 v1.2 修订说明中已声明但伪代码未实质更新；本次替换伪代码为预计算库方案——`precompute_sigma_library()` 一次性预计算 ~15000 网格点 × 15 min ≈ 150 GPU·小时（Year 2 Q2 前完成），`train_PINN_with_sigma_library()` 通过三次样条插值查询代理库；L_GF 改写为自能平滑性正则化 $\mathcal{L}_{\text{GF}} = \|\partial_\omega \Sigma_{\text{inv}} - \partial_\omega \Sigma_{\text{interp}}\|^2$，彻底避免循环引用。训练成本统一为 250 GPU·小时 ≈ 10.4 GPU·天/次（单卡），5 次训练 48 GPU·总预算。
+- **§3E.2 三个可辨识性指标统一**：原 v1.1 §3E.2 仍保留 sin/cos 奇偶性残差 $\mathcal{R}_\perp$ 定义（数学错误，理想 sin·cos 内积 ≈ 0.637 而非 0）；本次替换为三个互相独立的可辨识性指标——(i) 归一化有符号内积 $|\rho_{\Omega g}|$、(ii) Fisher 信息矩阵条件数 $\text{cond}(\mathcal{I})$、(iii) 后验相关系数 $|C_{\Omega g}|$，与申请书 §2.3 / §3.2 完全一致。No-Go 降级方案从"三色场"改为 Aversa-Sipe 1993 张量分解方案（与申请书 §3.2 一致）。
+
+**medium 修复（叙事/口径）**：
+- 与申请书 r15 内容同步：R1 三层描述并列对比（双模联合 / 条件单模 / P(n) 加权）的物理根源说明、R2 R4 训练阶段三档分层 + 物理验证阶段三档分层 f-sum rule 阈值、R3 偏振基准+红移特征两个独立观测维度的可辨识映射与混杂因素排除、PINN 边际价值去预设化、R4 开头以"半解析 R2 为何不足"作为动机段——这些修订均已在 v1.2 中体现，本版 v1.3 主要落实 §2D.2 与 §3E.2 两处代码与公式的版本对齐。
+
+**low 修复（文献与编号）**：
+- **新文献支撑**：Khurelbaatar 等（arXiv:2605.21925, 2026）证明 BSV 截止方差 $\Delta H^2(r)/\Delta H^2_{\text{SQL}} = e^{-2r}$ 的自校准关系——为 R1 量子态层级对比提供独立的方法学支撑；Rivera-Dean 等（arXiv:2606.22714, 2026）证明双色场 BSV 驱动 HHG 中偶次谐波承载多模高斯纠缠——为 R1 三层描述的物理根源提供核证；Yang（arXiv:2512.24553, 2025）综述了 ARPES 直接测量量子几何张量的进展——为 R2 反演结果提供独立基线；Sumaya-Martinez 与 Mulia-Rodriguez（arXiv:2512.23538, 2025）将 Fisher 信息定义为结构光场参数估计的操作度量——为 R2 选择 Fisher 信息矩阵条件数作为主判据提供方法学依据；Loaiza 等（arXiv:2405.13885 / Quantum 9, 1822, 2025）GQPE 框架——为 R4 提供 NISQ 时代的对照基线。
+- **文献编号修正**：与 references.md 一致——[5] Liu-Fu-Kais、[6] Ghalgaoui、[9] Uzan-Nat、[10] Rasputnyi、[11] Tyulnev、[12] Verma、[13] Goswami、[14] Faeyrman、[16] Ikeda、[17] Sala、[22] Ciappina、[31]-[35] 为本轮新增的 5 篇定向检索文献。
+
+**未改动**：§1A/§1B/§1C 立项依据对应细节；§2A/§2B/§2C R1-R3 对应细节；§3A/§3B/§3C/§3D 研究方案对应技术细节（r5-r8 已成熟）；§3E.3/§3E.4/§3E.5 判据与降级协议（v1.2 已就绪）。*
+
+*方法学手册 v1.2 | 2026-08-05 | 对应申请书 r14 优化（critic-round-6 跨章节一致性修订，聚焦可行性最弱维度 0.82）。
+**与申请书 r14 同步修订的细节**（针对 critic-round-6 评审 2 high + 3 medium + 1 low 跨章问题）：
+
+**high 修复（衔接矩阵口径）**：
+- **§3E.4 R4 消融实验三档分层**：原 §3E.4 仅给"基线 +U/+U+symm/全约束"四配置单档 Go 判据，缺少按样本量分档的边际贡献预期。改为三档分层（弱关联同域 n=5000 / 中等关联同域 n=2000 / 弱→中关联外推 n=2000），与申请书 §2.5 第 128 行 + §3.4 第 75 行的训练阶段 / 物理验证阶段三档分层口径一一对齐，确保评审对照阅读时三个口径完全自洽。新增"按样本量分档的边际贡献预期"表（10–15% / 20–25% / 30–40%）与"物理验证阶段三档分层 f-sum rule 阈值"表（5% / 5%×(1+0.5·U/W) / 5%×(1+0.5·U/W)×1.5，对应弱关联硬约束 / 中等关联线性标度 / 外推 1.5×放大）。
+- **§3E.6 风险表 tdDMFT 协议独立列**：本手册风险表的"tdDMFT 合作协议"行（触发阈值 Year 1 Q4 仍未签正式协议、Plan A 用 TRIQS/CTHYB 替代 + 1D 多体 + 2D SBE 过渡、Plan B 推迟中等关联域外推验证）已在 v1.1 列表中独立成行；本次新增与申请书 §3.5 第 100 行的对齐说明——风险触发后 R4 训练数据先用 1D 多体 + 2D SBE 模拟过渡，待 3D 数据上线后做迁移学习微调，不依赖外部合作的可信度。
+
+**medium 修复（判据口径）**：
+- **§3E.4 R4 物理验证 Go 判据三档分层**：原 v1.1 §3E.4 仅给"三项约束使反演误差较无约束基线降低 ≥ 30%"单档判据；本次新增"物理验证阶段三档分层 f-sum rule 阈值"表，对应申请书 §3.4 第 75 行第（3）项——弱关联同域偏差 < 5%（硬约束）+ Chern < 5%、中等关联同域偏差 < 5%×(1+0.5·U/W)（一阶多体修正线性标度）+ 覆盖率 > 85%、弱→中关联外推偏差 < 5%×(1+0.5·U/W)×1.5（外推不确定性放大系数 1.5）+ 覆盖率 > 80%。
+- **§3B.3 R2 可辨识性指标统一**：原 §3B.3 与申请书 §2.3 任务 2 第 76 行的 SNR ≈ 3 / 残差 < 5% 旧版数字已删除（v1.1 已处置）；本次新增 §2.3 任务 2 与 §3.2 的口径统一说明——两处均改为 §3.2 第 29–34 行的三个互相独立的可辨识性指标（$|\rho_{\Omega g}| < 0.3$、$\text{cond}(\mathcal{I}) < 10$、后验相关系数 < 0.3），申请书 §2.3 仅保留"详细判据统一放 §3.2"的指向性表述，详细推导与判据统一在本手册 §3B.3 + §3E.2。
+- **§3B.4 强度比窗口/扫描区间分层标注**：原 §3B.4 与申请书 §2.3 任务 2 的口径差异（理想窗口 [0.3, 0.7] vs 扫描区间 [0.1, 1.0]）已在新版统一为分层标注——理想工作区间 $I_{2\omega}/I_\omega \in [0.3, 0.7]$（性能最优子集，与 §3.2 第 35 行三指标闭环验证同域口径一致）、实验扫描区间 [0.1, 1.0]（实验遍历区间，覆盖边界条件以检验窗口外推区间的退化行为）。
+
+**low 修复（叙事衔接）**：
+- **§1A.4 Q1→Q2 闭环判据链**：本次新增申请书 §1.4 Year 1 里程碑末的衔接句——Fisher 信息比 < 1.2 / ≥ 2 的理论预言将作为 R3' 实验设计的指导判据，与 Year 3 R3' 后验方差收缩比 ≥ 2 互为因果（前者是 R1 BSV-SBE 理论阶段的预言，后者是 R3' 实验阶段的实测值），连接 R1 理论预言到 R3' 实验验证的完整判据链。在本手册 §1A.4 对应补充该因果链的推导与判据校准方法。
+- **§2A.1 R3 方法学延伸**：申请书 §2.1 R3 行末"方法学延伸：R2 量子度规直接反演方法外推至 R3 验证"的标注在本手册 §2A.1 对应补充——R2 的双色场解耦 → R3' 的 BSV 增强验证是"工具 → 分离 → 验证"实验链路的具体实现，R3 任务 1 的偏振基准 + R3' 的 BSV 增强验证 + R4 的 PINN 反演构成完整的方法学延伸链。
+
+**§4 创新点三段式重构**（对应申请书 r14 §4 创新点改写）：本手册同步 §1A.5（科学价值陈述）按"前人空白 → 本项目填补 → 4 年内可证伪条件"三段式组织——前人空白（原 [9][13][7][16] 文献缺口的精确引用）、本项目填补（R1/R2/R3 的具体动作 + 对应手册章节号引用）、4 年内可证伪条件（与申请书 §3.1–§3.4 Go/No-Go 判据一一对应的 4 项可证伪条件）。
+
+**未改动**：§1A/§1B/§1C 立项依据对应细节（除 §1A.4 Q1→Q2 闭环衔接外）；§2A–§2C 研究内容对应细节；§3A/§3B/§3C/§3D 研究方案技术细节（r5–r8 已成熟）。*

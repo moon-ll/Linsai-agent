@@ -1,0 +1,251 @@
+{
+  "round": 1,
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "focus_section": "rationale",
+  "review_source": "05_review/critic-round-1.md",
+  "composite_score": 0.41,
+  "generated_at": "2026-08-03T12:35:00Z",
+  "summary": "从 56 个独立问题中筛选出与文献/引用/支撑不足直接相关的 18 个证据缺口，按立项依据章节顺序排列。所有缺口均需通过补齐文献检索或核查现有引文状态来修复。",
+  "gaps": [
+    {
+      "claim": "经典光 HHG 已成为能带与拓扑探针，关键进展包括 Bi2Se3/Bi2Te3 圆偏振选择性反映 Berry 曲率、MoS2/WSe2 能谷选择性、TMDC 单层 7-9 阶谐波产出规律 Iglesias 2024、多 plateau 截止能量 Wu/Schafer/Gaarde 2016",
+      "missing_evidence": "缺少对 Bi2Se3/Bi2Te3 拓扑绝缘体 HHG 圆偏振选择性的原始文献(作者、年份、期刊、DOI)，缺少驱动波长与带隙匹配性的论证(Bi2Te3 体带隙 0.15 eV 对应 8.3 μm，与 BSV 0.8-1.5 μm 驱动不自洽)，缺少 Wu/Schafer/Gaarde 2016 的卷期页码与适用范围，缺少 Iglesias 2024 对 TMDC 单层 7-9 阶谐波的具体样品/参数条件",
+      "search_keywords": [
+        "Bi2Se3 high harmonic generation circular polarization Berry curvature",
+        "Bi2Te3 HHG topological insulator nonlinear response",
+        "MoS2 WSe2 high harmonic generation valley selection rule",
+        "Iglesias 2024 TMDC high harmonic spectroscopy monolayer",
+        "Wu Schafer Gaarde 2016 multi-plateau high harmonic generation solid",
+        "solid HHG multi-band saddle point cutoff law",
+        "Berry curvature HHG Bi2Te3 mid-infrared drive wavelength"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rasputnyi 2024 首次实验观测到 BSV 驱动固体 HHG，BSV 单脉冲光子数 2x10^13，亚周期电场涨落 ±1 V/Å，HHG 效率显著高于经典光",
+      "missing_evidence": "缺少 Rasputnyi 2024 的完整发表状态核查(CLEO 2024 是会议报告，未经同行评审；arXiv 编号未给)，缺少样品体系(块体/薄膜/2D 材料)、BSV 模式(单模/双模)、观测量(总产额/某阶次/效率)、归一化条件、平均强度对比下的提升倍数与误差，缺少 ±1 V/Å 亚周期电场涨落的来源图号/表号/公式定位",
+      "search_keywords": [
+        "Rasputnyi BSV driven high harmonic generation solid",
+        "bright squeezed vacuum HHG solid first experimental",
+        "nonclassical light HHG solid CLEO 2024",
+        "subcycle electric field fluctuation BSV soliton HHG",
+        "BSV solid HHG efficiency enhancement normalization",
+        "rasputnyi 2024 arXiv BSV parametric downconversion HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Even Tzur / Gorlach 2024 建立任意量子光态驱动 HHG 的高次谐波量子态公式 PRR 6, 023064 (2024); arXiv:2311.11257，对压缩相干光驱动谐波保持压缩态，BSV 驱动进入 winding trail 复杂量子态",
+      "missing_evidence": "缺少 PRR 6, 023064 (2024) 卷期页码与 DOI 核查(arXiv 编号 2311.11257 的对应正式发表状态)，缺少该理论框架对压缩相干光与 BSV 分别的预测细节，缺少 winding trail 量子态对应的可测观测量(跨阶次相关函数/相位缠绕/压缩度传递/噪声关联结构)文献依据，缺少该理论从气体原子推广到固体多带多体体系的现有理论工作",
+      "search_keywords": [
+        "Even Tzur Gorlach quantum light high harmonic generation theory",
+        "PRR 6 023064 2024 high harmonic quantum state",
+        "arXiv 2311.11257 quantum state HHG formalism",
+        "winding trail harmonic quantum state squeezed vacuum",
+        "quantum light HHG solid Bloch basis multi-band extension",
+        "compressed coherent light HHG squeezing transfer harmonic",
+        "high harmonic generation quantum optics theory solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 单脉冲光子数可达 2x10^13 量级；二阶关联 g^(2)(0) 在非简并/简并参量下转换下分别为 2 与 3+1/N（超聚束）",
+      "missing_evidence": "缺少原始光子数基线的来源文献(Iskhakov 2012、Spasibko 2012 等)，缺少 g^(2)(0)=2 与 g^(2)(0)=3+1/N 两种配置的详细物理条件(时间/空间模式数、平均光子数 N、检测模式、归一化)，缺少非简并 PDC 与简并单模 PDC 配置的判别文献依据，缺少本项目所要复现的目标值及其误差",
+      "search_keywords": [
+        "Iskhakov 2012 bright squeezed vacuum photon number",
+        "Spasibko 2012 bright squeezed vacuum g2 second order correlation",
+        "bright squeezed vacuum g2(0) nondegenerate parametric downconversion",
+        "degenerate single mode parametric downconversion photon statistics",
+        "high gain parametric downconversion photon number 10^13",
+        "BSV photon number per pulse generation review",
+        "super-Poissonian bright squeezed vacuum bunching g2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内该方向几乎空白，是蓝海切口，是填补国内空白的原始创新空间",
+      "missing_evidence": "缺少 CNKI / Web of Science / Scopus / arXiv 的检索日期、关键词、机构筛选规则与排除标准；缺少对国内已有的 BSV 驱动 HHG、非经典光固体 HHG、多体态量子探针相关工作的系统核查清单；缺少与国际同行尚未充分涉足对照的最近 3 年文献综述",
+      "search_keywords": [
+        "CNKI 量子光场 高次谐波 固体",
+        "中国 BSV HHG 强场超快",
+        "国内 非经典光场 高次谐波 固体",
+        "Web of Science bright squeezed vacuum HHG solid China",
+        "Scopus quantum light HHG solid review 2024 2025",
+        "arXiv 2024 2025 bright squeezed vacuum high harmonic solid",
+        "国内 阿秒 量子光 强场 系统性研究"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 三层可能的新物理：光子数关联调制谐波产额、相位敏感的非线性响应、量子噪声作为探针",
+      "missing_evidence": "缺少 BSV 光子数关联进入 HHG 产额的具体实验或理论文献(区分 BSV 与经典光在同平均功率、波长、脉宽下的产额差异)，缺少 BSV 驱动 HHG 的相位敏感非线性响应或相位噪声谱的现有工作，缺少将 HHG 噪声关联作为多体态信息编码的 Fisher 信息/后验方差方法学文献",
+      "search_keywords": [
+        "BSV photon number correlation HHG yield modulation",
+        "squeezed vacuum driven high harmonic generation phase sensitive",
+        "quantum noise probe many-body HHG Fisher information",
+        "shot noise correlation harmonic spectroscopy",
+        "photon statistics encode HHG yield solid state",
+        "BSV driven HHG Fisher information posterior variance"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "QEF 双指标(QEF_vis、QEF_yield)作为量子增强因子，QEF_vis 参照 Li 2019 (arXiv:1908.07283)，QEF_yield 参照 Boroumand 2025 (arXiv:2505.22536)",
+      "missing_evidence": "缺少 Li 2019 (arXiv:1908.07283) 的正式发表版本核查(至今 7 年，应在 PRL/Nat. Phys. 等期刊发表，但未给卷期页码 DOI)，缺少 Boroumand 2025 (arXiv:2505.22536) 的发表状态(仅 arXiv 还是已发表)，缺少 QEF_vis/QEF_yield 的原始定义和被引用情况，缺少 QSHHG(Quantum Sideband HHG)的全称定义与 Boroumand 2025 原文定位",
+      "search_keywords": [
+        "Li 2019 arXiv 1908.07283 quantum enhanced factor",
+        "Boroumand 2025 arXiv 2505.22536 quantum sideband HHG",
+        "Quantum Sideband HHG QSHHG Boroumand 2025",
+        "quantum enhancement factor QEF visibility yield HHG",
+        "QEF definition high harmonic generation quantum light",
+        "quantum light HHG PRL 2019 2020 squeezed vacuum visibility"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "经典光场 HHG 在 Hubbard/Mott 体系中的多体动力学已建立基线",
+      "missing_evidence": "缺少经典光 HHG 在 Hubbard/Mott 强关联体系中的多体响应文献(与 §1.1 段 2 单粒子/平均场表述自相矛盾，需要正面证据支撑已有 Hubbard/Mott 多体基线)，缺少 Mott 绝缘体 HHG 多体动力学(激子、关联带、双占据等)的关键引用；缺少 Silva 2018、Murakami 2018、Iglesias 2024 等文献的卷期页码与适用范围",
+      "search_keywords": [
+        "Hubbard model HHG many-body dynamics solid",
+        "Mott insulator high harmonic generation multi-body",
+        "Silva 2018 many-body HHG strongly correlated",
+        "Murakami 2018 strongly correlated HHG Mott",
+        "Iglesias 2024 HHG TMDC excitonic correlation",
+        "high harmonic generation anti-ferromagnetic Mott review",
+        "HHG dynamical mean field theory strongly correlated"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "经典光 HHG 的多 plateau 截止能量可由多能级量子模型定量预测 Wu/Schafer/Gaarde 2016",
+      "missing_evidence": "缺少 Wu/Schafer/Gaarde 2016 的卷期页码、DOI、期刊(J. Phys. B / Phys. Rev. A / PRL)，缺少该多能级量子模型在 0.8-1.5 μm 驱动带隙 2-3 eV 半导体上的截止能量预测公式，缺少与 §2.2 中 3-5 倍带隙 cutoff → 30-40 eV 数量级一致性的推导依据",
+      "search_keywords": [
+        "Wu Schafer Gaarde 2016 multi-level quantum model HHG cutoff",
+        "multiplateau cutoff solid HHG saddle point",
+        "high harmonic cutoff 3-5 bandgap formula solid",
+        "solid HHG multi-band saddle point cutoff law",
+        "Wu Schafer Gaarde multi-band HHG 0.8 1.5 micron"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV 驱动样品产生 HHG，从 HHG 谱(产额、偏振、噪声关联、量子指纹)中反演样品的关联长度、激发寿命、量子相变等信息",
+      "missing_evidence": "缺少 HHG 谱反演关联长度(ξ)的方法学文献(哪种观测量 ↔ ξ 的前向模型)，缺少 HHG 谱反演激发寿命的瞬态测量文献(与时间分辨方法对应)，缺少 HHG 探针量子相变(跨越 U/W 临界点)的可行性论证文献；特别是缺少 BSV vs 经典光在反演精度上的对照方法学(Fisher 信息/后验方差)依据",
+      "search_keywords": [
+        "HHG probe correlation length solid state",
+        "high harmonic spectroscopy excited state lifetime",
+        "HHG quantum phase transition detection",
+        "Fisher information HHG spectroscopy inverse problem",
+        "Bayesian inversion high harmonic spectroscopy",
+        "BSV HHG inverse problem correlation length",
+        "ultrafast HHG transient lifetime retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "经典光 HHG 在 Bi2Te3 圆偏振选择性反映 Berry 曲率",
+      "missing_evidence": "缺少 Bi2Te3 HHG 圆偏振选择性反映 Berry 曲率的原始文献(作者、年份、驱动波长)，缺少该机制在 0.8-1.5 μm 驱动下的可分辨性论证(Bi2Te3 体带隙 0.15 eV 对应 8.3 μm，MIR 才是 Berry 曲率可分辨区)，缺少 Berry 曲率与量子度规的多通道耦合解耦文献",
+      "search_keywords": [
+        "Bi2Te3 HHG circular polarization Berry curvature mid-infrared",
+        "topological insulator HHG anomalous velocity Berry",
+        "Berry curvature quantum metric HHG disentangle",
+        "Bi2Se3 Bi2Te3 high harmonic circular dichroism",
+        "HHG Berry curvature 0.8 1.5 micron near-infrared drive limitation",
+        "anomalous velocity HHG Bi2Te3"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TMDC 单层列入强关联材料(与莫尔超晶格、关联绝缘体并列)",
+      "missing_evidence": "缺少 TMDC 单层(如 MoS₂、WSe₂)的 U/W 关联强度定量文献(U/W~0.5 为弱关联区)，缺少与莫尔超晶格(中等关联 U/W~1-2)和 Mott 绝缘体(强关联 U/W>3)分层对比的权威综述，缺少将 TMDC 重新定位为弱关联基线的分类依据",
+      "search_keywords": [
+        "TMDC MoS2 WSe2 U/W Hubbard ratio correlation strength",
+        "monolayer TMDC weakly correlated semiconductor",
+        "moire superlattice intermediate correlation strength",
+        "Mott insulator strongly correlated U/W ratio",
+        "transition metal dichalcogenide correlation strength review",
+        "TMDC Hubbard U bandwidth classification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 驱动 HHG 与经典光 HHG 的双光路 Mach-Zehnder 干涉(量子指纹)方案，Q_F = (I_max - I_min)/(I_max + I_min) 作为量子指纹",
+      "missing_evidence": "缺少 BSV-经典光双光路 Mach-Zehnder 干涉的现有实验或理论文献(概念是否已有类似实现)，缺少 Q_F 作为量子指纹与经典可见度差异的判据文献，缺少 Mach-Zehnder 干涉中 BSV 量子关联如何影响可见度的理论依据",
+      "search_keywords": [
+        "Mach-Zehnder interferometer squeezed vacuum coherent light",
+        "quantum fingerprint interference visibility nonclassical",
+        "BSV coherent light interference visibility quantum enhancement",
+        "squeezed vacuum interferometer visibility enhancement theory",
+        "two-arm interferometer BSV coherent visibility fringe",
+        "quantum path interference HHG BSV classical"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV 驱动 HHG 在不变损伤阈值下效率显著高于经典光，稀疏非经典性抑制样品损伤",
+      "missing_evidence": "缺少 BSV 与经典光在同平均功率/峰值场下样品损伤阈值的对照实验文献，缺少稀疏非经典性术语的物理定义与原始文献，缺少损伤与光子统计(非经典性)之间的因果机制证据(损伤通常由峰值场/平均剂量/重复频率决定)",
+      "search_keywords": [
+        "BSV damage threshold solid sample nonclassical",
+        "squeezed vacuum damage threshold comparison coherent",
+        "photon statistics sample damage semiconductor",
+        "subcycle field peak intensity damage solid",
+        "BSV HHG sample damage reduction mechanism",
+        "rare event nonclassical damage suppression"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV 光场统计-固体电子动力学-可测 HHG 指标的因果链尚未建立(机制层空白)",
+      "missing_evidence": "缺少 BSV 光子统计如何进入固体带间跃迁/带内加速/退相干通道的微观理论文献(Even Tzur 2024 仅针对气体原子)，缺少从气体原子到 Bloch 态的 HHG 理论推广文献，缺少 BSV 驱动固体 HHG 的多带多体理论模型(需含 Berry 几何、激子、关联、退相干)",
+      "search_keywords": [
+        "BSV driven solid HHG theory multi-band many-body",
+        "quantum light HHG Bloch basis extension",
+        "squeezed vacuum HHG solid state theory formalism",
+        "strongly correlated solid HHG quantum light",
+        "BSV HHG interband intraband decoherence theory",
+        "Bloch basis quantum light HHG formalism",
+        "quantum optics strong field solid extension theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔超晶格、关联绝缘体等强关联体系中的 BSV HHG 响应完全未知(材料层空白)",
+      "missing_evidence": "缺少 BSV 驱动莫尔超晶格(如魔角石墨烯、ABC 三层石墨烯)HHG 的任何实验或理论文献，缺少 BSV 驱动 Mott 绝缘体(如 NiO、VO2、1T-TaS2)HHG 的任何实验或理论文献，缺少经典光 HHG 在莫尔/Mott 体系中的多体响应基线文献(用于与 BSV 对照)",
+      "search_keywords": [
+        "BSV HHG moire superlattice magic angle",
+        "bright squeezed vacuum high harmonic generation Mott insulator",
+        "quantum light HHG strongly correlated material",
+        "BSV HHG NiO VO2 1T-TaS2",
+        "moire HHG correlated insulator probe",
+        "quantum light correlated material HHG review 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "尚未建立量子光 HHG 作为多体态非经典探针的系统方法论，缺乏可操作的量子指纹定义与 QEF 测量协议",
+      "missing_evidence": "缺少量子光 HHG 作为多体态探针的方法学综述(效应量、置信区间、跨体系迁移验证)，缺少 QEF/Q_F 已经过经典极限校准、误差标定和跨关联强度体系验证的原始文献(与 §1.3/§1.4 已有 Q_F/QEF 公式矛盾，所以应是缺乏验证过的协议而非缺乏定义)，缺少 BSV vs 经典光 HHG 反演精度的对照方法学文献",
+      "search_keywords": [
+        "quantum light HHG probe methodology systematic",
+        "quantum fingerprint HHG protocol validation",
+        "QEF QF measurement protocol cross-system validation",
+        "BSV vs classical HHG information gain Fisher",
+        "many-body state quantum light probe framework",
+        "nonclassical light HHG probe calibration protocol"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "在 0.8-1.5 μm 驱动下，TMDC 单层 7-9 阶谐波(Iglesias 2024)和 3-5 倍带隙 cutoff → 30-40 eV 的算术不自洽",
+      "missing_evidence": "缺少 BSV 中心波长(如 1.1 μm)下 7-9 阶谐波对应光子能量(7.9-10.1 eV)与 30-40 eV 截止能量之间的算术一致性文献，缺少该体系下多带 saddle point 截止律(3-5 倍带隙)的适用条件与已发表参数；需要补一份按选定方案推导的 cutoff law 手册",
+      "search_keywords": [
+        "high harmonic cutoff 3-5 bandgap solid 0.8 1.5 micron",
+        "TMDC MoS2 HHG 7-9 order harmonic photon energy",
+        "high harmonic cutoff 1.1 micron solid",
+        "multi-band saddle point cutoff solid HHG bandgap",
+        "high harmonic 30-40 eV cutoff near infrared semiconductor",
+        "HHG cutoff 1.5 micron TMDC experimental"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

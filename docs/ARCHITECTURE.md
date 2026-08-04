@@ -68,13 +68,13 @@ researcher ← analyst ← writer ↔ critic → reviewer
 
 | Profile | 模型 | 职责 |
 |---------|------|------|
-| `linsai` | GLM-5.2 | 方向校准 / 总控 / 简报 |
-| `pipeline-runner` | GLM-5.2 | 管线编排 / 每日触发 |
+| `linsai` | MiniMax-M3 | 方向校准 / 总控 / 简报 |
+| `pipeline-runner` | MiniMax-M3 | 管线编排 / 每日触发 |
 | `researcher` | MiniMax-M3 | 文献调研 / 定向检索 |
-| `analyst` | GLM-5.2 | 缺口分析 / 科学问题 |
-| `writer` | GLM-5.2 | 申请书撰写 / 修订 |
-| `critic` | GLM-5.2 | 对抗式评审（红队） |
-| `reviewer` | GLM-5.2 | 质量终审 |
+| `analyst` | MiniMax-M3 | 缺口分析 / 科学问题 |
+| `writer` | MiniMax-M3 | 申请书撰写 / 修订 |
+| `critic` | MiniMax-M3 | 对抗式评审（红队） |
+| `reviewer` | MiniMax-M3 | 质量终审 |
 
 关键协作文件：
 - `state_sync.py`：论文统一状态总线（`item-status.json`），CoPilot 与 hermes 共享。

@@ -1,0 +1,27 @@
+---
+title: "2409.04216"
+type: "concepts"
+created: "2026-07-31T14:08:20Z"
+updated: "2026-07-31T14:26:16Z"
+tags: []
+related: []
+source_raw: ""
+growth_stage: "seedling"
+confidence: 0.5
+used_by_proposals: ["general-order-parameter-ultrafast-readout-20260727"]
+read_status: "skimmed"
+---
+
+## 阅读笔记
+
+### general-order-parameter-ultrafast-readout-20260727
+- 核心结论：偏振分辨 HHG 可读出 TiSe₂ 的 Mott–CDW 相变各向异性。
+- 与课题关联：作为 Biegert 团队真实、可索引的关联材料 HHG 实验证据，替换不可核实的“YBCO Nature 2024”。
+- 已引用位置：references.md §2 [11]
+- 阅读日期：2026-07-31
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+_暂无关联概念_
+<!-- /linsai-wikilinks -->

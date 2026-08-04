@@ -49,7 +49,7 @@
 | 运行环境 | Python 3（仅标准库） | 同 virtu-LinSai，零第三方依赖。无 `requirements.txt`、`pyproject.toml`、`package.json`、`Cargo.toml` 等构建文件。 |
 | 内容格式 | Markdown（.md） | 对话记录、任务描述、记忆片段、知识库笔记。 |
 | 元数据 | JSON | 会话状态、记忆索引、任务追踪、管线状态。 |
-| LLM 接口 | GLM-5.2 / MiniMax-M3 / Kimi CLI / Claude CLI | 本地 CLI / API 路由，通过 `llm_router.py` / `llm_gateway.py` 自动降级。 |
+| LLM 接口 | MiniMax-M3（主） / GLM-5.2 / Kimi CLI / Claude CLI | 通过 hermes profile 管理，CoPilot 侧 `llm_router.py` / `llm_gateway.py` 自动降级。 |
 | Web 服务器 | Python `http.server.ThreadingHTTPServer` | 零第三方依赖，REST API + SSE 流式输出。 |
 | 前端 | 原生 HTML/CSS/JS | 零框架依赖，CSS 变量 + `data-theme` 切换深色/浅色/自动主题。 |
 | 路径处理 | `pathlib.Path` | 禁止硬编码绝对路径（用户 home 下的 hermes 工作区除外，统一在 `paths.py` 中声明）。 |

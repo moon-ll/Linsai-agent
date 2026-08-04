@@ -4,7 +4,7 @@ arxiv_id: "2607.26505"
 authors: "Ichiro Inoue, Ulrike Boesenberg, Rustam Rysov, Takahiro Sato, Ichika Harima"
 year: 2026
 tags: ["deepxiv-论文库"]
-project: ["NSFC-强场超快"]
+project: []
 direction: "阿秒科学"
 source: "hermes-briefing"
 imported_at: "2026-08-02T16:36:50Z"

@@ -276,7 +276,7 @@ class OptimizeMixin:
         P1-1: 支持章节级评审（focus_section）和整体审查（is_full_review）。
         v6.7.7: 默认按章节拆分文件读取，降低单次 LLM 负载、减少超时。
         """
-        sections = ProposalSections(prop_dir)
+        sections = ProposalSections(prop_dir / "04_proposal")
         sections.ensure_split()  # 兼容旧格式：自动拆分
         standards_path = str(self.standards_path.relative_to(_pl.PROJECT_ROOT))
         report_path = prop_dir / "05_review" / f"critic-round-{round_num}.md"
@@ -616,7 +616,7 @@ class OptimizeMixin:
         P1-1: 支持章节级修订（focus_section）。
         v6.7.7: 章节级修订只写入对应 section 文件，再自动组装 proposal-draft.md。
         """
-        sections = ProposalSections(prop_dir)
+        sections = ProposalSections(prop_dir / "04_proposal")
         sections.ensure_split()
         standards_path = str(self.standards_path.relative_to(_pl.PROJECT_ROOT))
         # 找最新的 critic 报告

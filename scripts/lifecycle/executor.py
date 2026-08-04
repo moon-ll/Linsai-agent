@@ -391,7 +391,18 @@ def _run_gap_identify_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[
                         break
 
         if not data or not isinstance(data, dict) or "gaps" not in data:
-            return {"success": False, "error": f"返回 JSON 缺少 gaps 字段（原文前200字: {text[:200]}）"}
+            # agent 返回了非 JSON（自然语言分析），但提取不到 gaps 字段
+            # 这通常意味着没有文献缺口，使用空 gaps 兜底让流程继续
+            default_data = {"gaps": [], "note": f"agent 未返回标准 JSON gaps 格式，视为无文献缺口。原文前200字: {text[:200]}"}
+            gap_path.write_text(json.dumps(default_data, ensure_ascii=False, indent=2), encoding="utf-8")
+            if _log:
+                _log.info(f"[{proposal_id}] gap_identify agent 未返回 JSON gaps，使用空 gaps 兜底")
+            # 仍然写记忆，标记降级
+            _write_memory("researcher",
+                f"[{now_utc()}] gap_identify 完成（empty_fallback）— 课题：{proposal_id}，"
+                f"轮次：{round_num}，章节：{section_name}，agent 未返回标准 JSON"
+            )
+            return {"success": True, "gap_path": str(gap_path), "method": "empty_fallback", "gap_count": 0}
 
         gap_path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 

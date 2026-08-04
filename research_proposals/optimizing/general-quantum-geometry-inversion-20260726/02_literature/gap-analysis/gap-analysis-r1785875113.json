@@ -1,0 +1,84 @@
+{
+  "gaps": [
+    {
+      "claim": "亮压缩真空(BSV)驱动固体HHG的实验和理论基础",
+      "missing_evidence": "关键论断仅由2025-2026预印本支撑(43%预印本率)，缺乏经同行评审的已发表论文",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation peer-reviewed",
+        "BSV driven solid-state HHG published",
+        "quantum light nonlinear optics solid journal article"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Faeyrman复Berry相(实部+虚部)的测量精度",
+      "missing_evidence": "仅由预印本支撑复Berry相精度的具体数值论断，需已发表期刊文章验证",
+      "search_keywords": [
+        "complex Berry phase real imaginary parts measurement accuracy",
+        "Berry curvature reconstruction precision published",
+        "Feynman path integral Berry phase solid state experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mott绝缘体HHG光谱红移5-15%的定量结果",
+      "missing_evidence": "Ikeda关于Mott绝缘体HHG红移的具体定量结论仅有预印本支撑，缺已发表期刊论文",
+      "search_keywords": [
+        "Mott insulator high harmonic generation spectral redshift",
+        "strongly correlated material HHG spectral shift experiment",
+        "Ikeda Mott insulator HHG journal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "压缩光编码用于HHG光谱学的方案",
+      "missing_evidence": "Lange-Madsen压缩光编码方案仅有预印本支撑，缺乏同行评审的已发表版本",
+      "search_keywords": [
+        "squeezed light encoding high harmonic spectroscopy",
+        "Lange-Madsen squeezed state HHG published",
+        "nonclassical light HHG modulation journal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子Fisher信息与HHG量子几何重构的信息论基础",
+      "missing_evidence": "立项依据中Q1/Q2可证伪判据(Fisher信息比<1.2加性/≥2乘性)的理论框架缺乏已发表文献支撑",
+      "search_keywords": [
+        "quantum Fisher information high harmonic generation",
+        "Cramér-Rao bound HHG spectroscopy reconstruction",
+        "information-theoretic limit quantum geometry measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Berry曲率从HHG光谱反演的可辨识性",
+      "missing_evidence": "反演问题的统计可辨识性和唯一性条件缺少独立已发表文献论证",
+      "search_keywords": [
+        "Berry curvature inversion identifiability high harmonic",
+        "statistical identifiability quantum geometry reconstruction",
+        "inverse problem uniqueness HHG band structure"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "亮压缩真空驱动强关联材料HHG的已有研究基础",
+      "missing_evidence": "BSV驱动Mott绝缘体或过渡金属氧化物HHG的研究目前文献稀缺，立项依据中缺乏前人工作引述",
+      "search_keywords": [
+        "non-classical light HHG correlated electron system",
+        "squeezed light high harmonic generation transition metal oxide",
+        "BSV driven HHG Mott insulator theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文引文[n]与参考文献表的正确映射关系",
+      "missing_evidence": "C-1/C-2指出现有23条参考文献中大量关键论断(尤其立项依据中Berry曲率/HHG/量子几何相关引用)的引文编号与文献表不匹配，需逐一核实每条引文对应的实际文献是否存在并已发表",
+      "search_keywords": [
+        "Berry curvature high harmonic generation experiment review",
+        "quantum geometry solid state nonlinear optics",
+        "solid-state HHG band structure reconstruction review"
+      ],
+      "priority": "high"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ arxiv_id: "2607.22360"
 authors: "Weifeng Xie, Yongqi Chen, Yiboyang Sun, Xiong Xu, Yunliang Yue"
 year: 2026
 tags: ["deepxiv-论文库"]
-project: ["NSFC-强场超快"]
+project: []
 direction: "能谷电子学"
 source: "hermes-briefing"
 imported_at: "2026-08-02T16:36:50Z"
