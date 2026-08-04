@@ -613,11 +613,11 @@ class LiteratureService:
                 _log.warning(f"[LiteratureService] 物化 {arxiv_id} 失败: {e}")
 
     def _build_note_from_hermes_analysis(self, arxiv_id: str) -> Optional[str]:
-        """v6.8.1: 从 hermes deep_analysis_{aid}.json 构建阅读笔记。
+        """v6.8.1 + v6.8.3: 从 hermes deep_analysis_{aid}.json 构建阅读笔记。
 
-        hermes 的深度分析已包含 5 维结构化数据（why_notable, core_findings,
-        new_methods, what_next, linsai_connection），直接转换为 wiki/papers/ 格式。
-        无需联网调用 researcher，零延迟。
+        hermes 的深度分析包含结构化数据（why_notable, core_findings,
+        new_methods, what_next, linsai_connection），转换为统一的 5 维度
+        学术阅读笔记格式（研究问题、研究背景、研究方法、主要发现、潜在方向）。
 
         Returns:
             阅读笔记 markdown 内容，或 None（JSON 不存在时）
@@ -641,6 +641,11 @@ class LiteratureService:
         else:
             authors_str = str(authors)
 
+        def _list(items) -> str:
+            if isinstance(items, list):
+                return "\n".join(f"- {item}" for item in items)
+            return str(items) if items else "（暂无）"
+
         lines = [
             f"# {title}",
             f"",
@@ -649,48 +654,38 @@ class LiteratureService:
             f"**日期**: {data.get('date', '')}",
             f"**方向**: {data.get('direction', '')}",
             f"",
-            f"## 为什么值得关注",
+            f"## 研究问题（Research Question）",
             f"",
             data.get("why_notable", "（无数据）"),
             f"",
-            f"## 核心发现",
-            f"",
-        ]
-
-        findings = data.get("core_findings", [])
-        if isinstance(findings, list):
-            for f in findings:
-                lines.append(f"- {f}")
-        else:
-            lines.append(str(findings))
-
-        lines.extend([
-            f"",
-            f"## 方法与创新",
-            f"",
-        ])
-        methods = data.get("new_methods", [])
-        if isinstance(methods, list):
-            for m in methods:
-                lines.append(f"- {m}")
-        else:
-            lines.append(str(methods))
-
-        lines.extend([
-            f"",
-            f"## 林赛的理解",
+            f"## 研究背景（Background）",
             f"",
             data.get("linsai_connection", "（无数据）"),
             f"",
-            f"## 开放问题与后续",
+            f"## 研究方法（Methods）",
+            f"",
+        ]
+
+        methods = data.get("new_methods", [])
+        lines.append(_list(methods))
+
+        lines.extend([
+            f"",
+            f"## 主要发现与核心结论（Main Results）",
             f"",
         ])
+
+        findings = data.get("core_findings", [])
+        lines.append(_list(findings))
+
+        lines.extend([
+            f"",
+            f"## 潜在研究方向（Future Directions）",
+            f"",
+        ])
+
         what_next = data.get("what_next", [])
-        if isinstance(what_next, list):
-            for w in what_next:
-                lines.append(f"- {w}")
-        else:
-            lines.append(str(what_next))
+        lines.append(_list(what_next))
 
         if _log:
             _log.info(f"[LiteratureService] 从 hermes 深度分析构建笔记: {arxiv_id}")
@@ -836,7 +831,6 @@ class LiteratureService:
                                         return papers
                             except (json.JSONDecodeError, KeyError, TypeError):
                                 pass
-                break
         return []
 
     def _try_parse_pipe_or_table(self, text: str, arxiv_pattern) -> List[Dict[str, Any]]:
@@ -1181,12 +1175,17 @@ class LiteratureService:
             f"【arXiv ID】{arxiv_id}\n\n"
             f"要求：\n"
             f"1. 使用 web_search 获取论文信息\n"
-            f"2. 输出格式：\n"
-            f"   ## 核心结论\n"
-            f"   ## 方法与创新\n"
-            f"   ## 与课题关联\n"
-            f"   ## 关键图表/数据\n"
-            f"   ## 局限性\n"
+            f"2. 输出必须包含以下五个维度，每个维度不少于 3 句实质内容：\n"
+            f"   ## 研究问题（Research Question）\n"
+            f"   论文的核心研究问题、目标或中心论点（the research question, aim, or central argument）。\n\n"
+            f"   ## 研究背景（Background）\n"
+            f"   该问题的学术背景、前人工作、领域现状及研究动机（the background of the question）。\n\n"
+            f"   ## 研究方法（Methods）\n"
+            f"   数据来源、实验方法、理论框架或技术路线（data and method）。\n\n"
+            f"   ## 主要发现与核心结论（Main Results）\n"
+            f"   关键结果、定量发现、核心结论与图表数据（main results and findings）。\n\n"
+            f"   ## 潜在研究方向（Future Directions）\n"
+            f"   研究局限性、注意事项及未解决的开放问题（limitations, caveats, and open questions）。\n"
         )
         try:
             from hermes_memory import _run_hermes_agent

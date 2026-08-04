@@ -199,6 +199,53 @@ class LifecycleCronTests(TestSuite):
         # 多个 worker 应错开（至少存在 3 个不同分钟）
         self.assert_true(len(minutes) >= 3, f"worker 分钟错开，实际 {len(minutes)} 个不同值: {sorted(minutes)}")
 
+    def _test_mark_degradation_persists(self):
+        """v6.8.3 修复: _mark_degradation 使用 _set_proposal_state（非不存在的 _save_proposal_state）。
+        验证降级事件被正确持久化到 proposal_state。"""
+        c = self._make_controller()
+        pid = "general-degrade-test-20260101"
+        self._register_proposal(c, pid, "optimizing")
+
+        # 调用 _mark_degradation（此前因方法名错误会静默失败）
+        c._mark_degradation(pid, "gap_identify", "agent_loop_failed→llm_direct")
+
+        # 验证 degradation_events 已持久化
+        state = c._get_proposal_state(pid)
+        events = state.get("degradation_events", [])
+        self.assert_eq(len(events), 1, "降级事件已记录")
+        self.assert_eq(events[0]["step"], "gap_identify", "步骤名正确")
+        self.assert_eq(events[0]["detail"], "agent_loop_failed→llm_direct", "详情正确")
+
+        # 验证多次调用会追加（且保留最近 20 条）
+        for i in range(25):
+            c._mark_degradation(pid, "lit_search", f"detail_{i}")
+        state = c._get_proposal_state(pid)
+        events = state.get("degradation_events", [])
+        self.assert_eq(len(events), 20, "降级事件保留最近 20 条")
+
+    def _test_quality_warning_persists(self):
+        """v6.8.3 修复: _check_done 逃生阀质量警告通过 _set_proposal_state 持久化（非崩溃的 _save_proposal_state）。
+        验证逃生阀触发且分数低于达标线时，quality_warning 被写入 proposal_state。"""
+        c = self._make_controller()
+        pid = "general-quality-warn-20260101"
+        self._register_proposal(c, pid, "optimizing")
+
+        # 模拟达到最大轮数 + 低分数场景（条件3 逃生阀）
+        state = c._get_proposal_state(pid)
+        state["optimization_rounds"] = 10  # 超过 DEFAULT_MAX_ROUNDS(8)
+        state["last_score"] = 0.50  # 低于达标线
+        state["section_passes"] = {s: False for s in c.REQUIRED_SECTIONS}
+        c._set_proposal_state(pid, state)
+
+        threshold = c._get_quality_threshold("general")
+        done_result = c._check_done(pid, threshold)
+
+        # 逃生阀应触发
+        self.assert_true(done_result["done"], "逃生阀触发 done=True")
+        # 分数低于达标线应有质量警告
+        warning = done_result.get("quality_warning")
+        self.assert_true(warning is not None and warning != "", "低分数逃生阀附加 quality_warning")
+
     def run_tests(self):
         self._test_checkpoint_generation()
         self._test_pick_next_job()
@@ -209,3 +256,5 @@ class LifecycleCronTests(TestSuite):
         self._test_max_rounds_no_new_jobs()
         self._test_non_optimizing_no_jobs()
         self._test_worker_minute_stagger()
+        self._test_mark_degradation_persists()
+        self._test_quality_warning_persists()

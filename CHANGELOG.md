@@ -1,5 +1,21 @@
 # 变更记录
 
+## v6.8.3-fix1 - 2026-08-04 健康检查修复: 方法名拼写 + JSON解析遗漏
+
+### 改动内容
+
+- **controller.py**: 补全 `_mark_degradation` 的导入与类绑定（v6.8.3 在 executor.py 新增了该方法及调用，但遗漏在 controller.py 绑定）
+  - 影响：lit_search/gap_identify 的 agent loop 失败降级路径调用 `self._mark_degradation(...)` 时抛出 `AttributeError: 'LifecycleCronController' object has no attribute '_mark_degradation'`，导致**降级逃生阀本身崩溃**——本应优雅降级（agent loop 失败→LiteratureService 兜底）的 job 被直接标记 FAILED。2026-08-04T01:51:38Z 的 lit_search 失败即为此触发
+- **executor.py**: 修复 `_mark_degradation` 和 `_run_monitor_step` 中调用不存在的 `_save_proposal_state`（正确方法名为 `_set_proposal_state`）
+  - 影响1（`_mark_degradation`，第96行）：被 try/except 静默吞掉，降级事件从未被记录——v6.8.3 的"降级追溯"功能完全失效
+  - 影响2（`_run_monitor_step`，第1080行）：未受 try/except 保护，当逃生阀触发且分数低于达标线时抛出 `AttributeError`，导致 proposal 已 transition 到 pending_review 但 job 被标记 FAILED，引发状态不一致
+- **literature_service.py**: 修复 `_try_parse_json` 中无条件的 `break`，允许扫描后续 `[` 位置
+  - 影响：当 LLM 输出自然语言中包含 `[` 字符（如"搜索了[关键词]"）时，JSON 数组解析器在第一个 `[` 处失败后直接退出，不再尝试后续的真正 JSON 数组。论文降级为自然语言提取路径，因 `_needs_metadata` 标记被 `_import_to_kb` 跳过，导致文献未入库
+
+### 验证结果
+- `python3 -m py_compile scripts/*.py` 全部通过
+- `self_test.py --module` 215/215 通过（含新增 2 个降级追溯测试 + 7 个解析器测试）
+
 ## v6.8.3 - 2026-08-04 质量保障: 逃生阀质量警告 + JSON 解析增强 + 降级追溯
 
 ### 改动内容

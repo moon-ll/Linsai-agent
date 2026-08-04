@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Proposal 知识库同步工具（v6.7.6）。
+"""Proposal 知识库同步工具（v6.8.2）。
 
 将 research_proposals/ 下各课题的核心信息同步到 NSFC-强场超快知识库，
 实现生命周期数据与全链路知识库的聚合。
+同步完成后自动调用 kb_proposal_reorg.py 更新 versions/ 和 reports/。
 
 用法：
     python3 scripts/proposal_kb_sync.py --sync-all
@@ -12,6 +13,7 @@
 
 from __future__ import annotations
 
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -130,6 +132,33 @@ def _extract_key_files(prop_dir: Path) -> List[Dict[str, str]]:
     return files
 
 
+def _run_reorg(dry_run: bool = False) -> None:
+    """调用 kb_proposal_reorg.py 更新 versions/ 和 reports/。"""
+    reorg_script = _SCRIPT_DIR / "kb_proposal_reorg.py"
+    if not reorg_script.exists():
+        if _log:
+            _log.warning("kb_proposal_reorg.py 不存在，跳过 versions/reports 同步")
+        return
+
+    cmd = [sys.executable, str(reorg_script)]
+    if not dry_run:
+        cmd.append("--apply")
+
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
+        if result.returncode != 0:
+            if _log:
+                _log.warning(f"kb_proposal_reorg 返回非零: {result.stderr[:200]}")
+        elif _log:
+            _log.info("kb_proposal_reorg 同步完成")
+    except subprocess.TimeoutExpired:
+        if _log:
+            _log.warning("kb_proposal_reorg 超时")
+    except Exception as e:
+        if _log:
+            _log.warning(f"kb_proposal_reorg 调用失败: {e}")
+
+
 # ---------------------------------------------------------------------------
 # 同步逻辑
 # ---------------------------------------------------------------------------
@@ -209,7 +238,7 @@ class ProposalKbSync:
         }
 
     def sync_all(self, dry_run: bool = False) -> Dict[str, Any]:
-        """同步所有已注册 proposal。"""
+        """同步所有已注册 proposal，完成后自动更新 versions/ 和 reports/。"""
         state = self._load_lifecycle()
         results = []
         for proposal_id in sorted(state["proposals"].keys()):
@@ -219,6 +248,9 @@ class ProposalKbSync:
                 _log.info(f"同步 proposal 到知识库: {proposal_id}")
 
         self._update_index(results, dry_run=dry_run)
+
+        # 同步完成后自动更新 versions/ 和 reports/
+        _run_reorg(dry_run=dry_run)
 
         return {
             "success": True,

@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import os
 import uuid
 from datetime import datetime, timezone
 from pathlib import Path
@@ -37,9 +38,14 @@ def _ensure_hermes_scripts_dir() -> Path:
 
 
 def _write_wrapper_script(name: str, content: str) -> Path:
-    """把包装脚本写入 ~/.hermes/profiles/linsai/scripts/，并返回路径。"""
+    """把包装脚本写入 ~/.hermes/profiles/linsai/scripts/，并返回路径。
+
+    如果文件已存在且可执行，跳过写入（避免沙盒权限问题）。
+    """
     _ensure_hermes_scripts_dir()
     path = HERMES_SCRIPTS_DIR / name
+    if path.exists() and os.access(path, os.X_OK):
+        return path
     path.write_text(content, encoding="utf-8")
     path.chmod(0o755)
     return path

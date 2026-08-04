@@ -93,7 +93,7 @@ def _mark_degradation(self, proposal_id: str, step: str, detail: str) -> None:
         degradations.append({"step": step, "detail": detail, "at": now_utc()})
         # 只保留最近 20 条
         prop_state["degradation_events"] = degradations[-20:]
-        self._save_proposal_state(proposal_id, prop_state)
+        self._set_proposal_state(proposal_id, prop_state)
     except Exception:
         pass  # 非关键路径，不影响主流程
 
@@ -635,12 +635,17 @@ def _run_lit_read_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str,
             f"【arXiv ID】{aid}\n\n"
             f"请执行：\n"
             f"1. 使用 web_search 获取论文的完整信息（标题、作者、摘要等）\n"
-            f"2. 输出格式：\n"
-            f"   ## 核心结论\n"
-            f"   ## 方法与创新\n"
-            f"   ## 与课题关联\n"
-            f"   ## 关键图表/数据\n"
-            f"   ## 局限性\n"
+            f"2. 输出必须包含以下五个维度，每个维度不少于 3 句实质内容：\n"
+            f"   ## 研究问题（Research Question）\n"
+            f"   论文的核心研究问题、目标或中心论点（the research question, aim, or central argument）。\n\n"
+            f"   ## 研究背景（Background）\n"
+            f"   该问题的学术背景、前人工作、领域现状及研究动机（the background of the question）。\n\n"
+            f"   ## 研究方法（Methods）\n"
+            f"   数据来源、实验方法、理论框架或技术路线（data and method）。\n\n"
+            f"   ## 主要发现与核心结论（Main Results）\n"
+            f"   关键结果、定量发现、核心结论与图表数据（main results and findings）。\n\n"
+            f"   ## 潜在研究方向（Future Directions）\n"
+            f"   研究局限性、注意事项及未解决的开放问题（limitations, caveats, and open questions）。\n"
         )
         try:
             agent_result = _run_hermes_agent("researcher", agent_prompt, timeout=240)
@@ -1077,7 +1082,7 @@ def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, 
             prop_state = self._get_proposal_state(proposal_id)
             if prop_state:
                 prop_state["quality_warning"] = quality_warning
-                self._save_proposal_state(proposal_id, prop_state)
+                self._set_proposal_state(proposal_id, prop_state)
                 if _log:
                     _log.warning(f"[{proposal_id}] {quality_warning}")
         return {

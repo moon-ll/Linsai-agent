@@ -53,6 +53,7 @@ from .executor import (
     _run_update_method_manual_step,
     execute_job,
     execute_next_job,
+    _mark_degradation,
 )
 from .framework import (
     setup_cron_framework,
@@ -292,6 +293,7 @@ python3 scripts/weekend_pipeline.py --run-next
     _run_monitor_step = _run_monitor_step
     _run_update_vision_step = _run_update_vision_step
     _run_update_method_manual_step = _run_update_method_manual_step
+    _mark_degradation = _mark_degradation
     execute_job = execute_job
     execute_next_job = execute_next_job
 

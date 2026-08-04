@@ -17,10 +17,11 @@
     arxiv_id           →  frontmatter.arxiv_id
     title/authors/date →  frontmatter.title/authors/year
     tldr/abstract      →  正文摘要
-    why_notable        →  ## 为什么值得关注
-    core_findings      →  ## 核心发现
-    linsai_connection  →  ## 林赛的理解
-    what_next          →  ## 开放问题
+    why_notable        →  ## 研究问题（Research Question）
+    linsai_connection  →  ## 研究背景（Background）
+    new_methods        →  ## 研究方法（Methods）
+    core_findings      →  ## 主要发现与核心结论（Main Results）
+    what_next          →  ## 潜在研究方向（Future Directions）
 
 用法示例：
     >>> from kb_importer import import_candidate, import_deep_analysis
@@ -270,23 +271,23 @@ def import_deep_analysis(arxiv_id: str, project: str = "") -> Optional[str]:
     # 构建深度解析段落
     deep_analysis_section = f"""## 深度解析
 
-### 为什么值得关注
+### 研究问题（Research Question）
 
 {why_notable}
 
-### 核心发现
-
-{_list_items(core_findings)}
-
-### 新方法
-
-{_list_items(new_methods)}
-
-### 林赛的理解
+### 研究背景（Background）
 
 {linsai_connection}
 
-### 开放问题
+### 研究方法（Methods）
+
+{_list_items(new_methods)}
+
+### 主要发现与核心结论（Main Results）
+
+{_list_items(core_findings)}
+
+### 潜在研究方向（Future Directions）
 
 {_list_items(what_next)}
 

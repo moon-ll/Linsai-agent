@@ -29,7 +29,7 @@ import json
 import os
 import subprocess
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -224,26 +224,157 @@ def _check_proposals() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
     return stats, anomalies
 
 
+# 必须存在的 cron 前缀列表
+REQUIRED_CRON_PREFIXES = [
+    "lc-daily-orchestrate",
+    "lc-repair",
+    "lc-micro-scheduler",
+    "lc-hourly-monitor",
+]
+
+# cron 未执行告警阈值（秒）— 超过此时间未运行则告警
+CRON_STALE_THRESHOLD = 2 * 3600  # 2 小时
+
+
 def _check_cron_status() -> Optional[Dict[str, Any]]:
-    """检查生命周期 cron 是否正常注册。"""
+    """检查生命周期 cron 是否完整注册且正常执行。
+
+    三层检测：
+    1. 必需 cron 前缀是否全部存在
+    2. 每个 cron 的 last_run_at 是否在合理时间范围内
+    3. worker cron 数量是否与 optimizing 课题数匹配
+    """
     try:
         import hermes_bridge as hb
         crons = hb.cron_list_profile("linsai")
-        has_micro = any(c.get("name", "").startswith("lc-micro-scheduler") for c in crons)
-        has_weekend = any(c.get("name", "").startswith("lc-weekend-") for c in crons)
-        if not has_micro or not has_weekend:
+        cron_names = [c.get("name", "") for c in crons]
+
+        # 1. 检查必需前缀
+        missing = []
+        for prefix in REQUIRED_CRON_PREFIXES:
+            if not any(name.startswith(prefix) for name in cron_names):
+                missing.append(prefix)
+
+        # 2. 检查 weekend cron
+        has_weekend = any(name.startswith("lc-weekend-") for name in cron_names)
+        if not has_weekend:
+            missing.append("lc-weekend-*")
+
+        if missing:
             return {
                 "type": "cron_missing",
-                "missing_micro": not has_micro,
-                "missing_weekend": not has_weekend,
-                "message": f"生命周期 cron 缺失: micro={has_micro} weekend={has_weekend}",
+                "missing": missing,
+                "message": f"生命周期 cron 缺失: {', '.join(missing)}",
             }
+
+        # 3. 检查关键 cron 是否长时间未执行
+        now_dt = datetime.now(timezone.utc)
+        stale_crons = []
+        for c in crons:
+            name = c.get("name", "")
+            last_run = c.get("last_run_at", "")
+            # 只检查关键调度 cron
+            if not any(name.startswith(p) for p in ["lc-micro-scheduler", "lc-daily-orchestrate", "lc-repair"]):
+                continue
+            if last_run:
+                try:
+                    last_dt = datetime.fromisoformat(last_run.replace("Z", "+00:00"))
+                    elapsed = (now_dt - last_dt).total_seconds()
+                    if elapsed > CRON_STALE_THRESHOLD:
+                        hours = int(elapsed // 3600)
+                        stale_crons.append(f"{name} ({hours}h 未执行)")
+                except Exception:
+                    pass
+            else:
+                # 有注册但从未执行过
+                # 排除刚创建的 cron（created_at 在 10 分钟内）
+                created = c.get("created_at", "")
+                if created:
+                    try:
+                        created_dt = datetime.fromisoformat(created.replace("Z", "+00:00"))
+                        age = (now_dt - created_dt).total_seconds()
+                        if age > 600:
+                            stale_crons.append(f"{name} (从未执行)")
+                    except Exception:
+                        pass
+
+        if stale_crons:
+            return {
+                "type": "cron_stale",
+                "stale": stale_crons,
+                "message": f"cron 长时间未执行: {'; '.join(stale_crons[:3])}",
+            }
+
     except Exception as e:
         return {
             "type": "cron_check_error",
             "message": f"cron 检查异常: {e}",
         }
     return None
+
+
+def _check_zero_progress(stats: List[Dict[str, Any]]) -> Optional[Dict[str, Any]]:
+    """检测全链路零进展：所有课题的 pending > 0 但 done 在近期无变化。
+
+    通过对比看板历史记录判断进展是否停滞。
+    """
+    try:
+        existing = load_json(KANBAN_PATH, default={})
+        hourly = existing.get("hourly_monitor", {})
+        prev_done = hourly.get("total_done", -1)
+        prev_ts = hourly.get("timestamp", "")
+
+        curr_done = sum(s["done"] for s in stats)
+        curr_pending = sum(s["pending"] for s in stats)
+
+        # 如果上次看板有记录，且 pending > 0，但 done 完全没变
+        if prev_done >= 0 and curr_pending > 0 and curr_done == prev_done:
+            # 计算停滞时长
+            stale_hours = 0
+            if prev_ts:
+                try:
+                    prev_dt = datetime.fromisoformat(prev_ts.replace("Z", "+00:00"))
+                    stale_hours = int((datetime.now(timezone.utc) - prev_dt).total_seconds() // 3600)
+                except Exception:
+                    pass
+
+            # 停滞超过 3 小时才告警（给正常执行间隔留余量）
+            if stale_hours >= 3:
+                return {
+                    "type": "zero_progress",
+                    "prev_done": prev_done,
+                    "curr_done": curr_done,
+                    "curr_pending": curr_pending,
+                    "stale_hours": stale_hours,
+                    "message": f"全链路进展停滞 {stale_hours}h: done={curr_done} (无变化), pending={curr_pending}",
+                }
+    except Exception:
+        pass
+    return None
+
+
+def _auto_repair_cron() -> bool:
+    """自动修复缺失的 cron 框架。
+
+    调用 --setup-cron-v2 重新安装完整框架。
+    返回 True 表示修复成功。
+    """
+    try:
+        result = subprocess.run(
+            [sys.executable, str(PROJECT_ROOT / "scripts" / "proposal_lifecycle.py"), "--setup-cron-v2"],
+            capture_output=True, text=True, timeout=120,
+        )
+        if result.returncode == 0:
+            if _log:
+                _log.info("cron 框架自动修复成功")
+            return True
+        else:
+            if _log:
+                _log.warning(f"cron 框架自动修复失败: {result.stderr[:200]}")
+    except Exception as e:
+        if _log:
+            _log.warning(f"cron 框架自动修复异常: {e}")
+    return False
 
 
 def _update_kanban(stats: List[Dict[str, Any]], focus: Optional[Dict[str, Any]]) -> None:
@@ -295,8 +426,27 @@ def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
     cron_issue = _check_cron_status()
     if cron_issue:
         anomalies.append(cron_issue)
+        # cron 缺失时自动修复（不等待人工介入）
+        if cron_issue.get("type") == "cron_missing" and not dry_run:
+            repaired = _auto_repair_cron()
+            if repaired:
+                # 修复后重新检查
+                recheck = _check_cron_status()
+                if not recheck:
+                    if _log:
+                        _log.info("cron 框架自动修复成功，告警降级为信息")
+                    cron_issue["auto_repaired"] = True
+                    cron_issue["message"] = f"[已自愈] {cron_issue['message']}"
+                else:
+                    if _log:
+                        _log.warning(f"cron 框架自动修复后仍有问题: {recheck}")
 
-    # 3. 获取当前聚焦
+    # 3. 检查全链路零进展（cron 存在但 job 不推进）
+    progress_issue = _check_zero_progress(stats)
+    if progress_issue:
+        anomalies.append(progress_issue)
+
+    # 4. 获取当前聚焦
     focus_info: Optional[Dict[str, Any]] = None
     try:
         from lifecycle.controller import get_controller
@@ -311,10 +461,10 @@ def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
     except Exception:
         pass
 
-    # 4. 更新看板
+    # 5. 更新看板
     _update_kanban(stats, focus_info)
 
-    # 5. 异常通知（去重）
+    # 6. 异常通知（去重）
     notified: List[str] = []
     if anomalies and not dry_run:
         # 汇总告警内容
