@@ -499,11 +499,15 @@ def _save_suggestions(suggestions: List[Dict]) -> None:
 
 
 def _apply_suggestion(suggestion: Dict) -> bool:
-    """应用单条建议到 hermes prompt 文件。"""
+    """应用单条建议到 hermes prompt 文件。
+
+    Returns:
+        True 表示成功（含"内容已存在"的跳过），False 表示失败。
+    """
     target_file = Path(suggestion["target_file"])
 
     if not target_file.exists():
-        print(f"✗ 目标文件不存在：{target_file}")
+        print(f"  ✗ 目标文件不存在：{target_file}")
         return False
 
     # 备份
@@ -515,11 +519,21 @@ def _apply_suggestion(suggestion: Dict) -> bool:
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     backup_path = backup_dir / f"{profile}-{filename}-{ts}.bak"
 
-    shutil.copy2(str(target_file), str(backup_path))
-    print(f"  ✓ 备份至：{backup_path}")
+    try:
+        shutil.copy2(str(target_file), str(backup_path))
+        print(f"  ✓ 备份至：{backup_path}")
+    except PermissionError:
+        print(f"  ✗ 备份失败（权限不足）：{target_file}")
+        suggestion["apply_error"] = "backup_permission_denied"
+        return False
 
     # 读取当前内容
-    current_content = target_file.read_text(encoding="utf-8")
+    try:
+        current_content = target_file.read_text(encoding="utf-8")
+    except PermissionError:
+        print(f"  ✗ 读取失败（权限不足）：{target_file}")
+        suggestion["apply_error"] = "read_permission_denied"
+        return False
 
     # 检查是否已经包含相同内容（避免重复添加）
     content_to_add = suggestion.get("content", "").strip()
@@ -529,7 +543,12 @@ def _apply_suggestion(suggestion: Dict) -> bool:
 
     # 添加到文件末尾
     new_content = current_content.rstrip() + "\n" + content_to_add + "\n"
-    target_file.write_text(new_content, encoding="utf-8")
+    try:
+        target_file.write_text(new_content, encoding="utf-8")
+    except PermissionError:
+        print(f"  ✗ 写入失败（权限不足）：{target_file}")
+        suggestion["apply_error"] = "write_permission_denied"
+        return False
 
     print(f"  ✓ 已修改：{target_file}")
     return True
@@ -662,9 +681,15 @@ def cmd_auto() -> None:
         debug_entries, score_reasons, failure_patterns, prompt_files
     )
 
+    all_suggestions = _load_suggestions()
+
+    # 将新建议合并到 all_suggestions（确保应用后状态变更被保存）
+    if new_suggestions:
+        all_suggestions.extend(new_suggestions)
+        _save_suggestions(all_suggestions)
+
     if not new_suggestions:
-        # 没有新建议，但检查是否有遗留的 pending 建议
-        all_suggestions = _load_suggestions()
+        # 没有新建议，检查是否有遗留的 pending 建议
         pending = [s for s in all_suggestions if s.get("status") == "pending"]
         if pending:
             safe_pending = [s for s in pending if s.get("priority") in ("high", "medium")]
@@ -688,15 +713,27 @@ def cmd_auto() -> None:
         for s in skipped:
             print(f"    [{s['priority'].upper()}] {s['id']}: {s['description'][:60]}")
 
-    if not safe_suggestions:
+    # 同时收集遗留的 pending 建议
+    existing_pending = [
+        s for s in all_suggestions
+        if s.get("status") == "pending" and s.get("priority") in ("high", "medium")
+    ]
+    if existing_pending:
+        print(f"  另发现 {len(existing_pending)} 条遗留 pending 建议，一并处理")
+
+    to_apply = safe_suggestions + existing_pending
+    if not to_apply:
         print("○ 无安全等级建议可应用")
         return
 
     # 3. 应用
-    all_suggestions = _load_suggestions()
-    print(f"\n  自动应用 {len(safe_suggestions)} 条建议：")
-    _apply_suggestions(safe_suggestions, all_suggestions, auto_mode=True)
-    _log_auto_applied(safe_suggestions)
+    print(f"\n  自动应用 {len(to_apply)} 条建议：")
+    _apply_suggestions(to_apply, all_suggestions, auto_mode=True)
+
+    # 只记录成功应用的
+    applied_ok = [s for s in to_apply if s.get("status") == "applied"]
+    if applied_ok:
+        _log_auto_applied(applied_ok)
 
     print("\n✓ 自动优化完成")
 
@@ -707,7 +744,7 @@ def _log_auto_applied(suggestions: List[Dict]) -> None:
         sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
         import debug_journal
         for s in suggestions:
-            debugjournal.add_entry({
+            debug_journal.add_entry({
                 "category": "prompt_tuning",
                 "severity": "minor",
                 "title": f"Prompt 自动优化：{s['target_profile']}/{Path(s['target_file']).name}",
@@ -740,8 +777,13 @@ def _apply_suggestions(
             s["status"] = "applied"
             s["applied_at"] = _now_utc()
             s["applied_mode"] = "auto" if auto_mode else "manual"
+            s.pop("apply_error", None)
             success_count += 1
         else:
+            # 失败标记为 failed，下次 auto 不会再选
+            s["status"] = "failed"
+            s["failed_at"] = _now_utc()
+            s["failed_mode"] = "auto" if auto_mode else "manual"
             fail_count += 1
 
     # 保存更新
