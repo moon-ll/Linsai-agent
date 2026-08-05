@@ -663,6 +663,17 @@ def cmd_auto() -> None:
     )
 
     if not new_suggestions:
+        # 没有新建议，但检查是否有遗留的 pending 建议
+        all_suggestions = _load_suggestions()
+        pending = [s for s in all_suggestions if s.get("status") == "pending"]
+        if pending:
+            safe_pending = [s for s in pending if s.get("priority") in ("high", "medium")]
+            if safe_pending:
+                print(f"○ 无新建议，但发现 {len(safe_pending)} 条遗留 pending 建议，自动应用")
+                _apply_suggestions(safe_pending, all_suggestions, auto_mode=True)
+                _log_auto_applied(safe_pending)
+                print("\n✓ 自动优化完成")
+                return
         print("○ 无新建议，无需操作")
         return
 
@@ -685,12 +696,17 @@ def cmd_auto() -> None:
     all_suggestions = _load_suggestions()
     print(f"\n  自动应用 {len(safe_suggestions)} 条建议：")
     _apply_suggestions(safe_suggestions, all_suggestions, auto_mode=True)
+    _log_auto_applied(safe_suggestions)
 
-    # 4. 记录到 debug journal
+    print("\n✓ 自动优化完成")
+
+
+def _log_auto_applied(suggestions: List[Dict]) -> None:
+    """将自动应用的记录写入 debug journal。"""
     try:
         sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
         import debug_journal
-        for s in safe_suggestions:
+        for s in suggestions:
             debugjournal.add_entry({
                 "category": "prompt_tuning",
                 "severity": "minor",
@@ -706,8 +722,6 @@ def cmd_auto() -> None:
             })
     except Exception:
         pass
-
-    print("\n✓ 自动优化完成")
 
 
 def _apply_suggestions(

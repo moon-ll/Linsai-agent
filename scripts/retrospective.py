@@ -743,6 +743,7 @@ def _format_report(
         weekend_analysis.get("pattern_count", 0) > 0
         or weekend_analysis.get("action_count", 0) > 0
         or weekend_analysis.get("latest_report_at")
+        or len(weekend_analysis.get("health_trend", [])) > 0
     ):
         wa = weekend_analysis
         if wa.get("latest_report_at"):
