@@ -940,27 +940,26 @@ def _focus_proposal_for_slot(
             prev_jobs = self._get_jobs(prev_pid)
             prev_state = self._get_proposal_state(prev_pid)
             completed_rounds = prev_state.get("optimization_rounds", 0) if prev_state else 0
-            stuck = _is_proposal_stuck(self, prev_pid)
 
             # 让出时段的唯一条件：
-            # 当前轮的全部任务已完成（产物+标签双检查通过）
+            # 进行中的轮次（=已完成轮次+1）的全部任务已完成（产物+标签双检查通过）。
+            # 必须检查 completed_rounds+1（进行中轮次）而非 completed_rounds
+            # （已完成轮次），否则已完成≥1轮的 proposal 会在下一轮进行中被误判
+            # 为"本轮完成"而提前让出时段，中断连续聚焦。
             # 卡住（stuck）不由微调度器处理，交给 repair 和健康检查发现并修复，
             # 修复后微调度器继续推进，保证每轮优化的连续性。
-            current_round = completed_rounds
-            if current_round > 0:
-                round_done = _is_round_complete(prev_jobs, prev_pid, current_round)
-            else:
-                round_done = False
+            current_round = completed_rounds + 1
+            round_done = _is_round_complete(prev_jobs, prev_pid, current_round)
 
             if not round_done:
-                # 未完成也未卡住，继续聚焦上一个
+                # 当前轮未完成，继续聚焦上一个
                 state["last_slot_index"] = slot_index
                 state["last_proposal_id"] = prev_pid
                 _save_focus_state(state)
                 return prev_pid
         except Exception:
             pass
-        # 已完成或卡住：移动到队列末尾，推进到下一个
+        # 当前轮已完成：移动到队列末尾，推进到下一个
         _move_to_queue_end(state, prev_pid)
         queue = state.get("queue", [])
         # 找到 prev_pid 移尾后的新队列中，下一个应聚焦的 proposal

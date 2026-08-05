@@ -1,5 +1,20 @@
 # 变更记录
 
+## v6.8.3-fix5 - 2026-08-05 微调度器轮转 off-by-one 修复
+
+### 改动内容
+
+- **micro_scheduler.py**: 修复 `_focus_proposal_for_slot` 让出检查的 off-by-one bug
+  - 根因：fix4 将 `current_round = completed_rounds + 1`（进行中轮次）误改为 `current_round = completed_rounds`（已完成轮次）
+  - 影响：已完成 ≥1 轮的 proposal 在下一轮进行中会被误判为"本轮完成"而提前让出时段，中断连续聚焦，严重拖慢多轮优化
+  - 修复：恢复为 `completed_rounds + 1`，与 `_sync_single_proposal_to_task`（L574）和调用方（L1156）的统一约定一致
+  - 清理：移除 yield 检查中未使用的 `stuck` 变量（死代码，stuck 处理已交由 repair/健康检查）
+- **test_micro_scheduler_rotation.py**: 新增 7 项回归测试，覆盖轮次编号选择逻辑
+
+### 验证结果
+- `self_test.py --module` 227/227 通过（含新增 7 项）
+- 已验证：还原 bug 后 5/7 测试失败，修复后 7/7 通过
+
 ## v6.8.3-fix4 - 2026-08-05 微调度器轮转逻辑修正
 
 ### 改动内容
