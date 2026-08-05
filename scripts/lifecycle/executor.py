@@ -154,9 +154,11 @@ def _run_critic_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         self._wait_for_critic_report(report_path, timeout=30)
 
     # 解析报告，决定是否需要 researcher
+    # v6.8.3-fix10: references 模块不插入 researcher 链（本身就是文献检验）
     report = self._read_critic_report(prop_dir, round_num)
-    if report["dim_scores"].get("rigor", 1.0) < 0.70 or self._has_lit_gap({"output": report["output"]}):
-        self._insert_researcher_pipeline(proposal_id, round_num, section["key"])
+    if section_key != "references":
+        if report["dim_scores"].get("rigor", 1.0) < 0.70 or self._has_lit_gap({"output": report["output"]}):
+            self._insert_researcher_pipeline(proposal_id, round_num, section["key"])
 
     return {"success": True, "score": report["score"]}
 

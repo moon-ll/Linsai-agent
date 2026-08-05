@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
+import os
 import subprocess
 
 from common import now_utc, load_json, hermes_subprocess_env
@@ -275,6 +276,7 @@ class OptimizeMixin:
 
         P1-1: 支持章节级评审（focus_section）和整体审查（is_full_review）。
         v6.7.7: 默认按章节拆分文件读取，降低单次 LLM 负载、减少超时。
+        v6.8.3-fix10: references 模块使用轻量化专用 prompt，不走重型评审流程。
         """
         sections = ProposalSections(prop_dir / "04_proposal")
         sections.ensure_split()  # 兼容旧格式：自动拆分
@@ -283,7 +285,55 @@ class OptimizeMixin:
         report_path.parent.mkdir(parents=True, exist_ok=True)
 
         # v6.7.7: 构建要读取的文件列表
-        if is_full_review:
+        is_references = focus_section and focus_section.get("key") == "references"
+
+        if is_references:
+            # v6.8.3-fix10: references 模块轻量化 prompt
+            # 参考文献检验不需要叙述式检查、创新性评分、7模块完整性检查
+            # 聚焦：引文格式、编号一致性、引用相关性、缺失引用检测
+            ref_file = prop_dir / "04_proposal" / "sections" / "references.md"
+            # 同时读取正文，检查正文中的引用标记是否在参考文献列表中
+            body_files = [
+                str(prop_dir / "04_proposal" / "sections" / f"{s['key']}.md")
+                for s in PROPOSAL_SECTIONS
+                if s["key"] in ("rationale", "content", "scheme") and sections.section_exists(s["key"])
+            ]
+            read_instruction = (
+                f"【参考文献文件】{ref_file}\n"
+                f"【正文文件】\n" + "\n".join(f"- {p}" for p in body_files) +
+                "\n\n请读取参考文献文件和正文文件，做参考文献检验。\n"
+            )
+            prompt = (
+                f"请对以下 NSFC 申请书的参考文献做第 {round_num} 轮检验。\n\n"
+                f"【项目类型】{project_type}\n\n"
+                f"{read_instruction}\n"
+                f"请执行以下检查（不需要检查写作风格、创新性或可行性）：\n"
+                f"1. 引文格式：是否统一使用 [N] 编号，作者、年份、期刊、卷页是否完整\n"
+                f"2. 编号一致性：正文中引用的 [N] 是否在参考文献列表中都能找到，反之亦然\n"
+                f"3. 引用相关性：每条参考文献是否与申请书的科学问题相关，是否有无关引用\n"
+                f"4. 缺失引用：正文中做出的重要论断是否缺少文献支撑\n"
+                f"5. 引用数量：参考文献总数是否在 15-30 篇区间（NSFC 面上项目惯例）\n"
+                f"6. 时效性：是否包含近 3 年的文献，是否有过于陈旧的引用\n\n"
+                f"每个问题按严重程度分级（critical/high/medium/low），给出具体修改建议。\n\n"
+                f"【评分（必填）】\n"
+                f"只评两个维度（0-1）：\n"
+                f"  - 严谨性（rigor）：引文格式、编号一致性、作者信息完整性\n"
+                f"  - 完整性（completeness）：引用数量、时效性、缺失引用情况\n\n"
+                f"在检验报告末尾，必须包含如下格式的评分块（供程序解析）：\n"
+                f"```\n"
+                f"## 评分\n"
+                f"创新性：0.85\n"
+                f"可行性：0.85\n"
+                f"严谨性：0.75\n"
+                f"完整性：0.90\n"
+                f"综合评分：0.82\n"
+                f"```\n"
+                f"（注：创新性和可行性固定填 0.85，综合评分为严谨性和完整性的均值）\n"
+                f"将检验报告写入：{report_path}\n"
+            )
+            return self._run_hermes("critic", prompt, min(timeout, 300))
+
+        elif is_full_review:
             focus_text = (
                 f"\n【本轮为整体一致性审查】\n"
                 f"请检查三个章节之间的逻辑衔接、术语一致性、内容冗余/矛盾。\n"
@@ -790,34 +840,62 @@ class OptimizeMixin:
         return result
 
     def _run_hermes(self, profile: str, prompt: str, timeout: int) -> Dict[str, Any]:
-        """执行 hermes oneshot。"""
-        # v6.6.3 + v6.7.7 修复：清理 Python 变量 + 自动读取 .env + 透传 ZAI_API_KEY，
-        # 避免 cron 等无 shell 环境因缺少 API Key 而失败
+        """执行 hermes oneshot。
+
+        v6.8.3-fix9: 使用 Popen + 进程组杀死替代 subprocess.run，
+        确保 timeout 后 hermes CLI 及其子进程被彻底清理。
+        subprocess.run(timeout=N) 在 macOS 上只 kill 直接子进程，
+        如果 hermes CLI fork 了额外进程（如 gateway worker），
+        这些进程会继续运行导致 CLI 端口/管道不释放，Python 侧永远收不到子进程退出信号。
+        """
         env = hermes_subprocess_env()
 
         import time
+        import signal
         cmd = ["hermes", "--profile", profile, "-z", prompt]
         t0 = time.time()
+        proc = None
         try:
-            result = subprocess.run(
-                cmd, capture_output=True, text=True, timeout=timeout,
-                env=env, cwd=str(_pl.PROJECT_ROOT),
+            # start_new_session=True 使子进程成为新进程组的 leader
+            # timeout 后可以用 os.killpg 杀死整个进程组
+            proc = subprocess.Popen(
+                cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                text=True, env=env, cwd=str(_pl.PROJECT_ROOT),
+                start_new_session=True,
             )
+            try:
+                stdout, stderr = proc.communicate(timeout=timeout)
+            except subprocess.TimeoutExpired:
+                # 杀死整个进程组（hermes CLI + 所有子进程）
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                    try:
+                        proc.wait(timeout=5)
+                    except subprocess.TimeoutExpired:
+                        os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                        proc.wait(timeout=3)
+                except (ProcessLookupError, PermissionError):
+                    pass
+                elapsed = round(time.time() - t0, 2)
+                return {"success": False, "output": "", "error": f"超时({timeout}s)", "elapsed_s": elapsed}
+
             elapsed = round(time.time() - t0, 2)
-            if result.returncode == 0:
-                output = result.stdout.strip()
-                # v6.7.1: 提高截断阈值，避免 critic 评分代码块被截断
-                # critic 报告通常 10-25KB，50KB 可保留完整评分
+            if proc.returncode == 0:
+                output = stdout.strip()
                 if len(output) > 50000:
                     output = output[:50000] + f"\n... (截断，共{len(output)}字符)"
                 return {"success": True, "output": output, "elapsed_s": elapsed}
             return {
-                "success": False, "output": result.stdout[:2000],
-                "error": result.stderr[:500], "elapsed_s": elapsed,
+                "success": False, "output": stdout[:2000],
+                "error": stderr[:500], "elapsed_s": elapsed,
             }
-        except subprocess.TimeoutExpired:
-            return {"success": False, "output": "", "error": f"超时({timeout}s)", "elapsed_s": timeout}
         except Exception as e:
+            # 兜底：确保进程被清理
+            if proc and proc.poll() is None:
+                try:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                except Exception:
+                    pass
             return {"success": False, "output": "", "error": str(e), "elapsed_s": 0}
 
     def _wait_for_critic_report(

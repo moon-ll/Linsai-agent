@@ -8,7 +8,7 @@ LinSai-CoPilot/
 ├── AGENTS.md                  # 本文件。AI 代理必读指南
 ├── README.md                  # 人类可读的项目说明
 ├── CHANGELOG.md               # 变更记录
-├── VERSION                    # 版本号唯一真相源（当前 6.8.1）
+├── VERSION                    # 版本号唯一真相源（当前 6.8.4）
 ├── .env                       # 本地 API 密钥（gitignore，不提交）
 ├── .gitignore                 # Git 忽略规则：用户数据、自动生成文件、敏感配置
 │
@@ -46,6 +46,13 @@ LinSai-CoPilot/
 │   ├── hermes-memory-snapshot.json # hermes 记忆原文快照
 │   ├── alias-candidates.json  # 别名候选
 │   ├── chat-archive-index.json # 聊天归档索引
+│   ├── system-kanban.json     # v6.8.1 系统看板（微调度器+生命周期监控协同写）
+│   ├── lifecycle-focus.json   # v6.8.0 生命周期聚焦状态（当前时段/队列/轮转）
+│   ├── agent-scores.json      # v6.7.6 Agent 奖惩分数（writer/critic）
+│   ├── tuning-log.json        # v6.7 调度策略调优日志
+│   ├── debug-journal.json     # v6.8.3 调试日志（prompt 优化器/失败分析数据源）
+│   ├── debug-journal-report.md # v6.8.3 调试日志摘要报告
+│   ├── background-tasks.json  # 后台任务状态
 │   └── snippets/              # 记忆片段（用户的名言、关键事件）
 │       └── README.md
 │
@@ -92,8 +99,6 @@ LinSai-CoPilot/
 │
 ├── projects/                  # v3.5 课题指导模块数据（当前为空，功能由 research_proposals 承接）
 │   └── README.md
-│
-├── proposals/                 # 早期 proposal 草稿（历史目录，逐渐被 research_proposals 替代）
 │
 ├── research_proposals/        # v6.2+ 研究管线数据域（独立，与 CoPilot 核心隔离）
 │   ├── _lifecycle.json        # 提案生命周期总状态
@@ -202,11 +207,12 @@ LinSai-CoPilot/
 │   ├── proposal_inspector.py  # v6.2 申请书自检
 │   ├── proposal_writer.py     # v6.2 申请书撰写
 │   ├── proposal_lifecycle.py  # v6.7.7 薄 shim：提案生命周期 CLI/导入入口，实现位于 proposal_lifecycle/ 包
-│   ├── proposal_lifecycle/    # v6.7.7 提案生命周期包：state/naming/registration/optimize/cron 等 mixin
+│   ├── proposal_lifecycle/    # v6.7.7 提案生命周期包：state/naming/registration/optimize/cron/constants/controller/framework 等 mixin
 │   ├── adversarial_governance.py # v6.7.7 薄 shim：对抗评审奖惩导入入口，实现位于 adversarial/ 包
 │   ├── adversarial/           # v6.7.7 对抗评审奖惩包
 │   ├── lifecycle_cron_framework.py # v6.7.7 薄 shim：生命周期 cron 导入入口，实现位于 lifecycle/ 包
-│   ├── lifecycle/             # v6.7.7 生命周期 cron 包：controller/scheduler/orchestrator/executor/utils
+│   ├── lifecycle/             # v6.7.7 生命周期 cron 包：controller/scheduler/orchestrator/executor/micro_scheduler/utils/constants
+│   ├── lifecycle_monitor.py   # v6.8.3 健康检查：cron 缺失/卡住/连续失败/零进展检测，飞书通知，自动修复
 │   ├── rebuild_lifecycle.py   # v6.7.1+ 基于 critic 报告重建 _lifecycle.json / 规范化轮次编号
 │   ├── import_hermes_topics.py # v6.7.3 将 hermes workspace 课题雏形导入全自动链路
 │   ├── idea_generator.py      # v6.7.7 输入端薄 shim：--auto 委托给 weekend_pipeline input 阶段；--manual 保留
@@ -215,6 +221,8 @@ LinSai-CoPilot/
 │   ├── weekend_pipeline.py    # v6.7.7 周末任务流水线入口脚本（供 hermes cron 调用）
 │   ├── weekend_pipeline/      # v6.7.7 周末任务流水线包：input/output/reflection 小任务与 KB 联动
 │   ├── kb_health_weekend.py   # v6.7.7 周末 KB 深度健康检查（基础检查复用 knowledge_output）
+│   ├── prompt_optimizer.py    # v6.8.3 Prompt 自动优化：从 debug journal/scores/failures 生成并应用 prompt 修改
+│   ├── retrospective.py       # v6.8.3 链路结构化复盘：综合 5 个数据源生成周期性复盘报告
 │   ├── orchestrator.py        # v6.7 林赛总控核心：仪表盘 / 失败分析 / 策略建议 / 链路监控
 │   ├── profile_health.py      # v6.7 profile 健康度：idle/working/blocked/offline + 成功率/耗时
 │   ├── failure_analyzer.py    # v6.7 失败模式分析：8 种模式聚类 + prompt 修正建议
@@ -235,7 +243,11 @@ LinSai-CoPilot/
 │       ├── test_persona.py           # 人格一致性抽检
 │       ├── test_web_api.py           # Web API 接口测试
 │       ├── test_lifecycle_cron.py    # 生命周期 cron 框架测试
-│       └── test_weekend_pipeline.py  # 周末任务流水线测试
+│       ├── test_weekend_pipeline.py  # 周末任务流水线测试
+│       ├── test_micro_scheduler.py   # v6.8.0 微调度器测试
+│       ├── test_round_complete_break.py # v6.8.2 轮次完成 break 测试
+│       ├── test_derived_job_priority.py # v6.8.3 derived job 优先级测试
+│       └── test_prompt_optimizer.py  # v6.8.3 prompt 优化器测试
 │
 └── web/                       # 前端界面（零框架依赖）
     ├── index.html             # 单页应用入口

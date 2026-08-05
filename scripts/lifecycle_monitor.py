@@ -275,6 +275,8 @@ REQUIRED_CRON_PREFIXES = [
     "lc-repair",
     "lc-micro-scheduler",
     "lc-hourly-monitor",
+    "lc-prompt-optimize",
+    "lc-retrospective",
 ]
 
 # cron 未执行告警阈值（秒）— 超过此时间未运行则告警
@@ -432,8 +434,12 @@ def _update_kanban(stats: List[Dict[str, Any]], focus: Optional[Dict[str, Any]])
     # 读取现有看板（scheduler 写入的详细格式），保留其结构
     existing = load_json(KANBAN_PATH, default={})
 
-    # 只更新 hourly_monitor 和 updated_at 字段，不破坏 scheduler 的格式
+    # 只更新 hourly_monitor 和 updated_at 字段，不破坏 scheduler 的格式。
+    # 必须同步刷新 updated_at_local，否则 micro_scheduler 不在工作时隙时该字段
+    # 会停滞在上次执行时间（如 12:30:57），令 --kanban CLI / 监控 UI 误判为链路静默。
+    now_local = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     existing["updated_at"] = now_utc()
+    existing["updated_at_local"] = now_local
     existing["hourly_monitor"] = {
         "timestamp": now_utc(),
         "total_proposals": len(stats),

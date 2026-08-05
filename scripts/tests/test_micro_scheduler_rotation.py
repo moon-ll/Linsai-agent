@@ -192,6 +192,52 @@ class MicroSchedulerRotationTests(TestSuite):
             f"应检查 round 3（进行中），不应检查 round 2（已完成），实际={queried4}",
         )
 
+        # ================================================================
+        # 测试 5（修复 A 守护）: _is_proposal_stuck 应识别 repair_attempts 达标
+        # bug 现场: orchestrator repair 会把 attempts 重置为 0（orchestrator.py
+        # _run_repair 的 failed→pending 重置），导致只看 attempts 的旧逻辑永远
+        # 判不出 stuck；修复后必须同时检查单调递增的 repair_attempts。
+        # ================================================================
+        mock_ctrl5 = MagicMock()
+        # failed job 的 attempts 已被 repair 清零，但 repair_attempts 已达上限
+        mock_ctrl5._get_jobs.return_value = [
+            {"job_id": "r1-critic", "status": "failed", "attempts": 0, "repair_attempts": self.ms.MAX_JOB_ATTEMPTS},
+            {"job_id": "r1-writer", "status": "pending", "depends_on": ["r1-critic"]},
+        ]
+        stuck5 = self.ms._is_proposal_stuck(mock_ctrl5, pid_a)
+        self.assert_true(
+            stuck5,
+            "repair_attempts 达标的 failed job 应判定 proposal 卡死",
+            "attempts 被 repair 清零后，须靠 repair_attempts 才能识别修复系统已放弃的 job",
+        )
+
+        # ================================================================
+        # 测试 6（修复 B 守护）: 进行中轮次未完成但 proposal 卡死时应让出焦点
+        # bug 现场: round_done=false 时的 early return 绕过下方 _is_proposal_stuck
+        # 兜底，卡死 proposal 永久占用时段焦点、饿死其余 proposal；修复后卡死时
+        # 应切换到队列下一个 proposal。
+        # ================================================================
+        self._write_focus_state(
+            queue=[pid_a, pid_b],
+            last_proposal_id=pid_a,
+            last_slot_index=0,
+        )
+        ctrl6 = self._make_mock_controller({pid_a: {"optimization_rounds": 1}})
+        self._patch_round_complete({2: False})  # round 2 未完成
+
+        orig_stuck = self.ms._is_proposal_stuck
+        self.ms._is_proposal_stuck = lambda c, pid: pid == pid_a  # 仅 pid_a 卡死
+        try:
+            result6 = self.ms._focus_proposal_for_slot(ctrl6, slot_index=1, optimizing=optimizing)
+        finally:
+            self.ms._is_proposal_stuck = orig_stuck
+
+        self.assert_eq(
+            result6, pid_b,
+            "进行中轮次未完成但卡死时应让出焦点",
+            "卡死 proposal 不应永久占用时段，应切换到队列下一个",
+        )
+
 
 if __name__ == "__main__":
     suite = MicroSchedulerRotationTests()

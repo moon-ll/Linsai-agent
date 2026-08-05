@@ -140,6 +140,38 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 - **模式而非规则**：失败分析用模式聚类，给出 `suggested_prompt_change`，由用户/AI 决定如何应用。
 - **链路可成长**：`monitor_pipeline` 自动给低质量产物生成 `growth_actions`，提示人工重跑或自动优化。
 
+### 8. 辅助链路（v6.8.3+）
+
+保障全链路稳定运转的四条辅助链路，与主线生命周期协同：
+
+| 辅助链路 | 核心模块 | cron 任务 | 职责 |
+|----------|----------|-----------|------|
+| **健康检查** | `lifecycle_monitor.py` | `lc-hourly-monitor`（每小时） | 检测 cron 缺失/陈旧、卡住课题、连续失败、零进展、API 限流；异常去重后飞书通知；cron 缺失自动修复 |
+| **看板系统** | `system-kanban.json` | 微调度器（主写）+ `lifecycle_monitor`（合并写） | 当前时段/聚焦课题/job 进度/执行历史/任务同步统计；前端通过 `/api/console/flow` 展示 |
+| **定期修复** | `orchestrator.run_repair()` | `lc-repair`（每 6 小时） | 重置 stuck running（阈值 1800s）、重试 failed job（最多 3 次）、补齐缺失 worker、清理旧轮次 job；微调度器每次执行前无条件清理 stale job |
+| **自成长** | `prompt_optimizer.py` / `retrospective.py` / `strategy_optimizer.py` | `lc-prompt-optimize`（每日 14:00）/ `lc-retrospective`（每周一 15:00） | prompt 自动优化（备份原文件后应用）、链路结构化复盘、调度参数建议 |
+
+**健康检查机制**：
+- `lifecycle_monitor.py` 每小时扫描全链路状态，检测 5 类异常：cron 缺失/陈旧、课题卡住（超时无进展）、连续失败（≥3 次）、零进展（24h 无新产物）、API 限流。
+- 异常去重后通过飞书通知用户；cron 缺失时自动调用 `--setup-cron-v2` 修复。
+- `profile_health.py` 计算 7 个 hermes profile 的健康度（idle/working/blocked/offline + 24h 成功率 + 平均耗时）。
+- `failure_analyzer.py` 从日志聚类 8 种失败模式（score-zero-streak / empty-draft / env-pollution / profile-timeout / file-missing / code-bug / rate-limit / low-content-after-rewrite），并给出 prompt 修正建议。
+
+**看板系统**：
+- `memory/system-kanban.json` 由微调度器（主写）和 `lifecycle_monitor`（合并写）协同维护。
+- 包含字段：当前时段、聚焦 proposal、各 proposal 的当前轮次/job 进度/分数、执行历史、任务同步统计。
+- 前端通过 `/api/console/flow` 读取并展示。
+
+**定期修复机制**：
+- `lc-repair` cron 每 6 小时执行 `orchestrator.run_repair()`。
+- 修复内容：重置 stuck running（阈值 1800s）、重试 failed job（attempts < 3）、补齐缺失 worker cron、清理旧轮次 job。
+- 微调度器在每次执行前无条件清理 stale job（不依赖 slot check），避免卡死。
+
+**自成长机制**：
+- `prompt_optimizer.py`（每日 14:00 cron `lc-prompt-optimize`）：从 debug journal / agent scores / failure patterns 生成 prompt 修改建议，自动备份原文件后应用。支持 `analyze`（仅分析）和 `auto`（分析+应用）两种模式。
+- `retrospective.py`（每周一 15:00 cron `lc-retrospective`）：综合 5 个数据源（lifecycle 执行历史 / agent scores / failure patterns / debug journal / 看板统计）生成结构化复盘报告。
+- `strategy_optimizer.py`：基于 7 天历史数据给出 stagger / max_rounds / score_threshold / timeout 等调度参数建议（仅建议，人工确认后写入 `tuning-log.json`）。
+
 ### 7. 林赛控制台与设置中心（v6.7.7）
 
 在总控层之上新增**面向用户的统一操作界面**，把「看状态」和「调配置」合并到一个入口：

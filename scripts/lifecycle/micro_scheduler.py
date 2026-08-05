@@ -68,6 +68,9 @@ DEFAULT_FOCUS_SLOTS: List[Tuple[str, str]] = [
 FOCUS_STATE_PATH = PROJECT_ROOT / "memory" / "lifecycle-focus.json"
 
 # 步骤在链中的顺序，用于优先级排序（数字越小越优先继续）
+# v6.8.3-fix13: 加入 STEP_UPDATE_VISION / STEP_UPDATE_METHOD_MANUAL，
+# 否则它们的优先级默认为 99（最低），会被下一轮的 critic（优先级 0）抢占，
+# 导致本轮 derived job 滞后执行，轮次完成检测和报告生成时机异常。
 _CHAIN_ORDER = {
     STEP_CRITIC: 0,
     STEP_GAP_IDENTIFY: 1,
@@ -76,6 +79,8 @@ _CHAIN_ORDER = {
     STEP_LIT_NOTE: 4,
     STEP_WRITER: 5,
     STEP_MONITOR: 6,
+    STEP_UPDATE_VISION: 7,
+    STEP_UPDATE_METHOD_MANUAL: 8,
     "researcher": 3,  # 兼容旧 researcher job
 }
 
@@ -298,7 +303,15 @@ def _is_proposal_stuck(self, proposal_id: str) -> bool:
     for job in jobs:
         if job.get("status") == JOB_STATUS_FAILED:
             attempts = job.get("attempts", 0)
-            if attempts >= MAX_JOB_ATTEMPTS and job.get("job_id") in pending_deps:
+            repair_attempts = job.get("repair_attempts", 0)
+            # 注意：orchestrator repair 会把 attempts 重置为 0（见 orchestrator.py
+            # _run_repair 的 failed→pending 重置逻辑），因此单看 attempts 无法
+            # 识别"已被修复系统放弃"的 job——它会因 attempts 被反复清零而永远
+            # 低于 MAX_JOB_ATTEMPTS。repair_attempts 单调递增，达到 MAX_JOB_ATTEMPTS
+            # 表示修复系统已明确放弃该 job。两者任一达标即视为卡死，避免反复
+            # 失败的 job 永远占用时段焦点、饿死其余 proposal。
+            if (attempts >= MAX_JOB_ATTEMPTS or repair_attempts >= MAX_JOB_ATTEMPTS) \
+               and job.get("job_id") in pending_deps:
                 return True
     return False
 
@@ -750,10 +763,12 @@ def _update_kanban(
         jobs = self._get_jobs(pid)
         round_num = prop_state.get("optimization_rounds", 0) + 1 if prop_state else 1
         score = prop_state.get("last_score", 0.0) if prop_state else 0.0
-        failed = sum(1 for j in jobs if j.get("status") == JOB_STATUS_FAILED)
-        pending = sum(1 for j in jobs if j.get("status") == JOB_STATUS_PENDING)
-        done = sum(1 for j in jobs if j.get("status") == JOB_STATUS_DONE)
-        total = len(jobs)
+        # v6.8.3-fix8: 只统计当前轮次的 job，避免跨轮累积导致看板数字膨胀
+        round_jobs = [j for j in jobs if j.get("round") == round_num]
+        failed = sum(1 for j in round_jobs if j.get("status") == JOB_STATUS_FAILED)
+        pending = sum(1 for j in round_jobs if j.get("status") == JOB_STATUS_PENDING)
+        done = sum(1 for j in round_jobs if j.get("status") == JOB_STATUS_DONE)
+        total = len(round_jobs)
         stuck = _is_proposal_stuck(self, pid)
 
         next_job = None
@@ -952,11 +967,16 @@ def _focus_proposal_for_slot(
             round_done = _is_round_complete(prev_jobs, prev_pid, current_round)
 
             if not round_done:
-                # 当前轮未完成，继续聚焦上一个
-                state["last_slot_index"] = slot_index
-                state["last_proposal_id"] = prev_pid
-                _save_focus_state(state)
-                return prev_pid
+                # 当前轮未完成：若 prev_pid 未卡死，继续聚焦（保证轮次连续性）；
+                # 若 prev_pid 已卡死（关键 job failed 且修复系统已放弃），此处若
+                # early return 会绕过下方第 988 行的 _is_proposal_stuck 兜底，导致
+                # 死锁 proposal 永久占用焦点、饿死其余 proposal。故卡死时不返回，
+                # 落入下方 move_to_queue_end 让出时段给下一个 proposal。
+                if not _is_proposal_stuck(self, prev_pid):
+                    state["last_slot_index"] = slot_index
+                    state["last_proposal_id"] = prev_pid
+                    _save_focus_state(state)
+                    return prev_pid
         except Exception:
             pass
         # 当前轮已完成：移动到队列末尾，推进到下一个
@@ -1035,7 +1055,13 @@ def _refresh_stale_jobs(self, proposal_id: str) -> None:
 
 
 def _job_priority_key(self, proposal_id: str, job: Dict[str, Any]) -> tuple:
-    """返回 job 的优先级排序键（越小越优先）。"""
+    """返回 job 的优先级排序键（越小越优先）。
+
+    v6.8.3-fix13: 优先级键加入 round 作为第一维度，
+    确保当前轮次的 job（如 derived）总是优先于下一轮的 job（如 critic）。
+    否则 _CHAIN_ORDER 中 critic=0 < update_vision=7，下一轮 critic 会抢占
+    当前轮次 derived job 的执行时机，导致轮次永远无法完成。
+    """
     jobs = self._get_jobs(proposal_id)
     job_index = {j["job_id"]: i for i, j in enumerate(jobs)}
 
@@ -1045,12 +1071,13 @@ def _job_priority_key(self, proposal_id: str, job: Dict[str, Any]) -> tuple:
         for d in deps
     )
 
+    round_num = job.get("round", 0)
     step = job.get("step", "")
     chain_order = _CHAIN_ORDER.get(step, 99)
     scheduled_at = job.get("scheduled_at") or job.get("started_at") or ""
     chain_next = 0 if deps_just_done else 1
 
-    return (chain_next, chain_order, scheduled_at, job_index.get(job["job_id"], 9999))
+    return (round_num, chain_next, chain_order, scheduled_at, job_index.get(job["job_id"], 9999))
 
 
 def _list_ready_jobs_for_proposal(
@@ -1101,19 +1128,7 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
     executed: List[Dict[str, Any]] = []
     generated_reports: List[str] = []
 
-    # 1. 时段检查
-    slot_info = _current_focus_slot()
-    if slot_info is None:
-        msg = "当前不在工作时段内，跳过"
-        if _log:
-            _log.info(msg)
-        return {"success": True, "executed_count": 0, "executed": [], "reason": msg, "skip_reason": "out_of_slot"}
-
-    slot_index, (slot_start, slot_end) = slot_info
-    if _log:
-        _log.info(f"当前时段: {slot_start}-{slot_end} (#{slot_index})")
-
-    # 2. 获取 optimizing proposal 列表
+    # 1. 获取 optimizing proposal 列表
     try:
         optimizing = self.list_by_status("optimizing")
     except Exception as e:
@@ -1121,14 +1136,8 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
             _log.warning(f"[micro-scheduler] 获取 optimizing 列表失败: {e}")
         optimizing = []
 
-    if not optimizing:
-        msg = "optimizing 区为空"
-        _update_kanban(slot_info, None, [], [], self)
-        if _log:
-            _log.info(msg)
-        return {"success": True, "executed_count": 0, "executed": [], "reason": msg, "skip_reason": "no_optimizing"}
-
-    # 3. 全局 stale job 清理（对所有 optimizing proposal，防止 stuck job 长期占用）
+    # 2. 全局 stale job 清理（无论是否在工作时段内都执行，防止 stuck job 跨时段滞留）
+    # v6.8.3-fix9: 原来在时段检查之后，导致时段结束后 running job 无法被回收
     for p in optimizing:
         pid = p.get("proposal_id", "")
         if pid:
@@ -1137,6 +1146,25 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
             except Exception as e:
                 if _log:
                     _log.warning(f"[micro-scheduler] stale 清理 {pid} 失败: {e}")
+
+    # 3. 时段检查（stale 清理已完成，非工作时段只跳过执行不跳过维护）
+    slot_info = _current_focus_slot()
+    if slot_info is None:
+        msg = "当前不在工作时段内，跳过执行（stale 清理已完成）"
+        if _log:
+            _log.info(msg)
+        return {"success": True, "executed_count": 0, "executed": [], "reason": msg, "skip_reason": "out_of_slot"}
+
+    slot_index, (slot_start, slot_end) = slot_info
+    if _log:
+        _log.info(f"当前时段: {slot_start}-{slot_end} (#{slot_index})")
+
+    if not optimizing:
+        msg = "optimizing 区为空"
+        _update_kanban(slot_info, None, [], [], self)
+        if _log:
+            _log.info(msg)
+        return {"success": True, "executed_count": 0, "executed": [], "reason": msg, "skip_reason": "no_optimizing"}
 
     # 4. 选择聚焦 proposal
     focus_pid = self._focus_proposal_for_slot(slot_index, optimizing)
@@ -1261,6 +1289,15 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
                             state = _load_focus_state()
                             _move_to_queue_end(state, proposal_id)
                             _save_focus_state(state)
+                        # v6.8.3-fix12: 轮次完成后必须 break，否则循环继续会触发
+                        # sync_checkpoint 创建下一轮 job，导致同一时段内启动新一轮，
+                        # 违反设计原则：时段内聚焦课题完成一轮后应让出焦点给下一个课题。
+                        if _log:
+                            _log.info(
+                                f"[{proposal_id}] 第 {post_round} 轮完成，"
+                                f"让出当前时段剩余时间"
+                            )
+                        break
 
     summary = {
         "success": True,

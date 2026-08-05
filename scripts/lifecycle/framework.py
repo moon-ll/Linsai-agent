@@ -10,7 +10,9 @@ from paths import PROJECT_ROOT
 
 from .constants import (
     DEFAULT_ORCHESTRATE_SCHEDULE,
+    DEFAULT_PROMPT_OPTIMIZE_SCHEDULE,
     DEFAULT_REPAIR_SCHEDULE,
+    DEFAULT_RETROSPECTIVE_SCHEDULE,
     DEFAULT_WEEKEND_INPUT_SCHEDULE,
     DEFAULT_WEEKEND_OUTPUT_SCHEDULE,
     DEFAULT_WEEKEND_REFLECTION_SCHEDULE,
@@ -101,6 +103,28 @@ def setup_cron_framework(
         result["success"] = result["success"] and all(
             c.get("result", {}).get("success") for c in weekend.get("created", [])
         )
+
+    # 安装 prompt 自动优化 cron（每天 14:00）
+    prompt_opt = hb.cron_create_no_agent(
+        script_name="lc_prompt_optimize.sh",
+        name="lc-prompt-optimize",
+        schedule=DEFAULT_PROMPT_OPTIMIZE_SCHEDULE,
+        workdir=str(PROJECT_ROOT),
+        profile=HERMES_PROFILE,
+    )
+    result["prompt_optimize"] = prompt_opt
+    result["success"] = result["success"] and prompt_opt.get("success")
+
+    # 安装复盘 cron（每周一 15:00）
+    retro = hb.cron_create_no_agent(
+        script_name="lc_retrospective.sh",
+        name="lc-retrospective",
+        schedule=DEFAULT_RETROSPECTIVE_SCHEDULE,
+        workdir=str(PROJECT_ROOT),
+        profile=HERMES_PROFILE,
+    )
+    result["retrospective"] = retro
+    result["success"] = result["success"] and retro.get("success")
 
     return result
 

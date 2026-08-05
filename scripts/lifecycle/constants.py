@@ -57,8 +57,15 @@ STEP_UPDATE_METHOD_MANUAL = "update_method_manual"
 MICRO_SCHEDULER_NAME = "lc-micro-scheduler"
 MICRO_SCHEDULER_SCHEDULE = "*/5 * * * 1-5"  # 工作日每 5 分钟一次
 
+# prompt 自动优化与复盘 cron 表达式
+DEFAULT_PROMPT_OPTIMIZE_SCHEDULE = "0 14 * * *"  # 每天 14:00（工作日时段间隙）
+DEFAULT_RETROSPECTIVE_SCHEDULE = "0 15 * * 1"  # 每周一 15:00（周末反思产出后）
+
 # stale 阈值：running 超过该秒数视为死锁
-STALE_RUNNING_SECONDS = 3600
+# v6.8.3-fix9: 从 3600s 降低到 1800s（30min）。
+# critic/writer 的 timeout=900s（15min），正常执行最长 ~12min。
+# 1800s 给 hermes 足够的退出缓冲，同时避免卡住整个时段。
+STALE_RUNNING_SECONDS = 1800
 
 # 最大自动重试次数
 MAX_JOB_ATTEMPTS = 3

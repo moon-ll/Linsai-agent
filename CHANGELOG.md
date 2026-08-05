@@ -1,5 +1,181 @@
 # 变更记录
 
+## v6.8.4 - 2026-08-05 整体检验：辅助链路文档补全 + 数据清理 + .gitignore 加固
+
+### 改动内容
+
+- **AGENTS.md**：版本号 6.8.2→6.8.4，测试基线 252→320，新增辅助链路章节（健康检查/看板/定期修复/自成长），补充 `lifecycle_monitor.py`/`prompt_optimizer.py`/`retrospective.py`/`orchestrator.py` 维护命令
+- **.gitignore**：补充 `/memory/prompt-backups/`、`/memory/weekend-*/`、`/memory/*.md`、`research_proposals/_lifecycle.json`、`/knowledge/qa/`、`/projects/*/kb/`、`.zcode/` 等遗漏规则
+- **数据清理**：
+  - `tuning-log.json`：清空 11 条 self_check 测试数据
+  - `debug-journal.json`：移除 3 条无效/测试条目（重复 ID、prompt_tuning 测试、空条目），保留 4 条有效记录
+  - `reflow-state.json`/`sync-state.json`：移除无效 `"sessions"` 条目
+  - `background-tasks.json`：清空 6 条陈旧测试任务
+  - `debug-journal-report.md`：删除过期报告
+  - 删除遗留 `proposals/` 目录（已被 `research_proposals/` 替代）
+  - 清理 `__pycache__/`、`.DS_Store`、`web_server.log`
+
+### 验证结果
+- `python3 scripts/self_test.py --module`：320/320 通过
+
+## v6.8.3-fix13 - 2026-08-05 修复 derived job 优先级导致轮次无法完成
+
+### 改动内容
+
+- **lifecycle/micro_scheduler.py** `_CHAIN_ORDER`: 加入 `STEP_UPDATE_VISION`(7) 和 `STEP_UPDATE_METHOD_MANUAL`(8)
+  - 问题：derived job 不在优先级映射中，默认优先级 99（最低），被下一轮 critic（优先级 0）抢占
+- **lifecycle/micro_scheduler.py** `_job_priority_key`: 优先级键加入 `round_num` 作为第一维度
+  - 问题：仅靠 `_CHAIN_ORDER` 不足以修复——下一轮 critic（chain_order=0）仍比当前轮 derived（chain_order=7）优先
+  - 修复：优先级键从 `(chain_next, chain_order, scheduled_at, job_index)` 改为 `(round_num, chain_next, chain_order, scheduled_at, job_index)`
+  - 确保当前轮次的 job 总是优先于下一轮，先完成当前轮再开下一轮
+- **scripts/tests/test_derived_job_priority.py**: 新增 13 个回归测试
+  - 覆盖：_CHAIN_ORDER 完整性、优先级值合理性、derived vs 下一轮 critic 竞争、完整轮次完成+报告生成
+
+### 验证结果
+- `python3 scripts/self_test.py --module`：320/320 通过
+- Moire R8 待执行 job 正确识别为 `r8/rationale/lit_search`
+- Cron 框架 14 个任务全部 active，无重复
+
+## v6.8.3-fix12 - 2026-08-05 修复轮次完成后未 break 导致同时段启动新一轮
+
+### 改动内容
+- **lifecycle/micro_scheduler.py** `run_micro_scheduler`: 轮次完成后添加 `break`
+- **scripts/tests/test_round_complete_break.py**: 新增 7 个回归测试
+
+### 验证结果
+- `python3 scripts/self_test.py --module`：307/307 通过
+
+## v6.8.3-fix11 - 2026-08-05 references critic 轻量化优化
+
+### 改动内容
+
+- **proposal_lifecycle/optimize.py** `_run_critic`: 新增 references 专用轻量化 prompt 分支
+  - 问题：references critic 使用与 rationale/content/scheme 完全相同的重型 prompt（叙述式检查、创新性评分、7模块完整性），对参考文献检验完全无意义，浪费 agent 算力
+  - 优化后：references 只检查引文格式、编号一致性、引用相关性、缺失引用、数量/时效性，timeout 从 900s 降至 300s（5min）
+  - 评分简化：只评严谨性 + 完整性，创新性/可行性固定 0.85（不影响综合评分均值）
+
+- **lifecycle/executor.py** `_run_critic_step`: references 模块跳过 researcher 链注入
+  - 参考文献检验本身就是文献检查，不需要再插入 gap_identify → lit_search → lit_read → lit_note
+
+### 预期效果
+- references critic 耗时从 ~360s 降至 ~120-180s（prompt 更短、不需要 7 模块检查）
+- references 步骤总任务数从可能的 6 步（critic + 4 researcher + writer）固定为 2 步（critic + writer）
+
+### 验证结果
+- `python3 scripts/self_test.py --module`：300/300 通过
+
+## v6.8.3-fix10 - 2026-08-05 修复 monitor 看板 updated_at_local 陈旧
+
+### 改动内容
+
+- **lifecycle_monitor.py** `_update_kanban`: 同步刷新 `updated_at_local` 字段
+  - 根因：`lifecycle_monitor.py` 的 `_update_kanban` 在每小時监控被触发时
+    只更新 `updated_at`（UTC）与 `hourly_monitor` 两个字段，**漏写了
+    `updated_at_local`**。`micro_scheduler` 不在工作时隙内时不会调用
+    `_update_kanban`，导致 `updated_at_local` 长时间停滞在上次
+    `micro_scheduler` 执行时间（如 12:30:57），而 `updated_at` 在 monitor
+    每小時执行时被刷新到当前时刻。最终 `proposal_lifecycle.py --kanban`
+    CLI / 监控 UI 读取的"更新时间"呈现 1-6 小时前的陈旧值，运维误判为
+    链路静默，触发不必要的告警风暴
+  - 触发场景：每个非工作时隙（如 12:30-18:30、20:30-22:30）都会令
+    `updated_at_local` 滞留，最多落后 `updated_at` 6 小时
+  - 修复后 `_update_kanban` 同时写入 `updated_at_local`，与 `updated_at`
+    保持最近一次写入时刻一致
+
+- **tests/test_monitor_kanban_local.py**: 新增 3 个测试用例（11 个断言）
+  - 测试 1：监控器更新后 `updated_at_local` 不再停留陈旧值
+  - 测试 2：初始看板缺 `updated_at_local` 时也能被补上
+  - 测试 3：monitor 与 scheduler 共存时保留 scheduler 写入的所有字段
+    （current / execution_history / day_key / proposals / task_sync）
+
+### 验证结果
+- `python3 -m py_compile scripts/lifecycle_monitor.py scripts/tests/test_monitor_kanban_local.py` 通过
+- `python3 scripts/self_test.py --module`：300/300 通过（包含 monitor 看板本地时间戳 11/11）
+
+## v6.8.3-fix9 - 2026-08-05 修复跨时段 stale job 无法回收 + hermes 超时进程清理
+
+### 改动内容
+
+- **lifecycle/micro_scheduler.py** `run_micro_scheduler`: 将 stale 清理从时段检查之后移到之前
+  - 根因：`run_micro_scheduler` 第一步"时段检查 → return"在 stale 清理之前，不在工作时段内时直接返回，
+    `_refresh_stale_jobs` 永远不执行。references-critic 在时段末尾启动（11:35），时段结束后卡在 running
+    状态超过 95 分钟无法回收，直到下一个时段（18:30）才开始处理，阻塞所有下游任务
+  - 修复后 stale 清理在时段检查之前无条件执行，每 5 分钟 cron 触发时即使不在工作时段也能回收超时 job
+
+- **lifecycle/constants.py** `STALE_RUNNING_SECONDS`: 从 3600s（60min）降低到 1800s（30min）
+  - 原因：critic/writer 的 subprocess timeout 为 900s（15min），历史平均 6.3min，最长 12.2min
+  - 1800s 给 hermes 足够的退出缓冲，同时将卡住检测从 60min 缩短到 30min
+
+- **proposal_lifecycle/optimize.py** `_run_hermes`: 使用 Popen + `start_new_session=True` + `os.killpg` 替代 `subprocess.run(timeout=N)`
+  - 根因：`subprocess.run(timeout=N)` 在超时后只杀死直接子进程，但 hermes CLI 连接持久化 gateway，
+    gateway 内的 agent loop 在独立进程中继续运行，导致 CLI 的 stdout/stderr 管道不释放，
+    Python 侧 `subprocess.run` 永远收不到子进程退出信号，timeout 实际未生效
+  - 修复后使用 `start_new_session=True` 使 hermes CLI 成为新进程组 leader，
+    timeout 后用 `os.killpg(SIGTERM)` → wait 5s → `os.killpg(SIGKILL)` 三级清理，
+    确保整个进程组被杀死
+
+- **tests/test_stale_cleanup_out_of_slot.py**: 新增 4 个测试用例（9 个断言）
+  - 测试 1：不在时段内时 stale running job 仍被标记为 failed（核心回归）
+  - 测试 2：多个 proposal 的 stale job 都被清理
+  - 测试 3：正常 pending job 不受 stale 清理影响
+  - 测试 4：running 但未超时的 job 不被误杀
+
+### 验证结果
+- `python3 scripts/self_test.py --module`：289/289 通过（跨时段 stale 回收 9/9）
+
+## v6.8.3-fix8 - 2026-08-05 修复微调度器卡死 proposal 永久占用时段焦点
+
+### 改动内容
+
+- **lifecycle/micro_scheduler.py** `_is_proposal_stuck`: 同时检查 `attempts` 与单调递增的 `repair_attempts`
+  - 根因：`orchestrator.py` `_run_repair` 在 failed→pending 重置时把 `attempts` 清零，而旧逻辑只看
+    `attempts >= MAX_JOB_ATTEMPTS`，导致反复失败、已被修复系统放弃的 job 永远判不出 stuck
+  - 修复后两者任一达标即视为卡死，使修复系统已放弃的 job 能被正确识别
+
+- **lifecycle/micro_scheduler.py** `_focus_proposal_for_slot`: round_done=false 的 early-return 前增加 stuck 检查
+  - 根因：进行中轮次未完成时直接 `return prev_pid`，绕过下方第 988 行 `_is_proposal_stuck` 兜底，
+    导致卡死 proposal 永久占用时段焦点、饿死其余 proposal（v6.8.3-fix5 轮次连续性修复的回归风险）
+  - 修复后卡死时落入 `move_to_queue_end` 让出焦点，未卡死时仍继续聚焦以保证轮次连续性
+
+- **tests/test_micro_scheduler_rotation.py**: 新增 2 个守护测试
+  - 测试 5：`attempts=0` 但 `repair_attempts>=MAX` 时 `_is_proposal_stuck` 应返回 True
+  - 测试 6：进行中轮次未完成但 proposal 卡死时 `_focus_proposal_for_slot` 应让出焦点
+
+### 验证结果
+- `python3 -m py_compile scripts/lifecycle/*.py scripts/tests/test_micro_scheduler_rotation.py`：通过
+- `python3 scripts/self_test.py --module`：280/280 通过（微调度器轮转测试 9/9）
+
+## v6.8.3-fix7 - 2026-08-05 Prompt 优化器单元测试 + Cron 框架集成
+
+### 改动内容
+
+- **test_prompt_optimizer.py**: 新增 12 个测试用例（29 个断言），覆盖权限错误处理全链路
+  - 备份/读取/写入三种 PermissionError 场景的 apply_error 标记
+  - `_apply_suggestions` 失败建议标记 status=failed、成功标记 status=applied
+  - `_log_auto_applied` 正确调用 debug_journal.add_entry 并写入 prompt_tuning 条目
+  - debug_journal 不可用时静默失败（不抛异常）
+  - auto 模式下失败建议不写入 debug journal
+  - 正常应用时备份文件创建、目标文件内容修改、内容已存在跳过
+  - 已纳入 `self_test.py --module` 回归（256/256 通过）
+
+- **lifecycle/framework.py**: `setup_cron_framework` 新增 prompt 自动优化 + 复盘 cron 注册
+  - `lc-prompt-optimize`：每天 14:00 执行 `prompt_optimizer.py auto`（工作日时段间隙）
+  - `lc-retrospective`：每周一 15:00 执行 `retrospective.py --period 7d`（周末反思产出后）
+  - 随 `--setup-cron-v2` 一并安装，随 `--teardown-cron-v2` 一并卸载
+
+- **lifecycle/controller.py**: `_write_generic_wrappers` 新增 `lc_prompt_optimize.sh` 和 `lc_retrospective.sh` 包装脚本
+
+- **lifecycle/constants.py**: 新增 `DEFAULT_PROMPT_OPTIMIZE_SCHEDULE` 和 `DEFAULT_RETROSPECTIVE_SCHEDULE` 常量
+
+- **lifecycle_monitor.py**: `REQUIRED_CRON_PREFIXES` 新增 `lc-prompt-optimize` 和 `lc-retrospective`
+
+- **self_test.py**: `--module` 过滤器新增 `test_prompt_optimizer`
+
+### 验证结果
+- `python3 scripts/self_test.py --module`：256/256 通过
+- `python3 scripts/prompt_optimizer.py --self-check`：通过
+- `python3 scripts/tests/test_prompt_optimizer.py`：29/29 通过
+
 ## v6.8.3-fix6 - 2026-08-05 周末反思接驳复盘 + Prompt 自动优化闭环
 
 ### 改动内容
@@ -18,8 +194,8 @@
   - `--apply` 改名为手动模式，保留人工介入入口
   - 新增 `_apply_suggestions()` 内部共享函数，消除重复代码
 
-### 待手动操作
-- 需在 hermes 中注册 lc-daily-retrospective 和 lc-prompt-optimize cron（沙盒限制无法自动执行）
+### 已完成
+- prompt 自动优化 cron 已集成到 `--setup-cron-v2` 框架（fix7 完成）
 
 ## v6.8.3-fix5 - 2026-08-05 微调度器轮转 off-by-one 修复
 

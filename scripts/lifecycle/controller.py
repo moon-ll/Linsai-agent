@@ -168,6 +168,18 @@ cd {project}
 python3 scripts/weekend_pipeline.py --run-next
 """.format(project=project)
 
+        prompt_optimize = """#!/bin/bash
+set -e
+cd {project}
+python3 scripts/prompt_optimizer.py auto
+""".format(project=project)
+
+        retrospective = """#!/bin/bash
+set -e
+cd {project}
+python3 scripts/retrospective.py --period 7d
+""".format(project=project)
+
         return {
             "orchestrate": _write_wrapper_script("lc_orchestrate.sh", orchestrate),
             "repair": _write_wrapper_script("lc_repair.sh", repair),
@@ -176,6 +188,8 @@ python3 scripts/weekend_pipeline.py --run-next
             "weekend_output": _write_wrapper_script("lc_weekend_output.sh", weekend_output),
             "weekend_reflection": _write_wrapper_script("lc_weekend_reflection.sh", weekend_reflection),
             "weekend_worker": _write_wrapper_script("lc_weekend_worker.sh", weekend_worker),
+            "prompt_optimize": _write_wrapper_script("lc_prompt_optimize.sh", prompt_optimize),
+            "retrospective": _write_wrapper_script("lc_retrospective.sh", retrospective),
         }
 
     def _worker_script_for_proposal(self, proposal_id: str) -> Path:

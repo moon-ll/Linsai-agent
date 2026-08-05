@@ -2,7 +2,7 @@
 
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
-> 最后更新：2026-08-02
+> 最后更新：2026-08-05
 > 提示：完整目录结构见 `docs/PROJECT-STRUCTURE.md`，完整架构说明见 `docs/ARCHITECTURE.md`。
 
 ---
@@ -105,6 +105,11 @@ python3 scripts/weekend_orchestrator.py --reflection --dry-run         # 周末�
 python3 scripts/proposal_lifecycle.py --orchestrate                    # 手动执行每日编排
 python3 scripts/proposal_lifecycle.py --micro-scheduler                # 手动触发微调度器
 python3 scripts/proposal_lifecycle.py --repair --dry-run               # 链路修复 dry-run
+python3 scripts/lifecycle_monitor.py --check                           # 健康检查（dry-run）
+python3 scripts/orchestrator.py --dashboard                            # 总控仪表盘
+python3 scripts/prompt_optimizer.py analyze                             # Prompt 优化分析
+python3 scripts/prompt_optimizer.py auto                                # Prompt 自动优化（cron 入口）
+python3 scripts/retrospective.py --period 7d                            # 链路复盘（7 天）
 ```
 
 ### 语法检查
@@ -123,8 +128,8 @@ python3 -m py_compile scripts/*.py
 2. **模块自检**：大量脚本支持 `--self-check`，运行 `python3 scripts/{module}.py --self-check`。
 3. **E2E 集成测试**：`python3 scripts/test_e2e_learning_full.py`（需真实 Claude CLI 环境，非日常回归项）。
 
-**当前基线（v6.8.1）**：
-- `--module`：252/252 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器）
+**当前基线（v6.8.4）**：
+- `--module`：320/320 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器、轮次完成 break、derived job 优先级、prompt 优化器、看板轮次统计、stale job 回收、monitor 看板时间戳）
 - `--scenario`：16/16 通过
 - `--persona`：38/38 通过
 - `--web-ci`：252/252 通过（Web API 虚拟用户测试覆盖所有主要 API 命名空间）
@@ -220,6 +225,15 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 面向用户的统一操作界面：`web_routes_system.py` 提供 `/api/console/*`（流水线/Agent/告警），`web_routes_settings.py` 提供 `/api/settings/*`（7 类配置读写与变更预览）。前端对应 `web/js/console.js` 与 `web/js/settings_center.js`，支持一键触发 repair/orchestrate/optimize/clear-alert。详见 `docs/ARCHITECTURE.md` §7。
 
+### 辅助链路（v6.8.3+）
+
+保障全链路稳定运转的四条辅助链路：
+
+- **健康检查**：`lifecycle_monitor.py`（每小时 cron `lc-hourly-monitor`）检测 cron 缺失/陈旧、卡住课题、连续失败、零进展、API 限流，异常去重后飞书通知，cron 缺失自动修复；`profile_health.py` 计算 7 个 hermes profile 的健康度；`failure_analyzer.py` 从日志聚类 8 种失败模式。
+- **看板系统**：`memory/system-kanban.json` 由微调度器（主写）和 `lifecycle_monitor`（合并写）协同维护，包含当前时段/聚焦课题/job 进度/执行历史/任务同步统计，前端通过 `/api/console/flow` 展示。
+- **定期修复**：`lc-repair` cron 每 6 小时执行 `orchestrator.run_repair()`，重置 stuck running（阈值 1800s）、重试 failed job（最多 3 次）、补齐缺失 worker、清理旧轮次 job；微调度器在每次执行前无条件清理 stale job。
+- **自成长**：`strategy_optimizer.py` 基于 7 天历史给出调度参数建议（仅建议）；`prompt_optimizer.py`（每日 14:00 cron `lc-prompt-optimize`）从 debug journal/agent scores/failure patterns 生成 prompt 修改建议并自动应用（备份原文件）；`retrospective.py`（每周一 15:00 cron `lc-retrospective`）综合 5 个数据源生成结构化复盘报告。
+
 ---
 
 ## 安全与隐私
@@ -239,7 +253,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 ### 版本号规范
 
-- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.8.2`）。
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.8.4`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -302,7 +316,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.8.2*
-*日期：2026-08-02*
+*版本：6.8.4*
+*日期：2026-08-05*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

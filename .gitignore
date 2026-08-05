@@ -6,7 +6,12 @@
 # === 用户生成数据（无价，禁止提交）===
 /sessions/*/
 /memory/*.json
+/memory/*.md
 /memory/snippets/*
+/memory/prompt-backups/
+/memory/weekend-input/
+/memory/weekend-output/
+/memory/weekend-reflection/
 /tasks/*/
 /references/papers/*
 /references/notes/*
@@ -39,6 +44,15 @@ knowledge/graph.json
 knowledge/growth-log.json
 knowledge/.cache/
 knowledge/.obsidian/
+knowledge/captures/
+knowledge/qa/
+
+# === 项目自动生成文件 ===
+/projects/*/kb/graph.json
+/projects/*/kb/index.json
+
+# === 研究管线运行时状态 ===
+research_proposals/_lifecycle.json
 
 # === 运行时数据 ===
 memory/usage/
@@ -51,3 +65,6 @@ knowledge/raw/checkpoint.json
 # === 备份 ===
 knowledge/.backup/
 knowledge/captures/
+
+# === 编辑器/工具 ===
+.zcode/
