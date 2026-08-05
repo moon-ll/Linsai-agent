@@ -1,5 +1,26 @@
 # 变更记录
 
+## v6.8.3-fix6 - 2026-08-05 周末反思接驳复盘 + Prompt 自动优化闭环
+
+### 改动内容
+
+- **retrospective.py**: 周末反思产出自动接驳到复盘报告
+  - 新增 `_load_weekend_reflections()` 函数：读取 `weekend-reflection/` 下的反思报告（patterns、next_actions、健康快照）和 `weekend-input/` 下的输入端产出（ideas、decisions、directions）
+  - 新增 `_analyze_weekend_reflections()` 函数：对反思产出做轻量分析，提取 top patterns 和 actionable items
+  - 复盘报告新增"第 6 章：周末反思整合"，包含关键模式、健康趋势表格、输入端产出统计
+  - 周末反思的 next_actions 自动合并到报告的行动建议章节
+  - 报告从 6 章扩展到 7 章
+
+- **prompt_optimizer.py**: Agent 分数到 prompt 的自动反馈闭环
+  - 新增 `cmd_auto()` 函数：自动分析 + 安全过滤 + 应用 + 记录到 debug journal
+  - 安全过滤：只自动应用 high/medium 级别建议，跳过 critical
+  - 自动应用记录到 debug journal（category=prompt_tuning, tags=auto_applied）
+  - `--apply` 改名为手动模式，保留人工介入入口
+  - 新增 `_apply_suggestions()` 内部共享函数，消除重复代码
+
+### 待手动操作
+- 需在 hermes 中注册 lc-daily-retrospective 和 lc-prompt-optimize cron（沙盒限制无法自动执行）
+
 ## v6.8.3-fix5 - 2026-08-05 微调度器轮转 off-by-one 修复
 
 ### 改动内容

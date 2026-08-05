@@ -9,6 +9,8 @@
 - memory/system-kanban.json — 执行历史与失败记录
 - memory/agent-scores.json — writer/critic 分数与奖惩记录
 - memory/tuning-log.json — 已有调优记录
+- memory/weekend-reflection/ — 周末反思产出（patterns、next_actions、健康报告）
+- memory/weekend-input/ — 周末输入端产出（ideas、decisions、directions）
 
 输出: memory/retrospective-YYYY-MM-DD.md
 
@@ -41,6 +43,8 @@ DEBUG_JOURNAL_PATH = MEMORY_DIR / "debug-journal.json"
 SYSTEM_KANBAN_PATH = MEMORY_DIR / "system-kanban.json"
 AGENT_SCORES_PATH = MEMORY_DIR / "agent-scores.json"
 TUNING_LOG_PATH = MEMORY_DIR / "tuning-log.json"
+WEEKEND_REFLECTION_DIR = MEMORY_DIR / "weekend-reflection"
+WEEKEND_INPUT_DIR = MEMORY_DIR / "weekend-input"
 
 
 # ─────────────────────────────────────────────
@@ -69,6 +73,127 @@ def _parse_period(period_str: str) -> Optional[datetime]:
         days = int(m.group(1))
         return datetime.now(timezone.utc) - timedelta(days=days)
     return None
+
+
+def _load_weekend_reflections(cutoff: Optional[datetime]) -> Dict[str, Any]:
+    """加载周末反思产出，整合最近的分析结果。
+
+    读取 weekend-reflection/ 目录下的：
+    - weekend-reflection-*.json（反思报告，含 patterns + next_actions）
+    - analyzed-patterns-*.json（模式分析）
+    - collected-state-*.json（收集的原始状态）
+    - reflection-health-*.json（健康检查快照）
+
+    以及 weekend-input/ 目录下的：
+    - ideas-*.json / decisions-*.json / directions-*.json
+    """
+    result: Dict[str, Any] = {
+        "patterns": [],
+        "next_actions": [],
+        "health_snapshots": [],
+        "ideas": [],
+        "decisions": [],
+        "directions": [],
+        "latest_report": None,
+    }
+
+    # 加载反思报告
+    if WEEKEND_REFLECTION_DIR.exists():
+        for f in sorted(WEEKEND_REFLECTION_DIR.glob("weekend-reflection-*.json"), reverse=True):
+            try:
+                data = _load_json(f)
+                ts = _parse_timestamp(data.get("generated_at", ""))
+                if cutoff and ts and ts < cutoff:
+                    continue
+                # 只保留最新一份完整报告
+                if result["latest_report"] is None:
+                    result["latest_report"] = data
+                # 合并 patterns 和 next_actions
+                for p in data.get("patterns", []):
+                    result["patterns"].append(p)
+                for a in data.get("next_actions", []):
+                    result["next_actions"].append(a)
+            except Exception:
+                continue
+
+        # 健康快照
+        for f in sorted(WEEKEND_REFLECTION_DIR.glob("reflection-health-*.json"), reverse=True)[:5]:
+            try:
+                data = _load_json(f)
+                ts = _parse_timestamp(data.get("checked_at", ""))
+                if cutoff and ts and ts < cutoff:
+                    continue
+                result["health_snapshots"].append({
+                    "checked_at": data.get("checked_at", ""),
+                    "status": data.get("status", ""),
+                    "alerts": data.get("alerts", {}),
+                    "optimizing": data.get("proposals", {}).get("optimizing", 0),
+                    "failed_jobs": data.get("pipeline_failed_jobs", 0),
+                })
+            except Exception:
+                continue
+
+    # 加载输入端产出
+    if WEEKEND_INPUT_DIR.exists():
+        for pattern, key in [
+            ("ideas-*.json", "ideas"),
+            ("decisions-*.json", "decisions"),
+            ("directions-*.json", "directions"),
+        ]:
+            for f in sorted(WEEKEND_INPUT_DIR.glob(pattern), reverse=True)[:3]:
+                try:
+                    data = _load_json(f)
+                    ts = _parse_timestamp(data.get("generated_at", ""))
+                    if cutoff and ts and ts < cutoff:
+                        continue
+                    actions = data.get("actions", [])
+                    if isinstance(actions, list):
+                        result[key].extend(actions[:10])  # 每份最多取 10 条
+                except Exception:
+                    continue
+
+    return result
+
+
+def _analyze_weekend_reflections(reflections: Dict[str, Any]) -> Dict[str, Any]:
+    """分析周末反思产出，提取可操作的洞察。"""
+    analysis: Dict[str, Any] = {
+        "pattern_count": len(reflections.get("patterns", [])),
+        "action_count": len(reflections.get("next_actions", [])),
+        "top_patterns": [],
+        "actionable_items": [],
+        "ideas_count": len(reflections.get("ideas", [])),
+        "decisions_count": len(reflections.get("decisions", [])),
+        "directions_count": len(reflections.get("directions", [])),
+        "health_trend": [],
+    }
+
+    # 模式重要性排序
+    patterns = reflections.get("patterns", [])
+    sorted_patterns = sorted(
+        patterns,
+        key=lambda p: p.get("severity", "").lower() in ("critical", "high"),
+        reverse=True,
+    )
+    analysis["top_patterns"] = sorted_patterns[:5]
+
+    # 可执行的行动建议
+    for action in reflections.get("next_actions", []):
+        if isinstance(action, str):
+            analysis["actionable_items"].append(action)
+        elif isinstance(action, dict):
+            analysis["actionable_items"].append(action.get("description", str(action)))
+
+    # 健康趋势
+    for snap in reflections.get("health_snapshots", []):
+        analysis["health_trend"].append(snap)
+
+    # 最新报告概要
+    latest = reflections.get("latest_report")
+    if latest:
+        analysis["latest_report_at"] = latest.get("generated_at", "")
+
+    return analysis
 
 
 def _parse_timestamp(ts: str) -> Optional[datetime]:
@@ -460,6 +585,7 @@ def _format_report(
     health: Dict,
     suggestions: List[Dict],
     tuning_log: List,
+    weekend_analysis: Optional[Dict] = None,
 ) -> str:
     """格式化 Markdown 复盘报告。"""
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
@@ -610,8 +736,67 @@ def _format_report(
         lines.append("暂无调优记录。")
         lines.append("")
 
-    # ── 6. 行动建议 ──
-    lines.append("## 6. 行动建议")
+    # ── 6. 周末反思整合 ──
+    lines.append("## 6. 周末反思整合")
+    lines.append("")
+    if weekend_analysis and (
+        weekend_analysis.get("pattern_count", 0) > 0
+        or weekend_analysis.get("action_count", 0) > 0
+        or weekend_analysis.get("latest_report_at")
+    ):
+        wa = weekend_analysis
+        if wa.get("latest_report_at"):
+            lines.append(f"**最近反思报告**：{wa['latest_report_at']}")
+        lines.append("")
+        lines.append(
+            f"- **模式识别**：{wa.get('pattern_count', 0)} 个 | "
+            f"**行动建议**：{wa.get('action_count', 0)} 条"
+        )
+        lines.append(
+            f"- **输入端产出**：ideas {wa.get('ideas_count', 0)} / "
+            f"decisions {wa.get('decisions_count', 0)} / "
+            f"directions {wa.get('directions_count', 0)}"
+        )
+        lines.append("")
+
+        # Top patterns
+        top_patterns = wa.get("top_patterns", [])
+        if top_patterns:
+            lines.append("### 反思发现的关键模式")
+            lines.append("")
+            for p in top_patterns:
+                if isinstance(p, dict):
+                    severity = p.get("severity", "")
+                    label = p.get("label", p.get("pattern", "未知"))
+                    lines.append(f"- [{severity.upper()}] {label}")
+                else:
+                    lines.append(f"- {p}")
+            lines.append("")
+
+        # 健康趋势
+        health_trend = wa.get("health_trend", [])
+        if health_trend:
+            lines.append("### 反思健康快照")
+            lines.append("")
+            lines.append("| 检查时间 | 状态 | 错误 | 警告 | 优化中 | 失败Job |")
+            lines.append("|----------|------|------|------|--------|---------|")
+            for snap in health_trend:
+                alerts = snap.get("alerts", {})
+                lines.append(
+                    f"| {snap.get('checked_at', '')} | "
+                    f"{snap.get('status', '')} | "
+                    f"{alerts.get('error', 0)} | "
+                    f"{alerts.get('warning', 0)} | "
+                    f"{snap.get('optimizing', 0)} | "
+                    f"{snap.get('failed_jobs', 0)} |"
+                )
+            lines.append("")
+    else:
+        lines.append("当前周期内无周末反思产出。")
+        lines.append("")
+
+    # ── 7. 行动建议 ──
+    lines.append("## 7. 行动建议")
     lines.append("")
 
     if suggestions:
@@ -653,6 +838,10 @@ def run_retrospective(period_str: str = "7d") -> Path:
     entries = debug_journal.get("entries", [])
     exec_history = system_kanban.get("execution_history", [])
 
+    # 加载周末反思产出
+    weekend_reflections = _load_weekend_reflections(cutoff)
+    weekend_analysis = _analyze_weekend_reflections(weekend_reflections)
+
     # 执行分析
     clustering = _analyze_problem_clustering(entries, cutoff)
     fix_eff = _analyze_fix_effectiveness(entries, exec_history, cutoff)
@@ -660,10 +849,20 @@ def run_retrospective(period_str: str = "7d") -> Path:
     health = _analyze_system_health(exec_history, cutoff)
     suggestions = _generate_action_suggestions(clustering, fix_eff, agent_trends, health)
 
+    # 合并周末反思的行动建议
+    for item in weekend_analysis.get("actionable_items", []):
+        suggestions.append({
+            "priority": "medium",
+            "type": "weekend_reflection",
+            "category": "周末反思",
+            "description": item,
+        })
+
     # 生成报告
     report_md = _format_report(
         period_str, cutoff, clustering, fix_eff,
         agent_trends, health, suggestions, tuning_log,
+        weekend_analysis,
     )
 
     # 写入文件
@@ -771,8 +970,9 @@ def _self_check() -> None:
     )
     assert "# 复盘报告" in report_md
     assert "## 1. 问题聚类" in report_md
-    assert "## 6. 行动建议" in report_md
-    print("  ✓ 报告格式正确（6 个章节完整）")
+    assert "## 6. 周末反思整合" in report_md
+    assert "## 7. 行动建议" in report_md
+    print("  ✓ 报告格式正确（7 个章节完整）")
 
     print("=== 通过 ===")
 

@@ -122,7 +122,7 @@
 | `[CITE:xu_natcomm_2024]` | §一 / §二 / §三 / 手册 | TMDC 莫尔 valley-pseudospin 可调（R3 靶标 A 外场可调佐证） |
 | `[CITE:amato_prb_2024]` | §二 | 光致关联相熔化机制（R3 靶标 A 物理类比） |
 | `[CITE:vampa_nature_2015]` | 备选（建议引用） | 固体 HHG 重碰撞（R1 理论工具支撑） |
-| `[CITE:ghimire_natphys_2011]` | 备选（建议引用） | 固体 HHG 实验先驱（产额对比参照基准） |
+| `[CITE:ghimire_natphys_2011]` | §二 / 备选（建议引用） | 固体 HHG 实验先驱（产额对比参照基准 + 靶标 B 标度指数基线） |
 
 ---
 

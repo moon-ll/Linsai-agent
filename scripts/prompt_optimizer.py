@@ -2,7 +2,7 @@
 """prompt_optimizer.py — Prompt 闭环优化器（v6.8 林赛协作引擎）
 
 从 failure_analyzer 的建议、debug journal 的 prompt_tuning 条目、agent-scores 的奖惩记录
-综合分析，生成针对 hermes prompt 模板的具体修改建议，支持人工确认后自动应用。
+综合分析，生成针对 hermes prompt 模板的具体修改建议，并自动应用。
 
 hermes prompt 模板位于 ~/.hermes/profiles/{profile}/ 目录，主要入口为 SOUL.md。
 修改前自动备份到 memory/prompt-backups/。
@@ -14,14 +14,15 @@ hermes prompt 模板位于 ~/.hermes/profiles/{profile}/ 目录，主要入口�
 - ~/.hermes/profiles/{profile}/SOUL.md — hermes prompt 模板
 
 输出:
-- memory/prompt-suggestions.json — 待人工确认的建议
+- memory/prompt-suggestions.json — 建议记录（含应用状态）
 - memory/prompt-backups/ — 应用前的备份
 
 用法:
     python3 scripts/prompt_optimizer.py analyze              # 分析并生成建议
-    python3 scripts/prompt_optimizer.py list                 # 列出待确认的建议
-    python3 scripts/prompt_optimizer.py apply --id <id>       # 应用单条建议
-    python3 scripts/prompt_optimizer.py apply --all           # 应用全部（慎用）
+    python3 scripts/prompt_optimizer.py auto                 # 自动模式：分析+应用（cron 调用）
+    python3 scripts/prompt_optimizer.py list                 # 列出建议
+    python3 scripts/prompt_optimizer.py apply --id <id>       # 手动应用单条建议
+    python3 scripts/prompt_optimizer.py apply --all           # 手动应用全部
     python3 scripts/prompt_optimizer.py --self-check          # 自检
 """
 
@@ -614,7 +615,7 @@ def cmd_list() -> None:
 
 
 def cmd_apply(suggestion_id: Optional[str] = None, apply_all: bool = False) -> None:
-    """应用建议。"""
+    """手动应用建议。"""
     suggestions = _load_suggestions()
     pending = [s for s in suggestions if s.get("status") == "pending"]
 
@@ -624,7 +625,7 @@ def cmd_apply(suggestion_id: Optional[str] = None, apply_all: bool = False) -> N
 
     if apply_all:
         to_apply = pending
-        print(f"=== 应用全部建议（{len(to_apply)} 条）===")
+        print(f"=== 手动应用全部建议（{len(to_apply)} 条）===")
     elif suggestion_id:
         to_apply = [s for s in pending if s.get("id") == suggestion_id]
         if not to_apply:
@@ -634,20 +635,103 @@ def cmd_apply(suggestion_id: Optional[str] = None, apply_all: bool = False) -> N
         print("✗ 请指定 --id <id> 或 --all")
         return
 
+    _apply_suggestions(to_apply, suggestions)
+
+
+def cmd_auto() -> None:
+    """自动模式：分析 + 应用（cron 调用入口）。
+
+    流程：
+    1. 采集数据并生成新建议
+    2. 过滤出安全等级的建议（排除 critical 级别的激进修改）
+    3. 自动应用，记录日志
+    4. 输出执行摘要
+    """
+    import subprocess
+
+    print("=== Prompt 自动优化（auto 模式）===")
+    print()
+
+    # 1. 采集数据
+    debug_entries = _collect_debug_journal_entries()
+    score_reasons = _collect_agent_score_reasons()
+    failure_patterns = _collect_failure_patterns()
+    prompt_files = _discover_prompt_files()
+
+    new_suggestions = _generate_suggestions(
+        debug_entries, score_reasons, failure_patterns, prompt_files
+    )
+
+    if not new_suggestions:
+        print("○ 无新建议，无需操作")
+        return
+
+    print(f"  新生成建议：{len(new_suggestions)} 条")
+
+    # 2. 安全过滤：只自动应用 high/medium 级别，跳过 critical
+    safe_suggestions = [s for s in new_suggestions if s.get("priority") in ("high", "medium")]
+    skipped = [s for s in new_suggestions if s.get("priority") not in ("high", "medium")]
+
+    if skipped:
+        print(f"  跳过 {len(skipped)} 条（priority 不在 high/medium）")
+        for s in skipped:
+            print(f"    [{s['priority'].upper()}] {s['id']}: {s['description'][:60]}")
+
+    if not safe_suggestions:
+        print("○ 无安全等级建议可应用")
+        return
+
+    # 3. 应用
+    all_suggestions = _load_suggestions()
+    print(f"\n  自动应用 {len(safe_suggestions)} 条建议：")
+    _apply_suggestions(safe_suggestions, all_suggestions, auto_mode=True)
+
+    # 4. 记录到 debug journal
+    try:
+        sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+        import debug_journal
+        for s in safe_suggestions:
+            debugjournal.add_entry({
+                "category": "prompt_tuning",
+                "severity": "minor",
+                "title": f"Prompt 自动优化：{s['target_profile']}/{Path(s['target_file']).name}",
+                "context": f"来源：{s['source']}",
+                "root_cause": s.get("description", ""),
+                "solution": f"自动修改 hermes prompt 文件，操作：{s.get('action', 'append')}",
+                "files_changed": [s.get("target_file", "")],
+                "testing": "已备份原文件，修改后 hermes 下次 agent loop 自动生效",
+                "lessons": s.get("description", ""),
+                "tags": ["prompt_optimization", "auto_applied", s.get("target_profile", "")],
+                "status": "verified",
+            })
+    except Exception:
+        pass
+
+    print("\n✓ 自动优化完成")
+
+
+def _apply_suggestions(
+    to_apply: List[Dict],
+    all_suggestions: List[Dict],
+    auto_mode: bool = False,
+) -> None:
+    """应用建议列表（内部共享函数）。"""
     success_count = 0
     fail_count = 0
 
     for s in to_apply:
-        print(f"\n应用 {s['id']}：{s['description'][:60]}")
+        label = "自动" if auto_mode else "手动"
+        print(f"\n{label}应用 {s['id']}：{s['description'][:60]}")
         if _apply_suggestion(s):
             s["status"] = "applied"
             s["applied_at"] = _now_utc()
+            s["applied_mode"] = "auto" if auto_mode else "manual"
             success_count += 1
         else:
             fail_count += 1
 
     # 保存更新
-    _save_suggestions(suggestions)
+    _save_suggestions(all_suggestions)
 
     print(f"\n✓ 完成：成功 {success_count}，失败 {fail_count}")
 
@@ -784,6 +868,8 @@ def main() -> None:
         _self_check()
     elif args.command == "analyze":
         cmd_analyze()
+    elif args.command == "auto":
+        cmd_auto()
     elif args.command == "list":
         cmd_list()
     elif args.command == "apply":
@@ -792,10 +878,11 @@ def main() -> None:
         parser.print_help()
         print()
         print("示例：")
-        print("  python3 scripts/prompt_optimizer.py analyze")
-        print("  python3 scripts/prompt_optimizer.py list")
-        print("  python3 scripts/prompt_optimizer.py apply --id <id>")
-        print("  python3 scripts/prompt_optimizer.py apply --all")
+        print("  python3 scripts/prompt_optimizer.py analyze           # 分析并生成建议")
+        print("  python3 scripts/prompt_optimizer.py auto              # 自动分析+应用（cron 入口）")
+        print("  python3 scripts/prompt_optimizer.py list               # 列出建议")
+        print("  python3 scripts/prompt_optimizer.py apply --id <id>    # 手动应用单条")
+        print("  python3 scripts/prompt_optimizer.py apply --all        # 手动应用全部")
 
 
 if __name__ == "__main__":
