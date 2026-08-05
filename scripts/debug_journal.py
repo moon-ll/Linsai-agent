@@ -398,25 +398,78 @@ def _update_stats(entries: List[Dict]) -> Dict:
         entries: 所有条目列表。
 
     Returns:
-        更新后的统计字典。
+        更新后的统计字典，包含：
+        - total_entries: 总条目数
+        - by_category: 按分类统计
+        - by_severity: 按严重程度统计
+        - by_tag: 按标签统计
+        - by_date: 按日期统计（YYYY-MM-DD → count）
+        - by_date_severity: 按日期+严重程度的交叉统计
+        - severity_timeline: 严重等级时间轴（按时间排序的条目摘要）
+        - hour_distribution: 按小时分布（0-23 各有多少条）
     """
     by_category: Counter = Counter()
     by_severity: Counter = Counter()
     by_tag: Counter = Counter()
+    by_date: Dict[str, Counter] = {}  # date → Counter(severity → count)
+    hour_dist: Counter = Counter()  # hour → count
 
     for entry in entries:
         cat = entry.get("category", "unknown")
         sev = entry.get("severity", "unknown")
+        ts = entry.get("timestamp", "")
+
         by_category[cat] += 1
         by_severity[sev] += 1
         for tag in entry.get("tags", []):
             by_tag[tag] += 1
+
+        # 按日期统计
+        date_key = ts[:10] if ts else "unknown"
+        if date_key not in by_date:
+            by_date[date_key] = Counter()
+        by_date[date_key][sev] += 1
+
+        # 按小时统计
+        try:
+            hour = int(ts[11:13]) if len(ts) >= 13 else -1
+            if 0 <= hour <= 23:
+                hour_dist[hour] += 1
+        except (ValueError, TypeError):
+            pass
+
+    # 构建 by_date_severity 汇总（便于展示）
+    by_date_severity: Dict[str, Dict[str, int]] = {}
+    for date_key, sev_counter in sorted(by_date.items()):
+        by_date_severity[date_key] = {
+            "critical": sev_counter.get("critical", 0),
+            "major": sev_counter.get("major", 0),
+            "minor": sev_counter.get("minor", 0),
+            "total": sum(sev_counter.values()),
+        }
+
+    # 构建严重等级时间轴
+    severity_timeline: List[Dict] = []
+    for entry in sorted(entries, key=lambda e: e.get("timestamp", "")):
+        severity_timeline.append({
+            "id": entry.get("id", ""),
+            "timestamp": entry.get("timestamp", ""),
+            "severity": entry.get("severity", ""),
+            "category": entry.get("category", ""),
+            "title": entry.get("title", ""),
+        })
+
+    # 按小时分布补全 0-23
+    hour_distribution = {h: hour_dist.get(h, 0) for h in range(24)}
 
     return {
         "total_entries": len(entries),
         "by_category": dict(by_category.most_common()),
         "by_severity": dict(by_severity.most_common()),
         "by_tag": dict(by_tag.most_common()),
+        "by_date_severity": by_date_severity,
+        "severity_timeline": severity_timeline,
+        "hour_distribution": hour_distribution,
         "recent_pattern": "",
     }
 
@@ -604,25 +657,82 @@ def _show_list(entries: List[Dict]) -> None:
 
 
 def _show_stats(stats: Dict) -> None:
-    """格式化输出统计概览。"""
-    print(f"  总条目数: {stats.get('total_entries', 0)}")
+    """格式化输出统计概览（含时间轴和严重等级可视化）。"""
+    total = stats.get("total_entries", 0)
+    print(f"  总条目数: {total}")
     print()
 
+    # ── 严重等级分布 ──
+    by_sev = stats.get("by_severity", {})
+    if by_sev:
+        print("  严重等级分布:")
+        sev_icons = {"critical": FAIL, "major": WARN, "minor": OK}
+        sev_colors = {"critical": "█", "major": "▓", "minor": "░"}
+        max_count = max(by_sev.values()) if by_sev else 1
+        for sev in ["critical", "major", "minor"]:
+            count = by_sev.get(sev, 0)
+            if count == 0:
+                continue
+            icon = sev_icons.get(sev, PEND)
+            bar_len = int(count / max_count * 30) if max_count > 0 else 0
+            bar = sev_colors.get(sev, "?") * bar_len
+            pct = count / total * 100 if total > 0 else 0
+            print(f"    {icon} {sev:10s} {bar} {count} ({pct:.0f}%)")
+        print()
+
+    # ── 按分类 ──
     by_cat = stats.get("by_category", {})
     if by_cat:
         print("  按分类:")
         for cat, count in by_cat.items():
             print(f"    {cat:25s} {count}")
-    print()
+        print()
 
-    by_sev = stats.get("by_severity", {})
-    if by_sev:
-        print("  按严重程度:")
-        for sev, count in by_sev.items():
-            icon = {"critical": FAIL, "major": WARN, "minor": OK}.get(sev, PEND)
-            print(f"    {icon} {sev:15s} {count}")
-    print()
+    # ── 日期 × 严重等级交叉表 ──
+    by_date_sev = stats.get("by_date_severity", {})
+    if by_date_sev:
+        print("  日期 × 严重等级:")
+        print(f"    {'日期':12s}  {'CRIT':>5s} {'MAJ':>5s} {'MIN':>5s}  {'总计':>5s}  分布")
+        print(f"    {'─'*12}  {'─'*5} {'─'*5} {'─'*5}  {'─'*5}  {'─'*20}")
+        for date_key, counts in sorted(by_date_sev.items()):
+            crit = counts.get("critical", 0)
+            maj = counts.get("major", 0)
+            min_ = counts.get("minor", 0)
+            tot = counts.get("total", 0)
+            # 迷你柱状图
+            bar = FAIL * crit + WARN * maj + OK * min_
+            print(
+                f"    {date_key:12s}  {crit:5d} {maj:5d} {min_:5d}  {tot:5d}  {bar}"
+            )
+        print()
 
+    # ── 严重等级时间轴 ──
+    timeline = stats.get("severity_timeline", [])
+    if timeline:
+        print("  严重等级时间轴:")
+        for item in timeline:
+            sev = item.get("severity", "")
+            icon = sev_icons.get(sev, PEND)
+            ts = item.get("timestamp", "")[:19]
+            title = item.get("title", "")[:55]
+            print(f"    {icon} {ts}  [{sev:8s}]  {title}")
+        print()
+
+    # ── 小时分布 ──
+    hour_dist = stats.get("hour_distribution", {})
+    if hour_dist and total > 0:
+        active_hours = {h: c for h, c in hour_dist.items() if c > 0}
+        if active_hours:
+            print("  按小时分布:")
+            max_h_count = max(active_hours.values()) if active_hours else 1
+            for h in sorted(active_hours):
+                count = active_hours[h]
+                bar_len = int(count / max_h_count * 20) if max_h_count > 0 else 0
+                bar = "▇" * bar_len
+                print(f"    {h:02d}:00  {bar} {count}")
+            print()
+
+    # ── 按标签 ──
     by_tag = stats.get("by_tag", {})
     if by_tag:
         print("  按标签 (Top 15):")
