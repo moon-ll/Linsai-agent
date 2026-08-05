@@ -201,11 +201,36 @@ def _count_consecutive_slots(state: Dict[str, Any], proposal_id: str) -> int:
 
 
 def _is_round_complete(jobs: List[Dict[str, Any]], proposal_id: str, round_num: int) -> bool:
-    """检查 proposal 的指定 round 是否全部 job 都 done。"""
+    """检查 proposal 的指定 round 是否全部完成。
+
+    双重检查：
+    1. 标签检查：pipeline_jobs 中该轮所有 job 的 status == done
+    2. 产物检查：04_proposal/sections/ 下所有必需章节文件存在且非空
+    两者都通过才判定完成，避免 job 标记 done 但产物缺失的假阳性。
+    """
     round_jobs = [j for j in jobs if j.get("round") == round_num]
     if not round_jobs:
         return False
-    return all(j.get("status") == JOB_STATUS_DONE for j in round_jobs)
+
+    # 标签检查：所有 job 都 done
+    all_done = all(j.get("status") == JOB_STATUS_DONE for j in round_jobs)
+    if not all_done:
+        return False
+
+    # 产物检查：sections 目录下所有必需章节文件存在且非空
+    try:
+        from pathlib import Path
+        prop_dir = Path(__file__).parent.parent.parent / "research_proposals" / "optimizing" / proposal_id / "04_proposal"
+        required_sections = ["rationale.md", "content.md", "scheme.md", "full_review.md", "references.md"]
+        for sec in required_sections:
+            sec_path = prop_dir / "sections" / sec
+            if not sec_path.exists() or sec_path.stat().st_size < 50:
+                return False
+    except Exception:
+        # 产物检查出错时保守返回 False
+        return False
+
+    return True
 
 
 def _get_current_day_key() -> str:
@@ -917,24 +942,17 @@ def _focus_proposal_for_slot(
             completed_rounds = prev_state.get("optimization_rounds", 0) if prev_state else 0
             stuck = _is_proposal_stuck(self, prev_pid)
 
-            # 统计该 proposal 已连续聚焦几个时段
-            consecutive = _count_consecutive_slots(state, prev_pid)
+            # 让出时段的唯一条件：
+            # 当前轮的全部任务已完成（产物+标签双检查通过）
+            # 卡住（stuck）不由微调度器处理，交给 repair 和健康检查发现并修复，
+            # 修复后微调度器继续推进，保证每轮优化的连续性。
+            current_round = completed_rounds
+            if current_round > 0:
+                round_done = _is_round_complete(prev_jobs, prev_pid, current_round)
+            else:
+                round_done = False
 
-            # 让出时段条件（满足任一则切换到下一个课题）：
-            # 1. 已卡住
-            # 2. 上一时段完成了一整轮（最近完成的轮次全部 done）
-            # 3. 连续聚焦已达上限（最多 2 个时段）
-            max_consecutive = 2
-            round_done_this_slot = (
-                completed_rounds > 0
-                and _is_round_complete(prev_jobs, prev_pid, completed_rounds)
-            )
-            should_switch = (
-                stuck
-                or round_done_this_slot
-                or consecutive >= max_consecutive
-            )
-            if not should_switch:
+            if not round_done:
                 # 未完成也未卡住，继续聚焦上一个
                 state["last_slot_index"] = slot_index
                 state["last_proposal_id"] = prev_pid
