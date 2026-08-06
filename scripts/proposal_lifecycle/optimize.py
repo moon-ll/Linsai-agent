@@ -18,23 +18,9 @@ from proposal_lifecycle.constants import (
     DEFAULT_SCORE_THRESHOLD,
 )
 
-# v6.8.6: 项目类型 → 范本文件名映射
-_PROJECT_TYPE_TO_TEMPLATE = {
-    "general": "面上项目-正文.md",
-    "key": "面上项目-正文.md",       # 重点项目暂用面上范本（体量不同但风格一致）
-    "major": "原创探索计划项目-正文.md",
-}
-
-
-def _get_reference_paths(project_type: str) -> tuple:
-    """返回 (范本相对路径, 撰写指南相对路径)，供 hermes agent 读取。
-
-    路径相对于项目根目录，与 standards_path 同级。
-    """
-    template_name = _PROJECT_TYPE_TO_TEMPLATE.get(project_type, "面上项目-正文.md")
-    template_path = f"references/nsfc-templates/{template_name}"
-    guide_path = "references/nsfc-templates/申请书撰写指南.html"
-    return template_path, guide_path
+# v6.8.6: 范本写作标杆已提炼嵌入 nsfc-standards.json 的
+# reference_materials.style_benchmark 字段，agent 读 JSON 即可获取全部规则，
+# 无需每次读原始范本文件（节省 ~29KB token/次）。
 
 
 class OptimizeMixin:
@@ -302,8 +288,7 @@ class OptimizeMixin:
         report_path = prop_dir / "05_review" / f"critic-round-{round_num}.md"
         report_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # v6.8.6: 构建范本文件路径，供 critic 对标
-        template_path, guide_path = _get_reference_paths(project_type)
+        # v6.7.7: 构建要读取的文件列表
         is_references = focus_section and focus_section.get("key") == "references"
 
         if is_references:
@@ -435,10 +420,12 @@ class OptimizeMixin:
         prompt = (
             f"请对以下 NSFC 申请书做第 {round_num} 轮对抗评审。\n\n"
             f"【项目类型】{project_type}\n"
-            f"【质量标准】请读取 {standards_path} 中 project_types.{project_type} 的标准，"
-            f"并特别关注 general_principles 中的 writing_style_rules、anti_ai_patterns、indicator_red_lines\n\n"
-            f"【范本标杆】请读取 {template_path} 作为风格对标，"
-            f"评审时以范本的语体风格、论证密度和文献使用方式为参照\n\n"
+            f"【质量标准】请读取 {standards_path}，重点关注：\n"
+            f"  - project_types.{project_type} 的评审标准与权重\n"
+            f"  - general_principles.writing_style_rules（叙述式写作规则）\n"
+            f"  - general_principles.writing_style_rules.anti_ai_patterns（去AI味清单）\n"
+            f"  - general_principles.indicator_red_lines（P0指标红线）\n"
+            f"  - reference_materials.style_benchmark（范本写作标杆摘要，对标使用）\n\n"
             f"{read_instruction}"
             f"{focus_text}"
             f"{completeness_hint}"
@@ -712,8 +699,6 @@ class OptimizeMixin:
         sections = ProposalSections(prop_dir / "04_proposal")
         sections.ensure_split()
         standards_path = str(self.standards_path.relative_to(_pl.PROJECT_ROOT))
-        # v6.8.6: 构建范本文件路径，供 writer 对标
-        template_path, guide_path = _get_reference_paths(project_type)
         # 找最新的 critic 报告
         review_dir = prop_dir / "05_review"
         critic_reports = sorted(review_dir.glob("critic-round-*.md"), reverse=True)
@@ -815,9 +800,11 @@ class OptimizeMixin:
             f"【所有章节文件】\n" +
             "\n".join(f"- {p}" for p in section_files) + "\n\n"
             f"【项目类型】{project_type}\n"
-            f"【质量标准】请读取 {standards_path}，并严格遵守其中的 writing_style_rules、anti_ai_patterns、indicator_red_lines\n"
-            f"【范本标杆】请读取 {template_path} 作为风格对标，"
-            f"撰写/修改时以范本的语体风格、论证密度和文献使用方式为参照\n"
+            f"【质量标准】请读取 {standards_path}，重点关注：\n"
+            f"  - writing_style_rules + anti_ai_patterns（写作风格与去AI味）\n"
+            f"  - indicator_red_lines（指标红线）\n"
+            f"  - content_boundaries（内容边界）\n"
+            f"  - reference_materials.style_benchmark（范本写作标杆摘要，对标使用）\n"
             f"【评审报告】{latest_critic}\n"
             f"{dim_focus}"
             f"{section_focus}"
