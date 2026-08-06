@@ -342,6 +342,38 @@ def _has_any_ready_or_failed_job(self, proposal_id: str) -> bool:
     return False
 
 
+def _sync_proposal_to_kb(proposal_id: str) -> None:
+    """轮次完成后自动同步 proposal 到知识库（v6.8.5）。
+
+    调用 proposal_kb_sync.sync_proposal() 刷新 proposals/ 页面，
+    调用 kb_proposal_reorg 刷新 versions/ 和 reports/ 页面。
+    同步失败不影响主流程，仅记录日志。
+    """
+    try:
+        import proposal_kb_sync as pks
+        sync = pks.ProposalKbSync()
+        sync.sync_proposal(proposal_id)
+        if _log:
+            _log.info(f"[kb-sync] proposal 同步完成: {proposal_id}")
+    except Exception as e:
+        if _log:
+            _log.warning(f"[kb-sync] proposal 同步失败: {e}")
+
+    try:
+        import subprocess as _sp
+        import sys as _sys
+        _script_dir = Path(__file__).resolve().parent.parent
+        _sp.run(
+            [_sys.executable, str(_script_dir / "kb_proposal_reorg.py"), "--apply"],
+            capture_output=True, text=True, timeout=60,
+        )
+        if _log:
+            _log.info(f"[kb-sync] versions/reports 同步完成: {proposal_id}")
+    except Exception as e:
+        if _log:
+            _log.warning(f"[kb-sync] versions/reports 同步失败: {e}")
+
+
 def _generate_round_report(self, proposal_id: str, round_num: int) -> Optional[str]:
     """为指定 proposal 的 round 生成优化报告，保存到 proposal 目录。
 
@@ -1270,6 +1302,8 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
                             generated_reports.append(report_path)
                             if _log:
                                 _log.info(f"已生成优化报告: {report_path}")
+                        # v6.8.5: 轮次完成后自动同步到知识库，无需等周末
+                        _sync_proposal_to_kb(proposal_id)
                         # 检查是否达标，达标则 transition 到 pending_review
                         transition_result = _check_and_transition(self, proposal_id)
                         if transition_result:

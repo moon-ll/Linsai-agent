@@ -1,22 +1,25 @@
 ---
-title: "序参量超快读出 — 优化报告"
+title: "课题说明 — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-order-parameter-ultrafast-readout-20260727"
 latest_round: 6
 last_score: 0.71
 critic_rounds: 8
-created: "2026-08-04T08:30:27Z"
-updated: "2026-08-04T08:30:27Z"
+optimization_reports: 0
+status: "optimizing"
+created: "2026-08-06T09:09:26Z"
+updated: "2026-08-06T09:09:26Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
 ---
 
-# 序参量超快读出 — 优化报告
+# 课题说明 — 优化报告
 
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
 **累计轮次**：6
 **当前分数**：0.71
+**状态**：优化中
 
 ---
 

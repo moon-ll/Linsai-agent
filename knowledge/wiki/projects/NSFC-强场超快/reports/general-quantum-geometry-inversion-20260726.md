@@ -1,26 +1,29 @@
 ---
-title: "量子几何反演 — 优化报告"
+title: "课题说明 — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-quantum-geometry-inversion-20260726"
-latest_round: 5
-last_score: 0.82
-critic_rounds: 7
-created: "2026-08-04T08:30:27Z"
-updated: "2026-08-04T08:30:27Z"
+latest_round: 6
+last_score: 0.81
+critic_rounds: 8
+optimization_reports: 0
+status: "optimizing"
+created: "2026-08-06T09:09:26Z"
+updated: "2026-08-06T09:09:26Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
 ---
 
-# 量子几何反演 — 优化报告
+# 课题说明 — 优化报告
 
 **课题 ID**：`general-quantum-geometry-inversion-20260726`
-**累计轮次**：5
-**当前分数**：0.82
+**累计轮次**：6
+**当前分数**：0.81
+**状态**：优化中
 
 ---
 
-## 对抗评审（共 7 轮）
+## 对抗评审（共 8 轮）
 
 | 轮次 | 文件 |
 |------|------|
@@ -31,6 +34,7 @@ confidence: 1.0
 | 第 4 轮 | [critic-round-4.md](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/05_review/critic-round-4.md) |
 | 第 5 轮 | [critic-round-5.md](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/05_review/critic-round-5.md) |
 | 第 6 轮 | [critic-round-6.md](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/05_review/critic-round-6.md) |
+| 第 7 轮 | [critic-round-7.md](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/05_review/critic-round-7.md) |
 
 ## 综合评审报告
 

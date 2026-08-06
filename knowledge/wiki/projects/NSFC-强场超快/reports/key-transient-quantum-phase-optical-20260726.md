@@ -1,22 +1,25 @@
 ---
-title: "瞬态量子相全光读写 — 优化报告"
+title: "课题说明 — 优化报告"
 type: "proposal_reports"
 proposal_id: "key-transient-quantum-phase-optical-20260726"
 latest_round: 5
-last_score: 0.66
+last_score: 0.71
 critic_rounds: 9
-created: "2026-08-04T08:30:27Z"
-updated: "2026-08-04T08:30:27Z"
+optimization_reports: 0
+status: "optimizing"
+created: "2026-08-06T09:09:26Z"
+updated: "2026-08-06T09:09:26Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
 ---
 
-# 瞬态量子相全光读写 — 优化报告
+# 课题说明 — 优化报告
 
 **课题 ID**：`key-transient-quantum-phase-optical-20260726`
 **累计轮次**：5
-**当前分数**：0.66
+**当前分数**：0.71
+**状态**：优化中
 
 ---
 

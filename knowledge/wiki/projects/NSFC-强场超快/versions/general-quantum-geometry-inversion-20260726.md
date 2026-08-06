@@ -1,26 +1,26 @@
 ---
-title: "量子几何反演 — 最新版本"
+title: "课题说明 — 最新版本"
 type: "proposal_version"
 proposal_id: "general-quantum-geometry-inversion-20260726"
 project_type: "general"
-latest_round: 5
-last_score: 0.82
+latest_round: 6
+last_score: 0.81
 status: "optimizing"
-created: "2026-08-04T08:30:27Z"
-updated: "2026-08-04T08:30:27Z"
+created: "2026-08-06T09:09:26Z"
+updated: "2026-08-06T09:09:26Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
 ---
 
-# 量子几何反演 — 最新版本
+# 课题说明 — 最新版本
 
 **课题 ID**：`general-quantum-geometry-inversion-20260726`
 **类型**：general
-**最新轮次**：第 5 轮
-**当前分数**：0.82
+**最新轮次**：第 6 轮
+**当前分数**：0.81
 **状态**：优化中
-**同步时间**：2026-08-04T08:30:27Z
+**同步时间**：2026-08-06T09:09:26Z
 
 ---
 
@@ -28,22 +28,22 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 106 |
+| content | content | 135 |
 | full_review | full_review | 170 |
-| rationale | rationale | 63 |
-| references | references | 79 |
-| scheme | scheme | 222 |
+| rationale | rationale | 72 |
+| references | references | 36 |
+| scheme | scheme | 164 |
 
 ## 课题简介
 
 # 课题说明
 
-**课题名称**：本项目对两堵墙的探索路径（分阶段承诺）**：本项目并非同时推倒两堵墙，而是分阶段探索量子光场与强关联材料的耦合前沿——
+**课题名称**：因此，无论是"量子光场改变驱动统计"还是"强关联改变响应机制"，这两条路径各自已被独立证明是 HHG 反演的不可回避边界；但两者的联合检验仍付阙如**——这正是 Q1 与 Q2 共同要回答的物理问题。
 **项目类型**：面上项目
 **课题 ID**：`general-quantum-geometry-inversion-20260726`
-**当前状态**：待校验（等待人工核验）
+**当前状态**：优化中（第6轮，score 0.81）
 **启动日期**：2026-07-26
-**最后更新**：2026-08-03
+**最后更新**：2026-08-04
 
 ---
 
@@ -54,11 +54,11 @@ confidence: 1.0
 **主问题**（同立项依据）：多体关联拓扑材料的HHG响应能否通过物理约束神经网络实现可解释反演？
 
 ## 创新点
-研究方案与技术路线
-3.1 R1：BSV-SBE 理论框架（理论 → 数值 → 实验对接）
-3.2 R2：双色场 Ω/g 解耦方案（理论条件 → 拓扑绝缘体验证，Year 1 Q1–Year 3）
-3.3 R3：CDW 材料 HHG 验证（基准测量 → 关联边界检验）
-3.4 R4：物理约束反演框架（损失函数设计 → 训练 → 验证）
+3.1 R1：BSV 驱动固体 HHG 的量子态约化与正向模型
+3.2 R2：Ω/g 可辨识性边界与双色场分离方案
+3.3 R3：CDW 材料 HHG 验证与关联边界检验
+3.4 R4：物理约束反演框架与边界量化
+3.5 技术风险与人力配置
 
 ---
 
@@ -66,7 +66,7 @@ confidence: 1.0
 | 轮次 | 分数 | 问题数 | high问题 | 时间 |
 |------|------|--------|---------|------|
 | 1 | 0.58 | 12 | 4 | 2026-07-27 |
-| 2 | 0.66 | 47 | 
+| 2 | 0.66 | 47 |
 
 （完整简介见 [源文件](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft-merged.md)）
 

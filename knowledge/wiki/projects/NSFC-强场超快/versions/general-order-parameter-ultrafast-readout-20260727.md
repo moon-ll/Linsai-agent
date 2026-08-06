@@ -1,26 +1,26 @@
 ---
-title: "序参量超快读出 — 最新版本"
+title: "课题说明 — 最新版本"
 type: "proposal_version"
 proposal_id: "general-order-parameter-ultrafast-readout-20260727"
 project_type: "general"
 latest_round: 6
 last_score: 0.71
 status: "optimizing"
-created: "2026-08-04T08:30:27Z"
-updated: "2026-08-04T08:30:27Z"
+created: "2026-08-06T09:09:26Z"
+updated: "2026-08-06T09:09:26Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
 ---
 
-# 序参量超快读出 — 最新版本
+# 课题说明 — 最新版本
 
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
 **类型**：general
 **最新轮次**：第 6 轮
 **当前分数**：0.71
 **状态**：优化中
-**同步时间**：2026-08-04T08:30:27Z
+**同步时间**：2026-08-06T09:09:26Z
 
 ---
 

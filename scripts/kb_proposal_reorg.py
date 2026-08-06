@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
 """知识库提案整理脚本 —— 将最新申请书版本和优化报告纳入知识库统一管理。
 
-依据最新架构设计（v6.8+），在 knowledge/wiki/projects/NSFC-强场超快/ 下新增：
+依据最新架构设计（v6.8+），在 knowledge/wiki/projects/NSFC-强场超快/ 下维护：
   - versions/      ← 最新申请书快照（含 frontmatter + 链接到源文件）
-  - reports/       ← 优化报告汇总（含各轮评审链接）
+  - reports/       ← 优化报告汇总（含各轮评审链接 + 评分变化表）
+
+v6.8.5 改进：
+  - 动态扫描 _lifecycle.json 获取所有 proposal（不再硬编码列表）
+  - 动态查找 proposal 目录（覆盖 drafts/optimizing/pending_review/archived）
+  - reports 页面加入评分变化表（从 optimization-report-round-N.md 提取）
+  - reports 页面加入优化报告链接
 
 同时更新：
   - proposals-index.md  ← 修复链接，加入版本/报告入口
@@ -33,9 +39,9 @@ from typing import Any, Dict, List, Optional, Tuple
 # 路径
 # ─────────────────────────────────────────────
 
-PROJECT_ROOT = Path("/Users/ll/Desktop/LinSai-CoPilot")
+PROJECT_ROOT = Path(__file__).resolve().parent.parent
 NSFC_KB_DIR = PROJECT_ROOT / "knowledge" / "wiki" / "projects" / "NSFC-强场超快"
-PROPOSALS_ROOT = PROJECT_ROOT / "research_proposals" / "optimizing"
+PROPOSALS_ROOT = PROJECT_ROOT / "research_proposals"
 
 # 新目录
 VERSIONS_DIR = NSFC_KB_DIR / "versions"
@@ -45,22 +51,8 @@ REPORTS_DIR = NSFC_KB_DIR / "reports"
 PROPOSALS_INDEX = NSFC_KB_DIR / "proposals-index.md"
 MOC_FILE = NSFC_KB_DIR / "MOC.md"
 
-# 5 个优化中课题
-OPTIMIZING_PROPOSALS = [
-    "general-bsv-driven-hhg-quantum-20260726",
-    "general-moire-strong-field-probe-20260726",
-    "general-order-parameter-ultrafast-readout-20260727",
-    "general-quantum-geometry-inversion-20260726",
-    "key-transient-quantum-phase-optical-20260726",
-]
-
-PROPOSAL_LABELS = {
-    "general-bsv-driven-hhg-quantum-20260726": "BSV-HHG 量子光场驱动",
-    "general-moire-strong-field-probe-20260726": "莫尔超晶格强场探针",
-    "general-order-parameter-ultrafast-readout-20260727": "序参量超快读出",
-    "general-quantum-geometry-inversion-20260726": "量子几何反演",
-    "key-transient-quantum-phase-optical-20260726": "瞬态量子相全光读写",
-}
+# 所有生命周期阶段（查找 proposal 目录时按此顺序搜索）
+_LIFECYCLE_STAGES = ["drafts", "optimizing", "pending_review", "archived"]
 
 # ─────────────────────────────────────────────
 # 工具函数
@@ -78,11 +70,6 @@ def load_json(path: Path) -> Optional[Dict[str, Any]]:
         return json.loads(path.read_text(encoding="utf-8"))
     except Exception:
         return None
-
-
-def save_json(path: Path, data) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
 
 
 def read_file(path: Path) -> str:
@@ -138,6 +125,43 @@ def _extract_title(text: str) -> str:
     return ""
 
 
+def _extract_label(proposal_id: str, brief_text: str) -> str:
+    """从 proposal-brief 中提取可读标签，回退到 ID。"""
+    title = _extract_title(brief_text)
+    if title:
+        return title[:40]
+    # 从 ID 推断
+    parts = proposal_id.split("-")
+    if len(parts) > 1:
+        return parts[1] if not parts[0].startswith(("general", "key", "major")) else "-".join(parts[1:-1])
+    return proposal_id
+
+
+def _find_proposal_dir(proposal_id: str) -> Tuple[Optional[Path], str]:
+    """动态查找 proposal 目录，返回 (path, stage)。"""
+    for stage in _LIFECYCLE_STAGES:
+        d = PROPOSALS_ROOT / stage / proposal_id
+        if d.exists():
+            return d, stage
+    return None, ""
+
+
+def _get_all_proposals() -> List[Tuple[str, str, Path]]:
+    """从 _lifecycle.json 动态获取所有 proposal。
+
+    Returns:
+        [(proposal_id, stage, prop_dir), ...] 按状态优先级排序
+    """
+    lifecycle = load_json(PROPOSALS_ROOT / "_lifecycle.json") or {}
+    proposals = lifecycle.get("proposals", {})
+    result = []
+    for pid in sorted(proposals.keys()):
+        prop_dir, stage = _find_proposal_dir(pid)
+        if prop_dir:
+            result.append((pid, stage, prop_dir))
+    return result
+
+
 def _get_latest_round(prop_dir: Path) -> Tuple[int, str]:
     """获取提案最新轮次和 merged 文件路径。"""
     proposal_dir = prop_dir / "04_proposal"
@@ -146,7 +170,6 @@ def _get_latest_round(prop_dir: Path) -> Tuple[int, str]:
 
     merged = proposal_dir / "proposal-draft-merged.md"
     if merged.exists():
-        # 从文件名推断最高轮次
         max_round = 0
         for f in proposal_dir.glob("proposal-draft-r*.md"):
             m = re.search(r"r(\d+)", f.name)
@@ -157,6 +180,98 @@ def _get_latest_round(prop_dir: Path) -> Tuple[int, str]:
         return max_round, str(merged)
 
     return 0, ""
+
+
+def _parse_optimization_report(report_path: Path) -> Optional[Dict[str, Any]]:
+    """从 optimization-report-round-N.md 提取评分变化数据。
+
+    Returns:
+        {round, scores: {metric: {prev, curr, delta}}, total: {prev, curr, delta}}
+    """
+    text = read_file(report_path)
+    if not text:
+        return None
+
+    result: Dict[str, Any] = {"round": 0, "scores": {}, "total": {}}
+
+    # 提取轮次
+    m = re.search(r"第\s*(\d+)\s*轮", text)
+    if m:
+        result["round"] = int(m.group(1))
+
+    # 提取评分变化表
+    # 格式: | innovation | 0.85 | 0.30 | -0.55 |
+    # 总分行可能有 ** 加粗: | **总分** | **0.79** | **0.81** | **+0.02** |
+    lines = text.split("\n")
+    in_table = False
+    for line in lines:
+        if "| 指标 |" in line or "| metric |" in line:
+            in_table = True
+            continue
+        if in_table:
+            if not line.strip().startswith("|"):
+                break
+            # 去除 ** 加粗标记
+            clean_line = line.replace("**", "")
+            cells = [c.strip() for c in clean_line.split("|")]
+            cells = [c for c in cells if c]  # 去除空字符串
+            if len(cells) >= 4:
+                metric = cells[0]
+                try:
+                    prev = float(cells[1])
+                    curr = float(cells[2])
+                    delta_str = cells[3].replace("+", "")
+                    delta = float(delta_str)
+                    if metric in ("总分", "total", "overall"):
+                        result["total"] = {"prev": prev, "curr": curr, "delta": delta}
+                    else:
+                        result["scores"][metric] = {"prev": prev, "curr": curr, "delta": delta}
+                except (ValueError, IndexError):
+                    pass
+
+    return result if result["scores"] or result["total"] else None
+
+
+def _collect_score_history(prop_dir: Path) -> List[Dict[str, Any]]:
+    """收集所有优化报告的评分历史。
+
+    Returns:
+        [{round, total_curr, total_prev, delta, ...}, ...] 按轮次排序
+    """
+    review_dir = prop_dir / "05_review"
+    if not review_dir.exists():
+        return []
+
+    history = []
+    for report_file in sorted(review_dir.glob("optimization-report-round-*.md")):
+        data = _parse_optimization_report(report_file)
+        if data:
+            entry = {
+                "round": data["round"],
+                "total": data.get("total", {}),
+                "scores": data.get("scores", {}),
+                "file": report_file.name,
+            }
+            history.append(entry)
+
+    history.sort(key=lambda x: x["round"])
+    return history
+
+
+def _status_cn(stage: str) -> str:
+    return {
+        "drafts": "初稿",
+        "optimizing": "优化中",
+        "pending_review": "待校验",
+        "archived": "已归档",
+    }.get(stage, stage)
+
+
+def _format_delta(delta: float) -> str:
+    """格式化分数变化，带正负号。"""
+    if delta > 0:
+        return f"+{delta:.2f}"
+    return f"{delta:.2f}"
 
 
 # ─────────────────────────────────────────────
@@ -179,24 +294,22 @@ class KBProposalReorg:
 
     def run(self) -> None:
         """执行整理。"""
+        all_proposals = _get_all_proposals()
         print(f"{'='*60}")
         print(f"知识库提案整理 {'（DRY RUN）' if self.dry_run else '（实际写入）'}")
+        print(f"发现 {len(all_proposals)} 个已注册课题")
         print(f"{'='*60}\n")
 
         # 1. 创建目录
         self._ensure_dirs()
 
         # 2. 处理每个提案
-        for pid in OPTIMIZING_PROPOSALS:
-            prop_dir = PROPOSALS_ROOT / pid
-            if not prop_dir.exists():
-                print(f"  ○ 跳过（目录不存在）: {pid}")
-                continue
-            self._process_proposal(pid, prop_dir)
+        for pid, stage, prop_dir in all_proposals:
+            self._process_proposal(pid, stage, prop_dir)
 
         # 3. 更新索引
-        self._update_proposals_index()
-        self._update_moc()
+        self._update_proposals_index(all_proposals)
+        self._update_moc(all_proposals)
 
         # 4. 报告
         self._print_report()
@@ -209,24 +322,26 @@ class KBProposalReorg:
             (NSFC_KB_DIR / ".gitkeep").touch(exist_ok=True)
         print(f"  ✓ 目录已就绪: versions/ reports/")
 
-    def _process_proposal(self, proposal_id: str, prop_dir: Path) -> None:
+    def _process_proposal(self, proposal_id: str, stage: str, prop_dir: Path) -> None:
         """处理单个提案。"""
-        label = PROPOSAL_LABELS.get(proposal_id, proposal_id)
-        print(f"\n  [{label}] ({proposal_id})")
+        brief_text = read_file(prop_dir / "00_proposal-brief.md")
+        label = _extract_label(proposal_id, brief_text)
+        print(f"\n  [{label}] ({proposal_id}) [{_status_cn(stage)}]")
 
         latest_round, merged_path = _get_latest_round(prop_dir)
 
         # 创建版本页
         if merged_path:
-            self._create_version_page(proposal_id, label, prop_dir, merged_path, latest_round)
+            self._create_version_page(proposal_id, label, stage, prop_dir, merged_path, latest_round)
 
         # 创建报告页
-        self._create_report_page(proposal_id, label, prop_dir, latest_round)
+        self._create_report_page(proposal_id, label, stage, prop_dir, latest_round)
 
     def _create_version_page(
         self,
         proposal_id: str,
         label: str,
+        stage: str,
         prop_dir: Path,
         merged_path: str,
         latest_round: int,
@@ -244,17 +359,15 @@ class KBProposalReorg:
             project_type = "major"
 
         # 获取当前分数
-        lifecycle_path = PROJECT_ROOT / "research_proposals" / "_lifecycle.json"
-        lifecycle = load_json(lifecycle_path) or {}
-        proposals_data = lifecycle.get("proposals", {})
-        prop_data = proposals_data.get(proposal_id, {})
+        lifecycle = load_json(PROPOSALS_ROOT / "_lifecycle.json") or {}
+        prop_data = lifecycle.get("proposals", {}).get(proposal_id, {})
         last_score = prop_data.get("last_score", 0)
 
         # 标题
         title = _extract_title(merged_text) or label
 
         # 构建版本页
-        rel_source = f"research_proposals/optimizing/{proposal_id}/04_proposal/proposal-draft-merged.md"
+        rel_source = f"research_proposals/{stage}/{proposal_id}/04_proposal/proposal-draft-merged.md"
 
         # 获取各章节摘要
         sections_dir = prop_dir / "04_proposal" / "sections"
@@ -276,7 +389,7 @@ class KBProposalReorg:
             "project_type": project_type,
             "latest_round": latest_round,
             "last_score": last_score,
-            "status": "optimizing",
+            "status": stage,
             "created": now_utc(),
             "updated": now_utc(),
             "project": ["NSFC-强场超快"],
@@ -291,7 +404,7 @@ class KBProposalReorg:
         lines.append(f"**类型**：{project_type}")
         lines.append(f"**最新轮次**：第 {latest_round} 轮")
         lines.append(f"**当前分数**：{last_score}")
-        lines.append(f"**状态**：优化中")
+        lines.append(f"**状态**：{_status_cn(stage)}")
         lines.append(f"**同步时间**：{now_utc()}")
         lines.append("")
         lines.append("---")
@@ -310,7 +423,6 @@ class KBProposalReorg:
         # 提案摘要
         if brief_text:
             brief_body = brief_text
-            # 跳过 frontmatter
             if brief_text.startswith("---"):
                 _, brief_body = parse_frontmatter(brief_text)
             lines.append("## 课题简介")
@@ -325,7 +437,7 @@ class KBProposalReorg:
         lines.append("## 来源")
         lines.append("")
         lines.append(f"- 最新申请书：[{rel_source}]({rel_source})")
-        lines.append(f"- 各章节文件：`research_proposals/optimizing/{proposal_id}/04_proposal/sections/`")
+        lines.append(f"- 各章节文件：`research_proposals/{stage}/{proposal_id}/04_proposal/sections/`")
         lines.append(f"- 优化报告：[reports/{proposal_id}.md](reports/{proposal_id}.md)")
         lines.append("")
         lines.append(f"> 本页由 `scripts/kb_proposal_reorg.py` 自动生成。")
@@ -343,10 +455,11 @@ class KBProposalReorg:
         self,
         proposal_id: str,
         label: str,
+        stage: str,
         prop_dir: Path,
         latest_round: int,
     ) -> None:
-        """创建优化报告汇总页。"""
+        """创建优化报告汇总页（含评分变化表）。"""
         review_dir = prop_dir / "05_review"
         if not review_dir.exists():
             print(f"    ○ 无评审目录: 05_review/")
@@ -356,8 +469,12 @@ class KBProposalReorg:
         critic_rounds = sorted(review_dir.glob("critic-round-*.md"))
         meta_reviews = sorted(review_dir.glob("meta-review-*.md"))
         review_reports = sorted(review_dir.glob("review-report*.md"))
+        opt_reports = sorted(review_dir.glob("optimization-report-round-*.md"))
 
-        # 获取各轮分数（从 round 文件名推断）
+        # 收集评分历史
+        score_history = _collect_score_history(prop_dir)
+
+        # 各轮 critic 信息
         round_info = []
         for f in critic_rounds:
             m = re.search(r"round-(\d+)", f.name)
@@ -365,10 +482,8 @@ class KBProposalReorg:
             round_info.append((r, f.name))
 
         # 获取当前分数
-        lifecycle_path = PROJECT_ROOT / "research_proposals" / "_lifecycle.json"
-        lifecycle = load_json(lifecycle_path) or {}
-        proposals_data = lifecycle.get("proposals", {})
-        prop_data = proposals_data.get(proposal_id, {})
+        lifecycle = load_json(PROPOSALS_ROOT / "_lifecycle.json") or {}
+        prop_data = lifecycle.get("proposals", {}).get(proposal_id, {})
         last_score = prop_data.get("last_score", 0)
 
         frontmatter = {
@@ -378,6 +493,8 @@ class KBProposalReorg:
             "latest_round": latest_round,
             "last_score": last_score,
             "critic_rounds": len(critic_rounds),
+            "optimization_reports": len(opt_reports),
+            "status": stage,
             "created": now_utc(),
             "updated": now_utc(),
             "project": ["NSFC-强场超快"],
@@ -385,7 +502,7 @@ class KBProposalReorg:
             "confidence": 1.0,
         }
 
-        rel_review_dir = f"research_proposals/optimizing/{proposal_id}/05_review/"
+        rel_review_dir = f"research_proposals/{stage}/{proposal_id}/05_review/"
 
         lines = [build_frontmatter(frontmatter), ""]
         lines.append(f"# {label} — 优化报告")
@@ -393,9 +510,51 @@ class KBProposalReorg:
         lines.append(f"**课题 ID**：`{proposal_id}`")
         lines.append(f"**累计轮次**：{latest_round}")
         lines.append(f"**当前分数**：{last_score}")
+        lines.append(f"**状态**：{_status_cn(stage)}")
         lines.append("")
         lines.append("---")
         lines.append("")
+
+        # 评分变化趋势
+        if score_history:
+            lines.append("## 评分变化趋势")
+            lines.append("")
+            lines.append("| 轮次 | 总分 | 变化 | innovation | feasibility | rigor | completeness |")
+            lines.append("|------|------|------|------------|-------------|-------|-------------|")
+
+            prev_total = None
+            for entry in score_history:
+                r = entry["round"]
+                total = entry.get("total", {})
+                curr_total = total.get("curr", 0)
+                delta_str = _format_delta(total.get("delta", 0)) if total else "—"
+
+                scores = entry.get("scores", {})
+                innov = scores.get("innovation", {}).get("curr", "—")
+                feas = scores.get("feasibility", {}).get("curr", "—")
+                rigor = scores.get("rigor", {}).get("curr", "—")
+                complet = scores.get("completeness", {}).get("curr", "—")
+
+                def _fmt(v):
+                    return f"{v:.2f}" if isinstance(v, float) else str(v)
+
+                lines.append(
+                    f"| 第 {r} 轮 | {_fmt(curr_total)} | {delta_str} | "
+                    f"{_fmt(innov)} | {_fmt(feas)} | {_fmt(rigor)} | {_fmt(complet)} |"
+                )
+            lines.append("")
+
+        # 优化报告链接
+        if opt_reports:
+            lines.append(f"## 优化报告（共 {len(opt_reports)} 份）")
+            lines.append("")
+            lines.append("| 轮次 | 报告 |")
+            lines.append("|------|------|")
+            for f in opt_reports:
+                m = re.search(r"round-(\d+)", f.name)
+                r = int(m.group(1)) if m else 0
+                lines.append(f"| 第 {r} 轮 | [{f.name}]({rel_review_dir}{f.name}) |")
+            lines.append("")
 
         # 对抗评审轮次
         if round_info:
@@ -424,7 +583,7 @@ class KBProposalReorg:
             lines.append("")
 
         # 如果没有评审文件
-        if not critic_rounds and not meta_reviews and not review_reports:
+        if not critic_rounds and not meta_reviews and not review_reports and not opt_reports:
             lines.append("（暂无评审记录）")
             lines.append("")
 
@@ -443,14 +602,19 @@ class KBProposalReorg:
             out_path.write_text(content, encoding="utf-8")
 
         self.stats["reports_created"] += 1
-        self.stats["details"].append(f"  ✓ 报告页: reports/{proposal_id}.md ({len(round_info)}轮评审)")
+        self.stats["details"].append(
+            f"  ✓ 报告页: reports/{proposal_id}.md ({len(round_info)}轮评审, {len(opt_reports)}份优化报告)"
+        )
 
-    def _update_proposals_index(self) -> None:
+    def _update_proposals_index(self, all_proposals: List[Tuple[str, str, Path]]) -> None:
         """更新 proposals-index.md。"""
+        lifecycle = load_json(PROPOSALS_ROOT / "_lifecycle.json") or {}
+        proposals_data = lifecycle.get("proposals", {})
+
         fm = {
             "title": "NSFC 课题生命周期索引",
             "type": "index",
-            "created": "2026-08-02T06:02:42Z",
+            "created": now_utc(),
             "updated": now_utc(),
             "tags": [],
             "related": [],
@@ -469,25 +633,23 @@ class KBProposalReorg:
         # 生命周期状态图
         lines.append("## 课题总览")
         lines.append("")
-        lines.append("| 课题 | 类型 | 当前轮次 | 分数 | 最新版本 | 优化报告 |")
-        lines.append("|------|------|---------|------|---------|---------|")
+        lines.append("| 课题 | 类型 | 状态 | 当前轮次 | 分数 | 最新版本 | 优化报告 |")
+        lines.append("|------|------|------|---------|------|---------|---------|")
 
-        lifecycle_path = PROJECT_ROOT / "research_proposals" / "_lifecycle.json"
-        lifecycle = load_json(lifecycle_path) or {}
-        proposals_data = lifecycle.get("proposals", {})
-
-        for pid in OPTIMIZING_PROPOSALS:
-            label = PROPOSAL_LABELS.get(pid, pid)
+        for pid, stage, prop_dir in all_proposals:
+            brief_text = read_file(prop_dir / "00_proposal-brief.md")
+            label = _extract_label(pid, brief_text)
             prop_data = proposals_data.get(pid, {})
-            project_type = "重点" if "key-" in pid else "面上"
+            project_type = "重点" if "key-" in pid else ("重大" if "major-" in pid else "面上")
             latest_round = prop_data.get("optimization_rounds", 0)
             last_score = prop_data.get("last_score", "—")
 
-            version_link = f"[📄](versions/{pid}.md)"
-            report_link = f"[📊](reports/{pid}.md)"
+            version_link = f"[版本](versions/{pid}.md)"
+            report_link = f"[报告](reports/{pid}.md)"
 
             lines.append(
-                f"| {label} | {project_type} | 第{latest_round}轮 | {last_score} | {version_link} | {report_link} |"
+                f"| {label} | {project_type} | {_status_cn(stage)} | 第{latest_round}轮 | "
+                f"{last_score} | {version_link} | {report_link} |"
             )
 
         lines.append("")
@@ -502,8 +664,8 @@ class KBProposalReorg:
         lines.append("├── MOC.md              ← 知识地图（入口）")
         lines.append("├── proposals-index.md  ← 本页（生命周期索引）")
         lines.append("├── proposals/          ← 元数据同步（由 proposal_kb_sync.py 维护）")
-        lines.append("├── versions/           ← 最新申请书快照（本结构新增）")
-        lines.append("├── reports/            ← 优化报告汇总（本结构新增）")
+        lines.append("├── versions/           ← 最新申请书快照（由 kb_proposal_reorg.py 维护）")
+        lines.append("├── reports/            ← 优化报告汇总 + 评分变化表（由 kb_proposal_reorg.py 维护）")
         lines.append("├── decisions/          ← 决策记录")
         lines.append("├── topics/             ← 课题方向笔记（T1-T5）")
         lines.append("└── .gitkeep")
@@ -512,121 +674,73 @@ class KBProposalReorg:
         lines.append("> 数据流：`research_proposals/`（源）→ `proposal_kb_sync.py` → `proposals/`")
         lines.append("> `research_proposals/`（源）→ `kb_proposal_reorg.py` → `versions/` + `reports/`")
         lines.append("")
-        lines.append("---")
-        lines.append("")
-
-        # 各课题详细
-        lines.append("## 课题详情")
-        lines.append("")
-
-        for pid in OPTIMIZING_PROPOSALS:
-            label = PROPOSAL_LABELS.get(pid, pid)
-            lines.append(f"### {label}")
-            lines.append("")
-            lines.append(f"- **ID**：`{pid}`")
-            lines.append(f"- **类型**：{'重点项目' if 'key-' in pid else '面上项目'}")
-            lines.append(f"- **最新版本**：[versions/{pid}.md](versions/{pid}.md)")
-            lines.append(f"- **优化报告**：[reports/{pid}.md](reports/{pid}.md)")
-            lines.append(f"- **源文件**：`research_proposals/optimizing/{pid}/`")
-            lines.append("")
-
-        lines.append("")
-        lines.append("> 由 `scripts/kb_proposal_reorg.py` 自动更新。")
+        lines.append(f"> 由 `scripts/kb_proposal_reorg.py` 自动更新（{now_utc()[:10]}）。")
 
         content = "\n".join(lines)
 
         if not self.dry_run:
             PROPOSALS_INDEX.write_text(content, encoding="utf-8")
-            # 同时也保留原索引文件名用于兼容
-            # （proposals-index.md 已存在，直接覆盖）
 
         self.stats["index_updated"] = True
         self.stats["details"].append(f"  ✓ 索引已更新: proposals-index.md")
 
-    def _update_moc(self) -> None:
-        """更新 MOC.md，加入新 sections 链接。"""
+    def _update_moc(self, all_proposals: List[Tuple[str, str, Path]]) -> None:
+        """更新 MOC.md，加入课题链接。"""
         text = read_file(MOC_FILE)
         if not text:
             print(f"  ○ MOC.md 不存在，跳过")
             return
 
         fm, body = parse_frontmatter(text)
-
-        # 更新 frontmatter
         fm["updated"] = now_utc()
 
-        # 构建新正文
+        lifecycle = load_json(PROPOSALS_ROOT / "_lifecycle.json") or {}
+        proposals_data = lifecycle.get("proposals", {})
+
         lines = [build_frontmatter(fm), ""]
-        lines.append("# 🗺️ NSFC 强场超快课题知识地图")
+        lines.append("# NSFC 强场超快课题知识地图")
         lines.append("")
         lines.append("> 本页是 NSFC 强场超快光学课题的知识入口，聚合课题相关概念、方法、人物和论文。")
         lines.append("")
-        lines.append("## 📋 课题方向（T1-T5）")
-        lines.append("")
-        lines.append("| 课题 | 方向 | 进度 |")
-        lines.append("|------|------|------|")
-        lines.append("| T1 | 量子几何 | 🌳 成熟 |")
-        lines.append("| T2 | 谷电子学 | 🌳 成熟 |")
-        lines.append("| T3 | 带动力学 | 🌳 成熟 |")
-        lines.append("| T4 | 序参量 | 🌳 成熟 |")
-        lines.append("| T5 | 反演方法学 | 🌱 起步 |")
-        lines.append("")
 
-        # 新增：申请书版本和报告入口
-        lines.append("## 📄 申请书与优化报告")
+        # 课题总览
+        lines.append("## 申请书与优化报告")
         lines.append("")
-        lines.append("| 课题 | 最新版本 | 优化报告 | 状态 |")
-        lines.append("|------|---------|---------|------|")
+        lines.append("| 课题 | 状态 | 轮次 | 分数 | 版本 | 报告 |")
+        lines.append("|------|------|------|------|------|------|")
 
-        lifecycle_path = PROJECT_ROOT / "research_proposals" / "_lifecycle.json"
-        lifecycle = load_json(lifecycle_path) or {}
-        proposals_data = lifecycle.get("proposals", {})
-
-        for pid in OPTIMIZING_PROPOSALS:
-            label = PROPOSAL_LABELS.get(pid, pid)
+        for pid, stage, prop_dir in all_proposals:
+            brief_text = read_file(prop_dir / "00_proposal-brief.md")
+            label = _extract_label(pid, brief_text)
             prop_data = proposals_data.get(pid, {})
-            score = prop_data.get("last_score", "—")
-            status = "🔄 优化中"
+            latest_round = prop_data.get("optimization_rounds", 0)
+            last_score = prop_data.get("last_score", "—")
 
-            version_link = f"[📄](versions/{pid}.md)"
-            report_link = f"[📊](reports/{pid}.md)"
+            version_link = f"[版本](versions/{pid}.md)"
+            report_link = f"[报告](reports/{pid}.md)"
 
-            lines.append(f"| {label} | {version_link} | {report_link} | {status} |")
+            lines.append(
+                f"| {label} | {_status_cn(stage)} | 第{latest_round}轮 | {last_score} | "
+                f"{version_link} | {report_link} |"
+            )
 
         lines.append("")
 
-        # 保留原有内容
-        lines.append("## 🔬 课题相关概念")
-        lines.append("")
-        lines.append("- [[固体高次谐波]] — 课题核心研究对象")
-        lines.append("- [[德鲁德模型]] — 带内电流描述")
-        lines.append("- [[拓扑绝缘体]] — 拓扑材料 HHG")
-        lines.append("- [[带间跃迁]] / [[带内电流]] — 固体 HHG 双机制")
-        lines.append("")
-        lines.append("## 🛠️ 相关方法")
-        lines.append("")
-        lines.append("- [[TDSE求解器]] — 理论计算核心")
-        lines.append("- [[RABBITT]] / [[瞬态吸收光谱]] — 实验表征")
-        lines.append("")
-        lines.append("## 👤 相关团队")
-        lines.append("")
-        lines.append("- [[Ghimire-Reis]] — 固体 HHG 开创")
-        lines.append("- [[北大HHG团队]] — 国内合作")
-        lines.append("")
-        lines.append("## 📄 课题论文（NSFC-强场超快子库）")
-        lines.append("")
-        lines.append("raw/papers/ 中标记 project=['NSFC-强场超快'] 的论文：")
-        lines.append("- arXiv:1502.07183（拓扑 HHG）")
-        lines.append("- arXiv:1806.11232")
-        lines.append("- arXiv:2003.10430")
-        lines.append("- arXiv:2304.12547")
-        lines.append("- arXiv:2503.08052（滑移铁电 HHG）")
-        lines.append("")
-        lines.append("## 🔗 外部链接")
-        lines.append("")
-        lines.append("- hermes 课题目录：`~/Desktop/hermes_workspace/research_proposals/2026_NSFG_strongfield_ultrafast/`")
-        lines.append("- 林赛课题目录：`research_proposals/optimizing/`")
-        lines.append("")
+        # 保留原有 body 中非自动生成的部分
+        # 提取 "## 课题相关概念" 及之后的内容
+        preserved_sections = []
+        capture = False
+        for line in body.split("\n"):
+            if "课题相关概念" in line or "相关方法" in line or "相关团队" in line or "课题论文" in line or "外部链接" in line:
+                capture = True
+            if capture:
+                preserved_sections.append(line)
+
+        if preserved_sections:
+            lines.extend(preserved_sections)
+        else:
+            # 回退：保留所有原始内容
+            lines.append(body)
 
         content = "\n".join(lines)
 
@@ -643,8 +757,8 @@ class KBProposalReorg:
         print(f"{'='*60}")
 
         s = self.stats
-        print(f"\n  ✓ 版本页创建: {s['versions_created']}/5")
-        print(f"  ✓ 报告页创建: {s['reports_created']}/5")
+        print(f"\n  ✓ 版本页创建: {s['versions_created']}")
+        print(f"  ✓ 报告页创建: {s['reports_created']}")
         print(f"  ✓ 索引更新: {s['index_updated']}")
         print(f"  ✓ MOC 更新: {s['moc_updated']}")
         print(f"  ✗ 错误: {len(s['errors'])}")
@@ -660,19 +774,6 @@ class KBProposalReorg:
                 print(f"  ✗ {e}")
 
         print(f"\n{'='*60}")
-        print(f"知识库新增结构：")
-        print(f"  {NSFC_KB_DIR}/")
-        print(f"  ├── versions/       ← 5 篇最新申请书快照")
-        print(f"  ├── reports/        ← 5 篇优化报告汇总")
-        print(f"  ├── proposals/      ← 保留（元数据同步）")
-        print(f"  ├── proposals-index.md（已更新）")
-        print(f"  └── MOC.md          （已更新）")
-        print(f"{'='*60}")
-        print(f"数据流：")
-        print(f"  research_proposals/（源）→ kb_proposal_reorg.py → versions/ + reports/")
-        print(f"  research_proposals/（源）→ proposal_kb_sync.py → proposals/（不变）")
-        print(f"  └── 不修改源文件，不影响现有数据流动")
-        print(f"{'='*60}")
 
 
 def main():

@@ -1,5 +1,44 @@
 # 变更记录
 
+## v6.8.5 - 2026-08-06 知识库自动同步 + 仪表盘升级 + 微调度器优化
+
+### 知识库自动同步（本轮新增）
+
+- **kb_proposal_reorg.py**：全面重构
+  - 动态扫描 `_lifecycle.json` 获取所有 proposal（不再硬编码 5 个 ID）
+  - 动态查找 proposal 目录（覆盖 drafts/optimizing/pending_review/archived 全部阶段）
+  - reports 页面新增**评分变化趋势表**（从 optimization-report-round-N.md 提取总分/innovation/feasibility/rigor/completeness 及变化量）
+  - reports 页面新增**优化报告链接**区
+  - 去除硬编码 `PROJECT_ROOT`，改用 `Path(__file__).resolve().parent.parent`
+- **proposal_kb_sync.py**：提取函数兼容新版章节结构
+  - `_extract_core_questions()`：优先从 `sections/rationale.md` 提取科学问题段落，回退到旧版 `question-framework.md`
+  - `_extract_innovations()`：优先从 `sections/scheme.md` 提取创新/特色段落，回退到旧版 `proposal-draft.md`
+- **micro_scheduler.py**：新增 `_sync_proposal_to_kb()` 函数
+  - 轮次完成后自动调用 `proposal_kb_sync.sync_proposal()` + `kb_proposal_reorg --apply`
+  - 同步失败不影响主流程（仅日志告警）
+  - 不再依赖周末 output 端才刷新知识库
+
+### 验证结果
+- 知识库 proposals/ 页面：核心问题和创新点成功提取（之前显示"待提取"）
+- 知识库 reports/ 页面：评分变化表正确显示（总分 0.79→0.79→0.81）
+- `python3 scripts/self_test.py --module`：320/320 通过
+
+## v6.8.5 - 2026-08-06 仪表盘首页升级：四课题轮转进展 + 今日执行轨迹
+
+### 改动内容
+
+- **web/js/dashboard.js**：仪表盘首页中段重构
+  - 新增 `/api/lifecycle/kanban` 数据源获取（系统看板：四课题轮次/分数/进度、执行历史）
+  - `renderProposalProgress()`：四课题轮转进展板块（替代原六阶段漏斗），展示课题名、轮次标签、质量分、jobs 进度条、聚焦高亮、失败计数；点击跳转课题详情
+  - `renderTodayTimeline()`：聚焦课题今日执行轨迹时间线，按本地时间分桶聚合（最多 4 段），显示时段/任务数/运行状态（正常 vs 重试）/关键步骤，末段高亮表示进行中
+  - 聚焦课题今日数据不足 3 条时自动回退到当天全部记录，保证板块稳定渲染
+- **web/css/style.css**：新增 `dash-prop-*`（进展行/进度条/轮次标签/分数）与 `dash-tl-*`（时间线步骤/状态点/计数）样式，复用现有 CSS 变量，自动适配深/浅色主题；补充 1100px/600px 两档响应式（时间线换行、窄屏隐藏进度条）
+- **web/index.html**：`style.css` 与 `dashboard.js` 缓存版本号 `6.8.0`→`6.8.5`
+
+### 验证结果
+- `node --check web/js/dashboard.js`：语法正确
+- 数据源复用既有 `GET /api/lifecycle/kanban`，无后端改动
+
 ## v6.8.4 - 2026-08-05 整体检验：辅助链路文档补全 + 数据清理 + .gitignore 加固
 
 ### 改动内容

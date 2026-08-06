@@ -85,6 +85,33 @@ def _extract_title_from_brief(text: str) -> str:
 
 
 def _extract_core_questions(prop_dir: Path) -> str:
+    """提取核心科学问题。
+
+    v6.8.5: 兼容新版 sections/ 结构，优先从 rationale.md 提取科学问题段落，
+    回退到旧版 03_question/question-framework.md。
+    """
+    # 优先从新版 sections/rationale.md 提取
+    rationale_path = prop_dir / "04_proposal" / "sections" / "rationale.md"
+    if rationale_path.exists():
+        text = _safe_read(rationale_path, 8000)
+        # 提取包含"科学问题"关键词的段落
+        lines = []
+        for line in text.split("\n"):
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#"):
+                continue
+            # 匹配包含科学问题描述的段落
+            if any(kw in stripped for kw in ["科学问题", "核心问题", "核心科学问题", "可证伪"]):
+                # 截取前 200 字
+                if len(stripped) > 200:
+                    stripped = stripped[:200] + "..."
+                lines.append(stripped)
+                if len(lines) >= 3:
+                    break
+        if lines:
+            return "\n\n".join(lines)
+
+    # 回退到旧版 question-framework.md
     q_path = prop_dir / "03_question" / "question-framework.md"
     text = _safe_read(q_path, 3000)
     lines = []
@@ -98,6 +125,36 @@ def _extract_core_questions(prop_dir: Path) -> str:
 
 
 def _extract_innovations(prop_dir: Path) -> str:
+    """提取特色与创新点。
+
+    v6.8.5: 兼容新版 sections/ 结构，优先从 scheme.md 提取创新/特色段落，
+    回退到旧版 proposal-draft.md。
+    """
+    # 优先从新版 sections/scheme.md 提取
+    scheme_path = prop_dir / "04_proposal" / "sections" / "scheme.md"
+    if scheme_path.exists():
+        text = _safe_read(scheme_path, 8000)
+        lines = []
+        in_innovation = False
+        for line in text.split("\n"):
+            stripped = line.strip()
+            # 匹配创新/特色章节标题
+            if ("创新" in stripped or "特色" in stripped) and "##" in stripped:
+                in_innovation = True
+                lines.append(f"**{stripped.lstrip('#').strip()}**")
+                continue
+            if in_innovation:
+                if stripped.startswith("## ") and "创新" not in stripped and "特色" not in stripped:
+                    break
+                if stripped.startswith("###") or (len(stripped) > 2 and stripped[0].isdigit() and stripped[1] in "."):
+                    summary = stripped.lstrip("#").strip()
+                    if len(summary) > 150:
+                        summary = summary[:150] + "..."
+                    lines.append(f"- {summary}")
+        if lines:
+            return "\n".join(lines[:8])
+
+    # 回退到旧版 proposal-draft.md
     p_path = prop_dir / "04_proposal" / "proposal-draft.md"
     text = _safe_read(p_path, 5000)
     lines = []
