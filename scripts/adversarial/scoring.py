@@ -18,11 +18,27 @@ from .constants import (
     CRITIC_REGRESSION_PENALTY,
     DEFAULT_INITIAL_SCORE,
     DEFAULT_SCORES,
+    CRITIC_HIGH_ISSUE_BONUS,
+    CRITIC_INFLATION_MONITOR_THRESHOLD,
+    CRITIC_INFLATION_PENALTY,
+    CRITIC_INFLATION_SCORE_THRESHOLD,
+    CRITIC_OVERHARSH_MONITOR_THRESHOLD,
+    CRITIC_OVERHARSH_PENALTY,
+    CRITIC_OVERHARSH_SCORE_THRESHOLD,
+    CRITIC_PROGRESS_WEIGHT,
+    CRITIC_REGRESSION_PENALTY,
+    LOW_SCORE_ALERT_THRESHOLD,
     MONITOR_DELTA_CAP,
     PROHIBITION_PENALTIES,
+    RECOVERY_BONUS,
+    RECOVERY_BONUS_MIN_SCORE,
     ROLES,
     WRITER_ISSUE_REDUCTION_WEIGHT,
     WRITER_PROGRESS_WEIGHT,
+    WRITER_QUALITY_GATE_LOW,
+    WRITER_QUALITY_GATE_LOW_PENALTY,
+    WRITER_QUALITY_GATE_MID,
+    WRITER_QUALITY_GATE_MID_PENALTY,
 )
 from .utils import _clamp_score, _count_high_critical_issues, _safe_float
 
@@ -60,19 +76,26 @@ def update_critic_score(old_score: float, delta: float) -> float:
 def compute_rule_deltas(
     monitor_score: float,
     prev_monitor_score: float,
-    critic_score: float,
+    critic_proposal_score: float,  # 批评家对申请书的评分（0-1），非 agent 分数（0-150）
     writer_violations: List[str],
     critic_violations: List[str],
     high_issues_before: int,
     high_issues_after: int,
 ) -> Tuple[float, float]:
-    """规则层计算 writer/critic 本轮 delta。"""
+    """规则层计算 writer/critic 本轮 delta。
+
+    注意：critic_proposal_score 是批评家对申请书的评分（0-1 区间），
+    不是批评家 agent 的全局分数（0-150 区间）。两者在 scoring 模块中并存。
+    """
     monitor_delta = monitor_score - prev_monitor_score
 
     # Writer
     writer_delta = monitor_delta * WRITER_PROGRESS_WEIGHT
     writer_delta += max(0, high_issues_before - high_issues_after) * WRITER_ISSUE_REDUCTION_WEIGHT
     writer_delta += _penalty_for_violations(writer_violations, "writer")
+    # v6.8.9 防摆烂：monitor 评分低时，writer 的"微调式改进"未实质推进质量，
+    # 抑制正奖励甚至反向扣分，倒逼 writer 通过实质性提升申请书质量来得分。
+    writer_delta += _writer_quality_gate(monitor_score)
 
     # Critic
     critic_delta = 0.0
@@ -84,21 +107,88 @@ def compute_rule_deltas(
     critic_delta += _penalty_for_violations(critic_violations, "critic")
 
     # Critic 校准奖励 / 惩罚
-    calibration_error = abs(critic_score - monitor_score)
+    calibration_error = abs(critic_proposal_score - monitor_score)
     if calibration_error < 0.10:
         critic_delta += CALIBRATION_BONUS
     elif calibration_error > 0.20:
         critic_delta -= min(8.0, (calibration_error - 0.20) * CALIBRATION_PENALTY_FACTOR)
 
+    # v6.8.9 防摆烂：critic 评审质量门槛——评分虚高放水或过度苛刻都扣分，
+    # 倒逼 critic 通过"严格而准确的评审"（评分贴合 monitor 独立判断）得分。
+    critic_delta += _critic_quality_gate(monitor_score, critic_proposal_score)
+
     return writer_delta, critic_delta
 
 
+def _writer_quality_gate(monitor_score: float) -> float:
+    """v6.8.9 防摆烂：writer 质量门槛。
+
+    monitor 独立评分代表第三方对申请书本身上限的判断。评分低说明申请书
+    质量差，writer 只做微调并未实质推进质量，不应获得正奖励；评分过差时
+    反向扣分，促使 writer 深入重写而非流于表面。
+    """
+    if monitor_score < WRITER_QUALITY_GATE_LOW:
+        return WRITER_QUALITY_GATE_LOW_PENALTY
+    if monitor_score < WRITER_QUALITY_GATE_MID:
+        return WRITER_QUALITY_GATE_MID_PENALTY
+    return 0.0
+
+
+def _critic_quality_gate(monitor_score: float, critic_proposal_score: float) -> float:
+    """v6.8.9 防摆烂：critic 评审质量门槛。
+
+    - monitor 评分低（申请书质量差）但 critic 给高分 → 评分虚高/放水，重扣。
+    - monitor 评分高（质量尚可）但 critic 给过低分 → 过度苛刻/不准确，扣分。
+    二者都要求 critic 的评审严格且准确，与 monitor 独立判断贴合时才得高分。
+    """
+    penalty = 0.0
+    if monitor_score < CRITIC_INFLATION_MONITOR_THRESHOLD and \
+            critic_proposal_score >= CRITIC_INFLATION_SCORE_THRESHOLD:
+        penalty += CRITIC_INFLATION_PENALTY
+    elif monitor_score >= CRITIC_OVERHARSH_MONITOR_THRESHOLD and \
+            critic_proposal_score < CRITIC_OVERHARSH_SCORE_THRESHOLD:
+        penalty += CRITIC_OVERHARSH_PENALTY
+    return penalty
+
+
 def _penalty_for_violations(violations: List[str], role: str) -> float:
-    """根据违规类型返回总扣分。"""
+    """根据违规类型返回总扣分。
+
+    先精确匹配 PROHIBITION_PENALTIES 中的预定义类型名；
+    无匹配时，通过关键词兜底匹配 monitor 输出的自由文本违规描述。
+    """
+    _KEYWORD_PENALTIES = [
+        # 严重等级关键词 → 默认扣分
+        (("[severe]", "severe", "[critical]", "critical"), -10),
+        (("[high]", " high"), -6),
+        # 行为类型关键词
+        (("禁止", "fabrication", "杜撰", "伪造"), -12),
+        (("wrong_citation", "错误引用", "虚标", "虚假"), -8),
+        (("placeholder", "占位符", "未清理", "待核验", "TODO"), -4),
+        (("surface_change", "表面修改", "零改进", "未修改", "零响应"), -5),
+        (("template_rigidity", "僵化模板", "模板", "套话"), -6),
+        (("score_content_mismatch", "评分与内容矛盾", "高分"), -8),
+        (("lazy_review", "消极评审", "过短"), -10),
+        (("rigid_scoring", "僵化评分"), -8),
+        (("unactionable", "不可操作建议"), -6),
+        (("missed_major", "遗漏重大"), -10),
+        (("未解决", "未修复", "未回应"), -6),
+    ]
+
     total = 0.0
     for v in violations:
-        key = v if isinstance(v, str) else v.get("type", "")
-        total += PROHIBITION_PENALTIES.get(role, {}).get(key, 0)
+        vtype = v if isinstance(v, str) else v.get("type", "")
+        penalty = PROHIBITION_PENALTIES.get(role, {}).get(vtype, 0)
+
+        # 精确匹配失败 → 关键词兜底
+        if penalty == 0 and vtype:
+            v_lower = vtype.lower()
+            for keywords, p in _KEYWORD_PENALTIES:
+                if any(kw in v_lower for kw in keywords):
+                    penalty = p
+                    break
+
+        total += penalty
     return total
 
 
@@ -199,10 +289,30 @@ def apply_monitor_result(
         writer_delta, critic_delta, collusion_risk
     )
 
-    # 加载并更新 agent 分数
+    # 加载 agent 分数（用于后续恢复判断和更新）
     scores = load_agent_scores(scores_path)
     old_writer = scores["writer"]["score"]
     old_critic = scores["critic"]["score"]
+
+    # 批评家恢复机制：分数过低时，如近期无严重违规，给予小幅恢复奖励
+    if old_critic < RECOVERY_BONUS_MIN_SCORE and critic_delta <= 0:
+        recent_violations = scores["critic"]["prohibition_violations"][-5:]
+        has_severe_recent = any(
+            v.get("type", "") and (
+                "severe" in v.get("type", "").lower()
+                or "critical" in v.get("type", "").lower()
+                or v.get("penalty", 0) <= -8
+            )
+            for v in recent_violations
+        )
+        if not has_severe_recent:
+            critic_delta += RECOVERY_BONUS
+            if _log:
+                _log.info(
+                    f"批评家恢复: old={old_critic}, 近5轮无严重违规，"
+                    f"奖励 {RECOVERY_BONUS} 分（delta={critic_delta:.1f}）"
+                )
+
     new_writer = update_writer_score(old_writer, writer_delta)
     new_critic = update_critic_score(old_critic, critic_delta)
 
@@ -284,6 +394,53 @@ def check_negative_feedback(
     return bool(reasons), reasons
 
 
+def check_low_score_alert(proposal_state: Dict[str, Any]) -> bool:
+    """检查课题分数是否低于低分预警阈值，返回是否触发预警。
+
+    在 proposal_state 中设置 low_score_alert 和 low_score_alert_reason 字段。
+    低分预警条件：
+    - 当前分数 < LOW_SCORE_ALERT_THRESHOLD（默认 0.65）
+    - 同时有 monitor_history 且最近 3 轮分数呈下降趋势
+    """
+    last_score = proposal_state.get("last_score", 0.0)
+    if last_score >= LOW_SCORE_ALERT_THRESHOLD:
+        proposal_state["low_score_alert"] = False
+        proposal_state.pop("low_score_alert_reason", None)
+        return False
+
+    # 分数低于阈值，检查趋势
+    monitor_history = proposal_state.get("monitor_history", [])
+    recent_scores = [
+        entry.get("proposal_score_after", entry.get("monitor_independent_score", 0.0))
+        for entry in monitor_history[-3:]
+    ]
+
+    if len(recent_scores) >= 3 and all(
+        recent_scores[i] > recent_scores[i + 1] for i in range(len(recent_scores) - 1)
+    ):
+        # 连续 3 轮下降 + 低于阈值 → 高风险预警
+        proposal_state["low_score_alert"] = True
+        proposal_state["low_score_alert_reason"] = (
+            f"分数{last_score:.2f}低于阈值{LOW_SCORE_ALERT_THRESHOLD:.2f}，"
+            f"且最近3轮持续下降（{', '.join(f'{s:.2f}' for s in recent_scores)}）"
+        )
+        return True
+
+    # 低于阈值但分数稳定 → 低风险预警
+    rounds = proposal_state.get("optimization_rounds", 1)
+    if rounds >= 3:
+        proposal_state["low_score_alert"] = True
+        proposal_state["low_score_alert_reason"] = (
+            f"分数{last_score:.2f}低于阈值{LOW_SCORE_ALERT_THRESHOLD:.2f}，"
+            f"已进行{rounds}轮优化，建议人工关注"
+        )
+        return True
+
+    # 低于阈值但轮次尚浅 → 暂不预警
+    proposal_state["low_score_alert"] = False
+    return False
+
+
 def record_monitor_history(
     proposal_state: Dict[str, Any],
     round_num: int,
@@ -333,5 +490,8 @@ def record_monitor_history(
     proposal_state["negative_feedback_alert"] = alert
     if alert:
         proposal_state["negative_feedback_reasons"] = reasons
+
+    # 低分预警：课题分数低于阈值时标记
+    check_low_score_alert(proposal_state)
 
     return proposal_state

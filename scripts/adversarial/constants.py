@@ -46,6 +46,33 @@ CALIBRATION_PENALTY_FACTOR = 40  # 每 0.1 误差扣 4 分
 # 串通惩罚
 COLLUSION_PENALTY: Dict[str, int] = {"medium": -5, "high": -10}
 
+# 批评家恢复机制
+RECOVERY_BONUS_MIN_SCORE = 20     # 分数低于此值时触发恢复检查
+RECOVERY_BONUS = 3.0              # 恢复奖励（每次）
+
+# ---------------------------------------------------------------------------
+# v6.8.9 质量门槛（防摆烂）
+# ---------------------------------------------------------------------------
+# writer 质量门槛：monitor 独立评分低于中线下限时，writer 的"微调式改进"
+# 未实质推进质量，不应获得正奖励，甚至反向抑制。
+WRITER_QUALITY_GATE_LOW = 0.50            # 质量过差阈值（<此值反向抑制）
+WRITER_QUALITY_GATE_LOW_PENALTY = -5.0    # 质量过差时的额外扣分
+WRITER_QUALITY_GATE_MID = 0.70            # 质量欠佳阈值（<此值抑制正奖励）
+WRITER_QUALITY_GATE_MID_PENALTY = -2.0    # 质量欠佳时的额外扣分
+
+# critic 评审质量门槛：monitor 评分低但 critic 给申请书打高分 → 评分虚高/放水；
+# monitor 评分高但 critic 打低分 → 过度苛刻/不准确。两者都扣分，倒逼 critic
+# 通过"严格而准确的评审"（发现真问题、评分贴合 monitor）来获得分数。
+CRITIC_INFLATION_MONITOR_THRESHOLD = 0.60  # monitor 评分低于此值视为"质量差"
+CRITIC_INFLATION_SCORE_THRESHOLD = 0.75    # critic 给分≥此值视为"虚高"
+CRITIC_INFLATION_PENALTY = -8.0            # 虚高放水扣分
+CRITIC_OVERHARSH_MONITOR_THRESHOLD = 0.75  # monitor 评分≥此值视为"质量尚可"
+CRITIC_OVERHARSH_SCORE_THRESHOLD = 0.55    # critic 给分<此值视为"过度苛刻"
+CRITIC_OVERHARSH_PENALTY = -4.0            # 过度苛刻扣分
+
+# 低分预警阈值
+LOW_SCORE_ALERT_THRESHOLD = 0.65  # 课题分数低于此值触发低分预警
+
 # 占位符信号（writer）
 PLACEHOLDER_PATTERNS: List[str] = [
     r"待补充",

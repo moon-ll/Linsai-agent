@@ -2,7 +2,7 @@
 
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
-> 最后更新：2026-08-05
+> 最后更新：2026-08-07
 > 提示：完整目录结构见 `docs/PROJECT-STRUCTURE.md`，完整架构说明见 `docs/ARCHITECTURE.md`。
 
 ---
@@ -128,8 +128,8 @@ python3 -m py_compile scripts/*.py
 2. **模块自检**：大量脚本支持 `--self-check`，运行 `python3 scripts/{module}.py --self-check`。
 3. **E2E 集成测试**：`python3 scripts/test_e2e_learning_full.py`（需真实 Claude CLI 环境，非日常回归项）。
 
-**当前基线（v6.8.4）**：
-- `--module`：320/320 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器、轮次完成 break、derived job 优先级、prompt 优化器、看板轮次统计、stale job 回收、monitor 看板时间戳）
+**当前基线（v6.8.9）**：
+- `--module`：332/332 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器、轮次完成 break、derived job 优先级、prompt 优化器、看板轮次统计、stale job 回收、monitor 看板时间戳、维度提取修复、质量门槛）
 - `--scenario`：16/16 通过
 - `--persona`：38/38 通过
 - `--web-ci`：252/252 通过（Web API 虚拟用户测试覆盖所有主要 API 命名空间）
@@ -253,7 +253,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 ### 版本号规范
 
-- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.8.4`）。
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.8.9`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -316,7 +316,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.8.4*
-*日期：2026-08-05*
+*版本：6.8.9*
+*日期：2026-08-07*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

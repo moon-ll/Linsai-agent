@@ -47,10 +47,22 @@ class CompletionMixin:
             last_monitor = monitor_history[-1]
             monitor_score = last_monitor.get("monitor_independent_score", 0.0)
 
-        # 条件1（P1-3）：所有模块对抗胜利
+        # 条件1（P1-3）：所有模块对抗胜利 + monitor 复核通过
         passed_sections = [s for s in self.REQUIRED_SECTIONS if section_passes.get(s)]
         all_passed = len(passed_sections) == len(self.REQUIRED_SECTIONS)
         if all_passed:
+            # v6.8.9: monitor 作为第三方监管者把关——即使 writer-critic 对抗全部胜利，
+            # 若 monitor 独立评分低于达标线，视为未达标，继续优化。
+            # 防止 writer+critic 串通虚高通过（"摆烂"），监管者真正起到把关作用。
+            if monitor_history and monitor_score > 0 and monitor_score < min_score:
+                return {
+                    "done": False,
+                    "reason": (
+                        f"全部{len(self.REQUIRED_SECTIONS)}个模块对抗胜利，"
+                        f"但 monitor 独立评分{monitor_score:.2f}低于达标线{min_score:.2f}，"
+                        f"不予流转，继续优化。"
+                    ),
+                }
             return {"done": True, "reason": f"全部{len(self.REQUIRED_SECTIONS)}个模块对抗胜利（{','.join(passed_sections)}）"}
 
         # 条件2：连续N轮无提升（逃生阀）

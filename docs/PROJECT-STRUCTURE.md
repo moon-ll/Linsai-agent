@@ -8,7 +8,7 @@ LinSai-CoPilot/
 ├── AGENTS.md                  # 本文件。AI 代理必读指南
 ├── README.md                  # 人类可读的项目说明
 ├── CHANGELOG.md               # 变更记录
-├── VERSION                    # 版本号唯一真相源（当前 6.8.4）
+├── VERSION                    # 版本号唯一真相源（当前 6.8.9）
 ├── .env                       # 本地 API 密钥（gitignore，不提交）
 ├── .gitignore                 # Git 忽略规则：用户数据、自动生成文件、敏感配置
 │
@@ -117,6 +117,10 @@ LinSai-CoPilot/
 │
 ├── docs/                      # 项目文档与报告
 │   ├── README.md
+│   ├── ARCHITECTURE.md        # 完整架构说明
+│   ├── PROJECT-STRUCTURE.md   # 目录结构（本文件）
+│   ├── SCORING-STANDARDS.md   # v6.8.9 评分标准（评分体系/达标阈值/防摆烂机制）
+│   ├── FRAMEWORK-ARCHITECTURE.md # v6.8.9 框架结构设计（完整架构总览/关键设计决策）
 │   ├── CLAUDE-CLI-ADMIN.md    # Claude CLI 人工管理指南
 │   ├── deepxiv-knowledge-workflow.md
 │   ├── unified-state-sync-design.md

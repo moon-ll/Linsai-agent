@@ -1,5 +1,81 @@
 # 变更记录
 
+## v6.8.9 - 2026-08-07 评分标准存档 + 维度提取修复 + 监考者把关 + 对抗防摆烂
+
+### 评分标准存档
+- 新增 `docs/SCORING-STANDARDS.md`：完整记录当前有效评分标准（达标阈值 0.90、三类项目维度权重、评分完整性 7 规则、程序化天花板、进入待评审 3 条件、agent 分数机制、禁止清单扣分对照、分数提取方式），标注权威数据源，便于后续查看。
+
+### 维度提取修复
+- `optimize.py::_extract_dimension_scores`：修复表格含权重列时误匹配权重的问题。旧正则取行内第一个数字（权重），现改为取表格行内**最后一个**数字作为得分列；非表格回退到行内格式。修正 score_history 维度分错误等于权重的问题。
+- 跟进修正（健康检查发现）：取"最后一个数字"会被表格行内档位/主要短板评语中的数字干扰（如 `U/W ~ 0.5`、`已扣 ceiling 0.05`、`17.4%`），导致严谨性误读为 0.10、表达质量误读为 0.05。改为取行内**最后一个独立纯数字单元格**（`0.xx` 独立成格）作为得分列，覆盖 `|维度|得分|`、`|维度|权重|得分|`、`|维度|权重|得分|档位|主要短板|` 各格式。
+
+### 监考者把关
+- `completion.py::_check_done`：条件 1（5 模块全胜）新增 monitor 复核——即使对抗全部胜利，若 monitor 独立评分 < 达标线，判定未达标、不予流转、继续优化，防止 writer+critic 串通虚高通过。
+
+### 对抗防摆烂（质量门槛）
+- `constants.py`：新增 `WRITER_QUALITY_GATE_*`、`CRITIC_INFLATION_*`、`CRITIC_OVERHARSH_*` 常量。
+- `scoring.py`：
+  - `compute_rule_deltas` 接入两个质量门槛。
+  - 新增 `_writer_quality_gate`：monitor 评分 < 0.50 反扣 5 分、< 0.70 扣 2 分，倒逼 writer 实质提升质量。
+  - 新增 `_critic_quality_gate`：monitor < 0.60 但 critic 给分 ≥ 0.75（虚高放水）扣 8 分；monitor ≥ 0.75 但 critic 给分 < 0.55（过度苛刻）扣 4 分，倒逼 critic 严格准确评审。
+
+### 验证
+- `self_test.py --module` 340/340 通过（含新增 `test_optimize_dimension_scores` 8 项断言）。
+- 临时验证脚本确认：维度提取（权重列/得分列/行内各格式）、writer 质量门槛（过差反扣/欠佳抑制/高正常）、critic 质量门槛（虚高扣/过苛扣/准确不扣）行为正确。
+
+## v6.8.8 - 2026-08-06 评审标准锚点回归 + 执行机制重构
+
+### 问题诊断
+
+用户反馈申请书写作有明显 AI 味、语言不连贯、内容论述不足，但评审仍给出高分。根因分析：
+1. prompt 过载导致 LLM 忽略评审标准，凭感觉打分
+2. 程序化天花板仅 cap 表达质量维度，综合分不受约束
+3. references 评审使用固定占位分（0.85），虚高综合分
+4. section checklist 未嵌入 prompt，critic 无从对照
+5. 缺少强制锚点对比机制，评审无标杆参照
+
+### 核心修复
+
+- **nsfc-standards.json**：
+  - 新增 `scoring_integrity_rules`（7 条规则）：AI 检测天花板→综合分上限联动、references 专项计分、机械评审无效、锚点对比强制、执行清单约束、自引用扣分
+  - 新增 `section_standards`（4 个 section）：每个 section 含 `enforcement_checklist`（10 项检查）和 `mandatory_comparison`（锚点对比强制要求）
+  - 新增 `scoring_rubric`（6 维度 × 5 档）：每档有明确判定标准，critic 必须逐条引用
+  - 强化 `anti_ai_patterns`：添加量化阈值和替换指导
+- **optimize.py**：
+  - 嵌入 `enforcement_checklist` 到 critic prompt（`_build_enforcement_checklist_text`）
+  - 综合分天花板强制 cap：AI 天花板 < 0.7 → 综合分 ≤ 0.75
+  - references 评审专用计分：N/A 维度不纳入加权
+  - 评审报告完整性验证：缺"锚点对比"或"写作风格评估"→评审无效
+  - 自引用检测：超 10 次扣 0.05，超 15 次扣 0.10
+- **writer SOUL.md**：
+  - 添加 5 组改写示范（死板关联词/模板主语/加粗堆砌/元话语/空洞概括句）
+  - 添加去AI味操作指南表（8 种 AI 模式 × 识别特征 × 改写方法 × 示例）
+  - 添加范本锚点段落（6 个），写作时逐段对标
+- **critic SOUL.md**：
+  - 添加评分完整性规则（6 条强制执行）
+  - 添加防跑偏规则：3 个必选节（写作风格评估/锚点对比/执行清单对照）缺一不可
+  - 添加正确/错误评审示范
+  - 添加输出格式模板（含必选节标注）
+
+### 总控层锚点回归
+
+- **lifecycle_monitor.py `_check_standard_alignment()`**：
+  - 检查项从 4 项扩展到 6 项
+  - 新增：scoring_integrity_rules 存在性、section_standards enforcement_checklist/mandatory_comparison 完整性
+  - 新增：optimize.py 综合分天花板逻辑、评审报告完整性验证、锚点对比验证
+  - 新增：critic SOUL.md 锚点对比/执行清单/写作风格评估/天花板约束引用
+  - 新增：writer SOUL.md benchmark_anchors/改写示范/anti_ai_patterns 引用
+- **prompt_optimizer.py `_check_anchor_regression()`**：
+  - 新增检查 1b：不得移除执行机制引用（10 项：scoring_integrity_rules/enforcement_checklist/锚点对比/天花板 等）
+  - 新增检查 4：不得弱化评分天花板约束
+  - 新增检查 5：不得弱化评审报告完整性要求
+
+### 验证结果
+- `python3 -m py_compile`：lifecycle_monitor.py / prompt_optimizer.py / optimize.py 全部通过
+- `nsfc-standards.json` JSON 格式验证通过
+- `lifecycle_monitor.py --self-check`：通过（5 课题 0 异常）
+- `prompt_optimizer.py --self-check`：通过（10 个 prompt 文件、2 条建议生成测试）
+
 ## v6.8.5 - 2026-08-06 知识库自动同步 + 仪表盘升级 + 微调度器优化
 
 ### 知识库自动同步（本轮新增）
@@ -21,7 +97,12 @@
 ### 验证结果
 - 知识库 proposals/ 页面：核心问题和创新点成功提取（之前显示"待提取"）
 - 知识库 reports/ 页面：评分变化表正确显示（总分 0.79→0.79→0.81）
-- `python3 scripts/self_test.py --module`：320/320 通过
+
+### 缺陷修复
+- **kb_proposal_reorg.py `_update_moc`**：修复 MOC.md 无限膨胀缺陷。原保留逻辑按"任意行含关键词"触发捕获，而 MOC 顶部自动生成的引言行含"课题相关概念/相关方法/相关团队"子串，导致每次运行将整段旧 body 重复追加，MOC.md 随运行次数无限增长（实测 5 课题时膨胀至 367 行、引言重复 18 次）。改为仅"章节标题行（`#` 开头）"匹配关键词触发，运行幂等（连续运行行数稳定）。
+- **kb_proposal_reorg.py `_extract_label`**：修复知识库索引所有课题标签雷同为「课题说明」的缺陷。brief 模板 H1 恒为"课题说明"，现跳过该通用标题，回退到 ID 推断。
+- 新增回归测试 `scripts/tests/test_kb_proposal_reorg.py`（4 用例 12 断言：不重复追加、幂等、手工章节保留、标签回退），并纳入 `self_test.py --module` 清单。
+- `python3 scripts/self_test.py --module`：320/320 → 332/332 通过
 
 ## v6.8.5 - 2026-08-06 仪表盘首页升级：四课题轮转进展 + 今日执行轨迹
 
