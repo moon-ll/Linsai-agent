@@ -152,6 +152,15 @@ def run_monitor_step(
     monitor_score = _safe_float(parsed.get("monitor_independent_score"), 0.0)
     if monitor_score == 0.0:
         monitor_score = _extract_overall_score(output)
+    # v6.8.10: 当 monitor_score 仍为 0 时，记录 reviewer 原始输出用于调试
+    monitor_score_valid = monitor_score > 0.0
+    if not monitor_score_valid:
+        if _log:
+            _log.warning(
+                f"[monitor] {proposal_id} r{round_num} {section_key} "
+                f"monitor_independent_score=0，解析失败。"
+                f" reviewer 输出前 500 字符: {output[:500]}"
+            )
     monitor_dim_scores = parsed.get("monitor_dim_scores") or _extract_dim_scores(output)
     if not monitor_dim_scores:
         monitor_dim_scores = dim_scores

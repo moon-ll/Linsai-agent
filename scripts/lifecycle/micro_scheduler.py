@@ -28,6 +28,7 @@ from .constants import (
     JOB_STATUS_PENDING,
     JOB_STATUS_RUNNING,
     MAX_JOB_ATTEMPTS,
+    MAX_SOFT_STUCK_SLOTS,
     MICRO_SCHEDULER_NAME,
     MICRO_SCHEDULER_SCHEDULE,
     STALE_RUNNING_SECONDS,
@@ -1005,10 +1006,46 @@ def _focus_proposal_for_slot(
                 # 死锁 proposal 永久占用焦点、饿死其余 proposal。故卡死时不返回，
                 # 落入下方 move_to_queue_end 让出时段给下一个 proposal。
                 if not _is_proposal_stuck(self, prev_pid):
-                    state["last_slot_index"] = slot_index
-                    state["last_proposal_id"] = prev_pid
-                    _save_focus_state(state)
-                    return prev_pid
+                    # v6.8.10: 软卡死检测 — 连续 ≥MAX_SOFT_STUCK_SLOTS 个时段
+                    # 轮次无推进（failed job 不阻塞 pending 但又不完成，灰色地带）。
+                    # 此时不卡死不返回，强制让出给下一个 proposal，避免永久占用焦点。
+                    consecutive = _count_consecutive_slots(state, prev_pid)
+                    if consecutive >= MAX_SOFT_STUCK_SLOTS:
+                        tracked = state.setdefault("_round_when_focused", {})
+                        first_round = tracked.get(prev_pid, completed_rounds)
+                        if first_round == completed_rounds:
+                            # 连续 N 个时段轮次无推进 → 软卡死，让出
+                            if _log:
+                                _log.warning(
+                                    f"[{prev_pid}] 连续 {consecutive} 个时段"
+                                    f"轮次无推进（rounds={completed_rounds}），"
+                                    f"触发软卡死让出焦点"
+                                )
+                            # 清除跟踪记录，让出焦点
+                            tracked.pop(prev_pid, None)
+                            state["_round_when_focused"] = tracked
+                            _save_focus_state(state)
+                            # 不 return，落入下方 move_to_queue_end
+                        else:
+                            # 有进展，更新记录
+                            tracked[prev_pid] = completed_rounds
+                            state["_round_when_focused"] = tracked
+                            _save_focus_state(state)
+                            state["last_slot_index"] = slot_index
+                            state["last_proposal_id"] = prev_pid
+                            _save_focus_state(state)
+                            return prev_pid
+                    else:
+                        # 连续聚集 < N 个时段，记录初始轮次
+                        tracked = state.setdefault("_round_when_focused", {})
+                        if prev_pid not in tracked:
+                            tracked[prev_pid] = completed_rounds
+                        state["_round_when_focused"] = tracked
+                        _save_focus_state(state)
+                        state["last_slot_index"] = slot_index
+                        state["last_proposal_id"] = prev_pid
+                        _save_focus_state(state)
+                        return prev_pid
         except Exception:
             pass
         # 当前轮已完成：移动到队列末尾，推进到下一个

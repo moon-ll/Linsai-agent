@@ -1,5 +1,19 @@
 # 变更记录
 
+## v6.8.10 - 2026-08-07 monitor 评分降级日志 + 聚焦软卡死让出
+
+### monitor 评分降级
+- `monitor.py::run_monitor_step`：当 `monitor_independent_score` 在 JSON 解析和文本兜底后仍为 0.0 时，记录 reviewer 原始输出前 500 字符到日志（含 proposal_id/round/section_key），方便定位是 reviewer 输出格式变化还是 LLM 挂掉。新增 `monitor_score_valid` 标记。
+
+### 聚焦软卡死让出
+- `constants.py`：新增 `MAX_SOFT_STUCK_SLOTS = 3`（连续聚焦同一 proposal 超过该时段数且轮次无推进时强制让出）。
+- `micro_scheduler.py::_focus_proposal_for_slot`：在硬卡死检查（`_is_proposal_stuck`）通过后，新增软卡死检测——`_count_consecutive_slots` 统计连续 N 个时段，若 `optimization_rounds` 未增长则视同"软卡死"强制让出焦点给下一个 proposal。解决 failed job 不阻塞 pending 但又不完成（灰色地带）时永久占用焦点的问题。
+- 新增 `_round_when_focused` 状态字典跟踪初始轮次，区分"轮次正常推进"和"真卡死"。
+
+### 验证
+- 语法检查通过。
+- `self_test.py --module` 342/342 通过。
+
 ## v6.8.9 - 2026-08-07 评分标准存档 + 维度提取修复 + 监考者把关 + 对抗防摆烂
 
 ### 评分标准存档
@@ -11,6 +25,7 @@
 
 ### 监考者把关
 - `completion.py::_check_done`：条件 1（5 模块全胜）新增 monitor 复核——即使对抗全部胜利，若 monitor 独立评分 < 达标线，判定未达标、不予流转、继续优化，防止 writer+critic 串通虚高通过。
+- 跟进修正（健康检查发现）：monitor 把关若在"全章节通过但 monitor 评分长期低于达标线"时提前返回 `done=False`，会绕过条件 3（达到最大轮数）逃生阀，导致 proposal 无限卡在 `optimizing`、永不流转到 `pending_review`。修复：仅当未达最大轮数（`rounds < DEFAULT_MAX_ROUNDS`）时才"继续优化"，已达最大轮数由逃生阀收尾流转。新增 `_test_monitor_gate_respects_max_rounds` 回归断言。
 
 ### 对抗防摆烂（质量门槛）
 - `constants.py`：新增 `WRITER_QUALITY_GATE_*`、`CRITIC_INFLATION_*`、`CRITIC_OVERHARSH_*` 常量。
