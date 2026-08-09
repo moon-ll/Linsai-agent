@@ -1,0 +1,97 @@
+{
+  "gaps": [
+    {
+      "claim": "Even Tzur 2024 建立的任意量子光态驱动 HHG 的高次谐波量子态公式与 winding trail 模型是 BSV-HHG 项目 §1.2.2 段 4 的核心理论框架支撑",
+      "missing_evidence": "rationale.md 标注 [Phys. Rev. Research 6, 023064 (2024)] 是事实性错误——截至 2026-08-06 该文仍为 arXiv 预印本（journal_ref 字段为空），需删除 PRR 标注；同时作为支撑 §1.2.2 段 4、§1.4 创新点 2、§2.3 理论环节的核心论断，需核实是否已有正式发表版本或同行评审认可的替代理论框架",
+      "search_keywords": [
+        "Even Tzur 2024 squeezed high-order harmonics publication status",
+        "arXiv:2311.11257 Phys Rev Research",
+        "winding trail model quantum harmonic generation published",
+        "high harmonic quantum state formula review",
+        "quantum light driven HHG theoretical framework"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV-经典光双光路 Mach-Zehnder 干涉定义并测量量子指纹 Q_F 的测量范式参照 Li et al. (测量范式参照 §1.3 问题 3)",
+      "missing_evidence": "rationale.md 引用 [Li et al. 2022, Phys. Rev. Lett.; arXiv:2205.11161] 年份和卷期错误——真实发表信息为 Li A., Pan Y., Dienstbier P., Hommelhoff P., Phys. Rev. Lett. 126, 137403 (2021)，需更正作者首字母、年份与卷期页",
+      "search_keywords": [
+        "Li Pan Dienstbier Hommelhoff PRL 126 137403",
+        "two-color photoemission tungsten needle tips quantum interference visibility",
+        "arXiv:2205.11161 Phys Rev Lett",
+        "quantum interference visibility spectroscopy measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 单脉冲光子数 ~2×10¹³ 量级、二阶关联 g^(2)(0) 在非简并/简并 PDC 配置下分别测得 2 和 3+1/N 的统计性质作为本项目 2.1 节标定光子统计的量化基线",
+      "missing_evidence": "rationale.md 引用 [Iskhakov et al., Opt. Lett. 37, 1919 (2012); arXiv:1202.1682] 中 'Opt. Lett. 37, 1919 (2012)' 标注可能不准确——round-9 核实 arXiv:1202.1682 截至 2026-08-06 仍为预印本（journal_ref 字段为空，已逾 14 年）；需核实 Iskhakov T. Sh. 等 Opt. Lett. 37, 1919 (2012) 是否对应 BSV 主题",
+      "search_keywords": [
+        "Iskhakov Superbunched bright squeezed vacuum state published",
+        "Opt Lett37 1919 2012 Iskhakov",
+        "arXiv:1202.1682 journal reference",
+        "g(2)(0) bright squeezed vacuum measurement Phys Rev Lett",
+        "BSV second order correlation function measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "2024 年 Rasputnyi 等首次实验观测到 BSV 驱动固体 HHG 的首例实验作为 §1.1 段 2 + §1.2.2 段 3 + §1.4 创新点 1 的核心论据",
+      "missing_evidence": "rationale.md 引用 [Rasputnyi A. et al., arXiv:2403.15337 (2024)] 漏标正式发表——该文已正式发表于 Nat. Phys. 20, 1960–1965 (2024), DOI 10.1038/s41567-024-02659-x；需补充正式期刊卷期与 DOI",
+      "search_keywords": [
+        "Rasputnyi Chen Birk Cohen Kaminer Nature Physics 2024",
+        "10.1038/s41567-024-02659-x bright squeezed vacuum HHG",
+        "high harmonic generation bright squeezed vacuum Nature Physics",
+        "BSV solid HHG first experiment 2024 publication"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV-HHG 反演方法学参照 Li et al. 的 HHG 时域干涉反演能带结构方法（§1.4 创新点 2参照）",
+      "missing_evidence": "rationale.md 引用 [Li et al. 2019, arXiv:1908.07283] 年份+作者首字母错标——真实发表信息为 Li L., Lan P., He L., Cao W., Zhang Q., Lu P., Phys. Rev. Lett. 124, 157403 (2020), DOI 10.1103/PhysRevLett.124.157403；需更正年份和首作者",
+      "search_keywords": [
+        "Li Lan He Cao Zhang Lu PRL 124 157403",
+        "electron band structure temporal interferometry HHG",
+        "arXiv:1908.07283 Phys Rev Lett publication",
+        "HHG reconstruction band structure methodology"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "中等关联扭转双层 MoS₂ 莫尔超晶格 'Y3 室温可工作' 的关键论据（§1.2.3 段 1 + §2.4 中等关联体系支撑）",
+      "missing_evidence": "rationale.md 引用 [Wu et al. 2024, arXiv:2311.16655] 截至 2026-08-06 仍为预印本（无 journal_ref / DOI），但用于支撑中等关联体系关键论断；需核实是否已被 Nat. Phys./Nat. Mater./PRX 接收，或寻找已发表的扭转双层 TMDC 莫尔室温关联绝缘相文献作为替代支撑",
+      "search_keywords": [
+        "Wu twisted bilayer MoS2 moire room temperature correlated",
+        "arXiv:2311.16655 publication status",
+        "moire superlattice correlated insulator twisted bilayer Nature Physics",
+        "AB stacked MoS2 moire room temperature insulator285K",
+        "twisted bilayer TMDC correlated insulating states publication"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "'QEF 随关联强度单调上升' 的物理机制论证（多体关联增强电子动力学对驱动场涨落的非线性响应灵敏度；BSV 高阶光子统计涨落在强关联体系中与多体激发发生更强耦合）",
+      "missing_evidence": "rationale.md §1.3 问题 2 物理机制段当前依赖方法学手册 §5.2 + §7.4，评审专家不一定能获取；机制段为定性表述（'多体态高密度激发通道对入射场涨落更敏感'）但缺少定量预期（如 QEF 在 TMDC/莫尔/Mott 上的预期比值或 Fisher 信息增益的相对量级）；需要独立于方法学手册的同行评审文献支撑该机制",
+      "search_keywords": [
+        "many-body correlation squeezed light nonlinear response sensitivity",
+        "Fisher information gain high harmonic generation solid state",
+        "quantum light photon statistics many-body coupling Hubbard U",
+        "BSV high-order photon statistics strongly correlated system HHG",
+        "squeezed light enhanced parameter estimation spectroscopy published"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "Boroumand 2025 提出的'量子边带 HHG（QSHHG）'理论与 QEF 度量框架作为 §1.4 创新点 2 + §2.4 关联体系 + §2.5 量子指纹的关键参照",
+      "missing_evidence": "rationale.md 引用 [Boroumand et al. 2025, arXiv:2505.22536] 截至 2026-08-06 仍为预印本（无 journal_ref / DOI），但用于支撑本项目核心论断；需核实 PRL 是否已接收或寻找替代的量子工程化 HHG 理论框架作为已发表文献支撑",
+      "search_keywords": [
+        "Boroumand Thorpe Bart Vampa Brabec quantum engineering HHG PRL",
+        "arXiv:2505.22536 publication status",
+        "quantum sideband HHG theoretical framework Phys Rev Lett",
+        "Quantum Dial high harmonic generation Wang Parks2025",
+        "quantum engineering high harmonic generation published2025 2026"
+      ],
+      "priority": "low"
+    }
+  ]
+}

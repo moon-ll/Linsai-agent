@@ -1,0 +1,1077 @@
+Monochromatic high-harmonic generation by a BesselGauss beam in periodically modulated media
+O. Finke,1,2,+ J. Vábek,1,+ M. Dvořáček,1,2 L. Jurkovičová,1,2 M. Albrecht,1,2 H. Ovcharenko,1 O. Hort,1
+and J. Nejdl1,2,*
+1ELI Beamlines Facility, The Extreme Light Infrastructure ERIC, Za Radnicí 835, 252 41, Dolní Břežany, Czech Republic
+2Czech Technical University in Prague, FNSPE, Břehová 7, 115 19 Prague 1, Czech Republic
++these authors contributed equally to this work
+
+*jaroslav.nejdl@eli-beams.eu
+
+Abstract: High harmonic generation (HHG) has become a multipurpose source of coherent XUV
+radiation used in various applications. One of the notable aspects of HHG is its wide spectrum consisting
+of many harmonic orders. This might represent a bottleneck in HHG utility for applications requiring
+a single wavelength. We propose a method to generate radiation consisting of a single high-order
+harmonic frequency employing Bessel-Gauss driving beam and a periodically modulated gaseous
+medium. We validate it by analytical calculations and numerical simulations. Our method provides a
+way to generate monochromatic harmonic radiation directly from the source without the need for
+additional monochromatizing optics. Thus, it represents a substantial enhancement of the flux and
+simplification of the setup for numerous applications requiring monochromatic short-wavelength
+radiation.
+
+1. INTRODUCTION
+High-order harmonic generation (HHG) is a versatile tabletop source of coherent XUV radiation
+commonly using rare gases as a generation medium. Nonlinear interaction of the driver laser with the
+medium results in emission of radiation with a specific spectrum corresponding to multiples of a driver
+laser frequency which can range from vacuum ultraviolet (VUV) up to the X-ray part of the spectrum.
+The properties of this source provide wide utility in several research fields, notably in attosecond
+physics[1]; coherent diffractive imagining [2] or ptychography [3], and atomic, molecular, and optical
+sciences [4] or material sciences [5].
+The spectrum of radiation from HHG consists of several harmonic orders, some applications of these
+sources, however, require only specific photon energy. In such cases, other harmonic orders can cause
+parasitic signals, and therefore need to be removed from the beam by, e.g., grating monochromators
+[6],[7]. These monochromators consisting of several reflective optical elements provide relatively low
+transmission, which decreases the flux of the desired harmonic typically below 30% [8],[9]. Recently,
+schemes for HHG using second or third harmonic of the fundamental laser to generate a spectrum with
+sparsely positioned harmonic orders have been reported [10][11][12][13]. The largely separated VUV
+harmonics can then be filtered using narrowband transmission filters or multilayered mirrors. Other
+approaches exploited wavefront control [14] or plasma resonances [15]. However, these approaches
+might not always be suitable, as the frequency upconversion of the laser driver lowers the harmonic
+cutoff, and narrowband optics reduce the versatility of the experimental setup. The aim of this study is,
+therefore, to design a HHG scheme providing highly monochromatic radiation (single harmonic
+frequency) for direct application without the need of further filtering or monochromatization.
+Several advanced target designs for HHG have already used quasi phase-matching (QPM) to increase
+the yield of generated harmonics [16],[17],[18][19] by manipulating phase mismatch between the driver
+field and the generated one. Here we further expand this concept to suppress all harmonics except the
+optimized one. To achieve this, we employ Bessel-Gauss (BG) driving beams, which provide a strong
+geometrical phase shift along the focus. Furthermore, these beams form stable structures along the
+propagation axis [20]. We demonstrate that the strong geometrical phase, combined with a highly
+modulated longitudinal gas profile, provides suitable conditions for the generation of monochromatic
+
+radiation directly from the HHG source. Our design thus brings a novel mechanism to control the
+macroscopic HHG process by BG beams in the density-modulated media resulting in highly selective
+quasi-phase-matching.
+The article is organized in the following way. First, the basic principle of monochromatic HHG is
+presented in Section 2. It is followed by the description of a detailed strategy to design an optimal
+generation scheme in Sec. 3; the stability of the scheme is analyzed in Section 4. The general
+presentation is accompanied by examples of monochromatizing harmonics within the range 20-30 in
+Ar by an 800 nm laser (as one of the typical conditions in HHG), and the 41st harmonic by 1030 nm in
+Ar (a case providing straightforward analysis as absorption is more uniform in the vicinity of this
+harmonic). Next, in Sec. 5, we use the scheme for the 401st harmonic generated by 1600 nm in He. This
+case is of particular interest as it falls within the water window, and absorption plays a minor role in the
+generating medium. These results are followed by a general discussion in Sec. 6.
+
+2. BASIC PRINCIPLE OF MONOCHROMATIC HHG
+The laser-atom interaction responsible for emission of XUV radiation [21] is happening throughout the
+medium, therefore it is usually beneficial, if the emerging qth order harmonic wave keeps a constant
+phase shift with the driver wave to add up constructively. In other words, the wave number mismatch
+between the driver and the qth order wave defined as Δ𝑘𝑞 = 𝑘𝑞 − 𝑞𝑘1 [22], where 𝑘𝑞 , 𝑘1 are
+corresponding wave numbers, should be reasonably small, or zero. In our model, we consider the
+generated harmonic beam as a plane wave, while the driving beam has nonzero wave vector contribution
+2𝜋𝑛
+𝑘𝑔𝑒𝑜 due to its focusing, so that its on-axis wave number reads 𝑘1 = 𝜆 1 + 𝑘𝑔𝑒𝑜 with 𝜆1 denoting the
+1
+
+laser wavelength and 𝑛1 = 𝑛1 (𝜆1 ) the refractive index of the medium for the laser wavelength.
+Tailoring the geometrical phase of the driving beam and the refractive index of the medium is the core
+concept of our monochromatic HHG scheme.
+We start with the refractive index in a periodically modulated gas target. For the initial simplification,
+let us assume that a medium with constant pressure alternates with empty spaces. We denote the length
+of a single period 𝑧𝑝 (containing the medium and the empty space). The basis of our concept is that the
+phase mismatch of desired harmonic order 𝑞 accumulated within one period of a generating medium
+that reads
+𝑧𝑝
+
+Δφ𝑞 (z𝑝 ) = ∫ Δ𝑘𝑞 𝑑𝑧 ,
+
+(1)
+
+0
+
+equals 2𝜋𝑛, where 𝑛 is a positive integer. This ensures that radiation of the qth harmonic from a period
+adds up constructively with the radiation from the previous period. Meanwhile, the absolute phase
+mismatch accumulated in the part of the period with a generating medium cannot exceed 𝜋 to ensure
+coherent buildup of the harmonic signal here. The rest of the phase-mismatch (up to 2𝜋𝑛) is then
+accumulated in the empty space (see Fig. 1).
+In the configuration, where the phase mismatch of the qth harmonic after one period equals 2𝜋𝑛, the
+neighboring harmonic’s mismatch will depart from 2𝜋𝑛 as (1) is a function of the harmonic order. Note
+that the contribution of the phase mismatch in the empty space is caused by the geometrical phase of
+the driving laser. Therefore, one needs to employ a driving beam with a large geometrical contribution
+of the on-axis wave number. For Gaussian beams, which are typically used for driving HHG, the
+𝜋
+𝜋
+geometrical phase evolves only from – 4 to 4 across the focus region which is too little to achieve a
+large enough phase shift in single period of the medium, if we want to employ several periods within
+the laser focus. BG beams, on the other hand, provide a strong geometrical phase [20] described by the
+on-axis wave number as
+
+𝑘𝑔𝑒𝑜 = −
+
+2𝜋𝑛1
+2𝜋𝑛1
+(1 − cos 𝜃),
+𝜁= −
+𝜆1
+𝜆1
+
+(2)
+
+where 𝜁 is a relative difference from a plane wave. Such beams can be generated by focusing a hollow
+laser beam as depicted in Fig. 2. The parameter 𝜁 relates to the half-divergence angle 𝜃 of the BG beam
+by 𝜁 = 1 − cos 𝜃 ≈
+
+𝜃2
+. The on-axis wave number of BG beams is very high and almost constant across
+2
+
+the focus. This allows us to design the experiment with the required geometrical phase shift of the
+desired harmonic order.
+
+Fig. 1 – Example of evolution of the phase mismatch Δ𝜑𝑞 in two medium periods. Green
+background highlights the presence of the gas. The phase mismatch for selected harmonic
+order 𝑞 evolves exactly with multiples of 2𝜋𝑛 at the end of each period, while the
+neighboring orders get phase mismatch whose difference to 2𝜋𝑛 increases with further
+propagation.
+
+Fig. 2 – Schematic of the setup for monochromatic HHG. A hollow beam is focused into
+a periodically density-modulated gas target, where angle theta determines the geometrical
+phase according to (2). Blue schematic peaks denote temporal addition of attosecond
+pulses generated in consecutive medium segments (more details in text).
+By employing multiple medium periods, the accumulated phase mismatch Δ𝜑𝑞 of nondesired harmonic
+orders increases and generation of these orders is effectively suppressed. The rough estimate of the
+number of periods needed to suppress the neighboring harmonic orders reads 𝑞⁄2𝑛 (see Appendix B
+for details). This value is accurate mainly in the low-absorption low-dispersion case, e.g., for HHG
+nonabsorbing gases, such as helium.
+Even though we analyze mostly the HHG in targets with idealized “step-like” density modulation
+throughout this paper, as this can be calculated analytically (see Appendix A), the build-up of the
+harmonic signal can be also evaluated numerically for arbitrary density distribution of the medium as
+
+𝐿𝑚𝑒𝑑
+
+𝐸𝑞 (𝐿𝑚𝑒𝑑 ) = 𝐴𝑞 ∫
+
+𝑧
+
+′
+
+′
+
+𝜎(𝑧) 𝑒 𝑖 ∫0 Δ𝑘𝑞 (𝑧 )𝑑𝑧 𝑑𝑧,
+
+(3)
+
+0
+
+where 𝐴𝑞 is the amplitude of the generated electric field of the 𝑞th harmonic, 𝜎(𝑧) is density and Δ𝑘𝑞 (𝑧)
+is the wave number mismatch. Note that the latter is a complex function of the spatial coordinate
+(accounting also for absorption of XUV in the medium).
+In the first example, we will examine a case of the 29th harmonic (H29) generated by an 800 nm laser
+in argon. Figure 3 shows the signal of H29 and its neighboring harmonics as a function of propagation
+through the generating medium. For clarity and simplicity, we have chosen equal lengths of generating
+media and empty spaces. To show the robustness of our approach, we plot the results for the medium
+with a binary (steplike) density profile as well as a sinusoidal density profile. The phase-mismatch of
+the H29 after each period is equal to 2𝜋, i.e., 𝑛 = 1, in this example of geometry configuration. Figure
+3 clearly indicates that the signal of H29 is more than an order of magnitude stronger than neighboring
+harmonics H27 and H31.
+
+Fig. 3 – Evolution of the XUV signal generated in density-modulated argon using 800 nm
+driver as a function of the length of the medium. Signal of H27, H29, and H31 from binary
+(full line) and sinusoidal (dashed line) medium with peak argon pressure in the target of
+100 mbar and divergence angle of the BG beam 𝜃 = 9.5 mrad. Full and dashed lines are
+calculated using the numerical model (3) and blue diamonds correspond to analytical
+formula for binary medium (see Appendix A).
+Considering our concept in the temporal domain, each of the medium segments is a source of an
+attosecond pulse train with characteristics typical for HHG with a single color driving field.
+A pulse train generated by the following segment is temporally advanced from the train generated
+𝑛𝑇
+
+by the previous one by 𝑞 =
+
+𝑛𝜆𝑞
+𝑐
+
+with T denoting the period of the driving laser field and c being
+2𝜋𝑛
+
+the speed of light, because the driving field is effectively phase-shifted by 𝑞 . The overall signal
+can, thus, be considered as an attosecond pulse train where the separation of peaks of the XUV
+electric field is an n multiple of the qth harmonic period (as indicated in Fig. 2), which secures the
+significant spectral content of the qth harmonic and reduction of the other harmonic orders, if
+there are enough segments involved.
+
+3. AN OPTIMIZED CONFIGURATION OF MONOCHROMATIC HHG
+In the previous section, we presented the basic principle of monochromatic HHG by employing a
+Bessel-Gauss driving beam and density modulated periodic medium. In this section, we show a way to
+optimize the design of the monochromatic HHG scheme, i.e., we show how to determine the density
+profile of the generating medium and parameters of the driving BG beam. We will use a bottom-up
+strategy starting from an optimal design of generation in a single period of a binary medium using the
+analytical approach, i.e., assuming a steplike density profile for simplicity.
+Every period of the generating target is divided into a segment with a medium of length 𝑙1 and free
+space of length 𝑙2 fulfilling 𝑧𝑝 = 𝑙1 + 𝑙2 . The goal is to maximize generation of the harmonic when the
+medium is present; therefore phase mismatch within the segment with the medium should be equal to
+0 (phase matching is achieved there). Furthermore, the length 𝑙1 and pressure 𝑝 should be chosen so
+that the total medium length-pressure product is not too high to enter the absorption limited generation
+regime. Therefore, the total effective length of the gaseous medium 𝐿 = 𝑀𝑙1 , with M denoting the
+number of periods, should be approximately
+𝐿 ≤ 3𝐿𝑎𝑏𝑠 (𝑝, 𝑞)
+
+(4)
+
+with p denoting the pressure in the medium segment, where 𝐿𝑎𝑏𝑠 is the absorption length of the 𝑞th
+harmonic order in the medium. Furthermore, the length of a single medium segment should always be
+𝑙1 ≪ 𝐿𝑎𝑏𝑠
+
+(5)
+
+to achieve sufficient monochromaticity of the selected harmonic order. Depending on further conditions
+(harmonic order, absorption at this point), there is certain freedom to fulfill the optimizing
+conditions (4) and (5) to trade-off the contrast and the strength of the signal. By approaching the
+equality in condition (4), the signal strength of the selected harmonic increases to ~1/2 of the asymptotic
+absorption-limited maximum [23]; while prioritizing condition (5) enhances the monochromaticity of
+the generated radiation at the expense of harmonic signal strength. We found out that the number of
+𝑞
+periods in a medium corresponding to 2𝑛provides a good rule of thumb for achieving reasonable signal
+monochromaticity, in particular for cases with low absorption (see Appendix B for details). In cases
+with significant absorption, i.e., where condition (4) approaches equality, there are generally, fewer
+medium periods needed.
+Once 𝑙1 and 𝑝 are set, the geometrical phase needs to be set up in a way to compensate for the effects
+of material dispersion and achieve perfect phase-matching in the segment with the medium. The
+optimum parameter (described above) of the BG beam thus reads (see Appendix A for further details
+of the derivation)
+𝜁𝑜𝑝𝑡 =
+
+𝜎
+𝑒2
+(Δ𝛼̃𝑟 − 𝜂
+),
+2
+𝜖0 𝑚𝑒 𝜔12
+
+(6)
+
+where 𝜎 is density, Δ𝛼̃𝑟 is a real part of the difference of polarizabilities of neutrals between the driver
+and harmonic order, 𝜂 denotes the ionization degree of the gas, 𝑒 is electron charge, 𝜖0 vacuum
+permittivity, 𝑚𝑒 electron mass, and 𝜔1 angular frequency of the driving laser. In this design, the
+ionization is a parameter which is only restricted to the interval between 0 and the value corresponding
+to the complete plane-wave phase matching, 𝜂𝑐 , of the studied gas. Because 𝜂𝑐 is typically a few
+percent, we do not correct Δ𝛼̃𝑟 for the depletion of the neutrals (see the justification of this
+approximation in Appendix C). In this initial study, we assume that ionization is uniform in the region
+where the harmonics are efficiently generated. Generally, our optimization scheme works if 𝜂 < 𝜂𝑐 ; we
+
+𝜂
+
+have chosen a fixed value of 𝜂 = 4𝑐 (see Appendix D for examples of other choices of 𝜂). The
+discussion on time-dependent ionization is in Sec. 6.
+In the free-space segment of the target period, the geometrical phase of the beam is the only factor
+changing the phase-mismatch; therefore, the ratio of medium to vacuum segment lengths 𝜉 = 𝑙2 ⁄𝑙1
+needs to be established as
+𝜉𝑜𝑝𝑡 =
+
+1
+𝜁𝑜𝑝𝑡
+
+⋅
+
+2𝜋𝑛
+𝑞𝑘0 𝑙1
+
+(7)
+
+where 𝑘0 is the vacuum wave number of the laser driver, to ensure the phase mismatch 2𝜋𝑛 accumulated
+within the period. Note that the length of the medium 𝑙1 generally differs from the length of free
+space 𝑙2 . By calculating 𝜁𝑜𝑝𝑡 and 𝜉𝑜𝑝𝑡 , the driving beam and the single period of the medium are fully
+defined.
+At this point, the last parameter to determine is the number of periods. By increasing the constant 𝑛,
+fewer periods will be required to clearly pronounce only single harmonic order, on the other hand; it
+provides strain on the required target length.
+The calculation of the signal of various harmonics after each period of a scheme optimized for
+monochromatic H41 in Ar driven by a 1030 nm laser shows that in the absorption-limited case (𝐿 =
+3𝐿𝑎𝑏𝑠 ) there is a reasonable monochromaticity achieved already after 11 periods. The signal buildup is
+shown in Fig. 4. The dispersive properties are tabulated in [24] and [25], see [26] for all the details of
+the implementation.
+We define the contrast of a given harmonic by the ratio of its signal and the signal of the strongest
+harmonic in its neighborhood. Therefore, various designs can be conveniently evaluated by comparing
+the total signal of the selected harmonic and its contrast.
+
+Fig 4 - Harmonic signal as functions of number of periods 𝑀 in a setup optimized for H41
+generated in Ar by a 1030 nm laser. The design parameters are following: l1=1 mm; l2=0.87
+mm; p=120 mbar; =0.7%; and 𝜃 = 7.6 mrad (n=1). Contrast of H41 is plotted with gray
+dashed line. (Note that the arb. units of the signal are related to the asymptotic value of
+perfectly phase-matched (absorption-limited) optimized harmonic generation. This
+definition of arb. units is applied in all the figures.)
+Considering the design of monochromatic H41 generation with parameters shown in the caption of Fig.
+4 as the reference case, we can elaborate upon other possible designs. The first alternative design has
+two-times shorter segments of the medium (while keeping all the other parameters fixed), which
+doubles the maximum contrast with respect to the reference case after 14 periods, while the total signal
+
+of H41 is 40% lower in that case [Fig. 5(a)]. Another interesting case is similar to the reference case,
+with doubled empty segments (again keeping all the other parameters fixed) to reach phase mismatch
+of H41 after each period to be 4 , i.e., a case with n=2. A very high contrast of ~40 is achieved already
+after seven periods with lower H41 signal strength [Fig. 5(b)]. These examples represent a general tradeoff between the contrast (monochromaticity) and the signal strength.
+
+Fig. 5 - Variations of the design for monochromatic H41 in Ar driven by 1030 nm laser:
+a) two-times shorter segments b) n = 2. Setup parameters are following a) l1=0.5 mm;
+l2=0.87 mm; p=120 mbar; =0.6%; and 𝜃 = 7.6 mrad (n=1), and b) l1=1 mm; l2=1.74 mm;
+p=120 mbar; =0.6%; and 𝜃 = 7.6 mrad (n=2) b). Contrast of H41 is plotted with gray
+dashed line.
+
+4. STABILITY OF THE METHOD
+An important parameter of the monochromatic HHG is its stability with respect to various experimental
+parameters that might differ from the design values due to manufacturing or alignment errors. We have
+investigated the stability of the reference case of monochromatic generation of H41 designed in the
+previous section (using 11 periods of the medium) with respect to deviations of gas pressure in the
+target, geometrical phase of the driving beam (divergence angle of the BG beam), and ionization degree
+of the medium. The results are depicted in Fig. 6.
+When the real experimental parameters depart from the design values, the easiest way to ensure
+fulfillment of the principal condition of monochromatic HHG, (i.e. the 2πn phase shift of the desired
+harmonic after one period) is usually to adjust the pressure in the target. Changing the pressure allows
+us to shift our scheme within the parametric space (𝜃, pressure, ionization) into the region with a strong
+monochromatic signal. The differences between these regions for signals [Figs. 6(a) and 6(c)] and
+contrasts [Figs. 6(b) and 6(d)] also illustrate the trade-off between the contrast and the signal.
+
+Consequently, one can conveniently optimize an experiment with the gas pressure to compensate for
+parameters that are difficult to tune experimentally, such as the driving beam divergence and ionization
+degree.
+
+Fig. 6 - Signals (a,c) and contrasts (b,d) of the H41 as function of pressure in the medium,
+divergence angle of the BG beam 𝜃 (a,b), and degree of ionization (c,d). The central points
+of each figure indicated by the red cross correspond to the optimal designed values
+according to (6) and (7). Further examples of this case with ionization degree set to
+=0.5c and =0.75c can be found in Appendix D.
+
+5. MONOCHROMATIC HHG IN THE WATER WINDOW
+The monochromatic HHG setup can be designed for any type of medium. Generally, the selection
+mechanism works the best if the HHG is dominated by phase matching and not by absorption. As a next
+example of optimized monochromatic generation, we present the 401st harmonic of a 1600 nm laser
+(𝜆𝑞 ≈ 4 𝑛𝑚) generated in helium, which falls into the water window wavelength range. Setting 𝑙1 =
+200 𝜇𝑚 and 𝑝 = 100 𝑚𝑏𝑎𝑟 at the beginning of the optimization procedure, the obtained harmonic
+signal (Fig. 7) is further away from the absorption limited optimum, because of the very low XUV
+photoionization cross section of helium (L~0.16 Labs, assuming 200 periods). This is why this generation
+scheme can provide very high contrast of more than three orders of magnitude. The contrast of the
+optimized configuration is, indeed, mainly given by fulfillment of condition (5), as also seen in Eq. (B1),
+𝑙
+
+where the ratio 𝐿 1 is the only parameter defining the contrast of the harmonic assuming a large enough
+𝑎𝑏𝑠
+
+number of periods.
+
+Fig. 7 - Signal of H401 of 1600nm driver laser and neighboring harmonic orders as a
+function of number of target periods 𝑀 together with the contrast of H401. The parameters
+are following: l1=0.2 mm; l2=0.12 mm; p=100 mbar; =0.34%; and 𝜃 = 7.61 mrad (n=1).
+Contrast of H401 is plotted with gray dashed line (in logarithmic scale).
+Due to the large number of periods needed for monochromatizing such high harmonic order it is worth
+considering a configuration with higher-order phase mismatch, i.e. with n=2 or n=3. The evolution of
+the harmonic signal along the periodic target for three configurations with n=1, 2, and 3 together with
+the contrast of the H401 is shown in Fig. 8.
+
+Fig. 8 - Signal of various harmonics as function of number of periods for experimental
+configuration described in caption of Fig. 7 (a) and for the same configuration but with
+l2=0.24 mm (n=2) (b), and l2= 0.36 mm (n=3) (c). Contrast of H401 as function of number
+of periods for the three phase mismatch configurations (d).
+
+These results indicate that, in general, the harmonic orders close to integer multiples of q/n are
+enhanced, which can give rise to subharmonic frequencies of the desired harmonic in the case of n>1.
+This is understandable, as while the harmonic q gains phase mismatch 2n after one period, the
+harmonic q/n reaches the phase mismatch 2 or, more generally, harmonic mq/n gains phase mismatch
+2m where m is an integer. In fact, this might reduce the strict monochromaticity for higher order phasemismatches. In some cases, this monochromatization might be sufficient, if the subharmonic peaks are
+spectrally separated allowing for their removal by a single high-pass filter. Experimentally, this can be
+achieved, e.g., with a state-of-the-art multilayer mirror, as the enhanced harmonics are spectrally
+considerably separated (200 harmonic orders for n = 2 and > 130 orders for n = 3). Therefore, we
+believe the schemes with higher values of 𝑛 broaden our parameter palette as these configurations might
+be practical due to less stringent experimental requirements mainly a lower number of medium periods
+needed.
+6. DISCUSSION
+The examples presented in the manuscript demonstrate the ability to analytically find the optimal
+parameters in the binary medium given by (6) and (7). The same strategy holds for any periodic density
+profile of the medium that provides sufficient modulation to reach required phase differences (see
+Appendix A). For example, Fig. 9 shows the analogical design as presented in Fig. 4 by replacing the
+𝑧−𝑧
+
+2
+
+binary medium by 11 “Gaussian jets”, defined by 𝑝(𝑧) = 𝑝0 exp (− ( 𝑎 𝑖) ), where 𝑧𝑖 is the position
+of the jet and 𝑎 characterizes its width. The optimal values of the geometrical phase and jets’ spacing
+are found numerically to optimize the signal of H41 (see corresponding Jupyter notebook in [26] for
+details). It shows that the optimization works similarly as in the idealized case, the contrast remains
+similar and the signal decreases by only 13 % with respect to the analytical case with a binary medium.
+
+Fig. 9 - The signal of H41 and its contrast for the medium with “Gaussian jets” (the density
+profile is depicted below the plot) instead of binary profile of Fig. 4. The medium period
+is ~1.3 mm, 𝑎 ≈ 0.3 mm, and peak pressure 𝑝0 = 120 mbar (the amount of gas in each
+period is the same as in Fig. 4.), =0.7%. The optimized BG beam divergence is 𝜃opt. =
+9.20 mrad.
+
+Although in practice it might be difficult to set all the experimental parameters exactly, a similar design
+principle as described in Sec. 3 can be applied experimentally. This way, one optimizes the XUV signal
+with a single segment. Segment number and spacing are then to be tuned for the desired contrast.
+Ionization degree is, unlike the other experimental parameters, a dynamic variable that might change
+during the passage of the driving pulse and reduce the overall contrast of the required harmonic order.
+
+Pressure tuning cannot be used efficiently in this case as it is a static dispersion compensation method.
+Therefore, for the cases of rapid ionization of the generating medium, we propose to employ laser
+driving fields with BG beams and pulses with spatiotemporal coupling (STC) [26] that has decreasing
+divergence angle 𝜃 within the laser pulse to compensate for the generally increasing ionization degree
+of the medium. To give an example, we plot the contrast as a function of ionization degree and
+divergence angle of the BG beam in Fig. 10. In the cases of H41 generated by a 1030 nm laser driver
+in Ar and H401 generated by a 1600 nm laser in He, driving pulses with STC seem to be necessary to
+sustain monochromatic HHG. In contrast to that, the generation of H23 by an 800 nm laser in Ar shows
+much lower sensitivity to ionization degree and a sufficient level of contrast can be achieved even with
+standard pulses without STC. In general, the sensitivity of ionization degree decreases with decreasing
+wavelength of the laser driver and decreasing harmonic order, but also with the medium density
+[mathematically, this stems from the optimizing condition (A7) in Appendix A].
+
+Fig. 10 - Contrast as function of ionization degree and divergence angle of the BG beam for
+H41 generated in Ar with 1030 nm laser (a), H401 generated in He with 1600 nm laser (in log
+scale) (b), and H23 generated in Ar by 800 nm laser (c). The red crosses indicate the design
+values of the schemes.
+Moreover, it should be noted that monochromatic HHG with BG beams and pulses with STC would
+benefit from the possibility to adjust the group velocity in the focus [28], because the pulses in the BG
+𝑐
+beam without STC are superluminal as 𝑣𝑔 = cos 𝜃. The monochromatic HHG with BG beams and STC
+is, however, beyond the scope of this paper and it will be discussed in the following publication.
+
+Experimental limitations of the monochromatic HHG lie mainly in fitting the desired number of
+medium periods in the region, where geometrical phase together with sufficient laser intensity is
+available, or in technological limitation of preparing the density-modulated medium with high enough
+modulation on a short length scale. However, we believe the example designs presented here are feasible
+with current manufacturing and laser technologies.
+
+7. CONCLUSION
+In this article, we introduced a novel method for a direct generation of purely monochromatic harmonic
+radiation using Bessel-Gauss beams and periodically density-modulated medium. We apply this method
+to monochromatize HHG with significant absorption (the generation in Ar) or negligible absorption
+(the generation in He), which shows the universality of the method. We believe that our generation
+scheme outperforms the standard HHG systems with monochromators as well as other
+monochromatizing methods, and provides strong monochromatic radiation required in many user
+applications. Furthermore, we provide our simulations in the form of a Jupyter notebook written in
+Python [26], for the readers to test our conclusions or to design a configuration suitable for their own
+application.
+
+A. APPENDIX – ANALYTICAL COMPUTATION OF THE SIGNAL
+Here we present a simplified model of the harmonic generation by Bessel-Gauss beams (approximated
+by diffraction-free beams within our interaction region) in the discretized medium given by the
+rectangular profile of the pressure in the laser propagation direction z. This assumption permits us to
+find the analytic expressions of optimal parameters (6) and (7).
+First, we find the phase mismatch using the diffraction-free beams and dispersion relations. Second, we
+derive the analytic expression of the harmonic signal. At the end, we will show that the main feature –
+the selection mechanism of a given harmonic – holds also for an arbitrary medium profile.
+Let us introduce the geometry imprinted by the Bessel-Gauss beams. We consider the target composed
+from consecutive segments of the medium and vacuum of respective lengths 𝑙1 and 𝑙2 . Within our
+assumption, the phase-mismatch along the propagation axis z is retrieved from the diffraction-free beam
+profile 𝐸𝐼𝑅 (𝑧, 𝜌) = exp(𝐢𝛼𝑧) 𝐽0 (𝛽𝜌), [29] where 𝛼 and 𝛽 are linked with the dispersion relation by
+𝛼 2 + 𝛽2 = 𝑘 2,
+
+(𝐴1)
+
+where 𝑘 is the wave number. We find how the geometrical phase 𝛼 changes on the transition between
+the vacuum and the medium. Because of the continuity of the field on the interface, 𝛽 is equal on both
+sides and we have
+2 − 𝑘 2 + 𝛼 2,
+𝛼𝑚 = √𝑘𝑚
+𝑣
+𝑣
+
+(𝐴2)
+
+where the indices 𝑣 and 𝑚 denote vacuum and medium, respectively. We start our analytic
+considerations by the rectangular modulation of gas and vacuum segments, i.e., the gas density, 𝜎, is
+constant in the gas segments and zero in the vacuum segments.
+Now, we compute the harmonic signal from (3). First, we need to find the wave number mismatch
+Δ𝑘𝑥,𝑞 = 𝑘𝑥,𝑞 − 𝑞 𝛼𝑥 ,
+
+𝑥 ∈ {𝑚, 𝑣} .
+
+(𝐴3)
+
+Let us list the considered effects. In vacuum, the harmonics propagate as plane waves, 𝑘𝑣,𝑞 = 𝑞𝑘0 , and
+the fundamental beam is affected only by the geometrical phase, 𝛼𝑣 = 𝑘0 (1 − 𝜁) (see Eq. (2)). The
+situation is more complex in the medium. The harmonics are affected only by dispersion, 𝑘𝑚,𝑞 =
+𝑞𝑘0 √1 + 𝜎𝛼̃𝑞 , where 𝜎 is the density and 𝛼̃𝑞 the polarizability for the 𝑞th harmonic. The fundamental
+beam
+is
+affected
+by
+the
+dispersion
+and
+free
+electrons;
+it
+gives
+𝑘𝑚 =
+𝑞𝑘0 √1 + 𝜎(𝛼̃𝐼𝑅 − 𝜂𝑒 2 /(𝜖0 𝑚𝑒 𝜔12 )), the included quantities are described below (6). Considering the
+wave numbers, (A2), Taylorizing square roots, and neglecting 𝜁 2-terms, the wave number mismatches
+are
+𝜎
+𝜂𝑒 2
+Δ𝑘𝑚,𝑞 ≈ 𝑞𝑘0 ( (𝛼̃𝐼𝑅 − 𝛼̃𝑞 −
+) − 𝜁) ,
+2
+𝜖0 𝑚𝑒 𝜔12
+
+(𝐴4𝑎)
+
+Δ𝑘𝑣,𝑞 = −𝑞𝑘0 𝜁.
+
+(𝐴4𝑏)
+
+Using (A4a), we can find the signal at the end of the first gas segment
+𝑙1
+
+𝑆1 = ∫ 𝐴𝑞 𝑒 𝐢Δ𝑘𝑚,𝑞 𝑧 𝑑𝑧 =
+0
+
+𝐢𝐴𝑞 (e𝐢Δ𝑘𝑚,𝑞 𝑙1 − 1)
+,
+Δ𝑘𝑚,𝑞
+
+(𝐴5)
+
+with 𝐴𝑞 denoting the amplitude of the generated electric field of the qth harmonic. Because the
+dephasing is piecewise constant, its integration gives a continuous piecewise linear phase and the signal
+at the end of the 𝑀th gas segment is obtained as the signal from the first segment modulated by a
+geometrical sum:
+𝑀
+
+𝑆𝑀 = 𝑆1 ∑ e𝒊𝑚Δφ𝑞 = 𝑆1
+𝑚=0
+
+(e𝐢Δφ𝑞M − 1)
+(e𝐢Δφ𝑞 − 1)
+
+(𝐴6)
+
+,
+
+𝜎
+𝜂𝑒 2
+Δφ𝑞 = 𝑞𝑘0 𝑙1 ( (𝛼̃𝐼𝑅 − 𝛼̃𝑞 −
+) − 𝜁(1 + 𝜉)) ,
+2
+𝜖0 𝑚𝑒 𝜔12
+
+(𝐴7)
+
+𝑙
+
+where 𝜉 = 𝑙2 . Note that the stability and sensitivity of a scheme (discussed in Sections 4 and 6 and) are
+1
+
+inferred from (A7). The selection condition is Re(Δφ𝑞 ) = 2𝜋𝑛, where 𝑛 is an integer. Since this
+condition is achieved by the cancellations of different terms contained in (A7), the required relative
+precision imposed on the different quantities (𝜎, 𝜂, 𝜁, 𝜉) increases as they grow. In other words, the
+stability decreases if the aforementioned quantities increase.
+Now, we find the analytic form of the XUV intensity:
+𝑙
+2 − 1
+|𝑆1 |2 = 4|𝐴𝑞 | 𝑒 2𝐿𝑎𝑏𝑠
+
+𝑙
+𝑞𝑘 𝑙 σ
+sinh2 (4𝐿1 ) + sin2 ( 20 1 (2 (Δα̃ r − η𝒜) − ζ))
+𝑎𝑏𝑠
+
+𝑞2 𝑘20
+
+2
+σ
+1
+(2 (Δα̃ r − η𝒜) − ζ) + 2
+4𝐿𝑎𝑏𝑠
+
+,
+
+𝑀𝑞𝑘 𝑙 𝜎
+2 𝑀𝑙1
+) + sin2 ( 2 0 1 ( 2 (Δα̃ r − η𝒜) − ζ(1 + ξ)))
+(𝑀−1)𝑙1 sinh (4𝐿
+𝑎𝑏𝑠
+−
+|𝑆𝑀 |2 = |𝑆1 |2 𝑒 2𝐿𝑎𝑏𝑠
+.
+𝑙1
+𝑞𝑘0 𝑙1 𝜎
+2
+2
+sinh (4𝐿 ) + sin ( 2 ( 2 (Δα̃ r − η𝒜) − ζ(1 + ξ)))
+𝑎𝑏𝑠
+
+(𝐴8)
+
+(𝐴9)
+
+1
+
+where 𝐿abs = 2Im(k
+
+2
+
+, and 𝒜 = 𝜖 𝑚e 𝜔2. Note that the absorption comes only from the imaginary part
+
+𝑚,𝑞 )
+
+0
+
+𝑒
+
+1
+
+of 𝛼̃𝑞 . Using the power-reduction for sin, the signal within the single gas segment, |𝑆1 |2, given by (A8)
+𝜋
+
+can be recast into equation (1) from [23], where 𝐿coh = 𝑞𝑘 (σ(Δα̃ −η𝒜)−ζ) . Equations (A8) and (A9) directly
+|
+
+0 2
+
+r
+
+|
+
+2
+
+provide the optimizing conditions for a given harmonic 𝑞. The former equation gives (6) and the
+latter (7).
+Finally, we show that this reasoning can be generalized for an arbitrary gas profile. Let us assume that
+the support of an elementary medium is confined within the distance 𝑙1 and the gas segments are spaced
+by 𝑙2 . The signal at the end of the first gas segment is
+𝑙1
+
+𝑧
+
+′
+
+′
+
+𝑆1 = ∫ 𝐴𝑞 (𝑧) 𝑒 𝐢 ∫0 Δ𝑘𝑚(𝑧 )𝑑𝑧 𝑑𝑧.
+
+(𝐴10)
+
+0
+
+Next, we find the signal at the end of the second gas segment
+2𝑙1 +𝑙2
+
+𝑆2 = 𝑆1 + ∫
+
+𝑧
+
+′
+
+𝑙1
+
+′
+
+𝑧′ +𝑙1 +𝑙2
+
+𝐴𝑞 (𝑧)𝑒 𝐢 ∫0 Δ𝑘(𝑧 )𝑑𝑧 𝑑𝑧 = 𝑆1 + ∫ 𝐴𝑞 (𝑧 ′ + 𝑙1 + 𝑙2 )𝑒 𝐢 ∫0
+
+𝑙1 +𝑙2
+
+Δ𝑘(𝑧 ′′ )𝑑𝑧 ′′
+
+𝑑𝑧 ′
+
+0
+
+= 𝑆1 + 𝑒
+
+𝑙 +𝑙
+𝐢 ∫0 1 2 Δ𝑘(𝑧)𝑑𝑧
+
+𝑙1 +𝑙2
+
+= 𝑆1 + 𝑒 𝐢 ∫0
+
+Δ𝑘(𝑧)𝑑𝑧
+
+𝑙1
+
+𝑧+𝑙1 +𝑙2
+
+𝐢∫
+
+∫ 𝐴𝑞 (𝑧)𝑒 𝑙1+𝑙2
+0
+𝑙1
+
+Δ𝑘(𝑧 ′ )𝑑𝑧 ′
+
+𝑧
+
+′′
+
+𝑧
+
+′
+
+𝑑𝑧
+′′
+
+∫ 𝐴𝑞 (𝑧)𝑒 𝐢 ∫0 Δ𝑘(𝑧 +𝑙1 +𝑙2 )𝑑𝑧 𝑑𝑧
+0
+
+= 𝑆1 + 𝑒
+
+𝑙 +𝑙
+𝐢 ∫0 1 2 Δ𝑘(𝑧)𝑑𝑧
+
+𝑙1
+
+𝑙1 +𝑙2
+
+′
+
+∫ 𝐴𝑞 (𝑧)𝑒 𝐢 ∫0 Δ𝑘(𝑧 )𝑑𝑧 𝑑𝑧 = 𝑆1 (1 + 𝑒 𝐢 ∫0
+
+Δ𝑘(𝑧)𝑑𝑧
+
+) ; (𝐴11)
+
+0
+
+where we assume that both 𝐴𝑞 (𝑧) and Δ𝑘𝑚 (𝑧) depend on 𝑧 only through the density (this
+means 𝐴𝑞 (𝑧) = 𝐴𝑞 (𝜎(𝑧)) and Δ𝑘𝑚 (𝑧) = Δ𝑘𝑚 (σ(z))) meaning that they are (𝑙1 + 𝑙2 )-periodic, which
+justifies the equalities within (A11). The same reasoning can be inductively repeated for adding more
+gas segments. It thus leads to the same geometric sum as (A6). The only difference is that the
+phase Δφ𝑞 is not expressed analytically and is replaced by
+𝑙1 +𝑙2
+
+Δφ𝑞 = ∫
+0
+
+𝑙1
+
+Δ𝑘(𝑧) 𝑑𝑧 = ∫ Δ𝑘𝑚 (𝑧) 𝑑𝑧 − 𝑞𝑘0 𝑙2 𝜁 .
+
+(𝐴12)
+
+0
+
+The above derivation uses the assumption that the gas segments are separated by vacuum. However,
+the vacuum could be easily replaced by a residual nonzero gas density until the contribution to the XUV
+signal generated there, which is dephased from the effective gas segments, is small. In other words, the
+density modulation must be strong relative to the residual density.
+In conclusion, the main monochromatizing mechanism stays unaffected for a general gas profile with a
+sufficiently strong density modulation. The difference is that the optimizing parameters cannot be
+generally expressed analytically as for the discretized medium.
+
+B. APPENDIX – NUMBER OF PERIODS AND CONTRAST
+The contrast and its evolution with the number of gas segments is inferred from the analytic model (A9).
+(𝑞) 2
+
+We define the contrast of harmonics 𝑞 and 𝑞̃ after 𝑀 segments as 𝐶𝑞,𝑞̃,𝑀 =
+
+|𝑆𝑀 |
+
+(𝑞
+̃) 2
+
+. Let us assume that
+
+|𝑆𝑀 |
+
+the dispersion is the same for the harmonics 𝑞 and 𝑞̃. We start with the estimate of the number of periods
+
+while the absorption is negligible (𝐿𝑎𝑏𝑠 = +∞). The theoretical contrast in this case is extremely high
+𝑘 𝑙
+2
+
+𝜎
+2
+
+(see Fig. 7). The optimizing condition for the harmonic selection (7) leads to 0 1 ( (𝛼̃𝐼𝑅 − Re(𝛼̃𝑞 ) −
+𝜋𝑛
+
+𝜂𝒜) − 𝜁(1 + 𝜉)) → 𝑞 . If we insert this value into the signal (A9) for the 𝑞̃th harmonic, the numerator
+𝑀𝑞̃𝜋𝑛
+) . The first zero of this function (i.e. the value for which the signal of the 𝑞̃th harmonic
+𝑞
+𝑞
+𝑞
+vanishes) is reached at 𝑀 = |𝑛|Δ𝑞, where Δ𝑞 = |𝑞̃ − 𝑞|. Particularly, we find 𝑀 = 2 for neighboring
+
+gives sin2 (
+
+harmonics and 𝑛 = 1.
+If the absorption plays a significant role (as in cases studied in Figs. 4 and 5), Eq. (A9) allows us to
+evaluate the contrast as a function of the absorption length. The contrast is
+|𝑛|Δ𝑞
+𝑙
+𝑞̃
+𝑀𝑙1
+𝑙
+sinh2 ( 1 ) + sin2 ( 𝑛𝜋)
+sinh2 (
+)
+sinh2 ( 1 ) + sin2 (
+𝑛𝜋)
+𝑀→+∞
+4𝐿𝑎𝑏𝑠
+𝑞
+4𝐿𝑎𝑏𝑠
+4𝐿𝑎𝑏𝑠
+𝑞
+𝐶𝑞,𝑞̃,𝑀 = (
+)(
+)→
+. (𝐵1)
+𝑙
+𝑀𝑙1
+𝑞̃
+𝑙
+sinh2 ( 1 )
+sinh2 (
+) + sin2 (𝑀 𝑛𝜋)
+sinh2 ( 1 )
+4𝐿𝑎𝑏𝑠
+4𝐿𝑎𝑏𝑠
+𝑞
+4𝐿𝑎𝑏𝑠
+
+The limit 𝑀 → +∞ provides the asymptotic contrast, which gives a good estimate of the expected
+contrast even for lower number of periods (see the difference in the scale of the contrast in Figs. 4
+and 5). Since the optimal conditions are reached for all the arguments close to 0, the asymptotic contrast
+2
+𝑛Δ𝑞𝐿abs 2
+2 𝑛Δ𝑞𝐿abs
+)
+≈
+16𝜋
+(
+)
+. It shows that the contrast increases with the
+𝑞𝑙1
+𝑞𝑙1
+
+is 𝐶𝑞,𝑞̃,𝑀 ≈ 1 + 16𝜋 2 (
+
+ratio 𝐿abs /𝑙1 and with the order of phase-mismatch 𝑛. As this model is fully analytic, these particular
+cases may be efficiently studied with simple tools (see the attached notebooks [26]).
+
+C. APPENDIX – PHASE-MATCHING MODEL: THE DEPOPULATION OF
+NEUTRALS AND IONIC CONTRIBUTION TO POLARIZABILITY
+We have neglected the depopulation of neutrals due to ionization in our phase-matching model. In some
+models, such as in [30], the depopulation is taken into account, but the ions are not assumed to
+contribute to the polarizability. Here, we show that the difference is negligible for the small ionization
+degree assumed in our work. First, we show the difference between the two models. Then, we derive
+their error analytically while also considering the ionic contribution to the polarizability.
+Figure 11 shows the signals and contrast calculated with our model and the one including the
+depopulation of neutrals. The latter case is modeled by replacement of (𝛼̃𝐼𝑅 − 𝛼̃𝑞 ) by
+(𝛼̃𝐼𝑅 − 𝛼̃𝑞 )(1 − 𝜂) in Eq. (A4a). Indeed, the differences are small.
+
+Fig. 11 - Comparison of signal and contrast evolution of H41 of 1030 nm driver with BG beam with
+divergence of 𝜃 = 7.4 𝑚𝑟𝑎𝑑 in argon medium (𝑙1 = 𝑙2 = 1 𝑚𝑚, medium pressure 124 mbar, and 𝜂 =
+0.6%). Blue curves represent the situation without included depopulation of neutrals, as in the phase-
+
+matching model used throughout the manuscript, and green curves represent the model with included
+depopulation of neutrals.
+Now we further analytically estimate the difference with and without assuming the depletion of neutrals.
+In both cases, whether neutrals are reduced by (1 − 𝜂) or not, the models do not account for the
+dispersive properties of ions. Let us include them. Denoting Δ𝛼 = 𝛼𝐼𝑅 − 𝛼𝑞 the difference of
+polarizabilities of neutrals and Δ𝛼+ = 𝛼𝐼𝑅,+ − 𝛼𝑞,+ the difference of the polarizabilities of ions, we can
+write the wave number mismatch as
+𝜎
+Δ𝑘𝑞 = 𝑞𝑘0 [ (Δ𝛼(1 − 𝜂) + Δ𝛼+ 𝜂 − 𝒜 𝜂) − ζ]. (𝐶1)
+2
+First, we can find the optimal value of ionization degree providing a perfect phase-matching for plane
+waves (without considering geometrical effects, i.e. 𝜁 = 0) as defined in [31]. In the complete model it
+reads
+Δ𝛼
+1
+Δ𝛼
+Δ𝛼 − Δ𝛼+
+Δ𝛼 − Δ𝛼+ 2
+Δ𝛼 − Δ𝛼+ 3
+𝜂c =
+(
+)=
++(
+) −(
+) + ⋯ ) . (𝐶2)
+(1 −
+𝒜 1 + Δ𝛼 − Δ𝛼+
+𝒜
+𝒜
+𝒜
+𝒜
+𝒜
+The first correction, which gives the relative error, is of the order of
+
+Δ𝛼−Δ𝛼+
+, which is itself about a few
+𝒜
+
+percent because this value corresponds to the typical values of the optimal ionization for phasematching.
+Next, we use the same reasoning to express the contribution of the geometrical effect 𝜁 used in Eq. (6),
+the result is
+𝜁opt. =
+
+𝜎
+Δ𝛼 − Δα+
+)) . (𝐶3)
+(Δ𝛼 − 𝜂𝒜 (1 +
+2
+𝒜
+
+Again, the relative difference is of the order
+
+Δ𝛼−Δ𝛼+
+.
+𝒜
+
+The model from [30] still neglects the role of ions by setting Δ𝛼+ = 0. For example, the contribution
+of Δ𝛼+ is estimated to be more than the half of Δα for HHG in Ar driven by a 270 nm laser, which was
+obtained by ab initio calculations as shown in the supplement of [12]. This would indicate that the
+approach without using the correction for depopulation of neutrals might be even more accurate in these
+conditions. Moreover, to our best knowledge, the polarizability of ions has not been thoroughly
+tabulated and investigated in detail for a large range of wavelengths; furthermore, a precise treatment
+of the ultrafast phenomena may formally need a dynamical treatment [32]. However, as shown above,
+these differences are usually negligible in HHG-schemes, so even a simple phase-matching model
+considering only dispersion of neutrals and free electrons, which was used throughout this manuscript,
+provides sufficient accuracy.
+
+D. IONIZATION DEGREE OF THE MEDIUM
+The choice of the initial ionization degree 𝜂 is not treated in detail in our work. The reason is that 𝜂 is
+a free parameter in our general design. In real experimental conditions, the ionization depends mainly
+on the driving-pulse intensity. This would need to be considered in a concrete design implementing the
+scheme introduced in the paper. Here we show that our optimized monochromatizing scheme works
+well for a broad range of 𝜂 fulfilling 𝜂 < 𝜂𝑐 (𝜂𝑐 being the level satisfying the perfect phase-matching
+condition for plane waves introduced below Eq. (6), see [31] for more details).
+
+To illustrate the role of various values of ionization degree, we show analogies of Fig. 6 for 𝜂 = 0.5𝜂𝑐
+and 𝜂 = 0.75𝜂𝑐 in Figs. 12 and 13, respectively. For those examples, we have recalculated the optimal
+geometrical phase 𝜁 of the BG beam and 𝜉 (the ratio of lengths of the empty space and the segment
+with gas), while all the other parameters remained the same. Similarly to Fig. 6, the red crosses indicated
+the values obtained by the optimization algorithm.
+These results show that, upon optimization, there is no significant difference in both the harmonic signal
+and the contrast for the different values of 𝜂 (the color bar ranges of all the figures are very similar). It
+is apparent that for a given configuration the trade-off between signal and contrast does not depend on
+the ionization degree 𝜂.
+On the other side, the ionization degree clearly affects the optimized design, as we see the effect of
+different initial 𝜂 on the optimized parameters 𝜁 ≈
+
+𝜃2
+and 𝜉. According to Eq. (A4a), the main idea of
+2
+
+our optimized design is that the optimal phase matching within a single period is given by the sum of
+wave number contributions of the ionization through 𝜂 and the BG beam characterized by 𝜃. Therefore,
+higher values of 𝜂 lead to the decrement of 𝜃 as indicated by the red crosses in the figures.
+Consequently, 𝜉 is incremented to ensure the accumulation of the proper phase jump in the “empty”
+segment. Namely for the currently discussed case, 𝜉𝜂=0.25𝜂𝑐 ≈ 0.87 (the value used in the main
+manuscript), 𝜉𝜂=0.5𝜂𝑐 ≈ 1.3, and 𝜉𝜂=0.75𝜂𝑐 ≈ 2.6. All these values seem realistic for a potential
+experimental implementation.
+We note that the basic monochromatizing condition introduced in Sec. 2 works also for 𝜂 > 𝜂𝑐 .
+However, the generation within a single period of the medium cannot be phase-matched anymore. This
+is caused by the fact that the negative contribution to the wave number from the geometrical aspect of
+focusing cannot compensate for the negative contribution of the neutrals and plasma when the ionization
+degree overcomes the critical value. Mathematically, it would require 𝜁𝑜𝑝𝑡 < 0 in Eq. (6), which
+violates the geometrical constraints of BG beams.
+
+Fig. 12 - The analogy of Fig. 6 for 𝜂 = 0.5𝜂𝑐 , i.e. 𝜂 = 1.3%.
+
+Fig. 13 - The analogy of Fig. 6 for 𝜂 = 0.75𝜂𝑐 , i.e. 𝜂 = 2%.
+
+ACKNOWLEDGMENTS
+This work was supported by the project “Advanced research using high-intensity laser-produced
+photons and particles” (ADONIS) (CZ.02.1.01/0.0/0.0/16 019/0000789) from the European Regional
+Development Fund and the Ministry of Education, Youth and Sports.
+REFERENCES
+[1] Jiménez-Galán, Á., Dixit, G., Patchkovskii, S. et al. Attosecond recorder of the polarization
+state of light. Nat Commun 9, 850 (2018). https://doi.org/10.1038/s41467-018-03167-2
+[2] Truong, N.X., Safaei, R., Cardin, V. et al. Coherent Tabletop EUV Ptychography of
+Nanopatterns. Sci Rep 8, 16693 (2018). https://doi.org/10.1038/s41598-018-34257-2
+[3] Zhang B, Gardner DF, Seaberg MD, Shanblatt ER, Kapteyn HC, Murnane MM, Adams DE.
+High contrast 3D imaging of surfaces near the wavelength limit using tabletop EUV
+ptychography. Ultramicroscopy. 2015 Nov;158:98-104. doi: 10.1016/j.ultramic.2015.07.006.
+Epub 2015 Jul 22. PMID: 26233823.
+[4] Andreas H. Roos, Ziaul Hoque, Eva Klimešová, Ltaief Ben Ltaief, Cristian Medina, Lucie
+Jurkovičová, Martin Albrecht, Ondřej Finke, Ondřej Hort, Jaroslav Nejdl, Marcel
+Mudrich, Jakob Andreasson and Maria Krikunova, Electron correlation dynamics in atomic Kr
+excited by XUV pulses and controlled by NIR laser pulses of variable intensity, New J.
+Phys. 25 013038 (2023).
+[5] S. Espinoza, F. Samparisi, F. Frassetto, S. Richter, M. Rebarz, O. Finke, M. Albrecht, M.
+Jurkovic, O. Hort, N. Fabris, A. Zymaková, D. D. Mai, R. Antipenkov, J. Nejdl, L. Poletto, and
+J.Andreasson, “Characterization of the High Harmonics Source for the VUV Ellipsometer at
+ELI Beamlines,” Journal of Vacuum Science & Technology B 38, 024005 (2020).
+[6] O. Hort, M. Albrecht, V. E. Nefedova, O. Finke, D. D. Mai, S. Reyné, F. Giambruno, F.
+Frassetto, L. Poletto, J. Andreasson, J. Gautier, S. Sebban, and J. Nejdl, "High-flux source of
+coherent XUV pulses for user applications," Opt. Express 27, 8871-8883 (2019)
+[7] J. Ojeda, C. A. Arrell, J. Grilj, F. Frassetto, L. Mewes, H. Zhang, F. van Mourik, L. Poletto,
+and M. Chergui , "Harmonium: A pulse preserving source of monochromatic extreme
+ultraviolet (30–110 eV) radiation for ultrafast photoelectron spectroscopy of liquids", Structural
+Dynamics 3, 023602 (2016) https://doi.org/10.1063/1.4933008
+[8] Fabio Frassetto, Cephise Cacho, Chris A. Froud, I.C. Edmund Turcu, Paolo Villoresi, Will A.
+Bryan, Emma Springate, and Luca Poletto, "Single-grating monochromator for extremeultraviolet ultrashort pulses," Opt. Express 19, 19169-19181 (2011)
+[9] L. Poletto, P. Miotti, F. Frassetto, C. Spezzani, C. Grazioli, M. Coreno, B. Ressel, D. Gauthier,
+R. Ivanov, A. Ciavardini, M. de Simone, S. Stagira, and G. De Ninno, "Double-configuration
+grating monochromator for extreme-ultraviolet ultrafast pulses," Appl. Opt. 53, 5879-5888
+(2014)
+[10]
+
+Antoine Comby et al 2022 J. Opt. 24 084003
+
+[11]
+Wang, H., Xu, Y., Ulonska, S. et al. Bright high-repetition-rate source of narrowband
+extreme-ultraviolet harmonics beyond 22 eV. Nat Commun 6, 7459 (2015).
+[12]
+Dimitar Popmintchev et al. , Ultraviolet surprise: Efficient soft x-ray high-harmonic
+generation in multiply ionized plasmas. Science 350, 1225-1231(2015)
+
+[13]
+L. Jurkovičová, L. Ben Ltaief, A. Hult Roos, O. Hort, O. Finke, M. Albrecht, Z. Hoque,
+E. Klimešová, A. Sundaralingam, R. Antipenkov, et al. Bright continuously tunable vacuum
+ultraviolet source for ultrafast spectroscopy. Commun. Phys. 7, 26 (2024).
+[14]
+P. Wei, J. Miao, Z. Zeng, C. Li, X. Ge, R. Li, Z. Xu, “Selective enhancement of a single
+harmonic emission in a driving laser field with subcycle waveform control,” Phys. Rev. Lett.
+110, 233903 (2013)
+[15]
+M. Suzuki, M. Baba, R. Ganeev, H. Kuroda, and T. Ozaki, “Anomalous enhancement
+of a single high-order harmonic by using a laser-ablation tin plume at 47nm,” Opt. Lett. 31, 22,
+3306-3308 (2006)
+[16]
+A. Paul, R. A. Bartels, R. Tobey, H. Green, S. Weiman, I. P. Christov, M. M. Murnane,
+H. C. Kapteyn, and S. Backus, “Quasi-phase-matched generation of coherent extremeultraviolet light,” Nature 421 (6918), 51 (2003).
+[17]
+V. V. Strelkov and R. A. Ganeev, "Quasi-phase-matching of high-order harmonics in
+plasma plumes: theory and experiment," Opt. Express 25, 21068 (2017).
+[18]
+T. Auguste, B. Carré, and P. Salières, “Quasi-phase-matching of high-order harmonics
+using a modulated atomic density,”Phys. Rev. A 76, 011802, 2007
+[19]
+V. Tosa, V. S. Yakovlev and F. Krausz, “Generation of tunable isolated attosecond
+pulses in multi-jet systems,” New J. Phys. 10, 025016, 2008
+[20]
+Oto Brzobohatý, Tomáš Čižmár, and Pavel Zemánek, "High quality quasi-Bessel beam
+generated by round-tip axicon," Opt. Express 16, 12688-12700 (2008).
+[21]
+P. Corkum Plasma Perspective on Strong-Field Multiphoton Ionization. Phys. Rev.
+Lett. 71(13), 1994 (1993).
+[22]
+Ph. Balcou and Anne L’Huillier, Phase-matching effects in strong-field harmonic
+generation, Phys. Rev. A 47, 1447 (1993).
+[23]
+E. Constant, D. Garzella, P. Breger, E. Mével, Ch. Dorrer, C. Le Blanc, F. Salin, and
+P. Agostini Phys. Rev. Lett. 82, 1668 (1999).
+[24]
+B. Henke, E. Gullikson, and J. Davis, “X-ray interactions: Photoabsorption, scattering,
+transmission, and reflection at e = 50-30,000 ev, z = 1-92,” Atomic Data and Nuclear Data
+Tables, vol. 54, no. 2, pp. 181–342, 1993.
+[25]
+A. Dalgarno and A. E. Kingston, “The Refractive Indices and Verdet Constants of the
+Inert Gases,” Proceedings of the Royal Society of London Series A, vol. 259, pp. 424–431,
+Dec. 1960.
+[26]
+O. Finke & J. Vábek, Monochromatic HHG with BG beams, GitHub repository,
+https://github.com/ofinke/Monochromatic-HHG-with-BG-beams (2023).
+[27]
+Michaël Dallaire, Nathalie McCarthy, and Michel Piché, "Spatiotemporal bessel
+beams: theory and experiments," Opt. Express 17, 18148 (2009).
+[28]
+Sainte-Marie, A., Gobert, O. & Quéré, F. Controlling the velocity of ultrashort light
+pulses in vacuum through spatio-temporal couplings. Optica 4, 1298–1304 (2017).
+[29]
+J. Durnin, J. J. Miceli, Jr., and J. H. Eberly, Diffraction-free beams. Phys. Rev. Lett. 58
+(1987); J. Durnin, Exact solutions for nondiffracting beams. I. The scalar theory. Jou

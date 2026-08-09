@@ -1,0 +1,509 @@
+Phase-matching of high harmonic generation in twisted solids
+Chenjun Ma1#, Chen Huang1#, Yilong You1#, Huazhan Liu1, Zhitong Ding1, Mingchao Ding2,
+Jin Zhang3, Guixin Li4, Zhipei Sun5, Shiwei Wu6, Chaojie Ma1*, Enge Wang7,8*, Hao Hong1,9*
+and Kaihui Liu1,7*
+1
+
+State Key Lab for Mesoscopic Physics, Frontiers Science Centre for Nano-optoelectronics,
+School of Physics, Peking University, Beijing, China
+
+2
+
+Institute of Physics, Chinese Academy of Sciences, Beijing, China
+
+3
+
+National Center for Nanoscience and Technology, Chinese Academy of Sciences, Beijing,
+China
+
+4
+
+Department of Materials Science and Engineering, Southern University of Science and
+Technology, Shenzhen, China
+
+5
+
+QTF Centre of Excellence, Department of Electronics and Nanoengineering, Aalto University,
+Espoo, Finland
+
+6
+
+State Key Laboratory of Surface Physics and Department of Physics, Fudan University,
+Shanghai, China
+
+7
+
+International Centre for Quantum Materials, Collaborative Innovation Centre of Quantum
+Matter, Peking University, Beijing, China
+
+8
+
+Tsientang Institute for Advanced Study, Zhejiang, China
+
+9
+
+Interdisciplinary Institute of Light-Element Quantum Materials and Research Centre for
+Light-Element Advanced Materials, Peking University, Beijing, China
+
+#
+
+These authors contributed equally to this work
+
+* Correspondence: khliu@pku.edu.cn, haohong@pku.edu.cn, chaojiema@pku.edu.cn,
+egwang@pku.edu.cn
+
+1 / 15
+
+High harmonic generation (HHG) in solids could enable attosecond and ultraviolet light
+sources with high compactness, great controllability and rich functions. However, the
+HHG process is accompanied by a quite large wavevector mismatch that is
+uncompensated by any traditional phase-matching method, directly limiting its energy
+conversion efficiency. Here, we propose an effective strategy for phase-matching of HHG
+with arbitrary harmonic orders in solids. Two flakes of solids with an interlayer twist
+induce a nonlinear optical phase that depends on the crystal symmetry, twist angle and
+harmonic order, which can be accurately designed to compensate for the phase mismatch
+in HHG. Guided by the twist-phase-matching theory, we achieved a record-high
+conversion efficiency of ~1.5×10−5 for the fifth HHG in twisted hexagonal boron nitride
+crystals with a total thickness of only 1 µm. Our work establishes a foundation for
+developing ultrashort-wavelength and ultrafast-pulse laser sources in compact solid-state
+tabletop systems for fundamental and applied sciences.
+High harmonic generation (HHG) is a nonlinear optical process in which photons with
+frequencies that are integer multiples (typically ≥5) of the fundamental wave are emitted when
+an intense light pulse interacts with matter1, 2. The electric field of the light is sufficiently strong
+to rival the atomic binding field of electrons, thus driving electrons in the matter to undergo
+rapid acceleration and inducing coherent radiation of high-energy photons with well-defined
+timings, phases and wavelengths related to the fundamental wave. Initially, HHG was observed
+in plasma generated from aluminium targets3. Shortly thereafter, noble gases were identified as
+useful HHG sources that can operate in the nonperturbative region with high nonlinearity4-6.
+The highly nonlinear nature of HHG compresses electromagnetic pulses to the attosecond
+timescale and extends the photon energy into the soft X-ray regime, opening the door to
+attosecond science7-10 and strong-field optical physics11-14.
+Recent advancements in short-pulse, high-intensity, long-wavelength laser technologies—
+which are capable of generating strong electric fields while minimizing material damage—have
+enabled a shift in the research focus towards solid-state systems, such as wide bandgap
+semiconductors15-18, topological materials19, 20 and two-dimensional (2D) materials21-24.
+Compared with gas-state systems, solids exhibit unique characteristics, including densely
+
+2 / 15
+
+packed atomic structures, lattice periodicity and geometric symmetry. The high atomic density
+of solids (typically 3 to 6 orders of magnitude greater than that of gases) facilitates excitation
+of more electrons per unit volume and significantly enhances harmonic generation processes.
+The lattice periodicity in solids introduces continuous electronic band structures, enabling an
+additional HHG pathway through intraband currents alongside interband polarization25-27.
+Consequently, solid-state systems have the potential to produce ultrastrong HHG outputs.
+However, the energy conversion efficiency of HHG in solids remains considerably low (~10−8)
+compared to that in gas (~10−5), primarily due to the lack of an effective phase-matching
+strategy to coherently enhance the HHG.
+Phase-matching involves establishing a proper phase relationship between the fundamental
+and generated waves to maximize the optical parametric process efficiency1, 2. In gas-state
+systems, HHG phase-matching is achieved by engineering the gas pressure, species
+composition, spatial modes, and waveguide diameters to balance the wavevector mismatch
+arising from neutral dispersion, plasma dispersion, the Gouy phase, and the dipole phase28-32.
+In contrast, for free-space solid-state systems, phase-matching methods have been successfully
+demonstrated only for low-order (≤3) nonlinear processes. For HHG, birefringent-phasematching is impractical due to the inability of birefringent coefficients to compensate for the
+quite large wavevector mismatch. Theoretically, quasi-phase-matching could be applied to the
+generation of even-order high harmonics; however, the experimental results remain debatable,
+as direct HHG processes are often indistinguishable from cascaded processes33-35. A universal
+theoretical strategy and experimental demonstration of phase-matching for HHG in solids have
+yet to be realized.
+The inherent geometric symmetry of solids offers novel opportunities for addressing phase
+mismatch. An interlayer rotation in a 2D crystal has been reported to induce a phase shift in the
+second-order polarization, which can be applied for second harmonic generation (SHG) phasematching24, 36-39. However, the situation becomes quite complex for HHG, as the HHG
+susceptibility involves multiple components that complicate the relationship between the twist
+angle and polarization. Here, we demonstrate that the twist-induced phase can be simplified to
+a Pancharatnam-Berry (P-B) phase that can be designed for phase-matching in HHG with
+
+3 / 15
+
+arbitrary harmonic orders. Guided by the developed twist-phase-matching theory, we designed
+a solid HHG source using an assembly of hexagonal boron nitride (hBN) flakes and achieved a
+record-high fifth HHG efficiency of ~1.5×10−5 in a 1 µm thick crystal.
+We began by considering two ultrathin flakes assembled with an interfacial twist angle of
+𝜃𝜃 for HHG (Fig. 1a). The polarization states of the nth-order HHG signals from these two
+
+flakes are labelled as |𝑎𝑎⟩ and |𝑏𝑏⟩, corresponding to points A and B on the Poincaré sphere,
+
+respectively (Fig. 1b). |𝑎𝑎⟩ and |𝑏𝑏⟩ are linked by the twist operation 𝐉𝐉, and have a phase
+difference 𝜙𝜙 that can be depicted as40-42
+
+𝜙𝜙 = arg⟨𝑎𝑎|𝑏𝑏⟩ = arg ⟨𝑎𝑎|𝐉𝐉|𝑎𝑎⟩ = arg (det 𝐉𝐉)/2 + �ΩABQ − ΩBA(−Q) �/4,
+
+(1)
+
+where Q is a point on the Poincaré sphere that related to matrix 𝐉𝐉 and ΩABQ and ΩBA(−Q)
+
+are solid angles of the spherical triangles formed by ABQ and BA(−Q), respectively. In Eq. (1),
+the first term is a dynamic phase, and the second term is known as the P-B phase 𝜙𝜙𝑃𝑃𝑃𝑃 .
+
+Typically, the optical nonlinear susceptibility contains multiple tensor components that
+
+differ in crystals with different symmetries. For simplification, we consider only the pure
+circularly polarized components, and the HHG polarization can be expressed as 𝑃𝑃(𝑛𝑛𝑛𝑛) =
+(𝑛𝑛)
+
+𝜀𝜀0 𝜒𝜒1 𝐸𝐸𝜎𝜎 𝑛𝑛 (𝜎𝜎 = ±1 represents the circular polarization state). Thus, Q is fixed as [0, 0, 1],
+the dynamic phase becomes zero, and the P-B phase can be derived as
+�����⃗ ⋅ OA
+�����⃗,
+tan 𝜙𝜙𝑃𝑃𝑃𝑃 = tan(𝑛𝑛 ± 1) 𝜃𝜃 ⋅ OQ
+
+(2)
+
+where O is the centre point of the Poincaré sphere. Furthermore, if 𝐴𝐴 is circular polarization
+
+�����⃗ ⋅ �����⃗
+state and |OQ
+OA| = 1, Eq. 2 evolves into its most simplified form of 𝜙𝜙𝑃𝑃𝑃𝑃 = (𝑛𝑛 ± 1)𝜃𝜃. At
+
+this point, the original spherical quadrilateral degenerates into the region enclosed by two
+meridians on the Poincaré sphere (Fig. 1b).
+P-B phase 𝜙𝜙𝑃𝑃𝑃𝑃 is determined by not only the twist angle 𝜃𝜃 , but also the rotational
+
+symmetries of the used nonlinear optical material38. The conservation of spin angular
+
+momentum in nonlinear interaction states a selection rule that an m-fold rotationally symmetric
+material only allows harmonic orders of 𝑛𝑛 = 𝑙𝑙𝑙𝑙 ∓ 1 (l is an arbitrary integer, and the “−” and
+“+” signs correspond to HHG light with the opposite and same circular polarization state as the
+
+4 / 15
+
+fundamental wave, respectively). Therefore, 𝜙𝜙𝑃𝑃𝑃𝑃 = 𝑙𝑙𝑙𝑙𝑙𝑙 depends on the crystal rotational
+
+symmetry, twist angle and harmonic order.
+
+Experimentally, a crystalline 2D hBN multilayer was selected as the model platform for
+achieving the twist-phase-matching design of HHG because of its large optical nonlinearity,
+broad bandgap, excellent physicochemical stability and high laser damage threshold. The
+multilayers exhibit an antiparallel-stacking interlayer configuration and belong to the D6h space
+group (Fig. 2a). Under excitation at ~1750 nm, the HHG spectrum of a single hBN flake exhibits
+three peaks at 583 nm, 350 nm, and 250 nm, corresponding to odd-order harmonic waves of the
+third, fifth, and seventh harmonic generations, respectively (Fig. 2b). Notably, the intensity of
+the fifth HHG is significantly high, approaching ~1/30 of that of the third harmonic generation.
+Following careful calibration, the nonlinear susceptibility of hBN is estimated to be 𝜒𝜒 (5) ≈
+
+1 × 10−39 m4 /V 4 (two orders of magnitude greater than that of silica, Supplementary Fig. 1).
+(5)
+
+For a crystal with the D6h space group, there are two independent tensor components (𝜒𝜒1
+
+and
+
+(5)
+
+𝜒𝜒2 ) in the fifth-order nonlinear susceptibility, and the fifth harmonic nonlinear polarization
+
+can be written as
+
+�
+(5)
+
+where 𝜒𝜒1
+
+(5)
+
+(5)
+
+𝑃𝑃− (5𝜔𝜔) = 𝜀𝜀0 �𝜒𝜒1 𝐸𝐸+ 5 + 10𝜒𝜒2 𝐸𝐸+ 2 𝐸𝐸− 3 �
+(5)
+
+(3)
+
+(5)
+
+𝑃𝑃+ (5𝜔𝜔) = 𝜀𝜀0 �𝜒𝜒1 𝐸𝐸− 5 + 10𝜒𝜒2 𝐸𝐸+ 3 𝐸𝐸− 2 �,
+
+(5)
+
+responses for the pure circularly polarized light excitation, and 𝜒𝜒2
+
+responses for
+
+the elliptically polarized light excitation. For linearly polarized excitation with 𝐸𝐸− =
+1
+
+√2
+
+𝐸𝐸0 𝑒𝑒 −𝑖𝑖𝛼𝛼 and 𝐸𝐸+ =
+
+1
+
+√2
+
+𝐸𝐸0 𝑒𝑒 𝑖𝑖𝛼𝛼 , the fifth HHG output intensity can be written as
+
+𝐼𝐼(5𝜔𝜔) ∝ |𝑃𝑃(5𝜔𝜔)|2 = |𝑃𝑃− (5𝜔𝜔)|2 + |𝑃𝑃+ (5𝜔𝜔)|2
+
+𝐸𝐸010 2
+(5)
+(5)
+(5) (5)
+=
+𝜀𝜀0 �(𝜒𝜒1 )2 + 100(𝜒𝜒2 )2 + 20𝜒𝜒1 𝜒𝜒2 cos6𝛼𝛼�,
+16
+
+(4)
+
+where 𝛼𝛼 is the intersection angle between the fundamental wave polarization and the
+armchair direction of the hBN crystal (Fig. 2c). This equation very well describes the six-petal
+pattern observed in our polarization-dependent HHG experiment (Fig. 2d), which revealed that
+(5)
+
+(5)
+
+the ratio of these two tensor components is 𝜒𝜒1 /𝜒𝜒2 = 0.7.
+
+5 / 15
+
+In the following, we applied the P-B phase introduced at the twisted interface to design
+phase-matching in two hBN flakes. Given the sixfold rotational symmetry of the hBN
+multilayer, an interfacial rotation by an angle 𝜃𝜃 imparts a 6𝜃𝜃 P-B phase to the fifth HHG (Fig.
+3a). Consequently, the nonlinear polarization evolves as
+�
+
+(5)
+
+(5)
+
+𝑃𝑃′− (5𝜔𝜔) = 𝜀𝜀0 (𝜒𝜒1 𝐸𝐸+ 5 𝑒𝑒 −𝑖𝑖6𝜃𝜃 + 10𝜒𝜒2 𝐸𝐸+ 2 𝐸𝐸− 3 )
+(5)
+
+(5)
+
+𝑃𝑃′ + (5𝜔𝜔) = 𝜀𝜀0 (𝜒𝜒1 𝐸𝐸− 5 𝑒𝑒 𝑖𝑖6𝜃𝜃 + 10𝜒𝜒2 𝐸𝐸+ 3 𝐸𝐸− 2 ).
+
+(5)
+
+As the rotation operation and the twisted interface only introduce a phase shift in the fifth
+harmonic polarization without affecting the fundamental wave, a phase-matching condition can
+be achieved when 5𝑘𝑘𝜔𝜔 + 6𝜃𝜃/𝑡𝑡 = 𝑘𝑘5𝜔𝜔 (Fig. 3b), where 𝑡𝑡 is the thickness of a single hBN
+flake and 𝑘𝑘𝜔𝜔 and 𝑘𝑘5𝜔𝜔 are the wavevectors of the fundamental and fifth harmonic waves,
+
+respectively. Thus, 𝜃𝜃 scales linearly with 𝑡𝑡 in our twist-phase-matching theory (Fig. 3c). For
+𝜆𝜆(𝜔𝜔)
+
+a stacking thickness 𝑡𝑡 of the coherence length 𝑙𝑙𝑐𝑐 = 10|𝑛𝑛(𝜔𝜔)−𝑛𝑛(5𝜔𝜔)| (where 𝑛𝑛(𝜔𝜔) and 𝑛𝑛(5𝜔𝜔)
+
+are the refractive indices of the fundamental and fifth harmonic waves), 𝜃𝜃 approaches the
+largest absolute value of the twist angle in a C6 symmetry crystal of 30°.
+
+The physical picture of twist-phase-matching can be understood from the complex
+
+amplitude diagram depicted in Fig. 3d. The fifth harmonic electric field generated by each hBN
+flake contributes to an arc chord vector, whose magnitude is determined by the flake thickness.
+The sum of the vectors represents the overall HHG response of the twisted stacked crystal.
+Twist-phase-matching is a strategy that aligns these vectors in the same direction by introducing
+the P-B phase at the interface, thereby maximizing the HHG response. Experimentally, we
+assembled two hBN flakes, each with a thickness of 𝑙𝑙𝑐𝑐 ≈ 320 nm, at a twist angle of 0° or
+30°, respectively (Fig. 3e). As anticipated, the phase-matched crystal with a twist angle of 30°
+
+exhibits a fourfold enhancement in HHG compared with the monolayer, whereas the phasemismatched crystal with a twist angle of 0° demonstrates a suppressed response.
+
+The twist-phase-matching design promises a continuous enhancement of the parametric
+
+output with the number of stacked flakes (Fig. 4a). In the assembly, each flake had a thickness
+of 𝑙𝑙𝑐𝑐 /2 = 160 nm, and the twist angle between adjacent flakes was −15°, which satisfies the
+
+twist-phase-matching condition. Initially, we tested the excitation-ellipticity-dependent
+
+behaviour. As indicated by Eq. (3) for the 1-flake hBN, the output HHG intensity varies with
+6 / 15
+
+the incident light ellipticity and reaches its maximum under linear polarization with ellipticity
+(5)
+
+= 0 (Fig. 4b, orange curve). As the stacking number increases, the term 𝜒𝜒1 𝐸𝐸+ 5 𝑒𝑒 −𝑖𝑖6𝜃𝜃 in Eq.
+
+(5) experiences phase-matching, resulting in constructive HHG enhancement; whereas the other
+
+polarized components experience phase-mismatching with destructive HHG. Consequently, the
+ellipticity-dependent fifth HHG curves evolve correspondingly and present a peak at ellipticity
+= 1 with increasing stacking number, which can be reproduced very well by our simulation. The
+flake-number-dependent fifth HHG intensity under the twist-phase-matching condition of
+ellipticity = 1 is shown in Fig. 4c. A quadratic dependence on the flake number is observed,
+indicating a coherent enhancement of the fifth HHG response between flakes.
+The twist-phase-matching in HHG also exhibits an obvious wavelength-dependent
+behaviour. (Fig. 4d). The six-flake twisted stacked hBN crystal (𝑡𝑡 = 160 nm, 𝜃𝜃 = −15°) works
+at the fundamental excitation wavelength of 1340 nm, as designed. The crystal exhibits a large
+
+bandwidth of ~200 nm that is described well by our theoretical model. Finally, we estimated
+the output HHG efficiency of our twist-phase-matching designed hBN crystal, with a total
+thickness of 960 nm. The energy conversion efficiency scales quadratically with the excitation
+power intensity (Fig. 4e). It approaches ~0.0015% before laser-induced crystal damage,
+representing the highest value among the solid HHG sources ever reported.
+In summary, we developed a general phase-matching theory for HHG in twisted solids and
+achieved a record-high fifth HHG efficiency of ~1.5×10−5 in hBN crystals with a thickness of
+only 1 µm. With the advantage of an ultrathin thickness down to a few micrometres, this
+material is highly promising for minimizing pulse broadening down to the attosecond time scale.
+Our study provides a new platform for efficiently generating and engineering HHG light in
+solids, which should facilitate advances in all-solid compact lasers, on-chip integrated devices
+and quantum photonic technologies towards the extreme optics regime.
+
+7 / 15
+
+References
+1
+2
+3
+
+Shen, Y., The Principles of Nonlinear Optics (Wiley, 1984).
+Boyd, R. W., Nonlinear Optics (Academic, 2008).
+Burnett, N. H., Baldis, H. A., Richardson, M. C.,Enright, G. D. Harmonic generation in CO2 laser
+target interaction. Appl. Phys. Lett. 1977, 31, 172-174.
+4 Ferray, M., L'Huillier, A., Li, X. F. et al. Multiple-harmonic conversion of 1064 nm radiation in rare
+gases. J. Phys. B: At. Mol. Opt. Phys. 1988, 21, L31-L35.
+5 Corkum, P. B. Plasma perspective on strong field multiphoton ionization. Phys. Rev. Lett. 1993, 71,
+1994-1997.
+6 L’Huillier, A.,Balcou, P. High-order harmonic generation in rare gases with a 1-ps 1053-nm laser.
+Phys. Rev. Lett. 1993, 70, 774-777.
+7 Corkum, P. B.,Krausz, F. Attosecond science. Nat. Phys. 2007, 3, 381-387.
+8 Antoine, P., L'Huillier, A.,Lewenstein, M. Attosecond pulse trains using high–order harmonics. Phys.
+Rev. Lett. 1996, 77, 1234-1237.
+9 Hentschel, M., Kienberger, R., Spielmann, C. et al. Attosecond metrology. Nature 2001, 414, 509513.
+10 Itatani, J., Quéré, F., Yudin, G. L. et al. Attosecond streak camera. Phys. Rev. Lett. 2002, 88, 173903.
+11 Popmintchev, T., Chen, M.-C., Popmintchev, D. et al. Bright coherent ultrahigh harmonics in the
+kev X-ray regime from mid-infrared femtosecond lasers. Science 2012, 336, 1287-1291.
+12 Goulielmakis, E., Loh, Z.-H., Wirth, A. et al. Real-time observation of valence electron motion.
+Nature 2010, 466, 739-743.
+13 Schultze, M., Bothschafter, E. M., Sommer, A. et al. Controlling dielectrics with the electric field of
+light. Nature 2012, 493, 75-78.
+14 Sabbar, M., Timmers, H., Chen, Y.-J. et al. State-resolved attosecond reversible and irreversible
+dynamics in strong optical fields. Nat. Phys. 2017, 13, 472-478.
+15 Ghimire, S., DiChiara, A. D., Sistrunk, E. et al. Observation of high-order harmonic generation in a
+bulk crystal. Nat. Phys. 2010, 7, 138-141.
+16 Luu, T. T., Garg, M., Kruchinin, S. Y. et al. Extreme ultraviolet high-harmonic spectroscopy of solids.
+Nature 2015, 521, 498-502.
+17 Vampa, G., Hammond, T. J., Thiré, N. et al. Linking high harmonics from gases and solids. Nature
+2015, 522, 462-464.
+18 Ghimire, S.,Reis, D. A. High-harmonic generation from solids. Nat. Phys. 2018, 15, 10-16.
+19 Bai, Y., Fei, F., Wang, S. et al. High-harmonic generation from topological surface states. Nat. Phys.
+2020, 17, 311-315.
+20 Schmid, C. P., Weigl, L., Grössing, P. et al. Tunable non-integer high-harmonic generation in a
+topological insulator. Nature 2021, 593, 385-390.
+21 Liu, H., Li, Y., You, Y. S. et al. High-harmonic generation from an atomically thin semiconductor.
+Nat. Phys. 2016, 13, 262-265.
+22 Yoshikawa, N., Tamaya, T.,Tanaka, K. High-harmonic generation in graphene enhanced by
+elliptically polarized light excitation. Science 2017, 356, 736-738.
+23 Tancogne-Dejean, N.,Rubio, A. Atomic-like high-harmonic generation from two-dimensional
+materials. Sci. Adv. 2018, 4, eaao5207.
+24 Ma, C., Ma, C., Liu, C. et al. Strong chiroptical nonlinearity in coherently stacked boron nitride
+nanotubes. Nat. Nanotechnol. 2024, 19, 1299-1305.
+25 Vampa, G., McDonald, C. R., Orlando, G. et al. Theoretical analysis of high-harmonic generation
+8 / 15
+
+in solids. Phys. Rev. Lett. 2014, 113, 073901.
+26 Ghimire, S., DiChiara, A. D., Sistrunk, E. et al. Redshift in the optical absorption of ZnO single
+crystals in the presence of an intense midinfrared laser field. Phys. Rev. Lett. 2011, 107, 167407.
+27 Schubert, O., Hohenleutner, M., Langer, F. et al. Sub-cycle control of terahertz high-harmonic
+generation by dynamical bloch oscillations. Nat. Photon. 2014, 8, 119-123.
+28 Lange, H. R., Chiron, A., Ripoche, J. F. et al. High-order harmonic generation and quasiphase
+matching in xenon using self-guided femtosecond pulses. Phys. Rev. Lett. 1998, 81, 1611-1613.
+29 Rundquist, A., Durfee, C. G., Chang, Z. et al. Phase-matched generation of coherent soft X-rays.
+Science 1998, 280, 1412-1415.
+30 Tamaki, Y., Itatani, J., Nagata, Y. et al. Highly efficient, phase-matched high-harmonic generation
+by a self-guided laser beam. Phys. Rev. Lett. 1999, 82, 1422-1425.
+31 Durfee, C. G., Rundquist, A. R., Backus, S. et al. Phase matching of high-order harmonics in hollow
+waveguides. Phys. Rev. Lett. 1999, 83, 2187-2190.
+32 Paul, A., Bartels, R. A., Tobey, R. et al. Quasi-phase-matched generation of coherent extremeultraviolet light. Nature 2003, 421, 51-54.
+33 Chen, B.-Q., Zhang, C., Hu, C.-Y. et al. High-efficiency broadband high-harmonic generation from
+a single quasi-phase-matching nonlinear crystal. Phys. Rev. Lett. 2015, 115, 083902.
+34 Hickstein, D. D., Carlson, D. R., Kowligy, A. et al. High-harmonic generation in periodically poled
+waveguides. Optica 2017, 4, 1538-1544.
+35 Rutledge, J., Catanese, A., Hickstein, D. D. et al. Broadband ultraviolet-visible frequency combs
+from cascaded high-harmonic generation in quasi-phase-matched waveguides. J. Opt. Soc. Am. B
+2021, 38, 2252-2260.
+36 Hong, H., Huang, C., Ma, C. et al. Twist phase matching in two-dimensional materials. Phys. Rev.
+Lett. 2023, 131, 233801.
+37 Li, G., Chen, S., Pholchai, N. et al. Continuous control of the nonlinearity phase for harmonic
+generations. Nat. Mater. 2015, 14, 607-612.
+38 Li, G., Zhang, S.,Zentgraf, T. Nonlinear photonic metasurfaces. Nat. Rev. Mater. 2017, 2, 17010.
+39 Tymchenko, M., Gomez-Diaz, J. S., Lee, J. et al. Gradient nonlinear Pancharatnam-Berry
+metasurfaces. Phys. Rev. Lett. 2015, 115, 207403.
+40 Pancharatnam, S. Generalized theory of interference, and its applications. Proc. Indian Acad. Sci.
+1956, 44, 247-262.
+41 Berry, M. V. The adiabatic phase and Pancharatnam's phase for polarized light. J. Mod. Opt. 1987,
+34, 1401-1407.
+42 Gutiérrez-Vega, J. C. Pancharatnam-Berry phase of optical systems. Opt. Lett. 2011, 36, 1143-1145.
+
+9 / 15
+
+Acknowledgements: This work is supported by the National Key R&D Program of China
+(2022YFA1403500 and 2021YFA1400201), National Natural Science Foundation of China
+(52025023, 12374167 and 12422406), and the New Cornerstone Science Foundation through
+the XPLORER PRIZE.
+Competing interests: The authors declare no competing interests.
+
+10 / 15
+
+Methods:
+Sample preparation for twisted hBN flakes. The hBN flakes were mechanically exfoliated
+from a commercial bulk hBN crystal. The large flakes (lateral size >100 µm) with specific
+thicknesses were selected to fabricate the twisted hBN crystal.. The twisted hBN flakes were
+fabricated using a precisely controlled dry-transfer technique, with a polypropylene carbonate
+(PPC) film placed on a polydimethylsiloxane (PDMS) stamp. One hBN flake was picked up
+and transferred onto another, with the rotation angle carefully controlled using a commercial
+two-dimensional-material rotary transfer stage (JOOIN Technology, 2DT-7-300). The
+hBN/PPC film was then detached from the stamp by heating to 130 °C. To remove any PPC
+residue and ensure a better interlayer fit, the twisted hBN flakes were annealed at 500 °C for 8
+hours under low-pressure condition (<200 Pa), with Ar (500 sccm) and H2 (50 sccm) gas flow.
+Sample characterization. Optical images of hBN flakes were taken with an Olympus BX51M
+microscope. Atomic force microscopic (AFM) mappings were obtained by an Oxford Asylum
+Research Cypher S system at ambient atmosphere (Supplementary Fig. 3).
+
+11 / 15
+
+Figures and captions:
+
+Fig. 1︱Twist induced Pancharatnam-Berry phase at the interface of two ultrathin solids.
+a, Schematic of nth-order HHG from two ultrathin solids assembled with an interfacial twist
+angle of 𝜃𝜃. b, Illustration of the induced P-B phase on the Poincaré sphere. Points A and B on
+
+the Poincaré sphere demonstrate the polarization of HHG light from flakes A and B, respectively.
+The point Q is related to the twist operation, and −Q is the centrosymmetric point of Q. The
+phase difference between A and B can be described by the solid angle difference between ABQ
+and AB(−Q). If circularly polarized laser excitation is considered, points Q, A and B approach
+the poles, and the P-B phase can be simplified to be 𝜙𝜙𝑃𝑃𝑃𝑃 = (𝑛𝑛 ± 1)𝜃𝜃.
+
+12 / 15
+
+Fig. 2︱HHG responses of an hBN flake. a, Schematic of the stacking configuration of hBN.
+b, HHG spectrum of the hBN flake. Under linearly polarized excitation light with a wavelength
+of 1750 nm and a peak intensity of ~3 TW/cm2, the hBN flake exhibits third, fifth and seventh
+harmonic responses. c, Illustration of the laser polarization orientation relative to the hBN
+crystalline lattice direction. Here, the laser polarization is rotated 𝛼𝛼 with respect to the fixed
+the armchair direction of the hBN crystal. d, Polarization-dependent HHG spectrum. A six-petal
+pattern is observed from our measured data (dots) and fitting result (solid curve).
+
+13 / 15
+
+Fig. 3︱HHG responses of two twisted hBN flakes. a, Schematic of twisted hBN flakes. A
+twist angle of 𝜃𝜃 introduces a 6𝜃𝜃 P-B phase into the fifth HHG response. b, Illustration of
+
+twist-phase-matching during the propagation of a fundamental excitation wave and the
+generation of a fifth harmonic wave in a twisted hBN crystal. The P-B phase can be utilized to
+compensate for the phase mismatch. c, Twist-phase-matching condition of 𝑡𝑡 and 𝜃𝜃 . d,
+
+Complex amplitude diagram illustrating the superposition of the fifth harmonic electric fields
+for twisted hBN flakes. e, Fifth HHG spectra of hBN flakes. Under 1340 nm pulsed laser
+excitation, the HHG signal of the assembled phase-matched hBN flakes with a twist angle of
+30° is four times stronger than that of a single hBN flake, whereas the phase-mismatched hBN
+flakes with a twist angle of 0° exhibit a suppressed response.
+
+14 / 15
+
+Fig. 4︱HHG responses of multiple hBN flakes with a twist-phase-matching design. a,
+Schematic of the experimental setup, showing the placement of optical components. 𝜆𝜆/2
+
+(𝜆𝜆/4 ), half-wave plate (quarter-wave plate). b, Theoretical (solid curves) and experimental
+(dots) results of the fifth HHG intensity from hBN flakes as a function of the excitation
+ellipticity and flake number. c, Flake number-dependent HHG intensity under ellipticity = 1. A
+quadratic dependence of the output HHG signals on the number of flakes is observed, indicating
+that the phase-matching condition is well satisfied. d, Excitation wavelength-dependent HHG
+intensity. The assembled six-flake hBN crystal has a phase-matching wavelength of 1340 nm
+and a bandwidth of ~200 nm. e, Pump-peak-intensity-dependent HHG conversion efficiency.
+The measured efficiency yield with a power law of 4 indicates a perturbative response under
+our experimental conditions. The maximum efficiency can reach 0.0015%.
+
+15 / 15
+
+

@@ -1,0 +1,491 @@
+Lightwave-controlled relativistic plasma mirrors
+Marie Ouill´ e1,2,3, Jaismeen Kaur 1,3,∗ Zhao Cheng 1, Stefan Haessler 1,† and Rodrigo Lopez-Martens 1‡
+1Laboratoire d’Optique Appliqu´ ee, Institut Polytechnique de Paris,
+ENSTA-Paris, Ecole Polytechnique, CNRS, 91120 Palaiseau, France,
+2Ardop Engineering, 6 All. Annie Fratellini, 33140 Villenave-d’Ornon, France and
+3These authors contributed equally to this work.
+(Dated: August 27, 2024)
+We report on attosecond-scale control of high-harmonic and fast electron emission from plasma
+mirrors driven by relativistic-intensity near-single-cycle lightwaves at kHz repetition rate. By con-
+trolling the waveform of the intense light transient, we reproducibly form a sub-cycle temporal
+intensity gate at the plasma mirror surface, leading to the observation of extreme ultraviolet spec-
+tral continua, characteristic of isolated attosecond pulse generation. We also observe the correlated
+emission of a waveform-dependent relativistic electron beam, paving the way from towards fully
+lightwave-controlled dynamics of relativistic plasma mirrors.
+The generation of attosecond light pulses has enabled
+the real-time observation of the fastest electronic pro-
+cesses in matter. Although new generation schemes have
+emerged [1, 2], the currently preferred route to pro-
+duce attosecond pulses remains High-Harmonic Gener-
+ation (HHG) from the gas phase [3, 4]. The mechanism
+is now well understood, the technology is mature (as indi-
+cated by the emergence of turn-key, tabletop HHG beam-
+lines), and it has been successfully used in several pi-
+oneering applications unveiling previously unobservable
+attosecond-scale dynamics [5]. However, it is intrinsically
+limited to low intensity ( ∼ 1015 W/cm2) driving pulses
+and the maximum laser-to-XUV conversion efficiency is
+currently <∼ 10−4 [3, 4]. To circumvent those limita-
+tions, HHG from relativistic plasma mirrors has long
+been recognized as a promising route [6] owing to the pre-
+dicted percent-level conversion efficiencies [7] (although
+the measured efficiencies are ∼ 10−4 so far [8, 9]), their
+compatibility with relativistic-intensity ( > 1018 W/cm2)
+driving lasers, as well as the production of chirp-free at-
+tosecond pulses [10] with high spatial coherence [11, 12].
+The nonlinear interaction leading to the emission of
+XUV light being repeated once (in the case of surface
+harmonics) or twice (in the case of gas harmonics) per
+optical cycle, trains of attosecond pulses spaced by one
+or half a laser period, respectively, are usually gener-
+ated. To gate the process and generate isolated attosec-
+ond pulses (IAP), different techniques based on largely
+available multi-cycle drivers have been explored, such as
+polarization gating [13, 14], wavefront rotation [15, 16]
+and two-color gating [17–19]. However, these methods
+are costly in terms of achievable focused laser intensity,
+and it is much more efficient to gate the process using
+single-cycle duration laser pulses with controlled carrier-
+envelope phase (CEP). Routinely used for IAP genera-
+tion from the gas phase [20] for well over a decade now,
+this gating technique has thus far only been applied to
+∗ jaismeen.kaur@ensta-paris.fr
+† stefan.haessler@cnrs.fr
+‡ rodrigo.lopez-martens@ensta-paris.fr
+relativistic plasma mirrors through the binning and post-
+processing of data generated with randomly fluctuating
+laser waveforms [9, 21, 22].
+HHG from plasma mirrors is also known to be accom-
+panied by the emission of electrons [23, 24], injected at
+specific phases in the reflected laser pulse [25], in the
+form of attosecond bunches [26]. Typically, in the case
+of multi-cycle driving pulses, depending on their initial
+energy and time of injection during the pulse, these elec-
+trons can either be isotropically scattered due to the
+laser ponderomotive potential, leading to the observa-
+tion of a doughnut-shaped electron distribution centered
+about the specular direction far away from the inter-
+action point, or undergo direct vacuum laser accelera-
+tion (VLA) and further gain kinetic energy before being
+ejected along the polarization plane, leading to the ob-
+servation of an electron density peak slightly offset from
+the specular direction [27].
+In this letter, we present experimental results ob-
+tained on the correlated high-harmonic and electron
+emission from relativistic plasma mirrors driven by CEP-
+controlled sub-1.5-cycle laser pulses: for the first time,
+via CEP gating, we are able to reproducibly generate
+XUV continua and control relativistic electron beaming
+with attosecond precision, thereby paving the way to-
+wards the reliable generation of synchronized isolated
+attosecond light and electron bunches from relativistic
+lightwave-driven plasma mirrors.
+Experiments were conducted using the Salle Noire
+laser driver [28], developed in-house at LOA , which rou-
+tinely delivers multi-mJ energy sub-4 fs pulses (FWHM)
+at a central wavelength λ0 ≈ 780 nm, corresponding to
+less than 1.5 optical cycles, with a temporal contrast ra-
+tio > 1010 up to 15 ps and better than 10 7 up to 3 ps
+before the pulse peak. A shot-to-shot CEP stability of
+≈ 380 mrad rms can be maintained for ∼ hour durations
+[29]. The CEP is measured and locked relative to an
+unknown offset value at the 1-kHz laser repetition rate
+by a Fringeezz device with feedback to a Dazzler (both
+Fastlite). It can be varied while keeping all other laser
+parameters identical.
+The experimental setup [30] is shown in fig. 1. The
+arXiv:2406.06396v3  [physics.plasm-ph]  26 Aug 2024
+2
+FIG. 1. Schematic drawing of the experimental setup. In-
+sert (a) shows the experimentally measured focused beam
+profiles on target for both the Prepulse (gray-color scale) and
+Main-pulse (multi-color scale). Insert (b) shows a typical
+angle-resolved XUV spectrogram (top: vertically integrated
+spectrum). Insert (c) shows a typical electron angular charge
+distribution recorded with the wide-angle Lanex screen. The
+dashed-black line indicates the specular direction.
+laser pulses are made to interact with plasma mirrors
+generated at the surface of rotating solid fused silica tar-
+gets [31]. We use a time-delayed Prepulse, obtained by
+picking-off a small fraction ( ≈ 4 % of the energy) of the
+Main-pulse, in order to initiate and control plasma ex-
+pansion at the target surface. Both p-polarized pulses are
+tightly focused on target at an incidence angle of 55◦ by a
+f/1.3, 30◦ off-axis parabola. As shown in the fig. 1(a), the
+Prepulse and Main-pulse are focused down to ≈ 10 µm
+and ≈ 1.5 × 1.7 µm FWHM spot size, respectively. Con-
+sidering the Main-pulse energy on target to be approxi-
+mately 2.5 mJ and assuming there are no spatio-temporal
+couplings, this corresponds to a relativistic peak intensity
+of Ipeak = 1.8 × 1019 W/cm2 i.e. a normalized vector po-
+tential a0 = λ0[µm]
+p
+Ipeak[W cm−2]/1.37 × 1018 ≈ 2.8.
+The spatio-spectral XUV content of the reflected beam
+(photon energies ranging from 10 eV to 40 eV) is mea-
+sured in the specular direction ( ϕaz = 55 ◦ with respect
+to the target-normal) with a flat-field concave XUV grat-
+ing and an MCP-phosphor screen assembly imaged on a
+CCD camera (fig. 1(b)). A scintillating screen (Lanex)
+covered with a 13- µm aluminum foil and imaged onto
+another CCD camera allows simultaneous detection of
+electrons with kinetic energy > 150 keV in the range,
+30◦ < ϕaz < 48◦ with respect to the target normal. A
+0.5-mm pinhole and a pair of permanent magnets can be
+inserted in front of the Lanex screen in order to measure
+the energy spectra of electrons emitted at ϕaz ≈ 38◦ and
+θpol ≈ 0◦, which allows simultaneous XUV detection.
+Alternatively, a larger Lanex screen can be inserted to
+image the full electron angular charge distribution cov-
+ering 18 ◦ < ϕaz < 72◦ with respect to the target nor-
+mal (fig. 1(c)), which now blocks XUV detection and
+prevents any direct correlation measurement with XUV
+FIG. 2. Vertically-integrated HHG spectra as a function of
+relative CEP for Prepulse lead times of: -1 ps (a), 1 ps (b), and
+2 ps (c). Above each frame are two line-out spectra measured
+for opposite laser waveforms (π CEP offset). Each acquisition
+averaged over 100 consecutive laser shots (100 ms). To the
+right of each frame, we show the temporal auto-correlation
+of the HHG emission in the shown spectral range. The white
+dashed line marks the position of the satellite peak near 1 laser
+period where such a peak could be determined. The scans
+were made in succession while the CEP-locking loop remained
+active. Equal relative CEPs thus correspond to the same
+driving waveforms in each panel.
+generation. Nevertheless, different experimental reports
+confirm that electron emission and HHG are correlated
+in the relativistic regime [23, 24, 30]. No electron spectra
+could be recorded in this configuration due to the size of
+the Lanex assembly.
+In order to estimate the surface plasma gradient scale
+length Lg = L0 +csτ , where L0 ≈ 0.01λ0 is the estimated
+contribution of the Main-pulse finite temporal contrast,
+and τ the delay between the Prepulse and the Main-
+pulse, we experimentally measured the plasma expansion
+speed cs using spatial domain interferometry [30, 32] and
+found cs = 22 nm/ps. In fig. 2, we show the vertically-
+integrated XUV spectra recorded as a function of rela-
+tive CEP for three different values of τ : -1 ps, 1 ps, and
+2 ps, corresponding to respectively Lg ≈ L0, 0.04λ0 and
+3
+FIG. 3. Simultaneous acquisition of XUV spectra (top panel), electron beam profiles (middle panel), and electron spectra
+(bottom panel) for different relative CEP values. Each acquisition averaged over 100 consecutive laser shots (100 ms). The
+red dot in the middle panel indicates the point of measurement of the electron spectrum. The dashed boxes indicate the
+two opposite waveforms in the electron push-pull scenario: at the top, the angle-integrated HHG spectrum is shown for the
+two opposite driving waveforms and corresponding push-pull scenarios at absolute CEP values, ψCEP = π/2 and 3 π/2. The
+formation of an XUV continuum can clearly be resolved in the case of a single push-pull sequence for a given relative CEP
+(step size < 0.5 rad).
+0.07λ0. We observe clear CEP and Lg-dependent spec-
+tral structures of the harmonics. Assuming a nearly flat
+spectral phase [10], these can be linked to the periodicity
+of the corresponding attosecond temporal profiles, ap-
+parent in the temporal auto-correlations obtained as the
+modulus of the Fourier transform of each HHG spectrum
+in the shown spectral range and also shown in fig. 2. For
+Lg ≈ L0 (fig. 2a), the slower spectral modulation on top
+of the harmonic orders probably results from the pres-
+ence of both coherent wake emission [33] and relativistic
+HHG. Their different emission times [10] then create 2 at-
+tosecond pulses per ≈ 2.5-fs laser period, which appears
+as an additional peak near 1.3 fs in the auto-correlations.
+As the plasma gradient softens to Lg ≈ 0.04λ0 (fig. 2b),
+relativistic HHG becomes dominant, and only the satel-
+lite peak near the ≈ 2.5-fs laser period remains in the
+auto-correlation. Its CEP-dependent shift over ≈ 0.3 fs
+likely results from a CEP-dependent plasma denting evo-
+lution over the pulse duration [9]. Finally, in panel (c),
+there is interestingly no clear temporal shift of the satel-
+lite peak (i.e., the harmonic modulation period is nearly
+constant).
+Finally, we find that a 2-ps prepulse delay ( Lg ≈
+0.07λ0, Fig. 2c) maximizes the spectral extent (for τ >
+3 ps, both harmonic yield and spectral extent drop),
+which is close to the optimal gradient of Lg ≈ 0.1λ0
+typically observed for relativistic HHG [24, 34]. Only for
+this optimum gradient do we observe clear XUV spectral
+continua for a given relative CEP (0 rad in Fig.2c), char-
+acteristic of IAP generation. Clearly modulated spectra
+are observed when the relative CEP is offset by π. Inter-
+estingly, the corresponding ≈ 2.5-fs satellite peak in the
+temporal auto-correlations shifts by no more than≈ 0.1fs
+before falling below the noise level.
+We repeated these measurements at the optimal den-
+sity gradient (Lg ≈ 0.07λ0), but this time simultaneously
+recording both the XUV spectrum and the electron an-
+gular charge distribution as a function of relative CEP
+(fig. 3). The locked CEP was varied randomly to elim-
+inate any systematic experimental bias. Here again, an
+XUV spectral continuum is clearly produced for a cer-
+tain relative CEP value (0 rad), whereas the most mod-
+ulated spectrum appears upon adding a ≈ π phase offset
+(−3 rad). This π periodicity is reminiscent of our pre-
+vious observations via CEP-tagging and is very well re-
+produced by numerical simulations predicting compres-
+sion of the lightwave into a sub-0.4 fs IAP, potentially
+containing a third of the incident pulse energy [22], with-
+4
+FIG. 4. Angular electron charge distribution for the locked
+CEP values indicated in the panels, measured at τ = 2 ps
+Prepulse lead time. Each image averaged over 100 consecutive
+laser shots (100 ms). Red ticks indicate the specular direction.
+out any spectral filtering required. Physically, this CEP-
+dependence can be understood through a three-step pro-
+cess [22, 25]: (1) push, (2) pull, and (3) emission of XUV
+light, which occurs only once in the optimal-gating-case
+of ψCEP = 3 π/2 and twice in the case of ψCEP = π/2
+(see fig.3). We also clearly observe, for the first time, a
+closely correlated waveform-dependence of the electron
+emission: the highest electron charge is obtained in cor-
+relation with the XUV continuum in which case a clear
+charge density peak appears close to the specular direc-
+tion, while the lowest charge is produced by the opposite
+laser waveform (π CEP offset), in which case no density
+peak is observed.
+Measuring the electron energy spectrum (point of mea-
+surement indicated by the red dot in the middle panel of
+fig. 3) confirms the clear influence of the CEP on the
+electron acceleration mechanism. The dashed boxes in
+fig. 3 highlight the acquired electron spectra under sim-
+ilar conditions for the two opposite laser waveforms: In
+the right box, for a given relative CEP (0 rad), we are
+in the scenario in which the push-pull mechanism only
+occurs once, as indicated by the production of an XUV
+continuum. Interestingly, this corresponds to the pro-
+duction of an electron energy spectrum with a single
+broad peak at ≈ 1 MeV. As the CEP is shifted by π
+(left box, CEP= −3 rad), a more modulated electron
+spectrum is observed, with the appearance of a shoulder
+at lower energies. These features could be the indication
+of the phase-locked injection and subsequent VLA of ei-
+ther one (in the optimal-gating case of ψCEP = 3π/2) or
+two (in the case of ψCEP = π/2) attosecond relativistic
+electron bunches. In the latter case, one bunch undergoes
+less efficient VLA than the other. These preliminary re-
+sults should be confirmed in a more detailed experimen-
+tal study. Unfortunately, our setup only allowed us to
+measure the spectrum at the electron beam periphery,
+indicated by the red dot in the middle panel in Fig. 3.
+We expect higher energies in the beam center, in par-
+ticular in the optimal-gating scenario (right box). Our
+observation is nonetheless the first experimental evidence
+of CEP-controlled emission of relativistic electrons from
+plasma mirrors.
+Fig. 4 shows the full electron beam measured under
+similar conditions with the wide-angle Lanex screen, as
+the relative CEP is cycled through 2 π. The electron an-
+gular charge distribution exhibits the same CEP depen-
+dence as in the previous measurements (middle panel in
+fig. 3), with maximum charge peak appearing at a relative
+CEP of 0 rad and a minimally charged beam (approxi-
+mately half the total integrated charge) when the CEP
+is shifted by π. Although the distribution and direction
+of the electron beam only subtly changes, for a relative
+CEP of 0 rad, the less divergent “VLA beam”, centered
+on ϕaz ≈ 50◦, is most dominant over the more divergent
+contribution centered near the specular direction. This
+dominance gradually fades with CEP until for a relative
+CEP of 3 rad, a small sign of ponderomotive blowout
+appears around the specular direction. This would indi-
+cate that when ψCEP = π/2, one of the electron bunches
+is not injected with the adequate phase-energy combina-
+tion for efficient VLA, leading to a lower final energy and
+some ponderomotive scattering. We plan to measure the
+spatially-resolved electron spectrum across the full beam
+in order to visualize CEP-dependent fine structure that
+could provide more insight into the attosecond-scale elec-
+tron acceleration dynamics.
+In conclusion, we report the first experimental evidence
+of the CEP dependence and control of correlated high-
+harmonic and relativistic electron emission from plasma
+mirrors driven at kHz repetition rate by controlled near-
+single-cycle lightwaves. In particular, we can produce
+XUV spectral continua on demand by forming a singular
+sub-cycle temporal intensity gate at the plasma mirror
+surface, which in light of previously reported experimen-
+tal observations of the very high spatio-temporal quality
+of the emitted attosecond pulses [10–12] represents a ma-
+jor step towards the realization of isolated XUV attosec-
+ond pulses with record-intensity at kHz repetition rate,
+which we aim at verifying in the future.
+Data underlying the results presented in this paper are
+available in Ref. [35].
+ACKNOWLEDGMENTS
+This work was supported by the Agence Na-
+tionale pour la Recherche (ANR-11-EQPX-005 AT-
+TOLAB, ANR-14-CE32-0011-03 APERO, ANR-22-
+CE30-0005-01 BANDITO); European Research Council
+(ERC FEMTOELEC 306708, ERC ExCoMet 694596);
+LASERLAB-EUROPE (H2020-EU.1.4.1.2. grant agree-
+ment ID 654148), R´ egion Ile-de-France (SESAME 2012-
+ATTOLITE).
+5
+[1] M. T. Hassan, T. T. Luu, A. Moulet, O. Raskazovskaya,
+P. Zhokhov, M. Garg, N. Karpowicz, A. M. Zheltikov,
+V. Pervak, F. Krausz, and E. Goulielmakis, Optical at-
+tosecond pulses and tracking the nonlinear response of
+bound electrons, Nature 530, 66 (2016).
+[2] P. Franz, S. Li, T. Driver, R. R. Robles, D. Cesar, E. Isele,
+Z. Guo, J. Wang, J. P. Duris, K. Larsen, J. M. Glownia,
+X. Cheng, M. C. Hoffmann, X. Li, M.-F. Lin, A. Ka-
+malov, R. Obaid, A. Summers, N. Sudar, E. Thierstein,
+Z. Zhang, M. F. Kling, Z. Huang, J. P. Cryan, and
+A. Marinelli, Terawatt-scale attosecond x-ray pulses from
+a cascaded superradiant free-electron laser, Nature Pho-
+tonics 10.1038/s41566-024-01427-w (2024).
+[3] E. J. Takahashi, P. Lan, O. D. M¨ ucke, Y. Nabekawa,
+and K. Midorikawa, Attosecond nonlinear optics using
+gigawatt-scale isolated attosecond pulses, Nature Com-
+munications 4, 2691 (2013).
+[4] A. Nayak, I. Orfanos, I. Makos, M. Dumergue, S. K¨ uhn,
+E. Skantzakis, B. Bodi, K. Varju, C. Kalpouzos,
+H. I. B. Banks, A. Emmanouilidou, D. Charalambidis,
+and P. Tzallas, Multiple ionization of argon via multi-
+xuv-photon absorption induced by 20-gw high-order har-
+monic laser pulses, Phys. Rev. A 98, 023426 (2018).
+[5] R. Borrego-Varillas, M. Lucchini, and M. Nisoli, Attosec-
+ond spectroscopy for the investigation of ultrafast dy-
+namics in atomic, molecular and solid-state physics, Re-
+ports on Progress in Physics 85, 066401 (2022).
+[6] P. Heissler, R. H¨ orlein, J. M. Mikhailova, L. Waldecker,
+P. Tzallas, A. Buck, K. Schmid, C. M. S. Sears,
+F. Krausz, L. Veisz, M. Zepf, and G. D. Tsakiris, Few-
+cycle driven relativistically oscillating plasma mirrors: A
+source of intense isolated attosecond pulses, Phys. Rev.
+Lett. 108, 235003 (2012).
+[7] J. M. Mikhailova, M. V. Fedorov, N. Karpowicz, P. Gib-
+bon, V. T. Platonenko, A. M. Zheltikov, and F. Krausz,
+Isolated attosecond pulses from laser-driven synchrotron
+radiation, Phys. Rev. Lett. 109, 245005 (2012).
+[8] C. R¨ odel, D. an der Br¨ ugge, J. Bierbach, M. Yeung,
+T. Hahn, B. Dromey, S. Herzer, S. Fuchs, A. G. Pour,
+E. Eckner, M. Behmke, M. Cerchez, O. J¨ ackel, D. Hem-
+mers, T. Toncian, M. C. Kaluza, A. Belyanin, G. Pret-
+zler, O. Willi, A. Pukhov, M. Zepf, and G. G. Paulus,
+Harmonic generation from relativistic plasma surfaces
+in ultrasteep plasma density gradients, Phys. Rev. Lett.
+109, 125002 (2012).
+[9] O. Jahn, V. E. Leshchenko, P. Tzallas, A. Kessel,
+M. Kr¨ uger, A. M¨ unzer, S. A. Trushin, G. D. Tsakiris,
+S. Kahaly, D. Kormin, L. Veisz, V. Pervak, F. Krausz,
+Z. Major, and S. Karsch, Towards intense isolated at-
+tosecond pulses from relativistic surface high harmonics,
+Optica 6, 280 (2019).
+[10] L. Chopineau, A. Denoeud, A. Leblanc, E. Porat, P. Mar-
+tin, H. Vincenti, and F. Qu´ er´ e, Spatio-temporal charac-
+terization of attosecond pulses from plasma mirrors, Na-
+ture Physics 17, 968 (2021).
+[11] B. Dromey, D. Adams, R. H¨ orlein, Y. Nomura, S. G.
+Rykovanov, D. C. Carroll, P. S. Foster, S. Kar,
+K. Markey, P. McKenna, D. Neely, M. Geissler, G. D.
+Tsakiris, and M. Zepf, Diffraction-limited performance
+and focusing of high harmonics from relativistic plasmas,
+Nature Physics 5, 146 (2009).
+[12] A. Leblanc, S. Monchoc´ e, H. Vincenti, S. Kahaly, J.-
+L. Vay, and F. Qu´ er´ e, Spatial properties of high-order
+harmonic beams from plasma mirrors: A ptychographic
+study, Phys. Rev. Lett. 119, 155001 (2017).
+[13] T. Baeva, S. Gordienko, and A. Pukhov, Relativistic
+plasma control for single attosecond x-ray burst gener-
+ation, Phys. Rev. E 74, 065401 (2006).
+[14] M. Yeung, J. Bierbach, E. Eckner, S. Rykovanov,
+S. Kuschel, A. S¨ avert, M. F¨ orster, C. R¨ odel, G. G.
+Paulus, S. Cousens, M. Coughlan, B. Dromey, and
+M. Zepf, Noncollinear polarization gating of attosecond
+pulse trains in the relativistic regime, Phys. Rev. Lett.
+115, 193903 (2015).
+[15] J. A. Wheeler, A. Borot, S. Monchoc´ e, H. Vincenti,
+A. Ricci, A. Malvache, R. Lopez-Martens, and F. Qu´ er´ e,
+Attosecond lighthouses from plasma mirrors, Nature
+Photonics 6, 829 (2012).
+[16] H. Vincenti and F. Qu´ er´ e, Attosecond lighthouses: How
+to use spatiotemporally coupled light fields to generate
+isolated attosecond pulses, Phys. Rev. Lett. 108, 113904
+(2012).
+[17] Y. X. Zhang, S. Rykovanov, M. Shi, C. L. Zhong, X. T.
+He, B. Qiao, and M. Zepf, Giant isolated attosecond
+pulses from two-color laser-plasma interactions, Phys.
+Rev. Lett. 124, 114802 (2020).
+[18] R. E. Smith, E. White, P. M. Gilmore, B. Dromey, and
+M. Yeung, Double optical gating of high order harmonics
+from plasma surfaces, New Journal of Physics 23, 093010
+(2021).
+[19] M. Blanco and M. Flores-Arias, Frequency gating to iso-
+late single attosecond pulses with overdense plasmas us-
+ing particle-in-cell simulations, Opt. Express 25, 13372
+(2017).
+[20] A. Baltuˇ ska, T. Udem, M. Uiberacker, M. Hentschel,
+E. Goulielmakis, C. Gohle, R. Holzwarth, V. S. Yakovlev,
+A. Scrinzi, T. W. Hansch, and F. Krausz, Attosecond
+control of electronic processes by intense light fields, Na-
+ture 421, 611 (2003).
+[21] D. Kormin, A. Borot, G. Ma, W. Dallari, B. Bergues,
+M. Aladi, I. B. F¨ oldes, and L. Veisz, Spectral interferome-
+try with waveform-dependent relativistic high-order har-
+monics from plasma surfaces, Nature Communications 9
+(2018).
+[22] F. B¨ ohle, M. Th´ evenet, M. Bocoum, A. Vernier,
+S. Haessler, and R. Lopez-Martens, Generation of XUV
+spectral continua from relativistic plasma mirrors driven
+in the near-single-cycle limit, J. Phys. Photonics 2,
+034010 (2020).
+[23] L. Chopineau, A. Leblanc, G. Blaclard, A. Denoeud,
+M. Th´ evenet, J.-L. Vay, G. Bonnaud, P. Martin, H. Vin-
+centi, and F. Qu´ er´ e, Identification of coupling mecha-
+nisms between ultraintense laser light and dense plasmas,
+Phys. Rev. X 9, 011050 (2019).
+[24] S. Haessler, M. Ouill´ e, J. Kaur, M. Bocoum, F. B¨ ohle,
+D. Levy, L. Daniault, A. Vernier, J. Faure, and R. Lopez-
+Martens, High-harmonic generation and correlated elec-
+tron emission from relativistic plasma mirrors at 1 kHz
+repetition rate, Ultrafast Science 2022, 9893418 (2022).
+[25] M. Th´ evenet, H. Vincenti, and J. Faure, On the
+physics of electron ejection from laser-irradiated over-
+dense plasmas, Physics of Plasmas 23, 063119 (2016),
+6
+https://doi.org/10.1063/1.4954822.
+[26] C. Zhou, Y. Bai, L. Song, Y. Zeng, Y. Xu, D. Zhang,
+X. Lu, Y. Leng, J. Liu, Y. Tian, R. Li, and Z. Xu, Di-
+rect mapping of attosecond electron dynamics, Nature
+Photonics 15, 216 (2021).
+[27] M. Th´ evenet, A. Leblanc, S. Kahaly, H. Vincenti,
+A. Vernier, F. Qu´ er´ e, and J. Faure, Vacuum laser ac-
+celeration of relativistic electrons using plasma mirror
+injectors, Nature Physics 12, 355 (2016).
+[28] M. Ouill´ e, A. Vernier, F. B¨ ohle, M. Bocoum, A. Jul-
+lien, M. Lozano, J.-P. Rousseau, Z. Cheng, D. Gustas,
+A. Blumenstein, P. Simon, S. Haessler, J. Faure, T. Nagy,
+and R. Lopez-Martens, Relativistic-intensity near-single-
+cycle light waveforms at kHz repetition rate, Light Sci-
+ence & Applications 9, 2047 (2020).
+[29] J. Huijts, L. Rovige, I. A. Andriyash, A. Vernier,
+M. Ouill´ e, J. Kaur, Z. Cheng, R. Lopez-Martens, and
+J. Faure, Waveform control of relativistic electron dy-
+namics in laser-plasma acceleration, Phys. Rev. X 12,
+011036 (2022).
+[30] J. Kaur, M. Ouill´ e, D. Levy, L. Daniault, A. Robbes,
+N. Za ¨ ım, A. Flacco, E. Kroupp, V. Malka, S. Haessler,
+and R. Lopez-Martens, High repetition rate relativistic
+laser–solid–plasma interaction platform featuring simul-
+taneous particle and radiation detection, Rev. Sci. Instr.
+94, 113002 (2023).
+[31] A. Borot, D. Douillet, G. Iaquaniello, T. Lefrou, P. Au-
+debert, J.-P. Geindre, and R. Lopez-Martens, High rep-
+etition rate plasma mirror device for attosecond sci-
+ence, Review of Scientific Instruments 85, 013104 (2014),
+https://doi.org/10.1063/1.4860035.
+[32] M. Bocoum, F. B¨ ohle, A. Vernier, A. Jullien, J. Faure,
+and R. Lopez-Martens, Spatial-domain interferometer for
+measuring plasma mirror expansion, Optics Letters 40,
+3009 (2015).
+[33] F. Qu´ er´ e, C. Thaury, P. Monot, S. Dobosz, Martin, Ph.,
+J. P. Geindre, and P. Audebert, Coherent Wake Emis-
+sion of High-Order Harmonics from Overdense Plasmas,
+Physical Review Letters 96, 125004 (2006).
+[34] S. Kahaly, S. Monchoc´ e, H. Vincenti, T. Dzelzainis,
+B. Dromey, M. Zepf, P. Martin, and F. Qu´ er´ e, Direct
+observation of density-gradient effects in harmonic gener-
+ation from plasma mirrors, Phys. Rev. Lett. 110, 175001
+(2013).
+[35] J. Kaur, M. Ouill´ e, S. Haessler, and R. Lopez-Martens,
+[Data set]. Zenodo. https://doi.org/10.5281/zenodo.
+12579010 (2024).

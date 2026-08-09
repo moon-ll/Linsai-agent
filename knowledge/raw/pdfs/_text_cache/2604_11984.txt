@@ -1,0 +1,2361 @@
+High-harmonic generation in systems with chiral Bloch states:
+application to rhombohedral graphene
+
+Jessica O. de Almeida,1, ∗ Wilton J. M. Kort-Kamp,2 and Mathias S. Scheurer1
+1Institute for Theoretical Physics III, University of Stuttgart, 70550 Stuttgart, Germany
+2Theoretical Division, Los Alamos National Laboratory, Los Alamos, NM 87545, United States
+
+Nonlinear light-matter interaction and, in particular, high-harmonic generation (HHG) are funda-
+mentally interesting and frequently discussed as versatile probes of quantum materials with potential
+for optical information processing applications. Meanwhile, there has also been significant progress
+in graphene-based multilayer systems to engineer interesting band structures and boost correlation
+effects. Motivated by the successful demonstration of HHG in graphene, we here study this effect in
+rhombohedral stacks of n layers of graphene, a recent very prominent representative of correlated
+multilayer graphene systems. We show how the chiral Bloch states of the valleys of this system
+crucially affect the HHG. The “winding” of the Bloch states scales linearly with n, just like the
+dominant harmonic order. The location of the strongest quantum geometry in momentum space on
+a ring of finite radius is shown to be imprinted on the time-dependent momentum distribution at
+the beginning of the strong laser pulse. We further demonstrate that the presence of an interaction-
+induced splitting of the two valleys leads to a complex interplay of the opposite chiralities of the two
+valleys, directly visible in the n dependence of the circular dichroism. We also analyze the impact of
+doping and identify a quantity that tracks the net chirality of the occupied states. Our findings show
+that rhombohedral graphene constitutes a promising platform for exploring rich nonlinear optical
+phenomena.
+
+I.
+
+INTRODUCTION
+
+In recent years, the systematic study of effects rooted
+in the non-trivial momentum dependencies of multi-
+component Bloch states—often collectively referred to as
+quantum geometry—has become a very active field of
+study in condensed matter physics, relevant to a broad
+variety of phenomena [1–4]. This is particularly true
+in systems with low symmetries and, hence, fewer con-
+straints on the associated matrix elements. For instance,
+if all mirror symmetries and time-reversal symmetry are
+broken, the Bloch states are chiral and exhibit a non-
+zero net Berry curvature Ω. In this regard, rhombohe-
+dral multi-layer graphene (RMG), where graphene layers
+are stacked such that the B sublattice of one layer is
+just below the A sublattice of the subsequent layer, see
+Fig. 1(a), provides a particularly exciting and recent ex-
+ample. Without any two-fold rotational symmetry C2z
+or inversion (which combined with time-reversal would
+lead to an anti-unitary intravalley symmetry, prohibit-
+ing any Berry curvature) in the crystal structure, the
+Bloch states of RMG are chiral with Ω ̸= 0.
+Interest-
+ingly, Ω(k) and quantum geometric effects in general are
+concentrated on a ring of finite radius in momentum (k)
+space encircling the K and K′ points and the magnitude
+is tunable by the number n of rhombohedrally stacked
+layers.
+In combination with the fact that this system
+exhibits strongly correlated physics [5–9], including the
+spontaneous emergence of an imbalance between the two
+
+∗ jessica.almeida@itp3.uni-stuttgart.de
+
+valleys, which breaks time-reversal symmetry, RMG has
+attracted a lot of interest [10–29], including in the con-
+text of quantum geometry.
+
+Harmonic generation, a non-linear optical phenomenon
+where the driving of a system by a high-intensity laser
+at a fundamental frequency ω0 leads to the emission at
+frequencies ω(l) = lω0, with integer l > 1, has also
+attracted significant attention in recent years [30–37].
+Apart from its technological relevance, one of the cen-
+tral reasons is its relation to the aforementioned quan-
+tum geometry and topology of Bloch bands [38–51]. The
+relevance of Bloch-state matrix elements arises because
+the light-matter interaction involves the band projection
+of the dipole operator. Harmonic generation, including
+with large l (HHG), is also very actively studied in two-
+dimensional systems [35–37], such as graphene—both ex-
+perimentally [52–60] and theoretically [61–75].
+
+This motivates us to study the physics of harmonic
+generation in RMG for different numbers n of graphene
+layers. We elucidate the rich physics coming from the
+low symmetries of the system, in particular the lack of
+C2z symmetry, a crucial difference compared to the re-
+lated flat-band system twisted bilayer graphene [70], and
+demonstrate the key role of the quantum geometry of
+the Bloch states for harmonic generation. We investigate
+the consequences of an interaction-induced valley imbal-
+ance and doping for the HHG. As a sensitive measure
+of the valley-resolved physics, we employ circular dichro-
+ism (CD) of our harmonic generation spectrum, which
+is widely used as a probe of chirality (see, e.g., [76, 77])
+and has also been proposed as a way of accessing Chern
+numbers [40, 42, 43, 45]. We find that the competition
+
+6
+2
+0
+2
+
+r
+p
+A
+3
+1
+
+]
+l
+l
+a
+h
+-
+s
+e
+m
+
+.
+t
+a
+m
+-
+d
+n
+o
+c
+[
+
+1
+v
+4
+8
+9
+1
+1
+.
+4
+0
+6
+2
+:
+v
+i
+X
+r
+a
+
+ 
+ 
+ 
+ 
+ 
+ 
+of the two valleys with different interaction-induced gaps
+leads to a sign change of the dominant circular dichro-
+ism signature as a function of the number n of graphene
+layers.
+
+The remainder of the paper is organized as follows. In
+Sec. II, we introduce the basic model and formalism that
+we use. To illustrate the key physics in a minimal setting,
+we first start our analysis of HHG spectra only taking into
+account one of the two valleys of RMG, see Sec. III. In
+Sec. IV, we incorporate both valleys and their interplay.
+The results are summarized in Sec. V. Multiple appen-
+dices provide additional data and analytical details.
+
+II. MODEL AND APPROACH
+
+We begin this section by introducing the effective two-
+band model that is used to describe the low-energy
+physics of RMG, which can be more generally thought
+of as a minimal prototype of a chiral continuum model.
+We will couple it to an external electromagnetic field as-
+sociated with the applied strong pulsed laser and outline
+how we compute the resultant HHG.
+
+A. Bloch Hamiltonian of RMG
+
+We here consider rhombohedral stacks of n graphene
+layers, i.e., the honeycomb lattices with the two sublat-
+tices denoted by Aj and Bj in the jth graphene layer,
+are stacked such that Bj and Aj+1 are vertically on top
+of each other, see Fig. 1(a). An important experimen-
+tal tuning parameter of the system is an external dis-
+placement field, denoted by D, which effectively creates
+a potential offset between neighboring layers. Using a
+full tight-binding model on the honeycomb lattice would
+give rise to a total of 2n bands (per spin). However, near
+charge neutrality, there are only two low-energy bands—
+one just above and one below the Fermi level in the vicin-
+ity of the K (ξ = +) and K′ (ξ = −). The weight of
+their Bloch states is localized on the non-dimerized sites,
+i.e., the sublattices A1 and Bn. This allows us to con-
+struct [78–83] a minimal two-band model (per spin) for
+each of the two valleys ξ = ±, with the Bloch Hamilto-
+nian.
+
+h(n)
+ξ
+
+(k) =
+
+(cid:18) −µ + w
+
+−γ1(−kξ/kc)n
+
+−γ1(−k∗
+
+ξ /kc)n
+
+−µ − w
+
+(cid:19)
+
+.
+
+(1)
+
+Here, k = (kx, ky) is the momentum deviation from the
+respective K or K′ point and we introduced the com-
+plex momentum coordinate kξ = kx + iξky. Besides, µ
+is the chemical potential, w is controlled by the displace-
+ment field, γ1 is the interlayer nearest neighbor hopping
+amplitude between superposed sites Bj-Aj+1, and the
+momentum scale is kc = 2γ1/(
+In the latter,
+
+3aγ0).
+
+√
+
+2
+
+a is the intralayer distance between sublattices and γ0
+the intralayer nearest neighbor hoppings of the original
+tight-binding model.
+
+An important advantage of the effective two-band
+model in Eq. (1) is that the eigenstates and the associated
+matrix elements we will need below are readily derived
+analytically (see Appendix A). The spectrum reads as
+
+ϵp(k) = −µ + p
+
+(cid:113)
+
+w2 + γ2
+
+1 (k/kc)2n,
+
+(2)
+
+(cid:113)
+
+x + k2
+k2
+
+y =
+where p = ± labels the two bands and k =
+|kξ|. It is shown in Fig. 1(b) and reveals that, with in-
+creasing n, the bands become flatter in a range of mo-
+menta of order kc. The associated increase in the density
+of states is also expected to be the reason why RMG dis-
+plays multiple correlated phases, as revealed by recent
+experiments [5–9].
+
+Note that this minimal model leads to a dispersion
+that is even in momentum, ϵp(k) = ϵp(−k). This is also
+why the band energies are the same in both valleys ξ = ±
+and why we suppressed a valley index ξ in Eq. (2). While
+one could introduce additional trigonal warping terms to
+break the degeneracy, we will not do so here since this will
+allow us to focus on the effect of the Bloch wave functions
+|Ψ(ξ)
+k,p⟩, which do depend on ξ; here, K
+is the position of the K point in the Brillouin zone of the
+underlying lattice model and |ϕ(ξ)
+k,p⟩ is the periodic part of
+the Bloch states, obtained from Eq. (1) in our continuum
+model. The Bloch states encode the non-trivial quantum
+geometry of the bands and, in particular, that each valley
+is chiral, with opposite orientations in the two valleys, as
+required by time-reversal symmetry.
+
+k,p⟩ = ei(k−ξK)·ˆr |ϕ(ξ)
+
+This chirality can, in turn, be illustrated and quantified
+
+using the Berry curvature, given by
+
+Ω(ξ)
+
+p (k) =
+
+(cid:104)
+
+∇k × A(ξ)
+
+(cid:105)
+p (k)
+
+,
+
+z
+
+(3)
+
+p (k) = Ω(ξ)
+
+p (k) = i ⟨ϕ(ξ)
+
+p (k)|∇kϕ(ξ)
+where A(ξ)
+p (k)⟩ is the Berry con-
+nection. As will become important later, we have
+Ω(ξ)
+p (−k) for our model in Eq. (1). The Berry
+curvature is sizable only in a ring-shaped region in k-
+space, as can be seen in Fig. 1(c). The resulting valley-
+resolved Chern number is
+
+C (ξ)
+
+p =
+
+(cid:90)
+
+1
+2π
+
+d2k Ω(ξ)
+
+± (k) = pξ
+
+n
+2
+
+,
+
+(4)
+
+showing that it is proportional to the number of layers n.
+The half-integer quantization for odd n is a consequence
+of the continuum approximation.
+
+B. Laser field interaction
+
+Our main goal is to describe the higher harmonics
+generated by the coupling of the system to a strong
+
+3
+
+(cid:105)∗
+
+(cid:104)
+ϕ(−ξ)
+k,p
+
+such
+
+++(k) = −d(ξ)
+d(ξ)
+that d(ξ)
+
+pp′(k) = −
+d(ξ)
+
+(cid:104)
+
+(cid:105)∗
+
+d(ξ)
+
+−−(k) and where ϕ(ξ)
+
+k,p =
+
+(cid:104)
+
+d(−ξ)
+
+pp′ (k)
+
+(cid:105)∗
+
+. Note it always holds
+
+p′p(k)
+
+since the states are normalized.
+
+pp′(k) =
+To solve the time-dependent Schrödinger equation
+i | ˙Ψ(t)⟩ = ˆH(t) |Ψ(t)⟩, where ˆH(t) is the full Hamiltonian
+including the band structure and the coupling to E(t) as
+described, we expand the electronic wave function in the
+Bloch basis,
+
+FIG. 1. a) Side-view of rhombohedral stack of n graphene
+layers, i.e., sublattice Aj+1 of the (j + 1)th layer is super-
+posed with site Bj of the jth layer; D is the applied dis-
+placement field, which creates a potential off-set between the
+layers and the inset on the right shows one honeycomb of one
+graphene layer. b) Electronic dispersion, Eq. (2), of the effec-
+tive two-band model of RMG we use, for n = 2 − 6. c) Berry
+curvature Ω(ξ=+)
+(k) for n = 6. d) Square of the off-diagonal
+components of the dipole matrix in Eq. (6), [d(ξ=+)
++− (k)]2, with
+n = 6. It shows a flower pattern, with 2n “petals” (blue/red).
+Parameters for (b)-(d) and in our numerics are w = 0.026 a.u.,
+γ1 = 0.46 a.u.. Momenta are measured in units of kc, such
+that effectively kc = 1 a.u..
+
++
+
+pulsed laser with an electric field profile E(t) = −∂tA(t).
+Within the dipole approximation and using the length
+gauge, this leads to the additional time-dependent term
+Vint(t) = −eE(t) · ˆr in the Hamiltonian, i.e., Eq. (1) is
+extended according to h(n)
+(k) + Vint(t). Im-
+portantly, the position operator ˆr acts non-trivially in
+the Bloch basis, with matrix elements given by
+
+(k) → h(n)
+
+ξ
+
+ξ
+
+|Ψ(t)⟩ =
+
+(cid:90)
+
+(cid:88)
+
+p=±
+
+d2k αp,ξ(k, t) |Ψ(ξ)
+
+k,p⟩ .
+
+(7)
+
+As a result of the term in the first line of Eq. (5), the
+time-dependent Schrödinger equation expressed in terms
+of the expansion coefficients αp,ξ(k, t) ∈ C involves mo-
+mentum derivatives. Translating these coefficients to
+a “moving frame” via αp,ξ(k, t) =: eA(t)·∇Kβp,ξ(K, t)
+with K = k − A(t), eliminates the momentum deriva-
+tives. The resultant “semi-conductor Bloch equations”
+(SBEs) [34, 40, 84] then read as
+
+˙βp,ξ(K, t) = −i
+
+(cid:104)
+
+(cid:105)
+p (k)
+
+βp,ξ(K, t)
+
+ϵp(k) + E(t) · A(ξ)
+(cid:88)
+
+− iE(t) ·
+
+d(ξ)
+
+pp′(k)βp′,ξ(K, t).
+
+(8)
+
+p′̸=p
+
+Here and in the following equations, k should be un-
+derstood as k(t) = K + A(t). Alternatively, this equa-
+tion can also be derived from the Liouville-von Neumann
+equation i ˙ˆρ(t) = [ ˆH(t), ˆρ(t)], with associated density ma-
+trix ˆρ = |Ψ(t)⟩ ⟨Ψ(t)|, which allows to include a dephas-
+ing term with associated rate 1/T2. The resulting equa-
+tions can be conveniently stated in terms of the occupa-
+tions np,ξ(K, t) = |βp,ξ(K, t)|2 and interband coherence
+πξ(K, t) = β∗
+
++,ξ(K, t)β−,ξ(K, t),
+
+⟨Ψ(ξ)
+
+k,p|ˆr|Ψ(ξ′)
+
+k′,p′⟩ = δξ,ξ′
+
+(cid:2)−iδp,p′(∇k′δ(k − k′))
+pp′(k)(cid:3),
+
++ δ(k − k′)d(ξ)
+
+(5)
+
+˙np,ξ(K, t) = ipE(t) · d(ξ)
+
++−(k)πξ(K, t) + c.c.,
+
+˙πξ(K, t) = −i
+
+(cid:20)
+∆ϵ(k) + E(t) · ∆A(ξ)(k) − i
+
+where the dipole matrix elements with respect to the pe-
+riodic part of the Bloch states are given by
+
+− iE(t) · d(ξ)
+
++−∆nξ(K, t),
+
+(9a)
+
+πξ(K, t)
+
+(cid:21)
+
+1
+T2
+
+(9b)
+
+pp′(k) = i ⟨ϕ(ξ)
+d(ξ)
+
+k,p|∇kϕ(ξ)
+
+k,p′⟩
+
+(6)
+
+in Eq. (1) is
+and we used that our minimal model
+block diagonal
+in the valley basis (no intervalley co-
+herence). The diagonal matrix elements are equal to
+the Berry connection in the respective band and valley,
+d(ξ)
+pp (k) = A(ξ)
+p (k), probing the chirality of the bands.
+Importantly, also the off-diagonal components are non-
+zero which will drive transitions across the band gap.
+We refer to Appendix A for the explicit analytical form
+of the matrix elements that we use in our analysis and
+here only point out that we use a phase convention where
+
+where ∆nξ = n+,ξ − n−,ξ is the occupation imbalance,
+∆ϵ(k) = ϵ+(k) − ϵ−(k) the k-resolved band splitting,
+and ∆A(ξ)(k) = A(ξ)
+− (k) is the difference be-
+tween the Berry connection in the conduction and valence
+bands.
+
++ (k) − A(ξ)
+
+Throughout this work, we choose the vector potential
+
+of the incident laser field to be [53]
+
+A(t) =
+
+√
+
+E0
+1 + ϵ2
+
+ω0
+
+e−(t−t0)2/σ2
+
+[cos(ω0(t − t0))ˆx
+
++ϵ sin(ω0(t − t0))ˆy] .
+
+(10)
+
+Here, E0 is the amplitude of the electric field, ω0 the
+frequency, σ2 is the variance of the Gaussian envelope,
+i.e., our measure for the pulse duration, t0 the time at
+which the pulse reaches its maximum envelope, and ϵ
+the ellipticity of the incident electric field. With these
+conventions, linearly polarized light is defined as ϵ = 0,
+right circular polarization (RCP) corresponds to ϵ = −1
+and left circular polarization (LCP) to ϵ = 1.
+
+We numerically solve the SBEs in Eq. (9) subject to ap-
+propriate initial conditions. For instance, at half-filling,
+we choose n−,ξ(K, 0) = 1 and n+,ξ(K, 0) = πξ(K, 0) = 0.
+We note that in systems with non-trivial topology, the
+off-diagonal elements of the dipole matrix may have sin-
+gularities. These must be handled carefully, e.g., by vary-
+ing the gauge around these points [42, 85], enhancing the
+complexity in solving the SBEs. Although each valley
+has a non-zero Chern number in our case, this is not an
+issue for us: as a result of the non-compact nature of the
+continuum model, we can choose a gauge with perfectly
+smooth dipole matrix elements, see Appendix A.
+
+Unless stated otherwise, the specific parameters used
+in our numerical simulations are as follows: the incident
+field E0 = 0.005 a.u.= 880 GW/cm2 (where a.u. refers to
+“atomic units”), with frequency ω0 = 0.013 a.u.=0.35 eV
+(corresponding to λ = 3.5 µm), t0 = 25π/ω0 ≈ 146.1 fs,
+σ = 59.57 fs (12 cycles at FWHM), and RMG constants
+n = 2 − 6, γ1 = 0.46 a.u., bandgap 2w = 0.052 a.u.,
+T2 = 1.85 fs, µ = 0 (without doping), ℏ = |e| = me =
+kB = 4πϵ0 = 1. Momenta are measured in units of kc =
+1 a.u.. The choice of parameters is discussed further in
+Appendix B. We use a trapezoidal method for integration
+over a momentum range |ki| ≤ 2 a.u., i = x, y and a
+momentum grid of 401 × 401 points. We numerically
+solve the differential equations in Eq. (9) using Julia ODE
+solver.
+
+C. High-harmonic generation
+
+The interaction with the strong laser field drives the
+system out of equilibrium, producing a current J(t). It
+is given by the expectation value of the current operator,
+ˆj = −ˆp in the gauge we are using here, and can be written
+as [33]
+
+J(t) = Tr{ˆj, ˆρ(t)} = i Tr{[ˆr, ˆH(t)] ˆρ(t)}.
+
+(11)
+
+Recalling that the matrix elements of ˆr with respect to
+the Bloch states are given in Eq. (5) with intra- and
+interband contributions, it is natural to also split the
+current into intra- (Jintra) and interband (Jinter) terms,
+J = (cid:80)
+inter). These current contributions can
+be conveniently written as a function of the Berry curva-
+
+intra + J(ξ)
+
+ξ(J(ξ)
+
+ture, dipole moments, and energy bands as [86, 87]
+
+J(ξ)
+inter(t) = ∂tP(ξ)(t)
+d2K d(ξ)
+
+= ∂t
+
+(cid:90)
+
+−+(K + A(t))πξ(K, t) + c.c,
+
+4
+
+(12a)
+
+related to the polarization P(ξ)(t) as expressed in the first
+line, and
+
+J(ξ)
+intra(t) =
+
+(cid:90)
+
+(cid:88)
+
+p
+
+d2K v(ξ)
+
+p (K + A(t), t)np,ξ(K, t), (12b)
+
+p (k) = ∇kϵp(k) − E(t) × ˆz Ω(ξ)
+
+respectively. Here, v(ξ)
+p (k)
+is the effective velocity, involving both the group velocity
+associated with the band structure (first term) as well as
+the anomalous velocity perpendicular to the electric field
+(second term).
+
+Due to the complex dynamics of the electrons, the asso-
+ciated current J(t) not only has frequency components at
+the fundamental frequency ω = ω0 of the incident light,
+see Eq. (10), but also at higher frequencies, ω > ω0, in-
+cluding at higher harmonics, ω(l) = l ω0 with l ∈ N,
+l > 1. We probe and quantify these aspects using the
+spectral intensity or Fourier transform of the currents, as
+explicitly given by the Larmor formula [33, 84, 88]
+
+Ij(ω) = ω2 |FTω[W (t)(J(t))j]|2 ,
+
+(13)
+
+j = x, y, where FTω[g(t)] denotes the Fourier transform
+of g(t) at frequency ω and W (t) is the Blackman window
+function [34].
+
+III. SINGLE-VALLEY LIMIT
+
+Having explained the basic setting and formalism used,
+we can now discuss our findings. Our primary goal is
+to study valley-polarized RMG, where interaction effects
+spontaneously create an asymmetry in the two valleys.
+To keep the discussion transparent, we therefore assume
+an extreme anisotropy first, where only one of the two
+valleys needs to be taken into account in the expres-
+sions above, while the other one will remain “inactive”.
+In Sec. IV below, we will then study the changes when
+both valleys with different gaps are included simultane-
+ously. Without loss of generality, we will take the ξ = +
+valley as “active”, but suppress the superscript ξ = + in
+the following expressions for notational simplicity.
+
+Before studying the non-perturbative regime and
+higher harmonics, let us first gain some intuition by look-
+ing at the behavior right at the beginning of the pulse.
+Starting from the filled-lower band initial condition, we
+can neglect in the early-time limit of Eq. (8) the finite
+population in the conduction band that will eventually
+be induced due to the interaction with light over a finite
+
+5
+
+we further observe that the current magnitude increases
+with n, which in our effective two-band model description
+simply determines the power of the complex momentum
+factor kξ in Eq. (1). Note we only show n = 3, 4 for
+clarity but the trend continues, which we have checked
+for n = 2, 5, 6. We have verified, by artificially keeping
+ϵp(k) fixed and only varying the Bloch states with n, that
+the |ϕp(k)⟩, entering the transition matrix elements, and
+thus the quantum geometry provide the dominant role
+in this enhancement. This further agrees with the naive
+expectations based on the early-time analysis above.
+
+To gain more information, we use Eq. (13) to per-
+form a spectral decomposition and analyze the higher
+harmonics. The result is displayed in Fig. 3(a), where
+we measure ω in units of ω0 such that the harmonics
+with frequency w(l) correspond to the integer values l.
+We observe prominent odd harmonic orders, while even
+l are suppressed. As we explain in more detail in Ap-
+pendix C, one can understand this behavior intuitively
+(within the Keldysh approximation) to be the result of
+Ωp(k) = Ωp(−k) and d+−(k) = −(−1)nd+−(−k), i.e.,
+the definite parity of these matrix elements in k. Among
+the odd values of l, the dominant harmonic above the
+band gap scales with n like l = 2n − 1 (and l = 2n + 1 be-
+ing the second largest; in Appendix C we also provide a
+qualitative argument for why specifically those harmon-
+ics dominate). This shows that the degree of winding of
+the Bloch states is directly connected to the dominant
+harmonic.
+
+It is further interesting to investigate the intra- and in-
+terband currents separately. As can be seen in Fig. 3(b),
+where we focus on n = 4, 5 for clarity (but we checked
+that the following also holds for n = 2, 3, 6), the strong
+incident laser field and small bandgap favor the inter-
+band contribution in higher harmonic orders, above the
+bandgap. More specifically, the interband HHG is dom-
+inant for l ≥ 2n − 1. At the same time, we can see
+that intraband HHG shows different signatures for even
+and odd n: For odd n the intraband is dominant up to
+the nth harmonic order (HO), while for even n, it only
+contributes significantly to the first HO. Since vp(k) in
+Eq. (12b) does not depend on the parity of n, the differ-
+ence in the number of HOs can only come from how the
+bands are populated.
+
+For HOs above 2n + 1, the HHG spectrum does not
+show any pronounced peaks, while for higher HOs (for
+example, above 60 ω0 for n = 4 as shown in Fig. 7 in Ap-
+pendix D) clearer peaks reemerge. This result resembles
+the HHG in [66] for single-layer graphene.
+
+B. Circular dichroism
+
+To provide a more direct link to the chiral nature of
+the single-valley band structure, we next address circular
+
+FIG. 2. Time dependence of the x component of the total
+current J(t) = Jinter(t) + Jintra(t), for n = 3 (red), 4 (green),
+both with incident light with RCP. The electric field in the
+x direction is shown in black. The three insets display the
+momentum dependence of the population for n = 4 of the
+conduction band at three different times as indicated by the
+black arrows; specifically, left panel at 60.5 fs with maximum
+population (yellow) of max = 0.0045, middle panel (max =
+0.38) at 133 fs, right panel (max = 0.496) at 241.8 fs.
+
+time period. Then the resulting equation for β+(k) can
+be written as
+
+∂tβ+(k) = −i E(t) · d+−(K + A(t)) + O(β+).
+
+(14)
+
+So we expect that the population n+(K, t) in the upper
+band initially grows the strongest in momentum space
+where the interband matrix elements of d are the largest.
+Inspection of Fig. 1(d) shows that this quantity is peaked,
+similar to the Berry curvature, on a ring of finite radius.
+As can be seen in the (leftmost) inset of Fig. 2, this is
+indeed where we also find the largest initial occupation in
+the conduction band right at the beginning of the pulse.
+So the momentum-space distribution is primarily deter-
+mined by the Bloch-state wave functions rather than the
+band energies, which are still fairly flat in this momentum
+range.
+
+A. High harmonic generation
+
+In the main panel of Fig. 2, we can see that this non-
+equilibrium configuration gives rise to an oscillatory cur-
+It is consistently synchronized with a π/2 phase
+rent.
+delay with the incident laser field, in line with expecta-
+tions based on previous numerics in different systems [50];
+see also Appendix E for further discussion. Interestingly,
+
+kxkykxkykxky6
+
+FIG. 3. a) HHG spectrum ln[Ix(ω)], see Eq. (13), for n = 2 − 6. b) ln[Ix(ω)] split into interband and intraband contributions
+for n = 4 and 5. c) ln[I +
+RCP(ω)], see Eq. (16), for n = 2 − 6, where the same legend as in (a) applies. The input laser has RCP
+in all cases. Dashed black line shows the bandgap.
+
+dichroism (CD) [40, 42, 76, 77], i.e., contrast the response
+of the system to light with RCP and LCP. To quantify
+it for the different HOs, we employ the commonly used
+dimensionless quantity
+
+CDl =
+
+I +
+RCP(l) − I −
+RCP(l) + I −
+I +
+
+LCP(l)
+LCP(l)
+
+,
+
+(15)
+
+where l is the HO, as before associated with the frequency
+ω(l) = lω0, and
+
+P (l) = ω2(l) (cid:12)
+I ±
+
+(cid:12)FTω(l)[W (t)(Jx(t) ± iJy(t))](cid:12)
+(cid:12)
+
+2
+
+(16)
+
+RCP (I −
+
+with polarization P ∈ RCP, LCP of the incoming light.
+Intuitively, I +
+LCP) measures the right-handed (left-
+handed) response to a right-handed (left-handed) per-
+turbation; as such, a finite difference I +
+LCP(l)
+implies that the system has a preferred chirality and the
+denominator in Eq. (15) normalizes CDl to become a di-
+mensionless quantity.
+
+RCP(l) − I −
+
+LCP and I −
+
+However, before studying CDl, let us first take a closer
+look at I +
+RCP as an example, which is represented in
+Fig. 3(c) for n = 2 − 6. We observe a dominant peak
+at HO l = 2n + 1; as expected, I −
+LCP displays similar
+In contrast, for the orthogonal
+behavior (not shown).
+polarizations I +
+RCP, we obtain a dominant peak
+at HO 2n − 1 instead (see Fig. 6 in Appendix D). Writing
+the x-component of the current as the linear combination
+Jx = 1
+2 (J + + J −), with J ± = Jx ± iJy, it becomes clearer
+how Ix contains the HOs of both I ±, which is consistent
+with Fig. 3(a), displaying peaks at both HOs l = 2n ± 1.
+Just as before, the harmonics above the band gap are
+dominated by the interband current, while the peaks be-
+low the bandgap are due to the intraband contribution.
+In the inset of Fig. 4(a), we show CDl for the afore-
+mentioned dominant harmonic l = 2n + 1. It is not only
+clearly non-zero and thus reflects the chirality of the sys-
+tem, but it is also very close to its maximum value of 1,
+i.e., I +
+LCP, in particular for n ≥ 3. For the other
+valley, CDl will have the same magnitude but opposite
+
+RCP ≫ I −
+
+sign. By virtue of saturating the bound |CD2n+1| ≤ 1,
+this quantity is not sensitive to the number of layers n.
+Inspired by Ref. 45, which proposed to compare the sign
+of CD1 with CDl for higher l above the gap to extract
+the topological properties, we here consider their ratio,
+cn = CD2n+1/CD1. We find cn < 0 in line with the ex-
+pectations for a topological regime of a two-band model
+[45]. This is also consistent with our observation in Ap-
+pendix E that the phase relation between the x and y
+components of the current is opposite for the inter- and
+intraband current contributions. What is more, our nu-
+merics reveals that the magnitude |cn| does depend sen-
+sitively on n: as can be seen in Fig. 4(a), ln |cn| increases
+approximately linearly with n and, thus, constitutes a
+natural quantifier of the degree of chirality in our model.
+
+C. The effect of doping
+
+We next address what happens once the system is
+doped away from half filling, which in RMG is done
+in experiment by the application of gate voltages and,
+in fact, is even needed for the spontaneous emergence
+of valley imbalance [8].
+In our calculation, this im-
+plies that different initial conditions [89] have to be used
+when solving the SBEs in Eq. (9). Specifically, we will
+impose π(K, 0) = 0 and np(K, 0) = nF(ϵp(K) − µ),
+nF(ϵ) = 1
+eϵ/T +1 , with a suitably chosen chemical potential
+µ; our previous half-filled initial conditions correspond to
+µ = 0 (and T → 0). Away from half-filling, we use a small
+but finite T of T = 0.01 a.u..
+
+The key features of our results remain qualitatively
+intact when detuning µ slightly away from half-filling,
+despite the large density of states associated with the flat
+band bottom. For instance, in Fig. 4(b) we display the
+µ dependence of CD2n+1, which stays constant and close
+to saturation at the bound in a finite (and, as expected,
+particle-hole symmetric) region around µ = 0 for all n.
+In particular, for n ≥ 4, this region is fairly large—much
+
+7
+
+(see, e.g., [22–29]) and employ a (mean-field) valley im-
+balance order parameter ΦV . While the Bloch states are
+unaffected by it, the band energies in Eq. (2) are mod-
+ified according to ϵ±(k) → E±(k, ξ) = ε±(k) ± ξ ΦV ,
+which modifies the bandgap in valley ξ according to
+2w → 2(w + ξ ΦV ), see the schematic dispersion relation
+illustrated in Fig. 5(a).
+
+In our low-energy continuum approximation, the valley
+effectively acts as a quantum number, and the contribu-
+tions to the currents from the two valleys simply add up,
+as reflected by the expressions in Sec. II, in particular,
+Eq. (12). To quantify the HHG, we still use the Larmor
+expression in Eq. (13) but replace J with the average
+instead of the sum of the currents in two valleys, i.e.,
+J = 1
+inter), to be able to better compare
+2
+with the single-valley limit; the associated spectral inten-
+sity will be denoted by I (2)
+(ω) in the following. Since we
+have seen above that the main features of the HHG are,
+to a good approximation, unaffected when varying µ in
+a finite range around zero, we here focus on half filling
+(µ = 0) for concreteness.
+
+intra + J(ξ)
+
+ξ(J(ξ)
+
+(cid:80)
+
+j
+
+As a first illustration of the contrasting behavior and
+interference of the two valleys concerning the generation
+of currents, we consider linearly polarized light, with the
+electric field along the x direction. We Fourier transform
+the time-dependent current distribution, apply a Gaus-
+sian mask around each HO, followed by a Fourier trans-
+form back to the time domain (a similar approach was
+used in [61]). The resulting time traces of the current
+J are shown in Fig. 5(b) for a few selected harmonics
+and studying the two valleys separately. First, we can
+see how the polarizations of low HOs are aligned with
+the laser field. Meanwhile, above the first band gap, the
+anomalous current in the y direction becomes significant.
+This is a direct manifestation of the low symmetries of
+the system, which does not exhibit a reflection symme-
+try with respect to the xz-plane. However, as a result of
+the reflection at the yz-plane which relates the two val-
+leys, we can see that the two traces of the two valleys are
+mirror images of one another. If both valleys are taken
+into account simultaneously, we find that the y compo-
+nent in the time traces of the current cancel out to a very
+good degree and the current is approximately along the
+direction of the electric field.
+
+To address the physics of the two valley system, we
+therefore consider circularly polarized light. In Fig. 5(c),
+we show the HHG spectrum, I (2)(ω), for RCP of the in-
+cident light in the two-valley system, where the gap in
+one valley is larger (in the example ξ = +) than in the
+other (ξ = −). Direct comparison with the analogous
+single-valley plot in Fig. 3(c) [and the other single-valley
+curves in Fig. 5(c)] shows that the central features—the
+prominent harmonics, particularly at l = 2n ± 1—are
+qualitatively unaffected, as the wavefunctions remain in-
+tact and interference effects of the currents between the
+
+FIG. 4. a) ln(|cn|) = ln(|CD2n+1/CD1|), see Eq. (15), as a
+function of the number of layers for n = 2 − 6. The result for
+ξ = − (squares) and ξ = + (circles, not visible) is identical.
+The inset shows the value of CD2n+1 as a function of n for
+ξ = ±. b) Value of CD2n+1 for n = 3 − 6 as a function
+of the chemical potential; CD ∼ 1 in the region µ < 16w,
+for n = 4 − 6. c) ΦB(µ)/C, see Eq. (17), as a function of
+the chemical potential µ for n = 2 − 6. d) Relative helicity
+It shows a
+1/|cn| = |CD1/CD2n+1| in presence of doping.
+peak in the region µ < 4w, similar to ΦB(µ)/C. Note that
+the data point for n = 3 with µ = 0.125 was removed [cf. sharp
+dip in part (b)] for better visualization of the results. Legend
+of all figures in (c) and µ in a.u. in all plots.
+
+larger than the region where the net Berry curvature,
+
+ΦB(µ) =
+
+1
+2π
+
+(cid:90)
+
+(cid:88)
+
+p
+
+d2k Ωp(k)nF(εp(k)),
+
+(17)
+
+of the occupied states is maximal and close to the quan-
+tized value in Eq. (4), see Fig. 4(c). Similar to the n
+dependence at half-filling, we expect that the weak sensi-
+tivity of CD2n+1 to detuning µ from zero compared to ΦB
+is due to the fact that CD2n+1 is saturating the bound.
+Instead, cn is expected to also vary more strongly with µ,
+which is indeed confirmed by Fig. 4(d); we can see that
+1/|cn| = |CD1/CD2n+1| exhibits a peak in the region
+µ < |4w|, similar to ΦB. The decrease of |CD1/CD2n+1|
+with doping is naturally rooted in the decay of CD1 with
+doping: as CD1 is dominated by intraband current contri-
+butions it is crucially determined by the Berry curvature
+of the occupied states [85] and, hence, should qualita-
+tively follow ΦB(µ) in Eq. (17).
+
+IV.
+
+INCLUDING THE SECOND VALLEY
+
+After clarifying the HHG spectrum in a single-valley,
+we finally address the case where both valleys are taken
+into account. To incorporate the interaction-induced val-
+ley polarization in the system, we follow previous works
+
+8
+
+near cancellation between the opposite chiralities of the
+two valleys. For n = 4 − 6, CD2n+1 is more and more
+determined by the larger-gap valley (ξ = +) upon in-
+creasing n, culminating in n = 6, where CD2n+1 is close
+to reaching the maximum value of +1.
+
+V. CONCLUSION
+
+In this work, we studied harmonic generation due to a
+high-intensity light pulse in a minimal model for rhom-
+bohedral multi-layer graphene. We investigated the be-
+havior as a function of the number n of graphene layers,
+explored the dependence on the band filling and the in-
+terplay of two energetically split valleys, scrutinizing the
+role of the quantum geometry of the chiral Bloch states.
+We first started by investigating the physics of a sin-
+gle valley. We showed that the momentum-space occu-
+pations at early times after the onset of the light pulse
+are crucially shaped by the non-trivial momentum de-
+pendence of the Bloch states, which has the characteris-
+tic feature of being significant in a ring of finite radius
+around the K and K′ points. Since the Bloch state’s
+winding in k space crucially affects the transition ma-
+trix elements, it is natural to have a huge impact on the
+HHG spectra: The dominant harmonic orders above the
+bandgap scale linearly with n and are primarily driven by
+the interband contribution to the current. More specif-
+ically, we find that the dominant peaks of the spectral
+intensity in Eq. (13) are at frequencies ω(l) = lω0 with
+l = 2n ± 1; we only find one of these two peaks in the
+analogous intensity I ±
+P in Eq. (16), depending on ± and
+the chirality of the polarization P .
+
+To probe the chirality of the valleys systematically,
+we investigated circular dichroism of the different har-
+monic orders l, specifically, the dimensionless quantity in
+Eq. (15). While it was found to be almost exclusively
+reaching its maximum magnitude of one, its sign is de-
+termined by the chirality of the normal state, i.e., which
+of the two valleys dominates. We identified the quan-
+tity CD1/CD2n+1 to also provide quantitative informa-
+tion about the degree of the winding of the Bloch states
+since ln |CD1/CD2n+1| is found to scale linearly with n.
+We further studied the doping dependence, which re-
+vealed that CD2n+1 stays close to being saturated in an
+extended range of chemical potential values, much larger
+than the gap and the range where the net Berry curva-
+ture of the occupied states, ΦB in Eq. (17), stays close to
+its value at charge neutrality (the Chern number). It is
+again the normalized quantity CD1/CD2n+1 that follows
+ΦB more closely. Finally, we investigated the interplay of
+two opposite chiralities when both valleys, but with dif-
+ferent interaction-induced gaps, are included. Remark-
+ably, the dominant valley determining the sign of CD2n+1
+depends on the number of layers n.
+
+FIG. 5. a) Schematic illustration of the electronic dispersion
+relation in the two valleys in the presence of valley imbalance,
+with smaller (larger) gap for ξ = − (ξ = +). b) Normalized
+time trace of currents for the first 9 HOs for valley ξ = +
+(dark colors) and ξ = − (light colors). Here n = 4 and
+the incident laser is linearly polarized along the x direction.
+c) ln[I +
+RCP(ω)] for n = 3 as function of ω/ω0 when both val-
+leys are simultaneously active (green) and for the two valleys
+separately (purple and orange). d) CD2n+1 including both
+valleys.
+Inset shows value of CD2n+1 in each valley, upper
+triangles correspond to ξ = + and lower triangles to ξ = −.
+Valley ξ = + has larger gap 2(w + ΦV ) = 8w/3 and valley
+ξ = − has smaller gap 2(w − ΦV ) = 4w/3; ΦV = w/3.
+
+two valleys do not qualitatively change these features.
+
+Closer inspection of Fig. 5(c) shows that the dominant
+peak in I (2) away from the fundamental harmonic ap-
+pears at the HO (2n + 1) where also the single valley
+ξ = + has its dominant peak with virtually identical
+peak height as the two-valley system. We checked that
+this is also the case for n = 4, 5, 6 (for n = 2, the asso-
+ciated HO is below the band gap of the larger valley).
+To understand whether it is the difference in band gap
+or chirality that selects the ξ = + valley to determine
+the peak of the two-valley problem, we investigate the
+behavior under LCP light while keeping the band gaps
+identical: now, it is the ξ = − valley that drives the dom-
+inant higher harmonic peak of I (2)(ω). In line with other
+recent results [43, 90] and as expected by symmetry, this
+shows that circularly polarized light couples preferably
+to band structures with a specific chirality.
+
+The two valleys have opposite chirality [cf. Eq. (4)]
+and, thus, opposite CDl by themselves [see also inset in
+Fig. 5(d)]. Therefore, it is natural to expect a more non-
+trivial interplay of the two valleys in CD. This is indeed
+what we find, as shown in the main panel of Fig. 5(d):
+although the gaps are fixed (in particular, in all cases
+CD2n+1 of the single-valley problem is negative in the
+valley, ξ = −, with the smaller gap), we find that CD2n+1
+changes sign as a function of n. This shows that, while
+CD2n+1 is dominated for n ≤ 3 by the valley with smaller
+gap, it is the larger-gap valley which determines the sign
+of CD2n+1 for n ≥ 4. Notably, at n = 3, we have a
+
+Taken together, our findings show that rhombohe-
+dral multilayer graphene, particularly with valley imbal-
+ance, and chiral multi-band systems in general display
+rich physics concerning harmonic generation and circu-
+lar dichroism. As we discussed in detail, this is rooted
+in their non-trivial quantum geometry. Given the fast
+progress in non-linear optics in two-dimensional materials
+[35–37], we hope that some of our predictions will become
+relevant to future experiments in multi-layer graphene
+
+[1] A. Gao, N. Nagaosa, N. Ni, and S.-Y. Xu, “Quantum
+Geometry Phenomena in Condensed Matter Systems,”
+arXiv e-prints
+(2025), arXiv:2508.00469 [cond-mat.str-
+el].
+
+[2] Y. Jiang, T. Holder, and B. Yan, “Revealing quantum
+geometry in nonlinear quantum materials,” Reports on
+Progress in Physics 88, 076502 (2025).
+
+[3] P. Törmä, S. Peotta,
+
+and B. A. Bernevig, “Super-
+conductivity, superfluidity and quantum geometry in
+twisted multilayer systems,” Nature Reviews Physics 4,
+528 (2022).
+
+[4] N. Verma, P. J. W. Moll, T. Holder, and R. Queiroz,
+“Quantum geometry and the hidden scales in materials,”
+Nature Reviews Physics 8, 226 (2026).
+
+[5] H. Zhou, T. Xie, T. Taniguchi, K. Watanabe,
+
+and
+A. F. Young, “Superconductivity in rhombohedral tri-
+layer graphene,” Nature 598, 434 (2021).
+
+[6] H. Zhou, T. Xie, A. Ghazaryan, T. Holder, J. R. Ehrets,
+E. M. Spanton, T. Taniguchi, K. Watanabe, E. Berg,
+M. Serbyn, and A. F. Young, “Half- and quarter-metals
+in rhombohedral trilayer graphene,” Nature 598, 429
+(2021).
+
+[7] P. A. Pantaleón, A. Jimeno-Pozo, H. Sainz-Cruz,
+V. Phong, T. Cea, and F. Guinea, “Superconductivity
+and correlated phases in non-twisted bilayer and trilayer
+graphene,” Nature Reviews Physics 5, 304 (2023).
+
+[8] T. Han, Z. Lu, Y. Yao, L. Shi, J. Yang, J. Seo, S. Ye,
+Z. Wu, M. Zhou, H. Liu, G. Shi, Z. Hua, K. Watanabe,
+T. Taniguchi, P. Xiong, L. Fu, and L. Ju, “Signatures of
+Chiral Superconductivity in Rhombohedral Graphene,”
+(2024), arXiv:2408.15233.
+
+[9] E. Morissette, P. Qin, H.-T. Wu, N. J. Zhang, K. Watan-
+and J. I. A. Li, “Superconductiv-
+abe, T. Taniguchi,
+ity, Anomalous Hall Effect, and Stripe Order in Rhom-
+bohedral Hexalayer Graphene,” arXiv e-prints
+(2025),
+arXiv:2504.05129 [cond-mat.mes-hall].
+
+[10] Y.-Z. Chou, F. Wu, J. D. Sau,
+
+and S. Das Sarma,
+“Acoustic-phonon-mediated superconductivity in rhom-
+bohedral trilayer graphene,” Phys. Rev. Lett. 127,
+187001 (2021).
+
+[11] A. Ghazaryan, T. Holder, M. Serbyn,
+
+and E. Berg,
+“Unconventional superconductivity in systems with an-
+nular fermi surfaces: Application to rhombohedral tri-
+layer graphene,” Phys. Rev. Lett. 127, 247001 (2021).
+
+9
+
+and related chiral systems.
+
+ACKNOWLEDGMENTS
+
+J.O.d.A. and M.S.S. acknowledge support from EU
+HORIZON-MSCA-2024-PF-01 Project No.101205617,
+GATOR. W.K.-K. acknowledges the Laboratory Di-
+rected Research and Development (LDRD) program of
+Los Alamos National Laboratory under projects number
+20260116ER and 20240037DR.
+
+conductivity and intervalley coherence in rhombohedral
+trilayer graphene,” Phys. Rev. B 105, 134524 (2022).
+[13] A. L. Szabó and B. Roy, “Metals, fractional metals, and
+superconductivity in rhombohedral trilayer graphene,”
+Phys. Rev. B 105, L081407 (2022).
+[14] S. Chatterjee, T. Wang, E. Berg,
+
+and M. P. Zale-
+tel, “Inter-valley coherent order and isospin fluctuation
+mediated superconductivity in rhombohedral trilayer
+graphene,” Nature Communications 13, 6013 (2022).
+[15] A. Ghazaryan, T. Holder, E. Berg, and M. Serbyn, “Mul-
+tilayer graphenes as a platform for interaction-driven
+physics and topological superconductivity,” Phys. Rev.
+B 107, 104502 (2023).
+
+[16] A. Jimeno-Pozo, H. Sainz-Cruz, T. Cea, P. A. Pantaleón,
+and F. Guinea, “Superconductivity from electronic inter-
+actions and spin-orbit enhancement in bilayer and tri-
+layer graphene,” Phys. Rev. B 107, L161106 (2023).
+[17] W. Qin, C. Huang, T. Wolf, N. Wei, I. Blinov, and A. H.
+MacDonald, “Functional renormalization group study of
+superconductivity in rhombohedral trilayer graphene,”
+Phys. Rev. Lett. 130, 146001 (2023).
+
+[18] Z. Li, X. Kuang, A. Jimeno-Pozo, H. Sainz-Cruz,
+Z. Zhan, S. Yuan, and F. Guinea, “Charge fluctuations,
+phonons, and superconductivity in multilayer graphene,”
+Phys. Rev. B 108, 045404 (2023).
+
+[19] Z. Dong, L. Levitov, and A. V. Chubukov, “Supercon-
+ductivity near spin and valley orders in graphene multi-
+layers,” Phys. Rev. B 108, 134503 (2023).
+
+[20] Z. Dong, É. Lantagne-Hurtubise, and J. Alicea, “Super-
+conductivity from spin-canting fluctuations in rhombo-
+hedral graphene,” (2024), arXiv:2406.17036.
+
+[21] G. Shavit and J. Alicea, “Quantum geometric kohn-
+luttinger superconductivity,” Phys. Rev. Lett. 134,
+176001 (2025).
+
+[22] J. May-Mann, T. Helbig,
+
+“How
+pairing mechanism dictates topology in valley-polarized
+(2025),
+superconductors with Berry curvature,”
+arXiv:2503.05697.
+
+and T. Devakul,
+
+[23] G. Parra-Martinez, A. Jimeno-Pozo, V. Tien Phong,
+H. Sainz-Cruz, D. Kaplan, P. Emanuel, Y. Oreg, P. A.
+Pantaleon, J. A. Silva-Guillen, and F. Guinea, “Band
+Renormalization, Quarter Metals, and Chiral Supercon-
+ductivity in Rhombohedral Tetralayer Graphene,” arXiv
+e-prints (2025), arXiv:2502.19474 [cond-mat.str-el].
+
+[12] Y.-Z. You and A. Vishwanath, “Kohn-luttinger super-
+
+[24] H. Yang and Y.-H. Zhang,
+
+“Topological
+
+incommen-
+
+surate Fulde-Ferrell-Larkin-Ovchinnikov superconductor
+and Bogoliubov Fermi surface in rhombohedral tetra-
+layer graphene,” (2024), arXiv:2411.02503.
+
+[25] M. Christos, P. M. Bonetti, and M. S. Scheurer, “Finite-
+momentum pairing and superlattice superconductivity
+in valley-imbalanced rhombohedral graphene,” arXiv e-
+prints (2025), arXiv:2503.15471 [cond-mat.str-el].
+
+[26] D. Sedov and M. S. Scheurer,
+
+“Quantum geometry
+and impurity sensitivity of superconductors without
+time-reversal symmetry: application to rhombohedral
+graphene and altermagnets,” arXiv e-prints
+(2025),
+arXiv:2510.19943 [cond-mat.supr-con].
+
+[27] A. S. Patri and M. Franz, “Family of Multilayer Graphene
+Superconductors with Tunable Chirality: Momentum-
+Space Vortices Forged in the Berry-Ring of Fire,” arXiv
+e-prints (2025), arXiv:2505.21616 [cond-mat.supr-con].
+[28] Z. Dong and P. A. Lee, “A controllable theory of super-
+conductivity due to strong repulsion in a polarized band,”
+arXiv e-prints (2025), arXiv:2503.11079 [cond-mat.supr-
+con].
+
+[29] B. A. Bernevig and Y. H. Kwan,
+
+““Berry Trash-
+can” Model of Interacting Electrons in Rhombohedral
+Graphene,” arXiv e-prints
+(2025), arXiv:2503.09692
+[cond-mat.str-el].
+
+[30] M. Lewenstein, P. Balcou, M. Y. Ivanov, A. L’Huillier,
+and P. B. Corkum, “Theory of high-harmonic generation
+by low-frequency laser fields,” Phys. Rev. A 49, 2117
+(1994).
+
+[31] P. B. Corkum, “Plasma perspective on strong field mul-
+tiphoton ionization,” Physical review letters 71, 1994
+(1993).
+
+[32] M. Lewenstein, P. Balcou, M. Y. Ivanov, A. L’huillier,
+and P. B. Corkum, “Theory of high-harmonic genera-
+tion by low-frequency laser fields,” Physical Review A
+49, 2117 (1994).
+
+[33] L. Yue and M. B. Gaarde, “Introduction to theory of
+high-harmonic generation in solids: tutorial,” Journal of
+the Optical Society of America B 39, 535 (2022).
+
+[34] G. Vampa and T. Brabec, “Merge of high harmonic gen-
+eration from gases and solids and its implications for at-
+tosecond science,” Journal of Physics B: Atomic, Molec-
+ular and Optical Physics 50, 083001 (2017).
+
+[35] K. Ullah, Y. Meng, Y. Shi, and F. Wang, “Harmonic gen-
+eration in low-dimensional materials,” Advanced Optical
+Materials 10, 2101860 (2022).
+
+[36] A. R. Khan, L. Zhang, K. Ishfaq, A. Ikram, T. Yildrim,
+B. Liu, S. Rahman, and Y. Lu, “Optical harmonic gen-
+eration in 2d materials,” Advanced Functional Materials
+32, 2105259 (2022).
+
+[37] R. Zhou, T. Guo, L. Huang, and K. Ullah, “Engineering
+the harmonic generation in graphene,” Materials Today
+Physics 23, 100649 (2022).
+
+[38] P. Bhalla, K. Das, D. Culcer, and A. Agarwal, “Reso-
+nant second-harmonic generation as a probe of quantum
+geometry,” Phys. Rev. Lett. 129, 227401 (2022).
+
+[39] M. Lysne, Y. Murakami, M. Schüler, and P. Werner,
+“High-harmonic generation in spin-orbit coupled sys-
+tems,” Phys. Rev. B 102, 081121 (2020).
+
+[40] D. Kim, D. Shin, A. S. Landsman, D. E. Kim,
+
+and
+A. Chacón, “Theory for all-optical responses in topolog-
+ical materials: The velocity gauge picture,” Physical Re-
+
+10
+
+view B 106, 214314 (2022).
+
+[41] R. K. Malla, D. Kim, D. E. Kim, A. Chacón,
+
+and
+W. J. Kort-Kamp, “Ultrafast nonequilibrium dynamics
+and high-harmonic generation in two-dimensional quan-
+tum spin hall materials,” Physical Review Materials 7,
+L051201 (2023).
+
+[42] A. Chacón, D. Kim, W. Zhu, S. P. Kelly, A. Dauphin,
+E. Pisanty, A. S. Maxwell, A. Picón, M. F. Ciappina,
+D. E. Kim, et al., “Circular dichroism in higher-order
+harmonic generation: Heralding topological phases and
+transitions in chern insulators,” Physical Review B 102,
+134115 (2020).
+
+[43] A. d.
+
+l. Heras, O. Neufeld,
+
+and A. Rubio,
+“Pulse-duration-sensitive high harmonics and attosec-
+ond locally-chiral light from a chiral topological weyl
+semimetal,” arXiv preprint arXiv:2603.05346 (2026).
+[44] T. T. Luu and H. J. Wörner, “Measurement of the berry
+curvature of solids using high-harmonic spectroscopy,”
+Nature communications 9, 916 (2018).
+
+[45] R. Silva, Á. Jiménez-Galán, B. Amorim, O. Smirnova,
+and M. Ivanov, “Topological strong-field physics on sub-
+laser-cycle timescale,” Nature Photonics 13, 849 (2019).
+[46] M. Wu, S. Ghimire, D. A. Reis, K. J. Schafer, and M. B.
+Gaarde, “High-harmonic generation from bloch electrons
+in solids,” Phys. Rev. A 91, 043839 (2015).
+
+[47] Y. Bai, F. Fei, S. Wang, N. Li, X. Li, F. Song, R. Li,
+Z. Xu, and P. Liu, “High-harmonic generation from topo-
+logical surface states,” Nature Physics 17, 311 (2021).
+
+[48] D. Bauer and K. K. Hansen, “High-harmonic generation
+in solids with and without topological edge states,” Phys-
+ical review letters 120, 177401 (2018).
+
+[49] C. Heide, Y. Kobayashi, D. R. Baykusheva, D. Jain, J. A.
+Sobota, M. Hashimoto, P. S. Kirchmann, S. Oh, T. F.
+Heinz, D. A. Reis, et al., “Probing topological phase tran-
+sitions using high-harmonic generation,” Nature Photon-
+ics 16, 620 (2022).
+
+[50] M. L. Bera, J. O. de Almeida, M. Dziurawiec,
+M. Płodzień, M. M. Maśka, M. Lewenstein, T. Grass,
+“Topological phase detection
+and U. Bhattacharya,
+through high-harmonic spectroscopy in extended su-
+schrieffer-heeger chains,” Physical Review B 108, 214104
+(2023).
+
+[51] M. F. Ciappina, “Solid-state high-order harmonic gener-
+ation: emerging frontiers in ultrafast and quantum light
+science,” Advances in Physics , 1 (2025).
+
+[52] H. A. Hafez, S. Kovalev, J.-C. Deinert, Z. Mics,
+B. Green, N. Awari, M. Chen, S. Germanskiy, U. Lehnert,
+J. Teichert, et al., “Extremely efficient terahertz high-
+harmonic generation in graphene by hot dirac fermions,”
+Nature 561, 507 (2018).
+[53] N. Yoshikawa, T. Tamaya,
+
+and K. Tanaka, “High-
+harmonic generation in graphene enhanced by elliptically
+polarized light excitation,” Science 356, 736 (2017).
+[54] G. Soavi, G. Wang, H. Rostami, D. G. Purdie,
+D. De Fazio, T. Ma, B. Luo, J. Wang, A. K. Ott, D. Yoon,
+et al., “Broadband, electrically tunable third-harmonic
+generation in graphene,” Nature nanotechnology 13, 583
+(2018).
+
+[55] S. Cha, M. Kim, Y. Kim, S. Choi, S. Kang, H. Kim,
+S. Yoon, G. Moon, T. Kim, Y. W. Lee, et al., “Gate-
+tunable quantum pathways of high harmonic generation
+
+in graphene,” Nature Communications 13, 6630 (2022).
+[56] M. Baudisch, A. Marini, J. D. Cox, T. Zhu, F. Silva,
+S. Teichmann, M. Massicotte, F. Koppens, L. S. Levi-
+tov, F. J. Garcia de Abajo, et al., “Ultrafast nonlinear
+optical response of dirac fermions in graphene,” Nature
+Communications 9, 1018 (2018).
+
+[57] E. B. Molinero, A. Datta, M. J. Calderón, E. Bascones,
+and R. E. Silva, “High-harmonic generation with a twist:
+all-optical characterization of magic-angle twisted bilayer
+graphene,” Optica 11, 171 (2024).
+
+[58] Y. Shan, Y. Li, D. Huang, Q. Tong, W. Yao, W.-T.
+Liu, and S. Wu, “Stacking symmetry governed second
+harmonic generation in graphene trilayers,” Science Ad-
+vances 4, eaat0074 (2018).
+
+[59] N. Yoshikawa, K. Nagai, K. Uchida, Y. Takaguchi,
+S. Sasaki, Y. Miyata,
+“Interband
+resonant high-harmonic generation by valley polarized
+electron–hole pairs,” Nature communications 10, 3709
+(2019).
+
+and K. Tanaka,
+
+[60] W. Zhou, J. Hua, N. Liu, J. Ding, H. Xiang, W. Zhu, and
+S. Xu, “Inversion symmetry-broken tetralayer graphene
+probed by second-harmonic generation,” Nano Letters
+24, 8378 (2024).
+
+[61] N. Rana, M. S. Mrudul, and G. Dixit, “High-harmonic
+generation from strain-engineered graphene for polariza-
+tion tailoring,” Phys. Rev. B 110, 054103 (2024).
+
+[62] M. Mrudul and G. Dixit, “High-harmonic generation
+from monolayer and bilayer graphene,” Physical Review
+B 103, 094308 (2021).
+
+[63] S. A. Sato, H. Hirori, Y. Sanari, Y. Kanemitsu, and
+A. Rubio, “High-order harmonic generation in graphene:
+Nonlinear coupling of intraband and interband transi-
+tions,” Physical Review B 103, L041408 (2021).
+
+[64] Z.-Y. Chen and R. Qin, “Circularly polarized extreme ul-
+traviolet high harmonic generation in graphene,” Optics
+express 27, 3761 (2019).
+
+[65] S. Rakhmanov, K. Matchonov, H. Yusupov, K. Nasriddi-
+nov, and D. Matrasulov, “Optical high harmonic genera-
+tion in dirac materials,” The European Physical Journal
+B 98, 35 (2025).
+
+[66] R. Boyero-García, A. García-Cabrera, O. Zurrón-
+Cifuentes, C. Hernández-García,
+and L. Plaja, “Non-
+classical high harmonic generation in graphene driven by
+linearly-polarized laser pulses,” Optics Express 30, 15546
+(2022).
+
+[67] J. D. Cox, A. Marini, and F. J. G. de Abajo, “Plasmon-
+assisted high-harmonic generation in graphene,” Nature
+Communications 8, 14380 (2017).
+
+[68] Z.-Y. Chen and R. Qin, “High harmonic generation
+in graphene–boron nitride heterostructures,” J. Mater.
+Chem. C 8, 12085 (2020).
+
+[69] Y. Murakami and M. Schüler, “Doping and gap size de-
+pendence of high-harmonic generation in graphene: Im-
+portance of consistent formulation of light-matter cou-
+pling,” Physical Review B 106, 035204 (2022).
+
+[70] T. N. Ikeda, “High-order nonlinear optical response of a
+twisted bilayer graphene,” Physical Review Research 2,
+032015 (2020).
+
+[71] H. K. Avetissian, G. F. Mkrtchian, and A. Knorr, “Ef-
+ficient high-harmonic generation in graphene with two-
+color laser field at orthogonal polarization,” Physical Re-
+
+11
+
+view B 105, 195405 (2022).
+
+[72] Z. Guan, Z. Yin, J. You, B. Wang, X. Li, G.-L. Wang, X.-
+X. Zhou, and C. Jin, “Optimal generation and systematic
+analysis of tunable terahertz emissions from single-layer
+graphene using two-color laser pulses with different du-
+rations,” Physical Review A 108, 023515 (2023).
+
+[73] F. Dong, Q. Xia, and J. Liu, “Ellipticity of the harmonic
+emission from graphene irradiated by a linearly polarized
+laser,” Physical Review A 104, 033119 (2021).
+
+[74] Y. Zhang, L. Li, J. Li, T. Huang, P. Lan, and P. Lu, “Ori-
+entation dependence of high-order harmonic generation
+in graphene,” Physical Review A 104, 033110 (2021).
+[75] N. Rana, M. Mrudul, and G. Dixit, “Generation of cir-
+cularly polarized high harmonics with identical helicity
+in two-dimensional materials,” Physical Review Applied
+18, 064049 (2022).
+
+[76] L. Asteria, D. T. Tran, T. Ozawa, M. Tarnowski, B. S.
+Rem, N. Fläschner, K. Sengstock, N. Goldman,
+and
+C. Weitenberg, “Measuring quantized circular dichroism
+in ultracold topological matter,” Nature physics 15, 449
+(2019).
+
+[77] B. Ranjbar and P. Gill,
+
+“Circular dichroism tech-
+niques: biomolecular and nanostructural analyses-a re-
+view,” Chemical biology & drug design 74, 101 (2009).
+
+[78] M. Koshino and E. McCann, “Trigonal warping and
+berry’s phase nπ in abc-stacked multilayer graphene,”
+Phys. Rev. B 80, 165409 (2009).
+
+[79] M. Koshino, “Interlayer screening effect in graphene mul-
+tilayers with aba and abc stacking,” Physical Review
+B—Condensed Matter and Materials Physics 81, 125304
+(2010).
+
+[80] F. Zhang, B. Sahu, H. Min, and A. H. MacDonald, “Band
+structure of abc-stacked graphene trilayers,” Phys. Rev.
+B 82, 035409 (2010).
+
+[81] H. Min, G. Borghi, M. Polini, and A. H. MacDonald,
+“Pseudospin magnetism in graphene,” Physical Review
+B—Condensed Matter and Materials Physics 77, 041407
+(2008).
+
+[82] M. Koshino and E. McCann, “Parity and valley de-
+generacy in multilayer graphene,” Physical Review
+B—Condensed Matter and Materials Physics 81, 115315
+(2010).
+
+[83] J. H. Muten, A. J. Copeland,
+
+and E. McCann, “Ex-
+change interaction, disorder, and stacking faults in rhom-
+bohedral graphene multilayers,” Physical Review B 104,
+035404 (2021).
+
+[84] G. Vampa, C. McDonald, G. Orlando, D. Klug,
+P. Corkum, and T. Brabec, “Theoretical analysis of high-
+harmonic generation in solids,” Physical review letters
+113, 073901 (2014).
+[85] R. Silva, F. Martín,
+
+and M. Ivanov, “High harmonic
+generation in crystals using maximally localized wannier
+functions,” Physical Review B 100, 195201 (2019).
+[86] D. Golde, T. Meier, and S. W. Koch, “High harmon-
+ics generated in semiconductor nanostructures by the
+coupled dynamics of optical inter-and intraband excita-
+tions,” Physical Review B—Condensed Matter and Ma-
+terials Physics 77, 075330 (2008).
+
+[87] H. Haug and S. W. Koch, Quantum theory of the op-
+tical and electronic properties of semiconductors (world
+scientific, 2009).
+
+12
+
+[88] S. Ghimire, A. D. DiChiara, E. Sistrunk, P. Agostini,
+L. F. DiMauro, and D. A. Reis, “Observation of high-
+order harmonic generation in a bulk crystal,” Nature
+physics 7, 138 (2011).
+
+[89] D. Dutta and K. Saha, “Probing fermi surface topol-
+ogy by ultrafast pump pulse dynamics,” arXiv preprint
+arXiv:2508.06910 (2025).
+
+[90] M. Mrudul and G. Dixit, “Controlling valley-polarisation
+in graphene via tailored light pulses,” Journal of Physics
+B: Atomic, Molecular and Optical Physics 54, 224001
+(2021).
+
+[91] Y. Lee, D. Tran, K. Myhro, J. Velasco, N. Gillgren,
+C. Lau, Y. Barlas, J. Poumirol, D. Smirnov,
+and
+F. Guinea, “Competition between spontaneous symmetry
+breaking and single-particle gaps in trilayer graphene,”
+Nature communications 5, 5656 (2014).
+
+[92] L. Li, P. Lan, X. Zhu, and P. Lu, “High harmonic gener-
+ation in solids: particle and wave perspectives,” Reports
+on Progress in Physics 86, 116401 (2023).
+
+[93] J. Li, X. Zhang, S. Fu, Y. Feng, B. Hu, and H. Du,
+“Phase invariance of the semiconductor bloch equations,”
+Physical Review A 100, 043404 (2019).
+
+Appendix A: Analytical expressions for wavefunctions and matrix elements
+
+Decomposing Eq. (1) in the Pauli basis as hn(k) = g0σ0 + g(k).σ, where σ are the Pauli matrices and g(k) =
+
+(g1(k), g2(k), g3(k)) are
+
+g0 = −µ
+
+g1(k) = (−1)n+1γ1
+
+kn
+kn
+c
+
+cos (nξβ)
+
+g2(k) = (−1)n+1γ1
+
+kn
+kn
+c
+
+sin (nξβ)
+
+g3(k) = w
+
+where k =
+
+(cid:113)
+
+x + k2
+k2
+
+y and β = arctan (ky/kx).
+
+The eigenvectors of the Hamiltonian in Eq. (1) are
+
+|ϕ(ξ)
+
+− (k)⟩ =
+
+einξβ
+(cid:112)2k2n|g(k)| (g3(k) − |g(k)|)
+
+(cid:18) g3(k) − |g(k)|
+−γ1kne−inξβ/kn
+c
+
+(cid:19)
+
+,
+
+|ϕ(ξ)
+
++ (k)⟩ =
+
+1
+(cid:112)2|g(k)| (g3(k) + |g(k)|)
+
+(cid:18) g3(k) + |g(k)|
+−γ1kne−inξβ/kn
+c
+
+(cid:19)
+
+,
+
+where |g(k)| = (cid:112)(g1(k))2 + (g2(k))2 + (g3(k))2 and keinξβ = (kx + iξky)n.
+
+The dipole moment matrix d(ξ)(k) is
+
+d(ξ)(k) =
+
+(cid:19)
+(cid:18)d−−(k) d−+(k)
+d+−(k) d++(k)
+
+with exact solutions to Eq. (6) as
+
+d(ξ)
+−−(k) =
+
+
+
+
+
+
+−ξky n
+
+(cid:16)
+
+w −
+
+(cid:113)
+
+w2 + k−2n
+
+c
+
+(k2
+
+x + k2
+
+y)nγ2
+
+2(k2
+
+x + k2
+y)
+
+(cid:113)
+
+w2 + k−2n
+
+c
+
+(k2
+
+x + k2
+
+y)nγ2
+
+
+
+(cid:17)
+
+
+
+
+ ˆx +
+
+
+
+
+−ξkx n
+
+(cid:16)
+
+−w +
+
+(cid:113)
+
+w2 + k−2n
+
+c
+
+(k2
+
+x + k2
+
+y)nγ2
+
+(cid:113)
+
+2(k2
+
+x + k2
+y)
+
+w2 + k−2n
+
+c
+
+(k2
+
+x + k2
+
+y)nγ2
+
+(A1)
+
+(A2)
+
+(A3)
+
+(A4)
+
+
+
+(cid:17)
+
+
+ ˆy (A5)
+
+d(ξ)
++−(k) =
+
+
+
+
+
+
+i ξ(cid:0)−kc(kx + iξky)(cid:1)n
+
+nγ
+
+(cid:16)
+
+iξkxw + ky
+
+(cid:113)
+
+2(k2
+
+x + k2
+
+y) (cid:0)k2n
+
+c w2 + (k2
+
+c
+
+w2 + k−2n
+y)nγ2(cid:1)
+
+x + k2
+
+(k2
+
+x + k2
+
+y)nγ2
+
+
+
+(cid:17)
+
+
+ ˆx +
+
+
+
++
+
+
+−
+
+iξ (cid:0)−kc(kx + iξky)(cid:1)n
+2(k2
+
+−iξkyw + kx
+y) (cid:0)k2n
+
+c w2 + (k2
+
+c
+
+w2 + k−2n
+y)nγ2(cid:1)
+
+x + k2
+
+x + k2
+
+(cid:16)
+
+nγ
+
+(cid:113)
+
+Ω(ξ)
+
+± (k) = ±
+
+ξn2 w γ2 k−2n
+2(w2 + γ2 k−2n
+
+c
+
+c
+
+(k2
+(k2
+
+x + k2
+x + k2
+
+y)n−1
+y)n)3/2
+
+(k2
+
+x + k2
+
+y)nγ2
+
+
+
+(cid:17)
+
+
+ ˆy
+
+(A6)
+
+(A7)
+
+13
+
+Analyzing the analytical expressions, we can derive the solutions ∂kε±(k) ∝ ±nk2n−1a/(b + k2n)1/2 and Berry
+curvature Ω±(k) ∝ ±c n2k2n−2/(b + k2n)3/2, (a = γ2, b = w2/γ2, c = wγ2/2 ), contribute to the intraband current,
+the phase relation between the ˆx and ˆy components exchanging and rotating the kx and ky components of the dipole
++−(kx, ky)ˆy and d(ξ)
+matrix elements are d(ξ)
+
++−(ky, −kx)ˆx = e−inπ/2d(ξ)
+
+−−(ky, −kx)ˆx = d(ξ)
+
+−−(kx, ky)ˆy.
+
+Appendix B: Rhombohedral graphene parameters
+
+Here, we comment on the relation of the parameters used in the main text and those believed to describe RMG
+well. As for the latter, the interlayer nearest neighbor hopping amplitude between superposed sites Bj-Aj+1 is
+γ1 = 0.381 eV= 1.4 × 10−2 a.u., the intralayer nearest neighbor γ0 = 3.16 eV= 0.12 a.u., and the intralayer distance is
+a = 0.246 nm= 4.65 a.u. [83], yielding a momentum scale of kc = 2γ1/(
+3aγ0) ∼ 0.03 a.u.. The bandgap (2w) can be
+up to 42 meV = 1.54 × 10−3a.u. as implemented in [91]. In our numerical simulations, the relevant parameters kc, γ1
+and 2w are, respectively chosen as 1 a.u., 0.46 a.u. and 0.052 a.u.. These parameters differ from the true values by a
+constant factor of ∼ 33.33; it can be thought of as a rescaled choice of units such that the momentum scale kc is fixed
+to unity, kc ∼ 1 a.u..
+
+√
+
+However, transforming back from the parameters used in the simulations to those of RMG listed above is straight-
+forward. Most importantly, the ratio between the bandgap and the laser frequency of 2w = 4ℏω0 for rhombohedral
+graphene with a bandgap of 42 meV would require a laser with frequency ω0 = 2.5 THz (λ = 124 µm) which is possible
+with current technology [52].
+
+Appendix C: Keldysh approximation and semiclassical analysis
+
+1. Why only odd harmonics
+
+In this appendix, we would like to qualitatively understand the dominance of odd harmonics above the bandgap
+in the HHG. To do that, we focus on the interband current, as it is the dominant contribution above the bandgap.
+Using the Keldysh approximation [33, 84, 92], we will explore the parity of the matrix elements under inversion of
+momentum, k → −k, and the periodicity of the incident field to identify the dominant HOs.
+
+The Keldysh approximation fixes the difference between the band populations to 1, i.e. n+,ξ(K, t) − n−,ξ(K, t) ≈ 1;
+
+this decouples the SBEs in Eq. (9). Under this approximation, the interband current is [33, 42, 84, 92]
+
+J(ξ)
+inter(t) = −i
+
+d2K d(ξ)
+
++−(K + A(t))
+
+(cid:90) t
+
+dt′E(t′) ·
+
+(cid:104)
+
+d(ξ)
++−(K + A(t′))
+
+(cid:105)∗
+
+(cid:90)
+
+d
+dt
+
+t0
+× e−iS(ξ)(K,t,t′)−i(t−t′)/T2 + c.c.
+(cid:90) t
+
+(C1a)
+
+(C1b)
+
+S(ξ)(K, t, t′) =
+
+dt′′∆ϵ(K + A(t′′)) + E(t′′) · ∆A(ξ)(K + A(t′′)),
+
+t′
+
+where S(K, t, t′) is the accumulated phase in time, also called the classical action. This solution is typically derived
+in the Houston basis and in the velocity gauge [84], but this is a gauge invariant quantity as discussed in [33, 42, 93].
+Here we examine Eq. (C1), to qualitatively understand how the incident laser periodicity and the symmetry of the
+dispersion and matrix elements lead to the dominance of odd harmonic orders in this model. The HHG spectrum is
+proportional to the Fourier transform of the current, cf. Eq. (13). Basically, our argument will be that if Eq. (C1a) is
+effectively even in A(t), this would result in an HHG spectrum with peaks at odd frequencies, due to the extra factor
+of E(t) in Eq. (C1a).
+
+We next discuss this more systematically. First, we consider how the instantaneous crystal momentum transforms
+in the moving frame, k(K, t) = K + A(t), under inversion of momentum K → −K. For a monochromatic incident
+field, with frequency ω0 and period τ = 2π/ω0, the vector potential and electromagnetic field have approximately the
+following half-period symmetry (in the limit where τ is much shorter than the duration of the Gaussian envelope)
+
+A(t + τ /2) ∼ −A(t),
+
+E(t + τ /2) ∼ −E(t).
+
+Including the half-period time shift in the moving frame, K + A(t), gives
+
+k(K, t + τ /2) ∼ K − A(t) ∼ −k(−K, t).
+
+(C2)
+
+(C3)
+
+14
+
+Upon shifting K → −K in the momentum integration in Eq. (C1), we can relate J(ξ)
+inter(t + τ /2), where
+all functions are evaluated at −k. As a consequence, by exploring the parity of each element in the right hand side
+Eq. (C1a) under momentum and half-period transformation in time, i.e. k → −k and t → t + τ /2, we can investigate
+the behavior of J(ξ)
++−(k), E(t),
+∆ϵ(k) and ∆A(k).
+The parity of d(ξ)
+
++−(k) is opposite to the parity of n, d(ξ)
++−(k), therefore, an even (odd) n gives
+an odd (even) d(ξ)
++−(k). Nevertheless, in Eq. (C1a) the time-dependent current is proportional to (d(ξ)
++−(k))2, and this
+quantity has always even parity regardless of the parity of n, as a consequence, we can safely assume the parity of the
+harmonic orders will not depend on the parity of n.
+
+inter(t) under t → t + τ /2. We will discuss the parity of the following quantities: d(ξ)
+
++−(−k) = −(−1)−nd(ξ)
+
+inter(t) to J(ξ)
+
+Analyzing the parity of the terms in Eq. (C1b), ∆ϵ(k) is even [cf. Eq. (2)] and ∆A(ξ)(k) is odd as the diagonal
+elements of A(ξ)
+p (−k).
+Moreover, the parity of E(t + τ /2) is odd, transforming the parity of the product ∆A(ξ)(k)E(t) into an even function.
+Resulting in an even function S(ξ)(k, t, t′) under time and momentum transformations.
+
+p (k) are both odd under momentum inversion symmetry, following the relation A(ξ)
+
+p (k) = −A(ξ)
+
+Taken together, S(ξ)(k, t, t′) and (d(ξ)
+
++−(k))2 terms in Eq. (C1a) have even parity, and E(t) is an odd function,
+resulting into an odd function on the right hand side. Note that the time derivative does not affect this property
+since g(t) = −g(t + τ /2) implies that also g′(t) = −g′(t + τ /2). The fact that the current in Eq. (C1a) is odd
+under t → t + τ /2, will select the harmonic orders of type (2m ± 1)ω0, leading to a FT[J(ξ)
+inter(t)] to have only odd
+harmonic orders. This is consistent with a naive analysis of the current periodicity in time, i.e. if the current satisfies
+J(ξ)(t + τ ) = J(ξ)(t) and J(ξ)(t + τ /2) = −J(ξ)(t), then it can be expanded as
+
+J(ξ)(t) =
+
+(cid:88)
+
+m∈Z
+
+Jme−imω0t
+
+and
+
+(cid:88)
+
+m
+
+Jm(−1)me−imω0t = −
+
+(cid:88)
+
+m
+
+Jme−imω0t ⇒ [(−1)m + 1]Jm = 0,
+
+(C4)
+
+resulting in non-zero Fourier coefficients only for odd m. Nevertheless, in a finite-duration Gaussian pulse, containing
+several cycles of the main carrier frequency ω0, this symmetry is only approximate, which is consistent with the strong
+suppression, rather than the exact absence, of even harmonics in our simulations.
+
+2. A qualitative argument for the dominance of 2n ± 1
+
+We now search for an intuitive explanation of the scaling of the interband HOs with n. We will focus on valley
+
+ξ = + and RCP, for simplicity. The interband dipole matrix element vector is
+
+d+−(k) = (cid:0)dx
+
++−(k), dy
+
++−(k)(cid:1),
+
+which we can write in its circular components
+
+d±
++−(k) := dx
+
++−(k) ± i dy
+
++−(k).
+
+Similarly, for the electric field we define the circular polarization basis with E±, resulting in the expression
+
+E±(t) := Ex(t) ± iEy(t) ∝ e∓iω0(t−t0).
+
+(C5)
+
+(C6)
+
+(C7)
+
+From Eq. (A6), both components of the interband dipole contain a common factor (kx + iky)n multiplied by a term
+linear in kx and ky. Passing to circular components simplifies this structure further: the combination dx
++−
+produces one additional factor (kx + iky), whereas dx
++− produces one factor (kx − iky), which can be rewritten
+as k2/(kx + iky). Therefore, the two circular components can be written as
+
++− + idy
+
++− − idy
+
+d+
++−(k) = D+(k) (kx + iky)n+1,
+
+d−
++−(k) = D−(k) (kx + iky)n−1,
+
+where D±(k) are radial prefactors. Writing
+
+kx(t) + iky(t) = k(t)eiφk(t),
+
+where φk(t) is the polar angle of the instantaneous momentum k(t) = K + A(t), one obtains
+
+d+
++−(k(t)) ∝ ei(n+1)φk(t),
+
+d−
++−(k(t)) ∝ ei(n−1)φk(t).
+
+(C8)
+
+(C9)
+
+(C10)
+
+Thus, the two circular components of the interband dipole carry angular windings n + 1 and n − 1, respectively.
+
+The interband coherence πξ(K, t) is driven by the source term
+
+15
+
+E(t) · d+−(k(t)) =
+
+(cid:16)
+
+1
+2
+
+E+(t) d+
+
++−(k(t)) + E−(t) d−
+
++−(k(t))
+
+(cid:17)
+
+.
+
+(C11)
+
+For a nearly monochromatic circular pulse, the field-driven part A(t) rotates with frequency ω0 during the central
+cycles of the pulse. We assume for those trajectories and times dominating the interband response that the angle
+φk(t) therefore evolves approximately linearly in time, φk(t) ≈ ω0t + φ0. The circular components of the field carry
+one unit of angular phase, E±(t) ∝ e∓iω0t ≈ e∓iφk(t) such that the two contributions to the source term behave as
+
+E(t) · d+−(k(t)) =
+
+1
+2
+
+[E+(t) · d+
+
++−(k(t)) + E−(t) · d−
+
++−(k(t))] ∝ einφk(t).
+
+(C12)
+
+Hence, irrespective of the helicity channel in the driving term, the interband source carries an n-fold angular winding.
+In this semiclassical central-cycle picture, the interband coherence therefore acquires a dominant component with the
+same winding, πξ(K, t) ∝ einφk(t). When inserted back into the interband current, Eq. (12a), the additional dipole
+factor has a phase with winding n ± 1. Consequently, the emitted interband response contains only the neighboring
+odd orders 2n ± 1.
+
+Appendix D: Additional numerical results
+
+In Fig. 6 we show the HHG of I −
+
+same HOs are dominant for I +
+
+RCP(ω). Here the dominant HOs have dominant peaks at 2n − 1. Similarly, the
+
+LCP(ω). Nevertheless, these do not contribute to CDl in Eq. (15).
+
+FIG. 6. I −
+
+RCP(ω) as function of ω/ω0 for n = 2 − 6.
+
+In Fig. 7 we show the full HHG spectra of I +
+plateau and cutoff regions, as is typical in HHG.
+
+RCP(ω), with the behavior of higher HOs of the HHG spectra, including
+
+FIG. 7. HHG spectra for n = 4 under RCP.
+
+16
+
+Appendix E: Additional results on the relative Current distribution
+
+Here we compare the relative phase between ˆx and ˆy components of currents under right (left) circular polarization
+showing how a they have a similar oscillatory pattern, up to a relative π/2 phase shift. Figs. 8,9 show the results for
+interband and intraband for n = 3, similar phase relations holds for n = 2 − 6.
+
+From the ˆx-component current distribution Jx(t) we extract a function with pattern A(t)eiθ(t), to which we add
+a ±π/2 phase shift, transforming to A(t)ei(θ(t)±π/2), here we plot the real part as a function of time in Figs. 8,9.
+The results for the intraband current are shown in Fig. 8, where we include a relative phase in the ˆx component
+depending on the ellipticity ϵ as e−iϵπ/2. The phase shifted ˆx component is in phase with the ˆy component. This
+is the same phase relation between the components of the input laser beam. The results for the interband current
+are shown in Fig. 9, here the relative phase included in the ˆx component is eiϵπ/2. The phase relation between the ˆx
+and ˆy components of interband current is opposite to the phase relation of the intraband current and the input laser
+components.
+
+FIG. 8. Intraband current for n = 3 for Jx, Jy(t) components under RCP and LCP. From the current Jx(t) we extract a
+function A(t)ei(θ(t)), to which we add a phase shift e−iϵπ/2. Shown in the figure Re[A(t)ei(θ(t)±π/2)], for a single valley ξ = +.
+The phase shift as a function of the ellipticity ϵ is e−iϵπ/2.
+
+FIG. 9. Interband current for n = 3 for Jx(t), Jy(t) components under RCP and LCP. Jx(t) is modified under a eiϵπ/2 phase
+shift. The figure shows the real part of A(t)ei(θ(t)±π/2), for a single valley in valley ξ = +.The phase shift as a function of the
+ellipticity ϵ is eiϵπ/2.
+
+In Fig. 10 we present similar results as in Fig. 5, but without the 2 valley approximation. Each valley has the same
+gap but opposite chirality and are independently interacting with the incident field in the ˆx direction. We analyze
+the results at each harmonic order. Showing how each valley chirality affects the polarization. Above the bandgap
+the rotation is in agreement with the mean field 2 valley approximation orientation, valley ξ = −, left, (ξ = +, right),
+the polarization is slightly rotated to the left (right) of the incident polarization. In more details, this is calculating
+computing a Fourier transform the time dependent current ˜J(ω) = FT[J(t)], a Gaussian mask around each HO,
+followed by a Fourier transform back to time domain Jl(t) = FT[e−(ω−ωl)2/χ2 ˜J(ω)], where χ is the width of the HO.
+
+17
+
+FIG. 10. Jx,Jy relative currents at each harmonic order for n = 4, considering each valley ξ = ± individually. a) ξ = −valley.
+b) ξ = + valley.
+
+

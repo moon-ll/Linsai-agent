@@ -1,0 +1,892 @@
+4
+2
+0
+2
+
+n
+u
+J
+
+0
+2
+
+]
+i
+c
+s
+-
+l
+r
+t
+
+m
+
+.
+t
+a
+m
+-
+d
+n
+o
+c
+[
+
+1
+v
+5
+1
+5
+5
+1
+.
+
+6
+0
+4
+2
+:
+v
+i
+X
+r
+a
+
+Machine Learning Models for Accurately
+Predicting Properties of CsPbCl3 Perovskite
+Quantum Dots
+
+Mehmet Sıddık C¸ adırcı1∗, Musa C¸ adırcı2
+
+1 Faculty of Science, Department of Statistics, Cumhuriyet University, Sivas, Turkey.
+2 Department of Electrical & Electronics Engineering, Duzce University, D¨uzce,
+Turkey.
+
+∗ Corresponding author, Email:msiddikcadirci@cumhuriyet.edu.tr
+
+Abstract
+
+Perovskite Quantum Dots (PQDs) have a promising future for several
+applications due to their unique properties. This study investigates the
+effectiveness of Machine Learning (ML) in predicting the size, absorbance
+(1S abs) and photoluminescence (PL) properties of CsPbCl3 PQDs using
+synthesizing features as the input dataset. the study employed ML models
+of Support Vector Regression (SVR), Nearest Neighbour Distance (NND),
+Random Forest (RF), Gradient Boosting Machine (GBM), Decision Tree
+(DT) and Deep Learning (DL). Although all models performed highly ac-
+curate results, SVR and NND demonstrated the best accurate property
+prediction by achieving excellent performance on the test and training
+datasets, with high R2 and low Root Mean Squared Error (RMSE) and
+low Mean Absolute Error (MAE) metric values. Given that ML is be-
+coming more superior, its ability to understand the QDs field could prove
+invaluable to shape the future of nanomaterials designing.
+
+1
+
+INTRODUCTION
+
+Within computer science, artificial intelligence (AI) refers to the study of de-
+signing intelligent machines which can sense the environment around them and
+take appropriate actions accordingly [15]. Machine learning (ML) is a branch
+of artificial intelligence that employs algorithms to develop mathematical mod-
+els from data for solving specific problems directly without applying physical
+principles that gave birth to the data. This method is especially valuable when
+the connection between the variables used in the study and the results of the
+study is not understood. Widespread access to computational power along with
+the increasing amount of data available for experimentation has resulted in
+the emergence and application in different areas of science and industry of ad-
+vanced machine learning models [8, 19]. Thanks to the capability of evaluating
+the massive amount of data, Machine learning (ML) is significant for predicting
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+QDs’ properties with a high accuracy. Since QDs’ properties are highly depen-
+dent on the size, and composition[4], ML algorithms are appropriate tools to
+handle the data and exhibit well-expressed interactions between the input vari-
+ables and the resultant properties. Moreover, ML can improve the procedure
+of synthesizing QDs in order to give out desired characteristics without run-
+ning more expensive tests and complex simulations which take much time[20].
+Besides, ML can unearth hidden patterns from data that aid scientists in un-
+derstanding new mechanisms and links in QDs[17][23]. Predicting properties of
+QDs in diverse conditions using ML is important in materials design for specific
+applications[20].
+
+All inorganic metal halide Perovskite Quantum Dots (PQDs) have shown great
+promise due to their unique optical and electronic properties. They exhibit size-
+and composition-dependent properties and are cubic in shape, with the size
+ranging from approximately 3 nm to 15 nm. Therefore, PQDs offer band gap
+tunability over a wide range and property tailoring capabilities. Compared to
+their counterparts, PQDs have high photoluminescence quantum yield, narrow
+emission linewidth, higher stability, higher charge mobility, and longer diffu-
+sion length [5][24][22][2][21]. These properties make them exceptionally critical
+in a wide range of applications; including solar cells[26], lasers[21], LEDs[6],
+and medical imaging[16]. PQDs are produced using the colloidal synthesizing
+method at high temperatures where the temperature, reaction time, and the
+amount of substance are significantly vital for the properties of PQDs. There-
+fore, to obtain PQDs with the anticipated optical and electronic properties, it is
+necessary to carefully design the experiment conditions with the full knowledge
+of every parameter’s effect. This process is usually carried out by trial and er-
+ror, which is time-consuming, costly and requires intensive manpower. In this
+context, ML is a powerful tool to predict the precise conditions of experiments
+for synthesizing PQDs with the desired properties. It has been shown that ML
+enables researchers to extract valuable insights from large datasets such as fore-
+casting a variety of chemical and physical features of materials to find intricate
+mathematical relationships within empirical data [9]. Different ML algorithms
+have been applied to the synthesizing conditions of several QDs to predict their
+sizes including, CdSe[1], PbSe[1], ZnSe [1], InP[11] and ZnO[13] QDs. How-
+ever, a comprehensive ML study has not been conducted to predict the optical
+properties of PQDs yet.
+
+In this work, we applied several ML algorithms to predict the output proper-
+ties of CsPbCl3 PQDs synthesized via the hot-injection method. Based on the
+predicted photoluminescence, absorption and size properties of CsPbCl3 PQDs,
+we compared the performances of ML models of SVR, NND, Deep Learning,
+Decision Tree, Random Forest, and GBM.
+
+2 METHODOLOGY
+
+2.1 Data Description
+
+We initiated our research by thoroughly analysing existing literature to com-
+pile a comprehensive database of hot injection synthesis parameters for CsPbCl3
+
+2
+
+PQDs. The data was collected from a total of 59 peer-reviewed articles which are
+listed in Table S1 in the supporting information section. Once the selected pa-
+pers were decided, relevant synthesis parameters and the corresponding output
+properties were extracted manually. The following parameters are considered as
+the independent input variables to train algorithms; The injection temperature,
+the source of chloride (Cl), the amount of Cl in millimoles (mmol), the source
+of lead (Pb), the amount of Pb in mmol, the cesium (Cs) source, the quantity
+of Cs in mmol, the molar ratio of Cs-to-Pb, and the molar ratio of Cl to Pb. In
+addition, the quantities of octadecene (ODE), oleic acid (OA), and oleylamine
+(OLA) in millilitres (ml), along with the total volume of ligands (OA+OLA)
+in ml, are also included as input parameters. Furthermore, the ratio of Cl
+amount to total ligand volume and the amount of Pb to total ligand volume
+are also utilised as input features. The output target parameters are PQDs’
+size in nanometer (nm), the 1S abs peak in nm and the PL in nm. We suitably
+classified the collected data, each variable parameter located in its respective
+columns, and every outcome in its respective rows. This well-ordered records
+set improved the model better trained and quicker in data management.
+
+2.2 Machine Learning Models and Metrics
+
+The dataset is separated into training and testing categories according to the
+hierarchical clustering framework instead of using the same ones repetitively to
+avoid cases where memorizing or overfitting hinders new information. We evalu-
+ated the six regression methods that are suitable for small datasets: SVR, NND,
+DL, DT, RF and GBM. All of these algorithms were built using the sklearn li-
+brary. To guarantee representative samples for testing and training, we utilised
+both random sampling and stratified sampling techniques. We partitioned our
+data sets into training which contained 80% examples while testing contains the
+remaining 20% examples. The tuning hyperparameters were performed through
+Grid search. We evaluated the model’s performance by computing R2, MAE
+and RMSE metrics. MAE mainly considers outliers and compares datasets,
+and models with different objectives measured on the scale. A simple way to
+visualise the model’s performance is to look at its MAE value; lower values
+correspond to higher predicted accuracy. The distance between the predicted
+actual value and the observed value of the data sample is the best way to in-
+terpret RMSE. If RMSE equals zero, then the model is correctly estimating all
+prices. The coefficient of determination noted as R2 is a metric that quantifies
+the degree to which the model accurately represents the data, with values closer
+to 1 suggesting a higher level of accuracy.
+
+In data science, SVR is a line of regression model that is effective in modeling
+complex relationships within a dataset through the mapping of input data into
+a higher dimensional space. SVR’s application is of importance especially in
+dealing with high-dimensional data sets and not-linear relationships. Which
+can make SVR computationally intensive especially with large datasets The
+SVR model was created using the radial basis function (RBF) kernel with the
+scikit-learn Python module. The hyperparameters were optimised using a grid
+search technique.
+
+NND is an important concept in spatial analysis and machine learning. More
+
+3
+
+precisely, it plays a significant role in pattern recognition as well as classifica-
+tion algorithms which includes k-Nearest Neighbor (k-NN) method. NND is
+defined as the shortest length that separates any two points within the dataset
+from one another. NND has been applied in computational geometry founda-
+tional concepts, particle systems theoretical analysis, and statistical estimator
+convergence analysis, according to [7]. The Python scikit-learn library was also
+utilised to implement the NND model.
+
+DT are straightforward but robust models that are simple to understand and
+illustrate. They can deal with both numerical and categorical data, hence be-
+coming flexible for diverse data sets. Nevertheless, decision trees are susceptible
+to overfitting specifically as the tree becomes too deep. To train the model,
+a decision tree model was developed using Python’s scikit-learn module. The
+model’s parameters, including its maximum depth, were changed by applying
+cross-validation.
+
+RF is a machine learning algorithm that has become famous in recent days
+[27].
+It is considered one of the best machine learning algorithms by many
+people because: it can handle a thousand variables without compromising the
+accuracy; it is fast; it is simple to implement; and its prediction accuracy is
+high [18]. This algorithm has been referred to as one with high-level prediction
+performance but requiring less tuning hence regarded as the most appropriate
+out-of-the-box classification and regression algorithm [14]. The RF model was
+implemented in Python’s scikit-learn module. 500 trees were used to train the
+model, and cross-validation was used to optimise max features, the number of
+features to take into account at each split.
+
+GBM is another machine learning technique that is significantly strong because
+it combines many weak learners. This technique is efficient in many classifica-
+tion tasks [3]. It has also been identified for its high predictive accuracy and
+effectiveness when working with complicated interactions in the data. However,
+it tends to overfit when not well-adjusted as one of the drawbacks of GBM.
+Python was used to train the GBM model with the scikit-learn library. By im-
+plementing cross-validation on critical parameters such as learning rate, number
+of boosting rounds and max depth, they were properly optimized.
+
+DL, particularly neural networks, possess the potential to learn through exam-
+ples in the same way humans do. These networks do not require specific algo-
+rithms and are capable of estimating any nonlinear transformation; hence they
+can be used to determine inputs/outputs for intricate systems [25]. Nonetheless,
+there are problems associated with using older model architectures that include
+a lack of balance within the dataset resulting in memorization rather than gen-
+eralization by machine learning algorithms themselves as well as redundancy
+within feature extraction along with ignoring cross-layer characteristic interac-
+tions [10]. We used scikit-learn library for training our RF model in Python.
+
+3 RESULTS AND DISCUSSION
+
+The numerical simulations performed in this study have given a more detailed
+account of how well machine learning techniques could forecast the Size, 1S abs
+
+4
+
+and PL for CsPbCl3 PQDs. The employed models were SVR, NND, DT, RF,
+GBM and DL. For training and testing data sets, standard measures like RMSE,
+MAE and R2 were used in order to assess the models’s performance levels. A
+series of numerical experiments have given us a full and clear understanding of
+forecasting CsPbCl3 PQDs’ size, 1S abs and PL output through the indicated
+ML models.
+
+Figure 1: Box plots for the Size, 1S abs, PL providing the data distribution,
+median, quartiles, and potential outliers for each variable.
+
+Initially, to identify the distribution of the data collected from the papers, the
+outlier data, and data medians, we generated the boxplot for the three output
+properties as shown in Figure 1. It is seen that the median size distribution of
+PQDs is around 9.5 nm, whereas the 1S abs and PL ranges vary between 395
+and 402 nm and 405 and 412 nm, respectively. Next, to compare the actual and
+predicted processed values using ML algorithms, we conducted scatter graphs
+of all models for three output properties of CsPbCl3 PQDs. Figure 2 compares
+the DT model prediction against actual values of size, 1S abs and PL outputs.
+Clearly, it shows how accurate the model performs. The predicted and observed
+values for three output properties of PQDs are almost overlapped in this model.
+Test data RMSE values of as low as 0.23, 0.19 and 0.16 are respectively obtained
+for size, 1S abs and PL in this algorithm. On the other hand, the minimum
+test data MAE indicators of 0.16, 0.13 and 0.11 are calculated for the properties
+of size, 1S abs and PL, respectively. Similar Scatter graphs for other employed
+ML algorithms are given in Figures S1,2,3,4,5 in the supporting information sec-
+tion. These models also yielded similar prediction performances for properties
+of CsPbCl3 PQDs. All these findings suggest that ML algorithms are powerful
+tools for estimating the properties of PQDs accurately.
+
+5
+
+Figure 2: Parity plots of predicted vs. observed values for the Size, 1S abs and
+PL outputs of the CsPbCl3 PQDs using DT regression model
+
+Figure 3: Importance of the variables for 1S abs using the RF regression model.
+
+6
+
+Table 1: Comparison of performance metrics values for Size, 1S abs, and PL
+using all ML methods.
+
+Model
+
+SVR
+NND
+Deep Learning
+Decision Tree
+Random Forest
+GBM
+SVR
+NND
+Deep Learning
+Decision Tree
+Random Forest
+GBM
+SVR
+NND
+Deep Learning
+Decision Tree
+Random Forest
+GBM
+
+e
+z
+i
+S
+
+s
+b
+a
+
+S
+
+1
+
+L
+P
+
+Train data
+
+Test data
+
+R2
+0.99
+0.99
+0.77
+0.94
+0.93
+0.97
+0.99
+0.99
+0.66
+0.96
+0.94
+0.98
+0.99
+0.99
+0.73
+0.97
+0.94
+0.99
+
+RMSE MAE
+0.009
+0.009
+0.008
+0.012
+0.38
+0.49
+0.17
+0.23
+0.20
+0.26
+0.13
+0.14
+0.008
+0.009
+0.005
+0.009
+0.39
+0.59
+0.13
+0.19
+0.17
+0.23
+0.09
+0.11
+0.009
+0.009
+0.002
+0.005
+0.38
+0.51
+0.11
+0.16
+0.16
+0.23
+0.07
+0.09
+
+R2
+0.80
+0.62
+0.10
+0.94
+0.51
+0.48
+0.84
+0.55
+0.44
+0.96
+0.64
+0.66
+0.66
+0.78
+0.53
+0.97
+0.70
+0.71
+
+RMSE MAE
+0.16
+0.30
+0.56
+0.16
+0.54
+0.38
+0.19
+0.34
+0.49
+0.13
+0.37
+0.30
+0.28
+0.29
+0.56
+0.11
+0.39
+0.34
+
+0.34
+0.47
+0.74
+0.23
+0.66
+0.56
+0.34
+0.59
+0.66
+0.19
+0.53
+0.51
+0.58
+0.46
+0.68
+0.16
+0.54
+0.53
+
+The input feature importance for predicting 1S abs using the RF algorithm
+is shown in Figure 3. The amounts of Cs and OA are seen to be the most
+significant features, whereas the quantity of Cl and ODE are found to be the
+less important input features for accurately estimating the indicated property.
+On the other hand, for size and PL outputs the amounts of Pb and Cs are the
+most significant input parameters, respectively (See Figures S8 & S9).
+
+To minimize the similarity for the training and test data, we compared R2,
+RMSE, and MAE metrics obtained from test and trained data for 1S abs target
+output for all employed algorithms, as shown in Figure 4. The training data and
+the testing data appear in different parts of the bar plots. Overall, SVR and
+NND could perform better than other algorithms for training data, whereas, for
+test data SVR and DT models outperform their rivals. The metric performance
+comparison for size and PL outputs of the CsPbCl3 PQD can be seen in Figures
+S6 and S7 in the supporting information section.
+
+The Table 1 compiles the metric (R2, RMSE, and MAE) performances of train-
+ing and test data set for three target parameters of CsPbCl3 PQDs using all ML
+models. In general, all used ML algorithms utilised in this study provide high
+accuracy for predicting the target characteristics. The SVR model yields the
+highest R2 values for three target features in the test data category compared
+with the other models, which is an indicator of being the most accurate predic-
+tion method. In this model, in the trained data category, the RMSE and MAE
+metrics are found to be as low as 0.009, which gives one of the best accuracy
+among all prediction models. These observations also agree with the results
+obtained from Figure S5 for three outputs, where the predicted and observed
+values are well-correlated. On the other hand, the NND model is also found to
+
+7
+
+be as accurate as the SVR model. It is obvious that the metrics performances
+of NND model are nearly identical to those of the SVR model. The well data
+arrangement in Figure S1 for size, 1S abs, and PL properties of the PQDs, also
+confirms the accuracy of the NND model.
+
+Conversely, DL and RF models seem to be the least accurate method for predict-
+ing the properties of CsPbCl3 PQDs. For example, the RMSE and MAE metrics
+values for predicting test data set for size feature are 0.74 and 0.56, respectively,
+being 2 times and 3 times lesser those of the SVR model. Although the predic-
+tion performance of RF and DL for size feature are inferior to others employed
+in this study, their performances are marginally better than that used for dif-
+ferent QDs in the literature [1]. The metrics values for all target parameters
+obtained from GBM and DT models demonstrate a moderate performance be-
+tween the SVR-NND and DL-RF algorithm couples. These two models showed
+better prediction performance when used for PL output estimation.
+
+A Pearson correlation heatmap is a graphical representation that effectively
+communicates the Pearson correlation coefficients (ranging between -1 to +1)
+among variables within a dataset. The heatmap displays a colour-coded matrix,
+with warmer colours indicating stronger positive correlations, cooler colours
+representing stronger negative correlations, and neutral colours signifying no
+link between variables [12]. Figure 5 shows the Pearson correlation heatmap to
+demonstrate the correlations between the input and output parameters dataset
+of CsPbCl3 PQDs. 1S abs and PL have a positive correlation of 0.66, whereas,
+the correlations between size and PL and size and 1S abs are considerably
+inferior.
+
+8
+
+Figure 4: Performance metrics for the algorithm trained and tested in 1S abs
+output, with splitting based on random conditions or to minimize similarity for
+the training and test data.
+
+From synthesis parameters, results have shown that machine learning can be
+used to accurately predict the properties of CsPbCl3 quantum dots. In fact,
+the most efficient ones were SVR and RF models which performed well in their
+predictions and also provided some guidance in understanding the parameters
+affecting the properties of quantum dots. The importance of growth temper-
+ature was underlined by RF because these variables have a direct effect on
+quantum dots characteristics and hence require precise control measures. An-
+other finding was that; NND and DT models though fast at producing easily
+understood outputs might need further optimization if they are to match other
+sophisticated models like GBM or DL. Boxplots and correlation analyses serve
+as an additional level of validation for ensuring predictive model stability. In
+general, this paper demonstrates how ML can help in the control and synthesis
+of QDs implying a route to more efficient experimental designs.
+
+9
+
+Figure 5: Pearson correlation shows a strong correlation between the three
+output targets
+
+10
+
+4 CONCLUSION
+
+This study aimed to predict the size, 1S abs and PL properties of CsPbCl3 PQDs
+by comparing the performances of ML algorithms of SVR, NND, GBM, RF, DT
+and DL. Generally, nearly all models succeeded in promising outcomes in pre-
+dicting the outputs of PQDs. Among them, SVR and NND models indicated
+the best performance as they make accurate predictions and give insights into
+factors that affect QD properties. The SVR and NND ML models demonstrate
+RMSE metric values of 0.009 and 0.012 for the train data, and 0.34 and 0.47
+for the test data, respectively. These findings are close to actual data, which
+indicate that the employed ML models have the capability of predicting proper-
+ties of CsPbCl3 PQDs with high accuracy. For the future direction, the results
+suggest that the progress of ML can significantly contribute to the progress of
+QDs design, resulting in more tailored QDs with specific properties.
+
+Supporting Information
+
+Electronic supporting information (ESI) is accessible: Additional details about
+the similarity between the training and test data, the significance of the variables
+in terms of feature importance, and the comparison of predicted and observed
+outputs of the CsPbCl3 PQDs and compound databases.
+
+Acknowledgements
+
+11
+
+References
+
+[1] F´abio Baum, Tatiane Pretto, Ariadne K¨oche, and Marcos Jos´e Leite San-
+tos. Machine learning tools to predict hot injection syntheses outcomes
+for ii–vi and iv–vi quantum dots. The Journal of Physical Chemistry C,
+124(44):24298–24305, 2020.
+
+[2] Jonathan De Roo, Maria Ib´a˜nez, Pieter Geiregat, Georgian Nedelcu,
+Willem Walravens, Jorick Maes, Jose C Martins, Isabel Van Driessche,
+Maksym V Kovalenko, and Zeger Hens. Highly dynamic ligand binding and
+light absorption coefficient of cesium lead bromide perovskite nanocrystals.
+ACS nano, 10(2):2071–2081, 2016.
+
+[3] Manqing Dong, Lina Yao, Xianzhi Wang, Boualem Benatallah, and Shuai
+Zhang. Grcan: gradient boost convolutional autoencoder with neural deci-
+sion forest. arXiv preprint arXiv:1806.08079, 2018.
+
+[4] Yasemin G¨undo˘gdu, Hamdi S¸¨uk¨ur Kılı¸c, and Musa C¸ adırcı. Third order
+nonlinear optical properties of cdte/cdse quasi type-ii colloidal quantum
+dots. Optical Materials, 114:110956, 2021.
+
+[5] He Huang, Maryna I Bodnarchuk, Stephen V Kershaw, Maksym V Ko-
+valenko, and Andrey L Rogach. Lead halide perovskite nanocrystals in
+the research spotlight: stability and defect tolerance. ACS energy letters,
+2(9):2071–2083, 2017.
+
+[6] Yun-Fei Li, Jing Feng, and Hong-Bo Sun. Perovskite quantum dots for
+
+light-emitting devices. Nanoscale, 11(41):19119–19139, 2019.
+
+[7] Elia Liiti¨ainen, Amaury Lendasse, and Francesco Corona. Bounds on
+the mean power-weighted nearest neighbour distance. Proceedings of
+the Royal Society A: Mathematical, Physical and Engineering Sciences,
+464(2097):2293–2301, 2008.
+
+[8] Yuan Liu, Ayush Jain, Clara Eng, David H Way, Kang Lee, Peggy Bui,
+Kimberly Kanada, Guilherme de Oliveira Marinho, Jessica Gallegos, Sara
+Gabriele, et al. A deep learning system for differential diagnosis of skin
+diseases. Nature medicine, 26(6):900–908, 2020.
+
+[9] Yu-Chen Lo, Stefano E Rensi, Wen Torng, and Russ B Altman. Machine
+learning in chemoinformatics and drug discovery. Drug discovery today,
+23(8):1538–1546, 2018.
+
+[10] Xiaopu Ma, Jiangdan Shan, Fei Ning, Wentao Li, and He Li. Effnet: A
+skin cancer classification model based on feature fusion and random forests.
+Plos one, 18(10):e0293266, 2023.
+
+[11] Hao A Nguyen, Florence Y Dou, Nayon Park, Shenwei Wu, Harrison
+Sarsito, Benedicte Diakubama, Helen Larson, Emily Nishiwaki, Micaela
+Homer, Melanie Cash, et al. Predicting indium phosphide quantum dot
+properties from synthetic procedures using machine learning. Chemistry of
+Materials, 34(14):6296–6311, 2022.
+
+12
+
+[12] Clare Rainey, Angelina T Villikudathil, Jonathan McConnell, Ciara
+Hughes, Raymond Bond, and Sonyia McFadden. An experimental ma-
+chine learning study investigating the decision-making process of students
+and qualified radiographers when interpreting radiographic images. PLOS
+Digital Health, 2(10):e0000229, 2023.
+
+[13] Paul Rossener Regonia, Christian Mark Pelicano, Ryosuke Tani, Atsushi
+Ishizumi, Hisao Yanagi, and Kazushi Ikeda. Predicting the band gap of zno
+quantum dots via supervised machine learning models. Optik, 207:164469,
+2020.
+
+[14] Jake S Rhodes, Adele Cutler, and Kevin R Moon. Geometry-and accuracy-
+preserving random forest proximities. IEEE Transactions on Pattern Anal-
+ysis and Machine Intelligence, 2023.
+
+[15] Stuart J Russell and Peter Norvig. Artificial intelligence: a modern ap-
+
+proach. Pearson, 2016.
+
+[16] Ilhwan Ryu, Jee-Yeon Ryu, Geunpyo Choe, Hyemin Kwon, Hyeji Park,
+Young-Seok Cho, Rose Du, and Sanggyu Yim. In vivo plain x-ray imaging
+of cancer using perovskite quantum dot scintillators. Advanced Functional
+Materials, 31(34):2102334, 2021.
+
+[17] Benjamin Sanchez-Lengeling and Al´an Aspuru-Guzik.
+
+Inverse molecular
+design using machine learning: Generative models for matter engineering.
+Science, 361(6400):360–365, 2018.
+
+[18] Nilam Novita Sari, Ismaini Zain, Kartika Fithriasari, and Amri Muhaimin.
+Br+ for addressing imbalanced multilabel data classification combined with
+resampling technique. In AECon 2020: Proceedings of The 6th Asia-Pacific
+Education And Science Conference, AECon 2020, 19-20 December 2020,
+Purwokerto, Indonesia, page 421. European Alliance for Innovation, 2021.
+
+[19] Andrew W Senior, Richard Evans, John Jumper, James Kirkpatrick, Lau-
+rent Sifre, Tim Green, Chongli Qin, Augustin ˇZ´ıdek, Alexander WR Nel-
+son, Alex Bridgland, et al.
+Improved protein structure prediction using
+potentials from deep learning. Nature, 577(7792):706–710, 2020.
+
+[20] Huachen Tao, Tianyi Wu, Matteo Aldeghi, Tony C Wu, Al´an Aspuru-
+Guzik, and Eugenia Kumacheva. Nanoparticle synthesis assisted by ma-
+chine learning. Nature reviews materials, 6(8):701–716, 2021.
+
+[21] Yue Wang, Xiaoming Li, Jizhong Song, Lian Xiao, Haibo Zeng, and Han-
+dong Sun. All-inorganic colloidal perovskite quantum dots: a new class
+of lasing materials with favorable characteristics. Advanced materials,
+27(44):7101–7108, 2015.
+
+[22] Kaifeng Wu, Guijie Liang, Qiongyi Shang, Yueping Ren, Degui Kong,
+and Tianquan Lian. Ultrafast interfacial electron and hole transfer from
+cspbbr3 perovskite quantum dots. Journal of the American Chemical So-
+ciety, 137(40):12792–12795, 2015.
+
+13
+
+[23] Zhenpeng Yao, Benjam´ın S´anchez-Lengeling, N Scott Bobbitt, Benjamin J
+Bucior, Sai Govind Hari Kumar, Sean P Collins, Thomas Burns, Tom K
+Woo, Omar K Farha, Randall Q Snurr, et al. Inverse design of nanoporous
+crystalline reticular materials with deep generative models. Nature Machine
+Intelligence, 3(1):76–86, 2021.
+
+[24] Gurivi Reddy Yettapu, Debnath Talukdar, Sohini Sarkar, Abhishek
+Swarnkar, Angshuman Nag, Prasenjit Ghosh, and Pankaj Mandal. Ter-
+ahertz conductivity within colloidal cspbbr3 perovskite nanocrystals: re-
+markably high carrier mobilities and large diffusion lengths. Nano letters,
+16(8):4838–4848, 2016.
+
+[25] Ningrui Zhao and Jinwei Lu. Review of neural network algorithm and its
+application in temperature control of distillation tower. Journal of Engi-
+neering Research and Reports, 20(4):50–61, 2021.
+
+[26] Qian Zhao, Abhijit Hazarika, Xihan Chen, Steve P Harvey, Bryon W Lar-
+son, Glenn R Teeter, Jun Liu, Tao Song, Chuanxiao Xiao, Liam Shaw, et al.
+High efficiency perovskite quantum dot solar cells with charge separating
+heterostructure. Nature communications, 10(1):2842, 2019.
+
+[27] Yangming Zhou and Guoping Qiu. Random forest for label ranking. Expert
+
+systems with applications, 112:99–109, 2018.
+
+14
+
+Supporting Information
+
+Figure S1: Predicted vs. observed plot of the NND regression model for the
+Size, 1S abs and PL outputs of the CsPbCl3 PQDs.
+
+15
+
+Table S1: DOIs are utilised to consolidate the databases.
+
+CsPbCl3 Database DOIs
+
+01.
+03.
+05.
+07.
+09.
+11.
+13.
+15.
+17.
+19.
+21.
+23.
+25.
+27.
+29.
+31.
+33.
+35.
+37.
+39.
+41.
+43.
+45.
+47.
+49.
+51.
+53.
+55.
+57.
+59.
+
+10.1002/adfm.202100930
+10.1021/acsenergylett.8b01441
+10.1016/j.solener.2020.05.070
+10.1016/j.materresbull.2018.12.004
+10.1021/acsenergylett.9b02678
+10.1021/acsmaterialslett.9b00101
+10.1016/j.matchemphys.2021.125479
+10.1021/acs.nanolett.6b02772
+10.1021/acs.jpclett.1c02416
+10.1021/acs.chemmater.8b02157
+10.1021/acs.jchemed.8b00735
+10.1021/acsanm.0c01254
+10.1039/C7RA06597C
+10.1021/acsenergylett.7b00375
+10.1016/j.nanoen.2018.06.073
+10.1016/j.nanoen.2020.105163
+10.1021/acs.jpcc.7b06929
+10.1039/C9RA05685H
+10.1039/C9RA07069A
+10.1021/acs.jpcc.6b12828
+10.1016/j.materresbull.2020.110907
+10.1039/C8TC03139H
+10.1039/c7nr08136g
+10.1039/d1nr04455a
+10.1021/acsanm.3c01960
+10.1021/acs.jpcc.1c06995
+10.1021/acs.jpclett.9b03831
+10.1021/acsami.8b14046
+10.1016/j.ceramint.2022.09.075
+10.1016/j.jallcom.2021.161505
+
+02.
+04.
+06.
+08.
+10.
+12.
+14.
+16.
+18.
+20.
+22.
+24.
+26.
+28.
+30.
+32.
+34.
+36.
+38.
+40.
+42.
+44.
+46.
+48.
+50.
+52.
+54.
+56.
+58.
+60.
+
+10.1016/j.jlumin.2021.118658
+10.1021/acsnano.8b07850
+10.1016/j.optmat.2022.113362
+10.1007/s00339-022-05962-7
+10.1021/acs.jpclett.8b03047
+10.1021/acs.chemmater.9b05082
+10.1039/D0RA09043C
+10.1021/jacs.6b08085
+10.1021/acs.jpcc.8b06579
+10.1021/acs.jpcc.8b11906
+10.1021/acsenergylett.8b01909
+10.1021/acs.jpcc.8b12035
+acsanm.1c01623
+10.1039/C8NR10439E
+10.1002/asia.202200478
+10.1021/acs.jpcc.1c04335
+10.1038/srep45906
+10.1016/j.jallcom.2019.02.032
+10.1021/acs.nanolett.5b02404
+10.1021/acs.chemmater.9b05082
+10.1039/c8tc03957g
+10.1063/1.5127887
+10.1088/2632-959X/abcf8e
+10.1016/j.ceramint.2022.07.310
+10.1039/c7nr06745c
+10.1021/acs.chemmater.0c01325
+10.1021/acsenergylett.0c00931
+10.1021/acs.nanolett.7b04575
+10.1021/acs.jpclett.1c00017
+
+16
+
+Figure S2: Predicted vs. observed plot of the RF regression model for the Size,
+1S abs and PL outputs of the CsPbCl3 PQDs.
+
+17
+
+Figure S3: Predicted vs. observed plot of the GBM regression model for the
+Size, 1S abs and PL outputs of the CsPbCl3 PQDs.
+
+18
+
+Figure S4: Predicted vs. observed plot of the DL regression model for the Size,
+1S abs and PL outputs of the CsPbCl3 PQDs.
+
+19
+
+Figure S5: Predicted vs. observed plot of the SVR model for the Size, 1S abs
+and PL outputs of the CsPbCl3 PQDs.
+
+20
+
+Figure S6: Performance metrics for the the algorithm trained and tested in Size
+output, with splitting based on random conditions or to minimize similarity for
+the training and test data.
+
+21
+
+Figure S7: Performance metrics for the algorithm trained and tested in PL
+output, with splitting based on random conditions or to minimize similarity for
+the training and test data.
+
+Figure S8: Importance of the variables for Size using the RF regression model.
+
+22
+
+Figure S9: Importance of the variables for PL using the RF regression model.
+
+23
+
+

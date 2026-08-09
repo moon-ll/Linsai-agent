@@ -22,7 +22,6 @@ MEMORY_DIR = PROJECT_ROOT / "memory"
 SESSIONS_DIR = PROJECT_ROOT / "sessions"
 LOGS_DIR = PROJECT_ROOT / "logs"
 TASKS_DIR = PROJECT_ROOT / "tasks"
-DOCS_DIR = PROJECT_ROOT / "docs"
 
 # 知识库子目录
 WIKI_DIR = KNOWLEDGE_DIR / "wiki"
@@ -33,9 +32,6 @@ CAPTURES_DIR = KNOWLEDGE_DIR / "captures"
 RAW_PROJECTS_DIR = RAW_DIR / "projects"      # 课题库（归档课题完整文件）
 RAW_PAPERS_DIR = RAW_DIR / "papers"          # 文献库（论文元数据）
 QA_DIR = KNOWLEDGE_DIR / "qa"                 # 问答模块（用户讨论归档）
-QA_PAPER_DIR = QA_DIR / "paper-discussions"
-QA_PROPOSAL_DIR = QA_DIR / "proposal-discussions"
-QA_PROJECT_DIR = QA_DIR / "project-discussions"
 
 # 知识库核心文件
 INDEX_PATH = KNOWLEDGE_DIR / "index.json"
@@ -56,10 +52,9 @@ HERMES_WIKI_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "02-wiki"
 HERMES_BRIEFINGS_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "briefings"
 HERMES_BRIEFING_PAPERS_DIR = HERMES_BRIEFINGS_DIR / "papers"
 
-# Hermes 配置目录（~/.kimi，旧版路径，部分模块仍使用）
-HERMES_HOME = Path.home() / ".kimi"
+# Hermes 配置目录（~/.hermes，hermes-agent 运行目录）
+HERMES_HOME = Path.home() / ".hermes"
 LINSAI_PROFILE = HERMES_HOME / "profiles" / "linsai"
-BRIEFINGS_DIR = LINSAI_PROFILE / "briefings" if LINSAI_PROFILE.exists() else HERMES_HOME / "briefings"
 
 # 研究管线数据目录（v6.2，独立数据域，与 CoPilot 核心隔离）
 RESEARCH_PROPOSALS_DIR = PROJECT_ROOT / "research_proposals"

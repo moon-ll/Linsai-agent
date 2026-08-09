@@ -1,0 +1,744 @@
+arXiv:2504.02497v5  [cond-mat.mes-hall]  27 Jun 2025
+All-electrical scheme for valley polarization in graphene
+Sachchidanand Das 1 and Abhiram Soori 1, ∗
+1School of Physics, University of Hyderabad, Prof. C. R. Rao Road, Gachibowli, Hyderabad-500046, India
+We propose an all-electrical setup to generate valley polarization in graphene. A finite graphene
+sheet is connected to two normal metal electrodes each with two terminals along its zigzag edges,
+while the armchair edges remain free. When a bias is applied to one terminal and the others are
+grounded, valley polarization emerges due to transverse momentum matching between the graphene
+and the metal electrodes. Significant valley polarization is achieved when the Fermi wavevector
+in the metal exceeds half the separation between the K and K ′ valleys in graphene. We analyze
+how conductance and valley polarization depend on geometric and electronic parameters. While
+increasing the width enhances both conductance and polarization, increasing the length introduces
+Fabry–P´ erot oscillations and suppresses valley polarization due to enhanced intervalley mixing. We
+also examine the effects of disorder: on-site disorder in graphene increases conductance near the
+Dirac point but reduces valley polarization. Finally, we study the impact of imperfect armchair
+edges and interface roughness, finding that moderate deviations from ideal conditions still yield
+substantial valley polarization. Our results demonstrate a viable route to electrically controlling
+valley degrees of freedom in graphene-based devices.
+Introduction.– Graphene, a two-dimensional material
+composed of carbon atoms on a honeycomb lattice, has
+attracted significant attention due to its unusual band
+structure and associated quantum phenomena such as
+Klein tunneling [1]. Its valence and conduction bands
+meet at the Dirac points with linear dispersion. These
+Dirac points, located at inequivalent momenta labeled
+K and K ′, define graphene’s two valleys—an internal
+quantum degree of freedom that can be selectively ma-
+nipulated. This forms the basis of valleytronics, which
+exploits valley polarization (an imbalance in populations
+at K and K ′) as an information carrier [2]. The valley de-
+gree of freedom offers new possibilities for applications in
+electronics, quantum computing [3], optoelectronics [4],
+and energy-efficient devices.
+Several approaches to achieving valley polarization in
+graphene have been proposed. Strain and symmetry-
+breaking potentials in graphene quantum dots can gen-
+erate valley polarization [5], as can gate-controlled n–
+p–n transistors [6] and graphene-superconductor junc-
+tions [7]. In biased bilayer graphene, a band gap al-
+lows circularly polarized light to produce valley polar-
+ization [8]. Terahertz radiation [9, 10] and other light-
+matter interactions [11–13] have also been shown to filter
+electrons by valley.
+Fewer proposals address valley polarization through
+purely electrical means. Luo et al. [14] studied a point
+contact with a superconducting lead; valley filtering was
+also found in junctions between zigzag nanoribbons of
+differing widths [15], and in three-terminal devices with
+mixed edge terminations [16]. All-electrical control in
+bilayer graphene has also been reported [17, 18]. How-
+ever, valley polarization at interfaces between graphene
+and conventional metals remains unexplored. Our work
+addresses this gap by proposing a conceptually simple
+and experimentally feasible setup using normal-metal
+electrodes to generate valley polarization in monolayer
+graphene.
+Graphene
++∞
+−∞
++∞
+−∞
+Lgx
+y
+xLnx
+T erminal− 1
+T erminal− 2
+T erminal− 4
+T erminal− 3
+Lnx
+Lgy Lgy
+Figure 1. Schematic of the normal metal/graphene/normal
+metal junction wherein valley polarization can be acheived.
+The System and the Central Idea.–Electron transmis-
+sion across a junction between two-dimensional materi-
+als occurs when transverse momentum is conserved [19–
+21]. Based on this, we propose a setup for generating
+valley polarization in graphene using a purely electrical
+method. A finite graphene sheet is placed between two
+square-lattice normal metals, as shown in Fig. 1. The
+graphene is oriented such that its zigzag edges contact
+the metal electrodes, while the armchair edges remain
+free. A bias is applied at terminal 1, with terminals 2, 3,
+and 4 grounded.
+On the biased metal side, the current flow along the y-
+direction leads to an asymmetric occupation of ky states.
+If the valley separation in graphene exceeds 2ky,F , where
+ky,F is the Fermi wavevector of the metal in the y-
+direction, transmission occurs primarily into one valley,
+2
+producing valley polarization. Though the system lacks
+full translational invariance, this momentum filtering re-
+mains valid for sufficiently wide graphene regions. We
+also find that while disorder enhances conductance near
+the Dirac point, it suppresses valley polarization.
+The graphene region has dimensions Lgx × Lgy , and
+the metal electrodes extend infinitely along y and have
+finite width Lnx along x. Nearest-neighbor hopping in
+graphene is γ, and in the metal, it is t. The chemical
+potentials in graphene and metal are µg and µn, with µg
+tunable via gate voltage.
+We compute the differential conductance Gj =
+dIj/dV1, where Ij is the current in terminal j, V1 is
+the applied voltage at terminal 1, and all other termi-
+nals are grounded. The conductance through graphene
+is Gg = G1 − G2. These are calculated using Landauer-
+B¨ uttiker scattering theory.
+We further resolve the conductance into valley-
+resolved components, Gg,K and Gg,K ′, and de-
+fine the valley polarization efficiency as η =
+2(Gg,K − Gg,K ′)/(Gg,K + Gg,K ′). This quantifies the ex-
+tent of valley polarization.
+The mechanism is illustrated in Fig. 2, where E vs
+ky for kx = 0 shows that within the bias window, ky val-
+ues in graphene and metal align, enabling valley-selective
+transmission.
+-4 -3 -2 -1 0 1 2 3
+-1
+-0.8
+-0.6
+-0.4
+-0.2
+0
+0.2
+0.4
+0.6
+0.8
+ Empty states
+ Filled states
+Bias window
+Figure 2. Dispersion of graphene and normal metal fixing
+kx = 0.
+Results.– Varying the normal metal’s chemical poten-
+tial µn alters its Fermi surface size. Figure 3(a) shows
+the graphene conductance Gg and valley polarization ef-
+ficiency η versus µn. Panels (b) and (c) display Fermi
+surfaces for µ = −1.4 eV and −4 eV, respectively. At
+µ = −1.4 eV, the Fermi surfaces of graphene and the
+metal share a broader ky range, resulting in higher con-
+ductance. At µ = −4 eV, the ky mismatch lowers Gg,
+as also reflected in Fig. 3(a), where Gg is nearly zero for
+µn ≲ −1.8 eV, and most electrons from terminal-1 reach
+terminal-2.
+Despite the low Gg at µ = −4 eV, η remains high be-
+cause states in the K valley are closer to the positive ky
+-4 -3 -2 -1 0
+0
+0.5
+1
+1.5
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+0.6
+0.7
+(a)
+Figure 3. (a) Conductance through graphene (right axis) and
+valley polarization efficiency (left axis) versus µn at zero bias.
+Parameters: t = 1 .2eV , Lnx = 20, Lgy = 24, Lgx = 24,
+µg = 0.5eV , γ = 2.7eV . The Fermi surfaces of normal metal
+(dashed line) and graphene (solid line) for (b) µ = −1.4eV
+(c) µ = −4eV .
+states of the metal than those in K ′. Near µ = −1.5 eV,
+η drops as K valley states with high vy undergo repeated
+reflections in graphene along y, mixing with K ′ valley
+states. These reflections reduce η by increasing Gg with-
+out proportionally enhancing Gg,K − Gg,K ′.
+This mechanism is confirmed by studyingGg and η ver-
+sus Lgx and Lgy . Increasing Lgy (fixed Lgx) boosts both
+Gg and η, as shown in Fig. 4(a,b). In contrast, increas-
+ing Lgx (fixed Lgy ) initially suppresses Gg, which then
+oscillates [Fig. 4(c)], while η decreases overall [Fig. 4(d)].
+These trends support the role of transverse reflections in
+valley mixing.
+Among conduction channels in graphene, some lie out-
+side the bias window and transmit via evanescent modes,
+causing Gg to decay with increasing Lgx. Others trans-
+mit via plane-wave modes, yielding oscillatory conduc-
+tance. The combined result is an initial drop in Gg fol-
+lowed by irregular oscillations—which become regular at
+smaller Lgy (see Supplementary Material for detailed dis-
+cussion). Meanwhile, η decreases with Lgx due to en-
+hanced back-and-forth scattering in the y-direction.
+We next examine howGg and η vary with the graphene
+chemical potential µg [Fig. 5]. As µg → 0 (Dirac point),
+Gg drops to zero, accompanied by oscillations. This
+vanishing conductance arises from the low density of
+states near the Dirac point. Moving away from µg = 0,
+3
+0 50 100 150 200
+0
+0.5
+1
+1.5(a)
+0 50 100 150 200
+0
+0.5
+1
+1.5(b)
+0 50 100 150 200
+0
+0.2
+0.4
+0.6
+0.8
+1(c)
+0 50 100 150 200
+-0.2
+0
+0.2
+0.4
+(d)
+Figure 4. (a) Conductance through graphene Gg versus Lgy ,
+(b) Valley polarization effeiciency η versus Lgy , (c) Gg versus
+Lgx, (d) η versus Lgx. Parameters: (a,b) Lgx = 24, (c,d)
+Lgy = 24. t = 1.2 eV , µ = −1.4 eV , µg = 0.5 eV .
+-2 -1.5 -1 -0.5 0 0.5 1 1.5 2
+-0.2
+0
+0.2
+0.4
+0.6
+0.8
+1
+0
+0.5
+1
+1.5
+2
+2.5
+Figure 5. Conductance Gg and valley polarization efficiency
+η versus the chemical potential of graphene µg. Parameters:
+µ = −1.4 eV , Lgx = Lgy = 24, Lnx = 20.
+the increasing density of states enhances Gg, with os-
+cillations due to Fabry-P´ erot interference of plane-wave
+modes [19, 20, 22]. The valley polarization efficiency η
+peaks near µg = 0, but since Gg is close to zero there,
+the polarization is of limited practical relevance.
+Disorder in graphene .-We introduce on-site disorder
+in the graphene region, where the disorder potential is
+randomly distributed within the range [−w/2, w/2]. The
+resulting conductance and valley polarization efficiency
+are plotted in Fig. 6. We observe that the conductance
+increases with disorder strength for µg = 0 .5 eV and
+µg = 0.2 eV [see Fig. 6(a,c)]. This behavior can be at-
+tributed to the low density of states near the charge neu-
+trality point in graphene–introducing disorder enhances
+0 0.5 1 1.5 2
+w in eV
+0.15
+0.2
+0.25
+0.3
+0.35(a)
+0 0.5 1 1.5 2
+w in eV
+0.25
+0.3
+0.35
+0.4
+0.45(b)
+0 1 2
+w in eV
+0.02
+0.03
+0.04
+0.05
+0.06
+(c)
+0 0.5 1 1.5 2
+w in eV
+0.2
+0.4
+0.6
+0.8
+1(d)
+Figure 6. (a,c) Conductance through graphene versus disor-
+der strength. (b,d) Valley polarization efficiency versus disor-
+der strength. Both physical quantities are averaged over 100
+disorder configurations and the error-bar shows the standard
+deviation about the mean. Parameters: Lgx = 24, Lgy = 24
+t = 1 .2 eV , µ = −1.4 eV . For (a,b), µg = 0 .5eV , for (c,d)
+µg = 0.2eV .
+the density of states, thereby increasing conductance.
+However, valley polarization is suppressed by disorder
+[see Fig. 6(b,d)], as impurity scattering leads to mixing
+between states from the two valleys, reducing the extent
+of valley polarization.
+Imperfect armchair edges and interface roughness .-In
+realistic experimental setups, the graphene–metal inter-
+face is unlikely to be perfectly smooth. We model this
+interface roughness by introducing non-uniform hopping
+strengths between graphene and the normal metal. Addi-
+tionally, imperfections in the armchair edges of graphene
+are expected and can be captured by introducing on-site
+disorder near these edges over a finite width along the
+transverse direction.
+Specifically, we model the hopping strengths at the
+left and right interfaces as t′
+l/r,ny
+= t + δtl/r,ny , where
+δtl/r,ny is randomly drawn from a uniform distribution
+in the range [ −δt/2, δt/2] [see the terms HLG and HGR
+in Supplementary Material]. For a graphene lattice of
+size Lgx = Lgy = 24, we introduce on-site disorder of
+strength we near the top and bottom armchair edges,
+i.e., for all sites located within four lattice sites from the
+transverse boundaries. The disorder potential on these
+sites is randomly chosen from the range [ −we/2, we/2].
+To quantify the impact of these imperfections, we per-
+form disorder averaging over Nc = 50 configurations for
+each pair ( δt, we). The resulting average conductance
+through graphene and valley polarization efficiency, along
+with their standard deviations, are presented in Fig. 7.
+It is evident from Fig. 7 that the conductance through
+graphene increases with either type of disorder. The in-
+crease in conductance with edge disorder strength we can
+4
+Figure 7. Effect of edge disorder and interface roughness on
+valley polarization and conductance. The graphene region
+has size Lgx = Lgy = 24, with on-site disorder of strength we
+introduced within four lattice sites from the top and bottom
+armchair edges to model edge imperfections. Interface rough-
+ness is implemented by choosing the hopping amplitudet′
+l/r,ny
+between graphene and normal metal from a uniform random
+distribution in the range [ t − δt/2, t+ δt/2]. Panels show the
+disorder-averaged (a) conductance through graphene and (b)
+valley polarization efficiency, along with their respective stan-
+dard deviations (c,d), as functions of δt and we. Averages are
+taken over Nc = 50 disorder realizations. µg = 0.2eV , other
+parameters are same as in Fig. 6.
+be attributed to an enhanced density of states near the
+armchair edges. On the other hand, increasing the in-
+terface disorder δt leads to higher conductance because
+more of the electrons incident from terminal 1 are scat-
+tered by the disordered hopping bonds and are redirected
+into the graphene sheet, rather than flowing directly into
+terminal-2 or back into terminal-1. However, both types
+of disorder: we and δt lead to a reduction in valley
+polarization efficiency due to enhanced intervalley mix-
+ing caused by scattering. Nonetheless, as seen in Fig.7,
+the valley polarization remains substantial over a wide
+range of disorder strengths. For instance, at δt = 0.5eV
+and we = 1 .526eV , the valley polarization efficiency is
+0.6981 ± 0.0981. Thus, while a perfectly smooth interface
+and ideal armchair edges yield optimal valley polariza-
+tion, small to moderate deviations from these conditions
+still maintain a high degree of valley polarization.
+Discussion and Conclusion.– We proposed an all-
+electrical scheme for achieving valley polarization in
+graphene, where a graphene sheet is contacted by nor-
+mal metal electrodes on both sides. When a bias is ap-
+plied at one terminal and the others are grounded, valley
+polarization arises if the Fermi wavevector in the metal
+exceeds half the separation between the K and K ′ valleys
+in graphene.
+We examined how system geometry affects perfor-
+mance. Increasing the graphene width enhances both
+conductance and valley polarization, while increasing the
+length initially suppresses conductance and introduces
+Fabry-P´ erot oscillations. Longer lengths also reduce po-
+larization due to increased intervalley scattering.
+The effect of disorder was also analyzed. While on-
+site disorder in graphene enhances conductance near the
+Dirac point via increased density of states, it concur-
+rently reduces valley polarization due to intervalley mix-
+ing. We modeled interface roughness and imperfect arm-
+chair edges through randomness in hopping amplitudes
+and edge-site potentials. Our simulations show that val-
+ley polarization remains substantial for moderate devi-
+ations from ideal geometry, indicating robustness. De-
+spite challenges in realizing clean interfaces and edges,
+recent advances in fabrication have demonstrated atom-
+ically precise graphene edges [23, 24], supporting the ex-
+perimental feasibility of our model.
+In metals like gold and silver, the Fermi wavevector
+is around 1 .2 ˚A
+−1
+[25], exceeding half the valley separa-
+tion in graphene ( ∼ 0.85 ˚A
+−1
+), thus fulfilling the trans-
+verse momentum matching criterion. Though these are
+3D metals, transport at 2D interfaces is often governed by
+a few atomic layers. Our square-lattice model effectively
+captures this using a minimal 2D representation. This
+is analogous to the use of 1D quantum wires to model
+reservoirs in mesoscopic transport [26]. By tuning pa-
+rameters to match realistic Fermi wavevectors, we retain
+the essential physics required for valley polarization.
+In summary, our work offers a robust, tunable, and
+all-electrical approach to valley polarization in graphene,
+with promising implications for valleytronic applications.
+Acknowledgements .- We thank Adhip Agarawala and
+Manu Jaiswal for illuminating discussions. We thank
+Manu Jaiswal for comments on the manuscript. SD
+thanks Bijay Kumar Sahoo for help with numerics in
+the early stages of the project. SD and AS thank Sci-
+ence and Engineering Research Board (now Anusandhan
+National Research Foundation) - Core Research grant
+(CRG/2022/004311) for financial support. AS thanks
+the funding from Institute of Eminence Professional De-
+velopment Fund, University of Hyderabad.
+∗ abhirams@uohyd.ac.in
+[1] A. H. Castro Neto, F. Guinea, N. M. R. Peres, K. S.
+Novoselov, and A. K. Geim, The electronic properties of
+graphene, Rev. Mod. Phys. 81, 109 (2009).
+[2] J. R. Schaibley, H. Yu, G. Clark, P. Rivera, J. S. Ross,
+K. L. Seyler, W. Yao, and X. Xu, Valleytronics in 2d
+materials, Nat. Rev. Mater. 1, 16055 (2016).
+[3] I. Alonso Calafell, J. D. Cox, M. Radonji´ c, J. R. M.
+Saavedra, F. J. Garc ´ ıa de Abajo, L. A. Rozema, and
+P. Walther, Quantum computing with graphene plas-
+mons, npj Quantum Inf. 5, 37 (2019).
+[4] J. Wang, X. Mu, M. Sun, and T. Mu, Optoelectronic
+5
+properties and applications of graphene-based hybrid
+nanomaterials and van der waals heterostructures, Appl.
+Mater. Today 16, 1 (2019).
+[5] S.-Y. Li, Y. Su, Y.-N. Ren, and L. He, Valley polarization
+and inversion in strained graphene via pseudo-landau lev-
+els, valley splitting of real landau levels, and confined
+states, Phys. Rev. Lett. 124, 106802 (2020).
+[6] J. L. Garcia-Pomar, A. Cortijo, and M. Nieto-Vesperinas,
+Fully valley-polarized electron beams in graphene, Phys.
+Rev. Lett. 100, 236801 (2008).
+[7] A. R. Akhmerov and C. W. J. Beenakker, Detection of
+valley polarization in graphene by a superconducting con-
+tact, Phys. Rev. Lett. 98, 157003 (2007).
+[8] A. Friedlan and M. M. Dignam, Valley polarization in
+biased bilayer graphene using circularly polarized light,
+Phys. Rev. B 103, 075414 (2021).
+[9] D. S. L. Abergel and T. Chakraborty, Generation of val-
+ley polarized current in bilayer graphene, Appl. Phys.
+Lett. 95, 062107 (2009).
+[10] S. Sharma, D. Gill, J. Krishna, J. K. Dewhurst, P. Elliott,
+and S. Shallcross, Combining thz and infrared light to
+control valley charge and current in gapless graphene,
+Nano Letters 25, 3791 (2025).
+[11] M. S. Mrudul, A. Jim´ enez-Gal´ an, M. Ivanov, and
+G. Dixit, Light-induced valleytronics in pristine
+graphene, Optica 8, 422 (2021).
+[12] N. Rana and G. Dixit, All-optical ultrafast valley switch-
+ing in two-dimensional materials, Phys. Rev. Appl. 19,
+034056 (2023).
+[13] M. S. Mrudul and G. Dixit, Controlling valley-
+polarisation in graphene via tailored light pulses, J. Phys.
+B 54, 224001 (2021).
+[14] K. Luo, T. Zhou, and W. Chen, Probing the valley fil-
+tering effect by andreev reflection in a zigzag graphene
+nanoribbon with a ballistic point contact, Phys. Rev. B
+96, 245414 (2017).
+[15] M. Li, Z.-L. Cai, Z.-B. Feng, and Z.-Y. Zhao, Valley-
+resolved transport in zigzag graphene nanoribbon junc-
+tions, Commun. Theor. Phys. 73, 115701 (2021).
+[16] Q. Zhang and K. S. Chan, Pure valley current generation
+in graphene nanostructure, Phys. Lett. A 386, 126990
+(2021).
+[17] Y. Shimazaki, M. Yamamoto, I. V. Borzenets, K. Watan-
+abe, T. Taniguchi, and S. Tarucha, Generation and de-
+tection of pure valley current by electrically induced
+berry curvature in bilayer graphene, Nat. Phys. 11, 1032
+(2015).
+[18] F.-W. Chen, N.-Y. Lue, M.-Y. Chou, and Y.-S. G. Wu,
+All-electrical valley filtering in graphene systems. i. a
+path to integrated electro-valleytronics, J. App. Phys.
+132, 164303 (2022).
+[19] D. Suri and A. Soori, Finite transverse conductance in
+topological insulators under an applied in-plane magnetic
+field, J. Phys.: Condens. Matter 33, 335301 (2021).
+[20] A. Soori, Finite transverse conductance and anisotropic
+magnetoconductance under an applied in-plane mag-
+netic field in two-dimensional electron gases with strong
+spin–orbit coupling, J. Phys.: Condens. Matter 33,
+335303 (2021).
+[21] B. K. Sahoo and A. Soori, Transverse currents in spin
+transistors, J. Phys.: Condens. Matter 35, 365302 (2023).
+[22] A. Soori, Tunable crossed Andreev reflection in a het-
+erostructure consisting of ferromagnets, normal metal
+and superconductors, Solid State Commun. 348-349,
+114721 (2022).
+[23] X. Jia, M. Hofmann, V. Meunier, B. G. Sumpter,
+J. Campos-Delgado, J. M. Romo-Herrera, H. Son, Y.-
+P. Hsieh, A. Reina, J. Kong, M. Terrones, and M. S.
+Dresselhaus, Controlled formation of sharp zigzag and
+armchair edges in graphitic nanoribbons, Science 323,
+1701 (2009).
+[24] J. Cai, P. Ruffieux, R. Jaafar, M. Bieri, T. Braun,
+S. Blankenburg, M. Muoth, A. P. Seitsonen, M. Saleh,
+X. Feng, K. M¨ ullen, and R. Fasel, Atomically precise
+bottom-up fabrication of graphene nanoribbons, Nature
+466, 470 (2010).
+[25] N. W. Ashcroft and N. D. Mermin, Solid state physics
+(Holt, Rinehart and Winston, New York, NY, 1976).
+[26] M. D. Ventra, Electrical transport in nanoscale systems
+(Cambridge University Press, New Delhi, 2008).
+6
+Supplementary Material for “An all-electrical scheme for valley polarization in
+graphene”
+DET AILS OF CALCULA TION
+Figure 1 in the paper illustrates the schematic of the model, where a finite graphene sheet is connected to two
+normal metals (NMs). These normal metals, modeled as square lattices, have a finite number of sites ( Lnx) along
+the x-direction, while they extend infinitely along the y-direction. As shown in the figure, the system consists of four
+terminals. When a bias is applied to terminal 1 while the other three terminals are grounded, a potential difference
+develops between terminal 1 and the other terminals. This potential difference drives a current from terminal 1 toward
+terminal 2, while also inducing currents in graphene toward terminals 3 and 4.
+The Hamiltonian for the setup is given by:
+H = HL + HLG + HG + HGR + HR, where,
+HLG = −
+LgyX
+ny=1
+t′
+l,ny [c†
+Lnx,ny d1,ny + h.c.],
+HGR = −
+LgyX
+ny=1
+t′
+r,ny [d†
+Lgx,ny cLnx+1,ny + h.c.]
+HL = −t
+∞X
+ny=−∞
+h Lnx−1X
+nx=1
+[(c†
+nx+1,ny cnx,ny + h.c.)] +
+LnxX
+nx=1
+[(c†
+nx,ny−1cnx,ny + h.c.)]
+i
+− µn
+LnxX
+nx=1
+∞X
+ny=−∞
+c†
+nx,ny cnx,ny
+HR = −t
+∞X
+ny=−∞
+h 2Lnx−1X
+nx=Lnx+1
+[(c†
+nx+1,ny cnx,ny + h.c.)] +
+2LnxX
+nx=Lnx+1
+[(c†
+nx,ny−1cnx,ny + h.c.)]
+i
+− µn
+2LnxX
+nx=Lnx+1
+∞X
+ny=−∞
+c†
+nx,ny cnx,ny
+HG = −γ
+Lgx−1X
+nx=1
+LgyX
+ny=1
+[d†
+nx+1,ny dnx,ny + h.c.] − γ
+′X
+nx=4n+2
+Lgy −1X
+ny=1
+[d†
+nx−1,ny+1dnx,ny + h.c.]
+−γ
+′X
+nx=4n+3
+Lgy −1X
+ny=1
+[d†
+nx+1,ny+1dnx,ny + h.c.] − µg
+LgxX
+nx=1
+LgyX
+ny=1
+d†
+nx,ny dnx,ny , (1)
+where cnx,ny annihilates an electron at site ( nx, ny) in normal metal, dnx,ny annihilates an electron on site ( nx, ny) in
+graphene, t is the hopping strength in the normal metal, t′
+l/r,ny
+is the hopping strength at the junction of the normal
+metal and graphene at ny on left/right, and µn is the chemical potential in the normal metal, γ is the hopping strength
+in graphene, µg is the chemical potential in graphene, P′
+nx=4n+m means the summation is over all integers between
+1 to Lgx having the form (4n + m), where n is a nonnegative integer and m = 2, 3. We take graphene to be composed
+of spinless electrons. We set t′
+l/r,ny
+= t in numerical calculations for producing results leading to Figures 3, 4, 5, 6 of
+the main paper. The labelling of sites on the graphene lattice follows the scheme shown in Fig. 1 for lattice of size
+(Lgx, Lgy ) = (16, 3).
+In each of the four terminals of the normal metal, the modes are described by the wavenumberkm in the y-direction,
+which satisfies the dispersion relation
+E = −2t cos (kmb) + ϵm − µn, (2)
+for m = 1 , 2, . . . , Lnx, where b is the lattice constant in the normal metal. Here, ϵm are the eigenenergies of a
+one-dimensional Hamiltonian along the x-direction with open boundary conditions, having Lnx sites and a hopping
+strength of t. As a result, each of the four terminals supports Lnx transport channels.
+7
+Graphene
+(1, 1) (4 , 1) (5 , 1) (8 , 1) (9 , 1) (12 , 1) (13 , 1) (16 , 1)
+(2, 1) (3 , 1) (6 , 1) (7 , 1) (10 , 1) (11 , 1) (14 , 1) (15 , 1)
+(1, 2) (4 , 2) (5 , 2) (8 , 2) (9 , 2) (12 , 2) (13 , 2) (16 , 2)
+(2, 2) (3 , 2) (6 , 2) (7 , 2) (10 , 2) (11 , 2) (14 , 2) (15 , 2)
+(1, 3) (4 , 3) (5 , 3) (8 , 3) (9 , 3) (12 , 3) (13 , 3) (16 , 3)
+(2, 3) (3 , 3) (6 , 3) (7 , 3) (10 , 3) (11 , 3) (14 , 3) (15 , 3)
+A − Sublattice
+B − Sublattice
+Lgx
+Lgy
+> > > >
+> > >
+Figure 1. Scheme for labelling the lattice sites in graphene with Lgx = 16, Lgy = 3.
+The column vector vm, of size Lnx × 1, represents the eigenstate of the one-dimensional Hamiltonian corresponding
+to the eigenenergy ϵm. At a given energy E, the wavenumber km may be real or complex. An electron can be incident
+from channel m0 of terminal 1 only if km0 is real.
+The scattering eigenfunction corresponding to an electron with energy E incident on the system is expressed as
+|ψ⟩ =
+X
+nx,ny
+ψnx,ny,n|nx, ny, n⟩ +
+X
+nx,ny
+ψnx,ny,g|nx, ny, g⟩. (3)
+Here, ψnx,ny,n can be grouped into column vectors ψny,nt with Lnx entries, where the nx-th entry is equal to ψnx,ny,n
+in terminals nt = 1, 2, and the nx-th entry is equal to ψLnx+nx,ny,n in terminals nt = 3, 4. The wave function ψny,nt
+takes the form:
+ψny,1 = vm0 eikm0 nyb +
+LnxX
+m=1
+rm,m0 vme−ikmnyb,
+for ny ≤ 0,
+ψny,2 =
+LnxX
+m=1
+tm,m0,2vmeikmnyb, for ny > Lgy ,
+ψny,3 =
+LnxX
+m=1
+tm,m0,3vmeikmnyb, for ny > Lgy ,
+ψny,4 =
+LnxX
+m=1
+tm,m0,4vme−ikmnyb, for ny ≤ 0.
+(4)
+At a given energy E, km is chosen to be positive if real and has positive imaginary part if complex. The scattering
+coefficients rm,m0 , tm,m0,j (for j = 2, 3, 4) and the wavefunctions ψnx,ny,g can be determined using the Schr¨ odinger
+wave equation H|ψ⟩ = E|ψ⟩.
+The differential conductivity Gj = dIj/dV , the differential ratio of the current in terminal j to the voltage bias V
+8
+applied in terminal-1 is given by:
+Gj = e2
+h
+′X
+m0
+1
+sin km0 a
+′X
+m
+|tj
+m,m0 |2 sin kma, (5)
+(for j = 2, 3, 4),
+G1 = e2
+h
+′X
+m0
+h
+1 −
+′X
+m
+|rm,m0 |2 sin kma
+sin km0 a
+i
+,
+(6)
+where the primed summation over m means that the summation is done over all the values of m for which km is real.
+The conductances obey the conservation condition G1 = G2 + G3 − G4. The conductance through graphene is given
+by Gg = G1 − G2 = G3 − G4.
+To characterize the valley polarization, we consider the momentum eigenstates of the graphene lattice, denoted as
+ϕ⃗k, which have the same dimensions as the graphene region in the setup and satisfy periodic boundary conditions
+within the first Brillouin zone. The states near the K-point are classified as belonging to the K valley, while those
+near the K ′-point are assigned to the K ′ valley.
+Let ψ(m0, E) represent a current-carrying eigenstate of the scattering problem corresponding to an electron incident
+in the m0-th transport channel at energy E. The graphene component of this scattering eigenfunction, normalized
+over the graphene region, is denoted as ψg(m0, E). If Gg(m0, E) is the contribution of the m0-th channel to the
+total conductance through graphene, then the contribution of a particular momentum state ⃗k in graphene to this
+conductance is given by
+Gg(m0, E)|ϕg†
+⃗k · ψg(m0, E)|2.
+The valley polarised conductance which is defined as the difference between conductance contributions from states
+belonging to K and K ′ valleys is then given by
+Gg,V =
+′X
+m0
+Gg(m0, E) ·
+ X
+⃗k∈K
+|ϕ†
+⃗k · ψg(m0, E)|2 −
+X
+⃗k∈K′
+|ϕ†
+⃗k · ψg(m0, E)|2
+(7)
+The valley polarization efficiency η defined as the ratio of difference between the contributions of K and K ′ valleys
+to conductance through graphene to the mean of the contributions of K and K ′ valleys to conductance through
+graphene is given by
+η =
+2 P′
+m0 Gg(m0, E) ·
+ P
+⃗k∈K |ϕ†
+⃗k · ψg(m0, E)|2 − P
+⃗k∈K′ |ϕ†
+⃗k · ψg(m0, E)|2
+P′
+m0 Gg(m0, E) ·
+ P
+⃗k∈K |ϕ†
+⃗k · ψg(m0, E)|2 + P
+⃗k∈K′ |ϕ†
+⃗k · ψg(m0, E)|2 (8)
+DEPENDENCE OFGg ON Lgx
+We show in Fig. 2 that the conductance through graphene as a function of Lgx exhibits more regular oscillations
+when the transverse width is reduced to Lgy = 12, keeping all other parameters the same as in Fig. 4 of the main
+paper. This increased regularity arises because a smaller Lgy limits the number of transverse modes (or channels)
+participating in transport. When fewer channels contribute, the interference pattern is dominated by a smaller set
+of longitudinal wave vectors, leading to more regular Fabry–P´ erot-like oscillations. In contrast, as more channels
+participate (i.e., for larger Lgy ), the superposition of multiple interference conditions results in irregular oscillations
+due to differing resonance conditions across channels. However, reducing Lgy also diminishes both the conductance
+and the valley polarization, as fewer channels contribute to transport and the transverse momentum matching becomes
+less efficient.
+9
+Figure 2. Conductance through graphene as a function of Lgx for a fixed transverse width Lgy = 12. Compared to Fig. 4 of the
+main paper, where Lgy = 24, the oscillations are more regular here due to fewer transverse modes contributing to transport.
+With fewer channels, the interference pattern is simpler and more periodic, illustrating clearer Fabry–P´ erot resonances.

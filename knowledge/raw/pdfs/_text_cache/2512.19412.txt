@@ -1,0 +1,546 @@
+Sculpting ultrafast mid-infrared light for solid-state
+high-harmonic generation
+Camilo Granados1,* , Bálint Kiss2 , Eric Cormier2,3 , Bikash Kumar Das4 , Debobrata Rajak2 ,
+Carmelo Rosales-Guzman5 , Rajaram Shrestha2 , Stephan Fritzsche4,6,7 , Qiwen Zhan8,9,10 ,
+and Wenlong Gao1,*
+
+arXiv:2512.19412v2 [physics.optics] 3 Jan 2026
+
+1 Eastern Institute of Technology, Ningbo 315200, China
+2 ELI-ALPS, ELI-Hu Non-Profit Ltd., Szeged, Hungary.
+3 Laboratoire Photonique Numérique et Nanosciences (LP2N), UMR 5298, CNRS-IOGS-Université Bordeaux,
+
+33400 Talence, France
+4 Theoretisch-Physikalisches Institut, Friedrich-Schiller-Universität Jena, Max-Wien-Platz 1, D-07743 Jena, Germany
+5 Centro de Investigaciones en Óptica, A.C., Loma del Bosque 115, Colonia Lomas del campestre, 371507 León,
+
+Gto., Mexico.
+6 Helmholtz-Institut Jena, D-07743 Jena, Germany
+7 GSI Helmholtzzentrum für Schwerionenforschung GmbH, D-64291 Darmstadt, Germany
+8 School of Optical-Electrical and Computer Engineering, University of Shanghai for Science and Technology,
+Shanghai 200093, China
+9 Zhejiang Key Laboratory of 3D Micro/Nano Fabrication and Characterization, Department of Electronic and
+Information Engineering, School of Engineering, Westlake University, Hangzhou 310030, China
+10 International Institute for Sustainability with Knotted Chiral Meta Matter (WPI-SKCM2), Hiroshima University,
+Higashihiroshima, Hiroshima 739-8526, Japan
+* wgao@eitech.edu.cn
+* cagrabu@eitech.edu.cn
+
+ABSTRACT
+The ability to sculpt light in space, time, and polarization has revolutionized studies of light–matter interaction and enabled
+breakthroughs in optical communication, imaging, and ultrafast science. Among the many degrees of freedom of light,
+orbital angular momentum (OAM) further expands these capabilities by unlocking new regimes of control in information
+encoding, particle trapping and manipulation, and symmetry-driven selection rules. However, exploiting OAM to drive nonlinear,
+non-perturbative effects in solids remains challenging, especially in the mid-infrared (MIR) spectral regime-a key region for
+accessing these effects in ambient air, where spatial light modulators do not operate. Here, we circumvent this limitation by
+generating femtosecond, few-cycle MIR Bessel-Gauss vortex (BGV) and perfect optical vortices (POVs), using a robust, static
+spatial-shaping strategy. By utilizing these beams to drive nonlinear optical processes such as second-harmonic generation
+(SHG) and high-harmonic generation (HHG) in various solid-state materials, we show that the resulting harmonic beams
+faithfully inherit the structural characteristics of the drivers: the constant-intensity ring of the POVs is preserved across harmonic
+orders, while the BGV harmonic beams retain their intrinsic topological charge-dependent intensity profiles. Furthermore, by
+verifying the linear OAM up-scaling law, we confirm the conservation of OAM during SHG and HHG in solids. These results
+establish strong-field HHG in solids as a robust platform for synthesizing ultrafast structured harmonic light with controllable,
+high-value OAM.
+
+Introduction
+Light beams carrying orbital angular momentum (OAM)1 - also known as vortex beams (VBs)- have profoundly reshaped our
+understanding of light–matter interactions across various scales2–7 . In both perturbative and non-perturbative optical regimes,
+these interactions are typically described within the framework of the dipole approximation8 , yet recent advances have clearly
+shown effects beyond the dipole limit9–11 . However, exploring how matter responds to different properties of VBs, particularly
+to their OAM (or, their topological charge (TC)), is often constrained to low OAM values. This limitation typically arises from
+the OAM conservation law, which leads to an enhancement in the beam size with increasing values of the TC12 , hindering
+high-intensity-dependent nonlinear processes such as high-order harmonic generation (HHG), where maintaining a sufficient
+peak intensity is essential to surpass the nonlinear threshold13 .
+
+A robust solution to this limitation is the utilization of perfect optical vortex (POV) beams. Unlike conventional vortex
+beams such as Laguerre-Gaussian and Bessel-Gauss beams, POV beams are characterized by a ring width that is smaller than
+their ring radius as well as an annular intensity distribution which remains invariant with the TC14 . This invariant geometry of
+the beam intensity is essential in experiments where high spatial resolution is crucial15 , as well as in optical encryption, optical
+communication, optical tweezing, and microscopy, among others16–20 . However, realizing POV beams in the femtosecond
+(fs) temporal and long-wavelength regime, which are uniquely suited for investigating nonlinear non-perturbative processes in
+solid-state systems, presents a threefold challenge: (1) the scarcity of specialized ultrashort mid-infrared (MIR) laser sources,
+(2) the absence of dynamic beam-shaping optics (e.g., spatial light modulators) in the MIR spectral regime, and (3) the difficulty
+of preserving femtosecond pulse durations during complex spatial shaping.
+The generation of MIR structured light based on static elements is then pivotal to overcome these limitations and to advance
+our knowledge on non-perturbative effects in matter. As such, the ultrashort structured light reported in this manuscript
+provides a versatile platform to investigate light-matter interactions in solid-state systems which intrinsically exhibit diverse
+symmetries, topologies, and spin–orbit couplings. As a result, ultrashort structured light opens the door to address fundamental
+questions concerning OAM conservation in solid-state HHG. Additionally, ultrashort structured light driven HHG establishes
+the harmonic process in solids as a source of coherent, compact, and short-wavelength exotic vortex beams as the POV and
+BGV beams in ambient air. Consequently, the requirement of large vacuum systems which are typically employed in gas-phase
+HHG experiments can be bypassed. These developments created new opportunities to investigate quantum entanglement in
+solids and to produce structured quantum states of light with a large photon number for tailoring light-matter interactions21 .
+Furthermore, MIR structured light driving the solid-state HHG is a potential source of twisted attosecond pulses22 in the
+vacuum-ultraviolet (VUV) spectral range23 , and of exotic topological structures such as skyrmions and Hopfions.
+In this work, we implement a completely passive beam-shaping strategy specifically designed for the MIR domain, which
+preserves the ultrashort temporal structure but still enables us to structure the light spatially. Our approach combines a spiral
+phase plate (SPP), an axicon (AX), and a lens24, 25 (Fig.1 top). With these optical elements in hand, we demonstrate the
+generation of MIR (3.2 µm) spatial POV and Bessel–Gauss vortex (BGV) beams in the fs regime with few-cycle pulses
+suitable for strong-field physics experiments. We verify the TC-invariant features of the fundamental POV beams by generating
+them with multiple TCs, showing that their ring radius and annular intensity distribution remain independent of the TC. This
+behaviour contrast to the TC-dependent transverse intensity distribution exhibited by BGV beams. Using the fs fundamental
+POV beam, we first investigate the frequency-doubling process in zinc oxide (ZnO; a 3D, direct, wide-band gap semiconductor
+typically used for scalable UV devices) and gallium selenide (GaSe; a layered van-der-Waals semiconductor suitable for 2D
+optoelectronics). We then extend these measurements to high-harmonic generation (HHG) in the same materials. The selection
+of these two materials provides a direct comparative study of how the OAM of the driver couples to materials exhibiting
+different crystal symmetries and dimensionalities. Furthermore, we study the conservation law of the OAM for these vortex
+beams and show the robustness of the HHG process in solids as a source of high TC structured light. These experiments
+demonstrate that the fs POV pulses effectively drive both perturbative and non-perturbative nonlinear processes, producing
+short structured pulses across the infrared-to-visible spectral range with large values of the TC.
+
+Results
+The fundamental POV beam can be described in two distinct regimes, as characterized by the ratio between the beam radius (or
+ring radius), r0 , and the half-ring width, δ . In the regime, where r0 /δ > 1, though not too high, the complex field amplitude of
+the POV beam is mathematically expressed as (at the source plane):
+
+
+
+
+(r2 + r02 )
+2rr0
+Ẽ(r, θ ) = E0 exp −
+exp
+(il
+θ
+)I
+,
+0
+l
+0
+δ2
+δ2
+
+(1)
+
+where l0 is the TC carried by the beam, (r, θ ) denote the polar coordinates of the beam with r2 = x2 + y2 and θ = arctan(y/x),
+Il0 (...) is the modified-Bessel function of the first kind of order l0 , and E0 is the constant field amplitude. In the asymptotic
+regime, where r0 /δ ≫ 1, in contrast, the modified-Bessel function of the first kind can be approximated to an exponentially
+growing function, independent of the TC, as Il0 (2r0 r/δ 2 ) ≈ exp(2r0 r/δ 2 ). In this regime, the POV field distribution takes the
+form:
+
+
+(r − r0 )2
+Ẽ(r, θ ) = E0 exp −
+exp (il0 θ ).
+δ2
+
+(2)
+
+The asymptotic regime is reached when the beam radius, r0 , exceeds the beam half-ring width, δ , by approximately an
+order of magnitude or more26 . As follows from Eq. 2, the field amplitude is entirely independent of the TC, leading to a
+2/12
+
+TC-independent intensity distribution for POV beams characterized by a bright ring at r = r0 . In contrast, Bessel-Gauss vortex
+(BGV) beams27 , typically characterized by a TC-dependent intensity distribution and the presence of multiple concentric
+off-axis rings around the central vortex core, are described by the presence of a Bessel function of the first kind, Jl0 (kr ρ), and a
+Gaussian envelope in their complex spatial amplitudes:
+
+
+′
+ρ2
+E(ρ, φ ) = E0 exp − 2 Jl0 (kr ρ) exp(il0 φ ).
+w0
+
+(3)
+
+p
+Here, kr is the radial component (responsible for controlling the beam size) of the total wave number, k = kr2 + kz2 = 2π/λ ,
+with kz and λ representing the longitudinal wave number and the wavelength of the beam, respectively, (ρ, φ ) are the polar
+coordinates of the BGV beam, and E0′ is a constant amplitude. More importantly, the POV and BGV beams are Fourier pairs,
+i.e., Ẽ(r, θ ) ∝ F [E(ρ, φ )]. This characteristic make it possible to generate either of them by exploiting the optical Fourier
+transformation (FT) as will be shown below.
+In Fig. 1 (Top), we show a schematic representation of the experimental setup at the Extreme Light Infrastructure Attosecond Laser Pulse Source (ELI-ALPS, MIR laser source) used to generate fundamental VBs and their corresponding
+harmonic vortices via the SHG and HHG processes. The experimental setup comprises of two main sections summarized as
+follows: The first section deals with short pulses generation, τ p ≈ 45 fs (4 cycles, average duration over the beam aperture)
+with τ p being the pulse duration, in the form of Gaussian beams centered at a wavelength of λ = 3.2 µm with a repetition rate
+of 100 kHz (delivered by the MIR laser system)29 . The energy per pulse of the fundamental beam is, E p ≈ 140 µJ (corresponds
+to a peak intensity of Ipeak = 1.6 × 1012 W/cm2 ). The fundamental Gaussian beam is then guided towards the spiral phase
+plate (SPP, Vortex Photonics, Munich), which imparts the required helical phase onto the Gaussian beam and transforms it into
+fs Laguerre-Gaussian vortex (LGV) beam. When the LGV beam passes through an axicon (AX, Vortex Photonics, Munich)
+optical element, fs BGV beam is produced. Both LGV and BGV beams, characterized with a MIR camera (DIAS Infrared
+systems), share the same T.
+The second section of the MIR laser source setup deals with the characterization of the fundamental POV and BGV beams,
+and the harmonics generated when these beams drive the harmonic generation process in various solids. We adopt the following
+strategy to generate fs POV beams from fs BGV beams: we use a collimating lens ( fc = 125 mm) at a distance of ≈ 35 cm
+from the AX element and a focusing lens ( f f = 75 mm) at a distance of ≈ 45 cm from the collimating lens, to generate fs
+POV beams at its focal plane. The focused beam is then imaged into an imaging camera (Basler acA1440, spectral range
+1200–300 nm). For simplicity, in Fig. 1 (Top), we call this camera a charge-coupled device (CCD). Upon propagation, fs POV
+beams transform into fs BGV beams at a distance of ≈ 2 f f from the focusing lens, because their Fourier pairs nature, which can
+be exploit via their propagation to the far-field or via the optical FT. To generate harmonic vortices, we place the solid crystal
+between the two lenses and in the optical path of the POV beam, as exemplified in Fig.1 (Top) by the ZnO crystal. Additionally,
+we interchange the positions of the fc and f f lenses to achieve a tighter focusing into the target materials, thereby, enhancing
+the harmonic generation process.
+Furthermore, we measure the TC of the fundamental and harmonic vortex beams by guiding a part of those beams towards a
+cylindrical lens (CL), which typically works on the principle of mode conversion i.e., the CL transforms the input OAM modes
+into tilted Hermite-Gaussian (HG) modes1, 30, 31 . The number of intensity minima, n, between the bright lobes in the resulting
+tilted HG intensity distribution is directly linked to the TC of the beam as, l0 = n. This measurement technique can also be
+implemented with a tilted convex lens, where a convex lens tilted in one of the transverse dimensions transforms an input OAM
+mode into a tilted HG pattern at a specific distance after the lens32, 33 . The conceptual ideas explaining the experimental design
+to generate fs MIR structured light beams are presented in Fig. 1(a). We display the simulated transverse spatial intensity
+profiles of the fundamental Gaussian, LGV, BGV, and POV beams along with their corresponding temporal durations measured
+during the experiment. Additionally, we show the transformed HG intensity patterns resulting from the passage of VBs through
+the CL. Moreover, we show spatial intensity structures of the frequency up-converted POV and BGV beams along with their
+TC measurement results. From the perspective of fundamental beams, two characteristics are more important: (1) their spatial
+integrity, and (2) their temporal duration. The latter characteristic can be ensured by using specialized optics designed for the
+MIR spectral regime that minimize the temporal stretching of the pulse and by compensating the residual temporal chirp. This
+guarantees an optimal pulse duration for driving the HHG process.
+Moreover, we can manipulate the spatial structure of the beam by leveraging on the beam transformation: to generate BGV
+beams, we illuminate the AX element with LGV beams. Later, the optical FT of BGV beams results in POV beams. The mode
+and frequency conversion of the beams are used to extract the TC of the fundamental beams, to generate ultrashort harmonic
+vortex beams, and to test the conservation law of OAM in solid-state HHG. Finally, we measure the fs temporal duration of the
+generated beams in a frequency-resolved optical gating (FROG) setup28 . As shown in Fig. 1(b), the retrieved time intensity
+profile shows a pulse duration of ≈47.1 fs, measured after the AX optical element. Besides the time intensity, we also display
+3/12
+
+Figure 1. Simplified experimental setup for the generation and characterization of fs BGV and POV beams. Here, we
+illustrate the generation of a fs Gaussian beam, centered at λ = 3.2 µm, followed by the generation of the LGV and BGV
+beams by means of a spiral phase plate (SPP) and an axicon (AX), respectively. The generation is followed by the
+characterization of both fundamental and POV harmonic beams. (a) conceptualization of the experimental setup that realized
+the theoretical ideas supporting the experiment design. (d) Resulting spectrum and temporal intensity extracted from the FROG
+traces28 showing the temporal duration of the pulse after the axicon optical element. SPP: Spiral phase plate, VB: Vortex beam,
+PK: pickup mirror, f f : focusing lens, fc : collimation lens, SP: spectrometer and CCD: beam profiler.
+
+the retrieved spectral intensity and phase of the driving field. To extract the temporal duration of the pulse, we mimic the effect
+of different optical elements with a 4 mm thick Yttrium aluminum garnet (YAG) piece. This corresponds to measure the pulse’s
+temporal duration after fc . The short pulse duration is achieved by compensating the dispersion induced by different optical
+elements with the Dazzler CEP control module of the MIR laser. We perform the CEP optimization by maximizing ethe HHG
+signal.
+4/12
+
+Fundamental ultrashort MIR vortex beams
+Figure. 2 (a1)-(a5) demonstrate the generation of fs MIR BGV and POV beams, where we display the TC-dependent transverse
+intensity distribution of BGV beams, measured at the plane 2 f f . It is clear from the figure that the radius of the maximum
+intensity of BGV beams grows monotonically as the TC increases- a characteristic also observed in LGV beams case. WE note
+that irrespective of the nature (continuous-wave or pulsed) of the BGV beam, its beam size expands with the TC. Additionally,
+in Figs. 2 (b1)-(b5), we show their transformed intensity patterns after the BGV beams has passed through a CL. This pattern
+also shows how a CL transforms the multi-ring intensity patterns of a BGV beam into tilted HG intensity distribution with
+surrounding rings. As discussed earlier, the number of minima, n, in the transformed intensity distribution of a BGV beam is
+directly tied to the magnitude of its TC, l0 = n, whereas the orientation of the tilted lobed-intensity patterns is linked to the sign
+of the TC: right-tilted patterns correspond to the positive sign, whereas, left-tilted patterns to the negative sign32 . Therefore, the
+beam’s TC shown in (b1)-(b2) are negative, while the values in (b3)-(b5) are positive. Furthermore, in Figs. 2 (c1)-(c5), we
+show transverse intensity distribution of POV beams, measured at the plane f f . We observe from Figs. 2 (c1)-(c5) that the
+ring radius and ring thickness of POV beams hardly change with increasing TC as required for a “perfect” beam. Although
+this feature has been demonstrated previously with continuous-wave type POV beams, we translate such a novel characteristic
+to the fs temporal regime for the first time. Note that the focusing lens transforms the fs BGV beam into a POV beam, as a
+consequence of their conjugate FT relationship24 .
+To make the “perfectness” of the fs POV beams and show the enhancement of fs BGV beam’s size with increasing TC
+explicit, we compute the ratio between the ring diameter and ring width for POV (2r0 /2δ ) and BGV (2ρBG /2w0 ) beams, where
+2ρBG and 2w0 denote the diameter and width of the maximum intensity ring of BGV beams. We note that extracting the
+beam diameter is easier straight forward and leads to the same conclusion than using the beam radius. Additionally, for all
+quantitative aspects of the fs BGV beams, here we consider the maximum intensity ring only. This description follows from the
+definition of divergence both in the near- and far-field, which is typically given in terms of the maximum intensity ring. For the
+case of fs BGV beams, shown in Figs. 2(a1)-(a5), we obtain the ratio, 2ρBG /2w0 = (4.1(5), 3.0(5), 2.8(5), 3.3(5), 4(0.5))), for
+TC l0 = −3, −2, 1, 2, and 3, respectively. The error assigned to the measured ring diameter and ring width corresponds to the
+pixel size, 5 µm. Moreover, the ring diameter values are extracted to be 2ρBG =(190(5),143(5), 106(5),152(5),186(5))µm,
+exhibiting a clear larger value for increasing TCs. On the other hand, for POV beams (shown in Figs. 2 (c1)-(c5)), we obtain
+2r0 /2δ =(48.5(5), 48.8(5), 48.8(5), 49.3(5), 48.8(5)), for TC l0 = −3, −2,1,2, and 3, respectively. The small deviations
+observed in the ratio, 2r0 /2δ (still similar within the error bar), for POV beams mainly originate from minor variations in
+the ring diameter, 2r0 = (415(5), 412(5), 415(5), 419(5), 415(5))µm, since the ring width remains constant for all the cases
+presented here i.e., 2δ =17(5)µm. Notice that the error assigned to the experimental values corresponds to the minimum pixel
+size, which is 5µm. In Fig. 2(d), we further compare the radius of the maximum intensity of BGV beams (blue solid line) and
+POV beams (black dotted line) for different TCs. For a better comparison, we divide the radius of POV beams by four. The
+TC-independent (dependent) transverse intensity distribution of the POV (BGV) beams is clearly demonstrated in the figure:
+a flat (or, constant) line for POV beam’s radius with increasing values of the TC and a linear relationship between the beam
+radius and the TC for BGV beams. Additionally, these results confirm that the intensity distribution of generated POV beams
+are well-described by their asymptotic form, as displayed in Eq. 2.
+Second-harmonic generation with fs POV
+To make use of the MIR fs POV beams, we first investigate the perturbative nonlinear process of second-harmonic generation
+from different solid-state materials. In particular, we produce the second harmonic (SH) of the 3.2 µm fundamental POV
+beam in ZnO (a-cut, thickness ≈ 270 µm) and GaSe (100 µm thickness). To generate the SH, we swap the position of the
+focusing and collimating lenses and place the ZnO/GaSe crystal in between them. The transverse intensity distribution of
+the generated SH BGV beams in the ZnO crystal are shown in Figs. 3(a1)-(a3), whereas those for SH POV beams are shown
+in Figs. 3(b1)-(b3) for TC of the fundamental beams l0 = 1, −3, and −5, respectively. The TC of SH beams are found to be
+l2 = 2, −6, and −10 (see the Supplementary Material), which are exactly twice the TC of the corresponding fundamental
+beams. Moreover, the ring diameter values for SH POV beams are extracted to be 2r0 =(1369(5), 1365(5), 1374(5)) µm for the
+same TC. From Figs. 3(a1)-(a3) and (b1)-(b3), it is clear that the radius of the maximum intensity of SH BGV beams increases
+with increasing values of the TC, whereas the radius of the maximum intensity of SH POV beams hardly change with TCs.
+Notice that the transverse intensity distribution of vortex beams with equal and opposite sign TC remain similar. Therefore, the
+TC l0 = 1, −3, and -5 can be used in our study in a strictly growing sense. Furthermore, in Figs. 3(c1)-(c3) and (d1)-(d3), we
+show SH intensity distribution of BGV and POV beams generated in the GaSe crystal. We generate these harmonic vortices
+by driving the SH generation process with a fundamental beam carrying TC l0 = 3, 5, and 6, which results in TC l2 = 6, 10,
+and 12, respectively (see the Supplementary Material for more details on the TC measurements). To obtain higher TC for the
+fundamental beam, we employ a technique that cascades different SPPs (two SPPs in our case), as reported in Ref.34 .
+Similar observations (as reported in the ZnO crystal) are also made in the context of the radius of the maximum intensity of
+5/12
+
+Figure 2. Intensity distribution of the fs MIR BGV and POV beams. (a1)-(a5) Intensity distribution of fs BGV beams with
+values of the TC l0 = −3, −2,1,2 and 3. (b1)-(b5) Their corresponding HG intensity distribution after the transformation by a
+CL, from where we extracted the beam’s TC. (c1)-(c5) Intensity distribution of fs POV beams generated from the BGV beams
+shown in (a1)-(a5). Notice that we used the same beam size value for the BGV beam generated with l0 = 1 and l0 = −1 for
+completeness, since the latter values were not measured. (d), Comparison between the POV and BGV beam size results for the
+different TC. Notice that we divided the POV beam radius values by 4 for a better comparison with the BGV beam. The
+intensity bar on the right side corresponds to the measured temperature produced by the beam in the MIR camera.
+SH BGV and POV beams for this case. For SH POV beams, the extracted ring diameter values are 2r0 =(1484(5), 1487(5),
+1485(5)). Figures 3(e) and (f) compare the obtained beam size of SH BGV and POV beams generated in ZnO and GaSe crystals.
+For SH POV beams, we obtain the characteristic TC-independent beam size distribution, which confirms the "perfect" nature
+of the harmonic vortices. For SH BGV beams, in contrast, we find a linear dependence of the harmonic vortices beam size
+with their TC. Therefore, this demonstrates that SH POV beams display a constant beam size irrespective of the TCs, whereas,
+the beam size shows a monotonic increase with the TC for SH BGV beams, a behavior similar to fundamental BGV beams.
+Furthermore, the TC of SH vortices (lSH ) scales linearly with the harmonic order and the TC of the fundamental beam i.e.,
+lSH = 2l0 , which validates the OAM conservation in the SHG process, also discussed in Ref.35 . We note that for a better
+comparison between SH POV and BGV beams in both the materials, we divide the POV beam radius by a factor of four.
+High-order harmonic generation with fs POV beams
+We now investigate non-perturbative high-order harmonic generation driven by femtosecond POV beams in ZnO and GaSe
+crystals, enabling us to assess the robustness of OAM transfer across materials with distinct dimensionality, band structure, and
+symmetry. The generation of high, non-perturbative POV harmonic beams also leverages on its conjugate nature with the BGV
+beams. After the AX element, BGV beams are transformed into POV beams at the lens focus. The fundamental and harmonic
+6/12
+
+Figure 3. Second-harmonic generation in ZnO and GaSe for fundamental POV and BGV (after background subtraction).
+(a1)-(a3) and (b1)-(b3) Normalized intensity distribution of the SH BGV and POV beams for a ZnO target, respectively. The
+driving field carried l0 = 1, −3, and -5. (c) and (d), SH in GaSe for a fundamental field with values of the TC l0 = 3, 5 and 6.
+(e) and (f) Summary of the results for ZnO and GaSe, showing the SH POV beam size (full lines) and the SH BGV beam size
+(dashed lines). We divided the beam radius of the SH POV by 4 to make easily to compare the sizes of the vortex beams. The
+error bar for all the values corresponds to 5 µm.
+
+vortices then propagate in the ambient air and transform again into BGV beams. By using a strong focal lens ( fc = 75 mm)
+after the target crystals (see Fig. 1), we convert the BGV harmonics into POV harmonics24 . For instance, in Fig. 4, we show
+the measured transverse intensity distribution for the 5th POV and BGV harmonic beams generated from GaSe crystal for TC
+l0 = 3, 5 and 6 of the fundamental beam (for harmonics generated from ZnO, see the Supplementary Material). As seen from
+Figs. 4(a)-(b), a single-ring intensity distribution is found for the POV harmonic beams, in line with the ring radius and ring
+width for different TCs, whereas high BGV harmonic beams show multi-ring intensity structures with enhanced radius of the
+first maximum intensity ring and dark core size for increasing values of the TC. In Fig. 4 (c), we compare the beam radius
+of different harmonic vortices, which are extracted from the experimental measurements: 2r0 = (2684(5), 2676(5), 2683(5)),
+2r0 = (2683(5), 2699(5), 2714(5)), and 2r0 = (2691(5), 2736(5)), for perfect harmonic vortices q = 5, 6 and 7, respectively.
+The above trend clearly depicts that the generated high-order harmonics indeed inherit the "perfectness" of the fundamental
+POV beams. Here, notice that we divide the beam diameter by a factor of six (2r0 /6) to plot the beam radius for different
+harmonic vortices generated by POV beams. In the case of BGV harmonic beams, the TC-dependent beam size is clearly
+evident from all the trends shown in Fig. 4 (c). Note that for the 7th harmonic vortex, it was necessary to use a ×20 objective
+to properly resolve the beam in the focal position, which explains the high contrast of the beam size with the other two
+harmonic vortices. The extracted ring size values for BGV harmonic beams correspond to 2ρBG = (158(5), 242(5), 280(5)),
+2ρBG = (128(5), 212(5), 249(5)), 2ρBG = 423(4), 680(5).
+Finally, in Figs. 4 (d)-(e), we present the TC measurements for different harmonic vortices generated in GaSe and ZnO,
+7/12
+
+which clearly follow a linear trend that scales with the TC of the fundamental vortex beams. As a result, the linear trend
+can be describe by a harmonic vortex OAM scaling law that follows lq = ql0 , where lq is the TC of the harmonics. These
+results, support the OAM conservation in solid-state HHG and extend its validity for this particular type of structured light (see
+the Supplementary Material). The obtained OAM selection rule in solid-state HHG is identical to what we typically see in
+gas-phase HHG case, when a single driving OAM beam governs the harmonic generation process. Therefore, despite complex
+symmetries and geometries of different solid-state materials (unavailable in atomic gases), the OAM selection rule remains
+intact. Moreover, the generation of even harmonic vortices is allowed by the intrinsic symmetry of GaSe, which belongs to a
+non-centrosymmetric point group, and by the a-cut (⟨112̄0⟩) ZnO crystal, where rotating the principal crystal axis by 90o with
+respect to the beam polarization effectively breaks the inversion symmetry of the light-matter interaction.
+Our results also demonstrate that it is possible to use the solid-state HHG process as a robust source of ultrashort POV and
+BGV beams with large TC in the IR-to-visible spectral range (see also the Supplementary material). This is explicitly show in
+Fig. 4, where TC as large as 36 are obtained by means of the OAM up-scaling in the non-linear process. To the best of our
+knowledge, these results have never been reported before.
+
+Figure 4. Non-perturbative harmonics. (a) and (b), The 5th POV and BGV harmonic beams, generated in GaSe, respectively.
+(c) Comparison between the beam size for different harmonic orders showing that the POV harmonic beams conserve similar
+beam radius values for a very large range of TCs. (d)-(e) Topological charge measurements in GaSe and ZnO, respectively. For
+the case of GaSe, we obtained harmonic vortices q = 6 and 7, with TC as large as lq = 35 and 36, when the solid-state HHG
+process is driven by a fundamental field with l0 = 5 and 6. There results clearly demonstrate that the up-conversion process can
+produce harmonics in the infrared-to-visible wavelength spectral range. Additionally, the linear trend followed by the harmonic
+TC as a function of the fundamental vortex beam TC, supports the conservation of OAM and extend its validity for this
+particular type of vortex beams. We divided the beam radius of the SH POV by 3 to make easily to compare the sizes of the
+vortex beams. The error bar for all the values corresponds to 5 µm.
+
+8/12
+
+Discussion
+Our experimental results demonstrate the generation of ultrashort MIR structured light and its parametric conversion into the IR
+and visible spectral regimes. They also represent a major advance in our quest to control light’s degrees of freedom and to
+explore different solid-state materials functionalities. In IR-to-visible spectral range, creating fs BGV and POV beams would
+require specialized laser systems to generate fs Gaussian beams and spatial light modulators to imprint the TC onto them.
+These light modulators are limited in efficiency, operation wavelength and bandwidth, all crucial for applications in nonlinear,
+non-perturbative physics in solids. We circumvent these limitations, offering a compact and flexible route to produce harmonic
+vortices with high values of the TC (lq = 35 for q = 7) in the IR-to-visible spectral range. Furthermore, the HHG process driven
+by fs MIR vortex beams, make it is possible to investigate non-perturbative effects in ambient air. This result represents a major
+difference and advantage over the gas-phase studies which typically require ultrahigh vacuum conditions.
+Producing short wavelengths with large TC via HHG is fundamental to further expand the study of the helical phase effects
+in different physical systems. For example, understanding the absorption of molecular switches and motors dissolved in liquids
+is pivotal to increase the efficiency of energy conversion. Vortex beams provide a potential new route in this direction via the
+helical dichroism, since now it is possible to study if the molecular motors and switches are sensitive to the OAM sign and if
+new and more efficient OAM-dependent molecular transitions can be achieved. Most importantly, studying those systems via
+transient absorption spectroscopy, for example, allows for understanding the environment’s effect on the molecular response
+to the helical light. In addition to this, the opportunity to generate and incorporate topological quantum light (quantum light
+carrying OAM) into ultrafast studies in solid systems could potentially open new opportunities to manipulate the harmonic
+spectrum basic characteristics.
+Beyond demonstrating control over the spatial structure of harmonics, our results confirm the conservation of OAM in
+solid-state HHG for the POV and BGV beams. The harmonic vortices TC scales linearly with both the fundamental OAM
+and the harmonic order, closely following the up-scaling law previously observed in gases and also recently demonstrated in
+several solid-state materials? . This provides a robust experimental benchmark for theoretical models addressing microscopic
+and macroscopic electron dynamics in solids under helical strong-field excitation.
+Generating harmonic vortices in semiconductor materials also expands the accessible spectral range of ultrashort structured
+light. Previously, harmonic vortex generation was largely restricted to the ultraviolet and extreme-ultraviolet in gases, where
+vacuum systems and low-efficiency XUV optics limit applications. Additionally, producing POV and BGV harmonic beams in
+the infrared-to-visible range opens opportunities for ultrafast transient absorption spectroscopy with OAM as a new degree
+of freedom and stimulated emission depletion microscopy, where the small ring size of the POV can be advantageous over
+previous approaches. It also enables studies of the fundamental optics of ultrashort structured light: we demonstrate the
+conjugate nature of POV and BGV beams during propagation (see Supplementary Material), opening the door to investigate
+propagation of ultrashort structured light in different media and greatly expanding their applicability in both fundamental and
+technological contexts. Additionally, with the advent of more complex topological structures, such as optical skyrmions and
+Hopfions, solid-state HHG provides an ideal platform to explore these exotic light fields and to produce them in the ultrashort
+regime.
+To summarize, we demonstrated the generation of fs MIR BGV and POV beams. Our results confirm that POVs maintain
+even for fs pulses a TC-invariant beam size, whereas BGV beams always exhibit a TC-dependent beam size. Furthermore, these
+characteristics were shown to be preserved in the corresponding harmonic vortex beams, enabling the generation of POV and
+BGV beams in the shorter wavelength regimes with large TC. Most importantly, we demonstrate here the possibility to study
+nonlinear effects in solid-state materials with the use of structured light. Our work establishes a foundation for investigating the
+high-harmonic generation process driven by POV and BGV beams and the generation of attosecond twisted pulses in solid-state
+systems.
+
+Methods
+Fourier relationship between POV and BGV beams
+The experimental generation of POV beams relies solely on the optical FT of BGV beams. This relationship allows an arbitrary
+BGV beam to be mapped into a POV beam as follows24 :
+k
+Ẽ(r, θ ) =
+2πi f
+
+Z ∞ Z 2π
+0
+
+ik
+
+E(ρ, φ )e− f ρrcos(θ −φ ) dρρdφ .
+
+(4)
+
+0
+
+Here, E(ρ, φ ) denotes the complex field amplitude of a BGV beam (given by Eq.3), and Ẽ(r, θ ) denotes the FT complex
+field amplitude of a POV beam, given by Eq.1. Furthermore, f is the focal length of the lens, k = 2π/λ represents the magnitude
+of the wave vector and λ is the laser wavelength. Note that Eq.4 holds for both the fundamental BGV and POV beams, as well
+9/12
+
+as for their harmonic counterparts (since BGV and POV harmonic beams are also Fourier pairs, as shown from our experimental
+results). Therefore, the helical phase of BGV harmonics, exp(iqlφ ), translates to the helical phase of POV harmonics, exp(iqlθ ).
+Accordingly, the TC of the POV beam can be extracted from the BGV beam, since it remains unchanged by the FT. This
+scenario corresponds exactly to the our experimental measurements aimed to extract the TC of the harmonic vortices.
+TC measurement of BGV beams
+The TC measurement of the fundamental BGV and harmonic beams is based on the principle of the π/2 mode conversion. In
+this case, illuminating a CL with a BGV beam produces tilted HG beams surrounded by multiple rings in the detection plane.
+Quantitatively, this can be understood as follows: Under the small argument condition i.e., kr ρ ≪ 1, the Bessel function of the
+first kind of order ℓ, describing the BGV beam, can be approximated as:
+
+Jℓ (kr ρ) ≈
+
+(kr ρ)ℓ
+,
+2ℓ ℓ!
+
+(5)
+
+Here, ℓ represents the TC of the fundamental BGV and harmonic beams i.e., ℓ = l0 for the fundamental field and ℓ = ql0 for
+the harmonic field. Utilizing Eq.5, we simplify Eq.3, which now takes the form:
+
+
+
+
+ρ 2 (kr ρ)ℓ
+(x2 + y2 )
+(x + iy)ℓ ,
+− 2
+exp(iℓφ ) = E1 exp −
+2ℓ ℓ!
+w0
+w20
+
+E(ρ, φ ) ≈ E0′ exp
+
+(6)
+
+where E1 condenses all the constant values. Note that the term, ρ ℓ exp(iℓφ ), is replaced with (x + iy)ℓ , where (x, y) denote
+the cartesian coordinates of the beam at the source plane (z = 0) and are related to polar coordinates (ρ, φ ) via: x = ρ cos φ and
+y = ρ sin φ . Following the calculation presented in Ref.32 , we derive the complex field amplitude of the beam at a distance z as:
+E(x′ , y′ , z) ∝ Hℓ (α1 x′ + iα2 y′ ),
+
+(7)
+
+where, the parameters α1 and α2 depend on the beam waist and beam wavelength at a particular distance z. Furthermore,
+(x′ , y′ ) are the beam coordinates at a distance z. Equation 7 demonstrates the vortex beam transformation into a HG pattern, up
+to some additional prefactors. The interplay between those prefactors and the the Hermite polynomial determines the distance
+after the lens at which the input vortex beam transforms into tilted HG beams. This particular distance corresponds to the
+lens focal point. Most importantly, the number of intensity zeroes between the bright lobes, corresponding to the order of the
+Hermite polynomial, contains the TC information. We note that, to obtain the same transformed HG patterns as shown in Fig.2,
+it is necessary to use Eq.3 without any approximation.
+
+Acknowledgments
+The ELI-ALPS project (GINOP-2.3.6-15-2015-00001) is supported by the European Union and co-financed by the European
+Regional Development Fund. C.G. and B.K.D. acknowledged the support of the European laser Infrastructure ERIC through
+the program “ELI Call for Users". C.R.G. acknowledged support from SECIHTI, México (CBF-2025-I-1804). We thank
+Andrew Forbes and Marcelo Ciappina for the valuable comments on the manuscript.
+
+References
+1. Allen, L., Beijersbergen, M. W., Spreeuw, R. J. C. & Woerdman, J. P. Orbital angular momentum of light and the
+transformation of laguerre-gaussian laser modes. Phys. Rev. A 45, 8185–8189, DOI: 10.1103/PhysRevA.45.8185 (1992).
+2. Wu, H.-J. et al. Observation of anomalous orbital angular momentum transfer in parametric nonlinearity. Phys. Rev. Lett.
+130, 153803, DOI: 10.1103/PhysRevLett.130.153803 (2023).
+3. Jiang, J.-J., Zhuang, K.-H., Chen, J.-D., Li, J.-X. & Chen, Y.-Y. Controlling the polarization and vortex charge of γ photons
+via nonlinear compton scattering. Phys. Rev. Lett. 134, 153802, DOI: 10.1103/PhysRevLett.134.153802 (2025).
+4. Wu, Y., Gargiulo, S., Carbone, F., Keitel, C. H. & Pálffy, A. Dynamical control of nuclear isomer depletion via electron
+vortex beams. Phys. Rev. Lett. 128, 162501, DOI: 10.1103/PhysRevLett.128.162501 (2022).
+10/12
+
+5. Bu, Z. et al. Twisted breit-wheeler electron-positron pair creation via vortex gamma photons. Phys. Rev. Res. 3, 043159,
+DOI: 10.1103/PhysRevResearch.3.043159 (2021).
+6. Schmiegelow, C. T. et al. Transfer of optical orbital angular momentum to a bound electron. Nat. Commun. 7, 12998, DOI:
+10.1038/ncomms12998 (2016).
+7. Forbes, A., Nothlawala, F. & Vallés, A. Progress in quantum structured light. Nat. Photonics 19, 1291–1300, DOI:
+10.1038/s41566-025-01795-x (2025).
+8. Rego, L., Román, J. S., Picón, A., Plaja, L. & Hernández-García, C. Nonperturbative twist in the generation of extremeultraviolet vortex beams. Phys. Rev. Lett. 117, 163202, DOI: 10.1103/PhysRevLett.117.163202 (2016).
+9. Jain, A. et al. Intrinsic dichroism in amorphous and crystalline solids with helical light. Nat. Commun. 15, 1350, DOI:
+10.1038/s41467-024-45735-9 (2024).
+10. Bégin, J.-L. et al. Nonlinear helical dichroism in chiral and achiral molecules. Nat. Photonics 17, 82–88, DOI: 10.1038/
+s41566-022-01100-0 (2023).
+11. Schüler, M., Schmitt, T. & Werner, P. Probing magnetic orbitals and Berry curvature with circular dichroism in resonant
+inelastic X-ray scattering. npj Quantum Mater. 8, 6, DOI: 10.1038/s41535-023-00538-x (2023).
+12. Padgett, M. J., Miatto, F. M., Lavery, M. P. J., Zeilinger, A. & Boyd, R. W. Divergence of an orbital-angular-momentumcarrying beam upon propagation. New J. Phys. 17, 023011, DOI: 10.1088/1367-2630/17/2/023011 (2015).
+13. Lewenstein, M., Balcou, P., Ivanov, M. Y., L’Huillier, A. & Corkum, P. B. Theory of high-harmonic generation by
+low-frequency laser fields. Phys. Rev. A 49, 2117–2132, DOI: 10.1103/PhysRevA.49.2117 (1994).
+14. Ostrovsky, A. S., Rickenstorff-Parrao, C. & Arrizón, V. Generation of the perfect optical vortex using a liquid-crystal
+spatial light modulator. Opt. Lett. 38, 534–536, DOI: 10.1364/OL.38.000534 (2013).
+15. Bretschneider, S., Eggeling, C. & Hell, S. W. Breaking the diffraction barrier in fluorescence microscopy by optical
+shelving. Phys. Rev. Lett. 98, 218103, DOI: 10.1103/PhysRevLett.98.218103 (2007).
+16. Vanitha, P. et al. Correlations in scattered perfect optical vortices. J. Opt. 23, 095601, DOI: 10.1088/2040-8986/ac094f
+(2021).
+17. Yang, Q. et al. Ultra-secure optical encryption based on tightly focused perfect optical vortex beams. Nanophotonics 11,
+1063–1070, DOI: doi:10.1515/nanoph-2021-0786 (2022).
+18. Shao, W., Huang, S., Liu, X. & Chen, M. Free-space optical communication with perfect optical vortex beams multiplexing.
+Opt. Commun. 427, 545–550, DOI: https://doi.org/10.1016/j.optcom.2018.06.079 (2018).
+19. Chen, M., Mazilu, M., Arita, Y., Wright, E. M. & Dholakia, K. Dynamics of microparticles trapped in a perfect vortex
+beam. Opt. Lett. 38, 4919–4922, DOI: 10.1364/OL.38.004919 (2013).
+20. Zhang, C., Min, C., Du, L. & Yuan, X.-C. Perfect optical vortex enhanced surface plasmon excitation for plasmonic
+structured illumination microscopy imaging. Appl. Phys. Lett. 108, 201601, DOI: 10.1063/1.4948249 (2016).
+21. Sergio, C. et al. Structured light at the extreme: Harnessing spatiotemporal control for high-field laser-matter interactions.
+arXiv (2025).
+22. Géneaux, R. et al. Synthesis and characterization of attosecond light vortices in the extreme ultraviolet. Nat. Commun. 7,
+12583, DOI: 10.1038/ncomms12583 (2016).
+23. Nayak, A. et al. Attosecond metrology of vacuum-ultraviolet high-order harmonics generated in semiconductors via
+laser-dressed photoionization of alkali metals. Nat. Commun. 16, 1428, DOI: 10.1038/s41467-025-56759-0 (2025).
+24. Vaity, P. & Rusch, L. Perfect vortex beam: Fourier transformation of a bessel beam. Opt. Lett. 40, 597–600, DOI:
+10.1364/OL.40.000597 (2015).
+25. Jochen, A. & Kishan, D. Generation of high-order bessel beams by use of an axicon. Opt. Commun. 177, 297–301 (2000).
+26. Das, B. K., Granados, C., Krüger, M. & Ciappina, M. F. High-order harmonic generation driven by perfect optical vortex
+beams: Exploring the orbital angular momentum upscaling law. Phys. Rev. Res. 6, 043244, DOI: 10.1103/PhysRevResearch.
+6.043244 (2024).
+27. Rao, A. S. A conceptual review on bessel beams. Phys. Scripta 99, 062007, DOI: 10.1088/1402-4896/ad4921 (2024).
+28. Kane, D. & Trebino, R. Characterization of arbitrary femtosecond pulses using frequency-resolved optical gating. IEEE J.
+Quantum Electron. 29, 571–579, DOI: 10.1109/3.199311 (1993).
+11/12
+
+29. Thiré, N. et al. Highly stable, 15 w, few-cycle, 65 mrad cep-noise mid-ir opcpa for statistical physics. Opt. Express 26,
+26907–26915, DOI: 10.1364/OE.26.026907 (2018).
+30. Beijersbergen, M., Allen, L., van der Veen, H. & Woerdman, J. Astigmatic laser mode converters and transfer of orbital
+angular momentum. Opt. Commun. 96, 123–132 (1993).
+31. Padgett, M. J. & Allen, L. Orbital angular momentum exchange in cylindrical-lens mode converters. J. Opt. B: Quantum
+Semiclassical Opt. 4, S17 (2002).
+32. Vaity, P., Banerji, J. & Singh, R. Measuring the topological charge of an optical vortex by using a tilted convex lens. Phys.
+Lett. A 377, 1154–1156, DOI: https://doi.org/10.1016/j.physleta.2013.02.030 (2013).
+33. Liu, P., Cao, Y., Lu, Z. & Lin, G. Probing arbitrary Laguerre–Gaussian beams and pairs through a tilted biconvex lens. J.
+Opt. 23, DOI: 10.1088/2040-8986/abd1cd (2021).
+34. Wang, C., Liu, T., Ren, Y., Shao, Q. & Dong, H. Generating optical vortex with large topological charges by spiral phase
+plates in cascaded and double-pass configuration. Optik 171, 404–412 (2018).
+35. Li, Y. et al. Second-harmonic generation of perfect vortex beams and their transformation characteristics during propagation.
+Phys. Scripta 100, 055545, DOI: 10.1088/1402-4896/adcd05 (2025).
+
+Author contributions statement
+C.G., D.R., B.K.D., B.K. and E.C. conceptualized the idea. C.G., D.R., R.S. and B.K. conducted the experiments. C.G., D.R.
+and R.S. analyzed the results. W.G., S.F., Q.Z. and C.G. supervised the project. C.G, C.R.G. and B.K.D. wrote the manuscript.
+All authors contributed equally to and approved the final version of the manuscript.
+
+12/12
+
+

@@ -1,0 +1,2342 @@
+Coherent phonon motions and ordered vacancy compound mediated quantum path
+interference in Cu-poor CuInxGa(1−x)Se2 (CIGS) with attosecond transient absorption
+
+Hugo Laurell,1, 2, 3, 4, ∗ Jonah R. Adelman,1 Elizaveta Yakovleva,5 Carl Hägglund,5 Kostiantyn Sopiha,5
+Axel Stenquist,4 Han K. D. Le,1 Peidong Yang,1, 3, 6, 7 Marika Edoff,5 and Stephen R. Leone2, 1, 8
+1Department of Chemistry, University of California, Berkeley, California, 94720, USA
+2Department of Physics, University of California, Berkeley, California, 94720, USA
+3Material Sciences Division, Lawrence Berkeley National Laboratory, Berkeley, California 94720, USA
+4Department of Physics, Lund University, Box 118, 22100 Lund, Sweden
+5Department of Materials Science and Engineering, Solar Cell Technology,
+Uppsala University, Box 35,751 03 Uppsala, Sweden
+6Department of Materials Science and Engineering,
+University of California, Berkeley, California 94720, USA
+7Kavli Energy Nano Science Institute, Berkeley, California 94720, USA
+8Chemical Sciences Division, Lawrence Berkeley National Laboratory, Berkeley, California 94720, USA
+
+In this study, coherent phonon motion is observed in bandgap excited CuInxGa(1−x)Se2 (CIGS) uti-
+lizing extreme ultraviolet (XUV) attosecond transient absorption spectroscopy across the Se M4,5
+absorption edge. Two frequencies of coherent phonon motion are resolved, a low frequency mode
+attributed through Raman measurements to the A1g phonon motion of a Cu-deficient ordered va-
+cancy compound (OVC), while the high frequency mode originates from the A1g phonon motion in
+the chalcopyrite phase. The two oscillations lead to modulations in the XUV differential absorption
+∆A(ϵ, τ ) due to energy shifts of the Se M4,5 edge, with a minima occuring approximately 1 ps
+after the band gap excitation. The hot carrier cooling time of holes and electrons are individually
+obtained and the observed slower cooling of holes is attributed to the higher density of hole states in
+the valence band. We also observe fast oscillations (18.6(3) fs period) across the Se absorption edge,
+which are interpreted to originate from quantum path interference between the electronic conduction
+bands of the chalcopyrite CIGS and OVC phases, opening the possibility towards quantum coher-
+ent metrology in photovoltaics on the femtosecond timescale. The complex interplay between the
+chalcopyrite and OVC phases are revealed in this investigation through both coherent vibrational
+and electronic motions.
+
+I.
+
+INTRODUCTION
+
+With the discovery of high-harmonic generation and
+attosecond light pulses [1, 2], electron dynamics have
+been measured in atomic [3], molecular [4] and solid-
+state systems [5]. A key method for the characterization
+of electron dynamics on their natural time scale is at-
+tosecond transient absorption spectroscopy (ATAS), [6–
+11] which often has excellent sensitivity to hole and elec-
+tron dynamics in both the valence and conduction bands.
+The study of carrier and lattice dynamics in semiconduc-
+tors on attosecond and femtosecond timescales is crucial
+for understanding the fundamental processes governing
+their optical and electronic properties.
+
+In perspective of the global effort of transitioning en-
+ergy production away from fossil fuels, novel photovoltaic
+platforms can play a crucial role [12]. Photovoltaics now
+offers the cheapest form of energy production in many
+countries worldwide, and it is forecast to surpass nu-
+clear and wind electricity generation within five years
+[13]. One such platform of special promise is the I-III-
+VI2 chalcopyrite compounds such as Cu(InxGax−1)Se2
+(CIGS) [14], with a current record photovoltaic efficiency
+of 23.6% [15]. The potential of CIGS lies in its high ab-
+
+∗ hugolaurell@lbl.gov
+
+sorption coefficient, allowing for thin 1-2 µm thick ab-
+sorber layers, and direct bandgap that can be tuned by
+changing the [Ga]/([Ga]+[In]) ratio [14].
+
+An attractive application for CIGS is in tandem solar
+cells, where alloying with Ag and higher levels of Ga to
+achieve a larger bandgap, promote crystallization, and
+improve band alignment for the top subcell can substan-
+tially improve overall light harvesting efficiency [16, 17].
+In parallel, lower-bandgap CIGS compositions remain of
+great interest for single-junction cells that could rival the
+performance of monocrystalline Si. Notably, Ag alloy-
+ing, while beneficial for tandem designs[16], also enhances
+the OVC formation[18]. This underscores the impor-
+tance of systematic studies of the (A)CIGS–OVC sys-
+tem to optimize both band-edge tuning and heterojunc-
+tion quality. Ultrafast spectroscopy provides a means to
+study key parameters in the optimization of solar cell
+efficiency, such as recombination times, recombination
+pathways and hot carrier cooling, inaccessible with more
+traditional phenomenological studies. Detailed charac-
+terization of the coherent phonon motion in CIGS could
+reveal how to efficiently store hot carrier energy in the
+phonon motion and subsequently transfer it to the carri-
+ers (hot-phonon bottleneck). This potentially paves the
+way toward phonon engineering approaches to use hot-
+carrier energy to enhance photovoltaic efficiency beyond
+the Schockley-Queisser limit[19].
+
+Core-level XUV transient absorption spectroscopy has
+
+5
+2
+0
+2
+
+g
+u
+A
+8
+1
+
+]
+i
+c
+s
+-
+l
+r
+t
+
+m
+
+.
+t
+a
+m
+-
+d
+n
+o
+c
+[
+
+2
+v
+1
+2
+6
+5
+0
+.
+6
+0
+5
+2
+:
+v
+i
+X
+r
+a
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+FIG. 1. In (a,b) the chalcopyrite and OVC band structures calculated using DFT are shown, respectively. Here Cu(In/Ga)Se2
+represent the chalcopyrite, while the Cu(In/Ga)3Se5 denotes the OVC. The contributions of Se, In and Cu orbitals are color
+coded in green, red and blue, respectively. The [Ga]/([Ga]+[In]) ratio was set to 0 for the calculations. The panels on the right
+show the Se projected density of states. The red arrows indicate the optical excitation. In (c) a schematic of the measurement
+procedure is shown. A few femtosecond IR pump pulse is sent to the CIGS thin film sample to enable transition across the
+bandgap. The photoinduced dynamics is then recorded by transmitting an attosecond XUV pulse through the sample and
+recording the XUV absorption spectrum. By changing the optical path length between the IR pump and XUV probe the
+effective delay between pump and probe pulses is varied, from which the differential absorption can be reconstructed. In (d)
+the energy diagram for the 10:12:23 type-II band alignment across the distributed heterojunctions is shown. At pump-probe
+delay τ = 0 an IR photon transfers population from the Γ and Z valence bands into the Γ and Z conduction bands. The CBs
+then evolve with different phase due to the conduction band offset ∆ECB. Subsequently, an XUV photon is absorbed from the
+Se 3d5/2,3/2 ground state to probe the population in the CBs and VBs of the chalcopyrite and OVC, as well as the coherence
+between the CBs. The dashed parabolas in the CBs represent the shift in conduction band minimum (CBM) due to the bandgap
+renormalization, which is modulated by the coherent phonon motion. The red arrows indicate the optical excitations and the
+purple arrows indicate the XUV probe transitions from the 3d5/2 core level.
+
+enabled the simultaneous observation of carrier and lat-
+tice dynamics in semiconductors with unprecedented
+temporal resolution [8, 20]. The technique combines both
+high spectral and temporal resolution, while being espe-
+cially advantageous for measuring the holes due to their
+spectral isolation. The core level transitions provide in-
+dependent probes of the valence and conduction bands,
+making it ideal to disentangle complex carrier-lattice dy-
+
+namics. Measurements in Si across the L2,3 absorption
+edge, for example, have recovered the time constants for
+inter/intra valley scattering and disentangled scattering
+contributions imparted by electrons and phonons [21].
+Additionally, studies have been performed on Si nanopar-
+ticles to investigate phonon bottleneck effects that slow
+down the loss of hot carrier energy[22]. Using femtosec-
+ond pump-probe spectroscopy, the dominant recombi-
+
+nation mechanism at carrier densities on the order of
+1020 cm−3, for co-evaporated CIGS, has been determined
+to be Shockley-Read-Hall recombination. At these car-
+rier densities the carrier cooling time (equilibration with
+phonons) has been measured to be ∼3 ps [23].
+
+Ordered vacancy compounds (OVCs) are believed to
+play an important role in enhancing the efficiency of
+the CIGS absorber layer in photovoltaic cells [24]. Cop-
+per deficiency leads to the formation of an OVC phase
+adjacent to bulk CIGS, creating buried type-II hetero-
+junctions that optimize charge separation and transport.
+These heterojunctions create a hole barrier by widening
+the CIGS band gap through lowering of the valence band
+maximum (VBM) in the defect phase. This barrier pre-
+vents holes from reaching the CIGS/CdS interface, im-
+proving charge collection efficiency and reducing recombi-
+nation losses [25–27]. Through this mechanism the OVC
+enhances the efficiency of CIGS-based solar cells. By un-
+derstanding the dynamic interplay between the crystal
+phases, future improvements of CIGS design might be
+possible, thereby advancing photovoltaic technologies.
+
+In this work, we have performed ATAS measurements
+on CIGS thin films across the Se M4,5 absorption edge.
+As the conduction band minimum (CBM) and VBM both
+have Se character (see Fig. 1), the element specific XUV
+light probes a spectral region that is central to the pho-
+tovoltaic performance. Coherent oscillations of the ab-
+sorption edge are observed as a function of pump-probe
+delay at energies corresponding to the transition from
+the 3d5/2,3/2 core levels to the CBM. Two distinct lower-
+frequency oscillations are observed at 4.8 and 5.3 THz,
+corresponding to the A1g phonon modes of the chalcopy-
+rite and the OVC phases, and one higher frequency oscil-
+lation is uncovered at 55 THz, originating from quantum
+path interference between the two phases (electronic co-
+herence). In addition, there is an increase in absorption
+in the valence band region, indicating the generation of a
+pump-induced hole population. We employ an iterative
+decomposition, following the methodology developed by
+Zuerch et. al.[9], to disentangle the temporal response of
+holes, electrons and coherent optical phonons.
+
+In Fig. 1(a,b) the band structure of the chalcopy-
+rite phase (a) and OVC (b) are shown, calculated using
+Density Functional Theory (DFT). The phases are repre-
+sented by the Ga-free chalcopyrite CuInSe2 (Eg = 1 eV)
+and model CuIn3Se5 structure illustrated below. The cal-
+culations were performed using the PBE+U functional,
+with Hubbard U correction of 5 eV applied on the Cu 3d
+orbitals according to Dudarev et al.[28]. The band gaps
+were scissor-shifted to the experimental values measured
+for CIGS film herein. The band gap was measured to
+be Eg = 1.1 eV using ellipsometry and is direct at the
+Γ-point. The panels on the right in Fig. 1(a,b) show
+the projected density of states for Se. The valence band
+predominantly consists of Cu 3d and Se 4p anti-bonding
+orbitals, while the conduction band is dominated by Se
+4s and In 5s orbitals. The bandgap difference between
+the chalcopyrite and OVC is indicated as ∆Eg and has
+
+3
+
+a value of 0.18 eV [29], while the energy for the CBM
+and VBM is shown as ECBM and EV BM , respectively.
+The difference in EV BM is due to the fact that the Cu 3d
+and Se 4p form anti-bonding orbitals near the VBM, and
+when Cu atoms are removed to form the OVC this shifts
+the VBM to lower energies. Experimentally, the Fermi
+level is above the midgap for the OVC, making it n-type,
+while the chalcopyrite is strongly p-type[30]. Therefore,
+as the two phases are in contact, p-n heterojunctions are
+formed.
+
+In Fig. 1(c), a schematic of the ATAS measurements
+of the thin film CIGS sample is shown. An IR few fem-
+tosecond pump pulse optically excites electrons across the
+bandgap of CIGS, initiating the photoinduced dynamics.
+Subsequently, the XUV attosecond probe pulse is trans-
+mitted through the CIGS film and the transient XUV
+absorption spectrum recorded by a CCD camera. By
+recording the XUV absorption spectra, with and without
+infrared pump, for a set of pump-probe delays the dif-
+ferential absorption, ∆A(ϵ, τ ), is reconstructed. In Fig.
+1(d), a simplified energy diagram, with respect to the
+Se 3d5/2 core level, of the involved states that partake
+in the optical transitions at the distributed heterojunc-
+tions is shown. The structure is the Cu10(In/Ga)12Se23,
+which includes both the OVC and the chalcopyrite unit
+cells in its supercell, more details on this in section III C.
+Excitation of an electron from the VB to the CB via the
+absorption of an IR photon generates hole and electron
+populations at the Γ or Z-point. The localization of car-
+riers to the Γ and Z-point is also due to the fact that for
+direct transitions the bandgap is larger than the IR pho-
+ton energy at all other points. The momentum mismatch
+between the Γ and Z point is small, and indirect transi-
+tions between these valleys could be weakly allowed. Fur-
+thermore, the prominence of the Z-valley increases with
+reduced Cu concentration, implying that it is a signa-
+ture of the ordered vacancies. The bandgap difference of
+the two valleys is a reflection of the larger bandgap for
+the OVC/Z due to the reduced antibonding in the VB.
+The difference in XUV absorption, with and without IR
+pump, probe the valence and conduction band popula-
+tions through state blocking (SB) of the XUV transition.
+Due to the proximity between Se and Ge in the periodic
+table, and the similar core transitions, we anticipate the
+core hole to be well screened in Se, as in Ge [9].
+
+II. METHODS
+
+A. Sample synthesis
+
+For CIGS deposition, the Si3N4 substrates were placed
+in a titanium holder with an opening just below the size
+of 5 mm x 5 mm. For the purpose of optical charac-
+terization, one 5 mm x 15 mm Si substrate piece was
+also included in the run. To prevent diffusion of copper
+into the Si during CIGS deposition, a barrier layer of ap-
+proximately 20 nm thick hafnium oxide was first grown
+
+on this Si substrate using atomic layer deposition (ALD)
+at 250°C, with tetrakis(dimethylamido)hafnium (Sigma-
+Aldrich, 99.99%) and water as precursors.
+
+CIGS was deposited in vacuum through co-evaporation
+from fixed open boat sources with evaporation rates con-
+trolled by mass-spectrometer feedback. All elements were
+evaporated at constant rates during the entire deposition
+time, aiming for a slightly Cu-poor stoichiometry with a
+Cu/(Ga+In) ratio of 0.9 and a [Ga]/([Ga]+[In]) ratio of
+0.26. The ratios of elements were confirmed with X-ray
+fluorescence (XRF) measurement on a sample with 1 µm
+CIGS thickness. The deposition time was then scaled
+down in the next deposition run to result in a sample of
+50 nm thick CIGS.
+
+The samples were heated from the back by infrared
+heaters, and they reached a maximum of 425°C dur-
+ing the deposition process. The deposition time window
+started with opening the shutter in front of the samples
+when stable temperature and evaporation rates had been
+achieved, and the deposition lasted for 75 s. After CIGS
+deposition and cooling down in vacuum, the samples were
+unloaded from the vacuum system and transferred within
+5 min to an ALD system. Using trimethyl aluminum
+(Pegasus, electronic grade) and water, a layer of approx-
+imately 10 nm thick of Al2O3 was grown at 120°C on all
+samples to suppress CIGS oxidation.
+
+Spectroscopic ellipsometry measurements were per-
+formed on the Si substrate before and after the Al2O3
+growth to determine the thickness and bandgap of the
+CIGS layer. A generalized oscillator model including one
+Psemi-m0 and 9 Gaussians was employed to represent the
+CIGS layer. The model also included a top layer based
+on the Bruggeman effective medium approximation, to
+take CIGS roughness, with and without the Al2O3, into
+account. The resulting CIGS thickness was slightly less
+than 48 nm. The extrapolated bandgap was 1.1 eV, which
+corresponds well to the expected [Ga]/([Ga]+[In]) = 0.26
+ratio [16, 31].
+
+B. Core-level XUV transient absorption
+measurements
+
+The XUV transient absorption spectroscopy measure-
+ments of the CIGS samples were performed by photo-
+exciting CIGS with a few fs nominally 800 nm IR pump
+pulse and waiting a delay τ until a probe XUV pulse
+was transmitted through the sample, and the XUV ab-
+sorption spectrum recorded. The beam path starts with
+35 fs, 2.3 mJ pulses with a central wavelength of 800 nm
+(IR) at 1 kHz repetition rate delivered from a Ti:Sapphire
+Coherent Astrella laser system. The pulses are then sent
+through a stretched 2 m long hollow core fiber filled with
+neon for spectral broadening. The spectrally broadened
+laser pulses were then temporally compressed to 4 fs us-
+ing chirped mirrors and a piece of z-cut Ammonium Di-
+hydrogen Phosphate (ADP) to compensate for 3rd order
+dispersion accumulated in the fiber. Subsequently, the
+
+4
+
+IR pulses were sent into a Mach-Zehnder interferometer,
+where in the probe arm the IR pulse was focused with a
+mirror with f = 50 cm into a gas cell filled with argon.
+In the focus, few-burst attosecond pulses are generated
+through the process of high-order harmonic generation
+(HHG). The residual IR was filtered out with an alu-
+minum foil leaving only the XUV pulse. Then, the XUV
+was recombined with the pump IR pulses on an annular
+mirror and both the IR and XUV were focused on the
+CIGS sample. The IR pump excites an estimated carrier
+density of 2 ⋅ 1020 cm−3 in the CIGS layer. After trans-
+mission through the sample, a secondary aluminum foil
+was used to filter out the residual pump IR. Finally, the
+transmitted XUV is diffracted by a grating onto a CCD
+(PIXIS 400 B) where it was recorded.
+
+III. RESULTS AND DISCUSSION
+
+In this work, we present four sets of measurements,
+where the pump-probe delay was varied with different
+time steps and over different time delay ranges to capture
+slow and fast time scales of the photo-induced dynamics.
+Long scans (∼ps) were recorded to study the coherent
+phonon motion and hot carrier cooling in CIGS, while
+short scans (∼100 fs) were performed to study fast elec-
+tron dynamics in CIGS across the Se M4,5 absorption
+edge.
+
+In Fig. 2 (c), an attosecond transient absorption scan
+of the CIGS sample is shown. The delay was scanned
+between -165 and 1973.4 fs with steps of 26.4 fs. The
+colormap shows the differential absorption (∆A(ϵ, τ )) in
+units of mOD, where a positive ∆A(ϵ, τ ) indicates an
+increase in absorption and vice versa. In the top panel
+(Fig. 2 (a)), the XUV absorption spectrum is shown.
+The VBM probed via the 3d3/2 transition was determined
+from the zero crossing of ∆A(ϵ, τ ) to EVBM = 54.1 eV,
+agreeing with photoelectron spectroscopy measurements
+[32], while the lower bound of the VB spectral region
+was determined to 52 eV (Fig. 2 (a) blue region). Sub-
+sequently, the CBM probed via the 3d5/2 transition was
+determined to be ECBM = 54.5 eV, by subtracting the Se
+3d spin-orbit splitting energy from the 3d3/2 EVBM and
+adding the band gap energy. The upper bound on the CB
+spectral region (Fig. 2 (a) red region) was determined via
+the zero crossing of the ∆A(ϵ, τ ) to 55.2 eV.
+
+The spectral region from 52.0 to 54.1 eV (blue shaded
+in the XUV absorption spectrum) shows an increase in
+absorption, this we attribute to the opening of transi-
+tions to the VB from the Se 3d shell. The second region
+of interest (red shaded in the XUV absorption spectrum
+in Fig. 2(a)) shows an oscillation in the ∆A as a function
+of pump-probe delay in Fig. 2(c). The differential ab-
+sorption here corresponds predominantly to XUV transi-
+tions from the 3d5/2 ground state to the conduction band.
+The oscillation in ∆A as a function of delay is typical of
+coherent phonon motion [33] and the results are consis-
+tent with the frequencies of the two A1g phonon modes
+
+set of an oscillation in ∆A(ϵ, τ ). Importantly, there is a
+dephasing of the beats in the oscillation with a minimum
+around 1 ps and a subsequent revival.
+
+5
+
+A.
+
+Iterative decomposition of the differential
+
+absorption
+
+The variation of ∆A(ϵ, τ ) within the spectral region
+around 55 eV originating from the transition from the Se
+3d5/2 ground state to the CB has several contributions
+listed in the previous section. To disentangle the indi-
+vidual components, an iterative decomposition algorithm
+was implemented, following the methodology developed
+by Zuerch et al. [9], decomposing the differential absorp-
+tion according to,
+
+∆A(ϵ, τ ) = ∆Ashift(ϵ, τ ) + ∆Abroadening(ϵ, τ )
+
++ ∆Acarriers(ϵ, τ ).
+
+(1)
+
+In Fig. 3 the iterative decomposition of the measured
+1 ps scan (a) is shown. The contributions due to shift-
+ing of the absorption edge (b), State blocking by carriers
+(c) and Excited state broadening (d) are indicated. The
+excited state broadening does not vary significantly as a
+function of pump-probe delay over 1 ps. Moreover the
+excited state broadening in Fig. 3 (d) is at the noise
+level and its contribution to the ∆A can therefore be ne-
+glected. The coherent phonon dynamics is well described
+by the shifting of the absorption edge, which is retrieved
+from the decomposition (see Fig. 3 (b)). The transient
+edge shift originates from a modulation of the ECBM and
+Se 3d core level binding energies. Following a similar pro-
+cedure as was made in the case of silicon [35], we calculate
+the initial shift in core level binding energy as 45 meV. In
+addition, since the core level shift counteracts the BGR,
+we can estimate the magnitude of the inital BGR as 11
+meV. For a transition from the Se 3d ground state the
+edge shift contribution to the differential absorption can
+be written as,
+
+∆Ashift(ϵ, τ ) = ∑
+j
+
+αj(Aj(ϵ + ∆Eshift(τ )) − Aj(ϵ)).
+
+(2)
+
+Where Aj(ϵ) is the XUV absorption spectra of the j-th
+crystal phase and ∆Eshift(τ ) is the transient edge shift.
+The fractions of contributions for the two phases (αj)
+were extracted from the Raman measurements (see Fig.
+6 in the SM). The core hole broadening is described with
+a convolution of the Lorentzian lineshape function, L(ϵ),
+with a FWHM of Γ = 0.8 eV [36].
+In Fig. 3 (b) the
+edge shift contribution to the differential absorption is
+shown, ∆Ashift(ϵ, τ ), assuming identical edge shifts for
+the chalcopyrite and OVC phases. From the transient
+edge shift ∆Eshift(τ ) (Fig. 3 (f)), the DFT calculated
+Se-projected density of states and the Lorentzian core
+hole broadening, the theoretical differential absorption
+can be calculated according to Eq. (2), as shown in Fig.
+3 (e). There is good agreement between the theoretical
+
+FIG. 2. XUV absorption spectrum (a), spectral averages of
+the VB and CB spectral regions (b) and transient absorption
+scan of CIGS (c). The delay was varied in steps of 26.4 fs be-
+tween −165.0 and 1973.4 fs. The VBM probed via the 3d3/2
+transition was determined from the zero-crossing of the tem-
+porally averaged ∆A(ϵ, τ ) and was found to EVBM = 54.1 eV.
+The VB spectral region ((a) blue region) was determined as
+the interval from the low energy zero crossing of ∆A at the
+EVBM. By subtracting the spin-orbit splitting energy from
+EVBM and adding the bandgap energy, the CBM probed via
+the 3d5/2 transition was found at ECBM = 54.5 eV. The up-
+per bound of the CB region ((a) red region) probed via the
+3d5/2 transition was determined from the zero crossing of the
+∆A(ϵ, τ ) to 55.2 eV. To the spectral average of VB (in (b)),
+a 1 mOD offset has been added for visibility.
+
+measured for the chalcopyrite and the OVC phase with
+Raman spectroscopy (see SM VI D). To the best of our
+knowledge this is the first observation of coherent phonon
+dynamics in CIGS. The two coherent phonons are likely
+generated by the change in potential (force) from depop-
+ulation of Cu 3d and Se 4p anti-bonding orbitals in the
+VB of CIGS [34].
+
+In the CB spectral region we have three main contribu-
+tions to the ∆A(ϵ, τ ): (1) Redshift of the absorption edge
+due to bandgap renormalization (BGR) and a change in
+core-level binding energy, (2) state-blocking due to the
+IR mediated population transfer from the VB to the CB,
+labeled carriers, as well as (3) excited state broadening
+[9]. Due to the 0.65 eV spin-orbit splitting energy of Se 3d
+core levels, which has been measured in CIGS[32], there
+is partial spectral overlap between the state blocking and
+lattice features that correspond to the core-level transi-
+tions from the 3d3/2,5/2 shells. The left panel (Fig. 2
+(b)) shows the spectral average of differential absorption
+across the valence band and conduction band regions.
+For the holes there is a fast increase in absorption around
+t = 0 followed by a slow decay over several ps. For the CB
+there is a fast increase in absorption followed by the on-
+
+6
+
+FIG. 3. Iterative decomposition of transient absorption scan. (a) Raw transient absorption scan. The raw scan is separated
+into the underlying spectral contributions that include absorption edge shift (b), state blocking by carriers (c), and excited
+state broadening (d). The two negative state blocking features in (c) are due to spin-orbit replicas from the spin-orbit split Se
+core level. (e) ∆Ashift(ϵ, τ ) is computed from the total CB Se DOS for the chalcopyrite and OVC using the retrieved transient
+edge shift ∆E(τ ) and Eq. (2). In (f) the retrieved transient edge shift, ∆Eshift(τ ) is shown.
+
+differential absorption and ∆Ashift(ϵ, τ ), i.e. Fig. 3(b)
+and (e).
+
+B. Temporal analysis of carriers and phonons
+
+To characterize the photo-induced dynamics in CIGS,
+decay
+the decay of the electron and hole populations (τ
+electron,
+decay
+hole ), the common decoherence time of the coherent
+τ
+2 ) and phonon phases (ϕCIGS
+phonons (T ph
+) were
+A1g
+fitted for the spectral averages of the VB and CB regions
+indicated in Fig. 2. The rise and decay of the differen-
+
+, ϕOVC
+A1g
+
+tial absorption (∆A(ϵ, τ )) were fitted using exponentially
+modified Gaussian functions, which take into account the
+effect of the cross-correlation between the IR pump and
+XUV probe pulses. In Fig. 4 (a) the spectral averages of
+the two spectral regions indicated in Fig. 2 corresponding
+to the VB and CB response are shown. At t = 0 there is a
+sharp increase in absorption for both curves followed by
+an exponential decay. Superimposed on the relaxation of
+the lattice (red curve) there are clear oscillations with a
+period of ∼ 200 fs. At around t = 1 ps there is a minimum
+in the oscillation amplitude, followed by a revival, indi-
+cating that there is a dephasing between the two phonon
+modes due to their different frequencies. The rise and
+
+7
+
+Supplemental Material) were performed on the CIGS
+= 159(4) cm−1 and
+samples and two peaks at νOVC
+A1g
+= 176.2(7) cm−1 were observed. These are iden-
+νCIGS
+A1g
+tified in previous work and are assigned as the A1g co-
+herent phonon of the chalcopyrite phase and its spectrally
+shifted copy in the ordered vacancy compound [38]. The
+relative amplitudes from Raman spectroscopy were ob-
+tained as αCIGS
+= 35%. The frequencies
+A1g
+(ωCIGS
+, αOVC
+, ωOVC
+)
+A1g
+A1g
+A1g
+retrieved from the Raman measurements, were incorpo-
+rated into a fit of the coherent phonons to reduce the
+number of parameters of the fit function. The results
+show that there will be dephasing and recurrences due to
+the difference in phonon frequencies, as well as a perma-
+nent loss of coherence, or decoherence. In Fig. 4 (b) the
+fit is plotted as a solid black curve, where the fit function
+used was parameterized as,
+
+= 65% and αOVC
+A1g
+) and relative amplitudes (αCIGS
+A1g
+
+∆Aphonon(τ ) = Ce
+
+− τ
+T
+
+ph
+
+2 (αOVC
+A1g
+
+cos(ωOVC
+A1g
+
+τ + ϕOVC
+A1g
+
+)
+
+(3)
+
++ αCIGS
+A1g
+
+cos(ωCIGS
+
+A1g
+
+τ + ϕCIGS
+A1g
+
+)).
+
+,ϕOVC
+A1g
+
+Here C is the oscillation amplitude, T ph
+is the coher-
+2
+ent phonon decoherence time and (ϕCIGS
+) are the
+A1g
+phonon phases for chalcopyrite and OVC, respectively. It
+is assumed that the two phonons decohere on the same
+timescale T ph
+2 , a reasonable assumption as the chalcopy-
+rite and OVC lattices are very similar. The fitted phonon
+= 0.73(4) rad and ϕCIGS
+phases were, ϕOVC
+= 0.75(2)
+A1g
+A1g
+rad, with the shared decoherence time of T ph
+2 = 2.27(8)
+ps. The decoherence mechanism of the coherent phonons
+is likely through Klemens decay where one coherent op-
+tical phonon is converted into two acoustic phonons [39].
+Since the phonon phases, (ϕCIGS
+), are similar and
+A1g
+close to π/4, the mechanism responsible for the excitation
+of the coherent phonon is likely a mixture of displacive
+excitation of coherent phonons (DECP) and impulsive
+stimulated Raman scattering (ISRS)[40]. For ISRS the
+phonon phase is predicted to be π/2, while for DECP the
+value should be closer to 0 or π. In the DECP model,
+the driving force of the coherent phonon motion can orig-
+inate from either population transfer n(t) or variations
+in electronic temperature ∆Te(t) [11, 33, 40, 41]. The
+most likely driving force in CIGS is population transfer
+as CIGS lacks a Peierls distortion[11].
+
+, ϕOVC
+A1g
+
+C. Few femtosecond time-scale dynamics
+
+To investigate further, given the high temporal resolu-
+tion of ATAS, we conducted measurements in CIGS with
+a 3.3 fs time step across the three first phonon oscillations
+to investigate ultrafast carrier dynamics. In Fig. 5 ATAS
+delay scans of CIGS are shown where the delay is varied
+from −19.8 to 511.5 fs in (a) and, focusing on a narrower
+
+FIG. 4. In (a) the spectral average of ∆A(ϵ, τ ) shows the dif-
+ferential absorption as a function of pump-probe delay time
+for the valence (blue) and conduction bands (red), respec-
+tively. The black curves represent the fit of the rise and decay
+using an exponentially modified Gaussian function. In (b) the
+residual oscillating component (∆Aphonon(τ )) of the conduc-
+tion band in (a) is plotted after subtraction of the fitted rise
+and decay.
+
+decay
+phonon = 2.7(8) ps, τ
+
+decay of the two spectral averages were fitted, where the
+fit results are plotted as black curves in Fig. 4 (a). The
+relaxation of the lattice (based on the edge shift) and
+decay
+holes were fitted to, τ
+hole = 1.7(2)
+ps, where the lattice relaxation was fitted from the de-
+composed edge shift contribution (∆Eshift(ϵ, τ )) in Eq.
+(1) of the 1 ps scan. The 1.7 ps decay of the holes is
+similar to the previously reported carrier cooling time of
+∼ 3 ps for co-evaporated CIGS at a carrier density of
+2 ⋅ 1020 cm−3 [23]. The mechanism for the carrier cooling
+has previously been determined to be electron-phonon
+scattering [37]. For reference, the characteristic time for
+recombination of photo-carriers is two orders of magni-
+tude slower, e.g. ∼ 750 ps recombination decay time
+was measured in co-evaporated CIGS with similar car-
+rier concentrations. The vastly different timescale means
+the carrier concatenations cannot be resolved from our
+measurements. In addition, the dominant recombination
+mechanism was determined to be Shockley-Read-Hall for
+co-evaporated CIGS [23]. The decay of the CB was fitted
+from ∆Acarriers(ϵ, τ ), retrieved from the decomposition,
+decay
+to τ
+electron = 2.6(5) ps. Bringing everything together,
+we conclude that the hole cooling time is approximately
+half that of the cooling time of the electrons and the
+relaxation of the lattice. The larger DOS in the VB com-
+pared to the CB is a likely origin for the higher scat-
+tering rate for the holes as compared to the electrons.
+Specifically, since the electron-phonon scattering matrix
+elements incorporate the electron DOS, more available
+states for holes to scatter into gives a higher rate and
+shorter cooling time.
+
+To characterize the coherent phonon motion, the fit
+of the rise and decay in the CB spectral region were
+subtracted from the spectral average, shown in Fig. 4
+(b), leaving the oscillating coherent phonon component
+of the differential absorption. To probe the phonon fre-
+quencies, Raman measurements (shown in Fig. 6 in the
+
+8
+
+FIG. 5. Attosecond transient absorption scans of CIGS where the delay is scanned from −19.8 to 511.5 fs (a) and 219.8 to
+361.7 fs (b) with a time step of 3.3 fs.
+In the left panels in (a,b), the spectral averages over the CB regions are plotted,
+showing clear oscillations in ∆A. In the left panel in (b) ∆τ indicates the fitted period of oscillation of 18.6(3) fs. In (c)
+the fitted oscillation amplitude of the bandpass filtered lineout of the CB region in (a) is shown over the first three phonon
+maxima. From the decay of the oscillation amplitude, the fit of the decoherence time is 0.8(4) ps. In (d) the crystal structure
+of the chalcopyrite and OVC mixture is shown, showing the Cu poor planar defects separated by 3 nm. At these interfaces the
+distributed heterojunctions are formed. In (e) the energy diagram for the 4-level model is shown.
+
+delay range, from 219.8 to 361.7 fs in (b) in steps of 3.3
+fs. In the left panels in Fig. 5(a,b), the spectral averages
+over the CB region reveal clear oscillations of the absorp-
+tion edge with a fitted period of ∆τ = 18.6(3) fs across
+the second phonon oscillation maximum. These rapid
+oscillations are interpreted as a two-optical-path inter-
+ference between the OVC and chalcopyrite CB’s, owing
+to the type-II band alignment [24]. However, this expla-
+nation requires significant overlap between wavefunctions
+of both phases, which can only occur if the interface-to-
+bulk ratio is large. This situation is possible in CIGS
+because of the inherent off-stoichiometry, mediated by
+the formation of thermodynamically stable OVC-like in-
+clusions inside the otherwise ideal CIGS grains, as illus-
+trated in Fig. 5(d) [42]. These inclusions are Cu-poor
+and have local bonding structure similar to that in the
+Cu(In,Ga)3Se5, but they cannot be strictly characterized
+as an OVC phase due to the small thickness. Judging
+by the composition of our films (Cu/(Ga+In)=0.9), the
+average distance between the OVC planar defects is es-
+timated to be ∼ 3 nm. Provided the OVC-like inclusions
+are electronically similar to the OVC phase, which usu-
+ally exhibits n-type conductivity [24], the bulk of the
+CIGS film constitutes a distributed heterojunction. Fol-
+lowing the optical excitation, at τ = 0, photo-exited elec-
+trons are generated in the state of a coherent superposi-
+
+tion. This coherence is traced in time by probing optical
+transitions from the Se 3d shell into the CB using at-
+tosecond XUV pulses.
+
+In Fig. 5 (e) the DFT calculated band structure of the
+10:12:23 supercell is shown, which includes both the cal-
+copyrite and OVC unit cells. In contrast to the chalcopy-
+rite and OVC band structures in Fig. 1(a,b), a new CB
+at the Z point emerges due to the inclusion of the OVC.
+Since the VBM in the chalcopyrite and the CBM in the
+OVC lie at the Γ and Z point respectively, the optical
+transitions between these manifolds are not momentum-
+conserving, however provided that the initial and final
+state wavefunctions sufficiently overlap they could be
+weakly allowed. This facilitates direct interfacial charge
+transfer, a phenomenon predicted and experimentally ob-
+served in other material platforms. Examples include
+momentum-matched type-II van der Waals heterostruc-
+tures [43], direct photoluminescence-based evidence of
+type-II transitions in a ZnO/P3HT junction [44], and
+observations of both direct type-I and interface-related
+indirect type-II transitions in InGaAs/AlAsSb quantum
+wells [45]. Additionally, studies of WS2/Bi2O2Se het-
+erojunctions have demonstrated programmable interfa-
+cial band alignment, enabling type-II direct transitions
+and localized interlayer excitons dependent on Γ-point
+wavefunction overlap [46]. Further support of this in-
+
+terpretation comes from observed strong photoresponses
+attributed explicitly to interfacial transitions in type-II
+junctions, with clear threshold energies indicating gen-
+uine interfacial transition mechanisms [47]. These stud-
+ies collectively provide credence to interpreting the rapid
+oscillations as a consequence of direct interfacial charge
+transfer. Nevertheless, the strength and feasibility of
+such direct transitions critically rely upon the symmetry
+match of wavefunctions at the interface, an important
+aspect requiring detailed theoretical studies beyond the
+scope of this work.
+
+Within this interpretation, the measured period corre-
+sponds to a conduction band minima offset of, h/∆τ =
+∆ECB = 0.222(7) eV. This value is in line with theo-
+retical studies of the conduction band offset between the
+chalcopyrite phase and OVC across distributed hetero-
+junctions [24], and it agrees with the extrapolated value
+from DFT calculations ∆Eth
+CB = 0.25 eV of the CIGS
+sample in this study (Fig. 12 in the SM). To model the
+photo-induced dynamics, we consider direct optical tran-
+sitions from the chalcopyrite valence band to the OVC
+and chalcopyrite conduction bands in a simple 4-level
+model (shown in Fig. 5(e)). The 4-level model consists
+of the states, ∣V B⟩, the two CBs ∣CB1⟩ and ∣CB2⟩, where
+the VB is the chalcopyrite VB and the indices {1, 2} cor-
+respond to OVC and the chalcopyrite, respectively. The
+core level is represented by ∣3d5/2⟩. Solving the Lind-
+blad master equation perturbatively to first order (full
+derivation shown in SM VI B) yields an evolving coher-
+ence between the CB states as,
+
+ρ(1)
+CB1,CB2
+
+(τ ) = µV B,CB1 µ∗
+
+V B,CB2
+
+ρCB1,CB2 (0)
+⎞
+⎠
+
+,
+
+∆ECB τ − Γ τ
+
+⎛
+× exp
+⎝
+
+−
+
+i
+̵h
+
+(4)
+
+where ∆ECB = ECB2 − ECB1
+is the energy difference be-
+tween the conduction band minima of the two crystal
+phases and Γ is the decoherence rate. The XUV medi-
+ated transition from the core level then probes the co-
+herence between the conduction bands, resulting in the
+state blocking contribution to the differential absorption
+signal of the form (full derivation in SM VI B)
+
+∆Acarriers(Ef , τ ) ∝ −ρCB1,CB1 (0) − ρCB2,CB2 (0)
+
+⎛
+− 2∣ρCB1,CB2(0)∣ e−Γτ cos
+⎝
+
+∆ECB τ
+̵h
+
++ ϕ
+
+⎞
+,
+⎠
+(5)
+
+where, ϕ = Arg(ρCB1,CB2 (0)), is the phase of the initial
+coherence. One can note that the expression of the state
+blocking contribution in Eq. (5) is always negative, as
+state blocking cannot increase the XUV transition am-
+plitude to the CB’s. Notably, we do not observe oscil-
+lations in the VB region. This is due to the fact that
+no coherent superposition is created in the chalcopyrite
+VB, as it has a single degree of crystal phase freedom.
+By fitting the oscillation amplitude in Fig. 5(a) across
+
+9
+
+the three first phonon oscillations (∼100 fs intervals out-
+lined by the shaded regions in Fig. 5(a)), the blue points
+in Fig. 5(c) are produced with associated uncertainty.
+Fitting the decay of the oscillation amplitude, weighted
+with the inverse of the error from the fit of the oscillation
+amplitude, the decoherence time 1/Γ = T e
+2 is extracted as
+0.8(4) ps. Additionally, we fit the phase over the first
+100 fs and relate the imprinted phase shift in the dif-
+ferential absorption to a time delay experienced for the
+electron while crossing the junction. We find a phase
+shift of ϕ = 4.1(3) rad, which corresponds to a time de-
+lay of tW = 12.1(8) fs. Assuming that contributions from
+the dipole transition matrix elements (both from the IR
+and core-level transitions) are negligible, this time delay
+can be interpreted as the time it takes for the electron to
+traverse the junction.
+
+Furthermore, we can try to estimate the degree of co-
+herence between the conduction bands from the scan
+in Fig.
+5(b), recognizing the limitations of the esti-
+mate. From the Raman measurements we can approx-
+imate the populations of the two conduction bands,
+(ρCB1,CB1, ρCB2,CB2 ), as the normalized Raman inten-
+sities for the two phonon modes. We can also infer the
+coherence ∣ρCB1,CB2∣ from the oscillation amplitude of
+the rapid oscillations, full details in SM VI C. From the
+estimated elements of the density matrix we retrieve the
+degree of coherence between the chalcopyrite and OVC
+conduction bands at the second phonon oscillation as,
+
+C =
+
+√
+
+∣ρCB1,CB2 ∣
+ρCB1,CB1 ρCB2,CB2
+
+≈ 0.19.
+
+(6)
+
+The partial coherence of roughly 20% is due to a number
+of decoherence channels. Present decoherence channels
+include experimental decoherence, in the form of tempo-
+ral jitter between the pump and probe and camera noise,
+as well as decoherence due to interactions with the envi-
+ronment, such as electron-phonon and electron-electron
+scattering. We also know that intra-phase transitions,
+originating from spatial regions where no junctions are
+present, will contribute to a reduced degree of coherence
+as pure state blocking. If only spatial regions with wave-
+function overlap between the chalcopyrite and OVC were
+probed, the observed degree of coherence would likely be
+higher.
+
+We hypothesize that the observed long-lived electronic
+2 = 0.8(4), ps), exceeding typical semicon-
+coherence (T e
+ductor coherence times (e.g., 12.9, fs in GaAs at room
+temperature [48]), originates from the the spatial sep-
+aration of the OVC and chalcopyrite conduction bands
+and the coherent phonon motion. The spatial separation
+of the conduction band states across the buried type-II
+chalcopyrite/OVC heterojunctions [49] leads to reduced
+wavefunction overlap, suppressing interphase electron-
+electron and electron-phonon scattering. As a con-
+sequence, the populations remain approximately time-
+invariant during the measurement, consistent with the as-
+sumptions for the perturbative solutions to the Lindblad
+equation (Eq. (5)). Within this framework, this leaves
+
+intraphase scattering as the primary dephasing mecha-
+nism. In intraphase scattering within each CB manifold,
+electrons can scatter internally with phonons or other
+electrons. Intraphase electron-phonon scattering, in par-
+ticular, is closely related to carrier cooling, for which we
+measure a cooling time of the electrons to 2.6(5), ps, sig-
+nificantly longer than the observed coherence time. How-
+ever, cooling involves multiple sequential phonon emis-
+sion events, each imparting incremental and possibly ran-
+dom phase shifts. Since the conduction band minima
+(CBM) for the chalcopyrite and OVC phases lie at the
+Γ and Z-point respectively, intraphase scattering primar-
+ily involves zone center phonons. The A1g phonons are
+coherent during our measurement and electron scatter-
+ing on these coherent phonons could possibly explain the
+origin of the extended coherence time. Other possible ex-
+planations for the long lived electronic coherence include
+correlated lattice fluctuations as observered in perovskite
+quantum dots [50], or as a result of coherence between in-
+coherent excitons [51]. Additionally, intraphase electron-
+electron scattering will contribute to the dephasing and
+if dominant would lead to a rapid dephasing, disagree-
+ing with our measurements. Therefore, we suggest that
+the long electronic coherence time results from a combi-
+nation of suppressed interphase scattering due to spatial
+localization of electrons in the distinct crystal phases and
+intraphase scattering via coherent optical phonons at the
+distributed chalcopyrite/OVC heterojunctions.
+
+To test this hypothesis, future experiments could inves-
+tigate the dependence of the electronic coherence time on
+carrier density. Such studies could probe the relative con-
+tributions of interphase and intraphase scattering mech-
+anisms and determine the extent to which spatial local-
+ization at the distributed heterojunctions influence ultra-
+fast electronic decoherence. To summarize, the measure-
+ments provide compelling evidence for efficient, ultrafast
+interfacial charge transfer enabled by wavefunction over-
+lap at the chalcopyrite/OVC interface, highlighting the
+critical role of atomic-scale interface design in optimizing
+photovoltaic performance.
+
+IV. SUMMARY
+
+In this study, we present the first attosecond transient
+absorption spectroscopy (ATAS) characterization of thin-
+film Copper Indium Gallium Selenide (CIGS) samples.
+Utilizing high temporal and spectral resolution, we ob-
+serve the coherent phonon motion corresponding to the
+A1g modes of both the chalcopyrite phase and a Cu-
+deficient ordered vacancy compound (OVC) phase, with
+frequencies of νCIGS
+= 159(4)
+
+= 176.2(7) cm−1 and νOVC
+A1g
+
+A1g
+
+10
+
+cm−1, respectively. The superposition of the two phonon
+oscillations results in a beating in differential absorption
+with a minimum of the oscillation amplitude around 1 ps
+in the differential absorption, ∆A(ϵ, τ ), and later recur-
+rence. Additionally, we measure rapid oscillations with
+a fitted period of 18.6 fs across the Se M4,5 absorption
+edge, which we attribute to quantum path interference
+between the chalcopyrite and OVC phase. The contrast
+of the high frequency oscillations encodes the degree of
+electronic coherence, which could be a potential new ob-
+servable for photovoltaic performance. Through an iter-
+ative decomposition of the transient absorption data, we
+successfully disentangled the contributions from electron
+and hole cooling as well as the lattice response, provid-
+ing insights into the carrier cooling and coherent phonon
+motion in CIGS. The measured hot hole cooling time
+of approximately 1.7 ps and hot electron cooling time
+of 2.7 ps aligns with previous studies and improves the
+understanding of carrier thermalization in CIGS. These
+processes are inseparable parts of photo excitations in
+CIGS-based solar cells, which on the fundamental level
+are likely to underpin their exceptional photovoltaic per-
+formance. The ability to disentangle coherent phonon
+motion and hot carrier cooling at femtosecond to picosec-
+ond timescales opens new avenues for tailoring material
+properties to achieve higher solar cell efficiencies. This
+work underscores the potential of ATAS as a powerful
+tool for probing ultrafast dynamics in complex semicon-
+ductor systems, paving the way for future advancements
+in photovoltaic technology.
+
+V. ACKNOWLEDGEMENTS
+
+H.L would like to thank J. M. Dahlström for fruit-
+ful discussions. This work was supported by the De-
+partment of Energy, Office of Science, Basic Energy Sci-
+ence (BES) Program within the Materials Science and
+Engineering Division (contract DE-AC02-05CH11231),
+through the Fundamentals of Semiconductor Nanowires
+Program through the Lawrence Berkeley National Lab-
+oratory. Support for laser instrumentation and vacuum
+hardware is from AFOSR grant numbers FA9550-19-1-
+0314, FA9550-24-1-0184, and FA9550-22-1-0451. H.L.
+acknowledges support from the Swedish Research Coun-
+cil (2023-06502) and the Sweden-America Foundation.
+J.R.A acknowledges the NSF GRFP under grant No
+DGE 2146752. H.K.D.L acknowledges support from
+the National Science Foundation’s Graduate Research
+Fellowship Program (NSF GRFP) under grant DGE
+1752814
+
+[1] A. McPherson, G. Gibson, H. Jara, U. Johann, T. S. Luk,
+I. A. McIntyre, K. Boyer, and C. K. Rhodes, Studies of
+
+multiphoton production of vacuum-ultraviolet radiation
+in the rare gases, Journal of the Optical Society of Amer-
+
+ica B 4, 595 (1987).
+
+[2] M. Ferray, A. L’Huillier, X. Li, L. Lompre, G. Mainfray,
+and C. Manus, Multiple-harmonic conversion of 1064 nm
+radiation in rare gases, Journal of Physics B: Atomic,
+Molecular and Optical Physics 21, L31 (1988).
+
+[3] C. Ott, A. Kaldun, P. Raith, K. Meyer, M. Laux, J. Ev-
+ers, C. H. Keitel, C. H. Greene, and T. Pfeifer, Lorentz
+meets fano in spectral line shapes: A universal phase and
+its laser control, Science 340, 716 (2013).
+
+[4] S. Nandi, E. Plésiat, S. Zhong, A. Palacios, D. Busto,
+M. Isinger, L. Neoričić, C. L. Arnold, R. J. Squibb,
+R. Feifel, P. Decleva, A. L’Huillier, F. Martín, and
+M. Gisselbrecht, Attosecond timing of electron emission
+from a molecular shape resonance, Science Advances 6,
+eaba7762.
+
+[5] H. Liu, Y. Li, Y. S. You, S. Ghimire, T. F. Heinz, and
+D. A. Reis, High-harmonic generation from an atomically
+thin semiconductor, Nature Physics 13, 262 (2016).
+[6] A. Wirth, M. T. Hassan, I. GrguraÅ!’, J. Gagnon,
+A. Moulet, T. T. Luu, S. Pabst, R. Santra, Z. A.
+Alahmed, A. M. Azzeer, V. S. Yakovlev, V. Pervak,
+F. Krausz, and E. Goulielmakis, Synthesized light tran-
+sients, Science 334, 195 (2011).
+
+[7] A. R. Attar, H.-T. Chang, A. Britz, X. Zhang, M.-F.
+Lin, A. Krishnamoorthy, T. Linker, D. Fritz, D. M. Neu-
+mark, R. K. Kalia, A. Nakano, P. Ajayan, P. Vashishta,
+U. Bergmann, and S. R. Leone, Simultaneous observa-
+tion of carrier-specific redistribution and coherent lattice
+dynamics in 2h-mote2 with femtosecond core-level spec-
+troscopy, ACS Nano 14, 15829 (2020).
+
+11
+
+[15] J. Keller, K. Kiselman, O. Donzel-Gargand, N. M. Mar-
+tin, M. Babucci, O. Lundberg, E. Wallin, L. Stolt, and
+M. Edoff, High-concentration silver alloying and steep
+back-contact gallium grading enabling copper indium
+gallium selenide solar cell with 23.6% efficiency, Nature
+Energy 9, 467 (2024).
+
+J.
+
+[16] J. Keller, K. V. Sopiha, O. Stolt, L. Stolt,
+and
+J.
+C. Persson,
+M. Edoff, Wide-gap (ag,cu)(in,ga)se2
+cells
+with different buffer materials—a path to a bet-
+Photovoltaics:
+ter
+Progress
+Research
+(2020),
+237
+https://onlinelibrary.wiley.com/doi/pdf/10.1002/pip.3232.
+
+Scragg, T. Törndahl,
+solar
+
+heterojunction,
+and
+
+Applications
+
+in
+28,
+
+[17] S.-C. Yang, T.-Y. Lin, M. Ochoa, H. Lai, R. Kothandara-
+man, F. Fu, A. N. Tiwari, and R. Carron, Efficiency
+boost of bifacial Cu(In,Ga)Se2 thin-film solar cells for
+flexible and tandem applications with silver-assisted low-
+temperature process, Nature Energy 8, 40 (2023), num-
+ber: 1 Publisher: Nature Publishing Group.
+
+[18] J. Keller, L. Stolt, K. V. Sopiha, J. K. Larsen,
+and M. Edoff, On the paramount
+L. Riekehr,
+stoichiometry in (ag,cu)(in,ga)se2
+role of absorber
+wide-gap solar cells, Solar RRL 4, 2000508 (2020),
+https://onlinelibrary.wiley.com/doi/pdf/10.1002/solr.202000508.
+
+[19] C. C. S. Chan, K. Fan, H. Wang, Z. Huang, D. Novko,
+K. Yan, J. Xu, W. C. H. Choy,
+I. Lončarić, and
+K. S. Wong, Uncovering the electron-phonon inter-
+energy-dissipation mechanisms
+play and dynamical
+in hybrid lead halide perovskites,
+of hot carriers
+Advanced Energy Materials 11,
+(2021),
+https://advanced.onlinelibrary.wiley.com/doi/pdf/10.1002/aenm.202003071.
+
+2003071
+
+[8] N. Di Palo, G. Inzani, G. L. Dolso, M. Talarico,
+S. Bonetti, and M. Lucchini, Attosecond absorption
+and reflection spectroscopy of solids, APL Photonics
+9, 020901 (2024), https://pubs.aip.org/aip/app/article-
+pdf/doi/10.1063/5.0176656/19333851/020901_1_5.0176656.pdf.
+
+[9] M. Zürch, H.-T. Chang, L. J. Borja, P. M. Kraus, S. K.
+Cushing, A. Gandman, C. J. Kaplan, M. H. Oh, J. S.
+Prell, D. Prendergast, C. D. Pemmaraju, D. M. Neu-
+mark, and S. R. Leone, Direct and simultaneous obser-
+vation of ultrafast electron and hole dynamics in germa-
+nium, Nature Communications 8, 15734 (2017).
+
+[10] R. Géneaux, I. Timrov, C. J. Kaplan, A. D. Ross, P. M.
+Kraus, and S. R. Leone, Coherent energy exchange be-
+tween carriers and phonons in peierls-distorted bismuth
+unveiled by broadband xuv pulses, Physical Review Re-
+search 3, 033210 (2021).
+
+[11] L. Drescher, B. R. de Roulet, Y. S. Phang, and S. R.
+Leone, On the onset of coherent phonon motion in
+peierls-distorted antimony by attosecond transient ab-
+sorption, arXiv 2309.00734 (2023).
+
+[12] M. Victoria, N. Haegel, I. M. Peters, R. Sinton, A. Jäger-
+Waldau, C. del Cañizo, C. Breyer, M. Stocks, A. Blak-
+ers, I. Kaizuka, K. Komoto, and A. Smets, Solar photo-
+voltaics is ready to power a sustainable future, Joule 5,
+1041 (2021).
+
+[13] Y. Abdelilah, A. A. Báscones, H. Bahar, P. Bojek,
+F. Briens, T. Criswell, J. Moorhouse, and L. Mari Mar-
+tinez, Renewables 2023 Analysis and forecast to 2028 ,
+Tech. Rep. (International Energy Agency, France, 2024).
+[14] J. Ramanujam and U. P. Singh, Copper indium gallium
+selenide based solar cells – a review, Energy & Environ-
+mental Science 10, 1306 (2017), publisher: The Royal
+Society of Chemistry.
+
+[20] E. Goulielmakis, Z. Loh, A. Wirth, R. Santra,
+N. Rohringer, V. S. Yakovlev, S. Zherebtsov, T. Pfeifer,
+A. M. Azzeer, M. F. Kling, S. R. Leone, and F. Krausz,
+Real-time observation of valence electron motion, Nature
+466, 739 (2010).
+
+[21] S. K. Cushing, A. Lee, I. J. Porter, L. M. Carneiro, H.-
+T. Chang, M. Zürch, and S. R. Leone, Differentiating
+photoexcited carrier and phonon dynamics in the ∆, l,
+and Γvalleys of si(100) with transient extreme ultraviolet
+spectroscopy, The Journal of Physical Chemistry C 123,
+3343 (2019).
+
+[22] I. J. P. Molesky, A. Lee, S. K. Cushing, H.-T. Chang,
+J. C. Ondry, A. P. Alivisatos, and S. R. Leone, Charac-
+terization of carrier cooling bottleneck in silicon nanopar-
+ticles by extreme ultraviolet (xuv) transient absorption
+spectroscopy, The Journal of Physical Chemistry C 125,
+9319 (2021).
+
+[23] S.-C. Chen, Y.-K. Liao, H.-J. Chen, C.-H. Chen, C.-H.
+Lai, Y.-L. Chueh, H.-C. Kuo, K.-H. Wu, J.-Y. Juang, S.-
+J. Cheng, T.-P. Hsieh, and T. Kobayashi, Ultrafast car-
+rier dynamics in cu(in,ga)se2 thin films probed by fem-
+tosecond pump-probe spectroscopy, Optics Express 20,
+12675 (2012).
+
+[24] S. B. Zhang, S.-H. Wei, A. Zunger, and H. Katayama-
+Yoshida, Defect physics of the cuinse2 chalcopyrite semi-
+conductor, Phys. Rev. B 57, 9642 (1998).
+
+[25] Y. Zhao, S. Yuan, Q. Chang, Z. Zhou, D. Kou,
+W. Zhou, Y. Qi, and S. Wu, Controllable forma-
+tion of ordered vacancy compound for high effi-
+cells,
+ciency solution processed cu(in,ga)se2 solar
+Advanced Functional Materials 31, 2007928 (2021),
+https://onlinelibrary.wiley.com/doi/pdf/10.1002/adfm.202007928.
+
+[26] R. Caballero, V. Izquierdo-Roca, X. Fontané, C. Kauf-
+mann, J. Álvarez-García, A. Eicke, L. Calvo-Barrio,
+A. Pérez-Rodríguez, H. Schock, and J. Morante, Cu defi-
+ciency in multi-stage co-evaporated cu(in,ga)se2 for solar
+cells applications: Microstructure and ga in-depth alloy-
+ing, Acta Materialia 58, 3468 (2010).
+
+[27] D. Schmid, M. Ruckh, and H. W. Schock, A comprehen-
+sive characterization of the interfaces in mo/cis/cds/zno
+solar cell structures, Solar Energy Materials and Solar
+Cells 41-42, 281 (1996).
+
+[28] S. L. Dudarev, G. A. Botton, S. Y. Savrasov, C. J.
+Humphreys, and A. P. Sutton, Electron-energy-loss spec-
+tra and the structural stability of nickel oxide: An lsda+u
+study, Phys. Rev. B 57, 1505 (1998).
+
+[29] T. Maeda, W. Gong, and T. Wada, Crystallographic
+and optical properties and band structures of cuinse2,
+cuin3se5, and cuin5se8 phases in cu-poor cu2se–in2se3
+pseudo-binary system, Japanese Journal of Applied
+Physics 55, 04ES15 (2016).
+
+[30] D. Schmid, M. Ruckh, F. Grunwald, and H. W.
+Schock, Chalcopyrite/defect chalcopyrite heterojunctions
+on the basis of cuinse2, Journal of Applied Physics
+73, 2902 (1993), https://pubs.aip.org/aip/jap/article-
+pdf/73/6/2902/18655402/2902_1_online.pdf.
+
+[31] J. H. Boyle, B. E. McCandless, W. N. Shafar-
+man, and R. W. Birkmire, Structural and opti-
+polycrystalline
+cal
+thin film alloys, Journal of Applied Physics 115,
+223504
+https://pubs.aip.org/aip/jap/article-
+pdf/doi/10.1063/1.4880243/13253226/223504_1_online.pdf.
+
+(ag,cu)(in,ga)se2
+
+properties
+
+(2014),
+
+of
+
+[32] A. J. Nelson, G. Berry, A. Rockett, D. K. Shuh,
+J. A. Carlisle, D. G. J. Sutherland, and L. J.
+Terminello, Observation of
+core-level binding en-
+ergy shifts between (100) surface and bulk atoms
+of epitaxial CuInSe2, Applied Physics Letters 70,
+1873
+https://pubs.aip.org/aip/apl/article-
+pdf/70/14/1873/18525876/1873_1_online.pdf.
+
+(1997),
+
+[33] R. Géneaux, H.-T. Chang, A. M. Schwartzberg, and
+H. J. B. Marroux, Source noise suppression in attosecond
+transient absorption spectroscopy by edge-pixel referenc-
+ing, Opt. Express 29, 951 (2021).
+
+[34] S. Ghosh, P. L. Leath, and M. H. Cohen, Phonons in
+random alloys: The itinerant coherent-potential approx-
+imation, Physical Review B 66, 214206 (2002).
+
+[35] S. K. Cushing, M. Zürch, P. M. Kraus, L. M.
+Carneiro, A. Lee, H.-T. Chang, C. J. Kaplan,
+and S. R. Leone, Hot phonon and carrier
+relax-
+ation in Si(100) determined by transient extreme
+ultraviolet
+5,
+054302
+(2018), https://pubs.aip.org/aca/sdy/article-
+pdf/doi/10.1063/1.5038015/19791144/054302_1_online.pdf.
+
+Structural Dynamics
+
+spectroscopy,
+
+[36] M. K. Bahl, R. L. Watson, and K. J.
+
+Irgolic,
+LMM Auger
+of
+its compounds, The Journal of Chemical Physics
+72, 4069 (1980), https://pubs.aip.org/aip/jcp/article-
+pdf/72/7/4069/18922120/4069_1_online.pdf.
+
+selenium and some
+
+spectra
+
+of
+
+[37] A. Othonos, Probing ultrafast carrier and phonon dy-
+namics in semiconductors, Journal of Applied Physics
+83, 1789 (1998), https://pubs.aip.org/aip/jap/article-
+pdf/83/4/1789/18698506/1789_1_online.pdf.
+
+[38] H.-H. Sheu, Y.-T. Hsu, S.-Y. Jian, and S.-C. Liang, The
+effect of cu concentration in the photovoltaic efficiency
+of cigs solar cells prepared by co-evaporation technique,
+
+12
+
+Vacuum 131, 278 (2016).
+
+[39] P. G. Klemens, Anharmonic decay of optical phonons,
+
+Phys. Rev. 148, 845 (1966).
+
+[40] H. J. Zeiger, J. Vidal, T. K. Cheng, E. P. Ippen, G. Dres-
+selhaus, and M. S. Dresselhaus, Theory for displacive
+excitation of coherent phonons, Phys. Rev. B 45, 768
+(1992).
+
+[41] J. R. Adelman, H. Laurell, L. B. Drescher, H. K. D. Le,
+P. Yang, and S. R. Leone, Coherently coupled carrier
+and phonon dynamics in elemental tellurium probed by
+extreme ultraviolet transient absorption, Phys. Rev. B
+111, 184315 (2025).
+
+[42] K. V. Sopiha, J. K. Larsen, J. Keller, M. Ed-
+off, C. Platzer-Björkman, and J. J. S. Scragg, Off-
+stoichiometry in i–iii–vi2 chalcopyrite absorbers: a com-
+parative analysis of structures and stabilities, Faraday
+Discuss. 239, 357 (2022).
+
+[43] Y.-J. Zhang, Y.-T. Ren, X.-H. Lv, X.-L. Zhao, R. Yang,
+N.-W. Wang, C.-D. Jin, H. Zhang, R.-Q. Lian, P.-L.
+Gong, R.-N. Wang, J.-L. Wang, and X.-Q. Shi, Momen-
+tum matching and band-alignment type in van der waals
+heterostructures: Interfacial effects and materials screen-
+ing, Phys. Rev. B 107, 235420 (2023).
+
+evidence
+
+[44] M. H. Chan, J. Y. Chen, T. Y. Lin, and Y. F.
+ii band align-
+nanorods/poly(3-hexylthiophene)
+100,
+https://pubs.aip.org/aip/apl/article-
+
+Chen, Direct
+ment
+heterostructures, Applied
+021912
+(2012),
+pdf/doi/10.1063/1.3676267/13405611/021912_1_online.pdf.
+
+Physics
+
+Letters
+
+type
+
+zno
+
+in
+
+of
+
+in type-ii
+
+transitions
+
+lattice matched to
+
+[45] T. Mozume, N. Georgiev, H. Yoshida, A. Neogi,
+(type-
+and T. Nishimura, Observation of direct
+ingaas/alassb heterostruc-
+i)
+inp grown by molec-
+tures
+ular beam epitaxy,
+of Vacuum Science
+Journal
+and Technology B: Microelectronics and Nanometer
+Structures Processing, Measurement, and Phenomena
+18, 1586 (2000), https://pubs.aip.org/avs/jvb/article-
+pdf/18/3/1586/8204243/1586_1_online.pdf.
+
+[46] H. Zhang, J. Fu, A. Carvalho, E. T. Poh, J.-Y. Chung,
+M. Feng, Y. Chen, B. Wang, Q. Shang, H. Yang,
+Z. Zhang, S. X. Lim, W. Gao, S. Gradečak, C.-W. Qiu,
+J. Lu, C. He, T. C. Sum, and C. H. Sow, Programmable
+interfacial band configuration in ws2/bi2o2se heterojunc-
+tions, ACS Nano 18, 16832 (2024).
+
+[47] Y. Cao, Z. Wu, J. Ni, W. A. Bhutto, J. Li, S. Li,
+K. Huang, and J. Kang, Type-ii core/shell nanowire het-
+erostructures and their photovoltaic applications, Nano-
+Micro Letters 4, 135 (2012).
+
+[48] I. Takagi, Y. Kayanuma, and K. G. Nakamura, Ultrafast
+quantum path interferometry to determine the electronic
+decoherence time of the electron-phonon coupled system
+in n-type gallium arsenide, Phys. Rev. B 107, 184305
+(2023).
+
+[49] K. Sato and H. Katayama-Yoshida, Ordered de-
+fect
+so-
+in cuinse2
+application, AIP Conference Proceedings
+lar
+1583, 150 (2014), https://pubs.aip.org/aip/acp/article-
+pdf/1583/1/150/11445237/150_1_online.pdf.
+
+compounds
+cell
+
+for photovoltaic
+
+[50] A. Ghosh, A. Liu, S. C. Boehme, P. Brosseau, D. N.
+Dirin, M. V. Kovalenko, and P. Kambhampati, Cor-
+related lattice fluctuations in cspbbr3 quantum dots
+give rise to long-lived electronic coherence, ACS Nano
+10.1021/acsnano.5c03051 (2025).
+
+13
+
+[51] Z. Zhang, W. Hu, E. Perfetto, and G. Stefanucci,
+Long-lived coherence between incoherent excitons re-
+vealed by time-resolved arpes: An exact solution (2025),
+arXiv:2502.08162 [cond-mat.mtrl-sci].
+
+[52] K. Codling, R. P. Madden, and D. L. Ederer, Resonances
+in the photo-ionization continuum of ne i (20-150 ev),
+Physical Review 155, 26 (1967).
+
+[53] A. N. Pfeiffer and S. R. Leone, Transmission of an iso-
+lated attosecond pulse in a strong-field dressed atom,
+Phys. Rev. A 85, 053422 (2012).
+
+[54] A. Fonari and S. Stauffer, vasp_raman.py, https://
+
+github.com/raman-sc/VASP/ (2013).
+
+[55] S. Baroni, S. de Gironcoli, A. Dal Corso, and P. Gi-
+annozzi, Phonons and related crystal properties from
+density-functional perturbation theory, Rev. Mod. Phys.
+73, 515 (2001).
+
+[56] S. R. Dhage, H.-S. Kim, and H. T. Hahn, Cu(in,ga)se2
+thin film preparation from a cu(in,ga) metallic alloy and
+se nanoparticles by an intense pulsed light technique,
+Journal of Electronic Materials 40, 122 (2011).
+
+VI. SUPPLEMENTAL MATERIAL
+
+A. Data analysis
+
+14
+
+The analysis of the differential absorption scans were performed as follows, first the energy axis was calibrated to
+the absorption of the singly excited states in Ne, 2s22p6 1S0 → 2s2p6np 1P0, n = {3, 4, 5}, at well known energies of
+45.547, 47.123 and 47.694 eV [52]. Then, the scan was re-binned using a cubic spline interpolation on the linear energy
+grid calibrated from the Ne XUV absorption measurement. Subsequently, an edge referencing algorithm was applied
+[33] to reduce noise induced by high-harmonic spectral drifts. The edge referencing regions are chosen as [38.0, 45.1]
+eV and [59.2, 70.0] eV, as in these spectral regions there were no measurable differential absorptions above the noise
+floor. In the scans to investigate the femtosecond dynamics, with delay step 3.3 fs, temporal drifts between pump and
+probe caused an increased noise level; this necessitated a shorter scan time, in turn leading to a lower SNR. Therefore
+a moving average was applied to these scans to increase visibility of the spectral features. The rapid oscillations (∼55
+THz) were reproduced in three separate measurements, the two presented in the manuscript and a third where the
+delay was varied in steps of 2.9 fs. All uncertainties reported in this manuscript are retrieved from the 1σ confidence
+intervals of the fits.
+
+B. Solution of the Lindblad master equation for the 4-level model
+
+and ECB2
+
+and an energy splitting ∆ECB = ECB2 − ECB1
+
+. The energies are ordered as E3d5/2 < EV B < ECB1 < ECB2
+
+We consider a four-level system with the following states, a ground state ∣V B⟩, two excited states ∣CB1⟩ and ∣CB2⟩
+, and a core level ∣3d5/2⟩ with energy
+with energies ECB1
+. Here ∣CB1⟩ represent the OVC conduction band
+E3d5/2
+while ∣CB2⟩ the CIGS conduction band and ∣V B⟩ the CIGS valence band. An impulsive IR pump pulse at τ = 0
+creates a coherent superposition of ∣CB1⟩ and ∣CB2⟩. After a delay τ , the XUV probe pulse excites the core level
+electron ∣3d5/2⟩ to the conduction band states. We assume the probe is weak and impulsive so that its effect can be
+treated perturbatively. The observable is the differential absorption ∆ASB(E, τ ) as a function of XUV photon energy
+Ef and pump-probe delay τ . By selecting energies Ef ≈ ECBj − E3d5/2
+, we probe the coherence of the excited state.
+In what follows we derive the differential absorption ∆ASB(E, τ ), including pure dephasing via the Lindblad master
+equation, and show that the differential absorption is proportional to the imaginary part of the Fourier transform of
+the induced macroscopic polarization similar to published work [53]. Initially the system is in the ground state,
+
+ρ(t < 0) = ∣V B⟩ ⟨V B∣ .
+
+Where ρ is the density matrix. The IR pump pulse (at t = 0) excites the system into the superposition state
+
+with complex amplitudes a and b. In density matrix representation the IR prepared system reads as,
+
+∣ψ(0)⟩ = a ∣CB1⟩ + b ∣CB2⟩ ,
+
+α1
+α1 + α2
+α2
+α1 + α2
+
+= 0.65
+
+= 0.35
+
+ρCB1,CB1 (0) = ∣a∣2 =
+
+ρCB2,CB2 (0) = ∣b∣2 =
+ρCB1,CB2 (0) = a b∗
+ρCB2,CB1 (0) = a∗ b
+
+(7)
+
+(8)
+
+(9)
+
+Where αj is the concentration of the crystal phases, which is known from the Raman measurements. Between pump
+and probe (0 < t < τ ) the system evolves freely under H0. Since H0 ∣CBj⟩ = ECBj ∣CBj⟩, the state ∣CBj⟩ evolves as
+∣CBj(t)⟩ = e−iECBj t/̵h ∣CBj⟩ .
+
+(10)
+
+Thus, the off-diagonal element of the density matrix evolves as
+
+At t = τ this becomes
+
+ρCB1,CB2 (t) = ρCB1,CB2(0) exp[−
+
+i
+̵h
+
+(ECB1 − ECB2 )t] .
+
+ρCB1,CB2(τ ) = a b∗ exp[−
+
+i
+̵h
+
+(ECB1 − ECB2)τ ] .
+
+(11)
+
+(12)
+
+This phase evolution represents the quantum beat between ∣CB1⟩ and ∣CB2⟩. At t = τ the XUV probe pulse interacts
+with the system. The probe couples the core state ∣3d5/2⟩ to the conduction band states via the dipole operator
+
+µ = µ3d5/2,CB1 ∣3d5/2⟩ ⟨CB1∣ + µ3d5/2,CB2 ∣3d5/2⟩ ⟨CB2∣ + h.c.
+
+(13)
+
+We assume that the core level, 3d5/2, is populated before the interaction with the probe, so that ρ3d5/2,3d5/2(τ ) is
+nonzero. The probe is treated as a weak, impulsive perturbation, with its effect given by
+
+15
+
+where the effective XUV interaction is
+
+ρ(1)(τ ) = −
+
+i
+̵h
+
+[VXU V , ρ(τ )] ,
+
+VXU V = −[µ3d5/2,CB1 ∣3d5/2⟩ ⟨CB1∣ + µ3d5/2,CB2 ∣3d5/2⟩ ⟨CB2∣ + h.c.] .
+
+We focus on the density matrix element
+
+Expanding the commutator gives
+
+ρ(1)
+3d5/2,CB1
+
+(τ ) = ⟨3d5/2∣ ρ(1)(τ ) ∣CB1⟩ .
+
+ρ(1)
+3d5/2,CB1
+
+(τ ) = −
+
+i
+̵h
+
+(⟨3d5/2∣ VXU V ρ(τ ) ∣CB1⟩ − ⟨3d5/2∣ ρ(τ ) VXU V ∣CB1⟩) .
+
+The first term,
+
+T1 = ⟨3d5/2∣ VXU V ρ(τ ) ∣CB1⟩
+
+receives a contribution from the component of VXU V that connects ∣CB1⟩ and ∣CB2⟩ to ∣3d5/2⟩. We have,
+
+T1 = −µ3d5/2,CB1 ⟨3d5/2 ∣3d5/2⟩ ⟨CB1∣ ρ(τ ) ∣CB1⟩ − µ3d5/2,CB2 ⟨3d5/2 ∣3d5/2⟩ ⟨CB2∣ ρ(τ ) ∣CB1⟩
+
+= −µ3d5/2,CB1 ρCB1,CB1 (τ ) − µ3d5/2,CB2 ρCB2,CB1 (τ ) .
+
+The second term,
+
+T2 = ⟨3d5/2∣ ρ(τ ) VXU V ∣CB1⟩ ,
+
+receives a contribution from the component of VXU V that connects ∣3d5/2⟩ to ∣CB1⟩. Thus,
+
+T2 = −µ3d5/2,CB1 ⟨3d5/2∣ ρ(τ ) ∣3d5/2⟩ = −µ3d5/2,CB1 ρ3d5/2,3d5/2 (τ ) .
+
+Hence, the induced coherence is
+
+ρ(1)
+3d5/2,CB1
+
+(τ ) =
+
+i
+̵h
+
+[µ3d5/2,CB2 ρCB2,CB1 (τ ) + µ3d5/2,CB1 ρCB1,CB1 (τ ) − µ3d5/2,CB1 ρ3d5/2,3d5/2 (τ )] .
+
+A similar expression can be obtained for ρ(1)
+
+3d5/2,CB2
+
+(τ ) as,
+
+ρ(1)
+3d5/2,CB2
+
+(τ ) =
+
+i
+̵h
+
+[µ3d5/2,CB1 ρCB1,CB2 (τ ) + µ3d5/2,CB2 ρCB2,CB2 (τ ) − µ3d5/2,CB2 ρ3d5/2,3d5/2 (τ )] .
+
+For t > τ the induced coherences oscillate at their corresponding frequencies. For example,
+
+ρ3d5/2,CB1(t) = ρ3d5/2,CB1 (τ ) exp[−
+
+i
+̵h
+
+(E3d5/2 − ECB1)(t − τ )] .
+
+The macroscopic polarization is given by
+
+P (t) = tr[µ ρ(t)] ,
+
+(14)
+
+(15)
+
+(16)
+
+(17)
+
+(18)
+
+(19)
+
+(20)
+
+(21)
+
+(22)
+
+(23)
+
+(24)
+
+Since we are performing core level spectroscopy, we will select the channels with energy differences corresponding to
+the core-excited coherences. Thus,
+
+P (t) ∼ µ3d5/2,CB1 ρCB1,3d5/2 (t) + µ3d5/2,CB2 ρCB2,3d5/2(t) + c.c.
+
+(25)
+
+For t > τ these coherences oscillate at the frequencies,
+
+ω3d5/2,CB1 =
+
+E3d5/2 − ECB1
+̵h
+
+and ω3d5/2,CB2 =
+
+E3d5/2 − ECB2
+̵h
+
+.
+
+Taking the Fourier transform of P (t) with respect to time gives the polarization as,
+
+with Ef = ̵hωf . In the impulsive limit this becomes,
+
+P (Ef , τ ) = ∫
+
+∞
+
+−∞
+
+dt eiωf tP (t, τ ) ,
+
+P (Ef , τ ) ∝ P (ECB1 − E3d5/2, τ ) δ(Ef − [ECB1 − E3d5/2 ])
+
++ P (ECB2 − E3d5/2, τ ) δ(Ef − [ECB2 − E3d5/2 ]) ,
+
+where the Fourier amplitudes of the macroscopic polarization are given by,
+
+P (ECB1 − E3d5/2 , τ ) ∝ −
+i
+̵h
+i
+̵h
+
++
+
++
+
+P (ECB2 − E3d5/2 , τ ) ∝ −
+i
+̵h
+i
+̵h
+
++
+
++
+
+µ3d5/2,CB1µCB1,3d5/2ρ3d5/2,3d5/2 (τ )
+
+i
+̵h
+µ3d5/2,CB1 µCB2,3d5/2 ρCB2,CB1(0) e−i∆ECB τ /̵h
+
+µ3d5/2,CB1 µCB1,3d5/2 ρCB1,CB1(0)
+i
+̵h
+µ3d5/2,CB2 µCB1,3d5/2 ρCB1,CB2(0) ei∆ECB τ /̵h
+
+µ3d5/2,CB2µCB2,3d5/2ρ3d5/2,3d5/2 (τ )
+
+µ3d5/2,CB2 µCB2,3d5/2 ρCB2,CB2(0)
+
+16
+
+(26)
+
+(27)
+
+(28)
+
+(29)
+
+For core level XUV spectroscopy the transmitted XUV field Eout(ω, τ ) is related to the incident field Ein(ω) and the
+induced polarization P (ω, τ ), assuming that the Beer-Labert law is valid, via
+
+Eout(ω, τ ) = Ein(ω)exp [i
+
+2πω
+c
+
+P (ω, τ )L
+Ein(ω)
+
+]
+
+The state blocking contribution to the absorption is then given as,
+
+ASB(ω, τ ) = log (
+
+∣Ein(ω)∣2
+∣Eout(ω, τ )∣2 )
+P (ω, τ )L
+Ein(ω)
+2πω
+c
+
+2πω
+c
+P (ω, τ )L
+Ein(ω)
+
++ i
+
+)
+
+= −i
+
+2πω
+c
+
+= 2Re (−i
+
+P ∗(ω, τ )L
+Ein(ω)
+
+(30)
+
+(31)
+
+∝ Re (−iP (ω, τ )) = Im (P (ω, τ ))
+
+where L is the sample thickness. Therefore, in the weak-probe limit the absorption is directly proportional to the
+In our ideal resolution case, at energies
+imaginary part of the Fourier transform of the macroscopic polarization.
+E ≈ ECB1 − E3d5/2
+
+the differential absorption becomes,
+
+and E ≈ ECB2 − E3d5/2
+
+∆ASB(Ef , τ ) = A
+
+pump off
+SB
+
+(Ef , τ ) − ASB(Ef , τ )
+
+∝ ∆ASB(ECB1 − E3d5/2, τ ) δ(Ef − [ECB1 − E3d5/2 ])
+
+(32)
+
++ ∆ASB(ECB2 − E3d5/2 , τ ) δ(Ef − [ECB2 − E3d5/2])
+
+Where A
+ρCB2,CB2
+
+pump off
+SB
+= ρCB1,CB2
+
+is the XUV absorption without IR excitation across the bandgap. Hence in this case ρCB1,CB1 =
+= 0. Inserting the perturbative expansion of the density matrix into the Eq. (32) gives,
+
+∆ASB(ECB1 − E3d5/2 , τ ) ∝ Re(∣µ3d5/2,CB1 ∣2ρ3d5/2,3d5/2 (τ )
+
+17
+
+− µ3d5/2,CB1 µ∗
+
+3d5/2,CB2
+
+ρCB2,CB1(0) e−i(ECB2 −ECB1 )τ /̵h
+
+− ∣µ3d5/2,CB1∣2ρCB1,CB1(0) − ∣µ3d5/2,CB1 ∣2ρ3d5/2,3d5/2(τ ))
+
+(33)
+
+= −∣µ3d5/2,CB1∣2ρCB1,CB1(0)
+
+− ∣µ3d5/2,CB1∣∣µ3d5/2,CB2 ∣∣ρCB2,CB1(0)∣ cos (
+
+∆ECBτ
+̵h
+
++ ϕ) .
+
+That is, the differential absorption measured at the transition E = ECB1 − E3d5/2
+the population in CB1) and an oscillatory contribution (from the coherence ρCB2,CB1
+beat oscillations with frequency
+
+contains a static contribution (from
+), the latter yielding quantum
+
+∆ω =
+
+ECB2 − ECB1
+̵h
+
+=
+
+∆ECB
+̵h
+
+.
+
+(34)
+
+Replacing the discrete CB states with bands of states (∣CBj⟩ → ∫ dEf fj(Ef ) ∣j, Ef ⟩) with spectral overlap, at a
+selected energy bin there will be two contributions to the differential absorption, one for the CB of OVC and one
+for the CB of CIGS. Where fj(Ef ) is the amplitude of the states. Giving the total expression for the differential
+absorption as,
+
+∆ASB(Ef , τ ) ∝ −∣µ3d5/2,CB1 ∣2ρCB1,CB1(0) − ∣µ3d5/2,CB2 ∣2ρCB2,CB2 (0)
+
+− 2∣µ3d5/2,CB2 ∣∣µ3d5/2,CB1∣∣ρCB1,CB2 (0)∣ cos (
+
+∆ECBτ
+̵h
+
++ ϕ)
+
+Assuming similar dipole couplings between the states gives,
+
+∆ASB(Ef , τ ) ∝ −ρCB1,CB1(0) − ρCB2,CB2 (0) − 2∣ρCB1,CB2(0)∣ cos (
+
+∆ECBτ
+̵h
+
++ ϕ).
+
+(35)
+
+(36)
+
+From this expression we see that the state blocking contributes with a negative differential absorption, which agrees
+with the observations. Under the approximation of similar strengths of dipole coupling the phase becomes,
+
+With associated scattering time delay,
+
+ϕ = Arg(ρCB1,CB2(0))
+
+τW = ̵h
+
+∂ϕ
+∂E
+
+≈ ̵h
+
+ϕ
+∆ECB
+
+.
+
+(37)
+
+(38)
+
+In an open quantum system, decoherence causes the off-diagonal coherence ρCB1,CB2
+to decay. The inclusion of
+decoherence is facilitated by adding terms to the Liouville von-Neumann equation and instead solving the Lindblad
+master equation,
+
+with collapse operators defined as,
+
+dρ
+dt
+
+= −
+
+i
+̵h
+
+[H0, ρ] +
+
+2
+∑
+j=1
+
+(Lj ρ L
+
+†
+j −
+
+1
+2
+
+†
+{L
+jLj, ρ}) ,
+
+Lj =
+
+√
+
+γj ∣CBj⟩ ⟨CBj∣
+
+(j = 1, 2) ,
+
+(39)
+
+(40)
+
+where γj are the dephasing rates. For pure dephasing the populations remain unchanged but the off-diagonal element
+decays between pump and probe (0 < t < τ ) according to,
+
+d
+dt
+
+ρCB1,CB2(t) = −
+
+i
+̵h
+
+(ECB1 − ECB2 ) ρCB1,CB2 (t) −
+
+1
+2
+
+(γ1 + γ2) ρCB1,CB2(t) .
+
+(41)
+
+The solution to Eq. (41) is on the form,
+
+⎡
+⎢
+⎢
+ρCB1,CB2 (t) = ρCB1,CB2(0) exp
+−
+⎢
+⎢
+⎣
+
+i
+̵h
+
+(ECB1 − ECB2 )t −
+
+1
+2
+
+(γ1 + γ2)t
+
+⎤
+⎥
+⎥
+⎥
+⎥
+⎦
+
+.
+
+By defining the average dephasing rate as follow,
+
+we obtain a new form of Eq. (42) as,
+
+Γ =
+
+γ1 + γ2
+2
+
+,
+
+ρCB1,CB2(t) = ρCB1,CB2 (0) exp[−
+
+i
+̵h
+
+(ECB1 − ECB2)t − Γ t] .
+
+18
+
+(42)
+
+(43)
+
+(44)
+
+This shows that at t = τ the coherence will decay with the factor e−Γτ . Following a similar calculation as above, the
+final expression of the differential absorption is given as,
+
+∆ASB(Ef , τ ) ∝ −ρCB1,CB1(0) − ρCB2,CB2 (0) − 2∣ρCB1,CB2(0)∣e−Γτ cos (
+
+∆ECBτ
+̵h
+
++ ϕ).
+
+(45)
+
+We have derived the energy- and delay-resolved transient absorption signal ∆ASB(E, τ ) for a four-level system under
+impulsive pump and XUV probe excitation. By taking the Fourier transform of the induced macroscopic polarization,
+we showed that the differential absorption is proportional to the imaginary part of P (E, τ )/Ein(ω). In the derivation,
+selecting Ef ≈ ECB1 − E3d5/2
+isolates the contributions from the corresponding core-excited
+transitions. The signal exhibits quantum beat oscillations with frequency ∆ω = (ECB2 − ECB1 )/̵h due to the coherent
+superposition prepared by the pump.
+Including dephasing via the Lindblad equation introduces an exponential
+damping e−Γτ of the oscillations. This complete treatment shows how both the electronic coherence and dephasing is
+reflected in the observed transient absorption.
+
+or Ef ≈ ECB2 − E3d5/2
+
+C. Estimate of degree of coherence
+
+From the iterative decomposition of the 1 ps scan we observe that the relative contribution to the total differential
+absorption of the edge shift is ∆Ashift ≈ 5 mOD and that the relative carrier contribution was ∆Acarriers ≈ −2 mOD,
+with a total ∆A of 3 mOD. This gives a relative carrier to lattice ratio of ∆Acarriers/∆Ashift ≈ −2/5. In the scan in Fig.
+5(a) we observe a total ∆A of 2 mOD at the first phonon maximum. Assuming that the relative carrier contribution
+of the ∆A is conserved between the scans, this obtains the carrier contribution at the first phonon maximum, as
+∆Acarriers ≈ −4/3. This implies that to relate the fitted oscillation amplitude to the off diagonal element of the density
+matrix we should normalize as ∣ρ1,2∣ ≈ Aosc/(2∣∆Acarriers∣) = 0.09. Where Aosc is the fitted oscillation amplitude across
+the second phonon maxima. Furthermore we can estimate the populations of the density matrix as the normalized
+amplitudes from the Raman measurements, This gives a population for OVC as ρ1,1 = 0.35 and for CIGS, ρ2,2 = 0.65.
+From the estimated elements of the density matrix we calculate the degree of coherence between the CIGS and OVC
+conduction bands as,
+
+C =
+
+√
+
+∣ρ1,2∣
+ρ1,1ρ2,2
+
+≈ 0.19.
+
+D. Raman Measurements
+
+(46)
+
+Figure 6 shows the Raman spectrum of the CuInxGa(1−x)Se2 sample employed in the ATAS experiments. The
+spectrum shows two prominent features, a shoulder at frequency 159(4) cm−1 and a narrow peak at 176.2(7) cm−1.
+The narrow peak at approximately 176 cm−1 is in good agreement with previous Raman measurements of the optical
+A1g phonon mode of chaclopyrite phase, while the shoulder at 159 cm−1 is consistent with those observed in ordered
+vacancy compounds (OVC)[38]. The relative amplitudes were fitted using the fit function,
+
+f (ν) = ∑
+j=1,2
+
+αj√
+
+2πσj
+
+−
+e
+
+(ν−νj )2
+2σ2
+
+j + d,
+
+(47)
+
+19
+
+FIG. 6. Raman spectra of the CuInxGa(1−x)Se2 sample used in the ATAS experiments. Two features are evident, a shoulder
+centered at 159(4) cm−1 and a narrow peak at 176.2(7) cm−1. The black lines show the fitted wavenumbers for OVC and the
+chalcopyrite.
+
+= 5 ⋅ 104 ± 8.8 ⋅ 103 a.u. and αOVC
+A1g
+
+= 2.707 ⋅ 104 ± 9.4 ⋅ 103 a.u.. In Fig. 7 simulated off-resonance Raman spectra
+as αCIGS
+A1g
+are shown for the chalcopyrite and model OVC structures. For the calculated structures we recover the A1g of the
+chalcopyrite and model OVC close to the experimentally observed frequencies.
+
+E. Fit of electronic decoherence time T e
+
+2 and the scattering phase ϕ
+
+From the lineout of the CB spectral region in Fig. 5(a), the electronic decoherence time and phase were fitted using
+Eq. (5). To fit the decoherence time, a bandpass filter was applied to remove the slow varying component of the ∆A
+originating from the coherent phonon motion. The band pass filter also reduces high frequency noise. Subsequently,
+for the temporal intervals 9.9-112.2 fs, 211.2-310.2 fs, 412.5-511.5 fs, the oscillation amplitude was fit using a least
+squares fit with fit function f (τ ) = a cos(ωτ + ϕ). This produces the oscillation amplitudes in Fig. 5(c), from which
+the decoherence time was fitted with an exponential decay using a weighted least squares fit where the uncertainties
+of the oscillation amplitudes were used as weights. In addition, for the temporal interval, 9.9-112.2 fs, the fitted phase
+ϕ of 4.1(3) rad was used to calculate the time delay of tW = 12.1(8) fs.
+
+F. Fourier map of scan in Fig 5(b)
+
+In Fig. 8, the Fourier transform over pump-probe delay is shown for the scan in Fig. 5(b). A clear Fourier amplitude
+is shown around 55 THz for energies > 54 eV. We therefore attribute these oscillations to originate from core level
+transitions to the CB. In Fig. 8, The DC component was subtracted for visibility.
+
+G. XUV absorption spectrum of CIGS
+
+In Fig. 9 the XUV absorption spectrum of the CIGS sample is shown. The Se M4,5 absorption edge is visible
+around 55 eV with two distinct peaks corresponding to the XUV transitions from the 3d5/2,3/2 core to the conduction
+band. In addition, the Al L2,3 is measured at 71.7 eV. This edge originates from the 10 nm Al2O3 layer added on
+
+20
+
+FIG. 7. Off-resonance Raman spectra simulated for three selected structures representing stoichiometric chalcopyrite CIGS
+(CuInSe2 and CuGaSe2), model OVC (CuIn5Se8 and CuGa5Se8), and off-stoichiometric CIGS with planar Cu-poor defects
+(Cu8In10Se19 and Cu8Ga10Se19). The simulations were performed using the vasp_raman.py utility developed by Fonari and
+Stauffer [54]. For the input, the phononic frequencies and the macroscopic dielectric tensors were computed according to
+the density functional perturbation theory [55], whereas the derivatives of the dielectric tensor were obtained numerically by
+displacing the atoms by 0.01 Å. All these calculations were carried out using the PBE+U functional (with the Hubbard U
+correction of 5 eV applied on Cu 3d electrons), after relaxing ionic positions (under the force threshold of 1 meV/atom), while
+keeping the cell parameters fixed to the PBEsol-computed values. The simulated unit cells contained 16, 28, and 37 atoms in the
+stoichiometric chalcopyrite, model OVC, and off-stoichiometric chalcopyrite models, respectively. To replicate the experimental
+peak broadening, the output Raman modes were smeared using the Lorentz function with the full width at half maximum
+(FWHM) of 5 cm−1.
+
+FIG. 8. Amplitude of Fourier transform of ATAS scan shown in Fig. 5(b). The DC component was subtracted for visibility.
+The Fourier amplitude of frequency 55 THz has an onset for XUV photon energies greater than 54 eV.
+
+top of the CIGS layer to prevent the CIGS from oxidizing. The Al2O3 edge exhibited no transient response, due to
+it being an insulator.
+
+21
+
+FIG. 9. XUV Absorbtion spectrum of CIGS measured as a function of XUV photon energy. The spectrum shows a broad
+absorption peak around 55 eV, with distinct features corresponding to the transitions from the 3d5/2,3/2 core levels to the
+conduction band. The Al L2,3 edge is visible around 71.7 eV
+
+H. X-ray diffraction characterization
+
+To verify that the CIGS morphology was not transformed by the intense IR pulses, XRD measurements were
+
+performed after the ATAS measurements.
+
+FIG. 10. XRD measurements on the CIGS sample studied in this work.
+
+In Fig. 10, the XRD measurement is shown. The XRD peaks are compared to previous XRD measurements of
+CIGS thin films, showing excellent agreement[56]. We therefore conclude that the samples were of high quality and
+the morphology was not changed during the scope of the measurement. We identify two main contributions from the
+Si3N4 substrate, a broad peak at angles (2θ) in the range 15 to 25 degrees and a narrow peak at 33.07 degrees. We
+identify peaks corresponding to the CIGS chalcopyrite phase at angles 26.9, 44.64 and 52.91 corresponding to the
+Miller indices (112), (220)/(204) and (312)/116. The XRD characterization hence confirms that the CIGS sample did
+not transform from the chaclopyrite phase during the scope of our measurements.
+
+I. Band structure series and calculation of conduction band offset
+
+To investigate the dependence of the conduction band offset on the [Cu]/([Ga]+[In]) ratio, the Cu-Ga-Se2 and
+Cu-In-Se2 band structures were calculated for a set of structures with varying Cu to In/Ga concentration. In Fig. ??,
+the band structures for the, 1:1:2, 10:12:23, 8:10:19, 6:8:15 and 4:6:11 structures are shown. As the Cu concentration
+decreases, a saddle point valley emerges at the Z-point with energy minima decreasing with decreasing [Cu]/([Ga]+[In])
+ratio. In Fig. 12 the calculated energy difference of the band energy minima of the Z and Γ points are shown for
+
+22
+
+FIG. 11. Element-projected band structures for a series of (a) Cu-In-Se and (b) Cu-Ga-Se structures with different
+[Cu]/([Ga]+[In]) ratios. The structures are produced by varying the separation between the Cu-poor planar defects depicted
+in Figure 1. The insets illustrate the k-paths in the Brillouin zones. The band structures were computed using the PBE+U
+functional (with the Hubbard U correction of 5 eV applied on Cu 3d electrons), using the structures (both lattice parameters
+and ionic positions) optimised using the PBEsol functional. The band gaps were additionally adjusted to the values computed
+using the HSE06 functional, upshifted by 0.17 and 0.27 eV for the Cu-In-Se and Cu-Ga-Se structures, respectively.
+
+Cu-In-Se (blue points) and Cu-Ga-Se (red points). As the Cu concentration decreases the conduction band minimum
+offset decreases, and by extrapolating the value (solid lines) to the Cu concentration of the CIGS sample in this study
+CB = 0.25 eV (denoted with a star).
+([Cu]/([Ga]+[In] = 0.9) the predicted conduction band offset is retrieved as ∆Eth
+
+23
+
+FIG. 12. Computed energy difference of the lowest unoccupied band at the high-symmetry Z and Γ points for the Cu-In-Se and
+Cu-Ga-Se structures with different [I]/[III] ≡ [Cu]/([Ga]+[In]) ratios. The hexagonal markers depict the values extracted from
+Figure ??, and the lines represent linear fits for the three values closest to the ideal chalcopyrite stoichiometry. The yellow star
+marker at ∆Eth
+
+CB = 0.25 eV is an extrapolation for the CIGS film composition used in experiments.
+
+

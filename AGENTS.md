@@ -128,11 +128,11 @@ python3 -m py_compile scripts/*.py
 2. **模块自检**：大量脚本支持 `--self-check`，运行 `python3 scripts/{module}.py --self-check`。
 3. **E2E 集成测试**：`python3 scripts/test_e2e_learning_full.py`（需真实 Claude CLI 环境，非日常回归项）。
 
-**当前基线（v6.8.9）**：
-- `--module`：332/332 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器、轮次完成 break、derived job 优先级、prompt 优化器、看板轮次统计、stale job 回收、monitor 看板时间戳、维度提取修复、质量门槛）
+**当前基线（v6.8.17）**：
+- `--module`：345/345 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器、轮次完成 break、derived job 优先级、prompt 优化器、看板轮次统计、stale job 回收、monitor 看板时间戳、维度提取修复、质量门槛、MOC 去重修复、标签提取修复、质量天花板收敛/下降检测、维度轮换、输入端熔断、审核反馈闭环、KB 健康评分）
 - `--scenario`：16/16 通过
 - `--persona`：38/38 通过
-- `--web-ci`：252/252 通过（Web API 虚拟用户测试覆盖所有主要 API 命名空间）
+- `--web-ci`：399/399 通过（Web API 虚拟用户测试覆盖所有主要 API 命名空间）
 
 **测试设计原则**：零污染（临时隔离目录运行）、零成本（不调用 LLM API）、自动发现（新增 `scripts/tests/test_*.py` 自动纳入回归）。
 
@@ -233,6 +233,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 - **看板系统**：`memory/system-kanban.json` 由微调度器（主写）和 `lifecycle_monitor`（合并写）协同维护，包含当前时段/聚焦课题/job 进度/执行历史/任务同步统计，前端通过 `/api/console/flow` 展示。
 - **定期修复**：`lc-repair` cron 每 6 小时执行 `orchestrator.run_repair()`，重置 stuck running（阈值 1800s）、重试 failed job（最多 3 次）、补齐缺失 worker、清理旧轮次 job；微调度器在每次执行前无条件清理 stale job。
 - **自成长**：`strategy_optimizer.py` 基于 7 天历史给出调度参数建议（仅建议）；`prompt_optimizer.py`（每日 14:00 cron `lc-prompt-optimize`）从 debug journal/agent scores/failure patterns 生成 prompt 修改建议并自动应用（备份原文件）；`retrospective.py`（每周一 15:00 cron `lc-retrospective`）综合 5 个数据源生成结构化复盘报告。
+- **自检测/自成长增强（v6.8.16-v6.8.17）**：① 质量天花板检测（连续 3 轮 ≥0.80 且提升 <2% → 自动晋级 pending_review；连续 3 轮下降 → 暂停）② 停滞课题检测（48h 无进展 → stalled 告警）③ KB 笔记覆盖率检测（sync_all 中实时统计）④ 对抗评审维度轮换（连续 3 轮原地踏步 → 自动切换最弱维度）⑤ 输入端熔断（连续 2 周 ideas=0 → input_pipeline_broken 告警）⑥ 人工审核反馈闭环（审核对话意见自动提取 → critic prompt 注入，避免重蹈覆辙）⑦ KB 健康评分（每周反思时计算覆盖率/新鲜度/连通度）⑧ 研究趋势雷达（sync_all 中分析关键词频率趋势）⑨ Cross-proposal 范例注入（高分课题 ≥0.80 的段落注入低分课题 <0.75 的 writer prompt）。
 
 ---
 
@@ -253,7 +254,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 ### 版本号规范
 
-- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.8.9`）。
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.8.17`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -273,6 +274,24 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 | **备份优先** | 任何更新操作前必须先备份 |
 | **恢复可验证** | 备份包必须能完整恢复 |
 | **升级可回滚** | 升级失败时能一键回到之前状态 |
+| **产出即资产** | AI 生成的代码、文档、设计、数据均属用户资产，不得擅自处置 |
+
+### Git 操作红线（v6.8.16 新增）
+
+以下操作**永久禁止**在用户工作区直接执行：
+
+| 禁止操作 | 原因 | 替代方案 |
+|----------|------|----------|
+| `git stash` + `git stash drop` | 临时移除工作区改动，drop 后不可恢复 | 用 `git diff` 对比或复制到临时目录 |
+| `git stash pop` 有冲突时 force | 冲突文件会丢失 | 用 `git stash branch` 创建分支恢复 |
+| `git reset --hard` | 丢弃所有未提交改动 | 用 `git checkout <file>` 逐文件恢复 |
+| `git clean -fd` | 删除未跟踪文件（含知识库数据） | 手动检查后逐个删除 |
+| `git checkout .` | 丢弃所有工作区修改 | 逐文件 `git checkout <file>` |
+| `rm -rf` 批量删除 | 不可恢复 | 先移到临时目录，确认后再删 |
+
+**根因**：v6.8.15 使用 `git stash` 对比测试基线，`stash pop` 失败后 `stash drop` 导致 v6.8.13-v6.8.14 全部代码改动丢失（8 项功能 + 知识库数据清理回退），耗费大量 token 才恢复。
+
+**正确的心态**：如果需要对比"修改前"和"修改后"的状态，用 `cp -r` 创建临时副本，或用 `git diff` 查看差异——永远不要把用户的工作区当作临时实验场。
 
 ### 标准升级流程
 
@@ -316,7 +335,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.8.10*
-*日期：2026-08-07*
+*版本：6.8.17*
+*日期：2026-08-09*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

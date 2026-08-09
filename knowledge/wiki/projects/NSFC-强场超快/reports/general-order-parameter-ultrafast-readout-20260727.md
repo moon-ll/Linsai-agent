@@ -1,20 +1,20 @@
 ---
-title: "课题说明 — 优化报告"
+title: "order-parameter-ultrafast-readout — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-order-parameter-ultrafast-readout-20260727"
 latest_round: 6
 last_score: 0.71
 critic_rounds: 8
-optimization_reports: 0
+optimization_reports: 2
 status: "optimizing"
-created: "2026-08-06T09:09:26Z"
-updated: "2026-08-06T09:09:26Z"
+created: "2026-08-09T00:07:26Z"
+updated: "2026-08-09T00:07:26Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
 ---
 
-# 课题说明 — 优化报告
+# order-parameter-ultrafast-readout — 优化报告
 
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
 **累计轮次**：6
@@ -22,6 +22,20 @@ confidence: 1.0
 **状态**：优化中
 
 ---
+
+## 评分变化趋势
+
+| 轮次 | 总分 | 变化 | innovation | feasibility | rigor | completeness |
+|------|------|------|------------|-------------|-------|-------------|
+| 第 1 轮 | 0.39 | +0.39 | 0.62 | 0.25 | 0.32 | 0.30 |
+| 第 2 轮 | 0.42 | +0.03 | 0.70 | 0.22 | 0.46 | 0.25 |
+
+## 优化报告（共 2 份）
+
+| 轮次 | 报告 |
+|------|------|
+| 第 1 轮 | [optimization-report-round-1.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/optimization-report-round-1.md) |
+| 第 2 轮 | [optimization-report-round-2.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/optimization-report-round-2.md) |
 
 ## 对抗评审（共 8 轮）
 

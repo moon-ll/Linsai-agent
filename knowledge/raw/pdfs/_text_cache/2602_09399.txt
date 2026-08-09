@@ -1,0 +1,716 @@
+Simulation of the Space-Charge Limited Current
+Density for Time-Variant Pulsed Injection
+
+H. Huang, Member, IEEE, and Y. Liu (刘泱杰)∗, Member, IEEE
+
+1
+
+6
+2
+0
+2
+
+b
+e
+F
+0
+1
+
+]
+h
+p
+-
+m
+
+s
+a
+l
+p
+.
+s
+c
+i
+s
+y
+h
+p
+[
+
+1
+v
+9
+9
+3
+9
+0
+.
+2
+0
+6
+2
+:
+v
+i
+X
+r
+a
+
+Abstract—Space charge limited (SCL) current density for
+time-invariant injection via the diode cathode is the maximum
+transportable density, while it can be leveraged higher when
+the injection pulse length is shorter than the transmit time
+for electrons (i.e. under short-pulse condition). However, both
+known limits apply for the time-invariant injection condition
+and the role of time-varying current density for injection remains
+elusive. In this paper, we numerically investigate the space-charge
+limited electron flow with time-variant injection. Using particle-
+in-cell simulation, four different time-variant profiles for electron
+injection are enforced, and the maximum current densities are
+determined resulting from the space charge effect for various
+pulse lengths. We speculate that time-variant density of injection
+via the diode cathode will contribute to transport enhancement.
+
+Index Terms—Space charge, Particle beam transport, Electron
+
+emission, Particle-in-cell method (plasma simulation).
+
+I. Introduction
+
+S PACE-CHARGE-LIMITED (SCL) current density de-
+
+scribes the maximum current density transportable for a
+diode under a voltage drop between its cathode and anode,
+when the injection current density from the cathode is time-
+invariant. For a vacuum diode with a gap spacing of D and a
+dc voltage of Vg , it is known as one-dimensional (1D) Child-
+Langmuir (CL) law [1], [2], given by
+
+JCL = 4ϵ0
+9D2
+
+(cid:114)
+
+2e
+m0
+
+V 3/2
+g
+
+,
+
+(1)
+
+where ϵ0, e and m0 are respectively, vacuum permittivity,
+electron charge and electron mass. Space charge limited elec-
+tron flow in one-dimensional case occurs if the charge of the
+emitted electrons is sufficient to suppress the cathode electric
+field to zero, when the electrostatic potential distribution
+function and charge density are respectively
+
+ϕ(x) = Vg
+ρ(x) = 4
+9
+
+(cid:18) x
+D
+
+ϵ0Vg
+
+(cid:19)4/3
+
+,
+
+(cid:17)−2/3
+
+(cid:16)
+
+D2 x
+
+,
+
+(2)
+
+H. H. and Y. L. are presently with Faculty of Physics and Electronic
+
+Science, Hubei University, 430062 Wuchang District, Wuhan, P. R. China.
+
+∗ Corresponding author, yangjie@hubu.edu.cn.
+Y. L. was with Computational Nano-Electronics Laboratory, Division
+of Micro-Electronics, School of Electrical and Electronic Engineering, 50
+Nanyang Avenue, Nanyang Technological University, 639798 Singapore.
+
+Manuscript received July 25, 2018; revised 19 November, resubmitted 7
+December 2018; re-revised 10 February 2019, re-submitted 11 February 2019
+(TPS11450.R2). H. H. is supported by the Natural Science Foundation of
+Hubei Province of China (2018CFC797). L. Y. acknowledges financial support
+of his PhD stipend from Tier II Academic Research Fund (MOE2008-T2-01-
+033) and Antennas Group travel grant (EECSRC2/4a).
+
+where x is the spatial coordinate. This 1D classical CL law
+above assumes the long-pulse condition, i.e. constant injection
+current density from cathode, and extends to the short pulse
+model when the injection pulse length is less than the transmit
+time of electrons [3]. The short pulse model pushes the
+maximum transportable current density higher than the CL
+law predicts. Therein the short pulse SCL current density, i.e.
+Valfells’ formula, can be expressed as (cf. black line of Fig. 3)
+(cid:113)
+
+JS(XCL) = 2
+
+1 −
+
+1 − 3X2
+
+CL/4
+
+X3
+CL
+
+JCL,
+
+(3)
+
+(cid:112)
+
+where XCL = τp/τCL ≤ 1 is the normalized pulse length and
+τCL = 3D
+m0/2eVg is the CL transit time to traverse the
+diode. Physically, a bunch of electrons is injected into the
+gap with a constant current density JS over length τp (0 ≤
+t ≤ τp). This equivalent (virtual) diode model captures the
+physical feature of virtual cathode formation localised in time
+and space [3]–[5] and results in Eq. (3) above [3]. Furthermore,
+the ratio of transported charge between the long pulse limit and
+short pulse, can be written as
+
+Qmod(XCL) =
+
+1 −
+
+= 2
+
+JSτp
+JCLτCL
+
+(cid:113)
+
+1 − 3X2
+
+CL/4
+
+X2
+CL
+
+,
+
+(4)
+
+after substituting Eqs. (1) and (3) 1. Thus the total transported
+charge cannot exceed that under convectional CL condition
+and in short pulse limit, the ratio Qmod ≃ 3/4, as indicated in
+Fig. 1 [6]. The critical current density Eq. (3) for a short-pulse
+electron flow, results from considering only virtual cathode
+beam front and sidestepping internal repulsion force within
+the pulse spatially.
+
+Although a substantial amount of investigations on SCL
+effect have been performed [7]–[15], most of them assume
+injection of a time-uniform current density. Some subsequent
+progress, however, has been made to understand the time-
+variance effect of an injection current density [16]–[20]. It
+was even speculated that there might be an upper bound of
+time-averaged SCL current density for a given time-dependent
+current, which could be higher than the time-independent
+case such as CL law. However, the exact such time profile
+for injection current remains unknown [21]. Furthermore, the
+long-pulse time-variant injection was already investigated and
+believed to play little role to enhance the SCL density [22].
+Note that our numerical code gives more accurate prediction
+for relativistic SCL density other than Jory’s analytic formula
+(Fig. 1 in [23]) by considering time-variance of injection pulse
+
+1An interesting note for CL electron flow is JCLτCL = 4ϵ0Vg/3D ∼ Vg/D.
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+emission mechanism [24]–[28]. Here, it is assumed that J(t)
+can be expressed as
+
+J(t) = βm · jm(t),
+
+(5)
+
+where βm is the magnitude of the current density, and time-
+profile jm(0 ≤ ¯t = t/τp ≤ 1) is a particular time-dependent
+profile assumed in the model (for m ∈ N, t ∈ [0, τp]) among
+(see Fig. 2 below)
+
+j0(¯t) = 1,
+j1(¯t) = 2¯t,
+j2(¯t) = 2(1 − ¯t),
+(cid:17)
+(cid:16) 1
+j3(¯t) = H
+− ¯t
+2
+j4(¯t) = 3¯t2.
+
+· 4¯t + H
+
+(cid:16)
+
+¯t −
+
+(cid:17)
+
+1
+2
+
+· 4(1 − ¯t),
+
+(6)
+
+(7)
+
+(8)
+
+(9)
+
+(10)
+
+(cid:82) 1
+0
+
+jm(¯t)d¯t = 1), and H(·)
+jm(¯t) has been normalized (
+Here,
+stands for Heaviside step function.
+Such time profiles for
+injection pulses are assumed in the hope to reveal some
+dynamic feature of short-pulsed plasma transport. Polynomial
+functions are chosen for they serve as the basic functions
+in Taylor expansion for a time-variant function in general.
+Accordingly, the whole electron count number density (per
+unit emitter area) NEC is defined as
+
+NEC =
+
+(cid:90) τp
+
+0
+
+J(t)
+e
+
+dt.
+
+(11)
+
+Fig. 2.
+assumed in the model [see Eq. (5)] to be used in PIC simulation.
+
+(Colour online) The five normalized time profiles jm(t)|m=0,1,2,3,4
+
+To check whether any representative of the time-varying
+current densities Jm(t)|m>0 is able to transcend in average
+the constant profile m = 0 case in Eq. (5), a commercial
+PIC software (VORPAL4.2) [29], [30] is used to determine
+the occurrence of SCL current at the end of the short pulse.
+The simulation is constructed in one-dimension limit in order
+to unfold the basic phenomenon for space-charge-limited
+plasma flow. The SCL current is determined by increasing the
+magnitude of the injected current βm until electron reversal is
+observed [31]–[33].
+
+We also note here the procedures to set up VORPAL sim-
+ulation to explore the SCL short pulse flow. As mentioned
+in order to avoid additional problems of plasma expansion
+
+Fig. 1. (Color online) The ratio of transported charge between the long pulse
+limit and short pulse Qmod as a function of the normalised pulse length XCL
+= τp/τCL ≤ 1.
+
+numerically [22]. When the injection current density becomes
+pulsed and time-varied, the internal repulsion within the elec-
+tron beam will reshape its spatial profile into nonuniform in
+space. Then Valfells’ formula [3] ceases to apply, and numeric
+methods are then used to address the transient behaviour for
+The time-varying issue for
+the short-pulse electron flow.
+pulsed injection should be important in the sense of reaching
+SCL by tuning short pulse plasma source in time in a diode
+emission setup experiment, such as a photoinjector [3]. As the
+ultrafast lasers up to femtosecond range and nano-fabricated
+samples become popular in modern experimental setup of
+plasma emission, it is curious to look at the space-charge
+effect down to the nano spacial and ultrafast temporal scales.
+It is also noted that we intensionally neglect other emission
+mechanisms (field emission etc.) in order to reveal the role
+time-varying injection plays in SCL electron transport.
+
+In this paper, we are motivated to investigate the charac-
+teristics of different short time profiles in order to enhance
+time-average current density as compared to the short-pulse
+Valfells’ formula [3]. In particular, the electrons are injected
+with negligible initial velocity into the gap following four
+prescribed time profiles, and the particle-in-cell (PIC) simula-
+tion in one-dimensional limit is performed to obtain the time-
+average SCL current density. It will be revealed that the time-
+average SCL current density of such time-varying profiles can
+be higher by a factor of 2 to 3 as compared to time-invariant
+injection. Discussions on the time dependence of the electric
+field on cathode and anode are also given.
+
+II. Model and simulation
+
+In this section, our problem of short-pulse electron flow in
+a 1D classical diode is described and its simulation set up for
+PIC simulation. Consider a gap of spacing (0 ≤ x ≤ D)
+on
+which an external fixed electric field Fdc = Vg/D is imposed.
+The electrons are injected from the cathode x = 0 with a time-
+variant current density J(t) over a pulse length τp ≤ τCL =
+3D
+m0/2eVg. The emitted electrons are then exerted only by
+the direct electric field within the spacing, instead of by other
+
+(cid:112)
+
+0.00.20.40.60.81.00123 m=0 m=1 m=2 m=3 m=4 jm(t)Temporal length of electron flow(t/p)in multidimensional space(as 2D or 3D cases), computation
+is performed in one-dimensional limit to study the
+very
+effect of time-variant electron flow. Then global uniform grid
+(uniCartGrid in Python script) is adopted to divide equally 1D
+space and assign values of electro-static potentials for both
+walls(cathode and anode) as Dirichlet boundary conditions.
+For any particle emitted within simulation grid [30], a particle
+source is defined according to physical properties of electrons.
+A bunch of electrons are then emitted at rest from cathode
+surface (eg. x = 0 emitSurface in script writing). Time-variant
+injection density in Eqs. (6)-(10) is also included in this part
+to vary electron number upon time emitted from cathode.
+The space-charge limit is reached if until the end of short-
+pulse flow, zero or negative momentum of electrons within
+the diode gaping is observed from VORPAL data. To avoid
+the trouble of particles running out of the simulation grid, two
+particle-absorbers adjacent to both ends of grid are placed to
+absorb any particle diffused across the demarcation borders.
+Our procedure to emit electrons from cathode is calculated
+from the perspective of current density rather than of particle
+number density in space. This emit-flux-mechanism avoids
+indirect conversion from current density to particle density.
+
+III. Results and discussion
+
+We shall present our simulation results for the SCL short
+flow and give some discussion in this section. For the reference
+case, i.e. time-invariant injection density at m = 0 in Eq. (6),
+determines the SCL current density as a constant J0 = β0.
+Thus it is expected that this time-invariant case m = 0 should
+recover Valfells’ formula Eq. (3), which means β0 = JS, as
+shown in Fig. 3.
+
+In Fig. 3, the SCL average densities are compared [nor-
+malised to Valfells’ formula Eq. (3)] between β0 (m = 0 case)
+and JS at D = 1cm, Fdc = 3GV/m (Vg = 30 MV) as a function
+of XCL up to ≲ 1, where the electron transit time is τp = 9.24ps.
+The comparison shows good agreement with β0 though slightly
+higher than those predicted by Eq. (3) at small XCL.
+
+As shown in Fig. 4, the determined values of βm (for m = 0,
+1, 2, 3 and 4) are plotted in terms of JCL and JS as a function of
+normalised pulse length XCL. The ratios βm/JCL in logarithm
+show a clear double-logarithm scaling with pulse length XCL.
+The ratios βm/JS demonstrate that the highest enhancement is
+achieved in m = 4 case, followed by m =1 , 3, 2 and 0. The
+data indicate that an increasing time-varying of J(t) will have
+a higher time-average current magnitude (β4 > β1 > β3 > β2).
+For a linearly increasing function m = 1 case, the enhancement
+is about 2.6. For a linearly decreasing function m = 2 case,
+it is about 2. In all cases, the enhancement is above 2 for
+small XCL < 0.01, and the enhancement deceases with large
+XCL approaching 1. The reduction to unity is attributed to that
+the longer pulse length inhibits the electron pulse tail from
+entering diode before the pulse front terminates at anode.
+
+To affirm the effect of time-variance of electron flow in
+simulation, electric fields of cathode and anode EK(t) and
+EA(t) are retrieved respectively, the difference of which is
+plotted in Fig. 5. One can interpret EK(t) − EA(t) as follows.
+According to 1D Gauss’s law and conservation of charge, the
+
+3
+
+Fig. 3. (Color online) Normalised SCL density with respect to JCL for short
+pulse condition: β0/JCL (symbol) and JS/JCL (line), plotted as a function of
+normalized pulse length XCL. The parameters are D = 1cm, Vg = 30MV, and
+SCL transit time τp = 9.24ps. The reason why a low value occurs near 10ps
+is explained near the end of Section III.
+
+(Color online) The magnitude of current density βm (m = 0, 1, 2, 3,
+Fig. 4.
+4) with repect to JS(left ordinate) and JCL (right ordinate) from Eq. (3), as a
+function of normalized pulse length XCL < 1. The same parameters are used
+as in Fig. 3. Note that the dashed line indicates the unity level.
+
+difference of the electric field between the cathode and anode
+is proportional to integral of current density J(t), given by
+
+EK(t) − EA(t) = −
+
+(cid:90) D
+
+∂E(x)
+∂x
+
+dx
+
+0
+(cid:90) t
+
+(cid:90) D
+
+0
+
+0
+
+(12)
+
+J(t′)dt′,
+
+= 1
+ϵ0
+
+ρ(x)dx = 1
+ϵ0
+where ρ(x) the charge density without its sign, and t′ a dummy
+variable. In Fig. 5, the field difference between the cathode
+and anode for two cases m = 0 and 4 are presented, which
+indicates that [EK(t) − EA(t)] ∼ t (for m = 0 case) and t3 (for
+m = 4 case) as expected from Eq. (12). Then our simulation
+is assured to include the time-dependence for injection flow.
+In Fig. 6, the histograms for the electron counts are shown
+inside the gap near cathode at the end of the pulse (x ∈
+
+10-410-310-210-1100100101102103104XCL(=tp/tCL) JS/JCL (Valfells' formula) b0/JCL from VORPAL: m=010-410-310-210-11000.51.01.52.02.53.03.54.04.55.0bm/JCL m=1 m=2 m=3 m=4 m=0 Eq. (3)bm/JSXCL(=tp/tCL)10-310-210-1100101102103104 4
+
+Fig. 6. Histograms of electron count number (arbitrary unit) versus x ∈
+[0, D/100] space between cathode and anode at the pulse end of short electron
+flow (t = τp), for (a) m = 0 and (b) m = 4 case. Produced from VorpalView
+4.0.0 [30] and Mathematica 9 [34]. The same parameters as in Fig. 5 are
+used. Reproduced from [6].
+
+the issue. Time-dependence should be in favor of leveraging
+space-charge-limit for short-pulse injection. These results may
+pave the way in using laser or other mechanism to excite a
+specific time-varying injection at the high-current regime.
+
+Acknowledgment
+The VORPAL simulation was performed on computing server
+Axle of IHPC, A*STAR in Singapore. L. Y. would like to
+thank ´Ag´ust Valfells, Koh Wee Shing and Christine Roark for
+their helpful discussion and persistent pedagogy, and South
+China Normal University for hosting his 2013 visit.
+
+References
+
+[1] C. D. Child, “Discharge from hot cao,” Phys. Rev., vol. 32, no. 5, pp.
+
+0492–0511, 1911.
+
+[2] I. Langmuir, “The effect of space charge and residual gases on
+thermionic currents in high vacuum,” Phys. Rev., vol. 2, no. 6, pp. 450–
+486, 1913.
+´A. Valfells, D. W. Feldman, M. Virgo, P. G. O’Shea, and Y. Y. Lau,
+“Effects of pulse-length and emitter area on virtual cathode formation
+in electron guns,” Phys. Plasmas, vol. 9, no. 5, pp. 2377–2382, 2002.
+
+[3]
+
+(Color online)The time dependence of the difference between the
+Fig. 5.
+electric field on the cathode and anode, EK(t) − EA(t) for m =0 case: (black
+square) and m = 4 case (red dot), which shows, respectively, t and t3 scaling.
+The used parameters are D = 1 cm, Vg = 30 MV, and τp = 10fs.
+
+[0, D/100], t = τp) for (a) m = 0 and (b) m = 4 case, as
+the latter gives the highest average current density transported.
+For injection of case m = 4, the electron distribution is more
+localised near cathode as compared to case m = 0. The reason
+why it transports more current is that in m = 4 case most part
+of the electron flow is squeezed in the pulse end, although
+further investigation is still required to affirm our speculation.
+
+Finally, all data in Figs. 3 and 4 are valid for only for
+short pulse regime XCL < 1 where the electron pulse length
+is less than the transit time. Our simulation shows that for
+presented data electron flow spends 9.24ps to transmit the
+space. For XCL ≥ 1,
+the front of electron pulse will be
+collected by the anode while its trail has not yet emitted from
+the cathode, which means PIC simulation fails to check the
+genuine physical limit of space-charge. Thus the determined
+transported current density de facto reduces to the steady one–
+CL limit in Eq. (1).
+
+It is concluded that time-variance of injection current den-
+sity can enhance the SCL current density from our simulation
+data, though our chosen four time-varying profiles are far from
+exhaustive and more investigation is required 2.
+
+IV. conclusion
+
+In this paper, we present numerical results using PIC simu-
+lation to study the effect of time-varying injection for a pulsed
+electron flow into diode to reach the space charge limited
+(SCL) condition. It is shown that time-varying injection profile
+can contribute to obtain a higher time-average SCL current
+density,
+than the time-invariant short pulse SCL one [3],
+although further detailed study is still required to pinpoint
+
+2See further simulation for more time-profiles in Ch. 3 of the PhD
+
+dissertation [6].
+
+02468100.02.0x1094.0x1096.0x1098.0x1091.0x1010~t3~t EK-EA(Unit: V/m)Time(Unit: fs) m=0 m=4[4] P. Liang and R. Groll, “Numerical study of plasma-electrode interaction
+during arc discharge in a dc plasma torch,” IEEE Transacation On
+Plasma Science, vol. 46, p. 363, 2018.
+
+[5] M. D. Campanell, “Alternative model of space-charge-limited thermionic
+current flow through a plasma,” Phys. Rev. E, vol. 97, p. 043207, 2018.
+[6] Y. Liu, “Time-varying emission of electrons and its relevant EM phe-
+
+nomenon,” Ph.D. dissertation, 2014.
+
+[7] Y. Y. Lau, D. Chernin, D. G. Colombant, and P.-T. Ho, Phys. Rev. Lett.,
+
+[32] S. H. Chen, L. C. Tai, Y. L. Liu, L. K. Ang, and W. S. Koh,
+“Two-dimensional electromagnetic child–langmuir law of a short-pulse
+electron flow,” Phys. Plasmas, vol. 18, no. 2, p. 023105, 2011.
+
+[33] Y. Liu and L. K. Ang, “Time-dependent space-charge limited electron
+flow,” in The 39th IEEE International Conference on Plasma Science,
+ser. Session 3P: Computational Plasma Physics (poster session 2), 2012,
+pp. 3P–36.
+
+[34] W. R. Inc., “Mathematica, Version 9.0,” champaign, IL, 2012.
+
+5
+
+vol. 66, p. 1446, 1991.
+
+[8] J. W. Luginsland, Y. Y. Lau, and R. M. Gilgenbach, Phys. Rev. Lett,
+
+vol. 77, p. 4668, 1996.
+
+[9] Y. Y. Lau, Phys. Rev. Lett., vol. 87, p. 278301, 2001.
+[10] W. S. Koh, L. K. Ang, and T. J. T. Kwan, “Three-dimensional Child-
+Langmuir law for uniform hot electron emission,” Phys. Plasmas,
+vol. 12, no. 5, p. 053107, 2005.
+
+[11] J. W. Luginsland, Y. Y. Lau, R. J. Umstattd, and J. J. Watrous, “Beyond
+the child–langmuir law: A review of recent results on multidimensional
+space-charge-limited flow,” Phys. Plasmas, vol. 9, no. 5, p. 2371, 2002.
+[12] R. J. Umstattd and J. W. Luginsland, Phys. Rev. Lett., vol. 87, p. 145002,
+
+2001.
+
+[13] A. Rokhlenko and J. Lebowitz, “Space-charge-limited 2d electron flow
+between two flat electrodes in a strong magnetic field,” Physical
+Review Letters, vol. 91, no. 8, p. 085002, 2003. [Online]. Available:
+http://link.aps.org/doi/10.1103/PhysRevLett.91.085002
+
+[14] A. Pedersen, A. Manolescu, and ´A. Valfells, “Space-charge modulation
+in vacuum microdiodes at thz frequencies,” Physical Review Letters, vol.
+104, no. 17, p. 175002, 2010.
+
+[15] P. Zhang, A. Valfells, L. K. Ang, J. W. Luginsland, and Y. Y. Lau,
+“100 years of the physics of diodes,” Applied Physics Reviews, vol. 4,
+p. 011304, 2017.
+
+[16] M. E. Griswold, N. J. Fisch, and J. S. Wurtele, “An upper bound to time-
+averaged space-charge limited diode currents,” Phys. Plasmas, vol. 17,
+no. 11, p. 114503, 2010.
+
+[17] Y. Zhu and L. K. Ang, “Child-langmuir law in the coulomb blockade
+
+regime,” Appl. Phys. Lett., vol. 98, no. 5, p. 051502, 2011.
+
+[18] M. E. Griswold, N. J. Fisch, and J. S. Wurtele, “Amended conjecture on
+an upper bound to time-dependent space-charge limited current,” Phys.
+Plasmas, vol. 19, no. 2, p. 024502, 2012.
+
+[19] R. E. Caflisch and M. S. Rosin, “Beyond the child-langmuir limit,”
+
+Physical Review E, vol. 85, no. 5, p. 056408, 2012.
+
+[20] M. E. Griswold and N. J. Fisch, “Maximum time-dependent space-
+charge limited diode currents,” Phys. Plasmas, vol. 23, no. 1, p. 014502,
+2016.
+
+[21] Y. L. Liu, P. Zhang, S. H. Chen, and L. K. Ang, “Maximal charge
+injection of consecutive electron pulses with uniform temporal pulse
+separation,” Phys. Plasmas, vol. 22, no. 8, p. 084504, 2015.
+
+[22] Y. Liu, Q. Tang, and B. Wu, “Space-charge effect of the time-varying
+electron injection in a diode: Classical and relativistic regimes,” Physics
+of Plasmas, vol. 24, no. 9, p. 093512, 2017.
+
+[23] H. R. Jory, “Exact relativistic solution for the one-dimensional diode,”
+
+Journal of Applied Physics, vol. 40, no. 10, p. 3924, 1969.
+
+[24] B. Barwick, C. Corder, J. Strohaber, N. Chandler-Smith, C. Uiterwaal,
+and H. Batelaan, “Laser-induced ultrafast electron emission from a field
+emission tip,” New J. Phys., vol. 9, p. 10, 2007.
+
+[25] S. Yalunin, M. Gulde, and C. Ropers, “Strong-field photoemission from
+surfaces: Theoretical approaches,” Phys. Rev. B, vol. 84, no. 19, p.
+195426, 2011.
+
+[26] M. Pant and L. Ang, “Ultrafast laser-induced electron emission from
+
+multiphoton to optical tunneling,” Phys. Rev. B, vol. 86, no. 4, 2012.
+
+[27] W. Wendelen, B. Y. Mueller, D. Autrique, B. Rethfeld, and A. Bogaerts,
+“Space charge corrected electron emission from an aluminum surface
+under non-equilibrium conditions,” Journal of Applied Physics, vol. 111,
+no. 11, p. 113110, 2012.
+
+[28] Y. Liu and L. K. Ang, “Transition from ultrafast laser photo-electron
+in a 1d gap,” Journal of
+emission to space-charge-limited current
+Physics D: Applied Physics, vol. 47, no. 12, p. 125502, 2014.
+[Online]. Available: http://iopscience.iop.org/0022-3727/47/12/125502/
+,http://arxiv.org/abs/1307.5596v3
+
+[29] C. Nieter and J. R. Cary, “Vorpal: a versatile plasma simulation code,”
+
+J. Comput. Phys., vol. 196, no. 2, pp. 448–473, 2004.
+[30] “VORPAL User Guide,” Tech-X Corporation, Boulder, 2010.
+[31] S. Mahalingam, C. Nieter, J. Loverich, D. Smithe, and P. Stoltz, “Space
+charge limited currents calculations in coaxial cylindrical diodes using
+particle-in-cell simulations,” The Open Plasma Physics Journal, vol. 2,
+p. 7, 2009.
+
+Hao Huang Biography text here.
+
+Yangji´e Liu Biography text here.
+
+PLACE
+PHOTO
+HERE
+
+PLACE
+PHOTO
+HERE
+
+

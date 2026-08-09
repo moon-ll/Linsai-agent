@@ -322,6 +322,13 @@ python3 scripts/lifecycle_monitor.py
 """.format(project=project)
             _write_wrapper_script("lc_monitor.sh", monitor_script)
 
+            # 先清理同名旧实例（确保幂等）
+            removed = []
+            for cron in hb.cron_list_profile(HERMES_PROFILE):
+                if cron.get("name") == "lc-hourly-monitor":
+                    hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)
+                    removed.append(cron.get("id"))
+
             res = hb.cron_create_no_agent(
                 script_name="lc_monitor.sh",
                 name="lc-hourly-monitor",
@@ -331,6 +338,7 @@ python3 scripts/lifecycle_monitor.py
             )
             print("=== 每小时监控 cron 安装结果 ===")
             print(f"schedule: 0 * * * *（每小时整点）")
+            print(f"removed_duplicates: {len(removed)}")
             print(f"message: {res.get('message', res.get('error', '?'))}")
             return 0 if res.get("success") else 1
 

@@ -1,0 +1,64 @@
+{
+  "gaps": [
+    {
+      "claim": "国内尚无利用量子光驱动固体高次谐波、尤其是明亮压缩真空驱动固体HHG开展量子增强光谱学研究的工作",
+      "missing_evidence": "缺少可复核的系统性国内外文献检索范围、检索数据库、检索时间和检索结果；且该表述与参考文献[31]所示的Wang等人2025年华中科技大学相关工作存在潜在矛盾，需要补充该工作的准确研究内容、适用体系及其与本课题的差异，或将“国内空白”改为更窄且可证实的研究空白",
+      "search_keywords": [
+        "Wang 2025 HUST quantum light high harmonic generation",
+        "华中科技大学 量子光 高次谐波 2025",
+        "bright squeezed vacuum solid-state high harmonic generation China",
+        "quantum light driven solid-state HHG China",
+        "国内 量子光驱动 固体高次谐波"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子高次谐波产生（QSHHG）是已有文献中明确建立的研究概念和术语",
+      "missing_evidence": "缺少能够证明该术语已有规范使用及概念边界的权威文献；需要补充量子光驱动高次谐波、量子高次谐波光子统计和非经典光场高次谐波理论/实验文献，避免将课题自定义缩写表述为领域通用概念",
+      "search_keywords": [
+        "quantum high-harmonic generation QSHHG",
+        "quantum light high harmonic generation review",
+        "nonclassical light high harmonic generation",
+        "photon statistics of high harmonic generation",
+        "quantum harmonic generation squeezed light"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "明亮压缩真空相对于相干光能够改变或增强高阶多光子跃迁及固体HHG响应",
+      "missing_evidence": "缺少直接将明亮压缩真空或其他非经典光场与固体高次谐波产率、截止能量、谱形或多光子跃迁概率联系起来的理论或实验研究；现有量子HHG和非经典光场文献需要进一步区分气相体系、金属纳米尖端体系与固体体系的证据范围",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation",
+        "squeezed light driven solid-state HHG",
+        "nonclassical light solid-state high harmonic generation",
+        "quantum light multiphoton transition enhancement",
+        "squeezed vacuum high-order harmonic generation cutoff"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子光场的光子统计特性能够被固体HHG光谱或高次谐波光子统计可靠地读出",
+      "missing_evidence": "缺少关于固体HHG输出光子数统计、g2(0)、高阶相关函数与驱动光场量子统计之间映射关系的理论推导和实验验证；需要补充能够支持“HHG作为量子光场/物质响应读出工具”的文献",
+      "search_keywords": [
+        "solid-state HHG photon statistics",
+        "g2 high harmonic generation quantum light",
+        "higher-order photon correlations HHG",
+        "quantum state tomography high harmonic generation",
+        "photon statistics nonclassical light nonlinear spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "高次谐波能够同时提供Berry曲率、量子度规等量子几何信息，并用于固体量子几何反演",
+      "missing_evidence": "尽管已补充Berry曲率引用，但仍需覆盖量子度规、Berry联络/曲率与HHG振幅、偏振、椭偏率、圆二色性或相位之间定量关系的理论和实验文献，特别是支持多观测量联合反演及其可辨识性的研究",
+      "search_keywords": [
+        "quantum geometry high harmonic generation",
+        "quantum metric high harmonic spectroscopy",
+        "Berry curvature reconstruction HHG",
+        "Berry connection solid-state HHG",
+        "quantum geometric tensor nonlinear spectroscopy"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

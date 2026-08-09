@@ -1,0 +1,707 @@
+Brilliant source of 19.2 attosecond soft X-ray pulses below the 
+atomic unit of time.  
+
+Fernando Ardana-Lamas1,†, Seth L. Cousin1,†, Juliette Lignieres1, Jens Biegert1,2,* 
+
+1 ICFO - Institut de Ciencies Fotoniques, The Barcelona Institute of Science and Technology, 08860 Castelldefels 
+(Barcelona), Spain. 
+2 ICREA, Pg. Lluís Companys 23, 08010 Barcelona, Spain.  
+* Correspondence to: jens.biegert@icfo.eu 
+† These authors contributed equally 
+
+Abstract 
+Electronic correlations occur on attosecond timescales, dictating how chemical bonds form, 
+energy flows, and materials respond to light. Capturing such many-body processes requires 
+light pulses of similar duration. The soft X-ray water window is vital because it encompasses 
+the  principle  absorption  edges  of  carbon,  nitrogen,  and  oxygen  that  underpin  chemistry, 
+biology,  and  materials  science.  However,  generating  and  characterising  isolated  attosecond 
+pulses that reach into the soft X-ray water window has remained a challenge. 
+We addressed this need and report an isolated attosecond soft X-ray pulse with a duration of 
+19.2 attoseconds. This pulse reaches into the water window and is shorter than the atomic unit 
+of time (24.2 as). The pulse is supported by a spectrum centred at 243 eV, extending up to 390 
+eV, and crossing the carbon K-edge with record photon flux: 4.8 × 10!"photons per second 
+overall and 4.1 × 10#photons per second in a 10% bandwidth at the carbon K-shell edge (284 
+eV). Such an extremely short soft X-ray pulse combines extreme temporal resolution with a 
+coherent  ultrabroadband  soft  X-ray  spectrum,  opening  new  opportunities  to  study  electron 
+dynamics in atoms, molecules, and solids, disentangle many-body interactions in correlated 
+systems, and follow non-adiabatic energy flow in molecular complexes. Our results establish 
+a new benchmark for table-top attosecond technology and lay the foundation for its widespread 
+application in science and technology. 
+
+INTRODUCTION 
+
+Excitation,  scattering,  and  electron  relaxation  are  crucial  processes  that  control  how 
+matter interacts with light. Their timing influences how chemical bonds form or break, how 
+charge  and  energy  move,  and  how  the  functions  in  molecules  and  materials  develop. 
+Understanding  these  dynamics  requires  attosecond  resolution,  as  electronic  excitations  and 
+dynamics occur on timescales of tens of attoseconds (1). Since the first real-time observation 
+of the femtosecond lifetime of an M-shell vacancy in krypton in 2002 (2), attosecond science 
+has enabled groundbreaking studies of electron tunnelling (3), photoemission (4, 5), ultrafast 
+charge  transfer  in  molecules  (6–11),  electron  localisation  during  dissociation  (12–14), 
+electronic  dynamics  in  condensed  matter  (15–19)  and  probing  many-body  dynamics  in 
+condensed matter (20, 21). 
+
+Extending attosecond pulses into the soft X-ray (SXR, > 124 eV) regime is particularly 
+powerful because core-level spectroscopy offers element specificity and site selectivity. This 
+capability  allows  attosecond-resolution  investigations  of  intra-atomic  and  intra-molecular 
+energy transfer (22–24), charge-induced structural rearrangements (25, 26), transient variations 
+in chemical reactivity (27), non-adiabatic dynamics (28–30), photodamage of organic matter 
+(31),  and  carrier  and  exciton  dynamics  (16,  20,  32).  Significantly,  SXR  attosecond  pulses 
+permit access to core-shell absorption edges vital to chemistry and biology, such as the carbon, 
+
+ 
+ 
+ 
+ 
+ 
+ 
+nitrogen, and oxygen K and L-edges, thus providing a novel means to explore the complex 
+many-body interactions between photons, charge carriers, and nuclei (20, 21, 33). 
+
+Over  the  past  decade,  short-  and  mid-wave  infrared  drivers  have  advanced  high-
+harmonic generation (HHG) (34, 35) into the SXR domain (36–41). Early HHG research using 
+Ti:Sapphire lasers led to the production of keV photons (42), while the ponderomotive scaling 
+of HHG (43) with longer wavelength drivers enabled generation within the water window (284-
+530 eV; (39)) and up to the keV range (36). However, it required substantial progress (39, 44) 
+to overcome the unfavourable wavelength scaling of the single-atom response (λ⁻⁵ to λ⁻⁹) (45–
+47)  by  understanding  ionisation  dynamics  at  unprecedented  gas  pressures  (38,  44,  48)  to 
+achieve efficient phase-matched HHG (49–52). Such conditions require pressures of several to 
+tens of bars, and can be obtained using capillaries or carefully designed target systems that 
+support  stable,  effusive  gas  targets.  These  innovations  have  enabled  the  long-sought  new 
+opportunities, such as the first coherent SXR spectroscopy (17, 37, 53). Simultaneously, HHG 
+in the SXR range has led to expectations of generating even shorter, isolated attosecond pulses 
+(54–59), which face new challenges due to a significantly reduced photon flux in the SXR (47), 
+as  well  as  measurement  difficulties  (60,  61).  Several  studies  have  reported  (60,  62–64) 
+achieving  the  SXR  regime  with  pulse  durations  close  to  the  atomic  unit  of  time  (24  as). 
+Nonetheless, key challenges in such streaking measurements (65, 66) of an SXR attosecond 
+pulse include emission from multiple shells of the measurement gas (60) and limitations of 
+retrieval methods (67, 68) to extract the electric field envelope of the SXR pulse accurately. 
+However, it is well known that a combination of time-stationary and non-stationary filters must 
+be  used  to  retrieve  the  electric  field  amplitude  of  the  attosecond  pulse;  otherwise,  only  the 
+spectrum or an undersampled temporal trace can be obtained.  
+
+Chronocyclic techniques, such as the FROG-CRAB (67) method, are well-established 
+methods that combine time-stationary and time-non-stationary filters to extract an electric field 
+envelope (69). FROG-CRAB, however, relies in its original form on the central momentum 
+approximation (CMA); therefore, it must be used cautiously when dealing with broad SXR 
+bandwidths.  Frequency-domain  interferometric  methods,  like  RABBITT  (70),  PROOF  (71, 
+72),  and  iPROOF  (73),  avoid  the  CMA  but  are  limited  to  weak  streaking  fields  and  long 
+infrared  pulses.  As  a  result,  achieving  an  accurate  reconstruction  of  extremely  short,  i.e., 
+broadband, SXR pulses alongside their streaking fields has remained a challenge. One solution 
+to this problem is the Volkov-transform generalised projection algorithm (VTGPA) (74), which 
+formulates the retrieval as a Fourier-transform-free least-squares optimisation and bypasses the 
+CMA.  The  VTGPA  further  incorporates  dipole  transition  matrix  elements.  This  method 
+reduces  computational  demands,  improves  robustness  to  noise,  and  converges  in  about  20 
+minutes  on  modern  computing  hardware,  making  it  a  practical  tool  for  characterising  SXR 
+attosecond experiments. 
+
+Using this method, we measured an isolated attosecond pulse with a duration below the 
+atomic unit of time (24.2 as), reaching 19.2 attoseconds. The central photon energy and spectral 
+bandwidth  surpass  previous  demonstrations,  setting  a  new  benchmark  for  attosecond  pulse 
+generation and characterisation. 
+
+The availability of such a pulse marks a significant advance for attosecond science and 
+ultrafast investigations due to its short duration and fully coherent bandwidth for spectroscopy 
+(33).  Covering  the  key  absorption  edges  of  light  elements,  they  enable  element-specific 
+attosecond spectroscopy of inner-shell relaxation, Auger decay, and correlated carrier–nuclear 
+dynamics in gases, liquids, and solids (33). They also open a new chapter for chemical research, 
+from ultrafast charge migration in biomolecules to structural transitions in condensed matter 
+and light-induced phase changes in correlated materials. By pushing attosecond science below 
+
+the atomic time unit and into the water window, this work provides a vital tool to study matter 
+on its most fundamental temporal and spatial scales. 
+
+RESULTS AND DISCUSSION 
+
+Attosecond SXR Measurement Setup 
+
+Figure 1: Attosecond pulse generation and measurement. Schematic outline of the measurement setup. The 12-
+fs CEP-stable pulse at 1850 nm is split by a pellicle beam, with a major part of the energy used to generate the SXR 
+attosecond  pulse  in  an  effusive  “T”  shaped  target  described  in  Ref.  (37).  The  inset  (bottom  right)  shows  a 
+photograph of the target when operating with 3.5 bar neon. The emerging attosecond pulse is focused into a TOF 
+spectrometer, and the remainder of the short pulse is used as a streaking field.  
+
+Here we briefly describe the experimental setup. The driving source was a home-built, 
+cryogenically cooled, two-stage Ti:Sapphire amplifier that delivered stable 40-fs, 7-mJ pulses 
+at 1 kHz. These pulses seeded a TOPAS-HE (LightConversion) optical parametric amplifier 
+(OPA),  where  three  stages  of  white-light-seeded  amplification  generated  passively  CEP-
+stabilised  idler  pulses  of  45  fs  duration  centred  at  1850  nm.  The  pulses  were  spectrally 
+broadened in a gas-filled hollow-core fibre and subsequently compressed in bulk, resulting in 
+0.4-mJ,  12-fs,  CEP-stable  pulses.  A  slow  feedback  loop  mitigated  long-term  CEP  drifts, 
+ensuring  stability  over  extended  timescales.  A  measurement  over  1  hour  yielded  an  rms 
+stability of 88.8 mrad. These pulses drove the attosecond streaking beamline, where most of 
+the energy was used to generate the attosecond SXR pulse, while a smaller portion was used 
+as the streaking field; see Fig. 1 for an illustration.  
+
+The high-energy pulse was focused to a spot size of 54 µm and reached an intensity of 
+4.3  ×  10¹⁴  W/cm²  in  a  free-space  neon  target  with  a  backing  pressure  of  3.5  bar  and  an 
+interaction region shorter than 1 mm. Under these conditions, soft X-rays were generated well 
+into the water window, delivering a total flux of 4.8 × 1010 photons/s across the spectral range 
+from 200 eV to 380 eV. The top left inset in Fig. 1 shows a typical SXR spectrum, and the 
+bottom right inset shows a photograph of the high-pressure target. 
+
+ 
+ 
+  
+The  generated  soft  X-rays  were  refocused  into  a  time-of-flight  (TOF)  spectrometer 
+using a grazing-incidence ellipsoidal mirror (Zeiss) with ion-beam-polished surfaces of less 
+than 0.5 nm roughness across the 260 × 50 mm² optic. A gold mirror with a 3-mm through-
+hole at 45° enabled co-alignment of the 1850-nm streaking pulses (reflected) with the X-rays 
+(transmitted).  Beam  steering  was  performed  with  motorised  mirrors  under  vacuum,  and  an 
+actuator-controlled  sampling  mirror  allowed  real-time  beam  profiling.  Collinearity  was 
+verified when the beams from both arms overlapped on the hole and remained aligned in the 
+far field. 
+
+The  interferometric  stability  of  the  streaking  setup  was  qualitatively  confirmed  by 
+observing the interference fringes of the 1850-nm beams at the TOF gas jet. Excellent fringe 
+stability was achieved without active stabilisation, thanks to isolating the vacuum chambers 
+from the optical breadboards. No infrared attenuation filter was employed, maximising the soft 
+X-ray flux at the target. Control experiments verified that residual infrared did not affect the 
+streaking trace; see Ref. (60): its intensity was three orders of magnitude below the ionisation 
+threshold,  and  comparisons  of  photoelectron  spectra  recorded  with  and  without  infrared-
+blocking filters (200 nm carbon + 200 nm chromium) revealed no energy shift, only a reduction 
+in the signal. 
+
+Attosecond SXR Pulse Measurement 
+
+Now  we  turn  to  the  streaking  measurement.  We  previously  described  the 
+characterisation  of  attosecond  SXR  pulses  generated  in  neon  at  3.5  bars  using  streaking 
+measurements in krypton (60). In that work, the FROG-CRAB retrieval method was employed; 
+however, due to its limitations for the broad SXR bandwidth produced, we restricted ourselves 
+to only reporting a conservative upper bound of 322 as for the pulse duration. Notably, the 
+retrieval already indicated the presence of isolated attosecond pulses with durations of 23.1 as, 
+hinting at the ultrashort regime we now confirm.  
+
+Figure 2: Attosecond streaking in Krypton. (a) Photoionisation cross sections for helium and krypton. Helium 
+would provide direct mapping, but it is prohibitive due to the extremely low cross-section. We used krypton with 
+a binding energy of 𝐸! =	94 eV and ensured that the additional shells do not pollute the measured trace shown to 
+the  right.  (b)  and  (c)  Retrieved  and  measured  streaking  traces  in  krypton.  The  black  line  represents  the  vector 
+potential. 
+
+We briefly outline the measurement conditions. A portion of the IR pulse energy was 
+split off to act as the streaking field, reaching a peak intensity of 3.2 × 10¹¹ W/cm² at focus. 
+The TOF spectrometer (Stefan Kaesdorf) was operated in either electron or ion collection mode 
+
+         
+ 
+ 
+and included a 461-mm drift tube, providing a resolution of T/ΔT = 100, corresponding to E/ΔE 
+≈ 50. An Einzel lens focused charged particles onto a microchannel plate without changing 
+their energies; optimal focusing was achieved when the lens voltage was approximately five 
+times the expected electron energy. For a central energy of 200 eV, the acceptance bandwidth 
+was around 150 eV (FWHM). In this setup, the standard 30° full-cone acceptance was replaced 
+by  a  spherical  acceptance  volume  approximately  200  µm  in  diameter,  requiring  precise  co-
+alignment of the soft X-rays, streaking infrared, and gas jet. Helium is ideal as the target gas 
+since  emission  from  only  the  1s  shell  precisely  defines  the  photon  energy  of  emitted 
+photoelectrons 𝐸$%& = ℎ𝜈 − 𝐸'; ℎ𝜈 is the SXR photon energy, and 𝐸' is the electron's binding 
+energy relative to the vacuum level. However, the ionisation cross section of helium is more 
+than two orders of magnitude lower than that of krypton, making krypton a practical choice for 
+measuring SXR pulses — that is, for photon energies above 124 eV; see Fig. 2. We emphasise 
+that  careful  assessment  of  the  spectral  distribution  of  photon  flux  across  the  attosecond 
+spectrum is necessary. For example, if the photon flux mainly resides at 100 eV with only a 
+tail crossing into the water window, measuring with helium results in a significantly skewed 
+mapping of the attosecond pulse spectrum into the photoelectron spectrum.   
+
+We previously (60) performed a detailed analysis of the SXR-driven photoemission of 
+krypton,  which  clearly  ruled  out  significant  contributions  other  than  the  Kr(3d)  shell.  The 
+photoionisation cross section of the Kr(3d) shell at the centre of mass of the attosecond pulse 
+spectrum  at  243  eV  is  nearly  ten  times  larger  than  that  of  the  Kr(3p)  shell  and  almost  one 
+hundred times larger than that of the 4p shell. At this energy, the asymmetry parameters of the 
+Kr(3d) and Kr(3p) shells converge near unity and vary minimally across the pulse bandwidth. 
+Thus,  photoemission  can  be  attributed  predominantly  to  the  Kr(3d)  shell,  with  angular 
+asymmetries  posing  no  limitation.  However,  Auger  decay  is  another  source  of  unwanted 
+electrons,  with  secondary  contributions.  We  found  that  ionisation  from  the  Kr(3d-1)  shell 
+produces Auger electrons with energies below 60 eV (75), well outside the energy window 
+contributing  to  streaking,  and  with  negligible  intensity,  at  most  6%  of  the  Kr(3d)  signal.  A 
+second  source  could  be  Auger  decay  from  the  Kr(3p)  shell.  Analysis  shows  that  the  three 
+relevant groups (M2,3-M4,5N2,3, M2-M4,5N2,3 and M3-M4,5N2,3) amount maximally to 6% of the 
+Kr(3d) signal. Lastly, the M₂,₃–NN Auger lines account for only 0.66% of the Kr(3d) signal. 
+These contributions are therefore negligible, confirming that the detected photoelectrons arise 
+
+Figure 3: Reconstructed attosecond SXR pulse. (a) The intensity profile of the soft X-ray attosecond pulse had 
+an average FWHM pulse duration of 19.2 (-2.1 / +4.6) as. The corresponding instantaneous frequency is also 
+shown, revealing that the SXR pulse is down chirped with a slight residual phase. The shaded areas indicate the 
+variations, and the thick lines the mean values. (b) The corresponding measured (green line) and retrieved kinetic 
+energy spectra are shown in the right panel with the retrieved spectral phase. 
+
+ 
+ 
+ 
+from  single-photon  ionisation  of  the  Kr(3d)  shell,  providing  a  direct  one-to-one  mapping 
+between the attosecond SXR pulse and the photoelectron TOF spectrum. 
+
+Figure  2  shows  the  recorded  and  retrieved  streaking  traces.  We  used  the  Volkov-
+transform  generalised  projection  algorithm  (VTGPA)  to  retrieve  the  attosecond  pulse.  By 
+framing  the  reconstruction  as  a  least-squares  projection  in  the  Volkov-transformed  domain, 
+VTGPA (74) avoids the central momentum approximation and captures the complete physics 
+of  strong-field  photoionisation,  including  dipole  transition  matrix  elements.  This  allows  for 
+reliable retrieval of both the attosecond pulse and the streaking field, even for broadband soft 
+X-ray  continua  and  nonperturbative  IR  streaking  fields.  It  is  particularly  effective  for 
+characterising our ultra-broadband attosecond SXR pulses. The VTGPA was repeated 30 times 
+and yielded the average pulse duration of 19.2 (-2.1 / +4.6) attoseconds, well below the atomic 
+unit  of  time  of  24.2  as.  Figure  3(a)  shows  the  mean  intensity  profile  and  instantaneous 
+frequency. Shaded areas indicate the spread of values. Figure. 3(b) shows the measured (green) 
+and  retrieved  kinetic  energy  spectra  with  the  retrieved  spectral  phase  and  spread  of  values 
+indicated in shaded areas.  
+
+*
+
+.
+
+The  retrieval  started  with  a  random  guess  and  converged  with  an  error  of  ℇ =
+100 ∑ ∑ .𝑆()* − 𝑆)+,.
+=  0.15%;  where  W  is  the  kinetic  energy,  S  is  the 
+spectra  and  energy  steps.  We  further  analysed  the  entire  streaking  trace  by  retrieving  the 
+attosecond  pulse  at  each  half-cycle  interval  of  the  streaking  field.  We  observe  consistent 
+retrieval of similar pulse durations.  
+
+/𝑁* ∑ ∆𝑊.
+
+∆𝑊
+
+-
+
+Regarding  the  residual  uncompensated  chirp,  Fig.  4  illustrates  the  markedly  different 
+challenges for chirp compensation in the SXR regime compared to the XUV regime. The figure 
+
+Figure  4:  Dispersion  and  transmission  of  XUV  and  SXR  radiation.  We  calculate  the  group  delay  dispersion 
+(GDD) and the transmission based on reference data (73), which was adjusted for pressure and temperature (74). The 
+left column gives values for noble gases, showing well-known resonances in the XUV spectrum for Kr and Xe. Data 
+for a range of solid foils are shown in the right column. Note that a resonance causes a strong amplitude modulation 
+of the attosecond pulse spectrum, but more importantly, it causes a phase modulation of the spectral phase.  
+
+shows calculated transmission and GDD for a range of noble gases at 100 mbar pressure and 
+typical foils with 100 nm thickness. We calculated these values based on tabulated data (76) 
+
+ 
+ 
+with adjustment for temperature and pressure (77). The differences between the XUV (up to 
+124 eV) and SXR (above 124 eV) regimes are striking and illustrate the challenges in achieving 
+appreciable chirp compensation without strongly modulating the coherent attosecond spectrum 
+or  reducing  photon  flux.  Although  straightforward  post-generation  chirp  compensation  by 
+inserting materials or gases seems impractical in the SXR, earlier studies have shown that high-
+order harmonic generation (HHG) at long driving wavelengths, high intensities, and elevated 
+gas pressures can demonstrate near-instantaneous temporal gating. For example, when the gas 
+pressure was increased, Ref. (78) reported transitioning from attosecond pulse trains to isolated 
+attosecond pulses—even with multicycle driving pulses. Similarly, our work (38, 44) revealed 
+that  under  multi-atmosphere  HHG  conditions,  phase  matching  is  inherently  confined  to  a 
+temporal window much shorter than half a cycle of the 1850 nm driving field. We note that 
+some control may also be possible with an additional control field. A simple calculation shows 
+that the intrinsic attochirp varies from 1654 as2 to 6172 as2 when decreasing peak intensity 
+from 6.8x1014 to 1.7x1014 W/cm2. The rapidly varying electric field envelope of the generating 
+few-cycle pulse ramps through a much larger range of intensities and may provide additional 
+chirp compensation.  
+
+Another  critical  aspect  of  HHG  at  multi-atmosphere  pressure  is  understanding  the  gas 
+dynamics, as it influences phase matching and gives valuable insight into target design and 
+optimisation  of  photon  yield.  Figure  5  shows  the  results  of  our  investigation,  in  which 
+computational  fluid  dynamics  simulations  on  ANSYS  Fluent  CFD  with  the  K-epsilon 
+turbulence model and a finite element size of 10 microns were matched with the gas jet shown 
+in Fig. 5(top, left). The expansion of 3.5 bars of neon through a 200 micron orifice produces 
+turbulent flow and shock fronts nicely reproduced by the simulations. The panels below (Fig. 
+5(a)-(d)) show the computed distribution of velocity reaching speeds up to 720 m/s, as well as 
+the density and temperature distributions; also shown in Fig. 5(e,f). Based on these values, we 
+calculated the chirp as a function of photon energy and found a GDD of -101.3 as² at 243 eV; 
+see Fig. 5(g).  
+
+Figure 5: Multi-bar gas dynamics and chirp in HHG. (a) photograph of the gas jet. CFD simulations provided 
+velocity  (b),  density  (c)  and  temperature  (d)  of  the  HHG  target.  Lineouts  of  the  CFD  data  along  the  beam 
+propagation yield the pressure of neon (e), the temperature (f) and the GDD (g). The total transmission was 3%.  
+
+CONCLUSION  
+
+ 
+   
+ 
+ 
+ 
+We demonstrated the generation of coherent attosecond SXR pulses with a duration of 
+19.2 attoseconds, significantly shorter than the atomic unit of time. These pulses are centred at 
+243 eV with a spectrum extending to 390 eV and record photon flux of 4.8x1010 photons per 
+second. The photon flux in 10% bandwidth at the carbon K-shell edge at 284 eV is 4.1x109 
+photons per second. The sub-atomic time duration and the coherence of the ultrabroad spectrum 
+offer exciting new opportunities to investigate atomic, molecular, and solid-state physics, such 
+as  inner  and  valence  electron  dynamics,  or  to  disentangle  many-body  physics  in  correlated 
+systems and non-adiabatic energy transfer in molecular complexes. Our results demonstrate 
+the remarkable capabilities of table-top attosecond technology and lay the foundation for its 
+widespread use in fundamental and applied science.  
+
+ACKNOWLEDGMENTS 
+
+We gratefully acknowledge the contributions of all the authors of our original publication (60) 
+on which this new work is based. 
+
+Author contributions: F.A.-L. and J.L. conducted the retrieval simulations, which F.A.-L. 
+supervised; S.L.C. conducted fluid dynamic simulations and dispersion calculations; J.B. 
+supervised the investigation and wrote the manuscript with contributions from all authors.  
+
+Funding: J.B. and group acknowledges financial support from the European Research Council 
+for  ERC  Advanced  Grant  “TRANSFORMER”  (788218),  ERC  Proof  of  Concept  Grant 
+“miniX” (840010), FET-OPEN “PETACom” (829153), FET-OPEN “OPTOlogic” (899794), 
+FET-OPEN “TwistedNano” (101046424), MINECO for Plan Nacional PID2024-162757NB-
+I00; QU-ATTO, 101168628; AGAUR for 2021 SGR 01449, MINECO for “Severo Ochoa” 
+(CEX2019-000910-S),  Fundació  Cellex  Barcelona,  the  CERCA  Programme/Generalitat  de 
+Catalunya,  and  the  Alexander  von  Humboldt  Foundation  for  the  Friedrich  Wilhelm  Bessel 
+Prize. JB also acknowledges Lasers4EU, which is funded by the European Union funds under 
+HEU-GA 101131771.  
+
+REFERENCES 
+
+1.  
+
+P. B. Corkum, F. Krausz, Attosecond science. Nature Phys 3, 381–387 (2007). 
+
+2.   M. Drescher, M. Hentschel, R. Kienberger, M. Uiberacker, V. Yakovlev, A. Scrinzi, T. Westerwalbesloh, 
+
+U. Kleineberg, U. Heinzmann, F. Krausz, Time-resolved atomic inner-shell spectroscopy. Nature 419, 
+803–807 (2002). 
+
+3.   M. Uiberacker, T. Uphues, M. Schultze, A. J. Verhoef, V. Yakovlev, M. F. Kling, J. Rauschenberger, N. 
+
+M. Kabachnik, H. Schroder, M. Lezius, K. L. Kompa, H. G. Muller, M. J. J. Vrakking, S. Hendel, U. 
+Kleineberg, U. Heinzmann, M. Drescher, F. Krausz, Attosecond real-time observation of electron 
+tunnelling in atoms. Nature 446, 627–632 (2007). 
+
+4.   M. Schultze, M. Fiess, N. Karpowicz, J. Gagnon, M. Korbman, M. Hofstetter, S. Neppl, A. L. Cavalieri, 
+Y. Komninos, T. Mercouris, C. A. Nicolaides, R. Pazourek, S. Nagele, J. Feist, J. Burgdorfer, A. M. 
+Azzeer, R. Ernstorfer, R. Kienberger, U. Kleineberg, E. Goulielmakis, F. Krausz, V. S. Yakovlev, Delay 
+in Photoemission. Science 328, 1658–1662 (2010). 
+
+5.   K. Klünder, J. M. Dahlström, M. Gisselbrecht, T. Fordell, M. Swoboda, D. Guénot, P. Johnsson, J. 
+Caillat, J. Mauritsson, A. Maquet, R. Taïeb, A. L’Huillier, Probing Single-Photon Ionization on the 
+Attosecond Time Scale. Physical Review Letters 106, 143002 (2011). 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+6.   C. Ott, A. Kaldun, P. Raith, K. Meyer, M. Laux, J. Evers, C. H. Keitel, C. H. Greene, T. Pfeifer, Lorentz 
+
+Meets Fano in Spectral Line Shapes: A Universal Phase and Its Laser Control. Science 340, 716–720 
+(2013). 
+
+7.   N. Saito, H. Sannohe, N. Ishii, T. Kanai, N. Kosugi, Y. Wu, A. Chew, S. Han, Z. Chang, J. Itatani, Real-
+time observation of electronic, vibrational, and rotational dynamics in nitric oxide with attosecond soft x-
+ray pulses at 400 eV. Optica 6, 1542–1542 (2019). 
+
+8.   K. S. Zinchenko, F. Ardana-Lamas, I. Seidu, S. P. Neville, J. van der Veen, V. U. Lanfaloni, M. S. 
+
+Schuurman, H. J. Wörner, Sub-7-femtosecond conical-intersection dynamics probed at the carbon K-
+edge. Science 371, 489–494 (2021). 
+
+9.  
+
+S. Severino, K. M. Ziems, M. Reduzzi, A. Summers, H.-W. Sun, Y.-H. Chien, S. Gräfe, J. Biegert, Non-
+Adiabatic Electronic and Vibrational Ring-Opening Dynamics resolved with Attosecond Core-Level 
+Spectroscopy. Nature Photonics 18, 731–737 (2024). 
+
+10.   A. R. Attar, A. Bhattacherjee, C. D. Pemmaraju, K. Schnorr, K. D. Closser, D. Prendergast, S. R. Leone, 
+
+Femtosecond x-ray spectroscopy of an electrocyclic ring-opening reaction. Science 356, 54–58 (2017). 
+
+11.   Y. Kobayashi, K. F. Chang, T. Zeng, D. M. Neumark, S. R. Leone, Direct mapping of curve-crossing 
+
+dynamics in IBr by attosecond transient absorption spectroscopy. Science Science 365, 79-+ (2019). 
+
+12.   G. Sansone, F. Kelkensberg, J. F. Perez-Torres, F. Morales, M. F. Kling, W. Siu, O. Ghafur, P. Johnsson, 
+
+M. Swoboda, E. Benedetti, F. Ferrari, F. Lepine, J. L. Sanz-Vicario, S. Zherebtsov, I. Znakovskaya, A. 
+L’Huillier, M. Y. Ivanov, M. Nisoli, F. Martin, M. J. J. Vrakking, Electron localization following 
+attosecond molecular photoionization. Nature 465, 763-U3 (2010). 
+
+13.   A. Fischer, A. Sperl, P. Cörlin, M. Schönwald, H. Rietz, A. Palacios, A. González-Castrillo, F. Martín, T. 
+Pfeifer, J. Ullrich, A. Senftleben, R. Moshammer, Electron Localization Involving Doubly Excited States 
+in Broadband Extreme Ultraviolet Ionization of ${\mathbf{H}}_{2}$. Phys. Rev. Lett. 110, 213002 
+(2013). 
+
+14.   L. Cattaneo, J. Vos, R. Y. Bello, A. Palacios, S. Heuser, L. Pedrelli, M. Lucchini, C. Cirelli, F. Martín, U. 
+Keller, Attosecond coupled electron and nuclear dynamics in dissociative ionization of H2. Nature 
+Physics 14, 733–738 (2018). 
+
+15.   E. Goulielmakis, Z. H. Loh, A. Wirth, R. Santra, N. Rohringer, V. S. Yakovlev, S. Zherebtsov, T. Pfeifer, 
+
+A. M. Azzeer, M. F. Kling, S. R. Leone, F. Krausz, Real-time observation of valence electron motion. 
+Nature 466, 739-U7 (2010). 
+
+16.   M. Schultze, K. Ramasesha, C. D. Pemmaraju, S. A. Sato, D. Whitmore, A. Gandman, J. S. Prell, L. J. 
+
+Borja, D. Prendergast, K. Yabana, D. M. Neumark, S. R. Leone, Attosecond band-gap dynamics in 
+silicon. Science 346, 1348–1352 (2014). 
+
+17.   B. Buades, A. Picon, I. Leon, N. Di Palo, S. L. Cousin, C. Cocchi, E. Pellegrin, J. Herrero Martin, S. 
+
+Manas-Valero, E. Coronado, T. Danz, C. Draxl, M. Uemoto, K. Yabana, M. Schultze, S. Wall, J. Biegert, 
+Attosecond-resolved petahertz carrier motion in semi-metallic TiS2. Appl. Phys. Rev. 8, 011408 (2021). 
+
+18.   T. P. H. Sidiropoulos, N. Di Palo, D. Rivas, S. Severino, M. Reduzzi, B. Buades, I. Leon, S. L. Cousin, 
+
+M. Hemmer, C. Cocchi, E. Pellegrin, J. Herrero Martin, S. Manas-Valero, E. Coronado, T. Danz, C. 
+Draxl, M. Uemoto, K. Yabana, M. Schultze, S. Wall, A. Picon, J. Biegert, Transient attosecond soft-X-ray 
+spectroscopy in layered semi-metals. Adv. Ultraf. Cond. Ph. Phys. 11346, 1134602 (2020). 
+
+19.   M. Lucchini, S. A. Sato, A. Ludwig, J. Herrmann, M. Volkov, L. Kasmi, Y. Shinohara, K. Yabana, L. 
+Gallmann, U. Keller, Attosecond dynamical Franz-Keldysh effect in polycrystalline diamond. Science 
+353, 916–919 (2016). 
+
+20.   T. P. H. Sidiropoulos, N. Di Palo, D. E. Rivas, S. Severino, M. Reduzzi, B. Nandy, B. Bauerhenne, S. 
+
+Krylow, T. Vasileiadis, T. Danz, P. Elliott, S. Sharma, K. Dewhurst, C. Ropers, Y. Joly, M. E. Garcia, M. 
+
+Wolf, R. Ernstorfer, J. Biegert, Probing the Energy Conversion Pathways between Light, Carriers, and 
+Lattice in Real Time with Attosecond Core-Level Spectroscopy. Phys. Rev. X 11, 041060 (2021). 
+
+21.   T. P. H. Sidiropoulos, N. Di Palo, D. E. Rivas, A. Summers, S. Severino, M. Reduzzi, J. Biegert, 
+
+Enhanced optical conductivity and many-body effects in strongly-driven photo-excited semi-metallic 
+graphite. Nature Comm. in press (2023). 
+
+22.   S. Svensson, B. Eriksson, N. Mårtensson, G. Wendin, U. Gelius, Electron shake-up and correlation 
+
+satellites and continuum shake-off distributions in X-Ray photoelectron spectra of the rare gas atoms. 
+Journal of Electron Spectroscopy and Related Phenomena 47, 327–384 (1988). 
+
+23.   F. Chevalier, T. Schlathölter, J.-C. Poully, Radiation-Induced Transfer of Charge, Atoms, and Energy 
+
+within Isolated Biomolecular Systems. ChemBioChem 24, e202300543 (2023). 
+
+24.   N. Sisourat, N. V. Kryzhevoi, P. Kolorenč, S. Scheit, T. Jahnke, L. S. Cederbaum, Ultralong-range energy 
+transfer by interatomic Coulombic decay in an extreme quantum system. Nature Phys 6, 508–511 (2010). 
+
+25.   T.-C. Tseng, C. Urban, Y. Wang, R. Otero, S. L. Tait, M. Alcamí, D. Écija, M. Trelka, J. M. Gallego, N. 
+Lin, M. Konuma, U. Starke, A. Nefedov, A. Langner, C. Wöll, M. Á. Herranz, F. Martín, N. Martín, K. 
+Kern, R. Miranda, Charge-transfer-induced structural rearrangements at both sides of organic/metal 
+interfaces. Nature Chem 2, 374–379 (2010). 
+
+26.   R. Otero, A. L. Vázquez de Parga, J. M. Gallego, Electronic, structural and chemical effects of charge-
+
+transfer at organic/inorganic interfaces. Surface Science Reports 72, 105–145 (2017). 
+
+27.   F. Remacle, R. D. Levine, An electronic time scale in chemistry. Proceedings of the National Academy of 
+
+Sciences 103, 6793–6798 (2006). 
+
+28.   Z.-H. Loh, S. R. Leone, Capturing Ultrafast Quantum Dynamics with Femtosecond and Attosecond X-ray 
+
+Core-Level Absorption Spectroscopy. J. Phys. Chem. Lett. 4, 292–302 (2013). 
+
+29.   C.-T. Liao, X. Li, D. Haxton, W. McCurdy, A. Sandhu, “Investigation of Non-adiabatic Molecular 
+
+Dynamics with Attosecond Transient Absorption” in Nonlinear Optics (2015), Paper NTh1A.4 (Optica 
+Publishing Group, 2015; https://opg.optica.org/abstract.cfm?uri=NLO-2015-NTh1A.4). 
+
+30.   P. M. Kraus, B. Mignolet, D. Baykusheva, A. Rupenyan, L. Horný, E. F. Penka, G. Grassi, O. I. 
+
+Tolstikhin, J. Schneider, F. Jensen, L. B. Madsen, A. D. Bandrauk, F. Remacle, H. J. Wörner, 
+Measurement and laser control of attosecond charge migration in ionized iodoacetylene. Science 350, 
+790–795 (2015). 
+
+31.   G. Griffini, L. Brambilla, M. Levi, M. Del Zoppo, S. Turri, Photo-degradation of a perylene-based organic 
+
+luminescent solar concentrator: Molecular aspects and device implications. Solar Energy Materials and 
+Solar Cells 111, 41–48 (2013). 
+
+32.   Bovensiepen, U., Petek, H., Wolf, M., Dynamics at Solid State Surfaces and Interfaces: Current 
+
+Developments (John Wiley & Sons, Ltd, 2010; 
+https://onlinelibrary.wiley.com/doi/abs/10.1002/9783527633418.fmatter)sidiropo. 
+
+33.   J. Biegert, Attosecond science: a new era for many-body physics. Europhysics News 55, 12–15 (2024). 
+
+34.   A. McPherson, G. Gibson, H. Jara, U. Johann, T. S. Luk, I. A. McIntyre, K. Boyer, C. K. Rhodes, Studies 
+of multiphoton production of vacuum-ultraviolet radiation in the rare gases. J. Opt. Soc. Am. B, JOSAB 4, 
+595–601 (1987). 
+
+35.   M. Ferray, A. L’Huillier, X. F. Li, L. A. Lompre, G. Mainfray, C. Manus, Multiple-harmonic conversion 
+
+of 1064 nm radiation in rare gases. J. Phys. B: At. Mol. Opt. Phys. 21, L31 (1988). 
+
+36.   T. Popmintchev, M. C. Chen, D. Popmintchev, P. Arpin, S. Brown, S. Ališauskas, G. Andriukaitis, T. 
+
+Balčiunas, O. D. Mücke, A. Pugzlys, A. Baltuška, B. Shim, S. E. Schrauth, A. Gaeta, C. Hernández-
+
+García, L. Plaja, A. Becker, A. Jaron-Becker, M. M. Murnane, H. C. Kapteyn, Bright coherent ultrahigh 
+harmonics in the kev x-ray regime from mid-infrared femtosecond lasers. Science 336, 1287–1291 (2012). 
+
+37.   S. L. Cousin, F. Silva, S. Teichmann, M. Hemmer, B. Buades, J. Biegert, High-flux table-top soft x-ray 
+
+source driven by sub-2-cycle, CEP stable, 1.85-mu m 1-kHz pulses for carbon K-edge spectroscopy. 
+Optics Letters 39, 5383–5386 (2014). 
+
+38.   S. M. Teichmann, F. Silva, S. L. Cousin, M. Hemmer, J. Biegert, 0.5 keV soft X-ray attosecond continua. 
+
+Nature Communications 7, 11493 (2016). 
+
+39.   E. J. Takahashi, T. Kanai, K. L. Ishikawa, Y. Nabekawa, K. Midorikawa, Coherent Water Window X Ray 
+by Phase-Matched High-Order Harmonic Generation in Neutral Media. Phys. Rev. Lett. 101, 253901 
+(2008). 
+
+40.   H. Xiong, H. Xu, Y. Fu, J. Yao, B. Zeng, W. Chu, Y. Cheng, Z. Xu, E. J. Takahashi, K. Midorikawa, X. 
+Liu, J. Chen, Generation of a coherent x ray in the water window region at 1 kHz repetition rate using a 
+mid-infrared pump source. Opt. Lett., OL 34, 1747–1749 (2009). 
+
+41.   F. Silva, S. M. Teichmann, S. L. Cousin, J. Biegert, Spatio-temporal isolation of attosecond soft X-ray 
+
+pulses in the water window. Nature Communications 6, 6611 (2015). 
+
+42.   J. Seres, E. Seres, A. J. Verhoef, G. Tempea, C. Streli, P. Wobrauschek, V. Yakovlev, A. Scrinzi, C. 
+Spielmann, F. Krausz, Source of coherent kiloelectronvolt X-rays. Nature 433, 596–596 (2005). 
+
+43.   B. Shan, Z. Chang, Dramatic extension of the high-order harmonic cutoff by using a long-wavelength 
+
+driving field. Phys. Rev. A 65, 011804 (2001). 
+
+44.   S. M. Teichmann, F. Silva, S. L. Cousin, J. Biegert, The importance of intensity to phase coupling for 
+water window high harmonic generation with few-cycle pulses. Physical Review A 91, 063817 (2015). 
+
+45.   J. Tate, T. Auguste, H. G. Muller, P. Salières, P. Agostini, L. F. Dimauro, Scaling of wave-packet 
+
+dynamics in an intense midinfrared Field. Physical Review Letters 98, 013901–013901 (2007). 
+
+46.   A. D. Shiner, Wavelength Scaling of High Harmonic Generation Efficiency. Phys. Rev. Lett. 103 (2009). 
+
+47.   D. R. Austin, J. Biegert, Strong-field approximation for the wavelength scaling of high-harmonic 
+
+generation. Physical Review A 86, 023813 (2012). 
+
+48.   M.-C. Chen, C. Mancuso, C. Hernández-García, F. Dollar, B. Galloway, D. Popmintchev, P.-C. Huang, 
+
+B. Walker, L. Plaja, A. A. Jaroń-Becker, A. Becker, M. M. Murnane, H. C. Kapteyn, T. Popmintchev, 
+Generation of bright isolated attosecond soft X-ray pulses driven by multicycle midinfrared lasers. 
+Proceedings of the National Academy of Sciences 111, E2361–E2367 (2014). 
+
+49.   Ph. Balcou, A. L’Huillier, Phase-matching effects in strong-field harmonic generation. Phys. Rev. A 47, 
+
+1447–1459 (1993). 
+
+50.   P. Balcou, P. Salières, A. L’Huillier, M. Lewenstein, Generalized phase-matching conditions for high 
+
+harmonics: The role of field-gradient forces. Phys. Rev. A 55, 3204–3210 (1997). 
+
+51.   S. Kazamias, S. Daboussi, O. Guilbaud, K. Cassou, D. Ros, B. Cros, G. Maynard, Pressure-induced phase 
+
+matching in high-order harmonic generation. Phys. Rev. A 83, 063405 (2011). 
+
+52.   F. Ardana-Lamas, G. Lambert, A. Trisorio, B. Vodungbo, V. Malka, P. Zeitoun, C. P. Hauri, Spectral 
+
+characterization of fully phase-matched high harmonics generated in a hollow waveguide for free-electron 
+laser seeding. New J. Phys. 15, 073040 (2013). 
+
+53.   B. Buades, D. Moonshiram, T. P. H. Sidiropoulos, I. León, P. Schmidt, I. Pi, N. Di Palo, S. L. Cousin, A. 
+
+Picón, F. Koppens, J. Biegert, Dispersive soft x-ray absorption fine-structure spectroscopy in graphite 
+with an attosecond pulse. Optica 5, 502–502 (2018). 
+
+54.   M. Hentschel, R. Kienberger, C. Spielmann, G. A. Reider, N. Milosevic, T. Brabec, P. Corkum, U. 
+
+Heinzmann, M. Drescher, F. Krausz, Attosecond metrology. Nature 414, 509 (2001). 
+
+55.   E. Goulielmakis, M. Uiberacker, R. Kienberger, A. Baltuska, V. Yakovlev, A. Scrinzi, T. 
+
+Westerwalbesloh, U. Kleineberg, U. Heinzmann, M. Drescher, F. Krausz, Direct measurement of light 
+waves. Science 305, 1267–1269 (2004). 
+
+56.   R. Kienberger, M. Hentschel, M. Uiberacker, C. Spielmann, M. Kitzler, A. Scrinzi, M. Wieland, T. 
+
+Westerwalbesloh, U. Kleineberg, U. Heinzmann, M. Drescher, F. Krausz, Steering attosecond electron 
+wave packets with light. Science 297, 1144–1148 (2002). 
+
+57.   H. Merdji, T. Auguste, W. Boutu, J.-P. Caumes, B. Carré, T. Pfeifer, A. Jullien, D. M. Neumark, S. R. 
+
+Leone, Isolated attosecond pulses using a detuned second-harmonic field. Opt. Lett., OL 32, 3134–3136 
+(2007). 
+
+58.   G. Sansone, E. Benedetti, F. Calegari, C. Vozzi, L. Avaldi, R. Flammini, L. Poletto, P. Villoresi, C. 
+Altucci, R. Velotta, S. Stagira, S. De Silvestri, M. Nisoli, Isolated Single-Cycle Attosecond Pulses. 
+Science 314, 443–446 (2006). 
+
+59.   Y. Mairesse, A. de Bohan, L. J. Frasinski, H. Merdji, L. C. Dinu, P. Monchicourt, P. Breger, M. Kovačev, 
+R. Taïeb, B. Carré, H. G. Muller, P. Agostini, P. Salières, Attosecond Synchronization of High-Harmonic 
+Soft X-rays. Science 302, 1540–1543 (2003). 
+
+60.   S. L. Cousin, N. Di Palo, B. Buades, S. M. Teichmann, M. Reduzzi, M. Devetta, A. Kheifets, G. Sansone, 
+
+J. Biegert, Attosecond Streaking in the Water Window: A New Regime of Attosecond Pulse 
+Characterization. Phys Rev X 7, 041030 (2017). 
+
+61.  
+
+I. Orfanos, I. Makos, I. Liontos, E. Skantzakis, B. Förg, D. Charalambidis, P. Tzallas, Attosecond pulse 
+metrology. APL Photonics 4, 080901 (2019). 
+
+62.   J. Li, X. Ren, Y. Yin, K. Zhao, A. Chew, Y. Cheng, E. Cunningham, Y. Wang, S. Hu, Y. Wu, M. Chini, 
+Z. Chang, 53-attosecond X-ray pulses reach the carbon K-edge. Nature Communications 8, 1–5 (2017). 
+
+63.   T. Gaumnitz, A. Jain, Y. Pertot, M. Huppert, I. Jordan, F. Ardana-Lamas, H. J. Wörner, Streaking of 43-
+attosecond soft-X-ray pulses generated by a passively CEP-stable mid-infrared driver. Opt. Express, OE 
+25, 27506–27518 (2017). 
+
+64.   J. Gao, M. Hasan, H. Liang, M.-S. Tsai, Y. Yuan, Z. Eisenhutt, C. H. Keitel, C.-D. Lin, Y. Liu, M.-C. 
+
+Chen, M. Han, Bright 25-attosecond light pulses reach the one atomic unit of time. arXiv 
+arXiv:2508.14774 [Preprint] (2025). https://doi.org/10.48550/arXiv.2508.14774. 
+
+65.   J. Itatani, F. Quere, G. L. Yudin, M. Y. Ivanov, F. Krausz, P. B. Corkum, Attosecond streak camera. Phys 
+
+Rev Lett 88 (2002). 
+
+66.   L. Cattaneo, J. Vos, M. Lucchini, L. Gallmann, C. Cirelli, U. Keller, Comparison of attosecond streaking 
+
+and RABBITT. Opt. Express, OE 24, 29060–29076 (2016). 
+
+67.   F. Quéré, Y. Mairesse, J. Itatani, Temporal characterization of attosecond XUV fields. Journal of Modern 
+
+Optics 52, 339–360 (2005). 
+
+68.   F. Quéré, J. Itatani, G. L. Yudin, P. B. Corkum, Attosecond Spectral Shearing Interferometry. Phys. Rev. 
+
+Lett. 90, 073902 (2003). 
+
+69.  
+
+I. A. Walmsley, C. Dorrer, Characterization of ultrashort electromagnetic pulses. Adv. Opt. Photon., AOP 
+1, 308–437 (2009). 
+
+70.   P. M. Paul, E. S. Toma, P. Breger, G. Mullot, F. Auge, P. Balcou, H. G. Muller, P. Agostini, Observation 
+
+of a train of attosecond pulses from high harmonic generation. Science 292, 1689–1692 (2001). 
+
+71.   M. Chini, S. Gilbertson, S. D. Khan, Z. Chang, Characterizing ultrabroadband attosecond lasers. Opt. 
+
+Express, OE 18, 13006–13016 (2010). 
+
+72.   V. Gruson, L. Barreau, Á. Jiménez-Galan, F. Risoud, J. Caillat, A. Maquet, B. Carré, F. Lepetit, J.-F. 
+Hergott, T. Ruchon, L. Argenti, R. Taïeb, F. Martín, P. Salières, Attosecond dynamics through a Fano 
+resonance: Monitoring the birth of a photoelectron. Science 354, 734–738 (2016). 
+
+73.   G. Laurent, W. Cao, I. Ben-Itzhak, C. L. Cocke, Attosecond pulse characterization. Opt. Express, OE 21, 
+
+16914–16927 (2013). 
+
+74.   P. D. Keathley, S. Bhardwaj, J. Moses, G. Laurent, F. X. Kärtner, Volkov transform generalized 
+projection algorithm for attosecond pulse characterization. New J. Phys. 18, 073009 (2016). 
+
+75.   A. J. Verhoef, A. V. Mitrofanov, X. T. Nguyen, M. Krikunova, S. Fritzsche, N. M. Kabachnik, M. 
+Drescher, A. Baltuška, Time-and-energy-resolved measurement of Auger cascades following Kr 3d 
+excitation by attosecond pulses. New J. Phys. 13, 113003 (2011). 
+
+76.   B. L. Henke, E. M. Gullikson, J. C. Davis, X-Ray Interactions: Photoabsorption, Scattering, 
+
+Transmission, and Reflection at E = 50-30,000 eV, Z = 1-92. Atomic Data and Nuclear Data Tables 54, 
+181–342 (1993). 
+
+77.   H. J. Lehmeier, W. Leupacher, A. Penzkofer, Nonresonant third order hyperpolarizability of rare gases 
+
+and N2 determined by third harmonic generation. Optics Communications 56, 67–72 (1985). 
+
+78.   M.-C. Chen, C. Mancuso, C. Hernández-García, F. Dollar, B. Galloway, D. Popmintchev, P.-C. Huang, 
+
+B. Walker, L. Plaja, A. A. Jaroń-Becker, A. Becker, M. M. Murnane, H. C. Kapteyn, T. Popmintchev, 
+Generation of bright isolated attosecond soft X-ray pulses driven by multicycle midinfrared lasers. 
+Proceedings of the National Academy of Sciences 111, E2361–E2367 (2014). 
+
+ 
+

@@ -1,0 +1,1011 @@
+6
+2
+0
+2
+
+r
+a
+
+M
+9
+
+]
+s
+c
+i
+t
+p
+o
+.
+s
+c
+i
+s
+y
+h
+p
+[
+
+1
+v
+3
+0
+2
+8
+0
+.
+3
+0
+6
+2
+:
+v
+i
+X
+r
+a
+
+LARGE DIFFERENTIAL ATTOSECOND DELAYS IN SOLID STATE
+PHOTOEMISSION
+
+Andreas Gebauer1, Walter Enns1, Sergej Neb2, Tillmann Schabbehard1, Luis Maschmann1, Stefan Muff3,4, J. Hugo
+Dil3,4, Ulrich Heinzmann1, Stephan Fritzsche5,6,7, Ricardo Diez Muiño8,9, Pedro M. Echenique8,9,10, Nikolay M.
+Kabachnik8,11, Eugene E. Krasovskii8,9,10, and Walter Pfeiffer1
+
+1Faculty of Physics, Bielefeld University, Universitätsstr. 25, 33615 Bielefeld, Germany
+2Department of Physics, ETH Zürich, 8093 Zürich, Switzerland
+3Center for Photon Science, Paul Scherrer Institut, CH-5232 Villigen, Switzerland
+4Institute of Physics, École Polytechnique Fédérale de Lausanne, CH-1015 Lausanne, Switzerland
+5Helmholtz-Institut Jena, Fröbelstieg 3, 07743 Jena, Germany
+6GSI Helmholtzzentrum für Schwerionenforschung GmbH, Planckstr. 1, 64291 Darmstadt, Germany
+7Theoretisch-Physikalisches Institut, Friedrich-Schiller-Universität Jena, Max-Wien-Platz 1, 07743 Jena, Germany
+8Donostia International Physics Center (DIPC), 20018 Donostia – San Sebastián, Spain
+9IKERBASQUE, Basque Foundation for Science, 48013 Bilbao, Spain
+10Universidad del País Vasco – Euskal Herriko Unibertsitatea, 20080 Donostia – San Sebastián, Spain
+11European XFEL GmbH, Holzkoppel 4, 22869 Schenefeld, Germany
+
+March 9, 2026
+
+ABSTRACT
+
+Time-resolved photoelectron spectroscopy provides access to the electronic structure and non-
+equilibrium electron dynamics in matter. At solid surfaces photoemission dynamics can be in-
+vestigated on its natural time scale by measuring attosecond time delays of emitted electrons [1].
+Photoelectrons with final state energies of several tens of eV need tens to hundreds of attoseconds to
+be released into the vacuum [2]. Competing effects determine the emission dynamics and, hence,
+the full picture of the process is still under debate [3, 4, 5, 6, 7]. The rather large energy differences
+between the final states probed in commonly reported relative photoemission delays obscure their
+complex fine structure and hinders the interpretation of the measurements. Here we report differential
+attosecond delays τDAD, i.e., relative photoemission delays for energetically close-lying spin-orbit
+split states. Differential attosecond delays on the order of 30 as to 100 as for Bi 5d, Te 4d, and
+Se 3d core level photoemission from Bi2Te3 and Bi2Se3 can neither be attributed to intra-atomic
+delays [4], nor to ballistic transport and subsequent emission. Instead, calculations based on the
+one-step photoemission theory [8] reveal that photoemission delays vary strongly on the energy scale
+of the spin-orbit splitting and quantitatively match experimental observations. This strong variation
+arises from multiple scattering at the surface leading to final states that involve both evanescent and
+propagating Bloch waves. Their relative amplitudes vary strongly affecting thereby the timing of
+the photoemission event since evanescent and propagating components exhibit inherently different
+dynamics.
+
+Introduction
+
+The emergence of attosecond XUV pulses [9, 10, 11] enabled the observation of photoemission delays in atoms [12],
+molecules [13] and solids [1] directly in the time-domain and has yielded results that challenge our understanding of the
+photoemission process and its accurate theoretical description. The most common methods of attosecond time-resolved
+photoemission spectroscopy, i.e., attosecond streaking [14, 15] and reconstruction of attosecond beating by interference
+of two-photon transitions (RABBITT) [11, 16], determine relative photoemission delays between different emission
+
+ 
+ 
+ 
+ 
+ 
+ 
+Large differential attosecond delays in solid state photoemission
+
+channels. To a large extent measured relative photoemission delays in solids were interpreted as propagation times due
+to ballistic motion of wave packets [1, 2, 3, 4, 5, 6, 17, 18, 19, 20], where the phenomenological parameters such as
+group velocity, effective mass and final state lifetime were determined from the bulk band structure. For solid state
+photoemission it was shown, that on this level of description delays obtained by RABBITT and streaking are equivalent
+[21]. Such time-resolved studies provide substantial insights into photoelectron dynamics. In particular it was revealed
+that there is an influence of resonances [3, 6, 22], final state band gaps [7], plasmonic excitations [23], electron screening
+[24] and intra-atomic many-body interactions [4] on the photoelectron dynamics. In comparing delays in photoemission
+from core levels and the valence band [1] or from core levels of different elements in a compound [4], one must take into
+account that the emission is affected by substantially different final states, so the measured delay depends on various
+factors, which generally cannot be disentangled. Here we show that for differential attosecond delays, these ambiguities
+in their interpretation can be sufficiently reduced and conclude that only the rigorous one-step photoemission theory,
+which explicitly accounts for the scattering of the emitted electron at the surface, can reproduce the observed delays.
+The trick relies on measuring the relative photoemission delay for photoemission channels that are as close as possible
+in energy and, in addition, involve final states reached from initial states with the same spatial symmetry, i.e., orbital
+angular momentum.
+
+The photoelectron dynamics inside the solid is determined by elastic and inelastic scattering in the bulk as well as at the
+bulk-vacuum interface. Bulk scattering is accounted for in the band structure, and in the most common conception of
+photoemission the photoelectron is travelling across the crystal with its group velocity vg and is either washed out of the
+measurement channel by an inelastic collision or is emitted into the vacuum half space. The short inelastic mean free
+path of photoelectrons excited by XUV photon energies [25] restricts the emission depth of observable photoelectrons to
+a few Å. In this ballistic propagation picture, the photoelectron escape time tesc is given by tesc = Λ/vg, where Λ is the
+photoelectron inelastic mean free path. Since Λ = vgτinel, with τinel being the photoelectron lifetime, vg cancels and
+tesc directly corresponds to τinel [26]. The excited electron lifetime τinel is mostly determined by the available phase
+space for electron-electron scattering and thus varies only moderately and smoothly with final state energy for energies
+far above the Fermi level [27]. Accordingly, large relative photoemission delays are only expected for large differences
+in final state energy. However, this equivalence between tesc and τinel holds only if the group velocity is a meaningful
+concept. Both for vanishing vg, for example at band edges [7], and for photoelectrons being emitted via evanescent final
+states, i.e., final states in band gaps, this simple relation may break down. This was demonstrated for a one-dimensional
+Kronig-Penney model, which revealed strong variations of tesc(Ekin) in the vicinity of band gaps and close to minima
+in the photoemission matrix element, i.e., at Cooper minima [28, 26]. Here we provide experimental evidence that
+such strong variations of tesc(Ekin) indeed occur and show that the measured differential attosecond delays τDAD can
+be attributed to the interplay between propagating and evanescent photoemission channels. This relies, both on the
+ability to measure differential attosecond delays and a quantitative theoretical model that accounts for all effects that are
+responsible for strong variations of tesc(Ekin). The latter is achieved by employing the one-step photoemission theory
+[29, 30, 31, 32, 33], which, based on the Eisenbud-Wigner-Smith time delay formalism, has been shown to account for
+the effects of band edges, evanescent emission channels in bulk band gaps, and Cooper minima [8].
+
+One-step photoemission theory fully accounts for scattering at the bulk-vacuum interface [29, 30, 31, 32, 33]. It
+describes the "click" an emitted free photoelectron causes at a detector as a transition from the ground state to a
+scattering state: The asymptotic photoelectron wave function at the detector is given by a plane wave whose complex
+amplitude is determined by the transition matrix element between the ground state and a time-reversed low-energy
+electron diffraction (TR LEED) state [34]. The TR LEED state is governed by the elastic and inelastic photoelectron
+scattering inside the solid and at the surface. This results in a structured final state continuum being distinct from
+bulk final states in an infinite periodic crystal. If, for example, the final state energy lies in a bulk continuum band
+gap, the photoelectron is, nevertheless, emitted due to evanescent waves. Thus, the dynamics inside the material and
+all interfering quantum pathways that as a result of a photoexcitation could lead to the emission of an electron are
+accounted for.
+
+Concept of differential attosecond delays
+
+The escape time of photoelectrons can be rigorously calculated by a combination of the one-step theory of photoemission
+[29, 30, 31, 32, 33, 34] and the Eisenbud-Wigner-Smith (EWS) time delay formalism (OSTEWS) [8]. Recently, it was
+shown that the photoelectron escape time determined in streaking spectroscopy agrees with the OSTEWS delay [8]
+
+τOSTEWS = ℏ d
+dE
+
+(cid:16)
+
+arg
+
+⟨Φ∗
+
+LEED| ˆHXUV|ψ0⟩
+
+(cid:17)
+
+,
+
+(1)
+
+LEED is the TR LEED state, and ˆHXUV is the dipole operator. Figure
+where ψ0 is the initial state wave function, Φ∗
+1 schematically depicts the XUV-driven photoemission for spin-orbit split initial states. For illustration, in the
+
+2
+
+Large differential attosecond delays in solid state photoemission
+
+Fig. 1: Determination of differential attosecond delays τDAD using spin-orbit split initial states. An XUV pulse
+excites photoelectrons from an atom-like initial state subject to spin-orbit splitting with the energy difference ESO
+here indicated for d-type initial core levels. The two photoemission final states (indicated by green and orange arrows)
+differentially probe tesc(Ekin) and yield τDAD. For one-step photoemission theory the TR LEED states are indicated as
+thin black lines in the continuum. They are derived for a one-dimensional finite Kronig-Penney model in the vicinity of
+a bulk band gap. The Kronig-Penney model parameters are chosen to mimic the 1D single-electron potential shown in
+the lower part. The τOSTEWS(Ekin) derived within one-step photoemission theory using the Eisenbud-Wigner-Smith
+delay formalism [8] is shown as red solid line in the left inset together with the inelastic electron lifetime τinel(Ekin)
+(blue dotted line), which varies only weakly with energy. The emission from spin-orbit split initial states leads to two
+spectral contributions in the photoelectron spectrum (right inset panel). Their relative spectral weight reflects the initial
+state degeneracy.
+
+photoemission continuum TR LEED states for final state energies close to a band gap in the continuum are depicted as
+obtained for a finite Kronig-Penney 1D model assuming inelastic scattering within the solid and no spin-orbit splitting.
+The corresponding photoelectron escape time calculated based on eq. 1 shows a strong variation with the final state
+energy (red solid line in left inset in Fig. 1), whereas the ballistic propagation model predicts an almost constant escape
+time given by the inelastic lifetime of the photoelectron τinel(Ekin) (blue dotted line in left inset in Fig. 1). For some
+final state kinetic energies, the photoelectrons are almost simultaneously emitted with the XUV excitation, whereas
+for other energies the emission is significantly delayed with respect to τinel(Ekin). Hence, accounting for scattering
+with the bulk-vacuum interface within the one-step formalism causes a non-trivial energy dependence of tesc(Ekin).
+As indicated in Fig. 1 this variability leads to large differential attosecond delays τDAD compared to almost vanishing
+τDAD given by the slope of τinel(Ekin) if the ballistic photoelectron propagation in an absorbing medium is considered.
+
+This rapid energy variation of tesc can only be probed by measuring the photoemission delays for channels that lie
+very close in energy, which is achieved by using spin-orbit split initial states. The splitting ESO of the shallow d5/2
+and d3/2 core levels in the topological insulators Bi2Te3 and Bi2Se3 is on the order of 1 eV to 3 eV [35] and thus
+allow differential probing of tesc(Ekin) on this energy scale. Note, that both photoelectron emission channels originate
+from the same emitter atom, and since the orbital angular momentum determines the selection rules, basically the
+same final states are populated in a photoexcitation. For such a small difference in kinetic energy any contribution
+from semi-classical ballistic propagation is almost completely eliminated. Hence, substantial differential attosecond
+delays in solids can only arise from a non-trivial energy-dependence of the photoelectron escape time as it is expected
+in the vicinity of band gaps in the continuum and Cooper minima [26]. Differential attosecond delays, i.e., relative
+photoemission delays for spin-orbit split initial states, allow probing the derivative of tesc(Ekin) with simultaneously
+high temporal and energy resolution.
+
+3
+
+Large differential attosecond delays in solid state photoemission
+
+Fig. 2: RABBITT measurement for Bi2Te3. a, XUV spectrum (magenta) after reflection off a broadband multilayer
+XUV-mirror with a reflectivity indicated by the gray shaded area. b, High statistics Bi2Te3 XUV-only photoelectron
+spectrum (data points) generated by the XUV-spectrum plotted in a. The error bars correspond to the standard deviation
+of the underlying Poissonian counting statistics. The fit model function (gray solid line) is the sum of four Voigt profiles
+for Bi 5d5/2 (green), Bi 5d3/2 (orange), Te 4d5/2 (red) and Te 4d3/2 (blue), each convoluted with the XUV spectrum
+(magenta) shown in a and the inelastic background calculated as iterative Shirley-Proctor-Sherwood background (pink).
+c, RABBITT spectrogram on Bi2Te3. Solid connection lines between b and c indicate the principal bands of the
+respective photoemission channels in the RABBITT spectrogram. The dashed lines indicate the corresponding 58th
+sidebands with arrows that symbolize the interfering NIR-pulse induced pathways involved.
+
+Measurement of differential attosecond delays
+
+The determination of relative photoemission delays requires to spectrally resolve the spin-orbit splitting in the attosecond
+time resolved spectroscopy. Attosecond streaking spectroscopy, which relies on the use of an isolated attosecond pulse
+(IAP) and the interaction of the emitted electrons with the field of a single NIR pulse, would completely wash out the
+spin-orbit splitting because of the large IAP spectral bandwidth of several eV. Employment of an attosecond pulse train
+(APT), as it is used in RABBITT spectroscopy, overcomes this limitation. The proper choice of the APT results in
+a spectrum of distinct harmonics with sufficiently small bandwidth. Still the sidebands induced by the near infrared
+(NIR) pulse for the spin-orbit split states overlap. Hence, for the determination of differential attosecond delays we rely
+on a recently demonstrated method for the evaluation of RABBITT spectrograms that yields reliable delays even for
+highly convoluted spectra, i.e., spectral features for which emission channels corresponding to different harmonics in an
+attosecond pulse train (APT) and NIR-field induced sideband overlap [36].
+
+4
+
+Large differential attosecond delays in solid state photoemission
+
+The involved XUV attosecond pulse train consists of the 57th (ℏωHH57 = 90.6 ± 0.4 eV) and 59th (ℏωHH59 =
+93.8 ± 0.4 eV) harmonics of a NIR fs-laser pulse (Fig. 2a), where the specified photon energy uncertainty reflects
+the variation of the harmonics’ peak positions of the complete measurement campaign. With these XUV photon
+energies photoemission from Bi 5d and Te 4d core levels in Bi2Te3 and Se 3d in Bi2Se3, respectively, is observable.
+Fig. 2b shows the photoelectron spectrum of Bi2Te3 excited by the APT (black data points). Details of the analysis
+of the photoemission spectrum can be found in the methods section. In the RABBITT experiments (Fig. 2c) the
+APT and the NIR pulse are brought into spatio-temporal overlap on the sample surface. This leads to laser-assisted
+photoemission sidebands [37] shifted by the NIR photon energy ℏωNIR = ±1.59 ± 0.01 eV. However, there are two
+quantum pathways leading to the 58th sideband, i.e. absorption of a photon of the 57th harmonic plus subsequent
+absorption of an NIR photon at the surface and absorption of a photon of the 59th harmonic plus emission of an NIR
+photon. Due to quantum path interference with varying relative phase, the photoemission intensity in the 58th sideband
+oscillates as a function of delay between XUV-APT and NIR pulse [16, 38]. In the experimental geometry the NIR
+field component perpendicular to the surface is strongly suppressed inside the material. Hence, the sideband formation
+happens only after the photoelectron has been emitted into the vacuum and the resulting RABBITT delays correspond
+to relative photoelectron escape times tesc.
+
+The spin-orbit splitting of ESO(Bi5d) = 3.05 eV for the Bi 5d core level leads to a clear separation of the 58th sidebands
+of Bi 5d3/2 at Ekin = 60.4 ± 0.4 eV and Bi 5d5/2 at Ekin = 63.5 ± 0.4 eV, respectively. In the same way the 58th
+sidebands corresponding to Te 4d3/2 at Ekin = 47.0 ± 0.4 eV and Te 4d5/2 at Ekin = 48.4 ± 0.4 eV can be identified.
+Since spin-orbit splitting and NIR photon energy are on the same order of magnitude, Fig. 2c shows a multitude of
+overlapping photoelectron peaks in the RABBITT spectrogram. The RABBITT delays are determined by a recently
+demonstrated method to disentangle overlapping RABBITT spectrograms [36] that combines the complex fit method
+[39] with fixed phase and amplitude relations between sidebands and principal bands in RABBITT spectrograms.
+
+Evaluation of 213 individual RABBITT measurements on four Bi2Te3 samples leads to a weighted mean value of the
+Bi 5d differential attosecond delay of τ Bi5d
+DAD = 30 ± 13 as, where the error corresponds to the standard deviation of all
+measurements. Note that the individual delays in all cases are normal distributed and show no trend with the time after
+cleavage (see Methods section and Supplementary Information Fig. 4 for the statistical distribution of the individual
+τDAD values). The corresponding Te 4d differential attosecond delay is determined as τ Te4d
+DAD = −39 ± 18 as. Literally
+this means that photoelectrons from the Bi 5d5/2 initial state are emitted 30 as later into the vacuum than those from
+the Bi 5d3/2 state, while photoelectrons from Te 4d5/2 are emitted 39 as earlier than those from Te 4d3/2. Analogous
+RABBITT measurements on three Bi2Se3 samples yield τ Bi5d
+DAD = −93 ± 83 as. The weak Se
+3d photoemission yield together with a strong secondary electron background leads to the rather large uncertainty of
+τ Se3d
+DAD. For a summary of all determined relative photoemission delays see Supplementary Information Tab. 1.
+
+DAD = 31 ± 10 as and τ Se3d
+
+Exclusion of ballistic transport and intraatomic delays
+
+Photoelectrons from d3/2 and d5/2 initial states of the same inner shell effectively originate from the same emitter atom
+and are created with almost the same kinetic energy. Nevertheless, the differential attosecond delays are on the same
+order of magnitude as relative photoelectron delays in previous studies [1, 2, 3, 4, 5, 6, 17, 18, 19, 20], which probe
+relative delays with significantly different final state energies and sometimes different final state continua reached from
+initial states with different orbital angular momentum. For typical values of the final state lifetime [27] a difference
+in the inelastic lifetime τinel in the order of 30 as would correspond to an unprecedented and unexpected variation of
+its absolute value by up to about 30 % for energy differences of a few eV. Moreover, by solving the time-dependent
+Schrödinger equation for a Jellium model including electron-hole interaction and IR-field penetration into the material
+[40] or ballistic propagation models we obtain differential attosecond delays for Bi2Te3 and Bi2Se3 that do not exceed
+three attoseconds for a broad parameter range. Accordingly, all differential attosecond delays that are accessible in the
+present experiment for Bi2Te3 and Bi2Se3 cannot be explained based on the ballistic picture of photoelectron transport,
+which predicts negligible relative delays for emission channels with such small final state energy differences.
+
+In addition to the transport of the photoelectron from the emitter atom to the material-vacuum interface intraatomic
+delays can contribute to tesc. This has been demonstrated for relative photoemission delays in WSe2, which are
+influenced by the intraatomic centrifugal barrier inside the emitter atom and differ for different initial state angular
+momenta [4]. Both the close agreement of the Bi 5d differential attosecond delay of about 30 as in Bi2Te3 and Bi2Se3
+and the fact, that for gas phase photoionization emission delays up to several tens of attosecond between spin-orbit-split
+components in noble gas atoms [41, 42, 43] and molecules [44] were reported, suggest that also in the present case
+intraatomic delays could be relevant. In these gas phase experiments the RABBITT NIR probe field acts directly at the
+location of the emitter atom and the XUV photon energies are small enough to reveal significant spin-orbit delays. In
+contrast, in solid state photoemission as performed in the present investigation the NIR probe field interacts with the
+emitted electron only after the emission into the vacuum, i.e., the measured τDAD reflects the intra-atomic processes
+
+5
+
+Large differential attosecond delays in solid state photoemission
+
+and the transport induced delays. Since gas phase photoionization experiments for Bi atoms are not feasible we employ
+relativistic ab initio calculations of the photoionization time-delay for gas phase atoms using the single-configuration
+Dirac-Fock method [45], which accounts for all relativistic effects including spin-orbit interaction. The predicted
+relative photoionization delays between d5/2 and d3/2 shells for the various core levels probed are typically smaller
+than five attoseconds in the photon energy range employed in our experiment. For photon energies similar to those used
+in the gas phase spin-orbit delay measurements [41] our calculations reveal larger relative delays in the order of several
+tens of attoseconds. This confirms that intraatomic delays could become relevant for small enough photon energies but
+can be excluded to be responsible for the differential attosecond delays reported here. Hence, the spin-orbit delays
+determined in atomic gases and the differential attosecond delays reported here are determined by different physical
+mechanisms. Accordingly, we now exclude both intraatomic delays as well as delays arising from ballistic electron
+propagation to explain the here reported large values for differential attosecond delays.
+
+One step theory for τDAD
+
+To overcome the intrinsic limitations of the ballistic propagation model for photoemission we determined τDAD for
+both materials as function of the XUV photon energy by taking the difference between absolute photoemission delays
+of d5/2 and d3/2 photoelectrons that were calculated based on the OSTEWS theory [8] (for details see Methods).
+Here, we calculated initial and final state wave functions by means of density functional theory (DFT) in local density
+approximation (LDA). The TR LEED states are calculated by the augmented-plane-wave method [34, 46].
+
+The determined τDAD-curves are shown as function of photon energy for Bi2Te3 and Bi2Se3 in Fig. 3a and b,
+respectively. Within the uncertainties of theory and experiment the τDAD values for the four different core-level
+photoemission channels probed in Bi2Te3 and Bi2Se3 determined via RABBITT spectroscopy (red data points in
+Fig. 3) agree quantitatively with the theoretically determined τDAD for the given XUV photon energy. Note that the
+relative photoemission delays between Bi 5d and Te 4d or Se 3d photoemission channels, respectively, which are
+measured simultaneously with the τDAD, also agree well with the corresponding OSTEWS values (see Supplementary
+Information Fig. 6). It indicates that the observed large differential attosecond delays are not a peculiarity of this
+specific XUV photon energy, but a very general property of solid-state photoemission dynamics, at least for the here
+studied material systems. Moreover, it suggests that the almost identical differential attosecond delay of Bi 5d in Bi2Te3
+and Bi2Se3 is coincidental. Although highly desirable, probing the large variability of τDAD as function of the XUV
+photon energy is not feasible in the present experimental setup. Hence, the OSTEWS theory accounts for the observed
+large differential attosecond delays observed in the experiment and, as discussed in the following, provides further
+insight in the mechanisms that are responsible for such large differential delays.
+
+The OSTEWS τDAD show both large variability as function of the XUV photon energy and τDAD values reaching
+values well beyond ±200 as, for example for the Te 4d emission in Bi2Te3. Hence the theory provides evidence that
+photoemission final states that differ in final state energy in the order of 1 eV to 3 eV, i.e., the spin orbit splitting
+energy of the initial states, exhibit largely different photoelectron escape times, which are here probed differentially.
+Additionally, the calculations show that τOSTEWS, i.e., the one step theory prediction for tesc, as functions of final state
+energy are practically identical for d5/2 and d3/2 photoelectrons (Supplementary Information Fig. 7). This further
+confirms that intraatomic delays due to spin-orbit interaction are negligible. Instead, due to their difference in binding
+energy d5/2 and d3/2 photoelectrons are excited to different energies in the final state continuum, thereby probing the
+photoelectron escape time at different final state energies.
+
+The actual values of OSTEWS τDAD are influenced by the choice of the only free parameter in these calculations, i.e.,
+the optical potential Vopt, which accounts for the inelastic scattering of the photoelectrons inside the solid. The optical
+potential is related to τinel of the excited electrons via Vopt = ℏ/2τinel. The chosen values 1 eV and 2 eV correspond to
+τinel of 329 as and 165 as, respectively. These values lie in the range expected for the given final state energies in the
+experiment [26]. The larger τinel applies preferentially for smaller final state energies and vice versa. Note, that an
+increasing Vopt leads not only to an expected smearing out of spectral structure in the τDAD-curves, but also changes
+features qualitatively, as it is for example obvious at 72 eV photon energy for τ Bi5d
+DAD in Bi2Te3 (Fig. 3a upper panel).
+A large negative τDAD of about −100 as changes to an equally large positive τDAD as Vopt increases by 1 eV. This
+can be understood by the optical potential Vopt and how it differently affects the TR LEED states with predominantly
+evanescent or propagating character. For vanishing Vopt evanescent TR LEED states decay towards the bulk, whereas
+propagating TR LEED states are current-carrying and delocalized in the material and exhibit an exponential decay only
+for finite Vopt. Hence, an increase of Vopt increases the relative weight of evanescent emission channels and thus can
+significantly alter spectral features in the τDAD-curves.
+
+Evanescent waves appear in all types of wave mechanics ranging from acoustics, electromagnetic waves to quantum
+mechanics. They are characterized by imaginary wave vector components and arise from classically forbidden processes
+
+6
+
+Large differential attosecond delays in solid state photoemission
+
+Fig. 3: Comparison of theoretical and observed differential attosecond delays. a and b, τDAD as function of
+the XUV photon energy for Bi2Te3 and Bi2Se3, respectively. The XUV photon energy here corresponds to the even
+harmonic between the two odd harmonics employed for RABBITT spectroscopy. The black dashed and solid lines
+correspond to τDAD calculated in the OSTEWS theory assuming Vopt of 1 eV and 2 eV, respectively. The gray shaded
+areas along each line reflect a ±1 eV uncertainty of the absolute energies of the involved Kohn-Sham quasi-particle
+initial and final state energies derived in LDA based DFT. The data points (in red) are the τDAD observed in the
+RABBITT experiments. They are determined by the weighted mean values of all experiments and error bars correspond
+to the weighted standard deviations.
+
+such as for example quantum mechanical tunneling through a potential barrier. The analysis of the group delays of
+tunneling wave packets or dwell times of particles in potential barriers consistently reveal the advancement of wave
+packets in tunnel barriers [47, 48, 49]. The availability of ultrashort laser pulses has enabled studying this advancement
+of evanescent waves directly in the time domain for light propagation in band gaps of photonic crystals [50], atomic
+tunnel ionization [51, 52] and atoms tunneling through an optical barrier [53]. Assuming that the same holds for
+photoemission channels, the large variability seen in OSTEWS τDAD (Fig. 3) is attributed to the large difference in the
+emission dynamics for emission channels within band gaps and at band edges. Emission via evanescent TR LEED states
+in band gaps is advanced, whereas the emission via states at band edges is significantly delayed due to the vanishing
+group velocity exactly at the band edge. Hence, advancement and increased delay could appear for energetically close
+lying photoemission final states. Note that the mixing of these effects in case of small band gaps leads to rather complex
+variations of the escape time [26]. In particular for the rather complex continuum band structure of the materials studied
+here an identification of band gaps and band edges is impossible. Still the large variability of OSTEWS τDAD and
+in particular its variation with the optical potential shows that the two prototypical cases of ballistic and evanescent
+transport can be qualitatively distinguished and give rise to the large τDAD reported here.
+
+Conclusions
+
+In summary, we reported the first experimental observation of differential attosecond delays employing spin-orbit-split
+core levels as initial states in a solid via RABBITT measurements. They probe the variation of the emission dynamics
+
+7
+
+Large differential attosecond delays in solid state photoemission
+
+with unprecedented energy resolution. The reported delays in the order of several tens of attoseconds are of the same
+magnitude as relative delays between different core level photoelectrons initially localized at different atomic species in
+a compound material. This observation alone proves that the picture of photoelectrons propagating like nearly-free
+electrons with well-defined group velocities inside the solid has to be abandoned. To accurately predict photoemission
+delays it is inevitable to account for the surface-induced breaking of the lattice periodicity. The resulting structured final
+state continuum consists of evanescent and propagating waves and their largely varying relative weight is responsible for
+the large differential attosecond delays. Hence, it is the complicated multiple scattering of the outgoing photoelectron in
+the presence of the surface that determines how long it takes for a photoelectron to be emitted from the solid into the
+vacuum.
+
+Methods
+
+Experimental Setup
+
+30 fs near-infrared pulses (790 nm center wavelength) are generated by a commercial Ti:sapphire-based laser system
+(Femtopower PRO) at a repetition rate of 3 kHz. The laser pulse is temporally compressed to 18 fs by subsequent
+spectral broadening via self-phase modulation in a neon-filled hollow core fiber (1 m length, 250 µm core diameter,
+400 mbar Ne gas pressure) and spectral phase control in a chirped mirror compressor.
+
+XUV pulses are generated via high harmonic generation in a neon gas target inside a vacuum chamber. A differential
+pumping scheme reduces the base pressure from the HHG target along the beam path by twelve orders of magnitude to
+10 × 10−10 mbar at the sample position. XUV and NIR pulses propagate collinearly, while the XUV beam diverges
+much less than the NIR beam. Both beams are spatially separated by a 150 nm thick Zr foil glued on a pellicle iris
+whose diameter matches the XUV beam diameter. The NIR beam passes outside the Zr foil forming a ring-shaped beam
+whose intensity on the sample is controlled via a neutral density filter and an iris. Both beams are incident on a co-axial
+spherical double mirror assembly. The NIR beam is focused by the outer part of the double mirror onto the sample
+(125 mm focal length) while the XUV beam is focused by the inner part. The inner part of the double mirror assembly
+acts as a spectral filter via a Mo-Si multilayer coating with a reflection maximum at 91.2 eV and 5.8 eV bandwidth.
+It therefore only reflects the 57th and 59th harmonics (Fig. 2a). This spectral filtering forms attosecond pulse trains
+(APTs) that consist of exactly two adjacent odd-order harmonics located at 90.6 ± 0.4 eV and 93.8 ± 0.4 eV. Moreover,
+the inner mirror is mounted on a high-precision piezo-driven delay stage that controls the delay between APT and NIR
+pulse.
+Both pulses are p-polarized and incident on the sample surface in an 85◦ angle with respect to the surface normal.
+Photoelectrons are detected in normal emission direction in a field-free time-of-flight spectrometer with an acceptance
+angle of ±3◦. The spectrometer energy axis was calibrated using Auger lines in the Xe photoelectron spectrum.
+Residual magnetic fields at the sample position are compensated to <1 µT using three Helmholtz coils.
+
+Every RABBITT measurement contains 200 delay steps with a delay step size of approximately 70 as.
+
+Sample preparation
+
+Bi2Te3 bulk crystals were grown by a collaborator by the Bridgeman method and CVT grown Bi2Se3 bulk crystals
+were purchased [54]. The crystals were in-situ cleaved in ultra-high vacuum at a base pressure <10 × 10−10 mbar. In
+total 213 individual RABBITT measurements on four different Bi2Te3 samples and 187 RABBITT measurements on
+three different Bi2Se3 samples were performed. After every RABBITT measurement a high statistics photoelectron
+spectrum without temporal overlap between XUV and NIR pulses was recorded to observe possible changes in the
+photoelectron spectrum due to surface contamination. However, no significant changes in photoelectron spectra and
+delays (Supplementary Information Fig. 4 and Fig. 5) were observed within the first 144 hours after cleaving, indicating
+that the cleaved surfaces remained stable for the entire measurement period. All measurements were performed at room
+temperature.
+
+Modeling the photoelectron spectrum in absence of the NIR pulse
+
+To disentangle contributions from different photoemission channels and different harmonic orders within the XUV pulse
+train, a high-resolution XPS spectrum of a Bi2Te3 sample from the same batch was measured at the Surface/Interface
+Science beamline of the Swiss Light Source facility with monochromatic synchrotron radiation at a photon energy of
+91 eV. In the region of interest four core level photoemission channels in Bi2Te3 (Te 4d3/2, Te 4d5/2, Bi 5d3/2 and Bi
+5d5/2) could be identified. This XPS spectrum was used to determine binding energies, linewidths and intensity ratios
+by fitting a Voigt profile to each peak and a two-parameter Shirley-Proctor-Sherwood background [55].
+
+8
+
+Large differential attosecond delays in solid state photoemission
+
+In the analysis of the high statistics XUV-only photoelectron spectrum excited by the APT (Fig. 2b) all Voigt profile
+parameters were kept fixed. The sum of the four Voigt profiles is convolved with the XUV spectrum consisting
+of a series of five Gaussians (Fig. 2a). The peak positions, widths and intensities of the Gaussians as well as the
+Shirley-Proctor-Sherwood background parameters were the only free fit parameters in the model function (Gray line in
+Fig. 2b), resulting in a good agreement with the measured photoelectron spectrum.
+
+Since the Bi 5d spin-orbit splitting of 3.05 eV is very close to the energy difference between the two harmonics in the
+XUV spectrum, i.e. 2ℏωNIR = 3.18 eV, a triple peak structure appears in the region of the Bi 5d peaks. However, the
+Te 4d spin-orbit splitting of 1.47 eV is close to the fundamental photon energy of 1.59 eV, yielding clearly discernible
+peaks in the high statistics measurement out of temporal overlap with the NIR pulse, but overlapping and almost
+π-shifted sideband oscillations in the RABBITT spectrogram (Fig. 2c).
+
+Bi2Se3 was treated in a similar way with peak parameters taken from literature [56].
+
+RABBITT delay extraction
+
+The RABBITT delays were extracted following an approach based on the complex fit method [39] including additional
+constraints for phase and amplitude relations between sidebands and principal bands that were recently suggested by
+some of the authors and validated for simulated data [36]. The RABBITT spectrogram raw data was Fourier transformed
+along the NIR-XUV-delay axis via non-uniform discrete Fourier transform (NUDFT) considering the non-uniformity
+of the piezo-stage step size. To avoid artifacts from the finite measurement range, the time-domain raw data was
+multiplied with a Kaiser-Bessel window function with window parameter β = 4 and zero-padded. The 2fNIR peak
+was individually determined in every measurement with fNIR being the NIR pulse center frequency. The frequency
+domain data was then spectrally filtered at 2fNIR by an eighth-order super-Gaussian with a full width half maximum of
+100 THz and integrated along the frequency axis to yield the frequency integrated RABBITT spectrum Z(Ekin), i.e.
+
+Z(Ekin) =
+
+(cid:90) ∞
+
+I(f, Ekin)e−256 ln(2)
+
+(cid:16) f −2fNIR
+FWHM
+
+(cid:17)8
+
+df,
+
+(2)
+
+−∞
+
+with I(f, Ekin) being the Fourier transform of the RABBITT photoemission raw data. The influence of window
+function, zero-padding and spectral filter bandwidth on the RABBITT delays was carefully investigated. It did not
+shift the mean delay values significantly, but this choice of filters and parameters reduced the standard deviation of
+data points considerably. For every kinetic energy Z(Ekin) is a complex number whose amplitude corresponds to the
+amplitude of the 2fNIR photoemission intensity oscillation and whose phase describes its phase shift with respect to the
+origin of the NIR-XUV delay axis.
+
+Making use of both the fixed RABBITT phase and amplitude relations [36], the frequency filtered and integrated data
+Z(Ekin) is fitted by a model function
+(cid:88)
+
+−In,57(Ekin) + 2In,58(Ekin) − In,59(Ekin)
+2
+
+An,58eiφn,58,
+
+Zfit(Ekin) =
+
+(3)
+
+n
+
+where n is an index for a specific photoemission channel and An,58 and φn,58 = 2ENIR
+τn,58 are its RABBITT
+oscillation amplitude and phase, respectively. In,q(Ekin) is the peak function corresponding to the photoelectron peak
+associated with photoemission channel n at the q-th sideband or principal band. This peak function was determined
+for every measurement from a high statistics XUV-only photoelectron spectrum as described in the previous section.
+Therefore, the delay extraction of each photoemission channel relies on only two independent fit parameters for each
+photoemission channel. The delay difference between two photoemission channels n and m is then given by
+
+ℏ
+
+τn−m = ℏ φn,58 − φm,58
+
+2ENIR
+
+.
+
+(4)
+
+The NIR photon energy is determined from the photoelectron peak positions by En,59−En,57
+
+2
+
+.
+
+To validate the application of the fixed RABBITT phase and amplitude relations, the delay extraction of the Bi 5d
+differential attosecond delay provides a benchmark because both contributions can be clearly separated. If the fixed
+relations are dropped, the average τ Bi5d
+DAD of all RABBITT measurements on Bi2Te3 yields 24 ± 12 as, which agrees
+within the error bar with the results for fixed phase relations. Instead, the overlapping peaks of Te 4d result in a
+significantly larger standard deviation of the differential attosecond delay if the phase and amplitude relations are
+dropped and their application is clearly beneficial.
+
+Error bars
+
+We estimated the influence of photoemission counting statistics by taking one RABBITT measurement and generating
+100 samples of the same measurement by adding random numbers to it. These random numbers follow Poisson statistics
+
+9
+
+NIR
+(cid:113)
+
+Large differential attosecond delays in solid state photoemission
+
+with a variance that is given by the number of photoelectrons detected in an energy channel in the original measurement.
+Evaluation of these 100 artificial RABBITT data sets revealed that the mean delay values are still equal to the original
+delay value. The variance of data points across these 100 samples is smaller than the variances of the fit parameters.
+From these findings we concluded that the photoelectron spectrometer integration time is sufficient to exclude counting
+statistics as the limiting factor. Moreover, this allows to use the fit parameter variances as estimates for the error bars of
+the individual measurements. The delay difference error of an individual RABBITT measurement is therefore estimated
+by Gaussian error propagation from Eq. 4 to
+
+∆τn−m =
+
+(cid:115)(cid:18) ℏ
+
+2ENIR
+
+(cid:19)2
+
+∆φn,58
+
++
+
+(cid:18) ℏ
+
+2ENIR
+
+(cid:19)2
+
+∆φm,58
+
++
+
+(cid:18) ℏ (φn,58 − φm,58)
+2E2
+
+(cid:19)2
+
+∆ENIR
+
+,
+
+(5)
+
+(∆En,57)2 + (∆En,59)2, where
+with ∆φn,58 being the standard deviation of the φn,58 fit parameter and ∆ENIR = 1
+2
+∆En,q is the fit parameter standard deviation from the XUV-only photoelectron spectrum. All delay differences given
+in the main text are weighted mean values of 213 RABBITT measurements in case of Bi2Te3 and 187 RABBITT
+measurements in case of Bi2Se3. They are calculated via
+
+⟨τ ⟩ =
+
+N
+(cid:88)
+
+i
+
+τi
+∆τ 2
+i
+
+(cid:44) N
+(cid:88)
+
+i
+
+1
+∆τ 2
+i
+
+,
+
+(6)
+
+where τi ± ∆τi is the RABBITT delay of the i-th RABBITT measurement and N is the number of measurements. The
+errors of the weighted mean delays in the main text are given by the weighted standard deviation of the ensemble of all
+measurements [57]
+
+(cid:118)
+(cid:117)
+(cid:117)
+(cid:116)
+
+N
+N − 1
+
+(cid:32) N
+(cid:88)
+
+i
+
+τ 2
+i
+∆τ 2
+i
+
+(cid:44) N
+(cid:88)
+
+i
+
+1
+∆τ 2
+i
+
+(cid:33)
+
+− ⟨τ ⟩2
+
+.
+
+(7)
+
+σ =
+
+Calculation of OSTEWS delays
+
+The Wigner time delay of the photoelectrons emitted from the semi-core d3/2 and d5/2 states was calculated within
+the framework of the one-step theory [8]. The electronic structure of the occupied states was obtained within the
+density functional theory with the relativistic effects included in second-variational two-component Koelling-Harmon
+approximation [58]. All calculations were performed with the extended augmented plane waves method [46]. In view of
+the atomic-like nature of the photoemission initial states they were calculated as eigenstates of a one-formula-unit-thick
+isolated slab (quintuple layer). The time-reversed LEED states were calculated in the scalar-relativistic approximation
+for a semi-infinite crystal terminated by a potential step [34]. The excitation amplitudes were calculated in the dipole
+approximation as momentum matrix elements for the polarization vector perpendicular to the crystal surface. The
+energy derivative of the phase of the matrix element yields the photoelectron’s arrival time at a reference plane assuming
+that the equation of motion of the outgoing wave packet in vacuum can be extrapolated to that plane. In the present
+calculation the plane was located half the van der Waals gap above the outermost atomic layer. For comparison with
+experimental data (Fig. 3 and Fig. 6) the convolution of the OSTEWS delay and a Gaussian with full width half
+maximum (FWHM) equal to the FWHM of the respective RABBITT sideband peaks is calculated.
+
+References
+
+[1] Cavalieri, A. L. et al. Attosecond spectroscopy in condensed matter. Nature 449, 1029 (2007).
+[2] Ossiander, M. et al. Absolute timing of the photoelectric effect. Nature 561, 374 (2018).
+[3] Tao, Z. et al. Direct time-domain observation of attosecond final-state lifetimes in photoemission from solids.
+
+Science 353, 62 (2016).
+
+[4] Siek, F. et al. Angular momentum–induced delays in solid-state photoemission enhanced by intra-atomic interac-
+
+tions. Science 357, 1274 (2017).
+
+[5] Kasmi, L. et al. Effective mass effect in attosecond electron transport. Optica 4, 1492 (2017).
+[6] Riemensberger, J. et al. Attosecond Dynamics of sp-Band Photoexcitation. Phys. Rev. Lett. 123, 176801 (2019).
+[7] Potamianos, D. et al. Attosecond chronoscopy of the photoemission near a bandgap of a single-element layered
+
+dielectric. Sci. Adv. 10, eado0073 (2024).
+
+[8] Kuzian, R. O. & Krasovskii, E. E. One-step theory of photoelectron escape time: Attosecond spectroscopy of
+
+Mg(0001). Phys. Rev. B 102, 115116 (2020).
+
+10
+
+Large differential attosecond delays in solid state photoemission
+
+[9] Drescher, M. et al. X-ray Pulses Approaching the Attosecond Frontier. Science 291, 1923 (2001).
+[10] Hentschel, M. et al. Attosecond metrology. Nature 414, 509 (2001).
+[11] Paul, P. M. et al. Observation of a Train of Attosecond Pulses from High Harmonic Generation. Science 292,
+
+1689 (2001).
+
+[12] Schultze, M. et al. Delay in Photoemission. Science 328, 1658 (2010).
+[13] Sansone, G. et al. Electron localization following attosecond molecular photoionization. Nature 465, 763 (2010).
+[14] Itatani, J. et al. Attosecond Streak Camera. Phys. Rev. Lett. 88, 173903 (2002).
+[15] Kienberger, R. et al. Steering attosecond electron wave packets with light. Science 297, 1144 (2002).
+[16] Muller, H. G. Reconstruction of attosecond harmonic beating by interference of two-photon transitions. Appl.
+
+Phys. B 74, s17 (2002).
+
+[17] Neppl, S. et al. Attosecond Time-Resolved Photoemission from Core and Valence States of Magnesium. Phys.
+
+Rev. Lett. 109, 087401 (2012).
+
+[18] Neppl, S. et al. Direct observation of electron propagation and dielectric screening on the atomic length scale.
+
+Nature 517, 342 (2015).
+
+[19] Locher, R. et al. Energy-dependent photoemission delays from noble metal surfaces by attosecond interferometry.
+
+Optica 2, 405 (2015).
+
+[20] Heinrich, S. et al. Attosecond intra-valence band dynamics and resonant-photoemission delays in W(110). Nat.
+
+Commun. 12, 3404 (2021).
+
+[21] Gebauer, A. et al. Equivalence of RABBITT and Streaking Delays in Attosecond-Time-Resolved Photoemission
+
+Spectroscopy at Solid Surfaces. Appl. Sci. 9, 592 (2019).
+
+[22] Borisov, A. G., Sánchez-Portal, D., Kazansky, A. K. & Echenique, P. M. Resonant and nonresonant processes in
+
+attosecond streaking from metals. Phys. Rev. B 87, 121110 (2013).
+
+[23] Lemell, C. et al. Real-time observation of collective excitations in photoemission. Phys. Rev. B 91, 241101 (2015).
+[24] Chen, C. et al. Distinguishing attosecond electron–electron scattering and screening in transition metals. Proc.
+
+Natl. Acad. Sci. 114, E5300 (2017).
+
+[25] Tanuma, S., Powell, C. J. & Penn, D. R. Calculations of electron inelastic mean free paths. IX. Data for 41
+
+elemental solids over the 50 eV to 30 keV range. Surf. Interface Anal. 43, 689 (2011).
+
+[26] Krasovskii, E. E., Friedrich, C., Schattke, W. & Echenique, P. M. Rapid propagation of a Bloch wave packet
+
+excited by a femtosecond ultraviolet pulse. Phys. Rev. B 94, 195434 (2016).
+
+[27] Silkin, V. M., Krasovskii, E. E., Chulkov, E. V. & Echenique, P. M. Dynamics and mean-free path of electronic
+
+excitations in WSe2. Surf. Sci. 678, 72 (2018).
+
+[28] Krasovskii, E. E. Attosecond spectroscopy of solids: Streaking phase shift due to lattice scattering. Phys. Rev. B
+
+84, 195106 (2011).
+
+[29] Adawi, I. Theory of the Surface Photoelectric Effect for One and Two Photons. Phys. Rev. 134, A788 (1964).
+[30] Mahan, G. D. Theory of Photoemission in Simple Metals. Phys. Rev. B 2, 4334 (1970).
+[31] Caroli, C., Lederer-Rozenblatt, D., Roulet, B. & Saint-James, D. Inelastic Effects in Photoemission: Microscopic
+
+Formulation and Qualitative Discussion. Phys. Rev. B 8, 4552 (1973).
+
+[32] Feibelman, P. J. & Eastman, D. E. Photoemission spectroscopy — Correspondence between quantum theory and
+
+experimental phenomenology. Phys. Rev. B 10, 4932 (1974).
+[33] Pendry, J. B. Theory of photoemission. Surf. Sci. 57, 679 (1976).
+[34] Krasovskii, E. E. & Schattke, W. Calculation of the wave functions for semi-infinite crystals with linear methods
+
+of band theory. Phys. Rev. B 59, R15609 (1999).
+
+[35] Thompson, A. C. et al. X-Ray Data Booklet. (Lawrence Berkeley National Laboratory, Berkeley, California,
+
+2001).
+
+[36] Gebauer, A., Schabbehard, T., Maschmann, L. & Pfeiffer, W. Disentanglement of overlapping spectrograms in
+
+attosecond time-resolved photoelectron spectroscopy of solids. Phys. Rev. B 111, 125146 (2025).
+
+[37] Miaja-Avila, L. et al. Laser-assisted photoelectric effect from surfaces. Phys. Rev. Lett. 97, 113604 (2006).
+[38] Véniard, V., Taïeb, R. & Maquet, A. Phase dependence of (N+1)-color (N>1) ir-uv photoionization of atoms with
+
+higher harmonics. Phys. Rev. A 54, 721 (1996).
+
+11
+
+Large differential attosecond delays in solid state photoemission
+
+[39] Jordan, I. & Wörner, H. J. Extracting attosecond delays from spectrally overlapping interferograms. J. Opt. 20,
+
+024013 (2018).
+
+[40] Kazansky, A. K. & Echenique, P. M. One-Electron Model for the Electronic Response of Metal Surfaces to
+
+Subfemtosecond Photoexcitation. Phys. Rev. Lett. 102, 177401 (2009).
+
+[41] Jordan, I. et al. Spin-orbit delays in photoemission. Phys. Rev. A 95, 013404 (2017).
+[42] Zhong, S. et al. Attosecond electron–spin dynamics in Xe 4d photoionization. Nat. Commun. 11, 5042 (2020).
+[43] Ge, P. et al. Probing the Spin-Orbit Time Delay of Multiphoton Ionization of Kr by Bicircular Fields. Phys. Rev.
+
+Lett. 126, 223001 (2021).
+
+[44] Grafstrom, B. et al. Relativistic effects in molecular photoemission delays. Phys. Rev. A 110, L061101 (2024).
+[45] Fritzsche, S. The Ratip program for relativistic calculations of atomic transition, ionization and recombination
+
+properties. Comput. Phys. Commun. 183, 1525 (2012).
+
+[46] Krasovskii, E. E. Accuracy and convergence properties of the extended linear augmented-plane-wave method.
+
+Phys. Rev. B 56, 12866 (1997).
+
+[47] Hartman, T. E. Tunneling of a Wave Packet. J. Appl. Phys. 33, 3427 (1962).
+[48] Hauge, E. H. & Stoveng, J. A. Tunneling times: a critical review. Rev. Mod. Phys. 61, 917 (1989).
+[49] Winful, H. G. Tunneling time, the Hartman effect, and superluminality: A proposed resolution of an old paradox.
+
+Phys. Rep. 436, 1 (2006).
+
+[50] Spielmann, Ch., Szipöcs, R., Stingl, A. & Krausz, F. Tunneling of Optical Pulses through Photonic Band Gaps.
+
+Phys. Rev. Lett. 73, 2308 (1994).
+
+[51] Eckle, P. et al. Attosecond Ionization and Tunneling Delay Time Measurements in Helium. Science 322, 1525
+
+(2008).
+
+[52] Sainadh, U. S. et al. Attosecond angular streaking and tunnelling time in atomic hydrogen. Nature 568, 75 (2019).
+[53] Ramos, R., Spierings, D., Racicot, I. & Steinberg, A. M. Measurement of the time spent by a tunnelling atom
+
+within the barrier region. Nature 583, 529–532 (2020).
+
+[54] 2D Semiconductors, 3260 N. Hayden Rd., Scottsdale, AZ 85251, USA. https://2dsemiconductors.com.
+[55] Herrera-Gomez, A., Bravo-Sanchez, M., Ceballos-Sanchez, O. & Vazquez-Lepe, M. O. Practical methods for
+
+background subtraction in photoemission spectra. Surf. Interface Anal. 46, 897 (2014).
+
+[56] Thuler, M. R., Benbow, R. L. & Hurych, Z. Synchrotron-radiation photoemission study of the V–VI layered
+
+compounds Bi2Te3, Bi2Se3, Sb2Te3 and Sb2Te2Se. Chem. Phys. 71, 265 (1982).
+
+[57] Bevington, P. R. & Robinson, D. K. Data Reduction and Error Analysis for the Physical Sciences. (McGraw-Hill,
+
+Boston, 2003).
+
+[58] Koelling, D. D. & Harmon, B. N. A technique for relativistic spin-polarised calculations. J. Phys. C Solid State
+
+Phys. 10, 3107 (1977).
+
+Acknowledgements: We gratefully acknowledge Helmuth Berger from EPFL for providing us with Bi2Te3 samples.
+This work was supported by the German Research Foundation (DFG) within the Priority Program SPP 1840 “Quantum
+Dynamics in Tailored Intense Fields” (A.G. and W.P., PF 317/10-2, 652733), by the Federal Ministry of Education
+and Research (A.G., BMBF Grant No. 05K22PBA) and by the Spanish Ministry of Science and Innovation (E.E.K.
+Projects No. PID2022-139230NB-I00 and No. PID2022-138750NB-C22). N.M.K. acknowledges the hospitality and
+the financial support from European XFEL and Donostia International Physics Center.
+
+Author contributions: A.G. and W.E. performed the experiment. A.G. analyzed the experimental data, calculated
+Jellium-model photoemission delays and prepared the first manuscript draft. S.N., T.S. and L.M. contributed substantially
+to the experiment. S.M. and J.H.D. provided XPS spectra of Bi2Te3. S.F. and N.M.K. calculated atomic photoionization
+delays. E.E.K. calculated the solid-state OSTEWS delays. W.P. coordinated the project. A.G., S.N., T.S., L.M., R.D.M.,
+P.M.E., N.M.K., E.E.K. and W.P. developed the physical interpretation of differential attosecond delays. All authors
+contributed to the preparation of the manuscript.
+
+Competing Interests: The authors declare no competing interests.
+
+12
+
+Large differential attosecond delays in solid state photoemission
+
+Supplementary Information
+
+The RABBITT experiments not only give access to the differential attosecond delays, but also to all relative delays
+between each pair of the four photoemission channels (Tab. 1). These four additional relative delays are plotted as
+red error crosses in Fig. 6a and b for Bi2Te3 and Bi2Se3, respectively. Figure 6 also shows the corresponding relative
+delays obtained from OSTEWS-theory.
+
+Tab. 1: Relative RABBITT delays of all photoemission channels with respect to each other. All values correspond
+to the mean values of 213 RABBITT measurements on four Bi2Te3 samples and 187 RABBITT measurements on
+three Bi2Se3 samples, respectively. The errors correspond to the weighted standard deviation described in the methods
+section.
+
+Bi2Te3
+
+Bi2Se3
+
+30 ± 13 as
+
+τ (Bi5d5/2) − τ (Bi5d3/2)
+τ (Te4d5/2) − τ (Te4d3/2) −39 ± 18 as
+τ (Bi5d5/2) − τ (Te4d5/2)
+18 ± 15 as
+τ (Bi5d3/2) − τ (Te4d3/2) −20 ± 22 as
+τ (Bi5d3/2) − τ (Te4d5/2) −13 ± 16 as
+τ (Bi5d3/2) − τ (Te4d3/2) −53 ± 23 as
+
+31 ± 10 as
+
+τ (Bi5d5/2) − τ (Bi5d3/2)
+τ (Se3d5/2) − τ (Se3d3/2) −93 ± 83 as
+τ (Bi5d5/2) − τ (Se3d5/2)
+25 ± 52 as
+τ (Bi5d5/2) − τ (Se3d3/2) −65 ± 61 as
+τ (Bi5d3/2) − τ (Se3d5/2)
+−5 ± 52 as
+τ (Bi5d3/2) − τ (Se3d3/2) −96 ± 61 as
+
+13
+
+Large differential attosecond delays in solid state photoemission
+
+Fig. 4: Extracted delays of 213 individual RABBITT measurements on Bi2Te3. Each row shows a
+pair of RABBITT delay differences τn − τm between two photoemission channels n and m, with n, m ∈
+(cid:8)Bi5d5/2, Bi5d3/2, Te4d5/2, Te4d3/2
+(cid:9). If the difference is positive, photoemission channel n is emitted delayed
+with respect to channel m. a-f, All extracted delay values as a function of time after cleaving a fresh sample. The color
+indicates the sample, and the symbol indicates a position on the sample surface where multiple measurements were
+performed. Horizontal error bars correspond to the duration of the measurement and vertical error bars correspond to
+Eq. 5. The black line indicates the weighted mean value and the gray shaded area the weighted standard deviation.
+g-l, Weighted mean of the delays of equivalent measurements, i.e. measurements performed in the same position on
+the sample. m-r, Occurrence of measured delay values with histogram bins of 5 as width. The black curve indicates a
+normal distribution corresponding to the weighted mean value ⟨τ ⟩ (Eq. 6 in Methods) and weighted standard deviation
+σ (Eq. 7 in Methods).
+
+14
+
+Large differential attosecond delays in solid state photoemission
+
+Fig. 5: Extracted delays of 187 individual RABBITT measurements on Bi2Se3. Each row shows a
+pair of RABBITT delay differences τn − τm between two photoemission channels n and m, with n, m ∈
+(cid:8)Bi5d5/2, Bi5d3/2, Se3d5/2, Se3d3/2
+(cid:9). If the difference is positive, photoemission channel n is emitted delayed
+with respect to channel m. a-f, All extracted delay values as a function of time after cleaving a fresh sample. The color
+indicates the sample, and the symbol indicates a position on the sample surface where multiple measurements were
+performed. Horizontal error bars correspond to the duration of the measurement and vertical error bars correspond to
+Eq. 5. The black line indicates the weighted mean value and the gray shaded area the weighted standard deviation.
+g-l, Weighted mean of the delays of equivalent measurements, i.e. measurements performed in the same position on
+the sample. m-r, Occurrence of measured delay values with histogram bins of 5 as width. The black curve indicates a
+normal distribution corresponding to the weighted mean value ⟨τ ⟩ (Eq. 6 in Methods) and weighted standard deviation
+σ (Eq. 7 in Methods).
+
+15
+
+Large differential attosecond delays in solid state photoemission
+
+Fig. 6: Comparison of measured non-differential relative photoemission delays with predictions based on
+OSTEWS theory. a and b, Delays for Bi2Te3 and Bi2Se3, respectively. Data points correspond to the weighted mean
+value of all experimental RABBITT delays and the respective error bears are determined by the weighted standard
+deviation. Relative OSTEWS-delays are plotted as dashed (Vopt = 1 eV) and solid lines (Vopt = 2 eV) and the gray
+shaded area indicates a possible energy shift of ±1 eV for each of the relative OSTEWS-delays.
+
+16
+
+Large differential attosecond delays in solid state photoemission
+
+Fig. 7: Absolute photoelectron escape time derived by one-step photoemission theory. a and b, OSTEWS delays
+τOSTEWS as a function of final state energy with respect to the valence band maximum for Bi2Te3 in part a and Bi2Se3
+in part b for Vopt = 2 eV. Note that the spin-orbit interaction of the initial states does affect the OSTEWS-delays only
+marginally since dashed and solid line almost perfectly coincide for Bi, Te and Se core level emission.
+
+17
+
+

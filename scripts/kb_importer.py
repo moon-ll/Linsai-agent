@@ -380,6 +380,87 @@ def import_all_candidates(project: str = "", with_analysis: bool = False) -> Lis
     return imported
 
 
+def import_deep_analysis_all() -> Dict[str, Any]:
+    """v6.8.14 WP2: 批量转换 hermes deep_analysis JSON 为 wiki/papers 5 维度笔记。
+
+    链 ③：hermes deep_analysis_*.json → knowledge/wiki/papers/{arxiv_id}.md
+
+    仅处理有完整 5 维度字段的 JSON（why_notable / core_findings / new_methods /
+    what_next / linsai_connection），低质量分析自动跳过。
+
+    Returns:
+        {"imported": int, "skipped": int, "errors": int}
+    """
+    if not BRIEFINGS_DIR.exists():
+        return {"imported": 0, "skipped": 0, "errors": 0}
+
+    # 确保 kb_wiki 门面依赖已初始化（_ensure_dirs 等由 knowledge_base 注入）
+    try:
+        import knowledge_base as _kb  # noqa: F401 — 触发 kb_wiki 依赖注入
+    except Exception:
+        # knowledge_base 不可用时，手动初始化 kb_wiki 依赖
+        import kb_wiki
+        if kb_wiki._ensure_dirs is None:
+            def _fallback_ensure_dirs():
+                for t in ["concepts", "methods", "people", "papers", "projects"]:
+                    (kb_wiki.WIKI_DIR / t).mkdir(parents=True, exist_ok=True)
+            kb_wiki._ensure_dirs = _fallback_ensure_dirs
+        if kb_wiki.log_growth is None:
+            kb_wiki.log_growth = lambda *a, **kw: None
+
+    analysis_files = sorted(BRIEFINGS_DIR.glob("deep_analysis_*.json"))
+    imported = 0
+    skipped = 0
+    errors = 0
+
+    # 必需字段（5 维度）
+    required_fields = ["why_notable", "core_findings", "new_methods", "what_next", "linsai_connection"]
+
+    for f in analysis_files:
+        try:
+            data = json.loads(f.read_text(encoding="utf-8"))
+        except Exception:
+            errors += 1
+            continue
+
+        arxiv_id = data.get("arxiv_id", "")
+        if not arxiv_id:
+            # 从文件名提取
+            arxiv_id = f.stem.replace("deep_analysis_", "")
+            if not arxiv_id:
+                skipped += 1
+                continue
+
+        # 质量门槛：至少 3 个维度有实质内容
+        filled = sum(1 for field in required_fields if data.get(field))
+        if filled < 3:
+            skipped += 1
+            continue
+
+        # 幂等检查：已有深度解析则跳过
+        wiki_path = WIKI_PAPERS_DIR / f"{arxiv_id}.md"
+        if wiki_path.exists():
+            try:
+                existing = wiki_path.read_text(encoding="utf-8")
+                if "## 深度解析" in existing:
+                    skipped += 1
+                    continue
+            except Exception:
+                pass
+
+        # 调用单篇导入
+        try:
+            result = import_deep_analysis(arxiv_id)
+            if result:
+                imported += 1
+            else:
+                skipped += 1
+        except Exception:
+            errors += 1
+
+    return {"imported": imported, "skipped": skipped, "errors": errors}
+
+
 def import_session_discussion(session_path: Path, project: str = PROJECT_TAG,
                               qa_type: str = "paper-discussion",
                               related_papers: Optional[List[str]] = None,

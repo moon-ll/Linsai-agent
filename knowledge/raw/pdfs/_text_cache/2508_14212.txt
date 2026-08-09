@@ -1,0 +1,2408 @@
+A uniﬁed perspective of high-harmonic generation in gases a nd solids
+A. Thorpe 1,∗ N. Boroumand 1, G. Bart 1, L. Wang 1, G. Vampa 1,2, and T. Brabec 1
+1Department of Physics, University of Ottawa, Ontario K1N 6N 5, Canada and
+2National Research Council of Canada, Ottawa, Ontario K1A 0R 6, Canada
+(Dated: October 21, 2025)
+We present a quantum optical generalization of the quantum- matter Lewenstein model of high-
+harmonic generation (HHG) in gases that contains two channe ls corresponding to the inter- and
+intraband HHG in solids. Both channels can be presented as a s emiclassical current multiplied by
+the vacuum ﬁeld strength, resulting in a quantitative corre ction and a faster roll-oﬀ of the harmonic
+power with order than in previous theories. In gases, like in solids, intraband HHG dominates at
+low orders; the switchover harmonic corresponds to a speciﬁ c photon energy, independent of pump
+wavelength.
+Theories of the interaction of intense electromagnetic
+radiation with matter predate the widespread use of
+intense laser sources[1–3]. One strong-ﬁeld laser phe-
+nomenon, high-harmonic generation (HHG), was initially
+observed in gases during the late 1980s and early 1990s
+[4–6] and has since been extensively investigated for its
+applications, such as providing a source of ultrafast co-
+herent light and applications in attosecond spectroscopy
+[7–10].
+The exploration of HHG has expanded to solids [11],
+oﬀering an extension of attosecond science to convenient
+tabletop media [10, 12–16]. HHG in solids had allowed
+for applications like probing various aspects of electroni c
+band structure [17–20], imaging transition dipole mo-
+ments [21] and Berry curvatures [22–24], as well as, topo-
+logical states of matter [25, 26] and phase transitions [27] .
+Recently, there has been growing interest in the quan-
+tum optical aspects of HHG. This has opened a number of
+novel applications, such as generation of Schrödinger cat
+states [28–30], photon bunching and antibunching [31–
+37], and generation of squeezed light [35–37] from HHG
+with classical and non-classical light sources, such as
+bright squeezed vacuum [38–43]. It has also been shown
+that bound states may inﬂuence the quantum nature of
+the emitted high-harmonic (HH) radiation [44, 45].
+HHG is typically elucidated in atomic gases accord-
+ing to Lewenstein’s seminal work [46]. This semiclassical
+approach—treating light classically and matter quantum
+mechanically—considers oscillations of a ﬁeld-induced
+bound-continuum state dipole. It has an intuitive three-
+step explanation: an electron is ionized by a strong laser
+ﬁeld, then propagates within the ﬁeld-dressed continuum,
+and ﬁnally recombines with an ionic core, converting its
+excess energy into ultrafast pulses of light with odd fre-
+quency multiples of the driving laser’s frequency [9, 46–
+48]. A similar mechanism has been studied in solids,
+known as the interband mechanism, where an electron is
+excited to a conduction band and a hole is promoted to
+a valence band, and they propagate before recombining
+to emit HH light [12, 49, 52, 53].
+In addition to the interband mechanism, there exists
+also an intraband mechanism in solids [12, 49]. This
+mechanism describes the generation of harmonics as a
+response to charge motion within individual electronic
+bands. The relation between the two mechanisms in
+atoms, analogous to interband and intraband HHG in
+solids, has not been explored yet.
+Finally, while semiclassical models reproduce HHG
+spectra qualitatively very well, they are not quantita-
+tively accurate. This limitation arises from their neglect
+of vacuum electric ﬁeld ﬂuctuations, which are essential
+for a full quantum description.
+Here we develop a quantum optical generalization of
+the quantum-matter Lewenstein model which yields the
+following insights.
+First, the quantum optical strong ﬁeld model inher-
+ently contains interband and intraband currents for both
+gases and solids. As such, it allows for a one-to-one con-
+nection between HHG in gases and solids. In atoms, the
+intraband mechanism is related to Brunel HHG [50].
+Second, the quantum optical Lewenstein model yields
+semiclassical currents multiplied by the vacuum electric
+ﬁeld. This is lost in semiclassical approaches, and allows
+for a close to quantitative description of HHG, as long
+as a Coulomb correction factor to ionization is included,
+and bound states can be neglected.
+Third, due to the frequency dependence of the vac-
+uum electric ﬁeld, the frequency scaling of HHG is also
+diﬀerent to semiclassical theories. This results in a faste r
+decrease of the harmonic power with order than in pre-
+vious theories.
+Fourth, our analysis shows that, like in solids, the in-
+traband current in atomic gases is important. It is the
+dominant source for low order HHG in atomic and molec-
+ular gases. The crossover harmonic between interband
+and intraband HHG relates to a speciﬁc photon energy
+independent of the pump laser wavelength.
+Finally, the computational eﬃciency of the quantum
+optical Lewenstein model, in particular after using saddle
+point integration [51], allows for eﬃcient integration int o
+macroscopic phase matching models and thus, a scalable,
+close-to quantitative description of HHG experiments in
+atomic and molecular gases. This makes it a valuable
+tool for the design and interpretation of experiments.
+arXiv:2508.14212v1  [physics.atom-ph]  19 Aug 2025
+2
+To model the problem, we introduce the Hamiltonian
+ˆH = ˆHm + ˆHf + ˆHi, where ˆHm = ˆp2/(2m) + V (x) is
+the matter Hamiltonian, ˆHf =∑
+κ ℏωκˆa†
+κˆaκ is the ﬁeld
+Hamiltonian, and ˆHi = r|e| ˆF(x) is the interaction Hamil-
+tonian. Here, ˆp represents the momentum operator, r
+deﬁnes the relative coordinates and x deﬁnes the centre
+of mass coordinates. Further, m and |e| deﬁne the elec-
+tronic mass and charge. The creation and annihilation
+operators ˆa†
+κ and ˆaκ correspond to the electromagnetic
+ﬁeld mode κ ≡ (k, s), with wavevector k and s = 1 or 2
+labeling two orthogonal unit vectors that deﬁne the po-
+larization basis of the light ﬁeld. The quantized electric
+ﬁeld and vector potential are given by,
+ˆF(x) = i
+∑
+κ
+ηκωκeκ
+(
+ˆaκeikx − ˆa†
+κe−ikx)
+, (1a)
+ˆA(x) =
+∑
+κ
+ηκeκ
+(
+ˆaκeikx + ˆa†
+κe−ikx)
+, (1b)
+respectively, where eκ is the unit vector along the po-
+larization direction, ηκ =
+√
+ℏ/(2ωkε0V ) is the vacuum
+vector ﬁeld amplitude, ωk is the mode frequency, ε0 is
+the vacuum permittivity, and V is the quantization vol-
+ume.
+We use the strong ﬁeld and dipole approximations,
+considering a hydrogen-like atom with a ground state
+|0⟩ and continuum states |p⟩ = 1 /(2πℏ)3/2 exp((i/ℏ)pr)
+[1, 10, 54]. Doing so, we utilize the Ansatz
+|Ψ(t)⟩ = |0⟩ ⊗ |φ0(t)⟩ +
+∫
+d3p|p⟩ ⊗ |φp(t)⟩, (2)
+where photon quantum states |φ0(t)⟩ and |φp(t)⟩, are
+associated with the ground and continuum states re-
+spectively. By determining the evolution of |φ0(t)⟩
+with the Schrödinger equation, we can measure HHG
+using the photon number expectation value ⟨ˆn⟩(t) ≈
+⟨φ0(t)|ˆn|φ0(t)⟩. To measure HHG Eq. (
+2) can be gen-
+eralized to many atoms [43], but for clarity we highlight
+the single atom case here.
+We simplify solving the Schrödinger equation by using
+the transformation |ϕ0(t)⟩ = ˆD†
+α ˆU †
+v ˆU †
+i |φ0(t)⟩, with the
+interaction picture operator ˆUi = exp
+(
+−i ˆHf t/ℏ
+)
+, the
+velocity gauge operator ˆUv = exp
+(
+i|e|r ˆA/ℏ
+)
+, and the
+displacement operator over modes of the driving laser
+ﬁeld ˆDα = exp
+( ∑
+κ ακˆa†
+κ − α∗
+κˆaκ
+)
+, with ακ being the
+corresponding single-mode complex coherent state am-
+plitudes. This separates the strong driving laser ﬁeld
+and quantum optical ﬁelds, excluding the fundamental
+harmonic in HHG analysis. The electric ﬁeld splits into
+˜F(t) = F (t) + ˆF(t), with F (t) treated classically and
+ˆF(t) quantum optically. Similarly, ˜A(t) = A(t) + ˆA(t)
+and Rabi frequency ˜Ω(t) = |e|d(pt) ˜F(t)/ℏ = Ω(t) + ˆΩ(t)
+with pt = p + |e|A(t) and transition dipole moment
+d(p) = ⟨p|r|0⟩ [54, 55]. Solving the Schrödinger equation
+leads to the Volterra integro-diﬀerential equation [55]:
+∂t|ϕ0(t)⟩ = −
+∫
+d3pˆc†
+p(t)
+∫ t
+t0
+dt′ˆcp(t′)|ϕ0(t′)⟩, (3)
+where,
+ˆcp(t) = ˜Ω(t) ˆD†
+σ(t) exp (iS(t)) , (4)
+with,
+S(t) = 1
+ℏ
+∫ t
+t0
+( p2
+τ
+2m + E0
+)
+dτ, (5)
+the classical action. Further, the displacement operator
+ˆD†
+σ(t) = exp
+(
+−∑
+κ σκˆa†
+κ − σ∗
+κˆaκ
+)
+consists of
+σκ(t) = |e|Ev
+ℏ σκ(t)e−i(kx−ωkt) (6)
+σκ(t) = −i
+mωk
+∫ t
+t0
+eκpt′ e−iωk(t−t′)dt′, (7)
+where, Ev = ωkηκ is the vacuum electric ﬁeld amplitude;
+σκ(t) deﬁnes the dressing of continuum electrons with
+coherent state radiation modes.
+While numerical methods [37] like the variational iter-
+ation method (see [56]) can solve equations like Eq. ( 3),
+we use a simpler approximation for clarity. Following the
+Lewenstein approach for ground state depletion, we as-
+sume the photon wavefunction varies slowly and can be
+extracted from the integral
+[46]. Additionally, assuming
+ﬁrst-order expansion of the operator expressions in Eq.
+(
+3), we ﬁnd that,
+|ϕ0(t)⟩ ≈ exp
+( ∑
+κ
+hκˆa†
+κ − h∗
+κˆaκ
+)
+|ϕ0(t0)⟩, (8)
+where hκ is the coherent state parameter that we will
+deﬁne in Eqs. (
+9) and ( 10) below. Assuming the initial
+state of the system is vacuum |ϕ0(t0)⟩ = |v⟩, Eq. ( 8)
+represents a coherent state.
+To connect with semiclassical analysis of HHG, the co-
+herent state parameter hκ = h′
+κ + h′′
+κ involves
+two chan-
+nels
+h′
+κ = |e|Ev
+ℏ eκ
+∫ ∞
+−∞
+dtei(ωkt−kx)x(t), (9)
+h′′
+κ = − |e|Ev
+ℏ
+∫ ∞
+−∞
+dtei(ωkt−kx)
+∫
+d3p¯σκ(t) [Γp(t) + c.c.] ,
+(10)
+with,
+x(t) = 2 Re
+[
+i
+∫
+d3pd∗(pt)e−iS(t)
+∫ t
+−∞
+dt′Ω(t′)eiS(t′)
+]
+,
+(11)
+Γp(t) =Ω ∗(t)e−iS(t)
+∫ t
+−∞
+dt′Ω(t′)eiS(t′). (12)
+3
+Here, x(t) in Eq. ( 11) is Lewenstein’s time-dependent
+dipole which describes charge oscillations due to polariza -
+tion buildup between the atomic ground state and elec-
+tronic continuum states [46]. Eq. (
+12), is the momentum-
+dependent complex ionization rate, related to the full
+complex ionization rate γ(t) =
+∫
+d3pΓp(t), as deﬁned
+in Lewenstein’s work [46]. Note that in numerical cal-
+culations involving Eqs. (
+9) and ( 10) we use a ﬁlter to
+suppress electron returns longer than a half-cycle follow-
+ing ionization as the shorter trajectories are dominant
+in HHG in atomic gases (see Appendix C of supplement
+Ref. [55]).
+The ﬁrst mechanism, Eq. (
+9), resembles the Fourier
+transform of x(t) of Eq. (55) from Lewenstein’s work cor-
+responding to polarization generated by the quantum in-
+terference between the laser-accelerated continuum elec-
+tron and the atomic ground state. Eq. (
+9) diﬀers from
+Lewenstein’s model through the harmonic frequency fac-
+tor Ev ∝ ω1/2
+k due to vacuum ﬂuctuations, aﬀecting po-
+larization buildup and HHG.
+The second mechanism, Eq. (
+10), resembles the
+Fourier transform of the complex ionization rate γ(t) =∫
+d3pΓp(t) of Eq. (52) of Lewenstein’s work [46]. Unlike
+the time dependent dipole x(t) found in the ﬁrst channel,
+Eq. ( 9), this source was not studied there as a source of
+HHG. Eq. ( 10) allows HH emission through (i) ioniza-
+tion nonlinearities from Γp(t) and (ii) from dressing of
+the continuum electron as a coherent state, quantiﬁed by
+the parameter ¯σκ(t) [44].
+The formalism and the equa-
+tions introduced up to now have been derived in Ref.
+[43]. There, the focus was on HH emission resulting from
+Eq. (9). Below we analyze HH emission from Eq. (10)
+and we formally show the correspondence with intraband
+and interband currents.
+Although links between the quantum optical channels
+in Eqs. ( 9) and ( 10) and Lewenstein’s work are estab-
+lished, there is a broader connection between quantum
+optical and semiclassical models. By using properties of
+Fourier transforms and integration by parts (see supple-
+ment Ref. [55]) Eqs. (
+9) and ( 10) can be rewritten as,
+h′
+κ = iηκeκ
+ℏ e−ikx
+∫ ∞
+−∞
+dteiωktjer(t), (13)
+h′′
+κ ≈ iηkeκ
+ℏ e−ikx
+∫ ∞
+−∞
+dteiωktjra(t), (14)
+where, jer(t) = |e| ˙x(t) and jra(t) =
+∫
+d3pv(pt)|bp(t)|2
+represent the time-dependent interband and intraband
+currents previously studied semiclassically as mecha-
+nisms of HHG in solids [12, 49, 52]. Here, we de-
+ﬁne ˙x(t) = ∂tx(t), as the time dependent dipole ve-
+locity, v(pt) = ∇p(p2/2m)|p=pt = pt/m as the con-
+tinuum velocity, and |bp(t)|2 as the electronic contin-
+uum population with continuum amplitude bp(t) =
+ie−iS(t)∫ t
+−∞ dt′Ω(t′)eiS(t′), of the ground-continuum
+wavefunction as in [46].
+We observe that the quantum optical results of Eqs.
+(
+13) and ( 14) consist of semiclassical currents times a fac-
+tor with ηκ ∝ ω−1/2
+k resulting from vacuum ﬂuctuations.
+So far, no studies have examined the relation between
+these two mechanisms in atoms, which is analogous to
+interband and intraband HHG in solids.
+To clarify how the interband current jer(t) = |e| ˙x(t)
+0 100 200 300 400 500 600 700 800
+10-2610-2410-2210-2010-1810-1610-1410-1210-10
+0 1000 2000 3000 4000 5000 6000
+10-2610-2410-2210-2010-1810-1610-1410-1210-10
+1 3 5 7 9 11 13 15
+10-20
+10-18
+10-16
+10-14
+10-12
+10-10
+10-8
+1 5 9 13 17 21 25 29
+1 9 17 25 33 41
+10-20
+10-18
+10-16
+10-14
+10-12
+10-10
+10-8
+1 9 17 25 33 41 49
+FIG. 1. Harmonic spectra, calculated via Eq. (17), for wave-
+lengths 1.05 μm (a,c) and 2.1 μm (a,d) and 3.15 μm (b,e)
+and 4.2 μm (b,f) using a Gaussian temporal pulse (5-cycle
+temporal FWHM) with intensity 3.5 × 1014W/cm2 in argon
+gas. Panels (a,b) show full spectra up to the harmonic cutoﬀs
+(black dashed lines), while (c-f) focus on spectra below the
+ionization energy (vertical red lines). h′
+κ (interband) mech-
+anism: orange (1.05, 3.15 μm) and purple (2.1, 4.2 μm) di-
+amonds. h′′
+κ (intraband) mechanism: green (1.05, 3.15 μm)
+and blue (2.1, 4.2 μm) circles.
+4
+and intraband current jra(t) =
+∫
+d3pv(pt)|bp(t)|2 deﬁned
+for gases relate to the theory of solids [12, 57], note that in
+solids, the interband current is generated by polarization
+accumulation due to dipole coupling of valence and con-
+duction bands. Technically, the momentum p is replaced
+by crystal momentum K, the band-velocity is deﬁned as
+v(K) = ∇Kε(K), and ε is the bandgap between valence
+and conduction band. Next, the dipole is replaced by
+the dipole transition moment between valence and con-
+duction band.
+In gases the intraband term related to the
+Brunel mechanism [50]. In a solid, as the band velocity
+is in general a nonlinear function of K, intraband HHG
+is driven by ionization and band velocity nonlinearities
+[12, 57].
+We explore the two HHG mechanisms in the quantum
+optical context, as indicated in Eqs. (
+9) and ( 10), by ex-
+amining their inﬂuence on harmonic photon yield across
+varying wavelengths. The total photon yield is given by,
+⟨ˆn⟩ =
+∑
+s=1,2
+V
+(2π)3
+∫
+d3k|hκ|2. (15)
+By assuming the quantization volume V → ∞ , that
+pt ∥ kz and that one of the polarization basis vectors
+is contained in the plane of k and pt, we ﬁnd that the
+photon expectation value variation with harmonic fre-
+quency, and the total yield about a given harmonic N
+are given by,
+d⟨ˆn⟩
+dωk
+= V ω2
+k
+3π2c3 |¯hκ|2, (16)
+⟨ˆn⟩N = V
+3π2c3
+∫ (N +1/2)ω0
+(N −1/2)ω0
+dωkω2
+k|¯hκ|2, (17)
+respectively (see supplement Ref. [55]). Here, ¯hκ =
+hκ csc θ is independent of the polar angle θ with wavevec-
+tor k. In addition, note that the factor V cancels out with
+a factor of 1/V from η2
+κ contained in |¯hκ|2.
+We now investigate HHG in argon gas driven by a
+strong linearly polarized laser ﬁeld with a Gaussian tem-
+poral envelope (full width at half maximum of 5 cycles)
+and a peak intensity of 3.5 × 1014 W/cm2. The total
+photon yield is calculated as a function of harmonic or-
+der (Eq. (
+17)) for the two mechanisms described in Eqs.
+(13) and ( 14), using driving wavelengths of 1.05 μm, 2.1
+μm, 3.05 μm, and 4.2 μm, and a simple Coulomb correc-
+tion factor for ionization [58].
+Figures 1(a) and (b) show the full harmonic spectra
+up to the harmonic cutoﬀs (black dashed lines), de-
+termined by the cutoﬀ energy, Emax = E0 + 3 .17Up,
+where Up ≈ | e|2F 2
+0 /4mω2
+0 is the ponderomotive energy
+given a driving frequency ω0 and maximum amplitude
+F0 [46, 47].
+Panels (c) through (f) focus on the low-
+order harmonics with dashed lines indicating the har-
+monic orders corresponding to the ionization energy for
+each wavelength
+.
+1 1.5 2 2.5 3 3.5 4
+2
+4
+6
+8
+10
+12
+14
+16
+18
+FIG. 2. Comparison of the crossover harmonic (orange
+crosses), deﬁned as the highest odd harmonic for which the h′′
+κ
+(intraband) mechanism (Eq. (14)) is greater or near to equal
+to the h′
+κ (interband) mechanism (Eq. (13)) for wavelengths
+as in FIG. 1. A teal linear trendline and its corresponding
+equation are also plotted.
+Observing these spectra, the interband quantum opti-
+cal channel, Eq. ( 9), is dominant throughout most of the
+spectra, especially in the HH plateaux, with cutoﬀs con-
+sistent with semiclassical atomic gas results [46–48, 59–
+62].
+In our argon model gas, the lowest order harmonics are
+driven by the intraband mechanism of Eq. (
+10), with in-
+traband dominance increasing with wavelength. The in-
+traband dominance noticeably occurs for more harmonics
+as wavelength is increased.
+To compare the quantum optical intraband and inter-
+band analogous mechanisms as a function of the driving
+laser’s wavelength, we plot the "crossover harmonic" (the
+highest harmonic where the h′′
+κ spectrum is greater than
+or equal to the h′
+κ spectrum) in Fig.
+2 based on Fig. 1. A
+linear trend of one plus the crossover harmonic with laser
+wavelength is observed, amounting to a constant
+pho-
+ton energy of 5.195 eV. This allows for predicting where
+the intraband mechanism will dominate, enabling exper-
+iments in gas to explore and tune the dominant mecha-
+nism.
+In conclusion, we demonstrated that, in gases, quan-
+tizing the electromagnetic ﬁeld naturally produces mech-
+anisms analogous to semiclassical interband and intra-
+band HHG in gases and solids. The intraband HHG term
+in gases is driven by the ionization nonlinearity, as the
+continuum does not have any nonlinear properties, un-
+like the valence and conduction bands in solids.
+The
+quantum optical model accounts for vacuum ﬂuctuations
+which result in an additional factor, the vacuum electric
+ﬁeld, modifying magnitude and wavelength scaling of pre-
+5
+vious classical-light, quantum-matter theories. We found
+that interband analogous mechanisms dominate the HH
+plateau in atoms, while intraband analogous mechanisms
+dominate low order harmonics.
+The crossover between
+the two regimes relates to a constant photon energy in-
+dependent of the wavelength of the driving laser.
+∗ athor087@uottawa.ca
+[1] L. V. Keldysh, Ionization in the Field of a Strong Electro-
+magnetic Wave, in Selected Papers of Leonid V Keldysh
+(WORLD SCIENTIFIC, 2023), pp. 56–63.
+[2] F. H. M. Faisal, Multiple absorption of laser photons by
+atoms, J. Phys. B: At. Mol. Phys. 6, L89 (1973).
+[3] H. R. Reiss, Eﬀect of an intense electromagnetic ﬁeld on
+a weakly bound system, Phys. Rev. A 22, 1786 (1980).
+[4] A. McPherson, G. Gibson, H. Jara, U. Johann, T. S. Luk,
+I. A. McIntyre, K. Boyer, and C. K. Rhodes, Studies of
+multiphoton production of vacuum-ultraviolet radiation
+in the rare gases, J. Opt. Soc. Am. B 4, 595 (1987).
+[5] M. Ferray, A. L’Huillier, X. F. Li, L. A. Lompre, G.
+Mainfray, and C. Manus, Multiple-harmonic conversion
+of 1064 nm radiation in rare gases, J. Phys. B: At. Mol.
+Opt. Phys. 21, L31 (1988).
+[6] A. L’Huillier and Ph. Balcou, High-order harmonic gen-
+eration in rare gases with a 1-ps 1053-nm laser, Phys.
+Rev. Lett. 70, 774 (1993).
+[7] Scrinzi, M. Y. Ivanov, R. Kienberger, and D. M. Vil-
+leneuve, Attosecond physics, J. Phys. B: At. Mol. Opt.
+Phys. 39, R1 (2005).
+[8] F. Krausz and M. Ivanov, Attosecond physics, Rev. Mod.
+Phys. 81, 163 (2009).
+[9] P. B. Corkum and F. Krausz, Attosecond science, Nature
+Phys 3, 381 (2007).
+[10] K. Amini et al., Symphony on strong ﬁeld approximation,
+Rep. Prog. Phys. 82, 116001 (2019).
+[11] S. Ghimire, A. D. DiChiara, E. Sistrunk, P. Agostini, L.
+F. DiMauro, and D. A. Reis, Observation of high-order
+harmonic generation in a bulk crystal, Nature Phys 7,
+138 (2011).
+[12] G. Vampa, C. R. McDonald, G. Orlando, D. D. Klug,
+P. B. Corkum, and T. Brabec, Theoretical Analysis of
+High-Harmonic Generation in Solids, Phys. Rev. Lett.
+113, 073901 (2014).
+[13] S. Ghimire and D. A. Reis, High-harmonic generation
+from solids, Nature Phys 15, 10 (2019).
+[14] E. Goulielmakis and T. Brabec, High harmonic genera-
+tion in condensed matter, Nat. Photon. 16, 411 (2022).
+[15] J. Park, A. Subramani, S. Kim, and M. F. Ciappina, Re-
+cent trends in high-order harmonic generation in solids,
+Advances in Physics: X 7, 2003244 (2022).
+[16] L. Yue and M. B. Gaarde, Introduction to theory of high-
+harmonic generation in solids: tutorial, J. Opt. Soc. Am.
+B, JOSAB 39, 535 (2022).
+[17] G. Vampa, T. J. Hammond, N. Thiré, B. E. Schmidt, F.
+Légaré, C. R. McDonald, T. Brabec, D. D. Klug, and P.
+B. Corkum, All-Optical Reconstruction of Crystal Band
+Structure, Phys. Rev. Lett. 115, 193603 (2015).
+[18] T. T. Luu, M. Garg, S. Yu. Kruchinin, A. Moulet, M.
+Th. Hassan, and E. Goulielmakis, Extreme ultraviolet
+high-harmonic spectroscopy of solids, Nature 521, 498
+(2015).
+[19] S. Almalki, A. M. Parks, G. Bart, P. B. Corkum, T.
+Brabec, and C. R. McDonald, High harmonic generation
+tomography of impurities in solids: Conceptual analysis,
+Phys. Rev. B 98, 144307 (2018).
+[20] A. A. Lanin, E. A. Stepanov, A. B. Fedotov, and A.
+M. Zheltikov, Mapping the electron band structure by
+intraband high-harmonic generation in solids, Optica 4,
+516 (2017).
+[21] D. Wu, L. Li, Y. Zhan, T. Huang, H. Cui, J. Li, P. Lan,
+and P. Lu, Determination of transition dipole moments
+of solids with high-order harmonics driven by multicycle
+ultrashort pulses, Phys. Rev. A 105, 063101 (2022).
+[22] H. B. Banks, Q. Wu, D. C. Valovcin, S. Mack, A. C. Gos-
+sard, L. Pfeiﬀer, R.-B. Liu, and M. S. Sherwin, Dynam-
+ical Birefringence: Electron-Hole Recollisions as Probes
+of Berry Curvature, Phys. Rev. X 7, 041042 (2017).
+[23] T. T. Luu and H. J. Wörner, Measurement of the Berry
+curvature of solids using high-harmonic spectroscopy,
+Nat Commun 9, 916 (2018).
+[24] Y.-Y. Lv et al., High-harmonic generation in Weyl
+semimetal β-WP2 crystals, Nat Commun 12, 6437
+(2021).
+[25] A. M. Parks, J. V. Moloney, and T. Brabec, Gauge Invari-
+ant Formulation of the Semiconductor Bloch Equations,
+Phys. Rev. Lett. 131, 236902 (2023).
+[26] M. L. Bera, J. O. De Almeida, M. Dziurawiec, M.
+Płodzień, M. M. Maśka, M. Lewenstein, T. Grass, and U.
+Bhattacharya, Topological phase detection through high-
+harmonic spectroscopy in extended Su-Schrieﬀer-Heeger
+chains, Phys. Rev. B 108, 214104 (2023).
+[27] C. Heide et al., Probing topological phase transitions
+using high-harmonic generation, Nat. Photon. 16, 620
+(2022).
+[28] N. Tsatrafyllis, I. K. Kominis, I. A. Gonoskov, and P.
+Tzallas, High-order harmonics measured by the photon
+statistics of the infrared driving-ﬁeld exiting the atomic
+medium, Nat Commun 8, 15170 (2017).
+[29] M. Lewenstein, M. F. Ciappina, E. Pisanty, J. Rivera-
+Dean, P. Stammer, Th. Lamprou, and P. Tzallas, Gen-
+eration of optical Schrödinger cat states in intense laser–
+matter interactions, Nat. Phys. 17, 1104 (2021).
+[30] J. Rivera-Dean, P. Stammer, E. Pisanty, Th. Lamprou,
+P. Tzallas, M. Lewenstein, and M. F. Ciappina, New
+schemes for creating large optical Schrödinger cat states
+using strong laser ﬁelds, J Comput Electron 20, 2111
+(2021).
+[31] S. Lemieux, S. A. Jalil, D. N. Purschke, N. Boroumand,
+T. J. Hammond, D. Villeneuve, A. Naumov, T. Brabec,
+and G. Vampa, Photon bunching in high-harmonic emis-
+sion controlled by quantum light, Nat. Photon. 19, 767
+(2025).
+[32] Á. Gombkötő, P. Földi, and S. Varró, Quantum-optical
+description of photon statistics and cross correlations
+in high-order harmonic generation, Phys. Rev. A 104,
+033703 (2021).
+[33] J. Rivera-Dean, P. Stammer, A. S. Maxwell, Th. Lam-
+prou, P. Tzallas, M. Lewenstein, and M. F. Ciappina,
+Light-matter entanglement after above-threshold ioniza-
+tion processes in atoms, Phys. Rev. A 106, 063705
+(2022).
+[34] J. Sloan, A. Gorlach, M. E. Tzur, N. Rivera, O. Cohen,
+I. Kaminer, and M. Soljačić, Entangling extreme ultravi-
+olet photons through strong ﬁeld pair generation, arXiv
+6
+preprint arXiv:2309.16466 (2023).
+[35] D. Theidel et al., Evidence of the Quantum Optical Na-
+ture of High-Harmonic Generation, PRX Quantum 5,
+040319 (2024).
+[36] S. Yi, N. D. Klimkin, G. G. Brown, O. Smirnova, S.
+Patchkovskii, I. Babushkin, and M. Ivanov, Generation of
+Massively Entangled Bright States of Light during Har-
+monic Generation in Resonant Media, Phys. Rev. X 15,
+011023 (2025).
+[37] P. Stammer, J. Rivera-Dean, A. S. Maxwell, T. Lamprou,
+J. Argüello-Luengo, P. Tzallas, M. F. Ciappina, and M.
+Lewenstein, Entanglement and Squeezing of the Optical
+Field Modes in High Harmonic Generation, Phys. Rev.
+Lett. 132, 143603 (2024).
+[38] M. Even Tzur, M. Birk, A. Gorlach, M. Krüger, I.
+Kaminer, and O. Cohen, Photon-statistics force in ul-
+trafast electron dynamics, Nat. Photon. 17, 501 (2023).
+[39] A. Rasputnyi, Z. Chen, M. Birk, O. Cohen, I. Kaminer,
+M. Krüger, D. Seletskiy, M. Chekhova, and F. Tani,
+High-harmonic generation by a bright squeezed vacuum,
+Nat. Phys. 20, 1960 (2024).
+[40] J. Heimerl, A. Mikhaylov, S. Meier, H. Höllerer, I.
+Kaminer, M. Chekhova, and P. Hommelhoﬀ, Multipho-
+ton electron emission with non-classical light, Nat. Phys.
+20, 945 (2024).
+[41] M. Even Tzur and O. Cohen, Motion of charged particles
+in bright squeezed vacuum, Light Sci Appl 13, 41 (2024).
+[42] A. Gorlach, M. E. Tzur, M. Birk, M. Krüger, N. Rivera,
+O. Cohen, and I. Kaminer, High-harmonic generation
+driven by quantum light, Nat. Phys. 19, 1689 (2023).
+[43] N. Boroumand, A. Thorpe, G. Bart, L. Wang, D. N.
+Purschke, G. Vampa, and T. Brabec, Quantum Engi-
+neering of High Harmonic Generation, arXiv preprint
+arXiv:2505.22536 (2025).
+[44] S. Varró, Quantum Optical Aspects of High-Harmonic
+Generation, Photonics 8, 269 (2021).
+[45] A. Gorlach, O. Neufeld, N. Rivera, O. Cohen, and I.
+Kaminer, The quantum-optical nature of high harmonic
+generation, Nat Commun 11, 4598 (2020).
+[46] M. Lewenstein, Ph. Balcou, M. Yu. Ivanov, A. L’Huillier,
+and P. B. Corkum, Theory of high-harmonic generation
+by low-frequency laser ﬁelds, Phys. Rev. A 49, 2117
+(1994).
+[47] P. B. Corkum, Plasma perspective on strong ﬁeld multi-
+photon ionization, Phys Rev Lett 71, 1994 (1993).
+[48] K. J. Schafer, B. Yang, L. F. DiMauro, and K. C. Ku-
+lander, Above threshold ionization beyond the high har-
+monic cutoﬀ, Phys. Rev. Lett. 70, 1599 (1993).
+[49] G. Vampa and T. Brabec, Merge of high harmonic gen-
+eration from gases and solids and its implications for at-
+tosecond science, J. Phys. B: At. Mol. Opt. Phys. 50,
+083001 (2017).
+[50] F. Brunel, Harmonic generation due to plasma eﬀects
+in a gas undergoing multiphoton ionization in the high-
+intensity limit, J. Opt. Soc. Am. B 7, 521 (1990).
+[51] F. Krausz and T. Brabec, Intense few-cycle laser ﬁelds:
+Frontiers of nonlinear optics, Rev. Mod. Phys. 72, 545
+(2000).
+[52] A. Thorpe, N. Boroumand, A. M. Parks, E. Goulielmakis,
+and T. Brabec, High harmonic generation in solids: Real
+versus virtual transition channels, Phys. Rev. B 107,
+075135 (2023).
+[53] A. M. Parks, G. Ernotte, A. Thorpe, C. R. McDonald, P.
+B. Corkum, M. Taucer, and T. Brabec, Wannier quasi-
+classical approach to high harmonic generation in semi-
+conductors, Optica 7, 1764 (2020).
+[54] N. Boroumand, A. Thorpe, A. M. Parks, and T. Brabec,
+Keldysh ionization theory of atoms: mathematical de-
+tails, J. Phys. B: At. Mol. Opt. Phys. 55, 213001 (2022).
+[55] See Supplemental Material at _____ for detailed infor-
+mation of the ground state photon wavefunction deriva-
+tion and its connections to interband and intraband cur-
+rents of solids. Methods of expectation value calculations
+are also given there.
+[56] A.-M. Wazwaz, Linear and Nonlinear Integral Equa-
+tions: Methods and Applications (Higher Education
+Press, Beijing and Springer-Verlag GmbH Berlin Heidel-
+berg Springer e-books, Berlin, Heidelberg, 2011).
+[57] G. Vampa, T. J. Hammond, N. Thiré, B. E. Schmidt, F.
+Légaré, C. R. McDonald, T. Brabec, and P. B. Corkum,
+Linking high harmonics from gases and solids, Nature
+522, 462 (2015).
+[58] M. V. Ammosov, N. B. Delone, and V. P. Krainov, Tun-
+nel ionization of complex atoms and of atomic ions in an
+alternating electromagnetic ﬁeld, Soviet Journal of Ex-
+perimental and Theoretical Physics 64, 1191 (1986).
+[59] C.-G. Wahlström, J. Larsson, A. Persson, T. Starczewski,
+S. Svanberg, P. Salières, Ph. Balcou, and A. L’Huillier,
+High-order harmonic generation in rare gases with an
+intense short-pulse laser, Phys. Rev. A 48, 4709 (1993).
+[60] C. Jin and C. D. Lin, Comparison of high-order harmonic
+generation of Ar using truncated Bessel and Gaussian
+beams, Phys. Rev. A 85, 033423 (2012).
+[61] S. Majidi, R. Aghbolaghi, H. A. Navid, and R. Mokhlesi,
+Optimization of cut-oﬀ frequency in high harmonic gen-
+eration in noble gas, Appl. Phys. B 130, 11 (2024).
+[62] S. Chintalwad, T. Chau, and L. V. Dao, Cascaded high
+harmonic generation in mixture of argon and helium:
+Achieving a broad photon spectrum, Physics of Plasmas
+31, 123301 (2024).
+A uniﬁed treatment of high-harmonic generation in gases and solids: supplemental
+material
+A. Thorpe 1,∗ N. Boroumand 1, G. Bart 1, L. Wang 1, G. Vampa 1,2, and T. Brabec 1
+1Department of Physics, University of Ottawa, Ontario K1N 6N 5, Canada and
+2National Research Council of Canada, Ottawa, Ontario K1A 0R 6, Canada
+(Dated: October 21, 2025)
+In this supplemental document we provide greater de-
+tail as to how we derive the photon wavefunction and
+corresponding coherent state parameters for interband-
+like and intraband-like mechanisms. Further, we provide
+some detail on the calculation of expectation values, in
+particular the harmonic photon yield. We provide other
+information in the appendices: the calculation of σκ(t),
+the calculation of the quantum vacuum phase, the ﬁlter
+we use in our model that suppresses long electron trajec-
+tories, and Fourier transform identities that we utilize.
+I. DERIV ATION OF THE PHOTON
+W A VEFUNCTION
+We start in the Schrödinger picture, operators time inde-
+pendent, and wavefunction time dependent. The electric
+ﬁeld and vector potential operators are deﬁned as
+ˆF(x) = i
+∑
+κ
+ηkωkeκ
+(
+ˆaκeikx − ˆa†
+κe−ikx)
+(1a)
+ˆA(x) =
+∑
+κ
+ηkeκ
+(
+ˆaκeikx + ˆa†
+κe−ikx)
+, (1b)
+compare Eqs. (2.119), (2.120) in Ref. [1]. Here, k = kn
+runs over all wavevectors, n represents the unit vector
+along k, k = ωk/c, and s = 1 or 2 is the light polar-
+ization index; to minimize indices, we deﬁne the multi-
+index κ ≡ (k, s); further, eκ speciﬁes the direction of po-
+larization, and hat denotes operator quantities. Finally,
+η2
+k = ℏ/(2ωkε0V ) and ε0 is the vacuum permittivity.
+Our goal is to solve the Schrödinger equation
+iℏ∂t|Ψ(t)⟩ = ˆH|Ψ(t)⟩ =
+(
+ˆHm + ˆHf + ˆHi
+)
+|Ψ(t)⟩, (2)
+where
+ˆHm = ˆp2/(2m) + V (r) (3a)
+ˆHf =
+∑
+κ
+ℏωkˆa†
+κˆaκ (3b)
+ˆHi = r|e| ˆF(x) (3c)
+are the matter, ﬁeld, and interaction Hamiltonian; m is
+the electron mass; we distinguish between local coordi-
+nates of a single atom r and global coordinates x that
+∗ athor087@uottawa.ca
+vary over the whole material; ˆp, r are electron momen-
+tum and position relative to the global center of mass x
+of the atom.
+Eq. ( 2) is solved by utilizing the Ansatz
+|Ψ(t)⟩ = |0⟩ ⊗ |φ0(t)⟩ +
+∫
+d3p |p⟩ ⊗ |φp(t)⟩ (4)
+where |0⟩ is the atomic ground state of binding en-
+ergy E0, and ionized electron continuum state |p⟩ =
+1/(2πℏ)3/2 exp((i/ℏ)pr). Further, photon Fock states
+|φ0(t)⟩ and |φp(t)⟩, are associated with the ground and
+continuum states, respectively.
+Inserting Ansatz ( 4) into Eq. ( 2) and operating on the
+resulting equation with functionals ⟨0| and ⟨p| yields two
+equations of motion for the respective photon wavefunc-
+tions,
+iℏ∂t|φ0⟩ = (E0 + Hf )|ϕ0⟩ +
+∫
+d3p d∗(p) |e| ˆF |φp⟩ (5a)
+iℏ∂t|φp⟩=
+(p2
+2m+Hf +|e| ˆF(−iℏ∇p)
+)
+|φp⟩
++ d(p) |e| ˆF |φ0⟩. (5b)
+In the derivation of Eq. ( 5) we have employed the
+strong ﬁeld approximation; single electron ground and
+continuum states are approximately orthogonal, ⟨p|0⟩ =
+⟨0|p⟩ = 0, and the eﬀect of the Coulomb potential on the
+continuum electron is assumed to be negligible compared
+to the intense laser ﬁeld. Further, the single electron
+transition dipole moment is deﬁned as d(p) = ⟨p|r|0⟩ =
+d0p/(p2 + 2mE0)3 [2, 3].
+Next, we transform Eqs. (
+5) into velocity the gauge
+by inserting |φl⟩ = ˆUv|φ′
+l⟩, l = 0, p with unitary operator
+ˆUv = exp(i(|e|/ℏ)r ˆA). The resulting equations are
+iℏ∂t|φ′
+0⟩ = (E0 + Hf )|φ′
+0⟩
++
+∫
+d3p d∗(p + |e| ˆA) |e| ˆF |φ′
+p⟩ (6a)
+iℏ∂t|φ′
+p⟩=
+( 1
+2m (p+|e| ˆA)2 +Hf
+)
+|φ′
+p⟩
++ d(p + |e| ˆA) |e| ˆF|φ′
+0⟩. (6b)
+For the derivation of Eq. (
+5) the following relations
+have been used; ˆU †
+v f (p) ˆUv = f (p + |e| ˆA); ˆU †
+v Hf ˆUv =
+Hf − | e|x ˆF; and ˆU †
+v ˆF ˆUv = ˆF. For the second rela-
+tion it is helpful to use [ˆa, exp(βˆa†)] = β exp(βˆa†) and
+[exp(βˆa), ˆa†] = β exp(βˆa) [4].
+2
+For the next step we need coherent states. A coherent
+state can be expressed in terms of the displacement op-
+erator |α(t)⟩ = ˆDα(t)|v⟩, where |v⟩ is the vacuum state
+over all modes, |v⟩ =∏
+κ |vκ⟩, and the displacement op-
+erator is deﬁned as ˆDα(t) = ∏
+κ ˆD(ακ(t)); for a single
+mode,
+ˆD(ακ(t)) = exp
+(
+ακˆa†
+κ
+e−iωkt − α∗
+κˆaκ
+eiωkt)
+. (7)
+Note that we are in the Schrödinger picture, where opera-
+tors are time independent. However, in the above we use
+the displacement operator to describe a photon wavefunc-
+tion state which is time dependent. Pulling the time de-
+pendence into the coeﬃcient, we deﬁne ακ(t) = ακe−iωkt.
+With Eq. (
+7), the coherent state can be expressed as
+|ακ(t)⟩ = ˆD(ακ(t))|vκ⟩.
+As the driving laser is intense, it makes sense to
+model it via a multi-mode coherent state, |φ′
+0(t)⟩ =
+|α(t)⟩ + |φ′′
+0 (t)⟩. The weak quantum state |φ′′
+0 (t)⟩ ac-
+counts for weak perturbations to the pump beam and
+for the radiation produced during HHG. We assume a
+set of quantum modes for the intense laser κ ∈ { c}
+and one for the quantum state κ ∈ { q}. The modes
+of the quantum state are assumed to not overlap with
+the intense laser modes, {c} ∩ { q} = ∅. For now we
+assume that |φ′′
+0 (t0)⟩ = 0 . As a result, we can say
+ˆD†
+α(t)|φ′
+0(t)⟩ = |φ′′
+0 (t)⟩, as ˆD†
+α(t)|α(t)⟩ = |v⟩. The dis-
+placement operator ˆDα(t) = ∏
+κ∈{c} ˆD(ακ(t)) runs over
+the modes of the intense laser.
+In case there is a quantum ﬁeld |ε(t)⟩ that overlaps
+with the intense laser modes we would need to carry along
+ˆD†
+α(t)|ε(t)⟩ in the following transformation.
+In order to remove the coherent state from the wave-
+function, we make the replacement |φ′
+l(t)⟩ = ˆDα(t)|φ′′
+l (t)⟩
+(l = 0, p) in Eq. (
+6). The vector potential transforms as
+ˆD†
+α(t) ˆA ˆDα(t) = ˜A(t) = A(t) + ˆA, and the electric ﬁeld
+becomes ˆD†
+α(t) ˆF ˆDα(t) = ˜F(t) = F (t) + ˆF. The quantum
+ﬁelds are deﬁned as in Eq. ( 1) and the classical ﬁelds are
+given by
+F(t) =i
+∑
+κ∈{c}
+ηkωkeκ
+(
+ακei(kx−ωkt) −α∗
+κe−i(kx−ωkt)
+)
+(8a)
+A(t) =
+∑
+κ∈{c}
+ηkeκ
+(
+ακei(kx−ωkt) + α∗
+κe−i(kx−ωkt)
+)
+. (8b)
+Further, we have to work out ∂t ˆDα(t) and
+ˆD†
+α(t) ˆHf ˆDα(t) where the second expression gives an ad-
+ditional term that cancels the time derivative of the dis-
+placement operator [5].
+The resulting equations of motion are
+iℏ∂t|φ′′
+0 ⟩= (E0 + Hf )|φ′′
+0 ⟩+
+∫
+d3p d∗(
+p+|e| ˜A(t)
+)
+×
+× |e| ˜F(t) |φ′′
+p⟩ (9a)
+iℏ∂t|φ′′
+p⟩=
+( 1
+2m (p+|e| ˜A(t))2 +Hf
+)
+|φ′′
+p⟩
++ d
+(
+p + |e| ˜A(t)
+)
+|e| ˜F(t)|φ′′
+0 ⟩. (9b)
+To put classical and quantum ﬁelds on equal footing,
+we transform to the interaction picture; we chose |φ′′
+l ⟩ =
+ˆUi|ϕl⟩, l = 0 , p with ˆUi = exp( −i ˆHf t/ℏ). The resulting
+equations are
+iℏ∂t|ϕ0⟩= E0|ϕ0⟩+
+∫
+d3p d∗(
+p+|e| ˜A(t)
+)
+|e| ˜F(t) |ϕp⟩
+(10a)
+iℏ∂t|ϕp⟩ =
+( 1
+2m (p + |e| ˜A(t))2
+)
+|ϕp⟩
++ d
+(
+p + |e| ˜A(t)
+)
+|e| ˜F(t)| ϕ0⟩. (10b)
+In the interaction picture, the operators ˆaκ exp(−iωkt)
+and ˆa†
+κ exp(iωkt) become time dependent, and as a
+consequence the ﬁeld and vector potential operators,
+˜F(t) = F (t) + ˆF(t), ˜A(t) = A(t) + ˆA(t). For
+the derivation of Eq. (
+10) the following relations are
+helpful; exp(iωtˆa†ˆa)ˆa exp(−iωtˆa†ˆa) = ˆ a exp(−iωt) and
+exp(iωtˆa†ˆa)ˆa† exp(−iωtˆa†ˆa) = ˆa† exp(iωt) [4].
+The quantum ﬁelds clearly present a perturbation to
+the intense pump ﬁeld. As a result, we introduce the
+following approximations: (i) we expand the dipole mo-
+ments with regard to the operator arguments to ﬁrst
+order, d(pt + |e| ˆA(t)) ≈ d(pt) + |e|[( ˆA(t)∇p)d(p)]pt ,
+where pt = p + |e|A(t). While we do not carry along
+the ﬁrst order contribution in this work, we keep in mind
+that it is there. (ii) we approximate (p + |e| ˜A(t))2 ≈
+p2
+t + 2pt|e| ˆA(t). With these approximations, Eqs. (
+10)
+become
+iℏ∂t|ϕ0⟩ = E0|ϕ0⟩ +
+∫
+d3p d∗(pt) |e| ˜F(t) |ϕp⟩ (11a)
+iℏ∂t|ϕp⟩ =
+( 1
+2m p2
+t + |e|
+m pt ˆA(t)
+)
+|ϕp⟩
++ d(pt) |e| ˜F(t) |ϕ0⟩. (11b)
+Eqs. ( 11) can be integrated analytically. We start with
+Eq. ( 11b) which contains an operator term
+−i |e|
+ℏm pt ˆA(t) =
+∑
+κ∈{q}
+.
+σκ(t)ˆa†
+κ −
+.
+σ
+∗
+κ (t)ˆaκ
+.
+σκ(t) = −i |e|ηk
+ℏm
+(
+eκpt
+)
+e−i(kx−ωkt), (12)
+where the dot on
+.
+σκ(t) indicates the time derivative.
+σκ(t) = ∂tσκ(t). The exponent of this operator is clearly
+a displacement operator,
+exp
+(
+−i |e|
+ℏm pt ˆA(t)
+)
+=
+∏
+κ∈{q}
+ˆD(
+.
+σκ(t)), (13)
+where the displacement operator was deﬁned above Eq.
+(
+7).
+For the integration of Eq. ( 11b) the following relation
+is useful,
+∂t exp( ˆB(t)) = ( ∂t ˆB + (1/2)[ ˆB(t), ∂t ˆB]) exp( ˆB(t)),
+(14)
+3
+as long as the commutator gives a c-number. Equation
+(
+11b) is integrated by using the Ansatz
+|ϕp⟩ = ˆDσ(t′) exp
+(
+i
+∫ t′
+t0
+g′dt′′
+)
+| ˜ϕp⟩, (15)
+where, ˆDσ(t) =∏
+κ∈{q} ˆD(σκ(t)),
+σκ(t) =σκ(t0, t) =
+∫ t
+t0
+.
+σκdt′
+= |e|Ev
+ℏ σκ(t)e−i(kx−ωkt) (16)
+σκ(t) = −i
+mωk
+∫ t
+t0
+eκpt′ e−iωk(t−t′)dt′, (17)
+t0 is the initial time, and Ev = ηkωk is the vacuum elec-
+tric ﬁeld amplitude. An evaluation of this integral is
+given in Appendix
+A.
+The purpose of the exponential c-number term in the
+Ansatz Eq. ( 15) is to cancel the commutator that arises
+from the time derivative of the operator part of the
+Ansatz above.
+We insert Ansatz (
+15) into Eq. ( 11b). Evaluating the
+time derivative, as prescribed above, a commutator re-
+sults that needs to be evaluated using relation (
+12),
+ig′(t) = 1
+2
+[
+−i |e|
+ℏm
+∫ t
+t0
+dt′pt′ ˆA(t′), −i |e|
+ℏm pt ˆA(t)
+]
+=
+= i
+∑
+κ
+Im
+[ .
+σ
+∗
+κ (t)σκ(t)
+]
+(18)
+After elimination of the operator term, the resulting
+equation can be directly integrated to give
+| ˜ϕp⟩ = − i
+ℏ
+∫ t
+t0
+dt′ exp
+(
+i
+∫ t′
+t0
+( p2
+τ
+2mℏ − g′(τ )
+)
+dτ
+)
+× d(pt′ ) |e| ˜F(t′) ˆDσ(t′)| ˜ϕ0(t′)⟩ (19)
+Transformation back to |ϕp⟩ we encounter a product
+of displacement operators that need to be combined to a
+single displacement operator,
+∏
+κ
+ˆD(σκ(t)) ˆD†(σκ(t′)) =
+= ˆDσ(t′, t) exp
+(
+ig′′(t′, t)
+)
+, (20)
+with ˆDσ(t′, t) =∏
+κ ˆD(σκ(t′, t)). Further,
+ig′′(t′, t) = − 1
+2
+( |e|
+ℏm
+)2[ ∫ t
+t0
+dτ pτ ˆAj (τ ),
+∫ t′
+t0
+dτ pτ ˆA(τ )
+]
+= i
+∑
+κ
+Im [σκ(t′) σ∗
+κ (t)] . (21)
+Here we have used the relation ˆD(α) ˆD(β) = ˆD(α +
+β) exp(iIm(αβ∗)) [1]. We deﬁne
+g(t′, t) =
+∫ t
+t′
+g′(τ )dτ + g′′(t′, t) (22)
+Putting everything together we ﬁnd
+|ϕp⟩ = − i|e|
+ℏ
+∫ t
+t0
+dt′ exp
+(
+− i
+2mℏ
+∫ t
+t′
+p2
+τ dτ + ig(t′, t)
+)
+× d(pt′ ) ˜F(t′) ˆDσ(t′, t) |ϕ0⟩. (23)
+Finally, we integrate Eq. ( 10a) and insert Eq. ( 23) to
+obtain
+|ϕ0(t)⟩= |ϕ0(t0)⟩− |e|2
+ℏ2
+∫ t
+t0
+dt′
+∫
+d3p d∗(pt′) ˜F(t′)
+∫ t′
+t0
+dt′′
+˜F(t′′) d(pt′′) e−iS(t′′,t′)+ig(t′′,t′) ˆDσ(t′′, t′)|ϕ0(t′′)⟩ (24)
+with
+S(t) = 1
+ℏ
+∫ t
+t0
+( 1
+2m p2
+τ + E0
+)
+dτ. (25)
+the classical action, and S(t′, t) = S(t) − S(t′).
+Eq. ( 24) can be simpliﬁed by deﬁning the right-hand
+side as,
+−
+∫
+d3p
+∫ t
+t0
+dt′ˆc†
+p(t′)
+∫ t′
+t0
+dt′′ˆcp(t′′)
+⏐
+⏐ϕ0(t′′)
+⟩
+=
+− |e|2
+ℏ2
+∫
+d3p d∗(pt′ )
+∫ t′
+t0
+dt′′d(pt)
+×
+(
+F (t′)F (t′′)+ ˆF(t′)F (t′′)+ F(t′) ˆF(t′′)
+)
+× ˆDσ(t′′, t′) exp (−iS(t′′, t′))
+⏐
+⏐ϕ0
+⟩
+(t′′), (26)
+ˆcp(t′′) = ˜Ω(t′′) ˆD†
+σ(t′′) exp (iS(t′′)) . (27)
+Here, ˜Ω(t′′) = ( |e|/ℏ)d(pt′′ ) ˜F(t′′)
+)
+= Ω( t) + ˆΩ(t) is a
+generalized Rabi frequency with the quantum Rabi fre-
+quency ˆΩ(t) = ∑
+κ ˆΩκ(t). Further, the term g(t′′, t′) is
+omitted as can be analyzed in Appendix
+B.
+Using Eq. ( 27) we can rewrite Eq. ( 24) to arrive at
+the following integro-diﬀerential equation,
+∂t|ϕ0(t)⟩ = −
+∫
+d3p ˆc†
+p(t)
+∫ t
+t0
+dt′ ˆcp(t′) |ϕ0(t′)⟩. (28)
+In the weak depletion limit, |ϕ0⟩ can be pulled out of the
+integral on the right hand side of Eq. (
+28) by integration
+by parts; higher order terms are neglected. The resulting
+diﬀerential equation of motion is
+∂t|ϕ0(t)⟩ ≈
+(
+∂tˆh(t)
+)
+|ϕ0(t)⟩. (29)
+Integration of Eq. (
+29) by the method of Magnus and
+Fer [6] results in
+|ϕ0(t)⟩ ≈ exp
+(
+ˆh(t)
+)
+|ϕ0(t0)⟩ (30)
+ˆh = −
+∫
+d3p
+∫ t
+t0
+dt′ ˆc†
+p(t′)
+∫ t′
+t0
+dt′′ ˆcp(t′′). (31)
+4
+The next order term in the Magus Fer expansion,
+exp
+(∫ t
+t0
+dt′
+∫ t
+t0
+dt′′
+[
+∂t′ ˆh, ∂t′′ ˆh
+] )
+, (32)
+is small and is neglected, see the discussion of the zero-
+and one-photon operator terms in the next section.
+II. ZERO- AND ONE-PHOTON OPERATOR
+TERMS
+The operator exp(ˆh(t)) is not unitary due to the cou-
+pling between ground state and the continuum photon
+wavefunction. In order to isolate the unitary part of the
+wavefunction, ˆh(t) is split into an anti-Hermitian part
+plus small remainder. For that, we keep only zero-, and
+one-operator terms ˆh ≈ h(0) + ˆh(1), respectively and ne-
+glect the rest. This is reasonable, as |σκ|, |Ωκ| ≪ 1.
+The expansion of ˆ
+h is done by ﬁrst expanding ˆcp in Eq.
+(
+27) up to one-photon operator terms, ˆcp ≈ ˆc(0)
+p + ˆc(1)
+p
+with
+ˆc(0)
+p (t) = Ω( t)eiS(t)
+ˆc(1)
+p (t) =
+∑
+κ
+(
+ˆΩκ(t) − Ω(t)ˆσκ(t)
+)
+eiS(t), (33)
+where, ˆσκ(t) = σκ(t)ˆa†
+κ − σ∗
+κ(t)ˆaκ.
+From this ˆh = ˆh(0) + ˆh(1) in relation (
+31) is determined
+up to ﬁrst order with
+ˆh(0) = −
+∫
+d3p
+∫ t
+t0
+dt′
+(
+ˆc(0)∗
+p ˆC(0)
+p
+)
+(t′) (34a)
+ˆh(1) = −
+∫
+d3p
+∫ t
+t0
+dt′
+(
+ˆc(0)∗
+p ˆC(1)
+p + ˆc(1)†
+p ˆC(0)
+p
+)
+(t′) (34b)
+Here, we have introduced ˆC(j)
+p (t) = ∫ t
+−∞ dt′ˆc(j)
+p (t′) (j =
+0, 1) for the inner time integral. Further, HHG terms
+should have the photon operator term outside of the inner
+time integral, i.e. they should all be represented by small
+letter terms ˆc(1)
+p . To achieve this, we perform integration
+by parts of the terms in Eqs. (
+34b) containing ˆC(1)
+p . For
+example,
+∫ tdt′ˆc(0)∗
+p ˆC(1)
+p = −
+∫ tdt′ˆc(1)
+p ˆC(0)∗
+p + R, where R
+is a small residual term.
+Applying the above steps to Eq. (
+34) yields
+ˆh(0) = −
+∫
+d3p
+∫ t
+t0
+dt′
+(
+ˆc(0)∗
+p ˆC(0)
+p
+)
+(t′) (35a)
+ˆh(1) ≈
+∫
+d3p
+∫ ∞
+t0
+dt′
+(
+ˆc(1)
+p ˆC(0)∗
+p − ˆc(1)†
+p ˆC(0)
+p
+)
+(t′) (35b)
+where we also have let t → ∞ in the HH term (
+35b).
+Next, we evaluate the individual terms in Eq. ( 35) by
+inserting Eq. ( 33). For Eq. ( 35a) one obtains
+h(0)(t) = −
+∫ t
+t0
+dt′γ(t′) = −
+∫ t
+t0
+dt′
+∫
+d3p Γp(t′)
+Γp(t) = Ω ∗(t)e−iS(t)
+∫ t
+t0
+dt′ Ω(t′) eiS(t′). (36)
+Here, γ(t) is a complex rate, and γ + γ∗ gives the optical
+ﬁeld ionization rate from ground state to continuum.
+The one photon operator contribution ( 35b) is worked
+out to be ˆh(1) =∑
+κ
+ˆh(1)
+κ with
+ˆh(1)
+κ = hκˆa†
+κ − h∗
+κˆaκ. (37)
+The next order term in the Magnus Fer expansion ([6]) is
+a small phase term that does not contribute to HHG and
+can be neglected. Therefore, assuming the initial state is
+vacuum, Eq. (
+31) for HHG gives a coherent state with
+the HHG coeﬃcient given by
+hκ = e−ikx
+∫ ∞
+−∞
+dt′eiωkt′
+Hk(t′) = ˜Hke−ikx (38)
+Hk =
+{
+|e|Ev
+ℏ
+(
+eκx(t′)
+)
+−
+∫
+d3p σκ(t′) (Γp(t′) + c.c)
+}
+with
+x(t) =2Re
+[
+i
+∫
+d3p d∗(pt)e−iS(t)
+∫ t
+−∞
+dt′Ω(t′)eiS(t′)
+]
+.
+(39)
+The ﬁrst term in Eq. ( 38) relates to previous work [7],
+where x(t) is the expectation value of the dipole moment
+driving HHG. Note that the subscript in Hk is chosen k
+to indicate that it does not depend on the HHG wavevec-
+tor, but only on the frequency. It is also assumed that
+harmonic and laser polarization vectors are parallel, so
+that the polarization index can be neglected as well.
+Finally, it should be noted that Eq. (
+38) does not con-
+tain any explicit terms that account for dephasing be-
+tween the ground state and the continuum. Without any
+kind of dephasing mechanism implemented in the model,
+the spectrum becomes too noisy to easily distinguish dif-
+fering odd harmonics. To counteract this, we include in
+our numerical simulations a ﬁlter as in Appendix
+C. This
+is based on the fact that HHG is dominated by the short-
+est trajectories, where the time between ionization and
+harmonic emission is within a half-cycle.
+5
+III. CONNECTION TO INTERBAND AND
+INTRABAND CURRENTS IN SOLIDS
+From Eq. ( 38) we see that the coherent quantum op-
+tical HHG parameter, hκ, consists of a sum of two parts,
+h′
+κ = |e|Ev
+ℏ eκ
+∫ ∞
+−∞
+dtei(ωkt−kx)x(t), (40a)
+h′′
+κ = − |e|Ev
+ℏ
+∫ ∞
+−∞
+dtei(ωkt−kx)
+∫
+d3p¯σκ(t) [Γp(t) + c.c.] .
+(40b)
+We will demonstrate that they can be connected to the
+theory of interband and intraband currents in solids, re-
+spectively [8]. This thus bridges HHG theory of gases
+and solids as well as quantum optical and semiclassical
+theories.
+To derive these connections, we assume a linearly po-
+larized classical driving ﬁeld that is of the form, F (t) =
+F 0f (t) sin(ω0t), where F 0 is the ﬁeld vector of maximum
+amplitude, ω0 is its frequency, and f (t) is a slowly vary-
+ing temporal envelope. We aim to rewrite Eqs. ( 40) to
+eliminate integer powers of the harmonic frequency fac-
+tors ωk, isolating the role of vacuum ﬁeld ﬂuctuations
+ηκ ∝ ω−1/2
+k . This involves using the diﬀerentiation (Eq.
+(
+40b)) or integration (Eq. ( 40a)) properties of Fourier
+transforms (see Appendix D).
+In order to facilitate the demonstration of these con-
+nections, let us write here some correspondences between
+atomic gas systems and two-band solid [8] systems:
+p →k ∈ BZ (41a)
+E0 + p2
+2m →ε(k) = Ec(k) − Ev(k) (41b)
+v(p) =∇p
+(
+E0 + p2
+2m
+)
+= p
+m
+→v(k) = ℏ−1∇kε(k) (41c)
+d(p) →d(k) = i
+∫
+d3xu∗
+c,k(x)∇kuv,k(x). (41d)
+That is, ionized electronic momentum p is replaced with
+the crystal wavevector k (or crystal momentum ℏk)
+within the Brillouin zone (BZ), where all physics for
+k ̸∈BZ can be remapped to. Further, the atomic ground
+state and electronic continuum energies are replaced with
+the valence band Ev(k) and the conduction band Ec(k),
+respectively. ε(k) describes the energy diﬀerence be-
+tween these two bands and is often more convenient to
+use for calculations. The continuum electronic velocity
+v(p) = p/m is analogous to the band diﬀerence velocity,
+or more simply, the band velocity v(k). Note that both
+the valence and conduction bands have velocities associ-
+ated with them due to their curvatures in k-space. This
+is not the case with an atomic system where only the ion-
+ized electron motion contributes to the system’s velocity.
+Finally, the ground-continuum transition dipole d(p) in
+a gas is replaced with the valence-conduction transition
+dipole d(k), as in Eq. (
+41d), where, um,k(x), m = v, c
+are Bloch functions that correspond to periodic parts of
+crystal wavefunctions.
+A. Interband current
+Let us start by rewriting Eq. (
+40a) in terms of ηκ as,
+h′
+κ = |e|ηκωk
+ℏ eκ
+∫ ∞
+−∞
+dtei(ωkt−kx)x(t). (42)
+To eliminate the ωk factor we ﬁrst rewrite x(t) =∫ t
+−∞ dt′ ˙x(t′) so that,
+h′
+κ = |e|ηκωk
+ℏ eκ
+∫ ∞
+−∞
+dtei(ωkt−kx)
+∫ t
+−∞
+dt′ ˙x(t′). (43)
+We now apply the integral Fourier transform identity (see
+Eq. (
+D3) in Appendix D), ignoring the DC term, to
+obtain,
+h′
+κ = i|e|ηκ
+ℏ eκ
+∫ ∞
+−∞
+dtei(ωkt−kx) ˙x(t). (44)
+Outside of the Fourier exponent eiωkt, this form now
+only scales with ωk through vacuum ﬂuctuations via
+ηκ ∝ ω−1/2
+k .
+Using Eqs. ( 41a)-(41d), when we replace the dipole
+d(p) and action S(t) in x(t) of Eq. ( 39) by the solid
+state analogues, then we get a connection betwenn h′
+κ
+and the quasiclassical interband current in solids [8],
+h′
+κ = iηκeκ
+ℏ e−ikxJer(ωk), (45)
+where,
+Jer(ωk) =
+∫ ∞
+−∞
+dteiωktjer(t), (46)
+represents the interband current in the frequency domain
+and jer(t) = |e| ˙x(t) is in the time domain. Thus, vacuum
+ﬂuctuations ηκ ∝ ω−1/2
+k connect the coherent state pa-
+rameter h′
+κ to the interband current that can be derived
+semiclassically.
+B. Intraband current
+Consider Eq. (
+40b), it can rewritten in an alternative
+way as,
+h′′
+κ = − |e|Ev
+ℏ
+∫
+d3p
+∫ ∞
+−∞
+dte−i(kx−ωkt) ¯σκ(t)∂t|bp(t)|2,
+(47)
+where |bp(t)|2 is the electronic continuum pop-
+ulation with continuum amplitude bp(t) =
+6
+ie−iS(t)∫ t
+−∞ dt′Ω(t′)eiS(t′), of the atom-continuum
+wavefunction as in [7]. Of note is that by examining Eq.
+(23) we see that, up to a phase term, bp(t) represents
+the classical ﬁeld part of the ground-continuum photon
+wavefunction overlap ⟨ϕ0|ϕp⟩.
+We made use of the fact
+that ∂t|bp(t)|2 = Γ p(t) + c.c according to Eq. (36).
+Inserting ¯σκ(t), as evaluated in Eq. ( A6) of Appendix
+A, and assuming for the harmonics in question that ω2
+k ≫
+ω2
+0, we obtain,
+h′′
+κ ≈ − |e|ηkeκ
+ℏm
+∫
+d3p
+∫ ∞
+−∞
+dte−i(kx−ωkt)
+×
+{ pt
+ωk
++ |e|
+ω2
+k
+[ ω2
+0
+ωk
+A(t) − iF (t)
+]}
+∂t|bp(t)|2. (48)
+Next, we can use the relation ∂t
+(
+A(t)|bp(t)|2)
+=
+−F (t)|bp(t)|2 + A(t)∂t|bp(t)|2 in the above to obtain,
+h′′
+κ = − |e|ηkeκ
+ℏm
+∫
+d3p
+∫ ∞
+−∞
+dte−i(kx−ωkt)
+{
+pt
+ωk
+∂t|bp(t)|2
++|e| ω2
+0
+ω3
+k
+A(t)∂t|bp(t)|2 − |e| i
+ω2
+k
+F (t)∂t|bp(t)|2
+}
+. (49)
+This can be modiﬁed further by using the relation
+A(t)∂t|bp(t)|2 = ∂t
+(
+A(t)|bp(t)|2)
++ F (t)|bp(t)|2 and
+applying the diﬀerentiation rule of Fourier transforms,
+as in Eq. (
+D2) of Appendix D, on the term with
+∂t
+(
+A(t)|bp(t)|2)
+to obtain,
+h′′
+κ = i|e|ηkeκ
+ℏm
+∫
+d3p
+∫ ∞
+−∞
+dte−i(kx−ωkt)
+×
+{
+ipt
+ωk
+∂t|bp(t)|2 + |e| ω2
+0
+ω2
+k
+(
+A(t)|bp(t)|2)
++i|e| ω2
+0
+ω3
+k
+F (t)|bp(t)|2 + |e|
+ω2
+k
+F (t)∂t|bp(t)|2
+}
+. (50)
+Next we assume that i|e|(ω2
+0/ω3
+k)F (t)|bp(t)|2 is much
+smaller than the other terms in braces so that we can
+use,
+h′′
+κ ≈ i|e|ηkeκ
+ℏm
+∫
+d3p
+∫ ∞
+−∞
+dte−i(kx−ωkt)
+{
+ipt
+ωk
+∂t|bp(t)|2
++|e| ω2
+0
+ω2
+k
+(
+A(t)|bp(t)|2)
++ |e|
+ω2
+k
+F (t)∂t|bp(t)|2
+}
+. (51)
+With this result we can follow a similar procedure as
+before by utilizing the relation, valid in the slowly
+varying envelope approximation, ∂t
+(
+F (t)|bp(t)|2)
+≈
+ω2
+0A(t)|bp(t)|2 + F (t)∂t|bp(t)|2. Using this relation and
+applying the diﬀerentiation rule of Fourier transforms
+(Eq. (
+D2) of Appendix D) on the resulting term with
+∂t
+(
+F (t)|bp(t)|2)
+, we obtain,
+h′′
+κ = i|e|ηkeκ
+ℏm
+∫
+d3p
+∫ ∞
+−∞
+dte−i(kx−ωkt)
+×
+{
+ipt
+ωk
+∂t|bp(t)|2 − i |e|
+ωk
+F (t)|bp(t)|2
+}
+. (52)
+Finally, by using the relation ∂t
+(
+pt|bp(t)|2)
+=
+−|e|F(t)|bp(t)|2 + pt∂t|bp(t)|2, we arrive at,
+h′′
+κ = i|e|ηkeκ
+ℏm
+∫
+d3p
+∫ ∞
+−∞
+dte−i(kx−ωkt)
+× i
+ωk
+∂t
+(
+pt|bp(t)|2)
+. (53)
+Once again applying the diﬀerentiation rule of Fourier
+transforms (Eq. (
+D2) of Appendix D) we arrive at,
+h′′
+κ = i|e|ηkeκ
+ℏ
+∫
+d3p
+∫ ∞
+−∞
+dte−i(kx−ωkt)v(pt)|bp(t)|2,
+(54)
+where we made use of the electronic continuum velocity
+relation v(p) = p/m.
+Eq. (
+54) can now be rewritten in the compact form,
+h′′
+κ = iηkeκ
+ℏ e−ikxJra(ωk), (55)
+where,
+Jra(ωk) =
+∫ ∞
+−∞
+dteiωktjra(t), (56)
+and,
+jra(t) =
+∫
+d3pv(pt)|bp(t)|2. (57)
+In reference to HHG in solids [8], we call Eq. ( 57)
+the “intraband current” and Eq. ( 56) is its harmonic
+frequency domain analogue. To see this connection, con-
+sider the form of the intraband current for a two-band
+crystal model, as in Ref. [8], of
+jra(t) =
+∑
+m=c,v
+∫
+BZ
+vm (Kt) nm(K, t)d3K, (58)
+where, in SI units, vm (k) = ℏ−1∇kEm(k) and nm(K, t)
+correspond to conduction ( m = c) and valence ( m = v)
+band velocities and populations, respectively. As can
+be seen by Eq. (
+58), the intraband current is driven
+by displacement of charge within the bands, through a
+combination of ionization ( nm(K, t)) and charge motion
+(vm (Kt)). The nonlinearities of these processes lead to
+HHG that carry a signature in Eq. (
+56). The connection
+to Eq. ( 57) in gases is apparent as the only diﬀerence in
+form is that the current only applies to continuum elec-
+trons rather than two (or more) bands. Although, the
+7
+role of the continuum velocity cannot be neglected in the
+gaseous model, without further external conditions that
+lead to anharmonicities, it plays a lesser role compared to
+the nonlinear ionization term ( |bp(t)|2), and also, band
+velocities of solids where anharmonic and often compli-
+cated band curvatures can lead to nonlinear acceleration
+of charges.
+With the connection to the solid state intraband cur-
+rent established for Eq. (
+57), we go back to Eq. ( 55). We
+ﬁnd that vacuum ﬂuctuations ηκ ∝ ω−1/2
+k connect the co-
+herent state parameter h′′
+κ to the intraband current that
+can be derived semiclassically.
+IV. EXPECT ATION V ALUES
+We look at the general expression for an expectation
+value of an operator of the form ˆO = ˆO(. . . ,ˆaκ, ˆa†
+κ, . . .).
+The wavefunction in the original frame is given by Eq.
+(
+4). The derived photon wavefunctions, |ϕl⟩ with l =
+0, p, as in Sec. I, relate to |φl⟩ in Eq. ( 4) through the
+relation |ϕl⟩ = ˆD†
+α ˆU †
+v ˆU †
+i |φ0⟩. To determine the expecta-
+tion value we need to connect it with the wavefunction
+in the original frame,
+|Ψ⟩ = ˆUv ˆDα ˆUi|Ψ⟩v
+|Ψ⟩v = |0⟩v ⊗ |ϕ0(t)⟩ +
+∫
+d3p |p⟩v ⊗ |ϕp(t)⟩ (59)
+where |0⟩v = ˆU †
+v |0⟩, |p⟩v = ˆU †
+v |p⟩.
+From here we can go two ways; transform the wave-
+function back to the Schrödinger and velocity gauge
+frame, or transforming the operator ˆO and keeping the
+wavefunction in the interaction frame, or any mixture of
+both. The easiest way seems to transform ˆO and to keep
+|Ψ⟩v,
+⟨Ψ| ˆO(ˆaκ, ˆa†
+κ)|Ψ⟩ = v⟨Ψ| ˆU †
+i ˆD†
+α ˆU †
+v ˆO ˆUv ˆDα ˆUi|Ψ⟩v
+= v⟨Ψ| ˆU †
+v ˆO
+(
+ˆaκe−iωkt +α(t), ˆa†
+κeiωkt +α∗(t)
+)ˆUv|Ψ⟩v
+≈ v⟨Ψ| ˆU †
+v ˆO
+(
+. . . ˆaκe−iωkt, ˆa†
+κeiωkt, . . .
+)ˆUv|Ψ⟩v
+≈ v⟨Ψ| ˆO
+(
+. . . ˆaκe−iωkt, ˆa†
+κeiωkt, . . .
+)
+|Ψ⟩v, (60)
+where the classical ﬁeld part can be neglected if we are
+only interested in HHG quantum emission and where
+ˆU †
+v ˆO ˆUv = ˆO, as long as ˆO does not depend on the elec-
+tronic part of the wavefunction.
+Splitting the wavefunction in Eq. (
+59) into ground
+state and continuum part, |Ψ⟩v = |Ψ0⟩v + |Ψc⟩v, the
+operator expectation value can be written as
+v⟨Ψ| ˆO|Ψ⟩v = v⟨Ψ0| ˆO|Ψ0⟩v +v⟨Ψc| ˆO|Ψc⟩v
++
+(
+v⟨Ψ0| ˆO|Ψc⟩v +c.c.
+)
+. (61)
+We focus on v⟨Ψ0| ˆO|Ψ0⟩v which contains the dominant
+HHG contribution; the resulting probability wavefunc-
+tion is very close to the Lewenstein expression for HHG
+[7]. Therefore, continuum-continuum terms are omitted.
+Mixed continuum ground state matrix elements are zero
+due to the assumed approximate orthogonality of plane
+waves and ground state. We have
+v⟨Ψ| ˆO|Ψ⟩v ≈ v⟨Ψ0| ˆO|Ψ0⟩v = ⟨ϕ0| ˆO|ϕ0⟩. (62)
+A. High harmonic photon number expectation
+value
+The harmonic spectrum is determined by the expecta-
+tion value of the number operator ˆn =∑
+κ ˆa†
+κˆaκ.
+Let us consider Eq. (
+30) with only ˆh(1)
+κ = hκˆa†
+κ − h∗
+κˆaκ
+and the assumption that the initial state is vacuum such
+that we are working with a coherent state with single
+mode harmonic coherent state parameters hκ as deﬁned
+in Eq. (
+38). Following the convention of Eq. ( 62), and
+noting that the expectation value for a single mode co-
+herent state |α⟩ is ⟨α|ˆn|α⟩ = |α|2 [1], we ﬁnd,
+⟨ϕ0|ˆn|ϕ0⟩ = ⟨ˆn⟩
+=
+∑
+κ
+|hκ|2. (63)
+Assuming that the quantization volume V is much
+greater than the scale of the laser wavelengths in the
+problem, we can switch the summation to integration in
+Eq. (
+63). As a result, following Ref. [1] we can write,
+⟨ˆn⟩ =
+∑
+s=1,2
+V
+(2π)3
+∫
+d3k|hκ|2, (64)
+where the sum over s = 1 , 2 corresponds to the light
+polarization basis. Note that the volume factor V is can-
+celled out by a η2
+κ ∝ 1/V contained in |hκ|2.
+Now note that the magnitude of the wavevector k can
+be linked to the harmonic frequency through the relation
+k = ωk/c. Because of this, we can implement harmonic
+frequencies into the integral by switching to spherical co-
+ordinates. That is,
+d⟨ˆn⟩
+dωk
+=
+∑
+s=1,2
+V ω2
+k
+(2πc)3
+∫
+dΩk|hκ|2, (65)
+where the integral over dΩk = sin θdθdφ corresponds to
+the solid angle associated with k.
+We next make the following assumptions:
+1. pt ∥ kz
+2. Assume a polarization state in the plane of k and
+pt. Then the second polarization state drops out
+as it is perpendicular to pt.
+With these assumptions made, note that hκ contains a
+dot product of the form eκpt = −pt sin θ, and this also
+applies to h′
+κ and h′′
+κ.
+8
+To separate out angular variables, let hκ = ¯hκ sin θ, so
+that,
+d⟨ˆn⟩
+dωk
+= V ω2
+k
+(2πc)3
+∫
+dΩk sin2 θ|¯hκ|2
+= V ω2
+k
+(2πc)3
+∫ 2π
+0
+dφ
+∫ π
+0
+dθ sin3 θ|¯hκ|2
+= V ω2
+k
+3π2c3 |¯hκ|2. (66)
+Utilizing this result we can determine the harmonic pho-
+ton yield centred about a given harmonic order N as,
+⟨ˆn⟩N = V
+3π2c3
+∫ (N +1/2)ω0
+(N −1/2)ω0
+dωkω2
+k|¯hκ|2. (67)
+Appendix A: Calculation of σκ(t) in the limit
+t0 → −∞
+Here we calculate σκ(t) = |e|Evσκ(t)e−i(kx−ωkt)/ℏ as-
+suming t0 → −∞ , starting from Eq. ( 17). To this end
+we start from the following deﬁnition
+σκ(t) = −i |e|ηk
+ℏm
+∫ t
+−∞
+dt′pt′ eκei(ωkt′−kx). (A1)
+We use integration by parts by letting u = pt′ eκ,
+du = −|e|F (t′)eκdt′, dv = eiωkt′
+dt′ and v = −ieiωkt
+′
+/ωk.
+Then we arrive at
+σκ(t)=− |e|ηkeκe−ikx
+ℏωkm
+{
+pteiωkt+|e|
+∫ t
+−∞
+dt′F (t′)eiωkt′
+}
+.
+(A2)
+Let I(t) =
+∫ t
+−∞ dt′F (t′)eiωkt′
+. Assume that the classi-
+cal ﬁeld is linearly polarized and of the form, F (t) =
+F 0f (t) sin(ω0t), with a slowly varying envelope f (t),
+driving ﬁeld maximum amplitude vector F 0 and driving
+frequency ω0 so that A(t) ≈ F 0f (t) cos ω0t/ω0. There-
+fore, it follows that,
+I(t) ≈ F 0f (t)
+2i
+∫ t
+−∞
+dt′
+(
+ei(ωk+ω0)t′
+− ei(ωk−ω0)t′)
+.
+(A3)
+= −F 0f (t)eiωkt
+2(ω2
+k − ω2
+0)
+(
+ωk(eiω0t − e−iω0t)
+− ω0(eiω0t + e−iω0t)
+)
+= −F 0f (t)eiωkt
+(ω2
+k − ω2
+0) (iωk sin ω0t − ω0 cos ω0t)
+= −eiωkt
+(ω2
+k − ω2
+0)
+(
+iωkF (t) − ω2
+0A(t)
+)
+. (A4)
+Then we arrive at
+σκ(t) = − |e|ηkeκ
+ℏm eiωkt−ikx
+{
+pt
+ωk
++ |e|
+(ω2
+k − ω2
+0)
+(ω2
+0
+ωk
+A(t) − iF (t)
+)}
+. (A5)
+Noting the deﬁnition of σκ(t) in Eq. ( 17), it is given by,
+¯σκ(t) ≈− eκ
+mωk
+{
+pt
+ωk
++ |e|
+(ω2
+k − ω2
+0)
+×
+[ ω2
+0
+ωk
+A(t) − iF (t)
+] }
+. (A6)
+Appendix B: Quantum vacuum phase g(t′′, t′)
+We evaluate g(t′′, t′) as deﬁned in Eqs. ( 18) ( 21) and
+(22). We start with,
+∫ t′′
+t′
+g′dτ =
+∑
+k
+(|e|ηk
+ℏm
+)2 1
+ωk
+[ ∫ t′
+t′′
+(
+eκpτ
+)2
+dτ − 1
+ωk
+(
+eκpt0
+)
+×
+{(
+eκpt′′
+)
+sin ωk(t′′ − t0) −
+(
+eκpt′
+)
+sin ωk(t′ − t0)
+}]
+(B1)
+and
+g′′(t′′, t′) =
+∑
+k
+( |e|ηk
+ℏωkm
+)2(
+eκpt0
+)
+×
+[ (
+eκpt′
+)
+sin ωk(t′ −t0)−
+(
+eκpt′′
+)
+sin ωk(t′′ −t0)
+]
+(B2)
+The last lines in Eqs. ( B1) and ( B2) cancel so that the
+sum yields
+g(t′′, t′) =
+∫ t′′
+t′
+g′(τ )dτ + g′′(t′′, t′)
+g(t′′, t′) =
+∑
+k
+( |e|2
+mω2
+kε0V
+) 1
+2mℏ
+∫ t′′
+t′
+(
+eκpτ
+)2
+dτ, (B3)
+Now we let V → ∞ by
+∑
+k
+1
+8π3∆k3 = 1
+8π3c3
+∫ ωr
+0
+ω2
+kdωkdΩk, (B4)
+9
+where ωr is the cutoﬀ frequency used for renormaliza-
+tion and dΩk is the angular integration variable. Clearly
+the dωk part is inﬁnite and ωr needs to be capped.
+An estimate can be obtained by following Bethe’s non-
+relativistic argument for the Lamb shift [9]; the elec-
+tron is non-relativistic, therefore ωr ≤ mc2/ℏ should be
+capped to frequencies corresponding to non-relativistic
+energies. This is intuitive, as the interaction of the elec-
+tron with relativistic frequencies would result in relativ is-
+tic ﬂuctuating motion of the electron.
+We still need to do the angular integral. For that we
+chose pt ∥ kz and we chose one polarization state in the
+plane spanned by k and pt. Then the second polarization
+state is automatically perpendicular to pt and does not
+contribute. As the integrand has only θ-dependence (z-
+axis angle) we get
+∫
+dΩk
+(
+eκpτ
+)2
+= 2πp2
+τ
+∫ π
+0
+dθ sin3 θ = 8π
+3 p2
+τ . (B5)
+Inserting Eq. ( B4) and ( B5) in ( B3) yields
+g(t′′, t′) = δr
+1
+2mℏ
+∫ t′′
+t′
+p2
+τ dτ (B6)
+δr = 1
+3π2
+|e|2
+ε0ℏc
+ℏωr
+mc2 . (B7)
+Here, δr renormalizes the electron mass by interaction of
+the continuum electron with vacuum modes.
+Since the experimentally known mass of the electron
+already contains the eﬀects of the electromagnetic ﬁeld,
+the phase term g(t′′, t′) can eﬀectively be dropped from
+our analysis [9].
+Appendix C: Long electron trajectory return ﬁlter
+Usually dephasing is accounted for by a term,
+exp (−ξ(t − t′)), with ξ(t − t′) = ( t − t′)/T2 and T2 the
+dephasing time [10–12]. This increases suppression of
+HHG for increasingly higher order electron returns. We
+use here a diﬀerent ﬁlter which leaves the ﬁrst return
+unﬁltered and extinguishes all higher returns,
+ξ(t − t′) = 0 for t − t′ ≤ T0
+2 (C1)
+ξ(t − t′) = 10( t − t′)/T0 for T0
+2 ≤ t − t′ ≤ T0 (C2)
+ξ(t − t′) = ∞ for t − t′ > T 0 (C3)
+with optical period T0 = 2 π/ω0 and ω0 the laser fre-
+quency. The ﬁlter is conﬁned to one optical cycle, as
+the associated convolution operation is numerically ex-
+pensive.
+Appendix D: Diﬀerentiation and integration
+properties of Fourier transforms
+Sec.
+III relies heavily on the diﬀerentiation and inte-
+gration properties of Fourier transforms. For the conve-
+nience of the reader we provide them here.
+Throughout this work the convention for the Fourier
+transform of a function G(t) in the time domain to the
+harmonic angular frequency domain is,
+g(ω) =
+∫ ∞
+−∞
+dteiωtG(t). (D1)
+The diﬀerentiation and integration properties are
+∫ ∞
+−∞
+dteiωt dG(t)
+dt = − iωg(ω), (D2)
+∫ ∞
+−∞
+dteiωt
+∫ t
+−∞
+dt′G(t′) = ig(ω)
+ω + πg(0)δ(ω), (D3)
+respectively [13].
+The second term of Eq. ( D3) is a DC term that we
+ignore throughout this analysis as we account only for
+harmonics above the fundamental frequency of the laser
+beam.
+[1] C. C. Gerry and P. Knight, Introductory Quantum Op-
+tics (Cambridge University Press, Cambridge, UK ; New
+York, 2005).
+[2] N. Boroumand, A. Thorpe, A. M. Parks and T. Brabec,
+Keldysh ionization theory of atoms: mathematical details
+J. Phys. B., 55 213001 (2022).
+[3] H. A. Bethe and E. E. Salpeter, Quantum Mechanics of
+One-and Two-Electron Atoms , Plenum Pub. Corp., New
+York (1977).
+[4] R. Loudon, The quantum theory of light , 2 nd edition,
+Claerendon Press, Oxford (1983).
+[5] A. Gorlach, O. Neufeld, N. Rivera, O. Cohen, and I.
+Kaminer, The quantum-optical nature of high harmonic
+generation, Nat Commun 11, 4598 (2020).
+[6] R. M. Wilcox, Exponential Operators and Parameter Dif-
+ferentiation in Quantum Physics , Journal of Mathemat-
+ical Physics 8, 962 (1967).
+[7] M. Lewenstein, Ph. Balcou, M. Yu. Ivanov, A. L’Huillier,
+and P. B. Corkum, Theory of high-harmonic genera-
+tion by low-frequency laser ﬁelds , Phys. Rev. A 49, 2117
+(1994).
+[8] G. Vampa, C. R. McDonald, G. Orlando, D. D. Klug,
+P. B. Corkum, and T. Brabec, Theoretical Analysis of
+High-Harmonic Generation in Solids , Phys. Rev. Lett.
+113, 073901 (2014).
+[9] H. A. Bethe, The Electromagnetic Shift of Energy Levels ,
+Phys. Rev. 72, 339 (1947).
+[10] E. Coccia, How electronic dephasing aﬀects the high-
+10
+harmonic generation in atoms, Molecular Physics 118,
+e1769871 (2020).
+[11] S. Yu. Kruchinin, Non-Markovian pure dephasing in a
+dielectric excited by a few-cycle laser pulse , Phys. Rev. A
+100, 043839 (2019).
+[12] G. G. Brown, Á. Jiménez-Galán, R. E. F. Silva, and M.
+Ivanov, Real-space perspective on dephasing in solid-state
+high harmonic generation , Phys. Rev. Res. 6, 043005
+(2024).
+[13] F. T. Ulaby, M. M. Maharbiz, and C. M. Furse, Circuits,
+Third edition (National Technology & Science Press, Al-
+lendale, N.J., 2016).

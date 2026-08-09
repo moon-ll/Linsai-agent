@@ -1,0 +1,1288 @@
+Attosecond pulses from a solid driven by a
+arXiv:2410.09178v1 [physics.optics] 11 Oct 2024
+
+synthesized two-color field at megahertz repetition
+rate
+Zhaopin Chen1,2,3∗† , Mark Levit1,2,3† , Yuval Kern1,2,3 , Basabendra Roy1,2,3
+Adi Goldner1,2,3 , Michael Krüger1,2,3∗
+1 Department of Physics, Technion—Israel Institute of Technology, Haifa 32000, Israel.
+2 Solid State Institute, Technion—Israel Institute of Technology, Haifa 32000, Israel.
+3 The Helen Diller Quantum Center, Technion—Israel Institute of Technology, Haifa 32000, Israel.
+∗ Corresponding authors. Email: zhaopin.chen@campus.technion.ac.il, krueger@technion.ac.il
+† These authors contributed equally to this work.
+
+Probing coherent quantum dynamics in light-matter interactions at the microscopic level requires high-repetition-rate isolated attosecond pulses (IAPs) in
+pump-probe experiments. To date, the generation of IAPs has been mainly limited
+to the kilohertz regime. In this work, we experimentally achieve attosecond control
+of extreme-ultraviolet (XUV) high harmonics in the wide-bandgap dielectric MgO,
+driven by a synthesized field of two femtosecond pulses at 800 nm and 2000 nm
+with relative phase stability. The resulting quasi-continuous harmonic plateau
+with ∼ 9 eV spectral width centered around 16.5 eV photon energy can be tuned
+by the two-color phase and supports the generation of an IAP (∼ 730 attoseconds), confirmed by numerical simulation based on three-band semiconductor
+Bloch equations. Leveraging the high-repetition-rate driver laser and the moderate intensity requirements of solid-state high-harmonic generation, we achieve
+1
+
+IAP production at an unprecedented megahertz repetition rate, paving the way
+for all-solid compact XUV sources for IAP generation.
+
+Introduction
+High-harmonic generation (HHG) produces coherent extreme ultraviolet (XUV) light through the
+interaction of strong laser pulses with gases (1, 2), solids (3, 4) and liquids (5) on a table-top
+platform. In the time domain, isolated attosecond pulses (IAPs) can be achieved, which are key
+to the extremely precise pump-probe measurements of attosecond science (6–8). Starting with the
+first successful observation of an IAP in a gas in 2001 (9), various techniques for producing IAPs
+from atomic gases have been established (10), mostly based on spectral filtering in conjunction
+with an approach to effectively reduce the number of HHG-generating half-cycles to a single
+one (11), such as polarization gating (12), double optical gating (13), ionization gating (14) and
+two-color mixing (15). Another frontier in HHG is the generation of attosecond pulses at high
+repetition rates of 100 kHz and higher, which is beneficial for experiments where only low singleshot signal rates can be achieved, such as photoemission spectroscopy and imaging (16), or for
+precision spectroscopy with frequency combs in the XUV (17). High repetition rates are essential
+for improving measurement efficiency, minimizing space charge effects, preventing sample damage,
+and enhancing overall signal quality. An early study produced IAPs in a gas at a repetition rate of
+600 kHz (18), which is, to the best of our knowledge, the highest repetition rate for IAPs.
+In principle, HHG from solids (3, 19, 20) opens up the possibility to generate IAPs more
+efficiently than in gaseous media due to the higher atomic density in solids (21) and the non-parabolic
+dispersion of the band structure, which enables strong enhancement in certain spectral regions (22).
+The first demonstration of an IAP from a solid has been achieved with synthesized sub-cycle light
+field transients generated from a hollow-core fiber supercontinuum at kHz repetition rates (23, 24).
+Bulk pre-compression in a solid enables such transients, opening the door to attosecond pulses (25).
+Solid-state HHG sources in the XUV allow for a more modest peak intensity of the driving laser
+pulses, on the order of 1013 W cm−2 or less (23, 25, 26), due to the fact that the band gaps of
+materials like ZnO, MgO and SiO2 are smaller than the usual ionization energies of noble gases.
+These properties make solid-state HHG particularly attractive for high repetition rates, alleviating
+2
+
+the requirements on the driving laser system. Solid-state HHG has been achieved at tens of MHz
+oscillator repetition rates using a titanium-sapphire laser in a metal-sapphire nanostructure (27) and
+using a mid-infrared (MIR) laser in bulk ZnO (28). A first pump-probe spectroscopy application of
+attosecond pulses generated in ZnO has recently been reported at 100 kHz repetition rate (29). IAP
+generation from solids, however, has remained elusive at MHz repetition rates.
+In this work, we employ a laser field synthesized from two incommensurate frequencies and
+demonstrate high-contrast IAP generation from a wide bandgap dielectric at a repetition rate
+of 1 MHz. Compared to other incommensurate HHG experiments (30, 31), the two constituent
+fields at 800 nm and 2000 nm wavelength are phase-stable with respect to each other and form
+the synthesized laser field with controllable waveform on the attosecond scale. We employ a
+magnesium oxide (MgO) crystal for HHG due to its wide bandgap, high cutoff energy and spectral
+enhancements (22, 26, 32, 33). These properties facilitate the generation of IAPs. Moreover, MgO
+exhibits a comparatively high damage threshold, thus allowing us to access the extreme ultraviolet
+(XUV) spectral range. Through attosecond waveform control, we observe an HHG spectrum with
+greatly reduced oscillatory features. Our measurement is in excellent agreement with numerical
+simulations. While we do not directly measure the temporal profile of the generated XUV light
+field, our calculations show that a high-contrast IAP with a duration of 730 as at a center photon
+energy of 16.5 eV is produced.
+
+Results
+Synthesized two-color field for high-harmonic generation
+In our experiment (see Fig. 1A for a sketch of the setup), we generate high harmonics and implement
+attosecond control by synthesizing two-color laser pulses using a phase-stable optical parametric
+chirped pulse amplification (OPCPA) system operating at a repetition rate of 1 MHz (Class 5
+Photonics White Dwarf (34)). The OPCPA system outputs two distinct pulses, 12 fs pulses at a
+wavelength of 800 nm and 60 fs pulses at 2000 nm. Mathematically, the synthesized two-color
+
+field can be expressed as 𝐸 (𝑡) = 𝐴1 exp(−2 ln 2 𝑡 2 /𝜏12 ) cos 𝜔1 𝑡 + 𝜙CEP,1 + 𝐴2 exp(−2 ln 2 (𝑡 +
+
+Δ𝑡) 2 /𝜏22 ) cos 𝜔2 𝑡 + 𝜙 + 𝜙CEP,2 , where the subscripts 1 and 2 denote the 800 nm and 2000 nm laser
+
+3
+
+pulses, and Δ𝑡 and 𝜙 are the two-color delay time and phase (𝜙 = 𝜔2 Δ𝑡). The carrier-envelope
+phases (CEPs) 𝜙CEP,1 and 𝜙CEP,2 are passively stabilized at an unknown fixed value. We assume
+the CEPs to be zero for both colors since they barely affect our results (see Supplementary Text and
+Figures S4 and S5 for a discussion of the CEP effects). We emphasize the fact that in our case, the
+two wavelengths are incommensurate, meaning they cannot be related by an integer factor. In our
+experiment, we maintain the peak intensity of the 800 nm pump at approximately 15 TW cm−2 at
+the focus. We then introduce a weak admixture of the second color, at a relative intensity of 2%. The
+relative delay between the two colors is controlled by a translation stage with attosecond precision.
+The resulting synthesized pulse waveform at zero two-color delay is depicted in Fig. 1B. A key
+characteristic of the synthesized field is the presence of a strongly enhanced field peak in the orange
+shaded area at the pulse center, while the adjacent field peaks of the 800 nm pulse at 𝑡 ≈ 1.33fs
+and 𝑡 ≈ 2.66fs are suppressed, indicated by the green circles, due the constructive or destructive
+interference of the two fields. The intensity ratio of the synthesized field between the central peak
+and the strongest adjacent side peak, at around ±4 fs, is about 72%. Even in the case with a CEP
+for both pump pulses equal to 𝜋/2, the intensity ratio 79% is still sufficient for a good contrast (see
+Fig. S3). The synthesized pulse is akin to a single-cycle pulse (see Fig. 1A), which enables us to
+produce a quasi-continuous plateau in the HHG spectrum. Due to the extremely nonlinear nature
+of the process in play, this ratio can already give rise to a dominant attosecond pulse with large
+intensity contrast to adjacent pulses, thus equivalent to an IAP.
+To optimize the HHG yield, we align the polarization of the laser field along the Γ− 𝑋 orientation
+of the MgO crystal. This orientation gives rise to a 7.5 eV bandgap at the Γ point and a ∼ 17 eV
+bandgap at the 𝑋 point between the valence band and first conduction band. A strong spectral
+enhancement is located at the 𝑋 point bandgap (22), which we leverage in our experiment. In
+addition, with sufficiently intense field strength, the second conduction band may also be involved
+and contribute to higher energy harmonics, up to ∼ 25 eV (35). With this wide bandgap, an XUV
+spectrum with sufficient spectral width supporting an IAP is feasible. We generate XUV high
+harmonics in the transmission geometry within the last ∼ 10 nm of the crystal and measure the
+spectrum using a flat-field XUV spectrometer based on a grating and a microchannel plate (MCP)
+detector (see Fig. 1A for a sketch and Materials and Methods for further details).
+
+4
+
+A
+
+B
+
+1.2
+1
+
+E (arb. units)
+
+1
+
+0.8
+-5
+
+0.5
+
+0
+
+5
+
+0
+-0.5
+-0.8
+
+-1
+
+-0.9
+
+-10
+
+0
+t (fs)
+
+10
+
+-1
+
+-5
+
+0
+
+5
+
+Figure 1: Experimental setup and synthesized two-color field distribution. (A) Experimental
+setup for attosecond control of high-harmonic generation and isolated attosecond pulse generation
+from MgO with synthesized two-color light fields. (B) The field profile (solid blue with shading)
+shows a dominant field peak in the center. Red solid (with shading) and green dashed curves (with
+shading) depict the 800 nm and the 2000 nm field, respectively. The peak intensity of 2000 nm
+field is 2% of the 800 nm peak intensity. The red and green circles in the insets indicate where the
+2000 nm field enhances and suppresses the corresponding half-cycle, respectively.
+
+Attosecond control of solid-state high harmonics
+We begin by comparing the high-harmonic (HH) spectra generated by the 800 nm field alone with
+those induced by the synthesized two-color field, as shown in Fig. 2A and B. The HH spectra driven
+solely by the 800 nm field exhibit odd harmonic peaks with a spacing of 2ℏ𝜔0 = 3.1 eV, where
+𝜔0 is the fundamental frequency. Due to the approximately 4.5 cycles contained within the 12 fs
+duration of the 800 nm pulse, the resulting HHG spectrum shows discrete odd harmonics. At a peak
+5
+
+intensity of ∼ 15 TW cm−2 , the measured HH spectra exhibit a cutoff energy around 21 eV. Since
+the MCP detector in our XUV spectrometer is only efficient for photon energies larger than ∼ 11 eV
+
+A
+
+B
+
+Delay (fs)
+
+Spectral
+intensity
+(arb. unit)
+Spectral
+Intensity
+
+(see Fig. S6), our experimental measurement shows this part of the spectrum.
+
+Energy (eV)
+
+C
+
+800nm
+2-color
+
+1
+0.8
+0.6
+0.4
+0.2
+0
+
+15
+
+D
+
+20
+Energy (eV)
+Energy
+
+25
+
+0.6
+
+1.4
+
+100
+
+6.6fs
+
+1.2
+
+0.5
+
+delay
+Delaytime
+(fs)(fs)
+
+Intensity (arb. unit)
+
+1.2
+
+1
+0.8
+0.6
+
+50
+
+0.4
+
+0
+
+0.3
+0.2
+
+-50
+
+0.1
+
+0.4
+
+-100
+0.2
+-20
+
+-10
+
+0
+10
+delay
+time
+(fs)
+Delay (fs)
+
+0
+
+20
+
+5
+Fourier
+Fouriertime
+time(fs)
+(fs)
+
+10
+
+0
+
+Figure 2: Attosecond-controlled harmonic spectra. (A) Experimentally measured harmonic
+intensity as a function of two-color delay from −120 fs to 120 fs. The white dashed line has a
+slope of 6.5 fs eV−1 . (B) Experimentally measured harmonic intensity for the 800 nm pulse pump
+(orange) and for the synthesized two-color field (blue) with 0.5 fs delay. (C) Spectral intensity at
+15.5 eV as a function of two-color delay shows a period of 6.6 fs. (D) Harmonic intensity in the
+Fourier time domain as a function of delay, corresponding to (A).
+Introducing the weak 2000 nm laser pulse disrupts the symmetry of the original field, resulting
+in the occurrence of a dominant peak field at a specific delay. It thus leads to a nearly continuous
+spectrum with spectral width of ∼ 9 eV around the spectral singularity at ∼ 17 eV. Figure 2A shows
+
+6
+
+the measured HH spectra as a function of two-color delay, which is the central result of our work.
+When the relative delay of two pulses are larger than half of the pulse duration of the 2000 nm,
+discrete harmonic spectra are mainly produced by the 800 nm pulse. In contrast, the temporal
+overlapping of the two pulses within a time delay from −30 fs to 30 fs leads to a quasi-continuous
+spectrum, with several lower contrast peaks with a spacing of ∼ 1 eV (see also Fig. 2B). This
+already indicates the spectral interference originating from a dominant attosecond pulse and weak
+subordinate pulses at a temporal spacing of ∼ 4 fs.
+Scanning the delay between the 800 nm and 2000 nm fields reveals a periodic modulation in the
+HHG spectrum, as shown in Fig. 2A. The spectral interference forms a tilted stripe-like pattern with
+a slope of approximately 6.5 fs eV−1 . A cross-section of the delay-dependent spectral intensity at
+15.5 eV in Fig. 2C highlights a periodic modulation with a period of 6.6 fs. This modulation arises
+from the temporal distribution of the synthesized two-color field. For incommensurate continuous
+light waves, the synthesized field can be expressed as 𝐸 (𝑡, 𝜙) = 𝐴1 cos (𝜔1 𝑡) + 𝐴2 cos (𝜔2 𝑡 + 𝜙),
+where the field naturally repeats after delays corresponding to the optical periods of each of the
+two colors. However, for an ultrashort pump pulse consisting of only a few cycles, this repetition
+behavior no longer holds. The 12 fs duration of the 800 nm pulse is too short to approximate it as a
+continuous wave. On the other hand, the 60 fs 2000 nm pulse can be reasonably treated as a plane
+wave within the temporal overlap region. As a result, the constructive overlap of the two fields’
+peaks occurs periodically, repeating only after one optical cycle of the 2000 nm pulse (see Fig. 3E).
+To better understand the change in harmonic spectra from the non-overlap to the overlap region
+of our two-color field, we perform an inverse Fourier transformation of the spectral intensity into
+the Fourier time domain, assuming a uniformly zero spectral phase. Although the Fourier time
+domain does not give us access to the actual spectral phase and the exact temporal structure of each
+attosecond pulses produced in each laser shot, it allows us to extract other crucial information about
+the train structure of the attosecond pulses. All attosecond pulses contributing to the HHG spectrum
+and their timing cause interference in the spectral domain and the Fourier transformation can reveal
+temporal spacings between the attosecond pulses as they are modulated using the two-color delay, in
+analogy to a HHG spectral interferometry scheme utilizing the CEP (36). Out of temporal overlap,
+the Fourier amplitude plot of the harmonic spectra shows a secondary peak at a Fourier time of
+approximately 𝜏 ∼ 1.3 fs. This peak corresponds to temporal features separated by half a cycle
+7
+
+of the 800 nm pulse, showing that a train of attosecond pulses is generated and rendering IAP
+generation elusive. Remarkably, this changes completely in the overlap region. The secondary peak
+at 1.3 fs is suppressed due to the enhancement of the electric field in the dominant half-cycle and
+the suppression of the electric field in the adjacent half cycles (see Fig. 1B for a comparison of the
+electric fields of the 800 nm pulses and the two-color pulses). Additionally, in the overlap region,
+we find an enhancement of the peak around 𝜏 ∼ 4 fs, which corresponds to a temporal delay of
+attosecond pulses of three optical half-cycles of the 800 nm field. This is the result of constructive
+interference between the dominant attosecond pulse generated around the peak of the field and one
+or more weak satellite pulses at a temporal distance of 4 fs.
+
+Comparison with numerical simulations
+To elucidate our experimental findings, we utilize the semiconductor Bloch equations (SBEs) to
+predict and calculate solid-state HHG (see Materials and Methods for more details). Generally,
+both interband polarization and intraband current acceleration contribute to HHG in solids. In our
+case, the HHG yield in MgO is mainly contributed by the interband polarization according to our
+numerical calculations (see Fig. S7), in accordance with prior works (22,33). The analogy between
+the interband polarization process in solids and the semi-classical three-step model in atomic HHG
+indicates the possibility of generating IAPs in MgO.
+The numerical simulations of the SBEs in Fig. 3A perfectly match the experimental results in
+Fig. 3B. Here, the two-color delay is taken from −20 fs to 20 fs in the overlap region between two
+pump pulses. Similar to the experimental results, our numerical simulation also displays a 6.6 fs
+periodicity in the spectral interference as a function of the time delay. A tilted stripe-like spectral
+interference pattern shows a slope of ∼ 6.5 fs eV−1 , exactly corresponding to the experimental one.
+Since the harmonics peak shift linearly from one order to the next within one cycle of the 2000 nm
+field, the slope can be expressed as 𝑇2um /Δ𝐸 = 6.5 fs eV−1 , where 𝑇2um is the duration of an optical
+cycle of the 2000 nm field and Δ𝐸 is the period of the spectral interference from the generated
+attosecond pulses. Therefore, we can obtain the mean spectral period as Δ𝐸 ∼ 1.0 eV, which already
+indicates the interference is mainly from two attosecond pulses with a temporal distance of ∼ 4 fs,
+corresponding to 1.5 cycles of the 800 nm field. According to established theory of gas-phase and
+
+8
+
+solid-state HHG (36–38), the phase of attosecond pulses, governed by the harmonic dipole phase,
+depends on the field strength and the time spent by the electron and hole in the conduction and
+valence bands, respectively. Since the two-color delay periodically changes the field strength in each
+half-cycle (see the squared absolute value of the synthesized field distribution in Fig. 3E), the relative
+harmonic phases contributed by attosecond pulses in different half-cycles vary correspondingly. As
+a consequence, the spectral interference also shifts as the relative harmonic phases from different
+attosecond pulses change.
+Taking a closer look at the delay dependence of the spectra, a surprising result is that there are
+fine oscillatory structures within each 6.6 fs period, showing three local maxima of the harmonic
+intensity within that period for both simulation and experiment (see Fig. 3A and B). These local
+maxima originate from the spectral interference of attosecond pulses, indicating the existence of
+more than one significant attosecond pulse at a specific two-color delay. To verify this assumption,
+we further use the numerical results to estimate the real-time distribution of the attosecond pulses
+in Fig. 3C. Here, we can see that the attosecond pulses in real time show a periodic distribution
+and repeat itself for each 6.6 fs of the two-color delay. Within each period, there are three dominant
+pulses at different two-color delays, along with weak subordinate pulses. The local maxima observed
+in the spectrum originate from the interference between two dominant attosecond pulses located
+at the ”switch” positions. Since the generation of attosecond pulses is strongly related to the
+field strength within each half cycle, we expect that the synthesized two-color field also has a
+similar temporal distribution. Indeed, the synthesized field strength square distribution |𝐸 (𝑡)| 2 in
+Fig. 3E contains three local maximum values located at at (𝜙, 𝑡) = (0, 0), (𝜋 − 𝜋𝜔2 /𝜔1 , 𝜋/𝜔1 )
+and (𝜋 + 𝜋𝜔2 /𝜔1 , −𝜋/𝜔1 ) for the two-color delay within one cycle of the second color. These
+electric field local maxima give rise to comparatively more continuous spectra located between
+the local spectral maxima. Compared with the synthesized field distribution, the half-cycle delay
+of the attosecond pulse generation indicates that electrons and holes in MgO generated at the
+original half-cycle will re-collide with each other and emit harmonics at the next half cycle. Further
+comparison between experiment and simulation regarding the large range of two-color delay in
+both spectral and Fourier time domain can be found in the Supplementary Information.
+
+9
+
+A
+
+10 -8
+7
+
+20
+
+B
+
+10
+
+5
+
+Delay (fs)
+
+delay
+Delaytime
+(fs) (fs)
+
+6
+
+4
+
+0
+
+3
+2
+
+-10
+
+1
+
+0.5
+
+-165 fs
+0 fs
+
+25
+
+≈ 730as
+
+0
+
+C 10
+
+-5
+
+0
+
+5
+
+delay (fs)
+(fs)
+Delay
+
+t (fs)
+
+1
+0.5
+
+E
+
+1
+
+0 fs
+
+0
+-5
+
+0
+
+5
+
+0.8
+
+5
+
+0.6
+
+0
+0.4
+
+-5
+
+-10
+
+Energy (eV)
+
+F
+!
+
+I I(t)
+
+1
+
+20
+Energy
+(eV)
+Energy (eV)
+
+𝐸 𝑡
+
+D
+
+15
+
+Delay (fs)
+
+-20
+
+0.2
+
+-5
+
+0
+t
+(fs)
+Time (fs)
+
+5
+
+Time (fs)
+
+Figure 3: Comparison of experimental results with SBEs simulation results. Semiconductor
+Bloch equations calculation and experiment results. (A) and (B) Harmonic intensity as a function
+of two-color delay for SBE simulation and experiment (logarithmic scale), respectively. For both
+cases, the peak intensity for the 800 nm pulse is 15 TW cm−2 . The black dashed circle curves shows
+three local maxima for each 6.6 fs period for both experiment and simulation. The white dashed
+line for both cases have a slope of 6.5 fs eV−1 . The white arrow in (A) indicates zero delay. (C)
+Attosecond pulses intensity as a function of two-color delay in real time. The white arrow indicates
+zero delay where a high-contrast IAP is produced. (D) Comparison of the formation of attosecond
+pulse trains and IAPs at time delay −165 fs (orange) and 0 fs (blue), respectively. (E) Field strength
+square distribution |𝐸 (𝑡)| 2 of the synthesized pulse as a function of the two-color delay. The white
+arrow indicates zero delay. (F) shows the synthetic field strength square distribution with a twocolor delay equal to 0 fs.
+
+10
+
+Discussion
+The good match between the numerical and experimental results further validates our theoretical
+model. Therefore, we can use the numerical results to estimate the real-time distribution of the
+attosecond pulses. For the experimental realization of an IAP, a filter that acts as a spectral window
+to remove the fundamental light and lower-order harmonics is required. Here, we consider an indium
+filter (39), which has a transparency window between 12 and 21 eV photon energy. To compare the
+attosecond pulse distribution generated by one-color and two-color fields, we examine the intensity
+distribution of the generated attosecond pulse at two specific delay positions (see Fig. 3D). When the
+delay time is equal to 0 fs, an IAP with a full width at half maximum (FWHM) duration of 730 as is
+generated. At a delay of −165 fs, where two pump pulses are widely separated, an attosecond pulse
+train is generated due to the discrete high-harmonic spectra. By controlling the two-color delay, we
+can switch between an IAP and a pulse train and use their corresponding spectral signatures as a
+guide.
+In conclusion, we demonstrate attosecond control of HHG from the dielectric MgO, driven
+by a combination of two femtosecond pulses with incommensurate wavelengths and controllable
+relative phase. By precisely controlling the temporal overlap of the two-color field, we synthesize
+the equivalent of a single-cycle pulse, producing a quasi-continuous XUV spectrum without the
+need for complex single-cycle femtosecond pulse compression techniques. This result is confirmed
+by our theoretical model based on the semiconductor Bloch equations, showing the creation of an
+IAP. By combining the advantages of a two-color optical parametric chirped pulse amplification
+system – featuring high repetition rates, phase stability, and ultrashort pulse durations – alongside the
+moderate intensity requirements of solid-state HHG, we achieve IAP generation at 1 MHz repetition
+rate. With photon energies in the lower XUV range (∼10 eV to ∼20 eV), our high-repetition-rate IAPs
+are ideally suited for pump-probe experiments, enabling the study of attosecond electron dynamics
+in wide bandgap dielectrics such as LiF (40), deep valence-to-conduction band excitations in solid
+materials (41), and molecular charge migration (42).
+
+11
+
+Materials and methods
+Semiconductor Bloch equations calculations
+To describe the interaction of the synthesized two-color field and the MgO crystal in the Γ-𝑋
+orientation, we use the following one-dimensional, three-band semiconductor Bloch equations
+(SBEs):
+
+
+
+
+
+1
+𝜕 𝜈𝑐1
+𝑐1
+𝜈𝑐 1
+𝑐1
+𝑣
+𝑣
+𝑖 𝑃 𝑘 (𝑡) = 𝜖 𝑘 − 𝜖 𝑘 − 𝑖 + 𝑖𝐸 (𝑡)∇ 𝑘 𝑃 𝑘 (𝑡) − 1 − 𝑓 𝑘 (𝑡) − 𝑓 𝑘 (𝑡) 𝑑 𝑘𝑐1 𝜈 𝐸 (𝑡)
+𝜕𝑡
+𝑇2
+
+
++ 𝐸 (𝑡) 𝑑 𝑘𝑐2 𝜈 𝑃 𝑐𝑘2 𝑐1 (𝑡) − 𝑑 𝑘𝑐1 𝑐2 𝑃 𝑘𝜈𝑐2 (𝑡)
+
+
+
+
+𝜕 𝜈𝑐2
+1
+𝑐2
+𝜈𝑐 2
+𝑐2
+𝑣
+𝑣
+𝑖 𝑃 𝑘 (𝑡) = 𝜖 𝑘 − 𝜖 𝑘 − 𝑖 + 𝑖𝐸 (𝑡)∇ 𝑘 𝑃 𝑘 (𝑡) − 1 − 𝑓 𝑘 (𝑡) − 𝑓 𝑘 (𝑡) 𝑑 𝑘𝑐2 𝜈 𝐸 (𝑡)
+𝜕𝑡
+𝑇2
+
+
++ 𝐸 (𝑡) 𝑑 𝑘𝑐1 𝜈 𝑃 𝑐𝑘1 𝑐2 (𝑡) − 𝑑 𝑘𝑐2 𝑐1 𝑃 𝑘𝜈𝑐1 (𝑡)
+
+
+
+
+1
+𝜕 𝑐1 𝑐2
+𝑐1 𝑐2
+𝑐2
+𝑐2
+𝑐1
+𝑐1
+𝑖 𝑃 𝑘 (𝑡) = 𝜖 𝑘 − 𝜖 𝑘 − 𝑖 + 𝑖𝐸 (𝑡)∇ 𝑘 𝑃 𝑘 (𝑡) + 𝑓 𝑘 (𝑡) − 𝑓 𝑘 (𝑡) 𝑑 𝑘𝑐2 𝑐1 𝐸 (𝑡)
+𝜕𝑡
+𝑇2
+
+
+∗
++ 𝐸 (𝑡) 𝑑 𝑘𝜈𝑐1 𝑃 𝑘𝜈𝑐2 (𝑡) − 𝑑 𝑘𝑐2 𝜈 𝑃 𝑘𝜈𝑐1 (𝑡)
+
+(1)
+
+h
+
+∗
+
+∗i
+𝜕 𝜈
+𝑐1 𝑣
+𝜈𝑐 1
+𝑐2 𝑣
+𝜈𝑐 2
+𝑓 𝑘 (𝑡) = −2Im 𝑑 𝑘 𝐸 (𝑡) 𝑃 𝑘 (𝑡) + 𝑑 𝑘 𝐸 (𝑡) 𝑃 𝑘 (𝑡)
++ 𝐸 (𝑡)∇ 𝑘 𝑓 𝑘𝜈 (𝑡)
+𝜕𝑡
+h
+
+∗
+
+∗i
+𝜕 𝑐1
+𝑓 𝑘 (𝑡) = −2Im 𝑑 𝑘𝑐1 𝜈 𝐸 (𝑡) 𝑃 𝑘𝜈𝑐1 (𝑡) + 𝑑 𝑘𝑐1 𝑐2 𝐸 (𝑡) 𝑃 𝑐𝑘2 𝑐1 (𝑡)
++ 𝐸 (𝑡)∇ 𝑘 𝑓 𝑘𝑐1 (𝑡)
+𝜕𝑡
+h
+
+∗
+
+∗i
+𝜕 𝑐2
+𝑓 𝑘 (𝑡) = −2Im 𝑑 𝑘𝑐2 𝑣 𝐸 (𝑡) 𝑃 𝑘𝜈𝑐2 (𝑡) + 𝑑 𝑘𝑐2 𝑐1 𝐸 (𝑡) 𝑃 𝑐𝑘1 𝑐2 (𝑡)
++ 𝐸 (𝑡)∇ 𝑘 𝑓 𝑘𝑐2 (𝑡)
+𝜕𝑡
+
+(2)
+
+′
+
+Here, 𝑃𝜆,𝜆
+𝑘 (𝑡) represents a dimensionless polarization depending on time 𝑡 and momentum 𝑘,
+induced by the time-dependent electric field 𝐸 (𝑡), with 𝜆, 𝜆′ = {𝑣, 𝑐 1 , 𝑐 2 }. The indices 𝑣, 𝑐 1 , and 𝑐 2
+correspond to the valence band, first conduction band, and second conduction band, respectively.
+𝑓 𝑘𝜆 (𝑡) denotes the population of electrons or holes in the conduction or valence bands. The energy′
+
+momentum dispersion relation for the band 𝜖 𝑘𝜆 , as well as the transition dipole moments (TDMs) 𝑑 𝜆𝜆
+𝑘 ,
+are derived from density functional theory (DFT) calculations (43). The exact band structure and
+TDMs used in our calculations are plotted in Fig. S1. Here, we consider a ”smooth-periodic” gauge
+such that TDMs maintain smoothness and periodicity at the boundary of the 𝑘-space, preserving
+the crystal symmetry. This ensures the absence of unphysical even-order harmonics in a singlecolor field from an inversion-symmetric crystal structure like MgO. We set the phenomenological
+12
+
+decoherence time 𝑇2 to half of the optical cycle duration of the 800 nm laser. This approach cuts
+off long electron-hole trajectories and achieves good agreement with the experiment.
+The HHG spectrum is computed as
+∫ ∞
+2
+𝑖𝜔𝑡
+𝑆HHG (𝜔) ∼
+[𝐽inter (𝑡) + 𝑖𝐽intra (𝑡)]𝑒 𝑑𝑡 ,
+
+(3)
+
+−∞
+
+where
+𝐽inter (𝑡) =
+
+∑︁ 𝑑 ∫
+𝜆,𝜆′
+
+𝑑𝑡
+
+′
+
+′
+
+𝜆𝜆
+𝑑 𝜆𝜆
+𝑘 · 𝑃 𝑘 (𝑡)𝑑𝑘 + c.c.
+
+(4)
+
+and
+𝐽intra (𝑡) =
+
+∑︁ ∫
+
+𝜈𝜆𝑘 𝑓 𝑘𝜆 (𝑡)𝑑𝑘
+
+(5)
+
+𝜆
+
+denote the interband and intraband contributions to the HHG yield, respectively. 𝜈𝜆𝑘 = ∇ 𝑘 𝜖 𝑘𝜆
+represents the group velocity of the electrons and holes in the corresponding bands.
+
+Details of the experimental setup
+The two-color delay is controlled by a closed-loop linear piezo stage (Physik Instrumente P-611.1).
+For combining the two colors, we use a dichroic mirror (Thorlabs DMLP1180T). Starting with the
+focusing optics, the HHG setup is situated in an ultra-high vacuum chamber with a base pressure
+of ∼ 1 × 10−8 mbar. The laser beam is focused using an off-axis parabolic mirror with a focal
+length of 5 cm. The spot size of the 800 nm beam at the focus is ∼6 𝜇m FWHM, as measured by
+a camera. The 2000 nm beam at the focus has an effective radius of ∼18.2 𝜇m, as determined by
+a knife-edge measurement. The pulse durations were measured using frequency-resolved optical
+gating. The < 100 >-cut MgO crystal used in our experiment has a thickness of 50 𝜇m (Farview
+Optics). The home-built spectrometer uses a 100 𝜇𝑚 wide entrance slit and a flat-field diffraction
+grating suitable for wavelengths of 50 − 200 nm (L0120-50-200, Shimadzu).
+We also determine the divergence angle of the generated harmonics by recording the 1/𝑒 2 width
+at the MCP position and the distance between the MCP detector and the MgO crystal. H11 has a
+divergence angle of approximately 17.9 mrad. With a pump intensity of 15 TW cm−2 , we find that
+the lower bound of the photon flux of the measured HHG signal is on the order of 107 photons per
+second in the spectral range from 10 eV to 20 eV. For this estimate, we take into account the grating
+and the low detection efficiency of our uncoated MCP (Texel MCP-50-D-S-P43).
+13
+
+References and Notes
+1. M. Ferray, et al., Multiple-harmonic conversion of 1064 nm radiation in rare gases. J. Phys. B:
+At. Mol. Opt. Phys. 21 (3), L31 (1988), doi:10.1088/0953-4075/21/3/001.
+2. A. McPherson, et al., Studies of multiphoton production of vacuum-ultraviolet radiation in the
+rare gases. J. Opt. Soc. Am. B 4 (4), 595–601 (1987), doi:10.1364/JOSAB.4.000595.
+3. S. Ghimire, et al., Observation of high-order harmonic generation in a bulk crystal. Nat. Phys.
+7, 138–141 (2011), doi:10.1038/nphys1847.
+4. G. Vampa, et al., Linking high harmonics from gases and solids. Nature 522, 462–464 (2015),
+doi:10.1038/nature14517.
+5. T. T. Luu, et al., Extreme-ultraviolet high-harmonic generation in liquids. Nat. Commun. 9,
+3723 (2018), doi:10.1038/s41467-018-06040-4.
+6. P. B. Corkum, F. Krausz, Attosecond science. Nat. Phys. 3 (6), 381–387 (2007), doi:10.1038/
+nphys620.
+7. F. Krausz, M. Ivanov, Attosecond physics. Rev. Mod. Phys. 81 (1), 163–234 (2009), doi:
+10.1103/RevModPhys.81.163.
+8. F. Calegari, G. Sansone, S. Stagira, C. Vozzi, M. Nisoli, Advances in attosecond science.
+J. Phys. B: At. Mol. Opt. Phys. 49 (6), 062001 (2016), doi:10.1088/0953-4075/49/6/062001.
+9. M. Hentschel, et al., Attosecond metrology. Nature 414, 509 (2001), doi:10.1038/35107000.
+10. M. Chini, K. Zhao, Z. Chang, The generation, characterization and applications of broadband
+isolated attosecond pulses. Nat. Photon. 8, 178–186 (2014), doi:10.1038/nphoton.2013.362.
+11. I. P. Christov, M. M. Murnane, H. C. Kapteyn, High-Harmonic Generation of Attosecond Pulses
+in the “Single-Cycle” Regime. Phys. Rev. Lett. 78, 1251 (1997), doi:10.1103/PhysRevLett.78.
+1251.
+12. G. Sansone, et al., Isolated Single-Cycle Attosecond Pulses. Science 314, 443 (2006), doi:
+10.1126/science.1132838.
+14
+
+13. H. Mashiko, et al., Double Optical Gating of High-Order Harmonic Generation with
+Carrier-Envelope Phase Stabilized Lasers. Phys. Rev. Lett. 100, 103906 (2008), doi:10.1103/
+PhysRevLett.100.103906.
+14. F. Ferrari, et al., High-energy isolated attosecond pulses generated by above-saturation fewcycle fields. Nature Photonics 4 (12), 875–879 (2010), doi:10.1038/nphoton.2010.250.
+15. E. J. Takahashi, P. Lan, O. D. Mücke, Y. Nabekawa, K. Midorikawa, Attosecond nonlinear
+optics using gigawatt-scale isolated attosecond pulses. Nature Communications 4 (1), 2691
+(2013), doi:10.1038/ncomms3691.
+16. S. Heinrich, et al., Attosecond intra-valence band dynamics and resonant-photoemission delays
+in W(110). Nat. Commun. 12, 3404 (2021), doi:10.1038/s41467-021-23650-7.
+17. G. Porat, et al., Phase-matched extreme-ultraviolet frequency-comb generation. Nat. Photon.
+12, 387–391 (2018), doi:10.1038/s41566-018-0199-z.
+18. M. Krebs, et al., Towards isolated attosecond pulses at megahertz repetition rates. Nature
+Photonics 7 (7), 555–559 (2013), doi:10.1038/nphoton.2013.131.
+19. S. Ghimire, D. A. Reis, High-harmonic generation from solids. Nat. Phys. 15, 10–16 (2019),
+doi:10.1038/s41567-018-0315-5.
+20. E. Goulielmakis, T. Brabec, High harmonic generation in condensed matter. Nat. Photon. 16,
+411–421 (2022), doi:10.1038/s41566-022-00988-y.
+21. G. Ndabashimiye, et al., Solid-state harmonics beyond the atomic limit. Nature 534, 520–523
+(2016), doi:10.1038/nature17660.
+22. A. J. Uzan, et al., Attosecond spectral singularities in solid-state high-harmonic generation.
+Nat. Photon. 14, 183–187 (2020), doi:10.1038/s41566-019-0574-4.
+23. M. Garg, et al., Multi-petahertz electronic metrology. Nature 538 (7625), 359–363 (2016),
+doi:10.1038/nature19821.
+
+15
+
+24. M. Garg, H. Y. Kim, E. Goulielmakis, Ultimate waveform reproducibility of extreme-ultraviolet
+pulses by high-harmonic generation in quartz. Nat. Photon. 12, 291–296 (2018), doi:10.1038/
+s41566-018-0123-6.
+25. T. J. Hammond, et al., Integrating solids and gases for attosecond pulse generation. Nat. Photon.
+11, 594–599 (2017), doi:10.1038/nphoton.2017.141.
+26. S. Ghimire, et al., Strong-field and attosecond physics in solids. J. Phys. B: At. Mol. Opt. Phys.
+47 (20), 204030 (2014), doi:10.1088/0953-4075/47/20/204030.
+27. S. Han, et al., High-harmonic generation by field enhanced femtosecond pulses in metalsapphire nanostructure. Nat. Commun. 7, 13105 (2016), doi:10.1038/ncomms13105.
+28. G. Vampa, et al., Characterization of high-harmonic emission from ZnO up to 11 eV pumped
+with a Cr:ZnS high-repetition-rate source. Opt. Lett. 44 (2), 259–262 (2019), doi:10.1364/OL.
+44.000259.
+29. A. Nayak, et al., Attosecond spectroscopy using vacuum-ultraviolet pulses emitted from laserdriven semiconductors. arXiv (2024).
+30. B. D. Bruner, et al., Robust enhancement of high harmonic generation via attosecond control
+of ionization. Opt. Express 26 (7), 9310–9322 (2018), doi:10.1364/OE.26.009310.
+31. B. D. Bruner, et al., Control and enhancement of multiband high harmonic generation by
+synthesized laser fields. J. Phys. B: At. Mol. Opt. Phys. 54 (15), 154001 (2021), doi:10.1088/
+1361-6455/ac1b67.
+32. Y. S. You, et al., Laser waveform control of extreme ultraviolet high harmonics from solids.
+Opt. Lett. 42 (9), 1816–1819 (2017), doi:10.1364/OL.42.001816.
+33. A. J. Uzan-Narovlansky, et al., Observation of light-driven band structure via multiband high-harmonic spectroscopy. Nature Photonics 16 (6), 428–432 (2022), doi:10.1038/
+s41566-022-01010-1.
+34. T. Braatz, et al., 1 MHz - dual channel, CEP stable, few-cycle OPCPA at 800nm and >1.7µm
+wavelength, in Nonlinear Frequency Generation and Conversion: Materials and Devices XX,
+16
+
+P. G. Schunemann, K. L. Schepler, Eds., International Society for Optics and Photonics (SPIE),
+vol. 11670 (2021), p. 116700Z, doi:10.1117/12.2578873.
+35. T.-Y. Du, D. Tang, X.-H. Huang, X.-B. Bian, Multichannel high-order harmonic generation
+from solids. Phys. Rev. A 97, 043413 (2018), doi:10.1103/PhysRevA.97.043413.
+36. C. Ott, et al., Strong-field spectral interferometry using the carrier–envelope phase. New J. Phys.
+15 (7), 073031 (2013), doi:10.1088/1367-2630/15/7/073031.
+37. P. Salières, P. Antoine, A. de Bohan, M. Lewenstein, Temporal and Spectral Tailoring of HighOrder Harmonics. Phys. Rev. Lett. 81, 5544–5547 (1998), doi:10.1103/PhysRevLett.81.5544.
+38. S. Li, et al., High-order harmonic generation from a thin film crystal perturbed by a
+quasi-static terahertz field. Nature Communications 14 (1), 2603 (2023), doi:10.1038/
+s41467-023-38187-0.
+39. R. Henneck, K. Bjoerknaes, S. R. Jelinsky, Transmission of thin indium filters in the EUV and
+lifetime tests, in EUV, X-Ray, and Gamma-Ray Instrumentation for Astronomy VIII (SPIE),
+vol. 3114 (1997), pp. 648–651, doi:10.1117/12.278908.
+40. P. Abbamonte, et al., Dynamical reconstruction of the exciton in LiF with inelastic x-ray
+scattering. Proceedings of the National Academy of Sciences 105 (34), 12159–12163 (2008),
+doi:10.1073/pnas.0801623105.
+41. M. Schultze, et al., Attosecond band-gap dynamics in silicon. Science 346 (6215), 1348–1352
+(2014), doi:10.1126/science.1260311.
+42. F. Calegari, et al., Ultrafast electron dynamics in phenylalanine initiated by attosecond pulses.
+Science 346 (6207), 336–339 (2014), doi:10.1126/science.1254061.
+43. S. Jiang, et al., Smooth periodic gauge satisfying crystal symmetry and periodicity to study
+high-harmonic generation in solids. Phys. Rev. B 102, 155201 (2020), doi:10.1103/PhysRevB.
+102.155201.
+
+17
+
+Acknowledgments
+The authors acknowledge Barry D. Bruner and Nirit Dudovich for insightful discussions and Ulf
+Leonhardt and Lorenzo M. Procopio for providing equipment for pulse characterization.
+Funding: This project has received funding from the European Union’s Horizon 2020 research
+and innovation program under grant agreement No 853393-ERC-ATTIDA. We also acknowledge
+the Helen Diller Quantum Center at the Technion for partial financial support.
+Author contributions: M. K. and Z. C. conceived the initial idea. M. K. supervised the project.
+M. L., Z. C., B. R. and M. K. designed and built the experimental setup. M. L., Y. K. and
+Z. C. performed the measurements. Z. C. and A. G. supported the operation of the laser system.
+Z. C. carried out the theory calculations. Z. C. and M. K. wrote the initial manuscript. All the
+authors contributed to the preparation of the final manuscript.
+Competing interests: The authors declare that they have no competing interests.
+Data and materials availability:
+
+All data needed to evaluate the conclusions in the paper are
+
+present in the paper and/or the Supplementary Materials.
+
+18
+
+Supplementary Materials for
+Attosecond pulses from a solid driven by a synthesized
+two-color field at megahertz repetition rate
+Zhaopin Chen et al.
+Corresponding authors. Email: zhaopin.chen@campus.technion.ac.il, krueger@technion.ac.il
+
+S1
+
+Supplementary text
+1. Band structure and transition dipole moment of MgO for numerical calculations
+The three-band structure and transition dipole moment (TDM) of MgO along the Γ − 𝑋 orientation
+in our numerical simulation is obtained from a density functional theory calculation (43). We also
+introduce a small modification of the TDM amplitude to better fit the experimental results. We
+show the band structure and TDM in Fig. S1.
+
+2. Semiconductor Bloch equation simulation results for CEP equal to zero
+Here, we present additional simulation results of the two-color control of high harmonic generation
+from MgO, based on the semiconductor Bloch equations (1) and (2), using the same parameters as
+those in Fig. 3 of the main text. Figure S2A displays the harmonic spectrum as a function of the
+two-color delay, ranging from −120 fs to 120 fs. Similar to the experimental results in Fig. 2A in
+the main text, the spectrum shows a quasi-continuous profile in the central overlap region of the
+two-color pulses. Spectral interference shifts as a function of delay are also clearly observed in the
+simulation. The white dashed line indicates a slope of 6.5 fs eV−1 , consistent with the experimental
+observations. In the Fourier time domain, Fig. S2b reveals a suppression of the secondary peak at
+a Fourier time of 𝑡 ≈ 1.33 fs and the appearance of weak intensity at 𝑡 ≈ 4 fs, closely resembling
+the experimental data in Fig. 2D of the main text.
+In order to see the harmonic distribution in both time and frequency domain for a specific delay,
+we perform a Gabor transformation over the interband and intraband currents obtained by Eqs. (3)
+and (4) in the main text. The Gabor transformation is calculated by
+′
+
+𝐺 (𝜔, 𝑡 ) =
+
+∫
+
+
+2
+(𝑡 − 𝑡 ′) 2 𝑖𝜔𝑡
+[𝐽inter (𝑡) + 𝐽intra (𝑡)] exp −
+𝑒 𝑑𝑡 .
+𝜎𝑡2
+
+
+(S1)
+
+Here, we use a Gaussian window function with a width of 𝜎𝑡 = 800 as. Figure S3A clearly shows
+the generation of an isolated pulse with a spectrum ranging from 13 eV to 20 eV at a two-color
+delay time of 𝜏 = 0 fs. At 𝜏 = 2.5 fs, two attosecond pulses with a temporal separation of 4 fs are
+produced. It is evident that the attochirp is minimal in both cases, primarily due to the contribution
+S2
+
+of the short trajectory.
+
+3. Semiconductor Bloch equation simulation results for CEP equal to 𝜋/2
+In order to assess the influence of CEP of both pulses on the experimental results, we consider a
+case with 𝜙CEP,1 = 𝜙CEP,2 = 𝜋/2, which is the opposite with respect to Fig. 3 in the main text with
+zero CEP phase. Even with 𝜋/2 phase for 800 nm where the positive and negative peak intensity
+are equal in the center of the pulse, a high intensity ratio between the dominant peak and secondary
+peak is still obtained, ∼ 79% (see Fig. S4A). The corresponding attosecond pulse distribution from
+the generated high harmonics is highly similar to the one with 𝜙𝐶𝐸 𝑃,1 = 𝜙𝐶𝐸 𝑃,2 = 0 in Fig. 3C in
+the main text. In this case, an isolated attosecond pulse with high contrast can still be realized under
+specific delay, e.g., 𝜏 = 0.9 fs (see Fig. S4B). The spectral intensity as a function of two-color delay
+in Fig. S4 is very similar to the case of zero CEP. Our results show that the CEP does not affect
+the main physics and behaviours in our two-color HHG experiments, except for a small influence
+on the IAP duration (∼ 100 as).
+
+4. Quantum efficiency of the micro-channel plate detector
+Figure S6 shows the estimated quantum efficiency of the micro-channel plate (MCP) detector
+used to measure high harmonics in the experiment. To simulate the experimental results, we also
+multiplied the SBE simulation spectrum by the MCP efficiency.
+
+5. Comparison of harmonic spectrum from intra- and interband currents
+Figure S7 compares the harmonic spectral intensity contributions from intraband and interband
+currents driven by an 800 nm pulse with a peak intensity of 15 TW cm−2 . Strikingly, the harmonic
+intensity generated by the interband current is several orders of magnitude higher than that from
+the intraband current.
+
+S3
+
+A
+25
+
+−+
+
+Γ
+
+B
+
++
+
+−"
+
+Γ
+
+"
+
+Energy (eV)
+
+20
+15
+10
+19.6 eV
+
+5
+
+7.5 eV
+
+16.5 eV
+
+0
+-5
+-1
+
+-0.5
+
+0
+k/kc
+
+0.5
+
+1
+
+Figure S1: Band structure and transition dipole moment of MgO. (A) Band structure of the
+MgO crystal in the Γ − 𝑋 orientation. The bottom curve is the valence band and the upper two
+curves represent the first and second conduction bands, respectively. (B) Corresponding transition
+dipole moments (TDMs) in atomic units (a.u.).
+
+S4
+
+A
+
+B
+0.6
+
+100
+
+100
+
+50
+
+10 -8
+
+0
+-50
+
+10 -9
+
+delay
+(fs)
+Delay
+(fs)
+
+delay
+time (fs)
+(fs)
+Delay
+
+0.5
+
+50
+
+0.4
+
+0
+
+0.3
+0.2
+
+-50
+
+0.1
+
+-100
+
+-100
+
+15
+
+20
+Energy(eV)
+(eV)
+Energy
+
+25
+
+0
+
+5
+Fourier
+time
+Fourier
+time
+(fs)(fs)
+
+10
+
+0
+
+Figure S2: Harmonics intensity in spectral and Fourier time domain. (A)Harmonic spectrum
+as a function of two-color delay from −120 fs to 120 fs calculated with the SBEs. The white dashed
+line has a slope of 6.5 fs eV−1 . (B) Harmonic intensity in the Fourier time domain as a function of
+delay, corresponding to (A).
+
+S5
+
+A
+
+B
+𝜏 = 0 fs
+
+𝜏 = 2.5 fs
+
+Figure S3: Time-frequency analysis. Gabor transformation of the simulated harmonics in Fig. 3
+of the main text, based on the definition in Eq. S1. (A) and (B) correspond to two-color delays
+𝜏 = 0 fs and 𝜏 = 2.5 fs, respectively.
+
+S6
+
+B
+1
+
+1
+
+-0.9 fs
+
+𝐼 I𝑡
+
+𝐸
+𝑡2 !
+|E(t)|
+
+A
+0.5
+0
+
+0.5
+
+-165 fs
+-0.9 fs
+
+≈ 660as
+
+0
+
+-5
+
+0
+
+10
+
+5
+
+-5
+
+0
+
+5
+
+1
+
+t (fs)
+
+Delay (fs)
+
+delay
+Delay(fs)(fs)
+
+t (fs)
+
+0.8
+
+5
+
+0.6
+
+0
+0.4
+
+-5
+-10
+
+0.2
+
+-5
+
+0
+
+5
+
+t (fs)(fs)
+Time
+
+Time (fs)
+
+Figure S4: Time-domain simulation results for CEP equal to 𝜋/2. (A) Field strength square
+|𝐸 (𝑡)| 2 distribution of the synthesized pulse as a function of the pulse delay. The upper plot shows
+the synthetic field distribution in the white dash line with two-color delay equal to −0.9 fs. The
+intensity ratio between the dominant peak and secondary peak is ∼ 79%. (B) Attosecond pulses
+intensity as a function of two-color delay in real time. The upper plot compares the formation of
+attosecond pulse trains and isolated attosecond pulses at time delay −165 fs (orange) and −0.9 fs
+(blue), respectively. The dash line in the lower plot indicates the corresponding time delay. Similar
+to Fig. S2, the peak intensity for the 800 nm pulse is 15 TW cm−2 , but with the CEP 𝜙CEP = 𝜋/2.
+
+S7
+
+A
+
+10 -8
+7
+
+20
+
+B
+100
+
+10
+
+5
+4
+
+0
+
+3
+2
+
+-10
+
+delay
+time
+Delay
+(fs)(fs)
+
+delay
+time
+Delay
+(fs)(fs)
+
+6
+
+1
+
+-20
+
+15
+
+20
+Energy (eV)
+
+50
+
+10 -8
+
+0
+-50
+
+10 -9
+
+-100
+15
+
+25
+
+20
+Energy (eV)
+
+25
+
+Figure S5: Frequency-domain simulation results for CEP equal to 𝜋/2. Harmonic intensity as
+a function of two-color delay for SBE simulation for (A) range from −20 fs to 20 fs, and (B) from
+−120 fs to 120 fs. Similar to Fig. S3, the peak intensity for the 800 nm pulse is 15 TW cm−2 , but
+with CEP phase 𝜙CEP = 𝜋/2.
+
+S8
+
+Quantum efficiency (%)
+
+10 1
+
+10 0
+
+10 -1
+
+5
+
+10
+
+15
+20
+Energy [eV]
+
+25
+
+30
+
+Figure S6: MCP quantum efficiency. Estimated quantum efficiency of the microchannel plate
+detector as a function of photon energy. For the SBE simulation results in this paper, we account
+for this efficiency to model the experimental results.
+
+S9
+
+-5
+
+Counts
+
+10
+
+Interband
+Intraband
+
+-10
+
+10
+
+10-15
+0
+
+5
+
+10
+15
+Energy (eV)
+
+20
+
+Figure S7: Harmonics spectrum from interband and intraband currents. Comparison between
+interband and intraband contribution to the harmonic spectrum for a single-color 800 nm pump
+with 15TW cm−2 .
+
+S10
+
+

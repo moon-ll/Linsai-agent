@@ -53,11 +53,16 @@ def setup_cron_framework(
 
     # 删除旧的大 cron（兼容 v6.7.4 及之前）
     old_names = ["每日提案系统编排", "每日编排"]
+    # 同时清理 lc- 框架下的同名 cron（避免 --setup-cron-v2 重复执行造成的重复实例）
+    # 覆盖：lc-daily-orchestrate / lc-repair / lc-prompt-optimize / lc-retrospective
+    framework_names = ["lc-daily-orchestrate", "lc-repair",
+                       "lc-prompt-optimize", "lc-retrospective"]
     removed = []
     for cron in hb.cron_list_profile(HERMES_PROFILE):
-        if cron.get("name") in old_names:
+        cname = cron.get("name", "")
+        if cname in old_names or cname in framework_names:
             hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)
-            removed.append(cron.get("name"))
+            removed.append(cname)
 
     # orchestrate cron
     orch = hb.cron_create_no_agent(
@@ -104,7 +109,11 @@ def setup_cron_framework(
             c.get("result", {}).get("success") for c in weekend.get("created", [])
         )
 
-    # 安装 prompt 自动优化 cron（每天 14:00）
+    # 安装 prompt 自动优化 cron（每天 14:00）—— 先清理同名旧实例
+    for cron in hb.cron_list_profile(HERMES_PROFILE):
+        if cron.get("name") == "lc-prompt-optimize":
+            hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)
+            removed.append("lc-prompt-optimize")
     prompt_opt = hb.cron_create_no_agent(
         script_name="lc_prompt_optimize.sh",
         name="lc-prompt-optimize",
@@ -115,7 +124,11 @@ def setup_cron_framework(
     result["prompt_optimize"] = prompt_opt
     result["success"] = result["success"] and prompt_opt.get("success")
 
-    # 安装复盘 cron（每周一 15:00）
+    # 安装复盘 cron（每周一 15:00）—— 先清理同名旧实例
+    for cron in hb.cron_list_profile(HERMES_PROFILE):
+        if cron.get("name") == "lc-retrospective":
+            hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)
+            removed.append("lc-retrospective")
     retro = hb.cron_create_no_agent(
         script_name="lc_retrospective.sh",
         name="lc-retrospective",

@@ -1,0 +1,1872 @@
+Probing sliding ferroelectricity in bilayer Td-WTe2 with high-harmonic generation
+
+Elias Greil,1 Alba de las Heras,2 Angel Rubio,2, 3, 4 and Anna Galler1, 2, ∗
+1Institute of Theoretical and Computational Physics,
+TU Graz, NAWI Graz, Petersgasse 16, 8010 Graz, Austria
+2Max Planck Institute for the Structure and Dynamics of Matter,
+Center for Free Electron Laser Science, Luruper Chaussee 149, 22761 Hamburg, Germany
+3Center for Computational Quantum Physics, Flatiron Institute, New York, NY 10010, USA
+4Nano-Bio Spectroscopy Group, and ETSF, Universidad del Pa´ıs Vasco UPV/EHU- 20018 San Sebasti´an, Spain
+
+High-harmonic generation is a sensitive all-optical probe of symmetry and electron dynamics in
+solids. Here, we use first-principles time-dependent density functional theory (TDDFT) to study
+high-harmonic generation in Td-WTe2, a two-dimensional semimetal with switchable out-of-plane
+ferroelectric polarization driven by interlayer sliding. We show that the mirror-symmetry breaking
+underlying the ferroelectric state produces robust signatures in polarization-resolved high-harmonic
+spectra, enabling optical identification of the polarization state. By incorporating interlayer shear
+motion in coupled electron-lattice TDDFT simulations, we further show that the 0.24 THz shear
+mode is slow enough to remain effectively decoupled from the ultrafast electronic response responsi-
+ble for harmonic emission. Our results establish high-harmonic spectroscopy as a non-invasive probe
+of sliding ferroelectricity and lattice symmetry in two-dimensional quantum materials.
+
+I.
+
+INTRODUCTION
+
+Sliding ferroelectrics are bilayer or multilayer van der
+Waals (vdW) materials that exhibit robust out-of-plane
+ferroelectric (FE) polarization. This polarization arises
+from specific stacking configurations that break spatial
+inversion symmetry and can be reversibly switched via
+interlayer sliding. Similar to conventional bulk ferro-
+electrics, these systems are promising for applications
+such as non-volatile memory and optoelectronic devices.
+Moreover, in contrast to their bulk counterparts, two-
+dimensional (2D) ferroelectrics offer several advantages,
+including reduced size, mechanical flexibility, and lower
+switching fields.1
+
+Starting from the initial proposal in 2017,2 a grow-
+ing number of sliding ferroelectrics have been identified,
+including bilayer graphene,3 boron nitride,4–6 InSe2,7,8
+and transition-metal dichalcogenides (TMDs) such as
+MoS2, MoSe2, WS2 and WSe2.9–11 In particular, bi-
+layer Td-MoTe2 and Td-WTe2 have attracted atten-
+tion due to the interplay of ferroelectricity and nontriv-
+ial band topology.12–15 Their non-centrosymmetric, or-
+thorhombic Td phase (space group P nm21) hosts type-
+II Weyl semimetallic behaviour in the bulk.16–20 Td-
+WTe2 remains semimetallic down to the bilayer limit,
+and transitions to a quantum spin Hall insulator in the
+monolayer.21–24 Although bilayer Td-WTe2 is metallic in-
+plane, its atomic thickness allows the out-of-plane FE
+polarization to persist despite electronic screening. The
+resulting polarity is robust, vanishing only above 350 K,
+and can be switched by an electric field applied along the
+out-of-plane direction.12 Notably, the switching mecha-
+nism does not involve vertical ionic displacement, but
+instead arises from interlayer sliding,25 consistent with
+other sliding ferroelectrics such as boron nitride and
+MoS2.2
+
+This sensitivity of
+
+layered materials to shear and
+twist degrees of freedom has also been demonstrated
+
+dynamically.
+In WTe2, ultrafast electron diffraction
+showed that terahertz pulses can drive large-amplitude
+interlayer shear strain, inducing a transient symmetry
+change toward a centrosymmetric, topologically trivial
+phase and enabling ultrafast creation or annihilation of
+Weyl points.17 More recently, combined ultrafast elec-
+tron diffraction with atomic-scale simulations revealed
+coherent photoinduced twisting and untwisting of moir´e
+superlattices.26 Together, these studies establish inter-
+layer shear, sliding, and twist as active structural coordi-
+nates for controlling ferroelectric, moir´e, and topological
+properties on ultrafast timescales. They further point
+to a broader opportunity: using external stimuli–such as
+electric fields, terahertz pulses, and optical excitation–to
+manipulate vdW stacking and dynamically tune symme-
+try, polarization, and topology in atomically thin mate-
+rials.
+
+Building on these advances, time-resolved pump–probe
+experiments have directly demonstrated ultrafast sym-
+17 and Td-MoTe2.27 In these
+metry switching in Td-WTe2
+experiments, terahertz or optical pulses are used to coher-
+ently excite a shear phonon mode, while the resulting lat-
+tice symmetry is monitored via time-resolved second har-
+monic generation (SHG) and ultrafast electron diffrac-
+tion. Both studies show that sufficiently intense pump
+pulses drive the materials, through the excitation of a
+shear phonon, from the non-centrosymmetric Td phase
+to the centrosymmetric 1T′ phase.
+
+While SHG is a well-established technique for dis-
+tinguishing lattice structures with and without inver-
+sion symmetry, strong-field phenomena such as ultra-
+fast photocurrents23,28–30 and high-harmonic generation
+(HHG)31 are also emerging as powerful spectroscopic
+probes.
+In particular, HHG has been shown to en-
+code signatures of ultrafast electron dynamics,32,33 elec-
+tronic band structure,34–37 many-body interactions,38,39
+and the interplay between Berry curvature and lat-
+tice symmetries in topological materials.40–43 Moreover,
+
+6
+2
+0
+2
+
+r
+p
+A
+8
+2
+
+]
+i
+c
+s
+-
+l
+r
+t
+
+m
+
+.
+t
+a
+m
+-
+d
+n
+o
+c
+[
+
+1
+v
+3
+8
+4
+5
+2
+.
+
+4
+0
+6
+2
+:
+v
+i
+X
+r
+a
+
+ 
+ 
+ 
+ 
+ 
+ 
+a)
+
+b)
+
+c)
+
+FIG. 1: Schematic of the THz pump - NIR probe
+setup for ferroelectric switching. (a) A THz pump
+pulse excites coherent phonons in bilayer Td-WTe2, fol-
+lowed by a time-delayed NIR pulse, which drives HHG to
+probe the lattice and electronic structure. (b) Dynam-
+ics of the 0.24 THz interlayer shear phonon. (c) Poten-
+tial energy as a function of interlayer shear displacement,
+calculated using the nudged elastic band (NEB) method
+within DFT (see Methods). The THz pulse can drive a
+transition from the FE Td phase to a non-ferroelectric
+(NFE) intermediate state.17
+
+2D materials provide a particularly favourable platform
+for HHG, as reduced absorption and negligible phase-
+matching constraints enable more efficient harmonic gen-
+eration compared to bulk crystals.37,44–48
+
+In this work, we investigate whether HHG encodes
+information about the FE polarization in a 2D slid-
+ing ferroelectric. More broadly, we assess the poten-
+tial of HHG as an all-optical spectroscopic tool capa-
+ble of directly probing lattice dynamics and FE polariza-
+tion on ultrafast timescales. We theoretically consider a
+pump–probe scheme, depicted in Fig. 1a). In this setup,
+bilayer Td-WTe2 is excited by a THz pump pulse. As
+in many quantum materials,49–51 such intense ultrafast
+pump pulses can drive coherent phonon dynamics that
+transiently modify the lattice and electronic structure. In
+Td-WTe2, an interlayer shear phonon mode at 0.24 THz
+is launched, corresponding to a dynamic interlayer dis-
+placement along the y direction (Fig. 1b). Strong THz
+excitation can induce large-amplitude shear motion, driv-
+ing a structural transition from the FE Td phase to a non-
+ferroelectric (NFE) intermediate state (Fig. 1c), which we
+denote as 1T′(∗), following the notation in Ref. 17. Since
+the FE switching is intrinsically connected to the evo-
+lution of the lattice and electronic structure, we aim to
+identify its characteristic fingerprints in the HHG spec-
+tra driven by a time-delayed near-infrared (NIR) probe
+pulse.
+
+2
+
+II. RESULTS
+
+Signatures of ferroelectricity in HHG
+
+We begin by decomposing the proposed pump–probe
+experiment into a series of static snapshots.
+In a first
+step, we analyze HHG in bilayer WTe2 for static ionic
+configurations. The relevant structural reference points
+are the FE Td phase and the NFE intermediate 1T′(∗)
+state, shown in Fig. 2a) and Fig. 2d), respectively. No-
+tably, the 1T′(∗) structure can be obtained from Td via
+an interlayer shear displacement along the y direction,
+defining bilayer WTe2 as a sliding ferroelectric.
+
+Bilayer WTe2 is modeled using density functional the-
+ory (DFT) within PBE,52 with vdW interactions in-
+cluded via the DFT-D3 method with Becke–Johnson
+damping.53 The Td structure is fully relaxed, and the
+nudged elastic band (NEB) method54 is used to de-
+termine the minimum-energy pathway between the FE
+Td state, the intermediate NFE 1T′(∗) state, and the
+symmetry-equivalent state with reversed polarization,
+generated by a mirror operation across the interlayer
+xy plane. Computational details are provided in the
+Methods section. The resulting energy profile along the
+switching pathway is shown in Fig. 1c. A small inter-
+layer shear displacement of 0.72 ˚A induces switching of
+the FE polarization. The associated energy barrier is
+approximately 1 meV, indicating that this sliding-driven
+mechanism constitutes a realistic switching pathway.
+
+We next compute the HHG response along the FE
+switching pathway. To this end, the structures obtained
+from the NEB calculations are exposed to a 16-cycle NIR
+pulse with a wavelength of 800 nm and a peak intensity
+of 1 TW/cm2. The time-dependent electron dynamics is
+simulated using time-dependent density functional the-
+ory (TDDFT), as implemented in the Octopus code.55
+Further details of the TDDFT simulations are provided
+in the Methods section.
+
+In Fig. 2, we show the computed HHG spectra for the
+main structures: the FE Td phase (first row) and the
+intermediate NFE phase (second row). For comparison,
+results for a Td monolayer are included (third row). We
+display the polarization-resolved HHG spectra consider-
+ing a linearly polarized NIR driving field oriented along
+the in-plane x (second column) and y (third column) di-
+rections.
+
+For a driving field polarized along x (Fig. 2b), the HHG
+spectrum from the FE phase presents x, y, and z polar-
+ization components. Harmonics polarized parallel to the
+driving field (x) are purely odd, whereas those polarized
+perpendicular to it (y and z) are even. In contrast, for a
+driving field polarized along y (Fig. 2c), both even and
+odd harmonics are emitted in the y and z directions,
+while no harmonic emission is observed along x.
+
+A comparison with the HHG spectra of the NFE inter-
+mediate state (Fig. 2d–f) reveals a pronounced suppres-
+sion of harmonics polarized along the z direction. This
+contrast is especially important because z corresponds
+
+x-polarized driver
+
+y-polarized driver
+
+3
+
+a)
+
+b)
+
+d)
+
+e)
+
+g)
+
+h)
+
+c)
+
+f )
+
+i)
+
+FIG. 2: Signatures of sliding ferroelectricity in HHG. (a) The polar Td structure of bilayer WTe2 exhibits FE
+polarization in the out-of-plane (z) direction. (b) HHG spectrum obtained for a 16-cycle driving laser pulse with a
+wavelength of 800 nm, linearly polarized along the x direction, and an intensity of 1 TW/cm2. (c) Corresponding HHG
+spectrum for a driving laser polarized along the y direction. (d–f) Same as in (a–c), but for the non-ferroelectric (NFE)
+intermediate structure, obtained from Td via an interlayer shear displacement along y. The z-polarized harmonics
+(shaded in grey) are strongly suppressed. (g–i) For a full comparison, we also show the HHG spectra from monolayer
+WTe2.
+
+to the out-of-plane direction in which the FE polariza-
+tion develops in bilayer Td-WTe2. Therefore, when bi-
+layer WTe2 is driven within the xy plane, the emergence
+z-polarized harmonics provides a clear spectroscopic fin-
+gerprint of the FE polarization.
+
+For completeness, we also consider the monolayer
+case (Fig. 2g–i), where only odd-order harmonics
+are observed.
+The harmonic response of the FE,
+NFE, and monolayer structures under different driving
+polarizations–linear polarization along the x, y, and z
+directions–are summarized in Table I.
+
+Having established that the out-of-plane z-polarized
+
+TABLE I: Summary of the HHG response for the fer-
+roelectric Td, non-ferroelectric 1T′(∗), and monolayer
+structures. The polarization of the fundamental corre-
+sponds to that of the driving NIR field.
+
+Fundamental
+Harmonics
+Td
+1T′(∗)
+monolayer
+
+odd
+x
+x
+x
+
+x
+
+even
+y,z
+y
+
+y
+
+even
+y,z
+y
+
+odd
+y,z
+y
+y,z
+
+z
+
+even
+y,z
+y
+
+odd
+y,z
+z
+y,z
+
+a)
+
+b)
+
+FIG. 3: HHG response along the FE switching
+pathway. (a) Harmonic yield of the z-polarized harmon-
+ics as a function of the shear displacement ∆y. The HHG
+yield is computed for an x-polarized driving field with
+a wavelength of 800 nm and an intensity of 1 TW/cm2.
+The z harmonics progressively vanish as the shear dis-
+placement approaches the NFE 1T′(∗) structure.
+(b)
+The ferroelectric polarization is directly proportional to
+the deviation from the xy glide-plane symmetry, which is
+present only in the 1T′(∗) structure. The deviation from
+this symmetry is quantified by a mean absolute displace-
+ment measure D (see Methods).
+
+harmonics vanish–or are at least strongly suppressed–
+in the NFE phase, we now examine how their intensity
+evolves along the FE switching pathway obtained from
+the nudged elastic band (NEB) calculations. This path-
+way connects the FE Td structure of bilayer WTe2 to its
+mirrored configuration with opposite polarization, pass-
+ing through the intermediate NFE 1T′(∗) state.
+
+In Fig. 3b, we show how the FE polarization progres-
+sively decreases along the shear displacement in the y
+direction, vanishing at the NFE 1T′(∗) structure. The
+corresponding evolution of the z-polarized component in
+HHG is presented in Fig. 3a, along the same pathway.
+Considering an x-polarized driving field, only even-order
+harmonics are polarized along z. Notably, their intensity
+decreases continuously and ultimately disappears as the
+system approaches the NFE state. A key question, which
+we will address in the next section, concerns the origin
+of these z-polarized harmonics and their suppression in
+the NFE phase.
+
+A matter of symmetries
+
+HHG is extremely sensitive to the symmetries of
+both the driving laser field and the underlying mate-
+rial system.56,57 In isotropic, highly symmetric targets,
+such as atoms, a linearly polarized driving field is known
+
+a)
+
+b)
+
+4
+
+FIG. 4:
+Symmetries of the non-ferroelectric
+1T′(∗) structure. (a) Mirror plane Mx (corresponding
+to the yz plane). (b) Glide-plane symmetry Gz, consist-
+ing of a reflection across the xy plane combined with a
+fractional translation along the y direction.
+
+a)
+
+b)
+
+FIG. 5: Symmetries of the ferroelectric Td struc-
+ture. (a) Mirror plane Mx. (b) Illustration of the broken
+glide-plane symmetry Gz.
+
+to generate only odd-order harmonics, with the emit-
+ted radiation preserving the polarization of the driver.
+Within the dipole approximation, even-order harmonics
+are strictly forbidden in centrosymmetric systems and
+can appear only when inversion symmetry is broken.
+
+In crystalline solids, however, the symmetry con-
+straints are richer. Beyond inversion symmetry, rota-
+tional symmetries, mirror planes, and glide or screw ro-
+tations can impose additional selection rules that deter-
+mine which harmonic orders are allowed or suppressed in
+each polarization channel.43,44,57Consequently, the polar-
+ization of the emitted harmonics need not coincide with
+that of the driving field. Instead, the emitted HHG sig-
+nal encodes the symmetry of the lattice and electronic
+stucture, as clearly observed in Fig. 2 for WTe2. A sys-
+tematic framework connecting harmonic orders, emission
+polarization, and crystal symmetries has recently been
+developed in Ref. 42, providing a useful basis for inter-
+preting the polarization-resolved HHG spectra discussed
+here. This Jones matrix formalism for HHG in crys-
+talline solids reveals how the crystal symmetry controls
+the allowed harmonic orders and their polarization. In
+the Methods section, we derive the Jones matrices for all
+relevant crystal structures and driving-field polarizations
+considered in this work, and demonstrate that the fea-
+tures observed in Fig. 2 can be consistently interpreted
+within this framework. In the following, we highlight the
+most important findings.
+
+The WTe2 bilayer exhibits a yz mirror plane, denoted
+as Mx, in both the NFE 1T′(∗) and FE Td phases, as il-
+lustrated in Fig. 4a and Fig. 5a, respectively. When HHG
+is driven by a linearly polarized field, whose polarization
+lies within this mirror plane (e.g., y polarization), the
+mirror symmetry Mx is preserved. As a consequence,
+harmonic emission perpendicular to the mirror plane–
+i.e., along the x direction–is forbidden for all harmonic
+orders. This behaviour is clearly observed in Fig. 2c and
+f, where no harmonic response is detected in the x com-
+ponent, consistent with the constraints imposed by Mx
+symmetry.
+
+When the WTe2 bilayer is driven by an electric field
+polarized along the x direction, i.e., perpendicular to the
+mirror plane Mx, a constraint arises for the even-order
+harmonics: the even-harmonic response must vanish per-
+pendicular to the mirror plane Mx. The underlying ex-
+planation is that the Mx mirror symmetry requires the
+orthogonal x polarization of the induced electric field to
+have opposite sign and equal amplitude every half driv-
+ing cycle (when the sign of the driving field is reversed).
+Such a behaviour is incompatible with even-order har-
+monics, whose dipole should be identical in both sign and
+amplitude every half driving cycle. Consequently, even
+harmonics polarized along x are symmetry-forbidden, in
+agreement with the results shown in Fig. 2.
+
+The key structural difference between the FE and NFE
+phases, relevant for the present analysis, is the presence
+of an xy glide-plane symmetry, denoted by Gz, in the
+NFE 1T′(∗) phase (Fig. 4b), which is absent in the FE Td
+phase. This glide operation involves a reflection across
+the xy plane and a translation of half the lattice con-
+stant along the y axis. As only the point-group compo-
+nent of the symmetry operation enters the HHG selection
+rules, Gz is effectively equivalent to a mirror symmetry
+Mz acting on the harmonic emission. Consequently, the
+presence of Gz in the 1T′(∗) structure forbids the emis-
+sion of z-polarized harmonics in the NFE phase.
+
+In contrast, the breaking of Gz in the FE Td structure
+(Fig. 5b) lifts this restriction, allowing for the genera-
+tion of z-polarized harmonics. These symmetry-derived
+selection rules are consistent with the TDDFT results
+shown in Fig. 2a–f, where the z-polarized harmonics sup-
+pressed by approximately four orders of magnitude in the
+NFE phase compared to the FE phase. The residual,
+nonzero z-polarized response in the NFE structure can
+be attributed to the fact that the Gz symmetry is not
+perfectly realized in the 1T′(∗) geometry obtained from
+the NEB calculations.
+
+In Fig. 3b, we quantify the deviation from the Gz glide
+plane symmetry along the FE switching pathway through
+a mean absolute displacement measure (solid red line)
+and show that it directly correlates with the FE polar-
+ization along the z axis, as well as the yield of z-polarized
+harmonics, depicted in Fig. 3a.
+
+From this analysis, we conclude that the suppression
+of z-polarized harmonics in the NFE phase is dictated by
+symmetry and can be directly attributed to the presence
+
+a)
+
+b)
+
+5
+
+FIG. 6: Symmetries of monolayer WTe2. (a) xy-
+plane of the monolayer highlighting the mirror symmetry
+Mx.
+(b) The monolayer additionally shows a two-fold
+rotational symmetry C2(x) around the x-axis.
+
+of the glide-plane symmetry Gz in the 1T′(∗) structure.
+Conversely, in the FE Td phase, the breaking of Gz is
+intrinsically linked to the emergence of FE polarization.
+As a result, polarization-resolved HHG provides an indi-
+rect yet robust probe of the FE polarization in bilayer
+WTe2.
+
+For completeness, we demonstrate that the symmetry-
+derived HHG selection rules also apply to monolayer
+WTe2. In contrast to the bilayer structures, the mono-
+layer exhibits inversion symmetry I and a two-fold rota-
+tional symmetry around the x axis, C2(x). The inversion
+symmetry maps into the suppression of even harmonics
+in Figs. 2h,i. Moreover, we can distinguish two scenarios
+depending on the orientation of the driving polarization
+relative to the x axis.
+If the driving field is polarized
+along x, the system preserves its high symmetry, and
+all the harmonics are also polarized along x (Fig. 2h).
+Contrarily, for a driving polarization along y or z, the
+symmetry is reduced and superpositions of y and z com-
+ponents arise (Fig. 2i), consistent with the underlying
+symmetries of monolayer WTe2.
+
+Incorporating the lattice dynamics
+
+Having established the HHG response for static ionic
+configurations along the FE switching pathway, we now
+turn to the pump–probe scheme introduced in Fig. 1a. In
+this setup, inspired by the experiments in Refs. 17 and 27
+and simulations in Refs. 18 and 58, a THz pump pulse
+excites coherent phonons in bilayer WTe2, in particu-
+lar an interlayer shear mode at 0.24 THz, characterized
+by ionic motion along the y direction of the FE switch-
+ing pathway. A time-delayed near-infrared (NIR) probe
+pulse subsequently drives HHG, thereby probing the lat-
+tice structure and FE polarization, as discussed above.
+
+To simulate the coupled electron–ion dynamics, we em-
+ploy TDDFT combined with molecular dynamics (MD-
+TDDFT), as implemented in the Octopus code.55 Within
+the Ehrenfest approximation,59,60 the electronic degrees
+of freedom are treated fully quantum mechanically within
+TDDFT, while the ions evolve along classical trajecto-
+
+a)
+
+b)
+
+FIG. 7: Results of the MD-TDDFT simulations.
+(a) Comparison of the total HHG spectrum obtained
+from coupled electron–ion dynamics (MD-TDDFT, red)
+with that from fixed ionic positions corresponding to the
+Td phase of bilayer WTe2 (TDDFT, blue). (b) Time evo-
+lution of the ionic displacements during the first 350 fs fol-
+lowing initialization of the interlayer shear mode. Shown
+are the displacements ∆y of the centers of mass of the top
+layer (dashed black line) and bottom layer (solid black
+line). After 300 fs, a 16-cycle 800 nm probe pulse is ap-
+plied, and the resulting HHG spectrum is shown in (a).
+
+ries. The forces acting on the ions are obtained from the
+time-dependent electronic density in the presence of the
+external laser field. The phononic excitation is modeled
+by directly initializing the interlayer shear mode start-
+ing from the ground-state Td structure of bilayer WTe2.
+This is achieved by assigning appropriate initial ionic ve-
+locities, rather than explicitly simulating the interaction
+with the THz pump pulse, thereby substantially reducing
+the computational cost. Further technical details of the
+MD-TDDFT simulations are provided in the Methods
+section.
+
+Once the dynamics is initiated, the ions evolve accord-
+ing to the interlayer shear mode, and the coupled elec-
+tron–ion system is propagated in time. The time evolu-
+tion of the ionic displacements is depicted in Fig. 7b. Af-
+ter an initial propagation period, an 800 nm probe pulse
+is applied, analogously to the simulations with frozen
+ionic configurations discussed above. Owing to the high
+computational cost, only a fraction of the full cycle of the
+0.24 THz shear mode (with a period of approximately
+4 ps) is simulated.
+In Fig. 7b, an x-polarized 16-cycle
+NIR probe pulse is applied after 300 fs. The resulting
+HHG spectrum is shown in Fig. 7a (red) and compared
+with the spectrum obtained for the FE Td phase with
+frozen ions (blue). We note that Fig. 7a displays the
+total HHG spectrum and is not polarization-resolved. A
+direct comparison reveals only minor differences, indicat-
+ing that the spectra with and without ionic motion are
+
+6
+
+nearly identical.
+
+This observation suggests that ionic motion and elec-
+tron–phonon coupling have a negligible impact on the
+HHG response in bilayer WTe2 under the present condi-
+tions. This behaviour can be understood from the separa-
+tion of time scales: the interlayer shear mode at 0.24 THz
+evolves on picosecond time scales (with a period of ap-
+proximately 4 ps), whereas the electronic dynamics un-
+derlying HHG occurs on femtosecond time scales. As a
+result, the electronic response effectively follows the in-
+stantaneous ionic configuration, and the HHG process
+can be accurately described within a frozen-ion approx-
+imation. Consequently, the HHG results obtained for
+static ionic configurations, discussed above, remain appli-
+cable in the presence of lattice dynamics. Finally, we note
+that accessing the NFE intermediate state requires exci-
+tation with intense THz pulses (7.5 MV/cm in Ref.17),
+which drive anharmonic phonon dynamics that are not
+captured within the present simulations.
+
+III. DISCUSSION
+
+We have investigated HHG in bilayer WTe2, a proto-
+typical 2D sliding ferroelectric with out-of-plane polar-
+ization. Our results demonstrate that HHG can serve
+as an all-optical probe of FE polarization. In particular,
+z-polarized harmonics–aligned with the out-of-plane FE
+polarization–are emitted only in the presence of FE order
+when the material is driven by an in-plane (x or y) field.
+We showed that this behaviour originates from symme-
+try constraints: in the NFE 1T′(∗) phase, a glide-plane
+symmetry Gz forbids z-polarized emission, whereas its
+breaking in the FE Td phase lifts this restriction. Since
+the emergence of FE polarization in bilayer WTe2 is
+intrinsically linked to the breaking of Gz, polarization-
+resolved HHG provides a direct, symmetry-based probe
+of this order parameter. Moreover, the yield of the z-
+polarized harmonics scales with the degree of glide-plane
+symmetry breaking, enabling a quantitative connection
+between the HHG signal and the FE polarization along
+the switching pathway.
+
+We
+
+further demonstrated that
+
+the Jones ma-
+trix formalism42 consistently captures the symmetry-
+dependent selection rules governing HHG in both the
+FE Td and NFE 1T′(∗) phases, as well as in the WTe2
+monolayer. This highlights the general applicability of
+the approach as a unifying framework for understanding
+symmetry-resolved HHG in solids.
+
+More broadly, our results indicate that the connection
+between FE polarization and broken lattice symmetries
+provides a general principle for detecting ferroelectric or-
+der with HHG. In particular, a finite polarization re-
+quires the absence of symmetry operations, such as mir-
+ror or glide planes, that reverse the polar axis. This
+symmetry breaking opens otherwise forbidden harmonic
+emission channels, allowing polarization-resolved HHG
+to act as a direct optical fingerprint of the FE state. We
+
+therefore expect this mechanism to be applicable beyond
+WTe2, extending to a broad class of ferroelectric and po-
+lar materials. Our work establishes HHG as a sensitive,
+all-optical probe of ferroelectricity and lattice-symmetry
+breaking, and highlights its potential for tracking ultra-
+fast structural dynamics, interlayer sliding, and polariza-
+tion switching in quantum materials.
+
+IV. METHODS
+
+DFT. The DFT calculations, including structural re-
+laxations and nudged elastic band (NEB) calculations,
+were performed using the Vienna ab-initio simulation
+package (VASP).61 The exchange–correlation functional
+was treated within the Perdew–Burke–Ernzerhof func-
+tional (PBE52) generalized gradient approximation, ne-
+glecting spin polarization and spin–orbit coupling. Core
+states were described using projector augmented-wave
+pseudopotentials.62 A 8 × 8 × 1 Monkhorst–Pack k-point
+mesh and a plane-wave cutoff energy of 500 eV were used,
+with an energy convergence criterion of 10−8 eV. Van
+der Waals interactions were included via the DFT-D3
+method with Becke–Johnson damping53 for all structural
+relaxations and NEB calculations.
+
+Bilayer Td-WTe2 adopts a non-centrosymmetric or-
+thorhombic structure (space group P nm21), enabling
+out-of-plane ferroelectric polarization. The optimized
+lattice parameters are a = 3.461 ˚A, b = 6.287 ˚A, and
+c = 10.106 ˚A. A vacuum spacing of 17.6 ˚A was applied
+along the z direction. Atomic coordinates are provided
+in the Supplementary Information.
+
+For the final NEB state, the top layer was displaced
+by 0.72 ˚A along y and relaxed to obtain the structure
+with reversed polarization.25 Structural
+relaxations
+employed a conjugate gradient algorithm with an energy
+convergence threshold of 0.005 eV. NEB calculations
+were performed at fixed cell shape and volume with a
+convergence criterion of 0.01 eV. The nine intermediate
+images were subsequently recalculated including dipole
+corrections along z to extract the interlayer dipole
+moment.
+
+TDDFT. Time-dependent density functional theory
+(TDDFT) calculations were performed using Octopus,55
+which describes electron dynamics on a real-space grid by
+solving the time-dependent Kohn–Sham (KS) equations:
+
+i∂t |Ψnk(r, t)⟩ =
+
+(cid:104) 1
+2
+
+(cid:18)
+
+−i∇ −
+
+1
+c
+
+(cid:19)2
+
+(cid:105)
++vs(r, t)
+
+A(t)
+
+|Ψnk(r, t)⟩ .
+
+(1)
+Here, |Ψnk(r, t)⟩ are the KS single-particle wave func-
+tions for band n and k-point k. A(t) denotes the vector
+potential in the velocity gauge, c the speed of light, and
+vs(r, t) the time-dependent KS potential, which includes
+the ionic Coulomb potential, the Hartree term, and the
+exchange–correlation potential treated within the adia-
+batic local density approximation (ALDA). Starting from
+
+7
+
+the ground state electronic occupations, time propaga-
+tion was carried out using the enforced time-reversal sym-
+metry (etrs) scheme,63 in which the time-evolution oper-
+ator is approximated on a discretized time grid. A time
+step of ∆t = 0.05 a.u. = 2.065 fs was employed through-
+out the simulations.
+
+The vector potential A(t) is related to the electric field
+
+via −∂tA(t) = cE(t) and is defined as
+
+A(t) = −f (t)
+
+E0
+ω
+
+c sin(ωt)ˆe,
+
+(2)
+
+where E0 denotes the electric field amplitude, ω the driv-
+ing frequency, and ˆe a unit vector specifying the polar-
+ization direction.
+
+The temporal envelope f (t) was taken as a normalized
+
+function of the form57
+
+(cid:18)
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+π
+
+
+
+(cid:19)
+
+
+
+− 1
+2
+
+t
+Tp
+σ
+
+(cid:19)(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+
+
+
+
+f (t) = sin
+
+(cid:18) πt
+Tp
+
+,
+
+(3)
+
+where σ = 0.75, and Tp denotes the total pulse duration.
+In this work, Tp was chosen as Tp = 16T , with T = 2π/ω
+corresponding to a single cycle of the carrier frequency ω.
+In the simulations, we used a wavelength λ = 2πc/ω =
+800 nm and a peak intensity of E0 = 1 TW/cm2. The
+TDDFT calculations were performed for the relaxed
+structures obtained from VASP, including intermediate
+configurations along the NEB pathway. The exchange-
+correlation functional was treated within LDA. Spin de-
+grees of freedom and spin-orbit coupling were neglected.
+Core electrons were described within the frozen-core ap-
+proximation using norm-conserving pseudopotentials.64
+A 7 × 5 × 1 k-grid and a real-space grid spacing of 0.3 ˚A
+were employed throughout.
+
+A direct output of the TDDFT simulations is the time-
+
+dependent current density
+
+j(r, t) =
+
+1
+2
+
+(cid:88)
+
+nk
+
+(cid:20)
+Ψ∗
+
+nk(r, t)
+
+(cid:18)
+
+−i∇ −
+
+A(t)
+c
+
+(cid:19)
+
+(cid:21)
+Ψnk(r, t) + c.c.
+
+,
+
+(4)
+from which the total current expectation value J(t) is
+obtained by integration over the unit cell of volume V
+
+J(t) =
+
+1
+V
+
+(cid:90)
+
+V
+
+j(r, t)d3r.
+
+(5)
+
+The polarization-resolved HHG spectrum was calculated
+as the Fourier transform of the derivative of the current
+components Ji(t) along each direction i ∈ (x, y, z)
+
+Ii(ω) =
+
+(cid:12)
+(cid:90)
+(cid:12)
+(cid:12)
+(cid:12)
+
+dt∂tJi(t)e−iωt
+
+2
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+,
+
+(6)
+
+which was evaluated numerically using a fast Fourier
+transform.
+
+The harmonic yield shown in Fig. 3a is obtained by
+applying a moving average to the HHG spectra along
+the frequency axis for each intermediate structure.
+
+This smoothing enhances the visibility of the harmonic
+trends without affecting their spectral positions. The
+width of the moving average is chosen as 0.237 times
+the fundamental frequency, corresponding to a fraction
+of the harmonic spacing. The resulting spectra are
+subsequently interpolated across the intermediate struc-
+tures along the transition pathway to obtain a smooth
+representation.
+
+Symmetry analysis.
+To gain insight into symmetry-dependent HHG selec-
+tion rules, we employ the Jones matrix formalism intro-
+duced in Ref. 42. This approach enables the determina-
+tion of dipole-allowed harmonic orders, nH , for a given
+polarization. The Jones matrix J(nH ) for HHG from
+crystalline solids is given by42
+
+a)
+
+R′ = Gz
+
+b)
+
+R = Mx
+
+8
+
+FIG. 8: Shared symmetries of the NFE 1T′(∗)
+(a)
+structure and an x-polarized external field.
+The glide-plane symmetry Gz leaves both the crystal
+structure and the external field invariant. (b) The mirror
+symmetry Mx maps the external field onto itself with a
+temporal shift of T0/2, corresponding to a reversal of its
+direction.
+
+J(nH ) =
+
+N ′
+(cid:88)
+
+(R′)
+
+l′=1
+
+N
+(cid:88)
+
+l=1
+
+(cid:18)
+
+exp
+
+−i2πnH
+
+(cid:19)
+
+l
+N
+
+(R)l,
+
+(7)
+
+yields
+
+where nH is the harmonic order, and R and R′ repre-
+sent the shared orthogonal transformations of the ex-
+ternal field and the crystal structure. The integers N
+and N ′ correspond to the orders of the symmetry oper-
+ations R and R′, respectively, such that RN = E and
+(R′)N ′
+= E, with E being the identity operator. For in-
+stance, mirror symmetry or two-fold rotational symme-
+try corresponds to N = 2. The symmetry operation R′
+leaves both the crystal structure and the external field
+invariant.
+In contrast, R preserves the crystal symme-
+try while inducing a temporal translation of the driving
+field, RA(t) = A(t + T0/N ), where T0 is the fundamen-
+tal period of the field.
+In the following, we explicitly
+construct the Jones matrices for the crystal symmetries
+and driving-field polarizations considered in this work.
+
+We begin with the NFE 1T′(∗) structure of bilayer
+WTe2. As illustrated in Fig. 8, this structure possesses a
+mirror plane perpendicular to the x axis (the yz plane),
+denoted as Mx, and a glide plane parallel to the xy plane,
+denoted as Gz. The glide-plane symmetry comprises a re-
+flection across the xy plane, corresponding to z → −z,
+combined with a fractional translation of 3.14 ˚A along
+the y direction. Since only the orthogonal (point-group)
+component of the symmetry operation enters the Jones
+matrix formalism, the translational part of the glide op-
+eration is not considered.
+
+For a driving field linearly polarized along x, the only
+symmetry operation that leaves both the crystal struc-
+ture and the external field invariant is the point-group
+component of Gz. Accordingly, as shown in Fig. 8a, we
+obtain
+
+R′ = Gz =
+
+(cid:16) 1
+
+(cid:17)
+
+.
+
+1
+
+−1
+
+(8)
+
+R = Mx =
+
+(cid:16) −1
+
+(cid:17)
+
+.
+
+1
+
+1
+
+(9)
+
+Substituting Eqs. (9) and (8) into the Jones matrix ex-
+pression given in Eq. (7), we obtain
+
+J(nH ) =
+
+(cid:32)
+
+1−e−iπnH
+
+1+e−iπnH
+
+(cid:33)
+.
+
+0
+
+(10)
+
+We therefore conclude that, for the NFE 1T′(∗) struc-
+ture driven by an x-polarized field, only x-polarized odd
+harmonics (nH = 2n + 1) and y-polarized even harmon-
+ics (nH = 2n) are allowed, while harmonics polarized
+along z are symmetry-forbidden. These conclusions are
+consistent with the harmonics observed in Fig. 2e.
+
+Next, we analyze the symmetries shared by the NFE
+1T′(∗) structure and a y-polarized external field. In this
+case, the laser polarization lies within the yz mirror plane
+of the lattice; consequently, both Mx and Gz leave the
+crystal structure and the external field invariant. In con-
+trast, there is no symmetry operation of the lattice that
+translates the external field by T0/2. We therefore obtain
+
+R′ = GzMx =
+
+(cid:16) −1
+
+(cid:17)
+
+1
+
+−1
+
+and R = E =
+
+(cid:16) 1
+
+(cid:17)
+
+1
+
+1
+
+. (11)
+
+Substituting R and R′ into Eq. (7), we obtain the Jones
+matrix
+
+J(nH ) ∝
+
+(cid:16) 0
+
+(cid:17)
+
+.
+
+1
+
+0
+
+(12)
+
+This result implies that y-polarized harmonics of even
+and odd order are allowed, whereas x- and z-polarized
+harmonics are symmetry-forbidden. These predictions
+are consistent with the harmonics observed in Fig. 5f.
+
+In contrast, the symmetry operation that preserves the
+crystal structure while shifting the external field by T0/2
+is the mirror operation Mx. As illustrated in Fig. 8b, this
+
+The FE Td structure of bilayer WTe2 retains the yz
+mirror plane, denoted by Mx, while the glide-plane sym-
+metry Gz is broken, as shown in Fig. 5. Consequently,
+
+for an x-polarized driving field, there exists no orthogo-
+nal transformation that leaves both the crystal structure
+and the external field invariant. Instead, the mirror sym-
+metry Mx maps the external field as A(t) → A(t+T0/2).
+The relevant symmetry operations are therefore
+
+TABLE II: Shared symmetries R and R′ for the investi-
+gated crystal structures and external field polarizations.
+The relevant symmetry operations include mirror sym-
+metry Mx, glide-plane symmetry Gz, two-fold rotation
+C2(x), and inversion symmetry I.
+
+9
+
+R′ = E =
+
+(cid:16) 1
+
+(cid:17)
+
+1
+
+1
+
+and R = Mx =
+
+(cid:16) −1
+
+(cid:17)
+
+,
+
+1
+
+1
+
+(13)
+
+which yield the Jones matrix
+
+(cid:32)
+
+1−e−iπnH
+
+J(nH ) =
+
+1+e−iπnH
+
+1+e−iπnH
+
+(cid:33)
+.
+
+(14)
+
+This result indicates that, for an x-polarized driving field,
+odd harmonics are emitted with x polarization, while
+even harmonics appear in the y and z components. These
+predictions are confirmed by the TDDFT results shown
+in Fig. 3b.
+
+For a y-polarized external field, the mirror symmetry
+Mx leaves both the crystal structure and the field in-
+variant, while no lattice symmetry exists that induces
+a temporal shift of T0/2. The corresponding symmetry
+operations are therefore
+
+R′ = Mx =
+
+(cid:16) −1
+
+(cid:17)
+
+1
+
+1
+
+and R = E =
+
+(cid:16) 1
+
+(cid:17)
+
+,
+
+1
+
+1
+
+(15)
+
+which lead to the Jones matrix
+(cid:16) 0
+
+J(nH ) ∝
+
+(cid:17)
+
+.
+
+1
+
+1
+
+(16)
+
+Accordingly, both even- and odd-order harmonics are
+allowed with y and z polarization, while x-polarized
+harmonics are forbidden by symmetry.
+
+The investigated monolayer structure exhibits, in addi-
+tion to the mirror symmetry Mx, inversion symmetry I,
+and a two-fold rotational symmetry about the x axis, de-
+noted by C2(x). For an x-polarized driving field, both the
+crystal structure and the external field are invariant un-
+der the rotation C2(x). In contrast, inversion symmetry
+I reverses the direction of the external field, correspond-
+ing to A(t) → A(t + T0/2). The resulting symmetry
+operations are therefore
+
+R′ = C2(x) =
+
+(cid:16) 1
+
+(cid:17)
+
+−1
+
+−1
+
+and R = I =
+
+(cid:16) −1
+
+−1
+
+−1
+
+(cid:17)
+
+,
+
+(17)
+
+which lead to the Jones Matrix
+
+J(nH ) =
+
+(cid:32)
+
+1−e−iπnH
+
+(cid:33)
+
+0
+
+0
+
+(18)
+
+This result implies that only odd-order harmonics with x
+polarization are allowed, in agreement with the TDDFT
+results shown in Fig. 2h.
+
+For a y-polarized driving field, the symmetry opera-
+tions shared by the monolayer and the external field are
+
+R′ = Mx =
+
+(cid:16) −1
+
+(cid:17)
+
+1
+
+1
+
+and R = I =
+
+(cid:16) −1
+
+(cid:17)
+
+,
+
+(19)
+
+−1
+
+−1
+
+Fundamental
+Symmetry
+Td
+1T′(∗)
+monolayer
+
+R
+Mx
+Mx
+I
+
+x
+
+R′
+E
+Gz
+
+y
+
+z
+
+R′
+R
+R
+E
+E
+Mx
+E Mx Gz Gz
+I
+
+C2(x)
+
+R′
+Mx
+Mx
+I
+
+C2(x) C2(x)
+
+which yield the Jones matrix
+
+(cid:32)
+
+0
+
+1−e−iπnH
+
+J(nH ) =
+
+(cid:33)
+,
+
+(20)
+
+1−e−iπnH
+
+Accordingly, only odd-order harmonics polarized along y
+and z are allowed, consistent with the TDDFT results.
+
+Finally, we summarize all
+
+shared symmetries of
+the various crystal structures and laser polarizations,
+including driving fields polarized along z, in Table I.
+
+The deviation from the glide-plane symmetry Gz,
+shown in Fig. 3b, is quantified using a mean absolute
+displacement measure. For each intermediate structure
+along the NEB pathway, the atomic coordinates are first
+reflected across the xy plane (i.e., along the z direction).
+The mirrored structure is then rigidly displaced so as to
+minimize its deviation from the original configuration.
+The residual distances are evaluated according to
+
+D =
+
+1
+N
+
+N
+(cid:88)
+
+|ri − r′
+
+i|,
+
+i=1
+
+(21)
+
+where N is the number of atoms in the unit cell, ri
+denotes the position of the i-th atom in the original
+structure, and r′
+i the position of the corresponding atom
+in the mirrored and displaced configuration. For a
+perfectly glide-plane symmetric structure, D vanishes.
+In the NFE 1T′(∗) phase, we obtain a residual value of
+0.0028 ˚A.
+
+MD-TDDFT. The molecular
+
+dynamics
+time-
+theory (MD-TDDFT)
+dependent density functional
+simulations were performed using Octopus.55 The
+coupled electron-ion dynamics was treated within the
+Ehrenfest approximation,60 in which the ions evolve
+along classical trajectories while the electron dynamics
+is described quantum mechanically within TDDFT. The
+forces acting on the ions are computed at each time step
+from the time-dependent electronic density.
+
+The Td ground-state structure of bilayer WTe2 was
+used as the initial configuration for the time propagation.
+To eliminate residual forces, the structure was relaxed
+until the atomic forces were below 10−6 a.u. The inter-
+layer shear phonon mode was then initialized by assign-
+
+ing initial ionic velocities of 6.5×10−6 ˚A/fs along the cor-
+responding eigenmode obtained from density functional
+perturbation theory (DFPT).
+
+All calculations were performed using a 7 × 5 × 1 k-
+point grid, LDA pseudopotentials, and a time step of
+0.05 a.u. The parameters of the time-delayed NIR pulse
+used to drive HHG were identical to those employed for
+the static ionic configurations described above.
+
+V. DATA AVAILABILITY
+
+10
+
+11
+
+∗ anna.galler@tugraz.at
+1 Q. Zhang, A. Fan, Y. Wang, F. Wu, L. Li, H. Meng, and
+D. Geng, “Emerging frontiers in two-dimensional sliding
+ferroelectrics,” npj 2D Materials and Applications 9, 76
+(2025).
+
+2 L. Li and M. Wu, “Binary compound bilayer and multi-
+layer with vertical polarizations: Two-dimensional ferro-
+electrics, multiferroics, and nanogenerators,” ACS Nano
+11, 6382–6388 (2017).
+
+3 Z. Zheng, Q. Ma, Z. Bi, S. de La Barrera, M.-H. Liu,
+N. Mao, Y. Zhang, N. Kiper, K. Watanabe, T. Taniguchi,
+et al., “Unconventional
+ferroelectricity in Moir´e het-
+erostructures,” Nature 588, 71–76 (2020).
+
+4 K. Yasuda, X. Wang, K. Watanabe, T. Taniguchi, and
+P. Jarillo-Herrero, “Stacking-engineered ferroelectricity in
+bilayer boron nitride,” Science 372, 1458–1462 (2021).
+5 L. Wang, J. Qi, W. Wei, M. Wu, Z. Zhang, X. Li, H. Sun,
+Q. Guo, M. Cao, Q. Wang, et al., “Bevel-edge epitaxy
+of ferroelectric rhombohedral boron nitride single crystal,”
+Nature 629, 74–79 (2024).
+
+6 S.-S. Wong, Z.-Y. Lin, S.-Z. Ho, C.-E. Hsu, P.-H. Li, C.-Y.
+Chen, Y.-F. Huang, K.-E. Chang, Y.-C. Hsieh, C.-H. Chen,
+M.-H. Lee, M.-W. Chu, K.-I. Lin, T.-M. Chen, Y.-C. Chen,
+H.-C. Hsueh, C.-M. Cheng, and C.-L. Wu, “Epitaxial fer-
+roelectric hexagonal boron nitride grown on graphene,”
+Advanced Materials 37, 2414442 (2025).
+
+7 H. Hu, Y. Sun, M. Chai, D. Xie, J. Ma, and H. Zhu,
+“Room-temperature out-of-plane and in-plane ferroelec-
+tricity of two-dimensional β-InSe nanoflakes,” Applied
+Physics Letters 114, 252903 (2019).
+
+8 F. Sui, M. Jin, Y. Zhang, R. Qi, Y.-N. Wu, R. Huang,
+F. Yue, and J. Chu, “Sliding ferroelectricity in van der
+Waals layered γ-InSe semiconductor,” Nature communi-
+cations 14, 36 (2023).
+
+9 L. Rog´ee, L. Wang, Y. Zhang, S. Cai, P. Wang,
+M. Chhowalla, W. Ji,
+and S. P. Lau, “Ferroelectricity
+in untwisted heterobilayers of transition metal dichalco-
+genides,” Science 376, 973–978 (2022).
+
+10 X. Wang, K. Yasuda, Y. Zhang, S. Liu, K. Watanabe,
+T. Taniguchi, J. Hone, L. Fu, and P. Jarillo-Herrero, “In-
+terfacial ferroelectricity in rhombohedral-stacked bilayer
+transition metal dichalcogenides,” Nature nanotechnology
+17, 367–371 (2022).
+
+11 S. Deb, W. Cao, N. Raab, K. Watanabe, T. Taniguchi,
+M. Goldstein, L. Kronik, M. Urbakh, O. Hod,
+and
+M. Ben Shalom, “Cumulative polarization in conductive
+interfacial ferroelectrics,” Nature 612, 465–469 (2022).
+12 Z. Fei, W. Zhao, T. A. Palomaki, B. Sun, M. K. Miller,
+Z. Zhao, J. Yan, X. Xu, and D. H. Cobden, “Ferroelectric
+switching of a two-dimensional metal,” Nature 560, 336–
+339 (2018).
+
+13 P. Sharma, F.-X. Xiang, D.-F. Shao, D. Zhang, E. Y.
+and J. Seidel, “A room-
+Tsymbal, A. R. Hamilton,
+temperature ferroelectric semimetal,” Science Advances 5,
+eaax5080 (2019).
+
+14 J. Xiao, Y. Wang, H. Wang, C. Pemmaraju, S. Wang,
+P. Muscher, E. J. Sie, C. M. Nyby, T. P. Devereaux,
+X. Qian, et al., “Berry curvature memory through elec-
+trically driven stacking transitions,” Nature Physics 16,
+1028–1034 (2020).
+
+15 S. C. de la Barrera, Q. Cao, Y. Gao, Y. Gao, V. S.
+
+Bheemarasetty, J. Yan, D. G. Mandrus, W. Zhu, D. Xiao,
+and B. M. Hunt, “Direct measurement of ferroelectric po-
+larization in a tunable semimetal,” Nature communications
+12, 5298 (2021).
+
+16 H.-J. Kim, S.-H. Kang, I. Hamada, and Y.-W. Son, “Ori-
+gins of the structural phase transitions in MoTe2 and
+WTe2,” Phys. Rev. B 95, 180101 (2017).
+
+17 E. J. Sie, C. M. Nyby, C. Pemmaraju, S. J. Park, X. Shen,
+J. Yang, M. C. Hoffmann, B. Ofori-Okai, R. Li, A. H.
+Reid, et al., “An ultrafast symmetry switch in a Weyl
+semimetal,” Nature 565, 61–66 (2019).
+
+18 M.-X. Guan, E. Wang, P.-W. You, J.-T. Sun,
+
+and
+S. Meng, “Manipulating Weyl quasiparticles by orbital-
+selective photoexcitation in WTe2,” Nature Communica-
+tions 12, 1885 (2021).
+
+19 P. Hein, S. Jauernik, H. Erk, L. Yang, Y. Qi, Y. Sun,
+C. Felser,
+and M. Bauer, “Mode-resolved reciprocal
+space mapping of electron-phonon interaction in the Weyl
+semimetal candidate Td-WTe2,” Nature communications
+11, 2613 (2020).
+
+20 A. Jindal, A. Saha, Z. Li, T. Taniguchi, K. Watanabe,
+J. C. Hone, T. Birol, R. M. Fernandes, C. R. Dean, A. N.
+Pasupathy, et al., “Coupled ferroelectricity and supercon-
+ductivity in bilayer Td-MoTe2,” Nature 613, 48–52 (2023).
+21 S. Tang, C. Zhang, D. Wong, Z. Pedramrazi, H.-Z. Tsai,
+C. Jia, B. Moritz, M. Claassen, H. Ryu, S. Kahn, et al.,
+“Quantum spin Hall state in monolayer 1T’-WTe2,” Na-
+ture Physics 13, 683–687 (2017).
+
+22 Z. Fei, T. Palomaki, S. Wu, W. Zhao, X. Cai, B. Sun,
+P. Nguyen, J. Finney, X. Xu, and D. H. Cobden, “Edge
+conduction in monolayer WTe2,” Nature Physics 13, 677–
+682 (2017).
+
+23 S.-Y. Xu, Q. Ma, H. Shen, V. Fatemi, S. Wu, T.-R.
+Chang, G. Chang, A. M. M. Valdivia, C.-K. Chan, Q. D.
+Gibson, et al., “Electrically switchable Berry curvature
+dipole in the monolayer topological insulator WTe2,” Na-
+ture Physics 14, 900–906 (2018).
+
+24 E. Sajadi, T. Palomaki, Z. Fei, W. Zhao, P. Bement,
+and D. H.
+C. Olsen, S. Luescher, X. Xu, J. A. Folk,
+Cobden, “Gate-induced superconductivity in a monolayer
+topological insulator,” Science 362, 922–925 (2018).
+
+25 Q. Yang, M. Wu, and J. Li, “Origin of two-dimensional
+vertical ferroelectricity in WTe2 bilayer and multilayer,”
+The Journal of Physical Chemistry Letters 9, 7160–7164
+(2018).
+
+26 C. J. Duncan, A. C. Johnson, I. Maity, A. Rubio, M. Gor-
+don, A. C. Bartnik, M. Kaemingk, W. H. Li, M. B. Andorf,
+C. A. Pennington, et al., “Photoinduced twist and untwist
+of moir´e superlattices,” Nature , 1–6 (2025).
+
+27 M. Y. Zhang, Z. X. Wang, Y. N. Li, L. Y. Shi, D. Wu,
+T. Lin, S. J. Zhang, Y. Q. Liu, Q. M. Liu, J. Wang,
+T. Dong,
+and N. L. Wang, “Light-induced subpicosec-
+ond lattice symmetry switch in MoTe2,” Phys. Rev. X 9,
+021036 (2019).
+
+28 T. Higuchi, C. Heide, K. Ullmann, H. B. Weber,
+
+and
+P. Hommelhoff, “Light-field-driven currents in graphene,”
+Nature 550, 224–228 (2017).
+
+29 J. McIver, D. Hsieh, H. Steinberg, P. Jarillo-Herrero, and
+N. Gedik, “Control over topological insulator photocur-
+rents with light polarization,” Nature nanotechnology 7,
+96–100 (2012).
+
+30 A. Galler and O. Neufeld, “Bulk photogalvanic current
+control and gap spectroscopy in 2D hexagonal materials,”
+J. Mater. Chem. C 13, 17893–17901 (2025).
+
+31 E. Goulielmakis and T. Brabec, “High harmonic genera-
+tion in condensed matter,” Nature Photonics 16, 411–421
+(2022).
+
+32 M. Baudisch, A. Marini, J. D. Cox, T. Zhu, F. Silva, S. Te-
+ichmann, M. Massicotte, F. Koppens, L. S. Levitov, F. J.
+Garcia de Abajo, et al., “Ultrafast nonlinear optical re-
+sponse of Dirac fermions in graphene,” Nature Communi-
+cations 9, 1018 (2018).
+
+33 A. J. Uzan, G. Orenstein, ´A. Jim´enez-Gal´an, C. McDon-
+ald, R. E. Silva, B. D. Bruner, N. D. Klimkin, V. Blanchet,
+T. Arusi-Parpar, M. Kr¨uger, et al., “Attosecond spectral
+singularities in solid-state high-harmonic generation,” Na-
+ture Photonics 14, 183–187 (2020).
+
+34 G. Vampa, T. J. Hammond, N. Thir´e, B. E. Schmidt,
+F. L´egar´e, C. R. McDonald, T. Brabec, D. D. Klug, and
+P. B. Corkum, “All-optical reconstruction of crystal band
+structure,” Phys. Rev. Lett. 115, 193603 (2015).
+
+35 A. A. Lanin, E. A. Stepanov, A. B. Fedotov, and A. M.
+Zheltikov, “Mapping the electron band structure by intra-
+band high-harmonic generation in solids,” Optica 4, 516–
+519 (2017).
+
+36 N. Tancogne-Dejean, O. D. M¨ucke, F. X. K¨artner, and
+A. Rubio, “Impact of the electronic band structure in high-
+harmonic generation spectra of solids,” Phys. Rev. Lett.
+118, 087403 (2017).
+
+37 M. Kim, T. Kim, A. Galler, D. Kim, A. Chacon, X. Gong,
+Y. Yang, R. Fang, K. Watanabe, T. Taniguchi, et al.,
+“Quantum interference and occupation control in high har-
+monic generation from monolayer WS2,” Nature Commu-
+nications 16, 9825 (2025).
+
+38 R. Silva, I. V. Blinov, A. N. Rubtsov, O. Smirnova,
+and M. Ivanov, “High-harmonic spectroscopy of ultrafast
+many-body dynamics in strongly correlated systems,” Na-
+ture Photonics 12, 266–270 (2018).
+
+39 Y. Murakami, M. Eckstein,
+
+and P. Werner, “High-
+harmonic generation in Mott insulators,” Phys. Rev. Lett.
+121, 057405 (2018).
+
+40 T. T. Luu and H. J. W¨orner, “Measurement of the Berry
+curvature of solids using high-harmonic spectroscopy,” Na-
+ture communications 9, 916 (2018).
+
+41 O. Neufeld, N. Tancogne-Dejean, H. H¨ubener, U. De Gio-
+vannini, and A. Rubio, “Are there universal signatures of
+topological phases in high-harmonic generation? Probably
+not.” Phys. Rev. X 13, 031011 (2023).
+
+42 X. Zhang, J. v. d. Brink, and J. Li, “Impact of crystal sym-
+metries and Weyl nodes on high-harmonic generation in
+Weyl semimetal TaAs,” arXiv preprint arXiv:2405.16125
+(2024).
+
+43 A. de las Heras, O. Neufeld,
+
+and A. Rubio, “Pulse-
+duration-sensitive high harmonics and attosecond locally-
+chiral light from a chiral topological Weyl semimetal,”
+arXiv preprint arXiv:2603.05346 (2026).
+
+44 H. Liu, Y. Li, Y. S. You, S. Ghimire, T. F. Heinz, and
+D. A. Reis, “High-harmonic generation from an atomically
+thin semiconductor,” Nat. Phys. 13, 262–265 (2017).
+
+45 N. Yoshikawa, T. Tamaya,
+
+and K. Tanaka, “High-
+harmonic generation in graphene enhanced by elliptically
+polarized light excitation,” Science 356, 736–738 (2017).
+46 N. Tancogne-Dejean and A. Rubio, “Atomic-like high-
+harmonic generation from two-dimensional materials,” Sci-
+
+12
+
+ence Advances 4, eaao5207 (2018).
+
+47 N. Yoshikawa, K. Nagai, K. Uchida, Y. Takaguchi,
+S. Sasaki, Y. Miyata, and K. Tanaka, “Interband resonant
+high-harmonic generation by valley polarized electron–hole
+pairs,” Nature Communications 10, 3709 (2019).
+
+48 I. Tyulnev, ´Alvaro Jim´enez-Gal´an, J. Poborska, L. Vamos,
+P. S. J. Russell, F. Tani, O. Smirnova, M. Ivanov, R. E. F.
+Silva, and J. Biegert, “Valleytronics in bulk MoS2 with a
+topologic optical field,” Nature 628, 746–751 (2024).
+49 S. Liu, A. Hammud, I. Hamada, M. Wolf, M. M¨uller, and
+T. Kumagai, “Nanoscale coherent phonon spectroscopy,”
+Science Advances 8, eabq5682 (2022).
+
+50 T. Jiang, P. P. Orth, L. Luo, L.-L. Wang, F. Zhang, C.-
+Z. Wang, J. Zhao, K.-M. Ho, J. Wang, and Y.-X. Yao,
+“Ab-initio simulations of coherent phonon-induced pump-
+ing of carriers in zirconium pentatelluride,” Communica-
+tions Physics 6, 297 (2023).
+
+51 N. Notter, M. Aichhorn, and A. Galler, “Dynamical con-
+trol of Coulomb interactions and Hubbard bands in mono-
+layer 1T-TaS2,” Nano Letters 26, 4973–4978 (2026).
+52 J. P. Perdew, K. Burke, and M. Ernzerhof, “Generalized
+gradient approximation made simple,” Phys. Rev. Lett.
+77, 3865–3868 (1996).
+53 S. Grimme, S. Ehrlich,
+
+and L. Goerigk, “Effect of the
+damping function in dispersion corrected density func-
+tional theory,” Journal of Computational Chemistry 32,
+1456–1465 (2011).
+
+54 G. Henkelman, B. P. Uberuaga, and H. J´onsson, “A climb-
+ing image nudged elastic band method for finding saddle
+points and minimum energy paths,” The Journal of Chem-
+ical Physics 113, 9901–9904 (2000).
+
+55 N. Tancogne-Dejean, M. J. T. Oliveira, X. Andrade, H. Ap-
+pel, C. H. Borca, G. Le Breton, F. Buchholz, A. Cas-
+tro, S. Corni, A. A. Correa, U. De Giovannini, A. Del-
+gado, F. G. Eich, J. Flick, G. Gil, A. Gomez, N. Hel-
+big, H. H¨ubener, R. Jest¨adt, J. Jornet-Somoza, A. H.
+Larsen, I. V. Lebedeva, M. L¨uders, M. A. L. Marques,
+S. T. Ohlmann, S. Pipolo, M. Rampp, C. A. Rozzi, D. A.
+Strubbe, S. A. Sato, C. Sch¨afer, I. Theophilou, A. Welden,
+and A. Rubio, “Octopus, a computational framework for
+exploring light-driven phenomena and quantum dynamics
+in extended and finite systems,” The Journal of Chemical
+Physics 152, 124119 (2020).
+
+56 O. E. Alon, V. Averbukh, and N. Moiseyev, “Selection
+rules for the high harmonic generation spectra,” Physical
+Review Letters 80, 3743–3746 (1998).
+
+57 O. Neufeld, D. Podolsky, and O. Cohen, “Floquet group
+theory and its application to selection rules in harmonic
+generation,” Nature Communications 10, 405 (2019).
+
+58 Q. Yang, C. Song,
+
+and S. Meng, “Laser-induced en-
+hancement of vertical polarization in ferroelectric bilayer
+WTe2,” Journal of Physics: Condensed Matter 34, 424003
+(2022).
+
+59 J. L. Alonso, X. Andrade, P. Echenique, F. Falceto,
+D. Prada-Gracia, and A. Rubio, “Efficient formalism for
+large-scale ab initio molecular dynamics based on time-
+dependent density functional theory,” Phys. Rev. Lett.
+101, 096403 (2008).
+
+60 X. Andrade, A. Castro, D. Zueco, J. L. Alonso,
+P. Echenique, F. Falceto, and A. Rubio, “Modified Ehren-
+fest formalism for efficient large-scale ab initio molecular
+dynamics,” Journal of Chemical Theory and Computation
+5, 728–742 (2009).
+
+61 G. Kresse and J. Furthm¨uller, “Efficient iterative schemes
+for ab initio total-energy calculations using a plane-wave
+basis set,” Phys. Rev. B 54, 11169–11186 (1996).
+
+62 G. Kresse and D. Joubert, “From ultrasoft pseudopoten-
+tials to the projector augmented-wave method,” Phys.
+Rev. B 59, 1758–1775 (1999).
+
+63 A. Castro, M. A. L. Marques, and A. Rubio, “Propaga-
+tors for the time-dependent Kohn–Sham equations,” The
+Journal of Chemical Physics 121, 3425–3433 (2004).
+64 C. Hartwigsen, S. Goedecker, and J. Hutter, “Relativistic
+separable dual-space Gaussian pseudopotentials from H to
+Rn,” Phys. Rev. B 58, 3641–3662 (1998).
+
+VI. ACKNOWLEDGMENTS
+
+We thank Nicolas Tancogne-Dejean, Kazuhiro Yabana,
+Dongbin Shin, and Ofer Neufeld for helpful discussions.
+This work was financially supported by the Austrian
+Science Fund (FWF) grant 10.55776/V988, the Euro-
+pean Research Council (ERC-2024-SyG-101167294; Un-
+MySt), the Cluster of Excellence Advanced Imaging of
+Matter (AIM), Grupos Consolidados y Alto Rendimiento
+
+13
+
+UPV/EHU, Gobierno Vasco (IT1453-22). We acknowl-
+edge support from the Max Planck-New York City Center
+for Non-Equilibrium Quantum Phenomena. The Flatiron
+Institute is a division of the Simons Foundation. A.H. ac-
+knowledges the support from the postdoctoral fellowship
+programme of the Alexander von Humboldt Foundation.
+The computational results have been achieved using the
+Austrian Scientific Computing (ASC) infrastructure.
+
+VII. AUTHOR CONTRIBUTIONS
+
+A.G. conceived, designed, and led the project. E.G.
+performed the calculations and symmetry analysis under
+A.G.’s supervision. A.H. contributed to data analysis
+and scientific discussions. A.G., E.G., and A.H. drafted
+the manuscript. All authors discussed the results and
+revised the manuscript.
+
+VIII. COMPETING INTERESTS
+
+The authors declare no competing interests.
+
+

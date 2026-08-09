@@ -1,0 +1,1297 @@
+Attosecond control of solid-state high harmonic generation using ω-3ω fields
+Adam Gindl,1 Pawan Suthar,1 František Trojánek,1 Petr Malý,1 Thibault J.-Y. Derrien,2, 3, 4 and Martin Kozák1, ∗
+
+arXiv:2310.07254v2 [physics.optics] 5 May 2025
+
+2
+
+1
+Faculty of Mathematics and Physics, Charles University, Ke Karlovu 3, 12116 Prague 2, Czech Republic
+HiLASE Centre, Institute of Physics, Academy of Sciences of the Czech Republic, 25241 Dolnı́ Břežany, Czech Republic
+3
+Institute of Physics of the Czech Academy of Sciences,
+Na Slovance 1999/2, 18200 Prague, Czech Republic
+4
+IT4Innovations, Technical University of Ostrava,
+17. listopadu 2172/15, 70800 Ostrava-Poruba, Czech Republic
+
+High harmonic spectra generated in condensed matter carry the fingerprints of sub-cycle electronic
+motion and the energy structure of the studied system. Here we show that tailoring the waveform
+of mid-infrared driving light by using a coherent combination with its third harmonic frequency
+allows to control the time of electron tunneling to the conduction band within each half-cycle of the
+fundamental wave with attosecond precision. We introduce an experimental scheme in which we
+simultaneously monitor the modulation of amplitude and emission delays of high harmonic radiation
+and the excited electron population generated in crystalline silicon as a function of the relative phase
+between the ω-3ω fields. We observe that the mutual ω-3ω phase required for the maximum yield
+of high harmonic generation is shifted by approximately π/2 with respect to the phase leading to
+maximal generated carrier population. The observed emission delays of high harmonic photons of
+up to few hundred attoseconds scale with the time delay and with the ratio between the electric field
+amplitudes of the two-color fields. These results reveal the connection between electron tunneling
+and high harmonic emission processes in solids.
+
+Coherent nonlinear electron dynamics driven by strong
+oscillating fields of nonresonant electromagnetic waves in
+atomic or solid-state systems leads to generation of high
+energy photons [1, 2]. High harmonic generation (HHG)
+has opened the door to attosecond physics and spectroscopic techniques based on HHG have recently become
+indispensable tools for investigating the ultrafast electron dynamics in various physical systems [3–7]. HHG in
+condensed matter is a consequence of coherent nonlinear
+interband polarization and intraband electron currents
+[8]. The interband source of high energy photons can
+be understood in the framework of a three-step semiclassical model adopted from atomic physics [9]. The
+electron first tunnels to the conduction band in a narrow
+time window close to each maximum and minimum of
+the oscillating electric field of the driving wave. Subsequently, the coherent electron-hole wavepacket is accelerated by the laser field in the crystal and may eventually recombine while emitting high energy photon. On
+the other hand, the intraband contribution to HHG is a
+consequence of anharmonic motion of electrons in nonparabolic bands. As a result, the amplitude, phase and
+polarization of the emitted high harmonic radiation are
+tightly linked to the band structure of the material and
+to the polarization state and time profile of the electric
+field waveform of the driving pulse [10–24]. In extreme
+cases, the nonperturbative sub-cycle electron dynamics
+in strong low-frequency fields may also lead to dynamical Bloch oscillations [14] and Wannier-Stark localization
+[25, 26].
+Although high harmonic spectroscopy in condensed
+matter has become a widely used technique, there are
+only few experiments separating the individual processes
+contributing to the emission of the coherent high energy
+
+photons [15, 24]. These include coherent two-color optical control, which has initially been developed to steer
+electron currents in semiconductors via quantum path interference by the ω-2ω field superposition [27, 28]. Since
+then, the two-color coherent control has been demonstrated in many physical systems, including the control
+of quantum wave function of electrons in atoms [29], electron photoemission from metals [30, 31], HHG in atoms
+and solids [16–22]. It has also been shown that this
+scheme can be applied to study electron tunneling dynamics with attosecond time resolution [32, 33]. When
+combining the fundamental wave with its second harmonic frequency, the time symmetry of the waveform
+within one period is broken leading to emission of even
+order harmonic frequencies in centrosymmetric media.
+Even harmonic frequencies carry information about the
+quantum-mechanical phase acquired by the electron between the tunneling excitation and recombination. This
+phase is typically extracted via an interferometric measurement with the second harmonic field treated as a
+small perturbation, which does not shift the time window of electron tunneling with respect to the field of the
+fundamental wave [17, 22].
+In this report we demonstrate a scheme allowing to
+control the electron tunneling time within each half-cycle
+of the fundamental wave with attosecond precision using coherent superposition of an ultrashort infrared pulse
+with its third harmonic frequency. By controlling the
+mutual phase φ between the ω-3ω fields, the driving
+waveform changes (see Fig. 1a) leading to modulation
+of the amplitude and phase of high harmonic radiation
+generated in a silicon crystal. To separate the HHG process from electron tunneling excitation we simultaneously
+monitor the excited electron density as a function of the
+
+0
+
+b 6
+2
+4
++3 phase difference ( ) 0.5
+
+0
+
+2
+1
+0
+-1
+-2
+
+-0.4
+
+-0.2
+
+0
+0.2
+Time (T)
+
+1
+
+10
+
+100
+
+n
+
+0
+
+2
+4
+6
+D
+Spectral
++3 phase difference ( ) density
+Silicon
+crystal
+
+0.4
+
+Spectral power density
+(arb.u.)
+
+c
+
+0
+
+=0
+= /2
+=
+=3 /2
+
+Photon energy
+
+Electric field (GV/m)
+
+a
+
+High harmonic power
+
+High
+
+2
+
+Spectral power density
+(arb.u.)
+
+d
+
+10-3
+
+1000
+
+10-2
+
+10-1
+
+100
+
+10
+
+10
+
+15
+
+8
+
+11
+6
+
+9
+7
+
+4
+
+Photon energy (eV)
+
+13
+
+13
+
+8
+
+11
+6
+
+9
+7
+
+4
+
+5
+
+5
+0
+
+4
+
+0
+
+1
+2
+3
+-3 phase difference
+
+f
+
+∆R/R0
+
+e
+
+1
+2
+3
+-3 phase difference
+
+HHG yield (rel.u.)
+
+7
+
+80
+60
+40
+20
+
+5
+0
+
+1
+2
+3
+-3 phase difference
+
+4
+
+0.01
+
+0.1
+
+1
+r = F 3 /F (%)
+
+10
+
+Modulation visibility (%)
+
+9
+
+100
+
+Harmonic order
+
+11
+
+4
+
+5th
+7th
+9th
+11th
+13th
+15th
+
+15
+13
+
+Harmonic order
+
+Photon energy (eV)
+
+15
+
+0
+
+FIG. 1. (a) Time evolution of electric field of a combined
+ω-3ω waveform for different values of the mutual phase difference φ within one period T of the fundamental wave (dashed
+curve). (b) Layout of the experimental setup. (c) Measured
+and (d) calculated dependence of high harmonic spectra generated in silicon on φ. The field ratios are r = (3.9 ± 0.5)%
+in (c) and r = 4.3% in (d). (e) Experimental (full curves)
+and numerically calculated (dashed curves) modulation of individual harmonic orders and the transient reflectivity signal
+of the probe pulse (top panel). The black points label the
+values of the mutual phase corresponding to the maxima of
+the measured (squares) and theoretical (stars) modulation for
+individual harmonics. (f) Measured visibility of modulation
+of the HHG yield for 5th-15th harmonics as a function of r.
+
+ω-3ω phase by measuring the transient reflectivity of the
+sample after the interaction with ω-3ω fields. We observe that even a small admixture of light at the third
+harmonic frequency to the fundamental pulse (the ratio
+between light intensities I3ω /Iω ≈ 10−4 − 10−3 ) is sufficient to reach high modulation visibility of both the high
+harmonic generation yield and the excited electron population.
+In our experiments we use the fundamental pulses in
+the mid-infrared spectral region with the photon energy
+of 0.62 eV and the duration of 35 fs. The third harmonic
+pulse (1.86 eV) is generated in a BBO crystal. Both
+pulses propagate collinearly and are overlapped in space
+
+and time at the surface of a silicon crystal (see the layout
+of the experimental setup in Fig. 1b, detailed description
+of the setup can be found in the Supplemental Material
+[34]). Both the ω and 3ω pulses have the same orientation of linear polarization along [100] crystallographic
+direction of silicon. The generated harmonic radiation is
+collected in the reflection geometry to avoid propagation
+effects in the sample. Due to the strong absorption of
+light at photon energies above the direct band gap (3.4
+eV), the collected harmonic radiation is generated in a
+surface layer of the sample with the thickness of only
+≈5-100 nm depending on the photon energy. The relative phase difference φ between the ω and 3ω fields is
+controlled by a pair of fused silica wedges with a precision of 3 mrad corresponding to the time shift of the
+two waves by 3 as. (see Supplemental Material [34] for
+details).
+Simultaneously with the modulation of high harmonic
+yield we monitor the excited carrier population which
+remains in the sample after the interaction with ω-3ω
+pulses using transient reflectivity of an ultraviolet probe
+pulse (3.62 eV, blue beam in Fig. 1b, details in Supplemental Fig. 3 [34]) incident on the sample with the delay
+time of 0.5 ps after the ω-3ω pulse combination. This
+allows us to separate the modulation of the integrated
+tunneling rate from the modulation of the HHG yield.
+Coherent control of HHG in silicon by the two-color
+ω-3ω field is experimentally demonstrated in Fig. 1c,
+where we plot the measured HHG spectra in the spectral region 2.8-10.5 eV as a function of the relative
+phase shift φ between the fundamental (peak electric
+field in silicon 1.61 ± 0.1 GV/m) and the third harmonic
+fields with the ratio between the peak field amplitudes
+r = F3ω /Fω = (3.9 ± 0.5)%. The results are compared
+with numerical calculations using time dependent density
+functional theory (TDDFT, details are described in Supplemental Material [34]) shown in Fig. 1d obtained with
+the fundamental electric field amplitude of 1.6 GV/m and
+the field ratio of r = 4.3%. We observe a clear modulation of the spectra both in the experimental and numerical data. The oscillations of individual harmonic orders
+obtained by integrating the power emitted in the spectral
+window of 0.1 eV around each harmonic peak are shown
+in Fig. 1e both for the experimental data (solid curves)
+and the numerical calculations (dashed curves). The data
+are normalized and vertically translated for clarity.
+The HHG modulation is compared to the modulation
+of the transient reflectivity of the sample ∆R/R0 shown
+as a solid curve in the uppermost panel of Fig. 1e. Here
+the dashed curve corresponds to the normalized population of electrons excited to the conduction band calculated by TDDFT (see Supplemental Material [34] for
+details). These data are used to obtain absolute calibration of the mutual phase between the ω-3ω fields as the
+highest excited electron population is expected for φ = 0,
+for which the maxima of both waveforms overlap (see Fig.
+
+3
+
+0
+
+0
+12 eV
+
+-1
+
+-4
+
+0 eV
+0
+
+0.2
+
+0.4
+0.6
+Time (T)
+
+2
+1
+
+-2
+
+0.8
+
+1
+t = -135 as
+
+0.8
+0.6
+
+0
+
+0.4
+
+-1
+
+0.2
+30
+
+40
+50
+Time (fs)
+
+60
+
+0
+
+c
+
+0
+
+Electric field (V/nm)
+
+Electric field (V/nm)
+
+2
+
+-0.2
+
+Electric field (V/nm)
+
+4
+
+1
+
+-2
+
+b
+
+= 0.24
+
+t>0
+
+0.2
+
+0.4
+0.6
+Time (T)
+
+0.8
+
+2
+1
+
+1
+
+1
+t = 135 as
+
+0.8
+0.6
+
+0
+
+0.4
+
+-1
+
+0.2
+30
+
+40
+50
+Time (fs)
+
+60
+
+0
+
+HHG emission power (arb.u.)
+
+Here F (t) is the time dependent electric field in the
+material, e is electron charge, m∗ is reduced mass, Eg
+is band gap width and ℏ is reduced Planck’s constant.
+In Fig. 2a we plot the time evolution of the coherent
+superposition of the fundamental and third harmonic
+fields F (t) = Fω cos(ωt) + F3ω cos(3ωt − φ) with the
+amplitudes Fω =1.6 V/nm and F3ω =0.16 V/nm (ratio
+r = F3ω /Fω =10%) for two values of the relative phase
+difference φ = 1.24π (blue curve) and φ = 0.24π (red
+curve) corresponding to weak and strong emission of high
+harmonic radiation, respectively. The instantaneous tunneling rate describing the probability of electron transition to the conduction band per unit time calculated using Eq. (1) with parameters Eg =3.4 eV (1st direct band
+gap of silicon) and m∗ =0.112 m0 is shown as blue and
+
+= 1.24
+
+t<0
+
+Electron-hole
+distance (nm)
+
+(1)
+
+2
+
+Tunneling
+rate (arb.u.)
+
+q
+
+π m∗ Eg3
+2
+.
+W (t) ∝ |F (t)| exp −
+2eℏ |F (t)|
+
+
+a
+
+HHG emission power (arb.u.)
+
+1a). We observe a good quantitative agreement between
+the experiment and numerical calculations both for the
+phase shifts of the oscillation maxima of individual harmonic orders, which are marked by squares (experimental
+data) and stars (theory), and for the depth of modulation
+of the high harmonic yield.
+The ω-3ω phase difference of maximum generation
+yield differs for each harmonics as a consequence of the
+dispersion of the propagating electron and hole in higher
+energy bands of silicon, which tailors the interference between different quantum paths contributing to the interband emission of high energy photons. Remarkably, the
+maximum of the harmonic generation yield is reached for
+φ ≈ π/2, which is shifted from the phase corresponding
+to the highest population of excited carriers. This observation suggests that the dominant mechanism of HHG
+driven by mid-infrared light in silicon is the interband
+polarization [35] in contrast to HHG in wide band gap
+materials excited by near-infrared light, where the intraband current was found to be dominating [15]. The phase
+of HHG modulation maxima is only weakly dependent on
+the ratio between the amplitudes of electric field of the
+3ω and ω pulses r (see Supplemental Fig. 4 [34]). The
+modulation visibility of each harmonic frequency defined
+as (Smax −Smin )/(Smax +Smin ), where Smin and Smax are
+the minimum and maximum HHG yields at a particular
+harmonic frequency, is plotted in Fig. 1f as a function of
+r. The visibility reaches high values even for very weak
+third harmonic field only of about 1% of the fundamental
+field.
+To qualitatively understand the observed phenomena
+we recall the semi-classical model of HHG developed for
+atoms. In the adiabatic approximation, the instantaneous tunneling rate of an electron to the conduction
+band can be approximated using a Zener-like tunneling
+formula [36, 37]:
+
+FIG. 2. (a) Semi-classical model showing the time evolution of
+the electric field of the combined ω-3ω waveform for φ = 1.24π
+(blue curve) and φ = 0.24π (red curve). Instantaneous electron tunneling rate calculated using equation (1) is shown
+as blue and red shaded areas. The classical trajectories of
+electron-hole pairs with reduced mass of m∗ = 0.112m0 excited in different times are shown in the lower part of the
+figure with the color scale corresponding to the energy difference in the moment of recombination and the line thickness
+proportional to the tunneling probability associated with the
+particular trajectory. (b) The instantaneous power of high
+harmonic emission calculated using time-dependent density
+functional theory (blue shaded area) for φ=1.5π and for the
+field ratio of r=4.3%. The time evolution of the electric field of
+the combined waveform (red solid curve) is compared with the
+electric field of the fundamental pulse (black dashed curve).
+Inset: The peak of the waveform shifts by δt=-135 as. (c)
+The same as in (b) with φ=0.5π leading to the positive time
+shift of the field maximum of δt=135 as.
+
+red shaded areas. The reduced mass corresponds to an
+electron-hole pair consisting of a light hole and an electron from the conduction band with low effective mass,
+which is energy degenerate with the lowest conduction
+band in the Γ point of the Brillouin zone (see Supplemental Material [34] for details). We note that the time axis
+is defined with respect to the fundamental field oscillations. The classical trajectories x(t) corresponding to the
+distance between electron and hole are calculated by solving the equation of motion ẍ = −eE/m∗ in parabolic approximation. The trajectories corresponding to different
+tunneling times within one half-cycle of the fundamental wave are shown as curves in the lower section of Fig.
+2a. The color scale corresponds to the total energy of
+the recombining electron and hole Etot = 1/2m∗ ẋ2 + Eg
+while the line thickness is proportional to the tunneling
+probability of the electron corresponding to the particular trajectory.
+There are two important effects which contribute to
+the modulation of the HHG yield. The first effect is the
+
+4
+5th
+
+1
+
+7th
+
+9th
+
+0.5
+
+0
+
+n
+2
+4
++3 phase difference (n )
+
+0
+
+Spectral
+6
+density
+
+5.6
+
+Silicon
+crystal
+
+5th
+7th
+9th
+
+100
+0
+-100
+
+0
+
+200
+
+400
+
+600
+
+Time delay t (as)
+
+800
+
+1
+
+10
+
+100
+
+1000
+
+1
+2
+3
+-3 phase difference
+
+4
+
+5.5
+4.4
+4.3
+3.2
+
+d
+
+200
+
+-200
+
+0.1
+
+3.1
+0
+
+Slope of emission delays b
+
+HHG emission delay (as)
+
+c
+
+Spectral power density (arb.u.)
+
+b
+
+Photon energy (eV)
+
+a
+Photon energy
+
+modulation of the instantaneous tunneling rate induced
+by the combined ω-3ω waveform. The second effect contributing to the HHG modulation is the time shift δt
+of the maximum of the tunneling window. The time
+shift has important implications for the probability of
+electron-hole recombination. When HHG is driven by a
+single frequency field, only the electrons generated during
+the second half of each tunneling window can recombine
+and emit photons while the ones created in the first half
+of the tunneling window propagate in the laser field away
+from the original position. The time shift of the tunneling
+window to later times with respect to the fundamental
+wave thus increases the number of recombining electronhole pairs contributing to high harmonic emission while
+the shift to earlier times leads to the opposite effect. This
+model suggests that the maximum of the high harmonic
+yield is reached for different value of φ than the maximum of the excited carrier population, which agrees with
+our experimental observations shown in Fig. 1e.
+While this simple model captures qualitatively the features observed in the experiments, it cannot describe the
+complex electron dynamics in silicon involving the intraband currents and interband transitions between multiple
+bands. To get a deeper insight into the coherent highly
+nonlinear response of silicon we analyse the nonlinear current obtained from TDDFT simulations. In Figs. 2b,c
+we plot the combined ω-3ω waveforms with r=5% for
+two different values of φ=1.5π (red curve in Fig. 2b)
+and φ=0.5π (red curve in Fig. 2c) along with the calculated instantaneous power of the emitted high harmonic
+radiation at photon energies above 2.8 eV (blue shaded
+areas). The field of the fundamental pulse is shown for
+comparison as dashed curves in Figs. 2b,c. The time
+shifts of the maxima of the waveforms in these two cases
+of δt = −135 as (see the inset of Fig. 2b) and δt = 135
+as (see the inset of Fig. 2c), respectively, lead to strong
+modulation of the emission probability even with a weak
+perturbation of the fundamental waveform by the third
+harmonic field. We observe that the maxima and minima of the HHG yield correspond to approximately the
+same values of excited electron population, emphasizing
+the role of the time shift of the electron tunneling window which is evidenced to be the dominant mechanism
+causing the observed modulation of HHG in the silicon
+crystal.
+When the time of electron excitation shifts with respect to the oscillation maxima of the fundamental wave,
+not only the amplitude but also the phase of the generated harmonic radiation is expected to shift. To measure
+the phase delays of the emitted high harmonic radiation
+we apply spectral interferometry by using a signal and
+reference high harmonic fields [38, 39]. The reference
+field is generated by an infrared pulse phase-locked to
+the ω-3ω combination, which arrives to the sample before the two-color waveform (layout of the experimental
+setup is shown in Fig. 3a, the details are described in
+
+0.4
+0.3
+0.2
+0.1
+0
+
+0
+
+2
+
+4
+r = F 3 /F (%)
+
+6
+
+FIG. 3. (a) Layout of the experimental setup for spectral
+interferometry of high harmonic fields. (b) Spectral interference of the 5th, 7th and 9th harmonic frequencies measured
+as a function of φ. (c) Measured (solid curves, r=5.5%) and
+calculated (dashed curves, r=5%) attosecond emission delays
+obtained from the data shown in (b) as a function of the time
+delay of the 3ω field with respect to the ω field. (d) Slopes of
+the measured emission delays of the 5th (black squares), 7th
+(red circles) and 9th (blue triangles) harmonics as a function
+of the field ratio r obtained by fitting the data shown in (c)
+using linear function in the time interval of 400 as around the
+modulation maxima.
+
+Supplemental Material [34]). The time separation of the
+signal and reference fields of about 170 fs leads to spectral
+interference in the harmonic spectra, example of which is
+shown in Fig. 3b for 5th to 9th harmonic frequencies. By
+monitoring the shifts of the spectral interference fringes
+we measure the relative shifts of the emission phase of
+harmonic radiation as a function of φ. The measured
+phase shift of harmonic emission φHHG corresponds to
+the emission time delay of δtem = φHHG /ωHHG . We note
+that the carrier population generated in the sample during the HHG by the reference pulse is not expected to
+significantly influence the phase of the coherent photons
+generated by the signal pulse.
+In Fig. 3c we show the measured high harmonic emission delays (field ratio r=5.5%) compared to the delays obtained from the numerical TDDFT simulations
+(r=5%) in the time window around the maxima of the
+harmonic emission shown in Fig. 3b. We observe that
+close to the maximum of the emission yield, the emission
+delay scales approximately linearly with the time delay
+between the two-color fields δt with different slopes for
+individual harmonic frequencies. The emission delays of
+high harmonic photons relative to the fundamental wave
+thus depend on the photon energy and cannot be understood only by considering the time shift of the electron
+tunneling time. In contrast, the emission phase is determined by the combination of the tunneling time and
+
+5
+the quantum mechanical phase acquired by the electronhole wavepacket during its coherent dynamics between
+tunneling and recombination, where multiple bands are
+involved in the high harmonic generation process [35, 40].
+The measured slopes b of the emission delays of 5th to
+9th harmonics obtained by fitting the data shown in Fig.
+3c by a linear function y = a + bx are plotted in Fig. 3d
+as a function of the ω-3ω field ratio r.
+The observed smaller delays of higher order harmonics
+can be qualitatively understood in the framework of the
+semi-classical electron dynamics shown in Fig. 2a. The
+electrons propagating along trajectories corresponding to
+the highest recombination energy are generated only in
+a short time window within one half-cycle of the fundamental wave. The recombination time of these high energy electrons practically does not shift with the relative
+phase φ. However, the electrons with lower recombination energies are generated in two distinct time windows
+corresponding to short and long trajectories. Photons
+within the intermediate energy range are thus emitted in
+two distinct times within each half-cycle of the ω field
+(dark green curves in Fig. 2a) with different amplitudes
+and emission phases. The change of the relative phase
+shift φ between the ω-3ω field leads to strong changes of
+the recombination probability of particular trajectories,
+which in turn causes the larger emission delays.
+In summary, the combination of coherent two-color
+control and phase-resolved detection scheme with attosecond resolution introduced here brings opportunities
+for gaining a deeper understanding of HHG in solids. In
+particular we study the relation between the tunneling
+time, which is controlled within each half-cycle of the
+driving wave by adding a weak perturbation at the third
+harmonic frequency, and the amplitude and phase of the
+emitted high-energy photons. A direct comparison between the modulation of high harmonic emission and the
+modulation of the real carrier population induced by the
+ω-3ω fields allows to separate the processes of electron
+excitation from the nonlinear coherent dynamics leading
+to HHG. We note that the coherent electron-hole pair
+dynamics can differ considerably in systems with strong
+many-body correlations (e.g. 2D crystals), which have
+recently been studied using a combination of ultrashort
+infrared excitation pulse with oscillating THz field driving electron-hole recollision paths [41]. Further, the ω-3ω
+combination may find applications in atomic HHG for enhancement of the emission yield or for advanced gating
+techniques combining the coherent control with dynamic
+phase-matching [42].
+Acknowledgments Czech Science Foundation (project
+GA23-06369S), Charles University (UNCE/SCI/010,
+SVV-2020-260590, PRIMUS/19/SCI/05, GAUK 349921
+and 124324). Funded by the European Union (ERC,
+eWaveShaper, 101039339). Views and opinions expressed
+are however those of the author(s) only and do not necessarily reflect those of the European Union or the Eu-
+
+ropean Research Council Executive Agency. Neither the
+European Union nor the granting authority can be held
+responsible for them. T. J.-Y. D. acknowledges support from the European Regional Development Fund
+and the State Budget of the Czech Republic (Project
+SENDISO No. CZ.02.01.01/00/22 008/0004596), from
+the Ministry of Education, Youth and Sports of the
+Czech Republic through the e-INFRA CZ (ID:90254).
+This work was supported by TERAFIT project No.
+CZ.02.01.01/00/22 008/0004594 funded by OP JAK, call
+Excellent Research.
+Data availability - The data that support the findings
+of this article are openly available at Zenodo [43].
+
+∗
+m.kozak@matfyz.cuni.cz
+[1] A. McPherson, G. Gibson, H. Jara, U. Johann, T. S. Luk,
+I. A. McIntyre, K. Boyer, and C. K. Rhodes, Studies of
+multiphoton production of vacuum-ultraviolet radiation
+in the rare gases, J. Opt. Soc. Am. B 4, 595 (1987).
+[2] M. Ferray, A. L’Huillier, X. F. Li, L. A. Lompre, G. Mainfray, and C. Manus, Multiple-harmonic conversion of
+1064 nm radiation in rare gases, J. Phys. B-At. Mol. Opt.
+Phys. 21, L31 (1988).
+[3] P. B. Corkum and F. Krausz, Attosecond science, Nat.
+Phys. 3, https://doi.org/10.1038/nphys620 (2007).
+[4] F. Krausz and M. Ivanov, Attosecond physics, Rev. Mod.
+Phys. 81, 163 (2009).
+[5] J. Levesque, D. Zeidler, J. P. Marangos, P. B. Corkum,
+and D. M. Villeneuve, High Harmonic Generation and
+the Role of Atomic Orbital Wave functions, Phys. Rev.
+Lett. 98, 183903 (2007).
+[6] S. Ghimire, A. D. DiChiara, E. Sistrunk, P. Agostini,
+L. F. DiMauro, and D. A. Reis, Observation of high-order
+harmonic generation in a bulk crystal, Nat. Phys. 7, 138
+(2011).
+[7] T. T. Luu, M. Garg, S. Y. Kruchinin, A. Moulet, M. T.
+Hassan, and E. Goulielmakis, Extreme ultraviolet highharmonic spectroscopy of solids, Nature 521, 498 (2015).
+[8] S. Ghimire and D. A. Reis, High-harmonic generation
+from solids, Nat. Phys. 15, 10 (2019).
+[9] P. B. Corkum, Plasma perspective on strong field multiphoton ionization, Phys. Rev. Lett. 71, 1994 (1993).
+[10] Y. S. You, D. A. Reis, and S. Ghimire, Anisotropic highharmonic generation in bulk crystals, Nat. Phys. 13, 345
+(2017).
+[11] N. Yoshikawa, T. Tamaya, and K. Tanaka, Highharmonic generation in graphene enhanced by elliptically
+polarized light excitation, Science 356, 736 (2017).
+[12] N. Klemke, N. Tancogne-Dejean, G. M. Rossi, Y. Yang,
+F. Scheiba, R. E. Mainz, G. D. Sciacca, A. Rubio, F. X.
+Kärtner, and O. D. Mücke, Polarization-state-resolved
+high-harmonic spectroscopy of solids, Nat. Commun. 10,
+1319 (2019).
+[13] Y. S. You, M. Wu, Y. Yin, A. Chew, X. Ren, S. GholamMirzaei, D. A. Browne, M. Chini, Z. Chang, K. J.
+Schafer, M. B. Gaarde, and S. Ghimire, Laser waveform
+control of extreme ultraviolet high harmonics from solids,
+Opt. Lett. 42, 1816 (2017).
+[14] O. Schubert, M. Hohenleutner, F. Langer, B. Urbanek,
+
+6
+C. Lange, U. Huttner, D. Golde, T. Meier, M. Kira,
+S. W. Koch, and R. Huber, Sub-cycle control of terahertz high-harmonic generation by dynamical Bloch oscillations, Nat. Photonics 8, 119 (2014).
+[15] M. Garg, M. Zhan, T. T. Luu, H. Lakhotia, T. Klostermann, A. Guggenmos, and E. Goulielmakis, Multipetahertz electronic metrology, Nature 538, 359 (2016).
+[16] S. Watanabe, K. Kondo, Y. Nabekawa, A. Sagisaka, and
+Y. Kobayashi, Two-Color Phase Control in Tunneling
+Ionization and Harmonic Generation by a Strong Laser
+Field and Its Third Harmonic, Phys. Rev. Lett. 73, 2692
+(1994).
+[17] N. Dudovich, O. Smirnova, J. Levesque, Y. Mairesse,
+M. Y. Ivanov, D. M. Villeneuve, and P. B. Corkum,
+Measuring and controlling the birth of attosecond XUV
+pulses, Nat. Phys. 2, 781 (2006).
+[18] G. Vampa, T. J. Hammond, N. Thiré, B. E. Schmidt,
+F. Légaré, C. R. McDonald, T. Brabec, and P. B.
+Corkum, Linking high harmonics from gases and solids,
+Nature 522, 462 (2015).
+[19] G. Vampa, T. J. Hammond, N. Thiré, B. E. Schmidt,
+F. Légaré, C. R. McDonald, T. Brabec, D. D. Klug,
+and P. B. Corkum, All-Optical Reconstruction of Crystal
+Band Structure, Phys. Rev. Lett. 115, 193603 (2015).
+[20] G. Orenstein, A. J. Uzan, S. Gadasi, T. Arusi-Parpar,
+M. Krüger, R. Cireasa, B. D. Bruner, and N. Dudovich,
+Shaping electron-hole trajectories for solid-state high
+harmonic generation control, Opt. Express 27, 37835
+(2019).
+[21] S. Mitra, S. Biswas, J. Schötz, E. Pisanty, B. Förg, G. A.
+Kavuri, C. Burger, W. Okell, M. Högner, I. Pupeza,
+V. Pervak, M. Lewenstein, P. Wnuk, and M. F. Kling,
+Suppression of individual peaks in two-colour high harmonic generation, J. Phys. B-At. Mol. Opt. Phys. 53,
+134004 (2020).
+[22] A. J. Uzan, G. Orenstein, Á. Jiménez-Galán, C. McDonald, R. E. F. Silva, B. D. Bruner, N. D. Klimkin,
+V. Blanchet, T. Arusi-Parpar, M. Krüger, A. N. Rubtsov,
+O. Smirnova, M. Ivanov, B. Yan, T. Brabec, and
+N. Dudovich, Attosecond spectral singularities in solidstate high-harmonic generation, Nat. Photonics 14, 183
+(2020).
+[23] T. Severt, J. Troß, G. Kolliopoulos, I. Ben-Itzhak, , and
+C. A. Trallero-Herrero, Enhancing high-order harmonic
+generation by controlling the diffusion of the electron
+wave packet, Optica 8, 1113 (2021).
+[24] F. Langer, M. Hohenleutner, C. P. Schmid, C. Poellmann, P. Nagler, T. Korn, C. Schüller, M. S. Sherwin,
+U. Huttner, J. T. Steiner, S. W. Koch, M. Kira, and
+R. Huber, Lightwave-driven quasiparticle collisions on a
+subcycle timescale, Nature 533, 225 (2016).
+[25] A. Schiffrin, T. Paasch-Colberg, N. Karpowicz,
+V. Apalkov, D. Gerster, S. Mühlbrandt, M. Korbman, J. Reichert, M. Schultze, S. Holzner, J. V. Barth,
+R. Kienberger, R. Ernstorfer, V. S. Yakovlev, M. I.
+Stockman, and F. Krausz, Optical-field-induced current
+in dielectrics, Nature 493, 70 (2013).
+[26] C. Schmidt, J. Bühler, A.-C. Heinrich, J. Allerbeck,
+R. Podzimski, D. Berghoff, T. Meier, W. G. Schmidt,
+C. Reichl, W. Wegscheider, D. Brida, and A. Leitenstorfer, Signatures of transient Wannier-Stark localization in
+bulk gallium arsenide, Nat. Commun. 9, 2890 (2018).
+[27] E. Dupont, P. B. Corkum, H. C. Liu, M. Buchanan, and
+
+Z. R. Wasilewski, Phase-Controlled Currents in Semiconductors, Phys. Rev. Lett. 74, 3596 (1995).
+[28] A. Haché, Y. Kostoulas, R. Atanasov, J. L. P. Hughes,
+J. E. Sipe, and H. M. van Driel, Observation of Coherently Controlled Photocurrent in Unbiased, Bulk GaAs,
+Phys. Rev. Lett. 78, 306 (1997).
+[29] T. Weinacht, J. Ahn, and P. Bucksbaum, Controlling
+the shape of a quantum wavefunction, Nature 397, 233
+(1999).
+[30] M. Förster, T. Paschen, M. Krüger, C. Lemell,
+G. Wachter, F. Libisch, T. Madlener, J. Burgdörfer, and
+P. Hommelhoff, Two-Color Coherent Control of Femtosecond Above-Threshold Photoemission from a Tungsten Nanotip, Phys. Rev. Lett. 117, 217601 (2016).
+[31] A. Li, Y. Pan, P. Dienstbier, and P. Hommelhoff, Quantum Interference Visibility Spectroscopy in Two-Color
+Photoemission from Tungsten Needle Tips, Phys. Rev.
+Lett. 126, 137403 (2021).
+[32] O. Pedatzur, G. Orenstein, V. Serbinenko, H. Soifer,
+B. D. Bruner, A. J. Uzan, D. S. Brambila, A. G. Harvey,
+L. Torlina, F. Morales, O. Smirnova, and N. Dudovich,
+Attosecond tunnelling interferometry, Nat. Phys. 11, 815
+(2015).
+[33] P. Dienstbier, L. Seiffert, T. Paschen, A. Liehl, A. Leitenstorfer, T. Fennel, and P. Hommelhoff, Tracing attosecond electron emission from a nanometric metal tip, Nature 616, 702 (2023).
+[34] See Supplemental Material for methods and extended
+data of the experiments, which includes Refs. [35] and
+[44-55].
+[35] P. Suthar, F. Trojánek, P. Malý, T. J.-Y. Derrien, and
+M. Kozák, Role of Van Hove singularities and effective
+mass anisotropy in polarization-resolved high harmonic
+spectroscopy of silicon, Commun. Phys. 5, 288 (2022).
+[36] E. O. Kane, Zener tunneling in semiconductors, J. Phys.
+Chem. Solids 12, 181 (1960).
+[37] L. V. Keldysh, Ionization in the Field of a Strong Electromagnetic Wave, Soviet Physics JETP 20, 1307 (1965).
+[38] J. Lu, E. F. Cunningham, J. S. You, D. A. Reis, and
+S. Ghimire, Interferometry of dipole phase in high harmonics from solids, Nat. Photonics 13, 96 (2019).
+[39] K. Uchida and K. Tanaka, High harmonic Mach–Zehnder
+interferometer for probing sub-laser-cycle electron dynamics in solids, Optica 11, 1130 (2024).
+[40] N. Klemke, N. Tancogne-Dejean, G. M. Rossi, Y. Yang,
+F. Scheiba, R. E. Mainz, G. D. Sciacca, A. Rubio, F. X.
+Kärtner, and O. D. Mücke, Polarization-state-resolved
+high-harmonic spectroscopy of solids, Nat. Commun. 10,
+1319 (2019).
+[41] J. Freudenstein, M. Borsch, M. Meierhofer, D. Afanasiev,
+C. P. Schmid, F. Sandner, M. Liebich, A. Girnghuber,
+M. Knorr, M. Kira, and R. Huber, Attosecond clocking
+of correlations between bloch electrons, Nature 610, 290
+(2022).
+[42] I. Thomann, A. Bahabad, X. Liu, R. Trebino, M. M.
+Murnane, and H. C. Kapteyn, Characterizing isolated attosecond pulses from hollow-core waveguides using multicycle driving pulses, Opt. Express 17, 4611 (2009).
+[43] A. Gindl, P. Suthar, F. Trojánek, P. Malý, T. Derrien, and M. Kozák, Attosecond control of solid-state
+high harmonic generation using ω-3ω fields, version 1.0.1,
+10.5281/zenodo.15144782 (2025).
+[44] M. Kozák, P. Peterka, J. Dostál, F. Trojánek, and
+P. Malý, Generation of few-cycle laser pulses at 2 µm
+
+7
+with passively stabilized carrier-envelope phase characterized by f-3f interferometry, Opt. Laser Technol. 144,
+107394 (2021).
+[45] J. Šik, J. Hora, and J. Humlı́ček, Optical functions of silicon at high temperatures, J. Appl. Phys. 84, 6291 (1998).
+[46] N. Tancogne-Dejean, M. J. T. Oliveira, X. Andrade,
+H. Appel, C. H. Borca, G. L. Breton, F. Buchholz,
+A. Castro, , S. Corni, A. A. Correa, U. D. Giovannini,
+A. Delgado, F. G. Eich, J. Flick, G. Gil, A. Gomez,
+N. Helbig, H. Hübener, R. Jestädt, J. Jornet-Somoza,
+A. H. Larsen, I. V. Lebedeva, M. Lüders, M. A. L. Marques, S. T. Ohlmann, S. Pipolo, M. Rampp, C. A. Rozzi,
+D. A. Strubbe, S. A. Sato, C. Schäfer, I. Theophilou,
+A. Welden, and A. Rubio, Octopus, a computational
+framework for exploring light-driven phenomena and
+quantum dynamics in extended and finite systems, J.
+Chem. Phys. 152, 124119 (2020).
+[47] Y. Okada and Y. Tokumaru, Precise determination of lattice parameter and thermal expansion coefficient of silicon between 300 and 1500 K, Journal Of Applied Physics
+56, 314 (1984).
+[48] N. Troullier and J. L. Martins, Efficient pseudopotentials for plane-wave calculations, Phys. Rev. B 43, 1993
+(1991).
+[49] F. Tran and P. Blaha, Accurate Band Gaps of Semiconductors and Insulators with a Semilocal ExchangeCorrelation Potential, Phys. Rev. Lett. 102, 226401
+(2009).
+
+[50] D. Waroquiers, A. Lherbier, A. Miglio, M. Stankovski,
+S. Poncé, M. J. T. Oliveira, M. Giantomassi, G.-M.
+Rignanese, and X. Gonze, Band widths and gaps from
+the Tran-Blaha functional: Comparison with many-body
+perturbation theory, Phys. Rev. B 87, 075121 (2013).
+[51] G. Wachter, C. Lemell, J. Burgdörfer, S. A. Sato, X.-M.
+Tong, and K. Yabana, Ab Initio Simulation of Electrical
+Currents Induced by Ultrafast Laser Excitation of Dielectric Materials, Phys. Rev. Lett. 113, 087401 (2014).
+[52] S. A. Sato, H. Hirori, Y. Sanari, Y. Kanemitsu, and
+A. Rubio, High-order harmonic generation in graphene:
+Nonlinear coupling of intraband and interband transitions, Phys. Rev. B 103, L041408 (2021).
+[53] T. J.-Y. Derrien, N. Tancogne-Dejean, V. P. Zhukov,
+H. Appel, A. Rubio, and N. M. Bulgakova, Photoionization and transient Wannier-Stark ladder in silicon: First
+principle simulations versus Keldysh theory, Phys. Rev.
+B 104, L241201 (2021).
+[54] G. Ernotte, T. J. Hammond, and M. Taucer, A gaugeinvariant formulation of interband and intraband currents in solids, Phys. Rev. B 98, 235202 (2018).
+[55] T. Otobe, M. Yamagiwa, J.-I. Iwata, K. Yabana,
+T. Nakatsukasa, and G. F. Bertsch, First-principles electron dynamics simulation for optical breakdown of dielectrics under an intense laser field, Phys. Rev. B 77,
+165104 (2008).
+
+Attosecond control of solid-state high harmonic
+generation using ω-3ω fields - Supplemental Material
+Adam Gindl,1 Pawan Suthar,1 František Trojánek,1 Petr Malý,1 Thibault J.-Y. Derrien,2, 3 and Martin Kozák1, ∗
+
+arXiv:2310.07254v2 [physics.optics] 5 May 2025
+
+1
+
+Faculty of Mathematics and Physics, Charles University, Ke Karlovu 3, 12116 Prague 2, Czech Republic
+2
+Institute of Physics of the Czech Academy of Sciences,
+Na Slovance 1999/2, 18200 Prague, Czech Republic
+3
+IT4Innovations, Technical University of Ostrava,
+17. listopadu 2172/15, 70800 Ostrava-Poruba, Czech Republic
+
+CONTENTS
+
+I. Experimental setup
+
+1
+
+II. Dependence of HHG modulation on the ratio r between the field amplitudes of ω-3ω pulses
+
+5
+
+III. Data processing
+
+6
+
+IV. Details of the semi-classical model
+
+6
+
+V. Numerical calculations using time dependent density functional theory (TDDFT)
+A. Ground state preparation
+B. Time-dependent simulations and control of convergence
+C. Normalization of pulse frequency to band gap energy
+D. Calculation of harmonic spectra
+E. Calculation of the excited electron density
+
+7
+7
+7
+8
+8
+8
+
+References
+
+8
+I.
+
+EXPERIMENTAL SETUP
+
+The experiments demonstrating coherent two-color control of high harmonic generation in silicon are performed
+using pulses generated in a noncollinear optical parametric amplifier with subsequent difference frequency generation
+(NOPA-DFG, setup is described in detail in [1]) and the pulses at its third harmonic frequency. The NOPA-DFG setup
+is pumped by solid-state femtosecond laser system Pharos SP2-6W (Light Conversion) with ytterbium-doped active
+medium. The NOPA-DFG output pulses have central wavelength of 2000 nm and pulse duration at the sample of 35
+fs (FWHM of instantaneous power). The coherent ω-3ω pulse combination is generated in the setup, which is shown
+in Supplementary Fig. S1. The beam passes through a half wave plate to control the direction of linear polarization
+of the fundamental pulse. Subsequently, the beam is focused using an off-axis parabolic mirror with a focal distance of
+15 cm to a BBO crystal, where the pulses at third harmonic frequency 3ω are generated. We use phase-matching angle
+of θ=27.2° for direct third harmonic generation (oooe-type phase-matching) leading to vertically polarized 3ω pulse
+(polarization along the direction of projection of the optical axis of the BBO crystal in the plane perpendicular to the
+light propagation). In the first experiment, the half wave plate is adjusted such that the fundamental polarization is
+horizontal. The pulse thus propagates as an ordinary ray and we obtain only one replica of the fundamental pulse
+after the BBO. When the half wave plate is rotated to 22.5°, the polarization incident to BBO crystal has both the
+horizontal and vertical components with the same amplitude. As a consequence of the birefringence of the BBO crystal
+we obtain two orthogonally polarized pulses, which are delayed due to different group indexes of the ordinary and
+the extraordinary rays. After the BBO crystal, the two collinear beams at the fundamental and the third harmonic
+frequencies are collimated by a second off-axis parabolic mirror with focal length of 15 cm.
+The relative phase between the ω and 3ω pulses φ is controlled using a pair of fused silica wedges with an apex
+angle of α=4°. One of the wedges is placed on a translation stage. The phase shift of the third harmonic field with
+
+∗ m.kozak@matfyz.cuni.cz
+
+2
+respect to the fundamental pulse resulting from the propagation in the wedges over a distance ∆L can be expressed
+as φ = 3ω∆L (n3ω − nω ) /c , where c is speed of light in vacuum and nω =1.4381 and n3ω =1.4561 are the refractive
+indexes of fused silica at frequencies ω and 3ω, respectively. One period of the high harmonic yield modulation
+corresponds to the shift of the relative ω-3ω phase φ by 2π which gives ∆L =37 µm. The calculated shift of the
+wedge needed to change the thickness of the material by ∆L is ∆x = ∆L/ tan(α) = 0.59 mm, which matches well the
+experimentally determined value of 0.574±0.005 mm. While the refractive indexes of fused silica at frequencies ω and
+3ω differ strongly, the difference between group velocities of the two pulses in the wedges are much smaller (group
+indexes are ng,ω =1.4673 and ng,3ω =1.4732) leading to a small relative shift of the pulse envelopes when changing the
+relative phase by several periods of the 3ω field. To compensate the total group delay which the ω and 3ω pulses
+obtain between the first BBO crystal and the sample we let the beam pass through a second BBO crystal with the
+optical axis cut under the angle θ=50°. Due to the negative uniaxial birefringence of BBO, the ordinary ray at
+frequency ω propagates slower in the crystal than the extraordinary ray at 3ω. The beam is finally focused on the
+sample surface by an off-axis (90°) silver coated parabolic mirror with focal length of f =35 mm. The spot sizes of the
+two beams on the sample are wω = 15 µm and w3ω = 8 µm. The dependence of nonperturbative HHG yield in silicon
+on the incident light intensity of the fundamental pulses was previously measured to be cubic [2]. When considering
+Gaussian profile of the √
+fundamental beam, the harmonics are produced from the area with a radius decreased by a
+factor of wHHG = wω / 3 = 8.7 µm, which is well matched to the size of the third harmonic beam. To adjust the
+polarizations of all the pulses to be linear in the same direction we put a thin polarizer (Thorlabs, LPNIRA) between
+the final focusing parabolic mirror and the sample.
+High harmonic radiation is collimated by a UV fused silica lens with focal distance of 100 mm. The spectra are
+detected using a grating spectrograph (Andor, Shamrock 163) with a grating containing 600 lines/mm blazed for 300
+nm. The spectrometer is equipped with a cooled CCD camera (Andor iDUS 420). Prior to entering the spectrometer,
+the light is spectrally dispersed in the vertical direction by a pair of fused silica prisms. This allows to filter out
+most of the radiation at wavelengths above 500 nm before the high harmonics enter the spectrometer. Because the
+dispersion is applied in the vertical direction, all the harmonics are transmitted through the entrance vertical slit of
+the spectrometer. The harmonics 11th-15th have photon energies higher than 6 eV and are strongly absorbed in air.
+The modulation of the high harmonic orders is thus measured in vacuum using a vacuum ultraviolet spectrometer
+(EasyLight, H+P Spectroscopy) combined with a microchannel plate detector.
+Due to the inline setup of the nonlinear interferometer, in which both beams propagate through the same beam
+paths, the drifts of the relative phase difference φ between the ω and 3ω pulses are negligible and the time jitter of
+the two fields is only few attoseconds over the measurement time of one hour (see the measured modulation of the
+5th harmonic frequency over the time period of 60 minutes shown in Supplementary Fig. S2).
+The carrier population excited in the sample by the coherent superposition of ω-3ω fields is monitored by measuring
+the transient reflectivity of the sample. We use an independent probe pulse with the wavelength of 343 nm and photon
+energy of 3.62 eV (third harmonics of the Pharos laser output at 1030 nm), which is incident on the sample with a
+controlled time delay with respect to the coherent ω-3ω pulse combination. The high photon energy of the probe is
+selected due its short penetration depth into silicon of only few nanometers, which prevents accumulation of the signal
+coming from different depths which would be modified by the fact that the phase velocities of the pulses at ω and
+3ω frequencies in silicon strongly differ. The second reason for selecting a short probe wavelength is the possibility
+to focus the probe beam to a smaller spot size than the ω and 3ω beams, which allows to probe the region of the
+sample with approximately homogeneous spatial distribution of the excited carriers. In this experiment, the pump
+ω-3ω combination propagates through an optical chopper, which modulates the beam. After being reflected from the
+sample, the power of the probe beam at 3.62 eV is detected by a silicon photodiode. The electronic signal is measured
+using a lock-in amplifier (SR830, Stanford Research Systems) at the frequency of the optical chopper. To verify that
+the transient reflectivity signal at 3.62 eV scales linearly with the excited carrier population we perform additional
+degenerate pump-probe experiment, in which we use the same photon energy to excite the electron-hole pairs in
+silicon. The measured transient reflectivity dynamics at probe photon energy of 3.62 eV is shown in Supplementary
+Fig. S3 as a function of the time delay between the pump and probe pulses. We observe that the magnitude of the
+transient reflectivity signal in the time delay of 500 fs (the same time delay was used for probing the excited carrier
+population with ω-3ω pump) scales linearly with pump fluence (see the inset of Supplementary Fig. S3).
+We note that the physical origin of the transient reflectivity signal at probe photon energy of 3.62 eV is rather
+indirect. After the excitation over the direct band gap of silicon with the width of about 3.4 eV, the electrons and
+holes relax rapidly to the minima of the respective bands via electron-phonon scattering. For this reason, absorption
+bleaching of the direct transition is expected to have very fast dynamics. Similarly, the signal corresponding to excited
+carrier (Drude-like) absorption is expected to be weak since it scales with λ2 . For these reasons we conclude that
+the most probable origin of the signal is the increase of the lattice temperature after the initial relaxation of the
+excited carrier system, which transfers the excess energy to the lattice vibrations. The peak excited carrier density
+in our experiments can be estimated as n = αpump (1 − Rpump )fpump /(ℏωpump ), where αpump = 1.1 × 106 cm−1 is the
+
+3
+
+45°
+
+Sample
+
+POL, 45°
+
+BBO, θ=27.2°
+BBO, θ=27.2°
+
+BBO, θ=50°
+
+HWP, 0°
+HWP, 22.5°
+
+a
+
+Sample
+
+POL, 45°
+
+BBO, θ=50°
+
+b
+
+Supplementary Figure S1. Experimental setup for generation of coherent superposition of ω-3ω pulses. (a) The
+setup for the measurements of amplitude modulation of high harmonic generation. The half wave plate (HWP) is
+rotated to 0° (fundamental polarization remains horizontal). The pulse is focused by off-axis parabolic mirror to the
+first beta-barrium borate (BBO) crystal phase-matched for direct third harmonic generation. After the crystal, the
+beam is collimated and propagates through the fused silica wedges, where the relative ω-3ω phase is adjusted by
+translating one of the wedges. The group delay between the pulses is compensated in the second birefringent BBO
+crystal. The beam is focused on the sample by an off-axis parabolic mirror (all mirrors are displayed as lenses for
+simplicity). Both pulses propagate through a thin polarizer rotated under 45° to generate linear polarizations with
+their axis being parallel to each other on the sample surface. (b) The setup for the measurements of attosecond
+phase delays of high harmonic radiation. The components are the same as in (a) with the half wave plate rotated by
+22.5° leading to polarization rotation of the fundamental beam by 45°. As a consequence, two temporally separated
+fundamental pulses leave the first BBO crystal and co-propagate to the sample, where the latter pulse is temporally
+overlapped with the 3ω pulse and the former one serves as a reference pulse for the spectral interferometry
+measurements.
+
+b
+
+-3 phase difference ( )
+
+6
+
+5th
+harmonic
+yield
+(arb.u.)
+1
+
+5
+4
+3
+2
+
+0.5
+
+1
+0
+
+0
+
+10
+
+20
+30
+40
+50
+Measurement time (min)
+
+60
+
+0
+
+10
+
+Timing shift (as)
+
+a
+
+5
+0
+-5
+-10
+
+0
+
+10
+
+20
+30
+40
+50
+Measurement time (min)
+
+60
+
+Supplementary Figure S2. Long-term stability of ω-3ω interferometer. (a) Measurements of the modulation of 5th
+harmonic generation as a function of the relative phase difference between ω-3ω fields φ repeated over 60 minutes
+(color scale) along with the phase of the maxima obtained from fitting the data with harmonic function (black
+curve). (b) Timing jitter and long-term drift calculated from the measured data shown in (a). The RMS timing
+fluctuations of the ω-3ω fields measured over 60 minutes are 2.8 as.
+
+absorption coefficient and Rpump = 0.56 is reflectivity of silicon at photon energy of 3.62 eV, fpump is the fluence of
+the pump pulse and ℏωpump = 3.62 eV is the pump photon energy. When we consider the specific heat capacity of
+silicon at room temperature cp = 0.7 J/(g.K), the excess energy per electron-hole pair of ∆E = 2.5 eV and the density
+of silicon ρ = 2.33 g/cm−3 , the estimated increase of crystal temperature at excited carrier density of n = 1021 cm−3
+is ∆T = n∆E/(ρcp ) = 245 K. Both the real and the imaginary parts of dielectric function of silicon decrease with
+increasing lattice temperature in this spectral region [3], which leads to a decrease of the reflectivity of the sample in
+agreement with our observations.
+
+4
+
+-0 .0 2
+0 .0 4
+
+|∆R |
+
+∆R ( a r b . u . )
+
+0
+
+-0 .0 4
+
+0 .0 2
+0
+0
+
+-0 .0 6
+0
+
+1
+
+2
+4
+fp u m p (m J /c m
+
+2
+
+6
+2
+
+)
+
+3
+
+D e la y ( p s )
+
+Supplementary F

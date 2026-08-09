@@ -1,0 +1,1061 @@
+Generation of circular polarized high-order harmonics from single color quantum light
+L. Petrovic,1, ∗ P. Stammer,1, 2 M. Lewenstein,1 and J. Rivera-Dean1, 3, †
+
+arXiv:2601.01611v1 [quant-ph] 4 Jan 2026
+
+1
+
+ICFO – Institut de Ciencies Fotoniques, The Barcelona Institute of Science and Technology, 08860 Castelldefels (Barcelona)
+2
+Atominstitut, Technische Universität Wien, 1020 Vienna, Austria
+3
+Department of Physics and Astronomy, University College London, Gower Street, London WC1E 6BT, UK
+The atomic response to an ultra-intense driving field produces a characteristic high-harmonic
+spectrum featuring a rapid drop in intensity for the lower harmonics, followed by a plateau and
+a sharp cutoff. This response vanishes for circularly polarized classical drivers—a limitation that
+can be overcome by introducing quantum features into the driving field. In this work, we show that
+squeezed highly elliptically polarized drivers not only enable the high-harmonic generation (HHG)
+process in classically forbidden regimes of large ellipticity, but also yield highly elliptical harmonic
+radiation with pronounced super-Poissonian photon statistics. Moreover, we show that the HHG
+spectral features encode information about the quantum nature of the driving field, revealing the
+presence of its squeezed field fluctuations. By analyzing the HHG spectral intensity dependence as
+a function of the driver’s ellipticity and squeezing orientation, we identify a means to probe the
+driving field’s quantum properties that intrinsically lie in the high-photon number regime.
+
+Introduction.—In recent years, there has been a growing interest in the intersection of quantum optics and
+strong-field physics [1–3], giving rise to what is often
+called Extreme Quantum Optics or Strong-Field Quantum Optics. This nascent field seeks to combine strengths
+from strong-field physics, such as the generation of ultrafast and broadband radiation via high-harmonic generation (HHG) [4–6], with quantum optics techniques
+that exploit the properties of non-classical light [7–11].
+These combined approaches could open new avenues for
+ultrafast strong-field quantum optical applications [12–
+14]. In this direction, recent developments have demonstrated the potential of this connection for generating
+high-photon number non-classical states of light [15], involving, and possibly entangling, a broad range of spectral modes [16–26].
+Equally important, however, is understanding how
+each of these areas benefit individually from this new
+connection. Recently, the generation of bright squeezed
+light [27, 28] with parameters sufficient to drive strongfield interactions [29–33] has been proposed to markedly
+modify the HHG properties [34–36], and nontrivially alter its sub-cycle electron dynamics [35–37]. These advances have enabled new routes to both manipulate [26,
+29, 36, 38] and characterize [26, 32] the emitted radiation
+in regimes inaccessible with linear optics [1]. A particularly illustrative example, central to this work, is the generation of harmonic radiation under otherwise classically
+forbidden conditions, such as circularly polarized driving fields [39–44]. Combining squeezed polarization components in circularly polarized configurations can profoundly modify the ultrafast electron dynamics, thereby
+re-enabling the HHG process [35].
+In this Letter, we leverage HHG driven by elliptically
+polarized squeezed light as a versatile tool to both charac-
+
+∗ lidija.petrovic@icfo.eu
+† physics.jriveradean@proton.me
+
+FIG. 1. Schematic illustration of the use of bright squeezed
+elliptically polarized light to characterize the driving field
+properties and generate highly elliptically polarized harmonic
+radiation. We consider configurations where one linear polarization component (here the ⊥-component) is a displaced
+squeezed vacuum state, while the other (the ∥-component) remains a coherent state. By varying the the driver’s ellipticity
+and consequently the squeezing orientation, specified by ϕ,
+one can control the intensity, ellipticity, and photon statistics
+of the emitted radiation.
+
+terize the driving field properties and generate highly elliptically polarized harmonic radiation using single-color
+drivers [Fig. 1]. First, we demonstrate that the sensitivity of the harmonic response to the type of squeezing [35]
+can serve to certify the field fluctuations present in the
+strong-field squeezed driver. Second, we analyze the characteristics of the emitted harmonic radiation. Specifically, we show that this approach enables the generation of highly elliptically polarized harmonics—a feature that, classically, requires engineered bichromatic
+fields [45, 46]. Finally, we examine the photon statistics properties of the generated harmonics. We report the
+presence of pronounced super-Poissonian behavior, which
+
+2
+we attribute to the interplay between the squeezinginduced field fluctuations and the strong nonlinearity of
+the HHG process.
+More broadly, this work highlights the reciprocal benefits between quantum optics and strong-field physics.
+Quantum optics provides new tools for strong-field
+physics by controlling and characterizing strong-field
+phenomena, here enabling the generation of highly elliptical polarized harmonics using single-color fields. Conversely, the strong-field response to high-intensity quantum light opens new avenues for probing non-classical
+fields in the domain where strong-field physics naturally
+operates: the extreme wavelength, and high-photon number regime.
+Characterizing the driving field properties.—In this
+work, we focus on HHG driven by non-classical states
+of the form
+|ψ⟩ = |ᾱ⟩∥ ⊗ D̂⊥ (iAᾱ) ⊗ Ŝ⊥ (ξ) |0⟩⊥ ,
+
+(1)
+
+where one polarization component (∥) is prepared in
+a coherent state of amplitude ᾱ, while the orthogonal
+mode (⊥) is in a displaced squeezed vacuum (DSV) state.
+The DSV is defined through
+a displacement operator
+
+D̂µ (α) = exp αâ†µ − α∗ âµ , and the squeezing operator
+
+
+Ŝµ (ξ) = exp ξ ∗ â2µ − ξâ†2
+µ acting on a vacuum state, with
+âµ (â†µ ) the annihilation (creation) operator for the µpolarization mode. In Eq. (1), the parameter A ∈ [0, 1]
+controls the ellipticity of the coherent component, while
+the squeezing parameter ξ = re−iϕ introduces quantum
+features in the driver. For ξ = 0, the state reduces to
+a classical linearly polarized field when A = 0, and to
+a circularly polarized field when A = 1. Introducing
+r > 0 adds squeezing along the ⊥-polarization, with ϕ
+rotating the quadrature that gets squeezed: ϕ = 0 results in amplitude squeezing, whereas ϕ = π yields phase
+squeezing [Fig. 1 upper panels]. Thus, for a fixed squeezing amplitude r, the role of ϕ is to effectively rotate the
+squeezed state in phase space around its origin [Fig. 1
+lower panels]. Importantly, adding squeezing to elliptically polarized drivers leads to a modified polarization
+with an effective ellipticity, especially in regimes of strong
+squeezing [35].
+An essential requirement in Eq. (1) is that the squeezing is strong enough to significantly perturb the HHG
+process. The intensity of a DSV state can be decomposed as IDSV = Icoh + Isq , where Icoh ≡ ϵ2 |ᾱ| and Isq ≡
+ϵ2 sinh2 (r) correspond to the contributions from the coherent
+and squeezed components, respectively. Here, ϵ =
+p
+ℏωL /(2ϵ0 V ) denotes the light-matter coupling, with V
+the quantization volume. Thereby, the condition stated
+above is typically satisfied when Icoh /Isq ∼ 10−2 , values
+achievable with state-of-the-art high-gain spontaneous
+parametric down-conversion [27, 28]. Squeezed states of
+this type have already been employed to induce tunneling ionization in metal needle tips [33], to drive HHG in
+semiconductor materials [30], and as ω-perturbations assisting HHG initiated by an intense classical (ω/2)-field
+
+in solids [29], and a 2ω-field in gases [32]. In what follows, we consider conditions where the coherent component has an electric field strength ε̄ = 0.053 a.u., where
+ε̄ = 2ϵᾱ, and Isq = 10−5 a.u. for the squeezing contribution, allowing the composed field to both classically drive
+and non-classically modify the HHG process in atomic
+media. Hereupon, we focus on hydrogen, with ionization
+potential Ip = 0.5 a.u., as the HHG target system.
+Under the conditions described above, and for A = 1
+in Eq. (1) corresponding to a circular polarized field,
+such configurations enable the generation of HHG radiation across several harmonic orders [35]—a process that
+becomes increasingly suppressed in the classical regime
+without squeezing as the driver’s ellipticity grows [39, 44].
+Of particular relevance here is that the HHG spectra are
+strongly shaped by the type of squeezing applied, with
+amplitude and phase squeezing yielding different HHG
+cutoffs dependencies with the squeezing intensity Isq [35]
+(see Supplementary Material I). This suggests the potential of HHG driven by squeezed circularly polarized light
+as a probe of the driver’s non-classical properties, with
+the squeezing orientation ϕ as a control parameter.
+To gain further insight on this, we evaluate the HHG
+spectrum produced by Eq. (1), which can be written in
+general as [34, 35] (see Supplementary Material I)
+Z
+ (∥)
+
+(⊥)
+2
+(⊥) 2
+Ssq (ω, ϕ, A) ∝ dε̃(⊥)
+α Q⊥ (ε̃α ) |dεα (ω)| + dεα | . (2)
+Here, Q⊥ (ε̃α,⊥ ) is a marginal of the Husimi function [47],
+whose specific form encodes the non-classical properties
+(µ)
+of the driver, and dε (ω) is the Fourier Transform of
+the semiclassical time-dependent dipole moment along
+the µ-polarization when driven by a field of amplitude
+ε = (ε∥ , ε⊥ ). Calculations are performed in the classical limit, V → ∞ (equivalently ϵ → 0) and α → ∞ such
+that εα remains finite, a suitable approach for strong-field
+problems with freely propagating fields containing an extremely large photon number [34]. Here, εα and ε̃α are related through ε̃α,x = (εx −ε̄x ) cos(ϕ/2)−(εy −ε̄y ) sin(ϕ/2)
+and ε̃α,y = (εy − ε̄y ) cos(ϕ/2) + (εx − ε̄x ) sin(ϕ/2), with
+εα = εα,x + iεα,y (see Supplementary Material I).
+More precisely, we evaluate the normalized intensity
+Sϕ (ωq )
+difference ∆Sq,A (ϕ) = 1 − Sϕ=π
+(ωq ) for harmonic orders ωq = qωL and A = 0.9, i.e., an almost circularlypolarized driver in the absence of squeezing. In practice,
+this compares the qth harmonic intensity obtained for
+an elliptically polarized field with squeezing parameter
+ξ = re−iϕ against that from phase squeezing (ϕ = π),
+which overall yields the strongest signal (see Supplementary Material I).
+Figure 2 (a) presents these results near the cutoff region, where intensity differences across varying ϕ are
+more pronounced. As ϕ varies in the range [−π, π], each
+harmonic order displays a characteristic pattern, with
+∆Sq,A (ϕ) = 0 for phase squeezing by definition, and
+increasing sharply as ϕ approaches zero. At this point,
+∆Sq,A (ϕ) quantifies the (normalized) intensity difference
+
+3
+
+FIG. 2. (a) Normalized intensity of harmonic orders q =
+17, 19 and 21 against the squeezing angle ϕ for A = 0.9, with
+the inset plot showing the Fourier transform of the obtained
+signals. The FT is obtained by taking into account that the
+pattern in ∆Sq,A (ϕ) repeats itself every 2π due to the recurring squeezing directions. (b) Normalized intensity difference
+between amplitude and phase squeezing directions for different harmonic orders against the driver’s ellipticity A. Calculations have been performed over five optical cycles of a
+monochromatic field with set ε∥ = 0.053 a.u., ωL = 0.057
+a.u., Isq,⊥ = 10−5 a.u., using Ip = 0.5 a.u. (hydrogen) for the
+ionization potential.
+
+obtained between amplitude- and phase-squeezed driving fields. Such enhancement at intermediate ϕ arises
+from how the squeezed field fluctuations map onto the
+HHG spectrum, and how this mapping can be tuned via
+ϕ [35], that is, by rotating the squeezed state around its
+origin in phase space [Fig. 1 lower panels]. This mechanism is particularly useful in the strong-field regime,
+where more conventional signatures—such as the photonnumber probability distribution—are challenging or even
+impossible to measure accurately. In particular, light
+sources that are homogeneous in phase space, such as
+coherent and thermal states, are invariant under a rotation ϕ in phase space [Fig. 1 lower panels], making the
+features seen in Fig. 2 absent. Therefore, the presence of
+∆Sq,A (ϕ) ̸= 0, or equivalently non-zero frequencies in its
+Fourier transform [inset of Fig. 2 (a)], make this quantity
+an HHG-based witness of asymmetric strong-field fluctuations.
+Interestingly, the squeezing direction is not the only
+handle for probing the anisotropy of the driving field fluctuations, but also its ellipticity A. Figure 2 (b) shows
+∆Sq,A (ϕ = 0), thus comparing the intensities obtained
+from amplitude and phase squeezed light, as the polarization of the coherent state component of the driver varies
+from linear (A = 0) to circular (A = 1). For linear polarization, where the ⊥-component is in a bright squeezed
+vacuum (BSV), the squeezing direction has no impact on
+the HHG spectrum. In this regime, the process is dominated by the coherent ∥-component, while the BSV contribution barely modifies the HHG spectrum characteristics. In this case, the fluctuations induced by squeezing alter the shot-to-shot ellipticity of the field, lowering
+the HHG efficiency compared to the linearly polarized
+case. Moreover, since BSV light lacks an intrinsic phase
+reference (unlike DSV states), no distinction arises between amplitude and phase squeezing; all squeezing directions in phase space are effectively equivalent, such
+
+that Sϕ=0 (ω) = Sϕ=π (ω) and ∆Sq,A=0 (ϕ) = 0.
+As A increases, however, the coherent displacement
+along the ⊥-polarization counterbalances the ∥ contribution, and the HHG process becomes predominantly
+governed by the squeezing-induced fluctuations. The outcome then depends strongly on whether amplitude or
+phase squeezing is applied. This effect is most visible
+for harmonics near the cutoff, where ∆Sq,A (ϕ = 0) increases nearly monotonically. In this region, the effective
+ellipticity introduced by phase or amplitude squeezing
+more strongly affects the underlying electron trajectories
+that give rise to high-harmonic radiation [35], underscoring the enhanced sensitivity of the cutoff region to nonclassical fluctuations.
+Elliptically polarized harmonics.—Having characterized the influence of the driving field on the harmonics’ intensity, we now analyze the polarization properties of the harmonics themselves, and specifically focus
+on their ellipticity. Under entirely classical driving fields,
+elliptically polarized harmonics can be produced by using moderately elliptically polarized drivers [44]. However, the rapid decay of the HHG yield with increasing
+driving-field ellipticity makes the generation of elliptical
+high harmonics particularly challenging with single-color
+fields. Two-color configurations, where each color is circularly polarized with opposite handedness, overcome this
+limitation by enforcing spin angular momentum conservation from the driver to the harmonics [45, 46]. Here, in
+contrast, we find that introducing squeezing in one of the
+polarization direction enables generation of highly elliptically polarized harmonics even with single-color drivers,
+providing an alternative route to polarization control of
+harmonic radiation.
+To quantify this, we evaluate the ellipticity of the
+qth harmonic as Eq = |⟨Ŝ3,q ⟩/⟨Ŝ0,q ⟩|, where Ŝ0,q =
+â†∥,q â∥,q + â†⊥,q â⊥,q and Ŝ3,q = i(â†∥,q â⊥,q − â†⊥,q â∥,q ) are
+the operator forms of the Stokes parameters. Here, ⟨Ŝ0,q ⟩
+represents the total intensity of the qth harmonic order,
+while ⟨Ŝ3,q ⟩ encodes its polarization handedness. Thus,
+Eq ranges from 0 to 1 as the emission evolves from linear
+to circular polarization, respectively.
+Figure 3 displays the ellipticity for different harmonic
+orders as a function of the driver’s ellipticity for both amplitude and phase squeezed driving fields, shown in panels
+(a) and (b), respectively. Overall, the harmonic ellipticity
+increases with that of the driving field across the entire
+spectral range, reaching values as high as E9 = 0.997
+for A = 0.9. However, both squeezing types lead to
+markedly different behaviors: phase squeezing produces
+a smoother, more gradual increase of Eq with A, whereas
+amplitude squeezing yields a more irregular dependence
+involving a larger number of harmonics, as the cutoff frequency increases with A (see Supplementary Material II).
+Among both types, amplitude squeezing results in higher
+average values of Eq .
+These features can be understood from how field fluctuations of the driver map onto the mean intensity
+of the polarization components of the generated har-
+
+4
+
+(2)
+
+FIG. 3. Ellipticity against the harmonic order and the driver’s
+ellipticity in the case of (a) amplitude squeezing and (b) phase
+squeezing applied to the driving field. The same conditions as
+those in Fig. 2 are considered here.
+
+FIG. 4. Second-order autocorrelation function gµ,q (0) as a
+function of the harmonic order q, with the colors indicating
+the driving field ellipticity. Solid (dashed) curves correspond
+to the µ =∥ (µ =⊥) polarization component, with the different colors denoting. The dotted thin black line marks the
+value g (2) (0) = 1. The same conditions as those in Fig. 2 are
+used here.
+
+as (see Supplementary Material I)
+monics at high values of A (see Supplementary Material II). For amplitude-squeezed drivers, the mean intensities of both the ∥ and ⊥ components of the qth harmonic
+are nearly identical, but the stronger phase noise induced
+by the field fluctuations prevents them from achieving
+Eq = 1 across all harmonic orders. In contrast, for phase
+squeezed drivers the intensity along the squeezed polarization components is overall higher than in the orthogonal one due to the enhanced field fluctuations, which
+hinders the condition for circular polarization—equal intensity and a π/2 phase shift between components. These
+features, however, predominantly affect the higher harmonic orders which are more sensitive to squeezing, while
+the lower ones (q ∈ [3, 9]) behave similarly for both
+squeezing types.
+Photon statistics of the harmonics.—When coherent
+state light sources are used, the approaches in Refs. [44–
+46] lead to the generation of perfectly coherent, elliptically polarized harmonics, provided that the driving
+field strength is low enough to avoid significant depletion of the atomic system [16]. Thus, under these conditions the generated harmonics exhibit Poissonian photon statistics [15, 48, 49]. In contrast, the configurations
+studied here present a markedly different scenario: the
+generation of highly elliptically polarized harmonics requires not only large driving-field ellipticities but also
+sufficient field fluctuations introduced by squeezing. In
+the absence of such squeezing-induced fluctuations, harmonic generation is suppressed [35], indicating that the
+emitted harmonics originate from the field fluctuations of
+the driver. Consequently, their photon statistics are expected to deviate substantially from those obtained when
+using coherent state drivers [26, 29, 32, 36].
+To quantitatively characterize the photon statistics of
+the harmonics, we use the second-order autocorrelation
+function, g (2) (0) = ⟨â†2 â2 ⟩/⟨â† â⟩2 , which in our case
+can be explicitly written for a given optical mode (µ, q)
+
+R
+(2)
+gµ,q
+(0) =  R
+(2)
+
+(⊥)
+
+(⊥)
+
+(µ)
+
+dε̃α Q⊥ (ε̃α )|dεα (ω)|4
+2 .
+(µ)
+(⊥)
+(⊥)
+dε̃α Q⊥ (ε̃α )|dεα (ω)|2
+
+(3)
+
+Here, gµ,q (0) quantifies photon-number correlations
+within the (µ, q) optical mode: values greater, equal or
+lower than unity correspond to super-Poissonian, Poissonian and sub-Poissonian statistics, respectively. The latter case constitutes a sufficient, though non-necessary,
+condition for identifying a field as non-classical [50].
+(2)
+Figure 4 displays the gµ,q (0) function for several harmonic orders under amplitude-squeezed driving fields,
+with similar trends obtained for the phase-squeezed case.
+(2)
+In all situations, gµ,q (0) > 1, although its magnitude
+strongly depends on the initial polarization configuration. For almost linearly polarized drivers (A = 0.1), the
+harmonics exhibit moderate super-Poissonian statistics
+(2)
+with 1 < gµ,q < 10 for harmonics beyond the cutoff. In
+(2)
+contrast, for large driving field ellipticities, gµ,q (0) grows
+exponentially, reaching values as high as 103 for nearly
+circular polarization. A similar exponential enhancement
+also occurs for small ellipticities, but only for harmonics
+beyond the cutoff region.
+(2)
+This exponential growth of gµ,q (0) originates from the
+conditions under which the harmonics are generated. As
+discussed earlier, in the absence of squeezing features,
+large ellipticities in the driving field suppress harmonic
+generation, meaning that the rare, high-intensity events
+within the driver’s probability distribution Q(ε) dominate the emission in the presence of squeezing. Moreover,
+HHG is a strongly nonlinear process, with the plateau
+2
+harmonics’ intensity scaling as Iq ∝ |d(ωq )| ∝ ILp
+(p > 0) [51–53]. The interplay between this pronounced
+nonlinearity and the broad field fluctuations characteristic of strongly squeezed light leads to the extremely
+(2)
+large values of gµ,q (0) observed for almost circular po-
+
+5
+larized drivers—or, equivalently, for linearly polarized
+BSV fields (see Supplementary Material III A). Nonetheless, in regimes where a coherent component can already
+sustain harmonic generation, for instance for A = 0.1
+in Fig. 4, the introduction of squeezing mainly adds
+fluctuations around the coherent baseline, similarly to
+what has been recently observed in bichromatic HHG
+schemes where one component exhibits squeezing features [26, 29, 32, 36]. However, even in the absence of
+such coherent baseline, for extremely large squeezing levels depletion of the driving field—leading to a reduced
+conversion efficiency [54]—is expected to prevent the un(2)
+bounded growth of gµ,q (0) (see Supplementary Material
+III B).
+Conclusions.—This work has explored the versatility of HHG driven by elliptically polarized fields with
+strong squeezing features: it serves as a sensitive probe
+of field fluctuations in the driving light and as a source of
+highly elliptically polarized harmonic radiation. In particular, we have shown that the generated harmonics are
+strongly influenced by asymmetric field fluctuations in
+the driver, with both the squeezing angle and the drivingfield ellipticity as tunable parameters to control modifications on the generated harmonics [Fig. 2]. Moreover, we
+have demonstrated the generation of highly elliptically
+polarized harmonic light under nearly circularly polarized single-color driving fields [Fig. 3], and shown that
+such emission exhibits markedly super-Poissonian photon
+statistics, with extremely large values of the second-order
+autocorrelation function [Fig. 4]. This behavior arises
+from the interplay between the large quantum fluctuations characteristic of strongly squeezed light and the
+highly nonlinear nature of the HHG process.
+On a broader scale, our work demonstrates how HHG
+driven by elliptically polarized squeezed light can benefit both the quantum optics and strong-fields communities: for the former, as a diagnostic tool of non-classical
+features in high-photon number regimes; and for the latter, as a novel means of generating highly elliptically polarized harmonics using single-color drivers. Regarding
+the latter, we find that this configuration does not yield
+near-coherent harmonic radiation. However, our results
+suggest that strong squeezing could partially overcome
+this limitation by inducing significant atomic depletion,
+which on the other hand has been recently shown to significantly influence the propagation of the emitted radiation [54]. Similar effects have been found to generate
+squeezing and entanglement among different harmonic
+orders even for coherent state drivers [16, 22]. Understanding how these mechanisms modify the quantum optical properties of the harmonics will be essential to fully
+assess the potential of elliptically polarized, squeezedlight-driven HHG both as a probe of non-classical light
+and as a source of highly elliptically polarized radiation.
+Acknowledgments.—J. R.-D. is grateful to Misha
+Ivanov for valuable discussions that inspired part of the
+results reported in this work, and to Marcin Płodzień for
+all the support and interest shown throughout its devel-
+
+opment.
+ICFO-QOT group acknowledges support from:
+MCIN/AEI
+(PGC2018-0910.13039/501100011033,
+CEX2019-000910-S/10.13039/501100011033, Plan National STAMEENA PID2022-139099NB, project funded
+MCIN and by the “European Union NextGenerationEU/PRTR” (PRTR-C17.I1), FPI); Ministry for
+Digital Transformation and of Civil Service of the Spanish Government through the QUANTUM ENIA project
+call - Quantum Spain project, and by the European
+Union through the Recovery, Transformation and Resilience Plan - NextGenerationEU within the framework
+of the Digital Spain 2026 Agenda; CEX2024-001490-S
+[MICIU/AEI/10.13039/501100011033]; Fundació Cellex;
+Fundació Mir-Puig; Generalitat de Catalunya (European
+Social Fund FEDER and CERCA program; Barcelona
+Supercomputing Center MareNostrum (FI-2023-3-0024);
+Funded by the European Union (HORIZON-CL4-2022QUANTUM-02-SGA, PASQuanS2.1, 101113690, EU
+Horizon 2020 FET-OPEN OPTOlogic, Grant No 899794,
+QU-ATTO, 101168628), EU Horizon Europe Program
+(No 101080086 NeQSTGrant Agreement 101080086 —
+NeQST).
+P. Stammer acknowledges support from: The European Union’s Horizon 2020 research and innovation programme under the Marie Skłodowska-Curie grant agreement No 847517.
+References
+[1] T. Lamprou, P. Stammer, J. Rivera-Dean, N. Tsatrafyllis, M. F. Ciappina, M. Lewenstein, and P. Tzallas, Journal of Physics B: Atomic, Molecular and Optical Physics
+58, 132001 (2025).
+[2] P. Stammer, J. Rivera-Dean, P. Tzallas, M. F. Ciappina,
+and M. Lewenstein, Colloquium: Quantum optics of intense light–matter interaction (2025), arXiv:2510.19045
+[quant-ph].
+[3] N. Rivera, Nanophotonics 14, 1837 (2025).
+[4] P. Antoine, A. L’Huillier, and M. Lewenstein, Physical
+Review Letters 77, 1234 (1996).
+[5] M. Drescher, M. Hentschel, R. Kienberger, G. Tempea, C. Spielmann, G. A. Reider, P. B. Corkum, and
+F. Krausz, Science 291, 1923 (2001).
+[6] P. M. Paul, E. S. Toma, P. Breger, G. Mullot, F. Augé,
+P. Balcou, H. G. Muller, and P. Agostini, Science 292,
+1689 (2001).
+[7] N. Gisin and R. Thew, Nature Photonics 1, 165 (2007).
+[8] P. Kok, W. J. Munro, K. Nemoto, T. C. Ralph, J. P.
+Dowling, and G. J. Milburn, Reviews of Modern Physics
+79, 135 (2007).
+[9] V. Giovannetti, S. Lloyd, and L. Maccone, Nature Photonics 5, 222 (2011).
+[10] A. Aspuru-Guzik and P. Walther, Nature Physics 8, 285
+(2012).
+[11] S. Pirandola, B. R. Bardhan, T. Gehring, C. Weedbrook,
+and S. Lloyd, Nature Photonics 12, 724 (2018).
+[12] P. Stammer, T. F. Martos, M. Lewenstein, and
+G. Rajchel-Mieldzioć, Quantum Science and Technology
+9, 045047 (2024).
+
+6
+[13] L. Cruz-Rodriguez, D. Dey, A. Freibert, and P. Stammer,
+Nature Reviews Physics 6, 691 (2024).
+[14] M. Sennary, J. Rivera-Dean, M. ElKabbash, V. Pervak,
+M. Lewenstein, and M. T. Hassan, Light: Science & Applications 14, 350 (2025).
+[15] M. Lewenstein, M. F. Ciappina, E. Pisanty, J. RiveraDean, P. Stammer, T. Lamprou, and P. Tzallas, Nature
+Physics 17, 1104 (2021).
+[16] P. Stammer, J. Rivera-Dean, A. S. Maxwell, T. Lamprou, J. Argüello-Luengo, P. Tzallas, M. F. Ciappina,
+and M. Lewenstein, Physical Review Letters 132, 143603
+(2024).
+[17] J. Rivera-Dean, H. B. Crispin, P. Stammer, T. Lamprou,
+E. Pisanty, M. Krüger, P. Tzallas, M. Lewenstein, and
+M. F. Ciappina, Physical Review A 110, 063118 (2024).
+[18] J. Rivera-Dean, Physical Review A 110, 063704 (2024).
+[19] C. S. Lange, T. Hansen, and L. B. Madsen, Physical Review A 109, 033110 (2024).
+[20] D. Theidel, V. Cotte, R. Sondenheimer, V. Shiriaeva,
+M. Froidevaux, V. Severin, A. Merdji-Larue, P. Mosel,
+S. Fröhlich, K.-A. Weber, U. Morgner, M. Kovacev,
+J. Biegert, and H. Merdji, PRX Quantum 5, 040319
+(2024).
+[21] D. Theidel, V. Cotte, P. Heinzel, H. Griguer, M. Weis,
+R. Sondenheimer, and H. Merdji, Physical Review Research 7, 033223 (2025).
+[22] C. S. Lange and L. B. Madsen, Physical Review A 111,
+013113 (2025).
+[23] C. S. Lange, T. Hansen, and L. B. Madsen, Physical Review Letters 135, 043603 (2025).
+[24] S. Yi, N. D. Klimkin, G. G. Brown, O. Smirnova,
+S. Patchkovskii, I. Babushkin, and M. Ivanov, Physical
+Review X 15, 011023 (2025).
+[25] P. Stammer, J. Rivera-Dean, and M. Lewenstein, Theory
+of quantum optics and optical coherence in high harmonic
+generation (2025), arXiv:2504.13287 [quant-ph].
+[26] J. Rivera-Dean, L. Petrovic, M. Lewenstein, and P. Stammer, Attosecond quantum optical interferometry (2025),
+arXiv:2511.01097 [quant-ph].
+[27] K. Y. Spasibko, D. A. Kopylov, V. L. Krutyanskiy, T. V.
+Murzina, G. Leuchs, and M. V. Chekhova, Physical Review Letters 119, 223603 (2017).
+[28] M. Manceau, K. Y. Spasibko, G. Leuchs, R. Filip, and
+M. V. Chekhova, Physical Review Letters 123, 123606
+(2019).
+[29] S. Lemieux, S. A. Jalil, D. N. Purschke, N. Boroumand,
+T. J. Hammond, D. Villeneuve, A. Naumov, T. Brabec,
+and G. Vampa, Nature Photonics 19, 767 (2025).
+[30] A. Rasputnyi, Z. Chen, M. Birk, O. Cohen, I. Kaminer,
+M. Krüger, D. Seletskiy, M. Chekhova, and F. Tani, Nature Physics 20, 1960 (2024).
+[31] J. Heimerl, A. Mikhaylov, S. Meier, H. Höllerer,
+I. Kaminer, M. Chekhova, and P. Hommelhoff, Nature
+Physics 20, 945 (2024).
+[32] M. Even Tzur, C. Mor, N. Yaffe, M. Birk, A. Rasputnyi, O. Kneller, I. Nisim, I. Kaminer, M. Krüger,
+N. Dudovich, and O. Cohen, Measuring and controlling the birth of quantum attosecond pulses (2025),
+arXiv:2502.09427 [physics].
+[33] J. Heimerl, A. Rasputnyi, J. Pölloth, S. Meier,
+M. Chekhova, and P. Hommelhoff, Published in Nature
+Physics 10.1038/s41567-025-03087-1 (2025).
+[34] A. Gorlach, M. E. Tzur, M. Birk, M. Krüger, N. Rivera,
+O. Cohen, and I. Kaminer, Nature Physics 19, 1689
+
+(2023).
+[35] J. Rivera-Dean, P. Stammer, M. Ciappina, and
+M. Lewenstein, Physical Review Letters 135, 013801
+(2025).
+[36] P. Stammer, J. Rivera-Dean, M. F. Ciappina, and
+M. Lewenstein, Weak measurement in strong laser field
+physics (2025), arXiv:2508.09048 [quant-ph].
+[37] M. Even Tzur, M. Birk, A. Gorlach, M. Krüger,
+I. Kaminer, and O. Cohen, Nature Photonics 17, 501
+(2023).
+[38] M. Even Tzur, M. Birk, A. Gorlach, I. Kaminer,
+M. Krüger, and O. Cohen, Physical Review Research 6,
+033079 (2024).
+[39] K. S. Budil, P. Salières, A. L’Huillier, T. Ditmire, and
+M. D. Perry, Physical Review A 48, R3437 (1993).
+[40] P. Dietrich, N. H. Burnett, M. Ivanov, and P. B. Corkum,
+Physical Review A 50, R3585 (1994).
+[41] P. B. Corkum, N. H. Burnett, and M. Y. Ivanov, Optics
+Letters 19, 1870 (1994).
+[42] Y. Liang, S. Augst, M. V. Ammosov, S. Lazarescu, and
+S. L. Chin, Journal of Physics B: Atomic, Molecular and
+Optical Physics 28, 2757 (1995).
+[43] N. H. Burnett, C. Kan, and P. B. Corkum, Physical Review A 51, R3418 (1995).
+[44] P. Antoine, A. L’Huillier, M. Lewenstein, P. Salières, and
+B. Carré, Physical Review A 53, 1725 (1996).
+[45] A. Fleischer, O. Kfir, T. Diskin, P. Sidorenko, and O. Cohen, Nature Photonics 8, 543 (2014).
+[46] E. Pisanty, S. Sukiasyan, and M. Ivanov, Physical Review
+A 90, 043829 (2014).
+[47] W. P. Schleich, Phase Space Functions, in Quantum Optics in Phase Space (John Wiley & Sons, Berlin, Germany, 2001) Chap. 12, pp. 321–348.
+[48] J. Rivera-Dean, T. Lamprou, E. Pisanty, P. Stammer,
+A. F. Ordóñez, A. S. Maxwell, M. F. Ciappina, M. Lewenstein, and P. Tzallas, Physical Review A 105, 033714
+(2022).
+[49] P. Stammer, J. Rivera-Dean, A. Maxwell, T. Lamprou,
+A. Ordóñez, M. F. Ciappina, P. Tzallas, and M. Lewenstein, PRX Quantum 4, 010201 (2023).
+[50] R. Loudon, Single-mode quantum optics, in The Quantum Theory of Light (third edition) (Oxford University
+Press, Oxford, United Kingdom, 2001) Chap. 5, pp. 180–
+232.
+[51] K. Kulander and A. L’Huillier, JOSA B 7, 403 (1990).
+[52] A. L’Huillier, P. Balcou, S. Candel, K. J. Schafer, and
+K. C. Kulander, Physical Review A 46, 2778 (1992).
+[53] R. Weissenbilder, S. Carlström, L. Rego, C. Guo, C. M.
+Heyl, P. Smorenburg, E. Constant, C. L. Arnold, and
+A. L’Huillier, Nature Reviews Physics 4, 713 (2022).
+[54] J. Rivera-Dean, D. Kanti, P. Stammer, N. Tsatrafyllis, M. Lewenstein, and P. Tzallas, Propagation of intense squeezed vacuum light in non-linear media (2025),
+arXiv:2509.19608 [quant-ph].
+[55] P. D. Drummond and C. W. Gardiner, Journal of Physics
+A: Mathematical and General 13, 2353 (1980).
+[56] P. D Drummond and S. Chaturvedi, Physica Scripta 91,
+073007 (2016).
+[57] C. Cohen-Tannoudji, J. Dupont-Roc, and G. Grynberg,
+in Photons and Atoms (John Wiley & Sons, Ltd, 1997)
+pp. 5–77.
+[58] M. Lewenstein, P. Balcou, M. Y. Ivanov, A. L’Huillier,
+and P. B. Corkum, Physical Review A 49, 2117 (1994).
+[59] E. Pisanty, RB-SFA: High Harmonic Generation in the
+
+7
+Strong Field Approximation via Mathematica, Github:
+https://github.com/episanty/RB-SFA (2020).
+[60] M. V. Ammosov, N. 8. Delone, and V. P. Krainov, Sov.
+Phys. JETP 64, 1191 (1986).
+
+8
+
+Supplementary Material
+Contents
+
+I. Theory background
+A. Evaluation of observables on the harmonic modes
+B. Change of coordinates
+C. Numerical analysis
+
+8
+9
+9
+10
+
+II. Complementary plots
+
+11
+
+III. Analysis of the second-order autocorrelation function
+A. Toy model
+B. Introducing depletion of the ground state
+
+11
+12
+13
+
+I.
+
+Theory background
+
+In this work, we consider the interaction of a high-intensity elliptically polarized field exhibiting squeezing features
+with an atomic system initially in its ground state. The initial quantum state of the joint light-matter system can be
+expressed as
+|Ψ(t0 )⟩ = |g⟩ ⊗ ᾱ∥ ⊗ D̂(ᾱ⊥ )Ŝ(ξ) |0⟩ ⊗ |{0}q>1 ⟩ ,
+(4)
+ †
+
+
+
+where D̂(α) = exp αâ − α∗ â is the displacement operator, and Ŝ(ξ) = exp ξ ∗ â2 − ξâ†2 is the squeezing operator,
+with ξ = re−iϕ (r > 0) denoting the squeezing parameter. To describe elliptically polarized light, we set ᾱ⊥ = −iA|ᾱ∥ |,
+with 0 ≤ A ≤ 1 defines the ellipticity of the driving field: when A = 0 the input field is linearly polarized, whilst
+for A = 1 it is circularly polarized. All harmonic modes other than the fundamental (q = 1 ≡ L) are initially in the
+vacuum state. In the density matrix formulation, the initial state can thus be written as
+ρ̂(t0 ) = |g⟩⟨g| ⊗ ρ̂driver (t0 ) ⊗ |{0}q>1 ⟩⟨{0}q>1 | .
+
+(5)
+
+For convenience, in this work, we represent the quantum state of the driving field using the generalized positive-P
+representation [55]
+Z
+O Z
+Pµ (αµ , βµ∗ )
+αµ βµ∗ ,
+(6)
+ρ̂driver (t0 ) =
+d2 αµ d2 βµ
+⟨βµ∗ |αµ ⟩
+µ=(⊥,∥)
+
+where Pµ (αµ , βµ∗ ) is chosen as a positive-definite function given by [56]
+"
+
+
+2#
+αµ − βµ∗
+αµ + βµ∗
+1
+∗
+exp −
+,
+Pµ (αµ , βµ ) =
+Qµ
+4π
+4
+2
+
+(7)
+
+with Qµ (α) = π −1 ⟨α|ρˆµ |α⟩ denoting the Husimi function of the state ρ̂µ [47].
+Within this framework, the quantum state after strong laser-matter interaction with an atomic system can be
+expressed as [34, 35]
+Z
+Z
+Z
+Z
+∗ P∥ (α∥ , β ∗ )
+P⊥ (α⊥ , β⊥
+)
+∥
+ρ̂(t) = d2 α⊥ d2 β⊥ d2 α∥ d2 β∥
+∗
+⟨β⊥ |α⊥ ⟩
+⟨β∥∗ |α∥ ⟩
+(8)
+
+O
+ †
+
+× |ϕα (t)⟩⟨ϕβ∗ (t)| D̂⊥ (α⊥ ) ⊗ D̂∥ (α∥ )
+|χα,q (t)⟩⟨χβ∗ ,q (t)| D̂⊥
+(α⊥ ) ⊗ D̂∥† (α∥ ) ,
+q=1
+(⊥)
+
+(∥)
+
+where we denote α = (α⊥ , αµ ), and define |χα,q (t)⟩ ≡ |χα,q (t)⟩ ⊗ |χα,q (t)⟩, with χα⊥ ,q (t) the amplitude of the qth
+harmonic order in polarization component µ [15, 48, 49]
+Z
+(µ)
+χα,q (t) ∝ ϵµ · dτ ⟨g|d̂α (τ )|g⟩ e−iωq τ ,
+(9)
+
+9
+where dα (t) is the time-dependent dipole moment operator under the influence of Eα (t) = ⟨α|[ÊL,⊥ (t) + ÊL,∥ (t)]|α⟩,
+where Êq,µ (t) = ϵµ [âq,µ e−iωq t + c.c.] is the electric field operator acting on mode (q, µ). Finally, in Eq. (8), |ϕα (t)⟩
+denotes the electronic state, which satisfies
+iℏ
+
+A.
+
+
+∂ |ϕα (t)⟩ 
+= Ĥatom + er̂ · Eα (t) |ϕα (t)⟩ .
+∂t
+
+(10)
+
+Evaluation of observables on the harmonic modes
+
+Our discussion mainly develops around two observables acting on the harmonic modes: the harmonic spectrum
+S(ω) and the second-order autocorrelation function g (2) (0). Both quantities can be expressed in terms of expectation
+values of physical observables Ôq,µ , i.e.,
+h
+i
+⟨Ôq,µ ⟩ = tr Ôq,µ ρ̂(t) ,
+(11)
+where Ôq (t) denotes some normally ordered combination of creation and annihilation operators acting on the mode
+(q, µ).
+By inserting Eq. (8) into the expression
+above, and noting that in the low-depletion HHG regime [16] one can
+Q
+approximate ⟨β ∗ |α⟩ ≈ ⟨ϕβ∗ (t)|ϕα (t)⟩ q ⟨χβ∗ ,q (t)|χα,q (t)⟩ [38], we arrive at
+Z
+Z
+Z
+Z
+Pµ (αµ , βµ∗ )
+(µ)
+Pµ̄ (αµ̄ , βµ̄∗ )⟨χβ∗ ,q (t)|Ôq,µ |χ(µ)
+(12)
+⟨Ôq,µ ⟩ = d2 αµ d2 βµ d2 αµ̄ d2 βµ̄ (µ)
+α,q (t)⟩.
+(µ)
+⟨χβ∗ ,q (t)|χα,q (t)⟩
+To evaluate these observables, we work in the classical limit, also referred to as the small single photon amplitude
+limit in√Ref. [34]. In this regime, coherent state amplitudes are related to the field amplitude via εα = 2ϵα, with
+ϵ ∝ 1/ V and V the quantization volume. Taking the limit ϵ → 0 (V → ∞), which is justified for free-space
+propagating fields [57], requires simultaneously sending α → ∞ to ensure a finite field strength εα . This second limit
+is consistent with our problem, since we deal with driving fields of extremely large mean photon numbers. Under this
+limit, Eq. (12) becomes
+Z
+Z
+h 1
+i
+(µ)
+Q
+(ε
+)Q
+(ε
+)
+⟨χ(µ)
+(13)
+⟨Ôq,µ ⟩ = d2 εα,µ d2 εα,µ̄ lim
+µ
+α
+µ̄
+α
+α,q (t)|Ôq,µ |χα,q (t)⟩,
+µ
+µ̄
+ϵ→0 16ϵ4
+where in this case a Dirac delta δ(εα,µ − εβ,µ ) arises naturally from the evaluated limit [34, 35].
+It is important to stress that in the expression the limit does not affect the expectation value directly. In general,
+(µ)
+(µ)
+however, one should be cautious, since ⟨χα,q (t)|Ôq,µ |χα,q (t)⟩ ∝ ϵn , with n an integer that depends on the observable
+under consideration. Thus, extra care must be taken when evaluating the limit [36]. For the quantities considered
+here—S(ω) and g (2) (0)—this issue does not arise, as they are defined by
+ X
+
+2
+⟨â†2
+∂
+q,µ âq,µ ⟩
+†
+S(ω) ∝
+,
+(14)
+ℏωq ⟨âq,µ âq,µ ⟩ , g (2) (0) = †
+∂ωq
+⟨âq,µ âq,µ ⟩
+q̸=1,µ
+which by construction the dependence on ϵ cancels, either due to the continuous frequency in S(ω) or the structure
+of g (2) (0) itself. Consequently, the limits limϵ→0 [S(ω)] and limϵ→0 [g (2) (0)] remain well-defined. Figure 5 displays
+some examples for S(ω) for (a) phase and (b) amplitude squeezed drivers, with the different colors and marker-styles
+denoting different driving field ellipticities.
+B.
+
+Change of coordinates
+
+The evaluation of the limits presented in Eq. (13) has been extensively discussed in the literature [34, 35]. However,
+most studies to date have restricted to the cases of amplitude and phase squeezing, i.e., situations where ξ ∈ .
+Accounting for the intrinsically complex nature of ξ requires some care in order to properly recover expressions
+analogous to those reported in the aforementioned works.
+On the one hand, for the coherent state component it was found that [35]
+
+
+1
+lim
+Q∥ (ε∥ ) = δ(ε∥,x − ε̄x )δ(ε∥,y − ε̄y ),
+(15)
+ϵ→0 4ϵ2
+
+R
+
+10
+
+FIG. 5. High harmonic generation spectrum for (a) phase and (b) squeezed drivers of different ellipticities A. Calculations have
+been performed over five optical cycles of a monochromatic field with set ε∥ = 0.053 a.u., ωL = 0.057 a.u., Isq,⊥ = 10−5 a.u.,
+using an ionization potential Ip = 0.5 a.u. (hydrogen).
+
+where we have decomposed ε∥ = ε∥,x + iε∥,y , and introduced ε̄∥ = 2ϵᾱ∥ . On the other hand, for a squeezed state
+this evaluation requires more care. In general, the Husimi function of a squeezed coherent state with coherent state
+amplitude ᾱ can be written as
+
+
+
+tanh(r)
+1
+2
+2
+∗ 2
+exp −|α̃| −
+(α̃) + (α̃ ) ,
+Q(α) =
+cosh(r)
+2
+
+(16)
+
+where we define α̃ = (α− ᾱ)e−iϕ/2 . Expanding the exponent into its real and imaginary components, i.e., α̃ = α̃x +iα̃y ,
+the Husimi function an be rewritten as
+"
+#
+α̃y2
+α̃x2
+1
+exp −
+−
+,
+Q(α) =
+cosh(r)
+1 + e2r
+1 + e−2r
+
+(17)
+
+with the variables (α̃x , α̃y ) related to the original integration variables through
+ 
+ 
+α̃x = (αx − ᾱx ) cos ϕ2 − (αy − ᾱy ) sin ϕ2 ,
+
+ 
+ 
+α̃y = (αy − ᾱy ) cos ϕ2 + (αx − ᾱx ) sin ϕ2 .
+
+(18)
+
+Thus, this change of variables effectively shifts the phase-space coordinate system to the squeezing origin and
+rotates such that the state is represented as a BSV state squeezed along the optical quadrature defined by α̃y . In this
+coordinate system, applying the classical limit becomes straightforward and yields
+
+lim
+
+ϵ→0
+
+
+
+
+1
+1
+ε̃⊥,x
+p
+Q
+(ε
+)
+=
+exp
+−
+δ(ε⊥,x − ε̄x ),
+⊥
+⊥
+4ϵ2
+8Isqu
+8πIsqu
+
+(19)
+
+with the subsequent analysis proceeding analogously Refs. [34, 35] once the change of variables has been introduced.
+
+C.
+
+Numerical analysis
+
+In our numerical analysis, we set ε̄∥,x = ε̄⊥,y = 0.053 a.u. and ε̄∥,y = ε̄⊥,x = 0.0 a.u., with Isqu = 10−5 a.u. for the
+squeezing intensity. Using these parameters, the spectral amplitudes χα,q (t) were numerically computed within the
+strong-field approximation (SFA) [58] using the RB-SFA Mathematica package [59]. Specifically, 140 points along the
+Husimi distribution were sampled for each value of A and θ considered in the main text, and subsequently used for
+the analysis of both S(ω) and g (2) (0). The calculations were performed with a monochromatic driving field extended
+over five optical cycles. As the atomic system, we considered hydrogen (Ip = 0.5 a.u.) with ω = 0.057 a.u. for the
+driving field frequency.
+
+11
+II.
+
+Complementary plots
+
+In this section, we present additional figures that complement those shown in the main text. Figure 6 (a) displays
+the visibility, defined as
+V =
+
+⟨â†q,∥ âq,∥ ⟩ − ⟨â†q,⊥ âq,⊥ ⟩
+⟨â†q,∥ âq,∥ ⟩ + ⟨â†q,⊥ âq,⊥ ⟩
+
+,
+
+(20)
+
+for a driver with A = 0.9. The purpose of this quantity is to characterize how the intensity is distributed, on average,
+between the polarization components of the generated harmonics. This allows us to gain insight into the mechanisms
+leading to Eq < 1 for different types of drivers (phase- or amplitude-squeezed), given that circularly polarized light
+satisfies V = 0 with a phase difference of π/2 between components.
+For the phase-squeezed case (blue curve with circular markers), we find V > 0 for harmonic orders within the
+plateau region, indicating that the main factor preventing perfect circular polarization is how the field fluctuations
+present in the driver translate into higher intensities along the ∥-component. In contrast, for amplitude squeezing
+(red curve with square markers), we find V ≈ 0, suggesting that the deviation from Eq = 1 arises instead from
+phase fluctuations that induce relative phase shifts between polarization components different from π/2. In both
+cases, however, the lower harmonic orders exhibit V = 0, with phase difference close to π/2, as these result in high
+ellipticities in the emitted radiation.
+
+FIG. 6. (a) Visibility for different driving field conditions and (b) the 2nd order autocorrelation function g (2) (0) against the
+harmonic order q for different ellipticity values A of a phase-squeezed driver.
+
+Figure 6 (b) shows the g (2) (0) function for phase-squeezed drivers. Qualitatively, the results are similar to those
+obtained for amplitude squeezing: g (2) increases with the harmonic order for large A, and decreases as A is reduced.
+Quantitatively, however, the magnitudes differ significantly—phase squeezing yields g (2) (0) values up to three orders
+of magnitude higher than those observed for amplitude squeezing. This arises from the fact that phase squeezing
+induces larger fluctuations in the field strength. As discussed below, the combination of this enhancement with the
+strong nonlinearity of the HHG process accounts for the extremely large g (2) (0) values observed.
+
+III.
+
+Analysis of the second-order autocorrelation function
+
+In the main text, we found that the values of g (2) (0) function exceeded by many orders of magnitude those typically
+observed for standard super-Poissonian sources, which are usually around g (2) (0) ≈ 2. The main objective of this
+section is to justify these unusually large values, which arise from a combination of two factors:
+• the unique scaling of the HHG yield with the intensity of the driving field,
+• the characteristics of the field fluctuations associated with squeezed states at intensities high enough to drive
+HHG in gaseous systems.
+
+12
+For simplicity in the calculations presented here we restrict our calculations to linearly polarized driving fields
+and various types of sources, ranging from bright squeezed vacuum states (BSV) to general DSV states with nonvanishing field amplitude. This situation is analogous to moving from linear to circular polarization, since in the
+regime of vanishing squeezing, the limiting cases of either circularly polarized or BSV sources do not generate HHG
+radiation.
+A.
+
+Toy model
+
+Under strong-squeezing regimes, the properties of the harmonic radiation were found to be compatible with those
+of the mixed state [34–36, 38]
+Z
+ρ̂q = dεα Q(εα , ε̄α ) |χ̄q (εα )⟩⟨χ̄q (εα )| ,
+(21)
+where Q(εα , ε̄α ) corresponds to the limiting appearing in Eq. (19). It is important to note that, in writing this
+expression, additional considerations such as the thermodynamic limit [36] must be taken into account. Specifically,
+we assume
+region Nat → ∞, such that
+√ that as as V → ∞, then the number of atoms in the
+R HHG interaction
+−iωq t
+ˆ
+ϱ = Nat / V remains constant. Accordingly, we define χ̄q (εα ) ≡ ϱ dτ ⟨g|dεα (τ )|g⟩e
+.
+To gain insights into the properties of this state, we introduce a simple toy model where χ̄q (εα ) = εpα . This choice
+is motivated by the fact that the HHG intensity, particularly in the plateau region, typically scales as a power p > 0
+of the driving field [51–53]. Within this model, the corresponding state can be written as
+
+
+Z
+(εα − ε̄)2
+1
+dεα exp −
+|εpα ⟩⟨εpα | .
+(22)
+ρ̂q = √
+2σ
+2πσ
+In this framework setting ε̄ = 0 reproduces the analogue of a BSV-driven process, while ε̄ ̸= 0 corresponds to a general
+DSV state. Without loss of generality, we take the integration contour along the real axis, so that the g (2) (0) function
+becomes
+
+
+R
+√
+dεα exp −(εα − ε̄)2 /2σ ε4p
+α
+(2)
+(23)
+g (0) = 2πσ  R
+2 .
+dεα exp[−(εα − ε̄)2 /2σ]ε2p
+α
+From the Cauchy-Schwarz inequality, it immediately follows that g (2) ≥ 1. More explicitly, the denominator can be
+lower bounded as
+Z
+2  Z
+ Z
+ Z
+2
+⟨â†q âq ⟩2 =
+dεα Q(εα )α2p ≤
+dεα Q(εα )α4p
+dεα Q(εα ) = dεα Q(εα )α4p = ⟨â†2
+(24)
+q âq ⟩,
+where we have used the fact that Q(εα ) is normalized to unity.
+However, from a more general perspective, explicitly evaluating the integrals in Eq. (23) for the special case εα = 0
+yields
+√ Γ( 1 + 2p)
+(2)
+,
+gBSV (0) = σ π 21
+Γ( 2 + p)2
+(2)
+
+(25)
+
+from which we find that limp→∞ [gBSV (0)] = ∞. This result is further illustrated in Fig. 7 (a),which shows the behavior
+2
+†
+2
+of ⟨â†2
+q âq ⟩ (blue curve) and ⟨âq âq ⟩ (red curve) as a function of p. The growing separation between the two curves
+with increasing p highlights the divergence of g (2) (0).
+The important message to extract from this analysis is that the harmonic conversion efficiency counterbalances
+the rapidly decreasing probability of finding large field amplitudes. As a consequence, strong intensity correlations
+emerge in the harmonic emission, since the rare outliers of the distribution become the dominant contributors. In
+the extreme limit of infinitely large conversion efficiency, the width of the field distribution no longer plays a role in
+determining the photon statistics of the state, provided it remains greater than zero. In realistic scenarios, however,
+once the field strength exceeds a critical value, depletion effects start to play a role, potentially causing g (2) (0) to
+saturate to a constant value.
+The more general scenario with ε̄ ̸= 0 is shown in Fig. 8 (b). We observe that increasing α0 reduces the steepness of
+the g (2) (0) dependence on p (here denoted as n). In contrast to the BSV-analogue case, investigating the limit σ → 0
+2p
+yields a finite harmonic intensity, |ε| ̸= 0. Thus, the dominant contribution to the HHG spectrum arises from the
+(2)
+coherent α0 field. In this limit, g (0) → 1, in stark contrast to the ε0 = 0 case, where g (2) (0) becomes ill-defined as
+σ → 0.
+
+13
+
+†2
+FIG. 7. (a) Behavior of ⟨â†2
+q âq ⟩ (blue curve with circular markers) and ⟨âq âq ⟩ (red curve with circular markers) for the toymodel in Eq. (22) when setting ε̄ = 0. (b) Results for various values of ε̄. Here, we have set σ = 1 for simplicity.
+
+B.
+
+Introducing depletion of the ground state
+
+In practice, however, the HHG conversion efficiency does not scale uniformly with the driving field intensity. For
+coherent states of sufficiently high intensity, ground state depletion becomes a dominant effect, drastically reducing
+the HHG efficiency. Once depletion is taken into account, the toy model introduced earlier ceases to be valid: above
+a certain value of εα , the yield no longer grows exponentially but instead drops sharply.
+To investigate how depletion affects the g (2) function, we explicitly include it in the evaluation of the harmonic
+spectrum. Our approach follows that of Ref. [54] which, within the strong-field approximation [58], evaluates the
+time-dependent dipole moment used for the calculation of χq (εα (t) as
+Z
+Z t
+Rt
+
+ 1 R t1
+1
+ˆ
+d(t) = ⟨ψ(t)| d |ψ(t)⟩ ≈ dv
+dt1 e− 2 −∞ dτ ΓADK (τ ) e−iS(p,t,t1 ) d p + A(t) E(t1 )d p + A(t1 ) e− 2 −∞ dτ ΓADK (τ ) , (26)
+t0
+
+with S(p, t, t1 ) is the semiclassical action, E(t) the electric field, and d(v) denotes the transition matrix element between
+the ground state and a continuum state |v⟩. The ionization rate ΓADK (t) is evaluated using the Ammosov-DeloneKrainov (ADK) model [60]. Numerically, the dipole is computed using the RB-SFA Mathematica package [59], chosen
+for its efficiency in generating HHG spectra within the SFA. Minor modifications where implemented to incorporate
+depletion, following the procedure in Ref. [54].
+Figure 8 shows the values of g (2) when depletion effects are included under various conditions. In panel (a), the
+squeezing intensity is fixed to Isqu = 10−5 a.

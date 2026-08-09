@@ -1,0 +1,997 @@
+High harmonic generation in monolayer MoS2 controlled by resonant and
+near-resonant pulses on ultrashort time scales
+Pavel Peterka,1 Artur O. Slobodeniuk,2 Tomáš Novotný,2 Pawan Suthar,1 Miroslav Bartoš,3 František Trojánek,1
+Petr Malý,1 and Martin Kozák1
+
+arXiv:2504.02567v1 [physics.optics] 3 Apr 2025
+
+1) Department of Chemical Physics and Optics, Faculty of Mathematics and Physics, Charles University, Ke Karlovu 3,
+12116 Prague 2, Czech Republic
+2) Department of Condensed Matter Physics, Faculty of Mathematics and Physics, Charles University, Ke Karlovu 3,
+12116 Prague 2, Czech Republic
+3) Central European Institute of Technology, Brno University of Technology, Purkyňova 656/123, 612 00 Brno,
+Czech Republic
+
+(*Electronic mail: kozak@karlov.mff.cuni.cz)
+(Dated: 4 April 2025)
+
+We report on experimental investigation of nonperturbative high harmonic generation (HHG) in monolayer MoS2 in
+the ultraviolet spectral region driven by mid-infrared light. We study how the HHG is influenced by pre-excitation of
+the monolayer using resonant and near-resonant pulses in a pump-probe-like scheme. The resonant light creates high
+density exciton population. Due to ultrafast dephasing caused by electron-electron scattering, the HHG is suppressed in
+the presence of pre-excited carriers. In the case of near-resonant excitation with photon energy below the exciton transition, the dynamics of the observed suppression of the HHG yield contains a fast component which is a consequence
+of momentum scattering at carriers, which are excited by two-photon transition when the two pulses temporally overlap
+in the sample. This interpretation is supported by comparison of the experimental data with theoretical calculations of
+two-photon absorption spectrum of MoS2 monolayer. This work demonstrates a possibility to control HHG in lowdimensional materials on ultrashort timescales by combining the driving strong-field pulse with a weak near-resonant
+light.
+I.
+
+INTRODUCTION
+
+High harmonic generation (HHG) in solids1–6 is a nonperturbative nonlinear optical process, during which coherent light wave with high amplitude of electric field and low
+photon energy interacts with a solid-state material, typically a
+crystal. As a result, electron-hole wave packets are promoted
+to conduction and valence bands via quantum tunnelling. This
+process occurs during a short time window close to the maxima of the oscillating field. The duration of the tunnelling
+excitation window is typically few hundreds of attoseconds
+to single femtoseconds, depending on the frequency of the
+driving light. Subsequently, the carriers are coherently accelerated in the crystal by the oscillating field and propagate
+far from equilibrium positions. The electron and hole can
+eventually recombine leading to generation of high energy
+photons via interband mechanism of HHG3–5,7 . Due to the
+nonparabolicity of electron and hole dispersion in the material, the harmonically driven carriers undergo anharmonic motion leading to so-called intraband mechanism of HHG8–10 .
+HHG in solids has been used to investigate band structure11,12 ,
+Berry curvature13, topological surface states14 , the dynamics of a photoinduced phase transition15 or coherent phonon
+dynamics16.
+A crucial requirement for observation of a macroscopic
+wave containing harmonic frequencies is the coherence of the
+individual microscopic emission sources which contribute to
+the radiated field17,18 . However, when the charge carriers in a
+solid are accelerated to high energies, the momentum scattering causes fast decoherence. Most important scattering processes are electron-phonon scattering, electron-electron scattering and scattering at ionized impurities. While the electron-
+
+phonon scattering times for electrons with low kinetic energy
+are typically long (hundreds of femtoseconds to picoseconds)
+compared to the time period of the mid-infrared light (several femtoseconds), the electron-phonon and electron-electron
+scattering times can become much shorter for electrons that
+are accelerated to high kinetic energies and/or at high densities
+of excited carriers. The latter process can be controlled independently of the HHG process using a second resonant pulse
+exciting the carriers prior to the impact of the strong infrared
+pulse, which drives the HHG. The suppression of the HHG
+yield by excited carriers was recently observed in ZnO19 , carbon nanotubes20 or MoS2 monolayer21–23 , where the authors
+used infrared pulses to drive HHG. The carriers were excited
+by a resonant pump pulse19,21,22 or by a pulse with photon energy higher than the bandgap23. HHG in ZnO was also modulated by pulses with photon energy lower than the band gap24
+and the ultrafast response was interpreted as a consequence
+of nonlinear frequency mixing present in the sample for zero
+time delay between the two pulses.
+In this paper we show an experimental study of the effect
+of resonant and near-resonant pre-excitation on the HHG process in monolayer MoS2 25 . The harmonics are generated in
+a different regime than in previous studies5,21–23,26–28 . We
+use higher photon energy of the driving pulse of 0.62 eV
+(wavelength of 2000 nm) and observe harmonic spectra in
+the ultraviolet spectral region 2.7-6.2 eV (wavelength region
+of 200-450 nm). These photon energies correspond to interband transitions between higher lying bands in the MoS2 band
+structure29, thus going beyond the two-band approximation.
+We observe that the HHG yield is suppressed by high density carriers excited in the sample prior or during the illumination by the strong infrared pulse, which drives the HHG.
+
+2
+The dynamics of the change of the HHG yield as a function of the time delay between the pre-excitation and driving
+pulses differs significantly depending on the photon energy of
+the pre-excitation pulse. For non-resonant pre-excitation, the
+observed ultrafast supression of the HHG yield is explained
+by momentum scattering of coherently driven electron-hole
+wavepackets at charge carriers produced by two-photon absorption induced simultaneously by the pre-excitation and the
+strong-field pulses. The spectrum of two-photon absorption
+in MoS2 is theoretically calculated and compared to the measured results.
+
+II.
+
+EXPERIMENTAL
+
+In our experiments we illuminate a MoS2 monolayer on
+SiO2 substrate with mid-infrared pulses and measure the spectra of high harmonic frequencies reflected from the sample
+(see Fig. 1a). The HHG spectra are measured as a function
+of the time delay between a femtosecond resonant or nearresonant pump pulse (tunable photon energy 1.25-2 eV, pulse
+duration of about 20 fs) and the mid-infrared high intensity
+pulse (central photon energy 0.6 eV, FWHM pulse duration of
+38 fs, peak intensity up to 5 TW/cm2 ), which drives the HHG.
+Both pulses are generated from the output of a femtosecond
+ytterbium-based laser (Pharos SP-6W, Light Conversion, 170
+fs, 1030 nm). The resonant and near-resonant pulses are generated in an in-house developed noncollinear optical parametric amplifier (NOPA), which uses femtosecond supercontinuum generated in a sapphire crystal as a seed, and which is
+pumped by the second harmonics of the fundamental laser
+output (515 nm) generated in a BBO crystal. The mid-infrared
+pulses used to drive the HHG are obtained by the NOPA+DFG
+(difference frequency generation) setup, which is described in
+detail in30 . The time delay between the two pulses is controlled using a motorized translation stage. During the experiments, the samples are imaged in situ using an optical microscope setup to ensure the spatial overlap of the pre-excitation
+and the driving pulses and their position at the sample. We
+use linear polarizations of both pulses, which can be independently controlled by broadband half wave plates. Our HHG
+detection setup has different sensitivities for two orthogonal
+polarization components due to the prisms used to filter out
+the third harmonic signal and due to the polarization dependence of the diffraction efficiency of the spectrometer grating.
+For this reason, in the measurement showing the dependence
+of the HHG yield on the direction of the polarization of the
+driving field we detect the harmonic spectra separately for the
+two orthogonal polarization components, which are selected
+by a UV Glen-laser polarizer. The signals are corrected for
+different detection sensitivity and the total HHG yield is obtained as their sum. The experiments are carried out at room
+temperature with the laser repetition rate of 25 kHz. The studied samples are prepared by gel-film assisted mechanical exfoliation from bulk MoS2 crystal. The monolayers are then
+transferred to a SiO2 substrate, which is used due to its wide
+band gap leading to a negligible contribution to the generated
+harmonic spectra.
+
+III.
+
+RESULTS AND DISCUSSION
+
+The measured HHG spectrum for linear polarization of the
+driving pulse along the direction of the mirror symmetry axis
+of the MoS2 monolayer is shown in Fig. 1b. We observe harmonic frequencies up to the 10th order corresponding to the
+photon energy of 6 eV. This is considerably higher photon
+energy than observed in previous studies of HHG in TMD
+materials5,21–23,26 . The reason is probably the shorter wavelength of the driving field compared to previous experiments
+in combination with high field strength of about 3 GV/m used
+in our experiments, which can be applied to the monolayer
+due to the short pulse duration. The yield of HHG in MoS2
+monolayer and its polarization state is found to depend on the
+direction of linear polarization with respect to the mirror symmetry plane26. In Fig. 1c we plot the HHG yield as a function
+of the angle θ between the direction of linear polarization of
+the driving light and the mirror symmetry plane of the monolayer. The two perpendicular polarization components (horizontal and vertical) of HHG radiation are detected separately.
+The resulting spectrum is obtained by summing the two polarization components with particular weights corresponding to
+the measured polarization dependence of the detection setup
+(prisms, spectrometer grating). The results thus represent the
+total HHG yield independent of the polarization state of the
+generated ultraviolet light. We observe harmonic orders 59 at photon energies of 2.8-5.5 eV (higher photon energies
+are not transmitted through the polarizer used in the detection
+setup for these measurements). For photon energies below 4
+eV, the maxima of odd orders are observed for θ = 30◦ , while
+the even orders have their maxima for θ = 0◦ . However, at
+higher photon energies, the maximum yield of even and odd
+orders switches. This behaviour has been previously observed
+in MoS2 monolayer and it was attributed to the role of higher
+energy bands in the HHG process29.
+The main goal of this paper is to study the influence of the
+HHG yield by a resonant or near-resonant pump pulse applied
+to the sample prior to the illumination by the strong infrared
+pulse which drives the HHG process. When the real carrier
+population is generated in the sample by a resonant pump
+pulse, the HHG yield decreases for all the harmonics, which
+is shown in Fig. 2a. An interesting observation is the fact that
+the relative decrease is not monotonically changing with the
+harmonic order as observed in previous studies for harmonic
+photon energies up to 3.5 eV21–23 . The decrease of the HHG
+yield is caused by electron-electron scattering induced by the
+high density of excited carriers, which leads to extremely fast
+dephasing of the coherent electron-hole wave packets21 . The
+generated high harmonic radiation results from the macroscopic nonlinear current of coherently oscillating electrons.
+Once the quantum phase between the electron and the field of
+the driving infrared wave is lost, the electron does not further
+contribute to the generated coherent wave. As the density of
+the excited carriers decreases on picosecond time scales21,22 ,
+the harmonic signal recovers to the value without the resonant
+pump after several tens of picoseconds.
+Unlike the other experiments in MoS2 we also focus on the
+experiments with the pump beam at photon energy below the
+
+3
+
+FIG. 1. (a) Geometry of the experiment for investigation of the role of resonant and near-resonant excitation on the yield of high harmonic
+generation (HHG) in MoS2 monolayer. (b) HHG spectrum generated in the MoS2 monolayer with the linear polarization of the driving field
+along the mirror symmetry axis of the crystal (armchair direction). (c) Dependence of the polarization unresolved HHG yield of each harmonic
+frequency on the orientation of the linear polarization of the driving field with respect to the mirror symmetry axis of the crystal.
+b 1.1
+1
+
+0.5
+
+0
+
+0.9
+
+1.4
+
+1.6
+
+1.8
+
+Pump (eV)
+
+5th
+6th
+0.8
+
+7th
+
+0.9
+
+0.8
+
+Intensity (a.u.)
+
+High harmonic yield (rel.u.)
+
+1
+
+1sA
+1
+
+High harmonic yield (rel.u.)
+
+Intensity (a.u.)
+
+a
+
+0.7
+
+5th
+
+0.6
+
+6th
+7th
+
+0.5
+
+8th
+
+8th
+9th
+
+1sA
+1
+
+0.5
+
+9th
+
+0.4
+
+0
+1.4
+
+10th
+
+10th
+
+1.6
+
+1.8
+
+Pump (eV)
+0.3
+
+0.7
+
+-400
+
+0
+
+400
+
+800
+
+-200
+
+1200
+
+0
+
+200
+
+400
+
+600
+
+Time (fs)
+
+Time (fs)
+
+c 1.1
+
+d
+
+1.1
+
+1
+
+0.6
+
+5th
+0.5
+
+6th
+7th
+
+0.4
+
+8th
+9th
+
+0.3
+
+1sA
+1
+
+0.5
+
+0
+
+0.8
+
+0.7
+
+1.6
+
+5th
+6th
+
+0.6
+
+7th
+8th
+
+0.5
+
+1.4
+
+10th
+
+0.9
+
+Intensity (a.u.)
+
+0.7
+
+High harmonic yield (rel.u.)
+
+0.8
+
+Intensity (a.u.)
+
+High harmonic yield (rel.u.)
+
+1
+0.9
+
+1.8
+
+9th
+
+0.5
+
+0
+1.4
+
+10th
+
+Pump (eV)
+0.2
+
+1sA
+1
+
+1.6
+
+1.8
+
+Pump (eV)
+0.4
+
+-200
+
+0
+
+200
+
+400
+
+600
+
+Time (fs)
+
+-200
+
+0
+
+200
+
+400
+
+600
+
+Time (fs)
+
+FIG. 2. (a) Relative change of the high harmonic yield for different harmonic orders as a function of the time delay between the resonant
+pre-excitation at photon energy of 1.91 eV and the infrared pulse. (b), (c), (d) The same as in (a) with the pre-excitation pulse detuned from
+the exciton resonance to photon energies of (b) 1.65 eV, (c) 1.55 eV, (d) 1.46 eV. The spectra of the excitation pulses are shown in the insets,
+where the energy of the lowest exciton resonance (1sA exciton) is indicated.
+
+lowest exciton resonance of MoS2 (data shown in Fig. 2b-d).
+When the near-resonant pulse overlaps in time with the strong
+infrared pulse, the harmonic yield is significantly decreased.
+In this case the strong suppression shows ultrafast dynamics
+and harmonic yield recovers after 80 fs to value that is close to
+the yield without the pump pulse. Figure 3a shows the maximum relative change of the harmonic emission yield as a function of the intensity of the off-resonant pulse for overlapping
+
+pump and infrared pulses (time delay 0 fs). The data are fitted
+by linear function. The harmonic intensity suppression is different for different harmonic orders, it is smallest for 8th harmonic and for 5th, 6th, 7th, 9th and 10th it is monotonically
+increasing. After the short signal suprression, there is also a
+picosecond component of the change of HHG yield in the case
+of near-resonant excitation (see Fig. 3b). This signal cannot be
+caused by the excitons generated by single-photon absorption
+
+4
+a
+
+b
+0.5
+1
+
+5th
+
+7th
+8th
+9th
+
+0.3
+
+10th
+
+0.2
+
+0.9
+
+Relative decrease of HHG yield
+
+0.4
+
+5th harmonic yield (rel.u.)
+
+Relative decrease of HHG yield
+
+6th
+
+0.8
+
+0.1
+205 GW/cm
+103 GW/cm
+
+0
+0.7
+50
+
+100
+
+150
+
+Pump intensity (GW/cm
+
+2
+
+200
+
+)
+
+32 GW/cm
+
+-200
+
+2
+2
+
+2
+
+0.12
+
+7th
+
+0.1
+
+6th
+5th
+
+0.08
+
+2
+
+I0
+
+0.06
+0.04
+0.02
+0
+0
+
+50
+
+100
+
+150
+
+200
+
+250
+2
+
+Pump intensity (GW/cm )
+
+0
+
+200
+
+400
+
+600
+
+Time (fs)
+
+FIG. 3. (a) Relative decrease of HHG yield for different harmonic orders as a function of the intensity of the off-resonant pump pulse at energy
+1.46 eV. Measurements are performed for the two pulses overlapped on the sample (time delay 0 fs). (b) 5th harmonic yield as a function of
+the time delay between the pre-excitation and the infrared pulses for three different pump pulse intensities. Inset shows relative decrease of
+HHG yield 500 fs after pre-excitation for different harmonic orders as a function of the intensity of the off-resonant pump pulse.
+
+process due to the fact that the photon energy is lower than the
+energy of the exciton resonance. The picosecond component
+is thus caused by carriers excited by two-photon absorption of
+the near-resonant pulse, which is confirmed by the quadratic
+dependence of its amplitude shown in the inset of Fig. 3b.
+
+Stark energy shift is of the order of only several tens of meV41 .
+The estimated decrease of the tunnelling probability induced
+by such small increase of the band gap is only few percent,
+which is much less than the observed relative change of the
+HHG yield.
+
+The ultrafast suppression of the HHG yield might be attributed to two effects. The first possible source is the optical Stark effect (OSE)31–35 induced by the near-resonant field.
+OSE was previously observed in 2D materials36–42 and leads
+to a transient shift of the excitonic resonance. The energy
+shift induced by OSE may increase the energy barrier that the
+electrons need to overcome during tunnel excitation, which is
+an important ingredient of HHG. As a consequence, the tunnelling probability would be reduced leading to suppression of
+the harmonic yield. In two-level approximation representing
+a simplified model of the excitonic system in 2D transition
+metal dichalcogenides, the OSE induced energy shift scales
+with the field amplitude F, energy of the resonance E0 and
+2
+the applied photon energy h̄ω as ∆E ≈ E0|F|
+−h̄ω . A theory of
+OSE based on perturbative solution of semiconductor Bloch
+equations gives only a small correction to this dependence41.
+The second possible source of the ultrafast HHG suppression
+is the enhanced generation of carriers due to two-photon excitation, which becomes strongly enhanced when the two pulses
+are present on the sample in the same time. The higher excited carrier density then leads to stronger suppression of the
+HHG via decoherence due to electron-electron scattering. To
+resolve the underlying physical mechanism we study the dynamics of the HHG yield for different detuning of the nearresonant excitation from the exciton energy (see Fig. 2b-d).
+Fig. 4a shows the relative suppression of the harmonic yield
+as a function of pump peak intensity for three different nearresonant photon energies of the excitation pulse. The suppression is stronger as the detuning becomes larger. Therefore, the HHG suppression cannot be explained by the OSE,
+for which the energy shift is indirectly proportional to the detuning energy. Another argument is based on the fact that the
+
+The observed ultrafast suppression of the HHG yield with
+near-resonant pump is thus caused by two-photon absorption
+and subsequent electron dephasing. The excitation process is
+illustrated in Fig. 4b together with the two-photon absorption coefficient in MoS2 monolayer calculated by the theory
+presented in the following chapter. The excitonic levels43–45
+form clear peaks in the two-photon absorption spectra. For
+the near-resonant pulse at 1.46 eV, the sum of photon energies for two-photon transition (infrared HHG driving pulse at
+0.6 eV) gives 2.06 eV, which is partially overlapped with 1sB
+exciton resonance at EB =2.03 eV. For the higher photon energies of 1.55 eV and 1.65 eV, the sum of the photon energies is
+shifting away from 1sB exciton resonance to the region, where
+the two-photon absorption coefficient is decreasing. This explains, why the measured HHG suppression is stronger for
+lower pump photon energies corresponding to larger detuning
+from the exciton resonance.
+Recently, similar ultrafast suppression of HHG yield has
+been measured in bulk ZnO24 . The phenomenon was interpreted by a decrease of the intensity of the infrared pulse,
+which is partially absorbed in the crystal due to frequency
+mixing processes. The lower intensity of the infrared pulse
+should then lead to a suppression of the HHG. In our experiments with MoS2 monolayer, any propagation effects can be
+excluded. The origin of HHG suppression in the time overlap region is the creation of electron-hole pairs by two-photon
+absorption of the weak near-resonant and strong off-resonant
+infrared pulses. This effect is not present in ref.24, where the
+sum of photon energies of the two pulses is not sufficient to
+create electron-hole pairs in ZnO via two-photon absorption
+and only multiphoton processes are available.
+
+5
+a
+
+b
+
+1
+
+2.3
+
+5th
+6th
+
+2.1
+
+7th
+
+1sB
+
+8th
+9th
+
+Energy (eV)
+
+0.6
+
+10th
+
+0.4
+
+DI
+
+HHG
+
+/I
+
+PUMP
+
+(a.u.)
+
+0.8
+
+1sA
+
+1.7
+
+1.5
+
+0.2
+
+0
+0.2
+
+1.9
+
+0.3
+E g
+
+w (eV)
+
+0.4
+
+0.5
+
+0.1
+0
+
+Absorption coefficient (arb.u.)
+
+FIG. 4. (a) The magnitude of the relative decrease of HHG yield as a function of detuning between the photon energy of the near-resonant
+pulse and the energy of the 1sA exciton resonance. The change of the HHG yield is normalized to the peak intensity of the near-resonant pump
+pulse. (b) Sketch of two-photon generation of excitons for three different photon energies of the near-resonant pulse of 1.65 eV, 1.55 eV and
+1.46 eV.
+
+IV. THEORY OF TWO-PHOTON ABSORPTION IN
+MOS2 MONOLAYER
+
+We consider 7-band model of the TMD monolayer which
+goes beyond the simplest two-band case (see Supporting Information for details). The rate of optical transitions, induced
+simultaneously by two photons can be written as
+2π
+Γ( f , in) =
+|h f |U|ini|2 δ (E f − Ein − h̄ω1 − h̄ω2 ).
+h̄
+
+energy Em (q′ ) due to two-photon absorption
+i
+h
+
+2π
+Γm,q′ =
+|E1 |2 |E2 |2 ∑ |Mq′ ,m,τ |2 δ Em (q′ ) − h̄[ω1 + ω2 ] ,
+h̄
+τ
+(4)
+with the two-photon absorption amplitude
+h hq′ , m, τ , c, v|(Pτ · e )|ν ihν |(Pτ · e )|0i
+
+(1)
+
+Mq′ ,m,τ = ∑
+
+Here h f |U|ini is the matrix element of two-photon process.
+It couples the initial state |ini = |0i (with occupied valence
+bands and empty conduction bands) and final exciton state
+| f i = |q, n, τ , c, vi (with the total momentum q, discrete quantum number n) consisting of an electron in conduction (c)
+band and a hole in valence (v) band of τ = ±1 valley. We
+skip the bands’ spin indices here, because optical transitions
+conserve spin, i.e., couples only the bands with the same spin.
+Here, the operator U is responsible for the two-photon process. It corresponds to the second order processes in perturbation theory, see46,47 . The perturbation operator is taken in the
+form Hint (t) = −P · E, where P is the monolayer’s polarization operator and E is the in-plane electric field of incoming
+light pulses. Taking into account that optical pulses in the experiment are linearly polarized with polarization vectors e1 ,
+e2 , field amplitudes |E1 |, |E2 |, and phases φ1 , φ2 we write
+
++
+
+E =E1 cos(ω1t + φ1 ) + E2 cos(ω2t + φ2 ) =
+=(|E1 |eiφ1 eiω1t + |E1 |e−iφ1 e−iω1t )e1
++(|E2 |eiφ2 eiω2t + |E2 |e−iφ2 e−iω2t )e2
+
+(2)
+
+=(E1∗ eiω1t + E1 e−iω1t )e1 + (E2∗ eiω2t + E2e−iω2t )e2 .
+For this particular case the interaction term takes the form
+Hint (t) = −P · e1 (E1∗ eiω1t + E1 e−iω1t )
+−P · e2 (E2∗ eiω2t + E2 e−iω2t ).
+
+(3)
+
+Using the results of Refs.46,47 we obtain the following expression for the transition rate Γq′ ,m to the excitonic state with
+
+ν
+
+1
+
+2
+
+Eν − h̄ω2
+
+hq′ , m, τ , c, v|(Pτ · e2 )|ν ihν |(Pτ · e1 )|0i i
+.
+Eν − h̄ω1
+
+(5)
+
+Here, the index ν denote all the information about the excitonic states, i.e. ν = q, n, τ , c + j, v − l. Here Eν = En (q′ ) is
+the energy of the exciton in τ valley with momentum q, quantum number n, consisting of an electron in c + j ( j = 0, 1, . . . )
+conduction and a hole in v − l (l = 0, 1, . . . ) valence bands,
+respectively.
+Using this approach we derive the expression for the twophoton absorption coefficient (details can be found in Supporting Information).
+
+β (ω1 , ω2 ) ≈ 256π 3α 2
+
+(ω1 + ω2)3
+ω12 ω22
+
+2
+γ6 γ4∗ A
+γ5 γ2∗ B
++
+×
+(Ec+2 − Ev )(Ec+2 − Ec ) (Ec − Ev−3 )(Ev − Ev−3)
+∞
+1
+×∑
+(6)
+δ (Em (0) − h̄ω1 − h̄ω2 ).
+(m
++
+δ )4
+m=1
+
+
+Here α = e2 /h̄c is the fine structure constant. The parameter β (ω1 , ω2 ) can be associated with the absorption coefficient
+for the monolayer TMD. To evaluate the numerical value of
+this coefficient one needs to know: the k · p coupling parameters γ2 , γ4 , γ5 , γ6 , the energies Ev−3 , Ev , Ec , Ec+2 (see Ref.48 );
+numerical values of A, B, and δ parameters, which can be
+evaluated numerically using k · p parameters48 and the twobody approximation (see Supplementary data in49 ); and the
+spectrum of excitons Em (0) in monolayer TMD50 .
+
+6
+To estimate the absorption coefficient we can use the semianalytical formula for the spectrum of the excitons50
+Em (0) = Eg − Ry∗
+
+γ
+,
+(m + δ )2
+
+(7)
+
+where Eg is the single-particle band gap in the system, Ry∗ =
+µ e4 /(2h̄2 ε 2 ) is the effective Rydberg energy, for the exciton
+with reduced mass µ and dielectric constant ε of the medium
+surrounded the monolayer. Dimensionless parameters γ , δ depend on the ratio of the effective Bohr radius a∗0 = h̄/m0 e2
+and effective in-plane screening length of the monolayer r0∗ =
+r0 /ε . Taking into account the parameters for the considered
+system ε = 1.6, µ = 0.26m0, r0 = 41.5Å, the energy posiA = 1.886 meV
+tions of the 1s states for A and B excitons E1s
+B
+41
+and E1s = 2.032 meV, respectively we obtain Ry∗ ≈ 1.38 eV,
+γ ≈ 0.943, δ ≈ 0.746. Using these parameters we calculate
+the spectrum of the excitons. Then using the Elliott type formula (6) we estimate the absorption coefficient for the first 5 s
+excitonic states (as an example) and broadened delta function
+with Γ = 0.026 meV and present it in the Fig. 4b.
+V.
+
+CONCLUSION
+
+In conclusion, we experimentally investigate the ultrafast
+modulation of high harmonic generation in 2D transition
+metal dichalcogenide MoS2 using resonant and near-resonant
+light. We show that the pre-excitation of high density carriers leads to ultrafast dephasing and suppression of coherent
+interband polarization, which is responsible for macroscopic
+HHG. With the resonant pre-excitation, the dynamics of HHG
+suppression follows the recombination of excitons in the material. With the near-resonant pump pulse with photon energy
+lower than the exciton transition energy, the excitons are generated mainly via two-photon absorption driven by a combination of one photon from the pump pulse and one photon from
+the strong infrared driving pulse. This process occurs only
+when the pulses are overlapped in time on the sample. Combined with the short duration of pulses used in this study, this
+leads to ultrafast modulation of HHG at sub-100 fs timescales,
+thus enabling a new class of fast nonlinear optical devices
+working in the strong-field regime.
+SUPPLEMENTARY MATERIAL
+
+See the supplementary material for more details on the theory of two-photon absorption in MoS2 monolayer.
+ACKNOWLEDGMENTS
+
+The authors would like to acknowledge the support
+by Charles University (UNCE/SCI/010, SVV2020-260590,
+PRIMUS/19/SCI/05, GA UK 1190120) and Czech Science
+Foundation (23-06369S). Co-funded by the European Union
+(ERC, eWaveShaper, 101039339). Views and opinions expressed are however those of the author(s) only and do not
+
+necessarily reflect those of the European Union or the European Research Council. Neither the European Union nor the
+granting authority can be held responsible for them.
+
+AUTHOR DECLARATIONS
+Conflict of Interest
+
+The authors have no conflicts to disclose.
+
+Author Contributions
+
+Pavel Peterka: Investigation (equal), Formal analysis
+(lead), Writing – original draft (lead)., Artur O. Slobodeniuk: Methodology (equal), Software (equal), Tomáš
+Novotný: Methodology (equal), Pawan Suthar: Methodology (equal), Miroslav Bartoš: Resources (lead), František
+Trojánek: Software (equal), Petr Malý: Writing – review
+& editing (supporting), Martin Kozák: Conceptualization
+(lead), Investigation (equal), Methodology (equal), Writing –
+original draft (supporting), Writing – review & editing (lead),
+Supervision (lead).
+
+DATA AVAILABILITY STATEMENT
+
+The data that support the findings of this study are available
+from the corresponding author upon reasonable request.
+
+REFERENCES
+
+1 S. Ghimire, A. D. DiChiara, E. Sistrunk, P. Agostini, L. F. DiMauro,
+
+and
+D. A. Reis, “Observation of high-order harmonic generation in a bulk crystal,” Nat. Phys. 7, 138–141 (2011).
+2 T. T. Luu, M. Garg, S. Y. Kruchinin, A. Moulet, M. T. Hassan, and
+E. Goulielmakis, “Extreme ultraviolet high-harmonic spectroscopy of
+solids,” Nature 521, 498–502 (2015).
+3 G. Vampa, T. Hammond, N. Thiré, B. Schmidt, F. Légaré, C. McDonald,
+T. Brabec, and P. Corkum, “Linking high harmonics from gases and solids,”
+Nature 522, 462–464 (2015).
+4 S. Ghimire and D. A. Reis, “High-harmonic generation from solids,” Nat.
+Phys. 15, 10–16 (2019).
+5 N. Yoshikawa, K. Nagai, K. Uchida, Y. Takaguchi, S. Sasaki, Y. Miyata,
+and K. Tanaka, “Interband resonant high-harmonic generation by valley polarized electron–hole pairs,” Nat. Commun. 10, 3709 (2019).
+6 N. Yoshikawa, T. Tamaya, and K. Tanaka, “High-harmonic generation in
+graphene enhanced by elliptically polarized light excitation,” Science 356,
+736–738 (2017).
+7 G. Vampa, C. McDonald, G. Orlando, D. Klug, P. Corkum, and T. Brabec,
+“Theoretical analysis of high-harmonic generation in solids,” Phys. Rev.
+Lett. 113, 073901 (2014).
+8 D. Golde, T. Meier, and S. W. Koch, “High harmonics generated in semiconductor nanostructures by the coupled dynamics of optical inter-and intraband excitations,” Phys. Rev. B 77, 075330 (2008).
+9 M. Wu, S. Ghimire, D. A. Reis, K. J. Schafer, and M. B. Gaarde, “Highharmonic generation from bloch electrons in solids,” Phys. Rev. A 91,
+043839 (2015).
+
+7
+10 O. Schubert, M. Hohenleutner, F. Langer, B. Urbanek, C. Lange, U. Hut-
+
+tner, D. Golde, T. Meier, M. Kira, S. W. Koch, et al., “Sub-cycle control of
+terahertz high-harmonic generation by dynamical bloch oscillations,” Nat.
+Photonics 8, 119–123 (2014).
+11 G. Vampa, T. Hammond, N. Thiré, B. Schmidt, F. Légaré, C. McDonald,
+T. Brabec, D. Klug, and P. Corkum, “All-optical reconstruction of crystal
+band structure,” Phys. Rev. Lett. 115, 193603 (2015).
+12 P. Suthar, F. Trojánek, P. Malý, T. J.-Y. Derrien, and M. Kozák, “Role of van
+hove singularities and effective mass anisotropy in polarization-resolved
+high harmonic spectroscopy of silicon,” Commun. Phys. 5, 288 (2022).
+13 T. T. Luu and H. J. Wörner, “Measurement of the berry curvature of solids
+using high-harmonic spectroscopy,” Nat. Commun. 9, 916 (2018).
+14 Y. Bai, F. Fei, S. Wang, N. Li, X. Li, F. Song, R. Li, Z. Xu, and P. Liu,
+“High-harmonic generation from topological surface states,” Nat. Phys. 17,
+311–315 (2021).
+15 M. R. Bionta, E. Haddad, A. Leblanc, V. Gruson, P. Lassonde, H. Ibrahim,
+J. Chaillou, N. Émond, M. R. Otto, Á. Jiménez-Galán, et al., “Tracking ultrafast solid-state dynamics using high harmonic spectroscopy,” Phys. Rev.
+Res. 3, 023250 (2021).
+16
+O. Neufeld, J. Zhang, U. D. Giovannini, H. Hübener, and A. Rubio, “Probing phonon dynamics with multidimensional high harmonic
+carrier-envelope-phase spectroscopy,” PNAS 119, e2204219119 (2022),
+https://www.pnas.org/doi/pdf/10.1073/pnas.2204219119.
+17 G. Wang and T.-Y. Du, “Quantum decoherence in high-order harmonic generation from solids,” Phys. Rev. A 103, 063109 (2021).
+18 I. Floss, C. Lemell, K. Yabana, and J. Burgdörfer, “Incorporating decoherence into solid-state time-dependent density functional theory,” Phys. Rev.
+B 99, 224301 (2019).
+19 Z. Wang, H. Park, Y. H. Lai, J. Xu, C. I. Blaga, F. Yang, P. Agostini, and
+L. F. DiMauro, “The roles of photo-carrier doping and driving wavelength
+in high harmonic generation from a semiconductor,” Nat. Commun. 8, 1686
+(2017).
+20 H. Nishidome, K. Nagai, K. Uchida, Y. Ichinose, Y. Yomogida,
+Y. Miyata, K. Tanaka,
+and K. Yanagi, “Control of highharmonic generation by tuning the electronic structure and carrier injection,” Nano Lett. 20, 6215–6221 (2020), pMID: 32787188,
+https://doi.org/10.1021/acs.nanolett.0c02717.
+21 C. Heide, Y. Kobayashi, A. C. Johnson, F. Liu, T. F. Heinz, D. A. Reis,
+and S. Ghimire, “Probing electron-hole coherence in strongly driven 2d
+materials using high-harmonic generation,” Optica 9, 512–516 (2022).
+22 K. Nagai, K. Uchida, S. Kusaba, T. Endo, Y. Miyata, and K. Tanaka, “Effect of incoherent electron-hole pairs on high harmonic generation in atomically thin semiconductors,” arXiv preprint arXiv:2112.12951 (2021).
+23 Y. Wang, F. Iyikanat, X. Bai, X. Hu, S. Das, Y. Dai, Y. Zhang, L. Du,
+S. Li, H. Lipsanen, et al., “Optical control of high-harmonic generation at
+the atomic thickness,” Nano Lett. 22, 8455–8462 (2022).
+24 S. Xu, H. Zhang, J. Yu, Y. Han, Z. Wang, and J. Hu, “Ultrafast modulation
+of a high harmonic generation in a bulk zno single crystal,” Opt. Express
+30, 41350–41358 (2022).
+25 K. F. Mak, C. Lee, J. Hone, J. Shan, and T. F. Heinz, “Atomically thin mos :
+2
+A new direct-gap semiconductor,” Phys. Rev. Lett. 105, 136805 (2010).
+26 H. Liu, Y. Li, Y. S. You, S. Ghimire, T. F. Heinz, and D. A. Reis, “Highharmonic generation from an atomically thin semiconductor,” Nat. Phys.
+13, 262–265 (2017).
+27 J. Cao, F. Li, Y. Bai, P. Liu, and R. Li, “Inter-half-cycle spectral interference
+in high-order harmonic generation from monolayer mos2 ,” Opt. Express 29,
+4830–4841 (2021).
+28 Y. Kobayashi, C. Heide, H. K. Kelardeh, A. Johnson, F. Liu,
+T. F. Heinz, D. A. Reis, and S. Ghimire, “Polarization flipping
+of even-order harmonics in monolayer transition-metal dichalcogenides,”
+Ultrafast Science 2021 (2021), 10.34133/2021/9820716,
+https://spj.science.org/doi/pdf/10.34133/2021/9820716.
+29 L. Yue, R. Hollinger, C. B. Uzundal, B. Nebgen, Z. Gan, E. Najafidehaghani, A. George, C. Spielmann, D. Kartashov, A. Turchanin, et al.,
+“Signatures of multiband effects in high-harmonic generation in monolayer
+
+mos2 ,” Phys. Rev. Lett. 129, 147401 (2022).
+30 M. Kozák, P. Peterka, J. Dostál, F. Trojánek,
+
+and P. Malỳ, “Generation of few-cycle laser pulses at 2 µ m with passively stabilized carrierenvelope phase characterized by f-3f interferometry,” Opt. Laser Technol.
+144, 107394 (2021).
+31 S. H. Autler and C. H. Townes, “Stark effect in rapidly varying fields,” Phys.
+Rev. 100, 703 (1955).
+32 V. Ritus, “Shift and splitting of atomic energy levels by the field of an electromagnetic wave,” Sov. Phys. JETP 24, 1041–1044 (1967).
+33 C. Ell, J. Müller, K. El Sayed, and H. Haug, “Influence of many-body
+interactions on the excitonic optical stark effect,” Phys. Rev. Lett. 62, 304
+(1989).
+34 D. Chemla, W. Knox, D. Miller, S. Schmitt-Rink, J. Stark, and R. Zimmermann, “The excitonic optical stark effect in semiconductor quantum wells
+probed with femtosecond optical pulses,” J. Lumin. 44, 233–246 (1989).
+35 N. B. Delone and V. P. Krainov, “Ac stark shift of atomic energy levels,”
+Phys.-Usp. 42, 669 (1999).
+36 J. Kim, X. Hong, C. Jin, S.-F. Shi, C.-Y. S. Chang, M.-H. Chiu, L.-J. Li, and
+F. Wang, “Ultrafast generation of pseudo-magnetic field for valley excitons
+in wse2 monolayers,” Science 346, 1205–1208 (2014).
+37 E. J. Sie, J. W. McIver, Y.-H. Lee, L. Fu, J. Kong, and N. Gedik, “Valleyselective optical stark effect in monolayer ws2 ,” Nat. Mater. 14, 290–294
+(2015).
+38 E. J. Sie, C. H. Lui, Y.-H. Lee, L. Fu, J. Kong, and N. Gedik, “Large,
+valley-exclusive bloch-siegert shift in monolayer ws2 ,” Science 355, 1066–
+1069 (2017).
+39 T. LaMountain, H. Bergeron, I. Balla, T. K. Stanev, M. C. Hersam, and
+N. P. Stern, “Valley-selective optical stark effect probed by kerr rotation,”
+Phys. Rev. B 97, 045307 (2018).
+40 P. D. Cunningham, A. T. Hanbicki, T. L. Reinecke, K. M. McCreary, and
+B. T. Jonker, “Resonant optical stark effect in monolayer ws2 ,” Nat. Commun. 10, 5539 (2019).
+41 A. Slobodeniuk, P. Koutenský, M. Bartoš, F. Trojánek, P. Malý, T. Novotný,
+and M. Kozák, “Semiconductor bloch equation analysis of optical stark
+and bloch-siegert shifts in monolayer wse2 and mos2 ,” Phys. Rev. B 106,
+235304 (2022).
+42 A. Slobodeniuk, P. Koutenský, M. Bartoš, F. Trojánek, P. Malý, T. Novotný,
+and M. Kozák, “Giant valley-selective stark and bloch-siegert shifts
+of exciton resonances in wse2 and mos2 monolayers,” arXiv preprint
+arXiv:2204.00842 (2022).
+43 A. Splendiani, L. Sun, Y. Zhang, T. Li, J. Kim, C.-Y. Chim, G. Galli, and
+F. Wang, “Emerging photoluminescence in monolayer mos2 ,” Nano Lett.
+10, 1271–1275 (2010).
+44 Y. Niu, S. Gonzalez-Abad, R. Frisenda, P. Marauhn, M. Drüppel, P. Gant,
+R. Schmidt, N. S. Taghavi, D. Barcons, A. J. Molina-Mendoza, et al.,
+“Thickness-dependent differential reflectance spectra of monolayer and
+few-layer mos2 , mose2 , ws2 and wse2 ,” Nanomaterials 8, 725 (2018).
+45
+R. Frisenda, Y. Niu, P. Gant, A. J. Molina-Mendoza, R. Schmidt, R. Bratschitsch, J. Liu, L. Fu, D. Dumcenco, A. Kis, et al., “Micro-reflectance and
+transmittance spectroscopy: a versatile and powerful tool to characterize 2d
+materials,” J. Phys. D: Appl. Phys. 50, 074002 (2017).
+46 L. D. Landau and Lifshitz, Quantum mechanics: non-relativistic theory,
+Vol. 3 (Butterworth-Heinemann, 1981).
+47 J. J. Sakurai and E. D. Commins, “Modern quantum mechanics,” (2020).
+48 D. V. Rybkovskiy, I. C. Gerber, and M. V. Durnev, “Atomically inspired
+k· p approach and valley zeeman effect in transition metal dichalcogenide
+monolayers,” Phys. Rev. B 95, 155406 (2017).
+49 Ł. Kipczak, A. O. Slobodeniuk, T. Woźniak, M. Bhatnagar, N. Zawadzka, K. Olkowska-Pucko, M. Grzeszczyk, K. Watanabe, T. Taniguchi,
+A. Babiński, et al., “Analogy and dissimilarity of excitons in monolayer and
+bilayer of mose2 ,” 2D Mater. 10, 025014 (2023).
+50 M. Molas, A. Slobodeniuk, K. Nogajewski, M. Bartos, A. Babiński,
+K. Watanabe, T. Taniguchi, C. Faugeras, M. Potemski, et al., “Energy
+spectrum of two-dimensional excitons in a nonuniform dielectric medium,”
+Phys. Rev. Lett. 123, 136801 (2019).
+
+

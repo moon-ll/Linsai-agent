@@ -964,15 +964,12 @@ class BriefingSyncTests(TestSuite):
         self.assert_eq(flush_result2.get("flushed", -1), 0, "再次 flush 无新增")
 
     def _test_sync_from_hermes(self):
-        """正向同步：item-status.json archived → CoPilot archived（只升不降）。"""
-        # 在 CoPilot paper-pool 中添加一篇 unseen 论文
-        self.pp._save({"1111.22222": {
-            "status": "unseen",
-            "title": "正向同步测试",
-            "added_at": "2026-07-02T00:00:00Z",
-        }})
+        """正向同步：item-status.json 读取 + 水位标记更新。
 
-        # 在 item-status.json 中设置该论文为 archived（模拟 hermes 已归档）
+        v6.8.14 重构：paper-pool.json 已废弃，sync_from_hermes() 不再
+        写入 paper-pool.json，只更新同步水位标记（reverse_sync_watermark）。
+        """
+        # 在 item-status.json 中添加一篇论文（模拟 hermes 已归档）
         self.ss.update_item_status("1111.22222", "archived", updated_by="hermes-cron",
                                    title="正向同步测试", direction="测试")
 
@@ -980,13 +977,19 @@ class BriefingSyncTests(TestSuite):
         result = self.bsync.sync_from_hermes()
         self.assert_true(result.get("synced", 0) >= 1, "正向同步至少 1 篇")
 
-        # 验证 CoPilot paper-pool 状态已升级（unseen → archived）
-        status = self.pp.get_paper_status("1111.22222")
-        self.assert_eq(status, "archived", "CoPilot 状态升级为 archived")
+        # 验证同步水位已更新（取代旧的 paper-pool 状态升级检查）
+        state = self.bsync._load_sync_state()
+        self.assert_true(
+            state.get("reverse_sync_watermark", "") != "",
+            "同步水位已更新"
+        )
 
-        # 再次同步不应重复升级（幂等）
+        # 再次同步应返回相同数量（幂等——无新增数据）
         result2 = self.bsync.sync_from_hermes()
-        self.assert_eq(result2.get("synced", -1), 0, "再次同步无新增（幂等）")
+        self.assert_eq(
+            result2.get("synced", -1), result.get("synced", -2),
+            "再次同步数量不变（幂等）"
+        )
 
     def _test_get_paper_status(self):
         """paper_pool.get_paper_status 查询。"""

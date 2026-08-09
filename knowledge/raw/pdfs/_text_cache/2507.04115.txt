@@ -1,0 +1,1295 @@
+arXiv:2507.04115v2 [physics.optics] 5 Feb 2026
+
+Modular multiscale approach to modelling
+high-harmonic generation in gases
+Jan Vábeka,b,∗, Tadeáš Němeca,b , Stefan Skupinc , Fabrice Catoired
+a
+
+ELI Beamlines Facility, The Extreme Light Infrastructure ERIC, Za Radnicí 835, Dolní
+Břežany, 25241, Czech Republic,
+b
+Czech Technical University in Prague, Faculty of Nuclear Sciences and Physical
+Engineering, Břehová 7, Prague 1, 11519, Czech Republic,
+c
+Université Claude Bernard Lyon 1, CNRS, Institut Lumière Matière,
+UMR5306, Villeurbanne, F-69100, France,
+d
+Centre Lasers Intenses et Applications, Université de Bordeaux-CNRS-CEA, Talence
+Cedex, 33405, France,
+
+Abstract
+We present a modular user-oriented simulation toolbox for studying highharmonic generation in gases [1]. The first release consists of the computational pipeline to 1) compute the unidirectional IR-pulse propagation in
+cylindrical symmetry, 2) solve the microscopic responses in the whole macroscopic volume using a 1D-TDSE solver, 3) obtain the far-field harmonic field
+using a diffraction-integral approach. The code comes with interfaces and
+tutorials, based on practical laboratory conditions, to facilitate the usage
+and deployment of the code both locally and in HPC-clusters. Additionally,
+the modules are designed to work as stand-alone applications as well, e.g.,
+1D-TDSE is available through Pythonic interface.
+1. Introduction
+This computational toolbox results from a joint effort between the high
+harmonic generation (HHG) and fs-laser filamentation communities. It combines 1) a code initially designed to study the reshaping and filamentation
+∗
+
+Corresponding author
+Email addresses: jan.vabek@eli-beams.eu (Jan Vábek), vabekjan@fjfi.cvut.cz
+(Jan Vábek), stefan.skupin@cnrs.fr (Stefan Skupin),
+fabrice.catoire@u-bordeaux.fr (Fabrice Catoire)
+
+due to non-linear laser pulse propagation, and 2) codes for solving the timedependent Schrödinger equation (TDSE) and for modelling HHG and simulation of the subsequent linear XUV-field propagation. The result is a modular codebase that facilitates the modelling of HHG experiments, encompassing both the macroscopic and microscopic aspects of the phenomenon.
+The first release [2] is limited to modelling under linear polarisation and
+cylindrical symmetry during propagation. The primary goal is to establish a detailed one-to-one correspondence with laboratory HHG experiments.
+However, the modules are also designed to be used independently to address
+different aspects of HHG and related areas of atomic and plasma physics.
+Before delving into the specifics of the code, let us first explore the physical
+context of HHG.
+HHG in a gaseous medium produces coherent XUV radiation and is the result of a highly non-linear response of the medium induced by an infrared (IR)
+driving laser pulse [3, 4, 5, 6, 7]. The fundamental physical mechanism behind
+HHG is the microscopic interaction of a single atom with the external laser
+field, explained by the three-step model [8] that is rigorously encompassed by
+solving the TDSE. However, the efficiency of IR-to-XUV conversion remains
+low, which constitutes a challenge for applications requiring high-intensity
+XUV pulses, such as XUV–XUV pump–probe experiments [9] or non-linear
+ionization [10]. However, the realisation of the process usually occurs on
+a macroscopic scale corresponding to the laboratory environment using a gas
+cell or jet as the generating medium. This brings additional complexity due
+to the non-linear IR dynamics during the propagation such as plasma defocusing that reshapes the driving pulse. This dynamics then naturally impacts
+the HHG at different macroscopic points in the medium. The description of
+XUV propagation is less complicated due to its low intensity, as significant
+self-induced non-linear reshaping is ruled out. In summary, the coupling of
+microscopic and macroscopic aspects remains computationally challenging
+and of particular interest for applications.
+Generally speaking, the non-linear propagation of a pulse in a medium
+would require a feedback loop coupling the evolutions of the electromagnetic
+field and quantum-mechanical treatment of the response of the medium [11].
+This loop is illustrated in Fig. 1. This idea is similar to the key concept
+introduced for particle-in-cell codes (see, e.g., [12]), except that the kinetic
+treatment of charged particles is replaced by the microscopic response of the
+electrons within the influence of atomic nuclei. However, this solution constitutes a significant computational challenge which could be avoided without
+2
+
+too constraining assumptions, as we will present in this manuscript.
+
+Figure 1: General MMA scheme showing the coupling of the macroscopic field propagation governed by the macroscopic Maxwell’s equations together with microscopic dynamics
+given by TDSE. It presents the idea of the full feedback loop, which poses a great computational challenge in a general case.
+
+The present model originates from the integration of multiple numerical
+codes developed within the high-harmonic generation (HHG) and femtosecond laser filamentation communities. The IR propagation was first described
+by a scalar envelope model in cylindrical symmetry [13, 14, 15, 16, 17, 18] or
+fully space- and time resolved [19, 20, 21, 22], which is sufficient for many applications involving not too short laser pulses. The code was then upgraded
+to the unidirectional pulse propagation equation (UPPE) [23] to be able to
+describe larger frequency bandwidths [24, 25, 26, 27], and a vectorial model
+was also implemented [28, 29, 30]. Early HHG approaches were mainly restricted to regimes in which macroscopic propagation effects and reshaping
+of the driving-field could be safely neglected [31, 32, 33]. Subsequent developments progressively relaxed these assumptions, leading to models that
+self-consistently account for the propagation-induced evolution of the driving
+field [34]. The direction for future development is to use the code to provide
+more detailed insight into advanced beam geometries [35] or to extend the
+capability to study generating schemes requiring vectorial fields [36].
+The toolbox addresses the different HHG subproblems through a collection of dedicated codes, each focussing on a specific component:
+1. The non-linear laser propagation: This is computed under cylindrical symmetry using the CUPRAD (Complex Unidirectional Propa3
+
+gator, RADial symmetry in the transverse plane) code. This is the first
+module in the chain and can be run independently.
+2. The microscopic response: The microscopic response is obtained
+by numerically solving the TDSE. This code is compiled as an MPI
+application and a dynamic library which can be accessed directly from
+Python.
+3. XUV propagation: The XUV field propagation is modelled using a
+diffraction integral. This module is implemented in Python and can be
+fed with any user-defined microscopic dipole.
+These modules can be chained together, forming a pipeline that offers a
+comprehensive multiscale description of HHG (see Fig. 2). Data exchange
+between modules is facilitated by the HDF5 format, ensuring that all inputs
+and outputs are consistent in one file and easy to manipulate. Thus, the
+whole simulation pipeline can be executed at once.
+This article serves as the top layer of the documentation, discussing the
+physical context and computational methods used in the code. It covers:
+• IR propagation (Section 2);
+• High Harmonic Generation (HHG) and propagation (Section 3);
+• Details of the implementation of the MMA scheme (Section 4);
+• Details of the user interface (Section 5);
+• Usage of the Pythonic CTDSE library (Section 6);
+• Practical examples to demonstrate usage (Section 7).
+In addition to this paper, the complete documentation of the modules is
+available in the associated Git repository [1, 2]. This repository includes
+Jupyter notebooks that show the use of the code (see also Section 7). The
+key parts of the model are documented directly in the source code of the
+computational routines. Additionally, the repository provides guidelines for
+using the code within Docker containers and on HPC clusters.
+For the sake of clarity, we use the symbol fˆ to represent the temporal Fourier transform of f . All physical descriptions are given in SI units,
+except for the microscopic physics sections where different units are used
+(Sections 3.1, 4.2 and 6).
+4
+
+2. Infrared Propagation
+In this section, we present the model equations used to describe the propagation of ultrashort ionising pulses in gases. For the parameter ranges considered here, a complex envelope formulation of the scalar optical field, based
+on an extended nonlinear Schrödinger equation in cylindrical coordinates,
+provides an adequate description [37, 38]. The propagation is expressed in
+terms of the complex field envelope using the slowly varying envelope approximation (SVEA) in both space and time, while allowing for higher-order
+effects such as space–time coupling and self-steepening [39]. Future versions
+of the code will incorporate the unidirectional pulse propagation equation
+[23], which does not rely on the SVEA and enables the modelling of fewcycle pulses. The current restriction to linearly polarised (scalar) fields and
+cylindrical symmetry will also be relaxed in future releases. The following
+section provides a brief outline of the propagation models implemented in
+the current version of CUPRAD.
+Our starting point is macroscopic Maxwell’s equations
+ϱ(r, t) − ∇ · P (r, t)
+,
+ϵ0
+∇ · B(r, t) = 0 ,
+∂
+∇ × E(r, t) = − B(r, t) ,
+∂t
+∂
+∂
+∇ × H(r, t) = J f (r, t) + ϵ0 E(r, t) + P (r, t) .
+∂t
+∂t
+∇ · E(r, t) =
+
+(1a)
+(1b)
+(1c)
+(1d)
+
+All fields involved—namely the electric field E, the polarisation vector P ,
+the magnetic field H, the magnetic induction vector B, the macroscopic
+charge density ϱ and the corresponding current density J f —are real-valued
+quantities. Each of these fields is physically associated with specific processes: The polarisation P represents the microscopic bound response of the
+medium, encompassing both bound–bound contributions related to nonlinear χ(n) processes and bound–continuum interactions such as high-harmonic
+generation (HHG). The current density J f , on the other hand, accounts for
+the dynamics of free carriers, particularly those generated by ionisation. A
+more detailed description of these quantities is provided in Section 3.1.
+Gases are optically isotropic and non-magnetisable media that exhibit
+a nonlinear polarisation vector. Provided that the spectral range of the
+laser field lies sufficiently far from any material resonances, the standard
+5
+
+framework of nonlinear optics can be applied. In this regime, the polarisation
+vector P can be expressed as a power series in E:
+b (r, ω) = P
+b (1)(r, ω) + P
+b (3)(r, ω) + P
+b (5)(r, ω) + P
+b (7)(r, ω) + . . .
+P
+Z
+Z
+X
+Pbµ(j) (r, ω) = ϵ0
+· · · χ(j)
+µα1 ...αj (r, −ωσ ; ω1 , . . . , ωj )
+
+(2a)
+(2b)
+
+α1 ...αj
+
+bα1 (r, ω1 ) . . . E
+bα (r, ωj )δ(ω − ωσ )dω1 . . . dωj
+×E
+j
+ωσ = ω1 + . . . + ωj .
+
+(2c)
+
+For magnetic induction, we have
+b
+c ω).
+B(r,
+ω) = µ0 H(r,
+
+(3)
+
+For technical convenience, we express these relations in Fourier space and
+the corresponding transformations are defined as
+Z
+1
+b
+F (r, t)eiωt dt
+(4)
+F (r, ω) = √
+2π Z
+1
+b (r, ω)e−iωt dω.
+F (r, t) = √
+F
+(5)
+2π
+In Equation (2a), we account for the fact that, in isotropic media, all even↔
+order susceptibility tensors χ (j) with even j vanish due to considerations of
+spatial symmetry [40]. The subscripts µ, α1 , . . ., αj in Equation (2b) denote
+the respective field vector component in Cartesian coordinates. As indicated
+by the summation symbol, the indices α1 , . . ., αj are summed over the three
+spatial directions x, y, and z. In the following, we specify Equation (2a)
+for the media considered in this work. As will be shown later, for the field
+intensities relevant to our study, the condition |P (3) | ≪ |P (1) | is already
+satisfied. Consequently, we truncate the expansion (2a) after the third-order
+term.1
+b (1) can be further simplified. In
+The expression for linear polarisation P
+↔
+an isotropic medium, the susceptibility tensor χ (1) is diagonal, leaving only
+(1)
+one independent element component: χ(1)
+µα = χxx δµα . Hence, according to the
+convention χ(1) (r, ω) = χ(1)
+xx (r, −ω; ω), we have
+b (1)(r, ω) = ϵ0 χ(1) (r, ω)E(r,
+b
+P
+ω),
+1
+
+(6)
+
+CUPRAD also allows the inclusion of fifth-order nonlinearities; however, for clarity,
+they are omitted from the present derivation.
+
+6
+
+and we define the scalar dielectric function
+ϵ(r, ω) = 1 + χ(1) (r, ω).
+
+(7)
+
+b (3) is determined by the 81
+The third order nonlinear polarisation vector P
+↔(3)
+components of the general fourth-rank tensor χ . Once again, taking advantage of the isotropy of the medium and applying spatial symmetry relations
+[40], it can be shown that
+(3)
+(3)
+(3)
+χ(3)
+µα1 α2 α3 = χxxyy δµα1 δα2 α3 + χxyyx δµα3 δα1 α2 + χxyxy δµα2 δα1 α3 .
+
+(8)
+
+Furthermore, we restrict our analysis to media that exhibit homogeneous
+nonlinearity and to linearly polarised electric fields of the form E = Ex ex .
+Under these conditions, only a single relevant component of the susceptibility
+tensor contributes, and with the definition
+(3)
+(3)
+(3)
+χ(3) = χ(3)
+xxxx = χxxyy + χxyyx + χxyxy
+
+(9)
+
+we have
+b (3)
+
+P
+
+ZZ
+(r, ω) = ex ϵ0
+
+χ(3) (ω; ω1 , ω2 , ω − ω1 − ω2 )
+
+(10)
+
+bx (r, ω1 )E
+bx (r, ω2 )E
+bx (r, ω − ω1 − ω2 )dω1 dω2 .
+×E
+As expected, in an isotropic medium the nonlinear polarisation vector is
+parallel to the electric field.
+In media of interest, such as air or noble gases, the dielectric function ϵ(ω)
+is real and positive for wavelengths extending from
+p infrared to ultraviolet.
+The linear refractive index is defined by n(ω) = ϵ(ω), and the corresponding wavenumber is defined by k(ω) = ωn(ω)/c. We consider the propagation
+of a pulsed beam with a spectrum centred around the operating frequency
+ω0 . Assuming that the spectral bandwidth ∆ω is sufficiently narrow, the
+wavenumber k(ω) can be expressed as a Taylor series expansion around ω0 :
+1
+1
+k(ω) = k0 + k ′ ω + k ′′ ω 2 + k ′′′ ω 3 + . . . ,
+2
+6
+
+(11a)
+
+k0 k ′′′ 3
+ω + . . . . (11b)
+3
+where ω = ω − ω0 . The complex slowly varying envelope function E of the
+electric field E is defined by
+r
+ω0 µ0
+(12)
+E(r, t) =
+E(x, y, z, t)ei(k0 z−ω0 t) + c.c..
+2k0
+k 2 (ω) = k02 + 2k0 k ′ ω + k ′2 ω 2 + k0 k ′′ ω 2 + k ′ k ′′ ω 3 +
+
+7
+
+Note that this introduces the variable E and no approximation is made at this
+stage; especially, the phase of E carries chirps and shifts of the fundamental
+frequency. As already mentioned, we consider linearly polarised light, that
+is, the x-component of the optical field is assumed to be the dominant one,
+|Ex | ≫ |Ey,z |, and we write E = Ex . The field envelope E is assumed to change
+slowly in α = x, y, z and t
+∂
+E
+∂α
+∂
+E
+∂t
+
+≪ k0 |E|
+
+(13a)
+
+≪ ω0 |E| .
+
+(13b)
+
+This is justified if the field envelope E does not change on length scales
+comparable to the wavelength λ = 2π/k0 and on time scales comparable to
+the optical cycle Tcyc = 2π/ω0 .
+Strictly speaking, evaluating the third-order nonlinear polarisation vector
+(3)
+P for optical pulses requires detailed knowledge of the frequency dependence of the nonlinear susceptibility across the relevant spectral range [see
+Eq. (10)]. However, this dependence can generally be neglected when the
+laser frequency lies far from any material resonances. In this case, we adopt
+a commonly used approximation for the third-order nonlinearity in gases,
+expressed as
+r
+ω0 µ0
+(3)
+2nb n2 Ieff (t)E(t)ei(k0 z−ω0 t) + c.c.,
+(14a)
+P (t) = ϵ0
+2k0
+Z
+2
+Ieff (t) = R(t − t′ ) |E(t′ )| dt′ ,
+(14b)
+R(t) = (1 − xdK )δ(t) + xdK
+
+1 + Ω2 τK2
+Θ(t)e−t/τK sin(Ωt),
+ΩτK2
+
+(14c)
+
+where δ denotes the Dirac delta distribution and Θ the Heaviside step function. This intensity-dependent nonlinear polarisation–commonly referred to
+as the Kerr response–neglects third-harmonic generation, which is strongly
+suppressed by the large phase mismatch ∆k = 3k0 − k(3ω0 ) (for instance,
+∆k ≈ −5 cm−1 for 800 nm in air). For noble gases, the Kerr response is
+purely instantaneous (xdK = 0), corresponding to the electronic contribution ∼ δ(t), which originates from bound electrons. The associated response
+time, on the order of a few femtoseconds or less, is much shorter than the
+8
+
+pulse durations considered here. In contrast, for air and other molecular
+gases, a delayed component proportional to exp(−t/τK ) appears, weighted
+by xdK . This term represents the response that results from the movement of
+the nuclei, i.e. the ro-vibrational Raman contribution, with a characteristic
+delay time τK and resonance frequency Ω comparable to the pulse durations
+of ∼ 100 fs considered in this study.
+As noted above, at high intensities, one must model both the ionisation of gas atoms or molecules and the feedback of the generated charge
+carriers on the laser field. Depending on the gas and the field intensity, various photoionisation models may be employed by setting appropriate input
+parameters. Our implementation intrinsically contains a simple multiphoton ionisation rate or the more general Perelomov–Popov–Terent’ev (PPT)
+theory [41]. These ionisation models provide a cycle-averaged, intensitydependent photoionisation rate WP I (I) that governs the temporal evolution
+of the electron density ϱe . For consistency, we also include a second ionisation pathway: avalanche (impact) ionisation due to free electrons that are
+accelerated by the laser field and induce further ionisation. In gases, this
+mechanism is typically much weaker than that of photoionisation. The full
+evolution equation for the electron density is therefore
+∂
+ϱe (r, t) = [WP I (I) + WAI (I, ϱe )] ϱnt (r, t),
+∂t
+
+(15)
+
+where WAI denotes the avalanche ionisation rate and ϱnt the neutral density2 .
+At this stage, we consider only weakly ionised plasma: accounting only for
+single ionisation. This provides the link
+ϱnt (r, t) + ϱe (r, t) = ϱ0 (r),
+
+(16)
+
+where ϱ0 (r) is the initial time-independent gas-density profile. Therefore,
+ϱnt includes the depletion of neutrals by ionisation. We neglect carrier diffusion, which occurs on ≳ 1 ps timescales and thus does not affect femtosecond
+pulses. This means that the r-dependence is only obtained through the initial density distribution ϱ0 . Within this framework, the electron density ϱe
+is treated as a slowly varying quantity, analogous to E.
+The oscillatory motion of the free electrons driven by the electric field
+is described by using the Drude model. We consider a gas of free electrons
+2
+
+In CUPRAD, recombination can also be included; for conciseness, we omit it here.
+
+9
+
+embedded in a uniform positive ionic background. This background ensures
+charge neutrality, so that the macroscopic charge density ϱ as introduced in
+Eq. (1a) always satisfies
+ϱ = 0.
+(17)
+Since the ion mass is a few thousand times larger than the electron mass, we
+neglect the motion of ions and, therefore, their contribution to the current
+density. Under these assumptions, the dynamics of the free-electron current
+density J e (r, t) is governed by
+1
+q2
+∂
+J e + J e = e ϱe E.
+∂t
+τ0
+me
+
+(18)
+
+Here qe is for the electron charge, τ0 the electron collision time, and me
+the electron mass. The motion of free electrons is mainly governed by the
+rapid oscillations of the linearly polarised optical field at frequency ω0 . It is
+therefore convenient to introduce a complex-envelope function J e ,
+r
+ω0 µ0
+J e (x, y, z, t)ei(k0 z−ω0 t) + c.c.,
+(19)
+J e (r, t) =
+2k0
+analogous to Equation (12). We can solve Equation (18) formally as
+q2
+Je = e
+me ω0
+
+
+−1
+1
+−iT̂ +
+ϱe E,
+τ0 ω0
+
+(20)
+
+where T̂ = 1 + i∂t /ω0 . A slowly varying envelope condition similar to (13b)
+can be formulated for the product ϱe Je and reads |∂t ϱe E|/ω0 ≪ |ϱe E|. Thus,
+together with 1/τ0 ω0 ≪ 1, it is justified to simplify Equation (20) to
+
+
+qe2
+1
+−1
++ iT̂
+ϱe E,
+(21)
+Je =
+me ω0 τ0 ω0
+which is much more convenient for the following derivation.
+As in the case of the ionisation rates, it turns out that, for consistency, we
+have to consider a second contribution to the current density: The generation
+of free carriers by photo-ionisation. Because this term will lead to a loss
+current in our final equations, we call it J IL and
+J f (r, t) = J e (r, t) + J IL (r, t).
+10
+
+(22)
+
+The corresponding complex slowly varying envelopes J and J IL are defined
+as analogues of J e , cf. Eq. (19).
+Using the principle of energy conservation, self-consistent expressions can
+be derived for WAI and J IL . The temporal evolution of the local energy
+density w in the medium is determined by
+d
+w(r, t) = J f (r, t) · E(r, t).
+dt
+
+(23)
+
+Consequently, we can compute the energy transferred to the medium by the
+pulse at the position r in a small volume ∆V = λ30 by
+Z λ0 Z λ0 Z λ0 Z ∞
+
+W∆V (r) =
+J f (r + r ′ , t) · E(r + r ′ , t)dtd3 r′
+(24)
+0
+0
+0
+−∞
+Z
+µ0 qe2
+ω0 µ0
+3
+= λ0
+ϱe (r, t) |E(r, t)|2 +
+[J IL (r, t) · E ∗ (r, t) + c.c.] dt.
+me τ0 ω0 k0
+2k0
+Terms containing iT −1 vanish upon integration by parts, while rapidly oscillating components proportional to exp[±i2(k0 z − ω0 t)] do not make a net
+contribution to the integral. The specific choice of ∆V is arbitrary: its size
+must be large compared to the characteristic scale of electron displacement,
+but small relative to the spatial variation of the slowly varying envelopes.
+However, the energy transferred from the optical field to the medium
+leads to the ionisation of neutral gas atoms or molecules. We assume that all
+collisional energy losses–represented by the term ∼ 1/τ0 in Equation (18)–
+contribute to avalanche ionisation. Consequently, the total energy deposited
+in the small volume ∆V can be written as
+Z
+3
+W∆V (r) = λ0 Ui [WP I (I) + WAI (I, ϱe )] ϱnt (r, t)dt,
+(25)
+where Ui denotes the ionisation energy of atoms or molecules. The term ∝
+WP I accounts for the energy consumption associated with photo-ionisation,
+while the term ∝ WAI represents the contribution of avalanche ionisation
+to energy consumption. In the slowly varying envelope approximation, the
+energy transfer is considered local and instantaneous. Since both ionisation
+processes occur on time scales comparable to or shorter than the optical cycle,
+and the free-electron motion is confined to nanometre scales, it is justified
+to omit the time integration when equating Equations (24) and (25). This
+11
+
+yields the local energy conservation relation
+ω0 µ0
+µ0 qe2
+ϱe |E|2 +
+Re(J IL · E ∗ ) = Ui WP I ϱnt + Ui WAI ϱnt .
+me τ0 ω0 k0
+k0
+
+(26)
+
+As stated above, both WAI and J IL can be derived in a self-consistent
+manner. Equation (26) establishes a direct link between these quantities and
+the known parameters of the system. However, additional considerations are
+required to ensure their uniqueness. First, we impose that J IL only accounts
+for energy losses, i.e. Im(J IL · E ∗ ) = 0. This is primarily a formal constraint,
+as there is no physical reason to expect that ionisation affects the optical
+field in any way other than through absorption. Second, we assume that
+the current density J IL arises exclusively from photo-ionisation and that it
+is parallel to the electric field E. Under these assumptions, Equation (26)
+yields
+k0
+WP I
+(27)
+J IL =
+Ui 2 ϱnt E,
+ω0 µ0 |E|
+and with σ = µ0 qe2 /me τ0 ω0 k0
+WAI =
+
+σ
+ϱe |E|2 .
+Ui ϱnt
+
+(28)
+
+We now justify the neglect of the term ∇ · E in the derivation of the wave
+equation. Under the present assumptions, Equation (1a) reads
+∇ · P (3)
+∇·E =−
+,
+ϵ0 ϵ
+
+(29)
+
+and our goal is to show that |∇ · E| ≪ |∂x Ex |. Although the expression
+for the nonlinear polarisation P (3) is rather complex, its magnitude scales
+as ∼ 2ϵ0 nb n2 IE. For the gases and intensity ranges considered here, the
+condition |n2 I| ≪ nb = n(ω0 ) holds. After some algebra and using (13a) one
+can find that |∇ · P (3) |/ϵ0 ϵ ≪ |∂x Ex |. Hence, ∇ · E = 0 is justified, and we
+are able to derive the wave equation
+ 2
+
+1 ∂2
+∂
+∂
+∆E − 2 2 E = µ0
+P + Jf .
+(30)
+c ∂t
+∂t2
+∂t
+With the slowly varying envelopes and the expressions for polarisation [Equations (2a), (6), and (14)] and current density [Equations (21), (22), and (27)]
+12
+
+derived above we get
+
+2
+Z
+∂
+b ω)e−iωt dω
++ ik0 E + ∆⊥ E + k 2 (ω0 + ω)E(r,
+∂z
+Z
+2k02 n2 2
+k2
+2
+=−
+T̂
+R(t − t′ ) |E(t′ )| dt′ E + 20 ϱe E
+nb
+nb ϱ c
+
+
+WP I
+− ik0 T̂ σϱe E + Ui 2 ϱnt E ,
+|E|
+
+(31)
+
+where ϱc = me ϵ0 ω02 / qe2 is the critical plasma density.
+Our objective is to model the evolution of short laser pulses propagating
+in gaseous media such as noble gases and air. These pulses propagate along
+the z-axis with a well-defined velocity. In the linear regime, they travel at
+the group velocity vg (ω0 ) = 1/k ′ . It is safe to assume, under the present
+conditions, that the impact of nonlinear effects on vg is small. Consequently,
+the derivative of the field envelope E with respect to z is primarily governed
+by pulse motion such that
+∂
+∂
+∂
+E + k′ E ≪
+E .
+∂z
+∂t
+∂z
+
+(32)
+
+By being transformed into coordinates moving with the pulse, defined by
+t̃ = t−k ′ z and z̃ = z, the dependence of the field envelope on the propagation
+variable becomes even weaker. Using Eqs. (13) and (32) we find
+∂
+∂
+E = |∂z E + k ′ ∂t E| ≪
+E ≪ k0 |E| .
+∂ z̃
+∂z
+
+(33)
+
+For simplicity, the tilde notation will be dropped after this transformation.
+Using the Taylor expansion (11b), the left-hand side of Eq. (31) becomes
+
+
+
+
+∂
+k′ ∂
+i ∂
+i∆⊥ E ik ′′
+k′ ∂
+i k ′′′ ∂ ∂ 2 E
+.
+1+i
+−
+E−
++
+1+i
++
+∂z
+k0 ∂t 2k0 ∂z
+2k0
+2
+k0 ∂t 3 k ′′ ∂t ∂t2
+(34)
+′
+In gaseous media, it is reasonable to assume k ≈ 1/c, nb ≈ 1, and we can
+conveniently replace 1 + ik ′ ∂t /k0 in (34) by the operator T̂ introduced earlier. Using the relation (33), we further neglect in (34) the second derivative
+with respect to z. After applying the inverse operator T̂ −1 , the resulting
+13
+
+propagation equation reads
+i −1
+∂
+k ′′ ∂ 2
+k ′′′ ∂ 3
+E−
+T̂ ∆⊥ E + i
+E
+−
+E
+(35)
+∂z
+2k
+2 ∂t2
+6 ∂t3
+Z0
+k0 −1
+WP I
+σ
+2
+ϱnt E,
+= ik0 n2 T̂ R(t − t′ ) |E(t′ )| dt′ E − i
+T̂ ϱe E − ϱe E − Ui
+2ϱc
+2
+2 |E|2
+where we have neglected time derivatives of higher order than three. It is
+worth noting that Eq. (35) goes beyond the standard propagation equation
+in the slowly varying envelope approximation [39], which reads
+∂
+1
+k ′′ ∂ 2
+E −i
+E
+∆⊥ E + i
+2
+∂z
+2k
+2
+∂t
+0
+Z
+= ik0 n2
+
+(36)
+
+2
+
+R(t − t′ ) |E(t′ )| dt′ E − i
+
+σ
+k0
+WP I
+ϱe E − ϱe E − Ui
+ϱnt E
+2ϱc
+2
+2 |E|2
+
+= FN L (E) .
+Equation (36) follows from Eq. (35) by neglecting time derivatives of higher
+order than two and setting T̂ ≡ 1.
+In conclusion, equations (35) and (36) are the central equations for our
+IR-propagation model. Both are implemented in CUPRAD, and users can
+switch between them using the parameter numerics_operators_t_t-1. As
+mentioned in thep
+introduction, CUPRAD operates in cylindrical coordinates
+(ρ, z, t) with ρ = x2 + y 2 . Additionally, the rate equation for ionisation (15)
+is solved at the same time to provide ϱe and ϱnt . The model also depends
+on several material constants, such as the nonlinear refractive index n2 .
+CUPRAD intrinsically contains tabulated values for noble gases; however,
+the user can easily provide parameters for other media.
+3. High Harmonic Generation and Propagation
+In this section, we present the physical model underlying high-harmonic
+generation (HHG). The simulation involves two modules : 1) the computation
+of the microscopic source terms of the XUV radiation at all points within
+the macroscopic interaction volume; 2) the coherent sum of all microscopic
+emitters to obtain the macroscopic XUV signal.
+HHG in gases is generally studied in the non-relativistic regime because
+too high intensities disrupt the generation mechanism [5]. An accurate description requires a quantum-mechanical treatment, since the process involves the interaction of an electronic wave packet with the atomic potential.
+14
+
+A suitable framework is provided by the time-dependent Schrödinger equation (TDSE), which describes the dynamics of the electronic wave packet.
+The emitted fields–generated from all microscopic volumes–are then coherently integrated from the whole macroscopic medium to yield the far-field
+XUV response. The details of the respective physical models used in our
+code are discussed in the following two subsections.
+3.1. Microscopic Response in XUV regime (TDSE)
+We start with the model of the interaction between a single atom with
+the external laser field. This calculation is carried out for all spatial points
+within the macroscopic volume–the macroscopic computational grid is imposed by the solution of the laser propagation, which already ensures the
+required sampling (the field variations are small from one point to another).
+Consequently, the microscopic response is evaluated at a fixed macroscopic
+coordinate that is accounted parametrically in the TDSE, and omitted in this
+subsection for clarity as only one microscopic system is considered here. The
+spatial variable introduced here (xm ) refers exclusively to the microscopic
+system. The complete microscopic dynamics of interest is governed by the
+time-dependent Schrödinger equation (TDSE)
+i
+
+∂
+ψ(xm , t) = H(t)ψ(xm , t) ,
+∂t
+
+(37)
+
+which describes the evolution of the atomic wavefunction ψ(xm , t) under the
+influence of the external laser field. Note that atomic units are used throughout this subsection. A fully ab initio solution of this problem would involve
+all electrons in the atom or molecule and hence require solving the TDSE in
+a high-dimensional Hilbert space, which becomes computationally infeasible,
+in particular if we keep in mind that a microscopic solution is required in
+each macroscopic grid point. To render the problem tractable while preserving the essential physics of the interaction, we must introduce approximations
+that significantly reduce its dimensionality. Thus, the present model is restricted to linearly polarised laser fields within the dipole approximation and
+considers a single active electron without spin. These assumptions make it
+possible to solve the TDSE in a one-dimensional geometry represented on
+a Cartesian grid. A future release–which is currently under development–
+will bring several additional improvements, including exterior complex scaling [42, 43], optimised grid representations [44, 45], more advanced shaping
+15
+
+of the atomic potentials [46], and, ultimately, the incorporation of a threedimensional TDSE solver within the model.
+In general, the incident laser field is characterised by the scalar potential ϕ(xm , t) and the vector potential A(xm , t). The Hamiltonian that describes an electron subjected to both the external laser field and the atomic
+potential VC is given by H = (p + A)2 /2 + VC − ϕ. Both laser-field potentials possess gauge freedom, which leaves the physical electric field–and the
+∂
+A − ∂x∂m ϕ. Our solver is immagnetic field–invariant provided by E = − ∂t
+plemented in the length gauge (A = 0 and ϕ(xm , t) = −E(t)xm , consistently
+with the dipole approximation), which allows us to efficiently directly use the
+output of CUPRAD in the TDSE. The Hamiltonian reads
+p2
++ VC + xm E(t) ,
+2
+1
+VC = − p
+.
+x2m + a2
+
+H(t) =
+
+(38a)
+(38b)
+
+The potential used in the present model is the so-called soft-core potential [47]
+and depends only on the free parameter a since we impose the asymptoctic
+potential as −Z/|xm | when |xm | → ∞ where Z is the ionic charge (here,
+Z = 1). The single free parameter a is determined such that the groundstate energy Eg of the field-free Hamiltonian H0 = p2 /2 + VC matches the
+desired target value corresponding to a given atom.
+Regarding the choice of gauge, although physical observables are gauge
+invariant, it is often convenient to perform calculations in a particular gauge
+depending on the problem at hand. In addition to the length gauge, the
+) is commonly used in atomic
+velocity gauge (ϕ = 0 and E(t) = − ∂A(t)
+∂t
+physics. Transformation between gauges does not pose conceptual difficulty,
+as it simply corresponds to multiplying the wavefunction by a phase factor, ψ ′ (xm , t) = eiΛ(xm ,t) ψ(xm , t), where Λ(xm , t) is the gauge transformation
+function associated with the field potentials (see Chapter 6.3 of [48]).
+Once the time-dependent wavefunction ψ(x, t) has been computed, the
+dipole-acceleration source term entering the coupling with the Maxwell’s
+equations is given by
+∂ t jm (t) = ⟨ψ(t)|∇(VC − ϕ(xm , t)) − ∂t A(t)|ψ(t)⟩
+
+
+∂VC
+= ψ(t)
++ E(t) ψ(t) ,
+∂xm
+16
+
+(39)
+
+where we have used the property E = −∇ϕ − ∂t A. Note that jm (t) is related
+to the charge current and we already use here a microscopically averaged
+quantity–provided by the computation of the expected value–, which is exactly required for the coupling with the macroscopic modules. Subtle details
+of the derivation, including the relation with the macroscopic form of the
+Maxwell’s equations assumed in (1) or full 3D-perspective are provided in
+Appendix A.
+Taking the wavefunction ψ(x, t), other quantities in addition to (39) can
+be extracted to gain deeper microscopic insight, such as the photoelectron
+spectrum [49], the volumetric and projected ground-state populations, and
+the energy distribution associated with ionisation [50]. Further analysis tools
+may include, for instance, the Gabor transform of the source term. Examples
+of such analyses are discussed in Section 6, where the source term provides
+the bridge to the macroscopic model of the XUV field.
+3.2. XUV Propagation (Spectral Approach)
+The propagation of the XUV beam is treated in the linear regime; consequently, the model neglects any back-reaction of the XUV field on the
+medium, in contrast to the IR driving field, for which such effects are included (see Section 2). Under these assumptions, the XUV field can be
+represented as an integral transform of the macroscopic source terms ∂d
+tJ
+integrated over the interaction volume Vi .
+Exploiting the cylindrical symmetry of the problem defined by the propagation axis z, the angular part is irrelevant and is omitted in this section. The
+far-field distribution in a homogeneous generating medium can be expressed
+as [31]:
+µ0 eik(ω)z
+×
+4π
+k(ω)ρ2 Z
+ 
+
+Z zexit −ik(ω)z′ i 2(z−z
+2
+′)
+\
+k(ω)(ρ′ )
+k(ω)ρρ′
+e
+e
+∂J
+i 2(z−z′ )
+e
+J0
+ρ′ dρ′ dz ′ , (40)
+′
+′
+z
+−
+z
+∂t
+z
+−
+z
+zentry
+ΣT
+
+Ê(ρ, z, ω) ≈ −
+
+where (ρ′ , z ′ ) denote the cylindrical coordinates within the generating medium,
+and (ρ, z) defines, analogously, the coordinates of the far-field observation
+plane. Due to symmetry, the angular integration has been analytic performed
+– leading to the radial contributions weighted by the Bessel function of the
+first kind J0 –and only the integration in ρ′ rests in the transverse part. The
+17
+
+total integration volume is therefore Vi = [zentry , zexit ]×ΣT , where [zentry , zexit ]
+defines the longitudinal extent of the medium and ΣT its transverse crosssection. The precedent microscopic treatment enters the expression through
+the time Fourier transform of the macroscopic dipole-acceleration ∂d
+t J rec
+trieved from (39) by ∂d
+J
+(r)
+=
+ϱ(r)
+∂
+j
+(r).
+The
+microscopic
+source
+is
+propt
+t m
+erly weighted by the gas density ϱ at the macroscopic coordinate r = (ρ, z).
+This coordinate is also reintroduced in ∂c
+t j m (r), consistent with the local
+driving field from which it is computed. Finally, the additional exponential
+term in the Hankel transform, exp (ik(ω)(ρ′ )2 /2(z − z ′ )), corresponds to the
+solution of the paraxial wave equation that introduces the correction beyond
+the standard far-field diffraction approximation. The extended propagator
+accurately describes Gaussian beam propagation and has been successfully
+applied to model the focussing properties of XUV beams [33].
+When accounting for the spatial variation of the gas within the interaction
+region, the expression (40) must be modified accordingly. This inhomogeneity affects the local wave number k, which now explicitly depends on ρ′ and
+z ′ . Consequently,
+in the propagator term, the phase factor k(ω)z ′ is replaced
+R zexit
+by k(ρ, z, ω) = z′ k(ρ′ , z ′′ , ω) dz ′′ , where k(ρ, z, ω) represents the spatially
+dependent dispersion relation incorporating both refractive and absorption
+effects. Taking it into account, the far-field electric field, including the influence of the density modulation, is written
+µ0 eik(ω)z
+Ê(ρ, z, ω) ≈ −
+4π
+
+Z zexit Z
+
+R zexit
+
+e−i z′
+
+k(ω)ρ2
+
+k(z ′′ ,ρ′ ,ω) dz ′′ i 2(z−z′ )
+
+e
+
+×
+z − z′
+ 
+
+2
+\
+k(ω)(ρ′ )
+∂J
+k(ω)ρρ′
+i 2(z−z′ )
+e
+J0
+ρ′ dρ′ dz ′ . (41)
+∂t
+z − z′
+
+zentry
+
+ΣT
+
+Further details concerning our specific implementation–such as the normalisation of the signal accounting for absorption through a complex refractive
+index–can be found in the manual of the corresponding module.
+Building upon the theoretical framework outlined above for the XUV
+field propagation, we now turn to the practical aspects of the numerical
+implementation of the respective modules within the code.
+4. A Modular Multiscale Approach (MMA): Implementations
+The preceding sections have established the physical models that describe
+all relevant processes. The next step is to implement it into a pipeline of nu18
+
+merical solvers that treats consecutively the three main stages of the process,
+which is schematically illustrated in Fig. 2 (cf. the intrinsically coupled general approach in Fig. 1). This is allowed by the spectral decoupling of the
+driving laser and the secondary radiation. Next, the microscopic feedback
+loop providing the non-linear propagation is reduced down to scalar response
+described by the non-linear optics [40] and a simple rate equation to obtain
+the free electron density, which is computationally tremendous speed-up compared to the numerical solution of TDSE. The equations within the scheme
+only represent the central parts of the models, namely the unidirectional
+equations (35) and (36) for the IR propagation; 1D-TDSE (38); and the
+diffraction integral (41) for the XUV radiation. We now proceed to the
+numerical implementation–the main algorithms and computational methods
+employed–of the respective modules. It shall facilitate navigation within the
+code structure, while further technical details are documented in [1].
+
+19
+
+Figure 2: The MMA approach unfolds the intrinsically coupled description of the problem
+outlined in Fig. 1 into a pipeline of consecutive tasks. Here we schematically summarise the
+core ideas of the respective physical models: 1) the NLSE that governs the propagation of
+the driving (ionizing) IR field including plasma generation and Kerr effect and provides the
+laser field in the whole macroscopic volume; 2) the microscopic TDSE that is solved at each
+macroscopic point r of the medium, describing the atomic microscopic dynamics (spatial
+variable xm ) resulting into the source term in the XUV range; and 3) the diffractionintegral approach to obtain the macroscopic XUV signal.
+
+20
+
+4.1. A Parallel Radially Symmetric Unidirectional Solver (CUPRAD)
+Starting with CUPRAD, the simulation of pulsed-beam propagation in
+gaseous media is technically demanding and typically requires massively parallel computations. CUPRAD is implemented in Fortran 90 and parallelised
+for distributed-memory architectures using the Message Passing Interface
+(MPI) library. Fast Fourier Transforms (FFTs) are computed using routines
+from the FFTW3 library.
+A split-step scheme is used to solve Equations (35) or (36) under the
+assumption of radial symmetry. The fundamental idea of the split-step (or
+operator splitting) method is as follows : consider an equation to solve of the
+form
+∂
+ψ = L̂ψ,
+(42)
+∂z
+where L̂ is some operator. Formally speaking, the advance of ψ(z) from z to
+z + ∆z is written as
+R
+(43)
+ψ(z + ∆z) = e L̂dz ψ(z),
+R
+R z+∆z
+where denotes z
+. Assuming that L̂ can be decomposed into a sum of
+m distinct operators,
+L̂ = L̂1 + L̂2 + · · · + L̂m ,
+
+(44)
+
+one may construct a forward split-step scheme
+R
+
+R
+
+R
+
+ψ(z + ∆z) ≈ e L̂1 dz e L̂2 dz . . . e L̂m dz ψ(z),
+
+(45)
+
+R
+R z+∆z
+R
+and again denotes z
+. In general, the operators L̂i dz do not commute,
+making (45) an approximation of (43), and therefore the order of application
+of the exponential operators influences the accuracy of the scheme. Comprehensive discussions of higher-order variants of operator splitting can be
+found in Refs. [51, 52].
+A key feature of CUPRAD is the adaptative control of the propagation
+step ∆z along the longitudinal axis. In both Equations (35) and (36), the
+propagation operator L̂ is decomposed into a linear part, L̂lin , which includes
+the diffraction and dispersion terms, and a nonlinear part, L̂nl , which contains all remaining contributions. Since L̂lin is independent of z, a constant
+step size determined by transverse discretization is generally sufficient. In
+contrast, the nonlinear operator L̂nl exhibits a strong z-dependence and thus
+21
+
+governs the adaptive step-size control. To illustrate the principle, consider
+the simplified example:
+∂2
+∂
+ψ = i 2 ψ + i |ψ|2 ψ.
+∂z
+∂t
+
+(46)
+
+the
+Here we have L̂lin = i∂t2 and L̂nl = i |ψ|2 . RTwo conditions constrain
+R
+choice of ∆z: i- both propgagation steps exp( L̂lin dz) and exp( L̂nl dz) must
+remain numerically stable. ii- ∆z must be sufficiently small to preserve the
+accuracy of the split-step approximation.
+R The linear step is evaluated numerically exactly in the Fourier space exp( L̂lin dz) = FFT−1 exp(−iω 2 ∆z)FFT.
+Thus, there is no restriction on ∆zR from this scheme. For the nonlinear
+step, we approximate the integral |ψ|2 dz ≈ |ψ|2 ∆z, whose relative error
+scales as ∼ |ψ|4 ∆z 2 . To control this error, the step size is constrained by
+c2 < |ψ|2 ∆z < c1 , where c1 ensures sufficient accuracy, while c2 < c1 promotes a maximally large
+R step-size. The split-step methodR requires that the
+magnitudes of ∥Î−exp( L̂lin dz)∥ ∼ ∆z/∆t2 and ∥Î−exp( L̂nl dz)∥ ∼ |ψ|2 ∆z
+remain sufficiently small, where ∆t denotes the discretisation step of the
+transverse coordinate t. This introduces a third constant c3 > ∆z/∆t2 ,
+which provides an additional upper bound on ∆z independent of |ψ|2 . Since
+∆t remains constant throughout the simulation, c3 defines a fixed secondary
+limit on the propagation step. In practice, the parameter set c1 = 0.01,
+c2 = c1 /2.5, and c3 = 1 has been found to yield stable and accurate results,
+provided that the transverse discretisation is sufficiently fine. These conditions are similar to the well-known Courant–Friedrichs–Lewy (CFL) stability criterion [53], which defines the convergence limits for finite-difference
+schemes by constraining the relationship between spatial and temporal discretisation steps.
+CUPRAD solves Equations (35) and (36) in cylindrical coordinates,
+where
+p
+2
+2
+the transverse coordinates x and y are transformed as ρ = x + y and the
+angular part is omitted due to the assumed symmetry. The operator in
+Equation (36) is decomposed into three parts:
+
+
+i ∂
+∂2
+∂
+L̂lin1 =
+ρ
+,
+L̂lin2 = −ik ′′ 2 ,
+2k0 ρ ∂ρ
+∂ρ
+∂t
+Z
+k0
+WP I
+2
+L̂nl = ik0 n2 R(t − t′ ) |E(t′ )| dt′ − i
+ϱe − U i
+ϱnt .
+2ϱc
+2 |E|2
+The diffraction term, L̂lin1 , is treated using a Crank-Nicholson finite-difference
+scheme (see Ref. [51]), while the dispersion term L̂lin2 is evaluated in the
+22
+
+Fourier space domain. The Rnon-linear operator, L̂nl , is applied through direct multiplication by exp( L̂nl dz), where the integral is approximated as
+R z+∆z
+L̂nl dz ≈ L̂nl (z)∆z. The time integration for the delayed Kerr response
+z
+and for the electron density [see Equation (15)] is performed using a simple
+Euler scheme [51], which is sufficient provided that the temporal resolution
+is fine enough. Transparent boundary conditions are imposed in the radial
+coordinate ρ [54]. Since FFT-based propagation requires periodic boundaries in time, fully transparent boundaries in t are not possible; however,
+the inclusion of approximately (∼ 16) absorbing layers yields satisfactory
+results, provided that the outgoing field intensity at the edges of the simulation window remains small. Finally, parallelisation of CUPRAD is implemented via straightforward domain-decomposition, enabling efficient scaling
+on distributed-memory architectures.
+4.2. 1D-TSDE Implementation (CTDSE)
+The numerical solution of the TDSE is implemented in the C programming language. We conventionally call this implementation CTDSE (the
+Computation of Time-Dependent Schrödinger Equation) referring to our
+specific approach. It is built around the core routine, which is employed
+in two distinct applications compiled from the same source. The first is an
+MPI-based scheduler that processes the output generated by CUPRAD. This
+task is embarrassingly parallel: the scheduler simply distributes macroscopic
+grid points—each associated with different input field parameters—uniformly
+across multiple CTDSE processes. The second application is a dynamically
+linked C library that provides callable access to the CTDSE routines. This
+library is described in detail in Section 6.
+We now outline the principal numerical methods implemented in the core
+CTDSE routine. The wavefunction is represented directly on discrete grids in
+both space and time. The spatial and temporal grids are: [−Nx , . . . , 0, . . . , Nx ]×
+∆x and [0, 1, . . . , Nt ]×∆t. For consistency within CTDSE, the temporal grid
+always begins at t = 0. Consequently, the module internally performs a shift
+of the input interval [tmin , tmax ] → [0, tmax −tmin ] to align with this convention.
+Because the temporal discretization in CTDSE is typically finer than that
+used in CUPRAD, the input interface applies zero-padding in the Fourier domain to interpolate the driving field to the required temporal resolution ∆t.
+Once the computational grids are defined, the wavefunction is represented
+(i)
+(i)
+(i)
+(i)
+as ψ(xj , ti ) ≡ ψj and in vectorised form as ψ (i) ≡ (ψ1 , ψ2 , . . . , ψ2Nx,max +1 )⊺ .
+23
+
+(i)
+
+(i+1)
+
+The propagation from ψj → ψj
+
+is performed in three substeps:
+
+
+
+
+i∆t
+∆2
+ψ
+= M2 −
+−
++ M2 VC
+ψ (i) ,
+2
+2
+
+
+−1
+i∆t
+∆2
+(i,2)
+ψ
+= M2 +
+−
++ M2 VC
+ψ (i,1) ,
+2
+2
+
+(47a)
+
+(i,1)
+
+(i+1)
+
+ψj
+
+(i,3)
+
+= ψj
+
+(i,2)
+
+= e−i∆tE(ti )xj ψj
+
+(47b)
+∀j.
+
+,
+
+(47c)
+
+The first two substeps implement the Crank-Nicolson scheme for the field-free
+Hamiltonian using the Numerov-corrected approximation of the Laplacian.
+The matrices involved are : M2 is the Numerov refinement of the Laplacian, ∆2 and represents the second-derivative operator, both being tridiagonal (see Section 3.1 of [55] for a detailed discussion). VC is the potential
+energy matrix, which is local and therefore diagonal, evaluated on the computational x-grid (see (38b)). All matrix operations thus involve tridiagonal
+matrices and the inversion in (47b) can be carried out efficiently. The interaction with the external electric field is applied in the third substep, Equation (47c), using a split-operator approach. Since the electric field typically
+varies on a much slower time scale than the numerical time step ∆t (providing E(ti ) ≈ E(ti+1 )), the result is in an efficient split-operator propagation
+scheme with an accuracy of the order O(∆t2 ).
+All physical observables of interest are computed directly on the spatial
+x-grid. Most quantities are evaluated within the C implementation itself to
+ensure high computational efficiency, while the wavefunction ψ is also made
+accessible for user-defined post-processing. The current implementation does
+not include absorbing boundary conditions. Consequently, the spatial grid
+must be chosen sufficiently large to prevent unphysical reflections at the
+boundaries. Moreover, the present version of the code does not employ any
+predictor–corrector propagation scheme, and the next release will provide a
+version of CTDSE with adaptive step-size control. A fixed temporal step
+size is therefore required to perform the numerical Fourier transform of the
+time-dependent quantities and ensure convergence (see the CFL criterion).
+As described in the following sections, the TDSE simulations are executed
+for multiple sets of input electric fields. To ensure consistent numerical convergence across all configurations, the time step ∆t is chosen according to
+the most demanding field (i.e., most rapidly varying) in the data set and also
+an option of grid expansion over time can be activated.
+24
+
+4.3. A Linear XUV Propagator (HANKEL)
+d
+Once the source terms ∂
+t J have been computed at all macroscopic points,
+they are supplied as input to the diffraction integral, from which the macroscopic spatial profile of the XUV field is calculated.
+The calculation of the Hankel transform is implemented in the Python
+module Hankel_transform. A direct grid integration method is used to
+evaluate Equation (41). The model can access tabulated scattering factors,
+requiring only the type of gas and the source of the scattering data as input.
+From a numerical point of view, the (ρ, ω) far-field plane is partitioned
+into subarrays that are distributed and processed in parallel using OpenMPI
+(through Python’s multiprocessing module). The module provides an extended interface to the core routines, offering flexibility in data handling that
+benefits from the Pythonic generators: input data can be streamed directly
+from memory or read dynamically from the disc during execution. This functionality is particularly useful for the memory management of large datasets,
+such as those containing dipole-acceleration values across the full macroscopic
+volume. More details on the implementation and input/output procedures
+are provided directly in the open-source code [1, 2].
+Finally, the Hankel_transform module is part of the multiscale model,
+but it can be used independently as well. It includes i- a long media routine
+that implements Equation (41), and ii- a lightweight routine for performing
+standard Hankel transforms applicable to thin-media configurations.
+5. Model Execution and User Interfaces
+Here, we present the execution workflow of the model and describe how
+it enables the use of advanced input parameters to represent more complex
+physical configurations. We then illustrate the methods for analysing and
+visualising the resulting data. Finally, we outline the HDF5 data structure
+employed by the code and tools available for post-processing.
+The defined data format constitutes the core i

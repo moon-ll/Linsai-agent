@@ -1,0 +1,755 @@
+4
+2
+0
+2
+
+g
+u
+A
+6
+
+]
+l
+l
+a
+h
+-
+s
+e
+m
+
+.
+t
+a
+m
+-
+d
+n
+o
+c
+[
+
+1
+v
+5
+0
+1
+3
+0
+.
+8
+0
+4
+2
+:
+v
+i
+X
+r
+a
+
+Revealing the Berry phase under the tunneling barrier
+
+Lior Faeyrman1, Eduardo B. Molinero2, Roni Weiss1, Vladimir Narovlansky3,
+Omer Kneller1, Talya Arusi-Parpar1, Barry D. Bruner1, Binghai Yan4, Misha
+Ivanov5,7,8, Olga Smirnova5,6, ´Alvaro Jim´enez-Gal´an2, Riccardo Piccoli9, Rui
+E.F. Silva5,2, Nirit Dudovich ∗1, and Ayelet J. Uzan-Narovlansky ∗3
+
+1
+
+Department of Complex Systems, Weizmann Institute of Science, 76100, Rehovot, Israel
+2Instituto de Ciencia de Materiales de Madrid (ICMM), Consejo Superior de Investigaciones Cient´ıficas
+(CSIC), Madrid, Spain
+3Department of Physics, Princeton University, Princeton, NJ 08544, USA
+4Department of Condensed Matter, Weizmann Institute of Science, 76100, Rehovot, Israel
+5Max-Born-Institut, Max-Born Strasse 2A, D-12489 Berlin, Germany
+6Technische Universit¨at Berlin, Ernst-Ruska-Geb¨aude, Hardenbergstr. 36A, D-10623 Berlin, Germany
+7Blackett Laboratory, Imperial College London, South Kensington Campus, SW7 2AZ London, United
+Kingdom
+8Department of Physics, Humboldt University, Newtonstrasse 15, 12489 Berlin, Germany
+9Department of Molecular Sciences and Nanosystems, Ca’ Foscari University of Venice, via Torino 155, 30172
+Venice, Italy
+
+August 7, 2024
+
+Abstract
+
+In quantum mechanics, a quantum wavepacket may acquire a geometrical phase as it
+
+evolves along a cyclic trajectory in parameter space [1]. In condensed matter systems,
+
+the Berry phase plays a crucial role in fundamental phenomena such as the Hall effect,
+
+orbital magnetism, and polarization [2]. Resolving the quantum nature of these processes
+
+commonly requires sensitive quantum techniques, as tunneling, being the dominant mech-
+
+anism in STM microscopy and tunneling transport devices. In this study, we integrate
+
+these two phenomena – geometrical phases and tunneling – and observe a complex-valued
+
+Berry phase via strong field light matter interactions in condensed matter systems [3]. By
+
+manipulating the tunneling barrier [4], with attoseconds precision, we measure the imag-
+
+inary Berry phase accumulated as the electron tunnels during a fraction of the optical
+
+cycle. Our work opens new theoretical and experimental directions in geometrical phases
+
+physics and their realization in condensed matter systems, expanding solid state strong
+
+field light metrology to study topological quantum phenomena.
+
+*Corresponding authors: nirit.dudovich@weizmann.ac.il, auzan@princeton.edu
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+1 MAIN
+
+When a quantum system evolves in a cyclic path in parameter space, it accumulates a geo-
+metrical phase attributed to the parameter space topology. This phase, with its formulations
+of the Aharonov-Bohm phase [5] and the Berry phase [1], has been at the heart of topological
+phenomena in a broad range of fields - from condensed matter physics [6,7], fluid mechanics [8],
+optics [9, 10], to particle physics [11]. The role of the Berry phase is essential in many solid
+state systems, as it appears in the electronic Bloch states [2, 12] and leads to a wide range of
+observations such as the quantum Hall effect, macroscopic polarization [13], orbital magnetism
+and the topological classification of materials [14].
+
+The geometric phase has been commonly studied in closed quantum systems, resulting in
+real-valued phases. However, an interesting and unique scenario may arise in open systems,
+where the wavefunction is coupled to the environment. This picture can be formally described
+as an evolution of the electronic wavefunction following a path in a complex parameter space.
+Here, the geometric phase itself becomes complex, acquiring an imaginary component which
+represents an amplification or attenuation of the wavefunction’s amplitude. The notion of a
+complex geometric phase for open systems was previously introduced in non hermitian sys-
+tems [15] as spin systems with geometric dephasing [16, 17]. This concept became extremely
+important in the fast evolving field of quantum information, reflecting the topological dephasing
+of the information [18–20]. Despite the important role that the complex geometrical phase may
+play in a wide range of systems, previous studies have mainly focused on its real component.
+
+In this paper, we introduce and experimentally observe, for the first time, the notion of a
+complex geometric phase arising in condensed matter systems, by linking this phase with an
+additional quantum process – tunneling. Integrating these two quantum phenomena introduces
+a unique physical system to observe the complex Berry phase. We can describe the origin of
+this complex phase according to the following schematic picture. Consider a quantum wave-
+function, propagating in a closed loop in parameter space, accumulating a real Berry phase
+(figure 1a). Introducing a small tunneling barrier, raises the following question: will the the
+geometric properties of the system leave their fingerprint on the wavefunction as it propagates
+under the barrier? The evolution of the electronic wavefunction under the tunneling barrier can
+be described using complex time and complex momentum, which are the hallmark of tunneling
+mechanism [21–24]. Such evolution along these complex parameters leads to the accumula-
+tion of a complex geometrical phase. The imaginary component of this phase represents a
+dissipation of the wavepacket amplitude, dictated by the path it took in parameter space un-
+der the barrier. Interestingly, previous studies have shown that the imaginary Berry phase is
+gauge-independent, removing the requirement of a closed loop [16] (see SI). Moreover, we find
+that the imaginary component has a significant contribution to the well known and measurable
+quantities in quantum geometry, such as the Berry curvature and the quantum metric [25, 26]
+(see SI).
+
+The imaginary Berry phase may appear in a wide range of systems. Here we focus on
+
+2
+
+its observation in light-driven condensed matter systems. In solid state systems, an electron
+traverses a closed loop through the Brillouin zone (BZ) in a specific energy band, leading to
+the accumulation of a Zak phase [27]. The Zak phase admits real values which depend on the
+topology of the BZ and the band structure. Recently, a generalization of this phase introduced
+the interband Berry phase, including both adiabatic and discrete modifications of the wave-
+function between the bands [28–30]. Driven by a low-frequency external field, the electronic
+wavepacket undergoes a non-adiabatic interband tunneling transition followed by intraband
+propagation and closed by an additional non-adiabatic transition by photo-recombination [31].
+This process, known as high harmonic generation (HHG) leads to the emission of optical ra-
+diation with attosecond duration, mapping the accumulated complex phase of the electronic
+wavefunction into the optical amplitude and phase of the emitted pulses. Solid state HHG has
+become one of the most promising metrology schemes to resolve a wide variety of condensed
+matter phenomena [32–34], providing unique key advantages. The first is associated to its short
+time scale of the process, which intrinsically occurs within a single optical cycle of the driving
+laser field. This allows probing of the system coherence before any scattering or dephasing
+mechanisms [35]. The second is the precise control over the electron trajectories in momen-
+tum space, allowing for example valley manipulation with few-femtosecond switching between
+quantum degrees of freedom [36–38].
+
+How do we isolate the role of the imaginary Berry phase and separate it from all additional
+components of the interaction? Driving the interaction with a two color field enables us to
+accurately manipulate the origin of imaginary phases in the HHG process – the tunneling
+barrier itself (figure 1). We add a weak second harmonic field (SH), polarized parallel to the
+fundamental field, to enhance or to suppress the tunneling barrier [4, 23]. Modulating the
+tunneling barrier reveals the role of the imaginary Berry phase and allows the reconstruction
+of its geometrical properties. In the following we take a deeper look into the formation of the
+In the absence of the perturbation (the SH
+imaginary Berry phase in light driven crystals.
+field), the emitted field with its phase accumulated by the electron-hole wavepacket is given by:
+
+EHHG(t) ∝ eiS[k,t0,t] = ei (cid:82) t
+
+t0
+
+[εg(k(t′))+F (t′)·(Ag(k(t′))+∇kϕd(k(t′)))]dt′
+
+(1)
+
+with S [k, t0, t] being the semi-classical action, k recombination quasi-momentum, t0 and t
+are the tunneling and recombination times, εg = εc − εv the conduction-valence band gap,
+F = −∂tA the external electric field, A the vector potential, Ag = Ac − Av the electron-hole
+relative Berry connection An (k) = i ⟨ un,k| ∇kun,k⟩, ϕd the transition dipole phase ϕd (k) =
+arg (i ⟨ uc,k| ∇kuv,k⟩), k (τ ) = k − A (t) + A (t′) being the crystal quasi-momentum. The phase
+in equation (1) was previously shown to be gauge invariant [28–30], and thus observable. While
+the electron-hole wavepacket propagates inside the classically forbidden region, it experiences
+complex time and accumulates complex momentum, leading the geometric phase to take com-
+plex values. A further look into the action in (1) reveals that the geometric contribution, given
+by F ·Ag, acts as an effective modulation of the band gap εef f
+g = εg +F ·Ag. Such modification
+leads to a direct enhancement or suppression of the tunneling probability amplitude according
+
+3
+
+(cid:110)(cid:82) tr
+0
+0+iti
+tr
+0
+
+F (t′) · Ag (k (t′)) dt′(cid:111)
+
+with tr
+
+0 and ti
+0 being the real and imaginary ionization
+to: Im
+times [39]. Here, the accumulated Berry phase is the integration of the Berry connection along
+the complex path in parameter space. In order to isolate this phase we have to manipulate the
+tunneling barrier in a controllable manner. Such control is achieved by adding the SH field,
+A = Aω+A2ω, shaping the subcycle evolution of the field and therefore of the tunnelling barrier
+itself. Scanning the relative subcycle delay between the two fields, A2ω = A2ω0 sin[2ω0(t + τ )]
+(ω0 is the fundamental field frequency), while keeping the fundamental field constant, enhances
+or suppresses the tunneling barrier. This scheme reveals the role of the imaginary Berry phase
+and allows its reconstruction.
+
+We experimentally demonstrate the observation of the complex Berry phase by producing
+HHG in α-quartz z-cut sample, driven by λ = 1.2µm, 50f s laser field having an intensity of
+the order of 1013W/cm2 [40, 41]. α-quartz exhibits broken inversion symmetry that gives rise
+to a non-vanishing Berry curvature and the appearance of even harmonics [42]. The harmonic
+spectrum spans up to 30eV , probing the complex dynamics over a wide energy range. The SH
+perturbation field is produced by using a 100µm type-I phase barium borate (BBO) (BaB2O4),
+and the delay is scanned with Fused-Silica wedges. A detailed description of the experimental
+setup is provided at the SI.
+
+Figure 2a presents the HHG spectrum as a function of the two color delay. The experi-
+mental results show two important observations. First, the harmonic signal oscillates at 2ω0,
+with the two color delay [43]. This observation is in contrast with previous studies in gas phase
+and in inversion symmetric crystals, where 4ω0 oscillations were resolved [23, 44, 45]. Second,
+in contrast to previous observations of solid state HHG [31], here even and odd harmonic or-
+ders oscillate almost in phase. We can understand these results by performing a perturbative
+analysis.
+
+The SH field adds a complex perturbation to the action (equation 1) σ(τ ) = σr + iσi . The
+real perturbation σr, resolves the atto-chirp [31,44], while the imaginary perturbation σi encodes
+the tunneling process itself. Due to symmetry, the perturbation inverses its sign between
+consecutive half cycles of the fundamental laser field, manipulating the relative amplitude and
+phase of the emitted harmonics. The interference signal is mapped into the signal of odd and
+even harmonics (see SI):
+
+
+
+
+
+
+Iodd,N (σ) ∝ e−2Im(εg) (cid:12)
+(cid:12)e−iγr
+(cid:12)
+Ieven,N (σ) ∝ e−2Im(εg) (cid:12)
+(cid:12)e−iγr
+(cid:12)
+
+B−γi
+
+B+iσ + eiγr
+
+B+γi
+
+B−γi
+
+B+iσ − eiγr
+
+B+γi
+
+2
+
+B−iσ(cid:12)
+(cid:12)
+(cid:12)
+B−iσ(cid:12)
+(cid:12)
+(cid:12)
+
+2
+
+(2)
+
+where εg is the band gap, γr
+
+B = Re
+
+(cid:110)(cid:82) t
+t0
+
+F (t′) · (Ag (k (t′)) + ∇kϕd (k (t′))) dt′(cid:111)
+
+interband Berry phase (also known as the Shift Vector [46]) and γi
+is the imaginary part of the Berry phase, accumulated under the tunneling barrier. Expanding
+
+B = Im
+
+contains the real
+F (t′) · Ag (k (t′)) dt′(cid:111)
+
+(cid:110)(cid:82) t
+t0
+
+4
+
+equation (2) to first order in σ one gets:
+
+I±,N (σ) ∝ cosh (cid:0)2γi
+
+B
+
+(cid:1) ± cos (2γr
+
+B) + 4sinh (cid:0)2γi(cid:1) σi ± 4sin (2γr
+
+B) σr + O (cid:0)σ2(cid:1)
+
+(3)
+
+with ’+’ and ′−′ for odd and even harmonics, respectively. Importantly, as we scan the two-
+color delay, σi, σr oscillate at 2ω0 frequency, leading to 2ω0 oscillations of the harmonic signal
+itself. We note that in the case of a zero Berry phase, the first order perturbation becomes
+zero, leading to second order perturbation oscillating at 4ω0.
+
+Our experimental results reveal that odd and even harmonics oscillate approximately in
+phase (figure 2a). According to equation (3), such an observation identifies the dominant role
+of the imaginary perturbation σi over the real perturbation σr. A careful analysis enables a
+direct isolation of the real and imaginary components of the perturbation. Extracting the dif-
+ference between neighboring harmonic orders isolates the real perturbation, σr. Such analysis
+resolves the well known atto-chirp (see SI in [28]), revealing the signature of the interband
+mechanism [47]. Importantly, extracting the sum of neighboring harmonics isolates the imagi-
+nary perturbation σi. Figure 2b describes the imaginary component of the perturbation σi as
+a function of the delay and harmonic number along the Γ − K direction. As can be clearly
+observed, the oscillation phase of the imaginary perturbation is almost flat across the harmonics
+spectrum. Indeed such a flat spectral response has been identified in gas phase experiments [23],
+resolving the short temporal window of the tunneling mechanism.
+
+The sum of adjacent harmonics, Isum,N , allows the reconstruction of the imaginary Berry
+phase. This sum isolates the overall imaginary phase, probed by the SH perturbation –
+Isum,N (σ) ∝ tanh (2γi
+B) σi + O (σ2). Extracting the amplitude of the oscillating term, by
+applying Fourier transformation, retrieves the imaginary Berry phase itself (∝ tanh (2γi
+B)).
+Reconstructing the imaginary Berry phase for different harmonic numbers, maps this property
+for different recombination momentum along the fundamental polarization axis. Finally, we
+perform the analysis at various crystal angles, mapping the imaginary Berry phase along the
+2D momentum space (figure 3a).
+
+Figure 3c describes Isum,N (σ) for harmonics 14, 15 as a function of delay and crystal angle
+(θ), where Γ − K and Γ − M lie on 0◦ and 30◦ respectively. The signal oscillates in clear 2ω0
+frequency, revealing the non-zero value of the imaginary Berry phase. As we rotate the crystal
+to Γ − M the contrast decreases. Indeed, along this axis the Berry connection, and therefore
+Importantly, at Γ − K ′ we observe a clear phase shift by π with
+the Berry phase, vanish.
+respect to Γ − K. This shift can be understood by the C3 symmetry of the crystal. A 60◦
+rotation is equal to a 180◦ rotation, leading to an inversion of the imaginary Berry phase (seen
+as inversion of the Berry connection, figure 3b). Consequently, the perturbation phase, which
+probes such asymmetry, shifts by π. This observation is consistent with previous THz-resolved
+HHG measurements in broken inversion crystals [48]. We have performed extensive simulations
+(see SI) to confirm the experimental features. In figure 3d, we show the theoretical Isum,N (σ)
+where one can appreciate that the same physics as in the experimental results appears: We
+
+5
+
+first see a clear oscillation of 2ω0 at 0◦, followed by a decrease in the contrast at 30◦ and finally
+a π-shifted revival of the 2ω0 oscillations at 60◦.
+
+Next, we apply Fourier transformation and isolate the imaginary Berry phase at each
+crystal orientation. In figure 4a, we present the angular dependence of the imaginary Berry
+phase, ∝ tanh (2γi
+B), for harmonic H13, measured with different laser intensities. First we
+notice that the crystal symmetry is clearly reflected for all the intensity values – as we rotate
+the crystal from 0◦ to 60◦ the imaginary Berry phase shifts by π. In addition, increasing the
+field’s intensity leads to higher values of the imaginary Berry phase. What is the origin of
+this observation? As we increase the field we reduce the tunneling barrier and therefore the
+imaginary component of the time and momentum decreases. However, the Berry phase itself
+is directly proportional to the vector field which increases with the laser intensity. Clearly, in
+the balance between the two effects, the second effect plays the dominant role. This picture is
+well confirmed by our calculations (figure 4c). A detailed discussion of this picture is provided
+in the SI.
+
+In order to get a deeper insight into the subcycle evolution of the interaction, we resolve
+the variation of the imaginary Berry phase with the harmonic number. In figure 4b, we plot
+the reconstructed imaginary Berry phase associated with harmonics H11 to H14, correspond-
+ing to the interaction induced from the first conduction band. As in the intensity scan, the
+crystal symmetry is clearly reflected, as we notice a π phase shift around 30◦ for all the har-
+monic orders. Importantly, we observe that the imaginary Berry phase increases with harmonic
+number. Higher harmonics are associated with earlier tunneling times, and therefore a higher
+instantaneous field. Since the Berry phase is proportional to the field’s strength, increasing the
+harmonic order leads to an increase of this phase, revealing its subcycle evolution (see SI).
+
+Summary
+
+Our study pushes the boundaries of the well-known Berry phase in solids by generalizing this
+concept into the complex plane, thereby shedding light on geometrical phenomena within the
+classically forbidden region. We demonstrate, both theoretically and experimentally, the ability
+to isolate the role of the imaginary Berry phase, accumulated as the electron propagates under
+the tunneling barrier. Applying solid state two colors high harmonic spectroscopy, we manip-
+ulate the tunneling barrier with sub-cycle precision, extracting the imaginary Berry phase and
+identifying its geometrical properties. Resolving the variation of this phase with the crystal ori-
+entation captures its symmetrical properties, reflecting the symmetry of the tunneling barrier
+itself. Following the variation of this phase with the harmonic order, visualizes its evolution
+within a fraction of the optical cycle. Our study will open new opportunities for exploring novel
+quantum phenomena in condensed matter systems, such as topology [49, 50] and magnetism.
+Furthermore, our proposed scheme will introduce new approaches for controlling the system’s
+geometrical properties by extending them into the complex plane. Our theoretical study of the
+
+6
+
+Berry curvature and the quantum metric will open an opportunity to study quantum geometry
+in a wide range of open systems. Finally, the capacity to resolve complex geometrical phases
+extends beyond strong field light-matter interactions into the realms of quantum information
+and quantum computation – exploring dephasing and quantum entanglement phenomena.
+
+References
+
+[1] M. V. Berry. Quantal phase factors accompanying adiabatic changes. 392(1802):45–57.
+
+Publisher: The Royal Society.
+
+[2] Di Xiao, Ming-Che Chang, and Qian Niu. Berry phase effects on electronic properties.
+
+Reviews of modern physics, 82(3):1959, 2010.
+
+[3] Shambhu Ghimire and David A Reis. High-harmonic generation from solids. Nature
+
+physics, 15(1):10–16, 2019.
+
+[4] Omer Kneller, Doron Azoury, Yotam Federman, Michael Krueger, Ayelet J Uzan, Gal
+Orenstein, Barry D Bruner, Olga Smirnova, Serguei Patchkovskii, Misha Ivanov, et al. A
+look under the tunnelling barrier via attosecond-gated interferometry. Nature photonics,
+16(4):304–310, 2022.
+
+[5] Y. Aharonov and D. Bohm. Significance of electromagnetic potentials in the quantum
+
+theory. 115(3):485–491. Publisher: American Physical Society.
+
+[6] Di Xiao, Ming-Che Chang, and Qian Niu. Berry phase effects on electronic properties.
+
+82(3):1959–2007. Publisher: American Physical Society.
+
+[7] C. Dutreix, H. Gonz´alez-Herrero, I. Brihuega, M. I. Katsnelson, C. Chapelier, and V. T.
+Renard. Measuring the berry phase of graphene from wavefront dislocations in friedel
+oscillations. 574(7777):219–222. Publisher: Nature Publishing Group.
+
+[8] M. V. Berry, R. G. Chambers, M. D. Large, C. Upstill, and J. C. Walmsley. Wavefront
+
+dislocations in the aharonov-bohm effect and its water wave analogue. 1(3):154.
+
+[9] S. Pancharatnam. Generalized theory of interference, and its applications. part i. coherent
+
+pencils. 44(5):247–262. Number: 5 Publisher: Indian Academy of Sciences.
+
+[10] R. Simon, H. J. Kimble, and E. C. G. Sudarshan. Evolving geometric phase and its dy-
+namical manifestation as a frequency shift: An optical experiment. 61(1):19–22. Publisher:
+American Physical Society.
+
+[11] Kenneth G Wilson. Confinement of quarks. Physical review D, 10(8):2445, 1974.
+
+[12] Eliahu Cohen, Hugo Larocque, Fr´ed´eric Bouchard, Farshad Nejadsattari, Yuval Gefen,
+and Ebrahim Karimi. Geometric phase from aharonov–bohm to pancharatnam–berry and
+beyond. Nature Reviews Physics, 1(7):437–449, 2019.
+
+7
+
+[13] R. D. King-Smith and David Vanderbilt. Theory of polarization of crystalline solids.
+
+47(3):1651–1654. Publisher: American Physical Society.
+
+[14] M. Z. Hasan and C. L. Kane. Colloquium: Topological insulators. 82(4):3045–3067.
+
+Publisher: American Physical Society.
+
+[15] Eliahu Cohen, Hugo Larocque, Fr´ed´eric Bouchard, Farshad Nejadsattari, Yuval Gefen,
+and Ebrahim Karimi. Geometric phase from aharonov–bohm to pancharatnam–berry and
+beyond. 1(7):437–449. Publisher: Nature Publishing Group.
+
+[16] Robert S. Whitney, Yuriy Makhlin, Alexander Shnirman, and Yuval Gefen. Geometric
+nature of the environment-induced berry phase and geometric dephasing. 94(7):070407.
+Publisher: American Physical Society.
+
+[17] Peter J Leek, JM Fink, Alexandre Blais, R Bianchetti, M Goppl, Jay M Gambetta, David I
+Schuster, Luigi Frunzio, Robert J Schoelkopf, and Andreas Wallraff. Observation of berry’s
+phase in a solid-state qubit. science, 318(5858):1889–1892, 2007.
+
+[18] Angelo Carollo, Ivette Fuentes-Guridi, M Franca Santos, and Vlatko Vedral. Geometric
+
+phase in open systems. Physical review letters, 90(16):160402, 2003.
+
+[19] L-M Duan, Juan I Cirac, and Peter Zoller. Geometric manipulation of trapped ions for
+
+quantum computation. Science, 292(5522):1695–1697, 2001.
+
+[20] Jonathan A Jones, Vlatko Vedral, Artur Ekert, and Giuseppe Castagnoli. Geometric
+quantum computation using nuclear magnetic resonance. Nature, 403(6772):869–871, 2000.
+
+[21] LV Keldysh et al. Ionization in the field of a strong electromagnetic wave. Sov. Phys.
+
+JETP, 20(5):1307–1314, 1965.
+
+[22] Misha Ivanov.
+
+Ionization in strong low-frequency fields.
+XUV Physics, pages 177–200. John Wiley & Sons, Ltd.
+https://onlinelibrary.wiley.com/doi/pdf/10.1002/9783527677689.ch6.
+
+In Attosecond and
+eprint:
+6
+Section:
+
+[23] O Pedatzur, G Orenstein, V Serbinenko, H Soifer, BD Bruner, AJ Uzan, DS Brambila,
+AG Harvey, L Torlina, F Morales, O Smirnova, and N Dudovich. Attosecond tunnelling
+interferometry. Nature Physics, 11(10):815, 2015.
+
+[24] P Eckle, AN Pfeiffer, C Cirelli, A Staudte, R Dorner, HG Muller, M Buttiker, and
+U Keller. Attosecond ionization and tunneling delay time measurements in helium. science,
+322(5907):1525–1529, 2008.
+
+[25] A Gianfrate, O Bleu, L Dominici, V Ardizzone, M De Giorgi, D Ballarini, G Lerario,
+KW West, LN Pfeiffer, DD Solnyshkov, et al. Measurement of the quantum geometric
+tensor and of the anomalous hall drift. Nature, 578(7795):381–385, 2020.
+
+8
+
+[26] P¨aivi T¨orm¨a. Essay: Where can quantum geometry lead us? Physical Review Letters,
+
+131(24):240001, 2023.
+
+[27] J. Zak. Berry’s phase for energy bands in solids. 62(23):2747–2750. Publisher: American
+
+Physical Society.
+
+[28] Ayelet J. Uzan-Narovlansky, Lior Faeyrman, Graham G. Brown, Sergei Shames, Vladimir
+Narovlansky, Jiewen Xiao, Talya Arusi-Parpar, Omer Kneller, Barry D. Bruner, Olga
+Smirnova, Rui E. F. Silva, Binghai Yan, ´Alvaro Jim´enez-Gal´an, Misha Ivanov, and Nirit
+Dudovich. Observation of interband berry phase in laser-driven crystals. 626(7997):66–71.
+Publisher: Nature Publishing Group.
+
+[29] Alexis Chac´on, Dasol Kim, Wei Zhu, Shane P. Kelly, Alexandre Dauphin, Emilio Pisanty,
+Andrew S. Maxwell, Antonio Pic´on, Marcelo F. Ciappina, Dong Eon Kim, Christopher
+Ticknor, Avadh Saxena, and Maciej Lewenstein. Circular dichroism in higher-order
+harmonic generation: Heralding topological phases and transitions in chern insulators.
+102(13):134115. Publisher: American Physical Society.
+
+[30] Lun Yue and Mette B Gaarde. Imperfect recollisions in high-harmonic generation in solids.
+
+Physical Review Letters, 124(15):153204, 2020.
+
+[31] G Vampa, TJ Hammond, N Thir´e, BE Schmidt, F L´egar´e, CR McDonald, T Brabec, and
+PB Corkum. Linking high harmonics from gases and solids. Nature, 522(7557):462, 2015.
+
+[32] Shambhu Ghimire, Anthony D DiChiara, Emily Sistrunk, Pierre Agostini, Louis F Di-
+Mauro, and David A Reis. Observation of high-order harmonic generation in a bulk
+crystal. Nature physics, 7(2):138, 2011.
+
+[33] Tran Trung Luu, M Garg, S Yu Kruchinin, Antoine Moulet, M Th Hassan, and Eleft-
+herios Goulielmakis. Extreme ultraviolet high-harmonic spectroscopy of solids. Nature,
+521(7553):498, 2015.
+
+[34] Olaf Schubert, Matthias Hohenleutner, Fabian Langer, Benedikt Urbanek, C Lange,
+U Huttner, D Golde, T Meier, M Kira, Stephan W Koch, et al. Sub-cycle control of
+terahertz high-harmonic generation by dynamical bloch oscillations. Nature Photonics,
+8(2):119, 2014.
+
+[35] Martin Schultze, Krupa Ramasesha, CD Pemmaraju, SA Sato, D Whitmore, A Gandman,
+James S Prell, LJ Borja, D Prendergast, K Yabana, et al. Attosecond band-gap dynamics
+in silicon. Science, 346(6215):1348–1352, 2014.
+
+[36] Fabian Langer, Christoph P Schmid, Stefan Schlauderer, Martin Gmitra, Jaroslav Fabian,
+Philipp Nagler, Christian Sch¨uller, Tobias Korn, PG Hawkins, JT Steiner, et al. Lightwave
+valleytronics in a monolayer of tungsten diselenide. Nature, 557(7703):76–80, 2018.
+
+9
+
+[37] Igor Tyulnev, ´Alvaro Jim´enez-Gal´an, Julita Poborska, Lenard Vamos, Philip St J Russell,
+Francesco Tani, Olga Smirnova, Misha Ivanov, Rui EF Silva, and Jens Biegert. Valleytron-
+ics in bulk mos2 with a topologic optical field. Nature, 628(8009):746–751, 2024.
+
+[38] Sambit Mitra, ´Alvaro Jim´enez-Gal´an, Mario Aulich, Marcel Neuhaus, Rui EF Silva,
+Volodymyr Pervak, Matthias F Kling, and Shubhadeep Biswas. Light-wave-controlled
+haldane model in monolayer hexagonal boron nitride. Nature, pages 1–6, 2024.
+
+[39] Omer Kneller, Doron Azoury, Yotam Federman, Michael Kr¨uger, Ayelet J. Uzan, Gal
+Orenstein, Barry D. Bruner, Olga Smirnova, Serguei Patchkovskii, Misha Ivanov, and
+Nirit Dudovich. A look under the tunnelling barrier via attosecond-gated interferometry.
+16(4):304–310. Publisher: Nature Publishing Group.
+
+[40] Manish Garg, Hee-Yong Kim, and Eleftherios Goulielmakis. Ultimate waveform repro-
+ducibility of extreme-ultraviolet pulses by high-harmonic generation in quartz. Nature
+Photonics, 12(5):291–296, 2018.
+
+[41] TJ Hammond, DM Villeneuve, and PB Corkum. Producing and controlling half-cycle
+
+near-infrared electric-field transients. Optica, 4(7):826–830, 2017.
+
+[42] Tran Trung Luu and Hans Jakob W¨orner. Measurement of the berry curvature of solids
+
+using high-harmonic spectroscopy. Nature communications, 9(1):1–6, 2018.
+
+[43] Tran Trung Luu and Hans Jakob W¨orner. Observing broken inversion symmetry in solids
+using two-color high-order harmonic spectroscopy. Physical Review A, 98(4):041802, 2018.
+
+[44] N Dudovich, Olga Smirnova, J Levesque, Yu Mairesse, M Yu Ivanov, DM Villeneuve, and
+Paul B Corkum. Measuring and controlling the birth of attosecond xuv pulses. Nature
+physics, 2(11):781, 2006.
+
+[45] Ayelet Julie Uzan, Gal Orenstein, ´Alvaro Jim´enez-Gal´an, Chris McDonald, Rui EF Silva,
+Barry D Bruner, Nikolai D Klimkin, Valerie Blanchet, Talya Arusi-Parpar, Michael Kr¨uger,
+et al. Attosecond spectral singularities in solid-state high-harmonic generation. Nature
+Photonics, 14(3):183–187, 2020.
+
+[46] Chen Qian, Chao Yu, Shicheng Jiang, Tan Zhang, Jiacheng Gao, Shang Shi, Hanqi Pi,
+Hongming Weng, and Ruifeng Lu. Role of shift vector in high-harmonic generation from
+noncentrosymmetric topological insulators under strong laser fields. 12(2):021030. Pub-
+lisher: American Physical Society.
+
+[47] G. Vampa and T. Brabec. Merge of high harmonic generation from gases and solids and
+
+its implications for attosecond science. 50(8):083001. Publisher: IOP Publishing.
+
+[48] Fabian Langer, Matthias Hohenleutner, U Huttner, Stephan W Koch, M Kira, and Rupert
+Huber. Symmetry-controlled temporal structure of high-harmonic carrier fields from a bulk
+crystal. Nature photonics, 11(4):227–231, 2017.
+
+10
+
+[49] Christoph P Schmid, Leonard Weigl, P Gr¨ossing, Vanessa Junk, Cosimo Gorini, Ste-
+fan Schlauderer, Suguru Ito, Manuel Meierhofer, Niklas Hofmann, Dmitry Afanasiev,
+et al. Tunable non-integer high-harmonic generation in a topological insulator. Nature,
+593(7859):385–390, 2021.
+
+[50] Ya Bai, Fucong Fei, Shuo Wang, Na Li, Xiaolu Li, Fengqi Song, Ruxin Li, Zhizhan Xu,
+and Peng Liu. High-harmonic generation from topological surface states. Nature Physics,
+17(3):311–315, 2021.
+
+11
+
+Acknowledgments
+
+We would like to acknowledge Shinsei Ryu and Tobias Holder for useful discussions and their
+scientific input. We also would like to thank Pengjie Wang for his great advice. N.D. is the
+incumbent of the Robin Chemers Neustein Professorial Chair. N.D. acknowledges the Minerva
+Foundation, the Israeli Science Foundation and the European Research Council for financial
+support. M.I. acknowledges funding of the DFG QUTIF grant IV152/6-2. A.J.G. acknowledges
+support from Comunidad de Madrid through TALENTO Grant 2022-T1/IND-24102. A.J.G.
+and M.I. acknowledge funding from the European Union’s Horizon 2020 research and innovation
+program under grant agreement No 899794. E. B. M. and R. E. F. S. acknowledge support from
+the fellowship LCF/BQ/PR21/11840008 from “La Caixa” Foundation (ID 100010434) and by
+Grant PID2021-122769NB-I00 funded by MCIN/AEI/10.13039/501100011033.
+
+Contributions
+
+N.D. and A.J.U.N supervised the study. L.F. and A.J.U.N. conceived and planned the exper-
+iments. E.B.M, A.J.G. and R.S. performed the theoretical study and the numerical analysis.
+V.N., O.S. and M.I. developed the theoretical model. B.Y. provided the DFT calculations.
+L.F., A.J.U.N., T.A.P. and B.D.B performed the measurements. L.F., R.W. and R.P. analyzed
+the data. All authors discussed the results and contributed to writing the manuscript.
+
+Competing financial interests
+
+The authors declare no competing financial interests.
+
+Corresponding authors
+
+Correspondence to Nirit Dudovich (nirit.dudovich@weizmann.ac.il) and Ayelet Uzan-Narovlansky
+(auzan@princeton.edu).
+
+Data availability
+
+The data and datasets that support the plots within this paper and other findings of this study
+are available from the corresponding author upon reasonable request.
+
+12
+
+Code availability
+
+The custom code used for the current study has been described in previous publications, and
+parts of it can be made available from the corresponding author on reasonable request.
+
+Supplementary information
+
+Supplementary Information is available for this paper.
+
+13
+
+Imaginary Berry phase under tunneling barrier.
+
+a, When a quantum
+Figure 1:
+wavepacket follows a closed loop trajectory in the parameter space, it accumulates a real valued
+Berry phase (left). The presence of a tunneling barrier (right), introduces losses leading to the
+accumulation of a complex geometrical phase. b and c, Manipulation of the tunneling barrier
+in light driven crystals using a two color field. The strong laser field (red) bends the crystal
+Coulomb potential (orange), allowing the electronic wavefunction (cyan) to tunnel from the
+valence band to the conduction band (black/white lines). Adding the second harmonic field
+(dark blue) modulates the tunneling barrier, increasing or decreasing the barrier, as we scan
+the two-color delay (b or c respectively).
+
+14
+
+eiRe(γ )Be-Im(γ )BeiRe(γ )BabcFigure 2: Two color HHG spectroscopy in quartz. a, Oscillating HHG spectrum (in log
+scale) in quartz, as a function of the two color delay (vertical axis), along Γ − K. b Averaged
+sum of adjacent even and odd harmonics, as a function of the two color delay (vertical axis),
+generated in quartz. The sum of adjacent harmonics is proportional to the imaginary pertur-
+bation induced by the SH field (σi(τ )). Each harmonic signal is normalized by its maximum
+value and subtracted by the DC signal.
+
+15
+
+11131517192123061520253021.510.5ab1.53010.5x442Figure 3: Resolving the imaginary phase and its angular dependence. a, By rotat-
+ing the crystal with respect to the fundamental field’s polarization, while scanning the SH
+delay, we resolve the angular dependence of the HHG oscillations (0◦ orientation represents
+Γ − K and 60◦ represents Γ − K ′). b, Theoretical description (illustration) for the Berry
+connection (black arrows) in quartz, plotted on top of the Berry curvature (blue/red colors
+for positive/negative values). The presented Berry connection follows the crystal symmetries
+showing a sign changed between Γ − K to Γ − K ′. c,d Experimentally/theoretically resolved
+imaginary phase (H14/H11), Isum, as a function of the SH delay and crystal orientation. This
+term probes the overall imaginary phase, revealing the interplay between the imaginary Berry
+B)) and the imaginary perturbation induced by the two color field (σi). Positive
+phase (tanh(γi
+(negative) values signify suppression (amplification) of the imaginary phase, due to the corre-
+sponding modification of the tunneling barrier. Dashed lines (black) emphasize the π phase
+shift between Γ − K and Γ − K ′ crystal orientations.
+
+16
+
+020406000.511.5000.511.52020406000.511.5000.511.52020406000.511.5000.511.52cdГab020406000.511.5000.511.52020406000.511.500.511.52cd0204060-0.200.2-0.0500.05ГГFigure 4: Extracting the angular dependence of the imaginary Berry phase. a, Field’s
+intensity dependence. The imaginary Berry phase (H13), ∝ tanh (2γi
+B), resolved with different
+fundamental field intensities (I0-1.5I0, where I0 is the lowest intensity and it is of the order of
+1013 W
+cm2 ) as a function of the crystal orientation. b, Extracting the evolution of the imaginary
+Berry phase within the optical cycle. The imaginary Berry phase, ∝ tanh (2γi
+B), extracted
+for different harmonic orders, as a function of the crystal orientation. c, Measured/calculated
+imaginary Berry phase along (Γ − K ′), for different field intensities (red/yellow respectively),
+For the experimental plots, 1-4 intensities (x axis) are as in figure a and for the theoretical
+calculation 1-5 intensities are 1-1.5 T W
+cm2 .
+
+17
+
+0204060-0.02-0.0100.010.020204060-0.02-0.0100.010.02H11H12H13H1412345-0.02-0.015-0.01-0.005-0.3-0.25-0.2-0.15I01.1I0abc1.3I01.5I0

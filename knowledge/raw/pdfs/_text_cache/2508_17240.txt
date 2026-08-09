@@ -1,0 +1,1939 @@
+5
+2
+0
+2
+
+g
+u
+A
+4
+2
+
+]
+i
+c
+s
+-
+l
+r
+t
+
+m
+
+.
+t
+a
+m
+-
+d
+n
+o
+c
+[
+
+1
+v
+0
+4
+2
+7
+1
+.
+8
+0
+5
+2
+:
+v
+i
+X
+r
+a
+
+Tunable Valley Polarization and Anomalous Hall Effect in Ferrovalley
+NbX2 and TaX2 (X = S, Se, Te): A First-Principles Study
+Samiul Islama, Sharif Mohammad Mominuzzamana and Ahmed Zubaira,∗
+
+aDepartment of Electrical and Electronic Engineering, Bangladesh University of Engineering and Technology, Dhaka, 1205, Bangladesh
+
+A R T I C L E I N F O
+
+A B S T R A C T
+
+Keywords:
+2D Materials
+Transition Metal Dichalcogenides
+Valleytronics
+Spintronics
+Valley Polarization
+Berry Curvature
+Anomalous Hall Effect
+Ferrovalley materials
+Spin Filter
+
+Two-dimensional transition metal dichalcogenides lack inversion symmetry and have broken time-
+reversal symmetry due to the honeycomb structure and intrinsic ferromagnetism, which leads to
+their valley polarization. Here, we explored the electronic and magnetic properties of the novel
+ferrovalley materials 1H-NbS2, 1H-NbSe2, 1H-NbTe2, 1H-TaS2, 1H-TaSe2, and 1H-TaTe2 using
+first-principles calculations based on density functional theory. The materials are dynamically stable
+bipolar magnetic semiconductors. Among the magnetic semiconductors, NbSe2 showed the maximum
+Curie temperature of 176.25 K. For these materials, the ferromagnetic state was more favorable than
+the antiferromagnetic state, indicating robust ferrovalley characteristics. These ferrovalley materials
+showed a giant tunable valley polarization at K and K′ points in the Brillouin zone without applying
+any external factors due to intrinsic exchange interactions of transition metal d-orbital electrons
+and spin-orbit coupling. TaTe2 exhibited an outstanding valley splitting of 541 meV. Reversing
+Bloch electrons’ magnetic moment caused an alteration of valley polarization. Additionally, the
+application of uniaxial and biaxial strain led to the manipulation and variation of the bandgap and
+valley polarization. Berry curvature exhibited opposite signs and unequal magnitudes at K and K′
+points, which led to the anomalous valley Hall effect in these materials. NbS2, NbSe2, and NbTe2
+exhibited Berry curvature at unstrained crystals, whereas Berry curvature appeared only in TaSe2
+and TaTe2 with the application of strain. These ferrovalley materials exhibited distinct band gaps for
+spin-up and spin-down electrons, enabling the selective transport of spin-polarized electrons. The
+bandgap associated with each spin orientation could be modulated through uniaxial or biaxial strain,
+making them promising for spin filter devices. Insights from this work will be beneficial for utilizing
+these ferrovalley materials in advanced valleytronic and spintronic applications such as non-volatile
+memories, optical and magnetic switches, and valley filters.
+
+1. Introduction
+
+Two-dimensional (2D) transition metal dichalcogenides
+(TMDC) have garnered excellent traction due to their in-
+triguing electronic, electrochemical, thermal, mechanical,
+magnetic, and optical properties [1–4]. Besides, TMDCs ex-
+hibit some unique properties like valley contrasting physics
+[5], charge density wave [6], and magnetoresistance [7].
+Hence, they have potential applications in superconductors
+[8], valleytronics, and memory devices [9]. In addition, due
+to the inherent lack of center of symmetry associated with
+the spin-orbit coupling (SOC) effect from the 𝑑 orbitals
+of the transition metal atoms, they exhibit two degener-
+ate yet inequivalent valley states at the K and K′ points
+in the hexagonal Brillouin zone (BZ) [10, 11], which is
+considered a new quantum number called valley degree of
+freedom (DOF) and acts as a pseudospin. Like charge and
+spin, valley DOF can be manipulated, which makes them
+a promising candidate in valleytronic devices, non-volatile
+storage, valley valves, optical switches, magnetic switches,
+and valley filters [12–15]. Besides, the control of valley
+DOF can be utilized to encode and transmit information
+[16], making them promising candidates for information
+storage as the significant separation between inequivalent
+
+∗Corresponding author: Ahmed Zubair
+
+samiulislam2616@gmail.com (S. Islam); mominuzzaman@gmail.com
+
+(S.M. Mominuzzaman); ahmedzubair@buet.ac.bd (A. Zubair)
+
+ORCID(s): 0009-0002-5414-5531 (S. Islam); 0000-0002-1833-2244 (A.
+
+Zubair)
+
+valleys in momentum space reduces intervalley scattering
+from deformation and long wavelength phonons [17, 18].
+This surpasses modern charge-based semiconductor tech-
+nologies [18]. Recent studies demonstrated that materials
+like monolayer TMDCs exhibit robust valley polarization,
+which can be controlled through external stimuli, such as
+electric fields or mechanical strain, further supporting their
+potential in advanced information processing technologies
+[15, 19, 20].
+
+The concept of 2D valleytronics originated in graphene
+[21]. In materials with time-reversal symmetry (TRS), the
+electronic states at the inequivalent K and K′ points are
+degenerate, as the symmetry enforces identical energy lev-
+els, preventing spontaneous valley polarization. Breaking
+the valley degeneracy in these materials is crucial, as it
+would allow the control of valley polarization, which is
+essential for memory and logic applications [22, 23], in next-
+generation electronics [21, 22], and optoelectronics [13].
+Valley-dependent electronics and optoelectronics based on
+semi-metallic graphene, a representative 2D material, were
+theoretically proposed [21, 22]. In 2D materials, valley
+polarization, the selective population of electrons in one
+of the inequivalent K or K′ valleys in the BZ, depends
+critically on the presence or absence of TRS and inversion
+symmetry. When TRS is preserved, the energies at K and K′
+remain degenerate, making valley polarization challenging.
+However, breaking TRS lifts this degeneracy by shifting
+the energy of each valley differently, creating an effective
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 1 of 17
+
+ 
+ 
+ 
+ 
+ 
+ 
+Tunable Valley Polarization and Anomalous Hall Conductivity
+
+magnetic field 𝐵eff that results in a valley-specific energy
+difference Δ𝐸 = 𝑔𝜇𝐵𝐵eff, where 𝑔 is the Landé g-factor
+and 𝜇𝐵 is the Bohr magnetron. However, the valley energy
+is degenerate owing to TRS in most 2D TMDC materials,
+which restricts their practical applicability.
+
+Breaking TRS between K and K′ valleys can be achieved
+by using external magnetic fields [24, 25], magnetic prox-
+imity effects [26, 27], optical Stark effect [28], optical ex-
+citation [29], magnetic doping [30] , or electric fields [31].
+However, these external methods have limitations, as valley
+polarization disappears once the external field is removed,
+which is unsuitable for non-volatile valleytronic devices. Ad-
+ditionally, the effectiveness of magnetic-field-induced valley
+polarization is low (0.1–0.2 meV/T) [32], and magnetic
+substrates can impact device performance by increasing
+dimensions, causing minor Zeeman splitting, and altering
+band structures [32]. Magnetic dopants tend to cluster on
+TMDC surfaces, leading to carrier scattering. At the same
+time, circularly polarized light, though adequate for valley
+polarization in TMDC, requires complex tuning and has a
+short luminescence lifetime [33].
+
+Ferrovalley (FV) materials, such as the 2H-VSe2 mono-
+layer [34], offer an alternative by achieving spontaneous
+valley polarization through intrinsic ferromagnetism, ben-
+efiting from SOC and intrinsic exchange interactions. This
+spontaneous polarization remains stable without external
+fields, which is ideal for valleytronic and spintronic devices.
+Few FV materials have been discovered, including 2H-VSe2
+[34], VAgP2Se6 [35], LaBr2 [36], and GdX2 (X = Cl, F)
+[37], GdI2 [38], ScX2 (X= Br, Cl, I) [39], FeCl2 [40], YX2
+(X= Br, Cl, I) [41] which combine spin polarization and
+valley properties, making them promising for non-volatile
+applications. Previous studies identified significant chal-
+lenges in valleytronic devices, primarily due to the difficulty
+in achieving spontaneous valley polarization, clustering of
+magnetic atoms, and the complexity of the mechanism to
+achieve valley polarization. Though many FV materials
+were reported to exhibit spontaneous valley polarization, the
+valley splitting energy was low, which hindered the practical
+realization of valleytronic devices. Among these, the most
+prominent valley polarization was reported for GdI2, which
+was 149 meV [38].
+
+In this study, we explored a novel family of 2D FV
+materials that exhibited ease of exfoliation and demonstrated
+spontaneous valley polarization with significantly enhanced
+valley polarization energy. This elevated energy surpassed
+the threshold of electronic noise under ambient and ex-
+treme conditions, thereby offering promising potential for
+practical valleytronic devices. Moreover, we investigated the
+tunability of valley-splitting energy in these materials. We
+reported the identification of a new class of FV materials,
+including 1H-NbS2, 1H-NbSe2, 1H-NbTe2, 1H-TaS2, 1H-
+TaSe2, and 1H-TaTe2. While NbS2 and NbSe2 were previ-
+ously studied, we provided a comparative analysis of these
+materials alongside other members of the same group. Our
+findings revealed unique insights into the behavior of group
+
+V TMDCs, highlighting their potential for advanced val-
+leytronic technologies. They exhibited intrinsic valley polar-
+ization without external manipulation. Unlike conventional
+approaches where valley polarization is induced through
+external fields or magnetic doping, these materials demon-
+strated robust spontaneous valley polarization driven by
+their intrinsic magnetic properties. These materials showed
+superior valley polarization energy. We also demonstrated
+the manipulability of the materials through magnetic mo-
+ment reversal and uniaxial and biaxial strain. To show the
+valley-contrasting behaviors of the TMDCs, we calculated
+the quantum transport properties like Berry curvature and
+anomalous Hall conductivity (AHC), which confirmed the
+potential of these TMDCs for valleytronic and spintronic
+applications.
+
+2. Computational Details
+
+First-principles calculations were performed using den-
+sity functional theory (DFT) using the Quantum ESPRESSO
+package [42]. The projector augmented wave (PAW) method,
+coupled with the Perdew-Burke-Ernzerhof (PBE) exchange-
+correlation functional, was used to model the electron-
+ion interactions. Unlike norm-conserving pseudopotentials,
+PAW pseudopotentials offer higher accuracy in describing
+localized orbitals, especially for transition metals with sig-
+nificant SOC [3]. For transition metal atoms, 𝑑 orbitals
+were treated as valence electrons, whereas 𝑑 orbitals were
+considered as core electrons for chalcogen atoms in the
+pseudopotentials. The Hubbard U parameter was applied
+to account for strong on-site Coulomb interactions in the
+𝑑 orbitals [43]. The Hubbard parameters were obtained
+using the linear response approach implemented in Quantum
+ESPRESSO. This method calculates the Hubbard U by
+perturbing the on-site occupation of localized orbitals and
+measuring the response in the electronic structure self-
+consistently. The optimized Hubbard parameters for Nb and
+Ta atoms’ 𝑑 orbitals for NbS2, NbSe2, NbTe2, TaS2, TaSe2,
+and TaTe2 were 3.1148, 3.1231, 3.0448, 2.3392, 2.5686, and
+2.1982, respectively. Cold smearing, with a width of 0.005
+Ry, enhanced convergence.
+
+In our study, the unit cell of a TMDC with hexagonal
+symmetry, belonging to the space group P63/mmc, was
+utilized. The structure featured trigonal prismatic coordi-
+nation of the transition metal layer sandwiched between
+two chalcogen layers. This arrangement formed a periodic
+honeycomb-like lattice characteristic of monolayer TMDCs.
+A 15 Å vacuum gap along the z-axis minimized inter-
+layer interactions. A kinetic energy cutoff of 55 Ry was
+applied to define the maximum plane-wave energy used
+in expanding the electronic wavefunctions, and a charge
+density cutoff of 550 Ry was employed to specify the res-
+olution of the charge density grid. Variable cell relaxation
+was performed on the unit cell, allowing both atomic po-
+sitions and lattice parameters to adjust. The relaxation pro-
+cess continued until the total energy converged to a thresh-
+old of 10−8 Ry per atom, and the forces between atoms
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 2 of 17
+
+Tunable Valley Polarization and Anomalous Hall Conductivity
+
+Fig. 1: Optimized structures of different monolayers: (a) NbS2 (top view), (b) NbSe2 (side view), (c) NbTe2 (side view), (d) TaS2
+(side view), (e) TaSe2 (top view), (f) TaTe2 (side view), (g) top view of NbTe2 (3 × 3 × 1) supercell, (h) side view of NbTe2 (5
+× 5 × 1) supercell. Purple, blue, green, yellow, and red atoms represent Nb, Ta, S, Se, and Te, respectively.
+
+were reduced below 10−5 Ry/Bohr. Relaxation and self-
+consistent field (SCF) calculation were performed with a (24
+× 24 × 1) Γ-centered Monkhorst-Pack grid for BZ sampling
+and a denser (48 × 48 × 1) k-point grid for density of
+states (DOS) calculations. To assess the energetic stability
+of the system, we utilized the total ground-state energy de-
+rived from self-consistent field (SCF) calculations. This ap-
+proach ensures accurate energy evaluation by accounting for
+electron-electron interactions through a self-consistent so-
+lution. We utilized the Heyd–Scuseria–Ernzerhof (HSE06)
+hybrid functional within Quantum ESPRESSO to compute
+the electronic bandgap. Hybrid functionals like HSE06 com-
+bine a portion of exact Hartree–Fock exchange with den-
+sity functional theory (DFT) exchange-correlation, address-
+ing the typical bandgap underestimation in standard DFT
+methods. We performed Bader charge analysis using the
+charge density obtained from SCF calculations in Quantum
+ESPRESSO. This analysis was conducted using the Bader
+code developed by the Henkelman group [44]. Additionally,
+we evaluated the average electrostatic potential by summing
+the bare ionic potential and the Hartree potential derived
+from the same SCF calculations. For evaluating antifer-
+romagnetic (AFM) and ferromagnetic (FM) properties for
+TMDCs, we used a (2 × 2 × 1) supercell after variable cell
+relaxation.
+
+To investigate valley-related properties, we incorporated
+SOC effects using fully relativistic PAW pseudopotentials.
+We computed the Berry curvature and anomalous Hall con-
+ductivity (AHC) employing Wannier90 [45] and Wannier-
+Tools [46]. A (13 × 13 × 1) non-self-consistent k-point
+grid was utilized to generate maximally localized Wannier
+functions, facilitating accurate interpolation of the electronic
+
+structure. The non-self-consistent calculation to obtain Wan-
+nier functions was performed in Quantum ESPRESSO using
+fully relativistic pseudopotentials.
+
+Dynamic stability was verified using a (2 × 2 × 1) su-
+percell through the finite displacement method implemented
+in Phonopy [47]. This approach systematically displaces
+atoms within the supercell and calculates the resulting forces
+to construct the dynamical matrix from which phonon fre-
+quencies are determined. To obtain accurate forces, stresses,
+and ground-state energies, SCF calculations for the dis-
+placed atomic configurations were performed using Quan-
+tum ESPRESSO.
+
+3. Results and Discussion
+
+The exfoliation of 2D materials has progressed signifi-
+cantly with techniques like liquid-phase exfoliation (LPE).
+It provides a scalable and cost-effective approach for pro-
+ducing large quantities of solution-processed 2D materials,
+making it particularly suitable for electrochemical applica-
+tions. Notably, niobium diselenide (NbSe2) was successfully
+exfoliated using a two-step vapor deposition method, as well
+as LPE [48]. Likewise, thin films of NbS2 [49], TaSe2 [50],
+and metallic telluride nanosheets (e.g., NbTe2 and TaTe2)
+were effectively produced through exfoliation techniques
+[51]. These materials, which can be readily synthesized,
+exhibit hexagonal honeycomb lattice structures with broken
+inversion symmetry, a structural attribute that endows them
+with distinctive electronic properties.
+
+3.1. Structural Properties and Dynamic Stability
+
+We optimized unit cells of pristine 1H-NbS2, 1H-NbSe2,
+1H-NbTe2, 1H-TaS2, 1H-TaSe2, 1H-TaTe2 by relaxing them
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 3 of 17
+
+80.08°2.844 Å80.87°78.07°(a)(b)80.89°2.82 Å (c)(d)(f)(g)(h)(e)NbTaSSeTe3.502 Å 2.623Å (e)(h)3.378 Å Tunable Valley Polarization and Anomalous Hall Conductivity
+
+Table 1
+Structural, formation energy, work function, and Curie temperature of pristine TMDCs
+
+Crystals
+
+Lattice parameter (Å) Bond length (Å)
+
+Bond angle (◦)
+∠ chalcogen-metal-chalcogen
+
+NbS2
+NbSe2
+NbTe2
+TaS2
+TaSe2
+TaTe2
+
+3.378
+3.479
+3.699
+3.336
+3.502
+3.705
+
+2.506
+2.624
+2.844
+2.480
+2.623
+2.820
+
+77.79
+80.08
+80.87
+78.07
+79.47
+80.89
+
+Formation energy (eV) Work function (eV) Curie Temperature (K)
+
+(per atom)
+
+-4.7841
+-4.26322
+-3.6988
+-5.4565
+-4.8352
+-4.2861
+
+5.67
+5.33
+4.82
+–
+5.11
+4.75
+
+161.73
+176.25
+154.21
+–
+79.17
+79.27
+
+until the convergence threshold mentioned were achieved.
+To avoid interlayer interaction, we added a vacuum level of
+15 Å normal to the 2D sheet. Relaxed pristine TMDCs had
+hexagonal symmetry. The transition metal was sandwiched
+between two layers of chalcogens, forming a trigonal pris-
+matic coordinated with six chalcogen atoms. The optimized
+lattice parameters (a=b) for NbS2 and NbSe2 were 3.378
+and 3.479 Å, respectively, which is comparable with the
+previous report [52]. Lattice parameters of NbTe2, TaS2,
+TaSe2, TaTe2 were found to be 3.699, 3.336, 3.502, and
+3.705 Å, respectively. In niobium chalcogenides, the Nb-
+X (X = S, Se, Te) bond length increased with the atomic
+radius of the chalcogen. Nb-S bond length was 2.506 Å,
+the Nb-Se bond length was about 2.624 Å, and the Nb-
+Te bond length was around 2.844 Å. This trend reflected
+the increasing size of the chalcogen atoms from sulfur to
+tellurium, leading to longer Nb-X bonds. For Ta atoms,
+the bond lengths showed a similar increasing length with
+S, Se, and Te, where bond lengths were 2.480, 2.623, and
+2.820 Å, respectively. The bond angles within TMDCs ex-
+hibited a systematic increase with the atomic number of
+the chalcogen atom. This trend arose due to the increasing
+atomic radius and decreasing electronegativity from sulfur
+(S) to selenium (Se) to tellurium (Te), which influenced
+the spatial configuration of the crystal lattice. For niobium-
+based TMDCs, the chalcogen–metal–chalcogen bond angles
+increased. The bond angle in NbS2 is 77.79◦, which was a
+maximum of 80.87◦ in NbTe2. A similar trend was observed
+in tantalum-based TMDCs, where the bond angles were
+78.07◦ for TaS2, 79.47◦ for TaSe2, and 80.89◦ for TaTe2.
+The optimized lattice parameters, bond lengths, and bond
+angles are presented in Table 1.
+
+With the increasing atomic number in the same period in
+the periodic table, the lattice parameter and the bond length
+showed an increasing trend. This was due to the larger size of
+atoms, with the increasing atomic number having the same
+period in the periodic table. The bond angle showed the same
+trend. With increasing size, the bond angle increased. The
+optimized crystals are illustrated in Fig. 1.
+
+We predicted the energetic stability from the formation
+energy of the TMDCs. To calculate formation energy, we
+used the ground state energy and the single-atom ground
+state energy obtained from the SCF calculations. The for-
+mation energy of the alloy was determined by,
+
+𝐸formation = 𝐸MX2
+
+− 𝐸M𝑡𝑜𝑡𝑎𝑙
+
+− 2 × 𝐸X𝑡𝑜𝑡𝑎𝑙
+
+.
+
+(1)
+
+Here, 𝐸formation was the ground state total energy of the
+pristine crystals and 𝐸M, 𝐸X were the single atom energy
+of the atoms. Here, M = (Nb, Ta) and X = (S, Se, Te).
+
+The negative formation energy of the TMDCs suggests
+that energy will be released during the formation of the
+crystals. This process is an exothermic process. The largest
+formation energy was exhibited by TaS2, which was -5.457
+eV per atom. The formation energy was in the range of
+around 4 eV per atom, which is comparable to other crystals
+formation energy. The formation energies are reported in
+Table 1.
+
+We calculated the dynamic stability of the crystals by
+calculating the phonon dispersion. The finite displacement
+method was implemented to calculate the phonon disper-
+sion, where 6 supercells were created, displacing the atomic
+positions. Then, the phonon dispersion relation was evalu-
+ated from the force and stress on the system. TaS2 showed
+the most significant release of energy during formation;
+however, TaS2 was found to be dynamically unstable due
+to negative frequency in the phonon spectra. Except for
+TaS2, all other crystals were dynamically stable. The phonon
+dispersion relationship is in Fig. 2.
+
+The phonon dispersion relation showed that NbS2, NbSe2,
+NbTe2, TaSe2, and TaTe2 had no imaginary frequency,
+which indicated the dynamic stability of the crystals. There
+were three acoustic and six optical phonon branches present
+in the crystal. Except for NbS2 and NbSe2, there was
+a phonon gap between acoustic and optical phonons for
+these crystals. A more significant phonon gap can reduce
+phonon-phonon scattering, potentially increasing thermal
+conductivity. TaS2 exhibits a significant imaginary (nega-
+tive) frequency in the dispersion graph. TaS2 is not stable at
+room temperature. Hence, we discarded further discussion
+on TaS2.
+
+3.2. Bader Charge Analysis and Electrostatic
+
+Potential
+
+The bond nature in the crystals was predicted through
+Bader charge analysis. In these TMDC crystals, the oxi-
+dation state of Nb and Ta is +4. However, Bader charge
+analysis revealed that the actual charge transfer by Nb and
+Ta atoms was +1.661e, +1.451e, +1.137e, +1.529e, and
++1.120e, respectively, for NbS2, NbSe2, NbTe2, TaSe2, and
+TaTe2. This result suggested that the transition metals car-
+ried a partial positive charge. While the chalcogen atoms (S,
+Se, and Te) held partial negative charges, indicating electron
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 4 of 17
+
+Tunable Valley Polarization and Anomalous Hall Conductivity
+
+Fig. 2: Phonon spectra of (a) NbS2, (b) NbSe2, (c) NbTe2, (d) TaS2, (e) TaSe2, (f) TaTe2.
+
+Table 2
+Bader charge analysis of TMDCs
+
+Crystals Transition metal Chalcogen
+charge (e)
+-0.832
+-0.727
+-0.563
+-0.764
+-0.557
+
+charge (e)
++1.661
++1.451
++1.137
++1.529
++1.120
+
+NbS2
+NbSe2
+NbTe2
+TaSe2
+TaTe2
+
+transfer between the metal and chalcogen atoms. Such a
+distribution of charges highlighted a partial ionic character in
+the covalent bonding between atoms. NbS2 showed the most
+ionic characteristics. Table 2 illustrates the Bader charge
+analysis.
+
+The work function (𝜙) of TMDCs is a crucial parameter
+that impacts their electronic properties, surface reactivity,
+and applicability in electronic and optoelectronic devices.
+The average electrostatic potential is plotted in Fig. 3. The
+oscillations in the average electrostatic potential were more
+negative for transition metal atoms (Nb, Ta) than chalcogen
+atoms (S, Se, and Te) due to differences in electronic con-
+figuration, electronegativity, and charge distribution. Tran-
+sition metals have highly localized 𝑑 orbitals and higher
+local charge densities, resulting in deeper potential wells.
+In contrast, chalcogen atoms, with more diffuse 𝑝 orbitals
+and higher electronegativity, attracted some electron den-
+sity, leading to smoother and less negative oscillations.
+Additionally, the compact atomic radii of transition metals
+enhanced the nuclear potential, whereas the larger, more
+diffuse chalcogen orbitals resulted in a less pronounced
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 5 of 17
+
+(f)(g)(i)(j)(d)(e)(a)(b)(c)(f)Tunable Valley Polarization and Anomalous Hall Conductivity
+
+Fig. 3: Average electrostatic potential of TMDC structures: (a) NbS2, (b) NbSe2, (c) NbTe2, (d) TaS2, (e) TaSe2, (f) TaTe2.
+Purple, blue, green, yellow, and red atoms are Nb, Ta, S, Se, and Te, respectively.
+
+potential. This interplay of orbital localization and charge
+redistribution was critical for understanding the electronic
+properties of TMDCs. From the average electropotential,
+we calculated the work function. The work function was
+calculated by,
+
+𝜙 = 𝐸vacuum − 𝐸Fermi.
+
+(2)
+
+The work function is presented in Table 1. NbS2 had a
+relatively high work function of approximately 5.67 eV, sug-
+gesting enhanced surface stability and a reduced tendency
+for electron emission. On the other hand, NbTe2 and TaTe2,
+with work functions around 4.82 and 4.75 eV, respectively,
+may be more suitable for applications that require lower
+electron emission barriers. These values align with typical
+TMDC materials such as MoS2 [53], whose work functions
+range between 4.50 and 5.00 eV. Factors such as the specific
+transition metal and chalcogen atoms, layer thickness, and
+structural variations influence the work function and overall
+electronic behavior of TMDCs [54]. Understanding the work
+functions of these TMDCs is crucial for optimizing their
+performance in applications such as field-effect transistors
+and catalytic processes, where control over electron emis-
+sion and surface interactions is essential.
+
+3.3. Magnetic Properties
+
+The spatial distribution of spin density difference can
+predict the magnetism in a material. Uniform spin density
+indicates ferromagnetic ordering, while alternating regions
+of spin density suggest antiferromagnetic ordering. Spin
+polarization density is given by,
+
+Δ𝜌spin = 𝜌spin↑ − 𝜌spin↓.
+
+(3)
+
+Fig. 4 elucidates the spin polarization density of the TMDCs.
+The yellow isosurface represents regions of high spin den-
+sity, indicating areas where there is a significant spin po-
+larization. The specific structure shown suggested a central
+atom having an unpaired electron in an orbital. The spin
+polarization in the materials was due to only one spin. No op-
+posite spin is seen in the spin polarization plots. The central
+
+atom likely had a significant magnetic moment, contributing
+to the observed spin density. This predicted the materials to
+be ferromagnetic.
+
+Fig. 4: Spin polarization density of the TMDCs (a) NbS2 (b)
+NbSe2 (c) NbTe2 (d) TaSe2 (e) TaTe2. The yellow region
+indicates the spin polarization density. Direction of atomic
+magnetic moments for NbSe2 (f) AFM configuration (g) FM
+configuration.
+
+To confirm the FV character of the TMDCs, we calcu-
+lated the FM energy and AFM energy of the monolayers.
+The most favorable configuration has the lowest ground state
+energy. The FM ground state and AFM ground state energy
+predicted the magnetic ground state for a (2 × 2 × 1) super-
+cell. Figure 4 illustrates the FM and AFM configurations. For
+AFM and FM calculations, the AFM and the FM supercells
+were optimized by variable cell relaxation, and the ground
+state energy was achieved using the SCF calculation. The
+FM and AFM ground state energies indicated that the FM
+state was more favorable than the AFM state, as the FM
+ground state energies were lower than the AFM ground state
+energies. The magnetic ground state energy is presented in
+Table 3.
+
+The FM and AFM energies confirmed that NbX2 and
+TaX2 were FM in the ground state. The magnetic moment of
+the TMDCs was calculated, and the FM materials showed a
+total magnetization of 1 Bohr magneton per unit cell.
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 6 of 17
+
+(a)(b)(c)(d)(e)(a)(b)(c)(d)(e)(f)(g)(g)Tunable Valley Polarization and Anomalous Hall Conductivity
+
+Table 3
+Magnetic Ground State Energies of TMDCs
+
+Crystal
+
+FM energy (eV) AFM energy (eV)
+
+NbS2
+NbSe2
+NbTe2
+TaSe2
+TaTe2
+
+-25406.0866
+-38795.4162
+-57651.5818
+-60178.2764
+-79034.6263
+
+-25405.5855
+-38794.8701
+-57651.1040
+-60178.0311
+-79034.3807
+
+Energy difference
+𝐸𝐹 𝑀 − 𝐸𝐴𝐹 𝑀 (eV)
+-0.5011
+-0.5461
+-0.4778
+-0.2453
+-0.0181
+
+For 2D materials, Monte Carlo (MC) simulations of
+the Heisenberg model are effective in accurately estimating
+transition temperatures [55]. The Curie temperature, 𝑇𝐶 was
+determined using an equation derived from MC simulations
+of the XY model, which is well-suited for capturing critical
+behavior in 2D magnetic systems.
+
+𝑇𝐶 =
+
+0.89
+8𝑘𝐵
+
+(𝐸𝐴𝐹 𝑀 − 𝐸𝐹 𝑀 ),
+
+(4)
+
+here, 𝑘𝐵 is the Boltzmann constant, and 𝐸𝐹 𝑀 and 𝐸𝐴𝐹 𝑀
+were the energies of FM and AFM configurations. The 𝑇𝐶
+was calculated and presented in Table 1. The Curie tempera-
+ture for NbSe2 was the largest, which was found to be 176.25
+K and comparable with the previous report [56]. TaSe2 had
+the lowest Curie temperature, 79.17 K. However, 𝑇𝐶 values
+for all studied material were below the room temperature.
+
+3.4. Electronic Properties
+
+The band structure was plotted to determine the elec-
+tronic characteristics of the TMDCs. The band structure
+without SOC predicted that all the TMDCs- NbS2, NbSe2,
+NbTe2, TaSe2, and TaTe2 were semiconductors with a de-
+cent bandgap. The bandgaps of the TMDCs are 0.5818,
+0.7911, 0.7700, 0.3977, and 0.1947, respectively. The cal-
+culated bandgap of NbS2 is 0.2188 eV, which aligns well
+with previously reported values [52]. However, our com-
+puted bandgap for NbSe2 shows a discrepancy compared
+to existing literature, which may be attributed to differences
+in computational methods, such as the choice of exchange-
+correlation functionals or the inclusion of spin-orbit cou-
+pling effects. The bandgap is given in Table 4. Due to
+magnetic exchange interactions, semiconductors exhibited
+spin splitting between spin-up and spin-down electrons. The
+conduction band minimum and valence band maximum
+were spin-polarized in these materials, resulting in distinct
+electron and hole transport spin channels. This unique prop-
+erty classified them as bipolar magnetic semiconductors
+(BMS) [57].
+
+The monolayer semiconductors NbS2, NbSe2, NbTe2,
+TaSe2, and TaTe2 exhibited promising spin filter proper-
+ties, characterized by non-degenerate spin-up and spin-down
+energy states. The spin-up channels displayed bandgaps of
+approximately 0.8227, 1.0254, 0.8556, 1.0759, and 0.9159
+eV, respectively. In contrast, the spin-down channels ex-
+hibited bandgaps of 1.5359, 1.3915, 0.9279, 1.3269, and
+0.7291 eV, respectively. These bandgap values, as illustrated
+in Table 4, and given in Fig. 5 and the Supplementary
+Material, highlight the potential for spin-selective transport,
+
+where each spin channel can be independently controlled,
+a desirable property for spintronics applications. In BMS,
+fully spin-polarized currents with adjustable spin polariza-
+tion can be generated and modulated by applying a gate volt-
+age [57]. This characteristic allows for precise control over
+spin-dependent transport, making BMS materials highly
+promising for spintronic applications where the direction
+of spin polarization can be reversibly tuned [57]. BMS
+like NbS2, NbSe2, NbTe2, TaSe2, and TaTe2 demonstrated
+spin-filtering capabilities, making them suitable for a range
+of spintronic applications. These materials possessed non-
+degenerate spin-up and spin-down states, allowing selec-
+tive spin control. These are essential in devices such as
+spin filters and spin valves for data storage and memory
+applications in spintronics [15, 57, 58]. Furthermore, such
+bipolar magnetic semiconductors can be used in spin filters,
+spin valves, and potentially in energy-efficient data storage
+and quantum computing applications due to their ability to
+maintain distinct spin channels under external manipulations
+such as strain or doping [59].
+
+A substantial change in band structure was observed with
+the association of SOC, which breaks the degeneracy, and
+an energy difference was exhibited at K and K′ points. The
+energy splitting is defined as valley polarization. A large
+valley polarization was achieved at the valence band without
+applying any external factors. The valley splitting energy
+was calculated by,
+
+Δ𝐸valence = 𝐸K(valence) − 𝐸K′(valence), 𝑎𝑛𝑑
+
+Δ𝐸conduction = 𝐸K(conduction) − 𝐸K′(conduction).
+
+(5)
+
+(6)
+
+The valley splitting energy was maximum for TaTe2, which
+was 541.0 meV between K and K′. To achieve the same val-
+ley splitting, an external magnetic field of around 360 Tesla
+would be required. To be viable for valleytronic applications,
+a material must demonstrate broken valley degeneracy and
+exhibit a sufficiently large valley splitting to remain stable
+against thermal fluctuations. Studies suggest that a valley
+splitting of approximately 100 meV is necessary for stable
+operation at room temperature, ensuring resilience against
+thermal noise and enabling reliable manipulation of valley
+states for practical device implementations [17].
+
+We observed a significant valley splitting in these mono-
+layers. The valley splitting energies at the valence band in the
+TMDCs were 176.2, 251.6, 351.2, 539.4, and 541.0 meV,
+respectively. This supported nonvolatile valley polarization
+at room temperature. This also enables valley states in ap-
+plications like quantum computing and valley-based logic,
+where stable and controllable states are crucial for process-
+ing and storing information [15, 18]. The strong SOC in
+these materials contributed to this large valley splitting, mak-
+ing it comparable to advanced valleytronic materials such as
+MoS2, which also achieved valley polarization through SOC
+effects [60].
+
+For the conduction band, the maximum valley splitting
+was achieved for NbTe2, which was 26.2 meV. The valley
+splitting energy was less than the ambient temperature noise;
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 7 of 17
+
+Tunable Valley Polarization and Anomalous Hall Conductivity
+
+Fig. 5: Spin-polarized band structure for TMDCs without SOC: (a) NbTe2, (b) TaSe2, (c) TaTe2. Spin-up and spin-down states
+are distinguished by blue and red lines, respectively, to visualize spin polarization. Band diagram incorporating SOC for (d) NbTe2,
+(e) TaSe2, (f) TaTe2. The color gradient from blue to red depicts expectation values of the spin operator along the [001] direction,
+ranging from + 1
+2
+
+to − 1
+2
+
+.
+
+hence, this splitting is not discussed further. The valley split-
+ting energy of the pristine crystals without applying any ex-
+ternal methods is illustrated in Table 4. Moreover, the band
+structure incorporating SOC effect is given in Fig. 5. The
+association of SOC kept the band structure spin-polarized
+with a finite bandgap for NbS2, NbSe2, and NbTe2. These
+materials were BMS after association of SOC. As a result,
+the spin filtering character prevailed for them. However, the
+effect of SOC raised the valence band above the Fermi level
+for TaSe2 and TaTe2, which made these materials half-metal
+ferromagnetic materials. These materials can produce 100%
+spin polarization and be used for pure spin generation.
+
+The investigation further showed that no spontaneous
+valley polarization was noticed in the AFM configuration of
+the pristine crystals, where there is reversal symmetry. This
+result indicated that the spontaneous valley polarization in
+these materials was due to ferromagnetism, which causes
+the breaking of TRS, and this also limits the anomalous
+valley Hall effect and valleytronic applications. The AFM
+band structure is illustrated in Fig. 6 and the Supplementary
+Material.
+
+To investigate the materials further, we reversed the
+magnetic moment of the transition atoms, which gave rise
+to the reversal of spin polarization at the valence and con-
+duction bands. With the reversal of spin polarization, the
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 8 of 17
+
+(a)(b)(c)(f)(g)(i)(j)539.4 meV351.2 meV541 meV(d)(e)(f)Tunable Valley Polarization and Anomalous Hall Conductivity
+
+Fig. 6: Band structure after reversal of magnetic moment with SOC for different TMDCs: (a) NbTe2, (b) TaSe2, (c) TaTe2.
+Antiferromagnetic band structure with SOC of different TMDCs: (d) NbS2, (e) NbSe2, (f) NbTe2. The color gradient from blue
+to red depicts expectation values of the spin operator along the [001] direction, ranging from + 1
+2
+
+to − 1
+2
+
+.
+
+Table 4
+Electronic properties of pristine TMDCs: Bandgap, Spin-polarized Bandgap, and Valley Splitting Energy
+
+Crystals Bandgap (DFT+U) Bandgap (HSE06)
+
+NbS2
+NbSe2
+NbTe2
+TaSe2
+TaTe2
+
+(eV)
+0.5818
+0.7911
+0.7700
+0.3977
+0.1947
+
+(eV)
+0.2188
+0.4645
+0.3347
+0.1025
+0.9913
+
+Spin-up Bandgap
+(eV)
+0.8227
+1.0254
+0.8556
+1.0759
+0.9159
+
+Spin-down Bandgap Valley splitting energy
+Valence Band (meV)
+-176.2
+-251.6
+-351.2
+539.4
+541.0
+
+(eV)
+1.5359
+1.3915
+0.9279
+1.3269
+0.7291
+
+Valley splitting energy
+Conduction Band (meV)
+3.8
+18.6
+26.2
+14.4
+18.9
+
+valley polarization was also reversed. This gave a means
+to manipulate the valley polarization at K and K′ valleys.
+Due to magnetic moment reversal, valley polarization was
+reversed for NbS2, NbSe2, and NbTe2. The magnitude of
+valley polarization exhibited negligible variation. However,
+
+the magnitude of valley polarization was also changed for
+TaSe2 and TaTe2 along with the reversal of valley polar-
+ization. For TaSe2, the valley polarization was increased
+to 546.7 meV; for TaTe2, the valley splitting energy was
+increased to 574.3 meV. The reversal of valley polarization
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 9 of 17
+
+(f)(g)(i)(j)350.7 meV546.7 meV574.3 meV(a)(b)(c)(d)(e)(f)Tunable Valley Polarization and Anomalous Hall Conductivity
+
+and the magnitude of valley splitting energy are elucidated
+in Fig. 6 and the Supplementary Material.
+
+3.5. Orbital Projected Band and DOS
+
+To get a nuanced view of the electronic properties, we
+calculated the orbital contribution of the materials at the
+valence band maximum and conduction band minimum. The
+orbital contribution at K and K′ valleys was also calculated
+to get a deep view of the character of the valleys, which
+showed valley polarization. The electronic structure analysis
+of TMDCs revealed significant contributions from 𝑝 orbitals
+from chalcogens (C) and 𝑑 orbitals from transition metals
+(TM).
+
+The orbital contribution at the valence band’s K and
+K′ points showed an interesting view. As K and K′ points
+were degenerate without SOC, the orbital contributions at K
+and K′ were identical. For NbS2, the K and the K′ points
+at the valence band were contributed by 𝑑𝑥2−𝑦2, 𝑑𝑥𝑦, 𝑑𝑦𝑧,
+and 𝑑𝑧𝑥 orbitals of the Nb atom. The contributions were
+21.4%, 21.4%, 6.1%, and 6.1%, respectively. The Se atom’s
+𝑝𝑥 orbital had the majority contribution of 38.3% at the K
+and K′ points at the valence band. In NbSe2, K and K′ points
+at BZ were contributed by 𝑑𝑥2−𝑦2, and 𝑑𝑥𝑦 orbitals of the Nb
+atom, which were 38.5% for both of these orbitals. The Se
+atom’s 𝑝𝑥 and 𝑝𝑦 orbitals had the same contribution of 11.5%
+at those points. A different behavior was seen for NbTe2,
+TaSe2, and TaTe2. The K and K′ points were dominantly
+contributed by 𝑝𝑧 the orbitals of the chalcogen atom. The
+contributions were 62.6%, 73.1%, and 61.1% for 𝑝𝑧 orbitals
+in those TMDCs, respectively. Along with 𝑝𝑧, contribution
+from 𝑑𝑧𝑥, and 𝑑𝑦𝑧 orbitals of transition metal atoms were
+exhibited. The contribution for both orbitals was the same in
+magnitude. The contribution from both of them was 18.7%,
+13.5%, and 16% in NbTe2, TaSe2, and TaTe2, respectively.
+The orbital contribution at K and K′ valleys of the valence
+band is presented in Table 5.
+
+At the VBM of NbS2, the Nb 𝑑𝑧2 orbital was the domi-
+nant contributor, accounting for approximately 60.3%, while
+the S atom’s 𝑝𝑧 orbital contributed around 37.7%. In NbSe2,
+the Nb VBM was contributed by three degenerate 𝑑𝑥𝑦 ,
+𝑑𝑥2−𝑦2, and 𝑑𝑧𝑥 orbitals, with a contribution of 38.1% from
+each orbital, with the Se atoms 𝑝𝑥 and 𝑝𝑦 orbitals contribut-
+ing 11.4% each. The same trend was seen for NbTe2, the
+VBM was dominated by three degenerate 𝑑𝑥𝑦 , 𝑑𝑥2−𝑦2, and
+𝑑𝑧𝑥 orbitals, 𝑑𝑧2 with orbitals contributing 39.1% from each.
+Te atoms 𝑝𝑥 and 𝑝𝑦 orbitals showed similar behavior like
+NbSe2, contributing around 10.5%. For TaSe2, the VBM
+was mostly contributed by 𝑑𝑧2 the Ta atom. The contribution
+of this orbital was 67%. The chalcogen atom’s 𝑝𝑧 orbital
+also showed a mentionable contribution in the VBM by
+contributing 30%. TaTe2 VBM showed the same behavior
+as NbSe2 and NbTe2. It contained three degenerate 𝑑𝑥𝑦 ,
+𝑑𝑥2−𝑦2, and 𝑑𝑧𝑥 orbitals. Each of the orbitals contributed
+39.1% in the VBM; 10.9% was contributed by both 𝑝𝑥 and 𝑝𝑦
+of the Te atom. These results underscored the predominant
+role of chalcogen 𝑝 orbitals and transition metal 𝑑 orbitals in
+shaping the VBM characteristics across these materials.
+
+Table 5
+Orbital contributions in % at K and K′ of valence band for
+different materials
+
+Materials
+
+K and K′
+
+TM: d𝑥2 −𝑦2 TM: d𝑥𝑦 TM: d𝑦𝑧 TM: d𝑧𝑥 C: p𝑧 C: p𝑦 C: p𝑥
+
+NbS2
+NbSe2
+NbTe2
+TaSe2
+TaTe2
+
+21.4
+38.5
+0
+0
+0
+
+21.4
+38.5
+0
+0
+0
+
+6.1
+0
+18.7
+13.5
+16
+
+6.1
+0
+18.7
+13.5
+16
+
+0
+0
+62.6
+73.1
+61.1
+
+6.7
+11.5
+0
+0
+0
+
+38.3
+11.5
+0
+0
+0
+
+The CBM analysis also highlighted the dominant in-
+fluence of transition metal 𝑑 orbitals across the materials,
+with smaller contributions from the 𝑠 and 𝑝 orbitals of
+chalcogens. For NbS2, the CBM was consisted of 𝑑𝑥2−𝑦2,
+𝑑𝑥𝑦, 𝑑𝑧2, and 𝑑𝑧𝑥. They had contributions of 8.9%, 26.7%,
+28.3%, and 26.7%, respectively. 𝑝𝑧 orbital of the S atom
+was also mentionable with a contribution of 17.1%. The
+same behavior was seen for the CBM of NbSe2. 𝑑𝑥2−𝑦2,𝑑𝑥𝑦,
+𝑑𝑧2, and 𝑑𝑧𝑥 had contributions of 9.8%, 29.3%, 27.8%, and
+29.3%, respectively. The contribution from 𝑝𝑧 orbital of the
+Se atom was around 13.2%. A different character was shown
+for the CBM of NbTe2. 𝑑𝑥2−𝑦2,𝑑𝑥𝑦, and 𝑑𝑧𝑥 orbitals had no
+contribution in CBM. CBM was contributed by 𝑑𝑧2 which
+was about 82.6%. The contribution from chalcogens was also
+negligible. However, TaSe2 followed the same trend as NbS2
+and NbSe2. 𝑑𝑥2−𝑦2,𝑑𝑥𝑦, 𝑑𝑧2, and 𝑑𝑧𝑥 orbitals showed a con-
+tribution of 11.1%, 33.2%, 32.7%, and 33.2%, respectively,
+and 𝑝𝑧 orbitals of the Se atom contributed 21% in the CBM.
+The contribution from 𝑑𝑥2−𝑦2,𝑑𝑥𝑦, 𝑑𝑧2, and 𝑑𝑧𝑥 orbitals in
+TaTe2 were 11.5%, 34.5%, 32.6%, and 34.5%, respectively.
+Moreover, 20.4% was contributed from 𝑝𝑧 orbitals of Te
+atoms. These findings revealed the importance of transition
+metal 𝑑 orbitals in defining the CBM across these TMDCs,
+with chalcogen 𝑝 orbitals playing a supplementary role. The
+orbital contributions at VBM and CBM are illustrated in
+Table 6.
+
+The 𝑑 orbital projected band structure and the partial
+density of states (PDOS) of 𝑑 orbitals are presented in Fig. 7
+and the Supplementary Material, showing the contribution
+in a more elaborated view. The provided figure of 𝑑 orbital
+projected band structure and PDOS of 𝑑 orbitals in Fig. 7
+comprehensively illustrates the 𝑑 orbital projected electronic
+band structures and PDOS for various TMDCs calculated
+without considering SOC. The band structure diagrams in
+Figs. 7(a–c) reveal the contribution of different 𝑑 orbitals
+(𝑑𝑧2, 𝑑𝑥2−𝑦2, 𝑑𝑥𝑦, 𝑑𝑥𝑧, and 𝑑𝑦𝑧) to the electronic states
+across the BZ. The size of the circles in these diagrams
+represents the relative weight of specific orbitals at various
+energy levels and k points. In the vicinity of the Fermi level
+(𝐸 − 𝐸𝐹 = 0), notable contributions from the 𝑑𝑧2 and
+𝑑𝑥𝑦, and 𝑑𝑥2−𝑦2 orbitals were observed at the valence band,
+particularly for NbS2, NbSe2, and TaSe2, indicating that this
+orbital played a significant role in defining the electronic
+properties of these materials. Comparatively, in NbTe2, and
+TaTe2 near the Fermi level at the valence band, 𝑑𝑥𝑦, and
+𝑑𝑥2−𝑦2 orbitals were more important. At the conduction band
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 10 of 17
+
+Tunable Valley Polarization and Anomalous Hall Conductivity
+
+Fig. 7: The 𝑑 orbitals projected E-k diagram without SOC for different TMDCs – (a) NbS2, (b) NbSe2, (c) NbTe2. In the band
+structure, the size of the circles represents the amount of contribution. The illustration of the partial density of states of 𝑑 orbitals
+for different TMDCs – (d) NbS2, (e) NbSe2, (f) NbTe2. Spin-up and spin-down states are indicated by the red up arrow and the
+blue down arrow, respectively.
+
+near the Fermi level, 𝑑𝑥𝑦 and 𝑑𝑥2−𝑦2 were more important
+for NbS2, TaSe2, and TaTe2. For NbSe2, the closet point
+of the conduction band was dominated by 𝑑𝑧2 and 𝑑𝑥𝑦, and
+𝑑𝑥2−𝑦2 orbitals. On the other hand, NbTe2 𝑑𝑧2 was dominant
+at the nearest point from the Fermi level. The PDOS plots
+in Fig. 7(d–f) complement the band structure analysis by
+quantifying the DOS associated with individual 𝑑 orbitals. In
+the pristine TMDCs, the 𝑑𝑧2 orbital exhibited a pronounced
+peak of DOS near the Fermi level at the valence band, which
+was contributed by the spin-up channel electrons. At the con-
+duction band, the spin-down channel electron contributed to
+the DOS near the Fermi level, which was consistent with
+the electronic properties of BMS materials. The 𝑑𝑧2 orbital
+
+also exhibited a dominant DOS in the conduction band.
+The 𝑑𝑥2−𝑦2 and 𝑑𝑥𝑦 orbitals, while present, contributed less
+significantly. The other orbitals, 𝑑𝑥𝑧, and 𝑑𝑦𝑧 had negligible
+contribution at the DOS.
+
+The analysis of these data collectively underscored the
+importance of 𝑑 orbital contributions in defining the elec-
+tronic properties of TMDCs. The 𝑑𝑧2 and 𝑑𝑥𝑦 orbitals were
+found to play a dominant role across all compounds, partic-
+ularly near the Fermi level, where they largely dictated the
+semiconducting behavior of the materials. Furthermore, the
+degree of orbital hybridization and band dispersion varied
+systematically across the chalcogenide series, indicating that
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 11 of 17
+
+(f)(e)(f)(a)(b)(c)(d)(e)(f)Tunable Valley Polarization and Anomalous Hall Conductivity
+
+Table 6
+Orbital contributions in % for different materials at VBM and CBM
+
+Materials
+
+Valence Band Maximum (VBM)
+
+Conduction Band Minimum (CBM)
+
+TM: d𝑥2−𝑦2
+
+TM: d𝑥𝑦
+
+TM: d𝑧2
+
+TM: d𝑧𝑥
+
+C: p𝑧
+
+C: p𝑦
+
+C: p𝑥
+
+TM: d𝑥2 −𝑦2
+
+TM: d𝑥𝑦
+
+TM: d𝑧2
+
+TM: d𝑧𝑥
+
+C: p𝑧
+
+C: p𝑥
+
+NbS2
+NbSe2
+NbTe2
+TaSe2
+TaTe2
+
+0
+38.1
+39.1
+0
+39.1
+
+0
+38.1
+39.1
+0
+39.1
+
+60.3
+0
+0
+67.0
+0
+
+0
+38.1
+39.1
+0
+39.1
+
+37.7
+0
+0
+30.0
+0
+
+0
+11.4
+10.5
+0
+10.9
+
+0
+11.4
+10.5
+0
+10.9
+
+8.9
+9.8
+0
+11.1
+11.5
+
+26.7
+29.3
+0
+33.2
+34.5
+
+28.3
+27.8
+82.6
+32.7
+32.6
+
+26.7
+29.3
+0
+33.2
+34.5
+
+17.1
+13.2
+0
+21.0
+20.4
+
+2.8
+2.8
+4.1
+0.9
+0.5
+
+Fig. 8: Effect of uniaxial strain on spin-polarized bandgap for different TMDCs: (a) NbS2, (b) NbSe2, (c) NbTe2, (d) TaSe2,
+(e) TaTe2. The spin-down and spin-up bandgap are distinguished by blue and red lines. Effect of biaxial strain on spin-polarized
+bandgap for different TMDCs: (f) NbS2, (g) NbSe2, (h) NbTe2, (i) TaSe2, (j) TaTe2. Spin-down and spin-up bandgap are
+represented by blue and red lines, respectively. Positive strain refers to tensile strain, and negative strain refers to compressive
+strain.
+
+the electronic properties can be tuned by doping or substitut-
+ing chalcogen atoms or transition metals. These insights are
+pivotal for understanding the fundamental electronic behav-
+ior of TMDCs and their potential applications in electronic,
+optoelectronic, and superconducting devices. The projected
+band structure is provided in Fig. 7.
+
+3.6. Effect of Uniaxial and Biaxial Strain
+
+The valley splitting can be enhanced through external
+modifications, such as strain or atomic vacancies [61]. Uni-
+axial and biaxial strains were applied to investigate the
+behavior of the materials under strain. The strain was applied
+
+by the formula
+
+Strain =
+
+𝑎′ − 𝑎
+𝑎
+
+× 100%
+
+(7)
+
+Here, 𝑎′ was the strained lattice parameter, and 𝑎 is the
+relaxed lattice parameter. The strain impacted the bandgap,
+spin-up bandgap, spin-down bandgap, and valley polariza-
+tion. For both uniaxial and biaxial strain in NbS2 with
+increasing tensile strain, the spin-up band of the conduction
+band got closer to the Fermi level, narrowing the spin-up
+bandgap. The spin-down bandgap remained nearly constant
+with tensile strain. With increasing compressive strain, the
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 12 of 17
+
+(b)(c)(d)(e)(g)(h)(i)(j)(a)(f)Tunable Valley Polarization and Anomalous Hall Conductivity
+
+Fig. 9: The effect of uniaxial strain in valley polarization is shown for different TMDCs: (a) NbS2, (b) NbSe2, (c) NbTe2, (d)
+TaSe2, (e) TaTe2. The effect of biaxial strain on valley polarization is shown for different TMDCs: (f) NbS2, (g) NbSe2, (h)
+NbTe2, (i) TaSe2, (j) TaTe2. Positive strain refers to tensile strain, and negative strain refers to compressive strain.
+
+spin-up bandgap increased, and the spin-down bandgap de-
+creased as the spin-down band of the conduction band got
+close to the Fermi level. The exact impact was noticed for all
+other materials. With increasing tensile strain, the spin-up
+bandgap decreased, and the spin-down bandgap increased,
+and for increasing compressive strain, the spin-up bandgap
+increased, and the spin-down bandgap decreased. This trend
+was the same for uniaxial and biaxial strains. However, under
+4% compressive uniaxial strain and without SOC, TaTe2
+became a half-metal ferromagnet. For biaxial strain, NbS2,
+TaSe2, and TaTe2 became half-metal ferromagnets at 5%
+tensile strain, 6% compressive strain, and 2% compressive
+strain, respectively, showing a great potential to be used
+to generate pure spin-polarized electrons. However, for 5%
+compressive strain, TaTe2 turned into a full metallic ferro-
+magnet. The impact of uniaxial and biaxial strains on spin-
+polarized bandgap is illustrated in Fig. 8.
+
+Moreover, the impact of strain on the valley polariza-
+tion was noticeable. With the increasing tensile strain, the
+magnitude of the valley polarization in the valence band
+was increased. The valley polarization at the valence band
+decreased with the increasing compressive strain. The trend
+was the same for both uniaxial and biaxial strains. The
+valley polarization at the valence band for NbS2, NbSe2,
+
+NbTe2, and TaSe2 more or less showed a linear trend with
+uniaxial and biaxial strain. For TaTe2, the impact of uniaxial
+and biaxial strain was elusive and showed no linear trend.
+Moreover, the conduction band experienced variation with
+the application of strain. As the valley polarization was
+smaller than 100 meV, the discussion was dropped because it
+could not surpass the ambient thermal noise. The magnitude
+of valley polarization could also be manipulated by uniaxial
+and biaxial strain. Fig. 9 summarizes the effect of uniaxial
+and biaxial strain in valley polarization.
+
+3.7. Berry Curvature and Anomalous Hall Effect
+
+Berry curvature is crucial in modern condensed matter
+physics, particularly in materials with broken spatial inver-
+sion or broken TRS. It acts as an effective magnetic field in
+momentum space for the Bloch electrons [62]. The Berry
+curvature, denoted as Ω(𝐤), originates from the geometrical
+properties of the wave functions in the crystal’s BZ. For a
+given electronic band 𝑛, the Berry curvature at a point 𝐤 in
+the BZ was defined by,
+
+Ω𝑛(𝐤) = −2 Im
+
+(∑
+
+𝑚≠𝑛
+
+⟨𝑢𝑛𝐤| ̂𝑣𝑥|𝑢𝑚𝐤⟩⟨𝑢𝑚𝐤| ̂𝑣𝑦|𝑢𝑛𝐤⟩
+(𝐸𝑛𝐤 − 𝐸𝑚𝐤)2
+
+)
+
+. (8)
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 13 of 17
+
+(b)(c)(d)(e)(g)(h)(i)(j)(a)(f)Tunable Valley Polarization and Anomalous Hall Conductivity
+
+Fig. 10: Berry curvature in the valence band in different TMDCs: (a) NbS2, (b) NbSe2, (c) NbTe2, (d) TaSe2 (4% strain),
+(e) TaTe2 (5% strain). Anomalous Hall conductivity in the valence band for different TMDCs is given: (f) NbS2, (g) NbSe2,
+(h) NbTe2, (i) TaSe2 (4% strain), (j) TaTe2 (5% strain). Insets illustrate the anomalous Hall effect for (a) hole-doped and (b)
+electron-doped systems, showing valley-dependent transverse motion of carriers under an electric field, 𝐸, driven by valley-specific
+Berry curvature.
+
+Where |𝑢𝑛𝐤⟩ and |𝑢𝑚𝐤⟩ were the periodic parts of the
+Bloch wavefunctions for bands 𝑛 and 𝑚, ̂𝑣𝑥 and ̂𝑣𝑦 were
+the velocity operators in the 𝑥- and 𝑦-directions, and 𝐸𝑛𝐤
+and 𝐸𝑚𝐤 were the energy eigenvalues. This expression high-
+lights that the Berry curvature arises from the interband
+matrix elements between occupied and unoccupied bands.
+The magnitude of Berry curvature was opposite at K and
+K′ points in the BZ due to the absence of TRS [63, 64].
+This is why, in the presence of an in-plane electric field, the
+Bloch electrons of K and K′ valley gain a transverse velocity
+associated with Berry curvature called anomalous velocity
+[65]. This gave rise to a transverse current and Hall conduc-
+tance [33]. In systems with broken inversion symmetry and
+broken time reversal symmertry, Berry curvature exhibits
+valley-contrasting behavior, where it has opposite signs and
+unequal magnitude in the K and K′ valleys, leading to valley-
+dependent phenomena like the valley Hall effect [62].
+
+At K and K′ points in the valence band, the Berry
+curvature exhibited opposite signs with unequal magnitudes
+in NbS2, NbSe2, NbTe2, TaSe2, and TaTe2. These materials
+showed an anomalous behavior in Berry curvature. NbS2,
+NbSe2, and NbTe2 showed opposite Berry curvature at K
+
+and K′ points in BZ without external factors. For TaSe2 and
+TaTe2, by applying 4% and 5% strain, respectively, Berry
+curvature at K and K′ was achieved at VBM in BZ. Due
+to opposite Berry curvature, electrons at K valley and K′
+valley will experience opposite transverse velocity with the
+application of an in-plane electric field. This phenomenon
+was confirmed by the anomalous Hall conductivity. The
+anomalous Hall effect (AHE) is a direct consequence of non-
+zero Berry curvature. Unlike the conventional Hall effect,
+which requires an external magnetic field, the AHE arises
+from the intrinsic Berry curvature, which deflects charge car-
+riers transversely to an applied electric field. The anomalous
+velocity of charge carriers due to Berry curvature Ω(𝐤) is
+given by
+
+𝐯⟂ =
+
+𝑒
+ℏ
+
+𝐄 × Ω(𝐤)
+
+(9)
+
+Where 𝐄 is the applied electric field. This anomalous ve-
+locity leads to a transverse current, manifesting as the AHE
+without an external magnetic field. The AHC, 𝜎𝑥𝑦, can
+be computed by integrating the Berry curvature over all
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 14 of 17
+
+(b)(c)(d)(h)(i)(j)(a)(f)(g)(e)Tunable Valley Polarization and Anomalous Hall Conductivity
+
+occupied states in the BZ
+
+𝜎𝑥𝑦 =
+
+𝑒2
+ℏ ∫
+
+BZ
+
+𝑑2𝑘
+(2𝜋)2
+
+𝑓 (𝐤) Ω(𝐤)
+
+(10)
+
+where 𝑓 (𝐤) is the Fermi-Dirac distribution function, ac-
+counting for the occupation of electronic states. This formula
+indicates that AHC depends on the Berry curvature distribu-
+tion across the BZ and the position of the Fermi level. Berry
+curvature and AHE are particularly significant in systems
+with strong SOC and broken inversion symmetry, such as
+TMDCs. In these materials, the Berry curvature in the K
+and K′ valleys was large and oppositely signed, resulting
+in valley-contrasting AHE [64]. This valley-selective Berry
+curvature and anomalous Hall effect enable applications in
+valleytronics, where information can be stored and manipu-
+lated based on the valley index. The materials showed AHC
+at VBM in K and K′ points. At K point in the BZ, the valley
+Hall conductivity was seen and at K′ the conductivity is
+zero, suggesting that with the application of in-place electric
+field carriers, from K and K′ valleys will move towards two
+edges of materials and give rise to anomalous Hall voltage.
+For NbS2, NbSe2, and NbTe2 spontaneous AHC were seen,
+whereas for TaSe2 and TaTe2, like in Berry curvature, an
+application of 4% and 5% biaxial strain was applied to
+calculate the AHC. The Berry curvature and the AHC is
+illustrated in Fig. 10.
+
+4. Conclusion
+
+We extensively explored the electronic and magnetic
+characteristics of a novel class of FV materials, namely
+NbX2 and TaX2 (X = S, Se, Te). Through first-principles
+calculations, this investigation showed that these TMDCs
+possess stable FM ordering. That led to giant and tunable
+spontaneous valley polarization at the valence band with-
+out any external manipulation, which was 176.2, 251.6,
+351.2, 539.4, and 541 meV for NbS2, NbSe2, NbTe2, TaSe2,
+and TaTe2, respectively. This valley polarization was large
+enough to be sustained at room temperature and even in
+harsh conditions with high temperatures. Additionally, as
+BMS, they allowed for fully spin-polarized currents with
+reversible spin orientation, which can be controlled by gate
+voltage. NbS2, TaSe2, and TaTe2 became half-metal ferro-
+magnets with the application of 5%, 6%, and 2% biaxial
+strain, respectively, which showed the potential to generate
+a fully spin-polarized electron. This unique feature supports
+the development of efficient valleytronic and spintronic de-
+vices. Besides this, SOC and lack of inversion symmetry
+in these materials resulted in pronounced valley splitting
+at the K and K′ points within the BZ, creating a non-
+degenerate energy configuration that led to the anomalous
+Hall effect. Additionally, the ability to modulate valley polar-
+ization and spin-polarized bandgap through external strain
+and electric fields further positions these dichalcogenides
+as strong candidates for non-volatile memory, logic de-
+vices, and spin-filtering applications. The Nb and Ta-based
+dichalcogenides examined here represent a promising foun-
+dation for future valleytronic innovations, providing intrinsic
+
+valley-polarized current control without external magnetic
+fields, in line with the requirements of emerging data storage
+and processing technologies. This study lays critical ground-
+work for understanding these materials and highlights their
+potential to drive progress in spintronics and valleytronics.
+
+Associated Content
+Supplementary Material:
+Supplementary Material is available free of charge at url.
+This includes spin polarization analysis, band diagrams of
+pristine NbS2 and NbSe2, spin reversal band diagram and
+AFM band diagram, and orbital projected band structure and
+DOS analysis for various orbitals in the structures.
+
+Declaration of Competing Interest
+
+The authors declare that they have no known competing
+financial interests or personal relationships that could have
+appeared to influence the work reported in this paper.
+
+Data Availability Statement
+
+The data supporting the findings presented in this paper
+are not currently available to the public, but they may be
+obtained from the authors upon reasonable request.
+
+CRediT authorship contribution statement
+
+Samiul Islam: Conceptualization, Formal analysis, Method-
+
+ology, Visualization, Software, Investigation, Writing - orig-
+inal draft. Sharif Mohammad Mominuzzaman: Supervi-
+sion, Resources, Writing-review & editing. Ahmed Zubair:
+Supervision, Conceptualization, Methodology, Project ad-
+ministration, Resources, Writing - original draft, Writing-
+review & editing.
+
+References
+[1] Deji Akinwande, Christopher J Brennan, J Scott Bunch, Philip Eg-
+berts, Jonathan R Felts, Huajian Gao, Rui Huang, Joon-Seok Kim,
+Teng Li, Yao Li, et al. A review on mechanics and mechanical prop-
+erties of 2D materials—graphene and beyond. Extreme Mechanics
+Letters, 13:42–77, 2017.
+
+[2] Qijie Ma, Guanghui Ren, Kai Xu, and Jian Zhen Ou. Tunable optical
+properties of 2D materials and their applications. Advanced Optical
+Materials, 9(2):2001313, 2021.
+
+[3] Khondker Shihabul Hoque and Ahmed Zubair.
+
+First-principles
+study of induced magnetism in tungsten vanadium selenide alloys for
+spintronic applications. ACS omega, 7(41):36184–36194, 2022.
+[4] Qian Lv, Xi Wu, Junyang Tan, Bilu Liu, Lin Gan, Jia Li, Zheng-Hong
+Huang, Feiyu Kang, and Ruitao Lv. Ultrasensitive molecular sensing
+of few-layer niobium diselenide. Journal of Materials Chemistry A,
+9(5):2725–2733, 2021.
+
+[5] Kin Fai Mak, Keliang He, Jie Shan, and Tony F Heinz. Control of
+valley polarization in monolayer MoS2 by optical helicity. Nature
+nanotechnology, 7(8):494–498, 2012.
+
+[6] Meizhuang Liu, Changwei Wu, Zizhao Liu, Zhiqiang Wang, Dao-
+Xin Yao, and Dingyong Zhong. Multimorphism and gap opening
+of charge-density-wave phases in monolayer VTe2. Nano Research,
+13:1733–1738, 2020.
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 15 of 17
+
+Tunable Valley Polarization and Anomalous Hall Conductivity
+
+[7] Lyudmila V Begunovich, Artem V Kuklin, Maxim A Visotin, Alexan-
+der A Kuzubov, Felix N Tomilin, Anton S Tarasov, Yuri G Mikhalev,
+and Pavel V Avramov. Triple VTe2/graphene/VTe2 heterostructures
+as perspective magnetic tunnel junctions. Applied Surface Science,
+510:145315, 2020.
+
+[8] Sergio C De la Barrera, Michael R Sinko, Devashish P Gopalan,
+Nikhil Sivadas, Kyle L Seyler, Kenji Watanabe, Takashi Taniguchi,
+Adam W Tsen, Xiaodong Xu, Di Xiao, et al. Tuning Ising super-
+conductivity with layer and spin–orbit coupling in two-dimensional
+transition-metal dichalcogenides. Nature communications, 9(1):1427,
+2018.
+
+[9] Claude Chappert, Albert Fert, and Frédéric Nguyen Van Dau. The
+emergence of spin electronics in data storage. Nature materials,
+6(11):813–823, 2007.
+
+[10] Xiang-Jie Chen, Yong-Hu Xu, Meng-Ran Qin, Pei Zhang, Zhen Gao,
+Yao He, and Kai Xiong. Valley topological phase transitions under the
+combined effects of electronic correlation and strain in the H-TiSeBr
+monolayer. Journal of Materials Chemistry C, 2025.
+
+[11] Xiaodong Xu, Wang Yao, Di Xiao, and Tony F Heinz. Spin and
+pseudospins in layered transition metal dichalcogenides. Nature
+Physics, 10(5):343–350, 2014.
+
+[12] A Rycerz, J Tworzydło, and CWJ Beenakker. Valley filter and valley
+
+valve in graphene. Nature Physics, 3(3):172–175, 2007.
+
+[13] YJ Zhang, T Oka, Ryo Suzuki, JT Ye, and Y Iwasa. Electrically
+switchable chiral light-emitting transistor. Science, 344(6185):725–
+728, 2014.
+
+[14] Yee Sin Ang, Shengyuan A Yang, C Zhang, Zhongshui Ma, and
+Lawrence K Ang. Valleytronics in merging dirac cones: All-electric-
+controlled valley filter, valve, and universal reversible logic gate.
+Physical Review B, 96(24):245410, 2017.
+
+[15] Arnab Pal, Shuo Zhang, Tanmay Chavan, Kunjesh Agashiwala, Chao-
+Hui Yeh, Wei Cao, and Kaustav Banerjee. Quantum-engineered
+devices based on 2D materials for next-generation information pro-
+cessing and storage. Advanced Materials, 35(27):2109894, 2023.
+[16] Kin Fai Mak, Di Xiao, and Jie Shan. Light–valley interactions in 2D
+
+semiconductors. Nature Photonics, 12(8):451–460, 2018.
+
+[17] Steven A Vitale, Daniel Nezich, Joseph O Varghese, Philip Kim, Nuh
+Gedik, Pablo Jarillo-Herrero, Di Xiao, and Mordechai Rothschild.
+Valleytronics: opportunities, challenges, and paths forward. Small,
+14(38):1801483, 2018.
+
+[18] John R Schaibley, Hongyi Yu, Genevieve Clark, Pasqual Rivera,
+Jason S Ross, Kyle L Seyler, Wang Yao, and Xiaodong Xu. Val-
+leytronics in 2D materials. Nature Reviews Materials, 1(11):1–15,
+2016.
+
+[19] Yuan Liu, Xidong Duan, Yu Huang, and Xiangfeng Duan. Two-
+dimensional transistors beyond graphene and TMDCs. Chemical
+Society Reviews, 47(16):6388–6409, 2018.
+
+[20] Igor Tyulnev, Álvaro Jiménez-Galán, Julita Poborska, Lenard Vamos,
+Philip St J Russell, Francesco Tani, Olga Smirnova, Misha Ivanov,
+Rui EF Silva, and Jens Biegert. Valleytronics in bulk MoS2 with a
+topologic optical field. Nature, 628(8009):746–751, 2024.
+
+[21] Di Xiao, Wang Yao, and Qian Niu. Valley-contrasting physics in
+graphene: magnetic moment and topological transport. Physical
+review letters, 99(23):236809, 2007.
+
+[22] Di Xiao, Gui-Bin Liu, Wanxiang Feng, Xiaodong Xu, and Wang Yao.
+Coupled spin and valley physics in monolayers of MoS2 and other
+group-VI dichalcogenides. Physical review letters, 108(19):196802,
+2012.
+
+[23] Xiao Liang, Longjiang Deng, Fei Huang, Tingting Tang, Chuangtang
+Wang, Yupeng Zhu, Jun Qin, Yan Zhang, Bo Peng, and Lei Bi.
+The magnetic proximity effect and electrical field tunable valley
+degeneracy in MoS2/EuS van der waals heterojunctions. Nanoscale,
+9(27):9502–9509, 2017.
+
+[24] T Smoleński, M Goryca, M Koperski, C Faugeras, T Kazimierczuk,
+A Bogucki, K Nogajewski, P Kossacki, and M Potemski. Tuning
+valley polarization in a WSe2 monolayer with a tiny magnetic field.
+Physical Review X, 6(2):021024, 2016.
+
+[25] Chuan Zhao, Tenzin Norden, Peiyao Zhang, Puqin Zhao, Yingchun
+Cheng, Fan Sun, James P Parry, Payam Taheri, Jieqiong Wang,
+Yihang Yang, et al. Enhanced valley splitting in monolayer WSe2 due
+to magnetic exchange field. Nature nanotechnology, 12(8):757–762,
+2017.
+
+[26] Baoxing Zhai, Juan Du, Chenhai Shen, Tianxing Wang, Yuting Peng,
+Qiming Zhang, and Congxin Xia. Spin-dependent dirac electrons and
+valley polarization in the ferromagnetic stanene/CrI3 van der waals
+heterostructure. Physical Review B, 100(19):195307, 2019.
+
+[27] Tao Hu, Guodong Zhao, Heng Gao, Yabei Wu, Jisang Hong, Alessan-
+dro Stroppa, and Wei Ren. Manipulation of valley pseudospin in
+WSe2/CrI3 heterostructures by the magnetic proximity effect. Physi-
+cal Review B, 101(12):125401, 2020.
+
+[28] Ziliang Ye, Dezheng Sun, and Tony F Heinz. Optical manipulation
+
+of valley pseudospin. Nature physics, 13(1):26–29, 2017.
+
+[29] Ajit Srivastava, Meinrad Sidler, Adrien V Allain, Dominik S Lembke,
+Andras Kis, and Atac Imamoğlu. Valley zeeman effect in elementary
+optical excitations of monolayer WSe2. Nature Physics, 11(2):141–
+147, 2015.
+
+[30] Jie Li, Lei Gu, and Ruqian Wu. Possible realization and protection of
+valley-polarized quantum hall effect in Mn/WS2. Physical Review B,
+101(2):024412, 2020.
+
+[31] Yuanyuan Wang, Wei Wei, Fengping Li, Xingshuai Lv, Baibiao
+Huang, and Ying Dai. Valley polarization caused by crystalline
+symmetry breaking. Materials Horizons, 8(1):244–249, 2021.
+[32] Xiujuan Mao, Jia Li, Congcong Li, Ze Liu, Sukai Teng, Xiuting
+Xu, Yang Liu, and Fuxing Yin. Biaxial strain induced band transi-
+tion and valley–spin coupling in the ferromagnetic semiconducting
+WSe2/1T-FeCl2 heterostructure. Journal of Materials Chemistry C,
+7(30):9398–9405, 2019.
+
+[33] Kin Fai Mak, Kathryn L McGill, Jiwoong Park, and Paul L McEuen.
+The valley hall effect in MoS2 transistors. Science, 344(6191):1489–
+1492, 2014.
+
+[34] Wen-Yi Tong, Shi-Jing Gong, Xiangang Wan, and Chun-Gang Duan.
+Concepts of ferrovalley material and anomalous valley hall effect.
+Nature communications, 7(1):13612, 2016.
+
+[35] Zhigang Song, Xiaotian Sun, Jiaxin Zheng, Feng Pan, Yanglong Hou,
+Man-Hong Yung, Jinbo Yang, and Jing Lu. Spontaneous valley
+splitting and valley pseudospin field effect transistors of monolayer
+VAgP2Se6. Nanoscale, 10(29):13986–13993, 2018.
+
+[36] Pei Zhao, Yandong Ma, Chengan Lei, Hao Wang, Baibiao Huang, and
+Ying Dai. Single-layer LaBr2: Two-dimensional valleytronic semi-
+conductor with spontaneous spin and valley polarizations. Applied
+Physics Letters, 115(26), 2019.
+
+[37] Feng Ding, Shilei Ji, Shasha Li, Lixia Wang, Hong Wu, Zhengfei Hu,
+Feng Li, and Yong Pu. Prediction of intrinsic valley polarization in
+single-layer GdX2 (X= Br, Cl) from a first-principles study. physica
+status solidi (b), 258(12):2100356, 2021.
+
+[38] Hai-Xia Cheng, Jun Zhou, Wei Ji, Yan-Ning Zhang, and Yuan-Ping
+Feng. Two-dimensional intrinsic ferrovalley GdI2 with large valley
+polarization. Physical Review B, 103(12):125121, 2021.
+
+[39] Yanzhao Wu, Junwei Tong, Li Deng, Feifei Luo, Fubo Tian, Gaowu
+Qin, and Xianmin Zhang. Realizing spontaneous valley polarization
+and topological phase transitions in monolayer ScX2 (X= Cl, Br, I).
+Acta Materialia, 246:118731, 2023.
+
+[40] Pei Zhao, Ying Dai, Hao Wang, Baibiao Huang, and Yandong Ma.
+Intrinsic valley polarization and anomalous valley hall effect in single-
+layer 2H-FeCl2. ChemPhysMater, 1(1):56–61, 2022.
+
+[41] Bo Huang, Wen-Yu Liu, Xu-Cai Wu, Shu-Zong Li, Hongxing Li,
+Zhixiong Yang, and Wei-Bing Zhang. Large spontaneous valley
+polarization and high magnetic transition temperature in stable two-
+dimensional ferrovalley YX2 (X= I, Br, and Cl). Physical Review B,
+107(4):045423, 2023.
+
+[42] Paolo Giannozzi, Oliviero Andreussi, Thomas Brumme, Oana Bunau,
+M Buongiorno Nardelli, Matteo Calandra, Roberto Car, Carlo Cavaz-
+zoni, Davide Ceresoli, Matteo Cococcioni, et al. Advanced capabil-
+ities for materials modelling with Quantum ESPRESSO. Journal of
+physics: Condensed matter, 29(46):465901, 2017.
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 16 of 17
+
+Tunable Valley Polarization and Anomalous Hall Conductivity
+
+[43] Matteo Cococcioni and Stefano De Gironcoli.
+
+Linear response
+approach to the calculation of the effective interaction parameters in
+the LDA+U method. Physical Review B—Condensed Matter and
+Materials Physics, 71(3):035105, 2005.
+
+[44] Graeme Henkelman, Andri Arnaldsson, and Hannes Jónsson. A
+fast and robust algorithm for bader decomposition of charge density.
+Computational Materials Science, 36(3):354–360, 2006.
+
+[45] Arash A Mostofi, Jonathan R Yates, Giovanni Pizzi, Young-Su Lee,
+Ivo Souza, David Vanderbilt, and Nicola Marzari. An updated ver-
+sion of wannier90: A tool for obtaining maximally-localised wannier
+functions. Computer Physics Communications, 185(8):2309–2310,
+2014.
+
+[46] QuanSheng Wu, ShengNan Zhang, Hai-Feng Song, Matthias Troyer,
+and Alexey A Soluyanov. Wanniertools: An open-source software
+package for novel topological materials. Computer Physics Commu-
+nications, 224:405–416, 2018.
+
+[47] Atsushi Togo. First-principles phonon calculations with phonopy and
+
+phono3py. J. Phys. Soc. Jpn., 92(1):012001, 2023.
+
+[48] Ayesha Jamshed, Maryam Basit, Saqib Ali, Sumbal Hakeem,
+Muhammad Arman Liaqat, Fatima Jamshed, Rahim Jan, and Sofia
+Javed. Fabrication of 2-D nanosheets of NbSe2 via liquid phase exfoli-
+ation and their morphological, structural, and optical characterization.
+Materials Proceedings, 17(1):27, 2024.
+
+[49] Jincheng Si, Qiang Zheng, Hanlin Chen, Chaojun Lei, Yange Suo, Bin
+Yang, Zhiguo Zhang, Zhongjian Li, Lecheng Lei, Yang Hou, et al.
+Scalable production of few-layer niobium disulfide nanosheets via
+electrochemical exfoliation for energy-efficient hydrogen evolution
+reaction. ACS applied materials & interfaces, 11(14):13205–13213,
+2019.
+
+[50] Hai Li, Gang Lu, Yanlong Wang, Zongyou Yin, Chunxiao Cong,
+Qiyuan He, Lu Wang, Feng Ding, Ting Yu, and Hua Zhang. Me-
+chanical exfoliation and characterization of single-and few-layer
+nanosheets of WSe2, TaS2, and TaSe2. small, 9(11):1974–1981, 2013.
+[51] Jia Li, Bei Zhao, Peng Chen, Ruixia Wu, Bo Li, Qinglin Xia,
+Guanghua Guo, Jun Luo, Ketao Zang, Zhengwei Zhang, et al. Syn-
+thesis of ultrathin metallic MTe2 (M= V, Nb, Ta) single-crystalline
+nanoplates. Advanced Materials, 30(36):1801043, 2018.
+
+[52] Yanmei Zang, Yandong Ma, Rui Peng, Hao Wang, Baibiao Huang,
+and Ying Dai. Large valley-polarized state in single-layer NbX2 (X=
+S, Se): Theoretical prediction. Nano Research, 14:834–839, 2021.
+
+[53] Guoxiang Hu, Victor Fung, Jingsong Huang, and Panchapakesan
+Ganesh. Work function engineering of 2D materials: the role of polar
+edge reconstructions. The Journal of Physical Chemistry Letters,
+12(9):2320–2326, 2021.
+
+[54] Han-gyu Kim and Hyoung Joon Choi. Thickness dependence of
+work function, ionization energy, and electron affinity of Mo and W
+dichalcogenides from DFT and GW calculations. Physical review B,
+103(8):085404, 2021.
+
+[55] Daniele Torelli and Thomas Olsen. Calculating critical temperatures
+for ferromagnetic order in two-dimensional materials. 2D Materials,
+6(1):015028, 2018.
+
+[56] Yan-Ling Wu, Hao-Jia Wu, Hua-Yun Geng, and Yan Cheng. Elec-
+tronic structure and magnetothermal property of two-dimensional
+ferromagnetic NbSe2 monolayer regulated by carrier concentration.
+Journal of Applied Physics, 134(9), 2023.
+
+[57] Zhao Chen and Xingxing Li. Gate-controlled spin filter, spin valve,
+and negative differential resistance in cold metal/bipolar magnetic
+semiconductor lateral homologous heterojunctions. Physical Review
+B, 109(5):054428, 2024.
+
+[58] Muhammad Zahir Iqbal. Spin-valve effect of 2D-materials based
+In Spintronic 2D Materials, pages 253–272.
+
+magnetic junctions.
+Elsevier, 2020.
+
+[59] Xingxing Li and Jinlong Yang. First-principles design of spintronics
+
+materials. National Science Review, 3(3):365–381, 2016.
+
+[60] Hualing Zeng, Junfeng Dai, Wang Yao, Di Xiao, and Xiaodong Cui.
+Valley polarization in MoS2 monolayers by optical pumping. Nature
+nanotechnology, 7(8):490–493, 2012.
+
+[61] Ziqi Wang, Xuening Han, and Yan Liang. Large valley splitting
+and vacancy-induced valley polarization in two-dimensional WSeNH.
+Physical Chemistry Chemical Physics, 26(24):17148–17154, 2024.
+
+[62] Ming-Che Chang and Qian Niu. Berry phase, hyperorbits, and
+the Hofstadter spectrum: Semiclassical dynamics in magnetic bloch
+bands. Physical Review B, 53(11):7010, 1996.
+
+[63] Di Xiao, Ming-Che Chang, and Qian Niu. Berry phase effects on
+electronic properties. Reviews of modern physics, 82(3):1959–2007,
+2010.
+
+[64] Yanping Liu, Yuanji Gao, Siyu Zhang, Jun He, Juan Yu, and Zongwen
+Liu. Valleytronics in transition metal dichalcogenides materials. Nano
+Research, 12:2695–2711, 2019.
+
+[65] Naoto Nagaosa, Jairo Sinova, Shigeki Onoda, Allan H MacDonald,
+and Nai Phuan Ong. Anomalous hall effect. Reviews of modern
+physics, 82(2):1539–1592, 2010.
+
+Samiul Islam et al.: Preprint submitted to Elsevier
+
+Page 17 of 17
+
+

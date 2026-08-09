@@ -1,0 +1,1399 @@
+5
+2
+0
+2
+
+n
+a
+J
+
+0
+2
+
+]
+h
+t
+-
+l
+c
+u
+n
+[
+
+1
+v
+8
+2
+3
+1
+1
+.
+1
+0
+5
+2
+:
+v
+i
+X
+r
+a
+
+Dynamical Electromagnetic fields and Dynamical Electromagnetic Anomaly in heavy
+ion collisions at intermediate energies
+
+Irfan Siddique,1, ∗ Anping Huang,2, † Mei Huang,1, ‡ and Muhammad Abdul Wasaye3
+1School of Nuclear Science and Technology, University of Chinese Academy of Sciences, Beijing 101408, China.
+2School of Material Science and Physics, China University of Mining and Technology, Xuzhou 221116, China.
+3School of Computer Science and Engineering, Hunan Institute of Technology, Hengyang 421001, Hunan, China.
+
+Electromagnetic field produced in non-central heavy ion collisions play a crucial role in phenomena
+such as chiral anomalous effects, directed flow of mesons and splitting of spin polarization of Λ/¯Λ. A
+precise description of these fields is essential for quantitatively studying these effects. We investigate
+the space-time evolution of the electromagnetic fields by numerically solving Maxwell’s equations
+using the results from the UrQMD model, rather than relying on an ansatz. We present the space-
+averaged dynamic electromagnetic fields, weighted by energy density, in the central region of heavy-
+ion collisions. These measurements can serve as a barometer for assessing the effects induced by
+magnetic fields. Comparing the fields at geometric center of the collisions, the space-averaged
+dynamical fields weighted by the energy density are smaller at the early stage but damp much
+slower at the later stage. We discuss the impact of these space averaged dynamical magnetic fields
+on the spin polarization and spin alignment in heavy ion collisions. Additionally, we explore the
+opportunity to study non-perturbative regime of Quantum Electrodynamics (QED) by presenting
+the simulation results for space averaged dynamical electric field at intermediate collision energies.
+Finally, the space-averaged dynamical electromagnetic anomaly E · B weighted by energy density is
+also calculated and compared with experimentally measured slope parameter r.
+
+I.
+
+INTRODUCTION
+
+High energy heavy ion collisions provide a unique op-
+portunity to study matter under extreme temperatures
+and densities, as well as under the influence of exception-
+ally strong electromagnetic (EM) fields. Simple estim-
+ates of the magnetic field strength in non-central heavy
+ion collisions, where ions move relativistically, show that
+the magnitude can easily reach the hadronic scale eB ∼
+π ∼ 1018 Gauss at the Relativistic Heavy ion Collider
+m2
+(RHIC) and even stronger magnitudes at Large Hadron
+Collider (LHC) energies [1–8]. In high-energy heavy-ion
+collisions, the extreme temperatures and/or densities res-
+ult in nuclear matter undergoing a deconfinement phase
+transition, giving rise to a novel state of matter known
+as quark-gluon plasma (QGP). During the initial stages
+of these collisions, a strong magnetic field is generated,
+which can significantly contribute to the initial energy
+density and plays a crucial role in the plasma’s evolu-
+tion [9]. This scenario provides a unique opportunity
+to explore the interplay between electromagnetic fields
+and strongly interacting quark and nuclear matter. The
+influence of strong magnetic fields on QGP has led to
+the discovery of several novel phenomena, such as chiral
+magnetic effects, charge dependent directed flow, direc-
+ted flow of D0 mesons, spin polarization of hyperons,
+splitting of spin polarization of the Λ/¯Λ etc [10–16]. The
+electromagnetic field also have interesting effects in pair
+production [17, 18] and transport properties [19–22].
+
+∗ irfansiddique@ucas.ac.cn
+† huanganping@ucas.ac.cn
+‡ huangmei@ucas.ac.cn
+
+The effects of magnetic fields and related observables
+in heavy ion collision depends on the strength and evolu-
+tion of these fields. Particularly to induce an effect on ob-
+servables, the magnetic fields needs to be strong enough
+and sufficiently long lived in the evolving matter in heavy
+ion collisions. While the initial spatial distribution and
+strength can be accurately calculated at the beginning of
+heavy ion collisions, the situation becomes increasingly
+complex over time as the system evolves through vari-
+ous phase transitions. This complexity makes precise
+calculations challenging at later stage. Typically, the
+simulation of electromagnetic fields begins by determ-
+ining the charge density of the colliding nuclei, which
+is often achieved using the Woods-Saxon distribution or
+by sampling charge positions within the nucleus via the
+Monte Carlo Glauber model [4, 6, 23]. The nucleons
+are then boosted in opposite direction (usually ±z dir-
+ections) and allowed to collide. The simplest approach
+assumes that the two colliding nuclei pass through each
+other without further interaction. However, more soph-
+isticated and realistic methods involve using transport
+models such as UrQMD (Ultra Relativistic Quantum Mo-
+lecular Dynamics) [24, 25], AMPT (A multiphase trans-
+port model) [26, 27] etc. These models help in simulating
+the entire collisions process and provide a more detailed
+framework for calculating the evolution of electromag-
+netic fields.
+
+To calculate the space-time evolution of electromag-
+netic fields, one generally assumes either the absence of
+a medium (vacuum scenario) or the presence of the me-
+dium such as QGP. Previous studies have shown that in
+the vacuum scenario, magnetic fields decays rapidly with
+time, following t−3 dependence during the early phases of
+evolving matter [15, 28]. However, the time evolution of
+these fields can be significantly modified when consider-
+
+ 
+ 
+ 
+ 
+ 
+ 
+ing the feedback from QGP medium. Specifically, the de-
+cay of the magnetic field is significantly slowed when the
+feedback from the quark-gluon plasma (QGP) is taken
+into consideration.
+[7, 8, 23, 29–33]. To describe the
+induced effects of electromagnetic fields, it is crucial to
+understand the quantitative behavior of electromagnetic
+fields using a more realistic approach. This requires a
+framework that incorporate the entire collision process
+and solves the Maxwell’s equations in the presence of a
+conducting medium such as QGP, where induced Faraday
+currents significantly slows down the decay of produced
+fields. In this work instead of relying on ansatz, we sim-
+ulate the full collision process using the UrQMD model
+to calculate the corresponding currents. We then nu-
+merically solve Maxwell’s equations, incorporating finite
+conductivities, to obtain the dynamical electric and mag-
+netic fields. We also provide a comparison with the va-
+cuum scenario. Furthermore, we also extend our calcu-
+lations to evaluate electromagnetic anomaly E · B from
+the dynamical electric and magnetic fields.
+
+√
+
+sN N ≤ 27 GeV in this work.
+
+We present numerical results for collision energy in the
+range of 3.5 GeV ≤
+It
+is noticed that the dynamics of the system differ signi-
+ficantly between lower and higher collision energies, At
+lower collision energies, the Landau picture [34, 35] is
+realised due to the baryon stopping, where after the col-
+lision the colliding nuclei are slowed down for a moment
+and ions may stick together and act as whole gigantic
+ion which can create strong Columb electric field, which
+may as well subsequently influence the evolution of elec-
+tromagnetic fields produced in heavy ion collisions.
+In
+contrast, at higher collision energies, Bjorken picture [36]
+is realised, where due to highly relativistic movement, the
+colliding nucleons penetrate through each other without
+significant interaction or sticking together. Moreover, the
+lifetime of electromagnetic fields is expected to be longer
+at relatively lower collision energies compared to higher
+collision energies. The extended lifetime of electromag-
+netic fields can also play important role in field induced
+phenomenon.
+
+After providing the brief introduction, in Section II we
+give the expressions for dynamical electric and magnetic
+fields in a system having finite conductivities. In Section
+III, we provide simulation results and discussions for the
+dynamical electromagnetic fields. Finally we summarize
+our findings in Section IV.
+
+II. CALCULATION OF DYNAMICAL
+ELECTROMAGNETIC FIELD
+
+A. Solving Maxwell’s Equations: Numerical Methods and
+Approaches
+
+The covariant form of Maxwell’s equation with ex-
+ternal sources, given by the current density four-vector
+
+jµ = (ρ, j) is:
+
+∂µF µν = jν,
+∂µ ˜F µν = 0,
+
+2
+
+(1)
+
+where the field strength tensor of electromagnetic field
+is F µν = ∂µAν − ∂νAµ and it’s dual tensor is ˜F µν =
+1
+2 ϵµνρσFρσ. The covariant form of Maxwell’s equations
+can be written in a three-vector form as
+
+∇ · B =0,
+∇ · E =ρ,
+
+∇ × B =∂tE + J3 (σ, σχ) ,
+∇ × E = − ∂tB,
+
+(2)
+
+where J3 (σ, σχ) = Jext + σE + σχB with Jext being ex-
+ternal current density and ρ being external charge dens-
+ity. In above equation σ is electric conductivity and σχ is
+chiral magnetic conductivity of charged conducting me-
+dium (QGP). The first two lines of equation 2 are con-
+straints, while last two lines of equation 2 are used to
+derive the dynamical electric and magnetic fields.
+
+To evaluate the dynamical electromagnetic fields nu-
+merically, we first calculate the jµ using the UrQMD. The
+UrQMD model simulate a full collision process, provid-
+ing the phase-space distribution of all hadrons in a heavy
+ion collision event. The positions (xn (t)) and momenta
+(pµ
+n (t)) of charged particle are function of time and are
+provided by the simulation of UrQMD model. The elec-
+tric current at a position (t, x) can be given as
+
+jµ (t, x) =
+
+(cid:88)
+
+n
+
+pµ
+n (t)
+p0
+n (t)
+
+ρn (t, x) ,
+
+(3)
+
+where n labels n−th hadron. The charged density of
+n−th hadron (ρn) is localized at xn, and to account for
+the finite size of the charge distribution, we smear the
+charge density by using Gaussian distribution
+
+ρn (t, x) =
+
+(cid:34)
+
+−
+
+qnγn (t)
+(cid:0)√
+
+|x − xn (t)|2
+2ϱ2
+
+2πϱ(cid:1)3 exp
+n (t) (vn (t) · [x − xn (t)])2
+γ2
+2ϱ2
+
+−
+
+(4)
+
+(cid:35)
+
+,
+
+where qn is the electric charge, ϱ is the smearing width
+and γ is the Lorentz factor for the n−th hadron. Once
+the current density jµ is calculated with UrQMD we can
+numerically solve Maxwell equations by constructing cor-
+responding wave equations for the electric and magnetic
+fields.
+
+In order to numerically solve Maxwell’s equations we
+use strategy as described in [29, 33], we decompose the
+electric and magnetic field as
+
+F =Fext + Fint
+
+,
+
+(5)
+
+where F denotes either B or E. In above equation the
+subscript ‘ext’ denotes external part of field which is ori-
+ginated by the source contribution from the fast moving
+
+charge particles in heavy ion collisions. The subscripts
+‘int’ represents the induced part of field which is gener-
+ated in the QGP. So Maxwell’s equations given in Eq.
+(2) can also be separated into external and internal part.
+The external part is given as
+
+∇ · Bext =0,
+∇ · Eext =ρ,
+
+∇ × Bext =∂tEext + Jext,
+∇ × Eext = − ∂tBext,
+
+(6)
+
+whereas the internal part can be given as
+
+∇ · Bint =0,
+∇ · Eint =0,
+
+∇ × Bint =∂tEint + σ (Eext + Eint) − σχ (Bext + Bint) ,
+∇ × Eint = − ∂tBint.
+
+(7)
+We use Yee’s algorithm [37], also known as Finite-
+Difference Time Domain (FDTD) method to numeric-
+ally solve above set of equations in space and time, de-
+tails also in [33]. In FDTD the components of the elec-
+tric and magnetic field are staggered in both time and
+space, whereas staggering ensures a second order acur-
+racy on both space and time. For implementation of
+this algorithm, first we define 3D space with grid steps
+∆x, ∆y, ∆z, and define time step such that it satisfies
+Courant-Friedrichs-Lewy (CFL) stability condition i.e.,
+(cid:17)−1
+
+and then by using current
+∆t ≤
+density jµ in each grid we initialize the fields. In next
+step we iterate over time where we update jµ and so up-
+date fields F (i.e., B or E) using finite difference form of
+∇ × F, and also ensure that the fields are updated at
+each time step. In this way, we can record EM fields at
+each time step and space grids. The dynamic electric
+and magnetic fields are obtained by combining results
+from internal and external components by adding them
+together as shown in Eq. (5).
+
+∆y2 + 1
+∆z2
+
+∆x2 + 1
+
+(cid:16)(cid:113) 1
+
+B. Space-Average Dynamical Electromagnetic fields weighted
+Energy Density
+
+The EM fields produced in heavy-ion collisions are
+highly inhomogeneous in space and time [5, 23, 30, 38,
+39], evaluating the field at some specific space-time point
+could lead to over- or under-estimation of the field in-
+duced effects. To mitigate this, we use space-averaged
+dynamic EM fields weighted by energy density, follow-
+ing the fact that the region with lower energy density
+contribute less to the chiral effects arising from the elec-
+tromagnetic field and matter density (details can also be
+found in [32]). Since we divide the whole space into small
+grids so space-averaged dynamical fields can be given as
+
+⟨F⟩E (t) =
+
+(cid:80)
+
+i εi (t) Fi (t)
+(cid:80)
+i εi (t)
+
+,
+
+(8)
+
+3
+
+where εi (t) is the energy density in the i−th grid and
+F represents the electric E or magnetic field B in the
+center of the same grid. We use ⟨...⟩E to represent energy
+density weighted results in our draft. Here we mention
+that for energy density calculations, we only consider the
+particles in momentum rapidity range −0.5 ≤ Y ≤ 0.5 in
+the fireball. While calculating the current densities and
+solving Maxwell’s equation to obtain dynamical electric
+and magnetic fields all charged particles from UrQMD
+are taken into account.
+
+III. SIMULATION RESULTS AND
+DISCUSSIONS
+
+In this section, we present the simulation results by
+using the numerical method discussed in the previous
+section. We assume that one nucleus moves along +z
+direction and other along −z direction, with their cen-
+ters located at x = b/2 and x = −b/2 respectively, where
+b is impact parameter and the reaction plane is formed
+by xz−plane. This setup positions the orbital angular
+momentum (OAM) direction along the −y direction. In
+set of Maxwell’s equation, we set the electric conduct-
+ivity σ = 5.8 MeV, consistent with the lattice quantum
+chromodynamics calculation [40, 41]. The chiral mag-
+netic conductivity is set to σχ = 1.5 MeV, corresponding
+to µ5 ∼ 100 MeV, as used in earlier studies [23, 30, 42].
+Although the electric conductivity varies with time, how-
+ever the influence of the time dependent conductivity on
+the field lifetime during the hydrodynamic evolution is
+not very significant [43]. Furthermore, it has been shown
+in [44] that the behavior of time-dependent and con-
+stant electric conductivity is similar at both early and
+late stages of evolution, and at lower energies this dif-
+ference becomes minimal. Thus as a first step, treating
+conductivities as constant is a good approximation in us-
+ing UrQMD model to obtain four-current and solving
+Maxwell’s equation at intermediate collision energies.
+
+For numerical simulations, we consider Au+Au colli-
+sions with a spatial volume as −15 fm ≤ x, y ≤ 15 fm
+with dx = dy = 0.5 fm, and −15 fm ≤ z ≤ 15 fm
+with dz = 0.1 fm. The time step is set to dt = 0.05
+fm/c. Eqs 6, 7 and 8 has been numerically solved by us-
+ing aforementioned Yee’s algorithm to obtain results in
+this section. Below, we present simulation results for the
+spatial distribution and time evolution of the dynamical
+electromagnetic fields.
+
+1. Spatial Distributions of electromagnetic fields:
+
+In Fig. 1, we shows contour plots of the spatial dis-
+tributions of the dynamical electric and magnetic field
+components (in units of m2
+π ) for Au+Au collisions at
+√
+sN N = 27 GeV with b = 9 fm. These distributions
+are highly inhomogeneous, consistent with findings from
+previous studies [5, 23, 30, 38, 39]. The figure has two
+
+panels in Fig. 1: Panel A (left) shows the fields at t = 0.2
+fm/c , and Panel B (right) shows the fields at t = 4 fm/c.
+These two snapshots illustrate the evolution of the fields
+over time.
+In Panel A, the spatial distribution of the
+electromagnetic field components is symmetric because
+contributions from Fint (the internal fields) are minimal
+in Ftot. At the early stage, the dominant contribution
+comes from the fast-moving source charge particles, rep-
+resented by Fext.
+In Panel B, the spatial distribution
+becomes partially asymmetric due to the significant con-
+tribution from Fint, which includes the effects of electric
+and chiral magnetic conductivities in the QGP. These
+results highlight the transition from a purely external
+field contribution at early times to a combined contribu-
+tion from both external and internal fields as the system
+evolves.
+
+We further provide spatial distribution of the product
+of energy density and magnetic field along the OAM dir-
+ection (εBy) in Fig. 2. This calculation is crucial for
+evaluating energy density-weighted fields, which serve as
+a barometer for field-induced effects. As described in
+the previous section, energy density calculations only in-
+clude particles within the momentum mid-rapidity range
+−0.5 < Y < 0.5 to minimize the influence of spectat-
+ors and boundary regions of quark or nuclear matter.
+This ensures that the focus remains on the central region,
+where εBy is non-vanishing. The spatial distribution of
+εBy clearly indicates that significant contributions are
+concentrated in the central region of the fireball, reflect-
+ing the dominance of QGP effects in this area.
+
+2. Time evolution of the magnetic field:
+
+√
+
+In this subsection, we discuss the time evolution of the
+dynamical magnetic fields. In Fig. 3, we give the compar-
+ison between vacuum case (By−ext at (0,0,0), black line),
+dynamical magnetic field (By−dyn at (0,0,0), red line)
+and space averaged dynamical magnetic field weighted
+by energy density (BSA−dyn, blue line) in a Au+Au col-
+lisions at
+sN N = 27 GeV and b = 9 fm. We focus on the
+time evolution of only y−component of the magnetic field
+weighted by energy density BSA−dyn = ⟨By−dyn⟩E (E la-
+bels for energy as weight) because all other components
+of magnetic field and electric field are almost vanishing
+because of symmetric collisions and spatial distributions.
+The dynamical magnetic field By−dyn (red line) ini-
+tially behaves similar to the vacuum scenario By−ext
+(black line). However, at later times, the decay of By−dyn
+slowdown due to contributions from the QGP medium,
+where the conductivities σ and σχ play a role. This be-
+havior reflects the time required for QGP-induced effects
+to build up after the collision. The space-averaged mag-
+netic field ⟨By−dyn⟩E (blue line) exhibits an interesting
+trend when compared to the magnetic field at the origin.
+At initial times, the magnitude of ⟨By−dyn⟩E is smaller.
+However, at intermediate times, it becomes larger than
+fields at origin (red and black line) due to contributions
+
+4
+
+from regions with higher energy density in the fireball.
+At later times t > 7 fm/c ⟨By−dyn⟩E and By−dyn at ori-
+gin have almost similar magnitude, though ⟨By−dyn⟩E
+remains slightly larger.
+
+In Fig.
+
+(4a), we give results for time evolution of
+⟨By−dyn⟩E for different collision energies. The peak
+value of ⟨By−dyn⟩E increases with collision energy, as the
+production of magnetic fields is directly related to the
+movement of charged particles. As collision energy in-
+creases the system have fast movements of charges and
+higher energy densities, so the dynamics of the particles
+such as momentum and currents they generate also in-
+tensify,
+leading to stronger maximum magnetic fields.
+Conversely, the lifetime of the space-averaged dynamical
+magnetic field decreases with increasing collision energy.
+This inverse relationship arises because as collision ener-
+gies increases the speed of charges also increases, which
+causes quick decay of the magnetic field.
+
+We also show the magnitudes ⟨By−dyn⟩E at early
+time (t = 0.1 fm/c, square symbols) and late time (t =
+8.0 fm/c, diamond symbols) in Fig. (4b). At early times,
+the magnitude increases with collision energy, while at
+late times, the field magnitude decreases as collision en-
+ergy increases. This highlights that at lower collision en-
+ergies, the magnetic field persists longer and larger mag-
+nitude at late time in the mid-central rapidity fireball
+system, despite its smaller peak magnitude.
+
+Now we see the impact of the ⟨By−dyn⟩E on obseravble
+quantities, such as the splitting between the global spin
+polarization of Λ and ¯Λ following references [45–47]. The
+difference between the global polarization of Λ and ¯Λ is
+defined as [12]
+
+∆P = PΛ − P ¯Λ,
+
+(9)
+
+the magnetic field induced global polarization of Λ (cid:0)¯Λ(cid:1)
+can be calculated as
+
+PΛ (cid:0) ¯Λ(cid:1) =
+
+µΛ (cid:0) ¯Λ(cid:1)By
+T
+
+,
+
+(10)
+
+where µΛ = −0.613µN is magnetic moment of of Λ hyp-
+eron, with µN being nuclear magneton and µΛ = −µ ¯Λ.
+The temperature T marks the point at which the hyp-
+eron spin ceases to evolve and we use T = 155 MeV. So
+Eq. (9) can be given as [44]
+
+∆P = 0.0826
+
+By
+m2
+π
+
+.
+
+(11)
+
+The numerical results presented in Fig. 4 show that
+the ⟨By−dyn⟩E at initial and intermediate time has mag-
+nitude of order 10−2 − 10−1 m2
+π, and the magnitude
+at late time is of order 10−3 − 10−2 m2
+π. The effect
+of ⟨By−dyn⟩E is negligible on the splitting between the
+global polarization of Λ and ¯Λ. Our result is consist-
+ent with the results reported in [44, 47] and with recent
+STAR data [48].
+
+5
+
+A
+
+B
+
+Figure 1. Spatial distribution of transverse components of the dynamical electric and magnetic field in transverse plane in
+Au+Au collisions at 27 GeV and b = 9 fm at t = 0.2 fm/c (panel A) and t = 4 fm/c (panel B).
+
+Figure 2. Spatial distribution of the product of energy density and dynamical eBy in transverse (a) and reaction plane (b) at
+t = 0.8 fm/c in Au+Au collisions at 27 GeV and b = 9 fm.
+
+3. Time evolution of the electric field
+
+E
+
+(cid:69)
+
+E2
+
+y−dyn + E2
+
+x−dyn + E2
+
+In this subsection, we give numerical results for
+the space-averaged dynamic electric field ⟨Edyn⟩E =
+(cid:68)(cid:113)
+for Au+Au collisions
+
+z−dyn
+at intermediate collision energies. We show the time evol-
+(cid:1) for collision
+ution results for ⟨Edyn⟩E in units of (cid:0)m2
+energies ranging from 11.5 GeV to 3.5 GeV for two im-
+pact parameters i.e, b = 0 fm (solid lines) and b = 9
+fm (dashed lines) in Fig. 5. From the figure, we ob-
+serve that the electric field magnitude is greater for cent-
+ral collisions (b = 0 fm) than for non-central collisions
+(b = 9 fm). Similar to the behavior of the magnetic field,
+the magnitude of the electric field increases with collision
+energy. However, the decay of the electric field is slower
+at smaller collision energies, highlighting the enhanced
+lifetime of the fields at lower energies.
+
+π
+
+As shown in [49] that the electric fields produced in
+central collision at intermediate collisions can provide a
+unique and novel opportunity to study Quantum Elec-
+trodynamics (QED) in the non-perturbative regime bey-
+e = (0.511 MeV)2 ,
+ond Schwinger limit i.e., eEcr := m2
+
+where me being the electron mass [for details see Ref.
+[49]. Consider the example of the vacuum pair produc-
+tion by strong electric field, which can be classified as
+perturbative or non-perturbative based on two dimenless
+quantities [50–56]
+
+ξ(m) =
+
+eE0T
+m
+
+and ν = eE0T 2
+
+(12)
+
+where ξ is Keldysh parameter [57] or also referred to as
+the non-linearity parameter [58], m is the mass of the
+particle to be produced, E0 is the field strength and T
+is the field lifetime.
+If ξ, ν ≫ 1, the pair production
+becomes non-perturbative in the sense that the rate of
+pair production acquires non-analytical dependencies on
+(cid:1)(cid:3). On the other
+e and E0 as exp (cid:2)−(const) × (cid:0)m2/eE0
+hand, if ξ, ν ≪ 1 the pair production becomes perturb-
+ative as the rate of pair production has power dependen-
+cies in e and E0 as ∝ (cid:0)eE0/m2(cid:1)n
+, where n ∈ N . From
+Eq. (12), it is evident that E0 and T , in addition to m,
+determine whether pair production occurs in a perturb-
+ative or non-perturbative regime. While the maximum
+field strength E0 increases with collision energy, the life-
+time T decreases. To study the non-perturbative regime
+
+6
+
+from internal fields (influenced by conductivities) and ba-
+ryon stopping at lower collision energies. Similar to [49],
+our results also indicate that heavy-ion collisions at lower
+collision energies can provide an excellent opportunity to
+study the non-perturbative regime of QED. The com-
+bination of strong electric fields (beyond the Schwinger
+limit) and extended lifetimes may allows for the explor-
+ation of non-linearity parameters ξ, ν ≫ 1 that lead to
+non-perturbative dependencies. This opens a new avenue
+for studying fundamental QED processes in extreme con-
+ditions.
+
+4. Dynamic electromagnetic anomaly
+
+In this section, we investigate the dynamical electro-
+magnetic anomaly E · B in heavy ion collisions. The
+dynamical electromagnetic anomaly is calculated as
+
+(E · B)dyn = Ex,totBx,tot + Ey,totBy,tot + Ez,totBz,tot,
+
+√
+
+(16)
+where Fi,tot = Fi,ext + Fi,int, with F being E or B.
+The spatial distribution of E · B for Au+Au collisions
+at
+sN N = 27 GeV and b = 9 fm in transverse plane is
+given in Fig. 7. Similar to strategy adopted in subsec-
+tion III 1, there are two snapshots at different time are
+presented in panel A and panel B belonging to earlier
+time (t = 0.8 fm/c) and later time (t = 4 fm/c) respect-
+ively of evolving system. In each panel upper plot shows
+the spatial distribution for E·B and lower plot shows the
+results is for ε (E · B), where ε is energy density. From
+the spatial distribution in the upper plots of both pan-
+els A and B of Fig. 7, we observe that the electromag-
+netic anomaly exhibits a dipolar structure. This dipolar
+structure is symmetric when flipping the sign of the x-
+coordinate but asymmetric when flipping the sign of the
+y-coordinate. In lower plot of each panel of Fig. 7, spatial
+distribution of E · B times energy density (ε) is shown,
+which also shows a dipolar structure. From the spatial
+distribution one can notice that directly calculating the
+dynamical electromagnetic anomaly weighted by energy
+density will result in ⟨E · B⟩E ≈ 0, however, when av-
+eraging in upper (y > 0) and/or lower (y < 0) halves of
+spatial plane, the results are non-zero.
+
+(cid:68)
+
+(cid:69)
+
+(E · B)dyn
+
+In Fig. (8a), we show time evolution of ⟨E · B⟩E in
+lower half space i.e., y < 0 region in Au+Au collisions
+√
+at
+sN N = 27 GeV using formula given in Eq. (8). We
+give a comparison between ⟨(E · B)ext⟩E,
+E
+,(E · B)ext at (0, −4, 0) and (E · B)dyn at (0, −4, 0) fm.
+A visible difference can be seen between
+E
+(solid blue line) and ⟨(E · B)ext⟩E (solid green line), we
+see that initially the magnitude for dynamical fields i.e.,
+(cid:68)
+and (E · B)dyn at (0, −4, 0) has smal-
+(E · B)dyn
+ler magnitude but damps slower than the ⟨(E · B)ext⟩E
+and (E · B)ext at (0, −4, 0). Notably, the decay of
+(cid:68)
+is the slowest among all. The time evol-
+(E · B)dyn
+
+(E · B)dyn
+
+(cid:69)
+
+(cid:68)
+
+(cid:69)
+
+(cid:69)
+
+E
+
+E
+
+√
+
+Figure 3. Time evolution of magnetic field By in Au+Au
+collisions at
+sN N = 27 GeV and b = 9 fm. The comparison
+has been made for By−ext at (0,0,0), By−dyn at (0,0,0) and
+space averaged dynamical magnetic field weighted by energy
+density (BSA−dyn = ⟨By−dyn⟩E).
+
+of QED, we need collision energies where E0 and T are
+sufficiently large to satisfy ξ, ν ≫ 1.
+
+In Fig. (6a), we show the peak magnitude of electric
+field max ⟨Edyn⟩E (MeV scale ) as a function of collision
+energy. The maximum peak strength ranges from 20 MeV
+to 45 MeV for collision energies between 3.5 GeV to 11.5
+GeV. Although the peak field strengths are weaker com-
+pared to those at higher collision energies, they are still
+significantly stronger than the Schwinger limit. The rela-
+tionship between the peak strength and collision energy
+is well-fitted by the formula:
+
+max⟨Edyn⟩E = 12.997 ×
+
+(cid:19)1/2
+
+(cid:18) √
+
+sN N
+1GeV
+
+.
+
+(13)
+
+In Fig. (6b), we give the effective lifetime the electric
+field, calculated as [49]
+
+ˆ
+
+T =
+
+E(t)>max⟨Edyn⟩E /2
+
+dt.
+
+(14)
+
+The results show that T increases as the collision energy
+decreases and the best fitting curve for T is
+
+T = 20.7671 ×
+
+(cid:19)−1
+
+(cid:18) √
+
+sN N
+1 GeV
+
++ 65.8689 ×
+
+(cid:18) √
+
+sN N
+1 GeV
+
+(cid:19)−2
+
+.
+
+(15)
+Our fitting results shown in Eqs. (13) and (15) have dif-
+ferent coefficients from the fitting results shown in [49]
+due to the differences in the transport model and sim-
+ulation methodology. However, the qualitative behavior
+remains consistent i.e., at lower collision energies, the
+electric fields are significantly stronger relative to the
+Schwinger limit and exhibit much longer lifetimes. This
+delayed lifetime behavior is attributed to contributions
+
+7
+
+Figure 4. Time evolution of space-averaged dynamical magnetic field ⟨By−dyn⟩E as function of collision energy in Au+Au
+collisions at b = 9 fm in left panel. Right panel shows the magnitude of ⟨By−dyn⟩E at early time (t = 0.1 fm/c) shown by
+square symbols and later time (t = 8 fm/c) shown by diamond symbols.
+
+dynamical electromagnetic anomaly as
+
+(cid:68)
+
+(E · B)dyn
+
+(cid:69)
+
+T E
+
+=
+
+´
+
+dt
+
+(cid:68)
+(E · B)dyn
+dt
+
+´
+
+(cid:69)
+
+E
+
+,
+
+(17)
+
+since we have discretized the whole time period so above
+equation can be transformed into
+
+(cid:68)
+(E · B)dyn
+
+(cid:69)
+
+T E
+
+≡
+
+(cid:80)
+i
+
+(cid:68)
+(E · B)i,dyn
+(cid:80)
+i ∆ti
+
+(cid:69)
+
+E
+
+∆ti
+
+(18)
+
+Figure 5. Space-averaged dynamical electric field ⟨Edyn⟩E as
+function of collision energy in Au+Au collisions, solid lines
+are for b = 0 fm and dashed lines are for b = 9 fm for corres-
+ponding collisions energy.
+
+(cid:68)
+(E · B)dyn
+
+(cid:69)
+
+E
+
+ution of
+
+(solid lines) and (E · B)dyn at
+(0, −4, 0) for other collision energies is shown in Fig (8b),
+where we see that, as collision energy decreases, the peak
+(cid:69)
+magnitude of
+decreases, but the decay
+rate becomes more slower at lower collision energies.
+
+(cid:68)
+(E · B)dyn
+
+E
+
+Given the spatial and temporal variation of electro-
+magnetic anomaly in previous figures, their overall ef-
+fects on physical observable should be evaluated at an
+average level over the full volume and lifetime of quark
+and nuclear matter. To quantify net effect by dynamical
+electromagnetic anomaly we define space-time averaged
+
+(cid:68)
+(E · B)i,dyn
+
+(cid:69)
+
+E
+
+(cid:68)
+
+where
+is space-averaged dynamical elec-
+tromagnetic anomaly at i-th time step. As it is shown
+de-
+in Fig (8a) that initially magnitude of
+cays faster but this decay becomes slower once the con-
+tribution from induced part of electric and magnetic field
+components starts playing role and after t = 2 fm/c the
+decay become rate becomes very slow. Moreover mag-
+nitude at t = 2 fm/c is much smaller than initial time so
+we take time average interval 0 → 2 fm/c while calculat-
+
+(E · B)dyn
+
+(cid:69)
+
+E
+
+ing
+
+(cid:68)
+(E · B)dyn
+
+(cid:69)
+
+.
+
+T E
+
+(cid:69)
+
+T E
+
+In Fig.
+
+9, we present the space-time averaged
+magnitude of dynamical electromagnetic anomaly i.e.,
+(cid:68)
+(E · B)dyn
+for different centralities at 27 GeV and
+compare them to the slope parameter r derived from
+charge-dependent elliptic flow differences for charged pi-
+ons, as reported by the STAR collaboration in [59]. The
+(π±) ∓
+slope parameter r, defined as v2 (π±) = vbase
+rAch/2, with Ach = (N+ − N−) / (N+ + N−) character-
+izing the charge asymmetry, quantifies the difference in
+elliptic flow v2 between π+ and π−. The similarity in
+trends between the space-time averaged dynamical elec-
+(cid:68)
+and the measured
+(E · B)dyn
+tromagnetic anomaly
+r parameter as a function of centrality, as shown in the
+
+T E
+
+(cid:69)
+
+2
+
+8
+
+Figure 6. Peak strength of ⟨Edyn⟩E as function of collision energy for Au+Au collisions at b = 0 fm in left panel. Right panel
+shows the effective time for ⟨Edyn⟩E as a function of collision energy for Au+Au collision at b = 0 fm.
+
+Fig. 9, suggests that the QED anomaly E · B could also
+be a potential mechanism for the v2 separation observed
+between positive and negative charges in Au+Au colli-
+sions at 27 GeV.
+
+IV. SUMMARY AND OUTLOOK
+
+In this study, we have provided a comprehensive ana-
+lysis of the dynamical electromagnetic fields and dynam-
+ical electromagnetic anomaly in heavy-ion collisions, fo-
+cusing on intermediate collision energies. Using the Ur-
+QMD transport model, which accounts for full collision
+process, we calculated the current density and numeric-
+ally solve Maxwell’s equations with finite conductivities
+to obtain dynamical fields. The research conducted in
+this papers explores the space-time evolution of dynam-
+ical electromagnetic fields and electromagnetic anomaly
+in the presence of a medium i.e., quark-gluon plasma
+(QGP). Moreover, space-averaged fields weighted by en-
+ergy density were introduced to mitigate over- or under-
+estimations in local field-induced effects.
+
+While studying the dynamical magnetic fields, at in-
+termediate collision energies, we show that they ex-
+hibit extended lifetimes and slower decay due to QGP
+contributions(σ and σχ), which may enable a prolonged
+influence on field-induced phenomena. The peak mag-
+netic field strength increases with collision energy, but at
+lower collision energies, the fields decay more slowly and
+persist longer, maintaining a larger magnitude at later
+times. We also study the impact of the magnetic field on
+the spin polarization of Λ and ¯Λ. We found that the field
+strength at later times is insufficient to induce a signific-
+ant splitting in their global polarization. This result is
+consistent with previous studies and experimental data
+from the STAR collaboration.
+
+Dynamical electric fields exhibit behavior similar to
+i.e., they exhibit longer lifetimes and
+
+magnetic fields,
+
+slower decay when medium feedback is considered in
+terms of conductivities. We also show that the peak
+electric field strength increases with collision energy, but
+the lifetime is significantly extended at lower collision
+energies, which poses the potential of dynamical electric
+fields in central collisions to probe the non-perturbative
+regime of QED beyond the Schwinger limit. For colli-
+sion energies between 3.5 GeV and 11.5 GeV, the max-
+imum electric field strength was found to range from
+20 MeV to 45 MeV. While smaller than fields at higher
+collision energies, these values remain critical for study-
+ing the Schwinger effect due to their magnitude and ex-
+tended lifetime. Our results suggest that intermediate-
+energy heavy-ion collisions generate non-perturbatively
+strong electric fields capable of inducing the Schwinger
+effect. Our results are qualitatively consistent with previ-
+ous studies. The collisions at intermediate energies may
+provide a experimental setup to test this phenomenon.
+However, future work needs to focus and predict the po-
+tential experimental signatures of the Schwinger effect in
+heavy-ion collisions.
+
+Furthermore, we extended our work to study dynam-
+ical electromagnetic anomaly. We analyzed the spatial
+distribution and time evolution of dynamical electromag-
+netic anomaly. We define and calculate space-time aver-
+aged dynamical electromagnetic anomaly and compare
+them to the slope parameter r. These dependencies are
+found qualitatively consistent with the STAR data on the
+slope parameter r as a function of the centrality, indicat-
+ing the QED anomaly could be an potential mechanism
+that drives the v2 separation between positive and neg-
+ative charges.
+
+In the calculations of this paper, we have used finite
+conductivities, one can improve by introducing time de-
+pendent conductivities, which is expected to further ef-
+fect the electromagnetic fields and deserves a detailed
+study in the future. Our study, consistent with previous
+researches, suggests that intermediate-energy heavy-ion
+
+◆◆◆◆◆◆12.997*(sNN)12(a)4681012202530354045sNNE(MeV)Au+Au,b=0fm■■■■■■20.7671sNN+65.8689sNN(b)468101202468101214sNNT(fm/c)Au+Au,b=0fm9
+
+A
+
+B
+
+Figure 7. Spatial distribution of dynamical electromagnetic anomaly in transverse plane in Au+Au collisions at 27 GeV and
+b = 9 fm at t = 0.8 fm/c (panel A) and t = 4 fm/c (panel B). Lower plots of both panel shows spatial distribution for the
+product of energy density and dynamical electromagnetic anomaly.
+
+Figure 8. Time evolution of the dynamical electromagnetic anomaly in Au+Au collisions at
+sN N = 27 GeV and b = 9 fm is
+shown in left panel. Right panel shows the time evolution of electromagnetic anomaly for other intermediate collision energies.
+
+√
+
+collisions provide a unique opportunity to explore QCD
+under extreme conditions characterized by strong elec-
+tric fields. While observing significant effects at the had-
+ronic scale may be challenging, nonperturbative changes
+are more likely to occur in the deconfined phase of QCD.
+Numerous studies have investigated QCD in the presence
+of strong magnetic fields, predicting significant modific-
+ations to the QCD phase diagram . However, studies
+addressing strong electric fields are comparatively sparse
+and no consensus has been reached regarding their ef-
+
+fects. This highlights the need for further theoretical in-
+vestigations to understand the impact of strong electric
+fields on QCD and its phase structure.
+
+ACKNOWLEDGMENTS
+
+We thank X.G. Huang, G.Torrieri and Q. Wang for
+helpful discussions. I.Siddique is supported by the Min-
+istry of Science and Technology (MOST) of China un-
+
+10
+
+der Grant No. QN2023205001L and RFIS-NSFC under
+Grant No. 12350410364. M. Huang and A. Huang are
+supported by the National Natural Science Foundation of
+China (NSFC) under Grant No. 12235016 and 12221005.
+A. Huang is also grateful for the support from the NSFC
+under Grant No. 12205309.
+
+Figure 9. The space-time averaged dynamical electromagnetic
+and the slope parameter r as
+anomaly i.e,
+
+(cid:68)
+
+(cid:69)
+
+(E · B)dyn
+
+T E
+functions of centrality in Au + Au collisions at 27 GeV.
+
+[1] D. E. Kharzeev, L. D. McLerran, and H. J. Warringa,
+
+arXiv:2103.11577.
+
+Nucl. Phys. A 803, 227 (2008), arXiv:0711.0950.
+
+[22] H.-H. Peng, X.-L. Sheng, S. Pu, and Q. Wang, Phys.
+
+[2] V. Skokov, A. Y. Illarionov, and V. Toneev, Int. J. Mod.
+
+Rev. D 107, 116006 (2023), arXiv:2304.00519.
+
+Phys. A 24, 5925 (2009), arXiv:0907.1396.
+
+[3] M. Asakawa, A. Majumder, and B. Muller, Physical Re-
+
+view C 81, 064912 (2010).
+
+[23] I. Siddique, S. Cao, U. Tabassam, M. Saeed, and
+Phys. Rev. C 105, 054909 (2022),
+
+M. Waqas,
+arXiv:2201.09634.
+
+[4] A. Bzdak and V. Skokov, Phys. Lett. B 710, 171 (2012),
+
+[24] S. A. Bass et al., Prog. Part. Nucl. Phys. 41, 225 (1998),
+
+arXiv:1111.1949.
+
+[5] W.-T. Deng and X.-G. Huang, Phys. Rev. C 85, 044907
+
+(2012), arXiv:1201.5108.
+
+nucl-th/9803035.
+[25] M. Bleicher et al.,
+
+ph/9909407.
+
+J. Phys. G25, 1859 (1999), hep-
+
+[6] J. Bloczynski, X.-G. Huang, X. Zhang, and J. Liao, Phys.
+
+Lett. B 718, 1529 (2013), arXiv:1209.6594.
+
+[7] K. Tuchin,
+
+Phys. Rev. C 88,
+
+024911 (2013),
+
+[26] Z.-W. Lin, C. M. Ko, B.-A. Li, B. Zhang, and S. Pal,
+Phys. Rev. C72, 064901 (2005), arXiv:nucl-th/0411110.
+[27] Z.-W. Lin and L. Zheng, Nuclear Science and Techniques
+
+arXiv:1305.5806.
+
+32 (2021).
+
+[8] K. Tuchin,
+
+Phys. Rev. C 91,
+
+064902 (2015),
+
+[28] K. Hattori and X.-G. Huang, Nuclear Science and Tech-
+
+arXiv:1411.1363.
+
+niques 28 (2017).
+
+[9] V. Roy and S. Pu, Physical Review C 92, 064902 (2015).
+[10] STAR, M. Abdallah et al., Phys. Rev. C 105, 014901
+
+[29] L. McLerran and V. Skokov, Nucl. Phys. A 929, 184
+
+(2014), arXiv:1305.0774.
+
+(2022), arXiv:2109.00131.
+
+[30] H. Li, X.-l. Sheng, and Q. Wang, Phys. Rev. C 94, 044903
+
+[11] STAR Collaboration et al., Physics Letters B 839,
+
+(2016), arXiv:1602.02223.
+
+137779 (2022), arXiv:2209.03467.
+
+[31] I. Siddique, R.-j. Wang, S. Pu, and Q. Wang, Phys. Rev.
+
+[12] STAR Collaboration, Nature 548, 62 (2017) 548, 62
+
+D 99, 114029 (2019), arXiv:1904.01807.
+
+(2017), arXiv:1701.06657.
+
+[13] D. E. Kharzeev, J. Liao, S. A. Voloshin, and G. Wang,
+Prog. Part. Nucl. Phys. 88, 1 (2016), arXiv:1511.04050.
+[14] W. Li and G. Wang, Annual Review of Nuclear and
+
+Particle Science 70, 293 (2020).
+
+[15] X.-G. Huang, Reports on Progress in Physics 79, 076302
+
+(2016).
+
+[16] J.-J. Zhang et al., Phys. Rev. Res. 4, 033138 (2022),
+
+[32] I. Siddique, X.-L. Sheng, and Q. Wang, Phys. Rev. C
+
+104, 034907 (2021), arXiv:2106.00478.
+
+[33] A. Huang, D. She, S. Shi, M. Huang, and J. Liao, Phys-
+
+ical Review C 107, 034901 (2023).
+
+[34] E. Fermi, Progress of Theoretical Physics 5, 570 (1950).
+[35] L. D. Landau, Izv. Akad. Nauk Ser. Fiz. 17, 51 (1953).
+[36] J. D. Bjorken, Phys. Rev. D27, 140 (1983).
+[37] K. Yee, IEEE Transactions on Antennas and Propagation
+
+arXiv:2201.06171.
+
+14, 302 (1966).
+
+[17] X.-l. Sheng, D. H. Rischke, D. Vasak, and Q. Wang, Eur.
+
+[38] X.-L. Zhao, G.-L. Ma, and Y.-G. Ma, Phys. Rev. C 99,
+
+Phys. J. A 54, 21 (2018), arXiv:1707.01388.
+
+034903 (2019), arXiv:1901.04151.
+
+[18] X.-L. Sheng, R.-H. Fang, Q. Wang, and D. H. Rischke,
+Phys. Rev. D 99, 056004 (2019), arXiv:1812.01146.
+[19] K. Fukushima, K. Hattori, H.-U. Yee, and Y. Yin, Phys.
+
+Rev. D 93, 074028 (2016), arXiv:1512.03689.
+
+[20] K. Hattori, X.-G. Huang, D. H. Rischke, and D. Satow,
+Phys. Rev. D 96, 094009 (2017), arXiv:1708.00515.
+
+[39] X.-L. Zhao, G.-L. Ma, and Y.-G. Ma, Phys. Lett. B 792,
+
+413 (2019), arXiv:1901.04156.
+
+[40] H.-T. Ding et al., Physical Review D 83, 034504 (2011).
+[41] G. Aarts et al., Journal of High Energy Physics 2015
+
+(2015).
+
+[42] I. Siddique and U. Tabassam, Physical Review C 109,
+
+[21] S. Lin and L. Yang,
+
+JHEP 06,
+
+054 (2021),
+
+034905 (2024).
+
+11
+
+[43] K. Tuchin, Advances in High Energy Physics 2013, 1
+
+(1970).
+
+(2013).
+
+[44] H. Li, X.-L. Xia, X.-G. Huang, and H. Z. Huang, Physical
+
+Review C 108, 044902 (2023).
+
+[51] V. S. Popov, Zh. Eksp. Teor. Fiz. 61, 1334 (1971).
+[52] V. S. Popov, JETP Lett. 13, 185 (1971).
+[53] G. V. Dunne, Q.-h. Wang, H. Gies, and C. Schubert,
+
+[45] F. Becattini, I. Karpenko, M. A. Lisa, I. Upsal, and S. A.
+
+Physical Review D 73, 065028 (2006).
+
+Voloshin, Physical Review C 95, 054902 (2017).
+
+[46] B. Muller and A. Schafer, Physical Review D 98, 071902
+
+[54] T. Oka, Physical Review B 86, 075148 (2012).
+[55] H. Taya, H. Fujii, and K. Itakura, Physical Review D
+
+(2018).
+
+90, 014039 (2014).
+
+[47] H.-H. Peng, S. Wu, R.-j. Wang, D. She, and S. Pu, Phys-
+
+[56] I. A. Aleksandrov, G. Plunien, and V. M. Shabaev, Phys-
+
+ical Review D 107, 096010 (2023).
+
+ical Review D 99, 016020 (2019).
+
+[48] M. I. Abdulhamid et al., Physical Review C 108, 014910
+
+(2023).
+
+[49] H. Taya, T. Nishimura, and A. Ohnishi, Physical Review
+
+[57] L. V. Keldysh, J. Exp. Theor. Phys. 20, 1307 (1965).
+[58] A. Fedotov et al., Physics Reports 1010, 1 (2023).
+[59] STAR, L. Adamczyk et al., Phys. Rev. Lett. 114, 252302
+
+C 110, 014901 (2024).
+
+(2015), arXiv:1504.02175.
+
+[50] E. Brezin and C. Itzykson, Physical Review D 2, 1191
+
+

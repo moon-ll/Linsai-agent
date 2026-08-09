@@ -1,0 +1,1534 @@
+Attosecond Transient Absorption Study of Coherent Hole Oscillation in Ar+
+Nisnat Chakraborty 1, Miguel Alarc´ on1, Michael P. McDonnell 1, Karl Hauser 1, Islam
+Shalaby1, Dipayan Biswas 1, James K. Wood 2, Nikolay V. Golubev 1, Arvinder Sandhu 1,2,3∗
+1Department of Physics, University of Arizona, Tucson, Arizona 85721, USA
+2College of Optical Sciences, University of Arizona, Tucson, Arizona 85721, USA and
+3Department of Physics and CXFEL Laboratory,
+Arizona State University, Tempe, AZ, 85287, USA
+(Dated: August 15, 2025)
+We report on the observation, characterization, and control of the electron dynamics in ionized
+argon atoms. We utilized an intense mid-infrared (MIR) pulse to create a coherent superposition of
+the spin-orbit split ground state of the ion. A weak extreme ultraviolet (XUV) pulse then probes the
+hole oscillation through time-resolved transient absorption spectroscopy. We investigated several 3p
+to nd transitions accessible with our XUV high harmonics which show a 23 fs beat corresponding
+to the energy separation between the initially populated states. The experimental attosecond tran-
+sient absorption signals for different pathways were simulated using detailed TDSE simulations and
+perturbative analytic calculations. The analysis of phase relations between the oscillations reveals
+important information about transition dipole moments in the system. In addition, we employed
+another strong MIR pulse to achieve transient control over the absorption by inducing Stark shifts
+of the states without affecting the electronic coherences.
+I. INTRODUCTION
+Electronic motion in the valence orbitals of atomic and
+molecular systems occurs on timescales ranging from at-
+toseconds to femtoseconds [1]. Such ultrafast electron dy-
+namics [2–4] arise from the formation of coherent super-
+positions of electronic states. Understanding the origin
+and evolution of electronic coherences, as well as explor-
+ing ways to control them, can reveal fundamental proper-
+ties of atomic and molecular systems and their response
+to external perturbations.
+The tremendous developments in experimental laser
+science have made it possible to generate ultrashort light
+pulses capable of tracing the evolution of electronic co-
+herences on their natural time scales. Table-top setups
+utilizing high-harmonic generation (HHG) [5–7] have
+become routinely available for the efficient production
+of sub-femtosecond pulses spanning the visible to soft
+X-ray spectral ranges [8, 9]. Techniques such as at-
+tosecond streaking [10–12], reconstruction of attosecond
+beating by interference of two-photon transitions (RAB-
+BITT) [13, 14], high-harmonic spectroscopy [15], time-
+resolved photoelectron spectroscopy, attosecond tran-
+sient absorption spectroscopy (ATAS) have been used
+to measure the electron dynamics in a large variety of
+atomic and molecular systems[16–19] as well as in the
+condensed matter [20–22].
+Here we use a few-cycle mid-infrared (MIR) laser pulse
+to drive the strong field ionization (SFI) in a gas of argon
+atoms, creating a coherent superposition of the lowest
+spin-orbit-coupled electronic states of the ion. The re-
+sulting electronic coherence is probed with an extreme-
+ultraviolet (XUV) attosecond pulse train. We measure
+∗ asandhu6@asu.edu
+the ATAS signal in the energy range of 21–28 eV which
+corresponds to the 17th, 19th, and 21st harmonics of
+the MIR laser. We trace the oscillations, intensities, and
+phases of nine distinct absorption lines and highlight the
+non-intuitive relationships between different ATAS sig-
+nals.
+The ATAS approach used in our experiment has been
+previously employed to study valence-shell wave packet
+dynamics in krypton [23] and xenon [24]. Its extension to
+molecular systems has the potential for capturing charge
+migration on attosecond timescales [25, 26]. Yet, a de-
+tailed analysis of the relative phases and intensities of
+various absorption lines in the ATAS spectra has not
+been reported so far. Here, we establish the correspon-
+dence between the measured spectra and the properties
+of the coherent superposition of electronic states, as well
+as values of the transition dipole moments connecting
+initial and final states.
+To verify our interpretations, we perform a series
+of fully quantum mechanical simulations of the ATAS
+signal solving the time-dependent Schr¨ odinger equation
+(TDSE) numerically with explicit consideration of the
+interactions between the system and the applied exter-
+nal fields. We compare the results of our simulations
+with the spectra obtained within the perturbation the-
+ory framework [3]. While numerical integration of the
+TDSE is more versatile, enabling the calculation of the
+absorption spectra in the presence of the control fields or
+when the pump and the probe overlap, we still find ap-
+proximate analytical perturbative expressions valuable.
+Their analysis helps unravel the essence of the physical
+mechanisms that govern the dynamics of the observa-
+tion. For instance, using such expressions enables us to
+present simple mathematical expressions to explain the
+phase relations between different oscillations.
+arXiv:2508.10261v1  [physics.atom-ph]  14 Aug 2025
+2
+PHAROS
+200 fs, 1030 nm, 3 mJ
+Beam splitter
+arrangement
+Delay Stage
+HHG Gas cell
+IR Filter
+Toroidal Mirror
+Vaccum Chambers
+Target Gas cell
+Grating
+CCD
+IR Filter
+Waveplate Polarizer
+Shutter
+2.75m long, 0.5 mm diameter, 720 torr Argon /f_illed Hollow core /f_iber 
+Chirped mirrors
+18 fs, 1030 nm, 2.4 mJ
+Figure 1. Schematic of the transient absorption spectroscopy setup. A commercial Yb-based laser, coupled with a 2.75 m long
+hollow-core fiber and a chirped mirror compressor, produces 2.4 mJ, 18 fs pulses centered at 1030 nm. These MIR pulses are
+subsequently split into three arms—pump (MIR), probe (XUV), and control (MIR)—with a special beam splitter arrangement,
+using a 60:40 beam splitter and a pair of holey mirrors. All three beams are ultimately recombined at the target gas cell, where
+the transmitted XUV pulse is directed to a spectrometer for detection.
+Beyond observation and characterization of the ATAS
+signals, we investigate the active laser control of the elec-
+tronic processes by applying a delayed strong MIR field.
+We demonstrate the possibility to induce the transient
+Stark shifts on the absorption lines without affecting the
+coherent superposition of the ionic states. This con-
+trol capability lays the groundwork for quantum non-
+demolition control techniques enabling manipulations of
+quantum states without destroying their coherence which
+is critical for quantum error correction and sensing.
+The paper is organized as follows. In Sec. II, we present
+the detailed description of our experimental setup. Sec-
+tion III contains the description of the computational and
+theoretical schemes. We discuss the observed coherent
+electron dynamics in Sec. IV A and present our scheme
+for transient control of the system in Sec. IV B. We sum-
+marize our results and conclude the paper in Sec. V.
+II. EXPERIMENT
+Our experimental system, depicted in Fig. 1, utilizes
+a commercially available ytterbium based laser system
+(Pharos, LightConversion USA) which produces 3 mJ,
+200 fs pulses at a central wavelength of 1030 nm. The
+pulses are focused into a 2.75 m long hollow-core fiber
+filled with argon which is pressurized to 720 Torr, pro-
+ducing a MIR supercontinuum in the spectral range of
+about 950 nm to 1100 nm. The broad MIR output is
+temporally compressed by four chirped mirrors, generat-
+ing 18 fs pulses with a pulse energy of 2.4 mJ [27].
+The MIR pulse is subsequently divided into three
+parts. The first 60% is directed into a gas cell backed
+by 50 torr xenon, where it drives the HHG. The HHG
+process is phase-matched to achieve efficient generation
+of XUV in the energy range of 21–28 eV, mainly through
+the 17th, 19th, and 21st harmonics of the MIR beam of
+wavelength 1030 nm. This spectral window gives access
+to the 3d, 4d, and 5d spin-orbit split states of atomic ar-
+gon ion, as we discuss in details in Sec. III of this paper.
+The XUV pulse train co-propagates with the residual
+MIR field. The MIR radiation is subsequently removed
+by a 200 nm thick aluminum filter and the filtered XUV
+beam is focused to a spot size of 70 µm using a toroidal
+mirror with a 1 m focal length. At the focus XUV inter-
+acts with an effusive argon gas jet at a backing pressure
+of 10 Torr. Post interaction, the XUV beam proceeds to
+a spectrometer consisting of a curved variable line space
+diffraction grating, which spectrally resolves and images
+the XUV transmission from the focal region onto an X-
+ray charge-coupled device (CCD) detector.
+Out of the remaining 40% of the MIR beam, 37% is
+employed as a non-collinear pump pulse to ionize the ar-
+gon atoms by strong-field (tunnel) ionization. The re-
+sulting ions Ar + and any residual neutrals are probed
+with the attosecond XUV pulse train. Any scattering of
+the non-collinear MIR beam along the XUV propagation
+direction is eliminated by a second aluminum filter. Tem-
+poral delay between the MIR pump and XUV probe arm
+is introduced using a precision delay stage that controls
+the optical path length of the MIR beam. This delay is
+systematically scanned to capture the time-resolved evo-
+lution of the coherent electron dynamics. At each delay
+position, the transmitted XUV spectrum is recorded us-
+ing the CCD. The delay-dependent absorption features
+are obtained by averaging over 120 alternate probe-only
+(XUV) and pump–probe (XUV + MIR) spectra, with
+each frame captured at an exposure time of 0.5 seconds.
+3
+Table I. Dipole-allowed electronic transitions in Ar + in the
+energy range from 21 to 28 eV. The energies and elec-
+tronic configurations are taken from the NIST Atomic Spectra
+Database [28]. We assign a symbolic notation νi to each of
+the transitions in order to simplify the corresponding discus-
+sion in the main text.
+Energy (eV) Initial State Final State Symbol
+26.8900 3 s23p5 2P ◦
+3/2 3s23p4(1D)5d 2S1/2 ν1
+26.7125 3 s23p5 2P ◦
+1/2 3s23p4(1D)5d 2S1/2 ν2
+23.8933 3 s23p5 2P ◦
+3/2 3s23p4(3P )4d 2D3/2 ν3
+23.7158 3 s23p5 2P ◦
+1/2 3s23p4(3P )4d 2D3/2 ν4
+23.8740 3 s23p5 2P ◦
+3/2 3s23p4(3P )4d 2D5/2 ν5
+21.6750 3 s23p5 2P ◦
+3/2 3s23p4(1D)3d 2P1/2 ν6
+21.4975 3 s23p5 2P ◦
+1/2 3s23p4(1D)3d 2P1/2 ν7
+21.6241 3 s23p5 2P ◦
+3/2 3s23p4(1D)3d 2P3/2 ν8
+21.4466 3 s23p5 2P ◦
+1/2 3s23p4(1D)3d 2P3/2 ν9
+The transient absorption signal is quantified by the
+change in optical density, ∆OD( τ ), defined as
+∆OD(τ ) = − log
+ IXUV+MIR(τ )
+IXUV
+
+, (1)
+where IXUV+MIR(τ ) and IXUV denote the transmitted
+XUV intensities through the gas target with and without
+the MIR pump, respectively, as a function of the pump-
+probe delay τ .
+Lastly, the remaining 3% of the MIR pulse is reserved
+as a control field, introduced at a fixed delay of 750 fs
+with respect to the pump pulse. This control pulse is
+tuned to be strong enough to induce the Stark shift of
+energy levels in the system yet being too weak to cause
+any noticeable population transfer or other strong-field
+effects on the initially created electronic coherences.
+III. THEOR Y
+A. Description of the system
+The ground electronic configuration of Ar + is 3s23p5.
+According to the NIST Atomic Spectra Database [28],
+the ground electronic state experiences a considerable
+spin-orbit splitting leading to the creation of four de-
+generate electronic states of 2P ◦
+3/2 character and two de-
+generate states of 2P ◦
+1/2 character separated by 0.177 eV
+from each other. The next ionic state of Ar + has
+3s3p6 (2S1/2) electronic configuration and is almost
+0
+21
+ν2
+R1 3s23p45d
+J=1/2
+ν1
+19 17
+Harmonic order Ar
+Ar+
+3s23p6
+0.177
+3s23p5
+J=3/2
+26.88
+ν3 ν4 ν5
+23.89
+23.87
+3s23p44d
+J=3/2
+3s23p44d
+J=5/2
+ν6 ν7
+R2 
+ν8 ν9
+21.62
+21.67 3s23p43d
+J=1/2
+3s23p43d
+J=3/2
+R3 
+Energy (eV)
+SFI
+3s23p5
+J=1/2
+Figure 2. Schematic representation of the experiment for
+studying the electronic dynamics in Ar +. An intense mid-
+infrared (MIR) laser pulse creates electronic coherences in the
+spin-orbit split 3s23p5
+J=3/2 and 3s23p5
+J=1/2 electronic states of
+the cation. A weak extreme ultraviolet (XUV) laser pulse is
+used to probe the dynamics in the system via transmission
+of the 21 st (region R1, highlighted in green), 19 th (region R2,
+highlighted in blue), and 17 th (region R 3, highlighted in or-
+ange) harmonics.
+13.5 eV above the ground state. This large energy separa-
+tions implies that following SFI by the MIR, the resulting
+ionic wave packet will predominantly be composed of the
+six lower states of the cation. We assume an equal linear
+superposition of those six initial states as there no rea-
+son to favor any of the magnetic quantum numbers due
+to the symmetry of the experiment.
+In the energy window between 21 and 28 eV covered
+by the XUV probe pulse, the initially populated elec-
+tronic states can be coupled to a large number of final
+electronic states. For simplicity we focus on the dipole-
+allowed transitions leading to a total of nine distinct ab-
+sorption lines, which are listed in Tab. I and schemati-
+cally shown in Fig. 2. The electronic configurations of
+the corresponding states were obtained from the NIST
+database and used to compute the transition dipole mo-
+ments as detailed in the Appendix A.
+Since the reference for quantifying the optical den-
+sity change in the experiment is the transmission of
+XUV pulse only through neutral sample (denomina-
+tor of Eq. (1)), we also considered several absorption
+lines of the neutral system. Specifically, we included
+3s3p64p(1P ), 3s3p65s(1S) and 3s3p63d(1D) autoionizing
+electronic states of the neutral atom to our model. While
+these states have no impact on the electron dynamics in
+the ionic system, the neutral transitions can affect the
+absorption spectrum and get mixed in with the ionic ab-
+sorption signals, especially in the MIR control regime as
+we discuss in the Sec. IV B.
+4
+B. Attosecond transient absorption spectroscopy
+Application of an external electric field to a quantum
+system can cause population transfer between energy lev-
+els of that system. The probability of this process is
+maximized when the applied photon energy is resonant
+with the energy gap between the involved states. By
+measuring the transmission of the light pulses through
+a sample, one can observe a depletion in the field inten-
+sity at frequencies corresponding to specific resonances.
+The intensities of the observed absorption lines are pro-
+portional to the square of the electric dipole moments
+connecting the initial and final states.
+If the system is in a quantum superposition when inter-
+acting with a short laser pulse, due to the interferences
+between population transfer pathways, intensity of the
+absorption lines oscillates as a function of the pulse ar-
+rival time. A necessary condition for oscillations to exist,
+beyond the presence of the corresponding electronic co-
+herences, is the coupling between the states that form
+the initial wave packet and the final states. The fre-
+quency of these oscillations is determined by the energy
+difference between the states of the initial wave packet.
+Thus, if one observes an absorption line oscillating in
+time, the frequency spectrum provides important infor-
+mation about the pairs of states that couple to the probed
+final state. The derivations and the detailed analysis of
+this time-dependent version of absorption spectroscopy,
+also known as ATAS in the literature [3, 26], have at-
+tracted considerable interest in recent years.
+For a weak enough probe pulse, the ATAS cross-section
+can be obtained analytically employing first-order per-
+turbation theory directly to the time-dependent initial
+state of the system (see, e.g., Refs. [3, 26]). Assuming
+the probe field has a Gaussian shape and neglecting cer-
+tain terms (see Appendix B for the detailed derivation),
+the absorption cross-section can be expressed as
+σ(ω, τ) = 4πω
+c Im
+X
+k,j
+c∗
+kcjeiτ (ϵj −ϵk)e− γ2
+4 (ϵk−ϵj )2
+e− γ2
+2 (ω−ω0)(ϵj −ϵk) X
+f
+µkf µf j
+"
+1
+˜ϵf − ϵk − ω + 1
+˜ϵ∗
+f − ϵj + ω
+#
+, (2)
+where ω and τ denote the spectral frequency and time
+delay, respectively, at which the absorption is evaluated,
+c is the speed of light in vacuum, ω0 is the photon energy
+of the applied field andγ =
+√
+2 ln 2/FWHM is the param-
+eter related to the full width at half maximum (FWHM)
+of the Gaussian pulse. Sub-indices k and j run over the
+states forming the initial wave packet with, in general
+complex, coefficients ck and cj and energies ϵk and ϵj,
+respectively. Index f iterates over final states with com-
+plex energies ˜ϵf = ϵf −i(Γf /2), where Γf is the parameter
+responsible for the finite lifetime of the state, which are
+coupled to the initial ones via dipole matrix elements µkf
+and µf j.
+According to the Eq. (2), the absorption lines will show
+up at the vicinities of photon energies matching the en-
+ergy difference between the initial and final states (terms
+in square brackets). The energy profiles of these lines are
+determined by the product of a Lorentzian, due to the
+finite life time of the state, with a Gaussian, due to the fi-
+nite duration of the applied field. Observing a line in the
+ATAS spectrum depends on multiple factors. Namely,
+on the populations of the initial states entering Eq. (2)
+via ck and cj, on the corresponding dipole moments µkf
+and µf jconnecting the initial and final states with each
+other, and also on the photon energy ω0 and width γ
+of the applied electric field. The oscillating behavior of
+the lines is produced by the eiτ (ϵj −ϵk) terms which are
+responsible for the electronic coherences created in the
+system. The phases of these oscillations depend on how
+the initial wave packet is created. Note, however, that
+these phases are “global” which means that they will be
+identical across all the lines in the spectra connecting to
+the same initial states.
+While the above description of the time-dependent
+transient absorption spectroscopy is straightforward, the
+ATAS spectra measured in a realistic system could be
+quite complex due to the interplay of multiple effects
+contributing to Eq. (2). In Sec. IV A, we present various
+limiting cases arising from Eq. (2) and use them to inter-
+pret the results of our experiments by disentangling var-
+ious effects in the absorption spectra of the argon cation.
+To simplify the discussion even further, we assume that
+the probe field has a uniform energy profile thus setting
+γ = 0. Furthermore, we introduce a global phase φ, aris-
+ing as a result of the SFI, such that c∗
+kcj = |ck||cj|eiφ,
+which we will adjust to shift the overall signal to better
+match the experimentally measured spectra.
+C. Numerical simulations
+While the analytic formula for the absorption cross-
+section in Eq. (2) gives access to a simple and intuitive
+interpretation of the physics underlying the ATAS mea-
+surements, it is limited to analyzing transitions in the
+“field-free” regime only, when the system does not experi-
+ence action of other electric fields except the probe. Fur-
+thermore, the linear-response perturbation theory used
+in the derivation of Eq. (2) cannot account for interfer-
+ences of various pathways potentially involved in the pop-
+ulation transfer in systems with rather dense electronic
+structure such as Ar +.
+5
+Table II. Parameters of MIR control and XUV probe fields
+used in our numerical simulations
+Field I (TW/cm2) FWHM (fs) ω (eV)
+MIR 20 18 1.2526
+XUV, 17th 5×10−4 3 21.2947
+XUV, 19th 5×10−4 3 23.8
+XUV, 21st 5×10−4 3 26.3052
+To circumvent the aforementioned issues and go be-
+yond the limitations imposed by the perturbative treat-
+ment, we simulate the electron dynamics and the action
+of the control and the probe fields on the system by
+numerically solving the TDSE using the split operator
+method [29, 30]. The Hilbert space in which the TDSE is
+propagated is composed from all the spin-orbit coupled
+states of Ar + present in the NIST database [28] (3238
+states in total). Assuming the validity of the dipole ap-
+proximation, we constructed the total Hamiltonian of the
+system as
+ˆH(t, τ) = ˆH0 −
+h
+⃗VMIR(t − tMIR) + ⃗VXUV(t − τ )
+i
+· ˆ⃗D, (3)
+where the field-free Hamiltonian ˆH0 is diagonal in this
+representation and is directly composed from the ener-
+gies taken from the NIST, while the non-diagonal dipole
+operator ˆ⃗D is computed based on the electronic configu-
+rations of the corresponding states imported from NIST
+using the prescription detailed in the Appendix A. The
+control ⃗VMIR(t) and probe ⃗VXUV(t) fields are assumed to
+have Gaussian envelopes
+⃗V (t) = ⃗ ϵ
+√
+Ie −(
+√
+2 ln 2t/FWMH)2
+cos(ωt), (4)
+where the unit vector ˆϵ denotes the polarization vector
+of the field, I is the field intensity, FWHM parameter
+controls the duration of the field, and ω is the photon
+energy. The corresponding parameters of MIR and XUV
+fields used in our simulations are given in Tab. II. Note
+that the XUV field is, in principle, composed from the
+three harmonics, each of which is described by a separate
+Gaussian centered at τ time delay. The arrival time tMIR
+of the control field is kept fixed at 750 fs, as specified by
+the design of the experimental setup. We assumed all
+the fields are linearly polarized in the z-direction, being
+aligned with the ionizing pulse, and that they have zero
+carrier-envelope phase (CEP).
+We calculate the change in the optical density following
+the procedure described in Ref. [31]. Accordingly, we use
+the following expression for the absorption cross-section
+σ(ω, τ) = 4πω
+c Im
+ ˜d(ω, τ)
+˜VMIR(ω) + ˜VXUV(ω)
+!
+, (5)
+where c is the speed of light in vacuum, ˜VMIR(ω) and
+˜VXUV(ω) denote the Fourier transforms of MIR and XUV
+fields, respectively, and ˜d(ω, τ) is the Fourier transform
+of the time-dependent dipole moment of the system:
+d(t, τ) = ⟨ψ(t, τ)| ˆDz |ψ(t, τ)⟩ . (6)
+The evolution of the electronic wavefunction |ψ(t, τ)⟩ in
+time is computed under the action of the Hamiltonian in
+Eq. (3). Depending on the arrival time τ of the probe
+field, the evolution of the system will, in general, change,
+causing a modification in the corresponding dipole mo-
+ment. We, therefore, perform a scan of the dynamics in
+the system by varying the pump-probe delay τ to mimic
+the conditions of the experiment. The time grid used to
+propagate the wave function spans from 0 to 1000 fs us-
+ing a time step dependent on the XUV frequency close to
+0.01 fs. To numerically converge the Fourier transform
+of the computed dipole moment d(t, τ), we apply the ex-
+ponential decay filter with a characteristic time scale of
+40 fs, thus mimicking the finite lifetime of the electronic
+states reached by the probe pulse.
+To ensure the validity of our calculations and to speed
+up the corresponding data analysis, we conducted a se-
+ries of simulations varying the number of electronic states
+present in our Hamiltonian as well as the composition of
+the probe field. We used the complete system with all the
+electronic states and all the three XUV harmonics as a
+reference and compared it with the results obtained using
+reduced system where the Hilbert space was limited to
+the ionic ground states, the states approximately in reso-
+nance with the harmonics, and those within bandwidth of
+the MIR, switching on and off the presence of the corre-
+sponding harmonics. We, therefore, explored the impor-
+tance of high-lying and neighboring electronic states in
+the system, as well as possible interference between var-
+ious pathways initiated by the control and probe fields.
+Since our reduced model produced the absorption cross-
+section visually indistinguishable from the one obtained
+with the full system while demonstrating considerable
+computational advantages, all the results shown later in
+this work come from that reduced effective model.
+IV. RESUL TS AND DISCUSSION
+Below we present the measured ATAS signals and dis-
+cuss various aspects of the recorded spectra. To better
+analyze and understand the physics that leads to each
+one of these observed features we will split the data in
+two sets. First, in Sec. IV A we will discuss the data
+obtained using the ionizing and the probe pulses only,
+thus studying the electronic coherences and the connec-
+tions between the initial and final states in the system.
+Second, in Sec. IV B we explore the effects of a third
+strong MIR control pulse on the system and investigate
+the changes in the measured spectra during and after the
+action of the applied field.
+6
+26.7
+26.8
+26.9
+0   15   30   45   60   75
+ΔmOD
+23.7
+23.8
+23.9
+Photon Energy (eV)
+380 400 420 440 460 480
+Time Delay (fs)
+21.4
+21.5
+21.6
+21.7
+380 400 420 440 460 480
+Time Delay (fs)
+0  0.2  0.4  0.6  0.8   1
+Norm. abs
+0.5 1
+3p44d
+3/2
+3p5
+3/2
+3p44d
+3/2
+3p5
+1/2
+3p43d
+1/2
+3p5
+3/2
+3p43d
+3/2
+3p5
+3/2
+3p43d
+1/2
+3p5
+1/2
+3p43d
+3/2
+3p5
+1/2
+3p45d
+1/2
+3p5
+3/2
+3p45d
+1/2
+3p5
+1/2
+ν1
+ν2
+ν7
+ν8
+ν6
+ν4
+ν3
+3p44d
+5/2
+3p5
+3/2
+ν5
+Norm. abs
+Region R1Region R2Region R3
+(a) (b)
+(d)(c)
+(f)(e)
+ν9
+Theory
+Experiment
+Figure 3. Experimentally measured (left column) and theoretically simulated (right column) time-resolved transient absorption
+spectrograms of argon cation created via strong field ionization process. Horizontal axes represent the time delay between the
+MIR pump and XUV probe pulses. Vertical axes correspond to the measured photon energy of the XUV laser. The color
+contours depict the observed optical density which varies as a function of the time delay and the photon energy. Panels (a) and
+(b) depict the energy region R1 (see Fig. 2), which contains the transitions from the spin-orbit split 3 s23p5
+J=3/2 and 3s23p5
+J=1/2
+initial states to the final 3 s23p45dJ=1/2 electronically excited state of the cation. Similarly, panels (c) and (d) correspond to
+the region R2, showcasing transitions to final 3 s23p44dJ=3/2 and 3 s23p44dJ=5/2 states. Finally, panels (e) and (f) illustrate
+region R3, capturing the dynamics associated with transitions to 3 s23p43dJ=1/2 and 3s23p43dJ=3/2 final states.
+A. Two pulse experiment
+Our experimental ATAS signal is shown in the left col-
+umn of Fig. 3. To facilitate the analysis, we have split
+the spectrogram in three regions (see Fig. 2) and used the
+symbols from Tab. I to refer to each one of the absorp-
+tion lines. Region R1, accessed by the 21st harmonic of
+our XUV pulse, covers energy range between 26.50 and
+26.98 eV where two lines corresponding to transitions ν1
+and ν2 are present. Similarly, region R2, between 23.504
+and 23 .98 eV covered by the 19th harmonic, includes
+transitions ν3, ν4 and ν5; and region R3, between 21 .28
+to 21.76 eV covered by the 17th harmonic, contains the
+remaining ν6, ν7, ν8 and ν9 lines. We clearly observe all
+nine transitions listed in Tab. I. The assignments of the
+absorption lines along with the results of our theoretical
+simulations are shown in the right column of Fig. 3.
+The first thing to notice in the spectra depicted in
+Fig. 3 is that all the observed absorption lines oscillate
+with a period of 23 fs which corresponds to the 0.177 eV
+spin-orbit energy splitting of the ionic ground state of
+argon, which is expected based on the results of a similar
+experiment [23] performed in krypton ions. Nonetheless,
+time and energy resolution in our measurements permits
+the analysis of phases of the observed oscillations.
+Let us start by considering the region R1 in the spec-
+tra where only a single final state is present in the system
+(see Fig. 2). Accordingly, two initial states coupled to a
+single final state show up in the spectrogram in the form
+of two oscillating lines ν1 and ν2. Indeed, the measured
+absorption signal, shown in panel (a) of Fig. 3, demon-
+strates this expected behavior. Interestingly, while both
+absorption lines are observed to be oscillating in phase,
+the changes of their individual phases as functions of pho-
+ton energy are found to behave in the opposite way with
+respect to each other. As one can see, the slope of os-
+cillatory features in the spectrogram is positive for the
+upper line and negative for the lower line.
+To explain this feature of the time-dependent absorp-
+tion spectra, we utilize a general perturbative formalism
+presented in Sec. III B. Assuming that the system is com-
+posed of two initial and one final state, rearranging terms
+in Eq. (2), and using the notation ϵ12 = ϵ1 − ϵ2, the os-
+cillatory part of the cross-section can be written as
+7
+σosc(ω, τ) = 4πω
+c |c1||c2|µ1f µf 2 {Lf 1(ω) sin [ϵ12τ + ϕf 1(ω)] − Lf 2(ω) sin [ϵ12τ − ϕf 2(ω)]} , (7)
+where we introduced the frequency dependent amplitude
+Lf k(ω) =
+s
+1
+(εf − ϵk − ω)2 + Γ2
+f /4 , (8)
+and phase
+ϕf k(ω) = arctan Γf /2
+εf − ϵk − ω , (9)
+which determine the energy profiles and oscillatory be-
+havior, respectively, of the absorption lines. Note that
+the prefactor in front of the curly brackets “ {...}” in
+Eq. (7) is common for both transitions and do not con-
+tribute to potential phase offset between the lines. The
+expression inside the curly brackets shows that if the
+initial states have a larger splitting ϵ12, and hence a
+larger energy separation of two lines in the spectra, than
+the width Γ f of Lf j profiles, then the two oscillating
+lines are well separated and their phases do not inter-
+fere with each other. Measuring the spectra at the peaks
+of Lf 1 and Lf 2, where the corresponding phase factors
+ϕf 1 and ϕf 2 are both π/2, transforms both sine terms
+to identical cosines: sin( ϵ12τ + π/2) = cos( ϵ12τ ) and
+− sin(ϵ12τ − π/2) = cos( ϵ12τ ), oscillating with the same
+frequency ϵ12 and having identical phases. At the same
+time, the behavior of the absorption lines away from the
+resonances, while still oscillating with identical frequency,
+differ from each other due to the opposite signs in front of
+the corresponding sine terms. Accordingly, the opposite
+variations of the phases of these two lines along their en-
+ergy profiles explain the different slope of the correspond-
+ing oscillatory features. The calculated absorption cross
+section, depicted in panel (b) of Fig. 3, demonstrates
+an excellent agreement with the measured spectrograms
+highlighting the validity of our interpretations.
+We note the possibility for the existence of a more com-
+plicated scenario when the two absorption lines have con-
+siderable overlap between each other due to a small sep-
+aration between the initial states. In this case, although
+still having the same frequency, the phases at either of
+the absorption peaks will interfere being affected by the
+tails of the neighboring absorption lines. While this exact
+mechanism has not been observed in our study, a similar
+effect of overlapping absorption lines, which arise due to
+the close proximity of final states, plays an essential role
+in the absorption spectra as we explain next.
+One can expect that the region R2, shown in panels
+(c) and (d) of Fig. 3, should, in principle, contain more
+sophisticated features than region R1. This is due to the
+presence of an additional absorption line ν5 which is cou-
+pled to one of the initial states of the system (see Fig. 2).
+At the first glance, however, this line should not con-
+tribute much to the absorption spectra. Indeed, in the
+case when only one of the initial states is coupled to a
+final state, so that the other transition dipole moment is
+zero, the oscillating part of the absorption cross-section,
+Eq. (7), should vanish completely. Yet, due to the over-
+lap of ν3 and ν5 transitions, the actual energy profile and
+the phase behavior of the upper absorption line in the
+region R2 is more intricate than the one observed in the
+region R1. However, this effect is minor and can barely
+be observed in the experimental data. Accordingly, the
+overall structure of the R2 region is nearly indistinguish-
+able from that of R1.
+Nonetheless, a major distinction between the absorp-
+tion lines present in the regions R1 and R2 is a noticeable
+difference in the phases of the oscillations in two regions.
+Panels (a) and (b) of Fig. 4 depict the normalized line-
+outs of one absorption line from each region, i.e. ν1 and
+ν3 from R1 and R2 respectively, extracted at the corre-
+sponding resonance frequencies. As one can see, these
+two absorption lines oscillate π radians out of phase with
+respect to each other. To understand the nature of this
+effect, let us consider the absorption cross-section for the
+case where the two initial states are coupled to two dif-
+ferent final states:
+σosc(ω, τ) = 4πω
+c |c1||c2|
+
+µ1f1 µf12 {Lf11(ω) sin[ϵ12τ + ϕf11(ω)] − Lf12(ω) sin[ϵ12τ − ϕf12(ω)]}
++µ1f2 µf22 {Lf21(ω) sin[ϵ12τ + ϕf21(ω)] − Lf22(ω) sin[ϵ12τ − ϕf22(ω)]}
+
+.
+(10)
+The amplitudes of the peaks Lf11/Lf12, and Lf21/Lf22
+are controlled by the products of the dipole matrix el-
+ements µ1f1 µf12 and µ1f2 µf22, respectively, connecting
+the initial and final states with each other. If these two
+products have opposite signs, the oscillations of two pairs
+of absorption lines will be completely out of phase with
+respect to each other. Indeed, according to our estima-
+tions of the relevant dipoles (see Appendix A), the rela-
+8
+-1
+0
+1
+-1
+0
+1
+Time Delay (fs)
+-1
+0
+1
+420 440 460 480 500
+Normalized absorption
+experiment theory
+3p45d1/23p5
+3/2
+φ = 0
+φ = π
+(a)
+(c)
+(b)
+φ = 3π
+4
+3p44d3/2
+3p5
+3/2
+3p43d3/23p5
+3/2
+ν1
+ν3
+ν8
+Figure 4. Lineouts from Fig. 3 at energies corresponding to
+the transitions from 3 s23p5
+J=3/2 state to 3 s23p4 nd manifold,
+showing experimental data (dots) and theoretical simulations
+(solid lines). Phase flip between the ν1 and ν3 lines is at-
+tributed to difference in the sign of the transition dipole mo-
+ments. The 3 π/4 phase offset of the ν8 line stems from the
+overlap of absorption lines in the vicinity of ν8 transition. To
+make the phase extraction clearer, the DC component was
+removed from each of the lineouts and then normalized to a
+unit amplitude range.
+tive sign between the dipoles in the region R1 is flipped
+compared to the R2 lines. For transition ν1 and ν2, for
+m = 1 /2, the dipoles have “ −” and “+” signs, respec-
+tively, while the dipoles for both transitions ν3 and ν4
+have “+” signs. Accordingly, the oscillations in the re-
+gion R1 are out of phase compared to those in region
+R2. This demonstrates that the time-dependent tran-
+sient absorption spectroscopy is capable of probing not
+only the electronic coherences created in the system but
+also signs of the dipole moments connecting the initial
+and final states with each other.
+The lineout of ν8 transition, shown in panel (c) of
+Fig. 4, does not follow the simple logic outlined in the
+previous paragraph. The phase offset of ν8 with respect
+to ν1 line is found to be about 3 π/4 radians. However,
+this behavior can also be explained by a deeper analysis
+of Eq. (10). When we applied this expression to analyze
+the spectral lines in the regions R1 and R2, the energy
+separation between the lines and the resolution of our ex-
+perimental setup were sufficient to treat the energy pro-
+files of the measured transitions as distinct. Thus, only
+two possibilities for the phase relations between the lines
+existed in this case, namely either being fully in phase or
+completely out of phase with respect to each other de-
+pending on the signs of corresponding transition dipole
+moments. In contrast, the small energy separation be-
+tween the pairs of final states contributing to the region
+R3 leads to overlapping absorption lines. In this case,
+the gap between the two final states emerges as an addi-
+tional energy scale which has an impact on the phase of
+the oscillations. It is seen from Eq. (10) that if the spac-
+ing between the energy levels f1 and f2 is smaller than
+the widths of the corresponding spectral lines, then the
+lines will overlap and their oscillation phases can differ
+even if they share the same final state.
+The relationship between the phases of the absorption
+lines in the region R3 forms the next topic of our inves-
+tigation. Figure 5 depicts the lineouts of the four ab-
+sorption lines ν6, ν7, ν8 and ν9 present in that region.
+Experimental data indicated by points in Fig. 5 shows
+that all four lines have clear phase offsets with respect to
+each other. The results of our simulations, depicted by
+dashed lines in Fig. 5, indicate that although the phases
+indeed vary between the absorption lines, their agree-
+ment with the experimental data for lines ν8 and ν9 is
+poor. Interestingly, the deviations in phases between the
+experimental and theoretical results for these lines are
+close to π radians. Previously, we attributed the com-
+plete phase flip between the oscillations in regions R1
+and R2 to the difference in the signs of the correspond-
+ing dipole moments. This observation prompted us to
+check the validity of our simple model for computing the
+transition dipole moments, detailed in Appendix A, be-
+tween the electronic states.
+To correct a potential inaccuracy of our approach in
+obtaining the phases in region R3, we made an ad hoc
+change to the sign of the dipole moment for transition
+ν8 in Tab. I. The lineouts of the absorption lines com-
+puted with this “improved” version of our computational
+scheme are depicted by solid lines in Fig. 5. We note
+that the full spectrogram shown in panel (f) of Fig. 3 is
+also plotted using the improved theoretical model. The
+agreement between the “improved” model and the ex-
+perimental data is remarkable. In particular the −π/4
+radian phase difference between ν6 and ν8, as shown in
+panels (a) and (b) of Fig. 5, is captured accurately. We
+attribute this phase difference to the fact that the split-
+ting between states 3 p43dJ=1/2 and 3p43dJ=3/2 is small
+enough for the oscillations in two absorption lines to over-
+lap. The energy dependent phase of each oscillation, im-
+pacts the other, leading to a relative shift between the
+two. Similarly, the ν7 oscillation phase is impacted by
+the nearby presence of ν9. This explains the observed
+phase difference between the ν6 and ν7 oscillations in
+panels (a) and (c) of Fig. 5, which in principle should
+9
+-1
+0
+1
+-1
+0
+1
+-1
+0
+1
+-1
+0
+1
+Normalized absorption
+experimental data theory improved theory
+3p43d1/23p5
+3/2
+3p43d3/23p5
+3/2
+3p43d1/23p5
+1/2
+3p43d3/23p5
+1/2
+ν6:
+ν8:
+ν9:
+ν7:
+Transitions
+410 420 430 440 450 460 470 480 490 500
+Time Delay (fs)
+φ = -π/4
+φ = π/4
+φ = π/4
+φ = 0
+experimental fit
+(a)
+(c)
+(d)
+(b)
+Figure 5. Experimentally measured (dots) and theoretically simulated (lines) absorption lineouts for the transitions connecting
+the spin-orbit split initial 3 s23p5
+J=1/2 and 3 s23p5
+J=3/2 states to the final 3 s23p43dJ=1/2 and 3 s23p43dJ=3/2 states. The close
+proximity of the absorption lines to each other causes phase offsets in the corresponding oscillations. Theoretical simulation
+results in dashed lines are improved significantly by implementing a change in the sign of the dipole moment associated with
+the ν8 transition, capturing the measured oscillation phase offsets, as shown by the solid lines.
+have the same phase given that they share a common fi-
+nal state. Furthermore, the same effect explains why ν8
+oscillation is shifted by a fraction of π radians relative to
+ν1 in Fig. 4.
+Summarizing our observations in this section, we ob-
+tained good agreement between the results of our mea-
+surements and the simulations. The experimental data
+guided our theoretical investigations by indicating clearly
+that for a full correspondence between the experiment
+and theory some of the dipole moments utilized in the
+simulations must have an opposite sign. We attribute the
+discrepancy in our theory to a minimalistic hydrogen-like
+model used for computing the transition dipole moments.
+It has been widely regarded that electron correlation ef-
+fects, which are ignored in the computational approach,
+can play a substantial role in the properties of many-
+electron systems. While numerous high-level approaches
+capable of accessing the excited electronic states of atoms
+have been invented in the past (see, e.g., Ref. [32]), they
+are still very limited in their abilities to reach high-lying
+electronic states such as those measured in our exper-
+iment. Thus, our experimental measurements demon-
+strate the power of the time-dependent transient absorp-
+tion spectroscopy to highlight the nuanced features of the
+system under study, beyond straightforward observations
+of electronic coherences reported before.
+B. Control pulse
+Next we consider the effect of a third MIR control pulse
+on the system and discuss the changes in the absorption
+spectra in the region R1, accessed by the 21st harmonic
+of our XUV pulse. The experimentally measured ATAS
+spectrum recorded before, during, and after the interac-
+tion of the system with the MIR control pulse is shown
+in panels (a ′), (a), and (a ′′), respectively, of Fig. 6. For
+comparison, we also show in panel (b) of Fig. 6 the spec-
+trum obtained in absence of the control field. Results of
+our simulations, performed using the formalism discussed
+in Sec. III, for the system with and without control field
+are depicted in panels (c) and (d), respectively, of Fig. 6.
+10
+600 650 700 750 800 850
+26.5
+26.7
+26.9
+27.1
+Photon Energy (eV)
+ΔOD
+700 750 800
+Time Delay (fs)
+900
+700 750 800
+Time Delay (fs)
+600 650 700 750 800 850
+26.5
+26.7
+26.9
+27.1
+900
+-0.02
+0
+0.02
+0.04
+0.06
+0.08
+-0.20
+0
+0.25
+0.50
+0.75
+1
+Norm. abs.
+(a’) (b)
+(c) (d)
+With control pulse Without control pulse
+ExperimentTheory
+Photon Energy (eV)
+500 1000
+Before After
+(a’’)
+ν1
+ν2
+ν1
+ν2
+(a)
+Figure 6. Experimentally measured (top panels) and theoretically simulated (bottom panels) absorption spectra of argon ions
+with (left column) and without (right column) the action of a strong MIR control pulse. The control MIR field leads to the
+enhancement of neutral absorption and AC Stark shifting of the cationic absorption lines. The electronic coherences created
+between the spin-orbit split ground states of the cation are transiently impacted by the control pulse leading to the temporal
+suppression of coherent oscillations over several cycles of the MIR field. After the control pulse, the absorption line oscillations
+are identical to those measured before the MIR pulse arrival.
+When the system is exposed to the strong MIR con-
+trol field we observe a large change in the intensity of one
+of the absorption lines for the XUV delays between 650
+and 850 fs. This effect arises due to the existence of the
+3s3p64p autoionizing electronic state around 26 .6 eV. In
+our three-pulse experimental setup, the intensity of the
+ionizing MIR is slightly lower, and this leads to a smaller
+ionization fraction in the focal volume. As a result, the
+XUV pulse interacts with some neutrals and populates
+this autoionizing state. We observed that both the po-
+sition and the Fano line-shape of the autoionizing line is
+affected by the control field, which is reminiscent of the
+strong-field transient absorption. The quantum dynam-
+ics of this specific autoionizing state have been explored
+theoretically and experimentally in Refs. [33–35].
+The control pulse also produces significant changes in
+the positions of the ionic absorption lines compared to
+the unperturbed case. During the control pulse, the lines
+ν1 and ν2, at 26.7 eV and 26.9 eV, respectively, are tran-
+siently shifted upwards, as seen in panel (a). Panel (c) of
+Fig. 6 shows the theoretical calculation of the response of
+ionic transitions to the control pulse. The upward shift
+in the energies of the absorption lines is clear, and the
+physical mechanism behind this lies in the well-known
+AC Stark effect [3, 31, 36].
+After the control pulse, the Stark shifts subside and
+the coherent oscillation reappears with its relative phase
+and periodicity unchanged. Importantly, we would like to
+point out that the oscillations of the ionic absorption lines
+due to the coherent electronic wave packet created by
+the SFI process remains nearly unaffected by the action
+of the control MIR pulse. As one can see from panels
+(a′) and (a ′′) of Fig. 6, the oscillations of ν1 and ν2 lines
+are symmetric around the control pulse, suggesting that
+the effects of the control laser are only transient and do
+not affect the initial coherent superposition of the ionic
+ground states. This demonstrates a surprising robustness
+of quantum electronic coherences to the action of intense
+external perturbations.
+V. CONCLUSION
+In conclusion, our study showcases the experimental
+capability to generate and measure the ultrafast dynam-
+ics in a coherent superposition of the spin-orbit split
+3s23p5
+J=1/2 and 3s23p5
+J=3/2 ground electronic state of the
+argon ion. We observed clear signatures of the created
+electronic coherences by measuring the time-resolved ab-
+sorption spectra over a wide range of energies covered by
+11
+multiple XUV harmonics. The time scale of the measured
+oscillations has been attributed to the energy separation
+between the initially populated states. We characterized
+these oscillations in nine different transitions between the
+initial and electronically excited final states of the cation.
+We analyzed the phase shifts between the oscillations of
+the lines in three regions, which gave us access to de-
+tailed information about the dynamics and properties of
+the system.
+The first region involving the transitions to the
+3s23p45dJ=1/2 state, shows two absorption lines oscillat-
+ing in phase. This scenario, involving two initial and
+one final state, represents a minimal model where the
+absorption spectra can show the fingerprints of quan-
+tum coherences created between the initial states. The
+second region contains transitions to two spin-orbit split
+3s23p44dJ=3/2 and 3 s23p44dJ=5/2 states. According to
+the dipole selection rules both initial states can be cou-
+pled to a final state with J = 3/2, only one of the initial
+states is coupled to a final state with J = 5 /2. Thus,
+three absorption lines were observed in the second re-
+gion. While J = 3 /2 to J = 5 /2 line was expected to
+be stationary due to the absence of the second interfer-
+ing path, nevertheless a close overlap with a neighboring
+J = 3/2 to J = 3/2 transition leads to oscillatory behav-
+ior. A more striking observation was that the absorp-
+tion lines in the second region oscillate completely out of
+phase with respect to the lines in the first region. This
+previously unobserved behavior is explained by the flip
+in the signs of one of the dipole moments connecting the
+initial and final states.
+In the third region, we observed even more compli-
+cated relations between the phases of four absorption
+lines connecting the initial states to 3 s23p43dJ=1/2 and
+3s23p43dJ=3/2 final states. The oscillating absorption
+lines in this region have considerable overlaps with each
+other. The observed phase offsets are attributed to the
+intermingling of neighboring oscillations due to the long
+tails of Lorentzian-shape absorption profile of each line.
+We also studied the response of the system to a strong
+MIR pulse. We found that part of the experimental ab-
+sorption includes features coming from the autoionizing
+3s3p64p(1P ) state of neutral argon atom. Nevertheless,
+we were able to disentangle contributions coming from
+the ionic system. We observed the shifting of the ab-
+sorption lines due to the AC Stark effect. Importantly,
+this strong-field control did not influence the coherent
+superposition of the ionic states.
+All these conclusions were supported by a detailed the-
+oretical analysis using analytic expressions derived within
+the perturbation theory framework. Furthermore, we re-
+produced all the experimentally measured features in the
+spectra by performing numerical solutions of the TDSE.
+Our analysis of the the spectra measured in the third
+region, demonstrated the intertwining of several effects
+arising from the dipole matrix couplings, populations of
+the initial states, and excited state lifetimes. This yields
+oscillations whose phases vary in a wide range of val-
+ues depending on the input conditions. Furthermore,
+these phases can change dynamically with the photon
+frequency and can superimpose on different lines. We
+were able to find system parameters that reproduce the
+experimentally measured oscillations in the spectra, how-
+ever, theoretical assignment of a physical meaning to the
+phases of oscillations would also require a more compre-
+hensive treatment of the atom encompassing the ioniza-
+tion step, as well as the complexity of the interaction
+between the electron-double ionized ion and the complex
+electronic configurations of the ionic bound states. We
+leave this for a future study.
+Our experimental methods and the supporting theoret-
+ical model serve as a step towards for the study of coher-
+ent charge migration and electronic wave packet motion
+control in more complex systems such as molecules. In
+a paper [37] published in parallel with this experimen-
+tal work, we propose an approach to control the coher-
+ent superposition of ionic states via stimulated Raman
+adiabatic passage (STIRAP) technique. Notably, the ex-
+perimental set up required to perform the proposed mea-
+surements is similar to the one used in this study. Our
+experimental and theoretical work highlights power of the
+attosecond transient absorption spectroscopy for investi-
+gating ultrafast quantum dynamics in matter.
+VI. ACKNOWLEDGMENTS
+NC, MM, and AS acknowledge support of the U.S.
+Department of Energy, Office of Science, Office of Ba-
+sic Energy Sciences, Award No. DE-SC0018251. IS, JW,
+and DB received support from NSF PHY award 2207641.
+M.A. and N.V.G. acknowledge support from the U.S. De-
+partment of Energy, Office of Science, Office of Basic En-
+ergy Sciences, Award No. DE-SC0024182.
+Appendix A: Evaluation of dipole matrix elements between spin-orbit coupled electronic states of argon
+cation
+To access the excited electronic states of singly ionized argon, we employed a semi-empirical methodology relying
+on data from the NIST Atomic Spectra Database [28]. While it is, in principle, possible to compute bound electronic
+states of atomic systems using high-level ab initio methods, the accuracy of these simulations for highly-excited
+electronic states is questionable and thus the usage of first-principle techniques does not provide clear advantages over
+a simple semi-empirical approach we describe below.
+12
+We import from NIST the energies and the configurations of electronic states. In singly ionized argon, states are
+classified using both LS and J Kangular momentum coupling schemes. A typical electronic configuration of an
+LS-coupled state is specified as
+3s23p4(2Sp+1Lp)nl 2S+1LJ , (A1)
+where 3s23p4 indicates the electronic configuration of the parent doubly charged ion forming a term with Lp and Sp
+orbital and spin quantum numbers, respectively. The active outer electron is characterized by the principal quantum
+number n and an orbital angular momentum l. The total electronic term is defined by quantum numbers L and S. L
+is formed by coupling Lp with l. S if formed by coupling Sp with 1/2 spin of the outer electron. Finally, L and S are
+coupled to form a total angular momentum J. The projections of J on the z axis are denoted by M in the follow-up
+derivations.
+Similarly, a typical J K-coupled state is specified as
+3s23p4(2Sp+1LpJp )nl 2[K]J , (A2)
+where, in addition to the Lp and Sp quantum numbers discussed before, the parent ion is characterized by a total
+angular momentum Jp. The quantum number K is formed by coupling Jp and the orbital angular momentum l of the
+outer electron. The multiplicity of J Kterms for argon cation is always 2 indicating that only a single outer electron
+is considered. Finally, this 1 /2 spin quantum number of the outer electron is coupled to K forming the total angular
+momentum J.
+In order to compute the transition dipole moments between the electronic states, we first introduce the notation
+|γJ M⟩, where γ denote a set of quantum numbers specific for the coupling scheme under consideration. Expressing
+the dipole operator along z coordinate using spherical harmonics, such that ˆ z = rY 0
+1 , we compute the transition
+between the initial |γJ M⟩ and final |γ′J ′M ′⟩ states using the Wigner–Eckart theorem:
+⟨γ′J ′M ′| rY 0
+1 |γJ M⟩ = (−1)J ′−M ′
+
+J ′ 1 J
+−M ′ 0 M
+ 
+γ′J ′rY 0
+1
+γJ
+
+, (A3)
+with the reduced matrix element
+
+γ′J ′rY 0
+1
+γJ
+
+. This reduced matrix element depends on the type of angular
+momentum coupling utilized for describing the two states of interest. One typically deals with this coupling using
+standard formulas, like Edmond’s 7.1.8 [38], but since in our case different states have different angular momentum
+couplings we simplify the calculations by considering only the hydrogenic term:
+
+γ′J ′rY 0
+1
+γJ
+
+≈ δLpL′p δSpS′p (−1)l′√
+2l + 1
+√
+2l′ + 1
+r
+3
+4π
+
+l′ 1 l
+0 0 0
+ Z ∞
+0
+Rn′l′(r)rRnl(r)r2dr, (A4)
+thus utilizing only those quantum numbers which are common for both electronic states. The required radial wave-
+functions are approximated by hydrogen-like orbitals with appropriate quantum numbers and nuclear charge Z = 2,
+indicating that we are considering a single outer electron interacting with the doubly charged parent ion.
+Appendix B: Time-dependent transient absorption cross-section with a Gaussian pulse
+Following the discussion presented in Ref. [26], here we derive a perturbative expression for the absorption cross-
+section for the case when the probe pulse has a Gaussian profile:
+E(t) = E0e−( t−τ
+γ )
+2
+cos[ω0(t − τ )], (B1)
+where E0 is the magnitude of the field, τ denotes the center of the Gaussian envelope, γ is the parameter controlling
+its width, ω0 is the photon energy, and the CEP of the field is neglected for simplicity. The Fourier transform of
+Eq. (B1) is given by
+˜E(ω) = E0
+γ√
+8 eiωτ
+
+e− γ2
+4 (ω−ω0)2
++ e− γ2
+4 (ω+ω0)2
+
+. (B2)
+To obtain the absorption cross-section, we use a familiar expression
+σ(ω) = 4πω
+c Im
+˜P (ω) ˜E∗(ω)
+| ˜E∗(ω)|2 , (B3)
+13
+where ˜P (ω) is the Fourier transform of the polarization response
+P (t) = ⟨ψ(t)| ˆµ |ψ(t)⟩ , (B4)
+computed with respect to the time-dependent quantum state |ψ(t)⟩. Assuming that the spectrum of the atomic
+Hamiltonian ˆH0 is known, such that ˆH0|ψk⟩ = ϵk|ψk⟩, the time-dependent quantum state in the field-free regime can
+be expanded as
+|ψ(t)⟩ =
+X
+k
+cke−iϵkt|ψk⟩. (B5)
+Employing the first-order time-dependent perturbation theory to approximate the evolution of the system under
+the action of the Hamiltonian ˆH(t) = ˆH0 − ˆ⃗ µ· ⃗E(t), one can express the first order polarization correction as
+P (1)(t) = −i
+X
+k,j,f
+c∗
+kcj ⟨ψk| ˆµ |ψf ⟩ ⟨ψf | ˆµ |ψj⟩
+Z t
+−∞
+ei(ϵk−ϵf )t+i(ϵf −ϵk)t′
+E(t′)dt′ + c.c., (B6)
+where we utilized the resolution of identity P
+f |ψf ⟩ ⟨ψf | ≡1 to simplify the expression and c.c. denotes the complex
+conjugation. Using the Fourier convolution theorem and expanding energies of the final states to a complex domain,
+ϵf → ˜ϵf , one can show that the Fourier transform of the polarization is given by
+˜P (1)(ω) = E0γ√
+8
+X
+k,j,f
+c∗
+kcjeiτ (ϵj −ϵk) ⟨ψk| ˆµ |ψf ⟩ ⟨ψf | ˆµ |ψj⟩
+×
+"
+e− γ2
+4 (ω−ϵk+ϵj −ω0)2
++ e− γ2
+4 (ω−ϵk+ϵj +ω0)2
+˜ϵf − ϵk − ω eiωτ
++ e− γ2
+4 (−ω−ϵj +ϵk−ω0)2
++ e− γ2
+4 (−ω−ϵj +ϵk+ω0)2
+˜ϵ∗
+f − ϵj + ω eiωτ
+#
+.
+(B7)
+Under the assumption that only the terms involving ω − ω0 in the exponent are relevant, the expression for the
+absorption cross-section is given by:
+σ(ω, τ) = 4πω
+c Im
+X
+k,j,f
+c∗
+kcjeiτ (ϵj −ϵk) ⟨ψk| ˆµ |ψf ⟩ ⟨ψf | ˆµ |ψj⟩
+× e− γ2
+4 (ϵk−ϵj )2
+"
+e− γ2
+2 (ω−ω0)(ϵj −ϵk)
+˜ϵf − ϵk − ω + e− γ2
+2 (ω−ω0)(ϵj −ϵk)
+˜ϵ∗
+f − ϵj + ω
+#
+.
+(B8)
+The obtained expression, given by Eq. (2) in the main text, serves as the starting point for deriving various limiting
+cases that we use to explain the features observed in the experimentally measured absorption spectra. To simplify
+the discussion, in the main text we further assumed the uniform energy profile of the probe pulse thus switching from
+the Gaussian to a delta pulse. For completeness, here we present expressions analogous to those derived in Sec. IV A
+but assuming the probe pulse has a Gaussian profile.
+To analyze the dependence of the phase of the absorption signal on the photon energy ω, we express each of the
+absorption lines as
+1
+˜ϵf − ϵk − ω = Lf k(ω)eiϕf k(ω), (B9)
+where the real quantities Lf k(ω) and ϕf k(ω) are given by
+Lf k(ω) =
+s
+1
+(ϵf − ϵk − ω)2 + Γ2
+f /4 and ϕf k(ω) = arctan Γf /2
+ϵf − ϵk − ω , (B10)
+and ϵf and Γf denote the real and imaginary parts of final state energies ˜ϵf = ϵf − iΓf /2. The simplified formula for
+the absorption cross-section can now be written as
+σ(ω, τ) = 4πω
+c Im
+X
+k,j,f
+c∗
+kcjeiτ (ϵj −ϵk) ⟨ψk| ˆµ |ψf ⟩ ⟨ψf | ˆµ |ψj⟩
+×e− γ2
+4 (ϵk−ϵj )2
+e− γ2
+2 (ω−ω0)(ϵj −ϵk)
+
+Lf k(ω)eiϕf k(ω) + Lf j(−ω)eiϕf j(−ω)
+
+.
+(B11)
+14
+Considering the case where there are two initial states, i, j∈ 1, 2, and only one final state f , the oscillating portion
+of the absorption cross-section is given by
+σosc(ω, τ) = 4πω
+c |c1||c2|e− γ2
+4 ϵ2
+12 µf 1µf 2
+n
+e− γ2
+2 (ω−ω0)ϵ12 Lf 1(ω) sin [ϵ12τ − τ12 + ϕf 1(ω)]
+−e+ γ2
+2 (ω−ω0)ϵ12 Lf 2(ω) sin [ϵ12τ − τ12 − ϕf 2(ω)]
+o
+,
+(B12)
+where we denoted c∗
+1c2 = |c1||c2|eiτ12 , ϵ1 − ϵ2 = ϵ12, and ⟨ψk| ˆµ |ψf ⟩ = µkf .
+Including an additional final state, thus considering transitions between the two initial states i, j∈ 1, 2 and two
+final states f1, f2, yields
+σosc(ω, τ) = 4πω
+c |c1||c2|e− γ2
+4 ϵ2
+12
+n
+e− γ2
+2 (ω−ω0)ϵ12 Lf11(ω)µf11µf12 sin [ϵ12τ − τ12 + ϕf11(ω)]
++e− γ2
+2 (ω−ω0)ϵ12 Lf21(ω)µf21µf22 sin [ϵ12τ − τ12 + ϕf21(ω)]
+−e+ γ2
+2 (ω−ω0)ϵ12 Lf12(ω)µf11µf12 sin [ϵ12τ − τ12 − ϕf12(ω)]
+−e+ γ2
+2 (ω−ω0)ϵ12 Lf22(ω)µf21µf22 sin [ϵ12τ − τ12 − ϕf22(ω)]
+o
+.
+(B13)
+[1] F. Krausz and M. Ivanov, Attosecond physics, Reviews
+of Modern Physics 81, 163 (2009).
+[2] H. J. W¨ orner, C. A. Arrell, and N. Banerji, Charge migra-
+tion and charge transfer in molecular systems, Structural
+Dynamics 4, 061508 (2017).
+[3] R. Santra, V. S. Yakovlev, T. Pfeifer, and Z.-H. Loh,
+Theory of attosecond transient absorption spectroscopy
+of strong-field-generated ions, Phys. Rev. A 83, 033405
+(2011).
+[4] A. Wirth, M. T. Hassan, I. Grguraˇ s, J. Gagnon,
+A. Moulet, T. T. Luu, S. Pabst, R. Santra, Z. A.
+Alahmed, A. M. Azzeer, V. S. Yakovlev, V. Pervak,
+F. Krausz, and E. Goulielmakis, Synthesized light tran-
+sients, Science 334, 195 (2011).
+[5] A. McPherson, G. Gibson, H. Jara, U. Johann, T. S. Luk,
+I. A. McIntyre, K. Boyer, and C. K. Rhodes, Studies of
+multiphoton production of vacuum-ultraviolet radiation
+in the rare gases, J. Opt. Soc. Am. B 4, 595 (1987).
+[6] M. Ferray, A. L’Huillier, X. F. Li, L. A. Lompre, G. Main-
+fray, and C. Manus, Multiple-harmonic conversion of
+1064 nm radiation in rare gases, Journal of Physics B:
+Atomic, Molecular and Optical Physics 21, L31 (1988).
+[7] P. B. Corkum, Plasma perspective on strong field multi-
+photon ionization, Phys. Rev. Lett. 71, 1994 (1993).
+[8] F. Calegari, G. Sansone, S. Stagira, C. Vozzi, and
+M. Nisoli, Advances in attosecond science, Journal of
+Physics B: Atomic, Molecular and Optical Physics 49,
+062001 (2016).
+[9] T. Popmintchev, C. Hern´ andez-Garc ´ ıa, F. Dollar, C. A.
+Mancuso, A. Guggenmos, T. Gaumnitz, M.-C. Chen,
+C. Gentry, C. Altucci, T. Pfeifer, M. M. Murnane, and
+H. C. Kapteyn, Attosecond science based on high har-
+monic generation from gases and solids, Nature Commu-
+nications 11, 2180 (2020).
+[10] M. Hentschel, R. Kienberger, C. Spielmann, G. A. Rei-
+der, N. Milosevic, T. Brabec, P. B. Corkum, U. Heinz-
+mann, M. Drescher, and F. Krausz, Attosecond metrol-
+ogy, Nature 414, 509 (2001).
+[11] Y. Mairesse and F. Qu´ er´ e, Frequency-resolved optical
+gating for complete reconstruction of attosecond bursts,
+Physical Review A 71, 011401 (2005).
+[12] J. Itatani, F. Qu´ er´ e, G. L. Yudin, M. Y. Ivanov,
+F. Krausz, and P. B. Corkum, Attosecond streak cam-
+era, Physical Review Letters 88, 173903 (2002).
+[13] P. M. Paul, E. S. Toma, P. Breger, G. Mullot, F. Auge,
+P. Balcou, H. G. Muller, and P. Agostini, Observation of a
+train of attosecond pulses from high harmonic generation,
+Science 292, 1689 (2001).
+[14] Y. Mairesse, A. de Bohan, L. J. Frasinski, H. Merdji,
+L. C. Dinu, P. Monchicourt, P. Breger, M. Kovacev,
+R. Ta ¨ ıeb, B. Carr´ e, H. G. Muller, P. Agostini, and
+P. Sali` eres, Attosecond synchronization of high-harmonic
+soft x-rays, Science 302, 1540 (2003).
+[15] A. Rupenyan, P. M. Kraus, J. Schneider, and H. J.
+W¨ orner, High-harmonic spectroscopy of isoelectronic
+molecules: Wavelength scaling of electronic-structure
+and multielectron effects, Physical Review A 87, 033409
+(2013).
+[16] I. Shalaby, N. Chakraborty, S. Yanez-Pagans, J. Wood,
+D. Biswas, and A. Sandhu, Probing ultrafast excited-
+state dynamics using euv-ir six-wave-mixing emission
+spectroscopy, Optics Express 30, 46520 (2022).
+[17] S. Yanez-Pagans, N. Harkema, A. Sandhu, C. Cariker,
+and L. Argenti, Nonperturbative effects in attosec-
+ond four-wave-mixing spectra, Physical Review A 112,
+013107 (2025).
+[18] H. Timmers, Z. Li, N. Shivaram, R. Santra, O. Vendrell,
+and A. Sandhu, Coherent electron hole dynamics near a
+conical intersection, Physical Review Letters113, 113003
+(2014).
+[19] D. Biswas, J. K. Wood, I. Shalaby, and A. S. Sandhu, Ul-
+trafast dynamics of the rydberg states of co2: Autoioniza-
+tion and dissociation lifetimes, Physical Review A 110,
+043106 (2024).
+[20] M. Lucchini, S. A. Sato, A. Ludwig, J. Herrmann,
+M. Volkov, L. Kasmi, Y. Shinohara, K. Yabana, L. Gall-
+15
+mann, and U. Keller, Attosecond dynamical franz-
+keldysh effect in polycrystalline diamond, Science 353,
+916 (2016).
+[21] K. J. Gannan, L. B. Drescher, R. Quintero-Bermudez,
+N. Rana, C. Huang, K. Schafer, M. B. Gaarde, and
+S. R. Leone, Polarization-resolved core exciton dynamics
+in lif using attosecond transient absorption spectroscopy,
+Physical Review B 111, 134306 (2025).
+[22] B. R. de Roulet, L. Drescher, S. A. Sato, and S. R. Leone,
+Initial electron thermalization in metals measured by at-
+tosecond transient absorption spectroscopy, Physical Re-
+view B 110, 174301 (2024).
+[23] E. Goulielmakis, Z.-H. Loh, A. Wirth, R. Santra,
+N. Rohringer, V. S. Yakovlev, S. Zherebtsov, T. Pfeifer,
+A. M. Azzeer, M. F. Kling, S. R. Leone, and F. Krausz,
+Real-time observation of valence electron motion, Nature
+466, 739 (2010).
+[24] Y. Kobayashi, M. Reduzzi, K. F. Chang, H. Timmers,
+D. M. Neumark, and S. R. Leone, Selectivity of electronic
+coherence and attosecond ionization delays in strong-field
+double ionization, Physical Review Letters 120, 233201
+(2018).
+[25] D. T. Matselyukh, V. Despr´ e, N. V. Golubev, A. I. Kuleff,
+and H. J. W¨ orner, Decoherence and revival in attosecond
+charge migration driven by non-adiabatic dynamics, Na-
+ture Physics 18, 1206 (2022).
+[26] N. V. Golubev, J. c. v. Van ´ ıˇ cek, and A. I. Kuleff, Core-
+valence attosecond transient absorption spectroscopy of
+polyatomic molecules, Phys. Rev. Lett. 127, 123001
+(2021).
+[27] I. Shalaby, M. McDonnell, C. Murphy, N. Chakraborty,
+K. Gray, J. Wood, D. Biswas, and A. Sandhu, Compara-
+tive study of spectral broadening and few-cycle compres-
+sion of yb:kgw laser pulses in gas-filled hollow-core fibers,
+Optics Continuum 4, 271 (2025).
+[28] A. Kramida, Y. Ralchenko, J. Reader, and N. A. Team,
+Nist atomic spectra database (version 5.12), https://
+physics.nist.gov/asd (2024), [Accessed: 2025-04-16].
+[29] A. Plunkett, M. A. Alarc´ on, J. K. Wood, C. H. Greene,
+and A. Sandhu, Raman interferometry between autoion-
+izing states to probe ultrafast wave-packet dynamics with
+high spectral resolution, Physical Review Letters 128,
+083001 (2022).
+[30] M. Tarana and C. H. Greene, Femtosecond transparency
+in the extreme-ultraviolet region, Physical Review A 85,
+013411 (2012).
+[31] M. Wu, S. Chen, S. Camp, K. J. Schafer, and M. B.
+Gaarde, Theory of strong-field attosecond transient ab-
+sorption, Journal of Physics B: Atomic, Molecular and
+Optical Physics 49, 062003 (2016).
+[32] P. J¨ onsson, G. Gaigalas, J. Biero´ n, C. F. Fischer, and
+I. Grant, New version: Grasp2K relativistic atomic struc-
+ture package, Computer Physics Communications 184,
+2197 (2013).
+[33] S. Yanez-Pagans, C. Cariker, M. Shaikh, L. Argenti, and
+A. Sandhu, Multipolariton control in attosecond tran-
+sient absorption of autoionizing states, Phys. Rev. A105,
+063107 (2022).
+[34] N. Harkema, C. Cariker, E. Lindroth, L. Argenti, and
+A. Sandhu, Autoionizing polaritons in attosecond atomic
+ionization, Phys. Rev. Lett. 127, 023202 (2021).
+[35] C. Cariker, S. Yanez-Pagans, N. Harkema, E. Lindroth,
+A. Sandhu, and L. Argenti, Autoionizing polaritons with
+the jaynes-cummings model, Phys. Rev. A 110, 063119
+(2024).
+[36] S. H. Autler and C. H. Townes, Stark effect in rapidly
+varying fields, Physical Review 100, 703 (1955).
+[37] M. Alarc´ on, K. Hauser, and N. V. Golubev, Control of
+charge migration in spin-orbit split electronic states of Xe
+ion using stimulated Raman adiabatic passage technique,
+manuscript in preparation.
+[38] A. R. Edmonds, Angular momentum in quantum me-
+chanics, Vol. 4 (Princeton university press, 1996).

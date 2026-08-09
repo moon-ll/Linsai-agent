@@ -1,0 +1,541 @@
+Creation and control of valley currents in graphene by few cycle light pulses
+
+Creation and control of valley currents in graphene by few cycle light
+pulses
+Deepika Gill,1 Sangeeta Sharma,1, 2 and Sam Shallcross1
+1) Max-Born-Institut für Nichtlineare Optik und Kurzzeitspektroskopie, Max-Born-Strasse 2A, 12489 Berlin,
+
+Germany.
+2) Institute for theoretical solid-state physics, Freie Universität Berlin, Arnimallee 14, 14195 Berlin,
+Germany
+(*Electronic mail: sharma@mbi.de)
+
+arXiv:2411.02379v1 [cond-mat.mes-hall] 4 Nov 2024
+
+(Dated: November 5, 2024)
+
+Well established for the visible spectrum gaps of the transition metal dichalcogenide family, valleytronics – the control
+of valley charge and current by light – is comparatively unexplored for the THz gaps that characterize graphene and
+topological insulators. Here we show that few cycle pulses of THz light can create and control a 100% valley polarized
+current in graphene, with lightwave control over the current magnitude and direction. The latter is equal to an emergent
+pulse property of few cycle circularly polarized pulses, the “global” carrier envelope phase. Our findings both highlight
+the richness of few cycle light pulses in control over quantum matter, and provide a route towards a “THz valleytronics”
+in meV gapped systems.
+Novel quantum degrees of freedom, such as valley state and
+topological charge, provide rich new possibilities for controlling matter by light, and potentially form key elements of future classical and quantum computing technologies. The valley degree of freedom, that directly couples to circularly polarized light, has in particular attracted attention, most notably
+in the context of transition metal dichalcogenide (TMDC)
+family1–5 whose valley gaps of 1.6-2.3 eV fall within the visible spectrum. Terahertz light6–9 – typically understood as
+light in the 1-30 THz frequency range – couples to several fundamental electronic and lattice energy scales of the solid state,
+allowing for example light enhancement of Curie temperature
+and control over magnetic order10–12 . THz valleytronics, by
+contrast, remains relatively unexplored despite the existence
+of materials with excellent valleytronics potential that possess
+gaps in the THz window, for example graphene encapsulated
+in h-BN13 and topological insulator (TI) surface states.
+A direct analogy of the valley charge polarization physics of
+the TMDC family fails for THz gaps, as thermal fluctuations
+wash out light created valley contrast. However, valley current
+remains as a physical property that can be created and controlled by light in “THz valleytronics”, with “hencomb” pulse
+designs14 generating 70-80% valley polarization of current.
+Circularly polarized light is generally thought of as coupling
+only to the charge state of valleys, as the rotating polarization vector cannot distinguish directions in momentum space.
+However, recent work has shown that this picture breaks down
+in the few cycle limit15 for the TMDC family: at such short
+times the lightform becomes inherently vectorial and can thus
+simultaneously control valley charge and valley current.
+Here we show that this short time light-matter symmetry
+breaking of valley physics holds also for THz gaps. Taking as
+a test case graphene with a 40 meV gap – typical of those
+found upon encapsulation in h-BN13 – we demonstrate the
+generation of nearly 100% pure valley current by few cycle
+pulses of THz light with complete direction control via the
+“global” carrier envelope phase of the pulse. While generation of valley current in graphene is typically discussed in
+the context of complex nano-device structures – for example
+
+valley filters16–22 employ the emergent gauge physics of deformed graphene23–27 – our work provides a contrasting route
+to valleytronics in graphene via the short time limit of circularly polarized laser pulses.
+We consider a circularly polarized light pulse applied to a
+graphene system in which a small gap ∆ has been imposed at
+the Dirac point. Such gaps can readily be introduced by the
+particular environment in which the graphene layer is situation, for example by encapsulation in hexagonal Boron Nitride
+(h-BN)13,28 , or epitaxial growth on the (0001) face of SiC29 .
+To this end we deploy a minimal model consisting of the nearest neighbour tight-binding approach with ∆ introduced via
+a mass field, treating the dynamical evolution induced by an
+ultrafast laser pulse via the von Neumann equation incorporating a phenomenological decoherence of 20 fs30 . Further
+details of our model and its numerical solution are provided
+in Appendix A.
+Circularly polarized light fails as a route to valley polarization in the small gap limit. This is illustrated in Fig. 1(a) in
+which the charge at the K valley and its conjugate K∗ partner is shown as a function of the graphene gap. The light
+pulse in each case has fixed duration and amplitude, 117 fs
+and 0.041 a.u. respectively, with the frequency tuned to the
+gap. While for ∆ > 100 meV clear valley polarization can be
+seen, with light inducing dramatically more charge at the K as
+compared to K∗ valley, this falls to zero as the gap enters the
+“THz window”, a fact confirmed by a calculation of the valley
+polarization ηQ = (QK − QK ∗ )/(QK + QK ∗ ), see inset panel.
+Unexpectedly, however, this small gap region exhibits an increase of valley, Fig. 2(b). Calculation of the analogously defined valley current polarization, ηJ = (JK − JK ∗ )/(JK + JK ∗ ),
+shows furthermore that this current is strongly valley polarized, in particular towards the weak current tail at gaps of 50100 meV, see inset panel of Fig. 2(b).
+To explore the origins of this we consider in detail the case
+of a 30 meV gap corresponding to the maximal current response. The current carrying capacity of the charge excitations induced by a light pulse can be accessed by introducing
+a symmetry breaking density15 :
+
+Creation and control of valley currents in graphene by few cycle light pulses
+
+(a)
+
+2
+
+(b)
+
+Figure 1. In plane symmetry breaking by circularly polarized THz light in gapped graphene. (a) Charge excited at the conjugate K and K∗
+valleys by circularly polarized light pulse tuned to the gap. Valley polarization by light fails as the gap vanishes, a fact confirmed by calculation
+of the valley polarization ηQ = (QK − QK ∗ )/(QK + QK ∗ ), see inset. Including thermally excited charge at T = 300 K in the valley charge leads
+to a significantly earlier loss of valley polarization, presented as ηQ∗ in the inset. (b) The low gap region in which valley charge polarization
+fails is, however, endowed with an emergent current not found at large gaps. This current exhibits valley polarization corresponding to the
+underlying charge polarization, panel (b) inset.
+
+average” of the conduction band occupations averaged over
+the 3 k-vectors related by the valley C3 symmetry operations.
+A laser induced charge excitation exactly respecting the local
+valley symmetry, i.e. a charge excitation with exactly C3 symmetry, will have D(k) = 0 for all k. In such a state the macroscopic current will identically vanish. Finite values of D(k),
+on the other hand, indicate a breaking of valley symmetry by
+the light pulse and the possibility of an emergent current.
+
+(a)
+(b)
+
+(c)
+
+K
+
+(d)
+
+K*
+
+(e)
+
+K
+
+(f)
+
+K*
+
+Figure 2. Emergence of light-matter symmetry breaking in the single cycle limit of circularly polarized light. (a) The vector potential
+of a single cycle THz pulse, tuned to a gap of 30 meV (7.2 THz).
+The dynamical trajectory i.e. the evolution of crystal momentum induced by the lightform, describes a single loop in momentum space,
+panel (b). This generates symmetry breaking of the light-matter coupling that while difficult to discern in the momentum resolved charge
+density, panels (c,d), is clearly visible in the corresponding symmetry breaking density D(k), Eq. 1, panels (e,f), that reveals the light
+induced excitation to be symmetry lowered from the underlying C3
+symmetry of the band manifold to the C2 symmetry of the single loop
+lightform.
+
+D(k) = |ck |2 −
+
+1 3
+∑ |cMi k |2 .
+3 i=1
+
+(1)
+
+The value of D(k) represents the deviation of the conduction
+band occupation at crystal momenta k, |ck |2 , from the “star
+
+The vector potential of the light pulse tuned to a 30 meV
+reveals a pulse close to the single cycle regime, Fig. 2(a), with
+the corresponding dynamical trajectory, i.e. the evolution of
+crystal momenta this pulse induces, tracing out a single loop
+in momentum space, Fig. 2(b). Failure of light-valley coupling can be seen in the momentum resolved charge excitations, Fig. 2(c,d), which show charge excited at both valleys.
+The corresponding D(k), however, also reveal a clear symmetry lowering of the excitation: the C3 symmetry of the valley
+has been lowered to a C2 symmetry in the light induced charge
+excitation, Fig. 2(e,f). This arises as the momentum space
+loop shown in Fig. 2(j) may evolve crystal momenta either towards the region of maximum coupling at the high symmetry
+K point, shown by the dipole matrix element plotted in (b),
+or away from it. Crystal momenta at positive ky (evolving towards K) will thus experience greater charge excitation than
+at negative ky (evolving away from K), leading to a charge
+imbalance at positive and negative ky . It is this light-wave
+symmetry breaking, characteristic of the few cycle regime,
+that underpins the symmetry breaking of the charge density
+revealed by the D(k) and the emergence of a non-vanishing
+current.
+This appearance of current in the few cycle regime has been
+discussed recently in the context of large gap systems15 . However, while for large gap systems the currents generated are
+substantial and either fully spin and/or valley polarized, this is
+not the case here. The currents induced by light are both weak
+(in the pA regime) and, as inspection of the valley current polarizations shows, inset panel Fig. 1(b), have significant valley
+polarization only in the weak tail of the current. It would thus
+
+Creation and control of valley currents in graphene by few cycle light pulses
+Charge polarization
+
+(a)
+
+3
+Total current
+
+Current polarization
+
+(b)
+
+(c)
+
+X
+
+Y
+
+Figure 3. Maps of the charge and current excitation in the few cycle limit of circularly polarized light for graphene with a minimal 40 meV
+gap. Fixing the duration of a THz pulse to X fs we vary the amplitude, A0 , and frequency, ω, evolving the lightform between single cycle and
+few cycle regimes. Shown are the valley polarization of the excited charge, panel (a), and of the emergent symmetry breaking current, panel
+(b), with the magnitude of this current presented in panel (c). High values of charge and current polarization are seen to occur at quite distinct
+pulse parameters, with gap tuned low amplitude light polarizing the charge response, but supra-gap and high amplitude light polarizing the
+current response.
+
+appear that while the few cycle regime of excitation by THz
+circularly polarized light is endowed with an emergent current, the valley polarization of this is significantly degraded
+as compared that found in the visible spectrum gaps of the
+TMDC family.
+To further explore this short time current response we lift
+the restriction on the light pulse that it must be gap tuned.
+The broadband nature of lightforms approaching the few optical cycle regime allows significant charge excitation for pulse
+central frequencies both significantly below and above the gap
+energy, permitting the sensible lifting of this restriction. In
+Fig. 3 we map the charge and current response of minimally
+gapped graphene as a function of the pulse frequency, ω, and
+pulse amplitude, A0 . The band gap we take fixed at 40 meV,
+equal to that of a low misorientation angle graphene/h-BN
+system13 , and fix the pulse duration to 117 fs, suitable for few
+cycle pulses in the THz window.
+The valley polarization of excited charge reveals, at the low
+end of the range of pulse amplitudes explored, a pronounced
+maxima close to the band gap of 40 meV, Fig. 3(a). While
+values of 67% valley charge polarization can be achieved, this
+represents the valley signal at T = 0; increasing the temperature rapidly induces significant charge excitation across the
+gap, washing out this valley contrast. Increase of A0 results
+in significant weakening of this T = 0 valley contrast, a feature that follows from the increase in A0 generating dynamical
+trajectories that evolve crystal momenta further from the conduction band edge at which light-valley coupling holds, with
+degradation of valley polarization the inevitable consequence.
+From the current polarization, Fig. 3(b), a dramatically different picture emerges. Once again a pronounced maxima in
+valley polarization exists, but now both shifted to energies significant above the gap and to high end of the range of pulse
+amplitudes explored. Strikingly, this maxima entails nearly
+100% valley polarized current with, moreover, current magnitudes now on the nA scale, Fig. 3(c).
+The supra-gap frequency at which this high polarization of
+current occurs implies a light pulse of several cycles. As may
+
+(a)
+
+(b)
+
+(c)
+
+K
+
+K*
+
+(d)
+
+(e)
+
+K
+
+K*
+
+Figure 4. Valley selective symmetry breaking of charge excitation.
+The dynamical trajectory of a few cycle circularly polarized light
+pulse, panel (a), consists of a series of loops that are successively
+dominant at positive or negative momenta relative to the initial t = 0
+crystal momenta. While charge excitation is seen at both K and K∗ ,
+the symmetries of the charge excitations are distinct: C2 at the K
+valley, and C3 at the K∗ valley, as revealed by the symmetry breaking
+densiry D(k), Eq. 1, that takes on a finite dipole structure at K but
+is numerically zero at K∗ . This generates the 100% polarized valley
+current revealed by the “light maps” presented in Fig. 3.
+
+be seen in Fig. 4(a) the dynamical trajectory, plotted for the
+pulse indicated by “X” in Fig. 3(b), consists of several loops
+that, successively, evolve dominantly at either ky > 0 or ky < 0
+momenta. Following the same arguments that applied to a single low symmetry loop, each of these loops therefore excites
+successively positive and negative contributions to the overall current induced by the light pulse, leading to the possibility of an overall cancellation. How this impacts the overall
+charge excitation can be seen in the momentum resolved excited charge and the corresponding symmetry breaking density D(k), Fig. 4(b,c) and (d,e) respectively, revealing that
+while charge is excited at both valleys only at the K valley
+is the symmetry breaking K-pole associated with the generation of valley current seen. The existence of a 100% supra-gap
+valley polarized current response is thus seen to be a feature
+arising from cancellation over several loops of a few cycle
+pulse.
+
+Creation and control of valley currents in graphene by few cycle light pulses
+
+(a)
+
+(b)
+
+4
+
+(c)
+90 degrees
+
+135 degrees
+
+180 degrees
+
+(e)
+
+(f)
+
+(g)
+
+(h)
+
+(i)
+
+(j)
+
+(d)
+
+Figure 5. Valley current control via the global carrier envelope phase of few cycle circularly polarized light. Few cycle circularly polarized
+light pulses are characterized by an orientable dynamical trajectory in momentum space, whose direction is determined by the global carrier
+envelope phase φg , a phase shift common to both components of the light pulse, see Eq. 2. Three representative examples are presented in (a-c),
+φg = 90◦ , 135◦ , and 180◦ ; while the time evolving vector potentials are hard to distinguish the momentum space trajectories (inset panels)
+exhibit clear rotation with changing φg . The direction of the valley polarized current follows exactly φg , with the nearly 100% value of valley
+polarization unchanged by variation of φg . The charge excitation and symmetry breaking density for the three light pulses presented in (a-c)
+are shown in panels (e-j), as labelled, revealing the origin of current control via rotation of the symmetry breaking “K-pole” induced by few
+cycle circularly polarized light.
+
+Essential to any viable scheme of lightwave valleytronics
+in graphene is the ability to control the laser pulse induced
+valley current. The “light maps” presented in Fig. 3 make
+clear that the magnitude of the valley current can be controlled
+both through the amplitude and frequency of the few cycle
+circularly polarized THz pulse. To see how the direction of
+the light generated current can be controlled we recall that a
+circular polarized light waveform can be expressed as
+A(t) = f (t)(σ cos(ωt + φg ), sin(ωt + φg ))
+
+(2)
+
+with f (t) an envelope function encoding the pulse shape and
+temporal duration, and σ = ±1 the pulse helicity. At long
+pulse times the phase φg will play no physical role in lightmatter interaction: only the carrier envelop phase difference of
+σ π/2 that determines the helicity, expressed as the sine and
+cosine functions in Eq. 2, is of importance. However as the
+pulse waveform approaches the few cycle limit φg determines
+the direction of the orientable loop that the momentum space
+trajectory limits to. Three representative cases of this short
+time feature are shown in Fig. 5(a-c), for φg = 90◦ , 135◦ , and
+180◦ respectively, where for vector potential and frequency
+we employ the pulse parameters of the point indicated by “X”
+in the light maps, Fig. 3(a-c).
+This provides an emergent short time pulse parameter that
+couples few cycle circularly polarized light to the direction of
+the induced current, and facilitates a complete direction control over current, Fig. 5(d). Note that here we show the intraband component of the total current; for the pulses considered here the interband component is negligible in the residual
+post-pulse current, see Supplemental. The corresponding mo-
+
+mentum resolved charge densities and D(k) function (Eq. 1),
+panels (e-j), reveal that while the excited charge distribution
+does not discernibly change, this masks a clearly changing the
+K-pole that rotates with the global carrier envelope phase. Assigning a dipole moment to this K-pole leads, up to a scale, to
+exactly the same function as the valley current, as shown in
+Fig. 5(d).
+Opening a gap in graphene without significantly altering the
+Dirac cone electronic structure implies meV scale gaps, and
+hence light activation by THz pulses. While the light-valley
+coupling mechanism that underpins lightwave valleytronics in
+the transition metal dichalcogenide family holds also for minimally gapped graphene, the charge excitation induced by THz
+light is comparable to room temperature thermal excitation
+across the gap, washing out the valley signal and appearing
+to preclude a useful “THz valleytronics” in minimally gapped
+graphene. However, while valley charge cannot be effectively
+controlled circularly polarized THz light, it turns out that a
+second property of circularly polarized light, the short time
+emergence of a light-matter symmetry breaking current, does
+hold for gaps in the THz spectrum.
+At supra-gap frequencies at which the excited charge exhibits only weak valley contrast, few cycle pulses of THz circularly polarized light generate a 100% valley polarized current, with the THz polarization vector allowing full control
+over current direction by light. The emergence of a distinct
+region of light-matter coupling at which valley current control
+exists in the absence of valley charge polarization highlights a
+characteristic of few cycle circularly polarized light: it both
+possess a scalar degree of freedom – the helicity that couples to valley charge just as for longer time pulses, but also
+
+Creation and control of valley currents in graphene by few cycle light pulses
+a separate vectorial degree of freedom – the orientation of the
+momentum space dynamical trajectory – that couples to valley current. In the context of minimally gapped graphene this
+allows a rich current response in the few cycle regime of THz
+light, opening a route to the creation and control of valley currents and a “THz valleytronics” in this material.
+
+ACKNOWLEDGEMENTS
+
+Sharma would like to thank DFG for funding through
+project-ID 328545488 TRR227 (projects A04), and Shallcross would like to thank DFG for funding through project-ID
+522036409 SH 498/7-1. Sharma and Shallcross would like
+to thank the Leibniz Professorin Program (SAW P118/2021).
+The authors acknowledge the North-German Supercomputing
+Alliance (HLRN) for providing HPC resources that have contributed to the research results reported in this paper.
+
+ADDITIONAL INFORMATION
+
+Competing interests The authors declare no competing financial, or any other, interests.
+Correspondence Correspondence and requests for materials
+may be addressed to either of the corresponding authors.
+
+Appendix A: Methods
+
+We model gapped graphene via the simplest nearest neighbour tight-binding model with a sub-lattice symmetry breaking gap ∆
+
+
+∆/2
+fk
+H=
+fk∗ −∆/2
+
+(A1)
+
+with fk = −t ∑ j eik.ν j ; here t represents the nearest neighbour
+hopping, and j is a sum over nearest neighbour vectors ν j .
+In all calculations the laser pulse is described by a series
+of waveforms with Gaussian envelope form and with pulse
+(i)
+centre t0 :
+(i)
+
+A(t) = ∑
+i
+
+(i)
+
+(i)
+A0 exp
+
+(t − t0 )2
+−
+2σi2
+
+!
+(i)
+
+sin(ωit + φcep )
+
+(A2)
+
+where A0 is the pulse amplitude vector, σi is related to the
+√
+full width half maximum by FW HM = 2 2 ln 2σi , ωi is the
+(i)
+frequency of the light, and φcep the carrier envelope phase.
+The initial state is provided by a Fermi-Dirac distribution,
+and we include scattering that induces a loss of coherence in
+the simplest phenomenological model in which the density
+matrix is expressed in the eigenbasis at k(t), with an exponential decay of the off-diagonal density matrix elements that
+encode quantum interference:
+
+5
+
+∂t ρ = −i [H, ρ] +
+
+1
+(ρ − Diag[ρ])
+TD
+
+(A3)
+
+where Diag[ρ] denotes the matrix comprising only the diagonal elements of the density matrix ρ, and TD is a phenomenological decoherence time. For time propagation we employ
+the standard fourth-order Runge-Kutta method.
+
+REFERENCES
+1 J. Xiao, Z. Ye, Y. Wang, H. Zhu, Y. Wang,
+
+and X. Zhang, “Nonlinear
+optical selection rule based on valley-exciton locking in monolayer WS2 ,”
+Light: Science & Applications 4, e366–e366 (2015).
+2 K. F. Mak, D. Xiao, and J. Shan, “Light–valley interactions in 2D semiconductors,” Nature Photonics 12, 451–460 (2018), number: 8 Publisher:
+Nature Publishing Group.
+3 F. Langer, C. P. Schmid, S. Schlauderer, M. Gmitra, J. Fabian, P. Nagler,
+C. Schüller, T. Korn, P. G. Hawkins, J. T. Steiner, U. Huttner, S. W. Koch,
+M. Kira, and R. Huber, “Lightwave valleytronics in a monolayer of tungsten diselenide,” Nature 557, 76–80 (2018).
+4 S. A. Vitale, D. Nezich, J. O. Varghese, P. Kim, N. Gedik, P. JarilloHerrero, D. Xiao, and M. Rothschild, “Valleytronics: Opportunities,
+Challenges, and Paths Forward,” Small 14, 1801483 (2018), _eprint:
+https://onlinelibrary.wiley.com/doi/pdf/10.1002/smll.201801483.
+5 L. Li, L. Shao, X. Liu, A. Gao, H. Wang, B. Zheng, G. Hou, K. Shehzad,
+L. Yu, F. Miao, Y. Shi, Y. Xu, and X. Wang, “Room-temperature valleytronic transistor,” Nature Nanotechnology 15, 743–749 (2020), number:
+9 Publisher: Nature Publishing Group.
+6 A. Bera, S. Bera, S. Kalimuddin, S. Gayen, M. Kundu, B. Das, and
+M. Mondal, “Review of recent progress on THz spectroscopy of quantum
+materials: superconductors, magnetic and topological materials,” The European Physical Journal Special Topics 230, 4113–4139 (2021).
+7 E. A. Mashkovich, K. A. Grishunin, R. M. Dubrovin, A. K. Zvezdin, R. V.
+Pisarev, and A. V. Kimel, “Terahertz light–driven coupling of antiferromagnetic spins to lattice,” Science 374, 1608–1611 (2021), publisher: American
+Association for the Advancement of Science.
+8 P. Khan, M. Kanamaru, K. Matsumoto, T. Ito, and T. Satoh, “Ultrafast
+light-driven simultaneous excitation of coherent terahertz magnons and
+phonons in multiferroic $\mathrm{BiFe}{\mathrm{O}}_{3}$,” Physical
+Review B 101, 134413 (2020), publisher: American Physical Society.
+9 A. L. Chekhov, Y. Behovits, J. J. F. Heitz, C. Denker, D. A. Reiss, M. Wolf,
+M. Weinelt, P. W. Brouwer, M. Münzenberg, and T. Kampfrath, “Ultrafast Demagnetization of Iron Induced by Optical versus Terahertz Pulses,”
+Physical Review X 11, 041055 (2021), publisher: American Physical Society.
+10 A. S. Disa, M. Fechner, T. F. Nova, B. Liu, M. Först, D. Prabhakaran, P. G.
+Radaelli, and A. Cavalleri, “Polarizing an antiferromagnet by optical engineering of the crystal field,” Nature Physics 16, 937–941 (2020), publisher:
+Nature Publishing Group.
+11 A. S. Disa, J. Curtis, M. Fechner, A. Liu, A. von Hoegen, M. Först, T. F.
+Nova, P. Narang, A. Maljuk, A. V. Boris, B. Keimer, and A. Cavalleri,
+“Photo-induced high-temperature ferromagnetism in YTiO3,” Nature 617,
+73–78 (2023), publisher: Nature Publishing Group.
+12 J. B. Curtis, A. Disa, M. Fechner, A. Cavalleri, and P. Narang, “Dynamics
+of photoinduced ferromagnetism in oxides with orbital degeneracy,” Physical Review Research 5, 013204 (2023), publisher: American Physical Society.
+13 M. Yankowitz, Q. Ma, P. Jarillo-Herrero, and B. J. LeRoy, “van der Waals
+heterostructures combining graphene and hexagonal boron nitride,” Nature
+Reviews Physics 1, 112–125 (2019), number: 2 Publisher: Nature Publishing Group.
+14 S. Sharma, D. Gill, and S. Shallcross, “Giant and Controllable Valley Currents in Graphene by Double Pumped THz Light,” Nano Letters 23, 10305–
+10310 (2023).
+15 S. Sharma, D. Gill, J. Krishna, J. K. Dewhurst, and S. Shallcross, “Di-
+
+Creation and control of valley currents in graphene by few cycle light pulses
+rect coupling of light to valley current,” Nature Communications 15, 7579
+(2024), publisher: Nature Publishing Group.
+16 M. Settnes, S. R. Power, M. Brandbyge, and A.-P. Jauho, “Graphene
+Nanobubbles as Valley Filters and Beam Splitters,” Phys. Rev. Lett. 117,
+276801 (2016).
+17 C. Yesilyurt, S. Ghee Tan, G. Liang, and M. B. A. Jalil, “Perfect valley filter
+in strained graphene with single barrier region,” AIP Advances 6, 056303
+(2016).
+18 D. Faria, C. León, L. R. F. Lima, A. Latgé, and N. Sandler, “Valley polarization braiding in strained graphene,” Physical Review B 101, 081410
+(2020), publisher: American Physical Society.
+19 A. Rycerz, J. Tworzydlo, and C. W. J. Beenakker, “Valley filter and valley
+valve in graphene,” Nature Physics 3, 172–175 (2007), number: 3 Publisher: Nature Publishing Group.
+20 H.-B. Yao, Z. Liu, M.-F. Zhu, and Y.-S. Zheng, “The line-defect–induced
+valley filter in strained graphene,” EPL (Europhysics Letters) 109, 37010
+(2015).
+21 A. M. Khalifa, R. K. Kaul, E. Shimshoni, H. Fertig, and G. Murthy, “Weyl
+Semimetal Path to Valley Filtering in Graphene,” Physical Review Letters
+127, 126801 (2021), publisher: American Physical Society.
+22 M. Jo, P. Brasseur, A. Assouline, G. Fleury, H.-S. Sim, K. Watanabe,
+T. Taniguchi, W. Dumnernpanich, P. Roche, D. Glattli, N. Kumada, F. Parmentier, and P. Roulleau, “Quantum Hall Valley Splitters and a Tunable
+Mach-Zehnder Interferometer in Graphene,” Physical Review Letters 126,
+146803 (2021), publisher: American Physical Society.
+23 N. Levy, S. A. Burke, K. L. Meaker, M. Panlasigui, A. Zettl, F. Guinea,
+A. H. C. Neto, and M. F. Crommie, “Strain-Induced Pseudo–Magnetic
+Fields Greater Than 300 Tesla in Graphene Nanobubbles,” Science 329,
+544–547 (2010), publisher: American Association for the Advancement of
+
+6
+
+Science.
+24 P. Nigge, A. C. Qu, E. Lantagne-Hurtubise, E. Marsell, S. Link, G. Tom,
+
+M. Zonno, M. Michiardi, M. Schneider, S. Zhdanovich, G. Levy, U. Starke,
+C. Gutierrez, D. Bonn, S. A. Burke, M. Franz, and A. Damascelli, “Room
+temperature strain-induced Landau levels in graphene on a wafer-scale platform,” Science Advances 5, eaaw5593 (2019), publisher: American Association for the Advancement of Science.
+25 R. Gupta, F. Rost, M. Fleischmann, S. Sharma, and S. Shallcross, “Straintronics beyond homogeneous deformation,” Physical Review B 99, 125407
+(2019).
+26 B. Pacakova, T. Verhagen, M. Bousa, U. Hübner, J. Vejpravova, M. Kalbac,
+and O. Frank, “Mastering the Wrinkling of Self-supported Graphene,” Scientific Reports 7, 10003 (2017), number: 1 Publisher: Nature Publishing
+Group.
+27 C.-C. Hsu, M. L. Teague, J.-Q. Wang, and N.-C. Yeh, “Nanoscale strain
+engineering of giant pseudo-magnetic fields, valley polarization, and topological channels in graphene,” Science Advances 6, eaat9488 (2020), publisher: American Association for the Advancement of Science.
+28 C. R. Dean, A. F. Young, I. Meric, C. Lee, L. Wang, S. Sorgenfrei,
+K. Watanabe, T. Taniguchi, P. Kim, K. L. Shepard, and J. Hone, “Boron
+nitride substrates for high-quality graphene electronics,” Nature Nanotechnology 5, 722–726 (2010).
+29 S. Y. Zhou, G.-H. Gweon, A. V. Fedorov, P. N. First, W. A. de Heer,
+D.-H. Lee, F. Guinea, A. H. Castro Neto, and A. Lanzara, “Substrateinduced bandgap opening in epitaxial graphene,” Nature Materials 6, 770–
+775 (2007), number: 10 Publisher: Nature Publishing Group.
+30 C. Heide, T. Eckstein, T. Boolakee, C. Gerner, H. B. Weber, I. Franco,
+and P. Hommelhoff, “Electronic Coherence and Coherent Dephasing in the
+Optical Control of Electrons in Graphene,” Nano Letters 21, 9403–9409
+(2021), publisher: American Chemical Society.
+
+

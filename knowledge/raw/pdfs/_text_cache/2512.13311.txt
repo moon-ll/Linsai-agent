@@ -1,0 +1,682 @@
+A precision apparatus for high harmonic spectroscopy in bulk solids
+S. Mandal, P. Kumar, Z. Pi, H. Y. Kim, M. Zhan, and E. Goulielmakis*
+Institut für Physik, Universität Rostock, Albert-Einstein-Straße 23–24, 18059 Rostock,
+Germany
+(*Electronic mail: e.goulielmakis@uni-rostock.de)
+
+arXiv:2512.13311v1 [physics.optics] 15 Dec 2025
+
+(Dated: 16 December 2025)
+
+High harmonic generation (HHG) in solids has emerged as a powerful spectroscopic method for resolving ultrafast electron dynamics and band structure properties across a wide range of materials. However, quantitative
+HHG studies require instrumentation capable of delivering stable driving fields, precise crystal alignment,
+and broadband detection spanning the UV to the extreme ultraviolet (EUV). Here we present an integrated
+apparatus engineered specifically for high-accuracy, field-strength and orientation-dependent HHG measurements in bulk solids. The system incorporates dispersion-neutral intensity-control for few-cycle pulses, a
+vacuum HHG module with sub-micrometer and sub-degree sample positioning, and an imaging assembly that
+stabilizes the focal spot position and enables spatial filtering of the emitted harmonics. A synchronized dualspectrometer scheme provides simultaneous UV/VUV and EUV radiation detection, while absolute electric
+field calibration is achieved through gas-phase attosecond streaking. Together, these capabilities establish a
+versatile and quantitatively reliable platform for solid-state HHG spectroscopy. The methodology is broadly
+adaptable to various laser sources and material classes, and supports future efforts aimed at reconstructing
+valence-electron potentials, tracking strong-field dynamics, and mapping electronic structure with sub-cycle
+temporal resolution.
+I.
+
+INTRODUCTION
+
+High harmonic generation (HHG) in solids has evolved
+into a powerful spectroscopic method for probing the
+electronic structure across a broad range of materials.
+Since the first observation of HHG in bulk semiconductors under intense mid-infrared fields1 , the technique has
+been extended to dielectrics2,3 , amorphous media4 , twodimensional semiconductors5 , gapless materials such as
+graphene6 , and strongly correlated and topological systems where HHG provides access to many-body dynamics, phase transitions, and surface-state responses7–10 .
+Across these systems, the emission characteristics – cutoff
+energies, harmonic yields, and angular anisotropies – encode information on band structure, multiband coupling,
+Berry curvature, and valence-electron potentials11–15 .
+These advances establish HHG as an emerging metrological tool for quantitative solid-state spectroscopy extending from the infrared to the EUV.
+Such quantitative studies, however, impose stringent
+requirements for adequate instrumentation. HHG yields
+from thin crystalline samples are highly sensitive to
+sample inhomogeneities and beam-pointing drifts, making field-strength scans and angular scans particularly
+vulnerable to systematic errors. Accurate extraction
+of electronic-structure information calls for (i) stable,
+dispersion-free control of the driving electric-field amplitude especially for few-cycle pulses, (ii) precise and
+reproducible crystal rotation about a well-defined axis,
+and (iii) simultaneous detection of harmonics across extended spectral ranges spanning from the visible to the
+EUV. Moreover, accurate determination of the drivingfield amplitude – necessary for quantitative reconstruction of material properties – requires dedicated calibration methods16 .
+
+In this work, we present an integrated apparatus engineered to meet these requirements for precision HHG
+spectroscopy in solids. The apparatus is particularly optimized for few-cycle driving fields in the near-infrared
+and visible parts of the spectrum. The system combines
+a dispersion-neutral intensity-control module, a vacuum
+HHG platform equipped with a custom multi-axis goniometer for sub-micrometer positioning and sub-degree
+rotational accuracy, an imaging and spatial filtering assembly that ensures stable focal spot interrogation during field and angle scans, and a dual-spectrometer system
+enabling simultaneous UV/VUV and EUV radiation detection. Absolute calibration of the driving electric field
+is performed via gas-phase attosecond streaking16 . Together, these capabilities constitute a versatile platform
+for accurate field-strength- and orientation-dependent
+HHG measurements, supporting a wide range of measurements in high harmonic spectroscopy of solids.
+
+II.
+
+OVERVIEW OF THE EXPERIMENTAL APPARATUS
+
+The experimental apparatus (Fig. 1) consists of four
+main modules: (a) the intensity control module – for
+precise tuning of the driving pulse intensity; (b) the high
+harmonic generation module – which facilitates the positioning and rotation of the crystalline specimen to be
+investigated at the laser beam focus; (c) the imaging and
+spatial filtering assembly – which enables imaging of the
+high harmonic source onto the entrance plane of the spectrometers, enabling also a spatial selection of harmonics emanating from specific regions of the high harmonic
+beam; and (d) the detection system, where two spectrometers allow simultaneous detection of the generated harmonics in the UV/VUV and EUV ranges. Except mod-
+
+2
+
+FIG. 1. Schematic of the high harmonic spectroscopy apparatus.
+
+ule (a), which operates in ambient air, modules (b), (c)
+and (d) are housed within three interconnected chambers
+(Fig. 1) maintained at a vacuum level of 10-6 mbar, allowing an absorption-free propagation of VUV and EUV
+harmonics from the source to the detection system. The
+apparatus is driven by a light field synthesizer (LFS)17–19
+which, for the applications described here, provides fewcycle pulses in the visible spectral range centered at 2.0
+eV and the near infrared (NIR) region centered at 1.5 eV.
+In the following sections we focus on describing the
+technical details and purpose of each of the modules mentioned above and explain how each of these accomplishes
+key goals for attaining precision measurements of high
+harmonic emission from bulk solids.
+
+A.
+
+Intensity control module
+
+Studies of high harmonic generation from bulk solids
+have shown that valuable information about the electronic structure of a crystal is encoded both in the harmonic yield2,14 as well as the cutoff energy as a function
+of the applied electric field amplitude. Therefore, a high
+harmonic spectroscopy apparatus geared towards the
+precise characterization of the emitted harmonics must
+incorporate a dedicated pulse intensity control module.
+
+For ultrashort pulses, this module must vary the intensity
+without altering their temporal or spatial characteristics,
+in order to minimize measurement uncertainties.
+In principle, accurate, dispersion-free intensity control
+of few-cycle pulses could be implemented by spatially
+varying neutral density (ND) reflectors (filters), whose
+reflectivity gradient is negligible over the laser beam size.
+Yet the spatial translation of the reflector, necessary to
+adjust the pulse intensity to a specific setting, unavoidably affects the beam alignment. While in gas phase
+high harmonic generation, a moderate misalignment of
+the beam path and a corresponding lateral translation of
+the focal spot in the gas jet is of minor significance, it
+can severely affect measurement precision in bulk solids.
+This is because bulk solid samples (especially very thin
+ones) suffer surface imperfections such as digs, scratches,
+as well as non-uniform degree of crystallinity. Consequently, yield of laser-driven high harmonics from thin
+solid specimen is rather sensitive to the selected spot on
+the sample, on which the laser beam is focused to.
+The intensity control module implemented in this apparatus minimizes angular deviations during the adjustment of the pulse intensity and ensures that during a
+pulse-intensity scan, harmonics are emerging from the
+same spot of the studied specimen. Technically, the intensity control module (Fig. 2(a)) is implemented using
+
+3
+
+FIG. 2.
+Intensity control module and TG-FROG. (a)
+Schematic of the visible (yellow) and NIR (red) pulse compressor with the variable ND filter. Pulses from LFS are negatively chirped by chirped mirrors (CM) and dispersed by a
+pair of wedges in each individual path. Metal-coated mirrors
+are marked as MM. (b) Schematic of the TG-FROG setup for
+temporal characterization of the pulse (see also reference 20).
+
+(a) a set of chirp mirrors to negatively chirp the few-cycle
+pulses, and (b) a continuously variable, linear ND filter
+in transmission to adjust their energy. In this implementation a rectangular (25 mm × 100 mm) continuously
+variable ND filter having a thickness of ∼2.2 mm is used.
+Owing to the chirp-induced pulse intensity suppression,
+nonlinear effects in the bulk of ND filter are minimized.
+Moreover, to enable a uniform attenuation of the pulse
+intensity across the beam profile, which can be compromised by the spatial gradient of the ND filter, the diameter of the laser beam was kept lower than ∼3.5 mm.
+The intensity control module is completed by (c) a set
+of Brewster-angled, fused silica wedges that allow finetuning of the pulse dispersion. Using the module, the
+pulses acquire their minimum duration when they reach
+the high harmonic target specimen, as described later in
+this work. As we are dealing with pulses at two different
+bands the module is comprised by two paths. Path 1 is
+
+designed for pulses in the spectral range 500 nm – 700 nm,
+while path 2 for pulses in the range 700 nm – 1100 nm.
+In path 1 dispersion control is implemented using three
+chirped mirrors (-70 fs2 per reflection, 500 nm – 700 nm
+bandwidth), while in path 2 a pair of chirped mirrors (70 fs2 per reflection, 700 nm – 1100 nm bandwidth) were
+necessary. Routing of the beam through path 1 or path
+2 is possible via flip mirrors (Fig. 2(a)) placed at the entrance and exit of the module. The wedge-pair, mounted
+on a micrometer translation stage, allows fine-tuning of
+the dispersion of the pulses before reaching the high harmonic module. The pulse intensity control not only warrants a smooth and misalignment-free variation of the
+intensity but also ensures minimal effects on the beam
+properties in the focus in comparison to the aperturebased21,22 intensity control extensively used in the past
+for few-cycle pulse intensity control.
+For the temporal characterization of the few-cycle
+pulses in our apparatus a compact TG-FROG20 setup
+is placed at the exit of the pulse intensity control module. To ensure that the pulses characterized in the FROG
+setup accurately represent those used for high harmonic
+generation, we matched the optical paths that guide
+the beam to the HHG chamber and to the TG-FROG
+(Fig. 1). The schematic of the FROG apparatus is shown
+in Fig. 2(b).
+The temporal intensity profiles and phases of the pulses
+are retrieved by reconstruction of the recorded FROG
+spectrograms using a commercial software (Femtosoft
+Technologies). Figures 3(a) and 3(b) show the measured FROG spectrograms of visible and NIR pulses respectively. The retrieved temporal intensity and corresponding temporal phase of the pulses are shown in
+Fig. 3(c) and 3(d). The evaluated durations (FWHM) of
+the pulses are τ ≃ 6.9 fs and τ ≃ 8.6 fs respectively.
+
+B.
+
+High harmonic generation module
+
+The driving pulses exiting the intensity control module
+are routed to the entrance of the high harmonic generation module through a series of reflections from silvercoated steering mirrors. A concave silver-coated mirror
+(f = 40 cm) is used to focus the beam at approximately
+the center of the chamber (Fig. 1) maintained in vacuum
+(∼ 10-6 mbar). The pulses enter the chamber through a
+thin Brewster’s-angled (0.5 mm thin) fused silica window
+which minimizes reflection losses of the broadband incoming pulses. The crystalline specimens are mounted on
+a custom-built multi-axes goniometer (Fig. 4(b)), which
+is used for accurate positioning of the samples at the
+beam focus and for precision control of the crystal orientation with respect to the polarization vector of the
+incoming beam.
+The custom-built goniometer provides key functions
+for high harmonic studies in solids, outperforming commercial x-ray goniometers. It allows sample translation to undamaged regions while maintaining fixed three-
+
+4
+
+FIG. 3.
+Temporal characterization of the pulses used in
+high harmonic generation experiments. (a), (b) Measured TGFROG spectrograms of the driving pulses centered at 2 eV and 1.5
+eV respectively. (c), (d) Retrieved
+temporal intensity profile (blue)
+and phase (red). The evaluated
+pulse durations at the FWHM are
+τVIS ≃ 6.9 fs and τNIR ≃ 8.6 fs
+respectively.
+
+dimensional rotation axes relative to the laser path, using
+two orthogonal translation stages atop rotational stages
+(Fig. 4(b)). Rotation stage 1 turns the entire assembly
+around the laser axis, while stages 2 and 3 enable rotation
+about two perpendicular axes, ensuring the sample surface is perpendicular to the laser propagation. A copper
+weight mounted on top of the rotating platform counterbalances the torque produced by the rotation stage
+1 during its rotation. The translation stages provide
+micrometer-precision access to the entire sample surface
+and facilitate sample exchange without any additional
+rotational axis adjustments.
+An additional linear stage (Fig. 1) translates the entire
+sample holder unit (goniometer) along the laser propagation axis to correctly position the sample within the focus. The sample surface can be visually inspected using
+a 50× magnification optical system and camera located
+outside the HHG chamber (Fig. 4(a)).
+
+C.
+
+Imaging and spatial filtering assembly
+
+As alluded to earlier, the high harmonic yield is highly
+sensitive to the surface quality of the thin crystal sample. Consequently, any displacement of the laser focus on
+the sample surface during high harmonic measurements
+(for instance versus crystal angle) can lead to misleading variations. Therefore, to precisely study high harmonic anisotropy in crystalline solids, the signal must
+originate purely from the crystal’s intrinsic anisotropy.
+In a typical orientation-dependent yield measurement, a
+specific crystal axis is rotated on the laser polarization
+
+plane. If the sample’s rotation axis does not precisely
+coincide with the laser propagation axis, the focal spot
+of the laser beam will move across the sample surface
+and thus generate harmonics from different parts of the
+sample. To mitigate this issue the following strategy has
+been developed. A crosshair (Fig. 4(d)) made of a 40 µm
+thick copper wire is incorporated onto the sample holder
+and provides a permanent reference for aligning the laser
+beam such that its propagation axis always coincides with
+the rotation axis of the sample.
+Figure 4(a) illustrates the layout of the f-to-2f imaging system used for the visualization and measurement
+of the laser beam profile. The beam can also illuminate
+the crosshair in the sample plane, thereby allowing the
+crosshair to be visualized indirectly. The optics of the
+f-to-2f imaging system include a bare-aluminum-coated
+toroidal mirror (f = 10 cm), placed 15 cm away from
+the sample plane and a biconvex lens (f = 17.5 cm),
+placed another 30 cm away from the focus of the toroidal
+mirror. A set of three fused silica wedges placed after
+the toroidal mirror focus are used to attenuate the laser
+power before reaching a high resolution (pixel size 4.6
+µm) beam profiler (Dataray). A nearly Gaussian beam
+profile (Fig. 4(a)) with a 75 µm diameter (FWHM) was
+typically observed at the focus. Measurements of the
+beam profile across varying intensities using the intensity
+control module showed no detectable changes, indicating
+stable and reproducible focusing on the sample.
+To monitor and correct any misalignments between the
+sample rotation axis and the laser propagation axis, the
+steering and focusing mirror mounts (Fig. 4(a)) are iteratively adjusted using the crosshair as a reference, as
+
+5
+
+FIG. 4. (a) Overview of the f-to-2f imaging system used for aligning the rotation axis of the crystal sample along the laser
+propagation axis (orange solid arrow). (b) Multi-axis goniometer with the sample holder. The green dashed arrows denote the
+axes of rotation of each rotation stage (c) Photograph of the sample holder with three mounted samples and a crosshair. (d),
+(e) Photograph of the crosshair and sample respectively. (f) The crosshair imaged at the focal plane.
+
+shown in Fig. 4(f). Once the alignment is complete, the
+sample is brought into the beam path. The apparatus
+can spatially select high harmonics from a specific focal
+area by using a ceramic pinhole on a 3D translation stage
+at the toroidal mirror’s focal plane (Fig. 4(a)). When
+spatial filtering is not required, the ceramic pinhole is
+typically removed from the beam path.
+
+D.
+
+Dual-spectrometer
+
+With the pickup wedge retracted from the beam path,
+optical and UV-EUV radiation enter the spectrometer
+chamber (Fig. 1). There, a Hitachi, aberration-corrected
+concave grating (001-0266) is used to spectrally decom-
+
+pose the extreme ultraviolet beam and image the harmonic source on the detector. To allow a 5◦ grazing incidence of the beam on the grating, so as to optimize
+reflection and remain as close as possible to the angle
+for which the grating attains it highest imaging performance, the spectrometer chamber is rotated by ∼72.5◦
+with respect to the HHG chamber. Our main detector
+is a 3-stage microchannel plate (MCP) with a diameter
+of 6.8 cm and it is placed at a distance of 17 cm away
+from the grating center. To allow operational flexibility
+and fine adjustment of the imaging conditions the MCP
+is placed on an adjustable vacuum expansion bellow23,24
+(Fig. 5). In our geometry the spectrometer can simultaneously record harmonics in the energy range from ∼
+7 eV to 40 eV without any additional adjustment. To
+
+6
+the path of the first order diffraction of the grating to the
+MCP. Moreover, to suppress the optical beam, a series
+of VUV bandpass filters are employed at the entrance
+of the McPherson spectrometer. The filters are attached
+to externally adjustable vacuum valves which facilitate
+their insertion into the beam path. The central transmission energies of the filters are 4.8 eV and 6.4 eV, with
+FWHM values of 0.5 eV and 0.8 eV respectively, and are
+sufficient for capturing the entire bandwidth of the third
+harmonic for both driving pulse settings. The detector
+of the McPherson spectrometer is comprised of a fibercoupled multi-channel plate/phosphor screen and an Andor back illuminated CCD camera, with high sensitivity
+in the UV/VUV (3-8 eV) energy range.
+
+E.
+
+FIG. 5. EUV spectrometer design. (a), (b) Design of the EUV
+spectrometer for measuring high harmonics emission driven
+by visible and NIR driving pulses respectively. The optimal
+arrangement (imaging of the source and maximal bandwidth)
+is attained when the MCP detector is placed at a distance of
+17 cm from the center of the grating. Harmonic orders (first
+order diffraction) are denoted by numbers such as 3rd , 5th ,
+7th and so on.
+
+eliminate the second-order diffraction of high harmonics,
+a 200 µm thick magnesium fluoride (MgF2 ) substrate is
+inserted in the chamber, and it is positioned close to the
+front plate of the MCP detector by an UHV linear motion
+feedthrough. As MgF2 absorbs radiation with energies
+greater than 10 eV, the substrate is positioned within the
+diffracted beam path to allow the transmission of firstorder diffraction at energies < 10 eV but block harmonics with energies > 10 eV originating from higher-order
+diffraction.
+The sensitivity of MCP detectors is generally poor
+for photon energies below 10 eV. To efficiently detect
+lower order harmonics a second spectrometer (McPherson model no.: 234/302) optimized for operation in the
+UV/VUV range is integrated into our apparatus. To enable simultaneous acquisition with both spectrometers,
+the zeroth-order diffraction from the Hitachi grating is
+redirected to the McPherson spectrometer using a bare
+aluminum mirror (Fig. 1) placed such as not to obstruct
+
+Data acquisition
+
+Accurately measuring the yield of high harmonics as
+a function of electric field strength or crystal orientation
+requires long acquisition times. This is because the process involves mechanically adjusting both the translation
+and rotation stages to vary the driving-field amplitude
+and the crystal orientation, in addition to the necessary
+integration time at each measurement point. In these
+kinds of measurements, it is absolutely necessary that
+the sample remains free of damage in order to not compromise on the measurement fidelity. Since the degree
+of laser-induced damage scales with the total exposure
+of the specimen to the laser field25–29 , the minimization
+of the effective exposure time during data acquisition is
+crucial to maintaining the sample quality.
+To this end a motorized beam shutter (Fig. 1) driven by
+the acquisition software is placed before the HHG chamber to limit the exposure of the sample to the laser beam
+only for a very short time (typically ∼100 milliseconds),
+within which the cameras of the dual-spectrometer module record high harmonic spectra while blocking the beam
+at times when the sample is rotating or the intensity
+control unit is adjusting the linear reflector position to
+modify the intensity. With this approach, during a long
+acquisition of data – typically requiring several minutes
+– the solid specimen is exposed to the intense laser pulse
+only for a few seconds.
+A LabVIEW-based, home-made software is used to interface all externally controlled modules of the experimental apparatus, including the intensity control, the
+multi-axis goniometer’s rotation and translation stages,
+both CCD cameras in the dual-spectrometer, the photodiode used to track the laser stability (typically better
+than 2%), and the beam shutter. The high degree of
+automation of critical operations enables rapid acquisition of experimental data and ensures measurements of
+an extensive volume of data under identical experimental
+conditions.
+
+7
+III.
+
+ELECTRIC FIELD CALIBRATION
+
+Accurate knowledge of the absolute driving laser field
+amplitude is essential for high harmonic spectroscopy
+because it is an important parameter in numerous approaches aiming at extracting critical information about
+the studied solids2,14,30–32 . Ideally an attosecond streaking setup integrated in the apparatus could serve this
+goal by providing direct access into the driving field
+waveform16,33 . Yet, in order to minimize the complexity of our apparatus and avoid additional alignment burden we opted here for a different approach in which field
+calibration is performed externally.
+
+tency, we first conducted attosecond streaking measurements to determine the precise peak electric field amplitude of the laser pulses. Subsequently, we generated
+high harmonics in a 150 nm-thick fused silica sample for
+a range of known field strengths. The generated high
+harmonics were then directed into an EUV spectrometer
+using a pair of broadband rhodium (Rh) mirrors, as illustrated in Fig. 6(a). Figure 6(b) displays the measured
+spectra as a function of the absolute peak electric field of
+the driving near-infrared pulses.
+In the next step, the same fused silica sample was
+transferred to the newly developed apparatus and driven
+by the same laser pulses to generate high harmonics under identical conditions. In this setup, attosecond streaking is not available, and the electric field cannot be measured directly; instead, only the laser power is monitored
+using the photodiode that also tracks the long-term laser
+stability. We therefore recorded the high harmonic spectra as a function of the measured laser power. To relate
+these measurements to an absolute electric field scale, we
+established a conversion between laser power and field
+amplitude by requiring that the onset fields of the higherorder harmonics (orders > 11) coincide with those obtained in the attosecond beamline calibration (compare
+Fig. 6(c) and Fig. 6(d)). This procedure ensures a consistent, absolute field calibration across both measurement
+platforms.
+
+IV.
+
+FIG. 6. Determination of the absolute electric field amplitude and calibration of the apparatus. (a) Schematic of the
+attosecond (AS) beamline used for the pulse electric field calibration. (b) Recorded high harmonic yield of NIR pulses
+versus peak electric field determined by attosecond streaking.
+(c) Calibrated absolute electric field strength-dependent high
+harmonics from the developed HHG apparatus.
+
+To achieve an accurate external calibration of the electric field, we employed the attosecond (AS) beamline34
+in our laboratory. Using the same laser source for consis-
+
+REPRESENTATIVE HHG MEASUREMENTS
+
+To demonstrate the capabilities and quantitative reliability of the apparatus, we performed a series of representative high harmonic generation measurements using
+both amorphous and crystalline solids. These measurements serve two complementary purposes. First, they
+validate that the apparatus can stably generate and detect high-order harmonics over broad spectral ranges and
+field strengths. Second, they highlight the level of precision attainable in field- and angle-dependent studies –
+an essential requirement for extracting material properties and benchmarking theoretical models.
+We begin with HHG from a free-standing, amorphous
+150-nm fused silica membrane excited by visible laser
+pulses (2.0 eV). Figure 7(a) shows a representative harmonic spectrum recorded at a peak driving field of 0.83
+V/Å, spanning harmonic orders from the 3rd to the 13th .
+As the electric field strength is increased from 0.48 V/Å
+to 0.83 V/Å (Fig. 7(b)), higher harmonics up to the 15th
+order (≈ 30 eV) appear, consistent with the expected
+field-dependent extension of the cutoff. The equivalent
+measurements using NIR pulses at 1.5 eV (Figs. 7(c)–
+(d)) yield cutoffs reaching the 19th harmonic for fields
+approaching 0.82 V/Å. The smooth evolution of the harmonic cutoff and the absence of fluctuations across field
+steps reflect the stability of the intensity control module and the high repeatability of the beam delivery and
+detection systems.
+
+8
+
+FIG. 7. High harmonic generation spectra in a fused silica nanofilm (150 nm). Using visible laser pulse (2 eV) (a) and a NIR
+laser pulse (1.5 eV) (c). (b), (d) High harmonics spectra for the visible and NIR laser pulses respectively at different electric
+field strengths.
+
+In order to explore the capability of the apparatus to
+perform precision measurements of the anisotropy of the
+high harmonics yield versus crystal angle, we used a single crystal, ∼10 µm thick, magnesium oxide – MgO (100)
+sample. MgO is selected as a benchmark material because of its high damage threshold, and clear symmetrydriven anisotropy, which make it ideally suited for validating apparatus precision.
+The sample is shone by the linearly-polarized visible
+laser pulses, and the harmonic yield is recorded as a function of the crystal angle, with the laser polarization parallel to the MgO (100) plane. Here, the crystal angle is
+defined as the angle between the laser polarization vector and the lattice vector [001] (or equivalently [010], due
+to MgO’s 90◦ rotational symmetry) on the MgO (100)
+plane. Figure 8 illustrates the recorded harmonic yields
+(integrated over entire spectral width of each harmonic
+spectral peak) over the range from 0o to 360o at an angular step of 5o . The yield of the recorded harmonics
+exhibits a 90o periodicity, compatible with the crystal
+structure of MgO11,35–37 . Despite a minimal number of
+
+acquisitions (3) per angle the high symmetry of the data
+for all harmonics recorded is indicative for the quality of
+the measurements.
+Figure 9 shows the anisotropy of the high harmonic
+yield in crystalline MgO (100) plane for a range of driving
+field amplitudes 0.40, 0.47, 0.54, 0.60 and 0.67 V/Å. The
+high precision of the measurements is best highlighted by
+the evaluation of the standard errors (black segments).
+The standard error is evaluated by performing 3 consecutive measurements of the yield of the harmonics at each
+angle (integration time ∼100 ms) as well as by averaging
+over the n (8 for MgO) symmetric segments of the angular variation of the harmonic yield. Between rotation
+steps, the motorized shutter blocks the laser beam for 2 s,
+giving a total scan time of about 3 min for a full rotational
+scan per intensity setting. Across all field strengths and
+angles, the error bars are exceptionally small – typically
+only a few percent of the total signal – while the angular modulation spans tens of percent. This separation
+of scales demonstrates that the observed anisotropy is
+governed by the intrinsic crystal response, not by instru-
+
+9
+
+FIG. 8. High harmonic yield
+versus crystal angle in MgO
+(100) generated by linearly polarized laser pulses centered at
+an energy of 2 eV. The radial
+direction represents the intensity (in arbitrary units) whereas
+the azimuthal direction represents the angle of rotation of
+the crystal with respect to the
+polarization axis of the linearly
+polarized laser. The magenta
+circles show experimental data,
+with the green line serving as a
+guide to the eye.
+
+FIG. 9. High harmonic yields
+in MgO as a function of crystal rotation about an axis perpendicular to the sample surface, and electric field strength.
+The high harmonics are measured for five representative field
+strengths of 0.40 V/Å (magenta), 0.47 V/Å (grey), 0.54
+V/Å (olive), 0.60 V/Å (cyan)
+and 0.67 V/Å (blue). The data
+are shown in black (5° step)
+while the width of each data segment represent the standard error. Solid lines serve as guides
+to the eye. Each harmonic signal is normalized with respect to
+its maximum yield to enhance
+visibility.
+
+mental noise or drift. The small statistical uncertainties
+further confirm that the goniometer alignment, beampointing stability, and detector performance remain constant throughout extended measurement sequences, enabling quantitative comparison of angle-dependent yields
+across different field strengths.
+
+Taken together, the measurements in Figs. 7–9 provide a comprehensive validation of the apparatus. The
+fused silica results confirm stable and broadband HHG
+detection under varying field strengths, while the MgO
+measurements reveal the exceptional angular and statistical precision required for quantitative anisotropy studies.
+
+10
+The combination of negligible error bars, symmetry-clean
+angular traces, and consistent field-dependent trends establishes that the apparatus delivers drift-free, reproducible, and quantitative HHG measurements in bulk
+solids. These capabilities form a robust foundation
+for advanced spectroscopic applications, including bandstructure mapping, symmetry-resolved strong-field studies, and the reconstruction of valence-electron dynamics
+under tailored light fields.
+
+V.
+
+CONCLUSION AND OUTLOOK
+
+We have developed a fully integrated apparatus
+designed for precision high harmonic spectroscopy in
+bulk solids, combining dispersion-free intensity control
+of few-cycle driving fields, sub-micrometer and subdegree sample positioning, high-fidelity imaging and
+spatial filtering of the HHG source, and synchronized
+UV/VUV–EUV detection. Through absolute electricfield calibration via attosecond streaking and careful
+suppression of geometrical and alignment artefacts, the
+system enables reproducible, quantitative measurements
+of field- and angle-dependent harmonic emission across
+a broad spectral range. Representative results from
+amorphous and crystalline solids demonstrate the
+apparatus’s ability to capture subtle anisotropies and
+field-strength-dependent cutoffs with high accuracy.
+Beyond the examples presented here, the modular
+design of the platform allows adaptation to diverse
+material systems, driving wavelengths, and advanced
+spectroscopic methodologies. As such, the apparatus
+provides a robust foundation for future efforts aimed
+at reconstructing valence-electron potentials, mapping
+band structures with high precision, and exploring
+strong-field phenomena in emerging quantum materials.
+
+ACKNOWLEDGMENTS
+
+This work was jointly supported by the European
+Research Council (project number - 101098243) and
+Deutsche Forschungsgemeinschaft (project numbers 441234705 and 437567992).
+
+AUTHOR DECLARATIONS
+Conflict of Interest
+
+The authors declare that they have no competing interests.
+
+Author Contributions
+
+SM, ZP, HYK, MZ and PK designed and developed
+the apparatus. SM and PK performed the experiments.
+SM, PK and EG prepared the manuscript. EG conceived
+and supervised the experiments.
+
+DATA AVAILABILITY
+
+The data that support the findings of this study are
+available from the corresponding author upon reasonable
+request.
+
+REFERENCES
+
+1 S. Ghimire, A. D. DiChiara, E. Sistrunk, P. Agostini, L. F. Di-
+
+Mauro, and D. A. Reis, “Observation of high-order harmonic generation in a bulk crystal,” Nature Physics 7, 138–141 (2011).
+2 T. T. Luu, M. Garg, S. Y. Kruchinin, A. Moulet, M. T. Hassan,
+and E. Goulielmakis, “Extreme ultraviolet high-harmonic spectroscopy of solids,” Nature 521, 498–502 (2015).
+3 M. Garg, M. Zhan, T. T. Luu, H. Lakhotia, T. Klostermann,
+A. Guggenmos, and E. Goulielmakis, “Multi-petahertz electronic
+metrology,” Nature 538, 359–363 (2016).
+4 P. Jürgens, B. Liewehr, B. Kruse, C. Peltz, D. Engel, A. Husakou,
+T. Witting, M. Ivanov, M. J. J. Vrakking, T. Fennel, and
+A. Mermillod-Blondin, “Origin of strong-field-induced low-order
+harmonic generation in amorphous quartz,” Nature Physics 16,
+1035–1039 (2020).
+5 H. Liu, Y. Li, Y. S. You, S. Ghimire, T. F. Heinz, and D. A. Reis,
+“High-harmonic generation from an atomically thin semiconductor,” Nature Physics 13, 262–265 (2017).
+6 N. Yoshikawa, T. Tamaya, and K. Tanaka, “High-harmonic generation in graphene enhanced by elliptically polarized light excitation,” Science 356, 736–738 (2017).
+7 R. E. F. Silva, I. V. Blinov, A. N. Rubtsov, O. Smirnova, and
+M. Ivanov, “High-harmonic spectroscopy of ultrafast many-body
+dynamics in strongly correlated systems,” Nature Photonics 12,
+266–270 (2018).
+8 Y. Murakami, M. Eckstein, and P. Werner, “High-harmonic generation in mott insulators,” Physical Review Letters 121, 057405
+(2018).
+9 D. Bauer and K. K. Hansen, “High-harmonic generation in solids
+with and without topological edge states,” Physical Review Letters 120, 177401 (2018).
+10 D. R. Baykusheva, A. Chacón, J. Lu, T. P. Bailey, J. A. Sobota, H. Soifer, P. S. Kirchmann, C. Rotundu, C. Uher, T. F.
+Heinz, D. A. Reis, and S. Ghimire, “All-optical probe of threedimensional topological insulators based on high-harmonic generation by circularly polarized laser fields,” Nano Letters 21, 8970–
+8978 (2021).
+11 Y. S. You, D. A. Reis, and S. Ghimire, “Anisotropic highharmonic generation in bulk crystals,” Nature Physics 13, 345–
+349 (2017).
+12 A. A. Lanin, E. A. Stepanov, A. B. Fedotov, and A. M.
+Zheltikov, “Mapping the electron band structure by intraband
+high-harmonic generation in solids,” Optica 4, 516 (2017).
+13 T. T. Luu and H. J. Wörner, “Measurement of the berry curvature of solids using high-harmonic spectroscopy,” Nature Communications 9, 916 (2018).
+14 H. Lakhotia, H. Y. Kim, M. Zhan, S. Hu, S. Meng, and
+E. Goulielmakis, “Laser picoscopy of valence electrons in solids,”
+Nature 583, 55–59 (2020).
+
+11
+15 Y. S. You, E. Cunningham, D. A. Reis, and S. Ghimire, “Prob-
+
+ing periodic potential of crystals via strong-field re-scattering,”
+Journal of Physics B: Atomic, Molecular and Optical Physics 51,
+114002 (2018).
+16 E. Goulielmakis, M. Uiberacker, R. Kienberger, A. Baltuska,
+V. Yakovlev, A. Scrinzi, T. Westerwalbesloh, U. Kleineberg,
+U. Heinzmann, M. Drescher, and F. Krausz, “Direct measurement of light waves,” Science 305, 1267–1269 (2004).
+17 A. Wirth, M. T. Hassan, I. Grguraš, J. Gagnon, A. Moulet, T. T.
+Luu, S. Pabst, R. Santra, Z. A. Alahmed, A. M. Azzeer, and
+F. Krausz, “Synthesized light transients,” Science 334, 195–200
+(2011).
+18 M. T. Hassan, A. Wirth, I. Grguraš, A. Moulet, T. T. Luu,
+J. Gagnon, V. Pervak, and E. Goulielmakis, “Invited article: attosecond photonics: synthesis and control of light transients,”
+Review of Scientific Instruments 83, 111301 (2012).
+19 M. T. Hassan, T. T. Luu, A. Moulet, O. Raskazovskaya,
+P. Zhokhov, M. Garg, N. Karpowicz, A. M. Zheltikov, V. Pervak,
+F. Krausz, and E. Goulielmakis, “Optical attosecond pulses and
+tracking the nonlinear response of bound electrons,” Nature 530,
+66–70 (2016).
+20 J. N. Sweetser, D. N. Fittinghoff, and R. Trebino, “Transientgrating frequency-resolved optical gating,” Optics Letters 22,
+519–521 (1997).
+21 V. E. Nefedova, M. F. Ciappina, O. Finke, M. Albrecht, M. Kozlová, and J. Nejdl, “Efficiency control of high-order harmonic
+generation in gases using driving pulse spectral features,” Applied Physics Letters 113, 191104 (2018).
+22 P. A. Chevreuil, F. Brunner, S. Hrisafov, J. Pupeikis, C. R.
+Phillips, U. Keller, and L. Gallmann, “Water-window high harmonic generation with 0.8-µm and 2.2-µm OPCPAs at 100 kHz,”
+Optics Express 29, 32996–33008 (2021).
+23 T. Kita, T. Harada, N. Nakano, and H. Kuroda, “Mechanically ruled aberration-corrected concave gratings for a flat-field
+grazing-incidence spectrograph,” Applied Optics 22, 512–513
+(1983).
+24 T. Harada, K. Takahashi, H. Sakuma, and A. Osyczka, “Optimum design of a grazing-incidence flat-field spectrograph with
+a spherical varied-line-space grating,” Applied Optics 38, 2743–
+2748 (1999).
+25 A. Rosenfeld, M. Lorenz, R. Stoian, and D. Ashkenasi,
+“Ultrashort-laser-pulse damage threshold of transparent materials and the role of incubation,” Applied Physics A 69, S373–S376
+(1999).
+26 M. Lenzner, J. Kruger, W. Kautek, and F. Krausz, “Incubation
+of laser ablation in fused silica with 5-fs pulses,” Applied Physics
+
+A 69, 465–466 (1999).
+27 L. Smalakys, B. Momgaudis, R. Grigutis, S. Kičas, and A. Mel-
+
+ninkaitis, “Contrasted fatigue behavior of laser-induced damage
+mechanisms in single layer ZrO2 optical coating,” Optics Express
+27, 26088–26101 (2019).
+28 S. Möller, A. Andresen, C. Merschjann, B. Zimmermann,
+M. Prinz, and M. Imlau, “Insight to UV-induced formation of
+laser damage on LiB3 O5 optical surfaces during long-term sumfrequency generation,” Optics Express 15, 7351–7356 (2007).
+29 H. Hong, Q. Liu, L. Huang, and M. Gong, “Improvement and
+formation of UV-induced damage on LBO crystal surface during long-term high-power third-harmonic generation,” Optics Express 21, 7285–7293 (2013).
+30 G. Vampa, B. G. Ghamsari, S. Siadat Mousavi, T. J. Hammond,
+A. Olivieri, E. Lisicka-Skrek, A. Y. Naumov, D. M. Villeneuve,
+A. Staudte, P. Berini, and P. B. Corkum, “Plasmon-enhanced
+high-harmonic generation from silicon,” Nature Physics 13, 659–
+662 (2017).
+31 U. Huttner, M. Kira, and S. W. Koch, “Ultrahigh Off-Resonant
+Field Effects in Semiconductors,” Laser & Photonics Reviews 11,
+1700049 (2017).
+32 H. Liu, C. Guo, G. Vampa, J. L. Zhang, T. Sarmiento, M. Xiao,
+P. H. Bucksbaum, J. Vučkovič, S. Fan, and D. A. Reis, “Enhanced high-harmonic generation from an all-dielectric metasurface,” Nature Physics 14, 1006–1010 (2018).
+33 E. Goulielmakis, M. Schultze, M. Hofstetter, V. S. Yakovlev,
+J. Gagnon, M. Uiberacker, A. L. Aquila, E. M. Gullikson, D. T.
+Attwood, R. Kienberger, and F. Krausz, “Single-cycle nonlinear
+optics,” Science 320, 1614–1617 (2008).
+34 M. Schultze, A. Wirth, I. Grguras, M. Uiberacker, T. Uphues, A. J. Verhoef, J. Gagnon, M. Hofstetter, U. Kleineberg,
+E. Goulielmakis, and F. Krausz, “State-of-the-art attosecond
+metrology,” Journal of Electron Spectroscopy and Related Phenomena 184, 68–77 (2011).
+35 M. Hussain, H. Pires, W. Boutu, D. Franz, R. Nicolas, T. Imran,
+H. Merdji, M. Fajardo, and G. O. Williams, “Controlling the
+non-linear optical properties of MgO by tailoring the electronic
+structure,” Applied Physics B 126, 46 (2020).
+36 T. Heinrich, M. Taucer, O. Kfir, P. B. Corkum, A. Staudte,
+C. Ropers, and M. Sivis, “Chiral high-harmonic generation and
+spectroscopy on solid surfaces using polarization-tailored strong
+fields,” Nature Communications 12, 3723 (2021).
+37 A. Korobenko, S. Saha, A. T. K. Godfrey, M. Gertsvolf, A. Y.
+Naumov, D. M. Villeneuve, A. Boltasseva, V. M. Shalaev, and
+P. B. Corkum, “High-harmonic generation in metallic titanium
+nitride,” Nature Communications 12, 4981 (2021).
+
+

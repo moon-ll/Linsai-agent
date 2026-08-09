@@ -1,0 +1,1206 @@
+The interplay between high-harmonic generation and photoluminescence in ZnO:
+Anisotropic spectral properties of harmonic emission and the role of excitons
+
+Simon P. S. Jessen,1 Mark Mero,2 Marc J. J. Vrakking,2 Rosana M. Turtos,1 Peter Balling,1 and Peter J¨urgens2, ∗
+1Aarhus University, Department of Physics and Astronomy, Ny Munkegade 120, 8000 Aarhus C, Denmark
+2Max-Born-Institute for Nonlinear Optics and Short Pulse Spectroscopy,
+Max-Born-Strasse 2A, D-12489 Berlin, Germany
+(Dated: August 14, 2025)
+
+We investigate the nonlinear optical response of bulk ZnO under intense short-wave infrared exci-
+tation, focusing on the interplay between high-harmonic generation (HHG) and photoluminescence
+(PL). While HHG exhibits non-perturbative intensity scaling and a spectral blueshift consistent with
+plasma-induced refractive index changes, the PL signal shows a pronounced superlinear increase and
+a redshift, attributed to a combination of exciton–exciton scattering and phonon-assisted exciton
+recombination emission. A similar PL response under above-bandgap excitation supports its in-
+trinsic origin. Spectral analysis of the HHG emission reveals an intensity-driven transition in the
+characteristics of the ﬁfth harmonic, indicating a change in the underlying generation mechanism.
+These ﬁndings establish PL and spectral HHG analysis as complementary probes of strong-ﬁeld and
+many-body eﬀects in wide-bandgap semiconductors.
+
+I.
+
+INTRODUCTION
+
+Since its ﬁrst experimental demonstration [1, 2], high-
+harmonic generation (HHG) in solids has rapidly evolved
+into a distinct and expanding research ﬁeld. It has driven
+major advances in attosecond physics in condensed mat-
+ter systems [3], petahertz optoelectronics [4, 5], and ul-
+trafast photoconductive sampling [6, 7]. Over the past
+decade, numerous experimental and theoretical studies
+of HHG in bulk crystals and quantum materials have
+opened up new directions, including band-structure re-
+construction [8, 9], analysis of sub-cycle carrier dynam-
+ics [10], Floquet engineering [11], and probing of electron-
+hole coherence times [12].
+
+Among the materials extensively investigated for solid-
+state HHG, ZnO has emerged as a prototypical system
+due to its wide bandgap and strong nonlinear optical
+response. Several key studies have explored HHG in
+ZnO [13], employing various experimental conﬁgurations
+such as polarization-resolved [14], crystal-orientation-
+resolved [2, 15, 16], wavelength-dependent [16], and
+spatially-resolved measurements [17]. These static HHG
+experiments were later complemented by time-resolved
+studies that examined the inﬂuence of photocarrier dop-
+ing on the HHG yield and the spectral characteristics [18–
+20].
+
+Interestingly, many of these experiments have also re-
+ported a strong emission near 390 nm, commonly at-
+tributed to photoluminescence (PL) from radiative elec-
+tron–hole recombination or defect-assisted excitonic de-
+cay [14]. While often treated as a secondary eﬀect,
+this PL emission may carry complementary information
+about strong-ﬁeld carrier excitation and relaxation dy-
+namics. A few studies have started to explore this po-
+tential, using the PL signal as an indicator for excita-
+
+∗ juergens@mbi-berlin.de
+
+In
+tion strength or ionization probability [14, 21, 22].
+particular, the PL yield is increasingly employed in ﬁeld-
+resolved metrology as a nonlinear signal for the sampling
+of ultrashort mid-infrared and near-infrared laser pulses.
+However, a reliable and reproducible characterization re-
+quires a deeper understanding of the physical origin of
+this signal and its dependence on both laser and mate-
+rial parameters.
+
+In this work, we investigate the correlation between
+high-harmonic emission and the accompanying PL signal
+from bulk wurtzite-type ZnO crystals excited by intense,
+ultrashort short-wave infrared (SWIR) laser pulses.
+In
+addition to the strong-ﬁeld regime, we also explore the
+PL emission under above-bandgap excitation. We at-
+tribute the PL to radiative recombination of excitonic
+states, mediated by either phonon-assisted recombina-
+tion or exciton–exciton scattering, resulting in a lumi-
+nescence band that is considerably (i.e. 200 meV) red-
+shifted from the band edge of the material. Our results
+reveal clear diﬀerences in the intensity scaling and spec-
+tral characteristics of the coherent HHG emission and
+the incoherent PL signal. Together, these ﬁndings oﬀer
+new insight into strong-ﬁeld light–matter interaction in
+wide-bandgap semiconductors and the nonlinear optical
+response of ZnO under extreme excitation conditions.
+
+II. EXPERIMENTAL SETUP
+
+The experimental setup is illustrated in Fig. 1(a).
+A home-built, dual-beam optical-parametric chirped-
+pulse ampliﬁcation system, similar to that described in
+Ref. [23], was used to generate driving laser pulses at a
+wavelength of 1500 nm with a full-width half-maximum
+pulse duration of 50 fs. The beam was focused into the
+bulk of a 200 µm-thick single-crystalline wurtzite-type
+ZnO crystal with a (0001)-oriented surface using an oﬀ-
+axis parabolic mirror with a focal length of 25 mm. The
+
+5
+2
+0
+2
+
+g
+u
+A
+2
+1
+
+]
+s
+c
+i
+t
+p
+o
+.
+s
+c
+i
+s
+y
+h
+p
+[
+
+1
+v
+4
+6
+3
+9
+0
+.
+8
+0
+5
+2
+:
+v
+i
+X
+r
+a
+
+ 
+ 
+ 
+ 
+ 
+ 
+generated high-harmonic radiation and PL emission were
+spectrally analyzed using a commercial ﬁber-based spec-
+trometer (Avantes AvaSpec-HS1024x58/122TEC).
+
+The ZnO sample was mounted on a computer-
+controlled rotation stage, allowing precise adjustment of
+the relative angle θ between the incident linear laser
+polarization and the crystallographic c-axis of the sam-
+ple. This enabled systematic studies of the orientation-
+dependent emission characteristics.
+
+High-harmonic emission up to the seventh order of the
+excitation frequency was detected as shown in Fig. 1(b).
+In addition to the harmonic signals, a strong emission
+peak around 390 nm was observed, consistent with pre-
+vious reports [2, 14, 18]. Figure 1(b) presents repre-
+sentative spectra recorded at SWIR peak intensities of
+6.5 TW cm−2 [blue line in Fig. 1(b)] and 3.4 TW cm−2
+[orange line in Fig. 1(b)], clearly displaying the third,
+ﬁfth and seventh harmonic orders along with the PL
+emission. As discussed in detail in Ref. [23], we simul-
+taneously measured the transmission of the SWIR pump
+beam through the strongly excited ZnO sample.
+
+To complement the SWIR excitation measurements,
+we also investigated the PL response of ZnO under above-
+bandgap (6.05 eV) ultrafast (∼80 fs) optical excitation.
+In order to reveal ﬂuence-dependent variations in the PL
+eﬃciency arising from radiative and non-radiative recom-
+bination processes involving multiple emissive species,
+these measurements were performed using the z-scan lu-
+minescence method [24],
+in which the PL is recorded
+under constant excitation energy but varying excitation
+density, achieved by translating a lens that focuses the
+fourth harmonic of a Ti:sapphire laser onto the crys-
+tal. With a ﬁxed pulse energy of 42 nJ and variable
+beam width, peak ﬂuence levels between 0.01 mJ cm−2
+and 2 mJ cm−2 were accessed. This technique is designed
+to A detailed description of the speciﬁc z-scan setup used
+in this work can be found in Ref. [25].
+
+III. EXPERIMENTAL RESULTS
+
+Figure 2(a) shows the measured transmission of the
+SWIR pump laser beam as a function of excitation inten-
+sity, averaged over all crystal orientations and six consec-
+utive measurements. As in previous nonlinear transmis-
+sion studies [26, 27], the transmission remains constant at
+low intensities, then decreases nonlinearly and saturates
+near the threshold for irreversible material modiﬁcation.
+This reduction is attributed to absorption by the dense
+electron-hole plasma, with the onset of transmission loss
+marking the onset of strong-ﬁeld excitation.
+
+The inset
+
+in Fig. 2(a) shows the corresponding
+
+Keldysh-parameter γ, deﬁned as
+
+γ = ω0 (cid:18)
+
+m∗cǫ0n0Eg
+e2I
+
+(cid:19)
+
+1/2
+
+,
+
+(1)
+
+where ω0 is the central laser frequency, e the elemen-
+tary charge, m∗ = 0.24me the eﬀective electron mass,
+
+2
+
+a
+
+SWIR
+
+b
+
+θ
+
+Photodiode
+
+VIS/UV
+Spectr meter
+
+Sample
+
+L ns Dichroic
+
+Filter
+
+FIG. 1. Experimental setup and exemplary result. (a) Setup
+for the detection of high-harmonics and photoluminescence
+from ZnO. (b) Spectrum containing odd harmonics of the
+fundamental SWIR radiation up to the seventh order and the
+PL signal, at SWIR peak intensities of 6.5 TW cm−2 (blue)
+and 3.4 TW cm
+
+−2 (orange).
+
+c the speed of light in vacuum, n0 the linear refractive
+index, ǫ0 the vacuum permittivity, Eg the bandgap en-
+ergy, and I the peak laser intensity. A value of γ ≥ 1
+indicates multiphoton-dominated excitation, while γ < 1
+corresponds to a tunneling regime.
+
+Assuming that the electron-hole densities generated
+below the damage threshold are too low to induce sig-
+niﬁcant reﬂectivity changes, and that reﬂection remains
+negligible, the transmission measurements in Fig. 2(a)
+can be used to estimate the fraction of energy absorbed
+in the ZnO crystal. This calibration allows us to plot the
+PL yield near 390 nm as a function of absorbed SWIR
+energy [Fig. 2(b)], revealing a monotonic increase that
+is well-described by a second-order polynomial ﬁt (see
+purple line). As an additional estimate, we compute the
+peak carrier density by dividing the absorbed energy by
+the bandgap energy and assuming a cylindrical excitation
+volume, yielding densities on the order of 1 × 1020 cm−3.
+This value is used to compare the excitation conditions
+to those used in above-bandgap excitation experiments
+dscussed below.
+
+A comparable superlinear increase in PL yields is also
+observed in the interband z-scan luminescence measure-
+ments shown in Fig. 2(c). The peak ﬂuence is converted
+to an estimated excitation density (in units of electron-
+hole pairs per volume) using the absorption coeﬃcient
+of ZnO at 6 eV, taken as 4.2 × 105 cm−1 [28], and as-
+suming a reﬂectance of 0.1 [29]. Since the total optical
+excitation energy remains constant during the z-scan, an
+increasing or decreasing trend in the detected signal pre-
+dicts regimes of excitation density with a superlinear or
+sublinear intensity response, respectively.
+
+The resulting non-monotonic PL response is well cap-
+
+tured by a model that adds a second-order radiative term
+to the standard rate-equation formalism commonly used
+for self-activated scintillators and wide-bandgap semicon-
+ductors [24, 30, 31] [see purple line in Fig. 2(c)]. A de-
+tailed description of the numerical model is provided in
+Sec. IV.
+
+a
+
+b
+
+c
+
+FIG. 2. Experimentally determined intensity dependence of
+the SWIR-transmission and PL yield. (a) Transmission of the
+SWIR laser pulse through the ZnO crystal (averaged over all
+crystal orientations and six consecutive measurements) as a
+function of the SWIR peak intensity. The inset shows the
+corresponding value of the Keldysh parameter γ.
+(b) Ex-
+perimentally determined yield of the PL signal induced by
+SWIR laser excitation as a function of the absorbed energy
+extracted from (a) (bottom axis) and the SWIR peak inten-
+sity (top axis). (c) Experimentally measured PL yield as a
+function of excitation density under above-bandgap excita-
+tion. The excitation density is estimated using an absorption
+−1 [28] and a reﬂectance of
+coeﬃcient of ZnO of 4.2 × 105 cm
+0.1 [29].
+
+The measured signal strengths of the odd harmonics
+and the PL emission as a function of the SWIR peak
+
+3
+
+intensity are presented in Fig. 3(a). At moderate peak
+intensities (≤ 4 TW cm−2), all observed harmonic orders
+exhibit a strong nonlinear increase with increasing laser
+intensity. As the intensity approaches the damage thresh-
+old of the ZnO crystal (at ∼ 8 TW cm−2), the harmonic
+signal begins to saturate - a characteristic feature of non-
+perturbative HHG processes - consistent with previous
+ﬁndings in ZnO [2, 13] and other bulk crystals.
+
+In contrast, the intensity scaling of the PL emission fol-
+lows a diﬀerent trend, increasing nonlinearly across the
+entire intensity range, with no clear saturation observed.
+The inset of Fig. 3(a) compares the PL yield to ﬁfth- and
+sixth-order power law dependencies, showing that in the
+intermediate intensity range (4 TW cm−2 to 5 TW cm−2),
+the signal follows an I 6 scaling before the nonlinearity de-
+creases near the damage threshold. Note that, in contrast
+to Fig. 2(b), where the PL signal is shown as a function
+of absorbed energy to enable comparison to carrier den-
+sities extracted under above-bandgap excitation, here we
+focus on the dependence of the PL yield on the incident
+SWIR intensity to directly compare its scaling behavior
+to that of the high-harmonic signals.
+
+While the intensity scaling of signal yields provides in-
+sight into the underlying nonlinear processes, particularly
+the transition from perturbative to non-perturbative
+regimes, variations in the spectral properties are often
+overlooked in HHG studies, despite their potential to
+reveal important information about the frequency con-
+version mechanisms. Figure 3(b) shows the shift in the
+central wavelengths of the observed odd harmonics and
+the PL emission as a function of the SWIR peak inten-
+sity. The central wavelength of each spectral feature is
+determined from the spectral center of mass, which oﬀers
+greater robustness against asymmetric line shapes com-
+pared to ﬁtting with symmetric functions such as Gaus-
+sians or Lorentzians. The plotted values represent the
+deviation of each central wavelength from its mean value
+across all excitation intensities.
+
+All harmonic orders exhibit a clear blueshift with in-
+creasing intensity, whereas the PL emission shows a red-
+shift of up to 4 nm at the highest intensities. Notably, the
+third and ﬁfth harmonics display comparable scaling of
+the blueshift, while the seventh harmonic shows a steeper
+initial shift followed by saturation.
+
+To further investigate the inﬂuence of band structure
+and crystal orientation, we measured the dependence of
+both HHG and PL signals on the angle θ between the lin-
+ear laser polarization and the principal crystallographic
+axis of the ZnO crystal. Figures 4(a) and (b) show
+the intensity dependence of the odd harmonics and PL
+emission as a function of θ at SWIR peak intensities of
+2.8 TW cm−2 and 4.7 TW cm−2, respectively. The har-
+monic signals exhibit a pronounced fourfold symmetry,
+while the PL response remains isotropic, consistent with
+previous observations [2]. At low intensity in Fig. 4(a)
+the PL signal is in the range of the detection limit, hence
+no pronounced, reproducible angular dependence can be
+extracted. The observed π-periodicity in the harmonic
+
+a
+
+b
+
+IV. DISCUSSION
+
+4
+
+FIG. 3. Experimental investigation of the observed high-
+harmonic and PL emission from a bulk ZnO crystal. (a) De-
+pendence of the harmonic signal yields and the PL signal on
+the excitation intensity of the SWIR pump laser pulse. The
+data have been vertically oﬀset for clarity by 0.33 for H5, 0.66
+for H7, and 1.0 for the PL signal. (b) Variation of the central
+wavelength of the observed signals as a function of the SWIR
+pump laser intensity.
+
+yields agrees with earlier experimental and theoretical
+studies [2, 15].
+
+Figures 4(c) and (d) present the angular dependence
+of the central wavelength of the harmonics and PL emis-
+sion. At a moderate SWIR intensity of 2.8 TW cm−2, the
+third and ﬁfth harmonics exhibit two distinct maxima in
+their wavelength shifts, while the seventh harmonic and
+PL emission show no signiﬁcant angular dependence. At
+higher intensity (4.7 TW cm−2), only the third harmonic
+retains an anisotropic spectral response with increased
+amplitude, whereas the ﬁfth harmonic becomes nearly
+isotropic, similar to the seventh harmonic and the PL
+signal, whose apparent invariance is limited by the spec-
+trometer resolution of 0.26 nm.
+
+a
+
+c
+
+b
+
+d
+
+FIG. 4. Orientation dependent measurements of HHG and
+PL in ZnO. (a). Angular dependence of the signal yields at a
+−2. (b). Same as in (a) at
+SWIR peak intensity of 2.8 TW cm
+−2. (c) Variation of the central
+a peak intensity of 4.7 TW cm
+wavelength as a function of the orientation angle θ at a SWIR
+peak intensity of 2.8 TW cm−2. (d) Same as in (c) at a peak
+intensity of 4.7 TW cm
+
+−2.
+
+To elucidate the microscopic origin of the PL signal ob-
+served near 390 nm, we revisit its assignment in the con-
+text of strong-ﬁeld excitation in ZnO. While this emission
+has often been labeled as ”bandgap ﬂuorescence” in the
+solid-state HHG literature, its spectral position and non-
+linear excitation behavior suggest a more speciﬁc mech-
+anism. At room temperature, direct free exciton recom-
+bination in ZnO is expected to occur near 375 nm, based
+on a bandgap of 3.37 eV and an exciton binding energy
+of ∼ 60 meV [32, 33]. The observed emission, however,
+is consistently redshifted by ≥ 15 nm, which excludes di-
+rect band-to-band or free exciton recombination as the
+dominant origin. However, as previously reported [34],
+the phonon replicas of free exciton emission can still con-
+tribute to the observed spectra.
+
+Another exciton-based mechanism that would ﬁt the
+observed PL spectra is that of collisional exciton recom-
+bination, also known as P-band luminescence [24, 34].
+In this process, two excitons undergo inelastic scatter-
+ing, with one recombining radiatively while the other is
+promoted to a higher energy state. The emitted pho-
+ton is redshifted relative to the free exciton, consistent
+with the observed spectral position. This two-exciton
+process naturally gives rise to a quadratic dependence
+of the PL yield on the carrier density. While originally
+identiﬁed at cryogenic temperatures, collisional exciton
+emission has also been observed in high-quality ZnO ﬁlms
+at room temperature in the absence of quantum conﬁne-
+ment [35]. These ﬁndings establish the P-band as an in-
+trinsic feature of ZnO’s excitonic landscape, particularly
+at intermediate excitation densities where many-body in-
+teractions are prominent but exciton ionization is not yet
+dominant.
+
+Our experimental data provide strong support for this
+assignment. Under both SWIR and above-bandgap ex-
+citation, the PL yield increases superlinearly with ab-
+sorbed energy / carrier density [see Figs. 2(b,c)]. As
+such behavior deviates signiﬁcantly from the linear or
+sublinear scaling typical of defect-related luminescence
+Importantly,
+or electron-hole radiative recombination.
+time-resolved studies have shown that exciton forma-
+tion and carrier thermalization in ZnO occur on sub-
+picosecond timescales [36–38], allowing suﬃcient time
+for exciton-exciton scattering even under ultrafast exci-
+tation. Taken together, the observed spectral redshift,
+the superlinear (quadratic) scaling, and the consistency
+across excitation regimes strongly support the assign-
+ment of the PL to phonon-mediated excitonic recombina-
+tion and room-temperature collisional exciton emission.
+This interpretation is reinforced by further numerical
+analysis of the interband z-scan luminescence measure-
+ments, which show a non-monotonic PL response as a
+function of excitation density [Fig. 2(c)]. Such a behav-
+ior is unusual among scintillators, which exhibit quench-
+ing at high ﬂuences due to exciton-exciton annihilation
+or Meitner-Auger recombination [24, 30, 31, 39]. The
+
+non-monotonic response of the PL signal to increasing
+excitation densities is evidence of a radiative term with a
+higher order dependence on excitation density than the
+dominant quenching term.
+
+To describe this behavior quantitatively, we apply a
+phenomenological kinetic model that includes both ra-
+diative and non-radiative channels up to second order
+and that has been successfully applied previously in
+Refs. [24, 30, 31, 39]:
+
+dn
+dt
+
+= −(R1 + Q1)n − (R2 + Q2)n2
+
+(2)
+
+where n is the exciton density and R1, R2 and Q1, Q2
+are ﬁrst- and second-order radiative and quenching co-
+eﬃcients, respectively. Due to the fast formation of ex-
+citons, we neglect an explicit generation term and as-
+sume an initial exciton population proportional to the
+absorbed energy. The ﬁt shown in Fig. 2(c) reproduces
+the data well. At low excitation densities, the PL yield
+rises due to the second-order radiative term, R2n2, as-
+sociated with exciton-exciton scattering. At higher den-
+sities, the second-order quenching term, Q2n2, becomes
+signiﬁcant, leading to saturation and eventual reduction
+in PL. Notably, this saturation is absent under SWIR ex-
+citation, likely because the corresponding excitation den-
+sities do not reach the quenching regime here seen above
+excitation densities of 1 × 1020 cm−3.
+
+The second-order radiative term in the model provides
+a natural link to the collisional exciton emission mecha-
+nism discussed above. Inelastic exciton-exciton scatter-
+ing populates emissive states within the P-band, giving
+rise to the observed quadratic scaling [34, 35] at high in-
+tensities. Thus, the same microscopic process explains
+both the ﬂuence-dependent PL yield and its emission
+characteristics across diﬀerent excitation regimes.
+
+It is important to note the limitations of the seond-
+order radiative model presented in Fig. 2(c). This
+model, originally developed for stationary excitons in
+wide-bandgap scintillators, does not account for exciton
+mobility in ZnO or the complex dynamics of exciton-
+exciton interactions under our excitation conditions. As
+such, the extracted radiative and quenching rates should
+be interpreted with caution and not regarded as quantita-
+tively accurate. Nonetheless, the model illustrates that
+the inclusion of a second-order radiative recombination
+channel is suﬃcient to capture the observed nonlinear be-
+havior qualitatively. More detailed studies are required
+to develop a physically comprehensive model for the de-
+cay kinetics in ZnO following above-bandgap excitation.
+The intensity scaling of the harmonics yields follows
+a strongly nonlinear, non-perturbative dependence on
+the peak electric ﬁeld of the SWIR driving laser, con-
+sistent with the nature of HHG. In contrast, the PL sig-
+nal exhibits a diﬀerent kind of nonlinearity: it increases
+monotonically across the full range of accessible SWIR
+intensities, following a smooth supralinear trend. Recent
+studies have suggested that PL emission under strong-
+ﬁeld excitation can follow a power-law dependence of
+
+5
+
+the form I q where q reﬂects the eﬀective multiphoton
+order of the underlying excitation process [21, 22].
+In
+our measurements, we ﬁnd that a sixth-order power law
+provides the best ﬁt to the experimental PL yield, as
+shown in Fig. 3(a). Considering the fundamental photon
+energy of 0.83 eV (corresponding to a central wavelength
+of 1500 nm) and the bandgap of ZnO (3.37 eV), a ﬁve-
+photon absorption process (q = 5) would be the minimal
+requirement for interband excitation. However, in the
+intensity regime explored here, the optical ﬁeld is suﬃ-
+ciently strong to induce notable modiﬁcations of the band
+structure via the dynamic Stark eﬀect. This eﬀect leads
+to a ﬁeld-induced increase of the eﬀective bandgap, which
+can e.g. be expressed in terms of the Keldysh parameter
+γ [see Eg. 1] as [40]
+
+1 +
+
+Eg = Eg (cid:18)
+e
+
+1
+2γ2 (cid:19)
+
+,
+
+(3)
+
+which shifts the excitation threshold to higher photon
+orders and thereby modiﬁes the apparent scaling expo-
+nent. Including this Stark-induced bandgap modiﬁcation
+yields a corrected multiphoton order of q = 6 across the
+relevant intensity range. Thus, the observed PL scal-
+ing reﬂects not only the intrinsic multiphoton excitation
+pathway, but also the impact of transient band structure
+dressing by the strong driving ﬁeld.
+
+Spectral shifts, as shown in Fig. 3(b), can arise from
+several mechanisms, including dynamic changes in the
+linear and nonlinear refractive index due to the opti-
+cal Kerr eﬀect (e.g., self-phase and cross-phase modu-
+lation) or from carrier excitation. Additionally, strong-
+ﬁeld-induced modiﬁcations of the electronic band struc-
+ture can alter the refractive index and inﬂuence the accu-
+mulated phase during propagation, leading to frequency
+shifts.
+
+The observed blueshift of the odd harmonics is com-
+monly attributed to excitation-induced refractive index
+changes. As an electron-hole plasma forms, the refrac-
+tive index decreases, resulting in increased phase accu-
+mulation and a corresponding shift toward higher photon
+energies [41–43]. This mechanism provides a consistent
+explanation for the general intensity dependence of the
+wavelength shifts observed in the HHG spectra.
+
+In contrast, the PL emission exhibits a fundamen-
+tally diﬀerent behavior.
+Its nearly linear redshift with
+increasing SWIR laser intensity suggests that neither
+plasma-induced refractive index changes nor coherent,
+ﬁeld-driven eﬀects such as Kerr-type optical nonlineari-
+ties or AC stark shifts are the dominant contributors. In-
+stead, the PL shift reﬂects an intrinsic material response,
+pointing to a distinct physical origin that persists until
+the time of the PL emission.
+
+Under the assignment of the PL signal to excitonic
+emission, the central wavelength near 390 nm serves as
+a direct probe of the exciton binding energy. The ob-
+served redshift, which progresses with increasing exci-
+tation density, is indicative of bandgap renormalization
+driven by carrier-carrier interaction. Similar behavior
+
+has been reported in ZnO [33, 44, 45], as well as in a
+variety of other systems, including conventional semicon-
+ductors, transition-metal dichalcogenides, and perovskite
+quantum dots [46–48]. The measured redshift of ∼4 nm,
+corresponding to an energy shift of 32 meV, is relatively
+large compared to values reported in continuous-wave
+or weak excitation regimes but remains consistent with
+strong excitation by ultrashort laser pulses near the dam-
+age threshold.
+
+The excitonic interpretation for the PL emission
+also explains the isotropic nature of the PL emission,
+in contrast to the pronounced anisotropy observed in
+both the signal yield and central wavelength of the
+high-harmonic emission.
+
+To further analyze the observed transition in angu-
+lar dependence of the central emission wavelength shown
+in Fig. 4(c,d), Fig. 5(a) compares the wavelength shifts
+of the third and ﬁfth harmonics as a function of θ at
+two diﬀerent SWIR peak intensities (I1 = 2.8 TW cm−2
+and I2 = 4.7 TW cm−2). While the anisotropic response
+of the third harmonic remains unchanged, the ﬁfth har-
+monic exhibits a marked evolution: its modulation am-
+plitude decreases, and the positions of its maxima shift
+by approximately 20◦.
+
+The angular dependence ∆λ(θ) was ﬁtted at each
+
+SWIR intensity using
+
+∆λ(θ) = ∆λ0 × sin8[2(θ − φλ)]
+
+(4)
+
+to extract the amplitude ∆λ0 and phase φλ of the oscilla-
+tory spectral shift. The ﬁt results, presented in Fig. 5(b),
+conﬁrm a constant phase for the third harmonic, con-
+sistent with the ﬁxed peak positions in Fig. 5(a). The
+power of 8 in Eq. 4 is chosen to obtain the best ﬁt to
+the experimental data. In contrast, the phase of the ﬁfth
+harmonic remains stable up to a SWIR peak intensity of
+approximately 3.5 TW cm−2, beyond which it undergoes
+an abrupt shift accompanied by a pronounced reduction
+in modulation amplitude.
+
+This behavior can be analyzed in the context of the
+dominant HHG generation mechanism. Given that the
+seventh harmonic is well above the ZnO bandgpap, it
+can be attributed to a non-perturbative, recollision-based
+mechanism, consistent with previous works [49, 50]. At
+low intensities, third harmonic generation is primarily
+driven by the Kerr-type response of bound electrons.
+The observed transition in the ﬁfth harmonic suggests
+a change in its generation mechanism - from a perturba-
+tive process (likely cascaded χ(3)-based four-wave-mixing
+[51]) to a non-perturbative regime. Due to the diﬀerent
+dependence of these mechanisms on the intrinsic mate-
+rial properties, this transition alters the orientation de-
+pendence of the emission wavelength.
+
+The transition from perturbative to non-perturbative
+HHG can also be linked to the nonlinear decrease in
+transmission observed in Fig. 2(a). Similar nonlinear
+transmission behavior has been reported in prior stud-
+ies [23, 26, 27] where a gradual transmission drop signals
+
+6
+
+a
+
+b
+
+FIG. 5. Analysis of orientation-dependent wavelength shifts
+of the third and the ﬁfth harmonic. (a). ∆λ of the third and
+ﬁfth harmonic together with numerical ﬁts according to Eq. 4
+as a function of the crystal orientation for two diﬀerent SWIR
+−2).
+peak intensities (I1 = 2.8 TW cm
+(b) Extracted amplitudes and phases of the third and ﬁfth
+harmonic wavelength shifts as a function of peak intensity.
+
+−2 and I2 = 4.7 TW cm
+
+the onset of strong-ﬁeld excitation. A rapid variation
+of φλ(H5) sets in at 3.5 TW cm−2, corresponding to the
+intensity range where strong-ﬁeld excitation becomes sig-
+niﬁcant, as shown in Fig. 2(a).
+
+V. CONCLUSION
+
+We have investigated the interplay between HHG and
+PL in bulk ZnO driven by intense SWIR and above-
+bandgap excitation. The HHG signal displays the ex-
+pected non-perturbative intensity scaling and a pro-
+nounced blueshift with increasing excitation strength, at-
+tributed to excitation-induced refractive index changes.
+In contrast, the accompanying PL emission exhibits
+a redshift and a superlinear dependence on carrier
+density, consistent with phonon-assisted recombination
+and exciton-exciton scattering (collisional luminescence),
+rather than band-to-band or defect-mediated recombina-
+tion.
+
+Our results demonstrate that the PL signal, although
+commonly used as a representative for excitation den-
+sity in solid-state HHG experiments, is not directly pro-
+portional to the density of excited carriers.
+Instead,
+when a substantial carrier density is excited, it follows a
+quadratic scaling characteristic of a two-exciton recom-
+bination process until a saturation and eventual decrease
+is observed due to exciton-exciton annihilation. While
+
+7
+
+the overall power-law dependence of the PL yield on the
+intensity agrees with earlier studies, our ﬁndings reﬁne
+its interpretation and emphasize the role of many-body
+excitonic dynamics.
+
+A key result is the intensity-induced change in the an-
+gular dependence of the ﬁfth harmonic’s emission wave-
+length. At moderate intensities, its anisotropic spectral
+shift suggests a perturbative, symmetry-sensitive gener-
+ation pathway. Beyond a critical intensity, this response
+abruptly transitions to an isotropic regime with sup-
+pressed modulation amplitude and shifted phase, mark-
+ing a change in the underlying generation mechanism.
+We interpret this transition as a shift from cascaded
+four-wave mixing to a non-perturbative recollision-type
+HHG process. This provides a new spectroscopic handle
+
+to identify and distinguish competing microscopic HHG
+mechanisms through their spectral signatures.
+
+Our ﬁndings establish a comprehensive picture of co-
+herent and incoherent light emission in a prototypical
+wide-bandgap semiconductor under strong-ﬁeld excita-
+tion. They demonstrate the value of analyzing not only
+signal yields but also spectral and angular characteristics
+to access microscopic generation pathways. Further stud-
+ies may leverage these observables to disentangle nonlin-
+ear processes in more complex materials and to bench-
+mark theoretical models of strong-ﬁeld dynamics. More-
+over, the identiﬁcation of exciton-exciton scattering as
+the origin of the PL signal at high carrier concentration
+opens opportunities for exploiting this process in ultra-
+fast luminescence-based ﬁeld metrology and for studying
+carrier correlations in the high-density regime.
+
+[1] A. H. Chin, O. G. Calder´on, and J. Kono, Ex-
+treme midinfrared nonlinear optics in semiconductors,
+Physical Review Letters 86, 3292 (2001).
+
+[2] S. Ghimire, A. D. DiChiara, E. Sistrunk, P. Agos-
+tini, L. F. DiMauro, and D. A. Reis, Observation
+of high-order harmonic generation in a bulk crystal,
+Nature Physics 7, 138 (2011).
+
+[3] J. Li, J. Lu, A. Chew, S. Han, J. Li, Y. Wu, H. Wang,
+S. Ghimire, and Z. Chang, Attosecond science based
+on high harmonic generation from gases and solids,
+Nature Communications 11, 2748 (2020).
+
+[4] M. Ossiander, K. Golyari, K. Scharl, L. Lehnert,
+F. Siegrist, J. B¨urger, D. Zimin, J. Gessner, M. Weid-
+man, I. Floss, et al., The speed limit of optoelectronics,
+Nature Communications 13, 1620 (2022).
+
+[5] C. Heide, P. D. Keathley, and M. F. Kling, Petahertz
+electronics, Nature Reviews Physics 6, 648 (2024).
+[6] D. Zimin, M. Weidman, J. Sch¨otz, M. F. Kling,
+V. S. Yakovlev, F. Krausz, and N. Karpowicz,
+Petahertz-scale nonlinear photoconductive sampling in
+air, Optica 8, 586 (2021).
+
+[7] S. Sederberg, D. Zimin, S. Keiber, F. Siegrist,
+M. S. Wismer, V. S. Yakovlev, I. Floss, C. Lemell,
+al., Attosec-
+J. Burgd¨orfer, M.
+solids,
+ond
+Nature Communications 11, 430 (2020).
+
+ﬁeld measurement
+
+optoelectronic
+
+Schultze,
+
+in
+
+et
+
+[8] T. T. Luu, M. Garg, S. Y. Kruchinin, A. Moulet, M. T.
+Hassan, and E. Goulielmakis, Extreme ultraviolet high-
+harmonic spectroscopy of solids, Nature 521, 498 (2015).
+[9] A. Lanin, E. Stepanov, A. Fedotov, and A. Zheltikov,
+Mapping the electron band structure by intraband high-
+harmonic generation in solids, Optica 4, 516 (2017).
+
+[10] B. Zaks, R.-B. Liu,
+
+and M. S. Sherwin, Ex-
+perimental observation of electron–hole recollisions,
+Nature 483, 580 (2012).
+
+[11] K. Uchida and K. Tanaka, High harmonic Mach–Zehnder
+interferometer for probing sub-laser-cycle electron dy-
+namics in solids, Optica 11, 1130 (2024).
+
+[12] C. Heide, Y. Kobayashi, A. C. Johnson, F. Liu, T. F.
+Heinz, D. A. Reis, and S. Ghimire, Probing electron-hole
+coherence in strongly driven 2D materials using high-
+harmonic generation, Optica 9, 512 (2022).
+
+[13] S. Gholam-Mirzaei,
+
+J. E. Beetar, A. Chac´on,
+and M. Chini, High-harmonic generation in ZnO
+driven
+pulses,
+JOSA B 35, A27 (2018).
+
+self-compressed mid-infrared
+
+by
+
+[14] R. Hollinger, P. Herrmann, V. Korolev, M. Zapf,
+V. Shumakova, R. R¨oder, I. Uschmann, A. Pugˇzlys,
+A. Baltuˇska, M. Z¨urch, et al., Polarization dependent ex-
+citation and high harmonic generation from intense mid-
+IR laser pulses in ZnO, Nanomaterials 11, 4 (2020).
+[15] S. Jiang, S. Gholam-Mirzaei, E. Crites, J. E. Beetar,
+M. Singh, R. Lu, M. Chini, and C. Lin, Crystal sym-
+metry and polarization of high-order harmonics in ZnO,
+Journal of Physics B: Atomic, Molecular and Optical Physics 52, 225601
+
+[16] S. Gholam-Mirzaei, J. Beetar, and M. Chini, High har-
+monic generation in ZnO with a high-power mid-IR OPA,
+Applied Physics Letters 110, 10.1063/1.4975362 (2017).
+[17] Li, Wenkai and Liu, Zhe and Shao, Beijie and Qian,
+Junyu and Li, Yanyan and Peng, Yujie and Leng, Yuxin,
+Angle-resolved high-order harmonics in wurtzite-type
+ZnO, Journal of Applied Physics 132, 10.1063/5.0098582
+(2022).
+
+[18] Z. Wang, H. Park, Y. H. Lai, J. Xu, C. I. Blaga,
+F. Yang, P. Agostini, and L. F. DiMauro, The
+roles of photo-carrier doping and driving wavelength
+in high harmonic generation from a semiconductor,
+Nature Communications 8, 1 (2017).
+
+[19] S. Xu, H. Zhang,
+
+J. Yu, Y. Han, Z. Wang,
+and J. Hu, Ultrafast modulation of a high har-
+crystal,
+monic generation in a bulk ZnO single
+Optics Express 30, 41350 (2022).
+
+[20] Z. Nie, K. Murzyn, L. Guery, T. J. van den
+Hooven, and P. M. Kraus, Ultrafast Permittivity En-
+gineering Enables Broadband Enhancement and Spa-
+tial Emission Control of Harmonic Generation in ZnO,
+ACS Photonics 11, 5084 (2024).
+
+[21] Y. Liu, S. Gholam-Mirzaei, J. E. Beetar, J. Nesper,
+A. Yousif, M. Nrisimhamurty, and M. Chini, All-optical
+sampling of few-cycle infrared pulses using tunneling in
+a solid, Photonics Research 9, 929 (2021).
+
+[22] T.-C. Truong, Y. Liu, D. Khatri, Y. Zhang, B. Shim,
+and M. Chini, Scanless laser waveform measurement in
+the near-infrared, APL Photonics 10, 10.1063/5.0239294
+
+[29] Y. Benkrima,
+
+nache,
+optical
+Digest Journal of Nanomaterials and Biostructures 18, 11–19 (2023).
+
+S. Benhamida,
+of
+study
+in wurtzite
+zno
+
+and D. Belfen-
+and
+phase,
+
+Theoretical
+properties
+
+structural
+
+of
+
+(2025).
+
+[23] P. Juergens, S. D. Roscam Abbing, M. Mero, C. L. Gar-
+cia, G. G. Brown, M. J. Vrakking, A. Mermillod-Blondin,
+P. M. Kraus, and A. Husakou, Linking High-Harmonic
+Generation and Strong-Field Ionization in Bulk Crystals,
+ACS Photonics 11, 247 (2024).
+
+[24] J. Q. Grim, K. B. Ucer, A. Burger, P. Bhattacharya,
+E. Tupitsyn, E. Rowe, V. M. Buliga, L. Treﬁlova, A. Gek-
+tin, G. A. Bizarri, W. W. Moses, and R. T. Williams,
+Nonlinear quenching of densely excited states in wide-
+gap solids, Phys. Rev. B 87, 125117 (2013).
+
+[25] S. Jessen, A. Di Giacomo, I. Moreels, B. Julsgaard, and
+R. M. Turtos, Nonlinear quenching of excitonic emission
+from nanoplatelet ﬁlms at high excitation densities, Sci-
+entiﬁc Reports 15, 10.1038/s41598-025-04572-6 (2025).
+S. Leyder, P. Delaporte, W. Ma-
+rine, M. Sentis, and O. Ut´eza, Long-wavelength
+multiphoton
+solids,
+ionization
+Physical Review B 88, 195135 (2013).
+
+[26] D. Grojo,
+
+band-gap
+
+inside
+
+[27] P. S. Sneftrup, P. Juergens, V. D. Michele, J. R. Andrade,
+M. J. Vrakking, P. Balling, and A. Mermillod-Blondin,
+Probing nonlinear excitation conditions: photolumines-
+cence and nonlinear absorption studies in laser-irradiated
+dielectrics, Applied Physics A 130, 175 (2024).
+
+[28] G. Heiland, E. Mollwo, and F. St¨ockmann, Electronic
+processes in zinc oxide (Academic Press, 1959) pp. 191–
+323.
+
+[30] M. Kirm, V. Nagirnyi, E. Feldbach, M. De Grazia,
+B. Carr´e, H. Merdji, S. Guizard, G. Geoﬀroy, J. Gaudin,
+N. Fedorov, P. Martin, A. Vasil’ev, and A. Bel-
+sky, Exciton-exciton interactions in cdwo4 irradiated
+by intense femtosecond vacuum ultraviolet pulses,
+Physical Review B 79, 233103 (2009).
+
+[31] D. Spassky, A. Vasil’ev, A. Belsky, N. Fedorov, P. Mar-
+tin, S. Markov, O. Buzanov, N. Kozlova, and V. Shlegel,
+Excitation density eﬀects in luminescence properties of
+CaMoO4 and ZnMoO4, Optical Materials 90, 7 (2019).
+[32] ¨U. ¨Ozg¨ur, Y. I. Alivov, C. Liu, A. Teke, M. A.
+Reshchikov, S. Do˘gan, V. C. S. J. Avrutin, S.-J. Cho,
+and H. Morko¸c, A comprehensive review of ZnO ma-
+terials and devices, Journal of Applied Physics 98,
+10.1063/1.1992666 (2005).
+
+[33] Y. I. Alivov, E. Kalinina, A. Cherenkov, D. C. Look,
+B. Ataev, A. Omaev, M. Chukichev, and D. Bagnall,
+Fabrication and characterization of n-ZnO/p-AlGaN het-
+erojunction light-emitting diodes on 6H-SiC substrates,
+Applied Physics Letters 83, 4719 (2003).
+
+[34] C. F. Klingshirn, Semiconductor optics (Springer Science
+
+& Business Media, 2012).
+
+[35] Y. Chen, N. T. Tuan, Y. Segawa, H.-j. Ko, S.-
+k. Hong, and T. Yao, Stimulated emission and
+optical gain in zno epilayers grown by plasma-
+assisted molecular-beam epitaxy
+buﬀers,
+Applied Physics Letters 78, 1469 (2001).
+
+with
+
+[36] J. B. Baxter and C. A. Schmuttenmaer, Conduc-
+tivity of ZnO Nanowires, Nanoparticles, and Thin
+Films Using Time-Resolved Terahertz Spectroscopy,
+The Journal of Physical Chemistry B 110, 25229 (2006),
+pMID: 17165967.
+
+8
+
+[37] J.-C.
+
+Deinert,
+C. Richter, M. Wolf,
+fast
+Phys. Rev. Lett. 113, 057602 (2014).
+
+D. Wegkamp,
+J.
+
+exciton formation at
+
+and
+
+M. Meyer,
+St¨ahler, Ultra-
+surface,
+
+the ZnO(1010)
+
+[38] C. J. Milne, N. Nagornova, T. Pope, H.-Y. Chen,
+T. Rossi, J. Szlachetko, W. Gawelda, A. Britz, T. B.
+van Driel, L. Sala, S. Ebner, T. Katayama, S. H.
+Southworth, G. Doumy, A. M. March, C. S. Lehmann,
+M. Mucke, D. Iablonskyi, Y. Kumagai, G. Knopp, K. Mo-
+tomura, T. Togashi, S. Owada, M. Yabashi, M. M.
+Nielsen, M. Pajek, K. Ueda, R. Abela, T. J. Pen-
+fold, and M. Chergui, Disentangling the evolution of
+electrons and holes in photoexcited ZnO nanoparticles,
+Structural Dynamics 10, 064501 (2023).
+
+[39] K. Wei, D. Hei, Q. Xu, J. Liu, Q. Guo, X. Weng,
+X. Tan, and L. Sheng, Photoluminescence nonlinear-
+ity and picosecond transient absorption in an LYSO:Ce
+scintillator excited by a 266 nm ultraviolet
+laser,
+RSC Adv. 11, 17020 (2021).
+
+[40] O. Sergaeva, V. Gruzdev, D. Austin, and E. Chowd-
+hury, Ultrafast excitation of conduction-band electrons
+in band-
+by high-intensity ultrashort
+gap solids: Vinogradov equation versus Drude model,
+Journal of the Optical Society of America B 35, 2895 (2018).
+
+laser pulses
+
+[41] A. J. Verhoef, A. Mitrofanov, A. Zheltikov, and
+A. Baltuˇska, Plasma-blueshift spectral shear interferome-
+try for characterization of ultimately short optical pulses,
+Optics Letters 34, 82 (2008).
+
+J¨urgens,
+
+[42] M. L. van der Geest, J. J. de Boer, K. Murzyn,
+and P. M. Kraus,
+an
+spectroscopy
+perovskite,
+
+P.
+Transient
+inorganic–organic
+The Journal of Physical Chemistry Letters 14, 10810 (2023).
+
+high-harmonic
+lead
+
+B. Ehrler,
+
+halide
+
+in
+
+[43] L.-M. Koll, S. V. B. Jensen, P. J. van Essen, B. de Keijzer,
+E. Olsson, J. Cottom, T. Witting, A. Husakou, M. J. J.
+Vrakking, L. B. Madsen, P. M. Kraus, and P. J¨urgens,
+Extreme ultraviolet high-harmonic interferometry of excitation-induced
+(2025), arXiv:2502.20564 [physics.optics].
+
+[44] D. Reynolds, D. C. Look, and B. Jogai, Combined
+eﬀects of screening and band gap renormalization on
+the energy of optical transitions in ZnO and GaN,
+Journal of Applied Physics 88, 5760 (2000).
+
+[45] J. Dai, C. Xu, T. Nakamura, Y. Wang, J. Li,
+and Y. Lin, Electron–hole plasma induced band
+gap
+cavities,
+Optics Express 22, 28831 (2014).
+
+in ZnO microlaser
+
+renormalization
+
+[46] B. Ziaja, N. Medvedev, V. Tkachenko, T. Mal-
+tezopoulos, and W. Wurth, Time-resolved observa-
+tion of band-gap shrinking and electron-lattice ther-
+malization within X-ray excited gallium arsenide,
+Scientiﬁc reports 5, 18068 (2015).
+
+[47] F. Liu, M. E. Ziﬀer, K. R. Hansen, J. Wang,
+and X. Zhu, Direct determination of band-gap renor-
+malization in the photoexcited monolayer MoS2,
+Physical Review Letters 122, 246803 (2019).
+
+[48] Y. Ren, Z. Huang, and Y. Wang, Dynamic and giant
+bandgap renormalization dictates the transient optical
+response in perovskite quantum dots, Applied Physics
+Letters 121, 10.1063/5.0131286 (2022).
+
+[49] G. Vampa, C. McDonald, G. Orlando, D. Klug,
+anal-
+solids,
+
+P. Corkum,
+ysis
+Physical Review Letters 113, 073901 (2014).
+and M. B. Gaarde,
+
+and T. Brabec, Theoretical
+
+high-harmonic
+
+[50] L. Yue
+
+generation
+
+Imperfect
+
+recol-
+
+in
+
+of
+
+lisions
+high-harmonic
+Physical Review Letters 124, 153204 (2020).
+
+generation
+
+in
+
+in
+
+solids,
+
+[51] N.
+
+Garejev,
+
+D. Majus,
+G. Tamoˇsauskas, V. Jukna, A. Couairon, and A. Du-
+
+Graˇzuleviˇci¯ut˙e,
+
+I.
+
+bietis, Third-and ﬁfth-harmonic generation in trans-
+parent solids with few-optical-cycle midinfrared pulses,
+Physical Review A 89, 033846 (2014).
+
+9
+
+

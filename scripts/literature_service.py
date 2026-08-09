@@ -169,10 +169,25 @@ class LiteratureService:
         local_papers = self._scan_local_raw_papers()
         local_ids = set(local_papers.keys())
 
+        # v6.8.14 WP4: KB-first 本地预检索——先查知识库，命中 ≥60% 直接返回
+        kb_results = self._search_kb_papers(keywords, max_results=max_results or DEPTH_LIMITS.get(depth, 8))
+        kb_limit = (max_results or DEPTH_LIMITS.get(depth, 8))
+        if len(kb_results) >= kb_limit * 0.6:
+            if _log:
+                _log.info(f"[LiteratureService] KB-first 命中 {len(kb_results)}/{kb_limit}，直接返回本地结果")
+            # 标记 used_by_proposals
+            if proposal_id:
+                for paper in kb_results:
+                    arxiv_id = paper.get("arxiv_id", "")
+                    if arxiv_id:
+                        self._mark_used_by_proposal(arxiv_id, proposal_id)
+            return kb_results[:kb_limit]
+
         if _log:
             _log.info(
                 f"[LiteratureService] search source={source} depth={depth} "
-                f"keywords={keywords} exclude={len(processed_ids | local_ids)} 篇"
+                f"keywords={keywords} exclude={len(processed_ids | local_ids)} 篇 "
+                f"KB-only={len(kb_results)}（不足 {int(kb_limit * 0.6)}，fallback 在线检索）"
             )
 
         # 3. 构建检索 prompt（注入 exclude_ids）
@@ -1204,6 +1219,27 @@ class LiteratureService:
                 pass
 
         return f"# Paper: {arxiv_id}\n\n> 深度阅读未执行\n"
+
+    def _search_kb_papers(self, keywords: List[str], max_results: int = 10) -> List[Dict[str, Any]]:
+        """v6.8.14 WP4: KB-first 本地论文检索——合并 raw/papers + wiki/papers。
+
+        链 ⑥：先查本地知识库，命中 ≥60% 直接返回，不足才 fallback 在线检索。
+        """
+        raw_hits = self._search_raw_papers(keywords)
+        wiki_hits = self._search_wiki_papers(keywords)
+
+        # 合并去重（按 arxiv_id）
+        seen = set()
+        merged = []
+        for hit in raw_hits + wiki_hits:
+            aid = hit.get("arxiv_id", "")
+            if aid and aid not in seen:
+                seen.add(aid)
+                hit["is_new"] = False
+                hit["has_local_pdf"] = hit.get("has_pdf", False)
+                merged.append(hit)
+
+        return sorted(merged, key=lambda x: -self._safe_float(x.get("score", 0)))[:max_results]
 
     def _search_raw_papers(self, keywords: List[str]) -> List[Dict[str, Any]]:
         """在 raw/papers/ frontmatter 中检索关键词。"""

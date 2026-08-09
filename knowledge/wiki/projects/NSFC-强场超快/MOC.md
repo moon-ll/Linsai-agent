@@ -2,7 +2,7 @@
 title: "🗺️ NSFC 强场超快课题"
 type: "moc"
 created: "2026-06-19T00:00:00Z"
-updated: "2026-08-06T09:09:26Z"
+updated: "2026-08-09T00:07:26Z"
 tags: "["MOC", "NSFC", "索引", "强场超快", "#type/MOC", "#status/mature"]"
 related: "["Berry曲率", "Ghimire-Reis", "RABBITT", "TDSE求解器", "北大HHG团队", "固体高次谐波", "带内电流", "带间跃迁", "德鲁德模型", "拓扑绝缘体", "瞬态吸收光谱", "高次谐波产生"]"
 source_raw: ""
@@ -19,117 +19,11 @@ project: "["NSFC-强场超快"]"
 
 | 课题 | 状态 | 轮次 | 分数 | 版本 | 报告 |
 |------|------|------|------|------|------|
-| 课题说明 | 优化中 | 第7轮 | 0.78 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
-| 课题说明 | 待校验 | 第8轮 | 0.81 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
-| 课题说明 | 优化中 | 第5轮 | 0.71 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
-| 课题说明 | 优化中 | 第6轮 | 0.81 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
-| 课题说明 | 优化中 | 第0轮 | 0.71 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
-
-> 本页是 NSFC 强场超快光学课题的知识入口，聚合课题相关概念、方法、人物和论文。
-
-## 申请书与优化报告
-
-| 课题 | 状态 | 轮次 | 分数 | 版本 | 报告 |
-|------|------|------|------|------|------|
-| 课题说明 | 优化中 | 第7轮 | 0.78 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
-| 课题说明 | 待校验 | 第8轮 | 0.81 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
-| 课题说明 | 优化中 | 第5轮 | 0.71 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
-| 课题说明 | 优化中 | 第6轮 | 0.81 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
-| 课题说明 | 优化中 | 第0轮 | 0.71 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
-
-> 本页是 NSFC 强场超快光学课题的知识入口，聚合课题相关概念、方法、人物和论文。
-
-## 申请书与优化报告
-
-| 课题 | 状态 | 轮次 | 分数 | 版本 | 报告 |
-|------|------|------|------|------|------|
-| 课题说明 | 优化中 | 第7轮 | 0.78 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
-| 课题说明 | 待校验 | 第8轮 | 0.81 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
-| 课题说明 | 优化中 | 第5轮 | 0.71 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
-| 课题说明 | 优化中 | 第6轮 | 0.81 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
-| 课题说明 | 优化中 | 第0轮 | 0.71 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
-
-> 本页是 NSFC 强场超快光学课题的知识入口，聚合课题相关概念、方法、人物和论文。
-
-## 申请书与优化报告
-
-| 课题 | 状态 | 轮次 | 分数 | 版本 | 报告 |
-|------|------|------|------|------|------|
-| 课题说明 | 优化中 | 第7轮 | 0.78 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
-| 课题说明 | 待校验 | 第8轮 | 0.81 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
-| 课题说明 | 优化中 | 第5轮 | 0.71 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
-| 课题说明 | 优化中 | 第6轮 | 0.81 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
-| 课题说明 | 优化中 | 第0轮 | 0.71 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
-
-> 本页是 NSFC 强场超快光学课题的知识入口，聚合课题相关概念、方法、人物和论文。
-
-## 申请书与优化报告
-
-| 课题 | 状态 | 轮次 | 分数 | 版本 | 报告 |
-|------|------|------|------|------|------|
-| 课题说明 | 优化中 | 第7轮 | 0.78 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
-| 课题说明 | 待校验 | 第8轮 | 0.81 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
-| 课题说明 | 优化中 | 第5轮 | 0.71 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
-| 课题说明 | 优化中 | 第6轮 | 0.81 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
-| 课题说明 | 优化中 | 第0轮 | 0.71 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
-
-> 本页是 NSFC 强场超快光学课题的知识入口，聚合课题相关概念、方法、人物和论文。
-
-## 申请书与优化报告
-
-| 课题 | 状态 | 轮次 | 分数 | 版本 | 报告 |
-|------|------|------|------|------|------|
-| 课题说明 | 优化中 | 第7轮 | 0.78 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
-| 课题说明 | 待校验 | 第8轮 | 0.81 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
-| 课题说明 | 优化中 | 第5轮 | 0.71 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
-| 课题说明 | 优化中 | 第6轮 | 0.81 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
-| 课题说明 | 优化中 | 第0轮 | 0.71 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
-
-> 本页是 NSFC 强场超快光学课题的知识入口，聚合课题相关概念、方法、人物和论文。
-
-## 申请书与优化报告
-
-| 课题 | 状态 | 轮次 | 分数 | 版本 | 报告 |
-|------|------|------|------|------|------|
-| 课题说明 | 优化中 | 第7轮 | 0.78 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
-| 课题说明 | 待校验 | 第8轮 | 0.81 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
-| 课题说明 | 优化中 | 第5轮 | 0.71 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
-| 课题说明 | 优化中 | 第6轮 | 0.81 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
-| 课题说明 | 优化中 | 第0轮 | 0.71 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
-
-> 本页是 NSFC 强场超快光学课题的知识入口，聚合课题相关概念、方法、人物和论文。
-
-## 申请书与优化报告
-
-| 课题 | 状态 | 轮次 | 分数 | 版本 | 报告 |
-|------|------|------|------|------|------|
-| 课题说明 | 优化中 | 第7轮 | 0.78 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
-| 课题说明 | 待校验 | 第8轮 | 0.81 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
-| 课题说明 | 优化中 | 第5轮 | 0.71 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
-| 课题说明 | 优化中 | 第6轮 | 0.81 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
-| 课题说明 | 优化中 | 第0轮 | 0.71 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
-
-> 本页是 NSFC 强场超快光学课题的知识入口，聚合课题相关概念、方法、人物和论文。
-
-## 📋 课题方向（T1-T5）
-
-| 课题 | 方向 | 进度 |
-|------|------|------|
-| T1 | 量子几何 | 🌳 成熟 |
-| T2 | 谷电子学 | 🌳 成熟 |
-| T3 | 带动力学 | 🌳 成熟 |
-| T4 | 序参量 | 🌳 成熟 |
-| T5 | 反演方法学 | 🌱 起步 |
-
-## 📄 申请书与优化报告
-
-| 课题 | 最新版本 | 优化报告 | 状态 |
-|------|---------|---------|------|
-| BSV-HHG 量子光场驱动 | [📄](versions/general-bsv-driven-hhg-quantum-20260726.md) | [📊](reports/general-bsv-driven-hhg-quantum-20260726.md) | 🔄 优化中 |
-| 莫尔超晶格强场探针 | [📄](versions/general-moire-strong-field-probe-20260726.md) | [📊](reports/general-moire-strong-field-probe-20260726.md) | 🔄 优化中 |
-| 序参量超快读出 | [📄](versions/general-order-parameter-ultrafast-readout-20260727.md) | [📊](reports/general-order-parameter-ultrafast-readout-20260727.md) | 🔄 优化中 |
-| 量子几何反演 | [📄](versions/general-quantum-geometry-inversion-20260726.md) | [📊](reports/general-quantum-geometry-inversion-20260726.md) | 🔄 优化中 |
-| 瞬态量子相全光读写 | [📄](versions/key-transient-quantum-phase-optical-20260726.md) | [📊](reports/key-transient-quantum-phase-optical-20260726.md) | 🔄 优化中 |
+| bsv-driven-hhg-quantum | 优化中 | 第5轮 | 0.66 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
+| moire-strong-field-probe | 优化中 | 第5轮 | 0.77 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
+| order-parameter-ultrafast-readout | 优化中 | 第5轮 | 0.71 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
+| quantum-geometry-inversion | 优化中 | 第6轮 | 0.81 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
+| transient-quantum-phase-optical | 优化中 | 第0轮 | 0.71 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
 
 ## 🔬 课题相关概念
 

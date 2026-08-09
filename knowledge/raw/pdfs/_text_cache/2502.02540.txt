@@ -1,0 +1,921 @@
+Shot-to-shot acquisition ultrafast electron diffraction
+
+AIP/123-QED
+
+Shot-to-shot acquisition ultrafast electron diffraction
+Rémi Claude,1 Michele Puppin,1 Bruce Weaver,1 Paolo Usai,1 Thomas LaGrange,1 and
+Fabrizio Carbone1
+Laboratory of Ultrafast Microscopy and Electron scattering,
+
+arXiv:2502.02540v2 [physics.ins-det] 18 Jul 2025
+
+Ecole Polytechnique Fédérale de Lausanne
+(*Electronic mail: fabrizio.carbone@epfl.ch)
+(Dated: 8 September 2025)
+
+We demonstrate a novel shot-to-shot acquisition method for optical pump - keV electron
+energy probe in ultrafast scattering experiments. We integrate a phase-locked acquisition
+scheme at a repetition rate of 20kHz in a conventional ultrafast electron diffraction (UED)
+setup. We proceed to a full characterization of the noise level in different configurations
+and for realistic scenarios. The shot-to-shot acquisition improves the signal-to-noise ratio
+(SNR) by one order of magnitude and can be readily implemented in other high-repetitionrate electron diffraction and spectroscopy setups.
+
+1
+
+Shot-to-shot acquisition ultrafast electron diffraction
+I.
+
+INTRODUCTION
+
+Ultrafast electron diffraction, microscopy, and energy loss spectroscopy are widely used to
+investigate the properties of materials out-of-equilibrium using pump-probe methods. Transient
+signals recorded by these techniques correspond to a variation in the number of scattered electrons
+at specific positions in the momentum, real, or energy space, which enables studies in the temporal
+domain of lattice dynamics1,2 , magnetic ordering3–5 and demagnetization6 , plasmon dynamics7 ,
+charge density waves coherent response and melting8 , and to resolve changes in the phonon population with momentum resolution9–11 . The amplitude of transient signals increases with the photoexcitation energy density and is typically on the order of a few percent for light excitation in the
+range of mJ/cm2 . Advanced materials science focuses on broken-symmetry ground states, where a
+delicate microscopic balance of electron, spin, lattice, and orbital degrees of freedom is achieved.
+In electron diffraction, elastically scattered electrons provide measurements of lattice order, while
+inelastically scattered electrons contain crucial information on the momentum-dependent interaction between collective modes10,12 . For instance, phonon populations alter thermal diffuse scattering, with a typical total cross-section of 10−4 . Other quasiparticles, such as magnons, are also
+present in the diffuse inelastic scattering but represent only 10−6 of the total electron flux13,14 .
+Time-resolved measurements of such inelastic signals present a significant challenge for current
+experimental setups, which must improve detection sensitivity to capture small photo-induced
+variations, particularly in weak perturbation regimes that maintain the integrity of the ground
+state.
+To improve the signal-to-noise ratio (SNR), a first possibility is to develop a brighter electron source (> 105 electrons/pulse). However, this approach introduces space-charge-induced
+temporal broadening of the electron pulse, which significantly degrades the time resolution15,16 .
+Temporal compression of the electron bunch can be achieved using a synchronized radio frequency cavity17,18 , or a terahertz optical pulse19 . However, special care must be taken to avoid
+jitter and long-term drifts20 . A second approach is to minimize the noise of the electron source
+while working at low electron flux (< 104 electrons/pulse). To mitigate space charge broadening,
+the electron source is placed as close as possible to the sample21 . Combined with a high repetition
+rate laser source and fast acquisition system22,23 , the SNR is increased while maintaining good
+beam coherence. A possible limitation of this method is the sample re-equilibration time, which
+can become greater than the inter-pulse separation (< 1µs)24 .
+2
+
+Shot-to-shot acquisition ultrafast electron diffraction
+
+In this work, we present an ultrafast electron scattering apparatus based on a 20 kHz repetition
+rate source operating at low flux, with fewer than one thousand electrons per pulse. In this limit,
+the quality of the acquisition system is essential to improve the SNR. We employ a direct electron detector25 , which records high SNR electron diffraction patterns26 thanks to a combination of
+high detective quantum efficiency (DQE) (0.9 for direct detection, as compared to 0.2 for a typical
+charge-coupled device (CCD))27 and low acquisition noise. Another advantage of such a direct
+detection system is its capability to acquire data at a high rate, synchronized with the laser repetition rate28 . This enables the collection of pump-probe data by chopping the pump pulse train at 10
+kHz and normalizing the data using unpumped acquisition frames. This method, well-established
+in ultrafast optical spectroscopy due to the availability of fast light detectors, is widely used to
+achieve shot-noise-limited data29 . In electron scattering experiments, where the number of events
+per pixel and per pulse is low, the method remains viable due to the absence of the detector’s dark
+count contribution. We demonstrate pump-probe data with a noise level reaching 10−4 in a few
+hours of acquisition time, with sub-picosecond time resolution.
+The paper is organized as follows. In section II, we describe the setup, the acquisition system,
+and the working principles of the synchronization to achieve shot-to-shot acquisition. Section III
+presents the characterization of the noise level. In section IV, we will present UED data acquired
+in a realistic scenario by photo-exciting graphite samples with an 800 nm pump.
+
+II.
+
+DESIGN OF THE SHOT-TO-SHOT UED
+
+A.
+
+Optical setup and electron diffraction beamline
+The ultrafast electron diffraction (UED) setup and the data acquisition scheme are schematized
+
+in Fig. 1. The current setup is a modification of the setup detailed in Ref.17 . A cryogenically
+cooled Ti:Sapphire laser30 provides 60 fs pulses at a central wavelength of 780 nm at a repetition
+rate of 20 kHz with an output power higher than 10 W (pulse energy > 0.5 mJ). To avoid longterm drifts, the laser beam pointing is stabilized by a home-built stabilization system based on a
+pair of piezoelectric-actuated mirrors and CMOS cameras. The beam is divided into two arms
+with a beam splitter (BS1). The pump beam goes through a mechanical delay line to vary the
+delay between the probe pulse and the pump pulse. It then passed through a mechanical chopper,
+3
+
+Shot-to-shot acquisition ultrafast electron diffraction
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+  
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+­
+ 
+­
+
+
+
+
+
+
+
+
+
+
+
+ 
+­ 
+
+ 
+
+
+
+
+
+
+­
+
+
+
+
+FIG. 1. Scheme of the UED setup in EPFL composed of the optical table, the rack, and the computer.
+The optical table supports the pulsed laser, the optical beam path divided into the pump and the probe
+arms, the vacuum sample chamber, the photodiode, and the electron detectors. The rack accommodates
+the synchronization system, which is phase-locked to the laser source at 20 kHz. The data gathered by the
+electron and photodiode detectors are sent to the computer to be sorted between pumped and unpumped
+diffraction patterns.
+
+synchronized with the laser source, in order to halve the pulse repetition rate to 10 kHz. The last
+mirror (BS2) sends the pump into the chamber and is used to find spatial overlap between the
+pump beam and the electron probe. BS2 also acts as a beam splitter, transmitting a small fraction
+of the pump towards a photodiode.
+In the probe arm, third harmonic generation (THG) is used to generate a UV light beam (260
+nm) which back-illuminates a silver-coated sapphire photo-cathode. The UV probe pulse energy
+exceeds the work function of the silver (PUV = 4.76 eV > WAg = 4.26 eV), thus generating a pulse
+4
+
+Shot-to-shot acquisition ultrafast electron diffraction
+of electrons by single-photon photoemission. In Appendix A, we find the optimal condition for
+the photoemission when the measured quantum efficiency is maximum at 10−8 electrons/photon.
+It corresponds to an acquired flux between 1 and 1000 electrons/pulse photoemitted at UV powers
+from 1 µW and 1 mW, respectively. These pulses are then accelerated to 40 keV over a distance
+of 3 mm, corresponding to an accelerating electric field of 13.3 MV/m. The off-axis photoemitted
+electrons are filtered out using a 100 µm pinhole after the anode, providing the low beam emittance
+needed for coherent electron scattering with high reciprocal resolution. A solenoidal magnetic lens
+with approximately 3000 windings, each carrying a current of 0.62 A, focuses the electron beam
+onto the detector. Operating at 17.3 W, the lens achieves a focal length of 58 mm. At the sample
+holder position, 15 cm away from the electron source, the electron beam waist has a diameter of
+approximately 200 µm. For an electron flux of nearly 1000 electrons/pulse on the detector, we
+obtain a time resolution of around 1 ps.
+In transmission geometry, the sample holder hosts five standard 3 mm TEM grids. The holder
+is mounted on a 4-axis open-cycle cryo-manipulator that can achieve a temperature of 4.2K with
+liquid helium cooling. The UED setup can also work in reflection geometry to probe the surface
+lattice dynamics with five axes of freedom using another sample holder31 .
+The vacuum chamber has a base pressure of 10−8 mbar and accommodates a mirror that reflects
+the pump beams onto the sample at an angle of a few degrees off from the electron beam.
+The electron beam travels a distance of 57 cm after the sample position. At this distance and with
+a chip detection size of 38.4 × 38.4 mm2 , a reciprocal space area of 16 × 16 Å−2 is covered at 40
+keV.
+
+B.
+
+High speed lock-in direct electron detection
+The direct electron sensor is Si-based with 512 × 512 hybrid-pixels with a DQE of 0.9 at 100
+
+keV and can acquire electrons from 30 keV to 200 keV, without readout noise. However, after
+an electron collides with a pixel, it remains triggered for 50 ns. Therefore, the detector cannot
+acquire more than one electron per pulse per pixel, which reduces the DQE for a high pulsed
+electron flux, as explained in Appendix B. The fast electronics allow an acquisition rate of 2250
+frames per second and up to 18000 frames per second for a reduced region of interest (ROI). Each
+pixel has two 16-bit counter chips to reach a bit depth of 32 bits. Importantly for this work, it
+is also possible to switch between these 16-bit counters within 200 ns, sorting electron events
+5
+
+Shot-to-shot acquisition ultrafast electron diffraction
+independently in each of the two counters. The acquisition window is externally controlled by
+a time-to-live signal at a rate of 20 kHz, locked to the laser repetition rate. We note that rates
+exceeding 1 MHz are, in principle, possible by this method. After a given number of acquisition
+windows (typically 4·104 ≡ 2 sec), the total number of counts acquired for the two counters of
+each pixel is transferred as two full-frame images, labeled IA and IB in the figure. In this way, the
+effective repetition rate of the acquisition is greatly improved while minimizing the data transfer.
+We use this detector feature to acquire ultrafast electron diffraction by chopping the pump
+pulses at half the laser repetition rate (10 kHz). The two output images correspond to the excited,
+Ion , and non-excited, Ioff , diffraction patterns of the studied sample. Due to the high shot-to-shot
+correlation of the laser source, this considerably reduces the noise in the pump-probe signal, as
+will be discussed in Sec. III. We now describe the synchronization system in more detail.
+
+C.
+
+Synchronization system
+To capture the single shots, we synchronize the detection with the time of arrival of the elec-
+
+trons to the laser source repetition.
+As shown in the left panel of Fig. 1, a homemade delay generator constantly receives the 20 kHz
+laser signal from the laser source. This trigger is relayed into four independently delayed channels (A-D). Channel A is frequency-divided to 10 kHz and transmitted to the chopper controller.
+Channel B triggers a fast photodiode digitizer32 . This signal in this channel is gated by the main
+detector (EnOUT), which is a replica of the one received (EnIN). In this way, the Quadro detector
+operates as the master and the photodiode as the slave, ensuring that the same pulses originating
+from the laser are detected. The electron detector acquisition window is controlled by channel D,
+with a 20 kHz repetition rate of a 25 µs wide square signal. The acquisition window from channel D is inhibited by channel C, acting like a switch controlled by the main computer to start the
+acquisition. This synchronization system enables robust acquisition of every electron bunch at 20
+kHz and can be readily adapted to other repetition rates. However, operation at higher frequencies
+would require a different chopping mechanism. From the main computer, the number of exposition windows as well as other detector settings can be monitored.
+The main computer accesses the two 2D datasets acquired by the electron detector, IA and IB ,
+which can be sorted into Ion and Ioff , thanks to the photodiode readout. A Python-based user
+interface33 displays this data and the difference between Ion − Ioff , allowing for a fast and accurate
+6
+
+Shot-to-shot acquisition ultrafast electron diffraction
+time and spatial overlap.
+
+III.
+
+CHARACTERIZATION
+
+Given the low shot-to-shot fluctuation of the laser source, this acquisition method greatly improves the SNR of ultrafast experiments. We characterize this enhancement by disentangling the
+noise sources for conventional and shot-to-shot acquisition techniques with and without the photoexcitation pulse.
+
+A.
+
+Noise level without pump
+We acquired a series of diffraction patterns on a 50 nm thick graphite single crystal. Data
+
+were recorded as a function of pump-probe delay time with the shot-to-shot acquisition system.
+For each acquisition window (i), two diffraction patterns corresponding to Ion and Ioff are collected
+while blocking the photoexcitation pulse before the sample. We sum the electron count over all the
+pixels to compute the total electron flux. Fig. 2a) shows the fluctuation of the normalized scattered
+electron flux for a single image, ∑px Ion , and for the shot-to-shot acquisition, ∑px Ion / ∑px Ioff . We
+observe that the fluctuation amplitude is lower by more than one order of magnitude with the shotto-shot acquisition than with the conventional method.
+Fig. 2b) shows the frequency spectrum of the normalized signal. The shot-to-shot acquisition
+reduces the noise level at every time regime by a factor of 35 in low frequency and 20 in high
+frequency.
+To quantitatively define the different noise origins, we write the overall noise level as34 :
+σ=
+where σshot =
+
+q
+
+2 +σ2
+2
+2
+2
+2
+σshot
+source + σwhite + σreadout + σint + σgain ,
+
+(1)
+
+√
+N, with N the number of acquired electrons, is the intrinsic shot noise arising from
+
+the Poisson-distributed electron beam.
+The source noise originates from fluctuations in the electron generation and the laser source, which
+√ √
+scales as σsource = αs f N, with the electron flux f and the RMS magnitude αs .
+The white noise corresponds to the jitter and thermal effect of the optical and electron pulse generation, scaling as σwhite = αw N.
+The detector noise level, defined as σreadout and σint , depends on the number of counts acquired
+7
+
+Shot-to-shot acquisition ultrafast electron diffraction
+
+
+
+
+
+
+
+
+
+FIG. 2. a) Fluctuation of the electron diffraction pattern of graphite sample in the absence of a pump as a
+function of time for an exposure time of one second, with a flux of 3.6 · 106 electrons/sec. b) Spectral amplitude of the electron fluctuation as a function of the frequency, which corresponds to the Fourier transform
+of Fig. 2a. c) Acquired count without electron beam as a function of the integration time due to cosmic ray
+having a flux of 3.1 events/sec from a linear fit. d) Variation of the noise level as a function of the cumulative
+signal N for different configurations. The experimental curve is fitted with equation 2.
+
+at instantaneous and different integration times, respectively, when the electron beam is absent.
+As the single electron detector doesn’t have thermal noise like a CCD detector, σreadout = 0. This
+feature is crucial for utilizing the shot-to-shot acquisition method, as it prevents noise accumulation in each acquisition window. The main source of the integration noise σint is the cosmic rays
+detected by the single electron detector. However, as shown in Fig. 2c), the flux of cosmic rays of
+3.1 events/sec is insignificant compared to the electron flux usually set to ∼ 106 electrons/sec. As
+described in Sec. II C, in the shot-to-shot mode, the exposure window is 25 µs per pulse, so over
+one second, the effective exposure time of the detector is 0.5 s, reducing the integration noise level
+by a factor of two. The gain noise, σgain , originates from converting a collision event in the silicon
+8
+
+Shot-to-shot acquisition ultrafast electron diffraction
+
+
+
+
+
+
+
+FIG. 3. a) Correlation between pixel values for the two modes of acquisition and b) the Pearson coefficient
+along frame time. c) Pixel values distribution of Ion /Ioff as function of the integration time.
+
+detector to a written bit. As explained in Appendix A, this noise is negligible as long as we don’t
+reach a saturation point of 1 electron/pixel/pulse.
+The noise level is reduced to
+
+with α = (1 + αs
+
+√
+
+q √
+σ = (α N)2 + (αw N)2 ,
+
+(2)
+
+f ). Fig. 2d) shows the noise level as a function of acquired electrons for
+
+single images and shot-to-shot mode for a flux of f = 3.6 · 106 electrons/sec. It shows a source
+noise of αs = 10−2 Hz−1/2 and a white noise of αw = 1.7 · 10−2 for the single image, whereas the
+noise level of the shot-to-shot acquisition mode reaches the shot noise limit with a source noise of
+αs = 1.6 · 10−4 Hz−1/2 and a white noise, αw = 1.5 · 10−16 , considered negligible.
+Overall, Fig. 2 shows that the shot-to-shot mode decreases the noise level by almost a factor of 20.
+However, it requires twice the integration to build the reference image, so for twice the amount of
+signal, the SNR still increases by an order of magnitude.
+
+B.
+
+Noise level with pump
+In the presence of pump pulses, other noise sources, such as thermal and mechanical fluctua-
+
+tions of the thin film, should be considered. To verify how it affects real measurement, we focus on
+a pump-probe experiment in which the probe arrives before the pump. The reversible signal after
+photo-excitation won’t interfere with our analysis, but only the long-lived thermal and mechanical
+fluctuations.
+9
+
+Shot-to-shot acquisition ultrafast electron diffraction
+We take a 50 nm thick sample of natural graphite as a studied specimen whose diffraction patterns
+are shown in Fig. 5c). We photoexcite the sample with an absorbed energy density of 0.8 mJ/cm2
+at a wavelength around 800 nm, similar to experiments previously reported1,2,10 . However, in this
+section, we analyze the signal before the arrival time of the photoexcitation pulse, when the sample
+is at equilibrium, which should be identical to the diffraction patterns without photoexcitation.
+(i)
+
+( j)
+
+We acquire a set of Ion and Ioff images corresponding to a ten-second exposure of graphite’s
+diffraction patterns when it is photoexcited for a time window i, and when it is at rest for a time
+window j, respectively. For each diffraction image, we used a mask to set the unscattered electron beam to zero, such that we compare only the fluctuation of the scattered electron. Despite
+a protection coating on the detector, the pump beam scattered in the chamber creates abnormally
+(i)
+
+high-intensity pixels only visible on the Ion images. To remove them, we compare each image Ion
+(i)
+
+(i)
+
+(i)
+
+(i)
+
+(i)
+
+(i)
+
+to Ioff . The pixels in Ion respecting the conditions Ion /Ioff > n and Ion /Ioff < 1/n are set to their
+(i)
+
+value in Ioff . For a cutting parameter n = 2, around 1.8% of the pixels are neutralized.
+(i)
+
+(i)
+
+Fig. 3a) shows the correlation between Ion and Ioff taken shot-to-shot, and between two diffrac(i)
+
+( j)
+
+tion patterns Ion and Ion taken a few seconds apart, that is, i ̸= j. The pulse-to-pulse images are
+strongly correlated compared to the two single images, especially at low electron count. We can
+characterize the correlation between the two images with the Pearson coefficient:
+
+∑ (I1 (x) − ⟨I1 ⟩)(I2 (x) − ⟨I2 ⟩)
+,
+r(I1 , I2 ) = p x
+∑x (I1 (x) − ⟨I1 ⟩)2 (I2 (x) − ⟨I2 ⟩)2
+
+(3)
+
+where the sum is over all the pixels x, and ⟨I⟩ corresponds to the mean over the pixels. Fig. 3b)
+shows the Pearson coefficient for a set of integrated images taken at different times. The correlation
+(i)
+
+(i)
+
+(0)
+
+( j)
+
+between Ion and Ioff images taken shot-to-shot stays close to 1, while the one between Ion and Ion
+
+decreases and fluctuates with the time between exposure shots. The average correlation between
+⟨Ion (i), Ioff (i)⟩i is 1 − 6.8 · 10−4 , with a standard deviation of 1.6 · 10−5 . It suggests that the shotto-shot acquisition mode effectively removes thermal and mechanical fluctuations.
+Fig. 3c) shows the pixel distribution of the normalization Ion /Ioff as a function of exposure time.
+We observe that it converges towards a Gaussian distribution with decreasing variance, reaching
+0.01 with a mean of 0.99. It confirms the robustness of the correlation between the diffraction
+pattern of the unpumped and pumped graphite.
+10
+
+Shot-to-shot acquisition ultrafast electron diffraction
+IV.
+
+REALISTIC SITUATION
+The analysis of the noise origins showed that the SNR increased by one order of magnitude for
+
+the shot-to-shot acquisition with respect to the conventional technique. The correlation between
+the pumped and the unpumped data also showed that this acquisition method negates mechanical
+fluctuations in a pulse-to-pulse regime. We now focus on time traces after photoexcitation for two
+different practical cases: high-fluence pump on a copper grid generating a cloud of free electrons,
+which forms an electric field deviating the electron beam; and a well-studied sample, graphite,
+perturbed with a low fluence.
+
+A.
+
+Plasma generation
+We use a 1000 mesh copper grid and photoexcite at a wavelength of 800 nm with a fluence of
+
+2 mJ/cm2 . Fig. 4a) and b) show the unfocused electron beam that went through the copper grid in
+the absence, Ion (t), and the presence, Ioff (t), of the pump, respectively, at time t after the photoexcitation. Thanks to the shot-to-shot acquisition detection, the normalization between Fig. 4a) and
+b), Ion /Ioff , shown in Fig. 4d), clearly reveals the pattern of the plasma after the photoexcitation.
+Fig. 4c) shows the total count in a region of interest defined as a 6 × 6 pixels highlighted by the
+square in Fig. 4d). Each delay corresponds to an exposure time 20 · 103 pulses for both Ion (t), and
+Ioff (t). No transient signal can be observed for the single image acquisition since the noise level
+of > 10% overcomes the physical signal of 5%. However, the normalization Ion (t)/Ioff (t) for each
+delay t increases the SNR by almost two orders of magnitude, which reveals the physical transient signal due to the deflection of the electrons by the plasma generated after the photoexcitation.
+
+B.
+
+Graphite
+The photo-induced plasma generation already shows a striking difference between the conven-
+
+tional and shot-to-shot acquisition methods. However, the intensity distribution with diffraction
+patterns relies on the sample geometry. Photo-induced thermal and mechanical effects can induce
+instability or artifacts. In Sec. III B we already showed that these effects are stable over time. In
+this section, we confirm the capabilities of the shot-to-shot acquisition method on a time-resolved
+experiment on graphite.
+11
+
+Shot-to-shot acquisition ultrafast electron diffraction
+
+
+
+
+
+
+
+
+
+FIG. 4. Transient signal due to plasma generation after photoexcitation on a copper grid. Zoom in on the
+unfocused electron beam that went through the copper grid after the photoexcitation photon pulse in a) the
+presence of the pump Ion , b) the absence of the pump Ioff , and d) the normalization between each other
+Ion /Ioff . c) Comparison between the transient signals measured for a region of interest in the center of the
+electron beam Ion (t), Ioff (t), and Ion (t)/Ioff (t).
+
+Ultrafast electron diffraction on graphite has already been extensively studied1,10,18 . To account
+for the sensitivity of our acquisition techniques, we use a low absorbed excitation energy of 0.8
+mJ/cm2 on a 50 nm thick flake of natural graphite. The diffraction patterns are acquired over 24
+hours, for an exposure of 22 min per delay (11 min for Ion (t) and Ioff (t) respectively). To overcome
+the slight zone axis misalignment and gain SNR, we averaged the diffraction patterns along the
+6-fold symmetry axis.
+To observe the photo-induced effect, we normalize the excited diffraction patterns by the one at
+rest and subtract this by the same ratio averaged along delays before time zero, t0 . This subtraction
+removes the constant thermal effect. It can be written as:
+∆I(t, q) =
+
+Ion (t, q) ⟨Ion (t, q)⟩t<t0
+−
+Ioff (t, q) ⟨Ioff (t, q)⟩t<t0
+12
+
+(4)
+
+Shot-to-shot acquisition ultrafast electron diffraction
+This normalization is shown in Fig. 5a) at a time delay t = 1 ps after the photoexcitation. Since
+the normalization occurs pixel by pixel, the noise increases significantly in low-intensity regions.
+This effect is visible on the side of the figure where the signal is the lowest. To avoid this effect,
+we can subtract the pumped diffraction pattern from the unpumped as:
+δ I(t, q)
+
+=
+
+Ion (t, q)
+⟨Ion (t, q)⟩q
+
+−
+
+Ioff (t, q)
+⟨Ioff (t, q)⟩q
+
+
+−
+
+Ion (t, q)
+⟨Ion (t, q)⟩q
+
+−
+
+Ioff (t, q)
+⟨Ioff (t, q)⟩q
+
+
+(5)
+t<t0
+
+Fig. 5c) shows this subtraction for a time delay t = 1 ps. In this case, there is a strong signature
+where the electron intensity is large, at the Bragg peak position, but we can still resolve the low
+variation in the diffuse scattering at the K-point.
+The transient dynamics account for the sensitivity of the setup qualitatively. Fig. 5d) shows the
+intensity variation for the 100 Bragg peak family and the diffuse scattering at the K-point and
+around the Γ110 Bragg peak highlighted in the diffraction pattern Fig 5c). The low excitation
+energy induces a diffraction decrease of only 0.1% due to the Debye-Waller effect. We can still
+resolve the transition between the fast initial drop from the generation of strongly coupled optical
+(SCOP) phonon to the slower one from their decay to acoustic phonon at 1 ps. This is consistent
+with the rapid increase of the diffuse scattering intensity at the K-point due to the generation of
+A′1 optical phonon. Its population starts decreasing at 2 ps as it scatters with lower energy near Γ
+momentum acoustic phonons as suggested by the transient dynamics of diffuse scattering around
+the Γ110 Bragg peak family. These results are consistent with the previous work of Stern et al10 in
+which the photoexcitation energy is 15 times higher than the one used here.
+
+V.
+
+CONCLUSION
+Similar to ultrafast optical spectroscopy, the shot-to-shot acquisition method significantly im-
+
+proves the signal-to-noise ratio for the study of transient dynamics in solids and molecules. By
+phase locking a high acquisition rate direct electron detector, the noise reaches the shot noise limit.
+By introducing a photoexcitation pulse, we observe thermal and mechanical fluctuations that are
+stable over time and don’t introduce additional white noise.
+The shot-to-shot acquisition technique revealed a marked improvement over conventional methods. The investigation of plasma generation and transient dynamics in graphite diffraction patterns
+demonstrates a time resolution of approximately 1 ps, achieved with an electron flux of just 1000
+13
+
+Shot-to-shot acquisition ultrafast electron diffraction
+
+
+
+
+
+
+
+
+
+FIG. 5. a) and b) are the normalized diffraction patterns as equation 4 and 5 respectively, averaged over
+a time delay, t, between 1 and 2 ps. c) 6-fold averaged diffraction patterns of graphite, corresponding
+to Ion (t = −2.4 ps, q). d) Electron count variation for specific regions of interest highlighted in panel c)
+corresponding to the Bragg peak family 100 and the diffuse scattering at reduced momentum K and around
+the Γ point.
+
+electrons per pulse. In the absence of a pulse compression scheme, the temporal resolution varies
+with the electron flux, improving at lower flux and degrading as the flux increases.
+The high sensitivity of the setup enables the investigation of ultrafast lattice dynamics following
+low-level photoexcitation. In this regime, the lattice temperature increases by only a few tens of
+degrees, allowing the observation of dynamics driven by fluctuations in electronic, magnetic, or
+collective excitations.
+This acquisition technique offers sensitivity comparable to, or exceeding, that of other UED
+14
+
+Shot-to-shot acquisition ultrafast electron diffraction
+configurations operating at high repetition rates22 or using high electron flux18 , while providing enhanced sensitivity in the low-perturbation regime. Integrating this approach with a higher
+repetition-rate laser would increase the signal by one to two orders of magnitude, without compromising temporal resolution or beam quality.
+Shot-to-shot acquisition schemes can be implemented in other electronic spectroscopy methods,
+such as ultrafast transmission electron microscopy (UTEM)35 , ultrafast Lorentz TEM36 , timeresolved electron energy loss spectroscopy (tr-EELS)37 , time- and angle-resolved photoemission
+spectroscopy (tr-ARPES)38 , and others. This paves the way for investigating sensitive materials in
+the low-perturbation regime.
+
+ACKNOWLEDGMENTS
+We acknowledge the useful discussion with the Dectris team, especially Jan Vávra, who helped
+us install the detector.
+
+We acknowledge support from the SNF grant 200331. B.W. acknowledges support from the EU
+H2020 research and innovation program under the Marie Skłodowska-Curie Actions grant agreement 801459 (FP-RESOMUS). This project has also received funding from the European Union’s
+Horizon 2020 research and innovation program under grant agreement no. 871124 LaserlabEurope.
+
+DATA AVAILABILITY STATEMENT
+The data that support the findings of this study are available from the corresponding author
+upon reasonable request.
+
+Appendix A: Quantum detection efficiency
+When an electron collides with a detector’s pixel, charges are excited, and a current is measured.
+If it reaches a given threshold, the detector counts one electron. The threshold is factory-calibrated
+for different electron energies.
+We are interested in finding the optimal working conditions of the electron beam. One way to
+15
+
+Shot-to-shot acquisition ultrafast electron diffraction
+characterize the electron beam is the quantum efficiency, defined as
+QE =
+
+nel
+,
+nph
+
+(A1)
+
+where nel is the number of acquired electrons per pulse directly measured by the direct electron
+detector for one-second exposure time. nph = P/ f Eph is the number of incident photons per pulse
+for a repetition rate f = 20 kHz, a photon energy Eph = 4.66 eV and beam power P measured with
+a power meter.
+Fig. 6a) shows the acquired electron, nel and the quantum efficiency, QE, as a function of the input
+UV power. We observe three stages with a non-linear increase of the QE at P < 1µW, a plateau
+between 1 µW and 1 mW, and a decrease of the QE above 1 mW. The first stage corresponds to
+an extremely low dose rate, below one electron per pulse, so undetectable by the detector, while
+the last stage corresponds to a flux saturation. The latter can arise from a saturation in the photoemission due to the space charge and thermal effects of the photocathode, the Child-Langmuir
+limit, or from a saturation of the detection. The detector counts one electron for a given pixel
+when its signal reaches a threshold. When the signal is higher than the threshold for longer than
+200 ns, the detector counts another electron. This retrigger functionality enables high electron
+flux measurement for continuous beam, but for a short pulsed beam of time duration ≪ 200 ns,
+the electron bunch is too dense, such that the detector cannot acquire more than one electron per
+pixel per pulse. Fig. 6b) illustrates this by showing the electron count for one pixel as a function
+of the input UV power. From one electron/pulse/pixel, the acquired count starts saturating. It is
+not favored to use a high pulsed electron flux with this kind of direct electron detector, as artifacts
+can arise from the detection’s saturation.
+As shown in Fig. 6, the optimal UV power range for electron photoemission lies between 1 µW
+and 1 mW, where the measured quantum efficiency reaches a maximum of approximately 4 · 10−8
+electrons per photon.
+
+Appendix B: Electronic response of the detector to an electron pulse
+Electron detectors can have a long recovery time after an electron bunch arrival. If the recovery
+time is longer than the delay between two pulses, the shot-to-shot acquisition can lose its benefits.
+To quantify the electronic response of the direct electron detector we vary the delay of the acquisition window from the laser trigger with a fixed width of 10 ns. The delay can be tuned with steps
+16
+
+Shot-to-shot acquisition ultrafast electron diffraction
+
+
+
+
+
+FIG. 6. (a) Electron flux and quantum efficiency (Eq. A1) as a function of the input UV power for an
+electron energy of 30 keV. (b) Acquired electrons per pulse for one selected pixel as a function of the UV
+power.
+
+down to 1 ns. For each delay, we acquire an image of the raw electron beam with one-second
+exposure in shot-to-shot acquisition mode. Fig. 7 shows the total electron count as a function of
+the trigger delay. Even though the electron pulse duration is around 1 ps, the signal acquired by
+the detector lasts 80 ns. Then, the recovery time is smaller than the one between the pulse (50µs).
+
+17
+
+Shot-to-shot acquisition ultrafast electron diffraction
+
+1e7
+1.50
+
+Electron count ()
+
+1.25
+1.00
+0.75
+0.50
+0.25
+0.00
+20
+
+0
+
+20
+
+40
+
+60
+
+Delay Trigger (ns)
+
+80
+
+100
+
+FIG. 7. Electron count measured by the Quadro as a function of the delay given to a square signal with fixed
+width.
+
+REFERENCES
+1 F. Carbone, P. Baum, P. Rudolf, and A. H. Zewail, “Structural preablation dynamics of graphite
+
+observed by ultrafast electron crystallography,” Physical Review Letters 100, 035501 (2008),
+publisher: American Physical Society.
+2 R. P. Chatelain, V. R. Morrison, B. L. M. Klarenaar,
+
+and B. J. Siwick, “Coherent and incoher-
+
+ent electron-phonon coupling in graphite observed with radio-frequency compressed ultrafast
+electron diffraction,” Phys. Rev. Lett. 113, 235502 (2014).
+3 N. Rubiano da Silva, M. Möller, A. Feist, H. Ulrichs, C. Ropers,
+
+and S. Schäfer, “Nanoscale
+
+mapping of ultrafast magnetization dynamics with femtosecond lorentz microscopy,” Phys. Rev.
+X 8, 031052 (2018).
+4 G. Berruto, I. Madan, Y. Murooka, G. Vanacore, E. Pomarico, J. Rajeswari, R. Lamb, P. Huang,
+
+A. Kruchkov, Y. Togawa, T. LaGrange, D. McGrouther, H. Rønnow, and F. Carbone, “Laser18
+
+Shot-to-shot acquisition ultrafast electron diffraction
+Induced Skyrmion Writing and Erasing in an Ultrafast Cryo-Lorentz Transmission Electron Microscope,” Physical Review Letters 120, 117201 (2018), publisher: American Physical Society.
+5 N. Rubiano da Silva, M. Möller, A. Feist, H. Ulrichs, C. Ropers,
+
+and S. Schäfer, “Nanoscale
+
+Mapping of Ultrafast Magnetization Dynamics with Femtosecond Lorentz Microscopy,” Physical Review X 8, 031052 (2018), publisher: American Physical Society.
+6 S. R. Tauchert, M. Volkov, D. Ehberger, D. Kazenwadel, M. Evers, H. Lange, A. Donges,
+
+A. Book, W. Kreuzpaintner, U. Nowak, and P. Baum, “Polarized phonons carry angular momentum in ultrafast demagnetization,” Nature 602, 73–77 (2022), publisher: Nature Publishing
+Group.
+7 L. Piazza, T. T. A. Lummen, E. Quiñonez, Y. Murooka, B. W. Reed, B. Barwick, and F. Carbone,
+
+“Simultaneous observation of the quantization and the interference pattern of a plasmonic nearfield,” Nature Communications 6, 6407 (2015), publisher: Nature Publishing Group.
+8 Y. Cheng, A. Zong, L. Wu, Q. Meng, W. Xia, F. Qi, P. Zhu, X. Zou, T. Jiang, Y. Guo,
+
+J. Van Wezel, A. Kogar, M. W. Zuerch, J. Zhang, Y. Zhu, and D. Xiang, “Ultrafast formation
+of topological defects in a two-dimensional charge density wave,” Nature Physics 20, 54–60
+(2024).
+9 L. P. René De Cotret, J.-H. Pöhls, M. J. Stern, M. R. Otto, M. Sutton, and B. J. Siwick, “Time-
+
+and momentum-resolved phonon population dynamics with ultrafast electron diffuse scattering,”
+Phys. Rev. B 100, 214115 (2019).
+10 M. J. Stern, L. P. René de Cotret, M. R. Otto, R. P. Chatelain, J.-P. Boisvert, M. Sutton, and B. J.
+
+Siwick, “Mapping momentum-dependent electron-phonon coupling and nonequilibrium phonon
+dynamics with ultrafast electron diffuse scattering,” Phys. Rev. B 97, 165416 (2018), publisher:
+American Physical Society.
+11 L. Waldecker, R. Bertoni, H. Hübener, T. Brumme, T. Vasileiadis, D. Zahn, A. Rubio,
+
+and
+
+R. Ernstorfer, “Momentum-resolved view of electron-phonon coupling in multilayer WSe2 ,”
+Physical Review Letters 119, 036803 (2017), publisher: American Physical Society.
+12 R. M. van der Veen, T. J. Penfold,
+
+and A. H. Zewail, “Ultrafast core-loss spectroscopy in four-
+
+dimensional electron microscopy,” 2, 024302.
+13 K. Lyon, A. Bergman, P. Zeiger, D. Kepaptsoglou, Q. M. Ramasse, J. C. Idrobo,
+
+and J. Rusz,
+
+“Theory of magnon diffuse scattering in scanning transmission electron microscopy,” Physical
+Review B 104, 214418 (2021), publisher: American Physical Society.
+
+19
+
+Shot-to-shot acquisition ultrafast electron diffraction
+14 D. Kepaptsoglou, J. A. Castellanos-Reyes, A. Kerrigan, J. A. D. Nascimento, P. M. Zeiger, K. E.
+
+Hajraoui, J. C. Idrobo, B. G. Mendis, A. Bergman, V. K. Lazarov, J. Rusz, and Q. M. Ramasse,
+“Magnon spectroscopy in the electron microscope,” (2025), arXiv:2410.02908 [cond-mat].
+15 B. J. Siwick, J. R. Dwyer, R. E. Jordan,
+
+and R. J. D. Miller, “Ultrafast electron optics: Propa-
+
+gation dynamics of femtosecond electron packets,” Journal of Applied Physics 92, 1643–1648
+(2002).
+16 X. Wang, S. Nie, H. Park, J. Li, R. Clinite, R. Li, X. Wang,
+
+and J. Cao, “Measurement of
+
+femtosecond electron pulse length and the temporal broadening due to space charge,” Review of
+Scientific Instruments 80, 013902 (2009).
+17 G. F. Mancini, B. Mansart, S. Pagano, B. van der Geer, M. de Loos,
+
+and F. Carbone, “Design
+
+and implementation of a flexible beamline for fs electron diffraction experiments,” Nuclear Instruments and Methods in Physics Research Section A: Accelerators, Spectrometers, Detectors
+and Associated Equipment 691, 113–122 (2012).
+18 R. P. Chatelain, V. R. Morrison, C. Godbout,
+
+and B. J. Siwick, “Ultrafast electron diffraction
+
+with radio-frequency compressed electron pulses,” Applied Physics Letters 101, 081901 (2012).
+19 D. Ehberger, K. J. Mohler, T. Vasileiadis, R. Ernstorfer, L. Waldecker, and P. Baum, “Terahertz
+
+Compression of Electron Pulses at a Planar Mirror Membrane,” Physical Review Applied 11,
+024034 (2019), publisher: American Physical Society.
+20 M. R. Otto, L. P. René de Cotret, M. J. Stern,
+
+and B. J. Siwick, “Solving the jitter problem in
+
+microwave compressed ultrafast electron diffraction instruments: Robust sub-50 fs cavity-laser
+phase stabilization,” Structural Dynamics 4, 051101 (2017).
+21 L. Waldecker, R. Bertoni,
+
+and R. Ernstorfer, “Compact femtosecond electron diffractometer
+
+with 100 kev electron bunches approaching the single-electron pulse duration limit,” Journal of
+Applied Physics 117, 044903 (2015).
+22 B. Freelon, T. Rohwer, A. Zong, A. Kogar, H. Zhou, L. J. Wong, E. Ergeçen,
+
+and N. Gedik,
+
+“Design and construction of a compact, high-repetition-rate ultrafast electron diffraction instrument,” Review of Scientific Instruments 94, 053305 (2023).
+23 M. Aidelsburger, F. O. Kirchner, F. Krausz,
+
+and P. Baum, “Single-electron pulses for ultra-
+
+fast diffraction,” Proceedings of the National Academy of Sciences 107, 19714–19719 (2010),
+publisher: Proceedings of the National Academy of Sciences.
+24 L. Vidas, D. Schick, E. Martínez, D. Perez-Salinas, A. Ramos-Álvarez, S. Cichy, S. Batlle-Porro,
+
+A. S. Johnson, K. A. Hallman, R. F. Haglund, and S. Wall, “Does VO2 Host a Transient Mon20
+
+Shot-to-shot acquisition ultrafast electron diffraction
+oclinic Metallic Phase?” Physical Review X 10, 031047 (2020), publisher: American Physical
+Society.
+25 Quadro, Dectris.
+26 G. McMullan, A. R. Faruqi,
+
+and R. Henderson, “Chapter One - Direct Electron Detectors,” in
+
+Methods in Enzymology, The Resolution Revolution: Recent Advances In cryoEM, Vol. 579,
+edited by R. A. Crowther (Academic Press, 2016) pp. 1–17.
+27 B. D. A. Levin, “Direct detectors and their applications in electron microscopy for materials
+
+science,” Journal of Physics: Materials 4, 042005 (2021), publisher: IOP Publishing.
+28 C. J. R. Duncan, M. Kaemingk, W. H. Li, M. B. Andorf, A. C. Bartnik, A. Galdi, M. Gordon,
+
+C. A. Pennington, I. V. Bazarov, H. J. Zeng, F. Liu, D. Luo, A. Sood, A. M. Lindenberg, M. W.
+Tate, D. A. Muller, J. Thom-Levy, S. M. Gruner, and J. M. Maxson, “Multi-scale time-resolved
+electron diffraction: A case study in moiré materials,” Ultramicroscopy 253, 113771 (2023).
+29 B. Lang, “Photometrics of ultrafast and fast broadband electronic transient absorption spec-
+
+troscopy: State of the art,” Review of Scientific Instruments 89, 093112 (2018).
+30 Wyvern, KM Labs.
+31 F. Pennacchio, G. M. Vanacore, G. F. Mancini, M. Oppermann, R. Jayaraman, P. Musumeci,
+
+P. Baum, and F. Carbone, “Design and implementation of an optimal laser pulse front tilting
+scheme for ultrafast electron diffraction in reflection geometry with high temporal resolution,”
+Structural Dynamics 4, 044032 (2017).
+32 GlazPD, Synertronic design.
+33 P. Usai and R. Claude, “UED interface,” https://github.com/remiclaude/UED_interface
+
+(2024), accessed: 2025-05-11.
+34 C. Kealhofer, S. Lahme, T. Urban,
+
+and P. Baum, “Signal-to-noise in femtosecond electron
+
+diffraction,” Ultramicroscopy 159, 19–25 (2015).
+35 A.
+
+H. Zewail, “Four-dimensional electron microscopy,” Science 328, 187–193 (2010),
+
+https://www.science.org/doi/pdf/10.1126/science.1166135.
+36 P. Tengdin, B. Truc, A. Sapozhnik, L. Kong, N. del Ser, S. Gargiulo, I. Madan, T. Schönenberger,
+
+P. R. Baral, P. Che, A. Magrez, D. Grundler, H. M. Rønnow, T. Lagrange, J. Zang, A. Rosch, and
+F. Carbone, “Imaging the Ultrafast Coherent Control of a Skyrmion Crystal,” Physical Review
+X 12, 041030 (2022), publisher: American Physical Society.
+37 F. Carbone, O.-H. Kwon,
+
+and A. H. Zewail, “Dynamics of Chemical Bonding Mapped by
+
+Energy-Resolved 4D Electron Microscopy,” Science 325, 181–184 (2009), publisher: American
+21
+
+Shot-to-shot acquisition ultrafast electron diffraction
+Association for the Advancement of Science.
+38 M. X. Na, A. K. Mills, F. Boschini, M. Michiardi, B. Nosarzewski, R. P. Day, E. Razzoli,
+
+A. Sheyerman, M. Schneider, G. Levy, S. Zhdanovich, T. P. Devereaux, A. F. Kemper, D. J.
+Jones, and A. Damascelli, “Direct determination of mode-projected electron-phonon coupling
+in the time domain,” Science 366, 1231–1236 (2019), publisher: American Association for the
+Advancement of Science.
+39 M. T. Hassan, J. S. Baskin, B. Liao,
+
+and A. H. Zewail, “High-temporal-resolution electron
+
+microscopy for imaging ultrafast electron dynamics,” Nature Photonics 11, 425–430 (2017),
+publisher: Nature Publishing Group.
+40 C. Giannetti, G. Coslovich, F. Cilento, G. Ferrini, H. Eisaki, N. Kaneko, M. Greven,
+
+and
+
+F. Parmigiani, “Discontinuity of the ultrafast electronic response of underdoped superconducting
+Bi2 Sr2 CaCu2 O8+δ strongly excited by ultrashort light pulses,” Physical Review B 79, 224502
+(2009), publisher: American Physical Society.
+41 D. H. Dowell and J. F. Schmerge, “Quantum efficiency and thermal emittance of metal photo-
+
+cathodes,” Physical Review Special Topics - Accelerators and Beams 12, 074201 (2009), publisher: American Physical Society.
+
+22
+
+

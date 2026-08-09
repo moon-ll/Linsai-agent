@@ -1,0 +1,1706 @@
+Attosecond-resolved quantum fluctuations of light
+and matter
+Matan Even Tzur1∗†, Chen Mor2†, Noa Yaffe2, Michael Birk1, Andrei Rasputnyi3,4,
+Omer Kneller2, Ido Nisim1, Ido Kaminer1, Maria Chekhova1,3,4, Michael Krüger1,
+Misha Ivanov1,5, Nirit Dudovich2, and Oren Cohen1,6
+1Technion - Israel Institute of Technology, Haifa, Israel
+2Department of Physics of Complex Systems, Weizmann Institute of Science, Rehovot, Israel
+3Max Planck Institute for the Science of Light, Erlangen, Germany
+4Friedrich-Alexander Universität Erlangen-Nürnberg 5Max Born Institute, Berlin, Germany
+6 Guangdong Technion-Israel Institute of Technology, Shantou, Guangdong 515063, China
+∗Corresponding author. Email: matan.tzur@mpsd.mpg.de
+†These authors contributed equally to this work.
+Until recently, attosecond optical spectroscopy and quantum optics evolved
+along non-overlapping directions. In attosecond science, attosecond pulses have
+been regarded as classical waves, applied to probe electron dynamics on their nat-
+ural time scale. Here, we transfer fundamental concepts of quantum optics into
+attosecond physics, enabling control of both the properties of the XUV attosec-
+ond pulses and the quantum fluctuations of matter on attosecond time scales. By
+combining bright squeezed vacuum (BSV) with a strong laser field to drive high-
+harmonic generation, we transfer the quantum properties of the BSV onto the
+resulting XUV attosecond pulses. Applying advanced attosecond interferometry,
+we reconstruct the quantum state of the XUV high harmonics and their associated
+1
+arXiv:2511.18362v1  [physics.optics]  23 Nov 2025
+attosecond pulses with attosecond precision. Finally, we resolve the squeezing of
+the electron’s wavepacket during one of the most fundamental strong-field phe-
+nomena – field induced tunneling. The ability to measure and control quantum
+correlations in both electrons and XUV attosecond pulses establishes a founda-
+tion for attosecond quantum electrodynamics, manipulating the quantum state
+of electrons and photons with sub-cycle precision.
+Attosecond spectroscopy has revolutionized our ability to capture fundamental ultrafast phe-
+nomena, resolving electron dynamics on their natural time scale (1). The foundation and driving
+force of this field is the generation of XUV attosecond pulses via a strong-field light-matter inter-
+acti on, leading to high harmonic generation (HHG) (2, 3). Over the past two decades HHG-based
+spectroscopyhasresolved,withunprecedentedprecision,arangeoffundamentalquantumphenom-
+ena, from field induced tunneling (4) or multi-electron dynamics in atoms (5), to charge migration
+in molecules (6, 7) and topological dynamics in solids (8). These experiments share one common
+characteristic – theclassical properties of attosecond pulses served as a probe to resolve or manip-
+ulate the quantum dynamics of electronic wavefunctions. While the measurement and control of
+the classical properties of attosecond pulses and their associated XUV high harmonics are estab-
+lished (9–11), characterization and control of their quantum properties remains a major challenge.
+Building on these advances, the next frontier lies in extending attosecond spectroscopy beyond
+classical observables to the quantum domain of light itself. Resolving this challenge is a key step
+towards interfacing attosecond technology and spectroscopy with quantum optics, opening a new
+field of ultrafast quantum-optical spectroscopy.
+Quantum light (12), predominantly produced in the visible to infrared spectral range, plays a
+critical role in quantum information processing (13), precision metrology (14), and photonic quan-
+tum technologies (15). While most quantum light sources are weak, BSV (16) - a microjoule-level
+squeezedstatewithnonclassicalcorrelations-standsoutasauniquesourcetostudytheinteraction
+betweenintensequantumlightandmatter.EmployingBSVtodriveharmonicgenerationintheUV
+regime (17, 18) and multiphoton photoemission (19, 20) is one route to extend quantum optics into
+the ultrafast, high-photon-energy regime. Non-classical optical signatures of harmonics have also
+been observed during harmonic generation driven by coherent states of light, either in the outgoing
+infrared driving field (21) or in the visible harmonics (22). However, so far, the quantum state of
+2
+XUV high harmonics and attosecond pulses, as well as attosecond-scale quantum fluctuations in
+matter, have remained unexplored.
+Recenttheoreticalstudiessuggestthatapplyingquantumopticalconceptstohighharmonicgen-
+eration opens a door to a new class of quantum phenomena where the quantum properties of light
+manipulate matter, or are controlled by it, on a sub-cycle time scale (21, 23–32). It has been pro-
+posed that HHG can generate entangled XUV photon pairs (28), massively entangled (29, 30), and
+squeezed light states (27, 31), unveil non-adiabatic material excitations (33) and many-body corre-
+lations in correlated materials (29) as well as in superradiating ensembles (34). These remarkable
+opportunities pose critical challenges: Can the quantum state of high harmonics and the associated
+attosecond pulses be characterized and controlled, in the XUV range with attosecond precision?
+What is the link between their quantum state and the field driven dynamical electronic wavefunc-
+tion that has led to their generation?
+Here, we demonstrate the generation of an attosecond pulse train in the XUV regime with con-
+trollable quantum properties by manipulating electronic wavefunction correlations with sub-cycle
+precision. We combine intense 800 nm laser light with relatively weak quantum light generated
+by a 1600 nm BSV source to produce XUV emission with tailored quantum characteristics. These
+properties are controlled by imprinting the quantum fluctuations of the BSV field onto the elec-
+tronic wavefunction during light-induced tunneling, with attosecond precision, and subsequently
+transferredontothequantumpropertiesoftheemittedXUVpulses.Toresolvethequantumstateof
+the XUV light, we developed a novel form of attosecond quantum tomography performed in-situ –
+during the generation process itself – where individual atoms generating the XUV emission serve
+as interferometers (4, 35). Hence, our scheme enables the first reconstruction of the quantum state
+of XUV light, as represented by the Wigner or Husimi distribution (36). Finally, we demonstrate
+thatthequantumpropertiesoftheemittedlightencodequantumfluctuationsinmatteratpreviously
+inaccessible temporal and energy scales, revealing fluctuations arising during light-induced elec-
+tron tunneling. Our study transfers quantum optics to new extremes, opening new opportunities for
+attosecond quantum electrodynamics (QED).
+3
+Attosecond quantum interferometry
+Controlling and characterizing the quantum properties of attosecond pulses imposes a significant
+challenge. Attosecond pulses are generated during strong-field light-matter interaction, involving
+largephoton numbers, while quantumlight commonlyinvolveslowphoton numbers. Weovercome
+this challenge by combining a strong coherent beam centered at800 nm with a weaker BSV beam
+centeredat 1600nm.Thecoherentfieldgovernsthestrong-fielddynamics,whiletheBSVfieldacts
+as a perturbation, imprinting its non-classical characteristics onto the correlations and statistical
+properties of the generated attosecond pulses.
+Ourmeasurementandcontrolschemeleveragesthewell-establishedthree-stepmodelofgaseous
+HHG( 37,38):withineachhalf-cycleofthefundamental800nmfield( 𝜔)anelectrontunnel-ionizes
+inthestrongdrivingfield,propagatesinthecontinuum,andrecombineswithitsparention,emitting
+an XUV attosecond pulse. When driven solely by a fundamental800 nm field (𝜔), the symmetry
+between consecutive half cycles ensures a constructive interference at odd harmonics and destruc-
+tive interference at even harmonics (39). Introducing a1600nm perturbation with a frequency𝜔/2
+breaksthissymmetry,leadingtothegenerationofhalf-integerandevenharmonicorders.Quantum-
+mechanically, the properties of the harmonics are governed by the action accumulated along the
+quantum electron trajectory (40, 41). A weak 1600 nm field perturbs this action (4, 35, 42, 43), im-
+posingacomplexphaseshift 𝜎𝑗 = 𝛼 𝑗 +𝑖𝛽 𝑗 ,associatedwitheachfundamentalhalfcycle 𝑗 (43).The
+real part of the perturbation,𝛼 𝑗, describes the change in the phase accumulated along the quantum
+electron trajectory, while its imaginary part,𝛽 𝑗, represents the change in the amplitude of this tra-
+jectory, dominated by the perturbation of the ionization step. For a sufficiently weak1600nm field,
+these shifts are linear with the perturbing field amplitude. The perturbation exhibits a periodicity
+spanning four half cycles of the driving 800 nm field, with symmetry that dictates the relation-
+ships among the four complex phases:𝜎1; 𝜎2; 𝜎3 = −𝜎1; 𝜎4 = −𝜎2 (Figure 1a). This configuration
+serves as a four-ports in-situ interferometer, realized on a single atom level. The complex phase
+perturbation modifies the odd harmonics (2𝑁 + 1) and generates new frequency components: the
+half-integer harmonics (2𝑁 ± 1
+2) and even harmonics (2𝑁), as directly observed in the measured
+spectra (Figure 1c). The corresponding intensity modulations are (see Supplementary Material):
+4
+𝐼𝑞 ∝ | 𝐸𝑞 |2 ∝
+8>>>>>>>>>> <
+>>>>>>>>>>:
+|cos(𝜎1) + cos(𝜎2)|2 , q=2N+1,
+|cos(𝜎1) − cos(𝜎2)|2 , q=2N,
+|𝑖 sin(𝜎1) + sin(𝜎2)|2 , q=2N + 1
+2 ,
+|𝑖 sin(𝜎1) − sin(𝜎2)|2 , q=2N − 1
+2 .
+(1)
+In contrast to previous works (4, 43–46), in our experiment𝜎1 and 𝜎2 as well as the harmonic
+intensities are inherently stochastic variables. The physical origin of their fluctuations is the noise
+of the non-classical BSV, initiated by the fluctuations of the quantum vacuum. In the absence of the
+BSV perturbation, the odd harmonics are in coherent states (47), a property that remains approxi-
+matelyvalidforasufficientlyweakBSVperturbation.Incontrast,since 𝜎1and 𝜎2areapproximately
+linear in the perturbative field, Eq. 1 shows that half-integer harmonics are also approximately lin-
+ear in the perturbative field in the regime where𝑠𝑖𝑛 (𝜎1,2) ≈ 𝜎1,2. Hence, they are anticipated to
+resemble the BSV statistics, exhibiting vanishing displacement in phase space and squeezed fluctu-
+ations (27) (Figure 1b). Even harmonics are quadratic with the perturbation and are thus expected
+to be in more complex states, exhibiting non-Gaussian fluctuations.
+Equation 1 maps the quantum noise of the electronic wavefunction (encoded in the perturba-
+tions to the electron’s action,𝜎1,2) into measurable statistics of the harmonic intensities, and vice
+versa. As we shall show below, we utilize this mapping to explore the quantum correlations of the
+electronic wavefunctions as well as to reconstruct the quantum states of the XUV high harmonics.
+The above equation reflects a fundamental property of the interferometric scheme: although the ex-
+perimental measurement is macroscopic, the interference mechanism originates at the single-atom
+level, where the average number of generated photons is far below one. Therefore, the in-situ light
+characterization is effectively performed in the single-photon regime.
+Photon statistics
+Photon statistics characterize light by describing its photon number distribution and correlations,
+serving as one of the key methods for identifying the non-classical fingerprint of light. We first
+explore the photon statistics of the HHG radiation, dictated by the interplay between the strong-
+field interaction and the BSV perturbation. A pioneering study successfully measured the photon
+5
+statistics and intensity–intensity correlations of individual harmonics in the UV range, offering a
+static measurement at a fixed two-color delay (18). Here, we resolve these properties in the XUV
+spectral range and in the attosecond regime, by directly shaping the sub-cycle structure of the two-
+color driving field with attosecond precision. As expected, the BSV source is characterized by
+super-Poissonian photon statistics, exhibiting a long tail extending towards high photon numbers
+(SupplementaryInformation).Weresolvethephotonstatisticsofthehighharmonicsbyconducting
+single-shot measurements of the XUV spectrum, obtaining the complete photon statistics at a fixed
+two-color delay (Supplementary Information).
+As described in Eq. 1, the photon statistics of the harmonics group into four distinct families –
+odd, even, and half-integer harmonics (Figs 2a-b). Figure 2b presents the photon statistics of har-
+monic 17, which follows a Gaussian distribution in the absence of the BSV source, as expected
+when HHG is driven by a classical coherent state field (21, 23). Introducing the BSV modifies this
+distribution, reducing the mean intensity and producing a broader, asymmetric profile, with the
+longer tail extending towards lower photon numbers. This behavior reflects the anti-correlation be-
+tweenoddharmonicintensitiesandtheperturbationamplitude,aspredictedbyEq.1.Figure2balso
+presents the photon statistics of exemplary half-integer and even harmonics. These harmonic fam-
+ilies exhibit photon statistics similar to those of the input BSV, with a long tail extending towards
+higher photon numbers. To quantify XUV intensity fluctuations, we calculate the second-order co-
+herence, defined for a large photon number⟨ ˆ𝑛⟩ as 𝑔(2) = ⟨ ˆ𝑛2 − ˆ𝑛⟩/⟨ ˆ𝑛⟩2 ≈ ⟨ ˆ𝑛2⟩/⟨ ˆ𝑛⟩2 observing
+super-bunching (𝑔(2) > 2) in both half-integer and even harmonics (Figure 2a). Half-integer har-
+monics cluster around𝑔(2) ≈ 2.3, matching the input BSV value (Supplementary Information), as
+they are mainly produced by a single-BSV-photon process (48). Even harmonics exhibit𝑔(2) ≈ 4.8,
+matching the value of the photon number kurtosis⟨ ˆ𝑛4⟩/⟨ ˆ𝑛2⟩2 for the input BSV, consistent with
+their generation by a two-BSV-photon process (48).
+So far, we explored the photon statistics of the harmonics for a fixed two-color delay, revealing,
+for the first time, the mapping of squeezed vacuum photon statistics into the XUV harmonics. By
+measuring the single shot statistical distribution for each two-color delay, we can track the sub-
+cycle dynamics that underlie this process. We observe periodic modulations of the mean intensity
+with a periodicity of400nm, corresponding to half the fundamental optical cycle (Figure 2d-e).
+Statistical analysis shows that as we scan the two-color delay,𝑔(2) is modulated as well, in phase
+6
+with the modulations of the mean value of the harmonics (Figure 2e). What is the origin of these
+oscillations?
+These oscillations originate from the modulations of sub-cycle trajectories induced by the two-
+colorfield.WhiletheBSVcarriesastronglyfluctuatingamplitude,itmaintainsawelldefinedphase.
+Therefore, such a perturbation leads to amplitude fluctuations (i.e., the perturbation is complex) in
+eachofthefourslitsofourtemporalinterferometer,whicharemutuallycorrelatedandphase-locked
+with respect to the coherent driving field. Consequently, the interference between the slits depends
+on the two-color delay, yielding the observed phase-locked mean intensity and𝑔(2) modulations. A
+complementary view emerges in the frequency domain, where the perturbative nature of the BSV
+interactionallowsustodescribethesetimedomainmodulationsintermsofphotonicpathways.Ex-
+panding Eq. 1 as a power series in the complex phases𝜎1,2 describes the interaction as a sum over
+perturbative BSV photonic processes. Thus, we can view the mechanism as a frequency-domain
+interference of photonic pathways whose complex amplitudes depend on powers of𝜎1,2. For ex-
+ample, half-integer harmonics oscillations originate from a combination of one-BSV-photon and
+three-BSV-photon processes (Figure 2.c), as seen by expandingsin(𝜎1,2) ≈ 𝜎1,2 − 𝜎3
+1,2/6 in Eq. 1.
+These pathways,𝜎 and 𝜎3, acquire different phases as we scan the two-color delay, leading to the
+modulations of the interference signal. Since the one and three-photon processes have related yet
+distinct statistics,𝑔(2) of their interference depends on their relative phase.
+In addition, odd harmonic oscillations (Figure 2e), originate from the interference between
+a coherent state (zero-BSV-photons) and a four-BSV-photon process, as indicated by the lowest-
+order 𝜙-dependent contribution scaling as𝜎4 (supplementary information). Altogether, these re-
+sultsdemonstratehowscanningthetwo-colordelayuncoversinterferenceamongmultiplephotonic
+pathways, enabling precise control and characterization of the statistical properties of the emitted
+attosecond pulses.
+Reconstruction of tunneling dynamics driven by squeezed light
+Our ability to reveal the quantum fluctuations of the harmonics and to resolve their evolution with
+attosecond precision provides deep insight into the underlying dynamics, allowing us – for the first
+time – to uncover the quantum fluctuations imprinted in the process of quantum tunneling. Quan-
+7
+tum tunneling is one of the most fundamental phenomena distinguishing quantum from classical
+mechanics (49). It plays a central role across physics, chemistry, and technology, with applications
+ranging from semiconductor devices to superconducting circuits (50, 51). While electron tunneling
+is inherently quantum – where an electronic wavepacket propagates through a classically forbidden
+region – the tunneling barrier itself has traditionally been regarded as purely classical (52–55). In
+this work, we explore electronic tunneling through a barrier modulated by quantum noise, imple-
+mented by the photon statistics of our BSV source. According to Eq. 1, the statistics of the recom-
+bining HHG electrons over four consecutive half-cycles – represented by the distributions of𝜎1,2 –
+aremappedontothejointintensitystatisticsoffouradjacentharmonics(forinstance,14.5,15,15.5,
+and 16). Thus, by inverting Eq. 1, we can extract two complex electron phases𝜎1,2 ≡ 𝛼1,2 + 𝑖𝛽 1,2 on
+a shot-by-shot basis from the intensities of four adjacent harmonics (supplementary information).
+Such analysis reconstructs the joint statistics of𝜎1,2, for each two-color delay. Figure 3a schemati-
+callydescribestheoriginoftherealandimaginarycomponentsofthesub-cycleperturbationstothe
+action,highlightingthestochasticnatureoftheperturbation.Theimaginaryphase, 𝛽 𝑗,corresponds
+to a modification of the tunneling, as the BSV modifies the ionization barrier near the peak of the
+coherent driving field, at half-cycle𝑗. The real term,𝛼 𝑗, represents the additional phase accumu-
+lated by the electronic wavefunction between ionization and recombination, due to its interaction
+with the BSV field.
+Performing single-shot measurements of the harmonic spectrum allows us to reconstruct the
+statistical distribution of these complex phases as well as their correlations along successive half-
+cycles. For example, the𝛽1, 𝛽2 correlations, evident in Figure 3b reveals that when one tunneling
+event exhibits excess noise (resulting in a broad𝛽1 spread), the subsequent event, occurring half
+a cycle later, experiences reduced noise (leading to a narrower𝛽2 spread). This pattern reflects
+the temporal interval between excess and reduced noise in the input BSV, controlled by the delay
+between the BSV and the coherent field. Retrieving its temporal dependence constitutes the first
+demonstration of a tunneling barrier with tunable quantum properties.
+8
+Quantum state tomography
+We reconstruct the quantum state of the emitted harmonic field by mapping, via Eq. (1), the joint
+statistics of the complex electronic phases𝜎1,2 to the Husimi Q representation - the probability
+distribution to measure a coherent state𝛼 = 𝑥 + 𝑖 𝑝with quadrature amplitudes𝑥 and 𝑝:
+𝑄(𝛼) = 1
+𝜋 ⟨𝛼| ˆ𝜌|𝛼⟩, 𝛼 = 𝑥 + 𝑖 𝑝 (2)
+Here, ˆ𝜌 is the density operator and|𝛼⟩ a coherent state with quadrature amplitudes𝑥 and 𝑝.
+Experimentally,weobtain 𝑄(𝛼) directly:foreachlasershot,thecomplexharmonicamplitude 𝐸𝑞 ∝
+𝑥 + 𝑖 𝑝is computed from Eq. (1) using the extracted phases𝜎1,2. A two-dimensional histogram of
+the resulting𝛼 = (𝑥, 𝑝 ) values over many shots then yields the Husimi distribution𝑄(𝛼).
+Representative results are shown in Figure 4 for harmonic orders 12 (even), 12.5 (half-integer),
+and13(odd),alongsidetheoreticalpredictions.Interestingly,incontrastwiththeinputcoherentand
+BSV fields, the measured and calculated Husimi distributions of the half-integer harmonic (H12.5,
+panels b,e) are clearly non-Gaussian, displaying a zero-displaced elliptical envelope with two lobes
+and a central hole. The elliptical shape is a hallmark of squeezed vacuum, reflecting the imbalance
+between squeezed and anti-squeezed quadratures. The emergence of two peaks and the central hole
+indicates a departure from Gaussianity, reminiscent of a cat-like superposition. This behavior fol-
+lows from Eq.(1): the half-integer harmonics depend nonlinearly on the BSV field viasin(𝜎1,2).
+This nonlinear dependence of the harmonic response distorts the squeezed fluctuation distribution
+of the BSV field into the observed non-Gaussian, squeezed-cat-like state. The Husimi distribution
+of the even harmonic (H12, panels a,d) exhibits a state reminiscent of the input BSV. However,
+rather than forming a symmetric distribution around the origin of phase space, it is displaced and
+stretched predominantly along a single direction, while its most probable value remains near zero.
+The pronounced elongation along one quadrature axis reflects the quadratic dependence of even
+harmonics on the perturbing BSV field. In contrast, the Husimi distribution of the odd harmonic
+(H13, panels c,f) displays a dominant lobe corresponding to the BSV-unperturbed coherent-state
+emission, accompanied by a tail extending toward the origin of phase space. This tail signifies a
+reduction of the unperturbed coherent-state emission as energy is transferred into the half-integer
+and even harmonics. Altogether, these observations highlight the rich variety of quantum states
+9
+accessible across this unique XUV HHG spectrum.
+To the best of our knowledge, this is the first experimental demonstration of quantum-state to-
+mographyintheXUVspectralrange(asrepresentedbytheHusimidistribution,seeSupplementary
+Information for the Wigner-function reconstruction). This reconstruction highlights the application
+of self-referenced internal interferometry which serves as a viable substitute for conventional ho-
+modynetomographyatattosecondtimescales.Wenotethatthisschemeiscomplementarytoquan-
+tum state tomography of attosecond electrons (56–59). This observation holds great potential for
+the development of XUV quantum sources. By spectrally filtering quantum HHG radiation, one
+could realize a tunable quantum source, paving the way for a broad range of future applications.
+Time-Domain Reconstruction
+Thecoherentnatureoftheharmonicsenablesustopresentacomplementarytime-domainperspec-
+tive. At this stage, the attosecond pulse train emitted by the two-color HHG source is reconstructed
+onashot-by-shotbasis,unveilingthetemporalevolutionofitsquantumnoise.Thisapproachallows
+us to preform a direct link between the spectral signatures of the harmonics and the time-resolved
+fluctuations of the emitted XUV field. The reconstruction is performed by extracting the complex
+perturbation associated with each harmonic on a shot-by-shot basis via Eq. (1). The harmonics
+are then coherently linked by adding the unperturbed spectral phase, determined from the well-
+established atto-chirp extensively characterized over the past two decades (60, 61). This procedure
+yieldsanensembleofattosecondwaveforms,fromwhichweextractthedynamicalquantumfluctu-
+ations,quantifiedbythetime-dependentvariance Δ𝐸 2(𝑡).Theresultingdynamics,togetherwiththe
+reconstructed mean value of the pulses, resolved on attosecond timescales, are shown in Figure 5.
+The varianceΔ𝐸 2(𝑡) (dashed purple line) exhibits rapid sub-cycle fluctuations that reveals the gen-
+eration of attosecond-scale noise bursts in our experiment. These ultrafast field-fluctuations mark
+thedirecttime-domainmanifestationofquantumnoiseupconversion,showinghowthefluctuations
+of the driving squeezed light are transferred into the XUV regime. The quadrature asymmetry seen
+inFigure4ismanifestedasoscillationsofthevarianceattwicethefrequencyofthemeanvalueos-
+cillations.Whenaveragedoverthesefinefeatures,thesmoothedvariance(solidpurpleline)reveals
+a slowly varying envelope reminiscent of the input bright squeezed vacuum (BSV) field, indicating
+10
+a signature of the driving quantum noise, which is preserved by the HHG mechanism. Scanning
+the two colors delay modulates the noise oscillations in phase and amplitude, yet maintains a slow
+temporal envelope mirroring the field variance of the input BSV.
+Conclusion
+In this paper, we introduce the fundamental concepts of quantum light control into the attosecond
+XUV regime. Our study builds on three main milestones: controlling quantum fluctuations in XUV
+attosecond pulses, realizing optical tomography of quantum light in the XUV regime, andactively
+controlling the tunneling barrier–engineeringandresolvingitssub-cyclefluctuations.Bycombin-
+ing infrared BSV with a strong coherent field, we imprint the squeezed fluctuations of the driving
+light onto both sub-cycle ionization dynamics and the emitted harmonics. Scanning the two-color
+delay provides precise control over the relative phase between photonic pathways, modulating both
+the mean intensity and the quantum state of the high harmonics. This interferometric scheme en-
+ables quantum state tomography – long established in the visible and infrared – for the first time in
+the XUV regime and on the attosecond timescale. We further report the first observation of optical
+tunneling driven by squeezed light, demonstrating that sub-cycle ionization fluctuations directly
+reflect the quantum correlations of the driving field. The tunneling statistics acquire a squeezed
+character, establishing a direct link between quantum optical noise and the tunneling mechanism.
+Ourresultsbridgequantumopticsandattosecondscience,openingnewpathwaysforgenerating,
+characterizing,andcontrollingXUVpulseswithnon-classicalproperties.Non-classicalattosecond
+physics holds great promise for advancing quantum-enhanced metrology, interferometry, and be-
+yond, laying the foundation for attosecond-scale QED, where electron and photon quantum states
+can be manipulated with unprecedented temporal precision.
+11
+t
+a 
+↔
+X
+P
+(2m+1/2)ω
+P
+(2m+1)ω
+X
+2mω
+X
+P
+13 15 17 19 21
+Harmonic order
+BSV Off
+BSV On
+100
+101
+102
+103
+b 
+ c 
+I (arb. units)
+Figure 1: Generation of squeezed attosecond XUV pulses . a, HHG is driven by the combina-
+tion of a strong coherent field of frequency𝜔 and a weak bright squeezed vacuum (BSV) field
+of frequency 𝜔/2, producing a train of quantum attosecond pulses. The𝜔 − 𝜔/2 geometry acts
+as a temporal analogue of a four-slit interferometer, where four attosecond bursts are emitted per
+𝜔/2 cycle. Each burst has a fluctuating amplitude and phase described by a complex phase shift
+𝜎1(𝜏) and 𝜎2(𝜏), representing the perturbation of the BSV to the quantum action of the electron.
+Theirinterferencegivesrisetoacombofintegerandhalf-integersqueezedharmonics. b,Schematic
+illustrationsofphasespacediagramsforharmonicsofdifferentorders.Oddharmonicsareapproxi-
+matelyinacoherentstate,half-integerharmonicsexhibitsqueezedfluctuations,andevenharmonics
+exhibitphase-spacedisplacementandsqueezedfluctuations. c,ExperimentallyresolvedHHGspec-
+trageneratedbyacoherentfieldonly(blue)andthetwo-colorfield,composedofcoherentandBSV
+sources (red). The perturbative field leads to the appearance of half-integer (blue) and even (pink)
+harmonics.
+12
+11
+12
+13
+14
+15
+16
+17
+18
+19
+1
+2
+3
+4
+5
+Harmonic order
+2N-1/2
+2N
+2N+1/2
+2N-1
+Quantum
+XUV
+Perturbative
+BSV
+Fundamental
+driving field
+Harmonic order
+2.4
+2.6
+2.8
+3
+3.2
+3.4
+3.6
+11
+14
+17
+20
+12
+15
+18
+21
+16
+19
+22
+Delay (fs)
+13
+-15 -10 -5 0 5 10 15
+H14.5
+I (arb. u.)
+0
+2.5
+5 0
+20
+40
+1
+1.5
+2
+2.5
+0
+2.5
+5
+150
+152
+154
+156
+1.01
+1.015
+1.02
+1.025
+0
+2.5
+5
+0
+10
+20
+1
+1.5
+2
+H11.5H11
+a c
+e
+d
+200
+400
+600
+800
+1000
+1200
+Intensity (arb. u.)
+0
+0.02
+0.04
+0.06
+0.08
+0.1
+0.12
+0.14
+Probability
+H16.5
+200
+400
+500
+600
+700
+800
+Intensity (arb. u.)
+0
+0.02
+0.04
+0.06
+0.08
+0.1
+H17 (BSV on)
+H17 (BSV off)
+100
+200
+300
+400
+0
+0.05
+0.1
+0.15
+0.2
+0.25
+H16
+Intensity (arb. u.)
+Delay (fs)Delay (fs)Delay (fs)
+b
+Intensity (arb. u.)
+Figure 2: Photon statistics of the XUV harmonics for a fixed and scanned two-color delay. a ,
+Second order correlation function (𝑔(2) ) as a function of harmonic order. Odd harmonics exhibit
+Gaussianstatistics,with 𝑔(2) ≈ 1.Half-integerandevenharmonicsexhibitalong-taileddistribution,
+with 𝑔(2) values clustering around 2.3 and 4.8, respectively. These values correspond to𝑔(2) and
+the photon number kurtosis⟨ ˆ𝑛4⟩/⟨ ˆ𝑛2⟩2 for the input BSV, as indicated by dashed gray lines ina
+(Supplementary Information). b Intensity distributions of three types of harmonics:2𝑁 + 1 (17),
+2N (16), 2𝑁 + 1
+2 (16.5). c, One and three BSV-photon (orange dashed arrows) processes interfere
+to generate half-integer harmonics.d, Mean value of different optical frequencies as a function
+of the two-color delay.e, 𝑔(2) and mean oscillations of selected harmonics (11,11.5, 14.5 ,15.5)
+as a function of the two-color delay (Supplementary Information). The oscillations of𝑔(2) are in
+phase with the mean value oscillations. Notably, very weak, yet clearly resolved,𝑔(2) oscillations
+are observed in harmonic 11.
+13
+α1β1 β2α2
+b
+a
+1
+1
+-1
+-1
+0
+0 1-1 0
+1
+-1
+0
+Figure 3: Reconstruction of sub-cycle quantum fluctuations of tunneling in atoms driven by
+squeezed light a, The coherent field (blue) induces pairs of trajectories, labeled 1 and 2, every half
+cycle of the fundamental field. The correlation between𝛽1 and 𝛽2 reflects a correlation between
+two instantaneous tunneling events: when the first exhibits excess noise (a broader𝛽1 spread), the
+subsequent event, half a cycle later, becomes quieter (a narrower𝛽2 spread). b, The correlation
+between 𝛼1 and 𝛼2 reflects a correlation between two successive trajectories when the first exhibits
+excess noise (a broader𝛼1 spread), the subsequent event, half a cycle later, becomes quieter (a
+narrower 𝛼2 spread).
+14
+50
+55
+60
+65
+X
+-40
+-38
+-36
+-34
+-32
+-30
+-28
+-26
+-24
+-22
+-20
+P
+0
+0.02
+0.04
+0.06
+0.08
+0.1
+0.12
+30.5 1 1.5 2 2.5-0.5-1-1.5-2
+X
+P
+-4.5
+-4
+-3.5
+-3
+0
+-1
+-0.5
+-1.5
+-2
+-2.5
+0
+1
+2
+3
+4
+5
+6
+7
+8
+-6
+-4
+-2
+0
+2
+4
+6
+8
+10
+X
+-10
+-8
+-6
+-4
+-2
+0
+2
+4
+6
+P
+0
+0.05
+0.1
+0.15
+0.2
+0.25
+0.3
+0.35
+0.4
+0.5
+0
+-0.5
+-1
+-1.5
+-2
+-0.2  0  0.2  0.4  0.6 0.8
+X
+P
+ 0
+5
+10
+15
+20
+25
+30
+35
+40
+-1 10 0.5-0.5
+0
+0.5
+1
+1.5
+2
+3
+3.5
+2.5
+X
+P
+X
+0 5 10-5
+P
+-10 0
+0.005
+0.01
+0.015
+0.02H12 H12.5 H13
+H12 H12.5 H13
+a c
+fed
+0
+0.5
+-0.5
+1
+1.5
+2
+-1
+-1.5
+-2
+0
+-5
+15
+-10
+-15
+10
+5
+b
+H12
+Experiment
+Theory
+Figure 4: Quantum state tomography of high-harmonic emission. (a–c) Experimentally recon-
+structedHusimidistributionsforharmonicsat 𝜆 = 66nm(harmonic12),64nm(harmonic12.5),and
+61.5nm (harmonic 13). (d–f) Corresponding theoretical calculations (supplementary information).
+a,d Even harmonic orders (12) appears as a squeezed-like state elongated along one quadrature.
+b,eHalf-integerharmonic orders (12.5) exhibitsa non-Gaussian,two-lobedstructure with a central
+hole, reflecting the nonlinear mapping of the Gaussian BSV fluctuations into the harmonic quadra-
+tures. c,f Odd harmonic orders (13) show a dominant coherent-like lobe with a trailing depletion
+toward the origin of phase space, consistent with energy redistribution into neighboring harmonics
+half-integer and even harmonics. The close correspondence between experiment and theory high-
+lights the robustness of our interferometric quantum-state tomography scheme.
+15
+-2 -1 0 1 2
+t  [fs]
+-40
+-30
+-20
+-10
+0
+10
+20
+30
+40E(t)  (arb. units)
+10
+15
+20
+25
+30
+35
+40
+45
+50
+E2(t) (arb. units)
+Figure 5: Time-domain reconstruction of attosecond emission. Reconstructed attosecond wave-
+forms of the two-color HHG source showing the mean electric field⟨𝐸 (𝑡)⟩ (black), the instanta-
+neous variance Δ𝐸 2(𝑡) (dashed purple), and its smoothed envelope (solid purple). The rapid sub-
+cycle oscillations ofΔ𝐸 2(𝑡) reveal attosecond-scale noise bursts –direct evidence of quantum noise
+upconversion from the driving squeezed light into the XUV regime. The slower envelope follows
+the field-variance profile of the input bright squeezed vacuum, indicating that the underlying quan-
+tum noise structure is preserved through the high-harmonic generation process.
+16
+References and Notes
+1. D. M. Villeneuve, Attosecond science.Contemp. Phys. 59, 47–61 (2018).
+2. M. Ferray,et al., Multiple-harmonic conversion of 1064 nm radiation in rare gases.J. Phys. B
+At. Mol. Opt. Phys. 21 (1988).
+3. X. Li, A. L’Huillier, M. Ferray, L. Lompré, G. Mainfray, Multiple-harmonic generation in rare
+gases at high laser intensity.Phys. Rev. A 39.11, 5751–5761 (1989).
+4. O. Pedatzur,et al., Attosecond tunnelling interferometry.Nat. Phys. 11, 815–819 (2015).
+5. A.Shiner, et al.,Probingcollectivemulti-electrondynamicsinxenonwithhigh-harmonicspec-
+troscopy. Nature Physics 7 (6), 464–467 (2011).
+6. P. M. Kraus,et al., Measurement and laser control of attosecond charge migration in ionized
+iodoacetylene. Science 350 (6262), 790–795 (2015), doi:10.1126/science.aab2160.
+7. O. Smirnova, et al., High harmonic interferometry of multi-electron dynamics in molecules.
+Nature 460 (7258), 972–977 (2009).
+8. Y.Bai, et al.,High-harmonicgenerationfromtopologicalsurfacestates. Nature Physics 17(3),
+311–315 (2021).
+9. G. Gariepy,et al., Creating high-harmonic beams with controlled orbital angular momentum.
+Physical review letters 113 (15), 153901 (2014).
+10. A. Fleischer, O. Kfir, T. Diskin, O. C. Pavel Sidorenko, Spin angular momentum and tunable
+polarization in high-harmonic generation.Nat. Photonics 8, 543–549 (2014).
+11. P.-C. Huang, et al., Polarization control of isolated high-harmonic pulses.Nature Photonics
+12 (6), 349–354 (2018).
+12. R. Loudon,The quantum theory of light (OUP Oxford) (2000).
+13. L.S.Braunstein,P.V.Loock,Quantuminformationwithcontinuousvariables. Rev. Mod. Phys.
+77, 513–577 (2005).
+17
+14. J. Aasi,et al., Enhanced sensitivity of the LIGO gravitational wave detector by using squeezed
+states of light.Nat. Photonics 7.8, 613–619 (2013).
+15. J. L. O’brien, A. Furusawa, J. Vučković, Photonic quantum technologies.Nature Photonics
+3 (12), 687–695 (2009).
+16. M. V. Chekhova, G. Leuchs, M. Żukowski, Bright squeezed vacuum: Entanglement of macro-
+scopic light beams.Opt. Commun. 337, 27–43 (2015).
+17. A. Rasputnyi,et al., High Harmonic Generation by a Bright Squeezed Vacuum.Nat. Phys 20,
+1960–1965 (2024).
+18. S. Lemieux, et al., Photon bunching in high-harmonic emission controlled by quantum light.
+arXiv:2404.05474(2024).
+19. J. Heimerl,et al., Multiphoton electron emission with non-classical light.Nat. Phys. 20, 945–
+950 (2024).
+20. J. Pölloth,et al., Driving Electrons at Needle Tips Strongly with Quantum Light .
+21. M. Lewenstein,et al., Generation of optical Schrödinger cat states in intense laser–matter in-
+teractions. Nature Physics 17 (10), 1104–1108 (2021).
+22. D. Theidel, et al., Evidence of the quantum optical nature of high-harmonic generation.PRX
+Quantum 5 (4), 040319 (2024).
+23. A. Gorlach, O. Neufeld, N. Rivera, O. Cohen, I. Kaminer, The quantum-optical nature of high
+harmonic generation.Nat. Commun. 11, 4598 (2020).
+24. A. Gorlach, et al., High-harmonic generation driven by quantum light.Nat. Phys. 19, 1689–
+1696 (2023).
+25. G. R. Harrison,et al., Generation and control of non-local quantum equivalent extreme ultra-
+violet photons, inFrontiers in Optics (Optica Publishing Group) (2023), pp. FTu6D–4.
+26. M. E. Tzur, et al., Photon-statistics force in ultrafast electron dynamics.Nat. Photonics 17,
+501–509 (2023).
+18
+27. M. E. Tzur,et al., Generation of squeezed high-order harmonics.Phys. Rev. Res. 6, 033079
+(2024).
+28. J. Sloan, et al., Entangling extreme ultraviolet photons through strong field pair generation.
+arXiv:2309.16466(2023).
+29. C. S. Lange, T. Hansen, L. B. Madsen, Electron-correlation-induced nonclassicality of light
+from high-order harmonic generation.Physical Review A 109 (3), 033110 (2024).
+30. S.Yi, et al.,Generationofmassivelyentangledbrightstatesoflightduringharmonicgeneration
+in resonant media.arXiv:2401.02817 (2024).
+31. J.Rivera-Dean, et al.,Squeezedstatesoflightafterhigh-harmonicgenerationinexcitedatomic
+systems. Phys. Rev. A 110, 063118 (2024).
+32. J. Rivera-Dean, P. Stammer, M. Ciappina, M. Lewenstein, Non-classicality induces re-
+combination in high-harmonic generation with circularly polarized fields. arXiv preprint
+arXiv:2411.11042(2024).
+33. S.Yi, et al.,Generationofmassivelyentangledbrightstatesoflightduringharmonicgeneration
+in resonant media.Physical Review X 15 (1), 011023 (2025).
+34. A. Pizzi, A. Gorlach, N. Rivera, A. Nunnenkamp, I. Kaminer, Light emission from strongly
+driven many-body systems.Nature Physics 19 (4), 551–561 (2023).
+35. N. Dudovich, et al., Measuring and controlling the birth of attosecond XUV pulses.Nature
+physics 2 (11), 781–786 (2006).
+36. W. P. Schleich,Quantum optics in phase space (John Wiley & Sons) (2015).
+37. P. B. Corkum, F. Krausz, Attosecond science.Nature physics 3 (6), 381–387 (2007).
+38. K. Schafer, B. Yang, L. DiMauro, K. Kulander, Above threshold ionization beyond the high
+harmonic cutoff.Physical review letters 70 (11), 1599 (1993).
+39. N. Ben-Tal, N. Moiseyev, A. Beswick, The effect of Hamiltonian symmetry on generation of
+odd and even harmonics.J. Phys. B At. Mol. Opt. Phys. 26, 3017 (1993).
+19
+40. M. Lewenstein, P. Balcou, M. Y. Ivanov, A. L’huillier, P. B. Corkum, Theory of high-harmonic
+generation by low-frequency laser fields.Physical Review A 49 (3), 2117 (1994).
+41. B. Carré,et al., Feynman’s path-integral approach for intense-laser-atom interactions.Science
+292 (5518), 902–905 (2001).
+42. D. Shafir, et al. , Resolving the time when an electron exits a tunnelling barrier. Nature
+485 (7398), 343–346 (2012).
+43. J. Dahlström, A. L’Huillier, J. Mauritsson, Quantum mechanical approach to probing the birth
+of attosecond pulses using a two-colour field.Journal of Physics B: Atomic, Molecular and
+Optical Physics 44 (9), 095602 (2011).
+44. T. T. Luu, H. J. Wörner, Observing broken inversion symmetry in solids using two-color high-
+order harmonic spectroscopy.Physical Review A 98 (4), 041802 (2018).
+45. H. J. Wörner, J. B. Bertrand, D. V. Kartashov, P. B. Corkum, D. M. Villeneuve, Following a
+chemical reaction using high-harmonic interferometry.Nature 466 (7306), 604–607 (2010).
+46. X.He, et al.,Interferenceeffectsintwo-colorhigh-orderharmonicgeneration. Physical Review
+A—Atomic, Molecular, and Optical Physics 82 (3), 033410 (2010).
+47. J. Rivera-Dean,et al., Strong laser fields and their power to generate controllable high-photon-
+number coherent-state superpositions.Physical Review A 105 (3), 033714 (2022).
+48. K. Y. Spasibko,et al., Multiphoton Effects Enhanced due to Ultrafast Photon-Number Fluc-
+tuations. Phys. Rev. Lett. 119, 223603 (2017), doi:10.1103/PhysRevLett.119.223603,https:
+//link.aps.org/doi/10.1103/PhysRevLett.119.223603.
+49. L. D. Landau, E. M. Lifshitz,Quantum mechanics: non-relativistic theory , vol. 3 (Elsevier)
+(2013).
+50. M. H. Devoret, R. J. Schoelkopf, Superconducting circuits for quantum information: an out-
+look. Science 339 (6124), 1169–1174 (2013).
+51. A.Blais,A.L.Grimsmo,S.M.Girvin,A.Wallraff,Circuitquantumelectrodynamics. Reviews
+of Modern Physics 93 (2), 025005 (2021).
+20
+52. L. Keldysh, Ionization in the field of a strong electromagnetic wave, inSelected Papers of
+Leonid V Keldysh (World Scientific), pp. 56–63 (2024).
+53. A. Perelomov, V. Popov, M. Terent’Ev, Ionization of atoms in an alternating electric field.Sov.
+Phys. JETP 23 (5), 924–934 (1966).
+54. M. V. Ammosov, N. B. Delone, V. P. Krainov, Tunnel ionization of complex atoms and atomic
+ions in electromagnetic field, inHigh intensity laser processes (SPIE), vol. 664 (1986), pp.
+138–141.
+55. L. Torlina, O. Smirnova, Time-dependent analytical R-matrix approach for strong-field dy-
+namics. I. One-electron systems.Physical Review A—Atomic, Molecular, and Optical Physics
+86 (4), 043408 (2012).
+56. K. E. Priebe,et al., Attosecond electron pulse trains and quantum state reconstruction in ultra-
+fast transmission electron microscopy.Nature Photonics 11 (12), 793–797 (2017).
+57. C. Bourassin-Bouchet,et al., Quantifying decoherence in attosecond metrology.Physical Re-
+view X 10 (3), 031048 (2020).
+58. L.-M. Koll, L. Maikowski, L. Drescher, T. Witting, M. J. Vrakking, Experimental control of
+quantum-mechanical entanglement in an attosecond pump-probe experiment.Physical Review
+Letters 128 (4), 043201 (2022).
+59. H. Laurell, et al., Measuring the quantum state of photoelectrons.Nature Photonics pp. 1–6
+(2025).
+60. P.-M. Paul,et al., Observation of a train of attosecond pulses from high harmonic generation.
+Science 292 (5522), 1689–1692 (2001).
+61. Y. Mairesse, F. Quéré, Frequency-resolved optical gating for complete reconstruction of at-
+tosecond bursts.Physical Review A—Atomic, Molecular, and Optical Physics 71 (1), 011401
+(2005).
+62. A. Pérez,et al., Bright squeezed-vacuum source with 1.1 spatial mode.Optics Letters 39 (8),
+2403–2406 (2014).
+21
+63. L. Mandel,Optical Coherence and Quantum Optics (Cambridge University Press) (1995).
+64. S. D. J. Krasiński, Influence of nonlinear effects on the statistical properties of a high power
+density laser beam.Optics Communications 18 (4), 424–426 (1976).
+65. G. Leuchs, Photon statistics, antibunching and squeezed states, inFrontiers of nonequilibrium
+statistical physics (Springer), pp. 329–360 (1986).
+66. C. Law, I. A. Walmsley, J. Eberly, Continuous frequency entanglement: effective finite Hilbert
+space and entropy control.Physical Review Letters 84 (23), 5304 (2000).
+67. J.G.Aase,J.K.Burchill,D.J.Knudsen,J.P.Hackett,B.Moffat,Spatialresolutionandrelative
+brightnessofamicrochannelplatedetectorsystemwithP20andP43phosphorscreens. Optical
+Engineering 50 (6), 064001–064001 (2011).
+68. J. L. Wiza,et al., Microchannel plate detectors.Nucl. Instrum. Methods 162 (1-3), 587–601
+(1979).
+69. M. Jones, M. Harvey, W. Bertsche, A. J. Murray, R. B. Appleby, Measuring the gain of a mi-
+crochannel plate/phosphor assembly using a convolutional neural network.IEEE Transactions
+on Nuclear Science 66 (12), 2430–2434 (2019).
+70. D. T. Smithey, M. Beck, M. G. Raymer, A. Faridani, Measurement of the Wigner distribution
+and the density matrix of a light mode using optical homodyne tomography: Application to
+squeezed states and the vacuum.Phys. Rev. Lett. 70, 1244 (1993).
+71. M. O. Scully, M. S. Zubairy,Quantum optics (Cambridge university press) (1997).
+Acknowledgments
+This project has receivedfunding from the Israel Science Foundation(ISF) under grant agreements
+Nos. 1315/24 and 2626/23. M.E.T. gratefully acknowledges the support of the Council for Higher
+Education scholarship for excellence in quantum science and technology. N.D. is the incumbent of
+the Robin Chemers Neustein Professorial Chair. N.D. acknowledges the Minerva Foundation, the
+22
+IsraeliScience Foundationand theEuropean ResearchCouncil forfinancial support. M.E.T.,M.B.,
+I.N., I.K., M.K., and O.C. thank the Helen Diller Quantum Center for partial financial support. We
+thank Yossi Pilas for his technical support.
+Author contributions: All authors contributed substantially to all aspects of the work.
+Competing interests: There are no competing interests to declare.
+Data and materials availability: The data supporting the findings of this study are available
+upon reasonable request.
+23
+Supplementary Materials for
+Attosecond-resolved quantum fluctuations of light and matter
+Matan Even Tzur1∗†, Chen Mor2†, Noa Yaffe2, Michael Birk1,
+Andrei Rasputnyi1,3,4,Omer Kneller2, Ido Nisim1, Ido Kaminer1, Maria Chekhova1,3,4,
+Michael Krüger1,Misha Ivanov1,5, Nirit Dudovich2, and Oren Cohen1 1Technion - Israel Institute of
+Technology, Haifa, Israel2Department of Physics of Complex Systems, Weizmann Institute of Science,
+Rehovot, Israel3Max Planck Institute for the Science of Light, Erlangen, Germany4Friedrich-Alexander
+Universität Erlangen-Nürnberg5Max Born Institute, Berlin, Germany∗Corresponding author. Email:
+Matanev@campus.technion.ac.il†These authors contributed equally to this work.
+This PDF file includes:
+Materials and Methods
+Supplementary Text
+Figures S1 to S5
+S1
+Materials and Methods
+Experimental setup
+A Ti:sapphire laser system operating at a 500Hz repetition rate delivers infrared (IR) pulses with∼
+30fsduration,atcentralwavelengthof800nmandwithanenergyof ∼ 4.3mJperpulse.Thepulses
+are directed into a Mach–Zehnder interferometer, with a coherent state800nm arm and a bright-
+squeezed-vacuum (BSV) 1600nm arm (see Figure S1). The beam is split by a beamsplitter that
+allocates90%ofthepulseenergytothedelay-controlledcoherentlineandtheremaining10%tothe
+BSV line. A phase-locked BSV with a central wavelength of 1600 nm is generated via spontaneous
+parametric down-conversion (SPDC) in a3mm, 𝜃 = 19.8◦ type-I 𝛽-barium borate (BBO) crystal
+that can support pulses with a temporal duration of15fs. The beam diameter is adjusted before the
+BBOusingabeam-reducertelescopewitharatioof1:3.A 0◦mirrorpositioned ∼ 37cmdownstream
+from the BBO enhances BSV generation with a double pass through the crystal and filters out
+diverging BSV modes leading to the generation of BSV with an output energy of∼ 0.7𝜇J (62).
+The properties of the generated BSV are described in detail in the next section. A dichroic mirror
+is employed to reflect the BSV1600nm beam, while transmitting the coherent800nm beam. An
+IR filter is used to further clear the BSV line from the fundamental coherent beam and the weak
+secondharmonicgeneratedintheBBO.Finally,abeam-expandertelescopeenlargestheBSVbeam
+diameter by a factor of 8 (to allow for tighter focusing of the BSV down the line). In the coherent
+line, a delay line compensates for the relative optical paths to overlap the fundamental IR and the
+BSV field. The sub-cycle delay between the IR and the BSV is controlled using a motorized pair
+of silica wedges, scanning the relative delay with a step size of∼ 200as. A half-wave plate (HWP)
+rotates the IR field to align its polarization axis with the generated BSV.
+The two lines are combined using a second dichroic mirror as the Mach-Zehnder beam com-
+biner, and focused by a focusing system with an effective focal length of∼ 1m into a continuous-
+flowglassnozzlefilledwithnoblegasatoms(Kr)togenerateextreme-ultraviolet(XUV)attosecond
+pulses via high-harmonic generation (HHG).
+TheXUVisspectrallyresolvedusingaflat-fieldaberration-correctedconcavegrating,recorded
+using a micro-channel plate (MCP) detector and imaged by a charge-coupled device (CCD) cam-
+era. The acquisition system is triggered by the laser to capture single-shot measurements with an
+S2
+integration time of1ms.
+BSV generation and characterization
+We generate the BSV using two passes through the non-linear crystal, as described in the section
+above. This allows for sufficient amplification for the squeezed light to be bright, as well as for
+amplification of a single spatial and spectral dominant mode (62).
+To statistically characterize our BSV source we perform 10,001 single shot measurements on
+an InGaAs camera with a spectral range of∼ 400 − 1650nm and an InGaAs spectrometer with
+a spectral range of∼ 890 − 2500nm. Figure S2 quantifies the statistical properties of the spatial
+and spectral modes of the BSV light. The mean value of the intensity𝐼 ∝ ⟨ ˆ𝑁⟩ and second order
+correlation function𝑔(2) = ( ⟨ ˆ𝑁 2− ˆ𝑁⟩
+⟨ ˆ𝑁⟩2 ) are presented in Fig S2a,d. The data clearly demonstrates the
+BSV source exhibits superbunching (i.e.,𝑔(2) > 2 (63)). To extract 𝑔(2) we used a softening
+parameter 𝑔(2) = ( ⟨ ˆ𝑁 2⟩
+⟨ ˆ𝑁⟩2+𝜖𝑠𝑜 𝑓 𝑡
+), to prevent𝑔(2) from diverging at the edges of the beam (due to
+background removal), while maintaining a change of< 1% to 𝑔(2) at the center of the beam. The
+deviation of 𝑔(2) from the theoretical value of𝑔(2) = 3 due to larger absorption of BSV photons
+by the SPDC crystal from brighter (higher photon number) realizations was already discussed and
+demonstrated elsewhere (64, 65).
+Figure S2b,e shows the raw histograms of the BSV intensity signal as measured by the spec-
+trometerandthecamera,inwhichthelongtailedphotonnumberdistributionoftheBSV(extending
+towards high photon numbers) is observed. The insets show the tails of the histograms at higher
+photon numbers, with axes scaled for visibility.
+Next, we consider the covariance of the BSV intensity signal, defined as the mutual variance of
+two observables (X,Y), Cov(𝑋, 𝑌 ) =
+
+(𝑋 − ⟨ 𝑋⟩) (𝑌 − ⟨𝑌 ⟩)
+
+. Figure S2c,f shows the covariance in
+space and spectrum. The covariance indicates that the BSV is nearly single mode in both space and
+spectrum as the entire beam is highly correlated. The effective number of modes was calculated by
+singular value decomposition (66) to be∼ 1.2.
+XUV statistical data analysis
+We performed 10,001 single shot measurements for three different experimental configurations.
+The first includes the two-color experiment, performed with the strong coherent field and the BSV
+S3
+perturbation.ThesecondisanexperimentwithacoherentdriveonlywhiletheBSVisblocked.The
+third is a background measurement with both fields blocked. We then scanned the delay between
+the BSV and coherent fields in the overlap region, with 3,001 single shot measurements per delay.
+Single shot measurements
+To accurately obtain a full statistical analysis of light, we performed single shot measurements. We
+take the measurement with a micro-channel plate (MCP) detector with a phosphorous screen P43
+which has a decay time of 1.5ms for 100% to 10% decay (67). The laser shots are taken with a
+repetition rate of 500Hz and acquisition time of 1ms, triggering acquisition by the laser pulse. This
+setting resulted in effective∼ 1.05pulses per measurement, due to leakage from pulses that arrived
+before the target pulse that did not fully decay yet.
+MCP response and 𝑔(2) calibration
+Inthis section weestablisha calibration procedure to extractphoton statisticsusing an MCP.MCPs
+are commonly used in XUV spectrometers, as they have a high gain and have a relatively high effi-
+ciencyintheXUVrange.However,theyintroduceastatisticalsinglephotonresponse( 67–69)even
+in the linear detection regime. We will now show the process that calibrates the detection to remove
+thisstatisticalresponseoftheMCPfromthemeasurement,focusingonthemeanvalue ⟨𝑁⟩ andthe
+normalized second moment𝑔(2) , but the process can be further generalized to higher moments.
+Statistics of the light source
+The intensity of a quantum light source is proportional to the photon number which can be
+described by a stochastic variable𝑁. By definition,𝑔(2) of the light source is:
+𝑔(2)
+𝑙𝑖𝑔ℎ𝑡 = ⟨𝑁 2 − 𝑁⟩
+⟨𝑁⟩2 = 1 + Var(𝑁)
+⟨𝑁⟩2 − 1
+⟨𝑁⟩ (S1)
+In the high photon number limit:
+𝑔(2)
+𝑙𝑖𝑔ℎ𝑡 = 1 + Var(𝑁)
+⟨𝑁⟩2 (S2)
+In the following we will consider this approximation for𝑔(2)
+𝑙𝑖𝑔ℎ𝑡.
+S4
+MCP single photon response
+For a single input photon, with no photon number uncertainty (𝑁 = 1), the MCP statistical
+response introduces variance to the measurement. We denote the measured intensity by a random
+variable 𝑋. In this notation the dimensions of𝑋 are measured intensity
+photon , that is to statistically describe
+an intensity detector. Let us denote the mean of the MCP response as𝜇 and the variance as𝜎2
+𝑀𝐶𝑃.
+The second order normalized moment in this case is:
+𝑔(2)
+1𝑝ℎ ≡ 1 +
+𝜎2
+𝑀𝐶𝑃
+𝜇2 (S3)
+Full signal 𝑔(2)
+The MCP measurements are given by a new random variable𝐼𝑚 = Í𝑁
+𝑖=0 𝑋𝑖, with 𝑋𝑖 being the
+random variables representing the response of the MCP to the𝑖th photon, signifying different ran-
+dom variables that share the same distribution. We note that for a detector with no uncertainty we
+have 𝐼𝑚 ∝ 𝑁 ⇒ 𝑔(2)
+𝑑𝑒𝑡𝑒𝑐𝑡𝑒𝑑 = 𝑔(2)
+𝑙𝑖𝑔ℎ𝑡.
+We proceed by examining the effect of the MCP on𝑔(2) . The 𝑔(2) measured by the MCP
+detector discussed above is:
+𝑔(2)
+𝑑𝑒𝑡𝑒𝑐𝑡𝑒𝑑 = ⟨(Í𝑁
+𝑖=0 𝑋𝑖)2⟩
+⟨Í𝑁
+𝑖=0 𝑋𝑖⟩2 (S4)
+InthelineardetectionregimetheMCPresponsestodifferentphotonsareuncorrelated(Cov (𝑋𝑖, 𝑋 𝑗 ) =
+0for 𝑖 ≠ 𝑗)and 𝑋𝑖 isindependentof 𝑁.Since 𝑋𝑖 sharethesamedistribution(theMCPsinglephoton
+response) for all𝑖, we can write the denominator of Eq. S4 as:
+⟨
+𝑁Õ
+𝑖=0
+𝑋𝑖⟩2 = ⟨
+𝑁Õ
+𝑖=0
+⟨𝑋𝑖⟩⟩ 2
+𝑁 = ⟨𝑁 𝑋𝑖⟩2 = ⟨𝑁⟩2⟨𝑋𝑖⟩2 = ⟨𝑁⟩2𝜇2 (S5)
+in which𝜇 = ⟨𝑋𝑖⟩ is independent of𝑖. And the numerator as:
+⟨(
+𝑁Õ
+𝑖=0
+𝑋𝑖)2⟩ = ⟨( 𝑁 2 − 𝑁) 𝑋𝑖 𝑋 𝑗≠𝑖 + 𝑁 𝑋2
+𝑖 ⟩ = ⟨𝑁 2⟩𝜇2 + ⟨𝑁⟩(⟨ 𝑋 2
+𝑖 ⟩ − 𝜇2) = ⟨𝑁 2⟩𝜇2 + ⟨𝑁⟩𝜎2
+𝑀𝐶𝑃 (S6)
+Therefore
+𝑔(2)
+𝑑𝑒𝑡𝑒𝑐𝑡𝑒𝑑 =
+⟨𝑁 2⟩𝜇2 + ⟨ 𝑁⟩𝜎2
+𝑀𝐶𝑃
+⟨𝑁⟩2𝜇2 (S7)
+S5
+We define the quantity added to𝑔(2)
+𝑑𝑒𝑡𝑒𝑐𝑡𝑒𝑑 by the MCP for a single input photon (𝑁 = 1) as𝐺 (2)
+1𝑝ℎ ≡
+𝜎2
+𝑀𝐶 𝑃
+𝜇2 and finally we have:
+𝑔(2)
+𝑑𝑒𝑡𝑒𝑐𝑡𝑒𝑑 = 𝑔(2)
+𝑙𝑖𝑔ℎ𝑡 + 1
+⟨𝑁⟩ 𝐺 (2)
+1𝑝ℎ (S8)
+While 𝐺 (2)
+1𝑝ℎ depends on the efficiency of the MCP and therefore can slightly change along the
+detector, 𝑔(2)
+𝑙𝑖𝑔ℎ𝑡 is fully independent of the detector or the photon number.
+In our experiment we directly measure the intensity distribution𝐼𝑑𝑒𝑡𝑒𝑐𝑡𝑒𝑑 . In the linear detection
+regime ⟨𝐼𝑑𝑒𝑡𝑒𝑐𝑡𝑒𝑑 ⟩ ∝ ⟨ 𝐼𝑙𝑖𝑔ℎ𝑡 ⟩ ∝ ⟨ ˆ𝑁⟩. From this distribution we can extract⟨𝐼𝑑𝑒𝑡𝑒𝑐𝑡𝑒𝑑 ⟩ ∝ ⟨ ˆ𝑁⟩ and
+𝑔(2)
+𝑑𝑒𝑡𝑒𝑐𝑡𝑒𝑑 . We can then repeat the full statistical measurement, each time for a different value of
+⟨𝐼𝑑𝑒𝑡𝑒𝑐𝑡𝑒𝑑 ⟩ and therefore of𝑔(2)
+𝑑𝑒𝑡𝑒𝑐𝑡𝑒𝑑 . We can fit these measurements to Eq. S8, and obtain𝑔(2)
+𝑙𝑖𝑔ℎ𝑡.
+We verify this calibration by scanning the gas pressure, and therefore the number of emitters.
+In a dilute gas the average photon number⟨ ˆ𝑁⟩ scales linearly with the number of emitters, while
+𝑔(2)
+𝑙𝑖𝑔ℎ𝑡, remains unchanged. Figure S3 describes this calibration, demonstrating its validity. Figure
+S3adescribesthemeasuredspectraatdifferentpressurevalues.FigureS3bshowsthespectraofdif-
+ferent pressures (normalized for visibility), from the lowest pressure (blue) to the highest pressure
+(red).Theirsimilaritysubstantiatesthatchangingthepressureonlyscalesthephotonnumber,while
+keepingthenormalizedmomentsofthelightitselfsuchas 𝑔(2)
+𝑙𝑖𝑔ℎ𝑡 unchanged.Finally,FigureS3cde-
+scribes the measured𝑔(2) at different points in the spectra, shown as markers on S3)a, together with
+the fit to Eq. S8. It is clear that a good agreement between the measured values and the theoretical
+fit is achieved even in very low flux regions of the spectrum.
+Inourexperimentweperformasimilarcalibrationdirectlybycomparingdifferentpixelsonthe
+detector along a spectral line, representing different number of emitters.
+Background subtraction
+The statistical properties of the measurement are dictated by the statistics of the signal as well as
+the statistics of any background:
+𝑀 = 𝑆 + 𝐵 (S9)
+Where 𝑀 is the measurement,𝑆 is the signal (including the MCP noise discussed above),𝐵 is the
+background noise (present without input XUV light), and all three parameters represent random
+S6
+variables.
+Next, we expand the moments of𝑆 in terms of the moments of𝐵 and 𝑀. The mean value
+trivially decomposes to⟨𝑀⟩ = ⟨𝑆⟩ + ⟨ 𝐵⟩ while the variance is given by:
+Var(𝑀) = Var(𝑆 + 𝐵) = ⟨𝑆2⟩ + ⟨𝐵2⟩ +2⟨𝑆⟩⟨ 𝐵⟩ − ⟨𝑆⟩2 − ⟨𝐵⟩2 − 2⟨𝑆⟩⟨ 𝐵⟩ = Var(𝑆) +Var(𝐵) (S10)
+Where we have used the lack of correlations between the background noise and the signal.
+Finally, we have the variance of the signal:
+Var(𝑆) = Var(𝑀) − Var(𝐵) (S11)
+Therefore, to obtain the mean value and𝑔(2) of the signal, the mean and variance of the back-
+ground signal are subtracted from the measurement.
+In our experiment we had two types of background mechanisms. The first, originating from
+the detection system, is measured by removing the gas from the beam path, fully eliminating the
+HHG radiation. The second originates from leakage between neighboring regions on the MCP
+resulting in signal from the bright odd harmonics affecting the weak half integer harmonics and
+the even harmonics. Therefore, the background associated with the odd harmonics can be removed
+by recording the signal in the absence of XUV radiation. The background associated with the half
+integer and even harmonics is removed by measuring the HHG signal while blocking the BSV
+source. Equation S12 describes𝑔(2) in the presence of background with a mean value⟨𝑁𝐵𝐺 ⟩, and
+second order normalized coherence𝑔(2)
+𝐵𝐺:
+𝑔(2)
+𝑑𝑒𝑡𝑒𝑐𝑡𝑒𝑑 = ⟨( 𝑁 + 𝑁𝐵𝐺 )2⟩ + ⟨ 𝑁 + 𝑁𝐵𝐺 ⟩𝜎2/𝜇2
+(⟨ 𝑁⟩ + ⟨ 𝑁𝐵𝐺 ⟩) 2 =
+𝑔(2)
+𝑙𝑖𝑔ℎ𝑡 · ⟨ 𝑁⟩2 + 𝑔(2)
+𝐵𝐺 · ⟨ 𝑁𝐵𝐺 ⟩2 + ⟨ 𝑁 + 𝑁𝐵𝐺 ⟩𝜎2/𝜇2
+(⟨ 𝑁⟩ + ⟨ 𝑁𝐵𝐺 ⟩) 2
+(S12)
+Clearly, when ⟨𝑁⟩ grows with respect to⟨𝑁𝐵𝐺 ⟩, 𝑔(2) converges to𝑔(2)
+𝑙𝑖𝑔ℎ𝑡. After removing the
+full background signal we obtain the𝑔(2) calibration curve from Eq. S8.
+Derivation of Eq. (1) in the main text
+Inthissection,wederiveEq.1inthemaintext,describingharmonicintensitiesinourexperiment,as
+measured on a shot-by-shot basis. We employ the semi-classical strong-field approximation theory
+S7
+(40). For an atom with an ionization potential𝐼𝑝, and an electron with a mass𝑚, that interacts with
+a linearly polarized light, the semi-classical action is given by:
+𝑆 =
+¹ 𝑡
+𝑡′
+𝑑𝑡 ′′
+ ( 𝑝 − 𝑒 𝐴(𝑡′′))2
+2𝑚 + 𝐼𝑝
+
+(S13)
+𝐴(𝑡) = 𝐴0𝑠𝑖𝑛 (𝜔𝑡) + 𝐴𝑝𝑠𝑖𝑛 (𝜔𝑡/2 + 𝜙𝑇𝐶 ) (S14)
+in which𝜔 corresponds to the angular frequency of the bright 800 nm coherent beam, and𝜙TC
+is the two-colorphase.𝐴0 and 𝐴𝑝 are the vectorpotential amplitudes of the 800 nm pump and 1600
+nm perturbation, respectively. Assuming𝐴𝑝 ≪ 𝐴0, this can be written as:
+𝑆 ≈ 𝑆0 + 𝜎 (S15)
+In which
+𝑆0 =
+¹ 𝑡
+𝑡′
+𝑑𝑡 ′′
+ ( 𝑝 − 𝑒 𝐴0 sin(𝜔𝑡′′))2
+2𝑚 + 𝐼𝑝
+
+(S16)
+𝜎 = −𝑒 𝐴𝑝
+¹ 𝑡
+𝑡′
+𝑑𝑡 ′′ ©­­
+«
+( 𝑝 − 𝑒 𝐴0 sin(𝜔𝑡′′)) sin
+
+𝜔𝑡 ′′
+2 + 𝜙TC
+
+𝑚
+ª®®
+¬
+(S17)
+The Ω frequency component of the electronic dipole moment is given by a sum of four con-
+tributions from four consecutive half cycles, in a close analogy to previous two color experiments
+(35, 43):
+𝑋Ω =
+Õ
+𝑛
+𝑥 (𝑛)
+Ω
+
+𝑒𝑖𝜎 (𝑡′,𝑡,𝑝 ) − 𝑒𝑖𝜎 (𝑡′+ 𝑇
+2 ,𝑡+ 𝑇
+2 ,−𝑝)−𝑖Ω 𝑇
+2 + 𝑒𝑖𝜎 (𝑡′+𝑇 ,𝑡+𝑇 ,𝑝)−𝑖Ω𝑇
+− 𝑒𝑖𝜎 (𝑡′+ 3𝑇
+2 ,𝑡+ 3𝑇
+2 ,−𝑝)−𝑖Ω 3𝑇
+2
+
+(S18)
+in which𝑇 = 2𝜋/𝜔, the summation over𝑛 = 1, 2 corresponds to summation over short (𝑛 = 1)
+and long (𝑛 = 2) trajectories, and𝑥 (𝑛)
+Ω is the unperturbed (𝐴𝑝 = 0) dipole moment from a single-
+half cycle at frequencyΩ . The complex phase perturbation to the electron’s action satisfies the
+S8
+following relations:
+𝜎1(𝑛, Ω, 𝜙TC) = 𝜎(𝑡′, 𝑡, 𝑝 ) =
+−𝑒 𝐴𝑝
+¹ 𝑡 (𝑛,Ω)
+𝑡′( 𝑛,Ω)
+𝑑𝑡 ′′ 
+𝑝 (𝑛,Ω) − 𝑒 𝐴0 sin(𝜔𝑡′′)
+
+×
+sin
+
+𝜔𝑡 ′′
+2 + 𝜙TC
+
+𝑚 = 𝑑𝜎2
+𝑑𝜙TC
+(S19)
+𝜎2(𝑛, Ω, 𝜙TC) = 𝜎1
+
+𝑡′ + 𝑇
+2 , 𝑡 + 𝑇
+2 , −𝑝, 𝜙TC
+
+=
+𝑒 𝐴𝑝
+¹ 𝑡 (𝑛,Ω)
+𝑡′( 𝑛,Ω)
+𝑑𝑡 ′′ 
+𝑝 (𝑛,Ω) − 𝑒 𝐴0 sin(𝜔𝑡′′)
+
+×
+cos
+
+𝜔𝑡 ′′
+2 + 𝜙TC
+
+𝑚 = − 𝑑𝜎1
+𝑑𝜙TC
+(S20)
+We note that
+𝜎 (𝑡′ + 𝑇 , 𝑡 + 𝑇 ,−𝑝) = −𝜎1(𝑛, Ω, 𝜙TC)
+and
+𝜎
+
+𝑡′ + 3𝑇
+2 , 𝑡 + 3𝑇
+2 , −𝑝
+
+= −𝜎2(𝑛, Ω, 𝜙TC).
+Therefore, we may reorganize the expression𝑋Ω depending on the value ofΩ :
+𝑋Ω = 2𝑥Ω ×
+8>>>>>>>>>> <
+>>>>>>>>>>:
+cos(𝜎1) + cos(𝜎2) if Ω = (2𝑚 − 1)𝜔,
+cos(𝜎1) − cos(𝜎2) if Ω = 2𝑚𝜔,
+𝑖 sin(𝜎1) + sin(𝜎2) if Ω =
+
+2𝑚 − 3
+2
+
+𝜔,
+𝑖 sin(𝜎1) − sin(𝜎2) if Ω =
+
+2𝑚 − 1
+2
+
+𝜔.
+(S21)
+in which 𝑚 is an integer. This constitutes Eq. 1 in the main text. We note that the perturbations
+to the electron’s action,𝜎1,2, are complex valued. Their real and imaginary parts are denoted by
+𝜎1,2 ≡ 𝛼1,2 + 𝑖𝛽 1,2, where 𝛼 𝑗 and 𝛽 𝑗 correspond to the phase and amplitude of the emission from
+half cycle 𝑗, respectively.
+Reconstruction of (𝜎1, 𝜎2) from measured harmonic intensities
+Weextracttheperturbationparameters 𝜎1,2 = 𝛼1,2+𝑖𝛽 1,2,byfittingaquartetofmeasuredharmonic-
+intensity families to Eq.(1) in the main text. Based on Eq. 1, we can express the ratio between the
+BSV perturbed harmonics and the unperturbed harmonics, in terms of𝛼𝑖, 𝛽𝑖:
+S9
+𝐴 ≡ |𝑋(2𝑚−1)𝜔|2
+|𝑥(2𝑚−1)𝜔|2 = (cos(𝛼1) cosh(𝛽1) + cos(𝛼2) cosh(𝛽2))2
++ (sin(𝛼1) sinh(𝛽1) + sin(𝛼2) sinh(𝛽2))2
+(S22)
+𝐵 ≡ |𝑋2𝑚𝜔 |2
+|𝑥(2𝑚−1)𝜔|2 = (cos(𝛼1) cosh(𝛽1) − cos(𝛼2) cosh(𝛽2))2
++ (sin(𝛼1) sinh(𝛽1) − sin(𝛼2) sinh(𝛽2))2
+(S23)
+𝐶 ≡ |𝑋(2𝑚−1/2)𝜔|2
+|𝑥(2𝑚−1)𝜔|2 = (− cos(𝛼1) sinh(𝛽1) + sin(𝛼2) cosh(𝛽2))2
++ (sin(𝛼1) cosh(𝛽1) + cos(𝛼2) sinh(𝛽2))2
+(S24)
+𝐷 ≡ |𝑋(2𝑚−3/2)𝜔|2
+|𝑥(2𝑚−1)𝜔|2 = (− cos(𝛼1) sinh(𝛽1) − sin(𝛼2) cosh(𝛽2))2
++ (sin(𝛼1) cosh(𝛽1) − cos(𝛼2) sinh(𝛽2))2
+(S25)
+In which |𝑋𝑞𝜔 |2 is the intensity of the𝑞𝜔 harmonic in the presence of the BSV, and4|𝑥(2𝑚−1)𝜔|2
+is the intensity of the BSV-unperturbed emission of the adjacent odd harmonic (𝑥(2𝑚−1)𝜔 is propor-
+tional to the unperturbed dipole moment at a frequency(2𝑚 − 1)𝜔 generated by a single half-cycle
+of the driving field; see Equation (S21)).
+Extracting the perturbation parameters 𝛼𝑖, 𝛽𝑖 requires a careful analysis on a pixel-by-pixel
+level. To recover these parameters we employ the following datasets: (i) coherent-only driving field
+(“Coh”, odd only harmonics), (ii) background measurements, “BG”, no XUV radiation, and (iii)
+coherent driving field with bright squeezed vacuum perturbation (“BSV”, full emission spectrum
+perturbed by BSV).
+For each two-color delay𝜏 and each harmonic order, we extract the following signals:
+𝑆(A) = 𝑆𝐵𝑆𝑉 − 𝑆BG, 𝑆 (B) = 𝑆𝐵𝑆𝑉 − 𝑆Coh.
+in which 𝑆 is a single intensity measurement of the harmonic (perturbed by the BSV),𝑆BG is the
+mean intensity measured on the same detector pixels when both the coherent and BSV beams are
+off, and 𝑆Coh is the mean intensity measured when the BSV beam is off, while the coherent beam
+is on.
+S10
+For each odd harmonic order 𝑁 (e.g. {13, 15, 17, 19, 21}) and time delay 𝜏, we assemble a
+quartet of harmonic intensities:
+A(𝑁, 𝜏 ) (odd) : 𝑞 = 𝑁 from 𝑆(A) , (S26)
+B(𝑁, 𝜏 ) (even) : 𝑞 = 𝑁 + 1 from 𝑆(B) , (S27)
+C(𝑁, 𝜏 ) (odd+ 1
+2) : 𝑞 = 𝑁 − 1
+2 from 𝑆(B) , (S28)
+D(𝑁, 𝜏 ) (odd+ 3
+2) : 𝑞 = 𝑁 + 1
+2 from 𝑆(B) . (S29)
+Here 𝑆( 𝐴) denotes the BSV-perturbed odd-harmonic intensity measured in the after background
+subtraction, whereas 𝑆(𝐵) denotes the BSV-perturbed intensity measured after coherent-baseline
+subtraction. Using the coherent-subtracted data𝑆(𝐵) for even and half-integer harmonics removes
+residual spectral leakage from bright odd harmonics into neighboring bins and ensures that the
+extracted perturbation parameters𝜎1,2 vanish when the BSV is blocked.
+After assembling the quartet of background and coherent subtracted reduced intensities, each
+single-shot intensity quartet 𝐴, 𝐵, 𝐶, 𝐷 (𝑁, 𝜏 ) is normalized with a common normalization factor
+𝑁 𝑜𝑟𝑚(𝑁, 𝜏 ):
+𝐴(𝑁, 𝜏 ) → 4𝐴(𝑁, 𝜏 )
+Norm(𝑁, 𝜏 ) , 𝐵 (𝑁, 𝜏 ) → 4𝐵(𝑁+1, 𝜏)
+Norm(𝑁, 𝜏 ) , 𝐶 (𝑁, 𝜏 ) → 4𝐶 (𝑁− 1
+2, 𝜏)
+Norm(𝑁, 𝜏 ) , 𝐷 (𝑁, 𝜏 ) → 4𝐷 (𝑁+ 1
+2, 𝜏)
+Norm(𝑁, 𝜏 ) .
+(S30)
+The normalization coefficient is chosen as the shot-average of𝐴(𝑁, 𝜏 ). The normalized values of
+𝐴, 𝐵, 𝐶, 𝐷 (𝑁, 𝜏 ) are the values used for the reconstruction of the perturbation parameters for the
+harmonic quartet adjecent to the odd harmonic𝑁 at a time delay𝜏, i.e., from them we extract
+the parameters 𝜎1,2(𝑁, 𝜏 ) on a shot by shot basis. The factor of 4 in the normalization is chosen
+such that, when the intensities of the even and half-integer harmonics vanish, the normalized odd-
+harmonic intensity equals 4. This convention ensures consistency with the normalization used in
+Eq. (S21).
+Parametric model and unknowns
+In the following stage we reconstruct the complex parameters by fitting the model predictions from
+Equation (S21) (corresponding to Equation 1 in the main text), to the measured (normalized) har-
+monics intensities, extracted from Equation (S30). The model describes the harmonic intensities
+S11
+as functions of the complex perturbation parameters𝜎1,2 and the BSV-unperturbed odd-harmonic
+emission amplitude, given by4|𝑥(2𝑚−1)𝜔|2. Before applying this analysis we note that irrespective
+of the presence of the BSV perturbation, the unperturbed odd-harmonic intensity4|𝑥(2𝑚−1)𝜔|2 it-
+self fluctuates from shot to shot (e.g., due to fluctuations of the coherent800 nm beam). If these
+fluctuations are ignored, they would be falsely attributed to variations in the perturbation parame-
+ters 𝜎1,2. To avoid this cross-contamination, we introduce a per-shot normalized scaling factor𝑋2
+proportional to the unperturbed emission amplitude
+𝑋2 = |𝑥(2𝑚−1)𝜔|2/Norm(𝑁, 𝜏 ) (S31)
+This term accounts for intrinsic fluctuations of the coherent HHG emission and is fitted together
+with 𝜎1,2 for each shot.
+To reconstruct the parameters𝜎1,2 and the scaling factor𝑋2, we compare the measured normal-
+izedharmonicintensities 𝐴(meas)
+𝑁 , . . . , 𝐷 (meas)
+𝑁 withtheirmodelcounterpartsderivedfromEq.(S21).
+For compactness, we write
+𝐴(model)
+𝑁 = 𝑋2 | cos 𝜎1 + cos 𝜎2|2,
+𝐵(model)
+𝑁 = 𝑋2 | cos 𝜎1 − cos 𝜎2|2,
+𝐶 (model)
+𝑁 = 𝑋2 | 𝑖 sin 𝜎1 + sin 𝜎2|2,
+𝐷 (model)
+𝑁 = 𝑋2 | 𝑖 sin 𝜎1 − sin 𝜎2|2.
+The five fitting parameters are𝛼1,2, 𝛽1,2 (with 𝜎𝑖 = 𝛼𝑖 + 𝑖𝛽 𝑖) and𝑋2 > 0, while the measured values
+remain fixed. The residual vector between measurement and model is
+r =
+266666666664
+𝐴(meas)
+𝑁 − 𝐴(model)
+𝑁
+𝐵(meas)
+𝑁 − 𝐵(model)
+𝑁
+𝐶 (meas)
+𝑁 − 𝐶 (model)
+𝑁
+𝐷 (meas)
+𝑁 − 𝐷 (model)
+𝑁
+377777777775
+, F =
+h
+𝑟1/𝐴(meas)
+𝑁 , 𝑟 2/𝐵(meas)
+𝑁 , 𝑟 3/𝐶 (meas)
+𝑁 , 𝑟 4/𝐷 (meas)
+𝑁
+i𝑇
+.
+Normalizingtheresidualsin thiswayisessential: withoutit,the harmonicwiththe largestintensity
+would dominate the fit, causing the optimization to minimize its residual at the expense of the
+others. A nonlinear least-squares solver (lsqnonlin, MATLAB) iteratively updates𝛼1,2, 𝛽1,2, 𝑋2
+to minimize the normalized residual norm∥F∥2, subject to
+𝛼1,2 ∈ [− 𝜋, 𝜋], 𝛽 1,2 ∈ [− 𝜋, 𝜋], 𝑋 2 > 0.
+S12
+T wo-stage alternating solver
+Because of the intrinsic symmetries of Eq. (1) in the main text, reconstructing𝜎1,2 from the mea-
+sured harmonic intensities is not unique. In particular, the intensities are invariant under the trans-
+formations 𝜎1,2 → − 𝜎1,2 and (𝜎1, 𝜎2) ↔ ( 𝜎2, −𝜎2). As a result, several mathematically valid
+solutionscorrespondtothesamephysicaldata.Althougheachshotmustphysicallycorrespondtoa
+single physical pair(𝜎1, 𝜎2), numerical solvers may converge to any of these symmetric branches.
+To remove this ambiguity, we adopt a two-stage alternating strategy. In the first stage, we inten-
+tionally break the symmetry to guide the solver toward a single branch; in the second stage, we
+reintroduce the original equations and refine the result to the physical solution.
+Stage 1: solve modified (symmetry-broken) equations to obtain an initial guess. Herewetem-
+porarily alter the trigonometric combinations in Equation (S21) by replacing
+cos 𝜎1 ± cos 𝜎2 − → cos 𝜎1 ± 2 cos 𝜎2, 𝑖 sin 𝜎1 ± sin 𝜎2 − → 𝑖 sin 𝜎1 ± 2 sin 𝜎2,
+which breaks the degeneracy between equivalent solutions. The system is then solved iteratively,
+starting from a random initial guess for(𝑋2, 𝛼1, 𝛼2, 𝛽1, 𝛽2), and iteratively:
+1. fixing 𝑋2 and solving for(𝛼1, 𝛼2, 𝛽1, 𝛽2), and
+2. fixing (𝛼1, 𝛼2, 𝛽1, 𝛽2) and solving for𝑋2.
+Thesetwostepsarerepeateduntilconvergence.Theresultingsolutionprovidesaconsistent,symmetry-
+broken initialization for Stage 2.
+Stage 2: solve the physical equations using the Stage 1 result as an initial condition. With the
+initial guess supplied by Stage 1, we repeat the same alternating minimization using the unmodi-
+fied, physical equations (Equation (S21)). Because the initialization already selects one symmetry
+branch, the solver now converges reliably to the unique physical solution rather than to an arbitrary
+symmetric equivalent.
+S13
+Experimental Husimi reconstruction from (𝛼1,2, 𝛽1,2, 𝑋2)
+WereconstructexperimentalHusimi(Q)distributionsforselectedharmonicfamiliesusingthefitted
+parameters
+𝛼1, 𝛼 2, 𝛽 1, 𝛽 2, 𝑋2.
+This reconstruction maps the extracted perturbation parameters onto a phase-space representation
+of the emitted field. We define quantity𝑥Ω ≡ √𝑋2 which represents the magnitude of the unper-
+turbed harmonic field amplitude, since𝑋2 is proportional to its intensity (see Eqs. (S31), (S21)).
+WhentheBSVperturbationisblocked, 𝑥Ω isproportionaltotheper-shotcoherentXUVamplitude.
+Because the optical phase of the unperturbed emission cannot be measured on a shot-by-shot
+basis, we treat it as a random variable with uniform distribution𝜙 ∼ Unif[0, 2𝜋). Each shot is
+therefore assigned a complex unperturbed amplitude
+𝐸0 ≡ ( 𝑥Ω − ⟨ 𝑋Ω⟩) 𝑒𝑖𝜙 + ⟨ 𝑋Ω⟩,
+where ⟨𝑋Ω⟩ is the ensemble mean over shots at the same two-color delay and harmonic order. This
+assumption corresponds to a coherent XUV state with amplitude noise distributed equally between
+its two quadratures (9–11).
+Normalization. To express all quadratures in units of the vacuum noise level of the unperturbed
+coherent state, we rescale the reconstructed amplitudes such that⟨Δ𝑋 2⟩ = ⟨Δ𝑃2⟩ = 1/2. The
+quadrature variances of the unperturbed amplitudes𝐸0 are
+𝜎2
+𝑋 = Var ℜ𝐸0
+, 𝜎 2
+𝑃 = Var ℑ𝐸0
+,
+and the corresponding normalization factor is
+𝜎𝑞 𝑝 =
+q
+1
+2 (𝜎2
+𝑋 + 𝜎2
+𝑃), N =
+√
+2 𝜎𝑞 𝑝.
+Dividing all reconstructed quadrature amplitudes byN ensures that the Husimi distributions are
+expressed in canonical quantum-optical units, with quadrature variance1/2 when 𝜎1,2 = 0 (i.e., in
+the BSV-unperturbed case).
+S14
+Husimi reconstruction. For each shot, the harmonic quadrature amplitudes are then obtained by
+combining the unperturbed amplitude𝐸0 with the complex perturbations𝜎1,2 according to the four
+harmonic families:
+Row 1 (odd-like): 𝑄 = 𝐸0 [cos 𝜎1 + cos 𝜎2]
+N , (S32)
+Row 2 (even-like): 𝑄 = 𝐸0 [cos 𝜎1 − cos 𝜎2]
+N , (S33)
+Row 3 (odd+1
+2) : 𝑄 = 𝐸0 [ sin 𝜎2 + 𝑖 sin 𝜎1 ]
+N , (S34)
+Row 4 (odd+3
+2) : 𝑄 = 𝐸0 [ − sin 𝜎2 + 𝑖 sin 𝜎1 ]
+N . (S35)
+The corresponding normalized quadratures are𝑋 = ℜ𝑄 and 𝑃 = ℑ𝑄. From the ensemble of
+𝑁 laser shots, the set of quadratures{( 𝑋 𝑗 , 𝑃 𝑗 )} 𝑁
+𝑗=1 yields the experimental Husimi distribution
+𝑄(𝑋, 𝑃 ), which represents the probability density to measure a coherent state𝛼 = 𝑋 + 𝑖𝑃 with
+quadrature amplitudes(𝑋, 𝑃 ).
+Wigner reconstruction of the single-photon channel of half-integer harmonics
+The generation of half-integer harmonics can be described perturbatively with respect to the BSV
+field. This field can be viewed as a superposition of two channels associated with first- and third-
+orderperturbations,correspondingtotheabsorptionoremissionofoneorthreeBSVphotonsduring
+the strong-field interaction. In the following, we isolate and reconstruct the Wigner function of the
+single-photon channel, which corresponds to the absorption or emission of a single BSV photon
+during the strong-field process.
+Starting from Eq. (S21), the complex field of the(2𝑚 − 3
+2)𝜔 harmonic is
+𝑋(2𝑚− 3
+2 )𝜔 ∝ 𝑖 sin 𝜎1 + sin 𝜎2,
+with 𝜎𝑗 = 𝛼 𝑗 + 𝑖𝛽 𝑗. Expanding this expression in powers of𝜎1,2 decomposes the response into
+distinct photonic pathways:
+𝑋(2𝑚− 3
+2 )𝜔 (𝜙TC) ∝  𝜎2 + 𝑖𝜎1
+
+|      {z      }
+single BSV photon
+− 1
+6
+ 𝜎3
+2 + 𝑖𝜎 3
+1
+
+|       {z       }
+three BSV photons
++ . . .
+S15
+The first term corresponds to the single-photon channel, for which we define the complex field
+amplitude
+𝜖 ≡ X + 𝑖P = 𝜎2(0) + 𝑖 𝜎1(0).
+When the two-color delay𝜙TC is scanned, Eqs. (S19)–(S20) describe a rotation of(𝜎1, 𝜎2) in the
+complex plane, and thus of𝐸:
+𝜖 (𝜙TC) = 𝜖 𝑒 −𝑖𝜙 TC, 𝑋 𝜙 = ℜ
+
+𝜖 𝑒 −𝑖𝜙 TC
+	
+.
+In this picture, 𝜙TC plays the role of the local-oscillator phase in homodyne detection: varying
+𝜙TC samples different quadrature projections𝑋𝜙, yielding the set of marginals𝑃(𝑋𝜙) associated
+with the single-photon mode𝜖. The Wigner function𝑊 (𝑋, 𝑃 ) of this mode is then obtained—
+up to an overall scale—by performing an inverse Radon transform following standard homodyne-
+tomography protocols (70, 71).
+Figure S5 shows the reconstructed Wigner function for𝑞 = 14.5. The measured quadrature
+𝑋𝜙 (𝜙TC)exhibitsnegligiblemeandisplacementandaphase-dependentvariance,with min𝜙 Δ𝑋 2
+𝜙/max𝜙 Δ𝑋 2
+𝜙 ≃
+0.55. The corresponding𝑊 (𝑋, 𝑃 ) is centered near the origin and elongated along one quadrature
+axis, consistent with a squeezed single-photon channel (Fig. S5a–b).
+TDSE Simulations and Husimi Reconstruction
+In this section, we outline the numerical methodology used to calculate the quantum states of har-
+monics presented in Figure 4 of the main text. The procedure consists of two steps. First, we solve
+the semi-classical time-dependent Schrödinger equation (TDSE) for an atom driven by a classical,
+bi-chromatic, 𝜔 − 𝜔/2 laser field, sampling a broad range of the𝜔/2-field amplitudes and phases.
+Second, we evaluate the quantum state of the harmonics (represented by the Husimi distribution)
+using the joint probability density function of their amplitudes and phases.
+1. Semi-classical Time-Dependent Schrödinger Equation (TDSE) simulations
+We solve the one-dimensional time-dependent Schrödinger equation (TDSE)
+𝑖ℏ 𝜕
+𝜕𝑡 Ψ(𝑥, 𝑡) = ˆ𝐻 (𝑡)Ψ(𝑥, 𝑡),
+S16
+with Hamiltonian
+ˆ𝐻 (𝑡) = − ℏ2
+2𝑚𝑒
+𝜕2
+𝜕𝑥 2 + 𝑉atom(𝑥) + 𝑉abs(𝑥) + 𝑥𝐸 (𝑡).
+We use atomic units throughout.
+Atomic potential (Krypton). The krypton atom is modeled by a short-range Pöschl–Teller po-
+tential
+𝑉atom(𝑥) = − 𝑉0
+cosh2(𝛼𝑥)
+,
+with parameters
+𝑉0 = 0.855, 𝛼 = 0.68,
+chosen to exhibit the ionization potential of Kr.
+Numerical box and absorber. The TDSE is solved over a discrete spatial grid in one dimension,
+centered at𝑥 = 0, with a uniform grid spacing𝑑𝑥 and grid size𝐿𝑥:
+𝐿𝑥 = 101 a.u., 𝑑𝑥 = 0.12 a.u.,
+To suppress reflections from the grid edge, a complex absorbing potential is applied for|𝑥| > 𝑅 abs:
+𝑉abs(𝑥) = −𝑖 AbsStrength  |𝑥| − 𝑅abs
+ 3 Θ |𝑥| − 𝑅abs
+,
+where
+𝑅abs = 0.7 𝐸0
+𝜔2 , AbsStrength = 5 × 10−2.
+in which𝐸0 and 𝜔 are the peak electric field amplitude and angular frequency of the driving laser
+pulse.
+S17
+Driving electric field. The atom is driven by a laser pulse consisting of a noiseless fundamental
+component at frequency𝜔 (𝜆 ≈ 800 nm) and a stochastic component at half the frequency (𝜔/2):
+𝐸 (𝑡) =
+h
+𝑦𝑥 cos
+
+𝜔𝑡
+2 + 𝜙
+
++ 𝑦𝑦 sin
+
+𝜔𝑡
+2 + 𝜙
+
++ 𝐸0 cos(𝜔𝑡)
+i
+𝑓 (𝑡).
+In which 𝐸0 corresponds to a peak intensity of𝐼 = 1014 W/cm2 in atomic units, 𝑓 (𝑡) is the
+pulse envelope (defined below), and𝜙 is the relative phase between the𝜔 and 𝜔/2 components
+(i.e., the two-color phase), scanned over[0, 2𝜋], and 𝑦𝑥 and 𝑦𝑦 are the electric field amplitudes of
+the cosine and sine quadratures of stochastic𝜔/2 component;
+Pulse envelope implementation. A trapezoid envelope 𝑓 (𝑡) is constructed by concatenating a
+time-linear rising segment, a flat plateau, and a linear fall. With𝑁rise rise cycles,𝑁 𝑝 plateau cycles,
+and 𝑁fall fall cycles, the total pulse duration is
+𝑇 = (𝑁rise + 𝑁 𝑝 + 𝑁fall) 𝑇cyc, 𝑇 cyc = 2𝜋
+𝜔 .
+with 𝑁𝑟𝑖𝑠𝑒 = 𝑁 𝑓 𝑎𝑙𝑙 = 3, 𝑁 𝑝 = 8. Defining𝑡0 = 0, 𝑡rise = 𝑡0 + 𝑁rise𝑇cyc, and𝑡fall = 𝑇 − 𝑁fall𝑇cyc, the
+envelope is
+𝑓 (𝑡) =
+8>>>>>>>>>>>>> <
+>>>>>>>>>>>>>:
+𝑡−𝑡0
+𝑡rise−𝑡0
+, 𝑡 0 < 𝑡 < 𝑡 rise,
+1, 𝑡 rise < 𝑡 < 𝑡 fall,
+𝑇−𝑡
+𝑇−𝑡fall
+, 𝑡 fall < 𝑡 < 𝑇 ,
+0, otherwise.
+This provides a trapezoidal envelope that smoothly switches the field on and off.
+Stochastic sampling of the 𝜔/2 field. We sample the amplitude of the𝜔/2 quadratures from
+independent Gaussian distributions:
+𝑦𝑥 ∼ N (0, 𝜎2
+𝑥 ), 𝑦 𝑦 ∼ N (0, 𝜎2
+𝑦 ),
+With the choice:
+S18
+𝜎𝑥 = 2.5 × 105 𝜀(1)
+√
+2
+, 𝜎 𝑦 = 2.5 × 104 𝜀(1)
+√
+2
+, 𝜀 (1) ≈ 10−8.
+This mimics vacuum (for𝜎1 = 𝜎2 = 𝜖 (1)) or bright squeezed-vacuum statistics in the𝜔/2
+mode. Each pair(𝑦𝑥, 𝑦 𝑦) defines a random quadrature realization of the low-frequency field.
+Propagation. The wavefunction is propagated with a split-step operator method, from which we
+obtain the time dependent dipole acceleration as
+𝑎(𝑡) =
+
+− 𝜕𝑥𝑉atom(𝑥)
+
+− 𝐸 (𝑡).
+The Fourier transform 𝑎(𝜔) provides the single-atom harmonic emission spectrum for each
+shot, that is in good qualitative agreement with the experimental results, up to an overall scale
+factor; the overall scale factor may be attributed to the choice of the amplitude of infrared vacuum
+fluctuations in the simulation,𝜖 (1), which is not measured experimentally.
+2. Reconstruction of quadrature distributions, Husimi, and Wigner functions
+Quadrature extraction. For a given harmonic order𝐻, we extract the Fourier coefficient from
+the acceleration trace𝑎(𝐻𝜔):
+𝑎(𝐻𝜔) ∝ 𝑋 + 𝑖𝑃,
+where
+𝑋 = ℜ( 𝑎(𝐻𝜔)) , 𝑃 = ℑ( 𝑎(𝐻𝜔)) .
+Each Monte-Carlo shot contributes a pair(𝑋, 𝑃 ), forming an ensemble of quadrature samples.
+Normalization to vacuum. To assign physical meaning to the quadratures, we normalize them
+against a reference dataset, calculated with𝜎1 = 𝜎2 = 𝜖 (1). For each harmonic we compute
+𝜎2
+𝑋 = Var(𝑋), 𝜎 2
+𝑃 = Var(𝑃),
+and rescale (X,P) such that for vacuum,
+1
+2
+ 𝜎2
+𝑋 + 𝜎2
+𝑃
+ = 1
+2 .
+S19
+HHG
+sourceMCP
+Grating
+BBO
+HWP
+Wedges
+BSDM
+DM
+Delay stageVacuum chamber
+IR /f_ilter Telescope
+Focusing
+system
+Telescope
+Figure S1: Experimental setup. A strong IR pulse with 30fs duration and800nm central wave-
+length is split in a Mach-Zehnder interferometer into a BSV arm and a coherent arm. The BSV is
+generated by SPDC through a double pass in a BBO crystal with a central wavelength of1600nm.
+TherelativedelaybetweentheIRandBSViscompensatedusingadelaystageandfurthercontrolled
+with sub-cycle precision using a pair of glass wedges located in the coherent arm. Polarization and
+focusing are separately manipulated to match the BSV and coherent modes. The two arms are com-
+bined using a dichroic mirror and focused into a continuous-flow glass nozzle filled with Kr to
+produce quantum perturbed HHG in the XUV regime.
+Husimi Q function. The normalized quadratures are binned into a 2D histogram, interpolated
+onto a fine grid, and convolved with a Gaussian kernel for smoothing. This yields the Husimi Q
+distribution:
+𝑄𝐻 (𝑋, 𝑃 ) = 1
+𝜋 ⟨𝛼| ˆ𝜌𝐻 |𝛼⟩, 𝛼 = 𝑋 + 𝑖𝑃√
+2
+.
+S20
+Figure S2: 1600 nm BSV source properties. a),b),c) Spectral properties. d),e),f) Spatial prop-
+erties. a),d) 𝑔(2) and mean value on the spectrometer (camera).b),e) central wavelength (beam
+center) histogram. The inset continues the histogram on a different scale for higher photon num-
+bers. c),f) spectral (spatial) covariance. The red lines show the mean value measured in spectrum
+(space).
+S21
+11 13 15 17 19 21 23
+Harmonic order
+11.5 12 12.5 13 13.5
+Harmonic order
+0
+20
+40
+60
+80
+100
+120Mean Intensity [arb. units]
+0.5 1 1.5 2
+5
+10
+15g(2)
+0 1 2 3 4
+10
+20
+30g(2)
+0 5 10 15 20 25
+0
+10
+20g(2)
+0 50 100
+1
+2
+3g(2)
+0 5 10
+Mean Intensity [arb. units]
+2
+4g(2)
+a) b) c)
+Figure S3: Verification of the MCP calibration procedure a) Non-normalized spectra of differ-
+ent gas pressures, rising from blue to red, in a specific spectral region for clarity.b) Normalized
+mean spectrum for the same gas pressures with the same color code. It is apparent that the
+normalized spectra are identical up to SNR, indicating that scanning the gas pressure modi-
+fies the mean photon number only. c) Fits of𝑔(2) as a function of intensity to Eq. S8 at different
+spectral regions, seen as corresponding markers in a).
+S22
+Figure S4: Oscillations of the statistics of the attosecond light as a function of the two color
+delay. a) intensity mean value and b 𝑔(2) as a function of the two-color delay, normalized
+separately for each harmonic, and DC normalized with respect to the delay.
+S23
+a b
+φ [rad]
+Xφ
+Figure S5: Tomography of the Wigner function single-photon channel for a half-integer har-
+monic. (a) Measured quadrature amplitude𝑋𝜙 of harmonic 𝑞 = 14.5 versus two-color delay𝜙TC.
+Themeandisplacementisnegligibleandthevarianceoscillateswith 𝜙TC,consistentwithsqueezed-
+likebehavior. (b)ReconstructedWignerfunctionobtainedfromtheset {𝑃(𝑋𝜙)} 𝜙 viainverseRadon
+transform. The distribution is centered near zero displacement and exhibits anisotropic noise, char-
+acteristic of squeezed-vacuum.
+S24

@@ -1,0 +1,384 @@
+Phonon-driven decoherence of high-harmonic generation in the solid-state
+Saadat Mokhtari,1, 2 Vedran Jelic,1, 2 David N. Purschke,1 Shima Gholam Mirzaeimoghadar,1 Kasia Kowalczyk,1
+David A. Reis,3 T. J. Hammond,4 David Villeneuve,1 André Staudte,1 François Légaré,2 and Giulio Vampa1, ∗
+1
+
+arXiv:2604.07543v1 [cond-mat.mes-hall] 8 Apr 2026
+
+Joint Attosecond Science Laboratory, National Research Council of Canada and University of Ottawa,
+100 Sussex Drive, Ottawa, Ontario K1A 0R6, Canada
+2
+Advanced Laser Light Source (ALLS), Institut National de la Recherche Scientifique,
+Centre Énergie Matériaux Télécommunications, 1650 Boulevard Lionel-Boulet, Varennes, Québec J3X 1P7, Canada
+3
+Department of Applied Physics, Stanford University, Stanford, California 94305, USA
+4
+Department of Physics, University of Windsor, Windsor ON N9B 3P4, Canada
+High-harmonic generation in solids has emerged as a powerful probe of ultrafast electron dynamics and lattice motion, and recent theoretical work has suggested that thermally driven lattice
+fluctuations can act as an effective source of decoherence in the harmonic-generation process. However, a direct experimental link between high-harmonic emission and temperature-driven incoherent
+phonons has remained unclear. Here, we investigate the temperature dependence of high-harmonic
+generation in ultrapure silicon using reflection-geometry measurements over a wide temperature
+range. We observe that the harmonic yield increases significantly with decreasing temperature. To
+interpret these results, we introduce a one-dimensional atomic-chain model in which finite temperature is represented by random lattice displacements that mimic incoherent phonon fluctuations. The
+simulations reproduce the magnitude of temperature-dependent change of the harmonic signal and
+support a picture in which thermally induced lattice disorder enhances electron-hole decoherence,
+thereby reducing high-harmonic emission. Our results establish incoherent phonons as an important
+source of decoherence in solid-state high-harmonic generation.
+
+High-harmonic generation is an extremely nonlinear
+optical process that up-converts the frequency of an intense femtosecond laser to its high order harmonics during interaction with a medium. Although first demonstrated in metals [1], the most famous occurrence was
+carried out with noble gas atoms [2]. Gas-phase emission of harmonics was famously interpreted as a threestep process that starts with nonresonant laser-induced
+ionization of the atoms, followed by acceleration of the
+ionized electrons to very high kinetic energies and concludes with their recollision and recombination with the
+parent ions and emission of high-harmonic photons [3].
+The process has since been extended to crystals [4, 5] and
+liquids [6]. The discovery of high-harmonic generation in
+bulk crystals established a new way to investigate ultrafast phenomena in solid-state materials on femtosecondto-attosecond timescales [7–9]. Like in the gas phase,
+electron–hole pairs are created in the laser field across the
+material’s energy gap and accelerated to high momenta
+that can even exceed the Brillouin zone, setting up nonlinear intraband and interband currents that radiate high
+harmonics [10]. During their motion, the electron–hole
+pairs probe the material’s electronic structure and symmetry and such information can ultimately be retrieved
+from the high-harmonic spectrum. High-harmonic spectroscopy in the solid state [11] has successfully retrieved
+the timing of the recolliding electrons and holes [12, 13],
+the material’s band structure [14–18], Berry curvature
+[19, 20], and topological [21] and structural phase transitions [22].
+The influence of ionic motion on high-harmonic generation has been extensively studied in the gas phase,
+
+where nuclear wavepacket dynamics during molecular vibrations and dissociation modulate both the amplitude
+and phase of the emitted harmonics, as demonstrated in
+excited Br2 [23, 24] and in isotopic mixtures of H2 /D2
+[25]. In solids, meV energies are sufficient to excite collective vibrations of the ions – phonons. Phonon excitation can either be coherent or incoherent (thermal),
+both leading to disorder in an otherwise periodic lattice.
+Recent theoretical [26–28] and experimental [22, 29–31]
+work has demonstrated that high-harmonic generation
+can serve as a sensitive probe of coherent lattice dynamics whereby the high-harmonic spectrum is modulated
+via phonon-driven changes in the electronic structure.
+Since ionic displacements induce changes in the phase
+of the high harmonics, the disorder associated with incoherent phonons can lead to loss of coherence of the
+harmonics, i.e. dephasing of the electron–hole polarization arising from electron–phonon scattering. Theoretical studies have examined thermally driven atomic
+motion as an effective source of electronic decoherence.
+Freeman et al. [32] simulated high-harmonic generation
+in crystalline silicon and diamond within time-dependent
+density functional theory and introduced thermal effects
+by displacing atomic positions in a large silicon supercell using configurations taken from molecular-dynamics
+simulations. They found that thermally induced atomic
+motion acts as an effective dephasing mechanism and
+suggested cooling as a route to enhance high-order harmonic yield. Similarly, Du and Ma [33] developed a
+temperature-dependent lattice-vibration model for solidstate high-harmonic generation and showed that increasing temperature enhances dephasing, effectively increas-
+
+2
+ing electronic decoherence. Recent theoretical work have
+further supported a picture in which lattice fluctuations
+act as a source of electronic decoherence in solid-state
+high-harmonic generation, thereby suppressing the harmonic emission even at low temperature [34].
+To date, experiments have not established a clear
+link between harmonic emission and temperature-driven
+incoherent phonons. However, temperature-dependent
+high-harmonic generation has been explored in materials
+undergoing phase transitions, such as superconductors
+[35] and Mott insulators [36]. Meng et al. [37] studied
+high-harmonic generation in boron-doped silicon at cryogenic and room temperatures. They observed brighter
+harmonics at 4 K than at room temperature and attributed the enhanced harmonic yield to a change in the
+dominant generation mechanism: at high temperature,
+the response is governed by the nonlinear intraband
+motion of thermally ionized carriers, whereas at low
+temperature, dopant tunnel ionization injects carriers
+into the valence bands, and the harmonic emission arises
+from both this generational current and the subsequent
+acceleration of free carriers.
+In this work, we address this experimental gap by
+measuring the temperature dependence of high-harmonic
+generation in undoped silicon, a semiconductor crystal
+that does not undergo a phase transition upon cooling
+in the temperature range considered here. To minimize
+propagation effects in the bulk, the experiment is performed in reflection geometry since the intense driving
+field becomes easily modified as it propagates through the
+solid, leading to coherent interference of high-harmonic
+emission from different depths that strongly reshapes the
+observed spectrum [38]. To interpret our measurements,
+we introduce a one-dimensional atomic-chain model in
+which finite temperature enters through random lattice
+displacements that mimic incoherent phonon fluctuations, and that is in qualitative agreement with the experimental data.
+Figure 1 provides a schematic interpretation of how
+temperature suppresses solid-state high-harmonic generation through thermally induced lattice motion. At
+0 K (panel a), the lattice is static, so an electron–hole
+pair driven by the optical field follows a well-defined
+excursion in real space (black trajectory). In interband
+high-harmonic generation, when the electron and hole
+recombine, a high-harmonic photon is emitted [12].
+At room temperature (300 K, panel b), incoherent
+lattice vibrations (phonons) introduce fluctuations of
+the ions positions that electrons and holes experience
+as static disorder during the brief quiver motion in
+the laser field. Disorder-induced scattering causes loss
+of coherence of the electron-hole pair (represented as
+blurred lines), which in turn reduces the probability
+of phase-matched recombination and leads to a weaker
+high harmonic generation signal at elevated temperature.
+
+FIG. 1. Schematic electron–hole real-space trajectory in silicon at (a) 0 K and (b) 300 K.At 0 K, the lattice is static, and
+the electron–hole pair follows a well-defined, coherent trajectory (black line), leading to efficient recombination and highharmonic emission (magenta). At 300 K, thermally activated
+lattice vibrations introduce fluctuations in the ion positions.
+The diffuse red line represents the spread of real-space trajectories arising from phonon-induced scattering, reflecting a
+loss of coherence for the electron–hole pair and suppressing
+the high-harmonic yield.
+
+In the experiment, a Yb:KGW laser (LightConversion Carbide) delivers 260-fs pulses at a center wavelength of 1030 nm with a pulse energy of 0.8 mJ and a
+repetition rate of 100 kHz. Approximately 75% of the
+output pumps an optical parametric amplifier (LightConversion Orpheus-MIR) generating broadband midinfrared (MIR) pulses centered at 3.2 µm with a duration of ∼60 fs. The MIR beam is focused onto the silicon sample using a gold-coated 90◦ off-axis parabolic
+mirror (f = 10 cm) at an incidence angle of ∼ 10◦ .
+The sample is a 40-µm-thick high purity silicon crystal with a (100) surface orientation (NORCADA). It is
+mounted in a liquid nitrogen cryostat (RC102-CFM Microscopy Cryostat) equipped with a calcium fluoride window, allowing temperature control from 77 K to 500 K
+via PID-regulated resistive heating. The emitted high
+harmonics are collected in reflection geometry using a
+UV-enhanced aluminum mirror. The spectrum is analyzed with a home-built spectrometer equipped with a
+300 l/mm vacuum ultraviolet grating (Acton), an image intensifier (Photonis), and a CCD camera. The MIR
+pulse energy and polarization are controlled using halfwave plates and wire grid polarizers.
+Figure 2a–d shows the yield of harmonics 9, 11,
+13 and 15 as a function of temperature, normalized
+
+3
+sum of single-site cosine wells, each truncated to one unit
+cell centered on the corresponding ion. Given this potential, the band structure and eigenstates are obtained
+by diagonalizing the field-free Hamiltonian. Figure 3a
+shows the calculated band structure. It features three
+bands and a direct band gap of 3.4 eV. The transition
+dipole moments between the bands are calculated from
+the eigenstates. Finite temperatures populate phonons
+with random phases, leading to incoherent lattice fluctuations. We capture these ions displacements by shifting
+the potential minima ja0 → ja0 + ∆xj . The random displacement amplitude ∆xj is drawn from a Gaussian
+p distribution whose standard deviation is urms (T ) = ⟨u2 ⟩,
+where the mean-squared displacement ⟨u2 ⟩ is that of a
+quantum harmonic oscillator:
+
+
+3
+1
+2
+⟨u ⟩ =
+n(T ) +
+,
+(4)
+mh̄ω
+2
+
+FIG. 2. Temperature dependence of the harmonic yield for
+the 9th (a), 11th (b), 13th (c), and 15th (d) harmonics. Black
+circles represent experimental data, and blue triangles show
+the simulation results. Error bars denote the standard deviation from three independent measurements.
+
+to their values at 77 K. The peak incident vacuum
+intensity of the MIR pulse is ∼0.3 TW/cm2 . The yield
+of all measured harmonics increases significantly with
+decreasing temperature. To test our hypothesis that
+increased disorder at elevated temperatures leads to a
+loss of coherence of the laser-driven electron–hole pairs,
+we turn to simulations.
+To model the impact of lattice temperature on solidstate high-harmonic generation, we numerically solve the
+time-dependent density matrix of a one-dimensional solid
+dressed with the laser field. We consider one electron in a
+one-dimensional lattice potential described by the fieldfree Hamiltonian
+Ĥ0 =
+
+p̂2
++ V (x),
+2m
+
+(1)
+
+with
+
+
+X
+2π
+V (x) = −V0
+1 + cos
+(x − ja0 ) ,
+(2)
+a0
+j
+h
+i
+(
+1 + cos 2π
+(x
+−
+ja
+)
+if |x| ≤ ja0 + a0 /2
+0
+a0
+f (x) =
+0
+if |x| > ja0 + a0 /2
+(3)
+where the lattice constant a0 = 5.43 Å, and V0 = 7.5 eV
+is chosen to yield a band gap and band widths close to
+those of silicon. The lattice potential is modeled as a
+
+where m = 28.08 amu is the silicon atomic mass, h̄ω =
+3.04 × 10−4 Ha is the phonon energy, and n(T ) is the
+Bose-Einstein occupation at temperature T [39]. For reference, the largest ⟨u⟩ = 0.41 Å at 300 K. The laser field is
+incorporated in the velocity gauge via minimal coupling,
+yielding the time-dependent Hamiltonian Ĥ(k, t) =
+Rt
+Ĥ0 (k) − A(t)p̂(k), where A(t) = − −∞ F (t′ ) dt′ is the
+laser vector potential. The system is driven by an electric field F (t) with central wavelength λ = 3.2 µm and
+peak amplitude F0 = 0.003 a.u. The density matrix
+ρk (t) is propagated according to the Liouville–von Neumann equation, ρ̇k (t) = −i[Ĥ(k, t), ρk (t)], which is numerically integrated using a fourth-order Runge–Kutta
+(RK4) scheme [40, 41], with the initial condition ρk (0)
+corresponding to fully occupied valence bands and empty
+conduction band. The time-dependent current density is
+obtained from the momentum expectation value and averaged over the Brillouin zone,
+
+
+j(t) = Tr ρk (t) p̂(k) k .
+(5)
+Because a single thermally displaced configuration
+generally breaks inversion symmetry and can generate
+strong even harmonics, we perform a coherent ensemble average of the time-domain current over 1000
+independent configurations, J(t) = ⟨j(t)⟩seeds . This configuration average statistically restores centrosymmetry
+and strongly suppresses even-order emission (no even
+harmonics are observed in the experiment). The highharmonic spectrum is finally obtained from the squared
+modulus of the Fourier transform, |F {J(t)}|2 . Spectra
+for various temperatures are reported in Fig. 3b. The
+power of each harmonic is integrated over the spectral
+width, and the results are overlayed to the experimental
+data in Fig. 2, blue triangles. The simulations capture
+the global trend of decreasing high-harmonic intensity
+with increasing temperature. Although our current
+experimental capability limits the lowest accessible
+
+4
+fluctuations that act as static disorder during the subcycle electron-hole motion, thereby reducing electronhole phase coherence, lowering the probability of coherent recombination and resulting in weaker high-harmonic
+emission. These results establish high-harmonic generation as a sensitive probe of incoherent-phonon-driven decoherence in a conventional semiconductor and provide a
+route to study how lattice disorder limits carrier coherence and high harmonic emission in solids.
+
+FIG. 3. Calculated (a) band structure and (b) high harmonic
+spectra for different temperatures.
+
+temperature to 77 K, our model predicts a 15–30-fold
+enhancement across the high-harmonic spectrum at
+liquid-helium temperature. The discrepancy between
+simulation and experiment is expected since the the
+model employed here is a one dimensional three-band
+model (Figure 3a) where the emitted spectrum is
+computed from interband dynamics only. Despite these
+simplifications, the agreement in the overall temperature
+scaling supports thermal decoherence as a dominant
+mechanism for the observed intensity suppression of
+solid-state high-harmonic generation.
+In conclusion, we have experimentally demonstrated
+a clear temperature dependence of solid-state high harmonic generation in ultrapure silicon, with the power of
+harmonics increasing significantly as the temperature is
+decreased from 300 K to 77 K. The remarkable quantitative agreement with a theoretical modeling based on a
+one-dimensional lattice with random displacements supports the hypothesis that thermally populated incoherent
+phonons are the microscopic origin of this suppression.
+In this picture, increasing temperature enhances lattice
+
+∗
+Giulio.Vampa@uottawa.ca
+[1] N. Burnett, H. Baldis, M. Richardson, and G. Enright,
+Appl. Phys. Lett. 31, 172 (1977).
+[2] M. Ferray, A. L’Huillier, X. Li, L. Lompre, G. Mainfray,
+and C. Manus, Journal of Physics B: Atomic, Molecular
+and Optical Physics 21, L31 (1988).
+[3] P. B. Corkum, Phys. Rev. Lett. 71, 1994 (1993).
+[4] A. H. Chin, O. G. Calderón, and J. Kono, Phys. Rev.
+Lett. 95, 3292 (2001).
+[5] S. Ghimire, A. D. DiChiara, E. Sistrunk, P. Agostini,
+L. F. DiMauro, and D. A. Reis, Nature Physics 7, 138
+(2011).
+[6] T. T. Luu, Z. Yin, A. Jain, T. Gaumnitz, Y. Pertot,
+J. Ma, and H. J. Wörner, Nature Commun. 9, 3723
+(2018).
+[7] S. Ghimire and D. A. Reis, Nature Physics 15, 10 (2019).
+[8] L. Ortmann and A. S. Landsman, Adv. At. Mol. Opt.
+Phys. 70, 103 (2021).
+[9] E. Goulielmakis and T. Brabec, Nature Photonics 16,
+411 (2022).
+[10] G. Vampa, C. McDonald, G. Orlando, D. Klug,
+P. Corkum, and T. Brabec, Phys. Rev. Lett. 113, 073901
+(2014).
+[11] C. Heide, Y. Kobayashi, S. R. U. Haque, and S. Ghimire,
+Nature Physics 20, 1546 (2024).
+[12] G. Vampa, T. Hammond, N. Thiré, B. Schmidt,
+F. Légaré, C. McDonald, T. Brabec, and P. Corkum,
+Nature 522, 462 (2015).
+[13] J. Freudenstein, M. Borsch, M. Meierhofer, D. Afanasiev,
+C. P. Schmid, F. Sandner, M. Liebich, A. Girnghuber,
+M. Knorr, M. Kira, et al., Nature 610, 290 (2022).
+[14] G. Vampa, T. Hammond, N. Thiré, B. Schmidt,
+F. Légaré, C. McDonald, T. Brabec, D. Klug, and
+P. Corkum, Phys. Rev. Lett. 115, 193603 (2015).
+[15] A. A. Lanin, E. A. Stepanov, A. B. Fedotov, and A. M.
+Zheltikov, Optica 4, 516 (2017).
+[16] Y.-Y. Lv, J. Xu, S. Han, C. Zhang, Y. Han, J. Zhou,
+S.-H. Yao, X.-P. Liu, M.-H. Lu, H. Weng, et al., Nature
+Commun. 12, 6437 (2021).
+[17] A. J. Uzan-Narovlansky, Á. Jiménez-Galán, G. Orenstein, R. E. Silva, T. Arusi-Parpar, S. Shames, B. D.
+Bruner, B. Yan, O. Smirnova, M. Ivanov, et al., Nature
+Photonics 16, 428 (2022).
+[18] A. M. Parks and M. Kolesik, Optics Express 33, 13986
+(2025).
+[19] A. J. Uzan-Narovlansky, L. Faeyrman, G. G. Brown,
+S. Shames, V. Narovlansky, J. Xiao, T. Arusi-Parpar,
+O. Kneller, B. D. Bruner, O. Smirnova, et al., Nature
+626, 66 (2024).
+
+5
+[20] T. T. Luu and H. J. Wörner, Nature Commun. 9, 916
+(2018).
+[21] C. Heide, Y. Kobayashi, D. R. Baykusheva, D. Jain,
+J. A. Sobota, M. Hashimoto, P. S. Kirchmann, S. Oh,
+T. F. Heinz, D. A. Reis, et al., Nature Photonics 16, 620
+(2022).
+[22] M. R. Bionta, E. Haddad, A. Leblanc, V. Gruson, P. Lassonde, H. Ibrahim, J. Chaillou, N. Émond, M. R. Otto,
+Á. Jiménez-Galán, et al., Phys. Rev. Research 3, 023250
+(2021).
+[23] H. J. Wörner, J. B. Bertrand, D. V. Kartashov, P. B.
+Corkum, and D. M. Villeneuve, Nature 466, 604 (2010).
+[24] H. J. Wörner, J. B. Bertrand, P. B. Corkum, and D. M.
+Villeneuve, Phys. Rev. Lett. 105, 103002 (2010).
+[25] S. Baker, J. S. Robinson, C. Haworth, H. Teng, R. Smith,
+C. C. Chirila, M. Lein, J. Tisch, and J. P. Marangos,
+Science 312, 424 (2006).
+[26] N. Rana, M. Mrudul, D. Kartashov, M. Ivanov, and
+G. Dixit, Phys. Rev. B 106, 064303 (2022).
+[27] O. Neufeld, J. Zhang, U. D. Giovannini, and A. Rubio,
+Proc. Natl Acad. Sci. USA 119, e2204219119 (2022).
+[28] S.-Q. Hu, H. Zhao, X.-B. Liu, Q. Chen, D.-Q. Chen, X.Y. Zhang, and S. Meng, Phys. Rev. Lett. 133, 156901
+(2024).
+[29] J. Zhang, Z. Wang, F. Lengers, D. Wigger, D. E. Reiter,
+T. Kuhn, H. J. Wörner, and T. T. Luu, Nature Photonics
+18, 792 (2024).
+[30] J. Zhang, T.-D. Tran, Z. Wang, W. Yu, C. Zhang, M. Lo,
+
+W. Xu, and T. T. Luu, Optica 11, 1595 (2024).
+[31] J. Zhang and T. T. Luu, ACS Photonics 12, 1579 (2025).
+[32] D. Freeman, A. Kheifets, S. Yamada, A. Yamada, and
+K. Yabana, Phys. Rev. B 106, 075202 (2022).
+[33] T.-Y. Du and C. Ma, Phys. Rev. A 105, 053125 (2022).
+[34] A. Cárdenas, D. N. Purschke, G. G. Brown, P. SanJose, R. E. Silva, and Á. Jiménez-Galán, arXiv preprint
+arXiv:2512.01712 (2025).
+[35] J. Alcalà, U. Bhattacharya, J. Biegert, M. Ciappina,
+U. Elu, T. Graß, P. T. Grochowski, M. Lewenstein,
+A. Palau, T. P. Sidiropoulos, et al., Proceedings of the
+National Academy of Sciences 119, e2207766119 (2022).
+[36] Y. Murakami, K. Uchida, A. Koga, K. Tanaka, and
+P. Werner, Phys. Rev. Lett. 129, 157401 (2022).
+[37] F. Meng, F. Walla, S. Kovalev, J.-C. Deinert, I. Ilyakov,
+M. Chen, A. Ponomaryov, S. G. Pavlov, H.-W. Hübers,
+N. V. Abrosimov, et al., Phys. Rev. Research 5, 043141
+(2023).
+[38] I. Floss, C. Lemell, G. Wachter, V. Smejkal, S. A. Sato,
+X.-M. Tong, K. Yabana, and J. Burgdörfer, Phys. Rev.
+A 97, 011401 (2018).
+[39] C. Kittel, Introduction to Solid State Physics, 8th ed.
+(Wiley New York, 1996).
+[40] G. Orlando, T.-S. Ho, and S.-I. Chu, Journal of the Optical Society of America B 37, 1540 (2020).
+[41] M. Du, C. Liu, Z. Zeng, and R. Li, Phys. Rev. A 104,
+033113 (2021).
+
+

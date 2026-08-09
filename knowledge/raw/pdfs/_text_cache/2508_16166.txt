@@ -1,0 +1,798 @@
+Terahertz third-harmonic generation of lightwave driven Weyl fermions
+far from equilibrium
+
+Patrick Pilch,1 Changqing Zhu,1 Sergey Kovalev,1, 2 Renato M. A. Dantas,3, 4 Amilcar Bedoya-Pinto,5, 6
+Stuart S. P. Parkin,5 and Zhe Wang1
+1)Department of Physics, TU Dortmund University, Dortmund 44227, Germany
+2)Helmholtz-Zentrum Dresden-Rossendorf, Dresden 01328, Germany
+3)Department of Physics, University of Basel, Basel 4056 , Switzerland
+4)Center of Physics, University of Minho, Braga 4704-553, Portugal
+5)Max Planck Institute for Microstructure Physics, Halle (Saale) 06120, Germany
+6)Institute of Molecular Science, University of Valencia, Paterna 46980, Spain
+
+(*Electronic mail: zhe.wang@tu-dortmund.de)
+
+(*Electronic mail: patrick.pilch@tu-dortmund.de)
+
+(Dated: 14 November 2025)
+
+We report on time-resolved ultrafast terahertz third-harmonic generation spectroscopy of nonequilibrium dynamics of
+Weyl fermions in a nanometer thin film of the Weyl semimetal TaP. Terahertz third-harmonic generation is observed
+at room temperature under the drive of a multicycle narrowband terahertz pulse with a peak field strength of down to
+tens of kV/cm. The observed terahertz third-harmonic generation exhibits a perturbative cubic power-law dependence
+on the terahertz drive. By varying the polarization of the drive pulse from linear to elliptical, we realize a sensitive
+tuning of the third harmonic yield. By carrying out theoretical analysis based on the Boltzmann transport theory, we
+can properly describe the experimental results and ascribe the observed THz nonlinearity to field-driven kinetics of the
+Weyl fermions.
+
+The discovery of Weyl fermions1 in Weyl semimetals is a
+hallmark breakthrough in condensed matter physics2–5.
+In
+this peculiar class of materials, Weyl fermions are realized
+as the low-energy quasiparticles at the Weyl nodes near the
+Fermi energy2–5, which are characterized by linear disper-
+sion relation and nontrivial topological properties. Deriving
+from the composite excitation of Dirac fermions, the realiza-
+tion of Weyl fermions in solids requires a reduced symmetry
+such that two linearly dispersing electron bands corresponding
+to the Weyl nodes are nondegenerate in the reciprocal space.
+The very first significant realizations of the Weyl nodes were
+made in transition-metal monophosphides, such as TaAs and
+TaP6–9, where centrosymmetry is indeed absent in contrast to
+the Dirac semimetals (e.g. Na3Bi and Cd3As2). As a conse-
+quence, finite second-order optical susceptibility is allowed in
+these noncentrosymmetric compounds, which was found even
+to be unexpectedly large in the mid- or near-infrared range
+(see e.g.10–12).
+
+Since Weyl fermions are low-energy excitations in Weyl
+semimetals, the observed second-order susceptibility in the
+mid- or near-infrared frequency range (typically ∼ 0.1 − 1 eV
+in photon energy) is not necessarily directly related to the low-
+energy dynamics of Weyl fermions, but rather reflects an av-
+erage response over the host band structure corresponding to
+the mid- or near-infrared photon energy. At the same time,
+intensive theoretical studies have predicted a variety of fas-
+cinating nonlinear features associated to the low-energy dy-
+namics of Weyl fermions (see e.g.13–22), which largely remain
+to be investigated experimentally. In this work, we employ
+a low-energy spectroscopic method – time-resolved terahertz
+(1 THz ∼ 4 meV) high-harmonic generation spectroscopy –
+to directly study the nonlinear dynamics of Weyl fermions in
+the well-established Weyl semimetal TaP.
+
+Efficient THz
+
+high-harmonic
+
+generation
+
+has
+
+been
+
+in
+
+various
+
+solid-state
+
+topological
+
+insulators34–36,
+
+recently
+such as superconductors23–27,
+
+quantum sys-
+found
+tems,
+strongly correlated
+metals28, semiconductors29, or topological materials (e.g.
+graphene30–33,
+and a Dirac
+semimetal37–40).
+The understanding of the THz high-
+harmonic generation in topological materials has been
+progressively improved by continuous theoretical
+investi-
+gations (see e.g.13,22,31,37–42).
+Starting from a simplified
+phenomenological thermodynamic model, one could assume
+a quasi-instantaneous thermalization of the out-of-equilibrium
+Dirac fermions in graphene driven by strong THz electric
+field31. Under this assumption, the oscillation of the THz
+field leads to quasi-instantaneous variation of temperature,
+and consequently a time-dependent optical conductivity.
+Hence this results in a nonlinear dependence of the current
+density on the THz field, yielding the THz high-harmonic
+radiation31.
+In contrast, a later more detailed analysis of
+the nonlinear charge transport figured out explicitly the
+importance of the THz driven nonequilibrium states in high-
+harmonic generation for graphene41. Without assuming a
+quasi-instantaneous thermalization of the Dirac fermions, one
+can adopt a more generalized Boltzmann transport theory to
+describe the THz field driven kinetics of the highly nonequi-
+librium states13,22,42, which has successfully interpreted the
+experimentally observed THz high-harmonic generation in a
+three-dimensional Dirac semimetal Cd3As2
+
+37–39.
+
+In a simplified single-particle picture, under the periodic
+drive of a strong THz electric field, a massless quasiparticle
+characterized by the Fermi velocity +vF or −vF will periodi-
+cally pass the Dirac/Weyl node and reverse its velocity, which
+corresponds to an abrupt change of the electric-current direc-
+tion in the time domain. This leads to a very efficient emission
+of high-order harmonic radiation in the frequency domain. In
+a real Dirac/Weyl material, the transport of massless fermions
+
+5
+2
+0
+2
+
+v
+o
+N
+3
+1
+
+]
+l
+e
+-
+r
+t
+s
+.
+t
+a
+m
+-
+d
+n
+o
+c
+[
+
+2
+v
+6
+6
+1
+6
+1
+.
+8
+0
+5
+2
+:
+v
+i
+X
+r
+a
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+FIG. 1. (a) Crystal structure of TaP, with two mirror planes indicated by the grey planes. The THz electric field is parallel to the surface of
+a (001)-oriented thin film sample plane. (b) Sketch of the time-resolved THz third-harmonic generation spectroscopy. Two band pass filters
+(BPF) with central frequency of 1 f = 0.5 THz and two with 3 f = 1.5 THz are used for preparing a narrowband driving pulse and detection of
+THG, respectively. (c) Time-domain traces of the driving pulse and the third-harmonic emission from the sample, with the frequency-domain
+Fourier spectra of the time-domain signals in (d).
+
+experiences a variety of scattering processes and is essentially
+governed by many-body interactions. Moreover, the presence
+of topologically trivial parabolic bands at the Fermi energy
+can further reduce the nonlinear responses, because the asso-
+ciated charges with a parabolic dispersion relation ε ∝ k2 will
+behave like free particles that do not contribute to the nonlin-
+ear current but mainly absorb the THz field. Hence, an ex-
+perimental observation of the terahertz high-harmonic radia-
+tion is very challenging. So far, to the best of our knowledge,
+THz high-harmonic generation still has not been reported in
+a Weyl semimetal. An experimental study of the THz nonlin-
+ear responses of a Weyl semimetal will not only offer insight
+into the underlying nonequilibrium many-body physics, but
+can also provide candidate materials for next generation com-
+munication technologies.
+
+We choose to investigate THz third-harmonic generation in
+the prototypical Weyl semimetal TaP8,9,43,44. For this study,
+high quality single-crystalline TaP (001) thin films with a
+thickness of 22 nm were epitaxially grown on MgO (100) sub-
+strates by molecular-beam epitaxy. A detailed presentation on
+the sample characterization and the electronic structure fin-
+geprints of Weyl semimetals can be found in Ref.45. Although
+the crystal structure of TaP with a space group I41md is non-
+centrosymmetric, for our (001) oriented film the elements in
+the second-order optical susceptibility tensor involving only
+the a and b axes vanish, due to two mirror planes perpendic-
+
+ular to the crystallographic a and b axes (e.g. χaaa, χbaa = 0),
+see Fig. 1(a) for illustration.
+
+Therefore, for our THz electric field parallel to the sample
+surface, the nonzero second-order nonlinear responses are not
+involved in our measurements, hence we focus here on the
+THz third-order harmonic generation. An intense THz pulse
+is prepared based on an 800 nm femtosecond laser system
+by employing LiNbO3 in a tilted pulse-front scheme. Band-
+pass filters (BPF) with central frequencies of f or 3 f and a
+20% bandwidth (FWHM) are utilized to obtain a narrow band
+THz drive pulse or to filter out the third-harmonic generation
+(THG) signal, respectively. The experimental setup of the
+time-resolved THz third harmonic generation spectroscopy is
+sketched in Fig. 1(b). The THz electric field is gate-detected
+with femtosecond resolution by electro-optic sampling in a
+ZnTe crystal46,47.
+
+Under the drive of an f = 0.5 THz pulse, the emission of
+the nanometer TaP thin film is directly recorded in the time
+domain after a 3 f -bandpass filter. The time traces of the driv-
+ing pulse and the emitted THG electric field are presented in
+Fig. 1(c). The corresponding spectra in the frequency domain
+are obtained by Fourier transformation and shown in Fig. 1(d),
+where a THG peak is clearly resolved at 3 f = 1.5 THz. For
+a maximum peak field value of E0 = 135 kV/cm, we can es-
+timate a field conversion efficiency of Epeak
+f = 0.12%,
+which is smaller in comparison with a reference sample of the
+
+3 f /Epeak
+
+(cid:4)(cid:3)051015(cid:4)(cid:2)(cid:3)(cid:1)(cid:4)(cid:2)(cid:1)(cid:1)(cid:4)(cid:3)(cid:1)050100150Electric field (kV/cm)tgate (ps) Ef E3f ×102(a)(b)2×BPF 1f2×BPF 3f1f3fTaP (001)TaPcbaEa,bcaaa,cbaa = 0(c)(d)Mirror planes0.00.51.01.52.001Intensity (norm.)Frequency (THz) If I3f × 1063
+
+ties. These behaviors can also be seen from the corresponding
+frequency-domain spectra presented in Fig. 2(c). The inten-
+sity of the third-harmonic radiation I3 f is plotted versus the
+driving pulse intensity I f in Fig. 2(d). As shown by the solid
+line in the double-logarithmic scale, the THG clearly exhibits
+a power-law dependence, i.e. I3 f ∝ I3
+f . This follows the ex-
+pectation for a perturbative response, where an integer nth-
+order nonlinear perturbative response In f is proportional to In
+f .
+In contrast, in the Dirac semimetal Cd3As2, non-perturbative
+THz high-harmonic generation was observed, which does not
+follow the cubic power-law dependence37.
+It can be theo-
+retically shown13,22 that for Dirac and Weyl semimetals, the
+response remains perturbative as long as the momentum ac-
+quired by the quasiparticles due to the driving electric field,
+e ∆(t, 0), does not exceed the Fermi momentum pF = µ/vF ,
+i.e., e ∆(t, 0) ≤ µ/vF . When e ∆(t, 0) > µ/vF , the system
+crosses into the non-perturbative regime. Here e ∆(t, 0) =
+−e(cid:82) t
+0 E(s) ds, where e is the elementary charge, vF is the
+Fermi velocity, µ is the chemical potential, and E(t) is the
+driving electric field. This is consistent with the intuition that
+only when the THz field is sufficiently large, the Weyl system
+will be driven into the non-perturbative response regime. As
+also will be shown below [see Eq. (3)], the efficiency of the
+harmonic generation is determined by several parameters, in-
+cluding charge carrier density, Fermi velocity, and chemical
+potential.
+
+The dependence of high-harmonic generation on driving
+pulse ellipticity has been extensively investigated theoretically
+for various theoretical scenarios13,49–53 and also for high-
+energy optical excitation in different solid-state materials (see
+e.g.50,54,55). To investigate the ellipticity dependence of the
+THz THG, we employ a commercial quartz quarter-wave plate
+(QWP) optimized for 0.5 THz to change the ellipticity of the
+narrowband THz drive pulse. As illustrated in Fig. 3(d), by
+tuning the angle β between the linear polarization direction
+of the THz drive pulse and the slow/fast axes of the QWP, the
+obtained THz polarization varies from linear (β = 0) to ellip-
+tical (β ̸= 0) and almost circular (β = ±45◦). It is noteworthy
+that at β = ±45◦ the THz polarization is not exactly circu-
+lar, because the THz drive pulse has a finite bandwidth which
+experiences dispersion through the QWP. Moreover, this dis-
+persion can also result in additional phase shift of the drive
+pulses, when the polarization is altered from linear to ellipti-
+cal, which brings in further phase uncertainties.
+
+Figure 3(a) displays the experimentally detected electric
+field of the third-harmonic emission for various polarizations
+as labeled by the corresponding β values, where the data were
+recorded after a 3 f = 1.5 THz bandpass filter. The corre-
+sponding frequency-domain spectra obtained through Fourier
+transformation are presented in Fig. 3(b). For the linearly
+polarized THz pulse (i.e. β = 0◦), a maximum emission of
+third-harmonic electric field is observed. With increasing el-
+lipticity the THG efficiency reduces monotonically for either
+left- or right-handed polarizations, and reaches a minimum
+at β = ±45◦. By performing Fourier transformation on the
+time-domain data, we obtain the THG spectra in the frequency
+domain, and derive the corresponding THG intensity I3 f as in-
+tegrated over the peak area at 3 f for different β angles. The
+
+FIG. 2.
+(a) Sketch of tuning THz drive field strength by using
+two wire-grid polarizers (WGPs). The field strength varies with
+E0 cos2 α, where α represents the polarizer angle, without changing
+the field polarization. (b) Emitted THz field is recorded through a 3 f
+bandpass filter in the time domain, for various peak field strengths
+of an f = 0.5 THz drive.
+(c) Frequency-domain spectra derived
+through Fourier transformation, exhibiting an evident driving field
+dependence of the THG intensity. (d) Fluence dependece of the in-
+tegrated THG intensity follows a cubic power-law dependence i.e.
+I3 f ∝ I3
+
+f (solid line).
+
+topological insulator Bi2Se3 (∼ 2.9%, see Ref.35). Although
+the efficiency of the THz THG in TaP is not as extremely
+strong as in Dirac semimetals, the THz THG is unambigu-
+ously resolved in our experiment and our result provides a first
+demonstration of THz THG in a Weyl semimetal. Various ap-
+proaches can be utilized to enhance the THz third-harmonic
+yield, such as tuning the material parameters following our
+theoretical analysis below [see Eq. (3)] or by fabricating THz
+metamaterials (see e.g.48).
+
+In the following, we explore how the nonlinear THz re-
+sponse varies with the driving pulse intensity and elliptic-
+ity. This will not only demonstrate the possibility to tune the
+third-harmonic generation of Weyl fermions, but also provide
+important information for our understanding of the nonlinear
+nonequilibrium dynamical processes.
+In order to study the
+fluence dependence of the THz THG, we tune the strength
+of the driving THz field without changing its polarization,
+by using two THz wire-grid polarizers [see Fig. 2(a)]. As
+shown in Fig. 2(b), the emitted THz electric field decreases
+very rapidly with the decrease of the driving field strength.
+Below a peak driving field of ∼ 70 kV/cm the THG sig-
+nal can hardly be resolved within the experimental uncertain-
+
+-5050120.5110-210-11000.51.01.501Emitted electric field (kV/cm)tgate (ps)135 kV/cm131 kV/cm119 kV/cm101 kV/cm79 kV/cm56 kV/cm(d)aE0E0cos2aEf = WGPs2×BPF 1fIntensity I3f (norm.)THz fluence If (norm.)(cid:181) If3Intensity (norm.)Frequency (THz)(a)(b)(c)f = 0.5 THz3fas
+
+j(t) ≈
+
+−e vF n
+1 − e−T /τ
+
+(cid:90) 0
+
+−T
+
+du
+τ
+
+eu/τ F
+
+(cid:18) vF e∆(t,t + u)
+µ
+
+(cid:19)
+
+,
+
+where n = µ 3
+
+6π2 ¯h3v3
+F
+
+is the carrier density and
+
+4
+
+(2)
+
+x > 1.
+
+x ≤ 1,
+
+F (x) =
+
+5 x2) x,
+1
+x3 ) x,
+
+(cid:40)(1 − 1
+x − 1
+( 1
+5
+The experimentally observed perturbative response of TaP
+[see Fig. 2(d)] corresponds to e∆(t,t + u) ≤ µ
+In this
+vF
+for an ideal elliptically polarized pulse E(t) =
+regime,
+E [ε f cos (ωt) ˆx + εs sin (ωt) ˆy] we can obtain the emitted
+third-harmonic intensity I (3ω)
+of the x and y
+components39
+
+and I (3ω)
+
+13.
+
+x
+
+y
+
+(cid:110)
+
+I (3ω)
+x
+
+, I (3ω)
+y
+
+(cid:111)
+
+∝
+
+81n2v8
+
+F e8E 6ω 2τ 6(ε 2
+
+f − ε 2
+
+s )2 (cid:110)
+f , ε 2
+ε 2
+s
+
+(cid:111)
+
+100 µ 6(1 + 14 ω 2τ 2 + 49 ω 4τ 4 + 36 ω 6τ 6)
+(3)
+
+.
+
+FIG. 3. (a) Time-domain signal of the emitted third harmonic field
+E3 f for f = 0.5 THz at various angles β of the THz quarter wave
+plate (QWP). β = 0◦ corresponds to linear polarization. For ellip-
+tical polarization the dominant parallel component E∥ is recorded.
+(b) The corresponding frequency-domain spectra derived through
+Fourier transformation. (c) Integrated THG intensity I3 f ,∥ versus β .
+(d) Schematic illustration of the driving pulse ellipticity tunable from
+an incoming linearly polarized THz wave by a QWP.
+
+ellipticity dependence results are summarized in Fig. 3(c). It
+shows that the THz third-harmonic yield can be efficiently
+tuned by varying the ellipticity of the THz drive pulse. A sub-
+tle difference between the left- and right-elliptically polarized
+driving pulses is observed, but comparable to the experimental
+uncertainties. We should note that for elliptically or circularly
+polarized third-harmonic emission, the field component par-
+allel to the initial linear polarization is dominant39, which is
+sensitively detected by our electro-optic sampling scheme46.
+We can understand the observed ellipticity dependence by
+the THz field-driven intraband kinetics of Weyl fermions
+based on the Boltzmann transport theory13,39. Within the
+relaxation-time approximation the Boltzmann equation reads
+
+∂t f (t, p) − eE(t) · ∇p f (t, p) =
+
+f0(p) − f (t, p)
+τ
+
+,
+
+(1)
+
+where f0(p) and f (t, p) are the equilibrium (Fermi-Dirac)
+and nonequilibrium distribution functions, respectively, and
+τ is the relaxation time, treated here as a phenomenolog-
+The Boltzmann equation can be solved
+ical parameter.
+analytically13,22,39 to obtain the response current under the
+THz drive. For a short relaxation time or a long drive sat-
+isfying ωτ ≪ 1, the obtained response current can be written
+
+This result means that a maximum third-harmonic emission
+is achieved for a linearly polarized light (i.e. ε f = 1 and
+εs = 0), whereas for circularly polarized light (i.e. ε f = εs)
+no third-harmonic generation occurs. As shown in Fig. 3(c),
+we use Eq. (3) to describe our experimental data very well,
+confirming the nonlinear dynamical responses of the terahertz
+field-driven Weyl fermions. The corresponding mechanism
+can be delineated as follows. Under the drive of a linearly
+polarized THz electric field, the distribution function of the
+Weyl fermions is strongly stretched back and forth in the Weyl
+cones, which deviates far from a Fermi-Dirac distribution for
+thermal equilibrium. Due to the linear dispersion relation, this
+leads to very efficient high-harmonic generation. For the other
+limit of a circularly polarized pulse, the shape of the distri-
+bution function of the Weyl fermions remains essentially un-
+changed, hence no harmonic radiation will be generated. For a
+finite ellipticity the efficiency of harmonic generation changes
+monotonically as quantitatively described by Eq. (3)39.
+
+In conclusion, by performing time-resolved terahertz third-
+harmonic generation spectroscopy, we have investigated
+strong nonlinear responses of Weyl fermions driven by light-
+waves far from thermal equilibrium in the Weyl semimetal
+TaP. In particular, we have observed efficient terahertz third-
+harmonic generation due to the nonlinear dynamics of field-
+driven Weyl fermions. The nonlinear dynamics is found to
+be sensitive to the ellipticity of the terahertz drive pulse.
+Our study demonstrates that in addition to Dirac semimetals
+and topological insulators, very efficient and tunable terahertz
+nonlinear responses can also be achieved in Weyl semimetals
+at room temperature, which implies rich possibilities to ex-
+plore and utilize terahertz optoelectronic functionalities.
+
+ACKNOWLEDGMENTS
+
+We thank Ahmed Ghalgaoui, Thales V. A. G. de Oliveira,
+and Yang Zhang for useful discussions. We acknowledge
+
+-505012-45-30-15015304501tgate (ps)Emitted electric field (kV/cm)0°-15°-45°15°30°45°-30°(a)(b)(cid:2)(cid:1)=(c)(d)(cid:1) Experiment TheoryIntensity I3f (norm.)(cid:1) (°)linearellipticalQWP1f1.01.501(cid:2)(cid:1)= 0°Intensity (norm.)Frequency (THz)±15°±30°±45°support by the European Research Council (ERC) under
+the Horizon 2020 research and innovation programme,
+A.B.-P.
+grant agreement No.
+acknowledges support by the Generalitat Valenciana (CIDE-
+GENT/2021/005).
+
+950560 (DynaQuanta).
+
+P.P. and C.Z. contributed equally to this work.
+
+1H. Weyl, “Gravitation and the electron,” Proc. Natl Acad. Sci. 15, 323–334
+(1929).
+2S. Jia, S.-Y. Xu, and M. Z. Hasan, “Weyl semimetals, fermi arcs and chiral
+anomalies,” Nat. Mater. 15, 1140–1144 (2016).
+3B. Yan and C. Felser, “Topological materials: Weyl semimetals,” Annu.
+Rev. Condens. Matter Phys. 8, 337–354 (2017).
+4N. P. Armitage, E. J. Mele, and A. Vishwanath, “Weyl and Dirac semimetals
+in three-dimensional solids,” Rev. Mod. Phys. 90, 015001 (2018).
+5B. Q. Lv, T. Qian, and H. Ding, “Experimental perspective on three-
+dimensional topological semimetals,” Rev. Mod. Phys. 93, 025002 (2021).
+6S.-Y. Xu, I. Belopolski, N. Alidoust, M. Neupane, G. Bian, C. Zhang,
+R. Sankar, G. Chang, Z. Yuan, C.-C. Lee, S.-M. Huang, H. Zheng, J. Ma,
+D. S. Sanchez, B. Wang, A. Bansil, F. Chou, P. P. Shibayev, H. Lin, S. Jia,
+and M. Z. Hasan, “Discovery of a weyl fermion semimetal and topological
+fermi arcs,” Science 349, 613–617 (2015).
+7B. Q. Lv, H. M. Weng, B. B. Fu, X. P. Wang, H. Miao, J. Ma, P. Richard,
+X. C. Huang, L. X. Zhao, G. F. Chen, Z. Fang, X. Dai, T. Qian, and H. Ding,
+“Experimental discovery of Weyl semimetal TaAs,” Phys. Rev. X 5, 031013
+(2015).
+8S.-Y. Xu, I. Belopolski, D. S. Sanchez, C. Zhang, G. Chang, C. Guo,
+G. Bian, Z. Yuan, H. Lu, T.-R. Chang, et al., “Experimental discovery of a
+topological Weyl semimetal state in TaP,” Sci. Adv. 1, e1501092 (2015).
+9N. Xu, H. Weng, B. Lv, C. E. Matt, J. Park, F. Bisti, V. N. Strocov,
+D. Gawryluk, E. Pomjakushina, K. Conder, et al., “Observation of Weyl
+nodes and fermi arcs in tantalum phosphide,” Nat. Commun. 7, 11006
+(2016).
+
+10L. Wu, S. Patankar, T. Morimoto, N. L. Nair, E. Thewalt, A. Little, J. G.
+Analytis, J. E. Moore, and J. Orenstein, “Giant anisotropic nonlinear optical
+response in transition metal monopnictide Weyl semimetals,” Nat. Phys. 13,
+350–355 (2017).
+
+11Q. Ma, S.-Y. Xu, C.-K. Chan, C.-L. Zhang, G. Chang, Y. Lin, W. Xie,
+T. Palacios, H. Lin, S. Jia, P. A. Lee, P. Jarillo-Herrero, and N. Gedik, “Di-
+rect optical detection of Weyl fermion chirality in a topological semimetal,”
+Nat. Phys. 13, 842–847 (2017).
+
+12N. Sirica, P. P. Orth, M. S. Scheurer, Y. Dai, M.-C. Lee, P. Padmanab-
+han, L. Mix, S. Teitelbaum, M. Trigo, L. Zhao, et al., “Photocurrent-driven
+transient symmetry breaking in the Weyl semimetal TaAs,” Nat. Mater. 21,
+62–66 (2022).
+
+13R. M. A. Dantas, Z. Wang, P. Surówka, and T. Oka, “Nonperturbative topo-
+logical current in Weyl and Dirac semimetals in laser fields,” Phys. Rev. B
+103, L201105 (2021).
+
+14A. Bharti, M. S. Mrudul, and G. Dixit, “High-harmonic spectroscopy
+of light-driven nonlinear anisotropic anomalous Hall effect in a Weyl
+semimetal,” Phys. Rev. B 105, 155140 (2022).
+
+15P. Matus, R. M. A. Dantas, R. Moessner, and P. Surówka, “Skin effect as
+a probe of transport regimes in Weyl semimetals,” Proceedings of the Na-
+tional Academy of Sciences 119, e2200367119 (2022).
+
+16F. Nathan, I. Martin, and G. Refael, “Topological frequency conversion in
+
+Weyl semimetals,” Phys. Rev. Res. 4, 043060 (2022).
+
+17H. K. Avetissian, V. N. Avetisyan, B. R. Avchyan, and G. F. Mkrtchian,
+“High-order harmonic generation in three-dimensional Weyl semimetals
+with broken time-reversal symmetry,” Phys. Rev. A 106, 033107 (2022).
+18Z.-Y. Li, Q. Li, and Z. Li, “High-order harmonic generations in tilted Weyl
+
+semimetals,” Chin. Phys. B 31, 124204 (2022).
+
+19H. Avetissian, V. Avetisyan, B. Avchyan, and G. Mkrtchian, “High-order
+harmonic generation in three-dimensional Weyl semimetals with broken
+time-reversal symmetry,” Phys. Rev. A 106, 033107 (2022).
+
+20A. Bharti and G. Dixit, “Role of topological charges in the nonlinear optical
+
+response from Weyl semimetals,” Phys. Rev. B 107, 224308 (2023).
+
+21L. Medic, J. Mravlje, A. Ramšak, and T. c. v. Rejec, “High-harmonic gen-
+eration in semi-Dirac and Weyl semimetals with broken time-reversal sym-
+
+5
+
+metry: Exploration of the merging of Weyl nodes,” Phys. Rev. B 109,
+205130 (2024).
+
+22J. Lim, Y. S. Ang, F. J. García de Abajo, I. Kaminer, L. K. Ang,
+and L. J. Wong, “Efficient generation of extreme terahertz harmonics in
+three-dimensional Dirac semimetals,” Physical Review Research 2, 043252
+(2020).
+
+23R. Matsunaga, N. Tsuji, H. Fujita, A. Sugioka, K. Makise, Y. Uzawa,
+H. Terai, Z. Wang, H. Aoki, and R. Shimano, “Light-induced collective
+pseudospin precession resonating with Higgs mode in a superconductor,”
+Science 345, 1145–1149 (2014).
+
+24X. Yang, C. Vaswani, C. Sundahl, M. Mootz, L. Luo, J. H. Kang, I. E. Per-
+akis, C. B. Eom, and J. Wang, “Lightwave-driven gapless superconductiv-
+ity and forbidden quantum beats by terahertz symmetry breaking,” Nature
+Photonics 13, 707–713 (2019).
+
+25H. Chu, M.-J. Kim, K. Katsumi, S. Kovalev, R. D. Dawson, L. Schwarz,
+N. Yoshikawa, G. Kim, D. Putzky, Z. Z. Li, H. Raffy, S. Germanskiy, J.-C.
+Deinert, N. Awari, I. Ilyakov, B. Green, M. Chen, M. Bawatna, G. Cris-
+tiani, G. Logvenov, Y. Gallais, A. V. Boris, B. Keimer, A. P. Schnyder,
+D. Manske, M. Gensch, Z. Wang, R. Shimano, and S. Kaiser, “Phase-
+resolved Higgs response in superconducting cuprates,” Nat. Commun. 11,
+1793 (2020).
+
+26S. Kovalev, T. Dong, L.-Y. Shi, C. Reinhoffer, T.-Q. Xu, H.-Z. Wang,
+Y. Wang, Z.-Z. Gan, S. Germanskiy, J.-C. Deinert, I. Ilyakov, P. H. M. van
+Loosdrecht, D. Wu, N.-L. Wang, J. Demsar, and Z. Wang, “Band-selective
+third-harmonic generation in superconducting MgB2: Possible evidence for
+the Higgs amplitude mode in the dirty limit,” Phys. Rev. B 104, L140505
+(2021).
+
+27C. Reinhoffer, P. Pilch, A. Reinold, P. Derendorf, S. Kovalev, J.-C. Deinert,
+I. Ilyakov, A. Ponomaryov, M. Chen, T.-Q. Xu, Y. Wang, Z.-Z. Gan, D.-S.
+Wu, J.-L. Luo, S. Germanskiy, E. A. Mashkovich, P. H. M. van Loosdrecht,
+I. M. Eremin, and Z. Wang, “High-order nonlinear terahertz probing of the
+two-band superconductor MgB2: Third- and fifth-order harmonic genera-
+tion,” Phys. Rev. B 106, 214514 (2022).
+
+28C. Reinhoffer, S. Esser, S. Esser, E. A. Mashkovich, S. Germanskiy,
+P. Gegenwart, F. Anders, P. H. M. van Loosdrecht, and Z. Wang, “Strong
+terahertz third-harmonic generation by kinetic heavy quasiparticles in
+CaRuO3,” Phys. Rev. Lett. 132, 196501 (2024).
+
+29C. Zhu, A. Reinold, P. Pilch, S. Kovalev, J. Heckötter, D. Reiter, M. Bayer,
+M. Assmann, and Z. Wang, “Distinct terahertz third-harmonic generation
+of many-body excitonic states,” Phys. Rev. Lett. 134, 196503 (2025).
+
+30P. Bowlan, E. Martinez-Moreno, K. Reimann, T. Elsaesser, and M. Wo-
+erner, “Ultrafast terahertz response of multilayer graphene in the nonper-
+turbative regime,” Phys. Rev. B 89, 041408 (2014).
+
+31H. A. Hafez, S. Kovalev, J.-C. Deinert, Z. Mics, B. Green, N. Awari,
+M. Chen, S. Germanskiy, U. Lehnert, J. Teichert, et al., “Extremely efficient
+terahertz high-harmonic generation in graphene by hot Dirac fermions,” Na-
+ture 561, 507–511 (2018).
+
+32A. Arshad, H. N. Koyun, R. Salikhov, M. Gensch, I. Ilyakov, A. Pono-
+maryov, G. L. Prajapati, T. V. de Oliveira, K. Mavridou, J. Lindner, et al.,
+“Terahertz harmonic generation from graphite pencil drawings,” Advanced
+Photonics Research 4, 2300088 (2023).
+
+33A. Maleki, M. B. Heindl, Y. Xin, R. W. Boyd, G. Herink, and J.-M. Ménard,
+“Strategies to enhance thz harmonic generation combining multilayered,
+gated, and metamaterial-based architectures,” (2024), arXiv:2405.17125
+[physics.optics].
+
+34S. Kovalev, K.-J. Tielrooij, J.-C. Deinert, I. Ilyakov, N. Awari, M. Chen,
+A. Ponomaryov, M. Bawatna, T. V. de Oliveira, L. Eng, et al., “Terahertz
+signatures of ultrafast Dirac fermion relaxation at the surface of topological
+insulators,” npj Quantum Mater. 6, 84 (2021).
+
+35K.-J. Tielrooij, A. Principi, D. S. Reig, A. Block, S. Varghese, S. Schreyeck,
+K. Brunner, G. Karczewski, I. Ilyakov, O. Ponomaryov, et al., “Milliwatt
+terahertz harmonic generation from topological insulator metamaterials,”
+Light Sci. Appl. 11, 315 (2022).
+
+36J. Stensberg, X. Han, Z. Ni, X. Yao, X. Yuan, D. Mallick, A. Gandhi,
+S. Oh, and L. Wu, “Observation of terahertz second harmonic generation
+from Dirac surface states in the topological insulator Bi2Se3,” Phys. Rev. B
+109, 245112 (2024).
+
+37S. Kovalev, R. M. Dantas, S. Germanskiy, J.-C. Deinert, B. Green,
+I. Ilyakov, N. Awari, M. Chen, M. Bawatna, J. Ling, et al., “Non-
+perturbative terahertz high-harmonic generation in the three-dimensional
+
+Dirac semimetal Cd3As2,” Nat. Commun. 11, 2451 (2020).
+
+38B. Cheng, N. Kanda, T. N. Ikeda, T. Matsuda, P. Xia, T. Schumann, S. Stem-
+mer, J. Itatani, N. P. Armitage, and R. Matsunaga, “Efficient terahertz
+harmonic generation with coherent acceleration of electrons in the dirac
+semimetal Cd3As2,” Phys. Rev. Lett. 124, 117402 (2020).
+
+39S. Germanskiy, R. M. A. Dantas, S. Kovalev, C. Reinhoffer, E. A.
+Mashkovich, P. H. M. van Loosdrecht, Y. Yang, F. Xiu, P. Surówka,
+R. Moessner, T. Oka, and Z. Wang, “Ellipticity control of terahertz high-
+harmonic generation in a Dirac semimetal,” Phys. Rev. B 106, L081127
+(2022).
+
+40C. Zhu, P. Pilch, R. M. A. Dantas, A. Reinold, Y. Yang, F. Xiu, A. Bedoya-
+Pinto, S. S. P. Parkin, R. Moessner, and Z. Wang, “Population inversion
+and ultrafast terahertz nonlinearity of transient Dirac fermions in Cd3As2,”
+Phys. Rev. B 109, L201111 (2024).
+
+41W. Mao, A. Rubio, and S. A. Sato, “Terahertz-induced high-order harmonic
+generation and nonlinear charge transport in graphene,” Phys. Rev. B 106,
+024313 (2022).
+
+42H. Meng, L. Wang, C. H. Lee, and Y. S. Ang, “Terahertz polarization con-
+version from optical dichroism in a topological Dirac semimetal,” Applied
+Physics Letters 121, 193102 (2022).
+
+43C.-C. Lee, S.-Y. Xu, S.-M. Huang, D. S. Sanchez, I. Belopolski, G. Chang,
+G. Bian, N. Alidoust, H. Zheng, M. Neupane, et al., “Fermi surface inter-
+connectivity and topology in Weyl fermion semimetals TaAs, TaP, NbAs,
+and NbP,” Phys. Rev. B 92, 235104 (2015).
+
+44Z. Liu, L. Yang, Y. Sun, T. Zhang, H. Peng, H. Yang, C. Chen, Y. f. Zhang,
+Y. Guo, D. Prabhakaran, et al., “Evolution of the fermi surface of Weyl
+semimetals in the transition metal pnictide family,” Nat. Mater. 15, 27–31
+(2016).
+
+45A. Bedoya-Pinto, A. K. Pandeya, D. Liu, H. Deniz, K. Chang, H. Tan,
+H. Han, J. Jena, I. Kostanovskiy, and S. S. Parkin, “Realization of epitaxial
+NbP and TaP Weyl semimetal thin films,” ACS nano 14, 4405–4413 (2020).
+
+6
+
+46P. C. M. Planken, H.-K. Nienhuys, H. J. Bakker, and T. Wenckebach, “Mea-
+surement and calculation of the orientation dependence of terahertz pulse
+detection in znte,” J. Opt. Soc. Am. B 18, 313–317 (2001).
+
+47Q. Wu and X. Zhang, “Free-space electro-optic sampling of terahertz
+
+beams,” Applied Physics Letters 67, 3523–3525 (1995).
+
+48S. Duan, L. Shi, P. Pilch, A. Reinold, S. Kovalev, R. M. A. Dantas, Y. Yang,
+F. Xiu, M. S. Vitiello, and Z. Wang, “Giant enhancement of terahertz high-
+harmonic generation by cavity engineering of dirac semimetal,” (2025),
+arXiv:2510.01760 [cond-mat.mtrl-sci].
+
+49N. Tancogne-Dejean, O. D. Mücke, F. X. Kärtner, and A. Rubio, “Ellipticity
+dependence of high-harmonic generation in solids originating from coupled
+intraband and interband dynamics,” Nat Commun 8 (2017).
+
+50N. Yoshikawa, T. Tamaya, and K. Tanaka, “High-harmonic generation in
+graphene enhanced by elliptically polarized light excitations,” Science 356,
+736–738 (2017).
+
+51M. Taucer, T. J. Hammond, P. B. Corkum, G. Vampa, C. Couture, N. Thiré,
+B. E. Schmidt, F. Légaré, H. Selvi, N. Unsuree, B. Hamilton, T. J.
+Echtermeyer, and M. A. Denecke, “Nonperturbative harmonic generation in
+graphene from intense midinfrared pulsed light,” Phys. Rev. B 96, 195420
+(2017).
+
+52X. Zhang, J. Li, Z. Zhou, S. Yue, H. Du, L. Fu, and H.-G. Luo, “Ellipticity
+dependence transition induced by dynamical Bloch oscillations,” Phys Rev
+B 99, 014304 (2019).
+
+53S. A. Sato, H. Hirori, Y. Sanari, Y. Kanemitsu, and A. Rubio, “High-order
+harmonic generation in graphene: Nonlinear coupling of intraband and in-
+terband transitions,” Phys Rev B 103, L041408 (2021).
+
+54H. Liu, Y. Li, Y. S. You, S. Ghimire, T. F. Heinz, and D. A. Reis, “High-
+harmonic generation from an atomically thin semiconductor,” Nat. Phys.
+13, 262–265 (2017).
+
+55Y. S. You, D. A. Reis, and S. Ghimire, “Anisotropic high-harmonic gener-
+
+ation in bulk crystals,” Nat. Phys. 13, 345–349 (2017).
+
+

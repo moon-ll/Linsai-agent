@@ -82,7 +82,20 @@ def _jaccard_similarity(a: str, b: str) -> float:
 
 
 def run_input_collect(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
-    """收集来源并记录 processed_sources。"""
+    """收集来源并记录 processed_sources。
+
+    v6.8.13: 前置调用 sync_engine.sync_hermes_outputs() 确保 hermes 产出已汇聚。
+    """
+    if not dry_run:
+        try:
+            import sync_engine
+            sync_engine.sync_hermes_outputs()
+            if _log:
+                _log.info("输入端：hermes outputs 已同步")
+        except Exception as e:
+            if _log:
+                _log.warning(f"输入端：sync_hermes_outputs 失败（继续）: {e}")
+
     sources = collect_all_sources(state=state, days=7, paper_limit=20, capture_limit=10)
     _ensure_input_dir()
     if not dry_run:

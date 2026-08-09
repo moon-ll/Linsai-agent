@@ -1,0 +1,1127 @@
+Forbidden second harmonics in centrosymmetric bilayer crystals
+
+arXiv:2601.08830v1 [cond-mat.mes-hall] 13 Jan 2026
+
+Haoning Tang+ ,1, 2, ∗ Zhitong Ding+ ,1 Tianyi Ruan,1 Zeyu Hao,1, 3 Kenji Watanabe,4
+Takashi Taniguchi,4 Haozhe Wang,5 Ali Javey,1, 3 Feng Wang,6, 3 and Yuan Cao1, 6, 3, †
+1
+Department of Electrical Engineering and Computer Science,
+University of California at Berkeley, Berkeley, CA 94720, USA
+2
+Department of Mechanical Engineering, Massachusetts Institute of Technology, Cambridge, MA 02139, USA
+3
+Materials Sciences Division, Lawrence Berkeley National Laboratory, Berkeley, CA, USA
+4
+National Institute for Materials Science, Namiki 1-1, Tsukuba, Ibaraki 305-0044, Japan
+5
+Department of Electrical and Computer Engineering, Duke University, Durham, NC 27708, USA
+6
+Department of Physics, University of California at Berkeley, Berkeley, CA 94720, USA
+
+Optical spectroscopy based on second-order nonlinearity is a critical technique for characterizing two-dimensional (2D) crystals1–4 as well as bioimaging and quantum optics5,6 . It is generally
+believed that second-harmonic generation (SHG) in centrosymmetric crystals, such as graphene
+and other bilayer 2D crystals7 , is negligible without externally breaking the inversion symmetry.
+Here, we show that with a new homodyne detection technique, we can apparently circumvent this
+symmetry-imposed constraint and observe robust SHG in pristine centrosymmetric crystals, without any symmetry-breaking field. With its exceptional sensitivity, we resolve polarization-resolved
+SHG in bilayer hexagonal boron nitride (h-BN), bilayer 2H-WSe2 , and remarkably, Bernal-stacked
+bilayer graphene, allowing us to unambiguously identify the crystallographic orientation in these
+crystals via SHG for the first time. We also demonstrate that the new technique can be used to
+non-invasively detect uniaxial strain and optical geometric phase in these crystals. The observed
+SHG in our experiments is attributed to second-order nonlinearity in the quadrupole channel, which
+is controlled by the presence of the C2 symmetry instead of the inversion symmetry. Our new
+technique expands the capability of nonlinear optical spectroscopy to encompass a large class of
+centrosymmetric materials that could never be measured before, and can be used for quantum
+sensing of moiré materials and twisted epitaxial films.
+I.
+
+MAIN
+
+Two-dimensional crystals such as graphene and transitional metal dichalcogenides (TMDs) are host to crystalline surfaces with the highest quality and tunability. The advent of moiré engineering on these materials has further pioneered novel approaches for creating
+new quantum materials and devices8 , leading to the creation of new exotic correlated electronic phases such as
+unconventional superconductivity9 , fractional quantum
+anomalous Hall states10 , and Wigner crystals11,12 . A
+crucial aspect in all of these experiments is the precise
+control of the crystallographic orientation of the underlying 2D crystals. It is therefore highly desirable to develop
+a universal, quick, and non-contact approach to characterize the crystallographic orientation of any 2D crystal
+with no ambiguity.
+For this purpose, nonlinear optical methods based
+on second-harmonic generation (SHG) are frequently
+employed1–4 , but not without limitations. In a typical SHG measurement, a femtosecond laser at wavelength λ0 (fundamental wavelength) is focused at the
+sample, and the reflected (or transmitted) light at λ0 /2
+(second-harmonic wavelength) is measured. The secondharmonic signal light is often projected to the same polarization plane as the fundamental light by an analyzer to
+achieve a parallel input/output configuration. A 2D crystal with hexagonal lattice will exhibit an SHG intensity
+proportional to cos2 3θ if it breaks the inversion symmetry, where θ is the angle between the armchair direction
+
+of the crystal and the polarization plane. This results in
+polarization-dependent SHG intensity that is periodic in
+60◦13 . However, two limitations with conventional SHG
+are immediately apparent: (i) traditional SHG cannot
+be used to determine the crystallographic orientation of
+centrosymmetric materials, as their second-order nonlinear tensor χ(2) vanishes. These include some of the most
+important 2D crystals used in moiré engineering, such
+as monolayer and Bernal bilayer graphene, as well as bilayers of h-BN and 2H-phase transitional metal dichalcogenides (TMDs). (ii) Even for noncentrosymmetric materials (e.g. odd-layer h-BN and 2H-TMDs) that do exhibit nonvanishing χ(2) , an inconvenient ambiguity remains: conventional SHG cannot distinguish between 2D
+crystals rotated at θ and θ + 60◦ . These are nonequivalent crystals, and moiré materials created from one versus
+the other behave very differently14 . These inherent limitations render traditional SHG an inadequate approach
+for deterministic production of moiré heterostructures.
+In this article, we introduce a powerful and yet simple technique that simultaneously circumvents both of
+these inherent limitations in traditional SHG. With this
+ultra-sensitive technique, we are able to unambiguously
+measure the second-order optical response and extract
+the crystallographic orientations of any layers of h-BN,
+2H-TMDs, or graphene (except monolayer graphene), in
+particular bilayers of them that possess inversion symmetry, for the first time. We point out that the observed
+SHG in centrosymmetric crystals is quadrupolar in nature and is constrained by the C2 symmetry rather than
+
+2
+the inversion symmetry. We also demonstrate strain and
+geometric phase sensing using the new technique. These
+results open the doors towards precise optical sensing,
+characterization, and manipulation of a broad range of
+crystalline materials than previously thought to be impossible for SHG. The new technique is especially useful
+for future ‘twistronic’ studies that require precise alignment between dissimilar materials, and might also be utilized for quantum sensing of C2 -broken correlated phases
+in moiré materials.
+II. COMPLEX-AMPLITUDE NONLINEAR
+SPECTROSCOPY (CANS)
+
+In a nonlinear crystal, the SHG is produced by
+the second-order electric polarization density P2ω =
+χ(2) Eω Eω , where Eω is the incident fundamental electrical field and ω is the optical angular frequency. It is a
+fully coherent process, in which P2ω oscillates in full synchronization with Eω . In a traditional SHG measurement
+in parallel input/output configuration, one measures the
+intensity (square of amplitude) of the projected secondharmonic optical field, which we define as ISHG,|| . The
+polarization direction that yields the maximum ISHG,||
+corresponds to the armchair directions in a hexagonal 2D
+crystal1–4 . Since no phase information is retained in this
+measurement, traditional SHG does not resolve the sign
+of the SHG amplitude.
+To see why this lack of phase information leads to an
+ambiguity in the determination of crystallographic orientation, one could consider a monolayer MoS2 crystal
+as an example, as shown in Fig. 1b. While traditional
+SHG can differentiate between the armchair (AC) directions (maximum intensity) versus the zigzag (ZZ) directions (minimum intensity), one cannot tell between
+the directions along Mo→S bonds (AC+) versus those
+along S→Mo bonds (AC-). These two sets of directions
+are nonequivalent, and must be differentiated for reproducible fabrication of moiré heterostructures involving
+two different crystals. In terms of the rotational angle,
+intensity measurements can only resolve the angle of the
+crystallographic axis modulus 60◦ , instead of modulus
+120◦ , which is prescribed by the C3 rotational symmetry
+of MoS2 .
+A phase-sensitive (interferometric) measurement is
+thus required to obtain the full crystallographic information encoded in P2ω 15 . To resolve the phase of the SHG
+from the sample under test, one needs a reference sample
+from which the phase relationship between the fundamental and second-harmonic wave is known (e.g. GaAs).
+By interfering the sample SHG wave with the reference
+SHG wave, one could obtain their phase difference and reconstruct the phase of the P2ω 16–19 . For this purpose, we
+build a nonlinear Michelson interferometer to automatically achieve the phase referencing, which is illustrated
+in Fig. 1a. On top of a traditional SHG setup, the fundamental laser beam is split at a beam splitter (BS) and
+
+focused onto the reference and the sample with identical
+microscope objectives. The reflected fundamental light
+from the sample and the reference are recombined at the
+BS and monitored with a photodiode (PD) in a closedloop manner to ensure that the optical path difference
+between the two arms of the interferometer ∆L = nλ0 ,
+where n is an integer (see SI for full setup). Therefore, Eω
+is guaranteed to arrive at the reference and the sample
+precisely in-phase. In the meantime, the reflected SHG
+from the sample and the reference are also combined at
+the BS (green beams in Fig. 1a).
+The fundamental and SHG waves combined at the
+BS in the time domain resemble the illustration on the
+upper-right panel in Fig. 1a. In the time domain, each
+femtosecond pulse from the pump laser generates two
+pulses, one from the reference and one from the sample,
+separated by a time delay of ∆L/c, where c is the speed
+of light. While the two fundamental pulses are guaranteed to have identical time-domain profiles (their peak
+heights could differ), the two SHG pulses could have a
+finite phase difference ∆ϕ due to the inherent phase difference between the SHG of the reference and of the sample. ∆ϕ thus directly probes the phase of P2ω from the
+sample.
+This technique, which we name as Complex-Amplitude
+Nonlinear Spectroscopy (CANS), essentially uses the fundamental pulses as a precise gauge to time the phase difference between the two SHG pulses ∆ϕ20 . To facilitate
+phase extraction, the SHG signal is separated from the
+fundamental and analyzed with a spectrograph equipped
+with a camera. The double pulse in the time domain
+generates an interference pattern in the wavelength (frequency) domain according to its Fourier transform, much
+in analogy to a Young’s double-slit experiment, as illustrated in the lower-right panel of Fig. 1a. This interference pattern is convoluted with the up-converted laser
+spectral width. If a nonzero ∆ϕ exists between the two
+SHG pulses, there will be a phase shift in the interference pattern. Using a simple wavelet analysis on the
+spectrum near λ0 /2, both SHG amplitude (instead of intensity) and SHG phase (∆ϕ) can be readily obtained.
+(see SI for data analysis procedure).
+As a benchmark, we perform both traditional SHG
+and CANS measurement on the same monolayer MoS2
+single-crystal (Fig. 2b), which has armchair and zigzag
+directions that are unambiguously determinable from its
+triangular shape. While traditional SHG spectroscopy
+(Fig. 1c) only shows the standard six-fold pattern in the
+polarization-resolved SHG measurement, the interference
+pattern in CANS reveals additional sign information, allowing direct correlation of positive CANS signal to the
+AC+ direction and negative CANS signal to the AC- direction. It is evident that the polarization dependence
+of CANS respects the underlying C3 symmetry of monolayer MoS2 and thus does not have any ambiguity. We
+can also measure the CANS map of multiple MoS2 flakes
+by scanning the laser spot over the sample, as shown in
+Fig. 1e. From the complex-amplitude SHG data, we
+
+3
+
+a
+
+ƩL
+
+Reference
+
+Reference
+
+Complex-Amplitude
+Nonlinear Spectroscopy
+(CANS)
+
+Obj
+
+Fundamental ǔ
+
+L-ƩL
+
+BS
+
+fs Laser
+
+ACƩԄ
+
+ǔ
+
+ZZ
+Obj
+
+Pol
+
+Second harmonic ǔ
+
+2D Crystal
+Sample
+
+DM
+
+Traditional SHG
+
+Spectro
+-meter
+
+Mo
+S
+
+ȟԄൌͲ
+
+Traditional
+SHG
+
+Camera
+
+Spectrum (a.u.)
+
+Laser spectral width
+
+CANS
+
+ǔ
+
+c
+
+AC+
+
+L
+
+ǔ
+
+PD
+
+b
+
+Sample
+
+ƩL/c
+
+ȟԄൌɎ
+
+d
+
+0 0.5 1 1.5
+
+Wavelength
+
+Spectrum (a.u.)
+
+0
+
+2
+
+e
+
+4
+
+520 CANS
+λ (nm)
+
+4
+
+515
+2ω Amplitude
+
+2
+
+515
+2ω Amplitude
+
+λ (nm)
+
+520 Traditional SHG
+
+Ǌ0/2
+
+1
+0
+0
+
+120
+
+240
+
+ω Polarization (°)
+
+360
+
+2ω Intensity
+
+0
+
+5
+0 +
+
+-
+
++
+
+-
+
++
+
+-
+
+120°
+
+-5
+0
+
+120
+
+240
+
+ω Polarization (°)
+
+360
+
+60°
+
+Rotation
+
+0°
+
+FIG. 1: An ultrasensitive phase-resolved second-harmonic spectroscopy. (a) Illustration of CANS technique in
+comparison to traditional SHG spectroscopy. In CANS, coherent SHG waves from the reference and the sample interfere at the
+beam splitter (BS) to create a spectrum that contains the phase-resolved SHG amplitude from the sample. The upper-right
+panel shows the time domain pulses from the reference and the sample, at the fundamental (red) and second-harmonic (green)
+wavelengths. The lower-right panel shows the spectrum near λ0 /2, in a traditional SHG measurement, as well as in CANS
+measurements, when a phase difference of ∆ϕ = 0 or π is present between the reference SHG and sample SHG waves. (b) In
+a monolayer MoS2 flake, the armchair directions from Mo to S (AC+) are nonequivalent with the armchair directions from
+S to Mo (AC-). Scale bar is 5 µm. (c) Polarization-dependent spectrum and SHG amplitude (square root of intensity) in a
+traditional SHG measurement. The six polarizations that yields maximum SHG signal are the armchair directions. However,
+the AC+ and AC- directions cannot be distinguished. (d) Spectrum and SHG amplitude in a CANS measurement. The phase
+information of the SHG wave is encoded into the interference pattern in the wavelength domain. The phase-resolved SHG
+amplitude extracted from CANS clearly differentiates AC+ and AC- directions. (e) SHG intensity map and crystallographic
+rotation map of a region with multiple overlapping MoS2 monolayer flakes. By using CANS, the crystallographic orientation
+of a 2D crystal can be determined unambiguously, respecting the underlying C3 symmetry. Both maps are 100×100 µm2 .
+
+4
+can directly extract the rotation angle of each individual
+region with high precision21 .
+Another key advantage of CANS is its exceptional sensitivity. In traditional SHG measurements, the measured
+2ω 2
+signal (SHG intensity) is proportional to |Psam
+| (we use
+subscripts ‘sam’ and ‘ref’ to refer to SHG contribution
+from the sample and the reference, respectively). On
+the other hand, the SHG amplitude signal in a CANS
+2ω
+2ω
+measurement is proportional to Pref
+· Psam
+, which fundamentally classifies CANS as a homodyning detection
+technique22,23 . For samples with weak Psam , CANS is
+orders of magnitude more sensitive than the traditional
+SHG, making it an ideal technique for detecting weak
+SHG signals where the signal-to-noise ratio is limited by
+the background or the sensor22 . We will show next how
+this could be exploited to observe SHG in materials that
+were long thought to be lacking of SHG response.
+III. SHG FROM CENTROSYMMETRIC
+CRYSTALS
+
+Centrosymmetric crystals have vanishing χ(2) because
+χ
+is odd under inversion. For this reason, while 2D
+crystals such as monolayer TMDs and h-BN break inversion symmetry and exhibit a strong SHG response,
+inversion symmetry is restored in bilayer 2H-TMDs
+(Fig. 2a) and bilayer h-BN (Fig. 2d), and these
+crystals show negligible SHG response in their pristine states3 . This symmetry-imposed constraint makes
+it impossible to characterize the crystallographic properties of these bilayer crystals using SHG7,13 , unless
+the inversion symmetry is externally broken by various
+methods, such as strong substrate effect24,25 , van der
+Waals stacking4,26–28 , application of a dc electric field
+or dc bias current29–33 , magnetic ordering34 , excitonic
+polarization35 , strain gradient36,37 , among others. These
+approaches are either only applicable to certain classes
+of 2D crystals, or require special sample preparation that
+renders them unsuitable as non-contact characterization
+techniques.
+Here we demonstrate that the exceptional sensitivity
+of CANS allows one to apparently ‘evade’ this symmetry
+constraint, enabling the universal and robust observation of SHG in centrosymmetric bilayers. SHG measured
+via CANS does not depend on any particular material
+traits (e.g. excitonic resonances), and does not require
+any external symmetry breaking fields (e.g. doping, gating, current biasing, or straining). Figure 2b compares
+the traditional SHG spectrum and CANS for a bilayer
+WSe2 sample. These two measurements were taken in
+otherwise identical conditions (pump laser power, exposure time, etc.), but one with the reference signal blocked
+(traditional SHG) and one with it unblocked (CANS).
+We use normal incidence in all of our measurements to
+maximize the spatial resolution. The traditional SHG
+spectrum hardly reveal any SHG signal for this sample,
+as one would expect based on its inversion symmetry. To
+(2)
+
+our surprise, a strong SHG signal is present in the CANS
+measurement, manifested as an interference pattern in
+the wavelength domain. We extract the polarizationresolved complex-valued SHG amplitude from this interference and show it in the radial plot in Fig. 2c, where
+the amplitude (modulus) and phase are represented by
+the radial distance and color, respectively. The polarization dependence of the CANS signal has a clear 120◦
+periodicity, and is in fact similar to that of monolayer
+2H-TMD (Fig. 1d)1–4 .
+Optically generated exciton-polaritons in bilayer 2HTMDs are known to break the inversion symmetry in
+certain scenarios and can lead to enhanced SHG35 . To
+rule out this scenario and to demonstrate that our observation of SHG in centrosymmetric crystals is universal, we performed the same measurement in a bilayer
+h-BN crystal, as shown in Fig. 2e and 2f. The large
+band gap (6 eV) in h-BN relative to the laser energy
+(ℏω ∼ 1.2 eV) eliminates possible complication due to
+exciton-polaritons. As can be seen in Fig. 2e, while the
+nonlinearity of h-BN is intrinsically weaker than that in
+WSe2 3 , we can still clearly identify the interference pattern in the CANS data, whereas traditional SHG under
+identifical experimental conditions shows nothing other
+than noise. The polarization dependence of the complexvalued SHG amplitude is largely three-fold symmetric
+but with some distortion, which is attributed to residual
+strain in the h-BN crystal and will be further discussed
+in Fig. 4.
+We now turn to the intuition about why centrosymmetric crystals do not necessarily have a vanishing SHG
+response. In a monolayer crystals such as monolayer
+2H-TMDs and h-BN, which lacks inversion symmetry,
+the laser at the fundamental wavelength excites secondharmonic dipoles P2ω , which radiates second-harmonic
+light waves, as shown in Fig. 3a. The reason why bilayer TMDs (or h-BN) have vanishing χ(2) can be understood as a cancelation of the second-harmonic waves
+radiated from the top monolayer and the bottom layer.
+A phase difference near π exists between these two waves
+because the two monolayers are 180◦ rotated from each
+other (Fig. 3b). However, this cancelation is in fact not
+perfect, because the two second-harmonic waves are not
+completely in-phase due to the small but finite thickness d of each layer (d =0.6 nm∼0.7 nm for 2-H TMDs,
+d =0.34 nm for h-BN). We believe that the SHG wave
+that we measure via CANS, is the residue of such imperfect cancelation, as illustrated in Fig. 3b.
+Since a centrosymmetric system cannot possess a finite second-harmonic dipole, this residue SHG is described by the next-order multipole expansion of charge
+density in the crystal, which is the electric quadrupole.
+We shall thus refer to this wave as the quadrupolar
+SHG (QSHG), which was first observed in the context
+of isotropic gases38,39 . This SHG mechanism is also responsible for the bulk SHG contribution in thicker crystals, but generally believed to negligible for atomically
+thin 2D crystals. As an order-of-magnitude estimation
+
+5
+
+a
+
+Spectrum (a.u.)
+
+b
+
+c
+
+-π 0 π
+2ω Phase
+
+×10
+
+λ (nm)
+
+518
+
+Inversion
+Center
+
+-1 0 1
+
+516
+CANS
+
+Traditional SHG
+
+0
+120 240
+0
+120 240 360
+ω Polarization (°) ω Polarization (°)
+
+2H-TMD
+
+d
+
+e
+
+Spectrum (a.u.)
+
+×5
+
+f
+
+-π 0 π
+2ω Phase
+
+λ (nm)
+
+518
+
+Inversion
+Center
+
+-1 0 1
+
+516
+CANS
+-120 0
+120 -120 0
+120
+ω Polarization (°) ω Polarization (°)
+Traditional SHG
+
+h-BN
+
+FIG. 2: Second harmonic generation from centrosymmetric crystals. (a) Crystal structure of bilayer 2HTMDs, showing its inversion center. (b) While traditional SHG can hardly detect any SHG signal from a bilayer
+2H-WS2 , CANS can clearly detect an SHG interference pattern. See SI for background removal procedure for both
+data. The traditional SHG data is scaled by 10 times. (c) The complex-valued SHG amplitude extracted from the
+CANS measurement in (b). The SHG amplitude is represented by the radial distance (arbitrary units), and the SHG
+phase is represented by color (from −π to π). The solid curve is a fitting curve to the data points (see SI for the
+fitting function). (d) Crystal structure of bilayer h-BN and its inversion center. (e-f) Same measurements as in (b-c)
+for bilayer h-BN. Traditional SHG in (e) is scaled by 5 times. The distortion seen in (f) is attributed to uniaxial strain
+in the crystal.
+
+(see SI for detailed calculation), the intensity of QSHG
+in bilayer 2H-TMDs is ∼ 10−4 weaker than that of a
+monolayer, and ∼ 10−5 weaker for h-BN. This explains
+why the QSHG signal could not be readily observed via
+traditional SHG in these ultrathin crystals, but can now
+be resolved using the ultra-sensitive CANS technique.
+The QSHG is universally allowed in any crystal, including those with inversion symmetry, and is fundamentally
+different in nature compared to the prior observation
+of SHG in centrosymmetric crystals where an external
+symmetry-breaking field was applied or induced4,24–37 .
+While a SiO2 substrate is present in our present experiments, we believe that the substrate effect is not the
+dominant reason why an SHG signal can be observed,
+and we expect that the QSHG can be observed even in
+fully suspended (and thus fully centrosymmetric) bilayer
+crystals, using CANS (see SI for estimation).
+
+IV.
+
+QUADRUPOLAR SHG AND C2 SYMMETRY
+
+To further demonstrate that the observed SHG in centrosymmetric crystals is from the quadrupolar contribution and to gain further insight into its symmetry properties, we performed CANS measurement on two other centrosymmetric 2D crystals, which are monolayer graphene
+(MLG) and Bernal bilayer graphene (BLG), respectively.
+Analogous to χ(2) that describes the dipolar SHG,
+QSHG in centrosymmetric crystals is described by a
+rank-4 tensor χQ (see SI). χQ
+ijkl is even under inversion
+and thus does not vanish in centrosymmetric crystals.
+However, relevant components of χQ could be subject
+to other symmetry constraints. In particular, one could
+show that the components in χQ that are responsible for
+radiating SHG waves into the z direction must vanish
+when C2 -symmetry along the z-axis is present (see SI for
+derivation)40 . Therefore, whether the observed CANS
+signal vanishes when C2 -symmetry is present would be a
+strong indication of its quadrupolar origin.
+
+6
+
+a Fundamental
+
+c
+
+Dipolar SHG
+
+f
+C2 axis
+
+b
+
+d
+x
+
+Fundamental Quadrupolar SHG
+
+518
+
+e
+
+Px=0, Qzx≠0
+
+g
+
+518
+
+516
+
+Interference Phase Diff.
+
+Bernal bilayer graphene
+(C2 broken)
+-1 0 1
+Spectrum (a.u.)
+
+λ (nm)
+
+z
+
+λ (nm)
+
+Px≠0
+
+Monolayer graphene
+(C2 preserved)
+-1 0 1
+Spectrum (a.u.)
+
+CANS
+
+0
+
+120 240 360
+ω Polarization (°)
+
+2ω Phase
+-π 0 π
+
+516
+
+h
+
+CANS
+
+0
+
+120 240 360
+ω Polarization (°)
+
+2ω Phase
+-π 0 π
+
+FIG. 3: Quardrupolar SHG and C2 rotational symmetry. (a) In monolayer nonlinear crystals, SHG is generated
+by oscillating dipoles in the plane (e.g. Px2ω along the x direction), excited by the fundamental. These dipoles radiate
+SHG waves in the z direction. (b) In a bilayer crystal (2H-TMDs or h-BN), the SHG waves from the two oppositely
+rotated layers cancel, but a small residue remains. The total dipole density Px2ω vanishes, but the quadrupole density
+Q2ω
+zx is nonzero, which is can still radiates in the z direction, giving rise to a detectable QSHG signal. (c) and (f) shows
+the crystal structure of monolayer graphene (MLG) and Bernal bilayer graphene (BLG), respectively. While both are
+centrosymmetric, MLG has a C2 rotation axis while BLG does not. (d) MLG does not show any CANS signal apart
+from an polarization independent background. (g) BLG shows a clear CANS signal that can be attributed to QSHG
+in this C2 -broken crystal. (e) and (h) show the polarization-resolved complex-valued SHG amplitude extracted from
+(d) and (g), respectively.
+
+The contrast between MLG/BLG provides an ideal
+testbed for this hypothesis. Both being centrosymmetric
+and consisting of identical atoms, MLG possesses a C2
+symmetry axis at the hexagonal centers, whereas BLG
+does not possess this symmetry41 , as illustrated in Fig.
+3c and f. We prepare pristine MLG and BLG by mechanical exfoliation on identical substrates. As shown in
+Fig. 3d and g, with identical experimental conditions,
+we could not detect any SHG signal in MLG (except
+a weak polarization-independent background from the
+substrate24 ), while a strong CANS response is detected
+from BLG, in complete agreement with the above discussions about QSHG. Therefore, we conclude that the
+observed SHG in centrosymmetric C2 -broken crystals can
+be attributed to the quadrupolar contribution.
+Similar to bilayer 2H-TMDs and h-BN (Fig. 2), the
+complex-valued SHG amplitude of BLG extracted from
+the CANS data shows a C3 -symmetric pattern (Fig. 3h),
+
+allowing unique determination of its lattice orientation.
+To our knowledge, this experiment constitutes the first
+determination of crystallographic orientation in pristine
+BLG via SHG. This establishes CANS as an extremely
+useful tool for the preparation of moiré 2D crystals that
+involve the alignment between BLG and other rhombohedral graphene flakes (all of which possess inversion symmetry), with an h-BN substrate flake42 . Traditionally,
+the preparation of such samples involves visual alignment
+between the edges of h-BN and graphene flakes, which is
+error-prone (cannot tell between AC and ZZ edges, not
+to mention the ambiguity between AC+ and AC-), inaccurate (uncertainty of 2 ∼ 3◦ ), and irreproducible43 .
+CANS might increase the yield rate of such devices by
+several times if the crystallographic orientations of the
+underlying graphene and h-BN crystals are pinpointed
+before stacking.
+
+a
+
+Normal Strain
+
+2ω Phase (°) |2ω Amplitude| (a.u.)
+
+7
+
+b
+
+With strain
+
+No strain
+
+With strain
+
+No strain
+
+5
+
+0
+120
+0
+
+-120
+0
+
+θtwist
+
+0
+
+2ω Phase (°)
+
+-θtwist
+
+120
+240
+ω Polarization (°)
+
+360 -10
+
+0
+X (µm)
+
+h
+
+120
+0
+
+1
+0
+
+-120
+0
+
+-1
+
+2ω Chirality
+
+2ω
+
+0
+
+-120
+
+g
+ω
+
+1
+
+120
+
+0
+
+f
+
+e
+
+Y
+
+2ω
+
+2ω Phase (°)
+
+ω
+
+d
+
+360
+2ω Chirality
+
+c
+
+120
+240
+ω Polarization (°)
+
+Y
+
+Shear Strain
+
+120
+240
+ω Polarization (°)
+
+360
+
+0
+
+10
+20
+X (µm)
+
+-1
+
+FIG. 4: Strain and geometric phase sensing using CANS. (a) Uniaxial strain (including normal and shear
+strains) in a 2D crystal breaks the threefold rotational symmetry (C3 ). (b) Complex-valued SHG amplitude and
+phase in a bilayer h-BN crystal with strain. The empty dots are data, solid curves are fitting that includes strain
+effects, and dashed curves are fitting without strain effects (see SI). (c) In a chiral system (e.g. a twisted crystal with
+twist angle θtwist ), a linearly polarized fundamental input light (ω) becomes left circularly polarized (LCP) at the
+second harmonic frequency (2ω). The Pancharatnum-Berry phase (geometric phase) is the optical phase of the 2ω
+wave, which is related to the fundamental polarization θ by ∆ϕ = 3θ when the 2ω wave is purely LCP. (d) The SHG
+phase measured by CANS in a θtwist = 66◦ pentalayer-pentalayer WS2 device, where the SHG is close to LCP. The
+fitting curve is 3θ with an offset that represents the lattice orientation. (e) SHG chirality map of the θtwist = 66◦
+device. The dashed line highlights the twisted region. (f-h) Same measurements for a θtwist = 57◦ device, where the
+system has opposite chirality and the SHG is right circularly polarized (RCP). The geometric phase is ∆ϕ = −3θ plus
+an offset in this case.
+
+V.
+
+SENSING STRAIN AND GEOMETRIC
+PHASE
+
+The complex-valued SHG amplitude extracted from
+CANS contains rich information on the nonlinear crys-
+
+tals beyond their lattice orientation. Here we demonstrate that symmetry-breaking effects in ultrathin crystals caused by uniaxial strain or twisting can be sensed by
+CANS as well. CANS can thus be used as a non-contact
+
+8
+method to measure strain and twist angle in centrosymmetric crystals that could not be sensed by traditional
+SHG spectroscopy.
+A uniaxial strain in a 2D crystal, which could include
+a combination of normal strain and shear strain, breaks
+the C3 symmetry of a hexagonal 2D crystal (Fig. 4a).
+The effect of such strain-induced symmetry breaking on
+traditional SHG has been extensively studied in noncentrosymmetric 2D crystals, which is captured by a modulation on the SHG intensity with a periodicity of 180◦
+(i.e. C2 symmetric), on top of the standard 60◦ -periodic
+(C6 symmetric) pattern44,45 . However, since strain itself
+does not break the inversion symmetry, strain sensing
+using traditional SHG is not possible if the crystal is
+centrosymmetric. With the introduction of CANS, such
+sensing is now possible. Figure 4b shows the complexvalued SHG amplitude and phase for a bilayer h-BN sample (same as the one used in Fig. 2e and f). It can be
+seen that the data match perfectly with the fitting curves
+that consider strain effects, from which we can directly
+pinpoint the principal axes and relative strength of the
+uniaxial strain in this sample (see SI for further details).
+Symmetry is also broken by twisting one 2D crystal
+against another, creating a moiré bilayer. A moiré bilayer
+consisting of hexgonal 2D crystal breaks both inversion
+symmetry and mirror symmetry, if the twist angle θtwist
+is other than a multiple of 60◦ . In these crystals, one
+expects the nonlinear response to become chiral, i.e. the
+symmetry between left and right circular optical polarizations is lifted. In particular, we have previously shown
+that the nonlinear response of a moiré bilayer can become
+fully chiral46 at specific combinations of layer thicknesses
+and twist angles. Under these conditions, the SHG from
+the moiré bilayer becomes fully left or right circularly polarized (LCP or RCP) when excited with linearly polarized fundamental, as illustrated in Fig. 4c and f. At these
+peculiar singularities points, the linear polarization angle
+of the fundamental wave, θ, no longer affects the secondharmonic polarization (which is now fixated to LCP or
+RCP); instead, it directly controls the optical phase of
+the LCP or RCP light known as the Pancharatnum-Berry
+phase or geometric phase, given by e±3iθ (positive for
+LCP and negative for RCP) for hexagonal crystals47–49 .
+The phase sensitivity of CANS allows us to directly
+visualize this geometric phase. In this experiment, we
+fabricated two twisted pentalayer (5L) WS2 devices, one
+with twist angle θtw = 66◦ and one with θtw = 57◦ . The
+experimentally measured SHG phase for these two samples are shown in Fig. 4d and g, respectively. It can be
+seen that in stark contrast to nonchiral crystals where
+the phase switches by approximately ±π each time the
+SHG amplitude drops to zero (see Fig. 2c), the CANS
+phase for a chiral crystal is approximately linear with
+the fundamental polarization angle, ∆ϕ ∼ ±3θ, in precise agreement with the geometric phase for hexagonal
+crystals. We also performed CANS mapping in the two
+twisted samples to map out the SHG chirality (see SI
+for extraction), as shown in Fig. 4e and h respectively.
+
+The twisted regions, which exhibit close-to-unity SHG
+chirality, can be clearly identified in the chirality map.
+CANS mapping therefore allows one to remotely image
+the internally twisted interfaces in a crystal on the basis
+of its optical chirality. The same principle can be used
+to inspect internal twisted faults in other materials regardless of whether the underlying crystal have inversion
+symmetry or not.
+VI.
+
+DISCUSSION
+
+We have shown via several experiments that CANS
+is a powerful tool for optical characterization of centrosymmetric crystals where traditional SHG cannot be
+employed. We want to link this apparent ‘evading’ of
+symmetry constraints to a more general character of perturbative physical processes in nature: while the lowestorder response of a physical process (e.g. the dipolar
+SHG) might vanish due to a symmetry constraint, the
+next-lowest-order response (e.g. the QSHG) is often not
+subject to the same constraint, and can thus be probed
+by a suﬀiciently sensitive experimental technique. A classical example of this philosophy is optical selection rules,
+which are different for electric dipole radiation and electric quadrupole radiation. Based on this philosophy and
+our demonstration, one can extrapolate that other physical processes typically thought of as being forbidden by
+the presence of inversion symmetry, such as piezoelectricity, ferroelectricity, and electrical/optical rectification,
+might be permitted in their corresponding quadrupolar channels, which can in principle be measured using
+quadrupole-sensitive techniques.
+A potentially important application of QSHG spectroscopy is to study the symmetry-broken phases in moiré
+and non-moiré quantum materials50–53 . In hexagonal
+2D crystals with two valleys, the C2 symmetry and the
+time-reversal symmetry play a central role in low-energy
+electronic properties54 , and the theoretically predicted
+ground states of the correlated states in moiré 2D crystals are often classified by whether they spontaneously
+break one or both of these symmetries55,56 . However, it
+is diﬀicult to non-invasively detect C2 symmetry breaking and differentiate from inversion symmetry breaking
+with existing approaches. With the unique sensitivity to
+the C2 symmetry, we envision that QSHG imaging could
+become a new approach for sensing the spontaneously
+C2 -broken phases in moiré systems.
+ACKNOWLEDGEMENTS
+
+We thank Shanhui Fan, Alp Sipahigil, Peter So,
+and Pablo Jarillo-Herrero for helpful discussions. Y.C.
+acknowledges support by the U.S. National Science
+Foundation under grant No. DMR-2441893. H.T.
+acknowledges support by the Sony Research Award from
+Sony Group. F.W acknowledges support by the U.S.
+
+9
+Department of Energy, Oﬀice of Science, Basic Energy
+Sciences, Materials Sciences and Engineering Division
+under Contract No. DE-AC02-05-CH11231 within the
+van der Waals heterostructure program KCWF16. Y.C.
+and Z.H. acknowledge support from Lawrence Berkeley
+National Laboratory via the LDRD program. K.W.
+and T.T. acknowledge support from the Elemental
+Strategy Initiative conducted by the MEXT, Japan,
+grant no. JPMXP0112101001; JSPS KAKENHI grant
+no. JP20H00354; and the CREST (JPMJCR15F3), JST.
+
+∗
+
+haoning@mit.edu
+caoyuan@berkeley.edu
+1
+Kumar, N. et al. Second harmonic microscopy of monolayer MoS2. Physical Review B 87, 161403 (2013).
+2
+Malard, L. M., Alencar, T. V., Barboza, A. P. M., Mak,
+K. F. & de Paula, A. M. Observation of intense second
+harmonic generation from MoS2 atomic crystals. Physical
+Review B 87, 201401 (2013).
+3
+Li, Y. et al. Probing Symmetry Properties of Few-Layer
+MoS2 and h-BN by Optical Second-Harmonic Generation.
+Nano Letters 13, 3329–3333 (2013).
+4
+Kim, C.-J. et al. Stacking Order Dependent Second Harmonic Generation and Topological Defects in h-BN Bilayers. Nano Letters 13, 5660–5665 (2013).
+5
+Campagnola, P. J. & Loew, L. M. Second-harmonic imaging microscopy for visualizing biomolecular arrays in cells,
+tissues and organisms. Nature Biotechnology 21, 1356–
+1360 (2003).
+6
+Zhang, C., Huang, Y.-F., Liu, B.-H., Li, C.-F. & Guo, G.C. Spontaneous Parametric Down-Conversion Sources for
+Multiphoton Experiments. Advanced Quantum Technologies 4, 2000132 (2021).
+7
+Zhang, J., Zhao, W., Yu, P., Yang, G. & Liu, Z. Second
+harmonic generation in 2D layered materials. 2D Materials
+7, 042002 (2020).
+8
+Andrei, E. Y. et al. The marvels of moiré materials. Nature
+Reviews Materials 6, 201–206 (2021).
+9
+Cao, Y. et al. Unconventional superconductivity in magicangle graphene superlattices. Nature 556, 43–50 (2018).
+10
+Cai, J. et al. Signatures of fractional quantum anomalous
+Hall states in twisted MoTe2. Nature 622, 63–68 (2023).
+11
+Regan, E. C. et al. Mott and generalized Wigner crystal
+states in WSe2/WS2 moiré superlattices. Nature 579, 359–
+363 (2020).
+12
+Xu, Y. et al. Correlated insulating states at fractional
+fillings of moiré superlattices. Nature 587, 214–218 (2020).
+13
+Boyd, R. W. (ed.) Nonlinear Optics (Fourth Edition) (Academic Press, 2020).
+14
+Mak, K. F. & Shan, J. Semiconductor moiré materials.
+Nature Nanotechnology 17, 686–695 (2022).
+15
+Stolle, R., Marowsky, G., Schwarzberg, E. & Berkovic, G.
+Phase measurements in nonlinear optics. Applied Physics
+B 63, 491–498 (1996).
+16
+Kim, W., Ahn, J. Y., Oh, J., Shim, J. H. & Ryu, S. SecondHarmonic Young’s Interference in Atom-Thin Heterocrystals. Nano Letters 20, 8825–8831 (2020).
+†
+
+AUTHOR CONTRIBUTIONS
+
+Y.C. and H.T. conceived and built the experiment.
+Z.D., T.R. and Z.H. prepared the sample and performed
+the measurements. K.W. and T.T. provided h-BN crystals. H.W., A.J. and F.W. provided TMDs samples.
+Y.C. and H.T. wrote the manuscript with inputs from
+all authors.
+
+17
+
+Ohno, P. E., Saslow, S. A., Wang, H., Geiger, F. M. &
+Eisenthal, K. B. Phase-referenced nonlinear spectroscopy
+of the α-quartz/water interface. Nature Communications
+7, 13857 (2016).
+18
+Wang, Z. et al. Contrast-enhanced phase-resolved second
+harmonic generation microscopy. Optics Letters 49, 2117–
+2120 (2024).
+19
+Shen, Y. R. Phase-Sensitive Sum-Frequency Spectroscopy.
+Annual Review of Physical Chemistry 64, 129–150 (2013).
+20
+Chang, R. K., Ducuing, J. & Bloembergen, N. Relative
+Phase Measurement Between Fundamental and SecondHarmonic Light. Physical Review Letters 15, 6–8 (1965).
+21
+Mueller, N. S. et al. Full Crystallographic Imaging
+of Hexagonal Boron Nitride Monolayers with PhononEnhanced Sum-Frequency Microscopy. Advanced Materials n/a, e10124.
+22
+Thiansathaporn, P. & Superfine, R. Homodyne surface
+second-harmonic generation. Optics Letters 20, 545–547
+(1995).
+23
+Dadap, J., Shan, J., Weling, A., Misewich, J. & Heinz,
+T. Homodyne detection of second-harmonic generation as
+a probe of electric fields. Applied Physics B 68, 333–341
+(1999).
+24
+Dean, J. J. & van Driel, H. M. Second harmonic generation
+from graphene and graphitic films. Applied Physics Letters
+95, 261910 (2009).
+25
+Tom, H. W. K., Heinz, T. F. & Shen, Y. R. SecondHarmonic Reflection from Silicon Surfaces and Its Relation to Structural Symmetry. Physical Review Letters 51,
+1983–1986 (1983).
+26
+Yao, K. et al. Enhanced tunable second harmonic generation from twistable interfaces and vertical superlattices
+in boron nitride homostructures. Science Advances 7,
+eabe8691 (2021).
+27
+Hsu, W.-T. et al. Second Harmonic Generation from Artificially Stacked Transition Metal Dichalcogenide Twisted
+Bilayers. ACS Nano 8, 2951–2958 (2014).
+28
+Zhang, M. et al. Emergent second-harmonic generation in
+van der Waals heterostructure of bilayer MoS2 and monolayer graphene. Science Advances 9, eadf4571 (2023).
+29
+An, Y. Q., Nelson, F., Lee, J. U. & Diebold, A. C.
+Enhanced Optical Second-Harmonic Generation from the
+Current-Biased Graphene/SiO2/Si(001) Structure. Nano
+Letters 13, 2104–2109 (2013).
+30
+Yu, H., Talukdar, D., Xu, W., Khurgin, J. B. & Xiong, Q.
+Charge-Induced Second-Harmonic Generation in Bilayer
+WSe2. Nano Letters 15, 5653–5657 (2015).
+
+10
+31
+
+Klein, J. et al. Electric-Field Switchable Second-Harmonic
+Generation in Bilayer MoS2 by Inversion Symmetry Breaking. Nano Letters 17, 392–398 (2017).
+32
+Zhang, Y. et al. Doping-Induced Second-Harmonic Generation in Centrosymmetric Graphene from Quadrupole
+Response. Physical Review Letters 122, 047401 (2019).
+33
+Lee, J., Mak, K. F. & Shan, J. Electrical control of the
+valley Hall effect in bilayer MoS2 transistors. Nature Nanotechnology 11, 421–425 (2016).
+34
+Ahn, Y. et al. Electric quadrupole second-harmonic generation revealing dual magnetic orders in a magnetic Weyl
+semimetal. Nature Photonics 18, 26–31 (2024).
+35
+Shree, S. et al. Interlayer exciton mediated second harmonic generation in bilayer MoS2. Nature Communications 12, 6894 (2021).
+36
+Lu, K. et al. Strong second-harmonic generation by sublattice polarization in non-uniformly strained monolayer
+graphene. Nature Communications 14, 2580 (2023).
+37
+Zhang, X. et al. Strain-Driven Symmetry Breaking and
+Enhanced SHG in Centrosymmetric 1T-PtS2. The Journal
+of Physical Chemistry Letters 16, 7763–7772 (2025).
+38
+Bethune, D. S., Smith, R. W. & Shen, Y. R. Optical
+Quadrupole Sum-Frequency Generation in Sodium Vapor.
+Physical Review Letters 37, 431–434 (1976).
+39
+Bethune, D. S. Quadrupole second-harmonic generation
+for a focused beam of arbitrary transverse structure and
+polarization. Optics Letters 6, 287–289 (1981).
+40
+Popov, S. V. Susceptibility Tensors for Nonlinear Optics
+(Routledge, New York, 2017).
+41
+Wallace, P. R. The Band Theory of Graphite. Physical
+Review 71, 622–634 (1947).
+42
+Lu, Z. et al. Fractional quantum anomalous Hall effect in
+multilayer graphene. Nature 626, 759–764 (2024).
+43
+Lau, C. N., Bockrath, M. W., Mak, K. F. & Zhang, F. Reproducibility in the fabrication and physics of moiré materials. Nature 602, 41–50 (2022).
+44
+Mennel, L. et al. Optical imaging of strain in twodimensional crystals. Nature Communications 9, 516
+
+(2018).
+Mennel, L., Paur, M. & Mueller, T. Second harmonic generation in strained transition metal dichalcogenide monolayers: MoS2, MoSe2, WS2, and WSe2. APL Photonics 4,
+034404 (2018).
+46
+Tang, H. et al. An on-chip platform for multi-degree-offreedom control of two-dimensional quantum and nonlinear
+materials (2023).
+47
+Bhagavantam, S. & Chandrasekhar, P. Harmonic generation and selection rules in nonlinear optics. Proceedings
+of the Indian Academy of Sciences - Section A 76, 13–20
+(1972).
+48
+Li, G. et al. Continuous control of the nonlinearity phase
+for harmonic generations. Nature Materials 14, 607–612
+(2015).
+49
+Xie, X. et al. Generalized Pancharatnam-Berry Phase
+in Rotationally Symmetric Meta-Atoms. Physical Review
+Letters 126, 183902 (2021).
+50
+Cao, Y. et al. Correlated insulator behaviour at half-filling
+in magic-angle graphene superlattices. Nature 556, 80–84
+(2018).
+51
+Zhou, H. et al. Half- and quarter-metals in rhombohedral
+trilayer graphene. Nature 598, 429–433 (2021).
+52
+Wong, D. et al. Cascade of electronic transitions in magicangle twisted bilayer graphene. Nature 582, 198–202
+(2020).
+53
+Zondiner, U. et al. Cascade of phase transitions and Dirac
+revivals in magic-angle graphene. Nature 582, 203–208
+(2020).
+54
+Castro Neto, A. H., Guinea, F., Peres, N. M. R., Novoselov,
+K. S. & Geim, A. K. The electronic properties of graphene.
+Reviews of Modern Physics 81, 109–162 (2009).
+55
+Xie, M. & MacDonald, A. Nature of the Correlated Insulator States in Twisted Bilayer Graphene. Physical Review
+Letters 124, 097601 (2020).
+56
+Sheffer, Y., Queiroz, R. & Stern, A. Symmetries as the
+Guiding Principle for Flattening Bands of Dirac Fermions.
+Physical Review X 13, 021012 (2023).
+45
+
+

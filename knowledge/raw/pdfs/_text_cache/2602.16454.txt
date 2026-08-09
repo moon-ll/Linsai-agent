@@ -1,0 +1,746 @@
+Edge states and quantum optical high-harmonic generation from topological insulators
+Christian Saugbjerg Lange and Lars Bojer Madsen
+
+arXiv:2602.16454v1 [quant-ph] 18 Feb 2026
+
+Department of Physics and Astronomy, Aarhus University,
+Ny Munkegade 120, DK-8000 Aarhus C, Denmark
+(Dated: February 19, 2026)
+The strong-field process of high-harmonic generation (HHG) has, in recent years, been treated
+from a quantum optical perspective in the emerging research area of strong-field quantum optics.
+These investigations show that HHG radiation is, in general, in a nonclassical state of light. However,
+the quantum optical treatment of HHG from topological nontrivial materials is missing. Here, we aim
+to address this gap in current knowledge and consider the quantum optical HHG response from the
+Su-Schrieffer-Heeger model, a finite chain of atoms with both a topologically trivial and nontrivial
+insulating phase, the latter supporting edge states. We find that HHG from both topological phases
+is squeezed at the band-gap frequency. Interestingly, while the harmonic spectrum discriminates
+the two topological phases of the system, the degree of squeezing only discriminates the phases for
+smaller chain lengths. We attribute this difference to a relative increase in overlap between bulk
+and edge states in the topological nontrivial phase for smaller systems. Our findings reveal how
+the strength of dipole couplings governs the nonclassical HHG response and define new research
+questions on topologically protected generation of quantum light in strong-field physics.
+
+In recent years, strong-field physics has experienced a
+renewal by adopting a full quantum treatment of both
+light and matter. This emerging research area of strongfield quantum optics opens up new research questions
+with respect to the quantum light-matter interaction
+in strong-field processes; a challenging domain involving a macroscopic number of photons and a large number of electronic states, including the continuum. In
+this regard, high-harmonic generation (HHG), a nonlinear process where an intense laser field drives an electronic medium nonperturbatively, which in turn generates light at new frequencies, has been of particular interest with the aim of describing the generated light quantum mechanically. Studies have shown that by driving
+the electronic medium with an intense coherent state,
+the HHG light is, in general, in a nonclassical state, evident from a nonzero degree of quadrature squeezing and
+non-Poissonian photon statistics [1–6]. Quantum optical HHG has been studied from both atomic ensembles
+[1, 4–7], molecules [8], correlated materials [2, 6, 9, 10],
+and entangled systems [11] with recent experimental verification [12–15]. Additionally, it has been shown that
+HHG is first-order coherent [5] and that the origin of the
+nonclassical response is due to time correlations in the
+electronic medium [3, 5, 6, 9]. In a parallel line of studies, HHG driven by nonclassical states of light has been
+explored, both theoretically [16–21] and experimentally
+[22–24], showcasing the broad range of new research questions to investigate with a fully quantized description of
+intense light-matter interactions.
+A certain class of important materials has not been
+considered in strong-field quantum optics, namely that
+with a nontrivial topological phase. The topological
+phases of matter are characterized by distinct quantum
+properties, most notably symmetry-protected edge states
+exponentially localized at the edges or surfaces of finite
+systems. These edge states are robust against perturbations that do not break the relevant symmetries [25, 26].
+
+Consequently, topological materials have attracted interest for applications such as quantum information storage
+[27, 28]. Likewise, the nonclassical response in HHG from
+topologically nontrivial materials, and particularly the
+symmetry-protected edge states, is of particular interest.
+In this work, we therefore investigate the quantum optical properties of light generated via HHG in finite-sized
+topologically trivial and nontrivial insulators. Specifically, we examine whether the nonclassical HHG response
+discriminates between the two topological phases and assess how the presence of edge states in the nontrivial
+phase influences the quantum properties of the emitted
+light. We find that the quantum response, exemplified
+by the degree of squeezing, from HHG only discriminates the topological phases of the matter system for sufficiently small system sizes, while for larger systems, the
+two phases yield the same degree of squeezing across the
+harmonic spectrum. Our findings show how the degree
+of squeezing in the emitted HHG is particularly sensitive
+to strong dipole couplings in the matter system.
+We consider the Su-Schrieffer-Heeger (SSH) model,
+originally developed to describe long chains of polyacetylene [29]. We follow Refs. [30–32] and consider spinless
+fermions in a chain of Ncells unit cells, each consisting
+of two sites, denoted A and B. Each site is placed at
+xj = ja − (−1)j δ, where j = 1, 2, . . . , 2Ncells is the site
+index in the chain, a the lattice constant, and δ describes
+an alternating shift site location, as seen in Fig. 1(a).
+The SSH Hamiltonian reads
+N
+cells
+X
+
+Ĥ =
+
+i=1
+
+X−1 †
+ Ncells
+
+vĉ†i,A ĉi,B + h.c. +
+wĉi,B ĉi+1,A + h.c. ,
+i=1
+
+(1)
+where v = −e−(a−2δ) and w = −e−(a+2δ) describes the
+intracell and intercell hopping, respectively [32, 33], and
+ĉi,α (ĉ†i,α ) is the fermionic annihilation (creation) operator for site α = A, B in unit cell i. For δ > 0, the system
+
+2
+(a)
+
+Trivial insulator
+
+chiral symmetry. In Figs. 1 (d) and (e), the wave functions for the ground state (top row), highest occupied
+bulk state at half filling (middle row), and the occupied
+zero-energy edge state (bottom row) are shown for the
+topological nontrivial phase for Ncells = 50 and 12, respectively. The two top rows in Figs. 1 (d) and (e)
+show that the eigenstates are localized in the bulk of the
+system. This is also the case for all the states in the topologically trivial phase. In contrast, the bottom row shows
+how the zero-energy states are superposition
+of the two
+√
+localized edge states, (|R⟩ ± |L⟩)/ 2, where |L/R⟩ is the
+exponential localized state on the left/right edge, characteristic of the topological nontrivial phase. Though the
+edge states are localized for both system sizes, they extend relatively further into the bulk for Ncells = 12, than
+for Ncells = 50, see Figs. 1(d) and (e).
+
+Topological insulator
+
+(b)
+
+(c)
+
+Trivial
+insulator
+
+Topological
+insulator
+
+(d)
+
+Trivial
+insulator
+
+(e)
+Re( )
+
+(x)
+
+(x)
+
+Re( )
+
+Im( )
+
+(x)
+
+(x)
+
+(x)
+
+Im( )
+
+(x)
+0
+
+Topological
+insulator
+
+20
+
+40
+60
+Site index
+
+80
+
+100
+
+0
+
+5
+
+10
+15
+Site index
+
+30
+
+FIG. 1. (a) Illustration of the real-space configuration of the
+SSH model in its different phases with physical interpretation
+of relevant parameters introduced in he main text. (b), (c)
+Energy spectra for the trivial and topological phases for the
+long (b) and short (c) SSH chains. The topological phase
+supports states at zero energy. (d), (e) Eigenstates of the SSH
+model in the topological phase for both the ground state (top
+row), the highest-energy state below the band gap (middle
+row), and the zero-energy state (bottom row), localized at
+the edges of the chain.
+
+is a topologically trivial insulator, while for δ < 0, the
+system is in a topological nontrivial phase. As polyacetylene can be fabricated in many different lengths [34–36],
+we consider both a relatively long (Ncells = 50) and short
+(Ncells = 12) SSH chain. The energy spectra for the two
+different topological phases are seen in Figs. 1 (b) and
+(c). The topological nontrivial phase hosts two states
+at Eedge ≈ 0, not found in the topological trivial phase.
+These zero-energy edge states are exponentially localized
+at the edge of the chain and protected by the chiral symmetry of the SSH Hamiltonian, meaning that they remain
+unaffected by any perturbation that does not break the
+
+We consider the quantum optical properties of the
+HHG radiation from driving the SSH chain by an intense laser field. In recent work, the quantum optical response was derived using what we called the perturbative
+Heisenberg dynamics (PHD) formulation for strong-field
+quantum optics. This methodology relates the optical
+observables of interest to the semiclassically induced dynamics in the system [6]. This is achieved in two steps:
+first, the intense driving field (coherent-state parameter
+|αL | ≫ 1) is treated exactly via a transformation resulting in semiclassical dynamics; second, the coupling to the
+quantized field is treated perturbatively to second order
+in the weak light-matter coupling constant g0 = 4 × 10−8
+a.u. [1, 6, 9, 10, 37] . From this, it was found, confirming
+[5, 38], that the harmonic spectrum in the limit of many
+identical and independent emitter systems, N , is given
+by the coherent spectrum
+
+Scoh (ωk ) ∝ N
+
+2
+
+X Z ∞
+σ
+
+−∞
+
+′
+
+2
+
+dt′ e−iωk t ⟨ĵσ,sc (t′ )⟩ ,
+
+(2)
+
+where ĵσ,sc = ĵsc · êσ is the semiclassical current operator projected along the polarization vector êσ for the
+polarization σ. We note that Eq. (2) is proportional to
+the semiclassical expression for the harmonic spectrum,
+proving that no additional quantum optical insights are
+provided by the spectrum [6, 9]. In contrast, a nonvanishing degree of squeezing is a clear indication of a nonclassical state [39]. We calculate the degree of squeezing
+in the unit of decibel via
+
+ηk,σ = −10 log10
+
+
+
+2
+4min ∆X̂k,σ (θk,σ )
+,
+
+θk,σ ∈(0,π])
+
+(3)
+
+which is a minimization of the quadrature variance,
+which in the PHD for strong-field quantum optics is given
+
+3
+by
+[∆X̂k,σ (θk,σ )]2 =
+
+1 g02 N
++
+4
+2ωk
+
+
+
+Z t
+′
+′′
+dt′′ e−iωk (t −t ) ⟨∆ĵσ,sc (t′ )∆ĵσ,sc (t′′ )⟩
+dt′
+0
+0
+Z t
+Z t
+′
+′′
+dt′′ e−iωk (2t−t −t )−2iθk,σ
+dt′
+− Re
+
+Z t
+
+0
+
+0
+
+−
+
+Z t
+0
+
+dt′
+
+Z t′
+
+× ⟨∆ĵσ,sc (t′ )∆ĵσ,sc (t′′ )⟩
+′
+
+′′
+
+dt′′ e−iωk (2t−t −t )−2iθk,σ
+
+0
+
+
+× ⟨[∆ĵσ,sc (t′′ ), ∆ĵσ,sc (t′ )]⟩ ,
+
+(4)
+
+where ∆ĵσ,sc (t) = ĵσ,sc (t)−⟨ĵσ,sc (t)⟩ expresses the fluctuations of the semiclassical current operator. If ηk,σ > 0,
+the light is quadrature squeezed and nonclassical. Interestingly, the PHD predicts that the coherent spectrum in
+Eq. (2) scales with N 2 and that the quadrature variance
+related to the squeezing scales linearly with N . Thus,
+both the signal and degree of squeezing increases with
+the number of emitter systems involved in the HHG process.
+To evaluate Eqs. (2)-(4) in the SSH model, we drive
+the system by applying a classical laser field, Acl (t)
+with polarization along the SSH chain, and exploit the
+Peierl’s phase substitution to obtain time-dependent hopping parameters v(t) = v e−i(a−2δ)Acl (t) and w(t) =
+w e−i(a+2δ)Acl (t) such that the SSH Hamiltonian in Eq.
+(1) becomes a time-dependent semiclassical Hamiltonian,
+Ĥsc (t) [32, 33]. The current operator of the semiclassical
+SSH model is given as ĵsc (t) = i[Ĥsc (t), x̂], where we take
+x̂ to be the direction of the chain as well as the only relevant polarization direction. We denote the single-particle
+P
+(m)
+eigenstates as |ψm ⟩ = γ̂m |0⟩ with γ̂m = i,α ai,α ĉ†i,α |0⟩
+(m)
+
+the single-particle operator of eigenstate m with ai,α the
+amplitude of the m’th eigenstate on site α = A, B in
+unit cell i. As the SSH model consists of independent
+particles, the many-body state is Q
+a single Slater determinant which we write as |ΨM ⟩ = m∈M γ̂m |0⟩, where M
+denotes a many-body index consisting of a specific combination of single-body states, e.g., G = {1, 2, ..., Ncells }
+with M = G being the many-body ground state. We only
+consider the system at half filling, which means that all
+single-particle states below the energy gap are initially
+occupied in the topological trivial phase, while also one
+of the zero-energy edge states is occupied in the topological nontrivial phase, see Figs. 1 (b)-(e).
+To calculate the quadrature variance [Eq. (4)], we
+insert a complete set of many-body eigenstates, 1 =
+ΣM |ΨM ⟩⟨ΨM |, such that the expectation value of the
+current correlations at two different times reads [6, 9]
+⟨∆ĵσ,sc (t′ )∆ĵσ,sc (t′′ )⟩ =
+
+X
+M ̸=I
+
+jI,M (t′ )jM,I (t′′ ),
+
+(5)
+
+†
+where jI,M (t) = ⟨ΨI |Ûsc
+(t)ĵσ,sc (t)Ûsc (t)|ΨM ⟩ denotes
+a transition current between the many-body eigenstate
+|ΨM ⟩ and the initially occupied many-body state |ΨI ⟩,
+which we take to be the ground state in this work and
+(1)
+Ûsc (t) = ⊗i Ûsc (t) is the semiclassical time-evolution
+(1)
+operator of the many-body state with Ûsc (t) being the
+single-particle time-evolution operator. Due to the fact
+that the SSH consists of independent particles and both
+the Hamiltonian and current operator are single-particle
+operators, the SSH model is subject to Slater-Condon
+rules [40]. This means that only transition currents where
+|ΨM ⟩ differs from |ΨI ⟩ by at most a single-particle occupation need be considered. Hence, as the summation in
+Eq. (5) is for all excited many-body states M ̸= I, if
+a ∈ I and b ∈ M with a ∈
+/ M and b ∈
+/ I, we find
+(1)†
+(1)
+jI,M (t) = ⟨ψa |Ûsc
+(t)ĵσ (t)Ûsc
+(t)|ψb ⟩,
+
+(6)
+
+that is, only single-particle excitations need to be
+considered.
+To calculate the spectrum in Eq.
+(2), M = I and the expectation value of the
+†
+current ⟨ĵσ,sc (t)⟩ = ⟨ΨI |Ûsc
+(t)ĵσ,sc (t)Ûsc (t)|ΨI ⟩ =
+P
+(1)
+(1)†
+m∈I ⟨ψm |Ûsc (t)ĵσ,sc (t)Ûsc (t)|ψm ⟩ is the sum of
+single-particle contributions to the many-body current.
+We propagate each single-particle eigenstate according to the time-dependent Schrödinger equation using
+the Arnoldi-Lancoz algorithm [41–44] with a time step
+of dt = 1.00 a.u. and a Krylov subspace dimension of 6.
+We fix the lattice spacing at a = 2.00 a.u. and consider
+δ = ±0.15 a.u., with the negative sign corresponding to
+the topological nontrivial phase. We drive the chain with
+an intense laser on the form A(t) = (F0 /ωL )f (t) cos(ωL t),
+where f (t) is an envelope with Non = 5 laser cycles in
+the sin2 ramp and Npl = 10 laser cycles on a flat-top
+plateau. Similar to Refs. [30–32], we use a laser frequency of ωL = 0.0075 a.u., corresponding to a wavelength of λL = 6.1µm. For the long chain of Ncells = 50,
+we use an electric field amplitude of F0 = 0.0025 a.u.,
+while for the short chain of Ncells = 12, an electric field
+amplitude of F0 = 0.0015 a.u. is used. All results are
+checked for numerical convergence.
+In Fig. 2(a), the HHG spectra are shown for the long
+and short chains in both topological phases. The origin
+of the different spectra is well understood [30–32]: the
+so-called interband mechanism, where a particle is promoted across the band gap, leaving a hole behind, propagates within the upper band before recombining with
+the hole, can only efficiently generate harmonics above
+the band-gap energy. This is why the topologically trivial phase has an increased signal at harmonics at around
+ωk /ωL ≈ Egap /ωL ≈ 22, 23 [see Figs. 1 (b) and (c)] for
+the long and short chains, respectively. On the other
+hand, due to the presence of the edge states within the
+band gap, the interband mechanism can generate harmonic radiation down to the 11’th and 12’th harmonic
+in the topological phase both chain lengths. We note
+that harmonic peaks are seen below the band-gap energies for both topological phases. This is due to prop-
+
+4
+Ncells = 50, Trivial
+Ncells = 50, Topological
+Ncells = 12, Trivial
+Ncells = 12, Topological
+
+1013 (a)
+109
+
+Scoh(ω)
+
+105
+101
+10−3
+10−7
+10−11
+
+η(ω) (dB)
+
+×10−12
+1.5
+
+Trivial
+Topological
+Topological (no edge-state
+transition currents)
+
+(c)
+
+Trivial
+Topological
+Topological (no edge-state
+transition currents)
+
+1.0
+0.5
+
+×10−12
+η(ω) (dB)
+
+(b) Ncells = 50
+
+Ncells = 12
+
+1.0
+0.5
+0.00
+
+20
+
+40
+
+60
+
+80
+
+100
+
+ω/ωL
+
+FIG. 2. (a) Spectra obtained from Eq. (2) from both the
+long (blue and orange) and short (yellow and red) chains for
+both the trivial (δ = 0.15) and topological (δ = −0.15) phase.
+We note how the spectra discriminate the topological phases.
+The degree of squeezing for the long (b) and short chain (c),
+respectively. We note that excluding edge-state transition
+currents changes the degree of squeezing for the short chain
+at harmonics below the gap (c, green dashed) while it leaves
+the degree of squeezing from the long chain (b, purple dashed)
+indifferent. The coherent spectra in (a) are shown without N
+scaling and have been shifted for visual clarity, and the degree
+of squeezing is shown for N = 1 SSH chain. The parameters
+for the system are stated in the main text.
+
+agation within the band, i.e., between spectrally closelying states above and below the energy gap [see in Figs.
+1 (b) and (c)]. Finally, we note that for both system
+sizes, the topological nontrivial phase shows a stronger
+signal across all frequencies, which is due to transitions
+via the zero-energy states, resulting in a higher population of states above the gap, yielding a stronger current
+and hence stronger signal.
+The degree of squeezing [Eq. (3)] from the two different
+phases is shown in Figs. 2(b) and (c) for Ncells = 50 and
+12, respectively. The degree of squeezing between the two
+phases is practically indifferent for Ncells = 50, preventing discrimination of the topological phase of the model
+for this chain length, although such a discrimination is
+possible from the harmonic spectrum. To investigate the
+contribution from the edge states in the degree of squeez-
+
+ing, we calculate the quadrature variance [Eq. (4)] using
+the transition currents in Eq. (5), but omitting all singleparticle edge states in the summation. In other words,
+if either |ψa (t)⟩ or |ψb (t)⟩ in the resulting transition current in Eq. (6) is an edge state, the term is omitted in
+Eq. (5). The degree of squeezing for this case is shown
+by the purple dashed line in Fig. 2 (b). Omitting the
+edge-state transition currents does not change the degree
+of squeezing. This is due to the fact that the dominating transition currents in the summation in Eq. (5) are
+those between occupied bulk states below the energy gap
+to unoccupied bulk states above the gap. In contrast,
+both bulk-edge and edge-edge transition-current matrix
+elements are negligible in comparison. Looking at Fig.
+1(d), we see that this is expected, as the bulk states
+have very little overlap with the edge states, which remain exponentially localized on the edge of the system
+during the dynamics. We thus conclude that when the
+bulk-edge contribution in the transition currents is negligible, the degree of squeezing does not differ between the
+two topological phases of the SSH model. For comparison, we consider the degree of squeezing when driving a
+shorter chain of Ncells = 12, shown in Fig. 2(c). Here we
+note that the topological nontrivial phase (red) exhibits
+a larger degree of squeezing than the topological trivial
+phase (yellow) at harmonics ω/ωL ∼ 10−20, which is below the band-gap energy, see Fig. 1. Again, to investigate
+the role of the edge states in this system, we calculate the
+degree of squeezing when removing this edge-state contribution in the transition currents, and show the results in
+Fig. 2(c) (dashed green line). Here, we see that without
+the edge-state contributions, the degree of squeezing from
+the topological phase becomes identical to that found in
+the trivial phase, proving that the edge states are responsible for the signal at ω/ωL ∼ 10 − 20 discriminating the
+two phases. This is due to the fact that, although the
+edge states are exponentially localized in the topologically nontrivial phase, the small system size makes the
+overlap with bulk states non-negligible, an overlap not
+present in the topologically trivial system. Comparing
+the findings in Figs. 2(b) and (c), we conclude that the
+degree of squeezing in HHG discriminates the topological
+phases of the SSH model only if the system size makes
+the bulk-edge overlap non-negligible.
+Our results demonstrate that strong-field quantum optics provides direct access to nonclassical electronic responses. Within the PHD formalism for strong-field
+quantum optics [6], Eq. (2) shows that the emitted spectrum is proportional to the induced current, where topological edge states give a dominant contribution through
+an enhanced interband processes, consistent with semiclassical predictions [30–32], and clearly distinguishes the
+topological phases, independent of chain length. Going beyond this classical observable, Eqs. (3)-(4) show
+that squeezing is governed by time correlations of the induced current [3, 5, 6, 9]. For long chains, the degree
+of squeezing does not discriminate the topological phases
+due to the vanishing bulk–edge overlap. In contrast, such
+
+5
+a bulk-edge overlap is nonvanishing in shorter chains, allowing one to discriminate the topological phase in this
+latter case. Comparing the SSH model with recent work
+on quantum-optical HHG in excitonic systems [10] shows
+a stark contrast: In Ref. [10], a strong dipole coupling
+between the ground state and exciton states yielded pronounced squeezing at the transition energy, while such
+a signature is not seen in the response from long-chain
+SSH model, independent of the presence of edge states.
+This difference originates from weaker dipole couplings
+in the SSH model, particularly for edge states, suppressing their contribution to the fluctuations of the induced
+current and hence the degree of squeezing. Consequently,
+we conclude that the current time correlations [Eq. (5)]
+are particularly sensitive to strong dipole couplings in the
+matter system, and as such, the degree of squeezing in the
+emitted HHG probes different matter dynamics beyond
+those captured by the classical harmonic spectrum.
+
+Our work raises new research questions with respect
+to the nonclassical response in HHG from topologically
+nontrivial systems. Further studies include topological
+materials with a nonzero Chern number where the nonclassical response might yield a universal signature of
+the topological phase, previously not found [45]. Further, since the edge states are symmetry-protected in the
+topological nontrivial phase, our work is a first step into
+an exploration of topologically protected quantum light
+via HHG, which could provide a stable source of quantum light at high frequencies with applications in, e.g.,
+quantum sensing and technology.
+
+[1] A. Gorlach, O. Neufeld, N. Rivera, O. Cohen, and
+I. Kaminer, The quantum-optical nature of high harmonic generation, Nature Communications 11, 4598
+(2020).
+[2] C. S. Lange, T. Hansen, and L. B. Madsen, Electroncorrelation-induced nonclassicality of light from highorder harmonic generation, Physical Review A 109,
+033110 (2024).
+[3] P. Stammer, J. Rivera-Dean, A. S. Maxwell, T. Lamprou, J. Argüello-Luengo, P. Tzallas, M. F. Ciappina,
+and M. Lewenstein, Entanglement and Squeezing of the
+Optical Field Modes in High Harmonic Generation, Physical Review Letters 132, 143603 (2024).
+[4] S. Yi, N. D. Klimkin, G. G. Brown, O. Smirnova,
+S. Patchkovskii, I. Babushkin, and M. Ivanov, Generation of massively entangled bright states of light during
+harmonic generation in resonant media, Phys. Rev. X 15,
+011023 (2025).
+[5] P. Stammer, J. Rivera-Dean, and M. Lewenstein, Theory
+of quantum optics and optical coherence in high harmonic
+generation (2025), arXiv:2504.13287 [quant-ph].
+[6] C. S. Lange, E. E. Lassen, R. V. Gothelf, and
+L. B. Madsen, High-order harmonic generation with
+beyond-semiclassical emitter dynamics: A strong-field
+quantum optical heisenberg picture approach (2025),
+arXiv:2512.14174 [quant-ph].
+[7] J. Rivera-Dean, H. B. Crispin, P. Stammer, T. Lamprou,
+E. Pisanty, M. Krüger, P. Tzallas, M. Lewenstein, and
+M. F. Ciappina, Squeezed states of light after high-order
+harmonic generation in excited atomic systems, Phys.
+Rev. A 110, 063118 (2024).
+[8] J. Rivera-Dean, P. Stammer, A. S. Maxwell, T. Lamprou,
+E. Pisanty, P. Tzallas, M. Lewenstein, and M. F. Ciappina, Quantum-optical analysis of high-order harmonic
+generation in H+
+2 molecules, Phys. Rev. A 109, 033706
+(2024).
+[9] C. S. Lange and L. B. Madsen, Hierarchy of approximations for describing quantum light from high-harmonic
+generation: A Fermi-Hubbard-model study, Phys. Rev.
+A 111, 013113 (2025).
+
+[10] C. S. Lange, T. Hansen, and L. B. Madsen, Excitonic
+enhancement of squeezed light in quantum-optical highharmonic generation from a Mott insulator, Phys. Rev.
+Lett. 135, 043603 (2025).
+[11] A. Pizzi, A. Gorlach, N. Rivera, A. Nunnenkamp, and
+I. Kaminer, Light emission from strongly driven manybody systems, Nature Physics 19, 551 (2023).
+[12] I. A. Gonoskov, N. Tsatrafyllis, I. K. Kominis, and
+P. Tzallas, Quantum optical signatures in strong-field
+laser physics: Infrared photon counting in high-orderharmonic generation, Scientific Reports 6, 32821 (2016).
+[13] N. Tsatrafyllis, I. K. Kominis, I. A. Gonoskov, and
+P. Tzallas, High-order harmonics measured by the photon
+statistics of the infrared driving-field exiting the atomic
+medium, Nature Communications 8, 15170 (2017).
+[14] N. Tsatrafyllis, S. Kühn, M. Dumergue, P. Foldi, S. Kahaly, E. Cormier, I. A. Gonoskov, B. Kiss, K. Varju,
+S. Varro, and P. Tzallas, Quantum optical signatures in a
+strong laser pulse after interaction with semiconductors,
+Phys. Rev. Lett. 122, 193602 (2019).
+[15] D. Theidel, V. Cotte, R. Sondenheimer, V. Shiriaeva,
+M. Froidevaux, V. Severin, A. Merdji-Larue, P. Mosel,
+S. Fröhlich, K.-A. Weber, U. Morgner, M. Kovacev,
+J. Biegert, and H. Merdji, Evidence of the quantum optical nature of high-harmonic generation, PRX Quantum
+5, 040319 (2024).
+[16] A. Gorlach, M. E. Tzur, M. Birk, M. Krüger, N. Rivera,
+O. Cohen, and I. Kaminer, High-harmonic generation
+driven by quantum light, Nature Physics 19, 1689 (2023).
+[17] M. Even Tzur, M. Birk, A. Gorlach, M. Krüger,
+I. Kaminer, and O. Cohen, Photon-statistics force in
+ultrafast electron dynamics, Nature Photonics 17, 501
+(2023).
+[18] M. E. Tzur, M. Birk, A. Gorlach, I. Kaminer, M. Krüger,
+and O. Cohen, Generation of squeezed high-order harmonics, Phys. Rev. Res. 6, 033079 (2024).
+[19] R. V. Gothelf, C. S. Lange, and L. B. Madsen, High-order
+harmonic generation in a crystal driven by quantum light,
+Phys. Rev. A 111, 063105 (2025).
+[20] J. M. González-Monge and J. Feist, High-harmonic gen-
+
+This work is supported by the Novo Nordisk Foundation Project Grants in the Natural and Technical Sciences
+(0094623) and the Independent Research Fund Denmark
+(Technology and Production Sciences 10.46540/428600053B)
+
+6
+eration driven by temporal-mode quantum states of light
+(2025), arXiv:2512.06602 [quant-ph].
+[21] R. V. Gothelf, L. B. Madsen, and C. S. Lange, Limitations of an approximative phase-space description
+in strong-field quantum optics (2026), arXiv:2602.04370
+[quant-ph].
+[22] A. Rasputnyi, Z. Chen, M. Birk, O. Cohen, I. Kaminer,
+M. Krüger, D. Seletskiy, M. Chekhova, and F. Tani, Highharmonic generation by a bright squeezed vacuum, Nature Physics 20, 1960 (2024).
+[23] S. Lemieux, S. A. Jalil, D. N. Purschke, N. Boroumand,
+T. J. Hammond, D. Villeneuve, A. Naumov, T. Brabec,
+and G. Vampa, Photon bunching in high-harmonic emission controlled by quantum light, Nature Photonics 19,
+767 (2025).
+[24] M. E. Tzur, C. Mor, N. Yaffe, M. Birk, A. Rasputnyi, O. Kneller, I. Nisim, I. Kaminer, M. Chekhova,
+M. Krueger, M. Ivanov, N. Dudovich, and O. Cohen,
+Attosecond-resolved quantum fluctuations of light and
+matter (2025), arXiv:2511.18362 [physics.optics].
+[25] M. Z. Hasan and C. L. Kane, Colloquium: Topological
+insulators, Rev. Mod. Phys. 82, 3045 (2010).
+[26] X.-L. Qi and S.-C. Zhang, Topological insulators and superconductors, Rev. Mod. Phys. 83, 1057 (2011).
+[27] C. Nayak, S. H. Simon, A. Stern, M. Freedman, and
+S. Das Sarma, Non-abelian anyons and topological quantum computation, Rev. Mod. Phys. 80, 1083 (2008).
+[28] M. Aghaee, A. Alcaraz Ramirez, Z. Alam, R. Ali,
+M. Andrzejczuk, A. Antipov, M. Astafev, A. Barzegar, B. Bauer, J. Becker, U. K. Bhaskar, A. Bocharov,
+S. Boddapati, D. Bohn, J. Bommer, L. Bourdet, A. Bousquet, S. Boutin, L. Casparis, B. J. Chapman, S. Chatoor, A. W. Christensen, C. Chua, P. Codd, W. Cole,
+P. Cooper, F. Corsetti, A. Cui, P. Dalpasso, J. P.
+Dehollain, G. de Lange, M. de Moor, A. Ekefjärd,
+T. El Dandachi, J. C. Estrada Saldaña, S. Fallahi, L. Galletti, G. Gardner, D. Govender, F. Griggio, R. Grigoryan, S. Grijalva, S. Gronin, J. Gukelberger, M. Hamdast, F. Hamze, E. B. Hansen, S. Heedt, Z. Heidarnia,
+J. Herranz Zamorano, S. Ho, L. Holgaard, J. Hornibrook, J. Indrapiromkul, H. Ingerslev, L. Ivancevic,
+T. Jensen, J. Jhoja, J. Jones, K. V. Kalashnikov,
+R. Kallaher, R. Kalra, F. Karimi, T. Karzig, E. King,
+M. E. Kloster, C. Knapp, D. Kocon, J. V. Koski,
+P. Kostamo, M. Kumar, T. Laeven, T. Larsen, J. Lee,
+K. Lee, G. Leum, K. Li, T. Lindemann, M. Looij, J. Love,
+M. Lucas, R. Lutchyn, M. H. Madsen, N. Madulid,
+A. Malmros, M. Manfra, D. Mantri, S. B. Markussen,
+E. Martinez, M. Mattila, R. McNeil, A. B. Mei, R. V.
+Mishmash, G. Mohandas, C. Mollgaard, T. Morgan,
+G. Moussa, C. Nayak, J. H. Nielsen, J. M. Nielsen,
+W. H. P. Nielsen, B. Nijholt, M. Nystrom, E. O’Farrell,
+T. Ohki, K. Otani, B. Paquelet Wütz, S. Pauka,
+K. Petersson, L. Petit, D. Pikulin, G. Prawiroatmodjo,
+F. Preiss, E. Puchol Morejon, M. Rajpalke, C. Ranta,
+K. Rasmussen, D. Razmadze, O. Reentila, D. J. Reilly,
+Y. Ren, K. Reneris, R. Rouse, I. Sadovskyy, L. Sainiemi,
+I. Sanlorenzo, E. Schmidgall, C. Sfiligoj, M. B. Shah,
+K. Simoes, S. Singh, S. Sinha, T. Soerensen, P. Sohr,
+T. Stankevic, L. Stek, E. Stuppard, H. Suominen,
+J. Suter, S. Teicher, N. Thiyagarajah, R. Tholapi,
+M. Thomas, E. Toomey, J. Tracy, M. Turley, S. Upadhyay, I. Urban, K. Van Hoogdalem, D. J. Van Woerkom,
+D. V. Viazmitinov, D. Vogel, J. Watson, A. Webster,
+
+J. Weston, G. W. Winkler, D. Xu, C. K. Yang, E. Yucelen, R. Zeisel, G. Zheng, J. Zilke, and M. A. Quantum,
+Interferometric single-shot parity measurement in inas–al
+hybrid devices, Nature 638, 651 (2025).
+[29] W. P. Su, J. R. Schrieffer, and A. J. Heeger, Solitons in
+polyacetylene, Phys. Rev. Lett. 42, 1698 (1979).
+[30] D. Bauer and K. K. Hansen, High-harmonic generation
+in solids with and without topological edge states, Phys.
+Rev. Lett. 120, 177401 (2018).
+[31] H. Drüeke and D. Bauer, Robustness of topologically sensitive harmonic generation in laser-driven linear chains,
+Phys. Rev. A 99, 053402 (2019).
+[32] H. Jürß and D. Bauer, High-harmonic generation in suschrieffer-heeger chains, Phys. Rev. B 99, 195428 (2019).
+[33] M. Graf and P. Vogl, Electromagnetic fields and dielectric
+response in empirical tight-binding theory, Phys. Rev. B
+51, 4940 (1995).
+[34] L. Lichtmann, D. Fitchen, and H. Temkin, Resonant
+raman spectroscopy of conducting organic polymers.
+(CH)x , and an oriented analog, Synthetic Metals 1, 139
+(1980), symposium on the Structure and Properties of
+Highly Conducting Polymers and Graphite.
+[35] L. Y. Park, D. Ofer, T. J. Gardner, R. R. Schrock, and
+M. S. Wrighton, Effect of chain length on the conductivity of polyacetylene. potential dependence of the conductivity of a series of polyenes prepared by a living polymerization method, Chemistry of Materials, Chemistry
+of Materials 4, 1388 (1992).
+[36] M. Rybachuk, A. Hu, and J. M. Bell, Resonant raman
+scattering from polyacetylene and poly(p-phenylene vinylene) chains included into hydrogenated amorphous carbon, Applied Physics Letters 93, 051904 (2008).
+[37] M. Lewenstein, M. F. Ciappina, E. Pisanty, J. RiveraDean, P. Stammer, T. Lamprou, and P. Tzallas, Generation of optical Schrödinger cat states in intense laser–
+matter interactions, Nature Physics 17, 1104 (2021).
+[38] B. Sundaram and P. W. Milonni, High-order harmonic
+generation: Simplified model and relevance of singleatom theories to experiment, Phys. Rev. A 41, 6571
+(1990).
+[39] C. Gerry and P. Knight, Introductory Quantum Optics
+(Cambridge University Press, Cambridge, 2004).
+[40] T. Helgaker, P. Jørgensen, and J. Olsen, Molecular
+Electronic-Structure Theory (John Wiley & Sons, Ltd,
+Chichester, 2000).
+[41] T. J. Park and J. C. Light, Unitary quantum time evolution by iterative Lanczos reduction, J. Chem. Phys. 85,
+5870 (1986).
+[42] E. S. Smyth, J. S. Parker, and K. Taylor, Numerical
+integration of the time-dependent Schrödinger equation
+for laser-driven helium, Comput. Phys. Commun. 114, 1
+(1998).
+[43] X. Guan, O. Zatsarinny, K. Bartschat, B. I. Schneider,
+J. Feist, and C. J. Noble, General approach to few-cycle
+intense laser interactions with complex atoms, Phys. Rev.
+A 76, 053411 (2007).
+[44] A. L. Frapiccini, A. Hamido, S. Schröter, D. Pyke,
+F. Mota-Furtado, P. F. O’Mahony, J. Madroñero, J. Eiglsperger, and B. Piraux, Explicit schemes for time propagating many-body wave functions, Phys. Rev. A 89,
+023418 (2014).
+[45] O. Neufeld, N. Tancogne-Dejean, H. Hübener, U. De Giovannini, and A. Rubio, Are there universal signatures of
+topological phases in high-harmonic generation? proba-
+
+7
+bly not., Phys. Rev. X 13, 031011 (2023).
+
+

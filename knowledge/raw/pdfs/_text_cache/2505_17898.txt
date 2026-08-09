@@ -1,0 +1,590 @@
+arXiv:2505.17898v1  [cond-mat.mtrl-sci]  23 May 2025
+In-plane polarization induced ferroelectrovalley coupling in a two-dimensional
+rare-earth halide
+Srishti Bhardwaj 1 and T. Maitra 1, ∗
+1Department of Physics, Indian Institute of Technology Roorkee, Roorkee - 247667, Uttarakhand, India
+(Dated: June 9, 2025)
+We propose a mechanism where the valley splitting is caused by an in-plane electric polarization
+and the coupling between the two makes it possible for an electric field to control the valley degree
+of freedom. We demonstrate this by considering Gd-substituted EuCl 2 monolayer in its 1T-phase
+using first-principles calculations. This monolayer exhibits an in-plane polarization which breaks
+the inversion symmetry of the monolayer leading to a spontaneous valley splitting. The resulting
+valley polarization is strongly coupled with the electric polarization and, hence, the valley degree
+of freedom can be switched by an external electric field in this case, instead of the conventional
+magnetic field. We show that a similar ferroelectric-ferrovalley (FE-FV) coupling can also exist in
+the previously reported ferroelectric (CrBr3)2Li monolayer. This mechanism opens up a new avenue
+for electric field control of valley polarization in two-dimensional materials.
+After charge and spin, valley is the new degree of free-
+dom that is highly sought after in modern electronic de-
+vices [1, 2]. So far, the conventional method to control
+the valley degree of freedom has been via the spin-valley
+coupling [3, 4]. However, valley switching using an exter-
+nal magnetic field is a highly power-consuming process
+and is not ideal for miniaturized devices. Therefore, just
+like the electric control of magnetism, an electric con-
+trol of the valley degree of freedom is also an important
+requirement [5]. This phenomenon can be realized via
+a coupling between ferroelectricity and valley degree of
+freedom so that when the electric polarization is reversed
+by an external electric field, valley degree of freedom is
+also switched accordingly.
+It is difficult to find materials that have both reversible
+electric polarization and valley polarization, thus mak-
+ing the electric field control of valley polarization an elu-
+sive task. Valley polarization has been primarily found
+in materials like transition-metal dichalcogenides in 2H
+phase where inversion symmetry is inherently broken in
+their monolayers [6]. However, one cannot have an in-
+plane 180 ◦ reversible polarization in such materials due
+to their C3 rotational symmetry. Thus far, only a small
+number of materials with electric-field control of the val-
+ley have been predicted using first-principles calculations
+[7–11]. Some of the intrinsic materials to possess this
+phenomenon are found to have an out-of-plane polar-
+ization coupled with the structure crystal field, which
+results in a coupling of the valley degree of freedom
+with the direction of electric polarization. This mech-
+anism is found in materials with a special symmetry,
+such as a breathing kagome lattice as in Ti 3B8 [7] and
+CuCr2PS6[8]. The monolayers, which have an in-plane
+electric polarization coupled with the valley, are the tran-
+sition metal monochalcogenides [9]. However, they are
+not magnetic and have a zero Berry curvature and hence
+cannot display anomalous valley Hall effect. The car-
+bon nitrides adsorbed by metal halides MCl 2 (M = Zn,
+Mg), MCl 2(C2N)6 (M=Zn, Mg) have a valley polariza-
+tion but are also non-magnetic [10]. Further, the polar-
+ization direction in these systems, can only be rotated by
+120◦ and cannot be reversed by 180 ◦ due to the C3 ro-
+tational symmetry of carbon nitrides. The ferroelectric-
+valley coupling has also been found in bilayers stacked
+at various angles [11]. It has been shown, however, that
+in antiferromagnetic-ferroelectric bilayer 2H-VSe 2, a re-
+versal of polarization is coupled with a switching of mag-
+netisation as well, thus bringing the band structure back
+to its initial form. Therefore, ferromagnetism is coupled
+with ferroelectricity but a valley switching is not possible
+by an electric field alone. All these ferroelectric-valley
+coupled materials discussed above are transition-metal
+based, which usually have a smaller magnetic signal and
+magnetic anisotropy, whereas, the rare-earth metal-based
+materials possess large magnetic anisotropy and provide
+larger magnetic signal because of 4f-electrons [12].
+Recently, a number of rare-earth halides based multi-
+ferroics have been predicted, including ferroelastic (F A),
+ferroelectric (FE), ferromagnetic (FM), and ferrovalley
+(FV) orderings [12–19]. However, the coupling between
+ferroelectricity and ferrovalley ordering has not yet been
+found in these materials. Here, we present a mechanism
+where the valley splitting is caused by an induced in-
+plane polarization in a system where the inversion sym-
+metry is not inherently broken. Here, the spin-orbit cou-
+pling (SOC) associated with the in-plane polarization
+breaks valley degeneracy for the time-reversal symmetry-
+connected k-points. Thus, by inverting the direction of
+polarization, the SOC also changes its sign, causing the
+switching of the valley degree of freedom. To realize this
+mechanism, we introduce a 1/3rd Gd-substitution in 1T-
+EuCl2, which initially has a C6 symmetry and thus, can
+carry a reversible electric polarization. The system un-
+dergoes a charge ordering due to the substitution that
+breaks its inversion symmetry and gives rise to an in-
+plane electric polarization. Ultimately, we get a FE-
+FM-FV material in which the valley degree of freedom is
+coupled with the FE polarization and can be controlled
+2
+FIG. 1. (a) 2H-phase of EuCl 2 (b) 1T-phase of EuCl 2 bulk
+(Brown spheres denote Eu-atoms, silver denote Cl atoms).
+by an external electric field. Here, the inversion sym-
+metry breaks as a result of polarization, in contrast to
+the conventional ferrovalley materials, where the inver-
+sion symmetry is inherently broken. The valley polariza-
+tion, observed here, is a secondary effect and appears as
+a response to electric polarization. Thus, it gives a dif-
+ferent/new route to create valley-polarized materials via
+ferroelectricity.
+We performed the first-principles calculations using
+spin-polarized density functional theory (DFT) as im-
+plemented in the Vienna ab-initio Simulation Pack-
+age(V ASP) [21]. The core electrons are dealt with using
+the projector augmented wave (PA W) method. We have
+used the Perdew-Burke-Ernzerhof (PBE) parametriza-
+tion [23] of the generalized-gradient approximation as the
+exchange-correlation functional. The energy cut-off for
+the plane wave basis was 500 eV. To account for the
+Hubbard correlation in Gd and Eu 4f-bands, we used the
+rotationally invariant GGA (PBE) + U method [24] with
+U = 9.2 eV and J = 1.2 eV (here U is Coulomb correla-
+tion and J is Hund’s exchange) for Gd 4f-orbitals and U
+= 8.5 and J = 1.109 for Eu 4f-orbitals [25]. Treatment
+of f-electrons using PBE+U is possible as the f-subshell
+is half-filled. We inserted a vacuum of 23.5˚Abetween two
+layers to avoid interlayer interactions. The Hellmann-
+Feynman forces convergence criterion is set at 0.01 eV/˚A
+while relaxing the structure, and the energy convergence
+criterion is 10−6 eV. A Γ centered 15× 11× 1 Monkhorst-
+Pack grid was chosen for structural optimization. The
+phonon dispersion calculations were performed using the
+Density Functional Perturbation Theory (DFPT) as im-
+plemented in V ASP and the PHONOPY package with a
+2×2×1 supercell [26, 27]. We used a 7×5×1 k-points grid
+to construct the Maximally Localized Wannier Functions
+(ML WFs) and calculate the Berry curvature [30, 31].
+In a recent study by Sharan et. al. [32], the rare-earth
+iodides (RI2) are found to exist in a 2D layered structure
+in 2H, 1T or 1T d phases. The ground state phases for
+different iodides are found to be different. For example,
+for ScI 2, YI 2, and GdI 2, the ground state is found to be
+in the 2H-phase, similar to the MoS 2 structure, whereas
+for EuI 2, PrI 2, and NdI 2, the ground state phase is 1T
+[32]. In the 2H-phase, the monolayer of the material has
+an inherent broken inversion symmetry, thus resulting in
+inequivalent valleys at the K and K ′ reciprocal lattice
+points [15, 32]. Many such materials have been studied
+extensively in search of applications in the field of Valley-
+tonics. The 1T phase, on the other hand, does not dis-
+play a broken inversion symmetry in the monolayers, and
+thus, the valleys are degenerate at the two inequivalent
+reciprocal lattice points K and K ′. However, it should be
+noted that even though the 2H-phase monolayers have
+a broken inversion symmetry, they cannot have a 180 ◦
+switchable electric polarization because of their C 3 sym-
+metry while the 1T-phase has a C 6 symmetry and thus
+can host polarization that can be switched in the oppo-
+site direction by means of an external electric field.
+In case such an electric polarization is induced in a
+1T-monolayer, the inversion symmetry is broken, and a
+spontaneous valley splitting is simultaneously caused by
+spin-orbit coupling (SOC) associated with the polariza-
+tion. The SOC Hamiltonian in the presence of an electric
+polarization in the system can be written as:
+Hsoc = λ( ⃗d × ⃗k).⃗S (1)
+where λ represents the spin-orbit coupling strength, ⃗d is
+the elctric dipole moment, ⃗k is the crystal momentum
+and ⃗S is the spin moment. For the case where the spin
+moment is locked along out-of-plane (i.e. z) direction and
+an in-plane electric dipole moment (i.e. ⃗d = (dx, dy)), the
+spin Hamiltonian takes the form:
+Hsoc = λz(dxky − dykx)Sz (2)
+Thus, the SOC energy depends on the crystal momen-
+tum and causes a valley-dependent spin-splitting. This
+splitting also depends upon the direction of dipole mo-
+ment ⃗d corresponding to the electric polarization ⃗P . For
+example, for dx ̸= 0, dy = 0, a valley splitting along ky
+is obtained, whereas for dy ̸= 0, dx = 0, a valley split-
+ting along kx is obtained. Furthermore, upon switching
+the direction of ⃗d by 180 ◦, the valley polarization also
+switches.
+In order to realize this mechanism for valley splitting,
+we begin with the rare-earth halide EuCl 2, the iodine
+counterpart of which has its ground state in the 1T phase
+according to Sharan et. al. [32, 33]. In order to confirm
+that EuCl2 also has its ground state in 1T phase, we per-
+formed the first-principles calculations for the 2H and 1T
+phases of EuCl2. The energy of the 1T phase is found to
+be 408 meV/formula unit (f.u.) lower than that of the
+2H phase. The exfoliation energy for monolayer EuCl 2 is
+found to be 21.34 meV/ ˚A2. The electronic band struc-
+tures with SOC for monolayers of 1T and 2H phases of
+3
+AFE (C2/m) 
+Top
+Side
+(a) (c)
+FE (Cm) 
+ Step Number
+Δ
+E (m
+eV/unit cell)
+TS
+FE
+AFE
+(b)
+FIG. 2. (a) Ferroelectric (FE), (b) Antiferroelectric (AFE) states of Gd-substituted 1T-EuCl 2 monolayer (Purple spheres
+denote Gd atoms), and (c) Minimum energy pathway for transition between FE to AFE state.
+EuCl2 are shown in Fig. S1[34]. It is clear that the 2H-
+phase monolayer has a valley splitting of about 47 meV
+because it does not have an inversion symmetry. On
+the other hand, there is no valley splitting in 1T-EuCl 2
+monolayer (ML) because of its inversion symmetry.
+Next, we perform a 1/3rd Gd-substitution in 1T-EuCl2
+ML, where we replace every central Eu-atom of all the
+Eu-hexarings by a Gd-atom. The formation energy for
+this substitution is found to be -4.65 eV under Cl-rich
+conditions, which indicates its feasibility. We calculated
+the formation energy (E f ) using the formula,
+Ef = E(Eu2GdCl 6) − E(Eu3Cl 6) + µEu − µGd
+where E(Eu2GdCl6) and E(Eu3Cl6) are the energy of Gd-
+substituted and pristine
+√
+3 ×
+√
+3 × 1 supercell of EuCl 2
+monolayer, respectively, whereas µEu and µGd represent
+the chemical potentials of Eu and Gd. Under Cl-rich
+conditions, the chemical potential µEu of Eu is calculated
+as, µGd = E(EuCl 2) − E(Cl 2).
+The electronic configuration of Eu in the +2 oxidation
+state is 4f 75d0, whereas that of Gd is 4f 75d1. Thus, Gd
+substitution imparts an extra electron to the system. As
+a consequence of this electron doping, the structure un-
+dergoes a bond-centered charge ordering (BCO) in which
+the extra electron is shared between two Eu and one Gd
+atoms. This BCO is associated with a shifting of the Gd
+atoms away from the center of the Eu-hexarings, thus
+breaking the C6 symmetry of the parent EuCl 2 struc-
+ture. The Gd-shifting can, however, take place in two
+different ways: (i) The case in which the Gd-atoms in al-
+ternate 1D-chains shift along opposite directions. Thus,
+this structure retains the inversion symmetry of the par-
+ent lattice (space group C2/m) and can be termed as
+an anti-ferroelectric structure (AFE) as shown in Fig
+2(a). (ii) The other case involves shifting of all the Gd-
+atoms along the same (i.e., -x direction as shown in Fig.
+2(b)). This structure no longer has an inversion symme-
+try (space group Cm) and is polar, with the x-axis being
+the polar axis. The orbital projected density of states
+(PDOS) for the pristine and Gd-substituted EuCl 2 ML
+in the FE phase are shown in Fig. S2[34]. We calculated
+the spontaneous polarization of this polar structure and
+found it to be 48.40 pC/m. Because of the inversion
+symmetry of the parent lattice, this polarization can be
+switched in the opposite direction by means of an exter-
+nal electric field and hence this structure can be referred
+to as a ferroelectric structure.
+The nature of BCO in AFE and FE structures can
+be visualized from the partial charge density plots corre-
+sponding to the valence bands, as shown in Figures 3(a)
+and 3(b), respectively. These plots clearly explain the
+shifting of Gd-atoms along a single direction in FE and
+in opposite directions in the AFE structure. The AFE
+structure is found to have a lower energy than the FE
+structure by 25.04 meV per formula unit of Eu 2GdCl6.
+However, the FE state can be achieved by applying an
+external electric field. Both the FE and AFE states
+are found to be dynamically stable as indicated by their
+phonon dispersion spectra, where no soft phonons are
+observed (Fig.S3[34]). Also, we performed a solid-state
+nudged elastic band (SS-NEB) calculation to find that
+the transition from FE to AFE state requires crossing an
+energy barrier of 16.8 meV per formula unit (Fig.2(c)).
+This shows that once acquired, the system can stay in
+the FE phase and will not spontaneously transition into
+the more stable AFE phase at low temperatures.
+Along with the electric polarization, the final structure
+also possesses a spontaneous strain where the lattice pa-
+rameter along the y-axis becomes smaller. This is caused
+by the bond-centered charge ordering, which compresses
+the bond between Eu-atoms, containing the extra elec-
+tron from the Gd-atom. The direction of strain and that
+of polarization are, thus, coupled. Therefore, it should
+also be possible to switch the direction of polarization
+by an external mechanical strain [19]. Moreover, as the
+4
+  
+(a)
+(c)
+-Ω
+z(k
+) [Å
+2]
+-Ω
+z(k
+) [Å
+2]
+E-E
+f (eV)
+E-E
+f (eV)
+(b)
+(d)
+FIG. 3. (a) Partial charge density distribution corresponding to the extra electron for FE and (b) for AFE state of Gd-
+substituted EuCl2 along the monolayer plane consisting of Gd and Eu-ions. (c) Electronic band structure of FE and (d) AFE
+state along with the Berry curvature with polarization along +x-direction and spin along +z-direction.
+pristine EuCl2 monolayer has a C6 rotational symmetry,
+there are a total of six possible directions of electric po-
+larization which should theoretically be achievable by an
+external electric field or by a mechanical strain.
+In order to find the magnetic ground state of Eu2GdCl6
+monolayer, we calculated the energies of different possi-
+ble magnetic configurations as shown in Fig. S4[34]. The
+energy of ferromagnetic (FM) configuration is found to
+be 70.33 meV/f.u. and 9.13 meV/f.u. lower than that
+of the AFM1 and AFM2 magnetic configurations (Fig.
+S4). Thus, the ground state magnetic configuration of
+the monolayer is FM. To find the spin easy-axis, we calcu-
+lated the magnetic anisotropy energy defined byEc−Eab,
+where Ec represents the energy of the monolayer with
+spins oriented out-of-plane of the monolayer and Eab de-
+notes the energy when the spins are aligned in-plane. The
+MAE for spins oriented parallel or anti-parallel to the
+polar axis is 1.206 meV/f.u whereas the MAE for spins
+pointing perpendicular to the polar axis is -168 µeV/f.u.
+Thus, the spin easy-axis is found to be perpendicular to
+the polar axis. Hence, the magnetization and polariza-
+tion axes are coupled in the ferroelectric (FE) Eu 2GdCl2
+monolayer. This opens up the possibility for electric con-
+trol of magnetization due to FM-FE coupling in this ma-
+terial, a highly sought-after property from the aspect of
+less energy consumption. However, it should be noted
+that the spin easy-axis, which is in a direction perpen-
+dicular to the polar axis, does not change direction when
+the polarization is switched by 180 ◦. Therefore, upon
+reversing the polarization with an electric field, the spin
+orientation remains the same. But if the polarization axis
+is changed by an angle other than 180 ◦, the spin easy-
+axis also rotates so as to again become perpendicular to
+the new polar axis.
+In addition to the FM-FE coupling, we also expect an-
+other important property in the FE monolayer, i.e., the
+ferroelectric-ferrovalley (FE-FV) coupling. To check this,
+we examine the electronic band structure of the mono-
+layer in both AFE and FE phases with spin-orbit cou-
+pling (SOC) at play. Now, the AFE state still has the
+inversion symmetry, and the net electric dipole moment
+per unit cell ⃗d is zero. Therefore, the AFE state can
+not exhibit any valley splitting due to spin-orbit coupling
+(SOC), which can be seen in Fig. 3(c). The FE state, on
+the other hand, no longer has the inversion symmetry of
+the parent EuCl2 monolayer (ML) and has a finite electric
+dipole moment ⃗d. Therefore, it has a non-zero SOC cor-
+responding to the equation (2), which is crystal momen-
+tum dependent. The electronic band structure with SOC
+confirms this as energy eigenvalues of the top two valence
+bands are found to be unequal along the paths Y-Γ and
+Y′-Γ (Fig. 3(d)). We have also shown the corresponding
+Berry curvatures for AFE and FE states in Figures 3(c)
+and 3(d). The valley, i.e., the valence band maximum
+(VBM), however, lies on the Γ point and, hence, no val-
+ley splitting is observed for the FE structure either. This
+5
+  
+-Ω
+z(k
+) [Å
+2]
+E-E
+f (eV)
+E-E
+f (eV)
+-Ω
+z(k
+) [Å
+2]
+-Ω
+z(k
+) [Å
+2]
+-Ω
+z(k
+) [Å
+2]
+E-E
+f (eV)
+E-E
+f (eV)
+P
+P
+P
+P
+σ
+σ σ
+σ
+4 meV
+FIG. 4. Electronic band structure (with SOC) of monolayer under 5% strain, and Berry curvature, for different polarization
+and spin directions (A zoomed-in version of the band structure is shown in Fig. S5 [34]).
+problem is resolved by applying a biaxial tensile strain of
+5% on the monolayer under which the VBM shifts away
+from the Γ point and toward the Y/Y′-point, as is shown
+in Fig. 4. Thus, the VBM now lies between Y/Y ′ and
+Γ. The Berry curvature peaks are also obtained between
+Y/Y′ and Γ. The Berry curvature peak value along Y-
+Γ is found to be −2.12 ˚A2, whereas that along Y ′-Γ is
+1.96 ˚A2.
+As per the equation (2), the valley degree of freedom is
+directly coupled to the direction of polarization, and thus,
+upon switching the polarization direction, one should be
+able to achieve valley switching as well. This is confirmed
+by the electronic band structure (with SOC) of the mono-
+layer with the electric polarization along the x direction
+shown in Fig. 4. It can be seen in Fig. 4(a) that for po-
+larization along x direction, the VBM corresponds to the
+path Y-Γ whereas for the polarization along +x direction,
+the VBM lies between Y ′-Γ. The values of Berry curva-
+ture along Y-Γ and Y′-Γ are also interchanged. The value
+of valley splitting is found to be about 4 meV, which is
+comparable to the values found in kagome lattice Ti 3B8
+[7] and the bilayer 2H-VSe 2 [11]. It is to be noted that
+the valley splitting along the path Y/Y ′-Γ is consistent
+with the expression for SOC given above in equation (2)
+for an electric polarization along the x-direction.
+Thus, we demonstrate that because of the coupling be-
+tween the electric and valley polarization in the Gd sub-
+stituted EuCl2 monolayer, the valley polarization can be
+switched by an external electric field, unlike in the con-
+ventional ferrovalley materials, in which an external mag-
+netic field is required to switch the valley degree of free-
+dom. Besides, the valley splitting can also be switched
+in the conventional way, i.e., by changing the spin orien-
+tation by using an external magnetic field. This can be
+seen in the electronic band structures shown in Fig. 4(c)
+and 4(d). It should be noted, however, that in order to
+have a finite splitting due to SOC, the spins should align
+along the z-axis (equation (2)). Therefore, we still need
+to apply an external magnetic field to keep the spin orien-
+tation fixed along the z-axis. However, one does not need
+a changing magnetic field to switch the valley degree of
+freedom. Instead, by switching electric polarization, one
+can directly obtain valley switching.
+We also studied the valley splitting in another such
+material, which exhibits in-plane polarization, i.e., Li- in-
+tercalated CrBr 3 monolayer [35]. This material involves
+a site-centered charge ordering (SCO) along with an or-
+bital ordering (OO) due to the extra electron imparted
+6
+  
+-Ω
+z(k
+) [Å
+2]
+E-E
+f (eV)
+P
+σ P
+ σ
+-Ω
+z(k
+) [Å
+2]
+E-E
+f (eV)
+Cr1
+Cr2
+Cr2
+Cr1
+K
+Γ
+M
+K’
+M’
+b1
+b2
+a1
+a2
+3.9 meV
+FIG. 5. Electronic band structure (with SOC) of (CrBr 3)2Li monolayer, and Berry curvature, for different polarization and
+spin directions.
+by Li-intercalation. This system undergoes an asymmet-
+ric Jahn-Teller (JT) distortion at alternate Cr-sites. This
+combination of charge and orbital ordering gives the ma-
+terial a polar symmetry. We, therefore, expected a simi-
+lar valley splitting in (CrBr3)2Li as well. To confirm this,
+we calculated the electronic band structure of (CrBr3)2Li
+monolayer with SOC and found that the valleys at K and
+K′ have a splitting of about 3.9 meV. Here, also, the SOC
+depends upon the direction of in-plane polarization and
+the valley degree of freedom can be switched by changing
+the direction of electric polarization (Fig.5). Thus, the
+ferroelectricity-ferrovalley (FE-FV) coupling provides an
+electric field control of the valley in (CrBr 3)2Li mono-
+layer as well. The spin-easy axis, in this case, lies in the
+plane of the monolayer parallel or anti-parallel to the di-
+rection of the polar axis [35]. Thus, in order to observe
+the valley splitting due to SOC, one must apply an ex-
+ternal magnetic field to bring the spin easy-axis out of
+plane of the monolayer, in this case as well.
+In summary, we propose a novel route to induce
+ferroelectric-ferrovalley coupling where valley polariza-
+tion can be switched by an external electric field. We
+demonstrate using first principles density functional
+theory calculations considering two real materials (a
+rare-earth metal halide i.e. Gd-substituted EuCl 2 mono-
+layer and a transition metal halide i.e. Li-intercalated
+CrBr3 monolayer) the feasibility of this phenomenon.
+We have shown that the in-plane electric polarization
+induced by the bond or site centered charge ordering in
+these systems drives the spontaneous valley splitting via
+spin-orbit coupling (SOC) associated with the electric
+polarization.
+SB acknowledges Council of Scientific and Industrial
+Research (CSIR), India for research fellowship. TM
+acknowledges Science and Engineering Research Board
+(SERB), India for funding support through MATRICS
+research grant (MTR/2020/000419). TM and SB ac-
+knowledge the National Supercomputing Mission (NSM)
+for providing computing resources of ‘PARAM Ganga’
+at the Indian Institute of Technology Roorkee, which is
+implemented by C-DAC and supported by the Ministry
+of Electronics and Information Technology (MeitY) and
+Department of Science and Technology (DST), Govern-
+ment of India.
+∗ tulika.maitra@ph.iitr.ac.in
+[1] J. Schaibley, H. Yu, G. Clark, et al., Nat Rev Mater 1,
+16055 (2016).
+[2] S. A. Vitale, D. Nezich, J. O. Varghese, P. Kim, N. Gedik,
+7
+P. Jarillo-Herrero, D. Xiao, and M. Rothschild, Small14,
+1801483 (2018).
+[3] D. MacNeill, C. Heikes, K. F. Mak, Z. Anderson, A.
+Korm´ anyos, V. Z´ olyomi, J. Park, and D. C. Ralph, Phys.
+Rev. Lett. 114, 037401 (2015).
+[4] W. Y. Tong, S. J. Gong, X. G. Wan, and C. G. Duan,
+Nat. Commun. 7, 13612 (2016).
+[5] E. Y. Tsymbal, Nat. Mater. , 11, 12 (2012).
+[6] K. F. Mak, K. He, J. Shan, and T. F. Heinz, Nat. Nan-
+otechnol. 7, 494 (2012).
+[7] J. Zhao, Y. Feng, Y. Dai, B. Huang, and Y. Ma, Nano
+Lett. 24, 10490–10495 (2024).
+[8] Y. Lai, Z. Song, Y. Wan, M. Xue, C. Wang, Y. Ye, L.
+Dai, Z. Zhang, W. Yang, and H. Du, Nanoscale 11, 5163
+(2019).
+[9] X. W. Shen, W. Y. Tong, S. J. Gong, and C. G. Duan,
+2D Mater. 5, 011001 (2018).
+[10] L. Li, M. Wu, and X. C. Zeng, Adv. Funct. Mater. 29,
+1905752 (2019).
+[11] X. Liu, A. P. Pyatakov, and W. Ren, Phys. Rev. Lett.
+125, 247601 (2020).
+[12] B. Wang, X. Zhang, Y. Zhang, S. Yuan, Y. Guo, S. Dong,
+and J. Wang, Mater. Horiz. 7, 1623 (2020).
+[13] Y. Wu, J. Tong, L. Deng, F. Luo, F. Tian, G. Qin, and
+X. Zhang, Nano Lett. 23, 6226 (2023).
+[14] H. You, Y. Zhang, J. Chen, N. Ding, M. An, L. Miao,
+and S. Dong, Physical Review B 103, L161408 (2021).
+[15] W. Liu, J. Tong, L. Deng, B. Yang,G. Xie, G. Qin, F.
+Tian, and X. Zhang, Materials Today Physics 21, 100514
+(2021).
+[16] H.-X. Cheng, J. Zhou, W. Ji, Y.-N. Zhang, and Y.-P.
+Feng, Phys. Rev. B 103, 125121 (2021).
+[17] K. Sheng, H.-K. Yuan and Z.-Y. Wang, Phys. Chem.
+Chem. Phys., 24, 3865 (2022).
+[18] S. Bhardwaj and T Maitra, 2D Mater. 12, 015005 (2025).
+[19] S. Bhardwaj and T Maitra, Phys. Rev. B 108, L081116
+(2023).
+[20] S.-D. Guo, J.-X. Zhu1, W.-Q. Mu, and B.-G. Liu, Phys.
+Rev. B 104, 224428 (2021).
+[21] G. Kresse, and J. Hafner, Phys. Rev. B 47, 558 (1993).
+[22] P. E. Bl¨ ochl, Phys. Rev. B50, 17953 (1994).
+[23] J. P. Perdew, K. Burke, and M. Ernzerhof, Phys. Rev.
+Lett. 77, 3865 (1996).
+[24] A. I. Liechtenstein, V. I. Anisimov, and J. Zaanen, Phys.
+Rev. B 52, R5467 (1995).
+[25] P. Larson, W. R. L. Lambrecht, A. Chantis and M. van
+Schilfgaarde, Phys. Rev. B 75, 045114 (2007).
+[26] X. Gonze and C. Lee, Phys. Rev. B 55, 10355 (1997).
+[27] A. Togo and I. Tanaka, Scr. Mater. 108, 1 (2015).
+[28] W. G. Hoover, A. J. C. Ladd, and B. Moran, Phys. Rev.
+Lett. 48, 1818 (1982).
+[29] D. J. Evans, J. Chem. Phys. 78, 3297 (1983).
+[30] N. Marzari, A. A. Mostofi, J. R. Yates, I. Souza, and D.
+Vanderbilt, Rev. Mod. Phys. 84, 1419 (2012).
+[31] A. A. Mostofi, J. R. Yates, Y.-S. Lee, I. Souza, D. Van-
+derbilt and N. Marzari, Comput. Phys. Commun. 178,
+685 (2008).
+[32] A. Sharan, S. Lany, and N. Singh, 2D Mater. 10, 015021
+(2023).
+[33] We note that Gd substitution in EuI 2 doesn’t give rise
+to an electric polarization as we demonstrate for EuCl 2
+here.
+[34] Supplemental Materials.
+[35] C. Huang, Y. Du, H. Wu, H. Xiang, K. Deng, and E.
+Kan, Phys. Rev. Lett. 120, 147601 (2018).

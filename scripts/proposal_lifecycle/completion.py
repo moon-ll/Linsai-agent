@@ -65,6 +65,47 @@ class CompletionMixin:
                 }
             return {"done": True, "reason": f"全部{len(self.REQUIRED_SECTIONS)}个模块对抗胜利（{','.join(passed_sections)}）"}
 
+        # v6.8.16 改进1: 质量天花板检测（收敛检测）
+        # 连续 3 轮分数 ≥0.80 且每轮提升 <2% → 自动晋级到 pending_review
+        CONVERGENCE_SCORE = 0.80
+        CONVERGENCE_ROUNDS = 3
+        CONVERGENCE_DELTA = 0.02
+        if len(score_history) >= CONVERGENCE_ROUNDS + 1:
+            recent = score_history[-(CONVERGENCE_ROUNDS + 1):]
+            recent_scores = [h["score"] for h in recent]
+            # 前3轮都 ≥0.80
+            if all(s >= CONVERGENCE_SCORE for s in recent_scores[:-1]):
+                # 且每轮提升 <2%
+                deltas = [recent_scores[i + 1] - recent_scores[i] for i in range(len(recent_scores) - 1)]
+                if all(d < CONVERGENCE_DELTA for d in deltas):
+                    return {
+                        "done": True,
+                        "reason": (
+                            f"质量收敛：连续{CONVERGENCE_ROUNDS}轮分数≥{CONVERGENCE_SCORE:.2f}"
+                            f"且每轮提升<{CONVERGENCE_DELTA:.0%}，"
+                            f"当前{last_score:.2f}，建议人工审核确认"
+                        ),
+                        "quality_warning": None,
+                    }
+
+        # v6.8.16 改进1: 质量下降检测
+        # 连续 3 轮分数下降 → 标记 quality_declining，附加质量警告
+        DECLINE_ROUNDS = 3
+        if len(score_history) >= DECLINE_ROUNDS + 1:
+            recent_scores = [h["score"] for h in score_history[-(DECLINE_ROUNDS + 1):]]
+            deltas = [recent_scores[i + 1] - recent_scores[i] for i in range(len(recent_scores) - 1)]
+            if all(d < 0 for d in deltas[-DECLINE_ROUNDS:]):
+                quality_warning = (
+                    f"⚠ 质量下降: 连续{DECLINE_ROUNDS}轮分数下降"
+                    f"（{recent_scores[-DECLINE_ROUNDS-1]:.2f}→{recent_scores[-1]:.2f}）。"
+                    f"建议人工干预检查优化方向。"
+                )
+                return {
+                    "done": True,
+                    "reason": f"连续{DECLINE_ROUNDS}轮质量下降，暂停自动优化",
+                    "quality_warning": quality_warning,
+                }
+
         # 条件2：连续N轮无提升（逃生阀）
         no_improve_limit = DEFAULT_NO_IMPROVEMENT_LIMIT
         if len(score_history) >= no_improve_limit + 1:

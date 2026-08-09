@@ -1,0 +1,545 @@
+1 
+ 
+Solid and hollow plasmonic nanoresonators  
+for carrier envelope phase read-out 
+András Szenes 1,3 , Dávid Vass 1,3 , Balázs Bánhelyi 2,3 , Péter Földi 4,5  Mária Csete 1,3 ,*  
+1Department of Optics and Quantum Electronics, University of Szeged, 6720, Dóm tér 9, Szeged, Hungary 
+2Department of Computational Optimization, University of Szeged, 6720, Árpád tér 2, Szeged, Hungary 
+3HUN-REN Wigner Research Center of Physics, Konkoly-Thege Miklós út 29-33, Budapest, Hungary 
+4Department of Theoretical Physics, University of Szeged, Tisza Lajos krt. 84-86, H-6720 Szeged, Hungary 
+5ELI ALPS, ELI-HU Non-Profit Ltd., Wolfgang Sandner u. 3., H-6728, Szeged, Hungary 
+Keywords short pulse; carrier envelope phase; sensitivity; plasmonic nanoantenna; numerical 
+computation; optimization 
+Abstract  
+The geometry of various plasmonic nanoantennae was numerically optimized to maximize their 
+sensitivity to the carrier envelope phase (CEP) of the exciting ultra-short laser pulses. To verify the CEP 
+sensitivity, the near-field response of the investigated nanoantennae was analyzed  by combining 
+frequency and time -domain numerical computations. The simulation methodology, capable of  
+accurately calculating the time-dependent photocurrent stem from optical field emission , enabled the 
+determination and optimization of all key parameters characterizing and governing the CEP dependence 
+of the near-field responses. Three-types of structures were inspected, including individual triangular and 
+teardrop-shaped nanoantennae and plasmonic lens es consisting of three hemispheres with gradually 
+decreasing diameters. All structure types were optimized in solid and hollow compositions of gold 
+nanoresonators as well. It was shown that hollow /solid singlets produce the largest /intermediate CEP 
+dependent – to – CEP independent integrated current components’ ratio, while their absolute CEP 
+dependent integrated currents were the smallest /intermediate among the optimized structures. The 
+highest /intermediate CEP sensitivity was achieved via solid plasmonic lenses  due to their very large 
+absolute CEP dependent integrated photocurrent originating from huge near-field enhancement in the 
+nanogaps, while the integrated current components’ ratio was smaller than for counterpart singlets. 
+Introduction  
+Metal nanoparticles support light-induced electron plasma oscillations on their surfaces, which 
+phenomenon is known as localized surface plasmon resonance (LSPR) [1]. These localized plasmons 
+confine the  electromagnetic fields ( E-field) to sub -wavelength volumes. This  strongly below -
+diffraction-limited-confinement capability  makes the plasmonic noble metal nanoparticles ideal for 
+applications requiring simultaneously small mode volumes and enh anced E-field [ 2-14]. LSPRs are 
+accompanied with inherent ohmic and radiative losses, leading to relatively small quality factors ( Q-
+factor) and lifetimes, typically ranging from 10 fs to 100 fs [1]. 
+The material, size and shape of the metal nanoparticles determine the resonance frequency, govern the 
+reachable near-field enhancement  (NFE), and the lifetime of plasmonic oscillations [ 15]. Through 
+judicious optimization of the geometry, it is possible to maximize the NFE and to control the Q-factor 
+for specif ic applications [ 16]. For example,  supposing a given core-shell nano particle size, dipolar 
+plasmonic resonances can be excited for two different metal shell thicknesses [17]. The LSPR on the 
+thick-shell configuration possesses a lower Q-factor, accordingly it decays faster . Moreover, the 
+plasmonic pulsed response can be even shorter, than the illuminating photonic pulse, which is well suited 
+for applications, where few-cycle enhanced local E-field is necessary [14]. 
+In the strong light -material interactions regime occurring on  fs-to-attosecond time -scale, the 
+photoelectrons emanating from the nanostructures are sensitive to the exact temporal evolution of the 
+E-field, instead of being defined simply by the time-averaged E-field [18]. 
+ 
+2 
+ 
+At high frequencies and sharp edges , spatially asymmetric E-field enhancement, hence photoelectron 
+rectification is realizable that is controlled by the sub -cycle dynamics and mediately by the carrier 
+envelope phase (CEP) of the exciting pulse [ 19-21]. Such rectified currents can be generated without 
+complex structures and CEP detection can be performed on -chip in ambient conditions  without a 
+difficult lab-equipment [22].  
+Predesigned CEP-sensitive antennae can be used in experiments requiring CEP diagnostics [23], time-
+domain metrologies [24, 25], information processing and strong-field science [26, 27]. The bottleneck 
+of using plasmonic nanoparticles is their relatively low damage threshold, which limits the applicable 
+E-field strength and hence, the signal-to noise ratio as well as the ultimate CEP sensitivity [26, 27]. 
+The resonant nanoparticles reduce the energy needed to generate few-cycle E-field due to the large NFE 
+at their surface. Off-resonant particles enable to maintain the few-cycle nature of the E-field and CEP 
+sensitivity, at the expense of compromised NFE [28]. Nanotriangles are commonly used due to their 
+sharp apexes, which boost the NFE and generate well-defined hot spots acting as nano-scaled electron 
+emission sources, while their asymmetric geometry is essential to register CEP sensitivity in the 
+integrated current [27, 29]. With arrays of individual triangles  that were tuned to ensure spectrally 
+overlapping resonance with the near -IR pulse (1.177 μm), photoemission currents with 30 nA 
+fundamental component and 1.5 pA CEP-sensitive first harmonic component were generated [27]. An 
+order of magnitude current improvement was achieved using arrays constructed with off-resonant 
+dimers of triangles compared to an array of singlet triangles [30]. The CEP sensitivity of properly tuned 
+dimer arrays was further enhanced by using IR exciting pulses, namely 10-fold NFE and 3.3 electron 
+per shot was reached at 2.7 μm wavelength [31].  
+The Fowler-Nordheim equation suitably describes the level of electron extraction from a metal, by 
+including the effect of the barrier field [32, 33]. The theory is in good agreement with the experiments 
+in case of  optical field emission occurring at strong electric fields, corresponding to γ<<1 Keldysh 
+parameter [34, 35, 36, 37]. The Fowler-Nordheim equation constitutes an exponential term similar to 
+that governing the atomic electron emission, and with a saddle point analysis this formula can be used 
+to determine the photocurrents in a wide γ interval as well [38, 39].  
+In the E-field strength dependence of the integrated photocurrent vanishing points were predicted and 
+detected, where the CEP sensitivity suddenly drops to a significantly smaller , yet  configuration 
+dependent value [29]. The CEP-dependent photocurrent , numerically calculated  using the Fowler -
+Nordheim equation as a function of incoming E-field amplitude, geometry and resonance wavelength, 
+shows that a 50-100-fold CEP sensitivity improvement can be reached in the IR with respect to former 
+results by properly predesigned triangular and teardrop-shaped antenna configurations [40].  
+The present study is focused on numerical optimization and investigation of the carrier-envelope phase 
+sensitivity of gold nanoresonators illuminated by 795 nm central wavelength and 6.5 fs short-pulse, by 
+balancing the trade-off between moderately prolonged near -field oscillation and improved E-field 
+enhancement of resonant plasmonic nanoantennae, namely by considering both the NFE and Q-factor 
+in the composite objective function. 
+Methods  
+To determine the photocurrent response of nanoantennae that are the subjects of short-pulse excitation, 
+a comprehensive numerical methodology combining frequency and time -domain computations was 
+developed. The simulations were conducted using the finite element method  (FEM) based RF module 
+of COMSOL Multiphysics, that ensures the accurate, full-wave analysis of the nanoantennae's response. 
+The geometry of the nanoantennae was optimized with an in-house developed algorithm  called 
+GLOBAL [41, 42] to maximize the NFE/Q-factor ratio, considering the proportionality of the decay-
+time with the Q-factor. This objective function ensured large E-field enhancement, while maintaining 
+few-cycled characteristics that is essential for high CEP sensitivity. Additional criterion was that the 
+resonance frequency of the nanoantennae should be in the FWHM of the exciting pulse. 
+In the steady-state computations, continuous wave (CW) irradiation was applied to determine the NFE 
+and absorption cross-section (ACS) spectra and to conclude about the maximal NFE.  
+3 
+ 
+In the time-domain computations, the optimized nanoparticle structures were excited by a cos2-shaped 
+pulse with a full-width-at-half-maximum (FWHM) of 6.5 fs and a central wavelength of 795 nm . The 
+time-dependent photocurrent was calculated using the Fowler-Nordheim equation, considering the time-
+evolution of the local E-field (Fig. 1a, see Supplementary material for details). 
+The transient calculations were repeated for various CEP values, which enabled the characterization of 
+the photocurrent and its temporal integral as a function of CEP and revealed the phase sensitivity of the 
+nanoantenna near-field response. The photocurrent density computed using  the Fowler -Nordheim 
+equation (Jph(r,t)) was integrated spatially on the nanonantennae’s surface to determine the photocurrent 
+(I(t)), and thereafter the photocurrent was integrated temporally through the duration of the exciting 
+short-pulse to determine the corresponding amount of charges (Q). The CEP-independent fundamental 
+component (Q0, identifiable as a baseline, green dashed line in the inset of Fig. 1a) and CEP-dependent 
+harmonic component (Q1 manifesting itself in a sinusoidal modulation, blue solid line in the inset of Fig. 
+1a) of the  integrated photocurrent were extracted in a wide E-field interval of [0. 4, 2] V/nm.  By 
+analyzing the baseline and amplitude of the fitted sine curve, the most important quantities describing 
+the impact of CEP, such as the Q1/Q0 ratio and the Q12/Q0 CEP-sensitivity were calculated [40]. These 
+quantities provide the ratio of the CEP-dependent harmonic component of the integrated photocurrent 
+with respect to the fundamental CEP-independent component and ultimately qualify the CEP sensitivity. 
+The nanoresonators under investigation were triangular (TR) and teardrop (TD)-shaped nanoantennae 
+and plasmonic lenses  (LN), all made of gold and positioned onto an 8 nm ITO layer covered semi-
+infinite sapphire substrate. To exploit the potential advantage of core-shell compositions  that can 
+manifest itself in plasmonic field shortening, hollow (h) nanoresonators were also optimized aside their 
+solid counterparts (s) (Fig. 1a). During the optimization procedure, the height of 20 nm was fixed, while 
+the width and length of the nanoantennae as well as the shell thickness were  varied independently, in 
+order to maximize the NFE/Q-factor ratio defined as an objective function . In case of the hollow 
+nanoparticles the minimal shell thickness was 5 nm. 
+Results and Discussion  
+Two relevant properties of the optimized nanoantennae are the spectrally resolved absorption cross -
+section (ACS) (Fig. 1b) and the maximal near -field enhancement (NFE) taken at the nanopantennae’s 
+apex and plasmonic lenses’ gaps (Fig. 1c). These quantities provide information on the degree of 
+detuning and strength of the plasmonic resonances (Table S1 and S2). The quality factor of the resonance 
+can be determined also from the FWHM of the ACS spectra, which has a strong impact on the time -
+evolution and CEP sensitivity of the structures’ response (Table S1) [16].  
+ 
+Figure 1. (a) Schematics of the optimized solid and hollow nanoantenna geometries and CEP dependent integrated 
+photocurrents indicating the fundamental (Q0) and first (Q1) harmonics. Spectrum of the (b) absorption cross-section and (c) 
+maximal near-field enhancement at the apex of nanoantennae and in the gap of plasmonic lenses. Shaded regions represent the 
+incoming 6.5 fs pulse’s spectrum, while the red dashed line indicates the FWHM of the spectrum. In the legend: TR – triangle, 
+TD – teardrop, LN – lens, while the suffixes indicate s – solid, h – hollow.  
+ 
+
+4 
+ 
+For all optimized structures a  single Lorentzian peak appears in the absorption cross-section (Fig. 1b) 
+and maximal NFE (Fig. 1c) spectra within the FWHM of the pulse (Fig. 1b and 1c red dashe d lines). 
+This proves that every nanoantenna exhibits a  localized plasmonic resonance around the central 
+wavelength of the exciting pulse. The resonance is well-tuned to the central wavelength in the case of 
+solid singlet nanoantennae. In contrast, the resonance peaks of the hollow s inglets exhibit a  small 
+redshift, while in the case of plasmonic lenses a more pronounced blue-shift is observable (peak pos. in 
+Table S1). These spectral shifts predict distinct spectral regions of optimal operation for the different 
+inspected nanoantenna types (Fig. 1a and 1b).  
+The size  of the nanoantennae was qualified by the geometric cross -section ( GCS). The GCS of the 
+optimized hollow nanoparticles is consistently smaller than the GCS of their solid counterparts (GCS in 
+Table S1 and insets in Fig. 2). This size reduction compensates the redshift of the plasmon resonance 
+that is introduced by the hollow geometry. According to the optimization  via NFE/Q, it is advised to 
+not-completely compensate the redshift through si ze reduction (Fig. 1b and 1c). The smaller size also 
+results in a narrower spectrum. The geometric cross-section of the triangles is more than two-times larger 
+than that of the teardrops, while the net GCS of plasmonic lenses is several times larger.  
+The hollow geometry is preferred in case of triangular nanoantenna, while larger ACS is achieved by 
+solid composition in case of teardrops. Accordingly, the ACS of solid / hollow triangles is smaller / larger 
+than the ACS of teardrop with analogous compositions. The solid and hollow plasmonic lenses exhibit 
+similar ACS at the central wavelength of the incoming pulse. The achieved ACS of the plasmonic lens 
+is intermediate / the smallest in case of solid / hollow composition compared to the singlet counterparts. 
+The singlets exhibit larger ACS than GCS, while in case of plasmonic lenses the ACS is slightly smaller 
+compared to the GCS (Table S1). 
+The FWHMs of the hollow nanoantennae is smaller than that of their solid counterpart. The triangles 
+outperform the teardrops in the larger FWHM of ACS and NFE as well , both in solid and hollow 
+nanoantennae. The plasmonic lenses exhibit the largest FWHM of ACS and NFE among the inspected 
+optimized solid and hollow nanoantennae, providing the advantage of few-cycle properties preservation 
+(FWHM values in Table S1 and Table S2 ). The broader spectral lines are due to the larger GCS of 
+plasmonic lenses compared to the GCS of singlet nanoantennae. 
+The spectra of the maximal near-field enhancement at the apexes resemble the absorption cross-section 
+spectra, however there are significant differences in the relative amplitudes of the two quantities. Higher 
+NFE can be reached at the central wavelength of the pulse with the singlets of solid composition. The 
+highest NFE is achieved with the solid teardrop-shaped antenna, which has the sharpest apex (upper 
+insets in Fig. 2a and 2b, values taken at 795 in Table S2). In comparison, the hollow singlets produce 
+lower NFE, because of the slight re dshift of their resonance. Among the hollow nanoresonators, the 
+highest NFE is achieved with the hollow triangular antenna  (lower insets in Fig. 2 a and 2b ). The 
+plasmonic lenses show significantly smaller NFE at the apex compared to the singlets. Slightly higher 
+NFE can be reached at the central wavelength with the hollow composition, in contrast to singlets. The 
+achieved small NFE can be partially attributed to the pronounced blue-shift of the resonance, but it is 
+also limited by the confinement of near-field enhancement around the small nanogaps , rather than at 
+terminating component acting as an apex (insets in Fig. 2c). In the nanogaps a large ~360-fold NFE is 
+predicted with the steady-state calculations performed with large spatial resolution (yellow solid and 
+dashed horizontal lines in Fig. 1c).  
+The maximum near-field enhancements are high enough to reach γ<1 Keldysh parameter, hence allow 
+for entering into the optical field emission region for all inspected structures (Fig. S1a). A surface charge 
+distribution corresponding to the time-instant representing the predominant dipolar distribution is shown 
+in the insets of Figure 2 . Based on these calculations the optimal singlet geometry is capable of 
+sustaining dipolar plasmonic resonances.  
+In case of  plasmonic lenses, the individual dipolar resonances are hybridized into a bondi ng antenna 
+resonance. These charge distributions show, that the dipolar resonance is the most efficient to enhance 
+CEP sensitive current. 
+5 
+ 
+ 
+Figure 2. Time-evolution of the spatially averaged near-field enhancement (NFE(t)) at the apex of nanoantennae and their total 
+photocurrent (I(t)) in the case of solid and hollow (a) triangle, (b) teardrop and (c) plasmonic lens. 
+The time-evolution of near-field enhancement (NFE(t)) averaged on the surface of apex is prolonged in 
+case of singlets compared to the incoming short pulse, and the maximum in NFE(t) is significantly larger 
+than unity indicating typical resonant nanoantennae (Fig. 2). The time-evolution of the plasmonic lenses 
+is exceptional, as the solid  plasmonic lens shortens, while the hollow plasmonic lens preserves the 
+plasmonic response  (decay in Table S3) . Photocurrent spikes emerge around the time-instant 
+corresponding to the peak values of the local E-field at the apexes. In Figure 2 yellow arrows indicate 
+the photocurrent from the flatter side of nanoantennae (and from the bottom side of the half-spheres) 
+during the positive half cycles of the excitation, while the red arrows indicate the photocurrent from the 
+apexes (and from the top side of half-spheres) during the negative half cycles. Substantial differences 
+arise in the amplitude and number of photocurrent peaks taken in the succeeding half duty-cycles, as a 
+consequence of the asymmetry of each inspected nanoantenna's geometry (Napex and Nflat in Table S3). 
+The e lectron emission is maximized  at the time instant , when the local E-field is anti -parallel with 
+respect to the surface normal. 
+The decay of the enhanced near-field around the solid and hollow triangles is significantly prolonged 
+compared to the incident exciting 6.5 fs pulse (Fig. 2a). The lifetimes of the plasmons are 10.2 fs and 
+16.9 fs for solid and hollow configuration  respectively, indicating a plasmon resonance of larger Q-
+factor for the latter, in accordance with the steady -state computations. Although, their maximal time-
+averaged steady-state NFE values are close to each other , namely it is 90.9  / 95.5-fold in cas e of the 
+solid / hollow triangles (Fig. 1c, steady-state), the maximum in NFE(t) at the apex is 1.4-times larger for 
+solid configurations. The corresponding peak in the NFE(t) is 9.2-fold for the solid and 6.4-fold for the 
+hollow configuration, which is suitable for large photocurrent generation (NFE values in Table S3). 
+Around the global maximum in NFE(t), large photocurrent peaks appear during the negativ e E-field 
+half-cycles, i.e. from the sharp apex of the nanotriangles. The smaller number of detectable peaks are 
+significantly smaller in the positive half -cycles, as negligible photocurrent emanates from the flat , 
+bottom side of nanotriangles due to the asymmetric  antenna geometry and local E-field around the 
+triangles (Napex and Nflat in Table S3). The global maximum of the photocurrent is significantly larger 
+(more than doubled) for the solid configuration (Imax in Table S3,), moreover the photocurrent from the 
+flat side is significantly smaller for the hollow configuration. This predicts that the CEP sensitive current 
+could be more efficiently detectable in solid geometry, however both compositions are advantageous to 
+attain large CEP sensitivity (Fig. 2a). 
+Relatively long resonances are sustained on the teardrop geometry as well  (Fig. 2b). The lifetimes of 
+11.4 fs of solid teardrop and 12.9 fs of hollow teardrop are larger and smaller with respect to lifetimes 
+observed in case of the solid and hollow triangles, respectively (Fig. 1c, Table S3). The maximal steady-
+state NFE is larger / smaller for the solid / hollow teardrop compared to the triangular counterparts, i.e. 
+the solid teardrop’s advantage is more pronounced (Fig. 1c, Table S2). Larger maximum is attainable in 
+NFE(t) with the solid configuration (7.4-fold) than with the hollow one (4.6-fold), (NFE values in Table 
+S3), however both teardrop compositions possess smaller maximum in the NFE(t), than the triangular 
+nanoantennae of analogous composition.  
+
+6 
+ 
+In case of solid teardrop the generated reached Imax photocurrent is more than 2-times larger compared 
+to the solid triangle, according to the large maximal steady-state NFE and despite the smaller maximum 
+in NFE(t) (Imax in Table S3). In contrast, the hollow teardrop shows almost the same photocurrent, as the 
+hollow triangle, although both the maximal time-averaged NFE and the maximum in NFE(t) are smaller. 
+Accordingly, the Imax is significantly larger on solid TD than on it s hollow counterpart. Despite the 
+relatively large photocurrents during the negative h alf-cycles, the smaller number of detectable 
+photocurrent peaks are smaller during the positive half-cycles on the teardrops, which is beneficial in 
+the CEP-sensitivity, especially for the solid composition (Fig. 2b, Napex and Nflat in Table S3). 
+The maximal steady-state NFE at the apex of the plasmonic lenses is significantly smaller than in case 
+of the singlet structures (Fig. 1c, Table S2). Moreover, the lifetime of the plasmon is only 5.9 fs and 6.5 
+fs in case of solid and  hollow plasmonic lenses, respectively, in accordance with their small Q-factor. 
+Based on these lifetimes, the plasmonic lenses are suitable in preserving, or even shortening the pulse-
+length of the few-cycled E-field compared to the incoming short pulse (Fig. 1c). Although, the maximum 
+in NFE(t) is relatively small (1.5-fold for both compositions) (NFE values in Table S3), the maximum 
+in the photocurrent is significantly larger than in case of either singlets (Imax in Table S3 and insets in 
+Fig. 2c). This is achieved, though there is significant photocurrent for both halves of each duty cycles, 
+according to the more symmetric nature of the nanogaps and due to the huge NFE at the gaps compared 
+to the environment of singlets, (Napex vs Nflat in Table S3). The Imax is larger on the solid plasmonic lens 
+than on its hollow counterpart, but the maximum values are more comparable than in case of singlets. 
+ 
+Figure 3. Integrated photocurrent characteristics of optimized configurations. (a) Fundamental (Q0) and (b) first harmonic (Q1) 
+of the integrated photocurrent as a function of incident electric field amplitude. In the legend: TR – triangle, TD – teardrop, LN 
+– lens, while the suffixes indicate s – solid, h – hollow. 
+Considering the modulations of the integrated photocurrents, their CEP dependent component and their 
+respective ratios, the inspected E-field interval was separated into four different regions, to analyze them 
+thoroughly. Accordingly, the preferred structure types were compared in Intervals of I / II / III / IV: 0.4-
+0.8 V×nm-1 / 0.8-1.2 V×nm-1 / 1.2-1.6 V×nm-1 / 1.6-2.0 V×nm-1 (Fig. 3 and Fig. 4). 
+The integrated CEP-independent integrated photocurrent component (Q0) nonlinearly increases with the 
+exciting E-field amplitude , however t he rate of the increase gradually decreases (Fig. 3a). Both the 
+nonlinear tendency and the decreasing slope are the direct consequence of the Fowler-Nordheim 
+equation (Fig. S1b). Due to the nonlinear growth, it is possible to extract an integrated photocurrent in 
+an interval spanning six orders of magnitude - ranging from 10 -20 to 10 -14 C - with the six examined 
+structure types (Fig. 3a and Table S4 ). This is the result of a calculation on currents of a single 
+nanoantenna and plasmonic lens, hence the net current could be significantly scaled up by using an array 
+of them and increasing the target size. The largest slope can be achieved with the solid lens, followed 
+closely with its hollow counterpart in the I-interval (Q0 in Table S4). Accordingly, the largest differences 
+between Q0 values are observable at the smallest E-field strengths. By using different configurations of 
+nanoantennae up to 4 orders of magnitude Q0 modulation span is achievable in the I-interval.  
+
+7 
+ 
+The solid compositions show larger integrated photocurrents for all nanoantenna types in all inspected 
+E-field intervals (Q0 in Table S4). Approximately three-times and one order of magnitude  larger Q0 is 
+achieved in optimized solid triangular and teardrop structures compared to their hollow counterparts 
+respectively, according to their larger NFE (Table S2 and S3 ). Almost two -times larger integrated 
+photocurrent can be achieved with solid plasmonic lens compared to hollow one, despite the comparable 
+steady-state maximal NFE and equal maxima in NFE(t) (Table S2 and S3). In the case of plasmonic 
+lenses considering only the maximal NFE, calculated at the terminating components acting as apexes , 
+one could underestimate the integrated photocurrent. However, huge NFE confinement and large 
+integrated photocurrent are achieved in the nanogaps.  
+The Q0 of singlets is at least one / two orders of magnitude smaller but can be even three / four orders 
+of magnitude smaller, than in case of solid / hollow plasmonic lens in the inspected E-field interval. 
+The large achievable integrated photocurrents can be explained by the ~360-fold enhancement in the 2 
+nm nanogaps (Fig. 1c). If one intends to achieve large Q0, plasmonic lenses are preferable due to the 
+enormous NFE and the resulted more intense electron escape near the nanogaps. The Q0 correlates with 
+the maximum in the photocurrent (Fig. 3a to Fig. 2, Table S6), however, it correlates with the maximal 
+steady-state NFE at the apex only in case of singlet nanostructures (Table S2 and Table S4). The achieved 
+Q0 values show strong correlation with the maximal NFE including the nanogaps in all intervals  and 
+anticorrelates with the Q-factors (Table S6). 
+The CEP sensitive integrated photocurrents (Q1) non-monotonously increase with the E-field amplitude 
+(Fig. 3b). Shallow v anishing points (VP)  appear in distinctly different E-field strength regions for 
+different nanoantenna geometries, however dominantly in the first two inspected amplitude intervals. 
+The Q1 is 3-4 orders of magnitude smaller than the Q0 (Q1/Q0 in Table S5) and modifies between 10-23 – 
+10-18 C, depending on the short-pulse intensity and E-field strength as well as the antenna configuration 
+(Fig. 3b , Q1 in Table S4 ). Based on the amplitude of the CEP-sensitive Q1 both for individual 
+nanoantennae and for plasmonic lenses, the solid geometry is preferable dominantly (except the triangles 
+in the Interval I). The Q1 of singlets is at least one order of magnitude smaller than in case of plasmonic 
+lenses of the same composition in the inspected E-field intervals, three / four orders of magnitude  
+smaller relations are achieved in case of solid and hollow TRI / TD at the beginning of interval I. 
+Apart from the VPs at small E-field strengths in case of the solid triangle and teardrop, the Q1 completely 
+correlates with the Q0 and Imax in the optimized structures (Table S6). It is an additional proof about that 
+all nanonatenna types are equally optimized. The Q1 correlates with the maximal NFE including the 
+nanogaps and anticorrelates with the Q-factors, as it is expected from the strong correlation between the 
+CEP insensitive (Q0) and sensitive (Q1) components of the integrated photocurrent (Table S6). 
+ 
+Figure 4.  Carrier envelope phase  sensitivity characteristics of optimized configurations. (a) Q1/Q0 ratio and (b) Q12/Q0 
+sensitivity as a function of incident electric field amplitude. In the legend: TR – triangle, TD – teardrop, LN – lens, while the 
+suffixes indicate s – solid, h – hollow. 
+
+8 
+ 
+Although, Q0 and Q1 themselves carry useful information, the quantities derived from Q0 and Q1 provide 
+the reasonable evaluation of the  CEP sensitivity of the  optimized structures.  The Q1/Q0 shows the 
+relative strength of CEP sensitive integrated photocurrent to the CEP independent signal (Fig. 4a). It is 
+a non-monotonously varying quantity throughout the inspected E-field intervals and may increase or 
+decrease in a specific E-field interval depending on the nanoantenna type. The strong modulations are 
+the direct fingerprints of the VPs, while shallow modulations originate from the different slopes of the 
+Q0 and Q1 amplitude - E-field tendencies.  
+The Q1/Q0 is modulated within one order of magnitude in all configurations in the complete inspected 
+E-field amplitude interval (Q1/Q0 in Table S5) . The tendencies strongly depend on the  specific 
+nanoantenna type. The singlets behave completely differently in Intervals I-II and III-IV . In the former 
+two, the solid singlets have one or even multiple VPs, accordingly the hollow singlets outperform the 
+solid ones in the first half of the inspected E-field region (Q1/Q0 Interval I-II in Table S5).  
+The relations are nearly interchanged in Intervals III and IV , where the hollow singlets have very shallow 
+VPs, however the hollow triangle is still the most preferable structure considering the Q1/Q0 ratio (except 
+the termination of the inspected interval, where the ratio is the same  as for the solid TR ) (Q1/Q0 in 
+Interval III-IV in Table S5).  
+The plasmonic lenses possess the smallest Q1/Q0 ratio, i.e. the CEP dependent component of the total 
+integrated photocurrent is relatively small compared to the CEP independent component (Q1/Q0 in Table 
+S5). This can be explained by the composite geometry of the plasmonic lenses. Although, the complete 
+geometry of the plasmonic lenses is asymmetric, most of the electron emission originates from the 
+nanogaps, which produce large E-field enhancement in both halves of each duty-cycle (Fig. 2c). This 
+inherent symmetry at the nanogaps reduces the CEP sensitivity of Q1/Q0 ratio. However, due to the large 
+emanating current accompanied with a small Q-factor, the plasmonic lenses are still very competitive. 
+The hollow plasmonic lens outperforms its solid counterpart only in Interval I, where a VP appears in 
+case of the solid plasmonic lens (Q1/Q0 in Interval I in Table S5).  
+The Q1/Q0 shows strong anticorrelation with the maximal NFE including the nanogaps and the amplitude 
+of photocurrent peaks and indicates a strong correlation with the Q-factors of the resonances at play, 
+especially in Intervals I and II (Table S7). The NFEmax and Imax anticorrelations are weaker in regions 
+corresponding to smaller E-field strengths, because of the modulations caused by the appearance of the 
+VPs. The correlations are reversed compared to Q0 and Q1, as the Q1/Q0 ratio anticorrelates with the 
+constituting quantities (Table S7). 
+The CEP sensitivity is usually determined by the ratio of Q12/Q0 (Fig. 4b). It is non-monotonously 
+increasing throughout the inspected E-field interval. The modulations are the direct consequences of the 
+existence of the VPs. The sensitivity varies between 10-28 and 2×10-22 C (Q12/Q0 Table S5) and for each 
+specific configuration the modulation covers 2-4 orders of magnitude.  
+The hollow teardrop and triangle show relatively small sensitivity because of their small Q1, though the 
+hollow triangle is preferable exceptionally in Interval I of the smallest E-field strengths, where no VPs 
+appear for hollow nanoantennae. The singlets are always less preferable than the plasmonic lenses of 
+the same composition, in all inspected intervals. Although, the solid teardrop becomes better than the 
+hollow plasmonic lens in Interval II, III and IV , and the solid triangle also outperforms it in Interval IV 
+(Fig. 4b, Q12/Q0 in Table S5).  
+Despite the small Q1/Q0, the solid plasmonic lens shows the largest sensitivity among the optimized 
+structures (Fig. 4b, Q12/Q0 in Table S5,). It outperforms the sensitivity of the hollow plasmonic lenses in 
+all E-field regions due to its large CEP dependent current density (Q12/Q0 in Table S5). Moreover, also 
+the hollow plasmonic lens outperforms both types of the singlets in the Intervals I and II,  except the 
+solid teardrop in the Interval II. 
+The Q12/Q0 correlates with the constituting quantities, hence the sensitivity correlates with the maximal 
+NFE including the nanogaps and the maximum in the integrated photocurrent, while anticorrelations 
+can be recognized with the Q-factors and the Q1/Q0 ratio. Due to the existence of vanishing points the 
+(anti)correlations are weaker in Intervals III and IV (Table S7).  Better correlations are achieved with 
+NFEmax and Q0 / Q1 / Imax in Interval I / I-III /II-IV . 
+9 
+ 
+Conclusion 
+In conclusion, it is demonstrated that the plasmonic resonances on metal nanoantennae offer intriguing 
+possibilities for achieving enhanced electromagnetic field confinement at the nanoscale and controlling 
+the time-evolution of the few-cycle plasmonic field at fs-time-scale.  
+Plasmonic nanoantenna s inglets, as solid and hollow triangles and teardrops , are preferable from the 
+point of view of the achievable large Q1/Q0 ratio originating from their strongly asymmetric near-field 
+enhancement. Among them, the hollow singlet nanoantennae are the most preferable in terms of this 
+ratio, as they show the strongest CEP dependent integrated photocurrent component, especially in the 
+smaller E-field amplitude region. Because of the small CEP sensitive integrated photo current 
+component, their smaller Q12/Q0 sensitivity is comparable only in these smaller amplitude regions with 
+their solid counterparts. Only the Q12/Q0 of the hollow TR outperforms the sensitivity of the solid TR in 
+the smallest E-field interval. 
+The analysis of various optimized plasmonic nanoantennae has shown that solid plasmonic lenses ensure 
+the largest CEP sensitivity. Their advantage originates from the large electron emission rate from the 
+huge near-field enhancement in the nanogaps. Although, the Q1/Q0 ratio is relatively small compared to 
+singlets, because of the symmetry of the nanogaps, the large CEP dependent Q1 component results in an 
+extraordinary sensitivity. Larger Q0/Q1 ratio (except in the Interval I ) and Q12/Q0 sensitivity in al l 
+Intervals can be attained with a solid lens than with its hollow counterpart.  
+Vanishing points have an impact on the CEP dependent and independent integrated photo current 
+components’ Q1/Q0 ratio and Q12/Q0 sensitivity that can be controlled, and the smallest impact is 
+attainable in case of plasmonic lenses , except the ratio at small E-field strength. By alternating the 
+nanoantenna configuration, the VPs can be tuned properly, thus allowing CEP monitoring through wide 
+E-field regions. 
+Associated content 
+Detailed information on  the near-field response of optimized nanoantennae, validation. CEP 
+independent and dependent integrated photocurrent components arranged in tables (PDF format). 
+Corresponding Author 
+*Mária Csete, Department of Optics and Quantum Electronics, University of Szeged, Dóm tér 9, Szeged 
+6720, Hungary, Email: mcsete@physx.u-szeged.hu 
+Author Contributions 
+M.C. proposed the concept of individual plasmonic nanoantennae and plasmonic lens configurations’ optimization to maximize 
+CEP sensitivity. B.B. provided the method of numerical optimization. A.S. and V.D. contributed to data collection and analysis 
+of the optimized nanoresonator configurations. A.S. wrote the first version of the manuscript and created the visualizations, 
+M.C., V.D. and F.P. contributed to the theoretical explanation, writing and revision of the manuscript. All authors have 
+discussed the results, commented on the manuscript and given approval to the final version of the manuscript. 
+Funding Sources 
+This work was supported by the National Research, Development and Innovation Office (NKFIH) of Hungary, projects: 
+"Optimized nanoplasmonics" (K116362), "Nanoplasmonic Laser Inertial Fusion Research Laboratory" (NKFIH -2022-2.1.1-
+NL-2022-00002) and "National Laboratory for Cooperative Technologies" (NKFIH -2022-2.1.1-NL-2022-00012) in the 
+framework of the Hungarian National Laboratory program. Supported by the UNKP-20-3 new national excellence program of 
+the ministry for innovation and technology from the source of the National Research, Development and Innovation Fund. 
+Acknowledgements 
+Partial support by the ELI -ALPS project is acknowledged. The ELI -ALPS project (GINOP -2.3.6-15-
+2015- 00001) is supported by the European Union and cofinanced by the European Regional 
+Development Fund. 
+Notes 
+The authors declare no competing financial interest. 
+10 
+ 
+References 
+1. Maier, S. A. Plasmonics: Fundamentals and Applications. Springer New York, New York, 
+2007. DOI: 10.1007/0-387-37825-1 
+2. Otsuki, J.; Sugawa, K.; Jin, S. Plasmonic triangular nanoprism sensors. Mater. Adv. 2021, 2, 
+32-46. DOI: 10.1039/D0MA00644K 
+3. Minopoli, A.; Acunzo, A.; Ventura, B. D.; Velotta, R. Nanostructured Surfaces as Plasmonic 
+Biosensors: A Review. Adv. Mater. Interfaces 2021, 9 (2), 2101133. DOI: 
+10.1002/admi.202101133 
+4. Bragas, A. V .; Maier, S. A.; Boggiano, H. D.; Grinblat, G.; Berté, R.; Menezes, L. de S.; 
+Cortés, E. Nanomechanics with plasmonic nanoantennas: ultrafast and local exchange 
+between electromagnetic and mechanical energy. J. Opt. Soc. Am. B 2023, 40 (5), 1196-1211. 
+DOI: 10.1364/JOSAB.482384  
+5. Giannini, V .; Fernández-Domínguez, A. I.; Heck, S. C.; Maier, S. A. Plasmonic Nanoantennas: 
+Fundamentals and Their Use in Controlling the Radiative Properties of Nanoemitters. Chem. 
+Rev. 2011, 111 (6), 3888–3912. DOI: 10.1021/cr1002672 
+6. Piatkowski, L.; Accanto, N.; van Hulst, N. F. Ultrafast Meets Ultrasmall: Controlling 
+Nanoantennas and Molecules. ACS Photonics 2016, 3 (8), 1401–1414. DOI: 
+10.1021/acsphotonics.6b00124 
+7. Murray, W. A.; Barnes, W. L. Plasmonic Materials. Adv. Mater. 2007, 19 (22), 3771-3782. 
+DOI: 10.1002/adma.200700678 
+8. Baffou, G.; Quidant, R. Nanoplasmonics for chemistry. Chem. Soc. Rev. 2014, 43, 3898-3907. 
+DOI: 10.1039/C3CS60364D 
+9. Hutter, E.; Fendler, J. H. Exploitation of Localized Surface Plasmon Resonance. Adv. Mater. 
+2004, 16 (19), 1685-1706. DOI: 10.1002/adma.200400271 
+10. Novotny, L.; Hecht, B. Principles of Nano-Optics. 2nd. ed, Cambridge University Press, 
+Cambridge UK, 2012. DOI: 10.1017/CBO9780511794193 
+11. Szenes, A.; Bánhelyi, B.; Szabó, L. Z.; Szabó, G.; Csendes, T.; Csete, M. Enhancing Diamond 
+Color Center Fluorescence via Optimized Plasmonic Nanorod Configuration. Plasmonics 
+2017, 12, 1263–1280. DOI: 10.1007/s11468-016-0384-1 
+12. Szenes, A.; Bánhelyi, B.; Szabó, L. Z.; Szabó, G.; Csendes, T.; Csete, M. Improved emission 
+of SiV diamond color centers embedded into concave plasmonic core-shell nanoresonators. 
+Sci. Rep. 2017, 7, 13845. DOI: 10.1038/s41598-017-14227-w 
+13. Szenes, A.; Bánhelyi, B.; Csendes, T.; Szabó, G.; Csete, M. Enhancing Diamond Fluorescence 
+via Optimized Nanorod Dimer Configurations. Plasmonics 2018, 13, 1977–1985. DOI: 
+10.1007/s11468-018-0713-7 
+14. Szenes, A.; Vass, D. I.; Bánhelyi, B.; Csete, M. Enhancing Diamond Color Center 
+Fluorescence via Optimized Configurations of Plasmonic Core–Shell Nanoresonator Dimers. 
+ACS Omega 2023, 8 (44), 41356–41362. DOI: 10.1021/acsomega.3c04902 
+15. Bohren, C. F.; Huffman, D. R. Absorption and Scattering of Light by Small Particles. New 
+York: John Wiley & Sons, 1998. DOI: 10.1002/9783527618156 
+16. Csete, M.; Szenes, A.; Vass, D.; Bánheliy, B.; Dombi, P. Few-cycle localized plasmon 
+oscillations. Sci. Rep. 2020, 10, 12986. DOI: 10.1038/s41598-020-69761-x 
+17. Tam, F.; Chen, A. L.; Kundu, J.; Wang, H.; Halas, N. J. Mesoscopic nanoshells: Geometry-
+dependent plasmon resonances beyond the quasistatic limit. J. Chem. Phys. 2007, 127, 
+204703. DIO: 10.1063/1.2796169 
+18. Ciappina, M. F.; Pérez-Hernández, J. A.; Landsman, S. A.; Okell, W. A.; Zherebtsov, S.; Förg, 
+B.; Schötz, J.; Seiffert, L.; Fennel, T.; Shaaran, T.; Zimmermann, T.; Chacón, A.; Guichard, R.; 
+Zair, A.; Tisch, J. W. G.; Marangos, J. P.; Witting, T.; Braun, A.; Maier, S. A.; Roso, L.; 
+Krüger, M.; Hommelhoff, P.; Kling, M. F.; Krausz, F.; Lewenstein, M. Attosecond physics at 
+the nanoscale. Rep. Prog. Phys. 2017, 80, 054401. DOI: 10.1088/1361-6633/aa574e 
+11 
+ 
+19. Krüger, M.; Schenk, M.; Hommelhoff, P. Attosecond control of electrons emitted from a 
+nanoscale metal tip. Nature 2011, 475, 78–81. DOI: 10.1038/nature10196 
+20. Dombi, P.; Hörl, A.; Rácz, P.; Márton, I.; Trügler, A.; Krenn, J. R.; Hohenester, U. Ultrafast 
+Strong-Field Photoemission from Plasmonic Nanoparticles. Nano Lett. 2023, 13 (2), 674–678. 
+DOI: 10.1021/nl304365e 
+21. Dienstbier, P.; Seiffert, L.; Paschen, T.; Liehl, A.; Fennel, T.; Hommelhoff, P. Tracing 
+attosecond electron emission from a nanometric metal tip. Nature 2023, 616, 702–706 (2023). 
+DOI: 10.1038/s41586-023-05839-6 
+22. Wittmann, T.; Horvath, B.; Helml, W.; Schatzel, M. G.; Gu, X.; Cavalieri, A. L.; Paulus, G. G.; 
+Kienberger, R. Single-shot carrier-envelope phase measurement of few-cycle laser pulses. Nat. 
+Phys. 2009, 5, 357–362. DOI: 10.1038/nphys1250 
+23. Rossi, G. M.; Mainz, R. E.; Yang, Y .; Scheiba, F.; Silva-Toledo, M. A.; Chia, S.-H.; Keathley, 
+P. D.; Fang, S.; Mücke, O. D.; Manzoni, C.; Cerullo, G.; Cirmi, G.; Kärtner, F. X. Sub-cycle 
+millijoule-level parametric waveform synthesizer for attosecond science. Nat. Photonincs 
+2020, 14, 629–635. DOI: 10.1038/s41566-020-0659-0 
+24. Rácz, P.; Pápa, Zs.; Márton, I.; Budai, J.; Wróbel, P.; Stefaniuk, T.; Prietl, C.; Krenn, J. R.; 
+Dombi, P. Measurement of nanoplasmonic field enhancement with ultrafast photoemission. 
+Nano Lett. 2017, 17, 1181–1186. DOI: 10.1021/acs.nanolett.6b04893 
+25. Krausz, F.; Stockman, M. I. Attosecond metrology: from electron capture to future signal 
+processing. Nat. Photonics 2014, 8, 205–213. DOI: 10.1038/nphoton.2014.28 
+26. Rybka, T.; Ludwig, M.; Schmalt, M. F.; Knittel, V .; Brida, D.; Leitenstrofer, A. Sub-cycle 
+optical phase control of nanotunnelling in the single-electron regime. Nat. Photonics 2016, 10, 
+667–670. DOI: 10.1038/nphoton.2016.174 
+27. Putnam, W. P.; Hobbs, R. G.; Keathley, P. D.; Berggren, K. K.; Kärtner, F. X. Optical-field-
+controlled photoemission from plasmonic nanoparticles. Nat. Phys. 2017, 13, 335–339. DOI: 
+10.1038/nphys3978 
+28. Földi, P.; Márton, I.; Német, N.; Ayadi, V .; Dombi, P. Few-cycle plasmon oscillations 
+controlling photoemission from metal nanoparticles. Appl. Phys. Lett. 2015, 106, 013111. 
+DOI: 10.1063/1.4905464 
+29. Keathley, W. Putnam, P. Vasireddy, R. Hobbs, Y . Yang, K. Berggren, F. Kartner. Vanishing 
+carrier-envelope-phase-sensitive response in optical-field photoemission from plasmonic 
+nanoantennas. Nat. Physics 2019, 15 (11), 1128–1133. DOI: 10.1038/s41567-019-0613-6 
+30. Yang, Y .; Turchetti, M.; Vasireddy, P.; Putnam, W. P.; Karnbach, O.; Nardi, A.; Kartner, F. X.; 
+Berggren, K. K.; Keathley, P. D.; Light phase detection with on-chip petahertz electronic 
+networks. Nat. Commun. 2020, 11, 3407. DOI: 10.1038/s41467-020-17250-0 
+31. Ritzkowsky, F.; Yeung, M.; Bebeti, E.; Gebert, T.; Matsuyama, T.; Budden, M.; Mainz, R. E.; 
+Cankaya, H.; Berggren, K. K.; Rossi, G. M.; Keathley, P. D.; Kärtner, F. X. Large Area Optical 
+Frequency Detectorsfor Single-Shot Phase Readout. arXiv:2306.01621 DOI: 
+10.48550/arXiv.2306.01621 
+32. Fowler, R. H.; Nordheim, L. Electron emission in intense electric fields. P . R. Soc. London, 
+1928, 119 (781), 173–181. DOI: 10.1098/rspa.1928.0091 
+33. Forbes, R. G. Description of field emission current/voltage characteristics in terms of scaled 
+barrier field values (f-values). J. Vac. Sci. Technol. 2008, 26 (1), 209–213. DOI: 
+10.1116/1.2834563 
+34. Keldysh, L. V . Ionization in the field of a strong electromagnetic wave. J. Exptl. Theoret. 
+Phys. 1965, 20, 1307. DOI: 10.1142/9789811279461_0008 
+35. Czirják, A.; Kopold, R.; Becker, W.; Kleber, M.; Schleich, W. P. The Wigner function for 
+tunneling in a uniform static electric field. Opt. Commun. 2000, 179, 29-38. DOI: 
+10.1016/S0030-4018(99)00591-X 
+12 
+ 
+36. Hack, Sz.; Majorosi, Sz.; Benedict, M. G.; Varró, S.; Czirják, A. Quantum interference in 
+strong-field ionization by a linearly polarized laser pulse and its relevance to tunnel exit time 
+and momentum. Phys. Rev. A 2021, 104, L031102. DOI: 10.1103/PhysRevA.104.L031102 
+37. Szabó, L. Zs.; Benedict, M. G.; Czirják, A.; Földi, P. Relativistic electron transport through an 
+oscillating barrier: Wave-packet generation and Fano-type resonances. Phys. Rev. B 2013, 88, 
+075438. DOI: 10.1103/PhysRevB.88.075438 
+38. Yudin, G. L.; Ivanov, M. Y . Nonadiabatic tunnel ionization: Looking inside a laser cycle. Phys. 
+Rev. A 2001, 64, 013409. DOI: 10.1103/PhysRevA.64.013409 
+39. Hawkins, P. G.; Ivanov, M. Y . Role of subcycle transition dynamics in high-order-harmonic 
+generation in periodic structures. Phys. Rev. A 2013, 87, 063842. DOI: 
+10.1103/PhysRevA.87.063842 
+40. Buckley, D.; Yang, Y .; Yang-Keathley, Y .; Berggren, K. K.; Keathley, P. D. Nanoantenna 
+Design for Enhanced Carrier-Envelope-Phase Sensitivity. J. Opt. Soc. Am. B 2012, 38 (9), 
+C11-C21. DOI: 10.1364/JOSAB.424549 
+41. Csendes, T.; Garay, B.; Bánhelyi, B. A verified optimization technique to locate chaotic 
+regions of Hénon systems. J. Global. Optim. 2006, 35, 145. DOI: 10.1007/s10898-005-1509-9 
+42. Csendes, T.; Pál, L.; Sedin, J. O. H.; Banga, J. R. The GLOBAL optimization method 
+revisited. Optim. Lett. 2008, 2, 445-454. DOI: 10.1007/s11590-007-0072-3 
+ 

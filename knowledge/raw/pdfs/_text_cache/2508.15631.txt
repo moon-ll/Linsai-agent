@@ -1,0 +1,1053 @@
+High Harmonic Spectroscopy from Lower-Order to Higher-Order Topological
+Insulators
+Bryan Lorenzo1 , Carlos Batista1 , Milad Jangjan2 , Dasol Kim3 , Jean Menotti1 , Feng
+Liu4 , Wenlong Gao4 , Shambhu Ghimire5 , Camilo Granados4 , and Alexis Chacón1,6,7,8∗
+
+arXiv:2508.15631v2 [cond-mat.mtrl-sci] 24 May 2026
+
+1
+
+Departamento de Fı́sica, Área de Fı́sica, Universidad de Panamá,
+Ciudad Universitaria 3366 Octavio Mendez Pereira, Panama
+2
+Institute of Physics, University of Rostock, 18051 Rostock, Germany
+3
+Department of Materials Science and Engineering,
+Pohang University of Science and Technology, Pohang 37673, Korea
+4
+Eastern Institute of Technology, 315200, Ningbo, China
+5
+Stanford PULSE Institute, SLAC National Accelerator Laboratory, Menlo Park, California 94025, United States
+6
+Sistema Nacional de Investigación de Panamá, Building 205, Ciudad del Saber ,Clayton Panamá, Panama
+7
+Centro de Investigación con Técnicas Nucleares, Universidad de Panamá, Panama and
+8
+Parque Cientı́fico y Tecnológico, Universidad Autónoma de Chiriquı́, Ciudad Universitaria, David, Panama
+(Dated: May 26, 2026)
+Over the past decades, high-harmonic spectroscopy (HHS) has emerged as a powerful tool for
+all-optical probing of topological properties of solids. There are outstanding questions regarding
+universal nature of the spectral features of harmonics in their relationship to the non-trivial topological properties. Here, we present a systematic theoretical study of HHS in topological materials,
+including lower-order and higher-order topological insulators (LOTIs and HOTIs), focusing on observables such as helicity, circular dichroism, ellipticity dependence, and channel-resolved intensity
+yields. Using the Haldane, Kane–Mele, and breathing Kagome lattice models, we theoretically extend
+all-optical approaches from the LOTI to the HOTI regime by explicitly incorporating contributions
+from bulk, edge, and corner states. Depending on the crystalline system, our calculations suggest
+that these observables can encode topological information through distinct modifications of the HHG
+spectra in topological phases. In particular, we identify significant enhancements of the harmonic
+intensity yields, reaching up to two orders of magnitude relative to trivial phases, together with
+distinct spectral signatures associated with edge and corner contributions revealed through channelresolved intensity yields. These results show that channel-resolved HHS provides a promising route
+for probing topological states in both LOTIs and HOTIs.
+
+Introduction
+Topological physics is a unique branch of condensed matter physics devoted to the study of topological phases and
+transitions, which are governed by symmetries and topological invariants [1–3]. These phases are of great importance
+not only for fundamental science but also for the development of advanced technological devices, such as topological
+transistors [4, 5]. Materials in this class are distinguished by the presence of conducting topological states at their
+edges or surfaces, while remaining insulating in the bulk [6–11]. This remarkable duality is protected by symmetries
+and characterized by topological invariants, i.e., the Chern number or Z2 invariants. Topological materials can be
+broadly classified into lower-order topological insulators (LOTIs) [1–3, 6, 7] and higher-order topological insulators
+(HOTIs) [12–15]. LOTIs are characterized by a gapped bulk and gapless boundary states [1, 2]. More generally,
+for an n-dimensional LOTI, the bulk is an insulating nD phase, while the (n − 1)D boundary hosts topologically
+protected conducting states (here, n denotes the dimensionality of the system). These boundary modes are protected
+by topological invariants, such as the Chern number and the Z2 invariants, which arise as a direct consequence of the
+system symmetries.
+In particular, topological insulators (TIs) exhibit gapless edge or surface states coexisting with a gapped bulk. Here, we
+
+∗ alexis.chacon-s@up.ac.pa
+
+2
+focus on two-dimensional (2D) TIs unless otherwise stated, where conducting channels appear at the one-dimensional
+(1D) edges, while the 2D bulk remains insulating. Representative examples of LOTIs include the Haldane model [16],
+describing Chern insulators (CIs); the Kane–Mele model [6–9], which realizes 2D TIs; and the Zhang model for
+Bi2 Se3 [17], a paradigmatic 3D TI. As a concrete example, a 2D TI such as 1T’-WS2 hosts one-dimensional (1D)
+conducting edge states while remaining insulating in the 2D bulk, as illustrated in Fig. 1 (hexagonal lattice). On
+the other hand, HOTIs are generally defined as topological n-dimensional materials whose insulating states reside
+in n dimensions (identified as the bulk states), while their topological states appear in (n − 2)D (identified as the
+corner states) (see corner states in Fig. 1 for the Kagome lattice). The Kagome lattice can be considered either
+a LOTI or a HOTI (2D material) [18–22], depending on the parameters of the Hamiltonian model (see Fig. 1 for
+the Kagome lattice). It exhibits topological corner states, where the corners correspond to zero-dimensional (pointlike 0D) states [20, 21, 23], while the (n − 1)D edges and the 2D bulk remain insulating [18, 19, 22, 24]. Some
+of the materials described above and experimentally realized, such as Chern insulators [25], topological insulators
+(TIs) [8], and higher-order topological insulators [21], belong to a broader class of topological phases known as
+symmetry-protected topological (SPT) materials [2, 13]. Certain topological phases rely on the presence of protecting
+symmetries (e.g., time-reversal, inversion, or mirror symmetry). When these symmetries are broken, the associated
+topological features may disappear. For example, in 3D topological insulators such as Bi2 Se3 , impurities (e.g., Indium
+doping) can suppress the topological surface states by modifying the electronic structure and effectively breaking the
+protecting symmetry [1, 26, 27]. In contrast, in Chern insulators the topological phase emerges from the explicit
+breaking of inversion and time-reversal symmetries rather than from a protecting symmetry.
+In this work, we focus on the study of lower-order and higher-order topological insulators through the nonlinear
+optical response of these materials. Our targets are described using 2D topological models such as the paradigmatic
+Haldane model (2D Chern insulator [16, 28]), the Kane–Mele model (2D TI) [6, 7] for LOTIs, and the Kagome-lattice
+structure (2D triangular lattice) for HOTIs [20] (see Fig. 1). The Kagome lattice, due to its geometric frustration,
+spatial symmetry, and band topology, serves as an ideal platform for the realization of HOTIs [20]. For example, HOTIs
+in Kagome lattices exhibit localized corner states, or zero-dimensional topological states (see Fig. 1 for the Kagome
+lattice), protected by crystalline symmetries (e.g., C3 , inversion, etc.) [20, 21, 23]. These states are topologically
+robust; they arise from quantized multipole moments and crystalline symmetry protection [13]. Models such as the
+Ezawa Kagome model demonstrate that these systems host quantized corner charges, but without anyonic excitations
+or degenerate ground states [29]. Hence, Kagome LOTIs and HOTIs belong to the SPT class—specifically as higherorder topological insulators and not to the class of topologically ordered phases [1, 30].
+Despite the great success of Angle-Resolved Photoemission Spectroscopy (ARPES) in measuring the energy band
+structures of TIs [31–33], identifying or measuring topological invariants remains a challenge in condensed matter
+physics [1]. Thus, any alternative technique that can elucidate and address the challenge of characterizing topological
+materials is highly valuable. In this context, high-harmonic spectroscopy (HHS), based on high-harmonic generation
+(HHG), is emerging as an alternative nonlinear optical technique to ARPES measurements for exploring topological
+
+3
+
+FIG. 1. High-harmonic generation in two-dimensional topological materials: A strong and ultrashort mid infrared (MIR) driving
+laser (red pulse) is focused on a topological honeycomb lattice. As a result of the laser–matter interaction, high-energy photons
+(illustrated by oscillating green, orange, blue, and violet lines) are emitted from the systems considered here: lower-order
+topological insulators (LOTIs), including 2D Chern insulators described by the Haldane model, which breaks both inversion
+and time-reversal symmetries, and 2D topological insulators (TIs) modeled by the Kane–Mele (the two atoms of the unit cell
+are in blue and red dots), which preserves time-reversal symmetry (see left hexagonal inset zoom). In the case of the 2D TI,
+the conducting topological edge states are represented (shadow red-blue dots) orange and blue arrows along the edges of the
+hexagonal lattice, and the light red and blue circles represent those conducting states. The right-hand crystalline structure is
+the higher-order topological insulators (HOTIs) based on a breathing Kagome lattice (red shadow circles) hosting topological
+corner states (right triangular inset zoom), where the conducting states are visualized as red illuminated points, the edges as
+yellow and the bulk as blue circles.
+
+materials, their phases, and their transitions [34–40]. High-harmonic generation is a nonlinear optical process in which
+the photon energy of a laser focused on a medium (gas, solid, or liquid) is upconverted into high-frequency photons
+with energies that are integer multiples of the fundamental laser frequency [41], as it is shown in Fig. 1 for the
+optical response from solids [42]. This process occurs on a sub-femtosecond timescale in the atoms of a gas or solid
+and captures rich information about the electronic structure of the target via dipole transition matrix elements or
+induced currents, energy bands of the crystal, etc. [37, 38, 43]. Recently, HHG has been theoretically investigated
+as a probe of topological phases and transitions in systems such as the Su–Schrieffer–Heeger (SSH) model [34], the
+Haldane model (Chern insulator) [28], the Weyl semimetals [44–50] and three-dimensional (3D) topological insulators
+like Bi2 Se3 [37, 38], to mention some. by analyzing the helicity-resolved asymmetry or degree of circular polarization,
+the circular dichroism, and the anomalous ellipticity dependence of the emitted harmonics [36, 39, 51, 52].
+Notwithstanding these important experimental demonstrations, theoretical calculations of HHS by Neufeld et al.
+suggest that the HHG mechanism does not always encode topological information as a universal probe [53]. Their study
+focused on BiH and Na3 Bi–like materials using ab-initio time-dependent density functional theory (TDDFT). However,
+
+4
+this discrepancy may not be universal across all topological materials. In particular, we expect that the full highharmonic spectrum originates not only from topological bulk states, but also from contributions of topological edge
+states (or surface states), as well as topological corner states [34, 37, 39, 54].
+These states can play a crucial role in shaping topological phases and transitions in HHS, even in cases where such
+emission channels were not considered in Ref. [53], as demonstrated experimentally by Baykusheva et al. [37] and
+Heide et al. [39], respectively. For example, by analogy with quantum Hall phenomena, in the integer quantum Hall
+effect (IQHE) [55] and in the fractional quantum Hall effect (FQHE) [56], the charge current is the key observable
+that encodes the underlying topology. In contrast, in quantum spin Hall systems (QSHE), the spin current is the
+relevant measurable quantity that captures the topological properties of the system [6, 56, 57]. A similar situation is
+expected for HHS, where the emitted harmonics may serve as sensitive probes of topology in condensed matter systems.
+Baykusheva et al. [37] and Heide et al. [39] presented theoretical calculations and measurements indicating that the
+high harmonics originating from the topological surface states of a 3D TI Bi2 Se3 exhibit an atypical, or anomalous,
+ellipticity dependence (AED). Other experimental measurements have indicated that HHS exhibits two-dimensional
+topological surface-wave radiation (BiSbTeSe3 ), THz emission associated with fractional harmonics (Bi2 Te3 ), and clear
+enhancements in topologically nontrivial phases relative to trivial ones [54, 58, 59]. This discrepancy has sparked an
+ongoing debate in the attosecond-physics and condensed-matter physics communities [36–38, 40, 53, 60].
+Here, we aim to explore high-order harmonics generated from LOTIs to HOTIs using high-harmonic spectroscopy
+(HHS), to address this debate. Three distinct topological models, characterized by different topological invariants
+(Cm , Z2 , and P3 , see Appendix A) and symmetry protections, are studied to elucidate whether and how the HHG
+process encodes topological information in LOTIs and HOTIs [3, 7, 12, 16]. We analyze channel-resolved intensity
+yields together with helicity, circular dichroism, and AED for harmonic emissions originating from bulk, edge, and
+topological corner states in the corresponding LOTI and HOTI systems. In the case of LOTIs, these studies are
+addressed not only through high-harmonic emissions from the topological bulk states, but also from the topological
+edge states in 2D TIs and 2D CIs. In the case of HOTIs, we compute the full nonlinear all-optical response from
+the topological bulk, edge, and corner states. Our theoretical results suggest that HHS is a useful technique to probe
+topological materials, i.e., LOTIs and HOTIs. For the topological Chern insulators, for example, the helicity-resolved
+asymmetry or degree of circular polarization [60] and the circular dichroism of the emitted high-order harmonics [36]
+(specifically in the Haldane model; see Appendix A 1 for details) indicate qualitative differences between topologically
+trivial and nontrivial phases [34, 36, 38]. In the case of TIs described by the 2D Kane-Mele model, the HHG
+intensity yield as a function of the driving-laser ellipticity exhibits an atypical tendency, in direct agreement with
+the experimental observations reported in Ref. [37] and theoretical calculations [38]. This quantity is referred to
+in this work as anomalous ellipticity dependence (AED). In particular, we further extend our HHG calculations to
+investigate the emitted radiation from topological edge states in our LOTI models. A clear intensity enhancement
+of the emitted harmonics is observed in the simulated HHG spectra from the topological edge states, compared
+to both the topological non-trivial bulk states and the trivial bulk states, for the Haldane and Kane–Mele models
+
+5
+in analogy with the investigation carried out by Baykusheva et al. in Ref. [38]. This suggests a general trend in
+LOTI materials that cannot be explained without considering all possible emission channels, namely bulk and edge
+contributions. For the HOTI model considered in this work (the breathing Kagome lattice), we observe signatures
+of topology in the high-harmonic yield from the topological corner states, in comparison with the emissions from
+the bulk states and the edge states. The electronic dynamics for the topological bulk states, edge states and corner
+states are addressed by solving both: (i) the time-dependent density matrix [51], (see Appendix. B) and (ii) Bauer’s
+theory [34, 35], which is partially based on the SSH model (see Appendix B 2). While the calculated HHG from bulk
+and edge states is robust, the emitted harmonics from the corner states are extremely sensitive to the parameters of
+the SSH model. We present HHG calculations in which a clear difference in the harmonic intensity yields between
+trivial and nontrivial phases is observed for the corner states; however, this feature does not persist across all model
+parameter regimes. This indicates that HHS can encode topological information through harmonic intensity yields,
+albeit in a material-dependent manner. Finally, we emphasize the significant enhancement, exceeding two orders of
+magnitude, in the high harmonics emitted from the topological Kagome lattice in the semimetallic phase. In this
+context, four HHG-based observables are particularly useful for probing topological phases and transitions [37, 39],
+namely: (i) Helicity, the asymmetry between harmonics emitted with right- and left-handed circular polarization when
+driven by a linearly polarized infrared laser or helicity-resolved asymmetry; (ii) Circular dichroism, the normalized
+intensity difference between harmonic orders generated by right- and left-handed circularly polarized driving lasers;
+(iii) Ellipticity dependence, the variation of harmonic yield as a function of the driving laser ellipticity and (iv) the
+relative HHG intensity yield of harmonics emitted from topological edge states and corner states, in comparison to bulk
+states (trivial or non-trivial topological phases). In our theoretical analysis, we employ all four observables, unless
+otherwise stated.
+Lower-order topological insulators
+As a benchmark for validating our models, in particular the emission from topological bulk and edge states, and probing
+topological signatures in high-harmonic spectroscopy, we first analyze the nonlinear all-optical response of lower-order
+topological insulators (LOTIs), specifically the two-dimensional Chern insulator and topological insulator, modeled by
+the Haldane and Kane–Mele Hamiltonians, respectively (see Appendix A for details). The choice of parameters for the
+trivial and non-trivial phases was guided by realistic energy scales motivated by Kagome materials such as Nb3 Cl8 ,
+Nb3 Br8 , and Nb3 TeCl7 [61–63], whose band gap is approximately ∼ 1.0 eV, allowing for a consistent theoretical
+comparison with the Kagome-based models. Figures 2a) and 2e) (2c) and 2g)) present the energy dispersions for
+the trivial and non-trivial topological phases of the Haldane model (Kane–Mele model) for 2D bulk states. The
+corresponding HHG spectra for the trivial and nontrivial topological phases of the Haldane model (Kane–Mele model)
+are shown in Figs. 2b) and 2f) (2d) and 2h)), respectively.
+When the laser pulses: (i) linearly polarized (LP), (ii) right-handed circularly polarized (RCP), and (iii) left-handed
+circularly polarized (LCP) drive the topological Haldane model in its trivial phase, no substantial difference is observed
+in the high harmonics generated from the Chern insulator (see Fig. 2b)). Note, however, that the HHG spectra
+
+6
+produced under LP driving from a non-trivial topological phase exhibit a significantly enhanced compared to the
+trivial phase, typically by two to three orders of magnitude. These harmonics are calculated for the topological trivial
+(non-trivial) bulk states. Below, we extend our model from topological bulk harmonic emissions to topological edge
+and topological corner states. These harmonics fully follow the selection rules corresponding to the C3 symmetry and
+broken inversion symmetry of the Haldane model. This means that we can observe the harmonic selection rules for LP
+driving, i.e., n′ : 1, 2, 3, . . . , where both even and odd harmonic orders (HOs) are allowed. The harmonics produced by
+RCP and LCP lasers also exhibit the three-fold selection rule given by 3n′ ± 1. We further observe that the harmonic
+intensities for the trivial phase are almost the same for these driving conditions. In contrast, in the topological
+phase, an asymmetry emerges in the harmonics across the HHG spectral plateau (see Fig. 2f)), particularly for the
+co-rotating HOs.
+
+f)
+
+5
+
+9
+
+13
+
+K'
+
+K
+
+g)
+
+Corotating HO’s (3n+1)
+
+IHHG
+
+10-5
+10-10
+10-15
+10-20
+10-25
+
+1
+
+1
+
+5
+
+9
+
+13
+
+RCP
+
+K'
+
+K
+
+h)
+10-5
+10-10
+10-15
+10-20
+10-25
+
+LCP
+
+1
+
+5
+
+9
+
+13
+
+K'
+
+K
+
+1
+
+5
+
+9
+
+13
+
+Trivial
+
+LP
+
+IHHG
+
+K
+
+Energy (eV)
+
+K'
+
+Energy (eV)
+
+e)
+
+10-5
+10-10
+10-15
+10-20
+10-25
+
+IHHG
+
+Energy (eV)
+
+IHHG
+
+Energy (eV)
+
+10-5
+10-10
+10-15
+10-20
+10-25
+
+Kane-Mele
+d)
+
+c)
+
+Non-Trivial
+
+Haldane
+b)
+
+a)
+
+FIG. 2. Band dispersions and high-harmonic generation (HHG) for lower-order topological insulators: Chern insulators and
+topological insulators. For the trivial phase (Chern number, C = 0), panels a) and b) show the band structure across the
+K’–Γ–K points of the BZ for the Chern insulator (Haldane model) and the corresponding HHG spectra produced by a linearly
+polarized (LP, green line) laser, right-handed circularly polarized (RCP, red dashed line) laser, and left-handed circularly
+polarized (LCP, blue line) laser. The parameters used for the trivial phase are: lattice constant a0 ∼ 7.0 Å, nearest-neighbor
+hopping t1 = 0.0043 a.u. (∼ 0.117 eV), next-nearest-neighbor hopping t2 = 0.00132 a.u. (∼ 0.0359 eV), onsite potential ratio
+M/t2 = 16.77 and magnetic flux ϕ0 = π/2. Similarly, for the topological phase (C = +1) in the Haldane model, panels e) and
+f) display the topological band structure and the corresponding HHG spectra. The parameters for the Haldane topological
+phase are: t1 = 0.0152 a.u. (∼ 0.41 eV), t2 = 0.0049 a.u. (∼ 0.133 eV), M/t2 = 0.0520 and we keep the same lattice constant
+and magnetic flux of the trivial phase. Additional calculations for the band structures and HHG spectra are shown in panels
+c) (four bands are observed) and d) for the trivial phase, and in panels g) (topologically degenerated four bands are drawn)
+and h) for the non-trivial (topological) phase of the Kane-Mele model, using the same parameters as above for the respective
+phases, with the Rashba coupling set to zero tR = 0.0 (see Appendix A 1 a for details of the model). The laser parameters are
+field strength E0 = 0.0007 a.u., intensity I0 ∼ 1.7 × 1010 W/cm2 , photon energy ℏω = 0.013 a.u. (∼ 0.35 eV or 3.54 µm), and
+a Gaussian laser field envelope with a pulse duration of 7 opt. cycles at full width half maximum (FWHM). Atomic units are
+used throughout this work, unless otherwise stated. All parameters were chosen such that the band structures of the LOTI
+models exhibit a band gap of approximately ∼ 0.8 eV, consistent with the reported bandgap of the Kagome-lattice compound
+Nb3 TeCl7 .
+
+To this point, our calculations presented in this work correspond to the topological bulk states. However, a natural
+question arises: can the inclusion of topological edge (or corner) states in the model provide a more “direct” signature
+of the topology material in the HHG response? To address this question, we extend our models to explicitly include
+topological edge states in the nonlinear optical emission. Since the system remains periodic along one spatial direction,
+we compute the current along that direction, in close analogy with the bulk calculation (see Appendix B 1). Thus,
+
+7
+Haldane
+
+Kane-Mele
+
+b)
+
+a)
+
+100
+
+Edge
+
+10-5
+
+Bulk
+
+10-10
+10-15
+
+10-20
+10-25
+
+1
+c)
+
+5
+
+9
+
+13
+
+1
+d)
+
+5
+
+9
+
+13
+
+1
+
+5
+
+9
+
+13
+
+5
+
+9
+
+13
+
+10-0
+10-5
+10-10
+
+10-15
+10-20
+10-25
+
+1
+
+Harmonic Order
+
+Harmonic Order
+
+FIG. 3. Comparison of the high harmonic generation (HHG) spectra produced from the topological bulk states and the topological
+edge states in LOTIs: Panels a) and c) show the HHG spectra for the 2D Haldane model subjected to a linearly polarized driving
+laser for the trivial and the non-trivial topological phases, respectively. We compare the intensity of the bulk emission (red
+line) with the edge emission (blue line). The emission from topological edge states shows an interesting enhancement between
+one and two orders of magnitude over the topological bulk states. Panels b) and d) exhibit the same analysis as in panels a)
+and c), but now for the 2D topological insulator described by the Kane–Mele model. All simulations (bulk and edge) use the
+same linearly polarized laser and topological material parameters as in Fig. 2. Edge states are computed for an one-dimensional
+zig-zag hexagonal strip (See Appendix A 1 b). Both the Haldane and Kane–Mele models include next-nearest-neighbor terms,
+whereas only the Kane–Mele model incorporates spin (up and down). We note that the high-order harmonic intensities emitted
+from the topological edge states are enhanced in comparison to the topological bulk states for our LOTI models.
+
+our theoretical framework incorporates the topological conducting edge states in the calculations of HHG for both the
+Haldane model and the Kane–Mele model, i.e., our LOTI models. We use zigzag nanoribbon models for a hexagonal
+lattice [64], preserving periodicity along the x-direction while restricting the material along the y-direction. This
+allows us to study the emission from the edge of the material where topological states may exist (see Appendix A 1 b).
+We then compare the intensity of the harmonic emissions from the topological bulk states and the topological edge
+states. The results are shown in Fig. 3 and Fig. 4. For all LOTI models, we find a relatively good enhancement
+(one or two orders of magnitude) in the HHG intensity yield for the topologically non-trivial phases compared to the
+topologically trivial phases. The enhancement is observed for the emission of the topological edge states (see all curvelines depicted in blue lines of Figs. 3) in comparison with the topological bulk states (see all Figs. 3 depicted in red
+lines). This enhancement suggests a promising indication that topological conducting edge states can be distinguished
+in 2D-TIs by means of HHG spectrum analysis or HHS. A similar conclusion was shown by Baykusheva et al. [37]
+in the context of the 3D-TI in Bi2 Se3 where the enhancement was observed in the 2D topological surface states in
+comparison with the 3D-topological bulk states [38].
+Additionally, we compare the HHG emission originating from the trivial bulk states with the emission generated
+from topological edge states (as shown in Fig. 4). In particular, the Haldane model (Fig. 4a) and the Kane–Mele
+
+8
+
+a)
+
+b)
+
+Haldane
+
+100
+
+Kane-Mele
+
+Non-Trivial Edge
+
+10-5
+
+Trivial Bulk
+
+10-10
+10-15
+10-20
+10-25
+
+1
+
+9
+5
+Harmonic Order
+
+13
+
+1
+
+9
+5
+Harmonic Order
+
+13
+
+FIG. 4. Comparison of the high-harmonic generation (HHG) spectra for the Haldane and Kane–Mele models: Panel a) shows
+the HHG spectra for the 2D Haldane model driven by a linearly polarized laser, comparing emission from the trivial bulk
+states (red line) and the non-trivial edge states (green line). Panel b) presents the same analysis for the Kane–Mele model, also
+contrasting the trivial bulk emission and the topological edge emission. The laser and material parameters are the same as in
+Fig. 3. The harmonic intensity yield for both materials (Haldane and Kane–Mele models) exhibits an enhancement of about
+two to four orders of magnitude for topological edge emission compared to the trivial case.
+
+model (Fig. 4b) are analyzed. The results show that the emission intensity associated with ıthe topological edge
+states significantly exceeds the bulk emission in the trivial phase. This behavior can be attributed to the presence
+of topologically protected edge states, which exhibit stronger spatial localization and a more efficient coupling with
+the incident laser field. Consequently, these results suggest that materials in a topological phase favor more intense
+nonlinear emission processes than their trivial counterparts. Our theoretical results suggest that topological signatures
+are encoded in high-harmonic generation for lower-order topological insulators. In particular, this becomes noticeable
+once we consider the full harmonic emission channels from LOTIs: the 2D topological insulating bulk states and the 1D
+topological conducting edge states in both: Haldane model and Kane—Mele model. Figs. 4a) and 4b) further suggest
+that, for systems sharing the same minimum bulk bandgap, differences in the harmonic intensity yields between
+trivial and topological phases may provide indirect signatures of topology, even in systems exhibiting similar gapless
+edge states. Experimentally, this prediction could be tested by comparing the high-harmonic emission from a trivial
+reference target (MoS2 [65]) with that from a 2D topological insulator (Bismuthene, BiC2 Br [66, 67]), selected to
+possess a similar minimum bandgap.
+To connect with previously established observables used to probe the topological properties of quantum materials,
+we now return to bulk-related quantities. In particular, we consider the helicity-resolved asymmetry (h(n) ) and the
+(n,±)
+
+circular dichroism (CD(n) ). First, we define h(n) as the normalized intensity difference (ILP
+
+) between the right-
+
+handed circularly polarized (RCP, +) and left-handed circularly polarized (LCP, −) components of the high harmonics
+generated by a linearly polarized (LP) driving laser (see Table I):
+
+h(n) =
+
+(n,+)
+
+− ILP
+
+(n,+)
+
++ ILP
+
+ILP
+ILP
+
+(n,−)
+
+(n,−)
+
+.
+
+(1)
+
+where n is the harmonic order (HO) with circularly polarized decompositions (±). Here, we define the normalized
+helicity as a continuous quantity, rather than in terms of standard chiralities (i.e. h(n) = (0, ±1)). Note, the subindex
+
+9
+LP means the harmonics are generated by a linearly polarized laser. We compute the helicity-resolved asymmetry and
+present it in Table I. The behavior of h(n) is in good agreement with that reported by Silva et al. [68]. Second, the
+circular dichroism (CD) is defined in a similar way than the helicity: we measure the harmonics produced by RCP
+and LCP lasers separately and compare the difference between corotating HOs with n = 3n′ + 1 as
+
+CD(n) =
+
+(n)
+
+(n)
+
+(n)
+
+(n)
+
+IRCP − ILCP
+
+.
+
+(2)
+
+IRCP + ILCP
+For the 4th , 7th and 10th harmonics generated from Haldane model, the helicity-resolved asymmetry exhibits positive
+values in the trivial phase and negative values in the non-trivial one (see Table I). However, for the 10th corotating
+harmonic the helicity-resolved asymmetry is zero. This sign change in the helicity-resolved asymmetry (for simplicity
+we refer helicity-resolved asymmetry as helicity) observable for the lower-order harmonics is associated with the
+topological properties of the material, the topological Chern number, C [68]. From Figs. 2b) and 2f), we observe that
+the normalized CD is zero or close to zero for the trivial phase (see also Fig. 5a)) across all harmonics, but distinctly
+nonzero for the topological non-trivial phase of the Haldane model. In fact, the CD is −1.0, see Fig. 5c) and Table I,
+which matches the topological index C = −1. This is further supported by Figs. 5a) and 5c), where a nonzero CD
+is observed in the ellipticity dependence for corotating HOs in the topological phase (see Fig. 5c)), in stark contrast
+to the trivial phase. Clear differences are observed between the HOs produced by the topological trivial phase and
+the non-trivial phase for both: the helicity and circular dichroism. Note that the difference is significantly larger for
+the CD than for the h in these two topologically distinct phases. Our results indicate that CD is a more suitable
+observable than harmonic helicity, as it is more directly related to the Berry curvature [69].
+
+TABLE I. Helicity (h(n) ) and circular dichroism (CD(n) , see tex for Eqs.) for corotating harmonic orders (4th , 7th , and 10th )
+in different topological phases of the Haldane Model and also the retrieval from Figs. 5.
+
+4th
+
+7th
+
+10th
+
+0.50
+−1.00
+
+0.38
+−0.42
+
+0.00
+0.00
+
+Circular Dichroism
+Trivial
+−0.10
+Non-trivial
+−1.00
+
+−0.20
+−1.00
+
+0.00
+−1.00
+
+Haldane
+Helicity
+Trivial
+Non-trivial
+
+In addition, we compute the helicity and the circular dichroism (see Fig. 5b) and 5d)) for the 2D TI described by
+the Kane–Mele model and found both to be negligible. These observables do not capture the topological nature
+of TIs, where the QSHE is the underlying mechanism. This is analogous to the detection of the IQHE, where the
+Hall charge current is the relevant observable, in contrast to the QSHE, where the spin current is the important
+quantity [8, 57]. Here, we draw an analogy: instead of helicity and circular dichroism, for TIs we measure a different
+observable based on high-harmonic generation, the harmonic intensity yield as a function of the driving laser ellipticity
+
+10
+
+1.00
+
+Kane-Mele
+
+a)
+
+b)
+H7
+H10
+
+Trivial
+
+0.75
+
+0.50
+0.25
+0.00
+-1.0
+1.00
+
+c)
+
+-0.5
+
+0.0
+
+0.5
+
+1.0 -1.0
+
+-0.5
+
+0.0
+
+0.5
+
+1.0
+
+-0.5
+
+0.0
+Ellipticity
+
+0.5
+
+1.0 -1.0
+
+-0.5
+
+0.0
+Ellipticity
+
+0.5
+
+1.0
+
+d)
+
+0.75
+
+Non-Trivial
+
+Norm. Intensity Yield
+
+Norm. Intensity Yield
+
+Haldane
+
+0.50
+0.25
+0.00
+-1.0
+
+FIG. 5. High harmonic spectroscopy in lower-order topological insulators (LOTIs): the ellipticity dependence. a) (topologically
+trivial) And c) (topologically non-trivial) show the normalized harmonic intensity yield as a function of the driving laser
+ellipticity for both corotating HOs: 7th (blue line) and 10th (red line), in case of 2D topological Chern insulators (CIs). Same
+in b) and d) but now for 2D TIs described by the Kane-Mele model. The laser parameters used in these simulations are the
+same that those employed in Fig. 2. Note, in case of CIs there exists a strong asymmetry in the ellipticity dependence between
+left-handed circularly polarized (LCP) laser and right-handed circularly polarized (RCP) laser, namely, circular dichroism. In
+contrast, for TIs there is a symmetric behaviour of the intensity yield where the maximum intensity emissions are for LCP and
+RCP, but its minimum is about zero ellipticity, i.e. linearly polarized driving laser. Discrete points correspond to the calculated
+values, and the solid curve is obtained by interpolating these points.
+
+(see Fig. 5). The results reveal an anomalous ellipticity dependence (AED) that cannot easily be explained by
+conventional HHG mechanisms in solids, where e–h annihilation typically occurs near the spatial birth location for
+LP driving fields, but is suppressed for circular polarization due to the lateral displacement of the e–h trajectory
+along a spiral path [70]. This behavior suggests that ellipticity dependence is an observable for probing topological
+responses and phase transitions in TIs. Moreover, our results for 2D TIs are in agreement with the experimental
+observations reported by Baykusheva et al. [37]. However, Ref. [53] reported that this AED can also be found in
+topologically trivial materials, i.e., “emission originating from 2D trivial bulk states”. Notably, the contribution
+from topological edge states was not considered in that theoretical study. Therefore, the role of edge states remains
+an open question, by including edge and corner states in our theoretical model, we aim to clarify their role in the
+HHG response. Here, we introduce a complementary observable, namely, the relative intensity of the total harmonic
+emission from topological bulk and edge states compared to the trivial case. As we have introduced and studied above
+in Figs. 3 and 4, in general, the HHG produced from the edge states has an intensity at least two orders of magnitude
+
+11
+larger in comparison to the bulk emission for both models of our LOTI materials (all models have the same energy
+bulk bandgaps). These results suggest that one should consider all possible channels for HHG emission from trivial
+and non-trivial topological materials, the radiation emitted from the topological bulk and edge states.
+We now turn to the question of whether higher-order topological information can also be probed by ultrafast highharmonic spectroscopy. To this end, we consider a breathing Kagome lattice structure and examine its HHG response
+in the next section.
+higher-order topological insulators
+In this section, we study the high-harmonic spectroscopy of higher-order topological insulators, focusing specifically
+on Kagome materials with a minimum of three-band structure (Nb3 TeCl7 , Nb3 Br8 , Nb3 Cl8 , etc.). The Kagome lattice
+is a two-dimensional periodic arrangement of triangles sharing corners of atoms or sites A, B and C, where each pair
+of adjacent triangles is inverted with respect to the other, forming a pattern of hexagons interlaced with triangles, as
+illustrated in Fig. 1. Its Bravais lattice is hexagonal with a three-site basis, leading to a band structure that typically
+exhibits flat bands, Dirac cones, and van Hove singularities [18, 71]. These geometric features make the Kagome
+lattice an ideal platform to explore the interplay between geometry, electronic correlations, and topology [8, 20]. In
+the presence of spin–orbit coupling, lattice distortions, or staggered hopping (such as in the breathing Kagome variant),
+the system can realize nontrivial topological phases, including Chern insulators [24], QSHE [8, 18, 19], and higherorder topological insulators [20, 21]. We focus on the Kagome model that possesses distinct topological or geometrical
+features as topological bulk states, topological edge states and topological corner states for trivial, non-trivial and
+semimetallic phases [19, 20]. Based on these features, we compute the full HHG spectra driven by different laser
+configurations. For the HOTI and trivial phases, the parameters were obtained from a Wannier-based tight-binding
+fit to the DFT band structure of Nb3 TeCl7 (NTC), employed here as the reference system for the LOTI phases.
+The first-principles calculations were performed using VASP [72, 73], and the low-energy bands were projected onto
+maximally localized Wannier functions using Wannier90 [74, 75]. For the semimetal phase, we employed parameters
+within the same energy range but corresponding to a semimetallic regime. In the HOTI phase, the bulk and edge may
+remain insulating, while topological states (see Fig. 1 Kagome lattice) are localized at the lattice corners, reflecting the
+bulk–boundary correspondence generalized to HOTI. Further details of the Kagome lattice structure and Hamiltonian
+model are provided in Appendix A 3. This combination of symmetry, geometry, and tunable topological phases makes
+the Kagome lattice a paradigmatic model for studying topological band theory. Moreover, we employ the SSH model
+as a paradigm, as described in Refs. [20, 21]. Both models share multiple similarities, since the SSH model can be
+viewed as a one-dimensional simplification of one of the edges of the triangular Kagome structure shown in Fig. A.2.
+In this context, the edge states of the SSH model are analogous to the corner states of the Kagome HOTI, as both
+originate from the same topological mechanism associated with the alternation of hopping amplitudes.
+Here we investigate how the HHG can or not encode this topological information (topological corner states) by means
+of calculating the helicity, circular dichroism, ellipticity dependence and relative intensity emissions while a MIR laser
+drives the Kagome lattice. Our calculations are shown in Fig. 6. The trivial and non-trivial topological bands are
+
+10-10
+10-15
+10-20
+10-25
+
+f)
+IHHG
+
+'
+
+10-5
+10-10
+10-15
+10-20
+10-25
+
+10-5
+10-10
+10-15
+10-20
+10-25
+
+LCP
+
+1
+
+5
+
+9
+
+13
+
+1
+
+5
+
+9
+
+13
+
+1
+
+5
+
+9
+
+13
+
+HOTI
+
+IHHG
+
+'
+
+Energy (eV)
+
+e)
+
+d)
+
+RCP
+
+SM- TM
+
+IHHG
+
+'
+
+Energy (eV)
+
+c)
+
+LP
+
+10-5
+
+Trivial
+
+b)
+
+Non-Trivial
+
+a)
+Energy (eV)
+
+12
+
+FIG. 6. High-harmonic generation from higher-order topological insulators, topological bulk state emissions: Panels a) and b)
+show the band structure of our Kagome lattice model and the corresponding HHG spectra for the trivial phase under linearly
+polarized (LP, green dashed line), right-handed circularly polarized (RCP, red dashed line), and left-handed circularly polarized
+(LCP, blue solid line) driving lasers. Panels c) and d) present the same analysis for the HOTI phase (non-trivial). Panels e)
+and f) depict the energy band dispersions and HHG spectra for the semimetal topological material (SM-TM). For the Kagome
+material, the lattice constant is a0 ∼ 7.0 Å. In the topologically trivial phase, the hopping parameters are ta = 0.0123 a.u. (∼
+0.33 eV) and tb = 0.00173 a.u. (∼ 0.047 eV) with ratio ta /tb ∼ 7.02. In the HOTI topologically non-trivial phase, the parameters
+are reversed, such that tb → ta and ta → tb where the ratio is ta /tb ∼ 0.142 (see Appendix A 3 a)). The hopping parameters also
+for the SM-TM topologically non-trivial phase are equal, with ta = tb = 0.0123 a.u. (∼ 0.33 eV). The vertical black dashed lines
+connect the HOs: 3rd , 5th and 7th for the three different topological phases b), d) and f), respectively. Horizontal lines clear
+indicate that the HO 7th for the SM-TM has about three orders of magnitude larger that trivial and HOTI topological corner
+states, respectively. Similarly to the LOTI case, the model parameters were fitted to preserve a band gap of approximately
+0.8 eV.
+
+exactly the same as depicted in Figs. 6a) and 6c), though the P3 topological index is not null for the HOTI phase, it is
+null for trivial. These topological corner states are included in the model used here to compute the full high-harmonic
+emission: the calculated HHG spectra from topological bulk states, the topological edge states, and the topological
+corner states. We start then by showing the HHG spectra for trivial, HOTI and topological semimetal from the bulk
+states. The high harmonic spectra corresponding to trivial and HOTI phases are presented in Figs. 6b) and 6d),
+respectively. The HHG spectra do not exhibit any clear difference between the harmonics produced by LP, LCP and
+RCP driving lasers for the parameters considered here in Fig. 6. We also perform calculations of high-order harmonics
+by manipulating the location of the topological flat band at the bottom as a valence band and at the top as conduction
+one. Once again, the similar harmonic spectra were found for both trivial and non-trivial topological bulk Kagome
+
+13
+Bulk
+
+d)
+
+100
+10-5
+10-10
+10-15
+10-20
+10-25 1
+
+b)
+
+c)
+Non-Trivial
+
+5
+
+9
+
+13
+
+1
+
+e)
+
+5
+
+9
+
+13
+
+1
+
+f)
+
+5
+
+9
+
+𝜀𝑔0 ~0.86
+
+Trivial
+
+13
+
+𝜀𝑔0 ~0.25
+
+100
+10-5
+10-10
+10-15
+10-20
+10-25 1
+
+Corner
+
+Edge
+
+a)
+
+5
+9
+Harmonic Order
+
+13
+
+1
+
+5
+9
+Harmonic Order
+
+13
+
+1
+
+5
+9
+Harmonic Order
+
+13
+
+FIG. 7. Kagome HOTIs: high harmonic emission from bulk, edge, and corner topological states. Panels a), b) and c) show the
+harmonic emission from the topological bulk states, edge states, and corner states, respectively. The energy gap is characterized
+(0)
+by a bulk bandgap of εg ∼ 0.86 eV. The red (blue) dashed line denotes the trivial (non-trivial) phase. The energy bands are
+shown in Fig. 6a) and 6c). For this case, the HOTI phase uses the hopping parameters ta = 0.00173 a.u. (∼ 0.047 eV) and
+tb = 0.0123 a.u. (∼ 0.33 eV), while in the trivial phase these values are interchanged (tb → ta , ta → tb ). c) The corresponding
+HHG spectra from SSH model were performed using δ = ±0.49 a.u. for the topologically trivial and non-trivial phases. Panels
+(0)
+d) and e) display analogous HHG spectra for a system with a smaller bulk bandgap of εg ∼ 0.25 eV. The bands are shown in
+Fig. A.4. Here, the HOTI phase employs ta = 0.0037 a.u. (∼ 0.10 eV) and tb = 0.0067 a.u. (∼ 0.183 eV), with the trivial phase
+again obtained by inverting these values. f) The SSH model parameters for this case are δ = ±0.15 a.u. As before, harmonic
+spectra are shown for bulk, edge, and corner states. In particular, the smaller-gap configuration highlights a more pronounced
+contrast between the trivial and topological phases at the corner level. In the edge geometry, translational symmetry is broken
+along the y-axis, while the corner geometry corresponds to a finite system described within the SSH model framework. All
+simulations use the same laser parameters as those in Fig. 2.
+
+lattice.
+Since the topological bulk emission does not show a clear signature of topology in this Kagome lattice throughout the
+HHG process, we naturally turn to the contributions from boundary states. We therefore examine how the emissions
+from the topological edge states and topological corner states affect the harmonic response when included in the
+calculation for HOTIs. To this end, we follow the same procedure as described in the above section for lower-order
+topological insulators. The results are shown in Fig. 7 for the HHG emitted from the topological bulk states, edge
+states and corner states corresponding to Figs. 7a), 7b) and 7c), respectively. We observe that for the emitted topological bulk states and edge states there are not a significant difference between the trivial and non-trivial topological
+phases. Nevertheless, the emitted harmonics by the topological corner states show differences in the even harmonics. But, these topological corner states do not represent a conventional HHG spectrum, since the cut-off is very
+low (cut-off ≤ HO5rd ). Hence, we cannot conclude whether the emission from a system with δ = −0.49 a.u. carries
+corner-related topological information within the studied region.
+In order to prove that the existence of topological corner states can be encoded in the HHG spectrum, we carried out
+additional theoretical studies by adjusting the δ parameter of the SSH model, using a small band gap, in order to
+
+14
+
+a)
+100
+
+b)
+Non-Trivial Corner
+
+10-5
+
+Trivial Bulk
+
+10-10
+10-15
+
+10-20
+10-25
+
+1
+
+5
+9
+Harmonic Order
+
+13
+
+1
+
+5
+9
+Harmonic Order
+
+13
+
+FIG. 8. High-harmonic generation spectra for the trivial and topologically non-trivial HOTI phases in Kagome lattices. Panels a)
+and b) correspond to the two parameter sets used in Fig. 6. In each panel, the emission from the trivial bulk states (red line) is
+compared with the emission from the non-trivial corner states (green line). The topological HHG emission from corner states
+exhibits a different behavior compared to the trivial bulk emission and depends on the topological corner parameters. Since the
+cutoff of the trivial phase is better reproduced in b), we believe that these results suggest that HHS suitably captures topology
+through relative intensity enhancement (see Ref. [34, 35]).
+
+obtain a system that exhibits a larger cut-off, i.e., comparable to the cut-offs of the topological bulk and topological
+edge states. These calculations are shown in Figs. 7d), 7e), and 7f). Indeed, the HHG emission pattern observed in
+Figs. 7a) and 7b) is also repeated in the new topological system shown in Figs. 7d) and 7e). But, and interestingly,
+in the emitted harmonics from topological corner states under the new or current material parameters, we find an
+enhancement of one to two orders of magnitude (see Fig. 7f)) in comparison with the topological bulk or edge states.
+This enhancement distinguishes the HHG response of the topological Kagome lattice from that obtained using the
+previous material parameters (see Figs. 7a) and 7b)). Crucially, this enhancement can be regarded as a characteristic
+signature of topological corner states, so that comparing their yield with that of a trivial material provides a direct
+diagnostic of the underlying topological phase.
+Similarly to the LOTI case, we compare the HHG spectra generated from the bulk of the material with those obtained
+when topological corner states are taken into account. The comparison is performed for two sets of parameters shown
+in Fig. 8. For the first parameter set (Fig. 8(a)), the bulk emission is found to be stronger than that originating from
+the topological corner states of the finite system. In contrast, for the second parameter set, the topological corner
+states exhibit a significantly higher emission intensity than the bulk states. Here, we show that additional system
+parameters, such as details of the band structure, play a crucial role in determining the relative intensity, specially for
+corner states. The HHG spectra results shown here may still be reflected in the observed emission trends, which are
+intrinsic to systems hosting edge states (LOTIs) and corner states (HOTIs). In this sense, comparing the harmonic
+emission from bulk states and corner states can provide a qualitative indication of the underlying topology in Kagome
+lattice systems or, more generally, HOTI structures (Fig. 8). However, in regimes where the topological states are
+suppressed or not well defined, the emission from corner states can no longer be meaningfully distinguished from other
+contributions, such as bulk or edge states. Moreover, we investigate how the HHG spectra from the topological corner
+states evolve as a function of the parameter δ in the SSH model, and we present these results in the Appendix B 4.
+There, our results show the behavior of the emissions varies as a function of δ, which controls the band gap of the
+
+15
+material, and how the increase in the harmonic intensity depends on this parameter, causing the topological signatures
+we observe to shift across the frequency range.
+Further calculations of helicity and circular dichroism were performed and those quantities do not exhibit any different
+between trivial and HOTI phases. In contrast, the semimetal topological material (SM-TM) shows minor differences
+between the harmonics generated by LCP and RCP laser pulses. Note, however, a relative enhancement about one or
+two orders of magnitude is observed for harmonics produced by LP lasers in comparison with the observed in trivial
+and HOTI phases. This observation suggests that the HHG spectrum exhibits an indirect sensitivity to the topological
+properties of the Kagome lattice semimetal.
+To further investigate whether the topological information of corner states can be inferred from the bulk states via the
+ellipticity dependence, we compute the harmonic order yield as a function of the driving-laser ellipticity, as described
+in the LOTI section. The results are shown in Fig. 9. Once again, we do not observe any unusual behavior between the
+topologically trivial and non-trivial phases for the Kagome models (see Figs. 9a), 9b), and 9c)), as was also observed
+for the TI in the previous section. In case of SM-TM, the harmonics likewise do not exhibit any atypical behavior.
+Naturally, one may wonder whether this high-harmonic spectroscopy analysis demonstrates that the HHG mechanism
+can capture key topological information. Based on the theoretical results presented here, we conclude that highharmonic spectroscopy is a reliable observable for enco

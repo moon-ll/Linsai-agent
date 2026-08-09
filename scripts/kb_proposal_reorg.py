@@ -128,7 +128,9 @@ def _extract_title(text: str) -> str:
 def _extract_label(proposal_id: str, brief_text: str) -> str:
     """从 proposal-brief 中提取可读标签，回退到 ID。"""
     title = _extract_title(brief_text)
-    if title:
+    # v6.8.14: 跳过通用标题（brief 模板的默认 H1）
+    _GENERIC_TITLES = {"课题说明", "课题简介", "提案说明", "无标题"}
+    if title and title not in _GENERIC_TITLES:
         return title[:40]
     # 从 ID 推断
     parts = proposal_id.split("-")
@@ -727,11 +729,14 @@ class KBProposalReorg:
         lines.append("")
 
         # 保留原有 body 中非自动生成的部分
-        # 提取 "## 课题相关概念" 及之后的内容
+        # 提取手工维护的 ## 章节（精确匹配标题行，避免引言行误触发）
+        _MANUAL_SECTIONS = ("## 课题相关概念", "## 相关方法", "## 相关团队", "## 课题论文", "## 外部链接",
+                            "## 🔬 课题相关概念", "## 🛠️ 相关方法", "## 👤 相关团队", "## 📄 课题论文", "## 🔗 外部链接")
         preserved_sections = []
         capture = False
         for line in body.split("\n"):
-            if "课题相关概念" in line or "相关方法" in line or "相关团队" in line or "课题论文" in line or "外部链接" in line:
+            stripped = line.strip()
+            if any(stripped.startswith(ms) for ms in _MANUAL_SECTIONS):
                 capture = True
             if capture:
                 preserved_sections.append(line)
@@ -739,8 +744,18 @@ class KBProposalReorg:
         if preserved_sections:
             lines.extend(preserved_sections)
         else:
-            # 回退：保留所有原始内容
-            lines.append(body)
+            # 回退：保留 body 中非自动生成的手工内容
+            # v6.8.14 修复：过滤掉重复的自动生成头部块（# NSFC / > 本页是 / ## 申请书与优化报告）
+            _AUTO_MARKERS = ("# NSFC 强场超快课题知识地图", "> 本页是 NSFC", "## 申请书与优化报告")
+            for line in body.split("\n"):
+                if any(line.strip().startswith(m) for m in _AUTO_MARKERS):
+                    continue
+                preserved_sections.append(line)
+            # 去除尾部空行
+            while preserved_sections and not preserved_sections[-1].strip():
+                preserved_sections.pop()
+            if preserved_sections:
+                lines.extend(preserved_sections)
 
         content = "\n".join(lines)
 

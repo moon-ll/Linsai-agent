@@ -1,0 +1,398 @@
+Achieving low contact resistance through
+copper-intercalated bilayer MoS2
+Huan Wang1,2, Xiaojie Liu1*, Hui Wang1*, Yin Wang and Haitao Yin1*
+1. Key Laboratory for Photonic and Electronic Bandgap Materials of Ministry of Education,
+School of Physics and Electronic Engineerin, Harbin Normal University, Harbin, 150025, China
+2. College of Science, Qiqihar University, Qiqihar, 161006, China
+3. Department of Physics and International Centre for Quantum and Molecular Structures,
+Shanghai University, Shanghai, 200444, China
+ABSTRACT
+The high contact resistance between MoS2 and metals hinders its potential as an ideal solution for
+overcoming the short channel effect in silicon-based FETs at sub-3nm scales. We theoretically
+designed a MoS2-based transistor, featuring bilayer MoS2 connected to Cu-intercalated bilayer
+MoS2 electrodes. At 0.6 V, contact resistance is 16.7 Ω·μm (zigzag) and 30.0 Ω·μm (armchair),
+nearing or even surpassing the 30 Ω·μm quantum limit for single-layer materials. This low
+resistance is attributed to the elimination of the tunneling barrier and the creation of ohmic
+contacts. Additionally, the small contact potential difference enables lower operating voltages. Our
+intercalation design offers a novel approach to achieving low contact resistance in 2D electronic
+devices.
+KEYWORDS: MoS2; contact resistance;ohmic contact; intercalation
+I. INTRODUCTION
+In the process of semiconductor applications, it is inevitable to involve the contact between
+metal electrodes and semiconductors. Through electrical contact, charge carriers are injected from
+the metal into the semiconductor material. This contact significantly influences the performance
+properties of the device. Achieving good electrical contact is a prerequisite for two-dimensional
+(2D) materials to unlock their full potential.1 The quality of the electrical contact can be evaluated
+by measuring the contact resistance (RC). Contact resistance arises because carrier injection into
+2D semiconductor materials through electrical contact is restricted. The Schottky barrier and
+tunneling barrier, which influence carrier injection, are crucial for achieving low contact
+*
+Corresponding author: wlyht@126.com (Haitao Yin), redlxj@126.com (Xiaojie Liu),wh@fysik.cn (Hui Wang)
+resistance.
+In the ideal metal-semiconductor junction, according to the Schottky-Mott law,2 the height of
+the Schottky barrier can be regulated by selecting an appropriate work function of the metal.3–5
+Due to factors such as Fermi pinning6 and chemical bonding between metals and semiconductors,
+the height of the Schottky barrier no longer follows the Schottky-Mott law.7 The absence of
+suspensions in 2D materials avoids chemical disorder and defect/metal-induced gap states, greatly
+suppresses interfacial dipoles, and overcomes Fermi pinning effects.8–15 However, the weak hybrid
+coupling of the wave function between metal and 2D semiconductor interface makes it difficult to
+form a strong interfacial chemical bond with metal. The additional tunnel barrier introduced by the
+Van der Waals gap reduces charge injection and increases contact resistance. In addition to the top
+contact, the 2D metal and semiconductor contact modes also include edge contact. The edge
+contact creates a stronger hybrid at the metal interface than the top contact, eliminating the
+additional tunnel barrier. But it is challenging to fabricate pure edge contacts with standard
+lithography techniques in 2D materials.
+As a suitable channel material, MoS2 is naturally abundant and can be synthesized on various
+insulating substrates using chemical vapor deposition (CVD) technology.16–18 In terms of electrical
+performance, MoS2 has a suitable band gap, high switching ratio and carrier mobility. Recent
+advancements incorporating novel materials and contact engineering techniques have enabled the
+reduction of RC below 1 kΩ·μm.19–22 The 2H-MoS2 semiconductor is transformed into 1T-MoS2
+by phase engineering technology. The RC of the 1T-MoS2/2H-MoS2 junction is 200 Ω·μm.23
+Furthermore, it has been demonstrated that semimetals such as Bi and Sb, capable of effectively
+suppressing metal-induced gap states (MIGS) owing to their low density of states (DOS) at the
+Fermi level, facilitate the formation of high-quality n-type ohmic contacts with various transition
+metal dichalcogenides (TMDs). Notably, the RC values achieved are as low as 123 Ω·μm for the
+Bi/MoS2 interface and 42 Ω·μm for the Sb/MoS2 interface.8,24 Utilizing semimetal as the electrode,
+while effectively decreasing the contact resistance, unfortunately introduces a drawback: a higher
+operating voltage is necessary to achieve a larger on-state current.
+The intercalation method has surfaced as a promising approach to tackle the challenge of
+elevated contact resistance between TMDs and conventional metals. In the case of Van der Waals
+materials, such as MoS2, there exists considerable interlayer spacing, and harnessing this space
+can effectively modulate the material's characteristics. A common approach to achieve this is
+through intercalation technology, which entails inserting atoms into the interlayer spaces of the
+host material. The charge transfer facilitated by the inserted atoms or the heightened spin-orbit
+coupling resulting from the incorporation of heavy atoms can significantly boost
+superconductivity,25,26 thermoelectricity,27 spin polarization,28,29 and optoelectronic properties.30
+For instance, the intercalation of Li and Fe atoms into bilayer 2H-TaS2 leads to the induction of
+superconductivity and ferromagnetism,25,29 respectively.
+Furthermore, the intercalation of Co/Cu atoms into bilayer SnS2 (Co/Cu-SnS2) can locally
+convert this n-type semiconductor into a p-type semiconductor or even a metal.31 Additionally, the
+Co-SnS2/SnS2 junction attains a notably low contact resistance.32 For MoS2 materials, which
+garner significant research attention, it is imperative to identify metal-like electrode materials
+through the application of intercalation techniques. By constructing seamless metal/MoS2
+junctions, Fermi level pinning can be eliminated, paving the way for achieving ultra-low contact
+resistance, a critical factor in enhancing the performance of MoS2-based field-effect transistors.
+In this work, we unveil our prediction of a metallic Cu-intercalated bilayer MoS2 (Cu-MoS2)
+structure and introduce a novel design for a field-effect transistor (FET) that employs this structure
+as the electrode, with bilayer MoS2 (BL-MoS2) acting as the channel. We have attained contact
+resistances along both the armchair (AC) and zigzag (ZZ) directions that are either near or below
+the quantum limit value of 30 Ω·μm for single-layer materials. The gate voltage (Vgs) modulation
+effect is profound, with the On/Off state currents satisfying the high-performance (HP) standard of
+900 μA/μm and 0.1 μA/μm, as stipulated in the International Technology Roadmap for
+Semiconductors (ITRS) for the year 2028.
+II. MODEL AND METHODS
+Figure 1(a) and 1(c) illustrate the crystal structures of BL-MoS2 and Cu-MoS2, respectively.
+The unit cell lattice is represented by a tetragonal prism with parameters a=b=3.16 Å and c=23 Å,
+including a vacuum layer of 13 Å thickness. BL-MoS2 is stacked in A and A' modes with a layer
+interval of 7.05 Å. The Cu atoms are positioned directly below the topmost S atom and above the
+bottommost Mo atom, maintaining respective distances of 2.20 Å from the upper MoS2 layer and
+1.61 Å from the lower MoS2 layer, respectively. These distances were optimized using VASP
+software33 at the generalized gradient approximation (GGA) level after considering the Van der
+Waals correction with DFT-D3 method of Grimme with zero-damping function.34 The Brillouin
+zone was sampled with a k-point of 4 × 1 × 4. The plane wave cut-off energy was set to 400 eV,
+and the convergence accuracy of force and energy were 0.02 eV/Å and 1×10-8 eV/atom,
+respectively. Figures 1(b) and 1(d) show the band structures of BL-MoS2 and Cu-MoS2,
+respectively, as calculated by DFT. As shown in Figure 1(b), BL-MoS2 is a direct bandgap
+semiconductor, which is consistent with previous experimental results.35 For Cu-MoS2, the band
+structure changes significantly due to the coupling between the Cu atom and MoS2. As shown in
+Figure 1(d), the Fermi level intersects the energy bands, resulting in partial occupancy of the
+energy levels in the conduction band by electrons, while other levels remain unoccupied,
+indicating conducting behavior.
+Figure 1. Geometric and band structures of bilayer MoS2: Geometric structures of (a) bilayer
+MoS2 stacked in A and A' configuration and (b) bilayer MoS2 with Cu intercalation. Band
+structures of (c) bilayer MoS2 unit cell and (d) bilayer MoS2 unit cell with Cu intercalation.
+The MoS2-based FETs we constructed are shown in Figure 2(a) and 2(b). In these structures,
+the metallic Cu-MoS2 serves as the electrode, with MoS2 as the central region. The lengths of
+MoS2 along the AC direction and the ZZ direction are 21 Å and 22 Å, respectively. The central
+region is covered with a 5 Å-thick HfO2 dielectric layer. The atoms at the interface were locally
+optimized using the VASP software. The source and drain electrodes extend to the positive and
+negative infinity of the z axis, respectively, where a bias voltage is applied and current is collected.
+Both the bottom and top gates are positioned near the central scattering region. The transport
+properties of the device were calculated by the density functional theory (DFT) and the
+nonequilibrium Green’s function (NEGF) method, which is implemented in NANODCAL
+software.36 In the calculation, GGA was used to deal with the exchange correlation potential,37
+double zeta polarized atomic orbital group was used to expand wave function, and standard
+nonlocal mode conservation pseudopotential was used to replace the interaction between the
+nucleus and inner electron and valence electron.38 In the process of self-consistent calculation and
+post-analysis, k-point sampling was 15×1×1.
+Under the linear response approximation, the current flowing through the
+Cu-MoS2/BL-MoS2/Cu-MoS2 device can be calculated using the Landauer-Büttiker formula,39
+       
+R
+L
+L L R R
+2 , , , dds ds
+eI V T E V f E f E Eh
+
+
+     (1)
+where L R( )f f represents the Fermi-Dirac distribution function and L R （ ） denotes the
+electrochemical potential of the left (right) electrode. The relationship between L R （ ） and the
+bias voltage applied between the source and drain electrodes, Vds, satisfies L R| - | = dseV  . The
+transmission coefficient  , dsT E V is defined as
+Tr[ ]r a
+L RT G G   (2)
+where the line-width function /L R describes the coupling between the electrode and the central
+scattering region. rG ( aG ) is the retarded (advanced) Green's function.
+Figure 2 Schematic structures of the Cu-MoS2/BL-MoS2/Cu-MoS2 devices along the AC direction
+(a) and the ZZ direction (b). S (D) denotes the source (srain) electrodes.
+III. RESULTS AND DISCUSSION
+The obtained I-V curves of the Cu-MoS2/BL-MoS2/Cu-MoS2 devices under different
+source-drain voltages Vds in both the AC and ZZ directions are shown in Figure 3(a). The currents
+increase nonlinearly with the increase of Vds. According to the I-V curves, the contact resistance
+(RC) can be calculated by the formula R=V/2I. Since the channel length of the device is shorter
+than the mean free path of the electrons, the electrons will not experience scattering during the
+transport process, so the resistance of the system is primarily due to the contact interface between
+metal and semiconductor. Figure 3(b) illustrates the RC observed at various Vds for both the AC
+and ZZ directions. As the Vds increases, the RC decreases accordingly. Specifically, at Vds = 0.6 V,
+the RC drops to 16.7 Ω·μm in the ZZ direction and 30 Ω·μm in the AC direction. This is
+significantly lower than the contact resistance of monolayer MoS2 by in situ Fe doping device
+obtained by chemical vapor deposition technology, and it is reported to be 678 Ω·μm,7 and the
+contact resistance of the In/Sn alloy in contact with the upper surface of monolayer MoS2 is 190
+Ω⋅μm.
+21
+The contact resistance we obtained is also smaller than the one obtained when using
+semimetal as the electrode.8,24 These comparisons show that the proposed device designed using
+the intercalation method has low contact resistance even at small bias voltages. Moreover, the
+contact resistance in the ZZ (AC) direction is below (close to) the theoretical limit of 30 Ω⋅µm for
+single-layer materials.
+Figure 3 (a) I-V curves, and (b) contact resistance (RC) versus bias voltage. Inset: I-V curves on log
+y scale.
+In order to investigate the reason for low contact resistance, the projected density of states
+(PDOS) at equilibrium were calculated. The left panels of Figure 4(a) and 4(b) show the PDOS on
+the central scattering region (including the metallic Cu-MoS2 buffer layer and the
+semiconductoring BL-MoS2) at equilibrium to display the band alignment of the
+Cu-MoS2/BL-MoS2 junction for the AC and ZZ directions, respectively. The dark blue regions,
+approximately 24 to 44 Å (22 to 45 Å) for the AC (ZZ) direction, are low state density regions,
+indicate the band gap. In the AC direction, the calculated contact potential difference between the
+Fermi level and the conduction band bottom is 0.14 eV, signifying the creation of a 0.14 eV
+Schottky barrier, denoted as Φ, as illustrated in Figure 4(a). Similarly, the barrier height for the ZZ
+direction is 0.12 eV (see Figure 4(b)). The obtained barrier height of Cu-MoS2/BL-MoS2 junction
+is lower than that of the MoS2/Al Van der Waals heterostructure, which has a barrier height of 0.3
+eV.21 It is also lower than the barrier of the MoS2 heterojunction obtained through phase
+engineering, with a height of 0.7 to 0.8 eV.23 The low barrier facilitates the injection of low energy
+electrons, which is responsible for the current generated by the small bias. Concurrently, the
+barrier at the interface does not rise, suggesting that an ohmic contact has been formed between
+the metal and the semiconductor for both directions. In addition, the local space density of states
+(LDOS) of the device at equilibrium was calculated at E = 0 eV, as illustrated in Figure 4(c) and
+4(d). At the interface of the metal and the semiconductor (indicated by the dashed red rectangle),
+electronic states exist at the Fermi level indicates that the metallization of BL-MoS2 and the
+elimination of the barrier at the contact interface result in the formation of ohmic contact.
+Figure 4. PDOS, transmission, LDOS, and effective potential of the Cu-MoS2/BL-MoS2/Cu-MoS2
+devices: PDOS and transmission at equilibrium for (a) the AC direction and (b) the ZZ direction.
+The values of PDOS are plotted on a logarithmic scale. The white dashed line below indicates the
+Fermi level, and the white solid line above marks the bottom of the BL-MoS2 conduction band in
+the central region. The black arrow represents the barrier height. LDOS at E = 0 eV along (c) the
+AC direction and (d) the ZZ direction, as well as the LDOS at E = 1 eV along (e) the AC direction
+and (f) the ZZ direction. Effective potential in (g) AC direction and (h) ZZ direction. ΦTB
+represents effective tunnel barrier height, ΦCu−MoS2 denotes the minimum Veff that an electron can
+have in the metal.
+The transmission spectra of the equilibrium state are directly affected by the height of the
+barrier and are shown in the right panels of Figure 4(a) and 4(b). Due to limited electron tunneling,
+there are no obvious transmission peak in the energy range of -1.36 to 0.12 eV for the ZZ direction
+and −1.34 to 0.14 eV for the AC direction. At other energies, conduction bands and valence bands
+of BL-MoS2 can provide channels for electron transport, and corresponding peaks appear in the
+transmission spectra. When comparing the two directions, it is found that the transmission
+coefficient in the ZZ direction is higher than that in the AC direction. To clarify the source of this
+anisotropy, we calculated the LDOS at an energy level of E = 1 eV, which clearly demonstrates
+that there are more transport channels along the ZZ direction than the AC direction, as shown in
+Figure 4(e) and 4(f), resulting in a larger transmission coefficient for the former.
+The tunnel barrier affects the efficiency of carrier injection, which can be evaluated by the
+effective potential (Veff), as shown in Figure 4(g) and 4(h). The tunnel barrier height (ΦTB) is the
+lowest barrier to be overcome by the electrons when they move at Fermi level from the metal to
+BL-MoS2.40 Therefore, ΦTB can be determined as the difference in Veff between the gap (Φgap) and
+BL-MoS2 (ΦBL−MoS2). Notably, the tunneling barrier vanishes in both directions because
+ΦBL−MoS2 exceeds Φgap. High carrier injection efficiency is expected for the Cu-MoS2/BL-MoS2
+contact, which indicates the achievement of low contact resistance. Therefore, low Schottky
+barrier, the absence of a tunneling barrier and ohmic contact are the reasons for obtaining low
+contact resistance. Moreover, the obtained contact resistance is below (close to) the theoretical
+limit of 30 Ω⋅µm for single-layer materials. The reason lies in our adoption of bilayer MoS2 as the
+channel material. With a thickness twice that of a single layer, it provides more transport channels.
+Figure 5. Transmission coefficients versus energy E at different source-drain voltages in (a) AC
+and (b) ZZ. The dashed red lines represent bias windows.
+The characteristics of the I-V curves can be more directly explained by the transmission
+coefficient under different Vds, as shown in Figure 5(a) and 2(b). Applying bias voltages causes the
+source and drain electrode chemical potential (μL and μR) to move in opposite energy directions,
+where the energy range between μL and μR is referred to as the bias window. According to the
+Landauer-Büttiker formalism, the magnitude of the current is proportional to the integral value of
+the transmission coefficient in the bias window. When the Vds is small (< 0.3 V), there is no
+obvious transmission peak in the bias window, and the current is at a minimum. With the increase
+of Vds, the transmission coefficient moves to the low energy region. When the Vds is greater than
+0.3 V for the ZZ direction and 0.4 V for the AC direction, the transmission peak corresponding to
+the high energy contributed by the bottom of the conduction band enters the bias window, which
+results in a significant increase in current. When the Vds is the same, the transmission peak in the
+ZZ direction is always greater than the AC direction. As a result, the ZZ direction’ s current is
+always larger than the AC direction’s current.
+To clarify the gate regulation of electrical properties in the 2D semiconductor devices, a
+vertical electric field was exerted on the BL-MoS2 featuring a HfO2 dielectric layer, as shown
+in Figure 2. The transfer characteristics curves of Cu-MoS2/BL-MoS2/Cu-MoS2 devices with a
+fixed Vds of 0.3 V are shown in Figure 6. The current increases with increased positive gate
+voltages (Vgs) and decreases with increased negative gate voltage, exhibiting typical n-type
+conducting behavior. For ZZ direction, the Ion can satisfy the ITRS HP standard requirement (900
+μA/μm),41 reaching 1176 μA/μm before any gate voltage is applied. Under the modulation of
+-4.5V gate voltage, the device can quickly reach the current of 0.1 μA/μm, that is the OFF state
+current of ITRS HP standard, specified by the ITRS for the high-performance device applications
+projected for the year 2028.
+Figure 6. Transfer characteristics of Cu-MoS2/BL-MoS2/Cu-MoS2 devices along the AC
+and ZZ directions with Vds = 0.3 V.
+In order to reveal the origins of the gate regulation performance, we plot the PDOS and the
+transmission coefficients of the AC and ZZ directions under Vgs = -1.5 V, 0 V, and 1.5 V. As shown
+in the left panels of Figure 7(b) and (e), the conduction band bottom is located in the bias window,
+which provides a channel for electron transport at Vgs = 0 V. In the transmission spectra, the
+transmission peak contributed by the conduction band bottom appears in the bias window, leading
+to a current of a certain magnitude with 113 μA/μm and 1176 μA/μm for AC and ZZ directions,
+respectively. When Vgs is applied, the electrostatic potential caused by the Vgs shifts the energy
+level in the channel region, causing a gradual change in the conduction band minimum in the
+central region of BL-MoS2. At Vgs = 1.5 V, more of the bottom of the conduction band enters the
+bias window, providing more channels and leading to an increase in the transmission peaks within
+the bias window. This, in turn, results in an increase in current (see Figure 7(c) and (f)). When Vgs
+is set to -1.5 V, a higher Schottky barrier is formed, as illustrated in Figure 7(a) and (d). This leads
+to a reduction in transmission and, consequently, a decrease in current. It is worth noting that the
+transmission for AC is greater than for ZZ. This is because the electron tunneling behavior through
+the Schottky barrier near the Fermi level contributes more significantly to the current in the AC
+direction (see the inset in Figure 7(a) and (d)). This is likely due to the AC channel length being
+slightly shorter than that of ZZ, resulting in a larger tunneling current for AC. This increase in
+tunneling current may disrupt the gate's control over the channel, leading to a decrease in device
+performance.
+Figure 7. PDOS and Transmission coefficients on log y scale at different gate voltages with Vds =
+0.3 V. (a) Vgs = −1.5 V, (b) Vgs = 0 V and (c) Vgs = 1.5 V for the AC direction; (d) Vgs = −1.5 V, (e)
+Vgs = 0 V and (f) Vgs = 1.5 V for the ZZ direction. The white dashed lines and red dashed lines
+denotes the bias window. Inset: The transmission coefficients from E = -0.5 V to E = 0.5 V.
+IV. CONCLUSIONS
+In summary, we proposed 2D MoS2-based FETs in which the semiconducting BL-MoS2
+served as the central scattering region and metallic Cu-MoS2 as the electrodes. The transport
+properties of Cu-MoS2/BL-MoS2/Cu-MoS2 were studied by DFT-NEGF method. When the Vds is
+0.6 V, the obtained contact resistance is 16.7 Ω·μm in the ZZ direction and 30 Ω·μm in the AC
+direction. The low contact resistance arises mainly from the low Schottky barrier, the absence of a
+tunneling barrier, and the formation of an ohmic contact between Cu-MoS2 and BL-MoS2. The
+regulating effect of gate voltage is significant. The on-state and off-state currents in the ZZ
+direction are 1176 μA/μm and 0.1 μA/μm, respectively, meeting the current requirements of ITRS
+HP. Intercalation design addresses the contact issue arising from the Van der Waals gap between
+metal and 2D semiconductors, thereby solving the prevalent problem of high contact resistance in
+2D material devices and fulfilling the ITRS 2028 contact resistance requirements.
+Acknowledgments
+This research was supported by the Foundation of Heilongjiang Province Natural Science (grant
+no. PL2024A003), and the Youth Innovative Talent Project of the Basic Scientific Research
+Operating Expenses of Provincial Undergraduate Universities in Heilongjiang Province (grant no.
+145209215). Haitao Yin thanks Liu Niu for VASP calculaiton.
+References
+[1] D. S. Schulman, A. J. Arnold, S. Das, Contact Engineering for 2D Materials and Devices.
+Chem. Soc. Rev. 47, 3037–3058(2018).
+[2] W. Schottky, Zur Halbleitertheorie der Sperrschicht- und Spitzengleichrichter. Z. Physik. 113,
+367–414 (1939).
+[3] X. Zhang, H. Yu, W. Tang, X. Wei, L. Gao, M. Hong, Q. Liao, Z. Kang, Z. Zhang, Y. Zhang,
+All‐van‐der‐Waals Barrier‐Free Contacts for High‐Mobility Transistors. Adv. Mater. 34,
+2109521(2022).
+[4] R. Sridevi, J. Charles Pravin, A. Ramesh Babu, J. Ajayan, Lowering the Schottky Barrier
+Height by Titanium Contact for High-Drain Current in Mono-Layer MoS2 Transistor. J.
+Electron. Mater. 50, 3295–3301(2021).
+[5] Y. Wang, J. C. Kim, Y. Li, K. Y. Ma, S. Hong, M. Kim, H. S. Shin, H. Y. Jeong, M.
+Chhowalla, P-Type Electrical Contacts for 2D Transition-Metal Dichalcogenides. Nature 610,
+61–66 (2022).
+[6] C. Kim, I. Moon, D. Lee, M. S. Choi, F. Ahmed, S. Nam, Y. Cho, H. J. Shin, S. Park, W. J.
+Yoo, Fermi Level Pinning at Electrical Metal Contacts of Monolayer Molybdenum
+Dichalcogenides. ACS Nano 11, 1588–1596 (2017).
+[7] H. Li, M. Cheng, P. Wang, R. Du, L. Song, J. He, J. Shi, Reducing Contact Resistance and
+Boosting Device Performance of Monolayer MoS2 by In Situ Fe Doping. Adv. Mater. 34,
+2200885(2022).
+[8] Y. Liu, J. Guo, E. Zhu, L. Liao, S. J. Lee, M. Ding, I. Shakir, V. Gambin, Y. Huang, X. Duan,
+Approaching the Schottky–Mott Limit in van Der Waals Metal–Semiconductor Junctions.
+Nature 557, 696–700(2018).
+[9] T. Shen, J. C. Ren, X. Liu, S. Li, W. Liu, Van Der Waals Stacking Induced Transition from
+Schottky to Ohmic Contacts: 2D Metals on Multilayer InSe. J. Am. Chem. Soc. 141,
+3110–3115(2019).
+[10] Y. Liu, P. Stradins, S. H. Wei, Van Der Waals Metal-Semiconductor Junction: Weak Fermi
+Level Pinning Enables Effective Tuning of Schottky Barrier. Sci. Adv. 2, e1600069(2016).
+[11] T. Nishimura, K. Kita, A.Toriumi, Evidence for Strong Fermi-Level Pinning Due to
+Metal-Induced Gap States at Metal/Germanium Interface. Appl. Phys. Lett. 91,
+123123(2007).
+[12] M. Kobayashi, A. Kinoshita, K. Saraswat, H. S. P. Wong, Y. Nishi, Fermi Level Depinning in
+Metal/Ge Schottky Junction for Metal Source/Drain Ge Metal-Oxide-Semiconductor
+Field-Effect-Transistor Application. J. Appl. Phys. 105, 023702 (2009).
+[13] K. Sotthewes, R. Van Bremen, E. Dollekamp, T. Boulogne, K. Nowakowski, D. Kas, H. J.
+W. Zandvliet, P. Bampoulis, Universal Fermi-Level Pinning in Transition-Metal
+Dichalcogenides. J. Phys. Chem. C 123, 5411–5420 (2019).
+[14] X. Liu, K. Xing, C. Sin Tang, S. Sun, P. Chen, D. C. Qi, M. B. H. Breese, M.S. Fuhrer, A. T.
+S. Wee, X. Yin, Contact Resistance and Interfacial Engineering: Advances in
+High-Performance 2D-TMD Based Devices. Prog. Mater. Sci. 148, 101390(2025).
+[15] G. Kwon, Y. H. Choi, H. Lee, H. S. Kim, J. Jeong, K. Jeong, M. Baik, H. Kwon, J. Ahn, E.
+Lee, M. H. Cho, Interaction- and Defect-Free van Der Waals Contacts between Metals and
+Two-Dimensional Semiconductors. Nat. Electron. 5, 241–247(2022).
+[16] P. Yang, Y. Shan, J. Chen, G. Ekoya, J. Han, Z. J. Qiu, J. Sun, F. Chen, H. Wang, W. Bao, L.
+Hu, R. J. Zhang, R. Liu, C. Cong, Remarkable Quality Improvement of As-Grown Monolayer
+MoS2 by Sulfur Vapor Pretreatment of SiO2/Si Substrates. Nanoscale 12, 1958–1966 (2020).
+[17] W. H. Chae, J. D. Cain, E. D.Hanson, A. A. Murthy, V. P. Dravid, Substrate-Induced Strain
+and Charge Doping in CVD-Grown Monolayer MoS2. Appl. Phys. Lett. 111, 143106 (2017).
+[18] D. Zhu, H. Shu, F. Jiang, D. Lv, V. Asokan, O. Omar, J. Yuan, Z. Zhang, C. Jin, Capture the
+Growth Kinetics of CVD Growth of Two-Dimensional MoS2. Npj 2D Mater. Appl. 1,
+8(2017).
+[19] J. Jiang, L. Xu, L. Du, L. Li, G. Zhang, C. Qiu, L. M. Peng, Yttrium-Doping-Induced
+Metallization of Molybdenum Disulfide for Ohmic Contacts in Two-Dimensional Transistors.
+Nat. Electron. 7, 545–556(2024).
+[20] M. A. Aslam, S. Leitner, S. Tyagi, A. Provias, V. Tkachuk, E. Pavlica, M. Dienstleder, D.
+Knez, K. Watanabe, T. Taniguchi, D. Yan, Y. Shi, T. Knobloch, M. Waltl, U.
+Schwingenschlögl, T. Grasser, A. Matković, All van Der Waals Semiconducting PtSe2 Field
+Effect Transistors with Low Contact Resistance Graphite Electrodes. Nano Lett. 24,
+6529–6537(2024).
+[21] D. Lizzit, P. Khakbaz, E. Driussi, M. Pala, D. Esseni, Ohmic Behavior in Metal Contacts to
+n/p-Type Transition-Metal Dichalcogenides: Schottky versus Tunneling Barrier Trade-Off.
+ACS Appl. Nano Mater. 6, 5737–5746(2023).
+[22] M. Poljak, M. Matic, A. Zeljko, Minimum Contact Resistance in Monoelemental 2D Material
+Nanodevices With Edge-Contacts. IEEE Electron Device Lett. 42, 1240–1243(2021).
+[23] R. Kappera, D. Voiry, S. E. Yalcin, B. Branch, G. Gupta, A. D. Mohite, M. Chhowalla.
+Phase-Engineered Low-Resistance Contacts for Ultrathin MoS2 Transistors. Nat. Mater. 13,
+1128–1134 (2014).
+[24] P. C. Shen, C. Su, Y. Lin, A. S. Chou, C. C. Cheng, J.H. Park, M.H. Chiu, A. Y. Lu, H. L.
+Tang, M. M. Tavakoli, G. Pitner, X. Ji, Z. Cai, N. Mao, J. Wang, V. Tung, J. Li, J. Bokor, A.
+Zettl, C. I. Wu, T. Palacios, L.J. Li, J. Kong. Ultralow Contact Resistance between Semimetal
+and Monolayer Semiconductors. Nature 593, 211–217(2021).
+[25] T. Agarwal, C. Patra, A. Kataria, R. R. Chaudhari, R. P. Singh, Quasi-Two-Dimensional
+Anisotropic Superconductivity in Li Intercalated 2H-TaS2. Phys. Rev. B 107, 174509(2023).
+[26] S. Er-Rahmany, M. Loulidi, A. El Kenz, A. Benyoussef, M. Balli, M. Azzouz, Emergence of
+Superconductivity by Intercalation of Alkali Metals and Alkaline Earth Metals in Janus
+Transition-Metal Dichalcogenide Heterostructures. Phys. Chem. Chem. Phys. 26,
+24881–24893(2024).
+[27] O. Farkad, F. Elfatouaki, R. Takassa, S. Hassine, A. E. Mouncharih, O. Choukri, A. Ouahdani,
+E. A. Ibnouelghazi, D. Abouelaoualim. Improved Thermoelectric Properties of AB Stacking
+Bilayer Graphene by Sr-Intercalation According to Chemical Potential. Mater. Today
+Commun. 37, 107118 (2023).
+[28] Y. U. Boucher, I. Biało, M. A. Gala, W. Tabiś, M. Rosmus, N. Olszowska, J. J. Kolodziej, B.
+Gudac, M. Novak, N. K. C. Muniraju, I. Batistić, N. Barišić, P. Popčević, E. Tutiš.
+Intercalation-Induced States at the Fermi Level and the Coupling of Intercalated Magnetic
+Ions to Conducting Layers in Ni1/3 NbS2. Phys. Rev. B 109, 085135(2024).
+[29] S. Husremović, C. K. Groschner, K. Inzani, I. M. Craig, K. C. Bustillo, P. Ercius, N. P.
+Kazmierczak, J. Syndikus, M. V. Winkle, S. Aloni, T. Taniguchi, K. Watanabe, S. M. Griffin,
+D. K. Bediako. Hard Ferromagnetism Down to the Thinnest Limit of Iron-Intercalated
+Tantalum Disulfide. J. Am. Chem. Soc. 144, 12167–12176(2022).
+[30] Z. Han, X. Han, S. Wu, Q. Zhang, W. Hu, Y. Meng, Y. Liang, J. Hu, L. Li, Q. Zhang, Y.
+Zhang, X. Zhao, D. Geng, W. Hu. Phase and Composition Engineering of Self-Intercalated
+2D Metallic Tantalum Sulfide for Second-Harmonic Generation. ACS Nano 2024, 18 (8),
+6256–6265.
+[31] Y. Gong, H. Yuan, C.L. Wu, P. Tang, S.-Z. Yang, A. Yang, G. Li, B. Liu, J. Van De Groep, M.
+L. Brongersma, M. F. Chisholm, S. C. Zhang, W. Zhou, Y. Cui.Spatially Controlled Doping of
+Two-Dimensional SnS2 through Intercalation for Electronics. Nat. Nanotechnol. 13,
+294–299(2018).
+[32] M. Liu, B. Tao, B. Zhang, H. Wang, X. Liu, Y. Wang, H. Yin. Anisotropic Low Schottky
+Barrier and Transport Properties of the Co-Intercalated Bilayer SnS2/Monolayer SnS2
+Junction from First Principles. ACS Appl. Electron. Mater. 5, 2115–2121(2023).
+[33] G. Kresse, J. Furthmüller, J. Hafner. Theory of the Crystal Structures of Selenium and
+Tellurium: The Effect of Generalized-Gradient Corrections to the Local-Density
+Approximation. Phys. Rev. B 50, 13181–13185(1994).
+[34] S. Grimme, J. Antony, S. Ehrlich, S. Krieg. A consistent and accurate ab initio
+parametrization of density functional dispersion correction (DFT-D) for the 94 elements H-Pu,
+J. Chem. Phys. 132, 154104(2010).
+[35] K. F.Mak, C. Lee, J.; Hone, J. Shan, T. F. Heinz. Atomically Thin MoS2 : A New Direct-Gap
+Semiconductor. Phys. Rev. Lett. 105, 136805(2010).
+[36] J. Taylor, H. Guo, J. Wang. Ab Initio Modeling of Quantum Transport Properties of Molecular
+Electronic Devices. Phys. Rev. B 63, 245407(2001).
+[37] J. P. Perdew, K. Burke, M. Ernzerhof. Generalized Gradient Approximation Made Simple.
+Phys. Rev. Lett. 77, 3865–3868 (1996).
+[38] J.Junquera, Ó. Paz, D. Sánchez-Portal, E. Artacho. Numerical Atomic Orbitals for
+Linear-Scaling Calculations. Phys. Rev. B 64, 235111(2001).
+[39] Y. Meir, N. S. Wingreen, Landauer Formula for the Current through an Interacting Electron
+Region. Phys. Rev. Lett. 68, 2512–2515 (1992).
+[40] J. Kang, W. Liu, D. Sarkar, D. Jena, D. Banerjee. Computational Study of Metal Contacts to
+Monolayer Transition-Metal Dichalcogenide Semiconductors. Phys. Rev. X 4, 031005(2014).
+[41] X. Tan, H. Qu, J. Yang, S. Zhang, H. H. Fu. A Next-Generation Transistor with Low Supply
+Voltage Operation Constructed Based on 2D Materials’ Metal–Semiconductor Phase
+Transition. Mater. Horiz. 11, 5366–5373(2024).

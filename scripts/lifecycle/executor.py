@@ -492,11 +492,25 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
             + "\n".join(sorted(str(x) for x in _all_known))
         )
 
+    # v6.8.14 WP4: KB-first 三层预检索——注入本地知识库上下文作为背景
+    _kb_context_block = ""
+    try:
+        _kb_context = _svc.get_context(gap_keywords=gap_keywords, proposal_id=proposal_id)
+        if _kb_context and len(_kb_context) > 50:
+            _kb_context_block = (
+                f"\n\n【本地知识库已有的相关文献和概念（供参考，不要重复检索这些）】\n"
+                f"{_kb_context[:3000]}\n"
+            )
+    except Exception as e:
+        if _log:
+            _log.warning(f"KB context 注入失败（继续）: {e}")
+
     agent_prompt = (
         f"你是一位专业研究助手（Researcher）。请针对课题「{proposal_id}」的"
         f"「{section_name}」部分，检索以下关键词的最新论文。\n\n"
         f"【检索关键词】\n{keyword_str}\n"
-        f"{_exclude_prompt}\n\n"
+        f"{_exclude_prompt}\n"
+        f"{_kb_context_block}\n\n"
         f"请执行：\n"
         f"1. 使用 web_search 工具逐一检索每个关键词\n"
         f"2. 对每篇论文，提取完整信息：arxiv_id、标题、作者、年份、TL;DR\n"

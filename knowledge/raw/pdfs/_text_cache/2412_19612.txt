@@ -1,0 +1,428 @@
+Attosecond All-Optical Retrieval of Valley Polarization via Circular Dichroism in
+Transient Absorption
+Wenqing Li 1, Xiaosong Zhu 1,∗ Pengfei Lan 1,4,† Kai Wang 1, Wanzhu
+He1, Hannes H¨ ubener2, Umberto De Giovannini 2,3, and Peixiang Lu 1,4‡
+1Wuhan National Laboratory for Optoelectronics and School of Physics,
+Huazhong University of Science and Technology, Wuhan 430074, China
+2Max Planck Institute for the Structure and Dynamics of Matter
+and Center for Free-Electron Laser Science, Hamburg 22761, Germany
+3Universit` a degli Studi di Palermo,
+Dipartimento di Fisica e Chimica-Emilio Segr` e, Palermo I-90123, Italy
+4Hubei Optical Fundamental Research Center, Wuhan 430074, China
+We propose a scheme for retrieving the ultrafast valley polarization (VP) dynamics in two-
+dimensional hexagonal materials via attosecond circular dichroism (CD) transient absorption spec-
+troscopy. This approach builds on the CD transition between the first and higher conduction bands
+induced by the circularly polarized probe pulses. The population imbalance at nonequivalent valleys
+in the first conduction band is proportionally mapped onto the difference in absorption coefficients
+of two probe pulses with opposite helicities, supporting an unprecedented quantitative retrieval of
+the corresponding VP dynamics with subfemtosecond time resolution. We theoretically demonstrate
+the scheme for h-BN and MoS2 through ab initiocalculations, achieving an accurate retrieval of the
+VP dynamics, particularly the transient VP switching processes, with a time resolution of 250 as.
+∗ zhuxiaosong@hust.edu.cn
+† pengfeilan@hust.edu.cn
+‡ lupeixiang@hust.edu.cn
+arXiv:2412.19612v1  [physics.optics]  27 Dec 2024
+2
+The electrons in two-dimensional (2D) hexagonal materials exhibit a valley degree of freedom in addition to charge
+and spin. This new degree of freedom has potential applications in next-generation electronics and optoelectronics
+[1, 2].
+Selectively populating one valley, creating valley polarization (VP), has been achieved by various methods [3–12],
+which is a key enabling feature of valleytronics. Following the initialization, another crucial aspect is the detection
+of VP. Over the past decade, some methods, such as the polarization-resolved photoluminescence spectroscopy and
+the Kerr rotation, have been used to detect the VP [13–19]. Recently, approaches based on the second-harmonic
+spectroscopy [8, 11, 20] and high harmonic spectroscopy (HHS) [7–9, 12] have been proposed to detect VP in the
+femtosecond timescale.
+Despite their utility, the methods above exhibit significant limitations. Firstly, their time resolution is limited
+to the range of picoseconds to several tens of femtoseconds, which is not adequate to resolve the processes during
+the switching of VP. Besides, the time average of the signal over a long time scale [21, 22] or the lack of a clear
+and straightforward relationship between the observable quantities and the VP (such as in harmonics spectroscopies
+[7, 11, 12]) hinders a precise and quantitative characterization of the time-dependent VP. A recent study also raised
+concerns about the universal applicability of HHS in solids as a spectroscopic tool [23]. Overall, previous works
+usually employ the above techniques for investigations of the VP states after a VP-switching operation or the valley
+relaxation process on the order of picoseconds.
+However, explicitly characterizing VP dynamics, particularly during the switching processes, provides key insights
+into the underlying physics governing the establishment and switching of VP. This becomes increasingly important
+in light of the substantial research efforts currently being dedicated to the optical manipulation of VP, across various
+schemes and different regimes [4–12, 24], and will thereby facilitate the applications for petahertz valleytronics. These
+requirements highlight the urgency of approaches to accurately and even quantitatively capture the transient VP
+dynamics with subfemtosecond resolution. However, as far as we know, the issue of reliable ultrafast readout of VP
+remains an open problem.
+Here, we propose and theoretically demonstrate an approach to retrieve the ultrafast VP dynamics via transient ab-
+sorption spectroscopy [25–27], by leveraging the circular dichroism (CD) transition between the first conduction band
+(CB1) and higher unoccupied bands. Benefiting from this configuration, the population imbalance at nonequivalent
+valleys in CB1, namely the VP, is proportionally mapped on the difference between the absorption of two circularly
+polarized (CP) probe pulses with opposite helicities, thereby supporting a quantitative retrieval of the VP dynamics.
+Besides, the large energy separation between the two levels supports subfemtosecond time resolution. To demon-
+strate our scheme, we perform numerical pump-probe experiments based on the time-dependent density functional
+theory (TDDFT) that simulate the measurements. We take prototypical 2D materials, h-BN and MoS 2, as examples.
+Our results show that the VP dynamics, particularly the ultrafast switching, are faithfully retrieved with a 250 as
+resolution.
+We first outline the fundamental idea in Fig. 1. As shown in Fig. 1(a), the VP is initialized by a pump pulse and
+subsequently probed by CP attosecond probe pulses with opposite helicities with adjustable delay. For simplicity,
+we consider a CP pump pulse as an example. Note that the VP can also be achieved by various configurations,
+such as bi-circular fields [7, 9, 11, 12, 28, 29]. Then, as depicted by the purple arrows in Fig. 1(b), the probe pulses
+with different helicities will preferentially excite electrons around different valleys in CB1 to the higher unoccupied
+bands. The valley-selective nature of the transition is intrinsically linked to the symmetry breaking of valley-active
+materials, underpinning the universal applicability of this approach [30, 31]. Once the electron population imbalance
+at nonequivalent valleys in CB1 occurs, one probe pulse will excite more electrons, while the other pulse with the
+opposite helicity will excite fewer electrons. Consequently, the absorbance of the two probe pulses will differ, resulting
+in remarkable CD signatures in the absorption spectra. The CP attosecond probe pulses are experimentally feasible
+and have been applied to detect the ultrafast electron dynamics in diverse systems [28, 32–34].
+In contrast to previous approaches involving the transition between VB and CB1, in our approach, the target band
+CB1 is the lower level and the upper levels are empty. Therefore, the VP and observed signals will exhibit a more
+direct relationship. As derived in Sec. I in Supplemental Material [35], the difference in the absorption coefficients
+for ± probe pulses, denoted as ∆ µ = µ+ − µ−, where + /– refers to the left or right circular polarization, scales
+proportionally to the population imbalance in CB1:
+∆µ = µ+ − µ− ∝ N K1
+CB1 − N K2
+CB1. (1)
+N K1
+CB1(N K2
+CB1) is the number of electrons around K1(K2) valley in CB1. Namely, the observable ∆ µ scales proportion-
+ally with the VP and hence is a direct indicator for the magnitude of this effect.
+Additionally, the upper levels in our approach can provide a larger energy separation up to the ultraviolet range,
+which supports the subfemtosecond time resolution. By applying attosecond probe pulses and scanning the pump-
+probe delay, the VP dynamics can be retrieved by the resultant CD in the transient absorption spectra with attosecond
+resolution.
+3
+𝑲′
+(a) (b)
+𝑲𝟏 𝑲𝟐
+VB
+CB1
+Higher
+CB
+𝑲𝟏 𝑲𝟐
+FIG. 1. Schematic diagram of the scheme. (a) The pump pulse (red line) manipulates the VP in 2D hexagonal material,
+which is subsequently probed by the CP probe pulse (purple line). (b) Valley selective transition induced by probe pulses with
+opposite helicities.
+Firstly, we demonstrate a numerical pump-probe experiment in h-BN to validate the above expectations. The VP
+is prepared by applying a CP pump pulse with vector potential:
+Apump = F1
+ω1
+f (t, τ)[sin(ω1(t − τ ))ˆx − cos(ω1(t − τ ))ˆy]. (2)
+f (t, τ) represents a Gaussian envelope centered at τ with the full width at half maximum (FWHM) of 1 .25 fs. Here,
+τ = 5 fs, F1 = 0.1 V /˚A, and ω1 = 4.6 eV /ℏ corresponding to the resonant excitation from VB to CB1 around the
+valleys in h-BN. The electron dynamics in 2D materials is described by TDDFT. The simulations are implemented
+with Octopus [36–39]. Technical details are delegated in Sec. II in Supplemental Material [35].
+In the simulation, we can directly quantify the VP by counting excited electrons in CB1, i.e. calculating N K1
+CB1
+(N K2
+CB1), via integration of the momentum-resolved electron population in CB1 inside a circle of radius R around K1
+(K2) in the k-space. Here, R takes one-third of the distance between two neighboring valleys. Due to the optical
+valley selection rules [3, 4], the electrons around the K1 valley are selectively excited to CB1 (c.f. Fig. 3(b)). In this
+case, ∆NCB1 = N K1
+CB1 − N K2
+CB1 > 0.
+Subsequently, the prepared VP is probed by CP attosecond pulses:
+A±
+probe = F2
+ω2
+fp(t, τp)[cos(ω2(t − τp))ˆx ∓ sin(ω2(t − τp))ˆy]. (3)
+fp(t, τp) = sin2( π(t−τp)
+Tprobe
+) represents the envelope centered at τp with the full duration Tprobe = 1 fs. F2 = 0.007 V/˚A.
+ω2 = 7.5 eV/ℏ matches the bandgap between CB1 and the second conduction band (CB2) at the valleys. In this case,
+the ± probe pulses will preferentially excite electrons around respective valleys in CB1 to CB2.
+The valley-selectivity of the transition within the conduction bands is confirmed by calculating the squared modulus
+of corresponding momentum matrix elements for circular polarization of opposite helicities |⟨uCB1| ˆP±|uCB2⟩|2. Here,
+ˆP± = ˆPx ± i ˆPy with x/y component of the momentum operator ˆPx/y and |uCB1,2⟩ represents the periodic part of
+the Bloch function of CB1 and CB2 [40–42], which is obtained from the ground-state DFT calculation. The result
+indicates that, for a prepared VP state, different numbers of electrons will be excited into CB2 by the ± probe pulses.
+Taking probe pulses centered at τp = 7.5 fs as examples, we calculate the time evolution of the electron popula-
+tion in CB2 ( N BZ
+CB2(t), with superscript BZ representing integration over the Brillouin zone), as shown in Fig. 2(c).
+Momentum-resolved population changes induced by the probe pulses are given in Sec. III in Supplemental Material
+[35]. Comparing the black curve N BZ,probe+
+CB2 with the blue curve N BZ,probe−
+CB2 in Fig. 2(c), more electrons are excited
+by the + probe pulse than the − pulse, implying that the system absorbs more photons under the + probe pulse.
+This is validated in Fig. 2(d), where we calculate the difference of the energy-resolved transient absorption coefficients
+for the ± probe pulses ∆ µ(ω, τp = 7.5 fs) = µ+ − µ−. Details of the calculations for µ± are provided in Sec. IV in
+Supplemental Material [35]. One can see that a significant CD signal is obtained, reflecting the prepared VP. The CD
+signal reaches its maximum around 7 .5 eV, which corresponds to the energy difference between CB1 and CB2 at the
+valleys. The solid blue and green lines in Fig. 2(e) show N BZ,probe+
+CB2 (t) − N BZ,probe−
+CB2 (t) for pulses with different probe
+times τp = 7.5 fs and 7 .75 fs, respectively. The clear separation between the two curves shows that distinct electron
+dynamics occur under the probe pulses at different times, leading to different net photon absorption. The distinct
+responses indicate that the probe can distinguish different transient VP states separated by 250 as, underscoring the
+capability for subfemtosecond temporal resolution.
+4
+7 8 9Time (fs)
+0.5
+1
+1.5
+2
+2.5 10-6
+0
+1(c) Envelope
+Probe +
+Probe -
+No probe
+6 7 8 9Energy (eV)
+0
+1
+2 105
+(d)
+7 8 9Time (fs)
+-2
+0
+2
+10-7
+3.56
+3.6
+10-3
+(e)
+0 0.002 0.004 0.0060
+1
+2
+3
+105
+(f)
+-1 0 1
+-1
+0
+1
+ (a)
+0
+0.2
+0.4
+0.6
+0.8
+-1 0 1
+-1
+0
+1
+ (b)
+0
+0.2
+0.4
+0.6
+0.8
+FIG. 2. (a) (b) The squared modulus of momentum matrix elements |⟨uCB1| ˆP±|uCB2⟩|2 in h-BN, for the circular polarization
+with + and − helicity, respectively. (c) Time evolution of the electron population in CB2 for + (solid black line) and − (solid
+blue line) probe pulses, and without probe pulse (dashed grey line). The dashed violet line represents the envelope of probe
+pulses centered at 7 .5 fs. (d) The difference in the absorption coefficients between the probe pulses with opposite helicities
+(∆µ = µ+ − µ−). (e) Time evolution of N BZ,probe+
+CB2 − N BZ,probe−
+CB2 for probe pulses centered at 7 .5 fs (solid blue line) and
+7.75 fs (solid green line). The dashed line represents ∆ NCB1, characterizing the VP. (f) ∆ µ at 7.5 eV vs. ∆ NCB1 (red circles)
+compared to discussion in Eq. (1).
+To examine the correspondence between the VP (∆NCB1) and the observable CD in the absorption coefficient (∆µ),
+we prepare VP states with different ∆NCB1 by varying F1 of the pump pulse, and then calculate ∆µ of these states for
+the probe pulses fixed at τp = 7.5 fs. The resulting ∆ µ at 7.5 eV as a function of ∆ NCB1 are summarized in Fig. 2(f)
+by the red circles. As the dashed linearly fitting line indicates, ∆ µ is proportional to ∆ NCB1, which is consistent
+with Eq. (1), exhibiting a direct and simple one-to-one mapping. It enables a precise retrieval of time-dependent VP
+dynamics.
+As an illustration, we demonstrate our scheme to retrieve the VP dynamics in h-BN driven by three switching
+pulses. The three switching pulses are the same as the pump pulse used for Fig. 2 but with alternating helicities −, +,
++, and they are centered at τ = 5 fs, 10 fs, 15 fs, as shown in Fig. 3(a). All of the protocol is performed on timescales
+one order of magnitude shorter than valley lifetimes [43].
+The switching pulses will selectively and sequentially excite the electrons around the K1, K2, and K2 valleys. The
+momentum-resolved electron populations in CB1 at 7.5 fs, 12.5 fs, and 17.5 fs are shown in Figs. 3(b)-(d), respectively.
+Meanwhile, the time-dependent ∆ NCB1 is shown in Fig. 3(f). The results show that the obtained VP is turned on,
+off, and reversed.
+To probe the VP dynamics, the probe pulses described by Eq. (3) at various τp (4 fs < τp < 17 fs) with time
+step of 250 as are applied. The ∆ µ(ω, τp), namely the CD in the absorption spectra, is calculated and displayed in
+Fig. 3(e). Meanwhile, a slice along 7.5 eV in Fig. 3(e) is depicted as the orange diamonds in Fig. 3(f). Remarkably,
+one can see that the magnitude of ∆ µ faithfully reproduces the time variation of the VP. This follows from the linear
+correspondence between the observable quantity and VP as discussed with Eq. (1) and verified in Fig. 2(f). Note
+that, the proportionality constant in Eq. (1) can be experimentally determined by one auxiliary measurement of an
+absolute ∆N CB1 (e.g., with ARPES [19]) in the static or slowly varying VP condition. This means that here we
+present a scheme for the precise measurement of the absolute value of the ultrafast VP. Importantly, our method not
+only detects the switched VP states after each pump pulse. The sequential switching in the vicinity of 5 fs, 10 fs, and
+15 fs are clearly resolved within 250 attosecond. Such a time resolution is unprecedented.
+5
+0 5 10 15 20
+Time (fs)
+-0.01
+0
+0.01
+0 5 10 15 20
+6
+7
+8
+9Energy (eV)
+-2
+-1
+0
+1
+2
+105
+0 2.5 5 7.5 10 12.5 15 17.5 20
+-4
+-2
+0
+2
+4
+10-3
+-2
+0
+2
+105
+-1 0 1
+-1
+0
+1
+0
+1
+2
+10-5
+-1 0 1
+-1
+0
+1
+0
+2
+4
+10-5
+-1 0 1
+-1
+0
+1
+0
+0.5
+1
+10-4
+(f)
+(a)
+(e)
+Populaion
+(b)
+(c)
+(d)
+(b) (d)(c)
+FIG. 3. Retrieval of the ultrafast VP dynamics in h-BN. (a) The vector potential of the switching pulses given in atomic units
+(a.u.). The momentum-resolved electron populations in CB1 at (b) 7 .5 fs, (c) 12 .5 fs, and (d) 17 .5 fs. (e) The calculated
+∆µ(ω, τp). (f) Time evolution of ∆ NCB1 (solid black line) and ∆ µ(ω, τp) (orange diamonds) at 7 .5 eV indicated by the dashed
+black line in (e).
+We next explore the versatility of this scheme by applying it to MoS 2, another promising material for valleytronics.
+The time-dependent VP is manipulated by two CP pulses (given by Eq. (2)) with − and + helicities as shown in
+Fig. 4(a). The pulse parameters are: F1 = 0.05 V/˚A and ω1 = 1.68 eV/ℏ to match the bandgap between VB and CB1
+at the valleys in MoS 2. The FWHM of the Gaussian envelope is 3 .5 fs, and the two pulses are centered at τ = 5 fs
+and 10 fs, respectively. The time-dependent |∆NCB1| is illustrated with the solid black line in Fig. 4(d), showing that
+the prepared VP is turned on and then turned off.
+The parameters of probe pulses are the same as those in h-BN except for ω2 = 35 eV /ℏ. Following the procedure
+in Fig. 2(f), we examine the correspondence between the VP and the observable CD signals in MoS 2 as shown
+in Fig. 4(b), confirming the linear correspondence from Eq. (1). The delay-dependent ∆ µ(ω, τp) is calculated and
+displayed in Fig. 4(c), and the slice along 34 .9 eV (dashed black line) is depicted as the orange diamonds in Fig. 4(d).
+One can see that the magnitude of ∆ µ faithfully reproduces the VP dynamics in MoS 2 with a 250 as time resolution.
+In summary, we propose an all-optical approach that supports an unprecedented quantitative retrieval of the VP
+dynamics with attosecond time resolution. This is achieved through transient absorption spectroscopy leveraging the
+CD transition between CB1 and higher unoccupied bands. In this scenario, the VP is proportionally mapped to the
+observable, enabling the quantitative measurement. Meanwhile, the larger energy separation between CB1 and higher
+bands supports the sub-femtosecond time resolution. We numerically demonstrate this approach in h-BN and MoS 2.
+The results show that the ultrafast VP dynamics, particularly the transient VP switching processes, are accurately
+retrieved with a 250 as time resolution.
+6
+0 10 20
+34
+35Energy (eV)
+ 0
+4
+8
+104
+0 10 20
+0
+5
+10
+10-3
+0
+5
+10
+  (cm-1)
+104
+0 0.005 0.01 0.0150
+5
+10
+15 104
+0 5 10 15 20Time (fs)
+-0.02
+0
+0.02
+(c)
+(a) (b)
+(d)
+FIG. 4. Retrieval of the ultrafast VP dynamics in MoS 2. (a) The vector potential of the switching pulses. (b) ∆ µ at 34.9 eV
+vs. |∆NCB1| (red circles) compared to discussion in Eq. (1), where 34 .9 eV is the peak of the CD absorption spectra. (c)
+The calculated ∆ µ(ω, τp). (d) The time evolution of |∆NCB1| (solid black line) and ∆ µ(ω, τp) (orange diamonds) at 34 .9 eV
+indicated by the dashed black line in (c).
+ACKNOWLEDGEMENT
+This work was supported by National Key Research and Development Program under grant No. 2023YF A1406800,
+the National Natural Science Foundation of China under grants Nos. 12174134, 12450406, 12225406, and 12021004,
+European Union – Next Generation EU through project THENCE – Partenariato Esteso NQSTI – PE00000023 –
+Spoke 2, and the Marie Sklodowska-Curie Doctoral Networks TIMES grant No. 101118915 and SPARKLE grant No.
+101169225. The computation is completed in the HPC Platform of Huazhong University of Science and Technology.
+[1] J. R. Schaibley, H. Yu, G. Clark, P. Rivera, J. S. Ross, K. L. Seyler, W. Yao, and X. Xu, Nat. Rev. Mater. 1, 16055
+(2016).
+[2] S. A. Vitale, D. Nezich, J. O. Varghese, P. Kim, N. Gedik, P. Jarillo-Herrero, D. Xiao, and M. Rothschild, Small 14,
+1801483 (2018).
+[3] D. Xiao, W. Yao, and Q. Niu, Phys. Rev. Lett. 99, 236809 (2007).
+[4] D. Xiao, G.-B. Liu, W. Feng, X. Xu, and W. Yao, Phys. Rev. Lett. 108, 196802 (2012).
+[5] S. A. Oliaei Motlagh, J.-S. Wu, V. Apalkov, and M. I. Stockman, Phys. Rev. B 98, 081406 (2018).
+[6] R. E. F. Silva, M. Ivanov, and ´A. Jim´ enez-Gal´ an, Opt. Express30, 30347 (2022).
+[7] ´A. Jim´ enez-Gal´ an, R. E. F. Silva, O. Smirnova, and M. Ivanov, Nat. Photon.14, 728 (2020).
+[8] ´A. Jim´ enez-Gal´ an, R. E. F. Silva, O. Smirnova, and M. Ivanov, Optica8, 277 (2021).
+[9] M. S. Mrudul, ´A. Jim´ enez-Gal´ an, M. Ivanov, and G. Dixit, Optica8, 422 (2021).
+[10] S. Sharma, P. Elliott, and S. Shallcross, Optica 9, 947 (2022).
+[11] I. Tyulnev, ´A. Jim´ enez-Gal´ an, J. Poborska, L. Vamos, P. S. J. Russell, F. Tani, O. Smirnova, M. Ivanov, R. E. F. Silva,
+and J. Biegert, Nature 628, 746 (2024).
+[12] S. Mitra, ´A. Jim´ enez-Gal´ an, M. Aulich, M. Neuhaus, R. E. F. Silva, V. Pervak, M. F. Kling, and S. Biswas, Nature628,
+752 (2024).
+[13] H. Zeng, J. Dai, W. Yao, D. Xiao, and X. Cui, Nat. Nanotechnol. 7, 490 (2012).
+[14] K. F. Mak, K. He, J. Shan, and T. F. Heinz, Nat. Nanotechnol. 7, 494 (2012).
+[15] W.-T. Hsu, Y.-L. Chen, C.-H. Chen, P.-S. Liu, T.-H. Hou, L.-J. Li, and W.-H. Chang, Nat. Commun. 6, 8963 (2015).
+[16] Q. Wang, S. Ge, X. Li, J. Qiu, Y. Ji, J. Feng, and D. Sun, ACS Nano 7, 11087 (2013).
+[17] N. Kumar, J. He, D. He, Y. Wang, and H. Zhao, Nanoscale 6, 12690 (2014).
+[18] C. Mai, Y. G. Semenov, A. Barrette, Y. Yu, Z. Jin, L. Cao, K. W. Kim, and K. Gundogdu, Phys. Rev. B 90, 041414
+(2014).
+[19] R. Bertoni, C. Nicholson, L. Waldecker, H. H¨ ubener, C. Monney, U. De Giovannini, M. Puppin, M. Hoesch, E. Springate,
+R. Chapman, C. Cacho, M. Wolf, A. Rubio, and R. Ernstorfer, Phys. Rev. Lett. 117, 277201 (2016).
+[20] H. K. Avetissian, V. A. Sedrakyan, K. V. Sedrakian, and G. F. Mkrtchian, Phys. Rev. B 107, 205403 (2023).
+7
+[21] P. Herrmann, S. Klimmer, T. Lettau, M. Monfared, I. Staude, I. Paradisanos, U. Peschel, and G. Soavi, Small 19, 2301126
+(2023).
+[22] Z. Wang, A. Molina-S´ anchez, P. Altmann, D. Sangalli, D. De Fazio, G. Soavi, U. Sassi, F. Bottegoni, F. Ciccacci, M. Finazzi,
+L. Wirtz, A. C. Ferrari, A. Marini, G. Cerullo, and S. Dal Conte, Nano Lett. 18, 6882 (2018).
+[23] O. Neufeld, N. Tancogne-Dejean, H. H¨ ubener, U. De Giovannini, and A. Rubio, Phys. Rev. X 13, 031011 (2023).
+[24] N. Rana and G. Dixit, Phys. Rev. Applied 19, 034056 (2023).
+[25] M. Wu, S. Chen, S. Camp, K. J. Schafer, and M. B. Gaarde, J. Phys. B: At. Mol. Opt. Phys. 49, 062003 (2016).
+[26] J. J. Rørstad, J. E. Bækhøj, and L. B. Madsen, Phys. Rev. A 96, 013430 (2017).
+[27] D. Fazzi, F. Scotognella, A. Milani, D. Brida, C. Manzoni, E. Cinquanta, M. Devetta, L. Ravagnan, P. Milani, F. Cataldo,
+L. L¨ uer, R. Wannemacher, J. Cabanillas-Gonzalez, M. Negro, S. Stagira, and C. Vozzi, Phys. Chem. Chem. Phys. 15,
+9384 (2013).
+[28] O. Kfir, P. Grychtol, E. Turgut, R. Knut, D. Zusin, D. Popmintchev, T. Popmintchev, H. Nembach, J. M. Shaw, A. Fleis-
+cher, H. Kapteyn, M. Murnane, and O. Cohen, Nat. Photon. 9, 99 (2014).
+[29] X. Zhu, P. Lu, and M. Lein, Phys. Rev. Lett. 128, 030401 (2022).
+[30] A. Geondzhian, A. Rubio, and M. Altarelli, Phys. Rev. B 106, 115433 (2022).
+[31] M. Feldman, M. Even Tzur, and O. Cohen, Photonics 11, 918 (2024).
+[32] F. Siegrist, J. A. Gessner, M. Ossiander, C. Denker, Y.-P. Chang, M. C. Schr¨ oder, A. Guggenmos, Y. Cui, J. Walowski,
+U. Martens, J. K. Dewhurst, U. Kleineberg, M. M¨ unzenberg, S. Sharma, and M. Schultze, Nature 571, 240 (2019).
+[33] M. Han, J.-B. Ji, K. Ueda, and H. J. W¨ orner, Optica 10, 1044 (2023).
+[34] R. G´ eneaux, H.-T. Chang, A. Guggenmos, R. Delaunay, F. L´ egar´ e, K. L´ egar´ e, J. L¨ uning, T. Parpiiev, I. J. Molesky, B. R.
+de Roulet, M. W. Zuerch, S. Sharma, M. Schultze, and S. R. Leone, Phys. Rev. Lett. 133, 106902 (2024).
+[35] See Supplemental Material for a detailed derivation of our scheme and details of the simulations, which includes Refs.[36–
+39, 44–51].
+[36] M. Marques, Comput. Phys. Commun. 151, 60 (2003).
+[37] A. Castro, H. Appel, M. Oliveira, C. A. Rozzi, X. Andrade, F. Lorenzen, M. A. L. Marques, E. K. U. Gross, and A. Rubio,
+Phys. Status Solidi B 243, 2465 (2006).
+[38] X. Andrade, D. Strubbe, U. De Giovannini, A. H. Larsen, M. J. T. Oliveira, J. Alberdi-Rodriguez, A. Varas, I. Theophilou,
+N. Helbig, M. J. Verstraete, L. Stella, F. Nogueira, A. Aspuru-Guzik, A. Castro, M. A. L. Marques, and A. Rubio, Phys.
+Chem. Chem. Phys. 17, 31371 (2015).
+[39] N. Tancogne-Dejean, M. J. T. Oliveira, X. Andrade, H. Appel, C. H. Borca, G. Le Breton, F. Buchholz, A. Castro, S. Corni,
+A. A. Correa, U. De Giovannini, A. Delgado, F. G. Eich, J. Flick, G. Gil, A. Gomez, N. Helbig, H. H¨ ubener, R. Jest¨ adt,
+J. Jornet-Somoza, A. H. Larsen, I. V. Lebedeva, M. L¨ uders, M. A. L. Marques, S. T. Ohlmann, S. Pipolo, M. Rampp,
+C. A. Rozzi, D. A. Strubbe, S. A. Sato, C. Sch¨ afer, I. Theophilou, A. Welden, and A. Rubio, J. Chem. Phys. 152 (2020).
+[40] T. C. Berkelbach, M. S. Hybertsen, and D. R. Reichman, Phys. Rev. B 92, 085413 (2015).
+[41] L. Li, P. Lan, X. Zhu, T. Huang, Q. Zhang, M. Lein, and P. Lu, Phys. Rev. Lett. 122, 193901 (2019).
+[42] L. Li, P. Lan, X. Zhu, and P. Lu, Rep. Prog. Phys. 86, 116401 (2023).
+[43] K. Lively, S. A. Sato, G. Albareda, A. Rubio, and A. Kelly, Phys. Rev. Res. 6, 013069 (2024).
+[44] J. P. Perdew, K. Burke, and M. Ernzerhof, Phys. Rev. Lett. 77, 3865 (1996).
+[45] M. Schlipf and F. Gygi, Comput. Phys. Commun. 196, 36 (2015).
+[46] S. A. Sato, Comput. Mater. Sci. 194, 110274 (2021).
+[47] N. Tancogne-Dejean, M. A. Sentef, and A. Rubio, Phys. Rev. B 102, 115106 (2020).
+[48] M. B. Gaarde, C. Buth, J. L. Tate, and K. J. Schafer, Phys. Rev. A 83, 013419 (2011).
+[49] S. Yamada, K. Yabana, and T. Otobe, Phys. Rev. B 108, 035404 (2023).
+[50] S. M. Cavaletto and L. B. Madsen, Phys. Rev. A 110, 053111 (2024).
+[51] S. A. Sato, Electron. Struct. 4, 014007 (2022).

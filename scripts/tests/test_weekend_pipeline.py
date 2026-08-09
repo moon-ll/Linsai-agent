@@ -13,6 +13,7 @@ test_weekend_pipeline.py — 周末任务流水线单元测试
 """
 
 import sys
+import json
 import shutil
 from pathlib import Path
 
@@ -190,6 +191,89 @@ class WeekendPipelineTests(TestSuite):
         # 有 artifact_map 条目的 job 及其下游应全部重置
         self.assert_eq(done_count, 0, f"所有 output job 都应重置为 pending（当前 {done_count} 个 done）")
 
+    def _test_kb_health_field_fallback_in_weekly_report(self):
+        """验证 output 周报生成时兼容 kb.get_kb_health() 的字段名（wiki_count/raw_count）。
+
+        背景：kb_index.get_kb_health() 实际返回字段是 wiki_count / raw_count /
+        hermes_wiki_count，而旧版输出报告渲染时读 total_pages / by_type，导致
+        "知识库共 0 页" 显示错误。修复后应能正确合计显示 wiki + raw 数量。
+        """
+        # 在隔离环境中写入一份 kb-health-weekly.json（沿用 kb.get_kb_health 实际字段）
+        cache_dir = self.tmp_root / "knowledge" / ".cache"
+        cache_dir.mkdir(parents=True, exist_ok=True)
+        health_report = {
+            "checked_at": "2026-08-09T12:00:00Z",
+            "health": {
+                "indexed": True,
+                "raw_count": 226,
+                "wiki_count": 153,
+                "hermes_wiki_count": 12,
+                "chunks": 4658,
+            },
+            "derived_overdue": [],
+            "derived_overdue_count": 0,
+        }
+        (cache_dir / "kb-health-weekly.json").write_text(
+            json.dumps(health_report, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+
+        # 调用 run_output_generate_weekly_report 生成报告
+        import weekend_pipeline.output_jobs as oj_mod
+        from weekend_pipeline.constants import WEEKEND_OUTPUT_DIR
+        from weekend_pipeline import constants as wp_const
+
+        # 把 HEALTH_REPORT_PATH 和 WEEKEND_OUTPUT_DIR 都指向隔离环境
+        orig_health_path = oj_mod.HEALTH_REPORT_PATH
+        orig_output_dir = wp_const.WEEKEND_OUTPUT_DIR
+        oj_mod.HEALTH_REPORT_PATH = cache_dir / "kb-health-weekly.json"
+        # 隔离目录下的 memory/weekend-output
+        isolated_output_dir = self.tmp_root / "memory" / "weekend-output"
+        isolated_output_dir.mkdir(parents=True, exist_ok=True)
+        wp_const.WEEKEND_OUTPUT_DIR = isolated_output_dir
+        # output_jobs.py 顶层也导入了该常量，所以需要同步 patch 模块命名空间
+        oj_mod.WEEKEND_OUTPUT_DIR = isolated_output_dir
+        try:
+            state = {
+                "jobs": [
+                    {
+                        "job_id": "output_kb_health_check",
+                        "stage": "output",
+                        "step": "health",
+                        "status": "done",
+                        "result": {
+                            "report": {
+                                "derived_overdue_count": 2,
+                                "health": {
+                                    "raw_count": 226,
+                                    "wiki_count": 153,
+                                    "hermes_wiki_count": 12,
+                                },
+                            }
+                        },
+                    }
+                ]
+            }
+            result = oj_mod.run_output_generate_weekly_report(
+                state, {}, dry_run=False
+            )
+            self.assert_true(result.get("success"), "周报生成成功", result)
+
+            # 找到生成的报告并校验关键内容
+            report_files = sorted(isolated_output_dir.glob("weekend-output-report-*.md"))
+            self.assert_true(len(report_files) > 0, "应生成周报文件")
+            content = report_files[-1].read_text(encoding="utf-8")
+
+            # 总页数 = 226 + 153 + 12 = 391
+            self.assert_in("知识库共 391 页", content, "应合计 wiki+raw+hermes_wiki 并显示非零")
+            # by_type fallback 应包含 wiki/raw 明细
+            self.assert_in("wiki: 153 页", content, "应列出 wiki 明细")
+            self.assert_in("raw: 226 页", content, "应列出 raw 明细")
+        finally:
+            oj_mod.HEALTH_REPORT_PATH = orig_health_path
+            wp_const.WEEKEND_OUTPUT_DIR = orig_output_dir
+            oj_mod.WEEKEND_OUTPUT_DIR = orig_output_dir
+
     def run_tests(self):
         self._test_sync_stage_jobs_idempotent()
         self._test_dependency_order()
@@ -199,3 +283,4 @@ class WeekendPipelineTests(TestSuite):
         self._test_pick_next_job_retries_blocking_deps()
         self._test_output_stage_creates_archived_extract_jobs()
         self._test_verify_artifacts_resets_missing_output()
+        self._test_kb_health_field_fallback_in_weekly_report()

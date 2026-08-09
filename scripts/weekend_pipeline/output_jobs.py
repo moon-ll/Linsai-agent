@@ -472,7 +472,14 @@ def run_output_generate_weekly_report(state: Dict[str, Any], job: Dict[str, Any]
                 report = result.get("report", {})
                 overdue = report.get("derived_overdue_count", 0)
                 health = report.get("health", {})
-                total_pages = health.get("total_pages", 0) if isinstance(health, dict) else 0
+                if isinstance(health, dict):
+                    total_pages = health.get("total_pages")
+                    if total_pages is None:
+                        total_pages = (health.get("wiki_count", 0) or 0) + (
+                            health.get("raw_count", 0) or 0
+                        ) + (health.get("hermes_wiki_count", 0) or 0)
+                else:
+                    total_pages = 0
                 summaries.append(
                     f"- **{jid}**: ✓ KB 健康检查 "
                     f"(共 {total_pages} 页, {overdue} 页过期待更新)"
@@ -493,8 +500,20 @@ def run_output_generate_weekly_report(state: Dict[str, Any], job: Dict[str, Any]
     health_lines = []
     health = health_report.get("health", {})
     if isinstance(health, dict):
-        total_pages = health.get("total_pages", 0)
-        by_type = health.get("by_type", {})
+        # 字段名兼容：kb.get_kb_health() 实际返回 wiki_count/raw_count/hermes_wiki_count
+        # （kb_index.get_kb_health 与 knowledge_output 的字段名约定）
+        total_pages = health.get("total_pages")
+        if total_pages is None:
+            total_pages = (health.get("wiki_count", 0) or 0) + (
+                health.get("raw_count", 0) or 0
+            ) + (health.get("hermes_wiki_count", 0) or 0)
+        by_type = health.get("by_type")
+        if not by_type:
+            by_type = {
+                "wiki": health.get("wiki_count", 0) or 0,
+                "raw": health.get("raw_count", 0) or 0,
+            }
+            by_type = {k: v for k, v in by_type.items() if v}
         health_lines.append(f"- 知识库共 {total_pages} 页")
         for t, count in sorted(by_type.items()):
             health_lines.append(f"  - {t}: {count} 页")

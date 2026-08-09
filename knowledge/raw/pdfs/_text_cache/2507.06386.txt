@@ -1,0 +1,1148 @@
+Subcycle phase matching effects in short attosecond pulse
+
+arXiv:2507.06386v2 [physics.atom-ph] 27 Feb 2026
+
+trains
+N Ouahioune1* , R Martı́n-Hernández2,3 , D Hoff1 , PK Maroju1 , C Guo1 , R
+Weissenbilder1 , S Mikaelsson1 , A L’Huillier1 , M Lucchini4,5 , CL Arnold1 , and M
+Gisselbrecht1
+1
+
+Department of Physics, Lund University, Lund, Sweden.
+Grupo de Investigación en Aplicaciones del Láser y Fotónica, Departamento de
+Fı́sica Aplicada, Universidad de Salamanca, Salamanca, Spain.
+3
+Unidad de Excelencia en Luz y Materia Estructuradas (LUMES), Universidad de
+Salamanca, Salamanca, Spain.
+4
+Department of Physics, Politecnico di Milano, 20133 Milano, Italy.
+5
+Institute for Photonics and Nanotechnologies, IFN-CNR, 20133 Milano, Italy.
+*
+Address correspondence to: nedjma.ouahioune@fysik.lu.se
+2
+
+Abstract
+Attosecond pulses produced by High-order Harmonic Generation (HHG) in gases driven by
+intense laser fields have become a cornerstone technique for probing ultrafast electronic motion
+in matter. These applications require a good knowledge of the temporal and spectral properties
+of the emitted radiation. In this work, we generate a train of two to three attosecond pulses that
+we characterize using two-color laser-assisted photoionization. An unexpected spectral behavior,
+with more pulses at high energies than at low energies, is observed when the carrier-to-envelope
+phase of the laser field is changed by 90◦ . HHG simulations indicate that the time-dependent
+phase matching of the harmonics contributes in a non-trivial way to the structure of the pulse
+train. Two-color laser-assisted photoionization enables us to unravel the dynamical influence of
+subcycle phase matching on the spectral properties of the attosecond pulse train, going beyond
+the predictions of the response of a single atom to a strong laser field.
+
+1
+
+Introduction
+
+The generation of high-order harmonics of an intense laser in gas targets [1, 2] has enabled the
+production of attosecond pulses of light in the extreme-ultraviolet (XUV) range [3, 4]. The process
+depends on the highly non-linear interaction of the intense laser with an isolated atom (or molecule)
+- a microscopic effect known as the single-atom response [5–7], and the in-phase propagation of the
+1
+
+generated XUV radiation and the driving laser field - a macroscopic effect called phase matching [8–
+10]. In general, the properties of the attosecond pulses depend on the interplay between the singleatom response and propagation effects, which influences the efficiency, coherence, and spatiotemporal
+structure of the XUV emission [11–14]. The impact of reshaping of the fundamental field on HHG
+has also been pointed out for high laser intensities [15–19].
+The generation of high-order harmonics is due to the interference of attosecond pulses (temporal
+slits) created in the subcycle light-matter interaction [20], similar to the emission of electrons in
+above-threshold ionization (ATI), due to the interference of attosecond electron wavepackets [21].
+In HHG, the harmonics are separated by twice the laser photon energy while in ATI, the detection
+breaks the inversion symmetry, and electron energy peaks are separated by the laser photon energy.
+When the laser pulse is short (≤ 10 fs), the number of slits is small and the spectral range of the
+attosecond pulses differ from one half-cycle to the next. In the single-atom response, this spectral
+range can be obtained simply from the cut-off law [7, 22], as shown schematically in Fig. 1.
+
+A
+XUV
+signal
+
+B
+≥3 slits
+
+Electric
+field
+
+2 slits 1 slit
+
+Ec1
+
+Ec2
+
+Ec3
+
+Energy
+
+t1 t 2 t 3
+
+Time
+
+Figure 1: (A) Illustration of the spectral content of attosecond pulses (temporal slits) generated in
+each half-cycle of a short laser pulse, shown in (B). Each color (purple, blue, and orange) refers to a
+specific pulse, with a unique cut-off energy Ec . The pattern resulting from the interference is shown
+in gray.
+Attosecond pulses can be temporally characterized using laser-assisted photoionization schemes
+such as streaking [4, 13, 23] and RABBIT (Reconstruction of Attosecond Beating by Interference of
+Two-photon transitions) [3, 24]. In these schemes, electron spectra are measured as a function of the
+delay between the XUV radiation and a phase-locked infrared (IR) field. In streaking, the electron
+energy oscillates and the temporal properties can be obtained from the amplitude and contrast of
+these oscillations [25]. In RABBIT, the absorption/emission of an additional IR photon leads to
+additional peaks, called sidebands, and the temporal properties of an average attosecond pulse in
+a train can be obtained from the phase of the sideband oscillations [3, 26]. In both cases, retrieval
+methods taking advantage of the entire spectrum as a function of delay have been successfully
+developed [25, 27–31].
+In this work, we create attosecond pulse trains (APT) using few-cycle laser pulses, with a stable
+carrier-to-envelope phase (CEP), focused in a gas of argon atoms. Due to the short laser duration
+
+2
+
+(≤6 fs), the APTs contain a few attosecond pulses [20] and their number depends on the CEP of
+the driving laser. We characterize these APTs by laser-assisted photoionization of helium using a
+three-dimensional momentum spectrometer [32]. For certain CEP values, the spectrograms, which
+are the electron energy spectra as a function of delay, exhibit features that cannot be explained
+by the structure of the APTs predicted by the single-atom response alone. This is confirmed by
+a time-frequency analysis of the APTs retrieved from the experimental data [27, 30]. Supported
+by 3D simulations and a 1D-model, we show that the temporal properties of the APTs are also
+influenced by time-dependent phase matching in the nonlinear medium, with, in some cases, a nontrivial number of pulses as a function of the XUV energy. This experimental and theoretical study
+emphasizes the importance of subcycle phase matching for the accurate prediction and manipulation
+of the properties of attosecond light pulses.
+
+2
+
+Methods
+
+The experiment, shown in Fig. 2, was performed using an optical parametric chirped pulse amplification (OPCPA) system, providing sub-6-fs long pulses at a central wavelength of 850 nm with up
+to 10 −µJ pulse energy at a repetition rate of 200 kHz [32]. A stereo-ATI (SATI) setup installed in
+the beam path stabilized the CEP on a shot-to-shot basis, providing a stability of around 160 mrad
+(corresponding to a precision of 10◦ ) [33]. Furthermore, the CEP was controlled by a wedge pair in
+the oscillator (not shown in the schematic). The laser beam was then split into a pump (XUV) and
+a probe (IR) arm by a beamsplitter (BS). In the pump arm, the beam was tightly focused (beam
+waist w0 = 5 µm, Rayleigh length zR ∼ 100 µm) into a thin argon gas jet (∼ 36 µm length) at a
+pressure of 4 bar, reaching an intensity of ∼ 1.5 × 1014 W/cm2 to generate a comb of phase-locked
+odd-order harmonics. The low-order harmonics, below ∼15 eV, and the generating field were filtered
+out with an aluminum foil (AF) of 200-nm. The XUV pump was recombined with the probe using
+a holey mirror (RM). The delay τ between the XUV and the IR in the probe arm can be controlled
+using a delay stage in the pump arm. Once recombined, both fields were focused by a toroidal
+mirror into a helium gas target; the probe intensity was estimated to be ∼ 1011 W/cm2 . A reaction
+microscope was used to measure the three-dimensional momentum of the photoelectrons created by
+the absorption of the XUV-only or the XUV+IR radiation. In our experiments, the delay between
+the XUV light and the IR probe was scanned for different CEP settings. Changing the CEP allowed
+us to vary the number of pulses in the train, typically between two and four [20].
+
+3
+
+Results and Discussion
+
+Figures 3A and C present photoelectron spectra as a function of the delay for two different CEP
+values separated by 90◦ . In the figure, only electrons emitted in a solid angle of +2π sr (“up”) along
+the common polarization axis of XUV and IR fields are shown (see Fig. 2) [20]. At large delays, when
+the fields do not overlap, the photoelectron peaks are separated by a kinetic energy of 2h̄ω (h̄ is the
+reduced Planck constant and ω is the laser frequency) due to single-photon ionization by the comb
+of harmonics. At delays where the XUV and the IR overlap, additional features form, which depend
+3
+
+A
+
+Ti:Sa
+oscillator
+
+C
+
+Fiber amplifier
+
+Ytterbium rod
+
+3D electron momentum
+Up 𝑝𝑧
+
+Compressor
+
+Pulse
+shaper
+
+𝑝𝑦
+
+2𝜔
+
+𝑝𝑥
+
+Down
+NOPA 1 NOPA 2
+
+SATI
+
+OPCPA
+
+RM
+
+BS
+
+helium
+HHG
+
+Feedback
+B Controllable
+∆𝜑CEP
+
+AF
+
+Toroidal
+mirror
+
+Glass
+
+𝜏
+
+Pump-probe interferometer
+
+Ion
+detector
+
+Camera
+
+MCP
+
+Energy
+
+Figure 2: (A) Schematic of the experimental setup. Laser pulses from a Ti:Sapphire oscillator are amplified using two nonlinear optical parametric amplification (NOPA) stages. The relative CEP of the
+output pulses is controlled shot-to-shot through the feedback of a stereo Above-Threshold-Ionization
+(SATI) device to a wedge pair in the oscillator [33]. The CEP-controlled pulses are separated into
+a probe arm and a variably delayed pump arm by a beam splitter (BS). Short attosecond pulse
+trains are produced by the IR driving field using HHG and recombined with the probe before being
+focused into the sensitive region of a 3D electron spectrometer. (B) The controllable relative CEP
+∆φCEP of the ≤ 6 fs laser pulses. (C) Momentum projected along px and pz of the photoemitted
+electrons. The electrons can be distinguished between those emitted with pz > 0 (“Up”) and those
+emitted with pz < 0 (“Down”), where z is the axis along the detector and of the polarization of
+the light. BS: Beam splitter; SATI: Stereo-ATI; AF: Aluminium filter; RM: Recombination mirror;
+MCP: Micro-channel plate.
+on the kinetic energy and the CEP. Above 10 eV in Fig. 3A, and between 7 and 10 eV in Fig. 3C, the
+kinetic energy of the photoelectrons oscillates as a function of the delay with a periodicity equal to
+the laser period ∼2.6 fs. In other spectral regions, additional electron peaks are observed at kinetic
+energies between those due to the absorption of consecutive harmonics. In particular, in Fig. 3C,
+the pattern looks like a “chessboard” over a large energy range from 12 eV to the highest observed
+energy. This remarkable energy dependence comes from the small number of attosecond pulses in
+the train. Oscillations arise from the interference between two electron wave packets, similar to
+a double-slit experiment [20]. The additional electron peaks are due to interference of more than
+two electron wave packets, leading to sidebands, similar to RABBIT measurements performed with
+multiple-cycle pulses [3, 24].
+In the supplementary material, we also show the spectra obtained by collecting electrons emitted
+in the opposite direction (“down”) in Fig. S1. The results are very similar to Fig. 3A,C, except that
+the positions of the maxima and minima of the oscillations are shifted by half a laser period [20].
+
+4
+
+Consequently, collecting electrons over the full solid angle removes the CEP-dependent features. We
+note that the behavior of the photoelectron spectra do not vary much with angle in each hemisphere.
+
+Energy [eV]
+
+0
+
+0.5
+
+1
+
+0
+
+25
+A
+20
+15
+10
+5
+
+0.5
+
+1
+
+0
+
+1
+
+B
+
+25
+C
+20
+15
+10
+5
+
+D
+
+-5
+
+0
+
+5
+
+-1
+
+Delay [fs]
+
+Time [TIR]
+
+Figure 3: (A and C) Experimental photoelectron spectra as a function of the XUV-IR delay for two
+different CEP values separated by 90◦ . Only electrons photoemitted in the upper hemisphere around
+the polarization axis of the light fields are shown. (B and D) Wigner distributions of the attosecond
+pulses retrieved from the experimental spectrograms through the refined extended ptychographic
+iterative engine (rePIE) [28].
+In the single atom response, illustrated in Fig. 1, the minimum driving field intensity Imin (q)
+required for a harmonic order q to reach the plateau region can be obtained from the cut-off law,
+qh̄ω = Ip + 3.17Up , where Ip is the ionization energy of argon and Up is the ponderomotive energy
+equal to αhI/(me ω 2 ). In this expression, α is the fine structure constant, I the laser intensity and
+me the electron mass. This intensity, expressed as
+Imin (q) =
+
+me ω 2
+(qh̄ω − Ip ),
+3.17αh
+
+(1)
+
+increases linearly as a function of the harmonic order q. For our few-cycle pulses (≤ 6 fs), this implies
+that the highest-order harmonics are generated only during a few half-cycles of the electric field at the
+center of the pulse. Consequently, the number of attosecond pulses in the train depends on a chosen
+spectral range. It decreases as the central photon energy increases. With our ultrashort pulses, only
+two half-cycles (or less) reach the intensity for the generation of the highest orders. On the other
+hand, lower-order harmonics are generated over many half-cycles. The above argument would always
+result in RABBIT-like features at low photoelectron kinetic energies and an oscillatory pattern
+(streaking-like pattern) at higher photoelectron energies, for any CEP. From these arguments, the
+experimental observation in Fig. 3C, cannot be explained.
+To understand the temporal structure of the attosecond pulse trains, we apply the refined extended pthycographic iterative engine (rePIE) [27, 28, 30], described in the supplemental material
+(see supplementary material). The retrieved spectrograms are in good agreement with the experimental ones, as shown in Fig. S2 of the supplementary material. We describe the properties of the
+5
+
+0
+
+30
+
+0.1
+
+0.2
+
+0
+
+A
+
+B
+
+C
+
+D
+
+0.5
+
+Energy [eV]
+
+20
+10
+0
+30
+20
+10
+0
+
+-5
+
+0
+
+Delay [fs]
+
+5
+
+-1
+
+0
+
+Time [TIR]
+
+1
+
+Figure 4: (A and C) Photoionization spectrograms as a function of the kinetic energy of the electrons
+and of the XUV-IR delay simulated using the 3D model. (B and D) Wigner representation of the
+simulated attosecond pulse trains. The CEPs are (A and B) 70◦ and (C and D) 160◦ .
+APTs using the Wigner-Distribution (WD), defined as :
+Z +∞
+ ∗
+
+W (t, Ω) =
+t − τ2 e−iΩτ dτ,
+EAPT t + τ2 EAPT
+
+(2)
+
+−∞
+
+where Ω is the XUV frequency and EAPT is the XUV field. The advantage of using the WD compared
+to other time-frequency representations is that the spectral and temporal resolution is only limited
+by the uncertainty principle. Figures 3B,D shows the Wigner representations for the APTs retrieved
+from the experimental results in Fig.3A,C. Figure 3B shows essentially three pulses at low energies
+and two pulses above 12 eV. In comparison, Fig. 3D shows two dominating pulses up to 10 eV and
+three pulses at higher energies. The observed spectral variation of the structure of the APT cannot
+be explained by only considering the single-atom response.
+We performed advanced HHG simulations that account for both microscopic and macroscopic
+effects. Specifically, we compute the far-field harmonic emission by solving the Schrödinger equation
+within the SFA [6] and by including the propagation and absorption of the fundamental and harmonic
+fields in a thin nonlinear medium while accounting for the longitudinal phase matching of the XUV
+radiation [34]. This calculation goes beyond the slowly-varying envelope approximation, including
+in particular subcycle ionization dynamics with the Yudin-Ivanov CEP-dependent model described
+in [35]. The driving laser field is defined as E(t) = E0 f (t) exp[i(ωt + φCEP )], where E0 is the
+amplitude of the electric field, f (t) = sin2 (πt/tp ) (for 0 ≤ t ≤ tp ) and φCEP is the CEP. We
+perform a systematic study of HHG as a function of pressure, intensity, pulse duration and focusing
+conditions. We find that our observations are well reproduced for the parameters corresponding
+to the experimental ones (see experimental section). An exception is the pulse duration which is
+chosen to be 4.85 fs, slightly less than the experimental estimation (∼ 6 fs). In these conditions, the
+ionization degree is relatively small, typically a few percent. Ground-state depletion is negligible,
+and the driving laser is not significantly reshaped during propagation. The single-atom response can
+6
+
+be considered to be uniform throughout propagation in the gas, see Section 3 of the supplementary
+material. The calculated APTs are then used to simulate laser-assisted photoionization spectra using
+SFA. The results shown in Fig. 4A,C, using CEPs of 70◦ and 160◦ , reproduce the experimental trends.
+The Wigner representations in Fig. 4B,D are similar to those obtained from the retrieved APTs (see
+Fig. 3), showing the same number of pulses across the different energy regions and an overall good
+agreement with the experiment. A noticeable difference is the tilt observed in the simulation due to
+the attosecond chirp [24]. The absence of tilt in the experiment likely originates from the aluminum
+filter, which compensates for the attosecond chirp [26]. The effect of the spectral phase variation
+due to photoionization is here negligible. These theoretical results confirm that CEP-dependent
+macroscopic effects influence in a non-trivial way the spectral content of the individual attosecond
+pulses.
+To gain insight into the influence of macroscopic effects on the pulse train, we developed a onedimensional model of time-dependent harmonic phase matching, including subcycle variations. The
+total phase mismatch ∆k(q, t) depends on the medium properties and on the laser parameters and
+can be written as [10]
+∆k(q, t) = ∆kfoc (q)+∆kat (q)+∆kdip (q, t)+∆kfe (q, t)
+
+(3)
+
+where ∆kfoc (q) = −q/zr comes from the laser focusing (through the variation of the Gouy phase
+over the Rayleigh length zr ), ∆kat (q) is due to the dispersion of the neutral medium, ∆kdip (q, t)
+comes from the dipole phase with the time-dependent intensity taking into account only the short
+trajectory contribution, ∆kfe (q, t) ∝ −qρηfe (t) is due to the free electrons and depends on the timedependent ionization degree ηfe (t). The ionization degree is often estimated using a cycle-averaged
+approximation [10, 36, 37]. Here, we account for the subcycle variation of the ionization degree,
+allowing us to include CEP effects. In addition, we neglect the CEP-slip across the focus as the
+medium length is small compared to the Rayleigh length.
+Figures 5A and C show the temporal variation of ∆k(q, t) for five harmonic orders and two CEPs
+equal to 70◦ and 160◦ . ∆k(q, t) strongly varies with time and for the different orders. The steps
+reflect the variation of ∆kfe (q, t) through the ionization rate. The difference in heights between
+the curves comes from the q-dependence of the atomic dispersion ∆kat (q) and the dipole phase
+∆kdip (q, t). Perfect phase matching (∆k = 0) is in general achieved only during a short time,
+less than one laser period, leading to temporal confinement of the harmonic emission. This time
+interval, in the conditions examined in the present work, moves to a later time as the harmonic order
+increases. At a CEP of 70◦ , phase matching, corresponding to |∆k(q, t)| ≤ 0.03 µm−1 , is achieved
+simultaneously for all harmonics. At a CEP of 160◦ , it is achieved at a later time and differently for
+harmonics 17-21 and harmonics 23-25.
+For on-axis propagation in a uniform gas density, the intensity of the qth harmonic field at the
+exit of the medium can be expressed as [38, 39]
+I(q, t) ∝ [ρd(q, t)]2
+
+cosh [κq L] − cos[∆k(q, t)L] −κq L
+e
+,
+κ2q +∆k 2 (q, t)
+
+7
+
+(4)
+
+where d(q, t) is the dipole moment obtained by using an effective power law dependence (|d|2 ∝ I 2.6 )
+[10], ρ = 8.8 kg/m3 is the experimental gas density, L = 36 µm is the medium length and κq is the
+absorption coefficient [40]. The laser spatio-temporal properties are assumed constant throughout
+the interaction length since reshaping effects were found negligible (see supplementary material).
+The spectrograms simulated using this model, shown in Fig. S4 of the supplementary material,
+reproduce the experimental observations, in contrast to those obtained with the single-atom response
+(see Fig. S5).
+Figures 5B and D present the harmonic intensity as a function of time for different harmonic
+orders and CEPs equal to 70◦ and 160◦ . In this model, the single-atom response leads to a temporal
+dependence ∝ I 2.6 (t) for all harmonics, shown in dashed lines, while the inclusion of phase matching
+adds a subcycle q-dependent modulation of the temporal profile following the variation of ∆k(q, t)
+(see Fig. 5A and C). We observe that phase matching leads to a temporal confinement of the highorder harmonics. At the CEP of 160◦ , harmonics 23 and 25 are generated after the maximum
+intensity of the driving pulse and temporally confined to less than a half-cycle. In contrast, at
+70◦ , all the harmonics appear before the maximum intensity, and are generated over a longer time.
+CEP-dependent phase matching changes the relative strength and duration of the attosecond pulses,
+depending on the spectral region, as observed in our experimental and theoretical results (see Fig. 34). In XUV far field spectra, variations in the number of slits can be observed with the pressure, as
+shown in Fig. S6 of the supplementary material. While this model provides a valuable insight into
+the influence of phase matching on the spectro-temporal structure of the attosecond pulses, it cannot
+describe the details of the complex three-dimensional spatio-temporal dynamics of the generation
+process.
+
+4
+
+Conclusion
+
+In conclusion, we show that photoionization by short attosecond pulse trains in the presence of a
+dressing field leads to CEP-dependent photoelectron spectra. Our study emphasizes the sensitivity
+of laser-assisted photoionization for retrieving the intricate time-frequency dependence of short attosecond pulse trains. The behavior of photoelectron spectra can be explained by subcycle phase
+matching, which leads to temporal confinement of some harmonics, thereby acting as a passive pulse
+shaper. The spectral amplitude of each attosecond pulse in the train, therefore, varies in a nontrivial way, depending on the CEP. This work provides a comprehensive experimental and theoretical
+insight into subcycle phase-matching dynamics for short attosecond pulse trains.
+
+Acknowledgments
+We thank E. Constant for fruitful discussions.
+
+8
+
+1
+
+A
+
+C
+
+0.1
+
+Iq [a.u.]
+
+" k [7m-1]
+
+0.2
+
+0
+
+0.5
+
+-0.1
+
+q = 15
+q = 17
+q = 19
+q = 23
+q = 25
+
+0
+1
+
+B
+
+D
+
+0.1
+
+Iq [a.u.]
+
+" k [7m-1]
+
+0.2
+
+0
+
+0.5
+
+-0.1
+-1
+
+0
+
+Time [TIR]
+
+0
+
+1
+
+-1
+
+0
+
+Time [TIR]
+
+1
+
+Figure 5: (A and B) Total phase mismatch as a function of time in units of the laser period (TIR )
+for four harmonic orders q for the CEPs corresponding to Fig. 3B. The horizontal black dashed line
+corresponds to perfect phase matching. (C and D) Corresponding yield for each harmonic order
+q. The CEPs are 70◦ (top) and 160◦ (bottom). Dashed lines indicate the temporal profile of the
+single-atom response.
+
+Author Contributions
+N. O. analyzed the data and conceived the 1D model. R. M. H. performed the 3D simulation.
+D. H. and S. M. performed the experiments. P. K. M. performed complementary analysis. C. G,
+C. L. A., and S. M. designed and constructed the light sources. M. L. performed the retrieval of the
+experimental data. P. K. M., R. W., C. L. A., C. G., A. L. and M. G. contributed to the scientific
+discussion. M. G. supervised the work. N. O. wrote the manuscript with inputs from A. L. and
+M. G. All authors provided feedback to the manuscript.
+
+Funding
+M. G., A. L. and C.L. A acknowledge support from the Swedish Research Council (Grant Nos. 202005200, 2023-04603, 2021-04691) and Alice Wallenberg Foundation. A. L. acknowledges support from
+the European Research Council (Grants No. 884900, No 851201) and the Knut and Alice Wallenberg
+Foundation through the Wallenberg Centre for Quantum Technology (WACQT). This project has
+also received funding from the Ministerio de Ciencia e Innovación (grant PID2022-142340NB-I00)
+and from the Department of Education of the Junta de Castilla y León and FEDER Funds (Escalera
+de Excelencia CLU-2023-1-02 and grant No. SA108P24).
+
+Competing interests
+The authors declare that there is no conflict of interest regarding the publication of this article.
+
+9
+
+Data Availability
+Data underlying the results presented in this paper are not publicly available at this time but may
+be obtained from the authors upon reasonable request.
+
+5
+
+Supplementary material
+
+5.1
+
+Angular-dependence of the photoelectron spectra
+20 A
+
+B
+
+15
+
+Energy [eV]
+
+10
+5
+
+1
+
+20 C
+
+0.5
+
+D
+
+15
+
+0
+
+10
+5
+-5
+
+0
+
+5
+
+-5
+
+Delay [fs]
+
+0
+
+5
+
+Figure S1: Experimental photoelectron spectra for electrons emitted in the (A and B) upper (pz > 0)
+and (C and D) lower (pz < 0) hemisphere of the detector.
+The presented results include only electrons emitted in the upper hemisphere pz > 0 (toward
+the detector) shown in Fig. S1A,B. In Fig. S1C,D, the electrons emitted for pz < 0 (in the opposite
+direction) are shown. The results are very similar, except that the positions of the maxima and
+minima of the oscillations are shifted by half a laser period, see vertical dashed lines. In the results
+presented here, obtained in helium, the electron distribution does not vary significantly within each
+half hemisphere.
+
+5.2
+
+Pulse reconstruction from the experimental data
+
+The experimental spectrograms are reconstructed using the refined extended ptychographic iterative
+engine (ePIE) [28]. In this approach, exploiting the central-momentum approximation (CMA), a
+first quick reconstruction is obtained with the extended ptychographic iterative engine (ePIE) [27].
+The ePIE output becomes then the starting guess for a second step based on the “Volkov transform”
+generalized projections algorithm (VTGPA) [30]. This later does not contain the CMA, but it is
+typically more expensive in terms of computational cost and time. The initial ePIE step, though,
+assures that good convergence is reached after few iterations (50-100), thus removing the CMA from
+
+10
+
+the output while reducing overall the reconstruction time. It is important to stress that in our
+case, since the photoelectron spectra extends towards zero eV, rePIE assures that the low energies
+are correctly reconstructed. Most of the more common algorithms, based on CMA would instead fail.
+The output of the rePIE reconstructions are shown in Fig. S2. To minimize the effect of the
+angular averaging done by the detector, the retrieval is performed on photoelectrons emitted in a
+small solid angle (total aperture of +20◦ around the polarization axis of the light fields). For the
+initial ePIE step the experimental traces have been resampled so that the delay and energy axes
+have a spacing of 0.3 fs and 12 meV. The resulting time resolution of the reconstructed pulses is
+83 as. The code starts from a random guess and reaches good convergence after 2500 iterations,
+yielding a FROG error (normalized r.m.s. distance between the experimental and reconstructed
+traces [41]) of 4.9 × 10−2 and 4.5 × 10−2 for CEP1 and CEP2, respectively. The second VTGPA
+step runs over the native experimental spectrogram (delay step of 120 as and energy step of 167 eV).
+The IR envelope is described with 7 anchors while its phase is a polynomial of the 5th order. The
+resulting time resolution for the reconstructed pulses is 30 as. Good convergence is reached after 50
+iterations leading to a FROG error of 4.4 × 10−3 for CEP1 and 3.2 × 10−3 for CEP2.
+0
+
+25
+20
+
+0.5
+
+A
+
+1
+
+C
+
+B
+
+Energy [eV]
+
+15
+
+0.3
+
+10
+
+0.25
+
+5
+25
+20
+
+0.2
+
+D
+
+E
+
+0.15
+
+F
+
+0.1
+0.05
+
+15
+10
+5
+-5
+
+0
+
+5
+
+-5
+
+0
+
+Delay [fs]
+
+5
+
+-5
+
+0
+
+5
+
+Figure S2: (A and D) Experimental and (B and E) retrieved spectrograms. (C and F) Root mean
+square difference between the retrieved and the input spectrograms.
+We note that to prove the applicability of rePIE under the experimental conditions used in this
+work, we tested the algorithm against the simulated spectrogram. The spectro/temporal properties
+of the XUV are fully reconstructed for both CEP values, proving the applicability of our approach.
+
+11
+
+5.3
+
+Reshaping of the driving field
+
+In the three-dimensional simulations, the reshaping of the electric field (plasma and gas dispersion)
+during propagation is included. At each position, the electric field is updated and the single-atom
+response computed using the strong-field approximation. In our experimental conditions, consisting
+of moderately small peak intensities and a thin medium, the electric field at the input Ein , middle
+Emid and output Eout of the gas target remains unchanged, as depicted for example in Fig. S3.
+The change in phase due to focusing (Gouy phase) does not change the electric field throughout the
+medium. As a consequence, the single-atom response is uniform throughout the interaction length.
+
+Field strength [a.u.]
+
+1
+0.5
+Ein
+
+Eout
+
+0
+
+Emid
+
+-0.5
+-1
+
+-2
+
+0
+
+Time [TIR]
+
+2
+
+Figure S3: Electric field at the entrance and exit of the HHG medium for a CEP of 160◦ .
+
+5.4
+
+One-dimensional temporal phase matching model
+
+Using the 1D analytical model presented in the main text, we show in Fig. S4 that the experimental
+spectrograms can be well-reproduced, in particular, the non-trivial variation of the number of slits
+with the energy.
+
+Energy [eV]
+
+25
+
+0.5
+
+B
+
+A
+
+20
+
+0.4
+
+15
+
+0.3
+
+10
+
+0.2
+
+5
+
+0.1
+
+0
+
+-5
+
+0
+
+5
+
+-5
+
+Delay [fs]
+
+0
+
+5
+
+0
+
+Figure S4: Spectrograms obtained with SFA simulations using the APTs calculated with the 1D
+analytical model. The CEPs are (A) 70◦ and (B) 160◦ .
+The spectrograms simulated using the single-atom response for the same laser parameters are
+presented in Fig. S5. A RABBIT-like pattern (3-4 slits) is observed at all energies, since attosecond
+pulses produced in the rising edge of the driving field have a significant contribution.
+12
+
+Energy [eV]
+
+25
+
+0.1
+
+B
+
+A
+
+20
+
+0.08
+
+15
+
+0.06
+
+10
+
+0.04
+
+5
+
+0.02
+
+0
+
+-5
+
+0
+
+5
+
+-5
+
+Delay [fs]
+
+0
+
+5
+
+0
+
+Figure S5: Spectrograms obtained using the single-atom response calculated with the strong-field
+approximation. The CEPs are (A) 70◦ and (B) 160◦ .
+
+5.5
+
+Far field harmonic spectra
+
+Complementary experiments were carried out to study the effect of pressure on the harmonic spectra,
+for similar laser parameters and focusing geometry as the results presented in the article. In Fig. S6,
+the far-field XUV spectra for two CEP values separated by 90◦ are shown at different backing pressures, which is about twice higher than the pressure in the jet [32]. The spectral width of harmonics
+generated at low pressures (3 and 7 bar) is independent of the harmonic order. When the pressure is
+increased to 9 bar, however, harmonics at high energies become broader, indicating that harmonics
+are generated during a shorter time corresponding to a smaller number of attosecond pulses. Figure
+S6A shows broadband peaks compatible with generation of two attosecond pulses while Fig. S6B
+shows peaks in-between the odd orders, which suggests the presence of three attosecond pulses in
+the high-energy region. This confirms that macroscopic effects can change the number of attosecond
+pulses in selective spectral regions.
+
+References
+1.
+
+Ferray M, L’Huillier A, Li X, Lompre L, Mainfray G, and Manus C. Multiple-harmonic conversion of 1064 nm radiation in rare gases. J. Phys. B: Atom. Molec. Opt. Phys. 1988;21:L31.
+
+2.
+
+McPherson A, Gibson G, Jara H, et al. Studies of multiphoton production of vacuum-ultraviolet
+radiation in the rare gases. J. Opt. Soc. Am. B 1987;4:595–601.
+
+3.
+
+Paul PM, Toma ES, Breger P, et al. Observation of a Train of Attosecond Pulses from High
+Harmonic Generation. Science 2001;292:1689–92.
+
+4.
+
+Hentschel M, Kienberger R, Spielmann C, et al. Attosecond metrology. Nature 2001;414:509–
+13.
+
+5.
+
+Kulander K, Schafer K, and Krause J. Super-Intense Laser—Atom Physics. Vol. 316. NATO
+Science Series B 1. Springer New York, NY, 1993:95–110. doi: 10.1007/978-1-4615-7963-2.
+13
+
+XUV intensity [a.u.]
+
+1
+
+A
+
+0.5
+
+XUV intensity [a.u.]
+
+0
+
+1
+
+P = 3 bar
+P = 7 bar
+
+B
+
+P = 9 bar
+
+0.5
+
+0
+
+30
+
+40
+
+50
+
+60
+
+Photon energy [eV]
+Figure S6: Far field XUV signal integrated radially as a function of the energy for two CEPs separated
+by 90◦ . The different colors indicate different backing pressures. The curves are normalized to their
+maximum.
+6.
+
+Lewenstein M, Balcou P, Ivanov MY, L’Huillier A, and Corkum PB. Theory of high-harmonic
+generation by low-frequency laser fields. Phys. Rev. A 3 1994;49:2117–32.
+
+7.
+
+Corkum PB. Plasma perspective on strong field multiphoton ionization. Phys. Rev. Lett. 13
+1993;71:1994–7.
+
+8.
+
+L’Huillier A, Balcou P, Candel S, Schafer K, and Kulander K. Calculations of high-order
+harmonic-generation processes in xenon at 1064 nm. Phys. Rev. A 5 1992;46:2778–90.
+
+9.
+
+Balcou P, Salières P, L’Huillier A, and Lewenstein M. Generalized phase-matching conditions
+for high harmonics: The role of field-gradient forces. Phys. Rev. A 4 1997;55:3204–10.
+
+10.
+
+Weissenbilder R, Carlström S, Rego L, et al. How to optimize high-order harmonic generation
+in gases. Nat. Rev. Phys. 2022;4:713–22.
+
+11.
+
+Kazamias S, Douillet D, Weihe F, et al. Global Optimization of High Harmonic Generation.
+Phys. Rev. Lett. 19 2003;90:193901.
+
+12.
+
+Ferrari F, Calegari F, Lucchini M, et al. High-energy isolated attosecond pulses generated by
+above-saturation few-cycle fields. Nat. Photon. 2010;4:875–9.
+
+13.
+
+Sansone G, Benedetti E, Calegari F, et al. Isolated Single-Cycle Attosecond Pulses. Science
+2006;314:443–6.
+
+14.
+
+Wikmark H, Guo C, Vogelsang J, et al. Spatiotemporal coupling of attosecond pulses. Proceedings of the National Academy of Sciences 2019;116:4779–87.
+
+14
+
+15.
+
+Gaarde MB and Schafer KJ. Generating single attosecond pulses via spatial filtering. Opt. Lett.
+2006;31:3188–90.
+
+16.
+
+Major B, Kretschmar M, Ghafur O, et al. Propagation-assisted generation of intense fewfemtosecond high-harmonic pulses. J. Phys. Photonics 2020;2:034002.
+
+17.
+
+Major B, Kovács K, Svirplys E, et al. A Compact, Easily Tunable Extreme-ultraviolet Source:
+High-harmonic Generation in Strongly Overdriven Regime. In: Frontiers in Optics + Laser
+Science 2024 (FiO, LS). Optica Publishing Group, 2024:FTu1E.3. doi: 10.1364/FIO.2024.
+FTu1E.3.
+
+18.
+
+Kretschmar M, Svirplys E, Volkov M, et al. Compact realization of all-attosecond pump-probe
+spectroscopy. Science Advances 2024;10:eadk9605.
+
+19.
+
+Vismarra F, Fernández-Galán M, Mocci D, et al. Isolated attosecond pulse generation in a
+semi-infinite gas cell driven by time-gated phase matching. Light: Science & Applications
+2024;13:197.
+
+20.
+
+Cheng YC, Mikaelsson S, Nandi S, et al. Controlling photoionization using attosecond time-slit
+interferences. PNAS 2020;117:10727–32.
+
+21.
+
+Lindner F, Schätzel MG, Walther H, et al. Attosecond Double-Slit Experiment. Phys. Rev.
+Lett. 4 2005;95:040401.
+
+22.
+
+Krause JL, Schafer KJ, and Kulander KC. High-order harmonic generation from atoms and
+ions in the high intensity regime. Phys. Rev. Lett. 24 1992;68:3535–8.
+
+23.
+
+Goulielmakis E, Schultze M, Hofstetter M, et al. Single-Cycle Nonlinear Optics. Science 2008;320:1614–
+7.
+
+24.
+
+Mairesse Y, Bohan A de, Frasinski L, et al. Attosecond Synchronization of High-Harmonic Soft
+X-rays. Science 2003;302:1540–3.
+
+25.
+
+Mairesse Y and Quéré F. Frequency-resolved optical gating for complete reconstruction of
+attosecond bursts. Phys. Rev. A 1 2005;71:011401.
+
+26.
+
+Lopez-Martens R, Varjú K, Johnsson P, et al. Amplitude and phase control of attosecond light
+pulses. Phys. Rev. Lett. 2005;94:033001.
+
+27.
+
+Lucchini M, Brügmann M, Ludwig A, Gallmann L, Keller U, and Feurer T. Ptychographic
+reconstruction of attosecond pulses. Opt. Express 2015;23:29502–13.
+
+28.
+
+Lucchini M and Nisoli M. Refined Ptychographic Reconstruction of Attosecond Pulses. Applied
+Sciences 2018;8.
+
+29.
+
+Dolso GL, Inzani G, Di Palo N, et al. Versatile and robust reconstruction of extreme-ultraviolet
+pulses down to the attosecond regime. APL Photonics 2023;8:076101.
+
+30.
+
+Keathley P, Bhardwaj S, Moses J, Laurent G, and Kärtner F. Volkov transform generalized
+projection algorithm for attosecond pulse characterization. New J. Phys. 2016;18:073009.
+
+31.
+
+Orfanos I, Makos I, Liontos I, et al. Attosecond pulse metrology. APL Photonics 2019;4:080901.
+
+15
+
+32.
+
+Mikaelsson S, Vogelsang J, Guo C, et al. A high-repetition rate attosecond light source for
+time-resolved coincidence spectroscopy. J. Nanophotonics 2021;10:117–28.
+
+33.
+
+Wittmann T, Horvath B, Helml W, et al. Single-shot carrier–envelope phase measurement of
+few-cycle laser pulses. Nat. Phys. 2009;5:357–62.
+
+34.
+
+Hernández-Garcı́a C, Pérez-Hernández JA, Ramos J, Jarque EC, Roso L, and Plaja L. Highorder harmonic propagation in gases within the discrete dipole approximation. Phys. Rev. A 3
+2010;82:033432.
+
+35.
+
+Yudin G and Ivanov M. Nonadiabatic tunnel ionization: Looking inside a laser cycle. Phys.
+Rev. A 1 2001;64:013409.
+
+36.
+
+Keldysh L. Ionization in the field of a strong electromagnetic wave. Sov. Phys. JETP 5 1965;20:1307.
+
+37.
+
+Perelomov A, Popov V, and Terentév M. Ionization of atoms in an alternating electric field.
+Sov. Phys. JETP 5 1966;23:1393–409.
+
+38.
+
+Constant E, Garzella D, Breger P, et al. Optimizing High Harmonic Generation in Absorbing
+Gases: Model and Experiment. Phys. Rev. Lett. 8 1999;82:1668–71.
+
+39.
+
+Ruchon T, Hauri CP, Varjú K, et al. Macroscopic effects in attosecond pulse generation. New
+J. Phys. 2008;10:025027.
+
+40.
+
+Samson J and Stolte W. Precision measurements of the total photoionization cross-sections of
+He, Ne, Ar, Kr, and Xe. J. Electron Spectrosc. Related Phenom. 2002;123:265–76.
+
+41.
+
+Murari M, Lucarelli G, Lucchini M, and Nisoli M. Robustness of the ePIE algorithm for the complete characterization of femtosecond, extreme ultra-violet pulses. Opt. Express 2020;28:10210–
+24.
+
+16
+
+

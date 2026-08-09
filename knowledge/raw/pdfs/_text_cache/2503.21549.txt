@@ -1,0 +1,1085 @@
+Amplifying solid-state high harmonic generations with
+momentum k-gaps in band structure engineering
+Yiming Pan1, Danni Chen1, Xiaoxi Xu2, Zhaopin Chen3,4,5, Huaiqiang Wang6
+1. School of Physical Science and Technology and Center for Transformative Science,
+ShanghaiTech University, Shanghai 200031, China
+2. School of Electrical Engineering—Physical Electronics, Center of Light-Matter
+Interaction, Tel Aviv University, Ramat Aviv 69978, Israel
+3. Department of Physics, Technion – Israel Institute of Technology, Haifa 3200003, Israel
+4. Solid State Institute, Technion – Israel Institute of Technology, Haifa 3200003, Israel
+5. The Helen Diller Quantum Center, Technion – Israel Institute of Technology, Haifa
+3200003, Israel
+6. Center for Quantum Transport and Thermal Energy Science, School of Physics and
+Technology, Nanjing Normal University, Nanjing 210023, China
+Abstract
+We propose a novel amplification mechanism for high harmonic generation (HHG) in solids by
+leveraging bandgap engineering with momentum k-gaps. By constructing a simple diatomic lattice
+featuring balanced, alternating gain and loss profiles, facilitated by an array of four-level systems,
+we explore the physics of k-gap-amplified Bloch oscillations in the intraband channel of solidstate HHG. Through numerical simulations, we elucidate the coexistence of amplification and
+harmonic radiation processes in a solid. Our finding reveals that advanced bandgap engineering
+can define k-space optical devices - such as Brillouin cavity, Bloch-Zener oscillator and k-gap
+amplifier - thereby enabling the coherent manipulation of semiconductor radiation and high
+harmonic generation in both semiconductor superlattices and artificial materials. Furthermore, we
+analyze the spectrogram and material realizations required for amplifying solid-state HHG. These
+results underscore the potential of k-gap band structure engineering to advance coherent light
+sources at extremely short wavelengths.
+
+1
+
+The interaction of an intense electric field with matter – whether in atomic gases [1], liquids [2],
+or solids [3] - accelerates electrons within the medium, producing coherent radiations at extreme
+ultraviolet (EUV) and X-ray regimes. This process, termed high harmonic generation (HHG), en
+ables direct observation and control of coherent electron dynamics, ushering in transformative ad
+vances in ultrafast quantum physics [4]. To enable high-precision pump-probe measurements of u
+ltrafast electron dynamics [5,6], achieving high repetition rates and photon flux remains a central
+challenge in ultrashort pulse generation. However, conventional HHG processes exhibit extremel
+y low efficiencies, typically on the order of 10!" relative to the pump intensity [7]. Fundamental
+limitations persist for EUV/X-ray sources, including phase-matching conditions [8,9], unresolve
+d amplification mechanisms for ultra-short wavelengths [10], and inherent inefficiency of metho
+ds such as superradiance [11]. Moreover, reliance on large-scale facilities like free-electron lasers
+and synchronization radiation [12,13] presents prohibitive costs and scalability barriers for comp
+act ultra-short-wavelength light sources.
+While the amplification mechanism for HHG in solids remains poorly understood, most efforts
+focus on overcoming technical challenges in EUV laser design. In contrast, we propose a paradigm
+shift: leveraging a small crystal to generate intense, coherent EUV light. Solid-state HHG, first
+experimentally realized in 2011 [3], provides distinct advantages over noble gas HHG, such as
+simpler fabrication, scalable integration, and reduced peak intensity requirements, attributable to
+the high electron density of solids. However, after a decade of material exploration – spanning
+semiconductors to dielectrics [14], the lack of an effective amplification scheme has confined
+solid-state HHG to low-efficiency regimes, limiting its utility as a viable EUV source.
+In essence, solid-state HHG arises from two principal radiative channels: intraband currents [14],
+governed by field-driven acceleration of charge carriers within a single electronic band (e.g., superBloch oscillations), and interband polarization [15], in which strong-field tunneling generates
+electron-hole pair across different bands. Subsequent acceleration and radiative recombination of
+these pairs – mirroring the “three-step model” of atomic HHG – yield coherent emission. The
+dominant contribution between these channels is determined by the pump laser intensity and
+material band structures [16,17].
+In this work, we present an unexpected mechanism to amplify solid-state HHG through momentum
+bandgap (k-gap) engineering. The concept of k-gaps – analogous to energy gaps (𝜔-gaps) but
+characterized by “forbidden momentum regions” in the Brillouin zone – is inspired by recent
+advances in time-varying photonics [18,19] . Modes within k-gaps exhibit exponential growth
+over time, a phenomenon termed k-gap amplification [20]. While extensively studied in timevarying medium [20], including amplified emission and lasing, k-gap engineering remains largely
+uncharted in other material systems. Notably, k-gaps often emerge alongside exceptional points
+(EPs) [21–23] . Here, however, our focus is not on EPs or broader non-Hermitian physics but on
+utilizing k-gap engineering to enhance HHG in solids. Our framework posits that Bloch band
+electrons, driven by the pump, traverse a k-gap and experience a population increase in their
+2
+
+intraband current, leading to radiative amplification. This prompts a fundamental question for nonHermitian electronic systems: what exactly undergoes amplification – the pumped electron or the
+radiated photon? To address whether this amplification manifests as an increase in carrier density
+or radiation intensity, we construct an effective tight-binding diatomic lattice that features balanced
+gain and loss profiles using a four-level recycling process (Fig. 2a). This construction ensures that
+the total carrier population is conserved, even as the radiative emission intensity of Bloch electrons
+under a driving force is amplified. We then investigate the gain profile and radiative spectrogram
+of solid-state HHG. Ultimately, this k-gap-amplified HHG paradigm offers a promising route
+toward compact, coherent extreme ultraviolet light sources.
+Bloch radiation of band electrons. Bloch oscillation in crystalline solids can be interpreted as
+radiation emitted by an electron undergoing classical acceleration, similar to the radiation of an
+oscillating dipole (or current) [24–27]. This interpretation connects the Bloch theorem with
+classical radiation theory, positioning Bloch oscillations as a fundamental mechanism for photon
+emission in periodic potentials – a concept crucial to the subsequent analysis. In the presence of
+an external field, a band electron traversing the lattice accumulates energy, given by Δ𝐸 = 𝑒𝐸𝑎,
+where 𝐸 is the applied field amplitude, 𝑎 is the lattice constant, and 𝑒 is the elementary charge.
+The Bloch theorem enforces periodicity, requiring that the electron releases this energy gain upon
+returning to its initial state. Energy dissipation occurs through various channels, including thermal
+coupling to lattice vibrations, non-radiative transfer to other electrons (e.g., Auger scattering), or
+coherent radiation at the Bloch frequency 𝜔# = 𝑒𝐸𝑎/ℏ. Crucially, this radiation — termed Bloch
+radiation, provides a coherent mechanism for light emission, directly linking electron dynamics in
+solids to radiative processes [28].
+The bandgap engineering for k-gap-amplified Bloch oscillations is as follows. The Bloch theorem
+dictates that band electrons oscillate within the Brillouin zone, acting as a resonator that selects
+specific radiative modes. When a DC field is applied, electrons move periodically in momentum
+space, emitting radiation coherently in the form of classical oscillating currents or dipoles. The
+Brillouin zone thus functions as an optical micro-ring (“k-space ring”), as depicted in Fig. 1b.
+Dimerization of the simple lattice splits a single band into two, reducing the Brillouin zone from
+(-π/a, π/a) to (-π/2a, π/2a), where the dimerized lattice constant is 2a. When band electrons, driven
+by a gradient field, cross the reduced Brillouin zone, they may undergo non-adiabatic splitting
+through Landau-Zener tunneling (LZT) [29–31], analogous to a beam splitter. The LZT
+probability depends on the ratio of the driving field strength to the energy gap induced by
+dimerization. Alternatively, by introducing an on-site gain/loss profile into the lattice, we can
+engineer a k-gapped band structure (Fig. 1d). When electrons traverse these k-gaps periodically in
+momentum space, their oscillations are amplified. In this sense, this k-gap engineering offers a
+promising pathway to facilitate the lasing of solid-state HHG through the amplification of Bloch
+radiation.
+
+3
+
+(a)
+
+𝐸
+Bloch
+radiation
+
+ℏ𝜔𝐵
+
+Figure 1
+
+(b)
+
+ℏ𝜔𝐵
+Acceleration
+
+e
+
+e
+
+Bloch
+oscillation
+
+VB
+
+−𝜋/𝑎
+
+E
+
+e
+
+CB
+
+k
+
+𝜋/𝑎
+
+k-space ring
+
+a
+a
+
+a
+Diatomic lattice with
+staggered couplings
+
+(c)
+𝐸
+
+Diatomic lattice with
+gain/loss profile
+
+(d)
+
+LZ beam
+splitter
+
+𝐸
+
+k-gap
+amplifier
+
+CB
+
+CB
+
+−𝜋/2𝑎
+
+𝜋/2𝑎
+
+k
+
+−𝜋/2𝑎
+
+𝜋/2𝑎
+
+k
+
+Figure 1 Illustration of three optical devices constructed using Bloch oscillations in band structure
+engineering with designable energy gaps or momentum k-gaps. (a) an optical microring (Brillouin
+zone). (b) a beam splitter (Landau-Zener tunneling), and (c) a k-gap amplifier due to the travelling
+across the k-gap region.
+Modelling of k-gaps in solids. To introduce the momentum k-gaps in an electronic lattice system,
+we begin by designing balanced gain and loss profiles for each site. The setup is analogous to an
+array of the atomic four-level system, where two short-lived virtual energy levels are introduced
+for the gained site (G-site) and the lossy site (L-site), as illustrated in Fig. 2a. For the G-site, we
+incorporate a virtual 𝑁$ -level. Electrons are pumped to this level by UV light, quickly relaxing to
+the G-site and accumulating population there. Conversely, for the L-site, we introduce a virtual
+𝑁% -level. Electrons are then pumped out of the L-site to the 𝑁% -level, which has a short lifetime,
+enabling the population to relax back to a reservoir, denoted as the ground state 𝑁& ). This
+construction results in a similar four-level system, with the G- and L-site collectively forming the
+𝑁' -level as a diatomic site. Gain at the G-site arises from relaxation from 𝑁$ -level, while loss at
+the L-site is due to relaxation to 𝑁% -level. Notably, the hopping between sites is described by a
+quantum-mechanical process, distinct from relaxation. By applying rate equations, we ascertain
+(
+
+that the total population of all levels is conserved, expressed as () 𝑁)*) = 0, where 𝑁)*) = 𝑁$ +
+4
+
+𝑁+ + 𝑁, + 𝑁% + 𝑁& . The local population of G-site 𝑁+ (𝑡) (and L-site 𝑁, (𝑡) ) can exhibit
+exponentially growth or decay, controllable by a UV light pump (from 𝑁& to 𝑁$ level). When these
+G/L sites are arranged in sequence, they form a one-dimensional diatomic lattice with balanced
+gain/loss profiles (Fig. 2b). Using tight-binding approximation, the Hamiltonian of this lattice is
+given by
+/
+
+/!%
+.
+.
+.
+.
+𝐻& = 34𝑖𝛾𝑐-+ 𝑐-+ − 𝑖𝛾𝑐-, 𝑐-, 9 + 3 𝜅4𝑐-+
+𝑐-, + 𝑐-,
+𝑐-1%+ 9 + ℎ. 𝑐. ,
+-0%
+-0%
+
+(1)
+
+where 𝛾 represents the effective balanced gain and loss factor, and 𝜅 is the coupling strength
+between the adjacent G- and L- sites. In momentum space, the Hamiltonian is 𝐻& = ∑2 𝐻2 𝐶2. 𝐶2 ,
+where the operator is 𝐶2 = (𝑐2+ , 𝑐2, )3 , with 𝐻2 being given by
+−𝑖𝛾
+2𝜅 cos(𝑘𝑎)
+𝐻2 = @ ∗
+E.
+2𝜅 cos(𝑘𝑎)
+𝑖𝛾
+
+(2)
+
+From this, we derive the energy dispersion 𝐸2 = ±H4𝜅 ' cos ' (𝑘𝑎) − 𝛾 ' . This k-gapped band
+structure is depicted in Fig. 1d. Exceptional points (EPs) arise at 𝐸2 = 0, given by the condition
+cos(𝑘56 𝑎) = ±𝛾/2𝜅. Assuming a small gain/loss factor, 𝛾⁄2𝜅 ≪ 1, the momentum positions of
+7
+
+9
+
+9
+
+9
+
+the EPs are 𝑘56 = ± L'8 − ':8M. For 𝑘 ∈ L− ': , ': M, the energy 𝐸2 remains real, whereas for 𝑘 ∈
+9
+
+9
+
+9
+
+9
+
+L− '8 , − ':M ⋃ L'2 , '8M, the energy becomes imaginary, corresponding to the emergence of the kgap. By considering the momentum periodicity of the Brillouin zone, the “forbidden” regions of
+k-gap are approximately Δ2 = 𝛾⁄𝜅𝑎.
+Notably, we examine the relationship between EPs and k-gaps. For instance, if in the four-level
+setting involving only a pair of G/L sites, the Hamiltonian reduces to
+−𝑖𝛾
+𝐻+/, = @ ∗
+𝜅
+
+𝜅
+E,
+𝑖𝛾
+
+(3)
+
+which is structurally same to Eq. 4. The corresponding eigenvalues 𝐸 = ±H𝜅 ' − 𝛾 ' . EPs occur
+when γ > |κ|, and they can manifest in parameter spaces. In contrast, k-gaps are specific to
+momentum space. Such parity-time (PT) symmetric systems have been experimentally realized in
+coupled waveguides [32]. Notice that, EPs are not observed when γ ≪ |κ|. Nevertheless, in the
+setting of our lattice construction, specific Bloch band modes that satisfy |cos(𝑘56 𝑎)| < 𝛾/2𝜅 can
+fail into the k-gap region, and thus, being amplified.
+
+5
+
+(a)
+
+|3⟩
+Relaxation
+
+Relaxation
+
+Relaxation
+
+|2⟩
+Pump up
+
+Pump
+down
+
+|1⟩
+Relaxation
+
+Relaxation
+
+Relaxation
+
+|0⟩
+
+n"!
+La
+ser
+p
+
+(b)
+
+gain
+
+loss
+
+|G⟩
+
+|*⟩
+
+uls
+e
+
+k-gap
+amplified
+HHG
+
+"!
+e
+
+j-1
+
+(c)
+
+j
+
+2"!
+"!
+
+j+1
+
+(d)
+Laser driving (!! ⁄!" = 0.2)
+
+lattice
+
+DC driving
+
+time ("" t)
+
+time ("" t)
+
+Figure 2 Four-level construction of one-dimensional diatomic lattice with balanced gain/loss
+profiles and the dynamics of k-gap-amplified Bloch oscillations. (a) We construct the gain/loss
+profiles by introducing two auxiliary virtual levels (𝑁% 𝑎𝑛𝑑 𝑁$ -levels). (b) The schematic setup of
+amplifying HHG in the gain/loss profiled diatomic lattice. (c) An amplified Bloch oscillation under
+a DC driving field. (d) An amplified super Bloch oscillation under an AC/laser driving field. This
+leads to the key realization of amplifying solid-state HHG.
+
+6
+
+K-gap amplification. To account for the effects of a laser field applied to the lattice, the
+.
+.
+Hamiltonian is modified as follows: 𝐻 = 𝐻& − 𝐹(𝑡) ∑/
+-0%(2𝑗)𝑐-+ 𝑐-+ + (2𝑗 + 1)𝑐-, 𝑐-, . In the
+context of semiclassical wavepacket evolution, the driving force leads to the equation of motion
+(2
+
+for the Bloch electron ℏ () = 𝐹(𝑡), where 𝐹 is the driving field. For a DC electric field (𝐹 =
+−𝑒𝐸& ), the time-dependent momentum is 𝑘(𝑡) = 𝑘(0) − 𝑒𝐸& 𝑡/ℏ, while for a laser field (or AC)
+( 𝐹 = −𝑒𝐸& cos Ω𝑡 ), 𝑘(𝑡) = 𝑘& − 𝑒𝐸& sin (Ω𝑡)⁄ℏΩ , which can be obtained by the canonical
+substitution 𝑝 → 𝑝 − 𝑒𝐴(𝑡). Bloch oscillation of electrons can lead to Bloch radiation. We derive
+(±)
+
+the group velocities via the dispersion: 𝑣<
+
+= 𝜕𝐸2 ⁄𝜕𝑘 = ∓
+
+@: ! ABC 28 CDE 28
+
+= 𝑑𝑥(𝑡)⁄𝑑𝑡 . The
+
+F@: ! ABC! (28)!9 !
+(1)
+(1)
+sign denotes the upper band branch (𝑣< ) and the lower band branch (𝑣< ). From the last term,
+
+we can extract the classical trajectory of the wavepacket in real space, leading to the dipole moment
+𝑃(𝑡) = −𝑒𝑥(𝑡), which reflects the wave-particle duality of electron wavepackets [33]. The timeG H#
+
+"
+|ℱ[𝑃(𝑡)]|' ,
+averaged radiation power emitted by a classical dipole is given by [34]: 𝐼6 (𝜔) = %'7I
+
+where ℱ [𝑃(𝑡)] represent the Fourier component of the moment. Finally, we integrate group
+velocity over time and obtain the dipole moment:
+𝑃(𝑡) = −𝑒 f 𝑣< (𝑡 J )𝑑𝑡 J = −
+
+ℏ
+LH4𝜅 ' cos ' (𝑘(𝑡)𝑎) − 𝛾 ' − H4𝜅 ' cos ' (𝑘(0)𝑎) − 𝛾 ' M
+2𝐸&
+
+(4)
+
+For 𝛾 = 0, the expression in Eq. 4 describes a conventional Bloch oscillation and the associated
+G H # ℏ! : !
+
+" $
+radiation power can be derived as 𝐼6 (𝜔) = %'7I
+. However, for 𝛾 ≠ 0, the dipole moment
+5!
+"
+
+becomes imaginary as 𝑘(𝑡) approaches the exceptional points, leading to unphysical behavior.
+(±)
+
+This occurs because the group velocity h𝑣< h → ∞ diverges arounds the EPs. Despite this, the
+causality principle ensures that the electron cannot exceed the speed of light. The imaginary
+component of 〈𝑥(𝑡)〉 arises from the evolution of the wavepacket through the k-gap. This group
+velocity divergence signifies the complexity of Bloch oscillations within a k-gapped energy
+dispersion, suggesting that physical observables may become ambiguous due to the complexvalued dipole moment (Eq.4).
+To understand why the semiclassical approach fails in this scenario, we numerically simulate an
+electron evolution in the real lattice. Figure 2c and 2d depict the wavepacket evolution under both
+DC and laser fields. These plots illustrate how the electron wavepacket moves through the k-gap,
+with its central trajectories in real space associated with the corresponding band structure. Far from
+the k-gap, the wavepacket oscillates in the lattice. However, as it enters the k-gap region, the
+wavepacket seems frozen and begins to grow exponentially in amplitude (see the Movie in the SM
+file). This exponential growth within the k-gap has been extensively discussed in photonic time
+crystals [35].
+
+7
+
+Still, we can properly interpret the process when adding the k-gap amplification in the
+semiclassical picture. When a Bloch electron is driven by an external force with all its kcomponents lying in the k-gap, the energy of band modes become purely imaginary, resulting in
+the global growth over time. Although both k-gap amplification and attenuation occur
+simultaneously in k-gap, the amplification would predominate in long term. Within the k-gap, the
+real part of the energy is fixed and the group velocity becomes zero (𝑣< = 𝜕ℜ(𝐸2 )⁄𝜕𝑘 = 0).
+leading to the frozen phase while the amplitude continues to grow. Over time, all k-components
+exit the k-gap and return to the band. Upon crossing the EP, the amplified wavepackets splits into
+two: one component is scattered to the upper band, while the other is scattered into the lower band.
+As depicted in Fig. 2c, we can summary the process: upon entering the k-gap, the wavepacket
+pauses and undergoes amplification. As the amplified wavepacket, driven by an external force,
+leaves the k-gap and crosses the EP, it splits into two wavepackets, each residing on different band.
+These wavepackets oscillate on the bands, subsequently reach the EP again and re-enter the k-gap
+region for the next round of amplification. This cycle - comprising amplification, splitting,
+oscillation, and re-amplification – is referred to as amplified Bloch oscillation.
+In the case of a laser-driven system, Figure 2d illustrates the k-gap-amplified solid-state HHG, also
+known as super Bloch oscillation in AC field driving. Although the evolution pattern appears
+chaotic, it adheres to the same cycling process as the amplified Bloch oscillation. However, in this
+case as the driving field alternates periodically, different k-components of the wavepacket enter
+the k-gap region at different times, so that the amplification and oscillation processes become more
+intertwined and less distinguishable. Therefore, the full wavepacket evolution looks messy without
+showing obviously trajectories, as compared to Fig. 2c.
+Quadrupole radiation. When using semiclassical wavepacket dynamics to calculate the classical
+dipole moment, challenges arise when the displacement x(t) becomes imaginary. This issue
+necessitates a more appropriate method to calculate the radiation and solid-state HHG associated
+with the amplified Bloch oscillation. Numerically, we can define the dipole moment in lattice space
+as 𝑃(𝑡) = −𝑒 ∫ 𝜓 ∗ (𝑥, 𝑡)𝑥𝜓(𝑥, 𝑡) 𝑑𝑥 = −𝑒𝑎 ∑- 𝑗𝑐-. (𝑡) 𝑐- (𝑡) . However, when this definition is
+applied to these simulation results, the dipole moment is found to be zero, as illustrated in Fig. 2c,
+2d. This outcome results from the symmetric evolution pattern around its center. As the
+wavepacket splits evenly at the exceptional points, with one half moving left and the other moving
+right, their contributions to the dipole moment cancel each other out. In addition, even for
+conventional case (𝛾 = 0), we see that a spatially localized, point-like electron input would exhibit
+Bloch breathing behavior, also evolving symmetrically, and as a result, the calculated dipole
+moment trivially yields P(t)=0. Therefore, even without k-gap engineering, direct use of the
+classical dipole radiation looks invalid.
+
+8
+
+(a)
+
+(b)
+Laser field
+DC field
+
+normalized population N(t)
+
+HHG intensity (arb.unit)
+
+10000
+
+100
+
+1
+
+0.01
+1
+
+7
+
+13
+
+19
+
+1.6
+
+Laser field
+DC field
+1
+0
+
+25
+
+1
+
+(c)
+
+(d) 20
+0.16
+
+driving field
+
+k gap time (unit)
+
+amplification (unit)
+
+2
+
+time (t)
+
+harmonic order (n)
+
+0.1
+
+0.04
+
+G/L 0.16
+G/L 0.08
+
+16
+
+12
+
+8
+
+0.09
+
+0.12
+
+0.06
+
+0.15
+
+0.09
+
+0.12
+
+0.15
+
+0.18
+
+driving field (unit)
+
+G/L factor (unit)
+
+it需要确定 Figure 3
+以及数据更新
+Quadrupole radiation in amplified Bloch oscillation with k-gapped band structure
+engineering. (a) Comparison of AC- and DC-driven spectral characteristics. The cutoff frequency
+of high harmonic generation relates to the Bloch oscillation frequency. (b) The change of
+population N(t) over time. The flat segment indicates evolution on the band, while the gain
+segment shows dynamics in the k-gap. The slopes represent the effective gain coefficient Γ and
+the duration represents the k-gap time 𝜏<8L . (c) Linear relationship between the effective gain
+coefficient Γ and the gain/loss profile 𝛾 for three force strengths: F = 0.536,0.766,0.996 ×10⁻¹ eV/a
+(d) The k-gap time 𝜏<8L inversely correlates with the driving field strength, matching theoretical
+expectations.
+We observe that while the center of the wavepacket does not oscillate, its width does. Therefore,
+we define a radiation source based on this oscillating width, 𝑄(𝑡) = −𝑒〈𝑥 ' 〉 =
+−𝑒 ∫ 𝜓 ∗ (𝑥, 𝑡)𝑥 ' 𝜓(𝑥, 𝑡) 𝑑𝑥 = −𝑒𝑎' ∑- 𝑗 ' 𝑐-. (𝑡)𝑐- (𝑡). This is referred to as the quadrupole moment,
+corresponding to an oscillating linear electric quadrupole. Analogous to dipole radiation, we can
+9
+
+directly obtain the time-averaged radiation power from a classical quadrupole [34][Griffiths’
+textbook]:
+𝐼M (𝜔) =
+
+𝜇& 𝜔 N
+|ℱ[𝑄(𝑡)]|'
+60𝜋𝑐 $
+
+(5)
+
+To refine the definition of quadrupole radiation for amplified Bloch oscillations, we decompose
+the quadrupole moment into two parts: 𝑄(𝑡) = 𝑄u(𝑡)𝑁(𝑡), where 𝑄u(𝑡) is a normalized quadrupole
+and 𝑁(𝑡) = ∫|𝜓(𝑥, 𝑡)|' 𝑑𝑥 is the population, so that 𝑄u(𝑡) = 𝑄(𝑡)/𝑁(𝑡) . The normalized
+quadrupole 𝑄u(𝑡) is instrumental for analyzing the HHG spectrum, while the accumulated
+population 𝑁(𝑡) signifies the amplification. For each Bloch oscillation cycle, population growth
+can be approximated as 𝑁(𝑇# )/𝑁(0) = 𝑒 OP%&' , where Γ is the effective gain and 𝜏<8L is the kgap time. The effective gain and k-gap time depends on the balanced gain/loss factor, the k-gap
+size and the driving force strength. Notice that quadrupole radiation has been used in the analysis
+of electron dynamics and harmonic generations driven by bright squeezed vacuum [36].
+Figure 3 compare quadrupole radiation from DC-driven Bloch oscillation and laser-driven HHG.
+In Fig. 3a, the HHG cutoff frequency is shown to scale linearly with the Bloch frequency 𝜔# ,
+increasing with the driving force 𝐸& , and Fig. 3b depicts the temporal evolution of populations N(t)
+under both driving conditions. The effective gain Γ is derived from the slope of N(t) in the gain
+region, with its duration corresponds to the k-gap time 𝑡<8L . For DC cases (Fig. 3c), Γ exhibits a
+near-linear dependence on the gain/loss profile γ. Theoretically, 𝑡<8L = ℏΔ2 /𝑒𝐸* = 𝛾/𝜅ω# ,
+inversely proportional to 𝜔# or 𝐸& , a trend corroborated by numerical simulations (Fig. 3d). The
+simulation parameters see the SM file.
+To resolve temporal radiation characteristic across the k-gap and energy bands, the Gabor
+transformation is applied to the averaged quadrupole moment: 𝐼(𝜔, 𝜏) = y∫ 𝑄u (𝑡)𝑊(𝑡 +
+'
+
+𝜏)𝑒 QH) 𝑑𝑡y , where 𝑊 is a temporal window function. These resulting numerical spectrograms (Fig.
+4a-4c), reveal HHG-like spectral broadening of frequency distributions with increasing driving
+force F=6.8931, 5.3613, and to 3.8295×10⁻¹ eV/a. Oscillatory intensity growth dominates in Fig.
+4a and 4b, while Fig. 4c shows merely oscillation, reflecting competition between k-gap-induced
+population amplification and Bloch radiation. Fig. 4d-4f demonstrate intensity enhancement
+strongly correlated with the gain/loss profile 𝛾, peaking under DC driving. Dipole and quadrupole
+radiation spectrum (Fig. 4g, 4h) align for both wide and narrow wavepackets, with characteristic
+frequencies consistent with inter-band HHG radiations, as compared in Fig. 4i. The spectral
+consistency validates the applicability of the quadrupole radiation in our modelling.
+
+10
+
+20
+0.10
+
+10
+
+0
+
+0
+
+1
+
+2
+
+Time (T)
+
+30
+
+(e)
+
+0
+
+1
+
+301.0E+6
+
+10
+
+0
+
+HHG spectrum (ωL)
+
+(g)
+
+HHG spectrum (ωL)
+
+20
+
+1
+
+(h)
+
+𝐹 = 7, 𝐺/𝐿 = 0
+
+Bloch oscillation (BO)
+20
+
+10
+
+0
+
+1
+
+Time (T)
+
+2
+
+1
+
+30 1.0E+6
+
+Time (T)
+
+laser driving
+0.10
+
+Bloch breath (BB)
+0.10
+
+10
+
+0.10
+
+10
+
+−1
+10
+0.10
+
+0
+
+1
+
+2
+
+Time (T)
+
+30 1.0E+6
+
+1.0E+6
+
+𝐹 = 7, 𝐺/𝐿 = 1
+DC driving
+
+20
+0.10
+
+1
+
+0.10
+
+2
+
+Time (T)
+
+10
+
+(i)
+
+20
+
+6
+1.0E+6
+10
+
+20
+
+0
+
+2
+
+𝐹 = 7, 𝐺/𝐿 = 0
+
+0
+
+0
+
+0
+
+10
+
+0
+
+(f)
+
+1.0E+6
+
+𝐹 = 5, 𝐺/𝐿 = 1
+
+0
+
+2
+
+10
+
+0
+
+0.10
+
+2
+
+Time (T)
+
+30
+
+20
+
+𝐹 = 7, 𝐺/𝐿 = 0.5
+
+20
+
+0
+
+0
+
+HHG spectrum (ωL)
+
+HHG spectrum (ωL)
+
+𝐹 = 7, 𝐺/𝐿 = 2
+
+Time (T)
+
+30 1.0E+6
+
+30
+
+HHG spectrum (ωL)
+
+10
+
+𝐹 = 7, 𝐺/𝐿 = 1
+
+HHG intensity (arb.unit)
+
+20
+
+(c)
+
+1.0E+6
+
+HHG spectrum (ωL)
+
+30
+
+HHG spectrum (ωL)
+
+𝐹 = 9, 𝐺/𝐿 = 1
+
+0
+
+(d)
+
+(b)
+
+30
+
+HHG spectrum (ωL)
+
+HHG spectrum (ωL)
+
+(a)
+
+0
+
+1
+
+2
+
+Time (T)
+
+1.0E+6
+
+Laser field F1
+Laser field F2
+BB by DC
+BO by DC
+
+1000
+
+0.10
+
+0.01
+
+0
+
+1
+
+2
+
+Time (T)
+
+1
+
+7
+
+13
+
+19
+
+harmonic order (n)
+
+Figure 4 Spectrogram analysis of the k-gap amplified HHG in solid. Different HHG spectrum are
+compared in terms of the driving field parameters and gain/loss profile. (a)-(c) HHG spectra under
+different driving field strengths (F). The white line shows F over time, the yellow line shows
+population dynamics, and the color map shows the short-time Fourier transform (STFT)
+spectrogram. The population dynamics combine k-gap amplification and HHG oscillation. (d)-(e)
+HHG spectra under different gain/loss profiles ( 𝛾 ), showing a strong link between 𝛾 and
+amplification efficiency. (f) Spectrum under DC driving, showing higher enhancement compared
+to AC driving. (g)-(h) Comparison of dipole radiation (Bloch oscillation) and quadrupole radiation
+(Bloch breathing) without k-gaps. Both show similar spectral distributions, validating the
+quadrupole model for centrosymmetric electron dynamics. (i) HHG spectra under different F
+values (left) and comparison of Bloch oscillation (BO) and Bloch breathing (BB) radiation (right).
+The cutoff frequency and peak positions change with F. The consistency between quadrupole and
+dipole models further supports the quadrupole radiation mechanism. (F unit: 0.766×10⁻¹ eV/a; 𝛾
+unit: 0.244×10⁻¹ eV)
+Further discussions. Several theoretical frameworks have been developed to model solid-state
+HHG [37], including the time-dependent Schrödinger equation (TDSE) [38] with a periodic
+11
+
+Fig
+
+potential, semiconductor Bloch equations (SBEs) [15], and time-dependent density functional
+theory (TDDFT) [39]. Although SBEs and TDDFT are particularly effective for studying specific
+materials, given their ability to accurately simulate the band structure via density functional theory,
+the tight-binding approximation (TBA) Hamiltonian approach, employed as a phenomenological
+model for solving the TDSE, provides a clearer understanding by capturing the essential k-gapped
+band structure engineering. Therefore, TBA model serves as an excellent candidate for discussing
+the HHG amplification in solids.
+On the other hand, several experimental challenges must be addressed. First, the construction of
+the required four-level system to establish a balanced gain and loss profile may surpass the current
+capabilities of available materials. Potential platforms for such material design include aligned
+quantum wells or quantum dots with balanced gain/loss characteristics, optically pumped materials
+that exploit stimulated emission in doped semiconductor layers, and time-varying photonic crystals
+and metamaterials engineered to exhibit non-Hermitian responses. These systems would enable
+the controlled k-gap amplification of Bloch oscillations, facilitating the realization of efficient
+solid HHG. Second, maintaining electron coherence during the cycle of the amplified Bloch
+oscillation presents an additional challenge, particularly if the band electrons are subject to strong
+decoherence and dephasing. Third, generating coherent HHG in the extreme ultraviolet range, for
+instance, which requires Bloch frequencies between 10 to 100 eV, necessitates an electric field
+strength on the order of 1 GV/m and a superlattice constant ranging from 10 to 100 nm. Notably,
+Bloch oscillations have found applications such as THz sources in superlattice-based Bloch
+oscillators and quantum cascade laser (QCL) utilizes intrasubband transitions in quantum
+wells [28,40,41], commonly used in mid- to far-infrared electromagnetic radiation. Collectively,
+these stringent requirements push the limits of microfabrication technologies and material science,
+underscoring the complexity and technical hurdles in enhancing solid-state HHG.
+Conclusion. In brief, we propose a solid-state HHG amplification framework that encompasses
+the construction of an on-site gain/loss balanced diatomic lattice using a four-level system, the
+employment of k-gap engineering to demonstrate amplified Bloch oscillations, and the
+development of quadrupole radiation to calculate the amplified harmonic generations. Our
+approach specifically targets the amplification of EUV HHG in solids through k-gapped band
+structure engineering. The interband radiation modulated by k-gaps, significantly enhances the
+efficiency and spectral characteristics of the emissions. Despite the experimental challenges, our
+framework introduces a novel concept in k-gap engineering that opens new avenues for advanced
+solid-state photonics applications and the further exploration of compact, coherent EUV sources.
+
+12
+
+Acknowledgement
+Y.P. acknowledges the support of the NSFC (No. 2023X0201-417-03) and the fund of the
+ShanghaiTech University (Start-up funding). The authors declare no competing financial
+interests.
+Correspondence and requests for materials should be addressed to Y.P.
+yiming.pan@shanghaitech.edu.cn
+
+References
+[1]
+
+[2]
+[3]
+[4]
+[5]
+[6]
+[7]
+
+[8]
+
+[9]
+
+[10]
+
+[11]
+[12]
+[13]
+
+M. Ferray, A. L’Huillier, X. F. Li, L. A. Lompre, G. Mainfray, and C. Manus, Multiple-har
+monic conversion of 1064 nm radiation in rare gases, Journal of Physics B: Atomic, Molec
+ular and Optical Physics 21, L31 (1988).
+T. T. Luu, Z. Yin, A. Jain, T. Gaumnitz, Y. Pertot, J. Ma, and H. J. Wörner, Extreme–ultravi
+olet high–harmonic generation in liquids, Nat Commun 9, 3723 (2018).
+S. Ghimire, A. D. Dichiara, E. Sistrunk, P. Agostini, L. F. Dimauro, and D. A. Reis, Observ
+ation of high-order harmonic generation in a bulk crystal, Nat Phys 7, 138 (2011).
+F. Krausz, Nobel lecture: Sub-atomic motions, Rev Mod Phys 96, 030502 (2024).
+P. B. Corkum and F. Krausz, Attosecond science, Nat Phys 3, 381 (2007).
+F. Krausz and M. Ivanov, Attosecond physics, Rev Mod Phys 81, 163 (2009).
+E. Constant, D. Garzella, P. Breger, E. Mével, C. Dorrer, C. Le Blanc, F. Salin, and P. Agos
+tini, Optimizing High Harmonic Generation in Absorbing Gases: Model and Experiment, P
+hys Rev Lett 82(8), 1668 (1999).
+T. Popmintchev, M. C. Chen, A. Bahabad, M. Gerrity, P. Sidorenko, O. Cohen, I. P. Christo
+v, M. M. Murnane, and H. C. Kapteyn, Phase matching of high harmonic generation in the
+soft and hard X-ray regions of the spectrum, Proc Natl Acad Sci U S A 106, 10516 (2009).
+P. Balcou, P. Salieres, A. L’Huillier, and M. Lewenstein, Generalized phase-matching cond
+itions for high harmonics: The role of field-gradient forces, Phys Rev A (Coll Park) 55, 32
+04 (1997).
+R. Tobey, D. Raymondson, E. A. Gibson, C.-F. Lei, A. Paul, S. Backus, M. Siemens, X. Zh
+ang, M. M. Murnane, and H. C. Kapteyn, Ultrashort-Pulse EUV and Soft x-Ray Sources B
+ased on High-Harmonic Generation: Principles and Applications, in 26th International C
+ongress on High-Speed Photography and Photonics, Vol. 5580 (SPIE, 2005), pp. 12–17.
+M. Gross and S. Haroche, Superradiance: An essay on the theory of collective spontaneous
+emission, Phys Rep 93, 301 (1982).
+J. Ullrich, A. Rudenko, and R. Moshammer, Free-electron lasers: New avenues in molecul
+ar physics and photochemistry, Annu Rev Phys Chem 63, 635 (2012).
+C. Pellegrini, A. Marinelli, and S. Reiche, The physics of x-ray free-electron lasers, Rev M
+od Phys 88, 015006 (2016).
+13
+
+[14]
+[15]
+[16]
+[17]
+[18]
+
+[19]
+
+[20]
+[21]
+[22]
+[23]
+[24]
+[25]
+
+[26]
+
+[27]
+[28]
+
+[29]
+
+[30]
+
+S. Ghimire and D. A. Reis, High-harmonic generation from solids, Nat Phys 15, 10 (2019).
+G. Vampa, C. R. McDonald, G. Orlando, D. D. Klug, P. B. Corkum, and T. Brabec, Theore
+tical analysis of high-harmonic generation in solids, Phys Rev Lett 113, 073901 (2014).
+G. Vampa, T. J. Hammond, N. Thiré, B. E. Schmidt, F. Légaré, C. R. McDonald, T. Brabec,
+and P. B. Corkum, Linking high harmonics from gases and solids, Nature 522, 462 (2015).
+I. Al-Naib, J. E. Sipe, and M. M. Dignam, High harmonic generation in undoped graphene:
+Interplay of inter-and intraband dynamics, Phys Rev B 90, 245423 (2014).
+A. M. Shaltout, J. Fang, A. V Kildishev, and V. M. Shalaev, Photonic Time-Crystals and M
+omentum Band-Gaps, in CLEO: QELS_Fundamental Science (Optica Publishing Group, 2
+016), pp. FM1D-4.
+E. Galiffi, R. Tirole, S. Yin, H. Li, S. Vezzoli, P. A. Huidobro, M. G. Silveirinha, R. Sapien
+za, A. Alù, and J. B. Pendry, Photonics of time-varying media, Advanced Photonics 4, 140
+02 (2022).
+M. Lyubarov, Y. Lumer, A. Dikopoltsev, E. Lustig, Y. Sharabi, and M. Segev, Amplified e
+mission and lasing in photonic time crystals, Science (1979) 377, 425 (2022).
+N. Wang, Z.-Q. Zhang, and C. T. Chan, Photonic Floquet media with a complex time-perio
+dic permittivity, Phys Rev B 98, 085142 (2018).
+M.-A. Miri and A. Alu, Exceptional points in optics and photonics, Science (1979) 363, ea
+ar7709 (2019).
+S. Yao and Z. Wang, Edge states and topological invariants of non-Hermitian systems, Phy
+s Rev Lett 121, 086803 (2018).
+K. Leo, P. H. Bolivar, F. Brüggemann, R. Schwedler, and K. Köhler, Observation of Bloch
+oscillations in a semiconductor superlattice, Solid State Commun 84, 943 (1992).
+C. Waschke, H. G. Roskos, R. Schwedler, K. Leo, H. Kurz, and K. Köhler, Coherent subm
+illimeter-wave emission from Bloch oscillations in a semiconductor superlattice, Phys Rev
+Lett 70, 3319 (1993).
+J. Feldmann, K. Leo, J. Shah, D. A. B. Miller, J. E. Cunningham, T. Meier, G. Von Plessen,
+A. Schulze, P. Thomas, and S. Schmitt-Rink, Optical investigation of Bloch oscillations in
+a semiconductor superlattice, Phys Rev B 46, 7252 (1992).
+F. Bloch and A. Nordsieck, Note on the radiation field of the electron, Physical Review 52,
+54 (1937).
+E. P. Dodin and A. A. Zharov, Terahertz radiation of Bloch oscillators excited by an electro
+magnetic field in lateral semiconductor superlattices, Journal of Experimental and Theoreti
+cal Physics 97, 127 (2003).
+C. Zener and R. H. Fowler, A theory of the electrical breakdown of solid dielectrics, Proce
+edings of the Royal Society of London. Series A, Containing Papers of a Mathematical and
+Physical Character 145, 523 (1934).
+F. Bloch, Quantum mechanics of electrons in crystal lattices, Z. Phys 52, 555 (1928).
+
+14
+
+[31]
+
+[32]
+[33]
+[34]
+[35]
+
+[36]
+[37]
+[38]
+[39]
+
+[40]
+[41]
+
+C. Zener and R. H. Fowler, Non-adiabatic crossing of energy levels, Proceedings of the Ro
+yal Society of London. Series A, Containing Papers of a Mathematical and Physical Chara
+cter 137, 696 (1932).
+A. Regensburger, C. Bersch, M. A. Miri, G. Onishchukov, D. N. Christodoulides, and U. P
+eschel, Parity-time synthetic photonic lattices, Nature 488, 167 (2012).
+D. Xiao, M. C. Chang, and Q. Niu, Berry phase effects on electronic properties, Rev Mod
+Phys 82, 1959 (2010).
+Griffiths D J, Introduction to Electrodynamics, 4th ed. (Pearson, 2012).
+Z. Hayran, J. B. Khurgin, and F. Monticone, ℏω versus ℏk: dispersion and energy constrain
+ts on time-varying photonic materials and time crystals [Invited], Opt Mater Express 12, 3
+904 (2022).
+M. Even Tzur and O. Cohen, Motion of charged particles in bright squeezed vacuum, Ligh
+t Sci Appl 13, 41 (2024).
+L. Yue and M. B. Gaarde, Introduction to theory of high-harmonic generation in solids: tut
+orial, Journal of the Optical Society of America B 39, 535 (2022).
+M. Wu, S. Ghimire, D. A. Reis, K. J. Schafer, and M. B. Gaarde, High-harmonic generatio
+n from Bloch electrons in solids, Phys Rev A (Coll Park) 91, 043839 (2015).
+N. Tancogne-Dejean, O. D. Mücke, F. X. Kärtner, and A. Rubio, Impact of the electronic b
+and structure in high-harmonic generation spectra of solids, Phys Rev Lett 118, 087403 (2
+017).
+P. G. Savvidis, B. Kolasa, G. Lee, and S. J. Allen, Resonant Crossover of Terahertz Loss to
+the Gain of a Bloch Oscillating InAs/AlSb Superlattice, Phys Rev Lett 92, 196802 (2004).
+J. Faist, F. Capasso, D. L. Sivco, C. Sirtori, A. L. Hutchinson, and A. Y. Cho, Quantum cas
+cade laser, Science (1979) 264, 553 (1994).
+
+15
+
+

@@ -1,0 +1,929 @@
+Attosecond Light Skyrmion Pulses via High Harmonic Generation
+
+David Marco1,2,3,∗ Luis Plaja1,2, and Carlos Hern´andez-Garc´ıa1,2
+1Grupo de Investigaci´on en Aplicaciones del L´aser y Fot´onica,
+Departamento de F´ısica Aplicada,
+Universidad de Salamanca, E-37008 Salamanca, Spain
+2Unidad de Excelencia en Luz y Materia Estructuradas (LUMES),
+Universidad de Salamanca, Salamanca, Spain
+3Instituto de Bioingenier´ıa,
+Universidad Miguel Hern´andez de Elche, 03202 Elche, Spain
+
+Paraxial light skyrmions are topological configurations that map a spatial domain of the field
+onto the full Poincar´e sphere of polarization states. While optical skyrmions have been explored in
+continuous-wave regimes, their realization in the ultrafast domain remains open. Here we demon-
+strate that attosecond skyrmion pulses can be generated via high-harmonic generation. Advanced
+simulations combining single-atom strong-field theory and macroscopic propagation reveal that an
+infrared linearly polarized vector beam with fractional orbital angular momentum produces extreme-
+ultraviolet harmonic fields with nearly identical skyrmion polarization distributions across a broad
+spectral range. Using 1.2 µm driving fields and experimentally feasible spectral filtering, we show
+that the coherent superposition of consecutive harmonics centered at 70 eV yields a train of skyrmion
+pulses with ∼ 500 attoseconds duration. Our results open opportunities to use structured attosecond
+light with topological polarization textures in fields as ultrafast control, imaging and spectroscopy.
+
+Skyrmions are field configurations with nontrivial
+topology, where a spatial region is mapped onto an en-
+tire spherical parameter space [1, 2]. Their topologi-
+cal properties are quantified by the Skyrme number NS,
+whose magnitude gives the number of sphere coverings.
+Skyrmionic textures have been identified in systems like
+magnetic media [3], superfluids [4], Bose–Einstein con-
+densates [5], acoustic [6, 7] and water waves [8], and in
+various aspects of light polarization [9–16]. In particular,
+skyrmions arise in paraxial light fields containing all pos-
+sible elliptical polarization trajectories in the transverse
+profile [2, 17–19]. These trajectories are fully represented
+as points on the Poincar´e sphere of polarization states,
+where the poles correspond to the two orthogonal circular
+states and the equator to linear states (Fig. 1). Points in
+physical space mapping to circular polarization states are
+known as C-points. Unlike phase singularities in scalar
+optical vortices, C-points can be bright as they represent
+singularities in the orientation of the polarization ellipse
+in the circle limit, and have found recent applications in
+sensing [20]. Paraxial skyrmions are being also applied
+in complex media [21], quantum optics [22], topological
+materials [23, 24] or imaging [25].
+
+Up to now, optical skyrmions have been generated in
+the continuous-wave or long-pulse regimes, while their
+generation and applications in the ultrafast domain re-
+main largely unexplored. On the other side, although
+the production of light pulses down to the attosecond
+timescale is well established since the early 2000’s [26, 27],
+the generation of structured fields at such timescales has
+only been explored during the last decade. The key
+challenge is how to structure light in the high-frequency
+
+∗ davidmarco@usal.es
+
+regime, where most optical techniques become highly in-
+efficient. Recently, x-ray paraxial skyrmions have been
+generated using free electron lasers, without relying in
+optical elements [28]. However, synthesizing attosecond
+skyrmions requires the production of a high-frequency
+comb of phase-locked radiation with, ideally, identical
+skyrmion characteristics. In this context, the nonlinear
+process of high harmonic generation (HHG) [29, 30] has
+already been proven to be a robust method for generat-
+ing simpler forms of attosecond structured light pulses.
+In HHG an intense infrared (IR) femtosecond (fs) driver
+is up-converted into a plateau of harmonics with simi-
+lar intensity and regular phase relationship, which allows
+their synthesis into attosecond pulses [26, 27]. Through
+HHG, some particular forms of structured IR fields can
+be up-converted to structured extreme-ultraviolet (EUV)
+beams. As a result, EUV attosecond structures such
+as vortices [31–34], vector beams [35], self-torque beams
+[36], and spatiotemporal optical vortices [37, 38] have
+been successfully generated. Thus, HHG stands as an ex-
+cellent potential candidate for producing far more com-
+plex forms of ultrafast structured fields, as attosecond
+skyrmions.
+
+However, the up-conversion of IR paraxial skyrmions
+though HHG is far from trivial, as the harmonic con-
+version efficiency depends critically on the polarization
+state, decreasing substantially with the driver ellipticity
+[39]. As such, the up-conversion of light structures con-
+taining polarization states other than linear is challeng-
+ing. Therefore, an IR paraxial skyrmion does not directly
+up-convert into an EUV harmonic skyrmion. Nonethe-
+less, by properly modifying the IR driving field prop-
+erties, high-order harmonics with elliptical and circular
+polarization states have been produced [40–43]. Indeed,
+two-color schemes have been proposed to generate EUV
+
+5
+2
+0
+2
+
+t
+c
+O
+6
+1
+
+]
+s
+c
+i
+t
+p
+o
+.
+s
+c
+i
+s
+y
+h
+p
+[
+
+2
+v
+3
+1
+1
+9
+1
+.
+9
+0
+5
+2
+:
+v
+i
+X
+r
+a
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+FIG. 1. Generation of an attosecond EUV skyrmion pulse trains from an IR linearly polarized fs vector beam via HHG.
+The instantaneous polarization state of the pulse train is encoded by a color map that assigns each point to its location on
+intensity–phase maps of the LCP and RCP components, together
+the Poincar´e sphere. (a) Input driver at the gas target:
+with the intensity–polarization map designed to produce a skyrmion in the 23rd harmonic.
+(b) Near-field intensity–phase
+maps of the LCP and RCP components for harmonics q = 21, 23, 25, where the polarization distribution equals that of the
+driver. (c) Far-field intensity–phase maps of the circular components for harmonics q = 21, 23, 25, along with the corresponding
+intensity–polarization maps. All three harmonics evolve into nearly equal skyrmion structures with N q
+S ≈ 1 within a common
+closed contour of 0.34 mrad in the far field, indicated by the red dashed line.
+
+skyrmions with harmonic-dependent polarization distri-
+butions and distinct NS [44]. Yet, producing attosecond
+skyrmion pulses further requires a spectral comb where
+the harmonics share the same polarization distribution
+while maintaining a regular phase relationship.
+
+In this Letter, we demonstrate that attosecond
+skyrmion pulses can be obtained in HHG by properly
+structuring a linearly polarized IR vector driving beam.
+Our simulations demonstrate that the use of two counter-
+rotating beams with properly chosen fractional orbital
+angular momentum (OAM) drives far-field harmonics
+that, within a common fixed circular contour, exhibit
+
+polarization textures with nearly identical Skyrme num-
+ber. The coherent superposition of the harmonic comb
+yields an attosecond pulse train with a temporally nearly
+constant skyrmion polarization texture (Fig. 1). In par-
+ticular, as a potential experimental implementation, we
+propose that, driving HHG with a 1.2 µm driving and us-
+ing of a combination of Zr and Al filters, skyrmion pulses
+of ∼500 attoseconds and a central photon energy of ∼70
+eV can be readily produced.
+
+The proposed HHG configuration is depicted in Fig. 1
+(top). HHG is driven by two counter-rotating IR beams
+with fractional OAM, that results in a linearly polarized
+
+vector beam at the gas jet, given by
+A(ρ, φ) = A(ρ) (cid:2)eiℓlφ el + eiℓrφ er
+
+(cid:3) = A(ρ)eiℓ+φp(φ),
+
+√
+
+(1)
+2 are the basis vectors of the left-
+where el, er = (1 ± i)/
+and right-circularly polarized (LCP and RCP) compo-
+nents carrying topological charges of ℓl,r, ℓ± = (ℓl±ℓr)/2,
+and p(φ) = eiℓ−φ el + e−iℓ−φ er denotes a spatially vari-
+ant linear polarization state, whose local orientation an-
+gle is defined by ℓ−. We consider a driving amplitude
+profile, A(ρ), corresponding to a circular aperture with
+uniform amplitude (A = 1 for ρ < ρ0 and A = 0 other-
+wise, with ρ0 denoting the aperture radius). Note that
+to preserve the linearly polarized state that optimizes the
+HHG efficiency, the two circular components must over-
+lap spatially.
+
+To predict the conditions for generating skyrmionic
+harmonic polarization textures, we consider the thin slab
+model (TSM) for HHG [45], which treats the gas target
+as an infinitesimally thin layer of emitters. The TSM
+models the near-field q-th-order harmonic in terms of
+the driving field—the harmonic amplitude scales non-
+perturbatively with that of the driving with power of
+p < q, whereas its phase is multiplied by q [46]. The
+model includes an additional intrinsic dipole phase term
+arising from the electronic excursion. This phase, be-
+ing proportional to the local driving intensity, can be
+neglected for the uniform circular aperture considered.
+When applied to Eq. (1), the near-field q-th order har-
+monic profile is then given by
+
+Aq(ρ, φ) = Ap(ρ)
+
+(cid:104)
+
+eiℓq
+
+l φ el + eiℓq
+
+rφ er
+
+ℓq
+l,r =
+
+ℓl(q ± 1) + ℓr(q ∓ 1)
+2
+
+.
+
+(cid:105)
+
+,
+
+(2)
+
+(3)
+
+Reversing Eq. (3), we can infer the driving beam topo-
+logical charges, ℓl,r, required to obtain a particular set of
+harmonic topological charges ℓq
+
+(1 ± q)ℓq
+
+ℓl,r =
+
+l,r, as
+l + (1 ∓ q)ℓq
+r
+2q
+
+.
+
+(4)
+
+An optical skyrmion with NS = 1 can be constructed
+from LCP and RCP components carrying topological
+charges 0 and 1, respectively [17]. According to Eq. (4),
+a q-th-order harmonic with topological charges ℓq
+l,r = 0, 1
+is obtained by driving HHG with a linearly polarized
+vector beam carrying ℓl,r = 1 ∓ q/(2q). Considering
+the q = 23 harmonic—that belongs to the plateau if
+driven in argon—, the required driver charges are ℓl,r =
+−11/23, 12/23 (Fig. 1(a)). We note that fractional OAM
+beams [47], have been previously used in different scenar-
+ios of HHG [48, 49]. Figure 1(b) illustrates the resulting
+near-field circular components of the high-order harmon-
+ics predicted by the TSM, which share the same intensity
+distribution as they inherit the linear polarization of the
+driving beam. Whereas in the near field the high-order
+harmonics remain linearly polarized, the skyrmion tex-
+ture arises after propagation of these near-field profiles
+to a far-field detector.
+
+3
+
+To confirm the predictions given by the TSM, we
+show in Fig. 1(c) the results obtained using our full nu-
+merical simulations of HHG in an argon gas jet. Our
+method combines the quantum description at the single-
+atom level using the strong-field approximation, and the
+macroscopic phase-matching of the harmonics through
+the electromagnetic field propagator [50]. This approach
+has been successfully employed in the theoretical back-
+up of experiments of HHG driven by structured beams—
+see for example [33–37, 49]. The input IR driving field
+exhibits the polarization, amplitude and phase distribu-
+tions presented in Fig. 1(a), with a beam radius of 42 µm,
+and a sin-squared temporal envelope of 7.7 fs full width
+at half maximum in intensity (FWHM), with a peak in-
+tensity of 9.81 × 1013 W/cm2 and central wavelength of
+0.8 µm.
+
+The far-field polarization distributions, together with
+the amplitude and phase of the circular components of
+the harmonics q = 21, 23, 25, are shown in Fig. 1(c). For
+q = 23, the LCP (RCP) component presents ℓ23
+l = 0
+(ℓ23
+r = 1). Both components exhibit distinct radially
+varying intensity distributions, yielding a skyrmion with
+N 23
+S = 1. For adjacent harmonics, the harmonic-order
+dependence in the selection rule given by Eq. (4) leads
+to small deviations in the topological charges of their
+polarization components with respect to the central val-
+ues ℓ23
+l,r = 0, 1, resulting in slightly noninteger charges
+(Fig. 1(b)).
+Interestingly, after propagation to the far
+field, these noninteger charges evolve into beams with the
+same integer topological charges [51], ℓ21
+l,r = 0, 1,
+yielding nearly identical skyrmion polarization distribu-
+tions. The far-field polarization distribution of the ad-
+jacent harmonics, however, undergoes a slight linear dis-
+placement along the x axis, opposite in direction for har-
+monics above or below q = 23.
+
+l,r = ℓ25
+
+The near-field circular aperture—A(ρ) in Eq. (1)—
+induces fast polarization oscillations beyond the har-
+monic skyrmion boundary, but only in regions of neg-
+ligible intensity—not represented in Fig. 1(c). Although
+the skyrmionic structure does not extend to infinity, a
+skyrmion for the central harmonic q = 23 can be obtained
+by spatially cropping the field to the closed contour, C, of
+the RCP component. We calculate the resulting Skyrme
+number as
+
+NS =
+
+(cid:90) (cid:90)
+
+1
+4π
+
+C
+
+s · [∂xs × ∂ys] dx dy,
+
+(5)
+
+with
+
+s =
+
+[|Aq
+
+x|2 − |Aq
+
+y|2, 2Re(Aq,∗
+|Aq
+
+x Aq
+y), 2Im(Aq,∗
+x|2 + |Aq
+y|2
+
+x Aq
+
+y)]
+
+,
+
+(6)
+
+which denotes the spatially varying normalized Stokes
+vector across a transverse plane, whose components s =
+[s1, s2, s3] are the Cartesian coordinates of a point on the
+Poincar´e sphere representing a specific polarization state,
+and Aq
+x,y are the spatially varying Cartesian components
+of the complex harmonic field. Using a fixed closed con-
+tour of 0.34 mrad, the resulting Skyrme number obtained
+
+4
+
+S = 1.000,
+
+S = 0.957, N 23
+
+from our numerical results is N 21
+N 25
+
+S = 0.948.
+We next analyze the resulting attosecond pulses and
+the temporal stability of their polarization texture. Fig-
+ure 2(a) shows the spatially-integrated far-field spec-
+trum. Selecting a spectral window containing harmonics
+q = 21, 23, 25 yields a skyrmion attosecond pulse train.
+Figure 2(b) shows the temporal evolution of NS within a
+closed contour of 0.34 mrad for the central pulse within
+the train, reaching NS = 1.000 at the pulse peak, with
+variations smaller than ∆NS = 0.024 towards the edges.
+The temporal evolution of the local real electric field for
+a single pulse within the train is shown in Fig. 2(c). At
+each point, the field traces in time an approximately con-
+stant polarization ellipse. Small instantaneous deviations
+are encoded by a color scheme that maps the instan-
+taneous polarization state to its point on the Poincar´e
+sphere. Such small deviations are further evidenced in
+the three paradigmatic transverse positions depicted in
+Fig. 2(d), which shows the temporal evolution of the at-
+tosecond pulse train at positions where the polarization
+state of the central harmonic (q = 23) is LCP (top),
+linear at 45◦ (middle), and RCP (bottom). The cen-
+tral pulse within the train exhibits a duration of ∼ 450
+as (FWHM). The instantaneous polarization trajectories
+within the FWHM of the central pulse are mapped on
+the Poincar´e sphere (right column). The dots represented
+on the surface indicate that the polarization state varies
+slightly along the pulse.
+
+In order to provide a more realistic experimentally
+realizable configuration, where the harmonic skyrmions
+with similar NS within the same spatial contour can be
+naturally filtered, we perform simulations with a driv-
+ing beam with longer, mid-IR wavelength, of 1.2 µm,
+11.5 fs FWHM and peak intensity of 1.19×1014 W/cm2.
+Increasing the driver wavelength increases the maxi-
+mum HHG photon energy [52–54] while reducing the
+polarization imperfections between consecutive harmonic
+skyrmions. In Fig. 3(a) we show the resulting integrated
+spectrum (purple solid line). The use of 0.2 µm Al and
+0.3 µm Zr foils allows to naturally select a spectral region
+at 70 eV, covering five harmonic orders (purple filled).
+
+We chose q = 66 as the central frequency of the result-
+ing window, for which, the resulting driver topological
+charges are ℓl,r = −65/132, 67/132, as dictated by Eq. 4.
+Within a closed contour of 0.19 mrad, the Skyrme num-
+bers of the five harmonics within the window, ordered
+by increasing harmonic energy, are 0.982, 0.995, 1.000,
+0.994, and 0.978, showing smaller deviations from the
+central harmonic than in the 0.8-µm driver case. The
+temporal evolution of NS within this contour during the
+central pulse is shown in Fig. 3(b), yielding NS = 1.000
+at the pulse maximum with a maximum deviation of
+∆NS = 0.009. The resulting skyrmion pulse train is
+shown in Figs. 3(c,d). The skyrmion EUV attosecond
+pulses not only possess higher photon energy, but the
+polarization state in each spatial position is more regular
+in time, as evidenced by the corresponding projections
+
+FIG. 2.
+Attosecond EUV skyrmion pulse train driven at
+0.8 µm. (a) HHG spectrum, where the purple filled window
+contains the harmonics q = 21, 23, 25 that yield the skyrmion
+attosecond train. (b) Temporal evolution of NS inside a closed
+contour of 0.34 mrad corresponding to the central pulse of the
+train. (c) Local temporal evolution of the real electric field
+for the central pulse within the train, with the instantaneous
+polarization state encoded by a color map that maps each
+point to its location on the Poincar´e sphere. (d) Polarization
+dynamics at representative transverse positions (beam center,
+intermediate point, and skyrmion edge), with trajectories on
+the Poincar´e sphere within the central pulse; bluish regions
+indicate the highest pulse intensities.
+
+on the Poincar´e sphere.
+
+As a conclusion, we have unveiled a scenario of HHG
+capable of generating attosecond skyrmion pulses. De-
+spite the harmonic-dependence of the linearly polarized
+vector driving field, our numerical simulations demon-
+strate that high-quality attosecond skyrmionic polar-
+ization textures emerge when multiple harmonics are
+combined, an effect particularly favorable using mid-
+IR drivers. The resulting EUV attosecond skyrmion
+pulses enable advanced opportunities to control photo-
+
+5
+
+electron distributions [55], to high resolution imaging
+with EUV structured light [56–59], topological harmonic
+spectroscopy [60], the exploration of chiral topological
+systems [61] and magnetic helicoidal dichroism [62].
+
+ACKNOWLEDGEMENTS
+
+We acknowledge Rodrigo Mart´ın-Hern´andez and
+Charles Durfee for fruitful discussions. This project has
+received funding from the European Research Council
+(ERC) under the European Union’s Horizon 2020 re-
+search and innovation programme (grant agreement No
+851201) and from the Department of Education of the
+Junta de Castilla y Le´on and FEDER Funds (Escalera
+de Excelencia CLU-2023-1-02 and grant No. SA108P24).
+We acknowledge funding from Ministerio de Ciencia e In-
+novacion (Grant PID2022-142340NB-I00).
+
+FIG. 3. Attosecond EUV skyrmion pulse train driven at 1.2
+µm. (a) HHG spectrum, where the filled purple region shows
+the resulting harmonic window after using Al and Zr filters
+that yields the skyrmion attosecond train. (b) Temporal evo-
+lution of NS within the 0.19 mrad contour during the central
+pulse. (c) Local temporal evolution of the real electric field
+for the central pulse within the train, with the instantaneous
+polarization state encoded by a color map linking each point
+to its position on the Poincar´e sphere. (d) Polarization dy-
+namics at representative transverse positions (beam center,
+intermediate point, and skyrmion edge), with trajectories on
+the Poincar´e sphere within the central pulse; bluish regions
+mark the highest pulse intensities.
+
+[1] Tony Hilton Royle Skyrme. A non-linear field theory.
+Proceedings of the Royal Society of London. Series A.
+Mathematical and Physical Sciences, 260(1300):127–138,
+1961.
+
+[2] David Marco,
+
+Isael Herrera, Sophie Brasselet, and
+Miguel A. Alonso. Propagation-invariant optical meron
+lattices. ACS Photonics, 11(6):2397–2405, 2024.
+
+[3] Naoto Nagaosa and Yoshinori Tokura. Topological prop-
+erties and dynamics of magnetic skyrmions. Nature Nan-
+otechnology, 8(12):899–911, 2013.
+
+[4] Yuriy M. Bunkov and Henri Godfrin. Topological defects
+and the non-equilibrium dynamics of symmetry breaking
+phase transitions, volume 549. Springer Science & Busi-
+ness Media, 2000.
+
+[5] Azure Hansen, Justin T. Schultz, and Nicholas P.
+Bigelow. Singular atom optics with spinor Bose–Einstein
+condensates. Optica, 3(4):355–361, 2016.
+
+[6] Hao Ge, Xiang-Yuan Xu, Le Liu, Rui Xu, Zhi-Kang Lin,
+Si-Yuan Yu, Ming Bao, Jian-Hua Jiang, Ming-Hui Lu,
+and Yan-Feng Chen. Observation of acoustic skyrmions.
+Physical Review Letters, 127(14):144502, 2021.
+
+[7] Ruben D. Muelas-Hurtado, Karen Volke-Sep´ulveda,
+Joao L. Ealo, Franco Nori, Miguel A. Alonso, Kon-
+stantin Y. Bliokh, and Etienne Brasselet. Observation
+of polarization singularities and topological textures in
+sound waves. Physical Review Letters, 129(20):204301,
+2022.
+
+[8] Daria A. Smirnova, Franco Nori, and Konstantin Y.
+Bliokh. Water-wave vortices and skyrmions. Physical
+Review Letters, 132(5):054003, 2024.
+
+[9] Yijie Shen, Qiang Zhang, Peng Shi, Luping Du, Xiao-
+cong Yuan, and Anatoly V. Zayats. Optical skyrmions
+and other topological quasiparticles of light. Nature Pho-
+tonics, 18(1):15–25, 2024.
+
+[10] Danica Sugic, Ramon Droop, Eileen Otte, Daniel
+Ehrmanntraut, Franco Nori, Janne Ruostekoski, Cor-
+nelia Denz, and Mark R. Dennis. Particle-like topologies
+in light. Nature Communications, 12(1):6785, 2021.
+[11] Shai Tsesses, Evgeny Ostrovsky, Kobi Cohen, Bergin
+Gjonaj, Netanel H. Lindner, and Guy Bartal. Optical
+skyrmion lattice in evanescent electromagnetic fields. Sci-
+ence, 361(6406):993–996, 2018.
+
+[12] Luping Du, Aiping Yang, Anatoly V. Zayats, and Xi-
+aocong Yuan. Deep-subwavelength features of photonic
+skyrmions in a confined electromagnetic field with or-
+bital angular momentum. Nature Physics, 15(7):650–654,
+2019.
+
+[13] Rodrigo Guti´errez-Cuevas and Emilio Pisanty. Optical
+polarization skyrmionic fields in free space. Journal of
+Optics, 23(2):024004, 2021.
+
+[14] Xinrui Lei, Aiping Yang, Peng Shi, Zhenwei Xie, Lup-
+ing Du, Anatoly V. Zayats, and Xiaocong Yuan. Pho-
+tonic spin lattices: symmetry constraints for skyrmion
+and meron topologies.
+Physical Review Letters,
+127(23):237403, 2021.
+
+[15] Nilo Mata-Cervera, Deepak K Sharma, Yijie Shen,
+Ramon Paniagua-Dominguez, and Miguel A. Porras.
+Skyrmionic polarization texture around the phase sin-
+gularity of optical vortices. Physical Review Letters,
+135(3):033805, 2025.
+
+6
+
+[16] David Marco and Miguel A. Alonso. 4D topological tex-
+tures in light. Physical Review Letters, 134(12):123805,
+2025.
+
+[17] Amber M. Beckley, Thomas G. Brown, and Miguel A.
+Optics Express,
+
+Full Poincar´e beams.
+
+Alonso.
+18(10):10777–10785, 2010.
+
+[18] Stefano Donati, Lorenzo Dominici, Galbadrakh Dag-
+vadorj, Dario Ballarini, Milena De Giorgi, Alberto Bra-
+mati, Giuseppe Gigli, Yuri G. Rubo, Marzena Hanna
+Szyma´nska, and Daniele Sanvitto. Twist of general-
+ized skyrmions and spin vortices in a polariton super-
+fluid. Proceedings of the National Academy of Sciences,
+113(52):14926–14931, 2016.
+
+[19] David Marco,
+
+Isael Herrera, Sophie Brasselet, and
+Miguel A. Alonso. Periodic skyrmionic textures via con-
+formal cartographic projections. APL Photonics, 9(11),
+2024.
+
+[20] Jiakang Zhou, Haixiang Ma, Shuoshuo Zhang, Wu Yuan,
+Changjun Min, Xiaocong Yuan, and Yuquan Zhang.
+Controllable split polarization singularities for ultra-
+precise displacement
+Photonics Research,
+sensing.
+12(7):1478–1484, 2024.
+
+[21] An Aloysius Wang, Zimo Zhao, Yifei Ma, Yuxi Cai,
+Runchen Zhang, Xiaoyi Shang, Yunqi Zhang, Ji Qin, Zhi-
+Kai Pong, T´ad´e Marozs´ak, et al. Topological protection
+of optical skyrmions through complex media. Light: Sci-
+ence & Applications, 13(1):314, 2024.
+
+[22] Pedro Ornelas, Isaac Nape, Robert de Mello Koch, and
+Andrew Forbes. Topological rejection of noise by quan-
+tum skyrmions. Nature Communications, 16(1):2934,
+2025.
+
+[23] Light Mkhumbuza, Pedro Ornelas, Angela Dudley, Isaac
+Nape, and Kayn A. Forbes. Topological control of chi-
+arXiv preprint
+rality and spin with structured light.
+arXiv:2508.08733, 2025.
+
+[24] Chirantan Mitra, Chetan Sriram Madasu, Lucas Gabar-
+dos, Chang Chi Kwong, Yijie Shen, Janne Ruostekoski,
+and David Wilkowski. Topological optical skyrmion
+transfer to matter. APL Photonics, 10(4), 2025.
+
+[25] Cade Peters, Kelsey Everts, Tatjana Kleine, Pedro Or-
+nelas, and Andrew Forbes. Seeing through randomness
+with topological light. arXiv preprint arXiv:2508.12305,
+2025.
+
+[26] Pierre-Marie Paul, Elena S. Toma, Pierre Breger,
+Genevive Mullot,
+Fr´ed´erika Aug´e, Ph. Balcou,
+Harm Geert Muller, and Pierre Agostini. Observa-
+tion of a train of attosecond pulses from high harmonic
+generation. Science, 292(5522):1689–1692, 2001.
+
+[27] Michael Hentschel, Reinhard Kienberger, Ch. Spielmann,
+Georg A. Reider, Nenad Milosevic, Thomas Brabec,
+Paul Corkum, Ulrich Heinzmann, Markus Drescher,
+and Ferenc Krausz. Attosecond metrology. Nature,
+414(6863):509–513, 2001.
+
+[28] Jenny Morgan, Primoˇz R. Ribiˇc, Flavio Capo-
+tondi, Alexander Brynes, Michele Manfredda, Giovanni
+De Ninno, Luka Novinec, Matteo Pancaldi, Emanuele
+Pedersoli, Alberto Simoncig, Carlo Spezzani, Marco Zan-
+grando, and Erik Hemsing. Poincar´e beams from a free
+electron laser. Nature Photonics, pages 1–6, 2025.
+[29] A. McPherson, G. Gibson, H. Jara, U. Johann, Ting S.
+I. A. McIntyre, Keith Boyer, and Charles K.
+
+Luk,
+
+Rhodes. Studies of multiphoton production of vacuum-
+ultraviolet radiation in the rare gases. J. Opt. Soc. Am.
+B, 4(4):595–601, Apr 1987.
+
+[30] M. Ferray, Anne L’Huillier, X. F. Li, L. A. Lompre,
+G. Mainfray, and C. Manus. Multiple-harmonic con-
+version of 1064 nm radiation in rare gases.
+Journal
+of Physics B: Atomic, Molecular and Optical Physics,
+21(3):L31, feb 1988.
+
+[31] Carlos Hern´andez-Garc´ıa, Antonio Pic´on,
+
+Julio
+San Rom´an, and Luis Plaja.
+Attosecond extreme
+ultraviolet vortices from high-order harmonic genera-
+tion. Physical review letters, 111(8):083602, 2013.
+[32] R. G´eneaux, A. Camper, T. Auguste, O. Gobert, J. Cail-
+lat, R. Ta¨ıeb, and Thierry Ruchon. Synthesis and char-
+acterization of attosecond light vortices in the extreme
+ultraviolet. Nature Communications, 7(1):12583, 2016.
+
+[33] Kevin M. Dorney, Laura Rego, Nathan J. Brooks, Julio
+San Rom´an, Chen-Ting Liao, Jennifer L. Ellis, Dmitriy
+Zusin, Christian Gentry, Quynh L. Nguyen, Justin M.
+Shaw, Antonio Pic´on, Luis Plaja, Henry C. Kapteyn,
+Margaret M. Murnane, and Carlos Hern´andez-Garc´ıa.
+Controlling the polarization and vortex charge of attosec-
+ond high-harmonic beams via simultaneous spin–orbit
+momentum conservation. Nature Photonics, 13(2):123–
+130, 2019.
+
+[34] Alba de las Heras, David Schmidt, Julio San Rom´an,
+Javier Serrano, Jonathan Barolak, Bojana Ivanic,
+Cameron Clarke, Nathaniel Westlake, Daniel E. Adams,
+Luis Plaja, et al. Attosecond vortex pulse trains. Optica,
+11(8):1085–1093, 2024.
+
+[35] Carlos Hern´andez-Garc´ıa, Alex Turpin, Julio San
+Rom´an, Antonio Pic´on, Rokas Drevinskas, Ausra
+Cerkauskaite, Peter G. Kazansky, Charles G. Durfee, and
+´I˜nigo J. Sola. Extreme ultraviolet vector beams driven
+by infrared lasers. Optica, 4(5):520–526, May 2017.
+[36] Laura Rego, Kevin M. Dorney, Nathan J. Brooks,
+Quynh L. Nguyen, Chen-Ting Liao, Julio San Rom´an,
+David E. Couch, Allison Liu, Emilio Pisanty, Maciej
+Lewenstein, Luis Plaja, Henry C. Kapteyn, Margaret M.
+Murnane, and Carlos Hern´andez-Garc´ıa. Generation of
+extreme-ultraviolet beams with time-varying orbital an-
+gular momentum. Science, 364(6447):eaaw9486, 2019.
+
+[37] Rodrigo Mart´ın-Hern´andez, Guan Gui, Luis Plaja,
+Henry C. Kapteyn, Margaret M. Murnane, Chen-Ting
+Liao, Miguel A. Porras, and Carlos Hern´andez-Garc´ıa.
+Extreme-ultraviolet spatiotemporal vortices via high har-
+monic generation. Nature Photonics, 19(8):817–824,
+2025.
+
+[38] Rodrigo Martin-Hernandez,
+
+Luis Plaja,
+
+Carlos
+Isolated
+Hernandez-Garcia, and Miguel A. Porras.
+Interplay
+attosecond spatio-temporal optical vortices:
+between the topological charge and orbital angular
+momentum scaling in high harmonic generation. arXiv
+preprint arXiv:2506.07465, 2025.
+
+[39] K. S. Budil, P. Sali`eres, Anne L’Huillier, T. Ditmire, and
+M. D. Perry. Influence of ellipticity on harmonic genera-
+tion. Phys. Rev. A, 48:R3437–R3440, Nov 1993.
+
+[40] Avner Fleischer, Ofer Kfir, Tzvi Diskin, Pavel Sidorenko,
+and Oren Cohen. Spin angular momentum and tunable
+polarization in high-harmonic generation. Nature Pho-
+tonics, 8(7):543–549, jul 2014.
+
+[41] Daniel D. Hickstein, Franklin J. Dollar, Patrik Grychtol,
+Jennifer L. Ellis, Ronny Knut, Carlos Hern´andez-Garc´ıa,
+Dmitriy Zusin, Christian Gentry, Justin M. Shaw, Tingt-
+
+7
+
+ing Fan, Kevin M. Dorney, Andreas Becker, Agnieszka
+Jaro´n-Becker, Henry C. Kapteyn, Margaret M. Murnane,
+and Charles G. Durfee. Non-collinear generation of angu-
+larly isolated circularly polarized high harmonics. Nature
+Photonics, 9(11):743–750, nov 2015.
+
+[42] Pei-Chi Huang, Carlos Hern´andez-Garc´ıa, Jen-Ting
+Huang, Po-Yao Huang, Chih-Hsuan Lu, Laura Rego,
+Daniel D. Hickstein, Jennifer L. Ellis, Agnieszka Jaron-
+Becker, Andreas Becker, Shang-Da Yang, Charles G.
+Durfee, Luis Plaja, Henry C. Kapteyn, Margaret M. Mur-
+nane, A. H. Kung, and Ming-Chang Chen. Polarization
+control of isolated high-harmonic pulses. Nature Photon-
+ics, 12(6):349–354, jun 2018.
+
+[43] Nathan J. Brooks, Alba de las Heras, Bin Wang, Iona
+Binnie, Javier Serrano, Julio San Rom´an, Luis Plaja,
+Henry C. Kapteyn, Carlos Hern´andez-Garc´ıa, and Mar-
+garet M. Murnane. Circularly polarized attosecond
+pulses enabled by an azimuthal phase and polarization
+grating. ACS Photonics, 12(1):495–504, 2025.
+
+[44] Yiqi Fang and Yunquan Liu. Generation and control
+of extreme ultraviolet free-space optical skyrmions with
+high harmonic generation. Advanced Photonics Nexus,
+2(4):046009–046009, 2023.
+
+[45] Carlos Hern´andez-Garc´ıa, Julio San Rom´an, Luis Plaja,
+and Antonio Pic´on. Quantum-path signatures in attosec-
+ond helical beams driven by optical vortices. New Journal
+of Physics, 17(9):093029, sep 2015.
+
+[46] Anne L’Huillier, Philippe Balcou, Sebastien Candel,
+Kenneth J. Schafer, and Kenneth C. Kulander. Cal-
+culations of high-order harmonic-generation processes in
+xenon at 1064 nm. Physical Review A, 46(5):2778, 1992.
+[47] Kyle E. Ballantine, John F. Donegan, and Paul R. East-
+ham. There are many ways to spin a photon: Half-
+quantization of a total optical angular momentum. Sci-
+ence Advances, 2(4):e1501748, 2016.
+
+[48] Alex Turpin, Laura Rego, Antonio Pic´on,
+
+Julio
+San Rom´an, and Carlos Hern´andez-Garc´ıa. Extreme
+ultraviolet fractional orbital angular momentum beams
+from high harmonic generation.
+Scientific Reports,
+7(1):43888, 2017.
+
+[49] Alba de las Heras, Alok Kumar Pandey, Julio San
+Rom´an, Javier Serrano, Elsa Baynard, Guillaume Dovil-
+laire, Moana Pittman, Charles G. Durfee, Luis Plaja, So-
+phie Kazamias, Olivier Guilbaud, and Carlos Hern´andez-
+Garc´ıa. Extreme-ultraviolet vector-vortex beams from
+high harmonic generation. Optica, 9(1):71–79, Jan 2022.
+[50] C. Hern´andez-Garc´ıa, J. A. P´erez-Hern´andez, J. Ramos,
+E. Conejero Jarque, L. Roso, and L. Plaja. High-order
+harmonic propagation in gases within the discrete dipole
+approximation. Physical Review A, 82(3):1–11, 2010.
+[51] MV Berry. Optical vortices evolving from helicoidal in-
+teger and fractional phase steps. Journal of Optics A:
+Pure and Applied Optics, 6(2):259, 2004.
+
+[52] Tenio Popmintchev, Ming-Chang Chen, Dimitar Pop-
+mintchev, Paul Arpin, Susannah Brown, Skirman-
+tas Alisauskas, Giedrius Andriukaitis, Tadas Balciunas,
+Oliver D. M¨ucke, Audrius Pugzlys, Andrius Baltuska,
+Bonggu Shim, Samuel E. Schrauth, Alexander Gaeta,
+Carlos Hern´andez-Garc´ıa, Luis Plaja, Andreas Becker,
+Agnieszka Jaron-Becker, Margaret M. Murnane, and
+Henry C. Kapteyn. Bright coherent ultrahigh harmonics
+in the kev x-ray regime from mid-infrared femtosecond
+lasers. Science, 336(6086):1287–1291, 2012.
+
+8
+
+[53] S. L. Cousin, F. Silva, S. Teichmann, M. Hemmer,
+B. Buades, and J. Biegert. High-flux table-top soft x-
+ray source driven by sub-2-cycle, cep stable, 1.85-µm 1-
+khz pulses for carbon k-edge spectroscopy. Opt. Lett.,
+39(18):5383–5386, Sep 2014.
+
+[54] Allan S. Johnson, Dane R. Austin, David A. Wood,
+Christian Brahms, Andrew Gregory, Konstantin B.
+Holzner, Sebastian Jarosch, Esben W. Larsen, Susan
+Parker, Christian S. Str¨uber, Peng Ye, John W. G. Tisch,
+and Jon P. Marangos. High-flux soft x-ray harmonic
+generation from ionization-shaped few-cycle laser pulses.
+Science Advances, 4(5):eaar3761, 2018.
+[55] Daniel Younis, Daniel F. Gordon,
+
+and Bahman
+Hafizi. Spin-polarization control of photoelectrons using
+poincar´e fields. Physical Review Letters, 133(4):043201,
+2024.
+
+[56] Matteo Pancaldi, Francesco Guzzi, Charles S. Bevis,
+Michele Manfredda, Jonathan Barolak, Stefano Bonetti,
+Iuliia Bykova, Dario De Angelis, Giovanni De Ninno,
+Mauro Fanciulli, Luka Novinec, Emanuele Pedersoli,
+Arun Ravindran, Benedikt R¨osner, Christian David,
+Thierry Ruchon, Alberto Simoncig, Marco Zangrando,
+Daniel E. Adams, Paolo Vavassori, Maurizio Sacchi,
+George Kourousias, Giulia F. Mancini, and Flavio Capo-
+tondi. High-resolution ptychographic imaging at a seeded
+free-electron laser source using oam beams. Optica,
+11(3):403–411, Mar 2024.
+
+Johnsen,
+[57] Bin Wang, Nathan J. Brooks, Peter
+Nicholas W. Jenkins, Yuka Esashi,
+Iona Binnie,
+Michael Tanksalvala, Henry C. Kapteyn, and Mar-
+garet M. Murnane. High-fidelity ptychographic imaging
+of highly periodic structures enabled by vortex high
+
+harmonic beams. Optica, 10(9):1245–1252, Sep 2023.
+[58] Mengqi Du, Xiaomeng Liu, Antonios Pelekanidis,
+Fengling Zhang, Lars Loetgering, Patrick Konold,
+Christina L. Porter, Peter Smorenburg, Kjeld S. E.
+Eikema, and Stefan Witte. High-resolution wavefront
+sensing and aberration analysis of multi-spectral extreme
+ultraviolet beams. Optica, 10(2):255–263, Feb 2023.
+[59] Mengqi Du, Xiaomeng Liu, Antonios Pelekanidis,
+Fengling Zhang, Lars Loetgering, Patrick Konold,
+Christina L. Porter, Peter Smorenburg, Kjeld S. E.
+Eikema, and Stefan Witte. High-resolution wavefront
+sensing and aberration analysis of multi-spectral extreme
+ultraviolet beams. Optica, 10(2):255–263, Feb 2023.
+[60] Ana Garc´ıa-Cabrera, Roberto Boyero-Garc´ıa, ´Oscar
+Zurr´on-Cifuentes, Javier Serrano, Julio San Rom´an,
+Luis Plaja, and Carlos Hern´andez-Garc´ıa. Topological
+high-harmonic spectroscopy. Communications Physics,
+7(1):28, January 2024.
+
+[61] Nicola Mayer, David Ayuso, Piero Decleva, Margarita
+Khokhlova, Emilio Pisanty, Misha Ivanov, and Olga
+Smirnova. Chiral topological light for detection of ro-
+bust enantiosensitive observables. Nature Photonics,
+18(11):1155–1160, November 2024.
+
+[62] Mauro Fanciulli, Matteo Pancaldi, Emanuele Pedersoli,
+Mekha Vimal, David Bresteau, Martin Luttmann, Dario
+De Angelis, Primoˇz Rebernik Ribiˇc, Benedikt R¨osner,
+Christian David, Carlo Spezzani, Michele Manfredda,
+Ricardo Sousa, Ioan-Lucian Prejbeanu, Laurent Vila,
+Bernard Dieny, Giovanni De Ninno, Flavio Capotondi,
+Maurizio Sacchi, and Thierry Ruchon. Observation of
+magnetic helicoidal dichroism with extreme ultraviolet
+light vortices. Phys. Rev. Lett., 128:077401, Feb 2022.
+
+

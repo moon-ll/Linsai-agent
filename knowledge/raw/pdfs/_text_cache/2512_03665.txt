@@ -1,0 +1,961 @@
+Photonic time stretch fieldoscopy: single-shot electric field detection at
+near-petahertz bandwidth
+
+Steffen Gommel,1, 2, 3 Kilian Scheffter,1, 2, 3 Andreas Herbst,1, 2 Anchit Srivastava,1, 2 and Hanieh Fattahi1, 2, ∗
+1Max Planck Institute for the Science of Light, Staudtstraße 2, Erlangen, 91058, Germany
+2Friedrich-Alexander-Universit¨at Erlangen-N¨urnberg (FAU), Staudtstraße 7, Erlangen, 91058, Germany
+3Graduate School in Advanced Optical Technologies (SAOT), Konrad-Zuse-Straße 3, Erlangen, 91052, Germany
+(Dated: December 4, 2025)
+
+Accessing the electric field of light with petahertz bandwidths in ambient air is a rapidly advancing
+frontier, essential for probing ultrafast dynamics driven by classical or quantum ultrashort pulses.
+Near-petahertz fieldoscopy has recently demonstrated sub-cycle access to light–matter interactions,
+enabling label-free spectro-microscopy of liquids and solids with unprecedented spatiotemporal res-
+olution, detection sensitivity, and dynamic range. However, current implementations still rely on
+temporal scanning and averaging over many laser pulses. Here, we introduce photonic time-stretch
+fieldoscopy, enabling single-shot electric-field detection at near-petahertz frequencies. Numerical
+results demonstrate that integrating fieldoscopy with a nonlinear time lens enables the real-time
+acquisition of ultrashort optical waveforms with a detection bandwidth approaching petahertz. The
+resulting large temporal aperture and attosecond resolution allow direct single-shot detection of
+transient electric fields generated in solid or liquid samples. This concept opens new avenues for
+petahertz electronics, ultrafast spectro-microscopy, and the study of dynamic, non-repetitive optical
+phenomena.
+
+INTRODUCTION
+
+Accessing the electric field of light with near-petahertz
+bandwidths in ambient air has become a major research
+frontier over the past decade [1–12], overcoming limita-
+tions inherent to vacuum-based attosecond streaking [13–
+16]. Fieldoscopy has emerged as a powerful approach
+for resolving sub-cycle light–matter interactions at near-
+petahertz bandwidths, providing temporal precision at
+tens-of-attoseconds and enabling simultaneous measure-
+ment of the electric field amplitude and phase with ex-
+ceptional sensitivity and dynamic range [1, 17]. Direct
+access to the electric field has, in turn, enabled access
+to the temporally gated material response relative to the
+driving pulse, allowing label-free spectro-microscopy of
+liquids and solids with unprecedented spatio-temporal
+resolution [18–23].
+
+In Fieldoscopy, the electric field of a signal pulse is re-
+solved by scanning a temporally shorter gate pulse across
+the signal waveform. At each delay step, the nonlinear
+interaction between the gate and signal pulses encodes
+the instantaneous electric field. Despite its outstanding
+temporal resolution, the technique relies fundamentally
+on sequential time-domain scanning and signal averag-
+ing over multiple laser pulses. This dependence imposes
+significant limitations on acquisition speed in both imag-
+ing and spectroscopic measurements, leading to increased
+dwell times and hindering investigations of fragile sam-
+ples or rare phenomena [24–26].
+
+The dispersive Fourier transform (DFT) has proven
+highly effective for single-shot detection of optical in-
+tensity waveforms by mapping spectral components into
+the time domain [27–40]. Integrating electro-optic sam-
+pling with DFT or compressed-sensing strategies has fur-
+
+ther enabled single-shot or real-time measurements of the
+electric field at terahertz frequencies [41–44]. Nonethe-
+less, achieving single-shot detection of the electric field
+of light at near-petahertz frequencies remains challeng-
+ing, as current approaches rely on reconstruction algo-
+rithms, multi-shot operation, or high-energy laser pulses,
+and lack the detection sensitivity and dynamic range re-
+quired to resolve faint samples’ response [45–48].
+
+In this work, we present photonic time-stretch field-
+oscopy (PTF) for real-time access to the electric field of
+optical ultrashort pulses. By combining fieldoscopy with
+a nonlinear time lens, PTF enables single-shot electric-
+field detection with bandwidths extending into the peta-
+hertz range. The nonlinear time lens is configured anal-
+ogously to a spatial 2-f imaging system, where the time
+lens acts as a temporal Fourier transformer, mapping the
+signal pulse onto the sum frequency spectrum of the sig-
+nal and focal pulses. The sum frequency pulse is then
+combined with the focal pulse in a field detection scheme.
+Eventually, by performing balanced detection using ei-
+ther dispersive Fourier transform or angularly dispersed
+spectral balancing, PTF enables direct, single-shot de-
+tection of the signal electric field.
+
+By converting ultrafast optical waveforms into a time-
+stretched domain, PTF eliminates the need for tempo-
+ral scanning, enabling each laser pulse to be recorded in
+real-time. Through numerical simulations, we establish
+the fundamental requirements for implementing PTF and
+analyze the intrinsic limits that determine its temporal
+resolution, detection bandwidth, and detection dynamic
+range. This approach lays the foundation for extending
+attosecond-scale field measurements into the single-shot
+regime, opening new opportunities for observing sub-
+cycle, non-repetitive light–matter interactions.
+
+5
+2
+0
+2
+
+c
+e
+D
+3
+
+]
+s
+c
+i
+t
+p
+o
+.
+s
+c
+i
+s
+y
+h
+p
+[
+
+1
+v
+5
+6
+6
+3
+0
+.
+2
+1
+5
+2
+:
+v
+i
+X
+r
+a
+
+ 
+ 
+ 
+ 
+ 
+ 
+2
+
+FIG. 1: Photonic time-stretch Fieldoscopy (PTF) for single-shot detection of the electric field of light at
+near-petahertz bandwidth. The field detection [1] is performed under the time-lens condition. Two approaches can
+be employed to detect the signal carrying the field information: a) utilizing photonic time stretch and balanced
+photodetection at GHz sampling rates, b) utilizing polarization-resolved spectrometry, CMOS sensor, and
+computational balancing. Ds: signal dispersion; Df: focal dispersion; QWP: quarter waveplate; WP: Wollaston
+prism; BPD: balanced photodiode.
+
+PHOTONIC TIME-STRETCH FIELDOSCOPY:
+THE CONCEPT
+
+The PTF concept is illustrated in Fig. 1. The objec-
+tive is to detect the electric field of a signal pulse that
+may carry a sample response, such as a molecular vibra-
+tional signature. In liquids or solids, such responses can
+persist from hundreds of femtoseconds to several picosec-
+onds [1, 18]. For accurate mapping, the focal and signal
+pulses must be temporally synchronized and are linearly
+chirped to satisfy the time-lens condition. Analogous to
+placing an object at the focal plane of a spatial 2f imag-
+ing system, setting Ds = −Df positions the signal field at
+the focus of the time lens. To resolve the electric field, the
+stretched signal and focal pulses are spatio-temporally
+overlapped in a nonlinear crystal for sum-frequency gen-
+eration (SFG). Here, the time lens maps the temporal
+intensity profile of the signal pulse onto the SFG spec-
+trum.
+
+To resolve the electric field, the SFG signal must spec-
+trally overlap with the focal pulse, as illustrated in the in-
+set of Fig.1 a) and has been shown in [1, 2]. By adjusting
+the temporal delay between the signal and focal pulses,
+the central frequency of the SFG spectrum can be tuned.
+The portion of the SFG spectrum that overlaps with the
+residual focal pulse is then spectrally filtered. We refer
+
+to this spectral region as the spectral overlap bandwidth
+(SOB). The field information encoded in the SOB is car-
+ried in two orthogonal polarizations. These polarizations
+are spatially separated using a quarter-wave plate and a
+Wollaston prism. PTF is then achieved through single-
+shot balanced detection of the two orthogonal polariza-
+tions. Two approaches can be employed:
+
+i) Time-domain (dispersive) detection: Both beams are
+stretched to perform frequency-to-time mapping of the
+SOB, as shown in Fig. 1 a). Balanced detection of the
+stretched outputs using GHz-bandwidth photodiodes en-
+ables direct single-shot measurement of the signal pulse’s
+electric field.
+
+ii) Spectral-domain detection: Alternatively, the spec-
+tra of the two orthogonally polarized beams can be im-
+aged onto a CMOS sensor using a grating, as shown in
+Fig. 1 b). The CMOS records the two spectral traces, af-
+ter which computational balancing of corresponding pixel
+pairs is performed to access the field information [49, 50].
+
+NUMERICAL STUDY
+
+Numerical simulations were performed using an open-
+source nonlinear wave equation solver [51, 52]. The sim-
+ulation parameters were chosen to match closely the val-
+ues reported in [1]. Further details of the simulation are
+
+b)a)BeamCombinerNonlinearCrystalQWPWPSingle-mode fiberOpticalFiltertimens rangeSpectrumTime Lensνy-polx-polBPDDetection SchemeDfFocal PulseDsSignal PulseDfDfSignal PulseBeamCombinerWPOpticalGratingtimeCMOSDsComputationalBalancingQWP CMOS FramesFocal PulseOpticalFilterNonlinearCrystalprovided in the endmatter. Fig. 2 a) shows the electric
+field of the signal pulse and the envelope of the focal
+pulse, both stretched to satisfy the time-lens condition.
+Fig. 2 b) shows the generated SFG spectrum by the in-
+teraction of the signal and focal pulses. The central fre-
+quency of the sum frequency spectrum can be adjusted by
+varying the temporal overlap between the signal and fo-
+cal pulses. The temporal overlap was adjusted to achieve
+a SOB spanning from 425 THz to 500 THz. The orange
+curve corresponds to the sum frequency spectrum where
+the focal pulse is stretched (Df = 2110 fs2), and the sig-
+nal pulse remains Fourier-transform-limited (Ds = 0).
+The teal curve represents the sum frequency spectrum in
+which the signal pulse is stretched to satisfy the time-lens
+condition (Ds = −Df ).
+
+As illustrated in the concept in Fig. 1, the SFG spec-
+trum is then numerically propagated through a bandpass
+filter (SOB range of 425 THz to 500 THz), a quarter-wave
+plate, and a Wollaston prism. Eventually, the intensity
+spectra of orthogonal polarization axes are subtracted
+to simulate the balanced detection. Fig. 2 c) shows the
+retrieved electric field of the signal pulse for the two dis-
+persion cases. Under the condition of Ds = −Df , the re-
+solved electric field (teal curve) is identical to the original
+signal pulse we aim to measure (see Fig. E1 in endmat-
+ter). In contrast, for Ds = 0 the resolved electric field
+exhibits additional temporal chirp, arising from the fact
+that the time-lens condition is not satisfied.
+
+Fig. 3 a) illustrates how overcompensating or under-
+compensating the focal dispersion results in a down-
+chirped or up-chirped retrieved electric field of the sig-
+nal. The corresponding retrieved spectra are displayed
+in Fig. 3 b), along with their spectral phase. The group
+delay dispersion extracted from the retrieved spectral
+phase for both cases agrees with the sum of the ap-
+plied focal and signal dispersions to within an error of
+Derror = 3.5 fs2, which corresponds to the numerical ac-
+curacy of the simulation. This indicates that, when the
+input dispersion values of the PTF system are known,
+the phase of the retrieved signal field can be corrected
+computationally without spectral distortion, as long as
+the retrieved spectrum lies within the SOB.
+
+To assess the accuracy of the PTF in resolving absorp-
+tion features located in the trailing edge of the signal
+pulse, the resolved electric field is temporally gated from
+100 fs to 800 fs and Fourier transformed (see Fig. 3 c)).
+Under the time-lens condition, the Lorentzian-shaped ab-
+sorptions are accurately reconstructed. In contrast, the
+up- and down-chirped cases show additional spurious fre-
+quency components, originating from dispersive leakage
+of the main pulse into the gated temporal region. Never-
+theless, the true spectral features remain clearly distin-
+guishable.
+
+To accurately resolve the electric field of the signal
+pulse after resonant interaction with the medium, the
+observable time window must span several hundred fem-
+
+3
+
+FIG. 2: a) The temporal overlap between the signal
+pulse (purple electric field) stretched by Ds=−2110 fs2
+and the focal pulse (black envelope) stretched by
+Df =2110 fs2. b) Sum frequency spectrum resulting
+from the interaction of the stretched focal pulse
+(Df =2110 fs2) and the FTL signal pulse (Ds = 0) is
+shown in the orange curve, while the teal curve
+corresponds to the sum frequency spectrum in which
+the signal pulse is stretched by Ds = −Df . The black
+curve indicates the portion of the focal-pulse spectrum
+that overlaps with the sum-frequency spectrum. c) The
+corresponding resolved electric fields of the signal pulse
+from the generated sum frequency spectra in panel (a).
+The resolved electric field under the time-lens condition
+Ds = −Df (teal) matches the original signal pulse. In
+contrast, the electric field retrieved for Ds = 0 (orange)
+exhibits an additional temporal chirp that is absent in
+the original signal pulse. The SOB spans from 425 THz
+to 500 THz.
+
+toseconds. This window, referred to as the temporal
+aperture of the system, increases with the dispersion of
+the focal pulse Df in PTF [53]. However, increasing the
+temporal aperture inevitably reduces the sampling band-
+width per unit time. To quantify this trade-off, we de-
+fine a figure of merit, the scaling factor, as the ratio of
+the SOB to the temporal aperture. A larger scaling fac-
+tor corresponds to a narrower effective bandwidth of the
+filtered SFG signal. This can either demand very high
+group-delay dispersion, as in the design of Fig.1 a), or
+reach the spectrometer’s resolution limit for the filtered
+SFG bandwidth, as in the design of Fig.1 b).
+
+Time (fs)Electric Field (norm.)0200400600−200−4000.0−1.01.0DS = 0DS = −DfFrequency (THz)Intensity (norm.)4404004204604805000.50.01.0DS = −DfDS = 0Time (ps)Electric Field (norm.)Envelope (norm.)1.00.0−1.00−1−2121.00.0−1.0Signal PulseFocal Pulse a)b)c)4
+
+FIG. 4: a) The PTF temporal aperture and scaling
+factor as a function of Df , under the time lens
+condition Df = −Ds. b) Signal spectra retrieved for
+varying focal-pulse bandwidths centered at 345 THz
+under the time-lens condition. The SOB spans from
+425 THz to 500 THz.
+
+poral overlap between the two homogeneously stretched
+pulses, and to maintain sufficient spectral overlap be-
+tween the nonlinearly converted pulse and the focal pulse,
+the following condition must be satisfied: Ω0 + ∆Ω
+2 < ∆ω,
+where ∆Ω and ∆ω are the bandwidths of the signal and
+focal pulses, respectively.
+
+DISCUSSION
+
+We have introduced the concept of photonic time-
+stretch fieldoscopy (PTF), establishing a framework for
+extending electric field measurements with attosecond
+temporal resolution into the single-shot regime. PTF en-
+ables scan-free detection of the electric field of ultrashort
+pulses with bandwidths approaching the petahertz range
+by integrating fieldoscopy with a nonlinear time lens.
+The numerical study showed that the system’s focal dis-
+persion governs both the temporal aperture and the res-
+olution requirements of PTF. In contrast to conventional
+field detection techniques, PTF doesn’t require carrier-
+envelope-phase (CEP) stability of the signal pulse, or
+temporal compression of the ultrashort gate pulses to
+access the sub-cycle electric field information. The maxi-
+mum acquisition rate of PTF is limited by the repetition
+rate of the driving laser and the acquisition time of the
+detectors.
+
+The nonlinear time lens can also be implemented using
+difference-frequency generation (DFG) or four-wave mix-
+ing (FWM). Because these processes involve conjugation
+of one of the interacting fields, they require the signal and
+focal dispersions to share the same sign [53–56]. A DFG-
+based time lens can be particularly advantageous experi-
+mentally, as the generated signal lies in the near-infrared,
+where optical fibers offer a more favorable stretching-to-
+attenuation ratio [53, 57, 58]. Alternatively, as proposed
+here, angularly dispersive or diffractive optics may be
+used to extract the spectral information, eliminating the
+
+FIG. 3: a) Overcompensating or undercompensating the
+focal dispersion by applying Ds = −2637.5 fs2 (purple
+curve) or Ds = −1582.5 fs2 (orange curve) results in a
+down-chirped or up-chirped retrieved electric field of
+the signal. The teal curve shows the time-lens condition
+for Ds = −2110 fs2. The inset shows a magnified view of
+all three resolved electric fields at time zero. b) The
+corresponding spectra and spectral phases. c) The
+spectra of the temporally gated resolved signal pulse.
+The gated region is shown in gray in panel a).
+
+Fig. 4 a) shows the dependence of the temporal aper-
+ture and scaling factor on the focal dispersion Df , for the
+case in which the time-lens condition Ds = −Df is satis-
+fied, assuming an SOB spanning 425 THz to 500 THz. As
+the focal dispersion increases, the temporal aperture of
+the PTF expands, and the scaling factor correspondingly
+decreases. The maximum resolvable temporal aperture
+is strongly constrained by the temporal or spectral res-
+olution of the spectrometer or the DFT-based balanced
+detection system.
+
+Fig. 4 b) shows the quality of the resolved electric
+field for various bandwidths of the focal pulse centered
+at 345 THz, constrained by the requirement to maintain
+spectral overlap between the SFG and the focal pulse.
+Using a second-order nonlinear process imposes two prin-
+cipal conditions on the central frequency and bandwidth
+of the focal and signal pulses. First, the focal pulse must
+be centered at a higher frequency than the signal pulse,
+yielding the condition ω0 > Ω0. Second, to ensure tem-
+
+200180160140120Intensity (norm.)1000.01.00.5Frequency (THz)1.00.50.0Intensity (norm.)Phase (rad)–200.020Ds = −1582.5 fs2 Ds = −2110.0 fs2Ds = −2637.5 fs2TaleTime (fs)–2001.00.50.0–0.5–1.00200400600800Electric Field (norm.)a)b)c)150200Frequency (THz)Intensity (norm.)100175 THz100 THz200 THz140 THz0.00.51.0Temporal Aperture (fs)Scaling Factor(THz/fs)Df (fs2)00.00.20.40.60.8500100015002000a)b)need for extremely long fibers and avoiding the practical
+challenges of precisely matching dispersion across multi-
+ple fiber paths. Polarization-resolved spectra can be ob-
+tained by detecting both polarization components, either
+using a CMOS sensor or two synchronized spectrometers,
+followed by electronic or digital balancing.
+
+A further consideration is the impact of higher-order
+dispersion when stretching broadband pulses. As dis-
+cussed in the end matter, incorporating third-order dis-
+persion (TOD) results in the nonlinear time to frequency
+mapping, an effect that must be accounted for and that
+is expected to persist for even higher dispersion orders.
+To prevent third-order distortions in a SFG time lens,
+the TOD of both the signal and focal pulses must match
+in both sign and magnitude, a condition that is gener-
+ally favorable because dispersive media in the relevant
+spectral range typically exhibit positive TOD.
+
+PTF offers a promising route for real-time ultrafast
+spectroscopy with high detection sensitivity and dynamic
+range.
+Its large temporal aperture enables direct ac-
+cess to the material response, allowing real-time prob-
+ing of molecular dynamics that unfold outside the main
+excitation pulse. This capability opens new opportuni-
+ties for studying ultrafast processes under rapidly chang-
+ing conditions, investigating fragile samples with reduced
+dwell times [24], advancing petahertz electronics [59],
+and studying rare or non-repetitive classical or quantum
+events [25, 26] in the near-infrared and visible spectral
+ranges.
+
+DECLARATIONS
+
+This work was supported by research funding from the
+Max Planck Society and funding from the ERC Consol-
+idator Grant ID: 101125670. The authors declare no com-
+peting interests. The data supporting this study’s find-
+ings are available from the corresponding author upon
+reasonable request.
+
+∗ hanieh.fattahi@mpl.mpg.de
+
+[1] A. Srivastava, A. Herbst, M. M. Bidhendi, M. Kieker,
+F. Tani, and H. Fattahi, Near-petahertz fieldoscopy
+of liquid, Nature Photonics 10.1038/s41566-024-01548-2
+(2024).
+
+[2] S. Keiber, S. Sederberg, A. Schwarz, M. Trubetskov,
+V. Pervak, F. Krausz, and N. Karpowicz, Electro-optic
+sampling of near-infrared waveforms, Nature Photonics
+10, 159 (2016).
+
+[3] A. Alismail, H. Wang, G. Barbiero, N. Altwaijry, S. A.
+Hussain, V. Pervak, W. Schweinberger, A. M. Azzeer,
+F. Krausz, and H. Fattahi, Multi-octave, cep-stable
+source for high-energy field synthesis, Science advances
+6, eaax3408 (2020).
+
+5
+
+[4] A. Herbst, K. Scheffter, M. M. Bidhendi, M. Kieker,
+A. Srivastava, and H. Fattahi, Recent advances in
+petahertz electric field sampling, Journal of Physics
+B: Atomic, Molecular and Optical Physics 55, 172001
+(2022).
+
+[5] D. Zimin, M. Weidman, J. Sch¨otz, M. F. Kling, V. S.
+Yakovlev, F. Krausz, and N. Karpowicz, Petahertz-scale
+nonlinear photoconductive sampling in air, Optica 8, 586
+(2021).
+
+[6] W. Cho, S. I. Hwang, C. H. Nam, M. R. Bionta, P. Las-
+sonde, B. E. Schmidt, H. Ibrahim, F. L´egar´e, and K. T.
+Kim, Temporal characterization of
+femtosecond laser
+pulses using tunneling ionization in the uv, visible, and
+mid-ir ranges, Scientific Reports 9, 16067 (2019).
+
+[7] S. B. Park, K. Kim, W. Cho, S. I. Hwang, I. Ivanov, C. H.
+Nam, and K. T. Kim, Direct sampling of a light wave in
+air, Optica 5, 402 (2018).
+
+[8] A. Korobenko, K. Johnston, M. Kubullek, L. Arissian,
+Z. Dube, T. Wang, M. K¨ubel, A. Y. Naumov, D. Vil-
+leneuve, M. F. Kling, et al., Femtosecond streaking in
+ambient air, Optica 7, 1372 (2020).
+
+[9] S. Sederberg, D. Zimin, S. Keiber, F. Siegrist, M. S. Wis-
+mer, V. S. Yakovlev, I. Floss, C. Lemell, J. Burgd¨orfer,
+M. Schultze, et al., Attosecond optoelectronic field mea-
+surement in solids, Nature communications 11, 430
+(2020).
+
+[10] Y. Liu, S. Gholam-Mirzaei, J. E. Beetar, J. Nesper,
+A. Yousif, M. Nrisimhamurty, and M. Chini, All-optical
+sampling of few-cycle infrared pulses using tunneling in
+a solid, Photonics Research 9, 929 (2021).
+
+[11] D. Hui, H. Alqattan, S. Yamada, V. Pervak, K. Yabana,
+and M. T. Hassan, Attosecond electron motion control in
+dielectric, Nature Photonics 16, 33 (2022).
+
+[12] M. R. Bionta, F. Ritzkowsky, M. Turchetti, Y. Yang,
+D. Cattozzo Mor, W. P. Putnam, F. X. K¨artner, K. K.
+Berggren, and P. D. Keathley, On-chip sampling of op-
+tical fields with attosecond resolution, Nature Photonics
+15, 456 (2021).
+
+[13] M. Hentschel, R. Kienberger, C. Spielmann, G. A. Rei-
+der, N. Milosevic, T. Brabec, P. Corkum, U. Heinzmann,
+M. Drescher, and F. Krausz, Attosecond metrology, Na-
+ture 414, 509 (2001).
+
+[14] A. Sommer, E. Bothschafter, S. Sato, C. Jakubeit,
+T. Latka, O. Razskazovskaya, H. Fattahi, M. Jobst,
+W. Schweinberger, V. Shirvanyan, et al., Attosecond non-
+linear polarization and light–matter energy transfer in
+solids, Nature 534, 86 (2016).
+
+[15] J. Itatani, F. Qu´er´e, G. L. Yudin, M. Y. Ivanov,
+F. Krausz, and P. B. Corkum, Attosecond streak cam-
+era, Physical review letters 88, 173903 (2002).
+
+[16] H. Fattahi, Sub-cycle light transients for attosecond,
+x-ray, four-dimensional imaging, Contemporary Physics
+57, 580 (2016).
+
+[17] D. A. Zimin, A. Ashoka, F. Reiter, and A. Rao,
+the quantum limit, arXiv preprint
+
+Fieldoscopy at
+arXiv:2504.13121 (2025).
+
+[18] A. Herbst, A. Srivastava, K. Scheffter, S. Jun, S. Gom-
+mel, L. Rebecchi, S. Kuriyil, A. Rubino, N. Petrini,
+I. Kriegel, and H. Fattahi, Ultrafast nonlinear dynamics
+of indium tin oxide nanocrystals probed via fieldoscopy,
+Advanced Science (2025).
+
+[19] S. Jun, A. Herbst, K. Scheffter, D. Wehner, A. Srivas-
+tava, and H. Fattahi, Femtosecond fieldoscopy for super-
+resolution label-free microscopy, Microscopy and Analy-
+
+sis 39, 42 (2025).
+
+[20] A. Srivastava, A. Herbst, and H. Fattahi, Field-resolved,
+far-field characterization of air bubbles in liquid water,
+in IPC (2024).
+
+[21] A. Herbst, A. Srivastava, K. Scheffter, S. Jun, N. Petrini,
+A. Rubino, and I. Kriegel, Label-free hyperspectral mi-
+croscopy with attosecond precision, in IEEE Conference
+(IPC) (2024).
+
+[22] K. Scheffter, A. Srivastava, A. Herbst, S. Jun, and
+H. Fattahi, Multi-modal field-resolved spectroscopy at
+near petahertz frequencies, in SPIE Conference Proceed-
+ings, Vol. 13332, 133320A (2025).
+
+[23] K. Scheffter, A. Srivastava, A. Herbst, S. Jun, and H. Fat-
+tahi, Octave-spanning, field-resolved, Kerr-amplification
+in liquid thin film, in SPIE Conference Proceedings, Vol.
+13347, 133470E (2025).
+
+[24] S. Jun, A. Herbst, K. Scheffter, N. John, J. Kolb,
+D. Wehner, and H. Fattahi, Nonlinear dynamics of fem-
+tosecond laser interaction with the central nervous sys-
+tem in zebrafish, Communications Physics 7, 161 (2024).
+[25] A. Rasputnyi, Z. Chen, M. Birk, O. Cohen, I. Kaminer,
+M. Kr¨uger, D. Seletskiy, M. Chekhova, and F. Tani, High-
+harmonic generation by a bright squeezed vacuum, Na-
+ture Physics 20, 1960 (2024).
+
+[26] M. Sennary, J. Rivera-Dean, M. ElKabbash, V. Pervak,
+M. Lewenstein, and M. T. Hassan, Attosecond quan-
+tum uncertainty dynamics and ultrafast squeezed light
+for quantum communication, Light: Science & Applica-
+tions 14, 350 (2025).
+
+[27] A. Kawai, K. Hashimoto, T. Dougakiuchi, V. R. Badarla,
+T. Imamura, T. Edamura, and T. Ideguchi, Time-stretch
+infrared spectroscopy, Communications Physics 3, 152
+(2020).
+
+[28] K. Goda and B. Jalali, Dispersive fourier transforma-
+tion for fast continuous single-shot measurements, Na-
+ture Photonics 7, 102 (2013).
+
+[29] A. Mahjoubfar, D. V. Churkin, S. Barland, N. Broder-
+ick, S. K. Turitsyn, and B. Jalali, Time stretch and its
+applications, Nature Photonics 11, 341 (2017).
+
+[30] T. Nakamura, K. Hashimoto,
+
+Ideguchi,
+Broadband coherent raman scattering spectroscopy at
+50,000,000 spectra per second, Ultrafast Science 4, 0076
+(2024).
+
+and T.
+
+[31] T. Jannson, Real-time fourier transformation in disper-
+
+sive optical fibers, Opt. Lett. 8, 232 (1983).
+
+[32] K. Goda, K. K. Tsia, and B. Jalali, Serial time-encoded
+amplified imaging for real-time observation of fast dy-
+namic phenomena, Nature 458, 1145 (2009).
+
+[33] A. F. J. Runge, N. G. R. Broderick, and M. Erkintalo,
+Observation of soliton explosions in a passively mode-
+locked fiber laser, Optica 2, 36 (2015).
+
+[34] M. Shoshin, T. Kageyama, T. Nakamura, K. Hashimoto,
+and T. Ideguchi, Mid-infrared frequency-swept laser at
+50 mscans/s via frequency down-conversion of time-
+stretched near-infrared pulses, Laser & Photonics Re-
+views , 2500008 (2025).
+
+[35] K. Krupa, K. Nithyanandan, U. Andral, P. Tchofo-
+Dinda, and P. Grelu, Real-time observation of inter-
+nal motion within ultrafast dissipative optical soliton
+molecules, Phys. Rev. Lett. 118, 243901 (2017).
+
+[36] A. F. J. Runge, C. Aguergaray, N. G. R. Broderick, and
+M. Erkintalo, Raman rogue waves in a partially mode-
+locked fiber laser, Opt. Lett. 39, 319 (2014).
+
+6
+
+[37] G. Herink, F. Kurtz, B. Jalali, D. R. Solli, and C. Rop-
+ers, Real-time spectral interferometry probes the internal
+dynamics of femtosecond soliton molecules, Science 356,
+50 (2017).
+
+[38] Y. Zhou, J. C. K. Chan, and B. Jalali, A unified frame-
+work for photonic time-stretch systems, Laser & Photon-
+ics Reviews 16, 2100524 (2022), publisher: John Wiley
+& Sons, Ltd.
+
+[39] R. Salem, M. A. Foster, and A. L. Gaeta, Application
+of space–time duality to ultrahigh-speed optical signal
+processing, Adv. Opt. Photon. 5, 274 (2013).
+
+[40] K. Goda and B. Jalali, Dispersive fourier transforma-
+tion for fast continuous single-shot measurements, Na-
+ture Photonics 7, 102 (2013).
+
+[41] K. Scheffter, J. Will, C. Riek, H. Jousselin, S. Coudreau,
+N. Forget, and H. Fattahi, Compressed sensing of field-
+resolved molecular fingerprints beyond the nyquist fre-
+quency, Ultrafast Science 4, 0062 (2024).
+
+[42] C. Szwaj, C. Evain, M. Le Parquier, P. Roy, L. Manceron,
+J.-B. Brubach, M.-A. Tordeux, and S. Bielawski, High
+sensitivity photonic time-stretch electro-optic sampling
+of terahertz pulses, Review of Scientific Instruments 87,
+103111 (2016).
+
+[43] N. Couture, W. Cui, M. Lippl, R. Ostic, D. J. J. Fan-
+dio, E. K. Yalavarthi, A. Vishnuradhan, A. Gamouras,
+N. Y. Joly, and J.-M. M´enard, Single-pulse terahertz
+spectroscopy monitoring sub-millisecond time dynamics
+at a rate of 50 kHz, Nature Communications 14, 2595
+(2023).
+
+[44] N. Couture, W. Cui, M. Lippl, R. Ostic, D. J. J. Fan-
+dio, E. K. Yalavarthi, A. Vishnuradhan, A. Gamouras,
+N. Y. Joly, and J.-M. M´enard, Single-pulse terahertz
+spectroscopy monitoring sub-millisecond time dynamics
+at a rate of 50 khz, Nature Communications 14, 2595
+(2023).
+
+[45] P. Ryczkowski, M. N¨arhi, C. Billet, J.-M. Merolla,
+G. Genty, and J. M. Dudley, Real-time full-field char-
+acterization of transient dissipative soliton dynamics in
+a mode-locked laser, Nature Photonics 12, 221 (2018).
+
+[46] A. Tikan, S. Bielawski, C. Szwaj, S. Randoux, and
+P. Suret, Single-shot measurement of phase and ampli-
+tude by using a heterodyne time-lens system and ultra-
+fast digital time-holography, Nature Photonics 12, 228
+(2018).
+
+[47] T.-C. Truong, Y. Liu, D. Khatri, Y. Zhang, B. Shim,
+and M. Chini, Scanless laser waveform measurement in
+the near-infrared, APL Photonics 10 (2025).
+
+[48] K. Yeom, W. Cho, J.-u. Shin, B. Kim, S. I. Hwang, J. H.
+Sung, and K. T. Kim, Single-shot measurement of a laser
+waveform using plasma fluorescence in ambient air, Op-
+tics Express 32, 23796 (2024).
+
+[49] A. J. Black and T. Akkin, Polarization-based balanced
+detection for spectral-domain optical coherence tomog-
+raphy, Appl. Opt. 54, 7252 (2015).
+
+[50] M. Mamaikin, Y.-L. Li, E. Ridente, W. T. Chen, J.-S.
+Park, A. Y. Zhu, F. Capasso, M. Weidman, M. Schultze,
+F. Krausz, and N. Karpowicz, Electric-field-resolved
+near-infrared microscopy, Optica 9, 616 (2022), pub-
+lisher: Optica Publishing Group.
+
+[51] N. Karpowicz, Lightwaveexplorer, GitHub (2025).
+[52] N. Karpowicz, Open source, heterogeneous, nonlinear op-
+
+tics simulation, Opt. Continuum 2, 2244 (2023).
+
+[53] C. Bennett and B. Kolner, Principles of parametric tem-
+poral imaging. i. system configurations, IEEE Journal of
+
+Quantum Electronics 36, 430 (2000).
+
+[54] R. Salem, M. A. Foster, A. C. Turner, D. F. Geraghty,
+M. Lipson, and A. L. Gaeta, Optical time lens based on
+four-wave mixing on a silicon chip, Opt. Lett. 33, 1047
+(2008).
+
+[55] J. Schr¨oder, F. Wang, A. Clarke, E. Ryckeboer,
+M. Pelusi, M. A. Roelens, and B. J. Eggleton,
+Aberration-free ultra-fast optical oscilloscope using a
+four-wave mixing based time-lens, Optics Communica-
+tions 283, 2611 (2010).
+
+[56] A. Pasquazi, Y. Park, S. T. Chu, B. E. Little, F. L´egar´e,
+R. Morandotti, J. Aza˜na, and D. J. Moss, Time-lens mea-
+surement of subpicosecond optical pulses in cmos com-
+patible high-index glass waveguides, IEEE Journal of Se-
+lected Topics in Quantum Electronics 18, 629 (2012).
+[57] P. Sulzer, K. Oguchi, J. Huster, M. Kizmann, T. L. M.
+Guedes, A. Liehl, C. Beckh, A. S. Moskalenko,
+G. Burkard, D. V. Seletskiy, and A. Leitenstorfer, De-
+termination of the electric field and its hilbert transform
+in femtosecond electro-optic sampling, Phys. Rev. A 101,
+033821 (2020).
+
+[58] C. Hanoun, C. Szwaj, E. Roussel, S. Bielawski, P. Roy,
+M.-A. Tordeux, M. Labat, J.-B. Brubach, N. Hubert,
+and F. Ribeiro, Low-cost single-shot THz electro-optic
+detection at MHz repetition rates, using photonic time-
+stretch, in Real-time Measurements, Rogue Phenomena,
+and Single-Shot Applications IX , Vol. PC12870, edited
+by D. R. Solli, G. Herink, and S. Bielawski, Interna-
+tional Society for Optics and Photonics (SPIE, 2024) p.
+PC128700D.
+
+[59] C. Heide, P. D. Keathley, and M. F. Kling, Petahertz
+electronics, Nature Reviews Physics 6, 648 (2024).
+[60] I. Shoji, H. Nakamura, K. Ohdaira, T. Kondo, R. Ito,
+T. Okamoto, K. Tatsuki, and S. Kubota, Absolute mea-
+surement of second-order nonlinear-optical coefficients
+of β-BaB2O4 for visible to ultraviolet second-harmonic
+wavelengths, J. Opt. Soc. Am. B 16, 620 (1999).
+
+[61] M. Bache, H. Guo, B. Zhou, and X. Zeng, The anisotropic
+kerr nonlinear refractive index of the beta-barium borate
+(β-bab2o4) nonlinear crystal, Opt. Mater. Express 3, 357
+(2013).
+
+[62] D. Zhang, Y. Kong, and J. yuan Zhang, Optical para-
+metric properties of 532-nm-pumped beta-barium-borate
+near the infrared absorption edge, Optics Communica-
+tions 184, 485 (2000).
+
+7
+
+END MATTER
+
+FIG. E1: a) The electric field of the signal pulse. b) The
+signal spectrum. c) The electric field of the focal pulse.
+d) The focal spectrum.
+
+Simulation parameters
+
+Numerical
+
+simulations were performed using the
+UPPE model of an open-source nonlinear wave equa-
+tion solver, configured to operate under the slowly vary-
+ing wave approximation [51, 52]. The initial
+focal
+and signal fields (see Fig.E1) are defined to be lin-
+early polarized along the x- and y-axes, respectively.
+The focal pulse is modeled using a sixth-order super-
+Gaussian spectrum centered at 345 THz with a 200 THz
+full-width-at-half-maximum (FWHM) bandwidth, corre-
+sponding to a Fourier-transform-limited pulse duration of
+3 fs (FWHM). The signal pulse is modeled with a sech-
+shaped envelope centered at 155 THz, yielding a Fourier-
+transform-limited pulse duration of 14 fs (FWHM). We
+assume that the signal pulse has previously undergone
+resonant absorption. The system is modeled as two
+isolated Lorentzian oscillators at 130 THz and 160 THz,
+with dephasing times of 0.5 ps and 0.25 ps, respectively.
+To model the SFG between the signal and focal pulses
+in a χ(2) nonlinear crystal, we use a 20 µm-thick BBO
+crystal [60–62] with a phase-matching angle of θ = 25◦.
+The crystal is configured for type-II phase matching, gen-
+erating an SFG pulse polarized along the y-axis. The
+energies of both the focal and signal pulses are set to
+160 pJ. The focal pulse and the signal pulse are focused
+to 20 µm, and 30 µm (at 1
+e2 ) at the nonlinear crystal. The
+quarter-wave plate and a Wollaston prism are modeled
+as a single rotatable Wollaston prism. For positive Df ,
+
+Electric Field (norm.)Time (fs)010020010−1Intensity (norm.)Frequency (THz)2001501000.00.51.0Frequency (THz)Intensity (norm.)5503501501.00.50.0Time (fs)Electric Field (norm.)0−101010−1a)c)b)d)the frequency axis is related to the time axis by
+
+τ (ω) = −Df (ω − ω0 − Ω0) ,
+
+(1)
+
+where τ (ω) is defined by the focal dispersion, Df = −Ds,
+ω0 and Ω0 are the central frequency of the focal pulse and
+the signal pulse, respectively.
+
+Homogeneous Stretching
+
+Considering homogeneous stretching described by the
+Taylor expansion at the central frequency up to the sec-
+ond order while neglecting dispersive propagation after
+the detection crystal, Φ(ω, Ω) simplifies to
+
+Φ(ω, Ω) = ϕs(Ω) + ϕs,1(Ω) + ϕs,2(Ω) + ϕf,1(ω − Ω)
+
++ϕf,2(ω − Ω) − ϕf,1(ω) − ϕf,2(ω) .
+
+(2)
+
+Here ϕs(Ω) denotes the unknown phase of the signal field
+prior to stretching, whereas in the remaining known Tay-
+lor expansion phase terms, the first index assigns the field
+(either focal or signal field) and thereby the central fre-
+quency, while the second index assigns the expansion or-
+der of the phase term. To achieve temporal imaging, be-
+fore the nonlinear interaction, the group delay dispersion
+(GDD) of both beams must match, but with opposite
+signs. Adding the condition that both fields are tempo-
+rally overlapped in the nonlinear crystal and considering
+positive chirping of the focal pulse, eq. 2 simplifies to
+
+Φ(ω, Ω) = ϕs(Ω) + Ω τ (ω) − Ω0
+
+ϕ1 +
+
+(cid:18)
+
+(cid:19)
+
+ϕ2Ω0
+
+,
+
+(3a)
+
+1
+2
+
+8
+
+time vector, as indicated by eq. 3b, depends on the focal
+dispersion with Df = −Ds = ϕ2, as well as on Ω0 and
+ω0, the central frequencies of the signal and focal fields,
+respectively. The required focal dispersion with a given
+temporal aperture ∆τ and SOB is calculated as
+
+Df =
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+∆τ
+SOB
+
+(cid:12)
+(cid:12)
+(cid:12)
+(cid:12)
+
+.
+
+(4)
+
+The third term on the right-hand side of eq. 3a rep-
+resents a constant phase offset, independent of ω. This
+offset corresponds to a shift of the carrier-envelope phase
+(CEP) of the detected signal field.
+
+Influence of TOD
+
+Considering the TOD introduced by the stretcher be-
+fore the time lens, the sign and magnitude of the signal
+and focal field TOD must satisfy the condition TODf =
+TODs = ϕ3 [f s3] to prevent third-order distortions in the
+retrieved field.
+
+Using the same formalism as presented in eq. 2, but
+
+now expanding up to third order, the phase becomes
+
+Φ(ω, Ω) = ϕs(Ω) + Ωτ (ω) + Ω2 1
+3
+(cid:19)
+(cid:18)
+
+− Ω0
+
+ϕ1 +
+
+ϕ2Ω0
+
+−
+
+1
+2
+
+ϕ3(ω − ω0 − Ω0)
+
+(5a)
+
+1
+6
+
+ϕ3Ω3
+0
+
+τ (ω) = − ϕ2(ω − ωo − Ω0)
+1
+3
+
+ϕ3
+
+−
+
+(cid:2)(ω − ω0)2 − Ω2
+
+0
+
+(cid:3)
+
+(5b)
+
+τ (ω) = −ϕ2(ω − ω0 − Ω0) .
+
+(3b)
+
+= Ls
+vs,g
+
+Here, ϕ1 = Lf
+, with dispersive lengths Ls,f and
+vf,g
+propagation in material or air chosen to achieve temporal
+overlap at the nonlinear crystal. The conversion of the
+frequency axis of the balanced intensity spectrum into a
+
+The third term on the right-hand side of eq. 5a intro-
+duces a chirp to the retrieved waveform. As before, the
+following terms correspond to a constant phase offset and
+are therefore less relevant. With TOD present, the newly
+defined time vector in eq. 5b now has a quadratic depen-
+dence on ω, introducing a distortion to the time axis that
+must be accounted for.
+
+

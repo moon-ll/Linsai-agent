@@ -1,0 +1,832 @@
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+Valleytronics in 2D Materials Roadmap
+Kyle L. Seyler1*, Giancarlo Soavi2*, Bent Weber3*, Sunit Das4, Amit Agarwal4, Ioannis Paradisanos5,6,
+Mikhail M. Glazov7, Oleg Dogadov8,9, Francesco Gucci8, Giulio Cerullo8,10, Stefano Dal Conte8,
+Shubhadeep Biswas11, Jan Wilhelm12, Igor Žutić13, Konstantin S. Denisov13, Tong Zhou14, Huiyuan
+Zheng15, Wang Yao16,17, Hongyi Yu18, 19, Ting Cao20, Dacen Waters21, Matthew Yankowitz20,22, Guido
+Burkard23, Artem Denisov24, Thomas Ihn24, Klaus Ensslin24, Louis Gaudreau25, Justin BoddisonChouinard26, Zlata Fedorova27,28, Isabelle Staude27,28, Kuan Eng Johnson Goh29,30,31,32, Zhichao Zhou33,
+Xiao Li33.
+1
+
+Wyant College of Optical Sciences, University of Arizona, Tucson, United States
+Institute of Solid State Physics, Friedrich Schiller University Jena, Jena, Germany
+3
+School of Physical and Mathematical Sciences, Nanyang Technological University, Singapore,
+Singapore
+4
+Department of Physics, Indian Institute of Technology, Kanpur 208016, India
+5
+Department of Materials Science and Engineering, University of Crete, Heraklion, 70013, Greece
+6
+Institute of Electronic Structure and Laser, Foundation for Research and Technology-Hellas, Heraklion,
+70013, Greece
+7
+orcid.org/0000-0003-4462-0749
+8
+Dipartimento di Fisica, Politecnico di Milano, Piazza L. da Vinci 32, 20133 Milano, Italy
+9
+Department of Physical Chemistry, Fritz Haber Institute of the Max Planck Society, 14195 Berlin,
+Germany
+10
+IFN-CNR, Department of Physics, Politecnico di Milano, Piazza L. da Vinci 32, Milano 20133, Italy
+11
+Department of Physics, Indian Institute of Science, Bangalore-560012, India
+12
+Institute of Theoretical Physics and Regensburg Center for Ultrafast Nanoscopy (RUN), University of
+Regensburg, 93059 Regensburg, Germany
+13
+Department of Physics, University at Buffalo, State University of New York, Buffalo, New York 14260,
+USA
+14
+Eastern Institute for Advanced Study, Eastern Institute of Technology, Ningbo, Zhejiang 315200, China
+15
+Department of Materials Science and Engineering, University of Washington, Seattle, Washington
+98195, USA
+16
+New Cornerstone Science Lab, Department of Physics, The University of Hong Kong, Hong Kong
+Special Administrative Region of China, People’s Republic of China
+17
+HK Institute of Quantum Science & Technology, The University of Hong Kong, Hong Kong Special
+Administrative Region of China, People’s Republic of China
+18
+Guangdong Provincial Key Laboratory of Quantum Metrology and Sensing & School of Physics and
+Astronomy, Sun Yat-Sen University (Zhuhai Campus), Zhuhai 519082, People’s Republic of China
+19
+State Key Laboratory of Optoelectronic Materials and Technologies, Sun Yat-Sen University
+(Guangzhou Campus), Guangzhou 510275, People’s Republic of China
+20
+Department of Materials Science and Engineering, University of Washington, Seattle, Washington,
+USA
+21
+Department of Physics and Astronomy, University of Denver, Denver, CO, USA
+22
+Department of Physics, University of Washington, Seattle, Washington, USA
+23
+Department of Physics and IQST, University of Konstanz, D-78457 Konstanz, Germany
+24
+Laboratory for Solid State Physics, ETH Zurich, Switzerland
+25
+Quantum and Nanotechnologies Research Centre, National Research Council Canada, Ottawa, Canada
+26
+Department of Physics, University of Ottawa, Ottawa, Canada
+2
+
+1
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+27
+
+Institute of Applied Physics, Friedrich Schiller University Jena, Albert-Einstein-Str. 15, 07745 Jena,
+Germany
+28
+Abbe Center of Photonics, Friedrich Schiller University Jena, Albert-Einstein-Str. 6, 07745, Jena,
+Germany
+29
+Institute of Materials Research & Engineering (IMRE), Agency for Science, Technology, and Research
+(A*STAR), 2 Fusionopolis Way, #08-03 Innovis, Singapore 138634, Republic of Singapore
+30
+Centre for Quantum Technologies, National University of Singapore, 3 Science Drive 2, Singapore
+117543, Singapore
+31
+Department of Physics, National University of Singapore, Republic of Singapore 2 Science Drive 3,
+Singapore 117551, Singapore
+32
+Division of Physics and Applied Physics, School of Physical and Mathematical Sciences, Nanyang
+Technological University 21 Nanyang Link, 637371, Singapore
+33
+Center for Quantum Transport and Thermal Energy Science, Institute of Physics Frontiers and
+Interdisciplinary Sciences, School of Physics and Technology, Nanjing Normal University, Nanjing
+210023, China
+E-mails: klseyler@arizona.edu, giancarlo.soavi@uni-jena.de, b.weber@ntu.edu.sg
+
+Abstract
+Valleytronics exploits non-equivalent energy extrema in the electronic band structure of
+crystalline solids—the valley degree of freedom—to encode, manipulate, and read out information.
+The advent of 2D materials, first graphene and then transition-metal dichalcogenides, made valley
+control practical through optical, electrical, and magnetic routes. This foundation has enabled
+remarkable progress in recent years spanning established frontiers, such as valley exciton physics
+and valley Hall effects, as well as emerging directions including lightwave valleytronics,
+nanophotonic integration, flat-band valleytronics, and spin-valley qubits. In parallel, there are
+sustained efforts to scale up valleytronic materials and to predict new valleytronic platforms. This
+Roadmap brings together perspectives from leading experts to chart the key opportunities and
+challenges at the forefront of 2D material valleytronics. Each section captures a snapshot of progress
+in a key research area, identifies critical open challenges, and outlines pathways toward future
+valleytronics breakthroughs.
+
+2
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+Table of Contents
+1. Introduction ................................................................................................................. 4
+2. Valley Hall e5ects ........................................................................................................ 8
+3. Exciton valley physics .................................................................................................14
+4. Ultrafast valleytronics .................................................................................................19
+5. Lightwave valleytronics ...............................................................................................24
+6. Nonlinear optics .........................................................................................................30
+7. Proximity control of valleys ..........................................................................................35
+8. Quantum geometry in moiré valleytronics ....................................................................41
+9. Flat band valleytronics ................................................................................................47
+10. Theory of spin-valley qubits .......................................................................................52
+11. Spin-valley qubits in graphene ...................................................................................57
+12. Spin-valley e5ects in TMD quantum dots ....................................................................61
+13. Nanophotonic control................................................................................................67
+14. Scaling up valleytronic materials ...............................................................................72
+15. Novel valleytronic platforms beyond TMDs and graphene............................................77
+
+3
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+1. Introduction
+Kyle L. Seyler1, Giancarlo Soavi2 and Bent Weber3
+1
+
+Wyant College of Optical Sciences, University of Arizona, Tucson, United States
+Institute of Solid State Physics, Friedrich Schiller University Jena, Jena, Germany
+3
+School of Physical and Mathematical Sciences, Nanyang Technological University,
+Singapore, Singapore
+2
+
+E-mail: klseyler@arizona.edu, giancarlo.soavi@uni-jena.de, b.weber@ntu.edu.sg
+
+Quasiparticles in a crystal can possess internal quantum degrees of freedom, such as spin, that
+enable encoding and processing information. Interest in exploiting such degrees of freedom naturally
+extended to the valley pseudospin, which labels degenerate but non-equivalent energy extrema in
+momentum space. The ideas of “valleytronics” were seeded in studies of silicon in the 1970s [1] and
+AlAs quantum wells in early 2000s [2], but it did not develop as a distinct field until the arrival of 2D
+materials, particularly graphene [3] and transition metal dichalcogenides (TMDs). An important
+theoretical breakthrough came in 2007 with the recognition that inversion symmetry breaking in 2D
+hexagonal lattices endows the ±K valleys (at the corners of the hexagonal Brillouin zone) with
+contrasting Berry curvature and intrinsic orbital magnetic moment, enabling the valley Hall effect
+and magnetic field coupling [4]. The field accelerated dramatically with the study of monolayer
+group-6 TMD semiconductors (MoS2, WS2, MoSe2, WSe2, MoTe2) in the early 2010s [5]. These
+hexagonal-lattice materials not only possess intrinsic broken inversion symmetry, but also exhibit
+strong spin-orbit coupling that locks spin and valley degrees of freedom [6], direct bandgaps at their
+±K points [7, 8], and valley-dependent optical selection rules for circularly polarized light [6, 9]. By
+the mid-2010s, foundational valleytronic functionalities were demonstrated, including optical
+initialization (absorption) and readout (photoluminescence) of valley polarization and coherence
+[10-13], valley Hall transport in both TMDs and graphene heterostructures [14-18], and valley
+manipulation via magnetic fields [19-22] and Floquet engineering (optical Stark and Bloch-Siegert
+effects) [23-25]. The scope of valley physics also began to expand beyond intrinsic monolayers and
+bilayers to other systems such as TMD heterostructures [26] and individual electron (or hole) spins
+confined to quantum dot potentials [27]. These achievements, comprehensively reviewed elsewhere
+[5, 28-32], established TMDs and graphene as practical platforms for valleytronics. The 2D material
+valleytronics landscape has since evolved along a few distinct but interconnected trajectories.
+First, there continued to be important valleytronics-specific advances that enabled new
+manipulation pathways and deepened our understanding of valley phenomena. Established areas
+such as valley Hall effects (section 2) and exciton valley physics (section 3) have matured
+significantly. For example, valley Hall transport has expanded into nonlinear and quantum regimes,
+while valley exciton studies have achieved deeper understanding of depolarization mechanisms
+while expanding control through dielectric engineering, strain, moiré superlattices, and cavity
+coupling.
+Ultrafast valleytronics (section 4) has worked to understand and address the challenge of rapid
+valley depolarization in complementary ways: extending valley lifetimes through heterostructures
+and strain engineering, while also developing protocols to manipulate valley states with phaselocked few-cycle laser pulses before the polarization decays. This latter paradigm, lightwave
+valleytronics, has demonstrated all-optical valley initialization, switching, and readout even in
+centrosymmetric crystals and on few femtosecond timescales, using symmetry-engineered strong
+4
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+light fields such as trefoil waveforms (section 5). Furthermore, nonlinear optical spectroscopy has
+emerged as an ideal ultrafast and non-invasive probe of valley properties, with second-harmonic
+generation and third-harmonic Faraday/Kerr rotation being able to detect broken time-reversal
+symmetry in both centrosymmetric and non-centrosymmetric atomically thin crystals (section 6).
+While these all-optical valleytronics advances were unfolding, improvements in sample quality
+(particularly through hexagonal boron nitride encapsulation) and the emergence of multilayer
+devices transformed these materials into premier platforms for studying broader condensed matter
+phenomena. Interactions across van der Waals interfaces induce proximity effects that profoundly
+alter valleytronic properties, from lifting the valley degeneracy to stabilizing robust quantum spinvalley Hall kink states (section 7). The flat electronic bands of moiré superlattices as well as
+rhombohedral graphene further unveiled strong correlation phenomena such as superconductivity,
+magnetism, and quantum anomalous Hall states. While the valley structure of course remains central
+to understanding such materials, the focus of many studies shifted to emergent many-body
+phenomena rather than valley control per se, with valley pseudospin becoming one of several
+important coupled degrees of freedom such as layer pseudospin and moiré sublattice sites (sections
+8-9).
+Moving towards technological applications, the strong coupling of spin and valley degrees of
+freedom in individual electron spin qubits in graphene and TMD quantum dots can lead to a dramatic
+enhancement of qubit lifetimes (sections 10-12), which is paramount for devices. Finally, interfacing
+2D materials with nanophotonic structures serves to initialize, manipulate, route, and read out valley
+information (section 13).
+While these developments have significantly expanded the possibilities for valley-based classical
+and quantum information processing, most functionalities are still only demonstrated on small
+devices with mechanically exfoliated flakes. Therefore, parallel efforts to realize high-quality large
+area materials and address other scaling issues are essential (section 14). Moreover, experimental
+research has been largely limited to TMDs and graphene, leaving a wide variety of theoretically
+predicted 2D valleytronic materials awaiting experimental realization (section 15).
+This Roadmap brings together leading experts to chart paths forward across this diverse
+landscape. The contributions span fundamental valley physics, advanced manipulation techniques,
+quantum information applications, emerging directions, and practical considerations. Each section
+assesses current progress and identifies key challenges and opportunities. Rather than providing a
+comprehensive review, this Roadmap is a snapshot of the state of the field and is resolutely forwardlooking. It remains to be seen whether valleytronics can become a viable pathway to classical and
+quantum information processing and storage as compared to other established approaches.
+Regardless, it is clear that the scientific insights gained from 2D valleytronic materials will resonate
+across multiple fields for years to come.
+Acknowledgements
+KLS acknowledges support by the U.S. Department of Energy, Office of Science, Basic Energy
+Sciences under Award #DE-SC0025619. BW acknowledges support from the Singapore Ministry of
+Education (MOE) Academic Research Fund Tier 3 grant (MOE-MOET32023-0003) “Geometrical
+Quantum Materials” and the US Air Force Office of Scientific Research under award number FA238624-1-4064. GS acknowledges funding from the Deutsche Forschungsgemeinschaft (DFG, German
+Research Foundation) – Project-ID 398816777 – SFB 1375.
+
+5
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+References
+[1] Ando T, Fowler A B and Stern F 1982 Electronic properties of two-dimensional systems Rev. Mod. Phys. 54 437–672
+[2] Shkolnikov Y, De Poortere E, Tutuc E and Shayegan M 2002 Valley splitting of AlAs two-dimensional electrons in a
+perpendicular magnetic Pield Phys. Rev. Lett. 89 226805
+[3] Rycerz A, Tworzydło J and Beenakker C W J 2007 Valley Pilter and valley valve in graphene Nat. Phys. 3 172–175
+[4] Xiao D, Yao W and Niu Q 2007 Valley-contrasting physics in graphene: magnetic moment and topological transport
+Phys. Rev. Lett. 99 236809
+[5] Xu X, Yao W, Xiao D and Heinz T F 2014 Spin and pseudospins in layered transition metal dichalcogenides Nat. Phys. 10
+343–350
+[6] Xiao D, Liu G-B, Feng W, Xu X and Yao W 2012 Coupled spin and valley physics in monolayers of MoS₂ and other groupVI dichalcogenides Phys. Rev. Lett. 108 196802
+[7] Splendiani A et al. 2010 Emerging photoluminescence in monolayer MoS₂ Nano Lett. 10 1271–1275
+[8] Mak K F, Lee C, Hone J, Shan J and Heinz T F 2010 Atomically thin MoS₂: a new direct-gap semiconductor Phys. Rev.
+Lett. 105 136805
+[9] Yao W, Xiao D and Niu Q 2008 Valley-dependent optoelectronics from inversion symmetry breaking Phys. Rev. B 77
+235406
+[10]
+Mak K F, He K, Shan J and Heinz T F 2012 Control of valley polarization in monolayer MoS2 by optical helicity Nat.
+Nanotechnol. 7 494–498
+[11]
+Zeng H, Dai J, Yao W, Xiao D and Cui X 2012 Valley polarization in MoS2 monolayers by optical pumping Nat.
+Nanotechnol. 7 490–493
+[12]
+Cao T, Wang G, Han W, Ye H, Zhu C, Shi J, Niu Q, Tan P, Wang E, Liu B and Feng J 2012 Valley-selective circular
+dichroism of monolayer molybdenum disulphide Nat. Commun. 3 887
+[13]
+Jones A M, Yu H, Ghimire N J, Wu S, Aivazian G, Ross J S, Zhao B, Yan J, Mandrus D G, Xiao D, Yao W and Xu X 2013
+Optical generation of excitonic valley coherence in monolayer WSe2 Nat. Nanotechnol. 8 634–638
+[14]
+Mak K F, McGill K L, Park J and McEuen P L 2014 The valley Hall effect in MoS2 transistors Science 344 1489–
+1492
+[15]
+Gorbachev R V, Song J C W, Yu G L, Kretinin A V, Withers F, Cao Y, Mishchenko A, Grigorieva I V, Novoselov K S,
+Levitov L S and Geim A K 2014 Detecting topological currents in graphene superlattices Science 346 448–451
+[16]
+Sui M, Chen G, Ma L, Shan W-Y, Tian D, Watanabe K, Taniguchi T, Jin X, Yao W, Xiao D and Zhang Y 2015 Gatetunable topological valley transport in bilayer graphene Nat. Phys. 11 1027–1031
+[17]
+Shimazaki Y, Yamamoto M, Borzenets I V, Watanabe K, Taniguchi T and Tarucha S 2015 Generation and detection
+of pure valley current by electrically induced Berry curvature in bilayer graphene Nat. Phys. 11 1032–1036
+[18]
+Lee J, Mak K F and Shan J 2016 Electrical control of the valley Hall effect in bilayer MoS2 transistors Nat.
+Nanotechnol. 11 421–425
+[19]
+Li Y, Ludwig J, Low T, Chernikov A, Cui X, Arefe G, Kim Y D, van der Zande A M, Rigosi A, Hill H M, Kim S H, Hone J,
+Li Z, Smirnov D and Heinz T F 2014 Valley splitting and polarization by the Zeeman effect in monolayer MoSe2 Phys.
+Rev. Lett. 113 266804
+[20]
+Srivastava A, Sidler M, Allain A V, Lembke D S, Kis A and Imamoglu A 2015 Valley Zeeman effect in elementary
+optical excitations of monolayer WSe2 Nat. Phys. 11 141–147
+[21]
+Aivazian G, Gong Z, Jones A M, Chu R-L, Yan J, Mandrus D G, Zhang C, Cobden D, Yao W and Xu X 2015 Magnetic
+control of valley pseudospin in monolayer WSe2 Nat. Phys. 11 148–152
+[22]
+MacNeill D, Heikes C, Mak K F, Anderson Z, Kormanyos A, Zolyomi V, Park J and Ralph D C 2015 Breaking of valley
+degeneracy by magnetic Pield in monolayer MoSe2 Phys. Rev. Lett. 114 037401
+[23]
+Kim J, Hong X, Jin C, Shi S-F, Chang C-Y S, Chiu M-H, Li L-J and Wang F 2014 Ultrafast generation of pseudomagnetic Pield for valley excitons in WSe2 monolayers Science 346 1205–1208
+[24]
+Sie E J, McIver J W, Lee Y-H, Fu L, Kong J and Gedik N 2015 Valley-selective optical Stark effect in monolayer WS2
+Nat. Mater. 14 290–294
+[25]
+Sie E J, Lui C H, Lee Y-H, Fu L, Kong J and Gedik N 2017 Large, valley-exclusive Bloch-Siegert shift in monolayer
+WS2 Science 355 1066–1069
+[26]
+Rivera P, Seyler K L, Yu H, Schaibley J R, Yan J, Mandrus D G, Yao W and Xu X 2016 Valley-polarized exciton
+dynamics in a 2D semiconductor heterostructure Science 351 688–691
+[27]
+Trauzettel B, Bulaev D V, Loss D and Burkard G 2007 Spin qubits in graphene quantum dots Nat. Phys. 3 192–196
+[28]
+Schaibley J R, Yu H, Clark G, Rivera P, Ross J S, Seyler K L, Yao W and Xu X 2016 Valleytronics in 2D materials Nat.
+Rev. Mater. 1 16055
+[29]
+Vitale S A, Nezich D, Varghese J O, Kim P, Gedik N, Jarillo-Herrero P, Xiao D and Rothschild M 2018 Valleytronics:
+Opportunities, challenges, and paths forward Small 14 1801483
+6
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+[30]
+Mak K F, Xiao D and Shan J 2018 Light–valley interactions in 2D semiconductors Nat. Photonics 12 451–460
+[31]
+Rivera P, Yu H, Seyler K L, Wilson N P, Yao W and Xu X 2018 Interlayer valley excitons in heterobilayers of
+transition metal dichalcogenides Nat. Nanotechnol. 13 1004–1015
+[32]
+Zhao S, Li X, Dong B, Wang H, Wang H, Zhang Y, Han Z and Zhang H 2021 Valley manipulation in monolayer
+transition metal dichalcogenides and their hybrid systems: status and challenges Rep. Prog. Phys. 84 026401
+
+7
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+2. Valley Hall e4ects
+Sunit Das1 and Amit Agarwal1
+1
+
+Department of Physics, Indian Institute of Technology, Kanpur 208016, India
+
+E-mail: amitag@iitk.ac.in
+
+Fundamentals of Valley Physics
+In crystalline solids, the periodic lattice potential shapes the electronic states into bands that often
+host multiple inequivalent extrema in momentum space. These extrema, known as valleys, provide
+an internal degree of freedom that distinguishes carriers by their crystal momentum rather than their
+charge or spin. When valleys are separated by a large momentum transfer in the Brillouin zone,
+intervalley scattering becomes inefficient [1]. This allows valley populations to persist over
+timescales relevant for transport and optical measurements. This elevates the valley index to a
+functional quantum degree of freedom.
+Hexagonal lattices such as graphene allotropes and transition-metal dichalcogenides (TMDs) offer
+the clearest realization of valley physics. Their Brillouin zones contain two inequivalent corners,
+denoted by 𝝃 and 𝝃" in Fig. 1(a), which are related by time-reversal symmetry. This symmetry allows
+for valley-contrasting band geometric properties as reflected in the Berry curvature [𝛀𝛏 (𝐤) =
+#
+− 𝛀𝝃 (𝐤)], the momentum-space analogue of a magnetic field [2]. The most prominent transport
+manifestation of the opposite Berry curvature in the two valleys is the valley Hall effect (VHE) [2]. In
+the VHE, carriers at inequivalent valleys have opposite anomalous transverse velocities ∝ E × Ω
+under an in-plane electric field. This results in a net valley current without a net charge Hall response
+[see Fig. 1]. Because the carriers in each valley possess contrasting orbital magnetic moments,
+analogous to the intrinsic Bohr magneton associated with electron spin, valley transport can also be
+viewed as the flow of carriers with opposite orbital magnetic moments, detectable through magnetooptical probes [3,4].
+A central requirement for studying valley-dependent transport is the ability to initialize carriers
+in specific valleys. In atomically thin semiconductors, circularly polarized light couples selectively to
+one valley through helicity-dependent optical selection rules, producing a controlled valley
+imbalance [3]. This arises because the Bloch states at the two valleys carry opposite orbital angular
+momentum; therefore, right- and left-handed circularly polarized light couple to them through
+angular momentum-selective optical transitions. Furthermore, electrostatic and mechanical tuning
+via gating, strain, or layer asymmetry, provides additional control by reshaping the Berry curvature
+landscape and redistributing carriers between valleys.
+Together, these mechanisms establish the foundation for generating, manipulating, and probing
+valley Hall transport. The next section surveys the present theoretical and experimental landscape
+of the VHE, encompassing advances across multiple materials as well as emerging variants of VHE.
+
+8
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+Status
+Since its theoretical proposal [2], the VHE has grown into an experimentally verified, tunable
+platform across TMDs, graphene heterostructures, and moiré systems. We summarize its key
+milestones in Fig. 1(d). The first experimental access to valley physics was achieved in monolayer
+MoS2, where valley-specific optical selection rules enable helicity-resolved excitation and detection
+of valley polarization [3].
+A key advance was the recognition that valley-contrasting transport does not require optical
+pumping. Gate-tunable VHE in bilayer MoS2 demonstrated that inversion symmetry [5], and
+therefore Berry curvature, can be modified electrostatically, enabling all-electrical manipulation of
+valley currents. Spatially resolved Kerr microscopy directly imaged the resulting transverse valleyspecific magnetic moment accumulation, validating the microscopic mechanism and highlighting the
+feasibility of device-compatible, all-electrical control of the valley degree of freedom.
+Graphene-based systems provide a highly tunable platform for valley transport. In bilayer
+graphene, a perpendicular displacement field opens a controllable bandgap and induces valleycontrasting Berry curvature, yielding a gate-switchable VHE observable in nonlocal geometries [6],
+see Fig. 1(c). Moiré engineering in graphene/hBN and twisted multilayer graphene further amplifies
+these geometric effects due to multiple flat minibands with concentrated Berry curvature [7,8]. In
+ballistic graphene/hBN superlattices, these features manifest as giant nonlocal resistances capturing
+quantum valley Hall transport, and aligned graphene/hBN and electrically gapped bilayer graphene
+have shown similar signatures [9]. Complementing these graphene platforms, room-temperature
+valley Hall transport with micron-scale diffusion lengths has also been observed in atomically thin
+MoS2 [10].
+Beyond linear response, several new mechanisms have expanded the symmetry regimes in which
+VHE can occur. The nonlinear, second-order VHE, arising from the Berry connection polarizability, a
+field-induced geometric correction, allows valley currents even in inversion-symmetric crystals
+where the linear effect is forbidden [11]. Graphene/hBN moiré heterostructures indeed exhibit
+second-harmonic nonlocal signals consistent with this mechanism [12]. In parallel, altermagnets,
+which possess compensated magnetic order but break the combined spin–sublattice symmetry, have
+been predicted to host a `crystal valley Hall effect,' where crystalline symmetries generate valleycontrasting Berry curvature and the valley Hall response [13]. Recently, Euler curvature-based valley
+responses have been proposed, where real-valued Bloch wave functions support valley-selective
+transport even when the Berry curvature vanishes [14].
+Beyond the single-particle picture, electron–electron interactions can generate additional
+topological structure in valley transport. In graphene-based moiré materials, interactions are
+predicted to stabilize quantum valley Hall (QVH) phases featuring quantized transverse response and
+valley-polarized edge modes [15]. Valley-dependent transverse transport is not limited to electrons:
+excitons in TMDs and valley-polarized phononic and acoustic modes in engineered metamaterials
+also exhibit Hall-like behavior [4]. These responses arise from distinct microscopic mechanisms and
+are discussed later in this article.
+
+9
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+(c)
+
+(b)
+
+(a)
+
+TRS:
+
+Long-range, room
+temperature valley transport
+2024: Proposal of Euler
+curvature driven quantum VHE
+2022: Giant tunable VHE
+in bilayer graphene
+
+(d)
+
+2019: VHE at room
+temperature and microns
+scale valley diffusion length
+
+Valley-based logic gates
+and informaiton processing
+2025: Observation of
+nonlinear VHE
+2023-24: First proposal in graphene/hBN
+
+2016: Gate-controlled
+VHE in bilayer
+2014: First observation
+of VHE in
+
+of nonlinear VHE
+2019-20: Imaging of valley
+currents (accumulation of
+2018-19: Quantum VHE orbital moments)
+in graphene superlattice
+
+2007: First proposal
+of VHE
+
+2012: Optical control
+of valley polarization
+
+2014-15: VHE in bilayer
+graphene and graphene/hBN
+
+Figure 1. Geometric origin, detection, and major milestones of the valley Hall effect. (a) Low-energy
+electronic bands of an inversion-asymmetric hexagonal crystal (e.g., gapped graphene) exhibit two
+inequivalent valleys, 𝜉 and 𝜉̅. The Berry curvature of the lower band is projected where the Berry
+#
+
+curvatures 𝛀$ and 𝛀% are strongly localized in the valleys and have opposite sign. (b) In semiclassical
+dynamics, an electric field generates an anomalous velocity (𝑒/ℏ)𝑬 × 𝛀. In a time-reversal symmetric
+(TRS) system, the opposite Berry curvatures deflect carriers from the two valleys in opposite directions.
+As a consequence, their charge Hall contributions cancel, but the difference produces a pure valley current
+jVHE. (c) In a nonlocal measurement setup, the valley imbalance accumulates at opposite device edges and
+diffuses to distant contacts, producing an inverse VHE (iVHE) signal. The generated nonlocal transverse
+voltage 𝑉nl( serves as the characteristic electrical signature of the valley Hall effect. (d) Chronological
+milestones in the valley Hall effect. Solid markers denote established results, while the last two hollow
+markers denote outlook, such as long-range room-temperature valley transport and valley-based
+information technologies.
+
+Current and future challenges
+The valley Hall effect faces several fundamental and practical challenges that must be addressed
+for reliable valleytronic applications. A primary limitation is the short valley lifetime and diffusion
+length. In most semiconductors, intervalley scattering arising from phonons, disorder, etc., rapidly
+diminishes the valley character of the carriers, keeping diffusion lengths below the micron scale [4].
+Achieving long-range, room-temperature, and purely electronic valley transport remains a challenge.
+Another problem is the unambiguous detection of valley Hall currents. Nonlocal resistance
+measurements, the most widely used all-electrical experimental signature, can be contaminated by
+parasitic effects including current spreading, trivial edge conduction, and anisotropic resistivity [16].
+Scanning probe studies have shown that signals previously attributed to the VHE can potentially arise
+from trivial edge states. This underscores the need for standardized measurement geometries, local
+probes capable of analyzing valley-specific orbital magnetization, and quantitative frameworks to
+disentangle the contributions of valley effects from those of spin and thermoelectric responses.
+
+10
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+A related challenge is the separation of intrinsic and extrinsic mechanisms. The intrinsic VHE
+originates from Berry curvature, but extrinsic mechanisms, such as skew scattering, side-jump
+effects, can obscure or even dominate the measured signal. Identifying systems in which the intrinsic
+contribution dominates the VHE is crucial for exploring valley topological effects and using them to
+ensure predictable device behavior.
+From a materials perspective, scalable and reproducible control of inversion symmetry breaking
+remains difficult. In TMDs, inversion asymmetry is intrinsic but produces short valley lifetimes. In
+bilayer graphene, inversion breaking requires precise electrostatic control or moiré alignment. In
+twisted or stacked systems, small deviations in twist angle or strain can drastically alter the Berry
+curvature. Achieving reproducible, wafer-scale fabrication of valleytronic materials with consistent
+band geometric responses is a key challenge for the scalable integration of devices.
+Looking forward, nonlinear and topological extensions of the VHE introduce both opportunities
+and complications. Nonlinear VHE expands valley transport to centrosymmetric crystals but often
+requires strong driving fields or engineered asymmetry [11]. Interaction-driven and Euler curvaturebased valley Hall phases may offer routes to quantized or disorder-robust transport. However, their
+experimental realization remains in its early stages and requires improved theoretical
+understanding, material quality, and sensitive detection methods.
+Advances in science and technology to meet challenges
+Progress toward robust and scalable VHE has advanced across various materials platforms,
+symmetry engineering strategies, and detection techniques. These developments have significantly
+expanded the accessible regimes of valley transport, even though important challenges remain in
+translating proof-of-concept demonstrations into device-level performance [4,8].
+Gate voltage control of inversion symmetry in bilayer graphene, bilayer TMDs, and their moiré
+heterostructures, remains one of the most efficient routes for tuning Berry curvature, offering
+quantitative control over the VHE. Materials such as Janus TMD monolayers, ferrovalley compounds,
+and altermagnetic systems offer built-in valley asymmetry that is often tunable by electrostatic or
+magnetic means, providing promising paths toward non-volatile valley configurations [17]. These
+symmetry-engineered materials directly address the challenge of valley initialization without the
+need for optical pumping.
+Steady progress has been made in extending the lifetime of valley polarized carriers, a key
+requirement for observing VHE over device-relevant length scales. On the optical front, twisted TMD
+heterolayers host interlayer excitons with greatly enhanced valley lifetimes which facilitate
+improved initialization and readout of valley imbalance [18]. Hybrid photonic approaches, such as
+cavity or plasmonic coupling, further suppress depolarization [19]. These advances provide concrete
+strategies for increasing the VHE-relevant length scale, although integrating them with purely
+electronic devices remains an open challenge. Nonetheless, in electronic systems, cleaner interfaces,
+reduced disorder, and improved dielectric environments have enabled micron-scale valley diffusion
+lengths at room temperature, directly strengthening nonlocal VHE signals [10].
+Real-space probes capable of imaging valley-contrasting orbital magnetization, such as Kerr
+rotation and nano-SQUID microscopy, have played a crucial role in clarifying ambiguous nonlocal
+signals, but they are not scalable for device integration. A growing set of device-level diagnostics now
+provides physically grounded criteria for identifying genuine valley Hall transport. In diffusive valley
+transport, the nonlocal voltage shows a characteristic spatial decay and a distinct scaling with the
+longitudinal resistivity [2,11]. These mechanisms enable reliable identification of valley Hall
+transport using purely electrical measurements [7], without the need for local imaging techniques.
+11
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+Recent theoretical and experimental progress has broadened the materials landscape capable of
+producing valley currents. The giant second-order VHE observed in graphene/hBN moiré structures
+demonstrates that higher-order band geometry can generate valley transport even in inversionsymmetric systems [12]. Interaction-driven and Euler curvature-based valley phases further reveal
+that symmetry and topology alone can drive valley-selective responses, thereby extending VHE
+beyond the conventional Berry curvature paradigm.
+Finally, advances in large-area 2D material growth, deterministic stacking, and twist control are
+enabling wafer-scale structures with reproducible symmetry tuning. Improved contacts,
+encapsulation, and strain engineering have reduced device variability, while low-power gating and
+integrated photonics support hybrid optoelectronic-valley functionality [4,18]. Demonstrations of
+room-temperature valley transport in MoS2 [5,10] and promising high-temperature signals in bilayer
+graphene [20] suggest that technologically relevant VHE is increasingly within reach as materials and
+device platforms continue to improve.
+Concluding remarks
+The valley Hall effect has emerged as a quantitatively understood and experimentally accessible
+manifestation of valley degrees of freedom in two-dimensional materials. Its continued development
+now hinges on overcoming several central obstacles: extending valley lifetimes, establishing
+unambiguous detection protocols, and achieving reproducible operation at technologically relevant
+temperatures and length scales. As valley physics intersects with spintronics, orbitronics, and
+quantum geometry, the VHE may evolve from a diagnostic tool into a design principle for
+multifunctional devices. Realizing this potential will require coordinated progress in materials
+synthesis, theoretical modelling, device engineering, and system-level integration.
+Acknowledgements
+SD acknowledges the Ministry of Education, Government of India, for funding support through the
+Prime Minister’s Research Fellowship. AA acknowledges funding from the Core Research Grant by
+Anusandhan National Research Foundation (ANRF, Sanction No. CRG/2023/007003), Department of
+Science and Technology, India.
+References
+[1] Morozov S V, Novoselov K S, Katsnelson M I, Schedin F, Ponomarenko L A, Jiang D, and Geim A K, 2006 Strong
+suppression of weak localization in graphene Phys. Rev. Lett. 97, 016801.
+[2] Xiao D, Yao W and Niu Q 2007 Valley-contrasting physics in graphene: Magnetic moment and topological transport
+Phys. Rev. Lett. 99 236809 .
+[3] Mak K F, He K, Shan J and Heinz T F 2012 Control of valley polarization in monolayer MoS₂ by optical helicity Nat.
+Nanotechnol. 7 494–498.
+[4] Vitale S A, Nezich D, Varghese J O, Kim P, Gedik N, Jarillo-Herrero P, Xiao D and Rothschild M 2018 Valleytronics:
+Opportunities, challenges, and paths forward Small 14 1801483.
+[5] Hung T Y T, Camsari K Y, Zhang S, Upadhyaya P and Chen Z 2019 Direct observation of valley-coupled topological
+current in MoS₂ Sci. Adv. 5 eaau6478.
+[6] Sui M, Chen G, Ma L, Shan W-Y, Tian D, Watanabe K, Taniguchi T, Jin X, Yao W, Xiao D and Zhang Y 2015 Gate-tunable
+topological valley transport in bilayer graphene Nat. Phys. 11 1027–1031.
+[7] Gorbachev R V, Song J C W, Yu G L, Kretinin A V, Withers F, Cao Y, Mishchenko A, Grigorieva I V, Novoselov K S, Levitov
+L S and Geim A K 2014 Detecting topological currents in graphene superlattices Science 346 448–451.
+[8] Adak P C, Sinha S, Agarwal A and Deshmukh M M 2024 Tunable moiré materials for probing Berry physics and
+topology Nat. Rev. Mater. 9 481–498.
+[9] Komatsu K, Morita Y, Watanabe E, Tsuya D, Watanabe K, Taniguchi T and Moriyama S 2018 Observation of the
+quantum valley Hall state in ballistic graphene superlattices Sci. Adv. 4 eaaq0194.
+12
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+[10] Wu Z, Zhou B T, Cai X, Cheung P, Liu G-B, Huang M, Lin J, Han T, An L, Wang Y, Xu S, Long G, Cheng C, Law K T, Zhang F
+and Wang N 2019 Intrinsic valley Hall transport in atomically thin MoS₂ Nat. Commun. 10 611.
+[11] Das K, Ghorai K, Culcer D and Agarwal A 2024 Nonlinear valley Hall effect Phys. Rev. Lett. 132 096302.
+[12] He P, Zhang M, Cao J, Li J, Liu H, Zhai J, Wang R, Xiao C, Yang S A and Shen J 2025 Observation of giant nonlinear valley
+Hall effect arXiv:2503.03147.
+[13] Tan C-Y, Gao Z-F, Yang H-C, Liu Z-X, Liu K, Guo P-J and Lu Z-Y 2025 Crystal valley Hall effect Phys. Rev. B 111 094411.
+[14] Ghadimi R, Mondal C, Kim S and Yang B-J 2024 Quantum valley Hall effect without Berry curvature Phys. Rev. Lett.
+133 196603.
+[15] Marino E C, Nascimento L O, Alves V S and Morais Smith C 2015 Interaction induced quantum valley Hall effect in
+graphene Phys. Rev. X 5 011040.
+[16] Aharon-Steinberg A, Marguerite A, Perello D J, Bagani K, Holder T, Myasoedov Y, Levitov L S, Geim A K and Zeldov E
+2021 Long-range nontopological edge currents in charge-neutral graphene Nature 593 528–534.
+[17] Luo C, Huang Z, Qiao H, Qi X and Peng X 2024 Valleytronics in two-dimensional magnetic materials J. Phys.: Mater. 7
+022006.
+[18] Zhao S, Li X, Dong B, Wang H, Wang H, Zhang Y, Han Z and Zhang H 2021 Valley manipulation in monolayer transition
+metal dichalcogenides and their hybrid systems: status and challenges Rep. Prog. Phys. 84 026401.
+[19] Lee C-J, Pan H-C, HadavandMirzaee F, Lu L-S, Cheng F, Her T-H, Shih C-K and Chang W-H 2025 Exciton–polariton
+valley Hall effect in monolayer semiconductors on plasmonic metasurface ACS Photonics 12 1351–1358.
+[20] Huang K, Fu H, Watanabe K, Taniguchi T and Zhu J 2024 High-temperature quantum valley Hall effect with quantized
+resistance and a topological switch Science 385 657–661.
+
+13
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+3. Exciton valley physics
+Ioannis Paradisanos1,2 and Mikhail M. Glazov3
+1
+
+Department of Materials Science and Engineering, University of Crete, Heraklion, 70013,
+Greece
+2
+Institute of Electronic Structure and Laser, Foundation for Research and Technology-Hellas,
+Heraklion, 70013, Greece
+3
+orcid.org/0000-0003-4462-0749
+E-mail: iparad@iesl.forth.gr
+
+Status
+Exciton valley physics has become a leading direction in two-dimensional semiconductors,
+particularly transition-metal dichalcogenides (TMDs). The valley degree of freedom arises from
+inequivalent extrema at the 𝐾 and 𝐾΄ points. In monolayer TMDs, broken inversion symmetry, timereversal symmetry, and strong spin-orbit coupling lock spin and valley quantum numbers, allowing
+selective optical addressing with circularly polarized light - forming the basis of valleytronics.
+Excitons, Coulomb-bound electron–hole pairs, dominate the optical properties of TMD
+monolayers. Their binding energies of several hundred meV, a consequence of reduced dielectric
+screening, the relatively heavy carrier effective masses, and spatial confinement, keep them stable
+well above room temperature [1].
+A central feature of exciton valley physics is the valley-contrasting optical selection rules. At
+normal incidence, right-handed (𝜎 ! ) circularly polarized light couples exclusively to interband
+transitions in the 𝐾 valley, whereas left-handed (𝜎 " ) light couples to the 𝐾΄ valley. This property
+allows the optical generation of valley-polarized excitons with pseudospin of | + 𝟏⟩ or | − 𝟏⟩ (figure
+1(a)). The emitted photoluminescence can retain the helicity of the excitation, providing a direct
+probe of valley polarization (also known as optical orientation), as shown in early studies [2, 3].
+Beyond neutral excitons, trions, biexcitons, momentum-dark excitons, and interlayer excitons in
+heterobilayers inherit valley-specific optical properties, further enriching the field (figure 1(b)). In
+addition to valley polarization, excitons can also be prepared in coherent superpositions of the 𝐾 and
+𝐾΄ valleys using linearly polarized excitation, opening the way to manipulate exciton valley coherence
+(also known as exciton alignment) and highlighting the potential of the valley degree of freedom as a
+qubit basis beyond population imbalance (figure 1(a)) [4]. The latter property is particularly
+attractive because the valley coherent - linearly polarized - exciton is an entangled state in the
+electron and hole valley degrees of freedom.
+While the valley index of free carriers is expected to be stable mainly due to the large momentum
+transfer required for intervalley scattering and the need for simultaneous spin flip, excitons display
+much faster valley depolarization. This behavior arises from the long-range electron–hole exchange
+interaction [5]. The exchange interaction couples excitonic states from opposite valleys, acting like
+an effective, exciton-momentum-dependent, magnetic field on the exciton pseudospin (figure 1(a)),
+akin to artificial Dresselhaus and Rashba fields produced by the spin-orbit interaction in electron and
+hole gases [6]. Because the strength of this effective field grows with exciton center-of-mass
+momentum, the associated pseudospin precession frequency increases with temperature, leading to
+progressively faster polarization decay. Exciton valley polarization typically decays on a picosecond
+timescale even at low temperatures, as confirmed by time-resolved photoluminescence and Kerr
+rotation experiments [7].
+14
+
+Journal XX (XXXX) XXXXXX
+
+a)
+
+A Author et al
+
+c)
+
+optical selection rules
+linear excitation
+
+circular excitation
+
+exciton valley polarization control knobs
+doping
+
+strain
+
+!!
+
+exciton species
+
+b)
+
+dielectric
+
+near-field
+Gr
+
+momentum
+dark
+
+e
+
+TMD
+
+e
+
+Gr
+
+bright
+
+e
+twist
+
+e
+localized
+
+h
+
+Rydberg states
+!
+
+spin-dark
+
+h
+
+moiré
+
+h
+
+"=4
+"=3
+"=2
+"=1
+
+Figure 1. (a) Valley-selective optical selection rules in TMD monolayers: 𝜎 ) or 𝜎 * circularly polarized light
+addresses excitons with pseudospin of | + 1⟩ or | − 1⟩, respectively, while linear polarization prepares valleycoherent excitons. (b) Excitonic landscape in TMDs, including spin- and momentum-bright excitons (green),
+spin-dark excitons (red), momentum-dark excitons (grey), localized excitons (yellow). (c) Representative
+control knobs for engineering exciton valley polarization, including carrier doping, strain, dielectric
+environment, near-field coupling (nanoantennas/cavities), twist-induced moiré superlattices, and Rydberg
+exciton states.
+
+Beyond intrinsic effects, several external tuning knobs have emerged in the field. Electrostatic [8]
+and photochemical [9] doping, strain [10], and dielectric engineering [11] can modify valley
+polarization and exciton-scattering times, while coupling to optical cavities promotes the formation
+of exciton–polaritons [12], enriching the landscape of exciton valley physics (figure 1(c)). The field
+has expanded further with the introduction of van der Waals heterostructures and moiré
+superlattices, which support new regimes of exciton localization for singlet and triplet interlayer
+excitons associated with local symmetry [13] and a plethora of many body effects sensitive to the
+valley degrees of freedom (figure 1(c)).
+Current and future challenges
+Despite major advances, specific obstacles limit the development of exciton valley physics.
+Following optical excitation, excitons typically do not recombine directly but undergo a cascade of
+relaxation processes involving phonons, impurities, defects, and interactions with other excitons.
+These processes introduce dephasing before radiative emission and potentially shorten the lifetime
+of valley polarization. A further complication arises from the high oscillator strength of bright
+excitons: while it enables strong light–matter interactions, it also enhances the long-range exchange
+interaction. Since the exchange field scales with oscillator strength, pseudospin precession
+accelerates, leading to rapid polarization decay. Valley coherence is even more fragile and typically
+15
+
+Journal XX (XXXX) XXXXXX
+
+A Author et al
+
+dephases within a picosecond under exchange- and phonon-driven mechanisms. A central challenge
+involves the extension of both polarization and coherence lifetimes, while balancing strong optical
+activity with long-lived quantum states which is impossible without detailed investigation of the
+underlying mechanisms.
+Experimental reports of valley polarization reveal additional subtleties. Early measurements
+under cryogenic and resonant excitation showed polarization degrees approaching 100% [2].
+However, in today’s cleaner and encapsulated samples, the observed values are significantly reduced.
+This counterintuitive trend arises from two related effects. First, suppressing defect-assisted
+recombination prolongs the exciton lifetime, providing more time for depolarization. Second, the
+reduction of exciton-defect scattering in high-quality samples increases the exciton scattering time,
+which in turn shortens the valley lifetime and reduces the degree of valley polarization and coherence
+[14].
+Beyond these intrinsic processes, the band structure specifics impose constraints on valley
+preservation. Dark excitons act as long-lived reservoirs with suppressed exchange interaction and
+depolarization. Spin-dark excitons, common in tungsten-based TMDs, couple to 𝑧-polarized light and
+thus remain hidden in circular photoluminescence, while momentum-dark excitons such as K–K΄, 𝐾–
+Λ or 𝐾–Γ states require phonon or defect assistance for recombination (figure 1(b)). Their presence,
+however, can impact bright-exciton polarization, making their control a critical challenge. In
+compounds such as MoSe2, the different effective masses of spin-split conduction bands cause
+crossings between bright and dark states, accelerating valley depolarization through state mixing
+[15].
+Finally, van der Waals moiré heterostructures highlight another open challenge. Moiré patterns
+induce local optical selection rules tied to atomic registry and local symmetry, yet these occur on
+length scales of a few to tens of nanometers, well below the diffraction limit of conventional optics.
+Probing and exploiting such local rules will require techniques capable of matching the moiré
+wavelength. Additionally, presence of free charge carriers strongly affects exciton valley physics both
+on a few particle level related to the trion formation and via many body, Fermi-polaron-like, effects
+[16]. Beyond these microscopic hurdles, the integration of valley physics into practical devices
+remains difficult. Most demonstrations rely on cryogenic temperatures and resonant excitation.
+Extending valley control to room temperature and electrical operation will require substantial
+advances in materials growth, defect management, and interface quality, as well as reducing
+dielectric disorder to achieve narrow lines and long coherence times. These remain critical obstacles
+on the path to room-temperature valleytronic devices based on excitons.
+In parallel, several fundamental problems remain unresolved. These include clarifying the role of
+exciton-exciton and exciton-electron interactions in depolarization and coherence loss, developing a
+comprehensive description of dark exciton spin and valley relaxation mechanisms, and probing
+valley-dependent exciton transport in both monolayers and heterostructures. Additional directions
+involve understanding the valley physics of excited Rydberg excitons (figure 1(c)), establishing links
+between valley degrees of freedom and topological properties, and realizing valley–photon interfaces
+capable of transferring both polarization and coherence.
+Advances in science and technology to meet challenges
+Progress in exciton valley physics will likely come from steady improvements in materials,
+experimental and theoretical met

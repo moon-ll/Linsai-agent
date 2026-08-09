@@ -693,7 +693,11 @@ class SystemRoutesMixin:
             elif verdict == "reject":
                 # 保存审核意见为 feedback；submit_feedback 内部已完成到 optimizing 的流转
                 feedback_text = reason or "用户审核不通过，请根据审核意见修改。"
-                result = lc.submit_feedback(proposal_id, feedback_text, verdict="major_revision")
+                # v6.8.17: 传递 session_id 以启用反馈闭环
+                result = lc.submit_feedback(
+                    proposal_id, feedback_text, verdict="major_revision",
+                    session_id=session_id,
+                )
                 # v6.7.12: 退回修改后归档会话，由 worker 重新创建新会话
                 if session_id:
                     sm.archive_session(session_id)
@@ -784,11 +788,13 @@ class SystemRoutesMixin:
             elif verdict == "reject":
                 feedback_text = reason or "用户审核不通过，请根据审核意见修改。"
                 # submit_feedback 内部已完成到 optimizing 的流转
+                # v6.8.17: 传递 session_id 以启用反馈闭环
                 lc.submit_feedback(
                     proposal_id,
                     feedback_text,
                     verdict="major_revision",
                     structured_feedback=structured,
+                    session_id=session_id,
                 )
                 action = "optimizing"
             else:

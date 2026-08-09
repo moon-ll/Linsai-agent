@@ -29,6 +29,7 @@ class FeedbackArchiveMixin:
         feedback_text: str,
         verdict: str = "major_revision",
         structured_feedback: Dict[str, Any] = None,
+        session_id: str = "",
     ) -> Dict[str, Any]:
         """提交人工审核反馈。
 
@@ -39,6 +40,8 @@ class FeedbackArchiveMixin:
             proposal_id: 课题 ID
             feedback_text: 人工意见（自由文本）
             verdict: 审核结论（approve/minor_revision/major_revision/reject/redirect）
+            structured_feedback: 外部已提供结构化意见
+            session_id: 审核会话 ID（v6.8.17 反馈闭环——用于提取对话摘要）
 
         Returns:
             {success, verdict, structured_feedback, transition}
@@ -91,12 +94,26 @@ class FeedbackArchiveMixin:
             prop_state = self._get_proposal_state(proposal_id)
             prop_state["human_feedback_count"] = feedback_num
             prop_state["updated_at"] = now_utc()
+            # v6.8.17: 记录审核会话引用，供后续优化轮次注入
+            if session_id:
+                review_history = prop_state.setdefault("review_history", [])
+                review_history.append({
+                    "session_id": session_id,
+                    "feedback_num": feedback_num,
+                    "verdict": verdict,
+                    "at": now_utc(),
+                })
             self._set_proposal_state(proposal_id, prop_state)
+
+        # v6.8.17: 将审核对话摘要追加到反馈文件
+        if session_id:
+            _append_session_summary_to_feedback(feedback_dir / f"feedback-{feedback_num}-raw.md", session_id)
 
         # 返回优化中
         transition_result = self.transition(
             proposal_id, "optimizing",
             reason=f"人工审核退回({verdict})，携带结构化意见"
+            + (f"，会话={session_id}" if session_id else "")
         )
 
         return {
@@ -274,3 +291,86 @@ class FeedbackArchiveMixin:
             }
         except Exception as e:
             return {"success": False, "error": str(e)}
+
+
+# ---------------------------------------------------------------------------
+# v6.8.17: 审核对话摘要提取（模块级函数）
+# ---------------------------------------------------------------------------
+
+def _append_session_summary_to_feedback(feedback_path: Path, session_id: str) -> None:
+    """将审核会话的用户消息摘要追加到反馈文件。
+
+    不调用 LLM——直接提取审核对话中用户提出的问题和意见，
+    作为结构化反馈的补充上下文。
+    """
+    try:
+        import session_manager as sm
+        messages, _state = sm.load_session(session_id)
+
+        # 提取用户消息（跳过初始审核上下文）
+        user_messages = []
+        for m in messages:
+            if m.get("role") == "user" and m.get("mode") == "review":
+                content = m.get("content", "").strip()
+                if content and len(content) > 5:
+                    user_messages.append(content)
+
+        if not user_messages:
+            return
+
+        # 追加到反馈文件
+        summary_lines = [
+            "\n\n---\n\n",
+            "## 审核对话摘要（自动提取）\n\n",
+            f"会话 ID: `{session_id}`\n\n",
+        ]
+        for i, msg in enumerate(user_messages[-10:], 1):
+            summary_lines.append(f"**用户意见 {i}**: {msg[:500]}\n\n")
+
+        with open(feedback_path, "a", encoding="utf-8") as f:
+            f.writelines(summary_lines)
+    except Exception:
+        pass
+
+
+def load_review_feedback_for_optimization(prop_state: Dict[str, Any]) -> str:
+    """v6.8.17: 为优化轮次加载历史人工审核反馈。
+
+    从 review_history 和 06_feedback/ 中提取之前的审核意见，
+    供 critic/writer prompt 注入，避免重蹈覆辙。
+    """
+    review_history = prop_state.get("review_history", [])
+    if not review_history:
+        return ""
+
+    feedback_count = prop_state.get("human_feedback_count", 0)
+    if feedback_count == 0:
+        return ""
+
+    lines = [
+        "\n\n【历史人工审核反馈（请避免同类问题）】\n",
+    ]
+
+    # 读取最近一次反馈文件
+    proposal_id = prop_state.get("proposal_id", "")
+    from proposal_lifecycle.constants import PROPOSALS_ROOT
+    for stage in ["optimizing"]:
+        feedback_dir = PROPOSALS_ROOT / stage / proposal_id / "06_feedback"
+        if not feedback_dir.exists():
+            continue
+        raw_file = feedback_dir / f"feedback-{feedback_count}-raw.md"
+        if raw_file.exists():
+            text = raw_file.read_text(encoding="utf-8")
+            # 提取审核对话摘要部分
+            if "## 审核对话摘要" in text:
+                summary_part = text[text.find("## 审核对话摘要"):]
+                lines.append(summary_part[:2000])
+                break
+            else:
+                # 使用完整反馈（截断）
+                lines.append(text[:1500])
+                break
+
+    if len(lines) > 2:
+        return "\n".join(lines)
+    return ""

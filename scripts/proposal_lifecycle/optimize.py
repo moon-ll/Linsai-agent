@@ -74,10 +74,37 @@ class OptimizeMixin:
             return {"success": False, "error": f"已达最大轮数 {max_rounds}"}
 
         # P1-1: 确定本轮聚焦章节（轮转 + 每4轮整体审查）
+        # v6.8.16 改进4: 维度轮换——连续 3 轮在同一维度原地踏步则跳过
         section_cycle = current_round % (len(PROPOSAL_SECTIONS) + 1)
         if section_cycle < len(PROPOSAL_SECTIONS):
             focus_section = PROPOSAL_SECTIONS[section_cycle]
             is_full_review = False
+            # 检查该维度是否连续 3 轮无提升
+            score_history = prop_state.get("score_history", [])
+            if len(score_history) >= 3:
+                same_section_rounds = [
+                    h for h in score_history[-6:]
+                    if h.get("focus_section") == focus_section.get("key")
+                ]
+                if len(same_section_rounds) >= 3:
+                    deltas = [
+                        same_section_rounds[i + 1]["score"] - same_section_rounds[i]["score"]
+                        for i in range(len(same_section_rounds) - 1)
+                    ]
+                    if all(abs(d) < 0.01 for d in deltas[-3:]):
+                        # 该维度原地踏步，强制切换到最弱维度
+                        _dim_scores = score_history[-1].get("dim_scores", {})
+                        _weakest = min(_dim_scores, key=_dim_scores.get) if _dim_scores else None
+                        if _weakest and _weakest != focus_section.get("key"):
+                            for _sec in PROPOSAL_SECTIONS:
+                                if _sec.get("key") == _weakest:
+                                    focus_section = _sec
+                                    break
+                            if _log:
+                                _log.info(
+                                    f"[{proposal_id}] 维度轮换: {section_cycle}→{focus_section['key']}"
+                                    f"（连续3轮原地踏步，切换到最弱维度）"
+                                )
         else:
             focus_section = None  # 第4轮做整体一致性审查
             is_full_review = True
@@ -88,6 +115,14 @@ class OptimizeMixin:
             return {"success": False, "error": "申请书不存在，请先执行管线生成初稿"}
 
         score_before = prop_state.get("last_score", 0.0)
+
+        # v6.8.17: 加载历史人工审核反馈（反馈闭环——从对话中学习）
+        _human_feedback_block = ""
+        try:
+            from proposal_lifecycle.feedback_archive import load_review_feedback_for_optimization
+            _human_feedback_block = load_review_feedback_for_optimization(prop_state)
+        except Exception:
+            pass
 
         # 1. critic 评审
         if _log:
@@ -849,6 +884,10 @@ class OptimizeMixin:
             f"将评审报告写入：{report_path}\n"
         )
 
+        # v6.8.17: 注入历史人工审核反馈（反馈闭环）
+        if _human_feedback_block:
+            prompt += _human_feedback_block
+
         return self._run_hermes("critic", prompt, timeout)
 
     # P1-2: 文献缺口检测和定向检索
@@ -1253,6 +1292,11 @@ class OptimizeMixin:
             f"      请在笔记中追加一条记录：阅读日期、文献标题、来源、核心结论、与课题关联、已引用位置。\n"
         )
 
+        # v6.8.17: cross-proposal 范例注入——从最高分课题提取范例段落
+        _exemplar_block = _load_cross_proposal_exemplar(self, proposal_id, section_key)
+        if _exemplar_block:
+            prompt += _exemplar_block
+
         result = self._run_hermes("writer", prompt, timeout)
 
         # v6.7.7: writer 返回后，自动从 sections/ 重新组装 proposal-draft.md
@@ -1550,3 +1594,74 @@ class OptimizeMixin:
                 if f"[{sev}]" in line or f"（{sev}）" in line:
                     issues.append({"severity": sev, "line": line.strip()[:100]})
         return issues
+
+
+# ---------------------------------------------------------------------------
+# v6.8.17: cross-proposal 范例注入
+# ---------------------------------------------------------------------------
+
+def _load_cross_proposal_exemplar(lifecycle_obj, current_proposal_id: str, section_key: str) -> str:
+    """从最高分课题中提取范例段落，注入到低分课题的 writer prompt。
+
+    只有当当前课题分数 <0.75 且存在分数 ≥0.80 的其他课题时才触发。
+    """
+    try:
+        from proposal_lifecycle.constants import PROPOSALS_ROOT
+        optimizing_dir = PROPOSALS_ROOT / "optimizing"
+
+        # 找到当前课题的分数
+        current_state = lifecycle_obj._get_proposal_state(current_proposal_id)
+        current_score = current_state.get("last_score", 0.0) if current_state else 0.0
+        if current_score >= 0.75:
+            return ""  # 当前课题已足够好，不需要范例
+
+        # 找到最高分的其他课题
+        best_proposal = None
+        best_score = 0.80  # 最低门槛
+        for d in optimizing_dir.iterdir():
+            if not d.is_dir() or d.name == current_proposal_id:
+                continue
+            lc_file = d / "_lifecycle.json"
+            if not lc_file.exists():
+                continue
+            try:
+                import json
+                state = json.loads(lc_file.read_text(encoding="utf-8"))
+                score = state.get("last_score", 0.0)
+                if score > best_score:
+                    best_score = score
+                    best_proposal = d.name
+            except Exception:
+                continue
+
+        if not best_proposal:
+            return ""
+
+        # 提取范例课题的对应章节
+        section_file_map = {
+            "rationale": "rationale.md",
+            "content": "content.md",
+            "scheme": "scheme.md",
+        }
+        section_file = section_file_map.get(section_key)
+        if not section_file:
+            return ""
+
+        exemplar_path = optimizing_dir / best_proposal / "04_proposal" / "sections" / section_file
+        if not exemplar_path.exists():
+            return ""
+
+        text = exemplar_path.read_text(encoding="utf-8")
+        # 取前 2000 字符作为范例（足够展示写作风格，不会太长）
+        exemplar_text = text[:2000]
+
+        return (
+            f"\n\n【参考范文（来自评分 {best_score:.2f} 的高质量课题，仅供学习写作风格和论证密度）】\n"
+            f"来源课题：{best_proposal}\n"
+            f"章节：{section_file}\n"
+            f"---\n{exemplar_text}\n---\n"
+            f"请在本次修改中参考上述范文的论证密度、行文连贯性和具体性，"
+            f"但不要照抄内容（研究领域不同）。\n"
+        )
+    except Exception:
+        return ""

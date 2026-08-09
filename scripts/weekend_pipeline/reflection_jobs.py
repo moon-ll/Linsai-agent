@@ -249,6 +249,40 @@ def _analyze_collected_state(collected: Dict[str, Any]) -> Dict[str, Any]:
         patterns.append({"type": "weekend_pipeline", "status": "failed", "count": failed_jobs})
         next_actions.append("检查 weekend-pipeline.json 是否有 failed 任务")
 
+    # v6.8.16 改进5: 输入端"无新设想"熔断检测
+    # 连续 2 周 input ideas_count=0 → 触发 input_pipeline_broken 告警
+    try:
+        pipe_data = load_json(
+            Path(__file__).parent.parent.parent / "memory" / "weekend-pipeline.json",
+            default={},
+        )
+        all_jobs = pipe_data.get("jobs", []) if isinstance(pipe_data, dict) else []
+        input_results = []
+        for j in all_jobs:
+            if j.get("stage") == "input" or "input" in j.get("job_id", ""):
+                result = j.get("result", {})
+                if isinstance(result, dict) and "ideas_count" in result:
+                    input_results.append(result.get("ideas_count", 0))
+        # 检查最近 2 次 input 执行
+        if len(input_results) >= 2:
+            recent_two = input_results[-2:]
+            if all(v == 0 for v in recent_two):
+                patterns.append({
+                    "type": "input_pipeline_broken",
+                    "severity": "error",
+                    "description": (
+                        "输入端连续 2 周无新研究设想（ideas=0）。"
+                        "可能原因：hermes workspace 无新文献、来源收集路径断裂、"
+                        "或缺口分析逻辑异常。"
+                    ),
+                })
+                next_actions.append(
+                    "⚠ 检查输入端管线：确认 hermes workspace 有新文献、"
+                    "collect_briefings/collect_paper_pool 来源可达"
+                )
+    except Exception:
+        pass
+
     if not next_actions:
         next_actions.append("链路运转平稳，继续观察")
 
@@ -356,6 +390,30 @@ def run_reflection_recommend(state: Dict[str, Any], job: Dict[str, Any], dry_run
             "description": action_text,
         })
 
+    # v6.8.17: 知识库健康评分
+    try:
+        kb_health = _calculate_kb_health()
+        report["kb_health"] = kb_health
+        if kb_health.get("coverage_pct", 100) < 60:
+            actions.append({
+                "type": "kb_health",
+                "description": (
+                    f"知识库笔记覆盖率仅 {kb_health['coverage_pct']:.0f}%"
+                    f"（{kb_health['covered']}/{kb_health['total_raw']}），"
+                    f"建议周末输出端批量补齐深度阅读笔记"
+                ),
+            })
+        if kb_health.get("isolated_pct", 0) > 20:
+            actions.append({
+                "type": "kb_health",
+                "description": (
+                    f"知识图谱孤立节点 {kb_health['isolated_pct']:.0f}%，"
+                    f"建议检查概念关联，补充 wiki 链接"
+                ),
+            })
+    except Exception:
+        pass
+
     actions_data = {
         "generated_at": now_utc(),
         "actions": actions,
@@ -366,3 +424,68 @@ def run_reflection_recommend(state: Dict[str, Any], job: Dict[str, Any], dry_run
         save_json(WEEKEND_REFLECTION_DIR / f"weekend-actions-{_date_str()}.json", actions_data)
 
     return {"success": True, "actions_count": len(actions), "dry_run": dry_run}
+
+
+# ---------------------------------------------------------------------------
+# v6.8.17: 知识库健康评分
+# ---------------------------------------------------------------------------
+
+def _calculate_kb_health() -> Dict[str, Any]:
+    """计算知识库健康度：覆盖率 + 新鲜度 + 连通度。"""
+    from pathlib import Path
+    from datetime import datetime, timezone, timedelta
+    import re
+
+    project_root = Path(__file__).parent.parent.parent
+    raw_dir = project_root / "knowledge" / "raw" / "papers"
+    wiki_dir = project_root / "knowledge" / "wiki" / "papers"
+
+    # 提取 arxiv_id 作为匹配键（兼容两种文件名格式）
+    def _extract_arxiv_id(filename):
+        # wiki: "2411.02379.md" → "2411.02379"
+        # raw: "2026-2510.14404-title.md" → "2510.14404"
+        m = re.search(r"(\d{4}\.\d{4,5})", filename)
+        return m.group(1) if m else filename
+
+    raw_ids = {_extract_arxiv_id(f.name) for f in raw_dir.glob("*.md")} if raw_dir.exists() else set()
+    wiki_ids = {_extract_arxiv_id(f.name) for f in wiki_dir.glob("*.md")} if wiki_dir.exists() else set()
+    covered = raw_ids & wiki_ids
+    coverage_pct = len(covered) / max(len(raw_ids), 1) * 100
+
+    # 新鲜度：近 6 个月更新的 wiki/papers 比例
+    cutoff = datetime.now(timezone.utc) - timedelta(days=180)
+    fresh = 0
+    for f in wiki_dir.glob("*.md") if wiki_dir.exists() else []:
+        try:
+            mtime = datetime.fromtimestamp(f.stat().st_mtime, tz=timezone.utc)
+            if mtime > cutoff:
+                fresh += 1
+        except Exception:
+            pass
+    freshness_pct = fresh / max(len(wiki_ids), 1) * 100
+
+    # 连通度：图谱中孤立节点比例
+    isolated_pct = 0
+    try:
+        import json
+        graph = json.loads((project_root / "knowledge" / "graph.json").read_text(encoding="utf-8"))
+        nodes = graph.get("nodes", {})
+        edges = graph.get("edges", [])
+        connected = set()
+        for e in edges:
+            connected.add(e.get("from", e.get("source", "")))
+            connected.add(e.get("to", e.get("target", "")))
+        isolated = len(nodes) - len(connected & set(nodes.keys()))
+        isolated_pct = isolated / max(len(nodes), 1) * 100
+    except Exception:
+        pass
+
+    return {
+        "total_raw": len(raw_ids),
+        "total_wiki": len(wiki_ids),
+        "covered": len(covered),
+        "coverage_pct": round(coverage_pct, 1),
+        "freshness_pct": round(freshness_pct, 1),
+        "isolated_pct": round(isolated_pct, 1),
+        "score": round((coverage_pct + freshness_pct + (100 - isolated_pct)) / 3, 1),
+    }

@@ -1,0 +1,1257 @@
+Controlled Growth of large area bilayer MoS2 films on SiO2 substrates by
+chemical vapour deposition technique
+Umakanta Patra, Faiha Mujeeb, Abhiram K, Jai Israni, Subhabrata Dhar*
+Department of physics, Indian institute of technology, Bombay, Mumbai, India,400076
+Corresponding author email: dhar@phy.iitb.ac.in
+Bilayer (2L) transition metal dichalcogenides (TMD) have the ability to host interlayer excitons, where electron and
+hole parts are spatially separated that leads to much longer lifetime as compared to direct excitons. This property can
+be utilized for the development of exciton-based logic devices, which are supposed to be superior in terms of energy
+efficiency and optical communication compatibility as compared to their electronic counterparts. However, obtaining
+uniformly thick bilayer epitaxial films with large area coverage is challenging. Here, we have engineered the flow
+pattern of the precursors over the substrate surface to obtain large area (mm2) covered strictly bilayer MoS2 films on
+SiO2 by chemical vapour deposition (CVD) technique without any plasma treatment of the substrate prior to the
+growth. Bilayer nature of these films is confirmed by Raman, low-frequency Raman, atomic force microscopy
+(AFM) and photoluminescence (PL) studies. The uniformity of the film has been checked by Raman peak separation
+and PL intensity map. High resolution transmission electron microscopy (HRTEM) reveals that crystalline and
+twisted bilayer islands coexist within the layer. Back gated field-effect transistor (FET) structures fabricated on the
+bilayers show on/off ratio of 106 and subthreshold swings (SS) of 2.5 V/Decade.
+Keywords: Bilayer MoS2, Large area, CVD, Field effect transistors
+
+Introduction
+Monolayer (1L) transition metal dichalcogenides (1LTMDCs) exhibit certain unique properties such as the
+large exciton binding energy [1], existence of many
+body excitonic states, e.g. trions, biexcitons [2–4] etc.
+and most notably the valley polarization (VP) that
+results from the broken inversion symmetry and
+strong spin-orbit coupling in the material [5,6]. This
+enables an exciton in K (or K’)-valleys to sustain its
+valley character throughout the time of its existence.
+Moreover, the spin state of the exciton is tagged with
+the valley index. The property can be exploited to
+develop valley-based electronics or ‘valleytronics’,
+which can be used for the development of
+multifunctional quantum devices, and quantum
+computation [7,8]. Another important aspect of this
+class of 2D materials is layer number dependent
+electronic properties. For example, monolayer
+TMDCs have direct band gap, while multilayers show
+indirect nature [9,10]. One Interesting feature of
+bilayer TMDCs is its ability to host interlayer
+excitons [11]. These excitons, where electron and hole
+parts are spatially separated, have much longer
+lifetime as compared to direct excitons [12]. This
+aspect can be used for the development of excitonbased logic devices, which have superior energy
+
+efficiency and optical communication compatibility
+compared to their electronic counterparts [13,14].
+Moreover, due to smaller thickness, high stiffness,
+breaking strength, lower dielectric constant, higher
+electron effective mass and larger band gap than
+silicon, TMDC films are superior choice for the
+suppression of the short channel effects to achieve
+larger density of devices in a chip [15]. In this respect,
+TMDC films with thickness of a few layers are
+preferred over monolayers as the carrier mobility in
+the former is expected to be more than in the latter due
+to lower surface to volume ratio [16]. It should be
+further mentioned that TMDCs have shown great
+potential
+for
+neuromorphic
+computing
+applications [17]. There are several reports on
+artificial synaptic devices based on these
+materials [18]. Recently, M.M Islam et al. has
+demonstrated self-denoising capability of the
+chemical vapor deposition (CVD) grown bilayer
+MoS2 based artificial optoelectronic synapse [19].
+However, in most of the cases, these devices are
+demonstrated on isolated bilayer islands. This restricts
+the fabrication of multiple devices on a single
+platform necessary for the realization of the artificial
+neural network [20]. MoS2 is the most studied
+material within the class of 2D TMDCs [21]. Various
+growth methods, such as laser thinning [22], liquid
+
+exfoliation [23] and hydrothermal synthesis [24], are
+adopted to grow bilayer MoS2. However, not much
+control over the area coverage and the layer
+numbers [25] could be achieved by these methods.
+CVD technique has often been used to grow large area
+covered continuous 1L MoS2 films [26,27]. Lei Liu et
+
+al. has reported the epitaxial growth of continuous 2LMoS2 films covering large area (few cm2) on c-plane
+sapphire substrates using the same technique [28].
+However, growing large area continuous films of
+
+(a)
+
+(b)
+
+Furnace
+
+Ar
+
+Sulfur
+
+SiO2/Si
+
+Ar Flow
+
+MoO3
+
+Boat
+
+(c)
+
+150
+
+750
+
+Sulfur temperature(oC)
+
+o
+MoO3 temperature( C)
+
+1000 (c) 10 Min.
+
+(e)
+
+(d)
+
+SiO2
+
+100
+
+500
+50
+
+250
+
+0
+
+0
+0
+
+100
+Time(min.)
+
+200
+
+1 cm
+
+2L-MoS2
+300 m
+
+Figure. 1. (a) Chemical Vapour Deposition set up. (b) Arrangement of the substrates on top of the MoO 3 containing boat. (c)
+Temperature rise and cooling curves at the locations of MoO3 and S powder containing boats. (d) Photograph of the
+substrate(roof piece) after the growth. (e) Zoomed-in view of the portion of the substrate, which was directly exposed to MoO 3
+powder. Continious growth of MoS2 layer (blue area) could be seen.
+
+bilayer (2L) MoS2 on SiO2/Si substrates is still a
+challenge. Note that large area films are important for
+any practical application [29]. Further for better
+integration with existing Si-technology, it is necessary
+that these films are grown on SiO2/Si substrates [30].
+Recently, Xiumei Zhang et al. has reported the growth
+of 2L MoS2 films on SiO2/Si substrates by controlling
+the growth temperature and the gas flow direction in
+chemical vapour deposition (CVD) [31]. However,
+bilayers grown by this method are found to be isolated
+domains of size not more than a few hundreds of
+micrometer. Tingting Xu et al. reported the growth of
+2L MoS2 triangles of size 50-100 𝜇m on SiO2/Si by a
+two-step CVD process, where the MoO3 film is first
+deposited on the substrate and then sulphurisation of
+the film is carried out [32]. Sungjoo Lee et al. used a
+low-pressure chemical vapour deposition technique
+
+(LPCVD) to grow continuous MoS2 films with
+different layer numbers on SiO2 substrate treated with
+O2 plasma for different times prior to the growth.
+However, the morphology of SiO2 film has been found
+to deteriorate after the plasma treatment. Note that this
+deterioration is unwanted keeping in mind the need
+for low leakage current in any electronic device
+developed on this platform [33]. S.Xiao et al. has
+reported CVD growth of continuous monolayer,
+bilayer and multilayer MoS2 films on SiO2/Si
+substrate by varying the growth temperature.
+However, a details investigation on the bilayer nature
+of the MoS2 films is lacking in their study. [34]
+Here, we have engineered the flow pattern of
+the sulphur and MoO3 vapours over the substrate
+surface by introducing blockades in a CVD setup to
+achieve the growth of large area continuous 2L-MoS2
+
+films on SiO2/Si substrates. We have optimized the
+growth temperature, amount of the precursors as well
+as the width and height of the vapor flow channel to
+control the reaction rate of the precursors on the
+substrate surface. It has been found that at the
+optimum condition, MoS2 films with the thickness of
+2 monolayers (2L) can be deposited uniformly on
+SiO2/Si substrates covering an area as large as several
+tens of mm2. We have also carried out the growth of
+MoS2 on SiO2 after treating the SiO2/Si substrates in
+O2-plasma for different amounts of time. It has been
+found that the plasma exposure does not favour the
+growth of 2L-MoS2. Instead, 1L-MoS2 films are
+deposited under the same growth condition even for a
+few seconds of plasma treatment. The findings thus
+provide a novel way to grow a large area covered
+strictly bilayer MoS2 films on SiO2/Si substrate, which
+can be useful for developing 2D materials-based
+electronic/excitonic devices. Back gated field-effect
+transistor (FET) structures are fabricated on these
+bilayers, which show on/off ratio as high as 106,
+mobility of 9.5 cm2/V-s and subthreshold swings of
+2.5 V/decade.
+Experimental methods
+Growth and characterization of 2L-MoS2
+Samples were grown in a CVD chamber as depicted
+schematically in Fig. 1(a). Two ceramic boats, one
+containing 2 mg of high purity MoO3 powder (99.995
+%, Aldrich) and another with 350 mg of sulphur (S)
+powder (99.95%, Aldrich), were kept respectively in
+the higher and lower temperature zones of the quartz
+reactor tube. Separation between two boats was
+maintained at 16.5 cm. The SiO2/Si substrate was
+cleaned successively in tri chloroethylene (TCE),
+acetone and methanol for five minutes each in an
+ultrasonic bath before placing it on top of the MoO3
+containing boat as shown in the Fig. 1(b). The quartz
+reactor was purged with argon (Ar) gas for 10 min at
+a flow rate (𝜑𝐴𝑟 ) of 300 sccm at room temperature.
+The furnace temperature is then raised to 150℃ and
+Ar-purging was continued for another 20 minutes at
+𝜑𝐴𝑟 = 200 sccm. 𝜑𝐴𝑟 was then reduced to 8 sccm
+while the furnace temperature was raised to 700℃ at
+a rate of 10℃/min. This temperature was maintained
+for 10 minutes, which allowed the sulphur boat
+temperature to reach 150℃. The furnace was then
+switched off to cool down the substrate naturally
+under the flow of argon. Temperature evolution
+
+profiles at the MoO3 and sulphur boat positions are
+shown in the Fig. 1(c). Photographs of the
+substrate(roof piece) after the growth is shown in Fig.
+1(d) and (e), which show the deposition of a
+continuous MoS2 film (blue area). Note that the
+separation between the supporting pieces and the
+height of the substrate [see Fig. 1(b)] play very
+crucial roles in governing the size of the bilayer
+islands [see supplementary information S.1]. It should
+be noted that the flow pattern of the precursors plays
+a vital role in the growth process. M A Gokul et al.
+have manupulated the growth pattern by placing
+blockades of different size and shape on the substrates
+during the CVD growth of their MoS2 layers [35].
+They have found the growth of monolayer MoS2 only
+in the regions, where the flow trabulance is supressed.
+Here the we believe that for a particluar the height and
+width of the channel in our set up the velocity
+distribution of the precursor particles becomes
+uniform. This laminar flow results in the growth of
+uniform deposition of MoS2.
+MoS2 films were also grown on SiO2 after treating
+the surface in O2-plasma for 10, 30, 60 and 180 sec of
+exposer times. The plasma treatment was carried out
+at chamber pressure of 0.5 mbar, O2 flow rate of 5
+sccm and plasma power of 50 W. It has been found
+that O2 plasma treated substrates facilitate the growth
+of monolayer instead of bilayer MoS2 films. This is
+discussed in supplementary section S.2.
+Optical and atomic force microscopy (AFM) of the
+sample were carried out at room temperature.
+Photoluminescence (PL) and Raman spectroscopy
+were performed using a micro-PL/Raman setup from
+Renishaw, Invia Reflex, UK. PL and Raman maps
+were recorded with a 50× magnification and 1𝜇m of
+scanning step. Low frequency Raman and PL
+spectroscopy are carried out using a 532 nm diode
+laser excitation source with 500𝜇W power and a 500
+cm focal-length monochromator equipped with 2400
+gr/mm grating and CCD detector. High resolution
+transmission electron microscopy (HRTEM)
+investigation is carried out in a 300 kV system from
+Thermo Scientific (Themis 300 G3) after transferring
+the film onto a Cu-grid using polystyrene based wet
+transfer technique [36].
+Device fabrication and characterization
+Bilayer MoS2 films were transferred on a 300 nm thick
+SiO2 coated p-type Si-substrates by polystyrene based
+
+Result and Discussion
+
+(a)
+
+21.90
+(cm-1)
+
+21.55
+
+1
+𝐸2𝑔
+
+15 m
+
+𝐴1𝑔
+
+380 390 400 410
+Raman shift (cm -1)
+
+Raman intensity(a.u)
+
+Raman intensity (a.u)
+
+Room temperature Raman spectrum of the film is
+shown in Fig. 2(a). Raman spectrum for a 1L-MoS2,
+which has been grown in the same CVD setup, is
+1
+shown for comparison. The characteristic 𝐸2𝑔
+(Inplane vibration) and 𝐴1𝑔 (out-of plane vibration)
+peaks of MoS2 could be seen for both the cases. The
+1
+seperation between 𝐸2𝑔
+and 𝐴1𝑔 peaks, which carries
+the information of the layer thickness, is found to be
+21 and 19 cm-1, respectively, for this film and the
+monolayer 1L-MoS2 film. The increased raman
+seperation indicates that the film under study must be
+bilayer MoS2 [16,37,38]. The map showing the
+1
+separation between 𝐸2𝑔
+and 𝐴1𝑔 peaks is shown in the
+1
+inset of Fig. 2(a). Evidently, the gap between 𝐸2𝑔
+and
+𝐴1𝑔 does not show much variation over the entire
+scanned area of 900𝜇m2. This suggests that the bilayer
+nature of the deposition is maintained over a large
+area.
+(b)
+BM
+
+SM
+
+SM
+BM
+
+0
+
+20
+
+40
+
+Raman shift(cm-1)
+
+Figure. 2. (a) Room temperature Raman spectra comparing
+monolayer (black line) and bilayer (red line) MoS2. Inset
+1
+shows the 𝐸2𝑔
+-𝐴1𝑔 seperation map. (b) Low frequency
+Raman spectra recorded for monolayer (black line) and
+bilayer (red line) MoS2. Inset schematically represents the
+shear (SM) and breathing (BM) modes.
+
+Figure 2(b) compares low frequency raman
+spectra for the film and the 1L- MoS2. Presence of two
+low frequency raman features at 23 and 40 cm-1 is
+quite evident in the studied MoS2 film. While these
+
+features are missing in the 1L-MoS2. The two peaks
+can be attributed to the in-plane shear mode (SM) [at
+23cm-1] and out-of-plane breathing mode (BM) [at 40
+cm-1] observed in bilayer MoS2 [37]. Note that the two
+modes should not be present in 1L-MoS2, which is
+consistant with the observation. The finding thus
+confirms the bilayer nature of of our MoS2 film.
+Figure 3(a) compars the room temperature
+photoluminoscence(PL) spectra recorded on 1L(black symbols) and our 2L-MoS2 (orange symbol)
+films. In both the cases, the spectra are featured by two
+peaks, which can be assigned to A and B excitons in
+the K-valleys. Evidently, the A-excitonic peak
+intensity is suppressed in our 2L-MoS2 film as
+compared to 1L-MoS2. While, the intensity of the B
+excitonic feature is not so different in the two cases.
+Such a dramatic reduction of A-excitonic intensity in
+2L- as compared to 1L-MoS2 has been reported earlier
+and can be attributed to the formation of spatially
+indirect excitons in the former [39]. Fig. 3(b) presents
+the PL intensity map for the MoS2 film over a 20 × 20
+um2 area. The bare substrate region in the image is
+marked by white dotted line. Intenisty is evidently
+uniform over most parts of the selected region, which
+further confirm the uniformity of the 2L-MoS2 film.
+PL Intensity (a.u)
+
+wet transfer technique [36]. Backgated FET devices
+were fabricated using standard optical lithography and
+lift-off technique. Deposition of Ag(30nm) and
+Au(100nm) was carried out by sputtering techniques.
+Keithley 6487 pico-ammeter-voltage source and a
+Keysight B2901B source measuring unit were used
+for the electrical characterizations.
+
+(a) AA
+
+(b)
+2L-MoS2
+BB
+
+1.8
+2.0
+Energy (eV)
+
+5 m
+Low
+
+High
+
+Figure. 3. (a) Room temperature PL spectra recorded on the
+monolayer (Black) and bilayer (Orange) MoS2. (b) Room
+temperature PL intensity map.
+
+The layer thickness is further explored by
+atomic force microscopy (AFM). Fig. 4(a) is showing
+the AFM image taken from the edge of the continious
+MoS2 film. Fig. 4(b) shows the magnified view of the
+marked region [white box] of the AFM image of Fig.
+4(a). Presence of two layers with a clear side step is
+evident in the image. The line-scan profile along the
+white line marked in Fig. 4(b) is shown in the the inset
+of the figur. The profile clearly shows two step
+increase of height. The thickness is found to be 1.7
+nm, which also matches well with other reported
+values for CVD grown bilayer MoS2 thin films [38].
+
+(b)
+
+(a)
+SiO2
+
+(a)
+
+0.5 m
+Height (nm)
+
+2L-MoS2
+
+3 m
+
+1.5
+0.0
+
+(b)
+
+Region Region
+2
+1
+
+(c)
+5 nm
+
+1.7 nm
+1.7
+nm
+
+6 nm
+
+5 nm-1
+
+(d)
+
+(c)
+400
+600
+Distance (m)
+
+Figure. 4. Atomic force microscopy image of the
+continious bilayer MoS2 film grown on SiO2/Si substrate.
+(b) Magnified view of the edge of the film evidencing the
+stacking of two layers. (c) Height profile recorded along the
+white line maked in the figure 4(b).
+
+Figure 5(a) shows the HRTEM image of the
+bilayer MoS2 film. Edge of the continuous film on the
+Cu-gride is marked by the red dotted line. Fig. 5(b)
+and (c) show the magnified views of region 1 (blue
+box) and region 2 (yellow box), respectively.
+Crystalline islands extending over several hundreds of
+nanometres are observed as shown in these figures.
+Respective insets present the fast Fourier transform
+(FFT) patterns of the images. Perfect hexagonal
+arrangement of the spots in the FFT pattern of region
+1, confirms the AA stacking of the monolayers.
+Interestingly, the Moire pattern with a twist of 10° has
+been observed in the region 2 [Fig. 5(c)]. Note that
+similar Moire pattern has been reported earlier in 2LMoS2 by other group [40]. These results suggest that
+both AA stacked and twisted bilayer islands coexist
+within the sample. Presence of vacancies are also
+evident in the HRTEM images, which has been
+highlighted in Fig. 5(d).
+
+5 nm-1
+
+6 nm
+
+6 nm
+
+1 nm
+
+Figure. 5. High resolution TEM (HRTEM) images: (a)
+HRTEM image from a portion of the film. Region 1 and 2
+are marked in the image. (b) HRTEM image of region 1 and
+the corresponding fast furrier transform (FFT) pattern. (c)
+HRTEM image of region 2 and the corresponding FFT
+pattern. Double spot formation in FFT indicates the
+presence of twisted bilayers in this part of the film. The
+twist angle is estimated to be 10°. (d) HRTEM image of a
+crystalline region, inset shows a vacancy in an expanded
+scale.
+
+Fig. 6(a) plots the variation of source-drain (𝐼𝑑𝑠 )
+current as a function of source-drain (𝑉𝑑𝑠 ) voltage at
+different gate-source (𝑉𝑔𝑠 ) voltages. The top-view
+optical image of the source and drain contacts can be
+seen in the inset of the figure. Enhancement of 𝐼𝑑𝑠 from
+a few pA to A with the increase of 𝑉𝑔𝑠 from -40 to 40
+V confirms the n-type nature of the bilayer MoS2
+films. Fig. 6(b) shows the variation of 𝐼𝑑𝑠 with 𝑉𝑔𝑠 at
+𝑉𝑑𝑠 = 10 V. From the data, the field effect mobility of
+the electrons can be obtained from the following
+equation [29].
+𝑑𝐼
+
+𝐿
+×𝑊×𝑉
+𝑜𝑥
+𝑑𝑠
+
+𝜇 = (𝑑𝑉𝑑𝑠 ) × 𝑐
+𝑔𝑠
+
+(1)
+
+Where 𝐿 (~5 𝜇m) is the channel length and 𝑊
+(~5 𝜇m) is the channel width. Cox is the gate
+capacitance, which is estimated to be 11.51 nFcm-2
+𝐼𝑑𝑠 ⁄ 𝑉𝑔𝑠 = 1.09 × 10−6 A/V obtained from the 𝐼𝑑𝑠
+versus 𝑉𝑔𝑠 plots shown in the inset of Fig. 6(b). From
+these values, the mobility 𝜇 can be estimated as
+~9.5 cm2/V-s. Furthermore, the on/off ratio of the
+device and the
+
+(a)
+
+D
+
+S
+
+10
+
+Ids(A)
+
+2L-MoS2
+
+function of source-drain voltage (𝑉𝑑𝑠 ) at different gate-tosource voltages (𝑉𝑔𝑠 ), inset shows the optical top-view
+image of the device (b)Variation of 𝐼𝑑𝑠 as a function of 𝑉𝑔𝑠
+at a fixed source-drain voltage 𝑉𝑑𝑠 = 10 V.
+
+40 V
+
+40
+20m
+m
+
+5
+-40 V
+
+0
+
+0
+
+12
+
+10
+
+1E-5
+1E-6
+Vds=10 V
+8
+1E-7
+1E-8
+6
+SS=2.5 V/Dec
+1E-9
+4
+On/Off~ 106
+1E-10
+2
+1E-11
+0
+= 9.5 cm2/V.Sec 1E-12
+-30 -15
+0
+15
+30
+Vgs(V)
+
+(b)
+
+Log(Ids)
+
+10
+
+Ids(A)
+
+5
+Vds(V)
+
+subthreshold swings are estimated to be ~106 and
+2.5 V/Decade, respectively. Note that in terms of these
+figure of merits our 2L-MoS2 based FET is quite
+comparable with those reported on CVD grown 2LMoS2 films as shown in Table 1. Note that high values
+of carrier mobility have been observed only for the
+devices fabricated on small isolated flakes. This might
+be due to the lower rate of grain boundary scattering
+events for the carriers in these small islands.
+Performance of our FET devices might be further
+improved by introducing high K-gate dielectrics as the
+top gate [42,43]. Comparison of the performance of
+our bilayer MoS2 based back gated FET has been
+shown in Table. 1.
+
+Figure. 6. (a) Variation of source-drain current (𝐼𝑑𝑠 )as a
+
+Table. 1. Comparison of the FET performance of CVD grown 2L-MoS2
+
+Sl.n
+o
+
+Device structure
+
+Coverage
+
+Carrier
+Mobility(cm2/V.Sec)
+
+ON/OFF ratio
+
+Ref.
+
+---
+
+SS
+value
+(V/De
+c)
+---
+
+1
+
+2L-MoS2/SiO2/Si
+
+Continuous films
+
+8.2
+
+2
+
+2L-MoS2/SiO2/Si
+
+Isolated flakes
+
+21
+
+107
+
+---
+
+[16]
+
+3
+
+2L-MoS2/SiO2/Si
+
+Isolated flakes
+
+3.2
+
+105
+
+---
+
+[44]
+
+4
+
+2L-MoS2/SiO2/Si
+
+Isolated flakes
+
+0.01
+
+---
+
+---
+
+[45]
+
+5
+
+2L-MoS2/SiO2/Si
+
+Isolated flakes
+
+4.5
+
+105
+
+---
+
+[46]
+
+6
+
+---
+
+[47]
+
+[33]
+
+6
+
+2L-MoS2/SiO2/Si
+
+Isolated flakes
+
+0.3
+
+10
+
+7
+
+2L-MoS2/HFLaO
+
+Isolated flakes
+
+36
+
+106
+
+---
+
+[14]
+
+9
+
+2L-MoS2/SiO2/Si
+
+Continuous films
+
+9.5
+
+106
+
+2.5
+
+This
+work
+
+Conclusion
+
+[4]
+
+T. Mueller and E. Malic, Exciton Physics and
+Device Application of Two-Dimensional Transition
+Metal Dichalcogenide Semiconductors, Npj 2D
+Mater. Appl. 2, 29 (2018).
+
+[5]
+
+R. Suzuki et al., Valley-Dependent Spin
+Polarization in Bulk MoS2 with Broken Inversion
+Symmetry, Nat. Nanotechnol. 9, 611 (2014).
+
+[6]
+
+F. Mujeeb, P. Chakrabarti, V. Mahamiya, A.
+Shukla, and S. Dhar, Influence of Defects on the
+Valley Polarization Properties of Monolayer MoS2
+Grown by Chemical Vapor Deposition, Phys. Rev.
+B 107, 115429 (2023).
+
+[7]
+
+S. A. Vitale, D. Nezich, J. O. Varghese, P. Kim, N.
+Gedik, P. Jarillo‐Herrero, D. Xiao, and M.
+Rothschild,
+Valleytronics:
+Opportunities,
+Challenges, and Paths Forward, Small 14, 1
+(2018).
+
+[8]
+
+F. Langer et al., Lightwave Valleytronics in a
+Monolayer of Tungsten Diselenide, Nature 557, 76
+(2018).
+
+[9]
+
+X. Li, W. Han, J. Wu, X. Qiao, J. Zhang, and P.
+Tan, Layer‐Number Dependent Optical Properties
+of 2D Materials and Their Application for
+Thickness Determination, Adv. Funct. Mater. 27,
+(2017).
+
+[10]
+
+U. Patra, F. Mujeeb, and S. Dhar, Vapor–Liquid–
+Solid-Mediated Layer-by-Layer Growth of
+Stepped-Wedge-Shaped WS 2 Microribbons Using
+the Chemical Vapor Deposition Technique, Cryst.
+Growth Des. 24, 1626 (2024).
+
+Data availability statement
+
+[11]
+
+Data that support the findings of this study are
+available from the corresponding author upon
+reasonable request.
+
+I. Paradisanos et al., Controlling Interlayer
+Excitons in MoS2 Layers Grown by Chemical
+Vapor Deposition, Nat. Commun. 11, 2391 (2020).
+
+[12]
+
+P. Rivera et al., Observation of Long-Lived
+Interlayer Excitons in Monolayer MoSe2–WSe2
+Heterostructures, Nat. Commun. 6, 6242 (2015).
+
+References
+
+[13]
+
+A. Ciarrocchi, D. Unuchek, A. Avsar, K. Watanabe,
+T. Taniguchi, and A. Kis, Polarization Switching
+and Electrical Control of Interlayer Excitons in
+Two-Dimensional
+van
+Der
+Waals
+Heterostructures, Nat. Photonics 13, 131 (2019).
+
+[14]
+
+Q. Gao, Z. Zhang, X. Xu, J. Song, X. Li, and Y.
+Wu, Scalable High Performance Radio Frequency
+Electronics Based on Large Domain Bilayer MoS2,
+Nat. Commun. 9, 4778 (2018).
+
+[15]
+
+G. Arutchelvan et al., Impact of Device Scaling on
+the Electrical Properties of MoS2 Field-Effect
+Transistors, Sci. Rep. 11, 6610 (2021).
+
+[16]
+
+M. Fang, F. Wang, Y. Han, Y. Feng, T. Ren, Y. Li,
+D. Tang, Z. Song, and K. Zhang, Controlled
+Growth of Bilayer-MoS 2 Films and MoS 2 -Based
+Field-Effect Transistor (FET) Performance
+
+Continuous bilayer MoS2 films can be grown on
+SiO2/Si by chemical vapour deposition technique. It
+has been found that the flow pattern of the precursor
+over the substrate can be engineered to obtain large
+area (mm2) covered strictly bilayer films without any
+plasma treatment of the substrate prior to the growth.
+HRTEM study on these films’ revels the existence of
+both twisted and untwisted islands in the film. Back
+gated FET devices fabricated on these bilayer films
+shows excellent device characteristics.
+Acknowledgement
+The author acknowledges the financial support from
+the Science and Engineering Research Board (SERB),
+under the grant number CRG/2022/001852,
+Government of India. The authors are also thankful to
+Industrial Research and consultancy Centre (IRCC),
+Sophisticated Analytical Instrument Facility (SAIF),
+and the Centre for Excellence in Nanoelectronics
+(CEN), IIT Bombay for providing certain
+characterization facilities. We also thank to Prof.
+Gopal K. Pradhan, KIIT deemed to be university,
+Bhubaneswar for providing the low-frequency Raman
+measurement facility.
+Conflict of interest
+The author declares no conflict of interest
+
+[1]
+
+A. T. Hanbicki, M. Currie, G. Kioseoglou, A. L.
+Friedman, and B. T. Jonker, Measurement of High
+Exciton Binding Energy in the Monolayer
+Transition-Metal Dichalcogenides WS2 and WSe2,
+Solid State Commun. 203, 16 (2015).
+
+[2]
+
+K. F. Mak, K. He, C. Lee, G. H. Lee, J. Hone, T. F.
+Heinz, and J. Shan, Tightly Bound Trions in
+Monolayer MoS2, Nat. Mater. 12, 207 (2013).
+
+[3]
+
+J. Jadczak, J. Debus, J. Olejnik, C.-H. Ho, K.
+Watanabe, T. Taniguchi, and L. Bryja, Biexciton
+and
+Singlet
+Trion
+Upconvert
+Exciton
+Photoluminescence in a MoSe 2 Monolayer
+Supported by Acoustic and Optical K-Valley
+Phonons, J. Phys. Chem. Lett. 14, 8702 (2023).
+
+Optimization, Adv. Electron. Mater. 4, 1700524
+(2018).
+[17]
+
+[18]
+
+F. Zhang, C. Li, Z. Li, L. Dong, and J. Zhao, Recent
+Progress in Three-Terminal Artificial Synapses
+Based on 2D Materials: From Mechanisms to
+Applications, Microsystems Nanoeng. 9, 16 (2023).
+M. C. Sahu, S. Sahoo, S. K. Mallik, A. K. Jena, and
+S. Sahoo, Multifunctional 2D MoS 2
+Optoelectronic Artificial Synapse with Integrated
+Arithmetic and Reconfigurable Logic Operations
+for
+In‐Memory
+Neuromorphic
+Computing
+Applications, Adv. Mater. Technol. 8, 1 (2023).
+
+[28]
+
+L. Liu et al., Uniform Nucleation and Epitaxy of
+Bilayer Molybdenum Disulfide on Sapphire, Nature
+605, 69 (2022).
+
+[29]
+
+K.-Y. Yang, H.-T. Nguyen, Y.-M. Tsao, S. B.
+Artemkina, V. E. Fedorov, C.-W. Huang, and H.-C.
+Wang, Large Area MoS2 Thin Film Growth by
+Direct Sulfurization, Sci. Rep. 13, 8378 (2023).
+
+[30]
+
+C. Chen, H. Qiao, Y. Xue, W. Yu, J. Song, Y. Lu,
+S. Li, and Q. Bao, Growth of Large-Area
+Atomically Thin MoS_2 Film via Ambient Pressure
+Chemical Vapor Deposition, Photonics Res. 3, 110
+(2015).
+
+[19]
+
+M. M. Islam, M. S. Rahman, H. Heldmyer, S. S.
+Han, Y. Jung, and T. Roy, Bio-Inspired “SelfDenoising” Capability of 2D Materials
+Incorporated Optoelectronic Synaptic Array, Npj
+2D Mater. Appl. 8, 21 (2024).
+
+[31]
+
+X. Zhang, H. Nan, S. Xiao, X. Wan, X. Gu, A. Du,
+Z. Ni, and K. Ostrikov, Transition Metal
+Dichalcogenides Bilayer Single Crystals by
+Reverse-Flow Chemical Vapor Epitaxy, Nat.
+Commun. 10, 598 (2019).
+
+[20]
+
+S. Ma et al., An Artificial Neural Network Chip
+Based on Two-Dimensional Semiconductor, Sci.
+Bull. 67, 270 (2022).
+
+[32]
+
+[21]
+
+M. Olenchuk, G. Dovbeshko, A. Bodnaruk, G.
+Monastyrskyi, and V. Bykov, Magnetic Properties
+of MoS 2 and WS 2 Powders, in 2022 IEEE 41st
+International Conference on Electronics and
+Nanotechnology (ELNANO) (IEEE, 2022), pp. 91–
+94.
+
+T. Xu, Y. Pei, Y. Liu, D. Wu, Z. Shi, J. Xu, Y. Tian,
+and X. Li, High-Response NO2 Resistive Gas
+Sensor Based on Bilayer MoS2 Grown by a New
+Two-Step Chemical Vapor Deposition Method, J.
+Alloys Compd. 725, 253 (2017).
+
+[33]
+
+S. J. Park and S. Lee, As Featured In :, (2015).
+
+[34]
+
+Q. Wu, C. Wang, Q. Xu, X. Zhang, Z. Cai, L. Lin,
+X. Gu, K. Ken, H. Nan, and S. Xiao, CentimeterLevel MoS 2 Films with Controllable Number of
+Layers by Face-to-Face Chemical Vapor
+Deposition Strategy, Vacuum 216, 112489 (2023).
+
+[35]
+
+M. A. Gokul, V. Narayanan, and A. Rahman,
+Modulating Flow near Substrate Surface to Grow
+Clean and Large-Area Monolayer MoS 2,
+Nanotechnology 31, 415706 (2020).
+
+[36]
+
+M. R and G. Raina, Hydrothermally Synthesized
+2H-MoS 2 under Optimized Conditions – A
+Structure and Morphology Analysis, Phys. Scr. 97,
+125808 (2022).
+
+P. Chakrabarti, F. Mujeeb, and S. Dhar,
+Enhancement of Valley Polarization in CVD
+Grown Monolayer MoS2 Films, Appl. Phys. Lett.
+121, (2022).
+
+[37]
+
+D. Zhou, H. Shu, C. Hu, L. Jiang, P. Liang, and X.
+Chen, Unveiling the Growth Mechanism of MoS 2
+with Chemical Vapor Deposition: From TwoDimensional Planar Nucleation to Self-Seeding
+Nucleation, Cryst. Growth Des. 18, 1012 (2018).
+
+R. T. Sam, T. Umakoshi, and P. Verma, Probing
+Stacking Configurations in a Few Layered MoS2 by
+Low Frequency Raman Spectroscopy, Sci. Rep. 10,
+21227 (2020).
+
+[38]
+
+P. K. Mohapatra, S. Deb, B. P. Singh, P. Vasa, and
+S. Dhar, Strictly Monolayer Large Continuous
+MoS2 Films on Diverse Substrates and Their
+Luminescence Properties, Appl. Phys. Lett. 108,
+042101 (2016).
+
+K. H. Shin, M.-K. Seo, S. Pak, A.-R. Jang, and J. I.
+Sohn, Observation of Strong Interlayer Couplings
+in WS2/MoS2 Heterostructures via Low-Frequency
+Raman Spectroscopy, Nanomaterials 12, 1393
+(2022).
+
+[39]
+
+J. G. Kim, W. S. Yun, S. Jo, J. Lee, and C.-H. Cho,
+Effect of Interlayer Interactions on Exciton
+Luminescence in Atomic-Layered MoS2 Crystals,
+Sci. Rep. 6, 29813 (2016).
+
+[40]
+
+Y. Wu, J. Wang, Y. Li, J. Zhou, B. Y. Wang, A.
+Yang, L.-W. Wang, H. Y. Hwang, and Y. Cui,
+Observation of an Intermediate State during
+
+[22]
+
+L. Hu, X. Shan, Y. Wu, J. Zhao, and X. Lu, Laser
+Thinning and Patterning of MoS2 with Layer-byLayer Precision, Sci. Rep. 7, 15538 (2017).
+
+[23]
+
+D. Sahoo, B. Kumar, J. Sinha, S. Ghosh, S. S. Roy,
+and B. Kaviraj, Cost Effective Liquid Phase
+Exfoliation
+of
+MoS2
+Nanosheets
+and
+Photocatalytic Activity for Wastewater Treatment
+Enforced by Visible Light, Sci. Rep. 10, 10759
+(2020).
+
+[24]
+
+[25]
+
+[26]
+
+[27]
+
+S. Deb, P. Chakrabarti, P. K. Mohapatra, B. K.
+Barick, and S. Dhar, Tailoring of Defect
+Luminescence in CVD Grown Monolayer MoS2
+Film, Appl. Surf. Sci. 445, 542 (2018).
+
+Lithium Intercalation of Twisted Bilayer MoS2,
+Nat. Commun. 13, 3008 (2022).
+[41]
+
+N. B. Shinde, B. D. Ryu, K. Meganathan, B.
+Francis, C.-H. Hong, S. Chandramohan, and S. K.
+Eswaran, Large-Scale Atomically Thin Monolayer
+2H-MoS 2 Field-Effect Transistors, ACS Appl.
+Nano Mater. 3, 7371 (2020).
+
+[42]
+
+S. Y. Kim, S. Park, and W. Choi, Enhanced Carrier
+Mobility of Multilayer MoS2 Thin-Film Transistors
+by Al2O3 Encapsulation, Appl. Phys. Lett. 109, 3
+(2016).
+
+[43]
+
+X. Li, X. Xiong, T. Li, S. Li, Z. Zhang, and Y. Wu,
+Effect of Dielectric Interface on the Performance of
+MoS 2 Transistors, ACS Appl. Mater. Interfaces 9,
+44602 (2017).
+
+[44]
+
+V. T. Nguyen, V. C. Nguyen, V. H. Tran, and J.-Y.
+Park, Growth of Bilayer MoS2 Flakes by Reverse
+Flow Chemical Vapor Deposition, Mater. Lett. 346,
+134553 (2023).
+
+[45]
+
+A. Di Bartolomeo et al., Asymmetric Schottky
+Contacts in Bilayer MoS 2 Field Effect Transistors,
+Adv. Funct. Mater. 28, 1 (2018).
+
+[46]
+
+A. Zobel, A. Boson, P. M. Wilson, D. S. Muratov,
+D. V. Kuznetsov, and A. Sinitskii, Chemical
+Vapour Deposition and Characterization of
+Uniform Bilayer and Trilayer MoS 2 Crystals, J.
+Mater. Chem. C 4, 11081 (2016).
+
+[47]
+
+X. Wang, H. Feng, Y. Wu, and L. Jiao, Controlled
+Synthesis of Highly Crystalline MoS 2 Flakes by
+Chemical Vapor Deposition, J. Am. Chem. Soc.
+135, 5304 (2013).
+
+Supplementary information (S.I)
+Controlled Growth of large area bilayer MoS2 films on SiO2 substrates by
+chemical vapour deposition technique
+Umakanta Patra, Faiha Mujeeb, Abhiram K, Jai Israni, Subhabrata Dhar*
+Department of physics, Indian institute of technology, Bombay, Mumbai, India, 400076.
+
+S.1. Morphology of the grown layer as a function of the separation
+height of the roof piece
+
+=3 mm
+= 275 m
+
+(a)
+
+(b)
+
+SiO2
+
+between the two supporting pieces and the
+
+=5 mm
+= 275 m
+2L-MoS2
+
+2L-MoS2
+
+Ar
+Flow SiO2/Si
+
+SiO2
+
+300 m
+
+300 m
+
+Boat
+
+(c)
+
+=7 mm
+=275 m
+
+(d)
+
+=5 mm
+= 550 m
+2L-MoS2
+
+SiO2
+
+SiO2
+
+2L-MoS2
+300 m
+
+SiO2
+
+300 m
+
+FIG. S1. Optical images of the samples grown with different values of (separation between the two-supporting pieces) and
+(height of the roof piece). Strictly 2L MoS2 film covering a large area can only be grown for = 5 mm and = 275 𝜇m.
+
+S.2. Effect of O2-Plasma treatment on the growth of 2L-MoS2
+
+(a)
+
+(b)
+SiO2
+
+1L-MoS2
+2L-MoS2
+
+SiO2
+
+300 m
+(c)
+
+10 sec
+
+60 sec
+
+(d)
+
+50 m
+
+180 sec
+
+1L-MoS2
+
+3002m
+1L-MoS
+
+SiO2
+200 m
+
+SiO2
+
+300 m
+
+FIG. S2. Showing the optical images of MoS2 layers grown on SiO2 substrate (a) without O2-plasma treatment and after treating
+the substrate with O2-plasma for (b) 10 sec, (c) 60 sec and (d) 180 sec. Irrespective of the time of the plasma treatment, the
+grown layers are found to be 1L- MoS2. While bilayer MoS2 can be grown on untreated SiO2 substrates. It is evident from the
+figure that the monolayer coverage improves with the increase of the plasma exposure time.
+
+

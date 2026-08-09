@@ -1,0 +1,680 @@
+High harmonic spectroscopy reveals anisotropy  
+of the Mott to Charge-Density-Wave phase transition in TiSe2 
+
+Igor Tyulnev1, Lin Zhang1, Lenard Vamos1, Julita Poborska1, Utso Bhattacharya2, 
+Ravindra W. Chhajlany5, Tobias Grass3,4, Samuel Mañas-Valero6, Eugenio Coronado6, 
+Maciej Lewenstein1,3, Jens Biegert1,7* 
+
+1ICFO - Institut de Ciencies Fotoniques, The Barcelona Institute of Science and Technology, 
+Castelldefels (Barcelona), Spain 
+2Institute for Theoretical Physics, ETH Zurich, Zurich, Switzerland 
+3DIPC - Donostia International Physics Center, Paseo Manuel de Lardizábal 4, San Sebastián, Spain 
+4Ikerbasque - Basque Foundation for Science, Maria Diaz de Haro 3, Bilbao, Spain 
+5ISQI - Institute of Spintronics and Quantum Information, Faculty of Physics and Astronomy, Adam 
+Mickiewicz University, Poznań, Poland 
+6Instituto de Ciencia Molecular (ICMol), Universitat de València, Paterna, Spain 
+7ICREA, Pg. Lluís Companys 23, Barcelona, Spain 
+*Corresponding author : jens.biegert@icfo.eu 
+
+This work explores the use of polarization-resolved high harmonic generation (HHG) spectroscopy to 
+investigate the quantum phases and transitions in the correlated charge density wave (CDW) phase 
+of  TiSe₂.  Unlike  previous  studies  focusing  on  crystallographic  changes,  the  research  examines  the 
+reordering that occurs within the CDW phase as the material is cooled from room temperature to 14 
+K.  By  linking  ultrafast  field-driven  dynamics  to  the  material's  potential  landscape,  the  study 
+demonstrates how HHG is sensitive to quantum phase transitions. The findings reveal an anisotropic 
+component  below  the  CDW  transition  temperature,  providing  new  insights  into  the  nature  of  this 
+phase. The investigation highlights the interplay between linear and nonlinear optical responses and 
+their  departure  from  simple  perturbative  dynamics,  offering  a  fresh  perspective  on  correlated 
+quantum phases in condensed matter systems. 
+
+Introduction 
+
+Highly correlated quantum phases arise from many-body interactions between charge carriers and 
+the lattice, allowing quantum phenomena to appear at macroscopic scales1. In systems like 1T-TiSe₂, 
+these interactions facilitate the formation of bosonic quasiparticles via phonon mediation, much like 
+Cooper  pair  formation  in  superconductivity2,3.  A  related  phase,  the  charge  density  wave  (CDW)4,5, 
+follows similar principles, where the lattice vector Q connects high-symmetry points in the Brillouin 
+zone, enabling exciton formation and a 2 x 2 x 2 commensurate periodic lattice distortion below ~200 
+K6–10.  Recent  studies11–13  provide  evidence  for  exciton  condensation14–16  in  TiSe₂  when  the  exciton 
+binding energy exceeds the bandgap, pointing to a novel phase of matter. Moreover, the material 
+exhibits  superconductivity  upon  Copper  intercalation17  or  applied  pressure18,  making  it  central  to 
+exploring  high-temperature  condensates.  Anomalies  such  as  chiral  CDW  stabilization19,20, 
+anisotropy21,  and  strong  CDW  responses6  add  to  the  ongoing  debate  over  the  CDW  mechanism—
+whether driven by electron-phonon interactions9,22–24 or excitonic effects11,25,26. In this context, both 
+electron-phonon (Jahn-Teller) and excitonic mechanisms have been proposed, and each aligns with 
+experimental  observations.  Using  high-harmonic  generation  spectroscopy,  we  investigate  this 
+prototypical  phase  transition  from  a  new  perspective,  as  it  probes  changes  in  correlations  and 
+symmetries27. 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Discussion 
+
+High Harmonic Spectroscopy  
+
+At  the  core  of  high  harmonic  generation  (HHG)  in  solids28–30  lies  the  precise  response  to  charge 
+currents through polarization and by crystal orientation. Analogous to the three-step model in gaseous 
+HHG, charge carriers in solids are excited by strong optical fields, predominantly at band minima, and 
+subsequently accelerated. The trajectories of these carriers, governed by field polarization and atomic 
+potentials,  allow  recombination  not  only  at  the  origin  but  at  other  lattice  sites,  enabling  HHG 
+spectroscopy to directly resolve crystallographic details31,32. The harmonic response, linked to optical 
+properties and the complex dielectric function, is approximated through the Drude-Lorentz oscillator 
+model, where resonances arise from interband transitions and their electron-hole populations. 
+Using the ponderomotive scaling for HHG cut-off energy, higher harmonics are driven at moderate 
+intensities  to  preserve  the  correlated  phase.  To  achieve  this,  we  employ  a  mid-infrared  optical 
+parametric chirp pulse amplification (OPCPA) system33,34, providing a stable optical field centered at 
+3.2 µm. This driving field impinges onto the sample in reflection geometry at a 45° incidence, and the 
+reflected signal is spectrally analyzed. Harmonics are driven up to the 7th order with peak intensities 
+reaching 40 GW/cm², while the linear response is captured through reflectivity measurements. 
+
+Figure 1. (a) and (b) Reduced and normal band structure of 1T-TiSe₂. The lattice vector Q, connecting the Γ 
+and M points halfway across the Brillouin zone, leads to band back-folding and renormalization below Tc. 
+The shifting of valence band v1 and conduction band c3 with temperature results in an IR transition of up 
+to  0.4  eV  in  the  CDW  phase.  Excited  electron-hole  pairs  are  driven  by  our  mid-IR  field,  generating 
+harmonics. (c) Optical conductivity calculated from a Drude-Lorentz fit to the measurements in Ref. 36. As 
+temperature  decreases,  a  resonance  emerges  below  Tc,  corresponding  to  the  v1  to  c3  transition.  (d) 
+Reflectivity of the fundamental laser frequency (0.39 eV) with a BCS fit and reflectivity values from Ref. 36. 
+
+Reflectivity  data  exhibits  a  phase-dependent  response,  remaining  constant  above  the  transition 
+temperature (Tc) and deviating from linear scaling below Tc, resembling the mean-field form of the 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Δ!  ∝
+
+order  parameter.  A  Bardeen-Cooper-Schrieffer-type  fit35  of  the  form  of  the  form 
+  tanh! (Α*Τ"
+
+Τ, − 1/ + Δ#,  accurately  captures  this  behavior  (a  =  0.82),  yielding  a  transition 
+temperature  of  Tc  =  205.0  ±  5.5  K,  consistent  with  literature6,7.  The  resemblance  to  the  CDW  gap 
+scaling becomes clear when examining the changes in optical properties near the photon energy of 
+our fundamental field. As shown in Fig. 1c, the reflectivity is entirely governed by the temperature-
+dependent variations in optical conductivity or the dielectric function. In photoemission experiments, 
+the CDW gap is indirectly inferred from shifts in the valence band (v1) relative to the static "spectator" 
+conduction bands (c1 and c2), which emerge during back folding below Tc; see Fig. 1a and b. This region 
+is significantly affected by changes in the chemical potential and contributes to the low-frequency 
+response,  including  the  appearance  of  a  plasma  edge  and  phonon  peaks;  shown  in  Fig.  1c.  Direct 
+observation of the CDW gap between v1 and c3 is rare36,37, as the empty c3 band is often difficult to 
+detect,  though  it  offers  a  clear  excitonic  response.  Probed  at  our  fundamental  frequency,  this  gap 
+drives  the  emerging  single-particle  transition  shown  in  Fig.  1c,  measured  optically  through  a 
+Lorentzian resonance, with the band shift reaching up to 0.4 eV. The increased optical conductivity 
+and reflectivity of TiSe₂, therefore, directly probe the band renormalization and CDW gap, as seen in 
+Fig. 1d, showing up to a 22% rise in reflectivity at the lowest measured temperature of 14 K. 
+
+Beyond the single-particle response, we explore the harmonic yields as a function of temperature. 
+Figure 2 reveals stark differences in the behavior of various harmonic orders, particularly when the 
+driving  field  polarization  aligns  with  the  Γ-K  direction.  Approximating  the  response  with  the 
+perturbative model for harmonic generation38, changes in harmonic yield should directly reflect the 
+temperature-dependent variations in nonlinear susceptibilities for each order. Since the dynamic laser 
+parameters  remain  constant,  the  nonlinear  susceptibility  can  be  expressed  as  a  product  of  linear 
+susceptibilities at harmonic frequencies and the fundamental susceptibility raised to the respective 
+power 𝜒(%)  ∝  𝜒(')(𝑎 ⋅ 𝑤')7𝜒(')(𝑤')8
+
+.   
+
+%
+
+Figure 2. Measured harmonic intensity for the 3rd, 5th, and 7th orders as a function of temperature. The 
+scans  were  conducted  with  the  driving  field  polarization  along  the  Γ-K  direction,  with  square  markers 
+indicating additional measurements along the Γ-M direction, both plotted on a log-log scale. Shaded peaks 
+
+ 
+ 
+ 
+ 
+ 
+represent the optical conductivity calculated from the mean-field model at the harmonic frequencies: H3 
+(yellow), H5 (green), and H7 (blue). Solid lines denote the corresponding power-law scaling. 
+
+Power  law  fits  were  applied  to  each  harmonic’s  temperature  dependence.  For  H3,  a  fit  of  the 
+form [∝  (Τ" − Τ)(] yielded α  =  1.37  ±  0.23  for  T<Tc  consistent  with  the  square-root  scaling  of  the 
+order parameter25 raised to the third power. This scaling matches the perturbative description of the 
+nonlinear  susceptibility.  For  temperatures  above  Tc,  deviations  are  attributed  to  the  decreasing 
+chemical  potential,  reflecting  changes  in  electron-hole  populations.  The  same  fit  for  H7  reveals  a 
+square-root  scaling  to  the  seventh  power  with  the  temperature  fit  revealing  α  =  3.52  ±  0.96.  In 
+contrast, H5 exhibits unique sensitivity to the phase transition, with its yield decreasing below Tc and 
+reaching a minimum near 86 K. Comparing these findings with optical conductivity from our mean-
+field model (Fig. 2 shaded lines) at corresponding harmonic frequencies, we observe that significant 
+changes in scaling for H5 occur near maxima in its optical properties. Further measurements, where 
+HHG  is  driven  along  the  Γ-M  direction,  reveal  that  the  perturbative  mechanism  for  H5  is  restored, 
+while other harmonics remain largely indifferent to the choice between Γ-M and Γ-K directions.  
+
+High Harmonic Tomography of the CDW 
+
+To further investigate the stark differences between harmonic orders and to understand the specific 
+sensitivity  of  H5  to  the  CDW  phase-transition,  we  conducted  polarization  scans  across  varying 
+temperature regimes, controlling the input polarization with a half-wave plate. Figure 3 displays the 
+behavior of H3, H5, and H7 as functions of the fundamental polarization angle. An angle of 90 degrees 
+corresponds to the Γ-K direction, while 60 and 120 degrees align with the Γ-M1 and Γ-M2 directions, 
+respectively. Near room temperature and above Tc, both H3 and H7 exhibit a peak for p-polarized 
+input, while H5 splits into two symmetric peaks at 60-degree intervals, thus registering the hexagonal 
+crystal symmetry. 
+
+Figure 3. Harmonic yields for H3 (a), H5 (b), and H7 (c) as a function of the driving field polarization at 283 
+K  and  14  K.  The  sketch  illustrates  the  corresponding  Brillouin  zone  orientation,  with  90°  indicating  p-
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+polarization of the driving field along Γ-K. Black lines represent the simulated angular dependence of the 
+harmonics based on the mean-field model, while dashed lines show the simulation adjusted for the angle 
+offset  relative  to  the  experiment.  (d)  The  relative  ratio  of  H5  peaks  at  60°  and  120°  as  a  function  of 
+temperature, with insets displaying the angular distribution. 
+
+As the sample is cooled below the phase transition, all harmonic peaks increase in intensity, with the 
+contrast between H5's double peaks also becoming more pronounced, as seen in Fig. 3d, marked by 
+the diminishing minimum between them. Below 86 K, H5 develops an asymmetry, with the peak at 60 
+degrees rising sharply at lower temperatures. This asymmetry also emerges in H7, where the center 
+of mass shifts to the right, while H3 exhibits a slight but detectable rotation in the opposite direction. 
+Comparing H5's temperature scaling with Fig. 2 for high-symmetry directions, the response along Γ-
+M1 follows the mean-field behavior, but clear deviations occur along the Γ-K direction. Interestingly, 
+the Γ-M2 direction at 120 degrees, which should be symmetry-equivalent, remains nearly constant 
+throughout the entire temperature range. 
+
+Discussion 
+
+These,  at  first  glance  unexpected,  features  reveal  a  set  of  observables  that  reflect  the  underlying 
+microscopic changes that High Harmonic Spectroscopy sensitively reveals within the sample. 
+First,  the  overall  increase  in  harmonic  yield  at  lower  temperatures  highlights  the  phase  transition, 
+even within the nonlinear regime, demonstrating the coexistence of strong-field driving and the CDW 
+phase.  This  points  to  the  robustness  of  the  CDW  phase  against  moderate  perturbations.  Care  was 
+taken to limit the peak intensity and exposure to the sample, ensuring the experiment remained in 
+the perturbative regime. 
+Notably, H5 exhibits a unique sensitivity to the crystal symmetry, differentiating between the zigzag 
+(Γ-K)  and  armchair  (Γ-M)  directions.  This  can  be  attributed  to  the  bandgap  at  the  M  point,  which 
+reaches up to 1.95 eV (Fig. 1a), aligning closely with the H5 energy of 1.96 eV, creating a near-resonant 
+transition. In contrast, the K point's bandgap is slightly lower at 1.83 eV, favoring alignment along the 
+Γ-M direction for H5. The increasing contrast below Tc, as shown in Fig. 3d, with the deepening Γ-K 
+minimum and the enhanced Γ-M maximum, follows the renormalization of bands away from the Γ 
+point. 
+Furthermore, the asymmetry between the theoretically equivalent Γ-M1 and Γ-M2 directions suggests 
+an inequivalence between the lattice vectors Q1, Q2, and possibly Q3, which drive the CDW formation. 
+A closer look at Fig. 3d reveals two distinct asymmetry features in the H5 double peak. The first, a 
+subtle  negative  asymmetry  (where  M2  exceeds  M1),  is  already  present  at  room  temperature  and 
+becomes  more  pronounced  around  150  K.  Below  100  K,  a  strong  positive  asymmetry  (M1  >  M2) 
+dominates, even influencing the Γ-K direction. 
+Turning to our mean-field model, which calculates the harmonic response for different polarization 
+angles  (see  Methods),  we  observe  excellent  agreement  in  the  high-temperature  phase  for  all 
+harmonics. The notable splitting of H5 along the crystal axes is accurately reproduced. To explore the 
+origins of the asymmetry, we considered potential causes such as a slight rotational misalignment of 
+the crystal during mounting. XRD analysis confirmed a 7° ± 2° offset between the crystal axis and the 
+p-polarization of the laser, which could indeed account for the negative asymmetry observed at 283 
+K, as simulated for a 5° offset. 
+At high temperatures, this High Harmonic Spectroscopy study can determine crystal orientation and 
+also identify the rotation direction. However, the pronounced low-temperature asymmetry prompted 
+further  investigation.  While  studies  have  proposed  the  chiral  nature  of  the  TiSe2  CDW19,39  and 
+gyrotropic response20, simulations introducing slight ellipticity in the driving field showed negligible 
+differences, ruling out chirality of the field as a primary cause. 
+
+ 
+ 
+ 
+ 
+ 
+Ultimately, only an asymmetry between the translation vectors Q could produce such a pronounced 
+effect. When the simulation assumed ∆Q1 ≠ ∆Q2 ≠ ∆Q3, a stronger asymmetry emerged, consistent 
+with the experimental observation of H5 at 14 K. This anisotropic CDW dominates over the small offset 
+effect seen at higher temperatures. Notably, the center of mass shifts of H5 and H7 to the right and 
+H3  to  the  left  are  also  reproduced,  though  slightly  overestimated,  supporting  the  idea  of  an 
+inequivalence between the lattice vectors in the TiSe2 CDW phase below 80-100 K. 
+A possible onset of strain at these temperatures could distort the CDW phase, potentially explaining 
+our findings. While this is largely a lattice effect, it is worth noting that the Γ-K direction, which shows 
+a significant signal increase at 14 K, aligns with the atomic displacement direction and the relevant 
+phonon modes. Another explanation may lie in the backfolding of bands and their orbital character40. 
+While Fig. 1a illustrates the three conduction bands c1, c2, and c3 along the Γ-M path, they split along 
+the M directions, and only Γ-M3 has a band nearly resonant with H5. This strongly suggests that our 
+experiments sensitively detects the concomitant hybridization between Se p-orbitals and Ti dxy, dyz, or 
+dzx orbitals. 
+
+Conclusion 
+
+This work advances our insight into the quantum phases and transitions within the correlated charge 
+density  wave  (CDW)  phase  of  TiSe₂  by  leveraging  polarization-resolved  high  harmonic  generation 
+(HHG)  spectroscopy.  Distinct  from  prior  research,  which  primarily  focused  on  crystallographic 
+changes,  this  study  delves  into  the  reordering  occurring  within  the  CDW  phase  as  the  material  is 
+cooled  from  room  temperature  to  14  K.  By  correlating  ultrafast  field-driven  dynamics  with  the 
+material's potential landscape, we demonstrate that HHG is exceptionally sensitive to quantum phase 
+transitions  and  lattice  dynamics.  Our  findings  unveil  an  anisotropic  component  below  the  CDW 
+transition temperature and reveal backfolding of the bands, shedding new light on the nature of this 
+phase.  This  investigation  underscores  the  complex  interplay  between  linear  and  nonlinear  optical 
+responses and their deviation from simple perturbative dynamics, providing a novel perspective on 
+the behavior of correlated quantum phases in condensed matter systems. 
+
+References 
+
+1. 
+2. 
+
+3. 
+
+4. 
+5. 
+6. 
+
+7. 
+
+8. 
+
+9. 
+
+10. 
+
+Leggett, A. J. Quantum Liquids. Science (1979) 319, 1203–1205 (2008). 
+Herbert Fröhlich. On the theory of superconductivity: the one-dimensional case. Proc R Soc 
+Lond A Math Phys Sci 223, 296–305 (1954). 
+Bardeen, J., Cooper, L. N. & Schrieffer, J. R. Theory of Superconductivity. Physical Review 108, 
+1175–1204 (1957). 
+R. E. Peierls. Quantum Theory of Solids R. E. Peierls. (Oxford University, New York, 1955). 
+Grüner, G. Density Waves in Solids. vol. 89 (Addison-Wesley Publishing Company, 1994). 
+Di Salvo, F. J., Moncton, D. E. & Waszczak, J. V. Electronic properties and superlattice 
+formation in the semimetal TiSe2. Phys Rev B 14, 4321–4328 (1976). 
+Craven, R. A., Di Salvo, F. J. & Hsu, F. S. L. Mechanisms for the 200 K transition in TiSe2: A 
+measurement of the specific heat. Solid State Commun 25, 39–42 (1978). 
+Zunger, A. & Freeman, A. J. Band structure and lattice instability of TiSe2. Phys Rev B 17, 
+1839–1842 (1978). 
+Liang, W. Y., Lucovsky, G., Mikkelsen, J. C. & Friend, R. H. Infra-red studies of TiSe2: IR 
+phonons and free carriers. Philosophical Magazine B: Physics of Condensed Matter; Statistical 
+Mechanics, Electronic, Optical and Magnetic Properties 39, 133–146 (1979). 
+Drube, W., Schäfer, I., Karschnick, G. & Skibowski, M. Inverse photoemission study of the 
+conduction bands in TiSe2. Phys Rev B 30, 6248–6250 (1984). 
+
+ 
+ 
+ 
+ 
+ 
+11. 
+
+Cercellier, H. et al. Evidence for an excitonic insulator phase in 1T-TiSe2. Phys Rev Lett 99, 1–4 
+(2007). 
+
+12.  Monney, C. et al. Spontaneous exciton condensation in 1T-TiSe2: BCS-like approach. Phys Rev 
+
+13. 
+
+B 79, 045116 (2009). 
+Kogar, A. et al. Signatures of exciton condensation in a transition metal dichalcogenide. 
+Science (1979) 358, 1314–1317 (2017). 
+
+14.  Mott, N. F. The transition to the metallic state. Philosophical Magazine 6, 287–309 (1961). 
+15. 
+
+Keldysh, L. V. & Kopaev, A. N. Possible Instability of the Semimetallic State toward Coulomb 
+Interaction. Sov. Phys. Solid State 6, 2219–2224 (1965). 
+Jérome, D., Rice, T. M. & Kohn, W. Excitonic Insulator. Physical Review 158, 462–475 (1967). 
+
+16. 
+17.  Morosan, E. et al. Superconductivity in Cu x TiSe 2. Nat Phys 2, 544–550 (2006). 
+18. 
+
+Kusmartseva, A. F., Sipos, B., Berger, H., Forró, L. & Tutiš, E. Pressure Induced 
+Superconductivity in Pristine 1T-TiSe2. Phys Rev Lett 103, 2–5 (2009). 
+Ishioka, J. et al. Chiral Charge-Density Waves. Phys Rev Lett 105, 176401 (2010). 
+Xu, S.-Y. et al. Spontaneous gyrotropic electronic order in a transition-metal dichalcogenide. 
+Nature 578, 545–549 (2020). 
+Qiao, Q. et al. Anisotropic charge density wave in layered 1T-TiS e2. Phys Rev Mater 1, 1–8 
+(2017). 
+Yoshida, Y. & Motizuki, K. Electron Lattice Interaction and Lattice Instability of 1 T -TiSe 2. J 
+Physical Soc Japan 49, 898–905 (1980). 
+Suzuki, N., Yamamoto, A. & Motizuki, K. Microscopic Theory of the CDW State of 1 T -TiSe 2. J 
+Physical Soc Japan 54, 4668–4679 (1985). 
+Rossnagel, K., Kipp, L. & Skibowski, M. Charge-density-wave phase transition in (formula 
+presented): Excitonic insulator versus band-type Jahn-Teller mechanism. Phys Rev B Condens 
+Matter Mater Phys 65, 1–7 (2002). 
+
+19. 
+20. 
+
+21. 
+
+22. 
+
+23. 
+
+24. 
+
+25.  Monney, C., Battaglia, C., Cercellier, H., Aebi, P. & Beck, H. Exciton Condensation Driving the 
+
+26. 
+
+27. 
+
+28. 
+
+29. 
+
+30. 
+
+31. 
+
+32. 
+
+33. 
+
+34. 
+
+35. 
+
+36. 
+
+Periodic Lattice Distortion of 1T−TiSe2. Phys Rev Lett 106, 106404 (2011). 
+Cazzaniga, M. et al. Ab initio many-body effects in TiSe 2 : A possible excitonic insulator 
+scenario from GW band-shape renormalization. Phys Rev B 85, 195111 (2012). 
+Alcalà, J. et al. High-harmonic spectroscopy of quantum phase transitions in a high-Tc 
+superconductor. Proceedings of the National Academy of Sciences 119, 1–6 (2022). 
+Ghimire, S. et al. Observation of high-order harmonic generation in a bulk crystal. Nat Phys 7, 
+138–141 (2011). 
+Liu, H. et al. High-harmonic generation from an atomically thin semiconductor. Nat Phys 13, 
+262–265 (2017). 
+Luu, T. T. & Wörner, H. J. Measurement of the Berry curvature of solids using high-harmonic 
+spectroscopy. Nat Commun 9, 916 (2018). 
+Luu, T. T. & Wörner, H. J. High-order harmonic generation in solids: A unifying approach. Phys 
+Rev B 94, 115164 (2016). 
+Heinrich, T. et al. Chiral high-harmonic generation and spectroscopy on solid surfaces using 
+polarization-tailored strong fields. Nat Commun 12, 1–7 (2021). 
+Elu, U. et al. High average power and single-cycle pulses from a mid-IR optical parametric 
+chirped pulse amplifier. Optica 4, 1024 (2017). 
+Elu, U. et al. Seven-octave high-brightness and carrier-envelope-phase-stable light source. 
+Nat Photonics 15, 277–280 (2021). 
+Chen, P. et al. Charge density wave transition in single-layer titanium diselenide. Nat 
+Commun 6, 8943 (2015). 
+Li, G. et al. Semimetal-to-semimetal charge density wave Transition in 1T-TiSe2. Phys Rev Lett 
+99, 2–5 (2007). 
+
+37.  Monney, C. et al. Mapping of electron-hole excitations in the charge-density-wave system 1T-
+
+TiSe 2 using resonant inelastic x-ray scattering. Phys Rev Lett 109, (2012). 
+
+38. 
+39. 
+
+40. 
+
+Boyd, R. W. The nonlinear optical susceptibility - Chapter 1. Nonlinear Optics 1–67 (1961). 
+Castellan, J. P. et al. Chiral phase transition in charge ordered 1T-TiSe2. Phys Rev Lett 110, 1–6 
+(2013). 
+Kaneko, T., Ohta, Y. & Yunoki, S. Exciton-phonon cooperative mechanism of the triple-q 
+charge-density-wave and antiferroelectric electron polarization in TiSe2. Phys Rev B 97, 
+155131 (2018). 
+41.  Moos, D., Jürß, H. & Bauer, D. Intense-laser-driven electron dynamics and high-order 
+
+harmonic generation in solids including topological effects. Phys Rev A  (Coll Park) 102, 
+053112 (2020). 
+
+Methods 
+
+Experiment 
+The  experiment  was  conducted  using  a  home-built  mid-infrared  OPCPA  laser  system,  delivering 
+carrier-envelope phase (CEP) stable pulses of 100 fs duration at a repetition rate of 160 kHz and a 
+central wavelength of 3.2 µm. By focusing the beam with a 150 mm lens, we achieved peak intensities 
+of up to 40 GW/cm², allowing us to observe harmonic orders H3, H5, and H7 in a reflection geometry 
+with a 45-degree incidence angle. The TiSe₂ sample, exfoliated from a larger bulk material to ensure a 
+smooth surface, was placed in the vacuum chamber of a He cryostat. A UV-FS lens was used to image 
+the beam into a spectrometer (OceanOptics Maya). To enhance the dynamic range for higher-order 
+harmonics, a KG3 filter was employed to suppress the fundamental wavelength and attenuate H3. 
+Alternatively, the reflected fundamental was measured using a power meter (Thorlabs S401C). The 
+change of field amplitude when rotating the polarization was accounted for by the theory. 
+
+Mean-field theory 
+We  employ  a  minimal  phenomenological  mean-field  model  to  describe  the  charge  density  wave 
+(CDW) order in TiSe₂. The Hamiltonian is expressed as: 
++ 𝑑"*
+
++ 𝑑)* + [ε"(𝑘) − 𝜇]𝑑"*
+
+𝐻 = =[ε)(𝑘) − 𝜇]𝑑)*
+
+𝑑"* + Δ(/.)𝑑"*-.
+
++ = Δ(-.)𝑑)*/.
+
+𝑑)*.
+
++
+
++
+
+,
+
+.,*
+
+Here, 𝜀),"(𝑘) represent the valence and conduction band dispersions of TiSe₂, obtained from a tight-
+binding model40. The valence band, primarily composed of Se 4p orbitals, forms a hole pocket centered 
+at  the  Γ  point,  while  the  conduction  band,  dominated  by  Ti  3d  orbitals,  creates  three  symmetry-
+equivalent electron pockets at the M points. The interaction leads to a triplet-Q CDW order, which 
+couples  the  valence  band  hole  pocket  to  the  conduction  band  electron  pockets,  with  wave 
+vectors |𝑄'| = |𝑄!| = |𝑄1| = |ΓM|. 
+The CDW order parameter25 follows a mean-field temperature dependence, Δ(𝑇) = Δ#I1 − (𝑇/𝑇")!
+, where 𝑇"  = 200 K. As a result of the CDW order, the Brillouin zone folds. In the reduced Brillouin 
+zone (RBZ), the mean-field Hamiltonian can be recast as: 
+𝐻 = ∑
+
+ with Ψ* = O𝑑)*, 𝑑"*, 𝑑)*/.!, 𝑑)*/.!, 𝑑)*/.", 𝑑)*/.", 𝑑)*/.#, 𝑑)*/.#Q
+
++𝐻(𝑘)Ψ*
+
+*	∈	RBZ
+
+Ψ*
+
+5
+
+Optical Conductivity 
+The optical conductivity of the material is expressed as: 
+
+σ67(ω) =
+
+								−
+
+i𝑒!
+𝑉
+
+i𝑒!
+ω𝑉
+
+V =
+*,89
+
+[𝑓8(𝑘) − 𝑓9(𝑘)]𝐻6,89(𝑘)𝐻7,98(𝑘)
+i0/ + ε*8 − ε*9
+
++ =7𝑈+(𝑘) ∂6 ∂7𝐻(𝑘)𝑈(𝑘)8
+
+𝑓8(𝑘)
+
+Z	
+
+88
+
+*,8
+
+[𝑓8(𝑘) − 𝑓9(𝑘)]𝐻6,89(𝑘)𝐻7,98(𝑘)
+(i0/ + ε*8 − ε*9)(ω + i0/ + ε*8 − ε*9)
+
+=
+,,:;
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Where  𝐻6,89(𝑘) ≡ 7𝑈+(𝑘) ∂6𝐻(𝑘)𝑈(𝑘)8
+the  Fermi-Dirac 
+distribution  with  ε*8  being  the  eigenvalue  of  𝐻(𝑘).  We  note  that  the  conductivity  has  both  the 
+interband (𝑚 ≠ 𝑛) and intraband (𝑚 = 𝑛) contribution, and the diagonal part of [𝑓8(𝑘) − 𝑓9(𝑘)]/
+(ε*8 − ε*9) with 𝑚 = 𝑛 must be interpreted as ∂𝑓(ε*8)/ ∂ε*8. 
+
+.  𝑓8(𝑘) = 1/O1 + 𝑒<$%/*&5Q 
+
+is 
+
+89
+
+High Harmonic Generation 
+We now calculate the high harmonic spectra of TiSe2, which is a nonlinear optical process producing 
+higher-order  harmonics  of  the  incident  frequency  when  an  intense  laser  field  interacts  with  the 
+material. We note that the coupling of a material to the laser field in dipole approximation amounts 
+to  the  replacement  𝑘 → 𝑘(𝑡) = 𝑘 + 𝐴(𝑡)  in  the  Bloch  Hamiltonian  using  the  Peierls  substitution, 
+where   𝐴(𝑡) = c𝐴>(𝑡), 𝐴?(𝑡)d with  
+
+𝐴>(𝑡) = 𝐴(𝑡) sin θ sin(π/3 − α) +
+
+𝐴?(𝑡) = 𝐴(𝑡) sin θ cos(π/3 − α) −
+
+√2
+2
+√2
+2
+
+𝐴(𝑡) cos θ cos(π/3 − α) ,	
+
+𝐴(𝑡) cos θ sin(π/3 − α), 
+
+@A
+!9cyc
+
+and 𝐴(𝑡) = 𝐴# sin! n
+o sin(ω𝑡) is the vector potential of amplitude 𝐴#, center frequency ω, and 
+cycle number 𝑛cyc, projected onto the material plane (the laser field has an incident angle 45°). Here 
+θ is the polarization angle and α is the crystal axis offset. 
+Using  the  velocity  gauge  equation  of  motion  in  the  Bloch  basis41,  the  time-dependent  Schrödinger 
+equation can be written as 
+
+(𝑡)}Q, ρ(𝑘, 𝑡)8 
+
+ρ(𝑘, 𝑡) = −i7𝐻O𝑘 + 𝐴(𝑡); {Δ.'
+
+(𝑡) = (𝑈/𝑉) ∑ Tr7ρ(𝑘, 𝑡)𝑑)*/.'
+*
+
+d
+𝑑𝑡
+for the density matrix ρ(𝑘, 𝑡) at momentum 𝑘, where Δ.'
+ is the 
+time-evolved  CDW  order  parameter.  Phenomenologically,  we  can  choose  different  𝑈  at  different 
+temperatures to obtain suitable strength of initial CDW order parameters. Here the initial state for 
+each momentum is given by the Fermi-Dirac distribution, i.e., ρ(𝑘, 0) = 1/O𝑒BC(*) + 1Q. To include 
+the  phenomenological  dephasing  effect,  after  each  time  step  δ𝑡  of  the  evolution  governed  by  the 
+above equation, we transform the density matrix into an adiabatic basis obtained by diagonalizing the 
+(𝑡)}Q,  i.e.,  ρx(𝑘, 𝑡) = 𝑈+(𝑘, 𝑡)ρ(𝑘, 𝑡)𝑈(𝑘, 𝑡),  apply  the 
+instantaneous  Hamiltonian  𝐻O𝑘 + 𝐴(𝑡); {Δ.'
+dephasing  as  𝜌x89(𝑘, 𝑡) → 𝜌x89(𝑘, 𝑡)𝑒-DA/E  for  𝑚 ≠ 𝑛  with  τ  being  the  dephasing  rate,  and  then 
+transform back to the Bloch basis. 
+We calculate the expectation value of the velocity operator in direction 𝑗 
+
+𝑑"*8
+
++
+
+𝑣7(𝑘, 𝑡) = Tr }ρ(𝑘, 𝑡) ∂*(𝐻O𝑘 + 𝐴(𝑡); {Δ.'
+
+(𝑡)}Q~. 
+
+Denoting the polarization direction of the laser field as 𝑛F and 𝑣7(𝑡) = (1/𝑉) ∑ 𝑣7(𝑘, 𝑡)
+high harmonic spectrum is given by the Fourier transform of velocity 𝑃(ω) = ω!|FFT[𝑣 ⋅ 𝑛F]|!. 
+
+*
+
+, then the 
+
+Acknowledgements 
+
+J.B.  acknowledges  financial  support  from  the  European  Research  Council  for  ERC  Advanced  Grant 
+“TRANSFORMER”  (788218),  ERC  Proof  of  Concept  Grant  “miniX”  (840010),  FET-OPEN  “PETACom” 
+(829153), FET-OPEN “OPTOlogic” (899794), FET-OPEN “TwistedNano” (101046424), Laserlab-Europe 
+(871124), MINECO for Plan Nacional PID2020–112664 GB-I00; QU-ATTO, 101168628; AGAUR for 2017 
+SGR 1639, MINECO for “Severo Ochoa” (CEX2019-000910-S), Fundació Cellex Barcelona, the CERCA 
+Programme/Generalitat de Catalunya, and the Alexander von Humboldt Foundation for the Friedrich 
+Wilhelm Bessel Prize. I.T. and J.B. acknowledge support from Marie Skłodowska-Curie ITN “smart-X” 
+(860553).  ICFO-QOT  group  acknowledges  support  from  the  European  Research  Council  for  AdG 
+/ 
+NOQIA;  MCIN/AEI 
+
+(PGC2018-0910.13039/501100011033,  
+
+CEX2019-000910-S/10.13039 
+
+ 
+ 
+ 
+ 
+ 
+I00,  project 
+
+funded  by  MCIN/AEI/10.13039/501100011033  and  by 
+
+501100011033,  Plan  National  FIDEUA  PID2019-106901GB-I00,  Plan  National  STAMEENA  PID2022-
+139099NB, 
+the  “EU 
+NextGenerationEU/PRTR"  (PRTR-C17.I1),  FPI);  QUANTERA  MAQS  PCI2019-111828-2;   QUANTERA 
+DYNAMITE PCI2022-132919, QuantERA II Programme co-funded by EU Horizon 2020 program Grant 
+No 101017733; Ministry for Digital Transformation and of Civil Service of the Spanish Government 
+through the QUANTUM ENIA project call - Quantum Spain project, and by the European Union through 
+the Recovery, Transformation and Resilience Plan - NextGenerationEU within the framework of the 
+Digital Spain 2026 Agenda; Fundació Cellex; Fundació Mir-Puig; Generalitat de Catalunya (European 
+Social  Fund FEDER  and  CERCA  program,  AGAUR  Grant  No.  2021  SGR  01452,  QuantumCAT\U16-
+011424, co-funded by ERDF Operational Program of Catalonia 2014-2020); Barcelona Supercomputing 
+Center MareNostrum (FI-2023-3-0024); Funded by the EU. Views and opinions expressed are however 
+those  of  the  author(s)  only  and  do  not  necessarily  reflect  those  of  the  EU,  European  Commission, 
+European Climate, Infrastructure and Environment Executive Agency (CINEA), or any other granting 
+authority.  Neither the EU nor any granting authority can be held responsible for them (HORIZON-CL4-
+2022-QUANTUM-02-SGA  PASQuanS2.1, 101113690, EU Horizon 2020 FET-OPEN OPTOlogic, Grant No 
+899794, QU-ATTO, 101168628),  EU Horizon Europe Program (This project has received funding from 
+the  EU’s  Horizon  Europe  research  and  innovation  program  under  grant  agreement  No  101080086 
+NeQSTGrant Agreement 101080086 — NeQST); ICFO Internal “QuantumGaudi” project. U.B. is also 
+grateful  for  the  financial  support  of  the  IBM  Quantum  Researcher  Program.  T.G.  acknowledges 
+financial support from the Agencia Estatal de Investigación (AEI) through Proyectos de Generación de 
+Conocimiento  PID2022-142308NA-I00  (EXQUSMI),  and  that  this  work  has  been  produced  with  the 
+support of a 2023 Leonardo Grant for Researchers in Physics, BBVA Foundation. The BBVA Foundation 
+is not responsible for the opinions, comments, and contents included in the project and/or the results 
+derived therefrom, which are the total and absolute responsibility of the authors. RWC acknowledges 
+support  from  the  Polish  National  Science  Centre  (NCN)  under  the  Maestro  Grant  No.  DEC-
+2019/34/A/ST2/00081.  We  acknowledge  the  financial  support  from  the  European  Union  (ERC  AdG 
+Mol-2D 788222, FET OPEN SINFONIA 964396), the Spanish MCIN (2D-HETEROS PID2020-117152RB-
+100,  co-financed  by  FEDER,  and  Excellence  Unit  ‘María  de  Maeztu’  CEX2019-000919-M)  and  the 
+Generalitat  Valenciana  (PROMETEO  Program,  PO  FEDER  Program  IDIFEDER/2018/061,  a  PhD 
+fellowship to C.B.-C., and APOSTD-CIAPOS2021/215 to S.M.-V.). This study forms part of the Advanced 
+Materials  programme  and  was  supported  by  MCIN  with  funding  from  European  Union 
+NextGenerationEU (PRTR-C17.I1) and by Generalitat Valenciana. S.M.-V. acknowledges the support 
+from the European Commission for a Marie Sklodowska–Curie individual fellowship no. 101103355 - 
+SPIN-2D-LIGHT. We thank Anna Palau and technical staff from The Institute of Materials Science of 
+Barcelona (ICMAB-CSIC) for assistance with the XRD measurements. 
+
+Author Statements  
+
+J.B. conceived the project; I.T, L.V and J.P. conducted the measurements with support from J.B.; S.M.-
+V. and E.C. produced the samples; U.B., R.C., T.G. L.Z. and M.L. developed the mean-field theory and 
+L.Z. conducted simulations; I.T., L.V., J.P. carried out the data analysis with support by J.B.; I.T. and J.B. 
+wrote the manuscript with input from the authors.  
+
+ 
+ 
+ 
+ 
+ 
+

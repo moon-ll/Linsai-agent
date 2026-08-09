@@ -180,20 +180,19 @@ def _add_to_pending(arxiv_id: str, copilot_status: str, action: str, reason: str
 
 
 # ─────────────────────────────────────────────
-# 正向同步：item-status.json → CoPilot paper-pool.json
+# 正向同步：item-status.json 水位标记更新
 # ─────────────────────────────────────────────
 
 def sync_from_hermes() -> Dict[str, Any]:
-    """正向同步：统一状态 item-status.json → CoPilot paper-pool.json。
+    """正向同步：统一状态 item-status.json 状态确认。
 
-    v5.0 重构：从 state_sync 读取 item-status.json，按统一状态枚举映射
-    更新 CoPilot paper-pool.json 中对应论文的 status。
-    只升级不降级（unseen → viewed → archived 单向流转）。
+    v6.8.14 重构：paper-pool.json 已废弃（papers 字段为空，数据已迁移到
+    item-status.json + knowledge/raw/papers/ frontmatter）。
+    此函数不再写 paper-pool.json，只更新同步水位标记。
 
     Returns:
         {"synced": int, "skipped": int, "date": str}
     """
-    import paper_pool as pp
     import state_sync as ss
 
     if not ss.ITEM_STATUS_PATH.exists():
@@ -209,38 +208,13 @@ def sync_from_hermes() -> Dict[str, Any]:
     if not items:
         return {"synced": 0, "skipped": 0, "date": updated_at, "reason": "无论文记录"}
 
-    synced = 0
-    skipped = 0
-
-    for aid, item in items.items():
-        unified_status = item.get("status", "")
-        # 映射规则：统一状态 → CoPilot 三态
-        target = _UNIFIED_TO_COPILOT.get(unified_status)
-        if not target:
-            continue  # pool/candidate/pushed 不同步
-
-        # 查询当前 CoPilot 状态
-        current = pp.get_paper_status(aid)
-        if current is None:
-            skipped += 1  # 论文不在 CoPilot 池中
-            continue
-
-        # 只升不降
-        if _can_upgrade(current, target):
-            pp.update_status(aid, target, extra={
-                "hermes_synced_at": now_utc(),
-                "unified_status": unified_status,
-            })
-            synced += 1
-        else:
-            skipped += 1
-
-    # 更新水位
+    # v6.8.14: paper-pool.json 已废弃，不再写入
+    # 只更新同步水位
     state = _load_sync_state()
     state["reverse_sync_watermark"] = updated_at
     _save_sync_state(state)
 
-    return {"synced": synced, "skipped": skipped, "date": updated_at}
+    return {"synced": len(items), "skipped": 0, "date": updated_at}
 
 
 # ─────────────────────────────────────────────

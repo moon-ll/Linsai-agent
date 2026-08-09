@@ -23,8 +23,12 @@ except Exception:
 BRIEFING_DIR = PROJECT_ROOT / "knowledge" / "wiki" / "reviews"
 CAPTURES_DIR = PROJECT_ROOT / "knowledge" / "captures"
 REFERENCES_NOTES_DIR = PROJECT_ROOT / "references" / "notes"
-PAPER_POOL_PATH = PROJECT_ROOT / "memory" / "paper-pool.json"
 RAW_PAPERS_DIR = PROJECT_ROOT / "knowledge" / "raw" / "papers"
+
+# v6.8.13: Hermes workspace 文献来源路径
+HERMES_WORKSPACE = Path.home() / "Desktop" / "hermes_workspace"
+HERMES_BRIEFINGS_DIR = HERMES_WORKSPACE / "knowledge_base" / "AI_wiki" / "briefings"
+HERMES_BRIEFINGS_PAPERS_DIR = HERMES_BRIEFINGS_DIR / "papers"
 
 
 def _read_text(path: Path, max_chars: int = 8000) -> str:
@@ -48,11 +52,15 @@ def _make_source_id(prefix: str, path: Path) -> str:
 
 
 def collect_briefings(days: int = 7) -> List[Dict[str, Any]]:
-    """收集最近 N 天的文献简报。"""
+    """收集最近 N 天的文献简报。
+
+    v6.8.13: 三路读取——CoPilot wiki/reviews + hermes_briefings + hermes papers。
+    """
     cutoff = datetime.now(timezone.utc) - __import__("datetime").timedelta(days=days)
     sources = []
-    if not BRIEFING_DIR.exists():
-        return sources
+    seen_ids = set()
+
+    # 路径 A：CoPilot wiki/reviews（同步后的简报）
     for f in sorted(BRIEFING_DIR.glob("briefing-*.md"), reverse=True):
         try:
             mtime = datetime.fromtimestamp(f.stat().st_mtime, tz=timezone.utc)
@@ -62,36 +70,108 @@ def collect_briefings(days: int = 7) -> List[Dict[str, Any]]:
             pass
         text = _read_text(f, 6000)
         if text:
+            sid = _make_source_id("briefing", f)
+            seen_ids.add(sid)
             sources.append({
-                "source_id": _make_source_id("briefing", f),
+                "source_id": sid,
                 "type": "briefing",
                 "path": str(f.relative_to(PROJECT_ROOT)),
                 "text": text,
                 "mtime": _file_mtime_iso(f),
                 "reliability": RELIABILITY_RELIABLE,
             })
+
+    # 路径 B：hermes workspace briefings/research_briefing_*.md（每日精选简报）
+    if HERMES_BRIEFINGS_DIR.exists():
+        for f in sorted(HERMES_BRIEFINGS_DIR.glob("research_briefing_*.md"), reverse=True):
+            try:
+                mtime = datetime.fromtimestamp(f.stat().st_mtime, tz=timezone.utc)
+                if mtime < cutoff:
+                    continue
+            except Exception:
+                pass
+            text = _read_text(f, 6000)
+            if text:
+                sid = f"hermes_briefing:{f.name}"
+                if sid not in seen_ids:
+                    seen_ids.add(sid)
+                    sources.append({
+                        "source_id": sid,
+                        "type": "briefing",
+                        "path": str(f),
+                        "text": text,
+                        "mtime": _file_mtime_iso(f),
+                        "reliability": RELIABILITY_RELIABLE,
+                    })
+
     return sources
 
 
 def collect_paper_pool(limit: int = 20) -> List[Dict[str, Any]]:
-    """收集文献池中的新增论文。"""
+    """收集文献池中的新增论文。
+
+    v6.8.13: 从 knowledge/raw/papers/ 的 frontmatter 读取（取代空的 paper-pool.json）。
+    v6.8.14: 同时从 hermes workspace papers/ 读取补充。
+    """
     sources = []
-    if not PAPER_POOL_PATH.exists():
-        return sources
-    pool = load_json(PAPER_POOL_PATH, default={})
-    for arxiv_id, info in list(pool.get("papers", {}).items())[:limit]:
-        text = f"{info.get('title', '')}\n\n{info.get('abstract', '')[:800]}"
-        sources.append({
-            "source_id": f"paper:{arxiv_id}",
-            "type": "paper",
-            "path": str(PAPER_POOL_PATH.relative_to(PROJECT_ROOT)),
-            "arxiv_id": arxiv_id,
-            "title": info.get("title", ""),
-            "abstract": info.get("abstract", "")[:800],
-            "tags": info.get("tags", []),
-            "text": text,
-            "reliability": RELIABILITY_RELIABLE,
-        })
+    seen_ids = set()
+
+    # 路径 A：CoPilot knowledge/raw/papers/*.md（YAML frontmatter）
+    if RAW_PAPERS_DIR.exists():
+        for f in sorted(RAW_PAPERS_DIR.glob("*.md"), key=lambda p: p.stat().st_mtime, reverse=True)[:limit]:
+            try:
+                text = _read_text(f, 1500)
+                # 提取 frontmatter 中的标题和摘要
+                title = ""
+                abstract = ""
+                if text.startswith("---"):
+                    end = text.find("---", 3)
+                    if end > 0:
+                        fm = text[3:end].strip()
+                        for line in fm.split("\n"):
+                            if line.startswith("title:"):
+                                title = line.split(":", 1)[1].strip().strip('"\'')
+                            elif line.startswith("abstract:"):
+                                abstract = line.split(":", 1)[1].strip().strip('"\'')
+
+                arxiv_id = f.stem
+                sid = f"paper:{arxiv_id}"
+                seen_ids.add(sid)
+                body_text = f"{title}\n\n{abstract}" if abstract else text
+                sources.append({
+                    "source_id": sid,
+                    "type": "paper",
+                    "path": str(f.relative_to(PROJECT_ROOT)),
+                    "arxiv_id": arxiv_id,
+                    "title": title or arxiv_id,
+                    "abstract": abstract[:800],
+                    "text": body_text[:2000],
+                    "reliability": RELIABILITY_RELIABLE,
+                })
+            except Exception:
+                continue
+
+    # 路径 B：hermes workspace papers/*.md（补充来源）
+    if HERMES_BRIEFINGS_PAPERS_DIR.exists():
+        for f in sorted(HERMES_BRIEFINGS_PAPERS_DIR.glob("*.md"), key=lambda p: p.stat().st_mtime, reverse=True)[:limit]:
+            arxiv_id = f.stem
+            sid = f"paper:{arxiv_id}"
+            if sid in seen_ids:
+                continue
+            seen_ids.add(sid)
+            text = _read_text(f, 2000)
+            if text and len(text) > 100:
+                sources.append({
+                    "source_id": sid,
+                    "type": "paper",
+                    "path": str(f),
+                    "arxiv_id": arxiv_id,
+                    "title": arxiv_id,
+                    "abstract": text[:800],
+                    "text": text[:2000],
+                    "reliability": RELIABILITY_DERIVED,
+                })
+
     return sources
 
 

@@ -51,7 +51,10 @@ class ScenarioTests(TestSuite):
         }
 
         # 技能用真实数据（只读）
-        patch_module_root("skill_manager", REAL_ROOT)
+        # v6.8.14: patch_module_root 的字符串替换在二次 patch（tmp→real）时会失效，
+        # 因为 tmp_root 路径不含 REAL_ROOT 字符串。直接强制设置路径。
+        self.skm.SKILLS_DIR = REAL_ROOT / "skills"
+        self.skm.SKILLS_STATE_PATH = REAL_ROOT / "memory" / "skills-state.json"
         self.skm.reload_skills()
 
     def teardown(self):

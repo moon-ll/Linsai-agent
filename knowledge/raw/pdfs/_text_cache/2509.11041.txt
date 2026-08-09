@@ -1,0 +1,1233 @@
+Topological excitonic insulators in electron bilayers modulated by twisted hBN
+Yongxin Zeng∗
+Department of Physics, Columbia University, New York, NY 10027
+
+Allan H. MacDonald
+Department of Physics, University of Texas at Austin, Austin, TX 78712
+
+Nemin Wei
+
+arXiv:2509.11041v1 [cond-mat.mes-hall] 14 Sep 2025
+
+Department of Physics, Yale University, New Haven, CT 06520
+Equilibrium interlayer exciton condensation is common in bilayer quantum Hall systems and is
+characterized by spontaneous phase coherence between isolated layers. It has been predicted that
+similar physics can occur in the absence of a magnetic field in some two-dimensional semiconductor
+bilayers. In this work we consider the case of two transition metal dichalcogenide (TMD) monolayers
+separated by a twisted hexagonal boron nitride (hBN) bilayer or multilayer. The hBN layers suppress
+tunneling between the TMD layers so that phase coherence is spontaneous when it is present. When
+twisted, the hBN layers also form a ferroelectric moiré pattern that applies opposite triangular-lattice
+modulation potentials to the two TMD layers. We show via mean-field theory that at total hole
+filling per moiré unit cell ν = 1, this geometry can favor a chiral p-wave exciton condensate state
+in which the quantum anomalous Hall effect coexists with counter-flow superfluidity. We present a
+mean-field phase diagram for TMD hole bilayers modulated by twisted hBN, discuss the conditions
+needed for the realization of the p-wave condensate state, and propose experiments that could
+confirm its presence.
+
+Introduction.—Bilayer two-dimensional electron systems have a layer degree-of-freedom that supports some
+of the most spectacular recent discoveries in condensed
+matter physics. For example, in twisted transiton metal
+dichalcogenide (TMD) homobilayers, a delicate interplay
+between the moiré modulation of potential energy and interlayer tunneling leads [1–6] to layer-spinor Berry phases
+and associated effective magnetic fields that underlie the
+fractional quantum anomalous Hall effect [7–10]. Our interest here is instead in the case in which interlayer tunneling has been suppressed by a hexagonal boron nitride
+(hBN) barrier so that the number of electrons is separately conserved in each layer. In these electrically isolated bilayers, interlayer Coulomb interactions can lead
+to exciton condensation in which ⟨ψt† ψb ⟩ is spontaneously
+non-zero, breaking the layer-U(1) symmetry and establishing spontaneous interlayer phase coherence [11]. Here
+ψt† and ψb are electron creation and annihilation operators in the top (t) and bottom (b) layers. Equilibrium
+exciton condensation has been established and studied
+in depth in bilayer quantum Hall systems [12–23], but
+its presence in the absence of a magnetic field has not
+been experimentally confirmed despite recent progress in
+TMD-based electron-hole bilayers [24–28].
+Moiré materials host narrow minibands in a Brillouin
+zone that is small due to the large moiré length scale.
+Moiré minibands can in principle support equilibrium
+exciton condensates similar to those discovered in quantum Hall systems. Previous theoretical work [29–31] has
+considered TMD double-bilayers whose moiré structures
+have perfect lateral alignment, which can be modeled in
+the strong modulation limit as a lattice of layer pseudospins with antiferromagnetic interactions. Interlayer
+coherent states are theoretically expected in these sys-
+
+tems, but the predictions have not been confirmed because of the difficulty of achieving lateral alignment (see
+Refs. [32–35] for closely related experiments).
+In this Letter we consider a bilayer electron system
+that consists of two TMD monolayers separated by a
+few-layer twisted hBN spacer as schematically illustrated
+in Fig. 1. The twisted-hBN spacer not only suppresses
+interlayer tunneling, but also applies periodic modulation potentials onto the top and bottom TMD layers
+due to its alternating domains of ferroelectricity [36, 37].
+This remote imprinting of moiré superlattices has already
+proved to be an effective new method to engineer electronic band structure and correlations [38–46]. Crucially,
+the out-of-plane electric polarization of the ferroelectric
+hBN induces potential energies on the top and bottom
+TMD layers that are automatically aligned; no lattice
+alignment is needed between the TMD layers or between
+the TMD and hBN layers. When both layers are doped
+with holes, the carriers are localized near potential maxima that form a triangular lattice, but the triangular
+lattices in two layers are shifted with respect to each
+other, forming a honeycomb lattice with layer-sublattice
+locking. We show that at total filling ν = 1 per unit
+cell, the system forms an interlayer coherent state over
+a wide parameter range. Most interestingly, near zero
+displacement field and at intermediate moiré modulation
+strength, the ground state is a quantum anomalous Hall
+(QAH) insulator with spontaneous chiral p-wave interlayer coherence.
+Model.—The low-energy physics of a hole-doped TMD
+monolayer in the presence of a moiré modulation poten-
+
+2
+the top and bottom gate voltages. Without loss of generality, we assume M ≥ N so that 0 < α ≤ 1. Electronelectron interactions are described by the Hamiltonian
+
+𝑉𝑉𝑡𝑡𝑡𝑡
+
+Top Gate
+
+Hint =
+𝑑𝑑
+
+TMD monolayer
+Twisted hBN
+TMD monolayer
+
+ll
+
+𝑉𝑉𝑏𝑏𝑏𝑏
+
+Bottom Gate
+
+FIG. 1. Schematic illustration of the device structure. The
+twisted hBN layers suppress interlayer tunneling between enclosing top and bottom TMD layers and impose opposite electrostatic modulation potentials (blue and red shading for potential maxima and minima) in the two layers. The top and
+bottom gates are separated from the TMD layers by thick
+untwisted hBN dielectric barriers, and the gate voltages Vtg
+and Vbg independently tune the total carrier density and the
+potential difference VD between two TMD layers.
+
+tial is described by the continuum model [47]
+Ht = −
+
+ℏ2 k 2
++ V (r),
+2m
+
+(1)
+
+where m is the effective mass of holes in the monolayer
+TMD and V (r) is the moiré modulation potential. In
+our calculations we take m = 0.5 me where me is the free
+electron mass. Within the first-harmonic approximation,
+a periodic potential with triangular-lattice periodicity is
+expressed as
+V (r) = 2Vm
+
+3
+X
+
+cos(gi · r + ψ),
+
+(2)
+
+i=1
+
+√
+where g1 = (4π/ 3am , 0) and its C3 -partners g2 , g3 are
+reciprocal lattice vectors. In Eq. (2) Vm controls the
+strength of the modulation potential, and ψ describes
+its shape, e.g., the ratios of potential values at highsymmetry points. For twisted hBN, the symmetry of
+the domain pattern implies that ψ = π/2 (see Fig. 2(a)).
+The moiré lattice constant am = aBN /θ where aBN is the
+microscopic lattice constant of hBN and θ is the twist
+angle. In general the top TMD layer is described by
+single-particle Hamiltonain Ht with potential Vt , and the
+bottom layer by Hamiltonian Hb with potential Vb . We
+consider the general case of N -layer hBN twisted on top
+of M -layer hBN. This allows us to tune the interlayer
+distance d and the moiré potential strength Vm , as well
+as the ratio of the moiré potential strengths in two layers
+α. The bottom layer is described by the Hamiltonian
+Hb = −
+
+1 XX
+Vll′ (q)c†k+q,l c†k′ −q,l′ ck′ ,l′ ck,l ,
+2A ′
+′
+
+ℏ2 k 2
+− αVt (r) − VD ,
+2m
+
+(3)
+
+where VD is the potential difference between two layers
+due to the perpendicular displacement field controlled by
+
+(4)
+
+kk q
+
+where l = t, b is the layer index, c†k,l and ck,l are
+momentum-space creation and annihilation operators
+for electrons in layer l, and A is the area of the
+two-dimensional system. The intralayer and interlayer
+Coulomb interaction potentials are
+(
+2πe2 /ϵq,
+l = l′ ,
+Vll′ (q) =
+(5)
+(2πe2 /ϵq)e−qd , l ̸= l′ ,
+where ϵ is the dielectric constant. In our numerical calculations we use dual-gate-screened interaction potentials
+(see the Supplemental Material (SM) [48]) with gate distance dg = 50 nm. As in our previous work [29], we
+neglect the spin (valley) degree of freedom, anticipating
+that the energy scale of spin order is much smaller than
+that of layer order [49]. When the spin degree of freedom is restored, we expect a competition between spontaneously spin-polarized states like those studied here
+and competing states with spin-independent exciton order [50], which does not lead to qualitative changes in
+our excitonic phase diagrams.
+Mean-field theory.—The single-particle band structure
+of a monolayer TMD modulated by a periodic potential with Vm = 6 meV and am = 8 nm is shown in
+Fig. 2(b). Assuming that interactions do not lead to
+significant band mixing, we keep only one band in each
+layer and project the interaction Hamiltonian onto the
+two-band subspace. An explicit expression for the projected Hamiltonian is provided in the SM [48].
+To obtain the phase diagram, we perform selfconsistent Hartree-Fock calculations at total filling ν = 1
+(one hole per unit cell); the Hartree-Fock equations are
+listed in the SM [48]. Within Hartree-Fock mean-field
+theory, an interlayer coherent state is described by the
+Slater determinant
+Y
+θk
+θk
+|Ψ⟩ =
+(cos a†k−Q,t + eiϕk sin a†k+Q,b ) |0⟩ , (6)
+2
+2
+k∈mBZ
+
+where a†k,l is the creation operator for the Bloch state
+with momentum k in the top miniband in layer l, k
+is defined within the mini-Brillouin zone (mBZ) of the
+long-period moiré superlattice, |0⟩ is the vacuum state
+in which both bands are empty, and 2Q is the excitonic
+pairing momentum. We find that the ground
+√ state en2π
+ergy is minimized when Q = ±κ = ± 3a
+(
+3, 1), i.e.,
+m
+when the energy maximum of one layer is paired with
+one of the energy minima of the other layer, breaking
+time-reversal symmetry. Below we focus on the Q = κ
+pairing state (the Q = −κ state is its time-reversal partner) and, for convenience, relabel the momentum of the
+
+3
+
+30
+20
+10
+0
+10
+20
+30
+
+1
+
+1
+1
+
+0
+
+1
+
+x
+
+E (meV)
+
+(b) 0
+
+20 (c)
+10
+0
+10
+20
+30
+
+20
+40
+60
+80
+
+γ
+
+0
+
+m
+
+γ
+
+γ
+
+s-EI
+
+20
+
+VD (meV)
+
+0
+
+LP
+
+40
+
+V(r) (meV)
+
+y
+
+(a)
+
+0 metal
+20
+
+p-EI
+
+NEI
+
+s-EI
+
+40
+
+LP
+4
+
+0
+
+m
+
+γ
+
+FIG. 2. (a) Moiré modulation potential V (r) (Eq. 2) with
+Vm = 6 meV and ψ = π/2 as a model of modulation potential from an adjacent twisted hBN. Lengths are in units of
+the moiré lattice constant am . Holes in the top layer are localized near the potential maxima shown in blue, while the
+holes in the bottom layer are localized in the red regions.
+(b) Band structure of a monolayer TMD with effective mass
+m = 0.5 me modulated by the potential in (a) with moiré
+length am = 8 nm. (c) The topmost minibands (solid curves)
+of the top (blue) and bottom (red) TMD layers in a symmetric modulation potential (α = 1) with displacement field
+VD = 3 meV. When the two bands are shifted in momentum
+space by Q = κ (see main text), the maximum of one band
+aligns with the minimum of the other, allowing coherence to
+reduce the Fermi-level density-of-states to zero. The dotted
+curves show the Hartree-Fock band structure of the p-wave
+excitonic insulator state at d = 4 nm and ϵ = 6. The color
+scale represents layer polarization and shows that the states
+at κ and κ′ are polarized to opposite layers.
+
+Bloch states in two layers by k → k ± Q so that pairing
+occurs at zero momentum:
+Y
+θk
+θk
+(7)
+|Ψ⟩ =
+(cos a†k,t + eiϕk sin a†k,b ) |0⟩ .
+2
+2
+k∈mBZ
+
+The momentum-shifted band structure in the projected subspace is shown in Fig. 2(c). The Slaterdeterminant state (7) can be viewed as occupying k-dependent layer pseudospins with orientations
+nk ≡ (sin θk cos ϕk , sin θk sin ϕk , cos θk ). Momentumspace winding numbers of the layer pseudospins (with
+proper phase fixing of the layer-basis states; see SM [48])
+define the pairing symmetry and topology of the interlayer coherent state.
+To gain some insight into the energetically favored
+pairing symmetry, we note that the potential maxima
+in each layer form a triangular lattice, but the triangular lattices in the two layers are laterally shifted and together form a honeycomb lattice. For the modulation po-
+
+5
+
+6
+
+7
+
+Vm (meV)
+
+8
+
+9
+
+10
+
+FIG. 3. Mean-field phase diagram in the space of modulation
+potential strength Vm and displacement field VD , with symmetric twisted-hBN modulation (α = 1), interlayer distance
+d = 4 nm, moiré length am = 8 nm, and dielectric constant
+ϵ = 6. LP: layer-polarized state; s-EI: s-wave excitonic insulator; p-EI: p-wave excitonic insulator; NEI: nematic excitonic
+insulator. The solid and dashed lines represent first-order and
+continuous phase transitions, respectively. The green star,
+yellow triangle, and cyan circle indicate the parameters for
+the Berry curvature and layer pseudospin plots in Fig. 4.
+
+tential illustrated in Fig. 2(a), for example, holes in the
+top and bottom layers are predominantly localized at the
+blue and red regions, respectively. Because of this layersublattice locking, the dominant self-energies generated
+by interlayer interactions correspond to inter-sublattice
+near-neighbor hopping on the honeycomb lattice. The
+mean-field Hamiltonian therefore takes the form
+X
+H∆ ≈ −
+∆ij a†i aj ,
+(8)
+⟨ij⟩
+
+where i, j are site labels and ⟨. . .⟩ restricts the sum to
+nearest neighbors on the honeycomb lattice. If the coherence amplitudes are equal for all nearest-neighbor
+pairs (|∆ij | = ∆), H∆ is formally identical to the familiar honeycomb-latttice tight-binding model of graphene.
+The interlayer coherence order parameter has px ± ipy
+vortices at two of the three high-symmetry points γ, κ,
+and κ′ in the mBZ, depending on the relative phase of
+∆ij for ⟨i, j⟩ pairs along different directions. If the layer
+polarizations at the two vortices are opposite, the layer
+pseudospin nk forms a topologically nontrivial skyrmion
+texture in the mBZ, implying that the state is a QAH
+insulator state with a non-zero Chern number |C| = 1.
+If interactions are strong, some of the lattice symmetries
+such as C3 -rotational symmetry may be spontaneously
+broken. For example, coherence is sometimes formed
+only between horizontal pairs of sublattice sites, breaking C3 -symmetry and forming an excitonic dimer state
+that is topologically trivial. We therefore expect that the
+topologically nontrivial p-wave interlayer coherent state
+forms at intermediate strength of interactions.
+
+4
+
+(b)
+
+(c)
+
+C=0
+
+0.3
+
+C=0
+
+0.2
+0.1
+
+0
+
+0.0
+
+2
+
+0.1
+0.2
+
+4
+
+(d) 4
+
+(e)
+
+0.3
+1.0
+
+(f)
+
+0.5
+
+2
+
+ky
+
+Ω
+
+2
+
+0
+
+0.0
+
+2
+
+nz
+
+ky
+
+(a) 4 C = 1
+
+0.5
+
+4
+4
+
+2
+
+0
+
+kx
+
+2
+
+4
+
+4
+
+2
+
+0
+
+kx
+
+2
+
+4
+
+4
+
+2
+
+0
+
+kx
+
+2
+
+4
+
+1.0
+
+FIG. 4. (a-c) Berry curvature and (d-f) layer pseudospin distributions of (a,d) the p-EI state at VD = 0, Vm = 7 meV, (b,e) the
+NEI state at VD = 0, Vm = 8.5 meV, and (c,f) the s-EI state at VD = 20, Vm = 8.5 meV. The parameters are indicated by the
+green star, yellow triangle, and cyan circle in Fig. 3. The (x, y)-components of the pseudospins are represented by the black
+arrows and the z-component is shown by the color scale. The unit of length is the moiré length am = 8 nm.
+
+Phase diagram.—Fig. 3 presents the mean-field phase
+diagram in the space of modulation potential strength
+Vm and displacement field VD . The remaining parameters are set as α = 1, d = 4 nm, am = 8 nm, and
+ϵ = 6; phase diagrams at other values of α, d, am , and
+ϵ are qualitatively similar (see SM [48]). At large displacement field VD , the system forms a layer-polarized
+(LP) state, i.e., one of the layers is fully occupied and
+the other layer is empty. As VD decreases and the gap
+between two bands is reduced below a critical value, an
+excitonic instability occurs and interlayer coherence is established via a continuous phase transition. Just below
+the critical value of VD , the system is in the dilute boson
+regime and the ground state is the topologically trivial
+s-wave excitonic insulator (s-EI). This state is expected
+because the lowest-energy state of an electron-hole pair
+is always the 1s-exciton. We find that the topologically
+nontrivial p-wave excitonic insulator (p-EI) state occurs
+in a region near VD = 0 and at relatively weak modulation potential strength Vm . Between the s-EI and p-EI
+states is a C3 -breaking nematic excitonic insulator (NEI)
+state that extends to the large-Vm regime. At very small
+Vm , the band width is large and the mean-field ground
+state is a metallic state.
+To further investigate the nature of the three distinct
+interlayer coherent states, we plot in Fig. 4 the Berry
+curvature Ωk and layer (sublattice) pseudospin nk of
+the ground states at three different sets of parameters.
+Fig. 4(d) shows that the topological nature of the p-EI
+
+state is essentially the same as that of the Haldane model
+[51, 52]: the electrons at κ and κ′ are fully polarized
+to different sublattices, and the in-plane components of
+sublattice pseudospins form vortices of opposite chiralities around these points. The topologically nontrivial
+skyrmion-like pseudospin texture in the mBZ indicates
+a QAH state with Chern number |C| = 1. For the s-EI
+state in Fig. 4(f), on the other hand, the two vortices
+are located at γ and κ points in the mBZ where the
+layer polarizations are the same, leading to a topologically trivial state. The large and slowly varying in-plane
+component of pseudospins near κ′ indicates s-wave coherence between the electron and hole pockets from different
+layers.
+For the NEI state shown in Fig. 4(e), the in-plane component of pseudospins is always nonzero and polarized
+close to a common in-plane direction at all k, indicating a topologically trivial C3 -breaking interlayer coherent
+state. Physically, this represents a state in which coherence is established only between neighboring sublattice
+sites within a unit cell (horizontal pairs of neighboring
+sites in Fig. 2(a) by our basis choice) but not across different unit cells. The breaking of C3 -symmetry is also
+clear from the Berry curvature plot in Fig. 4(b).
+To understand the competition between the s-EI, p-EI,
+and NEI states, we note that at the vortex cores of the
+momentum-space pseudospin texture, the interlayer coherence order parameter vanishes and does not increase
+the gap size. It is thus energetically favorable to have
+
+5
+s-wave-like interlayer coherence at the high-symmetry
+point where the two layers are close in energy. When the
+displacement field VD is small, the single-particle bands
+of two layers are nearly degenerate at γ and far from degenerate at κ and κ′ (see Fig. 2(c)). It is thus favorable
+to have a pair of vortices located at κ and κ′ and s-wave
+coherence at γ, leading to the topologically nontrivial
+texture in Fig. 4(d). When VD is large and positive, the
+electron and hole pockets at κ′ are closest in energy, so
+the ground state has s-wave coherence at κ′ , leading to
+the topologically trivial texture in Fig. 4(f). At intermediate VD , or if Vm is large so that the band width is
+small, it is favorable to have finite interlayer coherence
+at all k, breaking C3 -symmetry.
+Discussion.—We have shown that when two TMD
+layers are modulated by opposite-sign triangular-lattice
+moiré potentials, spontaneous interlayer coherence can
+sometimes lead to a topologically nontrivial excitonic insulator state. The physics in this system is similar to that
+in AB-stacked MoTe2 /WSe2 heterobilayers in which the
+QAH effect was experimentally observed [53–55] despite
+weak interlayer hybridization. Recent magnetic circular
+dichroism measurements [55] suggest that in this system
+the carriers in two TMD layers are polarized to opposite valleys, and it was proposed theoretically [56, 57]
+that the QAH state arises as a result of spontaneous pwave interlayer coherence. Our phase diagram is qualitatively similar to that obtained in Ref. [56] using a lattice
+model, although spin order is not explicitly considered in
+our work. In fact, it was argued in Ref. [56] that in the
+small-VD regime carriers in each layer are spontaneously
+spin-polarized due to kinetic ferromagnetism, which further supports the validity of our spinless theory. The
+competition between intravalley and intervalley coherent
+states involves microscopic details such as trigonal warping and interlayer tunneling that break valley symmetry
+and is outside the scope of the present work.
+Compared with MoTe2 /WSe2 heterobilayers, the system we propose (Fig. 1) has the advantage that the
+two TMD layers are spatially separated by the hBN
+layers, which guarantees essentially perfect interlayer
+
+U(1)-symmetry at the single-particle level and allows for
+counter-flow measurements when separate electrical contacts are made to the two TMD layers. We predict that
+a quantized Hall drag effect will occur that is similar
+to the effect observed in the quantum Hall regime [17–
+21]. Its observation would not only support the excitonic
+scenario [56, 57] for the MoTe2 /WSe2 experiments [53–
+55], but also provide unambiguous evidence for excitonic
+coherence in equilibrium semiconductor bilayers at zero
+magnetic field that has so far been experimentally elusive. This and other properties of this exotic type of
+exciton condensate remain to be explored.
+It is known that Hartree-Fock mean-field theories tend
+to overestimate the stability of symmetry-broken states.
+The phase boundary between LP and s-EI states at large
+VD is however accurate since it involves the formation
+and condensation of low-density excitons that are accurately described by mean-field theory. We do expect that
+when quantum fluctuations are taken into account, the
+metallic state occupies a larger region in the phase diagram, and that the boundary between the p-EI and NEI
+states moves to larger Vm (stronger interactions) since
+the transition to the NEI state involves an additional C3 symmetry breaking. Anticipating that mean-field theory strongly overestimates the tendency to break translational symmetry, we have focused on the weak-correlation
+parameter regime where charge-ordered crystal states are
+unlikely. Because our model system has a natural realspace formulation, it is an ideal playground for quantum
+Monte Carlo methods [58, 59] including those with the
+use of neural-network quantum states [60–65] that have
+recently proved to be efficient methods to simulate interacting electrons in moiré materials.
+Acknowledgments.— We thank Naichao Hu for helpful discussion. Y.Z. acknowledges support from Programmable Quantum Materials, an Energy Frontiers Research Center funded by the U.S. Department of Energy
+(DOE), Office of Science, Basic Energy Sciences (BES),
+under award DE-SC0019443. A. H. M. was supported by
+a Simons Foundation Targeted Grant under Award No.
+896630.
+
+∗
+yz4788@columbia.edu
+[1] F. Wu, T. Lovorn, E. Tutuc, I. Martin, and A. H.
+MacDonald, Topological insulators in twisted transition
+metal dichalcogenide homobilayers, Phys. Rev. Lett. 122,
+086402 (2019).
+[2] N. Morales-Durán, N. Wei, J. Shi, and A. H. MacDonald,
+Magic angles and fractional chern insulators in twisted
+homobilayer transition metal dichalcogenides, Phys. Rev.
+Lett. 132, 096602 (2024).
+[3] J. Shi, N. Morales-Durán, E. Khalaf, and A. H. MacDonald, Adiabatic approximation and aharonov-casher bands
+in twisted homobilayer transition metal dichalcogenides,
+Phys. Rev. B 110, 035130 (2024).
+[4] T. Devakul, V. Crépel, Y. Zhang, and L. Fu, Magic in
+
+twisted transition metal dichalcogenide bilayers, Nature
+communications 12, 6730 (2021).
+[5] F. Zhang, N. Morales-Durán, Y. Li, W. Yao, J.-J. Su, Y.C. Lin, C. Dong, X. Liu, F.-X. R. Chen, H. Kim, et al.,
+Experimental signature of layer skyrmions and implications for band topology in twisted WSe2 bilayers, Nature
+Physics , 1 (2025).
+[6] E. Thompson, K. T. Chu, F. Mesple, X.-W. Zhang,
+C. Hu, Y. Zhao, H. Park, J. Cai, E. Anderson, K. Watanabe, et al., Microscopic signatures of topology in twisted
+MoTe2 , Nature Physics , 1 (2025).
+[7] J. Cai, E. Anderson, C. Wang, X. Zhang, X. Liu,
+W. Holtzmann, Y. Zhang, F. Fan, T. Taniguchi,
+K. Watanabe, et al., Signatures of fractional quantum
+
+6
+anomalous Hall states in twisted MoTe2 , Nature 622, 63
+(2023).
+[8] H. Park, J. Cai, E. Anderson, Y. Zhang, J. Zhu, X. Liu,
+C. Wang, W. Holtzmann, C. Hu, Z. Liu, et al., Observation of fractionally quantized anomalous hall effect, Nature 622, 74 (2023).
+[9] Y. Zeng, Z. Xia, K. Kang, J. Zhu, P. Knüppel,
+C. Vaswani, K. Watanabe, T. Taniguchi, K. F. Mak, and
+J. Shan, Thermodynamic evidence of fractional Chern
+insulator in moiré MoTe2 , Nature 622, 69 (2023).
+[10] F. Xu, Z. Sun, T. Jia, C. Liu, C. Xu, C. Li, Y. Gu,
+K. Watanabe, T. Taniguchi, B. Tong, J. Jia, Z. Shi,
+S. Jiang, Y. Zhang, X. Liu, and T. Li, Observation of Integer and Fractional Quantum Anomalous Hall Effects in
+Twisted Bilayer MoTe2 , Phys. Rev. X 13, 031037 (2023).
+[11] We restrict our attention here to the case of equilibrium
+exciton condensates in which ⟨ψt† ψb ⟩ is time-independent.
+Related physics occurs in quasi-equilibrium [24] or nonequilibrium [66, 67] exciton condensates in which a bias
+voltage is applied between layers and ⟨ψt† ψb ⟩ has a timedependent phase.
+[12] J. Eisenstein and A. H. MacDonald, Bose–einstein condensation of excitons in bilayer electron systems, Nature
+432, 691 (2004).
+[13] J. Eisenstein, Exciton condensation in bilayer quantum
+hall systems, Annu. Rev. Condens. Matter Phys. 5, 159
+(2014).
+[14] I. B. Spielman, J. P. Eisenstein, L. N. Pfeiffer, and K. W.
+West, Resonantly enhanced tunneling in a double layer
+quantum hall ferromagnet, Phys. Rev. Lett. 84, 5808
+(2000).
+[15] M. Kellogg, J. P. Eisenstein, L. N. Pfeiffer, and K. W.
+West, Vanishing hall resistance at high magnetic field
+in a double-layer two-dimensional electron system, Phys.
+Rev. Lett. 93, 036801 (2004).
+[16] E. Tutuc, M. Shayegan, and D. A. Huse, Counterflow
+measurements in strongly correlated GaAs hole bilayers:
+Evidence for electron-hole pairing, Phys. Rev. Lett. 93,
+036802 (2004).
+[17] M. Kellogg, I. B. Spielman, J. P. Eisenstein, L. N. Pfeiffer, and K. W. West, Observation of quantized hall drag
+in a strongly correlated bilayer electron system, Phys.
+Rev. Lett. 88, 126804 (2002).
+[18] J. Li, T. Taniguchi, K. Watanabe, J. Hone, and C. Dean,
+Excitonic superfluid phase in double bilayer graphene,
+Nature Physics 13, 751 (2017).
+[19] X. Liu, K. Watanabe, T. Taniguchi, B. I. Halperin, and
+P. Kim, Quantum hall drag of exciton condensate in
+graphene, Nature Physics 13, 746 (2017).
+[20] R. Qi, Q. Li, Z. Zhang, J. Nie, B. Zou, Z. Cui, H. Kim,
+C. Sanborn, S. Chen, J. Xie, et al., Competition between
+excitonic insulators and quantum hall states in correlated
+electron–hole bilayers, Nature Materials , 1 (2025).
+[21] P. X. Nguyen, R. Chaturvedi, B. Zou, K. Watanabe,
+T. Taniguchi, A. H. MacDonald, K. F. Mak, and J. Shan,
+Quantum oscillations in a dipolar excitonic insulator, Nature Materials , 1 (2025).
+[22] B. Zou, Y. Zeng, A. H. MacDonald, and A. Strashko,
+Electrical control of two-dimensional electron-hole fluids
+in the quantum hall regime, Phys. Rev. B 109, 085416
+(2024).
+[23] B. Zou and A. H. MacDonald, Vortex lattice states of
+bilayer electron-hole fluids in quantizing magnetic fields,
+
+Phys. Rev. Lett. 135, 086002 (2025).
+[24] Y. Zeng and A. H. MacDonald, Electrically controlled
+two-dimensional electron-hole fluids, Phys. Rev. B 102,
+085154 (2020).
+[25] L. Ma, P. X. Nguyen, Z. Wang, Y. Zeng, K. Watanabe,
+T. Taniguchi, A. H. MacDonald, K. F. Mak, and J. Shan,
+Strongly correlated excitonic insulator in atomic double
+layers, Nature 598, 585 (2021).
+[26] R. Qi, A. Y. Joe, Z. Zhang, Y. Zeng, T. Zheng, Q. Feng,
+J. Xie, E. Regan, Z. Lu, T. Taniguchi, et al., Thermodynamic behavior of correlated electron-hole fluids in van
+der waals heterostructures, Nature communications 14,
+8264 (2023).
+[27] R. Qi, A. Y. Joe, Z. Zhang, J. Xie, Q. Feng, Z. Lu,
+Z. Wang, T. Taniguchi, K. Watanabe, S. Tongay, et al.,
+Perfect coulomb drag and exciton transport in an excitonic insulator, Science 388, 278 (2025).
+[28] P. X. Nguyen, L. Ma, R. Chaturvedi, K. Watanabe,
+T. Taniguchi, J. Shan, and K. F. Mak, Perfect coulomb
+drag in a dipolar excitonic insulator, Science 388, 274
+(2025).
+[29] Y. Zeng, N. Wei, and A. H. MacDonald, Layer pseudospin
+magnetism in a transition metal dichalcogenide doublemoiré system, Phys. Rev. B 106, 165105 (2022).
+[30] Y.-H. Zhang, D. N. Sheng, and A. Vishwanath, Su(4) chiral spin liquid, exciton supersolid, and electric detection
+in moiré bilayers, Phys. Rev. Lett. 127, 247701 (2021).
+[31] L. Del Re and L. Classen, Field control of symmetrybroken and quantum disordered phases in frustrated
+moiré bilayers with population imbalance, Phys. Rev.
+Res. 6, 023082 (2024).
+[32] Z. Zhang, E. C. Regan, D. Wang, W. Zhao, S. Wang,
+M. Sayyad, K. Yumigeta, K. Watanabe, T. Taniguchi,
+S. Tongay, et al., Correlated interlayer exciton insulator in heterostructures of monolayer WSe2 and moiré
+WS2 /WSe2 , Nature physics 18, 1214 (2022).
+[33] J. Gu, L. Ma, S. Liu, K. Watanabe, T. Taniguchi, J. C.
+Hone, J. Shan, and K. F. Mak, Dipolar excitonic insulator
+in a moiré lattice, Nature physics 18, 395 (2022).
+[34] D. Chen, Z. Lian, X. Huang, Y. Su, M. Rashetnia, L. Ma,
+L. Yan, M. Blei, L. Xiang, T. Taniguchi, et al., Excitonic
+insulator in a heterojunction moiré superlattice, Nature
+Physics 18, 1171 (2022).
+[35] Y. Zeng, Z. Xia, R. Dery, K. Watanabe, T. Taniguchi,
+J. Shan, and K. F. Mak, Exciton density waves in
+coulomb-coupled dual moiré lattices, Nature Materials
+22, 175 (2023).
+[36] K. Yasuda, X. Wang, K. Watanabe, T. Taniguchi, and
+P. Jarillo-Herrero, Stacking-engineered ferroelectricity in
+bilayer boron nitride, Science 372, 1458 (2021).
+[37] M. Vizner Stern, Y. Waschitz, W. Cao, I. Nevo,
+K. Watanabe, T. Taniguchi, E. Sela, M. Urbakh, O. Hod,
+and M. Ben Shalom, Interfacial ferroelectricity by van der
+waals sliding, Science 372, 1462 (2021).
+[38] D. S. Kim, R. C. Dominguez, R. Mayorga-Luna, D. Ye,
+J. Embley, T. Tan, Y. Ni, Z. Liu, M. Ford, F. Y. Gao,
+et al., Electrostatic moiré potential from twisted hexagonal boron nitride layers, Nature materials 23, 65 (2024).
+[39] Z. Zhang, J. Xie, W. Zhao, R. Qi, C. Sanborn, S. Wang,
+S. Kahn, K. Watanabe, T. Taniguchi, A. Zettl, et al., Engineering correlated insulators in bilayer graphene with
+a remote coulomb superlattice, Nature Materials 23, 189
+(2024).
+[40] M. He, J. Cai, H. Zheng, E. Seewald, T. Taniguchi,
+
+7
+K. Watanabe, J. Yan, M. Yankowitz, A. Pasupathy,
+W. Yao, et al., Dynamically tunable moiré exciton rydberg states in a monolayer semiconductor on twisted
+bilayer graphene, Nature Materials 23, 224 (2024).
+[41] J. Gu, J. Zhu, P. Knuppel, K. Watanabe, T. Taniguchi,
+J. Shan, and K. F. Mak, Remote imprinting of moiré
+lattices, Nature Materials 23, 219 (2024).
+[42] X. Wang, C. Xu, S. Aronson, D. Bennett, N. Paul,
+P. J. Crowley, C. Collignon, K. Watanabe, T. Taniguchi,
+R. Ashoori, et al., Moiré band structure engineering using a twisted boron nitride substrate, Nature Communications 16, 178 (2025).
+[43] S. A. A. Ghorashi, A. Dunbrack, A. Abouelkomsan,
+J. Sun, X. Du, and J. Cano, Topological and stacked flat
+bands in bilayer graphene with a superlattice potential,
+Phys. Rev. Lett. 130, 196201 (2023).
+[44] S. A. A. Ghorashi and J. Cano, Multilayer graphene
+with a superlattice potential, Phys. Rev. B 107, 195423
+(2023).
+[45] Y. Zeng, T. M. R. Wolf, C. Huang, N. Wei, S. A. A.
+Ghorashi, A. H. MacDonald, and J. Cano, Gate-tunable
+topological phases in superlattice modulated bilayer
+graphene, Phys. Rev. B 109, 195406 (2024).
+[46] T. Tan, A. P. Reddy, L. Fu, and T. Devakul, Designing topology and fractionalization in narrow gap semiconductor films via electrostatic engineering, Phys. Rev.
+Lett. 133, 206601 (2024).
+[47] F. Wu, T. Lovorn, E. Tutuc, and A. H. MacDonald, Hubbard model physics in transition metal dichalcogenide
+moiré bands, Phys. Rev. Lett. 121, 026402 (2018).
+[48] See Supplemental Material, which includes Refs. [68–70],
+for details of the mean-field calculations and phase diagrams at different parameters.
+[49] For laterally aligned double-moirés described by a
+Hubbard-like model [29], the energy scale of spin order
+is ∼ t2 /U with hopping t and intralayer onsite repulsion
+U , while the energy scale of layer order is ∼ t2 /V where
+V ≪ U is the interlayer onsite repulsion. As the two
+moirés are laterally shifted, V decreases while U stays
+unchanged, enlarging the separation of energy scales.
+[50] F.-C. Wu, F. Xue, and A. H. MacDonald, Theory of twodimensional spatially indirect equilibrium exciton condensates, Phys. Rev. B 92, 165121 (2015).
+[51] F. D. M. Haldane, Model for a quantum hall effect without landau levels: Condensed-matter realization of the
+“parity anomaly”, Phys. Rev. Lett. 61, 2015 (1988).
+[52] Y. Zeng, D. Guerci, V. Crépel, A. J. Millis, and J. Cano,
+Sublattice structure and topology in spontaneously crystallized electronic states, Phys. Rev. Lett. 132, 236601
+(2024).
+[53] T. Li, S. Jiang, B. Shen, Y. Zhang, L. Li, Z. Tao, T. Devakul, K. Watanabe, T. Taniguchi, L. Fu, et al., Quantum anomalous hall effect from intertwined moiré bands,
+Nature 600, 641 (2021).
+[54] W. Zhao, K. Kang, Y. Zhang, P. Knüppel, Z. Tao,
+L. Li, C. L. Tschirhart, E. Redekop, K. Watanabe,
+T. Taniguchi, et al., Realization of the haldane chern in-
+
+sulator in a moiré lattice, Nature Physics 20, 275 (2024).
+[55] Z. Tao, B. Shen, S. Jiang, T. Li, L. Li, L. Ma, W. Zhao,
+J. Hu, K. Pistunova, K. Watanabe, T. Taniguchi, T. F.
+Heinz, K. F. Mak, and J. Shan, Valley-Coherent Quantum Anomalous Hall State in AB-Stacked MoTe2 /WSe2
+Bilayers, Phys. Rev. X 14, 011004 (2024).
+[56] Z. Dong and Y.-H. Zhang, Excitonic Chern insulator and
+kinetic ferromagnetism in a MoTe2 /WSe2 moiré bilayer,
+Phys. Rev. B 107, L081101 (2023).
+[57] Y.-M. Xie, C.-P. Zhang, and K. T. Law, Topological
+px + ipy intervalley coherent state in moiré MoTe2 /WSe2
+heterobilayers, Phys. Rev. B 110, 045115 (2024).
+[58] Y. Yang, M. A. Morales, and S. Zhang, Metal-insulator
+transition in a semiconductor heterobilayer model, Phys.
+Rev. Lett. 132, 076503 (2024).
+[59] Y. Yang, M. A. Morales, and S. Zhang, Ferromagnetic
+semimetal and charge-density wave phases of interacting electrons in a honeycomb moiré potential, Phys. Rev.
+Lett. 133, 266501 (2024).
+[60] G. Carleo and M. Troyer, Solving the quantum manybody problem with artificial neural networks, Science
+355, 602 (2017).
+[61] X. Li, Y. Qian, W. Ren, Y. Xu, and J. Chen, Emergent
+wigner phases in moiré superlattice from deep learning,
+arXiv preprint arXiv:2406.11134 (2024).
+[62] D. Luo, D. D. Dai, and L. Fu, Simulating moiré
+quantum matter with neural network, arXiv preprint
+arXiv:2406.17645 (2024).
+[63] M. Geier, K. Nazaryan, T. Zaklama, and L. Fu, Selfattention neural network for solving correlated electron
+problems in solids, Phys. Rev. B 112, 045119 (2025).
+[64] X. Li, Y. Chen, B. Li, H. Chen, F. Wu, J. Chen,
+and W. Ren, Deep learning sheds light on integer
+and fractional topological insulators, arXiv preprint
+arXiv:2503.11756 (2025).
+[65] D. Luo, T. Zaklama, and L. Fu, Solving fractional electron states in twisted MoTe2 with deep neural network,
+arXiv preprint arXiv:2503.13585 (2025).
+[66] Y. Zeng, V. Crépel, and A. J. Millis, Keldysh field theory of dynamical exciton condensation transitions in
+nonequilibrium electron-hole bilayers, Phys. Rev. Lett.
+132, 266001 (2024).
+[67] Z. Sun, Y. Murakami, F. Xuan, T. Kaneko, D. Golež,
+and A. J. Millis, Dynamical exciton condensates in biased electron-hole bilayers, Phys. Rev. Lett. 133, 217002
+(2024).
+[68] N. Marzari and D. Vanderbilt, Maximally localized generalized wannier functions for composite energy bands,
+Phys. Rev. B 56, 12847 (1997).
+[69] N. Marzari, A. A. Mostofi, J. R. Yates, I. Souza, and
+D. Vanderbilt, Maximally localized wannier functions:
+Theory and applications, Rev. Mod. Phys. 84, 1419
+(2012).
+[70] J. Kang and O. Vafek, Non-abelian dirac node braiding
+and near-degeneracy of correlated phases at odd integer filling in magic-angle twisted bilayer graphene, Phys.
+Rev. B 102, 035161 (2020).
+
+8
+
+Supplemental Material for “Topological excitonic insulators in electron bilayers
+modulated by twisted hBN”
+
+I.
+
+DETAILS OF MEAN-FIELD CALCULATIONS
+A.
+
+Single-band projection
+
+The single-particle part of the continuum-model Hamiltonian Hl (l = t, b) can be diagonalized in plane-wave basis:
+X X (n) †
+X (n) †
+Hl =
+εk,l ak,l,n ak,l,n , a†k,l,n =
+uk+g,l ck+g,l ,
+(S1)
+k∈mBZ n
+
+g
+
+where g represents reciprocal lattice vectors. Assuming that the topmost miniband is separated from the other bands
+by a large enough gap, we keep only the topmost band (n = 0) from each layer and suppress the band index in the
+P
+following. The projected Hamiltonian H = H0 + Hint consists of the single-particle term H0 = k,l εk,l a†k,l ak,l and
+the interaction term
+′
+1 XX
+Vll′ (q)Λlk (q)Λlk′ (−q)a†k+q,l a†k′ −q,l′ ak′ ,l′ ak,l ,
+(S2)
+Hint =
+2A ′
+′
+ll
+
+kk q
+
+where the form factor Λlk (q) ≡ g u∗k+q+g,l uk+g,l . Here and below k, k′ represent momenta within the first mBZ
+and q runs over the infinite momentum space.
+The operator a†k,l has a gauge degree of freedom related to the U(1)-phase choice at each k. In order to have a
+P
+smoothly defined layer pseudospin, we choose a smooth gauge such that the operator k a†k,l creates a localized state
+in real space. While the gauge for maximally localized Wannier functions can be obtained by the method introduced
+P
+2 2
+in Refs. [68, 69], here it suffices to construct a Gaussian wave function |ψr0 ⟩ = kg e−(k+g) w /2 e−i(k+g)·r0 |k + g⟩
+with localization length w and localization center r0 and fix the phase of any Bloch state |uk ⟩ by the projection
+"
+#
+X
+X
+∗
+−(k+g)2 w2 /2 −i(k+g)·r0
+|uk ⟩ =
+uk+g |k + g⟩ → |uk ⟩ arg(⟨uk |ψr0 ⟩) = |uk ⟩ arg
+uk+g e
+e
+.
+(S3)
+P
+
+g
+
+g
+
+√
+For the moiré band states in this work, we choose r0,t = (am / 3, 0) and r0,b = (2am / 3, 0) to be a set of neighboring
+sites where the moiré potential takes its maximum value in the top and bottom layers and wt = (ℏ2 a2m /8π 2 mVm )1/4
+and wb = wt α−1/4 to be the corresponding oscillator lengths near the potential maxima.
+√
+
+B.
+
+Hartree-Fock equations
+
+The Hartree-Fock equations are obtained by decomposing the interaction Hamiltonian Hint into the Hartree term
+′
+1 XX
+ΣH =
+Vll′ (g)Λlk (g)Λlk′ (−g)ρl′ l′ (k′ )a†k,l ak,l
+(S4)
+A ′
+′
+ll
+
+kk g
+
+and the Fock term
+ΣF = −
+
+′
+1 XX
+Vll′ (k′ − k + g)Λlk (k′ − k + g)Λlk′ (k − k′ − g)ρl′ l (k′ )a†k,l′ ak,l ,
+A ′
+′
+
+ll
+
+(S5)
+
+kk g
+
+where ρl′ l (k) ≡ ⟨a†k,l ak,l′ ⟩ − δl′ l is the single-particle density matrix of the Hartree-Fock ground state subtracted by
+that of the fully filled valence band. In the numerical calculations we use the dual-gate-screened Coulomb interaction
+(see Ref. [70] for a derivation)
+2πe2 (eqd − e−qdg )(e−qd − e−qdg )
+,
+ϵq
+1 − e−2qdg
+2πe2 eqd (e−qd − e−qdg )2
+Vll′ (q) =
+, l ̸= l′ ,
+ϵq
+1 − e−2qdg
+
+Vll′ (q) =
+
+l = l′ ,
+
+(S6)
+(S7)
+
+9
+
+metal
+
+20
+
+p-EI
+
+s-EI
+
+40
+6
+
+VD (meV)
+
+NEI
+
+10
+
+30
+
+metal
+
+0
+10
+
+NEI
+
+s-EI
+
+20
+30
+
+p-EI
+LP
+
+5
+
+6
+
+7
+
+8
+
+9
+
+Vm (meV)
+
+10
+
+NEI
+
+s-EI
+3.5
+
+4.0
+
+11
+
+12
+
+50
+25
+0
+25
+50
+75
+100
+
+4.5
+
+Vm (meV)
+
+5.0
+
+LP
+
+5.5
+
+6.0
+
+10
+
+NEI
+
+s-EI
+15
+
+s-EI
+
+20
+
+Vm (meV)
+
+LP
+6
+
+8
+
+10
+
+Vm (meV)
+
+25
+
+30
+
+1.5
+
+14
+
+s-EI
+
+0 metal
+10
+
+12
+
+LP
+p-EI
+
+NEI
+
+s-EI
+
+20
+
+LP
+10
+
+20
+
+NEI
+
+(f) 20
+
+LP
+p-EI
+
+p-EI
+
+0 metal
+
+60
+
+s-EI
+metal
+
+s-EI
+
+20
+
+40
+
+100
+
+s-EI
+
+10
+
+p-EI
+
+10
+
+(e) 75
+
+LP
+
+20
+
+metal
+
+LP
+
+40
+
+s-EI
+
+10
+
+30
+3.0
+
+12
+
+Vm (meV)
+
+20
+
+0
+
+(c) 60
+
+LP
+
+20
+
+LP
+8
+
+30
+
+VD (meV)
+
+0
+
+VD (meV)
+
+s-EI
+
+VD (meV)
+
+VD (meV)
+
+20
+
+(d)
+
+(b)
+
+LP
+
+VD (meV)
+
+(a) 40
+
+LP
+2.0
+
+2.5
+
+3.0
+
+3.5
+
+Vm (meV)
+
+4.0
+
+4.5
+
+5.0
+
+FIG. S1. Mean-field phase diagrams at (a) α = 0.5, ϵ = 6, d = 4 nm, am = 8 nm; (b) α = 1, ϵ = 6, d = 3 nm, am = 8 nm;
+(c) α = 1, ϵ = 6, d = 5 nm, am = 8 nm; (d) α = 1, ϵ = 10, d = 4 nm, am = 8 nm; (e) α = 1, ϵ = 6, d = 4 nm, am = 6 nm; (f)
+α = 1, ϵ = 6, d = 4 nm, am = 10 nm.
+
+where dg is the distance between the top and bottom gates. In our calculations we take dg = 50 nm although the
+precise value of dg does not affect our main results. The mean-field ground state is obtained by solving the HartreeFock equations self-consistently. The numerical calculations are performed on a 15 × 15 k-grid in the mBZ and with
+reciprocal lattice vectors cut off at 4|g1 | which ensures convergence of the results.
+II.
+
+PHASE DIAGRAMS
+
+Fig. S1 shows the mean-field phase diagrams at different parameters (layer asymmetry α, dielectric constant ϵ,
+interlayer distance d, and moiré length am ) from Fig. 3 in the main text. All the phase diagrams are qualitatively
+similar in trend, but the precise parameter (Vm , VD ) values of phase boundaries are sensitive to the other parameters
+(α, ϵ, d, am ). Roughly speaking, the metallic and p-EI phases tend to occupy a larger region in the phase diagram
+when the interaction strength is reduced by increasing ϵ, increasing d, or decreasing am .
+
+

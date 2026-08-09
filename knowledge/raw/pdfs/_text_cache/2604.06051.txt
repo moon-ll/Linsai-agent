@@ -1,0 +1,1204 @@
+Disentangling High Harmonic Generation from
+Surface and Bulk States of a Topological Insulator
+Sha Li,1, ∗ Wenyi Zhou,1 Kazi A. Imroz,1 Yaguo Tang,1, † Tiana A. Townsend,1
+
+arXiv:2604.06051v1 [cond-mat.mes-hall] 7 Apr 2026
+
+Vyacheslav Leshchenko,1 Larissa Boie,1 Pierre Agostini,1 Alexandra S.
+Landsman,1 Roland K. Kawakami,1 Lun Yue,2, ‡ and Louis F. DiMauro1
+1
+
+Department of Physics, The Ohio State University, Columbus, Ohio 43210, USA
+2
+
+Department of Physics, Applied Physics and Astronomy,
+
+Binghamton University, Binghamton, New York 13902, USA
+
+Abstract
+The discovery of topological phases has introduced a new dimension to materials science. Threedimensional (3D) topological insulators (TIs) are a remarkable class of matter that is insulating in
+the bulk while hosting conductive topological surface states (TSSs) with unique charge and spin
+properties. High-order harmonic generation (HHG) has emerged as a powerful tool to probe condensed matter systems by providing insights into their electronic structure and dynamic behavior.
+Here, we investigate HHG in the prototype 3D-TI Bi2 Se3 . We demonstrate that the contributions
+of bulk and surface states to the harmonic emission can be controlled by tuning the thickness of
+thin film samples. An ultrathin (6 nm) film substantially enhances HHG from the surface states,
+while the bulk states dominate HHG in a thicker (50 nm) film. By applying a quasi-static terahertz
+perturbing field, we disentangle the bulk and surface responses and reveal the significant impact of
+the surface states’ shift vector and Berry curvature on HHG. Our study provides effective methods
+for isolating the optical responses of TSSs from those of the bulk, which opens the door to resolving an ongoing debate regarding whether it is possible to reliably extract topological signatures in
+HHG.
+
+∗
+
+li.8187@osu.edu
+
+†
+
+Present address: SLAC National Accelerator Laboratory, Menlo Park, California 94025, USA
+
+‡
+
+lyue2@binghamton.edu
+
+1
+
+INTRODUCTION
+
+In the 1980s, foundational concepts related to topological phenomena, particularly in the
+context of the quantum Hall effect, were established [1–3], leading to a new paradigm for
+classifying materials based on their topological order. Three-dimensional (3D) topological
+insulators (TIs) [4, 5] are a quantum phase of matter that is insulating in the bulk but
+conductive on the surface. The metallic surface arises from the presence of gapless Dirac
+cone topological surface states (TSSs), which are inherently tied to the non-trivial topology
+of the bulk band structure that experiences a band inversion under time-reversal symmetry
+(TRS) and strong spin-orbit coupling (SOC).The TSSs are robust against time-reversalpreserving (e.g., non-magnetic) perturbations and exhibit unique properties [4, 5]: they are
+spin-polarized, and the spin and momentum of the charge-carriers are locked at a right angle (spin-momentum locking). Additionally, their helical spin texture supports chiral spin
+current, the spin-momentum locking prevents back-scattering allowing for dissipationless
+charge and spin transport, and the spin vortex induces a π Berry phase [6] in the wavefunction when looping around the Dirac point. These properties make 3D-TIs of substantial
+fundamental and practical interest.
+Methods for exploring TIs include (spin and) angular resolved photoelectron spectroscopy
+(s-ARPES) [7–9], measurement of the (quantum) Hall effect [10, 11], and circular dichroism
+examination [12], which are employed to probe intrinsic properties of TIs or their perturbative interactions with light. Recently, high-order harmonic generation (HHG) has been
+observed in 3D-TIs [13–15], offering an all-optical probe of them interacting with strong
+fields. HHG is a frequency up-conversion process that occurs when a strong laser field interacts with matter, typically atomic or molecular gases [16]. It is a hallmark of ultrafast
+physics and a key method for generating extreme-ultraviolet (XUV) and X-ray photons as
+well as attosecond pulses. The realization of HHG in solid-state systems [17] has launched
+extensive efforts to uncover ultrafast charge-carrier dynamics in strong-field-driven solids
+and to exploit high-harmonic spectroscopy as a probe of condensed-matter properties [18].
+The ability of HHG to probe topology has recently become a topic of animated debate. On one hand, a number of influential works have highlighted intriguing features in
+the HHG spectra of materials with non-trivial topology. For instance, the carrier-envelopephase-dependent, non-integer “harmonic” generation from TSSs has been explained by the
+2
+
+ballistic acceleration of Dirac fermions through the vicinity of the Dirac point [14, 19]. The
+“anomalous” (non-gas-like) dependence of the harmonic yield on the driving laser ellipticity has been attributed to the vortex spin texture and the hexagonal warping of the TSSs
+[15, 20]. Calculations of modeled systems have predicted orders of magnitude enhancement
+in harmonic conversion efficiency [21] and sign flipping of harmonic light helicity [22] between the non-trivial and trivial topological phases. On the other hand, a subsequent work
+has suggested that the non-integer harmonics were due to the chirp of the driving pulse [23].
+Anomalous HHG driven by elliptically or circularly polarized light has also been observed
+in many topologically trivial materials [24–26] and hence alone may not reflect the system’s topology. Furthermore, a numerical study cast doubt on the reliability of extracting
+topological phases via HHG from prior works [27].
+A serious challenge in probing TSSs via HHG is suppressing the responses of bulk states.
+Due to the very small bulk band gap of TIs, charge-carrier excitation and harmonic generation in the bulk can easily be triggered by a strong laser field. In addition, typically,
+mid-infrared (MIR) and long-wavelength infrared (LWIR) pulses are used to drive HHG in
+TIs, producing harmonic light in the visible to infrared wavelength regime. The absorption lengths of the fundamental and harmonic light are respectively >100 nm and ∼20-30
+nm [28], while the TSSs only have a penetration depth of less than 2 nm [29]. Therefore,
+even in reflection geometry, the contribution of bulk states to the harmonic emission can be
+significant, particularly when only in-plane responses are considered.
+Nevertheless, experiments can be carefully designed to selectively probe HHG from the
+surface states. For the Bi2 Se3 family of TIs, the bulk belongs to the inversion symmetric D3d
+point group while the surface symmetry reduces to C3v . As a result, even-order harmonics
+arising from electric-dipole transitions are permitted only from the surface, with their relative
+efficiency serving as a potential indicator of the contribution of surface states to HHG.
+Ref. [14] suggests that by using a weak below-band gap driving field, HHG in the bulk of
+Bi2 Te3 can be strongly suppressed. The spectrum consisting of commensurate odd- and evenorder harmonic light has been attributed to the TSSs. However, for Bi2 Se3 and BiSbTeSe2
+(BSTS), most previous studies have reported the yields of even-order harmonics that are 2-3
+orders of magnitude weaker than those of the odd-orders [13, 15], suggesting that harmonic
+emission from the surface states is weak.
+While most previous studies either assumed that HHG originates solely from the surface
+3
+
+or lacked solid evidence to support this claim—particularly for odd-order harmonics, which
+are allowed from both the bulk and surface states—this manuscript presents a novel approach
+for studying HHG in the prototype 3D-TI Bi2 Se3 and addresses the following key question:
+How can we suppress/enhance harmonic emission from the bulk/surface states and effectively
+distinguish between these contributions? We demonstrate: 1. The contributions of bulk and
+surface states to the MIR-driven HHG can be controlled by tuning the thickness of thin film
+samples. An ultrathin (6 nm) film substantially enhances HHG from the surface states,
+while the bulk states dominate HHG in a thicker (50 nm) film. 2. Introducing a quasistatic terahertz (THz) perturbing field, i.e., a MIR-THz two-color field scheme, provides
+an unambiguous method to differentiate between the bulk and surface HHG responses,
+applicable to both the even- and odd-order harmonic light. Our study provides effective
+methods for isolating TSSs from the bulk, paving the way for further exploration of the role
+of non-trivial topology in HHG.
+Symmetry is important throughout our discussion. Henceforth we will use P- and T to denote parity (inversion) and time-reversal symmetry, respectively. For convenience, the
+real-space crystal orientation is described using the corresponding reciprocal-space symmetry
+directions ΓM or ΓK (see Fig. 1).
+
+RESULTS AND DISCUSSION
+
+The experiments are conducted with normal incident light in transmission geometry. A
+strong 60 fs, 3.6 µm MIR pulse drives HHG in the (111) plane of Bi2 Se3 thin-film crystal
+grown on (0001) Al2O3 substrate. A weak ∼2 ps period single-cycle THz pulse is applied
+to perturb or control the HHG process. The THz field is considered quasi-static since its
+period is much longer than the MIR pulse duration. Both the MIR and THz fields are linearly
+polarized along the vertical direction in the laboratory frame, and the crystal can be oriented
+with respect to the laser polarization. Harmonic light is dispersed by a monochromator and
+detected by an ICCD camera. The harmonic polarization is analyzed using a Rochon prism.
+Detailed experimental setup can be found in the “Methods” section.
+4
+
+Experimental concept
+
+According to Floquet group theory and electric dipole selection rules, the forbidden evenorder HHG in a P-invariant medium driven by a monochromatic laser field arises from the
+H(r, t) = H(−r, t + T0 /2) dynamical symmetry of the Hamiltonian [30, 31], here T0 is the
+laser period. An intrinsic P-violation of the medium or an asymmetric driving field F(t) ̸=
+−F(t + T0 /2) both can break this symmetry and promote even-order harmonic emission.
+Our experiments exploit this principle, we introduce an asymmetry in the driving field
+by applying a quasi-static THz perturbation, and demonstrate that the coupling between
+intrinsic and THz-field-induced symmetry breaking enables the differentiation of surface
+(P-violated) and bulk (P-invariant) HHG responses in Bi2 Se3 .
+Intrinsic P-violation that gives rise to even-order optical responses is often characterized
+by vector quantities. For instance, non-zero Berry curvature (Ω, pseudovector) and shift
+vector (R, polar vector) due to P-violation are crucial for the generation of even-order
+harmonics. Figure 2 shows Ω and R for the TSSs of Bi2 Se3 . Phenomenologically, they
+can be understood as vectors that define the directions of symmetry breaking in the crystal
+frame, similar to the spin of spin-polarized molecules or the polar axis of polar molecules.
+In condensed matter physics, Ω plays an essential role in phenomena such as the anomalous
+Hall effect [32, 33], while R contributes to the shift current photovoltaic effect [34–36]. The
+roles of Ω and R in strong-field HHG have been actively studied recently [37–39], and a brief
+discussion is provided in Supplementary Information (SI) Section 3. Quantitative analysis of
+HHG with non-zero Ω and R not only offers a means to extract intrinsic material properties
+but also deepens our understanding of the HHG dynamics in solids [40–43].
+In this study, we demonstrate that the bulk (Ω = 0, R = 0) and surface (Ω ̸= 0, R ̸= 0)
+states of Bi2 Se3 produce distinct harmonic spectra, and respond differently to the THz
+perturbation. Moreover, the interplay between intrinsic and THz-field-induced symmetry
+breaking in TSSs enables us to probe the roles of the shift vector and Berry curvature in
+HHG. The expected experimental outcomes are summarized in Fig. 1. To support the key
+features of our experimental observations, we perform time-dependent strong-field simulations using a tight-binding model for the TSSs combined with a gauge-invariant formulation
+of the semiconductor Bloch equations (see “Methods” for simulation details and SI Section
+4 for simulation results).
+5
+
+Control HHG from the bulk and surface states by thin film thickness
+
+The experiments that compare the bulk- and surface-dominated HHG responses are realized with high quality thin film samples of varying thicknesses. Given the extremely short
+penetration depth (∼2 nm) of the TSSs, we fabricate an ultrathin film with a thickness of
+6 nm (≈1 nm per layer) such that it primarily consists of two (top and bottom) surfaces
+while the bulk volume is minimized. This thickness is chosen because studies have shown
+that when the film is thinner than 5-6 nm, the interaction between top and bottom TSSs
+results in re-opening of the band gap and the material may lose its non-trivial topology [44].
+For comparison, we also prepare a thick film of 50 nm thickness to represent a sample with
+maximized effective bulk volume. Films thicker than 50 nm do not further enhance the bulk
+HHG due to the short absorption length of the harmonic light.
+Figure 3 shows the harmonic spectra for the 6 and 50 nm samples. Due to the longer
+effective interaction length for HHG, the total harmonic yield for the 50 nm sample is a few
+times stronger than that for the 6 nm sample. However, the even-order harmonics, which
+can only be generated from the P-violated surface, are nearly two orders of magnitude
+stronger in the 6 nm sample compared to the 50 nm sample, suggesting that the surface
+states’ HHG is significantly enhanced in the ultrathin film. When the MIR driving field is
+polarized along the ΓK direction, the yields of adjacent odd and even harmonic orders are
+commensurate, similar to the LWIR-driven HHG in Bi2 Te3 in reflection geometry [14]. Such
+efficient relative even-order harmonic conversion strongly indicates that in the ultrathin film,
+HHG is dominated by the surface states.
+To investigate how HHG from the bulk and surface states evolves with the film thickness,
+we measure the harmonic yields for samples of varying thickness. The results are shown
+in Fig. 4. The total harmonic yield increases with the film thickness and peaks at about
+20 nm. This saturation behavior is attributed to the short absorption lengths of both the
+fundamental and harmonic light, as well as thin film interference and self-phase modulation
+of the fundamental light which may affect the laser peak intensity. In contrast, the total
+yield of surface-exclusive even-order harmonics increases as the film thickness decreases, with
+a steep rise below 10 nm. This sharp transition and significant increase of surface HHG in
+films thinner than 10 nm cannot be explained by light absorption alone. It indicates that
+the reduced bulk volume plays a central role in enhancing surface HHG and points to a
+6
+
+mechanism in which the bulk and surface of a TI are not fully isolated. We attribute this
+mechanism to bulk-surface electron scattering [45, 46], and provide a detailed discussion
+in SI Section 1. In brief, the photoexcited bulk electrons scatter into TSSs, incoherently
+generating excess hot electrons and increasing the electron-electron scattering within the
+surface during HHG, thereby suppressing the efficiency of surface HHG [47, 48]. Because
+bulk states are delocalized throughout the crystal while TSSs are confined within only ∼2
+nm near the surface, only bulk electrons sufficiently close to the surface scatter efficiently
+into TSSs. The observed transition near 10 nm therefore suggests an upper bound of ∼5
+nm for the bulk-surface coupling length (Supplementary Fig. S1).
+
+Disentangling HHG from the bulk and surface states with a terahertz field
+
+In this section, we confirm the dominant contributions of bulk and surface states to the
+HHG from the 50 nm and 6 nm samples, respectively, and verify the experimental concept
+introduced earlier: by applying a quasi-static terahertz perturbing field, the bulk and surface
+HHG responses are disentangled, allowing us to examine the influence of TSSs’ shift vector
+(R) and Berry curvature (Ω) on HHG.
+As shown in Fig. 2, along the ΓM direction, Ω vanishes and R exhibits only a longitudinal
+component, the polarity of R characterizes the direction of symmetry breaking in the crystal
+frame. We define M+ and M− such that Rk,y points from M− to M+ along ΓM. When the
+driving field is polarized along ΓM, dynamical symmetry restricts all the harmonic light to
+be polarized parallel to the driver (see Fig. 3a-top for measurement, and Supplementary
+Fig. S5 for simulation). Due to T -invariance, the band structure is symmetric regardless
+of bulk or surface states, therefore ΓM+ and ΓM− are indistinguishable from the harmonic
+yield with a monochromatic (bipolar) driver. However, for the TSSs, the polarity of R can
+be referenced by applying a polar THz perturbing field, which serves as a direct knob to tune
+the effect of R on HHG. In the experiments, we orient the crystal to compare HHG in the
+two cases where Rk,y points towards (ΓM+ ) or opposite (ΓM− ) to the instantaneous THz
+field direction, as shown in Fig. 5a. To the lowest order nonlinearity, this investigates the
+coupling between intrinsic and electric field-induced second harmonic generation (i-SHG and
+EFISHG [49]). The difference between the two cases can be understood through perturbative
+±
+nonlinear optics: P2ω
+= (χ(2) ∓ χ(3) FTHz )Fω2 , here P , F , and χ are absolute values of the
+
+7
+
+polarization, electric field, and susceptibility, respectively. Only the P-violated (χ(2) ̸= 0)
+surface states produce a difference in the harmonic yield (∝ P 2 ) between the two orientation
+configurations.
+Figure 5b shows the 6th - and 7th -order harmonic yields as a function of the MIR-THz
+time delay. For the 6 nm sample, both harmonics exhibit pronounced differences between the
+ΓM+ and ΓM− crystal orientations, while the differences are minimal for the 50 nm sample,
+indicating that these two harmonics are dominated by the surface and bulk states for the
+6 and 50 nm samples, respectively. At a fixed MIR-THz time delay, and from the 5th - to
+10th -order harmonics, Fig. 5c plots the contrast between the two crystal orientations, defined
+as the harmonic-yield difference divided by their sum, (Y+ − Y− )/(Y+ + Y− ). The contrast
+is a parameter reflecting the strength of surface states HHG as pure bulk responses yield
+a zero contrast. For the 50 nm sample, the contrast values remain very low across all the
+harmonic orders, suggesting a bulk-dominated HHG. For the 6 nm sample, large contrasts,
+a signature of surface-dominated HHG, are observed except for the 5th -order harmonic.
+Our measurements demonstrate that the influence of R on HHG can be probed by introducing a weak THz perturbation. Importantly, a recent theoretical study of HHG in ZnO
+driven by a single-color field concluded that R has little effect on odd-order harmonics [39].
+In contrast, our results highlight the crucial role of the THz perturbation in revealing the
+otherwise hidden impact of R on odd-order harmonic emission. Our simulations qualitatively reproduce the strong contrasts observed for the low-order harmonics (Supplementary
+Fig. S7), while for harmonics above the 9th -order the simulated contrasts become much
+smaller, indicating our current model does not fully capture the higher-order responses.
+The extremely small contrast of the 5th -order harmonic indicates that, under our experimental conditions, it is bulk-dominated even in an ultrathin (6 nm) film with minimum
+bulk volume. Additional HHG measurements by varying the MIR-THz time delay and by
+rotating the crystal orientation, presented in Supplementary Fig. S3, further support this
+conclusion. This counterintuitive behavior is likely due to strong bulk charge-carrier excitation induced by the relatively high fundamental photon energy (∼0.34 eV) above the bulk
+band gap (∼0.3 eV), which produces strong low-order harmonic emission from the bulk.
+In two-dimensional and topological materials, the Berry-curvature-induced perpendicular
+HHG (|j⊥,Ω | ∝ F × Ω) can be significant [14, 37]. Our approach provides a promising avenue
+to explore the Berry curvature effect on HHG by considering the case when the MIR driving
+8
+
+field is polarized along the ΓK direction, where the longitudinal component of R vanishes
+and symmetry breaking is characterized by the out-of-plane Ω (Fig. 2). In this case, the
+Hamiltonian possesses a ẐM = τ̂2 · σ̂vM reflection dynamical symmetry, restricting the oddand even- (if allowed) order harmonic light to be polarized parallel and perpendicular to the
+fundamental driving field, respectively (see Fig. 3b-top for measurement, and Supplementary
+Fig. S6 for simulation) [30]. Here τ̂2 and σ̂vM are the time translation (t → t+T0 /2) and mirror
+reflection (off the vertical mirror plane parallel to ΓM) operators. When a parallel THz field
+is applied, the ẐM symmetry is lifted, affecting the HHG in both dimensions. However,
+the harmonic modulation in the perpendicular direction reflects an exclusive surface states
+response. We measure this effect in the 6 and 50 nm samples, as shown in Fig. 6. In the
+perpendicular direction, only even-order harmonics are produced with the MIR driving field
+alone, applying the THz field not only suppresses the yields of even-order harmonics but also
+enables the generation of odd-order harmonics. Remarkably, for the surface-dominated 6 nm
+sample, the perpendicular harmonic yields exhibit pronounced modulations across the full
+spectrum, which are accurately captured by the simulated HHG spectra (Supplementary
+Fig. S8), demonstrating the effectiveness of this method for probing HHG from isolated
+surface states.
+In conclusion, we have demonstrated that the MIR-driven HHG from bulk and surface
+states of 3D-TI Bi2 Se3 can be controlled by varying the thickness of thin film samples. The
+substantial enhancement of surface HHG in ultrathin films (<10 nm) is attributed to reduced
+bulk-surface electron scattering. To probe TIs via high harmonic spectroscopy, it is crucial
+to disentangle the bulk and surface responses. We achieve this by employing a MIR-THz
+two-color field scheme. The observed effects of the TSSs’ shift vector and Berry curvature on
+HHG, probed by the THz field, are significant, making it intriguing to explore the potential
+role of non-trivial topology. Future experiments using ultrathin films with topologically
+trivial and non-trivial surface states (controllable through doping [50]), in comparison with
+theoretical calculations, could provide deeper insights. In addition, the concepts introduced
+in this work—controlling the ratio of surface area to bulk volume by varying the thin film
+thickness, and exploiting the coupling between intrinsic and field-induced symmetry breaking
+to distinguish surface and bulk optical responses—are broadly applicable and will provide
+valuable guidance for future experimental designs of probing TSSs beyond HHG studies.
+Finally, we note that whether the non-trivial topological features of the bulk states, such
+9
+
+as the band inversion, produce distinctive HHG signatures has largely been overlooked and
+merits future investigations.
+
+METHODS
+
+Experimental setup
+
+In the experiments, ∼60 fs (intensity FWHM), 3.6 µm (83.3 THz, 0.34 eV) MIR pulses
+are generated from an optical parametric amplifier based on KTiOAsO4 (KTA) crystals.
+Single-cycle ∼2 ps period (600 µm, 0.5 THz, 2.1 meV) THz pulses are generated via tiltedpulse-front-pumping (TPFP) optical rectification in a LiNbO3 crystal. Both the MIR and
+the THz generations are pumped by laser pulses delivered from the same Ti:sapphire system
+(80 fs, 800 nm, 5.5 mJ, 1 kHz). The THz pulse characteristics (central frequency, asymmetry between positive and negative half-cycles, small satellite cycles before/after the main
+cycle) may have small day-to-day variations, however, these do not affect our study in this
+manuscript. The MIR and THz fields are linearly polarized in the laboratory frame vertical
+direction. The MIR intensity and polarization are controlled via a half-waveplate followed by
+a nano-particle polarizer (Thorlabs, extinction ratio (ER) > 106 ), and the THz intensity and
+polarization are controlled by a pair of wire grid polarizers (Specac, ER > 109 ). Harmonic
+light is collected by a visible-vacuum ultraviolet monochromator (VIS-VUV, 120-900 nm)
+and detected by a cooled ICCD camera (Princeton Instruments, 16 bits, noise level <5). The
+intensity standard deviation of the harmonic light is about 1%. The harmonic polarization
+is analyzed by an ultrabroad-bandwidth (130-7000 nm) Rochon prism (Edmund optics, ER
+> 105 ). The highly linearly polarized MIR and THz fields, high ER Rochon prism, and high
+dynamic range detector allow for high precision polarization measurements.
+The experiments are conducted with normal incident light in transmission geometry in
+ambient air. The samples are mounted frontwards (the lasers hit the thin film first and then
+the substrate). The focal size (1/e2 intensity diameter) of the MIR and THz beams are ∼220
+µm and ∼1.5 mm, respectively. In the experiments, the maximum applied MIR and THz
+peak intensities (in air) are ∼80 GW cm−2 and ∼0.48 GW cm−2 , respectively. We measure
+from the 5th - to 11th -order (327-720 nm) harmonic light. When pumping slightly above the
+crystal damage threshold, we are able to detect up to the 13th -order (277 nm) harmonic in
+10
+
+Bi2 Se3 .
+In this study, we only focus on the THz-field-induced symmetry breaking. However, we
+also notice that the extremely low-frequency THz pulse heats the crystal through incoherent
+charge-carrier acceleration. This heating lasts for several hundred picoseconds (verified by
+MIR-THz time delay scan), and globally reduces the HHG efficiency.
+
+Sample preparation
+
+The highly-crystalline (111) Bi2 Se3 thin films are deposited in a Veeco 930 molecular beam
+epitaxy (MBE) system with a base pressure of 2 × 10−10 Torr. The 0.5 mm thick (0001)
+Al2 O3 substrates (MTI Corporation), chosen for their favorable lattice and symmetry match,
+are sonicated in acetone, methanol, and isopropyl alcohol for five min each, and annealed
+in air at 1000 ◦ C for three hours before loading into the MBE chamber. The substrates are
+then brought up to 800 ◦ C in the ultra-high vacuum chamber to de-gas for an hour prior to
+growth. For synthesis, the films are grown by co-depositing Bi (99.95%, Alfa Aesar) and Se
+(99.999%, Puratronic) with an atomic flux ratio of ∼1:30. Substrate is first heated up to 260
+◦
+
+C to grow Bi2 Se3 for 2 min, then annealed at 550 ◦ C to evaporate it off. Substrate is then
+
+cooled down to 260 ◦ C to deposit Bi2 Se3 buffer layer for 2 min again before heated up to
+360 ◦ C to deposit until the desired thickness is reached. The pre-growth procedure of buffer
+layers is aimed to reduce twinning domains and surface roughness [51]. All Bi2 Se3 samples
+are capped with a 5 nm CaF2 protection layer to prevent oxidization and degradation.
+
+TSSs model and HHG simulation methods
+
+1. Tight-binding model
+We consider a tight-binding model for the TSSs in Bi2 Se3 [20, 52–54] previously derived
+in Ref. [20], which captures the correct symmetries of the TSSs and their properties such as
+spin-momentum locking and hexagonal warping [55] at large crystal momenta.
+The Hamiltonian of the TSSs can be parametrized to the form
+k
+
+H =
+
+3
+X
+
+Bik σi ,
+
+(1)
+
+i=0
+
+with k = (kx , ky ) the in-plane crystal momenta, σ0 ≡ I the identity matrix, {σi , i = 1, 2, 3}
+11
+
+the Pauli matrices, and {Bik , i = 1, 2, 3} are functions defined in the tight-binding model
+[20]. As usual, it is convenient to consider the system as an analog to a spin- 12 particle in a
+qP
+3
+k
+pseudo-magnetic field, and define polar and azimuthal angles as [56] cos θk = B3k /
+i=1 Bi
+qP
+3
+k
+and ϕk = arg(B1k + iB2k ), where B k ≡
+i=1 Bi . The eigenstates can then be written in
+a particular gauge as
+
+|uk+ ⟩ = 
+
+
+
+cos θ2k
+eiϕk sin θ2k
+
+
+
+
+
+e
+sin θ2k
+.
+|uk− ⟩ = 
+− cos θ2k
+
+,
+
+−iϕk
+
+(2)
+
+with the eigenenergies
+E±k = B0k ± B k .
+
+(3)
+
+Here “+” and “−” correspond to the Dirac cone upper and lower states, respectively.
+We obtain analytical forms of gauge-invariant quantities such as the absolute value of the
+k
+transition dipoles dka , the (out-of-plane) Berry curvature Ωk± and the shift vectors Rab
+
+(a = x, y and b = x, y specify a particular Cartesian vector component)
+dka
+
+= ⟨uk+ | ∂a |uk− ⟩
+
+= 41
+
+q
+
+(∂a ϕk )2 sin2 θk + (∂a θk )2
+
+Ωk± = − 2 Im ⟨∂x uk± ⟩ ∂y uk± = ± 21 sin θk [∂x ϕk ∂y θk − ∂x θk ∂y ϕk ]
+h
+i
+k
+k
+k
+Rab =∆Aa − ∂a arg(db ) = ∂a ϕk cos θk − ∂a arg ∂b ϕk sin θk + i∂b θk ,
+
+(4a)
+(4b)
+(4c)
+
+where we have used the notation ∂a ≡ ∂/∂ka , a = x, y for the partial derivates. For brevity,
+here we have not fully expanded Eq. (4c).
+2. Gauge-invariant dynamics
+We implemented a gauge-invariant formulation of the semiconductor Bloch equations
+(GI-SBEs) [39] to simulate the dynamics of the TSSs driven by intense, linearly polarized
+electric fields. In such a formalism, each term in the GI-SBEs is gauge invariant, which
+allows us to turn on/off certain properties such as dipole magnitudes and shift vectors to
+observe their contributions to the dynamics. We work in the dipole approximation, using a
+vector potential on the form A(t) = A(t)n̂ = [AMIR (t) + ATHz (t)] n̂, with n̂ the polarization
+unit vector. The electric field is then obtained by F(t) = −Ȧ(t) = F (t)n̂. In a frame moving
+with the vector potential A(t), or equivalently, in a basis spanned by the Houston states
+12
+
+[57, 58], the two-band GI-SBEs take on the form
+f˙±K (t) = ∓ 2F (t)|dK+A(t) | Im[P K (t)] − [f±K (t) − f0K ]/T1
+
+
+Ṗ K (t) = − i ∆E K+A(t) + F(t) · RK+A(t) P K (t)
+
+(5a)
+
++ iF (t)|dK+A(t) |∆f K (t) − P K /T2
+
+(5b)
+
+K
+with f±K the band populations (diagonal elements of the density matrix f±K ≡ ρK
+the
+±± ), P
+k
+k
+k
+band coherences (off-diagonal parts of the density matrix P K ≡ ρK
++− ), ∆E ≡ E+ − E− the
+
+band gap, ∆f K ≡ f+K − f−K the population difference, dk ≡ n̂ · dk the dipole along n̂, Rk
+the shift vector “along” n̂, i.e.,
+
+
+ Rk,x ≡ (Rk , Rk )
+xx
+yx
+k
+R =
+
+ Rk,y ≡ (Rk , Rk )
+xy
+yy
+
+for n̂ = x̂
+
+(6)
+
+for n̂ = ŷ.
+
+Phenomenological dephasing and decay times within the relaxation-time approximation,
+T2 = 10 fs and T1 = 1 ps, are included to mimic elastic and inelastic electron scattering [19].
+The initial condition is chosen as P K (0) = 0 and f±K (0) = f0K , where f0K is the Fermi-Dirac
+distribution at 300 K and at a Fermi level of 0.25 eV above the Dirac point.
+The total current along the Cartesian direction a is
+ja (t) = −
+
+X
+
+K+A(t) K
+K+A(t) K
+f+ (t) − ∂a E−
+f− (t)
+
+∂a E+
+
+K
+
+−2
+
+X
+
+∆E
+
+K+A(t)
+
+n
+
+|dK+A(t)
+| Im
+a
+
+K+A(t)
+
+K −i[arg(da
+
+P e
+
+)−arg(dK+A(t) )]
+
+o
+
+(7)
+
+K
+
+and the harmonic intensity along a specific polarization ŝ is then calculated as Sŝ (ω) ∝
+ω 2 |j̃(ω) · ŝ|, where j̃(ω) is the Fourier transform of the current j(t) weighted with a cos2
+mask. In addition, the contribution from the anomalous current depending on the Berry
+curvature can be calculated as
+janom (t) = −F(t) ×
+
+i
+X h K+A(t)
+K+A(t) K
+Ω−
+f−K (t) + Ω+
+f+ (t) .
+
+(8)
+
+K
+
+For convenience, in the main text, when the Berry curvature and shift vector are introduced conceptually, we omit their explicit k-dependence and denote them as Ω and R,
+provided no ambiguity arises.
+
+13
+
+DATA AVAILABILITY
+
+Source data for Figures 3-6 in the main manuscript are provided with this paper.
+
+CODE AVAILABILITY
+
+The codes for calculating HHG from topological surface states of Bi2 Se3 are available
+upon reasonable request.
+
+[1] von Klitzing, K., Dorda, G. & Pepper, M. New method for high-accuracy determination of
+the fine-structure constant based on quantized hall resistance. Phys. Rev. Lett. 45, 494-497
+(1980).
+[2] Laughlin, R. B. Anomalous quantum Hall effect: an incompressible quantum fluid with fractionally charged excitations. Phys. Rev. Lett. 50, 1395-1398 (1983).
+[3] Thouless, D. J., Kohmoto, M., Nightingale, M. P. & den Nijs, M. Quantized Hall conductance
+in a two-dimensional periodic potential. Phys. Rev. Lett. 49, 405-408 (1982).
+[4] Hasan, M. Z. & Kane, C. L. Colloquium: topological insulators. Rev. Mod. Phys. 82, 30453067 (2010).
+[5] Qi, X.-L. & Zhang, S.-C. Topological insulators and superconductors. Rev. Mod. Phys. 83,
+1057-1110 (2011).
+[6] Berry, M. V. Quantal phase factors accompanying adiabatic changes. Proc. R. Soc. Lond. A
+392, 45-57 (1984).
+[7] Hsieh, D. et al. A topological Dirac insulator in a quantum spin Hall phase. Nature 452,
+970-974 (2008).
+[8] Chen, Y. L. et al. Experimental realization of a three-dimensional topological insulator,
+Bi2 Te3 . Science 325, 178-181 (2009).
+[9] Xia, Y. et al. Observation of a large-gap topological-insulator class with a single Dirac cone
+on the surface. Nat. Phys. 5, 398-402 (2009).
+[10] König, M. et al. Quantum spin Hall insulator state in HgTe quantum wells. Science 318,
+766-770 (2007).
+
+14
+
+[11] Chang, C.-Z. et al. Experimental observation of the quantum anomalous Hall effect in a
+magnetic topological insulator. Science 340, 167-170 (2013).
+[12] Wang, Y. H. et al. Observation of a warped helical spin texture in Bi2 Se3 from circular
+dichroism angle-resolved photoemission spectroscopy. Phys. Rev. Lett. 107, 207602 (2011).
+[13] Bai, Y. et al. High-harmonic generation from topological surface states. Nat. Phys. 17, 311-315
+(2021).
+[14] Schmid, C. P. et al. Tunable non-integer high-harmonic generation in a topological insulator.
+Nature 593, 385-390 (2021).
+[15] Heide, C. et al. Probing topological phase transitions using high-harmonic generation. Nat.
+Photon. 16, 620-624 (2022).
+[16] Ferray, M. et al. Multiple-harmonic conversion of 1064 nm radiation in rare gases. J. Phys. B:
+At. Mol. Opt. Phys. 21, L31 (1988).
+[17] Ghimire, S. et al. Observation of high-order harmonic generation in a bulk crystal. Nat. Phys.
+7, 138-141 (2011).
+[18] Ghimire, S. & Reis, D. A. High-harmonic generation from solids. Nat. Phys. 15, 10-16 (2019).
+[19] Reimann, J. et al. Subcycle observation of lightwave-driven Dirac currents in a topological
+surface band. Nature 562, 396-400 (2018).
+[20] Baykusheva, D. et al. Strong-field physics in three-dimensional topological insulators. Phys.
+Rev. A 103, 023101 (2021).
+[21] Bauer, D. & Hansen, K. K. High-harmonic generation in solids with and without topological
+edge states. Phys. Rev. Lett. 120, 177401 (2018).
+[22] Silva, R. E. F., Jiménez-Galán, Á., Amorim, B., Smirnova, O. & Ivanov, M. Topological
+strong-field physics on sub-laser-cycle timescale. Nat. Photon. 13, 849-854 (2019).
+[23] Graml, M., Nitsch, M., Seith, A., Evers, F & Wilhelm, J. Influence of chirp and carrierenvelope phase on noninteger high-harmonic generation. Phys. Rev. B 107, 054305 (2023).
+[24] You, Y. S., Reis, D. A. & Ghimire, S. Anisotropic high-harmonic generation in bulk crystals.
+Nat. Phys. 13, 345-349 (2017).
+[25] Saito, N. et al. Observation of selection rules for circularly polarized fields in high-harmonic
+generation from a crystalline solid. Optica 4, 1333-1336 (2017).
+[26] Yoshikawa, N., Tamaya, T. & Tanaka, K. High-harmonic generation in graphene enhanced by
+elliptically polarized light excitation. Science 356, 736-738 (2017).
+
+15
+
+[27] Neufeld, O., Tancogne-Dejean, N., Hübener, H., De Giovannini, U. & Rubio, A. Are there
+universal signatures of topological phases in high-harmonic generation? Probably not. Phys.
+Rev. X 13, 031011 (2019).
+[28] Humlı́ček, J. et al. Raman and interband optical spectra of epitaxial layers of the topological
+insulators Bi2 Te3 and Bi2 Te3 on BaF2 substrates. Phys. Scr. 2014, 014007 (2014).
+[29] Zhang, W., Yu, R., Zhang, H.-J., Dai, X. & Fang, Z. First-principles studies of the threedimensional strong topological insulators Bi2 Te3 , Bi2 Se3 and Sb2 Te3 . New J. Phys. 12, 065013
+(2010).
+[30] Neufeld, O., Podolsky, D. & Cohen, O. Floquet group theory and its application to selection
+rules in harmonic generation. Nat. Commun. 10, 405 (2019).
+[31] Ben-Tal, N., Moiseyev, N. & Beswick, A. The effect of Hamiltonian symmetry on generation
+of odd and even harmonics. J. Phys. B: At. Mol. Opt. Phys. 26, 3017-3024 (1993).
+[32] Hall, E. H. XVIII. On the “Rotational Coefficient” in nickel and cobalt. Philos. Mag. 12,
+157-172 (1881).
+[33] Nagaosa, N., Sinova, J., Onoda, S., MacDonald, A. H. & Ong, N. P. Anomalous Hall effect.
+Rev. Mod. Phys. 82, 1539-1592 (2010).
+[34] von Baltz, R. & Kraut, W. Theory of the bulk photovoltaic effect in pure crystals. Phys. Rev.
+B 23, 5590-5596 (1981).
+[35] Sipe, J. E. & Shkrebtii, A. I. Second-order optical response in semiconductors. Phys. Rev. B
+61, 5337-5352 (2000).
+[36] Young, S. M. & Rappe, A. M. First principles calculation of the shift current photovoltaic
+effect in ferroelectrics. Phys. Rev. Lett. 109, 116601 (2012).
+[37] Yue, L. & Gaarde, M. B. Characterizing anomalous high-harmonic generation in solids. Phys.
+Rev. Lett. 130, 166903 (2023).
+[38] Qian, C. et al. Role of shift vector in high-harmonic generation from noncentrosymmetric
+topological insulators under strong laser fields. Phys. Rev. X 12, 021030 (2022).
+[39] Parks, A. M., Moloney, J. V. & Brabec, T. Gauge invariant formulation of the semiconductor
+Bloch equations. Phys. Rev. Lett. 131, 236902 (2023).
+[40] Luu, T. T. & Wörner, H. J. Measurement of the Berry curvature of solids using high-harmonic
+spectroscopy. Nat. Commun. 9, 916 (2018).
+
+16
+
+[41] Lv, Y.-Y. et al. High-harmonic generation in Weyl semimetal β-WP2 crystals. Nat. Commun.
+12, 6437 (2021).
+[42] Faeyrman, L. et al. Revealing the Berry phase under the tunneling barrier. Preprint at
+https://arxiv.org/abs/2408.03105 (2024).
+[43] Bai, Y. et al. Probing Berry phase effect in topological surface states. Phys. Rev. Lett. 133,
+243801 (2024).
+[44] Zhang, Y. et al. Crossover of the three-dimensional topological insulator Bi2 Se3 to the twodimensional limit. Nat. Phys. 6, 584-588 (2010).
+[45] Kim, S. et al. Surface scattering via bulk continuum states in the 3D topological insulator
+Bi2 Se3 . Phys. Rev. Lett. 107, 056803 (2011).
+[46] Wang, Y. H. et al. Measurement of intrinsic Dirac Fermion cooling on the surface of the topological insulator Bi2 Se3 using time-resolved and angle-resolved photoemission spectroscopy.
+Phys. Rev. Lett. 109, 127401 (2012).
+[47] Wang, Z. et al. The roles of photo-carrier doping and driving wavelength in high harmonic
+generation from a semiconductor. Nat. Commun. 8, 1686 (2017).
+[48] van Essen, P. J., Nie, Z., de Keijzer, B. & Kraus, P. M. Toward complete all-optical intensity
+modulation of high-harmonic generation from solids. ACS Photon. 11, 1832-1843 (2024).
+[49] Terhune, R. W., Maker, P. D. & Savage, C. M. Optical harmonic generation in calcite. Phys.
+Rev. Lett. 8, 404-406 (1962).
+[50] Brahlek, M. et al. Topological-metal to band-insulator transition in (Bi1−x Inx )2 Se3 thin films.
+Phys. Rev. Lett. 109, 186403 (2012).
+[51] Levy, I., Garcia, T. A., Shafique, S. & Tamargo, M. C. Reduced twinning and surface roughness
+of Bi2 Se3 and Bi2 Te3 layers grown by molecular beam epitaxy on sapphire substrates. J. Vac.
+Sci. Technol. B 36, 02D107 (2018).
+[52] Zhang, H. et al. Topological insulators in Bi2 Se3 , Bi2 Te3 and Sb2 Te3 with a single Dirac cone
+on the surface. Nat. Phys. 5, 438-442 (2009).
+[53] Shan, W.-Y., Lu, H.-Z. & Shen, S.-Q. Effective continuous model for surface states and thin
+films of three-dimensional topological insulators. New J. Phys. 12, 043048 (2010).
+[54] Liu, C.-X. et al. Model Hamiltonian for topological insulators. Phys. Rev. B 82, 045122 (2010).
+[55] Fu, L. Hexagonal warping effects in the surface states of the topological insulator Bi2 Te3 .
+Phys. Rev. Lett. 103, 266801 (2009).
+
+17
+
+[56] Chacón, A. et al. Circular dichroism in higher-order harmonic generation: Heralding topological phases and transitions in Chern insulators. Phys. Rev. B 102, 134115 (2020).
+[57] Yue, L. & Gaarde, M. B. Introduction to theory of high-harmonic generation in solids: tutorial.
+J. Opt. Soc. Am. B 39, 535–555 (2022).
+[58] Houston, W. V. Acceleration of electrons in a crystal lattice. Phys. Rev. 57, 184-186 (1940).
+
+ACKNOWLEDGMENTS
+
+This material is based upon work supported by the US Air Force Office of Scientific
+Research under Grant No. FA9550-2-110415 and US Department of Energy BES under
+Grant No. DE-FG02-04ER15614. A. S. L. and L. Y. acknowledge support from the Center
+for Emergent Materials, an NSF MRSEC, under Grant No. DMR-2011876. W. Z., K. A. I.
+and R. K. K. acknowledge support from the US Department of Energy under Grant No. DESC0016379 and the AFOSR MURI 2D MAGIC under Grant No. FA9550-19-1-0390. L. Y.
+acknowledges startup funds from Binghamton University.
+
+AUTHOR CONTRIBUTIONS
+
+S. L., L. Y. and W. Z. conceived the study. S. L., T. A. T. and L. B. performed the experiment. L. Y. performed the simulations. K. A. I. and W. Z. prepared and characterized the
+samples. S. L., Y. T. and V. L. developed the laser and light source systems. Y. T. developed
+the data acquisition software packages. P. A., R. K. K., A. S. L. and L. F. D. supervised the
+study. All authors contributed to the manuscript.
+
+COMPETING INTERESTS
+
+The authors declare no competing interests.
+
+ADDITIONAL INFORMATION
+
+Correspondence and request for materials should be addressed to S.L. (li.8187@osu.edu)
+or L.Y. (lyue2@binghamton.edu).
+
+18
+
+a
+
+bulk
+
+odd even
+
+Γ
+
+K
+
+𝐌𝐌−
+
+surface
+
+𝐹𝐹𝑀𝑀𝑀𝑀𝑀𝑀
+
+∆𝒀𝒀±
+
+𝐹𝐹𝑇𝑇𝑇𝑇𝑇𝑇
+
+𝐌𝐌+
+
+bulk
+
+odd even
+
+𝑭𝑭𝑻𝑻𝑻𝑻𝑻𝑻=𝟎𝟎
+𝑭𝑭𝑻𝑻𝑻𝑻𝑻𝑻≠𝟎𝟎
+
+K
+
+b
+
+𝐌𝐌+
+
+Γ
+
+𝐌𝐌−
+
+surface
+
+odd even
+
+odd even
+
+≡ 𝟎𝟎 ≡ 𝟎𝟎
+
+≠ 𝟎𝟎 ≠ 𝟎𝟎
+
+𝑭𝑭𝑻𝑻𝑻𝑻𝑻𝑻=𝟎𝟎
+≡ 𝟎𝟎 ≡ 𝟎𝟎
+
+𝑭𝑭𝑻𝑻𝑻𝑻𝑻𝑻≠𝟎𝟎
+
+≠ 𝟎𝟎 ≠ 𝟎𝟎
+
+∆𝒀𝒀⊥
+
+FIG. 1: The experimental design. Polarization-resolved harmonic selection rules when
+the driving fields are polarized along the real-space directions corresponding to the (a)
+ΓM or (b) ΓK directions in reciprocal space. Black hexagons indicate the Bi2 Se3 surface
+Brillouin zone, colored triangles with dots show the real-space lattice structure projected
+onto the (111) plane. Symmetry breaking of the TSSs is “visualized” by the gray arrows and
+color-scale bar, which represent local directions of the in-plane shift vector Rk,y along ΓM
+and amplitude of the out-of-plane (z) Berry curvature Ωkz along ΓK, respectively. Reciprocal
+space two-dimensional distributions of R and Ω can be found in Fig. 2. Black arrows indicate
+the MIR and (instantaneous) THz field directions. Purple arrows show the HHG polarization
+directions. (a) When the driving fields are polarized along the ΓM direction, the differential
+HHG yield between the cases where the instantaneous THz field and the TSSs’ shift vector
+are parallel (+, same direction, as shown in Fig. a) or anti-parallel (−, opposite directions,
+180◦ crystal orientation of Fig. a), defined as ∆Y ± ≡ Y (FTHz ∥ ΓM+ ) − Y (FTHz ∥ ΓM− ), serves
+to distinguish harmonic emission from the bulk (R = 0, ∆Y = 0) and surface (R ̸= 0,
+∆Y ̸= 0) states. (b) When the driving fields are polarized along the ΓK direction, and
+for the harmonic emission perpendicular to the driving fields polarization, the HHG yield
+difference with and without the THz field, defined as ∆Y⊥ = Y⊥ (FTHz̸=0 ) − Y⊥ (FTHz=0 ),
+probes an exclusive surface states HHG response (Bulk: Ω = 0, ∆Y⊥ = 0; Surface: Ω ̸= 0,
+∆Y⊥ ̸= 0).
+
+19
+
+k
+E+
+(eV)
+
+-1
+
+0
+
+1
+
+b
+
+20
+
+c
+
+along ΓK
+
+0.0
+
+-0.2
+k
+E−
+(eV)
+
+0.0
+-1
+
+0.2
+0
+
+1
+
+0.2
+
+-0.2
+
+0.0
+
+Ωk−,z (a.u.)
+
+-20
+
+ky (a.u.)
+
+-0.2
+
+-0.2
+20
+
+0.0
+kx (a.u.)
+
+0.2
+
+30
+
+∥R
+
+k,y
+
+0.0
+
+∥ (a.u.)
+
+0
+
+0.2
+15
+
+30
+
+0.2
+
+0.0
+
+-0.2
+
+-0.2
+
+15
+
+0.0
+
+0.2
+0
+
+0.2
+
+0.0
+
+0
+
+-0.2
+
+-0.2
+
+-0.2
+
+∥Rk,x ∥ (a.u.)
+
+0.2
+ky (a.u.)
+
+0.0
+
+ky (a.u.)
+
+along ΓM
+
+ky (a.u.)
+
+0
+
+0.2
+
+0.2
+
+ky (a.u.)
+
+-20
+
+Ωk+,z (a.u.)
+
+ky (a.u.)
+
+a
+
+0.0
+
+-0.2
+
+-0.2
+
+0.0
+kx (a.u.)
+
+0.2
+
+-0.2
+
+0.0
+kx (a.u.)
+
+0.2
+
+FIG. 2: Reciprocal space inversion symmetry breaking in the (111) plane of Bi2 Se3
+TSSs. (a) Band structure E k and (b) amplitude of the out-of-plane Berry curvature Ωkz ,
+for the Dirac cone upper (“+”, top panel) and lower (“−”, bottom panel) states. (c) Shift
+k
+k
+k
+k
+) (bottom panel); the color scale
+, Ryy
+) (top panel) and Rk,y ≡ (Rxy
+, Ryx
+vector Rk,x ≡ (Rxx
+
+and white arrows indicate the magnitude and local direction of the shift vector, respectively.
+T -invariance requires a symmetric band structure E k = E −k . The surface states P-violation
+is restored by the non-zero Ω and R, which are odd and even functions of k, respectively:
+Ωk = −Ω−k and Rk = R−k . See Equations 4 and 6 in “Methods” for the mathematical
+definitions, and Section 3 in SI for detailed physical meanings, of Ω and R.
+
+20
+
+sample Rochon
+⦁
+⊗
+
+H5
+
+⦁
+⊗
+
+H6
+
+H7
+
+H8
+
+H7
+
+50 nm
+6 nm
+
+H9
+
+H6
+
+H8
+H7
+
+𝑭𝑭𝑀𝑀𝑀𝑀𝑀𝑀
+
+H9
+H6
+
+⦁
+⊗
+
+H9
+
+𝑭𝑭𝑀𝑀𝑀𝑀𝑀𝑀
+
+H8
+
+H10
+
+H11
+
+a
+
+b
+
+FIG. 3: MIR-driven high-order (5th to 11th ) harmonic spectra from the Bi2 Se3 thin
+film crystals. The 50 nm (shaded blue) and 6 nm (solid red) samples are oriented with
+(a) ΓM and (b) ΓK along the MIR polarization direction, respectively. All four spectra are
+scaled by the same factor. Top: Schematics of the polarization-resolved HHG measurements
+using a Rochon prism: harmonic components polarized parallel and perpendicular to the
+fundamental field are spatially separated along the vertical direction and simultaneously
+detected by the spectrometer camera. Gray arrows indicate the polarization direction of the
+light.
+
+21
+
+FIG. 4: Evolution of the harmonic yield (Y) and MIR transmission as a function
+11
+P
+of the thin film thickness. Total harmonic yield
+Yq (open orange squares), total
+q=5
+
+odd-order harmonic yield (open blue circles), 100 × total even-order harmonic yield (open
+red circles). All three curves are normalized by the same factor (the total harmonic yield
+maximum). The MIR driving laser transmission is shown as purple crosses. Despite of large
+(>5) index of refraction, the MIR transmission is high due to thin film interference.
+
+22
+
+𝐑𝐑𝐤𝐤, y 𝐹𝐹𝑀𝑀𝑀𝑀𝑀𝑀 𝐹𝐹𝑇𝑇𝑇𝑇𝑇𝑇
+
+𝐑𝐑𝐤𝐤, y 𝐹𝐹𝑀𝑀𝑀𝑀𝑀𝑀 𝐹𝐹𝑇𝑇𝑇𝑇𝑇𝑇
+
+M+
+
+M−
+
+M−
+
+c
+
+60° + 𝑁𝑁 ∗ 120°
+
+M+
+
+50 nm
+6 nm
+
+b
+
+6 nm H6
+
+ΓM+
+ΓM−
+
+50 nm H6
+
+ΓM+
+ΓM−
+
+Norm. THz field
+
+a
+
+ΓM+
+ΓM−
+
+6 nm H7
+
+ΓM+
+ΓM−
+
+50 nm H7
+
+FIG. 5: Probing the influence of shift vector on HHG by the THz field. (a)
+Experimental configuration: The MIR and THz fields are polarized along the ΓM direction.
+In the crystal frame, M+ and M− are defined by the polarity of the TSSs’ shift vector Rk,y
+along ΓM, which points from M− to M+ . In the laboratory frame, the polarity of the first
+main half-cycle of the THz field (see inset c) defines the “up” direction. (b) For the 6 nm
+(left panels) and 50 nm (right panels) samples, the 6th - (upper panels) and 7th - (lower panels)
+order harmonic yields are measured as a function of the MIR-THz time delay, for the two
+crystal orientations shown in a when ΓM+ (red) and ΓM− (blue) point upwards. All yields
+are scaled by the same factor. Time zero is defined at the field zero-crossing of the THz
+main cycle, and large negative time delays correspond to MIR leading. Middle panels show
+a typical THz waveform at focus in air, measured separately. (c) At a fixed MIR-THz time
+delay of about −250 fs when the MIR pulse overlaps with the crest of the first main halfcycle of the THz field (see inset), the contrast between ΓM+ and ΓM− crystal orientations,
+defined as the harmonic-yield difference divided by their sum, (Y+ − Y− )/(Y+ + Y− ), is shown
+as a function of the harmonic order. Error bars are standard deviations of 10 measurements.
+
+23
+
+6 nm
+
+Without THz
+
+50 nm
+
+With THz
+
+Without THz
+
+With THz
+
+𝐹𝐹𝑀𝑀𝑀𝑀𝑀𝑀 𝜴𝜴Γ𝐾𝐾
+𝐹𝐹𝑇𝑇𝑇𝑇𝑇𝑇
+𝑧𝑧
+
+a
+
+H6
+
+H8
+
+H10
+
+b
+
+FIG. 6: Probing the influence of Berry curvature on HHG by the THz field.
+The MIR and THz fields are polarized along the ΓK direction, and only the harmonic light
+polarized perpendicular to the driving fields is measured. For the (a) 6 nm and (b) 50 nm
+samples, perpendicular harmonic spectra without the THz field (shaded blue) and with the
+THz field (solid red) at a fixed MIR-THz time delay of about −250 fs (see Fig. 5c inset),
+are shown. All four spectra are scaled by the same factor. Inset a: For the 6 nm sample,
+the perpendicular 6th - (red) and (10×) 7th - (blue) order harmonic yield as a function of the
+MIR-THz field time delay. Inset b: Crystal orientation relative to the laser fields. The
+color-scale bar demonstrates amplitude of the out-of-plane Berry curvature along ΓK.
+
+24
+
+Disentangling High Harmonic Generation from
+Surface and Bulk States of a Topological Insulator
+Supplementary Information
+Sha Li,1 Wenyi Zhou,1 Kazi A. Imroz,1 Yaguo Tang,1 Tiana A. Townsend,1
+Vyacheslav Leshchenko,1 Larissa Boie,1 Pierre Agostini,1 Alexandra S.
+Landsman,1 Roland K. Kawakami,1 Lun Yue,2 and Louis F. DiMauro1
+1
+
+Department of Physics, The Ohio State University, Columbus, Ohio 43210, USA
+2
+
+Department of Physics, Binghamton University,
+Binghamton, New York 13902, USA
+
+Contents
+
+1. Thickness-dependent efficiency of surface HHG in Bi2 Se3 thin films
+
+2
+
+2. Additional measurements: 5th -order harmonic generation in the 6 nm film
+
+7
+
+3. Roles of Berry curvature and shift vector in HHG
+
+8
+
+4. Simulation results of HHG in TSSs of Bi2 Se3
+
+10
+
+4.1. HHG by the MIR driver alone: Roles of shift vector and Berry curvature
+
+11
+
+4.2. THz-assisted HHG: Coupling between intrinsic and THz-field-induced symmetry
+breaking
+
+12
+
+References
+
+15
+
+1
+
+1. Thickness-dependent efficiency of surface HHG in Bi2 Se3 thin films
+In this section, we present a detailed explanation of the thickness-dependent surface HHG
+in Bi2 Se3 and the substantial enhancement observed in ultrathin films below 10 nm.
+In an ideal, free-standing Bi2 Se3 film crystal with slab geometry, the two surfaces—top
+and bottom—are structurally identical. The combined inversion (P-) and time-reversal (T -)
+symmetries enforce that the spin, Berry curvature, and shift vector contributions from the
+two surfaces cancel each other, thereby preserving the overall PT -symmetry of the entire
+slab [1]. In a transmission-geometry HHG experiment, both surfaces are simultaneously
+probed, the even-order harmonics generated from the top and bottom surfaces are out of
+phase by π a

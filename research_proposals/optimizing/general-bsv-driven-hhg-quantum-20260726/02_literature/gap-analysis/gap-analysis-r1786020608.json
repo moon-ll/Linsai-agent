@@ -1,0 +1,114 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV-HHG对固体多体关联提供探针灵敏度的可证伪主张",
+      "missing_evidence": "缺少BSV/量子光驱动固体HHG作为多体探针的实验或理论先例，特别是已发表的灵敏度/可辨识性证据",
+      "search_keywords": [
+        "bright squeezed vacuum solid HHG many-body probe sensitivity",
+        "quantum light driven HHG solid-state correlation detection",
+        "nonclassical light HHG condensed matter probe published"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "QEF（量子增强因子）的定义、量级和适用边界",
+      "missing_evidence": "缺少QEF在量子光HHG文献中的明确数学定义、已观测的增强倍数（如g2=2处的理论上限）以及与经典对照的可分离判据",
+      "search_keywords": [
+        "quantum enhancement factor QEF HHG definition",
+        "g2 scaling high harmonic yield nonclassical light",
+        "BSV HHG enhancement ratio coherent comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG过程中g²保持率（光子统计在非线性过程中的传递）",
+      "missing_evidence": "缺少HHG产生过程中g²的演化数据：是高次谐波保持入射g²还是被多体通道重整化的实验/理论证据",
+      "search_keywords": [
+        "photon statistics preservation high harmonic generation",
+        "g2 g3 nonclassical HHG output statistics measurement",
+        "quantum correlations transfer HHG nonlinear process"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SBE-Q（量子光驱动的半导体Bloch方程）的理论基础与公式",
+      "missing_evidence": "缺少SBE-Q的完整理论形式、适用条件、与经典SBE的差异以及与含时密度泛函或Keldysh-Green函数的边界",
+      "search_keywords": [
+        "semiconductor Bloch equations quantum light driver",
+        "SBE-Q nonclassical light formalism derivation",
+        "quantum optical semiconductor Bloch equation photon statistics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mott绝缘体在BSV驱动下的强关联HHG响应与理论预测",
+      "missing_evidence": "缺少Mott绝缘体中BSV-HHG的理论预言（Hubbard U/W依赖、增强倍数）或实验观测",
+      "search_keywords": [
+        "Mott insulator BSV HHG many-body enhancement",
+        "Hubbard model quantum light driven high harmonic",
+        "strongly correlated Mott HHG nonclassical light prediction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV驱动HHG中光子统计与多体通道（带内/带间/碰撞）的耦合机制",
+      "missing_evidence": "缺少明确证据说明BSV的光子数涨落通过哪条多体通道（带内电流、带间极化、电子-电子碰撞）改变HHG观测量",
+      "search_keywords": [
+        "BSV intraband interband many-body HHG channel",
+        "photon number fluctuation band coupling solid HHG",
+        "nonclassical light many-body channel harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Fisher信息/量子Fisher信息在HHG反演量子几何量中的应用",
+      "missing_evidence": "缺少将HHG谱作为观测量、量子Fisher信息作为度量、并完成量子度量可重构性的已发表方法学",
+      "search_keywords": [
+        "quantum Fisher information HHG spectroscopy",
+        "Fisher information high harmonic reconstruction metric",
+        "QFI Berry curvature HHG observable"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV驱动HHG中纯量子贡献可与经典贡献可分离的判据",
+      "missing_evidence": "缺少将量子贡献（如干涉可见度、相位信息）从经典强度贡献中分离的实验或理论判据",
+      "search_keywords": [
+        "pure quantum contribution HHG separation criterion",
+        "classical versus quantum HHG signal isolation",
+        "nonclassical signature HHG witness"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "贝叶斯反演/PINN应用于量子光HHG光谱的可行性先例",
+      "missing_evidence": "缺少贝叶斯推断或物理信息神经网络对量子光HHG光谱做反演的已发表案例或可比方法",
+      "search_keywords": [
+        "Bayesian inversion quantum HHG spectrum",
+        "physics-informed neural network HHG quantum light",
+        "PINN quantum spectroscopic reconstruction"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV光源的工程参数（dB、重复频率、稳定性）与HHG驱动可行性的对应关系",
+      "missing_evidence": "缺少将BSV光源参数（压缩度、带宽、重复频率、长时间稳定性）映射到固体HHG驱动条件的对照数据",
+      "search_keywords": [
+        "BSV source engineering parameters HHG driver",
+        "squeezed vacuum source dB repetition rate stability",
+        "cavity-enhanced BSV solid HHG experimental feasibility"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "HHG过程的反馈控制用于量子态提取或稳态运行",
+      "missing_evidence": "缺少在HHG实验中通过反馈控制提取量子信息或稳定量子光驱动条件的先例",
+      "search_keywords": [
+        "feedback control high harmonic generation quantum",
+        "closed-loop HHG quantum state extraction",
+        "real-time feedback attosecond quantum control"
+      ],
+      "priority": "low"
+    }
+  ]
+}

@@ -295,9 +295,10 @@ def update_task_status(
 # ============================================================
 
 def initialize_from_existing() -> int:
-    """从现有 paper-pool + briefing_state 合并初始化 item-status.json。
+    """初始化 item-status.json。
 
-    v5.0: 使用 file_lock 保护批量合并，防止与并发 update_item_status 冲突。
+    v6.8.14 重构：paper-pool.json 已废弃（papers 字段为空），不再从中导入。
+    数据来源：hermes daily_candidates.json + paper-feedback.json。
 
     Returns:
         初始化的论文数量
@@ -307,28 +308,9 @@ def initialize_from_existing() -> int:
         data = _load_item_status()
         items = data.setdefault("items", {})
 
-        # 1. 从 Copilot paper-pool.json 导入
-        pool_path = PROJECT_ROOT / "memory" / "paper-pool.json"
-        if pool_path.exists():
-            try:
-                pool = json.loads(pool_path.read_text(encoding="utf-8"))
-                for aid, p in pool.items():
-                    if aid not in items:
-                        items[aid] = {
-                            "arxiv_id": aid,
-                            "title": p.get("title", ""),
-                            "direction": p.get("direction", ""),
-                            "score": p.get("score", 0),
-                            "status": p.get("status", "pool"),
-                            "first_seen": p.get("added_at", _now()),
-                            "last_updated": p.get("updated_at", _now()),
-                            "updated_by": "copilot",
-                            "history": [],
-                        }
-            except Exception:
-                pass
+        # v6.8.14: paper-pool.json 已废弃（papers 字段为空），跳过导入
 
-        # 2. 从 hermes daily_candidates.json 导入（补充 pool/candidate 状态）
+        # 1. 从 hermes daily_candidates.json 导入（补充 pool/candidate 状态）
         candidates_path = BRIEFINGS_DIR / "daily_candidates.json"
         if candidates_path.exists():
             try:
@@ -350,7 +332,7 @@ def initialize_from_existing() -> int:
             except Exception:
                 pass
 
-        # 3. 从 Copilot paper-feedback.json 补充 history
+        # 2. 从 Copilot paper-feedback.json 补充 history
         fb_path = PROJECT_ROOT / "memory" / "paper-feedback.json"
         if fb_path.exists():
             try:

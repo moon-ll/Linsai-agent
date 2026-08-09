@@ -1,5 +1,157 @@
 # 变更记录
 
+## v6.8.18 - 2026-08-09 cron 安装幂等性修复（健康检查 4h 发现）
+
+### Bug
+- `setup_cron_framework` 和 `setup_monitor` 直接调用 `hb.cron_create_no_agent`，
+  **未先清理同名旧实例**，导致每次 `--setup-cron-v2` / `--setup-monitor` 都叠加一个新 cron。
+- 过去 4h 健康检查实测：
+  - `lc-hourly-monitor` 注册了 2 个（id=5c89cbd77338 + 9d3177df68f0）
+  - `lc-daily-orchestrate` / `lc-repair` / `lc-prompt-optimize` / `lc-retrospective`
+    各注册了 5 个
+  - jobs.json 总 cron 数 = 32（合理约 13）
+- 影响：整点同时触发 N 次同一个 monitor，造成 CPU 浪费、看板时间戳抖动；
+  同一分钟内 `lc-hourly-monitor` 双触发（16:00:36.611 + 16:00:36.735）。
+
+### 修复
+- `scripts/lifecycle/framework.py:54-60` — 清理名单新增
+  `lc-daily-orchestrate` / `lc-repair` / `lc-prompt-optimize` / `lc-retrospective`
+- `scripts/lifecycle/framework.py:113-128` — prompt-optimize / retrospective 创建前
+  单独清理同名旧实例（这些 cron 在函数末尾才创建）
+- `scripts/proposal_lifecycle/cli.py:325-330` — setup_monitor 在创建 lc-hourly-monitor
+  前先清理同名旧实例，并在输出中报告 `removed_duplicates` 数量
+- `scripts/tests/test_cron_setup_idempotent.py` — 新增 8 个回归断言（桩 hermes_bridge，
+  不依赖真实 hermes CLI，零成本）
+
+### 校验结果
+- 新测试 `test_cron_setup_idempotent.py`：8/8 通过
+- `py_compile` 全部通过
+
+### 后续建议（需用户手动执行一次）
+- `python3 scripts/proposal_lifecycle.py --setup-cron-v2`
+- `python3 scripts/proposal_lifecycle.py --setup-monitor`
+- 执行后 `jobs.json` 中同名 cron 应均归 1 个。
+
+## v6.8.17 - 2026-08-09 自检测/自成长深层增强（反馈闭环 + KB健康 + 趋势雷达 + 范例注入）
+
+### 改进1: 人工审核反馈闭环（核心）
+- `feedback_archive.py` — `submit_feedback()` 新增 `session_id` 参数，退回时自动提取审核对话中的用户意见摘要写入 `06_feedback/`
+- `feedback_archive.py` — 新增 `load_review_feedback_for_optimization()` 加载历史审核反馈
+- `optimize.py` — critic prompt 自动注入历史人工审核反馈（"从对话中学习"）
+- `web_routes_system.py` — `review-verdict` 和 `review-finalize` 传递 `session_id`
+- 效果：人工审核意见不再丢失，后续优化轮次自动回避同类问题
+
+### 改进2: 知识库健康评分
+- `reflection_jobs.py` — 每周反思时自动计算 KB 健康度（覆盖率 + 新鲜度 + 连通度）
+- 覆盖率 <60% 或孤立节点 >20% 时触发行动建议
+
+### 改进3: 研究趋势雷达
+- `sync_engine.py` — `sync_all()` 新增 [3.7/5] 步骤，分析最近 2 周简报的关键词频率趋势
+- 领域关键词突增时在日志标记"趋势上升"
+
+### 改进4: Cross-proposal 范例注入
+- `optimize.py` — writer prompt 自动注入高分课题（≥0.80）的范例段落
+- 触发条件：当前课题分数 <0.75 且存在高分范例
+
+### 校验结果
+- `--module`：345/345 通过
+- `--scenario`：16/16 通过
+- `--web-ci`：399/399 通过
+
+## v6.8.16 - 2026-08-09 全链条自检测/自成长增强（5 项改进）
+
+### 改进1: 质量天花板检测 + 自动晋级/暂停
+- `completion.py::_check_done()` 新增收敛检测：连续 3 轮 ≥0.80 且每轮提升 <2% → 自动晋级到 pending_review
+- 新增质量下降检测：连续 3 轮分数下降 → 暂停自动优化，附加 quality_warning
+- 效果：避免高质量课题在 optimizing 阶段无限空转
+
+### 改进2: 停滞课题自动检测
+- `lifecycle_monitor.py::_check_proposals()` 新增 stalled 检测：optimizing 课题 48h 无新 done job → 告警
+- 效果：0/25 job 完全停滞的课题不再被忽略
+
+### 改进3: 知识库笔记覆盖率检测
+- `sync_engine.py::sync_all()` 新增 [3.6/5] 步骤：扫描 raw/papers 无 wiki 笔记的论文，统计覆盖率
+- 效果：214 篇 raw 中 137 篇无笔记的缺口可视化，为周末输出端提供补全目标
+
+### 改进4: 对抗评审维度轮换
+- `optimize.py::optimize_cycle()` 新增维度轮换逻辑：连续 3 轮在同一维度原地踏步 → 自动切换到最弱维度
+- 效果：避免 critic/writer 在同一维度"鸡蛋里挑骨头"循环
+
+### 改进5: 输入端无新设想熔断
+- `reflection_jobs.py::_analyze_collected_state()` 新增 input_pipeline_broken 检测：连续 2 周 ideas=0 → 告警
+- 效果：输入端管线断裂不再静默失败
+
+### 校验结果
+- `--module`：345/345 通过
+- `--scenario`：16/16 通过
+- `--persona`：38/38 通过
+- `--web-ci`：399/399 通过
+
+## v6.8.15 - 2026-08-08 全面校验 + 缺陷修复 + 路径清理固化
+
+### 缺陷修复
+- `kb_proposal_reorg.py` 修复 MOC 去重缺陷：capture 条件从模糊包含改为精确匹配 `## ` 标题行，修复引言行 `聚合课题相关概念` 误触发导致 MOC 内容重复追加（v6.8.5 回归缺陷）
+- `kb_proposal_reorg.py` 修复标签提取缺陷：`_extract_label()` 跳过通用标题（课题说明/课题简介/提案说明/无标题），回退到 ID 推断
+- `test_scenarios.py` 修复 web-ci 模式下场景测试技能匹配失败：`patch_module_root` 二次 patch（tmp→real）字符串替换失效，改为直接强制设置 `SKILLS_DIR`/`SKILLS_STATE_PATH`
+
+### 路径清理固化
+- `paths.py` 移除死路径常量：DOCS_DIR / QA_PAPER_DIR / QA_PROPOSAL_DIR / QA_PROJECT_DIR / BRIEFINGS_DIR
+- `paths.py` 修复 HERMES_HOME：从 `~/.kimi` 改为 `~/.hermes`（hermes-agent 更名遗留）
+- `briefing_sync.py` 废弃 paper-pool.json 写入：`sync_from_hermes()` 只更新水位标记
+- `state_sync.py` 废弃 paper-pool.json 读取：`initialize_from_existing()` 跳过空 paper-pool.json
+- `test_core.py` 更新 `_test_sync_from_hermes` 匹配 v6.8.14 行为
+
+### 全面校验结果
+- `--module`：340/340 通过（较 v6.8.9 基线 332→340，新增 8 项 + 修复 5 项失败）
+- `--scenario`：16/16 通过
+- `--persona`：38/38 通过
+- `--web-ci`：394/394 通过（较 v6.8.9 基线 252→394，修复场景测试隔离 + 知识库提案整理缺陷）
+- 知识库：438 索引文档 / 192 图谱节点 / 235 raw papers / 77 wiki papers / 72 PDF / 219 item-status
+- cron：32 个 job 正常 / 17 个 wrapper 脚本全部含 `cd /` 前缀
+
+## v6.8.14 - 2026-08-08 知识库架构重整（数据清理 + PDF整合 + 简报知识化 + 同步常态化 + 知识反哺 + Obsidian优化）
+
+### WP0：数据清理
+- 删除 raw/papers 17 个迁移空壳（正文 <1500 字符 + abstract 为空）
+- 修复 wiki/papers 9 个双FM破损文件（从 deep_analysis JSON 重建），删除 10 个无源文件
+- 回填 19 篇 wiki/papers 元数据（arxiv_id→title/链接/方向）
+- 统一 45 篇 frontmatter type 字段（concepts→paper）
+- 重建 index.json（438 条，清除 197 条幽灵索引）
+- 重建 graph.json（192 节点 205 边）
+- 归档 test 课题到 _archive/
+
+### WP1：PDF 资产整合
+- `sync_engine.py` 新增 `sync_pdf_library()`：从 hermes 同步 72 个 PDF + extracted txt
+- 新建 `knowledge/raw/pdfs/_pdf-library.md` Obsidian 索引页
+
+### WP2：简报知识化
+- `kb_importer.py` 新增 `import_deep_analysis_all()`：批量转换 deep_analysis JSON 为 5 维笔记
+- `sync_engine.py` 新增 `sync_research_briefings()`：同步每日精选简报到 wiki/reviews/
+- 低质 papers/*.md 不再同步到知识库
+
+### WP3：同步常态化
+- 新建 `lc-daily-sync` cron job（每天 23:00 执行 `sync_engine.sync_all()`）
+- 新增 `lc_daily_sync.sh` wrapper（含 cd / 兼容 v6.8.11）
+
+### WP4：知识反哺（本地优先）
+- `literature_service.search()` 加入 KB-first 逻辑：先查本地 raw/papers + wiki/papers，命中 ≥60% 直接返回
+- `executor.py::_run_lit_search_step` 注入 `get_context()` 三层预检索作为背景知识
+
+### WP5：Obsidian 体验优化
+- 新建 `knowledge/Home.md` 顶层 Dashboard
+- Graph 颜色分组：concepts 蓝 / methods 绿 / papers 橙 / reviews 紫 / projects 红
+- 新建 `docs/DATA-FLOW-MAP.md` 数据流动路径图谱（7 条核心数据链 + 废弃路径清单）
+
+## v6.8.13 - 2026-08-08 weekend-input 文献来源路径统一
+
+- `weekend_pipeline/sources.py` 三路读取统一（raw/papers + hermes_briefings + reviews）
+- `weekend_pipeline/input_jobs.py` 前置调用 `sync_engine.sync_hermes_outputs()`
+
+## v6.8.11 - 2026-08-08 cron wrapper cd / 修复
+
+- 所有 wrapper 脚本添加 `cd /` 前缀，解决 macOS TCC 权限导致的 `getcwd: Operation not permitted`
+- `lifecycle/utils.py::_write_wrapper_script` 使用正则检测并强制升级旧 wrapper
+
 ## v6.8.10 - 2026-08-07 monitor 评分降级日志 + 聚焦软卡死让出
 
 ### monitor 评分降级

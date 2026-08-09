@@ -1,0 +1,1168 @@
+Enhancing Model-Based Step Adaptation for Push Recovery through
+Reinforcement Learning of Step Timing and Region
+
+Tobias Egle*,1, Yashuai Yan*,2, Dongheui Lee2,3, and Christian Ott1,3
+
+4
+2
+0
+2
+
+v
+o
+N
+1
+
+]
+
+O
+R
+.
+s
+c
+[
+
+1
+v
+0
+0
+0
+1
+0
+.
+1
+1
+4
+2
+:
+v
+i
+X
+r
+a
+
+Abstract— This paper introduces a new approach to enhance
+the robustness of humanoid walking under strong pertur-
+bations, such as substantial pushes. Effective recovery from
+external disturbances requires bipedal robots to dynamically
+adjust their stepping strategies, including footstep positions and
+timing. Unlike most advanced walking controllers that restrict
+footstep locations to a predefined convex region, substantially
+limiting recoverable disturbances, our method leverages re-
+inforcement learning to dynamically adjust the permissible
+footstep region, expanding it to a larger, effectively non-convex
+area and allowing cross-over stepping, which is crucial for
+counteracting large lateral pushes. Additionally, our method
+adapts footstep timing in real time to further extend the range of
+recoverable disturbances. Based on these adjustments, feasible
+footstep positions and DCM trajectory are planned by solving
+a QP. Finally, we employ a DCM controller and an inverse
+dynamics whole-body control framework to ensure the robot
+effectively follows the trajectory.
+
+I. INTRODUCTION
+
+In humanoid robot
+
+locomotion, Divergent Component
+of Motion (DCM) trajectory generation [1] has become a
+widely used method for generating walking motions. Current
+research is evolving from focusing on motion generation to
+addressing the challenges of robustness and adaptability in
+the face of external disturbances. Model-based push recovery
+approaches often involve analytical calculation of footstep
+adjustments [2], [3] or optimization-based methods [4] to
+adjust timing and position of footsteps [5], [6]. Data-driven
+approaches have also been applied to generate push recovery
+strategies. Recent works [7], [8] used end-to-end Reinforce-
+ment Learning (RL) to acquire a variety of push recovery
+and balancing behaviors, such as ankle, hip, and stepping
+strategies, which are similar to those seen in humans [9].
+While these methods adapt well to various disturbances,
+they often require extensive training data and significant
+computational resources.
+
+Model-based approaches typically use distinct control
+components, such as a low-level whole-body controller and a
+high-level trajectory planner to precisely follow pre-planned
+
+1Tobias Egle and Christian Ott are with the Automation and Con-
+Institute, TU Wien, 1040 Vienna, Austria {tobias.egle,
+
+trol
+christian.ott}@tuwien.ac.at
+
+2Yashuai Yan and Dongheui Lee are with the Autonomous Sys-
+tems Lab, TU Wien, 1040 Vienna, Austria {yashuai.yan,
+dongheui.lee}@tuwien.ac.at
+
+3Christian Ott and Dongheui Lee are also with the Institute of Robotics
+and Mechatronics (DLR), German Aerospace Center, Wessling, Germany.
+This project has received funding from the European Research Council
+(ERC) under the European Union’s Horizon 2020 research and innovation
+programme (grant agreement No. 819358).
+
+*Contributed equally to the work.
+
+Fig. 1. Simulation of the robot kangaroo during a lateral push force of 800N
+for 0.1 seconds. Our method allows the robot to quickly recover from such
+a large disturbance through a leg cross-over and simultaneous adjustment
+in step timing.
+
+motions [10]. In contrast, data-driven approaches often em-
+ploy end-to-end learning of joint positions [11], [12], [13],
+[14]. These methods tend to generalize better to unknown
+environments due to extensive domain randomization. For
+instance, [15] showcased robust blind walking on stairs using
+terrain randomization techniques. Moreover, [16] demon-
+strates navigation over difficult stepping-stone patterns effec-
+tively using vision input. Nevertheless, the success of end-
+to-end learning approaches largely depends on the precise
+design of the reward function.
+
+Hybrid approaches that combine model-based and data-
+driven methods have emerged as promising solutions, aiming
+to take advantage of both [17], [18]. Duan et al. [19] pro-
+pose integrating robot system knowledge into reinforcement
+learning to train bipedal locomotion policies directly in task
+space, improving sample efficiency and demonstrating the
+approach in simulation and on the real robot Cassie. Castillo
+et al. [20] achieved a lightweight network structure and
+sample efficiency through an RL framework, where actions
+parameterize desired joint trajectories rather than direct actu-
+ator inputs. In [21], the same authors propose a hierarchical
+approach that uses RL at the high level to train policies
+for task space commands and employs a model-based low-
+level controller to track these trajectories. Both policies
+demonstrate robust performance against various disturbance
+forces applied to the torso.
+
+From a model-based perspective, we can effectively find
+optimal solutions for previewed footstep placements using
+a QP approach. However, some drawbacks remain. The
+step time appears nonlinear in the solution of the DCM
+
+ 
+ 
+ 
+ 
+ 
+ 
+dynamics. Thus, iterative solutions or a general nonlinear
+optimization are required. Additionally, using a QP restricts
+possible footstep regions to convex shapes, thereby reducing
+the solution space and excluding options such as cross-
+over stepping. Recent works have addressed this problem by
+decomposing the non-convex regions into convex subregions
+by a set of rules [22] or by evaluating the feasibility of the
+resulting QP problem [23].
+
+The contribution of this work lies in enhancing model-
+based trajectory planning by integrating RL to address the
+limitations of the QP approach. This is achieved by using an
+RL agent to dynamically adjust key parameters within the
+model-based control framework. The selected parameters are
+the step frequency, single support percentage, and rotation
+angle of a convex step area around the current stance
+foot. Thanks to the combination of RL with the model-
+based framework, our method significantly improves the
+maximal recoverable external disturbances, enhancing the
+robustness of the robot’s walking. Additionally, the division
+of tasks between RL and model-based controllers improves
+the learning efficiency of RL, enabling the training of a single
+environment in just a few hours.
+
+II. PRELIMINARIES
+
+Our model-based walking trajectory generation uses the
+concepts of the three-dimensional DCM and the Virtual
+Repellent Point (VRP) [2]. The DCM is defined as
+
+ξ = x + b ˙x,
+
+(1)
+where x is the Center of Mass (CoM) and b = (cid:112)∆z/g is
+given by the average CoM height ∆z and gravity g. From
+the CoM dynamics ¨x = g + F ext/m the DCM dynamics
+can be derived as
+
+Here, the VRP v encodes the total force F = F g + F ext on
+the CoM as F = m
+
+b2 (x − v), where m is the total mass.
+
+A. DCM trajectory generation (backward recursion)
+
+The trajectory is divided into nφ transition phases (al-
+ternating single and double support). Within each transition
+phase φ with time t ∈ [0, T ] we assume a spatially linear
+interpolation for the VRP between a set of nwp = nφ + 1
+waypoints {vi}. Given the VRP trajectory, we can solve (2)
+with a DCM terminal constraint ξφ,T as
+
+B. DCM tracking control
+
+To control the unstable first-order DCM dynamics, En-
+glsberger et al. [2] proposed tracking the reference DCM
+trajectory using the following control law:
+
+v = vref + (I + bKξ)(ξ − ξref ),
+(4)
+where vref is the reference VRP position and ˜ξ = ξ −
+ξref is the DCM tracking error. This approach ensures stable
+tracking for a positive diagonal matrix Kξ.
+
+C. Separation into Ankle and Step Strategy
+
+Mesesan et al. [3] proposed splitting the current DCM
+
+error ˜ξ into two parts:
+
+˜ξ = ˜ξankle + ˜ξstep,
+(5)
+where ˜ξankle is correctable by the ankle strategy, and ˜ξstep
+requires the step strategy. The ankle strategy, i.e., the DCM
+controller (4), can use VRP adjustments that remain in the
+the set of possible VRP
+support polygon. For example,
+adjustments usable by the ankle strategy is defined as ˜V =
+{˜v = (x, y, 0)T | −l ≤ x ≤ l, −w ≤ y ≤ w} for
+a rectangular foot with a width of 2w and a length of
+2l. Inserting this set of VRP adjustments in the recursive
+solution of the DCM dynamics (3), we can compute the set
+of correctable DCM errors in the first phase as
+
+˜Ξankle = α1(t) ˜V1 + β1(t) ˜V2 + γ1(t)˜Ξ2.
+(6)
+Here, ˜Ξ2 is the remaining error at the end of the phase. This
+computation can be extended to multiple transition phases.
+Projecting the current DCM error ˜ξ onto ˜Ξankle minimizes
+∥˜ξstep∥, ensuring the step strategy activates only if ˜ξ is
+outside ˜Ξankle. A graphical illustration of this computation
+is indicated in Fig. 3-2). For more details, see [3], [6].
+
+A. Overview of our framework
+
+An overview of our walking control framework is illus-
+trated in Fig. 2. The architecture mainly consists of two
+components: the RL for step timing and region adaptation
+and the model-based control framework. While we utilize
+an inverse dynamics Whole-Body Controller (WBC) [10]
+in the final component, our contribution does not focus
+on this aspect. The RL framework is used to dynamically
+adjust selected parameters that influence step timing and step
+region. Under these adjustments, the model-based method
+plans the foot and DCM trajectories. The WBC optimizes
+the joint torques to follow the desired trajectories.
+
+˙ξ =
+
+1
+b
+
+(ξ − v).
+
+(2)
+
+III. METHODOLOGY
+
+ξφ(t) = αφ(t)vφ,0 + βφ(t)vφ,T + γφ(t)ξφ,T ,
+
+(3)
+
+B. Model-based step timing adaptation
+
+where αφ(t), βφ(t), and γφ(t) are nonlinear coefficients in
+time that depend on the temporal interpolation between the
+VRP start point vφ,0 and endpoint vφ,T (cf. [24]). The start
+and end points of adjacent transition phases are linked to
+ensure trajectory continuity. Starting from a DCM endpoint,
+this calculation is performed backward in time, hence the
+term ”backward recursion”.
+
+While our approach is based on the model-based trajectory
+generation outlined in [6], we introduce several modifications
+to enhance the previous framework. By directly choosing the
+DCM and VRP waypoints as optimization variables, finding
+an exact solution for the time adjustment during the single
+support phase is possible. However, due to the interpolation
+of the VRP between two foot positions in the double support
+
+Fig. 2. Overview of our framework. The main contribution is extending the model-based control framework by an RL-based step timing and region
+adaptation. An inverse dynamics whole-body controller generates the desired joint torques. Model-based time adaptation is only used in the baseline method.
+
+phase, we still rely on an iterative solution during this phase
+(details in Sec. III-B.2). Finally, different from [6], we only
+minimize the distance of the final DCM from its nominal
+value, which is sufficient for convergence of the trajectory.
+A graphical overview of the DCM trajectory generation
+is shown in Fig. 3. The backward computation approach
+introduced in Section II-A is well-suited for offline trajectory
+generation. The DCM terminal constraint guarantees con-
+vergence of the trajectory. However, with predefined VRP
+waypoints, the initial DCM cannot be controlled. Therefore,
+the measured DCM must be close to the trajectory to
+be feasible. This proximity ensures that the ankle strategy
+produces feasible VRP adjustments according to (4).
+
+In online trajectory generation, we continuously replan
+the trajectory and only evaluate the next time step of the
+trajectory. In this context, the initial DCM state holds greater
+importance than strict convergence to a predefined endpoint.
+We will address this convergence using a soft constraint in
+the subsequent optimization problem.
+
+1) DCM trajectory generation as an optimization prob-
+lem: By solving the DCM dynamics (2) and evaluating it at
+the end time T of a transition phase, we obtain the recursive
+equation for the DCM waypoints as
+
+(cid:32)
+
+ξi =
+
+−
+
+b
+T
+
+T
+b
+
+− e
+
+(cid:18)
+
+1 −
+
+(cid:124)
+
+(cid:123)(cid:122)
+αT ,i−1
+
+(cid:19)(cid:33)
+
+b
+T
+
+(cid:125)
+
+(cid:18)
+
+vi−1 +
+
+1 +
+
+(cid:124)
+
+b
+T
+
+T
+b
+
+− e
+
+(cid:123)(cid:122)
+βT ,i−1
+
+vi
+
+b
+T
+
+(cid:19)
+
+(cid:125)
+
++ e
+
+T
+b
+(cid:124)(cid:123)(cid:122)(cid:125)
+γT ,i−1
+
+ξi−1 ∀i ∈ {2, . . . , nwp}.
+
+(7)
+Here, unlike (3), we start from a DCM start point and
+compute the next waypoint in a ”forward” recursion. To
+reduce the size of the optimization problem, we choose to
+express the VRP waypoints in terms of foot positions pj as
+
+for all i ∈ {1, . . . , nwp}, for all j ∈ {1, . . . , npfs} and obtain
+
+ξi =
+
+(cid:40)(cid:0)αT,i−1 + βT,i−1
+αT,i−1pj + βT,i−1pj+1 + γT,i−1ξi−1 for DS.
+
+(cid:1) pj + γT,i−1ξi−1 for SS
+
+(9)
+Here, npfs is the number of foot positions, and the terms
+”cSS” and ”cDS” in (8) denote the current ongoing phases
+of support, whereas ”SS” and ”DS” in (9) refer to the general
+phases of single and double support, respectively. To easily
+relate the trajectory generation to the current state of the
+robot, we start the preview trajectory from the current time
+in the transition phase t1, i.e., ξ1 = ξ(t1) and v1 = v(t1).
+Thus, the duration of the first phase is the remaining time
+Trem and not the total time of the transition phase T1. In
+the single support phase, the start and end VRP are equal
+to the foot position, whereas, in the double support phase,
+the VRP is interpolated between two feet positions (see
+(9)). Consequently, the solution for the DCM in the current
+transition phase differs from (9) as follows
+
+ξ2 =
+
+(cid:40)
+
+(α Trem + β Trem ) pj + γ Tremξ1 for cSS
+α Tremv1 + β Trempj+1 + γ Tremξ1 for cDS.
+
+(10)
+
+2) Time adjustment in first transition phase: Since in the
+initial transition phase, the foot positions do not change, and
+ξ1 is a known input parameter, we can use this phase for time
+adjustment. Here, we have to differentiate between single
+and double support phases. We omit the subscripts of the
+coefficients α, β, and γ for readability and use T instead of
+the correct Trem in this section.
+
+Single support: With the constraint α + β + γ = 1 (see
+[24]), we can formulate (10) for the single support phase as
+
+ξ2 = (1 − γ)pj + γξ1.
+
+(11)
+
+vi = pj + [0 0 ∆z]T with j =
+
+(cid:40)
+
+⌈i/2⌉ for cSS
+⌊i/2 + 1⌋ for cDS.
+
+Here, we can directly solve for γ in the optimization problem
+and substitute T ∗ = b ln(γ) to obtain the optimal transition
+phase time.
+
+(8)
+
+Step region parametrization. The extended footstep region is
+Fig. 4.
+parametrized by a convex region (here Pstep,2 for single support) and a
+rotation angle θ around the stance foot.
+
+3) DCM initial condition: Since the DCM trajectory is
+calculated using a forward recursion according to (7), the
+starting point for the DCM can be freely chosen. However,
+due to the divergent nature of DCM dynamics, selecting the
+starting point requires careful consideration. Based on the
+current nominal footstep plan, we choose a DCM terminal
+condition ξn,d between the last two footstep positions, as
+illustrated in Fig. 3. We then calculate the DCM trajectory
+backward and obtain the DCM starting point ξ1,d, from
+which we can follow the DCM trajectory under ideal con-
+ditions. To stabilize this trajectory, we first define the DCM
+error as ˜ξ = ξ − ξ1,d. We aim to integrate both ankle and
+step strategies for maximal robustness against disturbances
+by dividing the DCM error into two components, i.e., ˜ξ =
+˜ξankle + ˜ξstep. We do this by projecting the current DCM
+error onto a set of DCM errors that can be corrected using
+the ankle strategy, thereby minimizing the error that needs to
+be compensated for by adjusting the reference trajectory, i.e.,
+through step adjustments (cf. [3]). We add the DCM error
+for step adjustment to the desired DCM start point to obtain
+the DCM start point as
+
+ξ1 = ξ1,d + ˜ξstep.
+
+(19)
+
+4) Step and Timing Optimization: We cannot follow the
+nominal DCM trajectory due to the shifted DCM start point.
+Instead, we formulate an optimization problem that adjusts
+the time in the first transition phase, all previewed footstep
+positions, and the DCM endpoint to obtain a feasible DCM
+trajectory. The optimization problem in the single support
+phase is formulated as a QP as
+
+Fig. 3. Graphical illustration of the computation of the DCM start point as
+input to the optimization problem. Comparison of model-based step timing
+adaptation and improvement due to possible adjustment of the footstep
+region by the RL agent.
+
+Double support: Due to the interpolation of the VRP
+between two feet positions, we cannot find an exact solution
+for the transition phase time and thus need to linearize
+the coefficients α, β, and γ around a nominal value T0.
+According to (10) we obtain the next DCM waypoint in the
+first phase in double support as
+
+ξ2 = αv1 + βpj+1 + γξ1,
+
+(12)
+
+with
+
+γ = eT /b,
+
+β =
+
+b
+T
+
++ 1 − γ
+
+b
+T
+
+, α = 1 − β − γ.
+
+(13)
+
+The linearized forms of the coefficients are:
+
+γ ≈ γc + γℓT,
+
+β ≈ βc + βℓT, α ≈ αc + αℓT,
+
+(14)
+
+where
+
+γc = eT0/b,
+
+γℓ =
+
+eT0/b
+b
+
+,
+
+βc =
+
+b
+T0
+
++ 1 − γc
+
+b
+T0
+
+,
+
+βℓ = −
+
+b
+T 2
+0
+
++
+
+γcb
+T 2
+0
+
+−
+
+γℓb
+T0
+
+,
+
+(15)
+
+(16)
+
+αc = 1 − βc − γc, αℓ = −βℓ − γℓ.
+
+(17)
+
+The equation in the first phase can be rewritten as
+
+ξ2 ≈ (αℓv1 + βℓpj+1 + γℓξ1)T + (αcv1 + βcpj+1 + γcξ1).
+(18)
+In the double support phase, we must limit the time ad-
+justments to ensure that the linearization remains a valid
+approximation.
+
+min
+γ,pj ,ξi
+
+wγ|γ − γd|2 +
+
+2+npfs
+(cid:88)
+
+j=2
+
+s.t.
+
+(9) and (11),
+
+(cid:13)
+(cid:13)
+(cid:13)pj − pj,d
+
+(cid:13)
+2
+(cid:13)
+(cid:13)
+
+Wp
+
+(cid:13)
+(cid:13)
+(cid:13)ξn − ξn,d
+
++
+
+(cid:13)
+2
+(cid:13)
+(cid:13)
+
+Wξ
+
+Tmin
+
+b ≤ γ ≤ e
+
+e
+
+Tmax
+b
+
+, pj ∈ Pstep,j.
+
+(20)
+
+Similarly, the optimization problem in the double support
+phase is given by
+
+min
+T,pj ,ξi
+
+wT |T − T0|2 +
+
+3+npfs
+(cid:88)
+
+j=3
+
+(cid:13)
+(cid:13)
+(cid:13)pj − pj,d
+
+(cid:13)
+2
+(cid:13)
+(cid:13)
+
+Wp
+
+(cid:13)
+(cid:13)
+(cid:13)ξn − ξn,d
+
++
+
+(cid:13)
+2
+(cid:13)
+(cid:13)
+
+Wξ
+
+s.t.
+
+(9) and (18),
+Tmin ≤ T ≤ Tmax, pj ∈ Pstep,j.
+
+(21)
+With the solution of the optimization problem, we update the
+reference VRP and DCM as
+
+(cid:18)
+
+v1(ts) =
+
+1 −
+
+(cid:19)
+
+ts
+Trem
+
+v1 +
+
+ts
+Trem
+
+v2,
+
+(22)
+
+ξ(ts) = αTrem (ts)v1 + βTrem (ts)v2 + γTrem (ts)ξ1,
+
+(23)
+
+with v2 according to (8) and ts is the sample time.
+
+C. Reinforcement learning of step time and region
+
+To enhance the model-based framework, we integrate
+RL to dynamically adjust key parameters of the trajectory
+generator. The input to our RL is shown in Fig. 2. The swing
+foot is represented as binary values, i.e., +1 for the left foot
+and −1 for the right foot. Similarly, for the current phase,
++1 indicates the single support phase and −1 the double
+support phase.
+
+1) Step region adjustment: In model-based trajectory gen-
+eration, the foot positions are treated as variables that can be
+optimized in a QP framework, constraining foot placement
+to a convex region. The convex region is typically defined on
+the same side as the swing foot, preventing foot collisions
+but severely restricting foot placement options for robots.
+
+In this study, we parameterize the footstep region as a
+convex region and an angle θ (see Fig. 4). The angle θ is
+a continuous variable ranging from −90◦ to 90◦, rotating
+the convex region around the current footstep. This creates
+an effectively non-convex possible footstep region, even
+though the QP still operates under convex constraints. Our
+method employs RL to adjust the parameter θ to expand the
+permissible step region. Although QP ensures a collision-
+free swing foot target within the convex footstep region, the
+trajectory leading to this point may not be collision-free. The
+RL algorithm learns through significant penalties to avoid
+self-collisions by only rotating the footstep region when a
+collision-free path exists to the swing foot target.
+
+2) Step timing adjustment: Unlike the model-based
+method in Sec. III-B that optimizes the remaining transition
+time only in the first phase, our RL adjusts the step frequency
+f and single support percentage r for all phases involved
+in trajectory generation. In this case, the model-based time
+adaptation corresponding to the first term in the cost function
+in (20) and (21) is disabled. The model-based method ap-
+proximates the nonlinear optimization in the double support
+phase by linearizing the transition time around the nominal
+value, further limiting its ability to find optimal step timing.
+Our RL-based time adjustment aims to maintain nominal
+walking behavior whenever possible, with adjustments to
+
+TABLE I
+REWARD FUNCTIONS.
+
+Reward
+
+Expression
+
+Distance/Condition
+
+Parameter
+
+Rfreq
+Rss
+Rreg
+Rdcm
+
+Rfall
+Rcolli
+
+ωe−λd
+
+(cid:26)−λ Condition
+otherwise
+
+0
+
+d = | ˆf |
+d = |ˆr|
+d = |θ|
+(cid:13)
+(cid:13)
+(cid:13)ξn − ξn,d
+robot falls
+self-collision
+
+d =
+
+(cid:13)
+(cid:13)
+(cid:13)
+
+ω = 2.0; λ = 1
+ω = 1.0; λ = 5
+ω = 0.1; λ = 2
+ω = 10; λ = 1
+
+λ = 200
+λ = 200
+
+step timing made only when necessary. For minor distur-
+bances, if the robot can recover using its ankle strategy via
+(4), the step timing remains unchanged. However, the step
+timing is adjusted when the disturbance is too significant
+for the ankle strategy alone. This time adjustment can be
+formulated as follows:
+
+where
+
+f = fnom + η ˆf ,
+r = rnom + ηˆr,
+
+(cid:40)
+
+0
+1
+
+η =
+
+(cid:101)ξstep = 0
+otherwise.
+
+(24)
+
+Here, (cid:101)ξstep = 0 indicates the disturbance can be managed by
+the ankle strategy (see (19)). Otherwise, the RL adjusts the
+step timing with ˆf and ˆr accordingly.
+
+3) Rewards: In our method, RL is used to adjust high-
+level footstep regions and timing, while precise foot locations
+are optimized via a QP approach under these adjustments.
+This combination of RL and a model-based framework
+significantly reduces the effort required to design reward
+functions. The applied reward functions are shown in Table I.
+The rewards Rfreq, Rss, and Rreg encourage the step timing
+and region to remain close to their nominal values if possible.
+in optimization in (20), we
+Similarly to the DCM cost
+employ a DCM reward Rdcm to penalize the distance between
+the final DCM waypoint ξn and the final desired DCM
+waypoint ξn,d. Finally, we penalize if the robot falls or
+collides with itself in rewards Rfall, Rcolli.
+
+The parameters ω and λ are hyperparameters for training.
+The λ in the exponential function serves to normalize the
+distances to facilitate later distributing the importance by ω
+over different rewards. However, fine-tuning these parameters
+is not the main focus of this paper. Better results can be
+achieved with further fine-tuning. Our total reward is a sum
+of these rewards:
+
+Rtotal = Rfreq + Rss + Rreg + Rdcm + Rfall + Rcolli.
+
+(25)
+
+IV. EXPERIMENTS
+
+A. Experiment setting
+
+For RL, the PPO algorithm [25] is utilized to learn footstep
+timing and region adjustments. The actor and critic networks
+are designed as multi-layer perceptions (MLPs) with two
+hidden layers, each containing 256 neurons. During training,
+the policy for step timing and region adjustments is running
+
+Fig. 5. Push force evaluation. We conduct 1000 experiments to push the
+robot with random forces and in random directions. The SVM with RBF
+kernel is employed to obtain the maximal recoverable disturbance contour
+between successful and failed trials.
+
+at 50 Hz, while the DCM trajectory generator and the whole-
+body controller run at 1 kHz.
+
+We evaluate our method for the bipedal robot Kangaroo
+[26] using the MuJoCo simulation environment [27]. The
+Kangaroo robot is of height 145 cm with a mass of 40
+kg. Each leg is fully actuated with 6 DoFs and has a flat
+foot. The feet measure 21 cm in length and 9 cm in width.
+We use PROX-QP [28] to solve the QP for DCM trajectory
+generation and the whole-body controller.
+
+During training, push forces are randomly sampled from
+200 N to 400 N and can act in any direction. Each dis-
+turbance is applied for 0.1 seconds, and each episode of
+reinforcement learning training lasts 20 seconds, with the
+robot experiencing a push every 1.5 seconds.
+
+B. Baseline method
+
+We adopt the model-based control approach, depicted in
+Fig. 2, as our baseline methodology. This baseline employs
+model-based step timing optimization (detailed in Section
+III-B) to adjust the remaining time Trem. Within this frame-
+work, step adjustment for each foot occurs within a convex
+region on the same side, analogous to the scenario where
+θ = 0◦ in our approach.
+
+C. Quantitative evaluation on push recovery
+
+In this section, we evaluate our method of push recovery
+when walking forward with a reference velocity vref =
+0.3ms−1. In all evaluations, the forces are applied for 0.1
+seconds.
+
+1) Recovery force: We push the robot at different times
+during a walking cycle. The push force ranges from 200N
+to 800N in any direction, which is up to two times more
+than the disturbance forces during training. The simulation
+is considered unsuccessful if the center of mass falls below
+a certain threshold.
+
+Figure 5 presents the results of the simulations using
+our baseline method. We utilized a Support Vector Ma-
+chine (SVM) with Radial Basis Function (RBF) kernels to
+classify successful and failed simulations, with the bound-
+ary representing the maximal recoverable disturbances. To
+comprehensively compare our method with the baseline, we
+
+Fig. 6. Comparison of maximal recoverable disturbances. Contours
+represent the maximal recoverable disturbance when a push is applied at
+different times during the transition phase. The push occurs at (a) the first
+half of the DS; (b) the second half of the DS; (c) the first half of the SS; (d)
+the second half of the SS. The robot is walking forward with a reference
+velocity of vref = 0.3ms−1 when the push occurs.
+
+introduce disturbances at different times during a robot’s
+walking cycle.
+
+Figure 6-(a) compares the maximal recoverable distur-
+bances between the baseline and our methods when pushes
+occur during the first half of the double support phase. Fig.
+6-(b) shows the results for pushes occurring in the second
+half of the double support phase. Similarly, Fig. 6-(c) and
+Fig. 6-(d) illustrate the maximal recoverable disturbances
+for the first and second halves of the single support phase,
+respectively. Our RL-based footstep timing and footstep
+region adjustments significantly enhance walking robustness
+compared to the model-based step and timing adjustment in
+the baseline. Our method accommodates larger disturbance
+forces, regardless of the push direction and timing. As the
+robot is walking forward and the forward momentum of
+the robot partly compensates for the push, we observe a
+shift of all contour lines towards the backward direction
+(180◦). Furthermore, our proposed approach results in more
+noticeably asymmetric contour lines,
+indicating that RL
+improves recovery more effectively in certain directions.
+
+D. Qualitative evaluation on push recovery
+
+To evaluate the advantages of foot region adjustment in our
+method, we push the robot with large forces while walking
+forward. Figure 7 illustrates four experiments where the robot
+is pushed with different forces in various directions. Our
+approach recovers from the disturbances in all scenarios,
+whereas the baseline method results in the robot falling.
+
+Thanks to our footstep region adjustment, the robot can
+in an effectively non-convex region, often
+
+place its foot
+
+Fig. 7. Recovery from large disturbances. We compare our method with the baseline under large disturbances, ranging from 300 N to 800 N. Using
+the baseline method, the robot falls in all four experiments. In contrast, our approach enables the robot to recover from all disturbances. Thanks to the step
+region adjustment, our approach allows the robot to cross its legs, effectively compensating for the large disturbances and facilitating a quick recovery.
+
+leading to a cross-over leg behavior. Notably, in the last
+experiment shown in Fig. 7, the robot is subjected to a
+substantial force of 800N from the front right. Under the
+baseline method, the robot quickly falls due to the magnitude
+of the disturbance. In contrast, our method enables the robot
+to quickly cross over its legs to compensate for a significant
+portion of the momentum, leading to a rapid recovery from
+such a large disturbance.
+
+Figure 8 illustrates the footstep adjustments when the
+robot is pushed to the left with a force of 450N. The left
+plot displays the footstep locations (xlfoot and xrfoot) and the
+planned and measured DCM ( ξplan and ξmeas) during the
+simulation. To counteract the disturbance, the robot initially
+moves its right foot from position 3⃝ to 5⃝, followed by
+crossing its left foot to the front right from position 4⃝ to 6⃝.
+This sequence of movements significantly reduces the robot’s
+momentum, enabling recovery in the subsequent step. The
+top right snapshots in Fig. 8 show the simulation results in a
+MuJoCo environment. The bottom right plot in Fig. 8 shows
+the nominal (Trem, nom in purple) and adjusted remaining time
+(Trem, meas
+in blue) during the double and single support
+phases. Our method effectively reduces Trem, facilitating
+high-frequency stepping to maintain balance. Consequently,
+due to the combined adjustments in step timing and step
+region, the robot recovers from the substantial lateral push
+in approximately 0.55 seconds, deviating less than 0.5 meters
+from the nominal trajectory.
+
+V. DISCUSSION AND CONCLUSION
+
+limits foot placement
+
+In this paper, we integrate reinforcement learning into a
+model-based control framework to address significant limi-
+tations in planning: footstep region and step timing. Unlike
+the model-based method that
+to a
+predefined convex region, we parametrize the step region
+with a convex region and a learnable parameter θ. The RL
+learns to adjust the footstep region by rotating the convex
+region around the stance foot by the angle θ. This allows the
+QP approach to find optimal foot positions that minimize the
+terminal DCM’s distance to its target within an extended,
+effectively non-convex solution space. By focusing RL on
+adjusting the footstep region rather than precise footstep
+positions, we reduce the complexity for RL to learn, allowing
+for efficient training in a single environment on a CPU.
+
+In addition, we delegate the adjustment of step timing to
+RL, as optimizing step timing with a model-based method
+is challenging due to its nonlinearity. The time adjustment
+is managed by two parameters: step frequency f and single
+support percentage r. The frequency f dynamically changes
+the duration of a walking circle, while r adjusts the time
+distribution between single and double support phases.
+
+Our method combines data-driven RL with a model-based
+control framework by dynamically adjusting the parame-
+ters used in model-based optimization. This division of
+tasks leverages the strengths of both RL and model-based
+optimization, significantly enhancing the robot’s walking
+robustness against external disturbances and improving the
+
+Fig. 8. Step adjustment in our approach. The robot is pushed with 450N to the left. The left plot illustrates the adjusted footstep locations, showing
+a cross-over behavior at footsteps 5⃝ and 6⃝. Our method enhances recovery through rapid stepping by reducing the remaining time Trem. Due to step
+timing and region adjustments, the robot recovers from the substantial push in approximately 0.55 seconds, deviating less than 0.5 meters from the desired
+trajectory. The top right snapshots correspond to the simulation in a MuJoCo environment (RSS: right single support; LSS: left single support).
+
+training efficiency of RL.
+
+REFERENCES
+
+[1] T. Takenaka, T. Matsumoto, and T. Yoshiike, “Real
+
+time motion
+generation and control for biped robot -1st report: Walking gait pattern
+generation-,” in Proc. IEEE/RSJ Int. Conf. Intell. Robots Syst., 2009.
+[2] J. Englsberger, C. Ott, and A. Albu-Sch¨affer, “Three-Dimensional
+Bipedal Walking Control Based on Divergent Component of Motion,”
+IEEE Transactions on Robotics, 2015.
+
+[3] G. Mesesan, J. Englsberger, and C. Ott, “Online DCM Trajectory
+Adaptation for Push and Stumble Recovery during Humanoid Loco-
+motion,” in Proc. IEEE Int. Conf. Robot. Automat., 2021.
+
+[4] C. Khazoom, S. Hong, M. Chignoli, E. Stanger-Jones, and S. Kim,
+“Tailoring solution accuracy for fast whole-body model predictive
+control of legged robots,” IEEE Robotics and Automation Letters,
+2024.
+
+[5] M. Khadiv, A. Herzog, S. Ali. A. Moosavian, and L. Righetti, “Walk-
+ing Control Based on Step Timing Adaptation,” IEEE Transactions on
+Robotics, 2020.
+
+[6] T. Egle, J. Englsberger, and C. Ott, “Step and Timing Adaptation
+during Online DCM Trajectory Generation for Robust Humanoid
+Walking with Double Support Phases,” in IEEE-RAS 22nd Int. Conf.
+Humanoid Robots, 2023.
+
+[7] C. Yang, K. Yuan, W. Merkt, T. Komura, S. Vijayakumar, and Z. Li,
+“Learning Whole-body Motor Skills for Humanoids,” in IEEE-RAS
+18th Int. Conf. Humanoid Robots, Nov. 2018.
+
+[8] D. Ferigo, R. Camoriano, P. M. Viceconte, D. Calandriello, S. Traver-
+saro, L. Rosasco, and D. Pucci, “On the Emergence of Whole-Body
+Strategies From Humanoid Robot Push-Recovery Learning,” IEEE
+Robotics and Automation Letters, 2021.
+
+[9] F. B. Horak and L. M. Nashner, “Central programming of postural
+movements: Adaptation to altered support-surface configurations,”
+Journal of Neurophysiology, no. 6, 1986.
+
+[10] J. Englsberger, G. Mesesan, A. Werner, and C. Ott, “Torque-Based
+Dynamic Walking - A Long Way from Simulation to Experiment,” in
+Proc. IEEE Int. Conf. Robot. Automat., 2018.
+
+[11] R. P. Singh, Z. Xie, P. Gergondet, and F. Kanehiro, “Learning Bipedal
+Walking for Humanoids with Current Feedback,” IEEE Access, 2023.
+[12] Z. Xie, H. Y. Ling, N. H. Kim, and M. van de Panne, “ALLSTEPS:
+Curriculum-driven Learning of Stepping Stone Skills,” Computer
+Graphics Forum, 2020.
+
+[13] N. Rudin, D. Hoeller, P. Reist, and M. Hutter, “Learning to Walk in
+Minutes Using Massively Parallel Deep Reinforcement Learning,” in
+Proceedings of the 5th Conference on Robot Learning, 2022.
+[14] Z. Li, X. B. Peng, P. Abbeel, S. Levine, G. Berseth, and K. Sreenath,
+“Reinforcement Learning for Versatile, Dynamic, and Robust Bipedal
+Locomotion Control,” arXiv, Tech. Rep. arXiv:2401.16889, Jan. 2024.
+
+[15] J. Siekmann, K. Green, J. Warila, A. Fern, and J. Hurst, “Blind Bipedal
+Stair Traversal via Sim-to-Real Reinforcement Learning,” arXiv, Tech.
+Rep. arXiv:2105.08328, May 2021.
+
+[16] H. Duan, A. Malik, M. S. Gadde, J. Dao, A. Fern, and J. Hurst,
+“Learning Dynamic Bipedal Walking Across Stepping Stones,” in
+2022 IEEE/RSJ International Conference on Intelligent Robots and
+Systems (IROS), Oct. 2022.
+
+[17] L. Bao, J. Humphreys, T. Peng, and C. Zhou, “Deep Reinforcement
+Learning for Bipedal Locomotion: A Brief Survey,” arXiv, Tech. Rep.
+arXiv:2404.17070, Apr. 2024.
+
+[18] Z. Gu, R. Guo, W. Yates, Y. Chen, and Y. Zhao, “Walking-by-logic:
+Signal temporal logic-guided model predictive control for bipedal
+locomotion resilient to external perturbations,” 2023.
+
+[19] H. Duan, J. Dao, K. Green, T. Apgar, A. Fern, and J. Hurst, “Learning
+Task Space Actions for Bipedal Locomotion,” in 2021 IEEE Interna-
+tional Conference on Robotics and Automation (ICRA), May 2021.
+
+[20] G. A. Castillo, B. Weng, W. Zhang, and A. Hereid, “Reinforcement
+Learning-Based Cascade Motion Policy Design for Robust 3D Bipedal
+Locomotion,” IEEE Access, vol. 10, 2022.
+
+[21] G. A. Castillo, B. Weng, S. Yang, W. Zhang, and A. Hereid, “Template
+Model Inspired Task Space Learning for Robust Bipedal Locomotion,”
+arXiv, Tech. Rep. arXiv:2309.15442, Sep. 2023.
+
+[22] R. Griffin, J. Foster, S. Fasano, B. Shrewsbury, and S. Bertrand,
+“Reachability Aware Capture Regions with Time Adjustment and
+Cross-Over for Step Recovery,” arXiv, Tech. Rep. arXiv:2307.11968,
+Jul. 2023.
+
+[23] A. S. Habib, F. M. Smaldone, N. Scianca, L. Lanari, and G. Oriolo,
+“Handling Non-Convex Constraints in MPC-Based Humanoid Gait
+Generation,” in 2022 IEEE/RSJ International Conference on Intelligent
+Robots and Systems (IROS), Oct. 2022.
+
+[24] G. Mesesan, J. Englsberger, C. Ott, and A. Albu-Sch¨affer, “Convex
+Properties of Center-of-Mass Trajectories for Locomotion Based on
+Divergent Component of Motion,” IEEE Robotics and Automation
+Letters, vol. 3, no. 4, pp. 3449–3456, 2018.
+
+[25] J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov,
+“Proximal Policy Optimization Algorithms,” arXiv, Tech. Rep.
+arXiv:1707.06347, Aug. 2017.
+
+[26] A. Roig, S. K. Kothakota, N. Miguel, P. Fernbach, E. M. Hoffman, and
+L. Marchionni, “On the Hardware Design and Control Architecture of
+the Humanoid Robot Kangaroo,” in 6th Workshop on Legged Robots
+during the Int. Conf. Robot. Automat., 2022.
+
+[27] E. Todorov, T. Erez, and Y. Tassa, “MuJoCo: A physics engine for
+model-based control,” in Proc. IEEE/RSJ Int. Conf. Intell. Robots Syst.,
+2012, pp. 5026–5033.
+
+[28] A. Bambade, S. El-Kazdadi, A. Taylor, and J. Carpentier, “PROX-QP:
+Yet another Quadratic Programming Solver for Robotics and beyond,”
+in Robotics: Science and Systems XVIII, Jun. 2022.
+
+

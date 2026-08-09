@@ -1,0 +1,745 @@
+High-Order Harmonic Generation in Organic Molecular 
+Crystals  
+Falk-Erik Wiechmann1,2, Samuel Schöpa1, Lina Bielke1, Svenja Rindelhardt1,2, Serguei 
+Patchkovskii3, Felipe Morales3, Maria Richter3, Dieter Bauer1,2, Franziska Fennel1,2 
+ 
+1Institute of Physics, University of Rostock, 18051 Rostock, Germany. 
+2Department Life, Light & Matter, University of Rostock, 18051 Rostock, Germany. 
+3Max Born Institute, Max Born Str. 2a, 12489 Berlin, Germany. 
+High-order harmonic generation (HHG) is a powerful tool for probing electronic 
+structure and ultrafast dynamics in matter. Traditionally studied in atomic and 
+molecular gases1–4, HHG has recently been extended to condensed matter, enabling all -
+optical investigations of electronic and crystal structures 5–10. Here, we experimentally 
+demonstrate HHG in a new  class of materials: thin organic molecular crystals with 
+perfectly aligned molecules, using pentacene as a model system. Organic molecular 
+crystals, characterized by weak intermolecular coupling, flat electronic bands, and large 
+unit cells, differ fundame ntally from conventional covalent or ionic crystals and have 
+attracted significant interest as promising candidates for organic electronics 11. We show 
+that pentacene crystals endure laser intensities sufficient for efficient HHG up to the 17th 
+order. The harmonic yield as a function of laser polarization reveals a strong dependence 
+on intermolecular interactions, with higher harmonic orders particularly sensitive to 
+both nearest - and next -nearest-neighbor c ouplings. Model calculations indicate that 
+weaker intermolecular interactions necessitate probing with higher harmonic orders to 
+resolve the crystal structure. These findings suggest that HHG may serve as a powerful 
+tool for probing the electronic structure of organic molecular crystals, enhancing all -
+optical techniques for studying electronic properties and ultrafast dynamics in complex 
+organic materials. 
+ 
+High-order harmonic generation (HHG) is a highly nonlinear and coherent process in which 
+systems exposed to intense laser fields convert low -energy radiation into radiation at integer 
+multiples of the incident photon energy. HHG enables the study of ultrafast dynamics in matter, 
+such as laser -driven electronic processes in molecules 12,13, inorganic  crystals5, liquids14,15, 
+liquid crystals16, transition metal dichalcogenide s17, metals18, and topological insulators 19. In 
+crystalline solids, HHG provides a powerful tool for mapping neighboring atomic sites 20, 
+reconstructing band structures 6, and imaging the valence electron  distribution8,10. Therefore, 
+HHG has been established as a powerful spectroscopic method for inorganic solid-state targets. 
+In this work, we extend HHG to organic molecular crystals (OMCs), a target class so far not 
+considered in extreme nonlinear optics. Due to their low cost, light weight, and great processing 
+versatility OMCs have attracted significant attention as promising candidates for organic 
+electronics like thin -film field -effect transistors (OFETs)
+21, organic light emitting diodes, 
+sensors, and organic photovoltaics22,23. 
+Given their practical significance, a detailed understanding of the charge- carrier dynamics in 
+OMCs is highly desirable and  high-harmonic spectroscopy provides a powerful all -optical 
+approach. From a fundamental physics perspective, OMCs also represent a compelling new 
+class of materials for HHG, as they consist of perfectly aligned organic molecules in the 
+crystalline phase. However, their weak intermolecular coupling of only a few hundred 
+wavenumbers leads to the formation of very flat electronic bands. This poses a fundamental 
+question: What governs the harmonic generation process in these weakly coupled systems? Is 
+it drive n primarily by the coherent response of individual molecules, or does weak  
+intermolecular coupling influence strong- field interactions, imprinting the crystal structure 
+onto the harmonic signatures? 
+Until now, OMCs have only been shown to generate perturbative, low-order harmonics24,25. In 
+polycrystalline organic semiconductors, higher -order harmonics up order  nine have been 
+observed26. However, due to the random molecular orientation, no directional dependence on 
+molecular states, intermolecular coupling or crystal structure was identified. 
+In this work, we introduce a novel approach for probing the electronic structure and dynamics 
+of single-crystalline OMCs, observing harmonic orders up to 17 and their distinct dependence 
+on the polarization of the incoming laser pulse. 
+As a prototype OMC, we chose a pentacene crystal. The pentacene molecule consists of five 
+linearly fused benzene rings and is a text book organic molecule due to its conjugated π-
+electron system. Pentacene crystals 27 attract great attention as they perform singlet fission 
+breaking the Schockley -Queisser limit 28–30, are used in OFETs and organic light emitting 
+diodes31, are easy to grow32, and are theoretically well characterized33–35.  
+We consider two potential origins of the generated harmonics in OMCs: (i) The harmonics are 
+generated independently by the well -aligned pentacene molecules. In this scenario, the 
+measured spectrum could be understood as  the coherent sum of the individual molecular 
+contributions, and the harmonic efficiency should be enhanced for laser polarizations matching 
+the dominant transition dipole moments of the individual molecules. (ii) The harmonic 
+generation is strongly influenced by the crystal structure, where couplings to nearest and 
+possibly next-nearest neighbor molecules play a decisive role. This  would involve electrons 
+sensing the crystal lattice during their dynamics, and harmonics should be enhanced for laser 
+polarizations along directions that connect the neighbors, a behavior previously observed in 
+inorganic crystals10,20. 
+To discriminate between the two possible mechanisms, we performed polarization- dependent 
+harmonic yield measurements from a pentacene crystal placed on a wide band -gap sapphire 
+substrate. The driving peak field strength was 0.67 TW/cm 2 with a photon energy of 0.31 eV 
+(corresponding to 4 µm wavelength) , well belo w the lowest electronic transition energy of 
+1.85 eV33. Odd harmonic orders from 3 to 17 were observed, collected in transmission 
+geometry, and analyzed using grating spectrometers, see Fig. 1. To investigate the process 
+behind the harmonic generation, the harmonic yield was measured as a function of the lase r 
+polarization direction by turning the laser polarization with a λ /2-waveplate and keeping the 
+crystal fixed, for further details see Methods.  
+In case the generation mechanism is dominated by isolated molecules, we expect maximum 
+harmonic emission when the fundamental polarization aligns with the projections of the 
+molecular electronic transition dipole moments located at 32° and 165° for the first electronic 
+transition (S0 → S1) and at 127° for the second electronic transition (S0 → S2), see black arrows 
+in Fig. 2a for the two molecules in the unit cell. 
+On the other hand, couplings of pentacene molecules could enhance harmonic emission when 
+the fundamental polarization aligns with directions to nearest neighbors located at 53° and 133° 
+or next-nearest neighbor at 0°, see gray arrows in Fig. 2b, c and d. 
+For all harmonic orders, we observed a pronounced dependence of the harmonic yield on the 
+laser polarization direction (Fig.  2c and d). Harmonic orders 3 to 9 exhibit two principal 
+emission directions, with peaks near 55° and 130°. Additionally, higher -order harmonics 
+(orders 11 to 13) reveal an emission lobe at 0°, resulting in three dominant directions. 
+Interestingly, harmonic 15 behaves similarly to the lower orders, with primary emission around 
+55° and 130°, while the 0° lobe remains minimal. However, the emission lobes for harmonic 
+15 are noticeably narrower compared to the lower -order harmonics, indicating a stronger 
+sensitivity to the crystal structure and intermolecular interactions. 
+Surprisingly, our experimental findings indicate that the  S
+0 → S1 transition has negligible  
+impact on the HHG process, since no enhanced harmonic yield was observed in these 
+directions. In contrast, the crystal structure seems to strongly influence the generation process. 
+In all three neighboring directions the harmonic generation process was enhanced, with higher-
+order harmonics seeming to be much more sensitive to the weaker next -nearest neighbor 
+coupling compared to the lower harmonics. However, we cannot rule out significant 
+contribution of the (S0 →  S2) transition at 127°, as it would be superimposed with the nearest 
+neighbor at 133°. 
+To understand the origin of the measured angular dependence, we pursued three 
+complementary theoretical approaches: High -level quantum calculations for individual 
+pentacene molecules, TD -DFT calculations for the pentacene crystal, and a simplified but 
+instructive and flexible 2D tight- binding approach to separate the contributions of single and 
+coupled molecules for variable intermolecular couplings. 
+The dashed red curves in Fig. 3 depict the angular dependence of harmonics 3 to 15 generated 
+coherently by two individual pentacene molecules as calculated with the MR -CIS 
+(multireference configuration interaction with all single excitations) approach . The two 
+molecules had the same spatial alignment as those in the unit cell of the crystal. A 4  µm laser 
+pulse with a peak intensity of 1 TW/cm 2 was used, for further details see Method s. For all 
+harmonic orders, the yield is pronounced in a single dominant direction. In particular, the 
+higher-order harmonics ali gn closely with the long molecular axis, which corresponds to the 
+highest polarizability, the strongest molecular response, and the transition dipole moment from 
+the ground to the second excited state S0 → S2. Instead, for the third harmonic the S 0 → S1 
+transition (black arrow at 165°) seems to dominate. Crucially, the multiple -peak structure 
+observed in the experiment is absent in the individual-molecule calculations, highlighting that 
+the single molecule response is not sufficient to describe the exper imental observations and 
+that intermolecular couplings within the crystal must be important, despite their apparent 
+weakness. 
+We tested this hypothesis using the Octopus package 36 to perform real-space, time-dependent 
+density functional theory (TD-DFT) simulations of HHG in the pentacene crystal.  Compared 
+to conventional ionic- and covalently bonded solids, pentacene has a significantly larger unit 
+cell and a greater number of occupied bands, making time-dependent HHG simulations with a 
+long-wavelength driving pulse computationally demanding. To manage this complexity, we 
+restricted the TD-DFT simulations to vertical transitions at the Γ-point.  
+The blue curves in Fig.  3 depict the polarization-dependent harmonic yields generated in the 
+periodic molecular crystal. Compared to the  calculated harmonic response of individual 
+molecules, the crystal calculations reveal a much more intricate polarization dependence. 
+Notably, harmonics 5 to 13 exhibit enhanced yields for three distinct polarization directions, 
+matching the nearest- and next-nearest-neighbor orientations, as observed experimentally. 
+The quantitative discrepancy between the TD-DFT calculations and experimental results is not 
+unexpected. Specifically, the HOMO -LUMO gap of single pentacene molecules is 
+underestimated37. Additionally, DFT -based methods tend to artificially redshift electronic 
+transitions due to charge -transfer effects in herringbone dimers 38, which cannot be fully 
+captured by local exchange- correlation functionals alone 39. Nevertheless, the qualitative 
+polarization dependence obtained with TD-DFT matches the experimental observations. 
+The drop in harmonic efficiency between low and high orders observed for single -molecule 
+and crystal calculations gives an additional hint to the relevant mechanism. For the individual 
+molecule calculations, the harmonic intensity decreases more than 11 orders of magnitude from 
+harmonic 5 to 15. Such a steep drop suggests that the higher -order harmonics would be 
+undetectable in the experiment. In contrast, the crystal calculations exhibit a significantly 
+smaller decrease of up to four orders of magnitude, closely matching the experimental results, 
+see Fig. 1c. This agreement underscores the efficiency of HHG in OM Cs and the crucial role 
+of intermolecular interactions in sustaining higher-order harmonic generation in the crystal. 
+To gain deeper insight into the mechanism underlying the HHG process in the pentacene 
+crystal, we constructed a simplified 2D tight-binding model as shown in Fig. 4b. Each molecule 
+was modeled as two tight -binding sites, strongly coupled by the parameter  t
+1, with their 
+molecular axes aligned along 127 °, corresponding to the 2D -projected long molecular 
+pentacene axes onto the polarization plane of the laser field. Multiple of these molecules were 
+placed on a regular grid such that next neighbors  were located at angles of 47 ° and 133°, and 
+the closest sites of neighboring toy molecules feature a weak intermolecular coupling of t2. For 
+simplicity, we omitted a coupling to next-nearest neighbors. The four sites per unit cell lead to 
+four bands in the corresponding model crystal. 
+Examining the polarization dependence predicted by this model (green dotted lines in Fig.  3), 
+we observed distinct maxima in both intermolecular directions for all harmonic orders except 
+the 9th. The relative peak strengths vary with harmonic order, consistent with experimental 
+observations. The experimental peaks in 0° direction were not reproduced as we omi tted the 
+coupling in this direction. The 5th  and 7th  harmonic show a stronger yield for a laser 
+polarization of about 133° because this nearest-neighbor direction coincides with the single 
+molecule transition, which influences the lower orders. The higher orders 9 to 13 exhibit their 
+maximum around the 47° direction. For equal intermolecular coupling, in this direction the 
+distance between the coupled sites , and thus the transition dipole, is slightly larger compared 
+to the other direction at 133°, resulting in enhanced harmonic yield.  
+To clearly distinguish between molecular and intermolecular contributions, we rotated the 
+molecular axes in the model away from the nearest neighbor direction to 0° as shown in Fig. 4c, 
+ensuring that the molecular and intermolecular directions were well separated. Note that for 
+this geometry an additional symmetry arises in which both intermolecular axes at 47° and 133° 
+are equivalent, and it is sufficient to consider only the polariza tion range from 0° to 90°. We 
+varied the intermolecular coupling t 2 across three orders of magnitude and plot ted the laser 
+polarization that maximizes the harmonic yield in Fig.  4d. Red color signifies  a higher 
+harmonic yield for a field polarization along the molecular direction, here 0°, while light blue  
+signifies the intermolecular direction. 
+For a relatively strong intermolecular coupling, all harmonics were  indeed most efficiently 
+generated for a l aser polarization along the intermolecular direction. At an intermolecular 
+coupling strength of one percent of the molecular coupling, the fundamental and 3rd harmonic 
+maximize along the angle of the molecular transition, while all higher orders show their  
+maximum in the nearest-neighbor direction. 
+As |𝑡𝑡2| further decreases, the maximum HHG yield flips towards the molecular direction, 
+starting with the lower orders and gradually affecting higher orders. The details of the angular 
+flipping not only depend on t 2 but also on the laser parameters because of potential  (multi-
+photon) resonances. Such resonances lead to non-monotonous flipping as a function of |𝑡𝑡2| for, 
+e.g., harmonic orders 5 and 7 in Fig.  4d. The results for the model system suggest that the 
+intermolecular couplings in the pentacene crystal are in the regime where the harmonic yield 
+is maximized for laser polarizations along nearest-neighbor directions and the weaker coupling 
+in next -nearest neighbor direction affects mainly the higher orders 11 and 13 in Fig.  3. In 
+general, the tight binding models illustrate, that HHG is extremely sensitive to the electronic 
+intermolecular coupling.  
+Our experimental and theoretical results demonstrate that OMCs, with their perfectly aligned 
+molecules on a crystal lattice, are a promising target class for efficient HHG. By applying high-
+harmonic spectroscopy to pentacene, we have introduced a powerful all-optical method for 
+probing intermolecular coupling strengths. In weakly coupled systems, higher-order harmonics 
+are required to resolve neighboring positions, while stronger coupling allows detection at lower 
+orders.  
+Beyond structural characterization, our approach paves the way towards time-resolved studies 
+of ultrafast excitations in pentacene and related organic semiconducting materials. 
+Temperature-dependent measurements could further reveal how thermal fluctuations influence 
+intermolecular interactions, potentially uncovering phase transitions or polaronic effects. 
+The role of intermolecular coupling in organic electronics could be further elucidated by 
+comparing the HHG response across polycyclic aromatic hydrocarbons or chemically modified 
+pentacene crystals via functional group substitutions or packing variations. Such studies may 
+inform design strategies for optimizing the HHG response in tailored semiconductors.  
+Extending HHG to a broader class of organic molecular crystals will advance the st udy of 
+charge transport, excitonic coupling, and ultrafast carrier dynamics, reinforcing its potential as 
+a versatile tool for all- optical spectroscopy and control in organic electronics and quantum 
+materials. 
+ 
+ 
+References 
+1. Popmintchev, T., Chen, M.-C., Arpin, P., Murnane, M. M. & Kapteyn, H. C. The attosecond 
+nonlinear optics of bright coherent X-ray generation. Nat. Photon. 4, 822–832; 
+10.1038/nphoton.2010.256 (2010). 
+2. Peng, P., Marceau, C. & Villeneuve, D. M. Attosecond imaging of molecules using high 
+harmonic spectroscopy. Nat. Rev. Phys. 1, 144–155; 10.1038/s42254-018-0015-1 (2019). 
+3. Marangos, J. P. Development of high harmonic generation spectroscopy of organic molecules 
+and biomolecules. J. Phys. B: At. Mol. Opt. Phys. 49, 132001; 10.1088/0953-4075/49/13/132001 
+(2016). 
+4. Cireasa, R. et al. Probing molecular chirality on a sub-femtosecond timescale. Nat. Phys. 11, 
+654-658; 10.1038/NPHYS3369 (2015). 
+5. Ghimire, S. et al. Observation of high-order harmonic generation in a bulk crystal. Nat. Phys. 7, 
+138–141; 10.1038/NPHYS1847 (2011). 
+6. Vampa, G. et al. All-Optical Reconstruction of Crystal Band Structure. Phys. Rev. Lett. 115, 
+193603; 10.1103/PhysRevLett.115.193603 (2015). 
+7. Yue, L. & Gaarde, M. B. Introduction to theory of high-harmonic generation in solids: tutorial. J. 
+Opt. Soc. Am. B: Opt. Phys. 39, 535–555; 10.1364/JOSAB.448602 (2022). 
+8. Goulielmakis, E. & Brabec, T. High harmonic generation in condensed matter. Nat. Photon. 16, 
+411–421; 10.1038/s41566-022-00988-y (2022). 
+9. Ghimire, S. & Reis, D. A. High-harmonic generation from solids. Nat. Phys. 15, 10–16; 
+10.1038/s41567-018-0315-5 (2019). 
+10. Lakhotia, H. et al. Laser picoscopy of valence electrons in solids. Nature 583, 55-59; 
+10.1038/s41586-020-2429-z (2020). 
+11. Wang, J. et al. Organic crystalline materials in flexible electronics. Chem. Soc. Rev. 48, 1492–
+1530; 10.1039/c8cs00406d (2019). 
+12. Vozzi, C. et al. Generalized molecular orbital tomography. Nat. Phys. 7, 822–826; 
+10.1038/nphys2029 (2011). 
+13. Smirnova, O. et al. High harmonic interferometry of multi-electron dynamics in molecules. 
+Nature 460, 972–977; 10.1038/nature08253 (2009). 
+14. Luu, T. T. et al. Extreme‐ultraviolet high‐harmonic generation in liquids. Nat. Commun. 9, 3723; 
+10.1038/s41467-018-06040-4 (2018). 
+15. Inga Jordan et al. Attosecond spectroscopy of liquid water. Science 369, 974–979; 
+10.1126/science.abb0979 (2020). 
+16. Annunziata, A. et al. High-order harmonic generation in liquid crystals. APL Photonics 9, 
+60801; 10.1063/5.0191184 (2024). 
+17. Liu, H. et al. High-harmonic generation from an atomically thin semiconductor. Nat. Phys. 13, 
+262–265; 10.1038/nphys3946 (2017). 
+18. Korobenko, A. et al. High-harmonic generation in metallic titanium nitride. Nat. Commun. 12, 
+4981; 10.1038/s41467-021-25224-z (2021). 
+19. Schmid, C. P. et al. Tunable non-integer high-harmonic generation in a topological insulator. 
+Nature 593, 385-390; 10.1038/s41586-021-03466-7 (2021). 
+20. You, Y. S., Reis, D. A. & Ghimire, S. Anisotropic high-harmonic generation in bulk crystals. 
+Nat. Phys. 13, 345–349; 10.1038/NPHYS3955 (2017). 
+21. He, T. et al. Single-crystal field-effect transistors of new Cl₂-NDI polymorph processed by 
+sublimation in air. Nat. Commun. 6, 5954; 10.1038/ncomms6954 (2015). 
+22. Bronstein, H., Nielsen, C. B., Schroeder, B. C. & McCulloch, I. The role of chemical design in 
+the performance of organic semiconductors. Nat. Rev. Chem. 4, 66–77; 10.1038/s41570-019-
+0152-9 (2020). 
+23. Yi, Jicheng and Zhang, Guangye and Yu, Han and Yan, He. Advantages, challenges and 
+molecular design of different material types used in organic solar cells. Nat. Rev. Mat. 2024, 46–
+62; 10.1038/s41578-023-00618-1 (2024). 
+24. Jentzsch, T., Juepner, H. J., Brzezinka, K. W. & Lau, A. Efficiency of optical second harmonic 
+generation from pentacene films of different morphology and structure. Thin Solid Films 315, 
+273–280; 10.1016/S0040-6090(97)00797-9 (1998). 
+25. Radhakrishnan, T. P. Molecular structure, symmetry, and shape as design elements in the 
+fabrication of molecular crystals for second harmonic generation and the role of molecules-in-
+materials. Acc. Chem. Res. 41, 367–376; 10.1021/ar7002072 (2008). 
+26. Li, W. et al. Resonance Effect in Brunel Harmonic Generation in Thin Film Organic 
+Semiconductors. Adv. Opt. Mater. 11, 2203070; 10.1002/adom.202203070 (2023). 
+27. Siegrist, T. et al. Enhanced Physical Properties in a Pentacene Polymorph. Angew. Chem., Int. 
+Ed. 40, 1732–1736; 10.1002/1521-3773(20010504)40:9<1732::AID-ANIE17320>3.0.CO;2-7 
+(2001). 
+28. Rao, A. & Friend, R. H. Harnessing singlet exciton fission to break the Shockley-Queisser limit. 
+Nat. Rev. Mater. 2, 17063; 10.1038/natrevmats.2017.63 (2017). 
+29. Neef, A. et al. Orbital-resolved observation of singlet fission. Nature 616, 275-279; 
+10.1038/s41586-023-05814-1 (2023). 
+30. Seiler, H. et al. Nuclear dynamics of singlet exciton fission in pentacene single crystals. Sci. Adv. 
+7, eabg0869; 10.1126/sciadv.abg0869 (2021). 
+31. Hagen Klauk (ed.). Organic Electronics (Wiley-VCH, 2006). 
+32. Ye, X. et al. Microspacing In-Air Sublimation Growth of Organic Crystals. Chem. Mater. 30, 
+412–420; 10.1021/acs.chemmater.7b04170 (2018). 
+33. Cocchi, C., Breuer, T., Witte, G. & Draxl, C. Polarized absorbance and Davydov splitting in bulk 
+and thin-film pentacene polymorphs. Phys. Chem. Chem. Phys. 20, 29724–29736; 
+10.1039/c8cp06384b (2018). 
+34. Hestand, N. J. et al. Polarized Absorption in Crystalline Pentacene: Theory vs Experiment. J. 
+Phys. Chem. C 119, 22137–22147; 10.1021/acs.jpcc.5b07163 (2015). 
+35. Coropceanu, V., Li, Y., Yi, Y., Zhu, L. & Bredas, J.-L. Intrinsic charge transport in single 
+crystals of organic molecular semiconductors: A theoretical perspective. MRS Bull 38, 57–64; 
+10.1557/mrs.2012.313 (2013). 
+36. Andrade, X. et al. Real-space grids and the Octopus code as tools for the development of new 
+simulation approaches for electronic systems. Phys. Chem. Chem. Phys. 17, 31371–31396; 
+10.1039/c5cp00351b (2015). 
+37. Jacquemin, D., Wathelet, V., Perpète, E. A. & Adamo, C. Extensive TD-DFT Benchmark: 
+Singlet-Excited States of Organic Molecules. J. Chem. Theory Comput. 5, 2420–2435; 
+10.1021/ct900298e (2009). 
+38. Ang, S. T., Pal, A. & Manzhos, S. Comparison of optical absorption spectra of organic 
+molecules and aggregates computed from real frequency dependent polarizability to TD-DFT 
+and the dipole approximation. J. Chem. Phys. 149, 44114; 10.1063/1.5040723 (2018). 
+39. Dreuw, A., Weisman, J. L. & Head-Gordon, M. Long-range charge-transfer excited states in 
+time-dependent density functional theory require non-local exchange. J. Chem. Phys. 119, 2943–
+2946; 10.1063/1.1590951 (2003). 
+ 
+ 
+ 
+ 
+ 
+  
+Figures 
+ 
+ 
+Figure 1: a, Schematic of the experimental setup.  A mid-IR pulse is focused onto a single 
+pentacene crystal, inducing harmonic generation. Harmonics are collected in transmission 
+geometry and analyzed using two diffraction grating spectrometers, covering a spectral range 
+from 2500 nm to 220 nm, containing harmonic orders 2 to 17. b, Crystal structure and unit cell 
+of pentacene as obtained by X-ray diffraction. Incident and harmonic pulse are also indicated. 
+c, Harmonic spectrum generated by a driving field with photon energy of 0.31 eV and 
+polarization direction at 120° relative to the a- axis of the crystal. The spectrum extends from 
+the 3rd to the 17th  harmonic order. Different colors represent data measured with different 
+spectrometers. Variations in noise levels result from differing integration times. 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+Figure 2: Measured polarization -dependent harmonic yield. In all polar plots, 0° 
+corresponds to the projection of the crystalline a- axis vector onto the laser polarization plane.  
+a, The two different alignments of pentacene molecules, derived from the crystal structure. 
+Black arrows represent the directions of the transition dipole moments for the single-molecule 
+excited states, projected onto the laser polarization plane. b, Alignment of the pentacene crystal 
+with the laser propagating into the plane, along the crystalline c-axis. Gray arrows indicate the 
+angles where the laser polarization aligns with the connecting lines between molecules. c,d , 
+Experimentally measured normalized harmonic yields for the 3rd to 7th harmonic and the 9th 
+to 15th harmonic, respectively.  
+ 
+ 
+ 
+ 
+ 
+
+ 
+Figure 3: Simulated polarization-dependent harmonic yield compared to  experimental 
+results. Polarization-dependent HHG yields of the experimental measurements for harmonic 
+orders 3 to 13 (gray shaded), compared to the results of an MR-CIS simulation for the combined 
+individual molecular response (dashed red), TD -DFT simulations (blue), and the simple 2D 
+tight-binding model (dotted green). Gray and black arrows indicate the projected directions of 
+the intermolecular connecting axes and the molecular transition dipole moments, respectively  
+(see Fig. 2). 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+Figure 4: Dependence of HHG on intermolecular coupling.  a-c, Crystal structure of 
+pentacene alongside the two variants of the simplified tight- binding model. d, Laser 
+polarization 𝜑𝜑 maximizing the harmonic yield for different harmonic orders as a function of 
+the intermolecular coupling t2 in the tight-binding model shown in c. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+Methods 
+Experimental harmonic- generation setup . Mid-IR pulses with a center wavelength of 
+4000 nm were generated by frequency conversion of the 800 nm output of a Ti:sapphire CPA 
+system (Spitfire ACE PA, Spectra -Physics, 1 kHz). The Ti:sapphire laser output was used to 
+pump an optical parametric amplifier (HE -Topas-Prime Plus, Light Conversion, 10 mJ)  to 
+generate the signal and idler at 1333  nm and 2000 nm, respectively. Noncollinear difference 
+frequency generation (NDFG1K, Light Conversion) in an AGS crystal generated 4000  nm 
+pulses with 40 µJ pulse energy. Signal, idler and the mid- IR driving pulses were separated by 
+propagation to the harmonic generation setup. The mid-IR pulse duration (FWHM) was 152 fs, 
+as characterized with a home built SHG autocorrelator using again an AGS crystal (AGS5002-
+SHG(I), Newlight Photonics Inc.). The intensity was controlled via a turnable achromatic half-
+waveplate (3-6 µm, B.Halle), in combination with a fixed polarizer (SIR3 -5, Moxtec) placed 
+behind. A second half-waveplate (3-6 µm, B.Halle) was used to adjust the angle between the 
+polarization direction of the linearly polarized driving field and the targets' crystal axes. The 
+pulses were focused by an f = 5 cm plano-convex ZnSe lens (LA7656-E4, Thorlabs) to a focal 
+spot with ~ 40 µm in radius (1/e 2), measured with the knife -edge method. The target was 
+positioned inside the laser focus with a nano-positioner (SLC-2460/SLC-2490, SmarAct) with 
+sub-micrometer precision. The target positioning was monitored via a microscope with a long 
+working distance.  The emitted harmonics were collected and characterized by a grating 
+spectrometer (Triax 190, Horiba). The dispersed harmonics were imaged onto a CCD camera 
+(Newton DU970N-UVB, Andor Technology) with low noise level. The spectral region falling 
+on the camera chip was adjusted by rotating the grating. The wavelength sensitivity of the 
+optics and the camera allowed us to measure harmonics with a wavelength between 220  nm 
+and 900 nm, covering the harmonic orders 17 to 5. For the third harmonic, with a wavelength 
+of 1330 nm, an NIR sensitive fiber spectrometer (NIR Quest+2.5, Ocean Optics) was used. 
+Thanks to its large band gap
+1, the sapphire substrate did not generate harmonics, even at the 
+highest applied intensity of 0.67 TW/cm2. 
+Crystal growth and characterization. Pentacene crystals were grown by microspacing in-air 
+sublimation2. For this purpose, pentacene powder (P0030, TCI, used without further 
+purification) was deposited onto a microscope slide within a temperature-controlled cell (LTS-
+420, Linkam). A sapphire substrate (25.4 mm x 0.25 mm, Ted Pella) was positioned upside 
+down ~200 µm above the microscope slide. The cell was heated with a rate of 50°C/min from 
+room temperature to 290°C. Subsequently, the temperature was maintained at 290°C for 
+several minutes, until large crystals formed  on the sapphire substrate, which was monitored 
+using a microscope. Heating was then stopped and the sample cooled down to room 
+temperature. Cooling speed was increased by opening the temperature cell. The crystal 
+structure was resolved by X -ray diffractio n experiments conducted at room temperature to 
+match the experimental conditions in the harmonic generation setup. A triclinic crystal 
+structure of point group P 1� with two pentacene molecules in the unit cell was identified, in 
+agreement with the literatur e
+3,4. The obtained cell parameters, a = 6.252 Å, b =  7.752 Å, 
+c = 14.569 Å and α = 76.58°, β = 87.52°, γ = 84.83°, are in line with the well-known Siegrist-
+type pentacene polymorph4,5. 
+Additionally, optical microscope pictures of the crystal were taken during the X-ray diffraction 
+experiments for various diffraction angles. This allows us to associate the orientation of the 
+unit cell vectors relative to the macroscopic crystal edges. The a- and b-axis lay close to the 
+plane of the large crystal face, while the c-axis was parallel to the surface normal within the 
+experimental uncertainties. In the harmonic generation setup, the  mid-IR driving pulse 
+propagated along the surface normal of the crystal, i.e. parallel to the c-axis. 
+The angle between the linearly polarized mid -IR driving field and the pentacene molecules 
+inside the crystal depends on the orientation of the crystal and therefore on the unit cell vectors 
+inside the harmonic generation setup. The molecular packing within the unit cell of the crystal 
+leads to a splitting of the energetically lowest electronic transition into two Davydov 
+components. The lower Davydov component (at ~ 670 nm or 1.85 eV) is polarized parallel to 
+the a-axis5. 
+A broad CaF 2 white-light continuum with known polarization orientation was used in an 
+absorption microscope to measure the angle dependent absorption and to indicate the a- axis. 
+In Extended Data Figure 1, the absorption spectra for different white-light polarization angles 
+(gray and red lines) are shown for a wavelength range from 400 nm to 750 nm. The red 
+spectrum exhibits maximum absorption at 670  nm, indicating a white light polarization 
+direction parallel to the energetically lowest transition, i.e. the a -axis of t he crystal. A 
+microscope picture of the pentacene crystal used in the harmonic generation and absorption 
+measurements is shown as an inset. The crystal size is ~ 200µm x 200 µm x 4 µm. Holes are 
+visible at positions where the laser intensity for driving har monics exceeded 0.7 TW/cm 2, 
+leading to local damage of the crystal.  
+In the polar plots shown in Fig. 2 and 3, the experimentally determined a-axis is used to set the 
+angle ϕ = 0°. Note that due to the triclinic crystal structure of pentacene, a laser polarized with 
+an angle of ϕ = 0° will not be polarized parallel to the a- axis but is actually parallel to the 
+projection of the a-axis onto the plane normal to the propagation direction.  
+HHG calculations for pairs of non-interacting pentacene molecules. First, we investigated 
+the polarization dependence of the high- harmonic spectra generated by two non -interacting 
+pentacene molecules with the same spatial orientations as the two molecules in the unit cell of 
+the crystal. For that, we have employed the MR -CIS method (multireference configuration 
+interaction with all single excitations) to calculate the electronic structure of the pentacene 
+molecule, including the 496 lowest -energy singlet states.  For all electronic structure 
+calculations, we applied a cc- pVDZ basis set.  The molecular geometry was optimized at the 
+MP2(fc) level and molecular orbitals were optimized using a CASSCF (complete active space 
+self consistent field) active s pace with six electrons in six π -type orbitals (CAS(6,6)). The 
+calculations were carried out in D
+2h symmetry, with the active -space orbitals having 
+symmetries of B 2g, Au, B3g, B1u, B2g, and A u. The state- averaged energy 𝜀𝜀𝑆𝑆0 + 𝜀𝜀𝑆𝑆1  has been 
+minimized with the ground state 𝑆𝑆0 and the first singlet excited state 𝑆𝑆1 equally weighted. The 
+electronic states were then calculated using the MR -CIS approach, with the CASSCF as the 
+reference and employing the GAMESS (US) quantum chemistry package6–8. For the MR-CIS 
+active space, 31 and 37 active orbitals have been added below and above the CAS, respectively, 
+giving a total of 74 active orbitals. 250 states (all spin multiplicities) were calculated per 
+irreducible representation, giving a total of 496 energy-ordered singlet states.  
+Finally, the energy 𝜀𝜀n of the electronic state n and the transition dipole moment d nm between 
+the electronic states n and m of the pentacene molecule were determined.  
+To maintain phase consistency between the dipoles, they were evaluated using the package 
+SUPERDYSON9 developed at the MBI. 
+To obtain the angle-resolved high-harmonic spectra shown with dashed red lines in Fig. 3, we 
+solved the TDSE in atomic units (au) 
+𝑖𝑖
+𝜕𝜕Ψ(𝒓𝒓,𝑡𝑡;𝜑𝜑)
+𝜕𝜕
+𝑡𝑡 = [𝐻𝐻0 + 𝑉𝑉𝑙𝑙(𝑡𝑡; 𝜑𝜑)] Ψ(𝒓𝒓, 𝑡𝑡; 𝜑𝜑)    (1) 
+ 
+for different laser polarization angles 𝜑𝜑, ranging from 0° to 180°, with a step size of ∆ 𝜑𝜑 = 2°. 
+H0 denotes the field -free molecular Hamiltonian with 𝐻𝐻0Φn = 𝜀𝜀nΦn and 𝑉𝑉𝑙𝑙(𝑡𝑡; 𝜑𝜑) = −𝒅𝒅 ∙
+ 𝑬𝑬(𝑡𝑡; 𝜑𝜑) describes the laser-molecule interaction with the transition dipole moments  
+𝒅𝒅nm = ∫ 𝑑𝑑𝒓𝒓 Φn(𝒓𝒓)(−𝒓𝒓)Φm(𝒓𝒓).    (2) 
+The angle 𝜑𝜑 is defined in the plane spanned by the vectors 𝒂𝒂�p and 𝒃𝒃�p, which are the 
+orthonormalized projections of the unit cell axes a and b onto the plane perpendicular to laser 
+propagation direction, see Eq.  (4) below. The vector 𝒂𝒂�p defines our polarization angle as 
+𝜑𝜑 = 0°, which allows for a direct comparison to the experiment. The molecular wave function 
+Ψ(𝒓𝒓, 𝑡𝑡; 𝜑𝜑) is expanded in the basis of the 496 electronic wave functions, 
+Ψ(𝒓𝒓, 𝑡𝑡; 𝜑𝜑) = ∑ 𝑐𝑐n(𝑡𝑡; 𝜑𝜑) Φn(𝒓𝒓)495
+n=0 .    (3) 
+The Gaussian-shaped laser pulse is given by 
+𝐸𝐸(𝑡𝑡; 𝜑𝜑) = 𝐸𝐸0�𝒂𝒂�p cos(𝜑𝜑) − 𝒃𝒃�psin (𝜑𝜑) � 𝑒𝑒
+−𝑡𝑡2
+2𝜏𝜏2 cos(𝜔𝜔𝑡𝑡),   (4) 
+with a peak field strength of E 0 = 0.00534 au, corresponding to a peak intensity of 
+I0 = 1 TW/cm2, and a frequency of 𝜔𝜔 = 0.011391 au, corresponding to a wavelength of 
+4000 nm. The FWHM pulse duration was 2√2 ln2𝜏𝜏 = 125 fs. 
+The system of ordinary differential equations resulting from Eq.  (1) with the ansatz (3) was 
+solved with the explicit Runge-Kutta method of order 8(5,3)10 on a time grid spanning 1200 fs, 
+and with a time step of dt = 0.11 fs. The initial condition was 𝑐𝑐0 = 1 and 𝑐𝑐n = 0 for n > 0. The 
+calculated energy gap Δ𝜀𝜀(S0, S1) = 𝜀𝜀S0 − 𝜀𝜀S1 = 3.23 eV between states S0 and S1 was adjusted 
+to the experimental value of ~2 eV by shifting the ground state energy accordingly.  
+The single-molecule harmonic dipole,  
+𝑫𝑫m(𝑡𝑡; 𝜑𝜑) = ⟨Ψm(𝑡𝑡; 𝜑𝜑)|𝒅𝒅|Ψm(𝑡𝑡; 𝜑𝜑)⟩,   (5) 
+was calculated in the molecular frame and subsequently transformed to the laboratory frame 
+for each of the two differently oriented molecules in the unit cell ( m = 1, 2). The dipole has 
+been multiplied by a mask that ramps down from 1 to 0 using a cos4-function over the last four 
+cycles of the propagation time.  
+T
+o obtain the angle-resolved total high-harmonic signal of the two non- interacting molecules 
+𝐼𝐼Nω
+tot (𝜑𝜑) = �𝑫𝑫�Nω
+tot (𝜑𝜑)�
+2
+at harmonic frequency 𝑁𝑁 𝜔𝜔, a s shown in Fig . 3, we first removed the 
+dipole components parallel to the laser propagation direction to exclude contributions not 
+present in the experimentally observed far field. Next, we performed a Fourier transform of the 
+sum of the laboratory -frame harmonic dipoles of  the two molecules and determined the 
+maximum value of each harmonic as a function of the polarization angle 𝜑𝜑. 
+H
+HG calculations for the full periodic pentacene crystal . In addition to computing the 
+harmonic signal generated by two non- interacting pentacene molecules oriented as the 
+molecules in the unit cell, we also calculated the harmonic response of the full pentacene 
+crystal, incorporating intermolecular coupling.  
+For such a large and complex system, electronic structure and dynamics calculations at the 
+MR-CIS or similar levels are computationally prohibitive. However, the real -space TD-DFT 
+Octopus package
+11,12 is a well-established tool for simulating the harmonic response of various 
+crystalline targets 13,14, organic molecules 15,16, liquids17, liquid crystals 18, and has also been 
+applied to describe the nuclear dynamics of singlet exciton fission in pentacene crystals19. 
+Our calculations included three steps: First, the experimental structure obtained by X -ray 
+diffraction was relaxed with the Quantum Espresso package20. The new structure was then used 
+for the ground state calculations in Octopus. Finally, we employed Octopus  to simulate the 
+response of the crystal to a short mid-IR laser pulse. In the last step, the electron wavefunctions 
+were propagated by solving the time-dependent Kohn-Sham equations,  
+𝑖𝑖
+∂ψ(𝒓𝒓, 𝑡𝑡; 𝜑𝜑) n, 𝐤𝐤
+∂𝑡𝑡 = 𝐻𝐻�KS(𝒓𝒓, 𝑡𝑡; 𝜑𝜑)𝐤𝐤ψ(𝒓𝒓, 𝑡𝑡; 𝜑𝜑)n,𝐤𝐤   (6) 
+for different polarization directions 𝜑𝜑 of the laser. Here, ψ(𝒓𝒓, 𝑡𝑡; 𝜑𝜑)n,𝐤𝐤 is a Kohn-Sham orbital 
+in the band with index n at the point k in the first Brillouin zone. The Kohn-Sham Hamiltonian 
+reads 
+𝐻𝐻�KS(𝒓𝒓, 𝑡𝑡; 𝜑𝜑)𝐤𝐤 =
+1
+2 �−i∇ +
+1
+𝑐𝑐 𝑨𝑨(𝑡𝑡; 𝜑𝜑)�
+2
++ 𝑣𝑣ext(𝒓𝒓, 𝑡𝑡) + 𝑣𝑣H(𝒓𝒓, 𝑡𝑡)𝐤𝐤 + 𝑣𝑣xc(𝒓𝒓, 𝑡𝑡)𝐤𝐤  (7) 
+ 
+c
+onsisting of the kinetic energy term with the coupling to the vector potential A, related to the 
+electric field of the laser by 𝑬𝑬(𝑡𝑡; 𝜑𝜑) = −(1/𝑐𝑐) 𝜕𝜕𝑨𝑨(𝑡𝑡 ; 𝜑𝜑)/𝜕𝜕
+𝑡𝑡. N
+ote that Octopus uses atomic 
+units but for crystal calculations a prefactor 1/ c is applied to the vector potential (as in cgs -
+units), where c is the speed of light ( ≃ 137 au). The potential 𝑣𝑣 ext(𝒓𝒓, 𝑡𝑡) is determined by the 
+fixed ions, 𝑣𝑣H(𝒓𝒓, 𝑡𝑡)𝐤𝐤 is the Hartree potential describing the mean -field interaction among 
+electrons, and 𝑣𝑣xc(𝒓𝒓, 𝑡𝑡)𝐤𝐤 is the exchange-correlation potential for which we used the Perdew –
+Burke–Ernzerhof (PBE) functional 21. Core electrons were included via the sg15 norm -
+conserving Vanderbilt pseudopotential set22. 
+The long-range van der Waals interaction, which leads to crystal formation, was included via 
+the Grimme-d3 dispersion correction with Becke-Johnson damping23. 
+In the TD-DFT simulations, we applied the vector potential  
+𝑨𝑨(𝑡𝑡; 𝜑𝜑) =
+𝑐𝑐𝐸𝐸0
+𝜔𝜔 �𝒂𝒂�p cos(𝜑𝜑) − 𝒃𝒃�psin (𝜑𝜑) �sin �
+𝜔𝜔𝑡𝑡
+2𝑁𝑁p
+�
+2
+cos(𝜔𝜔𝑡𝑡)   (8) 
+with a peak field strength of E 0 = 0.0018 au (corresponding to a peak intensity of 
+I0 = 0.11 TW/cm2 and a frequency of 𝜔𝜔 = 0.008046 au (corresponding to a wavelength of 
+λ  = 5663 nm. The vectors 𝒂𝒂�p and 𝒃𝒃�p are defined in the previous section. The pulse duration 
+was Np = 10 cycles, corresponding to a FWHM of 95 f s. The calculated energy gap 
+Δ𝜀𝜀(S0, S1) = 𝜀𝜀S0 − 𝜀𝜀S1 = 1.32 eV for the a- polarized Davydov component is smaller 
+compared to the experimental value of 1.85 eV. To maintain the same ratio between the energy 
+gap and the driving frequency in experiment and theory, we adjusted the wavelength to 
+λ = 5663 nm in the TD -DFT simulations.  Pentacene comprises 72 atoms and 204 active 
+electrons in the unit cell.  A full time -dependent simulation describing the interaction of a 
+system as large as pentacene with a long-wavelength laser pulse, while ensuring convergence 
+with respect to the grid and k -space sampling, is computationally prohibitive. Therefore we 
+had to restrict ourselves to calculations for the Γ-point, which can be justified in view of  the 
+flat band structure of pentacene in the low-energy region5. All Octopus simulations employed 
+a grid spacing of 0.4 au and utilized the enforced time -reversal symmetry propagator24 with a 
+time step of 0.1 au. 
+At each time step, we calculated the current and removed its component parallel to the laser 
+propagation, as explained in the previous section. The HHG spectrum was obtained by Fourier-
+transforming the first derivative of the current into the frequency domain with a Hann window. 
+Finally, the harmonic yield was determined by integrating the HHG spectrum over an interval 
+of 1𝜔𝜔 centered around the corresponding harmonic. 
+2D tight-binding model to gain insight into the complex HHG mechanism. To gain further 
+insight into the underlying mechanism in the generation of harmonics in organic molecular 
+crystals, we have developed a simple but instructive 2D tight -binding (TB) model. In this 
+model, a single pentacene molecule is represented by two sites with a strong (intramolecular) 
+coupling t
+1. To model the crystal, we used a unit cell containing two of these toy molecules, 
+with a weak (intermolecular) coupling t2 between the nearest sites of neighboring molecules.  
+Similar to atomic units, ℏ = |e| = 1 is used for the TB model but the energy unit is determined 
+by setting the intramolecular coupling t 1 to -1. The length unit results from specifying the 
+distances between the sites (see below). Note that this model is not primarily intended for direct 
+quantitative comparisons but rather aims to provide insight into the key features governing 
+harmonic generation in OMCs.  
+ The tight-binding Bloch Hamiltonian reads25  
+𝐻𝐻�α,β(𝐤𝐤) = ∑ 𝐻𝐻α,β(Δ𝑹𝑹)𝑒𝑒𝑖𝑖𝒌𝒌(Δ𝑹𝑹+𝝉𝝉β−𝝉𝝉α)
+Δ𝐑𝐑 .   (9) 
+Here, 𝐻𝐻α,β(Δ𝑹𝑹) contains the coupling between site 𝛼𝛼 in the unit cell at position R and site 𝛽𝛽 in 
+the unit cell at R’. The vectors 𝝉𝝉α and 𝝉𝝉β specify the positions of the sites within the unit cell. 
+The sum runs over Δ𝑹𝑹 = 𝑹𝑹’ − 𝑹𝑹, which connects unit cells |Δ𝑹𝑹| apart. In our model, all vectors 
+are 2D and we consider only neighbor -couplings, as described in Main and Fig . 4. This leads 
+to a 4 x 4 Bloch Hamiltonian. 
+The ground state was obtained by diagonalizing the Hamiltonian in Eq.  (9) To calculate the 
+response of the 2D crystal model to the laser field, the system was coupled to the laser vector 
+potential 𝑨𝑨(𝑡𝑡; 𝜑𝜑) in the dipole approximation by the Peierls substitution 
+𝐤𝐤 →  𝒌𝒌(𝒕𝒕) = 𝒌𝒌 + 𝑨𝑨(𝑡𝑡; 𝜑𝜑)             (10) 
+where 𝑨𝑨(𝒕𝒕; 𝜑𝜑) is given in Eq. (8).  
+The photon energy was selected so that slightly more than 6 photons fit into the band gap of 
+the system, in accordance with the experiment. The pulse contained Np = 10 cycles. The TDSE 
+was initialized in the ground states for given ks with the two lower bands populated. The states 
+were propagated over small time steps of 0.1  using the matrix exponential with the full, time -
+dependent Hamiltonian. The crystal momentum was sampled by a 6x6 k -point grid. The 
+polarization-dependent harmonic yield was obtained from the expectation value for the current, 
+as in the TD-DFT calculations described above.  
+In the model, we consider rectangular unit cells, each containing two molecules. Two different 
+geometries within the unit cell were used, see Fig. 4b, c in Main.  
+The polarization dependence of the harmonics calculated with the first geometry, Fig . 4b, are 
+shown with dotted green lines in Fig. 3. Here, the unit cell was designed to mimic the unit cell 
+structure of the pentacene crystal as closely as possible. The molecular axis was set to an angle 
+of 127°, corresponding to the projection of the long-molecular axis of the pentacene molecules 
+in the crystal onto the 2D plane spanned by 𝒂𝒂�p and 𝒃𝒃�p. As neither the experimental nor the 
+theoretical results show any indication for a relevant role of the short molecular axis, and, in 
+order to focus on the essential features, this axis was omitted in this model.  The connecting 
+lines between the centers of nearest neighbor molecules are at angles of 133 ° and 47°, see 
+Fig. 4b. The slightly smaller angle of 47° compared to the experimentally determined 53° is a 
+consequence of the rectangular shape of the unit cell. The distance between the sites belonging 
+to the same molecule is set to a value of 2, while t he centers of neighboring molecules are 9.2 
+length units apart (where the latter is close to the experimentally determined distances in atomic 
+units). The ratio of these values is chosen to avoid overlapping molecules and to keep the 
+intramolecular distanc e appropriately shorter than the distance between sites of different 
+molecules in this 2D model. The intermolecular coupling was adjusted to a value of 𝑡𝑡
+2 =
+0.02 𝑡𝑡1 in order to match the results as closely as possible to the experimentally found 
+polarization dependence. For the results shown in Fig.  3, we used a field strength of 
+E0 =  0.15 / c in the given unit system, leading to clear harmonic spectra.  
+The close proximity of the nearest -neighbor coupling at 133° and the intramolecular S 0-S2 
+coupling at 127° complicates the separation of both contributions. For a clear separation, we 
+have constructed a second unit cell geometry, where the connecting lines between n earest 
+neighbor molecules lie at the same angles as in the previous model system, but the molecular 
+axes are rotated to lie along 0°, see Fig. 4c. As a result, this model system is mirror-symmetrical 
+in x and both signals of the two intermolecular directions at  𝜑𝜑 = 133° and 𝜑𝜑 = 47° have the 
+same intensity. 
+The second model geometry allowed us to systematically study the impact of the strength of 
+the intermolecular coupling t 2 on the harmonic generation, see Fig. 4d. For the t 2-dependent 
+calculations, the field strength was scaled logarithmically as  𝐸𝐸0 = −0.04 log10(|𝑡𝑡2|) in order 
+to obtain a sufficient harmonic yield for small t2 parameters, but to avoid too strong excitations 
+in the limited 4-band scheme for larger t2 parameters. We verified that the harmonic 'flipping' 
+effect, where lower orders switch their maximum from the intermolecular to the molecular axis 
+as the intermolecular coupling decreases, is due to the change in the coupling and not to the 
+accompanying change in field strength. 
+References 
+1. French, R. H. Electronic Band Structure of Al₂O₃, with Comparison to AlON and AlN. J. Am. 
+Ceram. Soc. 73, 477–489; 10.1111/j.1151-2916.1990.tb06541.x (1990). 
+2. Ye, X. et al. Microspacing In-Air Sublimation Growth of Organic Crystals. Chem. Mater. 30, 
+412–420; 10.1021/acs.chemmater.7b04170 (2018). 
+3. Siegrist, T. et al. Enhanced Physical Properties in a Pentacene Polymorph. Angew. Chem., Int. 
+Ed. 40, 1732–1736; 10.1002/1521-3773(20010504)40:9<1732::AID-ANIE17320>3.0.CO;2-7 
+(2001). 
+4. Anthony, J. E. The Larger Acenes: Versatile Organic Semiconductors. Angew. Chem., Int. Ed. 
+47, 452–483; 10.1002/anie.200604045 (2008). 
+5. Cocchi, C., Breuer, T., Witte, G. & Draxl, C. Polarized absorbance and Davydov splitting in bulk 
+and thin-film pentacene polymorphs. Phys. Chem. Chem. Phys. 20, 29724–29736; 
+10.1039/c8cp06384b (2018). 
+6. Schmidt, M. W. et al. General Atomic and Molecular Electronic Structure System. J. Comput. 
+Chem. 14, 1347–1363; 10.1002/jcc.540141112 (1993). 
+7. Mark S. Gordon & Michael W. Schmidt. Advances in Electronic Structure Theory: GAMESS a 
+Decade Later. 41. In Theory and Applications of Computational Chemistry, edited by Clifford E. 
+Dykstra, Gernot Frenking, Kwang S. Kim & Gustavo E. Scuseria (Elsevier, Amsterdam, 2005), 
+pp. 1167–1189. 
+8. Ivanic, J. Direct configuration interaction and multiconfigurational self-consistent-field method 
+for multiple active spaces with variable occupations. I. Method. J. Chem. Phys. 119, 9364–9376; 
+10.1063/1.1615954 (2003). 
+9. Patchkovskii, S. Superdyson: A package for property evaluation for general CI expansions. 
+Available at https://github.com/MBI-Theory/superdyson (2024). 
+10. Hairer, E., Wanner, G. & Nørsett, S. P. Solving Ordinary Differential Equations I: Nonstiff 
+Problems, Chapter 2, Springer Series in Computational Mathematics (Springer-Verlag Berlin, 
+Heidelberg, 1993). 
+11. Andrade, X. et al. Time-dependent density-functional theory in massively parallel computer 
+architectures: the octopus project. J. Phys. Condens. Matter 24, 233202; 10.1088/0953-
+8984/24/23/233202 (2012). 
+12. Andrade, X. et al. Real-space grids and the Octopus code as tools for the development of new 
+simulation approaches for electronic systems. Phys. Chem. Chem. Phys. 17, 31371–31396; 
+10.1039/c5cp00351b (2015). 
+13. Klemke, N. et al. Polarization-state-resolved high-harmonic spectroscopy of solids. Nat. 
+Commun. 10, 1319; 10.1038/s41467-019-09328-1 (2019). 
+14. Tancogne-Dejean, N., Mücke, O. D., Kärtner, F. X. & Rubio, A. Ellipticity dependence of high-
+harmonic generation in solids originating from coupled intraband and interband dynamics. Nat. 
+Commun. 8, 745; 10.1038/s41467-017-00764-5 (2017). 
+15. Li, W. et al. Resonance Effect in Brunel Harmonic Generation in Thin Film Organic 
+Semiconductors. Adv. Opt. Mater. 11, 2203070; 10.1002/adom.202203070 (2023). 
+16. Zhou, S.-S. et al. High-order harmonic generation of 1-nonene under linearly polarized laser 
+pulses. Phys. Rev. A 106, 23510; 10.1103/PhysRevA.106.023510 (2022). 
+17. Mondal, A. et al. High-harmonic generation in liquids with few-cycle pulses: effect of laser-
+pulse duration on the cut-off energy. Opt. Exp. 31, 34348–34361; 10.1364/OE.496686 (2023). 
+18. Lue, L.-J. & Bian, X.-B. High-order harmonic generation in a liquid-crystal-like model. Phys. 
+Rev. A 108, 13504; 10.1103/PhysRevA.108.013504 (2023). 
+19. Seiler, H. et al. Nuclear dynamics of singlet exciton fission in pentacene single crystals. Sci. Adv. 
+7, eabg0869; 10.1126/sciadv.abg0869 (2021). 
+20. Paolo Giannozzi et al. QUANTUM ESPRESSO: a modular and open-source software project for 
+quantum simulations of materials. J. Phys. Condens. Matter 21, 395502; 10.1088/0953-
+8984/21/39/395502 (2009). 
+21. Perdew, J. P., Burke, K. & Ernzerhof, M. Generalized Gradient Approximation Made Simple. 
+Phys. Rev. Lett. 77, 3865–3868; 10.1103/PhysRevLett.77.3865 (1996). 
+22. Schlipf, M. & Gygi, F. Optimization algorithm for the generation of ONCV pseudopotentials. 
+Comput. Phys. Commun. 196, 36–44; 10.1016/j.cpc.2015.05.011 (2015). 
+23. Grimme, S., Ehrlich, S. & Goerigk, L. Effect of the Damping Function in Dispersion Corrected 
+Density Functional Theory. J. Comput. Chem. 32, 1456–1465; 10.1002/jcc.21759 (2011). 
+24. Castro, A., Marques, M. A. L. & Rubio, A. Propagators for the time-dependent Kohn‐Sham 
+equations. J. Chem. Phys. 121, 3425–3433; 10.1063/1.1774980 (2004). 
+25. Moos, D., Jürss, H. & Bauer, D. Intense-laser-driven electron dynamics and high-order harmonic 
+generation in solids including topological effects. Phys. Rev. A 102, 53112; 
+10.1103/PhysRevA.102.053112 (2020). 
+ 
+Author Contributions 
+F.F. and D.B. developed the idea and supervised the project. F.-E.W. and F.F. performed the 
+experiment and evaluated the data. S.S. performed the TD-DFT simulations. L.B. performed 
+the tight-binding simulations. F.-E.W., S.R., and F.F. characterized the pentacene crystals. S.P., 
+F.M., and M.R. contributed the single-molecule calculations. All authors discussed the results 
+and wrote the manuscript.  
+ 
+Acknowledgments 
+We acknowledge funding from the Deutsche Forschungsgemeinschaft via SFB 1477 ‘Light –
+Matter Interactions at Interfaces’ (project no. 441234705). We thank Alexander Villinger for 
+measuring the X-ray diffraction of the crystal. 
+ 
+ 
+Competing Interests 
+The authors declare no competing interests.  
+  
+Extended Data Figure 
+ 
+Extended Data Figure 1: Absorption spectra for different white light polarization directions 
+relative to the crystal axes. The red spectrum exhibits maximum absorption at 670 nm, which 
+is the transition in direction of the a-axis. The inset shows a microscope picture of the crystal. 
+

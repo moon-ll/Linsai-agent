@@ -266,6 +266,29 @@ def _check_proposals() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
         except Exception:
             pass
 
+        # v6.8.16 改进2: 停滞课题检测
+        # optimizing 课题连续 48 小时无新 done job → 标记 stalled
+        STALL_THRESHOLD_HOURS = 48
+        try:
+            last_activity = p.get("updated_at", "")
+            if last_activity:
+                last_dt = datetime.fromisoformat(last_activity.replace("Z", "+00:00"))
+                hours_since = (datetime.now(timezone.utc) - last_dt).total_seconds() // 3600
+                if hours_since >= STALL_THRESHOLD_HOURS and done == 0:
+                    anomalies.append({
+                        "type": "stalled",
+                        "proposal_id": pid,
+                        "hours": int(hours_since),
+                        "done": done,
+                        "total": total,
+                        "message": (
+                            f"课题 {pid[:40]} 停滞 {int(hours_since)}h，"
+                            f"0/{total} job 完成。建议重置 pipeline_jobs 或手动编排。"
+                        ),
+                    })
+        except Exception:
+            pass
+
     return stats, anomalies
 
 
@@ -519,12 +542,15 @@ def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
     notified: List[str] = []
     if anomalies and not dry_run:
         # 汇总告警内容
-        alert_lines = []
+        alert_lines: List[str] = []
+        alert_keys: List[str] = []
+        alert_messages: List[str] = []
         for a in anomalies:
             alert_key = f"{a.get('type')}:{a.get('proposal_id', '')}:{a.get('job_id', '')}"
             if _should_notify(alert_key):
                 alert_lines.append(f"- {a['message']}")
-                _mark_notified(alert_key, a["message"])
+                alert_keys.append(alert_key)
+                alert_messages.append(a["message"])
                 notified.append(alert_key)
 
         if alert_lines:
@@ -534,7 +560,12 @@ def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
             if len(alert_lines) > 10:
                 content += f"\n... 还有 {len(alert_lines) - 10} 条"
 
-            _send_feishu(title, content)
+            # v6.8.17 修复：只有飞书通知真正送达时才标记告警为已通知，
+            # 否则 lark-cli 不可用时同一异常会在 4h 去重窗口内被"自我吞掉"，
+            # 用户永远收不到真实告警。
+            if _send_feishu(title, content):
+                for key, msg in zip(alert_keys, alert_messages):
+                    _mark_notified(key, msg)
 
     result = {
         "success": True,

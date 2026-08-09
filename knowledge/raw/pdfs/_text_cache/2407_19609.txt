@@ -1,0 +1,775 @@
+1 
+ 
+ 
+Attosecond transient grating spectroscopy with near-infrared grating pulses and an 
+extreme ultraviolet diffracted probe  
+ 
+Rafael Quintero-Bermudez 1,2,3 , Lorenz Drescher 1,2,3 , Vincent Eggers 1, Kevin Gulu Xiong 1, Stephen R. Leone 1,2,3  
+ 
+1Department of Chemistry, University of California, Berkeley, California 94720, USA 
+2Chemical Sciences Division, Lawrence Berkeley National Laboratory, Berkeley, California 94720, USA  
+3Department of Physics, University of California, Berkeley, California 94720, USA 
+ 
+Transient grating spectroscopy has become a mainstay among metal and semiconductor characterization techniques. Here 
+we extend the technique towards the shortest achiev able timescales by using tabletop high-harmonic gen eration of 
+attosecond extreme ultraviolet (XUV) pulses that di ffract from transient gratings generated with 500-1 000 nm sub-5 fs 
+near-infrared (NIR) pulses. We demonstrate the powe r of attosecond transient grating spectroscopy (ATG S) by 
+investigating the ultrafast photoexcited dynamics i n an Sb semimetal thin film. ATGS provides an eleme nt-specific, 
+background-free signal, unfettered by spectral congestion, in contrast to transient absorption spectroscopy. With the ATGS 
+measurements in Sb polycrystalline thin films, we o bserve the generation of coherent phonons and inves tigate the lattice 
+and carrier dynamics. Among the latter processes, we extract carrier thermalization, hot carrier cooli ng, and electron-hole 
+recombination, which are on the order of 20 fs, 50 fs, and 2 ps, timescales, respectively. Furthermore , simultaneous 
+collection of transient absorption and transient grating data allows us to extract the total complex dielectric constant in the 
+sample dynamics, including the real-valued refracti ve index, from which we are also able to investigat e carrier-phonon 
+interactions and longer-lived phonon dynamics. The outlined experimental technique expands the capabil ities of transient 
+grating spectroscopy and attosecond spectroscopies by providing a wealth of information concerning car rier and lattice 
+dynamics with an element-selective technique, at the shortest achievable timescales.  
+ 
+INTRODUCTION 
+ 
+Ultrafast spectroscopy has made it possible to obse rve a 
+wide range of physical phenomena unfold. Transient grating 
+spectroscopy (TGS), in particular, has become popular among 
+ultrafast techniques due to its versatility, sensit ivity, and 
+wealth of information available in the data. Among the latter, 
+TGS is capable of quantifying diffusion lengths of particles 
+and quasi-particles, such as charge carriers, spins , and 
+phonons ( 1). Additionally, the introduction of an additional 
+reference beam makes TGS uniquely suited to probe b oth 
+refractive index as well as absorption dynamics (2).  
+TGS is a subset of four-wave mixing nonlinear 
+spectroscopy in which a probe beam is used to measu re the 
+dynamics of a time-dependent grating. In a typical TGS 
+measurement scheme, two non-collinear pump pulses a re 
+employed to generate a pump grating on the sample. A 
+temporally delayed probe pulse is diffracted by the  resulting 
+amplitude  and phase  gratings. These two components result 
+from absorptive and dispersive phenomena, or more 
+concretely from changes caused by the pump pulses i n the 
+attenuation coefficient and refractive index, respe ctively. 
+Unlike transient absorption spectroscopy (TAS) and transient 
+reflectivity spectroscopy (TRS) measurements, which  are 
+used to track dynamics predominantly in the absorpt ion and 
+refractive index, respectively, the TGS signal consists of both 
+terms (2): 
+ 
+
+ =  + 
+ =  ∆ 
+4 
+
++ ∆ 
+ 
+
+  , 
+ 
+where η
+TOTAL  is the total grating efficiency, ηAMP  and ηPHA  are 
+the amplitude and phase grating efficiencies, Δk is the change 
+in the absorption, Δn is the change in refractive index, d is the 
+sample thickness, λ is the probe beam wavelength, and α is 
+the sample attenuation coefficient.  
+TGS has been used to investigate a wide range of 
+electrical, thermal, and mechanical properties and phenomena 
+in condensed matter systems ( 1, 3), including photocarrier 
+dynamics such as electrons and holes in metals and 
+semiconductors (4, 5), excitons in semiconductors (6, 7), and 
+quasi-particles in superconductors ( 8); phonon dynamics  (9, 
+10 ); spin dynamics (11 ); magnetization dynamics (12 ); charge 
+density waves ( 13 ); lattice strain ( 14 ); and surface acoustic 
+waves ( 15 ). Recent studies at Free Electron Laser (FEL) 
+facilities have shown that extreme ultraviolet (XUV ) pump – 
+XUV probe TGS could be used to investigate nanoscal e 
+charge-carrier diffusion due to the nanoscale grati ng period 
+(16 – 19 ). However, the temporal resolution of the 
+measurement was limited to 40-70 fs due to the puls e width 
+of the FEL source. TGS signals were also demonstrat ed in 
+tabletop XUV systems, however these were limited to  
+resolutions on the order of a few 100 fs (20 ). 
+Attosecond studies of condensed matter systems have  
+elucidated a number of phenomena including coherent  
+phonons ( 21 , 22 ), carrier thermalization ( 23 ), and core 
+excitons ( 24 – 26 ), due to the temporal resolution ( 24 ), 
+element-selective detection ( 27 ), and ability to isolate 
+multiple processes obtained within their large spec tral 
+bandwidth datasets, such as separate extraction of electron 
+and hole-phenomena (28 ). These, however, have been mostly 
+limited to TAS. Expanding attosecond methodologies in 
+condensed matter systems to nonlinear and non-colli near 
+measurement schemes could lead to enhanced signal-to-noise, 
+background-free data collection that is free of spe ctral 
+congestion, and richer datasets with information be yond the 
+limits of TAS. 
+Here, we report the first TGS measurements capable of 
+achieving attosecond resolution (ATGS). We use tabl etop 
+high-harmonic generation (HHG) of XUV pulses ( 27 ) to 
+2 
+ 
+generate attosecond probe pulses that diffract from  transient 
+ 
+Figure 1. Attosecond transient grating experiment.  a Schematic of experimental setup consisting of two non-collinear NIR few-cycle 
+pump pulses and one time-delayed attosecond XUV probe pulse. A transient grating consisting of amplitude and phase terms is generated at 
+the sample, which produces the off-axis diffraction  of the XUV probe pulse. These diffracted beams are  the detectable signal pulses, which 
+are collected with a CCD after being spectrally dispersed with an XUV diffraction grating. BB – beam block, CCD – charge-coupled device 
+camera, DG – dispersion grating. b Differential camera image at 150 fs time delay between pump and probe pulses with one pump arm only 
+and c with both pump arms, demonstrating the experimental principle of the grating diffraction in a thin film Sb sample. The camera has been 
+shifted such that transient absorption for the collinear XUV probe beam can be just observed simultaneously with the off-axis transient grating 
+signal.  
+ 
+Figure 2.  Simultaneous collection of XUV transient absorption  and transient grating spectroscopy data in Sb. a  XUV linear 
+absorption spectrum in Sb at N 4,5  edges. Inset: A 1g  phonon mode is depicted on the Sb crystal structur e. b Change in absorbance due to 
+lattice and carrier dynamics as obtained from singu lar value decomposition of transient absorption dat a. c ATAS data in Sb reveals the 
+excitation and decay of coherent phonon dynamics that decay over the course of a few ps. d ATAS data collected with a higher temporal 
+resolution during the signal rise can be used to id entify hot carrier relaxation. e ATGS data in contrast depicts a simplified spectrum that 
+together with ATAS provides a richer picture of the photoexcited dynamics in solid-state materials. f ATGS data collected with a higher 
+temporal resolution during signal rise provides analogous information to d.         
+
+3 
+ 
+gratings generated with sub-5 fs near infrared (NIR ) pulses. 
+We benchmark the method by investigating the ultraf ast 
+photoexcited dynamics in Sb semimetal thin film, wh ich 
+exhibits coherent phonon oscillations. With the tec hnique we 
+are able to resolve carrier thermalization and hot carrier 
+cooling, which would be inaccessible by fs TGS tech niques. 
+We also observe electron-hole recombination, carrier-phonon 
+interaction, and longer-lived phonon dynamics. We t hen use 
+simultaneous collection of attosecond transient abs orption 
+spectroscopy (ATAS) and ATGS to determine ultrafast  
+changes in the refractive index, providing a more c omplete 
+picture of the photoexcited dynamics. We discuss th e 
+potential of ATGS for condensed-matter systems in l ight of 
+these exciting results.  
+ 
+RESULTS  
+ 
+The experimental methodology is illustrated in Fig.  1a. A 
+detailed account of the methodology is outlined in a later 
+section. In brief, two coincident non-collinear sub -5 fs 500-
+1000 nm NIR pump pulses are incident on samples fol lowed 
+by a 25-45 eV attosecond XUV probe pulse that is ge nerated 
+by HHG, in which a portion of the aforementioned NIR pulse 
+energy is incident onto a Kr gas cell. The XUV beam  is 
+spectrally dispersed by a grating and recorded with  an X-ray 
+camera. The TGS measurement results in two non-coll inear 
+signal beams that do not overlap with the pump or p robe 
+beams (Fig 1b). It is possible to simultaneously de tect the 
+signal and probe beams with the XUV charge-coupled device 
+camera (CCD). As a result, it is possible to gather  spectrally 
+broad ATAS and ATGS data at the same time.   
+The experimental technique is applied to measuremen ts 
+on an Sb semimetal thin film with a NIR pump intens ity of 
+7.9 mJ/cm 2. A NIR-XUV offset angle of 36 mrad is used, 
+which yields a grating period of approximately 11 μ m ( =
+
+ !" #$%& , where E IR  is the NIR pump photon energy and θ the 
+pump beam offset angle). Samples consist of 30 nm t hick Sb 
+thin films evaporated onto 30 nm thick Si 3N4 membrane 
+substrates. The XUV linear absorption spectrum is d epicted 
+in Fig 2a. Sb is known to exhibit a coherent phonon  motion 
+due to the lifting of a Peierls distortion upon ult rafast 
+photoexcitation (21 , 29 –31 ). This phenomenon is attributed to 
+displacive excitation of coherent phonons (DECP). T he A 1g  
+phonon vibration that is active during DECP is illu strated in 
+the inset of Fig 2a ( 32 , 33 ). Upon photoexcitation, ATAS 
+reveals the emergence of coherent phonon oscillatio ns that 
+decay shortly after 1 ps as well as longer-lived ex ponentially 
+decaying features (Fig 2c). Using singular value 
+decomposition (SVD) to facilitate analysis of the t ransient 
+data, two main components are identified, which are  
+attributed to lattice and carriers as done in previous work (21 ). 
+The spectral shape of these components is depicted in Fig 2b. 
+A higher temporal resolution ATAS scan is also perf ormed 
+during the first 160 fs to facilitate the identification of shorter-
+lived processes (Fig 2d).  
+As mentioned earlier, ATGS data are collected 
+simultaneously during the ATAS measurements shown in Fig 
+2c and 2d. These are depicted in Fig 2e and 2f. Whi le the 
+ATAS data depict a convoluted array of spectrally-c ongested 
+overlapping features due to transitions from the sp in-orbit 
+split 4d 
+5/2  and 4d 3/2  core levels, the ATGS can be more easily 
+interpreted since the ATGS consists only of positiv e signal 
+and both spin-orbit components are clear and well-s eparated. 
+The ATAS data is first analyzed by fitting the latt ice and 
+carrier transient data to a DECP model outlining the decay of 
+ 
+Figure 3. Fitting transient absorption and transient grating data with Sb photoinduced dynamics model. a Experimental ATAS data 
+singular value decomposition (SVD) component 1 and b component 2, corresponding to lattice and carrier, respectively are depicted (dots) 
+along with the fit to equations SE1 and SE2 (line). c Experimental ATAS data SVD component 2 for the high temporal resolution scan in 
+Figure 2d, corresponding to hot carrier relaxation,  depicted (dots) along with fit to equation SE3 (li ne). d Experimental ATGS data SVD 
+component 1 and e component 2, corresponding to mixing of ATAS components 1 and 2, depicted (dots) along with the product of ATAS 
+SVD component fits C 1 x C 1 and C 1 x C 2, respectively (line). f Experimental ATGS data SVD component 2 for high temporal resolution 
+scan, corresponding to mixing of TA components 1 and 2, depicted (dots) along with ATAS SVD component fits C short1  x C short2 (line).  
+
+4 
+ 
+the coherent phonon oscillations, carrier relaxatio n, and 
+carrier recombination ( 21 , 29 ). The first and second SVD 
+components of the ATAS, C 1 and C 2 (for the data of Fig 2c), 
+which correspond to lattice and carrier dynamics respectively 
+(21 ), are plotted in Fig 3a and Fig 3b respectively, along with 
+the optimized fit to Equations SE1 and SE2. The opt imal fit 
+parameters are included in Table ST1. The fit param eters are 
+comparable to those determined in previous work (21 , 29 , 31 ), 
+especially after considering the greater phase offs et and 
+shorter lifetimes that are expected at higher NIR p ump 
+intensities (31 ). Most notably, our measurements find an A 1g  
+phonon frequency of 4.13±0.02 THz, a carrier recomb ination 
+lifetime of 2.07±0.04 ps, and a coherent phonon osc illation 
+decay of 540±50 fs.  
+The high temporal resolution ATAS scan (Fig 2d) is used 
+to determine carrier thermalization and relaxation.  The first 
+two SVD components of the short scan (C short1 and C short2) do 
+not match those of the long scan. Instead, the first component 
+resembles a sum of C 1 and C 2, depicting a monotonic rise in 
+signal (Fig S4), whereas the second component depic ts a 
+delayed rise and subsequent decay (Fig 3c). The lat ter is too 
+fast to be captured by the SVD analysis of the long er scan. 
+Both the rise and decay of C short2, it should be noted, occur 
+with a temporal component far slower than the tempo ral 
+bandwidth of the NIR pump beam. The temporal trace is fitted 
+to the sum of an exponential rise and an exponentia l decay; 
+the best fit corresponds to a 16±4 fs rise and a 45 ±8 fs decay. 
+These are attributed to carrier thermalization and hot carrier 
+cooling, respectively.  
+As outlined in Eq 1, transient grating efficiency i s a 
+function of the square of transient absorption modu lation. As 
+a result, the ATGS data is a function of the square of the ATAS 
+data ( 34 ). The first SVD component of the ATGS data in 
+Figure 2e is therefore found to resemble the square d C 1 
+component of the ATAS data (Fig 3d), whereas the se cond 
+SVD component is found to resemble the product of t he C 1 
+and C 2 components of the ATAS data (Fig 3e). More 
+generally, the SVD components of the ATGS can be described 
+by the relation: '$ = ∑ )$)*
+%
+$,*+,
+, where n is the number of 
+non-trivial SVD components identified in the ATAS, and C i 
+and D i represent the ATAS and ATGS SVD components, 
+respectively. In the plots, the ATGS SVD components  are 
+compared to the products of the best fit equations for ATAS 
+SVD components: C 1 x C1 and C1 x C2, respectively. The data 
+matches the products of the fitted equations best at early time 
+delays and diverges at later time delays; this is d iscussed 
+below. The high temporal resolution ATGS scan can i n turn 
+be used to observe carrier thermalization and hot c arrier 
+cooling in its second SVD component (Fig 3f), as wa s done 
+with the ATAS. In this case, the ATGS data is found  to 
+resemble the product of C short1 x C short2. The ATGS C short2 is 
+plotted alongside the product of the best fit equat ions for 
+ATAS SVD components: C 1 x Cshort2 . C 1 was chosen as there 
+is an analytical equation available for this compon ent, 
+however C 2 would work equally well given the nature of the 
+monotonic rise of these components during the first 150 fs. As 
+a result, it is found that the ATGS measurements ca n be used 
+to directly analyze the ultrafast dynamics in Sb as  has been 
+found with ATAS. However, the discrepancy at greate r time 
+delays would limit its ability to interpret phenome na 
+occurring at longer time scales.  
+The source of this disagreement lies in the second term of 
+Eq 1. The ATGS signal is not simply a function of the ATAS, 
+but instead also dependent on the photoexcited chan ge in 
+refractive index, Δn. The remaining discrepancy between the 
+squared ATAS and the ATGS can thus be attributed to  Δ n. 
+ 
+Figure 4. Extracting transient refractive index from ATAS and ATGS. Transient refractive index determined from ATAS and 
+ATGS reveal the rich array of information provided by a single XUV ATGS measurement. a Calculated diffraction efficiency of 
+ATGS resulting from experimentally measured ATAS data, i.e. amplitude grating efficiency. Calculated efficiency also accounts 
+for transmittance through the sample. b Experimentally measured total ATGS efficiency (inc ludes both amplitude and phase 
+grating components). c The phase grating component is calculated from a and b and used to extract the transient refractive index 
+in Sb after photoexcitation. d First SVD component of transient refractive index dynamics in c reveal the presence of long-lived 
+phenomena in the refractive index (and A TGS) not exhibited by the ATAS, which can be attributed to pho non, carrier-phonon, 
+and phonon-phonon dynamics. e Second and f third SVD components of transient refractive index dynamics can be attributed to 
+lattice and carrier dynamics, respectively . 
+
+5 
+ 
+Conversely, if ATAS and ATGS are both simultaneousl y 
+acquired, as has been done in this work, it is possible to extract 
+Δn, expanding the capabilities of the measurement.    
+To calculate Δn, the grating efficiency resulting only from 
+the amplitude grating, ηAMP , is calculated from the measured 
+ATAS (i.e., ∆ ),   () = /
+∆0(1)
+2 3
+
+. The amplitude 
+grating efficiency is depicted in Fig 4a. The total  grating 
+efficiency (Fig 4b), ηTOTAL , is calculated from the XUV 
+spectrum of the probe beam, 445(), and the raw ATGS 
+data, TG (), with the equation  () = /
+6(1)
+
+
+6(1)3. The 
+phase grating efficiency, ηPHA , and the transient change in 
+refractive index, Δn, can then be determined by Eq 1 as: 
+
+ =  −   and ∆() = 8 ()(1) −
+ ()9
+: ; 1
+<  , where the sample attenuation coefficient 
+α(), can be determined by performing a static absorpti on 
+measurement of the sample. The experimentally deter mined 
+refractive index dynamics, ∆() are presented in Fig 4c. The 
+extracted Δn for Sb exhibits some similarities to the ATGS, 
+namely coherent phonon oscillations and some decayi ng 
+components. SVD analysis is then used to determine the 
+different components contributing to Δn. The temporal 
+evolution of the first three SVD components N 1, N 2, and N 3 
+are plotted in Fig 4d-f, along with the best expone ntial decay 
+fits. The first component, N 1, clearly consists of long-lived 
+processes. The component is sufficiently well-fitte d with a 
+single exponential decay of 30 ps lifetime. However , the 
+increasing error at larger time delays suggest that  a 
+biexponential decay may be a more accurate model. T his 
+decay lifetime cannot be estimated very accurately with such 
+a comparatively short time scan. N2 is best fitted to a decaying 
+exponential with a 1.3±0.3 ps time constant. And N 3 reveals a 
+relatively faster 720±140 fs decay. These are further discussed 
+in the following section. 
+ 
+DISCUSSION 
+ 
+These results show that ATGS provides an element-
+selective background-free technique that provides r icher data 
+with information on both dispersive and absorptive 
+phenomena in contrast to XUV TAS. Interestingly, ou r 
+measurements find that ATGS at a few-fs scale is ma inly 
+dominated by absorptive effects, whereas at longer timescales 
+Δn effects need to be included. As a result, ATGS can be used 
+to accurately analyze fast electronic processes in solids, 
+including carrier thermalization and relaxation, as  well as 
+recombination in metals, without much post-processi ng. 
+However, slower processes may be more difficult to isolate 
+due to the presence of dispersive and absorptive ph enomena, 
+as well as the manifestation of diffusion features in ATGS (1). 
+Simultaneous collection of ATAS, however, can be us ed to 
+isolate absorptive and dispersive effects, and dise ntangle 
+various phenomena as we have shown. 
+Researchers have previously used attosecond reflect ivity 
+measurements ( 35 , 36 ) to extract the ultrafast transient 
+complex-valued dielectric function of materials aft er 
+photoexcitation. In these studies, it was difficult  to 
+conclusively disentangle various carrier and phonon  
+processes in the rich but spectrally-congested data . 
+Additionally, XUV transient reflectivity was found to depend 
+primarily on dispersive phenomena. However, it is known that 
+absorptive and dispersive components in XUV spectro scopy 
+contain complementary information. Although Kramer-
+Kronig’s relations state that all information conta ined in the 
+dispersive component must be contained in the absor ptive 
+component ( 37 ), this is only true if the entire spectrum is 
+known. It is thus it is easier to distinguish non-a bsorptive 
+phenomena, such as lattice effects, in Δn than in the 
+absorption spectrum ( 36 ). Additionally, in the ATGS 
+measurement, the grating lines make it possible to quantify 
+diffusion lifetimes for carriers, phonons, and heat , when the 
+grating period is shorter than the mean-free path of the particle 
+in question (1).  
+In the extracted Δn refractive index information of the thin 
+film Sb sample, N
+2 and N 3 may be directly linked to lattice 
+and carrier dynamics, respectively, as observed in the ATAS 
+(Fig 3a,b) and ATGS (Fig 3d,e) results. N 1, in contrast, 
+exhibits one or more very long-lived decaying expon entials. 
+Given that this term is not observable in the ATAS, N 1 can be 
+attributed to a diffusion process. Since the grating period used 
+for this experiment was greater than the mean-free path of the 
+carriers and phonons ( 38 ), it is not possible to determine the 
+diffusion lifetimes of these. However, it is still possible to 
+observe carrier-phonon and phonon-phonon processes.  
+In Bi, Lopez argued that the recombination process 
+between the electron in the conduction band edge at  the L 
+point and the hole in the valence band edge at the T point 
+would lead to the emission of one acoustic and two optical 
+phonons at X (39 ).  Since Sb also exhibits its conduction and 
+valence band edges at the same points, similar phon on 
+processes are expected ( 40 ). Additionally, further generation 
+of acoustic phonons is expected as optical and acou stic 
+phonons scatter. As a result, N 1 most likely represents carrier-
+phonon and phonon-phonon based heat diffusion processes. 
+The transient absorption collected from two beams t hat 
+write a grating is also compared to transient absor ption 
+conducted with one beam in order to ensure that the re are no 
+additional grating-induced phenomena exhibited in t he two-
+beam ATAS results. These spectra are identical (Fig S3). 
+We have demonstrated that the ATGS technique in sol id-
+state materials can achieve attosecond time resolut ion with 
+XUV broadband information. Attosecond resolution is  
+necessary to observe and investigate hot electron 
+thermalization and relaxation and can be used in fu ture 
+experiments to analyze ultrafast processes that are  too rapid 
+for fs experiments such as core exciton dynamics. 
+Additionally, the broadband XUV pulses provide a ri ch 
+dataset that contains element-selective information and can be 
+processed to obtain separate information on electron and hole 
+dynamics and diffusion in semiconductors. Furthermo re, in 
+contrast to spectrally narrow TGS experiments, ATGS probes 
+a wide range of energies at and away from resonant transitions 
+where amplitude and phase grating processes dominat e, 
+respectively. As a result, the data contain multisp ectral 
+information on the different transient dispersive a nd 
+absorptive processes and ultimately reveal differen t 
+phenomena taking place in solid-state materials.  
+The technique presented here also demonstrates the use of 
+simultaneous collection of ATAS as well as ATGS to extract 
+the time-resolved change in the refractive index. T his 
+6 
+ 
+measurement provides an enhanced view of non-absorp tive 
+dynamics such as lattice and thermal dynamics. Fina lly, an 
+important feature of TGS experiments lies in its ab ility to 
+observe and quantify real-space dynamics, such as d iffusion 
+processes in carriers, phonons, and heat. ATGS prov ides 
+access to these phenomena with unprecedented tempor al 
+resolution.  
+The solid-state samples investigated in this study consist 
+of thin polycrystalline films compatible with trans mission-
+mode XUV experiments. However, the nanometric 
+dimensions of the average crystallite will limit th e ability of 
+TGS experiments to capture phonon diffusion lifetim es. 
+Future ATGS experiments can be conducted in reflect ion 
+mode on single crystalline samples to allow the ext raction of 
+phonon diffusion lifetimes. Charge carrier diffusio n rates 
+have been notably measured with XUV-XUV TGS 
+experiments at FEL facilities ( 16 , 19 ) due to the higher flux 
+available in such experiments that enables the use of XUV 
+pump pulses that can generate nanoscale gratings. F uture 
+experiments should seek to combine the strengths of  both 
+experiments, i.e. the flux at FEL facilities and the consequent 
+access to nanoscale investigations and the time resolution and 
+spectral bandwidth in the ATGS measurements present ed 
+here, as HHG source fluxes and efficiencies are increased and 
+as FEL temporal pulse widths are decreased. With su ch 
+capabilities it could be, for instance, possible to  measure 
+charge dynamics and diffusion lengths of carriers b efore 
+relaxation and before thermalization. 
+Future measurements could also make use of a heterodyne 
+setup to separate amplitude and phase grating information, or 
+absorptive and dispersive processes, to more concre tely 
+distinguish and isolate dynamics in condensed matte r 
+systems. Such experiments would require a co-propag ating 
+XUV beam that is delayed by a fixed offset in order to obtain 
+purely amplitude and purely phase grating ATGS data sets. It 
+should be noted, however, that this will require a delay 
+between beams on the order of a fraction of an opti cal cycle, 
+which for XUV photons will present a considerable challenge. 
+Finally, using cross-polarized NIR beams is suggest ed as 
+a means of creating spin gratings and investigating  spin 
+dynamics and diffusion with attosecond time resolut ion and 
+with the broad bandwidth inherent to ATGS. Such 
+measurements could then be conducted on spin density waves 
+(41 ), spin defects (42 ), as well as spin diffusion, transfer, and 
+relaxation more generally. 
+ 
+METHODS 
+ 
+The ATGS experiments conducted for this work use spectrally 
+broad and temporally short pulses to evaluate a large spectral 
+region at attosecond scales. The NIR pulses are pro duced by 
+a Ti:sapphire laser (Coherent Astrella, 1 khz repetition rate, 7 
+mJ pulse energy, 35 fs pulse duration and 32 nm ban dwidth). 
+3 mJ of the beam is focused with an f=2.5 m dielect ric 
+concave mirror into a 2.2 m long hollow core fiber (inner 
+diameter 700 μm) filled with an Ar gas pressure gradient 
+(approximately 5 Torr to 120 mTorr) to generate a 
+supercontinuum spanning 500–1000 nm wavelengths wit h 
+self-phase modulation (Fig. S2). Dispersion is comp ensated 
+using eight pairs of double angled broadband chirpe d mirrors 
+(Ultrafast Innovations, PC1332), fused silica wedge pairs, and 
+potassium dihydrogen phosphate (KDP) wedge pairs an d 
+temporally compress the pulses to ~5 fs durations. A 
+broadband 90:10 beamsplitter (Layertec) is then use d to split 
+the beam into two parts. Both beam paths after the split have 
+a pair of fused silica wedges to independently tune  the 
+dispersion of the pump and probe beams. The larger power 
+beam is sent into a gas cell with a 200 μm hole with Kr gas at 
+~15 Torr in a vacuum chamber held at ~10 
+-7 Torr to generate 
+broadband XUV pulses via HHG. A 100 nm thick Al foil filter 
+(Lebow Company) is then used to filter out the NIR and 
+transmit the XUV pulse, which is focused onto the s ample 
+with a gold-coated toroidal mirror to act as the pr obe beam. 
+The remaining NIR beam after the beamsplitter is used for the 
+pump beams. A second broadband 50:50 beamsplitter 
+(Layertec) is used to generate two NIR pump arms. These are 
+then focused non-collinearly onto the sample at a θ=36 mrad 
+angle offset with an f=1 m silver concave mirror. T he XUV 
+probe is delayed with respect to the NIR pump beams  with a 
+piezo stage (Physik Instrumente, P-620.1CD) mounted onto a 
+stepper motor stage (Physik Instrumente, M-505-6DG) . The 
+former is used for the high temporal resolution scan while the 
+latter is used for the longer delay scans. The puls e energy of 
+the NIR beam is adjusted with an iris and monitored  with a 
+power meter and the beam diameter is characterized using a 
+beam profiler (DataRay WinCamD). The NIR pump intensity 
+was computed by accounting for the light reflected at the Sb 
+sample surface (approximately 75% within the 500-10 00 nm 
+range (43 )) and subtracting that from the incident fluence. We 
+estimate an incident pump fluence of 7.5 mJ/cm 
+2.  
+Spatial and temporal overlap is determined by placi ng an 
+Ar gas cell in the interaction region instead of th e sample. 
+Time zero is estimated by fitting the rise time of the Ar 
+3s3p6np autoionization signal to an exponentially-m odified 
+Gaussian function. The temporal pulse width of the NIR pump 
+is estimated to be under 5 fs with a dispersive characterization 
+of ultrafast pulses (D scan, Sphere Ultrafast Photo nics) (Fig 
+S1) and confirmed with the rise time of the Ar 3s3p 6np 
+autoionization signal. The spectral axis is also calibrated with 
+the autoionization lines of Ar 3s3p6np(44 ). An additional 100 
+nm thick Al foil is then used to filter out any rem aining NIR ; 
+meanwhile the XUV beam is spectrally dispersed by a  gold-
+coated flat-field grating (01-0639, Hitachi) and me asured 
+with an XUV CCD camera (Pixis XO 400-B, Princeton 
+Instruments). The XUV CCD is placed on a dual axis stage in 
+order to shift the spectral axis and locate ATAS and ATGS, as 
+needed. 
+The samples measured are 30 nm polycrystalline Sb t hin 
+films ( 21 ) evaporated onto 30 nm thick Si 
+3N4 membranes 
+(Norcada NX5050X). Samples are mounted onto an x,y- axis 
+translation stage (Physik Instrumente) which is use d to shift 
+the illuminated area of the sample every 5 minutes to avoid 
+artifacts from sample heating and damage. 
+The measured ATGS spectra are divided by the XUV 
+harmonic spectral flux used during the experiments in order 
+to normalize the ATGS and prevent inaccurate conclu sions 
+due to enhancements in the transient grating effici ency from 
+higher XUV spectral intensities at different parts of the 
+harmonic spectra. 
+ 
+ACKNOWLEDGEMENTS 
+ 
+7 
+ 
+This work was supported by Air Force Office of Scie ntific 
+Research (AFOSR) Grant FA9550-20-1-0334 (R.Q.B, 
+K.G.X., and S.R.L.) and FA9550-19-1-0314 (L.D. and 
+S.R.L.). R.Q.B. acknowledges support from Natural Sciences 
+and Engineering Research Council of Canada (NSERC) 
+Postdoctoral Fellowship. L.D. acknowledges the Euro pean 
+Union’s Horizon research and innovation program und er the 
+Marie Sklodowska-Curie grant agreement No. 10106633 4 – 
+SR-XTRS-2DLayMat. 
+ 
+ 
+REFERENCES 
+ 
+1.  U. Choudhry, T. Kim, M. Adams, J. Ranasinghe, R . 
+Yang, B. Liao, Characterizing microscale energy 
+transport in materials with transient grating 
+spectroscopy. J Appl Phys  130  (2021). 
+ 
+2.  H. J. Eichler, P. Günter, D. W. Pohl, Laser-Induced 
+Dynamic Gratings  (Springer, Berlin, 1986)vol. 50. 
+3.  F. Hofmann, M. P . Short, C. A. Dennett, Transie nt 
+grating spectroscopy: An ultrarapid, nondestructive 
+materials evaluation technique. MRS Bull  44 , 392–
+402 (2019). 
+4.  C. Weber, U. Becker, R. Renner, C. Klingshirn, 
+“Condensed Measurement of the diffusion-length of 
+carriers and excitons in CdS using laser-induced 
+transient gratings” (1988). 
+5.  W. Ouyang, Y . Li, B. Yurash, N. Schopp, A. Vega -
+Flick, V . Brus, T. Q. Nguyen, B. Liao, Transient 
+grating spectroscopy of photocarrier dynamics in 
+semiconducting polymer thin films. Appl Phys Lett  
+117  (2020). 
+6.  P. Baronas, P. Š čajev, V . Cerkasovas, G. Kreiza, P. 
+Adomenas, O. Adomeniene, K. Kazlauskas, C. 
+Adachi, S. Juršenas, Exciton diffusion in bifluoren e 
+single crystals studied by light induced transient 
+grating technique. Appl Phys Lett  112  (2018). 
+7.  J. Wang, Y . Guo, Y . Huang, H. Luo, X. Zhou, C. Gu, 
+B. Liu, Diffusion dynamics of valley excitons by 
+transient grating spectroscopy in monolayer WSe2. 
+Appl Phys Lett  115  (2019). 
+8.  N. Gedik, J. Orenstein, R. Liang, D. A. Bonn, W . N. 
+Hardy, Diffusion of nonequilibrium quasi-particles 
+in a cuprate superconductor. Science (1979)  300 , 
+1410–1412 (2003). 
+9.  A. J. Minnich, Multidimensional quasiballistic 
+thermal transport in transient grating spectroscopy. 
+Phys Rev B Condens Matter Mater Phys  92  (2015). 
+10.  E. J. Heilweil, R. M. Hochstrasser, Nonlinear 
+spectroscopy and picosecond transient grating study  
+of colloidal gold. J Chem Phys  82 , 4762–4770 
+(1985). 
+11.  C. P. Weber, N. Gedik, J. E. Moore, J. Orenste in, J. 
+Stephens, D. D. Awschalom, Observation of spin 
+Coulomb drag in a two-dimensional electron gas. 
+Nature  437 , 1330–1333 (2005). 
+12.  M. Brioschi, P. Carrara, V . Polewczyk, D. Dagu r, G. 
+Vinai, P. Parisse, S. Dal Zilio, G. Panaccione, G. 
+Rossi, R. Cucini, Multidetection scheme for 
+transient-grating-based spectroscopy. Opt Lett  48 , 
+167 (2023). 
+13.  D. H. Torchinsky, F. Mahmood, A. T. Bollinger,  I. 
+Božovi ć, N. Gedik, Fluctuating charge-density 
+waves in a cuprate superconductor. Nat Mater  12 , 
+387–391 (2013). 
+14.  T. D. Frazer, Y . Zhu, Z. Cai, D. A. Walko, C. Adamo, 
+D. G. Schlom, E. E. Fullerton, P. G. Evans, S. O. 
+Hruszkewycz, Y . Cao, H. Wen, Optical transient 
+grating pumped X-ray diffraction microscopy for 
+studying mesoscale structural dynamics. Sci Rep  11  
+(2021). 
+15.  A. Reza, Y . Zayachuk, H. Yu, F. Hofmann, Trans ient 
+grating spectroscopy of thermal diffusivity 
+degradation in deuterium implanted tungsten. Scr 
+Mater  174 , 6–10 (2020). 
+16.  F. Bencivenga, R. Mincigrucci, F. Capotondi, L . 
+Foglia, D. Naumenko, A. A. Maznev, E. Pedersoli, 
+A. Simoncig, F. Caporaletti, V . Chiloyan, R. Cucini, 
+F. Dallari, R. A. Duncan, T. D. Frazer, G. Gaio, A. 
+Gessini, L. Giannessi, S. Huberman, H. Kapteyn, J. 
+Knobloch, G. Kurdi, N. Mahne, M. Manfredda, A. 
+Martinelli, M. Murnane, E. Principi, L. Raimondi, S . 
+Spampinati, C. Spezzani, M. Trovò, M. Zangrando, 
+G. Chen, G. Monaco, K. A. Nelson, C. 
+Masciovecchio, Nanoscale transient gratings excited  
+and probed by extreme ultraviolet femtosecond 
+pulses. Sci Adv  5, 1–7 (2019). 
+17.  L. Foglia, R. Mincigrucci, A. A. Maznev, G. Ba ldi, 
+F. Capotondi, F. Caporaletti, R. Comin, D. De 
+Angelis, R. A. Duncan, D. Fainozzi, G. Kurdi, J. Li, 
+A. Martinelli, C. Masciovecchio, G. Monaco, A. 
+Milloch, K. A. Nelson, C. A. Occhialini, M. 
+Pancaldi, E. Pedersoli, J. S. Pelli-Cresi, A. Simoncig, 
+F. Travasso, B. Wehinger, M. Zanatta, F. 
+Bencivenga, Extreme ultraviolet transient gratings:  A 
+tool for nanoscale photoacoustics. Photoacoustics  29  
+(2023). 
+18.  J. R. Rouxel, D. Fainozzi, R. Mankowsky, B. 
+Rösner, G. Seniutinas, R. Mincigrucci, S. Catalini, 
+L. Foglia, R. Cucini, F. Döring, A. Kubec, F. Koch, 
+F. Bencivenga, A. Al Haddad, A. Gessini, A. A. 
+Maznev, C. Cirelli, S. Gerber, B. Pedrini, G. F. 
+Mancini, E. Razzoli, M. Burian, H. Ueda, G. 
+Pamfilidis, E. Ferrari, Y . Deng, A. Mozzanica, P. J. 
+M. Johnson, D. Ozerov, M. G. Izzo, C. Bottari, C. 
+Arrell, E. J. Divall, S. Zerdane, M. Sander, G. 
+Knopp, P . Beaud, H. T. Lemke, C. J. Milne, C. 
+David, R. Torre, M. Chergui, K. A. Nelson, C. 
+Masciovecchio, U. Staub, L. Patthey, C. Svetina, 
+Hard X-ray transient grating spectroscopy on 
+8 
+ 
+bismuth germanate. Nat Photonics  15 , 499–503 
+(2021). 
+19.  F. Steinbach, U. Atxitia, K. Yao, M. Borchert,  D. 
+Engel, F. Bencivenga, L. Foglia, R. Mincigrucci, E. 
+Pedersoli, D. De Angelis, others, Exploring the 
+Fundamental Spatial Limits of Magnetic All-Optical 
+Switching. Nano Lett  (2024). 
+20.  E. Sistrunk, J. Grilj, J. Jeong, M. G. Samant,  A. X. 
+Gray, H. A. Dürr, S. S. P. Parkin, M. Gühr, 
+Broadband extreme ultraviolet probing of transient 
+gratings in vanadium dioxide. Opt Express  23 , 
+4340–4347 (2015). 
+21.  L. Drescher, B. R. de Roulet, Y . S. Phang, S. R. 
+Leone, On the Onset of Coherent Phonon Motion in 
+Peierls-Distorted Antimony by Attosecond Transient 
+Absorption. arXiv preprint arXiv:2309.00734  
+(2023). 
+22.  R. Géneaux, I. Timrov, C. J. Kaplan, A. D. Ros s, P. 
+M. Kraus, S. R. Leone, Coherent energy exchange 
+between carriers and phonons in Peierls-distorted 
+bismuth unveiled by broadband XUV pulses. Phys 
+Rev Res  3, 33210 (2021). 
+23.  H.-T. Chang, A. Guggenmos, S. K. Cushing, Y . C ui, 
+N. U. Din, S. R. Acharya, I. J. Porter, U. Kleineberg, 
+V . Turkowski, T. S. Rahman, others, Electron 
+thermalization and relaxation in laser-heated nickel 
+by few-femtosecond core-level transient absorption 
+spectroscopy. Phys Rev B  103 , 64305 (2021). 
+24.  M. Lucchini, S. A. Sato, G. D. Lucarelli, B. M oio, 
+G. Inzani, R. Borrego-Varillas, F. Frassetto, L. 
+Poletto, H. Hübener, U. De Giovannini, others, 
+Unravelling the intertwined atomic and bulk nature 
+of localised excitons by attosecond spectroscopy. 
+Nat Commun  12 , 1021 (2021). 
+25.  R. Quintero-Bermudez, S. R. Leone, Deciphering  
+core-exciton dynamics in Ca F 2 with attosecond 
+spectroscopy. Phys Rev B  109 , 24308 (2024). 
+26.  J. D. Gaynor, A. P. Fidler, Y .-C. Lin, H.-T. C hang, 
+M. Zuerch, D. M. Neumark, S. R. Leone, Solid state 
+core-exciton dynamics in NaCl observed by tabletop 
+attosecond four-wave mixing spectroscopy. Phys 
+Rev B  103 , 245140 (2021). 
+27.  P. M. Kraus, M. Zürch, S. K. Cushing, D. M. 
+Neumark, S. R. Leone, The ultrafast X-ray 
+spectroscopic revolution in chemical dynamics. Nat 
+Rev Chem  2, 82–94 (2018). 
+28.  M. Zürch, H.-T. Chang, L. J. Borja, P. M. Krau s, S. 
+K. Cushing, A. Gandman, C. J. Kaplan, M. H. Oh, J. 
+S. Prell, D. Prendergast, others, Direct and 
+simultaneous observation of ultrafast electron and 
+hole dynamics in germanium. Nat Commun  8, 15734 
+(2017). 
+29.  H. J. Zeiger, J. Vidal, T. K. Cheng, E. P. Ipp en, G. 
+Dresselhaus, M. S. Dresselhaus, “Theory for 
+displacive excitation of coherent phonons” (1992). 
+30.  S. M. O’Mahony, F. Murphy-Armando, É. D. 
+Murray, J. D. Querales-Flores, I. Savi ć, S. Fahy, 
+Ultrafast Relaxation of Symmetry-Breaking Photo-
+Induced Atomic Forces. Phys Rev Lett  123  (2019). 
+31.  S. M. O’Mahony, “Electronic excitation and ato mic 
+forces in optically excited group V semimetals,” 
+thesis, University College Cork, Cork (2020). 
+32.  D. Schiferl, C. S. Barrett, The crystal struct ure of 
+arsenic at 4.2, 78 and 299 K. J Appl Crystallogr  2, 
+30–36 (1969). 
+33.  K. Momma, F. Izumi, VESTA 3 for three-
+dimensional visualization of crystal, volumetric and 
+morphology data. J Appl Crystallogr  44 , 1272–1276 
+(2011). 
+34.  A. Ajdarzadeh, C. Consani, O. Bräm, A. 
+Tortschanoff, A. Cannizzo, M. Chergui, Ultraviolet 
+transient absorption, transient grating and photon 
+echo studies of aqueous tryptophan. Chem Phys  422 , 
+47–52 (2013). 
+35.  J. Husek, A. Cirri, S. Biswas, L. R. Baker, Su rface 
+electron dynamics in hematite ( α-Fe 2 O 3): 
+correlation between ultrafast surface electron 
+trapping and small polaron formation. Chem Sci  8, 
+8170–8178 (2017). 
+36.  C. J. Kaplan, P. M. Kraus, A. D. Ross, M. Zürc h, S. 
+K. Cushing, M. F. Jager, H. T. Chang, E. M. 
+Gullikson, D. M. Neumark, S. R. Leone, 
+Femtosecond tracking of carrier relaxation in 
+germanium with extreme ultraviolet transient 
+reflectivity. Phys Rev B  97  (2018). 
+37.  N. W. Ashcroft, N. D. Mermin, Solid State Physics  
+(Cengage Learning, 1976). 
+38.  J. A. Johnson, A. A. Maznev, J. Cuffe, J. K. E liason, 
+A. J. Minnich, T. Kehoe, C. M. S. Torres, G. Chen, 
+K. A. Nelson, Direct measurement of room-
+temperature nondiffusive thermal transport over 
+micron distances in a silicon membrane. Phys Rev 
+Lett  110  (2013). 
+39.  A. A. Lopez, Electron-hole recombination in 
+bismuth. Physical Review  175 , 823 (1968). 
+40.  Y . Liu, R. E. Allen, Electronic structure of t he 
+semimetals Bi and Sb. Phys Rev B  52 , 1566 (1995). 
+41.  C.-W. Chen, J. Choe, E. Morosan, Charge densit y 
+waves in strongly correlated electron systems. 
+Reports on Progress in Physics  79 , 84505 (2016). 
+42.  G. Wolfowicz, F. J. Heremans, C. P. Anderson, S. 
+Kanai, H. Seo, A. Gali, G. Galli, D. D. Awschalom, 
+Quantum guidelines for solid-state spin defects. Nat 
+Rev Mater  6, 906–925 (2021). 
+43.  N. Srimathy, A. Ruban Kumar, Structural and op tical 
+characterization of thermally evaporated bismuth 
+and antimony films for photovoltaic applications. 
+Superlattices Microstruct  93 , 1–10 (2016). 
+9 
+ 
+44.  R. P. D. L. E. Madden, K. Codling, Resonances in 
+the Photo-ionization Continuum’of Ar I (20-150 
+eV)s’. Physical Review  177 , 136–151 (1969). 
+  

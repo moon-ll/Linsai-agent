@@ -1,0 +1,1073 @@
+6
+2
+0
+2
+
+r
+p
+A
+7
+1
+
+]
+i
+c
+s
+-
+l
+r
+t
+
+m
+
+.
+t
+a
+m
+-
+d
+n
+o
+c
+[
+
+1
+v
+0
+6
+9
+5
+1
+.
+
+4
+0
+6
+2
+:
+v
+i
+X
+r
+a
+
+1
+
+ 
+ 
+ 
+ 
+ 
+ 
+Identification and Structural Characterization of
+
+Twisted Atomically Thin Bilayer Materials by
+
+Deep Learning
+
+Haitao Yang,†,@ Ruiqi Hu,‡,@ Heng Wu,¶,@ Xiaolong He,†,@ Yan Zhou,∗,¶ Yizhe
+
+Xue,† Kexin He,∥ Wenshuai Hu,† Haosen Chen,† Mingming Gong,⊥ Xin Zhang,¶
+
+Ping-Heng Tan,∗,¶ Eduardo R. Hern´andez,∗,# and Yong Xie∗,∥,#
+
+†School of Advanced Materials and Nanotechnology, Xidian University, Xi’an 710071,
+
+China
+
+‡Department of Materials Science and Engineering, University of Delaware, Newark, DE
+
+19716, USA
+
+¶State Key Laboratory of Superlattices and Microstructures, Institute of Semiconductors,
+
+Chinese Academy of Sciences, Beijing 100083, China
+
+§Phonon Engineering Research Center of Jiangsu Province, School of Physics and
+
+Technology, Nanjing Normal University, Nanjing 210023, China.
+
+∥ School of Advanced Materials and Nanotechnology, Xidian University, Xi’an 710071,
+
+China
+
+⊥School of Materials Science and Engineering, Northwestern Polytechnical University,
+
+Xi’an 710072, China
+
+#Instituto de Ciencia de Materiales de Madrid (ICMM-CSIC), 28049 Madrid, Spain
+
+@These authors contributed equally to this work
+
+E-mail: yan.zhou@bristol.ac.uk; phtan@semi.ac.cn; Eduardo.Hernandez@csic.es;
+
+yxie@xidian.edu.cn
+
+2
+
+Abstract
+
+Two-dimensional materials are expected to play an important role in next-generation
+
+electronics and optoelectronic devices. Recently, twisted bilayer graphene and transi-
+
+tion metal dichalcogenides have attracted significant attention due to their unique phys-
+
+ical properties and potential applications. In this study we describe the use of optical
+
+microscopy to collect the color space of chemical vapor deposition (CVD) molybdenum
+
+disulfide (MoS2), and the application of a semantic segmentation convolutional neural
+
+network (CNN) to accurately and rapidly identify thicknesses of MoS2 flakes. A second
+
+CNN model is trained to provide precise predictions on the twist angle of CVD-grown
+
+bilayer flakes. This model harnessed a dataset comprising over 10,000 synthetic images,
+
+encompassing geometries spanning from hexagonal to triangular shapes. Subsequent
+
+validation of the deep learning predictions on twist angles was executed through the
+
+second harmonic generation and Raman spectroscopy. Our results introduce a scalable
+
+methodology for automated inspection of twisted atomically thin CVD-grown bilayer.
+
+Keywords: Twist angles, Transition Metal Dichalcogenides (TMDs), Deep Learning,
+
+OpenCV, Raman
+
+3
+
+Inspired by magic-angle graphene, 1,2 twisted bilayer graphene and transition metal dichalco-
+
+genides (TMDs) have emerged as a promising platform for the study of moir´e physics, en-
+
+compassing a range of phenomena such as Hubbard physics, 3,4 superconductivity, 5 or valley
+
+polarization. 6 The twist angle in TMDs bilayers can significantly alter their correlated elec-
+
+tronic phases and their optical properties. 7 For example, in the twist angle (2◦ ≤ θ < 6◦),
+
+low-frequency interlayer shear and layer breathing modes exhibit rapid change with the twist
+
+angle θ. 8 Additionally, the formation of the moir´e Brillouin zone introduces new energy sub-
+
+bands in twisted MoS2 bilayers with twist angles close to 0◦ or 60◦, 9 or high-lying excitons
+
+in bilayer WSe2, which can be tuned over 235 meV by enforcing different twist angles in the
+
+range 0◦ to 60◦. 10 The electric field control of the 2H bilayer MoS2 interlayer exciton at room
+
+temperature is possible due to the out-of-plane electric dipole. 11
+
+Chemical vapor deposition (CVD) can be used to fabricate bilayer graphene 12 and bi-
+
+layer TMDs with different twist angles, 13–17 i.e. different stacking arrangements between
+
+the two layers. Typically, only 0◦ (AA stacking, or 3R) or 60◦ (AB stacking, or 2H) ar-
+
+rangements are possible for the second layer on bilayer TMDs, as these are energetically the
+
+more favourable. 16,18 Reflectivity spectra have shown an A and B exciton energy difference
+
+of 49 meV between the 2H and 3R bilayer MoS2. 15 Reverse-flow chemical vapor epitaxy
+
+provided a way to controllable grow high-quality bilayer TMD single crystals with different
+
+growth temperatures. 16
+
+Second Harmonic Generation (SHG) spectroscopy is frequently employed to characterize
+
+the twist angles of TMDs. 19,20 This reliable method determines the orientation of exfoli-
+
+ated flakes and subsequently enables the stacking of homo- or hetero- layers using a dry
+
+transfer technique. 21–23 In addition to SHG, differential reflectance spectroscopy can also be
+
+used for characterizing TMDs, specifically by identifying twist angles through the transi-
+
+tion of interlayer excitons. 15,24 Raman spectroscopy, particularly low wavenumber Raman
+
+spectroscopy, 25,26 is another common method used for this purpose. 8,16,27–29 For cases where
+
+atomic precision is required, Transmission Electron Microscopy (TEM) can be employed to
+
+4
+
+determine the twist angles of graphene. 30 Further augmenting the atomic precision of char-
+
+acterization techniques, the Scanning Tunneling Microscope (STM) offers local probing of
+
+twist angles with atomic level resolution. 31 Although accurate and reliable, these experi-
+
+mental techniques are costly, require specialised equipment and are time consuming. It is
+
+therefore desirable to develop alternative structural characterisation techniques that are cost
+
+effective, fast and easily implemented without compromising accuracy and reliability.
+
+Although the thickness is normally confirmed by atomic force microscopy (AFM), Ra-
+
+man, etc, 32 optical contrast is frequently adopted by experience researcher in terms of the
+
+speed and simplicity based on the optical contrast. 33 Recent developments in artificial in-
+
+telligence (AI) have led to the adoption of new techniques for processing microscopy image
+
+datasets of layer thicknesses, edges, dimensions, etc. 34–36 For example, autonomous robotic
+
+search and stacking of graphene flakes were proposed to detect up to 400 monolayer graphene
+
+samples in one hour. 34,35 Unsupervised Machine Learning (ML) and Deep Learning (DL)
+
+techniques have been used to classify two-dimensional (2D) materials into different cat-
+
+egories. 37–40 In combination with an automatic optical microscope stage, the desired 2D
+
+materials can be searched automatically. 39 However, to the best of our knowledge, no au-
+
+tomatic procedure for determining the twist angle in bilayer atomically thin materials (e.g.
+
+TMDs and graphene) has been described up to now. Presumably, the DL model may lack
+
+sufficient accuracy due to the absence of adequate experimental data for training.
+
+In this work, a systematic methodology is reported that demonstrates the potential of DL
+
+and image processing tools for determining the twist angles in CVD-grown bilayer TMDs and
+
+graphene. Specifically, we trained four different DL algorithms to identify the thickness of
+
+the CVD-grown flakes. The twist angle in individual bilayer TMDs flakes can be estimated
+
+by means of image processing tools, such as implemented in OpenCV. 41 This procedure,
+
+illustrated below, is nevertheless slow and not effective for large-scale sample analysis. To
+
+circumvent this problem, we have developed a second DL model to characterize the twist
+
+angle of individual flakes in an efficient way. All codes and datasets are open access and
+
+5
+
+freely available, provided with user-friendly instructions. Our work aims to provide new tools
+
+designed to facilitate and make more effectively structural characterization of CVD-grown
+
+twisted TMDs samples, with extended applicability to CVD-grown graphene and hexagonal
+
+boron nitride (h-BN) and other CVD-grown two-dimensional materials.
+
+Figure 1: Identification and analysis of optical micrographs of CVD-grown bilayer atomically
+Images of the TMDs are shown as the
+thin materials (e.g. TMDs) using deep learning.
+example. (a) Original optical micrographs (OMs) captured by an Optical Microscope. (b)
+Images processed and labeled using LabelMe, followed by training via convolutional neural
+network (CNN) employing various classification methods. (c) Typical outcomes of the TMD
+thickness derived from the processing in step (b). (d) The regression CNN model trained by
+the artificially generated dataset for twist-angle prediction. (e) Twist angles predicted by
+using the CNN model from (d) are shown at the left corner at each image. Scale bar: 10 µm.
+
+In our study, optical micrographs of CVD-grown bilayer atomically thin materials are
+
+captured as shown in Figure 1 (for MoS2) and supplementary for graphene 12 (Figure S15).
+
+These images are then processed and utilized to train a convolutional neural network (CNN)
+
+for the identification of flake thickness. Subsequently, a different CNN model, developed us-
+
+ing a synthetic dataset, is used to predict the twist angles of the flakes, with these predictions
+
+displayed on the corresponding images. The workflow diagram of the process to identify the
+
+twist bilayer of TMDs is visually shown in the supplementary Figure S1.
+
+6
+
+Figure 2: Segmentation techniques for classifying thickness in atomically thin CVD-grown
+bilayer flakes. (a) Optical micrographs of a bilayer MoS2 flake. (b-c) Detail the labeling for
+single and bilayer regions. (d) Final labeled result identifying thickness variations.(e) Ex-
+plains the color labels, correlating colors to specific thickness levels. (f) Optical micrographs
+of another bilayer flake using as a test image. (g-n) Four CNN models and segmentation
+results employing DeepLabV3, FCN, LR-ASPP, and U-Net models respectively. Notably,
+the U-Net model excels in recognizing the contours of imperfect triangular flakes.Scale bar:
+10 µm.
+
+We utilized deep learning techniques to determine the thickness of atomically thin flakes,
+
+harnessing a supervised neural network trained on manually labeled images. These atom-
+
+ically thin flakes were initially distinguished by optical contrast and subsequently verified
+
+through AFM and Raman spectroscopy, 13,14 detailed in Supplementary Section 1.1.
+
+Figure 2 showcases the adeptness of our segmentation deep learning (DL) models in
+
+classifying flakes into monolayers (1L), bilayers (2L), and thicker layers (TL) with remarkable
+
+precision, as further elaborated in Figure 2 and Figure S7. Figure 2(a) shows an original
+
+unprocessed microscopy image. Figures 2(b-e) illustrate the manual labeling of background,
+
+monolayer, bilayer, and thick layers.
+
+7
+
+In our evaluation, four DL models were rigorously tested: DeepLabV3, 42 Fully Convolu-
+
+tional Network (FCN), 43 MobileNetV3, 44 and U-Net, 45 each employing distinct segmentation
+
+strategies and architectures. For instance, DeepLabV3 integrates a backbone architecture
+
+for feature extraction with advanced techniques like dilated convolutions and spatial pyra-
+
+mid pooling. The FCN model, tailored for semantic segmentation, ensures the output size
+
+matches the input. Meanwhile, LR-ASPP, a variant of DeepLabV3’s ASPP, aims for effi-
+
+ciency in mobile and edge computing. Notably, U-Net, recognized for its effectiveness in
+
+biomedical image segmentation, features a distinctive U-shaped architecture. Our imple-
+
+mentation utilized Python 3.8 and Pytorch 1.10, 46 with U-Net emerging as the most adept
+
+in capturing the nuances of shape, particularly evident in cases of distorted triangular over-
+
+lays. Compared to the original micrographs, U-Net’s segmentation reveals enhanced detail
+
+in both monolayer and bilayer configurations (Figure 2(n)), affirming its selection as the
+
+primary model for our study. For a comprehensive understanding of the labeling process
+
+and additional model comparisons, readers are directed to the Supplementary Information
+
+(Supplementary 2.1).
+
+Once the pixels in an experimental image have been classified, either by a human or by
+
+any of the trained DL models described in Sec. I of SI, and the resulting flakes color-coded
+
+according to their thickness, it is possible to determine the twist angle formed between
+
+an underlying single-layer and an overlying second layer using appropriate image analysis
+
+software, such as OpenCV. 41 It contains useful functionalities to e.g. determine contour lines
+
+enclosing a particular flake and measure the corresponding enclosed area, fit an approximate
+
+polygonal shape or find the minimum desired polygonal shape that encloses a given set
+
+of pixels in the image. Given that TMDs typically exhibit a triangular shape, we employ
+
+triangles as the chosen polygonal shape, leading to an estimation of the corner positions.
+
+By carrying out this process for each of the layers in a flake, it is possible to estimate the
+
+twist angles between each pair of layers from their corner positions by simple trigonometric
+
+calculation.
+
+8
+
+Nevertheless, the use of image analysis software as described above has several disadvan-
+
+tages. First, it is not easily automated, requiring human intervention and thus resulting in a
+
+slow and tedious process that cannot be applied efficiently on a large scale. A better alterna-
+
+tive is to train a DL model to directly predict the twist angles from the appropriately cropped
+
+experimental image of a twisted bilayer [see Figure 1(d-e)]. Training such a model would
+
+require a large database of preprocessed experimental images for which the twist angles had
+
+been previously determined. However there is a more practical and expedient procedure,
+
+which consists of employing a synthetically generated image database. As can be seen in
+
+Figure 1 and Figure 2, experimental samples of MoS2 bilayer flakes typically consist of two
+
+roughly triangular shapes, with the rotation angles in the range of 0 to 60◦. It is trivial to
+
+generate large numbers of synthetic images of rotated pairs of superimposed triangles. This
+
+adds the advantage that such images can be made to sample homogeneously all possible
+
+twist angles, while training on labelled experimental images would result in a bias towards
+
+the experimentally observed twist angles. It is even possible to generate synthetic images
+
+that mimic more faithfully the experimental ones, by e.g. cropping corners of the triangles,
+
+or introducing random noise to their edges.
+
+In the process of generating the datasets for training the second neural network, a se-
+
+quence of images is created, including double-layered polygons that morph sequentially from
+
+hexagons to truncated triangles and finally into triangles (as illustrated in Figure 3(a)). For-
+
+mation of the outer polygon begins with the careful selection of random variables, such as
+
+central coordinates, side lengths, and rotational angles, promoting visual diversity. Once the
+
+outer polygon is defined, an inner polygon is positioned within it. The inner polygon’s loca-
+
+tion, rotation, and side length are determined through random selection, while ensuring its
+
+side length is equal to or less than the outer polygon’s, preserving their hierarchical nesting
+
+and maintaining distinct spatial separation between them.
+
+9
+
+Figure 3: Deep learning approach for recognizing twist angles in atomically thin bilayer
+flakes. (a) Synthetic datasets illustrating varying twist angles in uniformly colored MoS2
+flakes post-segmentation. (b) ResNet CNN model training using the linear regression ap-
+proach on the datasets from (a). (c) The detailed structure of ResNet with input training
+synthetic datasets and output twist angles of the datasets. (d) Prediction of twist angles for
+actual as-grown MoS2 bilayer samples using the trained CNN model.
+
+The angle formed by a vertex of each polygon and its respective center is calculated,
+
+providing a measure to assess the angular difference between them. This angular variation is
+
+then incorporated into the filename of the stored image, serving as a perceptible geometric
+
+attribute label. Consequently, the generated datasets, enriched with clear geometric anno-
+
+tations and offering a wide variety of forms, become a valuable resource for training datasets
+
+in the subsequent recognition of twist angles in CVD-grown samples.
+
+10
+
+Figure 4: Performance evaluation of the twisted bilayer MoS2 identification CNN model.
+(a)-(h) present predicted angles for different flakes, showcasing the efficacy of the CNN-
+based model (indicated in the bottom-left corner of each subfigure) in comparison to angles
+obtained via OpenCV (displayed in the bottom-right corner).
+It is noteworthy that in
+numerous instances, OpenCV was unable to identify the angles, resulting in absent data in
+the bottom-right corner of some subfigures. (i) Histogram of the quantity of bilayer MoS2 at
+various twist angles. (j)-(u) Second harmonic generation (SHG) and thickness identification
+for corresponding samples with (v) serving as the legend. (w) Comparison between true and
+predicted twist angle angles θ using the artificially generated test datasets and SHG dataset
+in (j)-(u), respectively.
+
+After that, a Residual Network (ResNet) 47 Convolutional Neural Network (see Figure 3)
+
+is trained to predict the twist angle by regression to a synthetically generated database of
+
+more than 10000 images. The input images are RGB images with a resolution of 512 × 512
+
+pixels obtained from Figure 3(a). In model design, the choice between using a single-layer or
+
+multi-layer approach for regression tasks hinges on the complexity of the data relationship.
+
+11
+
+A direct 512 to 1 dimension reduction in the network might be suitable for simpler, linear
+
+problem, while a more gradual decrease, such as 512-256-128-1, tends to perform better for
+
+capturing complex, non-linear relationships in the data (as shown in Figure 3 (b) and (c)).
+
+In the latter approach, additional layers aid the model in learning nuanced data patterns,
+
+offering a potential boost in predictive accuracy for intricate problems. Upon being input
+
+into the ResNet network, the final angles are obtained, as illustrated in Figure 3 (b) and (c).
+
+After training the CNN regression model, the real as-grown bilayer MoS2 micrographs after
+
+the first deep learning model are used as input, and the twist angle of the bilayer MoS2 are
+
+obtained through this second neural network. The capabilities of the model are illustrated in
+
+Figure 4. The identification of twist bilayer MoS2 using OpenCV is also demonstrated in the
+
+supplementary (Figure S8) and shown in the Figure 4 as a comparison for the DL method-
+
+ology. It can be concluded that the CNN regression model we used here can identify the
+
+twist angle in bilayer MoS2 while being tolerant to shape irregularities. For bilayer graphene
+
+synthesized through CVD, it is evident that different edges can correspond to varying twist
+
+angles in the secondary layer 12 (Figure S15). Demonstrably, our methodology proficiently
+
+enables the identification of such twist angles within hexagonally shaped, CVD-grown bi-
+
+layer graphene, offering insightful exploration into its structural intricacies, as depicted in
+
+Supplementary Figure S15.
+
+To verify the identification of the twist angles of CVD-grown bilayer MoS2, SHG mea-
+
+surements are performed on these samples with various twist angles as shown in Figure 4
+
+(j)-(v). The true and predicted twist angle θ using the artificially generated test datasets
+
+and SHG dataset is summarized in Figure 4 (w), showing the reasonable accuracy of our
+
+model.
+
+12
+
+Figure 5: Moir´e phonons in twisted CVD-grown bilayer MoS2.
+(a) Raman spectra of
+CVD grown bilayer MoS2 with the excitation energy (Eex) of 2.54 eV. Peaks assigned to
+moir´e phonons modes 28 including FTA, FLA and FA′
+1 modes are marked by red, blue and
+gray arrows, respectively. The dashed lines corresponds to the peak position of second-order
+Raman modes and the E′ and A′
+1 modes are also marked out. (b, c) Comparison between the
+calculated (Cal, lines) and experimental (Exp, circles) frequencies of twist-angle-dependent
+moir´e phonons including (b) FTA, FLA and (c) FA′
+
+1 phonons.
+
+One possible application of our methodology could be used to select more samples for
+
+probing their optical properties correlations. The strain, defects and doping of the inho-
+
+mogeneity of the individual bilayer CVD-grown flakes could influence the Raman spectra,
+
+making the interpretation of Raman signal challenging. 48–54 Figure 5 (a) shows the Ra-
+
+man spectra of the CVD-grown bilayer MoS2 samples with twist angles ranging from 0-60◦.
+
+The three vertical dashed lines correspond to the peak positions of the second-order Raman
+
+modes E′(M)LO2-LA(M) (∼ 150 cm−1), A′
+
+1(M)-LA(M) (∼ 178 cm−1) and TA(K) (∼ 190
+
+cm−1). 55 In addition, several branches of moir´e phonons are observed in the Raman spec-
+
+tra. Moir´e phonons refer to zone-center phonons in twisted bilayer MoS2, which are folded
+
+from the off-center phonons in monolayer MoS2 due to the periodic moir´e potential and
+
+13
+
+thus exhibit shift in peak frequency with the change of twist angle. 28 The arrows indicates
+
+the assigned moir´e phonon modes including folded TA (FTA), folded LA (FLA) and folded
+
+A′
+
+1 (FA′
+
+1) modes, which exhibit high frequency sensitivity to the twist angle, similar to the
+
+previous results. 28 Figure 5 (b)-(c) summarized the experimental and calculated frequencies
+
+of the three moir´e phonon modes for comparison. The experimental peak positions of moir´e
+
+phonons agree well with the theoretical ones 28 based on twist angle of twisted bilayer MoS2
+
+and the phonon dispersion of monolayer MoS2. Note that the frequencies of FA1
+
+′ mode on
+
+the CVD-grown bilayer MoS2 diverging relatively from the theoretical curve in the range of
+
+24.6° to 34.7° may be arisen from different reasons, where strain is very likely as E′ and A1
+
+′
+
+modes also show behaviors of strain-induced shifts. 51 We did not discuss the results of twist
+
+angle at 0-5◦ and 55-60◦ in detail, because the case is very complicated due to the phonon
+
+renormalization induced by lattice relaxation. 8
+
+Another possible application of our methodology could be used for optimization of the
+
+large-scale growth for bilayer atomically materials (as shown in Figure S17). In addition,
+
+the exfoliated flakes with regular shape could also be the next possible applications of our
+
+model (as show in Figure S18). 56,57 This thorough work-flow acts as a clear guide, detailing
+
+the methodology utilized in the study for the precise identification and analysis of twisted
+
+bilayers in TMDs grown via CVD. This method can also be adapted to include graphene (as
+
+shown in Figure S15) and hBN, as well as their heterostructures.
+
+In conclusion, we have demonstrated a robust and efficient methodology for the identifica-
+
+tion and analysis of twisted bilayers in TMDs using deep learning and OpenCV techniques.
+
+Our approach, which combines optical micrographs, deep learning models, and OpenCV,
+
+provides accurate and comprehensive predictions of thickness properties and twist angles of
+
+bilayer TMDs. The comparison of various deep learning models revealed that the U-Net
+
+model exhibits superior performance in terms of global accuracy, mean intersection over
+
+union, and processing speed.
+
+Our methodology can be extended to other two-dimensional materials grown by CVD,
+
+14
+
+including both homojunctions and heterojunctions, highlighting its versatility and broad
+
+applicability in the field of 2D materials analysis. Our datasets and codes are made freely
+
+available as a service to the community. We hope that, by facilitating and automating the
+
+structural analysis of TMDs, this work will contribute to further advancements in the field
+
+of TMDs and 2D materials in general, thus also the rapid growing Autonomous lab using
+
+AI. 58
+
+Methods
+
+A description of the data pipeline, data preparation, deep learning training of the semantic
+
+segmentation model, twist angle identification by OpenCV can be found in SI.
+
+Author Contributions
+
+Y. X. supervised the project; Y. X. and E. R. H. conceived the idea. H. Y., R. H., H. W.,
+
+and X. H. contributed equally to this work; H. Y. performed the coding with the help of
+
+Y. X. and R. H.; H. Y. and Y. Z. X. prepared the datasets with assistance from H. C. and
+
+M. G.; H. Y., X. H., K. H., and Y. Z. prepared the figures with the help of Y. X., R. H., and
+
+E. R. H.; H. W., Y. Z., and X. Z. measured the Raman spectra and SHG, and analyzed the
+
+data under the supervision of P. T.; Y. X., R. H., and E. R. H. wrote the manuscript.
+
+Acknowledgements
+
+This work received funding from the National Natural Science Foundation of China (NSFC)
+
+Grants (No. 62011530438, No. 61704129, No.12204472, No. 12127807) are acknowledged.
+
+This work was partially supported by the Key Research and Development Program of
+
+Shaanxi (Program No.2021KW-02), Fundamental Research Funds for the Central Universi-
+
+ties (QTZX23026), and the fund of the State Key Laboratory of Solidification Processing
+
+15
+
+in Northwestern Polytechnical University (grant no. SKLSP201612). The work of ERH is
+
+supported by MCIN/AEI/ 10.13039/501100011033/FEDER, UE through projects PID2022-
+
+139776NB-C66 and TED2021-132267B-I00.
+
+Supporting Information
+
+This material is available free of charge via the Internet at ACS Publications. It includes de-
+
+tailed descriptions of dataset preparation, semantic segmentation results, synthetic dataset
+
+generation, verification of twisted bilayer graphene, and Raman spectra of CVD-grown
+
+twisted bilayer MoS2.
+
+All scripts used in this study are available on GitHub. 59 Currently, the source code is
+
+provided as a supplementary file for reviewers and readers to examine. Upon acceptance
+
+of the manuscript, the code will be fully open-sourced at the following repository: https:
+
+//github.com/YongXie-ICMM/Twist2DNet.
+
+Each subfolder in the supplementary package corresponds directly to the respective sec-
+
+tions described in this Supporting Information.
+
+References
+
+(1) Cao, Y.; Fatemi, V.; Fang, S.; Watanabe, K.; Taniguchi, T.; Kaxiras, E.; Jarillo-
+
+Herrero, P. Unconventional superconductivity in magic-angle graphene superlattices.
+
+Nature 2018, 556, 43–50.
+
+(2) Cao, Y.; Fatemi, V.; Demir, A.; Fang, S.; Tomarken, S. L.; Luo, J. Y.; Sanchez-
+
+Yamagishi, J. D.; Watanabe, K.; Taniguchi, T.; Kaxiras, E.; Ashoori, R. C.; Jarillo-
+
+Herrero, P. Correlated insulator behaviour at half-filling in magic-angle graphene su-
+
+perlattices. Nature 2018, 556, 80–84.
+
+(3) Tang, Y.; Li, L.; Li, T.; Xu, Y.; Liu, S.; Barmak, K.; Watanabe, K.; Taniguchi, T.;
+
+16
+
+MacDonald, A. H.; Shan, J.; Mak, K. F. Simulation of Hubbard model physics in
+
+WSe2/WS2 moir´e superlattices. Nature 2020, 579, 353–358.
+
+(4) Wu, F.; Lovorn, T.; Tutuc, E.; MacDonald, A. H. Hubbard model physics in transition
+
+metal dichalcogenide moir´e bands. Phys. Rev. Lett. 2018, 121, 026402.
+
+(5) Wang, L. et al. Correlated electronic phases in twisted bilayer transition metal dichalco-
+
+genides. Nat. Mater. 2020, 19, 861–866.
+
+(6) Devakul, T.; Cr´epel, V.; Zhang, Y.; Fu, L. Magic in twisted transition metal dichalco-
+
+genide bilayers. Nat. Commun. 2021, 12, 6730.
+
+(7) Lau, C. N.; Bockrath, M. W.; Mak, K. F.; Zhang, F. Reproducibility in the fabrication
+
+and physics of moir´e materials. Nature 2022, 602, 41–50.
+
+(8) Quan, J. et al. Phonon renormalization in reconstructed MoS2 moir´e superlattices. Nat.
+
+Mater. 2021, 20, 1100–1105.
+
+(9) Marcellina, E.; Liu, X.; Hu, Z.; Fieramosca, A.; Huang, Y.; Du, W.; Liu, S.; Zhao, J.;
+
+Watanabe, K.; Taniguchi, T.; Xiong, Q. Evidence for moir´e trions in twisted MoSe2
+
+homobilayers. Nano Lett. 2021, 21, 4461–4468.
+
+(10) Lin, K.-Q.; Faria Junior, P. E.; Bauer, J. M.; Peng, B.; Monserrat, B.; Gmitra, M.;
+
+Fabian, J.; Bange, S.; Lupton, J. M. Twist-angle engineering of excitonic quantum
+
+interference and optical nonlinearities in stacked 2D semiconductors. Nat. Commun.
+
+2021, 12, 1553.
+
+(11) Peimyoo, N.; Deilmann, T.; Withers, F.; Escolar, J.; Nutting, D.; Taniguchi, T.; Watan-
+
+abe, K.; Taghizadeh, A.; Craciun, M. F.; Thygesen, K. S.; Russo, S. Electrical tuning
+
+of optically active interlayer excitons in bilayer MoS2. Nat. Nanotechnol. 2021, 16,
+
+888–893.
+
+17
+
+(12) Sun, L.; Wang, Z.; Wang, Y.; Zhao, L.; Li, Y.; Chen, B.; Huang, S.; Zhang, S.;
+
+Wang, W.; Pei, D.; Fang, H.; Zhong, S.; Liu, H.; Zhang, J.; et al. Hetero-site nu-
+
+cleation for growing twisted bilayer graphene with a wide range of twist angles. Nat.
+
+Commun. 2021, 12, 2391.
+
+(13) Xie, Y.; Wang, Z.; Zhan, Y.; Zhang, P.; Wu, R.; Jiang, T.; Wu, S.; Wang, H.; Zhao, Y.;
+
+Nan, T.; Ma, X. Controllable growth of monolayer MoS2 by chemical vapor deposition
+
+via close MoO2 precursor for electrical and optical applications. Nanotechnology 2017,
+
+28, 084001.
+
+(14) Wang, Z.; Xie, Y.; Wang, H.; Wu, R.; Nan, T.; Zhan, Y.; Sun, J.; Jiang, T.; Zhao, Y.;
+
+Lei, Y.; Yang, M.; Wang, W.; Zhu, Q.; Ma, X.; Hao, Y. NaCl-assisted one-step growth
+
+of MoS2–WS2 in-plane heterostructures. Nanotechnology 2017, 28, 325602.
+
+(15) Paradisanos, I.; Shree, S.; George, A.; Leisgang, N.; Robert, C.; Watanabe, K.;
+
+Taniguchi, T.; Warburton, R. J.; Turchanin, A.; Marie, X.; Gerber, I. C.; Urbaszek, B.
+
+Controlling interlayer excitons in MoS2 layers grown by chemical vapor deposition. Nat.
+
+Commun. 2020, 11, 2391.
+
+(16) Zhang, X.; Nan, H.; Xiao, S.; Wan, X.; Gu, X.; Du, A.; Ni, Z.; Ostrikov, K. Transition
+
+metal dichalcogenides bilayer single crystals by reverse-flow chemical vapor epitaxy.
+
+Nat. Commun. 2019, 10, 598.
+
+(17) Wang, Z.; Sun, J.; Wang, H.; Lei, Y.; Xie, Y.; Wang, G.; Zhao, Y.; Li, X.; Xu, H.;
+
+Yang, X.; Feng, L.; Ma, X. 2H/1T′ phase WS2(1 − x)Te2x alloys grown by chemical
+
+vapor deposition with tunable band structures. Applied Surface Science 2020, 504,
+
+144371.
+
+(18) Dumcenco, D.; Ovchinnikov, D.; Marinov, K.; Lazic, P.; Gibertini, M.; Marzari, N.;
+
+Sanchez, O. L.; Kung, Y.-C.; Krasnozhon, D.; Chen, M.-W.; Bertolazzi, S.; Gillet, P.;
+
+18
+
+Morral, A. F. i.; Radenovic, A.; Kis, A. Large-area epitaxial monolayer MoS2. ACS
+
+Nano 2015, 9, 4611–4620.
+
+(19) Yin, X.; Ye, Z.; Chenet, D. A.; Ye, Y.; O’Brien, K.; Hone, J. C.; Zhang, X. Edge
+
+Nonlinear Optics on a MoS2 Atomic Monolayer. Science 2014, 344, 488–490.
+
+(20) Kumar, N.; Najmaei, S.; Cui, Q.; Ceballos, F.; Ajayan, P. M.; Lou, J.; Zhao, H. Second
+
+harmonic microscopy of monolayer MoS2. Phys. Rev. B 2013, 87, 161403.
+
+(21) Castellanos-Gomez, A.; Buscema, M.; Molenaar, R.; Singh, V.; Janssen, L.; Van
+
+Der Zant, H. S.; Steele, G. A. Deterministic transfer of two-dimensional materials by
+
+all-dry viscoelastic stamping. 2D Mater. 2014, 1, 011002.
+
+(22) Wang, L.; Meric, I.; Huang, P.; Gao, Q.; Gao, Y.; Tran, H.; Taniguchi, T.; Watan-
+
+abe, K.; Campos, L.; Muller, D.; Guo, J.; Kim, P.; Hone, J.; Shepard, K.; Dean, C.
+
+One-dimensional electrical contact to a two-dimensional material. Science 2013, 342,
+
+614–617.
+
+(23) Cheng, J.; Jiang, T.; Ji, Q.; Zhang, Y.; Li, Z.; Shan, Y.; Zhang, Y.; Gong, X.; Liu, W.;
+
+Wu, S. Kinetic nature of grain boundary formation in as-grown MoS2 monolayers. Adv.
+
+Mater. 2015, 27, 4069–4074.
+
+(24) Carrascoso, F.; Lin, D.-Y.; Frisenda, R.; Castellanos-Gomez, A. Biaxial strain tuning
+
+of interlayer excitons in bilayer MoS2. J. Phys. Materials 2019, 3, 015003.
+
+(25) Tan, P. H.; Han, W. P.; Zhao, W. J.; Wu, Z. H.; Chang, K.; Wang, H.; Wang, Y. F.;
+
+Bonini, N.; Marzari, N.; Pugno, N.; Savini, G.; Lombardo, A.; Ferrari, A. C. The shear
+
+mode of multilayer graphene. Nature Materials 2012, 11, 294–300.
+
+(26) Zhang, X.; Han, W. P.; Wu, J. B.; Milana, S.; Lu, Y.; Li, Q. Q.; Ferrari, A. C.; Tan, P. H.
+
+Raman spectroscopy of shear and layer breathing modes in multilayer MoS2. Phys. Rev.
+
+B 2013, 87, 115413.
+
+19
+
+(27) van der Zande, A. M.; Kunstmann, J.; Chernikov, A.; Chenet, D. A.; You, Y.;
+
+Zhang, X.; Huang, P. Y.; Berkelbach, T. C.; Wang, L.; Zhang, F.; Hybertsen, M. S.;
+
+Muller, D. A.; Reichman, D. R.; Heinz, T. F.; Hone, J. C. Tailoring the Electronic
+
+Structure in Bilayer Molybdenum Disulfide via Interlayer Twist. Nano Lett. 2014, 14,
+
+3869–3875.
+
+(28) Lin, M.-L.; Tan, Q.-H.; Wu, J.-B.; Chen, X.-S.; Wang, J.-H.; Pan, Y.-H.; Zhang, X.;
+
+Cong, X.; Zhang, J.; Ji, W.; Hu, P.-A.; Liu, K.-H.; Tan, P.-H. Moir´e Phonons in Twisted
+
+Bilayer MoS2. ACS Nano 2018, 12, 8770–8780.
+
+(29) Wu, H.; Lin, M.-L.; Zhou, Y.; Zhang, X.; Tan, P.-H. Analyzing Fundamental Properties
+
+of Two-Dimensional Materials by Raman Spectroscopy from Microscale to Nanoscale.
+
+Analytical Chemistry 2023, 95, 10821–10838.
+
+(30) Yoo, H.; Engelke, R.; Carr, S.; Fang, S.; Zhang, K.; Cazeaux, P.; Sung, S. H.; Hov-
+
+den, R.; Tsen, A. W.; Taniguchi, T.; Watanabe, K.; Yi, G.-C.; Kim, M.; Luskin, M.;
+
+et al. Atomic and electronic reconstruction at the van der Waals interface in twisted
+
+bilayer graphene. Nat. Mater. 2019, 18, 448–453.
+
+(31) Liu, H.; Zheng, H.; Yang, F.; Jiao, L.; Chen, J.; Ho, W.; Gao, C.; Jia, J.; Xie, M.
+
+Line and point defects in MoSe2 bilayer studied by scanning tunneling microscopy and
+
+spectroscopy. ACS Nano 2015, 9, 6619–6625.
+
+(32) Li, H.; Zhang, Q.; Yap, C. C. R.; Tay, B. K.; Edwin, T. H. T.; Olivier, A.; Baillargeat, D.
+
+From bulk to monolayer MoS2: evolution of Raman scattering. Advanced Functional
+
+Materials 2012, 22, 1385–1390.
+
+(33) Castellanos-Gomez, A.; Agra¨ıt, N.; Rubio-Bollinger, G. Optical identification of atom-
+
+ically thin dichalcogenide crystals. Applied Physics Letters 2010, 96, 213116.
+
+(34) Frisenda, R.; Castellanos-Gomez, A. Robotic assembly of artificial nanomaterials. Nat.
+
+Nanotechnol. 2018, 13, 441–442.
+
+20
+
+(35) Masubuchi, S.; Morimoto, M.; Morikawa, S.; Onodera, M.; Asakawa, Y.; Watan-
+
+abe, K.; Taniguchi, T.; Machida, T. Autonomous robotic searching and assembly of
+
+two-dimensional crystals to build van der Waals superlattices. Nat. Commun. 2018, 9,
+
+1413.
+
+(36) Lin, X.; Si, Z.; Fu, W.; Yang, J.; Guo, S.; Cao, Y.; Zhang, J.; Wang, X.; Liu, P.;
+
+Jiang, K.; Zhao, W. Intelligent identification of two-dimensional nanostructures by
+
+machine-learning optical microscopy. Nano Res. 2018, 11, 6316–6324.
+
+(37) Masubuchi, S.; Machida, T. Classifying optical microscope images of exfoliated
+
+graphene flakes by data-driven machine learning. npj 2D Mater. Appl. 2019, 3, 4.
+
+(38) Han, B.; Lin, Y.; Yang, Y.; Mao, N.; Li, W.; Wang, H.; Yasuda, K.; Wang, X.;
+
+Fatemi, V.; Zhou, L.; Wang, J. I.-J.; Ma, Q.; Cao, Y.; Rodan-Legrain, D.; et al.
+
+Deep-learning-enabled fast optical identification and characterization of 2D materials.
+
+Adv. Mater. 2020, 32, 2000953.
+
+(39) Masubuchi, S.; Watanabe, E.; Seo, Y.; Okazaki, S.; Sasagawa, T.; Watanabe, K.;
+
+Taniguchi, T.; Machida, T. Deep-learning-based image segmentation integrated with
+
+optical microscopy for automatically searching for two-dimensional materials. npj 2D
+
+Mater. Appl. 2020, 4, 3.
+
+(40) Sterbentz, R. M.; Haley, K. L.; Island, J. O. Universal image segmentation for optical
+
+identification of 2D materials. Sci. Rep. 2021, 11, 5808.
+
+(41) Open Source Computer Vision Library. https://opencv.org/, Accessed: February 10,
+
+2024.
+
+(42) Chen, L.-C.; Papandreou, G.; Schroff, F.; Adam, H. Rethinking atrous convolution for
+
+semantic image segmentation. 2017; accessed on December 06, 2023.
+
+21
+
+(43) Long, J.; Shelhamer, E.; Darrell, T. Fully convolutional networks for semantic segmen-
+
+tation. Proceedings of the IEEE conference on computer vision and pattern recognition.
+
+2015; pp 3431–3440.
+
+(44) Howard, A.; Sandler, M.; Chu, G.; Chen, L.-C.; Chen, B.; Tan, M.; Wang, W.; Zhu, Y.;
+
+Pang, R.; Vasudevan, V.; Le, Q. V.; Adam, H. Searching for mobilenetv3. Proceedings
+
+of the IEEE/CVF international conference on computer vision. 2019; pp 1314–1324.
+
+(45) Ronneberger, O.; Fischer, P.; Brox, T. U-net: Convolutional networks for biomedical
+
+image segmentation. Medical Image Computing and Computer-Assisted Intervention–
+
+MICCAI 2015: 18th International Conference, Munich, Germany, October 5-9, 2015,
+
+Proceedings, Part III 18. 2015; pp 234–241.
+
+(46) TorchVision maintainers and contributors TorchVision: PyTorch’s Computer Vision
+
+Library. https://github.com/pytorch/vision, 2016; Accessed: February 10, 2024.
+
+(47) He, K.; Zhang, X.; Ren, S.; Sun, J. Deep residual learning for image recognition. Pro-
+
+ceedings of the IEEE conference on computer vision and pattern recognition. 2016; pp
+
+770–778.
+
+(48) Lau, C. N.; Bockrath, M. W.; Mak, K. F.; Zhang, F. Reproducibility in the fabrication
+
+and physics of moir´e materials. Nature 2022, 602, 41–50.
+
+(49) Lin, K.-Q.; Holler, J.; Bauer, J. M.; Parzefall, P.; Scheuck, M.; Peng, B.; Korn, T.;
+
+Bange, S.; Lupton, J. M.; Sch¨uller, C. Large-scale mapping of moir´e superlattices by
+
+hyperspectral Raman imaging. Advanced Materials 2021, 33, 2008333.
+
+(50) Lu, A.-Y.; Martins, L. G. P.; Shen, P.-C.; Chen, Z.; Park, J.-H.; Xue, M.; Han, J.;
+
+Mao, N.; Chiu, M.-H.; Palacios, T.; Tung, V.; Kong, J. Unraveling the Correlation
+
+between Raman and Photoluminescence in Monolayer MoS2 through Machine-Learning
+
+Models. Advanced Materials 2022, 34, 2202911.
+
+22
+
+(51) Yang, R.; Yousuf, S. E. H.; Lee, J.; Zhang, P.; Liu, Z.; Feng, P. X.-L. Raman spectro-
+
+scopic probe for nonlinear MoS2 nanoelectromechanical resonators. Nano Letters 2022,
+
+22, 5780–5787.
+
+(52) Xie, Y.; Lee, J.; Wang, Y.; Feng, P. X.-L. Straining and Tuning Atomic Layer Nano-
+
+electromechanical Resonators via Comb-Drive MEMS Actuators. Advanced Materials
+
+Technologies 2021, 6, 2000794.
+
+(53) Hu, W.; Wang, Y.; He, K.; He, X.; Bai, Y.; Liu, C.; Zhou, N.; Wang, H.; Li, P.; Ma, X.;
+
+Xie, Y. Straining of atomically thin WSe2 crystals: Suppressing slippage by thermal
+
+annealing. Journal of Applied Physics 2022, 132, 085104.
+
+(54) Sun, Y.; Yin, S.; Peng, R.; Liang, J.; Cong, X.; Li, Y.; Li, C.; Wang, B.; Lin, M.-
+
+L.; Tan, P.-H.; Wan, C.; Liu, K. Abnormal out-of-plane vibrational Raman mode in
+
+electrochemically intercalated multilayer MoS2. Nano Letters 2023, 23, 5342–5349.
+
+(55) Zhang, X.; Qiao, X.-F.; Shi, W.; Wu, J.-B.; Jiang, D.-S.; Tan, P.-H. Phonon and
+
+Raman scattering of two-dimensional transition metal dichalcogenides from monolayer,
+
+multilayer to bulk material. Chem. Soc. Rev. 2015, 44, 2757–2785.
+
+(56) Palai, S. K.; Dyksik, M.; Sokolowski, N.; Ciorga, M.; S´anchez Viso, E.; Xie, Y.; Schu-
+
+bert, A.; Taniguchi, T.; Watanabe, K.; Maude, D. K.; Surrente, A.; Baranowski, M.;
+
+Castellanos-Gomez, A.; Munuera, C.; Plochocka, P. Approaching the Intrinsic Proper-
+
+ties of Moir´e Structures Using Atomic Force Microscopy Ironing. Nano Letters 2023,
+
+23, 4749–4755.
+
+(57) Zhang, N.; Surrente, A.; Baranowski, M.; Maude, D. K.; Gant, P.; Castellanos-
+
+Gomez, A.; Plochocka, P. Moir´e intralayer excitons in a MoSe2/MoS2 heterostructure.
+
+Nano letters 2018, 18, 7651–7657.
+
+(58) Ren, Z.; Ren, Z.; Zhang, Z.; Buonassisi, T.; Li, J. Autonomous experiments using active
+
+learning and AI. Nature Reviews Materials 2023, 8, 563–564.
+
+23
+
+(59) Xie, Y. Twist2DNet. https://github.com/YongXie-ICMM/Twist2DNet.git, 2024;
+
+Accessed: February 10, 2024.
+
+24
+
+TOC Graphic
+
+25
+
+
