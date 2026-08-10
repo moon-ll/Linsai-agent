@@ -596,9 +596,16 @@ def _run_lit_search_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[st
     new_papers = [p for p in papers if p.get("is_new", False)]
     if new_papers:
         try:
-            _svc._ingest_new_papers(new_papers, source="pipeline", proposal_id=proposal_id)
+            ingest_res = _svc._ingest_new_papers(new_papers, source="pipeline", proposal_id=proposal_id)
+            # v6.8.20: 用真实入库数替代之前虚报的"len(new_papers)"
+            # 修复前：build_frontmatter 对含 dict 元素的列表抛 unhashable type，
+            # 所有论文静默失败，但外层 try/except 永远不触发，导致日志与实际不一致。
             if _log:
-                _log.info(f"[{proposal_id}] lit_search 新入库 {len(new_papers)} 篇论文到知识库")
+                _log.info(
+                    f"[{proposal_id}] lit_search 新入库 "
+                    f"{ingest_res['ingested']}/{len(new_papers)} 篇论文到知识库 "
+                    f"（failed={ingest_res['failed']}, skipped={ingest_res['skipped']}）"
+                )
         except Exception as e:
             if _log:
                 _log.warning(f"[{proposal_id}] lit_search 新论文入库失败: {e}")

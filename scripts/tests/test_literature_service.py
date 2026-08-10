@@ -102,6 +102,110 @@ class LiteratureServiceParserTests(TestSuite):
         papers = self.svc._parse_researcher_output("[]")
         self.assert_eq(len(papers), 0, "空 JSON 数组返回空列表")
 
+    # ─────────────────────────────────────────────
+    # v6.8.20 健康检查回归：kb_text.build_frontmatter 对 list[dict] 元素
+    # 抛 unhashable type，导致 _ingest_new_papers 静默失败。
+    # ─────────────────────────────────────────────
+    def _test_build_frontmatter_string_list_preserves_old_behavior(self):
+        """字符串列表（hashable）走原 dedup 路径，输出 [\"a\",\"b\"] 形式。"""
+        from kb_text import build_frontmatter
+        text = build_frontmatter({"tags": ["a", "b", "a", "c"]})
+        # 旧行为：去重保留顺序 → ["a", "b", "c"]
+        self.assert_true('tags: ["a", "b", "c"]' in text,
+                         f"字符串列表去重（实际 {text!r}）")
+
+    def _test_build_frontmatter_dict_list_no_unhashable(self):
+        """dict 列表（unhashable）不应抛 TypeError；改走 JSON 序列化兜底。
+
+        触发场景：v6.8.20 健康检查（4h 窗口）发现
+        `LiteratureService._ingest_new_papers` 把 status_history（List[Dict]）
+        传给 `build_frontmatter`，后者 set.add(dict) → unhashable type，
+        全部 10 篇论文静默失败，错误日志被 except 吞掉，外层仍报"新入库 10 篇"。
+        """
+        from kb_text import build_frontmatter
+        fm = {
+            "title": "Test",
+            "status_history": [
+                {"status": "pool", "at": "2026-08-10T12:00:00Z", "by": "literature_service"},
+                {"status": "reading", "at": "2026-08-11T12:00:00Z", "by": "literature_service"},
+            ],
+        }
+        # 不应抛 TypeError
+        text = None
+        try:
+            text = build_frontmatter(fm)
+        except TypeError as e:
+            self.assert_true(False, f"build_frontmatter 不应抛 TypeError: {e}")
+        # 兜底路径输出合法 JSON 数组，且元素保持顺序
+        self.assert_true(text is not None, "build_frontmatter 返回字符串")
+        self.assert_true('"status": "pool"' in text, f"首条 status 保留（实际 {text!r}）")
+        self.assert_true('"status": "reading"' in text, f"次条 status 保留（实际 {text!r}）")
+        # 顺序：pool 必须在 reading 之前
+        pool_idx = text.find('"status": "pool"')
+        reading_idx = text.find('"status": "reading"')
+        self.assert_true(
+            0 <= pool_idx < reading_idx,
+            f"列表元素保序（pool 在 reading 之前），实际 {text!r}",
+        )
+
+    def _test_build_frontmatter_mixed_list_falls_back_to_json(self):
+        """含 dict 与可哈希元素的混合列表，走 JSON 兜底（保守行为）。"""
+        from kb_text import build_frontmatter
+        text = build_frontmatter({"mixed": ["a", {"k": 1}, "b"]})
+        self.assert_true('"a"' in text, f"含 dict 时整体 JSON 序列化（实际 {text!r}）")
+        self.assert_true('"k": 1' in text, f"dict 元素被保留（实际 {text!r}）")
+
+    def _test_ingest_new_papers_returns_counts(self):
+        """_ingest_new_papers 返回 {ingested, failed, skipped} 计数。
+
+        修复前返回 None，外层 executor.py 用 len(new_papers) 虚报入库数。
+        """
+        papers = [
+            {"arxiv_id": "2401.00001", "title": "Paper A", "year": "2024",
+             "authors": "X", "score": 0.8, "tldr": "tldr A",
+             "is_new": True},
+            {"arxiv_id": "2401.00002", "title": "Paper B", "year": "2024",
+             "authors": "Y", "score": 0.7, "tldr": "tldr B",
+             "is_new": True},
+        ]
+        result = self.svc._ingest_new_papers(papers, source="pipeline", proposal_id="test-proposal")
+        self.assert_true(isinstance(result, dict),
+                         f"返回 dict 而非 None（实际 {type(result).__name__}）")
+        self.assert_eq(result.get("ingested"), 2,
+                       f"2 篇应成功入库（实际 {result}）")
+        self.assert_eq(result.get("failed"), 0,
+                       f"0 篇失败（实际 {result}）")
+        self.assert_eq(result.get("skipped"), 0,
+                       f"0 篇跳过（实际 {result}）")
+
+    def _test_ingest_new_papers_handles_unhashable_dict_list(self):
+        """v6.8.20 核心回归：_ingest_new_papers 在 status_history 含 dict 时
+        不抛 unhashable type，能成功把论文写入 KB。
+        """
+        papers = [
+            {"arxiv_id": "2401.99999", "title": "Regression Test Paper",
+             "year": "2024", "authors": "Test Author", "score": 0.85,
+             "tldr": "确保 build_frontmatter 不被 dict 列表击穿",
+             "is_new": True},
+        ]
+        # 在修复前会抛 TypeError（unhashable type: 'dict'）并被内部 except 吞掉，
+        # 导致 ingested=0 / failed=1；修复后应全部入库。
+        result = self.svc._ingest_new_papers(
+            papers, source="pipeline", proposal_id="test-proposal-unhashable"
+        )
+        self.assert_eq(result.get("ingested"), 1,
+                       f"含 status_history[dict] 的论文应正常入库（实际 {result}）")
+        self.assert_eq(result.get("failed"), 0,
+                       f"不应有失败（实际 {result}）")
+        # 验证文件确实落盘
+        raw_dir = self.lit_svc_mod.RAW_DIR / "papers"
+        written = list(raw_dir.glob("*2401.99999*.md"))
+        self.assert_eq(len(written), 1, f"KB 中应找到 1 个文件（实际 {len(written)}）")
+        if written:
+            content = written[0].read_text(encoding="utf-8")
+            self.assert_true('"status": "pool"' in content,
+                             f"status_history 字段已写入文件（实际 {content[:300]!r}）")
+
     def run_tests(self):
         self._test_json_array_clean()
         self._test_json_array_with_markdown_fence()
@@ -110,3 +214,8 @@ class LiteratureServiceParserTests(TestSuite):
         self._test_natural_language_fallback()
         self._test_empty_text()
         self._test_json_empty_array()
+        self._test_build_frontmatter_string_list_preserves_old_behavior()
+        self._test_build_frontmatter_dict_list_no_unhashable()
+        self._test_build_frontmatter_mixed_list_falls_back_to_json()
+        self._test_ingest_new_papers_returns_counts()
+        self._test_ingest_new_papers_handles_unhashable_dict_list()

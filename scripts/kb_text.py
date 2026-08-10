@@ -98,13 +98,17 @@ def parse_frontmatter(text: str) -> Tuple[Dict[str, Any], str]:
 
 def build_frontmatter(meta: Dict[str, Any]) -> str:
     """将字典转换为 YAML frontmatter 字符串（Obsidian 兼容格式）。"""
+    import json as _json
     lines = ["---"]
     for key, val in meta.items():
         if isinstance(val, list):
             if not val:
                 lines.append(f'{key}: []')
-            else:
-                # P1-16: 去重保持顺序，防止标签重复累积
+                continue
+            # P1-16: 去重保持顺序，防止标签重复累积
+            # 若列表元素是 dict 等不可哈希类型（如 status_history），
+            # 去重集合会抛 unhashable type；此时回退为 JSON 序列化（保持顺序）。
+            try:
                 seen = set()
                 deduped = []
                 for v in val:
@@ -113,6 +117,8 @@ def build_frontmatter(meta: Dict[str, Any]) -> str:
                         deduped.append(v)
                 items = ', '.join(f'"{v}"' for v in deduped)
                 lines.append(f'{key}: [{items}]')
+            except TypeError:
+                lines.append(f'{key}: {_json.dumps(val, ensure_ascii=False)}')
         elif isinstance(val, bool):
             lines.append(f'{key}: {"true" if val else "false"}')
         elif isinstance(val, (int, float)):

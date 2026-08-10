@@ -999,8 +999,15 @@ class LiteratureService:
         papers: List[Dict[str, Any]],
         source: str,
         proposal_id: Optional[str] = None,
-    ) -> None:
-        """将新论文入库 KB。跳过需要补充元数据的条目。"""
+    ) -> Dict[str, int]:
+        """将新论文入库 KB。跳过需要补充元数据的条目。
+
+        Returns:
+            {"ingested": int, "failed": int, "skipped": int}
+        """
+        ingested = 0
+        failed = 0
+        skipped = 0
         for paper in papers:
             arxiv_id = self._extract_arxiv_id(paper)
             if not arxiv_id:
@@ -1009,6 +1016,7 @@ class LiteratureService:
             if paper.get("_needs_metadata"):
                 if _log:
                     _log.info(f"[LiteratureService] 跳过缺元数据论文: {arxiv_id}，需通过 DeepXiv 补充")
+                skipped += 1
                 continue
             try:
                 import kb_importer as ki
@@ -1020,6 +1028,7 @@ class LiteratureService:
                 slug = f"{paper.get('year', '2024')}-{arxiv_id}-{self._safe_filename(paper.get('title', 'untitled'))}"
                 raw_path = raw_dir / f"{slug}.md"
                 if raw_path.exists():
+                    skipped += 1
                     continue
 
                 fm = {
@@ -1046,12 +1055,15 @@ class LiteratureService:
                 content = build_frontmatter(fm)
                 content += f"\n\n# {paper.get('title', '')}\n\n{paper.get('tldr', '')}\n"
                 raw_path.write_text(content, encoding="utf-8")
+                ingested += 1
 
                 if _log:
                     _log.info(f"[LiteratureService] 新论文入库: {arxiv_id} ({paper.get('title', '')[:50]})")
             except Exception as e:
+                failed += 1
                 if _log:
                     _log.warning(f"[LiteratureService] 入库失败 {arxiv_id}: {e}")
+        return {"ingested": ingested, "failed": failed, "skipped": skipped}
 
     def _mark_used_by_proposal(self, arxiv_id: str, proposal_id: str) -> None:
         """在 raw/papers/ frontmatter 中标记论文被课题引用。"""

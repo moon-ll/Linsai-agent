@@ -1,5 +1,64 @@
 # 变更记录
 
+## v6.8.21 - 2026-08-10 知识库入库 unhashable 静默失败修复（健康检查 4h 发现）
+
+### Bug
+- `scripts/kb_text.py:99` `build_frontmatter` 对 `list` 元素做去重时无条件调用
+  `set.add(v)`。
+- 若 list 含不可哈希元素（如 `_ingest_new_papers` 传入的
+  `status_history: List[Dict]`），立即抛 `TypeError: unhashable type: 'dict'`。
+- `LiteratureService._ingest_new_papers`（literature_service.py:1013）的
+  `except Exception` 静默吞掉所有 per-paper 异常；外层 `executor.py:601` 用
+  `len(new_papers)` 虚报入库数，导致日志永远显示"新入库 N 篇"而 KB 实际零落盘。
+- 实证（`logs/linsai.log` 2026-08-10 18:57:18）：
+  - `general-bsv-driven-hhg-quantum-20260726` 第 6 轮 lit_search 检索到 10 篇论文
+  - 10 篇论文 `_ingest_new_papers` 全部 `unhashable type: 'dict'`
+  - 同时日志错误地报 `lit_search 新入库 10 篇论文到知识库`
+  - 10 个 arxiv_id（2311.11257、2305.16831、2406.10443、2409.13614、
+    2311.10390、2505.22536、2407.04755、2206.01042、2003.00277、2106.00372）
+    全部未进入 KB。
+- 影响：知识出口被静默阻塞。`knowledge_output.process_daily_sources` 依赖
+  `lit-gap-*.md` 报告去萃取可靠知识，所有依赖这些论文的 KB 笔记（人物/方法/概念）
+  将持续缺失关键引用；同时 `lit_read` 因无 arxiv_id 可读而整体跳过，
+  申请书引文校验阶段无法补全。这是 v6.8.3 在 `_ingest_new_papers` 加入
+  `status_history` 字段后埋下的回归。
+
+### 修复
+- `scripts/kb_text.py:99` — `build_frontmatter` 在列表非空时，先尝试原去重路径，
+  异常时（仅 `TypeError`，含 `unhashable type`）回退为 `json.dumps` 序列化。
+  字符串列表保持原 `["a","b","c"]` 输出形式，向后兼容。
+- `scripts/literature_service.py:997` — `_ingest_new_papers` 返回
+  `{"ingested": int, "failed": int, "skipped": int}`，让外层能看到真实入库结果。
+- `scripts/lifecycle/executor.py:601` — 用真实计数 `ingested/len(new_papers)`
+  替换虚报的 `len(new_papers)`，附加 `failed` / `skipped` 计数。
+- **最小化、定向**：3 个文件，~30 行新增/替换，不重构 dedup 逻辑，不改其他路径。
+
+### 回归测试
+- `scripts/tests/test_literature_service.py` 新增 5 项（覆盖 15 项断言）：
+  - `_test_build_frontmatter_string_list_preserves_old_behavior` — 字符串列表
+    仍输出 `tags: ["a", "b", "c"]`（向后兼容）
+  - `_test_build_frontmatter_dict_list_no_unhashable` — `status_history` 列表
+    不抛 `TypeError`，输出合法 JSON 数组且保序
+  - `_test_build_frontmatter_mixed_list_falls_back_to_json` — 混合列表保守
+    走 JSON 路径（dict 元素被保留）
+  - `_test_ingest_new_papers_returns_counts` — 返回 `dict` 含 `ingested/failed/skipped`
+    三个计数（替换之前的 None 返回）
+  - `_test_ingest_new_papers_handles_unhashable_dict_list` — 端到端验证：
+    含 `status_history` 的论文能成功落盘到 `RAW_DIR/papers/`，且文件 frontmatter
+    包含完整的 `"status": "pool"` 字段
+- 全量基线：
+  - `--module` **335/335 通过**（基线 320 → 加 15 项守护）
+  - `--scenario` 16/16 通过
+  - `--persona` 38/38 通过
+  - `--web-ci` **403/403 通过**（基线 388 → +15 项）
+  - `py_compile scripts/*.py` 全部通过
+
+### 副作用
+- 修复后 `executor.py:601` 日志格式变为 `新入库 X/N 篇论文到知识库
+  （failed=Y, skipped=Z）`，运维侧一眼可分辨真实入库/失败/跳过。
+
+---
+
 ## v6.8.20 - 2026-08-10 微调度器时段内轮转修复 + 回归测试补齐（健康检查 4h 发现）
 
 > v6.8.19 已修复的 prompt 变量作用域问题与本次微调度器轮转修复在 git 历史中
