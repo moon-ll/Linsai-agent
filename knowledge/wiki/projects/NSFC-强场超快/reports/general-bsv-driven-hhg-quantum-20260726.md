@@ -3,12 +3,12 @@ title: "bsv-driven-hhg-quantum — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-bsv-driven-hhg-quantum-20260726"
 latest_round: 7
-last_score: 0.66
+last_score: 0.71
 critic_rounds: 10
 optimization_reports: 5
 status: "optimizing"
-created: "2026-08-10T02:28:56Z"
-updated: "2026-08-10T02:28:56Z"
+created: "2026-08-10T07:39:39Z"
+updated: "2026-08-10T07:39:39Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,7 +18,7 @@ confidence: 1.0
 
 **课题 ID**：`general-bsv-driven-hhg-quantum-20260726`
 **累计轮次**：7
-**当前分数**：0.66
+**当前分数**：0.71
 **状态**：优化中
 
 ---

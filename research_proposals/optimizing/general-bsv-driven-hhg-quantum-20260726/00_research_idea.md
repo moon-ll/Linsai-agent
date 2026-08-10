@@ -1,6 +1,6 @@
 # 课题设想
 
-**最后更新**：2026-08-03（writer-critic 第 8 轮后同步）
+**最后更新**：2026-08-10（writer 第 12 轮，rationale.md 参考文献闭环后同步）
 
 ## 标题
 
@@ -63,4 +63,4 @@
 | 特色与创新点 | innovation.md | ✓ 完整（本轮独立成章） |
 | 年度研究计划 | plan.md | ✓ 完整（本轮独立成章） |
 
-> 已知遗留：rationale §1.2.1 的 cutoff 律数值（"3–5 倍带隙→30–40 eV"）仍与 content/scheme 的正确表述（"7–13 阶/8–20 eV"）不一致，需下一轮 rationale 修订统一。
+> 已知遗留：rationale §1.2.1 的 cutoff 律表述（"3–5 倍带隙→30–40 eV"）已在第 8-11 轮迭代中改为"7–13 阶/8–20 eV"，并以 Wu/Schafer/Gaarde 多能级 SBE 数值预测 + 半经典分析 [24] 双引支撑。**第 12 轮新增遗留**：rationale.md 全文已统一为 [N] 编号制（21 处引用嵌入），但 references.md 仍有 5 条 [3]/[5]/[10]/[11]/[15] 标题/卷期/ID 与 arXiv API 实测不符（详见 reading-notes.md 第 12 轮记录），需下一轮 writer 聚焦 references.md 修复。

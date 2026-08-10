@@ -1070,6 +1070,11 @@ def _focus_proposal_for_slot(
     else:
         # 同一时段内，保持当前聚焦
         pid = queue[last_proposal_index % len(queue)]
+        # v6.8.19: 确保 state 与当前聚焦课题同步
+        # 之前 else 分支不更新 last_proposal_id，导致下次 _rebalance_index
+        # 用旧值校准 index，在队列重排时指向错误课题，表现为时段内轮转
+        state["last_proposal_id"] = pid
+        state["last_slot_index"] = slot_index
 
     # 检查选中的 proposal 是否卡住，若卡住则跳过
     if _is_proposal_stuck(self, pid):
