@@ -974,6 +974,11 @@ def _focus_proposal_for_slot(
 
     # 当前时段与上一时段不同，可能需要切换 proposal
     if slot_index != last_slot_index:
+        # v6.8.20: 清除上一时段的 slot_done 标记
+        prev_done_key = f"slot_{last_slot_index}_done"
+        if prev_done_key in state:
+            state.pop(prev_done_key, None)
+
         # 先自动重试上一个 proposal 的 failed job
         prev_pid = queue[last_proposal_index % len(queue)]
         try:
@@ -989,15 +994,18 @@ def _focus_proposal_for_slot(
             prev_state = self._get_proposal_state(prev_pid)
             completed_rounds = prev_state.get("optimization_rounds", 0) if prev_state else 0
 
-            # 让出时段的唯一条件：
-            # 进行中的轮次（=已完成轮次+1）的全部任务已完成（产物+标签双检查通过）。
-            # 必须检查 completed_rounds+1（进行中轮次）而非 completed_rounds
-            # （已完成轮次），否则已完成≥1轮的 proposal 会在下一轮进行中被误判
-            # 为"本轮完成"而提前让出时段，中断连续聚焦。
-            # 卡住（stuck）不由微调度器处理，交给 repair 和健康检查发现并修复，
-            # 修复后微调度器继续推进，保证每轮优化的连续性。
-            current_round = completed_rounds + 1
-            round_done = _is_round_complete(prev_jobs, prev_pid, current_round)
+            # v6.8.20: 优先检查 slot_done 标记——如果上一时段标记为已完成，
+            # 说明轮次在中途就完成了，应该轮转到下一个课题
+            prev_slot_done_key = f"slot_{last_slot_index}_done"
+            if state.get(prev_slot_done_key):
+                round_done = True
+            else:
+                # 让出时段的条件：
+                # 进行中的轮次的全部任务已完成（产物+标签双检查通过）。
+                # 卡住（stuck）不由微调度器处理，交给 repair 和健康检查发现并修复，
+                # 修复后微调度器继续推进，保证每轮优化的连续性。
+                current_round = completed_rounds + 1
+                round_done = _is_round_complete(prev_jobs, prev_pid, current_round)
 
             if not round_done:
                 # 当前轮未完成：若 prev_pid 未卡死，继续聚焦（保证轮次连续性）；
@@ -1253,6 +1261,17 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
         _log.info(f"聚焦 proposal: {focus_pid}")
 
     # 4. 检查聚焦 proposal 本轮是否已完成
+    # v6.8.20: 本时段已完成轮次则标记，后续同一时段 cron 空转到时段结束
+    focus_state = _load_focus_state()
+    slot_done_key = f"slot_{slot_index}_done"
+    if focus_state.get(slot_done_key):
+        msg = f"{focus_pid} 本时段已完成轮次，空转到时段结束"
+        if _log:
+            _log.info(msg)
+        _update_kanban(slot_info, focus_pid, optimizing, [], self)
+        return {"success": True, "executed_count": 0, "executed": [], "reason": msg,
+                "skip_reason": "slot_already_done"}
+
     prop_state = self._get_proposal_state(focus_pid)
     current_round = prop_state.get("optimization_rounds", 0) + 1 if prop_state else 1
     jobs = self._get_jobs(focus_pid)
@@ -1281,11 +1300,14 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
             if focus_pid in queue:
                 queue.remove(focus_pid)
             state["queue"] = queue
+            state[slot_done_key] = True  # v6.8.20: 标记本时段已完成
             _save_focus_state(state)
         else:
-            # 未达标但本轮完成，移动到队列末尾
+            # v6.8.20: 未达标但本轮完成——标记本时段已完成，不移到队尾
+            # 队列轮转在下一时段切换时由 _focus_proposal_for_slot 处理
+            # 这样保证"本时段后续轮转任务跳过"，避免上下文丢失
             state = _load_focus_state()
-            _move_to_queue_end(state, focus_pid)
+            state[slot_done_key] = True
             _save_focus_state(state)
         _update_kanban(slot_info, focus_pid, optimizing, [], self)
         return {"success": True, "executed_count": 0, "executed": [], "reason": msg,

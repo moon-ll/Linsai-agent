@@ -1,6 +1,6 @@
 # 课题设想
 
-**最后更新**：2026-08-10（writer 第 12 轮，rationale.md 参考文献闭环后同步）
+**最后更新**：2026-08-10（writer 第 14 轮，content.md 表达质量专项优化——去AI味、拆长句、删模板化表达、去英文插入）
 
 ## 标题
 
@@ -49,7 +49,7 @@
 
 ## 来源与可靠性
 
-核心引文均已有正式发表版本或同行评审基线：Iskhakov 2012 (Opt. Lett.)、Spasibko 2012 (Opt. Express; arXiv:1203.1391)、Wu/Schafer/Gaarde 2016 (PRA)、Silva 2018 (Nat. Photon.)、Murakami 2018 (PRL)、Liu 2017 (Nat. Phys.)、Even Tzur 2024 (PRR)、Peschel 2022 (PRB)、Raab 2024 (Opt. Express)、Hu 2024 (PNAS)、Li 2022 (PRL 129, 173001)、Boroumand 2025 (PRL 134, 113602)。预印本 Rasputnyi 2024 (arXiv:2403.15337)、Wu 2024 (arXiv:2311.16655)、Rivera-Dean 2023 (arXiv:2309.14435)、Prajapati 2024 (arXiv:2410.01424)、Li 2019 (arXiv:1908.07283) 需在提交前核实正式发表状态。参考文献完整列表已整理至 04_proposal/sections/references.md（27 条，含正文 19 篇 + 方法学手册 8 篇）。
+核心引文均已有正式发表版本或同行评审基线：Iskhakov 2012 (Opt. Lett.)、Spasibko 2012 (Opt. Express; arXiv:1203.1391)、Wu/Schafer/Gaarde 2016 (PRA)、Silva 2018 (Nat. Photon.)、Murakami 2018 (PRL)、Liu 2017 (Nat. Phys.)、Even Tzur 2024 (PRR)、Peschel 2022 (PRB)、Raab 2024 (Opt. Express)、Hu 2024 (PNAS)、Li 2022 (PRL 129, 173001)、Boroumand 2025 (PRL 134, 113602)。预印本 Rasputnyi 2024 (arXiv:2403.15337)、Wu 2024 (arXiv:2311.16655)、Rivera-Dean 2023 (arXiv:2309.14435)、Prajapati 2024 (arXiv:2410.01424)、Li 2019 (arXiv:1908.07283) 需在提交前核实正式发表状态。第 13 轮新增四条量子光 HHG 近期理论文献 [28]-[31]（Even Tzur & Cohen 2023、Wang et al. 2024、de-la-Peña et al. 2024、Jiang & Dorfman 2023），均已在 content.md §2.1–§2.8 中引用。参考文献完整列表已整理至 04_proposal/sections/references.md（31 条，含正文 23 篇 + 方法学手册 8 篇）。
 
 ## 申请书模块完整性（第 8 轮后）
 
@@ -59,8 +59,8 @@
 | 研究内容 | content.md | ✓ 完整（§2.0–§2.9，含年度计划与预期成果） |
 | 研究方案 | scheme.md | ✓ 完整（§3.1–§3.6） |
 | 整体一致性审查 | full_review.md | ✓ 完整（本轮补齐） |
-| 参考文献 | references.md | ✓ 完整（本轮修订，27 条） |
+| 参考文献 | references.md | ✓ 完整（第 13 轮修订，31 条：正文 23 篇 + 方法学手册 8 篇） |
 | 特色与创新点 | innovation.md | ✓ 完整（本轮独立成章） |
 | 年度研究计划 | plan.md | ✓ 完整（本轮独立成章） |
 
-> 已知遗留：rationale §1.2.1 的 cutoff 律表述（"3–5 倍带隙→30–40 eV"）已在第 8-11 轮迭代中改为"7–13 阶/8–20 eV"，并以 Wu/Schafer/Gaarde 多能级 SBE 数值预测 + 半经典分析 [24] 双引支撑。**第 12 轮新增遗留**：rationale.md 全文已统一为 [N] 编号制（21 处引用嵌入），但 references.md 仍有 5 条 [3]/[5]/[10]/[11]/[15] 标题/卷期/ID 与 arXiv API 实测不符（详见 reading-notes.md 第 12 轮记录），需下一轮 writer 聚焦 references.md 修复。
+> 已知遗留：rationale §1.2.1 的 cutoff 律表述（"3–5 倍带隙→30–40 eV"）已在第 8-11 轮迭代中改为"7–13 阶/8–20 eV"，并以 Wu/Schafer/Gaarde 多能级 SBE 数值预测 + 半经典分析 [24] 双引支撑。**第 14 轮进展**：content.md 完成表达质量专项优化——删除 6 处"配套风险为"模板、全部 contingent/conditional/mapping/No-Go 英文插入、3 段元话语防御性解释（术语约定/含义不同声明/可证伪立场），40 处超长句压缩至 28 处（其中关键段无 >120 字严重超长句），2.0 总览段从"X节...配套风险为..."清单式重写为递进式叙述，新增 [13][18] 两处文献嵌入论证链。scheme.md 与 rationale.md 的引用体系统一留待后续轮次。

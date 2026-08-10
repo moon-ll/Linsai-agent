@@ -74,4 +74,4 @@ MAX_JOB_ATTEMPTS = 3
 # v6.8.10: 原本微调度器只检查"硬卡死"（failed job 阻塞 pending），
 # 但 failed job 若不阻塞下游（如独立 content 模块），proposal 既不完成
 # 也不卡死，导致永久占用焦点。该阈值确保最多 N 个时段后强制让出。
-MAX_SOFT_STUCK_SLOTS = 3
+MAX_SOFT_STUCK_SLOTS = 2  # v6.8.20: 3→2，一个课题最多连续聚焦两个时段

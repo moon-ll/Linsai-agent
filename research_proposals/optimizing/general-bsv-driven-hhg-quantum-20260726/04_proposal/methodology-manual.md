@@ -105,6 +105,8 @@ $$g_{\rm HHG}^{(2),q}(\tau) = \frac{\langle :\!\hat{I}_q(t)\hat{I}_q(t+\tau)\!:\
 2. **截断能收敛性**：固定 $\Delta t$，验证 $Y^{(q)}$ 随动量截断 $k_{\rm max} \to \infty$ 的收敛（对 BSV 高能光子尾要求 $k_{\rm max} \ge 5\,k_{\rm BZ}$）；
 3. **去相干时间收敛性**：在 $T_2 \in [1, 20]\,\text{fs}$ 区间扫描，验证 $Y^{(q)}$ 随 $T_2$ 的物理合理收敛（避免 $T_2 \to 0$ 的非物理尖峰）。
 
+**交叉验证工具**：当 SBE-Q 在特定参数区间（高压缩度 $r > 1$ 或强关联 $U/W \gg 1$）的收敛性出现问题时，可参照 de-la-Peña、Even Tzur 与 Rubio 等 [arXiv:2409.13614, 2024] 建立的 QED-HHG 多轨迹 Ehrenfest 严格数值框架进行独立交叉验证。该框架处理了多轨迹相干叠加与量子退相干的联合效应，预言 HHG 产额对相位压缩存在极小结构（fine structure），可作为 SBE-Q 数值结果的物理合理性判据。
+
 ---
 
 ## §3 BSV-经典光双驱动 Mach-Zehnder 干涉光路

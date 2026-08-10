@@ -3394,9 +3394,9 @@
       "source": "expansion",
       "source_detail": "候选4：量子光场驱动的HHG，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-10T04:34:16Z",
+      "updated_at": "2026-08-10T11:42:18Z",
       "optimization_rounds": 5,
-      "last_score": 0.71,
+      "last_score": 0.74,
       "score_history": [
         {
           "round": 1,
@@ -3606,6 +3606,23 @@
           "issues_count": 45,
           "high_issues": 9,
           "at": "2026-08-10T04:34:16Z"
+        },
+        {
+          "round": 6,
+          "score": 0.74,
+          "dim_scores": {
+            "innovation": 0.3,
+            "feasibility": 0.25,
+            "rigor": 0.2,
+            "expression": 0.1,
+            "completeness": 0.15
+          },
+          "weakest_dim": "expression",
+          "focus_section": "content",
+          "section_passed": false,
+          "issues_count": 57,
+          "high_issues": 14,
+          "at": "2026-08-10T11:42:18Z"
         }
       ],
       "human_feedback_count": 2,
@@ -3668,8 +3685,8 @@
         "innovation": 0.3,
         "feasibility": 0.25,
         "rigor": 0.2,
-        "expression": 0.68,
-        "completeness": 0.25
+        "expression": 0.1,
+        "completeness": 0.15
       },
       "section_passes": {
         "rationale": false,
@@ -3887,14 +3904,14 @@
           "step": "critic",
           "section_key": "content",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r6-rationale-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-10T10:38:30Z",
+          "finished_at": "2026-08-10T10:47:26Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -3904,14 +3921,14 @@
           "step": "gap_identify",
           "section_key": "content",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r6-content-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-10T10:50:57Z",
+          "finished_at": "2026-08-10T10:51:47Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -3921,14 +3938,14 @@
           "step": "lit_search",
           "section_key": "content",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r6-content-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-10T10:55:58Z",
+          "finished_at": "2026-08-10T10:57:18Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -3938,14 +3955,14 @@
           "step": "lit_read",
           "section_key": "content",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r6-content-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-10T11:00:59Z",
+          "finished_at": "2026-08-10T11:09:46Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -3955,14 +3972,14 @@
           "step": "lit_note",
           "section_key": "content",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r6-content-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-10T11:10:00Z",
+          "finished_at": "2026-08-10T11:10:00Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -3972,17 +3989,18 @@
           "step": "writer",
           "section_key": "content",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r6-content-critic",
             "general-bsv-driven-hhg-quantum-20260726-r6-content-lit_note"
           ],
-          "attempts": 0,
+          "attempts": 2,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-10T11:35:04Z",
+          "finished_at": "2026-08-10T11:42:18Z",
           "last_error": "",
-          "cron_job_id": ""
+          "cron_job_id": "",
+          "repair_attempts": 1
         },
         {
           "job_id": "general-bsv-driven-hhg-quantum-20260726-r6-scheme-critic",
@@ -5052,5 +5070,5 @@
       ]
     }
   },
-  "updated_at": "2026-08-10T04:34:16Z"
+  "updated_at": "2026-08-10T11:42:18Z"
 }

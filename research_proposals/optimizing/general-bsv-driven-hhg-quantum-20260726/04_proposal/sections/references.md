@@ -58,8 +58,16 @@
 
 **[27]** Krausz F., Ivanov M. Attosecond physics. *Rev. Mod. Phys.* **81**, 163–234 (2009). DOI: 10.1103/RevModPhys.81.163. —— 阿秒科学权威综述，支撑 §2.9 论文拟投方向定位与方法学综述参照。
 
+**[28]** Even Tzur M., Cohen O. Motion of charged particles in bright squeezed vacuum. arXiv:2305.16831 (2023). —— BSV 驱动自由电子的"宽度振荡"与等效有质动力能 $U_p^{(q)}$ 理论，为 BSV-HHG 提供动力学底层支撑，支撑 §2.1 / §2.3。
+
+**[29]** Wang S., Lai X., Liu X. Attosecond pulse synthesis from high-order harmonic generation in intense squeezed light. arXiv:2406.10443 (2024). —— 压缩光驱动 HHG 全光谱相位锁定与长轨迹抑制机制（最优 $E_{\rm vf} \approx 0.03 E_0$ 非单调依赖），支撑 §2.3 / §2.6。
+
+**[30]** de-la-Peña S., Neufeld O., Even Tzur M., Cohen O., Appel H., Rubio A. Quantum electrodynamics in high harmonic generation: multi-trajectory Ehrenfest and exact quantum analysis. arXiv:2409.13614 (2024). —— QED-HHG 严格数值框架，预言 HHG 产额对相位压缩的极小结构，可作为 SBE-Q 模型交叉验证工具，支撑 §2.3 / 方法学手册 §2.3。
+
+**[31]** Jiang S., Dorfman K. Relative-intensity squeezing of high-order harmonic "twin beams". arXiv:2311.10390 (2023). —— 全光强场方案产生相对强度压缩谐波 twin-beams（宽 XUV 频段），与本项目 QEF 框架在物理目标上互补，支撑 §2.8。
+
 ---
 
-> **引用说明**：编号 1–18 为正文三章节（立项依据 / 研究内容 / 研究方案）直接引用的核心文献；编号 19 为固体 HHG 领域开山之作（正文 §1.2.1 提及但未标注方括号编号，此处补全）；编号 20–27 为方法学手册引用的补充文献。
+> **引用说明**：编号 1–18 为正文三章节（立项依据 / 研究内容 / 研究方案）直接引用的核心文献；编号 19 为固体 HHG 领域开山之作（正文 §1.2.1 提及但未标注方括号编号，此处补全）；编号 20–27 为方法学手册引用的补充文献；编号 28–31 为 round-9 评审后新增的量子光 HHG 近期理论文献，支撑 §2.1–§2.8 的新增引用。
 >
 > **预印本核实状态**（截至检索日期 2026-08-03）：以下 5 条目前仍为 arXiv 预印本，提交前需核实正式发表状态并补充期刊卷期页码——[1] Rasputnyi 2024（BSV-HHG 首例实验）、[9] Li 2019（HHG 时域干涉反演）、[14] Wu 2024（莫尔室温关联绝缘相）、[16] Rivera-Dean 2023（Bloch 量子光形式化）、[18] Prajapati 2024（Mott THz 谐波）。此外，[15] Boroumand 2025 已正式发表于 *Phys. Rev. Lett.* **134**, 113602，[11] Li 2022 已正式发表于 *Phys. Rev. Lett.* **129**, 173001。
