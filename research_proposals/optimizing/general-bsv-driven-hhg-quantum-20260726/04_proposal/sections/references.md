@@ -48,7 +48,7 @@
 
 **[22]** Karniadakis G. E. *et al.* Physics-informed neural networks: A deep-learning framework for solving forward and inverse problems involving nonlinear partial differential equations. *J. Comput. Phys.* **378**, 686–707 (2019). DOI: 10.1016/j.jcp.2018.10.045. —— 物理信息神经网络（PINN），支撑 §2.9 贝叶斯/PINN 反演组件 / 方法学手册 §5.4。
 
-**[23]** Borrego Varillas R. *et al.* Roadmap on attosecond science. arXiv:2604.15085 (2025). —— 阿秒科学领域综述标杆（80+ 领袖署名），支撑 §2.9 人才培养跨学科定位。
+**[23]** Borrego Varillas R. *et al.* Roadmap on attosecond science. arXiv:2604.15085 (2026). —— 阿秒科学领域综述标杆（80+ 领袖署名），支撑 §2.9 人才培养跨学科定位。
 
 **[24]** Vampa G., McDonald C. R., Orlando G., Corkum P. B., Brabec T. Semiclassical analysis of high harmonic generation in bulk crystals. *Phys. Rev. B* **91**, 064502 (2015). —— 固体 HHG 带间再碰撞机制的半经典分析，为方法学手册 §5.2"HHG 谱→能带结构反演"提供方法学先例。
 

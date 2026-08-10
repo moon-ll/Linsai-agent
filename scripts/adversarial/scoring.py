@@ -12,6 +12,7 @@ from common import load_json, now_utc, save_json
 from .constants import (
     CALIBRATION_BONUS,
     CALIBRATION_PENALTY_FACTOR,
+    CALIBRATION_PENALTY_MAX,
     COLLUSION_PENALTY,
     CRITIC_HIGH_ISSUE_BONUS,
     CRITIC_PROGRESS_WEIGHT,

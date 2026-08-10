@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-bsv-driven-hhg-quantum-20260726"
 project_type: "general"
 latest_round: 7
-last_score: 0.74
+last_score: 0.68
 status: "optimizing"
-created: "2026-08-10T11:42:19Z"
-updated: "2026-08-10T11:42:19Z"
+created: "2026-08-10T14:31:14Z"
+updated: "2026-08-10T14:31:14Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-bsv-driven-hhg-quantum-20260726`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.74
+**当前分数**：0.68
 **状态**：优化中
-**同步时间**：2026-08-10T11:42:19Z
+**同步时间**：2026-08-10T14:31:14Z
 
 ---
 
@@ -34,7 +34,7 @@ confidence: 1.0
 | plan | plan | 21 |
 | rationale | rationale | 65 |
 | references | references | 74 |
-| scheme | scheme | 82 |
+| scheme | scheme | 114 |
 
 ## 课题简介
 
@@ -43,7 +43,7 @@ confidence: 1.0
 **课题名称**：完整性结论**：正文三段式骨架完整，立项依据四要素齐全，研究内容六子方向逻辑递进，研究方案风险可控。但正文之外仍存在若干结构性缺失（见下文第三节），需在本轮或后续轮次补齐。
 **项目类型**：面上项目
 **课题 ID**：`general-bsv-driven-hhg-quantum-20260726`
-**当前状态**：优化中（第5轮，score 0.74）
+**当前状态**：优化中（第5轮，score 0.68）
 **启动日期**：2026-07-26
 **最后更新**：2026-08-10
 
