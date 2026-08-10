@@ -1,5 +1,47 @@
 # 变更记录
 
+## v6.8.20 - 2026-08-10 微调度器时段内轮转修复 + 回归测试补齐（健康检查 4h 发现）
+
+> v6.8.19 已修复的 prompt 变量作用域问题与本次微调度器轮转修复在 git 历史中
+> 都标注为 v6.8.19（修复提交时间紧邻且都用同一周期号），本次 CHANGELOG 补记
+> 微调度器修复并将其登记到 v6.8.20，避免版本号复用。
+
+### Bug
+- `scripts/lifecycle/micro_scheduler.py:1070` `_focus_proposal_for_slot` 的 else
+  分支（同一时段内保持当前聚焦）**不更新** `state["last_proposal_id"]` 和
+  `state["last_slot_index"]`。
+- 后果：下次调用进入函数顶部 `_rebalance_index` 时（908-939），用陈旧的
+  `last_proposal_id` 校准 `last_proposal_index`，队列重排时指向错误课题，
+  表现为**同一时段内每 5 分钟轮换一个 proposal**，永远跑不完一轮优化。
+- 实证（看板 memory/lifecycle-focus.json::focus_history）：
+  - `2026-08-09 23:05Z ~ 2026-08-10 00:00Z`（slot=08:30-12:30）连续 ~60 条
+    5min 轮换记录，5 个 optimizing 课题反复循环，无一完成本轮。
+  - 04:00Z 后焦点稳定锁定 `general-bsv-driven-hhg-quantum-20260726`，与
+    修复后逻辑一致。
+- 影响：5 个 optimizing 课题（其中 general-quantum-geometry 已 score=0.81 接近
+  晋级，其余 0.71-0.77）的轮次优化进度被卡住，直接威胁申请书高质量产出。
+
+### 修复
+- `scripts/lifecycle/micro_scheduler.py:1073-1077` — else 分支同步写回
+  `state["last_proposal_id"] = pid` 与 `state["last_slot_index"] = slot_index`。
+  函数尾部 `_save_focus_state(state)`（line 1107）会统一落盘。
+- **最小化、定向**：仅 2 行新增，不改其他分支逻辑。
+
+### 回归测试
+- `scripts/tests/test_micro_scheduler_rotation.py` 新增"测试 7（v6.8.19 修复守护）"：
+  - 模拟 `state.last_proposal_id=""` 漂移，slot_index 不变 → 走 else 分支
+  - 断言函数返回 pid_a（按 queue 选择正确）
+  - 断言持久化的 `state.last_proposal_id == pid_a` 与
+    `state.last_slot_index == 1`，确保下次 `_rebalance_index` 拿到正确锚点
+- 全量基线：`--module` **320/320 通过**（基线 317 → 加 3 项守护）
+- 单独跑：`test_micro_scheduler_rotation.py` **12/12 通过**
+
+### 副作用
+- 修复后 4 小时内 `system-kanban.json` 显示 5 个 optimizing 课题
+  `stuck=false`、`failed=0`，恢复正常推进节奏。
+
+---
+
 ## v6.8.19 - 2026-08-10 优化循环 prompt 变量作用域修复（健康检查 4h 发现）
 
 ### Bug

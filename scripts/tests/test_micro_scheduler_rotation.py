@@ -238,6 +238,50 @@ class MicroSchedulerRotationTests(TestSuite):
             "卡死 proposal 不应永久占用时段，应切换到队列下一个",
         )
 
+        # ================================================================
+        # 测试 7（v6.8.19 修复守护）: 同一时段内连续调用，
+        # state["last_proposal_id"] 必须与本次返回的 pid 同步，
+        # 否则下次 _rebalance_index 会用旧值校准队列索引，
+        # 表现为同一时段内每 5 分钟轮换一个 proposal，
+        # 5 个 optimizing 课题永远跑不完一轮（focus_history 实证见
+        # 2026-08-09 23:05 ~ 2026-08-10 00:00 的 60+ 条 5min 轮换记录）。
+        # ================================================================
+        # 模拟场景：上一次聚焦 pid_a，但 state 中 last_proposal_id
+        # 因某次路径未走保存分支而保持空串 / 错值。
+        self._write_focus_state(
+            queue=[pid_a, pid_b],
+            last_proposal_id="",  # 状态漂移：被清空
+            last_slot_index=1,    # 与本次 slot 相同 → 走时段内保持分支
+        )
+        ctrl7 = self._make_mock_controller({pid_a: {"optimization_rounds": 0}})
+        # round 1 未完成 → 走到时段内保持分支
+        self._patch_round_complete({1: False})
+
+        result7 = self.ms._focus_proposal_for_slot(
+            ctrl7, slot_index=1, optimizing=optimizing
+        )
+        self.assert_eq(
+            result7, pid_a,
+            "时段内连续调用应继续聚焦 pid_a",
+            "state.last_proposal_id 漂移时，else 分支必须按 queue 正确选择并同步状态",
+        )
+
+        # 关键守护：本次调用必须把 state.last_proposal_id 写回 pid_a，
+        # 否则下一次 tick 仍会读到空串，_rebalance_index 重置到队首 → 漂移
+        focus_path = self.tmp_root / "memory" / "lifecycle-focus.json"
+        import json as _json
+        persisted = _json.loads(focus_path.read_text(encoding="utf-8"))
+        self.assert_eq(
+            persisted.get("last_proposal_id"), pid_a,
+            "state.last_proposal_id 必须与本次返回的 pid 同步",
+            "v6.8.19: else 分支需同步写回 last_proposal_id，否则下次 rebalance 漂移",
+        )
+        self.assert_eq(
+            persisted.get("last_slot_index"), 1,
+            "state.last_slot_index 必须与本次 slot_index 同步",
+            "v6.8.19: else 分支需同步写回 last_slot_index，保持时段时间锚点",
+        )
+
 
 if __name__ == "__main__":
     suite = MicroSchedulerRotationTests()
