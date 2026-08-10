@@ -37,18 +37,19 @@ WRITER_PROGRESS_WEIGHT = 20
 WRITER_ISSUE_REDUCTION_WEIGHT = 3
 CRITIC_PROGRESS_WEIGHT = 15
 CRITIC_HIGH_ISSUE_BONUS = 2
-CRITIC_REGRESSION_PENALTY = 5
+CRITIC_REGRESSION_PENALTY = 3   # v6.8.18: 5→3
 
-# 校准奖励 / 惩罚
-CALIBRATION_BONUS = 3
-CALIBRATION_PENALTY_FACTOR = 40  # 每 0.1 误差扣 4 分
+# 校准奖励 / 惩罚（v6.8.18: 降低惩罚幅度）
+CALIBRATION_BONUS = 4           # v6.8.18: 3→4
+CALIBRATION_PENALTY_FACTOR = 20  # v6.8.18: 40→20（每 0.1 误差扣 2 分）
+CALIBRATION_PENALTY_MAX = 4.0    # v6.8.18: 新增上限
 
-# 串通惩罚
-COLLUSION_PENALTY: Dict[str, int] = {"medium": -5, "high": -10}
+# 串通惩罚（v6.8.18: 降低）
+COLLUSION_PENALTY: Dict[str, int] = {"medium": -3, "high": -6}  # v6.8.18: -5/-10 → -3/-6
 
-# 批评家恢复机制
-RECOVERY_BONUS_MIN_SCORE = 20     # 分数低于此值时触发恢复检查
-RECOVERY_BONUS = 3.0              # 恢复奖励（每次）
+# 批评家恢复机制（v6.8.18: 提高恢复力度）
+RECOVERY_BONUS_MIN_SCORE = 40     # v6.8.18: 20→40
+RECOVERY_BONUS = 5.0              # v6.8.18: 3→5
 
 # ---------------------------------------------------------------------------
 # v6.8.9 质量门槛（防摆烂）

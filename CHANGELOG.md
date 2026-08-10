@@ -1,5 +1,34 @@
 # 变更记录
 
+## v6.8.19 - 2026-08-10 优化循环 prompt 变量作用域修复（健康检查 4h 发现）
+
+### Bug
+- `optimize.py:888` `_run_critic` 引用了 `optimize_cycle` 局部变量 `_human_feedback_block`，
+  跨方法作用域不可见 → 每次 critic 评审必抛 `name '_human_feedback_block' is not defined`
+- `optimize.py:1296` `_run_writer_optimize` 直接引用未定义变量 `section_key` →
+  每次 writer 优化必抛 `name 'section_key' is not defined`
+- 影响：过去 4h 健康检查看板面板（memory/system-kanban.json）execution_history 显示
+  4 个 critic job + 5 个 writer job 全部失败，覆盖 4 个不同 proposal
+  （general-bsv / general-order / key-transient / general-quantum）；
+  5 个 optimizing 课题全部 stuck，task_progress 卡在 0%~84%；
+  这是 v6.8.17 引入反馈闭环与 cross-proposal 范例注入时埋下的回归
+
+### 修复
+- `scripts/proposal_lifecycle/optimize.py` — 抽出 `_load_human_feedback_block(proposal_id)`
+  私有方法，optimize_cycle 与 _run_critic 各调用一次，内部用 `proposal_id` 查 prop_state，
+  消除跨方法依赖
+- `scripts/proposal_lifecycle/optimize.py` — `_run_writer_optimize` 在调用
+  `_load_cross_proposal_exemplar` 前从 `focus_section` / `is_full_review` 派生 section_key
+
+### 校验结果
+- 新测试 `test_optimize_v6817_prompt_vars.py`：8/8 通过（覆盖 critic 与 writer 两条路径）
+- `--module`：345/345 通过（基线对齐）
+- `--scenario`：16/16 通过
+- `--web-ci`：413/413 通过
+- `py_compile`：全部通过
+
+---
+
 ## v6.8.18 - 2026-08-09 cron 安装幂等性修复（健康检查 4h 发现）
 
 ### Bug

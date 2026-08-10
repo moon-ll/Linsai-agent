@@ -2,7 +2,7 @@
 title: "general-test-alpha-20260101"
 type: "proposal"
 created: "2026-08-08T05:31:28Z"
-updated: "2026-08-08T17:17:56Z"
+updated: "2026-08-10T02:28:55Z"
 tags: []
 related: []
 source_raw: ""
@@ -14,7 +14,7 @@ project: ["NSFC-强场超快"]
 project_type: "general"
 optimization_rounds: 0
 last_score: 0.0
-synced_at: "2026-08-08T17:17:56Z"
+synced_at: "2026-08-10T02:28:55Z"
 ---
 
 # general-test-alpha-20260101
@@ -24,7 +24,7 @@ synced_at: "2026-08-08T17:17:56Z"
 **生命周期状态**：unknown  
 **优化轮次**：0  
 **当前分数**：0.00  
-**同步时间**：2026-08-08
+**同步时间**：2026-08-10
 
 ## 核心问题
 

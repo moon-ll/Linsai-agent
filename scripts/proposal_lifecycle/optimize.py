@@ -117,12 +117,9 @@ class OptimizeMixin:
         score_before = prop_state.get("last_score", 0.0)
 
         # v6.8.17: 加载历史人工审核反馈（反馈闭环——从对话中学习）
-        _human_feedback_block = ""
-        try:
-            from proposal_lifecycle.feedback_archive import load_review_feedback_for_optimization
-            _human_feedback_block = load_review_feedback_for_optimization(prop_state)
-        except Exception:
-            pass
+        # v6.8.19 修复: 该变量必须在 optimize_cycle 与 _run_critic 各自的作用域内
+        # 各自加载一次（原版跨方法引用导致 NameError，4h 内 4 个 critic job 全失败）
+        _human_feedback_block = self._load_human_feedback_block(proposal_id)
 
         # 1. critic 评审
         if _log:
@@ -885,10 +882,87 @@ class OptimizeMixin:
         )
 
         # v6.8.17: 注入历史人工审核反馈（反馈闭环）
+        # v6.8.19 修复: 在 _run_critic 自己的作用域内加载，避免跨方法未定义 NameError
+        _human_feedback_block = self._load_human_feedback_block(proposal_id)
         if _human_feedback_block:
             prompt += _human_feedback_block
 
+        # v6.8.18: 注入 agent 分数反馈——让 critic 看到自己的表现，才能调整
+        _score_feedback = self._load_agent_score_feedback("critic")
+        if _score_feedback:
+            prompt += _score_feedback
+
         return self._run_hermes("critic", prompt, timeout)
+
+    def _load_human_feedback_block(self, proposal_id: str) -> str:
+        """v6.8.19: 加载历史人工审核反馈的 prompt 片段（仅当存在时返回非空字符串）。
+
+        抽出该方法是因为原版在 optimize_cycle 局部变量中加载一次后，
+        在 _run_critic 方法内被引用，导致跨方法作用域 NameError。
+        通过 proposal_id 重新查询 prop_state，避免跨方法依赖。
+        """
+        prop_state = self._get_proposal_state(proposal_id) or {}
+        try:
+            from proposal_lifecycle.feedback_archive import load_review_feedback_for_optimization
+            block = load_review_feedback_for_optimization(prop_state)
+        except Exception:
+            return ""
+        return block or ""
+
+    def _load_agent_score_feedback(self, role: str) -> str:
+        """v6.8.18: 加载 agent 分数反馈——让 agent 看到自己的表现历史。
+
+        只有当分数 <80（偏离初始 100 较远）或最近 3 轮有 reason 时才注入，
+        避免无意义的冗余。
+        """
+        try:
+            import json
+            from pathlib import Path
+            scores_path = _pl.PROJECT_ROOT / "memory" / "agent-scores.json"
+            if not scores_path.exists():
+                return ""
+            scores = json.loads(scores_path.read_text(encoding="utf-8"))
+            agent = scores.get("agents", {}).get(role, {})
+            score = agent.get("score", 100)
+            initial = agent.get("initial_score", 100)
+            history = agent.get("history", [])
+
+            if score >= 80 and not history:
+                return ""  # 分数健康，无需反馈
+
+            lines = [
+                f"\n\n【你的表现评价（累积分数 {score}/{initial}）】\n",
+            ]
+
+            # 最近 3 轮的反馈
+            recent = history[-3:] if len(history) >= 3 else history
+            if recent:
+                lines.append("近期评价：\n")
+                for h in recent:
+                    delta = h.get("score", h.get("delta", 0))
+                    reason = h.get("reason", "")
+                    at = h.get("at", h.get("timestamp", ""))[:10]
+                    if reason:
+                        lines.append(f"- [{at}] 分数变化 {delta:+.1f}：{reason[:200]}\n")
+
+            if score < 40:
+                lines.append(
+                    "\n⚠ 你的分数已严重偏低。请特别注意：\n"
+                )
+                if role == "critic":
+                    lines.append(
+                        "- 严格但准确：评分必须与申请书实际质量匹配，不要虚高也不要过度苛刻\n"
+                        "- 每个问题都要有具体引用和可操作的改进建议\n"
+                    )
+                else:
+                    lines.append(
+                        "- 必须实质性回应当前 critic 的所有重要问题\n"
+                        "- 避免表面修改（改了措辞但没改内容）\n"
+                    )
+
+            return "".join(lines) if len(lines) > 2 else ""
+        except Exception:
+            return ""
 
     # P1-2: 文献缺口检测和定向检索
     def _has_lit_gap(self, critic_result: Dict[str, Any]) -> bool:
@@ -1293,9 +1367,22 @@ class OptimizeMixin:
         )
 
         # v6.8.17: cross-proposal 范例注入——从最高分课题提取范例段落
+        # v6.8.19 修复: section_key 必须从 focus_section 派生（原版直接引用未定义变量，
+        # 导致 writer 每次必抛 NameError，4h 内 5 个 writer job 全失败）
+        if focus_section:
+            section_key = focus_section.get("key", "")
+        elif is_full_review:
+            section_key = "full_review"
+        else:
+            section_key = ""
         _exemplar_block = _load_cross_proposal_exemplar(self, proposal_id, section_key)
         if _exemplar_block:
             prompt += _exemplar_block
+
+        # v6.8.18: 注入 agent 分数反馈
+        _writer_score_feedback = self._load_agent_score_feedback("writer")
+        if _writer_score_feedback:
+            prompt += _writer_score_feedback
 
         result = self._run_hermes("writer", prompt, timeout)
 

@@ -1,8 +1,8 @@
 ---
 title: "NSFC 课题生命周期索引"
 type: "index"
-created: "2026-08-09T00:07:26Z"
-updated: "2026-08-09T00:07:26Z"
+created: "2026-08-10T02:28:56Z"
+updated: "2026-08-10T02:28:56Z"
 tags: []
 related: []
 source_raw: ""
@@ -44,4 +44,4 @@ knowledge/wiki/projects/NSFC-强场超快/
 > 数据流：`research_proposals/`（源）→ `proposal_kb_sync.py` → `proposals/`
 > `research_proposals/`（源）→ `kb_proposal_reorg.py` → `versions/` + `reports/`
 
-> 由 `scripts/kb_proposal_reorg.py` 自动更新（2026-08-09）。
+> 由 `scripts/kb_proposal_reorg.py` 自动更新（2026-08-10）。

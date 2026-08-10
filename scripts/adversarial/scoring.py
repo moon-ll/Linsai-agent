@@ -106,16 +106,21 @@ def compute_rule_deltas(
         critic_delta -= CRITIC_REGRESSION_PENALTY
     critic_delta += _penalty_for_violations(critic_violations, "critic")
 
-    # Critic 校准奖励 / 惩罚
+    # Critic 校准奖励 / 惩罚（v6.8.18: 加上限避免单轮爆扣）
     calibration_error = abs(critic_proposal_score - monitor_score)
     if calibration_error < 0.10:
         critic_delta += CALIBRATION_BONUS
     elif calibration_error > 0.20:
-        critic_delta -= min(8.0, (calibration_error - 0.20) * CALIBRATION_PENALTY_FACTOR)
+        critic_delta -= min(CALIBRATION_PENALTY_MAX, (calibration_error - 0.20) * CALIBRATION_PENALTY_FACTOR)
 
     # v6.8.9 防摆烂：critic 评审质量门槛——评分虚高放水或过度苛刻都扣分，
     # 倒逼 critic 通过"严格而准确的评审"（评分贴合 monitor 独立判断）得分。
     critic_delta += _critic_quality_gate(monitor_score, critic_proposal_score)
+
+    # v6.8.18: 单轮扣分上限——避免连锁惩罚导致快速归零
+    SINGLE_ROUND_PENALTY_CAP = 10.0
+    writer_delta = max(writer_delta, -SINGLE_ROUND_PENALTY_CAP)
+    critic_delta = max(critic_delta, -SINGLE_ROUND_PENALTY_CAP)
 
     return writer_delta, critic_delta
 

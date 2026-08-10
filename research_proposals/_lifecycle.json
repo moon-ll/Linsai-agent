@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-04T22:52:14Z",
+      "updated_at": "2026-08-09T17:40:05Z",
       "optimization_rounds": 6,
       "last_score": 0.81,
       "score_history": [
@@ -1091,14 +1091,14 @@
           "step": "update_vision",
           "section_key": "derived",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r6-monitor-monitor"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-09T17:05:59Z",
+          "finished_at": "2026-08-09T17:06:51Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1108,14 +1108,14 @@
           "step": "update_method_manual",
           "section_key": "derived",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r6-derived-update_vision"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-09T17:10:00Z",
+          "finished_at": "2026-08-09T17:11:23Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1450,14 +1450,14 @@
           "step": "gap_identify",
           "section_key": "full_review",
           "round": 7,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r7-full_review-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-04T22:50:34Z",
-          "finished_at": "2026-08-04T22:52:14Z",
+          "started_at": "2026-08-09T17:15:01Z",
+          "finished_at": "2026-08-09T17:15:28Z",
           "last_error": "",
           "cron_job_id": "",
           "repair_attempts": 1
@@ -1468,14 +1468,14 @@
           "step": "lit_search",
           "section_key": "full_review",
           "round": 7,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r7-full_review-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-09T17:20:02Z",
+          "finished_at": "2026-08-09T17:20:22Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1485,14 +1485,14 @@
           "step": "lit_read",
           "section_key": "full_review",
           "round": 7,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r7-full_review-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-09T17:25:03Z",
+          "finished_at": "2026-08-09T17:25:03Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1502,14 +1502,14 @@
           "step": "lit_note",
           "section_key": "full_review",
           "round": 7,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r7-full_review-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-09T17:30:04Z",
+          "finished_at": "2026-08-09T17:30:04Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1519,17 +1519,18 @@
           "step": "writer",
           "section_key": "full_review",
           "round": 7,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r7-full_review-critic",
             "general-quantum-geometry-inversion-20260726-r7-full_review-lit_note"
           ],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
-          "cron_job_id": ""
+          "started_at": "2026-08-09T17:40:05Z",
+          "finished_at": "2026-08-09T17:40:05Z",
+          "last_error": "name 'section_key' is not defined",
+          "cron_job_id": "",
+          "repair_attempts": 1
         },
         {
           "job_id": "general-quantum-geometry-inversion-20260726-r7-references-critic",
@@ -1641,7 +1642,7 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-04T12:50:03Z",
+      "updated_at": "2026-08-09T17:00:59Z",
       "optimization_rounds": 0,
       "last_score": 0.71,
       "score_history": [
@@ -2291,14 +2292,14 @@
           "step": "critic",
           "section_key": "references",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-full_review-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-04T12:35:02Z",
-          "finished_at": "2026-08-04T12:50:03Z",
+          "started_at": "2026-08-09T16:50:57Z",
+          "finished_at": "2026-08-09T16:54:26Z",
           "last_error": "",
           "cron_job_id": "",
           "repair_attempts": 1
@@ -2309,16 +2310,17 @@
           "step": "writer",
           "section_key": "references",
           "round": 1,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-references-critic"
           ],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
-          "cron_job_id": ""
+          "started_at": "2026-08-09T17:00:59Z",
+          "finished_at": "2026-08-09T17:00:59Z",
+          "last_error": "name 'section_key' is not defined",
+          "cron_job_id": "",
+          "repair_attempts": 1
         },
         {
           "job_id": "key-transient-quantum-phase-optical-20260726-r1-monitor-monitor",
@@ -2521,7 +2523,7 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-05T02:30:43Z",
+      "updated_at": "2026-08-09T17:55:08Z",
       "optimization_rounds": 5,
       "last_score": 0.77,
       "score_history": [
@@ -3223,14 +3225,14 @@
           "step": "lit_note",
           "section_key": "scheme",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r6-scheme-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-09T17:45:06Z",
+          "finished_at": "2026-08-09T17:45:06Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -3240,17 +3242,18 @@
           "step": "writer",
           "section_key": "scheme",
           "round": 6,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r6-scheme-critic",
             "general-moire-strong-field-probe-20260726-r6-scheme-lit_note"
           ],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
-          "cron_job_id": ""
+          "started_at": "2026-08-09T17:55:08Z",
+          "finished_at": "2026-08-09T17:55:08Z",
+          "last_error": "name 'section_key' is not defined",
+          "cron_job_id": "",
+          "repair_attempts": 1
         },
         {
           "job_id": "general-moire-strong-field-probe-20260726-r6-full_review-critic",
@@ -3391,7 +3394,7 @@
       "source": "expansion",
       "source_detail": "候选4：量子光场驱动的HHG，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-04T01:59:46Z",
+      "updated_at": "2026-08-09T16:35:55Z",
       "optimization_rounds": 5,
       "last_score": 0.66,
       "score_history": [
@@ -3764,14 +3767,15 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 6,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
-          "cron_job_id": ""
+          "started_at": "2026-08-09T16:35:55Z",
+          "finished_at": "2026-08-09T16:35:55Z",
+          "last_error": "name '_human_feedback_block' is not defined",
+          "cron_job_id": "",
+          "repair_attempts": 1
         },
         {
           "job_id": "general-bsv-driven-hhg-quantum-20260726-r6-rationale-gap_identify",
@@ -4192,7 +4196,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-04T01:59:46Z",
+      "updated_at": "2026-08-09T16:45:56Z",
       "optimization_rounds": 5,
       "last_score": 0.71,
       "score_history": [
@@ -4606,14 +4610,15 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 6,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
-          "cron_job_id": ""
+          "started_at": "2026-08-09T16:45:56Z",
+          "finished_at": "2026-08-09T16:45:56Z",
+          "last_error": "name '_human_feedback_block' is not defined",
+          "cron_job_id": "",
+          "repair_attempts": 1
         },
         {
           "job_id": "general-order-parameter-ultrafast-readout-20260727-r6-rationale-gap_identify",
@@ -5029,5 +5034,5 @@
       ]
     }
   },
-  "updated_at": "2026-08-05T02:30:43Z"
+  "updated_at": "2026-08-09T17:55:08Z"
 }

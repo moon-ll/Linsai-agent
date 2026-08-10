@@ -2,7 +2,7 @@
 title: "测试课题"
 type: "proposal"
 created: "2026-08-04T12:36:18Z"
-updated: "2026-08-09T00:07:25Z"
+updated: "2026-08-10T02:28:50Z"
 tags: []
 related: []
 source_raw: ""
@@ -14,7 +14,7 @@ project: ["NSFC-强场超快"]
 project_type: "general"
 optimization_rounds: 1
 last_score: 0.65
-synced_at: "2026-08-09T00:07:25Z"
+synced_at: "2026-08-10T02:28:50Z"
 ---
 
 # 测试课题
@@ -24,7 +24,7 @@ synced_at: "2026-08-09T00:07:25Z"
 **生命周期状态**：优化中  
 **优化轮次**：1  
 **当前分数**：0.65  
-**同步时间**：2026-08-09
+**同步时间**：2026-08-10
 
 ## 核心问题
 
