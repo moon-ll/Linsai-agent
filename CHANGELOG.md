@@ -1,5 +1,92 @@
 # 变更记录
 
+## v6.8.22 - 2026-08-11 prompt 优化器指数级膨胀修复（健康检查 4h 发现）
+
+### Bug
+
+`scripts/prompt_optimizer.py` 在 `auto` 模式下与 `memory/debug-journal.json`
+形成**指数级增长循环**：
+
+1. `cmd_auto` 调用 `_collect_debug_journal_entries()`，采集 journal 中**所有**
+   `category=prompt_tuning` 条目作为建议输入源
+2. 对每条 entry 生成一条新 suggestion（fingerprint = `md5("debug_journal:{entry_id}")`）
+3. entry_id 格式 `dj-YYYYMMDD-NNN`（debug_journal.py:124-132），**每天从 001
+   递增**，每次运行都生成全新 fingerprint → `existing_ids` 去重全部通过
+4. `_apply_suggestion` 检查 `content_to_add in current_content` 命中后
+   return True，**但仍在第 514-528 行无条件 `shutil.copy2` 创建 backup**
+5. `_log_auto_applied` 把每条成功应用写入一条新 prompt_tuning journal 条目
+6. 下次 run 的输入基数更大 → 再次膨胀
+
+### 实证（2026-08-11 08:00 过去 4h 窗口）
+
+| 文件 | 4h 增长 | 当前大小 |
+|------|---------|----------|
+| `memory/debug-journal.json` | +1.7 万条 prompt_tuning | 46 MB / 44,312 条 |
+| `memory/prompt-suggestions.json` | +5,385 条新 applied | 34 MB / 44,185 条 |
+| `memory/prompt-backups/` | +58 个新备份 | ~600 个 × 4.6 MB ≈ 2.8 GB |
+| `~/.hermes/profiles/critic/SOUL.md` | 稳定在 4.6 MB（v6.8.22 修复点：内容已存在则跳过 backup） | — |
+
+时间分布（按小时统计创建时间）：
+
+- 2026-08-09 06:00: 3,968 条
+- 2026-08-10 06:00: 12,288 条
+- 2026-08-10 07:00: 7,317 条
+- 2026-08-11 06:00: 7,496 条
+- 2026-08-11 07:00: 3,014 条
+- 2026-08-11 08:00: 2,371 条（含 58 个 prompt 备份，间隔 1 秒）
+
+### 影响
+
+- **磁盘占用**：prompt-backups 累积 ~2.8 GB，每天增加 ~250 MB（按 58 个 × 4.6 MB 推算）
+- **链路风险**：
+  - `prompt_optimizer.py` 启动需要序列化/反序列化 34 MB JSON，秒级延迟
+  - 任何读 debug-journal 的脚本（`failure_analyzer`、`retrospective`、
+    `debug_journal_report`）变慢
+  - `retrospective.py` 每周一 15:00 触发，扫描整个 journal；
+    若达到 100 MB+ 级别，`json.loads` 会触发内存峰值
+  - 最坏情况：weekly `lc-retrospective` cron 持续超时失败
+
+### 修复（最小化、定向、高置信度）
+
+1. **`scripts/prompt_optimizer.py:127-138` — 限制采集窗口**
+   - 新增常量 `DEBUG_JOURNAL_WINDOW_DAYS = 7`
+   - `_collect_debug_journal_entries()` 增加时间戳过滤：
+     只采集最近 7 天的 prompt_tuning 条目
+   - 历史累积的 4 万多条过期条目被自动丢弃，循环基数归零
+2. **`scripts/prompt_optimizer.py:521-602` — 先读后备份**
+   - 调整顺序：先 `read_text` 检查 `content_to_add in current_content`，
+     再决定是否备份
+   - 内容已存在场景：跳过 backup 直接 return True（不再浪费磁盘）
+3. **`scripts/prompt_optimizer.py:531-535` — 单 run 备份上限**
+   - 新增常量 `MAX_BACKUPS_PER_FILE_PER_RUN = 1`
+   - `_apply_suggestion` 接收 `backup_count_tracker` 参数，同一 run 内
+     对同一文件最多备份 1 次（即便内容真的多次变化）
+4. **`scripts/prompt_optimizer.py:783-799` — cmd_auto 启用 tracker**
+   - `cmd_auto` 创建 `backup_tracker: Dict[str, int] = {}`
+   - 传给 `_apply_suggestions` → `_apply_suggestion`
+5. **零重构**：不改 fingerprint 生成逻辑（debug_journal + agent_scores
+   两路仍然去重），不改 suggest entry 结构，不改应用主路径
+
+### 回归测试（新增 3 项 / 9 断言）
+
+| 测试 | 守护行为 |
+|------|----------|
+| `_test_collect_debug_journal_filters_by_window` | 窗口外条目被过滤（边界 ±1d） |
+| `_test_apply_suggestion_no_backup_when_content_exists` | 内容已存在时不创建 backup |
+| `_test_apply_suggestion_backup_count_tracker` | 多次写入时单文件 backup 上限生效，tracker 正确计数 |
+
+### 副作用
+
+- `cmd_auto` 日志格式变为
+  `debug journal（prompt_tuning, 最近 7d 窗口）: N 条`，
+  运维侧一眼可看出窗口裁剪生效
+- 历史累积的 4.4 万条过期建议保留在 `prompt-suggestions.json`
+  （已 applied 状态），新 run 不再生成重复条目；用户可手动清理
+  `memory/prompt-suggestions.json` 释放 34 MB 磁盘
+- 触发源不限：cron / 手动 / 调试脚本调用 `prompt_optimizer.py auto` 都不再膨胀
+
+---
+
 ## v6.8.21 - 2026-08-10 知识库入库 unhashable 静默失败修复（健康检查 4h 发现）
 
 ### Bug

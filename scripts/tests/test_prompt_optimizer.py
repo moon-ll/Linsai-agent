@@ -349,6 +349,99 @@ class PromptOptimizerTests(TestSuite):
             "原始内容保留",
         )
 
+    # ── v6.8.22 守护测试 ──
+
+    def _test_collect_debug_journal_filters_by_window(self):
+        """v6.8.22: _collect_debug_journal_entries 应只采集窗口内条目。
+
+        历史 bug：auto 应用写入的 prompt_tuning 条目会被下次 auto 当作输入，
+        形成指数级膨胀。修复：限制为最近 DEBUG_JOURNAL_WINDOW_DAYS 天。
+        """
+        from datetime import datetime, timezone, timedelta
+        journal_path = self.tmp_root / "memory" / "debug-journal.json"
+
+        now = datetime.now(timezone.utc)
+        recent_ts = now.strftime("%Y-%m-%dT%H:%M:%SZ")
+        old_ts = (now - timedelta(days=self.po_mod.DEBUG_JOURNAL_WINDOW_DAYS + 5)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        borderline_ts = (now - timedelta(days=self.po_mod.DEBUG_JOURNAL_WINDOW_DAYS + 1)).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+        journal = {
+            "entries": [
+                {"id": "dj-20260810-001", "category": "prompt_tuning", "timestamp": recent_ts, "title": "近期条目"},
+                {"id": "dj-20260801-001", "category": "prompt_tuning", "timestamp": old_ts, "title": "过期条目"},
+                {"id": "dj-20260801-002", "category": "prompt_tuning", "timestamp": borderline_ts, "title": "边界过期"},
+                {"id": "dj-20260810-002", "category": "bug_fix", "timestamp": recent_ts, "title": "非 prompt_tuning"},
+            ],
+            "stats": {},
+        }
+        journal_path.write_text(json.dumps(journal, ensure_ascii=False), encoding="utf-8")
+        self.dj_mod._JOURNAL_PATH_OVERRIDE = journal_path
+
+        result = self.po_mod._collect_debug_journal_entries()
+
+        # 只应返回 1 条（窗口内的近期 prompt_tuning）
+        self.assert_eq(len(result), 1, "窗口外条目被过滤")
+        self.assert_eq(result[0]["title"], "近期条目", "保留窗口内条目")
+
+    def _test_apply_suggestion_no_backup_when_content_exists(self):
+        """v6.8.22: 内容已存在时不应创建备份。
+
+        历史 bug：旧实现先 backup 再判断 content_to_add 是否已存在，导致
+        每天数千次冗余备份（每个 ~4.6MB）。新实现先 read 检查。
+        """
+        profile = "analyst"
+        existing_content = "## 已存在规则 v6822\n\n这是已存在的内容\n"
+        target_file = self.po_mod.HERMES_PROFILES_DIR / profile / "SOUL.md"
+        target_file.write_text(f"# SOUL\n\n{existing_content}\n", encoding="utf-8")
+
+        # 清空已有备份
+        for f in self.po_mod.BACKUPS_DIR.glob("*.bak"):
+            f.unlink()
+
+        suggestion = self._make_suggestion(profile=profile, content=existing_content)
+        result = self.po_mod._apply_suggestion(suggestion)
+
+        self.assert_eq(result, True, "内容已存在时返回 True")
+        backup_files = list(self.po_mod.BACKUPS_DIR.glob("*.bak"))
+        self.assert_eq(len(backup_files), 0, "内容已存在时不创建备份")
+
+    def _test_apply_suggestion_backup_count_tracker(self):
+        """v6.8.22: backup_count_tracker 限制单 run 内同文件备份次数。
+
+        多次真正写入时，超过 MAX_BACKUPS_PER_FILE_PER_RUN 次后跳过备份。
+        """
+        profile = "linsai"
+        target_file = self.po_mod.HERMES_PROFILES_DIR / profile / "SOUL.md"
+        target_file.write_text("# SOUL\n\n原始内容\n", encoding="utf-8")
+
+        # 清空该 profile 的所有已有备份（避免被前面测试污染）
+        for f in list(self.po_mod.BACKUPS_DIR.glob(f"{profile}-*.bak")):
+            f.unlink()
+
+        # 用 3 条不同的内容，模拟 3 次成功写入
+        suggestions = []
+        for i in range(3):
+            content = f"## 测试规则 {i}\n\n内容 {i}\n"
+            suggestions.append(self._make_suggestion(profile=profile, content=content))
+
+        backup_tracker = {}
+        for s in suggestions:
+            self.po_mod._apply_suggestion(s, backup_count_tracker=backup_tracker)
+
+        # 备份次数应 == MAX_BACKUPS_PER_FILE_PER_RUN（默认 1）
+        backup_files = list(self.po_mod.BACKUPS_DIR.glob(f"{profile}-*.bak"))
+        self.assert_eq(
+            len(backup_files),
+            self.po_mod.MAX_BACKUPS_PER_FILE_PER_RUN,
+            f"备份数受 MAX_BACKUPS_PER_FILE_PER_RUN={self.po_mod.MAX_BACKUPS_PER_FILE_PER_RUN} 限制",
+        )
+        # tracker 也应记录
+        self.assert_eq(
+            backup_tracker.get(str(target_file), 0),
+            self.po_mod.MAX_BACKUPS_PER_FILE_PER_RUN,
+            "tracker 正确记录已备份次数",
+        )
+
     def run_tests(self):
         """执行所有测试用例。"""
         self._test_backup_permission_error()
@@ -363,6 +456,10 @@ class PromptOptimizerTests(TestSuite):
         self._test_auto_mode_handles_failed_suggestions()
         self._test_backup_file_created_on_success()
         self._test_file_content_modified_on_success()
+        # v6.8.22 守护测试
+        self._test_collect_debug_journal_filters_by_window()
+        self._test_apply_suggestion_no_backup_when_content_exists()
+        self._test_apply_suggestion_backup_count_tracker()
 
 
 if __name__ == "__main__":

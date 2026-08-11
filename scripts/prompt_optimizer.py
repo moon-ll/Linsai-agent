@@ -67,6 +67,16 @@ PROFILE_PROMPT_MAP = {
     "linsai": ["SOUL.md"],
 }
 
+# v6.8.22 修复：debug journal 采集时间窗口（天数）。
+# 历史背景：_log_auto_applied 会把每条成功应用写入一条 prompt_tuning 日志，
+# 下次 auto 运行时会重新读取全部 prompt_tuning 条目作为输入 → 指数级膨胀。
+# 限制窗口后，旧条目不再被采集，避免循环放大。
+DEBUG_JOURNAL_WINDOW_DAYS = 7
+
+# v6.8.22 修复：单次 auto 运行中，同一目标文件最多备份次数。
+# 历史背景：内容已存在时仍会先备份再 return True，每天数千次备份浪费磁盘。
+MAX_BACKUPS_PER_FILE_PER_RUN = 1
+
 # failure_analyzer 模式到目标 profile 的映射
 PATTERN_TO_PROFILE = {
     "score-zero-streak": "critic",
@@ -121,13 +131,33 @@ def _now_utc() -> str:
 # ─────────────────────────────────────────────
 
 def _collect_debug_journal_entries() -> List[Dict]:
-    """从 debug-journal.json 读取 category=prompt_tuning 的条目。"""
+    """从 debug-journal.json 读取 category=prompt_tuning 的条目。
+
+    v6.8.22: 限制为最近 DEBUG_JOURNAL_WINDOW_DAYS 天窗口内的条目，
+    避免历史累积导致指数级膨胀（每条 auto 应用都会写入新 prompt_tuning
+    条目，下次 auto 又读取 → 循环放大）。
+    """
     data = _load_json(DEBUG_JOURNAL_PATH)
     entries = data.get("entries", [])
+
+    # 计算 cutoff 时间戳（debug journal 的 timestamp 是 UTC ISO 格式）
+    from datetime import timedelta
+    cutoff = datetime.now(timezone.utc) - timedelta(days=DEBUG_JOURNAL_WINDOW_DAYS)
+
     result = []
     for e in entries:
-        if e.get("category") == "prompt_tuning":
-            result.append(e)
+        if e.get("category") != "prompt_tuning":
+            continue
+        ts = e.get("timestamp") or e.get("created_at") or ""
+        # 解析并比较时间戳；解析失败的条目跳过（避免污染采集）
+        try:
+            from datetime import datetime as _dt
+            entry_dt = _dt.strptime(ts[:19] + "Z", "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+            if entry_dt < cutoff:
+                continue
+        except (ValueError, TypeError):
+            continue
+        result.append(e)
     return result
 
 
@@ -498,8 +528,22 @@ def _save_suggestions(suggestions: List[Dict]) -> None:
     _save_json(SUGGESTIONS_PATH, suggestions)
 
 
-def _apply_suggestion(suggestion: Dict) -> bool:
+def _apply_suggestion(
+    suggestion: Dict,
+    backup_count_tracker: Optional[Dict[str, int]] = None,
+) -> bool:
     """应用单条建议到 hermes prompt 文件。
+
+    v6.8.22: 新增 backup_count_tracker 参数。当同一目标文件已被本次 run
+    备份过 MAX_BACKUPS_PER_FILE_PER_RUN 次时，跳过备份（仅 skip）。
+    历史背景：内容已存在时旧版本也会先 backup 再 return True，导致每天
+    数千次冗余备份（每个 ~4.6MB），占用磁盘；新版本先 read 检查内容，
+    已存在则跳过 backup，直接返回 True。
+
+    Args:
+        suggestion: 单条建议 dict。
+        backup_count_tracker: 可选 dict，key=target_file 路径，value=已备份次数。
+            同一 run 内复用此 dict 可限制单文件备份次数。
 
     Returns:
         True 表示成功（含"内容已存在"的跳过），False 表示失败。
@@ -510,7 +554,21 @@ def _apply_suggestion(suggestion: Dict) -> bool:
         print(f"  ✗ 目标文件不存在：{target_file}")
         return False
 
-    # 备份
+    # 读取当前内容（先于备份，避免"内容已存在"场景下浪费磁盘）
+    try:
+        current_content = target_file.read_text(encoding="utf-8")
+    except PermissionError:
+        print(f"  ✗ 读取失败（权限不足）：{target_file}")
+        suggestion["apply_error"] = "read_permission_denied"
+        return False
+
+    # 检查是否已经包含相同内容（避免重复添加）—— v6.8.22: 在备份前判定
+    content_to_add = suggestion.get("content", "").strip()
+    if content_to_add in current_content:
+        print(f"  ○ 内容已存在，跳过（不备份、不写入）")
+        return True
+
+    # 仅当确实需要写入时才执行备份
     backup_dir = BACKUPS_DIR
     backup_dir.mkdir(parents=True, exist_ok=True)
 
@@ -519,27 +577,29 @@ def _apply_suggestion(suggestion: Dict) -> bool:
     ts = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     backup_path = backup_dir / f"{profile}-{filename}-{ts}.bak"
 
-    try:
-        shutil.copy2(str(target_file), str(backup_path))
-        print(f"  ✓ 备份至：{backup_path}")
-    except PermissionError:
-        print(f"  ✗ 备份失败（权限不足）：{target_file}")
-        suggestion["apply_error"] = "backup_permission_denied"
-        return False
-
-    # 读取当前内容
-    try:
-        current_content = target_file.read_text(encoding="utf-8")
-    except PermissionError:
-        print(f"  ✗ 读取失败（权限不足）：{target_file}")
-        suggestion["apply_error"] = "read_permission_denied"
-        return False
-
-    # 检查是否已经包含相同内容（避免重复添加）
-    content_to_add = suggestion.get("content", "").strip()
-    if content_to_add in current_content:
-        print(f"  ○ 内容已存在，跳过添加")
-        return True
+    # v6.8.22: 单次 run 内对同一文件最多备份 MAX_BACKUPS_PER_FILE_PER_RUN 次
+    if backup_count_tracker is not None:
+        key = str(target_file)
+        current_count = backup_count_tracker.get(key, 0)
+        if current_count >= MAX_BACKUPS_PER_FILE_PER_RUN:
+            print(f"  ○ 本 run 已备份 {key} 达到上限，跳过备份")
+        else:
+            try:
+                shutil.copy2(str(target_file), str(backup_path))
+                backup_count_tracker[key] = current_count + 1
+                print(f"  ✓ 备份至：{backup_path}")
+            except PermissionError:
+                print(f"  ✗ 备份失败（权限不足）：{target_file}")
+                suggestion["apply_error"] = "backup_permission_denied"
+                return False
+    else:
+        try:
+            shutil.copy2(str(target_file), str(backup_path))
+            print(f"  ✓ 备份至：{backup_path}")
+        except PermissionError:
+            print(f"  ✗ 备份失败（权限不足）：{target_file}")
+            suggestion["apply_error"] = "backup_permission_denied"
+            return False
 
     # 添加到文件末尾
     new_content = current_content.rstrip() + "\n" + content_to_add + "\n"
@@ -563,14 +623,14 @@ def cmd_analyze() -> None:
     print("=== Prompt 优化建议分析 ===")
     print()
 
-    # 采集数据
+    # 1. 采集数据
     debug_entries = _collect_debug_journal_entries()
     score_reasons = _collect_agent_score_reasons()
     failure_patterns = _collect_failure_patterns()
     prompt_files = _discover_prompt_files()
 
     print(f"  数据源采集完成：")
-    print(f"    debug journal（prompt_tuning）: {len(debug_entries)} 条")
+    print(f"    debug journal（prompt_tuning, 最近 {DEBUG_JOURNAL_WINDOW_DAYS}d 窗口）: {len(debug_entries)} 条")
     print(f"    agent score reasons: {len(score_reasons)} 条")
     print(f"    failure patterns: {len(failure_patterns)} 条")
     print(f"    prompt 文件: {sum(len(v) for v in prompt_files.values())} 个")
@@ -695,7 +755,11 @@ def cmd_auto() -> None:
             safe_pending = [s for s in pending if s.get("priority") in ("high", "medium")]
             if safe_pending:
                 print(f"○ 无新建议，但发现 {len(safe_pending)} 条遗留 pending 建议，自动应用")
-                _apply_suggestions(safe_pending, all_suggestions, auto_mode=True)
+                backup_tracker: Dict[str, int] = {}
+                _apply_suggestions(
+                    safe_pending, all_suggestions, auto_mode=True,
+                    backup_count_tracker=backup_tracker,
+                )
                 _log_auto_applied(safe_pending)
                 print("\n✓ 自动优化完成")
                 return
@@ -728,7 +792,12 @@ def cmd_auto() -> None:
 
     # 3. 应用
     print(f"\n  自动应用 {len(to_apply)} 条建议：")
-    _apply_suggestions(to_apply, all_suggestions, auto_mode=True)
+    # v6.8.22: 同一 run 内对同一文件最多备份 MAX_BACKUPS_PER_FILE_PER_RUN 次
+    backup_tracker: Dict[str, int] = {}
+    _apply_suggestions(
+        to_apply, all_suggestions, auto_mode=True,
+        backup_count_tracker=backup_tracker,
+    )
 
     # 只记录成功应用的
     applied_ok = [s for s in to_apply if s.get("status") == "applied"]
@@ -765,15 +834,20 @@ def _apply_suggestions(
     to_apply: List[Dict],
     all_suggestions: List[Dict],
     auto_mode: bool = False,
+    backup_count_tracker: Optional[Dict[str, int]] = None,
 ) -> None:
-    """应用建议列表（内部共享函数）。"""
+    """应用建议列表（内部共享函数）。
+
+    v6.8.22: 新增 backup_count_tracker 参数，限制单次 run 内同一文件的
+    备份次数（防止指数级备份浪费磁盘）。
+    """
     success_count = 0
     fail_count = 0
 
     for s in to_apply:
         label = "自动" if auto_mode else "手动"
         print(f"\n{label}应用 {s['id']}：{s['description'][:60]}")
-        if _apply_suggestion(s):
+        if _apply_suggestion(s, backup_count_tracker=backup_count_tracker):
             s["status"] = "applied"
             s["applied_at"] = _now_utc()
             s["applied_mode"] = "auto" if auto_mode else "manual"
@@ -832,7 +906,7 @@ def _self_check() -> None:
 
     # 4. 数据采集测试
     debug_entries = _collect_debug_journal_entries()
-    print(f"  ✓ debug journal 采集：{len(debug_entries)} 条 prompt_tuning")
+    print(f"  ✓ debug journal 采集：{len(debug_entries)} 条 prompt_tuning（窗口 {DEBUG_JOURNAL_WINDOW_DAYS}d）")
 
     score_reasons = _collect_agent_score_reasons()
     print(f"  ✓ agent score reasons 采集：{len(score_reasons)} 条")
