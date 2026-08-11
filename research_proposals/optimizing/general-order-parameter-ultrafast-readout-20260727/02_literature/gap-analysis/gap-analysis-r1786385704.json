@@ -1,0 +1,80 @@
+{
+  "gaps": [
+    {
+      "claim": "§6 预期成果声称 CrSb altermagnet 固体 HHG 的「首例实验报道」，但 rationale.md §2.2 已引 Rost et al. arXiv:2507.02673 报告 CrSb 自旋分辨 HHG 指纹，两处直接冲突（触发 novelty_claim_cautious P0 红线）",
+      "missing_evidence": "需要核实 Rost 2025 (arXiv:2507.02673) 是否已正式发表、其报告的 CrSb HHG 观测内容与本项目「首例」声明的边界区分；需要查找是否有其他独立实验组（MnTe / RuO2 / CrSb altermagnet HHG）的同行评审论文",
+      "search_keywords": [
+        "Rost CrSb high harmonic generation spin-resolved",
+        "CrSb altermagnet HHG published peer-reviewed",
+        "arXiv:2507.02673 journal acceptance",
+        "MnTe RuO2 high harmonic generation altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3 末段以 Granados 2026 单源预印本讨论 CEP-OAM 耦合作为排除理由，未给出耦合强度的定量值",
+      "missing_evidence": "缺少 CEP-OAM 耦合强度的多源实验或理论定量数据（耦合系数、典型扰动幅度、对 HHG 谱的具体影响阈值），单源预印本不足以支撑排除性论证",
+      "search_keywords": [
+        "carrier-envelope phase orbital angular momentum HHG coupling",
+        "CEP OAM high harmonic generation quantitative",
+        "OAM driving HHG systematic error",
+        "vortex beam high harmonic generation CEP"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3 将 MnTe 作为 CrSb 失稳后的备选体系，理由为 Néel 约 310 K「较低相变温度反而提供了在常规低温恒温器内跨越磁相变点的便利」，但未提供 MnTe HHG 实验文献支撑该可切换性",
+      "missing_evidence": "缺少 MnTe 固体 HHG 的实验或理论文献，特别是 Néel 温度附近 HHG 谱对磁序敏感性的同行评审证据",
+      "search_keywords": [
+        "MnTe high harmonic generation",
+        "MnTe antiferromagnet HHG Néel temperature",
+        "alpha-MnTe strong field response",
+        "MnTe spin symmetry HHG altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§5 方法学创新三段（费舍尔信息差分、贝叶斯反演、序参量重构）均停留在定性描述，缺少「量化优势」指标（条件数阈值、后验宽度 dB、灵敏度增益倍数、检测下限）",
+      "missing_evidence": "缺少 HHG 光谱学中 Fisher 信息矩阵 / Cramer-Rao 下界 / 贝叶斯反演后验宽度的同行评审基准文献，无法为本项目的量化优势声明提供对照基准",
+      "search_keywords": [
+        "Fisher information HHG reconstruction Cramer-Rao",
+        "Bayesian inversion harmonic spectroscopy",
+        "identifiability quantum geometry HHG",
+        "quantum metric reconstruction Fisher matrix singular"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3 变量设计声称「仅需偏振/温度/磁场三重联合约束即可回答」三维独立性，但未给出独立性证明文献",
+      "missing_evidence": "缺少多维外参（偏振 × 温度 × 磁场）联合扫描下 HHG 信号可分辨性 / 独立性 / 信息完备性的理论或实验文献",
+      "search_keywords": [
+        "polarization temperature magnetic field HHG multidimensional",
+        "joint spectral reconstruction HHG vector observable",
+        "multi-observable HHG information content"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3 TiSe₂ CDW 205 K 复现门槛「有方向但未给具体阈值」，缺少 CDW 转变温度附近 HHG 已有实验数据作为复现基准",
+      "missing_evidence": "缺少 TiSe₂ 或类似 CDW 材料 HHG 转变温度附近谱学响应的同行评审数据，用于支撑本项目的复现阈值设定",
+      "search_keywords": [
+        "TiSe2 charge density wave HHG",
+        "CDW transition high harmonic generation",
+        "TiSe2 ultrafast HHG 205 K",
+        "charge density wave nonlinear spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1「可辨识性优先」研究范式以 Cochran 2025 + Sørensen 2025 双源锚定，但缺少该范式在其他体系（如超导、拓扑、磁性）的应用先例文献",
+      "missing_evidence": "缺少「identifiability-first」方法论在强场光谱学其他应用场景的同行评审案例文献，以支撑范式可推广性",
+      "search_keywords": [
+        "identifiability-first spectroscopy",
+        "Cochran Sørensen HHG inversion",
+        "parameter identifiability quantum materials ultrafast",
+        "Sørensen Bayesian HHG reconstruction"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

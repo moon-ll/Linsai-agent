@@ -206,6 +206,55 @@ class LiteratureServiceParserTests(TestSuite):
             self.assert_true('"status": "pool"' in content,
                              f"status_history 字段已写入文件（实际 {content[:300]!r}）")
 
+    def _test_lit_read_wiki_persistence(self):
+        """v6.8.18 fix: lit_read 成功路径下，LiteratureService.read() 必须建立 wiki 页面。
+
+        回归：executor._run_lit_read_step 步骤1 (agent loop 成功) 调用 read() 后，
+        knowledge/wiki/papers/{arxiv_id}.md 必须存在。否则 lit_note.link_to_proposal()
+        会因 wiki 页面不存在返回 False，导致 used_by_proposals 反向链接断裂。
+        """
+        aid = "2606.22714"
+        # 先确保不存在
+        wiki_path = self.lit_svc_mod.WIKI_PAPERS_DIR / f"{aid}.md"
+        if wiki_path.exists():
+            wiki_path.unlink()
+
+        # 调用 read()（模拟 lit_read 成功路径走 LiteratureService）
+        result = self.svc.read(aid, proposal_id="test-lit-read-fix", force=True)
+        self.assert_eq(result.get("cached"), False, "首次读取 cached=False")
+        self.assert_true(bool(result.get("content")), "返回内容非空")
+
+        # 验证 wiki 文件已创建
+        self.assert_true(wiki_path.exists(),
+                         f"wiki 页面必须存在（路径 {wiki_path}）")
+        # 验证 used_by_proposals 已写入
+        meta = self.svc.kw_get(f"wiki/papers/{aid}.md")
+        self.assert_true(meta is not None, "通过 kw_get 能取到 wiki 页面")
+        if meta:
+            used_by = meta.get("meta", {}).get("used_by_proposals", [])
+            self.assert_true("test-lit-read-fix" in (used_by if isinstance(used_by, list) else [used_by]),
+                             f"used_by_proposals 应包含 proposal_id（实际 {used_by!r}）")
+
+    def _test_link_to_proposal_after_read(self):
+        """v6.8.18 fix: read() 之后 link_to_proposal() 必须成功。
+
+        回归：模拟 lit_read 成功 → lit_note 调 link_to_proposal 的完整链路，
+        验证不再因 wiki 页面不存在返回 False。
+        """
+        aid = "2502.09427"
+        wiki_path = self.lit_svc_mod.WIKI_PAPERS_DIR / f"{aid}.md"
+        if wiki_path.exists():
+            wiki_path.unlink()
+
+        # 步骤1：lit_read 成功路径
+        read_result = self.svc.read(aid, proposal_id="general-bsv-driven-hhg-quantum-20260726", force=True)
+        self.assert_true(bool(read_result.get("content")), "lit_read 返回内容")
+
+        # 步骤2：lit_note.link_to_proposal 不再报"wiki 页面不存在"
+        linked = self.svc.link_to_proposal(aid, "general-bsv-driven-hhg-quantum-20260726",
+                                           citation_location="adversarial-review")
+        self.assert_true(linked, "link_to_proposal 在 wiki 存在时应返回 True")
+
     def run_tests(self):
         self._test_json_array_clean()
         self._test_json_array_with_markdown_fence()
@@ -219,3 +268,5 @@ class LiteratureServiceParserTests(TestSuite):
         self._test_build_frontmatter_mixed_list_falls_back_to_json()
         self._test_ingest_new_papers_returns_counts()
         self._test_ingest_new_papers_handles_unhashable_dict_list()
+        self._test_lit_read_wiki_persistence()
+        self._test_link_to_proposal_after_read()

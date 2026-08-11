@@ -1,234 +1,373 @@
-## 2311.11257
+## 2511.18362
 
-全部信息确认。引用数 40，期刊版本摘要比 arXiv 版本多了关键一句："Here we show that HHG driven by quantum light results in quantum high harmonics."（强结论句）。数据完整，撰写最终结构化笔记。
+已获取论文全文。下面是结构化的深度笔记。
 
 ---
 
-## 调研主题：压缩高次谐波的产生（Generation of Squeezed High-Order Harmonics）
+论文：Attosecond-resolved quantum fluctuations of light and matter
+来源：[arXiv:2511.18362](https://arxiv.org/abs/2511.18362)
+作者：Matan Even Tzur, Chen Mor, Noa Yaffe, Michael Birk, Andrei Rasputnyi, Omer Kneller, Ido Nisim, Ido Kaminer, Maria Chekhova, Michael Krüger, Misha Ivanov, Nirit Dudovich, Oren Cohen
+机构：Technion（海法以色列理工学院）、魏兹曼科学研究所、Max Planck Institute for the Science of Light、Max Born Institute、广东 Technion 以色列理工学院
+提交日期：2025-11-23## 研究问题（Research Question）
 
-**论文基本信息**
-- **arXiv ID**: 2311.11257
-- **DOI**: 10.1103/PhysRevResearch.6.033079
-- **期刊正式版**: Physical Review Research **6**, 033079 (2024年7月17日)
-- **标题**: Generation of squeezed high-order harmonics
-- **作者**: Matan Even Tzur, Michael Birk, Alexey Gorlach, Ido Kaminer, Michael Krüger, Oren Cohen
-- **单位**: Technion–Israel Institute of Technology（以色列理工学院）Helen Diller Quantum Center & Solid State Institute
-- **分类**: quant-ph（量子物理）
-- **arXiv 首次提交**: 2023-11-19
-- **开放获取**: Gold OA (CCBY)
-- **引用数**（Semantic Scholar 截至 2026-08）: 40
-- **资助**: European Research Council (819440-TIMP) + Israel Science Foundation (1781/18)
-- **关键前作**: 同团队 Nat. Phys. 2023 (ref [49]) 与 Nat. Photon. 17, 501 (2023) (ref [50])
+论文要回答的核心问题是：能否在 XUV 阿秒波段同时控制光的量子态和电子的量子态，并且以亚光周期（sub-cycle）精度测量光与物质的量子涨落？具体可拆分为三个互锁的子问题：（1）能否把量子光（BSV）的非经典统计通过强场 HHG 过程"上变频"（upconvert）到 XUV 阿秒脉冲上，并产生具有可调控量子态的 XUV 阿秒脉冲串？（2）能否在 XUV 波段实现量子态层析（Husimi/Wigner 重构）？（3）能否在阿秒时间尺度上分辨出场致电离（field-induced tunneling）过程中电子波包本身的量子涨落（即"隧穿势垒的可调量子性"）？论文的中心论点是：把 BSV 当作 ω/2 的微扰与800 nm 强相干场组合驱动 HHG，可形成天然的"原位四缝阿秒干涉仪"，由此同时回答以上三问。
+
+## 研究背景（Background）
+
+阿秒光谱学和量子光学在过去二十多年沿着几乎不交叉的方向发展。在阿秒一侧，HHG 一直被视为相干经典过程，用于探测电子动力学，XUV 阿秒脉冲的经典属性（脉冲宽度、啁啾、强度）已得到良好控制，但其量子属性始终未被表征和控制。在量子光学一侧，量子光源主要在可见—红外波段，弱光为主，微焦级 BSV 是少数能与物质发生强场相互作用的非经典源；之前的工作已用 BSV 驱动 UV 谐波产生以及多光子光发射，但 XUV 区间的谐波量子态及阿秒尺度物质量子涨落仍是空白。理论上已有研究预言：HHG 可产生纠缠 XUV 光子对、巨纠缠、压缩光态、非绝热材料激发、强关联材料的相互作用以及超辐射系综中的集体关联。本工作正是要将这些预言转化为实验证明，建立"阿秒量子电动力学"（attosecond QED）这一新方向。
+
+## 研究方法（Methods）
+
+光源与干涉结构：用 500 Hz、30 fs、4.3 mJ 的 800 nm 钛宝石激光经 Mach–Zehnder 干涉仪分成两臂——90% 进入强相干 800 nm 臂，10% 经 BBO 双通 I 型 SPDC 生成中心波长 1600 nm 的相干锁定 BSV（输出约 0.7 μJ，10001 个单次脉冲统计表征，g^(2) > 2 的超聚束、单模）。两束经双色镜合束、聚焦至充 Kr 的连续喷嘴，产生 XUV HHG；通过平场光栅 + MCP + CCD 做单次脉冲光谱采集（积分 1 ms）。亚周期延迟由楔形镜对控制（步长 ~200 as）。理论/计算框架：以半经典强场近似（SFA）推导 Eq.(1) —1600 nm 在四个相邻半周期对电子作用引入复相位扰动 σ_{1,2}=α_{1,2}+iβ_{1,2}，使800 nm单一驱动的奇次谐波（coherent state）劈裂为四类谱族（odd / even / half-integer ±1/2），形成"原位四缝干涉"；统计反演由四个相邻谐波单次强度反解 σ_{1,2}，用两阶段交替 lsqnonlin（先对称破缺打初猜、再物理方程精修）消除 (σ,−σ) / (σ_1,σ_2)↔(σ_2,−σ_2) 的对称歧义。再用 TDSE（一维 Pöschl–Teller 势模拟 Kr，复吸收边界，ω/2 场两正交分量 y_x, y_y 独立高斯采样）作为图4 的理论对应。MCP 探测 g^(2) 校准（Eq.S8：g_det^(2) = g_light^(2) + (1/⟨N⟩)G_1ph^(2)）和背景扣除（odd 用遮挡 XUV 的背景，half-integer/even 用遮挡 BSV 的背景）也专门给出。
+
+## 主要发现与核心结论（Main Results）
+
+1. 谱族统计指纹（图2）：单次脉冲测量给出 XUV 谐波的 g^(2)。奇次（coherent-like）g^(2) ≈ 1（高斯），半整数谐波 g^(2) ≈ 2.3 与输入 BSV 的 g^(2)吻合（单 BSV 光子通道），偶次 g^(2) ≈ 4.8 与 BSV 光子数峰度 ⟨n̂⁴⟩/⟨n̂²⟩² 吻合（双 BSV 光子通道）；扫描两色延迟时，g^(2) 与均值同相振荡，证明 odd 起源于 zero- 与 four-BSV-photon 干涉，半整数起源于 one- 与 three-BSV-photon 干涉。
+2. 隧穿动力学的量子重建（图 3）：由 Eq.(1) 反演 α_{1,2}, β_{1,2} 单次分布，发现 β_1 与 β_2 之间的反相关 — 当前半周期隧穿若"过吵"（β 分布宽），下一半周期隧穿"变安静"（β 分布窄）；α_1 与 α_2 类似反相关。这是首次在阿秒尺度观察到由 BSV 量子相关决定的电子隧穿势垒涨落。
+3. XUV 量子态层析（图 4）：用 σ_{1,2} → 复场 E_q → 多脉冲直方图得到 Husimi Q（半整数 H12.5 出现两叶 + 中央凹陷的非高斯"压缩猫态"；偶次 H12 沿一个正交方向被拉伸；奇次 H13 为相干态主瓣 + 朝原点衰减的尾巴），这是 XUV 波段首次量子态层析。H14.5 单光子通道的 Wigner 函数经反 Radon 变换得到，min_φ ΔX_φ² / max_φ ΔX_φ² ≈ 0.55，明显各向异性（squeezed vacuum）。
+4. 时域量子噪声上变频（图 5）：在每发激光重建阿秒波形并计算时变方差 ΔE²(t)。方差呈现亚周期噪声突发（与 BSV 输入场方差包络匹配），证明 BSV 量子噪声被直接上变频到 XUV，方差以两倍于均值频率振荡是 Husimi 椭圆的时域对应。
+核心结论：阿秒 XUV 量子态可被 BSV 写入和控制，电子隧穿涨落可被阿秒分辨地"读出"，BSV 与相干场组合构成单原子级别的原位量子干涉仪，奠定了 attosecond QED 的实验基础。
+
+## 潜在研究方向（Future Directions）
+
+1. 该方案为自参考内干涉（self-referenced internal interferometry），并非传统外差/零差检测——适用 XUV 但不适合任意量子态；把 XUV 量子 HHG 用光谱滤波做成可调谐 XUV 量子源、并扩展到分子、固体（已有理论预言能揭示多体关联与拓扑动力学）需要进一步验证。
+2. 当前仅在 Kr 原子气体中实现，气压、波长、激光强度可调范围有限，BSV 调制深度对应"弱微扰"条件（sin σ ≈ σ）；若破坏微扰假设将出现更复杂的非高斯态，重构算法需扩展。
+3. 光谱分辨率和 MCP 单光子响应对 g^(2) 的校准在低通量区域仍受 SNR 限制；进一步降低 XUV 单光子探测的额外噪声（用更稳定的探测器或替代方案）将拓展可探测谐波阶数范围。
+4. 当前对隧穿涨落的描述基于 σ_{1,2}复相位的统计反演，没有直接探测电子末态动量；与 attoclock、阿秒瞬态吸收、PECD 等互补手段的联合测量将给出更完整的"隧穿 + 阿秒 QED"图景。
+5. 理论上已有预言（纠缠 XUV 光子对、巨纠缠、超辐射相干等）尚未在实验中实现；本工作的 in-situ 干涉方案能否拓展到光子对纠缠、压缩/猫态的工程化产生以及向分子/固体迁移，是开放问题。
+
+---
+
+**备注**：如果需要把上述要点导出为 Markdown 报告或附加原文图表描述，告诉我即可。
+
+
+## 2509.19608
+
+我已经掌握了 Methods 的关键细节：BSV Husimi 分布 + TD-CIS 电离率 + RB-SFA（强场近似）+ 半经典 Maxwell 传播方程 + 损耗的 Wigner 函数演化。让我整合成结构化笔记。
+
+---
+
+调研主题：Propagation of intense squeezed vacuum light in non-linear media
+来源：[arXiv:2509.19608v3](https://arxiv.org/abs/2509.19608)（Rivera-Dean, Kanti, Stammer, Carlström, Tsatrafyllis, Ivanov, Lewenstein, Tzallas；提交 2025-09-23，v3 更新 2025-11-04；quant-ph；ICFO/FORTH/MBI Vienna 等）
+
+核心定量发现速览
+- 驱动场：λ = 800 nm，sin² 包络，τ = 13 fs，Ar 原子（Ip = 0.58 a.u.）
+- BSV 在 ⟨I⟩≈1.3×10¹⁴ W/cm² 下达到 2% 电离所需的平均强度仅为 ⟨I⟩≈9×10¹² W/cm²（≈同电离下低 1.5 个数量级）
+- 单原子 ⟨N₁₅⟩ 在 Isat 时相干光比 BSV 高 1 个数量级以上；考虑传播+退相干后 ⟨N_q⟩(Coh.)/⟨N_q⟩(BSV) ≳ 50（当 ρ_at > 2×10¹⁶ cm⁻³）
+- "量子性丧失"阈值：A = 1/8（即 12.5% IR 光子损失）
+- 15 次谐波平台可探测：⟨N_IR⟩≈10¹³ 光子/脉冲下，介质长 L_m^(BSV) ≈ 2 L_a 时输出 ≈5×10² 光子/脉冲
+- ⟨I⟩≲10¹³ W/cm² 时 BSV 优势区：A≪12%，单脉冲 ~20 谐波光子仍可探测
+
+## 研究问题（Research Question）
+
+- 核心问题：强红外 BSV（bright squeezed vacuum）在强场驱动非线性气体介质中如何传播？强场电离诱导的 IR 光子损失如何退相干，并如何削弱高次谐波（HHG）产额与可观测的谐波阶数？
+- 中心论点：以单原子图像为依据、断言 BSV 驱动的 HHG 比相干光更强、谱更宽的既有结论，在加入介质传播与退相干后将不再成立——相干光在相同条件下反而高效 ≥50 倍；但通过控制 ⟨I⟩ 和介质长度 L_m，仍可保留 BSV 的量子印记并产生可探测谐波。
+- 目标：构建首个"完全量子化"框架（BSV 量子态 + TDSE 电离率 + 半经典 Maxwell 传播），为所有物质相中的 BSV-强场耦合提供可推广基线。
+
+## 研究背景（Background）
+
+- 量子光工程已能产生红外 BSV 飞秒脉冲（mean photon number 10¹³ 量级），推动"强场量子光学"兴起；BSV 已被用于低阶非线性谐波、多光子/隧穿电子发射、双电离以及 HHG 实验与理论（[33-42]，尤其是 Gorlach et al. Nat. Phys. 2023；Rasputnyi et al. Nat. Phys. 2024；Lemieux et al. Nat. Photon. 2025）。
+- 但此前所有 BSV-HHG 理论仅做"单原子响应"计算，忽略关键的宏观传播效应：电离损耗、基态 depletion、相位匹配（phase matching）、吸收长度 L_a 与相干长度 L_c。
+- 相干光情况已有成熟的半经典传播理论（Constant et al. 1999；Weissenbilder et al. Nat. Rev. Phys. 2022）；低光子数量子光有完全量子化传播（Glauber-Lewenstein 1991 等）；二者之间存在"高光子数 BSV 介质传播"的方法论空白。
+- 此外，BSV 的 Q(E) 沿反压缩正交分量极宽的场强分布，意味着在相同 ⟨I⟩ 下电离率与涨落比相干光大得多——这是问题的物理根源。
+
+## 研究方法（Methods）
+
+- 量子光态描述：使用 BSV 的 Husimi 分布 Q(E)（Eq. B1），用 Q(E) 做从量子态到"经典相干态积分"的映射。定义量子性丧失阈值 A = ⟨N_abs⟩/⟨N_IR⟩ = 1/8；通过 Wigner 函数 W(X₁, X₂) 与 (ΔX₁²)(ΔX₂²) − 1 监测退相干。
+- 单原子电离率：对 3s² 3p⁶ 价壳层做 TD-CIS 求解（general TD-CIS，Carlström 等 2022）；I ≳ 10¹³ W/cm² 用 TDSE/Ion-loss，I 较低处接 PPT/ADK 率，并在中间区做匹配。
+- HHG 谱：用 RB-SFA Mathematica 包（包含 depletion 修正——把基态振幅乘以 exp[−½∫Γdτ]）做 TDSE 的 saddle-point 修正版本；HHG 谱 = ⟨N_q⟩ = ∫dE Q(E) |FT[⟨ψ_E|d|ψ_E⟩]|²。
+- 介质传播：使用 Maxwell 方程在慢变包络+傍轴近似下的形式；q 次谐波强度 ⟨I_q⟩≈∫dE Q(E) E_q²(z,t;α)；用吸收长度 L_a = 1/(σ^{(1)}ρ_at) 和相干长度 L_c = π/|Δk|；半经典传播方程保留在量子态外的"积分核"中。
+- 参数：λ = 800 nm，sin² 包络，13 fs，Ar，ρ_at = 10¹⁸ cm⁻³；⟨I⟩= I_sat = 1.3×10¹⁴ W/cm² 做对照；研究 ⟨I⟩, L_m, ρ_at 三维相图。
+
+## 主要发现与核心结论（Main Results）
+
+- 单原子阶段（图 2, 4a-b）：BSV 因场强涨落极宽（r ≈ 17 时 ⟨I⟩≈1.3×10¹⁴），达到与相干光相同的 2% 电离仅需 ⟨I⟩≈9×10¹² W/cm²；同时 Isat 时 BSV 单原子 ⟨N₁₅⟩ 已比相干光低约 1 个数量级（基态 depletion）；BSV 截止谐波 33 阶 > 相干光 29 阶；BSV 把 HHG 中的量子路径干涉洗掉。
+- 退相干与传播极限（图 3）：定义 A = 1/8 为量子性丧失阈值；介质长度上限 L_m^(BSV) = τ⟨I⟩/(8ℏω⟨Y_i⟩nρ_at)；该上限在 ⟨I⟩≈I_sat 时仅约 2 L_a。
+- 谐波产额对比（图 4c-e）：若仅算传播不加退相干，⟨N₁₅⟩(Coh.)/⟨N₁₅⟩(BSV) ~ 30；加入退相干后 ≳ 50；当 ρ_at > 2×10¹⁶ cm⁻³ 时相干光仍高 50 倍以上；BSV 的谐波谱几乎与相干光相同（截止、平台结构相似），只是产量更低。
+- 可探测性（图 4e, 讨论）：⟨N_IR⟩≈10¹³ photons/pulse，L_m ≈ L_m^(BSV) 时 BSV 输出 ~5×10² 谐波光子/脉冲——可探测；但 BSV 优势区在 ⟨I⟩≲10¹³ W/cm²：相干光此时无谐波，BSV 输出 ~20 photons/pulse 且 A≪12%，量子性得以保留。
+- 论断：本文明确说明所给结果不能作为"BSV 把量子特征印记在 HHG 可观测量上"的证据；后者需要高光子数量子态层析+极低退相干光学元件。
+
+## 潜在研究方向（Future Directions）
+
+- 局限性 / 注意事项：(i) 方法假设 BSV 各相干态实现之间量子相干性在传播中消失（强吸收纠缠光-物质后被 trace out），因此所给谱仍是经典混合态结果；(ii) 假设 IR 共焦参数 ≫ L_m，且单原子响应在介质内空间均匀，未考虑高阶空间模式耦合；(iii) 仅以 Ar + 800 nm + 13 fs 为例；不同原子/波段/脉冲形状的推广需重做电离率与相位匹配；(iv) SFA 框架在低次谐波和极低强度下精度有限。
+- 未解决/开放问题：(a) 如何设计实验直接证明 HHG 输出态承载 BSV 量子性（高光子数量子态层析、低退相干光学元件）；(b) 如何利用 ⟨I⟩< I_sat 的"BSV 优势区"做到既无退相干又可探测的谐波实验；(c) 在固体 [38,39]、液体、稠密等离子体中的传播——方法论可推广但需新电离/吸收模型；(d) BSV 谐波相位锁定与阿秒科学（attosecond pulse train）的相干性问题——本文已指出传播相位匹配是关键但未给完整解答；(e) 在强关联材料中（强 ground-state depletion，Ref. [43, 17]）产生"结构化压缩光"的途径尚待与本传播模型对接；(f) 与 PINN / 量子态层析/逆问题方法（参见课题"研究内容"识别的缺口）的结合——将 BSV 传播与机器学习反演耦合重建电子结构。
+- 未来工作建议（与课题"立项依据"对应）：(i) 探索不同量子态（猫态、纠缠态、Fock 态）下的传播；(ii) 加入空间多模效应；(iii) 设计可控的"低电离+高场"实验窗口，验证 BSV 量子印记能否保留到谐波谱。
+
+主要引用骨架（按引用量计的关键 anchor）
+- [33] Gorlach et al. Nat. Phys. 2023（BSV 驱动 HHG 理论）
+- [39] Rasputnyi et al. Nat. Phys. 2024（BSV-HHG 实验）
+- [38] Lemieux et al. Nat. Photon. 2025（量子光控制 HHG 光子聚束）
+- [50] Weissenbilder et al. Nat. Rev. Phys. 2022（气体 HHG 优化综述）
+- [27] Lamprou et al. J. Phys. B 2025（非经典光驱动强场综述）
+- [67-68] Carlström et al. PRA 2022（TD-CIS 方法）
+- [72] Pisanty RB-SFA Mathematica 包
+
+文件位置：PDF 已存至 /tmp/pdf_2509.19608.pdf；提取文本 /tmp/paper_2509.19608.txt（如需复核）。
+
+
+## 2404.05474
+
+Perfect — I have full content. Now let me write the structured note with concrete quantitative details (g(2)(0) values, wavelengths, etc.) for all five required dimensions.
+
+══════════════════════════════════════════════
+📄 论文深度笔记｜arXiv:2404.05474
+══════════════════════════════════════════════
+
+源信息
+- arXiv ID：2404.05474v1（2024-04-08 提交）
+- 标题：Photon bunching in high-harmonic emission controlled by quantum light
+- 作者：Samuel Lemieux, Sohail A. Jalil, David Purschke, Neda Boroumand, David Villeneuve, Andrei Naumov, Thomas Brabec, Giulio Vampa*（*通讯）
+- 单位：Joint Attosecond Science Laboratory (NRC + University of Ottawa), Univ. of Ottawa Physics Dept.
+- 通讯：gvampa@uottawa.ca
+- 来源：https://arxiv.org/abs/2404.05474
 
 ---
 
 ## 研究问题（Research Question）
 
-论文的核心问题是"高次谐波产生（HHG）过程中发射光的量子态是什么"——这一问题是几十年来 HHG 研究的根本空白。传统 HHG 研究将"物质"按量子处理而将"光"按经典（相干态）处理，但发射出的高次谐波光子本身的量子光学性质从未被系统推导。作者明确指出："despite its wide range of scientific and technological applications, it remains unclear if HHG, like χ(2,3) nonlinearities, can be used for frequency-converting quantum light without altering its quantum state, a process known as quantum frequency conversion (QFC)"。论文的中心论点：HHG 可以作为"量子频率转换器"将驱动光的量子态（特别是压缩）映射至高能谐波，条件是驱动光处于适度压缩区间；超出此区间后，谐波将进入"压缩热光子统计"乃至与半经典非线性响应函数强耦合的复杂量子态。这一论点的核心新颖之处在于推导出对任意量子光态驱动都适用的解析公式（中心方程 Eq. 8 与 Eq. 9）。
+本文的核心科学问题是：**量子光场（Bright Squeezed Vacuum, BSV）的非经典统计性质能否通过强场高次谐波产生（HHG）这一极端非线性过程进行"转导（transduction）"，从而在 XUV/深紫外波段产生具有超泊松光子统计（光子成束）的非经典态短波长光？** 具体而言，作者试图回答三个相互嵌套的子问题：（1）当一束明亮压缩真空场被注入到驱动固体 HHG 的强相干中红外场中后，新产生的"边带（sidebands）"是否会继承 BSV 的非经典光子统计；（2）这一转导过程对应的高次谐波偶极子在亚光学周期层面如何响应量子扰动；（3）所生成的边带场的四分量（quadratures）是否可以通过 BSV 与 HHG 的相对相位进行相干控制，从而开辟在阿秒时间尺度上主动"剪裁"非经典光态的路径。
 
 ## 研究背景（Background）
 
-研究动机来自三个前沿交汇点：(1) **量子光学的成熟**：压缩真空（squeezed vacuum）和明亮压缩真空（bright squeezed vacuum, BSV）已在桌面级 beamlines 实现（参见 Iskhakov et al., Pérez et al., Finger et al., Sharapova et al. 等系列工作，refs [44]-[48]、[52]），且非经典光已作为强非线性光学的驱动器被广泛研究（refs [41]-[43]）；(2) **HHG 与阿秒科学的爆发**：自1987 年 McPherson 与 1988 年 Ferray/L'Huillier 的开创工作以来，HHG 已从气体扩展到液体、固体（refs [3]-[5]），并支撑了阿秒脉冲列（ref [6]）和阿秒光谱学应用，包括拓扑相变（ref [19]）、分子手性（refs [20]-[21]）、环流（ref [22]）、对称破缺（refs [23]-[24]）等。(3) **量子 HHG 理论的兴起**：2020 年 Gorlach et al. (Nat. Commun. 11, 4598) 首次提出 HHG 的量子光学性质（ref [40]）；同团队前期工作（refs [49]-[50]）已理论预言"BSV 驱动 HHG 可突破经典截止频率"和"通过有效光子统计力控制电子轨迹"。但所有这些前期工作**都没有回答**一个关键问题——发射光的完整量子态是什么。该研究填补了这一空白，向"NIR→XUV量子频率转换"的目标迈出了关键一步。
+该工作建立在三条近期进展的交汇点上。第一，**阿秒光谱学** 正试图超越经典电磁场描述，将物质、量子化光子场及其相互作用中涌现的量子关联都纳入探测框架（Krausz & Ivanov 2009；Geneaux et al. 2019）。第二，**强场量子电动力学理论框架** 已开始预测量子光驱动下电子动力学的奇异行为：Lewenstein 等（2021, Nat. Phys.）预言强场-物质相互作用可产生光薛定谔猫态；Gorlach 等（2020, Nat. Commun.; 2023, Nat. Phys.）奠定了"量子光驱动的高次谐波产生"理论；Stammer 等（2023, PRX Quantum）发展出用于量子态工程的强场-QED 工具箱；Even Tzur 等（2023, Nat. Photon.）提出了"光子统计学力（photon-statistics force）"的概念。这些理论大多停留在预言阶段，**实验上如何把红外/可见波段的量子光学状态有效"写入"到 XUV 短波长光子态中** 仍是空白。第三，**固体高次谐波**（自 Ghimire et al. 2011, Nat. Phys. 开创以来）已被证明可作为亚周期"门控器"——Vampa et al. 2015 已展示固体 HHG 与气体 HHG 通过电子-空穴对的加速-辐射机制统一起来，而 Dudovich et al. 2006、Purschke et al. 2023 则展示了 HHG 边带可作为相干控制的"波混频探针"。**研究动机** 由此被精确定义为：利用固体 HHG 的亚周期门控特性，把红外 BSV 的非经典统计转写到短波长边带，进而开辟短波长量子态工程这一全新方向。
 
 ## 研究方法（Methods）
 
-论文的理论框架建立在以下几个关键要素之上：(1) **广义密度矩阵分解**：以驱动光频率 ω 的 Positive P 表征 $P_ω(α, β^*)$ 展开初始联合光-物质密度矩阵（Eq. 1），利用 Glauber 相干态 $|α⟩, |β⟩$ 的线性叠加来表示任意量子光态。(2) **半经典近似下的分解**（Eq. 5）：电子波函数由半经典含时薛定谔方程 $i\hbar \partial_t |φ_α⟩ = H_α |φ_α⟩$ 描述，光场部分 $|χ_α⟩ = |α_ω + χ_ω(α)⟩ ⊗_{q=2}^{q_cutoff} |χ_{qω}(α)⟩$，其中 $χ_q(α) = -iN \sqrt{q} ε^{(1)} \langle d_α^{(qω)}⟩$ 由 Lewenstein 等的强场近似（Strong-Field Approximation, SFA，ref [8]）计算。(3) **中心公式**：对电子自由度求迹后得到发射光密度矩阵（Eq. 8，论文最核心结果之一），进而得到 Glauber-Sudarshan P 表征与 Husimi Q 表征在谐波频率 $qω$ 上的表达式（Eq. 9，$P_{qω}(χ_{qω}) = J(χ_q) · P_ω(α(χ_q))$，Jacobian $J(χ_q)$ 为半经典响应函数 $χ_q(α)$ 的相空间变换雅可比）。(4) **两个具体示例**：第一为"压缩相干光驱动"——使用式 (10) 的 Husimi 表征，强场近似求 $χ^{(q)}(α)$，推出谐波四阶矩的解析公式（Eq. 11）；第二为"明亮压缩真空驱动"——采用截断谐振子势模型（$I_p = 11\hbarω$, $U_p = 9\hbarω$,23 次谐波），利用 Lewenstein et al. 1994 的解析 $χ^{(q)}(α)$（ref [8] Eq. 22）计算谐波 Husimi 分布。(5) **物理参数与近似**：研究波长800 nm，强度 $2×10^{14}$ W/cm²（相干光情形）或 $1.25×10^{15}$ W/cm²（BSV 情形）；明确假设量子模式对电子的反作用可忽略（无光子发射反冲）、量子相位前因子 $e^{-iζ(α)}$ 在 $P_ω$ 采样区域内近似平直。
+**实验架构**：使用 Coherent Legend 钛宝石放大器（50 fs, 1.6 mJ, 1 kHz），其中 1.3 mJ 泵浦 LightConversion TOPAS 光参量放大器，通过 Type-II AGS 晶体差频产生 3.35 μm 中红外相干驱动光。剩余 300 μJ 在两片 2 mm BBO 晶体（Type I SPDC 串联）中产生 BSV，经 50 nm 带通滤波（中心 1.6 μm）和 RG1000 抑制可见光，得到近单空间-频谱模的 BSV 源（Pérez et al. 2014 方案）。两束光通过定制双色介电镜共线耦合进入 200 μm 厚的 ZnO(0001) 单晶。中红外光斑 40 μm, BSV 光斑 70–100 μm, 强度约 0.3–0.5 TW/cm²。
+
+**信号采集与统计提取**：紫外输出用 CaF₂ 棱镜 + CaF₂ 透镜 (f=250 mm) + 单光子级光电倍增管（Hamamatsu H9305-01）的自制光谱仪进行**单脉冲（single-shot）探测**——这是关键创新点。中红外脉冲能量通过 PbSe 光电二极管、BSV 通过 InGaAs 光电二极管同步采集，用 12-bit DAQ 与 boxcar 积分器关联。三束信号单脉冲同步，用 PMT 增益 × 量子效率（~50–80%）校准到绝对光子数/脉冲。归一化二阶关联函数 g⁽²⁾(0)=〈n²〉·〈n〉⁻² − 1 在单探测器模式下对单时空模有效（Christ et al. 2011 论证）。
+
+**理论模型**：提出**双通道相互作用哈密顿量** Ĥ_int = iℏγ(ε₁ â₀ â_sb† + ε₂ â₀† â_sb† + h.c.)，第一项描述从相邻低阶 HHG 吸收一个边带光子后再发射一个边带光子（即和频通道），第二项描述从更高阶 HHG 与扰动场共同贡献一个边带光子（差频通道）。初态 |ξ⟩₀ ⊗ |ε₁⟩₁ ⊗ |0⟩_sb ⊗ |ε₂⟩₂（压缩真空+两个相干高次谐波态+真空）演化后通过 Bogoliubov 变换解析得到 ⟨n_sb⟩、〈(ΔX)²〉、〈(ΔP)²〉对 BSV 相位 φ 与高次谐波相对相位 (θ₁−θ₂) 的依赖关系。
 
 ## 主要发现与核心结论（Main Results）
 
-论文给出三大核心结果：(1) **普适公式**（Eq. 8 + Eq. 9）：HHG 发射的量子态完全由驱动光的 Positive P 表征与半经典非线性响应函数 $χ_q(α)$ 通过相空间映射（含 Jacobian）确定。这意味着只要知道 $χ_q(α)$（可用 SFA 或数值 TDSE 计算），就可预言任意量子光驱动下的谐波量子态。(2) **压缩相干光驱动下的解析结果**（Eq. 11，论文第二个中心结果）：谐波四阶方差 $ΔX̂_θ^2 = 1 + 4ε^{(1)4} N^2 q (⟨d_{γx}^{(qω)}⟩ cosθ + ⟨d_{γy}^{(qω)}⟩ sinθ)^2 (A_{qω}^2 (e^{-2r}-1) + B_{qω}^2 (e^{2r}-1))$。关键发现——绝对压缩（variance < 1）仅在有限泵浦压缩 $r$ 范围内实现：超过此范围，反压缩象限的涨落会映射到谐波的两个象限，使谐波进入"压缩热光子统计"。物理图像清晰：**短轨迹下，电离时刻最接近场峰的高次谐波继承了泵浦在峰处的最小涨落**，因此高次谐波（QEF，quantum-enhanced factor > 1）可被压缩；对相位压缩泵浦则相反——所有谐波场峰附近为最大涨落，没有一个谐波实现压缩。(3) **BSV 驱动下的奇特量子态**：Husimi 分布 $Q(α(χ))$（图3b）显示23 次谐波量子态与泵浦态完全无关——围绕原点 $χ_x = χ_y = 0$ 出现一个尖锐窄峰（来自大部分低强度相干成分因太弱而不产生高次谐波），其余分布形成"winding trail down a mountain"（下山路径）的形态：路径宽度与 $|α_x|$ 成正比，随 $|α|$ 指数下移（因 $|χ|$ 随 $|α|$ 指数增长），并在复平面绕圈（因 $χ$ 在复平面内随 $|α|$ 循环）。此结构强烈依赖于半经典非线性响应函数的具体形式，可通过材料与光束参数工程调控。结论性陈述：作者论证 HHG 是 QFC 的天然候选机制，可"将压缩态从 NIR 转换到 XUV、从 MIR 转换到 UV"，为"亚散粒噪声阿秒计量"打开大门。
+**（1）边带生成与统计转导**：当中红外驱动（3350 nm, 300 nJ, 0.5 TW/cm², 80 fs）单独入射 ZnO 时，**只产生奇次谐波**（210 nm, 5.9 eV 截止）（图 1d）；叠加 30 nJ 的 1600 nm BSV 后，**在偶次谐波位置出现边带**（图 1e），即 BSV 作为扰动打开了 σ(t+π/ω) = −σ(t) 的时间平移对称性。
+
+**（2）超泊松统计的实验定量化**：BSV 自身的 g⁽²⁾(0) = 2.24 ± 0.34（重尾分布，相干态预期为 1）（图 1c）；中红外泵的 g⁽²⁾(0) = 1.05 ± 0.02（图 1b）。**关键定量结果（图 2）**：高次谐波的 g⁽²⁾(0) < 1.4（趋于 1，相干态行为），而**边带的 g⁽²⁾(0) > 1.6**——其中低阶边带尤其显著，甚至**可超过 BSV 自身的 g⁽²⁾**。由于发射发生在飞秒脉冲内，g⁽²⁾(τ>0) = 1，故 g⁽²⁾(0) > g⁽²⁾(τ>0)，符合**光子成束（photon bunching）** 的判定标准。
+
+**（3）门控与亚周期转导机制**：仅 ~10 nJ BSV 即可在 ZnO 整段高次谐波谱上产生非泊松梳状光，转换效率极低（约每 10⁹ BSV 光子中仅有 1 个被转写为边带光子）。边带功率**与 BSV 功率呈线性关系**（Extended Data 2），符合 1-光子加/减通道（1-photon addition/subtraction）的波混频图像。
+
+**（4）四分量可被相干调控（图 3 理论预言）**：⟨n_sb⟩ 随 φ 与 θ₁−θ₂ 振荡（与经典相干控制一致）。**两个正交分量 X、P 的行为存在显著差异**：当 θ₁−θ₂ = 0 时，P 分量保持最小不确定性（4⟨(ΔP)²⟩=1），产生**最大压缩态（maximally squashed state）**；当两分量相等时进入**超热态（super-thermal state）**——两者分别可用于量子增强成像（Manceau 等 2019）与玻色采样量子计算（Jahangiri 等 2020）。**当转换效率接近 1 时**（理论预言，黄色线），和频通道可保留入射 BSV 的压缩；而当前实验 ~10⁻⁹ 的效率下，得到的是 squashed/thermal 而非 squeezed 态。
+
+**（5）纠缠预言**：模型显示被消耗的扰动场与发射的边带是关联的——对边带光子做投影测量，应在扰动 BSV 中生成相干受控的猫态或 kitten 态（指向 Lewenstein et al. 2021 框架）。
 
 ## 潜在研究方向（Future Directions）
 
-论文明确指出几个待解决问题与限制：(1) **"相干态→相干态"映射的实验验证尚缺失**：作者坦承 "$HHG maps a coherent driver state to a coherent harmonic state$" 是广泛使用但"未在实验中验证的假设"，在发射体相关联（如凝聚相或多体系统）时可能不成立。(2) **绝对压缩的有限区间限制**：Eq. 11 表明存在最优泵浦压缩 $r$，超过此值后绝对压缩消失且谐波变为压缩热态——这意味着实际可达到的压缩度受材料响应（$A_{qω}, B_{qω}$ 系数）严格限制，需要精心选择泵浦强度与波长。(3) **半经典近似对强场的适用边界**：所有结果都假设量子模式对电子的反作用可忽略（无光子发射反冲、自发辐射时间远长于相互作用）。当 HHG 进入强相对论性 regime（ref [5]）或强电子关联 regime（ref [27] Pizzi et al.），该近似会失效。(4) **三个开放前沿方向**（作者明确点名）：(a) BSV 驱动 HHG 的实验实现需结合"最有效的 HHG 几何"（如 hollow-core 光纤，ref [51]）与"桌面级压缩真空 beamline"（ref [52]），目前文献已预言但未观测；(b) 气体 HHG 之外的体系（液体、固体、moiré 等）下量子 HHG 态的结构；(c) 量子 HHG 与阿秒计量学结合的"超灵敏测量"路径（如压缩 XUV 是否能突破标准量子极限）。(5) **方法学展望**：Eq. 9 表明，谐波量子态对半经典响应函数 $χ_q(α)$极度敏感——意味着 HHG 量子态本身可作为"材料响应的量子探针"，特别是在多体关联体系中具有应用潜力（与本研究团队后续工作如 ref [27]-[28] 中"通过 HHG 产生纠缠 XUV 光子对"形成连贯研究脉络）。
+**直接开放问题**：（1）**边带的时域结构**——作者直言时域表征"很可能揭示一串阿秒至几飞秒的非经典光脉冲串"，但尚未直接测量。HHG 门控在每个半光学周期内可能截取亚周期扰动，如何用 STREAK 或 attosecond 开关技术进行时域重建是直接的下一步。（2）**单模压缩 XUV 是否可达**——目前 ~10⁻⁹ 的低转换效率使"压缩"被"压扁（squashed）"所取代；提升转换效率 ~10 个数量级（通过谐振腔增强或更长有效介质）方能进入 Vollmer et al. 2014 所预言的压缩上转换区。（3）**光子统计学力（photon-statistics force）的实验验证**——Even Tzur 等（2023）预言的电子在量子统计场中的受力，目前通过 in-situ HHG 边带统计提供了一条测量路径，但具体实验链路尚未建立。
 
----
+**方法局限与注意事项**：（a）目前依赖单探测器 g⁽²⁾(0)，需要时空模数 ≈ 1 的近似，对 BSV 模数的进一步诊断将提升精度；（b）ZnO 选择使数据集中在 DUV/VIS 而非 XUV——延伸至更短波长需要替换材料系统（MgO, SiC, 或气体-固体混合）；（c）模型对 HHG 偶极子的"门控"做了半经典近似，**电子-空穴对的量子化** 与 **强场电子-量子光联合统计** 的完整描述（Stammer 2023 路线）仍是开放理论问题；（d）作者在 Acknowledgements 中感谢 Paul Corkum 的讨论，提示宏观实验设计中的相干控制思想受到 Corkum 三步模型启发，未来在 attosecond 当前与 THz 辐射（Kizmann et al. 2019; Jana et al. 2024）方向的扩展自然衔接。
 
-**调研笔记已保存至**: `/tmp/arxiv_2311.11257_full.txt`（35 KB 完整 PDF 提取文本）
-**关键价值判断**: 这篇论文是"量子光驱动 HHG"领域的**核心理论奠基作**之一（与2020 Gorlach Nat. Commun.、2023 Pizzi Nat. Phys.、2023 Even Tzur Nat. Photon. 共同构成 Technion 团队的完整理论链），其 Eq. 8 + Eq. 9公式具有**教科书级别**的普适性。引用数 40 表明已被学界快速接受。对课题 general-bsv-driven-hhg-quantum-20260726 而言，这是"量子态如何传递"这一核心问题的权威回答。
-
-
-## 2505.22536
-
-# Paper: 2505.22536
-
-> 深度阅读未执行
+**应用前景**：量子增强短波长计量学（对灵敏度优于标准量子极限）、XUV 单光子成像、短波长量子信息网络（替代成熟的红外量子光子学方案）三方向被作者明确提出；其中 XUV 量子比特的相干控制能力相较红外可获得更高的相位灵敏度与更低的热噪声-探测噪声比（Adams et al. 2013; Tamasaku et al. 2011 提出但未直接实现）。
 
 
+## 2308.15087
 
-## 2505.22536
+论文已完整阅读。这是一篇发表在 Nature Physics（2024）的综述短文（3页），作者 Philipp Stammer（ICFO），主题是量子光场驱动 HHG 时半经典模型的局限性。下面整理结构化笔记。
 
-资料齐全。下面整合成结构化笔记输出。
+══════════════════════════════════════════════════════════
+论文深度笔记 — arXiv:2308.15087
+══════════════════════════════════════════════════════════
 
-注意：作者列表来自 HTML 与 arXiv 一致：Boroumand, Thorpe, Bart, Wang, Purschke, Vampa, Brabec（Ottawa 大学 + NRC Joint Attosecond Science Lab），论文 2025-05-28 上传，分类 quant-ph，无 DOI，无期刊记录。
+## 调研主题
+来源：[arXiv:2308.15087 — On the limitations of the semi-classical picture in high harmonic generation](https://arxiv.org/abs/2308.15087) (DOI: 10.1038/s41567-024-02579-w, Nature Physics 20, 1040-1042, 2024)
 
----
+## 研究问题（Research Question）
+- 论文的核心问题是**重新审视"高次谐波产生（HHG）的半经典图像在量子光学框架下是否仍然成立"**。过去近三十年，HHG 的理论、实验与图像（3-step 模型、有质动力势 Up、SFA 鞍点近似）都建立在"驱动光是相干激光、具有明确相位与大幅值经典电场 E_cl(t)"这一前提之上。
+- 作者明确提出中心论点：当驱动光从相干态 |α⟩ 推广到**非经典光场**——特别是**亮压缩真空态（BSV, |ξ⟩）与光子数态 |n⟩**——由于二者均具有 ⟨E_Q⟩ = 0 的零均值电场，半经典图像（依赖电场振幅 E_cl(t)）不再适用，必须用场的强度 ⟨E_Q²⟩ 而非 ⟨E_Q⟩² 来描述强场动力学。
+- 由此衍生的关键子问题：(i) 高次谐波产生是否必须有非零的驱动电场振幅？(ii) 如果场振幅消失但强度仍在，强场物理应基于什么物理量？(iii) 半经典图像的失效边界在哪里？
 
-# 论文结构化笔记 — Boroumand et al., "Quantum engineering of high harmonic generation" (arXiv:2505.22536)
+## 研究背景（Background）
+- HHG 是强激光与物质相互作用产生的极端非线性频率上转换过程，是阿秒脉冲产生的物理基础（Krausz & Ivanov 2009；Corkum & Krausz 2007）。3-step 模型（Corkum 1993）：隧穿电离—电场加速—复合辐射，构成半经典直观图像；Lewenstein 等1994 的 SFA 半经典理论进一步数学化该图像。
+- 早期量子化工作（Gorlach et al. 2020 Nat Commun；Lewenstein et al. 2021 Nat Phys；Stammer et al. 2023 PRX Quantum）证明：若驱动场为相干态 |α⟩，可通过位移算符 D(α) 将相空间参考系平移到真空，恢复半经典形式 H_I(t) = -d[E_cl(t) + E_Q(t)]，且谐波模仍为相干态，振幅正比于偶极矩期望值的傅里叶变换。
+- 但2023 年 Gorlach 等（Nature Physics 2023，"High-harmonic generation driven by quantum light"）首次理论预言：用 BSV 或光子数态驱动 HHG 是可行的，因为这些态虽有 ⟨E_Q⟩=0，但场强度 ⟨E_Q²⟩≠0，仍然能驱动谐波辐射——这是直接挑战"必须有 E_cl"的传统观点。
+- 同时 Stammer 2023（arXiv:2309.05010）独立指出光学相位与相干性在 HHG 中的角色转变。这些进展共同构成论文的写作动机：**量子光学与阿秒科学交汇点上的图像更新**（呼应 Ko & Corkum 2023 Nat Phys 的评论 "Quantum optics meets attosecond science"）。
 
-## 元数据
+## 研究方法（Methods）
+- **理论框架**：全量子化 HHG 形式——电子与量子化光场在联合 Hilbert 空间演化，相互作用哈密顿量 H_Q(t) = -d·E_Q(t)（方程 2）；初始场态为 |α⟩（相干态）或 |ξ⟩/|n⟩（非经典态）。
+- **核心算子工具**：位移算符 D(α) 在相空间重置参考系。半经典图像的成立条件 = 存在唯一 D(α) 使 D†(α)|α⟩ = |0⟩，这要求初始态有良好定义的相位 φ = arg(α)。无良好相位（相位不稳定激光的混合态 ρ_|α|、BSV、光子数态）则不存在唯一半经典参考系。
+- **图示方法**：图1 用相空间图对比 (a) 相干态 |α⟩ 有唯一位移 D(α)；(b) 混合态 ρ_|α| 无唯一位移（如 D(αe^{iπ/4}) 等多种可能并存）。
+- **强度 vs 振幅的关键分辨**：经典 I_cl ∝ E_cl² = ⟨E_Q⟩²；量子 I ∝ ⟨E_Q²⟩。对相干态 ⟨E_Q⟩² ≈ ⟨E_Q²⟩ 近似相等，故半经典成立；对 BSV/光子数态 ⟨E_Q⟩² = 0 但 ⟨E_Q²⟩ ≠ 0，差异决定有质动力势的正确表述。
+- **方法论特点**：这是一篇**观点/综述短文**（3 页，arXiv v3 标注"slightly extended version"），不是原创方法论文，而是把作者近期系列工作 + 同领域量子光学驱动 HHG 文献串成一条逻辑链，明确指出半经典图像的失效条件。
 
-来源：https://arxiv.org/abs/2505.22536
+## 主要发现与核心结论（Main Results）
+- **核心论断**：半经典图像（依赖 E_cl(t)）在两类情况下失效——(i) 驱动场是 BSV 或光子数态等无相位的非经典光场；(ii) 即便是经典态，只要是相位不稳定的激光混合态 ρ_|α|，也无唯一定义的半经典参考系。
+- **关键物理量替换**：驱动 HHG 的关键物理量不是场振幅 E_cl，而是**场强度 I ∝ ⟨E_Q²⟩**；相应的有质动力势需重定义为 U_p ∝ ⟨E_Q²⟩（而非 U_p = E_cl²/(4ω²) = ⟨E_Q⟩²/(4ω²)），才能保证在 E_cl=0 时仍有非零 U_p，自洽地解释为何这些场仍能产生高次谐波。
+- **新的量子优势机会**：(a) 场涨落作为额外自由度可调节 HHG 截止能量（Gorlach et al. 2023 已预言扩展的截止谱）；(b) 可用于整形电子连续态轨迹（Even Tzur et al. Nat Photon 2023 的"光子统计力"概念）；(c) 与量子态工程（HHG 产生薛定谔猫态 Stammer 2023、Lewenstein 2021、Pizzi 2023、Lamprou 2023）结合，可用于量子信息处理。
+- **图像范式转换**：半经典图像的局限并非仅出现在非经典光场，也出现在任何 ⟨E⟩=0 的态；这意味着用场振幅（而非场强度）讨论强场动力学的整套语言需要修正，连接此前不相关的"量子光学"与"阿秒科学"两个领域。
 
-- Title: **Quantum engineering of high harmonic generation**
-- Authors: N. Boroumand, A. Thorpe, G. Bart, L. Wang, D. N. Purschke, G. Vampa, T. Brabec
-- Affiliations: Department of Physics, University of Ottawa, Canada + Joint Attosecond Science Laboratory, NRC Canada
-- arXiv ID: 2505.22536v1；Primary category: quant-ph
-- Published / Updated: 2025-05-28（无 DOI，无期刊记录）
-- 配套附录 (Supplement): ref [23] 同上 arXiv 页
+## 潜在研究方向（Future Directions）
+- **半经典图像失效边界的定量刻画**：哪些混合态、非经典态的"相位混合程度"会真正破坏半经典图像？是否需引入类似"相干度"或"场涨落阈值"的判据？论文未给出具体度量。
+- **重定义 U_p 与截止定律的实验验证**：需要实验上用 BSV 或光子数态驱动 HHG，直接测量谐波截止位置是否与 ⟨E_Q²⟩（而非 ⟨E_Q⟩²）的标度律一致，这是对论文论断最直接的检验（论文指出 Gorlach 等已理论预言扩展截止，但实验尚未完成）。
+- **与"光场涨落调控电子动力学"的深度耦合**：Even Tzur 等提出的"光子统计力"如何定量影响电子轨迹？场涨落能否用作 HHG 光谱学的新探针？需要在全量子化多模场 + 多电子能带结构下求解。
+- **量子态工程与量子信息应用**：利用 HHG 在非经典光驱动下产生高光子数纠缠态、薛定谔猫态（Stammer/Lamprou/Pizzi 等），是否能构造可实用的阿秒量子信息处理协议？论文将其列为"exciting new avenues"但未展开具体方案。
+- **局限性/注意事项**：(1) 论文是观点文章（3 页），未给出新数学推导或新数值结果，主要价值在概念框架；(2) 全部分析针对原子模型（H原子或类氢），未讨论多带固体 HHG 在非经典光驱动下的类似问题；(3) 当前实验上产生足够高强度 BSV/光子数态仍困难，预言的物理图像尚未直接观测；(4) 对"经典-量子边界"的刻画仅是定性陈述，未提供严格的失效判据（如半经典近似的有效阶数）；(5) 3-step 模型在非经典光下完全失效还是部分修正？电子"轨迹"概念是否仍可用？——这是值得追问的开放问题。
 
----
+══════════════════════════════════════════════════════════
+元数据速查
+══════════════════════════════════════════════════════════
+作者: Philipp Stammer（ICFO, 巴塞罗那）
+首次提交: 2023-08-29 / v3 更新: 2024-09-12
+期刊: Nature Physics 20, 1040-1042 (2024) — 评论/观点类
+引用数: 19 (Semantic Scholar，截至2026-08) / influential: 0
+类别: quant-ph (primary), physics.atom-ph
+全文链接: https://arxiv.org/abs/2308.15087 / PDF: https://arxiv.org/pdf/2308.15087
+引用关键文献: [9] Gorlach et al. Nat Phys 2023 (quantum-light HHG); [14] Even Tzur et al. Nat Photon 2023 (photon-statistics force); [13] Stammer et al. PRL 2024 (entanglement/squeezing in HHG)
+课题匹配: general-bsv-driven-hhg-quantum-20260726 — 高度匹配（核心讨论 BSV 与光子数态驱动 HHG 时半经典图像的失效）
+══════════════════════════════════════════════════════════
+
+
+## 2305.16831
+
+论文已深度阅读完毕，以下为结构化笔记。
+
+【论文基本信息】
+- 标题: Motion of charged particles in bright squeezed vacuum
+- 作者: Matan Even Tzur, Oren Cohen
+- 单位: Solid State Institute and Physics Department, Technion-Israel Institute of Technology, Haifa 3200003, Israel
+- 发表: 2023-05-26, arXiv:2305.16831, 共 11 页（含正文 8 页 + 参考文献 2 页）
 
 ## 研究问题（Research Question）
 
-本研究的核心问题是：**在保留高次谐波产生（HHG）的强场非线性转换效率优势的同时，能否利用一个弱量子微扰（bright squeezed vacuum, BSV）将非经典量子光学性质"按需注入"到 XUV 高次谐波侧带中**？作者把这一目标命名为"量子侧带高次谐波产生（quantum sideband high harmonic generation, QSHHG）"。
+论文的核心问题是：在经典电磁场中成立的"电子抖动运动（quiver motion）"和"有质动力能（ponderomotive energy）"概念，能否被推广到量子光场——特别是明亮压缩真空（Bright Squeezed Vacuum, BSV）——驱动的场景。具体而言：当驱动光场为 BSV 时，相干电场振幅 ⟨Ê⟩=0，电子的位移 ⟨x̂(t)⟩=0，但电场仍有涨落 ⟨Ê²⟩≠0，此时电子究竟如何运动？经典公式 U_p^(c) = e²E_a²/(4mω²) 是否仍然有效？论文试图定义并推导出"量子有质动力能 U_p^(q)"，并证明其与经典形式完全等价。
 
-论文聚焦三个具体子问题：（1）QSHHG 中谐波侧带与量子微扰模式之间的纠缠结构如何？（2）什么条件下对其中一个模式做投影测量能在另一个模式上产出特定非经典态（如 heralded 单光子态、Schrödinger cat 态、photon-added 压缩真空态）？（3）固体介质相对于原子气体在多大程度上"放大"了 QSHHG 转化效率，以及为何经典驱动场与弱 BSV 的协同可以成为可扩展到 XUV 的量子光源？
+第二个核心问题是：BSV 驱动的束缚电子能否发生隧穿电离？其亚周期（sub-cycle）动力学与相干态驱动有何本质区别？这些动力学又如何影响高次谐波产生（HHG）与非线性 Compton 散射？
 
 ## 研究背景（Background）
 
-经典 HHG 在阿秒科学中的地位早已确立：原子在强激光下的电离–加速–复合三步图像（Krausz & Ivanov 2009；Lewenstein 1994；Corkum 1993）和它在气体、固体中的延展（Ghimire 2011；Goulielmakis & Brabec 2022）使 XUV 相干辐射源成为阿秒光谱的核心。
+经典理论中，激光驱动的自由电子在电场中以驱动频率振荡（quiver motion），其周期平均能量即有质动力能 U_p，它在强场物理中是衡量光-物质相互作用强度的关键标度。Keldysh 参数 γ = √(I_p/2U_p)（I_p 为电离势）决定多光子电离与隧穿电离的过渡；U_p 也是 Corkum-Lewenstein HHG 三步模型的基础，决定高次谐波截止能量。
 
-近五年量子光学化 HHG 成为前沿：Gorlach 2020、Gombkötő 2021、Tsatrafyllis 2019、Rivera-Dean 2021/2022、Lewenstein 2021 讨论了光场与谐波之间的纠缠、Schrödinger cat 态、above-threshold ionization 中的光-电子纠缠，以及强场耗尽下驱动场的 squeezing（Stammer 2023/2024）。
+近年实验表明，BSV 即使相干振幅为零也能诱导物质中的电子运动：例如扰动非线性光学过程（Spasibko 2017）、光致电离（Heimerl 2022）等被观察到；而扰动极限之外，已有理论预言 HHG（Gorlach/Even Tzur 2022）、非线性 Compton 散射（Khalaf & Kaminer 2023）由 BSV 驱动会出现新颖现象。然而，quiver motion 与 U_p 的经典表述在 ⟨E⟩=0 情形下失效，量子光学强场物理缺乏一个统一的能量标度。
 
-**用 BSV 完全替代经典驱动** 的路线（Even Tzur 2023 Nat Photon；Even Tzur & Cohen 2024 LSA；Heimerl 2024 Nat Phys；Rasputnyi 2024 Nat Phys）虽然预言了 cutoff 之外谐波、更高损伤阈值和 BSV 光子统计对电子发射的影响，但尚未证实非经典性质；将纯量子光驱动延伸至 XUV 仍受限于亮度。
-
-**本工作的出发点是近期实验 [Lemieux et al. 2024 arXiv:2404.05474] 用一个 BSV 扰动经典 HHG，产生"超泊松光子聚束"的 QSHH**。作者指出此前实验未发现 QSHHG 中的非经典特征，但是否在原理上可达仍未有定论；同时发展量子信号源的愿望（更高信息密度、更低探测噪声）要求一个可扩展到 XUV 的可控量子过程。本工作通过闭式解析理论回答"在什么条件下非经典性可以实现"。
+论文正是在这一背景下，将经典强场物理的基石（quiver 与 U_p）推广到量子光场范畴，为 BSV 驱动的强场现象提供共同的理论基础。
 
 ## 研究方法（Methods）
 
-**理论框架**：将 Lewenstein 1994 半经典三步模型的"薛定谔方程部分"保留，而把激光场做量子化处理，对谐波发射算符和强场相互作用都使用算符，从而得到 QSHHG 的闭式光子波函数
+（1）数值方法：作者采用 (t,t') 方法（Peskin & Moiseyev, JCP 1993）求解含时薛定谔方程。初始电子波函数为 1D 高斯波包 |g⟩∝exp(−x²/4σ₀²)，光-物质哈密顿量 Ĥ = p̂²/(2m) + x̂·Ê_Ω(t)。对光场部分求部分迹（partial trace），得到电子约化密度矩阵 ρ^(e)_{x,x'}(t)，其对角元即 |ψ_e(x,t)|²。
 
-$$|\varphi_0(t)\rangle \approx |\varphi_h(t)\rangle|\varphi_m(t)\rangle = \hat{D}_h\hat{S}_m|\varphi_0(t_0)\rangle$$
+（2）三组对照计算：分别令电子与（i）单模电磁真空 |0_Ω⟩、（ii）相干态 D̂(α)|0_Ω⟩、（iii）单模压缩真空 Ŝ(r)|0_Ω⟩ 耦合，对比 ⟨x̂(t)⟩ 与波包宽度 ΔX² = ⟨x̂²⟩−⟨x̂⟩² 的时间演化。
 
-其中 $\hat{D}_h$ 是经典 HHG 的位移算符，$\hat{S}_m$ 是一个混合模式（含频-频）双模压缩算符，把谐波模式 $\hat a_\kappa$ 与 BSV 模式 $\hat a_q$ 耦合（系数 $f_\kappa, g_\kappa$ 分别对应差频/和频发射）。初始真空叠加一个单模压缩真空 $|\xi_q\rangle$，参数 $\xi=re^{i\theta}$。
+（3）解析推导：第 SI 节用二阶微扰理论对一般多模压缩光（含偏振压缩光、双色双模压缩光）推导 U_p^(q) 公式；第 SI 节还通过准概率分布方法（Eqs. 3–5）得到电子密度矩阵的积分表示。
 
-**闭式推导技巧**：对 $\hat{S}_m|\xi_q\rangle$ 做正规序展开，得到以 $Z_\kappa \equiv f_\kappa - g_\kappa \tanh(r) e^{i\theta}$ 和 $\bar\beta = \beta/(1+\sum_\kappa|Z_\kappa|^2)$ 为系数的紧凑多模波函数（Eq. 5），适用条件 $r\gg 1$、$|Z_\kappa|^2\ll 1$。
-
-**原子气体 vs 双带固体**：通过对应 $\mathbf p\to\mathbf k,\;E_0+\mathbf p^2/2m\to E_g+\mathbf p^2/2m_*,\;\mathbf p/m\to\mathbf v(\mathbf k),\;\mathbf d(\mathbf p)\to\mathbf d(\mathbf k)\approx d_0 E_g/\varepsilon(\mathbf p)$，把原子公式直接搬到双带半导体；从而可在 ZnO 中计算 QSHHG，其中 $m_* \approx 0.25 m$，$E_g=3.4$ eV，$d_0=7\times 10^{25}$ 单位。
-
-**相位匹配 / 宏观发射**：连续极限下 $\sum_i\to N_0\int d^3x$，$\sum_\kappa\to V/(2\pi)^3\int d^3k$，得到宏观修正 $c_k^2 = (N_0 w_k l_i)^2/(2c)V$，以及 QSHHG 谱密度 $d\langle\hat n\rangle/d\omega_k = c_q^2\cosh^2(r)|\zeta_k|^2$，其中 BSV 模体积 $(2\pi/\Delta q)^3=(2\pi)^3\Delta\lambda_q/(w_q\lambda_q)^2$。
-
-**有效 QSHH 模式**：实验测一个频率区间内所有平面波模式的总光子数。定义有效算符 $\hat a_N = (1/|\zeta_N|)\sum_{\kappa\in N}Z_\kappa^* \hat a_\kappa$，把多模波函数 (Eq.5) 改写成可分离的"压缩真空+双模产生"乘积形式 $|\varphi_m\rangle = \prod_N (\mathfrak N_N/\sqrt{\cosh r})\exp(|\zeta_N|\hat a_N^\dagger\hat a_q^\dagger)\exp(-\beta_N\hat a_q^{\dagger 2})|v_N v_q\rangle$（Eq. 22），这是后续分析的统一形式。
-
-**投影测量**：（III.3）对量子模式 $|l\rangle_q$ 投影，得到谐波模式叠加态 $|\varphi_N\rangle$；其限域偶/奇导致只允许偶或奇占据，由 Eq. 26 的有限求和给出；（III.4）反向投影得到量子模式为 photon-added squeezed vacuum 态。
-
-**数值验证**：所有近似式（Eqs. 25-33）在 $r\gg 1$、$l_\eta\gg 1$ 下与精确数值符合 "excellent"，甚至在小参数下也"surprisingly decent"。结合实验 [Lemieux 2024, 22]：ZnO, $\lambda_0=3.2\;\mu$m, $I_0=5\times 10^{11}$ W/cm², $r=13.6$, $\sinh^2 r\approx 10^{11}$。
+（4）束缚电子模型：采用 Fleischer & Moiseyev（PRA 2005）的模型 Xe 原子势，支持两个束缚态（E_g = −0.44 a.u.，E_e = −0.14 a.u.）、一个弱束缚态（≈ −0.00014 a.u.）和连续谱，对基态 |g.s.⟩_{Xe} 在 BSV 驱动下做含时演化，提取 ρ_{gg}、ρ_{ee} 与电离速率。
 
 ## 主要发现与核心结论（Main Results）
 
-**1. 气体 vs 固体 QSHHG 的敏感度之比（Fig. 1, Eq. 23）**：BSV 扰动与 HHG 之比
+（1）自由电子的"宽度振荡（width oscillation）"：图 1(a–c) 显示，在压缩真空驱动下，⟨x̂(t)⟩_SV ≡ 0（无位移），但波包宽度 ΔX² 在真空自由扩散基础上叠加周期性的拉伸-压缩振荡（图 1d）。这是 BSV 驱动电子的标志性特征——相干位移消失，但量子涨落仍驱动集体振荡。
 
-$$R \propto |\sigma_q|^2 \propto \frac{I_0}{\omega_0^2}\cdot\frac{1}{\omega_q^3 m_*^2}\propto \frac{I_0}{8\omega_0^5 m_*^2}$$
+（2）量子有质动力能与经典等价：数值（图 1e）与解析（Eq. 2）均表明，电子周期平均动能 U_p^(q) 恰好等于同强度相干态的经典有质动力能 U_p^(c)：
+U_p^(q) = (2e²I_vac)/(mε₀c·4Ω²)，其中 I_vac ≡ cℏΩ N_SV/V，N_SV = sinh²(r)。
+该结论对任意多模压缩光（含偏振压缩、双色双模压缩真空）成立。附带结果：压缩真空引起微小的电子质量重整化（非相对论下可忽略）。
 
-对 $\omega_q=2\omega_0$。由于固体有更低 $m_*$ 和更低有效驱动频率，固:气比含因子 $4^7 \approx 16384$，不被气体 200 倍强度提升抵消，Fig.1 显示固:气 QSHHG/HHG 差距 ~3 数量级，固体对量子扰动"敏感得多"。
+（3）开/闭轨迹的类比：将自由电子在 BSV 中的"宽度轨迹"按释放时刻 t₀ 分类——若 t₀ 处于 0<t₀/T<0.25（反压缩峰值之后），宽度轨迹为闭合的（最终回到自由扩散宽度）；若 0.25<t₀/T<0.5（最大压缩之后），则为开放的（始终宽于自由扩散）。这与经典相干态驱动下"位移轨迹的开/闭"完全类比，因此 HHG 与重散射 ATI 的贡献仅来自闭轨迹（t₀/T ∈ (0, 0.25)）。
 
-**2. 转化效率的预测（Fig. 1 b, d）**：ZnO N=8 处把 $10^{11}$ 个 BSV 光子转换为 $\sim 10^2$ QSHH 光子，效率 $10^{-9}$。改用 Bi 类低有效质量材料 ($m_*/m\approx 0.002$) 加 $10\;\mu$m 驱动，可提升效率 $\sim 5\times 10^6$，达 $\approx 0.005$；进一步增大光束半径和纳米结构增强态密度，效率可望接近 1。这一发现意义：**QSHHG 不需要把 BSV 作为唯一驱动**，故对量子源亮度要求远低于纯量子光 HHG 路线。
+（4）束缚电子隧穿电离的亚周期动力学：模型 Xe 在 BSV 驱动下基态与第一激发态出现 Rabi 类振荡（图 3b），整体占据数线性衰减（时间平均隧穿速率）；电子在两侧对称隧穿（图 3c），与相干态驱动的单向隧穿截然不同——这是 ⟨x̂⟩=0 的直接后果。最关键的是电离速率在正负之间快速振荡（图 3d），即电子在电离与复合之间快速切换，且切换节律与 BSV 电场涨落幅度同相位。这意味着谐波发射（HHG）应当发生于"复合脉冲"期间。
 
-**3. 两模式概率分布（Fig. 2-3, Eq. 25）**：有效 QSHH 光子分布 $P(m)\approx (2m-1)!!/(2m)!! \cdot [2\langle\hat n\rangle_N \tanh^2 r]^m / (1+2\langle\hat n\rangle_N)^{m+1/2}$，体现偶-偶/奇-奇的棋盘式纠缠。低转化效率下，单 QSHH 模式的 $g^{(2)}>1$、quadrature 无 squeezing 或 Wigner 负性——非经典性被 trace-out 抹掉（图 3）；但多模纠缠结构（图 2：偶-偶和奇-奇才被占据；多模呈高维"棋盘"）被识别为可利用资源。
-
-**4. 对量子模式投影 (III.3, Eq. 26-28)**：得到谐波模式为有限叠加 $|\varphi_N\rangle = N_\eta(-e^{i\theta})^{l/2}\sum_{m=0}^{l_\eta/2}(-1)^m \alpha_N^{2m+\eta}/\sqrt{(2m+\eta)!}\;|2m+\eta\rangle_N$。其行为随投影光子数 $l_\eta$ 演化：
-
-   - $l_\eta\to 0$：$\eta=0$ 时 $|\varphi_N\rangle$ 接近真空数态 ($\Delta X^2\to 1/4, g^{(2)}\to\infty$)；$\eta=1$ 时为单光子态 ($\Delta X^2\to 3/4, g^{(2)}\to 0$)——纯 heralded 单光子态，适合在 XUV 域制备。
-   - $l_\eta\sim 10^9-10^{10}$：对偶宇称叠加态出现 moderate squeezing。
-   - $l_\eta\to\infty$：所有 $g^{(2)}\to 1$，演化为 Schrödinger cat 态（仅含偶或仅含奇光子数），特征为 quadrature 零点附近的反相干涉条纹 (Fig. 4 d)。
-
-   显式公式：$g_N^{(2)} = \coth^2(|\alpha_N|)$ ($\eta=0$)，$g_N^{(2)}=\tanh^2(|\alpha_N|)$ ($\eta=1$)。四元数 $\alpha_N = l_\eta|\zeta_N|^2/(2\beta_N)$。
-
-**5. 对 QSHH 模式投影 (III.4, Eq. 29-33)**：得到 $m$-光子 added squeezed vacuum 态 $|\varphi_q\rangle = N_m\sum_{l=0}^\infty (-1)^l \sqrt{(2l+m)!}/l!\;\beta_N^l |2l+m\rangle_q$。两个关键发现：
-
-   - m=0 时 (Eq. 33 极限)：$\Delta X^2_{1N}(\theta=0)\approx (2m+1)(\cosh r+\sinh r)^2/[4(1+2\langle\hat n\rangle_N)]$，与 $\sinh r$ 主导项，给出具有剩余 $|\zeta_N|^2$ 修正的"最低不确定度压缩态"。文中给出 $\Delta X_1^2 = (1/4)e^{-2r}\simeq 5\times 10^{-13}$ 作为输入态基准，模式混合使其压缩降到 ~$1/16$ 但仍最小不确定。
-   - $g_N^{(2)}(0) \approx 1+2/(2m+1)$ (Eq. 31)，独立于其他参数。m 增加 $\Rightarrow g^{(2)}$ 趋向 1，quadrature 方差增大 (Fig. 5 a-b)。
-   - $m\geq 1$：属 photon-added 压缩真空，已知可用于接近 Heisenberg 极限的相位测量（Anderson 2016 类比，参引 [42]），其宏观性使 homodyne 探测可行，TIPTOE / 非线性光导采样可直接外推到单发探测 [43, 44]。
-
-**6. 整体预言**：QSHHG 在其参数区间内预言与实验 [Lemieux 2024] 的谐波数同数量级——尽管采用闭式近似和粗略相位匹配，模型仍具"order of magnitude predictive power"，可作为后续设计的基线。
+（5）核心论断：BSV 驱动的电子动力学在能量尺度上与同强度相干态驱动等价，但其亚周期结构是噪声驱动的、随机的，这是量子光场驱动的内在特征。
 
 ## 潜在研究方向（Future Directions）
 
-作者在引言与结论中明确点出以下限制和开放方向：
+（1）局限性：模型为 1D、单模量子化辐射模式、非相对论极限。质量重整化在高强度下可能变得显著但本文未触及。模型 Xe 原子的两个束缚态不足以描述真实多电子原子或分子的多通道动力学；准概率解析方法（Eq. 3）本质上是微扰的，对极强压缩或极短波长是否仍需检验。
 
-**（a）多模纠缠与单模化**。文中分析局限于单侧带或两/三模式；真正的 QSHHG 涉及所有侧带与 BSV 的高维纠缠。论文预言了一个"高维棋盘结构"（Fig. 2 类比至 n 个模式），但多模纠缠的定量描述、损耗下的退相干、以及多模式投影方案的可行性是开放课题。结论强调"必须同时探测所有侧带，否则未测模式被 trace-out 退化为混合态、非经典性消失"。
+（2）开放问题——直接应用：作者明确指出本结果对 BSV 驱动的非线性 Compton 散射（Khalaf & Kaminer 2023）和自由电子整形（Di Giulio & García de Abajo, Optica 2020；Gorlach et al. 2020）直接适用，因为这两类相互作用本质都是"自由电子置于压缩真空中"。
 
-**（b）转化效率的瓶颈**。当前 $\sim 10^{-9}$ 远低于产生可测量非经典态的需求。文中通过优化低 $m_*$ 材料 + 长波长激光，理论上限可达 $\sim 0.005$，接近 1 的转化需借助共振超表面、纳米结构、光子态密度增强 [32,33,34] 和改进相位匹配。需要在 BSV 损耗（典型 ~1%）远低于转化效率时才能保证 cat 态宇称守恒。
+（3）开放问题——更广泛意义：本文将强场物理的标准构件（U_p、quiver motion）推广到量子光学领域，因此预期将在以下方向成为基础——量子光-物质纠缠（Stammer, Rivera-Dean, Lewenstein 等 2022 综述）、量子信息处理（光学薛定谔猫态生成，Lewenstein et al. Nat Phys 2021）、以及探索 BSV 中 HHG/ATI 现象的精确机制（特别是"复合脉冲"对应的高次谐波光谱结构）。
 
-**（c）数态分辨能力与实验可达性**。实验数态分辨率限于 $l\sim 10$ ——这足以进入 heralded 单光子 regime（III.3），但完全进入 cat 态 regime 需要保持宇称的损耗低于 $1/10^{10}$。文中 (Fig. 4 d) 详细分析了 $\Delta l$ 引起的 Wigner 条纹抹除：仅测偶数 $\Delta l$ 时平均 $10^{10}$ 仍可保住条纹，否则 100 个数态就把条纹平均掉；探测手段包括 homodyne、on-the-fly 在位测量或 TIPTOE 类技术。
+（4）实验展望：现有 BSV 源（Manceau 2019, Finger 2015 等）已能在扰动非线性光学区间观察到新效应，但要进入非扰动隧穿电离区间需要更高强度/光子数的 BSV 源；本文预言的"亚周期电离-复合脉冲"结构是否能在时域被直接探测，是实验验证的关键挑战。
 
-**（d）ω_q=2ω_0 和 ω_q=ω_0 两种耦合的差异**。文中主结果限于 $f_\kappa$、$g_\kappa$ 在 $\omega_q=2\omega_0$ 主导的三光子过程，明确把同频 BSV 的一阶过程和三次过程的耦合标记为 future research（并在 supplement [23] 给出泛化框架）。
+——备注：参考文献 [11][12] 即作者本人前期工作（HHG driven by quantum light, photon-statistics force），本文是其后续，专注"运动学"层面。
 
-**（e）Coulomb 势与更精确的电子动力学**。文中闭式推导省略了 (i) 吸收 (ii) 激光-谐波相位失配的精确积分 (iii) 库仑势对薛定谔方程的影响，作为进一步精化预测精度的方向。
-
-**（f）补足非经典性探测与 cat 态本体**。作者指出不用宇称分辨，只看 $g^{(2)}(0)\to 1$ 与 quadrature 剩余噪声也能在少光量子边带上辨识 cat 态；提出"用 homodyne 干涉或扩展的 TIPTOE 进行单发测量"。这要求发展 XUV 波段的超低噪声平衡探测技术，目前是工程瓶颈。
-
-**（g）耦合到现有的固态 HHG 平台**。与 Vampa 组 [Nat. Photonics / PRL] 在 ZnO 已有 HHG 平台契合，论文自然路径是把 BSV 注入现有 3.2 µm 中红外源，并通过 Bi 族材料、超表面把 QSHHG 延伸到 VUV-XUV。
+输出已根据要求覆盖五个维度，每个细节均给出不少于三句的实质内容。如需进一步拆解某部分（如 SI 节具体推导细节，或与参考论文 [11][12] 的关系）可继续。
 
 ---
 
-调研主题：arXiv 2505.22536 — Quantum engineering of high harmonic generation
-来源：https://arxiv.org/abs/2505.22536（HTML 版 https://arxiv.org/html/2505.22536）
+# 第 16 轮 writer 修订新增的论文阅读笔记（content.md 严谨性优化配套）
 
-补充：semanticscholar API 当下返回 429，引用次数暂不可获取；后续若需要，可用 `delegate_task` 后台补取 ref-citation 计数。
+> 本节为 2026-08-11 writer 第 16 轮 content.md 严谨性专项优化配套新增的 4 篇 2025 关键量子光 HHG 理论文献的简短阅读记录。完整阅读笔记已合并至本文件 2305.16831/2308.15087/2404.05474/2509.19608/2511.18362 章节（参见上节"四 / 五 / 六 / 七 / 八"——注：上文标签顺序为四 / 五 / 六 / 七 / 八，原 2305.16831 实为 2305.16831 论文位于 §五）。下述记录为申请书 §2.2/§2.4/§2.8 三处引用的 4 篇 2025 关键文献的"使用位置—论证角色"映射。
 
+## 2502.11803（Gothelf, Lange, Madsen 2025，[32] ZnO 晶体 BSV-HHG）
 
-## 2311.11257
+- **阅读日期**：2026-08-10
+- **文献标题**：High-Harmonic Generation in a Crystal Driven by Quantum Light
+- **来源**：arXiv:2502.11803（提交 2025-02），Aarhus 大学 Lange/Madsen 组
+- **核心结论**：把气体 BSV-HHG 框架推广到 ZnO 晶体一维单带模型。提出广义 P 表示的截止律公式 $\gamma_{\rm cutoff} = l_{\max} \cdot \tilde{g}_0 \cdot (\mu_P + 3\sigma_P)$，预言 BSV 驱动下截止阶数因 P 表示分布的高拖尾而显著推高（从相干态的 $n \approx 13$ 推至 $n \gg 33$）。同时给出 $n$ 阶谐波强度公式 $S(n\omega_0) \propto K_n \tilde{g}_0^{2n}/[(n!)^2 2^{2n}] \cdot g^{(n)}(0) \cdot \langle a^\dagger a\rangle^n$，直接显示 $n$ 阶归一化关联函数 $g^{(n)}(0)$ 调制谐波强度。
+- **与课题关联**：本项目 §2.2 实验验证的"机制层对照基准"——Gothelf 2025 的单带 ZnO 预言与本项目多带 TMDC 实验形成"单带→多带"的内在关联。本项目 §2.8 系统化创新层将 Gothelf 2025 与 Wang 2025 [35] 共同列为"单带/紧束缚简化模型"基线。
+- **已引用位置**：content.md §2.2 末段（"Gothelf 等 [32] 近期在 ZnO 一维单带模型上预言：BSV 驱动下截止阶数因 P 表示分布的高拖尾而显著推高（从相干态的 $n \approx 13$ 推至 $n \gg 33$）。同一工作中还预言 $n$ 阶谐波强度受 $n$ 阶归一化关联函数 $g^{(n)}(0)$ 调制。该预言构成 TMDC 多带体系实验验证的机制层对照基准"）；§2.8 系统化层（"Gothelf 等 [32] 与 Wang 等 [35] 在单带或紧束缚简化模型上把量子光推广到晶体/二维材料"）。
 
-已抓取论文全文（16 页 PDF，已转文本35402 字符）。以下为结构化笔记。
+## 2503.15932（Lange, Hansen, Madsen 2025，[33] Mott 激子能区压缩光）
 
----
+- **阅读日期**：2026-08-10
+- **文献标题**：Excitonic Enhancement of Squeezed Light in Quantum-Optical High-Harmonic Generation From a Mott Insulator
+- **来源**：arXiv:2503.15932（提交 2025-03），Aarhus 大学 Lange/Madsen 组
+- **核心结论**：在一维扩展 Hubbard 模型（Mott 绝缘体）的全量子光学 HHG 框架下预言：激子通过双空穴-双占据束缚引入强电子关联，使得压缩光在激子能量（$\omega \approx 15\omega_L$）处出现一个清晰孤立的峰。压缩度的微观起源是电流算符的双时关联函数 $C(t', t'')$。
+- **与课题关联**：本项目 §2.4 强关联体系（1T-TaS₂、$\kappa$-(BEDT-TTF)₂Cu[N(CN)₂]Br 等 Mott 候选）的机制层理论参照——为强关联体系的 BSV-HHG 测量提供"压缩光可在 Mott 激子能区被观测"的国际同行最新理论预言。
+- **已引用位置**：content.md §2.4 中段（"Lange 等 [33] 近期预言 Mott 激子能区（$\omega \approx 15\omega_L$）可出现显著压缩光信号，压缩度由电流算符双时关联函数 $C(t', t'')$ 决定。该预言构成强关联体系 BSV-HHG 测量的机制层理论参照"）。
 
-## 论文元数据
-- arXiv ID: 2311.11257v1（2023-11-19 投稿）
-- 标题：Generation of squeezed high-order harmonics
-- 作者：Matan Even Tzur, Michael Birk, Alexey Gorlach, Ido Kaminer, Michael Krüger, Oren Cohen
-- 单位：Technion–Israel Institute of Technology（Helen Diller Quantum Center）
-- 分类：quant-ph, physics.optics
-- 发表：Phys. Rev. Research 6(3), 2024 年 7 月（ResearchGate 与上海交大报告均确认期刊版本）
-- 关键前期工作（同一团队）：Nat. Phys. (2023) Gorlach et al. (ref [49])、Nat. Photonics 17, 501 (2023) Even Tzur et al. (ref [50])
+## 2502.09427（Even Tzur et al. 2025，[34] 阿秒量子态层析）
 
-## 研究问题（Research Question）
-论文的核心问题是：**当高次谐波产生（HHG）的驱动光场本身是量子光（squeezed coherent light 或 bright squeezed vacuum, BSV）而非经典相干态时，HHG 出射谐波的量子光学态是什么？** 论文进一步追问：HHG 能否像 χ^(2,3) 非线性那样实现「量子频率转换（quantum frequency conversion, QFC）」，即在保留光子量子态的前提下把 NIR/MIR 量子光上转换到目前难以到达的 XUV/UV 谱区。中心论点是：HHG 的量子态可以通过经典非线性响应函数 χ_q(α) 与泵浦的 Positive P 表示 P_ω(α, β*) 的卷积严格写出（Eq. 8/9），从而揭示出射谐波对泵浦量子结构的继承与重塑。
+- **阅读日期**：2026-08-10
+- **文献标题**：Measuring and controlling the birth of quantum attosecond pulses
+- **来源**：arXiv:2502.09427（提交 2025-02），Technion（Even Tzur / Cohen / Dudovich 等）
+- **核心结论**：双色场气体 HHG 方案（强 800 nm 相干 + 弱 1600 nm BSV 扰动），通过 4-缝亚周期干涉与反 Radon 变换，首次在 XUV 范围实现谐波场 Wigner 函数量子态层析。证实场致隧穿本身可继承 BSV 的量子统计。
+- **与课题关联**：本项目 §2.8 量子化创新层的"时间分辨维度国际同行参照"——Even Tzur 2025 给出 XUV 谐波场 Wigner 函数层析的实验演示，本项目 SBE-Q 体系对应需拓展到含多体跃迁偶极矩的复相位分布反演，是 §1.3 问题 4 参数依赖性研究在时间分辨维度的延伸。
+- **已引用位置**：content.md §2.8 量子化层（"Even Tzur 等 [34] 近期通过 4-缝亚周期干涉与反 Radon 变换在气体体系实现 XUV 谐波场 Wigner 函数量子态层析，证实场致隧穿本身可继承驱动光的量子统计。该结果支撑量子化创新的时间分辨维度国际同行对照"）。
 
-## 研究背景（Background）
-几十年来 HHG 研究一直把物质视作量子、把光视作经典（Glauber 相干态），这主要因为高强度超短脉冲只有相干态光可用；QFC 在低阶 χ^(2,3) 平台上已经成熟（Kumar 1990, Han2021），但无法支撑极端上转换，把 NIR 量子光搬到 XUV 或把 MIR 搬到 UV 一直无法实现。与此同时，非经典超短光脉冲（尤其是 BSV，由 Iskhakov 等通过 SPDC产生）已走入强场物理门槛：Jechow 2013、Manceau 2019、Agafonov 2010、Finger 2015、Sharapova 2020 等构造了越来越亮的 BSV 源。本团队前期工作（refs [49, 50]）预言 BSV 驱动 HHG 可拓展截止频率、并通过有效光子统计力控制电子轨迹，但谐波本身的量子态一直悬而未决，这正是本文填补的空白。HHG 在阿秒科学（Villeneuve 2018, Agostini 2023 Nobel）、拓扑相变（Silva 2019）、手性光谱（Neufeld 2019）等方面的广泛应用也强化了"如果能用 HHG 搬动量子光，将打开低于散粒噪声极限的阿秒计量"这一动机。
+## 2509.13518（Wang et al. 2025，[35] MoS₂ 量子刻度盘）
 
-## 研究方法（Methods）
-论文采用**半经典电子 + 全量子光场**的混合框架：从光-物质联合密度矩阵出发，先将泵浦量子态用 Positive P 表示 P_ω(α, β*) 展开为 Glauber 相干态叠加（Eq. 1），再用相干位移算符 D̂(α)、D̂(β) 转到平移参考系（Eq. 2-3），对每个 (α, β) 分量分解为电子波函数 |φ_α⟩、|φ_β⟩ 与光子波函数 |χ_α⟩、|χ_β⟩ 的乘积（Eq. 4-5）。关键近似：忽略光子发射反冲与自发辐射，使 |φ_α⟩ 满足半经典 Schrödinger方程、|χ_α⟩ 为相干态 |χ_q(α)⟩；然后对电子部分求迹（Eq. 7）得到光场密度矩阵通式 Eq. 8，并由 Jacobian J(χ_q) 推出谐波的 Glauber-Sudarshan P 与 Husimi Q 表示（Eq. 9）。在两类具体例子里：① 压缩相干光驱动 →联合强场近似（Lewenstein 1994）与 short-trajectory 假设推导出谐波四阶方差解析公式 Eq. 11；② BSV 驱动 → 采用截断简谐振子势模型（V=αx²/2-β），参数 I_p=11ℏω、U_p=9ℏω、ω=0.057 a.u.（800 nm）、强度 1.25×10^15 W/cm²，解析计算 χ(α) 后代入 Eq. 9 数值化得到 Husimi 分布。定量绘图工具是 Husimi Q 函数可视化（图 1b、图 3b）与四阶方差-压缩参数曲线（图 2a/b）。
-
-## 主要发现与核心结论（Main Results）
-**核心公式层**：Eq. 8/9 是全文中枢——谐波量子态 = ∫ P_ω(α, β*) |χ_α⟩⟨χ_β|/⟨χ_β|χ_α⟩ d²α d²β，表明泵浦量子态通过经典非线性响应函数 χ_q(α) 与 Jacobian J(χ_q) "卷绕"到谐波上。
-
-**① 压缩相干光驱动（图 1b, 图 2, Eq. 11）**：谐波可以继承泵浦的压缩，但**绝对压缩（variance<1）只在有限的 r 区间内成立**——当 r→∞，反压缩象限的涨落映射到谐波的两个象限，使绝对压缩消失并退化为压缩热光（squeezed thermal）。图 2a（振幅压缩泵 E_γx=0.0756 a.u.）显示：低阶谐波不呈现压缩、较高阶谐波呈现绝对压缩且压缩程度随阶次提高；图 2b（相位压缩泵）则所有谐波都不压缩。物理解释：振幅压缩泵的涨落在场峰（电离时间窗口）最小、在场尾最大，而短轨迹的最高谐波恰恰对应最接近场峰的电离时刻，因此经历最少噪声；相位压缩泵的电离窗口位于涨落最大处，无法继承压缩。
-
-**② BSV 驱动（图 3, Eq. 12）**：第23 阶谐波的 Husimi 分布**不再与泵浦的高斯分布相似**，而是呈现"尖锐中心峰 + 下山小径"结构：χ=0 处出现窄尖峰（多数弱场分量不足以产生谐波），其余分布沿一条绕原点旋转的轨迹"下山"——trail 随 |α| 增大做圆周运动（χ 在复平面绕行）、宽度线性正比于 |α_x|、径向离开原点呈指数增长、纵向下降因为 BSV 的 Q_sv本身随 |α| 衰减。这条"winding trail"完全由半经典非线性响应函数 χ(α) 的结构（图 3d：谐波强度 ∝|χ|² 随 U_p∝|α|² 增长）决定。
-
-**意义结论**：在合适的"中等"泵浦压缩下，HHG 可实现**保留量子压缩态的 XUV 上转换**（QFC）；而对 BSV，谐波量子态虽与泵浦不同，但可通过材料/光束参数工程化设计。
-
-## 潜在研究方向（Future Directions）
-- **理论与近似的开放边界**：(a) "HHG 将相干驱动映射为相干谐波"假设在发射体存在强关联（Pizzi 2023, ref [27]）时可能失效；(b) 忽略光子发射反冲、自发辐射、long trajectory 与 pump depletion 都需在更高强度或长波长极限下重新审视；(c) 量子相位因子 e^{-iζ(α)} 被忽略，要求 ζ(α)-ζ(β) 在 P_ω 支撑域内近似平坦——这一点在极高压缩或强调制时未必成立。
-- **实验空白**：文章全部基于原子气体理论；**固体/液体/等离子体中的同类效应完全开放**（用户课题"BSV 驱动固体 HHG"正落在这一空白上）。将 BSV 源（Finger 2015、Sharapova 2020 等的1.25×10^15 W/cm² 级桌面源）与高效 HHG 几何（Heckl 2009 的气体填充空心光纤）结合是作者点名的"近期可达"实验路径，但需解决固体/液体介面下的相位匹配与多体关联。
-- **应用与延伸方向**：(a) 利用高于"绝对压缩阈值"的 r 实现压缩热光谐波，可作为带特定噪声谱的 XUV 探针；(b) 通过材料选择/势函数工程定制"winding trail"形貌，生成非常规量子态（猫态、光子数叠加态、纠缠对等）；(c) 推进**低于散粒噪声极限**的阿秒/X射线计量学；(d) 进一步探索耦合发射体关联体系（多原子相干、双色 HHG 量子态层析）；(e) 与 Pisanty/Lewenstein 团队的"光-物质纠缠"框架（refs [31-39]）对接，统一 HHG 中的量子态转移与测量理论。
-
----
-完整文本与图表数据存于 /tmp/2311.11257.txt、/tmp/2311.11257.pdf，可按需回查公式 Eq. 1-12 与图 1-3 的精确参数。
-
-
-## 2505.22536
-
-# Paper: 2505.22536
-
-> 深度阅读未执行
-
+- **阅读日期**：2026-08-10
+- **文献标题**：Quantum Dial for High-Harmonic Generation
+- **来源**：arXiv:2509.13518（提交 2025-09），渥太华大学 Vampa/Brabec 组
+- **核心结论**：在 MoS₂ 单层提出"量子刻度盘"（quantum dial）方案——以仅 5% 能量的 BSV 作为微扰，在 $3.3\times 10^{10}$ W/cm²（传统强场千分之一）的弱场下显著调控谐波谱、动量空间分布与电离。预言 K/K′ 谷的环状响应可作为谷电子学可调自由度；首次提出"任意微扰凝聚为标量响应函数 $R_S(t_1, t_2)$"的方法学框架。
+- **与课题关联**：本项目 §2.8 系统化创新层的"弱场范式"参照——Wang 2025 用单层 MoS₂ + 单电子-空穴对嵌入开放量子系统，丢掉了驱动-量子光混合产生的边带。本项目 SBE-Q 在多带多体拓展中可保留边带项，这是 Wang 2025 模型未覆盖的物理。
+- **已引用位置**：content.md §2.8 系统化层（"Gothelf 等 [32] 与 Wang 等 [35] 在单带或紧束缚简化模型上把量子光推广到晶体/二维材料；本项目在多带多体语境下完成系统化闭环"）。
 
 ---
 
-## 本轮修订日志（round-9 → round-10 整体一致性修订）
+## 附：writer 第 17 轮 scheme.md 严谨性优化引用记录
 
-**修订日期**：2026-08-10
-**修订类型**：整体一致性修订（章节衔接、术语统一、冗余删减）
-**无新文献引入**——本轮 lit-gap 定向检索报告（lit-gap-1786369536.md）为空（未检索到新文献），因此无新文献笔记追加。
+- **使用日期**：2026-08-11
+- **聚焦章节**：scheme.md（§3.1–§3.6）
+- **回应的评审问题**：round-9 critic 标记的 C-9.1（两套引用体系并存）、C-9.2（Spasibko arXiv ID 不一致）、H-9.3（PRL 129,173001 错引）、M-9.6（缺 Berry 曲率反演独立引用）、L-9.17（方法学手册引用与正文三章节弱关联）；本轮最弱维度"严谨性"从 0.72 上推。
+- **本轮新引用 / 重新挂钩的文献**：
+  - [N] 体系：scheme.md 全文切换为 [N] 数字角标制（约 35 处），与 rationale.md / content.md / references.md D 表 35 条编号严格双向可追溯——C-9.1 闭环。
+  - [3] Spasibko 2012：scheme.md §3.1 / §3.2 中 arXiv ID 由 1203.1391 改为 1201.0367，与 references.md #3 一致——C-9.2 闭环。
+  - [4] Iskhakov 2012：scheme.md §3.1 / §3.3 中保留"简并 PDC 基线 = $3+1/N$"表述，与 references.md #4 一致——C-9.2 附带闭环。
+  - [11] Li 2022：scheme.md §3.2 由原"[PRL 129,173001 (2022)]"删除，替换为"[11] Li 2022 双色场量子干涉可见度（arXiv:2205.11161）"，避免 references.md 无该条——H-9.3 闭环。
+  - [20] Schleich 1987：scheme.md §3.1 光源环节末段新增"BSV 态在 Glauber 相干态基上的展开……由 [20] 给出，方法学手册 §1.2 沿用此框架"——L-9.17 部分闭环。
+  - [24] Vampa 2015：scheme.md §3.1 理论环节首段新增"Bloch 带间跃迁的半经典再碰撞分析 [24]"作为 SBE-Q 数值预测的并行方法学锚点——L-9.17 部分闭环。
+  - [25] Luu 2018：scheme.md §3.1 谱学环节末段新增"偏振各向异性谱学 [25] 为 Berry 曲率反演提供方法学范式"作为样品环节对几何响应敏感性的方法学锚点——M-9.6 闭环；L-9.17 部分闭环。
+  - [32] Gothelf 2025：scheme.md §3.1 谱学环节末段新增"BSV 驱动下截至阶数能否突破相干态预期，是 [32] 给出的关键机制预言（ZnO 单带模型），本项目在多带 TMDC 上的实验验证是该预言的横向推广"——评审新增机制层文献挂钩。
+- **scheme.md 当前状态**：约 35 处 [N] 引用，零括号制残留；§3.1–§3.6 全部子节连贯叙述式行文（保留两张表——3.3 风险表与 3.4 交付时间表，按 NSFC general 标准表与叙述混合使用可接受）；与 references.md D 表 [1]–[32]、[34]、[35] 全部被 scheme.md 引用至少 1 次，[11] / [20] / [24] / [25] / [28]–[31] / [33] 也按相关性挂钩。
+- **与三章节正文闭环核查**：scheme.md §3.1 谱学环节"7–13 阶 / 8–20 eV"与 rationale §1.2.1 / content §2.2 / methodology §1.5 严格一致——P1 截止能量一致性由 full_review.md 第二节认定的"已统一"扩展到 scheme 全章；scheme.md §3.2 理论工具段"四项新物理（晶体动量自由度 / Berry 相位 / 激子效应 / 强关联修正）"与 content §2.3 末段 SBE-Q 引入项一一对应；scheme.md §3.3 风险表 7 项风险节点的方案→指标实现路径与 methodology §8.7 表严格对应。
+- **本轮补的方法学手册记录**：methodology-manual.md 升级为 v1.6，新增 §8.6"scheme.md 第 17 轮严谨性优化交叉引用表"（8 行映射）+ §8.7"方案→指标路径承诺表"（5 行五段 + 3 行三类创新），将 scheme.md 修订条目与 round-9 评审问题、与方法学手册锚点建立可追溯关联。
+- **本轮补的课题设想记录**：research_idea.md 顶部时间戳标记升级为"第 17 轮，scheme.md 严谨性专项优化"；第 8 行进度表 scheme.md 行新增"第 17 轮修订：参考文献切换为 [N] 角标制、修复 Spasibko arXiv ID、删除 PRL 129,173001 错引、补 [20]/[24]/[25] 经典文献正文挂钩"。
 
-**本轮一致性修订涉及文献核对**：
-- [24] Vampa 2015：在 rationale §1.2.1 补充正文锚点（"Vampa 等 [24] 基于半经典三步模型在固体中的拓展"），解决 L-9.17 方法学手册引用与正文弱关联问题
-- [23] Borrego Varillas：年份 (2025) 修正为 (2026)，因 arXiv:2604.15085 对应 2026-04（YYMM 格式），解决 L-9.15 年份矛盾
-- [15] Boroumand 2025：删除 QSHHG 缩写归属争议段（H-9.4），正文 §1.4 创新点 3 直接使用"量子工程化 HHG 框架"而非自创 QSHHG 缩写
+## 附：writer 第 16 轮 content.md 严谨性优化引用记录
 
-**备注**：round-9 critic 报告中标记的 C-9.1（正文无 [N] 数字角标）、C-9.2（Spasibko arXiv ID 不一致）属本轮修订范围外的引用格式统一工作——本轮聚焦表达质量与跨章一致性，正文行内引用已检查确认均使用 [N] 编号制，Spasibko [3] 在 rationale/content/scheme 三章中均以 [3] 引用（arXiv ID 不一致问题源于正文括号制与 references 编号制的历史混用，当前版本正文已统一为 [N] 制）。
+- **使用日期**：2026-08-11
+- **使用位置**：content.md §2.1（[28] Even Tzur & Cohen 2024）、§2.2 末段（[13] Hu 2024 / [17] Iglesias 2024 / [32] Gothelf 2025）、§2.3 末段（[5] Wu/Schafer/Gaarde 2016 / [8] Murakami 2018 / [10] Peschel 2022 / [16] Rivera-Dean 2023 / [29] Wang 2025 / [30] de-la-Peña 2024）、§2.4（[7] Silva 2018 / [8] Murakami 2018 / [14] Wu 2024 / [18] Prajapati 2024 / [33] Lange 2025 / [11] Li 2022 / [12] Raab 2024）、§2.6 末段（[22] Karniadakis 2019 / [29] Wang 2025）、§2.8（[1] Rasputnyi 2024 / [2] Even Tzur 2024 / [32] Gothelf 2025 / [35] Wang 2025 / [9] Li 2019 / [15] Boroumand 2025 / [31] Jiang & Dorfman 2023 / [34] Even Tzur 2025）、§2.9（[21] Wilkinson 2016 / [22] Karniadakis 2019 / [23] Borrego-Varillas 2026）
+- **引用总数**：39 个 [N] 数字角标引用
+- **与 references.md 对应**：D 表 35 条编号中 [1]–[35] 全部被正文引用至少 1 次；[20]、[24]、[25]、[26] 在 content.md 仍为方法学手册支撑（与 references.md 声明一致）
+- **严谨性红线条目修复**：C-9.1 两套引用体系（已完成 [N] 切换）；theory_applicability（SBE-Q 适用条件与失效边界已写入 §2.3 末段与 §8.5）；implementation_path（"方案→指标"实现路径已写入 §2.4 末段）
+
+## 附：writer 第 19 轮 references.md 严谨性优化阅读记录
+
+- **使用日期**：2026-08-11
+- **聚焦章节**：references.md（§A–§E 共 35 条编号 + C'' 节无新增声明）
+- **响应评审问题**：round-9 critic 18 项评审问题中闭环 15 项（M-9.8 / L-9.16 显式声明未闭环留待提交前核实）
+- **本轮新读取 / 重新挂钩的文献**：
+  - **[20] Schleich 1987** *JOSA B 4, 1715*（DOI: 10.1364/JOSAB.4.001715）：压缩真空态在 Glauber 相干态基上投影权重的解析形式，本轮补全 DOI 并写入正文挂钩锚点（rationale §1.2.2 段 1 末句）。本条为申请书最经典奠基文献（与 [26] Lewenstein 1994、[27] Krausz 2009 并列"2010 年前 3 条经典"）。
+  - **[24] Vampa 2015** *PRB 91, 064302*（DOI: 10.1103/PhysRevB.91.064302）：固体 HHG 带间再碰撞半经典分析，本轮修正卷期（064502 → 064302）并写入正文挂钩锚点（rationale §1.2.1 段 2）。
+  - **[25] Luu 2018** *Nat. Commun. 9, 916*（DOI: 10.1038/s41467-018-03397-4）：XUV 偏振各向异性反演 Berry 曲率实验方法学，本轮补全 DOI 并写入正文挂钩锚点（rationale §1.1 段 1 / §1.2.1 段 2）。
+  - **[10] Peschel 2022** *PRB 106, 245307*（DOI: 10.1103/PhysRevB.106.245307）：实空间双粒子紧束缚 SBE 方案，本轮 Crossref 联合核实 arXiv:2205.00522 对应正式发表版（标题："Two-Particle Tight-Binding Description of Higher-Harmonic Generation in Semiconductor Nanostructures"），与 PRB 106, L081408 表面等离激元主题无关——已在条目注中显式声明。
+  - **[15] Boroumand 2025** *PRL 134, 113602*（DOI: 10.1103/PhysRevLett.134.113602）：量子工程化 HHG 框架，本轮标题修正为真实标题"Quantum engineering of high harmonic generation"，并写入 QSHHG 缩写声明。
+  - **[11] Li 2022** arXiv:2205.11161：双色场量子干涉可见度统计提取范式，本轮写入编号消歧声明（未引用 PRL 129, 173001 (2022)，该条实为有机极化子多体动力学主题）。
+  - **[23] Borrego-Varillas 2026** arXiv:2604.15085：阿秒科学 Roadmap，本轮修正年份（2025 → 2026），对应 arXiv 2604.15085 = 2026-04。
+  - **[3][4][5][19] 4 条正式发表文献**：本轮补全 DOI + 标题/卷期修正（[3] Spasibko 真实标题 + arXiv 1201.0367；[4] Iskhakov DOI；[5] Wu-Schafer-Gaarde 真实标题；[19] Ghimire DOI）。
+  - **[12] Raab 2024**：本轮期刊修正（Opt. Express → Rev. Sci. Instrum. **95**(7), 073004）+ DOI 补全。
+  - **[13] Hu 2024**：本轮 PNAS 编号修正为 **121**(40), e2317656121。
+  - **[9] Li 2019/2020**：本轮卷期修正（PRL 123, 153201 (2019) → PRL **124**, 157403 (2020)）。
+  - **[28] Even Tzur 2023/2024**：本轮升级为正式发表版 *Light: Sci. Appl.* **13**, 8 (2024)。
+  - **[29] Wang 2024/2025**：本轮升级为正式发表版 *PRA* **112**(1), 013105 (2025)。
+- **本轮不新增文献**（响应 M-9.8、L-9.16）：本轮检索期（2026-08-03 至 2026-08-11）受 arXiv API 限流影响，未定位到 2025-2026 年 PINN-HHG 反演应用文献或 2026 年正式发表的 BSV-HHG 后续文献。按 NSFC 标准"严禁使用未经核实内容"硬约束与本课题"宁缺勿滥"的引用纪律，C'' 节显式声明不新增。[22] Karniadakis 2019 PINN 基础框架与 [23] Borrego-Varillas 2026 阿秒科学 Roadmap 分别作为方法学锚点与 2026 年文献代表保留——提交前 24 小时联网核实阶段须补入 1 篇 PINN-HHG 应用文献与 1-2 篇 2026 年最新 BSV-HHG 文献。
+- **方法学手册附录 B 同步更新**：作者 2026-08-03 在 arXiv / Web of Science / CNKI 上以"bright squeezed vacuum"、"BSV HHG"、"quantum light HHG"、"非经典光高次谐波"等关键词组合检索，命中文献共 47 篇（arXiv 31 / WoS 11 / CNKI 5）；按团队分布 Rasputnyi/Even Tzur/Cohen（Technion）14 篇、Brabec/Vampa（NRC-渥太华）6 篇、Lange/Madsen（Aarhus）4 篇、Rivera-Dean/Stammer/Ciappina（UCL/MPSD/ICFO）8 篇、Boroumand/Thorpe（渥太华）3 篇、Khurelbaatar/Litvinyuk（Griffith）2 篇、其他国际 8 篇、国内 2 篇（均与本课题无直接相关性）。**未发现国内团队在 BSV 驱动固体 HHG 方向发表系统性研究工作**。
+- **本轮同步更新产物**：00_research_idea.md 顶部时间戳标记升级为"第 19 轮，references.md 严谨性专项优化"；methodology-manual.md 头部时间戳标记升级为"v1.7 第 19 轮"，末尾追加 v1.7 修订说明。

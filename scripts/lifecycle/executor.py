@@ -688,6 +688,21 @@ def _run_lit_read_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str,
                 output = agent_result.get("output", "")
                 notes.append(f"## {aid}\n\n{output}\n")
                 read_count += 1
+                # v6.8.18 fix: 成功路径下也要建立 wiki/papers/{aid}.md 页面，
+                # 否则后续 lit_note.link_to_proposal() 会因 wiki 页面不存在而返回 False，
+                # 导致 used_by_proposals 反向链接断裂。仅在页面尚不存在时写入，避免覆盖既有深度笔记。
+                try:
+                    from literature_service import LiteratureService
+                    svc = LiteratureService()
+                    existing = svc._get_wiki_paper_note(aid)
+                    if not existing:
+                        svc._save_wiki_paper_note(aid, output, proposal_id)
+                        svc._update_read_status(aid, "deep-read", proposal_id)
+                except Exception as wiki_e:
+                    if _log:
+                        _log.warning(
+                            f"[{proposal_id}] lit_read 成功但 wiki 写入失败 {aid}: {wiki_e}"
+                        )
                 if _log:
                     _log.info(f"[{proposal_id}] lit_read agent loop 成功: {aid}")
             else:

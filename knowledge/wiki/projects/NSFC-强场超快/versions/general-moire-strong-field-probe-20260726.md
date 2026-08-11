@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-moire-strong-field-probe-20260726"
 project_type: "general"
 latest_round: 7
-last_score: 0.77
+last_score: 0.76
 status: "optimizing"
-created: "2026-08-10T14:31:14Z"
-updated: "2026-08-10T14:31:14Z"
+created: "2026-08-11T13:48:07Z"
+updated: "2026-08-11T13:48:07Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-moire-strong-field-probe-20260726`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.77
+**当前分数**：0.76
 **状态**：优化中
-**同步时间**：2026-08-10T14:31:14Z
+**同步时间**：2026-08-11T13:48:07Z
 
 ---
 
@@ -29,10 +29,10 @@ confidence: 1.0
 | 章节 | 标题 | 行数 |
 |------|------|------|
 | content | content | 95 |
-| full_review | full_review | 131 |
-| rationale | rationale | 63 |
+| full_review | full_review | 133 |
+| rationale | rationale | 64 |
 | references | references | 144 |
-| scheme | scheme | 54 |
+| scheme | scheme | 60 |
 
 ## 课题简介
 
@@ -41,9 +41,9 @@ confidence: 1.0
 **课题名称**：3 项研究内容的逻辑递进关系**。综合而言，R1 → R2（理论 → 反演）→ R3（读出 → 改写）→ R1（调控 → 理论验证），构成"建立理论 → 读出指纹 → 主动改写 → 闭环校准"的完整学术闭环。这一闭环结构是本项目的整体学术逻辑：每一项研究内容都不是孤立任务，而是闭环上的一个环节，前一环节的输出成为后一环节的输入，最终 Y4 的闭环校准将三者统一验证。
 **项目类型**：面上项目
 **课题 ID**：`general-moire-strong-field-probe-20260726`
-**当前状态**：优化中（第5轮，score 0.77）
+**当前状态**：优化中（第5轮，score 0.76）
 **启动日期**：2026-07-26
-**最后更新**：2026-08-05
+**最后更新**：2026-08-11
 
 ---
 

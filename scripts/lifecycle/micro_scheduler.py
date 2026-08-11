@@ -375,6 +375,57 @@ def _sync_proposal_to_kb(proposal_id: str) -> None:
             _log.warning(f"[kb-sync] versions/reports 同步失败: {e}")
 
 
+def _archive_old_round_jobs(proposal_id: str, current_round: int) -> int:
+    """v6.8.21: 将 current_round 之前的已完成轮次 job 从 pipeline_jobs 中移除。
+
+    保留 current_round（进行中）和 current_round-1（上一轮，用于对比）的 job，
+    更早轮次的 done job 从 pipeline_jobs 中删除（数据已在 _lifecycle.json 历史中）。
+    返回归档的 job 数量。
+    """
+    import json
+    from common import load_json, save_json
+
+    lifecycle_path = PROJECT_ROOT / "research_proposals" / "_lifecycle.json"
+    if not lifecycle_path.exists():
+        return 0
+
+    data = load_json(lifecycle_path)
+    proposals = data.get("proposals", {})
+    if proposal_id not in proposals:
+        return 0
+
+    prop = proposals[proposal_id]
+    jobs_dict = prop.get("pipeline_jobs", {})
+    if not isinstance(jobs_dict, dict):
+        return 0
+
+    # 保留阈值：只保留 current_round 和 current_round-1
+    keep_min_round = current_round - 1
+
+    active = {}
+    archived_count = 0
+    for job_id, job in jobs_dict.items():
+        if isinstance(job, dict):
+            r = job.get("round", 0)
+            if r < keep_min_round and job.get("status") == "done":
+                archived_count += 1
+            else:
+                active[job_id] = job
+
+    if archived_count == 0:
+        return 0
+
+    prop["pipeline_jobs"] = active
+    save_json(lifecycle_path, data)
+
+    if _log:
+        _log.info(
+            f"[{proposal_id}] 清理了 {archived_count} 个旧轮次 done job "
+            f"(保留 R{keep_min_round}+R{current_round})"
+        )
+    return archived_count
+
+
 def _generate_round_report(self, proposal_id: str, round_num: int) -> Optional[str]:
     """为指定 proposal 的 round 生成优化报告，保存到 proposal 目录。
 
@@ -1283,6 +1334,9 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
         if prop_state:
             prop_state["optimization_rounds"] = current_round
             self._set_proposal_state(focus_pid, prop_state)
+        # v6.8.21: 归档已完成轮次的 job——只保留当前轮+上一轮（用于对比），
+        # 更早的 job 移入 _archived_jobs 避免累积膨胀
+        _archive_old_round_jobs(focus_pid, current_round)
         # 生成优化报告
         report_path = _generate_round_report(self, focus_pid, current_round)
         if report_path:

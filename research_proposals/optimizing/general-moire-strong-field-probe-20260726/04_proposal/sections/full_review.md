@@ -128,3 +128,5 @@ NSFC 面上要求 2–3 个创新点，按理论/方法/假说三类组织。本
 *整体一致性审查完成日期：2026-08-03*
 *审查范围：rationale.md / content.md / scheme.md / references.md 四份章节文件 + 方法学手册 + 课题设想*
 *审查依据：NSFC `general_principles.writing_style_rules` + critic-round-8 红队报告*
+
+*r12 一致性微调（2026-08-11）— 仅作章节间衔接与术语统一，不大幅改动内容。具体三处微调：（1）rationale.md §1.1 行 7 修复 "Bernry 曲率" 笔误为 "Berry 曲率"；（2）rationale.md §1.1 首次出现处显式给出 magic-angle TBG 中英全称映射（"魔角扭曲双层石墨烯（magic-angle twisted bilayer graphene, magic-angle TBG, ~1.1°）"），消除 §一/§二/§三 TBG 命名歧义；（3）rationale.md §1.1 末段补一段衔接 §1.2 / §1.3 / §1.4 / §1.5 / §1.6 的过渡，§一末叙事弧线段精简表达。本轮不引入新内容，r10 中 critic-round-8 的 H31–H40 / M27–M32 / L14–L15 维持实质解决状态。full_review.md 的 7 项综合结论（结构归属 / 叙事弧线 / 关键数字 / 创新点 / 材料与风险 / 写作风格与引文 / 综合评估）均保持 r9 达标状态；占位标签 [CITE:xxx] 已在 r9 中清理完毕，本轮无需再处理；§三.5 残留"首次"用语的轻微遗留已在 r12 同步维护中确认其语境为客观陈述文献 [CITE:zhou_nature_2023] 的"首次实验演示"，不构成对本项目"国际首创"的违反。*

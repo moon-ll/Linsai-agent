@@ -1,0 +1,15 @@
+{
+  "gaps": [
+    {
+      "claim": "经典光下量子度规可分辨性已被实验证实（实部 0.1-0.3 rad / 虚部 0.05-0.15 rad 实验基线）",
+      "missing_evidence": "该基线数据完全依赖 Faeyrman 2026 [11] arXiv 预印本（未正式发表），需要同行评审正式发表的实验数据作为替代或补充支撑，避免诉诸预印本风险",
+      "search_keywords": [
+        "Berry phase recovery HHG experiment",
+        "quantum metric HHG measurement",
+        "Fubini-Study metric nonlinear optics",
+        "quantum geometry tensor experimental retrieval"
+      ],
+      "priority": "high"
+    }
+  ]
+}

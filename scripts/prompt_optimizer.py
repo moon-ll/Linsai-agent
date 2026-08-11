@@ -77,6 +77,20 @@ DEBUG_JOURNAL_WINDOW_DAYS = 7
 # 历史背景：内容已存在时仍会先备份再 return True，每天数千次备份浪费磁盘。
 MAX_BACKUPS_PER_FILE_PER_RUN = 1
 
+# v6.8.23 修复：单次 auto 运行中，最多应用 / 写入 journal 的 suggestion 数。
+# 历史背景：debug-journal.json 在 7 天窗口内可达 ~5000 条 prompt_tuning 条目，
+# 配合 cron 副本（5×）触发 cmd_auto 时，单次运行可能产生 15806+ 条 suggestion，
+# 全部 append 到 critic/SOUL.md 并写入 5000+ 条新 journal 条目。即使进程最终退出，
+# 单次 run 的磁盘放大已发生。设置上限后即使重复触发，journal 增长也被限制在
+# MAX_AUTO_APPLY_PER_RUN × cron 副本数 / 天的可控范围内。
+MAX_AUTO_APPLY_PER_RUN = 200
+
+# v6.8.23 修复：cmd_auto 互斥锁文件路径。
+# 历史背景：jobs.json 中存在 5 份同名 cron，hermes scheduler 同时触发时
+# 多个 python3 scripts/prompt_optimizer.py auto 并发跑，叠加写 journal 导致
+# debug-journal.json 持续膨胀。fcntl.flock 提供跨进程互斥。
+CMD_AUTO_LOCK_PATH = MEMORY_DIR / ".prompt-optimizer-auto.lock"
+
 # failure_analyzer 模式到目标 profile 的映射
 PATTERN_TO_PROFILE = {
     "score-zero-streak": "critic",
@@ -725,11 +739,32 @@ def cmd_auto() -> None:
     2. 过滤出安全等级的建议（排除 critical 级别的激进修改）
     3. 自动应用，记录日志
     4. 输出执行摘要
+
+    v6.8.23:
+    - 加 fcntl.flock 互斥锁，防止 cron 副本并发触发时多个进程同时跑
+    - 应用数量受 MAX_AUTO_APPLY_PER_RUN 限制，防止单次 run 写入过多
+      journal 条目（即使 cron 副本被清理前仍可能重复触发）
     """
     import subprocess
+    import fcntl
 
     print("=== Prompt 自动优化（auto 模式）===")
     print()
+
+    # v6.8.23: 进程互斥锁（flock）。若已有进程持有锁（如上一个 cron 触发的实例
+    # 仍在跑 / hang），当前进程直接退出，避免多个 cmd_auto 并发叠加写 journal。
+    try:
+        CMD_AUTO_LOCK_PATH.parent.mkdir(parents=True, exist_ok=True)
+        lock_fd = open(CMD_AUTO_LOCK_PATH, "w")
+        try:
+            fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            print(f"○ cmd_auto 互斥：另一个实例正在运行（lock={CMD_AUTO_LOCK_PATH}），跳过本次执行")
+            lock_fd.close()
+            return
+    except Exception as lock_e:
+        print(f"⚠ cmd_auto 锁获取失败（继续执行）：{lock_e}")
+        lock_fd = None
 
     # 1. 采集数据
     debug_entries = _collect_debug_journal_entries()
@@ -754,7 +789,12 @@ def cmd_auto() -> None:
         if pending:
             safe_pending = [s for s in pending if s.get("priority") in ("high", "medium")]
             if safe_pending:
-                print(f"○ 无新建议，但发现 {len(safe_pending)} 条遗留 pending 建议，自动应用")
+                # v6.8.23: 同样受 MAX_AUTO_APPLY_PER_RUN 截断
+                if len(safe_pending) > MAX_AUTO_APPLY_PER_RUN:
+                    print(f"○ 无新建议，但发现 {len(safe_pending)} 条遗留 pending；截断到 {MAX_AUTO_APPLY_PER_RUN}")
+                    safe_pending = safe_pending[:MAX_AUTO_APPLY_PER_RUN]
+                else:
+                    print(f"○ 无新建议，但发现 {len(safe_pending)} 条遗留 pending 建议，自动应用")
                 backup_tracker: Dict[str, int] = {}
                 _apply_suggestions(
                     safe_pending, all_suggestions, auto_mode=True,
@@ -789,6 +829,13 @@ def cmd_auto() -> None:
     if not to_apply:
         print("○ 无安全等级建议可应用")
         return
+
+    # v6.8.23: 应用数量上限。即使 5 份 cron 副本未清理，单次 run 也最多处理
+    # MAX_AUTO_APPLY_PER_RUN 条，避免单 run 把 debug-journal 撑大数百条。
+    # 历史触发场景：未清理 5 份 cron + cmd_auto 死循环 → 4h 窗口 +5102 条
+    if len(to_apply) > MAX_AUTO_APPLY_PER_RUN:
+        print(f"\n  ⚠ 待应用 {len(to_apply)} 条，超过 MAX_AUTO_APPLY_PER_RUN={MAX_AUTO_APPLY_PER_RUN}，截断")
+        to_apply = to_apply[:MAX_AUTO_APPLY_PER_RUN]
 
     # 3. 应用
     print(f"\n  自动应用 {len(to_apply)} 条建议：")

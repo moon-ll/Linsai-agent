@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-order-parameter-ultrafast-readout-20260727"
 project_type: "general"
 latest_round: 6
-last_score: 0.71
+last_score: 0.74
 status: "optimizing"
-created: "2026-08-10T14:31:14Z"
-updated: "2026-08-10T14:31:14Z"
+created: "2026-08-11T13:48:07Z"
+updated: "2026-08-11T13:48:07Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
 **类型**：general
 **最新轮次**：第 6 轮
-**当前分数**：0.71
+**当前分数**：0.74
 **状态**：优化中
-**同步时间**：2026-08-10T14:31:14Z
+**同步时间**：2026-08-11T13:48:07Z
 
 ---
 
@@ -28,22 +28,22 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 30 |
-| full_review | full_review | 76 |
-| rationale | rationale | 54 |
-| references | references | 134 |
-| scheme | scheme | 68 |
+| content | content | 34 |
+| full_review | full_review | 78 |
+| rationale | rationale | 66 |
+| references | references | 164 |
+| scheme | scheme | 95 |
 
 ## 课题简介
 
 # 课题说明
 
-**课题名称**：序参量（Order Parameter）** 描述凝聚态物质的相变与对称性破缺，是凝聚态物理的核心概念之一。HHG 谱对序参量相关对称性与动力学高度敏感，可通过多维扫描与模型反演提取。本项目围绕 4 类关键序参量（激子/超导/磁/CDW）展开，其中磁序参量涵盖 3 个子分类（铁磁/反铁磁/altermagnet）：
+**课题名称**：引用状态标注**：
 **项目类型**：面上项目
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
-**当前状态**：待校验（等待人工核验）
+**当前状态**：优化中（第5轮，score 0.74）
 **启动日期**：2026-07-27
-**最后更新**：2026-08-03
+**最后更新**：2026-08-10
 
 ---
 
@@ -68,7 +68,11 @@ confidence: 1.0
 | 7 | 0.36 | 45 | 15 | 2026-07-30 |
 | 1 | 0.39 | 31 | 15 | 2026-08-03 |
 | 2 | 0.42 | 16 | 6 | 2026-08-03 |
-| 3 | 0.4
+| 3 | 0.46 | 12 | 4 | 2026-08-03 |
+| 4 | 0.58 | 12 | 4 | 2026-08-03 |
+| 5 | 0.71 | 13 | 4 | 2026-08-03 |
+| 6 | 0.76 | 12 | 6 | 2026-08-10 |
+| 6 | 0.74
 
 （完整简介见 [源文件](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/04_proposal/proposal-draft-merged.md)）
 

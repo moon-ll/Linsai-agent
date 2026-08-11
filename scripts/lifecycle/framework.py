@@ -37,6 +37,71 @@ except Exception:
     _log = None
 
 
+def cleanup_cron_duplicates(
+    self,
+    framework_names: Optional[List[str]] = None,
+) -> List[Dict[str, str]]:
+    """v6.8.23: 清理 HERMES_PROFILE 下所有同名 cron 副本，每类仅保留最新 1 个。
+
+    历史根因：setup_cron_framework 在每次升级/手动 setup 时未彻底清理
+    历史累积的同名 cron，导致 jobs.json 中出现 5× 同名实例（lc-prompt-optimize
+    / lc-repair / lc-daily-orchestrate / lc-retrospective），每天 14:00 cron 触发
+    时被 hermes 同时调度 5 次，叠加 prompt_optimizer.cmd_auto 的"每分钟持续写入"
+    行为，4h 内可生成 5000+ 条 prompt_tuning journal 条目（debug-journal.json
+    从 46MB 涨至 49MB+）。
+
+    触发场景（具体、可信）：
+      1. 用户多次执行 `proposal_lifecycle.py --setup-cron-v2`，但 setup_cron_framework
+         内联的清理逻辑只能覆盖"创建前存在的副本"，无法处理历史累积
+      2. hermes scheduler 同时调度 5 个 lc-prompt-optimize，每天 14:00 触发 5 次
+      3. 每次 cmd_auto 从 7 天窗口内 ~5000 条 prompt_tuning 日志采集，生成
+         fingerprint 唯一的 suggestion，写入 critic/SOUL.md 并 append 新 journal
+      4. 基数持续增长，磁盘 4h 窗口内 +3MB
+
+    Args:
+        framework_names: 需要去重的 cron 名称列表，默认覆盖 lc-* 框架 4 类 + lc-hourly-monitor。
+
+    Returns:
+        删除记录列表，每项 {name, id, created_at}。
+    """
+    if framework_names is None:
+        framework_names = [
+            "lc-daily-orchestrate", "lc-repair",
+            "lc-prompt-optimize", "lc-retrospective",
+            "lc-hourly-monitor",
+        ]
+    removed: List[Dict[str, str]] = []
+    # 按 name 分组
+    by_name: Dict[str, List[Dict]] = {}
+    for cron in hb.cron_list_profile(HERMES_PROFILE):
+        cname = cron.get("name", "")
+        if cname in framework_names:
+            by_name.setdefault(cname, []).append(cron)
+
+    for cname, group in by_name.items():
+        if len(group) <= 1:
+            continue
+        # 保留最新（created_at 最大），其余删除
+        group_sorted = sorted(group, key=lambda c: c.get("created_at", ""))
+        keeper = group_sorted[-1]
+        for old in group_sorted[:-1]:
+            cid = old.get("id", "")
+            res = hb.cron_delete(cid, profile=HERMES_PROFILE)
+            removed.append({
+                "name": cname,
+                "id": cid,
+                "created_at": old.get("created_at", ""),
+                "deleted": bool(res.get("success")),
+            })
+            if _log:
+                _log.warning(
+                    f"[cron 副本清理] 删除 {cname} id={cid} "
+                    f"(created={old.get('created_at','')[:19]}); "
+                    f"保留 id={keeper.get('id')}"
+                )
+    return removed
+
+
 def setup_cron_framework(
     self,
     orchestrate_schedule: str = DEFAULT_ORCHESTRATE_SCHEDULE,
@@ -48,19 +113,21 @@ def setup_cron_framework(
 
     worker_interval 参数保留以兼容 CLI，但实际 worker 已由全局微调度器替代，
     每 5 分钟从所有 optimizing proposal 中挑选一个最优先的 pending job 执行。
+
+    v6.8.23: 在创建前调用 cleanup_cron_duplicates()，处理历史累积的
+    同名 cron 副本（每类保留最新 1 个）。
     """
     self._write_generic_wrappers()
 
-    # 删除旧的大 cron（兼容 v6.7.4 及之前）
+    # v6.8.23: 用统一去重函数替换 v6.7.12 内联清理逻辑，统一处理历史副本
+    dedup_removed = self.cleanup_cron_duplicates()
+
+    # 删除旧的大 cron（兼容 v6.7.4 及之前）—— 仍保留此分支处理中文名旧 cron
     old_names = ["每日提案系统编排", "每日编排"]
-    # 同时清理 lc- 框架下的同名 cron（避免 --setup-cron-v2 重复执行造成的重复实例）
-    # 覆盖：lc-daily-orchestrate / lc-repair / lc-prompt-optimize / lc-retrospective
-    framework_names = ["lc-daily-orchestrate", "lc-repair",
-                       "lc-prompt-optimize", "lc-retrospective"]
-    removed = []
+    removed = [r["name"] for r in dedup_removed]
     for cron in hb.cron_list_profile(HERMES_PROFILE):
         cname = cron.get("name", "")
-        if cname in old_names or cname in framework_names:
+        if cname in old_names:
             hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)
             removed.append(cname)
 
@@ -110,10 +177,11 @@ def setup_cron_framework(
         )
 
     # 安装 prompt 自动优化 cron（每天 14:00）—— 先清理同名旧实例
-    for cron in hb.cron_list_profile(HERMES_PROFILE):
-        if cron.get("name") == "lc-prompt-optimize":
-            hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)
-            removed.append("lc-prompt-optimize")
+    # v6.8.23: 改用 cleanup_cron_duplicates 统一处理（保留最新 1 个）
+    extra_cleanup = self.cleanup_cron_duplicates(framework_names=["lc-prompt-optimize"])
+    for r in extra_cleanup:
+        if r["name"] not in removed:
+            removed.append(r["name"])
     prompt_opt = hb.cron_create_no_agent(
         script_name="lc_prompt_optimize.sh",
         name="lc-prompt-optimize",
@@ -125,10 +193,11 @@ def setup_cron_framework(
     result["success"] = result["success"] and prompt_opt.get("success")
 
     # 安装复盘 cron（每周一 15:00）—— 先清理同名旧实例
-    for cron in hb.cron_list_profile(HERMES_PROFILE):
-        if cron.get("name") == "lc-retrospective":
-            hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)
-            removed.append("lc-retrospective")
+    # v6.8.23: 改用 cleanup_cron_duplicates 统一处理（保留最新 1 个）
+    extra_cleanup = self.cleanup_cron_duplicates(framework_names=["lc-retrospective"])
+    for r in extra_cleanup:
+        if r["name"] not in removed:
+            removed.append(r["name"])
     retro = hb.cron_create_no_agent(
         script_name="lc_retrospective.sh",
         name="lc-retrospective",
