@@ -114,6 +114,9 @@ def sync_checkpoint(self, proposal_id: str) -> Dict[str, Any]:
         if _log:
             _log.info(f"[{proposal_id}] checkpoint 修复: optimization_rounds 推进到 {actual_round}")
         self._set_proposal_state(proposal_id, prop_state)
+        # v6.8.21b: 清理旧轮次 job
+        from .utils import archive_old_round_jobs
+        archive_old_round_jobs(proposal_id, actual_round)
         # 重新加载 jobs（_set_proposal_state 可能并发修改）
         jobs = self._get_jobs(proposal_id)
 
