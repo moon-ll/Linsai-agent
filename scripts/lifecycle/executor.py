@@ -1205,11 +1205,13 @@ def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, 
     if AdversarialGovernance is None:
         if _log:
             _log.warning(f"[{proposal_id}] adversarial_governance 未加载，monitor 跳过")
-        # 降级处理：虽未启用监察模块，仍推进轮次，避免链路僵死
+        # v6.8.27 修复: round_num 在此处尚未定义（定义在 L1228），
+        # 从 job 中直接提取，避免降级路径 NameError
+        round_num_fallback = job.get("round", 0)
         prop_state = self._get_proposal_state(proposal_id)
         if prop_state:
             prop_state["optimization_rounds"] = max(
-                prop_state.get("optimization_rounds", 0), round_num
+                prop_state.get("optimization_rounds", 0), round_num_fallback
             )
             prop_state["last_monitor_assessment"] = "adversarial_governance 未加载，monitor 跳过"
             prop_state["updated_at"] = now_utc()

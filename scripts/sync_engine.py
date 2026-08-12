@@ -588,7 +588,7 @@ def sync_all() -> Dict[str, Any]:
         print(f"  ⚠ 深度分析转换失败: {e}")
 
     # [3.6/5] 知识库笔记覆盖检测（v6.8.16 改进3）
-    # 扫描 raw/papers 中无对应 wiki/papers 笔记的论文，统计覆盖率
+    # v6.8.27: 持久化到看板，供前端展示
     print("  [3.6/5] 知识库笔记覆盖率检测...")
     try:
         raw_dir = PROJECT_ROOT / "knowledge" / "raw" / "papers"
@@ -600,17 +600,46 @@ def sync_all() -> Dict[str, Any]:
         print(f"    笔记覆盖: {len(raw_ids & wiki_ids)}/{len(raw_ids)} ({coverage:.0f}%)")
         if missing:
             print(f"    缺失笔记: {len(missing)} 篇（将在周末输出端批量处理）")
+        # v6.8.27: 写入看板供前端展示
+        try:
+            import json
+            kanban_path = PROJECT_ROOT / "memory" / "system-kanban.json"
+            if kanban_path.exists():
+                kanban = json.loads(kanban_path.read_text(encoding="utf-8"))
+                kanban.setdefault("kb_metrics", {})
+                kanban["kb_metrics"]["coverage_pct"] = round(coverage, 1)
+                kanban["kb_metrics"]["total_papers"] = len(raw_ids)
+                kanban["kb_metrics"]["missing_notes"] = len(missing)
+                kanban["kb_metrics"]["updated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+                kanban_path.write_text(json.dumps(kanban, ensure_ascii=False, indent=2), encoding="utf-8")
+        except Exception:
+            pass
     except Exception as e:
         print(f"  ⚠ 笔记覆盖率检测失败: {e}")
 
     # [3.7/5] 研究趋势雷达（v6.8.17 改进3）
-    # 分析最近 2 周简报的关键词频率趋势
+    # v6.8.27: 持久化到看板
     print("  [3.7/5] 研究趋势雷达...")
     try:
         trends = _detect_research_trends()
         if trends.get("rising"):
             for kw in trends["rising"][:3]:
                 print(f"    📈 趋势上升: {kw['keyword']} ({kw['recent']}→{kw['freq']}次)")
+        # v6.8.27: 写入看板
+        try:
+            import json
+            kanban_path = PROJECT_ROOT / "memory" / "system-kanban.json"
+            if kanban_path.exists():
+                kanban = json.loads(kanban_path.read_text(encoding="utf-8"))
+                kanban.setdefault("kb_metrics", {})
+                kanban["kb_metrics"]["trends_rising"] = [
+                    {"keyword": kw["keyword"], "freq": kw["freq"]}
+                    for kw in trends.get("rising", [])[:5]
+                ]
+                kanban["kb_metrics"]["trends_updated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+                kanban_path.write_text(json.dumps(kanban, ensure_ascii=False, indent=2), encoding="utf-8")
+        except Exception:
+            pass
     except Exception as e:
         print(f"  ⚠ 趋势雷达失败: {e}")
 

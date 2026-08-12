@@ -119,9 +119,8 @@ class OptimizeMixin:
         score_before = prop_state.get("last_score", 0.0)
 
         # v6.8.17: 加载历史人工审核反馈（反馈闭环——从对话中学习）
-        # v6.8.19 修复: 该变量必须在 optimize_cycle 与 _run_critic 各自的作用域内
-        # 各自加载一次（原版跨方法引用导致 NameError，4h 内 4 个 critic job 全失败）
-        _human_feedback_block = self._load_human_feedback_block(proposal_id)
+        # _run_critic 内部会各自加载 _load_human_feedback_block（v6.8.19 修复：
+        # 避免跨方法 NameError），optimize_cycle 层不再重复加载
 
         # 1. critic 评审
         if _log:
@@ -1433,6 +1432,12 @@ class OptimizeMixin:
         if _writer_score_feedback:
             prompt += _writer_score_feedback
 
+        # v6.8.27: Writer 侧注入人工审核反馈（之前只有 critic 侧注入）
+        # 避免 writer 重复犯人工审核已指出的问题
+        _writer_human_feedback = self._load_human_feedback_block(proposal_id)
+        if _writer_human_feedback:
+            prompt += "\n\n## 历史人工审核反馈\n\n以下为人工审核曾指出的问题，请在本次修改中避免重蹈覆辙：\n" + _writer_human_feedback
+
         result = self._run_hermes("writer", prompt, timeout)
 
         # v6.7.7: writer 返回后，自动从 sections/ 重新组装 proposal-draft.md
@@ -1482,6 +1487,9 @@ class OptimizeMixin:
             f"【现有文献阅读笔记】{reading_notes_path}（当前 {rn_len} 字符）\n\n"
             f"更新要求：\n"
             f"1. {research_idea_path}：课题设想。包含标题、研究背景与动机、现存研究空白/瓶颈、拟开展研究内容和方案、拟采用技术路线、创新点。基于申请书提炼，不添加申请书中未出现的内容。\n"
+            f"   **重要约束（v6.8.27）**：本次更新仅限同步申请书已有内容，"
+            f"不允许新增科学目标或改变研究方向。如需方向性调整，应在报告中标注"
+            f"'需要退回研究设想评审'，由系统触发 idea_review。\n"
             f"2. {methodology_manual_path}：方法学手册。重方法细节（公式推导/参数表/技术路线图/局限性/误差分析）。若已较完整，只补充申请书新增或调整部分对应的方法细节。\n"
             f"3. {reading_notes_path}：文献阅读笔记。若申请书引用了新文献而笔记中未记录，请按时间倒序追加一条记录，包含：阅读日期、文献标题、来源、核心结论、与课题关联、已引用位置。\n\n"
             f"请直接覆盖写入对应文件，不需要在 stdout 中输出全文。"

@@ -211,6 +211,40 @@ def list_entries(filters: Optional[Dict] = None) -> List[Dict]:
     return result
 
 
+def compact_journal(max_stats_per_category: int = 500) -> Dict:
+    """v6.8.27: 压缩 debug journal 中膨胀的 stats 聚合数据。
+
+    v6.8.24 修复了 prompt 优化器正反馈循环，但此前产生的 54,798 条
+    prompt_tuning 统计仍残留在 stats 中（文件 11.4MB）。
+    本函数重置 stats 为当前 entries 的真实统计。
+
+    Args:
+        max_stats_per_category: 保留每类别统计的上限（未使用，预留）
+
+    Returns:
+        压缩前后的文件大小对比。
+    """
+    path = _journal_path()
+    if not path.exists():
+        return {"error": "journal 文件不存在"}
+
+    old_size = path.stat().st_size
+    data = _load_journal()
+
+    # 重置 stats 为当前 entries 的真实统计
+    data["stats"] = _update_stats(data.get("entries", []))
+
+    _save_journal(data)
+    new_size = path.stat().st_size
+
+    return {
+        "old_size_mb": round(old_size / 1024 / 1024, 2),
+        "new_size_kb": round(new_size / 1024, 2),
+        "entries_preserved": len(data.get("entries", [])),
+        "stats_reset": True,
+    }
+
+
 def compute_stats() -> Dict:
     """计算统计概览。
 

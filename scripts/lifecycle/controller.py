@@ -239,11 +239,12 @@ python3 scripts/retrospective.py --period 7d
         prev_writer_id = ""
 
         # v6.8.26: 第 1 轮或 monitor 检测到结构性缺陷时前置研究设想评审
-        # 作为所有 critic 的前置依赖，确保研究设想质量达标后才进入优化
+        # v6.8.27 修复: 如果 idea_review 已通过（idea_review_passed=True），
+        # 退回后不重跑——只在结构性缺陷标志触发时才重新评审
         idea_review_id = ""
         prop_state = self._get_proposal_state(proposal_id)
         need_idea_review = (
-            round_num <= 1
+            (round_num <= 1 and not (prop_state and prop_state.get("idea_review_passed")))
             or (prop_state and prop_state.get("idea_review_required"))
         )
         if need_idea_review:

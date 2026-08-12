@@ -267,27 +267,60 @@ def _check_proposals() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
             pass
 
         # v6.8.16 改进2: 停滞课题检测
-        # optimizing 课题连续 48 小时无新 done job → 标记 stalled
+        # v6.8.27 修复: 旧版要求 done==0 才触发，但大多数停滞课题已有部分 done job
+        # 改为：只要 updated_at 超 48h 且当前还有 pending job（说明没跑完就卡了）
         STALL_THRESHOLD_HOURS = 48
         try:
             last_activity = p.get("updated_at", "")
             if last_activity:
                 last_dt = datetime.fromisoformat(last_activity.replace("Z", "+00:00"))
                 hours_since = (datetime.now(timezone.utc) - last_dt).total_seconds() // 3600
-                if hours_since >= STALL_THRESHOLD_HOURS and done == 0:
+                pending_count = total - done
+                if hours_since >= STALL_THRESHOLD_HOURS and pending_count > 0:
                     anomalies.append({
                         "type": "stalled",
                         "proposal_id": pid,
                         "hours": int(hours_since),
                         "done": done,
                         "total": total,
+                        "pending": pending_count,
                         "message": (
                             f"课题 {pid[:40]} 停滞 {int(hours_since)}h，"
-                            f"0/{total} job 完成。建议重置 pipeline_jobs 或手动编排。"
+                            f"{done}/{total} job 完成，{pending_count} 个 pending 未执行。"
+                            f"建议检查 cron 是否正常或手动触发微调度器。"
                         ),
                     })
         except Exception:
             pass
+
+    # v6.8.27: 输入端熔断检测——从周末任务提升为每小时检查
+    # 连续 2 周 weekend input 的 ideas_count=0 → input_pipeline_broken
+    try:
+        weekend_path = PROJECT_ROOT / "memory" / "weekend-jobs.json"
+        if weekend_path.exists():
+            import json
+            weekend_data = json.loads(weekend_path.read_text(encoding="utf-8"))
+            weekend_input = weekend_data.get("weekend_input", {})
+            started_at = weekend_input.get("started_at", "")
+            ideas_count = 0
+            result = weekend_input.get("result", {})
+            if isinstance(result, dict):
+                ideas_count = result.get("ideas_count", 0)
+            # 如果最近一次 weekend input 无新设想且距上次执行超过 7 天
+            if started_at and ideas_count == 0:
+                input_dt = datetime.fromisoformat(started_at.replace("Z", "+00:00"))
+                days_since = (datetime.now(timezone.utc) - input_dt).total_seconds() // 86400
+                if days_since >= 7:
+                    anomalies.append({
+                        "type": "input_pipeline_broken",
+                        "message": (
+                            f"输入端连续 {int(days_since)} 天未产生新研究设想，"
+                            f"上次 weekend input 于 {started_at}。"
+                            f"建议检查 idea_generator prompt 或 hermes researcher profile 状态。"
+                        ),
+                    })
+    except Exception:
+        pass
 
     return stats, anomalies
 

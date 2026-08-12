@@ -1,5 +1,42 @@
 # 变更记录
 
+## v6.8.27 - 2026-08-12 全链路审计修复：9 项问题
+
+### 背景
+
+v6.8.26 发布后对全系统做了三轨并行审计（执行链路 / 自检测机制 / 运行时状态），发现 10 个问题（3 个 P0 + 5 个 P1 + 2 个 P2），外加设计清查发现 1 个设计-实现偏差。本次全部修复。
+
+### 修复列表
+
+| # | 级别 | 问题 | 修复方式 |
+|---|------|------|---------|
+| P0-1 | P0 | debug-journal.json 膨胀 11.4MB（54,798 条 prompt_tuning） | 新增 `compact_journal()` 函数，重置 stats 为真实统计；已执行清理：11.42MB→9.88KB |
+| P0-2 | P0 | 停滞课题检测 `done==0` 条件过严（大多数停滞课题已有部分 done） | 改为 `pending_count > 0`，检测"有 pending 但 48h 未推进"的课题 |
+| P0-3 | P0 | 退回后 idea_review 无条件重触发（浪费 LLM 调用） | `need_idea_review` 增加 `not idea_review_passed` 条件 |
+| P1-1 | P1 | monitor 降级路径 `round_num` 未定义（休眠 Bug） | 从 `job.get("round", 0)` 直接提取 |
+| P1-2 | P1 | Writer 侧未注入人工审核反馈 | `_run_writer_optimize` 末尾增加 `_load_human_feedback_block` 注入 |
+| P1-3 | P1 | `_sync_derivative_artifacts` 缺少"同步优化限制"约束 | prompt 增加"不允许新增科学目标或改变研究方向" |
+| P1-4 | P1 | KB 覆盖率/趋势雷达仅 stdout 输出 | 持久化到 `system-kanban.json` 的 `kb_metrics` 字段 |
+| P1-5 | P1 | 输入端熔断仅周末检测 | 在 `lifecycle_monitor.py` 每小时检查中增加 weekend input 状态检测 |
+| P2-1 | P2 | optimize.py L121-124 死代码（加载但从未使用） | 已删除 |
+
+### 修改文件
+
+| 文件 | 改动 |
+|------|------|
+| `scripts/debug_journal.py` | 新增 `compact_journal()` 函数 |
+| `scripts/lifecycle_monitor.py` | 停滞检测条件修复 + 输入端熔断每小时检测 |
+| `scripts/lifecycle/controller.py` | idea_review 退回重触发修复 |
+| `scripts/lifecycle/executor.py` | monitor 降级路径 round_num 修复 |
+| `scripts/proposal_lifecycle/optimize.py` | Writer 审核反馈注入 + 同步优化限制 + 死代码清理 |
+| `scripts/sync_engine.py` | KB 覆盖率/趋势雷达持久化到看板 |
+| `memory/debug-journal.json` | 已执行清理（11.42MB→9.88KB） |
+
+### 验证
+
+- `--module`：375/378 通过（3 个失败为沙箱限制）
+- debug journal 文件大小从 11.42MB 降至 9.88KB
+
 ## v6.8.26 - 2026-08-12 研究设想质量门槛（idea_review）
 
 ### 背景
