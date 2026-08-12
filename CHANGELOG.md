@@ -1,5 +1,37 @@
 # 变更记录
 
+## v6.8.28 - 2026-08-12 范本锚点路径修复 + stale job 清理
+
+### 背景
+
+v6.8.27 退回 2 个 pending_review 课题后，发现范本锚点（benchmark_anchors）存在关键路径不匹配：critic/writer prompt 引用 `reference_materials.benchmark_anchors`，但实际数据仅在 `general_principles.benchmark_anchors`，导致 agent 永远读不到实际范本内容。同时发现 order-parameter 积累了 58 个 stale jobs（rounds 7-8），需要清理。
+
+### 修复内容
+
+| # | 级别 | 问题 | 修复方式 |
+|---|------|------|---------|
+| P0 | P0 | benchmark_anchors 路径不匹配（agent 读不到范本） | 在 `reference_materials.benchmark_anchors` 下镜像数据，与 `general_principles.benchmark_anchors` 同步 |
+| P1 | P1 | order-parameter 84 个 jobs 混合 rounds 1/7/8 | 清理 58 个 stale jobs（rounds 7-8），保留 round 1 的 26 个 pending jobs |
+
+### 验证
+
+- `reference_materials.benchmark_anchors` 4 个 example 字段均可达（rationale/content/scheme/innovation）
+- 5 个 optimizing 课题状态：
+  - bsv-driven-hhg: round 8 进行中（8 pending writer）
+  - moire-strong-field: round 7 刚启动（27 pending）
+  - order-parameter: round 1 全新链（26 pending, first=idea_review）
+  - quantum-geometry: round 1 全新链（26 pending, first=idea_review）
+  - key-transient: round 1 全新链（26 pending, first=idea_review）
+- 模块测试 375/378 通过（同基线）
+- 微调度器手动触发验证：moire-strong-field monitor job 成功执行
+
+### 修改文件
+
+| 文件 | 改动 |
+|------|------|
+| `memory/nsfc-standards.json` | `reference_materials` 下新增 `benchmark_anchors` 镜像数据 |
+| `research_proposals/_lifecycle.json` | 清理 order-parameter 的 58 个 stale jobs |
+
 ## v6.8.27 - 2026-08-12 全链路审计修复：9 项问题
 
 ### 背景

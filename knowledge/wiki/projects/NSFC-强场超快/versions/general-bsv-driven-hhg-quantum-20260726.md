@@ -6,8 +6,8 @@ project_type: "general"
 latest_round: 7
 last_score: 0.79
 status: "optimizing"
-created: "2026-08-12T10:33:38Z"
-updated: "2026-08-12T10:33:38Z"
+created: "2026-08-12T11:19:01Z"
+updated: "2026-08-12T11:19:01Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -20,7 +20,7 @@ confidence: 1.0
 **最新轮次**：第 7 轮
 **当前分数**：0.79
 **状态**：优化中
-**同步时间**：2026-08-12T10:33:38Z
+**同步时间**：2026-08-12T11:19:01Z
 
 ---
 

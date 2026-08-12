@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-quantum-geometry-inversion-20260726"
 project_type: "general"
 latest_round: 7
-last_score: 0.78
+last_score: 0.86
 status: "optimizing"
-created: "2026-08-12T10:33:38Z"
-updated: "2026-08-12T10:33:38Z"
+created: "2026-08-12T11:19:01Z"
+updated: "2026-08-12T11:19:01Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-quantum-geometry-inversion-20260726`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.78
+**当前分数**：0.86
 **状态**：优化中
-**同步时间**：2026-08-12T10:33:38Z
+**同步时间**：2026-08-12T11:19:01Z
 
 ---
 
@@ -31,7 +31,7 @@ confidence: 1.0
 | content | content | 264 |
 | full_review | full_review | 256 |
 | rationale | rationale | 134 |
-| references | references | 33 |
+| references | references | 50 |
 | scheme | scheme | 216 |
 
 ## 课题简介
@@ -41,7 +41,7 @@ confidence: 1.0
 **课题名称**：无论是"量子光场改变驱动统计"还是"强关联改变响应机制"，这两条路径各自已被独立证明是 HHG 反演的不可回避边界；但两者的联合检验仍付阙如**。这正是 Q1 与 Q2 共同要回答的物理问题。
 **项目类型**：面上项目
 **课题 ID**：`general-quantum-geometry-inversion-20260726`
-**当前状态**：优化中（第7轮，score 0.78）
+**当前状态**：优化中（第0轮，score 0.86）
 **启动日期**：2026-07-26
 **最后更新**：2026-08-12
 
