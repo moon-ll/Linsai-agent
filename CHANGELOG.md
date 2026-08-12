@@ -1,5 +1,51 @@
 # 变更记录
 
+## v6.8.29 - 2026-08-12 项目目录结构整理
+
+### 背景
+
+项目经长期迭代（v1→v6.8.28），积累了大量历史备份、重复 HTML 分享产物、散落临时文件和编译缓存，总冗余约 943MB。本次按"备份迁移→验证→提交"策略，全部移入 `_cleanup_backup/` 待确认后清理。
+
+### 整理内容
+
+| 阶段 | 操作 | 文件数 | 体积 |
+|------|------|--------|------|
+| A-1 | `backups/` 旧 zip 备份（保留最近 2 个） | 7 zip + 5 lifecycle snapshot + 4 migration dir | ~920MB |
+| A-2 | 5 个 HTML 分享目录 + `.trae-html-share-packages/` | 6 目录（含重复字体/JS） | ~20MB |
+| A-3 | `scripts/__pycache__/`（全目录 8 个子目录） | 145 个 .pyc | ~2.8MB |
+| B-1 | `healthcheck-*` 文件归入 `logs/healthchecks/` | 9 文件 | ~72KB |
+| B-2 | `.DS_Store` 清理 | 5 文件 | ~50KB |
+| B-3 | 废弃空目录删除（`proposals/`、`.uploads/`、`.zcode/`） | 3 目录 | ~8KB |
+| B-4 | `.gitignore` 补充 healthcheck / HTML 目录 / `_cleanup_backup/` 规则 | 规则更新 | — |
+| C-1 | 一次性迁移/修复脚本归入 `scripts/archive/` | 4 文件 | — |
+| C-2 | `scripts/README.md` 文件统计更新（49→114 根目录 .py） | 文档更新 | — |
+
+### 安全措施
+
+- 所有文件**移动**到 `_cleanup_backup/`（非删除），按阶段分子目录
+- `_cleanup_backup/` 已加入 `.gitignore`，不影响版本库
+- 每阶段后 `py_compile` + `self_test`（375/378 同基线，无回归）
+- 确认运转正常后可手动清空 `_cleanup_backup/`
+
+### 整理前后对比
+
+| 指标 | 整理前 | 整理后 |
+|------|--------|--------|
+| 根目录文件/文件夹数 | 27 文件夹 + 16 文件 | 17 文件夹 + 4 文件（.md/.gitignore/VERSION/.env） |
+| backups/ 大小 | 925MB（8 zip + migration dirs） | ~820MB（仅保留最近 2 zip） |
+| scripts/ __pycache__ | 2.8MB（145 .pyc） | 0（运行时自动重建） |
+| .gitignore 覆盖 | 遗漏 healthcheck/HTML 目录 | 完整覆盖 |
+
+### 修改文件
+
+| 文件 | 改动 |
+|------|------|
+| `.gitignore` | 新增 healthcheck/HTML分享目录/_cleanup_backup/.uploads 规则 |
+| `VERSION` | 6.8.28 → 6.8.29 |
+| `scripts/README.md` | 文件数统计更新 |
+| `scripts/archive/README.md` | 新建归档说明 |
+| `logs/healthchecks/` | 新目录，归入 9 个 healthcheck 文件 |
+
 ## v6.8.28 - 2026-08-12 范本锚点路径修复 + stale job 清理
 
 ### 背景

@@ -128,7 +128,7 @@
 
 根目录另有 `test_e2e_learning_full.py`（292 行）——三来源端到端完整链路验证脚本。
 
-**总计：scripts/ 根目录 49 个 .py 文件（含 `__init__.py`）+ tests/ 目录 6 个 .py 文件 + deepxiv_knowledge（8 模块）/ wiki_regenerator（4 模块）两个流水线包。**
+**总计：scripts/ 根目录 114 个 .py 文件（含 `__init__.py`）+ tests/ 目录 26 个 .py 文件 + lifecycle/（8 模块）/ proposal_lifecycle/（12 模块）/ adversarial/（6 模块）/ weekend_pipeline/（10 模块）/ deepxiv_knowledge（7 模块）/ wiki_regenerator（3 模块）/ archive（4 归档脚本）七个子目录。**
 
 ---
 *版本：6.1.0*

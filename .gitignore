@@ -68,3 +68,19 @@ knowledge/captures/
 
 # === 编辑器/工具 ===
 .zcode/
+.uploads/
+.trae-html-share-packages/
+
+# === 健康检查临时产物（v6.8.29: 从根目录移入 logs/healthchecks/）===
+healthcheck-*.md
+healthcheck-*.html
+
+# === HTML 分享产物（不应入库，需时由工具重新生成）===
+/linsai-copilot-manual/
+/literature-reform-plan/
+/literature-restructure-summary/
+/pipeline-deep-design/
+/research-pipeline-architecture/
+
+# === 项目整理临时备份（确认无误后可删除）===
+/_cleanup_backup/
