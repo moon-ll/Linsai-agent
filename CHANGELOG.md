@@ -4387,3 +4387,59 @@ python3 scripts/web_server.py
 
 - deepxiv SDK (`reader.py`) encoding bug：response.content.decode("utf-8", errors="replace") + json.loads() 替换 response.json()
 
+
+## v6.8.29 - 2026-08-13 健康检查：last_error 上下文丢失修复
+
+### 背景
+
+4 小时窗口健康检查（12:01Z-16:01Z）发现
+`general-moire-strong-field-probe-20260726-r7-references-writer` 在
+2026-08-12T14:35:29Z 因 900s 超时失败，attempts 1→2，触发依赖链重试，
+但 `_lifecycle.json` 中 `last_error` 字段立即被重试逻辑清空为 `""`，
+导致失败原因（"运行超时/进程僵死"）彻底丢失。当 attempt 2/3 再次
+失败时，无法区分"再次超时"与"另一种新错误"，影响故障诊断与
+prompt_optimizer 的失败模式聚类。
+
+### 触发场景
+
+`_auto_retry_failed_jobs` (micro_scheduler.py:275) 在 failed→pending
+状态流转时无条件 `job["last_error"] = ""`，擦除错误上下文。同一函数
+调用顺序里，`_refresh_stale_jobs` 先将 references-writer 标记 failed
+并写入 `last_error="运行超时/进程僵死"`，紧接着 `_auto_retry_failed_jobs`
+又把它改回 pending 并清空 `last_error`。
+
+### 修复（最小化高置信度）
+
+**scripts/lifecycle/micro_scheduler.py** — `_auto_retry_failed_jobs`
+- 删除 `job["last_error"] = ""` 的无条件清空
+- 改为：将 `last_error` 追加到新的 `error_history` 字段（保留最近 10 条）
+- `last_error` 仅在下次执行成功后才清空
+
+**scripts/lifecycle/executor.py** — `_update_job`
+- `status == JOB_STATUS_DONE` 时清空 `last_error`，避免历史错误误导看板
+
+### 测试
+
+新增 **scripts/tests/test_auto_retry_error_history.py**（17 用例全通过）：
+- 核心回归：失败→重试必须保留 last_error（修复前会被清空）
+- 连续失败：error_history 单调累积
+- attempts 达上限：last_error 保持原样
+- 孤立 failed job：不重试、不改动 last_error
+
+加入 `scripts/self_test.py --module` 模块映射。
+
+### 验证
+
+- `python3 -m py_compile scripts/lifecycle/*.py` 通过
+- 新测试 17/17 通过
+- 现有微调度器轮转回归测试 12/12 通过（无回归）
+- self_test.py --module 392/395（基线 375/378 + 17 新增 = 392 通过；3 失败为测试沙箱环境固有权限问题，非本次修改引入）
+- _auto_retry_error_history 错误历史保留测试 17/17 通过
+
+### 教训
+
+1. 状态流转时不要无条件清空审计字段（如 last_error），否则故障上下文会消失。
+2. 错误追溯应优先保留"最后一次失败原因"，使用 error_history 累积历史，避免
+   看板上"显示但已擦除"的不一致状态。
+3. job["status"] == "done" 是 last_error 清空的合法时机（任务成功意味着问题已
+   解决），而 failed→pending 重试不应清空。

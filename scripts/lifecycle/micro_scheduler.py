@@ -270,9 +270,17 @@ def _auto_retry_failed_jobs(self, proposal_id: str) -> int:
         if job.get("status") == JOB_STATUS_FAILED and job.get("job_id") in pending_deps:
             attempts = job.get("attempts", 0)
             if attempts < MAX_JOB_ATTEMPTS:
+                # v6.8.27: 保留 last_error 记录最后一次失败原因（修复前会清空，
+                # 导致 references-writer 14:35:29Z 超时失败后错误上下文丢失，
+                # 下次失败时无法追溯是"超时"还是其他原因）。改为在 error_history
+                # 追加历史，last_error 仅在下次执行成功后才清空。
+                err = job.get("last_error", "")
+                if err:
+                    hist = job.get("error_history") or []
+                    hist.append({"at": now_utc(), "error": err[:500], "attempts": attempts})
+                    job["error_history"] = hist[-10:]  # 只保留最近 10 条
                 job["status"] = JOB_STATUS_PENDING
                 job["attempts"] = attempts + 1
-                job["last_error"] = ""
                 job["repair_attempts"] = job.get("repair_attempts", 0) + 1
                 retry_count += 1
                 changed = True

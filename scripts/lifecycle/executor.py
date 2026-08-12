@@ -111,6 +111,9 @@ def _update_job(self, proposal_id: str, job: Dict[str, Any], status: str, error:
         existing["started_at"] = now_utc()
     if error:
         existing["last_error"] = error[:500]
+    if status == JOB_STATUS_DONE:
+        # v6.8.27: 成功时清空 last_error，避免历史错误误导看板
+        existing["last_error"] = ""
     if status == JOB_STATUS_FAILED:
         existing["attempts"] = existing.get("attempts", 0) + 1
     self._save_jobs(proposal_id, jobs)
