@@ -28,6 +28,7 @@ from .constants import (
     JOB_STATUS_PENDING,
     STEP_CRITIC,
     STEP_GAP_IDENTIFY,
+    STEP_IDEA_REVIEW,
     STEP_LIT_NOTE,
     STEP_LIT_READ,
     STEP_LIT_SEARCH,
@@ -51,6 +52,7 @@ from .executor import (
     _run_monitor_step,
     _run_update_vision_step,
     _run_update_method_manual_step,
+    _run_idea_review_step,
     execute_job,
     execute_next_job,
     _mark_degradation,
@@ -236,6 +238,23 @@ python3 scripts/retrospective.py --period 7d
         jobs: List[Dict[str, Any]] = []
         prev_writer_id = ""
 
+        # v6.8.26: 第 1 轮或 monitor 检测到结构性缺陷时前置研究设想评审
+        # 作为所有 critic 的前置依赖，确保研究设想质量达标后才进入优化
+        idea_review_id = ""
+        prop_state = self._get_proposal_state(proposal_id)
+        need_idea_review = (
+            round_num <= 1
+            or (prop_state and prop_state.get("idea_review_required"))
+        )
+        if need_idea_review:
+            idea_review_id = _make_job_id(proposal_id, round_num, "idea_review", STEP_IDEA_REVIEW)
+            jobs.append(_job("idea_review", STEP_IDEA_REVIEW, []))
+            # 后续第一个 critic 将依赖此 job
+            # 清除标志位（本轮 idea_review 会重新评估）
+            if prop_state and prop_state.get("idea_review_required"):
+                prop_state["idea_review_required"] = False
+                self._set_proposal_state(proposal_id, prop_state)
+
         # 3 个主模块：每个 critic + 4 researcher + writer
         for section in PROPOSAL_SECTIONS[:3]:
             section_key = section["key"]
@@ -246,8 +265,12 @@ python3 scripts/retrospective.py --period 7d
             note_id = _make_job_id(proposal_id, round_num, section_key, STEP_LIT_NOTE)
             writer_id = _make_job_id(proposal_id, round_num, section_key, STEP_WRITER)
 
-            # critic 依赖上一模块的 writer
-            critic_deps = [prev_writer_id] if prev_writer_id else []
+            # critic 依赖上一模块的 writer（第 1 轮还依赖 idea_review）
+            critic_deps = []
+            if prev_writer_id:
+                critic_deps.append(prev_writer_id)
+            if idea_review_id:
+                critic_deps.append(idea_review_id)
             jobs.append(_job(section_key, STEP_CRITIC, critic_deps))
             jobs.append(_job(section_key, STEP_GAP_IDENTIFY, [critic_id]))
             jobs.append(_job(section_key, STEP_LIT_SEARCH, [gap_id]))
@@ -307,6 +330,7 @@ python3 scripts/retrospective.py --period 7d
     _run_monitor_step = _run_monitor_step
     _run_update_vision_step = _run_update_vision_step
     _run_update_method_manual_step = _run_update_method_manual_step
+    _run_idea_review_step = _run_idea_review_step
     _mark_degradation = _mark_degradation
     execute_job = execute_job
     execute_next_job = execute_next_job

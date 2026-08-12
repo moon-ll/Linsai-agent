@@ -1,5 +1,35 @@
 # 变更记录
 
+## v6.8.26 - 2026-08-12 研究设想质量门槛（idea_review）
+
+### 背景
+
+当前链路中，研究设想（`00_research_idea.md`）在进入 optimizing 之前只有一次性初始化生成，之后 writer 虽然在每轮结束时"同步更新"研究设想，但这个更新是被动的、片段式的。没有独立的、前置的"研究设想质量审核"环节。key-transient 课题 8 轮优化无收敛的根因就是研究设想阶段对"研究内容 vs 研究方案"的逻辑切分未想清楚，后续优化无法弥补结构性缺陷。
+
+### 新增功能
+
+- **研究设想独立评审步骤**（`idea_review`）：在 round 1 的 job 链最前端，作为所有 critic 的前置依赖。使用 researcher profile 对 `00_research_idea.md` 做独立评审，聚焦科学问题清晰度、创新点可检验性、内容-方案逻辑切分、方向一致性。
+- **质量门槛**：评审分数 ≥ 0.70 才允许进入优化（`IDEA_REVIEW_THRESHOLD`），与申请书的达标阈值解耦。
+- **迭代修复**：未达标时 writer 根据评审意见修改研究设想，重新评审，最多 3 轮（`MAX_IDEA_REVIEW_ATTEMPTS`）。仍不达标则暂停优化，等待人工介入。
+- **结构性缺陷退回机制**：monitor 步骤新增 `_detect_structural_defect` 检测 content/scheme 文件级重复或模块空置。检测到时设置 `idea_review_required` 标志，下一轮自动重新插入 `idea_review` job，形成退回闭环。
+- **同步优化限制**：optimizing 阶段 writer 对 `00_research_idea.md` 的修改仅限于"同步已有内容"，不允许新增科学目标或改变研究方向——方向性变更须退回研究设想阶段。
+
+### 修改文件
+
+| 文件 | 改动 |
+|------|------|
+| `scripts/lifecycle/constants.py` | 新增 `STEP_IDEA_REVIEW`、`IDEA_REVIEW_THRESHOLD`、`MAX_IDEA_REVIEW_ATTEMPTS` 常量 |
+| `scripts/lifecycle/executor.py` | 新增 `_run_idea_review_step`（评审-修复循环）、`_parse_idea_review_score`（评分解析）、`_detect_structural_defect`（缺陷检测）；`execute_job` 添加分发分支；`_run_monitor_step` 添加结构性缺陷检测和退回标志 |
+| `scripts/lifecycle/controller.py` | `_build_full_round_jobs` 在 round 1 或 `idea_review_required` 时前置 idea_review job；方法绑定区添加 `_run_idea_review_step` |
+| `scripts/lifecycle/micro_scheduler.py` | `_CHAIN_ORDER` 添加 `STEP_IDEA_REVIEW: -1`（最高优先级） |
+| `scripts/tests/test_idea_review.py` | 新增 11 个测试用例覆盖全部功能 |
+| `scripts/tests/test_lifecycle_cron.py` | 更新现有测试适配 26-job 结构 |
+
+### 验证
+
+- idea_review 专项测试：11/11 通过
+- `--module`：375/378 通过（3 个失败为沙箱限制，与本次改动无关）
+
 ## v6.8.25 - 2026-08-12 cross-proposal 范例注入数据源修复
 
 ### 背景

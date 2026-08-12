@@ -128,8 +128,8 @@ python3 -m py_compile scripts/*.py
 2. **模块自检**：大量脚本支持 `--self-check`，运行 `python3 scripts/{module}.py --self-check`。
 3. **E2E 集成测试**：`python3 scripts/test_e2e_learning_full.py`（需真实 Claude CLI 环境，非日常回归项）。
 
-**当前基线（v6.8.24）**：
-- `--module`：372/376 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器、轮次完成 break、derived job 优先级、prompt 优化器、看板轮次统计、stale job 回收、monitor 看板时间戳、维度提取修复、质量门槛、MOC 去重修复、标签提取修复、质量天花板收敛/下降检测、维度轮换、输入端熔断、审核反馈闭环、KB 健康评分、P0 跨轮持久化、prompt 优化器循环断裂、agent 分数奖惩闭环、nsfc 标准补全、范例注入修复、维度轮换修复）
+**当前基线（v6.8.26）**：
+- `--module`：375/378 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器、轮次完成 break、derived job 优先级、prompt 优化器、看板轮次统计、stale job 回收、monitor 看板时间戳、维度提取修复、质量门槛、MOC 去重修复、标签提取修复、质量天花板收敛/下降检测、维度轮换、输入端熔断、审核反馈闭环、KB 健康评分、P0 跨轮持久化、prompt 优化器循环断裂、agent 分数奖惩闭环、nsfc 标准补全、范例注入修复、维度轮换修复、cross-proposal 数据源修复、研究设想质量门槛 idea_review）
 - `--scenario`：16/16 通过
 - `--persona`：38/38 通过
 - `--web-ci`：399/399 通过（Web API 虚拟用户测试覆盖所有主要 API 命名空间）
@@ -233,7 +233,8 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 - **看板系统**：`memory/system-kanban.json` 由微调度器（主写）和 `lifecycle_monitor`（合并写）协同维护，包含当前时段/聚焦课题/job 进度/执行历史/任务同步统计，前端通过 `/api/console/flow` 展示。
 - **定期修复**：`lc-repair` cron 每 6 小时执行 `orchestrator.run_repair()`，重置 stuck running（阈值 1800s）、重试 failed job（最多 3 次）、补齐缺失 worker、清理旧轮次 job；微调度器在每次执行前无条件清理 stale job。
 - **自成长**：`strategy_optimizer.py` 基于 7 天历史给出调度参数建议（仅建议）；`prompt_optimizer.py`（每日 14:00 cron `lc-prompt-optimize`）从 debug journal/agent scores/failure patterns 生成 prompt 修改建议并自动应用（备份原文件）；`retrospective.py`（每周一 15:00 cron `lc-retrospective`）综合 5 个数据源生成结构化复盘报告。
-- **自检测/自成长增强（v6.8.16-v6.8.17）**：① 质量天花板检测（连续 3 轮 ≥0.80 且提升 <2% → 自动晋级 pending_review；连续 3 轮下降 → 暂停）② 停滞课题检测（48h 无进展 → stalled 告警）③ KB 笔记覆盖率检测（sync_all 中实时统计）④ 对抗评审维度轮换（连续 3 轮原地踏步 → 自动切换最弱维度）⑤ 输入端熔断（连续 2 周 ideas=0 → input_pipeline_broken 告警）⑥ 人工审核反馈闭环（审核对话意见自动提取 → critic prompt 注入，避免重蹈覆辙）⑦ KB 健康评分（每周反思时计算覆盖率/新鲜度/连通度）⑧ 研究趋势雷达（sync_all 中分析关键词频率趋势）⑨ Cross-proposal 范例注入（高分课题 ≥0.80 的段落注入低分课题 <0.75 的 writer prompt）。
+- **自检测/自成长增强（v6.8.16-v6.8.17）**：① 质量天花板检测（连续 3 轮 ≥0.80 且提升 <2% → 自动晋级 pending_review；连续 3 轮下降 → 暂停）② 停滞课题检测（48h 无进展 → stalled 告警）③ KB 笔记覆盖率检测（sync_all 中实时统计）④ 对抗评审维度轮换（连续 3 轮原地踏步 → 自动切换最弱维度）⑤ 输入端熔断（连续 2 周 ideas=0 → input_pipeline_broken 告警）⑥ 人工审核反馈闭环（审核对话意见自动提取 → critic prompt 注入，避免重蹈覆辙）⑦ KB 健康评分（每周反思时计算覆盖率/新鲜度/连通度）⑧ 研究趋势雷达（sync_all 中分析关键词频率趋势）⑨ Cross-proposal 范例注入（高分课题 ≥0.70 的段落注入低分课题 <0.75 的 writer prompt）。
+- **研究设想质量门槛（v6.8.26）**：⑩ idea_review 前置评审（round 1 的 job 链最前端，researcher 对 `00_research_idea.md` 做独立评审，分数 ≥0.70 才允许进入优化；未达标 writer 修复后重审，最多 3 轮）⑪ 结构性缺陷退回（monitor 检测 content/scheme 文件级重复或模块空置 → 设置 `idea_review_required` 标志 → 下一轮自动退回研究设想评审）。
 
 ---
 
@@ -254,7 +255,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 ### 版本号规范
 
-- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.8.24`）。
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.8.26`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -343,7 +344,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.8.24*
+*版本：6.8.26*
 *日期：2026-08-12*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

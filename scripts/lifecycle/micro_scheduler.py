@@ -34,6 +34,7 @@ from .constants import (
     STALE_RUNNING_SECONDS,
     STEP_CRITIC,
     STEP_GAP_IDENTIFY,
+    STEP_IDEA_REVIEW,
     STEP_LIT_NOTE,
     STEP_LIT_READ,
     STEP_LIT_SEARCH,
@@ -73,6 +74,7 @@ FOCUS_STATE_PATH = PROJECT_ROOT / "memory" / "lifecycle-focus.json"
 # 否则它们的优先级默认为 99（最低），会被下一轮的 critic（优先级 0）抢占，
 # 导致本轮 derived job 滞后执行，轮次完成检测和报告生成时机异常。
 _CHAIN_ORDER = {
+    STEP_IDEA_REVIEW: -1,  # v6.8.26: 研究设想评审最先执行
     STEP_CRITIC: 0,
     STEP_GAP_IDENTIFY: 1,
     STEP_LIT_SEARCH: 2,

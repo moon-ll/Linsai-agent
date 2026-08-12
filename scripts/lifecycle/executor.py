@@ -11,13 +11,16 @@ from typing import Any, Dict, List, Optional
 from common import file_lock, now_utc
 
 from .constants import (
+    IDEA_REVIEW_THRESHOLD,
     JOB_STATUS_DONE,
     JOB_STATUS_FAILED,
     JOB_STATUS_PENDING,
     JOB_STATUS_RUNNING,
+    MAX_IDEA_REVIEW_ATTEMPTS,
     STALE_RUNNING_SECONDS,
     STEP_CRITIC,
     STEP_GAP_IDENTIFY,
+    STEP_IDEA_REVIEW,
     STEP_LIT_NOTE,
     STEP_LIT_READ,
     STEP_LIT_SEARCH,
@@ -942,6 +945,193 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         "section_passed": section_passed,
     }
 
+
+# ────────────────────────────────────────────────────────────────────
+# v6.8.26: 研究设想质量门槛（idea_review）
+# ────────────────────────────────────────────────────────────────────
+
+def _run_idea_review_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
+    """v6.8.26: 研究设想独立评审——进入 optimizing 前的质量门槛。
+
+    流程：
+    1. researcher profile 对 00_research_idea.md 做独立评审
+    2. 评审聚焦：科学问题清晰度、创新点可检验性、研究内容与方案的逻辑切分
+    3. 分数 ≥ 0.70 → 通过，后续 critic-writer 链继续执行
+    4. 分数 < 0.70 → writer 根据评审意见修改研究设想，重新评审
+    5. 最多 3 轮迭代，仍不达标则返回失败（proposal 卡住，等待人工介入）
+
+    此步骤在 round 1 的 job 链最前端，作为所有 critic 的前置依赖。
+    也可在 monitor 检测到结构性缺陷时重新触发（round > 1）。
+    """
+    prop_dir = self._find_proposal_dir(proposal_id)
+    if not prop_dir:
+        return {"success": False, "error": "proposal 目录不存在"}
+
+    idea_path = prop_dir / "00_research_idea.md"
+    if not idea_path.exists():
+        return {"success": False, "error": "研究设想文件不存在"}
+
+    prop_state = self._get_proposal_state(proposal_id)
+    if not prop_state:
+        return {"success": False, "error": "proposal 状态不存在"}
+
+    round_num = job.get("round", 0)
+    attempts = prop_state.get("idea_review_attempts", 0)
+
+    # ── 评审循环 ──
+    for attempt in range(1, MAX_IDEA_REVIEW_ATTEMPTS + 1):
+        idea_content = idea_path.read_text(encoding="utf-8")
+
+        # 1. 调用 researcher 评审研究设想
+        review_prompt = (
+            f"请对以下 NSFC 课题研究设想做独立质量评审。\n\n"
+            f"【研究设想文件】\n{idea_path}\n"
+            f"请读取该文件并做评审。\n\n"
+            f"评审维度（每维 0-1 分）：\n"
+            f"1. 科学问题清晰度（clarity）：核心科学问题是否明确、聚焦，"
+            f"能否用一两句话概括，是否避免了泛化或模糊表述\n"
+            f"2. 创新点可检验性（testability）：每个创新点是否有对应的"
+            f"可检验指标或实验信号，能否被证伪\n"
+            f"3. 内容-方案逻辑切分（coherence）：研究内容（做什么）与"
+            f"研究方案（怎么做）是否有清晰边界，是否存在文件级重复、"
+            f"模块空置或逻辑交叉\n"
+            f"4. 方向一致性（consistency）：各子方向是否服务于同一核心"
+            f"科学问题，是否存在拼凑感\n\n"
+            f"请给出每个维度的分数和具体问题，并在报告末尾包含评分块：\n"
+            f"```\n"
+            f"## 评分\n"
+            f"科学问题清晰度：0.75\n"
+            f"创新点可检验性：0.70\n"
+            f"内容方案切分：0.65\n"
+            f"方向一致性：0.80\n"
+            f"综合评分：0.73\n"
+            f"```\n"
+            f"将评审报告写入：{prop_dir / '05_review' / f'idea-review-r{round_num}-a{attempt}.md'}\n"
+        )
+        review_result = self._run_hermes("researcher", review_prompt, timeout=600)
+        if not review_result.get("success"):
+            return {"success": False, "error": f"评审调用失败：{review_result.get('error')}"}
+
+        # 2. 解析评审分数
+        report_path = prop_dir / "05_review" / f"idea-review-r{round_num}-a{attempt}.md"
+        score = 0.0
+        issues = ""
+        if report_path.exists():
+            report_text = report_path.read_text(encoding="utf-8")
+            score, issues = _parse_idea_review_score(report_text)
+        else:
+            # 等待报告落盘
+            import time
+            for _ in range(6):
+                time.sleep(5)
+                if report_path.exists():
+                    report_text = report_path.read_text(encoding="utf-8")
+                    score, issues = _parse_idea_review_score(report_text)
+                    break
+
+        # 3. 更新 proposal 状态
+        prop_state = self._get_proposal_state(proposal_id) or {}
+        prop_state["idea_review_attempts"] = attempt
+        prop_state["idea_review_score"] = score
+        prop_state["idea_review_issues"] = issues[:500]
+        prop_state["idea_review_at"] = now_utc()
+        self._set_proposal_state(proposal_id, prop_state)
+
+        # 4. 达标 → 通过
+        if score >= IDEA_REVIEW_THRESHOLD:
+            if _log:
+                _log.info(
+                    f"[{proposal_id}] 研究设想评审通过 "
+                    f"(attempt={attempt}, score={score:.2f})"
+                )
+            prop_state["idea_review_passed"] = True
+            self._set_proposal_state(proposal_id, prop_state)
+            return {
+                "success": True,
+                "idea_review_score": score,
+                "attempts": attempt,
+                "passed": True,
+            }
+
+        # 5. 未达标且还有重试机会 → writer 修改研究设想
+        if attempt < MAX_IDEA_REVIEW_ATTEMPTS:
+            if _log:
+                _log.warning(
+                    f"[{proposal_id}] 研究设想评审未达标 "
+                    f"(attempt={attempt}, score={score:.2f} < {IDEA_REVIEW_THRESHOLD}), "
+                    f"触发 writer 修复"
+                )
+            fix_prompt = (
+                f"请根据以下评审意见修改研究设想文件。\n\n"
+                f"【待修改文件】{idea_path}\n"
+                f"请读取该文件，根据评审意见做针对性修改。\n\n"
+                f"【评审意见】\n{issues}\n\n"
+                f"要求：\n"
+                f"1. 针对评审指出的每个问题做具体修改，不要泛泛而谈\n"
+                f"2. 修改后确保科学问题更聚焦、创新点可检验、"
+                f"研究内容与方案有清晰边界\n"
+                f"3. 不要改变研究方向，只优化表述和逻辑切分\n"
+                f"4. 直接写入文件 {idea_path}\n"
+            )
+            fix_result = self._run_hermes("writer", fix_prompt, timeout=600)
+            if not fix_result.get("success"):
+                return {"success": False, "error": f"修复调用失败：{fix_result.get('error')}"}
+        else:
+            # 6. 超过最大重试次数 → 失败
+            if _log:
+                _log.error(
+                    f"[{proposal_id}] 研究设想评审 {MAX_IDEA_REVIEW_ATTEMPTS} 轮均未达标 "
+                    f"(final_score={score:.2f}), 暂停优化等待人工介入"
+                )
+            prop_state["idea_review_passed"] = False
+            prop_state["idea_review_blocked"] = True
+            self._set_proposal_state(proposal_id, prop_state)
+            return {
+                "success": False,
+                "error": (
+                    f"研究设想评审 {MAX_IDEA_REVIEW_ATTEMPTS} 轮均未达标"
+                    f"（最高分 {score:.2f} < {IDEA_REVIEW_THRESHOLD}），"
+                    f"暂停优化等待人工介入"
+                ),
+                "idea_review_score": score,
+                "attempts": attempt,
+                "passed": False,
+                "blocked": True,
+            }
+
+    # 理论上不会到达
+    return {"success": False, "error": "研究设想评审异常退出"}
+
+
+def _parse_idea_review_score(report_text: str) -> tuple:
+    """从评审报告中解析综合评分和问题摘要。
+
+    返回 (score: float, issues: str)。
+    """
+    import re
+
+    score = 0.0
+    # 匹配 "综合评分：0.73" 或 "综合评分: 0.73"
+    m = re.search(r"综合评分[：:]\s*([0-9]\.?\d*)", report_text)
+    if m:
+        try:
+            score = float(m.group(1))
+        except ValueError:
+            pass
+
+    # 如果没有综合评分，尝试取所有维度分数的均值
+    if score == 0.0:
+        dim_scores = re.findall(r"[：:]\s*([0-9]\.?\d*)", report_text)
+        valid = [float(s) for s in dim_scores if 0 <= float(s) <= 1]
+        if valid:
+            score = sum(valid) / len(valid)
+
+    # 提取问题摘要（取报告前 500 字作为 issues）
+    issues = report_text[:500]
+
+    return score, issues
+
+
 def _run_update_vision_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, Any]:
     """v6.8.0: 根据最终申请书更新研究设想（proposal-brief）。"""
     prop_dir = self._find_proposal_dir(proposal_id)
@@ -1158,6 +1348,20 @@ def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, 
             "monitor_score": monitor_result.get("monitor_independent_score"),
         }
 
+    # v6.8.26: 结构性缺陷检测——content/scheme 文件级重复或模块空置
+    # 检测到时设置 idea_review_required 标志，下一轮前置 idea_review job
+    structural_defect = _detect_structural_defect(prop_dir)
+    if structural_defect:
+        prop_state = self._get_proposal_state(proposal_id) or {}
+        prop_state["idea_review_required"] = True
+        prop_state["idea_review_required_reason"] = structural_defect
+        self._set_proposal_state(proposal_id, prop_state)
+        if _log:
+            _log.warning(
+                f"[{proposal_id}] 检测到结构性缺陷：{structural_defect}，"
+                f"下一轮将重新触发研究设想评审"
+            )
+
     return {
         "success": True,
         "done": False,
@@ -1165,7 +1369,46 @@ def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, 
         "writer_delta": deltas.get("writer_delta"),
         "critic_delta": deltas.get("critic_delta"),
         "monitor_score": monitor_result.get("monitor_independent_score"),
+        "structural_defect": structural_defect or None,
     }
+
+
+def _detect_structural_defect(prop_dir: Path) -> str:
+    """v6.8.26: 检测申请书结构性缺陷——content/scheme 文件级重复或模块空置。
+
+    返回缺陷描述字符串（无缺陷返回空字符串）。
+    """
+    sections_dir = prop_dir / "04_proposal" / "sections"
+    if not sections_dir.exists():
+        return ""
+
+    content_path = sections_dir / "content.md"
+    scheme_path = sections_dir / "scheme.md"
+
+    # 检测模块空置
+    for name, path in [("研究内容", content_path), ("研究方案", scheme_path)]:
+        if path.exists() and path.stat().st_size < 50:
+            return f"{name}模块空置（文件不足50字节）"
+
+    if not content_path.exists() or not scheme_path.exists():
+        return ""
+
+    content_text = content_path.read_text(encoding="utf-8")
+    scheme_text = scheme_path.read_text(encoding="utf-8")
+
+    # 检测文件级重复：取 content 前 200 字符，检查是否在 scheme 中出现
+    if len(content_text) > 200:
+        sample = content_text[:200].strip()
+        if sample and sample in scheme_text:
+            return "研究内容与研究方案存在文件级重复（前200字符完全匹配）"
+
+    # 反向检测
+    if len(scheme_text) > 200:
+        sample = scheme_text[:200].strip()
+        if sample and sample in content_text:
+            return "研究方案与研究内容存在文件级重复（前200字符完全匹配）"
+
+    return ""
 
 def execute_job(self, job: Dict[str, Any]) -> Dict[str, Any]:
     """执行一个 checkpoint job（不获取锁，调用方负责锁）。"""
@@ -1183,6 +1426,7 @@ def execute_job(self, job: Dict[str, Any]) -> Dict[str, Any]:
         STEP_MONITOR: "监察",
         STEP_UPDATE_VISION: "更新研究设想",
         STEP_UPDATE_METHOD_MANUAL: "更新方法学手册",
+        STEP_IDEA_REVIEW: "研究设想评审",
     }.get(step, step)
     if _log:
         _log.info(f"[{proposal_id}] 对抗轮 {round_num}: {step} {step_verb}")
@@ -1211,6 +1455,8 @@ def execute_job(self, job: Dict[str, Any]) -> Dict[str, Any]:
             result = self._run_update_vision_step(proposal_id, job)
         elif step == STEP_UPDATE_METHOD_MANUAL:
             result = self._run_update_method_manual_step(proposal_id, job)
+        elif step == STEP_IDEA_REVIEW:
+            result = self._run_idea_review_step(proposal_id, job)
         else:
             result = {"success": False, "error": f"未知步骤 {step}"}
     except Exception as e:

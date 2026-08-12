@@ -80,13 +80,18 @@ class LifecycleCronTests(TestSuite):
 
         result = c.sync_checkpoint(pid)
         self.assert_true(result.get("success"), "sync_checkpoint 成功", result)
-        self.assert_eq(result.get("added"), 25, "round 1 生成 25 个 job")
+        # v6.8.26: round 1 生成 26 个 job（25 常规 + 1 idea_review）
+        self.assert_eq(result.get("added"), 26, "round 1 生成 26 个 job（含 idea_review）")
 
         jobs = c._get_jobs(pid)
-        self.assert_eq(len(jobs), 25, "checkpoint 列表长度")
-        self.assert_eq(jobs[0]["step"], "critic", "第一个 job 是 critic")
-        self.assert_eq(jobs[0]["section_key"], "rationale", "第一个模块是 rationale")
-        self.assert_eq(jobs[24]["step"], "update_method_manual", "最后一个 job 是 update_method_manual")
+        self.assert_eq(len(jobs), 26, "checkpoint 列表长度")
+        # v6.8.26: 第一个 job 是 idea_review
+        self.assert_eq(jobs[0]["step"], "idea_review", "第一个 job 是 idea_review")
+        self.assert_eq(jobs[0]["section_key"], "idea_review", "idea_review section_key")
+        # 第二个 job 是 rationale critic
+        self.assert_eq(jobs[1]["step"], "critic", "第二个 job 是 critic")
+        self.assert_eq(jobs[1]["section_key"], "rationale", "第二个模块是 rationale")
+        self.assert_eq(jobs[25]["step"], "update_method_manual", "最后一个 job 是 update_method_manual")
 
     def _test_pick_next_job(self):
         c = self._make_controller()
@@ -96,8 +101,8 @@ class LifecycleCronTests(TestSuite):
 
         job = c.pick_next_job(pid)
         self.assert_true(job is not None, "有 pending job")
-        self.assert_eq(job["step"], "critic", "下一个 job 是 critic")
-        self.assert_eq(job["section_key"], "rationale", "下一个模块是 rationale")
+        # v6.8.26: 第一个 job 是 idea_review（无依赖）
+        self.assert_eq(job["step"], "idea_review", "下一个 job 是 idea_review")
 
     def _test_idempotent_sync(self):
         c = self._make_controller()
@@ -106,7 +111,8 @@ class LifecycleCronTests(TestSuite):
         c.sync_checkpoint(pid)
         result = c.sync_checkpoint(pid)
         self.assert_eq(result.get("added"), 0, "重复 sync 不新增")
-        self.assert_eq(len(c._get_jobs(pid)), 25, "job 数量保持 25")
+        # v6.8.26: job 数量保持 26（含 idea_review）
+        self.assert_eq(len(c._get_jobs(pid)), 26, "job 数量保持 26")
 
     def _test_dependency_respected(self):
         c = self._make_controller()
@@ -114,14 +120,14 @@ class LifecycleCronTests(TestSuite):
         self._register_proposal(c, pid, "optimizing")
         c.sync_checkpoint(pid)
 
-        # 模拟 critic 直接失败，writer 不应被 pick
+        # v6.8.26: 模拟 idea_review 失败，rationale critic 不应被 pick
         jobs = c._get_jobs(pid)
-        jobs[0]["status"] = "failed"
+        jobs[0]["status"] = "failed"  # idea_review
         jobs[0]["attempts"] = 1
         c._save_jobs(pid, jobs)
 
         job = c.pick_next_job(pid)
-        self.assert_true(job is None, "依赖未满足时无可用 job")
+        self.assert_true(job is None, "idea_review 失败后无可用 job（critic 依赖未满足）")
 
     def _test_chain_dependency(self):
         c = self._make_controller()
@@ -140,6 +146,11 @@ class LifecycleCronTests(TestSuite):
         # content critic 依赖 rationale writer
         content_critic = next(j for j in jobs if j["section_key"] == "content" and j["step"] == "critic")
         self.assert_in(writer["job_id"], content_critic["depends_on"], "content critic 依赖 rationale writer")
+
+        # v6.8.26: rationale critic 依赖 idea_review
+        rationale_critic = next(j for j in jobs if j["section_key"] == "rationale" and j["step"] == "critic")
+        idea_review_id = f"{pid}-r1-idea_review-idea_review"
+        self.assert_in(idea_review_id, rationale_critic["depends_on"], "rationale critic 依赖 idea_review")
 
     def _test_stale_running_repair(self):
         c = self._make_controller()

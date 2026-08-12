@@ -53,6 +53,11 @@ STEP_LIT_NOTE = "lit_note"
 STEP_UPDATE_VISION = "update_vision"
 STEP_UPDATE_METHOD_MANUAL = "update_method_manual"
 
+# v6.8.26: 研究设想质量门槛——进入 optimizing 前的前置审核步骤
+STEP_IDEA_REVIEW = "idea_review"
+IDEA_REVIEW_THRESHOLD = 0.70       # 研究设想评审达标分数线
+MAX_IDEA_REVIEW_ATTEMPTS = 3       # 最多迭代修复次数
+
 # 微调度器 cron 名称与默认调度（每 5 分钟）
 MICRO_SCHEDULER_NAME = "lc-micro-scheduler"
 MICRO_SCHEDULER_SCHEDULE = "*/5 * * * 1-5"  # 工作日每 5 分钟一次
