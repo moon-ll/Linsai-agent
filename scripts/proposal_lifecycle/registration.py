@@ -111,6 +111,8 @@ class RegistrationMixin:
             "last_score": 0.0,
             "score_history": [],
             "section_passes": {},  # P1-3: 各模块对抗胜利状态
+            # v6.8.22: P0 跨轮持久化问题清单——critical/high 问题跨轮记忆，供 critic/writer 注入
+            "open_critical_issues": [],
             "human_feedback_count": 0,
             "transition_history": [
                 {"to": "drafts", "at": now_utc(), "reason": "注册新 proposal"}

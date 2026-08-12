@@ -890,6 +890,17 @@ class OptimizeMixin:
         if _human_feedback_block:
             prompt += _human_feedback_block
 
+        # v6.8.22: 注入历史遗留 P0 记忆（断裂点1）——critic 需核对这些历史问题是否仍存在
+        _p0_memory = self._build_p0_memory_text(proposal_id, exclude_resolved=True)
+        if _p0_memory:
+            prompt += (
+                _p0_memory
+                + "请逐条核对这些历史遗留问题在当前申请书中是否仍存在：\n"
+                + "  - 若仍存在，必须在问题清单中再次标记（severity 不变或更高），并引用具体段落\n"
+                + "  - 若已解决，请明确说明'已解决'，避免误报\n"
+                + "严禁因为历史问题曾出现就重复机械扣分，务必基于当前文本实际判断。\n"
+            )
+
         # v6.8.18: 注入 agent 分数反馈——让 critic 看到自己的表现，才能调整
         _score_feedback = self._load_agent_score_feedback("critic")
         if _score_feedback:
@@ -1258,6 +1269,23 @@ class OptimizeMixin:
                 f"修改完成后，将优化后的完整章节内容覆盖写入 {target_section_file}\n"
                 f"系统会自动根据章节文件重新组装 proposal-draft.md。\n"
             )
+            # v6.8.22: 断裂点4——存在未解决 P0 时放宽章节限制，允许跨章节修复
+            try:
+                unresolved_p0 = [
+                    e for e in self._load_open_critical_issues(proposal_id)
+                    if isinstance(e, dict) and e.get("round_resolved") is None and not e.get("stale")
+                ]
+                if unresolved_p0:
+                    cross_sections = sorted({e.get("section", "?") for e in unresolved_p0})
+                    section_focus += (
+                        f"\n【例外：历史遗留 P0 跨章节修复】\n"
+                        f"当前存在 {len(unresolved_p0)} 条未解决的 critical/high 问题，"
+                        f"涉及章节：{', '.join(cross_sections)}。\n"
+                        f"为消除这些 P0，你可以一并修改上述涉及章节文件（即使不在本轮聚焦章节内），"
+                        f"但每次改动必须与聚焦章节问题直接相关，避免无关大改。\n"
+                    )
+            except Exception:
+                pass
             primary_read = str(target_section_file)
         elif is_full_review:
             target_section_file = None
@@ -1381,6 +1409,18 @@ class OptimizeMixin:
         _exemplar_block = _load_cross_proposal_exemplar(self, proposal_id, section_key)
         if _exemplar_block:
             prompt += _exemplar_block
+
+        # v6.8.22: 注入未解决 P0 列表（断裂点2）——writer 必须优先消除历史遗留 P0
+        _p0_memory = self._build_p0_memory_text(proposal_id, exclude_resolved=False)
+        if _p0_memory:
+            prompt += (
+                _p0_memory
+                + "请将上述状态为'待解决'的历史遗留 P0 问题列为最高优先级处理：\n"
+                + "  - 逐条分析各问题在当前申请书中的体现，针对性修改对应章节\n"
+                + "  - 修改后请明确说明每个待解决问题的处理结果（已消除 / 已缓解 / 无法处理及原因）\n"
+                + "即使该问题归属章节不是本轮聚焦章节，只要严重影响质量，也应一并修复。\n"
+                + "状态为'已解决'的问题请保持现状，不要为了改而改导致质量回退。\n"
+            )
 
         # v6.8.18: 注入 agent 分数反馈
         _writer_score_feedback = self._load_agent_score_feedback("writer")
@@ -1684,6 +1724,164 @@ class OptimizeMixin:
                 if f"[{sev}]" in line or f"（{sev}）" in line:
                     issues.append({"severity": sev, "line": line.strip()[:100]})
         return issues
+
+
+# ---------------------------------------------------------------------------
+# v6.8.22: P0 跨轮持久化（断裂点3、1、2、4 的数据基础）
+# ---------------------------------------------------------------------------
+
+    def _update_open_critical_issues(
+        self,
+        proposal_id: str,
+        new_issues: List[Dict[str, Any]],
+        current_round: int,
+        focus_section_key: str,
+    ) -> List[Dict[str, Any]]:
+        """更新 proposal 的 open_critical_issues 列表（跨轮 P0 记忆）。
+
+        逻辑：
+        1. 仅吸纳 critical/high 级问题（P0/P1 级），medium/low 不入库。
+        2. 去重：同 section + 同 severity + 描述相似度>0.8 视为同一问题，只更新最新轮次。
+        3. 已存在但本轮 critic 报告中未再出现的问题 → 尝试标记为已解决（round_resolved）。
+        4. 超过 MAX_P0_TRACK_ROUNDS 轮仍未被复现也未标记解决的问题 → 降级为 stale（保留记录）。
+        5. 返回更新后的 open_critical_issues 列表。
+        """
+        MAX_P0_TRACK_ROUNDS = 10
+        prop_state = self._get_proposal_state(proposal_id)
+        if prop_state is None:
+            return []
+        open_list = prop_state.get("open_critical_issues", [])
+        if not isinstance(open_list, list):
+            open_list = []
+
+        # 本轮 critic 报告的 section 归属
+        section_key = focus_section_key or "full_review"
+
+        # 1) 收集本轮出现的 critical/high 问题签名
+        current_sigs = set()
+        current_entries = []
+        for issue in (new_issues or []):
+            sev = issue.get("severity", "").lower()
+            if sev not in ("critical", "high"):
+                continue  # 只跟踪 P0/P1 级
+            desc = (issue.get("line") or issue.get("description") or "").strip()
+            if not desc:
+                continue
+            sim_key = self._issue_similarity_key(desc)
+            sig = (section_key, sev, sim_key)
+            current_sigs.add(sig)
+            current_entries.append({
+                "severity": sev,
+                "section": section_key,
+                "description": desc[:300],
+                "first_seen_round": current_round,
+                "last_seen_round": current_round,
+                "round_resolved": None,
+                "stale": False,
+            })
+
+        # 2) 合并：保留历史 + 更新 last_seen / 标记解决
+        seen_this_round = set()
+        merged = []
+        for entry in open_list:
+            if not isinstance(entry, dict):
+                continue
+            sig = (entry.get("section", ""), (entry.get("severity") or "").lower(), self._issue_similarity_key(entry.get("description", "")))
+            if sig in current_sigs:
+                # 本轮仍出现 → 更新 last_seen，清除 resolved（若曾被误标记）
+                entry["last_seen_round"] = current_round
+                entry["round_resolved"] = None
+                entry["stale"] = False
+                seen_this_round.add(sig)
+            elif entry.get("round_resolved") is None and not entry.get("stale"):
+                # 历史未解决问题，本轮未复现 → 视为已解决
+                entry["round_resolved"] = current_round
+            merged.append(entry)
+
+        # 3) 加入本轮新出现、且历史不存在的问题
+        for entry in current_entries:
+            sig = (entry["section"], entry["severity"], self._issue_similarity_key(entry["description"]))
+            if sig not in seen_this_round:
+                merged.append(entry)
+                seen_this_round.add(sig)
+
+        # 4) 超长滞留未复现且已标记解决的，超过 MAX_P0_TRACK_ROUNDS 轮未复现 → stale 降级
+        for entry in merged:
+            if entry.get("stale"):
+                continue
+            resolved = entry.get("round_resolved")
+            if resolved is not None and (current_round - resolved) > MAX_P0_TRACK_ROUNDS:
+                entry["stale"] = True
+
+        # 5) 列表上限保护（最近 40 条，按 last_seen_round 降序保留）
+        merged.sort(key=lambda e: e.get("last_seen_round", 0), reverse=True)
+        merged = merged[:40]
+
+        prop_state["open_critical_issues"] = merged
+        self._set_proposal_state(proposal_id, prop_state)
+        return merged
+
+    def _issue_similarity_key(self, description: str) -> str:
+        """生成问题描述的可比对相似键：取前 30 个字符，去掉空白与标点，小写。
+
+        用于跨轮去重——同一问题在不同轮次的措辞略有差异时仍能识别为同一问题。
+        """
+        import re
+        if not description:
+            return ""
+        norm = re.sub(r"[\s，。；：、,.!?！？;:'\"“”‘’（）()\[\]【】\-—]", "", description.lower())
+        return norm[:30]
+
+    def _load_open_critical_issues(self, proposal_id: str) -> List[Dict[str, Any]]:
+        """读取指定 proposal 的 open_critical_issues 列表（供 prompt 注入）。"""
+        prop_state = self._get_proposal_state(proposal_id)
+        if prop_state is None:
+            return []
+        open_list = prop_state.get("open_critical_issues", [])
+        return [e for e in (open_list or []) if isinstance(e, dict)]
+
+    def _build_p0_memory_text(self, proposal_id: str, exclude_resolved: bool = True) -> str:
+        """构建注入 critic/writer prompt 的历史 P0 记忆文本。
+
+        exclude_resolved=True（critic 用）：只列出仍未解决（round_resolved is None）的 P0。
+        exclude_resolved=False（writer 用）：列出全部未解决 + 最近已解决的问题。
+        """
+        entries = self._load_open_critical_issues(proposal_id)
+        if not entries:
+            return ""
+
+        unresolved = [e for e in entries if e.get("round_resolved") is None and not e.get("stale")]
+        if exclude_resolved:
+            target = unresolved
+        else:
+            # writer 需要看到未解决 + 最近 3 条已解决（防止反复横跳）
+            resolved = sorted(
+                [e for e in entries if e.get("round_resolved") is not None],
+                key=lambda e: e.get("round_resolved", 0), reverse=True,
+            )[:3]
+            target = unresolved + resolved
+
+        if not target:
+            return ""
+
+        sev_cn = {"critical": "严重(P0)", "high": "较高(P1)"}
+        lines = []
+        for e in target:
+            sev = (e.get("severity") or "high").lower()
+            if e.get("round_resolved") is None:
+                status = f"待解决（首见于 R{e.get('first_seen_round')}）"
+            else:
+                status = f"已解决（R{e.get('round_resolved')} 起未复现）"
+            lines.append(
+                f"- [{sev_cn.get(sev, sev)}] 归属章节={e.get('section','?')} 状态={status} "
+                f"问题：{e.get('description','')[:120]}"
+            )
+        block = "\n".join(lines)
+        return (
+            f"\n\n【历史遗留问题记忆（跨轮持久化，必须逐条核对）】\n"
+            f"以下问题是此前多轮对抗评审中反复/遗留的 P0 级问题，请务必处理：\n"
+            f"{block}\n"
+        )
 
 
 # ---------------------------------------------------------------------------

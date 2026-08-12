@@ -1,5 +1,36 @@
 # 变更记录
 
+## v6.8.23 - 2026-08-12 P0 跨轮持久化（对抗评审置换修复 5 断裂点）
+
+### 背景
+
+P0（critical）级问题此前**没有跨轮记忆**：critic 每轮只基于当前申请书文本评审，
+历史轮次指出的"指标口径不一致""首次无文献支撑"等致命问题，若本轮聚焦章节不同，
+writer 不会看到、也就不会修复，导致问题在多轮间反复出现、评分停滞。
+
+### 修复（5 个断裂点）
+
+1. **断裂点3（数据层）**：`_lifecycle.json` 新增 `open_critical_issues` 数组
+   （registration 初始化），`optimize.py` 新增 `_update_open_critical_issues` /
+   `_issue_similarity_key` / `_load_open_critical_issues` / `_build_p0_memory_text`。
+   仅收录 critical/high，按（章节+严重度+相似键）跨轮去重，未复现自动标记已解决，
+   超 10 轮未复现降级 stale，列表上限 40 条。执行器 `_run_writer_step` 每轮触发更新。
+2. **断裂点1（critic 记忆注入）**：`_run_critic` prompt 注入历史未解决 P0，
+   要求逐条核实"仍存在则再次标记 / 已解决则明确说明"，避免机械重复扣分。
+3. **断裂点2（writer 修复注入）**：`_run_writer_optimize` prompt 注入
+   未解决 P0 + 最近 3 条已解决（防横跳），要求列为最高优先级处理并说明结果。
+4. **断裂点4（章节放宽）**：存在未解决 P0 时，writer 的聚焦章节限制放宽，
+   允许一并修改 P0 涉及章节，但限定与聚焦问题直接相关，避免无关大改。
+5. **断裂点5（达标把关）**：`completion._check_done` 在 5 模块全胜且 monitor 达标后，
+   若仍存在未解决 critical P0，判定不予流转、继续优化，防止"带病出厂"。
+
+### 验证
+
+- 新增 `scripts/tests/test_cross_round_p0_memory.py`：18/18 通过（收录/去重/标记解决/
+  相似键/critic 注入/writer 注入/P0 清零达标判定）。
+- `python3 scripts/self_test.py --module`：373/376 通过，3 个失败均为沙箱无法访问
+  `~/.hermes` profile 目录所致，与本次改动无关。
+
 ## v6.8.22 - 2026-08-11 prompt 优化器指数级膨胀修复（健康检查 4h 发现）
 
 ### Bug

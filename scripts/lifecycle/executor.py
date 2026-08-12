@@ -891,6 +891,16 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     weakest_dim = self._get_weakest_dimension(dim_scores)
     issues = report["issues"]
 
+    # v6.8.22: P0 跨轮持久化——本轮 critic 出现的 critical/high 问题写入 open_critical_issues
+    # 供下一轮 critic/writer prompt 注入，实现跨轮记忆（断裂点3）
+    try:
+        self._update_open_critical_issues(
+            proposal_id, issues, round_num, section_key,
+        )
+    except Exception:
+        if _log:
+            _log.warning(f"[{proposal_id}] 更新 open_critical_issues 失败（非关键路径）")
+
     min_score = threshold.get("min_overall_score", 0.80)
     weak_dims = [k for k, floor in self.DIMENSION_FLOOR.items() if k in dim_scores and dim_scores[k] < floor]
     section_passed = score_after >= min_score and len(weak_dims) == 0

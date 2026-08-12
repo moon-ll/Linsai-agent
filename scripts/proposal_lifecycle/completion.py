@@ -63,6 +63,32 @@ class CompletionMixin:
                         f"不予流转，继续优化。"
                     ),
                 }
+            # v6.8.22: 断裂点5——P0 清零检查。即使 5 模块全胜，若存在未解决 critical P0，
+            # 不予标达标流转，防止"带着致命问题出厂"。
+            try:
+                open_critical = prop_state.get("open_critical_issues", [])
+                unresolved_criticals = [
+                    e for e in (open_critical or [])
+                    if isinstance(e, dict)
+                    and e.get("round_resolved") is None
+                    and not e.get("stale")
+                    and (e.get("severity") or "").lower() == "critical"
+                ]
+                if unresolved_criticals:
+                    sampled = ", ".join(
+                        f"{e.get('section','?')}" for e in unresolved_criticals[:5]
+                    )
+                    return {
+                        "done": False,
+                        "reason": (
+                            f"全部{len(self.REQUIRED_SECTIONS)}个模块对抗胜利，"
+                            f"但仍有{len(unresolved_criticals)}条未解决 critical P0 "
+                            f"（涉及：{sampled}{'...' if len(unresolved_criticals) > 5 else ''}），"
+                            f"不予流转，继续优化。"
+                        ),
+                    }
+            except Exception:
+                pass  # 非关键路径，读取失败不阻断原有达标逻辑
             return {"done": True, "reason": f"全部{len(self.REQUIRED_SECTIONS)}个模块对抗胜利（{','.join(passed_sections)}）"}
 
         # v6.8.16 改进1: 质量天花板检测（收敛检测）
