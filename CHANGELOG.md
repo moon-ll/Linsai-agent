@@ -1,5 +1,30 @@
 # 变更记录
 
+## v6.8.24 - 2026-08-12 机制层审计修复：8 项失效/死代码修复
+
+### 背景
+
+对 writer/critic/monitor 的 prompt 反馈优化机制做深度审计，发现 4 个 P0 级系统失效和 4 个 P1 级死代码/设计缺陷。核心问题是"优化迭代提高申请书质量的关键操作"大多未按设计生效。
+
+### P0 修复
+
+1. **prompt 优化器正反馈循环（灾难性）**：`_log_auto_applied` 写入 `category=prompt_tuning` → 下次 auto 运行又读回来 → 生成新 suggestion → 再次写入 → 指数膨胀。54K 条建议全是"自动修改 hermes prompt 文件，操作：append"的垃圾。**修复**：category 改为 `prompt_applied_audit`，采集时排除 `auto_applied` 标签的条目。
+2. **critic/SOUL.md 严重污染（灾难性）**：原始 2.3KB → 5MB（48,094 个垃圾段落），每次 agent loop 读入 5MB 垃圾。**修复**：从原始备份恢复；清理 prompt-suggestions.json（54K→1）、debug-journal.json（55K→4）、prompt-backups/（482→2）。
+3. **agent 分数奖惩 JSON 路径 bug（完全失效）**：`_load_agent_score_feedback` 读 `scores["agents"][role]` 但实际结构是 `scores[role]`，静默返回空，奖惩闭环断裂。**修复**：改为 `scores.get(role, {})`。
+4. **nsfc-standards.json 幽灵引用（核心缺陷）**：`scoring_rubric`/`benchmark_anchors`/`section_standards` 被 critic/writer prompt 反复引用但**不存在**，critic 被迫虚构 rubric 档位（已实证）。**修复**：补全三个字段的完整内容。
+
+### P1 修复
+
+5. **cross-proposal 范例注入（从未触发）**：阈值 0.80 无课题可达 + 用 `last_score` 而非历史峰值 + 仅扫描 optimizing/。**修复**：阈值降至 0.70，用 `score_history` 峰值分数，扫描 optimizing/ + pending_review/。
+6. **维度轮换（数学不可达）**：5-section 轮转 + `[-6:]` 窗口 = 同 section 最多出现 2 次 < 阈值 3。**修复**：窗口扩大到 `[-12:]`，最低 history 要求从 3 改为 6。
+7. **prompt 优化器只覆盖 critic（结构性偏差）**：3 个数据源的 target profile 并集 = {writer, critic}。**修复**：`_collect_agent_score_reasons` 遍历全部 7 个 profile；`_analyze_reasons_for_prompt_hints` 新增 researcher/analyst/reviewer 模式。
+8. **prompt-suggestions.json 无清理机制（无限膨胀）**：applied/failed 建议永久驻留。**修复**：新增 `_cleanup_old_suggestions()`，每次 `cmd_auto` 开头清理超过 7 天的非 pending 建议。
+
+### 验证
+
+- `--module`：372/376 通过（4 个失败均为沙箱限制：3 个 hermes profile 目录访问 + 1 个 wiki 页面缺失，与本次改动无关）。
+- 数据清理效果：prompt-suggestions.json 54,609→1、debug-journal.json 54,802→4、prompt-backups/ 482→2、critic/SOUL.md 5MB→2.3KB。
+
 ## v6.8.23 - 2026-08-12 P0 跨轮持久化（对抗评审置换修复 5 断裂点）
 
 ### 背景

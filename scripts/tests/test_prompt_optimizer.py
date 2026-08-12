@@ -260,7 +260,7 @@ class PromptOptimizerTests(TestSuite):
 
         # 验证条目内容
         entry = entries[-1]
-        self.assert_eq(entry["category"], "prompt_tuning", "条目 category 为 prompt_tuning")
+        self.assert_eq(entry["category"], "prompt_applied_audit", "条目 category 为 prompt_applied_audit（v6.8.24 改名，断裂循环）")
         self.assert_eq(entry["severity"], "minor", "条目 severity 为 minor")
         self.assert_eq(entry["status"], "verified", "条目 status 为 verified")
         self.assert_in("prompt_optimization", entry["tags"], "标签包含 prompt_optimization")

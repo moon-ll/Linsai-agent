@@ -91,6 +91,46 @@ MAX_AUTO_APPLY_PER_RUN = 200
 # debug-journal.json 持续膨胀。fcntl.flock 提供跨进程互斥。
 CMD_AUTO_LOCK_PATH = MEMORY_DIR / ".prompt-optimizer-auto.lock"
 
+# v6.8.24: applied/failed 建议保留天数。超过此天数的非 pending 建议将被清理。
+SUGGESTION_RETENTION_DAYS = 7
+
+
+def _cleanup_old_suggestions() -> int:
+    """v6.8.24: 清理超过保留期的 applied/failed 建议，防止 prompt-suggestions.json 无限膨胀。
+
+    Returns: 清理的条目数。
+    """
+    suggestions = _load_suggestions()
+    if not suggestions:
+        return 0
+
+    from datetime import timedelta
+    cutoff = datetime.now(timezone.utc) - timedelta(days=SUGGESTION_RETENTION_DAYS)
+
+    kept = []
+    cleaned = 0
+    for s in suggestions:
+        status = s.get("status", "")
+        if status == "pending":
+            kept.append(s)
+            continue
+        # applied/failed 超过保留期则删除
+        ts = s.get("applied_at") or s.get("created_at") or ""
+        try:
+            entry_dt = datetime.strptime(ts[:19] + "Z", "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+            if entry_dt < cutoff:
+                cleaned += 1
+                continue
+        except (ValueError, TypeError):
+            # 时间戳解析失败的安全策略：保留
+            pass
+        kept.append(s)
+
+    if cleaned > 0:
+        _save_suggestions(kept)
+    return cleaned
+
+
 # failure_analyzer 模式到目标 profile 的映射
 PATTERN_TO_PROFILE = {
     "score-zero-streak": "critic",
@@ -162,6 +202,10 @@ def _collect_debug_journal_entries() -> List[Dict]:
     for e in entries:
         if e.get("category") != "prompt_tuning":
             continue
+        # v6.8.24: 排除 auto_applied 标记的条目，断裂正反馈循环
+        tags = e.get("tags", [])
+        if "auto_applied" in tags:
+            continue
         ts = e.get("timestamp") or e.get("created_at") or ""
         # 解析并比较时间戳；解析失败的条目跳过（避免污染采集）
         try:
@@ -176,11 +220,16 @@ def _collect_debug_journal_entries() -> List[Dict]:
 
 
 def _collect_agent_score_reasons() -> List[Dict]:
-    """从 agent-scores.json 中提取带 reason 的奖惩记录。"""
+    """从 agent-scores.json 中提取带 reason 的奖惩记录。
+
+    v6.8.24: 遍历全部 7 个 profile（旧版硬编码只有 writer/critic）。
+    """
     data = _load_json(AGENT_SCORES_PATH)
     result = []
 
-    for agent_name in ["writer", "critic"]:
+    # v6.8.24: 覆盖全部 hermes profile
+    all_profiles = ["writer", "critic", "researcher", "analyst", "reviewer", "linsai", "pipeline-runner"]
+    for agent_name in all_profiles:
         agent_data = data.get(agent_name, {})
         # 从 history 中提取带 reason 的记录
         for h in agent_data.get("history", []):
@@ -352,7 +401,25 @@ def _analyze_reasons_for_prompt_hints(reasons: List[Dict]) -> List[Dict]:
          "critic 报告内评分不一致，需在 prompt 中明确评分公式的自洽性要求"),
     ]
 
-    all_patterns = writer_patterns + critic_patterns
+    # v6.8.24: 新增 researcher/analyst/reviewer 的模式
+    researcher_patterns = [
+        (r"超时|timeout|agent loop.*超时", "researcher", "medium",
+         "researcher agent loop 频繁超时，需在 prompt 中精简检索策略或限制搜索深度"),
+        (r"文献.*缺失|检索.*失败|无结果", "researcher", "medium",
+         "researcher 文献检索结果不足，需在 prompt 中强化关键词组合策略和数据库覆盖"),
+    ]
+
+    analyst_patterns = [
+        (r"分析.*空|gap.*识别.*失败|缺口.*未发现", "analyst", "medium",
+         "analyst 文献缺口识别能力不足，需在 prompt 中强化对比分析框架"),
+    ]
+
+    reviewer_patterns = [
+        (r"串通|collusion|虚高|过度宽松", "reviewer", "high",
+         "reviewer monitor 检测到 writer-critic 串通风险，需强化独立判断指令"),
+    ]
+
+    all_patterns = writer_patterns + critic_patterns + researcher_patterns + analyst_patterns + reviewer_patterns
     matched_patterns: Dict[str, int] = Counter()
 
     for r in reasons[:50]:  # 只检查最近 50 条
@@ -751,6 +818,11 @@ def cmd_auto() -> None:
     print("=== Prompt 自动优化（auto 模式）===")
     print()
 
+    # v6.8.24: 清理旧建议，防止文件无限膨胀
+    cleaned = _cleanup_old_suggestions()
+    if cleaned > 0:
+        print(f"  ✓ 清理 {cleaned} 条过期 applied/failed 建议")
+
     # v6.8.23: 进程互斥锁（flock）。若已有进程持有锁（如上一个 cron 触发的实例
     # 仍在跑 / hang），当前进程直接退出，避免多个 cmd_auto 并发叠加写 journal。
     try:
@@ -855,13 +927,18 @@ def cmd_auto() -> None:
 
 
 def _log_auto_applied(suggestions: List[Dict]) -> None:
-    """将自动应用的记录写入 debug journal。"""
+    """将自动应用的记录写入 debug journal。
+
+    v6.8.24: category 从 prompt_tuning 改为 prompt_applied_audit，
+    断裂正反馈循环（旧版写入 prompt_tuning → 下次 _collect_debug_journal_entries
+    又读回来 → 生成新 suggestion → 再次写入 → 指数膨胀）。
+    """
     try:
         sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
         import debug_journal
         for s in suggestions:
             debug_journal.add_entry({
-                "category": "prompt_tuning",
+                "category": "prompt_applied_audit",
                 "severity": "minor",
                 "title": f"Prompt 自动优化：{s['target_profile']}/{Path(s['target_file']).name}",
                 "context": f"来源：{s['source']}",

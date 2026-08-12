@@ -75,15 +75,17 @@ class OptimizeMixin:
 
         # P1-1: 确定本轮聚焦章节（轮转 + 每4轮整体审查）
         # v6.8.16 改进4: 维度轮换——连续 3 轮在同一维度原地踏步则跳过
+        # v6.8.24 修复: 旧版窗口 [-6:] 在 5-section 轮转下同 section 最多出现 2 次，
+        # 阈值 3 永远不可达。改为 [-12:]（覆盖 2+ 个完整轮转周期）。
         section_cycle = current_round % (len(PROPOSAL_SECTIONS) + 1)
         if section_cycle < len(PROPOSAL_SECTIONS):
             focus_section = PROPOSAL_SECTIONS[section_cycle]
             is_full_review = False
             # 检查该维度是否连续 3 轮无提升
             score_history = prop_state.get("score_history", [])
-            if len(score_history) >= 3:
+            if len(score_history) >= 6:
                 same_section_rounds = [
-                    h for h in score_history[-6:]
+                    h for h in score_history[-12:]
                     if h.get("focus_section") == focus_section.get("key")
                 ]
                 if len(same_section_rounds) >= 3:
@@ -928,6 +930,9 @@ class OptimizeMixin:
 
         只有当分数 <80（偏离初始 100 较远）或最近 3 轮有 reason 时才注入，
         避免无意义的冗余。
+
+        v6.8.24: 修复 JSON 路径 bug——agent-scores.json 顶层直接是 role key，
+        旧版读 scores["agents"][role] 永远返回空 dict，导致奖惩反馈完全失效。
         """
         try:
             import json
@@ -936,7 +941,8 @@ class OptimizeMixin:
             if not scores_path.exists():
                 return ""
             scores = json.loads(scores_path.read_text(encoding="utf-8"))
-            agent = scores.get("agents", {}).get(role, {})
+            # v6.8.24: 实际结构是 {role: {score, history, ...}}，不是 {agents: {role: ...}}
+            agent = scores.get(role, {})
             score = agent.get("score", 100)
             initial = agent.get("initial_score", 100)
             history = agent.get("history", [])
@@ -1891,11 +1897,12 @@ class OptimizeMixin:
 def _load_cross_proposal_exemplar(lifecycle_obj, current_proposal_id: str, section_key: str) -> str:
     """从最高分课题中提取范例段落，注入到低分课题的 writer prompt。
 
-    只有当当前课题分数 <0.75 且存在分数 ≥0.80 的其他课题时才触发。
+    v6.8.24 修复：旧版用 last_score + 阈值 0.80 → 所有课题从未达到 → 死代码。
+    改为：用历史峰值分数（score_history 中的最大值），阈值降至 0.70，
+    扫描 optimizing/ 和 pending_review/ 目录。
     """
     try:
         from proposal_lifecycle.constants import PROPOSALS_ROOT
-        optimizing_dir = PROPOSALS_ROOT / "optimizing"
 
         # 找到当前课题的分数
         current_state = lifecycle_obj._get_proposal_state(current_proposal_id)
@@ -1903,24 +1910,39 @@ def _load_cross_proposal_exemplar(lifecycle_obj, current_proposal_id: str, secti
         if current_score >= 0.75:
             return ""  # 当前课题已足够好，不需要范例
 
-        # 找到最高分的其他课题
+        # v6.8.24: 从 score_history 取历史峰值，而非 last_score
+        def _best_score_from_state(state: dict) -> float:
+            """从 proposal state 中提取历史最高分。"""
+            last = state.get("last_score", 0.0)
+            history = state.get("score_history", [])
+            if not history:
+                return last
+            peak = max((h.get("score", 0) for h in history if isinstance(h, dict)), default=0)
+            return max(last, peak)
+
+        # v6.8.24: 同时扫描 optimizing/ 和 pending_review/ 目录
         best_proposal = None
-        best_score = 0.80  # 最低门槛
-        for d in optimizing_dir.iterdir():
-            if not d.is_dir() or d.name == current_proposal_id:
+        best_score = 0.70  # v6.8.24: 门槛从 0.80 降至 0.70（实际可达到的水平）
+        for subdir in ["optimizing", "pending_review"]:
+            scan_dir = PROPOSALS_ROOT / subdir
+            if not scan_dir.exists():
                 continue
-            lc_file = d / "_lifecycle.json"
-            if not lc_file.exists():
-                continue
-            try:
-                import json
-                state = json.loads(lc_file.read_text(encoding="utf-8"))
-                score = state.get("last_score", 0.0)
-                if score > best_score:
-                    best_score = score
-                    best_proposal = d.name
-            except Exception:
-                continue
+            for d in scan_dir.iterdir():
+                if not d.is_dir() or d.name == current_proposal_id:
+                    continue
+                lc_file = d / "_lifecycle.json"
+                if not lc_file.exists():
+                    continue
+                try:
+                    import json
+                    state = json.loads(lc_file.read_text(encoding="utf-8"))
+                    score = _best_score_from_state(state)
+                    if score > best_score:
+                        best_score = score
+                        best_proposal = d.name
+                        best_subdir = subdir
+                except Exception:
+                    continue
 
         if not best_proposal:
             return ""
@@ -1935,7 +1957,7 @@ def _load_cross_proposal_exemplar(lifecycle_obj, current_proposal_id: str, secti
         if not section_file:
             return ""
 
-        exemplar_path = optimizing_dir / best_proposal / "04_proposal" / "sections" / section_file
+        exemplar_path = PROPOSALS_ROOT / best_subdir / best_proposal / "04_proposal" / "sections" / section_file
         if not exemplar_path.exists():
             return ""
 
