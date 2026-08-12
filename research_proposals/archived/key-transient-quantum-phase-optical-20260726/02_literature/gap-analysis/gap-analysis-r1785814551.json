@@ -1,0 +1,108 @@
+{
+  "gaps": [
+    {
+      "claim": "利用SHG偏振旋转作为Bi₂Se₃中瞬态相变或瞬态拓扑状态的实时触发/读出信号",
+      "missing_evidence": "缺少关于Bi₂Se₃晶体反演对称性、体内电偶极SHG选择定则以及表面/界面SHG贡献的实验与理论文献；需要文献明确说明在何种破缺反演对称性、表面敏感几何或高阶多极贡献下SHG偏振旋转才可作为有效动力学信号",
+      "search_keywords": [
+        "Bi2Se3 SHG inversion symmetry electric dipole selection rules",
+        "Bi2Se3 surface second harmonic generation polarization rotation",
+        "second harmonic generation Bi2Se3 transient dynamics",
+        "surface SHG topological insulator Bi2Se3"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "以ℏω/Eg或光子能量与带隙的相对关系判定体系是否进入目标强场驱动区域",
+      "missing_evidence": "缺少将光子能量、带隙、场强、Keldysh参数和多光子/隧穿机制联系起来的理论或实验依据；需要文献支持该阈值判据适用于所选材料和脉冲参数，而不能仅凭ℏω与Eg的比较作出动力学区间判断",
+      "search_keywords": [
+        "Keldysh parameter solid-state strong-field regime band gap photon energy",
+        "strong-field optical excitation criterion solid materials",
+        "multiphoton tunneling crossover semiconductor ultrafast optics",
+        "photon energy band gap criterion strong-field dynamics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MoS₂在拟议驱动参数下处于强非绝热区，并能够形成可观测的瞬态量子相/拓扑响应",
+      "missing_evidence": "缺少MoS₂在具体场强、频率、脉宽和带隙条件下的Keldysh参数、非绝热跃迁概率、带重整化和瞬态拓扑响应的定量理论或实验研究",
+      "search_keywords": [
+        "MoS2 strong-field nonadiabatic dynamics",
+        "MoS2 Keldysh parameter ultrafast strong-field",
+        "MoS2 nonadiabatic band structure modification",
+        "MoS2 light-induced topological phase transition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "瞬态陈数或其他拓扑不变量可以通过全光学写入—读取—反演闭环进行定量测量",
+      "missing_evidence": "缺少瞬态拓扑不变量全光学测量的先例、可观测量与拓扑不变量之间的定量映射，以及在有限脉冲、非平衡占据和退相干条件下反演唯一性的理论/实验依据",
+      "search_keywords": [
+        "ultrafast optical measurement transient Chern number",
+        "all-optical measurement dynamical topological invariant",
+        "high harmonic generation Chern number reconstruction",
+        "transient topology optical readout solid state",
+        "nonequilibrium Chern number experimental measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "瞬时陈数可在目标动力学过程中取ΔC=1的整数跃迁，并可由实验信号稳定识别",
+      "missing_evidence": "缺少支持ΔC整数跃迁幅度、其产生条件及实验分辨能力的文献；需要讨论有限时间、非绝热驱动、混合态、带占据和退相干下陈数的定义及整数拓扑量是否仍可直接从观测信号恢复",
+      "search_keywords": [
+        "dynamical Chern number nonadiabatic driving",
+        "Chern number mixed state nonequilibrium topology",
+        "transient Chern number ultrafast optics",
+        "nonadiabatic topological phase transition Chern number",
+        "experimental detection integer Chern number ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "强场驱动可以实现可逆的瞬态量子相，并可区分真正的瞬态相与普通激发态、Floquet态或热效应",
+      "missing_evidence": "缺少瞬态量子相的操作性定义、与Floquet态及短寿命非平衡激发态的判别标准，以及可逆性、寿命、驱动脉冲依赖和热效应排除的实验依据",
+      "search_keywords": [
+        "operational definition transient quantum phase ultrafast optics",
+        "transient quantum phase versus Floquet state",
+        "nonequilibrium quantum phase experimental criteria",
+        "reversible light-induced phase transition solid state",
+        "ultrafast distinction Floquet state excited state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "所提出的瞬态拓扑不变量全光测量理论构成从静态拓扑测量向瞬态体系的实质性推广",
+      "missing_evidence": "缺少已有静态拓扑不变量光学测量、非平衡拓扑理论和瞬态高次谐波/非线性光学工作的系统对比；需要文献明确现有方法的适用边界及本方案相对于已有扩展的新增可测量量或新增反演能力",
+      "search_keywords": [
+        "optical measurement topological invariants static systems",
+        "nonequilibrium topology nonlinear optics review",
+        "high harmonic spectroscopy topological invariants",
+        "dynamical topology optical probes review",
+        "transient topological invariant measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "物理约束AI反演方法相较于PINN、DeepEuler等已有物理引导机器学习方法具有明确的方法学优势",
+      "missing_evidence": "缺少PINN、DeepEuler及其在光谱反演、非线性光学或量子动力学中的代表性文献，以及对网络约束形式、物理先验、可解释性、噪声鲁棒性和反演不适定性处理的定量比较",
+      "search_keywords": [
+        "physics-informed neural network ultrafast spectroscopy inversion",
+        "PINN high harmonic generation inverse problem",
+        "DeepEuler physics-informed machine learning",
+        "physics-guided neural network quantum dynamics inverse problem",
+        "machine learning reconstruction nonlinear optical spectra"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L2计算方案能够将每个时间点的计算压缩至约1天，并相对于L1获得明确加速",
+      "missing_evidence": "缺少类似强场非平衡动力学、实时TDDFT、多体或高次谐波模拟中GPU/L2加速的基准测试文献；需要文献或公开基准支持预期加速比、系统规模、时间步长和并行效率",
+      "search_keywords": [
+        "GPU accelerated real-time TDDFT ultrafast dynamics benchmark",
+        "GPU strong-field electron dynamics simulation speedup",
+        "GPU high harmonic generation simulation benchmark",
+        "large-scale nonequilibrium quantum dynamics GPU acceleration"
+      ],
+      "priority": "medium"
+    }
+  ]
+}
