@@ -314,6 +314,9 @@ class OptimizeMixin:
         # 不再外层包 file_lock(f"proposal-{proposal_id}")，避免嵌套锁和潜在竞态
         prop_state = self._get_proposal_state(proposal_id)
         prop_state["optimization_rounds"] = current_round + 1
+        # v6.8.21: 清理旧轮次 job
+        from lifecycle.utils import archive_old_round_jobs
+        archive_old_round_jobs(proposal_id, current_round + 1)
         prop_state["last_score"] = score_after
         prop_state["last_dim_scores"] = dim_scores  # P0-2: 记录维度分数
         # P1-3: 记录各模块对抗胜利状态

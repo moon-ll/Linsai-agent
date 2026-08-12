@@ -1,0 +1,48 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb在0.3—0.8 V/Å强场下损伤阈值（反射率变化>5%）的判断缺乏样品级实验数据支撑",
+      "missing_evidence": "缺少CrSb在飞秒强场激发下的反射率变化/损伤阈值的实验文献",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser damage",
+        "CrSb strong-field optical excitation stability",
+        "CrSb reflectivity change intense laser field",
+        "CrSb near-infrared pump probe damage threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mandal 2025 [36]实验装置基线可扩展至本项目所需4倍场强跨度",
+      "missing_evidence": "缺乏从Mandal 2025装置基线到更高场强的技术可行性论证及同类场强标定文献",
+      "search_keywords": [
+        "Mandal 2025 high harmonic generation experimental setup field strength",
+        "Mandal 2025 ultrafast spectroscopy CrSb",
+        "solid-state HHG scaling with driving field strength",
+        "high-field ultrafast experiment damage threshold CrSb"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4三重保障中'X射线衍射或磁输运测量'可作为HHG方法的独立验证手段",
+      "missing_evidence": "缺少用X射线衍射或磁输运测量独立验证altermagnet有序参量的具体实验方案及相关文献",
+      "search_keywords": [
+        "magnetic Bragg peak altermagnet neutron diffraction CrSb",
+        "anomalous Hall altermagnet CrSb experimental signature",
+        "altermagnet order parameter independent verification X-ray diffraction"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "本项目'唯一归因'范式区别于Werner 2024框架，需更精细的区分论证",
+      "missing_evidence": "缺少与Werner 2024 altermagnet HHG理论框架的系统性对比文献，差异化定位不够精细",
+      "search_keywords": [
+        "Werner 2024 altermagnet high harmonic generation framework",
+        "Werner altermagnet nonlinear optical response theory",
+        "altermagnet HHG theory uniqueness attribution",
+        "altermagnet order parameter HHG fingerprint theory"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

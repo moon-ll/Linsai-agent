@@ -3,11 +3,11 @@ title: "order-parameter-ultrafast-readout — 最新版本"
 type: "proposal_version"
 proposal_id: "general-order-parameter-ultrafast-readout-20260727"
 project_type: "general"
-latest_round: 6
-last_score: 0.74
+latest_round: 7
+last_score: 0.69
 status: "optimizing"
-created: "2026-08-11T13:48:07Z"
-updated: "2026-08-11T13:48:07Z"
+created: "2026-08-12T03:12:03Z"
+updated: "2026-08-12T03:12:03Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -17,10 +17,10 @@ confidence: 1.0
 
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
 **类型**：general
-**最新轮次**：第 6 轮
-**当前分数**：0.74
+**最新轮次**：第 7 轮
+**当前分数**：0.69
 **状态**：优化中
-**同步时间**：2026-08-11T13:48:07Z
+**同步时间**：2026-08-12T03:12:03Z
 
 ---
 
@@ -28,22 +28,22 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 34 |
+| content | content | 59 |
 | full_review | full_review | 78 |
-| rationale | rationale | 66 |
-| references | references | 164 |
-| scheme | scheme | 95 |
+| rationale | rationale | 78 |
+| references | references | 156 |
+| scheme | scheme | 104 |
 
 ## 课题简介
 
 # 课题说明
 
-**课题名称**：引用状态标注**：
+**课题名称**：难点一：altermagnet HHG 信号能否被观测到。** Werner 等人理论给出候选信号的存在性预言（Werner et al., 2024 [24]），但理论是否包含自旋轨道耦合、带间跃迁贡献是否完整、在什么场强与波长范围内成立，都需要通过实验检验。信号强度、样品在强场下的损伤阈值、以及与能带背景的相对幅度，在实验之前均存在不确定性。
 **项目类型**：面上项目
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
-**当前状态**：优化中（第5轮，score 0.74）
+**当前状态**：优化中（第7轮，score 0.69）
 **启动日期**：2026-07-27
-**最后更新**：2026-08-10
+**最后更新**：2026-08-12
 
 ---
 
@@ -67,12 +67,7 @@ confidence: 1.0
 | 6 | 0.32 | 14 | 5 | 2026-07-30 |
 | 7 | 0.36 | 45 | 15 | 2026-07-30 |
 | 1 | 0.39 | 31 | 15 | 2026-08-03 |
-| 2 | 0.42 | 16 | 6 | 2026-08-03 |
-| 3 | 0.46 | 12 | 4 | 2026-08-03 |
-| 4 | 0.58 | 12 | 4 | 2026-08-03 |
-| 5 | 0.71 | 13 | 4 | 2026-08-03 |
-| 6 | 0.76 | 12 | 6 | 2026-08-10 |
-| 6 | 0.74
+| 2 | 0.42 | 16 | 6 
 
 （完整简介见 [源文件](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/04_proposal/proposal-draft-merged.md)）
 

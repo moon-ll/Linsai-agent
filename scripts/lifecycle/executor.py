@@ -1091,9 +1091,12 @@ def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, 
 
     # 本轮完整闭环结束，推进轮次（负反馈告警时除外）
     if not prop_state.get("negative_feedback_alert"):
-        prop_state["optimization_rounds"] = max(
-            prop_state.get("optimization_rounds", 0), round_num
-        )
+        old_rounds = prop_state.get("optimization_rounds", 0)
+        prop_state["optimization_rounds"] = max(old_rounds, round_num)
+        # v6.8.21: 清理旧轮次 job
+        if prop_state["optimization_rounds"] > old_rounds:
+            from .utils import archive_old_round_jobs
+            archive_old_round_jobs(proposal_id, prop_state["optimization_rounds"])
 
     # 写入 monitor 简要摘要到 proposal 状态
     prop_state["last_monitor_at"] = now_utc()

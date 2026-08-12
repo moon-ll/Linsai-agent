@@ -129,3 +129,62 @@ def _job_by_id(self, jobs: List[Dict[str, Any]], job_id: str) -> Optional[Dict[s
         if j.get("job_id") == job_id:
             return j
     return None
+
+
+def archive_old_round_jobs(proposal_id: str, new_round: int) -> int:
+    """v6.8.21b: 轮次推进后清理旧 job，只保留当前轮。
+
+    保留 new_round（刚完成/进行中），更早轮次的 job 全部移除。
+    pipeline_jobs 可能是 dict 或 list 格式。
+    返回清理的 job 数量。
+    """
+    lifecycle_path = PROJECT_ROOT / "research_proposals" / "_lifecycle.json"
+    if not lifecycle_path.exists():
+        return 0
+
+    data = load_json(lifecycle_path)
+    proposals = data.get("proposals", {})
+    if proposal_id not in proposals:
+        return 0
+
+    prop = proposals[proposal_id]
+    jobs_raw = prop.get("pipeline_jobs", {})
+
+    if isinstance(jobs_raw, dict):
+        active = {}
+        cleaned = 0
+        for job_id, job in jobs_raw.items():
+            if isinstance(job, dict):
+                r = job.get("round", 0)
+                if r < new_round:
+                    cleaned += 1
+                else:
+                    active[job_id] = job
+        if cleaned > 0:
+            prop["pipeline_jobs"] = active
+    elif isinstance(jobs_raw, list):
+        active = []
+        cleaned = 0
+        for job in jobs_raw:
+            if isinstance(job, dict):
+                r = job.get("round", 0)
+                if r < new_round:
+                    cleaned += 1
+                else:
+                    active.append(job)
+        if cleaned > 0:
+            prop["pipeline_jobs"] = active
+    else:
+        return 0
+
+    if cleaned == 0:
+        return 0
+
+    save_json(lifecycle_path, data)
+
+    if _log:
+        _log.info(
+            f"[{proposal_id}] 清理了 {cleaned} 个旧轮次 job "
+            f"(保留 R{new_round}+)"
+        )
+    return cleaned

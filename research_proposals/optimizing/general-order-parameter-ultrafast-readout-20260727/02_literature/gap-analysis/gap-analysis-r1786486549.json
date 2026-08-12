@@ -1,0 +1,4 @@
+{
+  "gaps": [],
+  "note": "agent 未返回标准 JSON gaps 格式，视为无文献缺口。原文前200字: gaps\": [{\"claim\": \"参考文献 [65][66][68][69] 4 条在正文未引用，构成引用闭环不严的 P0 级问题\", \"missing_evidence\": \"references.md 列出的 4 条未引用文献本身缺乏在 rationale.md / content.md / scheme.md 中的论证锚点；需核查这 4 条文献的实际主题（是否与 altermagnet "
+}
