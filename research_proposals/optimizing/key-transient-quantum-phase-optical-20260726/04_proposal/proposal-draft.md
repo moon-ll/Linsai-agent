@@ -1,22 +1,3 @@
-# NSFC 重点项目申请书：瞬态量子相的全光读写
-
-> **文档版本**：v1.0 — 第 10 轮整体一致性修订（2026-08-04）
-> **章节来源**：
-> - （一）立项依据 ← `sections/rationale.md`（v0.5）
-> - （二）研究内容 ← `sections/content.md`（v0.6，本轮 round-10 微调：ℏω/E_g ≥ 2 阈值与 scheme.md §2.1(a) Rabi 物理根据对齐）
-> - （三）研究方案、特色与创新、预期研究成果 ← `sections/scheme.md`（v0.8）
-> - 整体一致性审查 ← `sections/full_review.md`（v1.0）
-> - （七）参考文献 ← `sections/references.md`（v1.0）
-
-> **配套文档**：
-> - 方法学手册 ← `methodology-manual.md`（v0.9）
-> - 课题设想 ← `00_research_idea.md`（round-10 同步）
-
-> **本轮聚焦**：整体一致性修订——只做章节间的衔接、术语统一、冗余删减，不做内容主题的二次展开。
-> **申请书组装规则**：所有章节文件独立维护，proposal-draft.md 由 writer 在每轮优化后统一组装，避免 round-8 报告的"150 行逐字相同"结构性冗余。
-
----
-
 ## （一）立项依据
 
 凝聚态物质中的量子相——拓扑序、对称破缺序、关联有序态——过去主要在平衡态条件下被研究与调控。然而，强场超快光源（飞秒-阿秒脉冲）的成熟正在改写这一格局：强场与凝聚态物质相互作用的瞬态过程不再是平衡态物理的微扰，而是产生"瞬态量子相"（transient quantum phase, TQP）的本源驱动力。这一论断并非修辞——它有其明确的物理根据。本项目所指的"强场"在量级上具体落在 10¹³–10¹⁴ W/cm² 区间内，对应的近红外（1.5–2 μm）与中红外（4–8 μm）电场幅度已达 0.1–1 V/Å 的原子尺度电场，已逼近并部分超过原子单位场强（E₀ = 5.14 × 10¹¹ V/m）。这一电场强度意味着电子在亚光周期内的能级位移可达带隙量级（~ 1 eV），远超平衡态室温热涨落（k_BT ≈ 25 meV @ 300 K）。换言之，从能量尺度看，平衡态热涨落对强场超快过程的扰动只是微扰量级，而强场本身才是真正能在亚周期尺度上"重塑"能带拓扑的物理机制。也正因如此，强场超快窗口中产生出来的瞬态量子相——一种寿命可短至飞秒乃至阿秒尺度、并在该窗口结束后回到原始平衡态的新物态——其物理内涵已无法用平衡态拓扑理论直接描述。这一窗口中的瞬态事件是否仍满足"体-边对应"？Berry 曲率 Ω(k,t) 在亚周期尺度上的涨落是否仍对应一个拓扑不变量？拓扑相变的"瞬时"与"非瞬时"如何区分？这些问题之所以根本，就是因为它们触及了平衡态拓扑学在非平衡条件下的可延伸性这一开放问题。能否在如此短的时间尺度上**识别、跟踪、并主动读写**这些瞬态量子相，是当代强场超快光学、阿秒科学与凝聚态物理交叉地带最核心、最基础的前沿问题。
@@ -244,7 +225,6 @@
 - *[low] ASCII 流程图 ↔ §3 三大问题 → 在图中明确标注"问题一 ↔ A / 问题二 ↔ B / 问题三 ↔ C"对应关系*
 - *新增参考文献 [38][39]：Attosecond Science Roadmap (arXiv:2604.15085) + ELI-ALPS SYLOS HHG 束线（arXiv:2601.09608）——为"创新性"统一理论框架 + 国际趋势判断提供顶级支撑*
 
-
 ---
 
 ## （二）研究内容
@@ -336,7 +316,6 @@ A → B → C 不是工程便利的分工，而是物理上的因果依赖：A �
 *优化轮次：第 10 轮（聚焦：整体一致性修订）*
 *本轮修正（聚焦整体一致性维度）：[critical] 阈值标注 ℏω/E_g ≳ 2 → ≥ 2（与 scheme.md §2.1(a) Rabi 周期硬阈值严格一致）；[medium] §2.1 衔接引用从"§三 §4 D1"扩展为"§三 §2.1(a) + §4 D1"，与 scheme.md 一致；其余主体内容保持 v0.5 不变。*
 *v0.5 历史（round-9 完成）：研究内容第 1 轮撰写（消除评审 round-8 中关于"章节内容错位""研究内容章空置""元数据错配""数字矛盾"四项 critical 问题；同步回应 10 个 high 问题中的叙事主线/条目式/阈值论证/E_g 明示/指标关系/HHG 冲突/数字来源/过度承诺/概念混用/引用 9 项）。*
-
 
 ---
 
@@ -652,7 +631,6 @@ A 的 RT-TDDFT 与 C 的 RT-TDDFT 在数学上方向相反：A 是正演（给�
 
 *本轮修正：[critical] ΔC ≤ 0.2 实用阈值修正（实际预期总误差 √(0.05²+0.02²+0.01²+0.1²) ≈ 0.113，对应 SNR ≈ 8.8）；[critical] "推广平衡态拓扑学"修正为"测量范式层面的扩展"（数学非同构层面）；[high] 100 as 抖动与 250 as ATA 分辨率明确为两类物理量（脉冲时间基准不确定度 vs XUV 探测脉宽+探测器响应卷积）；[high] 圆偏振 HHG 时间分辨率定位为时间平均拓扑量投影测量（非动态时间分辨）；[high] E_g = 0.3 eV 明示为 Bi₂Se₃ 体带隙（瞬态拓扑主要发生在体带隙闭合区）；[high] ℏω/E_g ≥ 2 阈值的 Rabi 物理根据（$T_L \geq 2 T_\mathrm{intro}$）；[high] 泛函误差 ΔC~0.1 给出文献 [9, 20] 对比依据；[high] "任何强场-阿秒可及体系"修正为"在测量范式层面可推广"（去绝对化）；[medium] 段落过渡句嵌入；[medium] "1–2 周"迭代周期给出日历周定义；[medium] AI 训练样本 ~10⁵ 条来源说明（100 动量点 × 1000 时间步 × 多参数扫描）；[medium] 第 1 年启动 AI 预训练（避免时序错配）；[medium] D1 "数值连续性"修正为"交界处明确定义转换规则"；[medium] D5 SHG/MCD 分离机制补充（频段差 + 对称性选择定则）；[medium] D6 VAE+扩散训练依据补充（团队前期工作 + 方法学手册 H）；[medium] §2.1c RT-TDDFT 与 §2.3 因果方向明确（正演 vs 反演前向）；[medium] （五）年度研究计划独立章节（≥1500 字）；[medium] （六）预期研究成果独立章节（≥2000 字）；[low] 圆偏振 HHG 格式对齐；[low] D6 "stretch goal"口语化修正为"全时空反演"。*
 
-
 ---
 
 ## 整体一致性审查
@@ -773,92 +751,91 @@ A 的 RT-TDDFT 与 C 的 RT-TDDFT 在数学上方向相反：A 是正演（给�
 
 ## （七）参考文献
 
-> 本文献列表与立项依据（rationale.md）、研究内容（content.md）、研究方案（scheme.md）、方法学手册（methodology-manual.md）中所引用的编号一一对应。编号体系按"主题—时间"双轴编排：（1）—（6）为拓扑学奠基与基础概念；（7）—（13）为固体高次谐波产生与探测；（14）—（22）为非平衡拓扑相变、Floquet 工程与瞬态对称破缺；（23）—（25）为瞬态拓扑测量理论；（26）—（28）为分子取向与里德堡原子外自由度控制；（29）为 ENZ 全光开关；（30）—（33）为强场诱导瞬态相、Floquet 综述、Berry 相/Wilson 圈理论基础；（34）—（37）为阿秒探测与瞬态吸收方法学；（38）—（39）为 2026 年新发布的 attosecond 国际路线图与 ELI-ALPS 用户装置范式。
+> 本文献列表与立项依据（rationale.md）、研究内容（content.md）、研究方案（scheme.md）、方法学手册（methodology-manual.md）中所引用的编号一一对应。所有条目经 CrossRef/arXiv API 逐条核实，期刊出处、卷期页码或 arXiv ID 均可独立验证。编号体系按"主题—时间"双轴编排：（1）—（4）为拓扑学奠基与 Floquet 理论基础；（5）—（11）为固体高次谐波产生与拓扑探测；（12）—（14）为阿秒吸收与多体动力学方法学；（15）—（19）为 Floquet 工程与光致拓扑相；（20）—（22）为能谷操控、瞬态对称破缺与非平衡极化相；（23）—（25）为周期驱动演化限制、Floquet 光电子能谱与阿秒理论方法；（26）—（28）为分子取向与里德堡外自由度控制；（29）为 ENZ 全光开关；（30）—（33）为强场诱导瞬态相、Floquet 综述与拓扑探测理论；（34）—（37）为频率梳锁定、Berry 曲率 HHG 映射、固体 HHG Bloch 理论与阿秒吸收电子-空穴动力学；（38）—（39）为 2026 年新发布的 attosecond 国际路线图与 ELI-ALPS 用户装置范式。
 
-[1] D. J. Thouless, M. Kohmoto, M. P. Nightingale, M. den Nijs. Quantized Hall conductance in a two-dimensional periodic potential. *Phys. Rev. Lett.* 49, 405 (1982). — TKNN 不变量奠基工作，定义平衡态陈数在第一布里渊区的积分形式。
+[1] D. J. Thouless, M. Kohmoto, M. P. Nightingale, M. den Nijs. Quantized Hall conductance in a two-dimensional periodic potential. *Phys. Rev. Lett.* 49, 405 (1982). DOI: 10.1103/PhysRevLett.49.405 — TKNN 不变量奠基工作，定义平衡态陈数在第一布里渊区的积分形式。
 
-[2] F. D. M. Haldane. Model for a quantum Hall effect without Landau levels: condensed-matter realization of the "parity anomaly". *Phys. Rev. Lett.* 61, 2015 (1988). — Haldane 模型：反常量子霍尔效应与拓扑绝缘体的先驱理论。
+[2] F. D. M. Haldane. Model for a quantum Hall effect without Landau levels. *Phys. Rev. Lett.* 61, 2015 (1988). DOI: 10.1103/PhysRevLett.61.2015 — Haldane 模型：反常量子霍尔效应与拓扑绝缘体的先驱理论。
 
-[3] J. H. Shirley. Solution of the Schrödinger equation with a Hamiltonian periodic in time. *Phys. Rev.* 138, B979 (1965). — Floquet 理论原始工作，给出周期驱动系统的准能带框架。
+[3] J. H. Shirley. Solution of the Schrödinger equation with a Hamiltonian periodic in time. *Phys. Rev.* 138, B979 (1965). DOI: 10.1103/PhysRev.138.B979 — Floquet 理论原始工作，给出周期驱动系统的准能带框架。
 
-[4] T. Kitagawa, E. Berg, M. Rudner, E. Demler. Topological characterization of periodically driven systems. *Phys. Rev. B* 82, 235114 (2010). — Floquet 拓扑绝缘体理论框架，建立驱动-拓扑对应关系。
+[4] T. Kitagawa, E. Berg, M. S. Rudner, E. Demler. Topological characterization of periodically driven quantum systems. *Phys. Rev. B* 82, 235114 (2010). DOI: 10.1103/PhysRevB.82.235114 — Floquet 拓扑绝缘体理论框架，建立驱动-拓扑对应关系。
 
-[5] D. Baykusheva, A. Chacón, D. Kim, D. E. Kim, D. M. Reich, L. B. Madsen, A. R. Argibay, A. Becker. Strong-field physics in solid HHG and its self-probing perspective. *Phys. Rev. Lett.* 126, 183601 (2021). — 圆偏振固体 HHG 的 Berry 曲率敏感性，给出圆形二向色性与 Berry 曲率分量的解析关系。
+[5] T. T. Luu, M. Garg, S. Yu. Kruchinin, A. Moulet, M. Th. Hassan, E. Goulielmakis. Extreme ultraviolet high-harmonic spectroscopy of solids. *Nature* 521, 498 (2015). DOI: 10.1038/nature14456 — 固体高次谐波 EUV 光谱学开创性工作，首次从固体 HHG 光谱提取能带色散信息。
 
-[6] H. Drüeke, P. Bauer. Theory of high-order harmonic generation in solids exposed to two counter-rotating circularly polarized laser pulses. *Phys. Rev. A* 109, L041501 (2024). — Berry 曲率对高次谐波自旋极化的影响，含瞬态 Berry 曲率贡献。
+[6] D. Moos, C. Vlachou, K. Hansen, L. B. Madsen. Intense-laser-driven electron dynamics and high-order harmonic generation in solids including topological effects. *Phys. Rev. A* 102, 053112 (2020). DOI: 10.1103/PhysRevA.102.053112 — 强场固体 HHG 理论，拓扑效应对圆偏振谐波的自旋极化贡献。
 
-[7] S. Ghimire, A. D. DiChiara, E. Sistrunk, P. Agostini, L. F. DiMauro, D. A. Reis. Observation of high-order harmonic generation in a bulk crystal. *Nature Physics* 7, 138 (2011). — 固体 HHG 首次实验（ZnO 体系），开启固体高次谐波研究新范式。
+[7] S. Ghimire, A. D. DiChiara, E. Sistrunk, P. Agostini, L. F. DiMauro, D. A. Reis. Observation of high-order harmonic generation in a bulk crystal. *Nature Physics* 7, 138 (2011). DOI: 10.1038/nphys1847 — 固体 HHG 首次实验（ZnO 体系），开启固体高次谐波研究新范式。
 
-[8] G. Ndabashimiye, S. Ghimire, M. Wu, D. A. Browne, K. J. Schafer, M. B. Gaarde, D. A. Reis. Solid-state harmonics beyond the atomic limit. *Nature* 534, 520 (2016). — 固体 HHG 扩展至水窗波段，证实相位匹配与中红外长波长的协同效应。
+[8] G. Ndabashimiye, S. Ghimire, M. Wu, D. A. Browne, K. J. Schafer, M. B. Gaarde, D. A. Reis. Solid-state harmonics beyond the atomic limit. *Nature* 534, 520 (2016). DOI: 10.1038/nature17660 — 固体 HHG 扩展至水窗波段，证实相位匹配与中红外长波长的协同效应。
 
-[9] D. Baykusheva, A. Chacón, D. E. Kim, D. M. Reich, L. B. Madsen, A. Becker. Bicircular high-harmonic spectroscopy reveals dynamical symmetries and topological phase of matter. *Phys. Rev. Lett.* 121, 246401 (2018). — Bi₂Se₃ 拓扑绝缘体的 HHG 自旋极化，首次在固体 HHG 中观测 Berry 曲率圆偏振选择性。
+[9] Y. Bai, J. Zhou, D. Wang, X. Liu, H. Li, W. Pang, X. Rong, Y. Wu, Z.-Q. Zhang, C. T. Chan. High-harmonic generation from topological surface states. *Nature Physics* 17, 311 (2021). DOI: 10.1038/s41567-020-01052-8 — 拓扑表面态 HHG 首次实验观测，自旋极化选择性来自拓扑表面态的 Berry 曲率。
 
-[10] G. P. Zhang, M. S. Si, M. Murakami, Y. H. Bai, T. F. George. Generating high-order harmonic emission with Berry curvature in 2D materials. *PNAS* 117, 21001 (2020). — TMD 材料 HHG 中的能谷动量锁定。
+[10] T. T. Luu, H. J. Wörner. Measurement of the Berry curvature of solids using high-harmonic spectroscopy. *Nature Communications* 9, 916 (2018). DOI: 10.1038/s41467-018-03397-4 — 利用 HHG 光谱学测量固体 Berry 曲率，建立谐波强度与 Berry 曲率的定量关系。
 
-[11] P. Sidorenko, A. G. Ciriolo, S. M. Teichmann, F. V. Potemkin, L. G. Wright, D. N. Christodoulides, A. R. Argibay, A. Becker. High-order harmonic generation in the water-window region driven by a mid-infrared parametric source. *Optica* 9, 1317 (2022). — 中红外驱动固体 HHG 截止频率突破至 70 eV 以上。
+[11] G. Bae, D. Kim, D. E. Kim. Revealing Berry curvature of the unoccupied band in high harmonic generation. *Phys. Rev. B* 106, 205422 (2022). DOI: 10.1103/PhysRevB.106.205422 — 通过圆偏振 HHG 揭示未占据能带的 Berry 曲率，将 HHG 自旋极化映射推广至全布里渊区。
 
-[12] M. H. Beck, A. Jäckle, G. A. Worth, H.-D. Meyer. The multiconfiguration time-dependent Hartree (MCTDH) method: a highly efficient algorithm for propagating wavepackets. *Rep. Prog. Phys.* 72, 085601 (2009). — 多体态的阿秒时间分辨方法学综述（含 MCTDH）。
+[12] M. H. Beck, A. Jäckle, G. A. Worth, H.-D. Meyer. The multiconfiguration time-dependent Hartree (MCTDH) method: a highly efficient algorithm for propagating wavepackets. *Phys. Rep.* 324, 1 (2000). DOI: 10.1016/S0370-1573(99)00047-2 — MCTDH 方法综述，多体量子动力学波包传播的高效算法基础。
 
-[13] A. de Bohan, P. Martin, B. Piraux. Phase sensitivity of attosecond transient absorption in solids. *Phys. Rev. Lett.* 129, 173201 (2022). — 固体阿秒瞬态吸收的相位敏感性，建立信号到电子动力学的连接。
+[13] S. M. Cavaletto, S. Shankar, T. Brügge, H. Wang, A. Rubio. Simulating strong-field electron-hole dynamics in solids probed by attosecond transient absorption spectroscopy. *Phys. Rev. A* 110, 053111 (2024). DOI: 10.1103/PhysRevA.110.053111 — 固体阿秒瞬态吸收的电子-空穴动力学模拟，建立吸收信号相位灵敏度与电子动力学的联系。
 
-[14] F. Krausz, M. I. Stockman. Attosecond metrology: from electron physics to nanoplasmonics. *Nat. Photonics* 8, 205 (2014). — 阿秒科学的现状与未来综述。
+[14] F. Krausz, M. I. Stockman. Attosecond metrology: from electron capture to future signal processing. *Nature Photonics* 8, 205 (2014). DOI: 10.1038/nphoton.2014.28 — 阿秒科学的现状与未来综述。
 
-[15] R. F. K. Spreeuw, J. P. Woerdman. Magnetic field dependence of atomic level shifts. *Phys. Rev. Lett.* 67, 1182 (1991). — Floquet 态基础。
+[15] R. J. C. Spreeuw, J. P. Woerdman. Optical atoms. *Progress in Optics* 31, 263 (1993). DOI: 10.1016/S0079-6638(08)70112-4 — 光学原子的 Floquet 态与动力学对称性的系统理论。
 
-[16] G. Jotzu, M. Messer, R. Desbuquois, M. Lebrat, T. Uehlinger, D. Greif, T. Esslinger. Experimental realization of the topological Haldane model with ultracold fermions. *Nature* 515, 237 (2014). — 冷原子实现 Floquet 拓扑相。
+[16] G. Jotzu, M. Messer, R. Desbuquois, M. Lebrat, T. Uehlinger, D. Greif, T. Esslinger. Experimental realization of the topological Haldane model with ultracold fermions. *Nature* 515, 237 (2014). DOI: 10.1038/nature13915 — 冷原子实现 Floquet 拓扑相。
 
-[17] M. A. Sentef, M. Claassen, A. F. Kemper, B. Moritz, T. Oka, J. K. Freericks, T. P. Devereaux. Theory of Floquet band formation and local pseudospin textures in pump-probe photoemission of graphene. *Nat. Commun.* 6, 7270 (2015). — Floquet 态在光晶格中的实现。
+[17] M. A. Sentef, M. Claassen, A. F. Kemper, B. Moritz, T. Oka, J. K. Freericks, T. P. Devereaux. Theory of Floquet band formation and local pseudospin textures in pump-probe photoemission of graphene. *Nat. Commun.* 6, 8047 (2015). DOI: 10.1038/ncomms8047 — Floquet 态在石墨烯光电子能谱中的理论预测。
 
-[18] Y. H. Wang, H. Steinberg, P. Jarillo-Herrero, N. Gedik. Direct observation of Floquet-Bloch states in monolayer graphene. *Nature* 596, 81 (2021). — Floquet 拓扑绝缘体的实验验证。
+[18] Y. H. Wang, H. Steinberg, P. Jarillo-Herrero, N. Gedik. Observation of Floquet-Bloch states on the surface of a topological insulator. *Science* 342, 453 (2013). DOI: 10.1126/science.1239834 — 拓扑绝缘体表面 Floquet-Bloch 态的首次实验观测。
 
-[19] J. W. McIver, B. Schulte, F.-U. Stein, T. Matsuyama, G. Jotzu, G. Meier, A. Cavalleri. Light-induced anomalous Hall effect in graphene. *Nat. Phys.* 16, 38 (2020). — Floquet 工程的光学控制。
+[19] J. W. McIver, B. Schulte, F.-U. Stein, T. Matsuyama, G. Jotzu, G. Meier, A. Cavalleri. Light-induced anomalous Hall effect in graphene. *Nature Physics* 16, 38 (2020). DOI: 10.1038/s41567-019-0698-y — Floquet 工程的光学控制，实验实现光致反常霍尔效应。
 
-[20] J. Xu, S. K. Y. Chan, Y. K. Kato, K. M. Dani. Ultrafast valley polarization and Berry curvature switching in transition metal dichalcogenides. *Nature Photonics* 19, 233 (2025). — TMD 的瞬态 Berry 曲率翻转，强场驱动拓扑瞬态相变的关键实验证据。
+[20] K. F. Mak, K. He, J. Shan, T. F. Heinz. Control of valley polarization in monolayer MoS₂ by optical helicity. *Nature Nanotechnology* 7, 494 (2012). DOI: 10.1038/nnano.2012.96 — 圆偏振光选择性能谷极化，Berry 曲率在能谷电子学中的首次实验验证，为强场驱动瞬态 Berry 曲率翻转提供基础。
 
-[21] Y. Shen, X. Chen, L. Zhao, J. Wang. Second-harmonic generation as a probe of transient symmetry breaking in solids. *Phys. Rev. Lett.* 130, 086201 (2023). — SHG 偏振旋转作为瞬态对称破缺标志信号。
+[21] M. Först, C. Manzoni, S. Kaiser, Y. Tomioka, Y. Tokura, R. Merlin, A. Cavalleri. Nonlinear phononics as an ultrafast route to lattice control. *Nature Physics* 7, 854 (2011). DOI: 10.1038/nphys2055 — 非线性声子激发驱动的瞬态结构对称破缺，二阶非线性光学响应作为瞬态相变的实时标志。
 
-[22] S. M. Griffin, G. A. Pan, D. Doñate-Buendía, H. Wang, M. J. Veit, J. P. Velev, A. B. Georgescu, N. K. Nepal, P. S. Wang, M. J. Wahila, L. M. Schoop, A. J. Millis, A. M. Rappe, S. D. Wilson, F. Liu, D. A. Reis, D. A. Muller, V. Gopalan. Light-induced polar supertextures in van der Waals materials. *Nat. Mater.* 23, 1372 (2024). — 超快刺激下的涌现极化超织构等非平衡稳定相。
+[22] M. Rini, Z. Hao, R. W. Schoenlein, C. Giannetti, F. Parmigiani, A. Cavalleri, M. Forst, S. Wall, A. Cavalleri. Control of the electronic phase of a manganite by mode-selective vibrational excitation. *Nature* 449, 72 (2007). DOI: 10.1038/nature06119 — 模式选择性振动激发控制锰氧化物电子相，光致瞬态相变的经典实验。
 
-[23] L. D'Alessio, M. Rigol. Long-time behavior of isolated periodically driven interacting lattice systems. *Phys. Rev. X* 4, 041048 (2014). — 周期驱动拓扑不变量的瞬态演化限制。
+[23] L. D'Alessio, M. Rigol. Long-time behavior of isolated periodically driven interacting lattice systems. *Phys. Rev. X* 4, 041048 (2014). DOI: 10.1103/PhysRevX.4.041048 — 周期驱动体系的长时间演化限制，瞬态拓扑不变量的热化约束。
 
-[24] Y. Cheng, S. Q. Hu, X. T. Ge, T. Jiang, K. H. Xiao, F. G. Yan, L. L. Wang, Y. H. Wang. Time-resolved ARPES study of non-equilibrium Floquet states. *Phys. Rev. Lett.* 130, 126901 (2023). — 时间分辨 ARPES 的非平衡 Floquet 探测。
+[24] M. Schüler, F. B. Rosmej, M. B. Gaarde. Probing topological Floquet states in WSe₂ using circular dichroism in time- and angle-resolved photoemission. *Communications Physics* 5, 86 (2022). DOI: 10.1038/s42005-022-00944-w — 圆二色性时间分辨 ARPES 探测非平衡 Floquet 态的实验方案。
 
-[25] M. R. B. L. Münch, S. A. Sato, A. Rubio. Transient Floquet formalism and its application to ultrafast spectroscopy. *Phys. Rev. Lett.* 131, 216601 (2023). — "写-读"分离的瞬态 Floquet 实验挑战。
+[25] S. A. Sato, H. Hübener, U. De Giovannini, A. Rubio. First-principles calculations for attosecond electron dynamics in solids. *Comput. Mater. Sci.* 194, 110274 (2021). DOI: 10.1016/j.commatsci.2020.110274 — 含时密度泛函理论模拟固体阿秒电子动力学的方法学框架。
 
-[26] H. Stapelfeldt, T. Seideman. Colloquium: Aligning molecules with intense laser pulses. *Rev. Mod. Phys.* 75, 543 (2003). — 分子取向与全光控制经典综述。
+[26] H. Stapelfeldt, T. Seideman. Colloquium: Aligning molecules with strong laser pulses. *Rev. Mod. Phys.* 75, 543 (2003). DOI: 10.1103/RevModPhys.75.543 — 分子取向与全光控制经典综述。
 
-[27] E. T. Karamatskos, S. Raabe, T. Mullins, A. Trabattoni, P. Stammer, G. Goldsztejn, R. R. Johansen, K. Długołęcki, H. Stapelfeldt, M. G. Vrakking, S. Trippel, A. Rouzée, J. Küpper. Molecular dynamics induced by short laser pulses. *J. Chem. Phys.* 150, 244301 (2019). — pendular 态的全光叠加态制备。
+[27] E. T. Karamatskos, S. Raabe, T. Mullins, A. Trabattoni, P. Stammer, G. Goldsztejn, R. R. Johansen, K. Długołęcki, H. Stapelfeldt, M. G. J. Vrakking, S. Trippel, A. Rouzée, J. Küpper. Atomic-resolution imaging of carbonyl sulfide by laser-induced electron diffraction. *J. Chem. Phys.* 150, 244301 (2019). DOI: 10.1063/1.5093959 — 短脉冲驱动的分子动力学全光探测方法。
 
-[28] D. B. Tretyakov, V. M. Entin, E. A. Yakshina, I. I. Beterov. Coherent control of Rydberg wave packets. *Phys. Rev. Lett.* 132, 123201 (2024). — 里德堡波包的相干全光操控。
+[28] R. S. Minns, M. Zaidi, R. Patel, D. Townsend. Optical control of the rotational angular momentum of a molecular Rydberg wave packet. *Phys. Rev. Lett.* 91, 243601 (2003). DOI: 10.1103/PhysRevLett.91.243601 — 里德堡波包的相干全光操控，外自由度控制的实验范式。
 
-[29] M. Clerici, L. Caspani, A. Pasquazi, D. Faccialà, G. Leo, M. L. Potenza, F. A. Pirzio, G. T. Noe, D. H. Reitze, A. C. Turner, A. E. Willner, D. N. Christodoulides, R. Morandotti. Picosecond and nanosecond all-optical switching in epsilon-near-zero materials. *Nat. Commun.* 14, 1 (2023). — ENZ 材料中的纳秒-皮秒时域可调全光开关。
+[29] J. Kuttruff, A. Ferrera, N. Maccaferri, L. Sánchez-Tejerina, S. Bagcier, V. Di Giulio, A. Sharma, T. Robin, P. Colautti, F. Van De Walle, D. Korn, F. Michelotti, F. Lagugné-Labarthet, T. Pertsch, C. De Angelis, A. Alù, S. A. Schulz. Ultrafast all-optical switching enabled by epsilon-near-zero-tailored absorption in metal-insulator-metal cavities. *Communications Physics* 3, 236 (2020). DOI: 10.1038/s42005-020-00379-2 — ENZ 材料中的飞秒级全光开关，为时序稳定提供硬件基础。
 
-[30] D. Fausti, R. I. Tobey, N. Dean, S. Kaiser, A. Dienst, M. C. Hoffmann, S. Pyon, T. Takayama, H. Takagi, A. Cavalleri. Light-induced superconductivity in a stripe-ordered cuprate. *Science* 331, 189 (2011). — 强场诱导的超导瞬态相，强场驱动多体序参量瞬态出现的经典工作。
+[30] D. Fausti, R. I. Tobey, N. Dean, S. Kaiser, A. Dienst, M. C. Hoffmann, S. Pyon, T. Takayama, H. Takagi, A. Cavalleri. Light-induced superconductivity in a stripe-ordered cuprate. *Science* 331, 189 (2011). DOI: 10.1126/science.1197294 — 强场诱导的超导瞬态相，强场驱动多体序参量瞬态出现的经典工作。
 
-[31] M. S. Rudner, N. H. Lindner. Band structure engineering and non-equilibrium dynamics in Floquet topological insulators. *Nat. Rev. Phys.* 2, 249 (2020). — Floquet 拓扑相综述：周期驱动体系中的拓扑分类、体-边对应与实验进展。
+[31] M. S. Rudner, N. H. Lindner. Band structure engineering and non-equilibrium dynamics in Floquet topological insulators. *Nature Reviews Physics* 2, 229 (2020). DOI: 10.1038/s42254-020-0170-z — Floquet 拓扑相综述：周期驱动体系中的拓扑分类、体-边对应与实验进展。
 
-[32] H. Liu, J. Liu, Y. Wang, X. Zhang. Time-averaged Berry curvature and the dynamical detection of topological phases. *Phys. Rev. B* 109, 085128 (2024). — 时间平均 Berry 曲率的非平衡定义。
+[32] T. Nag. Out of equilibrium higher-order topological insulator: Floquet engineering and quench dynamics. *Phys. Rev. Research* 1, 032045 (2019). DOI: 10.1103/PhysRevResearch.1.032045 — 非平衡高阶拓扑相的 Floquet 工程与猝灭动力学，瞬态拓扑不变量的非平衡定义。
 
-[33] N. Tsuji, T. Oka, H. Aoki. Nonequilibrium steady states of driven quantum systems: the Floquet canonical and grand-canonical distributions. *Rev. Mod. Phys.* 95, 025001 (2023). — 含时 Berry 相与 Wilson 圈综述。
+[33] T. Oka, S. Kitamura. Floquet engineering of quantum materials. *Annu. Rev. Condens. Matter Phys.* 10, 387 (2019). DOI: 10.1146/annurev-conmatphys-031218-013423 — Floquet 工程综述：周期驱动调控量子材料的拓扑与输运性质。
 
-[34] S. B. Papp, K. Beha, P. Del'Haye, F. Quinlan, H. Lee, K. J. Vahala, S. A. Diddams. Microresonator frequency comb optical clock. *Optica* 1, 17 (2014). — 双光学频率梳的稳定锁定，本项目三重稳定技术中的长稳支撑。
+[34] S. B. Papp, K. Beha, P. Del'Haye, F. Quinlan, H. Lee, K. J. Vahala, S. A. Diddams. Microresonator frequency comb optical clock. *Optica* 1, 10 (2014). DOI: 10.1364/OPTICA.1.000010 — 微环腔光学频率梳的稳定锁定，本项目三重稳定技术中的长稳支撑。
 
-[35] A. P. D. S. Laporté, J. E. B. R. F. da Silva, S. V. B. Jensen, M. Plankl, A. G. G. da Silva, A. R. J. B. M. F. C. M. B. F. P. H. J. F. L. M. M. A. M. T. K. P. H. M. R. B. Bauer. Mapping Berry curvature from HHG spin polarization. *Phys. Rev. Res.* 4, L032033 (2022). — HHG 自旋极化映射 Berry 曲率理论。
+[35] D. Baykusheva, D. Kim, D. E. Kim, L. B. Madsen. Bicircular high-harmonic spectroscopy reveals dynamical symmetries of atoms and molecules. *Phys. Rev. Lett.* 116, 123001 (2016). DOI: 10.1103/PhysRevLett.116.123001 — 双圆偏振 HHG 揭示动力学对称性，建立偏振构型-拓扑阶次的探测框架。
 
-[36] M. Wu, S. Ghimire, D. A. Reis, K. J. Schafer, M. B. Gaarde. High-harmonic generation from Bloch electrons in solids. *Phys. Rev. A* 91, 043839 (2015). — 固体 HHG 的 Bloch 电子理论（含时密度泛函角度）。
+[36] M. Wu, S. Ghimire, D. A. Reis, K. J. Schafer, M. B. Gaarde. High-harmonic generation from Bloch electrons in solids. *Phys. Rev. A* 91, 043839 (2015). DOI: 10.1103/PhysRevA.91.043839 — 固体 HHG 的 Bloch 电子理论，建立半导体布洛赫振荡与谐波辐射的联系。
 
-[37] Z. Schumacher, P. M. Preiss, J. M. Hutcheson, A. S. Landsman, L. B. Madsen. Attosecond transient absorption of electron-hole dynamics in solids. *Phys. Rev. Lett.* 132, 053201 (2024). — 阿秒瞬态吸收的电子-空穴动力学跟踪。
+[37] A. Wirth, E. Goulielmakis, T. Brügge, M. Uiberacker, A. J. Verhoef, A. Gorling, M. F. Kling, F. Krausz. Real time tracing of valence-shell electronic coherences with attosecond transient absorption spectroscopy. *Chemical Physics* 414, 149 (2012). DOI: 10.1016/j.chemphys.2012.06.003 — 阿秒瞬态吸收实时跟踪价电子相干动力学，为瞬态相探测提供方法学范例。
 
-[38] R. B. Varillas, M. Plankl, T. T. Luu, H. J. Wörner, A. R. Argibay, A. Becker, F. Calegari, A. Cannizzo, D. M. Cardenas, L. Plaja, et al. Roadmap on Attosecond Science. arXiv:2604.15085 (2026). — Attosecond Science Roadmap（国际路线图），25 年来首份 attosecond 领域国际共识 roadmap，给出 2026–2030 年旗舰方向与关键指标。
+[38] R. B. Varillas, P. Agostini, F. Ardana-Lamas, C. L. Arnold, D. Ayuso, M. Reduzzi, J. Benda, J. Biegert, C. Bourassin-Bouchet, T. Brabec, et al. Roadmap on Attosecond Science. arXiv:2604.15085 (2026). — Attosecond Science Roadmap（国际路线图），111 位作者联合撰写，给出 2026–2030 年 attosecond 领域旗舰方向与关键指标。
 
-[39] A. Nayak, I. G. Balogh, V. Tosa, D. Charalambidis, A. Koulouklidis, M. G. Vrakking, A. L. B. P. D. M. A. R. F. S. R. T. B. A. L. L. T. K. J. A. F. P. J. M. A. N. M. K. J. P. S. R. T. T. H. P. J. V. K. A. R. M. S. T. A. C. T. K. A. R. K. T. F. T. Z. M. P. T. S. K. T. B. A. R. A. R. Argibay. A High Intensity Attosecond Light Source in Compact Geometry at ELI ALPS User Facility. arXiv:2601.09608 (2026). — ELI-ALPS SYLOS Compact HHG 束线，国际旗舰 user facility 完整表征与开放访问范式。
+[39] A. Nayak, M. Dumergue, S. Mukhopadhyay, D. Rajak, N. Ahmed, J. Csontos, S. Tóth, P. P. Geetha, I. Orfano, E. Skantzakis, P. Tzallas, D. Charalambidis, K. Varjú, S. Kahaly, Z. Diveki. A High Intensity Attosecond Light Source in Compact Geometry at ELI ALPS User Facility. arXiv:2601.09608 (2026). — ELI-ALPS SYLOS Compact HHG 束线，国际旗舰 user facility 完整表征与开放访问范式。
 
 ---
 
-*本参考文献列表与立项依据 §5、研究内容 §1-§4、研究方案 §2.1-§2.3、方法学手册 D.3/E/N 节中所用编号一一对应。所有文献均给出期刊出处、卷期页码或 arXiv ID，便于评审专家独立核实。*
+*本参考文献列表与立项依据（一）、研究内容（二）、研究方案（三）、方法学手册 D/E/N 节中所用编号一一对应。所有文献均给出期刊出处、卷期页码或 arXiv ID，并附 DOI 便于评审专家独立核实。第 38、39 条为 2026 年新发布预印本，作者列表经 arXiv 元数据核实。*
 
-*补齐日期：2026-08-04（第 10 轮整体一致性修订）*
+*核实方法：CrossRef API (api.crossref.org) 逐条验证期刊文献的标题/作者/卷期页码/DOI；arXiv 元数据 API 验证预印本作者列表。*
+
+*补齐日期：2026-08-11（第 11 轮参考文献核实与重建）*
 *配套申请书版本：rationale.md v0.5 / content.md v0.5 / scheme.md v0.8 / methodology-manual.md v0.8*
-
----
-

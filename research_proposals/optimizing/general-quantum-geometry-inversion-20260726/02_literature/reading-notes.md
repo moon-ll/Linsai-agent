@@ -388,3 +388,60 @@ arXiv: 2405.13885 [quant-ph]（v1: 2024-05-22, v3: 2025-07-31）；19 页，5 �
 - `/04_proposal/sections/references.md`（文献列表已在 r17 完成 25→27 条增补 + 编号断层闭合 + 预印本标注统一，本轮 r20 不再修改）
 - `04_proposal/methodology-manual.md`（本轮 §3 风险表精简的细节无需在方法学手册更新——风险表本身已精简到三列组织；§3D 反演精度验证指标表已在 r19 同步重写以匹配申请书 §2.5，本轮 r20 不再修改）
 
+## r21 引用记录（依据 critic-round-8 参考文献检验专项，聚焦严谨性最弱维度 0.85；本轮聚焦 references.md 增补）
+
+### 本轮工作概述（2026-08-12）
+
+依据 critic-round-8 参考文献检验专项报告（综合 0.86 / 严谨性 0.85），本轮聚焦 references.md 章节的 7 项问题修复（critical:0, high:2, medium:3, low:2）。**新增 2 条文献**（[28]、[29]）；**补全 [17] [18] 真实作者信息**（经 arXiv API 联网核实）；**为全部 17 条预印本补充 arXiv DOI 字段**；**补全 [14] 真实标题**。
+
+### *J. Comput. Phys.* **378**, 686–707 (2019) — Raissi, Perdikaris & Karniadakis
+
+- **阅读日期**：2026-08-12
+- **文献标题**：Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations
+- **来源**：*J. Comput. Phys.* **378**, 686–707 (2019)，Maziar Raissi, Paris Perdikaris, George Em Karniadakis（Brown University）；预印本 arXiv:1711.10561 (Part I) + arXiv:1711.10566 (Part II)；DOI: 10.1016/j.jcp.2018.10.045；经 arXiv API 联网核实 1711.10561 真实存在
+- **核心结论**：提出物理约束神经网络（PINN）框架，将控制偏微分方程的物理约束以软约束形式嵌入神经网络损失函数 $\mathcal{L} = \mathcal{L}_\text{data} + \lambda \mathcal{L}_\text{PDE}$，可在数据稀疏条件下仍保证前向解与反演估计的物理一致性。论文给出 Allen-Cahn、Navier-Stokes 等多类 PDE 的反问题求解验证。
+- **与课题关联**：R4 物理约束反演框架的方法学根基——申请书 §2.5/§3.4 采用三重物理约束架构（Hubbard-U、对称性、自能正则化）正是 PINN 框架在 HHG 反演任务上的实例化。申请书 §2.5 R4 损失函数 $\mathcal{L} = \mathcal{L}_\text{data} + \lambda_1 \mathcal{L}_U + \lambda_2 \mathcal{L}_\text{symm} + \lambda_3 \mathcal{L}_\text{GF}$ 直接对应 Raissi 2019 的 $\mathcal{L} = \mathcal{L}_\text{data} + \lambda \mathcal{L}_\text{PDE}$ 范式。**注**：本项目不调用 Raissi 2019 的具体实现代码，但采用其损失函数设计范式作为方法学起点。
+- **已引用位置**：references.md 新增条目 [28]；申请书 §2.5/§3.4 R4 物理约束反演框架的核心理论引用。
+
+### *Sci. Data* **3**, 160018 (2016) — Wilkinson 等
+
+- **阅读日期**：2026-08-12
+- **文献标题**：The FAIR Guiding Principles for scientific data management and stewardship
+- **来源**：*Sci. Data* **3**, 160018 (2016)，Mark D. Wilkinson, Michel Dumontier, IJsbrand Jan Aalbersberg 等 53 位作者（多机构合作）；DOI: 10.1038/sdata.2016.18；Web of Science 经典高被引（5000+ 次）
+- **核心结论**：提出科学数据管理的 FAIR 原则——Findable（可发现）、Accessible（可访问）、Interoperable（可互操作）、Reusable（可重用），并给出 15 项具体子原则。是 Nature Scientific Data 等数据期刊的强制投稿要求基础。
+- **与课题关联**：申请书 §3.6 明确声明 HMG-Schema-1.0 符合 FAIR 原则发布，本条目作为该方法学声明的文献支撑。**重要诚实标注**：arXiv 与 Web of Science 检索 2026-08-12 未见独立发表的"NEwwave data format"原始论文；HMG-Schema-1.0 在 NEwwave 基础上的字段扩展（quantum_geometry_metadata / cryogenic_environment / bsv_quantum_light_metadata）作为本项目方法学承诺，而非引用既有 NEwwave 标准文献。
+- **已引用位置**：references.md 新增条目 [29]；申请书 §3.6/§3.3 HMG-Schema-1.0 符合 FAIR 原则的方法学声明。
+
+### arXiv:2605.28236 — Stammer 等（[17] 作者核实）
+
+- **阅读日期**：2026-08-12
+- **文献标题**：Symmetry breaking by quantum light in solid-state high-harmonic generation
+- **来源**：arXiv:2605.28236（提交 2026-05-27；经 arXiv API 联网核实）；作者完整列表：P. Stammer, J. Rivera-Dean, D. Kim, A. Chacón, W. Gao, C. Granados（ICFO Barcelona / MPSD Hamburg / Technion 合作团队）；与文献 [22] Rivera-Dean 等共享两位作者（Stammer / Rivera-Dean）
+- **核心结论**：证明圆偏振量子光的量子涨落可破缺驱动场对称性（但保留晶体对称性），产生经典禁戒谐波
+- **与课题关联**：R1 §1.2 引用其作为量子光场参与 HHG 过程产生经典禁戒谐波的硬证据；与申请书靶标体系（CDW / 拓扑绝缘体）弱相关，仅作理论证明类支撑
+- **已引用位置**：references.md [17]（已联网核实作者）；申请书 rationale.md §1.2 [17] 引用
+
+### arXiv:2606.06999 — Chowdhury & Narayan（[18] 作者核实）
+
+- **阅读日期**：2026-08-12
+- **文献标题**：Light-tunable quantum metric non-linear Hall response in Berry dipole semimetals
+- **来源**：arXiv:2606.06999（提交 2026-06-05；经 arXiv API 联网核实）；作者：Debashree Chowdhury, Awadhesh Narayan（IISc Bangalore, India）；与 [17]/[22] 无作者重叠
+- **核心结论**：证明光可调控 Berry dipole 半导体中量子度量介导的非线性霍尔响应
+- **与课题关联**：申请书 §1.2 引用其作为量子度量介导非线性霍尔响应的方法学参照，靶标体系为 Berry dipole 半金属（与项目 CDW 靶标为间接相关，仅作理论证明类支撑）；critic-round-8 报告建议明确"方法学借鉴"定位，已在 references.md [18] 条目末补充限定语
+- **已引用位置**：references.md [18]（已联网核实作者）；申请书 rationale.md §1.2 [18] 引用
+
+### 与课题关联总结
+
+本轮（r21）参考文献章节修订补全 2 条核心方法学引用（PINN 原始论文 [28]、FAIR 原则 [29]）、补全 2 条预印本真实作者信息（[17] Stammer 等、[18] Chowdhury & Narayan）、为全部 17 条预印本补充 arXiv DOI 字段，**不改变 Q1/Q2 的科学定位、不改变 R1-R4 的方法学框架**，所有修复聚焦参考文献检验维度的严谨性（0.85→目标 0.90+）。本轮未引用虚构文献——所有 18 条预印本编号经 arXiv API 联网核实 2026-08-12 真实存在。
+
+### 已修改章节文件
+
+- `/04_proposal/sections/references.md`（本轮主要修改，新增 [28]/[29]、补全 [17]/[18]/[14] 信息、为全部预印本补充 arXiv DOI）
+
+### 未改动章节
+
+- `/04_proposal/sections/rationale.md`（§1 章节已在前几轮完成所有 P0 修复，本轮 r21 不再修改）
+- `/04_proposal/sections/content.md`（§2 章节已在前几轮完成所有 P0 修复，本轮 r21 不再修改）
+- `/04_proposal/sections/scheme.md`（§3 章节已在前几轮完成所有 P0 修复，本轮 r21 不再修改）
+- `04_proposal/methodology-manual.md`（[28] PINN 原始论文已隐含在 §2D.5 网络架构描述中，无需重写；[29] FAIR 原则已隐含在 §3D 数据标准化字段描述中，无需重写）
+
