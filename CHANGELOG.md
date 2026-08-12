@@ -1,5 +1,20 @@
 # 变更记录
 
+## v6.8.25 - 2026-08-12 cross-proposal 范例注入数据源修复
+
+### 背景
+
+v6.8.24 修复了 cross-proposal 范例注入的阈值和扫描范围，但深度审计发现函数仍完全失效：它扫描各课题目录下的独立 `_lifecycle.json` 文件，但实际所有课题状态存储在全局 `research_proposals/_lifecycle.json` 中，各课题目录无此文件。函数在 `if not lc_file.exists(): continue` 跳过所有课题，永远返回空字符串。
+
+### 修复
+
+- **cross-proposal 范例注入数据源（P0 死代码）**：`_load_cross_proposal_exemplar` 从扫描各课题目录下的独立 `_lifecycle.json` 改为从全局 `_lifecycle.json` 读取所有课题状态。通过 `lifecycle_obj._load_state()` 获取全局状态，遍历 `proposals` 字典筛选 optimizing/pending_review 状态的课题，用历史峰值分数选出最佳范例。
+
+### 验证
+
+- `--module`：373/376 通过（3 个失败均为沙箱限制，与本次改动无关）
+- 修复后，`order-parameter-ultrafast-readout`（last_score=0.55 < 0.75）将从 `bsv-driven-hhg-quantum`（峰值 0.85 > 0.70）获取范例段落注入 writer prompt
+
 ## v6.8.24 - 2026-08-12 机制层审计修复：8 项失效/死代码修复
 
 ### 背景

@@ -1900,6 +1900,10 @@ def _load_cross_proposal_exemplar(lifecycle_obj, current_proposal_id: str, secti
     v6.8.24 修复：旧版用 last_score + 阈值 0.80 → 所有课题从未达到 → 死代码。
     改为：用历史峰值分数（score_history 中的最大值），阈值降至 0.70，
     扫描 optimizing/ 和 pending_review/ 目录。
+
+    v6.8.25 修复：旧版扫描各课题目录下的独立 _lifecycle.json，但实际所有状态
+    存储在全局 research_proposals/_lifecycle.json 中，各课题目录无此文件 →
+    函数永远跳过所有课题 → 完全失效。改为从全局状态文件读取。
     """
     try:
         from proposal_lifecycle.constants import PROPOSALS_ROOT
@@ -1920,31 +1924,27 @@ def _load_cross_proposal_exemplar(lifecycle_obj, current_proposal_id: str, secti
             peak = max((h.get("score", 0) for h in history if isinstance(h, dict)), default=0)
             return max(last, peak)
 
-        # v6.8.24: 同时扫描 optimizing/ 和 pending_review/ 目录
+        # v6.8.25: 从全局 _lifecycle.json 读取所有课题状态，而非各课题目录下的独立文件
+        global_state = lifecycle_obj._load_state()
+        all_proposals = global_state.get("proposals", {})
+
         best_proposal = None
         best_score = 0.70  # v6.8.24: 门槛从 0.80 降至 0.70（实际可达到的水平）
-        for subdir in ["optimizing", "pending_review"]:
-            scan_dir = PROPOSALS_ROOT / subdir
-            if not scan_dir.exists():
+        best_status = None
+        for pid, pstate in all_proposals.items():
+            if pid == current_proposal_id:
                 continue
-            for d in scan_dir.iterdir():
-                if not d.is_dir() or d.name == current_proposal_id:
-                    continue
-                lc_file = d / "_lifecycle.json"
-                if not lc_file.exists():
-                    continue
-                try:
-                    import json
-                    state = json.loads(lc_file.read_text(encoding="utf-8"))
-                    score = _best_score_from_state(state)
-                    if score > best_score:
-                        best_score = score
-                        best_proposal = d.name
-                        best_subdir = subdir
-                except Exception:
-                    continue
+            # v6.8.25: 只从 optimizing 和 pending_review 状态的课题中选范例
+            p_status = pstate.get("status", "")
+            if p_status not in ("optimizing", "pending_review"):
+                continue
+            score = _best_score_from_state(pstate)
+            if score > best_score:
+                best_score = score
+                best_proposal = pid
+                best_status = p_status
 
-        if not best_proposal:
+        if not best_proposal or not best_status:
             return ""
 
         # 提取范例课题的对应章节
@@ -1957,7 +1957,7 @@ def _load_cross_proposal_exemplar(lifecycle_obj, current_proposal_id: str, secti
         if not section_file:
             return ""
 
-        exemplar_path = PROPOSALS_ROOT / best_subdir / best_proposal / "04_proposal" / "sections" / section_file
+        exemplar_path = PROPOSALS_ROOT / best_status / best_proposal / "04_proposal" / "sections" / section_file
         if not exemplar_path.exists():
             return ""
 
