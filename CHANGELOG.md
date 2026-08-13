@@ -1,6 +1,12 @@
 # 变更记录
 
-## v6.8.29 - 2026-08-12 项目目录结构整理
+## v6.8.31 - 2026-08-13 修复 cron_list_profile 未暴露 created_at 导致去重排序失效
+
+- 修复 `scripts/hermes_bridge.py`：`cron_list_profile` 返回值新增 `created_at` 字段（与 `cron_list` 保持一致）
+  - 根因：v6.8.30 只给 `cron_list` 补了 `created_at`，但 `cleanup_cron_duplicates` 实际调用的是 `cron_list_profile`，导致去重排序键仍为空、无法区分"最新"副本
+  - 影响：5 类框架 cron（lc-daily-orchestrate/lc-repair/lc-prompt-optimize/lc-retrospective/lc-hourly-monitor）修复后再次执行 `--setup-cron-v2` 时能正确保留最新副本
+- 新增回归测试 `scripts/tests/test_cron_setup_idempotent.py::_test_cron_list_profile_exposes_created_at`，验证 cron_list_profile 透传 created_at 并可按其区分最新副本（14/14 通过）
+- 验证：`py_compile` 通过
 
 ### 背景
 

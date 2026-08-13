@@ -213,6 +213,10 @@ def cron_list_profile(profile: str = "linsai") -> List[Dict[str, Any]]:
             "last_status": j.get("last_status", ""),
             "deliver": j.get("deliver", ""),
             "paused_at": paused_at or "",
+            # v6.8.30: 暴露 created_at 供 cleanup_cron_duplicates 排序"保留最新"
+            # 该函数被 setup_cron_framework 的去重逻辑使用；若缺失此字段，
+            # 去重排序键全为空，无法区分"最新"副本（与 cron_list 保持一致）。
+            "created_at": j.get("created_at", ""),
         })
 
     jobs.sort(key=lambda x: (x["status"] != "active", x["name"]))

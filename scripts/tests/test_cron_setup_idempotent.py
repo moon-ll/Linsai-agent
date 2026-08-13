@@ -212,10 +212,50 @@ class CronSetupIdempotentTests(TestSuite):
             self.assert_eq(hourly, 1,
                            "lc-hourly-monitor 应仅有 1 个实例（修复后）")
 
+    def _test_cron_list_profile_exposes_created_at(self):
+        """cron_list_profile 必须透传 created_at，供 cleanup_cron_duplicates 排序保留最新。
+
+        回归背景（v6.8.30）：cleanup_cron_duplicates 按 created_at 排序"保留最新"，
+        但此前 created_at 只补进了 cron_list，而 cleanup 实际调用的是
+        cron_list_profile，导致排序键仍为空、无法区分最新副本。
+        """
+        import json
+        import tempfile
+        import hermes_bridge
+        orig_cron_jobs_path = hermes_bridge.cron_jobs_path
+        try:
+            with tempfile.TemporaryDirectory() as td:
+                jobs_file = Path(td) / "jobs.json"
+                jobs_file.write_text(json.dumps({
+                    "jobs": [
+                        {"id": "a1", "name": "lc-hourly-monitor",
+                         "created_at": "2026-08-08T00:00:00+08:00",
+                         "enabled": True, "schedule": {"display": "0 * * * *"}},
+                        {"id": "a2", "name": "lc-hourly-monitor",
+                         "created_at": "2026-08-09T00:00:00+08:00",
+                         "enabled": True, "schedule": {"display": "0 * * * *"}},
+                    ]
+                }, ensure_ascii=False), encoding="utf-8")
+                hermes_bridge.cron_jobs_path = lambda profile: jobs_file
+                crons = hermes_bridge.cron_list_profile("test")
+                self.assert_eq(len(crons), 2, "cron_list_profile 应返回 2 个 cron")
+                for c in crons:
+                    self.assert_true("created_at" in c,
+                                     "cron_list_profile 返回项应含 created_at 字段")
+                    self.assert_true(c.get("created_at", "") != "",
+                                     "created_at 应透传非空值")
+                # 按 created_at 排序后应能区分"最新"（2026-08-09）
+                newest = max(crons, key=lambda c: c.get("created_at", ""))
+                self.assert_eq(newest["id"], "a2",
+                               "cleanup 依赖 created_at 区分最新副本")
+        finally:
+            hermes_bridge.cron_jobs_path = orig_cron_jobs_path
+
     def run_tests(self):
         self._test_setup_monitor_removes_duplicates()
         self._test_setup_cron_framework_removes_duplicates()
         self._test_real_duplicate_count_matches_bug()
+        self._test_cron_list_profile_exposes_created_at()
 
 
 if __name__ == "__main__":
