@@ -2,19 +2,17 @@
 
 ## 概述
 - **轮次**: 第 6 轮
-- **完成时间**: 2026-08-05T15:10:29Z
-- **状态**: ✓ 完成 (33/33 job 完成)
+- **完成时间**: 2026-08-13T13:05:55Z
+- **状态**: ✓ 完成 (29/29 job 完成)
 - **失败 job**: 0
-- **总耗时**: 7199s
+- **总耗时**: 6781s
 
 ## 评分变化
 | 指标 | 上一轮 | 本轮 | 变化 |
 |------|--------|------|------|
-| innovation | 0.72 | 0.30 | -0.42 |
-| feasibility | 0.68 | 0.25 | -0.43 |
-| rigor | 0.62 | 0.25 | -0.37 |
-| completeness | 0.88 | 0.20 | -0.68 |
-| **总分** | **0.72** | **0.79** | **+0.07** |
+| rigor | 0.72 | 0.78 | +0.06 |
+| completeness | 0.00 | 0.90 | +0.90 |
+| **总分** | **0.76** | **0.84** | **+0.08** |
 
 ## 执行详情
 ### rationale
@@ -43,36 +41,32 @@
 | lit_search | done | 342s |  |
 | lit_read | done | 0s |  |
 | lit_note | done | 0s |  |
-| writer | done | 357s |  |
+| writer | done | 512s |  |
 ### full_review
 | Job | 状态 | 耗时 | 错误 |
 |-----|------|------|------|
-| critic | done | 260s |  |
-| gap_identify | done | 24s |  |
-| lit_search | done | 662s |  |
+| critic | done | 313s |  |
+| gap_identify | done | 36s |  |
+| lit_search | done | 425s |  |
 | lit_read | done | 0s |  |
 | lit_note | done | 0s |  |
-| writer | done | 275s |  |
+| writer | done | 260s |  |
 ### references
 | Job | 状态 | 耗时 | 错误 |
 |-----|------|------|------|
-| critic | done | 320s |  |
-| gap_identify | done | 29s |  |
-| lit_search | done | 187s |  |
-| lit_read | done | 297s |  |
-| lit_note | done | 0s |  |
-| writer | done | 204s |  |
+| critic | done | 144s |  |
+| writer | done | 278s |  |
 ### monitor
 | Job | 状态 | 耗时 | 错误 |
 |-----|------|------|------|
-| monitor | done | 160s |  |
+| monitor | done | 155s |  |
 ### derived
 | Job | 状态 | 耗时 | 错误 |
 |-----|------|------|------|
-| update_vision | done | 14s |  |
-| update_method_manual | done | 13s |  |
+| update_vision | done | 72s |  |
+| update_method_manual | done | 189s |  |
 
 ## 问题分析
-- **最弱维度**: completeness
-- **高优先级问题**: 5 个
-- **总问题数**: 25 个
+- **最弱维度**: rigor
+- **高优先级问题**: 3 个
+- **总问题数**: 7 个

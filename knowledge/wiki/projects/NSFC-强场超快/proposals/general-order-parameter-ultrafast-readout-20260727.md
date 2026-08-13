@@ -1,8 +1,8 @@
 ---
-title: "序参量（Order Parameter）** 描述凝聚态物质的相变与对称性破缺，是凝聚态物理的核心概念之一。HHG 谱对序参量相关对称性与动力学高度敏感，可通过多维扫描与模型反演提取。本项目围绕 4 类关键序参量（激子/超导/磁/CDW）展开，其中磁序参量涵盖 3 个子分类（铁磁/反铁磁/altermagnet）："
+title: "反演层**。以费舍尔信息矩阵（FIM）评估参数空间的条件数（κ < 10² 可辨识、10²—10⁴ 边缘、> 10⁴ 触发 No-Go）；以贝叶斯框架给出参数后验分布而非点估计（后验标准差 < 先验宽度 50% 方视为有效约束）。该层终止判据：CrSb 数据的 κ 落在可辨识区间且后验有效约束，或落入 No-Go 区间并明确标注不可辨识条件已触发。"
 type: "proposal"
 created: "2026-08-02T06:02:42Z"
-updated: "2026-08-08T06:00:21Z"
+updated: "2026-08-13T13:06:22Z"
 tags: []
 related: []
 source_raw: ""
@@ -12,50 +12,45 @@ project: ["NSFC-强场超快"]
 proposal_id: "general-order-parameter-ultrafast-readout-20260727"
 status: "optimizing"
 project_type: "general"
-optimization_rounds: 5
-last_score: 0.71
-synced_at: "2026-08-08T06:00:21Z"
+optimization_rounds: 0
+last_score: 0.74
+synced_at: "2026-08-13T13:06:22Z"
 ---
 
-# 序参量（Order Parameter）** 描述凝聚态物质的相变与对称性破缺，是凝聚态物理的核心概念之一。HHG 谱对序参量相关对称性与动力学高度敏感，可通过多维扫描与模型反演提取。本项目围绕 4 类关键序参量（激子/超导/磁/CDW）展开，其中磁序参量涵盖 3 个子分类（铁磁/反铁磁/altermagnet）：
+# 反演层**。以费舍尔信息矩阵（FIM）评估参数空间的条件数（κ < 10² 可辨识、10²—10⁴ 边缘、> 10⁴ 触发 No-Go）；以贝叶斯框架给出参数后验分布而非点估计（后验标准差 < 先验宽度 50% 方视为有效约束）。该层终止判据：CrSb 数据的 κ 落在可辨识区间且后验有效约束，或落入 No-Go 区间并明确标注不可辨识条件已触发。
 
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`  
 **项目类型**：general  
 **生命周期状态**：优化中  
-**优化轮次**：5  
-**当前分数**：0.71  
-**同步时间**：2026-08-08
+**优化轮次**：0  
+**当前分数**：0.74  
+**同步时间**：2026-08-13
 
 ## 核心问题
 
-**现有研究的局限性总结。** 综合以上分析，现有研究存在三个递进层次的局限。第一，CDW方向已具备"实验-理论配对验证"的较完整证据链，但altermagnet HHG仍纯属理论预言，缺乏任何实验检验——这是本项目最直接的切入点。第二，即使观测到磁场依赖的谐波信号或偏振各向异性，如何排除能带色散、跃迁矩阵元和激发态分布等替代解释，目前在文献中没有成熟的方法学闭环——这正是本项目要通过"主体系加对...
+由此凝练的科学问题是：在限定的 altermagnet 材料与多带正演模型条件下，磁场反转与偏振分辨的固体 HHG 能否在排除能带背景等替代解释后，区分 altermagnet 序参量相关对称性破缺与能带背景的贡献。若可，则确立一种经独立验证的凝聚态序参量非线性谱学辨识新判据。若不可，则明确界定 HHG 在序参量辨识中的适用边界——两者均为后续研究奠定可靠的方法学起点。
 
-基于前人工作的成就与局限，本项目凝练出以下核心科学问题：
+基于前人工作的成就与局限，凝练出以下核心科学问题：在限定的 altermagnet 材料和多带正演模型条件下，磁场反转与偏振分辨的固体 HHG 能否在排除替代解释后区分 altermagnet 序参量相关对称性破缺与能带背景的贡献？
 
-这一框架的设计哲学是将方法学可靠性置于覆盖面之上。它不承诺"首次同步读出四类序参量"或"填补多个国际空白方向"，而是聚焦于一个具体的、可证伪的科学命题：在限定的altermagnet体系中，HHG能否在排除替代解释的条件下辨识序参量相关对称性。这一命题的验证无论结果正负都具有科学价值——正面结果将确立HHG作为序参量谱学工具的可信度，负面结果（No-Go条件触发）将明确界定HHG在序参量辨识中的适...
+判据阈值的物理依据以四项核心可证伪阈值为骨架。第一，TiSe₂ 复现判据：CDW 相变温度 205 K 上下的 3/5/7 阶谐波偏振不对称方向与 Tyulnev [11] 报道一致，幅度偏差 ≤ 10%（基于 Tyulnev 报道的 ±8% 实验不确定度加 2% 工程余量）。第二，CrSb 信号判据：磁场反转差分偶次谐波相对强度 ≥ 1%、信噪比 SNR > 5（1% 阈值的物理依据是差分信号须...
 
 ## 创新点
 
-**（三）研究方案、特色与创新、预期研究成果**
-- 1. 总体技术路线
-- 2. 理论方法
-- 3. 实验方案
-- 4. 关键技术难点与解决路径
-**5. 方法学创新**
-- 6. 预期研究成果
+（待提取）
 
 ## 关键产物
 
 - [proposal-brief](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/00_proposal-brief.md)
 - [question-framework](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/03_question/question-framework.md)
+- [method-manual](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/03_method/method-manual.md)
 - [reading-notes](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/02_literature/reading-notes.md)
 - [proposal-draft](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/04_proposal/proposal-draft.md)
 
 ## 状态说明
 
 - 处于 **优化中** 阶段
-- 最后得分：0.71
-- 累计对抗轮次：5
+- 最后得分：0.74
+- 累计对抗轮次：0
 
 <!-- linsai-wikilinks -->
 ## 关联概念

@@ -92,7 +92,13 @@ def file_lock(lock_name: str = "global") -> Iterator[None]:
         ...     data["key"] = "value"
         ...     save_json(path, data)
     """
-    lock_path = Path(tempfile.gettempdir()) / f"linsai-copilot-{lock_name}.lock"
+    # v6.8.36: 支持锁目录隔离（环境变量 LINSAI_LOCK_DIR）。测试经 create_isolated_env
+    # 设置该变量指向隔离目录，避免与真实 cron/web 进程争用 /tmp 下的同一锁文件
+    # （此前工作时段 file_lock("proposal-lifecycle") 与 lc-micro-scheduler 竞争，
+    # 导致 test_round_complete_break 等测试挂起）。生产进程不设此变量，行为不变。
+    _lock_dir = os.environ.get("LINSAI_LOCK_DIR")
+    lock_dir = Path(_lock_dir) if _lock_dir else Path(tempfile.gettempdir())
+    lock_path = lock_dir / f"linsai-copilot-{lock_name}.lock"
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     f = open(lock_path, "w")
     try:

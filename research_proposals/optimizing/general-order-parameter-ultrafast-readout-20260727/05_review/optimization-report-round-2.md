@@ -2,10 +2,10 @@
 
 ## 概述
 - **轮次**: 第 2 轮
-- **完成时间**: 2026-08-07T03:31:11Z
-- **状态**: ✓ 完成 (29/29 job 完成)
+- **完成时间**: 2026-08-13T13:05:55Z
+- **状态**: ✓ 完成 (0/0 job 完成)
 - **失败 job**: 0
-- **总耗时**: 292s
+- **总耗时**: 0s
 
 ## 评分变化
 | 指标 | 上一轮 | 本轮 | 变化 |
@@ -17,56 +17,6 @@
 | **总分** | **0.39** | **0.42** | **+0.03** |
 
 ## 执行详情
-### rationale
-| Job | 状态 | 耗时 | 错误 |
-|-----|------|------|------|
-| critic | done | 14s |  |
-| gap_identify | done | 15s |  |
-| lit_search | done | 14s |  |
-| lit_read | done | 0s |  |
-| lit_note | done | 0s |  |
-| writer | done | 13s |  |
-### content
-| Job | 状态 | 耗时 | 错误 |
-|-----|------|------|------|
-| critic | done | 15s |  |
-| gap_identify | done | 14s |  |
-| lit_search | done | 14s |  |
-| lit_read | done | 0s |  |
-| lit_note | done | 0s |  |
-| writer | done | 14s |  |
-### scheme
-| Job | 状态 | 耗时 | 错误 |
-|-----|------|------|------|
-| critic | done | 15s |  |
-| gap_identify | done | 13s |  |
-| lit_search | done | 12s |  |
-| lit_read | done | 0s |  |
-| lit_note | done | 0s |  |
-| writer | done | 14s |  |
-### full_review
-| Job | 状态 | 耗时 | 错误 |
-|-----|------|------|------|
-| critic | done | 15s |  |
-| gap_identify | done | 13s |  |
-| lit_search | done | 13s |  |
-| lit_read | done | 0s |  |
-| lit_note | done | 0s |  |
-| writer | done | 14s |  |
-### references
-| Job | 状态 | 耗时 | 错误 |
-|-----|------|------|------|
-| critic | done | 15s |  |
-| writer | done | 14s |  |
-### monitor
-| Job | 状态 | 耗时 | 错误 |
-|-----|------|------|------|
-| monitor | done | 14s |  |
-### derived
-| Job | 状态 | 耗时 | 错误 |
-|-----|------|------|------|
-| update_vision | done | 14s |  |
-| update_method_manual | done | 13s |  |
 
 ## 问题分析
 - **最弱维度**: feasibility

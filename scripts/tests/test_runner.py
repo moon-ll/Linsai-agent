@@ -10,6 +10,7 @@ test_runner.py — 轻量级内测框架
     被 self_test.py 统一调度，也可单独运行某个测试模块。
 """
 
+import os
 import sys
 import time
 import traceback
@@ -194,6 +195,10 @@ def create_isolated_env() -> Path:
     tmp = _make_isolated_root()
     _copy_essentials(tmp)
     isolate_logger(tmp)
+    # v6.8.36: 隔离锁目录——避免测试与真实 cron/web 进程争用 /tmp 下的同一锁文件
+    # （此前工作时段 file_lock("proposal-lifecycle") 与 lc-micro-scheduler 竞争，
+    # 导致 test_round_complete_break 等测试挂起）。common.file_lock 读取此变量。
+    os.environ["LINSAI_LOCK_DIR"] = str(tmp / "locks")
     return tmp
 
 

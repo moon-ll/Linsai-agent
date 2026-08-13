@@ -2,69 +2,67 @@
 
 ## 概述
 - **轮次**: 第 8 轮
-- **完成时间**: 2026-08-06T11:04:34Z
-- **状态**: ✓ 完成 (25/25 job 完成)
+- **完成时间**: 2026-08-13T13:05:55Z
+- **状态**: ◐ 进行中 (23/25 job 完成)
 - **失败 job**: 0
-- **总耗时**: 4610s
+- **总耗时**: 5911s
 
 ## 评分变化
 | 指标 | 上一轮 | 本轮 | 变化 |
 |------|--------|------|------|
-| innovation | 0.30 | 0.85 | +0.55 |
-| feasibility | 0.25 | 0.85 | +0.60 |
-| rigor | 0.20 | 0.87 | +0.67 |
-| completeness | 0.15 | 0.87 | +0.72 |
-| **总分** | **0.77** | **0.87** | **+0.10** |
+| rigor | 0.70 | 0.78 | +0.08 |
+| completeness | 0.00 | 0.93 | +0.93 |
+| **总分** | **0.77** | **0.86** | **+0.09** |
 
 ## 执行详情
 ### rationale
 | Job | 状态 | 耗时 | 错误 |
 |-----|------|------|------|
-| critic | done | 15s |  |
-| gap_identify | done | 13s |  |
-| lit_search | done | 16s |  |
+| critic | done | 858s |  |
+| gap_identify | done | 36s |  |
+| lit_search | done | 712s |  |
 | lit_read | done | 0s |  |
 | lit_note | done | 0s |  |
-| writer | done | 361s |  |
+| writer | done | 345s |  |
 ### content
 | Job | 状态 | 耗时 | 错误 |
 |-----|------|------|------|
-| critic | done | 406s |  |
-| gap_identify | done | 178s |  |
-| lit_search | done | 708s |  |
+| critic | done | 282s |  |
+| gap_identify | done | 22s |  |
+| lit_search | done | 377s |  |
 | lit_read | done | 0s |  |
 | lit_note | done | 0s |  |
-| writer | done | 271s |  |
+| writer | done | 261s |  |
 ### scheme
 | Job | 状态 | 耗时 | 错误 |
 |-----|------|------|------|
-| critic | done | 388s |  |
-| gap_identify | done | 22s |  |
-| lit_search | done | 546s |  |
-| lit_read | done | 522s |  |
+| critic | done | 236s |  |
+| gap_identify | done | 20s |  |
+| lit_search | done | 327s |  |
+| lit_read | done | 0s |  |
 | lit_note | done | 0s |  |
-| writer | done | 13s |  |
+| writer | done | 688s |  |
 ### full_review
 | Job | 状态 | 耗时 | 错误 |
 |-----|------|------|------|
-| critic | done | 14s |  |
-| writer | done | 453s |  |
+| critic | done | 564s |  |
+| writer | done | 758s |  |
 ### references
 | Job | 状态 | 耗时 | 错误 |
 |-----|------|------|------|
-| critic | done | 96s |  |
-| writer | done | 228s |  |
+| critic | done | 95s |  |
+| writer | done | 276s |  |
 ### monitor
 | Job | 状态 | 耗时 | 错误 |
 |-----|------|------|------|
-| monitor | done | 104s |  |
+| monitor | done | 54s |  |
 ### derived
 | Job | 状态 | 耗时 | 错误 |
 |-----|------|------|------|
-| update_vision | done | 41s |  |
-| update_method_manual | done | 215s |  |
+| update_vision | pending |  |  |
+| update_method_manual | pending |  |  |
 
 ## 问题分析
-- **最弱维度**: innovation
-- **高优先级问题**: 0 个
-- **总问题数**: 11 个
+- **最弱维度**: rigor
+- **高优先级问题**: 2 个
+- **总问题数**: 16 个

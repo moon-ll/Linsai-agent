@@ -2,13 +2,13 @@
 title: "moire-strong-field-probe — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-moire-strong-field-probe-20260726"
-latest_round: 7
+latest_round: 8
 last_score: 0.79
 critic_rounds: 8
 optimization_reports: 3
 status: "optimizing"
-created: "2026-08-13T05:00:25Z"
-updated: "2026-08-13T05:00:25Z"
+created: "2026-08-13T13:06:22Z"
+updated: "2026-08-13T13:06:22Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -17,7 +17,7 @@ confidence: 1.0
 # moire-strong-field-probe — 优化报告
 
 **课题 ID**：`general-moire-strong-field-probe-20260726`
-**累计轮次**：7
+**累计轮次**：8
 **当前分数**：0.79
 **状态**：优化中
 
@@ -27,9 +27,9 @@ confidence: 1.0
 
 | 轮次 | 总分 | 变化 | innovation | feasibility | rigor | completeness |
 |------|------|------|------------|-------------|-------|-------------|
-| 第 6 轮 | 0.79 | +0.07 | 0.30 | 0.25 | 0.25 | 0.20 |
-| 第 7 轮 | 0.79 | +0.24 | 0.85 | 0.85 | 0.50 | 0.50 |
-| 第 8 轮 | 0.81 | +0.02 | 0.30 | 0.25 | 0.50 | 0.20 |
+| 第 6 轮 | 0.84 | +0.08 | — | — | 0.78 | 0.90 |
+| 第 7 轮 | 0.83 | +0.03 | — | — | 0.80 | 0.86 |
+| 第 8 轮 | 0.79 | +0.01 | 0.82 | 0.78 | 0.75 | — |
 
 ## 优化报告（共 3 份）
 

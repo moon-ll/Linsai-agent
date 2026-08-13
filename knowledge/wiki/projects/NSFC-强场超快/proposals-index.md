@@ -1,8 +1,8 @@
 ---
 title: "NSFC 课题生命周期索引"
 type: "index"
-created: "2026-08-13T05:00:25Z"
-updated: "2026-08-13T05:00:25Z"
+created: "2026-08-13T13:06:22Z"
+updated: "2026-08-13T13:06:22Z"
 tags: []
 related: []
 source_raw: ""
@@ -22,7 +22,7 @@ project: ["NSFC-强场超快"]
 | bsv-driven-hhg-quantum | 面上 | 待校验 | 第8轮 | 0.86 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
 | moire-strong-field-probe | 面上 | 优化中 | 第7轮 | 0.79 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
 | order-parameter-ultrafast-readout | 面上 | 优化中 | 第0轮 | 0.74 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
-| quantum-geometry-inversion | 面上 | 优化中 | 第0轮 | 0.86 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
+| quantum-geometry-inversion | 面上 | 优化中 | 第0轮 | 0.77 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
 | transient-quantum-phase-optical | 重点 | 优化中 | 第0轮 | 0.71 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
 
 ---

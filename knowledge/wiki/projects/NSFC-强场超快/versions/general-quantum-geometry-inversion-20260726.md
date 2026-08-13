@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-quantum-geometry-inversion-20260726"
 project_type: "general"
 latest_round: 7
-last_score: 0.86
+last_score: 0.77
 status: "optimizing"
-created: "2026-08-13T05:00:25Z"
-updated: "2026-08-13T05:00:25Z"
+created: "2026-08-13T13:06:22Z"
+updated: "2026-08-13T13:06:22Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-quantum-geometry-inversion-20260726`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.86
+**当前分数**：0.77
 **状态**：优化中
-**同步时间**：2026-08-13T05:00:25Z
+**同步时间**：2026-08-13T13:06:22Z
 
 ---
 
@@ -31,8 +31,8 @@ confidence: 1.0
 | content | content | 264 |
 | full_review | full_review | 256 |
 | rationale | rationale | 113 |
-| references | references | 50 |
-| scheme | scheme | 216 |
+| references | references | 67 |
+| scheme | scheme | 186 |
 
 ## 课题简介
 
@@ -41,7 +41,7 @@ confidence: 1.0
 **课题名称**：Q2（科学问题）**：以 CDW（TiSe₂、1T-TaS₂）为代表的中等关联材料中，在何种 Hubbard-$U/W$ 与温度区间，HHG 偏振响应仍保留可独立辨识的 $\Omega(\mathbf{k})$、$g(\mathbf{k})$ 信息？超过该边界时，多体效应（CDW 序参量、doublon-holon 复合、带折叠）使 $\Omega$、$g$ 的辨识不可分离。
 **项目类型**：面上项目
 **课题 ID**：`general-quantum-geometry-inversion-20260726`
-**当前状态**：优化中（第0轮，score 0.86）
+**当前状态**：优化中（第0轮，score 0.77）
 **启动日期**：2026-07-26
 **最后更新**：2026-08-13
 

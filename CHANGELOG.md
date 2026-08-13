@@ -1,5 +1,26 @@
 # 变更记录
 
+## v6.8.36 - 2026-08-13 历史优化报告清洗 + 测试锁隔离（补 v6.8.35 两个后续项）
+
+### 任务1：历史脏 optimization-report 清洗
+- v6.8.35 的 P3 让新生成报告「总分与四维同源」，但已生成的 10 份历史报告仍是旧脏逻辑产物
+  （总分取 last_score、四维取另一条记录，如 moire r8 总分 0.81 vs 四维 0.30/0.25/0.50/0.20 错位）。
+- 新增 `scripts/regenerate_optimization_reports.py`（带 `--dry-run` + rename 备份恢复 + `--self-check`）：
+  rename 旧报告→.bak → 用当前逻辑重生成 → 成功删 .bak / 失败恢复，零数据丢失。
+- 执行：10 份全部重生成，score_history 覆盖率 100%。moire r8 新报告总分 0.79 + 四维
+  0.82/0.78/0.75/0.80 同源自一条记录（加权≈0.79），自洽。同步 KB：latest_round 与评分表同源（8）。
+
+### 任务2：测试锁隔离缺陷修复
+- 根因：`common.file_lock` 锁文件固定在 `/tmp/linsai-copilot-{name}.lock`，测试 `file_lock("proposal-lifecycle")`
+  与真实 lc-micro-scheduler cron 争用同一锁文件，工作时段导致 test_round_complete_break 等挂起。
+- 修复：`file_lock` 支持 `LINSAI_LOCK_DIR` 环境变量（生产不设则行为不变）；`create_isolated_env`
+  设置该变量指向隔离 tmp/locks。测试锁自动隔离。
+- 验证：人为持有 /tmp 锁时 test_round_complete_break 仍 30s 内通过；全量 self_test --module 406/406 全绿。
+
+### 验证
+- `py_compile` 通过；regenerate 脚本 --self-check 通过；self_test --module 406/406 全绿
+- 10 份历史 report 总分四维自洽；KB reports latest_round 与评分表同源
+
 ## v6.8.35 - 2026-08-13 知识库课题同步治理与治本（事件驱动同步+反向清理+测试隔离）
 
 ### 问题
