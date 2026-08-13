@@ -1,5 +1,13 @@
 # 变更记录
 
+## v6.8.33 - 2026-08-13 优化完善 5 个课题的研究设想（申请书核心）
+
+- **莫尔超晶格**（`optimizing/general-moire-strong-field-probe`）：剥离文件顶部 r19/r10/r18 轮次优化日志，保留纯科学内容
+- **瞬态量子相**（`optimizing/key-transient-quantum-phase-optical`）：补全"来源与可靠性"小节——从仅 1 篇论文扩充为 39 篇文献六条论证链 + 检索范围声明 + DOI 核实状态如实标注
+- **BSV-HHG**（`pending_review/general-bsv-driven-hhg-quantum`）：清理第 22/21/19 轮记录与第 15/16/20 轮进展、模块完整性表格等内部轮次日志，保留纯内容
+- **量子几何反演 / altermagnet 序参量**：校验确认已达 NSFC 严谨性标准，无需改动
+- 验证：3 个文件清理后无内部注释残留，判据数值与各课题 04_proposal 保持一致
+
 ## v6.8.32 - 2026-08-13 修复 test_literature_service 测试隔离失效（污染真实 knowledge 数据域）
 
 ### 问题
