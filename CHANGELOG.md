@@ -1,5 +1,22 @@
 # 变更记录
 
+## v6.8.38 - 2026-08-13 修复 missing_sections 初始化后不刷新导致 critic 误聚焦
+
+### 问题
+- 反馈机制核查发现：`missing_sections` 字段只在课题初始化时写入（initialization.py），
+  之后 writer 补全模块也不刷新，停留在旧值。moire 标缺 innovation/plan/outcome、bsv 标缺
+  innovation/plan/references，但这些模块要么不在 5 标准模块内、要么实际文件都已存在。
+- 该过时列表传给 critic 供「重点检查」，让 critic 白检查已存在的模块，影响反馈精度
+  （不影响评分，因 critic 实际检查会发现模块存在）。
+
+### 修复
+- `optimize.py` 在每轮 critic 评审前，基于实际 sections 文件重算 missing_sections
+  （`section_exists` 内容>50字判定），并回写 prop_state。让 critic 始终聚焦真正缺失/空置
+  的模块。验证：moire/bsv 重算后 missing 从过时值正确刷新为 []（5 标准模块实际都在）。
+
+### 验证
+- py_compile 通过；self_test --module 406/406 全绿
+
 ## v6.8.37 - 2026-08-13 修复 references/critic 检验超时阈值偏紧导致课题卡住
 
 ### 问题

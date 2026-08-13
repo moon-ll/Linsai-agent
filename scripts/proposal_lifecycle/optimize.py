@@ -126,12 +126,19 @@ class OptimizeMixin:
         if _log:
             section_name = focus_section["cn"] if focus_section else "整体一致性"
             _log.info(f"[{proposal_id}] 对抗轮 {current_round + 1}: critic 评审（聚焦：{section_name}）")
-        # v6.7.10: 读取初始化后的缺失模块列表，供 critic 重点检查
-        missing_sections = prop_state.get("missing_sections", [])
-
         # v6.8.7: 程序化 AI 写作模式检测——在 critic 之前运行，产出表达质量天花板
         sections_obj = ProposalSections(prop_dir / "04_proposal")
         sections_obj.ensure_split()
+        # v6.8.38: 基于实际 sections 文件重算 missing_sections。该字段只在初始化时写入
+        # (initialization.py)，之后 writer 补全模块也不刷新，会停留在旧值（如 moire 曾标
+        # 缺 innovation/plan/outcome，但这些压根不在 5 标准模块内、且文件实际都在），导致
+        # critic 被引导去"重点检查"已存在的模块。此处每轮按 section_exists(内容>50字)重算
+        # 并回写 prop_state，让 critic 聚焦真正缺失/空置的模块。
+        missing_sections = [s["key"] for s in PROPOSAL_SECTIONS
+                            if not sections_obj.section_exists(s["key"])]
+        if missing_sections != prop_state.get("missing_sections"):
+            prop_state["missing_sections"] = missing_sections
+            self._set_proposal_state(proposal_id, prop_state)
         ai_check = self._detect_ai_patterns(prop_dir, sections_obj)
         if _log:
             _log.info(f"[{proposal_id}] AI 检测: ceiling={ai_check['ceiling']:.2f}, "
