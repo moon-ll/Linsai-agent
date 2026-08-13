@@ -58,6 +58,7 @@ from .executor import (
     _mark_degradation,
 )
 from .framework import (
+    cleanup_cron_duplicates,
     setup_cron_framework,
     setup_weekend_crontab,
     teardown_weekend_crontab,
@@ -384,6 +385,7 @@ python3 scripts/retrospective.py --period 7d
     # ------------------------------------------------------------------
     # 安装 / 卸载（从 framework 模块绑定为方法）
     # ------------------------------------------------------------------
+    cleanup_cron_duplicates = cleanup_cron_duplicates
     setup_cron_framework = setup_cron_framework
     setup_weekend_crontab = setup_weekend_crontab
     teardown_weekend_crontab = teardown_weekend_crontab
