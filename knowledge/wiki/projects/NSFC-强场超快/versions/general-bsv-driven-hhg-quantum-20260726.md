@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-bsv-driven-hhg-quantum-20260726"
 project_type: "general"
 latest_round: 7
-last_score: 0.79
-status: "optimizing"
-created: "2026-08-12T13:43:57Z"
-updated: "2026-08-12T13:43:57Z"
+last_score: 0.86
+status: "pending_review"
+created: "2026-08-13T00:11:37Z"
+updated: "2026-08-13T00:11:37Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-bsv-driven-hhg-quantum-20260726`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.79
-**状态**：优化中
-**同步时间**：2026-08-12T13:43:57Z
+**当前分数**：0.86
+**状态**：待校验
+**同步时间**：2026-08-13T00:11:37Z
 
 ---
 
@@ -33,19 +33,19 @@ confidence: 1.0
 | innovation | innovation | 16 |
 | plan | plan | 21 |
 | rationale | rationale | 92 |
-| references | references | 231 |
+| references | references | 267 |
 | scheme | scheme | 73 |
 
 ## 课题简介
 
 # 课题说明
 
-**课题名称**：光源环节**是整个研究链条的起点。BSV 由 NOPA/OPA 后置的非线性晶体（β-BBO 或 PPKTP）经高增益参量下转换产生。参照 [3] 与 [4] 的高增益方案，目标单脉冲光子数达 $10^{13}$ 量级，波长可调范围 0.8–1.5 μm，脉冲宽度 < 50 fs。
+**课题名称**：完整性结论**：正文三段式骨架完整，立项依据四要素齐全，研究内容六子方向逻辑递进，研究方案风险可控。但正文之外仍存在若干结构性缺失（见下文第三节），需在本轮或后续轮次补齐。
 **项目类型**：面上项目
 **课题 ID**：`general-bsv-driven-hhg-quantum-20260726`
-**当前状态**：优化中（第7轮，score 0.79）
+**当前状态**：待校验（等待人工核验）
 **启动日期**：2026-07-26
-**最后更新**：2026-08-11
+**最后更新**：2026-08-12
 
 ---
 
@@ -72,14 +72,16 @@ confidence: 1.0
 | 6 | 0.65 | 40 | 21 | 2026-07-30 |
 | 6 | 0.65 | 40 | 21 | 2026-07-30 |
 | 1 | 0.41 | 126 | 76 | 2026-08-03 |
-| 2 | 0.62 | 75 | 43 | 2026-
+| 2 | 0.62 | 75 | 43 | 2026-08-03 |
+| 3 | 0.60 | 56 | 18 | 2026-08-03 |
+| 4 | 0.62 | 60 | 2
 
-（完整简介见 [源文件](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/04_proposal/proposal-draft-merged.md)）
+（完整简介见 [源文件](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/04_proposal/proposal-draft-merged.md)）
 
 ## 来源
 
-- 最新申请书：[research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/04_proposal/proposal-draft-merged.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/04_proposal/proposal-draft-merged.md)
-- 各章节文件：`research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/04_proposal/sections/`
+- 最新申请书：[research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/04_proposal/proposal-draft-merged.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/04_proposal/proposal-draft-merged.md)
+- 各章节文件：`research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/04_proposal/sections/`
 - 优化报告：[reports/general-bsv-driven-hhg-quantum-20260726.md](reports/general-bsv-driven-hhg-quantum-20260726.md)
 
 > 本页由 `scripts/kb_proposal_reorg.py` 自动生成。

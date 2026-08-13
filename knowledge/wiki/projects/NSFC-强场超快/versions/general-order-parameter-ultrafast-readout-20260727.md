@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-order-parameter-ultrafast-readout-20260727"
 project_type: "general"
 latest_round: 7
-last_score: 0.55
+last_score: 0.74
 status: "optimizing"
-created: "2026-08-12T13:43:57Z"
-updated: "2026-08-12T13:43:57Z"
+created: "2026-08-13T00:11:37Z"
+updated: "2026-08-13T00:11:37Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.55
+**当前分数**：0.74
 **状态**：优化中
-**同步时间**：2026-08-12T13:43:57Z
+**同步时间**：2026-08-13T00:11:37Z
 
 ---
 
@@ -28,20 +28,20 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 72 |
+| content | content | 64 |
 | full_review | full_review | 78 |
-| rationale | rationale | 94 |
+| rationale | rationale | 100 |
 | references | references | 164 |
-| scheme | scheme | 104 |
+| scheme | scheme | 111 |
 
 ## 课题简介
 
 # 课题说明
 
-**课题名称**：难点一：altermagnet HHG 信号能否被观测到。** Werner 等人理论给出候选信号的存在性预言（Werner et al., 2024 [24]），但理论是否包含自旋轨道耦合、带间跃迁贡献是否完整、在什么场强与波长范围内成立，都需要通过实验检验。信号强度、样品在强场下的损伤阈值、以及与能带背景的相对幅度，在实验之前均存在不确定性。
+**课题名称**：反演层**。以费舍尔信息矩阵（FIM）评估参数空间的条件数（κ < 10² 可辨识、10²—10⁴ 边缘、> 10⁴ 触发 No-Go）；以贝叶斯框架给出参数后验分布而非点估计（后验标准差 < 先验宽度 50% 方视为有效约束）。该层终止判据：CrSb 数据的 κ 落在可辨识区间且后验有效约束，或落入 No-Go 区间并明确标注不可辨识条件已触发。
 **项目类型**：面上项目
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
-**当前状态**：优化中（第0轮，score 0.55）
+**当前状态**：优化中（第0轮，score 0.74）
 **启动日期**：2026-07-27
 **最后更新**：2026-08-12
 
@@ -51,7 +51,7 @@ confidence: 1.0
 （待管线生成）
 
 ## 创新点
-4. 年度研究计划
+§2.6 年度研究计划
 
 ---
 
@@ -67,7 +67,7 @@ confidence: 1.0
 | 6 | 0.32 | 14 | 5 | 2026-07-30 |
 | 7 | 0.36 | 45 | 15 | 2026-07-30 |
 | 1 | 0.39 | 31 | 15 | 2026-08-03 |
-| 2 | 0.42 | 16 | 
+| 2 | 0.42 | 16
 
 （完整简介见 [源文件](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/04_proposal/proposal-draft-merged.md)）
 

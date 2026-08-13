@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-moire-strong-field-probe-20260726"
 project_type: "general"
 latest_round: 7
-last_score: 0.69
+last_score: 0.79
 status: "optimizing"
-created: "2026-08-12T13:43:57Z"
-updated: "2026-08-12T13:43:57Z"
+created: "2026-08-13T00:11:37Z"
+updated: "2026-08-13T00:11:37Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-moire-strong-field-probe-20260726`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.69
+**当前分数**：0.79
 **状态**：优化中
-**同步时间**：2026-08-12T13:43:57Z
+**同步时间**：2026-08-13T00:11:37Z
 
 ---
 
@@ -28,20 +28,20 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 154 |
-| full_review | full_review | 133 |
-| rationale | rationale | 131 |
-| references | references | 174 |
-| scheme | scheme | 55 |
+| content | content | 192 |
+| full_review | full_review | 137 |
+| rationale | rationale | 123 |
+| references | references | 202 |
+| scheme | scheme | 110 |
 
 ## 课题简介
 
 # 课题说明
 
-**课题名称**：反演探针：从均匀体系到莫尔自由度的扩展瓶颈。** HHG 反演材料参数的研究已在均匀单层/双层体系中取得重要进展，其发展脉络为莫尔体系的反演提供了方法学基础，但也暴露了向莫尔自由度扩展的根本困难。
+**课题名称**：反演探针：从均匀体系到莫尔自由度的扩展瓶颈。** HHG 反演材料参数的研究已在均匀单层/双层体系中取得重要进展。其发展脉络为莫尔体系的反演迁移了方法学基础，但也暴露了向莫尔自由度扩展的根本困难。
 **项目类型**：面上项目
 **课题 ID**：`general-moire-strong-field-probe-20260726`
-**当前状态**：优化中（第6轮，score 0.69）
+**当前状态**：优化中（第7轮，score 0.79）
 **启动日期**：2026-07-26
 **最后更新**：2026-08-12
 
