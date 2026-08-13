@@ -93,6 +93,20 @@ class TransitionsMixin:
         except Exception:
             pass
 
+        # v6.8.33: 状态流转事件钩子——按目标阶段同步/清理知识库镜像。
+        # 归档→清理活跃镜像（已由 feedback_archive 写入 knowledge/raw）；
+        # 其他流转（晋级 pending_review / 退回 optimizing）→ 刷新镜像保持一致。
+        try:
+            if to_stage == "archived":
+                from proposal_kb_sync import cleanup_kb_mirror
+                cleanup_kb_mirror(proposal_id)
+            else:
+                from lifecycle.micro_scheduler import _sync_proposal_to_kb
+                _sync_proposal_to_kb(proposal_id)
+        except Exception as e:
+            if _log:
+                _log.warning(f"[{proposal_id}] 流转({to_stage})KB 钩子失败: {e}")
+
         return {
             "success": True,
             "proposal_id": proposal_id,

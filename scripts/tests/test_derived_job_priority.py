@@ -28,7 +28,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from test_runner import TestSuite, create_isolated_env, patch_module_root
+from test_runner import TestSuite, create_isolated_env, patch_module_root, patch_kb_sync_noop
 
 
 def _make_job(pid, round_num, section_key, step, status="pending",
@@ -79,6 +79,7 @@ class DerivedJobPriorityTests(TestSuite):
 
         self.ms = importlib.import_module("lifecycle.micro_scheduler")
         patch_module_root("lifecycle.micro_scheduler", self.tmp_root)
+        patch_kb_sync_noop(self.ms)  # 拦截 KB 同步，避免测试写穿真实 knowledge/
         import paths
         paths.PROJECT_ROOT = self.tmp_root
 

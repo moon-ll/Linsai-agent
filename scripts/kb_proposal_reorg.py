@@ -159,7 +159,9 @@ def _get_all_proposals() -> List[Tuple[str, str, Path]]:
     result = []
     for pid in sorted(proposals.keys()):
         prop_dir, stage = _find_proposal_dir(pid)
-        if prop_dir:
+        # v6.8.33: 过滤已归档课题——归档内容由 feedback_archive 写入
+        # knowledge/raw/projects/，不再保留 NSFC 活跃镜像（避免陈旧孤儿）
+        if prop_dir and stage != "archived":
             result.append((pid, stage, prop_dir))
     return result
 
@@ -472,6 +474,17 @@ class KBProposalReorg:
         meta_reviews = sorted(review_dir.glob("meta-review-*.md"))
         review_reports = sorted(review_dir.glob("review-report*.md"))
         opt_reports = sorted(review_dir.glob("optimization-report-round-*.md"))
+
+        # v6.8.33: frontmatter/累计轮次与评分表同源——取 optimization-report 最大轮次，
+        # 而非入参 latest_round（来自 04_proposal/proposal-draft-r*，是另一套计数器，
+        # 两者常不对齐，导致「latest_round=7 但评分表列到第8轮」的矛盾）。
+        opt_rounds = []
+        for f in opt_reports:
+            m = re.search(r"round-(\d+)", f.name)
+            if m:
+                opt_rounds.append(int(m.group(1)))
+        if opt_rounds:
+            latest_round = max(opt_rounds)
 
         # 收集评分历史
         score_history = _collect_score_history(prop_dir)

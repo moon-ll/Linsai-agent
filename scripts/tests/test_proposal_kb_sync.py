@@ -50,13 +50,19 @@ class ProposalKbSyncTests(TestSuite):
         (prop_dir / "04_proposal").mkdir(parents=True, exist_ok=True)
         (prop_dir / "04_proposal" / "proposal-draft.md").write_text("# draft\n", encoding="utf-8")
 
-        # 强制重新导入
-        for mod_name in ["proposal_kb_sync"]:
+        # 强制重新导入 KB 写入链：proposal_kb_sync 委托 knowledge_base.save_proposal_sync
+        # → kb_wiki.save_wiki_page → kb_graph 图谱更新。这些模块的 KNOWLEDGE_DIR/WIKI_DIR/GRAPH_PATH
+        # 均为模块级绝对常量（import 时绑定真实 knowledge/ 路径），patch_module_root 只覆盖
+        # 单个模块，必须把整条写入链都 patch 到 tmp_root，否则 save_proposal_sync 会写穿真实
+        # knowledge/ 数据域（v6.8.33 修复：此前只 patch proposal_kb_sync，导致 save_proposal_sync
+        # 经未 patch 的 kb_wiki.KNOWLEDGE_DIR 把 test 课题写进真实 NSFC/proposals/）。
+        for mod_name in ["proposal_kb_sync", "knowledge_base", "kb_wiki", "kb_graph"]:
             if mod_name in sys.modules:
                 del sys.modules[mod_name]
 
         self.sync_mod = importlib.import_module("proposal_kb_sync")
-        patch_module_root("proposal_kb_sync", self.tmp_root)
+        for mod_name in ["proposal_kb_sync", "knowledge_base", "kb_wiki", "kb_graph"]:
+            patch_module_root(mod_name, self.tmp_root)
 
     def teardown(self):
         if self.tmp_root and self.tmp_root.exists():

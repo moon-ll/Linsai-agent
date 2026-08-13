@@ -358,6 +358,14 @@ class OptimizeMixin:
                 if _log:
                     _log.warning(f"[{proposal_id}] 同步产物失败: {e}")
 
+        # v6.8.33: 轮次完成后立即同步知识库（事件驱动），覆盖 cron sweep/CLI 所有调用方
+        try:
+            from lifecycle.micro_scheduler import _sync_proposal_to_kb
+            _sync_proposal_to_kb(proposal_id)
+        except Exception as e:
+            if _log:
+                _log.warning(f"[{proposal_id}] 轮次完成 KB 同步失败: {e}")
+
         # 5. 判定是否达标
         done_result = self._check_done(proposal_id, threshold)
 

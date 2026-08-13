@@ -400,6 +400,26 @@ def _generate_round_report(self, proposal_id: str, round_num: int) -> Optional[s
     # 收集本轮评分历史
     score_history = prop_state.get("score_history", [])
     round_scores = [h for h in score_history if h.get("round") == round_num]
+    # v6.8.33: 总分与四维同源——本轮取 round_scores[-1]，上一轮取它在 score_history 中的
+    # 前一条（按列表顺序），避免此前「总分取 last_score、四维取另一条记录」导致同表总分与
+    # 四维永不对齐；也避免按裸 round 号（< round_num）跨 epoch（round 编号曾重启）误配。
+    latest = round_scores[-1] if round_scores else None
+    if latest is not None:
+        final_score = latest.get("score", 0.0)
+        dim_scores = latest.get("dim_scores", {})
+    else:
+        final_score = prop_state.get("last_score", 0.0)
+        dim_scores = {}
+    prev_entry = None
+    if latest is not None:
+        try:
+            _idx = score_history.index(latest)
+            if _idx > 0:
+                prev_entry = score_history[_idx - 1]
+        except ValueError:
+            pass
+    prev_score = prev_entry.get("score", 0.0) if prev_entry else 0.0
+    prev_dim = prev_entry.get("dim_scores", {}) if prev_entry else {}
 
     # 收集本轮执行统计
     jobs = self._get_jobs(proposal_id)
@@ -419,11 +439,6 @@ def _generate_round_report(self, proposal_id: str, round_num: int) -> Optional[s
             except Exception:
                 pass
 
-    # 计算分数变化
-    final_score = prop_state.get("last_score", 0.0)
-    prev_scores = [h for h in score_history if h.get("round", 0) < round_num]
-    prev_score = prev_scores[-1]["score"] if prev_scores else 0.0
-
     report_lines = [
         f"# 优化报告：{proposal_id}",
         f"",
@@ -440,11 +455,8 @@ def _generate_round_report(self, proposal_id: str, round_num: int) -> Optional[s
         f"|------|--------|------|------|",
     ]
 
-    # 维度评分
-    if round_scores:
-        latest = round_scores[-1]
-        dim_scores = latest.get("dim_scores", {})
-        prev_dim = prev_scores[-1].get("dim_scores", {}) if prev_scores else {}
+    # 维度评分（复用前面同源的 dim_scores / prev_dim）
+    if dim_scores:
         for dim, score in dim_scores.items():
             prev = prev_dim.get(dim, 0.0)
             delta = score - prev
@@ -485,9 +497,8 @@ def _generate_round_report(self, proposal_id: str, round_num: int) -> Optional[s
             err = (j.get("last_error", "") or "")[:60]
             report_lines.append(f"| {step} | {status} | {elapsed} | {err} |")
 
-    # 弱维度分析
-    if round_scores:
-        latest = round_scores[-1]
+    # 弱维度分析（复用前面同源的 latest）
+    if latest:
         weakest = latest.get("weakest_dim", "无")
         high_issues = latest.get("high_issues", 0)
         report_lines.extend([
@@ -1300,6 +1311,8 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
         report_path = _generate_round_report(self, focus_pid, current_round)
         if report_path:
             generated_reports.append(report_path)
+        # v6.8.33: 轮次已完成分支同样同步知识库（与 :1383 的 job 执行路径对齐，补 GAP）
+        _sync_proposal_to_kb(focus_pid)
         # 检查是否达标，达标则 transition 到 pending_review
         transition_result = _check_and_transition(self, focus_pid)
         if transition_result:

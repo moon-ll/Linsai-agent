@@ -216,6 +216,42 @@ def _run_reorg(dry_run: bool = False) -> None:
             _log.warning(f"kb_proposal_reorg 调用失败: {e}")
 
 
+def cleanup_kb_mirror(proposal_id: str) -> Dict[str, Any]:
+    """归档时清理 NSFC 知识库镜像中该课题的活跃页（proposals/versions/reports）。
+
+    归档课题的完整内容已由 feedback_archive 写入 knowledge/raw/projects/{id}/，
+    活跃视图（NSFC/{proposals,versions,reports}）不再需要保留其镜像，否则会
+    成为陈旧孤儿并持续被 reorg 刷新。清理后重排一次 index/MOC 使索引立即一致
+    （_get_all_proposals 已过滤 archived，重排不会重新生成已清理的页面）。
+
+    Returns:
+        {"cleaned": [被删除的相对路径], "proposal_id": ...}
+    """
+    slug = _slugify(proposal_id)
+    targets = [
+        NSFC_KB_DIR / "proposals" / f"{slug}.md",
+        NSFC_KB_DIR / "versions" / f"{proposal_id}.md",
+        NSFC_KB_DIR / "reports" / f"{proposal_id}.md",
+    ]
+    cleaned = []
+    for p in targets:
+        if p.exists():
+            try:
+                p.unlink()
+                cleaned.append(str(p.relative_to(PROJECT_ROOT)))
+            except Exception as e:
+                if _log:
+                    _log.warning(f"[{proposal_id}] 清理 KB 镜像失败 {p}: {e}")
+    if cleaned:
+        try:
+            from kb_proposal_reorg import KBProposalReorg
+            KBProposalReorg(dry_run=False).run()
+        except Exception as e:
+            if _log:
+                _log.warning(f"[{proposal_id}] 清理后重排 index/MOC 失败: {e}")
+    return {"cleaned": cleaned, "proposal_id": proposal_id}
+
+
 # ---------------------------------------------------------------------------
 # 同步逻辑
 # ---------------------------------------------------------------------------

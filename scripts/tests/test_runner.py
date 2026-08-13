@@ -218,6 +218,21 @@ def patch_module_root(module_name: str, tmp_root: Path):
                 pass
 
 
+def patch_kb_sync_noop(micro_scheduler_module) -> None:
+    """把 micro_scheduler 的 KB 同步替换为 no-op，避免写穿真实 knowledge/。
+
+    根因（v6.8.33）：micro_scheduler._sync_proposal_to_kb → proposal_kb_sync.sync_proposal
+    → knowledge_base.save_proposal_sync → kb_wiki.save_wiki_page，链路上的
+    kb_wiki.KNOWLEDGE_DIR / kb_graph.GRAPH_PATH 是模块级绝对常量，patch_module_root
+    只覆盖传入的单个模块、覆盖不到整条链，故 sync 会写进真实 knowledge/wiki/projects/。
+
+    对于只验证调度/轮转/stale 清理等逻辑、不验证 KB 同步产物的 micro_scheduler 测试，
+    直接把 _sync_proposal_to_kb 替换为 no-op（micro_scheduler 内部以模块全局裸调用，
+    setattr 模块属性即可拦截），符合「测试零污染、不碰真实 knowledge/ 数据域」原则。
+    """
+    micro_scheduler_module._sync_proposal_to_kb = lambda *a, **kw: None
+
+
 def print_report(suites: List[TestSuite]):
     """打印中文测试报告"""
     print("\n" + "=" * 60)

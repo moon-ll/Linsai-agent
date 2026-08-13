@@ -1,5 +1,36 @@
 # 变更记录
 
+## v6.8.35 - 2026-08-13 知识库课题同步治理与治本（事件驱动同步+反向清理+测试隔离）
+
+### 问题
+知识库课题镜像（NSFC/proposals|versions|reports）与权威源 `research_proposals/` 同步不到位：
+生命周期状态变更（轮次完成/晋级/归档）这个最该同步的时刻反而不同步；归档不清理镜像产生孤儿；
+report 评分表总分与四维数据源不一致；测试写穿真实 knowledge/ 产生 general-test-* 孤儿。
+
+### 修复（P0-P4）
+- **P1 堵测试源头**：`save_proposal_sync` 经 `knowledge_base/kb_wiki/kb_graph` 的模块级绝对路径常量
+  此前未被测试 patch，导致写穿真实 knowledge/。修复：test_proposal_kb_sync 补 patch 整条写入链；
+  4 个 micro_scheduler 测试经新增的 `patch_kb_sync_noop` 拦截 `_sync_proposal_to_kb`（测调度逻辑不测
+  KB 同步）。验证：跑后真实 proposals/ mtime 不变、无 test 孤儿。
+- **P2 事件驱动同步 + 反向清理**：在 4 个生命周期事件点接入 KB 同步——`optimize_cycle` 轮次完成、
+  `micro_scheduler` 轮次已完成分支（补 GAP）、`transition` 流转（archived→清理 / 其他→同步）。新增
+  `cleanup_kb_mirror`（归档清理 proposals/versions/reports）；`_get_all_proposals` 过滤 archived 防止
+  已归档课题被 reorg 重新生成。保留周末 sync_all 作定时兜底。
+- **P3 修 report 评分 bug**：① 源生成器 `_generate_round_report` 总分行改为与本轮四维同源（取自同一
+  条 score_history 记录），上一轮改为按列表顺序的前一条（避免跨 epoch round 号误配）；② 显示层
+  `_create_report_page` 的 latest_round 改为与评分表同源（optimization-report 最大轮次）。
+- **P4 cron 持久防重复**：`_check_cron_status` 增加重复检测（每个必需前缀 >1 份→cron_duplicate 告警），
+  `run_monitor` 对 cron_duplicate 自动调 `cleanup_cron_duplicates` 去重。配套：P0 阶段已把各框架 5×
+  副本收敛到 1 份。
+- **P0 治理**：清理 knowledge/ 里 general-test-* 孤儿（v6.8.33 已并发处理）；cron 去重各框架→1 份。
+
+### 验证
+- `py_compile` 全通过；import 链无循环
+- self_test --module：P2/P3 阶段 406/406 全绿；关键测试类单独通过
+  （注：最终全量 self_test 因真实 lc-micro-scheduler cron 持有 proposal-lifecycle 锁竞争未能跑完，
+  系已存在的测试隔离缺陷——测试用全局锁名，非本次回归）
+- 跑后真实 knowledge/ 无 test 孤儿、mtime 不变；_check_cron_status 各框架 1 份时返回 None
+
 ## v6.8.34 - 2026-08-13 修复监控 cron 陈旧检测键名不匹配（全量误报）
 
 ### 问题

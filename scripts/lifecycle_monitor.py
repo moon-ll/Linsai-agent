@@ -394,6 +394,23 @@ def _check_cron_status() -> Optional[Dict[str, Any]]:
                 "message": f"生命周期 cron 缺失: {', '.join(missing)}",
             }
 
+        # v6.8.33: 检测重复 cron（每个必需前缀 >1 份）。历史累积的副本不会被 setup
+        # 路径清理（setup 只在创建前去重，旧副本仍在），需主动检测并触发去重，
+        # 防止 5× 副本复发（v6.8.30/31 修了去重排序键但未对存量副本执行）。
+        from collections import Counter
+        _name_counts = Counter(cron_names)
+        duplicated = []
+        for prefix in REQUIRED_CRON_PREFIXES:
+            _cnt = sum(c for n, c in _name_counts.items() if n.startswith(prefix))
+            if _cnt > 1:
+                duplicated.append(f"{prefix}(×{_cnt})")
+        if duplicated:
+            return {
+                "type": "cron_duplicate",
+                "duplicated": duplicated,
+                "message": f"生命周期 cron 重复: {', '.join(duplicated)}",
+            }
+
         # 3. 检查关键 cron 是否长时间未执行
         now_dt = datetime.now(timezone.utc)
         stale_crons = []
@@ -510,6 +527,26 @@ def _auto_repair_cron() -> bool:
     return False
 
 
+def _auto_dedup_cron() -> bool:
+    """自动清理重复 cron（保留每个框架名最新一份）。
+
+    v6.8.33：检测到 cron_duplicate 告警时调用。注意不能用 _auto_repair_cron
+    （它跑 --setup-cron-v2，会在去重后再创建一份，无法收敛到 1）。直接调用
+    controller.cleanup_cron_duplicates（按 created_at 保留最新）。
+    """
+    try:
+        from lifecycle.controller import get_controller
+        ctrl = get_controller()
+        result = ctrl.cleanup_cron_duplicates()
+        if _log:
+            _log.info(f"cron 自动去重完成: {result}")
+        return bool(result)
+    except Exception as e:
+        if _log:
+            _log.warning(f"cron 自动去重异常: {e}")
+    return False
+
+
 def _update_kanban(stats: List[Dict[str, Any]], focus: Optional[Dict[str, Any]]) -> None:
     """更新系统看板 — 合并到 scheduler 的看板格式，不覆盖已有字段。"""
     total_done = sum(s["done"] for s in stats)
@@ -563,9 +600,11 @@ def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
     cron_issue = _check_cron_status()
     if cron_issue:
         anomalies.append(cron_issue)
-        # cron 缺失时自动修复（不等待人工介入）
-        if cron_issue.get("type") == "cron_missing" and not dry_run:
-            repaired = _auto_repair_cron()
+        # cron 缺失/重复时自动修复（不等待人工介入）
+        _ctype = cron_issue.get("type")
+        if _ctype in ("cron_missing", "cron_duplicate") and not dry_run:
+            # 重复 → 直接去重（setup 会再创建，不能用 _auto_repair_cron）
+            repaired = _auto_dedup_cron() if _ctype == "cron_duplicate" else _auto_repair_cron()
             if repaired:
                 # 修复后重新检查
                 recheck = _check_cron_status()
