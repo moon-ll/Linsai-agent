@@ -6,9 +6,9 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-13T04:38:41Z",
+      "updated_at": "2026-08-13T12:20:34Z",
       "optimization_rounds": 0,
-      "last_score": 0.86,
+      "last_score": 0.77,
       "score_history": [
         {
           "round": 1,
@@ -464,6 +464,38 @@
           "issues_count": 56,
           "high_issues": 23,
           "at": "2026-08-13T04:38:41Z"
+        },
+        {
+          "round": 1,
+          "score": 0.85,
+          "dim_scores": {
+            "innovation": 0.85,
+            "feasibility": 0.86,
+            "rigor": 0.84,
+            "expression": 0.8
+          },
+          "weakest_dim": "expression",
+          "focus_section": "scheme",
+          "section_passed": true,
+          "issues_count": 101,
+          "high_issues": 38,
+          "at": "2026-08-13T11:08:37Z"
+        },
+        {
+          "round": 1,
+          "score": 0.77,
+          "dim_scores": {
+            "innovation": 0.82,
+            "feasibility": 0.8,
+            "rigor": 0.7,
+            "expression": 0.68
+          },
+          "weakest_dim": "expression",
+          "focus_section": "full_review",
+          "section_passed": false,
+          "issues_count": 14,
+          "high_issues": 6,
+          "at": "2026-08-13T12:00:45Z"
         }
       ],
       "human_feedback_count": 0,
@@ -532,14 +564,16 @@
         }
       ],
       "last_dim_scores": {
-        "innovation": 0.86,
-        "feasibility": 0.85,
-        "rigor": 0.82,
-        "expression": 0.92
+        "innovation": 0.82,
+        "feasibility": 0.8,
+        "rigor": 0.7,
+        "expression": 0.68
       },
       "section_passes": {
         "rationale": true,
-        "content": true
+        "content": true,
+        "scheme": true,
+        "full_review": false
       },
       "worker_minute": 47,
       "monitor_history": [
@@ -975,15 +1009,15 @@
           "step": "critic",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-content-writer",
             "general-quantum-geometry-inversion-20260726-r1-idea_review-idea_review"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T10:30:20Z",
+          "finished_at": "2026-08-13T10:33:36Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -993,14 +1027,14 @@
           "step": "gap_identify",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-scheme-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T10:35:21Z",
+          "finished_at": "2026-08-13T10:35:54Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1010,14 +1044,14 @@
           "step": "lit_search",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-scheme-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T10:40:22Z",
+          "finished_at": "2026-08-13T10:44:59Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1027,14 +1061,14 @@
           "step": "lit_read",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-scheme-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T10:45:23Z",
+          "finished_at": "2026-08-13T10:50:23Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1044,14 +1078,14 @@
           "step": "lit_note",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-scheme-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T10:55:24Z",
+          "finished_at": "2026-08-13T10:55:24Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1061,15 +1095,15 @@
           "step": "writer",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-scheme-critic",
             "general-quantum-geometry-inversion-20260726-r1-scheme-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T11:00:24Z",
+          "finished_at": "2026-08-13T11:08:37Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1079,14 +1113,82 @@
           "step": "critic",
           "section_key": "full_review",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-scheme-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T11:10:25Z",
+          "finished_at": "2026-08-13T11:17:18Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r1-full_review-gap_identify",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "gap_identify",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r1-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T11:20:27Z",
+          "finished_at": "2026-08-13T11:20:58Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r1-full_review-lit_search",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_search",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r1-full_review-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T11:25:27Z",
+          "finished_at": "2026-08-13T11:43:35Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r1-full_review-lit_read",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_read",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r1-full_review-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T11:45:29Z",
+          "finished_at": "2026-08-13T11:53:46Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r1-full_review-lit_note",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_note",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r1-full_review-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T11:55:31Z",
+          "finished_at": "2026-08-13T11:55:31Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1096,14 +1198,15 @@
           "step": "writer",
           "section_key": "full_review",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
-            "general-quantum-geometry-inversion-20260726-r1-full_review-critic"
+            "general-quantum-geometry-inversion-20260726-r1-full_review-critic",
+            "general-quantum-geometry-inversion-20260726-r1-full_review-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T12:00:31Z",
+          "finished_at": "2026-08-13T12:00:45Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1122,7 +1225,9 @@
           "started_at": "",
           "finished_at": "",
           "last_error": "",
-          "cron_job_id": ""
+          "cron_job_id": "",
+          "error_history": [],
+          "repair_attempts": 1
         },
         {
           "job_id": "general-quantum-geometry-inversion-20260726-r1-references-writer",
@@ -1228,6 +1333,11 @@
           "step": "lit_search",
           "detail": "agent_loop_failed→LiteratureService",
           "at": "2026-08-13T04:11:26Z"
+        },
+        {
+          "step": "lit_search",
+          "detail": "agent_loop_failed→LiteratureService",
+          "at": "2026-08-13T11:31:29Z"
         }
       ],
       "low_score_alert": false,
@@ -1409,7 +1519,7 @@
           "description": "> **评分依据**：本轮聚焦研究内容章节（§2）。本章节在叙述式合规、跨章节一致性、指标量化可检验性三方面均显著优于前一阶段（与 R8 之前的 rationale.md 相比）。**最大亮点**：(",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1418,7 +1528,7 @@
           "description": "> **评分依据**：本轮聚焦研究内容章节（§2）。本章节在叙述式合规、跨章节一致性、指标量化可检验性三方面均显著优于前一阶段（与 R8 之前的 rationale.md 相比）。**最大亮点**：(",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1427,7 +1537,7 @@
           "description": "| 超长句 >80 字 | **是（16 句）** | [high] issue——3 句 >120 字属严重超长句 |",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1436,7 +1546,7 @@
           "description": "### 6.1 [critical] cross_section_inconsistency — rationale.md 残留\"作者待联网核实\"占位符",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1445,7 +1555,7 @@
           "description": "### 6.2 [high] author_info_missing — [17]、[18] 条目作者信息缺失",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1454,7 +1564,7 @@
           "description": "### 6.3 [high] formatting_inconsistency — 预印本条目格式与正式发表条目不完全统一",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1463,7 +1573,7 @@
           "description": "### 6.4 [high] ultra_long_sentence — rationale.md 12 句超长句（>120 字）",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1472,7 +1582,7 @@
           "description": "### 6.5 [critical] data_metric_missing — 30% Ω 反演误差估算缺四要素",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1481,7 +1591,7 @@
           "description": "### 6.6 [high] theory_framework_boundary — BSV-SBE 框架未注明适用条件与失效边界",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1490,7 +1600,7 @@
           "description": "### 6.7 [critical] R8 修复在 references.md 已完成，但 rationale.md 跨章节更新遗漏",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1499,7 +1609,7 @@
           "description": "### 6.8 [high] 红线 §A 数字四要素",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1508,7 +1618,7 @@
           "description": "### 6.9 [high] 160 字超长句（rationale.md §1.5）",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1517,7 +1627,7 @@
           "description": "### 6.10–6.14 其余历史问题（[high] 类型 5 条）",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1526,7 +1636,7 @@
           "description": "[high] metric_inconsistency — R1 复现 metric 口径未对齐",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1535,7 +1645,7 @@
           "description": "- 问题：rationale.md §1.4 写\"Q1 验证线在拓扑绝缘体（Bi₂Se₃ 类，非共振带间驱动，与 §3.2 一致）\"——这是 [critical] 跨章节拓扑绝缘体命名不一致的另一面（",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1544,7 +1654,7 @@
           "description": "[high] cross_section_naming — 拓扑绝缘体命名跨章节不一致",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1553,7 +1663,7 @@
           "description": "[high] ultra_long_sentence_residual — §2.6 Year 1 段首 153 字超长句",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1562,7 +1672,7 @@
           "description": "- 问题：§2.6 Year 1 段首超长句 153 字，包含 4 个 bullet 嵌入（虽然 bullet 在 markdown 中换行，但句子本体仍为单句）。这是 [high] issue——按",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1571,7 +1681,7 @@
           "description": "| 1 | 拓扑绝缘体命名 | Bi₂Se₃=2, Bi₂Te₃=1 | Bi₂Se₃=0, Bi₂Te₃=13 | Bi₂Se₃=0, Bi₂Te₃=12 | ❌ [critical] ration",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1580,7 +1690,7 @@
           "description": "| 9 | 14.2° / 9.5° 复现的\"rotation angle\" 与 \"polarization response\" | \"偏振旋转角\" | \"偶次谐波偏振响应\" | \"偏振响应\" | ⚠",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1589,7 +1699,7 @@
           "description": "- **1 项 [critical]**：拓扑绝缘体命名（rationale.md §1.4 写\"Bi₂Se₃ 类\"，content.md/scheme.md 全文用 Bi₂Te₃/Sb₂Te₃）",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         }
       ],
@@ -1605,9 +1715,9 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-12T10:51:53Z",
-      "optimization_rounds": 0,
-      "last_score": 0.71,
+      "updated_at": "2026-08-13T20:05:44Z",
+      "optimization_rounds": 1,
+      "last_score": 0.56,
       "score_history": [
         {
           "round": 1,
@@ -1848,6 +1958,84 @@
           "issues_count": 75,
           "high_issues": 31,
           "at": "2026-08-04T12:14:45Z"
+        },
+        {
+          "round": 1,
+          "score": 0.68,
+          "dim_scores": {
+            "innovation": 0.8,
+            "feasibility": 0.75,
+            "rigor": 0.65,
+            "expression": 0.55
+          },
+          "weakest_dim": "expression",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 38,
+          "high_issues": 22,
+          "at": "2026-08-13T13:37:51Z"
+        },
+        {
+          "round": 1,
+          "score": 0.72,
+          "dim_scores": {
+            "innovation": 0.85,
+            "feasibility": 0.8,
+            "rigor": 0.65,
+            "expression": 0.68
+          },
+          "weakest_dim": "rigor",
+          "focus_section": "content",
+          "section_passed": false,
+          "issues_count": 37,
+          "high_issues": 21,
+          "at": "2026-08-13T14:32:19Z"
+        },
+        {
+          "round": 1,
+          "score": 0.78,
+          "dim_scores": {
+            "innovation": 0.82,
+            "feasibility": 0.8,
+            "rigor": 0.78,
+            "expression": 0.7
+          },
+          "weakest_dim": "expression",
+          "focus_section": "scheme",
+          "section_passed": false,
+          "issues_count": 71,
+          "high_issues": 37,
+          "at": "2026-08-13T17:20:46Z"
+        },
+        {
+          "round": 1,
+          "score": 0.72,
+          "dim_scores": {
+            "innovation": 0.82,
+            "feasibility": 0.75,
+            "rigor": 0.65,
+            "expression": 0.65
+          },
+          "weakest_dim": "rigor",
+          "focus_section": "full_review",
+          "section_passed": false,
+          "issues_count": 20,
+          "high_issues": 8,
+          "at": "2026-08-13T18:12:49Z"
+        },
+        {
+          "round": 1,
+          "score": 0.56,
+          "dim_scores": {
+            "rigor": 0.5,
+            "completeness": 0.62
+          },
+          "weakest_dim": "rigor",
+          "focus_section": "references",
+          "section_passed": false,
+          "issues_count": 9,
+          "high_issues": 3,
+          "at": "2026-08-13T18:47:58Z"
         }
       ],
       "human_feedback_count": 0,
@@ -1910,12 +2098,16 @@
       "writer_profile": "writer",
       "critic_profile": "critic",
       "last_dim_scores": {
-        "innovation": 0.25,
-        "feasibility": 0.1,
-        "rigor": 0.2,
-        "completeness": 0.45
+        "rigor": 0.5,
+        "completeness": 0.62
       },
-      "section_passes": {},
+      "section_passes": {
+        "rationale": false,
+        "content": false,
+        "scheme": false,
+        "full_review": false,
+        "references": false
+      },
       "pipeline_jobs": [
         {
           "job_id": "key-transient-quantum-phase-optical-20260726-r1-idea_review-idea_review",
@@ -1923,12 +2115,12 @@
           "step": "idea_review",
           "section_key": "idea_review",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T12:25:35Z",
+          "finished_at": "2026-08-13T12:27:46Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1938,14 +2130,14 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-idea_review-idea_review"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T12:30:36Z",
+          "finished_at": "2026-08-13T12:37:18Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1955,14 +2147,14 @@
           "step": "gap_identify",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-rationale-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T12:40:38Z",
+          "finished_at": "2026-08-13T12:41:01Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1972,14 +2164,14 @@
           "step": "lit_search",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-rationale-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T12:45:38Z",
+          "finished_at": "2026-08-13T13:03:29Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1989,14 +2181,14 @@
           "step": "lit_read",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-rationale-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T13:05:41Z",
+          "finished_at": "2026-08-13T13:20:46Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2006,14 +2198,14 @@
           "step": "lit_note",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-rationale-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T13:25:44Z",
+          "finished_at": "2026-08-13T13:25:44Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2023,15 +2215,15 @@
           "step": "writer",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-rationale-critic",
             "key-transient-quantum-phase-optical-20260726-r1-rationale-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T13:30:45Z",
+          "finished_at": "2026-08-13T13:37:51Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2041,15 +2233,15 @@
           "step": "critic",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-rationale-writer",
             "key-transient-quantum-phase-optical-20260726-r1-idea_review-idea_review"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T13:40:47Z",
+          "finished_at": "2026-08-13T13:48:08Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2059,14 +2251,14 @@
           "step": "gap_identify",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-content-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T13:50:48Z",
+          "finished_at": "2026-08-13T13:53:27Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2076,14 +2268,14 @@
           "step": "lit_search",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-content-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T13:55:49Z",
+          "finished_at": "2026-08-13T14:13:12Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2093,14 +2285,14 @@
           "step": "lit_read",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-content-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T14:15:52Z",
+          "finished_at": "2026-08-13T14:15:52Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2110,14 +2302,14 @@
           "step": "lit_note",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-content-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T14:20:53Z",
+          "finished_at": "2026-08-13T14:20:53Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2127,15 +2319,15 @@
           "step": "writer",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-content-critic",
             "key-transient-quantum-phase-optical-20260726-r1-content-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T14:25:53Z",
+          "finished_at": "2026-08-13T14:32:19Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2145,15 +2337,15 @@
           "step": "critic",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-content-writer",
             "key-transient-quantum-phase-optical-20260726-r1-idea_review-idea_review"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T16:30:10Z",
+          "finished_at": "2026-08-13T16:35:26Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2163,14 +2355,14 @@
           "step": "gap_identify",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-scheme-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T16:40:12Z",
+          "finished_at": "2026-08-13T16:41:22Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2180,14 +2372,14 @@
           "step": "lit_search",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-scheme-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T16:45:13Z",
+          "finished_at": "2026-08-13T16:54:28Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2197,14 +2389,14 @@
           "step": "lit_read",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-scheme-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T16:55:14Z",
+          "finished_at": "2026-08-13T17:05:11Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2214,14 +2406,14 @@
           "step": "lit_note",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-scheme-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T17:10:17Z",
+          "finished_at": "2026-08-13T17:10:17Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2231,15 +2423,15 @@
           "step": "writer",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-scheme-critic",
             "key-transient-quantum-phase-optical-20260726-r1-scheme-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T17:15:18Z",
+          "finished_at": "2026-08-13T17:20:46Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2249,14 +2441,82 @@
           "step": "critic",
           "section_key": "full_review",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-scheme-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T17:25:19Z",
+          "finished_at": "2026-08-13T17:30:36Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r1-full_review-gap_identify",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "gap_identify",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r1-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T17:35:21Z",
+          "finished_at": "2026-08-13T17:35:51Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r1-full_review-lit_search",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_search",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r1-full_review-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T17:40:22Z",
+          "finished_at": "2026-08-13T17:44:22Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r1-full_review-lit_read",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_read",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r1-full_review-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T17:45:22Z",
+          "finished_at": "2026-08-13T17:55:19Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r1-full_review-lit_note",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_note",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r1-full_review-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T18:00:25Z",
+          "finished_at": "2026-08-13T18:00:25Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2266,14 +2526,15 @@
           "step": "writer",
           "section_key": "full_review",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
-            "key-transient-quantum-phase-optical-20260726-r1-full_review-critic"
+            "key-transient-quantum-phase-optical-20260726-r1-full_review-critic",
+            "key-transient-quantum-phase-optical-20260726-r1-full_review-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T18:05:26Z",
+          "finished_at": "2026-08-13T18:12:49Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2283,14 +2544,14 @@
           "step": "critic",
           "section_key": "references",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-full_review-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T18:15:27Z",
+          "finished_at": "2026-08-13T18:19:46Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2300,16 +2561,24 @@
           "step": "writer",
           "section_key": "references",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-references-critic"
           ],
-          "attempts": 0,
+          "attempts": 2,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T18:40:31Z",
+          "finished_at": "2026-08-13T18:47:58Z",
           "last_error": "",
-          "cron_job_id": ""
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-13T18:35:28Z",
+              "error": "超时(900s)",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 1
         },
         {
           "job_id": "key-transient-quantum-phase-optical-20260726-r1-monitor-monitor",
@@ -2317,14 +2586,14 @@
           "step": "monitor",
           "section_key": "monitor",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-references-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T18:50:32Z",
+          "finished_at": "2026-08-13T18:56:58Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2334,14 +2603,14 @@
           "step": "update_vision",
           "section_key": "derived",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-monitor-monitor"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T19:00:34Z",
+          "finished_at": "2026-08-13T19:01:10Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -2351,9 +2620,435 @@
           "step": "update_method_manual",
           "section_key": "derived",
           "round": 1,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-derived-update_vision"
+          ],
+          "attempts": 1,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T19:05:35Z",
+          "finished_at": "2026-08-13T19:10:35Z",
+          "last_error": "超时(300s)",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-critic",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "critic",
+          "section_key": "rationale",
+          "round": 2,
+          "status": "done",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T19:15:36Z",
+          "finished_at": "2026-08-13T19:21:12Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-gap_identify",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "gap_identify",
+          "section_key": "rationale",
+          "round": 2,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-rationale-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T19:25:38Z",
+          "finished_at": "2026-08-13T19:26:07Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_search",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_search",
+          "section_key": "rationale",
+          "round": 2,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-rationale-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T19:30:39Z",
+          "finished_at": "2026-08-13T19:48:23Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_read",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_read",
+          "section_key": "rationale",
+          "round": 2,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T20:00:43Z",
+          "finished_at": "2026-08-13T20:00:43Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_note",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_note",
+          "section_key": "rationale",
+          "round": 2,
+          "status": "done",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T20:05:44Z",
+          "finished_at": "2026-08-13T20:05:44Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-writer",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "writer",
+          "section_key": "rationale",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-rationale-critic",
+            "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-critic",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "critic",
+          "section_key": "content",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-rationale-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-gap_identify",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "gap_identify",
+          "section_key": "content",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-content-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-lit_search",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_search",
+          "section_key": "content",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-content-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-lit_read",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_read",
+          "section_key": "content",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-content-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-lit_note",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_note",
+          "section_key": "content",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-content-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-writer",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "writer",
+          "section_key": "content",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-content-critic",
+            "key-transient-quantum-phase-optical-20260726-r2-content-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-critic",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "critic",
+          "section_key": "scheme",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-content-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-gap_identify",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "gap_identify",
+          "section_key": "scheme",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-scheme-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_search",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_search",
+          "section_key": "scheme",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-scheme-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_read",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_read",
+          "section_key": "scheme",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_note",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "lit_note",
+          "section_key": "scheme",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-writer",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "writer",
+          "section_key": "scheme",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-scheme-critic",
+            "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-full_review-critic",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "critic",
+          "section_key": "full_review",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-scheme-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-full_review-writer",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "writer",
+          "section_key": "full_review",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-references-critic",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "critic",
+          "section_key": "references",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-full_review-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-references-writer",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "writer",
+          "section_key": "references",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-references-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-monitor-monitor",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "monitor",
+          "section_key": "monitor",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-references-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-derived-update_vision",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "update_vision",
+          "section_key": "derived",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-monitor-monitor"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "key-transient-quantum-phase-optical-20260726-r2-derived-update_method_manual",
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "step": "update_method_manual",
+          "section_key": "derived",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "key-transient-quantum-phase-optical-20260726-r2-derived-update_vision"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -2477,12 +3172,34 @@
           "overall_assessment": "",
           "high_issues_after": 0,
           "at": "2026-07-30T21:01:17Z"
+        },
+        {
+          "round": 1,
+          "section_key": "monitor",
+          "proposal_score_before": 0.0,
+          "proposal_score_after": 0.56,
+          "monitor_independent_score": 0.42,
+          "writer_delta": 5.2,
+          "critic_delta": 9.65,
+          "local_writer_score": 95.8,
+          "local_critic_score": 110.35000000000001,
+          "writer_prohibitions": [
+            "superficial_modification",
+            "information_masking",
+            "p0_ignore"
+          ],
+          "critic_prohibitions": [],
+          "collusion_risk": "none",
+          "negative_feedback": true,
+          "overall_assessment": "本轮 writer-critic 对抗中，critic 表现优秀（评分准确、问题具体、建议可操作），而 writer 表现严重不合格。writer 对 critic 指出的全部 9 个问题（含 1 个 critical、3 个 high）零实质修复：2 个 P0 作者-编号错误原封不动，参考文献数量不减反增（54→57），预印本比例恶化（31.5%→35.1%），重复条目未合并，内联列表未删除。唯一变化是删除了'待DOI核实'标记和中文注释——这实质上是信息遮蔽而非信息补全，使列表表面上看起来更规范但真实完整度未提升。新增的 [12] 期刊矛盾更是引入了新错误。monitor 独立评分 0.42 低于 critic 的 0.56，原因是 critic 评审时可能对正文内容质量给予了部分基准分，而 monitor 侧重于参考文献章节本身的质量（本轮聚焦章节）。rigor 0.42 反映了未修复的作者-编号错误（最容易被评审专家当场发现的致命问题）和新增矛盾；completeness 0.40 反映了参考文献数量失控、信息缺失被标记删除掩盖、重复条目未清理。建议 writer 回退本轮修改",
+          "high_issues_after": 6,
+          "at": "2026-08-13T18:56:58Z"
         }
       ],
       "negative_feedback_alert": false,
-      "last_monitor_at": "2026-07-30T21:01:17Z",
-      "last_monitor_score": 0.0,
-      "last_monitor_assessment": "",
+      "last_monitor_at": "2026-08-13T18:56:58Z",
+      "last_monitor_score": 0.42,
+      "last_monitor_assessment": "本轮 writer-critic 对抗中，critic 表现优秀（评分准确、问题具体、建议可操作），而 writer 表现严重不合格。writer 对 critic 指出的全部 9 个问题（含 1 个 critical、3 个 high）零实质修复：2 个 P0 作者-编号错误原封不动，参考文献数量不减反增（54→57），预印本比例恶化（31.5%→35.1%），重复条目未合并，内联列表未删除。唯一变化是删除了'待DOI核实'标记和中文注释——这实质上是信息遮蔽而非信息补全，使列表表面上看起来更规范但真实完整度未提升。新增的 [12] 期刊矛盾更是引入了新错误。monitor 独立评分 0.4",
       "negative_feedback_reasons": [],
       "negative_feedback_cleared": [
         {
@@ -2492,7 +3209,397 @@
           ],
           "reason": "控制台一键清除"
         }
-      ]
+      ],
+      "idea_review_attempts": 1,
+      "idea_review_score": 0.71,
+      "idea_review_issues": "# 研究设想独立质量评审\n\n> 评审对象：`00_research_idea.md`（瞬态量子相的全光读写）\n> 评审日期：2026-08-13\n> 评审范围：设想文件本身为主，辅以 content.md / scheme.md / rationale.md / question-framework.md / direction-calibration.md 作为交叉验证材料\n> 评审身份：独立评审 A1（第一轮）\n\n---\n\n## 一、科学问题清晰度（clarity）\n\n**评分：0.75**\n\n### 核心科学问题的概括性\n\n核心命题\"瞬态量子相的全光读写\"可以用一句话概括，且在设想文件中反复出现并保持一致——这是优点。三个递进子问题（定义—实现—测量 / A→B→C）的因果链逻辑清晰：A 提供\"在什么 ℏω/E_g 区间内瞬态拓扑不变量可定义\"，B 提供\"同一脉冲序列内写-读时序协同的工程实现\"，C 提供\"多通道阿秒信号到瞬态拓扑量的定量反演\"。三者确实构成闭环。\n\n### 具体问题\n\n**P1-1（中）\"统一概念\"框架有过度包装倾向。**\n\n设想文件反复强调 TQP（瞬态量子相",
+      "idea_review_at": "2026-08-13T12:27:46Z",
+      "idea_review_passed": true,
+      "degradation_events": [
+        {
+          "step": "lit_search",
+          "detail": "agent_loop_failed→LiteratureService",
+          "at": "2026-08-13T12:51:40Z"
+        },
+        {
+          "step": "lit_search",
+          "detail": "agent_loop_failed→LiteratureService",
+          "at": "2026-08-13T14:01:51Z"
+        },
+        {
+          "step": "lit_search",
+          "detail": "agent_loop_failed→LiteratureService",
+          "at": "2026-08-13T16:51:15Z"
+        },
+        {
+          "step": "lit_search",
+          "detail": "agent_loop_failed→LiteratureService",
+          "at": "2026-08-13T19:36:40Z"
+        }
+      ],
+      "open_critical_issues": [
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "#### [high] narrative — 开篇段超长（721字），信息密度低于范本",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "#### [high] anti_ai — 破折号插入语高频使用（62次）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "#### [high] narrative — 国家战略段超长（775字），含 6 个严重超长句",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "#### [critical] boundary — \"国内研究现状\"层完全缺失",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "#### [high] red_line — \"填补…国际空白\"表述 5 次以上，部分缺乏文献支撑",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "#### [high] red_line — 预印本 [38][39] 未标注\"预印本\"状态",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "#### [high] anti_ai — \"为什么X做\"四元模板机械重复 4×3=12 次",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "#### [high] red_line — W% 占位符残留",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "#### [high] red_line — ΔC ≤ 0.05 vs scheme/content 中 ΔC ≤ 0.2 指标口径需明确关系",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "#### [high] narrative — §4 子课题协同段 227 字一句话",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "#### [high] red_line — CEP 口径跨章节不统一（≤200 mrad vs ±200 mrad）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| rationale \"CEP ≤ 200 mrad\" vs scheme \"CEP ±200 mrad\" | ✗ 口径不统一 | **[high]** 见上文 |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| rationale \"ΔC ≤ 0.05\" vs scheme \"ΔC ≤ 0.2\" | ⚠️ 需明确关系 | **[high]** 算法精度 vs 总误差，需在 rationale 加限定语 |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "### [critical] boundary — \"国内研究现状\"层完全缺失",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "### [critical] red_line — \"W%\" 占位符残留",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] red_line — \"填补…国际空白\"表述 5 次以上，缺乏文献检索支撑",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] red_line — 预印本 [38][39] 未在正文标注预印本状态",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] red_line — CEP 口径跨章节不统一",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] red_line — ΔC ≤ 0.05 vs ≤ 0.2 需明确口径关系",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] anti_ai — 31 个严重超长句（>120字），含 8 个极端超长句（>200字）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] anti_ai — 冗余修饰词总计 100 次（阈值 15 的 6.7 倍）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] narrative — 段落普遍超长（48% 超过 300 字，范本要求 150-300）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] narrative — 三家差异化定位在 §1/§2.4/§4 重复 3 次",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "- P1（必改）：4 项——国内现状缺失 [critical]、W% 占位符 [critical]、CEP 口径不统一 [high]、ΔC 口径限定 [high]",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "- P1（必改）：4 项——国内现状缺失 [critical]、W% 占位符 [critical]、CEP 口径不统一 [high]、ΔC 口径限定 [high]",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "- P2（强烈建议）：5 项——超长句系统整改 [high]、冗余修饰词系统清理 [high]、段落系统分段 [high]、国际空白表述限定 [high]、预印本标注 [high]",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "**完整性结论**：与上一轮（critic-round-8）相比，**本章从 [critical] 级降级（22 字占位符 + 184 行方案误置）已根本改善**——content.md 现为 v0.",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "- 最严重：§2.1 \"具体包括两件事：（a）定义框架的可参数化——以绝热参数 ℏω/E_g...两套定义在物理上如何衔接...\"——**216 字**，违反 anti_ai_patterns（>12",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "- 违反条款：anti_ai_patterns.quantitative_thresholds.超长句上限每段 = 3；全文 3 处 >120 字已触发 [high]",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "| \"国内研究现状\"层完全缺失 [critical] | rationale | **⚠️ 仍存在** | rationale.md L29 标题\"国内外研究现状与发展趋势\"下无独立\"国内现状\"小节；",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "| \"W%\" 占位符残留 [critical] | rationale | **✅ 已清除** | rationale.md 全文 \"W%\" 出现 0 次 |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "| \"填补…国际空白\"5 次以上 [high] | rationale | **✅ 已清除** | rationale.md \"填补/国际空白/国际首创/国际领先\"出现 0 次 |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "| 预印本 [38][39] 未标注\"预印本\"[high] | rationale | **⚠️ 仍存在（部分）** | rationale.md L205/L207 引用 [38][39] 标注 \"",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "| CEP 口径跨章节不统一（≤200 vs ±200）[high] | 跨章节 | **✅ 已统一** | content.md 全文 CEP 均为\"≤ 200 mrad\"；scheme.md 中\"",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "| ΔC ≤ 0.05 vs ≤ 0.2 需明确关系 [high] | 跨章节 | **⚠️ 新冲突浮现** | 详见问题 #1（SNR 数值跨章节不一致，比 ΔC 口径更严重） |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "| 31 个严重超长句（>120 字）[high] | rationale | **✅ rationale 已改善** | rationale.md 当前 >120 字句子 0 处。**但 conte",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "| 冗余修饰词 100 次（阈值 15 的 6.7 倍）[high] | rationale | **✅ rationale 已改善** | content.md 当前 16 次（轻度超阈值 1） |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "| 段落普遍超长（48% 超 300 字）[high] | rationale | **✅ rationale 已改善** | content.md 仅 1 处超 300 字（§1，311 字） |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "| 三家差异化定位重复 3 次 [high] | rationale | N/A | 本章未涉及（属 rationale §2.4/§4） |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "**遗留问题结论**：rationale 的多数历史问题已修复（W%、国际空白、超长句、冗余修饰、段落长度），**仅\"国内研究现状缺失\"[critical] 与\"预印本标注\"[high] 仍存**——",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        }
+      ],
+      "low_score_alert": false
     },
     "general-moire-strong-field-probe-20260726": {
       "status": "optimizing",
@@ -8599,5 +9706,5 @@
       ]
     }
   },
-  "updated_at": "2026-08-13T04:38:41Z"
+  "updated_at": "2026-08-13T20:05:44Z"
 }

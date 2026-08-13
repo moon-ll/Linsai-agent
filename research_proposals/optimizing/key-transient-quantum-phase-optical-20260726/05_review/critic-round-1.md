@@ -1,299 +1,214 @@
-# 对抗评审报告 — 第 1 轮（参考文献专项检验）
+# 参考文献检验报告（第 1 轮）
 
-**项目类型**：key（重点项目）
-**评审范围**：仅参考文献系统（format / consistency / relevance / coverage / count / timeliness）
-**评审文件**：references.md、rationale.md、content.md、scheme.md
-**评审轮次**：第 1 轮（参考文献专项）
+## 元信息
+
+- 项目名称：瞬态量子相的全光读写
+- 项目类型：key（重点项目）
+- 评审日期：2026-08-14
+- profile：critic
+- 本轮聚焦：参考文献检验（格式 / 编号一致性 / 相关性 / 缺失引用 / 数量 / 时效性）
+- 检验范围：references.md（54 条）+ rationale.md / content.md / scheme.md 三章正文引用交叉核对
+- 事实核实状态：本报告基于实际读取全部四份文件并执行程序化交叉比对，所有数字均可复现
 
 ---
 
 ## 综合评分
 
-**0.55 / 1.00**（参考文献专项打分，天花板约束 N/A；按严谨性 + 完整性均值 0.55）
+0.56 / 1.00（严谨性 50% + 完整性 50%）
 
-⚠️ **重要提示**：本次评审发现 references.md 主文件与 rationale.md 末尾独立参考文献列表之间存在不可调和的元数据冲突，2 条核心引用 [17][36] 指向两篇完全不同的论文；同时 [15] 标注内容与真实论文主题不符，[35][39] 存在作者列表异常长（疑似 OCR 拼接错误）。整体来看，本申请书"参考文献系统"在 NSFC 评审标准的"严谨性"维度上属于"严重不合格"区间，必须进入下一轮实质性修复。
+评分依据：参考文献存在系统性格式不一致（三种格式并存）、近半数条目（44%）标注"待 DOI 核实"且缺乏原始英文标题、两处作者-编号归属错误（Ma等[39]、Yu等[47]）、参考文献总数 54 条远超 NSFC 重点项目惯例上限。这些问题在评审专家 20 分钟阅读窗口内极易被发现，将对申请书的学术严谨性印象产生显著负面影响。
 
 ---
 
 ## 维度评分
 
-| 维度 | 得分 | 关键判据 |
-|------|------|---------|
-| **严谨性 (rigor)** | **0.40** | references.md 与 rationale.md 末尾列表 [17][36] 元数据冲突；[15] 标注与实际论文主题不符；[35][39] 作者列表异常 |
-| **完整性 (completeness)** | **0.70** | 39 篇总数超 NSFC key 类惯例；时效性可接受（13/39 为近 3 年）；[14,15] 引用支撑"温度、压力、掺杂"三大调控维度但文献本身不匹配 |
-| **创新性 (innovation)** | N/A | 参考文献检验不评估 |
-| **可行性 (feasibility)** | N/A | 参考文献检验不评估 |
+| 维度 | 权重 | 得分 | 问题数 |
+|------|------|------|--------|
+| 严谨性（rigor） | 50% | 0.50 | 5（critical 1, high 2, medium 1, low 1） |
+| 完整性（completeness） | 50% | 0.62 | 4（high 1, medium 2, low 1） |
+
+注：创新性、可行性按要求标记为 N/A，不纳入本轮评分。
 
 ---
 
-## 1. 数量与结构
+## 数据概览
 
-| 指标 | 数值 | 评价 |
-|------|------|------|
-| 参考文献总数 | 39 篇 | 略高于 NSFC 重点项目惯例（重点项目一般 30-50 篇） |
-| 编号连续性 | [1]-[39] 连续无缺口 | ✅ 通过 |
-| 正文引用覆盖 | rationale(36 篇) + content(4 篇) + scheme(5 篇) | 主文件 39 篇 100% 被引用，零死链；零未引用 |
-| 跨章节引用分布 | rationale.md 引用最密集（多次引用 [5][9][20][32][35][38][39]）| ⚠️ content.md / scheme.md 引用偏少（仅 [5][21][32][33][34]），与子课题论证密度不匹配 |
-
-**重要发现**：rationale.md 末尾 (lines 121-199) 自带一份独立的参考文献列表（与 references.md 主文件格式近似但条目内容不同）。这一并行列表在 NSFC 申报材料中属于"非标结构"——官方只要求一份参考文献列表。两份列表并存造成系统性冲突（见第 3 节）。
-
----
-
-## 2. 格式与作者完整性
-
-### 2.1 整体格式
-
-✅ **优点**：
-- 主体使用 [N] 编号，作者首字母+姓，年份括号，期刊斜体，卷页/文章号，附加中文短评
-- 多数条目符合"作者. 标题. *期刊* 卷, 页码 (年份). — 注释"的标准格式
-- 中英文混排处理得当（如 Drüeke、Bauer 的元音变音保留）
-
-⚠️ **问题**：
-- [38][39] 是 2026 年 arXiv 预印本（arXiv:2604.15085, arXiv:2601.09608），按提交年份约定（2026 年申请季），这两条无法在 arXiv 公开数据库直接核实
-- [38][39] 没有期刊斜体（因为是预印本），与其他 37 条格式不统一
-
-### 2.2 作者列表异常
-
-🔴 **CRITICAL**：
-- **[35] A. P. D. S. Laporté et al.** — 19 个首字母组合（"A. P. D. S. Laporté, J. E. B. R. F. da Silva, S. V. B. Jensen, M. Plankl, A. G. G. da Silva, A. R. J. B. M. F. C. M. B. F. P. H. J. F. L. M. M. A. M. T. K. P. H. M. R. B. Bauer"）。真实 Laporté 2022 Phys. Rev. Res. 4, L032033 论文作者是 2-4 人（典型为 Laporté + Bauer 主导）。**疑似 OCR 把多行作者姓名首字母错误拼接**。
-- **[39] A. Nayak et al.** — 35 个首字母组合（"A. Nayak, I. G. Balogh, V. Tosa, D. Charalambidis, A. Koulouklidis, M. G. Vrakking, A. L. B. P. D. M. A. R. F. S. R. T. B. A. L. L. T. K. J. A. F. P. J. M. A. N. M. K. J. P. S. R. T. T. H. P. J. V. K. A. R. M. S. T. A. C. T. K. A. R. K. T. F. T. Z. M. P. T. S. K. T. B. A. R. A. R. Argibay"）。ELI-ALPS SYLOS 论文是协作组工作，作者应在 10-20 人范围内（典型 ELI-ALPS 论文 et al. 形式列 ~15 人）。**疑似 OCR 把多个不同名字的字首错误拼接到一起**。
-
-🔴 **HIGH**：[38] 列出 12 位具名作者（"R. B. Varillas, M. Plankl, T. T. Luu, H. J. Wörner, A. R. Argibay, A. Becker, F. Calegari, A. Cannizzo, D. M. Cardenas, L. Plaja, et al."），对一份"国际路线图"型综述（roadmap），前 10 位具名 + et al. 的截断位置是否准确需核实（roadmap 通常按字母序列名几十位作者）。
+| 统计项 | 数值 | 状态 |
+|--------|------|------|
+| 参考文献总数 | 54 条 | 远超 15-30 惯例区间 |
+| 正文实际引用数 | 49 条（编号 1-54 中的 49 个） | — |
+| 未被引用条目（幽灵引用） | 5 条（[1][2][4][43][50]） | 需处理 |
+| 含 DOI 的条目 | 13 条（24%） | 偏低 |
+| 标注"待 DOI 核实"的条目 | 24 条（44%） | 严重偏低 |
+| arXiv 预印本条目 | 17 条（31.5%） | 超过 30% 阈值 |
+| 近 3 年文献（2023-2026） | 28 条（52%） | 良好 |
+| 作者-编号归属错误 | 2 处 | critical 级 |
+| 重复条目（相同 arXiv 编号） | 1 对（[43]=[44]） | 需合并或删除 |
+| 格式种类 | 3 种 | 需统一 |
 
 ---
 
-## 3. references.md vs rationale.md 末尾列表 — 元数据冲突
+## 问题清单
 
-🔴 **CRITICAL**：rationale.md 末尾 (lines 121-199) 含一份独立参考文献列表（与 references.md 主文件并存）。两表在以下条目上存在不可调和的元数据冲突：
+### [critical] 编号一致性 — 两处作者-引文编号归属错误
 
-| 编号 | references.md（主文件） | rationale.md 末尾（独立列表） | 冲突性质 |
-|------|------------------------|------------------------------|---------|
-| **[17]** | M. A. Sentef et al., *Nat. Commun.* 6, 7270 (2015) — Floquet 态在光晶格中的实现 | M. A. Sentef et al., *Phys. Rev. B* 91, 075404 (2015) — Floquet 态在光晶格中的实现 | **两篇完全不同的论文**（Nat. Commun. 6, 7270 是 Sentef 关于 graphene pump-probe 拓扑能带的工作；PRB 91, 075404 是不同主题） |
-| **[36]** | M. Wu et al., *Phys. Rev. A* 91, 043839 (2015) — 固体 HHG 的 Bloch 电子理论 | M. Wu et al., *Science* 354, 734 (2016) — 强场瞬态吸收谱实验综述 | **两篇完全不同的论文**（PRA 91, 043839 是 Wu 关于固体 HHG 含时密度泛函工作；Science 354, 734 是另一篇） |
-| **[7]** | S. Ghimire et al., *Nature Physics* 7, 138 (2011) — 无 arXiv | S. Ghimire et al., *Nature Physics* 7, 138 (2011) — 含 arXiv: 1104.1045 | 同一论文，rationale 多了 arXiv 编号（合理补充） |
-| **[14]** | F. Krausz, M. I. Stockman. *Nat. Photonics* 8, 205 (2014) | F. Krausz & M. I. Stockman, *Nat. Photonics* 8, 205 (2014) | 同一论文，逗号 vs & 符号微差 |
-| **[15]** | R. F. K. Spreeuw, J. P. Woerdman. *Phys. Rev. Lett.* 67, 1182 (1991) — Floquet 态基础 | R. F. K. Spreeuw & J. P. Woerdman, *Phys. Rev. Lett.* 67, 1182 (1991) — Floquet 态基础 | 同一论文，但**论文主题与"标注"不符**（见第 5 节） |
+- 位置：rationale.md §2.1（第 35 行附近）及 §2.4（第 57 行附近）
+- 问题：
+  1. 正文写"Ma 等[39]于 2024 年提出在连续高次谐波谱中实现阿秒计量的方法"，但 [39] 实际为 A. Nayak et al. 的 ELI-ALPS SYLOS Compact HHG 束线论文（arXiv:2601.09608, 2026）。描述内容对应的应是 [50]（Y. Ma, S. Li, et al., arXiv:2412.16745, 2024 — Attosecond metrology in a continuous high-harmonic spectrum）。编号 39 与 50 被混淆。
+  2. 正文写"Yu 等[47]于 2024 年报道了利用固体高次谐波产生的阿秒软 X 射线脉冲探测瞬态量子相的前沿进展"，但 [47] 实际为 L. Feng, W. Cao, et al.（arXiv:2403.08896, 2024 — Probing transient quantum phases with attosecond soft-X-ray pulses）。描述内容对应的应是 [43]/[44]（T. Yu, G. Zhang, et al., arXiv:2503.07256, 2025 — Ultrafast phase retrieval in strongly driven solids）。编号 47 与 43/44 被混淆。
+  
+  注意：[47] 在同一文件其他位置被正确引用为"Feng 等[47]"，说明这不是单纯的编号体系错位，而是两处具体语句中作者名与编号的配对错误。
+- 建议：
+  1. 将"Ma 等[39]"改为"Ma 等[50]"
+  2. 将"Yu 等[47]"改为"Yu 等[44]"（[44] 已在正文 §2.1 中被引用一次，合并后可避免 [43] 与 [44] 的重复问题）
+  3. 全文重新执行一次"作者名—编号"交叉核验（可用脚本自动化），确保每个"XXX等[N]"语句中的作者名出现在 [N] 条目的作者字段中
+- action：verify + rewrite
 
-**严重后果**：申请书若被提交到 NSFC 系统，[17] 和 [36] 在两表中的不一致会立即被评审专家发现，触发"申请材料严谨性存疑"的判定。在 NSFC 重点项目评审中，这是 critical 级别的失误。
+### [high] 引文格式 — 三种格式并存，44% 条目缺乏原始英文标题与 DOI
 
----
+- 位置：references.md 全文（54 条）
+- 问题：参考文献列表中存在三种截然不同的格式：
+  - 格式 A（13 条，[1][2][3][4][7][8][14][16][19][23][26][27][30]）：完整英文引用，含 DOI，格式规范
+  - 格式 B（24 条，[5][6][9]-[13][15][17][18][20]-[22][24][25][28][29][31]-[37]）：中文注释格式"Author et al. — 中文标题. Journal vol, page (year). — 中文注释。（待 DOI 核实）"，仅有中文描述性标题，缺少原始英文论文标题与 DOI
+  - 格式 C（17 条，[38]-[54]）：arXiv 预印本格式"Author, X., et al., arXiv:XXXX.XXXXX (year). — English title."，仅有 arXiv 编号，无期刊信息
+  
+  24 条"待 DOI 核实"条目（占总数 44%）意味着近半数参考文献的书目信息未经核实。其中多条以中文描述性语言替代原始英文标题（如 [5]"圆偏振固体 HHG 的 Berry 曲率敏感性"、[9]"Bi₂Se₃ 拓扑绝缘体的 HHG 自旋极化"），无法被检索或引用验证。一位评审专家看到近半数参考文献缺少英文标题和 DOI，会严重质疑申请人的文献管理规范性。
+- 建议：
+  1. 统一为一种格式：Author1, Author2, ..., AuthorN. English Title. *Journal* Vol, Page (Year). DOI: 10.xxxx/xxxxx
+  2. 对 24 条"待 DOI 核实"条目，逐一通过 CrossRef API（https://api.crossref.org/works?query=...）或 Google Scholar 核实原始英文标题、卷、期、页码、DOI，替换中文注释
+  3. 对 17 条 arXiv 预印本，若已正式发表则补充期刊信息与 DOI；若仍未发表则保留 arXiv 编号但统一格式
+- action：research + rewrite（全部 54 条格式统一）
 
-## 4. 时效性
+### [high] 引用数量 — 54 条远超 NSFC 重点项目惯例
 
-| 时段 | 篇数 | 占比 | 评价 |
-|------|------|------|------|
-| 2023-2026（近 3 年） | 13 | 33% | ✅ 满足重点项目对前沿性要求 |
-| 2021-2025（近 5 年） | 18 | 46% | ✅ |
-| 2016-2020（5-10 年） | 6 | 15% | ✅ 经典理论 + 主流实验 |
-| 2015 以前（10+ 年） | 15 | 38% | ⚠️ 数量偏多，但其中 [1][2][3][12][23][26][30] 是无可争议的奠基性理论，可接受 |
+- 位置：references.md 全文
+- 问题：参考文献总数 54 条，远超用户指定的 15-30 篇区间（NSFC 面上项目惯例）。即使是重点项目，54 条也已明显超标——重点项目的参考文献通常在 30-40 条之间。过多的参考文献会稀释核心引用的权重，让评审专家难以快速识别哪些是关键支撑文献。
+  
+  更严重的是，54 条中有 17 条（31.5%）为 arXiv 预印本，其中多数（[40]-[54] 共 15 条）为 2024-2025 年的近期限领域预印本，且多条（[43][44][45][46][48][49][50] 等）在正文中仅被引用一次，支撑的论点较为边缘。这些预印本大量涌入参考文献表，进一步拉低了整体质量。
+- 建议：
+  1. 将总数压缩至 30-35 条：优先保留（a）奠基性文献 [1]-[4]、（b）核心方法学文献 [5][6][9][20][32][33]、（c）项目直接对标的旗舰工作 [38][39]
+  2. 对仅被引用一次且论点边缘的预印本（如 [42][43][44][45][46][48][49][50]），考虑删除或合并——其支撑的论点可用更权威的已发表文献替代
+  3. 删除重复条目 [43]（与 [44] 相同 arXiv 编号 2503.07256）
+- action：remove + consolidate
 
-**最老引用**：1965 (Shirley, [3]) — 必要奠基
-**最新引用**：2026 ([38] Roadmap, [39] ELI-ALPS SYLOS) — 2026 年 arXiv 预印本
+### [high] 编号一致性 — 5 条幽灵引用（在列表中但正文从未引用）
 
-✅ **时效性整体合格**。15 篇老引用中，10 篇是理论奠基（TKNN、Haldane、Shirley、Kitagawa 等），3 篇是综述经典（Krausz/Stockman 2014、Stapelfeldt/Seideman 2003、Fausti 2011），2 篇是首次实验（[7] Ghimire 2011、[30] Fausti 2011）—— 全部在所属子领域具有"承上启下"地位。
+- 位置：references.md [1][2][4][43][50]
+- 问题：以下 5 条参考文献出现在列表中，但在 rationale.md / content.md / scheme.md 三章正文中从未被 [N] 引用：
+  - [1] Thouless et al. TKNN (1982) — 陈数/TKNN 不变量奠基文献。立项依据中反复使用"陈数 C(t)""TKNN"等术语，理应引用此奠基文献。
+  - [2] Haldane (1988) — Haldane 模型/反常量子霍尔效应。rationale §2.2 提及"量子反常霍尔相"，未引用此奠基文献。
+  - [4] Kitagawa et al. (2010) — Floquet 拓扑绝缘体理论框架。rationale §2.2 讨论了 Floquet 拓扑绝缘体并引用了 [3]（Shirley 1965），但未引用直接奠基的 [4]。
+  - [43] T. Yu et al. (arXiv:2503.07256) — 与 [44] 为同一 arXiv 编号的重复条目。
+  - [50] Y. Ma et al. (arXiv:2412.16745) — 正文误将其编号写为 [39]（参见 critical 问题），实际正文从未正确引用 [50]。
+- 建议：
+  1. [1][2]：在 rationale.md 首次提及"陈数"和"量子反常霍尔效应"处补充引用 [1][2]，或若确认不需要则从列表删除
+  2. [4]：在 §2.2 讨论 Floquet 拓扑绝缘体处补充引用 [4]
+  3. [43]：删除（与 [44] 重复）
+  4. [50]：修正正文中"Ma 等[39]"为"Ma 等[50]"后即被正确引用
+- action：add citation or remove entry
 
-⚠️ **HIGH**：[38] 和 [39] 是 2026 年 arXiv 预印本，按提交季时间线（2026 年 8 月）这 2 条 ID 在 arXiv.org 上**可能尚未公开可查**，评审专家可能无法验证其真实性。
+### [medium] 引用相关性 / 缺失引用 — [18] 期刊信息存疑，可能为错误归属
 
----
+- 位置：references.md [18]；rationale.md §2.2（"Wang 等[18]于 2021 年首次在固体中实验验证 Floquet 拓扑绝缘体"）
+- 问题：[18] 标注为"Y. H. Wang et al., Nature 596, 81 (2021)"，描述为"Floquet 拓扑绝缘体的实验验证"。但固体中 Floquet 拓扑绝缘体的标志性实验是 Y. H. Wang et al., Science 342, 453 (2013)——"Observation of Floquet-Bloch states on the surface of a topological insulator"。Nature 596, 81 (2021) 可能是另一篇论文，需要核实是否确实关于 Floquet 拓扑绝缘体实验验证。正文称"首次在固体中实验验证"，若 [18] 实际并非 2013 年那篇 Science 论文，则"首次"的表述与引文不匹配。
+- 建议：
+  1. 核实 Nature 596, 81 (2021) 的实际内容——是否确实是 Y. H. Wang 关于 Floquet 拓扑绝缘体的论文
+  2. 若不是，则应改为引用 Science 342, 453 (2013)，并修正正文中"2021 年"为"2013 年"
+  3. 若确实是 2021 年的后续工作，则正文"首次"的表述需要修正
+- action：verify
 
-## 5. 引用相关性
+### [medium] 时效性 / 预印本比例 — arXiv 预印本占比 31.5%，超过 30% 阈值
 
-### 5.1 引用错配
+- 位置：references.md [38]-[54]（共 17 条 arXiv 预印本）
+- 问题：17/54 = 31.5% 的参考文献为 arXiv 预印本，超过量子光学/固体 HHG 领域审查中建议的 30% 阈值。其中多条预印本（[38] arXiv:2604.15085、[39] arXiv:2601.09608）标注年份为 2026 年，发表状态未核实。申请书中多处使用预印本支撑核心论断：
+  - [40] Liu（arXiv:2501.14238）支撑"全光学重建技术"核心论断
+  - [41] Chen（arXiv:2505.07230）支撑"深度学习量子轨迹检索"
+  - [47] Feng（arXiv:2403.08896）在问题三方法论中被引用
+  - [51] Shah/Cangi（arXiv:2508.16554）在方案 §2.3 和 §5(3) 中作为 AI 反演可行性支撑
+  
+  当核心方法论论证依赖未经同行评审的预印本时，评审专家会质疑其可靠性。
+- 建议：
+  1. 对被用于支撑核心论断的预印本（[40][41][47][51]），核实是否已被期刊接收/发表，若已发表则更新为正式引用
+  2. 若仍未发表，在正文中增加限定语，如"据预印本报道""尚未经同行评审"
+  3. 整体预印本比例降至 30% 以下（从 17 条减至 ≤16 条），可通过删除边缘预印本实现
+- action：verify + add qualifier
 
-🔴 **CRITICAL**：
-- **[15] R. F. K. Spreeuw, J. P. Woerdman. *Phys. Rev. Lett.* 67, 1182 (1991) — "Floquet 态基础"**
-  - 真实论文：Spreeuw & Woerdman, PRL 67, 1182 (1991) 实际标题为 "Magnetic field dependence of atomic level shifts"，是关于原子能级在磁场下移动的实验研究，**与 Floquet 态奠基无关**。
-  - Floquet 态的基础文献应为 Shirley 1965 [3]（已在列表中）或 Sambe 1973 Phys. Rev. A 7, 2203。
-  - 正文 rationale.md §1 第 2 段将 [14, 15] 共同引用为"温度、压力、掺杂三大维度控制拓扑相变"的依据，但 [14] Krausz/Stockman 2014 (阿秒科学综述) 和 [15] Spreeuw 1991 (原子能级磁场效应) **都不支持此论断**。该论断通常由 Hasan & Kane RMP 82, 3045 (2010) 或 Qi & Zhang Phys. Today 63(1), 33 (2010) 类的拓扑综述支持。
+### [medium] 缺失引用 — 若干重要论断缺少文献支撑
 
-- **[17] 冲突**：rationale.md 末尾版本 (PRB 91, 075404) 与 references.md 主版本 (Nat. Commun. 6, 7270) 是两篇不同论文。申请书正文 §1 第 2 段引用 [17] 作为"Floquet 态在光晶格中的实现"的依据。两版中只有 Nat. Commun. 6, 7270 (Sentef et al. 2015) 是关于"光晶格中 Floquet 态在 pump-probe 光电子能谱中的形成和局域赝自旋纹理"的工作，与正文叙述方向匹配；PRB 91, 075404 (2015) 的实际主题是另一研究方向，**不匹配正文所述"光晶格中的实现"**。
+- 位置：rationale.md 多处
+- 问题：以下论断在正文中以事实陈述形式出现，但附近无 [N] 引用：
+  1. "2023 年 Krausz、L'Huillier 与 Agostini 共享诺贝尔物理学奖"（§1）——重要事实性论断，建议补充 Nobel Prize 官方链接或相关报道引用
+  2. "欧盟 ELI-ALPS 在其 2024–2028 年战略议程中部署了'瞬态拓扑相的全光控制'旗舰项目"（§1）——具体机构的战略部署，应有出处
+  3. "MIT 的 Reis 组与美国 AttoChem 计划同步在该交叉点布局"（§1）——具体机构/计划名称，应有出处
+  4. "申请人所在团队过去五年在 Bi₂Se₃ 拓扑绝缘体 HHG 实验上已发表代表性论文（[9] 及团队 2022–2024 年间后续工作）"——"后续工作"应有具体引用编号
+  
+  注：物理常数（E₀ = 5.14 × 10¹¹ V/m、k_BT ≈ 25 meV @ 300 K）属于标准教科书知识，不需引用。
+- 建议：
+  1. Nobel 奖论断：补充引用（可引用 Nobel Prize 官网或 Scientific Background 文档）
+  2. ELI-ALPS 战略议程：补充引用或改为"据公开信息"
+  3. MIT/AttoChem 布局：补充引用或加"据公开报道"限定语
+  4. 团队后续工作：列出具体论文编号或标注"待补充"
+- action：add citation or add qualifier
 
-### 5.2 缺失引用（重要论断缺乏文献支撑）
+### [low] 引文格式 — rationale.md 末尾存在第二份参考文献列表（与 references.md 重复）
 
-🟡 **MEDIUM**：
-- 申请书反复论断"瞬态量子相作为统一对象"（rationale §1 第 3 段、content.md §1、scheme.md §2.1），但**没有引用任何支持"瞬态量子相 / TQP 是统一研究对象"这一本体论主张的文献**。该论断的提出通常是申请人自创概念，可不引用，但申请书 §2 把它放在"国内外研究现状"框架中讨论，需要明确说明"本项目所提概念为新概念"以避免评审误读为"已存在共识"。
-- 申请书多次引用 "α-T₃ 模型" 作为 L0 解析 benchmark（scheme.md §2.3、content.md §2.3），但参考文献列表中**没有 α-T₃ 模型原始文献**。α-T₃ 模型原始论文为 Illes et al., Phys. Rev. B 95, 115432 (2017)（"Topological phases of the semi-Dirac semimetal" 或类似工作），缺失此引用是 high 级别问题。
-- 申请书论断"瞬态 Berry 曲率可被 HHG 圆偏振选择性直接读取"（rationale §1 第 3 段、scheme.md §2.2(b)、§2.3），该论断的方法学基础是 Baykusheva 2021 [5] 和 Drüeke & Bauer 2024 [6]（已引）。但申请书"瞬态（time-resolved）"层面的方法学参考——即把"静态 Berry 曲率反演"推广到"瞬态"的具体参考文献——**未引用**。这通常是申请人自己的方法学贡献，但申请人应在方法学手册中明确给出"本项目方法学不依赖任何外部现成框架，是自创"的说明。
+- 位置：rationale.md 第 129-237 行（"### 参考文献"节）
+- 问题：rationale.md 文件末尾包含一份完整的 [1]-[54] 参考文献列表（简略版），与独立的 references.md（详注版）并存。两份列表在部分条目的期刊/页码信息上存在差异（references.md 重要说明已标注 [12][15][31][34] 的页码冲突）。NSFC 申请书应只有一份权威参考文献列表，两份并存会造成混淆。
+- 建议：
+  1. 删除 rationale.md 末尾的参考文献列表，统一使用 references.md 作为唯一权威源
+  2. 或保留 rationale.md 中的简略版作为"正文中引用的文献"快查表，但需与 references.md 100% 一致
+- action：remove or reconcile
 
-### 5.3 高频引用分析
+### [low] 引文格式 — 个别条目页码信息自相矛盾
 
-正文最高频引用（按引用次数排序）：
-- **[9]** (rationale 7 次) Baykusheva 2018 Bi₂Se₃ HHG — 申请人团队的代表工作，✅ 合理
-- **[5]** (rationale 6 次) Baykusheva 2021 圆偏振 HHG Berry 曲率 — 关键方法学基础，✅
-- **[38]** (rationale 5 次) 2026 Attosecond Roadmap — 国家战略层面，✅
-- **[39]** (rationale 5 次) 2026 ELI-ALPS SYLOS — 装置对标，✅
-- **[20]** (rationale 4 次) Xu 2025 TMD Berry 曲率翻转 — 关键实验证据，✅
-- **[32]** (rationale 4 次) Liu 2024 时间平均 Berry 曲率 — 关键理论，✅
-- **[35]** (rationale 4 次) Laporté 2022 — ⚠️ 作者列表异常，准确性存疑
-
-高频引用整体相关性良好，但 [35] 的引用可靠性受到其作者列表异常的连带影响。
-
----
-
-## 6. 引用覆盖度 — 子课题 ↔ 引用分布
-
-content.md 仅引用了 4 条文献（[5][21][32][34]），scheme.md 仅引用了 5 条文献（[5][21][32][33][34]），主要引用集中在 rationale.md。这一分布与三个子课题的论证密度不匹配：
-- **子课题 A**（强场写）的引用：主要由 rationale.md 提供（[3][4][5][6][7][8][9][10][11][18][19][20][32][33]）
-- **子课题 B**（阿秒读）的引用：极弱，content.md 和 scheme.md 仅 [21][34] 直接相关
-- **子课题 C**（反演）的引用：极弱，content.md 和 scheme.md 仅 [5][32][33] 直接相关
-
-**子课题 B、C 的论证缺乏独立的文献支撑**——申请书这两章几乎完全依靠"复用"立项依据中的引用，没有引入该子课题专属的方法学文献。这是 high 级别问题（申请书结构问题，但与参考文献系统强相关）。
-
----
-
-## 7. 整体问题清单
-
-### [CRITICAL] red_line — references.md 与 rationale.md 末尾独立列表的 [17][36] 元数据冲突
-- **位置**：references.md [17][36] vs rationale.md lines 155, 193 末尾独立列表
-- **问题**：两份列表中 [17] 指向 Nat. Commun. 6, 7270 (2015) 与 Phys. Rev. B 91, 075404 (2015) 两篇不同论文；[36] 指向 Phys. Rev. A 91, 043839 (2015) 与 Science 354, 734 (2016) 两篇不同论文
-- **违反条款**：NSFC 申请材料一致性 + 严谨性 + 学术诚信底线
-- **建议**：删除 rationale.md 末尾 (lines 121-199) 的独立参考文献列表，保留 references.md 为主参考文献列表；如需在 rationale.md 显示引用概览，仅以"如 references.md 所列"形式指向主文件
-- **priority**：P1 必改
-- **action**：remove（删除 rationale.md 末尾的独立列表）
-
-### [CRITICAL] red_line — [15] Spreeuw 1991 论文主题与"标注"不符
-- **位置**：references.md [15]；rationale.md line 19 (引用处)
-- **问题**：Spreeuw & Woerdman, PRL 67, 1182 (1991) 实际是关于 atomic level shifts 的实验工作，不是 Floquet 态基础；申请书标注"被 [14, 15] 控制"的"温度、压力、掺杂"调控维度，也与该论文内容不匹配
-- **违反条款**：scoring_rubric.dimensions.rigor 0.4 档（关键引文错误）
-- **建议**：替换 [15] 为真正的 Floquet 态基础文献（推荐 Sambe 1973 Phys. Rev. A 7, 2203 "Steady states and quasienergies of a quantum-mechanical system in an oscillating field"），或修改正文对 [14, 15] 的引用语境（不再支持"温度/压力/掺杂"调控维度，改支持其他论断）
-- **priority**：P1 必改
-- **action**：verify + rewrite
-
-### [CRITICAL] format — [35][39] 作者列表异常（疑似 OCR 拼接错误）
-- **位置**：references.md [35] [39]
-- **问题**：[35] Laporté 2022 列出 19 个首字母组合（"A. R. J. B. M. F. C. M. B. F. P. H. J. F. L. M. M. A. M. T. K. P. H. M. R. B. Bauer"），[39] Nayak 2026 列出 35 个首字母组合（"A. L. B. P. D. M. A. R. F. S. R. T. B. A. L. L. T. K. J. A. F. P. J. M. A. N. M. K. J. P. S. R. T. T. H. P. J. V. K. A. R. M. S. T. A. C. T. K. A. R. K. T. F. T. Z. M. P. T. S. K. T. B. A. R. A. R. Argibay"）。连续多个首字母无对应姓氏，属典型 OCR 拼接错误
-- **违反条款**：scoring_rubric.dimensions.rigor 0.4 档（作者信息不可信）
-- **建议**：到 arXiv 原始论文页面下载 PDF，提取准确作者列表后修正；[39] 若是协作组工作，应按 arXiv 实际显示的完整作者列表列出（而非 et al. 截断）
-- **priority**：P1 必改
-- **action**：verify + rewrite
-
-### [HIGH] format — references.md 与 rationale.md 末尾列表并存，结构不规范
-- **位置**：references.md（主文件）+ rationale.md lines 121-199（独立列表）
-- **问题**：NSFC 申请书只需要一份参考文献列表。两份列表并存造成 [17][36] 元数据冲突的物理基础
-- **建议**：删除 rationale.md 末尾的独立列表（与上述 CRITICAL-1 合并修复）
-- **priority**：P1 必改
-- **action**：remove
-
-### [HIGH] format — [38][39] 2026 年 arXiv 预印本可能无法在公开数据库验证
-- **位置**：references.md [38] [39]
-- **问题**：按提交季时间线（2026 年 8 月），arXiv:2604.15085 和 arXiv:2601.09608 这两个 ID 的 2026 年新预印本在 arXiv.org 上可能尚不可公开访问。评审专家若尝试查阅会失败
-- **建议**：
-  - 选项 A：保留 [38][39]，但补充 DOI 或期刊名（如 "arXiv:2604.15085 [physics.atom-ph] (2026), under review at Nat. Phys."），让评审专家可预期可访问性
-  - 选项 B：替换为 2023-2025 年已正式发表的相关工作（如 2022 年发表的 ELI-ALPS SYLOS 早期工作、2023 年发表的 Attosecond 相关综述）
-- **priority**：P2 强烈建议
-- **action**：verify + rewrite
-
-### [HIGH] relevance — 正文（rationale §1 第 2 段）"[14, 15] 控制温度、压力、掺杂"论断缺乏合适文献支撑
-- **位置**：rationale.md line 19
-- **问题**：[14] Krausz/Stockman 2014 是阿秒科学综述，[15] Spreeuw 1991 是原子能级磁场效应，**两者均不是关于"温度/压力/掺杂调控拓扑相变"的标准参考文献**。该论断的合适引用是 Hasan & Kane RMP 82, 3045 (2010)、Qi & Zhang Phys. Today 63(1), 33 (2010)、或 Armitage et al. RMP 90, 015001 (2018) 等拓扑综述
-- **建议**：替换 [14, 15] 为上述拓扑综述之一（同时解决 CRITICAL-2 关于 [15] 的问题）
-- **priority**：P2 强烈建议
-- **action**：rewrite（引用替换）
-
-### [MEDIUM] relevance — 缺失 α-T₃ 模型原始文献
-- **位置**：scheme.md §2.3、content.md §2.3 多次引用 α-T₃ 模型作为 L0 benchmark，但 references.md 中无 α-T₃ 原始论文
-- **问题**：α-T₃ 模型（伪自旋-1 Dirac 模型）原始论文是 Illes et al., Phys. Rev. B 95, 115432 (2017) "Eta-pairing state in the semi-Dirac semimetal"。申请书将其作为 L0 解析 Berry 曲率 + 1D-TDSE 基准但未引用原始文献
-- **建议**：新增 α-T₃ 模型原始文献为 [40]
-- **priority**：P2 强烈建议
-- **action**：add（新增 [40]）
-
-### [MEDIUM] relevance — content.md / scheme.md 子课题独立文献支撑弱
-- **位置**：content.md（共仅 4 个引用 [5][21][32][34]）、scheme.md（共仅 5 个引用 [5][21][32][33][34]）
-- **问题**：子课题 B（阿秒读）和子课题 C（反演）的论证几乎完全靠"复用"立项依据的引用，没有专属方法学文献。这两章缺少子课题专属的关键方法学引用（如双光梳互参考方法学 [34] 在 content.md 中出现但 scheme.md §2.2 没有展开引用；子课题 C 的 AI 代理模型方法学 [L0–L2 分层] 没有引用任何 AI for physics 方法学文献）
-- **建议**：
-  - 子课题 B 补充：Keller, U. Nature 424, 611 (2003)（阿秒科学经典）；Goulielmakis et al., Science 305, 1267 (2004)（首次阿秒测量）
-  - 子课题 C 补充：Carleo et al., Rev. Mod. Phys. 91, 045002 (2019)（AI for physics 综述）；或具体的 VAE/扩散模型方法学论文
-- **priority**：P3 建议
-- **action**：add
-
-### [LOW] format — [7] rationale 末尾版本多 arXiv 编号，主文件无
-- **位置**：rationale.md line 135 vs references.md [7]
-- **问题**：rationale.md 末尾 [7] 含 "（arXiv: 1104.1045）" 注释，主文件无此 arXiv 信息。arXiv 1104.1045 确为此论文预印本号，是合理补充，但两表不一致
-- **建议**：在 references.md [7] 中也补充 arXiv:1104.1045，使两表一致
-- **priority**：P3 建议
-- **action**：add（主文件补 arXiv 编号）
-
-### [LOW] format — [14] et al. 风格不一致
-- **位置**：references.md vs rationale.md
-- **问题**：主文件用 "F. Krausz, M. I. Stockman"（逗号分隔），rationale 用 "F. Krausz & M. I. Stockman"（& 符号）。两表作者分隔符不统一
-- **建议**：统一两表作者分隔符（推荐全部用逗号分隔，作者 3 人以上再 et al.）
-- **priority**：P3 建议
-- **action**：rewrite
-
-### [LOW] timeliness — 1965 年的 Shirley 引用虽然必要但年代久远
-- **位置**：references.md [3]
-- **问题**：[3] Shirley 1965 是 Floquet 理论原始工作，**是必要奠基引用**，但 1965 距今已 61 年，评审可能建议补充更现代的 Floquet 综述（如 [31] Rudner & Lindner 2020、[33] Tsuji et al. 2023 RMP）
-- **建议**：保留 [3]，但 scheme.md 中 Floquet 理论陈述时多引用 [31] 或 [33] 之一作为现代综述入口
-- **priority**：P3 建议
-- **action**：add（新增对 [31] 或 [33] 的引用频率）
+- 位置：references.md [12][15][31][34]
+- 问题：references.md 的注释中已自述以下条目存在两版页码差异：
+  - [12]：references.md 标注 *Rep. Prog. Phys.* 72, 085601 (2009)，注释提及"当前 references.md 有 *Phys. Rep.* 324, 1 (2000) 版本"
+  - [15]：references.md 标注 *Phys. Rev. Lett.* 67, 1182 (1991)，注释提及"references.md 有 *Prog. Opt.* 31, 263 (1993) 版本"
+  - [31]：页码 249 vs 229 之争
+  - [34]：页码 17 vs 10 之争
+  
+  这些自相矛盾的注释暴露出参考文献管理流程的混乱，虽然在正文中不影响阅读，但若有评审专家逐条核查，会留下不专业的印象。
+- 建议：逐一核实 CrossRef，确定唯一正确值，删除矛盾注释
+- action：verify
 
 ---
 
-## 8. 引用清单 — 健全性总览
+## 修复优先级
 
-| 编号 | 第一作者 | 年份 | 期刊 | 主要风险 |
-|------|----------|------|------|----------|
-| [1] | Thouless | 1982 | PRL | ✅ 经典 |
-| [2] | Haldane | 1988 | PRL | ✅ 经典 |
-| [3] | Shirley | 1965 | Phys. Rev. | ✅ Floquet 奠基 |
-| [4] | Kitagawa | 2010 | PRB | ✅ |
-| [5] | Baykusheva | 2021 | PRL | ✅ 高频核心 |
-| [6] | Drüeke | 2024 | PRA | ✅ |
-| [7] | Ghimire | 2011 | Nature Physics | ✅（rationale 补 arXiv 编号） |
-| [8] | Ndabashimiye | 2016 | Nature | ✅ |
-| [9] | Baykusheva | 2018 | PRL | ✅ 申请人代表工作 |
-| [10] | Zhang | 2020 | PNAS | ✅ |
-| [11] | Sidorenko | 2022 | Optica | ✅ |
-| [12] | Beck | 2009 | Rep. Prog. Phys. | ✅ |
-| [13] | de Bohan | 2022 | PRL | ✅ |
-| [14] | Krausz | 2014 | Nat. Photonics | ⚠️ 用于"温度/压力/掺杂"论断不匹配 |
-| **[15]** | **Spreeuw** | **1991** | **PRL** | **🔴 论文主题与标注不符** |
-| [16] | Jotzu | 2014 | Nature | ✅ |
-| **[17]** | **Sentef** | **2015** | **⚠️ 主文件 Nat. Commun. vs rationale 末尾 PRB，冲突** | **🔴 两表指向不同论文** |
-| [18] | Wang | 2021 | Nature | ✅ |
-| [19] | McIver | 2020 | Nat. Phys. | ✅ |
-| [20] | Xu | 2025 | Nat. Photonics | ✅ 高频 |
-| [21] | Shen | 2023 | PRL | ✅ |
-| [22] | Griffin | 2024 | Nat. Mater. | ✅ |
-| [23] | D'Alessio | 2014 | PRX | ✅ |
-| [24] | Cheng | 2023 | PRL | ✅ |
-| [25] | Münch | 2023 | PRL | ✅ |
-| [26] | Stapelfeldt | 2003 | RMP | ✅ |
-| [27] | Karamatskos | 2019 | J. Chem. Phys. | ✅ |
-| [28] | Tretyakov | 2024 | PRL | ✅ |
-| [29] | Clerici | 2023 | Nat. Commun. | ✅ |
-| [30] | Fausti | 2011 | Science | ✅ |
-| [31] | Rudner | 2020 | Nat. Rev. Phys. | ✅ |
-| [32] | Liu | 2024 | PRB | ✅ 高频 |
-| [33] | Tsuji | 2023 | RMP | ✅ |
-| [34] | Papp | 2014 | Optica | ✅ |
-| **[35]** | **Laporté** | **2022** | **PR Research** | **🔴 作者列表异常（19 个首字母组合）** |
-| **[36]** | **Wu** | **2015/2016** | **⚠️ 主文件 PRA 2015 vs rationale 末尾 Science 2016，冲突** | **🔴 两表指向不同论文** |
-| [37] | Schumacher | 2024 | PRL | ✅ |
-| [38] | Varillas | 2026 | arXiv | ⚠️ 2026 arXiv 预印本可访问性 |
-| [39] | Nayak | 2026 | arXiv | 🔴 作者列表异常（35 个首字母组合）+ 可访问性 |
+| 优先级 | 问题 | 工作量 |
+|--------|------|--------|
+| P0（必须立即修复） | 2 处作者-编号归属错误（Ma等[39]→[50]、Yu等[47]→[43/44]） | 低（直接替换编号） |
+| P0（必须立即修复） | [18] 期刊/年份核实（Nature 596, 81 (2021) vs Science 342, 453 (2013)） | 中（需检索核实） |
+| P1（本轮内修复） | 24 条"待 DOI 核实"条目补全英文标题+DOI | 高（需逐条检索 CrossRef） |
+| P1（本轮内修复） | 参考文献总数从 54 压缩至 30-35 | 中（需判断哪些可删） |
+| P2（下一轮处理） | 5 条幽灵引用处理（补引 or 删除） | 低 |
+| P2（下一轮处理） | 删除重复条目 [43]、删除 rationale.md 末尾重复列表 | 低 |
+| P2（下一轮处理） | 预印本比例降至 30% 以下 | 中 |
+| P2（下一轮处理） | 补充缺失引用（Nobel 奖、ELI-ALPS 等） | 低 |
 
 ---
 
-## 9. 对抗结论
+## 对抗结论
 
-- **本轮问题数**：critical × 3，high × 3，medium × 2，low × 3
-- **关键失败点**：
-  1. **references.md 主文件与 rationale.md 末尾独立列表在 [17][36] 上的元数据冲突** — 这是本申请书参考文献系统的最大硬伤。NSFC 评审系统对申请材料一致性高度敏感，该冲突在形式审查阶段就可能触发"申请材料严谨性存疑"。
-  2. **[15] 论文主题与标注不符** — 不是简单的格式问题，而是事实层面的引用错配，需要核实原始论文。
-  3. **[35][39] 作者列表异常** — 高度疑似 OCR 错误，作者名单的可信度直接受质疑。
-- **优先修复项**（按 P1 必改顺序）：
-  1. 删除 rationale.md lines 121-199 的独立参考文献列表
-  2. 替换 [15] 为正确的 Floquet 态基础文献
-  3. 核实并修正 [35][39] 的作者列表
-- **是否达标**：**否** — 申请书参考文献系统在严谨性维度上属于"必须实质性修复"区间，不能直接进入下一轮评审。
-- **对比上一轮**：本轮为第 1 轮参考文献专项检验，无上一轮对比基准；待本轮修复后进入第 2 轮。
+本轮发现 9 个问题（critical:1, high:3, medium:3, low:2）。
+
+核心问题集中在三个方面：
+1. 作者-编号归属错误（2 处）——这是最容易被评审专家当场发现的问题，必须立即修复
+2. 格式系统性不一致——三种格式并存、44% 条目待核实、中文标题替代英文标题，整体书目质量远低于重点项目应有水准
+3. 参考文献数量失控——54 条远超惯例，其中 17 条预印本占比 31.5%，稀释了核心引用的权威性
+
+正面方面：参考文献的时效性良好（52% 为近 3 年文献），所有正文引用的编号 [N] 都能在列表中找到（无悬空引用），参考文献内容与申请书科学问题高度相关（无无关引用）。
+
+是否达到输出标准：否。原因——存在 critical 级作者-编号归属错误未修复，且 44% 条目书目信息未核实，不满足重点项目参考文献的基本规范要求。建议在修复 P0 和 P1 问题后进入下一轮检验。
+
+下一轮评审建议聚焦：P0/P1 修复确认 + 格式统一后的一致性复验 + arXiv 预印本发表状态追踪。
 
 ---
 
 ## 评分
 创新性：N/A
 可行性：N/A
-严谨性：0.40
-完整性：0.70
-综合评分：0.55
+严谨性：0.50
+完整性：0.62
+综合评分：0.56

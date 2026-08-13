@@ -1157,7 +1157,10 @@ def _run_update_vision_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict
         f"4. 直接写入文件 {brief_path}\n\n"
         f"【申请书内容】\n{draft}\n"
     )
-    result = self._run_hermes("writer", prompt, timeout=300)
+    # v6.8.39: 超时 300s→600s，与 v6.8.37 references/critic 修复策略一致。
+    # writer 长内容生成（研究设想/方法学手册）在 300s 内常超时，
+    # key-transient r1 update_method_manual 已实测超时(300s)，重试耗尽会卡住轮次。
+    result = self._run_hermes("writer", prompt, timeout=600)
     if not result.get("success"):
         return {"success": False, "error": result.get("error", "更新研究设想失败")}
     return {"success": True, "brief_path": str(brief_path)}
@@ -1193,7 +1196,9 @@ def _run_update_method_manual_step(self, proposal_id: str, job: Dict[str, Any]) 
         f"4. 直接写入文件 {manual_path}\n\n"
         f"【研究方案内容】\n{method_source}\n"
     )
-    result = self._run_hermes("writer", prompt, timeout=300)
+    # v6.8.39: 超时 300s→600s，与 v6.8.37 references/critic 修复策略一致。
+    # key-transient r1 该步骤已实测超时(300s)，重试耗尽会卡住轮次（轮次链末端）。
+    result = self._run_hermes("writer", prompt, timeout=600)
     if not result.get("success"):
         return {"success": False, "error": result.get("error", "更新方法学手册失败")}
     return {"success": True, "manual_path": str(manual_path)}

@@ -95,19 +95,18 @@
 
 ### 7. 一致性修订清单
 
-本轮（round-10，第 10 轮整体一致性修订）所执行的修改均为章节间衔接、术语统一、冗余删减范畴，未做内容主题的二次展开。具体清单：
+本轮（round-11，第 11 轮整体一致性修订）所执行的修改均为章节间衔接、术语统一、冗余删减、引用冲突消解范畴。具体清单：
 
-- [critical] references.md 50 字占位 → 补齐为完整的 39 条文献列表（含卷期页码或 arXiv ID），与 rationale.md §5 + content.md + scheme.md + methodology-manual.md 中所有引用编号一一对应（round-6 起的 P0 任务）。
-- [high] full_review.md 3 行占位 → 实质性撰写为 7 节整体一致性审查（核心问题一致性 + 关键参数一致性 + 术语对照 + 冗余识别 + 文献引用核查 + 20 分钟可读性自检 + 修订清单）。
-- [high] proposal-draft.md 仍为 v0.4 旧版（含 184 行错位的 scheme 内容）→ 本轮重新组装为 v1.0 版本，按 rationale.md v0.5 + content.md v0.5 + scheme.md v0.8 + methodology-manual.md v0.8 + references.md v1.0 + full_review.md v1.0 + 本节 full_review.md 的顺序。
-- [medium] content.md §4 与 scheme.md §6 的关系说明：明确"研究内容节奏" vs "技术节奏"分工，并通过内容.md §4 末段过渡句明示。
-- [medium] scheme.md §1.1 "≤100 as"与 methodology-manual.md B.1 "≤100 as"在元数据上同步：明确为"项目级指标，由三重稳定协同实现"，避免单独被引述时被误解为单一技术能力。
-- [medium] methodology-manual.md 头部"配套申请书 round-9" → 更新为"配套申请书 round-10"。
-- [medium] research_idea.md 头部"第 9 轮优化后同步" → 更新为"第 10 轮整体一致性修订后同步"。
-- [low] reading-notes.md 追加本轮"round-10 整体一致性修订小结"记录（一条）。
+- [critical] 参考文献编号冲突消解：scheme.md 引用 [40][41] 指向 Shah & Cangi (arXiv:2508.16554) 与 Zhao & Zou (arXiv:2510.12443)，但 rationale.md 内联列表 [40][41] 指向 Liu et al. (arXiv:2501.14238) 与 Chen et al. (arXiv:2505.07230)，导致同一编号在不同章节指向不同论文。修复：scheme.md 正文 [40]→[51]、[41]→[52]；references.md [40][41] 恢复为 rationale.md 的原始指向；新增 [51]-[54] 条目。
+- [high] "敏感性敏感" 语法冗余修复：rationale.md §3（1处）、content.md §2.2（1处）、scheme.md §1.2+§2.2b+§3（3处）共 5 处"Berry 曲率圆偏振敏感性敏感"统一替换为"Berry 曲率的圆偏振选择响应敏感"。
+- [high] content.md 元话语删除：§1"需要预先界定的是"、§2.2"需要特别说明的是"两处删除，直接陈述事实。
+- [medium] 新文献 [53] Silva et al. arXiv:2404.06086（拓扑表面态 Berry 相位效应实验探测）嵌入 rationale.md §2.1 论证链。
+- [medium] 新文献 [54] Lucchini et al. arXiv:2510.15207（固态 HHG 前沿综述）嵌入 rationale.md §2.1 作为"HHG-拓扑定量关联缺失"的领域共识支撑。
+- [medium] references.md 补齐 [42]-[54] 共 13 条缺失条目（此前仅 [1]-[41] 有定义），与 rationale.md 内联列表 + scheme.md [51][52] 引用全部一一对应。
+- [low] 上轮清单中的 [critical] references.md 50 字占位、[high] full_review.md 空置等均已在 round-10 完成，本轮复核确认无回退。
 
 ---
 
-*章节版本：v1.0 — 整体一致性审查（2026-08-04，第 10 轮）*
-*聚焦维度：跨章节衔接（rationale ↔ content ↔ scheme ↔ methodology-manual ↔ references）*
-*本轮修正：[critical] references.md 50 字占位补齐为 39 条完整文献列表（呼应 rationale §5 编号体系，round-6 P0 任务终结）；[high] full_review.md 3 行占位实质性撰写为 7 节一致性审查（问题一致性 + 参数一致性 + 术语对照 + 冗余识别 + 文献引用核查 + 20 分钟可读性自检 + 修订清单）；[high] proposal-draft.md 重新组装为 v1.0（按最新 6 个章节文件）；[medium] content.md §4 末段衔接句明示与 scheme.md §6 的分工；[medium] scheme.md §1.1 ≤100 as 与 methodology-manual.md B.1 元数据同步（项目级指标口径一致）；[medium] methodology-manual.md 头部"配套 round-9"更新为"配套 round-10"；[medium] research_idea.md 头部"第 9 轮"更新为"第 10 轮整体一致性修订"；[low] reading-notes.md 追加 round-10 一致性修订小结记录。*
+*章节版本：v1.1 — 整体一致性审查（2026-08-14，第 11 轮）*
+*聚焦维度：严谨性（文献编号冲突消解 + 语法一致性 + 新文献整合）*
+*本轮修正：[critical] 参考文献编号冲突消解——scheme.md [40][41] 重编号为 [51][52]，与 rationale.md [40]-[50] 不再冲突；references.md [40][41] 恢复为 rationale 内联列表的原始指向，新增 [42]-[54] 共 13 条缺失条目；[high] "敏感性敏感"语法冗余全部消除（5 处→0）；[high] content.md 元话语全部删除（2 处→0）；[medium] 新文献 [53] Silva 拓扑表面态 Berry 相位实验、[54] Lucchini 固态 HHG 综述嵌入论证链。*

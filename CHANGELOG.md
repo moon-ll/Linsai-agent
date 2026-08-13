@@ -1,5 +1,21 @@
 # 变更记录
 
+## v6.8.39 - 2026-08-14 修复生命周期衍生步骤超时偏紧导致轮次卡死风险
+
+### 问题
+- 健康检查发现 key-transient r1 `update_method_manual` 实测超时(300s)（2026-08-13T19:05-19:10Z）。
+- 根因：`lifecycle/executor.py` 的 `_run_update_vision_step` / `_run_update_method_manual_step`
+  硬编码 `timeout=300`，与 v6.8.37 已修复的 references/critic 超时问题同源。该步骤是轮次链
+  末端，300s 超时若持续触发，repair 重试 3 次耗尽后轮次无法完成、课题卡死。
+
+### 修复
+- `executor.py` 两个衍生步骤超时 300s→600s，与 v6.8.37 references/critic 修复策略一致。
+- 新增 `tests/test_derived_step_timeout.py`（5 断言）验证两步骤 `_run_hermes` 调用 timeout=600，
+  并纳入 `self_test.py --module` 回归列表。
+
+### 验证
+- py_compile 通过；self_test --module 411/411 全绿（原 406/406 + 新增 5）
+
 ## v6.8.38 - 2026-08-13 修复 missing_sections 初始化后不刷新导致 critic 误聚焦
 
 ### 问题

@@ -1,24 +1,24 @@
 ---
-title: "transient-quantum-phase-optical — 优化报告"
+title: "瞬态量子相的全光读写：强场驱动下的瞬态拓扑定义、相变实现与阿秒反演 — 优化报告"
 type: "proposal_reports"
 proposal_id: "key-transient-quantum-phase-optical-20260726"
 latest_round: 5
-last_score: 0.71
+last_score: 0.56
 critic_rounds: 9
 optimization_reports: 0
 status: "optimizing"
-created: "2026-08-13T13:06:22Z"
-updated: "2026-08-13T13:06:22Z"
+created: "2026-08-13T20:09:29Z"
+updated: "2026-08-13T20:09:29Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
 ---
 
-# transient-quantum-phase-optical — 优化报告
+# 瞬态量子相的全光读写：强场驱动下的瞬态拓扑定义、相变实现与阿秒反演 — 优化报告
 
 **课题 ID**：`key-transient-quantum-phase-optical-20260726`
 **累计轮次**：5
-**当前分数**：0.71
+**当前分数**：0.56
 **状态**：优化中
 
 ---

@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据缺少「国内研究现状」层，未体现国内布局与战略定位",
+      "missing_evidence": "缺少国内（中国）研究团队在固体高次谐波、阿秒科学、瞬态量子相测量等方向的系统性研究现状梳理，NSFC重点项目要求展示国内研究格局和本项目在其中的定位",
+      "search_keywords": [
+        "solid-state high harmonic generation China group",
+        "attosecond science Chinese research team",
+        "固体高次谐波 中国 实验组",
+        "瞬态量子相 超快光学 国内",
+        "ultrafast optics strong field China domestic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "文中多处声称存在「国际空白」（创新性论证），但缺乏文献支撑证明这些方向确属未被探索的前沿",
+      "missing_evidence": "缺乏对声称的「国际空白」领域进行系统性文献检索的证据，需要证明这些方向在国际上确实处于未被解决或未被探索的状态",
+      "search_keywords": [
+        "transient quantum phase attosecond measurement review",
+        "floquet engineering solid state strong field survey",
+        "subcycle quantum phase dynamics ultrafast review",
+        "强场 瞬态相位 阿秒测量 综述",
+        "ultrafast quantum phase retrieval solid state state-of-the-art"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2 引用 Wang 等(Nature 2021)[18] 和 McIver 等(Nat. Phys. 2020)[19] 但存在文献堆砌倾向，需补充论证链",
+      "missing_evidence": "缺少对这两篇关键工作更深入的批判性分析（局限性、未解决问题），以及它们与本项目的直接关联论证，可能还需补充同方向其他重要工作形成完整脉络",
+      "search_keywords": [
+        "Wang Nature 2021 solid-state HHG quantum",
+        "McIver Nature Physics 2020 floquet topological",
+        "floquet engineering HHG experimental verification",
+        "strong field topology harmonic generation experiment"
+      ],
+      "priority": "medium"
+    }
+  ]
+}
