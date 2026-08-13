@@ -53,7 +53,7 @@ def _run_selected(filters: List[str]) -> List[TestSuite]:
 
     suites = []
     mapping = {
-        "module": ["test_core", "test_lifecycle_cron", "test_adversarial_governance", "test_proposal_kb_sync", "test_weekend_pipeline", "test_literature_service", "test_optimize_sections", "test_optimize_dimension_scores", "test_micro_scheduler_rotation", "test_prompt_optimizer", "test_kanban_round_stats", "test_stale_cleanup_out_of_slot", "test_monitor_kanban_local", "test_round_complete_break", "test_derived_job_priority", "test_kb_proposal_reorg", "test_auto_retry_error_history"],
+        "module": ["test_core", "test_lifecycle_cron", "test_adversarial_governance", "test_proposal_kb_sync", "test_weekend_pipeline", "test_literature_service", "test_optimize_sections", "test_optimize_dimension_scores", "test_micro_scheduler_rotation", "test_prompt_optimizer", "test_kanban_round_stats", "test_stale_cleanup_out_of_slot", "test_monitor_kanban_local", "test_monitor_cron_stale", "test_round_complete_break", "test_derived_job_priority", "test_kb_proposal_reorg", "test_auto_retry_error_history"],
         "scenario": "test_scenarios",
         "persona": "test_persona",
         "web": "test_web_api",

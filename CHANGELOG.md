@@ -1,5 +1,20 @@
 # 变更记录
 
+## v6.8.34 - 2026-08-13 修复监控 cron 陈旧检测键名不匹配（全量误报）
+
+### 问题
+- `lifecycle_monitor._check_cron_status` 读取 cron 的 `last_run_at` 键，但 `hermes_bridge.cron_list_profile` 实际返回 `last_run` 键，导致 `last_run` 恒为空 → 所有关键 cron 被误判"从未执行"，每小时产生 1 条 cron_stale 假告警（误导健康监控与飞书通知）。
+- 固定 2h 陈旧阈值对每日(24h)/每6h 调度的 cron 恒误报（lc-daily-orchestrate 每日 08:55、lc-repair 每 6h，正常间隔即超 2h）。
+
+### 修复
+- `scripts/lifecycle_monitor.py`：`last_run = c.get("last_run") or c.get("last_run_at", "")` 兼容两键。
+- 新增 `_estimate_cron_interval()` 按调度间隔估算陈旧阈值（`max(2h, 2*interval)`），消除对每日/6h cron 的误报。
+- 新增 `scripts/tests/test_monitor_cron_stale.py`（7 断言）并纳入 `self_test --module` 回归。
+
+### 验证
+- 修复后 `lifecycle_monitor --dry-run` 异常数从 1（cron_stale 假告警）降为 0。
+- `test_monitor_cron_stale` 7/7 通过；`self_test --module` 393/395（优于基线 392/395，唯一失败为既有偶发的 test_round_complete_break，单独运行通过）。
+
 ## v6.8.33 - 2026-08-13 优化完善 5 个课题的研究设想（申请书核心）
 
 - **莫尔超晶格**（`optimizing/general-moire-strong-field-probe`）：剥离文件顶部 r19/r10/r18 轮次优化日志，保留纯科学内容

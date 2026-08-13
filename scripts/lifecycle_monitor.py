@@ -339,6 +339,30 @@ REQUIRED_CRON_PREFIXES = [
 CRON_STALE_THRESHOLD = 2 * 3600  # 2 小时
 
 
+def _estimate_cron_interval(schedule: str) -> int:
+    """从 cron 表达式估算期望执行间隔（秒），用于调度感知的陈旧判定。
+
+    仅覆盖本项目关键 cron 的常见形态：
+      - `*/N * * * *` / `*/N * * * 1-5` → N 分钟
+      - `0 */N * * *` → N 小时
+      - 固定分钟+小时（如 `55 8 * * *`）→ 每日 24h
+    无法解析时回退到 CRON_STALE_THRESHOLD（保守）。
+    """
+    try:
+        fields = schedule.split()
+        if len(fields) < 5:
+            return CRON_STALE_THRESHOLD
+        minute, hour = fields[0], fields[1]
+        if minute.startswith("*/"):
+            return max(60, int(minute[2:]) * 60)
+        if hour.startswith("*/"):
+            return max(3600, int(hour[2:]) * 3600)
+        # 固定分钟+小时 → 每日一次
+        return 24 * 3600
+    except Exception:
+        return CRON_STALE_THRESHOLD
+
+
 def _check_cron_status() -> Optional[Dict[str, Any]]:
     """检查生命周期 cron 是否完整注册且正常执行。
 
@@ -375,7 +399,9 @@ def _check_cron_status() -> Optional[Dict[str, Any]]:
         stale_crons = []
         for c in crons:
             name = c.get("name", "")
-            last_run = c.get("last_run_at", "")
+            # v6.8.34 修复: cron_list_profile 返回键为 last_run（非 last_run_at），
+            # 旧代码读 last_run_at 恒为空 → 所有 cron 被误报"从未执行"。
+            last_run = c.get("last_run") or c.get("last_run_at", "")
             # 只检查关键调度 cron
             if not any(name.startswith(p) for p in ["lc-micro-scheduler", "lc-daily-orchestrate", "lc-repair"]):
                 continue
@@ -383,7 +409,11 @@ def _check_cron_status() -> Optional[Dict[str, Any]]:
                 try:
                     last_dt = datetime.fromisoformat(last_run.replace("Z", "+00:00"))
                     elapsed = (now_dt - last_dt).total_seconds()
-                    if elapsed > CRON_STALE_THRESHOLD:
+                    # v6.8.34 修复: 固定 2h 阈值对每日(24h)/每6h cron 恒误报，
+                    # 改为按各 cron 自身调度间隔估算阈值（至少 2h）。
+                    interval = _estimate_cron_interval(c.get("schedule", ""))
+                    threshold = max(CRON_STALE_THRESHOLD, interval * 2)
+                    if elapsed > threshold:
                         hours = int(elapsed // 3600)
                         stale_crons.append(f"{name} ({hours}h 未执行)")
                 except Exception:
