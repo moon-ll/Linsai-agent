@@ -1,5 +1,24 @@
 # 变更记录
 
+## v6.8.32 - 2026-08-13 修复 test_literature_service 测试隔离失效（污染真实 knowledge 数据域）
+
+### 问题
+- `scripts/tests/test_literature_service.py` 的 `_test_lit_read_wiki_persistence` / `_test_link_to_proposal_after_read` 两个用例调用 `LiteratureService.read()`，发起**真实 arxiv 网络请求**并直接写入**真实 `knowledge/wiki/papers/`**：
+  - 根因：`literature_service.py` 的 `WIKI_PAPERS_DIR` / `RAW_PAPERS_DIR` 是模块级常量，import 时即绑定真实 `knowledge/` 绝对路径，`patch_module_root()` 无法覆盖已绑定常量 → 隔离失效。
+  - 后果：① 违背文件头「不调网络/LLM」与 AGENTS.md「测试零污染」「knowledge 为共享只读域」铁律；② 每次跑测试销毁性覆盖既有深度阅读笔记（`2502.09427.md` / `2606.22714.md` 的 hermes 产出被替换为简略网络内容）；③ 3 个测试长期不稳定（依赖网络，耗时 301s）。
+
+### 修复
+- **测试改造**：移除上述两个网络/真实 IO 用例，保留 12 个纯解析/逻辑单元测试（解析器、build_frontmatter、_ingest_new_papers 计数），文件头补充隔离原则说明与移除原因。如需回归 read()/link_to_proposal() 端到端链路，应改用注入假 fetcher + monkeypatch 路径常量方式。
+- **数据恢复**：`git checkout HEAD` 逐文件还原被覆盖的 `knowledge/wiki/papers/2502.09427.md`、`2606.22714.md` 深度阅读笔记。
+- **清理 `_lifecycle.json`**：移除顶层多余的 `key-transient-quantum-phase-optical-20260726` 污染键（与 `proposals` 内同名键重复，无代码读取，安全）。
+- **文档/注释对齐**：AGENTS.md 的 `lifecycle_monitor.py --check` → `--dry-run`（与实际 CLI 一致）；`hermes_bridge.py` cron_list_profile 处注释 `v6.8.30` → `v6.8.31`（该 created_at 修复属 v6.8.31）。
+
+### 验证
+- `py_compile scripts/*.py scripts/tests/*.py` 通过
+- `self_test.py --module`：**🟢 388/388 全量通过，4.75s**（修复前 392/395 含 3 失败、417s）
+- LiteratureService 解析器测试：30/30 通过，0.048s（修复前 34/37、301s）
+- 还原后的 wiki 文件 mtime 不再被后续测试触碰（隔离生效）
+
 ## v6.8.31 - 2026-08-13 修复 cron_list_profile 未暴露 created_at 导致去重排序失效
 
 - 修复 `scripts/hermes_bridge.py`：`cron_list_profile` 返回值新增 `created_at` 字段（与 `cron_list` 保持一致）

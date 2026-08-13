@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-12T10:51:53Z",
+      "updated_at": "2026-08-13T04:38:41Z",
       "optimization_rounds": 0,
       "last_score": 0.86,
       "score_history": [
@@ -432,6 +432,38 @@
           "issues_count": 7,
           "high_issues": 2,
           "at": "2026-08-12T10:44:14Z"
+        },
+        {
+          "round": 1,
+          "score": 0.84,
+          "dim_scores": {
+            "innovation": 0.85,
+            "feasibility": 0.86,
+            "rigor": 0.82,
+            "expression": 0.8
+          },
+          "weakest_dim": "expression",
+          "focus_section": "rationale",
+          "section_passed": true,
+          "issues_count": 28,
+          "high_issues": 13,
+          "at": "2026-08-13T03:47:11Z"
+        },
+        {
+          "round": 1,
+          "score": 0.86,
+          "dim_scores": {
+            "innovation": 0.86,
+            "feasibility": 0.85,
+            "rigor": 0.82,
+            "expression": 0.92
+          },
+          "weakest_dim": "rigor",
+          "focus_section": "content",
+          "section_passed": true,
+          "issues_count": 56,
+          "high_issues": 23,
+          "at": "2026-08-13T04:38:41Z"
         }
       ],
       "human_feedback_count": 0,
@@ -500,10 +532,15 @@
         }
       ],
       "last_dim_scores": {
-        "rigor": 0.85,
-        "completeness": 0.88
+        "innovation": 0.86,
+        "feasibility": 0.85,
+        "rigor": 0.82,
+        "expression": 0.92
       },
-      "section_passes": {},
+      "section_passes": {
+        "rationale": true,
+        "content": true
+      },
       "worker_minute": 47,
       "monitor_history": [
         {
@@ -716,12 +753,12 @@
           "step": "idea_review",
           "section_key": "idea_review",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T01:50:43Z",
+          "finished_at": "2026-08-13T02:01:55Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -731,14 +768,14 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-idea_review-idea_review"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T02:20:17Z",
+          "finished_at": "2026-08-13T02:58:24Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -748,14 +785,14 @@
           "step": "gap_identify",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-rationale-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T03:00:14Z",
+          "finished_at": "2026-08-13T03:01:35Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -765,14 +802,14 @@
           "step": "lit_search",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-rationale-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T03:05:14Z",
+          "finished_at": "2026-08-13T03:15:32Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -782,14 +819,14 @@
           "step": "lit_read",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-rationale-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T03:20:16Z",
+          "finished_at": "2026-08-13T03:30:00Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -799,14 +836,14 @@
           "step": "lit_note",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-rationale-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T03:35:18Z",
+          "finished_at": "2026-08-13T03:35:18Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -816,15 +853,15 @@
           "step": "writer",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-rationale-critic",
             "general-quantum-geometry-inversion-20260726-r1-rationale-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T03:40:19Z",
+          "finished_at": "2026-08-13T03:47:11Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -834,15 +871,15 @@
           "step": "critic",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-rationale-writer",
             "general-quantum-geometry-inversion-20260726-r1-idea_review-idea_review"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T03:50:21Z",
+          "finished_at": "2026-08-13T03:55:54Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -852,14 +889,14 @@
           "step": "gap_identify",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-content-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T04:00:23Z",
+          "finished_at": "2026-08-13T04:01:49Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -869,14 +906,14 @@
           "step": "lit_search",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-content-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T04:05:23Z",
+          "finished_at": "2026-08-13T04:16:32Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -886,14 +923,14 @@
           "step": "lit_read",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-content-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T04:20:26Z",
+          "finished_at": "2026-08-13T04:20:26Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -903,14 +940,14 @@
           "step": "lit_note",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-content-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T04:25:26Z",
+          "finished_at": "2026-08-13T04:25:26Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -920,15 +957,15 @@
           "step": "writer",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-content-critic",
             "general-quantum-geometry-inversion-20260726-r1-content-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T04:30:27Z",
+          "finished_at": "2026-08-13T04:38:41Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1181,6 +1218,16 @@
           "step": "lit_search",
           "detail": "agent_loop_failed→LiteratureService",
           "at": "2026-08-10T23:16:52Z"
+        },
+        {
+          "step": "lit_search",
+          "detail": "agent_loop_failed→LiteratureService",
+          "at": "2026-08-13T03:11:16Z"
+        },
+        {
+          "step": "lit_search",
+          "detail": "agent_loop_failed→LiteratureService",
+          "at": "2026-08-13T04:11:26Z"
         }
       ],
       "low_score_alert": false,
@@ -1191,7 +1238,7 @@
           "description": "### [high] formatting_inconsistency — 预印本条目格式与正式发表条目不完全统一",
           "first_seen_round": 8,
           "last_seen_round": 8,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -1200,10 +1247,357 @@
           "description": "### [high] author_info_missing — [17]、[18] 条目作者信息缺失",
           "first_seen_round": 8,
           "last_seen_round": 8,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 14 | 超长句（>80 字） | ❌ 不通过 | 66 句超长句（>80 字），12 句 >120 字，属 [high] 问题 |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "**该句无标点拆分的必要性**——技术参数本应以分号或句号拆为 3 句。这是 [high] issue。",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 超长句 >80 字 | 是 | 66 句 [high] |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "**这是 [high] issue**——反 round-8 修复时，references.md 已补全 [17] [18] 作者，但 rationale.md 仍保留\"作者待联网核实\"占位符。",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### 6.1 R8 [high] formatting_inconsistency — 预印本条目格式与正式发表条目不完全统一",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### 6.2 R8 [high] author_info_missing — [17]、[18] 条目作者信息缺失",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "**这是 [critical] issue**——R8 报告的问题在正文中的延续，等于 R8 修复未完成。",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "- **这是 [high] issue**——违反 red-team-checklist §A 数字四要素。",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "- **这是 [critical] issue**——R8 修复在 references.md 已完成，但 rationale.md 跨章节更新遗漏。",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "- 但是 160 字超长句（详见 §4.1）——[high] 表达质量",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "**关键发现**：30% 误差估算的 4 要素全部缺失，这是 [high] issue。",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "### [critical] cross_section_inconsistency — rationale.md 残留\"作者待联网核实\"占位符",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "- **问题**：R8 报告的 [high] author_info_missing 已在 references.md 修复（[17] Stammer 等 / [18] Chowdhury & Nar",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "- **首见于**：R8 [high] author_info_missing — **残留未解决**",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "### [critical] data_metric_missing — 30% Ω 反演误差估算缺四要素（metric / 误差 / 阈值 / 数据示例）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] ultra_long_sentence — 12 句超长句（>120 字）违反可读性",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] theory_framework_boundary — BSV-SBE 框架未注明适用条件与失效边界",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "> **评分依据**：本轮聚焦研究内容章节（§2）。本章节在叙述式合规、跨章节一致性、指标量化可检验性三方面均显著优于前一阶段（与 R8 之前的 rationale.md 相比）。**最大亮点**：(",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "> **评分依据**：本轮聚焦研究内容章节（§2）。本章节在叙述式合规、跨章节一致性、指标量化可检验性三方面均显著优于前一阶段（与 R8 之前的 rationale.md 相比）。**最大亮点**：(",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "| 超长句 >80 字 | **是（16 句）** | [high] issue——3 句 >120 字属严重超长句 |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "### 6.1 [critical] cross_section_inconsistency — rationale.md 残留\"作者待联网核实\"占位符",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "### 6.2 [high] author_info_missing — [17]、[18] 条目作者信息缺失",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "### 6.3 [high] formatting_inconsistency — 预印本条目格式与正式发表条目不完全统一",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "### 6.4 [high] ultra_long_sentence — rationale.md 12 句超长句（>120 字）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "### 6.5 [critical] data_metric_missing — 30% Ω 反演误差估算缺四要素",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "### 6.6 [high] theory_framework_boundary — BSV-SBE 框架未注明适用条件与失效边界",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "### 6.7 [critical] R8 修复在 references.md 已完成，但 rationale.md 跨章节更新遗漏",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "### 6.8 [high] 红线 §A 数字四要素",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "### 6.9 [high] 160 字超长句（rationale.md §1.5）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "### 6.10–6.14 其余历史问题（[high] 类型 5 条）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "[high] metric_inconsistency — R1 复现 metric 口径未对齐",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "- 问题：rationale.md §1.4 写\"Q1 验证线在拓扑绝缘体（Bi₂Se₃ 类，非共振带间驱动，与 §3.2 一致）\"——这是 [critical] 跨章节拓扑绝缘体命名不一致的另一面（",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "[high] cross_section_naming — 拓扑绝缘体命名跨章节不一致",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "[high] ultra_long_sentence_residual — §2.6 Year 1 段首 153 字超长句",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "- 问题：§2.6 Year 1 段首超长句 153 字，包含 4 个 bullet 嵌入（虽然 bullet 在 markdown 中换行，但句子本体仍为单句）。这是 [high] issue——按",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "| 1 | 拓扑绝缘体命名 | Bi₂Se₃=2, Bi₂Te₃=1 | Bi₂Se₃=0, Bi₂Te₃=13 | Bi₂Se₃=0, Bi₂Te₃=12 | ❌ [critical] ration",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "| 9 | 14.2° / 9.5° 复现的\"rotation angle\" 与 \"polarization response\" | \"偏振旋转角\" | \"偶次谐波偏振响应\" | \"偏振响应\" | ⚠",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "- **1 项 [critical]**：拓扑绝缘体命名（rationale.md §1.4 写\"Bi₂Se₃ 类\"，content.md/scheme.md 全文用 Bi₂Te₃/Sb₂Te₃）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
           "round_resolved": null,
           "stale": false
         }
-      ]
+      ],
+      "idea_review_attempts": 2,
+      "idea_review_score": 0.8,
+      "idea_review_issues": "# 研究设想质量评审报告（独立第二轮）\n\n**课题**: general-quantum-geometry-inversion-20260726\n**评审对象**: 00_research_idea.md（当前版本，最后更新 2026-08-13）\n**评审日期**: 2026-08-13\n**评审轮次**: r1-a2（独立第二轮，不依赖 r1-a1 结论）\n**评审者角色**: NSFC 面上项目函评专家视角\n\n---\n\n## 0. 前置说明\n\n本轮为对 00_research_idea.md 当前版本的独立评审。r1-a1 评审时该文件为空白模板，现已填充为完整的 139 行研究设想文档（~17KB），涵盖研究背景、现存空白、研究内容与方案、技术路线、创新点、来源可靠性六个部分。本轮仅评审该文件本身的内容质量，不交叉对照 03/04 阶段的其他文件。\n\n---\n\n## 1. 科学问题清晰度（clarity）\n\n### 评分：0.85\n\n**核心科学问题概括（可一句话复述）**：在量子光场（BSV）驱动统计与中等关联材料（CDW）电子结构两个边界条件同时被突破后，HHG 谱能否独立",
+      "idea_review_at": "2026-08-13T02:01:55Z",
+      "idea_review_passed": true
     },
     "key-transient-quantum-phase-optical-20260726": {
       "status": "optimizing",
@@ -6572,7 +6966,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-13T00:10:29Z",
+      "updated_at": "2026-08-13T04:00:23Z",
       "optimization_rounds": 0,
       "last_score": 0.74,
       "score_history": [
@@ -7062,12 +7456,29 @@
           "issues_count": 15,
           "high_issues": 5,
           "at": "2026-08-12T23:31:13Z"
+        },
+        {
+          "round": 1,
+          "score": 0.74,
+          "dim_scores": {
+            "innovation": 0.8,
+            "feasibility": 0.7,
+            "rigor": 0.7,
+            "expression": 0.65
+          },
+          "weakest_dim": "expression",
+          "focus_section": "full_review",
+          "section_passed": false,
+          "issues_count": 11,
+          "high_issues": 5,
+          "at": "2026-08-13T01:29:27Z"
         }
       ],
       "section_passes": {
         "rationale": false,
         "content": false,
-        "scheme": false
+        "scheme": false,
+        "full_review": false
       },
       "human_feedback_count": 1,
       "transition_history": [
@@ -7124,8 +7535,8 @@
       ],
       "last_dim_scores": {
         "innovation": 0.8,
-        "feasibility": 0.78,
-        "rigor": 0.65,
+        "feasibility": 0.7,
+        "rigor": 0.7,
         "expression": 0.65
       },
       "worker_minute": 17,
@@ -7672,15 +8083,91 @@
           "step": "critic",
           "section_key": "full_review",
           "round": 1,
-          "status": "failed",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r1-scheme-writer"
           ],
-          "attempts": 1,
+          "attempts": 2,
           "scheduled_at": "",
-          "started_at": "2026-08-12T23:35:57Z",
-          "finished_at": "2026-08-13T00:10:29Z",
-          "last_error": "运行超时/进程僵死",
+          "started_at": "2026-08-13T00:30:32Z",
+          "finished_at": "2026-08-13T00:37:13Z",
+          "last_error": "",
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-13T00:30:32Z",
+              "error": "运行超时/进程僵死",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 1
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r1-full_review-gap_identify",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "gap_identify",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r1-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T00:40:34Z",
+          "finished_at": "2026-08-13T00:40:56Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r1-full_review-lit_search",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_search",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r1-full_review-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T00:45:35Z",
+          "finished_at": "2026-08-13T01:03:10Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r1-full_review-lit_read",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_read",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r1-full_review-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T01:05:38Z",
+          "finished_at": "2026-08-13T01:08:36Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r1-full_review-lit_note",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_note",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r1-full_review-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-13T01:10:39Z",
+          "finished_at": "2026-08-13T01:10:39Z",
+          "last_error": "",
           "cron_job_id": ""
         },
         {
@@ -7689,14 +8176,15 @@
           "step": "writer",
           "section_key": "full_review",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r1-full_review-critic"
+            "general-order-parameter-ultrafast-readout-20260727-r1-full_review-critic",
+            "general-order-parameter-ultrafast-readout-20260727-r1-full_review-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-13T01:15:40Z",
+          "finished_at": "2026-08-13T01:29:27Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -7715,7 +8203,15 @@
           "started_at": "",
           "finished_at": "",
           "last_error": "",
-          "cron_job_id": ""
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-13T01:35:41Z",
+              "error": "超时(300s)",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 2
         },
         {
           "job_id": "general-order-parameter-ultrafast-readout-20260727-r1-references-writer",
@@ -7841,6 +8337,11 @@
           "step": "lit_search",
           "detail": "agent_loop_failed→LiteratureService",
           "at": "2026-08-12T23:01:52Z"
+        },
+        {
+          "step": "lit_search",
+          "detail": "agent_loop_failed→LiteratureService",
+          "at": "2026-08-13T00:51:36Z"
         }
       ],
       "low_score_alert": true,
@@ -7993,7 +8494,7 @@
           "description": "| #H1        | `anti_ai_patterns.remove` 超长句（>120 字 [high]） | 表达 0.60—0.69      |",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -8002,7 +8503,7 @@
           "description": "### [critical] consistency — §3 L43 损伤阈值 0.8 V/Å 数学不自洽",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -8011,7 +8512,7 @@
           "description": "### [high] anti_ai — §2—§5 多段 8 句超长句（>120 字）",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -8020,7 +8521,7 @@
           "description": "### [high] narrative — 缺独立\"可行性分析\"小节（structural）",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -8029,7 +8530,7 @@
           "description": "### [high] boundary — 跨章节内容重复（多处）",
           "first_seen_round": 1,
           "last_seen_round": 1,
-          "round_resolved": null,
+          "round_resolved": 1,
           "stale": false
         },
         {
@@ -8038,15 +8539,65 @@
           "description": "### [high] red_line — \"首次…\" 优先权表述检索范围不足",
           "first_seen_round": 1,
           "last_seen_round": 1,
+          "round_resolved": 1,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "full_review",
+          "description": "### [critical] consistency — scheme §3 损伤阈值 0.8 V/Å 算术与物理双重不自洽（历史 P0 残留）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "full_review",
+          "description": "### [high] red_line — scheme §5 创新点 2\"首次…\"优先权表述检索范围不足（历史遗留残留）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "full_review",
+          "description": "### [high] consistency — Néel 温度拼写错误\"Née 温度\"4 处（术语规范性）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "full_review",
+          "description": "### [high] anti_ai — 三章 >80 字超长句 54 处（段落密度偏离范本）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "full_review",
+          "description": "### [high] boundary — 跨章节内容重复（年度计划 + CrSb 选择理由 + 创新点）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "full_review",
+          "description": "### [high] boundary — content §2.2/§2.4 含研究方案技术细节（越界）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
           "round_resolved": null,
           "stale": false
         }
       ]
     }
   },
-  "updated_at": "2026-08-13T00:10:29Z",
-  "key-transient-quantum-phase-optical-20260726": {
-    "pipeline_jobs": [],
-    "cron_failures": []
-  }
+  "updated_at": "2026-08-13T04:38:41Z"
 }

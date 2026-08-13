@@ -8,9 +8,22 @@ test_literature_service.py — LiteratureService 解析器单元测试（v6.8.3 
     - _try_parse_pipe_or_table: 管道符 / Markdown 表格格式
     - _try_parse_natural_language: 兜底 arxiv_id 提取
     - _needs_metadata 标记正确
+    - kb_text.build_frontmatter 对 list[dict] 不抛 unhashable type
+    - _ingest_new_papers 返回 {ingested, failed, skipped} 计数
 
-注意：
-    本测试不调用 LLM API，仅验证解析逻辑。
+原则：
+    本测试为**纯单元测试**——不调用 LLM API、不发起任何网络请求、不写入
+    真实 knowledge/ 数据域，全部在 create_isolated_env() 隔离目录内运行。
+
+历史：
+    v6.8.32 移除了原 _test_lit_read_wiki_persistence / _test_link_to_proposal_after_read
+    两个用例。根因：literature_service.py 的 WIKI_PAPERS_DIR / RAW_PAPERS_DIR 是
+    模块级常量，import 时即绑定真实 knowledge/ 绝对路径，patch_module_root() 无法
+    覆盖已绑定常量。这两个用例调用 svc.read() 会发起真实 arxiv 网络请求，并直接
+    写入（甚至销毁性覆盖）真实 knowledge/wiki/papers/ 下的深度阅读笔记，违背
+    AGENTS.md「测试零污染」与「knowledge 为共享只读域」两条铁律。如需回归
+    read()/link_to_proposal() 的端到端链路，应改用注入假 fetcher + monkeypatch
+    路径常量的方式，确保隔离。
 """
 
 import sys
@@ -107,7 +120,7 @@ class LiteratureServiceParserTests(TestSuite):
     # 抛 unhashable type，导致 _ingest_new_papers 静默失败。
     # ─────────────────────────────────────────────
     def _test_build_frontmatter_string_list_preserves_old_behavior(self):
-        """字符串列表（hashable）走原 dedup 路径，输出 [\"a\",\"b\"] 形式。"""
+        """字符串列表（hashable）走原 dedup 路径，输出 ["a","b"] 形式。"""
         from kb_text import build_frontmatter
         text = build_frontmatter({"tags": ["a", "b", "a", "c"]})
         # 旧行为：去重保留顺序 → ["a", "b", "c"]
@@ -181,6 +194,9 @@ class LiteratureServiceParserTests(TestSuite):
     def _test_ingest_new_papers_handles_unhashable_dict_list(self):
         """v6.8.20 核心回归：_ingest_new_papers 在 status_history 含 dict 时
         不抛 unhashable type，能成功把论文写入 KB。
+
+        注意：本用例写入的是 create_isolated_env() 临时目录下的 RAW_DIR/papers
+        （经 patch_module_root 重定向），不触及真实 knowledge/ 数据域。
         """
         papers = [
             {"arxiv_id": "2401.99999", "title": "Regression Test Paper",
@@ -197,7 +213,7 @@ class LiteratureServiceParserTests(TestSuite):
                        f"含 status_history[dict] 的论文应正常入库（实际 {result}）")
         self.assert_eq(result.get("failed"), 0,
                        f"不应有失败（实际 {result}）")
-        # 验证文件确实落盘
+        # 验证文件确实落盘（隔离目录内）
         raw_dir = self.lit_svc_mod.RAW_DIR / "papers"
         written = list(raw_dir.glob("*2401.99999*.md"))
         self.assert_eq(len(written), 1, f"KB 中应找到 1 个文件（实际 {len(written)}）")
@@ -205,55 +221,6 @@ class LiteratureServiceParserTests(TestSuite):
             content = written[0].read_text(encoding="utf-8")
             self.assert_true('"status": "pool"' in content,
                              f"status_history 字段已写入文件（实际 {content[:300]!r}）")
-
-    def _test_lit_read_wiki_persistence(self):
-        """v6.8.18 fix: lit_read 成功路径下，LiteratureService.read() 必须建立 wiki 页面。
-
-        回归：executor._run_lit_read_step 步骤1 (agent loop 成功) 调用 read() 后，
-        knowledge/wiki/papers/{arxiv_id}.md 必须存在。否则 lit_note.link_to_proposal()
-        会因 wiki 页面不存在返回 False，导致 used_by_proposals 反向链接断裂。
-        """
-        aid = "2606.22714"
-        # 先确保不存在
-        wiki_path = self.lit_svc_mod.WIKI_PAPERS_DIR / f"{aid}.md"
-        if wiki_path.exists():
-            wiki_path.unlink()
-
-        # 调用 read()（模拟 lit_read 成功路径走 LiteratureService）
-        result = self.svc.read(aid, proposal_id="test-lit-read-fix", force=True)
-        self.assert_eq(result.get("cached"), False, "首次读取 cached=False")
-        self.assert_true(bool(result.get("content")), "返回内容非空")
-
-        # 验证 wiki 文件已创建
-        self.assert_true(wiki_path.exists(),
-                         f"wiki 页面必须存在（路径 {wiki_path}）")
-        # 验证 used_by_proposals 已写入
-        meta = self.svc.kw_get(f"wiki/papers/{aid}.md")
-        self.assert_true(meta is not None, "通过 kw_get 能取到 wiki 页面")
-        if meta:
-            used_by = meta.get("meta", {}).get("used_by_proposals", [])
-            self.assert_true("test-lit-read-fix" in (used_by if isinstance(used_by, list) else [used_by]),
-                             f"used_by_proposals 应包含 proposal_id（实际 {used_by!r}）")
-
-    def _test_link_to_proposal_after_read(self):
-        """v6.8.18 fix: read() 之后 link_to_proposal() 必须成功。
-
-        回归：模拟 lit_read 成功 → lit_note 调 link_to_proposal 的完整链路，
-        验证不再因 wiki 页面不存在返回 False。
-        """
-        aid = "2502.09427"
-        wiki_path = self.lit_svc_mod.WIKI_PAPERS_DIR / f"{aid}.md"
-        if wiki_path.exists():
-            wiki_path.unlink()
-
-        # 步骤1：lit_read 成功路径
-        read_result = self.svc.read(aid, proposal_id="general-bsv-driven-hhg-quantum-20260726", force=True)
-        self.assert_true(bool(read_result.get("content")), "lit_read 返回内容")
-
-        # 步骤2：lit_note.link_to_proposal 不再报"wiki 页面不存在"
-        linked = self.svc.link_to_proposal(aid, "general-bsv-driven-hhg-quantum-20260726",
-                                           citation_location="adversarial-review")
-        self.assert_true(linked, "link_to_proposal 在 wiki 存在时应返回 True")
 
     def run_tests(self):
         self._test_json_array_clean()
@@ -268,5 +235,3 @@ class LiteratureServiceParserTests(TestSuite):
         self._test_build_frontmatter_mixed_list_falls_back_to_json()
         self._test_ingest_new_papers_returns_counts()
         self._test_ingest_new_papers_handles_unhashable_dict_list()
-        self._test_lit_read_wiki_persistence()
-        self._test_link_to_proposal_after_read()

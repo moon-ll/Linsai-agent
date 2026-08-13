@@ -105,7 +105,7 @@ python3 scripts/weekend_orchestrator.py --reflection --dry-run         # 周末�
 python3 scripts/proposal_lifecycle.py --orchestrate                    # 手动执行每日编排
 python3 scripts/proposal_lifecycle.py --micro-scheduler                # 手动触发微调度器
 python3 scripts/proposal_lifecycle.py --repair --dry-run               # 链路修复 dry-run
-python3 scripts/lifecycle_monitor.py --check                           # 健康检查（dry-run）
+python3 scripts/lifecycle_monitor.py --dry-run                         # 健康检查（预览，不通知）
 python3 scripts/orchestrator.py --dashboard                            # 总控仪表盘
 python3 scripts/prompt_optimizer.py analyze                             # Prompt 优化分析
 python3 scripts/prompt_optimizer.py auto                                # Prompt 自动优化（cron 入口）
