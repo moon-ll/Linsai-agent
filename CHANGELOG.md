@@ -1,5 +1,24 @@
 # 变更记录
 
+## v6.8.37 - 2026-08-13 修复 references/critic 检验超时阈值偏紧导致课题卡住
+
+### 问题
+- 晚间时段检查发现 general-quantum-geometry-inversion 的 references/critic 检验连续 3 次
+  超时(300s)、重试耗尽后 stuck，本轮 references 模块缺失。
+- 根因：`_run_critic` 的 references 分支用 `min(timeout, 300)` 把检验硬限在 300s
+  （v6.8.3-fix10 刻意设为「轻量化」），但调用方传入 `critic_timeout=600`，且 references
+  丰富的课题实际需 >300s；与 constants.py「critic 900s」的设计意图也不符。
+
+### 修复
+- `optimize.py` references 检验超时 `min(timeout, 300)` → `min(timeout, 600)`：与调用方
+  critic_timeout 默认值一致，仍短于主 critic 900s（references 不评创新/可行性，较轻）。
+- 运行时重置 general-quantum-geometry-inversion 卡住的 references/critic job（attempts=3/failed
+  → 0/pending），其依赖 full_review-writer 已 done，下个时段将用新阈值重跑。
+  （该重置为运行时状态，记于 _lifecycle.json，不入版本库。）
+
+### 验证
+- py_compile 通过；self_test --module 406/406 全绿
+
 ## v6.8.36 - 2026-08-13 历史优化报告清洗 + 测试锁隔离（补 v6.8.35 两个后续项）
 
 ### 任务1：历史脏 optimization-report 清洗

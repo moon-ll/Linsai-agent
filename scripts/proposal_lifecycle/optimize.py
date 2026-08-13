@@ -735,7 +735,11 @@ class OptimizeMixin:
                 f"（注：创新性和可行性填 N/A，综合评分为严谨性和完整性的均值）\n"
                 f"将检验报告写入：{report_path}\n"
             )
-            return self._run_hermes("critic", prompt, min(timeout, 300))
+            # v6.8.37: references 检验超时从 300s 放宽到 600s。300s 对 references 丰富
+            # 的课题偏紧（quantum-geometry 曾连续 3 次 300s 超时、重试耗尽卡住）；
+            # 600s 与调用方 critic_timeout 默认值一致，仍短于主 critic 的 900s
+            # （references 评审不评创新/可行性，较主 critic 轻）。
+            return self._run_hermes("critic", prompt, min(timeout, 600))
 
         elif is_full_review:
             focus_text = (
