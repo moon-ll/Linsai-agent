@@ -164,10 +164,36 @@ def _copy_essentials(tmp_root: Path):
     )
 
 
+def isolate_logger(tmp_root: Path) -> None:
+    """将 logger 文件输出重定向到隔离目录，防止测试日志污染真实 linsai.log。
+
+    根因：logger.py 的 LOGS_DIR 在模块导入时绑定真实路径，
+    patch_module_root 无法覆盖；_root_configured 全局标志阻止重新初始化。
+    此函数强制重置 logger 状态，将文件 handler 指向 tmp_root/logs/。
+    """
+    import logging
+    import logger as _logger_mod
+
+    # 重置全局配置标志
+    _logger_mod._root_configured = False
+
+    # 更新 LOGS_DIR 指向隔离目录
+    _logger_mod.LOGS_DIR = tmp_root / "logs"
+    (tmp_root / "logs").mkdir(parents=True, exist_ok=True)
+
+    # 清除旧 handlers，避免写入真实日志文件
+    root = logging.getLogger("linsai")
+    root.handlers = []
+
+    # 重新初始化（文件 handler 将指向隔离目录）
+    _logger_mod.setup_logging()
+
+
 def create_isolated_env() -> Path:
     """创建完整隔离环境并返回根目录"""
     tmp = _make_isolated_root()
     _copy_essentials(tmp)
+    isolate_logger(tmp)
     return tmp
 
 
