@@ -113,6 +113,9 @@ def cron_list() -> List[Dict[str, Any]]:
             "last_status": j.get("last_status", ""),
             "deliver": j.get("deliver", ""),
             "paused_at": paused_at or "",
+            # v6.8.30: 暴露 created_at 供 cleanup_cron_duplicates 排序"保留最新"
+            # 旧版缺失此字段导致去重排序键全为空、5× 同名 cron 副本累积未清理
+            "created_at": j.get("created_at", ""),
         })
 
     # active 优先，再按名称排序
