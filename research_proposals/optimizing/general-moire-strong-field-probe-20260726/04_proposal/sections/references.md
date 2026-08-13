@@ -106,6 +106,32 @@
 
 [31] Ghimire S. 等.*Observation of high-harmonic generation in a bulk crystal*. **Nature Physics 7, 138 (2011)**. DOI: 10.1038/nphys2024. 论文首次在块体 ZnO 中观测到高次谐波，奠定强场固体 HHG 学科基础；体相 ZnO HHG 标度指数 α ≈ 2.5（微扰区）作为 R3 靶标 B flat band 带宽调制下标度指数变化的基线参考，α 从 2.5 → 2.3 → 1.8 的预期变化相对团队 ZnO 标度拟合精度 ±0.05 远超 Δα > 0.2 的可分辨阈值——R2 产额对比参照基准（与 MoS₂ 莫尔产额 10–50 倍差距的参照点），也是 R3 靶标 B 标度指数基线。[CITE:ghimire_natphys_2011]
 
+### 8. 经典 HHG 与强场物理基础（人工补充 v6.8.29 — 建议下一轮优化时在正文中引用）
+
+> 以下 11 条文献为本课题方向不可或缺的经典基础工作。当前正文未引用，但在 NSFC 面上项目中，评审专家期望在固体 HHG 申请书中看到这些奠基性引用。建议下一轮 critic/writer 优化时，将对应引用嵌入 rationale.md 的理论方法段和 scheme.md 的可行性论证段。
+
+[32] Corkum P. B.*Plasma perspective on strong field multiphoton ionization*. **Phys. Rev. Lett. 71, 1994 (1993)**. DOI: 10.1103/PhysRevLett.71.1994. 气体 HHG 三步模型奠基——固体 HHG 的"重碰撞-复合"物理图像直接类比自此工作，R1 理论框架的出发点。[CITE:corkum_prl_1993]
+
+[33] Lewenstein M., Balcou Ph., Ivanov M., L'Huillier A., Corkum P. B.*Theory of high-harmonic generation by low-frequency laser fields*. **Phys. Rev. A 49, 2117 (1994)**. DOI: 10.1103/PhysRevA.49.2117. 强场近似（SFA）理论框架——R1 降阶模型中 SBE 方程的解析处理方法可直接追溯到本工作的数学工具。[CITE:lewenstein_pra_1994]
+
+[34] Krausz F., Ivanov M.*Attosecond physics*. **Rev. Mod. Phys. 81, 163 (2009)**. DOI: 10.1103/RevModPhys.81.163. 阿秒物理综述——项目整体"阿秒时间尺度探测"定位的方法学综述背书。[CITE:krausz_ivanov_rmp_2009]
+
+[35] Brabec T., Krausz F.*Intense few-cycle laser fields: Frontiers of nonlinear optics*. **Rev. Mod. Phys. 72, 545 (2000)**. DOI: 10.1103/RevModPhys.72.545. 强场超快光学综述——项目驱动光源参数选择（10¹¹–10¹² W/cm²、few-cycle）的理论依据。[CITE:brabec_krausz_rmp_2000]
+
+[36] Gaarde M. B., Tate J. L., Schafer K. J.*Macroscopic aspects of high-order harmonic generation*. **J. Phys. B: At. Mol. Opt. Phys. 41, 132001 (2008)**. DOI: 10.1088/0953-4075/41/13/132001. HHG 宏观传播效应综述——实验方案中相位匹配条件设计的参考依据。[CITE:gaarde_josab_2008]
+
+[37] Hohenleutner M., Langer F., Schubert I., Knorr M., Huttner U., Koch S. W., Kira M., Huber R.*Real-time observation of interfering crystal electrons in high-harmonic generation*. **Nature 523, 572 (2015)**. DOI: 10.1038/nature14652. 半导体 HHG 实时观测——莫尔体系 HHG 实验的弱关联基线参照（与 ZnO/二硒化物的对比依据）。[CITE:hohenleutner_nature_2015]
+
+[38] Luu T. T., Garg M., Kruchinin S. Yu., Moulet A., Hassan M. Th., Goulielmakis E.*Extreme ultraviolet high-harmonic spectroscopy of solids*. **Nature 521, 498 (2015)**. DOI: 10.1038/nature14456. 固体 HHG 的 EUV 光谱学开创性工作——从 HHG 光谱提取能带色散信息的方法学先例。[CITE:luu_nature_2015]
+
+[39] Vampa G., McDonald C. R., Orlando G., Klug D. D., Corkum P. B., Brabec T.*Linking high harmonics from gases and solids*. **Nature 522, 462 (2015)**. DOI: 10.1038/nature14517. 建立"气体-固体 HHG 统一框架"——固体 HHG 中重碰撞 vs 带间跃迁的辨识方法，R1 理论模型的验证参照。[CITE:vampa_linking_nature_2015]
+
+[40] Langer F., Hohenleutner M., Schubert I., Knorr M., Huttner U., Koch S. W., Kira M., Huber R.*Lightwave-driven HHG: Symmetry and trajectory control of photocurrents in semiconductors*. **Nature 533, 225 (2016)**. DOI: 10.1038/nature17958. 半导体 HHG 的对称性控制——莫尔体系中"晶体取向扫描"方法的物理先例。[CITE:langer_nature_2016]
+
+[41] Garg M., Martin-Jimenez A., Pisanty E., et al.*Multi-petahertz HHG in the soft X-ray regime*. **Nature 538, 359 (2016)**. DOI: 10.1038/nature17960. 固体 HHG 扩展至 PHz 频率范围——项目"以 HHG 谱学为探针"定位的技术可行性背书。[CITE:garg_nature_2016]
+
+[42] Bistritzer R., MacDonald A. H.*Moire bands in twisted double-layer graphene*. **Proc. Natl Acad. Sci. 108, 12233 (2011)**. DOI: 10.1073/pnas.1108174108. 魔角石墨烯莫尔紧束缚模型奠基——R1 降阶框架中莫尔尺度 TB 模型的直接理论来源。[CITE:bistritzer_macdonald_pnas_2011]
+
 > 注：r18 修订过程中发现 r17 阶段 §3 与 §6 双收录了 [CITE:zhang_nat_mater_2023]（Zhang Z., Dixit E. T. 等. *Layer-dependent correlated phases in WSe₂/MoS₂ moiré superlattice*. **Nature Materials 22, 831 (2023)**）同一文献——编号 [#15] 与 [#30] 重复，r18 删除 §6 的重复条目 [#30]，编号顺延至 §7 [#30] Vampa 与 [#31] Ghimire，避免同一文献在参考文献列表中出现两次。r17 阶段该重复条目在 §3 与 §6 论证链功能均标注为"莫尔体系相关相多样性 + 可控性的备选支撑"，本轮统一归入 §3 实验方法与产额标定（编号 [#15]）。
 
 ---

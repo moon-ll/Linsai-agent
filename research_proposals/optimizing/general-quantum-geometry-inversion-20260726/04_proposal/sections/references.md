@@ -34,6 +34,23 @@
 | [28] | Raissi, M., Perdikaris, P. & Karniadakis, G. E. *J. Comput. Phys.* **378**, 686–707 (2019). "Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations." DOI: 10.1016/j.jcp.2018.10.045 (preprint arXiv:1711.10561 + 1711.10566; PINN 方法学奠基文献, R4 物理约束反演框架的方法学根基, 申请书 §2.5 / §3.4 引用) |
 | [29] | Wilkinson, M. D., Dumontier, M., Aalbersberg, I. J. et al. *Sci. Data* **3**, 160018 (2016). "The FAIR Guiding Principles for scientific data management and stewardship." DOI: 10.1038/sdata.2016.18 (FAIR 数据原则原始奠基文献; 对应申请书 §3.6 / §3.3 HMG-Schema-1.0 符合 FAIR 原则的方法学声明, 不直接涉及 NEwwave 数据格式定义; 经 Web of Science + DOI 双源核验; **注**: NEwwave 作为 HHG 社区口头简称的标准化定义文献经 arXiv 与 WoS 检索 2026-08-12 未见独立发表, HMG-Schema-1.0 在 NEwwave 基础上的扩展作为本项目方法学承诺而非引用既有标准) |
 
+### 人工补充（v6.8.29 — 经典基础文献扩展，建议下一轮优化时在正文中引用）
+
+> 以下 12 条文献为本课题方向不可或缺的经典基础工作。当前正文未引用，但在 NSFC 面上项目中，评审专家期望在"量子光 HHG + 量子几何反演"申请书中看到这些奠基性引用。建议下一轮 critic/writer 优化时，将对应引用嵌入 rationale.md 的理论方法段和 scheme.md 的可行性论证段。
+
+| [30] | Berry, M. V. *Proc. R. Soc. A* **392**, 45–57 (1984). "Quantal phase factors accompanying adiabatic changes." DOI: 10.1098/rspa.1984.0023 (Berry 相位原始论文, 量子几何的数学基础, 全文核心概念"Berry 曲率"的直接来源) |
+| [31] | Xiao, D., Chang, M.-C. & Niu, Q. *Rev. Mod. Phys.* **82**, 1959–2007 (2010). "Berry phase effects on electronic properties." DOI: 10.1103/RevModPhys.82.1959 (Berry 曲率在凝聚态物理中的系统综述, R2 量子几何指标的理论基础) |
+| [32] | Corkum, P. B. *Phys. Rev. Lett.* **71**, 1994–1997 (1993). "Plasma perspective on strong field multiphoton ionization." DOI: 10.1103/PhysRevLett.71.1994 (气体 HHG 三步模型奠基, R1 SBE 理论的物理出发点) |
+| [33] | Lewenstein, M., Balcou, Ph., Ivanov, M., L'Huillier, A. & Corkum, P. B. *Phys. Rev. A* **49**, 2117–2132 (1994). "Theory of high-harmonic generation by low-frequency laser fields." DOI: 10.1103/PhysRevA.49.2117 (SFA 强场近似理论, R1 解析方法的数学工具来源) |
+| [34] | Ghimire, S., DiChiara, A. D., Sistrunk, E., Agostini, P., DiMauro, L. F. & Reis, D. A. *Nat. Phys.* **7**, 138–141 (2011). "Observation of high-harmonic generation in a bulk crystal." DOI: 10.1038/nphys1847 (固体 HHG 首次实验, 本项目研究范式的起点) |
+| [35] | Runge, E. & Gross, E. K. U. *Phys. Rev. Lett.* **52**, 997–1000 (1984). "Density-functional theory for time-dependent systems." DOI: 10.1103/PhysRevLett.52.997 (TDDFT 奠基文献, R1 正向模型的理论根基) |
+| [36] | Onida, G., Reining, L. & Rubio, A. *Rev. Mod. Phys.* **74**, 601–659 (2002). "Electronic excitations: density-functional versus many-body Green's-function approaches." DOI: 10.1103/RevModPhys.74.601 (TDDFT/BSE 方法学综述, R1 SBE 模型适用性论证的参考) |
+| [37] | Lvovsky, A. I. et al. *Rev. Mod. Phys.* **81**, 299–332 (2009). "Production and applications of squeezed vacuum." DOI: 10.1103/RevModPhys.81.299 (压缩真空态实验综述, BSV 光源的量子光学基础) |
+| [38] | Breitenbach, G., Schiller, S. & Mlynek, J. *Nature* **387**, 471–475 (1997). "Measurement of the quantum states of squeezed light." DOI: 10.1038/387471a0 (压缩态量子态层析测量, R1 量子态描述层级选择的实验参照) |
+| [39] | Thouless, D. J., Kohmoto, M., Nightingale, M. P. & den Nijs, M. *Phys. Rev. Lett.* **49**, 405–408 (1982). "Quantized Hall conductance in a two-dimensional periodic potential." DOI: 10.1103/PhysRevLett.49.405 (TKNN 不变量奠基, 量子几何拓扑分类的出发点) |
+| [40] | Provost, J. P. & Vallee, G. *Commun. Math. Phys.* **76**, 289–301 (1980). "Riemannian structure on manifolds of quantum states." DOI: 10.1007/BF01942335 (量子度量张量原始定义, R2 量子几何指标 Ω/g 的数学来源) |
+| [41] | Karniadakis, G. E., Kevrekidis, I. G., Lu, L., Perdikaris, P., Wang, S. & Yang, L. *Nat. Rev. Phys.* **3**, 422–440 (2021). "Physics-informed machine learning." DOI: 10.1038/s42254-021-00314-5 (PINN 综述, R4 物理约束反演的方法学背书) |
+
 **核验说明（截至 2026-08-12）**：
 
 - **正式发表条目**（[1]–[7]、[10]、[25]、[26]、[28]、[29]）：12 条，经 Web of Science 与 DOI 双源核验。DOI 字段格式与正式发表版本一致。

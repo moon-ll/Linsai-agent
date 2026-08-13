@@ -6,8 +6,8 @@ project_type: "general"
 latest_round: 7
 last_score: 0.74
 status: "optimizing"
-created: "2026-08-13T00:11:37Z"
-updated: "2026-08-13T00:11:37Z"
+created: "2026-08-13T05:00:25Z"
+updated: "2026-08-13T05:00:25Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -20,7 +20,7 @@ confidence: 1.0
 **最新轮次**：第 7 轮
 **当前分数**：0.74
 **状态**：优化中
-**同步时间**：2026-08-13T00:11:37Z
+**同步时间**：2026-08-13T05:00:25Z
 
 ---
 
@@ -29,10 +29,10 @@ confidence: 1.0
 | 章节 | 标题 | 行数 |
 |------|------|------|
 | content | content | 64 |
-| full_review | full_review | 78 |
+| full_review | full_review | 80 |
 | rationale | rationale | 100 |
 | references | references | 164 |
-| scheme | scheme | 111 |
+| scheme | scheme | 115 |
 
 ## 课题简介
 
@@ -43,7 +43,7 @@ confidence: 1.0
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
 **当前状态**：优化中（第0轮，score 0.74）
 **启动日期**：2026-07-27
-**最后更新**：2026-08-12
+**最后更新**：2026-08-13
 
 ---
 

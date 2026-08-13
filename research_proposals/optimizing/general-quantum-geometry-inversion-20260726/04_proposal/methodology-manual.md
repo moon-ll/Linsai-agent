@@ -778,9 +778,13 @@ HMG-Schema-1.0 在 NEwwave 基础上扩展三个关键字段，专门为**固体
 
 **与 NEwwave 兼容性**：HMG-Schema-1.0 通过 `schema_uri` 字段声明扩展，HDF5 谱数据文件结构与 NEwwave 兼容（即 NEwwave 兼容的读取器可读 HMG 谱数据，缺少的元数据字段为 null）。
 
+**FAIR 原则符合性声明**：HMG-Schema-1.0 严格遵循 FAIR 数据原则 [29]（Findable / Accessible / Interoperable / Reusable）。Findable：数据集通过 Zenodo DOI 持久标识符发布；Accessible：通过 HTTPS 标准协议开放访问；Interoperable：基于 HDF5 + JSON Schema 标准格式；Reusable：含完整元数据（实验参数、样品信息、激光参数、温度、晶体取向、关联参数 $U/W$）。HMG-Schema-1.0 不申请专利——与 ICFO 联合推广通过 Zenodo 与 GitHub 开源发布，符合 FAIR 原则与社区开放科学的共识。
+
 ---
 
 ### 2D. R4 对应：PINN 反演框架的技术细节
+
+> **方法学根基**：PINN 框架的原始定义见 Raissi 等 *J. Comput. Phys.* **378**, 686-707 (2019) [28]（arXiv:1711.10561 / 1711.10566）。本项目将其推广至量子几何反演场景，三项物理约束（Hubbard-$U$、对称性、自能正则化）的联合嵌入是该框架的特定应用。
 
 #### 2D.1 网络架构
 
