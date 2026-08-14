@@ -1,13 +1,14 @@
 ---
 title: "北大HHG团队"
-type: "person"
+type: "people"
 created: "2026-06-17T12:40:33Z"
-updated: "2026-06-17T12:40:33Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["人物", "团队", "中国", "固体HHG", "#type/person", "#status/mature", "#status/growing"]
 related: ["固体高次谐波"]
-aliases: ["Peking-University-HHG", "北大"]
+source_raw: ""
 growth_stage: "growing"
 confidence: 0.6
+aliases: ["Peking-University-HHG", "北大"]
 ---
 
 # 北京大学 HHG 团队
@@ -25,3 +26,9 @@ confidence: 0.6
 ## 来源
 
 - `hhg-teams-report.md`；raw/papers/ 中多篇中国团队论文
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[固体高次谐波]]
+<!-- /linsai-wikilinks -->

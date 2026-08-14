@@ -1,13 +1,14 @@
 ---
 title: "Corkum"
-type: "person"
+type: "people"
 created: "2026-06-17T12:40:33Z"
-updated: "2026-06-17T12:40:33Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["人物", "三步模型", "加拿大", "#type/person", "#status/mature"]
 related: ["三步模型", "高次谐波产生"]
-aliases: ["Paul-Corkum", "科克姆"]
+source_raw: ""
 growth_stage: "mature"
 confidence: 0.9
+aliases: ["Paul-Corkum", "科克姆"]
 ---
 
 # Paul Corkum
@@ -25,3 +26,10 @@ Corkum 是 HHG 领域的奠基人。他 1993 年提出的三步模型至今仍�
 ## 来源
 
 - `hhg-teams-report.md`；三步模型原始文献 PRL 71, 1994
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[三步模型]]
+- [[高次谐波产生]]
+<!-- /linsai-wikilinks -->

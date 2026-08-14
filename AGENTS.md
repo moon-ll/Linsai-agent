@@ -2,7 +2,7 @@
 
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
-> 最后更新：2026-08-07
+> 最后更新：2026-08-14
 > 提示：完整目录结构见 `docs/PROJECT-STRUCTURE.md`，完整架构说明见 `docs/ARCHITECTURE.md`。
 
 ---
@@ -237,6 +237,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 - **研究设想质量门槛（v6.8.26）**：⑩ idea_review 前置评审（round 1 的 job 链最前端，researcher 对 `00_research_idea.md` 做独立评审，分数 ≥0.70 才允许进入优化；未达标 writer 修复后重审，最多 3 轮）⑪ 结构性缺陷退回（monitor 检测 content/scheme 文件级重复或模块空置 → 设置 `idea_review_required` 标志 → 下一轮自动退回研究设想评审）。
 - **多源学术检索（v6.8.42-v6.8.45）**：`external_fetcher.py` 新增 OpenAlex/Semantic Scholar/PubMed/Crossref 检索源与 `search_academic()` 聚合（DOI/arXiv ID/标题三级去重，任一源失败自动降级）；无 key 匿名模式日均 20-50 次检索足够（OpenAlex 无 key 约 100 次/天 + 24h 缓存）。`literature_service` 支持无 arXiv ID 的期刊论文以 DOI 入库（`{year}-doi-{slug}-{title}.md`）；references 校验步骤在 hermes 检索后叠加多源补充，hermes 无结果时多源自动接管。
 - **API 故障防线（v6.8.46-v6.8.48）**：`_run_hermes` 对 returncode=0 的输出做 API 错误特征检测（429/配额耗尽/余额不足等 10 种），命中即 success=False，防止 MiniMax Token Plan 耗尽期错误文本被解析成伪分数（实测案例：0.81→0.18 污染）；monitor 解析失败（0.0 非真实分）跳过奖惩不误扣；`_extract_dimension_scores` 对 <300 字符短输出不产生分数。
+- **知识库每日治理（v6.8.51）**：`lc-kb-sync` cron（每日 12:40）执行 `kb_auto_sync.py`（多端同步 + 索引/图谱无条件重建）与 `growth_engine.py --apply`（生长阶段晋升）。写入统一走 `kb_wiki` 门面（防双 frontmatter 污染）；索引格式 v2（扁平 chunk + 整型倒排 + 2-gram，157MB→20MB，两段式检索 + 进程内缓存）；简报同步兼容 `research_briefing_*`/`daily_memory_*` 双命名；`health_sensor` 新增 KB 四类告警（索引停更/生长断流/蒸馏积压/图谱失连）。详见 `docs/ARCHITECTURE.md` 知识库数据流转章节。
 
 ---
 
@@ -346,7 +347,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.8.27*
-*日期：2026-08-12*
+*版本：6.8.51*
+*日期：2026-08-14*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

@@ -1,13 +1,14 @@
 ---
 title: "RABBITT"
-type: "method"
+type: "methods"
 created: "2026-06-17T12:40:33Z"
-updated: "2026-06-17T12:40:33Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["表征方法", "阿秒", "干涉", "#type/method", "#topic/HHG", "#status/mature"]
-related: ["三步模型", "Lewenstein模型", "FROG"]
-aliases: ["RABBITT", "重建阿秒拍频干涉", "reconstruction-of-attosecond-beating"]
+related: ["FROG", "Lewenstein模型", "三步模型"]
+source_raw: ""
 growth_stage: "mature"
 confidence: 0.9
+aliases: ["reconstruction-of-attosecond-beating", "重建阿秒拍频干涉"]
 ---
 
 # RABBITT
@@ -30,3 +31,11 @@ RABBITT（Reconstruction of Attosecond Beating By Interference of Two-photon Tra
 ## 来源
 
 - arXiv: 0707.4228（RABBITT vs FROG 对比）；`hhg-methods-report.md`
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[FROG]]
+- [[Lewenstein模型]]
+- [[三步模型]]
+<!-- /linsai-wikilinks -->

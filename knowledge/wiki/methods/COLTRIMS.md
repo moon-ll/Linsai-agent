@@ -1,13 +1,14 @@
 ---
 title: "COLTRIMS"
-type: "method"
+type: "methods"
 created: "2026-06-17T12:40:33Z"
-updated: "2026-06-17T12:40:33Z"
+updated: "2026-08-14T11:15:51Z"
 tags: ["表征方法", "动量谱", "冷靶反冲", "#type/method", "#topic/HHG", "#status/mature", "#status/growing"]
 related: ["VMI"]
-aliases: ["COLTRIMS", "冷靶反冲动量谱", "cold-target-recoil-ion-momentum-spectroscopy"]
+source_raw: ""
 growth_stage: "growing"
 confidence: 0.75
+aliases: ["cold-target-recoil-ion-momentum-spectroscopy", "冷靶反冲动量谱"]
 ---
 
 # COLTRIMS
@@ -25,3 +26,9 @@ COLTRIMS（冷靶反冲动量谱）是"反应显微镜"——同时测量电离�
 ## 来源
 
 - arXiv: 1005.1253（双电离关联）；`hhg-methods-report.md`
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[VMI]]
+<!-- /linsai-wikilinks -->

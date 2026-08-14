@@ -118,6 +118,12 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
   - 周末模式：worker cron 仅工作日运行（`Mon-Fri`），周末由 `weekend_pipeline/` 小任务流水线执行输入发现、输出萃取、链路反思和 KB 健康检查；`lc-weekend-worker` 每 20 分钟推进一个 pending job。
 - **文献驱动**：优先优化与当天简报关键词匹配的课题，节省模型限额。
 - **质量标准**：`memory/nsfc-standards.json` 定义面上/重点/重大三类项目的评分权重、页数限制、模板结构。
+- **知识库数据流转（v6.8.51 重构）**：
+  - **写入口径**：所有 wiki 写入统一走 `kb_wiki.save_wiki_page` 门面（经 `knowledge_base` facade 注入依赖）。门面提供两项防御：① 调用方误传整页文本时自动剥离内层 frontmatter 并合并 meta（消灭双 frontmatter 污染）；② `content=""` 且非 append 时视为仅更新 meta、保留正文。门面统一写生长日志（`log_growth`，trigger=facade）、挂图谱节点与双向链接。提案镜像（`knowledge/research_proposals/`、`wiki/projects/*/proposals/`）是设计例外，允许直写（避免快照污染知识图谱）。
+  - **每日治理（lc-kb-sync cron，12:40）**：`kb_auto_sync.py`（hermes 会话/简报/PDF 同步 + 索引重建 + 图谱重建）+ `growth_engine.py --apply`（growth_stage 规则晋升，seedling→growing→mature，无 LLM 成本）。
+  - **索引格式 v2**（`kb_index.py`）：中文 2-gram 分词（弃 3/4-gram）、扁平 chunk 数组 + 整型倒排 postings、df==1 的中文词条剔除、紧凑 JSON 序列化；157MB → ~20MB，全量重建 ~2s，检索带进程内签名缓存（mtime+size 校验）。`lit_search` 入库后即时重建索引（新文献零检索盲区）。
+  - **简报链（链②）**：`sync_engine.sync_research_briefings` 同时兼容 `research_briefing_*`（旧）与 `daily_memory_*`（hermes 2026-06-08 后新命名），同日双源以 research_briefing 优先，写入走门面。
+  - **健康感知**：`kb_health.get_kb_health()`（`kb_health.py --real` 查看真实指标）+ `health_sensor` 四类 KB 告警（索引停更 >48h / 生长日志断流 >7d / 蒸馏积压 >300 / 图谱连通性 <0.50），经 `lifecycle_monitor` 持久化到系统看板并飞书通知。
 
 ### 6. 林赛总控层（v6.7+）
 

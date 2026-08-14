@@ -1,8 +1,8 @@
 ---
 title: "LHuillier"
-type: "person"
+type: "people"
 created: "2026-06-17T12:40:33Z"
-updated: "2026-06-23T02:42:18Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["人物", "HHG理论", "瑞典", "诺贝尔", "#type/person", "#status/mature"]
 related: ["Krausz", "相位匹配", "高次谐波产生"]
 source_raw: ""

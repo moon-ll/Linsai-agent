@@ -1,8 +1,8 @@
 ---
 title: "每日简报 research_briefing_2026-06-08"
-type: "review"
+type: "reviews"
 created: "research_briefing_2026-06-08T00:00:00Z"
-updated: "2026-06-23T02:42:19Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["每日简报", "HHG", "文献调研"]
 related: ["RABBITT", "固体高次谐波", "相位匹配", "高次谐波产生"]
 source_raw: ""

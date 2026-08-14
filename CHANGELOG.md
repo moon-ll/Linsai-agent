@@ -1,5 +1,87 @@
 # 变更记录
 
+## v6.8.51 - 2026-08-14 知识库治理落地：写入链修复 + 索引 v2 瘦身 + 每日调度
+
+### 背景（知识库评估报告逐项落实）
+评估结论：知识库处于"高速进料的文献堆场"状态，六条治理机制全部停摆——
+写入器双 frontmatter 污染、简报同步断流两个月、索引膨胀 157MB、
+kb_auto_sync 无调度从未运行、健康指标装饰性失真、growth_engine 从未启用。
+本次按 P0（止血）→ P1（瘦身）→ P2（收敛）九项建议逐项落实。
+
+### P0 止血：写入链修复
+- `kb_wiki.py`：`save_wiki_page` 双防御——① 调用方误传整页文本时解析内层
+  frontmatter 合并元数据（根治双 FM 污染）；② content 空且非 append 时保留
+  原正文不清空。门面统一写生长日志（create/update 自动判定）。
+  `_WIKI_TYPES` 补 `reviews`（57 个 review 文件此前对列表完全不可见）。
+- `literature_service.py`：`_save_wiki_paper_note` 重写——去掉 `kw_build`
+  双重构建、修复 `existing.get("content")`→`body` 的历史覆盖 bug、
+  title 优先论文真实题名。
+- 新增 `kb_repair_papers.py`（一次性修复工具）：双 FM 拆分合并 95→0、
+  裸 arXiv ID 标题回填 68 个（从 raw/ 提取题名）、五目录 type 规范化
+  131 处（消灭单复数分裂）。`--self-check` tempfile 隔离通过。
+
+### P0 调度：lc-kb-sync 每日治理 cron
+- `lifecycle/constants.py`：`DEFAULT_KB_SYNC_SCHEDULE = "40 12 * * *"`
+  （上午时段结束后）+ `KB_SYNC_CRON_NAME = "lc-kb-sync"`。
+- `lifecycle/framework.py`：安装流程末尾幂等挂载（cleanup_cron_duplicates +
+  cron_create_no_agent）；wrapper 依次执行 `kb_auto_sync.py` 与
+  `growth_engine.py --apply`（生长阶段自动晋升，此前从未运行）。
+- `lifecycle_monitor.py`：`REQUIRED_CRON_PREFIXES` 追加 lc-kb-sync
+  （缺失自动修复 + 告警）。
+
+### P0 简报链：断流两个月修复
+- `sync_engine.py`：`sync_research_briefings` 双命名兼容（hermes 2026-06-08
+  后改产 `daily_memory_*`）+ 同日双源去重 + 改走 kb 门面写入。
+  回补断流简报 26 篇。
+
+### P1 索引 v2：157MB → 20.7MB
+- `kb_index.py` 重写：格式 v2（扁平 chunk 数组 + 整型倒排 postings）；
+  `kb_text.py` 中文分词 2/3/4-gram 收敛为 2-gram 滑窗；df==1 中文词条剔除
+  （67310 词项中无效单现词占大头）；紧凑 JSON + 原子写入。
+- 两段式检索：IDF 覆盖率预排序 → top 60 候选精确 TF-IDF 重排。
+- 进程内缓存 `_INDEX_CACHE`（path+mtime_ns+size 签名校验）：长驻进程
+  重复检索 240ms→6ms。
+- **索引漂移修复**：v2 重建发现旧 v1 索引漏 432 个文档（mtime 增量机制
+  长期漏文件）；`sync_all` 索引重建从"仅新增论文时"改为无条件
+  （v2 全量 ~2s，日频可接受）；`literature_service` 入库后即时重建。
+- `kb_cleanup.py`：修复 `step5_rebuild_index` 用简化格式覆写 index.json
+  摧毁倒排表的关键 bug，改为委托 `build_index(force=True)`。
+
+### P1 健康指标修正：装饰性 → 真实
+- `kb_health.py`：`_compute_category_coverage` 解开双层嵌套；
+  CLI 新增 `--real`（经门面注入取真实数据）。实测 wiki_count 212→305。
+- `health_sensor.py`：新增知识库四类告警——kb_index_stale（索引停更>48h）、
+  kb_growth_stall（生长日志断流>7d）、kb_distill_backlog（蒸馏积压>300）、
+  kb_graph_disconnect（连通性<0.50）。信号采集经 facade 降级容错。
+
+### P2 收敛：写入口径统一 + 结构清理
+- `weekend_pipeline/output_jobs.py`：`_write_wiki_page` 迁移 kb 门面
+  （单数 type→复数规范化，门面异常回退旧直写保可用）。
+- `kb_importer.py`：hermes JSON null 字段全量防御（`_nz()`）——修复
+  `tldr: null` 导致 `"\n".join` 崩溃（实测导入 19 篇新论文验证）。
+- 结构清理：`knowledge/linsai-copilot-overview/` HTML 移至
+  `docs/archive/html-exports/`；`docs/ARCHITECTURE.md` 新增"知识库数据
+  流转（v6.8.51 重构）"章节（写入口径/每日治理/索引 v2/简报链/健康感知）。
+
+### 实测效果
+| 指标 | 修复前 | 修复后 |
+|------|--------|--------|
+| index.json | 157MB（漏 432 文档） | 20.7MB（1031 文档/14981 chunk） |
+| 检索耗时 | ~2-5s | 240ms 首次 / 6ms 缓存 |
+| 双 frontmatter | 95 个 | 0 |
+| 简报断流 | 2026-06-08 起两个月 | 回补 26 篇，链路恢复 |
+| kb 每日治理 | 无调度从未运行 | lc-kb-sync 12:40 每日 |
+| growth_stage 晋升 | 从未执行 | 32/32 全部 mature |
+| wiki_count（真实） | 212（漏 reviews） | 305 |
+| 图谱连通性 | 0.37 | 0.45（孤儿 2→0） |
+| week_new | 0（生长日志停写） | 169 |
+
+### 测试
+- `self_test --module` 445/445 通过（新增 lc-kb-sync 进 monitor 必需集
+  夹具；kb_repair_papers 自检通过）。
+- 端到端：kb_auto_sync 完整跑通（此前 LaunchAgent 缺失 + None 崩溃双重
+  失效从未成功）；growth_engine --apply 首次执行完成全部晋升。
+
 ## v6.8.50 - 2026-08-14 健康运维体系重构：双平面架构（维持+自优化共享证据层）
 
 ### 架构设计

@@ -1,13 +1,14 @@
 ---
 title: "TDSE求解器"
-type: "method"
+type: "methods"
 created: "2026-06-17T12:40:33Z"
-updated: "2026-06-17T12:40:33Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["计算方法", "TDSE", "数值模拟", "#type/method", "#topic/HHG", "#status/mature", "#status/growing"]
 related: ["Lewenstein模型", "三步模型"]
-aliases: ["TDSE-solver", "含时薛定谔求解", "time-dependent-schrodinger"]
+source_raw: ""
 growth_stage: "growing"
 confidence: 0.8
+aliases: ["TDSE-solver", "time-dependent-schrodinger", "含时薛定谔求解"]
 ---
 
 # TDSE 求解器
@@ -32,3 +33,10 @@ TDSE（含时薛定谔方程）数值求解是 HHG 理论的"ground truth"。Lew
 ## 来源
 
 - `hhg-methods-report.md`；arXiv: 0707.4192（改进模型对比 TDSE）
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[Lewenstein模型]]
+- [[三步模型]]
+<!-- /linsai-wikilinks -->

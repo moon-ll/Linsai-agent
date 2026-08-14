@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "key-transient-quantum-phase-optical-20260726"
 project_type: "key"
 latest_round: 5
-last_score: 0.81
+last_score: 0.18
 status: "optimizing"
-created: "2026-08-14T10:42:40Z"
-updated: "2026-08-14T10:42:40Z"
+created: "2026-08-14T11:32:27Z"
+updated: "2026-08-14T11:32:27Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`key-transient-quantum-phase-optical-20260726`
 **类型**：key
 **最新轮次**：第 5 轮
-**当前分数**：0.81
+**当前分数**：0.18
 **状态**：优化中
-**同步时间**：2026-08-14T10:42:40Z
+**同步时间**：2026-08-14T11:32:27Z
 
 ---
 
@@ -28,7 +28,7 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 108 |
+| content | content | 110 |
 | full_review | full_review | 112 |
 | rationale | rationale | 268 |
 | references | references | 136 |
@@ -65,16 +65,16 @@ confidence: 1.0
 | 1 | 0.07 | 11 | 4 | 2026-07-27 |
 | 2 | 0.54 | 13 | 5 | 2026-07-27 |
 | 3 | 0.71 | 30 | 12 | 2026-07-28 |
-| 4 | 0.18 | 22 | 8 | 2026-07-30 |
 | 5 | 0.15 | 27 | 10 | 2026-07-30 |
 | 6 | 0.08 | 29 | 7 | 2026-07-30 |
 | 1 | 0.23 | 23 | 12 | 2026-08-03 |
 | 2 | 0.54 | 13 | 5 | 2026-08-03 |
 | 3 | 0.71 | 30 | 12 | 2026-08-03 |
-| 4 | 0.18 | 22 | 8 | 2026-08-03 |
 | 5 | 0.15 | 27 | 10 | 2026-08-03 |
 | 1 | 0.23 | 23 | 12 | 2026-08-04 |
-| 1 | 0.23 | 23 | 12 | 202
+| 1 | 0.23 | 23 | 12 | 2026-08-04 |
+| 1 | 0.66 | 86 | 46 | 2026-08-04 |
+| 1 | 0.71 | 75 | 31 | 2
 
 （完整简介见 [源文件](research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/04_proposal/proposal-draft-merged.md)）
 

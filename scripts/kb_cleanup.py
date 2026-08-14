@@ -368,36 +368,21 @@ def step4_unify_frontmatter(dry_run: bool) -> dict:
 
 
 def step5_rebuild_index(dry_run: bool) -> dict:
-    """重建 index.json。"""
-    docs = []
+    """重建 index.json。
 
-    for f in KB_ROOT.rglob("*.md"):
-        if f.name.startswith(".") or ".obsidian" in str(f) or "/.cache/" in str(f):
-            continue
-        if "/.backup/" in str(f) or f.suffix == ".bak":
-            continue
-        try:
-            text = f.read_text(encoding="utf-8")
-            rel = str(f.relative_to(KB_ROOT))
-            docs.append({
-                "path": rel,
-                "size": f.stat().st_size,
-                "mtime": datetime.fromtimestamp(f.stat().st_mtime, tz=timezone.utc).isoformat(),
-                "chars": len(text),
-            })
-        except Exception:
-            continue
+    v6.8.51 修复：旧实现用自造的简化格式（total_documents + path 列表）直接覆写
+    knowledge/index.json，会摧毁 kb_index 的倒排索引（documents 结构完全不同，
+    检索方按 chunk_list/df 布局读取全部失效）。现委托 kb_index.build_index()
+    走统一格式 v2 构建器。
+    """
+    if dry_run:
+        return {"step": "5_rebuild_index", "would_rebuild": True, "skipped": "dry-run"}
 
-    index = {
-        "built_at": datetime.now(timezone.utc).isoformat(),
-        "total_documents": len(docs),
-        "documents": docs,
-    }
+    import kb_index
 
-    if not dry_run:
-        INDEX_PATH.write_text(json.dumps(index, ensure_ascii=False, indent=2), encoding="utf-8")
+    index = kb_index.build_index(force=True)
 
-    return {"step": "5_rebuild_index", "total_documents": len(docs)}
+    return {"step": "5_rebuild_index", "rebuilt": True, "doc_count": len(index.get("documents", {}))}
 
 
 def step6_rebuild_graph(dry_run: bool) -> dict:

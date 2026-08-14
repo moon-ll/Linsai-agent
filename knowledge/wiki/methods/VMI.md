@@ -1,8 +1,8 @@
 ---
 title: "VMI"
-type: "method"
+type: "methods"
 created: "2026-06-17T12:40:33Z"
-updated: "2026-06-23T02:42:19Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["表征方法", "光电子", "动量成像", "#type/method", "#topic/HHG", "#status/mature", "#status/growing"]
 related: ["COLTRIMS", "RABBITT"]
 source_raw: ""

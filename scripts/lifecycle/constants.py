@@ -66,6 +66,11 @@ MICRO_SCHEDULER_SCHEDULE = "*/5 * * * 1-5"  # 工作日每 5 分钟一次
 DEFAULT_PROMPT_OPTIMIZE_SCHEDULE = "0 14 * * *"  # 每天 14:00（工作日时段间隙）
 DEFAULT_RETROSPECTIVE_SCHEDULE = "0 15 * * 1"  # 每周一 15:00（周末反思产出后）
 
+# 知识库每日同步 cron（v6.8.51）：sync_all（hermes 会话/简报/PDF 同步 + 重建索引 + 图谱）
+# 12:40 = 上午时段（08:30-12:30）结束后、下午空档，避开 worker 竞争 I/O
+DEFAULT_KB_SYNC_SCHEDULE = "40 12 * * *"  # 每天 12:40
+KB_SYNC_CRON_NAME = "lc-kb-sync"
+
 # stale 阈值：running 超过该秒数视为死锁
 # v6.8.3-fix9: 从 3600s 降低到 1800s（30min）。
 # critic/writer 的 timeout=900s（15min），正常执行最长 ~12min。

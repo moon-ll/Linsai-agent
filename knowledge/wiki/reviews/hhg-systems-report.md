@@ -1,8 +1,8 @@
 ---
 title: "固体与液体 HHG 体系进展"
-type: "review"
+type: "reviews"
 created: "2026-05-19T00:00:00Z"
-updated: "2026-06-23T02:42:19Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["HHG", "综述", "材料体系", "#type/report", "#topic/HHG", "#status/mature"]
 related: ["固体高次谐波", "德鲁德模型", "拓扑绝缘体", "液体高次谐波"]
 source_raw: ""

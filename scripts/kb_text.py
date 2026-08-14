@@ -136,14 +136,19 @@ def build_frontmatter(meta: Dict[str, Any]) -> str:
 # ─────────────────────────────────────────────
 
 def _tokenize(text: str) -> List[str]:
-    """分词：提取中文词组（2字以上）和英文单词、数字。"""
+    """分词：中文 2-gram 滑窗 + 英文单词 + 数字。
+
+    v6.8.51 瘦身：原实现生成 2/3/4-gram 全展开（8 字中文词 → 18 个 token），
+    导致 580 篇文档膨胀出 28.4 万词条 / 157MB 索引，其中 46% 词条仅出现一次。
+    现收敛为 2-gram：查询与文档同法分词，长短语匹配由相邻 2-gram 组合覆盖，
+    索引体积约降 60%。英文/数字保持不变。
+    """
     tokens = []
-    # 中文字符串（连续2字以上）
+    # 中文 2-gram 滑窗（连续 2 字以上）
     for m in re.finditer(r"[\u4e00-\u9fff]{2,}", text):
         word = m.group()
-        for size in (2, 3, 4):
-            for i in range(len(word) - size + 1):
-                tokens.append(word[i : i + size])
+        for i in range(len(word) - 1):
+            tokens.append(word[i : i + 2])
     # 英文单词
     for m in re.finditer(r"[a-zA-Z_][a-zA-Z0-9_]{1,}", text):
         tokens.append(m.group().lower())

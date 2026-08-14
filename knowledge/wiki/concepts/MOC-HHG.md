@@ -1,8 +1,8 @@
 ---
 title: "🗺️ HHG 知识地图"
-type: "concept"
+type: "concepts"
 created: "2026-06-19T00:00:00Z"
-updated: "2026-06-23T02:42:18Z"
+updated: "2026-08-14T11:15:51Z"
 tags: ["MOC", "HHG", "索引", "#type/concept", "#topic/HHG", "#status/mature"]
 related: ["COLTRIMS", "Corkum", "FROG", "Ghimire-Reis", "Krausz", "LHuillier", "Lewenstein模型", "MOC-NSFC课题", "MOC-deepxiv论文库", "RABBITT", "TDSE求解器", "VMI", "hhg-comprehensive-report", "hhg-methods-report", "hhg-principles-report", "hhg-systems-report", "hhg-teams-report", "hhg-technology-report", "三步模型", "北大HHG团队", "协方差映射", "固体高次谐波", "德鲁德模型", "截止定律", "拓扑绝缘体", "水窗口", "液体高次谐波", "相位匹配", "瞬态吸收光谱", "阿秒条纹相机", "高次谐波产生"]
 source_raw: ""

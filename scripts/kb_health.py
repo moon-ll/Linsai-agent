@@ -154,15 +154,25 @@ def _compute_graph_connectivity() -> float:
 
 
 def _compute_category_coverage() -> Dict[str, Any]:
-    """计算分类覆盖率：被自定义分类覆盖的 wiki 页面比例。"""
+    """计算分类覆盖率：被自定义分类覆盖的 wiki 页面比例。
+
+    v6.8.51 修复：categories.json 实际结构为 {"categories": {"categories": [...]}}
+    双层嵌套（外层为包装对象），旧代码把外层 dict 当分类列表迭代，
+    len=1 且 .get("matched_paths") 全部失败 → coverage 恒 0。
+    """
     cat_path = KNOWLEDGE_DIR / "categories.json"
     if not cat_path.exists():
         return {"total_categories": 0, "covered_pages": 0, "coverage_rate": 0.0}
     try:
         data = json.loads(cat_path.read_text(encoding="utf-8"))
         cats = data.get("categories", [])
+        # v6.8.51: 解开双层嵌套包装
+        if isinstance(cats, dict):
+            cats = cats.get("categories", [])
         covered = set()
         for cat in cats:
+            if not isinstance(cat, dict):
+                continue
             for p in cat.get("matched_paths", []):
                 covered.add(p)
         wiki_count = len(list_wiki_pages())
@@ -383,4 +393,12 @@ def _self_check() -> bool:
 
 if __name__ == "__main__":
     import sys
+
+    # v6.8.51: --real 输出真实知识库健康指标（默认仍跑隔离夹具自检，零成本回归）
+    if "--real" in sys.argv:
+        import json as _json
+        import knowledge_base as _kb  # 门面加载（注入 get_growth_candidates 等依赖）
+        print(_json.dumps(_kb.get_kb_health(), ensure_ascii=False, indent=2))
+        sys.exit(0)
+
     sys.exit(0 if _self_check() else 1)

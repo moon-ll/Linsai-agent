@@ -333,6 +333,7 @@ REQUIRED_CRON_PREFIXES = [
     "lc-hourly-monitor",
     "lc-prompt-optimize",
     "lc-retrospective",
+    "lc-kb-sync",
 ]
 
 # cron 未执行告警阈值（秒）— 超过此时间未运行则告警

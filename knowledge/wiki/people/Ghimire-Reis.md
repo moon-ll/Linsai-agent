@@ -1,13 +1,14 @@
 ---
 title: "Ghimire-Reis"
-type: "person"
+type: "people"
 created: "2026-06-17T12:40:33Z"
-updated: "2026-06-17T12:40:33Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["人物", "固体HHG", "美国", "#type/person", "#status/mature", "#status/growing"]
 related: ["固体高次谐波"]
-aliases: ["Ghimire", "Reis", "固体HHG开创"]
+source_raw: ""
 growth_stage: "growing"
 confidence: 0.8
+aliases: ["Ghimire", "Reis", "固体HHG开创"]
 ---
 
 # Ghimire & Reis
@@ -25,3 +26,9 @@ Ghimire 和 Reis（UC Berkeley / SLAC）2011 年首次在 ZnO 单晶中观测到
 ## 来源
 
 - arXiv: 1104.1045；`hhg-teams-report.md`
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[固体高次谐波]]
+<!-- /linsai-wikilinks -->

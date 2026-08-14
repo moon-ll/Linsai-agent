@@ -27,6 +27,7 @@
 """
 
 import json
+import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -54,6 +55,46 @@ _log = None
 # ─────────────────────────────────────────────
 
 _SUPPORTED_EXTS = {".md", ".txt", ".rst"}
+
+# v6.8.51: 索引格式版本。v2 = 扁平 chunk 数组 + 整型倒排 postings。
+# 加载时 format 不匹配（旧版 v1 / 无标记）视为过期索引，检索走空结果，
+# 由日频 lc-kb-sync 或下一次 build_index() 重建。
+INDEX_FORMAT = 2
+
+# 两段式检索第二阶段精确打分的候选上限（第一阶段 IDF 覆盖率预排序后取 top N）
+_PHASE2_CANDIDATES = 60
+
+# 进程内索引缓存：按 (路径, mtime_ns, size) 签名校验，文件未变不重复加载。
+# Web 服务器长驻进程下避免每次检索 157MB（v2 后 ~10MB）级 JSON 全量重读。
+_INDEX_CACHE: Dict[str, Any] = {"data": None, "sig": None}
+
+
+def _invalidate_index_cache() -> None:
+    """索引文件被重写后清空进程内缓存（build_index / add_document 后调用）。"""
+    _INDEX_CACHE["data"] = None
+    _INDEX_CACHE["sig"] = None
+
+
+def _load_index_cached() -> Dict[str, Any]:
+    """带签名校验的索引加载。返回 {} 表示索引缺失/损坏/格式过期。"""
+    global INDEX_PATH
+    if not INDEX_PATH.exists():
+        return {}
+    try:
+        st = INDEX_PATH.stat()
+        sig = (str(INDEX_PATH), st.st_mtime_ns, st.st_size)
+        if _INDEX_CACHE["sig"] == sig and _INDEX_CACHE["data"] is not None:
+            return _INDEX_CACHE["data"]
+        with open(INDEX_PATH, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except Exception:
+        return {}
+    if data.get("format") != INDEX_FORMAT:
+        # 旧格式（v1 无 format 字段）→ 视为缺失，等待重建
+        return {}
+    _INDEX_CACHE["data"] = data
+    _INDEX_CACHE["sig"] = sig
+    return data
 
 
 # ─────────────────────────────────────────────
@@ -147,8 +188,17 @@ def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = No
     v5.0: 支持索引外部 wiki 目录（如 hermes AI_wiki/02-wiki/），
           使 CoPilot 检索引擎能命中 hermes 侧的结构化知识。
 
+    v6.8.51 索引格式 v2（瘦身，原 157MB → 目标 <15MB）：
+      - documents 不再内嵌 chunk_list（原 chunk 正文+全量关键词占 24MB）
+      - chunk 扁平化为全局数组 [{"d": 文档, "i": chunk_id, "t": 正文}]
+      - 倒排 postings 由 "doc::chunk_id" 长字符串改为整型下标（约 10 倍压缩）
+      - 仅出现一次的中文 2-gram 不入倒排（46% 词条为纯噪声；英文保留，支撑论文名精确检索）
+      - 放弃 mtime 增量（原增量依赖存储全量关键词）：全量分词重建，
+        580 文档 / 12.8K chunk 约 5-10s，日频 cron 完全可接受
+      - 检索改为两段式：先 IDF 覆盖率预排序，再对 top 候选重分词做精确 TF-IDF
+
     Args:
-        force: 为 True 时强制全量重建
+        force: 兼容参数（v2 起构建始终全量，忽略该值）
         extra_wiki_dirs: 外部 wiki 目录列表，每项为 (Path, source_label) 元组。
             默认 None 时自动包含 hermes wiki（标签 "hermes-wiki"）。
             传空列表 [] 则不索引任何外部目录（用于测试隔离）。
@@ -165,17 +215,6 @@ def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = No
             extra_wiki_dirs.append((HERMES_WIKI_DIR, "hermes-wiki"))
         if HERMES_BRIEFING_PAPERS_DIR.exists():
             extra_wiki_dirs.append((HERMES_BRIEFING_PAPERS_DIR, "hermes-briefings"))
-
-    # 加载旧索引
-    old_index: Dict[str, Any] = {}
-    if not force and INDEX_PATH.exists():
-        try:
-            with open(INDEX_PATH, "r", encoding="utf-8") as f:
-                old_index = json.load(f)
-        except Exception:
-            old_index = {}
-
-    old_docs = old_index.get("documents", {})
 
     # 收集所有待索引文件（v6.7.11: 加入 qa 模块）
     all_files: List[Path] = []
@@ -195,7 +234,9 @@ def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = No
                     external_map[fpath] = source_label
 
     docs: Dict[str, Dict[str, Any]] = {}
-    all_chunks: List[Dict[str, Any]] = []
+    chunks_v2: List[Dict[str, str]] = []          # {"d": rel_key, "i": chunk_id, "t": text}
+    chunk_terms: List[set] = []                    # 与 chunks_v2 平行：每 chunk 的去重词条
+    term_doc_freq: Dict[str, int] = {}
 
     for file_path in sorted(all_files):
         # v5.0: 计算 rel_key 和 source（支持外部 wiki）
@@ -229,20 +270,6 @@ def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = No
                 source = "raw"
 
         mtime = file_path.stat().st_mtime
-        old_doc = old_docs.get(rel_key)
-
-        # 增量更新
-        if not force and old_doc and old_doc.get("mtime") == mtime:
-            docs[rel_key] = old_doc
-            for chunk in old_doc.get("chunk_list", []):
-                all_chunks.append({
-                    "id": chunk["id"],
-                    "doc": rel_key,
-                    "text": chunk["text"],
-                    "keywords": set(chunk.get("keywords", [])),
-                    "source": old_doc.get("source", "raw"),
-                })
-            continue
 
         # 读取并索引
         try:
@@ -289,18 +316,13 @@ def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = No
                 pass
 
         chunks = _chunk_document(text)
-        doc_chunks = []
         for chunk in chunks:
-            keywords = _tokenize(chunk["text"])
-            chunk["keywords"] = keywords
-            doc_chunks.append(chunk)
-            all_chunks.append({
-                "id": chunk["id"],
-                "doc": rel_key,
-                "text": chunk["text"],
-                "keywords": set(keywords),
-                "source": source,
-            })
+            chunk_idx = len(chunks_v2)
+            chunks_v2.append({"d": rel_key, "i": chunk["id"], "t": chunk["text"]})
+            terms = set(_tokenize(chunk["text"]))
+            chunk_terms.append(terms)
+            for term in terms:
+                term_doc_freq[term] = term_doc_freq.get(term, 0) + 1
 
         docs[rel_key] = {
             "title": title,
@@ -308,8 +330,7 @@ def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = No
             "source": source,
             "size": file_path.stat().st_size,
             "mtime": mtime,
-            "chunks": len(doc_chunks),
-            "chunk_list": doc_chunks,
+            "chunks": len(chunks),
             "project": project,
         }
         if tags:
@@ -318,29 +339,25 @@ def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = No
             docs[rel_key]["growth_stage"] = growth_stage
 
     # 计算 IDF
-    term_doc_freq: Dict[str, int] = {}
-    for chunk in all_chunks:
-        for term in chunk["keywords"]:
-            term_doc_freq[term] = term_doc_freq.get(term, 0) + 1
-
-    doc_count = len(all_chunks) if all_chunks else 1
+    doc_count = len(chunks_v2) if chunks_v2 else 1
     idf = _compute_idf(doc_count, term_doc_freq)
 
-    # 构建倒排索引
-    inverted: Dict[str, List[str]] = {}
-    for chunk in all_chunks:
-        for term in chunk["keywords"]:
-            cid = f"{chunk['doc']}::{chunk['id']}"
-            if term not in inverted:
-                inverted[term] = []
-            if cid not in inverted[term]:
-                inverted[term].append(cid)
+    # 构建倒排索引（v2: 整型下标 postings；df==1 的中文 2-gram 剔除）
+    inverted: Dict[str, List[int]] = {}
+    _cjk_re = re.compile(r"[\u4e00-\u9fff]")
+    for chunk_idx, terms in enumerate(chunk_terms):
+        for term in terms:
+            if term_doc_freq.get(term, 0) == 1 and _cjk_re.search(term):
+                continue  # 仅出现一次的中文 2-gram：纯噪声，不入倒排
+            inverted.setdefault(term, []).append(chunk_idx)
 
     # 图谱统计
     graph_summary = get_graph_summary()
 
     index_data = {
+        "format": INDEX_FORMAT,
         "documents": docs,
+        "chunks": chunks_v2,
         "inverted": inverted,
         "idf": idf,
         "doc_count": doc_count,
@@ -348,10 +365,28 @@ def build_index(force: bool = False, extra_wiki_dirs: Optional[List[tuple]] = No
         "graph_summary": graph_summary,
     }
 
-    _cms.save_json(INDEX_PATH, index_data)
+    # v6.8.51: 索引为机器数据，用紧凑序列化（无缩进）+ 原子写入。
+    # indent=2 会给约 300 万条 postings 各加一行，体积膨胀 ~10MB。
+    import os
+    import tempfile as _tf
+    INDEX_PATH.parent.mkdir(parents=True, exist_ok=True)
+    fd, tmp = _tf.mkstemp(dir=str(INDEX_PATH.parent), suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            json.dump(index_data, f, ensure_ascii=False, separators=(",", ":"))
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp, str(INDEX_PATH))
+    except Exception:
+        try:
+            os.unlink(tmp)
+        except OSError:
+            pass
+        raise
+    _invalidate_index_cache()
 
     if _log:
-        _log.info(f"索引构建完成: 文档={len(docs)}, 词项={len(inverted)}, 图谱节点={graph_summary.get('node_count', 0)}")
+        _log.info(f"索引构建完成(v{INDEX_FORMAT}): 文档={len(docs)}, chunk={len(chunks_v2)}, 词项={len(inverted)}, 图谱节点={graph_summary.get('node_count', 0)}")
     return index_data
 
 
@@ -378,10 +413,9 @@ def search(query: str, top_k: int = 3, source: str = "all", project: str = "",
     if not INDEX_PATH.exists():
         return empty
 
-    try:
-        with open(INDEX_PATH, "r", encoding="utf-8") as f:
-            index_data = json.load(f)
-    except Exception:
+    # v2: 带签名缓存的加载（格式过期/损坏返回 {}）
+    index_data = _load_index_cached()
+    if not index_data:
         return empty
 
     query_terms = _tokenize(query)
@@ -402,21 +436,23 @@ def search(query: str, top_k: int = 3, source: str = "all", project: str = "",
     inverted = index_data.get("inverted", {})
     idf = index_data.get("idf", {})
     docs = index_data.get("documents", {})
+    chunks_v2 = index_data.get("chunks", [])
 
-    # 收集候选
-    candidates: Dict[str, Dict[str, Any]] = {}
+    # 收集候选（v2: postings 为 chunk 全局整型下标）
+    candidates: Dict[int, Dict[str, Any]] = {}
     for term in query_terms:
-        for cid in inverted.get(term, []):
-            if cid not in candidates:
-                doc_name, chunk_id = cid.split("::", 1)
-                candidates[cid] = {"doc": doc_name, "chunk_id": chunk_id, "terms": set()}
-            candidates[cid]["terms"].add(term)
+        for chunk_idx in inverted.get(term, []):
+            if chunk_idx not in candidates:
+                candidates[chunk_idx] = {"terms": set()}
+            candidates[chunk_idx]["terms"].add(term)
 
-    # 计算 TF-IDF 得分
-    scored = []
-    for cid, info in candidates.items():
-        doc_name = info["doc"]
-        doc_info = docs.get(doc_name, {})
+    # ── 第一阶段（廉价）：IDF 覆盖率预排序 ──
+    # v2 不再存储每 chunk 全量关键词，TF 精确计算推迟到第二阶段，
+    # 仅对预排序 top _PHASE2_CANDIDATES 个候选重分词，保证检索延迟有界。
+    pre: List[Any] = []  # (覆盖分, chunk_idx)
+    for chunk_idx, info in candidates.items():
+        chunk = chunks_v2[chunk_idx]
+        doc_info = docs.get(chunk["d"], {})
 
         # 来源过滤
         doc_source = doc_info.get("source", "raw")
@@ -435,7 +471,7 @@ def search(query: str, top_k: int = 3, source: str = "all", project: str = "",
 
         # 文档类型过滤（按 wiki 子目录推断：wiki/{doc_type}/... 或 hermes-wiki/{doc_type}/...）
         if doc_type:
-            doc_path_parts = Path(doc_info.get("path", doc_name)).parts
+            doc_path_parts = Path(doc_info.get("path", chunk["d"])).parts
             if len(doc_path_parts) >= 2 and doc_path_parts[0] in ("wiki", "hermes-wiki"):
                 doc_t = doc_path_parts[1]
             else:
@@ -456,25 +492,31 @@ def search(query: str, top_k: int = 3, source: str = "all", project: str = "",
             if doc_info.get("growth_stage", "") != stage:
                 continue
 
-        chunk_id = info["chunk_id"]
-        chunk_text = ""
-        chunk_keywords = []
-        for c in doc_info.get("chunk_list", []):
-            if c["id"] == chunk_id:
-                chunk_text = c["text"]
-                chunk_keywords = c.get("keywords", [])
-                break
+        cover = sum(idf.get(t, 1) for t in info["terms"])
+        pre.append((cover, chunk_idx))
 
-        if not chunk_text:
-            continue
+    if not pre:
+        return empty
 
-        term_freq = {}
-        for kw in chunk_keywords:
+    pre.sort(key=lambda x: -x[0])
+    top_candidates = pre[:_PHASE2_CANDIDATES]
+
+    # ── 第二阶段（精确）：对 top 候选重分词计算 TF-IDF ──
+    scored = []
+    for cover, chunk_idx in top_candidates:
+        chunk = chunks_v2[chunk_idx]
+        doc_name = chunk["d"]
+        doc_info = docs.get(doc_name, {})
+        doc_source = doc_info.get("source", "raw")
+
+        kws = _tokenize(chunk["t"])
+        total_terms = len(kws) if kws else 1
+        term_freq: Dict[str, int] = {}
+        for kw in kws:
             term_freq[kw] = term_freq.get(kw, 0) + 1
 
         score = 0
-        total_terms = len(chunk_keywords) if chunk_keywords else 1
-        for term in info["terms"]:
+        for term in candidates[chunk_idx]["terms"]:
             tf = term_freq.get(term, 0) / total_terms
             idf_val = idf.get(term, 1)
             score += tf * idf_val
@@ -487,7 +529,7 @@ def search(query: str, top_k: int = 3, source: str = "all", project: str = "",
                 score *= 1.1
 
         scored.append({
-            "text": chunk_text,
+            "text": chunk["t"],
             "doc": doc_name,
             "score": score,
             "source": doc_source,
@@ -619,14 +661,7 @@ def get_enriched_context(query: str, top_k: int = 3, project: str = "") -> Dict[
 
     # 检测缺失概念（查询中的词未在知识库中命中）
     query_terms = _tokenize(query)
-    indexed_terms = set()
-    if INDEX_PATH.exists():
-        try:
-            with open(INDEX_PATH, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            indexed_terms = set(data.get("inverted", {}).keys())
-        except Exception:
-            pass
+    indexed_terms = set(_load_index_cached().get("inverted", {}).keys())
 
     missing = [t for t in query_terms if t not in indexed_terms and len(t) >= 3]
 

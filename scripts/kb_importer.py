@@ -122,16 +122,23 @@ def import_candidate(arxiv_id: str, project: str = "") -> Optional[str]:
     if not project:
         project = infer_project(candidate.get("direction", ""))
 
-    title = candidate.get("title", arxiv_id)
+    # v6.8.51: 键存在但值为 null 时 .get(k, "") 仍返回 None（hermes 侧 JSON
+    # 偶发 null 字段），None 混入 fm_lines 会让 join 中断整条同步链——统一收敛为空串
+    def _nz(v: Any) -> str:
+        return v if isinstance(v, str) else ""
+
+    title = _nz(candidate.get("title")) or arxiv_id
     year = _extract_year(candidate.get("date", ""))
     authors = candidate.get("authors", "")
     if isinstance(authors, list):
-        authors = ", ".join(authors)
-    tldr = candidate.get("tldr", "")
-    abstract = candidate.get("abstract", "")
-    direction = candidate.get("direction", "")
-    score = candidate.get("score_deepxiv", 0)
-    ai_reason = candidate.get("ai_reason", "")
+        # 过滤 None 项（偶发 null 条目）
+        authors = ", ".join(str(a) for a in authors if a)
+    authors = _nz(authors)
+    tldr = _nz(candidate.get("tldr"))
+    abstract = _nz(candidate.get("abstract"))
+    direction = _nz(candidate.get("direction"))
+    score = candidate.get("score_deepxiv") or 0
+    ai_reason = _nz(candidate.get("ai_reason"))
 
     slug = _slugify(title)
     filename = f"{year}-{arxiv_id}-{slug}.md"

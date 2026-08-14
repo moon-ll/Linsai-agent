@@ -227,6 +227,17 @@ class LiteratureService:
             # 全链路模式：通过 kb_importer.import_candidate() 入库
             self._ingest_new_papers(new_papers, source, proposal_id)
 
+        # v6.8.51: 入库后即时重建索引，新论文立即可被检索
+        # （此前索引仅靠手动/周维护重建，新文献存在最长数日检索盲区；
+        #   v2 全量重建 1012 文档约 2s，挂在此处代价可接受）
+        if new_papers:
+            try:
+                if self.kb and hasattr(self.kb, "build_index"):
+                    self.kb.build_index()
+            except Exception as e:
+                if _log:
+                    _log.warning(f"[LiteratureService] 入库后重建索引失败（不影响入库结果）: {e}")
+
         # 6. 若有关联课题，标记 used_by_proposals
         if proposal_id:
             for paper in existing_papers + new_papers:
@@ -1150,15 +1161,25 @@ class LiteratureService:
         arxiv_id: str,
         content: str,
         proposal_id: Optional[str] = None,
+        title: Optional[str] = None,
     ) -> None:
-        """保存阅读笔记到 wiki/papers/。"""
+        """保存阅读笔记到 wiki/papers/。
+
+        v6.8.51 修复：
+        - 旧实现 kw_build 构建整页后交给 kw_save 二次包裹 → 双 frontmatter 污染
+          （实测 147 篇笔记中 95 篇叠加、99 篇 title 退化为裸 arXiv ID）。
+          现改为直接传正文 + meta，由 kb_wiki 门面统一构建。
+        - 旧实现 existing.get("content") 恒为空（get_wiki_page 返回键为 "body"），
+          导致每次追加笔记都会覆盖掉历史笔记。现读取 "body"。
+        """
         try:
-            # 检查是否已有页面
+            paper_rel = f"wiki/papers/{arxiv_id}.md"
+            display_title = title or f"Paper: {arxiv_id}"
             existing = self._get_wiki_paper_note(arxiv_id)
             if existing:
                 # 追加新的阅读笔记段落
-                old_content = existing.get("content", "")
-                meta = existing.get("meta", {})
+                old_content = existing.get("body", "")
+                meta = dict(existing.get("frontmatter", {}))
                 if proposal_id:
                     used_by = meta.get("used_by_proposals", [])
                     if isinstance(used_by, str):
@@ -1168,16 +1189,18 @@ class LiteratureService:
                     meta["used_by_proposals"] = used_by
                 meta["read_status"] = READ_STATUS_DEEP_READ
                 meta["updated"] = now_utc()
-                page = self.kw_build(
-                    title=meta.get("title", arxiv_id),
-                    wiki_type="papers",
-                    content=old_content + f"\n\n## 阅读笔记\n\n### {proposal_id or 'general'}\n\n{content}",
+                if title:
+                    meta["title"] = title
+                self.kw_save(
+                    paper_rel,
+                    old_content
+                    + f"\n\n## 阅读笔记\n\n### {proposal_id or 'general'}\n\n{content}",
                     meta=meta,
                 )
             else:
-                # 创建新页面
+                # 创建新页面：title 优先用论文真实题名（v6.8.51，避免裸 ID）
                 meta = {
-                    "title": f"Paper: {arxiv_id}",
+                    "title": display_title,
                     "type": "papers",
                     "arxiv_id": arxiv_id,
                     "tags": ["literature", "deep-read"],
@@ -1190,13 +1213,11 @@ class LiteratureService:
                     "growth_stage": "mature",
                     "confidence": 0.8,
                 }
-                page = self.kw_build(
-                    title=f"Paper: {arxiv_id}",
-                    wiki_type="papers",
-                    content=f"## 深度解析\n\n（来自简报深度分析）\n\n## 阅读笔记\n\n### {proposal_id or 'general'}\n\n{content}",
+                self.kw_save(
+                    paper_rel,
+                    f"## 深度解析\n\n（来自简报深度分析）\n\n## 阅读笔记\n\n### {proposal_id or 'general'}\n\n{content}",
                     meta=meta,
                 )
-            self.kw_save(f"wiki/papers/{arxiv_id}.md", page)
         except Exception as e:
             if _log:
                 _log.warning(f"[LiteratureService] 保存阅读笔记失败 {arxiv_id}: {e}")

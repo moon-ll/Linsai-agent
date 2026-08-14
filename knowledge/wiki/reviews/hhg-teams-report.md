@@ -1,8 +1,8 @@
 ---
 title: "HHG 光谱学关键研究团队"
-type: "review"
+type: "reviews"
 created: "2026-05-19T00:00:00Z"
-updated: "2026-06-23T02:42:19Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["HHG", "综述", "人物", "#type/report", "#topic/HHG", "#status/mature"]
 related: ["COLTRIMS", "Corkum", "Krausz", "LHuillier", "RABBITT", "VMI", "三步模型", "截止定律", "相位匹配", "瞬态吸收光谱"]
 source_raw: ""

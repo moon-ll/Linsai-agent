@@ -48,7 +48,9 @@ _log = None
 # 常量
 # ─────────────────────────────────────────────
 
-_WIKI_TYPES = {"concepts", "methods", "people", "papers", "projects"}
+# v6.8.51: 补上 reviews/（简报、链路复盘所在目录）——此前 57 个 review 文件
+# 对 list_wiki_pages 完全不可见，导致 wiki_count 与文件系统口径分裂
+_WIKI_TYPES = {"concepts", "methods", "people", "papers", "projects", "reviews"}
 
 
 # ─────────────────────────────────────────────
@@ -133,9 +135,11 @@ def save_wiki_page(rel_path: str, content: str, meta: Optional[Dict[str, Any]] =
 
     Args:
         rel_path: 相对 knowledge/ 的路径
-        content: Markdown 内容
+        content: Markdown 正文（**不含 frontmatter**；若误传整页文本，
+                 门面会自动剥离其 frontmatter 并合并 meta，v6.8.51）
         meta: frontmatter 数据（如页面已存在则合并更新）
-        append: 为 True 时在现有内容后追加
+        append: 为 True 时在现有内容后追加；
+                content 为空且 append=False 时视为"仅更新 meta"，保留现有正文（v6.8.51）
 
     Returns:
         保存的文件路径（相对 knowledge/）
@@ -143,6 +147,7 @@ def save_wiki_page(rel_path: str, content: str, meta: Optional[Dict[str, Any]] =
     _ensure_dirs()
     path = KNOWLEDGE_DIR / rel_path
     path.parent.mkdir(parents=True, exist_ok=True)
+    _existed_before = path.exists()  # v6.8.51: 供末尾 log_growth 判定 create/update
 
     existing_fm: Dict[str, Any] = {}
     existing_body = ""
@@ -150,12 +155,29 @@ def save_wiki_page(rel_path: str, content: str, meta: Optional[Dict[str, Any]] =
         text = path.read_text(encoding="utf-8")
         existing_fm, existing_body = parse_frontmatter(text)
 
+    # v6.8.51 防御①：调用方误将"整页文本"（自带 frontmatter）当 content 传入
+    # 历史后果：外层 frontmatter（默认值 title=文件名/type=concepts）+ 内层真实
+    # frontmatter 叠加成双块，消费方只读到外层错误元数据。此处剥离内层并合并。
+    content = content or ""
+    if content.lstrip().startswith("---"):
+        inner_fm, inner_body = parse_frontmatter(content)
+        if inner_fm:
+            merged = dict(existing_fm)
+            merged.update(meta or {})
+            merged.update(inner_fm)
+            meta = merged
+            content = inner_body
+
     if meta:
         existing_fm.update(meta)
     existing_fm["updated"] = _now_utc()
 
+    # v6.8.51 防御②：content 为空且非 append → 仅更新 meta，不再清空正文
+    # （旧逻辑 body=content.strip() 会把现有正文整体抹掉）
     if append and existing_body:
         body = existing_body + "\n\n" + content.strip()
+    elif not content.strip():
+        body = existing_body
     else:
         body = content.strip()
 
@@ -189,6 +211,20 @@ def save_wiki_page(rel_path: str, content: str, meta: Optional[Dict[str, Any]] =
                 # 确保项目节点存在（作为汇聚节点）
                 update_graph_node(proj, "projects", f"wiki/projects/{proj}", "mature")
                 add_graph_edge(title, proj, "belongs_to")
+
+    # v6.8.51: 门面统一写生长日志——此前 log_growth 只在对话成长路径
+    # （apply_growth）调用，活跃的 lit_search/修复脚本等门面写入全部
+    # 不落日志，导致 growth-log 断流两个月、week_new 恒为 0（仪表盘失真）。
+    if log_growth:
+        try:
+            log_growth(
+                "create" if not _existed_before else "update",
+                str(rel_path),
+                "facade",
+                f"save_wiki_page: {title or rel_path}",
+            )
+        except Exception:
+            pass  # 日志失败不阻塞保存
 
     return str(rel_path)
 

@@ -1,8 +1,8 @@
 ---
 title: "HHG 光谱学综合评述与未来展望"
-type: "review"
+type: "reviews"
 created: "2026-05-19T00:00:00Z"
-updated: "2026-06-23T02:42:19Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["HHG", "综述", "总论", "#type/report", "#topic/HHG", "#status/mature"]
 related: ["RABBITT", "三步模型", "水窗口", "高次谐波产生"]
 source_raw: ""

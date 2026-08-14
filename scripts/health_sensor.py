@@ -14,6 +14,8 @@ retrospective）提供同一份健康信号快照，消除"监控建立在 succe
                  0.81→0.18）
 4. 监控心跳    —— system-kanban.json hourly_monitor.timestamp 的时滞
 5. 熔断状态    —— memory/circuit-state.json（circuit_breaker 维护）
+6. 知识库信号  —— v6.8.51 新增：索引新鲜度 / 生长日志断流 / 蒸馏积压 /
+                 图谱连通性（此前知识库是健康感知盲区，索引停更 6 天无人知晓）
 
 用法:
     python3 scripts/health_sensor.py                # 打印当前快照
@@ -38,12 +40,20 @@ MEMORY_DIR = PROJECT_ROOT / "memory"
 LIFECYCLE_PATH = PROJECT_ROOT / "research_proposals" / "_lifecycle.json"
 KANBAN_PATH = MEMORY_DIR / "system-kanban.json"
 CIRCUIT_PATH = MEMORY_DIR / "circuit-state.json"
+KB_INDEX_PATH = PROJECT_ROOT / "knowledge" / "index.json"
+KB_GROWTH_LOG_PATH = PROJECT_ROOT / "knowledge" / "growth-log.json"
 
 # ── 阈值（供 monitor/调度侧消费，sensor 本身只采集不判断） ──────────────
 IDLE_JOB_SECONDS = 30          # done 但耗时低于此值视为疑似空转
 RECENT_WINDOW_HOURS = 2        # 统计窗口
 SCORE_DROP_THRESHOLD = 0.30    # score_history 末两条分差告警线
 MONITOR_STALE_HOURS = 2.0      # 监控心跳时滞告警线（由 repair 侧消费）
+
+# ── 知识库阈值（v6.8.51）────────────────────────────────────────────────
+KB_INDEX_STALE_HOURS = 48.0    # 索引超过 48h 未重建 → lc-kb-sync 疑似未运行
+KB_GROWTH_STALL_DAYS = 7.0     # 生长日志超过 7 天无新条目 → 写入口径断流
+KB_DISTILL_BACKLOG = 300       # 待蒸馏 raw 积压告警线（当前积压 ~489）
+KB_GRAPH_CONN_MIN = 0.50       # 图谱连通性（最大连通分量占比）告警线
 
 
 def _parse_ts(ts: str) -> Optional[datetime]:
@@ -93,6 +103,50 @@ def _detect_score_drop(history: List[Dict[str, Any]]) -> Optional[Dict[str, Any]
             "at": last.get("at", ""),
         }
     return None
+
+
+def _collect_kb_signals(now: datetime) -> Dict[str, Any]:
+    """采集知识库健康信号（v6.8.51，全部只读）。
+
+    设计原则：
+    - 文件级信号（索引新鲜度/生长日志时滞）用 os.stat + 小 JSON，零重型依赖；
+    - 聚合信号（蒸馏积压/图谱连通性）优先复用 kb_health.get_kb_health()
+      门面，导入失败自动降级为缺失（绝不阻塞核心感知）。
+    """
+    out: Dict[str, Any] = {}
+
+    # ① 索引新鲜度：文件 mtime 即最近一次重建时间（零成本，无需解析 20MB JSON）
+    if KB_INDEX_PATH.exists():
+        try:
+            built = datetime.fromtimestamp(KB_INDEX_PATH.stat().st_mtime, tz=timezone.utc)
+            out["index_age_h"] = round((now - built).total_seconds() / 3600, 2)
+        except Exception:
+            pass
+
+    # ② 生长日志时滞：最新条目距现在的小时数
+    #    （growth-log 为追加序：最新在列表末尾）
+    try:
+        entries = load_json(KB_GROWTH_LOG_PATH, default=[])
+        if isinstance(entries, list) and entries:
+            latest = _parse_ts(entries[-1].get("timestamp", ""))
+            if latest:
+                out["growth_stall_days"] = round((now - latest).total_seconds() / 86400, 2)
+    except Exception:
+        pass
+
+    # ③ 聚合信号（蒸馏积压/图谱连通性/本周新增）——门面降级容错
+    try:
+        import knowledge_base as _kb
+        h = _kb.get_kb_health()
+        out["pending_distill"] = h.get("pending_distill")
+        out["graph_connectivity"] = h.get("graph_connectivity")
+        out["week_new"] = h.get("week_new")
+        out["wiki_count"] = h.get("wiki_count")
+        out["raw_count"] = h.get("raw_count")
+    except Exception:
+        pass
+
+    return out
 
 
 def collect_snapshot() -> Dict[str, Any]:
@@ -146,6 +200,9 @@ def collect_snapshot() -> Dict[str, Any]:
             "opened_at": circuit.get("opened_at", ""),
         }
 
+    # 知识库信号（v6.8.51）
+    kb_signals = _collect_kb_signals(now)
+
     return {
         "generated_at": now_utc(),
         "global": {
@@ -157,6 +214,7 @@ def collect_snapshot() -> Dict[str, Any]:
         "proposals": proposals_out,
         "monitor_heartbeat_age_h": heartbeat_age_h,
         "circuit": circuit_summary,
+        "kb": kb_signals,
     }
 
 
@@ -212,6 +270,49 @@ def evaluate_risks(snapshot: Dict[str, Any]) -> List[Dict[str, Any]]:
                        f"开启于 {circuit.get('opened_at', '?')[:19]}），调度暂停中",
         })
 
+    # 5-8. 知识库信号（v6.8.51：把知识库纳入健康感知，消除盲区）
+    kb = snapshot.get("kb") or {}
+
+    # 5. 索引停更 → lc-kb-sync 未运行的直接证据
+    idx_age = kb.get("index_age_h")
+    if idx_age is not None and idx_age > KB_INDEX_STALE_HOURS:
+        risks.append({
+            "type": "kb_index_stale",
+            "level": "medium",
+            "message": f"知识库索引 {idx_age:.0f}h 未重建（阈值 {KB_INDEX_STALE_HOURS:.0f}h），"
+                       f"lc-kb-sync cron 疑似未运行，新文献存在检索盲区",
+        })
+
+    # 6. 生长日志断流 → 写入口径异常（门面 log_growth 失效或写入全绕行）
+    stall = kb.get("growth_stall_days")
+    if stall is not None and stall > KB_GROWTH_STALL_DAYS:
+        risks.append({
+            "type": "kb_growth_stall",
+            "level": "medium",
+            "message": f"知识库生长日志 {stall:.1f} 天无新条目（阈值 {KB_GROWTH_STALL_DAYS:.0f} 天），"
+                       f"wiki 写入可能绕过门面或已停滞",
+        })
+
+    # 7. 蒸馏积压
+    distill = kb.get("pending_distill")
+    if distill is not None and distill > KB_DISTILL_BACKLOG:
+        risks.append({
+            "type": "kb_distill_backlog",
+            "level": "medium",
+            "message": f"待蒸馏 raw 积压 {distill} 项（阈值 {KB_DISTILL_BACKLOG}），"
+                       f"知识沉淀停滞：进的多、化的少",
+        })
+
+    # 8. 图谱割裂
+    conn = kb.get("graph_connectivity")
+    if conn is not None and conn < KB_GRAPH_CONN_MIN:
+        risks.append({
+            "type": "kb_graph_disconnect",
+            "level": "low",
+            "message": f"图谱连通性 {conn:.2f}（阈值 {KB_GRAPH_CONN_MIN:.2f}），"
+                       f"过半节点游离于最大连通分量之外，知识网络碎片化",
+        })
+
     return risks
 
 
@@ -244,6 +345,24 @@ def _self_check() -> None:
     types = {r["type"] for r in risks}
     assert "api_idle_spin" in types and "circuit_open" in types, f"应检出空转与熔断: {types}"
     print("✓ 风险评估 2 用例通过")
+
+    # 单元级：知识库信号风险评估（v6.8.51）
+    fake_kb = {"global": {"idle_done_jobs_2h": 0, "api_error_jobs_2h": 0, "score_drops": []},
+               "circuit": None,
+               "kb": {"index_age_h": 72.0, "growth_stall_days": 10.0,
+                      "pending_distill": 489, "graph_connectivity": 0.35}}
+    kb_risks = evaluate_risks(fake_kb)
+    kb_types = {r["type"] for r in kb_risks}
+    expected = {"kb_index_stale", "kb_growth_stall", "kb_distill_backlog", "kb_graph_disconnect"}
+    assert expected <= kb_types, f"KB 四类风险应全部检出: {kb_types}"
+    # 健康侧不应误报
+    fake_kb_ok = {"global": {"idle_done_jobs_2h": 0, "api_error_jobs_2h": 0, "score_drops": []},
+                  "circuit": None,
+                  "kb": {"index_age_h": 1.0, "growth_stall_days": 0.5,
+                         "pending_distill": 12, "graph_connectivity": 0.9}}
+    kb_risks_ok = {r["type"] for r in evaluate_risks(fake_kb_ok)}
+    assert not (expected & kb_risks_ok), f"健康 KB 不应误报: {kb_risks_ok}"
+    print("✓ 知识库信号评估 2 用例通过")
     print("✓ health_sensor: 自检全部通过")
 
 

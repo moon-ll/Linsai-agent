@@ -1,10 +1,11 @@
 ---
 title: "HHG 光源与仪器技术进展"
-type: "review"
+type: "reviews"
 created: "2026-05-19T00:00:00Z"
-updated: "2026-06-19T00:00:00Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["HHG", "综述", "技术", "#type/report", "#topic/HHG", "#status/mature"]
-related: ["相位匹配", "水窗口"]
+related: ["水窗口", "相位匹配"]
+source_raw: ""
 growth_stage: "mature"
 confidence: 0.9
 ---
@@ -89,3 +90,10 @@ Chen et al.（2010，arXiv:1006.3942）：
 
 ---
 *本报告基于 deepxiv 真实文献于 2026-06-17 自动生成*
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[水窗口]]
+- [[相位匹配]]
+<!-- /linsai-wikilinks -->

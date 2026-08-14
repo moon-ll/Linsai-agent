@@ -351,6 +351,10 @@ def sync_research_briefings() -> Dict[str, Any]:
 
     链 ②：hermes research_briefing_*.md → knowledge/wiki/reviews/briefing-YYYY-MM-DD.md + briefing-index.md
 
+    v6.8.51：hermes 侧 2026-06-08 后简报改名 daily_memory_YYYYMMDD.md（每日产出），
+    旧命名规则再未匹配导致简报断流两个月。现同时兼容两种命名；
+    同日双源时 research_briefing 优先（更完整的研究简报）。
+
     Returns:
         {"synced": int, "skipped": int}
     """
@@ -364,48 +368,68 @@ def sync_research_briefings() -> Dict[str, Any]:
     synced = 0
     skipped = 0
     briefing_entries = []
+    seen_dates = set()
 
-    for f in sorted(BRIEFINGS_DIR.glob("research_briefing_*.md")):
-        # 从文件名提取日期（兼容两种格式）
-        # research_briefing_2026-06-08.md → 2026-06-08
-        # research_briefing_20260509.md → 2026-05-09
-        name = f.stem  # research_briefing_2026-06-08
+    # v6.8.51: 双命名兼容（旧研究简报 + 新每日简报），旧命名优先
+    briefing_sources = [
+        ("research_briefing_*.md", "林赛研究简报"),
+        ("daily_memory_*.md", "林赛每日简报"),
+    ]
 
-        date_match = re.search(r"(\d{4})[-_]?(\d{2})[-_]?(\d{2})", name)
-        if date_match:
-            y, m, d = date_match.groups()
-            date_str = f"{y}-{m}-{d}"
-        else:
-            skipped += 1
-            continue
+    for pattern, display_name in briefing_sources:
+        for f in sorted(BRIEFINGS_DIR.glob(pattern)):
+            # 从文件名提取日期（兼容两种格式）
+            # research_briefing_2026-06-08.md → 2026-06-08
+            # research_briefing_20260509.md / daily_memory_20260509.md → 2026-05-09
+            name = f.stem
 
-        target = BRIEFING_REVIEWS_DIR / f"briefing-{date_str}.md"
-        if target.exists():
-            skipped += 1
-            briefing_entries.append({"date": date_str, "path": target.name})
-            continue
+            date_match = re.search(r"(\d{4})[-_]?(\d{2})[-_]?(\d{2})", name)
+            if date_match:
+                y, m, d = date_match.groups()
+                date_str = f"{y}-{m}-{d}"
+            else:
+                skipped += 1
+                continue
 
-        try:
-            text = f.read_text(encoding="utf-8")
-            # 去重：移除已有的 frontmatter，添加标准 frontmatter
-            if text.startswith("---"):
-                end = text.find("---", 3)
-                if end > 0:
-                    text = text[end + 3:].strip()
+            # 同日双源去重：第一个源（research_briefing）已入库则跳过
+            if date_str in seen_dates:
+                skipped += 1
+                continue
 
-            header = (
-                f"---\n"
-                f"title: 林赛研究简报 {date_str}\n"
-                f"type: review\n"
-                f"date: {date_str}\n"
-                f"source: hermes-briefing\n"
-                f"---\n\n"
-            )
-            target.write_text(header + text, encoding="utf-8")
-            synced += 1
-            briefing_entries.append({"date": date_str, "path": target.name})
-        except Exception:
-            skipped += 1
+            target = BRIEFING_REVIEWS_DIR / f"briefing-{date_str}.md"
+            if target.exists():
+                skipped += 1
+                seen_dates.add(date_str)
+                briefing_entries.append({"date": date_str, "path": target.name})
+                continue
+
+            try:
+                text = f.read_text(encoding="utf-8")
+                # 去重：移除已有的 frontmatter，由门面统一构建
+                if text.startswith("---"):
+                    end = text.find("---", 3)
+                    if end > 0:
+                        text = text[end + 3:].strip()
+
+                # v6.8.51: 改走 kb_wiki 门面（此前直接 write_text 绕过门面，
+                # 简报不进图谱/不写生长日志）。经 knowledge_base facade 入口
+                # 以确保门面依赖（_ensure_dirs/log_growth）完成注入。
+                import knowledge_base as _kb_facade
+                _kb_facade.save_wiki_page(
+                    f"wiki/reviews/briefing-{date_str}.md",
+                    text,
+                    meta={
+                        "title": f"{display_name} {date_str}",
+                        "type": "review",
+                        "date": date_str,
+                        "source": "hermes-briefing",
+                    },
+                )
+                synced += 1
+                seen_dates.add(date_str)
+                briefing_entries.append({"date": date_str, "path": f"briefing-{date_str}.md"})
+            except Exception:
+                skipped += 1
 
     # 更新索引页
     if briefing_entries:
@@ -669,18 +693,21 @@ def sync_all() -> Dict[str, Any]:
     total_new = sess_result["new_sessions"] + paper_result["new_papers"]
 
     # 同步后自动重建索引和图谱（v3.1 自维护闭环）
-    if total_new > 0:
-        print("  [3/5] 重建索引和图谱...")
-        try:
-            import sys
-            sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
-            from kb_maintenance import cmd_reindex, cmd_rebuild_graph
-            kb = _import_kb_helper()
-            cmd_reindex(kb)
-            cmd_rebuild_graph(kb)
-        except Exception as e:
-            print(f"  ⚠ 自动重建失败: {e}")
+    # v6.8.51: 改为无条件重建——旧逻辑仅在新增论文时触发，简报/知识笔记/
+    # 修复脚本等其它写入渠道不触发，导致索引与文件系统漂移（实测索引漏
+    # 432 个文档长达数日）。v2 全量重建 ~2s，日频执行代价可接受。
+    print("  [3/5] 重建索引和图谱...")
+    try:
+        import sys
+        sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
+        from kb_maintenance import cmd_reindex, cmd_rebuild_graph
+        kb = _import_kb_helper()
+        cmd_reindex(kb)
+        cmd_rebuild_graph(kb)
+    except Exception as e:
+        print(f"  ⚠ 自动重建失败: {e}")
 
+    if total_new > 0:
         # v3.4: 认知回流 — 从新同步的 hermes 会话中提炼记忆
         print("  [4/5] 认知回流（记忆提炼）...")
         try:

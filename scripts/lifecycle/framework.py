@@ -13,6 +13,8 @@ from .constants import (
     DEFAULT_PROMPT_OPTIMIZE_SCHEDULE,
     DEFAULT_REPAIR_SCHEDULE,
     DEFAULT_RETROSPECTIVE_SCHEDULE,
+    DEFAULT_KB_SYNC_SCHEDULE,
+    KB_SYNC_CRON_NAME,
     DEFAULT_WEEKEND_INPUT_SCHEDULE,
     DEFAULT_WEEKEND_OUTPUT_SCHEDULE,
     DEFAULT_WEEKEND_REFLECTION_SCHEDULE,
@@ -207,6 +209,23 @@ def setup_cron_framework(
     )
     result["retrospective"] = retro
     result["success"] = result["success"] and retro.get("success")
+
+    # 安装知识库每日同步 cron（v6.8.51）—— sync_all 含 hermes 会话/简报/PDF
+    # 同步 + 索引重建 + 图谱重建。此前 kb_auto_sync 设计为 LaunchAgent 但从未安装，
+    # 导致索引停在 08-08、growth-log 断流两个月。先清理同名旧实例。
+    extra_cleanup = self.cleanup_cron_duplicates(framework_names=[KB_SYNC_CRON_NAME])
+    for r in extra_cleanup:
+        if r["name"] not in removed:
+            removed.append(r["name"])
+    kb_sync = hb.cron_create_no_agent(
+        script_name="lc_kb_sync.sh",
+        name=KB_SYNC_CRON_NAME,
+        schedule=DEFAULT_KB_SYNC_SCHEDULE,
+        workdir=str(PROJECT_ROOT),
+        profile=HERMES_PROFILE,
+    )
+    result["kb_sync"] = kb_sync
+    result["success"] = result["success"] and kb_sync.get("success")
 
     return result
 

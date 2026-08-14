@@ -1,13 +1,14 @@
 ---
 title: "Krausz"
-type: "person"
+type: "people"
 created: "2026-06-17T12:40:33Z"
-updated: "2026-06-17T12:40:33Z"
+updated: "2026-08-14T11:15:52Z"
 tags: ["人物", "阿秒科学", "慕尼黑", "诺贝尔", "#type/person", "#status/mature", "#status/growing"]
-related: ["高次谐波产生", "RABBITT"]
-aliases: ["Ferenc-Krausz", "克劳斯"]
+related: ["RABBITT", "高次谐波产生"]
+source_raw: ""
 growth_stage: "mature"
 confidence: 0.95
+aliases: ["Ferenc-Krausz", "克劳斯"]
 ---
 
 # Ferenc Krausz
@@ -25,3 +26,10 @@ Krausz 是阿秒科学的先驱，也是我博士期间的导师级人物（慕�
 ## 来源
 
 - `hhg-teams-report.md`；2023 诺贝尔物理学奖
+
+<!-- linsai-wikilinks -->
+## 关联概念
+
+- [[RABBITT]]
+- [[高次谐波产生]]
+<!-- /linsai-wikilinks -->

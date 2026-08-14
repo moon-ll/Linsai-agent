@@ -183,6 +183,17 @@ cd {project}
 python3 scripts/retrospective.py --period 7d
 """.format(project=project)
 
+        kb_sync = """#!/bin/bash
+set -e
+cd {project}
+# v6.8.51 每日知识库治理（12:40，上午时段结束后）：
+# 1) sync_all：hermes 会话/简报/PDF 同步 + 索引重建(v2) + 图谱重建
+# 2) growth_engine --apply：growth_stage 自动晋升（seedling→growing→mature）
+#    （此前无任何调用方，127/233 节点卡 seedling；纯规则无 LLM 成本）
+python3 scripts/kb_auto_sync.py
+python3 scripts/growth_engine.py --apply
+""".format(project=project)
+
         return {
             "orchestrate": _write_wrapper_script("lc_orchestrate.sh", orchestrate),
             "repair": _write_wrapper_script("lc_repair.sh", repair),
@@ -193,6 +204,7 @@ python3 scripts/retrospective.py --period 7d
             "weekend_worker": _write_wrapper_script("lc_weekend_worker.sh", weekend_worker),
             "prompt_optimize": _write_wrapper_script("lc_prompt_optimize.sh", prompt_optimize),
             "retrospective": _write_wrapper_script("lc_retrospective.sh", retrospective),
+            "kb_sync": _write_wrapper_script("lc_kb_sync.sh", kb_sync),
         }
 
     def _worker_script_for_proposal(self, proposal_id: str) -> Path:

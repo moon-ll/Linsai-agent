@@ -85,18 +85,20 @@ def _extract_frontmatter(text: str) -> tuple:
 
 def _write_wiki_page(kind: str, title: str, body: str, sources: List[Dict[str, Any]],
                      reliability: str = RELIABILITY_DERIVED) -> Dict[str, Any]:
-    """写入 wiki 页面，已存在则追加。"""
+    """写入 wiki 页面，已存在则追加。
+
+    v6.8.51: 改走 kb_wiki 门面（经 knowledge_base facade 注入依赖），
+    统一 frontmatter 构建/图谱挂接/生长日志；type 规范化为复数
+    （concept→concepts 等，旧单数写法是 wiki 类型桶分裂的来源之一）。
+    门面不可用时回退旧的直写路径（保持流水线可用性优先）。
+    """
     _ensure_output_dirs()
-    if kind == "concept":
-        path = KB_CONCEPTS_DIR / (safe_filename(title) + ".md")
-    elif kind == "method":
-        path = KB_METHODS_DIR / (safe_filename(title) + ".md")
-    elif kind == "person":
-        path = KB_PEOPLE_DIR / (safe_filename(title) + ".md")
-    elif kind == "paper":
-        path = KB_PAPERS_DIR / (safe_filename(title) + ".md")
-    else:
-        path = KB_ROOT / (safe_filename(title) + ".md")
+    # v6.8.51: 类型规范化（单数 → 复数目录名）
+    kind_map = {"concept": "concepts", "method": "methods",
+                "person": "people", "paper": "papers"}
+    canonical = kind_map.get(kind, kind)
+    rel = f"wiki/{canonical}/{safe_filename(title)}.md"
+    path = KB_ROOT / canonical / (safe_filename(title) + ".md")
 
     existing = _read_text(path)
     if existing:
@@ -104,32 +106,40 @@ def _write_wiki_page(kind: str, title: str, body: str, sources: List[Dict[str, A
         body = existing_body + "\n\n---\n\n" + body
         sources = existing_fm.get("sources", []) + sources
 
-    frontmatter = {
+    meta = {
         "title": title,
-        "type": kind,
+        "type": canonical,
         "source_reliability": reliability,
         "sources": sources,
-        "updated_at": now_utc(),
-        "created_at": existing and _extract_frontmatter(existing)[0].get("created_at", now_utc()) or now_utc(),
+        "updated": now_utc(),
     }
+    if existing:
+        created = _extract_frontmatter(existing)[0].get("created_at") or _extract_frontmatter(existing)[0].get("created")
+        if created:
+            meta["created"] = created
 
-    fm_lines = ["---"]
-    for k, v in frontmatter.items():
-        if isinstance(v, list):
-            fm_lines.append(f"{k}:")
-            for item in v:
-                if isinstance(item, dict):
-                    fm_lines.append(f"  - title: \"{item.get('title', '')}\"")
-                    fm_lines.append(f"    source_type: {item.get('source_type', '')}")
-                else:
-                    fm_lines.append(f"  - {item}")
-        else:
-            fm_lines.append(f'{k}: "{v}"')
-    fm_lines.append("---")
-
-    content = "\n".join(fm_lines) + "\n\n" + body
-    path.write_text(content, encoding="utf-8")
-    return {"success": True, "path": str(path.relative_to(PROJECT_ROOT)), "reliability": reliability}
+    try:
+        import knowledge_base as _kb
+        _kb.save_wiki_page(rel, body, meta=meta)
+        return {"success": True, "path": rel, "reliability": reliability, "via": "facade"}
+    except Exception:
+        # 门面不可用（罕见）→ 回退直写，保证周末输出链不中断
+        fm_lines = ["---"]
+        for k, v in meta.items():
+            if isinstance(v, list):
+                fm_lines.append(f"{k}:")
+                for item in v:
+                    if isinstance(item, dict):
+                        fm_lines.append(f"  - title: \"{item.get('title', '')}\"")
+                        fm_lines.append(f"    source_type: {item.get('source_type', '')}")
+                    else:
+                        fm_lines.append(f"  - {item}")
+            else:
+                fm_lines.append(f'{k}: "{v}"')
+        fm_lines.append("---")
+        content = "\n".join(fm_lines) + "\n\n" + body
+        path.write_text(content, encoding="utf-8")
+        return {"success": True, "path": str(path.relative_to(PROJECT_ROOT)), "reliability": reliability, "via": "fallback"}
 
 
 # ---------------------------------------------------------------------------

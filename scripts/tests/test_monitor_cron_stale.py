@@ -81,7 +81,7 @@ class MonitorCronStaleTests(TestSuite):
         now = datetime.now(timezone.utc)
         iso = lambda dt: dt.strftime("%Y-%m-%dT%H:%M:%SZ")
 
-        # 必需前缀齐全（含 weekend），避免 _check_cron_status 先触发 cron_missing
+        # 必需前缀齐全（含 weekend + kb-sync），避免 _check_cron_status 先触发 cron_missing
         def _full_set(overrides):
             base = {
                 "lc-micro-scheduler": "*/5 * * * 1-5",
@@ -90,6 +90,7 @@ class MonitorCronStaleTests(TestSuite):
                 "lc-hourly-monitor": "0 * * * *",
                 "lc-prompt-optimize": "0 14 * * *",
                 "lc-retrospective": "0 15 * * 1",
+                "lc-kb-sync": "40 12 * * *",
                 "lc-weekend-weekend-input": "0 9 * * 6",
             }
             crons = []
