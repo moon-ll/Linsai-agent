@@ -265,35 +265,48 @@ def apply_monitor_result(
 
     writer_violations = monitor_result.get("writer_prohibitions", [])
     critic_violations = monitor_result.get("critic_prohibitions", [])
-
-    writer_rule_delta, critic_rule_delta = compute_rule_deltas(
-        monitor_score, prev_monitor_score, score_after,
-        writer_violations, critic_violations,
-        high_issues_before, high_issues_after,
-    )
-
-    # 与 monitor 建议混合（±15 限制）
-    writer_suggested = float(monitor_result.get("writer_suggested_delta", 0.0))
-    critic_suggested = float(monitor_result.get("critic_suggested_delta", 0.0))
-    writer_monitor_delta = max(-MONITOR_DELTA_CAP, min(MONITOR_DELTA_CAP, writer_suggested))
-    critic_monitor_delta = max(-MONITOR_DELTA_CAP, min(MONITOR_DELTA_CAP, critic_suggested))
-
-    # 若 monitor 提供了非零建议，与规则层取平均；否则纯规则层
-    if abs(writer_monitor_delta) > 0.001:
-        writer_delta = (writer_rule_delta + writer_monitor_delta) / 2.0
-    else:
-        writer_delta = writer_rule_delta
-
-    if abs(critic_monitor_delta) > 0.001:
-        critic_delta = (critic_rule_delta + critic_monitor_delta) / 2.0
-    else:
-        critic_delta = critic_rule_delta
-
-    # 串通惩罚
     collusion_risk = monitor_result.get("collusion_risk", "none")
-    writer_delta, critic_delta = apply_collusion_penalty(
-        writer_delta, critic_delta, collusion_risk
-    )
+
+    # v6.8.47: monitor 分数解析失败（JSON+文本双 fallback 后仍为 0.0）时，
+    # 0.0 不是真实评分。此前规则层以 0.0 为真实低分执行奖惩，导致
+    # writer/critic 被顶格误扣（实测案例：key-transient R3 双 -10）。
+    # 解析失败时跳过本轮奖惩（delta=0），仅记录 history 与违规。
+    if monitor_result.get("monitor_score_valid") is False:
+        if _log:
+            _log.warning(
+                f"[{proposal_id}] r{round_num} {section_key} monitor 分数解析失败"
+                f"（0.0 非真实评分），跳过本轮 agent 奖惩"
+            )
+        writer_delta = 0.0
+        critic_delta = 0.0
+    else:
+        writer_rule_delta, critic_rule_delta = compute_rule_deltas(
+            monitor_score, prev_monitor_score, score_after,
+            writer_violations, critic_violations,
+            high_issues_before, high_issues_after,
+        )
+
+        # 与 monitor 建议混合（±15 限制）
+        writer_suggested = float(monitor_result.get("writer_suggested_delta", 0.0))
+        critic_suggested = float(monitor_result.get("critic_suggested_delta", 0.0))
+        writer_monitor_delta = max(-MONITOR_DELTA_CAP, min(MONITOR_DELTA_CAP, writer_suggested))
+        critic_monitor_delta = max(-MONITOR_DELTA_CAP, min(MONITOR_DELTA_CAP, critic_suggested))
+
+        # 若 monitor 提供了非零建议，与规则层取平均；否则纯规则层
+        if abs(writer_monitor_delta) > 0.001:
+            writer_delta = (writer_rule_delta + writer_monitor_delta) / 2.0
+        else:
+            writer_delta = writer_rule_delta
+
+        if abs(critic_monitor_delta) > 0.001:
+            critic_delta = (critic_rule_delta + critic_monitor_delta) / 2.0
+        else:
+            critic_delta = critic_rule_delta
+
+        # 串通惩罚（collusion_risk 已在分支外统一取值）
+        writer_delta, critic_delta = apply_collusion_penalty(
+            writer_delta, critic_delta, collusion_risk
+        )
 
     # 加载 agent 分数（用于后续恢复判断和更新）
     scores = load_agent_scores(scores_path)

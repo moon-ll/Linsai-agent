@@ -203,6 +203,9 @@ def run_monitor_step(
         "success": result.get("success", False),
         "error": result.get("error", ""),
         "monitor_independent_score": monitor_score,
+        # v6.8.47: 暴露分数有效性标志。0.0 意味着 JSON+文本双解析失败，
+        # 下游奖惩（apply_monitor_result）据此跳过扣分，防止解析失败被当作真实 0 分顶格误扣
+        "monitor_score_valid": monitor_score_valid,
         "monitor_dim_scores": monitor_dim_scores,
         "writer_assessment": parsed.get("writer_assessment", ""),
         "critic_assessment": parsed.get("critic_assessment", ""),

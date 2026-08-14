@@ -176,6 +176,62 @@ class AdversarialGovernanceTests(TestSuite):
         self.assert_true(scores["writer"]["score"] > 100, "writer 全局分数上升")
         self.assert_true(scores["critic"]["score"] > 100, "critic 全局分数上升")
 
+    def _test_invalid_monitor_score_skips_penalty(self):
+        """v6.8.47 核心回归：monitor 分数解析失败（0.0 非真实评分）时跳过奖惩。
+
+        触发场景：monitor reviewer 输出格式异常，JSON+文本双 fallback 均失败 →
+        monitor_independent_score=0.0。修复前规则层以 0.0 为真实低分执行奖惩，
+        writer/critic 被顶格误扣（实测 key-transient R3 双 -10），污染全局 agent
+        分数并经 score feedback 注入后续 writer prompt。
+        """
+        ag = self._make_ag()
+        monitor_result = {
+            "success": True,
+            "monitor_independent_score": 0.0,
+            "monitor_score_valid": False,  # v6.8.47 新增：解析失败标志
+            "writer_prohibitions": [],
+            "critic_prohibitions": [],
+            "writer_suggested_delta": 0,
+            "critic_suggested_delta": 0,
+            "collusion_risk": "none",
+            "negative_feedback": False,
+            "overall_assessment": "",
+            "raw_output": "格式异常输出",
+        }
+        prop_state = {"monitor_history": [
+            {"monitor_independent_score": 0.60, "local_writer_score": 90,
+             "local_critic_score": 90, "collusion_risk": "none"},
+        ]}
+        deltas = ag.apply_monitor_result(
+            proposal_id="general-test-20260101",
+            round_num=2,
+            section_key="rationale",
+            score_before=0.60,
+            score_after=0.81,
+            dim_scores={},
+            monitor_result=monitor_result,
+            proposal_state=prop_state,
+        )
+        self.assert_eq(deltas["writer_delta"], 0.0,
+                       f"解析失败时 writer 不应被扣分（实际 {deltas['writer_delta']}）")
+        self.assert_eq(deltas["critic_delta"], 0.0,
+                       f"解析失败时 critic 不应被扣分（实际 {deltas['critic_delta']}）")
+        # 兼容性：不带 monitor_score_valid 字段的旧调用（默认视为有效）行为不变
+        legacy_result = dict(monitor_result)
+        legacy_result.pop("monitor_score_valid")
+        deltas2 = ag.apply_monitor_result(
+            proposal_id="general-test-20260101",
+            round_num=3,
+            section_key="rationale",
+            score_before=0.60,
+            score_after=0.81,
+            dim_scores={},
+            monitor_result=legacy_result,
+            proposal_state=prop_state,
+        )
+        self.assert_true(deltas2["writer_delta"] < 0,
+                         f"旧调用无标志时仍按 0.0 真实低分扣分（实际 {deltas2['writer_delta']}）")
+
     def _test_collusion_penalty(self):
         ag = self._make_ag()
         monitor_result = {
@@ -258,6 +314,7 @@ class AdversarialGovernanceTests(TestSuite):
         self._test_rule_deltas_progress()
         self._test_rule_deltas_penalty()
         self._test_apply_monitor_result_updates_scores()
+        self._test_invalid_monitor_score_skips_penalty()
         self._test_collusion_penalty()
         self._test_negative_feedback_detection()
         self._test_record_monitor_history()

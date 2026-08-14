@@ -1,5 +1,28 @@
 # 变更记录
 
+## v6.8.47 - 2026-08-14 修复 monitor 解析失败被当作真实 0 分顶格误扣 agent 奖惩
+
+### 背景（设计实现一致性验证 #4/#6 交叉发现）
+- key-transient 课题 R3 轮末：monitor 独立评分 0.0（JSON+文本双解析失败，
+  `last_monitor_assessment` 为空佐证），但 `apply_monitor_result` 规则层以 0.0
+  为真实低分执行奖惩 → writer/critic 各被顶格扣 10 分（monitor_history R3 条目：
+  `writer_delta: -10.0, critic_delta: -10.0`），污染全局 agent 分数并经
+  score feedback 注入后续 writer prompt。
+- 设计意图（v6.8.10）本就要求 0.0 时标记 `monitor_score_valid=false`，但该标志
+  此前只用于记日志，未传入下游奖惩——设计实现不一致。
+
+### 修改
+- `adversarial/monitor.py`：返回 dict 新增 `monitor_score_valid` 字段
+- `adversarial/scoring.py`：`apply_monitor_result` 检测到
+  `monitor_score_valid is False` 时跳过规则层/建议混合/串通惩罚（delta=0），
+  仅记录 history 与违规；旧调用无该字段时行为不变（默认有效）
+- `collusion_risk` 取值移至分支外，避免无效分支引用未定义变量
+
+### 测试（test_adversarial_governance.py 新增 3 项断言）
+- `_test_invalid_monitor_score_skips_penalty`：无效分 → delta 双 0；
+  兼容性控制组：无标志旧调用 → 仍按原逻辑扣分
+- 全量回归 445/445 通过；py_compile 通过
+
 ## v6.8.46 - 2026-08-14 修复学习周期多源分发缺口（openalex 等新源全部落入 unknown source）
 
 ### 背景
