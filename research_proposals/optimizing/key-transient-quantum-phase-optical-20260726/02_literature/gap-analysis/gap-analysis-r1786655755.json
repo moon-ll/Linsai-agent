@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "L2分层反演层采用VAE+扩散模型作为AI代理模型，用于瞬态量子相反演，团队具备生成式架构预研基础",
+      "missing_evidence": "研究方案正文仅引用[51][52]两篇近期工作支撑VAE+扩散模型代理方案；团队自身在生成式架构上的前期工作仅以'详见方法学手册H节'带过，正文零实质预研证据；缺乏VAE或扩散模型在物理反演/光谱重建问题中应用的第三方文献支撑",
+      "search_keywords": [
+        "VAE diffusion model physics inverse problem",
+        "generative surrogate model spectroscopy inversion",
+        "variational autoencoder optical parameter retrieval",
+        "diffusion model scientific inverse problem surrogate"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "物理约束AI反演作为三项方法学创新之一，与现有AI驱动光谱反演方法有清晰区隔",
+      "missing_evidence": "仅引用2篇文献支撑物理约束AI反演方法，缺乏与现有PINN/神经网络HHG反演方法的系统性对比文献；创新区隔论证依赖过少引用，领域专家可质疑方法新颖性定位是否充分",
+      "search_keywords": [
+        "physics-informed neural network nonlinear optics inversion",
+        "PINN harmonic generation phase retrieval",
+        "neural network HHG spectroscopy reconstruction",
+        "physics-constrained deep learning optical inverse problem"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "误差预算中各项误差源定量估计（吸收谱噪声0.05、时间抖动0.02、温度漂移0.01、泛函误差0.1）具有可靠依据",
+      "missing_evidence": "四项误差源的具体数值无文献或实验依据引用；泛函误差0.1尤其需要DFT精度评估文献支撑，其余误差值缺乏类似实验条件下的噪声基底文献参照",
+      "search_keywords": [
+        "solid-state HHG signal-to-noise ratio measurement",
+        "attosecond spectroscopy noise floor photon counting",
+        "DFT functional error nonlinear optical property estimation",
+        "time-resolved spectroscopy timing jitter budget"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

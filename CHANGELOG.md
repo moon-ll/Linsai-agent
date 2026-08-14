@@ -1,5 +1,25 @@
 # 变更记录
 
+## v6.8.40 - 2026-08-14 修复 hermes agent 子进程缺进程组清理导致孤儿 gateway 进程风险
+
+### 问题
+- 健康检查发现 key-transient r3 `lit_read` job 运行 30 分钟被 stale 检测标记失败
+  （"运行超时/进程僵死"，attempts=1）。
+- 追踪执行路径发现：`hermes_memory._run_hermes_agent` 使用 `subprocess.run(timeout=N)`
+  未做进程组清理，与 `proposal_lifecycle/optimize.py` v6.8.3-fix9 已修复的模式不一致。
+  该函数被 lit_read/lit_search/gap_identify 及 literature_service 深度阅读路径使用。
+- 触发场景：hermes CLI 超时后 fork 的 gateway worker 进程成为孤儿，继续占用 CLI
+  端口/管道并累积消耗资源（2026-07-26 机器冻结事故同类风险）。
+
+### 修复
+- `hermes_memory._run_hermes_agent` 改为 `Popen + start_new_session=True + os.killpg`
+  进程组清理模式（与 optimize.py v6.8.3-fix9 一致），超时/异常时清理整个进程组。
+- 新增 `tests/test_hermes_agent_process_group.py`（12 断言）验证 start_new_session、
+  超时 killpg、返回契约，并纳入 `self_test.py --module` 回归列表。
+
+### 验证
+- py_compile 通过；self_test --module 423/423 全绿（原 411/411 + 新增 12）
+
 ## v6.8.39 - 2026-08-14 修复生命周期衍生步骤超时偏紧导致轮次卡死风险
 
 ### 问题

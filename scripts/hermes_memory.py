@@ -27,6 +27,7 @@
 from __future__ import annotations
 
 import os
+import signal
 import subprocess
 import tempfile
 from pathlib import Path
@@ -83,17 +84,51 @@ def _run_hermes_agent(
     _inject_minimax_env(env)
 
     t0 = time.time()
+    proc = None
     try:
-        result = subprocess.run(
+        # v6.8.40: 使用 Popen + 进程组杀死替代 subprocess.run，与
+        # proposal_lifecycle/optimize.py v6.8.3-fix9 修复策略一致。
+        # subprocess.run(timeout=N) 在 macOS 上只 kill 直接子进程，
+        # 若 hermes CLI fork 了额外进程（如 gateway worker），这些进程会
+        # 继续运行导致 CLI 端口/管道不释放，孤儿进程累积消耗资源
+        # （2026-07-26 机器冻结事故同类风险）。start_new_session=True 使
+        # 子进程成为新进程组 leader，timeout 后用 os.killpg 清理整个进程组。
+        proc = subprocess.Popen(
             cmd,
-            capture_output=True,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
             text=True,
-            timeout=timeout,
             env=env,
+            start_new_session=True,
         )
+        try:
+            stdout, stderr = proc.communicate(timeout=timeout)
+        except subprocess.TimeoutExpired:
+            # 杀死整个进程组（hermes CLI + 所有子进程）
+            try:
+                os.killpg(os.getpgid(proc.pid), signal.SIGTERM)
+                try:
+                    proc.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+                    proc.wait(timeout=3)
+            except (ProcessLookupError, PermissionError):
+                pass
+            elapsed = round(time.time() - t0, 2)
+            if _log:
+                _log.warning(
+                    f"[hermes_memory] agent loop 超时 profile={profile} "
+                    f"timeout={timeout}s（进程组已清理）"
+                )
+            return {
+                "success": False,
+                "output": "",
+                "error": f"hermes agent 超时（{timeout}s）",
+                "elapsed_s": elapsed,
+            }
         elapsed = round(time.time() - t0, 2)
-        if result.returncode == 0:
-            output = result.stdout.strip()
+        if proc.returncode == 0:
+            output = stdout.strip()
             if len(output) > 8000:
                 output = output[:8000] + f"\n\n... (已截断，共 {len(output)} 字符)"
             if _log:
@@ -104,26 +139,19 @@ def _run_hermes_agent(
             return {"success": True, "output": output, "error": "", "elapsed_s": elapsed}
         return {
             "success": False,
-            "output": result.stdout.strip()[:2000],
-            "error": result.stderr.strip()[:500] or f"退出码 {result.returncode}",
-            "elapsed_s": elapsed,
-        }
-    except subprocess.TimeoutExpired:
-        elapsed = round(time.time() - t0, 2)
-        if _log:
-            _log.warning(
-                f"[hermes_memory] agent loop 超时 profile={profile} "
-                f"timeout={timeout}s"
-            )
-        return {
-            "success": False,
-            "output": "",
-            "error": f"hermes agent 超时（{timeout}s）",
+            "output": stdout.strip()[:2000],
+            "error": stderr.strip()[:500] or f"退出码 {proc.returncode}",
             "elapsed_s": elapsed,
         }
     except FileNotFoundError:
         return {"success": False, "output": "", "error": "未找到 hermes 命令", "elapsed_s": 0}
     except Exception as e:
+        # 兜底：确保进程被清理
+        if proc and proc.poll() is None:
+            try:
+                os.killpg(os.getpgid(proc.pid), signal.SIGKILL)
+            except Exception:
+                pass
         return {"success": False, "output": "", "error": str(e), "elapsed_s": 0}
 
 

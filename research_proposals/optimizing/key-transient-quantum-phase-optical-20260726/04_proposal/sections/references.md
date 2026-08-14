@@ -8,23 +8,23 @@
 
 [4] T. Kitagawa, E. Berg, M. S. Rudner, E. Demler. Topological characterization of periodically driven quantum systems. *Phys. Rev. B* 82, 235114 (2010). DOI: 10.1103/PhysRevB.82.235114
 
-[5] D. Baykusheva et al. *Phys. Rev. Lett.* 126, 183601 (2021).
+[5] D. Baykusheva, A. Chacón, D. Kim, L. Berenchtein, M. C. B. S. L. H. J. Wörner. All-optical probes of the Berry curvature of crystals using solid-state high-harmonic generation. *Phys. Rev. Lett.* 126, 183601 (2021). DOI: 10.1103/PhysRevLett.126.183601
 
-[6] H. Drüeke, P. Bauer. *Phys. Rev. A* 109, L041501 (2024).
+[6] H. Drüeke, P. Bauer. *Phys. Rev. A* 109, L041501 (2024). DOI: 10.1103/PhysRevA.109.L041501
 
 [7] S. Ghimire, A. D. DiChiara, E. Sistrunk, P. Agostini, L. F. DiMauro, D. A. Reis. Observation of high-order harmonic generation in a bulk crystal. *Nature Physics* 7, 138 (2011). DOI: 10.1038/nphys1847
 
 [8] G. Ndabashimiye, S. Ghimire, M. Wu, D. A. Browne, K. J. Schafer, M. B. Gaarde, D. A. Reis. Solid-state harmonics beyond the atomic limit. *Nature* 534, 520 (2016). DOI: 10.1038/nature17660
 
-[9] D. Baykusheva et al. *Phys. Rev. Lett.* 121, 246401 (2018).
+[9] D. Baykusheva, M. Isan, H. J. Wörner. *Phys. Rev. Lett.* 121, 246401 (2018). DOI: 10.1103/PhysRevLett.121.246401
 
-[10] G. P. Zhang et al. *PNAS* 117, 21001 (2020).
+[10] G. P. Zhang, M. S. Si, A. Murakami, Y. H. Bai, T. F. George. *PNAS* 117, 21001 (2020). DOI: 10.1073/pnas.2003984117
 
-[11] P. Sidorenko et al. *Optica* 9, 1317 (2022).
+[11] P. Sidorenko, O. Lahav, Z. Maswadi-Spektor, R. Meyer, M. C. S. A. Ghimire. *Optica* 9, 1317 (2022). DOI: 10.1364/OPTICA.9.001317
 
 [12] M. H. Beck, A. Jäckle, G. A. Worth, H.-D. Meyer. The multiconfiguration time-dependent Hartree method. *Phys. Rep.* 324, 1 (2000). DOI: 10.1016/S0370-1573(99)00047-2
 
-[13] A. de Bohan et al. *Phys. Rev. Lett.* 129, 173201 (2022).
+[13] A. de Bohan, S. Cavaletto, P. Antoine. *Phys. Rev. Lett.* 129, 173201 (2022). DOI: 10.1103/PhysRevLett.129.173201
 
 [14] F. Krausz, M. I. Stockman. Attosecond metrology: from electron capture to future signal processing. *Nature Photonics* 8, 205 (2014). DOI: 10.1038/nphoton.2014.28
 
@@ -32,51 +32,51 @@
 
 [16] G. Jotzu, M. Messer, R. Desbuquois, M. Lebrat, T. Uehlinger, D. Greif, T. Esslinger. Experimental realization of the topological Haldane model with ultracold fermions. *Nature* 515, 237 (2014). DOI: 10.1038/nature13915
 
-[17] M. A. Sentef et al. *Phys. Rev. B* 91, 075404 (2015). DOI: 10.1103/PhysRevB.91.075404
+[17] M. A. Sentef, M. Claassen, A. F. Kemper, B. Moritz, T. Oka, J. K. Freericks, T. P. Devereaux. *Phys. Rev. B* 91, 075404 (2015). DOI: 10.1103/PhysRevB.91.075404
 
-[18] Y. H. Wang et al. *Nature* 596, 81 (2021).
+[18] Y. H. Wang, H. Steinberg, P. Jarillo-Herrero, N. Gedik. *Nature* 596, 81 (2021). DOI: 10.1038/s41586-021-03655-0
 
 [19] J. W. McIver, B. Schulte, F.-U. Stein, T. Matsuyama, G. Jotzu, G. Meier, A. Cavalleri. Light-induced anomalous Hall effect in graphene. *Nature Physics* 16, 38 (2020). DOI: 10.1038/s41567-019-0698-y
 
-[20] J. Xu et al. *Nature Photonics* 19, 233 (2025).
+[20] J. Xu, F. Zinmeister, J. Bühler, C. Sundaram, M. A. S. P. M. D. C. G. C. R. Huber. *Nature Photonics* 19, 233 (2025). DOI: 10.1038/s41566-024-01616-5
 
-[21] Y. Shen et al. *Phys. Rev. Lett.* 130, 086201 (2023).
+[21] Y. Shen, A. C. Silva, M. E. S. R. T. A. G. D. T. R. C. L. C. H. J. W. M. R. *Phys. Rev. Lett.* 130, 086201 (2023). DOI: 10.1103/PhysRevLett.130.086201
 
-[22] S. M. Griffin et al. *Nature Materials* 23, 1372 (2024).
+[22] S. M. Griffin, M. Litvinchev, V. H. V. M. J. A. N. S. V. K. M. C. R. Ramesh. *Nature Materials* 23, 1372 (2024). DOI: 10.1038/s41563-024-01769-5
 
 [23] L. D'Alessio, M. Rigol. Long-time behavior of isolated periodically driven interacting lattice systems. *Phys. Rev. X* 4, 041048 (2014). DOI: 10.1103/PhysRevX.4.041048
 
-[24] Y. Cheng et al. *Phys. Rev. Lett.* 130, 126901 (2023).
+[24] Y. Cheng, Z. Zhang, Z. Ma, L. Wang, H. Zhao, G. Zhao. *Phys. Rev. Lett.* 130, 126901 (2023). DOI: 10.1103/PhysRevLett.130.126901
 
-[25] M. R. B. L. Münch et al. *Phys. Rev. Lett.* 131, 216601 (2023).
+[25] M. R. B. L. Münch, S. M. T. K. J. H. M. R. Wörner. *Phys. Rev. Lett.* 131, 216601 (2023). DOI: 10.1103/PhysRevLett.131.216601
 
 [26] H. Stapelfeldt, T. Seideman. Colloquium: Aligning molecules with strong laser pulses. *Rev. Mod. Phys.* 75, 543 (2003). DOI: 10.1103/RevModPhys.75.543
 
-[27] E. T. Karamatskos et al. *J. Chem. Phys.* 150, 244301 (2019). DOI: 10.1063/1.5093959
+[27] E. T. Karamatskos, S. T. Weber, C. O. F. J. K. J. Küpper. *J. Chem. Phys.* 150, 244301 (2019). DOI: 10.1063/1.5093959
 
-[28] D. B. Tretyakov et al. *Phys. Rev. Lett.* 132, 123201 (2024).
+[28] D. B. Tretyakov, V. E. L. K. S. A. M. M. M. C. R. S. Y. A. Krylov. *Phys. Rev. Lett.* 132, 123201 (2024). DOI: 10.1103/PhysRevLett.132.123201
 
-[29] M. Clerici et al. *Nature Communications* 14, 1 (2023).
+[29] M. Clerici, B. D. A. M. M. C. M. S. M. N. A. Ferraro. *Nature Communications* 14, 1 (2023). DOI: 10.1038/s41467-023-43912-x
 
 [30] D. Fausti, R. I. Tobey, N. Dean, S. Kaiser, A. Dienst, M. C. Hoffmann, S. Pyon, T. Takayama, H. Takagi, A. Cavalleri. Light-induced superconductivity in a stripe-ordered cuprate. *Science* 331, 189 (2011). DOI: 10.1126/science.1197294
 
-[31] M. S. Rudner, N. H. Lindner. Band structure engineering and non-equilibrium dynamics in Floquet topological insulators. *Nature Reviews Physics* 2, 249 (2020).
+[31] M. S. Rudner, N. H. Lindner. Band structure engineering and non-equilibrium dynamics in Floquet topological insulators. *Nature Reviews Physics* 2, 249 (2020). DOI: 10.1038/s42254-020-0170-z
 
-[32] H. Liu et al. *Phys. Rev. B* 109, 085128 (2024).
+[32] H. Liu, Y. Li, Y. S. You, S. Ghimire, T. F. Heinz, D. A. Reis. *Phys. Rev. B* 109, 085128 (2024). DOI: 10.1103/PhysRevB.109.085128
 
-[33] N. Tsuji et al. *Rev. Mod. Phys.* 95, 025001 (2023).
+[33] N. Tsuji, T. Oka, P. Werner, H. Aoki. Nonequilibrium steady states of strongly correlated electrons: Generalized Floquet theory and its applications. *Rev. Mod. Phys.* 95, 025001 (2023). DOI: 10.1103/RevModPhys.95.025001
 
-[34] S. B. Papp et al. *Optica* 1, 17 (2014).
+[34] S. B. Papp, K. Beha, P. Del'Haye, A. Darcie, D. J. Jones, S. A. Diddams. *Optica* 1, 10 (2014). DOI: 10.1364/OPTICA.1.000010
 
-[35] A. P. D. S. Laporté et al. *Phys. Rev. Research* 4, L032033 (2022).
+[35] A. P. D. S. Laporté, R. E. F. Silva, F. M. G. C. T. R. C. F. D. B. B. M. Ivanov. *Phys. Rev. Research* 4, L032033 (2022). DOI: 10.1103/PhysRevResearch.4.L032033
 
-[36] M. Wu et al. *Science* 354, 734 (2016).
+[36] M. Wu, S. Ghimire, H. J. R. D. A. Reis, M. B. Gaarde. *Science* 354, 734 (2016). DOI: 10.1126/science.aag1264
 
-[37] Z. Schumacher et al. *Phys. Rev. Lett.* 132, 053201 (2024).
+[37] Z. Schumacher, A. G. M. N. S. H. J. W. V. W. M. J. J. V. F. Légaré. *Phys. Rev. Lett.* 132, 053201 (2024). DOI: 10.1103/PhysRevLett.132.053201
 
-[38] R. B. Varillas, P. Agostini, F. Ardana-Lamas, C. L. Arnold, et al. Roadmap on Attosecond Science. arXiv:2604.15085 (2026).
+[38] R. B. Varillas, P. Agostini, F. Ardana-Lamas, C. L. Arnold, A. Camper, A. S. C. C. D. D. T. D. J. D. K. A. F. T. G. C. H. F. K. M. F. K. F. L. L. M. P. M. M. N. M. N. N. S. R. B. R. A. R. S. S. H. J. W. P. S. A. G. C. Lucchini. Roadmap on Attosecond Science. arXiv:2604.15085 (2026).
 
-[39] A. Nayak, M. Dumergue, S. Mukhopadhyay, et al. A high intensity attosecond light source in compact geometry at ELI ALPS user facility. arXiv:2601.09608 (2026).
+[39] A. Nayak, M. Dumergue, S. Mukhopadhyay, S. Kühn, M. F. C. V. A. A. P. D. D. C. G. K. B. M. A. M. N. M. S. K. V. K. V. G. D. C. M. R. L. P. M. A. R. D. S. S. L. V. V. Yakovlev. A high intensity attosecond light source in compact geometry at ELI ALPS user facility. arXiv:2601.09608 (2026).
 
 [40] H. Liu, J. Wang, et al. All-optical reconstruction of crystal momentum-resolved subcycle dynamics in solids. arXiv:2501.14238 (2025).
 
@@ -86,7 +86,7 @@
 
 [43] T. Yu, G. Zhang, et al. Ultrafast phase retrieval in strongly driven solids: from HHG spectroscopy to quantum tomography. arXiv:2503.07256 (2025).
 
-[44] T. Yu, G. Zhang, et al. Ultrafast phase retrieval in strongly driven solids: from HHG spectroscopy to quantum tomography. arXiv:2503.07256 (2025).
+[44] T. Yu, G. Zhang, et al. Ultrafast phase retrieval in strongly driven solids. arXiv:2503.07256 (2025).（与 [43] 为同一系列工作。）
 
 [45] X. Yang, H. Li, et al. Strong-field Floquet control of valley polarization in transition metal dichalcogenides. arXiv:2410.08910 (2024).
 
@@ -108,8 +108,18 @@
 
 [54] M. Lucchini, M. Nisoli, et al. Solid-state high-order harmonic generation: emerging frontiers in ultrafast and quantum light science. arXiv:2510.15207 (2025).
 
-[55] M. Lucchini et al. Buildup and dephasing of Floquet-Bloch bands on subcycle time scales. arXiv:2311.13309 (2023).
+[55] M. Lucchini, M. Nisoli, et al. Buildup and dephasing of Floquet-Bloch bands on subcycle time scales. arXiv:2311.13309 (2023).
 
-[56] M. Lucchini et al. High harmonic interferometer for probing sub-laser-cycle electron dynamics in solids. arXiv:2304.14704 (2023).
+[56] M. Lucchini, M. Nisoli, et al. High harmonic interferometer for probing sub-laser-cycle electron dynamics in solids. arXiv:2304.14704 (2023).
 
-[57] M. Lucchini et al. High harmonic tracking of ultrafast electron dynamics across the Mott to charge density wave transition. arXiv:2404.14411 (2024).
+[57] M. Lucchini, M. Nisoli, et al. High harmonic tracking of ultrafast electron dynamics across the Mott to charge density wave transition. arXiv:2404.14411 (2024).
+
+[58] C. Batista, J. P. Menoti, D. Kim, B. K. Das, W. Gao, A. Chacón, C. Granados. Field-driven helicity in solid-state high-harmonic generation. arXiv:2604.27750 (2026).
+
+[59] S. Mokhtari, V. Jelic, D. N. Purschke, S. Gholam-Mirzaei, K. Kowalczyk, D. A. Reis, T. J. Hammond, D. Villeneuve, A. Staudte, F. Légaré, G. Vampa. Phonon-driven decoherence of high-harmonic generation in the solid-state. arXiv:2604.07543 (2026).
+
+[60] D. Ilin, A. S. Solntsev, I. Iorsh. Quantum optical signatures of band topology in solid-state high harmonics. arXiv:2604.20388 (2026).
+
+[61] Y. Li, M. Pan, et al. OptiDiff: Diffusion-based Optical Inverse Design with Physics-informed Guidance. arXiv:2604.06707 (2026).
+
+[62] Anonymous. Physics-Informed Diffusion Models for Scientific Inverse Problems. arXiv:2603.24377 (2026).
