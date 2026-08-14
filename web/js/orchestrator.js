@@ -51,6 +51,7 @@
         switch (status) {
             case 'working': return '#5b9a5b';
             case 'idle': return '#5b9a8b';
+            case 'degraded': return '#b08a3d'; // v6.8.54: 降级但存活（单次瞬时失败）
             case 'blocked': return '#c46b3d';
             case 'offline': return '#aa3a3a';
             default: return '#888';

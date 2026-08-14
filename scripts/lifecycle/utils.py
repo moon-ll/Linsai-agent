@@ -32,6 +32,85 @@ except Exception:
 # ---------------------------------------------------------------------------
 
 
+ERROR_HISTORY_CAP = 10
+"""单个 job 的 error_history 保留上限（v6.8.54）。
+
+背景：error_history 无上限增长曾把 _lifecycle.json 推向膨胀（重试风暴
+场景单 job 可积累数十条），且每条含完整错误文本。保留最近 10 条足够
+溯源，历史证据由归档文件兜底。"""
+
+LIFECYCLE_ARCHIVE_PATH = PROJECT_ROOT / "research_proposals" / "_lifecycle_archive.json"
+"""旧轮次 job 归档文件（v6.8.54）。
+
+archive_old_round_jobs 此前直接丢弃旧轮次 job（error_history 证据丢失，
+违背"产出即资产"）。现改为先归档再删除，全局上限 5000 条滚动裁剪。"""
+
+ARCHIVE_JOB_CAP = 5000
+
+
+def trim_error_history(job: Dict[str, Any], cap: int = ERROR_HISTORY_CAP) -> Dict[str, Any]:
+    """裁剪 job 的 error_history 至最近 cap 条（原地修改并返回 job）。"""
+    hist = job.get("error_history")
+    if isinstance(hist, list) and len(hist) > cap:
+        job["error_history"] = hist[-cap:]
+    return job
+
+
+def append_archive_jobs(proposal_id: str, jobs: List[Dict[str, Any]]) -> int:
+    """把被裁剪的 job 追加进归档文件，返回实际归档数（文件锁保护）。"""
+    if not jobs:
+        return 0
+    with file_lock("lifecycle-archive"):
+        archive = load_json(LIFECYCLE_ARCHIVE_PATH, default={"jobs": []})
+        ts = now_utc()
+        for j in jobs:
+            entry = dict(j)
+            entry["_archived_from"] = proposal_id
+            entry["_archived_at"] = ts
+            archive.setdefault("jobs", []).append(entry)
+        # 滚动裁剪：只保留最近 ARCHIVE_JOB_CAP 条
+        if len(archive["jobs"]) > ARCHIVE_JOB_CAP:
+            archive["jobs"] = archive["jobs"][-ARCHIVE_JOB_CAP:]
+        save_json(LIFECYCLE_ARCHIVE_PATH, archive)
+    return len(jobs)
+
+
+def should_auto_unlock(job: Dict[str, Any], now: datetime, cooldown_hours: float = 24.0) -> bool:
+    """判断双上限耗尽的 failed job 是否应自动解锁重跑（v6.8.54）。
+
+    背景：attempts 与 repair_attempts 双双耗尽后 job 进入"需人工介入"
+    终态，下游 pending 全部阻塞形成课题死锁——2026-08-14 两次人工解锁
+    （key-transient r4-critic / moire r8-writer），根因均为已修复的超时
+    分级问题。本策略把该终态交给 lc-repair 自动处置一次：
+
+    条件（全部满足才解锁）：
+      1. failed 且 attempts >= MAX_JOB_ATTEMPTS 且 repair_attempts >= MAX
+      2. auto_unlock_count < 1（每个 job 终生至多自动解锁一次，
+         防止坏输入导致无限重试循环）
+      3. 最近一次失败距今超过 cooldown_hours（默认 24h，给根因修复
+         留出落地时间，也避免短时间连环重置）
+    """
+    try:
+        if job.get("status") != "failed":
+            return False
+        if int(job.get("attempts", 0)) < MAX_JOB_ATTEMPTS:
+            return False
+        if int(job.get("repair_attempts", 0)) < MAX_JOB_ATTEMPTS:
+            return False
+        if int(job.get("auto_unlock_count", 0)) >= 1:
+            return False
+        finished = str(job.get("finished_at") or "")
+        if not finished:
+            return False
+        fin_dt = datetime.fromisoformat(finished.replace("Z", "+00:00"))
+        age_h = (now - fin_dt).total_seconds() / 3600.0
+        if age_h < cooldown_hours:
+            return False
+        return True
+    except Exception:
+        return False
+
+
 def _ensure_hermes_scripts_dir() -> Path:
     HERMES_SCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
     return HERMES_SCRIPTS_DIR
@@ -119,6 +198,11 @@ def _save_jobs(self, proposal_id: str, jobs: List[Dict[str, Any]]) -> bool:
     state = self._load_state()
     if proposal_id not in state.get("proposals", {}):
         return False
+    # v6.8.54: 保存前裁剪每个 job 的 error_history 至最近 10 条，
+    # 防止重试风暴把 _lifecycle.json 推向膨胀
+    for j in jobs:
+        if isinstance(j, dict):
+            trim_error_history(j)
     state["proposals"][proposal_id]["pipeline_jobs"] = jobs
     state["proposals"][proposal_id]["updated_at"] = now_utc()
     self._save_state(state)
@@ -150,6 +234,10 @@ def archive_old_round_jobs(proposal_id: str, new_round: int) -> int:
     prop = proposals[proposal_id]
     jobs_raw = prop.get("pipeline_jobs", {})
 
+    # v6.8.54: 被清理的旧轮次 job 先归档再丢弃（此前直接删除，
+    # error_history 证据丢失，违背"产出即资产"）
+    to_archive: List[Dict[str, Any]] = []
+
     if isinstance(jobs_raw, dict):
         active = {}
         cleaned = 0
@@ -158,6 +246,7 @@ def archive_old_round_jobs(proposal_id: str, new_round: int) -> int:
                 r = job.get("round", 0)
                 if r < new_round:
                     cleaned += 1
+                    to_archive.append(job)
                 else:
                     active[job_id] = job
         if cleaned > 0:
@@ -170,6 +259,7 @@ def archive_old_round_jobs(proposal_id: str, new_round: int) -> int:
                 r = job.get("round", 0)
                 if r < new_round:
                     cleaned += 1
+                    to_archive.append(job)
                 else:
                     active.append(job)
         if cleaned > 0:
@@ -179,6 +269,11 @@ def archive_old_round_jobs(proposal_id: str, new_round: int) -> int:
 
     if cleaned == 0:
         return 0
+    try:
+        append_archive_jobs(proposal_id, to_archive)
+    except Exception as e:
+        if _log:
+            _log.warning(f"归档旧轮次 job 失败（继续清理）: {e}")
 
     save_json(lifecycle_path, data)
 

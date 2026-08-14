@@ -84,6 +84,29 @@ def _should_notify(alert_key: str) -> bool:
     return True
 
 
+def _prune_alert_cache(cache: Dict[str, Any]) -> int:
+    """清理告警缓存中已过期的条目，返回清理数（v6.8.54）。
+
+    此前仅在 _mark_notified 写入时顺带清理——若无新告警产生，过期条目
+    会无限滞留在缓存文件里（实测 08-08 的 stalled 条目滞留 6 天），
+    对任何读该文件的人构成"看起来有未处理告警"的噪音。
+    """
+    cutoff = datetime.now().timestamp() - ALERT_DEDUP_WINDOW
+    removed = 0
+    for key in list(cache.get("alerts", {}).keys()):
+        info = cache["alerts"].get(key, {})
+        sent = info.get("last_sent", "")
+        if sent:
+            try:
+                dt = datetime.fromisoformat(sent.replace("Z", "+00:00"))
+                if dt.timestamp() < cutoff:
+                    del cache["alerts"][key]
+                    removed += 1
+            except Exception:
+                pass
+    return removed
+
+
 def _mark_notified(alert_key: str, message: str) -> None:
     """记录告警已通知。"""
     cache = _load_alert_cache()
@@ -92,17 +115,7 @@ def _mark_notified(alert_key: str, message: str) -> None:
         "message": message[:200],
     }
     # 清理过期记录
-    cutoff = datetime.now().timestamp() - ALERT_DEDUP_WINDOW
-    for key in list(cache.get("alerts", {}).keys()):
-        info = cache["alerts"][key]
-        sent = info.get("last_sent", "")
-        if sent:
-            try:
-                dt = datetime.fromisoformat(sent.replace("Z", "+00:00"))
-                if dt.timestamp() < cutoff:
-                    del cache["alerts"][key]
-            except Exception:
-                pass
+    _prune_alert_cache(cache)
     _save_alert_cache(cache)
 
 
@@ -340,6 +353,9 @@ def _check_proposals() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
 
 
 # 必须存在的 cron 前缀列表
+# v6.8.54: 拓扑校验已升级为 lifecycle.cron_manifest 清单对账
+# （缺失/重复/调度漂移三类检测）。保留本常量供历史引用与外部脚本兼容，
+# 新代码请使用 cron_manifest.CRON_MANIFEST / validate_cron_topology()。
 REQUIRED_CRON_PREFIXES = [
     "lc-daily-orchestrate",
     "lc-repair",
@@ -382,48 +398,45 @@ def _check_cron_status() -> Optional[Dict[str, Any]]:
     """检查生命周期 cron 是否完整注册且正常执行。
 
     三层检测：
-    1. 必需 cron 前缀是否全部存在
-    2. 每个 cron 的 last_run_at 是否在合理时间范围内
-    3. worker cron 数量是否与 optimizing 课题数匹配
+    1. 拓扑对账（v6.8.54 升级）：cron_manifest 清单校验缺失/重复/调度漂移
+    2. 关键 cron 的 last_run 是否在合理时间范围内
+    3. （遗留）worker cron 由 run_repair 清理，不做数量对账
     """
     try:
         import hermes_bridge as hb
         crons = hb.cron_list_profile("linsai")
         cron_names = [c.get("name", "") for c in crons]
 
-        # 1. 检查必需前缀
+        # 1. 拓扑对账（v6.8.54：从 REQUIRED_CRON_PREFIXES 前缀匹配升级为
+        # 清单对账，新增调度漂移检测——同名 cron 存在但跑错时间此前不可见）
+        from lifecycle.cron_manifest import validate_cron_topology
         missing = []
-        for prefix in REQUIRED_CRON_PREFIXES:
-            if not any(name.startswith(prefix) for name in cron_names):
-                missing.append(prefix)
-
-        # 2. 检查 weekend cron
-        has_weekend = any(name.startswith("lc-weekend-") for name in cron_names)
-        if not has_weekend:
-            missing.append("lc-weekend-*")
-
+        duplicated = []
+        drifted = []
+        for issue in validate_cron_topology(crons):
+            if issue["kind"] == "missing":
+                missing.append(issue["name"])
+            elif issue["kind"] == "duplicate":
+                duplicated.append(f"{issue['name']}(×2)")
+            elif issue["kind"] == "drift":
+                drifted.append(issue["detail"])
         if missing:
             return {
                 "type": "cron_missing",
                 "missing": missing,
                 "message": f"生命周期 cron 缺失: {', '.join(missing)}",
             }
-
-        # v6.8.33: 检测重复 cron（每个必需前缀 >1 份）。历史累积的副本不会被 setup
-        # 路径清理（setup 只在创建前去重，旧副本仍在），需主动检测并触发去重，
-        # 防止 5× 副本复发（v6.8.30/31 修了去重排序键但未对存量副本执行）。
-        from collections import Counter
-        _name_counts = Counter(cron_names)
-        duplicated = []
-        for prefix in REQUIRED_CRON_PREFIXES:
-            _cnt = sum(c for n, c in _name_counts.items() if n.startswith(prefix))
-            if _cnt > 1:
-                duplicated.append(f"{prefix}(×{_cnt})")
         if duplicated:
             return {
                 "type": "cron_duplicate",
                 "duplicated": duplicated,
                 "message": f"生命周期 cron 重复: {', '.join(duplicated)}",
+            }
+        if drifted:
+            return {
+                "type": "cron_drift",
+                "drifted": drifted,
+                "message": f"cron 调度漂移: {'; '.join(drifted[:3])}",
             }
 
         # 3. 检查关键 cron 是否长时间未执行
@@ -679,6 +692,18 @@ def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
     if _log:
         _log.info("=== 每小时监控启动 ===")
 
+    # v6.8.54: 启动即清理过期告警缓存条目（此前仅在有新告警写入时顺带
+    # 清理，无新告警时过期条目无限滞留，构成展示噪音）
+    try:
+        _cache = _load_alert_cache()
+        _removed = _prune_alert_cache(_cache)
+        if _removed > 0:
+            _save_alert_cache(_cache)
+            if _log:
+                _log.info(f"清理过期告警缓存 {_removed} 条")
+    except Exception:
+        pass
+
     # 1. 检查课题状态
     stats, anomalies = _check_proposals()
 
@@ -686,9 +711,11 @@ def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
     cron_issue = _check_cron_status()
     if cron_issue:
         anomalies.append(cron_issue)
-        # cron 缺失/重复时自动修复（不等待人工介入）
+        # cron 缺失/重复/调度漂移时自动修复（不等待人工介入）
+        # v6.8.54: 漂移加入自愈清单——setup 的幂等 helper 会删除
+        # 调度不一致的旧实例后重建，漂移可被 setup 修复
         _ctype = cron_issue.get("type")
-        if _ctype in ("cron_missing", "cron_duplicate") and not dry_run:
+        if _ctype in ("cron_missing", "cron_duplicate", "cron_drift") and not dry_run:
             # 重复 → 直接去重（setup 会再创建，不能用 _auto_repair_cron）
             repaired = _auto_dedup_cron() if _ctype == "cron_duplicate" else _auto_repair_cron()
             if repaired:

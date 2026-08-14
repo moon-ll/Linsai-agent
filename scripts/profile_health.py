@@ -282,7 +282,15 @@ def compute_profile_health(window_hours: int = 24) -> Dict[str, Any]:
         elif cur.get("heartbeat_alive"):
             status = "working"
         elif failed_recs:
-            status = "blocked"
+            # v6.8.54: blocked 仅在最近连续 2 次失败时标记——单次瞬时失败
+            # （如 28s api_error）此前会立刻显示 blocked，造成"看起来坏了
+            # 其实没坏"的误报噪音（2026-08-14 体检：writer/critic 曾同时
+            # 被误标，成功率仍 0.90）。单次失败归入 degraded（降级但存活）。
+            tail = [bool(r.get("success")) for r in completed_recs[-2:]]
+            if len(tail) == 2 and not any(tail):
+                status = "blocked"
+            else:
+                status = "degraded"
         else:
             status = "idle"
 

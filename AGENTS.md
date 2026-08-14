@@ -128,11 +128,11 @@ python3 -m py_compile scripts/*.py
 2. **模块自检**：大量脚本支持 `--self-check`，运行 `python3 scripts/{module}.py --self-check`。
 3. **E2E 集成测试**：`python3 scripts/test_e2e_learning_full.py`（需真实 Claude CLI 环境，非日常回归项）。
 
-**当前基线（v6.8.53）**：
-- `--module`：456/456 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器、轮次完成 break、derived job 优先级、prompt 优化器、看板轮次统计、stale job 回收、monitor 看板时间戳、维度提取修复、质量门槛、MOC 去重修复、标签提取修复、质量天花板收敛/下降检测、维度轮换、输入端熔断（v6.8.53 数据源修复）、审核反馈闭环、KB 健康评分、P0 跨轮持久化、prompt 优化器循环断裂、agent 分数奖惩闭环、nsfc 标准补全、范例注入修复、维度轮换修复、cross-proposal 数据源修复、研究设想质量门槛 idea_review、停滞课题检测修复、退回 idea_review 重触发修复、monitor 降级路径修复、writer 审核反馈注入、同步优化限制、KB 指标持久化、输入端熔断工作日检测、debug journal 压缩、输入端熔断数据源修复、cron 去重默认清单、周末跨周重置按阶段自身时间）
+**当前基线（v6.8.54）**：
+- `--module`：477/477 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器、轮次完成 break、derived job 优先级、prompt 优化器、看板轮次统计、stale job 回收、monitor 看板时间戳、维度提取修复、质量门槛、MOC 去重修复、标签提取修复、质量天花板收敛/下降检测、维度轮换、输入端熔断（v6.8.53 数据源修复）、审核反馈闭环、KB 健康评分、P0 跨轮持久化、prompt 优化器循环断裂、agent 分数奖惩闭环、nsfc 标准补全、范例注入修复、维度轮换修复、cross-proposal 数据源修复、研究设想质量门槛 idea_review、停滞课题检测修复、退回 idea_review 重触发修复、monitor 降级路径修复、writer 审核反馈注入、同步优化限制、KB 指标持久化、输入端熔断工作日检测、debug journal 压缩、输入端熔断数据源修复、cron 去重默认清单、周末跨周重置按阶段自身时间、告警防线可触发（v6.8.54 KB 四类告警端到端）、cron 拓扑对账（缺失/重复/漂移）、双上限终态自动解锁、error_history 裁剪）
 - `--scenario`：16/16 通过
 - `--persona`：38/38 通过
-- `--web-ci`：564/564 通过（Web API 虚拟用户测试覆盖所有主要 API 命名空间；v6.8.53 修复总控路由 500 与 3 处顺序/环境依赖 flake 后历史首次全绿）
+- `--web-ci`：585/585 通过（Web API 虚拟用户测试覆盖所有主要 API 命名空间；v6.8.54 后持续全绿）
 
 **测试设计原则**：零污染（临时隔离目录运行）、零成本（不调用 LLM API）、自动发现（新增 `scripts/tests/test_*.py` 自动纳入回归）。
 
@@ -229,9 +229,9 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 保障全链路稳定运转的四条辅助链路：
 
-- **健康检查**：`lifecycle_monitor.py`（每小时 cron `lc-hourly-monitor`）检测 cron 缺失/陈旧、卡住课题、连续失败、零进展、API 限流，异常去重后飞书通知，cron 缺失自动修复；`profile_health.py` 计算 7 个 hermes profile 的健康度；`failure_analyzer.py` 从日志聚类 8 种失败模式。
+- **健康检查**：`lifecycle_monitor.py`（每小时 cron `lc-hourly-monitor`）检测 cron 缺失/重复/漂移、卡住课题、连续失败、零进展、API 限流，异常去重后飞书通知，cron 异常自动修复；cron 拓扑以 `lifecycle/cron_manifest.py` 为单一真相源（7 个固定 cron 清单 + `validate_cron_topology()` 对账），monitor 启动时清理过期告警缓存条目；`profile_health.py` 计算 7 个 hermes profile 的健康度（单次失败标 degraded，连续 2 次失败才标 blocked）；`failure_analyzer.py` 从日志聚类 8 种失败模式。
 - **看板系统**：`memory/system-kanban.json` 由微调度器（主写）和 `lifecycle_monitor`（合并写）协同维护，包含当前时段/聚焦课题/job 进度/执行历史/任务同步统计，前端通过 `/api/console/flow` 展示。
-- **定期修复**：`lc-repair` cron 每 6 小时执行 `orchestrator.run_repair()`，重置 stuck running（阈值 1800s）、重试 failed job（最多 3 次）、补齐缺失 worker、清理旧轮次 job；微调度器在每次执行前无条件清理 stale job。
+- **定期修复**：`lc-repair` cron 每 6 小时执行 `orchestrator.run_repair()`，重置 stuck running（阈值 1800s）、重试 failed job（最多 3 次）、补齐缺失 worker、清理旧轮次 job（删除前归档至 `research_proposals/_lifecycle_archive.json`，上限 5000 条）；双上限终态 job（attempts≥3 且 repair_attempts≥3）finished 超 24h 后自动解锁重跑一次（`should_auto_unlock`，每 job 限 1 次，`auto_unlock_count` 计数）；error_history 保存时裁剪至 10 条（`trim_error_history`）；微调度器在每次执行前无条件清理 stale job。
 - **自成长**：`strategy_optimizer.py` 基于 7 天历史给出调度参数建议（仅建议）；`prompt_optimizer.py`（每日 14:00 cron `lc-prompt-optimize`）从 debug journal/agent scores/failure patterns 生成 prompt 修改建议并自动应用（备份原文件）；`retrospective.py`（每周一 15:00 cron `lc-retrospective`）综合 5 个数据源生成结构化复盘报告。
 - **自检测/自成长增强（v6.8.16-v6.8.17）**：① 质量天花板检测（连续 3 轮 ≥0.80 且提升 <2% → 自动晋级 pending_review；连续 3 轮下降 → 暂停）② 停滞课题检测（48h 无进展 → stalled 告警）③ KB 笔记覆盖率检测（sync_all 中实时统计）④ 对抗评审维度轮换（连续 3 轮原地踏步 → 自动切换最弱维度）⑤ 输入端熔断（连续 2 周 ideas=0 → input_pipeline_broken 告警）⑥ 人工审核反馈闭环（审核对话意见自动提取 → critic prompt 注入，避免重蹈覆辙）⑦ KB 健康评分（每周反思时计算覆盖率/新鲜度/连通度）⑧ 研究趋势雷达（sync_all 中分析关键词频率趋势）⑨ Cross-proposal 范例注入（高分课题 ≥0.70 的段落注入低分课题 <0.75 的 writer prompt）。
 - **研究设想质量门槛（v6.8.26）**：⑩ idea_review 前置评审（round 1 的 job 链最前端，researcher 对 `00_research_idea.md` 做独立评审，分数 ≥0.70 才允许进入优化；未达标 writer 修复后重审，最多 3 轮）⑪ 结构性缺陷退回（monitor 检测 content/scheme 文件级重复或模块空置 → 设置 `idea_review_required` 标志 → 下一轮自动退回研究设想评审）。
@@ -347,7 +347,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.8.53*
+*版本：6.8.54*
 *日期：2026-08-14*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

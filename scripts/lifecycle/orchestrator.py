@@ -22,7 +22,14 @@ from .constants import (
     STEP_WRITER,
     WEEKEND_JOBS,
 )
-from .utils import _is_stale, _is_weekend, _load_weekend_jobs, _make_job_id, _save_weekend_jobs
+from .utils import (
+    _is_stale,
+    _is_weekend,
+    _load_weekend_jobs,
+    _make_job_id,
+    _save_weekend_jobs,
+    should_auto_unlock,
+)
 
 from weekend_pipeline.state import load_pipeline_state, save_pipeline_state
 from weekend_pipeline.executor import repair_stale_and_failed as repair_weekend_pipeline
@@ -379,9 +386,37 @@ def run_repair(self, dry_run: bool = False) -> Dict[str, Any]:
                             f" retry job {job['job_id']} (repair_attempt {repair_attempts + 1}/{MAX_JOB_ATTEMPTS})"
                         )
                     else:
-                        item["actions"].append(f" job {job['job_id']} 超过修复重试次数，需人工介入")
-                        if not dry_run:
-                            self._record_cron_failure(pid, f"{job['job_id']}: {job.get('last_error', '')}")
+                        # v6.8.54: 双上限耗尽终态的自动解锁（每 job 终生一次，
+                        # 失败满 24h 后）。此前该终态只能人工解锁，2026-08-14
+                        # 曾两次手动处理（key-transient r4-critic / moire
+                        # r8-writer，根因均为超时分级不足，已修）。
+                        from datetime import datetime as _dt, timezone as _tz
+                        if should_auto_unlock(job, _dt.now(_tz.utc)):
+                            if not dry_run:
+                                job["auto_unlock_count"] = int(job.get("auto_unlock_count", 0)) + 1
+                                hist = job.get("error_history") or []
+                                hist.append({
+                                    "at": now_utc(),
+                                    "error": "自动解锁(v6.8.54): 双上限耗尽且失败超24h，"
+                                             f"重置重跑（第{job['auto_unlock_count']}次/上限1）",
+                                    "attempts": job.get("attempts", 0),
+                                })
+                                job.update({
+                                    "status": JOB_STATUS_PENDING,
+                                    "attempts": 0,
+                                    "started_at": "",
+                                    "finished_at": "",
+                                    "last_error": "",
+                                    "error_history": hist,
+                                })
+                                self._save_jobs(pid, jobs)
+                            item["actions"].append(
+                                f" auto-unlock job {job['job_id']} (双上限终态自动解锁重跑)"
+                            )
+                        else:
+                            item["actions"].append(f" job {job['job_id']} 超过修复重试次数，需人工介入")
+                            if not dry_run:
+                                self._record_cron_failure(pid, f"{job['job_id']}: {job.get('last_error', '')}")
         except Exception as e:
             item["actions"].append(f" error: {e}")
         repaired.append(item)

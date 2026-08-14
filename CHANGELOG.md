@@ -1,5 +1,59 @@
 # 变更记录
 
+## v6.8.54 - 2026-08-14 协调复杂度治理：cron 拓扑显式化 + 告警防线测试 + 终态自动解锁 + 噪音收敛
+
+架构评审结论的落地（"当前真正的对手是协调复杂度"）：
+
+### cron 拓扑显式化（协调机制从隐式时间错开升级为声明式对账）
+- 新增 `lifecycle/cron_manifest.py`：7 个固定 cron 的单一真相源
+  （名称/调度/类别/用途/软依赖），`validate_cron_topology()` 检出三类问题：
+  缺失（missing）、重复（duplicate）、**调度漂移（drift，新增能力）**
+  ——同名 cron 存在但跑错时间此前对 monitor 完全不可见。
+- `lifecycle_monitor._check_cron_status` 从 REQUIRED_CRON_PREFIXES 前缀
+  匹配升级为清单对账；`cron_drift` 纳入自动修复路径（setup 幂等 helper
+  删旧重建可修漂移）。常量保留并标注指向清单。
+- 明确 worker cron（v6.7.5 设计）为遗留清理目标，不参与对账，
+  防止"worker 数 0 ≠ 课题数 N"永久误报。
+- 实测当前拓扑对账干净（16 cron 无缺失/重复/漂移）。
+
+### 告警防线可触发性测试（"防线失效无人报警"的系统性补口）
+- 新增 `tests/test_alert_circuits.py`（21 断言，4 套件）：
+  KB 四类告警正向触发（v6.8.50 引入但从未被回归覆盖，此前仅
+  --self-check）+ 健康零告警基线 + 拓扑三类检出 + 清单完备性。
+- 注册进 self_test `--module` 注册表（发现并适配自定义 TestSuite
+  协议，unittest.TestCase 不可见问题顺带明确）。
+
+### 双上限终态自动解锁（替代人工解锁）
+- `lifecycle/utils.should_auto_unlock()`：failed 且 attempts/repair 双达 3
+  且失败超 24h 冷却 → 解锁重跑；每 job 终生至多 1 次（防坏输入无限
+  重试循环）；畸形输入安全返回 False。
+- `orchestrator.run_repair` 的"需人工介入"分支接入该策略。落地当天即
+  有存量案例：order-parameter r1 references critic 双上限超时终态，
+  冷却期满后 lc-repair 将自动处置（此前该终态 3 天内两次依赖人工）。
+- 六场景单测覆盖（解锁/冷却期/一次上限/单上限/非 failed/畸形输入）。
+
+### job 历史治理（控 _lifecycle.json 膨胀 + 证据保留）
+- `archive_old_round_jobs` 从"直接删除旧轮次 job"改为先归档到
+  `research_proposals/_lifecycle_archive.json`（全局 5000 条滚动，
+  file_lock 保护）再删除——error_history 证据此前随删除丢失。
+- `_save_jobs` 保存前裁剪每个 job 的 error_history 至最近 10 条
+  （`trim_error_history`），防重试风暴把状态文件推向膨胀。
+
+### 展示层噪音收敛
+- `profile_health`：blocked 仅在最近连续 2 次失败时标记；单次瞬时
+  失败（如 28s api_error）归入 degraded（降级但存活）。此前 writer/critic
+  成功率 0.90 时仍被误标 blocked。前端 orchestrator.js 补 degraded 颜色。
+- `lifecycle_monitor` 启动即清理过期告警缓存（_prune_alert_cache 提取），
+  此前仅在有新告警写入时顺带清理，无新告警时过期条目无限滞留
+  （实测 08-08 stalled 条目滞留 6 天构成"看起来有未处理告警"噪音）。
+
+### 验证
+- `self_test --module`：477/477（456→477，+21）
+- `self_test --web-ci`：585/585（564→585）
+- `lifecycle_monitor --dry-run`：5 课题推进正常 0 告警；2 个 failed job
+  均在正常策略范围内（1 个 repair<3 待重试、1 个终态待冷却期满自动解锁）
+- `profile_health --self-check` 通过；`cron_manifest --self-check` 通过
+
 ## v6.8.53 - 2026-08-14 三层诊断：输入端熔断复活 + cron 幂等 + 周重置修复
 
 ### 诊断（20:00-20:25 健康检查，发现 3 个确认 Bug）
