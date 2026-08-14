@@ -23,6 +23,45 @@ from proposal_lifecycle.constants import (
 # 无需每次读原始范本文件（节省 ~29KB token/次）。
 
 
+# ---------------------------------------------------------------------------
+# v6.8.46: hermes API 错误检测
+#   配额耗尽/限流/网关故障时，hermes CLI 以 returncode=0 退出，
+#   stdout 为错误文本。该文本进入评审解析链会产生伪分数
+#   （2026-08-14 实例：MiniMax 429 文本被解析为 0.18 综合分）。
+#   短输出（<2000 字符）中命中任一特征即判为 API 错误。
+# ---------------------------------------------------------------------------
+_API_ERROR_SIGNATURES = (
+    "API call failed",
+    "已达到 Token Plan 用量上限",
+    "购买积分补充用量",
+    "HTTP 429",
+    "rate limit exceeded",
+    "quota exceeded",
+    "insufficient_quota",
+    "API 调用失败",
+    "余额不足",
+    "账户已欠费",
+)
+
+
+def _detect_api_error(output: str) -> str:
+    """检测 hermes stdout 是否为 API 错误文本。
+
+    Returns:
+        命中的错误特征（用于日志与 error 字段）；正常输出返回空字符串。
+    """
+    if not output:
+        return ""
+    # 错误文本通常很短；正常评审输出动辄上万字符，
+    # 长输出中偶尔引用错误信息不应误判
+    if len(output) > 2000:
+        return ""
+    for sig in _API_ERROR_SIGNATURES:
+        if sig in output:
+            return sig
+    return ""
+
+
 class OptimizeMixin:
     # ------------------------------------------------------------------
     # 对抗优化循环
@@ -1623,6 +1662,19 @@ class OptimizeMixin:
                 output = stdout.strip()
                 if len(output) > 50000:
                     output = output[:50000] + f"\n... (截断，共{len(output)}字符)"
+                # v6.8.46: API 错误检测——配额耗尽/限流时 hermes CLI returncode 仍为 0，
+                # stdout 是错误文本。若不拦截，垃圾文本会被解析成伪分数污染 score_history
+                # （实例：2026-08-14 MiniMax Token Plan 耗尽，429 错误文本被解析成 0.18 分）
+                err_sig = _detect_api_error(output)
+                if err_sig:
+                    if _log:
+                        _log.warning(
+                            f"hermes 返回 API 错误({err_sig})，标记 success=False: {output[:120]}"
+                        )
+                    return {
+                        "success": False, "output": output[:2000],
+                        "error": f"api_error:{err_sig}", "elapsed_s": elapsed,
+                    }
                 return {"success": True, "output": output, "elapsed_s": elapsed}
             return {
                 "success": False, "output": stdout[:2000],
@@ -1735,6 +1787,10 @@ class OptimizeMixin:
         output = critic_result.get("output", "")
         import re
         dims: Dict[str, float] = {}
+        # v6.8.46: 输出过短视为无效评审——正常 critic 评审输出含维度表/问题清单，
+        # 少于 300 字符的输出必然是错误文本或截断，解析出的分数是伪分数
+        if len(output.strip()) < 300:
+            return dims
         # 收集所有"维度名+分数"对（去重，每个维度只取第一个匹配）
         for cn_name, en_key in self._DIM_MAP.items():
             if en_key in dims:

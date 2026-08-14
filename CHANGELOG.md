@@ -1,5 +1,36 @@
 # 变更记录
 
+## v6.8.48 - 2026-08-14 修复 429 空转污染链：API 错误源头拦截 + 双数据层清洗
+
+### 背景（架构评估逐项核查产出）
+- 架构评估发现瞬态课题分数 0.81→0.18 异常，逐项排查定位根因：
+  **MiniMax Token Plan 上午耗尽**（gap-analysis JSON 记录 HTTP 429"用量上限"），
+  此后所有 hermes job 均为 13-16 秒空转（CLI returncode=0 + 错误文本输出），
+  被 `_run_hermes` 记为 success=True，429 文本被解析成伪分数 0.18 污染 score_history；
+  同窗口 monitor 空转又触发 R3 双 -10 误扣（v6.8.47 已修下游跳过）。
+
+### 修改（proposal_lifecycle/optimize.py）
+- 新增 `_detect_api_error()`：识别 10 种 API 错误特征（429/配额耗尽/余额不足等），
+  `_run_hermes` 在 returncode=0 时进一步校验输出，命中特征返回 success=False（源头拦截）。
+- `_extract_dimension_scores` 增加短输出防线：<300 字符的输出不产生维度分（纵深防御）。
+
+### 数据清洗
+- score_history：移除瞬态课题 round 4 的 3 条伪记录（0.18 等），last_score 恢复 0.81。
+- agent-scores.json：回滚 R3 双 -10 误扣，writer/critic 恢复 100.0，清除无 reason 污染条目。
+
+### 验证
+- `_detect_api_error` 5 用例（含长输出不误判）通过；短输出拦截用例通过。
+- test_optimize_dimension_scores / test_adversarial_governance / test_lifecycle_cron 全通过。
+- hermes 探针确认配额已恢复（正常返回）。
+
+### 评估结论修正（逐项核查后）
+- rounds=0 两课题：验证为**非缺陷**（r1 进行中 25/30 job done，调度器会续跑剩余 5 个后
+  自动推进轮次）；rebuild dry-run 显示直接跑会把瞬态课题 last_score 误算成 0.48
+  （旧生命周期 round-8 文件混入），已规避。
+- 自学闭环此前评估"数据空缺"系查看位置错误：agent-scores.json 实际活跃（46 条历史）、
+  prompt 优化器 8-13 实际修改了 critic/writer SOUL.md（含备份+debug journal 审计）、
+  周复盘 8-10 产物存在。自学闭环真实在运转。
+
 ## v6.8.47 - 2026-08-14 修复 monitor 解析失败被当作真实 0 分顶格误扣 agent 奖惩
 
 ### 背景（设计实现一致性验证 #4/#6 交叉发现）
