@@ -222,6 +222,54 @@ class LiteratureServiceParserTests(TestSuite):
             self.assert_true('"status": "pool"' in content,
                              f"status_history 字段已写入文件（实际 {content[:300]!r}）")
 
+    def _test_ingest_doi_paper_without_arxiv_id(self):
+        """v6.8.43 核心回归：无 arXiv ID 的期刊论文（OpenAlex/Crossref 来源）
+        以 DOI 为标识也能入库，不再被静默丢弃。
+
+        触发场景：多源学术检索引入 OpenAlex 期刊论文，无 arxiv_id，
+        原实现 `if not arxiv_id: continue` 直接跳过，期刊文献进不了知识库。
+        """
+        papers = [
+            {"doi": "10.1038/s41567-018-0315-5",
+             "title": "Solid-state high harmonic generation in crystals",
+             "year": "2019", "authors": "Ghimire & Reis",
+             "score": 0.88, "tldr": "晶体高次谐波综述",
+             "source": "openalex", "is_new": True},
+        ]
+        result = self.svc._ingest_new_papers(
+            papers, source="pipeline", proposal_id="test-proposal-doi"
+        )
+        self.assert_eq(result.get("ingested"), 1,
+                       f"DOI 期刊论文应入库（实际 {result}）")
+        self.assert_eq(result.get("failed"), 0,
+                       f"不应有失败（实际 {result}）")
+        raw_dir = self.lit_svc_mod.RAW_DIR / "papers"
+        written = list(raw_dir.glob("*doi-10-1038-s41567-018-0315-5*.md"))
+        self.assert_eq(len(written), 1,
+                       f"按 DOI 命名的文件应落盘（实际 {len(written)}）")
+        if written:
+            content = written[0].read_text(encoding="utf-8")
+            self.assert_true("doi" in content,
+                             f"frontmatter 应含 doi 字段（实际 {content[:300]!r}）")
+            self.assert_true("10.1038/s41567-018-0315-5" in content,
+                             f"DOI 值应写入（实际 {content[:300]!r}）")
+            self.assert_true("s41567-018-0315-5" in content,
+                             f"DOI 链接应写入正文（实际 {content[:300]!r}）")
+
+    def _test_ingest_paper_with_neither_id(self):
+        """既无 arXiv ID 也无 DOI 的论文应跳过，不污染知识库。"""
+        papers = [
+            {"title": "No identifier paper", "year": "2024",
+             "authors": "X", "score": 0.5, "is_new": True},
+        ]
+        result = self.svc._ingest_new_papers(
+            papers, source="pipeline", proposal_id="test-proposal-none"
+        )
+        self.assert_eq(result.get("ingested"), 0,
+                       f"无标识论文不能入库（实际 {result}）")
+        self.assert_eq(result.get("skipped"), 0,
+                       f"无标识论文应直接 continue 不计数（实际 {result}）")
+
     def run_tests(self):
         self._test_json_array_clean()
         self._test_json_array_with_markdown_fence()
@@ -235,3 +283,5 @@ class LiteratureServiceParserTests(TestSuite):
         self._test_build_frontmatter_mixed_list_falls_back_to_json()
         self._test_ingest_new_papers_returns_counts()
         self._test_ingest_new_papers_handles_unhashable_dict_list()
+        self._test_ingest_doi_paper_without_arxiv_id()
+        self._test_ingest_paper_with_neither_id()

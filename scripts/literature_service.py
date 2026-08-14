@@ -1010,12 +1010,16 @@ class LiteratureService:
         skipped = 0
         for paper in papers:
             arxiv_id = self._extract_arxiv_id(paper)
-            if not arxiv_id:
+            # v6.8.43: 支持无 arXiv ID 的期刊论文（OpenAlex/Crossref/PubMed 来源），以 DOI 作为标识
+            doi = str(paper.get("doi", "") or "").strip()
+            doi_clean = re.sub(r"^(https?://(dx\.)?doi\.org/|doi:)", "", doi).strip()
+            if not arxiv_id and not doi_clean:
                 continue
+            identifier = arxiv_id or f"doi-{self._safe_filename(doi_clean)}"
             # v6.8.3: 跳过自然语言提取的缺元数据条目，不污染知识库
             if paper.get("_needs_metadata"):
                 if _log:
-                    _log.info(f"[LiteratureService] 跳过缺元数据论文: {arxiv_id}，需通过 DeepXiv 补充")
+                    _log.info(f"[LiteratureService] 跳过缺元数据论文: {identifier}，需通过 DeepXiv 补充")
                 skipped += 1
                 continue
             try:
@@ -1025,7 +1029,8 @@ class LiteratureService:
                 # 构建 raw/papers/ 条目
                 raw_dir = RAW_DIR / "papers"
                 raw_dir.mkdir(parents=True, exist_ok=True)
-                slug = f"{paper.get('year', '2024')}-{arxiv_id}-{self._safe_filename(paper.get('title', 'untitled'))}"
+                title_safe = self._safe_filename(paper.get("title", "untitled"))
+                slug = f"{paper.get('year', '2024')}-{identifier}-{title_safe}"
                 raw_path = raw_dir / f"{slug}.md"
                 if raw_path.exists():
                     skipped += 1
@@ -1033,13 +1038,13 @@ class LiteratureService:
 
                 fm = {
                     "title": paper.get("title", ""),
-                    "arxiv_id": arxiv_id,
+                    "doi": doi_clean,  # v6.8.43: 期刊论文 DOI（可为空）
                     "authors": paper.get("authors", ""),
                     "year": paper.get("year", "2024"),
                     "tags": ["deepxiv-论文库"],
                     "project": ["NSFC-强场超快"],
                     "direction": paper.get("direction", ""),
-                    "source": source,
+                    "source": paper.get("source", source),
                     "imported_at": now_utc(),
                     "score_deepxiv": paper.get("score", 0.5),
                     "status": "unseen",
@@ -1047,22 +1052,27 @@ class LiteratureService:
                     "read_status": "unread",
                     "used_by_proposals": [proposal_id] if proposal_id else [],
                     "has_pdf": False,
-                    "abstract": "",
+                    "abstract": paper.get("abstract", "")[:200],
                     "status_history": [
                         {"status": "pool", "at": now_utc(), "by": "literature_service"}
                     ],
                 }
+                if arxiv_id:
+                    fm["arxiv_id"] = arxiv_id
                 content = build_frontmatter(fm)
-                content += f"\n\n# {paper.get('title', '')}\n\n{paper.get('tldr', '')}\n"
+                body = f"\n\n# {paper.get('title', '')}\n\n{paper.get('tldr', '')}\n"
+                if doi_clean and not arxiv_id:
+                    body += f"\n**DOI**: [https://doi.org/{doi_clean}](https://doi.org/{doi_clean})\n"
+                content += body
                 raw_path.write_text(content, encoding="utf-8")
                 ingested += 1
 
                 if _log:
-                    _log.info(f"[LiteratureService] 新论文入库: {arxiv_id} ({paper.get('title', '')[:50]})")
+                    _log.info(f"[LiteratureService] 新论文入库: {identifier} ({paper.get('title', '')[:50]})")
             except Exception as e:
                 failed += 1
                 if _log:
-                    _log.warning(f"[LiteratureService] 入库失败 {arxiv_id}: {e}")
+                    _log.warning(f"[LiteratureService] 入库失败 {identifier}: {e}")
         return {"ingested": ingested, "failed": failed, "skipped": skipped}
 
     def _mark_used_by_proposal(self, arxiv_id: str, proposal_id: str) -> None:

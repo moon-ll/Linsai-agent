@@ -1,5 +1,25 @@
 # 变更记录
 
+## v6.8.43 - 2026-08-14 打通期刊论文入库：无 arXiv ID 论文以 DOI 进入知识库
+
+### 背景
+- v6.8.42 新增多源检索后，发现闭环缺口：`LiteratureService._ingest_new_papers` 以 `arxiv_id` 为唯一标识，
+  OpenAlex/Crossref 检索出的期刊论文（无 arXiv ID）在入口处被直接 `continue` 丢弃，多源成果进不了知识库。
+- 用户确认保持无 key 配置（压力测试：OpenAlex 无 key 12/12 成功均 1.6s，PubMed 5/5；S2 429 自动降级）。
+
+### 修改（literature_service.py）
+- `_ingest_new_papers` 支持无 arXiv ID 但带 DOI 的论文：
+  - 标识符回退链：`arxiv_id` → `doi-<safe-slug>`，两者皆无则跳过
+  - frontmatter 新增 `doi` 字段（还原 DOI 前缀 `https://doi.org/` / `doi:`）
+  - 期刊论文正文追加 DOI 链接行；`source` 保留真实来源（openalex/pubmed 等）
+  - `abstract` 前 200 字符写入 frontmatter（原为空）
+- 文件名规范：`{year}-doi-{safe-slug}-{title-slug}.md`，与 arXiv 论文并存于 raw/papers/
+
+### 测试（tests/test_literature_service.py，-2 新增用例）
+- `_test_ingest_doi_paper_without_arxiv_id`：DOI 期刊论文成功入库（文件落盘、frontmatter 含 doi、正文含 DOI 链接）
+- `_test_ingest_paper_with_neither_id`：无标识论文不污染知识库
+- 全量回归通过（隔离目录，零污染）；py_compile 全量通过
+
 ## v6.8.42 - 2026-08-14 论文检索多源化：新增 OpenAlex/Semantic Scholar/PubMed/Crossref，修复 arXiv 检索隐性故障
 
 ### 背景与验证
