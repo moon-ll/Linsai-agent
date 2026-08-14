@@ -6,9 +6,12 @@
 
 | 文件 | 说明 |
 |------|------|
-| `CLAUDE-CLI-ADMIN.md` | Claude CLI 人工管理指南 |
-| `deepxiv-knowledge-workflow.md` | deepxiv 知识库流水线设计文档（v6） |
-| `unified-state-sync-design.md` | 论文统一状态总线设计文档（v5） |
+| `FRAMEWORK-ARCHITECTURE.md` | 框架架构总览（最新，v6.8） |
+| `ARCHITECTURE.md` | 架构说明 |
+| `PROJECT-STRUCTURE.md` | 项目结构详版 |
+| `DATA-FLOW-MAP.md` | 数据流图 |
+| `SCORING-STANDARDS.md` | 评分标准 |
+| `FEATURE-PLAN.md` | 功能规划 |
 | `linsai-orchestrator-design.md` | 林赛总控设计文档（v6.7） |
 | `prompts/` | LLM prompt 模板（质量审查/维护审查/概念合并/论文精读） |
 | `archive/` | 历史版本文档归档（已实现/已废弃的旧版计划与报告） |
@@ -19,6 +22,10 @@
 
 | 文件 | 说明 |
 |------|------|
+| `CHANGELOG-archive-v6.0-v6.7.md` | 变更记录归档（v6.7.7 及更早，149 个版本条目中的 20 个） |
+| `deepxiv-knowledge-workflow.md` | deepxiv 知识库流水线设计（v6 时代，已被多源检索取代） |
+| `CLAUDE-CLI-ADMIN.md` | Claude CLI 人工管理指南（2026-05，工具手册） |
+| `unified-state-sync-design.md` | 论文统一状态总线设计（v4.2 设计稿，部分实现） |
 | `IMPLEMENTATION-PLAN-v2.1.0.md` | 工具型协作者实现计划（已实现） |
 | `IMPLEMENTATION-PLAN-v3.0.0.md` | 旧版计划（已废弃，方向已重构） |
 | `DEEP-AUDIT-REPORT-v1.7.2.md` | 深度评估报告（历史归档） |
@@ -36,3 +43,4 @@
 - 报告类文档包含：测试方法、结果数据、结论建议
 - prompt 模板独立存放，便于版本管理和复用
 - 废弃文档移入 `archive/`，避免污染主目录
+- CHANGELOG 主文件只保留当前大版本（v6.8.x），旧版本切至 `archive/CHANGELOG-archive-*.md`

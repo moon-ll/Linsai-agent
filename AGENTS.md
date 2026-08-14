@@ -235,6 +235,8 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 - **自成长**：`strategy_optimizer.py` 基于 7 天历史给出调度参数建议（仅建议）；`prompt_optimizer.py`（每日 14:00 cron `lc-prompt-optimize`）从 debug journal/agent scores/failure patterns 生成 prompt 修改建议并自动应用（备份原文件）；`retrospective.py`（每周一 15:00 cron `lc-retrospective`）综合 5 个数据源生成结构化复盘报告。
 - **自检测/自成长增强（v6.8.16-v6.8.17）**：① 质量天花板检测（连续 3 轮 ≥0.80 且提升 <2% → 自动晋级 pending_review；连续 3 轮下降 → 暂停）② 停滞课题检测（48h 无进展 → stalled 告警）③ KB 笔记覆盖率检测（sync_all 中实时统计）④ 对抗评审维度轮换（连续 3 轮原地踏步 → 自动切换最弱维度）⑤ 输入端熔断（连续 2 周 ideas=0 → input_pipeline_broken 告警）⑥ 人工审核反馈闭环（审核对话意见自动提取 → critic prompt 注入，避免重蹈覆辙）⑦ KB 健康评分（每周反思时计算覆盖率/新鲜度/连通度）⑧ 研究趋势雷达（sync_all 中分析关键词频率趋势）⑨ Cross-proposal 范例注入（高分课题 ≥0.70 的段落注入低分课题 <0.75 的 writer prompt）。
 - **研究设想质量门槛（v6.8.26）**：⑩ idea_review 前置评审（round 1 的 job 链最前端，researcher 对 `00_research_idea.md` 做独立评审，分数 ≥0.70 才允许进入优化；未达标 writer 修复后重审，最多 3 轮）⑪ 结构性缺陷退回（monitor 检测 content/scheme 文件级重复或模块空置 → 设置 `idea_review_required` 标志 → 下一轮自动退回研究设想评审）。
+- **多源学术检索（v6.8.42-v6.8.45）**：`external_fetcher.py` 新增 OpenAlex/Semantic Scholar/PubMed/Crossref 检索源与 `search_academic()` 聚合（DOI/arXiv ID/标题三级去重，任一源失败自动降级）；无 key 匿名模式日均 20-50 次检索足够（OpenAlex 无 key 约 100 次/天 + 24h 缓存）。`literature_service` 支持无 arXiv ID 的期刊论文以 DOI 入库（`{year}-doi-{slug}-{title}.md`）；references 校验步骤在 hermes 检索后叠加多源补充，hermes 无结果时多源自动接管。
+- **API 故障防线（v6.8.46-v6.8.48）**：`_run_hermes` 对 returncode=0 的输出做 API 错误特征检测（429/配额耗尽/余额不足等 10 种），命中即 success=False，防止 MiniMax Token Plan 耗尽期错误文本被解析成伪分数（实测案例：0.81→0.18 污染）；monitor 解析失败（0.0 非真实分）跳过奖惩不误扣；`_extract_dimension_scores` 对 <300 字符短输出不产生分数。
 
 ---
 

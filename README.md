@@ -129,95 +129,69 @@ LinSai-CoPilot/
 │   ├── .obsidian/             # Obsidian 配置
 │   ├── templates/             # 笔记模板
 │   ├── captures/              # 对话自动捕获片段
+│   ├── .cache/                # 检索缓存（arxiv/wikipedia/academic，24h TTL）
 │   ├── aliases.json           # 别名映射
 │   ├── index.json             # 倒排索引
 │   ├── graph.json             # 知识图谱
 │   └── growth-log.json        # 知识生长日志
 │
-├── skills/                    # 技能目录（8+ 个思维顾问技能）
-│   └── {skill-name}/
-│       └── SKILL.md
+├── research_proposals/        # NSFC 申请书生命周期数据（核心数据区）
+│   ├── _lifecycle.json        # 生命周期状态唯一真相源（轮次/分数/调度）
+│   ├── drafts/                # 初稿区（人工确认后流转）
+│   ├── optimizing/            # 优化区（每课题 00-06 编号目录，对抗优化进行中）
+│   ├── pending_review/        # 待校验区（质量天花板晋级后待终审）
+│   └── archived/              # 归档区（已完结课题）
 │
-├── projects/                  # v3.5 课题指导模块数据
-│   ├── {project_id}.json      # 课题元数据
-│   └── {project_id}/          # 课题工作目录
-│       ├── PROJECT-MEMORY.md  # 核心记忆（≤100行，自动压缩）
-│       ├── units/             # 单元（验收标准/风险/任务引用）
-│       ├── kb/                # 分层知识库（raw/parsed/summary）
-│       └── memory/            # 课题记忆（对话存档/片段/决策/风险）
+├── scripts/                   # 工具脚本（Python 3，零依赖，116 个主脚本 + 8 个子包）
+│   ├── copilot_engine.py      # 核心引擎（LLM调用 + CLI）
+│   ├── context_builder.py     # 上下文构建（Prompt组装）
+│   ├── knowledge_base.py      # 知识库引擎
+│   ├── external_fetcher.py    # 统一信息获取（deepxiv arXiv + OpenAlex/S2/PubMed/Crossref 多源学术检索）
+│   ├── learning_engine.py     # 自主学习核心
+│   ├── hermes_bridge.py       # hermes CLI 桥接（cron控制/oneshot/团队profile状态）
+│   ├── hermes_pipeline.py     # NSFC 研究管线（六阶段→7个hermes profile）
+│   ├── proposal_lifecycle.py  # 提案生命周期入口（状态流转 + 对抗优化引擎）
+│   ├── literature_service.py  # 文献服务（检索→聚合→KB入库，arxiv_id/DOI 双标识）
+│   ├── citation_manager.py    # 参考文献管理与校验
+│   ├── web_server.py          # Web 服务器聚合器（Mixin 架构 + 10 路由 Mixin）
+│   ├── prompt_optimizer.py    # prompt 自动优化器（agent 分数→SOUL.md 修订）
+│   ├── retrospective.py       # 周复盘引擎
+│   ├── adversarial/           # 对抗治理子包（monitor 监察/scoring 奖惩/governance）
+│   ├── lifecycle/             # 生命周期子包（micro_scheduler 微调度/orchestrator 编排/executor 执行）
+│   ├── proposal_lifecycle/    # 生命周期子包（optimize 对抗优化/inputs 输入端/transitions 流转）
+│   ├── deepxiv_knowledge/     # deepxiv 论文获取流水线（8 模块）
+│   ├── weekend_pipeline/      # 周末文献批处理管线（11 模块）
+│   ├── wiki_regenerator/      # wiki 报告重建（4 模块）
+│   └── tests/                 # 自动化测试套件（32 个测试文件，隔离目录零污染）
 │
 ├── docs/                      # 项目文档与报告
 │   ├── README.md              # 本目录说明与文件清单
-│   ├── CLAUDE-CLI-ADMIN.md    # Claude CLI 人工管理指南
-│   ├── cognitive-loop-plan.md # v3.4 认知闭环设计稿
-│   ├── deepxiv-knowledge-workflow.md   # deepxiv 知识库流水线设计
-│   ├── archive/               # 历史版本文档归档
+│   ├── ARCHITECTURE.md        # 架构总览
+│   ├── FRAMEWORK-ARCHITECTURE.md  # 框架架构（最新）
+│   ├── PROJECT-STRUCTURE.md   # 项目结构详版
+│   ├── SCORING-STANDARDS.md   # 评分标准
+│   ├── archive/               # 历史文档归档（含 CHANGELOG v6.7 及更早）
 │   └── prompts/               # LLM prompt 模板
 │
-├── scripts/                   # 工具脚本（Python 3，零依赖，48 个主脚本 + 子包）
-│   ├── session_manager.py     # 会话管理
-│   ├── context_builder.py     # 上下文构建（Prompt组装）
-│   ├── copilot_engine.py      # 核心引擎（LLM调用 + CLI）
-│   ├── memory_manager.py      # 记忆系统
-│   ├── task_manager.py        # 任务管理
-│   ├── proactive_engine.py    # 主动感知
-│   ├── document_handler.py    # 文档与代码协作
-│   ├── agora_bridge.py        # Agora群聊桥接
-│   ├── llm_router.py          # 多模型路由与自动降级
-│   ├── usage_tracker.py       # Token 用量追踪
-│   ├── skill_manager.py       # 技能系统管理
-│   ├── slash_commands.py      # 斜杠命令系统
-│   ├── tool_engine.py         # 子代理工具引擎
-│   ├── knowledge_base.py      # 知识库引擎
-│   ├── kb_capture.py          # 对话自动捕获
-│   ├── kb_maintenance.py      # 知识库批处理维护
-│   ├── research_profiler.py   # 研究方向感知器
-│   ├── external_fetcher.py    # 统一信息获取
-│   ├── learning_engine.py     # 自主学习核心
-│   ├── quality_evaluator.py   # 质量评估引擎
-│   ├── logger.py              # 统一日志系统
-│   ├── chat_archive.py        # 聊天记录归档浏览器
-│   ├── memory_reflow.py       # 认知回流引擎（hermes→记忆提炼）
-│   ├── sync_engine.py         # 多端同步（会话/文献→知识库+认知回流）
-│   ├── project_dispatch.py    # 项目总控（意见+执行追踪持久化）
-│   ├── project_manager.py     # v3.5 课题管理（CRUD/状态机/PROJECT-MEMORY）
-│   ├── unit_manager.py        # v3.5 单元管理（验收标准/风险/状态机）
-│   ├── project_kb.py          # v3.5 课题知识库（分层/TF-IDF/标签）
-│   ├── project_memory.py      # v3.5 课题记忆（对话/片段/决策/核心记忆）
-│   ├── project_context.py     # v3.5 课题上下文（@语法/跨课题检索）
-│   ├── project_workflow.py    # v3.5 课题工作流（规划→执行→验收→总结）
-│   ├── hermes_bridge.py       # hermes CLI 桥接（cron控制/oneshot/团队profile状态）
-│   ├── hermes_pipeline.py     # NSFC 研究管线（六阶段→7个hermes profile）
-│   ├── proposal_lifecycle.py  # 提案生命周期（drafts→optimizing→archived + 对抗优化引擎）
-│   ├── web_server.py          # Web 服务器聚合器（Mixin 架构，321 行 + 10 路由 Mixin）
-│   ├── backup_manager.py      # 数据备份/恢复
-│   ├── upgrade.py             # 安全升级流程
-│   ├── self_test.py           # 内测统一入口
-│   ├── deepxiv_knowledge/     # deepxiv 论文获取流水线（8 模块）
-│   ├── wiki_regenerator/      # wiki 报告重建（4 模块）
-│   └── tests/                 # 自动化测试套件
-│       ├── test_runner.py
-│       ├── test_core.py
-│       ├── test_scenarios.py
-│       └── test_persona.py
+├── memory/                    # 长期记忆与系统状态
+│   ├── user-profile.json      # 用户画像
+│   ├── agent-scores.json      # writer/critic 对抗奖惩记录（自学闭环数据层）
+│   ├── debug-journal.json     # 调试日志（prompt 优化审计）
+│   ├── prompt-backups/        # SOUL.md 修改备份
+│   └── retrospective-*.md     # 周复盘产出
+│
+├── sessions/                  # 对话会话存档（YYYYMMDD-主题/）
+├── tasks/                     # 工作项与项目管理
+├── references/                # 用户提供的参考资料（papers/notes）
+├── projects/                  # v3.5 课题指导模块数据（课题 kb 索引）
+├── skills/                    # 技能目录（8+ 个思维顾问技能）
+├── logs/                      # 运行日志（linsai.log + cron 执行记录）
+├── backups/                   # 自动备份（每 24 小时）
+├── notes/                     # 工作笔记区
 │
 └── web/                       # 前端界面（零框架依赖）
     ├── index.html             # 单页应用入口
-    ├── css/
-    │   └── style.css          # 双主题样式（深色/浅色/自动）
-    └── js/
-        ├── app.js             # 主入口（会话/聊天/流式SSE）
-        ├── core.js            # 核心工具（请求/渲染/主题）
-        ├── chat.js            # 聊天交互
-        ├── session.js         # 会话管理
-        ├── task.js            # 任务面板
-        ├── kb.js              # 知识库浏览器
-        ├── skill.js           # 技能面板
-        ├── settings.js        # 设置面板
-        ├── projects.js        # 课题面板
-        ├── hermes_console.js  # Hermes 深度对话控制台
-        ├── learning.js        # 自主学习管理
-        └── research.js        # v3.5 课题指导面板（单元时间线/知识库/记忆/工作流）
+    └── js/                    # 会话/任务/知识库/课题/Hermes控制台等面板
 ```
 
 ---
@@ -271,35 +245,40 @@ LinSai-CoPilot/
 | **统一状态同步** | ✅ | Copilot与hermes共享item-status.json，操作双向同步（Copilot=hermes操作台） |
 | **知识库自维护** | ✅ | 五维过滤/分页/自定义分类/别名发现/阶段晋升/自动连边 |
 | **NSFC 研究管线** | ✅ | 六阶段全自动链路：方向校准→文献→缺口→科学问题→申请书→自检 |
-| **提案生命周期** | ✅ | drafts→optimizing→pending_review→archived 四阶段流转 |
-| **对抗优化引擎** | ✅ | 分模块单轮+文献驱动筛选+多维度评分+全模块胜利达标 |
-| **Hermes 团队编排** | ✅ | 7 个 profile 协作，每日编排器自动驱动 |
+| **提案生命周期** | ✅ | drafts→optimizing→pending_review→archived 四阶段流转 + 质量天花板自动晋级 |
+| **对抗优化引擎** | ✅ | 五模块循环（rationale/content/scheme/full_review/references）+ 微调度器 25 job/轮轮转 |
+| **Hermes 团队编排** | ✅ | 7 个 profile 协作 + monitor 独立监察，微调度器自动轮转 |
+| **多源学术检索** | ✅ | arXiv + OpenAlex/Semantic Scholar/PubMed/Crossref，DOI/arXiv ID 双标识去重入库（v6.8.42-45） |
+| **期刊论文入库** | ✅ | 无 arXiv ID 论文以 DOI 进入知识库，文件名/frontmatter/链接规范化（v6.8.43） |
+| **API 故障防线** | ✅ | 429 配额耗尽/限流错误源头拦截，伪分数/误扣奖惩双防线（v6.8.46-48） |
+| **链路自学闭环** | ✅ | monitor 奖惩→agent-scores 落盘→prompt_optimizer 自动修订 SOUL.md→周复盘策略调优 |
 | **GLM-5.2 + MiniMax-M3 升级** | ✅ | 6个profile使用GLM-5.2（1M上下文），researcher使用MiniMax-M3 |
 
 ---
 
-## Hermes 团队架构（v6.6.2）
+## Hermes 团队架构（v6.8）
 
-林赛 CoPilot 通过 **hermes** 协调 7 个专业 profile，形成研究管线团队：
+林赛 CoPilot 通过 **hermes** 协调专业 profile 团队，形成全自动研究管线：
 
 ```
 linsai（总控）          pipeline-runner（编排器）
   │                        │
-  │ 简报 cron               │ 每日编排 cron
+  │ 简报 cron               │ 微调度器轮转 cron
   ↓                        ↓
-researcher ← analyst ← writer ↔ critic → reviewer
-（文献调研）  （缺口分析）（撰写）  （对抗）（终审）
+researcher ← analyst ← writer ↔ critic → reviewer → monitor
+（文献调研）  （缺口分析）（撰写）  （对抗）（终审）（独立监察）
 ```
 
 | Profile | 模型 | 职责 | 运行方式 |
 |---------|------|------|---------|
 | `linsai` | GLM-5.2 | 方向校准/总控/简报 | 常驻 gateway |
-| `pipeline-runner` | GLM-5.2 | 管线编排/每日触发 | 常驻 gateway |
+| `pipeline-runner` | GLM-5.2 | 微调度器编排/每日触发 | 常驻 gateway |
 | `researcher` | MiniMax-M3 | 文献调研/定向检索 | 按需 oneshot |
 | `analyst` | GLM-5.2 | 缺口分析/科学问题 | 按需 oneshot |
 | `writer` | GLM-5.2 | 申请书撰写/修订 | 按需 oneshot |
 | `critic` | GLM-5.2 | 对抗式评审（红队） | 按需 oneshot |
 | `reviewer` | GLM-5.2 | 质量终审 | 按需 oneshot |
+| `monitor` | GLM-5.2 | 独立 meta-review/奖惩/串通检测 | 每轮末触发 |
 
 ### 研究管线六阶段
 
@@ -318,32 +297,43 @@ researcher ← analyst ← writer ↔ critic → reviewer
 drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）→ archived（归档）
 ```
 
-人工确认 drafts 课题思路可行后流转到 optimizing，由每日编排器自动优化。
+人工确认 drafts 课题思路可行后流转到 optimizing，由微调度器自动轮转优化。
+**质量天花板机制**：连续 3 轮分数稳定 ≥0.82 自动晋级 pending_review（实测：BSV 课题 8 轮 0.76→0.86 晋级）。
 
-### 对抗优化引擎（v6.6.2）
+### 对抗优化引擎（v6.8）
 
-每天 9:00 pipeline-runner 自动触发每日编排器：
+微调度器按 25 job/轮 轮转调度 optimizing 区课题（同一课题聚焦推进，一轮完成后让出）：
 
 ```
-① 健康检查
-② 文献-课题匹配：读最新简报关键词 → 匹配 optimizing 课题（只优化命中的）
-③ 对命中的每个课题做4轮（错峰90秒间隔）：
-   轮1: 立项依据 → critic审 → writer改
-   轮2: 研究内容 → critic审 → writer改
-   轮3: 研究方案 → critic审 → writer改
-   轮4: 整体审查 → critic审 → writer改
-   中途达标提前结束
-④ 最终健康检查
+每轮 job 序列（五模块循环）：
+  rationale（立项依据）→ content（研究内容）→ scheme（研究方案）
+  → full_review（整体审查）→ references（参考文献校验）
+每轮末：monitor 独立 meta-review → agent 奖惩 → 轮次推进
 ```
 
 **单轮对抗流程**：
 - critic 输出 4 维度评分（创新性/可行性/严谨性/完整性）
-- 严谨性 <0.70 时触发 researcher 定向检索补充文献
+- 严谨性 <0.70 时触发 researcher 定向检索：hermes 联网 + **多源学术检索**（arXiv + OpenAlex 期刊论文，DOI/arXiv ID 双标识去重）
 - writer 聚焦最弱维度修订 + 同步方法学手册
+- monitor 独立评分 + writer/critic 奖惩（agent-scores.json 落盘）+ 串通风险检测
 
-**达标条件**：4 个模块（3 章节 + 整体审查）全部对抗胜利（分数达标 + 各维度无短板）才算 done。
+**韧性防线**（v6.8.46-48）：
+- API 配额耗尽/限流（429）时 hermes 错误文本被源头拦截，不再产生伪分数污染
+- monitor 解析失败（0.0 非真实分）时跳过奖惩，不顶格误扣
+- 短输出（<300 字符）不产生维度分
 
-**资源控制**：日均 15-25 prompts，适配 GLM Coding Plan Pro 套餐限额。
+**达标条件**：五模块全部对抗胜利（分数达标 + 各维度无短板）+ 连续 3 轮稳定 → 晋级 pending_review。
+
+### 链路自优化（自学闭环）
+
+```
+对抗轮次 → monitor 奖惩 → agent-scores.json（46+ 条历史）
+  → prompt_optimizer（14:00 cron）→ 修改 writer/critic SOUL.md（含备份+审计）
+  → failure_analyzer → 失败模式 → 定向 prompt 干预
+  → retrospective（周一复盘）→ 策略调优 → tuning-log
+```
+
+实测运转：8-13 prompt 优化器自动修改了 critic/writer 的 SOUL.md（针对"内容为空时评 0.10 而非 0.00"的失败模式），全程有备份与 debug journal 审计。
 
 ---
 
@@ -390,6 +380,9 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 | Phase 11 | **知识库主舞台+认知闭环（v3.6-v4.0）** — 知识库独立界面、MOC/双链/自维护、记忆清洗+去重防护 | ✅ 完成 |
 | Phase 12 | **协作操作台（v4.1-v4.2）** — 文献独立讨论、AI辅助指派、统一状态同步（Copilot↔hermes） | ✅ 完成 |
 | Phase 13 | **NSFC 研究管线（v6.4-v6.6）** — hermes 团队7 profile、六阶段管线、提案生命周期、对抗优化引擎、文献驱动筛选、GLM-5.2 | ✅ 完成 |
+| Phase 14 | **对抗治理深化（v6.7-v6.8.17）** — monitor 独立监察、agent 奖惩、五模块循环、微调度器轮转、质量天花板晋级、自检测/自成长增强 | ✅ 完成 |
+| Phase 15 | **多源检索与韧性（v6.8.18-48）** — OpenAlex/S2/PubMed/Crossref 多源学术检索、DOI 入库、429 故障防线、自学闭环（prompt_optimizer/周复盘） | ✅ 完成 |
+| Phase 16 | 性能优化 + 生态扩展 | ⏳ 待开发 |
 
 ### Web 界面特性
 
@@ -423,9 +416,9 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
 
 - 所有 Python 脚本仅使用标准库
 - 修改前必读 `AGENTS.md`
-- 所有变更记录在 `CHANGELOG.md`
+- 所有变更记录在 `CHANGELOG.md`（v6.7 及更早见 `docs/archive/CHANGELOG-archive-v6.0-v6.7.md`）
 
 ---
 
-*版本：6.1.0*
-*日期：2026-07-25*
+*版本：6.8.48*
+*日期：2026-08-14*
