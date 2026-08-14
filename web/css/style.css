@@ -3595,6 +3595,10 @@ body {
 .console-alerts { flex: 1; overflow-y: auto; }
 .console-alert-list { display: flex; flex-direction: column; gap: 8px; }
 
+/* v6.9.0 R6: 待人工处理队列 */
+.console-queue-list { flex: 0 0 auto; max-height: 32vh; min-height: 60px; }
+.console-queue-gap { margin-top: 16px; }
+
 .console-alert {
     border: 1px solid var(--border-color);
     border-radius: 8px;

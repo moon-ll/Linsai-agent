@@ -1721,7 +1721,7 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-14T12:55:22Z",
+      "updated_at": "2026-08-14T13:40:27Z",
       "optimization_rounds": 3,
       "last_score": 0.18,
       "score_history": [
@@ -3415,15 +3415,15 @@
           "step": "critic",
           "section_key": "scheme",
           "round": 4,
-          "status": "running",
+          "status": "failed",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r4-content-writer"
           ],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "2026-08-14T12:55:22Z",
-          "finished_at": "",
-          "last_error": "",
+          "started_at": "2026-08-14T13:20:27Z",
+          "finished_at": "2026-08-14T13:40:27Z",
+          "last_error": "超时(1200s)",
           "cron_job_id": "",
           "error_history": [
             {
@@ -3435,9 +3435,14 @@
               "at": "2026-08-14T11:55:00Z",
               "error": "手动解锁（v6.8.52 超时分级后重跑）: 超时(900s)",
               "attempts": 3
+            },
+            {
+              "at": "2026-08-14T13:15:23Z",
+              "error": "超时(1200s)",
+              "attempts": 1
             }
           ],
-          "repair_attempts": 1
+          "repair_attempts": 2
         },
         {
           "job_id": "key-transient-quantum-phase-optical-20260726-r4-scheme-gap_identify",
@@ -4253,7 +4258,7 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-14T12:00:43Z",
+      "updated_at": "2026-08-14T13:45:30Z",
       "optimization_rounds": 7,
       "last_score": 0.79,
       "score_history": [
@@ -6218,13 +6223,13 @@
           "step": "writer",
           "section_key": "full_review",
           "round": 8,
-          "status": "pending",
+          "status": "running",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r8-full_review-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
+          "started_at": "2026-08-14T13:45:30Z",
           "finished_at": "",
           "last_error": "",
           "cron_job_id": "",
@@ -8721,7 +8726,17 @@
           "round_resolved": 8,
           "stale": false
         }
-      ]
+      ],
+      "review_dossier": {
+        "generated_at": "2026-08-14T13:40:02Z",
+        "pre_review_verdict": "reject_lean",
+        "pre_review_reasons": [
+          "仅通过 2/5 模块"
+        ],
+        "last_score": 0.86,
+        "can_adopt": false,
+        "path": "/Users/ll/Desktop/LinSai-CoPilot/research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/review-dossier.md"
+      }
     },
     "general-order-parameter-ultrafast-readout-20260727": {
       "status": "optimizing",
@@ -10367,5 +10382,5 @@
       ]
     }
   },
-  "updated_at": "2026-08-14T12:55:22Z"
+  "updated_at": "2026-08-14T13:45:30Z"
 }

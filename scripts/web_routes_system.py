@@ -119,6 +119,8 @@ _SYSTEM_ROUTES = [
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/feedback$"), "_sys_lifecycle_feedback"),
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/review-session$"), "_sys_lifecycle_review_session"),
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/review-verdict$"), "_sys_lifecycle_review_verdict"),
+    ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/review-adopt$"), "_sys_lifecycle_review_adopt"),
+    ("GET", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/dossier$"), "_sys_lifecycle_dossier"),
     ("POST", re.compile(r"^/api/lifecycle/(?P<proposal_id>[^/]+)/review-finalize$"), "_sys_lifecycle_review_finalize"),
     ("POST", re.compile(r"^/api/lifecycle/cron-sweep$"), "_sys_lifecycle_cron_sweep"),
     # v6.7.5: checkpoint + 小型 cron 框架
@@ -151,6 +153,7 @@ _SYSTEM_ROUTES = [
     ("GET", re.compile(r"^/api/console/flow$"), "_sys_console_flow"),
     ("GET", re.compile(r"^/api/console/agents$"), "_sys_console_agents"),
     ("GET", re.compile(r"^/api/console/alerts$"), "_sys_console_alerts"),
+    ("GET", re.compile(r"^/api/console/human-queue$"), "_sys_console_human_queue"),
     ("POST", re.compile(r"^/api/console/action$"), "_sys_console_action"),
 ]
 
@@ -629,8 +632,18 @@ class SystemRoutesMixin:
             else:
                 review_context += "（无评分历史）\n"
 
+            # v6.9.0 R1: 注入验收决策包（系统预审），人从读全文变为核验摘要
+            try:
+                from review_dossier import dossier_context_for_session
+
+                dossier_ctx = dossier_context_for_session(proposal_id)
+            except Exception:
+                dossier_ctx = ""
+            if dossier_ctx:
+                review_context += f"\n{dossier_ctx}\n"
+
             review_context += (
-                f"\n【申请书节选】\n{proposal_text[:4000]}\n\n"
+                f"\n【申请书节选】\n{proposal_text[:3000]}\n\n"
                 f"【方法学手册节选】\n{method_text[:2000]}\n\n"
                 f"---\n"
                 f"请你作为审核人，审阅以上课题内容。你可以：\n"
@@ -649,6 +662,95 @@ class SystemRoutesMixin:
                 "mode": "review",
                 "proposal_id": proposal_id,
             })
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_review_adopt(self, parsed, body=None, **kwargs):
+        """v6.9.0 R1: 一键采纳预审。
+
+        守卫：课题在 pending_review + 决策包预审 approve_lean + 分数 >= 0.85。
+        通过守卫即执行归档（等价 verdict=approve），并在决策包记录采纳审计。
+        body 可选：session_id（归档会话）
+        """
+        proposal_id = kwargs.get("proposal_id")
+        try:
+            from proposal_lifecycle import ProposalLifecycle
+            from review_dossier import can_adopt_pre_review, generate_review_dossier
+
+            lc = ProposalLifecycle()
+            prop_state = lc._get_proposal_state(proposal_id)
+            if not prop_state:
+                self._send_json({"error": "课题不存在"}, 404)
+                return
+            if prop_state.get("status") != "pending_review":
+                self._send_json({"error": "课题不在待审核阶段"}, 400)
+                return
+
+            dossier = prop_state.get("review_dossier")
+            if not dossier:
+                # 无决策包时现场补生成一次（如晋级发生在旧版本）
+                gen = generate_review_dossier(proposal_id)
+                dossier = gen if gen.get("success") else None
+                if dossier:
+                    dossier = {
+                        "pre_review_verdict": dossier.get("pre_review_verdict"),
+                        "last_score": dossier.get("last_score"),
+                        "can_adopt": dossier.get("can_adopt"),
+                    }
+            if not dossier:
+                self._send_json({"error": "无验收决策包，请先打开审核会话人工验收"}, 400)
+                return
+            if not can_adopt_pre_review(dossier):
+                self._send_json(
+                    {
+                        "error": "预审未达一键采纳条件（需 approve_lean 且分数 ≥ 0.85）",
+                        "pre_review_verdict": dossier.get("pre_review_verdict"),
+                        "last_score": dossier.get("last_score"),
+                    },
+                    400,
+                )
+                return
+
+            result = lc.archive_proposal(
+                proposal_id, "一键采纳预审（approve_lean）", "approve"
+            )
+            # 记录采纳审计
+            try:
+                from common import now_utc
+
+                fresh = lc._get_proposal_state(proposal_id)
+                if fresh and fresh.get("review_dossier"):
+                    fresh["review_dossier"]["adopted_at"] = now_utc()
+                    fresh["review_dossier"]["adopted_via"] = "one_click"
+                    lc._set_proposal_state(proposal_id, fresh)
+            except Exception:
+                pass
+            session_id = (body or {}).get("session_id", "")
+            if session_id:
+                try:
+                    sm.archive_session(session_id)
+                except Exception:
+                    pass
+            self._send_json(
+                {"status": "ok", "action": "adopted_pre_review", "data": result}
+            )
+        except Exception as e:
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_lifecycle_dossier(self, parsed, body=None, **kwargs):
+        """v6.9.0 R1: 读取验收决策包（无则现场生成）。"""
+        proposal_id = kwargs.get("proposal_id")
+        try:
+            from review_dossier import generate_review_dossier, get_dossier_summary
+
+            summary = get_dossier_summary(proposal_id)
+            if not summary:
+                gen = generate_review_dossier(proposal_id)
+                if not gen.get("success"):
+                    self._send_json({"error": gen.get("error", "生成失败")}, 404)
+                    return
+                summary = get_dossier_summary(proposal_id)
+            self._send_json({"status": "ok", "dossier": summary})
         except Exception as e:
             self._send_json({"error": str(e)}, 500)
 
@@ -1346,6 +1448,22 @@ class SystemRoutesMixin:
         except Exception as e:
             if _log:
                 _log.error(f"console/flow 失败: {e}")
+            self._send_json({"error": str(e)}, 500)
+
+    def _sys_console_human_queue(self, parsed, body=None):
+        """GET /api/console/human-queue — 待人工处理队列（v6.9.0 R6）。
+
+        聚合验收/激活/负反馈等"等人"事项，每项附建议动作与等待时长；
+        超过 72h 标记 escalate。实时聚合（不读快照，保证最新）。
+        """
+        try:
+            from human_queue import collect_human_queue
+
+            result = collect_human_queue()
+            self._send_json({"status": "ok", **result})
+        except Exception as e:
+            if _log:
+                _log.error(f"console/human-queue 失败: {e}")
             self._send_json({"error": str(e)}, 500)
 
     def _sys_console_agents(self, parsed, body=None):

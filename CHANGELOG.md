@@ -1,5 +1,78 @@
 # 变更记录
 
+## v6.9.0 - 2026-08-14 智能化与自动化：关键节点智能辅助验收 + 异常自愈 + 待人工队列
+
+评估结论（人机分工现状实测）：执行/修复/治理已全自动（0 告警、0 暂停、
+0 终态卡死），真正等人参与的仅剩 3 个法定节点（立项激活、验收、策略
+apply）+ 2 个异常恢复（负反馈清除、质量退化处置）。本版本目标：验收
+智能辅助 + 异常自动恢复 + 等人事项集中可视，6 项全部落地。
+
+### R1 验收决策包（review_dossier.py，新文件）
+- pending_review 晋级时自动生成 `05_review/review-dossier.md` +
+  `prop_state.review_dossier`：规则预审（零 LLM 成本）、diff 摘要
+  （最近一轮改动）、分模块得分表。
+- 预审三档：`approve_lean`（5/5 模块通过 + 总分 ≥0.85 + 无质量警告）/
+  `attention`（需人重点核查）/ `reject_lean`（≤2/5 模块通过或总分
+  <0.75 或高危未解决）。
+- **一键采纳**：Web `POST /api/lifecycle/{id}/review-adopt`，守卫链
+  （状态=pending_review → dossier 存在 → approve_lean 且分数达标）
+  通过后 archive_proposal，审计字段 `adopted_via="one_click"`。
+- 审核会话（对话式分屏审核）自动注入决策包节选，人看摘要而非从头读。
+- 前端 lifecycle.js：审核页顶部三色预审横幅（绿/黄/红）+ 采纳按钮。
+- 门槛语义厘清：REJECT_SCORE_GATE=0.75（预审退回线，低于即建议不
+  通过）与 DEFAULT_SCORE_THRESHOLD=0.9（自动晋级线，达到即无需人）
+  分离，两者职责不同。
+
+### R2 负反馈告警自愈（24h 冷却自动清除一次）
+- `lifecycle/utils.should_auto_clear_negative_feedback()`：告警超 24h
+  冷却且 `negative_feedback_auto_clear_count<1` → 允许自动清除。
+- 清除同时策略降级：设 `idea_review_required=True`，下一轮自动退回
+  研究设想评审重走质量门槛（自愈不等于无代价，降级防重蹈覆辙）。
+- 执行器补戳遗留数据的 `negative_feedback_at`（无时间戳保守不动作）。
+- `lifecycle_monitor` 每小时检查自动清除（3.6 步）。
+- 降噪设计：冷却中的负反馈**不入**待人工队列（人不应看到即将自愈的
+  事项）；自动清除额度用尽（≥1）才入队。
+
+### R3 质量退化自动回退最佳轮次（新增）
+- `should_auto_rollback()`：连续两轮分数下降（s[-1]<s[-2]<=s[-3]）且
+  距历史最佳超 3 个百分点（AUTO_ROLLBACK_MARGIN）且最佳轮次非最新 →
+  允许回退；`auto_rollback_count<1` 每课题至多一次。
+- `perform_auto_rollback()`：`proposal-draft-r{best}.md` 恢复为主稿，
+  当前退化稿另存 `-pre-rollback.md`，记 `rollback_history` 审计。
+- 执行器 monitor 评分写入后检查（在 _check_done 晋级判断前）。
+
+### R4 立项决策包（idea_generator.py）
+- `recommend_activation()` 纯函数三档：重叠度 ≥0.50 → hold（不激活）；
+  0.35-0.50 → merge 考察；<0.35 → activate（推荐激活）。
+- `_feasibility_hint()` 启发式识别实验导向/理论导向/理实结合。
+- `generate_idea_dossier()`：注册 drafts 时自动写 `00_idea-dossier.md`
+  （新颖性对比 + 可行性倾向 + 激活建议），人在立项节点看摘要即可。
+
+### R5 策略分级自动应用（strategy_optimizer.py + retrospective.py）
+- 白名单 `AUTO_APPLY_KEYS=(stagger_seconds, score_threshold)` 内低风险
+  参数自动 apply：单向规则（score_threshold 只升不降）+ 7 天去重 +
+  单次上限 2 个参数 + `confirmed_by="auto:low-risk"` 可审计可回滚。
+- 周复盘（retrospective）生成建议后自动应用低风险项并追加审计行。
+- 策略节点从"全人工确认"降为"低风险自动 + 高风险人工"。
+
+### R6 待人工队列（human_queue.py 新文件 + 控制台面板）
+- 聚合三类等人事项：pending_review 验收（附预审建议动作）、drafts
+  立项（附激活建议）、负反馈人工处理（自动清除用尽后）。
+- 按等待时长排序，超 72h 标 escalate；monitor 每小时聚合持久化到
+  `memory/human-queue.json` 并对 escalate 项发催办告警（job_id 按
+  天数桶去重，避免每小时重复告警）。
+- Web `GET /api/console/human-queue` + 控制台右栏"待人工处理"面板：
+  计数 badge + 状态卡片 + 直达按钮（去验收/去激活）。
+
+### 验证
+- 新增 `tests/test_auto_acceptance.py`：6 套件 64 断言（预审各分支 /
+  采纳守卫 / diff / 端到端 / 负反馈 6 场景 / 回退 7 场景含文件恢复 /
+  立项三档 / 自动应用 6 规则 / 队列聚合降噪催办）。
+- 注册进 self_test `--module`。全量回归 678/678 通过
+  （module 541 + scenario 16 + persona 38 + web-ci 83）。
+- 真实数据端到端：bsv 课题预审 reject_lean（2/5 模块，符合逃生阀
+  晋级实情）；human_queue 实际输出等待 40h 条目。
+
 ## v6.8.54 - 2026-08-14 协调复杂度治理：cron 拓扑显式化 + 告警防线测试 + 终态自动解锁 + 噪音收敛
 
 架构评审结论的落地（"当前真正的对手是协调复杂度"）：

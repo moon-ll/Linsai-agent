@@ -111,6 +111,139 @@ def should_auto_unlock(job: Dict[str, Any], now: datetime, cooldown_hours: float
         return False
 
 
+NEG_FEEDBACK_CLEAR_COOLDOWN_H = 24.0
+"""负反馈告警自动清除冷却时长（v6.9.0 R2）。
+
+触发即人工清除此前是唯一恢复路径，负反馈课题会无限期停滞。现冷却期满
+后由 lifecycle_monitor 自动清除一次并降级策略（退回研究设想评审），
+再触发则不再自动清除（negative_feedback_auto_clear_count 上限 1）。"""
+
+AUTO_ROLLBACK_MARGIN = 0.03
+"""自动回退触发幅度（v6.9.0 R3）：当前分距历史最佳不足该幅度时不回退。"""
+
+
+def should_auto_clear_negative_feedback(
+    prop_state: Dict[str, Any],
+    now: datetime,
+    cooldown_hours: float = NEG_FEEDBACK_CLEAR_COOLDOWN_H,
+) -> bool:
+    """判断负反馈告警是否应自动清除（v6.9.0 R2）。
+
+    条件（全部满足）：
+      1. negative_feedback_alert 为 True
+      2. negative_feedback_auto_clear_count < 1（每课题至多自动清除一次）
+      3. negative_feedback_at 距今超过 cooldown_hours
+    无时间戳（遗留数据）返回 False，由 monitor 首次发现时补戳。
+    """
+    try:
+        if not prop_state.get("negative_feedback_alert"):
+            return False
+        if int(prop_state.get("negative_feedback_auto_clear_count", 0)) >= 1:
+            return False
+        alert_dt = _dt_from_iso(str(prop_state.get("negative_feedback_at") or ""))
+        if alert_dt is None:
+            return False
+        age_h = (now - alert_dt).total_seconds() / 3600.0
+        return age_h >= cooldown_hours
+    except Exception:
+        return False
+
+
+def find_proposal_dir(proposal_id: str, root: Optional[Path] = None) -> Optional[Path]:
+    """在四个阶段目录中定位课题目录（v6.9.0 R3）。"""
+    base = root or (PROJECT_ROOT / "research_proposals")
+    for stage in ("optimizing", "pending_review", "drafts", "archived"):
+        d = base / stage / proposal_id
+        if d.is_dir():
+            return d
+    return None
+
+
+def should_auto_rollback(
+    prop_state: Dict[str, Any],
+    margin: float = AUTO_ROLLBACK_MARGIN,
+) -> Optional[Dict[str, Any]]:
+    """判断连续下降是否应自动回退最佳轮次草稿（v6.9.0 R3）。
+
+    条件（全部满足才返回回退计划）：
+      1. score_history >= 3 且最近两轮连续下降（s[-1] < s[-2] <= s[-3]）
+      2. 当前分距历史最佳超过 margin（排除天花板附近正常波动）
+      3. 最佳轮不是最新轮（最新就是最佳时无可回退）
+      4. auto_rollback_count < 1（每课题至多自动回退一次）
+    返回 {"best_round", "best_score", "current"} 或 None。
+    """
+    try:
+        history = prop_state.get("score_history") or []
+        if len(history) < 3:
+            return None
+        if int(prop_state.get("auto_rollback_count", 0)) >= 1:
+            return None
+        scores = [float(e.get("score") or 0.0) for e in history]
+        if not (scores[-1] < scores[-2] <= scores[-3]):
+            return None
+        best_entry = max(history, key=lambda e: float(e.get("score") or 0.0))
+        best_score = float(best_entry.get("score") or 0.0)
+        if scores[-1] >= best_score - margin:
+            return None
+        best_round = int(best_entry.get("round") or 0)
+        if best_round == int(history[-1].get("round") or 0):
+            return None
+        return {
+            "best_round": best_round,
+            "best_score": best_score,
+            "current": scores[-1],
+        }
+    except Exception:
+        return None
+
+
+def perform_auto_rollback(
+    proposal_id: str,
+    prop_state: Dict[str, Any],
+    plan: Dict[str, Any],
+    root: Optional[Path] = None,
+) -> Dict[str, Any]:
+    """执行最佳轮次草稿回退（v6.9.0 R3）。
+
+    - 恢复 04_proposal/proposal-draft-r{best_round}.md → proposal-draft.md
+      （r{N} 备份即第 N 轮 writer 产出，rN+1 启动时保存）
+    - 回退前把当前草稿另存 proposal-draft-pre-rollback.md（证据保全）
+    - 记录 rollback_history 与 auto_rollback_count（上限 1 次）
+    """
+    prop_dir = find_proposal_dir(proposal_id, root)
+    if prop_dir is None:
+        return {"success": False, "error": "proposal_dir_not_found"}
+    draft_dir = prop_dir / "04_proposal"
+    src = draft_dir / f"proposal-draft-r{plan['best_round']}.md"
+    if not src.exists():
+        return {"success": False, "error": "best_round_backup_missing"}
+    dst = draft_dir / "proposal-draft.md"
+    try:
+        if dst.exists():
+            (draft_dir / "proposal-draft-pre-rollback.md").write_text(
+                dst.read_text(encoding="utf-8"), encoding="utf-8"
+            )
+        dst.write_text(src.read_text(encoding="utf-8"), encoding="utf-8")
+    except Exception as exc:
+        return {"success": False, "error": f"write_failed: {exc}"}
+    prop_state["auto_rollback_count"] = int(prop_state.get("auto_rollback_count", 0)) + 1
+    prop_state["rolled_back_to_round"] = plan["best_round"]
+    prop_state.setdefault("rollback_history", []).append(
+        {
+            "at": now_utc(),
+            "restored_round": plan["best_round"],
+            "best_score": plan["best_score"],
+            "from_score": plan["current"],
+            "auto": True,
+        }
+    )
+    return {
+        "success": True,
+        "restored_round": plan["best_round"],
+        "path": str(dst),
+    }
+
+
 def _ensure_hermes_scripts_dir() -> Path:
     HERMES_SCRIPTS_DIR.mkdir(parents=True, exist_ok=True)
     return HERMES_SCRIPTS_DIR

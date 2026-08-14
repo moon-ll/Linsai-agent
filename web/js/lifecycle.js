@@ -817,13 +817,21 @@ async function openReviewWorkspace(proposalId, sessionId) {
 }
 
 // v6.8.0: 加载申请书章节到左侧内容区（固定 5 模块，按顺序显示）
+let _reviewDossier = null;      // v6.9.0 R1: 验收决策包
+let _reviewActiveSection = null;
+
 async function loadReviewContent(proposalId) {
   const bodyEl = document.getElementById('review-content-body');
   const tabsEl = document.getElementById('review-content-tabs');
   if (!bodyEl || !tabsEl) return;
+  _reviewDossier = null;
+  _reviewActiveSection = null;
 
   bodyEl.innerHTML = '<div class="ta-center pad-40 text-tertiary">加载申请书内容...</div>';
   tabsEl.innerHTML = '';
+
+  // v6.9.0 R1: 先注入验收决策包（预审结论 + 可选一键采纳）
+  renderReviewDossier(proposalId);
 
   try {
     const result = await apiGet(`/api/pipeline/${encodeURIComponent(proposalId)}/proposal/sections`);
@@ -923,11 +931,71 @@ function renderMarkdown(text) {
   return processed.join('\n');
 }
 
+// v6.9.0 R1: 决策包横幅 + 一键采纳预审（approve_lean 且分数达标时）
+async function renderReviewDossier(proposalId) {
+  try {
+    const result = await apiGet(`/api/lifecycle/${encodeURIComponent(proposalId)}/dossier`);
+    if (result.status === 'ok' && result.dossier) {
+      _reviewDossier = result.dossier;
+      // 章节已渲染时重渲染当前章节以刷新横幅
+      if (_reviewActiveSection) renderReviewSection(_reviewActiveSection);
+    }
+  } catch (e) { /* 决策包缺失不影响人工审核 */ }
+}
+
+function reviewDossierBannerHtml() {
+  if (!_reviewDossier) return '';
+  const d = _reviewDossier;
+  const labels = {
+    approve_lean: ['建议通过', 'var(--success-color, #1dc981)'],
+    attention: ['需人工裁量', 'var(--warning-color, #efaa17)'],
+    reject_lean: ['建议退回', 'var(--error-color, #e5484d)'],
+  };
+  const [label, color] = labels[d.pre_review_verdict] || [d.pre_review_verdict || '未知', 'inherit'];
+  const reasons = (d.pre_review_reasons || []).slice(0, 4)
+    .map(r => `<div>· ${escapeHtml(String(r))}</div>`).join('');
+  const score = d.last_score != null ? ` · 评分 ${Number(d.last_score).toFixed(2)}` : '';
+  const adoptBtn = d.can_adopt
+    ? '<button id="review-adopt-btn" class="btn btn-primary" style="margin-top:8px;">⚡ 一键采纳预审（通过并归档）</button>'
+    : '';
+  return `
+    <div style="border:1px solid var(--border-color);border-left:3px solid ${color};border-radius:8px;padding:12px;margin-bottom:14px;background:var(--bg-secondary);">
+      <div style="font-weight:600;margin-bottom:4px;">📋 验收决策包 · 系统预审：<span style="color:${color};">${escapeHtml(label)}</span>${escapeHtml(score)}</div>
+      <div style="font-size:0.85rem;color:var(--text-secondary);">${reasons}</div>
+      ${adoptBtn}
+    </div>`;
+}
+
+function bindReviewAdopt() {
+  const btn = document.getElementById('review-adopt-btn');
+  if (!btn) return;
+  btn.onclick = async () => {
+    if (!window.confirm('采纳系统预审（approve_lean）并通过归档该课题？')) return;
+    try {
+      showToast('◐ 正在采纳预审…', 'info');
+      const result = await apiPost(
+        `/api/lifecycle/${encodeURIComponent(_reviewCurrentProposalId)}/review-adopt`,
+        { session_id: _reviewCurrentSessionId }
+      );
+      if (result.status !== 'ok') throw new Error(result.error || '采纳失败');
+      showToast('✓ 已采纳预审并归档', 'success');
+      const back = document.getElementById('review-page-back-btn');
+      if (back) back.click();
+      else if (typeof switchToView === 'function') switchToView('lifecycle');
+      if (typeof loadLifecycle === 'function') loadLifecycle();
+    } catch (e) {
+      showToast(`✗ ${e.message}`, 'error');
+    }
+  };
+}
+
 function renderReviewSection(name) {
   const bodyEl = document.getElementById('review-content-body');
   if (!bodyEl) return;
+  _reviewActiveSection = name;
   const content = _reviewSections[name] || '（本章节暂无内容）';
-  bodyEl.innerHTML = `<div class="review-section-title" style="font-weight:600;margin-bottom:12px;color:var(--accent-color);">${escapeHtml(name)}</div><div>${renderMarkdown(content)}</div>`;
+  bodyEl.innerHTML = `${reviewDossierBannerHtml()}<div class="review-section-title" style="font-weight:600;margin-bottom:12px;color:var(--accent-color);">${escapeHtml(name)}</div><div>${renderMarkdown(content)}</div>`;
+  bindReviewAdopt();
 }
 
 // ============================================

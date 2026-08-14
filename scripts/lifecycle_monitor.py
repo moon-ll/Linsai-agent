@@ -680,6 +680,73 @@ def _check_health_signals() -> Optional[Dict[str, Any]]:
     }
 
 
+def _auto_heal_negative_feedback() -> List[Dict[str, Any]]:
+    """v6.9.0 R2: 负反馈告警冷却自愈。
+
+    24h 冷却期满自动清除一次（每课题上限 1 次），并做策略降级：
+    设置 idea_review_required 退回研究设想评审（重想方向而非原地继续）。
+    再触发则不再自动清除，进入人工队列（human_queue 只收自动清除用尽的）。
+    """
+    healed: List[Dict[str, Any]] = []
+    try:
+        from proposal_lifecycle import ProposalLifecycle
+        from lifecycle.utils import should_auto_clear_negative_feedback
+
+        lc = ProposalLifecycle()
+        state = lc._load_state()
+        dirty = False
+        now = datetime.now(timezone.utc)
+        for pid, ps in (state.get("proposals") or {}).items():
+            if not isinstance(ps, dict) or ps.get("status") != "optimizing":
+                continue
+            if not ps.get("negative_feedback_alert"):
+                continue
+            # 遗留数据无时间戳：补戳后从现在起算冷却
+            if not ps.get("negative_feedback_at"):
+                ps["negative_feedback_at"] = now_utc()
+                dirty = True
+                continue
+            if not should_auto_clear_negative_feedback(ps, now):
+                continue
+            reasons = ps.get("negative_feedback_reasons") or []
+            clear_res = lc.clear_negative_feedback(
+                pid, reason="auto-heal：24h 冷却期满自动清除"
+            )
+            fresh = lc._get_proposal_state(pid) or ps
+            fresh["negative_feedback_auto_clear_count"] = int(
+                fresh.get("negative_feedback_auto_clear_count", 0)
+            ) + 1
+            fresh["idea_review_required"] = True
+            fresh["idea_review_required_reason"] = (
+                "负反馈自动清除降级：退回研究设想评审；" + "；".join(reasons)[:120]
+            )
+            lc._set_proposal_state(pid, fresh)
+            healed.append({"proposal_id": pid, "reasons": reasons[:3]})
+            if _log:
+                _log.info(
+                    f"[{pid}] 负反馈告警自动清除（24h 冷却期满），"
+                    f"策略降级为研究设想评审；clear={clear_res.get('success', True)}"
+                )
+        if dirty:
+            lc._save_state(state)
+    except Exception as exc:
+        if _log:
+            _log.warning(f"负反馈自愈失败: {exc}")
+    return healed
+
+
+def _run_human_queue_step() -> Optional[Dict[str, Any]]:
+    """v6.9.0 R6: 聚合待人工队列快照（>72h 催办由调用方生成告警）。"""
+    try:
+        from human_queue import run_human_queue
+
+        return run_human_queue(persist=True)
+    except Exception as exc:
+        if _log:
+            _log.warning(f"待人工队列聚合失败: {exc}")
+        return None
+
+
 def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
     """执行一次监控周期。
 
@@ -740,6 +807,41 @@ def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
     if health_issue:
         anomalies.append(health_issue)
 
+    # 3.6 v6.9.0 R2: 负反馈告警冷却自愈（自愈信息以告警形式留痕）
+    healed_items = _auto_heal_negative_feedback()
+    for h in healed_items:
+        anomalies.append(
+            {
+                "type": "auto_healed_negative_feedback",
+                "proposal_id": h["proposal_id"],
+                "message": f"[已自愈] {h['proposal_id']} 负反馈告警 24h 冷却期满自动清除，策略降级为研究设想评审",
+            }
+        )
+
+    # 3.7 v6.9.0 R6: 待人工队列聚合 + 超 72h 催办
+    human_queue_summary: Optional[Dict[str, Any]] = None
+    queue_result = _run_human_queue_step()
+    if queue_result:
+        human_queue_summary = queue_result.get("summary")
+        type_names = {"review": "验收", "activate": "激活", "negative_feedback": "负反馈"}
+        for item in queue_result.get("items", []):
+            if not item.get("escalate"):
+                continue
+            label = type_names.get(item["type"], item["type"])
+            anomalies.append(
+                {
+                    "type": "human_queue_escalation",
+                    "proposal_id": item["proposal_id"],
+                    # 去重键含天数桶：同一事项每天最多催办一次
+                    "job_id": str(int((item.get("waiting_hours") or 0) // 24)),
+                    "message": (
+                        f"⏰ 待人工处理超 72h：{label}「{item['title'][:28]}」"
+                        f"已等待 {(item.get('waiting_hours') or 0):.0f}h · "
+                        f"建议：{item['suggested_action'][:50]}"
+                    ),
+                }
+            )
+
     # 4. 获取当前聚焦
     focus_info: Optional[Dict[str, Any]] = None
     try:
@@ -795,6 +897,8 @@ def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
         "anomaly_count": len(anomalies),
         "notified_count": len(notified),
         "focus": focus_info,
+        "human_queue": human_queue_summary,
+        "auto_healed_negative_feedback": len(healed_items),
     }
 
     if _log:

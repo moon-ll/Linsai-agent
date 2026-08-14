@@ -878,6 +878,27 @@ def run_retrospective(period_str: str = "7d") -> Path:
     print(f"  成功率：{health['success_rate']}%")
     print(f"  行动建议：{len(suggestions)} 条")
 
+    # v6.9.0 R5: 复盘时自动应用低风险策略建议（白名单 + 单向 + 去重）
+    try:
+        from strategy_optimizer import auto_apply_low_risk
+
+        auto_result = auto_apply_low_risk()
+        if auto_result.get("applied"):
+            for c in auto_result["changes"]:
+                print(
+                    f"  自动应用（低风险）：{c['key']} {c['current']} → {c['suggested']}"
+                )
+                # 追记到报告，保证审计可见
+                with open(output_path, "a", encoding="utf-8") as f:
+                    f.write(
+                        f"\n> v6.9.0 自动调优：{c['key']} {c['current']} → "
+                        f"{c['suggested']}（confirmed_by=auto:low-risk）\n"
+                    )
+        else:
+            print(f"  低风险自动应用：{auto_result.get('reason', '跳过')}")
+    except Exception as exc:
+        print(f"  ⚠ 低风险自动应用失败：{exc}")
+
     return output_path
 
 

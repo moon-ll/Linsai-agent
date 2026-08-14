@@ -128,11 +128,11 @@ python3 -m py_compile scripts/*.py
 2. **模块自检**：大量脚本支持 `--self-check`，运行 `python3 scripts/{module}.py --self-check`。
 3. **E2E 集成测试**：`python3 scripts/test_e2e_learning_full.py`（需真实 Claude CLI 环境，非日常回归项）。
 
-**当前基线（v6.8.54）**：
-- `--module`：477/477 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器、轮次完成 break、derived job 优先级、prompt 优化器、看板轮次统计、stale job 回收、monitor 看板时间戳、维度提取修复、质量门槛、MOC 去重修复、标签提取修复、质量天花板收敛/下降检测、维度轮换、输入端熔断（v6.8.53 数据源修复）、审核反馈闭环、KB 健康评分、P0 跨轮持久化、prompt 优化器循环断裂、agent 分数奖惩闭环、nsfc 标准补全、范例注入修复、维度轮换修复、cross-proposal 数据源修复、研究设想质量门槛 idea_review、停滞课题检测修复、退回 idea_review 重触发修复、monitor 降级路径修复、writer 审核反馈注入、同步优化限制、KB 指标持久化、输入端熔断工作日检测、debug journal 压缩、输入端熔断数据源修复、cron 去重默认清单、周末跨周重置按阶段自身时间、告警防线可触发（v6.8.54 KB 四类告警端到端）、cron 拓扑对账（缺失/重复/漂移）、双上限终态自动解锁、error_history 裁剪）
+**当前基线（v6.9.0）**：
+- `--module`：541/541 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器、轮次完成 break、derived job 优先级、prompt 优化器、看板轮次统计、stale job 回收、monitor 看板时间戳、维度提取修复、质量门槛、MOC 去重修复、标签提取修复、质量天花板收敛/下降检测、维度轮换、输入端熔断（v6.8.53 数据源修复）、审核反馈闭环、KB 健康评分、P0 跨轮持久化、prompt 优化器循环断裂、agent 分数奖惩闭环、nsfc 标准补全、范例注入修复、维度轮换修复、cross-proposal 数据源修复、研究设想质量门槛 idea_review、停滞课题检测修复、退回 idea_review 重触发修复、monitor 降级路径修复、writer 审核反馈注入、同步优化限制、KB 指标持久化、输入端熔断工作日检测、debug journal 压缩、输入端熔断数据源修复、cron 去重默认清单、周末跨周重置按阶段自身时间、告警防线可触发（v6.8.54 KB 四类告警端到端）、cron 拓扑对账（缺失/重复/漂移）、双上限终态自动解锁、error_history 裁剪、智能辅助验收（v6.9.0 验收决策包预审/一键采纳/diff 摘要、负反馈 24h 自愈、最佳轮次自动回退、立项决策包三档建议、策略分级自动应用、待人工队列聚合降噪催办））
 - `--scenario`：16/16 通过
 - `--persona`：38/38 通过
-- `--web-ci`：585/585 通过（Web API 虚拟用户测试覆盖所有主要 API 命名空间；v6.8.54 后持续全绿）
+- `--web-ci`：732/732 通过（全量自动发现 46 个测试套件；Web API 虚拟用户测试覆盖所有主要 API 命名空间；v6.9.0 后持续全绿）
 
 **测试设计原则**：零污染（临时隔离目录运行）、零成本（不调用 LLM API）、自动发现（新增 `scripts/tests/test_*.py` 自动纳入回归）。
 
@@ -238,6 +238,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 - **多源学术检索（v6.8.42-v6.8.45）**：`external_fetcher.py` 新增 OpenAlex/Semantic Scholar/PubMed/Crossref 检索源与 `search_academic()` 聚合（DOI/arXiv ID/标题三级去重，任一源失败自动降级）；无 key 匿名模式日均 20-50 次检索足够（OpenAlex 无 key 约 100 次/天 + 24h 缓存）。`literature_service` 支持无 arXiv ID 的期刊论文以 DOI 入库（`{year}-doi-{slug}-{title}.md`）；references 校验步骤在 hermes 检索后叠加多源补充，hermes 无结果时多源自动接管。
 - **API 故障防线（v6.8.46-v6.8.48）**：`_run_hermes` 对 returncode=0 的输出做 API 错误特征检测（429/配额耗尽/余额不足等 10 种），命中即 success=False，防止 MiniMax Token Plan 耗尽期错误文本被解析成伪分数（实测案例：0.81→0.18 污染）；monitor 解析失败（0.0 非真实分）跳过奖惩不误扣；`_extract_dimension_scores` 对 <300 字符短输出不产生分数。
 - **知识库每日治理（v6.8.51）**：`lc-kb-sync` cron（每日 12:40）执行 `kb_auto_sync.py`（多端同步 + 索引/图谱无条件重建）与 `growth_engine.py --apply`（生长阶段晋升）。写入统一走 `kb_wiki` 门面（防双 frontmatter 污染）；索引格式 v2（扁平 chunk + 整型倒排 + 2-gram，157MB→20MB，两段式检索 + 进程内缓存）；简报同步兼容 `research_briefing_*`/`daily_memory_*` 双命名；`health_sensor` 新增 KB 四类告警（索引停更/生长断流/蒸馏积压/图谱失连）。详见 `docs/ARCHITECTURE.md` 知识库数据流转章节。
+- **智能辅助验收与异常自愈（v6.9.0）**：人机分工实测为"执行/修复/治理全自动，仅 3 法定节点（立项激活、验收、策略 apply）+ 2 异常恢复需人"。本层让验收智能辅助、异常自动恢复、等人事项集中可视：① 验收决策包 `review_dossier.py`（pending_review 晋级时自动生成规则预审三档 approve_lean/attention/reject_lean + diff 摘要，审核会话自动注入节选，`POST /api/lifecycle/{id}/review-adopt` 守卫链通过后一键采纳归档，审计 `adopted_via="one_click"`；门槛 REJECT_SCORE_GATE=0.75 与自动晋级线 0.9 分离）② 负反馈 24h 冷却自愈（`should_auto_clear_negative_feedback`，每课题至多 1 次，清除同时降级 `idea_review_required=True`；冷却中不入人工队列降噪）③ 质量退化自动回退（两连降且距最佳 >0.03 → `perform_auto_rollback` 恢复最佳轮次草稿，原稿存 `-pre-rollback.md`，每课题至多 1 次）④ 立项决策包（`idea_generator.recommend_activation` 三档 hold/merge/activate + 可行性启发式，注册时写 `00_idea-dossier.md`）⑤ 策略分级自动应用（白名单 stagger_seconds/score_threshold，单向规则（threshold 只升不降）+ 7 天去重 + 单次上限 2 项 + `confirmed_by="auto:low-risk"`，周复盘后自动应用）⑥ 待人工队列 `human_queue.py`（聚合验收/立项/负反馈三类等人事项，超 72h 催办告警按天数桶去重，持久化 `memory/human-queue.json`，控制台右栏面板 + `GET /api/console/human-queue`）。
 
 ---
 
@@ -347,7 +348,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.8.54*
+*版本：6.9.0*
 *日期：2026-08-14*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

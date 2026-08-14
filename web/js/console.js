@@ -138,6 +138,81 @@
   }
 
   // ============================================
+  // v6.9.0 R6: 待人工处理队列（验收/激活/负反馈 + 建议动作 + 等待时长）
+  // ============================================
+
+  const QUEUE_TYPE_LABELS = {
+    review: '验收',
+    activate: '激活',
+    negative_feedback: '负反馈',
+  };
+
+  function formatQueueWait(hours) {
+    if (hours == null) return '?';
+    if (hours < 24) return `${Math.round(hours)}h`;
+    return `${Math.round(hours / 24)}d`;
+  }
+
+  async function loadConsoleHumanQueue() {
+    const container = document.getElementById('console-human-queue');
+    if (!container) return;
+    try {
+      const data = await apiGet('/api/console/human-queue');
+      if (data.status !== 'ok') return;
+      const items = data.items || [];
+      const countEl = document.getElementById('console-queue-count');
+      if (countEl) countEl.textContent = String(items.length);
+
+      if (items.length === 0) {
+        container.innerHTML = '<div class="console-alert console-alert-info"><div class="console-alert-message">无待人工处理事项</div></div>';
+        return;
+      }
+
+      container.innerHTML = items.map((item, idx) => {
+        const typeLabel = QUEUE_TYPE_LABELS[item.type] || item.type;
+        const verdictHint = item.can_adopt ? ' · 可一键采纳' : '';
+        const actionBtn =
+          item.type === 'review'
+            ? `<button class="console-mini-btn" data-idx="${idx}" data-cmd="queue_review">去验收</button>`
+            : item.type === 'activate'
+              ? `<button class="console-mini-btn" data-idx="${idx}" data-cmd="queue_activate">去激活</button>`
+              : '';
+        return `
+          <div class="console-alert ${item.escalate ? 'console-alert-error' : 'console-alert-warning'}">
+            <div class="console-alert-header">
+              <span class="console-alert-level">${typeLabel}</span>
+              <span class="console-alert-time">等待 ${formatQueueWait(item.waiting_hours)}${item.escalate ? ' ⚠催办' : ''}</span>
+            </div>
+            <div class="console-alert-message">${escapeHtml(item.title || item.proposal_id)}</div>
+            <div class="console-alert-reasons">
+              <div>· 建议：${escapeHtml(item.suggested_action || '')}${escapeHtml(verdictHint)}</div>
+            </div>
+            <div class="console-alert-actions">${actionBtn}</div>
+          </div>
+        `;
+      }).join('');
+
+      container.querySelectorAll('.console-mini-btn').forEach(btn => {
+        btn.addEventListener('click', () => handleQueueAction(btn, items));
+      });
+    } catch (e) { console.error('console human-queue:', e); }
+  }
+
+  async function handleQueueAction(btn, items) {
+    const item = items[Number(btn.dataset.idx)];
+    if (!item) return;
+    if (btn.dataset.cmd === 'queue_review') {
+      if (typeof window.lcReview === 'function') {
+        window.lcReview(item.proposal_id);
+      } else {
+        openLifecycle();
+      }
+    } else if (btn.dataset.cmd === 'queue_activate') {
+      openLifecycle();
+    }
+  }
+
+  // ============================================
   // 渲染：控制台主框架
   // ============================================
 
@@ -179,7 +254,9 @@
           <div id="console-cron-jobs" class="console-cron-jobs"></div>
         </div>
         <div class="console-col console-col-right">
-          <div class="console-section-title">告警与待处理 <span id="console-alert-count" class="console-badge">0</span></div>
+          <div class="console-section-title">待人工处理 <span id="console-queue-count" class="console-badge">0</span></div>
+          <div id="console-human-queue" class="console-alerts console-queue-list"></div>
+          <div class="console-section-title console-queue-gap">告警与待处理 <span id="console-alert-count" class="console-badge">0</span></div>
           <div id="console-alerts" class="console-alerts"></div>
         </div>
       </div>
@@ -202,11 +279,13 @@
       loadConsoleFlow();
       loadConsoleAgents();
       loadConsoleAlerts();
+      loadConsoleHumanQueue();
     });
 
     loadConsoleFlow();
     loadConsoleAgents();
     loadConsoleAlerts();
+    loadConsoleHumanQueue();
   }
 
   function toggleWeekendMenu() {

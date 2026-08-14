@@ -1316,9 +1316,36 @@ def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, 
     prop_state["last_monitor_assessment"] = monitor_result.get("overall_assessment", "")[:300]
     self._set_proposal_state(proposal_id, prop_state)
 
+    # v6.9.0 R3: 连续两轮下降且距最佳超过幅度 → 自动回退最佳轮次草稿
+    # （先于 _check_done：若下降路径晋级待审，人工看到的也是最佳版本）
+    try:
+        from .utils import perform_auto_rollback, should_auto_rollback
+
+        _rb_plan = should_auto_rollback(prop_state)
+        if _rb_plan:
+            _rb = perform_auto_rollback(proposal_id, prop_state, _rb_plan)
+            if _rb.get("success"):
+                self._set_proposal_state(proposal_id, prop_state)
+                if _log:
+                    _log.info(
+                        f"[{proposal_id}] 连续下降自动回退至 R{_rb_plan['best_round']} "
+                        f"（最佳 {_rb_plan['best_score']:.2f}，当前 {_rb_plan['current']:.2f}）"
+                    )
+            elif _log:
+                _log.info(
+                    f"[{proposal_id}] 触发回退条件但未执行：{_rb.get('error')}"
+                )
+    except Exception as _rb_exc:  # pragma: no cover
+        if _log:
+            _log.warning(f"[{proposal_id}] 自动回退检查失败: {_rb_exc}")
+
     # 负反馈告警：不流转，等待人工介入
     if prop_state.get("negative_feedback_alert"):
         reasons = prop_state.get("negative_feedback_reasons", [])
+        # v6.9.0 R2: 补戳触发时间（遗留数据无时间戳，供 24h 冷却自动清除判定）
+        if not prop_state.get("negative_feedback_at"):
+            prop_state["negative_feedback_at"] = now_utc()
+            self._set_proposal_state(proposal_id, prop_state)
         if _log:
             _log.warning(
                 f"[{proposal_id}] 触发负反馈告警: {', '.join(reasons)}; "
@@ -1349,6 +1376,19 @@ def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, 
                 self._set_proposal_state(proposal_id, prop_state)
                 if _log:
                     _log.warning(f"[{proposal_id}] {quality_warning}")
+        # v6.9.0 R1: 晋级待审自动生成验收决策包（best-effort，失败不影响晋级）
+        try:
+            from review_dossier import generate_review_dossier
+
+            _dossier = generate_review_dossier(proposal_id)
+            if _dossier.get("success") and _log:
+                _log.info(
+                    f"[{proposal_id}] 验收决策包已生成："
+                    f"预审 {_dossier['pre_review_verdict']}"
+                )
+        except Exception as _dos_exc:  # pragma: no cover
+            if _log:
+                _log.warning(f"[{proposal_id}] 决策包生成失败（不影响晋级）: {_dos_exc}")
         return {
             "success": True,
             "done": True,

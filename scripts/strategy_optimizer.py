@@ -236,6 +236,114 @@ def suggest_strategies(window_hours: int = 168) -> Dict[str, Any]:
     }
 
 
+# ============================================================
+# v6.9.0 R5: 低风险策略自动应用
+# ============================================================
+
+TUNING_LOG_PATH = PROJECT_ROOT / "memory" / "tuning-log.json"
+
+AUTO_APPLY_DEDUP_DAYS = 7
+"""同一参数 7 天内已应用过则跳过（防止震荡）。"""
+
+AUTO_APPLY_MAX_PER_RUN = 2
+"""单次自动应用至多改 2 个参数（小步快跑，便于归因）。"""
+
+AUTO_APPLY_KEYS = ("stagger_seconds", "score_threshold")
+"""可自动应用的参数白名单。
+
+分级依据：
+  - stagger_seconds：仅影响派活节奏，风险最低，任何方向可自动
+  - score_threshold：只允许提高（收紧质量门槛更保守；降低可能放进
+    低质课题，必须人工确认）
+  - max_rounds / no_improvement_limit：双向都有争议，永不自动
+  - critic/writer timeout：建议值由 v6.8.52 超时分级（lifecycle/constants）
+    承载，apply_strategies 不支持，保持人工
+"""
+
+
+def _recently_applied_keys(
+    tuning_log: List[Dict[str, Any]],
+    now: Optional[datetime] = None,
+    days: int = AUTO_APPLY_DEDUP_DAYS,
+) -> set:
+    """最近 N 天内（含人工与自动）已应用过的参数键集合。"""
+    now = now or datetime.now(timezone.utc)
+    recent: set = set()
+    for entry in tuning_log or []:
+        try:
+            at = datetime.fromisoformat(str(entry.get("at", "")).replace("Z", "+00:00"))
+        except Exception:
+            continue
+        if (now - at).total_seconds() > days * 86400:
+            continue
+        new = entry.get("new")
+        if isinstance(new, dict):
+            recent.update(new.keys())
+    return recent
+
+
+def select_auto_appliable(
+    current: Dict[str, Any],
+    suggested: Dict[str, Any],
+    tuning_log: List[Dict[str, Any]],
+    now: Optional[datetime] = None,
+) -> List[Dict[str, Any]]:
+    """纯函数：从建议中筛出可安全自动应用的参数变更。"""
+    recent = _recently_applied_keys(tuning_log, now)
+    changes: List[Dict[str, Any]] = []
+    for key in AUTO_APPLY_KEYS:
+        cur = current.get(key)
+        sug = suggested.get(key)
+        if cur is None or sug is None or sug == cur:
+            continue
+        if key in recent:
+            continue
+        if key == "score_threshold" and float(sug) < float(cur):
+            continue  # 降门槛必须人工确认
+        changes.append({"key": key, "current": cur, "suggested": sug})
+        if len(changes) >= AUTO_APPLY_MAX_PER_RUN:
+            break
+    return changes
+
+
+def auto_apply_low_risk(result: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+    """自动应用低风险策略建议（经 orchestrator.apply_strategies 落盘）。
+
+    纪律：白名单 + 单向规则（threshold 只升不降）+ 7 天去重 + 单次上限，
+    tuning-log 中 confirmed_by 标记为 auto:low-risk 可审计、可回滚。
+    """
+    result = result or suggest_strategies()
+    if result.get("error") or not result.get("reasons"):
+        return {"applied": False, "reason": "no_suggestions", "risk": result.get("risk")}
+
+    tuning_log = []
+    if TUNING_LOG_PATH.exists():
+        try:
+            tuning_log = load_json(TUNING_LOG_PATH) or []
+        except Exception:
+            tuning_log = []
+    changes = select_auto_appliable(
+        result["current"], result["suggested"], tuning_log
+    )
+    if not changes:
+        return {"applied": False, "reason": "no_safe_changes", "risk": result.get("risk")}
+
+    try:
+        # 延迟导入避免 orchestrator ↔ strategy_optimizer 循环
+        from orchestrator import apply_strategies
+
+        patch = {c["key"]: c["suggested"] for c in changes}
+        apply_result = apply_strategies(patch, confirmed_by="auto:low-risk")
+    except Exception as exc:
+        return {"applied": False, "reason": f"apply_failed: {exc}", "changes": changes}
+
+    return {
+        "applied": True,
+        "changes": changes,
+        "apply_result": apply_result,
+    }
+
+
 def _self_check() -> None:
     """自检。"""
     print("=== strategy_optimizer._self_check ===")
@@ -248,6 +356,28 @@ def _self_check() -> None:
     print(f"  risk: {result['risk']}")
     for r in result["reasons"][:3]:
         print(f"  - {r[:80]}")
+
+    # v6.9.0 R5: 安全筛选规则自检
+    from datetime import datetime, timedelta, timezone as _tz
+
+    now = datetime(2026, 8, 14, tzinfo=_tz.utc)
+    cur = {"stagger_seconds": 60, "score_threshold": 0.9, "max_rounds": 8}
+    # 门槛下调被拒；stagger 变化放行
+    sug = {"stagger_seconds": 90, "score_threshold": 0.85, "max_rounds": 6}
+    changes = select_auto_appliable(cur, sug, [], now=now)
+    assert [c["key"] for c in changes] == ["stagger_seconds"], changes
+    # 门槛上调放行
+    sug2 = {"stagger_seconds": 60, "score_threshold": 0.95}
+    changes2 = select_auto_appliable(cur, sug2, [], now=now)
+    assert [c["key"] for c in changes2] == ["score_threshold"], changes2
+    # 7 天去重：stagger 刚应用过 → 跳过
+    log = [{"at": (now - timedelta(days=1)).isoformat(), "new": {"stagger_seconds": 90}}]
+    changes3 = select_auto_appliable(cur, sug, log, now=now)
+    assert changes3 == [], changes3
+    # 8 天前的记录不再拦截
+    log2 = [{"at": (now - timedelta(days=8)).isoformat(), "new": {"stagger_seconds": 90}}]
+    changes4 = select_auto_appliable(cur, sug, log2, now=now)
+    assert [c["key"] for c in changes4] == ["stagger_seconds"], changes4
     print("=== 通过 ===")
 
 

@@ -449,7 +449,158 @@ def register_new_idea(idea: Dict[str, Any], dry_run: bool = False) -> Dict[str, 
     result = lc.register_from_idea(idea, project_type="general")
     if result.get("success"):
         _log_info(f"新设想注册为 drafts: {result['proposal_id']}")
+        # v6.9.0 R4: 生成立项决策包（新颖性/重叠度/可行性 + 建议）
+        try:
+            existing = [
+                p
+                for p in _load_existing_proposals()
+                if p.get("proposal_id") != result["proposal_id"]
+            ]
+            comparisons = compare_with_existing(idea, existing)
+            generate_idea_dossier(idea, comparisons, result["proposal_id"])
+        except Exception as exc:
+            _log_warn(f"立项决策包生成失败（不影响注册）: {exc}")
     return result
+
+
+# ---------------------------------------------------------------------------
+# v6.9.0 R4: 立项决策包
+# ---------------------------------------------------------------------------
+
+IDEA_HOLD_SIMILARITY = 0.50
+"""建议搁置线：与现有课题相似度达到该值的设想建议 hold（高度重叠）。"""
+
+_EXPERIMENT_HINTS = ("实验", "测量", "激光", "样品", "装置", "搭建", "观测", "制备")
+_THEORY_HINTS = ("理论", "解析", "模拟", "数值", "推导", "建模", "计算")
+
+
+def _feasibility_hint(text: str) -> Dict[str, Any]:
+    """基于关键词的可行性启发式（零成本，不依赖 LLM）。"""
+    has_exp = any(k in text for k in _EXPERIMENT_HINTS)
+    has_thy = any(k in text for k in _THEORY_HINTS)
+    if has_exp and has_thy:
+        mode, note = "理实结合", "需兼顾实验资源与理论推导，建议先做理论预研降低试错成本"
+    elif has_exp:
+        mode, note = "实验导向", "依赖仪器与样品资源，建议核对现有实验条件后再激活"
+    elif has_thy:
+        mode, note = "理论导向", "以推导/模拟为主，资源需求低，可快速进入优化"
+    else:
+        mode, note = "未识别", "设想文本未显式标注研究范式，激活前建议人工确认研究路径"
+    return {"mode": mode, "note": note}
+
+
+def recommend_activation(
+    top_similarity: float,
+    hold_line: float = IDEA_HOLD_SIMILARITY,
+    novel_line: float = SIMILARITY_NEW_THRESHOLD,
+) -> Tuple[str, str]:
+    """根据与现有课题的最高相似度给出激活建议（纯函数，供回归测试）。
+
+    返回 (recommendation, reason)：hold / merge考察 / activate。
+    """
+    if top_similarity >= hold_line:
+        return (
+            "hold",
+            f"与现有课题相似度 {top_similarity:.2f} ≥ {hold_line}，高度重叠",
+        )
+    if top_similarity >= novel_line:
+        return (
+            "merge考察",
+            f"与现有课题相似度 {top_similarity:.2f}，建议先考察融合可能性",
+        )
+    return (
+        "activate",
+        f"最相似课题相似度 {top_similarity:.2f} < {novel_line}，新颖性达标",
+    )
+
+
+def generate_idea_dossier(
+    idea: Dict[str, Any],
+    comparisons: List[Dict[str, Any]],
+    proposal_id: str,
+) -> Dict[str, Any]:
+    """为新注册设想生成立项决策包（00_idea-dossier.md）。
+
+    人从"读设想全文"变成"看一页摘要"：新颖性 vs 现有课题、组合重叠度、
+    可行性启发式与激活建议（activate / merge考察 / hold）。
+    """
+    from proposal_lifecycle import ProposalLifecycle
+    from common import file_lock
+
+    idea_text = " ".join(
+        [idea.get("title", ""), idea.get("background", ""), " ".join(idea.get("keywords", []))]
+    )
+    top = comparisons[0] if comparisons else None
+    top_sim = float(top["similarity"]) if top else 0.0
+
+    recommendation, rec_reason = recommend_activation(top_sim)
+    if top and recommendation != "activate":
+        rec_reason = f"与现有课题 {top['proposal_id']}：{rec_reason}"
+
+    feasibility = _feasibility_hint(idea_text)
+    overlaps = [c for c in comparisons if float(c.get("similarity", 0)) >= 0.30]
+    keywords = idea.get("keywords") or []
+
+    dossier = {
+        "proposal_id": proposal_id,
+        "title": idea.get("title", ""),
+        "generated_at": now_utc(),
+        "novelty_top_similarity": top_sim,
+        "overlap_count": len(overlaps),
+        "feasibility": feasibility["mode"],
+        "recommendation": recommendation,
+        "recommendation_reason": rec_reason,
+    }
+
+    # 写入决策包文件
+    lc = ProposalLifecycle()
+    prop_dir = lc._find_proposal_dir(proposal_id)
+    if prop_dir:
+        lines = [
+            f"# 立项决策包 · {idea.get('title', proposal_id)}",
+            "",
+            f"- 生成时间：{dossier['generated_at']}",
+            f"- 关键词：{'、'.join(keywords[:8]) or '（无）'}",
+            "",
+            "## 激活建议",
+            "",
+            f"**{recommendation}** — {rec_reason}",
+            "",
+            "## 新颖性（vs 现有课题）",
+            "",
+        ]
+        if comparisons[:3]:
+            for c in comparisons[:3]:
+                lines.append(
+                    f"- {c.get('proposal_id')}（{c.get('status', '?')}，"
+                    f"{c.get('title', '')[:24]}）：相似度 {float(c['similarity']):.2f}"
+                )
+        else:
+            lines.append("- 当前无其他课题，天然新颖")
+        lines += [
+            "",
+            f"组合重叠度：{len(overlaps)} 个课题相似度 ≥ 0.30",
+            "",
+            "## 可行性启发",
+            "",
+            f"- 研究范式：{feasibility['mode']}",
+            f"- {feasibility['note']}",
+            "",
+            "## 背景（节选）",
+            "",
+            (idea.get("background", "") or "")[:600] or "（无背景文本）",
+            "",
+        ]
+        (prop_dir / "00_idea-dossier.md").write_text("\n".join(lines), encoding="utf-8")
+
+    # 摘要写回 prop_state（锁保护 + 重读合并）
+    with file_lock("proposal-lifecycle"):
+        state = lc._load_state()
+        prop = state.get("proposals", {}).get(proposal_id)
+        if prop:
+            prop["idea_dossier"] = dossier
+            lc._save_state(state)
+    return dossier
 
 
 def merge_into_existing(idea: Dict[str, Any], target_id: str, dry_run: bool = False) -> Dict[str, Any]:
