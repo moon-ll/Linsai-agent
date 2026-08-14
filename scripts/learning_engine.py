@@ -830,7 +830,31 @@ def run_learning_cycle(query: Optional[str] = None,
                 path = distill_arxiv_paper(op, cost_tracker)
                 if path:
                     result["created"].append(path)
+            elif source in ("openalex", "semantic_scholar", "pubmed", "crossref"):
+                # v6.8.44: 支持多源学术论文蒸馏，复用 arXiv 蒸馏逻辑
+                # 若含 arXiv ID → 走 PDF 下载+蒸馏；否则仅用元数据蒸馏
+                if op.get("arxiv_id"):
+                    path = distill_arxiv_paper(op, cost_tracker)
+                else:
+                    # 仅 DOI/元数据 → 走 generic 蒸馏
+                    wiki_text, concepts, hints = distill_content("academic_paper", op, cost_tracker)
+                    if wiki_text:
+                        doi = op.get("doi", "")
+                        slug = doi.replace("/", "-").replace(".", "-") if doi else _cache_key(op.get("title", ""))
+                        wiki_rel = f"wiki/papers/doi-{slug}.md"
+                        kb = _import_kb()
+                        kb.save_distilled_wiki(wiki_rel, wiki_text, raw_rel_path=f"doi:{doi}")
+                        for concept in concepts:
+                            _integrate_concept(concept, wiki_text, source="academic_paper")
+                        path = wiki_rel
+                if path:
+                    result["created"].append(path)
             elif source == "web":
+                path = distill_web_search(op, cost_tracker)
+                if path:
+                    result["created"].append(path)
+            elif source == "wikipedia":
+                # Wikipedia 词条直接走 web 蒸馏格式
                 path = distill_web_search(op, cost_tracker)
                 if path:
                     result["created"].append(path)

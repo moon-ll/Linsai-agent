@@ -1115,6 +1115,41 @@ class OptimizeMixin:
         # 2. 通过 LiteratureService.search() 执行联网检索
         papers = svc.search(keywords=gap_keywords, source="pipeline", proposal_id=proposal_id)
 
+        # v6.8.44: 多源学术检索补充——在 hermes 联网检索基础上，
+        # 叠加 OpenAlex（期刊论文）+ arXiv 检索结果，弥补单一 hermes 途径盲区。
+        # 任一来源失败（限流/超时）不影响已有结果。
+        multi_source_papers = []
+        try:
+            import external_fetcher as ef
+            # 将 gap 关键词组合为检索查询（取前 2 个关键词，避免超长查询触发 OpenAlex 限制）
+            combined_query = " ".join(gap_keywords[:2]) if gap_keywords else "high harmonic generation"
+            oa_papers = ef.search_academic(
+                combined_query, max_results=5,
+                sources=("arxiv", "openalex"),
+            )
+            # 去重：与已有 hermes 检索结果对比（按 arxiv_id / doi / title）
+            existing_keys = set()
+            for p in papers:
+                aid = p.get("arxiv_id", "")
+                if aid:
+                    existing_keys.add(f"arxiv:{aid}")
+            for p in oa_papers:
+                aid = p.get("arxiv_id", "")
+                doi = (p.get("doi") or "").replace("https://doi.org/", "")
+                title_key = p.get("title", "").strip().lower()[:80]
+                key = f"arxiv:{aid}" if aid else (f"doi:{doi}" if doi else f"title:{title_key}")
+                if key not in existing_keys:
+                    existing_keys.add(key)
+                    multi_source_papers.append(p)
+            if _log and multi_source_papers:
+                _log.info(
+                    f"[{proposal_id}] 多源检索补充 {len(multi_source_papers)} 篇"
+                    f"（OpenAlex+arXiv，去重后）"
+                )
+        except Exception as e:
+            if _log:
+                _log.warning(f"[{proposal_id}] 多源学术检索失败（降级跳过）: {e}")
+
         # 3. 构建输出 markdown（保持与原来相同的文件路径和格式）
         lines = [
             f"# 定向文献检索报告\n",
@@ -1135,11 +1170,37 @@ class OptimizeMixin:
             source_tag = "本地知识库" if not p.get("is_new", True) else "联网检索"
             lines.append(f"- {arxiv_id} | {title} | {authors} | {year} | {score} | {tldr} | 来源：{source_tag}")
 
+        # v6.8.44: 多源学术检索结果（期刊论文 + 预印本）
+        if multi_source_papers:
+            lines.append(f"\n## 多源学术检索补充（OpenAlex + arXiv）\n")
+            for p in multi_source_papers:
+                aid = p.get("arxiv_id", "")
+                doi = (p.get("doi") or "").replace("https://doi.org/", "")
+                title = p.get("title", "")
+                authors_list = p.get("authors", [])
+                authors = ", ".join(authors_list[:3]) if isinstance(authors_list, list) else str(authors_list)
+                year = p.get("year", "")
+                venue = p.get("venue", "")
+                cit = p.get("citation_count", 0)
+                source_tag = p.get("source", "academic")
+                # 期刊论文优先显示 DOI，预印本显示 arXiv ID
+                ident = f"arXiv:{aid}" if aid else (f"DOI:{doi}" if doi else "无ID")
+                abstract = (p.get("abstract") or "")[:150]
+                lines.append(
+                    f"- {ident} | {title} | {authors} | {year} | {venue} | "
+                    f"引用:{cit} | 来源：{source_tag} | {abstract}"
+                )
+
         result_path.write_text("\n".join(lines), encoding="utf-8")
 
-        if papers:
+        # v6.8.44: 多源检索有结果时也算成功（hermes 可能无结果但 OpenAlex 有期刊论文）
+        total_papers = len(papers) + len(multi_source_papers)
+        if total_papers:
             if _log:
-                _log.info(f"[{proposal_id}] 文献检索完成: {result_path.name} ({len(papers)} 篇)")
+                _log.info(
+                    f"[{proposal_id}] 文献检索完成: {result_path.name} "
+                    f"(hermes={len(papers)}, 多源={len(multi_source_papers)})"
+                )
             return result_path
         else:
             if _log:

@@ -447,9 +447,9 @@ def fetch_openalex(query: str, max_results: int = 5,
         params["api_key"] = api_key
     url = _OPENALEX_API + "?" + urllib.parse.urlencode(params)
 
-    data = _http_get_json(url)
+    data = _http_get_json(url, timeout=20, retries=2)
     if not data or not isinstance(data, dict):
-        print(f"⚠ OpenAlex 检索失败（可能无 key 或已达额度）: {query}", file=sys.stderr)
+        print(f"⚠ OpenAlex 检索失败（网络超时/限流/无额度）: {query}", file=sys.stderr)
         return []
 
     normalized = []

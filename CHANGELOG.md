@@ -1,5 +1,32 @@
 # 变更记录
 
+## v6.8.45 - 2026-08-14 多源检索接入 references 校验：期刊论文进入文献补充报告
+
+### 背景
+- v6.8.43 打通期刊论文入库后，生命周期 references 校验步骤仍只依赖 hermes researcher 单一检索途径。
+- 当 hermes 超时/限流无返回时，文献补充报告为空，writer 无新文献可引用。
+
+### 修改（proposal_lifecycle/optimize.py）
+- `_run_literature_searcher` 新增多源检索补充层：在 hermes 联网检索后，叠加 `external_fetcher.search_academic`（OpenAlex + arXiv）结果。
+- 去重机制：按 arxiv_id / DOI / title 三级标识与 hermes 结果对比，避免重复推荐。
+- 检索报告新增「多源学术检索补充」小节，含期刊论文（DOI 标识）和预印本（arXiv 标识），显示引用数/期刊/摘要。
+- 返回判断修正：hermes 无结果但多源有结果时也返回成功（`total_papers = hermes + 多源`）。
+- 关键词组合取前 2 个（避免超长查询触发 OpenAlex 限制）。
+- `fetch_openalex` 超时从 15s 提升到 20s + 2 次重试，SSL 握手波动时更快降级。
+
+### 验证
+- 端到端模拟（hermes 无结果场景）：多源检索成功补充 10 篇（含 Nature Communications/PRA/Nano Letters 等期刊预印本）。
+- 网络波动场景（OpenAlex SSL 超时）：arXiv 源自动接管返回 10 篇，链路未中断——验证多源降级健壮性。
+- `test_literature_service.py` 全量通过；py_compile 全量通过。
+
+### 当前闭环
+```
+critic references 评审 → gap_identifier 识别缺口 → literature_searcher:
+  ├─ hermes researcher 联网检索（主）
+  └─ search_academic(arXiv + OpenAlex) 多源补充（v6.8.45 新增）
+→ 文献补充报告（含期刊论文 DOI）→ writer 修订 references.md → CitationManager 入库
+```
+
 ## v6.8.44 - 2026-08-14 修复 DOI 论文文件名有损命名（回归测试新失败）
 
 ### 背景
