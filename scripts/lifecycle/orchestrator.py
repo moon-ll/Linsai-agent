@@ -87,6 +87,69 @@ def _cleanup_old_round_jobs(self, proposal_id: str, current_round: int) -> int:
     return cleaned
 
 
+def _check_monitor_heartbeat(self, dry_run: bool = False) -> Optional[Dict[str, Any]]:
+    """v6.8.50: monitor 心跳互查（由 repair cron 每 6h 调用）。
+
+    看板 hourly_monitor.timestamp 超过 2h 未刷新，说明 hourly monitor
+    自身故障（cron 被删/进程挂/异常退出）。由 repair 侧补告警并落盘
+    看板 alerts 区，打破"谁来监控监控者"的自引用问题。
+
+    Returns:
+        心跳正常返回 None；异常返回告警 dict。
+    """
+    from datetime import datetime, timezone
+    from common import load_json, save_json
+    from paths import PROJECT_ROOT
+
+    kanban_path = PROJECT_ROOT / "memory" / "system-kanban.json"
+    kanban = load_json(kanban_path, default={})
+    ts = (kanban.get("hourly_monitor") or {}).get("timestamp", "")
+    if not ts:
+        alert = None  # 从未运行过：monitor 的 cron 检查会覆盖，此处不重复告警
+        return alert
+    try:
+        last = datetime.fromisoformat(str(ts).replace("Z", "+00:00"))
+    except Exception:
+        return None
+    age_h = (datetime.now(timezone.utc) - last).total_seconds() / 3600
+    if age_h <= 2.0:
+        return None
+
+    alert = {
+        "type": "monitor_heartbeat_lost",
+        "level": "high",
+        "message": f"hourly monitor 心跳丢失 {round(age_h, 1)}h"
+                   f"（最后刷新 {str(ts)[:19]}），监控 cron 疑似故障，请检查 lc-hourly-monitor",
+    }
+    if _log:
+        _log.warning(f"[repair] {alert['message']}")
+    if not dry_run:
+        # 落盘到看板 alerts 区（与 lifecycle_monitor._persist_alerts 同构）
+        try:
+            kanban = load_json(kanban_path, default={})
+            alerts = kanban.get("alerts") or []
+            open_a = next((a for a in alerts
+                           if a.get("key") == "monitor_heartbeat_lost::" and not a.get("resolved_at")), None)
+            now = now_utc()
+            if open_a:
+                open_a["last_seen"] = now
+                open_a["count"] = int(open_a.get("count", 1)) + 1
+            else:
+                alerts.append({
+                    "key": "monitor_heartbeat_lost::",
+                    "level": "high",
+                    "message": alert["message"],
+                    "first_seen": now, "last_seen": now, "count": 1,
+                    "resolved_at": None,
+                })
+            kanban["alerts"] = alerts[-100:]
+            save_json(kanban_path, kanban)
+        except Exception as e:
+            if _log:
+                _log.warning(f"[repair] 心跳告警落盘失败: {e}")
+    return alert
+
+
 def sync_checkpoint(self, proposal_id: str) -> Dict[str, Any]:
     """为指定 proposal 补齐下一轮的 checkpoint。幂等。
 
@@ -236,10 +299,19 @@ def run_repair(self, dry_run: bool = False) -> Dict[str, Any]:
 
     v6.7.7: 区分工作日与周末。
     - 工作日：扫描 optimizing proposal worker jobs。
-    - 周末：扫描 weekend_input/output/reflection 任务状态，并修复周末 cron。
+    - 周末：扫描周末任务状态，并修复周末 cron。
     """
     if _log:
         _log.info(f"=== 修复扫描（dry_run={dry_run}, weekend={_is_weekend()}）===")
+
+    # v6.8.50: monitor 心跳互查——打破"谁来监控监控者"的自引用问题。
+    # repair 每 6h 运行一次，若看板 hourly_monitor 心跳时滞 >2h，
+    # 说明 hourly monitor 自身挂了，由 repair 侧补告警（落盘到看板 alerts 区）。
+    try:
+        self._check_monitor_heartbeat(dry_run=dry_run)
+    except Exception as e:
+        if _log:
+            _log.warning(f"[repair] monitor 心跳互查异常（不影响主流程）: {e}")
 
     lifecycle_crons = self.list_lifecycle_crons()
 

@@ -1,8 +1,8 @@
 ---
 title: "NSFC 课题生命周期索引"
 type: "index"
-created: "2026-08-14T09:03:51Z"
-updated: "2026-08-14T09:03:51Z"
+created: "2026-08-14T10:42:40Z"
+updated: "2026-08-14T10:42:40Z"
 tags: []
 related: []
 source_raw: ""
@@ -23,7 +23,7 @@ project: ["NSFC-强场超快"]
 | moire-strong-field-probe | 面上 | 优化中 | 第7轮 | 0.79 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
 | order-parameter-ultrafast-readout | 面上 | 优化中 | 第0轮 | 0.74 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
 | quantum-geometry-inversion | 面上 | 优化中 | 第0轮 | 0.77 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
-| transient-quantum-phase-optical | 重点 | 优化中 | 第3轮 | 0.18 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
+| transient-quantum-phase-optical | 重点 | 优化中 | 第3轮 | 0.81 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
 
 ---
 

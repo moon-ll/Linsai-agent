@@ -873,6 +873,7 @@ def cmd_auto() -> None:
                     backup_count_tracker=backup_tracker,
                 )
                 _log_auto_applied(safe_pending)
+                _record_intervention_baseline(safe_pending)  # v6.8.50 效果基线
                 print("\n✓ 自动优化完成")
                 return
         print("○ 无新建议，无需操作")
@@ -922,6 +923,7 @@ def cmd_auto() -> None:
     applied_ok = [s for s in to_apply if s.get("status") == "applied"]
     if applied_ok:
         _log_auto_applied(applied_ok)
+        _record_intervention_baseline(applied_ok)  # v6.8.50 效果基线
 
     print("\n✓ 自动优化完成")
 
@@ -950,6 +952,44 @@ def _log_auto_applied(suggestions: List[Dict]) -> None:
                 "tags": ["prompt_optimization", "auto_applied", s.get("target_profile", "")],
                 "status": "verified",
             })
+    except Exception:
+        pass
+
+
+def _record_intervention_baseline(suggestions: List[Dict]) -> None:
+    """v6.8.50: 干预效果基线记录——优化平面闭环的证据锚点。
+
+    每次成功应用 prompt 干预后，把当时的 agent-scores 快照记为基线。
+    后续（retrospective / 人工）对比"基线 → 当前"即可量化干预是否有效，
+    无效干预可回滚（备份在 memory/prompt-backups/）。
+
+    闭环链：干预(apply) → 基线锚点(本函数) → 运行 N 轮 → 对比 agent-scores
+    → 有效则沉淀/无效则回滚 → 周复盘归档。
+    """
+    try:
+        from common import load_json, save_json
+        scores_path = PROJECT_ROOT / "memory" / "agent-scores.json"
+        scores = load_json(scores_path, default={})
+        baseline_path = PROJECT_ROOT / "memory" / "prompt-interventions.json"
+        interventions = load_json(baseline_path, default=[])
+        if not isinstance(interventions, list):
+            interventions = []
+        from common import now_utc
+        for s in suggestions:
+            interventions.append({
+                "at": now_utc(),
+                "profile": s.get("target_profile", ""),
+                "file": Path(s.get("target_file", "")).name,
+                "description": str(s.get("description", ""))[:150],
+                "baseline": {
+                    "writer": (scores.get("writer") or {}).get("score"),
+                    "critic": (scores.get("critic") or {}).get("score"),
+                },
+                "status": "active",  # active → validated / rolled_back
+            })
+        # 只保留最近 50 条
+        interventions = interventions[-50:]
+        save_json(baseline_path, interventions)
     except Exception:
         pass
 

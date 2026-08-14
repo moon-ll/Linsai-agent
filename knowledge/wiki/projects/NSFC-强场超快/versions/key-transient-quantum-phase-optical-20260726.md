@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "key-transient-quantum-phase-optical-20260726"
 project_type: "key"
 latest_round: 5
-last_score: 0.18
+last_score: 0.81
 status: "optimizing"
-created: "2026-08-14T09:03:51Z"
-updated: "2026-08-14T09:03:51Z"
+created: "2026-08-14T10:42:40Z"
+updated: "2026-08-14T10:42:40Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`key-transient-quantum-phase-optical-20260726`
 **类型**：key
 **最新轮次**：第 5 轮
-**当前分数**：0.18
+**当前分数**：0.81
 **状态**：优化中
-**同步时间**：2026-08-14T09:03:51Z
+**同步时间**：2026-08-14T10:42:40Z
 
 ---
 

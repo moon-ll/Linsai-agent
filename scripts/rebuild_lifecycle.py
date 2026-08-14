@@ -83,8 +83,51 @@ def _find_proposal_dir(proposal_id: str) -> Optional[Path]:
     return None
 
 
-def rebuild_lifecycle(dry_run: bool = False) -> Dict[str, Any]:
-    """扫描 critic 报告并重建 _lifecycle.json。"""
+def _cycle_start_ts(state: Dict[str, Any]) -> float:
+    """v6.8.50: 计算当前周期起点（epoch 秒）。
+
+    取 score_history 中"轮次回退点"（如 r8→r1，表示周期重启）之后最早
+    条目的 at；无回退则退回全 history 最早条目。早于该时间点的 critic
+    文件属于旧周期，重算时应排除——否则会把旧周期 round-8 的分数覆盖
+    当前周期的 last_score（实测案例：瞬态课题 0.81 被误算成 0.48）。
+    """
+    hist = state.get("score_history") or []
+
+    def _ts(v: Any) -> float:
+        try:
+            return datetime.fromisoformat(str(v).replace("Z", "+00:00")).timestamp()
+        except Exception:
+            return 0.0
+
+    # 找最后一次轮次回退点（当前周期的起点；history 可能含多段旧周期）
+    restart_idx = -1
+    for i in range(1, len(hist)):
+        try:
+            if int(hist[i].get("round", 0)) < int(hist[i - 1].get("round", 0)):
+                restart_idx = i
+        except (TypeError, ValueError):
+            continue
+    if restart_idx > 0:
+        ats = [_ts(h.get("at")) for h in hist[restart_idx:]]
+        ats = [t for t in ats if t > 0]
+        if ats:
+            return min(ats)
+    # 无回退：全 history 最早
+    ats = [_ts(h.get("at")) for h in hist]
+    ats = [t for t in ats if t > 0]
+    return min(ats) if ats else 0.0
+
+
+def rebuild_lifecycle(dry_run: bool = False, proposal_id: Optional[str] = None,
+                      force: bool = False) -> Dict[str, Any]:
+    """扫描 critic 报告并重建 _lifecycle.json。
+
+    v6.8.50 安全护栏：
+    - proposal_id: 只处理指定课题（定向校准）
+    - 周期过滤: 只统计 mtime ≥ 当前周期起点的 critic 文件（防旧周期污染）
+    - 漂移护栏: 重算 last_score 与现值分差 >0.30 且未 --force 时，
+      保留现有 score 字段只告警（伪分数/旧文件混入双保险）
+    """
     if not LIFECYCLE_PATH.exists():
         return {"error": "_lifecycle.json 不存在"}
 
@@ -93,8 +136,15 @@ def rebuild_lifecycle(dry_run: bool = False) -> Dict[str, Any]:
 
     lc = ProposalLifecycle()
     changes: List[Dict[str, Any]] = []
+    skipped_by_guard: List[Dict[str, Any]] = []
 
     for pid, state in proposals.items():
+        if proposal_id and pid != proposal_id:
+            continue
+        # v6.8.50: 已晋级/归档课题的轮次是历史事实，不参与重算
+        # （bsv 晋级 pending_review 后若重算会被覆盖成错误轮次）
+        if state.get("status") not in ("optimizing",):
+            continue
         prop_dir = _find_proposal_dir(pid)
         if not prop_dir:
             continue
@@ -104,6 +154,15 @@ def rebuild_lifecycle(dry_run: bool = False) -> Dict[str, Any]:
 
         old_rounds = state.get("optimization_rounds", 0)
         old_last_score = state.get("last_score", 0.0)
+
+        # v6.8.50: 周期过滤——排除旧周期的 critic 文件
+        cycle_start = _cycle_start_ts(state)
+        if cycle_start > 0:
+            critic_files = [f for f in critic_files if f.stat().st_mtime >= cycle_start - 60]
+        # 过滤后无文件：当前周期无可解析报告（新格式带章节后缀或尚未生成），
+        # 保留现状跳过，避免 rounds/score 被错误重置
+        if not critic_files:
+            continue
 
         new_score_history: List[Dict[str, Any]] = []
         section_passes: Dict[str, bool] = {}
@@ -171,6 +230,19 @@ def rebuild_lifecycle(dry_run: bool = False) -> Dict[str, Any]:
                 "new_last_score": last_score,
             })
 
+        # v6.8.50 漂移护栏：重算分数与现值分差过大时，该课题完全保留现状。
+        # 双保险场景：a) 旧周期文件混入（周期过滤失效时）b) 伪分数污染期
+        # （0.81→0.18 案例：现值是清洗后的真实分，重算反而从污染文件捞回伪分）
+        score_drift = abs(last_score - old_last_score)
+        guard_triggered = (score_drift > 0.30) and (not force) and old_last_score > 0
+        if guard_triggered:
+            skipped_by_guard.append({
+                "proposal_id": pid,
+                "reason": f"score_drift {old_last_score:.2f}→{last_score:.2f} 超过 0.30，"
+                          f"保留现状（--force 可强制覆盖）",
+            })
+            continue  # rounds/score/history 全部不动
+
         state["optimization_rounds"] = new_rounds
         state["last_score"] = last_score
         state["last_dim_scores"] = last_dim_scores
@@ -179,7 +251,8 @@ def rebuild_lifecycle(dry_run: bool = False) -> Dict[str, Any]:
         state["updated_at"] = now_utc()
 
     if dry_run:
-        return {"dry_run": True, "changes": changes, "total_proposals": len(proposals)}
+        return {"dry_run": True, "changes": changes, "skipped_by_guard": skipped_by_guard,
+                "total_proposals": len(proposals)}
 
     # 备份原文件
     BACKUP_DIR.mkdir(parents=True, exist_ok=True)
@@ -196,6 +269,7 @@ def rebuild_lifecycle(dry_run: bool = False) -> Dict[str, Any]:
     return {
         "success": True,
         "changes": changes,
+        "skipped_by_guard": skipped_by_guard,
         "total_proposals": len(proposals),
         "backup_path": str(backup_path.relative_to(PROJECT_ROOT)),
     }
@@ -336,6 +410,12 @@ if __name__ == "__main__":
         result = normalize_critic_rounds(dry_run=dry)
         print(json.dumps(result, ensure_ascii=False, indent=2))
     else:
-        dry = len(sys.argv) > 1 and sys.argv[1] == "--dry-run"
-        result = rebuild_lifecycle(dry_run=dry)
+        dry = "--dry-run" in sys.argv
+        force = "--force" in sys.argv
+        pid_arg: Optional[str] = None
+        if "--proposal" in sys.argv:
+            i = sys.argv.index("--proposal")
+            if i + 1 < len(sys.argv):
+                pid_arg = sys.argv[i + 1]
+        result = rebuild_lifecycle(dry_run=dry, proposal_id=pid_arg, force=force)
         print(json.dumps(result, ensure_ascii=False, indent=2))

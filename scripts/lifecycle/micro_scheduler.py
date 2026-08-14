@@ -1341,6 +1341,25 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
                 "generated_reports": generated_reports}
 
     # 5. 只执行聚焦 proposal 的 pending job
+    # v6.8.50: API 配额熔断检查——熔断 open 期间不派发（防 429 空转烧配额），
+    # probing 只放行一个试探 job。详见 scripts/circuit_breaker.py
+    try:
+        from circuit_breaker import allow_dispatch as cb_allow_dispatch
+        if not cb_allow_dispatch():
+            msg = "API 熔断器 open/probing 中，本次跳过派发（冷却 1h 后自动试探恢复）"
+            if _log:
+                _log.warning(f"[micro-scheduler] {msg}")
+            _update_kanban(slot_info, focus_pid, optimizing, [], self)
+            return {"success": True, "executed_count": 0, "executed": [], "reason": msg,
+                    "skip_reason": "circuit_open"}
+    except ImportError:
+        cb_allow_dispatch = None
+    except Exception as e:
+        # 熔断器自身故障不应阻塞调度（防御的防御）
+        if _log:
+            _log.warning(f"[micro-scheduler] 熔断器状态读取异常，按正常派发: {e}")
+        cb_allow_dispatch = None
+
     with file_lock("lifecycle-micro-scheduler"):
         for _ in range(max_jobs):
             if time.time() - started_at > time_limit_s:
@@ -1368,6 +1387,30 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
                     continue
 
                 result = self.execute_job(refreshed)
+
+                # v6.8.50: 回报熔断器——连续 api_error 触发熔断后立即停止本轮派发
+                if cb_allow_dispatch is not None:
+                    try:
+                        from circuit_breaker import record_job_result as cb_record
+                        cb_st = cb_record(result.get("success", False), result.get("error", ""))
+                        if cb_st.get("state") == "open" and not result.get("success"):
+                            if _log:
+                                _log.warning(
+                                    f"[micro-scheduler] API 熔断已开启"
+                                    f"（连续 {cb_st.get('consecutive_api_errors')} 次），本轮停止派发"
+                                )
+                            executed.append({
+                                "proposal_id": proposal_id,
+                                "job_id": refreshed["job_id"],
+                                "step": refreshed.get("step"),
+                                "success": result.get("success"),
+                                "error": result.get("error", "")[:200],
+                            })
+                            break
+                    except Exception as e:
+                        if _log:
+                            _log.warning(f"[micro-scheduler] 熔断器回报异常（忽略）: {e}")
+
                 executed.append({
                     "proposal_id": proposal_id,
                     "job_id": refreshed["job_id"],

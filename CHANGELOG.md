@@ -1,5 +1,47 @@
 # 变更记录
 
+## v6.8.50 - 2026-08-14 健康运维体系重构：双平面架构（维持+自优化共享证据层）
+
+### 架构设计
+两平面共享同一证据层（health_sensor 统一信号），维持平面保运转、优化平面促进化：
+- **维持平面**（感知→防御→修复→溯源）：lifecycle_monitor + circuit_breaker + run_repair + 告警落盘
+- **优化平面**（证据→干预→验证）：agent-scores + failure_analyzer + prompt_optimizer 基线 + retrospective
+- 核心原则：不再依赖"success 标记可信"假设（429 空转三小时零告警的教训）
+
+### 新增模块
+- `health_sensor.py`（统一感知层，~270 行）：采集空转检测（done 但 <30s）/API 错误爆发/
+  分数骤降（≥0.30）/监控心跳/熔断状态五类信号；`evaluate_risks()` 统一阈值管理。
+  直接回归 2026-08-14 真实故障模式（0.81→0.18 伪分数案例）。
+- `circuit_breaker.py`（配额熔断器，~230 行）：三态状态机 closed→open（连续 3 次 api_error）
+  →probing（冷却 1h 后单 job 试探）→closed/open；非 API 错误不触发；fcntl 锁 + 原子写。
+- 接入 `lifecycle/micro_scheduler.py`：派发前询问熔断器，job 结果回报驱动状态机，
+  熔断开启即停止本轮派发（熔断器自身故障不阻塞调度——防御的防御）。
+
+### 修改
+- `lifecycle_monitor.py`：新增 3.5 感知层信号检查（`_check_health_signals`）；
+  `_persist_alerts` 告警落盘独立于飞书（先落盘后通知，恢复时标 resolved_at，保留 100 条）
+  ——修复 04:00 lark-cli exit=3 告警丢失问题。
+- `lifecycle/orchestrator.py`：`run_repair` 新增 monitor 心跳互查（心跳 >2h 丢失由 repair 侧
+  补告警），打破"谁来监控监控者"自引用。
+- `profile_health.py`：接入 pipeline_jobs 一手数据源（step→profile 映射），修复日志正则
+  脱节导致的 7 profile 全空数据假象；实测产出 writer 93.1%/critic 100% 真实成功率。
+- `rebuild_lifecycle.py`：三重安全护栏——①周期过滤（score_history 最后一次轮次回退点为
+  当前周期起点，旧周期文件排除）②漂移护栏（重算分差 >0.30 保留现状，--force 可强制）
+  ③状态护栏（仅 optimizing 课题参与重算）；新增 --proposal/--force 参数。
+  dry-run 实证：瞬态课题 0.81→0.48 污染被正确拦截。
+- `prompt_optimizer.py`：`_record_intervention_baseline` 干预效果基线（应用时记录
+  agent-scores 快照到 prompt-interventions.json），优化平面"干预→运行→对比→沉淀/回滚"
+  闭环的证据锚点。
+- `proposal_lifecycle/optimize.py` + `lifecycle/executor.py`：短输出防线改为
+  `min_output_len` 参数（实时评审路径 300、解析落盘报告 0），修复 v6.8.46 防线
+  误伤单元测试短样本问题。
+
+### 测试（回归基线 445/445，较 v6.8.27 净增 67 个用例）
+- 新增 `test_health_sensor.py`（11 用例：四类信号采集+风险评估+时间窗口+正常零告警）
+- 新增 `test_circuit_breaker.py`（16 用例：三态全路径+非 API 隔离+持久化+人工复位）
+- 修复 `test_optimize_dimension_scores` 3 个被 v6.8.46 防线误伤的用例
+- self_test --module 445/445 全量通过；6 个核心专项测试全过
+
 ## v6.8.49 - 2026-08-14 项目结构规整与文档现代化（清理 130MB 历史备份 + CHANGELOG 瘦身 + 架构文档更新）
 
 ### 清理（结构规整）

@@ -128,7 +128,7 @@ def _read_critic_report(self, prop_dir: Path, round_num: int) -> Dict[str, Any]:
     return {
         "output": text,
         "score": self._extract_score(file_result),
-        "dim_scores": self._extract_dimension_scores(file_result),
+        "dim_scores": self._extract_dimension_scores(file_result, min_output_len=300),
         "issues": self._extract_issues(file_result),
     }
 

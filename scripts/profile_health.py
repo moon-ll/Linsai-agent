@@ -155,6 +155,75 @@ def _read_lifecycle_failures() -> Dict[str, List[Dict[str, Any]]]:
         return {}
 
 
+# v6.8.50: job step → profile 映射（pipeline_jobs 是比日志更可靠的一手数据源）
+_STEP_PROFILE_MAP = {
+    "critic": "critic",
+    "writer": "writer",
+    "monitor": "monitor",
+    "lit_search": "researcher",
+    "lit_read": "researcher",
+    "lit_note": "researcher",
+    "idea_review": "researcher",
+    "idea_fix": "writer",
+    "gap_analysis": "analyst",
+    "reference_check": "reviewer",
+    "full_review": "critic",
+}
+
+
+def _read_pipeline_job_records(window_hours: int) -> List[Dict[str, Any]]:
+    """v6.8.50: 从 _lifecycle.json 的 pipeline_jobs 提取 profile 执行记录。
+
+    背景：日志正则解析与当前日志格式脱节，导致 profile_health 长期
+    dispatch_count=0 / success_rate=null（2026-08-14 实测 7 个 profile 全部
+    空数据却报 working）。pipeline_jobs 中每个 job 都有 step/status/
+    started_at/finished_at/last_error，是一手数据源，此处转为与日志解析
+    相同的 record 格式供下游统一消费。
+    """
+    lifecycle_file = PROJECT_ROOT / "research_proposals" / "_lifecycle.json"
+    if not lifecycle_file.exists():
+        return []
+    records: List[Dict[str, Any]] = []
+    try:
+        data = load_json(lifecycle_file, default={"proposals": {}})
+        cutoff = datetime.now(timezone.utc) - timedelta(hours=window_hours)
+        for pid, s in (data.get("proposals") or {}).items():
+            for j in s.get("pipeline_jobs") or []:
+                step = str(j.get("step", "") or "")
+                profile = _STEP_PROFILE_MAP.get(step)
+                if not profile:
+                    continue
+                finished = j.get("finished_at", "")
+                if not finished:
+                    continue
+                try:
+                    ft = datetime.fromisoformat(str(finished).replace("Z", "+00:00"))
+                except Exception:
+                    continue
+                if ft < cutoff:
+                    continue
+                duration_s = 0.0
+                try:
+                    st = datetime.fromisoformat(str(j.get("started_at", "")).replace("Z", "+00:00"))
+                    duration_s = max(0.0, (ft - st).total_seconds())
+                except Exception:
+                    pass
+                status = j.get("status", "")
+                records.append({
+                    "profile": profile,
+                    "at": ft.isoformat(),
+                    "proposal_id": pid,
+                    "success": status == "done",
+                    "completed": status in ("done", "failed"),
+                    "duration_s": duration_s,
+                    "error": str(j.get("last_error", "") or "")[:200],
+                    "source": "pipeline_jobs",
+                })
+    except Exception:
+        pass
+    return records
+
+
 def compute_profile_health(window_hours: int = 24) -> Dict[str, Any]:
     """计算所有 profile 的健康度。
 
@@ -181,6 +250,12 @@ def compute_profile_health(window_hours: int = 24) -> Dict[str, Any]:
     log_records = _parse_log_records(window_hours)
     by_profile: Dict[str, List[Dict[str, Any]]] = defaultdict(list)
     for r in log_records:
+        by_profile[r["profile"]].append(r)
+
+    # 2.5 v6.8.50: 合并 pipeline_jobs 一手数据（优先于日志解析——
+    # 日志正则脱节曾导致 7 个 profile 全部空数据却报 working）
+    pipeline_records = _read_pipeline_job_records(window_hours)
+    for r in pipeline_records:
         by_profile[r["profile"]].append(r)
 
     # 3. 从 _lifecycle 读取失败记录

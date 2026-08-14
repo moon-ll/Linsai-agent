@@ -216,7 +216,7 @@ class OptimizeMixin:
             }
 
         # 预解析维度分数，供 writer 聚焦（P0-2）
-        pre_dims = self._extract_dimension_scores(critic_result)
+        pre_dims = self._extract_dimension_scores(critic_result, min_output_len=300)
         pre_weakest = self._get_weakest_dimension(pre_dims)
 
         # P1-2: 文献定向补充（严谨性不足时触发 researcher 检索）
@@ -262,21 +262,21 @@ class OptimizeMixin:
                 file_content = report_path.read_text(encoding="utf-8")
                 file_result = {"output": file_content}
                 score_after = self._extract_score(file_result)
-                dim_scores = self._extract_dimension_scores(file_result)  # P0-2
+                dim_scores = self._extract_dimension_scores(file_result, min_output_len=300)  # P0-2
                 issues = self._extract_issues(file_result)
             except Exception as e:
                 if _log:
                     _log.warning(f"[{proposal_id}] 读取 critic 报告失败: {e}，回退到 stdout")
                 # 回退：使用 hermes stdout 摘要
                 score_after = self._extract_score(critic_result)
-                dim_scores = self._extract_dimension_scores(critic_result)
+                dim_scores = self._extract_dimension_scores(critic_result, min_output_len=300)
                 issues = self._extract_issues(critic_result)
         else:
             # 文件未生成（critic 未写盘），用 stdout 摘要
             if _log:
                 _log.warning(f"[{proposal_id}] critic 报告未生成，使用 stdout 摘要评分")
             score_after = self._extract_score(critic_result)
-            dim_scores = self._extract_dimension_scores(critic_result)
+            dim_scores = self._extract_dimension_scores(critic_result, min_output_len=300)
             issues = self._extract_issues(critic_result)
         weakest_dim = self._get_weakest_dimension(dim_scores)
 
@@ -1750,7 +1750,7 @@ class OptimizeMixin:
                 return float(match.group(1))
 
         # 回退：如果有维度分数，取加权平均
-        dims = self._extract_dimension_scores(critic_result)
+        dims = self._extract_dimension_scores(critic_result, min_output_len=300)
         if dims:
             weights = {"innovation": 0.30, "feasibility": 0.25, "rigor": 0.25, "expression": 0.20}
             total = sum(dims.get(k, 0) * w for k, w in weights.items())
@@ -1769,7 +1769,8 @@ class OptimizeMixin:
     # v6.8.3: 提升阈值，避免偏科通过（原 0.65/0.60 → 0.70/0.65）
     DIMENSION_FLOOR = {"innovation": 0.70, "feasibility": 0.70, "rigor": 0.70, "expression": 0.70, "completeness": 0.65}
 
-    def _extract_dimension_scores(self, critic_result: Dict[str, Any]) -> Dict[str, float]:
+    def _extract_dimension_scores(self, critic_result: Dict[str, Any],
+                                  min_output_len: int = 0) -> Dict[str, float]:
         """从 critic 输出中提取 4 维度分数（P0-2）。
 
         兼容 v6.6.3 GLM-5.2 输出格式：
@@ -1781,15 +1782,19 @@ class OptimizeMixin:
         原实现的正则会误匹配到权重列（第一个数字）。现改为取表格行内
         最后一个数字作为得分列。
 
+        v6.8.50: min_output_len 参数——实时 hermes 输出传 300（正常评审输出
+        含维度表/问题清单，过短必是错误文本，解析出的是伪分数）；解析落盘
+        的 critic 报告文件传 0（文件存在即真实评审发生过，且单元测试用
+        短样本验证解析器，不应被误拦）。
+
         Returns:
             {innovation, feasibility, rigor, completeness}
         """
         output = critic_result.get("output", "")
         import re
         dims: Dict[str, float] = {}
-        # v6.8.46: 输出过短视为无效评审——正常 critic 评审输出含维度表/问题清单，
-        # 少于 300 字符的输出必然是错误文本或截断，解析出的分数是伪分数
-        if len(output.strip()) < 300:
+        # v6.8.46→v6.8.50: 短输出防线（仅实时评审路径启用，见 docstring）
+        if min_output_len > 0 and len(output.strip()) < min_output_len:
             return dims
         # 收集所有"维度名+分数"对（去重，每个维度只取第一个匹配）
         for cn_name, en_key in self._DIM_MAP.items():

@@ -581,6 +581,77 @@ def _update_kanban(stats: List[Dict[str, Any]], focus: Optional[Dict[str, Any]])
         _log.info(f"看板已更新: done={total_done} failed={total_failed} pending={total_pending} running={total_running}")
 
 
+def _persist_alerts(anomalies: List[Dict[str, Any]]) -> None:
+    """v6.8.50: 告警落盘——飞书只是推送渠道，不是存储。
+
+    背景：2026-08-14 04:00 lark-cli exit=3 发送失败，当次告警彻底丢失。
+    现在：无论通知成败，告警一律持久化到看板 alerts 区（Web 控制台可见），
+    条件消失时标记 resolved_at，保留最近 100 条供溯源。
+    """
+    try:
+        existing = load_json(KANBAN_PATH, default={})
+        alerts = existing.get("alerts") or []
+        open_by_key = {a["key"]: a for a in alerts if a.get("key") and not a.get("resolved_at")}
+        now = now_utc()
+        seen_keys = set()
+        for a in anomalies:
+            key = f"{a.get('type')}:{a.get('proposal_id', '')}:{a.get('job_id', '')}"
+            seen_keys.add(key)
+            if key in open_by_key:
+                open_by_key[key]["last_seen"] = now
+                open_by_key[key]["count"] = int(open_by_key[key].get("count", 1)) + 1
+            else:
+                alerts.append({
+                    "key": key,
+                    "level": a.get("level", "medium"),
+                    "message": a.get("message", ""),
+                    "first_seen": now,
+                    "last_seen": now,
+                    "count": 1,
+                    "resolved_at": None,
+                })
+        # 恢复检测：本轮检查未再出现的未决告警 → 标记恢复时间
+        for a in alerts:
+            if a.get("key") and not a.get("resolved_at") and a["key"] not in seen_keys:
+                a["resolved_at"] = now
+        # 只保留最近 100 条（含已恢复），防止无限膨胀
+        existing["alerts"] = alerts[-100:]
+        save_json(KANBAN_PATH, existing)
+    except Exception as e:
+        if _log:
+            _log.warning(f"告警落盘失败（不影响主流程）: {e}")
+
+
+def _check_health_signals() -> Optional[Dict[str, Any]]:
+    """v6.8.50: 感知层信号检查——捕获"看起来成功的失败"。
+
+    2026-08-14 实例：MiniMax 配额耗尽期间 hermes job 13s"成功"返回 429 文本，
+    三小时零告警（success 标记可信假设失效）。本检查经 health_sensor 统一采集：
+    空转检测 / API 错误爆发 / 分数骤降 / 熔断状态。
+    """
+    try:
+        from health_sensor import collect_snapshot, evaluate_risks
+    except ImportError:
+        return None
+    try:
+        risks = evaluate_risks(collect_snapshot())
+    except Exception as e:
+        if _log:
+            _log.warning(f"健康感知层采集异常（跳过）: {e}")
+        return None
+    if not risks:
+        return None
+    # 聚合为单条告警（monitor 的通知链按条目处理）
+    if len(risks) == 1:
+        return risks[0]
+    return {
+        "type": "health_signals",
+        "level": "high" if any(r.get("level") == "high" for r in risks) else "medium",
+        "message": "；".join(r["message"] for r in risks[:4]),
+        "_detail": risks,
+    }
+
+
 def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
     """执行一次监控周期。
 
@@ -622,6 +693,11 @@ def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
     if progress_issue:
         anomalies.append(progress_issue)
 
+    # 3.5 v6.8.50: 感知层信号检查（空转/API 错误爆发/分数骤降/熔断状态）
+    health_issue = _check_health_signals()
+    if health_issue:
+        anomalies.append(health_issue)
+
     # 4. 获取当前聚焦
     focus_info: Optional[Dict[str, Any]] = None
     try:
@@ -637,8 +713,9 @@ def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
     except Exception:
         pass
 
-    # 5. 更新看板
+    # 5. 更新看板 + 告警落盘（先落盘再通知，通知失败不丢告警）
     _update_kanban(stats, focus_info)
+    _persist_alerts(anomalies)
 
     # 6. 异常通知（去重）
     notified: List[str] = []
