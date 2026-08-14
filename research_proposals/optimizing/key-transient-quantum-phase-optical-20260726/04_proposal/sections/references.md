@@ -123,3 +123,13 @@
 [61] Y. Li, M. Pan, et al. OptiDiff: Diffusion-based Optical Inverse Design with Physics-informed Guidance. arXiv:2604.06707 (2026).
 
 [62] Anonymous. Physics-Informed Diffusion Models for Scientific Inverse Problems. arXiv:2603.24377 (2026).
+
+[63] A. Ono, S. Okumura, S. Imai, Y. Akagi. High harmonic generation from electrons moving in topological spin textures. *Phys. Rev. B* 110, 125111 (2024). DOI: 10.1103/PhysRevB.110.125111
+
+[64] D. M. B. Lesko, T. Weitz, S. Wittigschlager, W. Li, C. Heide, O. Neufeld, P. Hommelhoff. Optical control of electrons in a Floquet topological insulator. arXiv:2407.17917 (2024).
+
+[65] Z. Zhao, Z. Zheng, Z. Xu, X. Ran, X. Yao, F. Ouyang. Orthogonal attosecond control of solid-state harmonics by optical waveforms and quantum geometry engineering. arXiv:2511.13114 (2025).
+
+[66] X. Zhang, J. van den Brink, J. Li. Impact of crystal symmetries and Weyl nodes on high-harmonic generation in Weyl semimetal TaAs. arXiv:2405.16125 (2024).
+
+[67] A. Di Gaspare, S. Ghayeb, C. Knox, A. Yagmur, S. Sasaki, M. Salih, L. Li, E. H. Linfield, J. Freeman, M. S. Vitiello. Second and third harmonic generation in topological insulator-based van der Waals metamaterials. *Light Sci. Appl.* 14, 337 (2025). DOI: 10.1038/s41377-025-01847-5

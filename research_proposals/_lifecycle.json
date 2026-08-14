@@ -1715,9 +1715,9 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-14T00:05:26Z",
+      "updated_at": "2026-08-14T01:47:58Z",
       "optimization_rounds": 2,
-      "last_score": 0.71,
+      "last_score": 0.72,
       "score_history": [
         {
           "round": 1,
@@ -2114,6 +2114,23 @@
           "issues_count": 12,
           "high_issues": 5,
           "at": "2026-08-13T22:42:24Z"
+        },
+        {
+          "round": 3,
+          "score": 0.72,
+          "dim_scores": {
+            "innovation": 0.82,
+            "feasibility": 0.68,
+            "rigor": 0.6,
+            "expression": 0.78,
+            "completeness": 0.85
+          },
+          "weakest_dim": "rigor",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 52,
+          "high_issues": 19,
+          "at": "2026-08-14T01:13:16Z"
         }
       ],
       "human_feedback_count": 0,
@@ -2176,8 +2193,11 @@
       "writer_profile": "writer",
       "critic_profile": "critic",
       "last_dim_scores": {
-        "rigor": 0.62,
-        "completeness": 0.8
+        "innovation": 0.82,
+        "feasibility": 0.68,
+        "rigor": 0.6,
+        "expression": 0.78,
+        "completeness": 0.85
       },
       "section_passes": {
         "rationale": false,
@@ -3191,16 +3211,24 @@
           "step": "lit_read",
           "section_key": "rationale",
           "round": 3,
-          "status": "failed",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_search"
           ],
-          "attempts": 1,
+          "attempts": 2,
           "scheduled_at": "",
-          "started_at": "2026-08-13T23:35:16Z",
-          "finished_at": "2026-08-14T00:05:26Z",
-          "last_error": "运行超时/进程僵死",
-          "cron_job_id": ""
+          "started_at": "2026-08-14T00:30:30Z",
+          "finished_at": "2026-08-14T00:35:42Z",
+          "last_error": "",
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-14T00:30:30Z",
+              "error": "运行超时/进程僵死",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 1
         },
         {
           "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_note",
@@ -3208,14 +3236,14 @@
           "step": "lit_note",
           "section_key": "rationale",
           "round": 3,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-14T00:40:31Z",
+          "finished_at": "2026-08-14T00:40:31Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -3225,17 +3253,25 @@
           "step": "writer",
           "section_key": "rationale",
           "round": 3,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r3-rationale-critic",
             "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_note"
           ],
-          "attempts": 0,
+          "attempts": 2,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-14T01:05:35Z",
+          "finished_at": "2026-08-14T01:13:16Z",
           "last_error": "",
-          "cron_job_id": ""
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-14T01:00:32Z",
+              "error": "超时(900s)",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 1
         },
         {
           "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-critic",
@@ -3243,14 +3279,14 @@
           "step": "critic",
           "section_key": "content",
           "round": 3,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r3-rationale-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-14T01:15:37Z",
+          "finished_at": "2026-08-14T01:23:39Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -3260,14 +3296,14 @@
           "step": "gap_identify",
           "section_key": "content",
           "round": 3,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r3-content-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-14T01:25:38Z",
+          "finished_at": "2026-08-14T01:26:22Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -3277,14 +3313,14 @@
           "step": "lit_search",
           "section_key": "content",
           "round": 3,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r3-content-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-14T01:30:39Z",
+          "finished_at": "2026-08-14T01:47:58Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -3772,12 +3808,242 @@
           "step": "lit_search",
           "detail": "agent_loop_failed→LiteratureService",
           "at": "2026-08-13T23:26:16Z"
+        },
+        {
+          "step": "lit_search",
+          "detail": "agent_loop_failed→LiteratureService",
+          "at": "2026-08-14T01:36:41Z"
         }
       ],
       "open_critical_issues": [
         {
           "severity": "high",
           "section": "rationale",
+          "description": "| 6 | 写作风格：知识整理/文献罗列/条目式 → [high] narrative | **部分通过** | 叙述式合规度高，未触发 [high] narrative（详见写作风格评估）；但发现结",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 死板关联词（在此基础上/此外/同时/与此同时/因此/然而/基于此） | 高频为 [high] | \"同时\"×2、\"进一步\"×2，其余 0 | **通过**——远低于高频阈值 |",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 模板句式\"为…提供…基础/支撑/途径\" | >15 次 → [high] | \"为.{0,6}提供\"×2 | **通过** |",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 模板主语\"本项目拟/将\"句首滥用 | 滥用为 [high] | \"本项目将\"×1、\"本项目提出\"×1、\"本项目以\"×1 | **通过**——未滥用 |",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 空洞概括句（具有决定性意义/迈向新高度） | 出现即 [high] | 0 | **通过** |",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 超长句 >80 字 / >120 字 | >80 [medium]，>120 [high] | >80 共 19 句；>120 仅 2 句（其中 1 句是 ASCII 流程图、1 句是带引文的 N",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| bullet / 条目式罗列 | 替代论证为 [high] | dash bullet 0、numbered 0 | **通过**——全文无条目式 |",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| \"A 做了 X，B 做了 Y\"文献堆砌 | 出现为 [high] narrative | 单句 ≥3 引用仅 3 句，且每句都有归纳性动词（\"已在…验证\"\"已通过…实现\"） | **通过**——非",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "**唯一的叙述式短板**（[medium]，非 [high]）：",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| rationale.md 自嵌参考文献（54 条）↔ references.md（62 条） | **✗ 两套并行** | **[high]** rationale.md 末尾自带 [1]-[54",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "| 正文称 [9] 为\"申请人团队代表工作\" | line 53, 77, 97 | **✗ 归属错误**——[9] 是 ETH Wörner 组，非中科院物理所 | **[critical] C1*",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "| 正文称 [9] 为\"MIT Reis 组工作\" | line 33, 127 | **✗ 归属错误**——[9] 是 ETH Wörner 组，非 MIT Reis | **[critical]",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "| 正文 §2.2 称 \"Yu 等[47]\" | line 43 | **✗ 第一作者冲突**——[47] 第一作者是 Feng 非 Yu | **[critical] C2** |",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| [43] 死引文（正文未引用） | 全文 | ✗ [43] 在正文出现 0 次，但 references/嵌入表均有 [43] 条目 | **[high] H-legacy** |",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| [44] 与 [43] 同一 arXiv 论文 | references.md line 87-89 | ✗ 两条指向同一 arXiv:2503.07256，附异常注释 | **[high] H-",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| \"国际上尚属空白[5,6,25]\" | line 49 | ✗ [5] Baykusheva 2021 本身即\"全光探测 Berry 曲率\"工作，与\"空白\"矛盾 | **[high] H2** |",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "### [critical] C1 — 引文归属错误：[9] 三重归属冲突（申请人团队 / MIT Reis / 实际 ETH Wörner）",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "### [critical] C2 — 引文归属错误：[47] 同一编号对应两个第一作者（Yu / Feng）",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] H1 — 跨小节逐字重复：\"Floquet 理论预言周期驱动...\"段落",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] H2 — 过度声明：\"国际上尚属空白\"\"填补这一国际空白\"\"任何...均可\"",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "- **问题**：`indicator_red_lines` 明确规定\"'首次''尚未见报道'等缺乏文献支撑\"为 [critical] 红线。本章节\"空白\"出现 5 次，其中\"国际上尚属空白\"直接违反",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] H3 — 自嵌参考文献表与 references.md 两套并行",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] H4 — 结构冗余：\"写-读-对比-反演闭环\"三处重复展开",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] H-legacy — [43]/[44] 死引文与重复（round-2 已提，未解决）",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "2. 引文错误修复后，下一轮可聚焦（二）研究内容 content.md 的段落级深审（round-2-content 已初步评，但仍有 [high] 未解决）。",
+          "first_seen_round": 3,
+          "last_seen_round": 3,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
           "description": "| 超长句 >120 字（[high]） | 0 | 0 | ✅ 通过 |",
           "first_seen_round": 2,
           "last_seen_round": 2,
@@ -3905,231 +4171,6 @@
           "severity": "critical",
           "section": "rationale",
           "description": "- 未解决：Ma 等[39] 残留（critical）、参考文献 54 条/重复/幽灵引用/格式/预印本占比（high→仍未修）、rationale.md 末尾重复列表（low→仍未修）",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "content",
-          "description": "| 超长句 >120 字（[high]） | 0 | 0 | ✅ 通过 |",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "content",
-          "description": "| **立项依据中出现研究方案/研究内容/研究基础素材** | ❌ **不通过** | 详见下方 [high] boundary 问题 |",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "content",
-          "description": "- **超长句**：9 句 >80 字。最长句 107 字（§4 line 121 数据流闭环描述）。虽然未达 >120 字 [high] 红线，但部分段落（§4 line 121、§3 line 8",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "content",
-          "description": "### [critical] red_line — Round-1 残留：Ma 等[39] 作者-编号归属错误未修复",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "content",
-          "description": "### [critical] boundary — 立项依据被研究方案/研究内容/研究基础素材严重污染（内容越界）",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "content",
-          "description": "### [high] narrative — §1（line 21）与 §2.2（line 39）文献堆砌，且两段内容重复",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "content",
-          "description": "### [high] red_line — \"W%\"占位符未清除",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "content",
-          "description": "### [high] rigor — 参考文献总数 54 条远超标准，[43]=[44] 重复未合并",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "content",
-          "description": "### [high] boundary — §4 子课题框架与数据流闭环图与 content.md/scheme.md 三重重复",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "content",
-          "description": "### [high] narrative — 9 句超 80 字，部分段落超过\"每段≤3 句\"上限",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "content",
-          "description": "- **建议**：执行 [critical] boundary 问题的修复（移除越界内容）后，字数应自然回落至 6000-7000 字区间，符合标准。",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "content",
-          "description": "| rationale §4 子课题框架 ↔ content §2 ↔ scheme §1 | ⚠️ 三重重复 | 见 [high] boundary 问题 |",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "content",
-          "description": "- 新增：内容越界（critical）、文献堆砌（high）、W% 占位符（high）、超长句（high）、§4 三重重复（high）、国内现状薄弱（medium）、冗余修饰逼近阈值（medium）、",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "content",
-          "description": "- 新增：内容越界（critical）、文献堆砌（high）、W% 占位符（high）、超长句（high）、§4 三重重复（high）、国内现状薄弱（medium）、冗余修饰逼近阈值（medium）、",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "content",
-          "description": "- 未解决：Ma 等[39] 残留（critical）、参考文献 54 条/重复/幽灵引用/格式/预印本占比（high→仍未修）、rationale.md 末尾重复列表（low→仍未修）",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "scheme",
-          "description": "**结论：未达重点项目输出标准（阈值 0.85）。差距 0.06，主要由 1 个 [high] 超长句（132 字，超过 >120 字红线）、1 个 [high] 越界（§2.3(b) 误差预算属研究",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "scheme",
-          "description": "| 超长句 >120 字（[high]） | 0 | **1 句（132 字）** | ❌ **不通过** |",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "scheme",
-          "description": "| 跨章节大量重复 | ❌ **不通过** | §2.3(b) 误差传播控制（四项误差源+高斯合成公式 ΔC_total=√(0.05²+0.02²+0.01²+0.1²)≈0.113）与 conte",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "scheme",
-          "description": ">120 字超长句:      1 句   （红线 [high]）       ❌ 有（132字）",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "scheme",
-          "description": "- **>120 字超长句（line 3，132 字）**：开篇导读句\"论证次序是：先给出系统级统一架构与数据流闭环，说明三个子课题为何必须协同而非平行并列；再按子课题逐项给出技术方案与可证伪的工程指",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "scheme",
-          "description": "- `[high] anti_ai` → `anti_ai_patterns`（超过120字属严重超长句）+ `style_benchmark.sentence_rhythm`",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "scheme",
-          "description": "- `[high] boundary` → `content_boundaries.不可越界` + `section_standards.full_review`（无跨章节内容重复）",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "scheme",
-          "description": "- `[high] red_line` → `indicator_red_lines.consistency_check`（≤100 as 空格跨章不统一）",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "scheme",
-          "description": "- `[high] narrative` → `style_benchmark.tone_and_voice` + `scoring_rubric.expression` 0.70-0.79 档",
-          "first_seen_round": 2,
-          "last_seen_round": 2,
-          "round_resolved": 2,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "scheme",
-          "description": "| [P1] 超长句 >120 字（[high]） | scheme.md line 3 有 1 句 132 字超长句 | ❌ **仍存在**（详见 [high] anti_ai） |",
           "first_seen_round": 2,
           "last_seen_round": 2,
           "round_resolved": 2,
@@ -10243,5 +10284,5 @@
       ]
     }
   },
-  "updated_at": "2026-08-14T00:05:26Z"
+  "updated_at": "2026-08-14T01:47:58Z"
 }
