@@ -920,6 +920,14 @@ def _update_kanban(
     }
     try:
         KANBAN_PATH.parent.mkdir(parents=True, exist_ok=True)
+        # v6.9.1: 合并写——先读入现有看板再覆盖自有键，保留其他写入方的数据
+        # （lifecycle_monitor 的 alerts/hourly_monitor、sync_engine 的 kb_metrics）。
+        # 原实现整文件替换，工作时段内每 5 分钟剥离一次告警与 KB 指标，
+        # 导致告警面板数据闪断、趋势雷达/覆盖率持久化失效、心跳时间戳丢失。
+        merged = load_json(KANBAN_PATH, default={})
+        if isinstance(merged, dict) and merged:
+            merged.update(kanban)
+            kanban = merged
         save_json(KANBAN_PATH, kanban)
     except Exception as e:
         if _log:

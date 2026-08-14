@@ -7,8 +7,8 @@ last_score: 0.86
 critic_rounds: 11
 optimization_reports: 5
 status: "pending_review"
-created: "2026-08-14T13:56:28Z"
-updated: "2026-08-14T13:56:28Z"
+created: "2026-08-14T16:25:16Z"
+updated: "2026-08-14T16:25:16Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0

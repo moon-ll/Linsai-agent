@@ -90,6 +90,7 @@ from .micro_scheduler import (
 )
 from .orchestrator import (
     _cleanup_old_round_jobs,
+    _check_monitor_heartbeat,
     _compute_actual_round,
     sync_checkpoint,
     run_orchestrator,
@@ -362,6 +363,10 @@ python3 scripts/growth_engine.py --apply
     # 编排与修复（从 orchestrator 模块绑定为方法）
     # ------------------------------------------------------------------
     _compute_actual_round = _compute_actual_round
+    # v6.9.1: 补绑 monitor 心跳互查——run_repair 调用 self._check_monitor_heartbeat，
+    # 但该函数自 v6.8.50 起未绑定到本类，repair 每 6h 触发 AttributeError，
+    # 心跳互查机制上线以来从未生效（日志实证 2026-08-15T00:00:52Z）。
+    _check_monitor_heartbeat = _check_monitor_heartbeat
     sync_checkpoint = sync_checkpoint
     run_orchestrator = run_orchestrator
     run_repair = run_repair

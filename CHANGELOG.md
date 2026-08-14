@@ -1,5 +1,37 @@
 # 变更记录
 
+## v6.9.1 - 2026-08-15 体检修复：monitor 心跳互查补绑 + 看板合并写
+
+三层诊断（2026-08-15 00h）发现两个已确认缺陷，定向修复：
+
+### 修复 1：_check_monitor_heartbeat 漏绑定（v6.8.50 引入，机制从未生效）
+- 现象：`lc-repair` 每 6h 运行时 `run_repair` 调用
+  `self._check_monitor_heartbeat()` 抛
+  `'LifecycleCronController' object has no attribute '_check_monitor_heartbeat'`
+  （日志实证 2026-08-15T00:00:52Z），被 try/except 吞掉仅留 WARNING。
+- 根因：v6.8.50 在 `lifecycle/orchestrator.py` 定义了模块级函数，但
+  `lifecycle/controller.py` 的 import 列表与类体绑定块均未纳入，
+  "谁来监控监控者"的守护机制自上线以来为死代码。
+- 修复：controller.py 补 import + 补类体绑定（v6.9.1）。
+
+### 修复 2：_update_kanban 整文件替换剥离他方键
+- 现象：`kb_metrics.trends_updated_at` 恒为 None（趋势雷达持久化从未落地）、
+  工作时段内 alerts/hourly_monitor 每 5 分钟被微调度器写入剥离一次。
+- 根因：`micro_scheduler._update_kanban` 构建全新 dict 后 `save_json`
+  整文件替换，凡不在其模板内的键（monitor 的 alerts/hourly_monitor、
+  sync_engine 的 kb_metrics）全部丢失，直到下一次整点 monitor 合并写才恢复。
+- 修复：写入前 `load_json` 读入现有看板，`update()` 覆盖自有键后落盘
+  （与 monitor 的合并写语义对齐）。
+- 连带收益：hourly_monitor 心跳时间戳不再被剥离，修复 1 的心跳互查
+  读数稳定。
+
+### 测试
+- 新增 `scripts/tests/test_heartbeat_kanban_merge.py`（18 项断言）：
+  类绑定回归 / 心跳新鲜不告警 / 丢失 3h 告警并落盘 / 重复触发 count 累加 /
+  dry_run 不落盘 / 从未运行不误报 / 合并写保留 alerts+kb_metrics+
+  hourly_monitor / 自有键正常覆盖 / 首次写入无异常。
+- 纳入 `self_test.py --module` 固定清单，全量 559/559 通过（541+18）。
+
 ## v6.9.0 - 2026-08-14 智能化与自动化：关键节点智能辅助验收 + 异常自愈 + 待人工队列
 
 评估结论（人机分工现状实测）：执行/修复/治理已全自动（0 告警、0 暂停、
