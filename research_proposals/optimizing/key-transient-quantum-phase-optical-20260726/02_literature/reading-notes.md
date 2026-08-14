@@ -241,4 +241,40 @@ arXiv: 2511.13114 | 发表日期: 2025-11-17
 
 ---
 
+## 2604.27750
+
+论文标题：Field-driven helicity in solid-state high-harmonic generation
+arXiv: 2604.27750 (2026) | 作者：C. Batista, J. P. Menoti, D. Kim, B. K. Das, W. Gao, A. Chacón, C. Granados
+
+核心结论：揭示固体 HHG 的螺旋度由驱动场与材料共同决定。通过极化定制光束可连续调控谐波螺旋度，为把圆偏振 HHG 从"现象观察"推进到"Berry 曲率定量投影"确立了场控手段。
+
+与课题关联：子课题 B 的圆偏振 HHG 通道——Berry 曲率圆偏振选择响应的场控调控路径。
+已引用位置：content.md §2.2 子课题 B（探测通道同步采集段）。
+
+---
+
+## 2604.07543
+
+论文标题：Phonon-driven decoherence of high-harmonic generation in the solid-state
+arXiv: 2604.07543 (2026) | 作者：S. Mokhtari, V. Jelic, D. N. Purschke, S. Gholam-Mirzaei, K. Kowalczyk, D. A. Reis, T. J. Hammond, D. Villeneuve, A. Staudte, F. Légaré, G. Vampa
+
+核心结论：实验证实声子驱动退相干可使硅中 HHG 产率在 77–300 K 范围变化 15–30 倍，提示晶格热涨落对瞬态 Berry 曲率测量的干扰不容忽略。
+
+与课题关联：子课题 C 的误差分解——声子退相干对 Berry 曲率测量精度的影响量级，支撑低温实验（4–77 K）的必要性论证。
+已引用位置：content.md §2.3 子课题 C（各误差子项来源段）、scheme.md §2.3(b)。
+
+---
+
+## 2604.20388
+
+论文标题：Quantum optical signatures of band topology in solid-state high harmonics
+arXiv: 2604.20388 (2026) | 作者：D. Ilin, A. S. Solntsev, I. Iorsh
+
+核心结论：发展固体 HHG 全量子光学理论，揭示谐波辐射场的电流-电流关联张量天然编码 Berry 曲率与量子度规。拓扑相增强的量子几何关联可使关联辐射的压缩度高于平凡相。多原子尺度效应使非经典签名按 1/N 量级衰减。
+
+与课题关联：(1) 子课题 C 误差分解中密度泛函误差的论证支撑——电流-电流关联张量精度受泛函近似层级限制。(2) Q3 第四类约束——量子光学关联构成独立于经典极化率的第四个方程，用于 L2 层交叉验证 AI 代理模型对 Berry 曲率符号的判定。
+已引用位置：content.md §2.3（密度泛函误差段）、content.md §3 Q3（第四类约束段）、scheme.md §2.3(b)、scheme.md §5(3)。
+
+---
+
 ## 2405.01351

@@ -1,5 +1,37 @@
 # 变更记录
 
+## v6.8.42 - 2026-08-14 论文检索多源化：新增 OpenAlex/Semantic Scholar/PubMed/Crossref，修复 arXiv 检索隐性故障
+
+### 背景与验证
+- 用户要求丰富论文来源。逐一验证候选途径畅通性与可靠性：
+  - 畅通且高质量：**OpenAlex**（HTTP 200，期刊/作者/DOI/引用/摘要齐全）
+  - 畅通但定位不同：**Crossref**（HTTP 200，但关键词搜索相关性差，定位为 DOI 元数据补全）；**PubMed**（HTTP 200，物理覆盖有限，作通用兜底）
+  - 受限：**Semantic Scholar**（无 key 共享 IP 常 429，需配置免费 key）；**arXiv 官方 API**（2026-02 起 export.arxiv.org 限流加严，当前实测持续 429）
+- 验证期间发现两个既有故障：
+  1. `fetch_arxiv` 隐性瘫痪：deepxiv 返回的 `authors` 元素类型不一致（dict/str 混排），
+     原实现 `a.get("name")` 遇 str 直接异常并被吞掉 → **arXiv 检索一直静默返回空**。
+  2. 沙箱 Python SSL 证书链失效（默认 CA 指向不存在的路径）→ urllib HTTPS 请求全部失败。
+
+### 新增（external_fetcher.py）
+- 新增 4 个学术检索源：`fetch_openalex`（240M+ works，含期刊论文）/ `fetch_semantic_scholar`（可选，配置 key 后稳定）/ `fetch_pubmed`（通用兜底）/ `fetch_crossref_doi`（已知 DOI → 权威元数据补全）。
+- 新增 `search_academic()` 多源聚合：按 DOI/arXiv ID/标题去重合并，任一所源失败（限流/超时）不影响其它。
+- `discover_learning_opportunities` 默认源扩展为 `[arxiv, openalex, wikipedia, raw]`，`learning_engine` 近 30 天论文候选也升级为多源。
+- API key 支持：`.env` 中 `OPENALEX_API_KEY` / `SEMANTIC_SCHOLAR_API_KEY`，缺失时自动匿名降级。
+- `score_opportunity` 可靠性权重增加 openalex=0.85 / crossref=0.9 / pubmed=0.85 / semantic_scholar=0.85。
+
+### 修复
+- `fetch_arxiv` authors 解析兼容 dict/str 混排（恢复 arXiv 检索能力）。
+- 新增 `_make_ssl_context()`：依次探测 env/系统/Homebrew CA 路径，全部失败才降级无验证（仅只读元数据抓取）。
+- 自检日期断言改为相对日期，避免随日期漂移。
+
+### 验证
+- `external_fetcher.py` 全项自检通过（fetch_arxiv 10 篇 / OpenAlex 3 篇含 Nature Physics DOI / 聚合去重 / 评分 / 统一发现 12 项）。
+- `test_literature_service.py` 通过；py_compile 全量通过。
+
+## v6.8.41 - 2026-08-14 提交瞬态量子相课题自动优化产出（补记）
+
+- 生命周期系统自动完成 key-transient-quantum-phase 第三轮优化（critic 评审/文献缺口分析/定向补研/proposal 5 模块修订/知识库同步），19 个文件 +1624/-1035。
+
 ## v6.8.40 - 2026-08-14 修复 hermes agent 子进程缺进程组清理导致孤儿 gateway 进程风险
 
 ### 问题

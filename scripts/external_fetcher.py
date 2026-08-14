@@ -19,10 +19,13 @@ import hashlib
 import json
 import logging
 import math
+import os
 import re
 import shutil
+import string
 import subprocess
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -39,8 +42,23 @@ from paths import PROJECT_ROOT, KNOWLEDGE_DIR, RAW_DIR
 CACHE_DIR = KNOWLEDGE_DIR / ".cache"
 CACHE_DIR_ARXIV = CACHE_DIR / "arxiv"
 CACHE_DIR_WIKI = CACHE_DIR / "wikipedia"
+CACHE_DIR_ACADEMIC = CACHE_DIR / "academic"
 RAW_INDEX_PATH = CACHE_DIR / "raw-index.json"
 RAW_QUEUE_PATH = CACHE_DIR / "raw-pending-queue.json"
+
+# ---------------------------------------------------------------------------
+# 多源学术检索配置（v6.8.42）
+#   - OpenAlex  ：2026-02 起 usage-based，无 key 每天约 $0.10 demo 预算（约 100 次 search）
+#                 免费 key（openalex.org/settings/api）每天 $1 免费额度（约 1000 次 search）
+#   - Semantic Scholar：无 key 1 req/s（共享 IP 常 429），免费 key 大幅提升
+#   - 优先从项目 .env 读取 OPENALEX_API_KEY / SEMANTIC_SCHOLAR_API_KEY，缺失则匿名降级
+# ---------------------------------------------------------------------------
+_ACADEMIC_MAILTO = "linsai-copilot@localhost"
+_OPENALEX_API = "https://api.openalex.org/works"
+_CROSSREF_API = "https://api.crossref.org/works"
+_S2_API = "https://api.semanticscholar.org/graph/v1/paper/search"
+_PUBMED_EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils"
+_DEFAULT_HTTP_TIMEOUT = 15
 
 # deepxiv CLI 路径（优先使用 venv 中的安装）
 _DEEPXIV_PATH = shutil.which("deepxiv") or str(Path.home() / ".venv" / "bin" / "deepxiv")
@@ -70,6 +88,7 @@ def _parse_date(date_str: str) -> Optional[datetime]:
 def _ensure_cache_dirs() -> None:
     CACHE_DIR_ARXIV.mkdir(parents=True, exist_ok=True)
     CACHE_DIR_WIKI.mkdir(parents=True, exist_ok=True)
+    CACHE_DIR_ACADEMIC.mkdir(parents=True, exist_ok=True)  # v6.8.42: 多源学术检索缓存
 
 
 def _cache_key(query: str) -> str:
@@ -156,17 +175,31 @@ def fetch_arxiv(query: str, max_results: int = 5) -> List[Dict[str, Any]]:
 
         normalized = []
         for p in papers:
+            # v6.8.42 修复：deepxiv 返回 authors 元素类型不一致（dict/str 混排），
+            # 原实现 a.get("name") 遇 str 直接异常 → 整个 arXiv 检索静默返回空
+            authors = []
+            for a in p.get("authors", []) or []:
+                if isinstance(a, dict):
+                    nm = a.get("name", "")
+                elif isinstance(a, str):
+                    nm = a.strip()
+                else:
+                    nm = str(a)
+                if nm:
+                    authors.append(nm)
             normalized.append({
                 "source": "arxiv",
                 "arxiv_id": p.get("arxiv_id", ""),
                 "title": p.get("title", ""),
-                "authors": [a.get("name", "") for a in p.get("authors", [])],
+                "authors": authors,
                 "abstract": p.get("abstract", ""),
                 "tldr": p.get("tldr", ""),
                 "url": p.get("url", ""),
                 "date": p.get("date", ""),
                 "citation_count": p.get("citation_count", 0),
                 "score": p.get("score", 0.0),
+                "venue": p.get("venue", ""),
+                "year": 0,
             })
 
         _save_cache(cache_path, normalized)
@@ -260,6 +293,438 @@ def fetch_arxiv_paper(arxiv_id: str) -> Optional[Dict[str, Any]]:
     except Exception as e:
         _log.debug("arXiv 论文获取失败: %s", e)
         return None
+
+
+# ---------------------------------------------------------------------------
+# 多源学术检索（v6.8.42）— OpenAlex / Semantic Scholar / PubMed / Crossref
+#   用于丰富论文来源：deepxiv 仅覆盖 arXiv 预印本，
+#   OpenAlex（240M+ works，含期刊）与 Crossref（DOI 元数据）补充正式出版物。
+# ---------------------------------------------------------------------------
+
+def _load_academic_api_keys() -> Dict[str, str]:
+    """从项目 .env 读取学术 API key（缺失返回空字符串，不影响降级运行）。
+
+    支持的环境变量：
+      OPENALEX_API_KEY           OpenAlex 免费 key（openalex.org/settings/api）
+      SEMANTIC_SCHOLAR_API_KEY   Semantic Scholar 免费 key
+    """
+    keys: Dict[str, str] = {}
+    env_map = {
+        "OPENALEX_API_KEY": os.environ.get("OPENALEX_API_KEY", ""),
+        "SEMANTIC_SCHOLAR_API_KEY": os.environ.get("SEMANTIC_SCHOLAR_API_KEY", ""),
+    }
+    # 兜底：从项目 .env 读取（复用 llm_router 的解析器，不引入第三方依赖）
+    try:
+        from llm_router import load_env_file
+        env_data = load_env_file(PROJECT_ROOT / ".env") or {}
+    except Exception:
+        env_data = {}
+    for var, val in env_map.items():
+        if val:
+            keys[var] = val.strip()
+        elif env_data.get(var):
+            keys[var] = str(env_data[var]).strip()
+    return keys
+
+
+_SSL_CONTEXT = None  # 模块级缓存，避免每次请求重建
+
+def _make_ssl_context():
+    """构建可用 SSL 上下文（沙箱 Python 默认 CA 路径常失效）。
+
+    依次尝试：env SSL_CERT_FILE → /etc/ssl/cert.pem → homebrew openssl → 默认。
+    全部失败时回退无验证（仅用于只读学术元数据抓取），并记录警告。
+    """
+    global _SSL_CONTEXT
+    if _SSL_CONTEXT is not None:
+        return _SSL_CONTEXT
+    import ssl
+    candidates = [
+        os.environ.get("SSL_CERT_FILE", ""),
+        "/etc/ssl/cert.pem",
+        "/etc/ssl/certs/ca-certificates.crt",
+        "/opt/homebrew/etc/openssl@3/cert.pem",
+        "/usr/local/etc/openssl@3/cert.pem",
+    ]
+    for cafile in candidates:
+        if cafile and os.path.exists(cafile):
+            try:
+                ctx = ssl.create_default_context(cafile=cafile)
+                _SSL_CONTEXT = ctx
+                return ctx
+            except (ssl.SSLError, OSError):
+                continue
+    try:
+        ctx = ssl.create_default_context()
+        _SSL_CONTEXT = ctx
+        return ctx
+    except (ssl.SSLError, OSError):
+        pass
+    _log.warning("未找到可用 CA 证书，学术检索 HTTPS 降级为无验证模式（仅只读元数据抓取）")
+    _SSL_CONTEXT = ssl._create_unverified_context()
+    return _SSL_CONTEXT
+
+
+def _http_get_json(url: str, timeout: int = _DEFAULT_HTTP_TIMEOUT,
+                   retries: int = 2, sleep_base: float = 1.5) -> Optional[Any]:
+    """通用 HTTP GET + JSON 解析，带轻量重试（429/5xx 退避）。"""
+    headers = {
+        "User-Agent": "LinSai-CoPilot/1.0 (academic search; mailto:%s)" % _ACADEMIC_MAILTO,
+        "Accept": "application/json",
+    }
+    for attempt in range(retries + 1):
+        try:
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=timeout, context=_make_ssl_context()) as resp:
+                return json.loads(resp.read().decode("utf-8", errors="replace"))
+        except urllib.error.HTTPError as e:
+            if e.code in (429, 500, 502, 503, 504) and attempt < retries:
+                time.sleep(sleep_base * (2 ** attempt))
+                continue
+            _log.debug("HTTP %s: %s", e.code, url[:120])
+            return None
+        except (urllib.error.URLError, OSError, json.JSONDecodeError) as e:
+            if attempt < retries:
+                time.sleep(sleep_base)
+                continue
+            _log.debug("请求失败: %s (%s)", url[:120], e)
+            return None
+    return None
+
+
+def _openalex_reconstruct_abstract(inverted_index: Optional[Dict[str, List[int]]]) -> str:
+    """重建 OpenAlex 摘要（倒排索引 → 纯文本）。"""
+    if not inverted_index:
+        return ""
+    try:
+        positions: Dict[int, str] = {}
+        for word, idxs in inverted_index.items():
+            for i in idxs:
+                positions[i] = word
+        if not positions:
+            return ""
+        return " ".join(positions[i] for i in sorted(positions))
+    except Exception:
+        return ""
+
+
+def _openalex_extract_arxiv_id(work: Dict[str, Any]) -> str:
+    """从 OpenAlex work 的 locations 中提取 arXiv ID（若有）。"""
+    for loc in work.get("locations") or []:
+        url = loc.get("landing_page_url") or ""
+        m = re.search(r"arxiv\.org/(?:abs|pdf)/([0-9]{4}\.[0-9]{4,5}|[a-z\-]+/\d{7})", url)
+        if m:
+            return m.group(1)
+    return ""
+
+
+def fetch_openalex(query: str, max_results: int = 5,
+                   api_key: Optional[str] = None) -> List[Dict[str, Any]]:
+    """OpenAlex 学术检索：240M+ works（期刊论文 + 预印本 + 会议）。
+
+    无需 key 即可使用（demo 预算）；配置 OPENALEX_API_KEY 后额度提升 10 倍。
+    结果含 DOI、作者、期刊、年份、引用数、摘要（倒排索引重建）。
+    """
+    cache_path = CACHE_DIR_ACADEMIC / f"openalex_{_cache_key(query)}_{max_results}.json"
+    cached = _load_cache(cache_path, ttl_hours=24)
+    if cached is not None:
+        return cached
+
+    if api_key is None:
+        api_key = _load_academic_api_keys().get("OPENALEX_API_KEY", "")
+
+    params = {
+        "search": query,
+        "per_page": str(max_results),
+        "mailto": _ACADEMIC_MAILTO,
+        "select": (
+            "id,doi,title,display_name,publication_year,publication_date,"
+            "cited_by_count,type,authorships,abstract_inverted_index,"
+            "primary_location,locations,open_access"
+        ),
+    }
+    if api_key:
+        params["api_key"] = api_key
+    url = _OPENALEX_API + "?" + urllib.parse.urlencode(params)
+
+    data = _http_get_json(url)
+    if not data or not isinstance(data, dict):
+        print(f"⚠ OpenAlex 检索失败（可能无 key 或已达额度）: {query}", file=sys.stderr)
+        return []
+
+    normalized = []
+    for w in data.get("results", [])[:max_results]:
+        authors = []
+        for a in w.get("authorships") or []:
+            nm = (a.get("author") or {}).get("display_name", "")
+            if nm:
+                authors.append(nm)
+        venue = ""
+        pl = w.get("primary_location") or {}
+        src = pl.get("source") or {}
+        # 期刊名优先，preprint repository 标记为 arXiv
+        venue = src.get("display_name", "") or ""
+        arxiv_id = _openalex_extract_arxiv_id(w)
+        date = w.get("publication_date") or ""
+        if not date and w.get("publication_year"):
+            date = f"{w['publication_year']}-01-01"
+        # 统一主 URL：优先 arXiv / OA 链接，否则 OpenAlex 详情页
+        url_main = f"https://openalex.org/{w.get('id','').rsplit('/',1)[-1]}" if w.get("id") else ""
+        oa = w.get("open_access") or {}
+        if arxiv_id:
+            url_main = f"https://arxiv.org/abs/{arxiv_id}"
+        elif oa.get("oa_url"):
+            url_main = oa["oa_url"]
+        normalized.append({
+            "source": "openalex",
+            "arxiv_id": arxiv_id,
+            "doi": (w.get("doi") or "").replace("https://doi.org/", ""),
+            "title": w.get("display_name") or w.get("title") or "",
+            "authors": authors,
+            "abstract": _openalex_reconstruct_abstract(w.get("abstract_inverted_index")),
+            "tldr": "",
+            "url": url_main,
+            "date": date,
+            "citation_count": w.get("cited_by_count") or 0,
+            "score": 0.0,
+            "venue": venue,
+            "year": w.get("publication_year") or 0,
+        })
+
+    _save_cache(cache_path, normalized)
+    return normalized
+
+
+def fetch_semantic_scholar(query: str, max_results: int = 5,
+                           api_key: Optional[str] = None) -> List[Dict[str, Any]]:
+    """Semantic Scholar 学术检索（可选源）。
+
+    无 key 时 1 req/s（共享 IP 易 429，会自动跳过）；配置 SEMANTIC_SCHOLAR_API_KEY
+    后限流大幅提升。提供 TLDR（一句话摘要）与引用数。
+    """
+    cache_path = CACHE_DIR_ACADEMIC / f"s2_{_cache_key(query)}_{max_results}.json"
+    cached = _load_cache(cache_path, ttl_hours=24)
+    if cached is not None:
+        return cached
+
+    if api_key is None:
+        api_key = _load_academic_api_keys().get("SEMANTIC_SCHOLAR_API_KEY", "")
+
+    params = {
+        "query": query,
+        "limit": str(max_results),
+        "fields": "title,year,authors,abstract,citationCount,externalIds,url,venue,publicationDate",
+    }
+    url = _S2_API + "?" + urllib.parse.urlencode(params)
+    headers = {"User-Agent": "LinSai-CoPilot/1.0"}
+    if api_key:
+        headers["x-api-key"] = api_key
+
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=_DEFAULT_HTTP_TIMEOUT, context=_make_ssl_context()) as resp:
+            data = json.loads(resp.read().decode("utf-8", errors="replace"))
+    except urllib.error.HTTPError as e:
+        if e.code == 429:
+            print(f"⚠ Semantic Scholar 限流（429），跳过该源: {query}", file=sys.stderr)
+            return []
+        _log.debug("S2 HTTP %s: %s", e.code, query)
+        return []
+    except (urllib.error.URLError, OSError, json.JSONDecodeError) as e:
+        _log.debug("S2 请求失败: %s", e)
+        return []
+
+    if not data:
+        return []
+    normalized = []
+    for p in data.get("data") or []:
+        ext = p.get("externalIds") or {}
+        arxiv_id = ""
+        aurl = ext.get("ArXiv", "")
+        m = re.search(r"arxiv\.org/(?:abs|pdf)/([0-9]{4}\.[0-9]{4,5})", aurl)
+        if m:
+            arxiv_id = m.group(1)
+        year = p.get("year") or 0
+        if not year and p.get("publicationDate"):
+            try:
+                year = int(p["publicationDate"][:4])
+            except (ValueError, TypeError):
+                year = 0
+        normalized.append({
+            "source": "semantic_scholar",
+            "arxiv_id": arxiv_id,
+            "doi": (ext.get("DOI") or "").replace("https://doi.org/", ""),
+            "title": p.get("title") or "",
+            "authors": [a.get("name", "") for a in p.get("authors") or []],
+            "abstract": p.get("abstract") or "",
+            "tldr": "",  # S2 tldr 需要独立端点，略过
+            "url": p.get("url") or "",
+            "date": p.get("publicationDate") or "",
+            "citation_count": p.get("citationCount") or 0,
+            "score": 0.0,
+            "venue": p.get("venue") or "",
+            "year": year,
+        })
+
+    _save_cache(cache_path, normalized)
+    return normalized
+
+
+def fetch_pubmed(query: str, max_results: int = 5) -> List[Dict[str, Any]]:
+    """PubMed E-utilities 检索（可选通用兜底，生物医学文献）。
+
+    物理领域覆盖有限，但可作为跨学科兜底。不需要 key，3 req/s 限制。
+    """
+    cache_path = CACHE_DIR_ACADEMIC / f"pubmed_{_cache_key(query)}_{max_results}.json"
+    cached = _load_cache(cache_path, ttl_hours=24)
+    if cached is not None:
+        return cached
+
+    esearch = (
+        f"{_PUBMED_EUTILS}/esearch.fcgi?db=pubmed&term={urllib.parse.quote(query)}"
+        f"&retmode=json&retmax={max_results}&sort=relevance"
+    )
+    data = _http_get_json(esearch, retries=1)
+    if not data:
+        return []
+    idlist = (data.get("esearchresult") or {}).get("idlist") or []
+    if not idlist:
+        return []
+
+    # esummary 批量拉取元数据
+    ids = ",".join(idlist)
+    esummary = f"{_PUBMED_EUTILS}/esummary.fcgi?db=pubmed&id={ids}&retmode=json"
+    sdata = _http_get_json(esummary, retries=1)
+    if not sdata:
+        return []
+
+    result = sdata.get("result") or {}
+    normalized = []
+    for pmid in idlist:
+        it = result.get(pmid)
+        if not it:
+            continue
+        doi = ""
+        eloc = it.get("elocationid") or ""
+        for ident in it.get("articleids") or []:
+            if ident.get("idtype") == "doi":
+                doi = ident.get("value", "")
+        pubdate = it.get("pubdate") or ""
+        year = 0
+        m = re.match(r"(\d{4})", pubdate or "")
+        if m:
+            year = int(m.group(1))
+        authors = [a.get("name", "") for a in (it.get("authors") or [])][:20]
+        normalized.append({
+            "source": "pubmed",
+            "arxiv_id": "",
+            "doi": doi,
+            "title": it.get("title") or "",
+            "authors": authors,
+            "abstract": "",
+            "tldr": "",
+            "url": f"https://pubmed.ncbi.nlm.nih.gov/{pmid}/",
+            "date": pubdate,
+            "citation_count": 0,
+            "score": 0.0,
+            "venue": it.get("fulljournalname") or it.get("source") or "",
+            "year": year,
+        })
+
+    _save_cache(cache_path, normalized)
+    return normalized
+
+
+def fetch_crossref_doi(doi: str) -> Optional[Dict[str, Any]]:
+    """Crossref DOI → 权威元数据补全（期刊论文）。
+
+    注意：Crossref 关键词搜索相关性差（常返回书章节/SI 附件），
+    因此仅用作「已知 DOI 的元数据补全」，不作为发现源。
+    """
+    if not doi:
+        return None
+    clean = doi.strip().replace("https://doi.org/", "").replace("http://dx.doi.org/", "")
+    url = f"{_CROSSREF_API}/{urllib.parse.quote(clean, safe='')}"
+    data = _http_get_json(url, retries=2)
+    if not data or data.get("status") != "ok":
+        return None
+    msg = data.get("message") or {}
+    title = (msg.get("title") or [""])[0]
+    journal = (msg.get("container-title") or [""])[0]
+    authors = []
+    for a in msg.get("author") or []:
+        name = " ".join([a.get("given", ""), a.get("family", "")]).strip()
+        if name:
+            authors.append(name)
+    date_parts = (msg.get("published") or msg.get("issued") or {}).get("date-parts") or [[]]
+    year = (date_parts[0] or [0])[0] or 0
+    return {
+        "source": "crossref",
+        "arxiv_id": "",
+        "doi": clean,
+        "title": title,
+        "authors": authors,
+        "abstract": "",
+        "tldr": "",
+        "url": f"https://doi.org/{clean}",
+        "date": "-".join(str(x) for x in (date_parts[0] or [])),
+        "citation_count": msg.get("is-referenced-by-count") or 0,
+        "score": 0.0,
+        "venue": journal,
+        "year": year,
+    }
+
+
+def search_academic(query: str, max_results: int = 5,
+                    sources: Tuple[str, ...] = ("arxiv", "openalex")) -> List[Dict[str, Any]]:
+    """多源学术论文检索聚合：顺序查询各源，按 DOI/arXiv ID 去重合并。
+
+    用例：
+      - 默认链：deepxiv(arXiv) + OpenAlex（期刊+预印本互补）
+      - 扩展链：可加 semantic_scholar / pubmed
+    任一来源失败（限流/超时/无结果）不影响其它来源。
+
+    Returns:
+        合并去重后的论文列表，按 citation_count 降序，每项带 source 标签。
+    """
+    results: Dict[str, Dict[str, Any]] = {}
+    seen_keys: set = set()
+
+    def _merge(items: List[Dict[str, Any]]) -> None:
+        for p in items:
+            key = ""
+            if p.get("doi"):
+                key = f"doi:{p['doi']}"
+            elif p.get("arxiv_id"):
+                key = f"arxiv:{p['arxiv_id']}"
+            else:
+                key = f"title:{_cache_key(p.get('title', ''))}"
+            if key in seen_keys:
+                # 已有来源保留，仅补充缺失的 DOI/abstract 等字段
+                existing = results.get(key)
+                if existing:
+                    for f in ("doi", "abstract", "venue", "year"):
+                        if not existing.get(f) and p.get(f):
+                            existing[f] = p[f]
+                continue
+            seen_keys.add(key)
+            results[key] = p
+
+    if "arxiv" in sources:
+        _merge(fetch_arxiv(query, max_results=max_results))
+
+    if "openalex" in sources:
+        _merge(fetch_openalex(query, max_results=max_results))
+
+    if "semantic_scholar" in sources:
+        _merge(fetch_semantic_scholar(query, max_results=max_results))
+
+    if "pubmed" in sources:
+        _merge(fetch_pubmed(query, max_results=max_results))
+
+    merged = list(results.values())
+    merged.sort(key=lambda x: (x.get("citation_count") or 0), reverse=True)
+    return merged[:max_results * 2]
 
 
 # ---------------------------------------------------------------------------
@@ -574,6 +1039,10 @@ def score_opportunity(item: Dict[str, Any],
     # 3. 可靠性：来源权重
     reliability_map = {
         "arxiv": 0.9,
+        "openalex": 0.85,       # v6.8.42: 开放学术目录（期刊+预印本）
+        "crossref": 0.9,        # v6.8.42: DOI 注册机构，元数据权威
+        "pubmed": 0.85,         # v6.8.42: NCBI 生物医学
+        "semantic_scholar": 0.85,  # v6.8.42
         "wikipedia": 0.7,
         "raw": 0.8,
     }
@@ -631,13 +1100,15 @@ def discover_learning_opportunities(query: Optional[str] = None,
     Args:
         query: 搜索关键词（None 时使用研究方向关键词）
         max_results: 每种来源的最大返回数
-        sources: 来源列表 ["arxiv", "wikipedia", "raw"]（None 表示全部）
+        sources: 来源列表（None 表示全部）
+                支持：arxiv / openalex / semantic_scholar / pubmed /
+                      web / wikipedia / raw（v6.8.42 起新增 3 个学术源）
 
     Returns:
         排序后的候选列表
     """
     if sources is None:
-        sources = ["arxiv", "wikipedia", "raw"]
+        sources = ["arxiv", "openalex", "wikipedia", "raw"]
 
     # 获取研究方向关键词
     try:
@@ -660,6 +1131,16 @@ def discover_learning_opportunities(query: Optional[str] = None,
     if "arxiv" in sources:
         papers = fetch_arxiv(query, max_results=max_results)
         candidates.extend(papers)
+
+    # v6.8.42: 补充学术来源（期刊论文 / 多学科覆盖）
+    if "openalex" in sources:
+        candidates.extend(fetch_openalex(query, max_results=max_results))
+
+    if "semantic_scholar" in sources:
+        candidates.extend(fetch_semantic_scholar(query, max_results=max_results))
+
+    if "pubmed" in sources:
+        candidates.extend(fetch_pubmed(query, max_results=max_results))
 
     if "web" in sources:
         # 对每个研究方向关键词进行联网检索
@@ -717,28 +1198,66 @@ if __name__ == "__main__":
         print("   ⚠ Wikipedia 获取失败（可能网络超时）")
     print("   ✓ Wikipedia 获取测试完成")
 
-    print("\n[4/6] 测试 scan_raw_changes...")
+    print("\n[4/8] 测试 fetch_openalex（多源学术检索 v6.8.42）...")
+    oa_papers = fetch_openalex("high harmonic generation solid", max_results=3)
+    print(f"   返回论文数: {len(oa_papers)}")
+    if oa_papers:
+        p0 = oa_papers[0]
+        print(f"   第一篇: {p0.get('title', 'N/A')[:50]}")
+        print(f"   年份={p0.get('year')} 引文={p0.get('citation_count')} 期刊={p0.get('venue','')[:30]} DOI={p0.get('doi')}")
+        assert p0.get("source") == "openalex"
+        assert "authors" in p0
+    else:
+        print("   ⚠ OpenAlex 获取失败（可能网络或额度问题）")
+    print("   ✓ OpenAlex 获取测试完成")
+
+    print("\n[5/8] 测试 fetch_semantic_scholar...")
+    s2_papers = fetch_semantic_scholar("high harmonic generation", max_results=2)
+    print(f"   返回论文数: {len(s2_papers)}")
+    if s2_papers:
+        assert s2_papers[0].get("source") == "semantic_scholar"
+    else:
+        print("   ⚠ S2 无返回（无 key 时可能 429，属预期降级）")
+    print("   ✓ S2 获取测试完成")
+
+    print("\n[6/8] 测试 search_academic 聚合去重...")
+    merged = search_academic("solid state high harmonic generation", max_results=3,
+                             sources=("arxiv", "openalex"))
+    print(f"   聚合论文数: {len(merged)}")
+    for m in merged[:3]:
+        print(f"   - [{m.get('source')}] {m.get('title','')[:45]} (DOI={m.get('doi')})")
+    if merged:
+        assert all(m.get("source") in ("arxiv", "openalex") for m in merged)
+    print("   ✓ 聚合搜索通过")
+
+    print("\n[7/8] 测试 scan_raw_changes...")
     changes = scan_raw_changes()
     print(f"   新增: {len(changes['added'])}, 修改: {len(changes['modified'])}, 删除: {len(changes['deleted'])}")
     assert "scanned_at" in changes
     print("   ✓ Raw 扫描通过")
 
-    print("\n[5/6] 测试 score_opportunity...")
+    print("\n[8/8] 测试 score_opportunity...")
+    from datetime import timedelta as _td
+    time_30d = _td(days=10)
     sample = {
         "source": "arxiv",
         "title": "Attosecond spectroscopy of solid-state HHG",
         "abstract": "We investigate high harmonic generation in solids using attosecond pulses.",
-        "date": "2026-04-15",
+        # 用相对日期避免断言漂移（v6.8.42）
+        "date": (datetime.now(timezone.utc).replace(tzinfo=None) - time_30d).strftime("%Y-%m-%d"),
     }
     score = score_opportunity(sample, [("attosecond", 0.9), ("HHG", 0.8), ("solid-state", 0.7)])
     print(f"   评分: {score}")
     assert 0 <= score["overall"] <= 1
     assert score["reliability"] == 0.9  # arXiv
     assert score["timeliness"] == 1.0   # 近30天
+    oa_score = score_opportunity({**sample, "source": "openalex"}, [("attosecond", 0.9)])
+    assert oa_score["reliability"] == 0.85  # OpenAlex 权重
+    print("   来源权重: openalex=0.85 已生效")
     print("   ✓ 评分通过")
 
-    print("\n[6/6] 测试 discover_learning_opportunities...")
-    ops = discover_learning_opportunities(query="quantum", max_results=2, sources=["arxiv"])
+    print("\n[9/9] 测试 discover_learning_opportunities（含新学术源）...")
+    ops = discover_learning_opportunities(query="quantum", max_results=2, sources=["arxiv", "openalex"])
     print(f"   发现机会数: {len(ops)}")
     if ops:
         print(f"   最高分: {ops[0].get('_score', {}).get('overall', 0)}")

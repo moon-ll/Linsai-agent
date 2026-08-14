@@ -728,8 +728,9 @@ def re_search_concepts(max_results: int = 3,
     # 取前 5 个概念进行 re-search
     candidates = []
     for concept in concepts[:5]:
-        # arXiv
-        papers = ef.fetch_arxiv(concept, max_results=max_results)
+        # arXiv + OpenAlex（v6.8.42 多源检索：预印本 + 期刊论文互补）
+        papers = ef.search_academic(concept, max_results=max_results,
+                                    sources=("arxiv", "openalex"))
         for p in papers:
             date_str = p.get("date", "")
             if date_str:

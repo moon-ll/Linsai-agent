@@ -74,7 +74,7 @@
 | 脚本 | 行数 | 说明 |
 |------|------|------|
 | `research_profiler.py` | 396 | 研究方向感知器：TF-IDF关键词、7天自动重建、漂移检测 |
-| `external_fetcher.py` | 738 | 统一信息获取：deepxiv arXiv + 联网检索 + raw扫描 |
+| `external_fetcher.py` | 1100+ | 统一信息获取：deepxiv arXiv + OpenAlex/Semantic Scholar/PubMed/Crossref 多源学术检索 + 联网检索 + raw扫描（v6.8.42）|
 | `learning_engine.py` | 1007 | 自主学习核心：蒸馏/精读/概念整合/图谱扩展/成本追踪 |
 | `quality_evaluator.py` | 785 | 质量评估：规则+LLM评估、对抗蒸馏、三级决策 |
 | `memory_reflow.py` | 569 | 认知回流引擎：hermes→记忆提炼、冷启动、增量回流（v3.4） |
