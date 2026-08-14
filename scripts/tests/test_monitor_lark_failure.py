@@ -54,6 +54,10 @@ class MonitorLarkFailureTests(TestSuite):
         # 隔离路径
         self.monitor.KANBAN_PATH = self.tmp_root / "memory" / "system-kanban.json"
         self.monitor.ALERT_CACHE_PATH = self.tmp_root / "memory" / "monitor-alert-cache.json"
+        # v6.8.53: 隔离健康感知层——_check_health_signals 经 health_sensor 读
+        # 真实 KB/熔断数据，真实 conn(0.45)<0.50 会额外产生告警，使
+        # notified_count=1 的断言漂移为 2（flake）。本套件聚焦通知去重语义。
+        self.monitor._check_health_signals = lambda: None
 
     def teardown(self):
         if self.tmp_root and self.tmp_root.exists():

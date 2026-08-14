@@ -42,10 +42,17 @@ class HealthSensorTests(TestSuite):
         hs.LIFECYCLE_PATH = self._tmpdir / "_lifecycle.json"
         hs.KANBAN_PATH = self._tmpdir / "system-kanban.json"
         hs.CIRCUIT_PATH = self._tmpdir / "circuit-state.json"
+        # v6.8.53: 隔离 KB 信号——_collect_kb_signals 经 facade 读真实知识库，
+        # 真实 graph_connectivity(0.45)<0.50 会触发 kb_graph_disconnect 告警，
+        # 污染"正常状态零告警"用例，且结果随全局 knowledge_base 模块的
+        # patch 状态漂移（flake）。KB 告警逻辑由 health_sensor --self-check 覆盖。
+        self._orig_kb = hs._collect_kb_signals
+        hs._collect_kb_signals = lambda now: {}
 
     def teardown(self):
         for k, v in self._orig.items():
             setattr(self._hs, k, v)
+        self._hs._collect_kb_signals = self._orig_kb
         self._tmp.cleanup()
 
     def _write_proposal(self, jobs=None, history=None, status="optimizing"):

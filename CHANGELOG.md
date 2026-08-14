@@ -48,6 +48,17 @@
   最新删较旧）；`tests/test_weekend_pipeline.py` 增 2 用例（跨周重置按
   阶段自身时间、周内不重置）；注册进 self_test `--module` 注册表。
 - `python3 scripts/self_test.py --module`：456/456 全量通过（基线 445→456）。
+- **web-ci 历史首次全绿 564/564**（体检补修，修复 3 处长期 flake/存量失败）：
+  - `tests/test_core.py` setup 的模块重载清单补 `paths`——lifecycle 系列套件
+    直接 patch `paths.PROJECT_ROOT` 且无 teardown 恢复，全量顺序下
+    skill_manager 重载时固化污染路径，4 项技能测试随 import 顺序漂移失败；
+  - `tests/test_health_sensor.py` 隔离 KB 信号——`_collect_kb_signals` 经
+    facade 读真实知识库，真实 conn(0.45)<0.50 触发 kb_graph_disconnect，
+    污染"正常状态零告警"用例；
+  - `tests/test_monitor_lark_failure.py` 桩化 `_check_health_signals`——
+    同上真实信号泄漏使 notified_count=1 断言漂移为 2。
+  - KB 告警逻辑的正向回归由 `health_sensor --self-check` 覆盖，测试隔离
+    不降低覆盖率。
 
 ## v6.8.52 - 2026-08-14 全链路阻塞点排查：critic/writer 超时分级 + 死锁课题解锁
 

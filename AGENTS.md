@@ -132,7 +132,7 @@ python3 -m py_compile scripts/*.py
 - `--module`：456/456 通过（含生命周期 cron、对抗评审、提案 KB 同步、周末任务流水线、章节评审/整体评审、微调度器、轮次完成 break、derived job 优先级、prompt 优化器、看板轮次统计、stale job 回收、monitor 看板时间戳、维度提取修复、质量门槛、MOC 去重修复、标签提取修复、质量天花板收敛/下降检测、维度轮换、输入端熔断（v6.8.53 数据源修复）、审核反馈闭环、KB 健康评分、P0 跨轮持久化、prompt 优化器循环断裂、agent 分数奖惩闭环、nsfc 标准补全、范例注入修复、维度轮换修复、cross-proposal 数据源修复、研究设想质量门槛 idea_review、停滞课题检测修复、退回 idea_review 重触发修复、monitor 降级路径修复、writer 审核反馈注入、同步优化限制、KB 指标持久化、输入端熔断工作日检测、debug journal 压缩、输入端熔断数据源修复、cron 去重默认清单、周末跨周重置按阶段自身时间）
 - `--scenario`：16/16 通过
 - `--persona`：38/38 通过
-- `--web-ci`：399/399 通过（Web API 虚拟用户测试覆盖所有主要 API 命名空间）
+- `--web-ci`：564/564 通过（Web API 虚拟用户测试覆盖所有主要 API 命名空间；v6.8.53 修复总控路由 500 与 3 处顺序/环境依赖 flake 后历史首次全绿）
 
 **测试设计原则**：零污染（临时隔离目录运行）、零成本（不调用 LLM API）、自动发现（新增 `scripts/tests/test_*.py` 自动纳入回归）。
 
