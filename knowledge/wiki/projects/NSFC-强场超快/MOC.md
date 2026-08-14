@@ -2,7 +2,7 @@
 title: "🗺️ NSFC 强场超快课题"
 type: "moc"
 created: "2026-06-19T00:00:00Z"
-updated: "2026-08-14T00:11:19Z"
+updated: "2026-08-14T04:36:19Z"
 tags: "["MOC", "NSFC", "索引", "强场超快", "#type/MOC", "#status/mature"]"
 related: "["Berry曲率", "Ghimire-Reis", "RABBITT", "TDSE求解器", "北大HHG团队", "固体高次谐波", "带内电流", "带间跃迁", "德鲁德模型", "拓扑绝缘体", "瞬态吸收光谱", "高次谐波产生"]"
 source_raw: ""
@@ -23,7 +23,7 @@ project: "["NSFC-强场超快"]"
 | moire-strong-field-probe | 优化中 | 第7轮 | 0.79 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
 | order-parameter-ultrafast-readout | 优化中 | 第0轮 | 0.74 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
 | quantum-geometry-inversion | 优化中 | 第0轮 | 0.77 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
-| transient-quantum-phase-optical | 优化中 | 第2轮 | 0.71 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
+| transient-quantum-phase-optical | 优化中 | 第3轮 | 0.18 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
 
 ## 🔬 课题相关概念
 

@@ -1015,7 +1015,10 @@ class LiteratureService:
             doi_clean = re.sub(r"^(https?://(dx\.)?doi\.org/|doi:)", "", doi).strip()
             if not arxiv_id and not doi_clean:
                 continue
-            identifier = arxiv_id or f"doi-{self._safe_filename(doi_clean)}"
+            # v6.8.44: DOI 标识符保留点/斜杠结构（转连字符），避免 _safe_filename 剥点后
+            # 产生有损文件名（如 10.1038/x → 101038x），造成 DOI 可读性差与潜在碰撞
+            doi_slug = self._safe_filename(doi_clean.replace("/", "-").replace(".", "-"))
+            identifier = arxiv_id or f"doi-{doi_slug}"
             # v6.8.3: 跳过自然语言提取的缺元数据条目，不污染知识库
             if paper.get("_needs_metadata"):
                 if _log:
