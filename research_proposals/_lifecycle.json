@@ -3409,21 +3409,26 @@
           "step": "critic",
           "section_key": "scheme",
           "round": 4,
-          "status": "failed",
+          "status": "pending",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r4-content-writer"
           ],
-          "attempts": 3,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-14T11:25:08Z",
-          "finished_at": "2026-08-14T11:40:08Z",
-          "last_error": "超时(900s)",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": "",
           "error_history": [
             {
               "at": "2026-08-14T11:20:05Z",
               "error": "超时(900s)",
               "attempts": 1
+            },
+            {
+              "at": "2026-08-14T11:55:00Z",
+              "error": "手动解锁（v6.8.52 超时分级后重跑）: 超时(900s)",
+              "attempts": 3
             }
           ],
           "repair_attempts": 1
@@ -10341,5 +10346,5 @@
       ]
     }
   },
-  "updated_at": "2026-08-14T11:40:09Z"
+  "updated_at": "2026-08-14T11:55:00Z"
 }

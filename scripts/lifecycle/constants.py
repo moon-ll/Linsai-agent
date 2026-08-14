@@ -73,9 +73,25 @@ KB_SYNC_CRON_NAME = "lc-kb-sync"
 
 # stale 阈值：running 超过该秒数视为死锁
 # v6.8.3-fix9: 从 3600s 降低到 1800s（30min）。
-# critic/writer 的 timeout=900s（15min），正常执行最长 ~12min。
+# critic/writer 的 timeout 见下方分级常量（900/1200s），正常执行最长 ~12min。
 # 1800s 给 hermes 足够的退出缓冲，同时避免卡住整个时段。
 STALE_RUNNING_SECONDS = 1800
+
+# critic/writer 超时分级（v6.8.52）
+# 背景：key-transient r4-scheme-critic 三连超时(900s)烧光 attempts 导致课题死锁
+# （stuck=true, next_job=null）。实测大模块输入上下文长（scheme 42KB、
+# rationale 46KB、full_review 跨全文），MiniMax 高峰期变慢时 900s 不够用；
+# 而 profile_health 对超时失败的建议本身就是"可考虑增加 timeout"。
+# 1200s 仍 < STALE_RUNNING_SECONDS(1800s)，stale 僵死判定窗口安全。
+CRITIC_WRITER_TIMEOUT_DEFAULT_S = 900
+CRITIC_WRITER_TIMEOUT_LARGE_S = 1200
+LARGE_TIMEOUT_SECTIONS = {"rationale", "scheme", "full_review"}
+
+
+def critic_writer_timeout_s(section_key: str) -> int:
+    """按模块返回 critic/writer 的超时秒数（大模块放宽，其余保持默认）。"""
+    return CRITIC_WRITER_TIMEOUT_LARGE_S if section_key in LARGE_TIMEOUT_SECTIONS \
+        else CRITIC_WRITER_TIMEOUT_DEFAULT_S
 
 # 最大自动重试次数
 MAX_JOB_ATTEMPTS = 3

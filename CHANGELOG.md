@@ -1,5 +1,38 @@
 # 变更记录
 
+## v6.8.52 - 2026-08-14 全链路阻塞点排查：critic/writer 超时分级 + 死锁课题解锁
+
+### 诊断（全链路 276 job 一手数据排查）
+- **死锁确认**：key-transient r4-scheme-critic 三连超时(900s)烧光 attempts=3，
+  下游 11 个 pending 全部依赖它 → `_is_proposal_stuck` 判定卡死，
+  看板 stuck=true / next_job=null，课题从 r4 起无法推进。
+- **超时根因**：critic/writer 硬编码 900s。实测大模块输入上下文长
+  （scheme 42KB、rationale 46KB、full_review 跨全文），MiniMax 高峰期变慢时
+  900s 不够；profile_health 对超时失败的建议本身就是"可考虑增加 timeout"。
+  error_history 中"超时(900s)"×4、"运行超时/进程僵死"×2 为最高频错误。
+- **排除项**（查实不构成阻塞，未改动）：writer/critic profile "blocked" 仅为
+  展示层状态（最近有失败记录即标记，成功率 0.90/0.903，不影响派发）；
+  熔断器 state=closed；moire r8-full_review-writer running 为活跃执行非僵死；
+  monitor-alert-cache 中 8-08 两条 stalled 残留有 4h 去重窗口自清理，不误发。
+
+### 修改
+- `lifecycle/constants.py`：新增超时分级——`CRITIC_WRITER_TIMEOUT_LARGE_S=1200`
+  适用于 `LARGE_TIMEOUT_SECTIONS={"rationale","scheme","full_review"}`，其余维持
+  `CRITIC_WRITER_TIMEOUT_DEFAULT_S=900`；辅助函数 `critic_writer_timeout_s()`。
+  1200s 仍 < STALE_RUNNING_SECONDS(1800s)，stale 僵死判定窗口安全。
+- `lifecycle/executor.py`：`_run_critic_step`（151 行）与 writer 调用（883 行）
+  的硬编码 900 改为按 section_key 取分级值。
+
+### 数据修复（一次性解锁）
+- key-transient r4-scheme-critic：failed→pending、attempts 归零，
+  语义与 orchestrator.run_repair 一致，使用相同的 `file_lock("proposal-{pid}")`
+  与运行中 worker 互斥；error_history 保留 2 条供追溯。
+  解锁后课题死锁判定复检为 False，下一时段微调度器将以 1200s 超时重跑。
+
+### 验证
+- 超时分级单测式验证：scheme/rationale/full_review=1200，content/references/monitor=900。
+- `self_test --module` 445/445 全量通过（test_optimize_v6817 自带独立超时值不受影响）。
+
 ## v6.8.51 - 2026-08-14 知识库治理落地：写入链修复 + 索引 v2 瘦身 + 每日调度
 
 ### 背景（知识库评估报告逐项落实）

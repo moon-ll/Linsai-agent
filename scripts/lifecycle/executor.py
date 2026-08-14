@@ -29,6 +29,7 @@ from .constants import (
     STEP_UPDATE_METHOD_MANUAL,
     STEP_UPDATE_VISION,
     STEP_WRITER,
+    critic_writer_timeout_s,
 )
 from .utils import _is_stale, _make_job_id
 
@@ -148,7 +149,8 @@ def _run_critic_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     is_full_review = section_key == "full_review"
 
     result = self._run_critic(
-        proposal_id, prop_dir, project_type, round_num, 900,
+        proposal_id, prop_dir, project_type, round_num,
+        critic_writer_timeout_s(section_key),  # v6.8.52: 大模块 1200s，其余 900s
         focus_section=focus_section, is_full_review=is_full_review,
     )
     if not result.get("success"):
@@ -880,7 +882,7 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     writer_result = self._run_writer_optimize(
         proposal_id, prop_dir, project_type,
         critic_result={"output": report["output"]},
-        timeout=900,
+        timeout=critic_writer_timeout_s(section_key),  # v6.8.52: 大模块 1200s，其余 900s
         weakest_dim=weakest_dim,
         dim_scores=dim_scores,
         focus_section=focus_section,
