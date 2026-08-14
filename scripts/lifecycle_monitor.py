@@ -295,30 +295,44 @@ def _check_proposals() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
 
     # v6.8.27: 输入端熔断检测——从周末任务提升为每小时检查
     # 连续 2 周 weekend input 的 ideas_count=0 → input_pipeline_broken
+    # v6.8.53: 数据源改读 weekend-pipeline.json 的 input job 结果。
+    # 旧实现读 weekend-jobs.json 顶层 weekend_input 键——实际结构嵌套在
+    # jobs 下（weekend_data["jobs"]["weekend_input"]），且该文件从不记录
+    # result.ideas_count，导致本检测自 v6.8.27 起从未可能触发（输入端
+    # 自 08-01 起停摆 13 天无人告警，运行时已证实）。
     try:
-        weekend_path = PROJECT_ROOT / "memory" / "weekend-jobs.json"
-        if weekend_path.exists():
+        # 注意：函数体内别处（提案循环内）有局部 from datetime import timezone，
+        # 空提案列表时该绑定不执行 → 此处必须显式导入，否则 UnboundLocalError
+        # 被 except 吞掉、检测静默失效（原实现即因此叠加死代码）。
+        from datetime import datetime, timezone
+        pipeline_path = PROJECT_ROOT / "memory" / "weekend-pipeline.json"
+        if pipeline_path.exists():
             import json
-            weekend_data = json.loads(weekend_path.read_text(encoding="utf-8"))
-            weekend_input = weekend_data.get("weekend_input", {})
-            started_at = weekend_input.get("started_at", "")
-            ideas_count = 0
-            result = weekend_input.get("result", {})
-            if isinstance(result, dict):
-                ideas_count = result.get("ideas_count", 0)
-            # 如果最近一次 weekend input 无新设想且距上次执行超过 7 天
-            if started_at and ideas_count == 0:
-                input_dt = datetime.fromisoformat(started_at.replace("Z", "+00:00"))
-                days_since = (datetime.now(timezone.utc) - input_dt).total_seconds() // 86400
-                if days_since >= 7:
-                    anomalies.append({
-                        "type": "input_pipeline_broken",
-                        "message": (
-                            f"输入端连续 {int(days_since)} 天未产生新研究设想，"
-                            f"上次 weekend input 于 {started_at}。"
-                            f"建议检查 idea_generator prompt 或 hermes researcher profile 状态。"
-                        ),
-                    })
+            pipe_data = json.loads(pipeline_path.read_text(encoding="utf-8"))
+            input_results = [
+                j for j in pipe_data.get("jobs", [])
+                if j.get("stage") == "input"
+                and isinstance(j.get("result"), dict)
+                and "ideas_count" in j["result"]
+            ]
+            if input_results:
+                latest = max(input_results, key=lambda j: j.get("finished_at", ""))
+                ideas_count = latest["result"].get("ideas_count", 0)
+                finished_at = latest.get("finished_at", "")
+                # 最近一次 input 产出无新设想，且此后 ≥7 天再无新产出
+                # （周输入窗口已过一轮）→ 视为连续 2 周断流
+                if finished_at and ideas_count == 0:
+                    fin_dt = datetime.fromisoformat(finished_at.replace("Z", "+00:00"))
+                    days_since = (datetime.now(timezone.utc) - fin_dt).total_seconds() // 86400
+                    if days_since >= 7:
+                        anomalies.append({
+                            "type": "input_pipeline_broken",
+                            "message": (
+                                f"输入端连续 {int(days_since)} 天未产生新研究设想，"
+                                f"上次 input 产出（{latest.get('job_id', '')}）于 {finished_at}。"
+                                f"建议检查 idea_generator prompt 或 hermes researcher profile 状态。"
+                            ),
+                        })
     except Exception:
         pass
 

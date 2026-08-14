@@ -274,6 +274,60 @@ class WeekendPipelineTests(TestSuite):
             wp_const.WEEKEND_OUTPUT_DIR = orig_output_dir
             oj_mod.WEEKEND_OUTPUT_DIR = orig_output_dir
 
+    def _test_reset_stage_uses_own_recency_not_global_updated_at(self):
+        """v6.8.53: 跨周重置应以阶段自身最近完成时间为准，而非全局 updated_at。
+
+        运行时缺陷（已证实）：input job 08-01 全部 done 后，周六 output/reflection
+        （及 weekend-worker 每 20 分钟）先跑刷新全局 updated_at → input 的跨周
+        重置永不触发 → weekend_input 变 no-op 却标记成功，研究设想停摆两周。
+        """
+        from datetime import datetime, timezone, timedelta
+
+        p = self._make_pipeline()
+        p.sync_stage_jobs("input")
+        eight_days_ago = (
+            datetime.now(timezone.utc) - timedelta(days=8)
+        ).strftime("%Y-%m-%dT%H:%M:%SZ")
+        for job in p.list_jobs(stage="input"):
+            job["status"] = "done"
+            job["finished_at"] = eight_days_ago
+        p._save()
+
+        # 全局 updated_at 被 output/reflection 刷新为"刚刚"（模拟同日其他阶段先跑）
+        p.state["updated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+        p._save()
+
+        p2 = self._make_pipeline()  # 重新加载状态
+        p2.sync_stage_jobs("input")
+        pending_count = sum(
+            1 for j in p2.list_jobs(stage="input") if j.get("status") == "pending"
+        )
+        self.assert_eq(
+            pending_count, 7,
+            "全局 updated_at 新鲜但 input 自身完成已 8 天 → 应重置 7 个 job",
+        )
+
+    def _test_reset_stage_not_triggered_within_week(self):
+        """阶段自身最近完成仅 2 天 → 不重置（周内幂等）。"""
+        from datetime import datetime, timezone, timedelta
+
+        p = self._make_pipeline()
+        p.sync_stage_jobs("input")
+        two_days_ago = (
+            datetime.now(timezone.utc) - timedelta(days=2)
+        ).strftime("%Y-%m-%dT%H:%M:%SZ")
+        for job in p.list_jobs(stage="input"):
+            job["status"] = "done"
+            job["finished_at"] = two_days_ago
+        p._save()
+
+        p2 = self._make_pipeline()
+        p2.sync_stage_jobs("input")
+        done_count = sum(
+            1 for j in p2.list_jobs(stage="input") if j.get("status") == "done"
+        )
+        self.assert_eq(done_count, 7, "完成仅 2 天 → 不应重置")
+
     def run_tests(self):
         self._test_sync_stage_jobs_idempotent()
         self._test_dependency_order()
@@ -284,3 +338,5 @@ class WeekendPipelineTests(TestSuite):
         self._test_output_stage_creates_archived_extract_jobs()
         self._test_verify_artifacts_resets_missing_output()
         self._test_kb_health_field_fallback_in_weekly_report()
+        self._test_reset_stage_uses_own_recency_not_global_updated_at()
+        self._test_reset_stage_not_triggered_within_week()

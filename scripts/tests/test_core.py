@@ -40,8 +40,15 @@ class CoreModuleTests(TestSuite):
     def setup(self):
         self.tmp_root = create_isolated_env()
         # 强制重新导入各模块（确保拿到未污染版本）
+        # v6.8.53: 增加 "paths"——lifecycle 系列套件（test_auto_retry 等）直接
+        # patch paths.PROJECT_ROOT = tmp 且无 teardown 恢复；若不重载，skill_manager
+        # 重新 import 时 from paths import PROJECT_ROOT 拿到残留 tmp 路径，
+        # SKILLS_DIR 固化到空 tmp → 技能数 0（web-ci 全量模式下 test_core 排在
+        # 这些套件之后，4 项技能测试失败）。重载后 paths 总是从 __file__ 推导
+        # 出真实根，后续 patch_module_root 才能正确替换。
         for mod_name in ["session_manager", "knowledge_base", "skill_manager",
-                         "task_manager", "memory_manager", "context_builder"]:
+                         "task_manager", "memory_manager", "context_builder",
+                         "paths"]:
             if mod_name in sys.modules:
                 del sys.modules[mod_name]
 

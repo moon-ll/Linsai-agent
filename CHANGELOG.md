@@ -1,5 +1,54 @@
 # 变更记录
 
+## v6.8.53 - 2026-08-14 三层诊断：输入端熔断复活 + cron 幂等 + 周重置修复
+
+### 诊断（20:00-20:25 健康检查，发现 3 个确认 Bug）
+
+- **输入端停摆 13 天无人告警（严重）**：researcher 研究设想发现自 08-01 起实际
+  未执行。08-08 weekend_input 瞬时完成（started_at == finished_at）标记 done，
+  但 input job 全部沿用 08-01 的 done 状态，未真正运行。三层防线同时失效：
+  ① `lifecycle_monitor` 输入端熔断读 `weekend-jobs.json` 顶层 `weekend_input`
+  键——实际结构嵌套在 `jobs` 下，且该文件从不记录 `result.ideas_count`，
+  检测自 v6.8.27 起从未可能触发（死代码）；即使读到数据，空提案列表时函数
+  体内局部 `from datetime import timezone`（提案循环内 line 235）未执行，
+  `UnboundLocalError` 被 `except: pass` 吞掉（原代码同样隐患）；② 周反思端
+  熔断需 ≥2 条 input 历史，实际仅 1 条，永不触发；③ 根因：
+  `_reset_stage_for_new_week` 用 pipeline 全局 `updated_at`（任意阶段 save
+  均刷新，weekend-worker 每 20 分钟也刷新）判定跨周——周六 output/reflection
+  先跑后 input 的跨周重置永不触发，weekend_input 变 no-op 却标成功。
+- **lc-kb-sync cron 双实例不收敛**：检测端 REQUIRED_CRON_PREFIXES 含
+  lc-kb-sync，但 `cleanup_cron_duplicates` 默认清单只有 5 个旧名称（不含
+  kb-sync）→ 每小时 monitor 检测到 cron_duplicate → 自动去重清不掉 →
+  异常每小时复现；次日 12:40 将并发跑两次 kb_auto_sync。实测 jobs.json
+  双实例（19:03 自动修复 + 19:26 手动 setup 各建一份）。
+- **总控 4 条 GET 路由 500（并行会话发现并修复）**：`window_hours` 解析对
+  ParseResult 调 `.get()` 抛 AttributeError，v6.7 起存在。
+
+### 修复
+- `lifecycle_monitor.py`：输入端熔断数据源改读 `weekend-pipeline.json` 的
+  input job 结果（`result.ideas_count` + `finished_at`，最新一条）；显式
+  `from datetime import datetime, timezone` 避免 UnboundLocalError。修复后
+  实测告警正确触发："输入端连续 13 天未产生新研究设想，上次 input 产出
+  （input_compose_ideas）于 2026-08-01T07:20:29Z"。
+- `weekend_pipeline/pipeline.py`：`_reset_stage_for_new_week` 跨周判定基准
+  从全局 `updated_at` 改为该阶段自身最近一次 job 完成时间（max
+  finished_at），阶段间互不干扰。
+- `lifecycle/framework.py`：`cleanup_cron_duplicates` 默认清单补入
+  KB_SYNC_CRON_NAME（存量 ×2 副本已清理收敛为 1）；并行会话新增
+  `_cron_create_idempotent`（同名同调度跳过、否则删旧建新）应用于
+  kb-sync/prompt-optimize 创建路径，杜绝再产生重复。
+- `web_routes_orchestrator.py`（并行会话）：`_window_hours` 兼容
+  ParseResult/dict，总控 dashboard/profiles/failures/strategies 恢复。
+- 存量数据修复：input 阶段 7 个 08-01 done job 已重置 pending，
+  明日（周六）09:00 输入端 cron 将真正执行研究设想发现。
+
+### 测试
+- 新增 `tests/test_input_breaker.py`（5 用例：触发/不触发/旧形状兼容）、
+  `tests/test_cron_dedup_default.py`（4 断言：默认清单覆盖 kb-sync、保留
+  最新删较旧）；`tests/test_weekend_pipeline.py` 增 2 用例（跨周重置按
+  阶段自身时间、周内不重置）；注册进 self_test `--module` 注册表。
+- `python3 scripts/self_test.py --module`：456/456 全量通过（基线 445→456）。
+
 ## v6.8.52 - 2026-08-14 全链路阻塞点排查：critic/writer 超时分级 + 死锁课题解锁
 
 ### 诊断（全链路 276 job 一手数据排查）

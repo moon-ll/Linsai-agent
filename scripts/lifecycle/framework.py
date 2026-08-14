@@ -39,6 +39,40 @@ except Exception:
     _log = None
 
 
+def _cron_create_idempotent(
+    script_name: str,
+    name: str,
+    schedule: str,
+) -> Dict[str, Any]:
+    """v6.8.53: 幂等创建框架 cron——同名且调度一致则跳过，不一致则删旧建新。
+
+    背景：setup_cron_framework 每次调用都无条件 create，而 cleanup_cron_duplicates
+    只处理"已存在多副本"（len>1 才删）。第二次 setup 时同名只剩 1 个，cleanup
+    不删、create 再建 → 每执行一次 setup 副本数 +1（实测 2026-08-14 两次 setup
+    产生 5 组重复，lc-kb-sync 双实例次日将并发执行两次 kb_auto_sync）。
+    """
+    for cron in hb.cron_list_profile(HERMES_PROFILE):
+        if cron.get("name") == name:
+            if cron.get("schedule") == schedule and cron.get("status") == "active":
+                if _log:
+                    _log.info(f"[cron 幂等] {name} 已存在且调度一致，跳过创建")
+                return {"success": True, "skipped": True, "id": cron.get("id", "")}
+            # 调度变化或已暂停 → 删旧建新
+            if _log:
+                _log.warning(
+                    f"[cron 幂等] {name} 调度不一致或非 active，删除旧实例后重建"
+                )
+            hb.cron_delete(cron.get("id", ""), profile=HERMES_PROFILE)
+            break
+    return hb.cron_create_no_agent(
+        script_name=script_name,
+        name=name,
+        schedule=schedule,
+        workdir=str(PROJECT_ROOT),
+        profile=HERMES_PROFILE,
+    )
+
+
 def cleanup_cron_duplicates(
     self,
     framework_names: Optional[List[str]] = None,
@@ -61,7 +95,9 @@ def cleanup_cron_duplicates(
       4. 基数持续增长，磁盘 4h 窗口内 +3MB
 
     Args:
-        framework_names: 需要去重的 cron 名称列表，默认覆盖 lc-* 框架 4 类 + lc-hourly-monitor。
+        framework_names: 需要去重的 cron 名称列表，默认覆盖 lc-* 框架 4 类 +
+            lc-hourly-monitor + lc-kb-sync（v6.8.53 补入，否则监控端检测到
+            kb-sync 重复后自动去重清不掉，异常每小时复现永不收敛）。
 
     Returns:
         删除记录列表，每项 {name, id, created_at}。
@@ -71,6 +107,7 @@ def cleanup_cron_duplicates(
             "lc-daily-orchestrate", "lc-repair",
             "lc-prompt-optimize", "lc-retrospective",
             "lc-hourly-monitor",
+            KB_SYNC_CRON_NAME,
         ]
     removed: List[Dict[str, str]] = []
     # 按 name 分组
@@ -133,22 +170,18 @@ def setup_cron_framework(
             hb.cron_delete(cron.get("id"), profile=HERMES_PROFILE)
             removed.append(cname)
 
-    # orchestrate cron
-    orch = hb.cron_create_no_agent(
+    # orchestrate cron（v6.8.53: 幂等创建）
+    orch = _cron_create_idempotent(
         script_name="lc_orchestrate.sh",
         name="lc-daily-orchestrate",
         schedule=orchestrate_schedule,
-        workdir=str(PROJECT_ROOT),
-        profile=HERMES_PROFILE,
     )
 
-    # repair cron
-    rep = hb.cron_create_no_agent(
+    # repair cron（v6.8.53: 幂等创建）
+    rep = _cron_create_idempotent(
         script_name="lc_repair.sh",
         name="lc-repair",
         schedule=repair_schedule,
-        workdir=str(PROJECT_ROOT),
-        profile=HERMES_PROFILE,
     )
 
     # 全局微调度器 cron（每 5 分钟执行一个 job）
@@ -184,12 +217,10 @@ def setup_cron_framework(
     for r in extra_cleanup:
         if r["name"] not in removed:
             removed.append(r["name"])
-    prompt_opt = hb.cron_create_no_agent(
+    prompt_opt = _cron_create_idempotent(
         script_name="lc_prompt_optimize.sh",
         name="lc-prompt-optimize",
         schedule=DEFAULT_PROMPT_OPTIMIZE_SCHEDULE,
-        workdir=str(PROJECT_ROOT),
-        profile=HERMES_PROFILE,
     )
     result["prompt_optimize"] = prompt_opt
     result["success"] = result["success"] and prompt_opt.get("success")
@@ -200,12 +231,10 @@ def setup_cron_framework(
     for r in extra_cleanup:
         if r["name"] not in removed:
             removed.append(r["name"])
-    retro = hb.cron_create_no_agent(
+    retro = _cron_create_idempotent(
         script_name="lc_retrospective.sh",
         name="lc-retrospective",
         schedule=DEFAULT_RETROSPECTIVE_SCHEDULE,
-        workdir=str(PROJECT_ROOT),
-        profile=HERMES_PROFILE,
     )
     result["retrospective"] = retro
     result["success"] = result["success"] and retro.get("success")
@@ -217,12 +246,10 @@ def setup_cron_framework(
     for r in extra_cleanup:
         if r["name"] not in removed:
             removed.append(r["name"])
-    kb_sync = hb.cron_create_no_agent(
+    kb_sync = _cron_create_idempotent(
         script_name="lc_kb_sync.sh",
         name=KB_SYNC_CRON_NAME,
         schedule=DEFAULT_KB_SYNC_SCHEDULE,
-        workdir=str(PROJECT_ROOT),
-        profile=HERMES_PROFILE,
     )
     result["kb_sync"] = kb_sync
     result["success"] = result["success"] and kb_sync.get("success")

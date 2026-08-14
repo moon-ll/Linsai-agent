@@ -92,19 +92,33 @@ class WeekendPipeline:
     def _reset_stage_for_new_week(self, stage: str) -> int:
         """检查是否跨周，若是则重置该阶段所有 job 为 pending。
 
-        当 pipeline 上次更新距今超过 6 天时，视为新一周开始，
+        当该阶段自身最近一次 job 完成距今超过 6 天时，视为新一周开始，
         将该阶段所有 job 重置为 pending，清除执行记录。
+
+        v6.8.53: 跨周判定基准从全局 state.updated_at 改为"该阶段自身
+        最近一次 job 完成时间"。旧实现读全局 updated_at——周六同一优先
+        级下 output/reflection（或 weekend-worker 每 20 分钟）先跑会刷新
+        它，导致 input 阶段的跨周重置永不触发：input job 自 08-01 全部
+        done 后，08-08 weekend_input 变成 no-op 却标记成功，研究设想
+        发现停摆两周无人察觉（运行时已证实）。
 
         Returns: 重置的 job 数量
         """
-        updated_at_str = self.state.get("updated_at", "")
-        if not updated_at_str:
+        stage_jobs = [j for j in self.state.get("jobs", []) if j.get("stage") == stage]
+        if not stage_jobs:
+            return 0
+        finished_times = [
+            j.get("finished_at", "") for j in stage_jobs
+            if j.get("finished_at")
+        ]
+        if not finished_times:
+            # 该阶段从未有 job 完成过：job 本就是 pending，无需重置
             return 0
 
         try:
-            updated = datetime.fromisoformat(updated_at_str.replace("Z", "+00:00"))
-            now = datetime.now(timezone.utc)
-            delta_days = (now - updated).days
+            last_fin = max(finished_times)
+            last_dt = datetime.fromisoformat(last_fin.replace("Z", "+00:00"))
+            delta_days = (datetime.now(timezone.utc) - last_dt).days
             if delta_days < 6:
                 return 0
         except Exception:

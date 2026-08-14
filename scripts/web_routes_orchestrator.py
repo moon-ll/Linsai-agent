@@ -19,6 +19,7 @@ from __future__ import annotations
 import re
 import sys
 from pathlib import Path
+from urllib.parse import parse_qs
 from typing import Any, Dict, List, Optional
 
 _SCRIPT_DIR = Path(__file__).parent.resolve()
@@ -29,6 +30,23 @@ import web_base
 from web_base import _log
 
 __all__ = ["OrchestratorRoutesMixin"]
+
+
+def _window_hours(parsed, default: int) -> int:
+    """从请求解析 window_hours 查询参数。
+
+    v6.8.53: 修复 v6.7 起的存量 bug——dispatch 层传入的 parsed 是
+    urlparse() 的 ParseResult（无 .get 方法），旧代码 parsed.get(...)
+    抛 AttributeError，导致总控 4 条 GET 路由（dashboard/profiles/
+    failures/strategies）在 Web 端全部 500。此处兼容 ParseResult 与
+    dict 两种形态。
+    """
+    try:
+        qs = parsed if hasattr(parsed, "get") else parse_qs(getattr(parsed, "query", "") or "")
+        vals = qs.get("window_hours")
+        return int(vals[0]) if vals else default
+    except Exception:
+        return default
 
 
 # ---------------------------------------------------------------------------
@@ -81,7 +99,7 @@ class OrchestratorRoutesMixin:
         """GET /api/orchestrator/dashboard — 总仪表盘。"""
         try:
             from orchestrator import compute_dashboard
-            window = int(parsed.get("window_hours", ["24"])[0]) if parsed.get("window_hours") else 24
+            window = _window_hours(parsed, 24)
             data = compute_dashboard(window_hours=window)
             return self._send_json(data, 200)
         except Exception as e:
@@ -91,7 +109,7 @@ class OrchestratorRoutesMixin:
         """GET /api/orchestrator/profiles/health — 7 个 profile 健康度。"""
         try:
             from profile_health import compute_profile_health
-            window = int(parsed.get("window_hours", ["24"])[0]) if parsed.get("window_hours") else 24
+            window = _window_hours(parsed, 24)
             data = compute_profile_health(window_hours=window)
             return self._send_json(data, 200)
         except Exception as e:
@@ -101,7 +119,7 @@ class OrchestratorRoutesMixin:
         """GET /api/orchestrator/failures/patterns — 失败模式聚类。"""
         try:
             from failure_analyzer import analyze_failures
-            window = int(parsed.get("window_hours", ["24"])[0]) if parsed.get("window_hours") else 24
+            window = _window_hours(parsed, 24)
             data = analyze_failures(window_hours=window)
             return self._send_json(data, 200)
         except Exception as e:
@@ -111,7 +129,7 @@ class OrchestratorRoutesMixin:
         """GET /api/orchestrator/strategies — 调度策略建议。"""
         try:
             from strategy_optimizer import suggest_strategies
-            window = int(parsed.get("window_hours", ["168"])[0]) if parsed.get("window_hours") else 168
+            window = _window_hours(parsed, 168)
             data = suggest_strategies(window_hours=window)
             return self._send_json(data, 200)
         except Exception as e:
