@@ -1,5 +1,32 @@
 # 变更记录
 
+## v6.8.46 - 2026-08-14 修复学习周期多源分发缺口（openalex 等新源全部落入 unknown source）
+
+### 背景
+- v6.8.42 将 `openalex` 纳入 `discover_learning_opportunities` 默认源，但
+  `run_learning_cycle` 的源分发器未同步：仅处理 arxiv/web/raw，
+  多源论文全部落入 `unknown source: openalex` 失败分支，学习周期内无法进入知识库。
+- 顺带修复同类历史缺口：`wikipedia` 一直在默认源列表但从未被分发。
+
+### 修改（learning_engine.py）
+- 新增 `openalex/semantic_scholar/pubmed/crossref` 分发分支：
+  - 含 arXiv ID → 复用 `distill_arxiv_paper`（PDF 下载 + 精读）
+  - 仅 DOI → 复用 `arxiv_paper` 蒸馏 prompt（元数据驱动），
+    落盘 `wiki/papers/doi-<slug>.md`，slug 约定与 literature_service v6.8.44 一致（`.`/`/` → `-`）
+- `wikipedia` 词条复用 `distill_web_search`（数据结构一致）
+
+### 测试（tests/test_learning_cycle_dispatch.py，新增 11 项断言）
+- openalex 含 arXiv ID → 走 arXiv 蒸馏；仅 DOI → 落盘 doi-slug；wikipedia → web 蒸馏；
+  未知 source 控制组仍正确失败
+- 纳入 `self_test --module` 注册表；全量回归 442/442 通过；py_compile 通过
+
+### 备注
+- 版本号与提交内容说明：生命周期管线的 references 多源提交（7687d69，v6.8.45）在
+  全量暂存时误将本修复的早期草稿一并入库（该草稿引用未定义的 `_cache_key`、
+  使用不支持的 `academic_paper` 蒸馏类型）。本 v6.8.46 为净修正版：
+  改用 `safe_filename` + 受支持的 `arxiv_paper` 类型 + `path=None` 初始化，
+  DOI slug 约定与 literature_service 对齐。两提交并行产生，CHANGELOG 结构冲突已还原。
+
 ## v6.8.45 - 2026-08-14 多源检索接入 references 校验：期刊论文进入文献补充报告
 
 ### 背景
@@ -28,7 +55,6 @@ critic references 评审 → gap_identifier 识别缺口 → literature_searcher
 ```
 
 ## v6.8.44 - 2026-08-14 修复 DOI 论文文件名有损命名（回归测试新失败）
-
 ### 背景
 - v6.8.43 新增的 `_test_ingest_doi_paper_without_arxiv_id` 用例在回归测试中失败：
   `_safe_filename` 会剥掉 DOI 中的 `.` 与 `/`，产生有损文件名 `doi-101038s41567-018-0315-5`，

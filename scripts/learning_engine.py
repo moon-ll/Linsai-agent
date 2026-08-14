@@ -831,21 +831,28 @@ def run_learning_cycle(query: Optional[str] = None,
                 if path:
                     result["created"].append(path)
             elif source in ("openalex", "semantic_scholar", "pubmed", "crossref"):
-                # v6.8.44: 支持多源学术论文蒸馏，复用 arXiv 蒸馏逻辑
-                # 若含 arXiv ID → 走 PDF 下载+蒸馏；否则仅用元数据蒸馏
+                # v6.8.45: v6.8.42 将 openalex 纳入默认检索源，但本分发器未同步，
+                # 多源论文全部落入 unknown source 失败分支。修复：
+                #   含 arXiv ID → 复用 arXiv 蒸馏（PDF 下载 + 精读）；
+                #   仅 DOI → 复用 arxiv_paper 精读 prompt（纯元数据驱动），
+                #            落盘为 wiki/papers/doi-<safe-slug>.md
+                path = None
                 if op.get("arxiv_id"):
                     path = distill_arxiv_paper(op, cost_tracker)
                 else:
-                    # 仅 DOI/元数据 → 走 generic 蒸馏
-                    wiki_text, concepts, hints = distill_content("academic_paper", op, cost_tracker)
+                    doi = op.get("doi", "")
+                    wiki_text, concepts, hints = distill_content("arxiv_paper", op, cost_tracker)
                     if wiki_text:
-                        doi = op.get("doi", "")
-                        slug = doi.replace("/", "-").replace(".", "-") if doi else _cache_key(op.get("title", ""))
-                        wiki_rel = f"wiki/papers/doi-{slug}.md"
+                        # 与 literature_service v6.8.44 的 DOI slug 约定保持一致：
+                        # . / → -（如 doi-10-1038-s41567-018-0315-5），便于跨目录互查
+                        base = f"doi-{doi}" if doi else op.get("title", "untitled")
+                        slug = safe_filename(base.replace(".", "-").replace("/", "-"))
+                        wiki_rel = f"wiki/papers/{slug}.md"
                         kb = _import_kb()
                         kb.save_distilled_wiki(wiki_rel, wiki_text, raw_rel_path=f"doi:{doi}")
                         for concept in concepts:
-                            _integrate_concept(concept, wiki_text, source="academic_paper")
+                            _integrate_concept(concept, wiki_text, source="arxiv_paper")
+                        print(f"✓ 期刊论文蒸馏已保存: {wiki_rel}")
                         path = wiki_rel
                 if path:
                     result["created"].append(path)
@@ -854,7 +861,8 @@ def run_learning_cycle(query: Optional[str] = None,
                 if path:
                     result["created"].append(path)
             elif source == "wikipedia":
-                # Wikipedia 词条直接走 web 蒸馏格式
+                # v6.8.45: wikipedia 一直在默认源列表但从未被分发（历史缺口），
+                # 词条数据结构与 web 检索一致（title/url/摘要），复用 web 蒸馏
                 path = distill_web_search(op, cost_tracker)
                 if path:
                     result["created"].append(path)
