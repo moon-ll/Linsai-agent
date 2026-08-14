@@ -1,5 +1,42 @@
 # 变更记录
 
+## v6.9.2 - 2026-08-15 cron 陈旧检测星期域感知 + 首跑宽限
+
+三层诊断（2026-08-15 04h）发现 1 个已确认缺陷（两处误报），定向修复：
+
+### 修复：cron_stale 双重误报（星期域盲区 + 首跑误报）
+- 现象 1：lc-micro-scheduler 调度为 `*/5 * * * 1-5`（工作日），周末暂停属
+  设计行为，但陈旧检测不感知星期域 → 周六 04:02 起检出
+  "lc-micro-scheduler (4h 未执行)"，每小时整点重发 1 条通知噪音，
+  将持续到周一微调度器复跑（约 48h）才自愈。
+- 现象 2：lc-daily-orchestrate 08-14 20:13 重建（每日调度 08:55），
+  首次合法触发在次日 08:55，"从未执行"分支仅设 600s 创建宽限 →
+  自 23:00 起连续误报 10 次（count=10，告警缓存实证）。
+- 根因：`_check_cron_status` 两项检测均无星期域感知；"从未执行"宽限为
+  固定 600s，与调度感知的陈旧阈值（v6.8.34）不一致。
+- 修复：新增 `_cron_runs_today()`（解析第 5 域，0/7=周日、区间/列表、
+  通配与垃圾输入保守真），当天不该执行的 cron 跳过两项检测；
+  "从未执行"宽限改为 `max(CRON_STALE_THRESHOLD, interval×2)`
+  （每日 48h / 每 6h 12h），超宽限未跑仍检出（防真死 cron 被掩盖）。
+- 验证：实时数据修复前 2 条误报 → 修复后返回 None；新增
+  `tests/test_cron_stale_weekend_grace.py`（18 断言，任意日期确定性）；
+  连带修正 `test_monitor_cron_stale.py` 测试 4 日期盲区（固定工作日表达式
+  在周末运行必失败，即本轮 self_test 首跑 558/559 的失败项）；
+  回归 577/577 全绿（基线 559 → 577）。
+
+### 同轮记录（未修复，待人工/观察）
+- R1 飞书通知通道失效：lark-cli 在 hermes context 下 "not bound"，
+  剥离环境变量后用户态亦 "not configured"，历史成功记录 0 条 →
+  环境配置问题，需人工执行 `lark-cli config bind`（hermes context）。
+- R2 key-transient r4 content 0.81→0.18 疑似伪分数污染（dim_scores 缺
+  expression 维），防线未拦截但 health_sensor 已告警；周一观察自愈
+  （两连降自动回退）。
+- R3 知识出口：蒸馏积压 508（>300）+ 图谱连通 0.45（<0.50），
+  weekend-output/lc-kb-sync 今日运行后观察。
+- 设计抽查：#15 monitor 降级路径正常；#12 趋势雷达待 lc-kb-sync
+  今日 12:40 首跑落地（合并写修复已就位）。
+- 报告：logs/healthchecks/healthcheck-2026-08-15-04h.md
+
 ## v6.9.1 - 2026-08-15 体检修复：monitor 心跳互查补绑 + 看板合并写
 
 三层诊断（2026-08-15 00h）发现两个已确认缺陷，定向修复：

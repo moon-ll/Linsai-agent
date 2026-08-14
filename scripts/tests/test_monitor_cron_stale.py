@@ -82,9 +82,14 @@ class MonitorCronStaleTests(TestSuite):
         iso = lambda dt: dt.strftime("%Y-%m-%dT%H:%M:%SZ")
 
         # 必需前缀齐全（含 weekend + kb-sync），避免 _check_cron_status 先触发 cron_missing
+        # v6.9.2: 星期域感知后，micro-scheduler 的调度须覆盖"今天"，
+        # 否则周末运行本测试命中免检分支（返回 None）。按当天动态构造。
+        today_wd = datetime.now().date().weekday()
+        micro_sched = "*/5 * * * 1-5" if today_wd < 5 else "*/5 * * * 6,0"
+
         def _full_set(overrides):
             base = {
-                "lc-micro-scheduler": "*/5 * * * 1-5",
+                "lc-micro-scheduler": micro_sched,
                 "lc-repair": "0 */6 * * *",
                 "lc-daily-orchestrate": "55 8 * * *",
                 "lc-hourly-monitor": "0 * * * *",

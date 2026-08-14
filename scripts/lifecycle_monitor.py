@@ -394,6 +394,48 @@ def _estimate_cron_interval(schedule: str) -> int:
         return CRON_STALE_THRESHOLD
 
 
+def _cron_runs_today(schedule: str, today=None) -> bool:
+    """判断 cron 表达式星期域是否覆盖今天（工作日-only cron 周末免检）。
+
+    背景（v6.9.2）: lc-micro-scheduler 的 `*/5 * * * 1-5` 周末按设计暂停，
+    但 _check_cron_status 的陈旧检测此前不感知星期域，从周六起持续误报
+    "N小时 未执行"直至周一。本函数解析第 5 域（星期），当天不该执行时
+    返回 False，供调用方跳过陈旧/从未执行两项检测。
+
+    Args:
+        schedule: cron 表达式（5 域，display 与 expr 形式一致）
+        today: 可选日期（date），默认今天；注入用于测试
+
+    Returns:
+        今天是否可能执行该 cron；解析失败保守返回 True（照常检测）。
+    """
+    try:
+        fields = schedule.split()
+        if len(fields) < 5:
+            return True
+        dow = fields[4]
+        if dow in ("*", "?"):
+            return True
+        allowed = set()
+        for part in dow.split(","):
+            part = part.strip()
+            if not part or part.startswith(("*", "?")):
+                # */N 或通配语义保守视为覆盖
+                return True
+            if "-" in part:
+                lo, hi = part.split("-", 1)
+                allowed.update(range(int(lo), int(hi) + 1))
+            else:
+                allowed.add(int(part))
+        if today is None:
+            today = datetime.now().date()
+        py_wd = today.weekday()                    # Mon=0 .. Sun=6
+        cron_wd = 0 if py_wd == 6 else py_wd + 1   # cron: 0/7=周日
+        return cron_wd in allowed or (cron_wd == 0 and 7 in allowed)
+    except Exception:
+        return True
+
+
 def _check_cron_status() -> Optional[Dict[str, Any]]:
     """检查生命周期 cron 是否完整注册且正常执行。
 
@@ -450,13 +492,19 @@ def _check_cron_status() -> Optional[Dict[str, Any]]:
             # 只检查关键调度 cron
             if not any(name.startswith(p) for p in ["lc-micro-scheduler", "lc-daily-orchestrate", "lc-repair"]):
                 continue
+            schedule = c.get("schedule", "")
+            # v6.9.2 修复: 星期域不含今天的 cron（如工作日-only 的
+            # `*/5 * * * 1-5` 在周末）当天本就不该执行，跳过两项检测，
+            # 避免从周六起持续误报 "N小时 未执行" 直至周一。
+            if not _cron_runs_today(schedule):
+                continue
+            interval = _estimate_cron_interval(schedule)
             if last_run:
                 try:
                     last_dt = datetime.fromisoformat(last_run.replace("Z", "+00:00"))
                     elapsed = (now_dt - last_dt).total_seconds()
                     # v6.8.34 修复: 固定 2h 阈值对每日(24h)/每6h cron 恒误报，
                     # 改为按各 cron 自身调度间隔估算阈值（至少 2h）。
-                    interval = _estimate_cron_interval(c.get("schedule", ""))
                     threshold = max(CRON_STALE_THRESHOLD, interval * 2)
                     if elapsed > threshold:
                         hours = int(elapsed // 3600)
@@ -465,13 +513,17 @@ def _check_cron_status() -> Optional[Dict[str, Any]]:
                     pass
             else:
                 # 有注册但从未执行过
-                # 排除刚创建的 cron（created_at 在 10 分钟内）
+                # v6.9.2 修复: 固定 10 分钟宽限期对"创建晚于当日调度点"的
+                # 每日 cron（昨晚创建、次日首跑）在首跑前持续误报"从未执行"。
+                # 实测: lc-daily-orchestrate 08-14 20:13 创建、08-15 08:55 首跑，
+                # 23:00 起连续 10 次被误报。改为与陈旧阈值一致的调度感知宽限
+                # （interval*2，至少 2h），首跑未到达不再告警；超期未跑仍检出。
                 created = c.get("created_at", "")
                 if created:
                     try:
                         created_dt = datetime.fromisoformat(created.replace("Z", "+00:00"))
                         age = (now_dt - created_dt).total_seconds()
-                        if age > 600:
+                        if age > max(CRON_STALE_THRESHOLD, interval * 2):
                             stale_crons.append(f"{name} (从未执行)")
                     except Exception:
                         pass
