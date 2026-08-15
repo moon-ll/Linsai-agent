@@ -41,7 +41,7 @@ CLUSTER_OPEN = "open"        # 积累中，可吸收新成员
 CLUSTER_LINKED = "linked"    # 已路由到课题（merge/new/expansion 均算）
 CLUSTER_CLOSED = "closed"    # 陈旧关闭（长期无新成员且未链接课题）
 
-# 归簇参数（关键词 Jaccard 口径，实测物理领域摘要关键词重合度标定）
+# 归簇参数（实测标定，见 _kw_similarity 注释）
 ASSIGN_SIM_THRESHOLD = 0.22       # 新摘要 vs 已有簇：超过即归入
 FORM_CLUSTER_SIM_THRESHOLD = 0.30  # orphans 互相之间：超过可聚团
 MIN_CLUSTER_MEMBERS = 2           # 成新簇最少成员数（单篇不成簇，防冗余）
@@ -88,32 +88,65 @@ def _tokenize(text: str) -> set:
     return words
 
 
+def norm_keyword(kw: str) -> str:
+    """关键词归一化（v6.9.14）。
+
+    08-15 实测：GLM 摘要关键词存在同义不同形——"高次谐波产生" vs
+    "高次谐波产生 (HHG)"，作为集合成员永不相等。统一去尾部括注、
+    去首尾空白、转小写。
+    """
+    if not kw:
+        return ""
+    kw = re.sub(r"\s*[（(][^（）()]*[)）]\s*$", "", str(kw)).strip().lower()
+    return kw
+
+
+def kw_set(keywords) -> set:
+    """关键词列表 → 归一化集合。"""
+    return {norm_keyword(k) for k in (keywords or []) if norm_keyword(k)}
+
+
 def _jaccard(a: set, b: set) -> float:
     if not a or not b:
         return 0.0
     return len(a & b) / len(a | b)
 
 
+def _overlap(a: set, b: set) -> float:
+    """overlap 系数：|A∩B| / min(|A|,|B|)。
+
+    08-15 实测标定：摘要关键词仅 5-15 个，同子领域两篇论文通常共享
+    2-4 个核心词。Jaccard 分母是并集（2 共享/9 并集 ≈ 0.22），对短
+    集合系统性偏低——435 对真实摘要最高仅 0.161，阈值 0.22/0.30
+    永远达不到，簇零形成、输入链空转。overlap 以较小集合为分母
+    （2/5 = 0.40），语义是"这篇的核心词是否落在簇的核心词内"，与
+    归簇意图一致。标题 token 分量保持 Jaccard（token 集较长，无此问题）。
+    """
+    if not a or not b:
+        return 0.0
+    return len(a & b) / min(len(a), len(b))
+
+
 def summary_similarity(item: Dict[str, Any], cluster: Dict[str, Any]) -> float:
-    """摘要条目 vs 簇的相似度：关键词 0.7 + 标题 0.3。
+    """摘要条目 vs 簇的相似度：关键词 overlap 0.7 + 标题 Jaccard 0.3。
 
     关键词权重高：LLM 摘要产出的 keywords 是主题的最强信号；
     标题 token 作补充（关键词漏提时兜底）。
     """
-    kw_a = set(item.get("keywords", []) or [])
-    kw_b = set(cluster.get("keywords", []) or [])
+    kw_a = kw_set(item.get("keywords"))
+    kw_b = kw_set(cluster.get("keywords"))
     ti_a = _tokenize(item.get("title", ""))
     ti_b = _tokenize(cluster.get("title", ""))
-    return 0.7 * _jaccard(kw_a, kw_b) + 0.3 * _jaccard(ti_a, ti_b)
+    return 0.7 * _overlap(kw_a, kw_b) + 0.3 * _jaccard(ti_a, ti_b)
 
 
 def item_similarity(a: Dict[str, Any], b: Dict[str, Any]) -> float:
     """两条摘要之间的相似度（orphan 聚团用）。"""
-    kw_a = set(a.get("keywords", []) or [])
-    kw_b = set(b.get("keywords", []) or [])
+    kw_a = kw_set(a.get("keywords"))
+    kw_b = kw_set(b.get("keywords"))
     ti_a = _tokenize(a.get("title", ""))
     ti_b = _tokenize(b.get("title", ""))
-    return 0.7 * _jaccard(kw_a, kw_b) + 0.3 * _jaccard(ti_a, ti_b)
+    return 0.7 * _overlap(kw_a, kw_b) + 0.3 * _jaccard(ti_a, ti_b)
 
 
 # ---------------------------------------------------------------------------
@@ -129,11 +162,19 @@ def _new_cluster_id() -> str:
 
 
 def _merge_keywords(cluster: Dict[str, Any], item: Dict[str, Any], cap: int = 12) -> None:
-    """簇关键词合并：保留高频/新词，上限 cap。"""
-    existing = list(cluster.get("keywords", []) or [])
+    """簇关键词合并：归一化去重，保留新词，上限 cap。"""
+    existing: list = []
+    seen = set()
+    for kw in list(cluster.get("keywords", []) or []):
+        nk = norm_keyword(kw)
+        if nk and nk not in seen:
+            existing.append(nk)
+            seen.add(nk)
     for kw in item.get("keywords", []) or []:
-        if kw and kw not in existing:
-            existing.append(kw)
+        nk = norm_keyword(kw)
+        if nk and nk not in seen:
+            existing.append(nk)
+            seen.add(nk)
     cluster["keywords"] = existing[:cap]
 
 
@@ -231,14 +272,12 @@ def form_new_clusters(
             remaining.extend(group[1:])
             continue
 
-        # 与全部已有簇查重（防换皮重开）
+        # 与全部已有簇查重（防换皮重开；关键词 overlap 口径与归簇一致）
         candidate_title = seed.get("title", "")
-        candidate_kw = set()
-        for g in group:
-            candidate_kw.update(g.get("keywords", []) or [])
+        candidate_kw = kw_set([k for g in group for k in (g.get("keywords") or [])])
         too_close = False
         for c in all_clusters + formed:
-            kw_sim = _jaccard(candidate_kw, set(c.get("keywords", []) or []))
+            kw_sim = _overlap(candidate_kw, kw_set(c.get("keywords")))
             ti_sim = _jaccard(_tokenize(candidate_title), _tokenize(c.get("title", "")))
             if 0.7 * kw_sim + 0.3 * ti_sim >= threshold:
                 too_close = True

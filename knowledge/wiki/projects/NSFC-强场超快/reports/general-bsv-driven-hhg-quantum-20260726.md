@@ -6,9 +6,9 @@ latest_round: 8
 last_score: 0.86
 critic_rounds: 11
 optimization_reports: 5
-status: "pending_review"
-created: "2026-08-15T09:15:39Z"
-updated: "2026-08-15T09:15:39Z"
+status: "optimizing"
+created: "2026-08-15T13:46:44Z"
+updated: "2026-08-15T13:46:44Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -19,7 +19,7 @@ confidence: 1.0
 **课题 ID**：`general-bsv-driven-hhg-quantum-20260726`
 **累计轮次**：8
 **当前分数**：0.86
-**状态**：待校验
+**状态**：优化中
 
 ---
 
@@ -37,35 +37,35 @@ confidence: 1.0
 
 | 轮次 | 报告 |
 |------|------|
-| 第 1 轮 | [optimization-report-round-1.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/optimization-report-round-1.md) |
-| 第 2 轮 | [optimization-report-round-2.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/optimization-report-round-2.md) |
-| 第 6 轮 | [optimization-report-round-6.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/optimization-report-round-6.md) |
-| 第 7 轮 | [optimization-report-round-7.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/optimization-report-round-7.md) |
-| 第 8 轮 | [optimization-report-round-8.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/optimization-report-round-8.md) |
+| 第 1 轮 | [optimization-report-round-1.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/optimization-report-round-1.md) |
+| 第 2 轮 | [optimization-report-round-2.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/optimization-report-round-2.md) |
+| 第 6 轮 | [optimization-report-round-6.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/optimization-report-round-6.md) |
+| 第 7 轮 | [optimization-report-round-7.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/optimization-report-round-7.md) |
+| 第 8 轮 | [optimization-report-round-8.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/optimization-report-round-8.md) |
 
 ## 对抗评审（共 11 轮）
 
 | 轮次 | 文件 |
 |------|------|
-| 第 1 轮 | [critic-round-1.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-1.md) |
-| 第 2 轮 | [critic-round-2.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-2.md) |
-| 第 3 轮 | [critic-round-3.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-3.md) |
-| 第 4 轮 | [critic-round-4.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-4.md) |
-| 第 4 轮 | [critic-round-4.overall-consistency.bak.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-4.overall-consistency.bak.md) |
-| 第 5 轮 | [critic-round-5.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-5.md) |
-| 第 6 轮 | [critic-round-6.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-6.md) |
-| 第 7 轮 | [critic-round-7.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-7.md) |
-| 第 8 轮 | [critic-round-8.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-8.md) |
-| 第 9 轮 | [critic-round-9.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-9.md) |
-| 第 10 轮 | [critic-round-10.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-10.md) |
+| 第 1 轮 | [critic-round-1.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-1.md) |
+| 第 2 轮 | [critic-round-2.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-2.md) |
+| 第 3 轮 | [critic-round-3.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-3.md) |
+| 第 4 轮 | [critic-round-4.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-4.md) |
+| 第 4 轮 | [critic-round-4.overall-consistency.bak.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-4.overall-consistency.bak.md) |
+| 第 5 轮 | [critic-round-5.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-5.md) |
+| 第 6 轮 | [critic-round-6.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-6.md) |
+| 第 7 轮 | [critic-round-7.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-7.md) |
+| 第 8 轮 | [critic-round-8.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-8.md) |
+| 第 9 轮 | [critic-round-9.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-9.md) |
+| 第 10 轮 | [critic-round-10.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-10.md) |
 
 ## 独立评审
 
-- [meta-review-round-5.md](research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/meta-review-round-5.md)
+- [meta-review-round-5.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/meta-review-round-5.md)
 
 ## 来源
 
-- 评审目录：`research_proposals/pending_review/general-bsv-driven-hhg-quantum-20260726/05_review/`
+- 评审目录：`research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/`
 - 最新版本：[versions/general-bsv-driven-hhg-quantum-20260726.md](versions/general-bsv-driven-hhg-quantum-20260726.md)
 
 > 本页由 `scripts/kb_proposal_reorg.py` 自动生成。

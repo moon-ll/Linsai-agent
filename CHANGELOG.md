@@ -1,5 +1,38 @@
 # 变更记录
 
+## v6.9.14 - 2026-08-15 输入链端到端实测收尾：GLM 主模型 + 知识簇聚类校准
+
+手动完整跑通输入链（collect→summarize→cluster_assign→cluster_distill
+→topic_match→compose 6 job），实测暴露并修复两处设计/实现问题，726/726
+全绿（周末时段工作日分支用例自动跳过，总数较工作日少）：
+
+- **GLM 主模型路由（用户指令）**：`llm_router.TASK_PROVIDER_PREFS` 新增
+  `weekend_input` 标签（glm, glm-fallback 队首），`input_jobs._llm_json`
+  默认 `prefer="weekend_input"`——summarize/cluster_distill/topic_match
+  三个 LLM 调用点统一走 glm-5.3。实测：30 篇摘要全量 `主模型=glm`
+  直连（单篇 10-25s），对比旧链 minimax 429→claude 超时→glm 兜底
+  单篇 130s+，全程零降级噪音。
+- **聚类相似度校准（P0，实测数据驱动）**：首轮 30/30 摘要全部挂
+  orphans、零簇形成——5 词论文特定关键词的集合太稀疏（435 对最高
+  Jaccard 0.161 < 成簇阈值 0.30），簇永远聚不成、输入链空转。三处
+  修复：① 摘要 prompt 关键词 5 个 → 10-15 个且强制含 2-4 个领域级
+  标签（固态高次谐波/强场物理/阿秒动力学等，制造共享词表）②
+  `clusters.py` 关键词分量 Jaccard → overlap 系数（|∩|/min，短集合
+  语义"核心词是否落入簇核心"），标题分量保持 Jaccard ③ 关键词
+  归一化 `norm_keyword`（"高次谐波产生 (HHG)" ≡ "高次谐波产生"，
+  实测 4/181 关键词带括注后缀），摄取（`_coerce_summary_data`）与
+  合并（`_merge_keywords`）双侧生效。实测重跑：30 篇 → 2 个真实
+  主题簇（偶次谐波×Weyl 节点对称性破缺 / HHG 全量子描述，2+5
+  成员）→ 2 条路由（expansion 补充信息源挂载 + merge 课题内容
+  句级去重注入）→ 双簇 linked，剩余 40 orphans 留待跨周积累。
+- **registration.py 缺 `import re`（P1）**：compose 的 merge 路由在
+  `_sentence_similarity` 处 NameError 中断；既有测试目标课题文件为
+  空、早退于去重路径之前未覆盖。补导入 + 新增带已有内容课题的
+  enrich 回归（重复注入去重为一次）。
+- **测试**：test_input_clustering.py 新增 4 用例（关键词归一化/稀疏
+  overlap 成簇/enrich 崩溃回归/GLM 路由透传——后者随 v6.9.13 GLM
+  改动并入本版提交），套件 55/55。
+
 ## v6.9.13 - 2026-08-15 体检修复：输入端知识簇链路四处阻断点 + 熔断口径
 
 20h 例行体检发现 v6.9.12 知识簇链路重构后四处阻断（其中两处

@@ -130,6 +130,12 @@ def _detect_cli_providers() -> List[Dict[str, Any]]:
 TASK_PROVIDER_PREFS: Dict[str, Tuple[str, ...]] = {
     # 任务标签 → 优先尝试的 provider 名（按序）
     "governance": ("glm", "glm-fallback"),
+    # v6.9.14: 周末输入端知识簇链路（summarize/cluster_distill/
+    # topic_match 仲裁）主模型改走 GLM 最新（glm-5.3）。该任务重
+    # 判断与结构化输出（知识卡/路由决策），GLM 5.3 规范遵循更稳；
+    # 且 MiniMax Token Plan 月末限额期（429）不再阻塞输入端整链。
+    # 失败仍回落全局链（minimax → kimi-coding …），无新增失败面。
+    "weekend_input": ("glm", "glm-fallback"),
 }
 
 

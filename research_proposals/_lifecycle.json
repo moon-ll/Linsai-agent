@@ -6759,13 +6759,13 @@
       ]
     },
     "general-bsv-driven-hhg-quantum-20260726": {
-      "status": "pending_review",
+      "status": "optimizing",
       "project_type": "general",
       "source": "expansion",
       "source_detail": "候选4：量子光场驱动的HHG，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-12T21:16:28Z",
-      "optimization_rounds": 8,
+      "updated_at": "2026-08-15T09:31:44Z",
+      "optimization_rounds": 0,
       "last_score": 0.86,
       "score_history": [
         {
@@ -7199,7 +7199,7 @@
           "at": "2026-08-12T21:10:09Z"
         }
       ],
-      "human_feedback_count": 2,
+      "human_feedback_count": 3,
       "transition_history": [
         {
           "to": "drafts",
@@ -7256,6 +7256,12 @@
           "to": "pending_review",
           "at": "2026-08-12T21:16:28Z",
           "reason": "达到最大轮数8（已通过2/5模块）"
+        },
+        {
+          "from": "pending_review",
+          "to": "optimizing",
+          "at": "2026-08-15T09:31:44Z",
+          "reason": "人工审核退回(major_revision)，携带结构化意见"
         }
       ],
       "assigned_agent": "writer+critic",
@@ -7439,12 +7445,8 @@
       "last_monitor_at": "2026-08-12T21:16:28Z",
       "last_monitor_score": 0.86,
       "last_monitor_assessment": "本轮 writer-critic 对抗聚焦'参考文献专项'，critic 评审专业严谨，问题定位精准（[27] 死文献 / D 表错位 / 数量超限 / 时效偏差）。writer 在 references.md 域做了大量高质量元信息工作（可靠性分级、修复记录、闭环证据索引、新增 4 条 2025 关键文献挂钩），但绕开了 critic 在内容层的核心诉求：(1) 正文三段式（rationale.md / content.md / scheme.md）与 r7 完全一致，零修改——critic round-8 的 [high] cutoff 律错误仍未修复；(2) [27] 死文献问题虽被 c",
-      "initialized_at": "2026-07-31T04:13:29Z",
-      "missing_sections": [
-        "innovation",
-        "plan",
-        "references"
-      ],
+      "initialized_at": "2026-08-15T09:31:44Z",
+      "missing_sections": [],
       "pipeline_jobs": [
         {
           "job_id": "general-bsv-driven-hhg-quantum-20260726-r7-rationale-critic",
@@ -10414,5 +10416,5 @@
       ]
     }
   },
-  "updated_at": "2026-08-14T22:00:47Z"
+  "updated_at": "2026-08-15T09:31:44Z"
 }

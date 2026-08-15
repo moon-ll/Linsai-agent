@@ -1,0 +1,14 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "cluster_id": "cl_20260815_51db8c",
+  "entries": [
+    {
+      "source_id": "paper:2024-2405.16125-impact-of-crystal-symmetries-and-weyl-nodes-on-high-harmonic",
+      "title": "Impact of crystal symmetries and Weyl nodes on high-harmonic generation in Weyl semimetal TaAs",
+      "summary": "本文发展了Jones矩阵分析框架，系统解析Weyl半金属TaAs中晶体对称性与Weyl节点对高次谐波产生（HHG）偏振特性的调制作用。由此建立的谐波选择定则为拓扑材料的非线性光学响应提供了普适理论，有望通过HHG实验探测Weyl节点的拓扑信息。",
+      "path": "knowledge/raw/papers/2024-2405.16125-impact-of-crystal-symmetries-and-weyl-nodes-on-high-harmonic.md",
+      "added_via": "cluster:cl_20260815_51db8c",
+      "added_at": "2026-08-15T13:47:29Z"
+    }
+  ]
+}

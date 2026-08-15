@@ -41,11 +41,17 @@ def _read_text(path: Path, max_chars: int = 8000) -> str:
         return ""
 
 
-def _llm_json(system: str, user: str, timeout: int = 120) -> Any:
-    """调用 LLM 并解析 JSON。"""
+def _llm_json(system: str, user: str, timeout: int = 120, prefer: str = "weekend_input") -> Any:
+    """调用 LLM 并解析 JSON。
+
+    v6.9.14: 默认 prefer="weekend_input"——本模块三个 LLM 调用点
+    （summarize 摘要 / cluster_distill 知识卡 / topic_match 仲裁）
+    统一走 GLM 最新（glm-5.3）为主模型，失败回落全局链。调用方
+    可显式传 prefer=None 恢复全局策略。
+    """
     if not is_llm_available():
         return None
-    ok, text, meta = llm_complete(system, user, timeout=timeout)
+    ok, text, meta = llm_complete(system, user, timeout=timeout, prefer=prefer)
     if not ok:
         if _log:
             _log.warning(f"LLM 调用失败: {meta.get('error', 'unknown')}")
@@ -127,8 +133,20 @@ def _coerce_summary_data(data: Any, paper: Dict[str, Any]) -> Optional[Dict[str,
     data["source_id"] = paper.get("source_id", "")
     data["path"] = paper.get("path", "")
     data["tier"] = paper.get("tier", 2)
-    if not data.get("keywords"):
-        data["keywords"] = []
+    # v6.9.14: 关键词摄取归一化——去尾部括注（"高次谐波产生 (HHG)" →
+    # "高次谐波产生"）、去空、去重、截断到 15。同义不同形会让聚类
+    # 集合成员永不相等（08-15 实测 4 个/181 个关键词带括注后缀）。
+    from .clusters import norm_keyword
+    kws: list = []
+    seen: set = set()
+    for kw in (data.get("keywords") or [])[:20]:
+        nk = norm_keyword(kw)
+        if nk and nk not in seen:
+            kws.append(nk)
+            seen.add(nk)
+        if len(kws) >= 15:
+            break
+    data["keywords"] = kws
     return data
 
 
@@ -158,13 +176,26 @@ def run_input_summarize(state: Dict[str, Any], job: Dict[str, Any], dry_run: boo
 
     summaries = []
     system = "你是林赛，擅长对学术文献做一句话核心摘要。输出合法 JSON 对象。"
+    # v6.9.14: 关键词要求 5 个 → 10-15 个且强制含 2-4 个领域级标签。
+    # 08-15 实测：5 个论文特定关键词的集合太稀疏（30 篇中仅 2 对共享
+    # ≥2 词，435 对最高 Jaccard 0.161），聚类的共享词表必须由领域级
+    # 标签（如 固态高次谐波/强场物理/二维材料/阿秒动力学）提供。
+    kw_spec = (
+        "。其中 keywords 为 10-15 个关键词：2-4 个领域级标签"
+        "（如：固态高次谐波、强场物理、非线性光学、二维材料、阿秒动力学、"
+        "拓扑材料、量子光学 等，标注本文所属大方向），其余为本文具体贡献关键词"
+    )
     # v6.9.11: 单次容量 10 → 30。每篇 LLM timeout 60s，最坏 30×60=1800s，
     # 在 weekend job stale 阈值（STALE_RUNNING_SECONDS=3600）内安全。
     # 旧值 10 配合每周一跑，消化能力 ~10 条/周 < 稳态新料增速，且补课
     # 积压（92 条）需 9 周才能清完。
     failed_llm = 0
     for p in papers[:30]:
-        user = f"请用 1-2 句话总结以下文献的核心贡献：\n\n标题：{p.get('title', '')}\n内容：{p.get('text', '')[:1200]}\n\n输出 JSON：{{\"title\": \"...\", \"summary\": \"...\", \"keywords\": [\"...\"]}}"
+        user = (
+            f"请用 1-2 句话总结以下文献的核心贡献：\n\n"
+            f"标题：{p.get('title', '')}\n内容：{p.get('text', '')[:1200]}\n\n"
+            f"输出 JSON：{{\"title\": \"...\", \"summary\": \"...\", \"keywords\": [\"...\"]}}{kw_spec}。"
+        )
         data = _llm_json(system, user, timeout=60)
         normalized = _coerce_summary_data(data, p) if data else None
         if normalized is not None:

@@ -319,9 +319,12 @@ class InputClusteringTests(TestSuite):
     def _test_summarize_llm_failure_not_silent(self):
         """有新料但 LLM 全挂 → success=False 且不标记已处理（防空转 done）。"""
         from weekend_pipeline import input_jobs, sources as src_mod
-        from weekend_pipeline.state import mark_source_processed
 
         # 伪造 collect：2 篇新料
+        orig = (src_mod.collect_paper_pool, src_mod.collect_briefings,
+                src_mod.collect_captures, src_mod.collect_reference_notes,
+                src_mod.collect_kb_concepts_and_methods,
+                input_jobs.is_llm_available, input_jobs._llm_json)
         src_mod.collect_paper_pool = lambda limit=20, state=None: [
             {"source_id": "paper:p1", "type": "paper", "text": "论文一", "tier": 1},
             {"source_id": "paper:p2", "type": "paper", "text": "论文二", "tier": 1},
@@ -335,13 +338,176 @@ class InputClusteringTests(TestSuite):
         input_jobs.is_llm_available = lambda: True
         input_jobs._llm_json = lambda system, user, timeout=120: None
 
-        state = {"processed_sources": {}}
-        result = input_jobs.run_input_summarize(state=state, job={})
+        try:
+            state = {"processed_sources": {}}
+            result = input_jobs.run_input_summarize(state=state, job={})
 
-        self.assert_true(not result.get("success"), "LLM 全挂应返回 success=False")
-        self.assert_true(
-            not any(sid.startswith("paper:") for sid in state["processed_sources"]),
-            "失败来源不得标记已处理（保数据待重试）",
+            self.assert_true(not result.get("success"), "LLM 全挂应返回 success=False")
+            self.assert_true(
+                not any(sid.startswith("paper:") for sid in state["processed_sources"]),
+                "失败来源不得标记已处理（保数据待重试）",
+            )
+        finally:
+            (src_mod.collect_paper_pool, src_mod.collect_briefings,
+             src_mod.collect_captures, src_mod.collect_reference_notes,
+             src_mod.collect_kb_concepts_and_methods,
+             input_jobs.is_llm_available, input_jobs._llm_json) = orig
+
+    # ------------------------------------------------------------------
+    # v6.9.14: GLM 主模型路由（weekend_input 任务标签）
+    # ------------------------------------------------------------------
+
+    def _test_weekend_input_prefers_glm(self):
+        """weekend_input 标签应把 glm/glm-fallback 提到队首，其余顺序不变。"""
+        import llm_router
+
+        prefs = llm_router.TASK_PROVIDER_PREFS
+        self.assert_eq(
+            prefs.get("weekend_input"), ("glm", "glm-fallback"),
+            "weekend_input 标签应注册 GLM 偏好",
+        )
+
+        # 模拟全局优先级链：minimax(1) → minimax-fallback(2) → glm(3) → glm-fallback(4)
+        chain = [
+            llm_router.LLMProvider({"name": "minimax", "type": "api", "priority": 1,
+                                    "base_url": "http://x", "api_key": "k", "model": "m"}),
+            llm_router.LLMProvider({"name": "minimax-fallback", "type": "api", "priority": 2,
+                                    "base_url": "http://x", "api_key": "k", "model": "m"}),
+            llm_router.LLMProvider({"name": "glm", "type": "api", "priority": 3,
+                                    "base_url": "http://x", "api_key": "k", "model": "glm-5.3"}),
+            llm_router.LLMProvider({"name": "glm-fallback", "type": "api", "priority": 4,
+                                    "base_url": "http://x", "api_key": "k", "model": "glm-5.2"}),
+        ]
+        ordered = llm_router._apply_task_preference(list(chain), "weekend_input")
+        self.assert_eq(ordered[0].name, "glm", "weekend_input 主模型应为 glm")
+        self.assert_eq(
+            [p.name for p in ordered], ["glm", "minimax", "minimax-fallback", "glm-fallback"],
+            "偏好重排应保持其余相对顺序（稳定排序）",
+        )
+        # 未注册标签原样返回
+        self.assert_eq(
+            [p.name for p in llm_router._apply_task_preference(list(chain), "no-such-tag")],
+            [p.name for p in chain],
+            "未注册标签不应改变顺序",
+        )
+
+    def _test_llm_json_passes_prefer_tag(self):
+        """_llm_json 默认传 prefer=weekend_input；显式 None 恢复全局策略。"""
+        from weekend_pipeline import input_jobs
+
+        captured = {}
+        orig = (input_jobs.is_llm_available, input_jobs.llm_complete)
+
+        def fake_llm_complete(system, user, timeout=60, prefer=None):
+            captured["prefer"] = prefer
+            return True, '{"ok": 1}', {}
+
+        input_jobs.is_llm_available = lambda: True
+        input_jobs.llm_complete = fake_llm_complete
+
+        try:
+            input_jobs._llm_json("s", "u")
+            self.assert_eq(captured.get("prefer"), "weekend_input", "默认应传 weekend_input 标签")
+
+            input_jobs._llm_json("s", "u", prefer=None)
+            self.assert_true(captured.get("prefer") is None, "显式 None 应恢复全局策略")
+        finally:
+            (input_jobs.is_llm_available, input_jobs.llm_complete) = orig
+
+    # ------------------------------------------------------------------
+    # v6.9.14: 关键词归一化 + overlap 相似度（聚类稀疏词表校准）
+    # ------------------------------------------------------------------
+
+    def _test_keyword_normalization(self):
+        """括注同义词应归一为同一集合成员；摄取时去重截断。"""
+        from weekend_pipeline.clusters import norm_keyword, kw_set
+        from weekend_pipeline import input_jobs
+
+        self.assert_eq(norm_keyword("高次谐波产生 (HHG)"), "高次谐波产生", "英文括注应剥离")
+        self.assert_eq(norm_keyword("二次谐波产生（SHG）"), "二次谐波产生", "中文括注应剥离")
+        self.assert_eq(norm_keyword("  Berry Phase "), "berry phase", "应去空白转小写")
+        self.assert_eq(
+            len(kw_set(["高次谐波产生", "高次谐波产生 (HHG)", "强场物理"])),
+            2, "同义不同形应去重为 2 个",
+        )
+
+        # 摄取归一化：_coerce_summary_data 应清洗 LLM 输出的关键词
+        paper = {"source_id": "paper:n1", "title": "t", "path": "p", "tier": 1}
+        data = input_jobs._coerce_summary_data(
+            {"title": "t", "summary": "s",
+             "keywords": ["高次谐波产生 (HHG)", "高次谐波产生", "强场物理", ""]},
+            paper,
+        )
+        self.assert_eq(data["keywords"], ["高次谐波产生", "强场物理"], "摄取关键词应归一去空去重")
+
+    def _test_sparse_overlap_forms_cluster(self):
+        """稀疏关键词（共享 2/5）在 overlap 口径下成簇，Jaccard 口径不成。
+
+        08-15 实测标定：5 词关键词摘要 435 对最高 Jaccard 0.161 < 0.30
+        成簇阈值，簇零形成。overlap（|∩|/min）对短集合公平——本用例
+        共享 2 个核心词 + 标题共享 2 token，组合分应过 0.30。
+        """
+        from weekend_pipeline import clusters as cl
+
+        # Jaccard 口径：2/8 并集 * 0.7 + 标题 2/6 * 0.3 = 0.275 < 0.30
+        # overlap 口径：2/5 较小集 * 0.7 + 标题 0.333 * 0.3 ≈ 0.38 ≥ 0.30
+        registry = {"clusters": [], "orphans": []}
+        cl.assign_summaries([
+            self._mk_summary(
+                "paper:a", "high harmonic generation solids",
+                ["固态高次谐波", "强场物理", "偶次谐波", "反演对称性破缺", "非平衡稳态"]),
+            self._mk_summary(
+                "paper:b", "harmonic generation solid state",
+                ["固态高次谐波", "强场物理", "晶体对称性", "weyl 节点", "berry 相位"]),
+        ], registry)
+        self.assert_eq(len(registry["orphans"]), 2, "两篇均应先挂 orphans")
+        formed = cl.form_new_clusters(registry)
+        self.assert_eq(len(formed), 1, "共享 2 核心词+领域标签应成簇（overlap 口径）")
+        if formed:
+            self.assert_true(
+                {"固态高次谐波", "强场物理"}.issubset(set(formed[0]["keywords"])),
+                "簇关键词应含归一化后的共享领域词",
+            )
+
+    def _test_enrich_appends_without_crash(self):
+        """enrich_from_idea 对已有内容的课题不崩溃（registration re 导入回归）。
+
+        08-15 实测：registration.py 使用 re 未导入，compose 的 merge 路由
+        落地时在 _sentence_similarity 处 NameError 中断。此前测试的目标
+        课题文件均为空/不存在，早退于去重路径之前，未覆盖该分支。
+        """
+        from proposal_lifecycle import ProposalLifecycle
+
+        self._seed_lifecycle({
+            "general-live-20260101": {"status": "optimizing",
+                "title": "quantum hhg theory", "text": "quantum description high harmonic"},
+        })
+        prop_dir = self.tmp_root / "research_proposals" / "optimizing" / "general-live-20260101"
+        (prop_dir / "01_direction").mkdir(parents=True, exist_ok=True)
+        (prop_dir / "01_direction" / "direction-calibration.md").write_text(
+            "# 方向校准\n\n已有研究背景句子超过十个字符长度，用于触发句子相似度计算路径。\n",
+            encoding="utf-8",
+        )
+
+        lc = ProposalLifecycle()
+        idea = {
+            "title": "全量子 HHG 描述",
+            "background": "全新背景内容：高次谐波产生的全量子理论描述甲乙丙丁。",
+            "gap": "电子离子辐射场纠缠的测量诱导效应尚缺统一刻画。",
+            "content": ["纠缠动力学刻画", "测量诱导退相干"],
+            "innovations": ["全量子三步模型"],
+            "sources": [],
+            "reliability": "derived",
+        }
+        result = lc.enrich_from_idea("general-live-20260101", idea)
+        self.assert_true(result.get("success"), "enrich 应成功", str(result))
+
+        # 重复注入同一 idea → 句级去重生效，仍成功且不重复追加
+        again = lc.enrich_from_idea("general-live-20260101", idea)
+        self.assert_true(again.get("success"), "重复 enrich 应成功", str(again))
+        content = (prop_dir / "01_direction" / "direction-calibration.md").read_text(encoding="utf-8")
+        self.assert_eq(
+            content.count("周末输入补充"), 1, "同 idea 重复注入应去重为一次",
         )
 
     def run_tests(self):
@@ -355,3 +521,8 @@ class InputClusteringTests(TestSuite):
         self._test_topic_match_all_stages()
         self._test_job_template_chain()
         self._test_summarize_llm_failure_not_silent()
+        self._test_weekend_input_prefers_glm()
+        self._test_llm_json_passes_prefer_tag()
+        self._test_keyword_normalization()
+        self._test_sparse_overlap_forms_cluster()
+        self._test_enrich_appends_without_crash()

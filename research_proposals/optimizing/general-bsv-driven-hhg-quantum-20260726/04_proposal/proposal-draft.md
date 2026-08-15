@@ -635,3 +635,27 @@ DOI 补全后，已正式发表的 25 条文献（A 级）100% 列出 DOI。
 ---
 
 *本节由 writer 在 round-9 评审后（2026-08-13）核校，闭环 18 项 round-9 问题中的 16 项 references.md 域可处置项，2 项需正文域协同的项目（M-9.8 / L-9.16 / C-9.1）按 NSFC 标准"严禁未经核实内容"硬约束与"宁缺勿滥"引用纪律处置。*
+
+## 周末输入补充（2026-08-15）
+
+### 拟开展研究内容
+- paper:2026-2606.22714-emergence-of-gaussian-entanglement-and-non-gaussianity-in-hi
+- paper:2025-2504.13287-theory-of-quantum-optics-and-optical-coherence-in-high-harmo
+- paper:2022-2203.04354-theory-of-entanglement-and-measurement-in-high-harmonic-gene
+- paper:2024-2406.13109-photon-statistics-from-non-hermitian-floquet-theory-high-har
+- paper:2025-2503.02469-theory-of-photocurrent-and-high-harmonic-generation-with-chi
+
+### 创新点
+- 如何在实验上直接测量HHG谐波光场的光子统计与量子纠缠？红外探测器和电离电子检测方案的可行性与精度如何？
+- 压缩光等非经典驱动场能否实现对HHG谐波量子态（非高斯性、纠缠度）的主动调控乃至量子增强的阿秒光源？
+- 全量子HHG描述中电子-离子-光场多体纠缠的微观动力学机制是什么，测量反作用与退相干能否被定量预测和利用？
+- 非厄米Floquet等量子-经典对应方法的适用边界在哪里？在多电子体系与固态环境中是否依然成立？
+- 手性拓扑材料（如B20型半金属）中的固态HHG能否承载非经典光态，并实现具有圆二色性的量子非线性光学效应？
+- 半经典三步模型的量子化修正何时不可忽略，非经典驱动场与固体能带结构对谐波量子特性的联合影响如何刻画？
+
+### 来源
+- [weekend_cluster] Theory of quantum optics and optical coherence in high harmonic generation
+- [weekend_cluster] Theory of entanglement and measurement in high harmonic generation
+- [weekend_cluster] Photon Statistics from Non-Hermitian Floquet Theory: High Harmonic Generation and Above-Threshold Ionization Spectra Detected via IR Detectors
+- [weekend_cluster] Theory of Photocurrent and High-Harmonic Generation with Chiral Fermions
+
