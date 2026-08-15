@@ -94,6 +94,155 @@ CMD_AUTO_LOCK_PATH = MEMORY_DIR / ".prompt-optimizer-auto.lock"
 # v6.8.24: applied/failed 建议保留天数。超过此天数的非 pending 建议将被清理。
 SUGGESTION_RETENTION_DAYS = 7
 
+# ─────────────────────────────────────────────
+# v6.9.9: 范本守门 + 自动段回收
+# ─────────────────────────────────────────────
+
+# 自动追加段在 SOUL.md 中的标记格式（回收机制的定位锚点）。
+# pattern_re 直接嵌入标记（回源自包含，不依赖 suggestions.json——
+# 后者只保留 7 天，而回收窗口 14 天）
+AUTO_TAG_START = "<!--auto-opt:start:{sid}:{ts}:{pat}-->"
+AUTO_TAG_END = "<!--auto-opt:end:{sid}-->"
+AUTO_TAG_RE = re.compile(
+    r"\n?<!--auto-opt:start:([^:]+):([0-9TZ:.-]+):([^>]*)-->\n(.*?)\n?<!--auto-opt:end:\1-->\n?",
+    re.S,
+)
+
+# 自动段回收保留期（天）：超期且对应问题未再出现的段落将被删除
+AUTO_SECTION_RETENTION_DAYS = 14
+
+# 范本守门规则：拦截与范本实测口径冲突的量化指令。
+# 依据 references/nsfc-templates/ 实测（2026-08-15 校准）：
+# - 范本总正文约 2.5-3 万字符，立项依据 5000-8000 字 → 总字数下限指令 < 10000 字
+#   会把申请书往小拉（历史实例：prompt_optimizer 曾追加"总字数≥4000字"）
+# - 参考文献范本实测 30-40 篇 → 篇数区间上限 < 25 或下限 < 15 与范本冲突
+#   （历史实例：critic 运行时曾要求"15-30 篇"）
+# - 评分体系由运行时 prompt（四维 + 天花板）统一约束，SOUL 层引入绝对分值
+#   会造成双口径（历史实例："占位符给 0.10"）
+BENCHMARK_GUARD_RULES = [
+    (
+        re.compile(r"(?:总字数|全文|正文总)[^\n]{0,12}(?:≥|>=|至少|不少于|不低于)?\s*(?<!\d)(\d{3,6})\s*字"),
+        lambda m: int(m.group(1)) < 10000,
+        "总字数下限低于 10000 字，与范本体量（2.5-3 万字符）冲突，会把申请书往小拉",
+    ),
+    (
+        re.compile(r"每(?:个)?章节[^\n]{0,10}(?:≥|>=|至少|不少于|不低于)?\s*(?<!\d)(\d{3,6})\s*字"),
+        lambda m: int(m.group(1)) < 3000,
+        "章节字数下限低于 3000 字，低于范本最短章节体量（研究内容 3000-5000 字）",
+    ),
+    (
+        re.compile(r"(?<!\d)(\d{1,3})\s*[-–~到至]\s*(\d{1,3})\s*篇"),
+        lambda m: int(m.group(1)) < 30 and int(m.group(2)) <= 30,
+        "参考文献篇数区间整体低于范本实测（30-40 篇），会把文献支撑往低压",
+    ),
+    (
+        re.compile(r"(?:给|评|打)\s*0\.\d{1,2}\s*(?:分|而非)"),
+        lambda m: True,
+        "SOUL 层引入绝对评分魔法数，与运行时四维评分+天花板机制形成双口径",
+    ),
+]
+
+
+def _benchmark_conflict_guard(suggestion: Dict) -> Optional[str]:
+    """v6.9.9: 范本守门——拦截与范本实测口径冲突的建议内容。
+
+    Returns:
+        None 表示通过；str 为拒绝原因（写入 suggestion["guard_reason"]，
+        status 置为 rejected_guard，不会追加到 SOUL.md）。
+    """
+    content = suggestion.get("content", "")
+    for pattern, conflict_if, reason in BENCHMARK_GUARD_RULES:
+        m = pattern.search(content)
+        if m and conflict_if(m):
+            return reason
+    return None
+
+
+def _wrap_auto_section(text: str, sid: str, pat: str = "-") -> str:
+    """v6.9.9: 给自动追加段包裹定位标记注释（回收机制的锚点）。
+
+    标记格式: <!--auto-opt:start:{sid}:{ts}:{pat}--> ... <!--auto-opt:end:{sid}-->
+    pat 为问题模式的正则（agent_score_analysis 来源），回收时用于判断问题
+    是否复现；其他来源填 "-"（永不自动回收，人工审阅）。
+    老版本（v6.9.9 前）追加的段落无标记，不在回收范围内（由人工清理）。
+    """
+    ts = _now_utc()
+    return f"\n{AUTO_TAG_START.format(sid=sid, ts=ts, pat=pat)}\n{text.rstrip()}\n{AUTO_TAG_END.format(sid=sid)}\n"
+
+
+def _reap_stale_auto_sections(score_reasons: List[Dict]) -> int:
+    """v6.9.9: 回收过期的自动追加段——让 SOUL.md "有增有减"。
+
+    回收条件（同时满足）：
+    1. 段龄超过 AUTO_SECTION_RETENTION_DAYS（14 天）
+    2. 标记内嵌的 pattern_re 非 "-"（agent_score_analysis 来源），且对应
+       问题模式在近期 score_reasons 中零命中（问题已消失，约束不再必要）
+
+    其他来源（failure_analyzer / debug_journal）的段不自动回收——无法可靠
+    判断问题是否复现，保留待人工审阅。回收前自动备份到
+    prompt-backups/reap-{profile}-{file}-{ts}.bak。
+
+    Returns: 回收的段数。
+    """
+    reaped = 0
+    try:
+        from datetime import timedelta
+        cutoff = datetime.now(timezone.utc) - timedelta(days=AUTO_SECTION_RETENTION_DAYS)
+        cutoff_str = cutoff.strftime("%Y-%m-%dT%H:%M:%SZ")
+    except Exception:
+        return 0
+
+    recent_reasons = [
+        r.get("reason", "") for r in (score_reasons or [])[:100]
+    ]
+
+    prompt_files = _discover_prompt_files()
+    backup_tracker: Dict[str, int] = {}
+
+    for profile, files in prompt_files.items():
+        for f in files:
+            try:
+                content = f.read_text(encoding="utf-8")
+            except Exception:
+                continue
+
+            changed = False
+            matches = list(AUTO_TAG_RE.finditer(content))
+            for m in matches:
+                sid, ts, pat_re = m.group(1), m.group(2), m.group(3)
+                if ts >= cutoff_str:
+                    continue  # 未过保留期
+                if not pat_re or pat_re == "-":
+                    continue  # 非 score_analysis 来源，不自动回收
+                try:
+                    if any(re.search(pat_re, r, re.IGNORECASE) for r in recent_reasons):
+                        continue  # 问题仍在复现，约束保留
+                except re.error:
+                    continue
+                content = content.replace(m.group(0), "\n")
+                changed = True
+                reaped += 1
+
+            if changed:
+                key = str(f)
+                if backup_tracker.get(key, 0) < 1:
+                    BACKUPS_DIR.mkdir(parents=True, exist_ok=True)
+                    try:
+                        shutil.copy2(key, str(BACKUPS_DIR / f"reap-{f.parent.name}-{f.name}-{_now_ts_safe()}.bak"))
+                        backup_tracker[key] = 1
+                    except Exception:
+                        pass
+                try:
+                    f.write_text(content.rstrip() + "\n", encoding="utf-8")
+                except Exception as e:
+                    print(f"  ⚠ 回收写入失败 {f}: {e}")
+                    reaped -= 1
+    return reaped
+
+
+def _now_ts_safe() -> str:
+    return datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+
 
 def _cleanup_old_suggestions() -> int:
     """v6.8.24: 清理超过保留期的 applied/failed 建议，防止 prompt-suggestions.json 无限膨胀。
@@ -377,46 +526,72 @@ def _generate_suggestion_id() -> str:
 
 
 def _analyze_reasons_for_prompt_hints(reasons: List[Dict]) -> List[Dict]:
-    """从 agent 分数原因中提取 prompt 相关的改进建议。"""
+    """从 agent 分数原因中提取 prompt 相关的改进建议。
+
+    v6.9.9: 每条模式新增 instruction 字段——追加到 SOUL.md 的文字必须是
+    可执行指令（agent 读到即知道怎么做），而非"需在 prompt 中要求…"式
+    元描述（那是写给系统管理员看的，agent 无法执行）。
+    """
     suggestions = []
 
-    # 常见问题模式关键词
+    # 常见问题模式关键词: (正则, 目标profile, 优先级, 诊断描述, 指令式文案)
     writer_patterns = [
         (r"零修改|完全未执行|逐字节相同|MD5.*一致|无实质性", "writer", "high",
-         "writer 提交与上一轮相同的文件，需在 prompt 中强化'必须基于 critic 建议做实质性修改'的指令"),
+         "writer 提交与上一轮相同的文件，需强化'必须基于 critic 建议做实质性修改'的指令",
+         "逐条核对评审报告的每个问题并逐一修改，在输出末尾给出'问题→修改对照'清单；"
+         "未修改的问题必须说明原因。禁止原样提交上一轮文件或仅做表面增删。"),
         (r"表面修改|仅删除|仅增加.*分隔线|未实质回应", "writer", "medium",
-         "writer 仅做表面修改，需在 prompt 中要求逐条回应 critic 的每个问题"),
+         "writer 仅做表面修改，需在 prompt 中要求逐条回应 critic 的每个问题",
+         "对评审报告的每条问题给出明确的处理结论（已修改/未修改及原因），"
+         "修改处须引用修改后的原句，让修改可被核对。"),
         (r"占位符|待.*核验|TBD", "writer", "high",
-         "writer 输出中残留占位符/TBD，需在 prompt 中明确禁止提交含占位符的内容"),
+         "writer 输出中残留占位符/TBD，需在 prompt 中明确禁止提交含占位符的内容",
+         "提交前全文检索'待补充/TBD/待核验/XXX'，命中处一律改写为不依赖该信息的"
+         "完整表述，或标注'需要 researcher 补充'并给出替代论证。"),
         (r"AI生成痕迹|优化记录|元信息", "writer", "high",
-         "writer 输出中残留 AI 工作流元信息，需在 prompt 中要求清理所有迭代痕迹"),
+         "writer 输出中残留 AI 工作流元信息，需在 prompt 中要求清理所有迭代痕迹",
+         "提交的 .md 文件只包含申请书内容本身；删除迭代记录、优化说明、审稿对话、"
+         "元信息等一切工作流痕迹后再写盘。"),
     ]
 
     critic_patterns = [
         (r"事实错误|事实核查.*失职|基于错误.*前提", "critic", "high",
-         "critic 评审基于错误的事实前提，需在 prompt 中强化'先核实文件状态再下结论'"),
+         "critic 评审基于错误的事实前提，需在 prompt 中强化'先核实文件状态再下结论'",
+         "评审前必须实际读取申请书当前文件内容，禁止基于记忆或上一轮印象下结论；"
+         "每条问题给出章节与段落定位。"),
         (r"过时的文件|文件系统快照", "critic", "medium",
-         "critic 使用过时的文件状态信息，需在 prompt 中要求重新读取最新文件"),
+         "critic 使用过时的文件状态信息，需在 prompt 中要求重新读取最新文件",
+         "开始评审前重新读取全部待审文件，确保引用的原文与当前文件一致。"),
         (r"评分.*不一致|综合分.*自报.*不匹配", "critic", "medium",
-         "critic 报告内评分不一致，需在 prompt 中明确评分公式的自洽性要求"),
+         "critic 报告内评分不一致，需在 prompt 中明确评分公式的自洽性要求",
+         "综合评分必须等于各维度分按项目类型权重的加权平均，误差不超过 0.02；"
+         "提交报告前复核维度分、问题数、综合分三者自洽。"),
     ]
 
     # v6.8.24: 新增 researcher/analyst/reviewer 的模式
     researcher_patterns = [
         (r"超时|timeout|agent loop.*超时", "researcher", "medium",
-         "researcher agent loop 频繁超时，需在 prompt 中精简检索策略或限制搜索深度"),
+         "researcher agent loop 频繁超时，需在 prompt 中精简检索策略或限制搜索深度",
+         "单次检索控制在 3 轮以内，优先使用聚合检索（search_academic），"
+         "避免逐库遍历导致超时。"),
         (r"文献.*缺失|检索.*失败|无结果", "researcher", "medium",
-         "researcher 文献检索结果不足，需在 prompt 中强化关键词组合策略和数据库覆盖"),
+         "researcher 文献检索结果不足，需在 prompt 中强化关键词组合策略和数据库覆盖",
+         "检索时组合使用领域术语与具体材料/方法名（如'高次谐波+掺杂半导体'），"
+         "单一关键词无结果时换同义术语重试一次。"),
     ]
 
     analyst_patterns = [
         (r"分析.*空|gap.*识别.*失败|缺口.*未发现", "analyst", "medium",
-         "analyst 文献缺口识别能力不足，需在 prompt 中强化对比分析框架"),
+         "analyst 文献缺口识别能力不足，需在 prompt 中强化对比分析框架",
+         "缺口分析按'已知→未知→本课题切入'三段展开，每个缺口须引用具体文献"
+         "支撑'已知'部分。"),
     ]
 
     reviewer_patterns = [
         (r"串通|collusion|虚高|过度宽松", "reviewer", "high",
-         "reviewer monitor 检测到 writer-critic 串通风险，需强化独立判断指令"),
+         "reviewer monitor 检测到 writer-critic 串通风险，需强化独立判断指令",
+         "独立形成判断后再看 critic 报告；评分依据必须引用申请书原文与评分档位，"
+         "不得复述 critic 的结论。"),
     ]
 
     all_patterns = writer_patterns + critic_patterns + researcher_patterns + analyst_patterns + reviewer_patterns
@@ -426,7 +601,7 @@ def _analyze_reasons_for_prompt_hints(reasons: List[Dict]) -> List[Dict]:
         reason_text = r.get("reason", "")
         agent = r.get("agent", "")
 
-        for pattern, target, priority, description in all_patterns:
+        for pattern, target, priority, description, instruction in all_patterns:
             if re.search(pattern, reason_text, re.IGNORECASE):
                 key = f"{target}:{description[:50]}"
                 matched_patterns[key] += 1
@@ -435,6 +610,8 @@ def _analyze_reasons_for_prompt_hints(reasons: List[Dict]) -> List[Dict]:
                     suggestions.append({
                         "source": "agent_score_analysis",
                         "pattern_key": key,
+                        "pattern_re": pattern,
+                        "instruction": instruction,
                         "target_profile": target,
                         "priority": priority,
                         "description": description,
@@ -482,8 +659,9 @@ def _generate_suggestions(
         if fingerprint in existing_ids:
             continue
 
+        _sid = _generate_suggestion_id()
         suggestions.append({
-            "id": _generate_suggestion_id(),
+            "id": _sid,
             "source": "failure_analyzer",
             "pattern_id": pat["pattern_id"],
             "pattern_label": pat["label"],
@@ -492,9 +670,10 @@ def _generate_suggestions(
             "target_file_display": target_file_rel,
             "priority": "high",
             "action": "append",
-            "content": (
-                f"\n## 优化规则（自动添加 {datetime.now(timezone.utc).strftime('%Y-%m-%d')}）\n\n"
-                f"{pat['suggested_change']}\n"
+            "content": _wrap_auto_section(
+                f"## 自动优化规则（{datetime.now(timezone.utc).strftime('%Y-%m-%d')}，来自失败模式 {pat['pattern_id']}）\n\n"
+                f"{pat['suggested_change']}\n",
+                sid=_sid, pat="-",
             ),
             "description": f"[{pat['category']}] {pat['label']}：{pat['suggested_change'][:100]}",
             "expected_impact": pat.get("expected_impact", ""),
@@ -534,8 +713,9 @@ def _generate_suggestions(
         if fingerprint in existing_ids:
             continue
 
+        _sid = _generate_suggestion_id()
         suggestions.append({
-            "id": _generate_suggestion_id(),
+            "id": _sid,
             "source": "debug_journal",
             "entry_id": entry_id,
             "target_profile": target_profile,
@@ -543,9 +723,10 @@ def _generate_suggestions(
             "target_file_display": target_file_rel,
             "priority": "high" if entry.get("severity") == "critical" else "medium",
             "action": "append",
-            "content": (
-                f"\n## 优化规则（来自 debug {entry_id}）\n\n"
-                f"{solution}\n"
+            "content": _wrap_auto_section(
+                f"## 自动优化规则（来自 debug {entry_id}）\n\n"
+                f"{solution}\n",
+                sid=_sid, pat="-",
             ),
             "description": f"[{entry.get('category', '')}] {title}",
             "expected_impact": entry.get("lessons", ""),
@@ -572,18 +753,21 @@ def _generate_suggestions(
         if fingerprint in existing_ids:
             continue
 
+        _sid = _generate_suggestion_id()
         suggestions.append({
-            "id": _generate_suggestion_id(),
+            "id": _sid,
             "source": "agent_score_analysis",
             "pattern_key": hint["pattern_key"],
+            "pattern_re": hint.get("pattern_re", ""),
             "target_profile": profile,
             "target_file": str(target_file),
             "target_file_display": target_file_rel,
             "priority": hint["priority"],
             "action": "append",
-            "content": (
-                f"\n## 行为约束（来自评分分析，{hint['evidence_count']} 次证据）\n\n"
-                f"{hint['description']}\n"
+            "content": _wrap_auto_section(
+                f"## 自动优化规则（评分分析 {hint['evidence_count']} 次证据）\n\n"
+                f"{hint.get('instruction') or hint['description']}\n",
+                sid=_sid, pat=hint.get("pattern_re", "-"),
             ),
             "description": f"[{profile}] {hint['description'][:100]}",
             "expected_impact": f"减少重复出现的 {profile} 问题模式",
@@ -823,6 +1007,15 @@ def cmd_auto() -> None:
     if cleaned > 0:
         print(f"  ✓ 清理 {cleaned} 条过期 applied/failed 建议")
 
+    # v6.9.9: 回收过期的自动追加段（问题已消失且段龄超 14 天的约束）
+    try:
+        _early_reasons = _collect_agent_score_reasons()
+        reaped = _reap_stale_auto_sections(_early_reasons)
+        if reaped > 0:
+            print(f"  ✓ 回收 {reaped} 条过期自动优化段（问题未复现）")
+    except Exception as reap_e:
+        print(f"  ⚠ 自动段回收异常（忽略，继续主流程）：{reap_e}")
+
     # v6.8.23: 进程互斥锁（flock）。若已有进程持有锁（如上一个 cron 触发的实例
     # 仍在跑 / hang），当前进程直接退出，避免多个 cmd_auto 并发叠加写 journal。
     try:
@@ -1007,10 +1200,22 @@ def _apply_suggestions(
     """
     success_count = 0
     fail_count = 0
+    guard_count = 0
 
     for s in to_apply:
         label = "自动" if auto_mode else "手动"
         print(f"\n{label}应用 {s['id']}：{s['description'][:60]}")
+
+        # v6.9.9: 范本守门——与范本实测口径冲突的建议直接拒绝，不入 SOUL.md
+        guard_reason = _benchmark_conflict_guard(s)
+        if guard_reason:
+            s["status"] = "rejected_guard"
+            s["rejected_at"] = _now_utc()
+            s["guard_reason"] = guard_reason
+            guard_count += 1
+            print(f"  ✗ 范本守门拦截：{guard_reason}")
+            continue
+
         if _apply_suggestion(s, backup_count_tracker=backup_count_tracker):
             s["status"] = "applied"
             s["applied_at"] = _now_utc()
@@ -1027,7 +1232,8 @@ def _apply_suggestions(
     # 保存更新
     _save_suggestions(all_suggestions)
 
-    print(f"\n✓ 完成：成功 {success_count}，失败 {fail_count}")
+    tail = f"，守门拦截 {guard_count}" if guard_count else ""
+    print(f"\n✓ 完成：成功 {success_count}，失败 {fail_count}{tail}")
 
 
 # ─────────────────────────────────────────────
