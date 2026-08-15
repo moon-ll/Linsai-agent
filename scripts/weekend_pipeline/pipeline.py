@@ -312,6 +312,21 @@ class WeekendPipeline:
             "trimmed_sources": trimmed,
         }
 
+    def _finalize_stage_status(self, stage: str) -> None:
+        """阶段终态汇总（run_stage/run_next 共用）。
+
+        v6.9.10: run_next 逐 job 推进时同样需要汇总——旧版只有 run_stage
+        做终态判定，worker cron 用 run_next 推完整阶段后 stage_status
+        永远停在 pending（控制台显示阶段未完成，实际 job 已全 done）。
+        """
+        stage_jobs = find_jobs_by_stage(self.state, stage)
+        if stage_jobs and all(j.get("status") == JOB_STATUS_DONE for j in stage_jobs):
+            set_stage_status(self.state, stage, JOB_STATUS_DONE)
+        elif any(j.get("status") == JOB_STATUS_FAILED for j in stage_jobs):
+            set_stage_status(self.state, stage, JOB_STATUS_FAILED)
+        else:
+            set_stage_status(self.state, stage, JOB_STATUS_PENDING)
+
     def run_next(self, stage: Optional[str] = None, dry_run: bool = False) -> Dict[str, Any]:
         """执行下一个 pending 且依赖满足的任务。
 
@@ -324,6 +339,8 @@ class WeekendPipeline:
         2. dry-run 零落盘：预览模式不持久化状态。旧版 dry-run 会把
            假 done 写入状态文件（output 曾因此需要 _verify_artifacts
            自愈，input/reflection 连自愈都没有），现在预览不留痕。
+
+        v6.9.10: job 执行后补阶段终态汇总（见 _finalize_stage_status）。
         """
         try:
             with file_lock("weekend-pipeline", blocking=False):
@@ -334,6 +351,7 @@ class WeekendPipeline:
 
                 result = execute_job(self.state, job, self.handlers, dry_run=dry_run)
                 if not dry_run:
+                    self._finalize_stage_status(job["stage"])
                     self._save_unlocked()
                 return {
                     "success": result.get("success"),
@@ -391,13 +409,7 @@ class WeekendPipeline:
         # 汇总阶段状态（终态判定）
         with file_lock("weekend-pipeline"):
             self.state = load_pipeline_state(self.state_path)
-            stage_jobs = find_jobs_by_stage(self.state, stage)
-            if stage_jobs and all(j.get("status") == JOB_STATUS_DONE for j in stage_jobs):
-                set_stage_status(self.state, stage, JOB_STATUS_DONE)
-            elif any(j.get("status") == JOB_STATUS_FAILED for j in stage_jobs):
-                set_stage_status(self.state, stage, JOB_STATUS_FAILED)
-            else:
-                set_stage_status(self.state, stage, JOB_STATUS_PENDING)
+            self._finalize_stage_status(stage)
             if not dry_run:
                 self._save_unlocked()
 

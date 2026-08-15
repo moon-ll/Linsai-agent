@@ -1,17 +1,15 @@
 #!/usr/bin/env python3
 """
-test_input_breaker.py — lifecycle_monitor 输入端熔断数据源修复测试（v6.8.53）
+test_input_breaker.py — lifecycle_monitor 输入端熔断检测测试
 
-覆盖缺陷：
-    lifecycle_monitor._check_proposals 的输入端熔断检测读
-    weekend-jobs.json 顶层 weekend_input 键——实际结构嵌套在 jobs 下
-    （weekend_data["jobs"]["weekend_input"]），且该文件从不记录
-    result.ideas_count。双错叠加导致该检测自 v6.8.27 起从未可能触发：
-    输入端自 08-01 起停摆 13 天（ideas=0 且未再执行）无人告警。
-
-修复：
-    数据源改读 weekend-pipeline.json 的 input job 结果
-    （result.ideas_count + finished_at）。
+历史：
+    v6.8.27 引入检测；v6.8.27-v6.8.52 读 weekend-jobs.json 顶层
+    weekend_input 键（结构嵌套错误 + 从不记录 ideas_count），检测从未
+    可能触发；v6.8.53 数据源改读 weekend-pipeline.json 的 input job
+    结果；v6.9.10 口径再修正——旧实现"最近一次 ideas=0 且距今 ≥7 天"
+    会被每周空跑刷新 finished_at（days_since 永远到不了 7），防线
+    形同虚设。现口径扫 weekend-input/ideas-*.json 产物文件族：最近
+    2 个文件 ideas 均为空即告警，不受空跑刷新影响。
 
 注意：
     本测试不调用 hermes/LLM，使用隔离临时目录。
@@ -21,7 +19,6 @@ import sys
 import json
 import shutil
 import importlib
-from datetime import datetime, timezone, timedelta
 
 from test_runner import TestSuite, create_isolated_env
 
@@ -56,30 +53,11 @@ class InputBreakerTests(TestSuite):
         if self._orig_root is not None:
             self.monitor.PROJECT_ROOT = self._orig_root
 
-    def _write_pipeline(self, ideas_count: int, finished_days_ago: float) -> None:
-        fin = (
-            datetime.now(timezone.utc) - timedelta(days=finished_days_ago)
-        ).strftime("%Y-%m-%dT%H:%M:%SZ")
-        jobs = [
-            {
-                "job_id": "input_compose_ideas",
-                "stage": "input",
-                "status": "done",
-                "finished_at": fin,
-                "result": {"ideas_count": ideas_count},
-            },
-            {
-                # 无 ideas_count 的 input job 应被过滤
-                "job_id": "input_collect_sources",
-                "stage": "input",
-                "status": "done",
-                "finished_at": fin,
-                "result": {"sources": 5},
-            },
-        ]
-        path = self.tmp_root / "memory" / "weekend-pipeline.json"
+    def _write_ideas(self, date: str, ideas) -> None:
+        path = self.tmp_root / "memory" / "weekend-input" / f"ideas-{date}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(
-            json.dumps({"jobs": jobs, "updated_at": fin}, ensure_ascii=False, indent=2),
+            json.dumps({"ideas": ideas}, ensure_ascii=False, indent=2),
             encoding="utf-8",
         )
 
@@ -88,46 +66,61 @@ class InputBreakerTests(TestSuite):
         return [a for a in anomalies if a.get("type") == "input_pipeline_broken"]
 
     def run_tests(self):
-        # ── 用例 1：ideas=0 且 ≥7 天无新产出 → 触发熔断告警 ──
-        self._write_pipeline(ideas_count=0, finished_days_ago=13)
+        # ── 用例 1：最近 2 个产物文件均空 → 触发熔断告警 ──
+        self._write_ideas("2026-08-14", [])
+        self._write_ideas("2026-08-15", [])
         hits = self._breaker_anomalies()
-        self.assert_eq(len(hits), 1, "停摆 13 天且 ideas=0 应触发 input_pipeline_broken")
+        self.assert_eq(len(hits), 1, "连续 2 次周末零设想应触发 input_pipeline_broken")
         if hits:
             self.assert_in(
-                "input_compose_ideas", hits[0].get("message", ""),
-                "告警应指出来源 job",
+                "2026-08-14", hits[0].get("message", ""),
+                "告警应指出来源产物文件日期",
             )
 
-        # ── 用例 2：ideas>0 → 不触发（正常产出） ──
-        self._write_pipeline(ideas_count=3, finished_days_ago=13)
+        # ── 用例 2：最近一次产出非零 → 不触发（正常产出） ──
+        self._write_ideas("2026-08-15", [{"title": "t", "gap": "g"}])
         self.assert_eq(
             len(self._breaker_anomalies()), 0,
-            "上周有产出（ideas=3）不应触发",
+            "最近一次产出非零（ideas=1）不应触发",
         )
 
-        # ── 用例 3：ideas=0 但仅 2 天 → 不触发（第二周窗口未过） ──
-        self._write_pipeline(ideas_count=0, finished_days_ago=2)
+        # ── 用例 3：仅 1 个产物文件 → 不触发（第二周窗口未过） ──
+        for f in (self.tmp_root / "memory" / "weekend-input").glob("ideas-*.json"):
+            f.unlink()
+        self._write_ideas("2026-08-15", [])
         self.assert_eq(
             len(self._breaker_anomalies()), 0,
-            "仅 2 天未产出（周窗口未过）不应触发",
+            "单产物文件（周窗口未过）不应触发",
         )
 
-        # ── 用例 4：旧错误数据形状（weekend-jobs.json 顶层键）不再影响 ──
+        # ── 用例 4：旧数据形状不再参与判定（数据源唯一） ──
+        # weekend-jobs.json 顶层键与 weekend-pipeline.json job result
+        # 均非新口径数据源，存在也不产生重复/误报。
+        for f in (self.tmp_root / "memory" / "weekend-input").glob("ideas-*.json"):
+            f.unlink()
         legacy = {
             "weekend_input": {
                 "status": "done",
-                "started_at": (
-                    datetime.now(timezone.utc) - timedelta(days=30)
-                ).strftime("%Y-%m-%dT%H:%M:%SZ"),
                 "result": {"ideas_count": 0},
             }
         }
         (self.tmp_root / "memory" / "weekend-jobs.json").write_text(
             json.dumps(legacy, ensure_ascii=False), encoding="utf-8"
         )
-        self._write_pipeline(ideas_count=0, finished_days_ago=13)
-        hits = self._breaker_anomalies()
+        jobs = [
+            {
+                "job_id": "input_compose_ideas",
+                "stage": "input",
+                "status": "done",
+                "finished_at": "2026-08-15T11:00:58Z",
+                "result": {"ideas_count": 0},
+            }
+        ]
+        (self.tmp_root / "memory" / "weekend-pipeline.json").write_text(
+            json.dumps({"jobs": jobs}, ensure_ascii=False),
+            encoding="utf-8",
+        )
         self.assert_eq(
-            len(hits), 1,
-            "数据源唯一（weekend-pipeline.json），旧形状不产生重复/误报",
+            len(self._breaker_anomalies()), 0,
+            "数据源唯一（ideas-*.json），旧形状不产生误报",
         )

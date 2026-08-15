@@ -1,5 +1,37 @@
 # 变更记录
 
+## v6.9.10 - 2026-08-15 周末输入端三项修复："成功空转"根治
+
+背景：用户报告 input 任务失败。排查发现 7 个 input job 全部 done、
+无 failed，但产物全空（directions=[]、ideas=0）——输入端自 v6.7.7
+上线起从未真正产生过研究设想（08-01/08-14/08-15 连续全零），熔断
+防线从未告警，stage_status 卡 pending。三项修复：
+
+- **修复 1（核心）：收集即标记饿死摘要**——`collect_all_sources` 在
+  收集时顺手把 papers/briefings/captures/reference_notes 全部
+  `mark_source_processed`，随后 `summarize` 的 `new_paper_sources`
+  过滤"未处理新料"恒为空，整条链空转。v6.7.7 原生缺陷，存在 9 天。
+  修复：删除四类文献来源的预标记，标记职责归还消费方（summarize
+  摘要成功后才标记，该逻辑已存在）；kb 类来源保留标记——
+  gap_analysis 依赖 processed_sources 中的 kb:concept 记录作为知识库
+  概念输入，且 collect_kb_concepts_and_methods 靠它去重。
+- **修复 2：熔断防线被空跑刷新**——旧口径"最近一次 ideas=0 且距今
+  ≥7 天"，但每周空跑一次 compose_ideas 就刷新 finished_at，
+  days_since 永远到不了 7，防线形同虚设（全零 15 天零告警）。
+  修复：改扫 `weekend-input/ideas-*.json` 产物文件族，最近 2 个文件
+  ideas 均空即告警；损坏文件按 0 计（宁误报不漏报）。注意：修复
+  部署后当期 monitor 会如实报一次 input_pipeline_broken（历史断流
+  的真实反映），待 08-22 新料产出非零后自愈。
+- **修复 3：stage_status 卡 pending**——worker cron 用 run_next 逐
+  job 推进，旧版只有 run_stage 做阶段终态汇总，worker 推完整阶段后
+  stage_status 永远停在 pending（控制台显示阶段未完成，实际 job 已
+  全 done）。修复：抽 `_finalize_stage_status` 公共方法，run_next
+  执行 job 后同样汇总。已对真实环境执行一次汇总修正（input→done）。
+- **验证**：新增 `tests/test_input_pipeline_repair.py`（15 用例：预
+  标记删除/新料过滤恢复/kb 通路保留/熔断触发-静默-单文件-损坏文件/
+  run_next 终态汇总/中途不提前翻 done），重写 `test_input_breaker.py`
+  适配新口径（4 用例）；基线 695 → **710/710** 全绿。
+
 ## v6.9.9 - 2026-08-15 writer/critic 提示词范本对齐 + 自优化架构加固
 
 背景：对照申请书范本（references/nsfc-templates/）审查 writer/critic

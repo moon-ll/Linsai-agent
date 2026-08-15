@@ -275,7 +275,16 @@ def collect_all_sources(
     paper_limit: int = 20,
     capture_limit: int = 10,
 ) -> Dict[str, Any]:
-    """统一收集所有来源并返回结构化结果。"""
+    """统一收集所有来源并返回结构化结果。
+
+    v6.9.10: papers/briefings/captures/reference_notes 不再在收集时预标记
+    为已处理。旧版"收集即标记"使 summarize 的 new_paper_sources 过滤恒为
+    空——输入端自 v6.7.7 上线起从未真正摘要过新料，ideas 连续全零。
+    标记职责归还消费方（summarize 摘要成功后才 mark，见 input_jobs）。
+    kb 类来源保留标记：gap_analysis 依赖 processed_sources 中的
+    kb:concept 记录作为知识库概念输入，且 collect_kb_concepts_and_methods
+    靠它去重跳过已收录页面。
+    """
     sources: Dict[str, Any] = {
         "briefings": collect_briefings(days=days),
         "papers": collect_paper_pool(limit=paper_limit),
@@ -285,12 +294,7 @@ def collect_all_sources(
         "collected_at": now_utc(),
     }
 
-    # 标记新来源为已处理
     if state is not None:
-        for key in ["briefings", "papers", "captures", "reference_notes"]:
-            for s in sources.get(key, []):
-                if not is_source_processed(s["source_id"], s["text"], state):
-                    mark_source_processed(s["source_id"], s["text"], state)
         for wiki_type, items in sources.get("kb", {}).items():
             for s in items:
                 if not is_source_processed(s["source_id"], s["text"], state):
