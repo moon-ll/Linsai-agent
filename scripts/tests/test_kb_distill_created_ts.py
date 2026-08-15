@@ -70,3 +70,34 @@ class KbDistillCreatedTsTests(TestSuite):
             fixed.index('source_raw:') < fixed.index("正文"),
             "source_raw 注入在 frontmatter 内",
         )
+
+        self.run_v6_9_15_tests()
+
+    def run_v6_9_15_tests(self):
+        """v6.9.15: distill_one 传 prefer=kb_distill（GLM 主模型路由）。"""
+        import kb_distill
+
+        captured = {}
+        orig = (
+            kb_distill.distill_raw_to_wiki,
+            kb_distill.save_distilled_wiki,
+        )
+        import llm_gateway
+        orig_gw = llm_gateway.llm_complete
+        try:
+            kb_distill.distill_raw_to_wiki = lambda rel: ("wiki/x.md", "prompt")
+            kb_distill.save_distilled_wiki = lambda *a, **k: None
+            llm_gateway.llm_complete = (
+                lambda sys_p, usr_p, timeout=90, prefer=None: (
+                    captured.update(prefer=prefer) or (True, "# 标题\n正文", {"provider": "glm"})
+                )
+            )
+            r = kb_distill.distill_one(Path("/tmp/fake/raw/x.md"))
+            self.assert_true(r.get("success"), "stub 蒸馏应成功", str(r))
+            self.assert_eq(
+                captured.get("prefer"), "kb_distill",
+                "distill_one 应传 prefer=kb_distill（GLM 主模型）",
+            )
+        finally:
+            kb_distill.distill_raw_to_wiki, kb_distill.save_distilled_wiki = orig
+            llm_gateway.llm_complete = orig_gw

@@ -146,10 +146,12 @@ def distill_one(raw_path: Path, dry_run: bool = False) -> Dict[str, Any]:
         return {"success": True, "raw": raw_rel, "wiki": wiki_rel, "skipped": True}
 
     from llm_gateway import llm_complete
+    # v6.9.15: prefer="kb_distill" → GLM 主模型直连（默认 MiniMax 主链
+    # 429 限额期单篇重试+降级最长 369s，350 篇积压不可行）。
     ok, text, meta = llm_complete(
         "你是知识库蒸馏器。按用户指令把原始文献提炼为 wiki 页面，"
         "直接输出 Markdown 正文（frontmatter 由系统补写），不要输出解释。",
-        prompt, timeout=150,
+        prompt, timeout=150, prefer="kb_distill",
     )
     if not ok or not text or not text.strip():
         return {"success": False, "raw": raw_rel,

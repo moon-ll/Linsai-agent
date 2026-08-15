@@ -1,5 +1,24 @@
 # 变更记录
 
+## v6.9.15 - 2026-08-15 知识库积压批量处理：蒸馏主模型切 GLM
+
+用户指令"把知识库累积的内容都处理一下"——盘点存量：输入链未摘要
+文献 508 篇 + raw→wiki 待蒸馏 348 篇。输入链批处理直调 handler
+（绕过 job 状态机，job 全 done 无冲突），蒸馏因链路瓶颈先行改造：
+
+- **蒸馏主模型切 GLM（P0，实测数据驱动）**：kb_distill 默认走
+  MiniMax 主链，429 限额期单篇需重试+降级（实测最长 369s），
+  348 篇按此链路约 26 小时不可行。`TASK_PROVIDER_PREFS` 注册
+  `kb_distill` 标签（glm/glm-fallback 队首），`distill_one` 传
+  `prefer="kb_distill"`。实测 GLM 直连 ~65s/篇（成功篇 71s），
+  提速 4 倍，且与 governance/weekend_input 同模式无新增失败面。
+- **测试**：test_kb_distill_created_ts.py 新增 prefer 透传回归
+  （stub llm_gateway 捕获参数），721/721 全绿。
+- **批处理驱动**（临时脚本，不入仓）：输入链循环 summarize+
+  cluster_assign 每批 30 篇至清零 → 全量簇蒸馏（跳过已有知识卡，
+  一次性追平语义不受周限 8 束缚）→ topic_match+compose 路由落地；
+  蒸馏 watcher 等输入链结束后全量跑（串行避免双进程抢 GLM 配额）。
+
 ## v6.9.14 - 2026-08-15 输入链端到端实测收尾：GLM 主模型 + 知识簇聚类校准
 
 手动完整跑通输入链（collect→summarize→cluster_assign→cluster_distill

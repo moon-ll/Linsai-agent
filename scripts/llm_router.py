@@ -136,6 +136,12 @@ TASK_PROVIDER_PREFS: Dict[str, Tuple[str, ...]] = {
     # 且 MiniMax Token Plan 月末限额期（429）不再阻塞输入端整链。
     # 失败仍回落全局链（minimax → kimi-coding …），无新增失败面。
     "weekend_input": ("glm", "glm-fallback"),
+    # v6.9.15: raw→wiki 蒸馏主模型改走 GLM。08-15 实测 MiniMax Token
+    # Plan 429 限额期，蒸馏走默认 MiniMax 主链需 429 重试（实测单篇
+    # 最长 369s）再降级 glm，350 篇积压按此链路约 26 小时不可行；
+    # glm 直连单篇 30-60s。蒸馏为治理类长文生成任务，与 governance
+    # 同级。失败仍回落全局链，无新增失败面。
+    "kb_distill": ("glm", "glm-fallback"),
 }
 
 
