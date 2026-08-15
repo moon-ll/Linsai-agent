@@ -312,6 +312,38 @@ class InputClusteringTests(TestSuite):
             key = (j["stage"], j["step"])
             self.assert_in(key, p.handlers, f"{j['job_id']} 应有注册 handler")
 
+    # ------------------------------------------------------------------
+    # 故障防线：LLM 全挂不空转
+    # ------------------------------------------------------------------
+
+    def _test_summarize_llm_failure_not_silent(self):
+        """有新料但 LLM 全挂 → success=False 且不标记已处理（防空转 done）。"""
+        from weekend_pipeline import input_jobs, sources as src_mod
+        from weekend_pipeline.state import mark_source_processed
+
+        # 伪造 collect：2 篇新料
+        src_mod.collect_paper_pool = lambda limit=20, state=None: [
+            {"source_id": "paper:p1", "type": "paper", "text": "论文一", "tier": 1},
+            {"source_id": "paper:p2", "type": "paper", "text": "论文二", "tier": 1},
+        ]
+        src_mod.collect_briefings = lambda days=7, state=None: []
+        src_mod.collect_captures = lambda limit=10: []
+        src_mod.collect_reference_notes = lambda: []
+        src_mod.collect_kb_concepts_and_methods = lambda state=None: {}
+
+        # LLM 可用但全部调用失败
+        input_jobs.is_llm_available = lambda: True
+        input_jobs._llm_json = lambda system, user, timeout=120: None
+
+        state = {"processed_sources": {}}
+        result = input_jobs.run_input_summarize(state=state, job={})
+
+        self.assert_true(not result.get("success"), "LLM 全挂应返回 success=False")
+        self.assert_true(
+            not any(sid.startswith("paper:") for sid in state["processed_sources"]),
+            "失败来源不得标记已处理（保数据待重试）",
+        )
+
     def run_tests(self):
         self._test_distilled_papers_excluded()
         self._test_source_tiers_assigned()
@@ -322,3 +354,4 @@ class InputClusteringTests(TestSuite):
         self._test_stale_cluster_closed()
         self._test_topic_match_all_stages()
         self._test_job_template_chain()
+        self._test_summarize_llm_failure_not_silent()

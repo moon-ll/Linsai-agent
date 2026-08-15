@@ -140,6 +140,7 @@ def run_input_summarize(state: Dict[str, Any], job: Dict[str, Any], dry_run: boo
     # 在 weekend job stale 阈值（STALE_RUNNING_SECONDS=3600）内安全。
     # 旧值 10 配合每周一跑，消化能力 ~10 条/周 < 稳态新料增速，且补课
     # 积压（92 条）需 9 周才能清完。
+    failed_llm = 0
     for p in papers[:30]:
         user = f"请用 1-2 句话总结以下文献的核心贡献：\n\n标题：{p.get('title', '')}\n内容：{p.get('text', '')[:1200]}\n\n输出 JSON：{{\"title\": \"...\", \"summary\": \"...\", \"keywords\": [\"...\"]}}"
         data = _llm_json(system, user, timeout=60)
@@ -153,12 +154,23 @@ def run_input_summarize(state: Dict[str, Any], job: Dict[str, Any], dry_run: boo
                     data["keywords"] = []
             summaries.append(data)
             mark_source_processed(p["source_id"], p["text"], state)
+        else:
+            failed_llm += 1
 
-    _ensure_input_dir()
-    if not dry_run:
-        save_json(WEEKEND_INPUT_DIR / f"summaries-{now_utc()[:10]}.json", {"summaries": summaries})
-
-    return {"success": True, "summarized": len(summaries)}
+    # v6.9.12 故障防线（对齐 v6.8.46 hermes 429 防线语义）：有新料但
+    # 全部摘要失败（LLM 限额/故障）时返回 success=False 而非空转标
+    # done——否则空 summaries 向下游传播，整链空跑，熔断只能事后报。
+    # 未 mark 的来源保持"未处理"状态，repair 重试或下周自然续跑。
+    if summaries or failed_llm == 0:
+        _ensure_input_dir()
+        if not dry_run:
+            save_json(WEEKEND_INPUT_DIR / f"summaries-{now_utc()[:10]}.json", {"summaries": summaries})
+        return {"success": True, "summarized": len(summaries)}
+    return {
+        "success": False,
+        "error": f"LLM 故障：{failed_llm} 篇新料全部摘要失败（未标记已处理，等待重试）",
+        "summarized": 0,
+    }
 
 
 # ---------------------------------------------------------------------------
