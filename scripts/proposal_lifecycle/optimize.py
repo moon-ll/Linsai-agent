@@ -2114,6 +2114,15 @@ def _load_cross_proposal_exemplar(lifecycle_obj, current_proposal_id: str, secti
         # 取前 2000 字符作为范例（足够展示写作风格，不会太长）
         exemplar_text = text[:2000]
 
+        # v6.9.3: 注入成功时留痕——此前函数无任何日志输出，2026-08-13/08-15
+        # 两轮体检均因日志 0 条"参考范文"记录无法区分"已注入"与"从未触发"，
+        # 被标记"潜在死代码风险"。一条 INFO 即可闭环观测。
+        if _log:
+            _log.info(
+                f"[{current_proposal_id}] 范例注入: {section_key} ← {best_proposal} "
+                f"(范文峰值分 {best_score:.2f}, 当前分 {current_score:.2f})"
+            )
+
         return (
             f"\n\n【参考范文（来自评分 {best_score:.2f} 的高质量课题，仅供学习写作风格和论证密度）】\n"
             f"来源课题：{best_proposal}\n"
