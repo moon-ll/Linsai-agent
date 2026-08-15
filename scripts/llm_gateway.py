@@ -153,6 +153,7 @@ def llm_complete(
     system_prompt: str,
     user_prompt: str,
     timeout: int = 90,
+    prefer: Optional[str] = None,
 ) -> Tuple[bool, str, Dict[str, Any]]:
     """单轮 LLM 调用（system + user 两段式）。
 
@@ -162,6 +163,8 @@ def llm_complete(
         system_prompt: 系统提示词（角色/任务/约束）。
         user_prompt:   用户输入（待处理的内容）。
         timeout:       调用超时（秒），默认 90。
+        prefer:        任务标签（v6.9.4）。治理/维护类任务传 "governance"
+                       可优先使用 GLM 系模型；None 走默认 MiniMax 主链。
 
     Returns:
         (ok, text, meta)
@@ -177,7 +180,8 @@ def llm_complete(
     messages = [{"role": "user", "content": user_prompt}]
     t0 = time.time()
     try:
-        result, usage, provider_name = router.call_llm(system_prompt, messages, timeout=timeout)
+        result, usage, provider_name = router.call_llm(
+            system_prompt, messages, timeout=timeout, prefer=prefer)
         elapsed = round(time.time() - t0, 2)
         _log_info(f"LLM 调用成功 provider={provider_name} elapsed={elapsed}s")
         return True, result or "", {
@@ -198,6 +202,7 @@ def llm_chat(
     system_prompt: str,
     messages: List[Dict[str, str]],
     timeout: int = 90,
+    prefer: Optional[str] = None,
 ) -> Tuple[bool, str, Dict[str, Any]]:
     """多轮 LLM 调用（传入完整消息历史）。
 
@@ -205,6 +210,7 @@ def llm_chat(
         system_prompt: 系统提示词。
         messages:      消息列表 [{role, content}, ...]。
         timeout:       调用超时（秒）。
+        prefer:        任务标签（v6.9.4），语义同 llm_complete。
 
     Returns:
         同 llm_complete。
@@ -216,7 +222,8 @@ def llm_chat(
 
     t0 = time.time()
     try:
-        result, usage, provider_name = router.call_llm(system_prompt, messages, timeout=timeout)
+        result, usage, provider_name = router.call_llm(
+            system_prompt, messages, timeout=timeout, prefer=prefer)
         elapsed = round(time.time() - t0, 2)
         _log_info(f"LLM 多轮调用成功 provider={provider_name} elapsed={elapsed}s")
         return True, result or "", {
@@ -238,6 +245,7 @@ def safe_llm_complete(
     user_prompt: str,
     fallback: str = "",
     timeout: int = 90,
+    prefer: Optional[str] = None,
 ) -> str:
     """安全 LLM 调用：失败时返回 fallback 文本（最简形式）。
 
@@ -245,7 +253,7 @@ def safe_llm_complete(
 
     >>> text = safe_llm_complete(sys_prompt, user_prompt, fallback=template_text)
     """
-    ok, text, _ = llm_complete(system_prompt, user_prompt, timeout=timeout)
+    ok, text, _ = llm_complete(system_prompt, user_prompt, timeout=timeout, prefer=prefer)
     if ok and text.strip():
         return text.strip()
     return fallback
@@ -259,12 +267,14 @@ def llm_json(
     system_prompt: str,
     user_prompt: str,
     timeout: int = 90,
+    prefer: Optional[str] = None,
 ) -> Tuple[bool, Any, Dict[str, Any]]:
     """LLM 调用并解析 JSON 输出。
 
     Args:
         system_prompt, user_prompt: 同 llm_complete。
         timeout: 超时秒数。
+        prefer:  任务标签（v6.9.4），语义同 llm_complete。
 
     Returns:
         (ok, data, meta)
@@ -273,7 +283,7 @@ def llm_json(
         - meta: 同 llm_complete，额外含 json_error 字段（若解析失败）
     """
     import json as _json
-    ok, text, meta = llm_complete(system_prompt, user_prompt, timeout=timeout)
+    ok, text, meta = llm_complete(system_prompt, user_prompt, timeout=timeout, prefer=prefer)
     if not ok:
         return False, None, meta
     # 尝试提取 JSON（LLM 可能包裹在 ```json ... ``` 或纯文本中）

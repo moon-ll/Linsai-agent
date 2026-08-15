@@ -28,7 +28,7 @@ import sys
 import urllib.error
 import urllib.request
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 import common as _cms
 
 # 统一日志
@@ -118,6 +118,43 @@ def _detect_cli_providers() -> List[Dict[str, Any]]:
                 "priority": 1 if name == "kimi" else 2,
             })
     return providers
+
+
+# v6.9.4: 任务级 provider 偏好。
+# 背景：监管/维护类任务（品味评分、知识萃取、提案检查）与执行类任务
+# （撰写、文献调研）对模型的诉求不同——前者重判断与规范遵循，后者重生成
+# 与长文产出。通过任务标签让治理类调用优先走 GLM（当前 glm-5.3），
+# 执行类维持 MiniMax 主链，实现"一链两用"而不破坏全局降级策略。
+# 偏好仅在自动策略（模式 B）下生效：偏好 provider 不可用或调用失败时，
+# 照常回落到原优先级链，不会因偏好引入新的失败面。
+TASK_PROVIDER_PREFS: Dict[str, Tuple[str, ...]] = {
+    # 任务标签 → 优先尝试的 provider 名（按序）
+    "governance": ("glm", "glm-fallback"),
+}
+
+
+def _apply_task_preference(
+    ordered: List["LLMProvider"], prefer: Optional[str]
+) -> List["LLMProvider"]:
+    """按任务标签把偏好 provider 提到队首（稳定排序，其余顺序不变）。
+
+    Args:
+        ordered: 已按全局策略排好序的可用 provider 列表。
+        prefer:  任务标签（如 "governance"）；None 或未注册标签原样返回。
+
+    Returns:
+        重排后的列表；偏好 provider 均不在列表中时原样返回。
+    """
+    pref_names = TASK_PROVIDER_PREFS.get(prefer or "")
+    if not pref_names:
+        return ordered
+    for name in pref_names:
+        idx = next((i for i, p in enumerate(ordered) if p.name == name), -1)
+        if idx > 0:
+            return [ordered[idx]] + ordered[:idx] + ordered[idx + 1:]
+        if idx == 0:
+            return ordered  # 已在队首
+    return ordered
 
 
 def _build_config() -> Dict[str, Any]:
@@ -393,6 +430,7 @@ class LLMRouter:
         system_prompt: str,
         messages: List[Dict[str, str]],
         timeout: Optional[int] = None,
+        prefer: Optional[str] = None,
     ):
         """调用 LLM。若 force_provider 已设置则直接使用；否则按策略自动选择。
 
@@ -400,6 +438,9 @@ class LLMRouter:
             system_prompt: 系统提示词
             messages: 消息列表 [{role, content}, ...]
             timeout: 单次调用超时（秒），None 则使用配置默认值。
+            prefer: 任务标签（v6.9.4，如 "governance"）。自动策略下把
+                TASK_PROVIDER_PREFS 中注册的 provider 提到队首；偏好
+                不可用或失败时回落全局链。force_provider 存在时忽略。
 
         Returns:
             LLM 生成的文本
@@ -460,6 +501,10 @@ class LLMRouter:
             idx = self._round_robin_idx % len(available)
             available = available[idx:] + available[:idx]
             self._round_robin_idx = (self._round_robin_idx + 1) % len(available)
+
+        # v6.9.4: 任务级偏好——治理/维护类标签优先 GLM，失败仍回落整链
+        if prefer:
+            available = _apply_task_preference(available, prefer)
 
         ordered_names = ", ".join([p.name for p in available])
         primary_name = available[0].name

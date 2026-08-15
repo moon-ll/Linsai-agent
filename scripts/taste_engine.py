@@ -438,7 +438,7 @@ class TasteEngine:
         )
 
         try:
-            ok, data, _ = llm_json(sys_prompt, user_prompt, timeout=90)
+            ok, data, _ = llm_json(sys_prompt, user_prompt, timeout=90, prefer="governance")
             if ok and isinstance(data, dict):
                 # 校验 match_score 合法性
                 score = data.get("match_score")

@@ -687,7 +687,7 @@ class ProposalInspector:
         )
 
         try:
-            ok, data, _ = llm_json(sys_prompt, user_prompt, timeout=120)
+            ok, data, _ = llm_json(sys_prompt, user_prompt, timeout=120, prefer="governance")
             if ok and isinstance(data, dict):
                 return data
         except Exception:

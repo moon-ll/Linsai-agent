@@ -1,5 +1,50 @@
 # 变更记录
 
+## v6.9.4 - 2026-08-15 监管与维护任务切换 GLM-5.3（任务级模型路由）
+
+按用户要求完成人机模型分工：**监管者与健康检查/项目维护类任务用 GLM
+最新模型（glm-5.3，2026-08-14 发布），执行类任务保持 MiniMax 最新
+模型（MiniMax-M3，2026-06-01 发布，仍为当前最新文本旗舰）**。
+
+### 任务→模型映射（本次生效）
+- **GLM-5.3 主力**（监管/治理/维护）：
+  - hermes `reviewer` profile：monitor meta-review（监管者）、整篇
+    一致性审查 full_review、参考文献校验 references、质量自检。
+  - hermes `critic` profile：对抗评审（章节评分、维度轮换）。
+  - CoPilot 网关治理调用点（`prefer="governance"`）：品味评分
+    taste_engine、周末知识萃取 knowledge_output、提案检查
+    proposal_inspector。
+- **MiniMax-M3 主力**（执行/生成，保持不变）：hermes `researcher`
+  （文献调研、idea_review）、`analyst`（缺口分析）、`writer`（申请书
+  撰写/修复）、`linsai` / `pipeline-runner`（编排）；CoPilot 执行类
+  调用点（idea_generator、literature_service、topic_generator、
+  question_architect、proposal_writer 等默认链）。
+- **不直接调 LLM 的维护链**（纯规则+数据聚合，无模型变更）：
+  lifecycle_monitor 健康检查、orchestrator 修复、strategy_optimizer、
+  prompt_optimizer、retrospective、kb_auto_sync。
+
+### 实现方式
+- **llm_router.py 新增任务级 provider 偏好**：`TASK_PROVIDER_PREFS`
+  注册 `"governance" → (glm, glm-fallback)`；`call_llm(prefer=...)`
+  在自动策略下把偏好 provider 稳定提到队首，**偏好不可用或失败时照常
+  回落全局链**（不引入新失败面）；force_provider 存在时忽略偏好。
+- **llm_gateway.py 四个入口透传**：llm_complete / llm_chat /
+  safe_llm_complete / llm_json 增加 `prefer` 可选参数（默认 None，
+  完全向后兼容，现有调用零改动）。
+- **hermes 侧**：reviewer / critic 两个 profile 的 config.yaml 主模型
+  改 `glm-5.3 @ zai`，fallback 链反转 `glm-5.2 → MiniMax-M3 → kimi`
+  （修改前已备份 `config.yaml.bak.*_glm53`）。
+- **.env**：GLM_MODEL=glm-5.3、GLM_FALLBACK_MODEL=glm-5.2（原 5.2/5.1）。
+
+### 验证
+- API 可用性实测：glm-5.3 / glm-5.2 在 coding plan 端点均 200 返回。
+- 端到端路由实测：`prefer="governance"` → provider=glm（glm-5.3，
+  4.9s 成功）；默认调用 → minimax 主链（当前 Token Plan 到量，按
+  既有防线自动降级 kimi，链路无中断）。
+- `llm_router --status`：链序 minimax(M3) → minimax-fallback(M2.7)
+  → glm(5.3) → glm-fallback(5.2) → kimi → claude。
+- 回归：`--module --scenario --persona` 644/644 全绿。
+
 ## v6.9.3 - 2026-08-15 范例注入可观测性（INFO 留痕）
 
 三层诊断（2026-08-15 08h）发现 1 个可观测性缺陷，定向修复：

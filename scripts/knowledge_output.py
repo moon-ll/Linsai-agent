@@ -189,7 +189,7 @@ def extract_from_archived_proposal(proposal_id: str, prop_dir: Path, dry_run: bo
 4. 每个 summary 不超过 100 字，严格控制总输出长度。
 """
 
-    ok, text, meta = llm_complete(system_prompt, user_prompt, timeout=120)
+    ok, text, meta = llm_complete(system_prompt, user_prompt, timeout=120, prefer="governance")
     if not ok:
         return {"success": False, "error": meta.get("error", "LLM 调用失败")}
 
@@ -324,7 +324,7 @@ def process_daily_sources(dry_run: bool = False, days: int = 7) -> Dict[str, Any
 4. 每个 summary 不超过 100 字，严格控制总输出长度。
 """
 
-    ok, text, meta = llm_complete(system_prompt, user_prompt, timeout=150)
+    ok, text, meta = llm_complete(system_prompt, user_prompt, timeout=150, prefer="governance")
     if not ok:
         return {"success": False, "error": meta.get("error", "LLM 调用失败")}
 
