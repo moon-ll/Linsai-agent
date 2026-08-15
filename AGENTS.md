@@ -218,7 +218,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 由 `linsai`、`pipeline-runner`、`researcher`、`analyst`、`writer`、`critic`、`reviewer` 7 个 profile 组成。关键协作文件包括 `state_sync.py`（论文状态总线）、`memory_bridge.py`（记忆同步）、`hermes_pipeline.py`（六阶段派活）、`proposal_lifecycle/` 包（四阶段生命周期，薄 shim `proposal_lifecycle.py` 保留 CLI）、`adversarial/` 包（对抗奖惩，薄 shim `adversarial_governance.py` 保留导入）、`weekend_pipeline/` 包（周末输入/输出/反思小任务流水线）。详见 `docs/ARCHITECTURE.md` §4。
 
-**周末流水线执行语义（v6.9.8 加固后）**：job 模板可声明 `artifact` 产物路径（`{date}` 按 job 自身 finished_at 格式化），`_verify_artifacts` 三阶段通用地校验"done 必有产物"，缺失级联重置自愈；handler 注册 key 为 `(stage, step)` 二元组；`run_stage` 按 per-job 粒度持锁（stage cron 与 20 分钟 worker 在 job 间隙协作推进），`run_next` 非阻塞抢锁、锁忙温和退出（skipped=lock_busy）；dry-run 零落盘（预览不留假 done）；`processed_sources` 随 sync 滚动裁剪（保留 28 天）。
+**周末流水线执行语义（v6.9.12 知识簇链路）**：input 阶段 6 job——collect → summarize（tier≤2 主源，单次 30 篇）→ cluster_assign（增量归簇，零 LLM，`clusters.py` 注册表持久化 `memory/weekend-input/clusters.json`）→ cluster_distill（簇内提炼知识卡，周限 8 簇）→ topic_match（簇 vs 全阶段课题路由：Jaccard 预筛 + LLM 仲裁）→ compose（路由落地：new 注册 / merge 融合+信息源挂载 / expansion 挂载 `02_literature/supplementary-sources-{date}.json`）。聚类防冗余：单篇不成簇、新簇与已有簇（含 linked/closed）查重、orphan 42 天超龄清理、open 簇 4 周无更新自动 closed。源甄别：已蒸馏论文（wiki/papers 有同 arxiv_id 页）排除，tier 分层 paper=1/briefing=2/capture=3/note=3。job 模板可声明 `artifact` 产物路径（`{date}` 按 job 自身 finished_at 格式化），`_verify_artifacts` 三阶段通用地校验"done 必有产物"，缺失级联重置自愈；handler 注册 key 为 `(stage, step)` 二元组；`run_stage` 按 per-job 粒度持锁（stage cron 与 20 分钟 worker 在 job 间隙协作推进），`run_next` 非阻塞抢锁、锁忙温和退出（skipped=lock_busy）、执行后补阶段终态汇总；dry-run 零落盘（预览不留假 done）；`processed_sources` 随 sync 滚动裁剪（保留 28 天）；废弃 job 由 `DEPRECATED_INPUT_JOBS` 清单在 sync 时清理 state 残留。
 
 ### 提案生命周期
 

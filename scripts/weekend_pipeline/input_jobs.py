@@ -100,16 +100,25 @@ def run_input_collect(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool 
     _ensure_input_dir()
     if not dry_run:
         save_json(WEEKEND_INPUT_DIR / f"sources-{now_utc()[:10]}.json", sources)
-    return {"success": True, "source_counts": {k: len(v) if isinstance(v, list) else len(v) for k, v in sources.items() if k != "collected_at"}}
+    # v6.9.12: distilled_excluded 是 int 计数，跳过 len()；kb 是 dict，
+    # len 取子类型数
+    source_counts = {
+        k: (len(v) if isinstance(v, (list, dict)) else v)
+        for k, v in sources.items()
+        if k != "collected_at"
+    }
+    return {"success": True, "source_counts": source_counts}
 
 
 def run_input_summarize(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
-    """对新增论文/简报做轻量摘要。
+    """对新增论文/简报做轻量摘要（聚类主源：tier ≤2）。
 
     v6.9.7: 无新增论文时也写出空产物文件——job 模板已声明
     artifact=summaries-{date}.json，产物校验依赖"done 必有产物"
     不变式；此前无新增论文提前 return 不落文件，会导致下一轮
     sync 误判产物缺失而反复重置（空转循环）。
+    v6.9.12: 摘要条目携带 source_id/path/tier，供下游增量归簇
+    与信息源挂载回溯原始文献。
     """
     sources = collect_all_sources(state=state, days=7, paper_limit=20, capture_limit=10)
     papers = new_paper_sources(sources, state)
@@ -135,6 +144,13 @@ def run_input_summarize(state: Dict[str, Any], job: Dict[str, Any], dry_run: boo
         user = f"请用 1-2 句话总结以下文献的核心贡献：\n\n标题：{p.get('title', '')}\n内容：{p.get('text', '')[:1200]}\n\n输出 JSON：{{\"title\": \"...\", \"summary\": \"...\", \"keywords\": [\"...\"]}}"
         data = _llm_json(system, user, timeout=60)
         if data:
+            # v6.9.12: 回填溯源字段（归簇成员清单、信息源挂载依赖）
+            if isinstance(data, dict):
+                data["source_id"] = p.get("source_id", "")
+                data["path"] = p.get("path", "")
+                data["tier"] = p.get("tier", 2)
+                if not data.get("keywords"):
+                    data["keywords"] = []
             summaries.append(data)
             mark_source_processed(p["source_id"], p["text"], state)
 
@@ -145,206 +161,388 @@ def run_input_summarize(state: Dict[str, Any], job: Dict[str, Any], dry_run: boo
     return {"success": True, "summarized": len(summaries)}
 
 
-def run_input_gap_analysis(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
-    """基于摘要与 KB 识别研究缺口。"""
+# ---------------------------------------------------------------------------
+# v6.9.12: 知识簇链路（cluster_assign → cluster_distill → topic_match）
+# ---------------------------------------------------------------------------
+
+
+def run_input_cluster_assign(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
+    """增量归簇：本周摘要沿已有 open 簇融入，孤篇挂 orphans 等凑簇。
+
+    取代旧 gap_analysis 的"每周无状态重猜 5 个方向"——簇注册表跨周
+    持久化，新知识优先融入已有类（防冗余核心），单篇不成簇。
+    全程零 LLM（关键词 Jaccard，确定性可回归）。
+    """
+    from .clusters import (
+        assign_summaries,
+        close_stale_clusters,
+        form_new_clusters,
+        load_clusters,
+        prune_orphans,
+        save_clusters,
+    )
+
     summaries_path = WEEKEND_INPUT_DIR / f"summaries-{now_utc()[:10]}.json"
     summaries = load_json(summaries_path, default={}).get("summaries", [])
 
     if dry_run:
-        return {"success": True, "directions_count": 2, "dry_run": True, "message": "dry-run 跳过 LLM 缺口分析"}
+        return {
+            "success": True,
+            "assigned": 0,
+            "new_clusters": 0,
+            "dry_run": True,
+            "message": f"dry-run 跳过归簇（{len(summaries)} 条待归）",
+        }
 
-    kb_concepts = []
-    for item in state.get("processed_sources", {}).values():
-        if isinstance(item, dict) and item.get("source_id", "").startswith("kb:concept"):
-            kb_concepts.append(item)
-
-    system = (
-        "你是林赛，擅长识别研究缺口。基于提供的文献摘要和知识库概念，"
-        "输出 1-5 条研究缺口，每条包含 title/gap/keywords/related_sources。输出合法 JSON。"
-    )
-    user = f"""文献摘要：
-{json.dumps(summaries[:8], ensure_ascii=False, indent=2)}
-
-知识库概念：
-{json.dumps(kb_concepts[:5], ensure_ascii=False, indent=2)}
-
-输出 JSON 数组：
-[{{"title": "...", "gap": "...", "keywords": ["..."], "related_sources": ["..."]}}]
-"""
-    directions = _llm_json(system, user, timeout=120)
-    if directions is None:
-        return {"success": False, "error": "LLM 不可用或调用失败"}
+    registry = load_clusters()
+    result = assign_summaries(summaries, registry)
+    formed = form_new_clusters(registry)
+    pruned = prune_orphans(registry)
+    closed = close_stale_clusters(registry)
+    save_clusters(registry)
 
     _ensure_input_dir()
-    if not dry_run:
-        save_json(WEEKEND_INPUT_DIR / f"directions-{now_utc()[:10]}.json", {"directions": directions})
+    save_json(WEEKEND_INPUT_DIR / f"clusters-week-{now_utc()[:10]}.json", {
+        "assigned": result["assigned"],
+        "orphaned": result["orphaned"],
+        "new_clusters": [
+            {"cluster_id": c["cluster_id"], "title": c["title"], "members": len(c["member_source_ids"])}
+            for c in formed
+        ],
+    })
 
-    return {"success": True, "directions_count": len(directions)}
+    return {
+        "success": True,
+        "assigned": len(result["assigned"]),
+        "orphaned": len(result["orphaned"]),
+        "new_clusters": len(formed),
+        "orphan_pruned": pruned,
+        "stale_closed": closed,
+        "total_open_clusters": sum(
+            1 for c in registry.get("clusters", []) if c.get("status") == "open"
+        ),
+    }
 
 
-def run_input_direction_select(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
-    """对比现有 proposal，决策 new/merge/expansion。"""
-    directions_path = WEEKEND_INPUT_DIR / f"directions-{now_utc()[:10]}.json"
-    directions = load_json(directions_path, default={}).get("directions", [])
+def run_input_cluster_distill(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
+    """簇内提炼：对本周有新成员的 open 簇生成结构化知识卡（LLM）。
+
+    知识卡 = 簇级摘要（150-300 字）+ 开放问题，是 topic_match 判断
+    簇与课题关系的主要依据。LLM 不可用时簇沿用成员摘要拼接（降级
+    不阻塞链路）。
+    """
+    from .clusters import load_clusters, open_clusters_with_fresh_members, save_clusters
 
     if dry_run:
-        return {"success": True, "decisions_count": len(directions), "dry_run": True, "message": "dry-run 跳过方向选择"}
+        return {"success": True, "distilled": 0, "dry_run": True, "message": "dry-run 跳过簇提炼"}
 
-    # 读取 KB 中的 proposal 页面
-    proposals_kb_dir = PROJECT_ROOT / "knowledge" / "wiki" / "projects" / "NSFC-强场超快" / "proposals"
-    existing = []
-    if proposals_kb_dir.exists():
-        for f in proposals_kb_dir.glob("*.md"):
-            if f.name == "proposals-index.md":
-                continue
-            text = _read_text(f, 3000)
-            title = ""
-            status = ""
-            for line in text.split("\n"):
-                if line.startswith("title:"):
-                    title = line.split(":", 1)[1].strip().strip('"')
-                if "生命周期状态" in line:
-                    status = line.split("：")[-1].strip()
-            existing.append({
-                "proposal_id": f.stem,
-                "title": title,
-                "status": status,
-                "text": text[:1000],
-            })
+    # 本周窗口：7 天前起有更新的簇
+    from datetime import datetime, timedelta, timezone
+    week_start = (datetime.now(timezone.utc) - timedelta(days=7)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
-    decisions = []
-    for d in directions:
-        idea_text = " ".join([d.get("title", ""), d.get("gap", ""), " ".join(d.get("keywords", []))])
-        best = None
-        best_score = 0.0
-        for p in existing:
-            score = _jaccard_similarity(idea_text, p["title"] + " " + p["text"])
-            if score > best_score:
-                best_score = score
-                best = p
+    registry = load_clusters()
+    targets = open_clusters_with_fresh_members(registry, week_start)
+    if not targets:
+        _ensure_input_dir()
+        save_json(WEEKEND_INPUT_DIR / f"distilled-clusters-{now_utc()[:10]}.json", {"clusters": []})
+        return {"success": True, "distilled": 0, "message": "本周无待提炼簇"}
 
-        if best and best_score > 0.35:
-            if best.get("status") in ("优化中", "待校验"):
-                action = "merge"
+    system = (
+        "你是林赛，擅长综合多篇文献摘要提炼主题级知识卡。"
+        "输出合法 JSON 对象：{\"title\": \"主题名\", \"summary\": \"150-300字综合摘要\", "
+        "\"open_questions\": [\"开放问题...\"]}。"
+    )
+    distilled_out = []
+    for c in targets[:8]:  # 周上限 8 簇（LLM 成本控制）
+        members = c.get("member_summaries", [])[:12]
+        user = (
+            f"簇主题：{c.get('title', '')}\n"
+            f"簇关键词：{', '.join(c.get('keywords', []))}\n\n"
+            f"成员文献摘要：\n{json.dumps(members, ensure_ascii=False, indent=1)}\n\n"
+            f"输出 JSON："
+        )
+        card = _llm_json(system, user, timeout=120)
+        if isinstance(card, dict) and card.get("summary"):
+            c["summary"] = card.get("summary", "")
+            c["title"] = card.get("title", "") or c.get("title", "")
+            c["open_questions"] = card.get("open_questions", []) or []
+        elif not c.get("summary"):
+            # 降级：成员摘要拼接（无 LLM 时保持链路可继续）
+            joined = "；".join(m.get("summary", "") for m in members[:6])
+            c["summary"] = joined[:500]
+        distilled_out.append({
+            "cluster_id": c["cluster_id"],
+            "title": c["title"],
+            "members": len(c.get("member_source_ids", [])),
+        })
+
+    save_clusters(registry)
+    _ensure_input_dir()
+    save_json(WEEKEND_INPUT_DIR / f"distilled-clusters-{now_utc()[:10]}.json", {"clusters": distilled_out})
+
+    return {"success": True, "distilled": len(distilled_out)}
+
+
+def _load_all_stage_proposals() -> List[Dict[str, Any]]:
+    """读取全阶段课题清单（drafts/optimizing/pending_review/archived）。
+
+    v6.9.12: 取代旧 direction_select 只读 KB 静态页（3000 字截断、
+    status 靠中文行解析）的弱数据源。直接读 research_proposals/
+    目录 + 各课题 00 号 brief，覆盖全部生命周期阶段且实时。
+    """
+    from proposal_lifecycle import ProposalLifecycle
+
+    proposals: List[Dict[str, Any]] = []
+    try:
+        lc = ProposalLifecycle()
+        for status in ("drafts", "optimizing", "pending_review", "archived"):
+            for p in lc.list_by_status(status):
+                prop_dir = lc._find_proposal_dir(p["proposal_id"])
+                brief_text = ""
+                if prop_dir:
+                    for f in sorted(prop_dir.glob("00_*.md")):
+                        brief_text = _read_text(f, 2000)
+                        break
+                proposals.append({
+                    "proposal_id": p["proposal_id"],
+                    "title": p.get("title", p["proposal_id"]),
+                    "status": status,
+                    "text": brief_text or p.get("title", ""),
+                })
+    except Exception as e:
+        if _log:
+            _log.warning(f"读取全阶段课题清单失败: {e}")
+    return proposals
+
+
+def run_input_topic_match(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
+    """课题判断：open 簇 vs 全阶段课题，产出路由决策（merge/new/expansion）。
+
+    两级判断：Jaccard 预筛 top-3 候选 → LLM 仲裁（概念级重合判断，
+    词袋测不出的同机制不同术语场景）。LLM 不可用时回退纯 Jaccard
+    阈值（0.35，与旧口径一致）。
+    """
+    from .clusters import load_clusters
+
+    if dry_run:
+        return {"success": True, "routes": 0, "dry_run": True, "message": "dry-run 跳过课题匹配"}
+
+    registry = load_clusters()
+    open_c = [c for c in registry.get("clusters", []) if c.get("status") == "open"]
+    if not open_c:
+        _ensure_input_dir()
+        save_json(WEEKEND_INPUT_DIR / f"routes-{now_utc()[:10]}.json", {"routes": []})
+        return {"success": True, "routes": 0, "message": "无待路由簇"}
+
+    proposals = _load_all_stage_proposals()
+    routes = []
+    for c in open_c:
+        cluster_text = " ".join([c.get("title", ""), c.get("summary", ""), " ".join(c.get("keywords", []))])
+        scored = sorted(
+            (
+                {"proposal": p, "score": _jaccard_similarity(cluster_text, p["title"] + " " + p["text"])}
+                for p in proposals
+            ),
+            key=lambda x: x["score"],
+            reverse=True,
+        )[:3]
+
+        action, target_id, reason = None, None, ""
+        best = scored[0] if scored else None
+        if best and best["score"] >= 0.35:
+            # 高置信重合：archived 课题 → expansion（文献挂载），
+            # 活跃课题 → merge（信息注入）
+            if best["proposal"]["status"] == "archived":
+                action, target_id = "expansion", best["proposal"]["proposal_id"]
             else:
-                action = "expansion"
+                action, target_id = "merge", best["proposal"]["proposal_id"]
+            reason = f"Jaccard {best['score']:.2f}"
         else:
-            action = "new"
+            # 中低置信：LLM 仲裁（top-3 候选一起判断，概念级重合）
+            action, target_id, reason = _llm_arbitrate_cluster(c, scored)
 
-        decisions.append({
-            "direction": d,
-            "action": action,
-            "target_id": best["proposal_id"] if best and action != "new" else None,
-            "similarity": best_score,
+        routes.append({
+            "cluster_id": c["cluster_id"],
+            "cluster_title": c.get("title", ""),
+            "action": action or "new",
+            "target_id": target_id,
+            "reason": reason,
+            "candidates": [
+                {"proposal_id": s["proposal"]["proposal_id"], "score": round(s["score"], 3)}
+                for s in scored
+            ],
         })
 
-    if not dry_run:
-        save_json(WEEKEND_INPUT_DIR / f"decisions-{now_utc()[:10]}.json", {"decisions": decisions})
-
-    return {"success": True, "decisions_count": len(decisions)}
-
-
-def run_input_retrieve_supplementary(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
-    """对 new 方向，先在 KB 中检索，再决定是否需要补充检索。"""
-    decisions_path = WEEKEND_INPUT_DIR / f"decisions-{now_utc()[:10]}.json"
-    decisions = load_json(decisions_path, default={}).get("decisions", [])
-
-    if dry_run:
-        return {"success": True, "new_directions": 0, "kb_hits": 0, "dry_run": True, "message": "dry-run 跳过补充检索"}
-
-    new_directions = [d for d in decisions if d.get("action") == "new"]
-    supplementary = []
-    for d in new_directions:
-        query = " ".join(d.get("direction", {}).get("keywords", []))
-        kb_results = search_kb_for_query(query, top_k=3) if query else []
-        kb_papers = list_kb_paper_pages()
-
-        # 若 KB 已有 paper 页面覆盖，直接引用
-        refs = [{"type": "kb", "path": r.get("path", "")} for r in kb_results]
-        refs.extend([{"type": "kb_paper", "path": p.get("path", "")} for p in kb_papers[:3]])
-
-        supplementary.append({
-            "direction": d.get("direction", {}),
-            "kb_hits": len(refs),
-            "references": refs,
-        })
-
-    if not dry_run:
-        save_json(WEEKEND_INPUT_DIR / f"supplementary-{now_utc()[:10]}.json", {"supplementary": supplementary})
-
-    return {"success": True, "new_directions": len(new_directions), "kb_hits": sum(s["kb_hits"] for s in supplementary)}
+    _ensure_input_dir()
+    save_json(WEEKEND_INPUT_DIR / f"routes-{now_utc()[:10]}.json", {"routes": routes})
+    return {"success": True, "routes": len(routes)}
 
 
-def run_input_deep_read(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
-    """对补充检索到的核心 paper 做深度阅读（优先复用本地 raw papers）。"""
-    sup_path = WEEKEND_INPUT_DIR / f"supplementary-{now_utc()[:10]}.json"
-    supplementary = load_json(sup_path, default={}).get("supplementary", [])
+def _llm_arbitrate_cluster(
+    cluster: Dict[str, Any],
+    scored: List[Dict[str, Any]],
+) -> tuple:
+    """LLM 仲裁簇与课题的关系（Jaccard 中低置信时）。
 
-    if dry_run:
-        return {"success": True, "deep_read_count": 0, "dry_run": True, "message": "dry-run 跳过深度阅读"}
+    Returns:
+        (action, target_id, reason)。LLM 不可用/失败 → ("new", None, "无匹配")。
+    """
+    if not is_llm_available():
+        return "new", None, "Jaccard 低置信且 LLM 不可用，按新课题处理"
 
-    read_results = []
-    raw_papers_dir = PROJECT_ROOT / "knowledge" / "raw" / "papers"
-    for item in supplementary:
-        # 本地 raw 目录查找候选 PDF/笔记
-        candidates = []
-        if raw_papers_dir.exists():
-            for f in raw_papers_dir.iterdir():
-                if f.is_file():
-                    candidates.append(str(f.relative_to(PROJECT_ROOT)))
+    cands = "\n".join(
+        f"- [{s['proposal']['status']}] {s['proposal']['proposal_id']}: "
+        f"{s['proposal']['title']}（相似度 {s['score']:.2f}）摘要：{s['proposal']['text'][:300]}"
+        for s in scored
+    ) or "（无候选课题）"
 
-        read_results.append({
-            "direction": item.get("direction", {}).get("title", ""),
-            "local_candidates": candidates[:5],
-            "status": "待深度阅读",
-        })
-
-    if not dry_run:
-        save_json(WEEKEND_INPUT_DIR / f"deep-read-{now_utc()[:10]}.json", {"read_results": read_results})
-
-    return {"success": True, "deep_read_count": len(read_results)}
+    system = (
+        "你是林赛，判断一个知识簇与候选课题的关系。merge=信息属于该课题应融合；"
+        "expansion=主题相邻应把文献挂为补充信息源；new=与现有课题无关。"
+        '输出 JSON：{"action": "merge|expansion|new", "target_id": "课题id或null", "reason": "一句话"}。'
+    )
+    user = (
+        f"知识簇：{cluster.get('title', '')}\n"
+        f"簇摘要：{cluster.get('summary', '')[:600]}\n"
+        f"关键词：{', '.join(cluster.get('keywords', []))}\n\n"
+        f"候选课题：\n{cands}"
+    )
+    verdict = _llm_json(system, user, timeout=90)
+    if isinstance(verdict, dict) and verdict.get("action") in ("merge", "expansion", "new"):
+        action = verdict["action"]
+        target = verdict.get("target_id")
+        if action != "new" and not target:
+            # action 指向课题但未给 id：回退最高分候选
+            if scored:
+                target = scored[0]["proposal"]["proposal_id"]
+            else:
+                action = "new"
+                target = None
+        return action, target, verdict.get("reason", "LLM 仲裁")
+    return "new", None, "LLM 仲裁失败，按新课题处理"
 
 
 def run_input_compose(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
-    """综合生成结构化研究设想，并调用 proposal_lifecycle 注册/融合/扩展。"""
-    from proposal_lifecycle import ProposalLifecycle
+    """路由落地：簇融入课题/注册新课题/挂载补充信息源（进下周工作流）。
 
-    decisions_path = WEEKEND_INPUT_DIR / f"decisions-{now_utc()[:10]}.json"
-    decisions = load_json(decisions_path, default={}).get("decisions", [])
+    v6.9.12 三条路由全部落地（取代旧 compose 依赖 decisions 且
+    expansion 空转）：
+    - new：register_from_idea 注册 drafts 新课题
+    - merge：enrich_from_idea 注入活跃课题 + 文献挂载到 02_literature
+    - expansion：文献挂载到课题 02_literature/supplementary-sources-{date}.json
+      （references 校验步骤与下周 writer 可读）
+    全部路由完成后簇标 linked，不再吸收新成员。
+    """
+    from proposal_lifecycle import ProposalLifecycle
+    from .clusters import load_clusters, mark_linked, save_clusters
+
+    routes_path = WEEKEND_INPUT_DIR / f"routes-{now_utc()[:10]}.json"
+    routes = load_json(routes_path, default={}).get("routes", [])
+
+    # 摘要索引：source_id → 摘要条目（信息源挂载需要 title/summary/path）
+    summaries_path = WEEKEND_INPUT_DIR / f"summaries-{now_utc()[:10]}.json"
+    summaries = load_json(summaries_path, default={}).get("summaries", [])
+    summary_index = {s.get("source_id", ""): s for s in summaries if isinstance(s, dict)}
+
+    registry = load_clusters()
+    cluster_index = {c.get("cluster_id"): c for c in registry.get("clusters", [])}
 
     lc = ProposalLifecycle()
     actions = []
-    for d in decisions[:3]:
-        direction = d.get("direction", {})
+    for r in routes:
+        cid = r.get("cluster_id", "")
+        cluster = cluster_index.get(cid)
+        if not cluster:
+            continue
+        action = r.get("action", "new")
+        target_id = r.get("target_id")
+
         idea = {
-            "title": direction.get("title", ""),
-            "background": f"基于近期文献与 KB 分析识别出的研究缺口：{direction.get('gap', '')}",
-            "gap": direction.get("gap", ""),
-            "content": direction.get("related_sources", []),
+            "title": cluster.get("title", ""),
+            "background": f"知识簇综合：{cluster.get('summary', '')}",
+            "gap": "；".join(cluster.get("open_questions", []) or []) or cluster.get("summary", "")[:200],
+            "content": cluster.get("member_source_ids", []),
             "approach": "待进一步细化",
-            "innovations": [direction.get("gap", "")],
-            "sources": [{"title": direction.get("title", ""), "source_type": "weekend_pipeline"}],
-            "keywords": direction.get("keywords", []),
+            "innovations": cluster.get("open_questions", []) or [cluster.get("summary", "")[:120]],
+            "sources": [
+                {"title": summary_index.get(sid, {}).get("title", sid), "source_type": "weekend_cluster"}
+                for sid in cluster.get("member_source_ids", [])
+                if sid in summary_index
+            ],
+            "keywords": cluster.get("keywords", []),
             "generated_at": now_utc(),
             "reliability": RELIABILITY_DERIVED,
         }
 
-        action = d.get("action")
-        target_id = d.get("target_id")
         if dry_run:
             result = {"action": action, "target_id": target_id, "dry_run": True}
         elif action == "new":
-            name = safe_filename(idea["title"])[:40].strip("-").lower() or "new-idea"
-            pid = lc.generate_proposal_id(name=name, project_type="general")
             result = lc.register_from_idea(idea, project_type="general")
         elif action == "merge" and target_id:
             result = lc.enrich_from_idea(target_id, idea)
+            result = dict(result) if isinstance(result, dict) else {"success": False}
+            result["supplementary_written"] = _write_supplementary_sources(target_id, cluster, summary_index)
+        elif action == "expansion" and target_id:
+            # v6.9.12 落地：旧版仅记录建议（空转）
+            written = _write_supplementary_sources(target_id, cluster, summary_index)
+            result = {"success": written, "action": "expansion", "target_id": target_id,
+                      "message": "补充信息源已挂载到课题文献目录"}
         else:
-            result = {"action": "expansion", "target_id": target_id, "message": "已记录扩展建议"}
+            result = {"action": action, "target_id": target_id, "message": "路由目标缺失，跳过"}
 
-        actions.append({"idea_title": idea["title"], "action": action, "result": result})
+        if not dry_run and result.get("success") and action != "new":
+            # 新课题 register 后 proposal_id 在 result 里，同样标 linked
+            mark_linked(registry, cid, result.get("proposal_id") or target_id or "")
+        elif not dry_run and action == "new" and result.get("success"):
+            mark_linked(registry, cid, result.get("proposal_id", ""))
+
+        actions.append({"cluster_id": cid, "cluster_title": cluster.get("title", ""), "action": action, "result": result})
 
     if not dry_run:
+        save_clusters(registry)
         save_json(WEEKEND_INPUT_DIR / f"ideas-{now_utc()[:10]}.json", {"generated_at": now_utc(), "actions": actions})
 
     return {"success": True, "ideas_count": len(actions)}
+
+
+def _write_supplementary_sources(
+    proposal_id: str,
+    cluster: Dict[str, Any],
+    summary_index: Dict[str, Dict[str, Any]],
+) -> bool:
+    """把簇成员文献挂载为课题补充信息源（02_literature/ 下）。
+
+    融入下周工作流的机制：references 校验步骤与 writer 以课题目录
+    为输入域，补充清单落盘后即进入下一轮优化的可见范围。
+    """
+    from proposal_lifecycle import ProposalLifecycle
+
+    try:
+        lc = ProposalLifecycle()
+        prop_dir = lc._find_proposal_dir(proposal_id)
+        if not prop_dir:
+            return False
+        lit_dir = prop_dir / "02_literature"
+        lit_dir.mkdir(parents=True, exist_ok=True)
+        entries = []
+        for sid in cluster.get("member_source_ids", []):
+            s = summary_index.get(sid)
+            if s:
+                entries.append({
+                    "source_id": sid,
+                    "title": s.get("title", ""),
+                    "summary": s.get("summary", ""),
+                    "path": s.get("path", ""),
+                    "added_via": f"cluster:{cluster.get('cluster_id', '')}",
+                    "added_at": now_utc(),
+                })
+        if not entries:
+            return False
+        out = lit_dir / f"supplementary-sources-{now_utc()[:10]}.json"
+        save_json(out, {"proposal_id": proposal_id, "cluster_id": cluster.get("cluster_id", ""),
+                        "entries": entries})
+        return True
+    except Exception as e:
+        if _log:
+            _log.warning(f"补充信息源挂载失败（{proposal_id}）: {e}")
+        return False

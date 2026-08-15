@@ -119,7 +119,7 @@ class WeekendPipelineHardeningTests(TestSuite):
         p.handlers = self._stub_handlers(p)
 
         result = p.run_stage("input", dry_run=True)
-        self.assert_eq(result.get("executed"), 7, "dry-run run_stage 预览 7 个 job")
+        self.assert_eq(result.get("executed"), 6, "dry-run run_stage 预览 6 个 job")
 
         p2 = self._make_pipeline()
         statuses = {j.get("status") for j in p2.list_jobs(stage="input")}
@@ -141,7 +141,7 @@ class WeekendPipelineHardeningTests(TestSuite):
         from weekend_pipeline.jobs import stage_job_templates
 
         input_jobs = stage_job_templates("input")
-        self.assert_eq(len(input_jobs), 7, "input 7 个 job")
+        self.assert_eq(len(input_jobs), 6, "input 6 个 job")
         missing = [j["job_id"] for j in input_jobs if not j.get("artifact")]
         self.assert_eq(
             missing, [], f"input 全部 job 应声明 artifact（缺失: {missing}）",
@@ -356,8 +356,8 @@ class WeekendPipelineHardeningTests(TestSuite):
         p.handlers = self._stub_handlers(p)
 
         result = p.run_stage("input")
-        self.assert_eq(result.get("executed"), 7, "P2b: per-job 锁下仍应跑完 7 个 job")
-        self.assert_eq(len(result.get("results", [])), 7, "每个 job 有独立结果")
+        self.assert_eq(result.get("executed"), 6, "P2b: per-job 锁下仍应跑完 6 个 job")
+        self.assert_eq(len(result.get("results", [])), 6, "每个 job 有独立结果")
 
         p2 = self._make_pipeline()
         statuses = {j.get("status") for j in p2.list_jobs(stage="input")}

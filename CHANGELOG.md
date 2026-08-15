@@ -1,5 +1,50 @@
 # 变更记录
 
+## v6.9.12 - 2026-08-15 输入端架构重构：知识簇链路（用户设计四点全落地）
+
+背景：用户提出理想输入端设计——①信息提取（对未被提炼过的知识聚类
+提炼）②课题判断（提炼内容 vs 全阶段课题，重合则融合、不重合则注册）
+③融入机制（补充 proposal/信息源，进下周工作流）④聚类防冗余（新知识
+沿已有类融入，不开新类）；并补充⑤源甄别设计（哪些知识可作聚类源）。
+对照现状逐项评估：①伪聚类（每周无状态重猜）、③expansion 空转、
+④⑤缺失、②存在 kb_concepts 恒空 bug。本次整体重构：
+
+- **源甄别（⑤）**：`distilled_paper_ids()` 以 wiki/papers 页的
+  arxiv_id/stem 为判据，已提炼论文不再作为聚类源（collect 层排除，
+  不耗 summarize LLM 名额）；tier 分层 paper=1/briefing=2/capture=3/
+  note=3，tier≤2 进聚类主源。实测首轮排除后仍有 500+ 未提炼积压。
+- **知识簇注册表（①④）**：新增 `clusters.py`——簇状态机
+  open→linked/closed；增量归簇 `assign_summaries`（关键词 Jaccard
+  0.7+标题 0.3 加权，零 LLM 确定性），新摘要优先融入已有 open 簇；
+  `form_new_clusters` 单篇不成簇（≥2 篇）、新簇与全部已有簇（含
+  linked/closed）查重防换皮重开；orphan 42 天超龄清理、open 簇 4 周
+  无更新自动 closed 防僵尸簇。注册表持久化
+  `memory/weekend-input/clusters.json`。
+- **课题判断（②）**：`topic_match` 取代旧 direction_select——
+  `_load_all_stage_proposals` 直读 research_proposals/ 全阶段（旧版只
+  读 KB 静态页 3000 字截断）；两级判断：Jaccard ≥0.35 高置信直判
+  （archived→expansion，活跃→merge），中低置信 LLM 仲裁 top-3 候选
+  （概念级重合，词袋测不出的场景）；LLM 不可用回退纯 Jaccard。
+  顺手修复 kb_concepts 恒空 bug（processed_sources value 无 source_id
+  键，旧 gap_analysis 的知识库概念输入从未生效）。
+- **融入机制（③）**：compose 三路由全部落地——new→register_from_idea；
+  merge→enrich_from_idea+信息源挂载；expansion→
+  `_write_supplementary_sources` 把簇成员文献写入课题
+  `02_literature/supplementary-sources-{date}.json`（references 校验
+  与下周 writer 以课题目录为输入域，即进下一轮优化可见范围；旧版
+  expansion 仅写建议 JSON 空转）。路由成功后簇标 linked 不再吸收。
+- **job 链重构**：input 7 job → 6 job（collect→summarize→
+  cluster_assign→cluster_distill→topic_match→compose）；旧 4 job
+  （gap/select/retrieve/deep_read）由 `DEPRECATED_INPUT_JOBS` 清单
+  在 sync 时清理 state 残留；summarize 摘要条目回填 source_id/path/
+  tier 供归簇与挂载回溯。
+- **验证**：新增 `tests/test_input_clustering.py`（36 断言：已提炼
+  排除/tier 分层/增量归簇/单篇不成簇/两篇成簇/新簇查重/stale 关闭/
+  全阶段路由 merge-expansion-new/6 job 链完整性+废弃清理）；旧套件
+  同步新链口径（7 job→6 job、产物名清单）；修复 source_counts 对
+  int 键 len() 崩溃；基线 717 → **753/753** 全绿。真实环境已切换
+  （清理 4 废弃 job、新增 3 job）并重置 input 阶段用新链重跑。
+
 ## v6.9.11 - 2026-08-15 输入端积压治理：虚假标记清理 + 补课语义
 
 背景：v6.9.10 修复"收集即标记"缺陷后，用户指出存量问题——306 条

@@ -20,6 +20,8 @@ from .constants import (
     STAGE_OUTPUT,
     STAGE_REFLECTION,
     STEP_ANALYZE,
+    STEP_CLUSTER_ASSIGN,
+    STEP_CLUSTER_DISTILL,
     STEP_COLLECT,
     STEP_COMPOSE,
     STEP_DEEP_READ,
@@ -33,6 +35,7 @@ from .constants import (
     STEP_SELECT,
     STEP_SUMMARIZE,
     STEP_SYNC,
+    STEP_TOPIC_MATCH,
     STEP_WEEKLY_REPORT,
 )
 
@@ -71,7 +74,17 @@ def _base_job(
 
 
 def input_stage_jobs() -> List[Dict[str, Any]]:
-    """输入阶段任务模板。"""
+    """输入阶段任务模板。
+
+    v6.9.12 知识簇链路（取代旧 gap→select→retrieve→deep_read 四步）：
+    collect → summarize → cluster_assign（增量归簇，零 LLM）→
+    cluster_distill（簇内提炼知识卡）→ topic_match（簇 vs 全阶段课题
+    路由）→ compose（路由落地：new 注册 / merge 融合 / expansion
+    信息源挂载）。
+
+    旧 job（gap_analysis/direction_select/retrieve_supplementary/
+    deep_read）由 pipeline.sync_stage_jobs 的废弃清单清理 state 残留。
+    """
     _in = "memory/weekend-input"
     jobs = [
         _base_job("input_collect_sources", STAGE_INPUT, STEP_COLLECT, [],
@@ -79,23 +92,29 @@ def input_stage_jobs() -> List[Dict[str, Any]]:
         _base_job("input_summarize_new_papers", STAGE_INPUT, STEP_SUMMARIZE,
                   ["input_collect_sources"],
                   artifact=f"{_in}/summaries-{{date}}.json"),
-        _base_job("input_gap_analysis", STAGE_INPUT, STEP_ANALYZE,
+        _base_job("input_cluster_assign", STAGE_INPUT, STEP_CLUSTER_ASSIGN,
                   ["input_summarize_new_papers"],
-                  artifact=f"{_in}/directions-{{date}}.json"),
-        _base_job("input_direction_select", STAGE_INPUT, STEP_SELECT,
-                  ["input_gap_analysis"],
-                  artifact=f"{_in}/decisions-{{date}}.json"),
-        _base_job("input_retrieve_supplementary", STAGE_INPUT, STEP_RETRIEVE,
-                  ["input_direction_select"],
-                  artifact=f"{_in}/supplementary-{{date}}.json"),
-        _base_job("input_deep_read", STAGE_INPUT, STEP_DEEP_READ,
-                  ["input_retrieve_supplementary"],
-                  artifact=f"{_in}/deep-read-{{date}}.json"),
+                  artifact=f"{_in}/clusters-week-{{date}}.json"),
+        _base_job("input_cluster_distill", STAGE_INPUT, STEP_CLUSTER_DISTILL,
+                  ["input_cluster_assign"],
+                  artifact=f"{_in}/distilled-clusters-{{date}}.json"),
+        _base_job("input_topic_match", STAGE_INPUT, STEP_TOPIC_MATCH,
+                  ["input_cluster_distill"],
+                  artifact=f"{_in}/routes-{{date}}.json"),
         _base_job("input_compose_ideas", STAGE_INPUT, STEP_COMPOSE,
-                  ["input_deep_read"],
+                  ["input_topic_match"],
                   artifact=f"{_in}/ideas-{{date}}.json"),
     ]
     return jobs
+
+
+# v6.9.12: input 阶段废弃 job（知识簇链路取代），sync 时清理 state 残留
+DEPRECATED_INPUT_JOBS = {
+    "input_gap_analysis",
+    "input_direction_select",
+    "input_retrieve_supplementary",
+    "input_deep_read",
+}
 
 
 # ---------------------------------------------------------------------------

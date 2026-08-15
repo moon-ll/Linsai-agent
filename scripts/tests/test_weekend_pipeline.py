@@ -73,11 +73,11 @@ class WeekendPipelineTests(TestSuite):
         p = self._make_pipeline()
         result = p.sync_stage_jobs("input")
         self.assert_true(result.get("success"), "sync input 成功", result)
-        self.assert_eq(len(result.get("jobs", [])), 7, "input 阶段 7 个 job")
+        self.assert_eq(len(result.get("jobs", [])), 6, "input 阶段 6 个 job（v6.9.12 知识簇链路）")
 
         result2 = p.sync_stage_jobs("input")
         self.assert_eq(result2.get("added"), 0, "重复 sync 不新增")
-        self.assert_eq(len(p.list_jobs(stage="input")), 7, "input job 数量保持 7")
+        self.assert_eq(len(p.list_jobs(stage="input")), 6, "input job 数量保持 6")
 
     def _test_dependency_order(self):
         p = self._make_pipeline()
@@ -128,7 +128,7 @@ class WeekendPipelineTests(TestSuite):
         p.sync_stage_jobs("input")
         jobs = p.list_jobs(stage="input")
 
-        # 模拟：collect 已完成，summarize 失败，gap_analysis 等待 summarize
+        # 模拟：collect 已完成，summarize 失败，cluster_assign 等待 summarize
         jobs[0]["status"] = "done"  # input_collect_sources
         jobs[1]["status"] = "failed"  # input_summarize_new_papers
         jobs[1]["attempts"] = 1
@@ -138,15 +138,15 @@ class WeekendPipelineTests(TestSuite):
         from weekend_pipeline.executor import pick_next_job
         job = pick_next_job(p.state, stage="input")
 
-        # pick_next_job 应发现 summarize 是 failed 且阻塞 gap_analysis → 重置为 pending
+        # pick_next_job 应发现 summarize 是 failed 且阻塞 cluster_assign → 重置为 pending
         self.assert_true(job is not None, "应返回一个 job")
         self.assert_eq(job["job_id"], "input_summarize_new_papers", "应返回被修复的 failed 依赖")
         self.assert_eq(job["status"], "pending", "被修复的 job 应为 pending")
         self.assert_eq(job["repair_attempts"], 1, "repair_attempts 应 +1")
 
-        # 验证 gap_analysis 的依赖现在满足
-        gap = next(j for j in p.state.get("jobs", []) if j["job_id"] == "input_gap_analysis")
-        self.assert_eq(gap["status"], "pending", "gap_analysis 仍为 pending")
+        # 验证 cluster_assign 的依赖现在满足
+        ca = next(j for j in p.state.get("jobs", []) if j["job_id"] == "input_cluster_assign")
+        self.assert_eq(ca["status"], "pending", "cluster_assign 仍为 pending")
 
     def _test_output_stage_creates_archived_extract_jobs(self):
         p = self._make_pipeline()
@@ -303,8 +303,8 @@ class WeekendPipelineTests(TestSuite):
             1 for j in p2.list_jobs(stage="input") if j.get("status") == "pending"
         )
         self.assert_eq(
-            pending_count, 7,
-            "全局 updated_at 新鲜但 input 自身完成已 8 天 → 应重置 7 个 job",
+            pending_count, 6,
+            "全局 updated_at 新鲜但 input 自身完成已 8 天 → 应重置全部 job",
         )
 
     def _test_reset_stage_not_triggered_within_week(self):
@@ -321,8 +321,8 @@ class WeekendPipelineTests(TestSuite):
         # finished_at 日期检查产物。补齐当日产物文件，保持本测试
         # "周内不因跨周而重置"的语义（产物齐全 → 不触发产物重置）。
         artifacts = [
-            "sources", "summaries", "directions", "decisions",
-            "supplementary", "deep-read", "ideas",
+            "sources", "summaries", "clusters-week", "distilled-clusters",
+            "routes", "ideas",
         ]
         input_dir = self.tmp_root / "memory" / "weekend-input"
         input_dir.mkdir(parents=True, exist_ok=True)
@@ -339,7 +339,7 @@ class WeekendPipelineTests(TestSuite):
         done_count = sum(
             1 for j in p2.list_jobs(stage="input") if j.get("status") == "done"
         )
-        self.assert_eq(done_count, 7, "完成仅 2 天且产物齐全 → 不应重置")
+        self.assert_eq(done_count, 6, "完成仅 2 天且产物齐全 → 不应重置")
 
     def run_tests(self):
         self._test_sync_stage_jobs_idempotent()

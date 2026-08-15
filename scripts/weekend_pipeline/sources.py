@@ -47,6 +47,39 @@ def _file_mtime_iso(path: Path) -> str:
         return ""
 
 
+# v6.9.12: 源质量分层（聚类提炼的质量来源设计）
+SOURCE_TIER_PAPER = 1       # 学术一手文献（raw papers + hermes papers）
+SOURCE_TIER_BRIEFING = 2    # 每日精选简报（二手但已筛选）
+SOURCE_TIER_CAPTURE = 3     # 讨论捕获（背景上下文）
+SOURCE_TIER_NOTE = 3        # 手工笔记（背景上下文）
+
+
+def distilled_paper_ids() -> set:
+    """已提炼论文 id 集合（wiki/papers 页的 arxiv_id / 文件 stem）。
+
+    v6.9.12: 知识已蒸馏成 wiki 页的 raw 论文不再作为聚类源。
+    判据：knowledge/wiki/papers/*.md frontmatter 的 arxiv_id 字段
+    或页文件名 stem。实测 wiki 页 326 个（含 arxiv_id 直标）。
+    """
+    ids: set = set()
+    wiki_papers_dir = PROJECT_ROOT / "knowledge" / "wiki" / "papers"
+    if not wiki_papers_dir.exists():
+        return ids
+    for f in wiki_papers_dir.glob("*.md"):
+        ids.add(f.stem)
+        try:
+            head = f.read_text(encoding="utf-8")[:800]
+            for line in head.split("\n"):
+                if line.startswith("arxiv_id:"):
+                    val = line.split(":", 1)[1].strip().strip('"\'')
+                    if val:
+                        ids.add(val)
+                    break
+        except Exception:
+            continue
+    return ids
+
+
 def _make_source_id(prefix: str, path: Path) -> str:
     return f"{prefix}:{path.relative_to(PROJECT_ROOT)}"
 
@@ -332,6 +365,15 @@ def collect_all_sources(
     kb 类来源保留标记：gap_analysis 依赖 processed_sources 中的
     kb:concept 记录作为知识库概念输入，且 collect_kb_concepts_and_methods
     靠它去重跳过已收录页面。
+
+    v6.9.12 源甄别（聚类提炼的质量来源）：
+    1. 已提炼排除——knowledge/wiki/papers/ 中已有同 arxiv_id 提炼页的
+       raw 论文不再作为聚类源（其知识已升华进 wiki，重复聚类纯冗余；
+       wiki 页可带 used_by_proposals 直接关联课题）。排除在 collect
+       层完成，不消耗 summarize 的 LLM 名额。
+    2. 质量分层 tier——paper=1（学术一手）/ briefing=2（二手精选）/
+       capture=3 / note=3（讨论与手工笔记）。tier ≤2 进聚类主源
+       （new_paper_sources 口径不变），tier=3 仅作 gap 上下文。
     """
     sources: Dict[str, Any] = {
         "briefings": collect_briefings(days=days, state=state),
@@ -341,6 +383,25 @@ def collect_all_sources(
         "kb": collect_kb_concepts_and_methods(state=state),
         "collected_at": now_utc(),
     }
+
+    # v6.9.12: 已提炼排除 + tier 标注
+    distilled = distilled_paper_ids()
+    kept_papers = []
+    excluded = 0
+    for s in sources.get("papers", []):
+        if s.get("source_id", "").split(":")[-1] in distilled:
+            excluded += 1
+            continue
+        s["tier"] = SOURCE_TIER_PAPER
+        kept_papers.append(s)
+    sources["papers"] = kept_papers
+    sources["distilled_excluded"] = excluded
+    for s in sources.get("briefings", []):
+        s["tier"] = SOURCE_TIER_BRIEFING
+    for s in sources.get("captures", []):
+        s["tier"] = SOURCE_TIER_CAPTURE
+    for s in sources.get("reference_notes", []):
+        s["tier"] = SOURCE_TIER_NOTE
 
     if state is not None:
         for wiki_type, items in sources.get("kb", {}).items():

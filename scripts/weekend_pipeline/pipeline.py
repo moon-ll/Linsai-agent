@@ -22,6 +22,8 @@ from .constants import (
     STAGE_REFLECTION,
     STAGES,
     STEP_ANALYZE,
+    STEP_CLUSTER_ASSIGN,
+    STEP_CLUSTER_DISTILL,
     STEP_COLLECT,
     STEP_COMPOSE,
     STEP_DEEP_READ,
@@ -35,6 +37,7 @@ from .constants import (
     STEP_SELECT,
     STEP_SUMMARIZE,
     STEP_SYNC,
+    STEP_TOPIC_MATCH,
     STEP_WEEKLY_REPORT,
 )
 from .executor import execute_job, pick_next_job, repair_stale_and_failed
@@ -93,10 +96,10 @@ class WeekendPipeline:
             # input
             (STAGE_INPUT, STEP_COLLECT): input_jobs.run_input_collect,
             (STAGE_INPUT, STEP_SUMMARIZE): input_jobs.run_input_summarize,
-            (STAGE_INPUT, STEP_ANALYZE): input_jobs.run_input_gap_analysis,
-            (STAGE_INPUT, STEP_SELECT): input_jobs.run_input_direction_select,
-            (STAGE_INPUT, STEP_RETRIEVE): input_jobs.run_input_retrieve_supplementary,
-            (STAGE_INPUT, STEP_DEEP_READ): input_jobs.run_input_deep_read,
+            # v6.9.12: 知识簇链路取代 gap/select/retrieve/deep_read
+            (STAGE_INPUT, STEP_CLUSTER_ASSIGN): input_jobs.run_input_cluster_assign,
+            (STAGE_INPUT, STEP_CLUSTER_DISTILL): input_jobs.run_input_cluster_distill,
+            (STAGE_INPUT, STEP_TOPIC_MATCH): input_jobs.run_input_topic_match,
             (STAGE_INPUT, STEP_COMPOSE): input_jobs.run_input_compose,
             # output：extract 一步两义（归档课题萃取 / 日常知识萃取），
             # 统一入口 run_output_extract 内部按 job_id 分派
@@ -295,6 +298,20 @@ class WeekendPipeline:
                 for key in ("artifact",):
                     if t.get(key) and not existing.get(key):
                         existing[key] = t[key]
+
+        # v6.9.12: 清理废弃 job 的 state 残留（模板已删除但 state 里
+        # 还挂着的旧 job——不清理会永远 done/pending 挂在列表里，
+        # 且旧 step 的 done 状态会污染阶段终态汇总）
+        if stage == STAGE_INPUT:
+            from .jobs import DEPRECATED_INPUT_JOBS
+            before = len(self.state.get("jobs", []))
+            self.state["jobs"] = [
+                j for j in self.state.get("jobs", [])
+                if not (j.get("stage") == STAGE_INPUT and j.get("job_id") in DEPRECATED_INPUT_JOBS)
+            ]
+            removed = before - len(self.state["jobs"])
+            if removed and _log:
+                _log.info(f"input 阶段清理废弃 job {removed} 个（v6.9.12 知识簇链路取代）")
 
         # 产物检测：声明了 artifact 的 done job 若产物缺失则级联重置
         self._verify_artifacts(stage)

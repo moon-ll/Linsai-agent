@@ -27,6 +27,10 @@ STEP_SELECT = "select"
 STEP_RETRIEVE = "retrieve"
 STEP_DEEP_READ = "deep_read"
 STEP_COMPOSE = "compose"
+# v6.9.12: 知识簇链路（取代 input 阶段的 analyze/select 旧用途）
+STEP_CLUSTER_ASSIGN = "cluster_assign"    # 增量归簇（零 LLM）
+STEP_CLUSTER_DISTILL = "cluster_distill"  # 簇内提炼（LLM 知识卡）
+STEP_TOPIC_MATCH = "topic_match"          # 簇 vs 全阶段课题路由判断
 STEP_SYNC = "sync"
 STEP_EXTRACT = "extract"
 STEP_HEALTH = "health"
