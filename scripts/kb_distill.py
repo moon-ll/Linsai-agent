@@ -40,6 +40,7 @@ from typing import Any, Dict, List, Optional, Tuple
 PROJECT_ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
+from common import now_utc  # noqa: E402
 from knowledge_base import (  # noqa: E402
     KNOWLEDGE_DIR,
     distill_raw_to_wiki,
@@ -113,7 +114,11 @@ def _ensure_source_raw(llm_output: str, raw_rel: str, wiki_type: str,
     - 无 frontmatter → 构造最小合规头（title/type/created/growth_stage）
     - 有 frontmatter → 仅在缺 source_raw 时补写，不覆盖已有字段
     """
-    now = "2026-08-15T00:00:00Z"
+    # v6.9.7: created 必须取真实当前时间——此前硬编码 "2026-08-15T00:00:00Z"，
+    # 而蒸馏系统提示要求 LLM 只输出正文（构造头部是主路径），导致 lc-kb-distill
+    # 每日新蒸馏页的 created 全部冻结在同一天，污染 KB 新鲜度指标与
+    # growth_engine 晋升时序判断。
+    now = now_utc()
     if llm_output.lstrip().startswith("---"):
         if re.search(rf"^{SOURCE_RAW_KEY}\s*:", llm_output, re.M):
             return llm_output
@@ -223,6 +228,24 @@ def _self_check() -> bool:
         print("✓ 已有 source_raw → 不覆盖")
     else:
         print("✗ 覆盖了已有字段"); ok = False
+
+    # 5) created 时间戳非冻结（v6.9.7 回归：与当前时间差 < 24h）
+    import re as _re
+    from datetime import datetime, timezone, timedelta
+    fresh = _ensure_source_raw("正文内容", "x.md", "papers", "x")
+    m = _re.search(r'^created:\s*"?(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z)"?', fresh, _re.M)
+    if m:
+        try:
+            ts = datetime.strptime(m.group(1), "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
+            age = datetime.now(timezone.utc) - ts
+            if abs(age) < timedelta(hours=24):
+                print("✓ 构造头 created 取真实当前时间（非冻结）")
+            else:
+                print(f"✗ created 冻结在 {m.group(1)}"); ok = False
+        except ValueError:
+            print(f"✗ created 格式不可解析: {m.group(1)}"); ok = False
+    else:
+        print("✗ 构造头缺失 created 字段"); ok = False
 
     print("自检结果:", "✓ 通过" if ok else "✗ 失败")
     return ok

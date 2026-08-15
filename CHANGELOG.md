@@ -1,5 +1,19 @@
 # 变更记录
 
+## v6.9.7 - 2026-08-15 体检修复：kb_distill 蒸馏页 created 时间戳冻结
+
+- **缺陷**：`kb_distill._ensure_source_raw` 硬编码 `now = "2026-08-15T00:00:00Z"`。
+  蒸馏系统提示要求 LLM"直接输出 Markdown 正文（frontmatter 由系统补写）"，
+  即"无 frontmatter → 构造合规头"是**主路径**而非边缘分支——lc-kb-distill
+  cron（每日 12:50，5 篇/天）产出的新页 `created` 将全部冻结在 2026-08-15，
+  系统性污染 KB 新鲜度指标（kb_health）与 growth_engine 晋升时序。
+- **修复**：改为 `common.now_utc()` 取真实当前时间（最小化定向修复，
+  `save_distilled_wiki` 门面确认不覆盖 created/updated，冻结值会原样落盘）。
+- **验证**：`kb_distill.py --self-check` 新增第 5 项断言（created 与当前
+  时间差 <24h）5/5 通过；新增回归测试
+  `tests/test_kb_distill_created_ts.py`（5 断言）注册进 `--module` 基线，
+  617 → **622/622** 全绿。
+
 ## v6.9.6 - 2026-08-15 知识库自动维护链路（P0 编排接线 + P1 执行器）
 
 评估结论："三类需求（条目编译/孤岛检查/信息整合）的检测工具基本已存在，
