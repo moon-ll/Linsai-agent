@@ -1,5 +1,34 @@
 # 变更记录
 
+## v6.9.11 - 2026-08-15 输入端积压治理：虚假标记清理 + 补课语义
+
+背景：v6.9.10 修复"收集即标记"缺陷后，用户指出存量问题——306 条
+processed_sources 里 93 条文献类标记是 bug 时期打上的虚假记录（文献
+从未被真正摘要），仅删代码不清理数据，"恢复未处理"仍轮不到消费。
+
+- **数据修正（一次性）**：清理 `weekend-pipeline.json` 中 93 条文献类
+  虚假标记（briefing 52 + paper 40 + capture 1），保留 kb 类 213 条
+  （gap_analysis 数据通路）。备份留存于
+  `memory/weekend-pipeline.json.bak-vacuum-*`。
+- **补课语义（窗口/上限豁免）**：清理后发现第二层结构性浪费——
+  `collect_briefings` 按 mtime 7 天窗口过滤，积压文献 mtime 已老化，
+  下周重跑即被窗口挡住；`collect_paper_pool` 按 mtime 前 20 截断，
+  池中较旧的一半永远排不进。修复：新增 `_backlog_exempt`——来源
+  从未被处理过（无标记）时豁免时间窗口与数量上限；已处理的维持
+  原过滤。待处理语义由标记决定，而非文件新鲜度。state=None 时
+  保持旧语义（向后兼容）。
+- **summarize 单次容量 10 → 30**：每篇 LLM timeout 60s，最坏 1800s
+  在 weekend job stale 阈值（3600s）内安全。旧值 10/周 < 稳态新料
+  增速，消化能力不足。
+- **实测规模**：补课语义生效后真实积压显现——577 条文献
+  （502 篇论文 + 75 份简报）从未被处理过，此前被"前 20 上限 +
+  虚假标记"双重掩盖。按 30 条/周转化，约 19 周清完；gap_analysis
+  每周消费 8 条摘要，下周六（08-22）起 ideas 产出恢复正常。
+- **验证**：test_input_pipeline_repair 新增 2 用例 7 断言（窗口豁免
+  三场景/上限豁免三场景，含 state=None 旧语义回归），修复 stub
+  用例间污染（_patch_collectors 增加 _restore_collectors）；
+  基线 710 → **717/717** 全绿。
+
 ## v6.9.10 - 2026-08-15 周末输入端三项修复："成功空转"根治
 
 背景：用户报告 input 任务失败。排查发现 7 个 input job 全部 done、

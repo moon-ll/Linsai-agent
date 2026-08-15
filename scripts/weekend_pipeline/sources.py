@@ -51,74 +51,120 @@ def _make_source_id(prefix: str, path: Path) -> str:
     return f"{prefix}:{path.relative_to(PROJECT_ROOT)}"
 
 
-def collect_briefings(days: int = 7) -> List[Dict[str, Any]]:
+def _backlog_exempt(sid: str, text: str, state: Optional[Dict[str, Any]]) -> bool:
+    """v6.9.11: 补课豁免——来源从未被处理过时豁免时间窗口/数量上限。
+
+    背景：v6.7.7-v6.9.10 的"收集即标记"缺陷给大量文献打上虚假的
+    已处理标记（实际从未摘要）。修复删除标记后，这些积压文献的
+    文件 mtime 已老化，会被 7 天窗口/mtime 前 N 上限挡在收集之外，
+    "恢复未处理"也轮不到消费。待处理语义应由标记决定而非文件
+    新鲜度：未处理的全收（补课），已处理的按原窗口过滤。
+    """
+    if state is None:
+        return False
+    return not is_source_processed(sid, text, state)
+
+
+def collect_briefings(
+    days: int = 7,
+    state: Optional[Dict[str, Any]] = None,
+) -> List[Dict[str, Any]]:
     """收集最近 N 天的文献简报。
 
     v6.8.13: 三路读取——CoPilot wiki/reviews + hermes_briefings + hermes papers。
+    v6.9.11: 窗口外文件若从未处理过（无标记）则豁免窗口收进（补课），
+    已处理过的旧文件仍跳过。
     """
     cutoff = datetime.now(timezone.utc) - __import__("datetime").timedelta(days=days)
     sources = []
     seen_ids = set()
 
-    # 路径 A：CoPilot wiki/reviews（同步后的简报）
-    for f in sorted(BRIEFING_DIR.glob("briefing-*.md"), reverse=True):
+    def _in_window_or_backlog(f: Path, sid: str, text: str) -> bool:
+        """窗口内直接放行；窗口外仅放行未处理过的（补课）。"""
         try:
             mtime = datetime.fromtimestamp(f.stat().st_mtime, tz=timezone.utc)
-            if mtime < cutoff:
-                continue
         except Exception:
-            pass
+            return True
+        if mtime >= cutoff:
+            return True
+        return _backlog_exempt(sid, text, state)
+
+    # 路径 A：CoPilot wiki/reviews（同步后的简报）
+    for f in sorted(BRIEFING_DIR.glob("briefing-*.md"), reverse=True):
         text = _read_text(f, 6000)
-        if text:
-            sid = _make_source_id("briefing", f)
+        if not text:
+            continue
+        sid = _make_source_id("briefing", f)
+        if not _in_window_or_backlog(f, sid, text):
+            continue
+        seen_ids.add(sid)
+        sources.append({
+            "source_id": sid,
+            "type": "briefing",
+            "path": str(f.relative_to(PROJECT_ROOT)),
+            "text": text,
+            "mtime": _file_mtime_iso(f),
+            "reliability": RELIABILITY_RELIABLE,
+        })
+
+    # 路径 B：hermes workspace briefings/research_briefing_*.md（每日精选简报）
+    if HERMES_BRIEFINGS_DIR.exists():
+        for f in sorted(HERMES_BRIEFINGS_DIR.glob("research_briefing_*.md"), reverse=True):
+            text = _read_text(f, 6000)
+            if not text:
+                continue
+            sid = f"hermes_briefing:{f.name}"
+            if sid in seen_ids:
+                continue
+            if not _in_window_or_backlog(f, sid, text):
+                continue
             seen_ids.add(sid)
             sources.append({
                 "source_id": sid,
                 "type": "briefing",
-                "path": str(f.relative_to(PROJECT_ROOT)),
+                "path": str(f),
                 "text": text,
                 "mtime": _file_mtime_iso(f),
                 "reliability": RELIABILITY_RELIABLE,
             })
 
-    # 路径 B：hermes workspace briefings/research_briefing_*.md（每日精选简报）
-    if HERMES_BRIEFINGS_DIR.exists():
-        for f in sorted(HERMES_BRIEFINGS_DIR.glob("research_briefing_*.md"), reverse=True):
-            try:
-                mtime = datetime.fromtimestamp(f.stat().st_mtime, tz=timezone.utc)
-                if mtime < cutoff:
-                    continue
-            except Exception:
-                pass
-            text = _read_text(f, 6000)
-            if text:
-                sid = f"hermes_briefing:{f.name}"
-                if sid not in seen_ids:
-                    seen_ids.add(sid)
-                    sources.append({
-                        "source_id": sid,
-                        "type": "briefing",
-                        "path": str(f),
-                        "text": text,
-                        "mtime": _file_mtime_iso(f),
-                        "reliability": RELIABILITY_RELIABLE,
-                    })
-
     return sources
 
 
-def collect_paper_pool(limit: int = 20) -> List[Dict[str, Any]]:
+def collect_paper_pool(
+    limit: int = 20,
+    state: Optional[Dict[str, Any]] = None,
+) -> List[Dict[str, Any]]:
     """收集文献池中的新增论文。
 
     v6.8.13: 从 knowledge/raw/papers/ 的 frontmatter 读取（取代空的 paper-pool.json）。
     v6.8.14: 同时从 hermes workspace papers/ 读取补充。
+    v6.9.11: mtime 前 N 上限仅约束已处理论文；未处理过的（无标记）
+    全量收进（补课）——旧实现按 mtime 倒序截断，池中较旧的一半
+    待处理论文永远排不进前 N，恢复未处理标记后也轮不到摘要。
     """
     sources = []
     seen_ids = set()
+    admitted_processed = 0  # 已处理论文的收纳计数（受 limit 约束）
+
+    def _admit(f: Path) -> bool:
+        """v6.9.11: 未处理的全收（补课）；已处理的最多 limit 条。"""
+        nonlocal admitted_processed
+        arxiv_id = f.stem
+        sid = f"paper:{arxiv_id}"
+        text_probe = _read_text(f, 2000)
+        if _backlog_exempt(sid, text_probe, state):
+            return True
+        if admitted_processed >= limit:
+            return False
+        admitted_processed += 1
+        return True
 
     # 路径 A：CoPilot knowledge/raw/papers/*.md（YAML frontmatter）
     if RAW_PAPERS_DIR.exists():
-        for f in sorted(RAW_PAPERS_DIR.glob("*.md"), key=lambda p: p.stat().st_mtime, reverse=True)[:limit]:
+        for f in sorted(RAW_PAPERS_DIR.glob("*.md"), key=lambda p: p.stat().st_mtime, reverse=True):
+            if not _admit(f):
+                continue
             try:
                 text = _read_text(f, 1500)
                 # 提取 frontmatter 中的标题和摘要
@@ -153,7 +199,9 @@ def collect_paper_pool(limit: int = 20) -> List[Dict[str, Any]]:
 
     # 路径 B：hermes workspace papers/*.md（补充来源）
     if HERMES_BRIEFINGS_PAPERS_DIR.exists():
-        for f in sorted(HERMES_BRIEFINGS_PAPERS_DIR.glob("*.md"), key=lambda p: p.stat().st_mtime, reverse=True)[:limit]:
+        for f in sorted(HERMES_BRIEFINGS_PAPERS_DIR.glob("*.md"), key=lambda p: p.stat().st_mtime, reverse=True):
+            if not _admit(f):
+                continue
             arxiv_id = f.stem
             sid = f"paper:{arxiv_id}"
             if sid in seen_ids:
@@ -286,8 +334,8 @@ def collect_all_sources(
     靠它去重跳过已收录页面。
     """
     sources: Dict[str, Any] = {
-        "briefings": collect_briefings(days=days),
-        "papers": collect_paper_pool(limit=paper_limit),
+        "briefings": collect_briefings(days=days, state=state),
+        "papers": collect_paper_pool(limit=paper_limit, state=state),
         "captures": collect_captures(limit=capture_limit),
         "reference_notes": collect_reference_notes(),
         "kb": collect_kb_concepts_and_methods(state=state),

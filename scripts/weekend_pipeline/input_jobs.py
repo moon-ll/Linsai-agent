@@ -127,7 +127,11 @@ def run_input_summarize(state: Dict[str, Any], job: Dict[str, Any], dry_run: boo
 
     summaries = []
     system = "你是林赛，擅长对学术文献做一句话核心摘要。输出合法 JSON 数组。"
-    for p in papers[:10]:
+    # v6.9.11: 单次容量 10 → 30。每篇 LLM timeout 60s，最坏 30×60=1800s，
+    # 在 weekend job stale 阈值（STALE_RUNNING_SECONDS=3600）内安全。
+    # 旧值 10 配合每周一跑，消化能力 ~10 条/周 < 稳态新料增速，且补课
+    # 积压（92 条）需 9 周才能清完。
+    for p in papers[:30]:
         user = f"请用 1-2 句话总结以下文献的核心贡献：\n\n标题：{p.get('title', '')}\n内容：{p.get('text', '')[:1200]}\n\n输出 JSON：{{\"title\": \"...\", \"summary\": \"...\", \"keywords\": [\"...\"]}}"
         data = _llm_json(system, user, timeout=60)
         if data:
