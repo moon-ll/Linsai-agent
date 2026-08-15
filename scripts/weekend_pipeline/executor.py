@@ -46,7 +46,14 @@ def is_stale(job: Dict[str, Any], stale_seconds: int = STALE_RUNNING_SECONDS) ->
 
 
 def dependencies_satisfied(job: Dict[str, Any], state: Dict[str, Any]) -> bool:
-    """判断任务依赖是否全部完成。"""
+    """判断任务依赖是否全部完成。
+
+    v6.9.13: 保持严格语义——依赖必须位于 done 集合，缺失的依赖（模板
+    已删除，如 v6.9.12 废弃的 input_deep_read）按不满足处理。死锁由
+    sync_stage_jobs 的依赖刷新解除，不在此处放行：若放行，"代码已
+    更新、state 未 sync"的窗口期内 compose 会被提前挑中，以空路由
+    落地并标 done，丢失整周路由结果。
+    """
     done_ids = {j.get("job_id") for j in state.get("jobs", []) if j.get("status") == JOB_STATUS_DONE}
     for dep in job.get("depends_on", []):
         if dep not in done_ids:

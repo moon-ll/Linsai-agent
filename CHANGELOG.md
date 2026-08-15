@@ -1,5 +1,43 @@
 # 变更记录
 
+## v6.9.13 - 2026-08-15 体检修复：输入端知识簇链路四处阻断点 + 熔断口径
+
+20h 例行体检发现 v6.9.12 知识簇链路重构后四处阻断（其中两处
+直接导致整链断流），全部定向修复并补测试，770/770 全绿：
+
+- **compose 永久死锁（P0）**：旧 state 里
+  `input_compose_ideas.depends_on=["input_deep_read"]` 指向
+  v6.9.12 已废弃 job，而 `sync_stage_jobs` 只刷新 artifact 不刷新
+  depends_on，`dependencies_satisfied` 要求依赖在 done 集合 →
+  compose 永久不可调度、input 阶段永无终态。修复：sync 时
+  depends_on 随模板刷新（diff 落 INFO）；生产 state 已随本次
+  sync 落盘自愈。`dependencies_satisfied` 保持严格语义（缺失依赖
+  不放行），防"代码已更新、state 未 sync"窗口期空路由落地。
+- **summarize 30/30 malformed（P1）**：system prompt 要求"JSON
+  数组"与 user 模板（对象）自相矛盾，LLM 全返回数组形状；旧代码
+  只回填 dict 形状 → 条目无 source_id/path/tier，
+  cluster_assign 取 `.get()` 崩溃且来源已标 processed 失去重跑
+  资格。修复：`_coerce_summary_data()` 归一化（数组取首 dict、
+  回填溯源、不可收敛计 failed_llm 不标 processed）+ prompt 统一
+  "JSON 对象" + 离线数据修复 30/30（按归一化标题回连，含备份
+  `*.bak-malformed-2026-08-15`）。
+- **熔断幻影键（P1）**：monitor 输入端熔断读
+  `data.get("ideas", [])`，但 compose 新旧版本从未写过 "ideas"
+  键（真实 schema `{"generated_at","actions":[...]}`），测试夹具
+  与实现共享幻影契约 → 告警恒触发永不解除。修复：actions 主口径
+  （ideas 仅历史兼容），夹具改真实 schema。
+- **sync 并发覆盖（P2）**：sync 加载快照后等锁期间 worker 完成
+  job，获锁写 stale 快照冲掉 done 状态（08-15 实测 summarize
+  重跑一次）。修复：`sync_stage_jobs` 全程持
+  `file_lock("weekend-pipeline")` + 锁内重载 state；内部子保存改
+  `_save_unlocked()`（file_lock 每次开新 fd，同进程嵌套自死锁）。
+- **测试**：新增 `test_input_summarize_shapes.py`（14 断言）；
+  test_weekend_pipeline 增依赖刷新/严格语义 2 用例；
+  test_input_breaker 增真实 schema 用例 5/6。770/770 全绿。
+- **仅报告不修**：知识簇零成簇——阈值 0.22/0.30 vs 08-15 实测
+  30 篇 435 对最高相似度 0.161（仅 19 对关键词有交集），当前
+  LLM 关键词风格下永远不成簇，后三环空转；标定需人工确认。
+
 ## v6.9.12 - 2026-08-15 输入端架构重构：知识簇链路（用户设计四点全落地）
 
 背景：用户提出理想输入端设计——①信息提取（对未被提炼过的知识聚类

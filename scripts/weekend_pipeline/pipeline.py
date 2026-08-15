@@ -172,7 +172,9 @@ class WeekendPipeline:
                 reset_count += 1
 
         if reset_count > 0:
-            self._save()
+            # 注意：调用方 sync_stage_jobs 已持有 weekend-pipeline 锁，
+            # 此处必须用 _save_unlocked（嵌套同名 flock 会自死锁）
+            self._save_unlocked()
 
         return reset_count
 
@@ -255,7 +257,8 @@ class WeekendPipeline:
             reset_count += 1
 
         if reset_count > 0:
-            self._save()
+            # 同 _reset_stage_for_new_week：调用方持锁，禁嵌套锁
+            self._save_unlocked()
 
         return reset_count
 
@@ -270,64 +273,86 @@ class WeekendPipeline:
            已存在的 job 上，旧 state 无需迁移即可获得产物校验能力。
         2. 产物检测三阶段通用（声明式 artifact，见 _verify_artifacts）。
         3. processed_sources 滚动裁剪（保留 4 周，防止只增不减膨胀）。
+
+        v6.9.13: 全程持 weekend-pipeline 锁 + 锁内重载状态。旧版只在
+        落盘时经 save_pipeline_state 抢锁，但读状态用的是进程启动时的
+        快照——与 20 分钟 worker 并发时会用 stale 快照覆盖 worker 刚
+        写入的 job 终态（08-15 实测：sync 覆盖 summarize done → 整个
+        job 重跑一遍 LLM）。子例程的保存改走 _save_unlocked（嵌套同名
+        flock 会自死锁）。
         """
         if stage not in STAGES:
             raise ValueError(f"未知阶段: {stage}")
 
-        # 跨周检测：重置已完成 job，避免新一周无任务可执行
-        self._reset_stage_for_new_week(stage)
+        with file_lock("weekend-pipeline"):
+            self.state = load_pipeline_state(self.state_path)
 
-        archived_ids: List[str] = []
-        if stage == STAGE_OUTPUT:
-            try:
-                archived_ids = [p["proposal_id"] for p in ProposalLifecycle().list_by_status("archived")]
-            except Exception as e:
-                if _log:
-                    _log.warning(f"获取 archived proposals 失败: {e}")
+            # 跨周检测：重置已完成 job，避免新一周无任务可执行
+            self._reset_stage_for_new_week(stage)
 
-        templates = stage_job_templates(stage, archived_proposal_ids=archived_ids)
-        added = []
-        for t in templates:
-            existing = find_job(self.state, t["job_id"])
-            if existing is None:
-                self.state.setdefault("jobs", []).append(t)
-                added.append(t["job_id"])
-            else:
-                # 字段级合并：补齐模板新增的声明性字段（artifact），
-                # 不覆盖任何运行时状态（status/attempts/finished_at 等）
-                for key in ("artifact",):
-                    if t.get(key) and not existing.get(key):
-                        existing[key] = t[key]
+            archived_ids: List[str] = []
+            if stage == STAGE_OUTPUT:
+                try:
+                    archived_ids = [p["proposal_id"] for p in ProposalLifecycle().list_by_status("archived")]
+                except Exception as e:
+                    if _log:
+                        _log.warning(f"获取 archived proposals 失败: {e}")
 
-        # v6.9.12: 清理废弃 job 的 state 残留（模板已删除但 state 里
-        # 还挂着的旧 job——不清理会永远 done/pending 挂在列表里，
-        # 且旧 step 的 done 状态会污染阶段终态汇总）
-        if stage == STAGE_INPUT:
-            from .jobs import DEPRECATED_INPUT_JOBS
-            before = len(self.state.get("jobs", []))
-            self.state["jobs"] = [
-                j for j in self.state.get("jobs", [])
-                if not (j.get("stage") == STAGE_INPUT and j.get("job_id") in DEPRECATED_INPUT_JOBS)
-            ]
-            removed = before - len(self.state["jobs"])
-            if removed and _log:
-                _log.info(f"input 阶段清理废弃 job {removed} 个（v6.9.12 知识簇链路取代）")
+            templates = stage_job_templates(stage, archived_proposal_ids=archived_ids)
+            added = []
+            for t in templates:
+                existing = find_job(self.state, t["job_id"])
+                if existing is None:
+                    self.state.setdefault("jobs", []).append(t)
+                    added.append(t["job_id"])
+                else:
+                    # 字段级合并：补齐模板新增的声明性字段（artifact），
+                    # 不覆盖任何运行时状态（status/attempts/finished_at 等）
+                    for key in ("artifact",):
+                        if t.get(key) and not existing.get(key):
+                            existing[key] = t[key]
+                    # v6.9.13: 依赖图随模板刷新。depends_on 是结构字段而非
+                    # 运行时状态——v6.9.12 链路重构后旧 state 里 compose 仍
+                    # 指向已废弃的 input_deep_read，而 dependencies_satisfied
+                    # 要求依赖位于 done 集合，废弃 job 已被清理永远无法满足
+                    # → compose 永久死锁、input 阶段永无终态（08-15 实测）。
+                    if existing.get("depends_on") != t.get("depends_on"):
+                        if _log:
+                            _log.info(
+                                f"[weekend-pipeline] 依赖刷新: {t['job_id']} "
+                                f"{existing.get('depends_on')} -> {t.get('depends_on')}"
+                            )
+                        existing["depends_on"] = list(t.get("depends_on", []))
 
-        # 产物检测：声明了 artifact 的 done job 若产物缺失则级联重置
-        self._verify_artifacts(stage)
+            # v6.9.12: 清理废弃 job 的 state 残留（模板已删除但 state 里
+            # 还挂着的旧 job——不清理会永远 done/pending 挂在列表里，
+            # 且旧 step 的 done 状态会污染阶段终态汇总）
+            if stage == STAGE_INPUT:
+                from .jobs import DEPRECATED_INPUT_JOBS
+                before = len(self.state.get("jobs", []))
+                self.state["jobs"] = [
+                    j for j in self.state.get("jobs", [])
+                    if not (j.get("stage") == STAGE_INPUT and j.get("job_id") in DEPRECATED_INPUT_JOBS)
+                ]
+                removed = before - len(self.state["jobs"])
+                if removed and _log:
+                    _log.info(f"input 阶段清理废弃 job {removed} 个（v6.9.12 知识簇链路取代）")
 
-        # v6.9.7: processed_sources 滚动裁剪（与 error_history 策略对齐）
-        trimmed = trim_processed_sources(self.state)
+            # 产物检测：声明了 artifact 的 done job 若产物缺失则级联重置
+            self._verify_artifacts(stage)
 
-        set_stage_status(self.state, stage, JOB_STATUS_PENDING)
-        self._save()
-        return {
-            "success": True,
-            "stage": stage,
-            "added": len(added),
-            "jobs": added,
-            "trimmed_sources": trimmed,
-        }
+            # v6.9.7: processed_sources 滚动裁剪（与 error_history 策略对齐）
+            trimmed = trim_processed_sources(self.state)
+
+            set_stage_status(self.state, stage, JOB_STATUS_PENDING)
+            self._save_unlocked()
+            return {
+                "success": True,
+                "stage": stage,
+                "added": len(added),
+                "jobs": added,
+                "trimmed_sources": trimmed,
+            }
 
     def _finalize_stage_status(self, stage: str) -> None:
         """阶段终态汇总（run_stage/run_next 共用）。

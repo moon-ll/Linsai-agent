@@ -148,6 +148,85 @@ class WeekendPipelineTests(TestSuite):
         ca = next(j for j in p.state.get("jobs", []) if j["job_id"] == "input_cluster_assign")
         self.assert_eq(ca["status"], "pending", "cluster_assign 仍为 pending")
 
+    def _test_sync_refreshes_stale_depends_on(self):
+        """v6.9.13 回归：链路重构后 sync 必须刷新旧 state 的 depends_on。
+
+        场景（08-15 实测死锁）：v6.9.12 部署前 state 里
+        input_compose_ideas.depends_on=["input_deep_read"]，废弃清理删掉
+        input_deep_read 后该依赖永远无法满足 → compose 永久 pending、
+        input 阶段永无终态。
+        """
+        p = self._make_pipeline()
+        # 预置旧链路形状 state（模拟 v6.9.12 之前的周末遗留）
+        p.state["jobs"] = [
+            {
+                "job_id": "input_collect_sources", "stage": "input", "step": "collect",
+                "status": "done", "depends_on": [], "attempts": 0,
+                "finished_at": "2026-08-15T11:54:36Z",
+                "artifact": "memory/weekend-input/sources-{date}.json",
+            },
+            {
+                "job_id": "input_deep_read", "stage": "input", "step": "deep_read",
+                "status": "done", "depends_on": ["input_retrieve_supplementary"],
+                "attempts": 0, "finished_at": "2026-08-15T10:00:00Z",
+            },
+            {
+                "job_id": "input_compose_ideas", "stage": "input", "step": "compose",
+                "status": "pending", "depends_on": ["input_deep_read"],
+                "attempts": 0, "artifact": "memory/weekend-input/ideas-{date}.json",
+            },
+        ]
+        p._save()
+
+        p.sync_stage_jobs("input")
+        jobs = p.list_jobs(stage="input")
+        job_ids = {j["job_id"] for j in jobs}
+
+        # 废弃 job 已清理
+        self.assert_true("input_deep_read" not in job_ids, "废弃 job input_deep_read 应被清理")
+        # 依赖已刷新为当前模板链
+        compose = next(j for j in jobs if j["job_id"] == "input_compose_ideas")
+        self.assert_eq(
+            compose.get("depends_on"), ["input_topic_match"],
+            "旧 state 的 depends_on 应被模板刷新（否则永久死锁）",
+        )
+
+        # 全链 done 后 compose 可被挑选（死锁解除）
+        for j in jobs:
+            if j["job_id"] != "input_compose_ideas":
+                j["status"] = "done"
+        p._save()
+        from weekend_pipeline.executor import pick_next_job
+        job = pick_next_job(p.state, stage="input")
+        self.assert_true(job is not None, "compose 不应因旧依赖死锁")
+        self.assert_eq(job["job_id"], "input_compose_ideas", "前序全 done 后应挑中 compose")
+
+    def _test_dependencies_satisfied_strict_missing_dep(self):
+        """v6.9.13 回归：依赖 job 缺失时保持严格阻塞（不放行）。
+
+        放行会在"代码已更新、state 未 sync"窗口期让 compose 被提前
+        挑中并以空路由落地（丢整周路由）；死锁的正确解法是
+        sync_stage_jobs 的依赖刷新（见上一用例）。
+        """
+        from weekend_pipeline.executor import dependencies_satisfied
+        state = {"jobs": [{"job_id": "a", "status": "done"}]}
+        # "ghost" 不存在于 state：仍阻塞（严格语义，等待 sync 刷新依赖）
+        self.assert_true(
+            not dependencies_satisfied({"depends_on": ["a", "ghost"]}, state),
+            "缺失依赖必须保持阻塞，防止 sync 前被提前挑中",
+        )
+        # 存在且已完成：满足
+        self.assert_true(
+            dependencies_satisfied({"depends_on": ["a"]}, state),
+            "已完成的依赖应满足",
+        )
+        # 存在但未完成：阻塞
+        state2 = {"jobs": [{"job_id": "a", "status": "done"}, {"job_id": "b", "status": "pending"}]}
+        self.assert_true(
+            not dependencies_satisfied({"depends_on": ["b"]}, state2),
+            "存在且未完成的依赖仍应阻塞",
+        )
+
     def _test_output_stage_creates_archived_extract_jobs(self):
         p = self._make_pipeline()
         # 创建最小 archived proposal
@@ -348,6 +427,8 @@ class WeekendPipelineTests(TestSuite):
         self._test_run_next_dry_run_no_writes()
         self._test_repair_stale_and_failed()
         self._test_pick_next_job_retries_blocking_deps()
+        self._test_sync_refreshes_stale_depends_on()
+        self._test_dependencies_satisfied_strict_missing_dep()
         self._test_output_stage_creates_archived_extract_jobs()
         self._test_verify_artifacts_resets_missing_output()
         self._test_kb_health_field_fallback_in_weekly_report()

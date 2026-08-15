@@ -61,6 +61,19 @@ class InputBreakerTests(TestSuite):
             encoding="utf-8",
         )
 
+    def _write_compose_output(self, date: str, actions) -> None:
+        """按 compose 实际产出 schema 写文件（v6.9.13 口径锁定）。
+
+        新旧 compose 均写 {"generated_at", "actions":[...]}，从未写过
+        "ideas" 键——旧口径只读 "ideas" 恒为 0，链路恢复后告警永不解除。
+        """
+        path = self.tmp_root / "memory" / "weekend-input" / f"ideas-{date}.json"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            json.dumps({"generated_at": f"{date}T12:00:00Z", "actions": actions}, ensure_ascii=False, indent=2),
+            encoding="utf-8",
+        )
+
     def _breaker_anomalies(self):
         _, anomalies = self.monitor._check_proposals()
         return [a for a in anomalies if a.get("type") == "input_pipeline_broken"]
@@ -123,4 +136,26 @@ class InputBreakerTests(TestSuite):
         self.assert_eq(
             len(self._breaker_anomalies()), 0,
             "数据源唯一（ideas-*.json），旧形状不产生误报",
+        )
+
+        # ── 用例 5：compose 真实 schema（actions 非空）→ 不触发 ──
+        # v6.9.13 回归：compose 写 {"generated_at","actions"}，无 "ideas"
+        # 键。旧口径对该 schema 恒读 0，链路恢复后告警永不解除。
+        for f in (self.tmp_root / "memory" / "weekend-input").glob("ideas-*.json"):
+            f.unlink()
+        self._write_compose_output("2026-08-14", [])
+        self._write_compose_output(
+            "2026-08-15",
+            [{"cluster_id": "cl_1", "action": "new", "result": {"success": True}}],
+        )
+        self.assert_eq(
+            len(self._breaker_anomalies()), 0,
+            "真实 schema 最近一次 actions 非空不应触发（旧口径误报）",
+        )
+
+        # ── 用例 6：compose 真实 schema（actions 均空）→ 触发 ──
+        self._write_compose_output("2026-08-15", [])
+        self.assert_eq(
+            len(self._breaker_anomalies()), 1,
+            "真实 schema 连续 2 次 actions 为空应触发",
         )

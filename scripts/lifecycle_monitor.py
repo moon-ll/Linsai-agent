@@ -325,7 +325,13 @@ def _check_proposals() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
                 for f in recent:
                     try:
                         data = json.loads(f.read_text(encoding="utf-8"))
-                        counts.append(len(data.get("ideas", [])))
+                        # v6.9.13: compose 实际产出 schema 为 {"generated_at",
+                        # "actions":[...]}（新旧版本均如此，从未写过 "ideas"
+                        # 键）。旧口径只读 "ideas" 恒为 0——链路恢复后告警
+                        # 也永不解除。改以 actions 为主口径，ideas 键仅作
+                        # 历史夹具兼容。
+                        value = data.get("actions", data.get("ideas", []))
+                        counts.append(len(value) if isinstance(value, list) else 0)
                     except Exception:
                         counts.append(0)
                 if all(c == 0 for c in counts):
@@ -334,7 +340,7 @@ def _check_proposals() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
                         "message": (
                             f"输入端连续 {len(recent)} 次周末运行零研究设想"
                             f"（{recent[0].stem} / {recent[-1].stem}），"
-                            f"建议检查 summarize 新料过滤与 idea_generator 链路。"
+                            f"建议检查 summarize 新料过滤与 compose 路由链路。"
                         ),
                     })
     except Exception:

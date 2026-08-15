@@ -6,7 +6,7 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 from common import load_json, now_utc, save_json, safe_filename
 from llm_gateway import is_llm_available, llm_complete
@@ -110,6 +110,28 @@ def run_input_collect(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool 
     return {"success": True, "source_counts": source_counts}
 
 
+def _coerce_summary_data(data: Any, paper: Dict[str, Any]) -> Optional[Dict[str, Any]]:
+    """v6.9.13: 把 LLM 摘要输出收敛为带溯源字段的 dict；无法收敛返回 None。
+
+    08-15 实测：system prompt 要求"JSON 数组"而 user 模板要求对象，
+    30/30 篇全部返回 [{"title","summary","keywords"}] 数组形状；旧代码
+    只回填 dict 形状，数组条目直接落盘且无 source_id/path/tier，
+    cluster_assign 取条目 .get() 时崩溃（'list' object has no
+    attribute 'get'），且来源已 mark processed 失去重跑资格。
+    """
+    if isinstance(data, list):
+        data = next((x for x in data if isinstance(x, dict)), None)
+    if not isinstance(data, dict):
+        return None
+    data.setdefault("title", paper.get("title", ""))
+    data["source_id"] = paper.get("source_id", "")
+    data["path"] = paper.get("path", "")
+    data["tier"] = paper.get("tier", 2)
+    if not data.get("keywords"):
+        data["keywords"] = []
+    return data
+
+
 def run_input_summarize(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
     """对新增论文/简报做轻量摘要（聚类主源：tier ≤2）。
 
@@ -135,7 +157,7 @@ def run_input_summarize(state: Dict[str, Any], job: Dict[str, Any], dry_run: boo
         return {"success": False, "error": "LLM 不可用"}
 
     summaries = []
-    system = "你是林赛，擅长对学术文献做一句话核心摘要。输出合法 JSON 数组。"
+    system = "你是林赛，擅长对学术文献做一句话核心摘要。输出合法 JSON 对象。"
     # v6.9.11: 单次容量 10 → 30。每篇 LLM timeout 60s，最坏 30×60=1800s，
     # 在 weekend job stale 阈值（STALE_RUNNING_SECONDS=3600）内安全。
     # 旧值 10 配合每周一跑，消化能力 ~10 条/周 < 稳态新料增速，且补课
@@ -144,15 +166,9 @@ def run_input_summarize(state: Dict[str, Any], job: Dict[str, Any], dry_run: boo
     for p in papers[:30]:
         user = f"请用 1-2 句话总结以下文献的核心贡献：\n\n标题：{p.get('title', '')}\n内容：{p.get('text', '')[:1200]}\n\n输出 JSON：{{\"title\": \"...\", \"summary\": \"...\", \"keywords\": [\"...\"]}}"
         data = _llm_json(system, user, timeout=60)
-        if data:
-            # v6.9.12: 回填溯源字段（归簇成员清单、信息源挂载依赖）
-            if isinstance(data, dict):
-                data["source_id"] = p.get("source_id", "")
-                data["path"] = p.get("path", "")
-                data["tier"] = p.get("tier", 2)
-                if not data.get("keywords"):
-                    data["keywords"] = []
-            summaries.append(data)
+        normalized = _coerce_summary_data(data, p) if data else None
+        if normalized is not None:
+            summaries.append(normalized)
             mark_source_processed(p["source_id"], p["text"], state)
         else:
             failed_llm += 1
