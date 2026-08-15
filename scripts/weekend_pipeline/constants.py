@@ -33,7 +33,14 @@ STEP_HEALTH = "health"
 STEP_REPORT = "report"
 STEP_WEEKLY_REPORT = "weekly_report"
 STEP_RECOMMEND = "recommend"
-STEP_KB_MAINTAIN = "kb_maintain"  # v6.9.6：知识库深度维护（去重合并/孤儿清理）
+# v6.9.6 新增知识库深度维护；v6.9.7 拆分为两个独立 step：
+# handler 注册统一 (stage, step) 二元组后，同阶段同 step 无法区分两个 job，
+# 故 deep_health 与 merge 各占一个 step（旧 STEP_KB_MAINTAIN 单值已废弃）
+STEP_KB_DEEP_HEALTH = "kb_deep_health"  # 深度健康检查（重复检测/孤儿清理/分类候选）
+STEP_KB_MERGE = "kb_merge"              # 重复页合并执行器（周限 5 对）
+
+# v6.9.7: processed_sources 滚动裁剪保留窗口（天），与 error_history 裁剪策略对齐
+PROCESSED_SOURCES_MAX_AGE_DAYS = 28
 
 # 周末任务状态文件
 PIPELINE_STATE_PATH = PROJECT_ROOT / "memory" / "weekend-pipeline.json"

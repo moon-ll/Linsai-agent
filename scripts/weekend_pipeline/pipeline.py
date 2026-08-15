@@ -13,17 +13,31 @@ from proposal_lifecycle import ProposalLifecycle
 
 from .constants import (
     JOB_STATUS_DONE,
+    JOB_STATUS_FAILED,
     JOB_STATUS_PENDING,
     JOB_STATUS_RUNNING,
-    NSFC_PROPOSALS_KB_DIR,
     PIPELINE_STATE_PATH,
     STAGE_INPUT,
     STAGE_OUTPUT,
     STAGE_REFLECTION,
     STAGES,
-    WEEKEND_OUTPUT_DIR,
+    STEP_ANALYZE,
+    STEP_COLLECT,
+    STEP_COMPOSE,
+    STEP_DEEP_READ,
+    STEP_EXTRACT,
+    STEP_HEALTH,
+    STEP_KB_DEEP_HEALTH,
+    STEP_KB_MERGE,
+    STEP_RECOMMEND,
+    STEP_REPORT,
+    STEP_RETRIEVE,
+    STEP_SELECT,
+    STEP_SUMMARIZE,
+    STEP_SYNC,
+    STEP_WEEKLY_REPORT,
 )
-from .executor import execute_job, pick_next_job, repair_stale_and_failed, run_pending_jobs
+from .executor import execute_job, pick_next_job, repair_stale_and_failed
 from .jobs import stage_job_templates
 from .state import (
     ensure_pipeline_state,
@@ -33,6 +47,7 @@ from .state import (
     load_pipeline_state,
     save_pipeline_state,
     set_stage_status,
+    trim_processed_sources,
     update_job,
 )
 
@@ -52,7 +67,7 @@ class WeekendPipeline:
     def __init__(self, state_path: Optional[Any] = None) -> None:
         self.state_path = state_path
         self.state = load_pipeline_state(state_path)
-        self.handlers: Dict[str, Callable[[Dict[str, Any], Dict[str, Any], bool], Dict[str, Any]]] = {}
+        self.handlers: Dict[tuple, Callable[[Dict[str, Any], Dict[str, Any], bool], Dict[str, Any]]] = {}
         self._register_handlers()
 
     def _save(self) -> None:
@@ -66,30 +81,38 @@ class WeekendPipeline:
         save_json(path, self.state)
 
     def _register_handlers(self) -> None:
+        """注册 job 执行器（v6.9.7: key 统一为 (stage, step) 二元组）。
+
+        旧版混用 job_id 与 step 两种 key，靠 execute_job 的回退逻辑
+        兜底，存在同名 step 静默错绑风险（旧代码注释曾自认冲突）。
+        二元组天然隔离三个阶段；同阶段同 step 需要多个 handler 时，
+        必须拆分为不同 step 常量（reflection 阶段的 kb_deep_health
+        与 kb_merge 即此例）。
+        """
         self.handlers = {
-            # input (按 step 注册)
-            "collect": input_jobs.run_input_collect,
-            "summarize": input_jobs.run_input_summarize,
-            "analyze": input_jobs.run_input_gap_analysis,
-            "select": input_jobs.run_input_direction_select,
-            "retrieve": input_jobs.run_input_retrieve_supplementary,
-            "deep_read": input_jobs.run_input_deep_read,
-            "compose": input_jobs.run_input_compose,
-            # output (按 step 注册；collect step 与 input/reflection 冲突，按 job_id 注册)
-            "sync": output_jobs.run_output_sync_proposals,
-            "extract": output_jobs.run_output_extract,
-            "health": output_jobs.run_output_kb_health,
-            "weekly_report": output_jobs.run_output_generate_weekly_report,
-            "output_collect_daily_sources": output_jobs.run_output_collect_daily_sources,
-            # reflection (report/recommend 按 step；collect/analyze/health 与 input/output 冲突，按 job_id 注册)
-            "report": reflection_jobs.run_reflection_report,
-            "recommend": reflection_jobs.run_reflection_recommend,
-            "reflection_health_check": reflection_jobs.run_reflection_health_check,
-            "reflection_collect_state": reflection_jobs.run_reflection_collect_state,
-            "reflection_analyze_patterns": reflection_jobs.run_reflection_analyze_patterns,
-            # v6.9.6：知识库深度维护（周日自动执行）
-            "reflection_kb_deep_health": reflection_jobs.run_reflection_kb_deep_health,
-            "reflection_kb_merge_duplicates": reflection_jobs.run_reflection_kb_merge_duplicates,
+            # input
+            (STAGE_INPUT, STEP_COLLECT): input_jobs.run_input_collect,
+            (STAGE_INPUT, STEP_SUMMARIZE): input_jobs.run_input_summarize,
+            (STAGE_INPUT, STEP_ANALYZE): input_jobs.run_input_gap_analysis,
+            (STAGE_INPUT, STEP_SELECT): input_jobs.run_input_direction_select,
+            (STAGE_INPUT, STEP_RETRIEVE): input_jobs.run_input_retrieve_supplementary,
+            (STAGE_INPUT, STEP_DEEP_READ): input_jobs.run_input_deep_read,
+            (STAGE_INPUT, STEP_COMPOSE): input_jobs.run_input_compose,
+            # output：extract 一步两义（归档课题萃取 / 日常知识萃取），
+            # 统一入口 run_output_extract 内部按 job_id 分派
+            (STAGE_OUTPUT, STEP_SYNC): output_jobs.run_output_sync_proposals,
+            (STAGE_OUTPUT, STEP_EXTRACT): output_jobs.run_output_extract,
+            (STAGE_OUTPUT, STEP_HEALTH): output_jobs.run_output_kb_health,
+            (STAGE_OUTPUT, STEP_WEEKLY_REPORT): output_jobs.run_output_generate_weekly_report,
+            (STAGE_OUTPUT, STEP_COLLECT): output_jobs.run_output_collect_daily_sources,
+            # reflection
+            (STAGE_REFLECTION, STEP_HEALTH): reflection_jobs.run_reflection_health_check,
+            (STAGE_REFLECTION, STEP_KB_DEEP_HEALTH): reflection_jobs.run_reflection_kb_deep_health,
+            (STAGE_REFLECTION, STEP_KB_MERGE): reflection_jobs.run_reflection_kb_merge_duplicates,
+            (STAGE_REFLECTION, STEP_COLLECT): reflection_jobs.run_reflection_collect_state,
+            (STAGE_REFLECTION, STEP_ANALYZE): reflection_jobs.run_reflection_analyze_patterns,
+            (STAGE_REFLECTION, STEP_REPORT): reflection_jobs.run_reflection_report,
+            (STAGE_REFLECTION, STEP_RECOMMEND): reflection_jobs.run_reflection_recommend,
         }
 
     def _reset_stage_for_new_week(self, stage: str) -> int:
@@ -159,67 +182,53 @@ class WeekendPipeline:
         return reverse
 
     def _verify_artifacts(self, stage: str) -> int:
-        """检查已完成 job 的产物是否实际存在，不存在则重置为 pending。
+        """检查已完成 job 的声明产物是否存在，缺失则级联重置为 pending。
 
-        对 output 阶段，每个 job 产生确定路径的文件。如果状态标记为 done
-        但文件不存在（如先前 dry-run 留下的假完成），则重置该 job 及其
-        下游依赖，确保下一轮执行时重新生成。
+        v6.9.7: 从 output 阶段专用硬编码 map 通用化为读取 job 自身
+        声明的 artifact 字段（见 jobs._base_job），三阶段统一生效。
+        {date} 占位符以该 job 自身 finished_at 日期格式化——晚于执行
+        日检查时不会因日期错位误判（旧实现取检查当日，晚一天跑 cron
+        就会误重置）。无确定性产物的 job（如萃取写动态 wiki 页）不
+        声明 artifact，自然跳过。
 
         Returns: 重置的 job 数量
         """
-        if stage != STAGE_OUTPUT:
-            return 0
-
-        today = now_utc()[:10]
-        health_cache = PROJECT_ROOT / "knowledge" / ".cache" / "kb-health-weekly.json"
-
-        # job_id → (产物路径, 描述)
-        artifact_map: Dict[str, tuple] = {
-            "output_sync_proposals_to_kb": (
-                NSFC_PROPOSALS_KB_DIR / "proposals-index.md",
-                "proposals-index.md",
-            ),
-            "output_collect_daily_sources": (
-                WEEKEND_OUTPUT_DIR / f"daily-sources-{today}.json",
-                f"daily-sources-{today}.json",
-            ),
-            "output_kb_health_check": (
-                health_cache,
-                "kb-health-weekly.json",
-            ),
-            "output_generate_weekly_report": (
-                WEEKEND_OUTPUT_DIR / f"weekend-output-report-{today}.md",
-                f"weekend-output-report-{today}.md",
-            ),
-        }
-
-        # 收集需要重置的 job_id（含级联下游）
         to_reset: set = set()
         for job in self.state.get("jobs", []):
-            if job.get("stage") != STAGE_OUTPUT:
+            if job.get("stage") != stage:
                 continue
             if job.get("status") != JOB_STATUS_DONE:
                 continue
-            jid = job.get("job_id", "")
-            entry = artifact_map.get(jid)
-            if not entry:
+            pattern = job.get("artifact", "")
+            if not pattern:
                 continue
-            artifact_path, desc = entry
+            jid = job.get("job_id", "")
+            date_str = (job.get("finished_at", "") or now_utc())[:10]
+            try:
+                artifact_path = PROJECT_ROOT / pattern.format(date=date_str)
+            except (KeyError, IndexError, ValueError):
+                continue
             if not artifact_path.exists():
                 to_reset.add(jid)
                 if _log:
                     _log.warning(
-                        f"[weekend-pipeline] 产物缺失: {jid} ({desc})，重置为 pending"
+                        f"[weekend-pipeline] 产物缺失: {jid} "
+                        f"({artifact_path.name})，重置为 pending"
                     )
 
         # 级联重置：下游依赖也需重置，避免用旧数据生成
         if to_reset:
             reverse = self._build_reverse_deps()
             cascade = list(to_reset)
-            for jid in cascade:
+            visited = set(to_reset)  # v6.9.7: 防同一下游被多条路径重复遍历
+            while cascade:
+                jid = cascade.pop(0)
                 for downstream in reverse.get(jid, []):
+                    if downstream in visited:
+                        continue
                     downstream_job = find_job(self.state, downstream)
                     if downstream_job and downstream_job.get("status") == JOB_STATUS_DONE:
+                        visited.add(downstream)
                         to_reset.add(downstream)
                         cascade.append(downstream)
                         if _log:
@@ -250,11 +259,14 @@ class WeekendPipeline:
     def sync_stage_jobs(self, stage: str) -> Dict[str, Any]:
         """幂等地为指定阶段创建任务。
 
-        自动检测跨周：若上次 pipeline 更新距今超过 6 天，
+        自动检测跨周：若该阶段上次完成距今超过 6 天，
         先将该阶段所有 job 重置为 pending 再创建新任务。
 
-        检测 output 阶段产物缺失：若 job 标记为 done 但产物文件
-        不存在（如 dry-run 残留），级联重置为 pending 确保重跑。
+        v6.9.7 三项增强：
+        1. 字段级合并：模板新增的声明性字段（如 artifact）会补齐到
+           已存在的 job 上，旧 state 无需迁移即可获得产物校验能力。
+        2. 产物检测三阶段通用（声明式 artifact，见 _verify_artifacts）。
+        3. processed_sources 滚动裁剪（保留 4 周，防止只增不减膨胀）。
         """
         if stage not in STAGES:
             raise ValueError(f"未知阶段: {stage}")
@@ -262,7 +274,6 @@ class WeekendPipeline:
         # 跨周检测：重置已完成 job，避免新一周无任务可执行
         self._reset_stage_for_new_week(stage)
 
-        existing_ids = {j.get("job_id") for j in self.state.get("jobs", [])}
         archived_ids: List[str] = []
         if stage == STAGE_OUTPUT:
             try:
@@ -274,49 +285,112 @@ class WeekendPipeline:
         templates = stage_job_templates(stage, archived_proposal_ids=archived_ids)
         added = []
         for t in templates:
-            if t["job_id"] not in existing_ids:
+            existing = find_job(self.state, t["job_id"])
+            if existing is None:
                 self.state.setdefault("jobs", []).append(t)
                 added.append(t["job_id"])
+            else:
+                # 字段级合并：补齐模板新增的声明性字段（artifact），
+                # 不覆盖任何运行时状态（status/attempts/finished_at 等）
+                for key in ("artifact",):
+                    if t.get(key) and not existing.get(key):
+                        existing[key] = t[key]
 
-        # 产物检测：output 阶段特有的自愈逻辑
-        if stage == STAGE_OUTPUT:
-            self._verify_artifacts(stage)
+        # 产物检测：声明了 artifact 的 done job 若产物缺失则级联重置
+        self._verify_artifacts(stage)
+
+        # v6.9.7: processed_sources 滚动裁剪（与 error_history 策略对齐）
+        trimmed = trim_processed_sources(self.state)
 
         set_stage_status(self.state, stage, JOB_STATUS_PENDING)
         self._save()
-        return {"success": True, "stage": stage, "added": len(added), "jobs": added}
+        return {
+            "success": True,
+            "stage": stage,
+            "added": len(added),
+            "jobs": added,
+            "trimmed_sources": trimmed,
+        }
 
     def run_next(self, stage: Optional[str] = None, dry_run: bool = False) -> Dict[str, Any]:
         """执行下一个 pending 且依赖满足的任务。
 
-        加全局锁并重新加载状态，避免与 run_stage 或其它 worker 并发冲突。
+        v6.9.7 两项加固：
+        1. 非阻塞抢锁：锁被 run_stage 或其它 worker 持有时温和退出
+           （skipped=lock_busy）。旧版阻塞等锁，run_stage 持锁可达
+           数小时，worker cron 每 20 分钟 spawn 的进程全部堆积在
+           flock 上；现在单 job 执行期间（分钟级）到达的 worker 才
+           会等待，其余立即退出留给下一 tick。
+        2. dry-run 零落盘：预览模式不持久化状态。旧版 dry-run 会把
+           假 done 写入状态文件（output 曾因此需要 _verify_artifacts
+           自愈，input/reflection 连自愈都没有），现在预览不留痕。
         """
-        with file_lock("weekend-pipeline"):
-            self.state = load_pipeline_state(self.state_path)
-            job = pick_next_job(self.state, stage=stage)
-            if not job:
-                return {"success": True, "message": "没有可执行任务", "executed": 0}
+        try:
+            with file_lock("weekend-pipeline", blocking=False):
+                self.state = load_pipeline_state(self.state_path)
+                job = pick_next_job(self.state, stage=stage)
+                if not job:
+                    return {"success": True, "message": "没有可执行任务", "executed": 0}
 
-            result = execute_job(self.state, job, self.handlers, dry_run=dry_run)
-            self._save_unlocked()
-            return {"success": result.get("success"), "job_id": job["job_id"], "result": result, "executed": 1}
+                result = execute_job(self.state, job, self.handlers, dry_run=dry_run)
+                if not dry_run:
+                    self._save_unlocked()
+                return {
+                    "success": result.get("success"),
+                    "job_id": job["job_id"],
+                    "result": result,
+                    "executed": 1,
+                }
+        except TimeoutError:
+            return {
+                "success": True,
+                "message": "锁忙（run_stage/其它 worker 持有中），本轮跳过",
+                "executed": 0,
+                "skipped": "lock_busy",
+            }
 
     def run_stage(self, stage: str, dry_run: bool = False) -> Dict[str, Any]:
         """顺序执行阶段内所有 pending 任务。
 
-        加全局锁并重新加载状态，避免与 worker cron 并发冲突。
+        v6.9.7: 锁粒度从"整阶段一次持锁"细化为"每 job 一持一放"。
+        旧版在 file_lock 内跑完整阶段，LLM 慢时段（单 job 6-10 分钟）
+        持锁可达数小时，期间所有 worker 进程阻塞排队。细化后每两个
+        job 之间释放锁，worker 可在间隙抢锁协作推进（pick_next_job
+        在锁内 reload 状态，不会重复执行同一 job）。
+
+        dry-run 同样零落盘（语义见 run_next）。
         """
         if stage not in STAGES:
             raise ValueError(f"未知阶段: {stage}")
 
+        results: List[Dict[str, Any]] = []
+        count = 0
+        while True:
+            with file_lock("weekend-pipeline"):
+                # dry-run 零落盘：磁盘状态不会推进，若每轮 reload 将无限
+                # 重复 pick 同一个 pending job。故 dry-run 仅首轮 reload，
+                # 后续轮复用内存状态（前序 job 已在内存标 done）。
+                # 非 dry-run 每轮 reload，保证与其它进程（worker）协作推进。
+                if not dry_run or count == 0:
+                    self.state = load_pipeline_state(self.state_path)
+                job = pick_next_job(self.state, stage=stage)
+                if not job:
+                    break
+                if count == 0 and not dry_run:
+                    set_stage_status(self.state, stage, JOB_STATUS_RUNNING)
+                    self._save_unlocked()
+                result = execute_job(self.state, job, self.handlers, dry_run=dry_run)
+                if not dry_run:
+                    self._save_unlocked()
+            results.append(result)
+            count += 1
+            if not result.get("success"):
+                # 失败即停该阶段，等待 repair 重试（保持旧语义）
+                break
+
+        # 汇总阶段状态（终态判定）
         with file_lock("weekend-pipeline"):
             self.state = load_pipeline_state(self.state_path)
-            set_stage_status(self.state, stage, JOB_STATUS_RUNNING)
-            self._save_unlocked()
-
-            result = run_pending_jobs(self.state, self.handlers, stage=stage, dry_run=dry_run)
-
-            # 更新阶段状态：若该阶段全部 done，则标记 done
             stage_jobs = find_jobs_by_stage(self.state, stage)
             if stage_jobs and all(j.get("status") == JOB_STATUS_DONE for j in stage_jobs):
                 set_stage_status(self.state, stage, JOB_STATUS_DONE)
@@ -324,9 +398,16 @@ class WeekendPipeline:
                 set_stage_status(self.state, stage, JOB_STATUS_FAILED)
             else:
                 set_stage_status(self.state, stage, JOB_STATUS_PENDING)
-            self._save_unlocked()
+            if not dry_run:
+                self._save_unlocked()
 
-            return {"success": True, "stage": stage, "dry_run": dry_run, **result}
+        return {
+            "success": True,
+            "stage": stage,
+            "dry_run": dry_run,
+            "executed": count,
+            "results": results,
+        }
 
     def list_jobs(self, stage: Optional[str] = None) -> List[Dict[str, Any]]:
         """列出任务。"""

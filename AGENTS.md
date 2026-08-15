@@ -218,6 +218,8 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 由 `linsai`、`pipeline-runner`、`researcher`、`analyst`、`writer`、`critic`、`reviewer` 7 个 profile 组成。关键协作文件包括 `state_sync.py`（论文状态总线）、`memory_bridge.py`（记忆同步）、`hermes_pipeline.py`（六阶段派活）、`proposal_lifecycle/` 包（四阶段生命周期，薄 shim `proposal_lifecycle.py` 保留 CLI）、`adversarial/` 包（对抗奖惩，薄 shim `adversarial_governance.py` 保留导入）、`weekend_pipeline/` 包（周末输入/输出/反思小任务流水线）。详见 `docs/ARCHITECTURE.md` §4。
 
+**周末流水线执行语义（v6.9.8 加固后）**：job 模板可声明 `artifact` 产物路径（`{date}` 按 job 自身 finished_at 格式化），`_verify_artifacts` 三阶段通用地校验"done 必有产物"，缺失级联重置自愈；handler 注册 key 为 `(stage, step)` 二元组；`run_stage` 按 per-job 粒度持锁（stage cron 与 20 分钟 worker 在 job 间隙协作推进），`run_next` 非阻塞抢锁、锁忙温和退出（skipped=lock_busy）；dry-run 零落盘（预览不留假 done）；`processed_sources` 随 sync 滚动裁剪（保留 28 天）。
+
 ### 提案生命周期
 
 四阶段：`drafts → optimizing → pending_review → archived`。v6.8+ 将申请书拆为 5 模块：立项依据（rationale）、研究内容（content）、研究方案含特色创新与预期成果（scheme）、整篇一致性审查（full_review）、参考文献校验（references）。一轮完整优化依次执行：① 三章节并行撰写/评审 → ② 整篇一致性修订 → ③ 参考文献校验/补充 → ④ monitor meta-review。工作日按 4 个时段轮转（00:30-03:30 / 04:00-08:00 / 08:30-12:30 / 18:30-22:30），每个时段聚焦一个 proposal，未完成则下一时段继续，已完成则切换下一个。v6.8.1 新增：失败任务自动重试（attempts < 3）、跨周轮转内容感知（`last_proposal_id` 校准）、系统看板文件（`memory/system-kanban.json`）、每轮优化报告（`05_review/optimization-report-round-N.md`）、**任务系统集成**（微调度器自动同步生命周期状态到 `task_manager`，每个 proposal 轮次自动创建/更新 task，支持 `--sync-lifecycle-tasks` / `--sync-lifecycle-history` CLI 命令和 `POST /api/lifecycle/sync-tasks` / `sync-task-history` Web API）。周末暂停 worker，集中执行输入端（研究设想发现）、输出端（归档知识萃取）与链路反思任务。v6.7.5+ 改为每个 optimizing proposal 一个独立 worker cron；v6.7.6+ 引入 monitor meta-review 与 agent 分数奖惩；v6.7.7+ 增加输入端 `idea_generator`、输出端 `knowledge_output` 与周末模式，并将 `proposal_lifecycle.py` 拆分为 `proposal_lifecycle/` 包。详见 `docs/ARCHITECTURE.md` §5。
@@ -264,7 +266,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 ### 版本号规范
 
-- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.9.6`）。
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.9.8`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -353,7 +355,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.9.6*
+*版本：6.9.8*
 *日期：2026-08-15*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

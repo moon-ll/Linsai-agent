@@ -75,7 +75,7 @@ atomic_save_json = save_json
 
 
 @contextmanager
-def file_lock(lock_name: str = "global") -> Iterator[None]:
+def file_lock(lock_name: str = "global", blocking: bool = True) -> Iterator[None]:
     """跨进程文件锁（fcntl.flock，独占）。
 
     用于 CoPilot web_server 与 hermes cron 等独立进程之间的互斥。
@@ -85,12 +85,22 @@ def file_lock(lock_name: str = "global") -> Iterator[None]:
     Args:
         lock_name: 锁名称，不同名称对应不同锁文件，互不阻塞。
             常用值："item-status"、"paper-pool"、"sync-state"。
+        blocking: True（默认）阻塞等锁，行为与旧版一致；False 非阻塞
+            抢锁，锁被占用时抛出 TimeoutError（v6.9.7 新增）。适用于
+            cron worker 等"拿不到就退出、下个 tick 再来"的调用方，
+            避免进程在 flock 上无限堆积。
 
     用法:
         >>> with file_lock("item-status"):
         ...     data = load_json(path)
         ...     data["key"] = "value"
         ...     save_json(path, data)
+
+        >>> try:
+        ...     with file_lock("weekend-pipeline", blocking=False):
+        ...         ...  # 拿到锁
+        ... except TimeoutError:
+        ...     ...  # 锁忙，温和退出
     """
     # v6.8.36: 支持锁目录隔离（环境变量 LINSAI_LOCK_DIR）。测试经 create_isolated_env
     # 设置该变量指向隔离目录，避免与真实 cron/web 进程争用 /tmp 下的同一锁文件
@@ -101,12 +111,22 @@ def file_lock(lock_name: str = "global") -> Iterator[None]:
     lock_path = lock_dir / f"linsai-copilot-{lock_name}.lock"
     lock_path.parent.mkdir(parents=True, exist_ok=True)
     f = open(lock_path, "w")
+    acquired = False
     try:
         if _HAS_FCNTL:
-            _fcntl.flock(f.fileno(), _fcntl.LOCK_EX)
+            flags = _fcntl.LOCK_EX if blocking else (_fcntl.LOCK_EX | _fcntl.LOCK_NB)
+            try:
+                _fcntl.flock(f.fileno(), flags)
+            except (BlockingIOError, OSError) as e:
+                if not blocking:
+                    # 非阻塞抢锁失败：统一抛 TimeoutError，调用方按"锁忙"处理
+                    raise TimeoutError(f"锁 {lock_name} 被其它进程持有") from e
+                # 阻塞模式：异常原样上抛（理论上仅信号中断等罕见场景）
+                raise
+            acquired = True
         yield
     finally:
-        if _HAS_FCNTL:
+        if _HAS_FCNTL and acquired:
             _fcntl.flock(f.fileno(), _fcntl.LOCK_UN)
         f.close()
 

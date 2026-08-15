@@ -104,10 +104,19 @@ def run_input_collect(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool 
 
 
 def run_input_summarize(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
-    """对新增论文/简报做轻量摘要。"""
+    """对新增论文/简报做轻量摘要。
+
+    v6.9.7: 无新增论文时也写出空产物文件——job 模板已声明
+    artifact=summaries-{date}.json，产物校验依赖"done 必有产物"
+    不变式；此前无新增论文提前 return 不落文件，会导致下一轮
+    sync 误判产物缺失而反复重置（空转循环）。
+    """
     sources = collect_all_sources(state=state, days=7, paper_limit=20, capture_limit=10)
     papers = new_paper_sources(sources, state)
     if not papers:
+        if not dry_run:
+            _ensure_input_dir()
+            save_json(WEEKEND_INPUT_DIR / f"summaries-{now_utc()[:10]}.json", {"summaries": []})
         return {"success": True, "summarized": 0, "message": "无新增论文/简报"}
 
     if dry_run:

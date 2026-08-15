@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -80,6 +81,37 @@ def mark_source_processed(source_id: str, content: str, state: Dict[str, Any]) -
         "hash": source_hash(content),
         "processed_at": now_utc(),
     }
+
+
+def trim_processed_sources(state: Dict[str, Any], max_age_days: int = None) -> int:
+    """滚动裁剪 processed_sources（v6.9.7 新增）。
+
+    该字典历史上只增不减（实测已达 291 条），与 error_history 的裁剪
+    策略对齐，仅保留最近 max_age_days 天的记录。旧格式（纯字符串
+    hash，无时间戳）无法判定年龄，保留不动；再次处理同一来源时会
+    自动升级为新格式（dict 带 processed_at）。
+
+    Returns: 实际删除的记录数
+    """
+    from .constants import PROCESSED_SOURCES_MAX_AGE_DAYS
+    if max_age_days is None:
+        max_age_days = PROCESSED_SOURCES_MAX_AGE_DAYS
+
+    processed = state.get("processed_sources", {})
+    if not processed:
+        return 0
+    cutoff_dt = datetime.now(timezone.utc) - timedelta(days=max_age_days)
+    cutoff = cutoff_dt.isoformat(timespec="seconds").replace("+00:00", "Z")
+    stale = [
+        sid
+        for sid, rec in processed.items()
+        # 仅裁剪"明确可判定为过期"的记录：缺 processed_at 的（早期
+        # 版本写入或异常数据）无法判定年龄，保留待其再次被处理时升级
+        if isinstance(rec, dict) and rec.get("processed_at") and str(rec["processed_at"]) < cutoff
+    ]
+    for sid in stale:
+        del processed[sid]
+    return len(stale)
 
 
 def find_job(state: Dict[str, Any], job_id: str) -> Optional[Dict[str, Any]]:

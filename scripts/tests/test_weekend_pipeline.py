@@ -316,6 +316,19 @@ class WeekendPipelineTests(TestSuite):
         two_days_ago = (
             datetime.now(timezone.utc) - timedelta(days=2)
         ).strftime("%Y-%m-%dT%H:%M:%SZ")
+        date_str = two_days_ago[:10]
+        # v6.9.7: 产物校验三阶段通用化后，input 的 done job 也会按
+        # finished_at 日期检查产物。补齐当日产物文件，保持本测试
+        # "周内不因跨周而重置"的语义（产物齐全 → 不触发产物重置）。
+        artifacts = [
+            "sources", "summaries", "directions", "decisions",
+            "supplementary", "deep-read", "ideas",
+        ]
+        input_dir = self.tmp_root / "memory" / "weekend-input"
+        input_dir.mkdir(parents=True, exist_ok=True)
+        for name in artifacts:
+            (input_dir / f"{name}-{date_str}.json").write_text("{}", encoding="utf-8")
+
         for job in p.list_jobs(stage="input"):
             job["status"] = "done"
             job["finished_at"] = two_days_ago
@@ -326,7 +339,7 @@ class WeekendPipelineTests(TestSuite):
         done_count = sum(
             1 for j in p2.list_jobs(stage="input") if j.get("status") == "done"
         )
-        self.assert_eq(done_count, 7, "完成仅 2 天 → 不应重置")
+        self.assert_eq(done_count, 7, "完成仅 2 天且产物齐全 → 不应重置")
 
     def run_tests(self):
         self._test_sync_stage_jobs_idempotent()

@@ -139,20 +139,23 @@ def reset_failed_job(job: Dict[str, Any]) -> None:
 def execute_job(
     state: Dict[str, Any],
     job: Dict[str, Any],
-    handlers: Dict[str, Callable[[Dict[str, Any], Dict[str, Any], bool], Dict[str, Any]]],
+    handlers: Dict[tuple, Callable[[Dict[str, Any], Dict[str, Any], bool], Dict[str, Any]]],
     dry_run: bool = False,
 ) -> Dict[str, Any]:
     """执行单个任务。
 
-    优先按 job_id 精确匹配，再按 step 回退，避免 input/output/reflection
-    阶段出现同名 step 的 handler 冲突。
+    v6.9.7: handler 注册 key 统一为 (stage, step) 二元组，消灭旧版
+    "job_id 优先、step 回退"的双命名空间——同名 step 跨阶段不再有
+    静默错绑风险。同阶段需要多 handler 的场景必须拆分为不同 step
+    （如 reflection 阶段的 kb_deep_health 与 kb_merge）。
     """
     job_id = job["job_id"]
+    stage = job.get("stage", "")
     step = job.get("step", "")
-    handler = handlers.get(job_id) or handlers.get(step)
+    handler = handlers.get((stage, step))
 
     if not handler:
-        error = f"未找到 job_id={job_id} / step={step} 的执行器"
+        error = f"未找到 handler: stage={stage} step={step} (job_id={job_id})"
         update_job(state, job_id, JOB_STATUS_FAILED, error)
         return {"success": False, "error": error, "job_id": job_id}
 
