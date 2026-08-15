@@ -18,6 +18,7 @@ from .constants import (
     STEP_DEEP_READ,
     STEP_EXTRACT,
     STEP_HEALTH,
+    STEP_KB_MAINTAIN,
     STEP_RECOMMEND,
     STEP_REPORT,
     STEP_RETRIEVE,
@@ -122,6 +123,17 @@ def reflection_stage_jobs() -> List[Dict[str, Any]]:
     """反思阶段任务模板。"""
     return [
         _base_job("reflection_health_check", STAGE_REFLECTION, STEP_HEALTH, []),
+        # v6.9.6：知识库深度维护（与反思链无数据依赖，独立执行）
+        # ① 深度健康检查：重复概念检测 + derived 过期降级 + 图谱孤儿清理
+        #    （kb_health_weekend / kb_maintenance 均为"能力在、编排无"，本 job 补接线）
+        # ② 去重合并执行器：同名/近义页 LLM 辅助融合，周限 5 对控成本
+        _base_job("reflection_kb_deep_health", STAGE_REFLECTION, STEP_KB_MAINTAIN, []),
+        _base_job(
+            "reflection_kb_merge_duplicates",
+            STAGE_REFLECTION,
+            STEP_KB_MAINTAIN,
+            ["reflection_kb_deep_health"],
+        ),
         _base_job("reflection_collect_state", STAGE_REFLECTION, STEP_COLLECT, ["reflection_health_check"]),
         _base_job("reflection_analyze_patterns", STAGE_REFLECTION, STEP_ANALYZE, ["reflection_collect_state"]),
         _base_job("reflection_generate_report", STAGE_REFLECTION, STEP_REPORT, ["reflection_analyze_patterns"]),

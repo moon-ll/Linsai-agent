@@ -489,3 +489,89 @@ def _calculate_kb_health() -> Dict[str, Any]:
         "isolated_pct": round(isolated_pct, 1),
         "score": round((coverage_pct + freshness_pct + (100 - isolated_pct)) / 3, 1),
     }
+
+
+# ---------------------------------------------------------------------------
+# 知识库深度维护（v6.9.6）
+# ---------------------------------------------------------------------------
+
+
+def _kb_deep_health_path() -> Any:
+    return WEEKEND_REFLECTION_DIR / f"kb-deep-health-{_date_str()}.json"
+
+
+def run_reflection_kb_deep_health(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
+    """知识库深度健康检查：重复概念检测 + derived 过期降级 + 图谱孤儿清理。
+
+    补接 kb_health_weekend（重复检测/derived 降级/来源审计）与
+    kb_maintenance --orphans（图谱孤儿清理）——两者此前均为"能力在、
+    编排无"的手动命令。apply 动作均为元数据级（走 save_wiki_page /
+    图谱重建门面），不触碰正文语义，自动执行安全。
+    """
+    _ensure_reflection_dir()
+    result: Dict[str, Any] = {"checked_at": now_utc()}
+
+    # 1) 深度健康检查（kb_health_weekend）
+    try:
+        from kb_health_weekend import run_weekend_kb_health
+        deep = run_weekend_kb_health(apply=not dry_run)
+        result["deep_health"] = {
+            "duplicate_groups": len(deep.get("duplicate_concepts", [])),
+            "duplicates": deep.get("duplicate_concepts", []),
+            "derived_overdue": len(deep.get("derived_overdue", [])),
+            "downgraded": len(deep.get("downgraded", [])) if isinstance(deep.get("downgraded"), list) else 0,
+            "unverified": deep.get("unverified_summary", {}),
+        }
+    except Exception as e:
+        result["deep_health"] = {"error": str(e)}
+
+    # 2) 图谱孤儿清理（kb_maintenance --orphans，幂等：0 孤儿零成本）
+    try:
+        import subprocess
+        proc = subprocess.run(
+            ["python3", str(PROJECT_ROOT / "scripts" / "kb_maintenance.py"), "--orphans"],
+            capture_output=True, text=True, timeout=300,
+            cwd=str(PROJECT_ROOT),
+        )
+        result["orphan_cleanup"] = {
+            "returncode": proc.returncode,
+            "tail": (proc.stdout or "").strip().splitlines()[-3:],
+        }
+    except Exception as e:
+        result["orphan_cleanup"] = {"error": str(e)}
+
+    # 3) 分类体系增量候选（kb_taxonomy dry-run：只提示不写入，
+    #    新增分类属语义决策，按"策略仅建议"哲学留人工确认）
+    try:
+        from kb_taxonomy import propose_categories
+        cands = propose_categories()
+        result["taxonomy_candidates"] = {
+            "count": len(cands),
+            "names": [c["name"] for c in cands[:10]],
+        }
+    except Exception as e:
+        result["taxonomy_candidates"] = {"error": str(e)}
+
+    if not dry_run:
+        save_json(_kb_deep_health_path(), result)
+
+    dup = result.get("deep_health", {}).get("duplicate_groups", 0)
+    _log_info(
+        f"[kb-deep-health] 重复组={dup}, derived过期={result.get('deep_health', {}).get('derived_overdue', 0)}, "
+        f"分类候选={result.get('taxonomy_candidates', {}).get('count', 0)}"
+    )
+    return {"success": True, **result}
+
+
+def run_reflection_kb_merge_duplicates(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
+    """重复 wiki 页合并执行器入口：调 kb_merger，周限 MAX_PAIRS_PER_WEEK 对。
+
+    LLM 失败的单对自动跳过（merger 内部保证），不影响其余对。
+    """
+    _ensure_reflection_dir()
+    try:
+        from kb_merger import run_merge
+        merged = run_merge(max_pairs=5, dry_run=dry_run)
+        return {"success": True, "merge": merged}
+    except Exception as e:
+        return {"success": False, "error": str(e)}

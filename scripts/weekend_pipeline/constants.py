@@ -33,6 +33,7 @@ STEP_HEALTH = "health"
 STEP_REPORT = "report"
 STEP_WEEKLY_REPORT = "weekly_report"
 STEP_RECOMMEND = "recommend"
+STEP_KB_MAINTAIN = "kb_maintain"  # v6.9.6：知识库深度维护（去重合并/孤儿清理）
 
 # 周末任务状态文件
 PIPELINE_STATE_PATH = PROJECT_ROOT / "memory" / "weekend-pipeline.json"

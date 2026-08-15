@@ -2,9 +2,9 @@
 title: "瞬态量子相的全光读写"
 type: "proposal"
 created: "2026-08-02T06:02:42Z"
-updated: "2026-08-15T06:00:22Z"
+updated: "2026-08-15T06:33:11Z"
 tags: []
-related: []
+related: ["Krausz"]
 source_raw: ""
 growth_stage: "growing"
 confidence: 1.0
@@ -62,5 +62,5 @@ synced_at: "2026-08-15T06:00:22Z"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
-_暂无关联概念_
+- [[Krausz]]
 <!-- /linsai-wikilinks -->

@@ -203,6 +203,10 @@ cd {project}
 # 注意：不用 set -e——单篇失败（批次退出码非零）不应阻断 growth 晋升
 # 等后续逻辑，kb_distill 内部已保证单篇失败跳过不中断。
 python3 scripts/kb_distill.py --batch 5
+# v6.9.6 蒸馏后立即补边（kb_linker 关键词匹配，零 LLM 成本）：
+# 新蒸馏页若无 related 边会成为图谱孤岛（连通度 0.45 已低于告警线
+# 0.50）。实测一次可补 84 页/185 边。幂等：补过即不再缺。
+python3 scripts/kb_linker.py --apply
 exit 0
 """.format(project=project)
 

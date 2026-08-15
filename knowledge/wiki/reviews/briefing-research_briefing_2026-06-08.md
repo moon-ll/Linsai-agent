@@ -2,9 +2,9 @@
 title: "每日简报 research_briefing_2026-06-08"
 type: "reviews"
 created: "research_briefing_2026-06-08T00:00:00Z"
-updated: "2026-08-14T11:15:52Z"
+updated: "2026-08-15T06:33:11Z"
 tags: ["每日简报", "HHG", "文献调研"]
-related: ["RABBITT", "固体高次谐波", "相位匹配", "高次谐波产生"]
+related: ["2503.04335", "RABBITT", "固体高次谐波", "相位匹配", "高次谐波产生"]
 source_raw: ""
 growth_stage: "mature"
 confidence: 0.85
@@ -127,6 +127,7 @@ source: "hermes-每日简报"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2503.04335]]
 - [[RABBITT]]
 - [[固体高次谐波]]
 - [[相位匹配]]

@@ -2,9 +2,9 @@
 title: "软X射线至硬X射线波段高次谐波产生的相位匹配（PNAS, Popmintchev et al.）"
 type: "papers"
 created: "2026-08-15T05:42:47Z"
-updated: "2026-08-15T05:42:47Z"
+updated: "2026-08-15T06:33:11Z"
 tags: ["HHG", "相位匹配", "中红外驱动激光", "水窗", "高通量弱电离气体", "空芯波导", "软X射线/硬X射线"]
-related: ["三步模型截止定律", "中性原子色散", "单原子产额波长标度定律", "相位失配 Δk", "等离子体色散", "重吸收极限"]
+related: ["三步模型", "三步模型截止定律", "中性原子色散", "单原子产额波长标度定律", "截止定律", "相位匹配", "相位失配 Δk", "等离子体色散", "重吸收极限"]
 source_raw: "2024-2404.01325-phase-matching-of-high-harmonic-generation-in-the-soft-and-h.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -59,9 +59,12 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[三步模型]]
 - [[三步模型截止定律]]
 - [[中性原子色散]]
 - [[单原子产额波长标度定律]]
+- [[截止定律]]
+- [[相位匹配]]
 - [[相位失配 Δk]]
 - [[等离子体色散]]
 - [[重吸收极限]]

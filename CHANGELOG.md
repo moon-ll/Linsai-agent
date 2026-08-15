@@ -1,5 +1,58 @@
 # 变更记录
 
+## v6.9.6 - 2026-08-15 知识库自动维护链路（P0 编排接线 + P1 执行器）
+
+评估结论："三类需求（条目编译/孤岛检查/信息整合）的检测工具基本已存在，
+缺口集中在编排接入与合并执行器"——"能力在、编排无"同构第三例。
+
+### 1. P0-1 孤岛治理接线：kb_linker 并入每日蒸馏尾部
+- **背景**：graph_connectivity 0.45 已跌破告警线 0.50（"图谱失连"），
+  治理工具 kb_linker（关键词匹配补 related 边，零 LLM）能力完好但
+  从未编排运行；实测预览一次可补 84 页/185 条边。
+- **接线**：lc_kb_distill.sh wrapper 尾部追加 `kb_linker --apply`——
+  新蒸馏页当天连上图谱，顺序天然合理（蒸馏→补边）。幂等：补过即不再缺。
+- **实测**：手动执行补 185 条边，图谱 391→576 边，
+  **connectivity 0.45 → 0.70**（远离告警线），graph_orphans 保持 0。
+
+### 2. P0-2 周日深度检查接线：reflection 阶段新增两个 job
+- `reflection_kb_deep_health`（无依赖，与反思链并行）：调
+  kb_health_weekend（重复概念检测 + derived>30d 过期降级，apply 级）+
+  kb_maintenance --orphans（图谱孤儿清理，幂等）+ kb_taxonomy 候选提示
+  （只提示不写入，遵循"策略仅建议"哲学）。
+- `reflection_kb_merge_duplicates`（depends_on: deep_health）：调
+  kb_merger 周限 5 对。
+- run_stage 的模板合并逻辑保证新 job 自动 append 进已有 state，零迁移。
+
+### 3. P1-1 新建 scripts/kb_merger.py（重复页合并执行器）
+- **补缺口**：kb_health_weekend 只能检测重复（同名分组），无合并动作。
+- **核心**：pick_primary（正文长者为主）→ LLM 融合正文（失败降级为
+  附录并置，合并永远可完成）→ related/tags 边迁移（并集去重、剔互指/
+  自指）→ 被并页降级为重定向 stub（保留 title/source_raw 检索可达，
+  merged_into 指向主页）。
+- **护栏**：周限 MAX_PAIRS_PER_WEEK=5 对；dry-run 跳过 LLM 零成本预览；
+  单对失败跳过不中断。
+- **dry-run 实测**：检出 15 组——全部为同一 arXiv 论文在 papers/ 正式库
+  与 deepxiv 项目分析中的双份入库，选主逻辑正确（papers 版为主）。
+
+### 4. P1-2 新建 scripts/kb_taxonomy.py（分类体系重建器）
+- **根因确认**：category_coverage 0.23 不是页面缺打标，而是
+  categories.json 只有 1 个分类——体系本身缺失；匹配引擎
+  （关键词规则→matched_paths）现成。
+- **核心**：wiki tags 频率统计（_clean_tag 清洗：# 前缀/纯标点/过短
+  排除——实测洗掉 frontmatter 解析污染的 `\`、`"`、`,` 垃圾 tag）→
+  ≥5 次的高频主题 tag → 候选分类。
+- **已 apply**（9 个新分类 + 原有 1 个 = 10 个，含备份）：课题/强场超快/
+  深度解析/每日简报/NSFC/文献调研/决策/表征方法/人物。
+  apply 后自动跑 scan_all_categories 刷新 matched_paths。
+- **实测**：**category_coverage 0.23 → 0.70**（222/308 页）。
+
+### 5. 测试
+- 新增 tests/test_weekend_kb_maintain.py（TestSuite 形式，6 组 27 断言）：
+  job 模板注册/依赖、state 模板合并、related 边合并、选主、stub/降级
+  正文、tag 清洗。
+- self_test --module 注册：590 → **617/617 通过**。
+- kb_merger --self-check 4/4、kb_taxonomy --self-check 3/3（零 LLM 零写入）。
+
 ## v6.9.5 - 2026-08-15 KB 蒸馏积压修复（lc-kb-distill 上线）+ 伪分数数据修正
 
 针对"今日进展"暴露的三类持续异常的修复收尾。

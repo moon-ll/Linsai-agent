@@ -2,9 +2,9 @@
 title: "固体与液体 HHG 体系进展"
 type: "reviews"
 created: "2026-05-19T00:00:00Z"
-updated: "2026-08-14T11:15:52Z"
+updated: "2026-08-15T06:33:11Z"
 tags: ["HHG", "综述", "材料体系", "#type/report", "#topic/HHG", "#status/mature"]
-related: ["固体高次谐波", "德鲁德模型", "拓扑绝缘体", "液体高次谐波"]
+related: ["High-harmonic spectroscopy of strongly bound excitons in solids", "固体高次谐波", "德鲁德模型", "拓扑绝缘体", "液体高次谐波"]
 source_raw: ""
 growth_stage: "mature"
 confidence: 0.9
@@ -136,6 +136,7 @@ Ghimire et al.（2011）在 ZnO 晶体中首次观测到固体 HHG，打开了 H
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[High-harmonic spectroscopy of strongly bound excitons in solids]]
 - [[固体高次谐波]]
 - [[德鲁德模型]]
 - [[拓扑绝缘体]]

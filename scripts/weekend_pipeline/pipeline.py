@@ -87,6 +87,9 @@ class WeekendPipeline:
             "reflection_health_check": reflection_jobs.run_reflection_health_check,
             "reflection_collect_state": reflection_jobs.run_reflection_collect_state,
             "reflection_analyze_patterns": reflection_jobs.run_reflection_analyze_patterns,
+            # v6.9.6：知识库深度维护（周日自动执行）
+            "reflection_kb_deep_health": reflection_jobs.run_reflection_kb_deep_health,
+            "reflection_kb_merge_duplicates": reflection_jobs.run_reflection_kb_merge_duplicates,
         }
 
     def _reset_stage_for_new_week(self, stage: str) -> int:
