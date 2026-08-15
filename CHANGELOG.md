@@ -1,5 +1,33 @@
 # 变更记录
 
+## v6.9.16 - 2026-08-16 体检修复：收敛窗口约束当前轮 + 测试门禁静默吞恢复
+
+04h 三层诊断（运行时健康 / 代码缺陷 / 设计一致性抽查 #7 #10）产出
+两项修复，`--module` 门禁 721→796 全绿：
+
+- **质量天花板收敛窗口缺陷（#7 复核发现，P1）**：
+  `completion._check_done` 收敛分支 `recent_scores[:-1]` 只约束窗口前
+  3 轮 ≥0.80，"3 轮高位平台后当前轮骤降"（含伪分数污染，如历史实测
+  0.81→0.18）会被误判为质量收敛而自动晋级 pending_review，掩盖质量
+  回退。运行时近触发实证：quantum-geometry 尾部 [0.84,0.86,0.85,0.77]
+  仅因浮点 0.86-0.84=0.02000…不满足 <0.02 而幸免；key-transient 尾部
+  4×0.81 已满足条件、待 r4 critic 终态 job 解锁后轮末即触发。修复为
+  窗口内全部轮次（含当前轮）≥0.80，骤降序列正确落入下降分支（暂停）
+  或继续优化。
+- **新增 test_quality_ceiling_convergence（7 用例）**：稳定收敛晋级 /
+  骤降防误晋级 / 小幅跌破不触发 / 连续 3 轮下降走暂停分支，登记入
+  `self_test._run_selected` module 精选清单（--module 不走 glob 发现，
+  新套件不登记则不进日常门禁）。
+- **测试门禁静默吞恢复（68 条断言归位）**：`--module` 运行期异常仅打
+  ⚠ 不计数，两个套件自落地起从未真正运行且被"全绿"掩盖——
+  test_kb_distill_created_ts（v6.9.15 prefer 透传回归，stub 路径
+  /tmp/fake/raw/x.md 不在隔离 KNOWLEDGE_DIR 下 relative_to 必然
+  ValueError，+7）与 test_input_clustering（08-15 enrich 用例，夹具
+  只建 01_direction 而 enrich_from_idea 还写 02_topic/03_question/
+  04_proposal，open("a") FileNotFoundError，+61）。修 stub 路径与
+  夹具目录后 796/796 全绿、零 ⚠。全量发现模式（--web-ci）仍有
+  ghost_write_guard 等静默吞，维持测试基建改进项不扩科。
+
 ## v6.9.15 - 2026-08-15 知识库积压批量处理：蒸馏主模型切 GLM
 
 用户指令"把知识库累积的内容都处理一下"——盘点存量：输入链未摘要

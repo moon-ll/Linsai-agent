@@ -488,6 +488,11 @@ class InputClusteringTests(TestSuite):
             "# 方向校准\n\n已有研究背景句子超过十个字符长度，用于触发句子相似度计算路径。\n",
             encoding="utf-8",
         )
+        # v6.9.16 修复：enrich_from_idea 还会向 02_topic / 03_question / 04_proposal 追加，
+        # 生产课题必有完整阶段骨架，夹具此前只建 01_direction 导致
+        # _deduplicate_append open("a") FileNotFoundError，整套件被静默吞掉。
+        for stage in ("02_topic", "03_question", "04_proposal"):
+            (prop_dir / stage).mkdir(parents=True, exist_ok=True)
 
         lc = ProposalLifecycle()
         idea = {
@@ -510,6 +515,70 @@ class InputClusteringTests(TestSuite):
             content.count("周末输入补充"), 1, "同 idea 重复注入应去重为一次",
         )
 
+    def _test_register_generates_valid_id(self):
+        """register_from_idea → generate_proposal_id 全链不崩溃（naming 导入回归）。
+
+        08-16 实测：naming.py 使用 LIFECYCLE_STAGES 未导入，compose 的
+        new 路由（课题注册）在 ID 生成处 NameError 中断。既有测试未走
+        register_from_idea 的 ID 生成分支（需真实 state 目录）。
+        """
+        from proposal_lifecycle import ProposalLifecycle
+
+        self._seed_lifecycle({})
+        lc = ProposalLifecycle()
+        idea = {
+            "title": "二维材料非线性霍尔效应",
+            "background": "背景内容甲乙丙丁戊己庚辛。",
+            "gap": "现有手段无法分辨内禀与外禀贡献。",
+            "content": ["非线性霍尔系数测量", "对称性调控"],
+            "innovations": ["温度依赖分离方案"],
+            "sources": [],
+            "reliability": "derived",
+        }
+        r = lc.register_from_idea(idea, project_type="general")
+        self.assert_true(r.get("success"), "注册应成功", str(r))
+        pid = r.get("proposal_id", "")
+        self.assert_true(pid.startswith("general-"), f"ID 应带类型前缀: {pid}")
+        # ID 符合命名规则（类型-名称-日期）
+        import re as _re
+        self.assert_true(
+            _re.match(r"^general-[a-z0-9-]+-\d{8}$", pid),
+            f"ID 应符合命名规则: {pid}",
+        )
+
+    def _test_register_cn_title_falls_back_to_keywords(self):
+        """中文标题注册：取名回退到 keywords 英文词（v6.9.16 命名回归）。
+
+        08-16 批处理实测：46+ 纯中文标题课题经 safe_filename+ASCII
+        过滤后取空，回退 "new-idea-N" 占位名。修复后应从 idea.keywords
+        取英文词组合命名。
+        """
+        from proposal_lifecycle import ProposalLifecycle
+
+        self._seed_lifecycle({})
+        lc = ProposalLifecycle()
+        idea = {
+            "title": "维格纳晶体非线性光学响应",
+            "background": "背景内容甲乙丙丁。",
+            "gap": "高温相变动力学缺乏统一图像。",
+            "content": ["时间分辨测量"],
+            "innovations": ["非平衡诊断"],
+            "sources": [],
+            "keywords": ["维格纳晶体", "Wigner Crystal", "THz", "非线性光学"],
+            "reliability": "derived",
+        }
+        r = lc.register_from_idea(idea, project_type="general")
+        self.assert_true(r.get("success"), "注册应成功", str(r))
+        pid = r.get("proposal_id", "")
+        # keywords 英文词按序拼接：wigner-crystal-thz
+        self.assert_true(
+            "wigner-crystal-thz" in pid,
+            f"中文标题应回退到 keywords 英文词命名: {pid}",
+        )
+        self.assert_true(
+            "new-idea" not in pid, f"不应回退占位名: {pid}",
+        )
+
     def run_tests(self):
         self._test_distilled_papers_excluded()
         self._test_source_tiers_assigned()
@@ -526,3 +595,5 @@ class InputClusteringTests(TestSuite):
         self._test_keyword_normalization()
         self._test_sparse_overlap_forms_cluster()
         self._test_enrich_appends_without_crash()
+        self._test_register_generates_valid_id()
+        self._test_register_cn_title_falls_back_to_keywords()

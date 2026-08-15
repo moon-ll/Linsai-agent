@@ -84,7 +84,12 @@ class KbDistillCreatedTsTests(TestSuite):
         )
         import llm_gateway
         orig_gw = llm_gateway.llm_complete
+        # v6.9.16 修复：distill_one 首行对 raw_path 做 relative_to(KNOWLEDGE_DIR)，
+        # "/tmp/fake/raw/x.md" 不在任何隔离 KNOWLEDGE_DIR 下必然 ValueError，
+        # 该回归自 v6.9.15 落地起整套件被 self_test 静默吞掉、从未真正运行。
+        orig_kd = kb_distill.KNOWLEDGE_DIR
         try:
+            kb_distill.KNOWLEDGE_DIR = Path("/tmp/fake")
             kb_distill.distill_raw_to_wiki = lambda rel: ("wiki/x.md", "prompt")
             kb_distill.save_distilled_wiki = lambda *a, **k: None
             llm_gateway.llm_complete = (
@@ -101,3 +106,4 @@ class KbDistillCreatedTsTests(TestSuite):
         finally:
             kb_distill.distill_raw_to_wiki, kb_distill.save_distilled_wiki = orig
             llm_gateway.llm_complete = orig_gw
+            kb_distill.KNOWLEDGE_DIR = orig_kd

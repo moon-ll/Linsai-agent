@@ -99,8 +99,11 @@ class CompletionMixin:
         if len(score_history) >= CONVERGENCE_ROUNDS + 1:
             recent = score_history[-(CONVERGENCE_ROUNDS + 1):]
             recent_scores = [h["score"] for h in recent]
-            # 前3轮都 ≥0.80
-            if all(s >= CONVERGENCE_SCORE for s in recent_scores[:-1]):
+            # v6.9.16 修复：窗口内全部轮次（含当前轮）都须 ≥0.80。
+            # 原实现只约束前 3 轮（recent_scores[:-1]），"3 轮高位平台后
+            # 当前轮骤降"（含伪分数污染，如实测 0.85→0.18）会被误判为
+            # 质量收敛而自动晋级 pending_review，掩盖质量回退。
+            if all(s >= CONVERGENCE_SCORE for s in recent_scores):
                 # 且每轮提升 <2%
                 deltas = [recent_scores[i + 1] - recent_scores[i] for i in range(len(recent_scores) - 1)]
                 if all(d < CONVERGENCE_DELTA for d in deltas):
