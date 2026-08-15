@@ -15,6 +15,8 @@ from .constants import (
     DEFAULT_RETROSPECTIVE_SCHEDULE,
     DEFAULT_KB_SYNC_SCHEDULE,
     KB_SYNC_CRON_NAME,
+    DEFAULT_KB_DISTILL_SCHEDULE,
+    KB_DISTILL_CRON_NAME,
     DEFAULT_WEEKEND_INPUT_SCHEDULE,
     DEFAULT_WEEKEND_OUTPUT_SCHEDULE,
     DEFAULT_WEEKEND_REFLECTION_SCHEDULE,
@@ -108,6 +110,7 @@ def cleanup_cron_duplicates(
             "lc-prompt-optimize", "lc-retrospective",
             "lc-hourly-monitor",
             KB_SYNC_CRON_NAME,
+            KB_DISTILL_CRON_NAME,
         ]
     removed: List[Dict[str, str]] = []
     # 按 name 分组
@@ -253,6 +256,21 @@ def setup_cron_framework(
     )
     result["kb_sync"] = kb_sync
     result["success"] = result["success"] and kb_sync.get("success")
+
+    # 安装知识库每日蒸馏 cron（v6.9.5）—— lc-kb-sync 之后 10 分钟，
+    # 补上 raw→wiki 蒸馏的流水线生产者（此前接口存在但无人调用，
+    # 351 项积压）。单篇失败不阻断批次（wrapper 已 exit 0）。
+    extra_cleanup = self.cleanup_cron_duplicates(framework_names=[KB_DISTILL_CRON_NAME])
+    for r in extra_cleanup:
+        if r["name"] not in removed:
+            removed.append(r["name"])
+    kb_distill = _cron_create_idempotent(
+        script_name="lc_kb_distill.sh",
+        name=KB_DISTILL_CRON_NAME,
+        schedule=DEFAULT_KB_DISTILL_SCHEDULE,
+    )
+    result["kb_distill"] = kb_distill
+    result["success"] = result["success"] and kb_distill.get("success")
 
     return result
 

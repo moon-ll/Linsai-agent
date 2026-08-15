@@ -71,6 +71,12 @@ DEFAULT_RETROSPECTIVE_SCHEDULE = "0 15 * * 1"  # 每周一 15:00（周末反思�
 DEFAULT_KB_SYNC_SCHEDULE = "40 12 * * *"  # 每天 12:40
 KB_SYNC_CRON_NAME = "lc-kb-sync"
 
+# 知识库每日蒸馏 cron（v6.9.5）：kb_distill 批量 raw→wiki 蒸馏（最旧 5 篇/天）
+# 12:50 = lc-kb-sync 之后 10 分钟，确保先完成多端同步与索引重建再取清单，
+# 避免蒸馏到刚同步一半的 raw。351 项积压按此速率约 70 天消化。
+DEFAULT_KB_DISTILL_SCHEDULE = "50 12 * * *"  # 每天 12:50
+KB_DISTILL_CRON_NAME = "lc-kb-distill"
+
 # stale 阈值：running 超过该秒数视为死锁
 # v6.8.3-fix9: 从 3600s 降低到 1800s（30min）。
 # critic/writer 的 timeout 见下方分级常量（900/1200s），正常执行最长 ~12min。

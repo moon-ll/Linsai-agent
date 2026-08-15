@@ -96,6 +96,7 @@ class MonitorCronStaleTests(TestSuite):
                 "lc-prompt-optimize": "0 14 * * *",
                 "lc-retrospective": "0 15 * * 1",
                 "lc-kb-sync": "40 12 * * *",
+                "lc-kb-distill": "50 12 * * *",  # v6.9.5 新增，纳入拓扑清单
                 "lc-weekend-weekend-input": "0 9 * * 6",
             }
             crons = []

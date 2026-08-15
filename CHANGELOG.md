@@ -1,5 +1,58 @@
 # 变更记录
 
+## v6.9.5 - 2026-08-15 KB 蒸馏积压修复（lc-kb-distill 上线）+ 伪分数数据修正
+
+针对"今日进展"暴露的三类持续异常的修复收尾。
+
+### 1. KB 蒸馏积压根治（核心：补上缺失的流水线生产者）
+- **根因**：`distill_raw_to_wiki()` / `save_distilled_wiki()` 接口自 v3.x
+  存在，但**无任何流水线生产者调用**（周末输出端做归档课题萃取，不覆盖
+  raw→wiki 蒸馏）→ 351 项（告警口径 508）raw 长期零消化，health_sensor
+  持续告警 KB 蒸馏积压（阈值 300）。
+- **新建 `scripts/kb_distill.py`**（批量蒸馏器）：
+  - `pending_distill_list()`：清单口径与 kb_health/health_sensor 告警
+    **完全同源**（kb_index.list_raw_files 的纯文件名 ↔ wiki frontmatter
+    的 source_raw），修复了初版"带 raw/ 前缀路径 vs 纯文件名"永不匹配、
+    蒸馏后计数不减的缺陷；排除 `raw/pdfs/_text_cache/`（PDF 抽取中间
+    缓存，纯数字命名无语义，蒸馏只会产出垃圾 wiki）。
+  - `distill_one()`：蒸馏 prompt → llm_gateway（执行类默认链）→
+    `_ensure_source_raw()` 注入纯文件名 source_raw（无头构造/有头补写/
+    已有不覆盖三态）→ save_distilled_wiki 门面写入（自动更新图谱/
+    生长日志/索引）。
+  - 单篇失败跳过不中断批次；`--batch/--dry-run/--self-check` CLI。
+- **cron 注册 `lc-kb-distill`**（每日 12:50，lc-kb-sync 后 10 分钟，
+  5 篇/天最旧优先，351 项约 70 天消化）：
+  - `lifecycle/constants.py`：KB_DISTILL_CRON_NAME + 调度常量。
+  - `lifecycle/controller.py`：lc_kb_distill.sh wrapper 生成（不用
+    set -e，单篇失败 exit 0 不阻断批次语义）。
+  - `lifecycle/framework.py`：setup_cron_framework 幂等安装段 +
+    cleanup_cron_duplicates 默认去重清单纳入。
+  - `lifecycle/cron_manifest.py`：拓扑清单第 8 个固定 cron（depends:
+    lc-kb-sync），monitor 对账自动覆盖。
+  - 实测确认已 active（14:00 整点 monitor 对账发现缺失后**自动修复
+    创建**，v6.8.54 自动修复链路首次实战验证）。
+- **端到端验证**：MiniMax 额度耗尽 + kimi/claude 沙箱受限的降级链下
+  glm 接住，2 篇蒸馏成功（wiki/papers + wiki/concepts），清单
+  351→350 正确递减，注入 source_raw 为纯文件名。
+
+### 2. 伪分数数据修正（key-transient r4-content 0.18→0.81）
+- **证据**：`05_review/critic-round-2-content.md`（08-14 04:28 落盘）
+  实际评审 0.81（四维 0.84/0.80/0.78/0.78）；状态里 0.18 为 API 错误
+  特征文本被解析成的伪分数（v6.8.46 防线之前的历史污染）。
+- **修正**：备份 `_lifecycle.json.bak.20260815_pseudo` 后，修正
+  score_history 尾条、last_score、last_dim_scores，加 `pseudo_score_fix`
+  审计字段（fixed_at/field/from/to/evidence）。
+
+### 3. stuck job / cron 告警（自动机制处置，无代码变更）
+- 2 个双上限终态 failed job 的 24h 自动解锁冷却明晨到期，周一 worker
+  恢复即重跑（should_auto_unlock 按设计工作）。
+- cron"从未执行"告警已由 v6.9.2 星期域感知修复消除。
+
+### 测试
+- `self_test --module`：590/590 通过（test_monitor_cron_stale 的 mock
+  基集补入 lc-kb-distill 后全绿）。
+- `kb_distill --self-check`：4/4 通过（零 LLM、零写入）。
+
 ## v6.9.4 - 2026-08-15 监管与维护任务切换 GLM-5.3（任务级模型路由）
 
 按用户要求完成人机模型分工：**监管者与健康检查/项目维护类任务用 GLM

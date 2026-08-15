@@ -195,6 +195,17 @@ python3 scripts/kb_auto_sync.py
 python3 scripts/growth_engine.py --apply
 """.format(project=project)
 
+        kb_distill = """#!/bin/bash
+cd {project}
+# v6.9.5 每日 raw→wiki 蒸馏（12:50，lc-kb-sync 之后）：
+# distill_raw_to_wiki/save_distilled_wiki 接口自 v3.x 存在但无流水线
+# 生产者，351 项 raw 积压零消化。本任务按最旧优先蒸馏 5 篇/天。
+# 注意：不用 set -e——单篇失败（批次退出码非零）不应阻断 growth 晋升
+# 等后续逻辑，kb_distill 内部已保证单篇失败跳过不中断。
+python3 scripts/kb_distill.py --batch 5
+exit 0
+""".format(project=project)
+
         return {
             "orchestrate": _write_wrapper_script("lc_orchestrate.sh", orchestrate),
             "repair": _write_wrapper_script("lc_repair.sh", repair),
@@ -206,6 +217,7 @@ python3 scripts/growth_engine.py --apply
             "prompt_optimize": _write_wrapper_script("lc_prompt_optimize.sh", prompt_optimize),
             "retrospective": _write_wrapper_script("lc_retrospective.sh", retrospective),
             "kb_sync": _write_wrapper_script("lc_kb_sync.sh", kb_sync),
+            "kb_distill": _write_wrapper_script("lc_kb_distill.sh", kb_distill),
         }
 
     def _worker_script_for_proposal(self, proposal_id: str) -> Path:

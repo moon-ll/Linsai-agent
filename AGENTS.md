@@ -91,6 +91,8 @@ python3 scripts/upgrade.py --check                        # 升级检查
 python3 scripts/upgrade.py --simulate
 python3 scripts/upgrade.py
 python3 scripts/kb_maintenance.py --weekly                # 知识库周维护
+python3 scripts/kb_distill.py --dry-run                  # raw→wiki 蒸馏预览
+python3 scripts/kb_distill.py --batch 5                  # 蒸馏最旧 5 篇（cron 每日 12:50）
 python3 scripts/memory_reflow.py --reflow                 # 认知回流
 python3 scripts/sync_engine.py                            # 同步 hermes 产出
 python3 scripts/rebuild_lifecycle.py --dry-run            # 修复 lifecycle 不一致（预览）
@@ -229,7 +231,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 保障全链路稳定运转的四条辅助链路：
 
-- **健康检查**：`lifecycle_monitor.py`（每小时 cron `lc-hourly-monitor`）检测 cron 缺失/重复/漂移、卡住课题、连续失败、零进展、API 限流，异常去重后飞书通知，cron 异常自动修复；cron 拓扑以 `lifecycle/cron_manifest.py` 为单一真相源（7 个固定 cron 清单 + `validate_cron_topology()` 对账），monitor 启动时清理过期告警缓存条目；`profile_health.py` 计算 7 个 hermes profile 的健康度（单次失败标 degraded，连续 2 次失败才标 blocked）；`failure_analyzer.py` 从日志聚类 8 种失败模式。
+- **健康检查**：`lifecycle_monitor.py`（每小时 cron `lc-hourly-monitor`）检测 cron 缺失/重复/漂移、卡住课题、连续失败、零进展、API 限流，异常去重后飞书通知，cron 异常自动修复；cron 拓扑以 `lifecycle/cron_manifest.py` 为单一真相源（8 个固定 cron 清单 + `validate_cron_topology()` 对账），monitor 启动时清理过期告警缓存条目；`profile_health.py` 计算 7 个 hermes profile 的健康度（单次失败标 degraded，连续 2 次失败才标 blocked）；`failure_analyzer.py` 从日志聚类 8 种失败模式。
 - **看板系统**：`memory/system-kanban.json` 由微调度器（主写）和 `lifecycle_monitor`（合并写）协同维护，包含当前时段/聚焦课题/job 进度/执行历史/任务同步统计，前端通过 `/api/console/flow` 展示。
 - **定期修复**：`lc-repair` cron 每 6 小时执行 `orchestrator.run_repair()`，重置 stuck running（阈值 1800s）、重试 failed job（最多 3 次）、补齐缺失 worker、清理旧轮次 job（删除前归档至 `research_proposals/_lifecycle_archive.json`，上限 5000 条）；双上限终态 job（attempts≥3 且 repair_attempts≥3）finished 超 24h 后自动解锁重跑一次（`should_auto_unlock`，每 job 限 1 次，`auto_unlock_count` 计数）；error_history 保存时裁剪至 10 条（`trim_error_history`）；微调度器在每次执行前无条件清理 stale job。
 - **自成长**：`strategy_optimizer.py` 基于 7 天历史给出调度参数建议（仅建议）；`prompt_optimizer.py`（每日 14:00 cron `lc-prompt-optimize`）从 debug journal/agent scores/failure patterns 生成 prompt 修改建议并自动应用（备份原文件）；`retrospective.py`（每周一 15:00 cron `lc-retrospective`）综合 5 个数据源生成结构化复盘报告。
@@ -237,7 +239,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 - **研究设想质量门槛（v6.8.26）**：⑩ idea_review 前置评审（round 1 的 job 链最前端，researcher 对 `00_research_idea.md` 做独立评审，分数 ≥0.70 才允许进入优化；未达标 writer 修复后重审，最多 3 轮）⑪ 结构性缺陷退回（monitor 检测 content/scheme 文件级重复或模块空置 → 设置 `idea_review_required` 标志 → 下一轮自动退回研究设想评审）。
 - **多源学术检索（v6.8.42-v6.8.45）**：`external_fetcher.py` 新增 OpenAlex/Semantic Scholar/PubMed/Crossref 检索源与 `search_academic()` 聚合（DOI/arXiv ID/标题三级去重，任一源失败自动降级）；无 key 匿名模式日均 20-50 次检索足够（OpenAlex 无 key 约 100 次/天 + 24h 缓存）。`literature_service` 支持无 arXiv ID 的期刊论文以 DOI 入库（`{year}-doi-{slug}-{title}.md`）；references 校验步骤在 hermes 检索后叠加多源补充，hermes 无结果时多源自动接管。
 - **API 故障防线（v6.8.46-v6.8.48）**：`_run_hermes` 对 returncode=0 的输出做 API 错误特征检测（429/配额耗尽/余额不足等 10 种），命中即 success=False，防止 MiniMax Token Plan 耗尽期错误文本被解析成伪分数（实测案例：0.81→0.18 污染）；monitor 解析失败（0.0 非真实分）跳过奖惩不误扣；`_extract_dimension_scores` 对 <300 字符短输出不产生分数。
-- **知识库每日治理（v6.8.51）**：`lc-kb-sync` cron（每日 12:40）执行 `kb_auto_sync.py`（多端同步 + 索引/图谱无条件重建）与 `growth_engine.py --apply`（生长阶段晋升）。写入统一走 `kb_wiki` 门面（防双 frontmatter 污染）；索引格式 v2（扁平 chunk + 整型倒排 + 2-gram，157MB→20MB，两段式检索 + 进程内缓存）；简报同步兼容 `research_briefing_*`/`daily_memory_*` 双命名；`health_sensor` 新增 KB 四类告警（索引停更/生长断流/蒸馏积压/图谱失连）。详见 `docs/ARCHITECTURE.md` 知识库数据流转章节。
+- **知识库每日治理（v6.8.51 + v6.9.5）**：`lc-kb-sync` cron（每日 12:40）执行 `kb_auto_sync.py`（多端同步 + 索引/图谱无条件重建）与 `growth_engine.py --apply`（生长阶段晋升）；`lc-kb-distill` cron（每日 12:50）执行 `kb_distill.py` 批量 raw→wiki 蒸馏（最旧优先 5 篇/天，`pending_distill_list` 清单口径与告警同源、排除 `raw/pdfs/_text_cache/`，产物强制注入纯文件名 `source_raw`，单篇失败跳过不中断批次）——此前 `distill_raw_to_wiki`/`save_distilled_wiki` 接口存在但无流水线生产者，351 项积压零消化，本 cron 补上编排缺失。写入统一走 `kb_wiki` 门面（防双 frontmatter 污染）；索引格式 v2（扁平 chunk + 整型倒排 + 2-gram，157MB→20MB，两段式检索 + 进程内缓存）；简报同步兼容 `research_briefing_*`/`daily_memory_*` 双命名；`health_sensor` 新增 KB 四类告警（索引停更/生长断流/蒸馏积压/图谱失连）。详见 `docs/ARCHITECTURE.md` 知识库数据流转章节。
 - **智能辅助验收与异常自愈（v6.9.0）**：人机分工实测为"执行/修复/治理全自动，仅 3 法定节点（立项激活、验收、策略 apply）+ 2 异常恢复需人"。本层让验收智能辅助、异常自动恢复、等人事项集中可视：① 验收决策包 `review_dossier.py`（pending_review 晋级时自动生成规则预审三档 approve_lean/attention/reject_lean + diff 摘要，审核会话自动注入节选，`POST /api/lifecycle/{id}/review-adopt` 守卫链通过后一键采纳归档，审计 `adopted_via="one_click"`；门槛 REJECT_SCORE_GATE=0.75 与自动晋级线 0.9 分离）② 负反馈 24h 冷却自愈（`should_auto_clear_negative_feedback`，每课题至多 1 次，清除同时降级 `idea_review_required=True`；冷却中不入人工队列降噪）③ 质量退化自动回退（两连降且距最佳 >0.03 → `perform_auto_rollback` 恢复最佳轮次草稿，原稿存 `-pre-rollback.md`，每课题至多 1 次）④ 立项决策包（`idea_generator.recommend_activation` 三档 hold/merge/activate + 可行性启发式，注册时写 `00_idea-dossier.md`）⑤ 策略分级自动应用（白名单 stagger_seconds/score_threshold，单向规则（threshold 只升不降）+ 7 天去重 + 单次上限 2 项 + `confirmed_by="auto:low-risk"`，周复盘后自动应用）⑥ 待人工队列 `human_queue.py`（聚合验收/立项/负反馈三类等人事项，超 72h 催办告警按天数桶去重，持久化 `memory/human-queue.json`，控制台右栏面板 + `GET /api/console/human-queue`）。
 
 ---
@@ -259,7 +261,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 ### 版本号规范
 
-- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.9.4`）。
+- **版本号来源**：`VERSION` 文件为唯一真相源（当前 `6.9.5`）。
 - **格式**：`MAJOR.MINOR.PATCH`
   - `MAJOR`：不兼容的数据结构变更（需迁移脚本）
   - `MINOR`：新增功能（向后兼容）
@@ -348,7 +350,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.9.4*
+*版本：6.9.5*
 *日期：2026-08-15*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

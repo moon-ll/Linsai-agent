@@ -24,11 +24,13 @@ from __future__ import annotations
 from typing import Any, Dict, List, Optional
 
 from .constants import (
+    DEFAULT_KB_DISTILL_SCHEDULE,
     DEFAULT_KB_SYNC_SCHEDULE,
     DEFAULT_ORCHESTRATE_SCHEDULE,
     DEFAULT_PROMPT_OPTIMIZE_SCHEDULE,
     DEFAULT_REPAIR_SCHEDULE,
     DEFAULT_RETROSPECTIVE_SCHEDULE,
+    KB_DISTILL_CRON_NAME,
     KB_SYNC_CRON_NAME,
 )
 
@@ -65,6 +67,12 @@ CRON_MANIFEST: Dict[str, Dict[str, Any]] = {
         "category": "framework",
         "purpose": "每日 12:40 知识库治理：多端同步 + 索引/图谱重建 + 生长晋升",
         "depends": [],
+    },
+    KB_DISTILL_CRON_NAME: {
+        "schedule": DEFAULT_KB_DISTILL_SCHEDULE,
+        "category": "framework",
+        "purpose": "每日 12:50 知识库蒸馏：raw→wiki 批量 5 篇（最旧优先）",
+        "depends": [KB_SYNC_CRON_NAME],
     },
     "lc-hourly-monitor": {
         "schedule": None,

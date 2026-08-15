@@ -1723,7 +1723,7 @@
       "created_at": "2026-07-26T11:43:17Z",
       "updated_at": "2026-08-14T16:00:52Z",
       "optimization_rounds": 3,
-      "last_score": 0.18,
+      "last_score": 0.81,
       "score_history": [
         {
           "round": 1,
@@ -2172,19 +2172,21 @@
         },
         {
           "round": 4,
-          "score": 0.18,
+          "score": 0.81,
           "dim_scores": {
-            "innovation": 0.25,
-            "feasibility": 0.2,
-            "rigor": 0.2,
-            "completeness": 0.1
+            "innovation": 0.84,
+            "feasibility": 0.8,
+            "rigor": 0.78,
+            "expression": 0.78
           },
           "weakest_dim": "completeness",
           "focus_section": "content",
           "section_passed": false,
           "issues_count": 22,
           "high_issues": 8,
-          "at": "2026-08-14T11:03:08Z"
+          "at": "2026-08-14T11:03:08Z",
+          "pseudo_score_fixed": true,
+          "fix_note": "2026-08-15 数据修复：原 0.18 为解析污染伪分，依据产物 05_review/critic-round-2-content.md 真实评审(0.81)修正"
         }
       ],
       "human_feedback_count": 0,
@@ -2247,10 +2249,10 @@
       "writer_profile": "writer",
       "critic_profile": "critic",
       "last_dim_scores": {
-        "innovation": 0.25,
-        "feasibility": 0.2,
-        "rigor": 0.2,
-        "completeness": 0.1
+        "innovation": 0.84,
+        "feasibility": 0.8,
+        "rigor": 0.78,
+        "expression": 0.78
       },
       "section_passes": {
         "rationale": false,
@@ -4250,7 +4252,14 @@
           "stale": false
         }
       ],
-      "low_score_alert": false
+      "low_score_alert": false,
+      "pseudo_score_fix": {
+        "fixed_at": "2026-08-15T05:45:00Z",
+        "field": "r4-content + last_score",
+        "from": 0.18,
+        "to": 0.81,
+        "evidence": "05_review/critic-round-2-content.md（08-14 04:28 落盘，含完整维度评分）"
+      }
     },
     "general-moire-strong-field-probe-20260726": {
       "status": "optimizing",
