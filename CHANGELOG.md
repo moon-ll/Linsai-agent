@@ -1,5 +1,29 @@
 # 变更记录
 
+## v6.9.19 - 2026-08-16 周末阶段超期补跑：入口 cron 错过不再整周空缺
+
+背景：周末三阶段的跨周重置只发生在入口 cron 的 sync_stage_jobs 里
+（input 周六 09:00 / output 周六 14:00 / reflection 周日 09:00）——
+08-16 实测反思入口 cron 撞上系统卡死窗口失败后，20 分钟 worker 只
+推进 pending job 不触发重置，本周反思整段空缺且无人补位（需人工
+手动补跑才恢复）；v6.9.6 的 KB 深度维护 job 也因反思阶段从未 sync
+而长期未注册进 state。
+
+- **补跑逻辑**（`lifecycle/orchestrator.py`）：`lc-repair`（每 6 小时）
+  周末分支新增 `_weekend_stage_catchup`——入口窗口（本地时间，对齐
+  controller 安装的时刻 +30 分钟宽限）已过且该阶段本周末（最近周六
+  00:00 起）零活动（无任何 job 的 started/finished 落入窗口）时，
+  补调 `sync_stage_jobs`（触发跨周重置 + 补建缺失 job 模板），执行
+  交给 20 分钟 worker 自然推进；repair 自身不跑 LLM 不长阻塞。
+- **决策与执行分离**：`_weekend_catchup_decisions` 纯函数（state +
+  now → {stage: 超期}）便于回归测试与时区锚点验证（UTC 时间戳 vs
+  本地窗口经 astimezone 对齐，周六 09:30 CST 活动正确判定为"本周末
+  已跑"）。
+- **验证**：test_weekend_pipeline 新增 7 断言（周日中午全零活动 →
+  三阶段全超期 / 周六中午仅 input / 本周末已跑不重复触发 / 接线
+  sync 实际调用 / dry-run 零落盘）；真实 state 复核无误报（本周末
+  三阶段均已有活动 → 全 False）；`--module` 全量 **840/840** 全绿。
+
 ## v6.9.18 - 2026-08-16 输入链路重构：信息整合 → 课题融合/新增全链治理
 
 08-16 凌晨知识簇链路全链首跑的实测暴露四层缺陷：乱聚类（簇 ID

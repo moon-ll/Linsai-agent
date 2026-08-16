@@ -420,6 +420,64 @@ class WeekendPipelineTests(TestSuite):
         )
         self.assert_eq(done_count, 6, "完成仅 2 天且产物齐全 → 不应重置")
 
+    def _test_weekend_stage_catchup(self):
+        """v6.9.19: 入口 cron 错过的周末阶段由 repair 补 sync（决策 + 接线）。
+
+        背景：跨周重置只发生在入口 cron 的 sync_stage_jobs 里——08-16
+        实测反思入口 cron（周日 09:00）撞上系统卡死窗口失败，20 分钟
+        worker 只推进 pending job 不触发重置，本周反思整段空缺。
+        """
+        from datetime import datetime
+        from lifecycle.orchestrator import _weekend_catchup_decisions, _weekend_stage_catchup
+
+        # --- 决策：周日中午，三阶段上周完成（本周末零活动）→ 全超期
+        state = {"jobs": [
+            {"stage": "input", "started_at": "2026-08-08T01:00:00Z",
+             "finished_at": "2026-08-08T02:00:00Z", "status": "done"},
+            {"stage": "output", "started_at": "2026-08-08T06:00:00Z",
+             "finished_at": "2026-08-08T06:06:00Z", "status": "done"},
+            {"stage": "reflection", "started_at": "2026-08-02T01:00:00Z",
+             "finished_at": "2026-08-08T09:05:00Z", "status": "done"},
+        ]}
+        d = _weekend_catchup_decisions(state, datetime(2026, 8, 16, 12, 0))
+        self.assert_eq(d, {"input": True, "output": True, "reflection": True},
+                       "周日中午全零活动 → 三阶段全部超期")
+
+        # --- 决策：周六中午 → 仅 input（09:00 窗口已过）超期
+        d = _weekend_catchup_decisions(state, datetime(2026, 8, 15, 12, 0))
+        self.assert_eq(d, {"input": True, "output": False, "reflection": False},
+                       "周六中午只有 input 窗口已过")
+
+        # --- 决策：本周末已有活动 → 不重复触发
+        state_active = {"jobs": [
+            {"stage": "input", "started_at": "2026-08-15T01:30:00Z",
+             "finished_at": "2026-08-15T05:47:00Z", "status": "done"},
+        ]}
+        d = _weekend_catchup_decisions(state_active, datetime(2026, 8, 16, 12, 0))
+        self.assert_true(d.get("input") is False, "本周末已跑的阶段不应补跑")
+        self.assert_true(d.get("reflection") is True, "零活动阶段仍应补跑")
+
+        # --- 接线：超期阶段实际调用 sync（monkeypatch 计数）
+        class _FakePipeline:
+            def __init__(self):
+                self.state = state  # 全零活动状态
+                self.state_path = None
+                self.synced = []
+            def sync_stage_jobs(self, stage):
+                self.synced.append(stage)
+                return {"success": True}
+
+        fake = _FakePipeline()
+        caught = _weekend_stage_catchup(dry_run=False, pipeline=fake)
+        self.assert_eq(sorted(fake.synced), ["input", "output", "reflection"],
+                       "三个超期阶段都应补 sync")
+        self.assert_eq(len(caught), 3, "补跑记录应为 3 条")
+
+        # --- 接线：dry-run 不落任何 sync
+        fake2 = _FakePipeline()
+        _weekend_stage_catchup(dry_run=True, pipeline=fake2)
+        self.assert_eq(fake2.synced, [], "dry-run 不应执行 sync")
+
     def run_tests(self):
         self._test_sync_stage_jobs_idempotent()
         self._test_dependency_order()
@@ -434,3 +492,4 @@ class WeekendPipelineTests(TestSuite):
         self._test_kb_health_field_fallback_in_weekly_report()
         self._test_reset_stage_uses_own_recency_not_global_updated_at()
         self._test_reset_stage_not_triggered_within_week()
+        self._test_weekend_stage_catchup()

@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+from datetime import datetime
 from typing import Any, Dict, List, Optional
 
 import hermes_bridge as hb
@@ -33,6 +34,15 @@ from .utils import (
 
 from weekend_pipeline.state import load_pipeline_state, save_pipeline_state
 from weekend_pipeline.executor import repair_stale_and_failed as repair_weekend_pipeline
+
+# v6.9.19: 周末阶段入口 cron 窗口（本地时间，与 lifecycle/controller.py
+# 安装的三个入口 cron 时刻对齐：input 周六 09:00 / output 周六 14:00 /
+# reflection 周日 09:00）。供 _weekend_stage_catchup 判断"超期未跑"。
+WEEKEND_STAGE_WINDOWS = {
+    "input": (5, 9),       # (weekday, hour)，周六=5
+    "output": (5, 14),
+    "reflection": (6, 9),  # 周日=6
+}
 
 try:
     from logger import get_logger
@@ -423,6 +433,94 @@ def run_repair(self, dry_run: bool = False) -> Dict[str, Any]:
 
     return {"success": True, "dry_run": dry_run, "repaired": repaired, "at": now_utc()}
 
+def _weekend_catchup_decisions(
+    state: Dict[str, Any],
+    now_local: "datetime",
+) -> Dict[str, bool]:
+    """判断各周末阶段是否"超期未跑"（纯决策，供回归测试）。
+
+    超期 = 入口 cron 窗口（v6.9.19：input 周六 09:00 / output 周六
+    14:00 / reflection 周日 09:00，本地时间）已过 30 分钟，且该阶段
+    本周末（最近周六 00:00 起）零活动（无任何 job 的 started_at/
+    finished_at 落入本周末窗口）。
+
+    背景：跨周重置只发生在入口 cron 的 sync_stage_jobs 里——入口
+    cron 错过（如 08-16 系统卡死撞掉周日 09:00 反思入口）时，20
+    分钟 worker 只推进 pending job 不触发重置，阶段整周空缺且无人
+    补位，只能等下周入口 cron。
+
+    Returns:
+        {stage: 超期布尔}。
+    """
+    from datetime import timedelta
+
+    # 本周末锚点：最近的周六 00:00（周六=5，周日=6；本函数仅在周末
+    # 被调用，周一及以后按"最近过去的周六"回溯不影响判断方向）
+    days_since_sat = (now_local.weekday() - 5) % 7
+    anchor = (now_local - timedelta(days=days_since_sat)).replace(
+        hour=0, minute=0, second=0, microsecond=0)
+
+    decisions: Dict[str, bool] = {}
+    for stage, (entry_wd, entry_hour) in WEEKEND_STAGE_WINDOWS.items():
+        window_dt = anchor + timedelta(days=(entry_wd - 5), hours=entry_hour)
+        if now_local < window_dt + timedelta(minutes=30):
+            decisions[stage] = False
+            continue
+        stage_jobs = [j for j in state.get("jobs", []) if j.get("stage") == stage]
+        active = False
+        for j in stage_jobs:
+            ts = j.get("started_at", "") or j.get("finished_at", "") or ""
+            if not ts:
+                continue
+            try:
+                dt = datetime.fromisoformat(ts.replace("Z", "+00:00")).astimezone().replace(tzinfo=None)
+                if dt >= anchor:
+                    active = True
+                    break
+            except Exception:
+                continue
+        decisions[stage] = not active
+    return decisions
+
+
+def _weekend_stage_catchup(
+    dry_run: bool = False,
+    pipeline: Optional[Any] = None,
+) -> List[Dict[str, Any]]:
+    """周末阶段超期补跑：补调 sync_stage_jobs，执行交给 20 分钟 worker。
+
+    只补状态不跑 LLM（repair cron 不做长阻塞执行）；sync 会触发跨周
+    重置（>6 天未完成的阶段 done→pending）并补建缺失的 job 模板
+    （08-16 实测 v6.9.6 的 kb 深度维护 job 因反思阶段从未 sync 而长期
+    未注册）。pipeline 参数供回归测试注入隔离实例。
+    """
+    from weekend_pipeline import WeekendPipeline
+
+    now_local = datetime.now()  # 入口 cron 时刻为本地时间
+    p = pipeline or WeekendPipeline()
+    decisions = _weekend_catchup_decisions(p.state, now_local)
+    caught = []
+    for stage, overdue in decisions.items():
+        if not overdue:
+            continue
+        if not dry_run:
+            try:
+                p.sync_stage_jobs(stage)
+            except Exception as e:
+                if _log:
+                    _log.warning(f"[repair] 周末阶段补跑 sync 失败（{stage}）: {e}")
+                caught.append({"stage": stage, "action": f"sync 失败: {e}"})
+                continue
+            p.state = load_pipeline_state(p.state_path)
+        caught.append({
+            "stage": stage,
+            "action": "入口 cron 窗口已过且本周末零活动 → 已补 sync（跨周重置），交由 worker 推进",
+        })
+        if _log:
+            _log.info(f"[repair] 周末阶段超期补跑: {stage}（周六00:00 以来零活动）")
+    return caught
+
+
 def _run_weekend_repair(
     self,
     dry_run: bool = False,
@@ -484,12 +582,21 @@ def _run_weekend_repair(
         if _log:
             _log.warning(f"扫描 weekend-pipeline.json 失败: {e}")
 
+    # v6.9.19: 周末阶段超期补跑——入口 cron 错过时阶段整周空缺的补位
+    try:
+        stage_catchup = _weekend_stage_catchup(dry_run=dry_run)
+    except Exception as e:
+        if _log:
+            _log.warning(f"[repair] 周末阶段补跑检查失败（不影响主流程）: {e}")
+        stage_catchup = []
+
     return {
         "success": True,
         "dry_run": dry_run,
         "mode": "weekend",
         "repaired": repaired,
         "pipeline_repaired": pipeline_repaired,
+        "stage_catchup": stage_catchup,
         "at": now_utc(),
     }
 
