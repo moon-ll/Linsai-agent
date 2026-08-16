@@ -55,9 +55,14 @@ SOURCE_RAW_KEY = "source_raw"    # pending_distill 判定字段
 #   蒸馏它们只会产出无意义 wiki 页；kb_health 计数包含它们属上游口径
 #   宽松，此处主动排除，避免污染知识库。
 EXCLUDE_PREFIXES = ("raw/pdfs/_text_cache/",)
+# v6.9.20: 排除自动生成的索引/清单类文件（无原文语义，蒸馏无意义，
+# 实测 _pdf-library.md 为 PDF 汇总表，会永久占用 pending 计数）。
+EXCLUDE_FILES = ("raw/pdfs/_pdf-library.md",)
 
 
 def _is_excluded(rel_path: str) -> bool:
+    if rel_path in EXCLUDE_FILES:
+        return True
     return any(rel_path.startswith(p) for p in EXCLUDE_PREFIXES)
 
 
@@ -231,7 +236,15 @@ def _self_check() -> bool:
     else:
         print("✗ 覆盖了已有字段"); ok = False
 
-    # 5) created 时间戳非冻结（v6.9.7 回归：与当前时间差 < 24h）
+    # 5) 排除规则（v6.9.20 回归：索引清单文件不入待蒸馏）
+    if _is_excluded("raw/pdfs/_pdf-library.md") and \
+            _is_excluded("raw/pdfs/_text_cache/123.md") and \
+            not _is_excluded("raw/papers/2024-x.md"):
+        print("✓ 排除规则：索引清单/_text_cache 排除，正常论文保留")
+    else:
+        print("✗ 排除规则失效"); ok = False
+
+    # 6) created 时间戳非冻结（v6.9.7 回归：与当前时间差 < 24h）
     import re as _re
     from datetime import datetime, timezone, timedelta
     fresh = _ensure_source_raw("正文内容", "x.md", "papers", "x")
