@@ -1,5 +1,22 @@
 # 变更记录
 
+## v6.9.17 - 2026-08-16 体检修复：补提交 v6.9.16 遗漏的命名修复
+
+08h 三层诊断发现 v6.9.16 存在提交完整性缺陷：commit 29d33c9 收录了
+引用"修复后"行为的两条命名回归（test_input_clustering），但修复本体
+（naming.py 的 LIFECYCLE_STAGES 导入 + registration.py 的中文标题
+keywords 英文词回退）滞留工作区未入库。HEAD 上该套件一崩一败：
+
+- `_test_register_generates_valid_id`：HEAD naming.py 引用未导入的
+  LIFECYCLE_STAGES → NameError，被 self_test ⚠ 静默吞（恰为 v6.9.16
+  刚收口的静默吞模式，发布说明"796/796 全绿"仅对工作区成立）
+- `_test_register_cn_title_falls_back_to_keywords`：无回退逻辑 →
+  占位名 "new-idea-N" 硬断言失败
+
+本补提交将两个修复文件入库，git 快照与工作区恢复一致，796/796 复验
+通过。触发链回溯：08-16 01:49 周日输入运行注册 54 个新课题（46 个
+纯中文标题落占位名）→ 04h 会话修复命名 → 04:17 提交测试但漏提修复。
+
 ## v6.9.16 - 2026-08-16 体检修复：收敛窗口约束当前轮 + 测试门禁静默吞恢复
 
 04h 三层诊断（运行时健康 / 代码缺陷 / 设计一致性抽查 #7 #10）产出

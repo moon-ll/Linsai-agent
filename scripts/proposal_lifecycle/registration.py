@@ -161,6 +161,19 @@ class RegistrationMixin:
         name = safe_filename(title)[:40].strip("-").lower()
         name = re.sub(r"[^a-z0-9-]+", "-", name).strip("-")
         if not name:
+            # v6.9.16: 中文标题经 ASCII 过滤后为空（08-16 批处理实测 46+
+            # 课题回退 "new-idea-N" 占位名）。回退源：idea.keywords 中的
+            # 英文词（知识簇关键词通常含英文术语），按序拼接截断。
+            en_words = []
+            for kw in idea.get("keywords", []) or []:
+                kw_clean = re.sub(
+                    r"[^a-z0-9-]+", "-", str(kw).lower()
+                ).strip("-")
+                if kw_clean and len(kw_clean) >= 2 and kw_clean not in en_words:
+                    en_words.append(kw_clean)
+            if en_words:
+                name = "-".join(en_words[:3])[:40].strip("-")
+        if not name:
             name = "new-idea"
 
         proposal_id = self.generate_proposal_id(name=name, project_type=project_type)

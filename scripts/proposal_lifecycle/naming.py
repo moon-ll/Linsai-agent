@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, Optional
 
-from proposal_lifecycle.constants import PROJECT_TYPES, _log
+from proposal_lifecycle.constants import LIFECYCLE_STAGES, PROJECT_TYPES, _log
 
 
 class NamingMixin:
