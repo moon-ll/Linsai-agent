@@ -102,7 +102,8 @@ def run_input_collect(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool 
             if _log:
                 _log.warning(f"输入端：sync_hermes_outputs 失败（继续）: {e}")
 
-    sources = collect_all_sources(state=state, days=7, paper_limit=20, capture_limit=10)
+    sources = collect_all_sources(state=state, days=7, paper_limit=20, capture_limit=10,
+                                  persist_scope=not dry_run)
     _ensure_input_dir()
     if not dry_run:
         save_json(WEEKEND_INPUT_DIR / f"sources-{now_utc()[:10]}.json", sources)
@@ -160,7 +161,8 @@ def run_input_summarize(state: Dict[str, Any], job: Dict[str, Any], dry_run: boo
     v6.9.12: 摘要条目携带 source_id/path/tier，供下游增量归簇
     与信息源挂载回溯原始文献。
     """
-    sources = collect_all_sources(state=state, days=7, paper_limit=20, capture_limit=10)
+    sources = collect_all_sources(state=state, days=7, paper_limit=20, capture_limit=10,
+                                  persist_scope=not dry_run)
     papers = new_paper_sources(sources, state)
     if not papers:
         if not dry_run:
@@ -325,14 +327,20 @@ def run_input_cluster_distill(state: Dict[str, Any], job: Dict[str, Any], dry_ru
             c["summary"] = card.get("summary", "")
             c["title"] = card.get("title", "") or c.get("title", "")
             c["open_questions"] = card.get("open_questions", []) or []
+            # v6.9.18: 知识卡来源标记——topic_match 的 new 门槛仅认
+            # LLM 提炼卡（降级拼接的弱卡不足以支撑开新课题）
+            c["distilled_by"] = "llm"
         elif not c.get("summary"):
             # 降级：成员摘要拼接（无 LLM 时保持链路可继续）
             joined = "；".join(m.get("summary", "") for m in members[:6])
             c["summary"] = joined[:500]
+            c.setdefault("distilled_by", "fallback")
+        c["distilled_at"] = now_utc()
         distilled_out.append({
             "cluster_id": c["cluster_id"],
             "title": c["title"],
             "members": len(c.get("member_source_ids", [])),
+            "distilled_by": c.get("distilled_by", ""),
         })
 
     save_clusters(registry)
@@ -374,14 +382,80 @@ def _load_all_stage_proposals() -> List[Dict[str, Any]]:
     return proposals
 
 
+# v6.9.18: new 动作周配额——08-16 实测 141 簇无差别路由产出 72 new
+# （54 个弱簇课题泛滥成灾，46 个 new-idea-NN 占位名）。宁缺毋滥。
+NEW_WEEKLY_QUOTA = 2
+# new 门槛成员数（与 clusters.MIN_CLUSTER_MEMBERS 对齐，弱簇只允许
+# merge/expansion 信息注入，不满足则 defer 继续积累）
+NEW_MIN_MEMBERS = 3
+
+# v6.9.18 补：运维簇识别词（路由前置过滤）。08-16 复跑实测运维简报
+# 簇（"每日简报/hermes-briefing"）知识卡含个别领域词可过方向关，
+# LLM 仲裁无 reject 选项只能判 new——注册了运维课题。
+_OPS_CLUSTER_MARKERS = (
+    "每日简报", "hermes-briefing", "对话记忆", "知识管理", "运维",
+    "自动化系统", "cron",
+)
+
+
+def _is_ops_cluster(cluster: Dict[str, Any]) -> bool:
+    """识别运维内容簇：标题命中运维标记，或关键词命中 ≥2 个运维词。"""
+    title = cluster.get("title", "") or ""
+    if any(m in title for m in _OPS_CLUSTER_MARKERS[:6]):
+        return True
+    kws = [str(k).lower() for k in (cluster.get("keywords") or [])]
+    hits = sum(1 for m in _OPS_CLUSTER_MARKERS if any(m in k for k in kws))
+    return hits >= 2
+
+
+def _new_gates(
+    cluster: Dict[str, Any],
+    proposals: List[Dict[str, Any]],
+    scope_terms: List[str],
+    quota_left: int,
+) -> tuple:
+    """new 动作四重门槛（v6.9.18）。
+
+    Returns:
+        (ok, reason)。ok=False 时簇路由为 defer（保持 open 继续积累）。
+    """
+    members = len(cluster.get("member_source_ids", []))
+    if members < NEW_MIN_MEMBERS:
+        return False, f"成员 {members} < {NEW_MIN_MEMBERS}，继续积累"
+    if cluster.get("distilled_by") != "llm":
+        return False, "知识卡非 LLM 提炼（缺失或降级拼接）"
+    if quota_left <= 0:
+        return False, f"本周 new 配额已用尽（上限 {NEW_WEEKLY_QUOTA}）"
+    cluster_text = " ".join([
+        cluster.get("title", ""), cluster.get("summary", ""),
+        " ".join(cluster.get("keywords", [])),
+    ])
+    from .sources import scope_hit
+    if scope_hit(cluster_text, scope_terms) is None:
+        return False, "簇主题与方向词表无交集"
+    # 与现有课题的重叠检查（hold 线对齐 idea_generator 口径）
+    try:
+        from idea_generator import IDEA_HOLD_SIMILARITY
+    except Exception:
+        IDEA_HOLD_SIMILARITY = 0.50
+    for p in proposals:
+        if _jaccard_similarity(cluster_text, p["title"] + " " + p["text"]) >= IDEA_HOLD_SIMILARITY:
+            return False, f"与现有课题 {p['proposal_id']} 高度重叠"
+    return True, "成员/知识卡/方向/重叠/配额五关全过"
+
+
 def run_input_topic_match(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
-    """课题判断：open 簇 vs 全阶段课题，产出路由决策（merge/new/expansion）。
+    """课题判断：open 簇 vs 全阶段课题，产出路由决策（merge/new/expansion/defer）。
 
     两级判断：Jaccard 预筛 top-3 候选 → LLM 仲裁（概念级重合判断，
     词袋测不出的同机制不同术语场景）。LLM 不可用时回退纯 Jaccard
     阈值（0.35，与旧口径一致）。
+    v6.9.18: new 动作加四重门槛（成员数/LLM 知识卡/方向相关/不与
+    现有课题重叠）+ 周配额；不达标的簇路由 defer（保持 open 继续
+    积累，不丢失），取代旧版"低置信一律按新课题处理"的泛滥路径。
     """
     from .clusters import load_clusters
+    from .sources import load_scope_terms
 
     if dry_run:
         return {"success": True, "routes": 0, "dry_run": True, "message": "dry-run 跳过课题匹配"}
@@ -394,8 +468,26 @@ def run_input_topic_match(state: Dict[str, Any], job: Dict[str, Any], dry_run: b
         return {"success": True, "routes": 0, "message": "无待路由簇"}
 
     proposals = _load_all_stage_proposals()
+    scope_terms = load_scope_terms()
+    quota_left = NEW_WEEKLY_QUOTA
+    # 配额优先给成员最多的簇：先按成员数降序处理，先到先得
+    open_c.sort(key=lambda c: len(c.get("member_source_ids", [])), reverse=True)
+
     routes = []
     for c in open_c:
+        # v6.9.18 补：运维簇前置 defer（不进课题路由，保持 open 无害积累）
+        if _is_ops_cluster(c):
+            routes.append({
+                "cluster_id": c["cluster_id"],
+                "cluster_title": c.get("title", ""),
+                "action": "defer",
+                "target_id": None,
+                "reason": "运维内容簇（简报/cron/系统元数据），不参与课题路由",
+                "members": len(c.get("member_source_ids", [])),
+                "candidates": [],
+            })
+            continue
+
         cluster_text = " ".join([c.get("title", ""), c.get("summary", ""), " ".join(c.get("keywords", []))])
         scored = sorted(
             (
@@ -419,6 +511,15 @@ def run_input_topic_match(state: Dict[str, Any], job: Dict[str, Any], dry_run: b
         else:
             # 中低置信：LLM 仲裁（top-3 候选一起判断，概念级重合）
             action, target_id, reason = _llm_arbitrate_cluster(c, scored)
+            if action == "new":
+                # LLM 判新也要过门槛（弱簇/离题/配额尽 → defer）
+                ok, gate_reason = _new_gates(c, proposals, scope_terms, quota_left)
+                if ok:
+                    quota_left -= 1
+                    reason = f"{reason}；{gate_reason}"
+                else:
+                    action, target_id = "defer", None
+                    reason = f"new 门槛未过：{gate_reason}"
 
         routes.append({
             "cluster_id": c["cluster_id"],
@@ -426,6 +527,7 @@ def run_input_topic_match(state: Dict[str, Any], job: Dict[str, Any], dry_run: b
             "action": action or "new",
             "target_id": target_id,
             "reason": reason,
+            "members": len(c.get("member_source_ids", [])),
             "candidates": [
                 {"proposal_id": s["proposal"]["proposal_id"], "score": round(s["score"], 3)}
                 for s in scored
@@ -434,7 +536,12 @@ def run_input_topic_match(state: Dict[str, Any], job: Dict[str, Any], dry_run: b
 
     _ensure_input_dir()
     save_json(WEEKEND_INPUT_DIR / f"routes-{now_utc()[:10]}.json", {"routes": routes})
-    return {"success": True, "routes": len(routes)}
+    from collections import Counter
+    return {
+        "success": True,
+        "routes": len(routes),
+        "actions": dict(Counter(r.get("action") for r in routes)),
+    }
 
 
 def _llm_arbitrate_cluster(
@@ -442,6 +549,10 @@ def _llm_arbitrate_cluster(
     scored: List[Dict[str, Any]],
 ) -> tuple:
     """LLM 仲裁簇与课题的关系（Jaccard 中低置信时）。
+
+    v6.9.18 补：仲裁选项加 defer（非研究内容/质量不足不路由），
+    并向 LLM 说明 new 的实际后果（注册新研究课题进人工立项队列）
+    ——08-16 复跑实测旧三选项下运维簇只能被塞给 new。
 
     Returns:
         (action, target_id, reason)。LLM 不可用/失败 → ("new", None, "无匹配")。
@@ -457,8 +568,11 @@ def _llm_arbitrate_cluster(
 
     system = (
         "你是林赛，判断一个知识簇与候选课题的关系。merge=信息属于该课题应融合；"
-        "expansion=主题相邻应把文献挂为补充信息源；new=与现有课题无关。"
-        '输出 JSON：{"action": "merge|expansion|new", "target_id": "课题id或null", "reason": "一句话"}。'
+        "expansion=主题相邻应把文献挂为补充信息源；new=值得开创新研究课题"
+        "（将注册为新课题并进入人工立项队列，需具备明确科学问题）；"
+        "defer=非研究内容（系统运维/流程记录）或科学含量不足，不应路由。"
+        '输出 JSON：{"action": "merge|expansion|new|defer", '
+        '"target_id": "课题id或null", "reason": "一句话"}。'
     )
     user = (
         f"知识簇：{cluster.get('title', '')}\n"
@@ -467,30 +581,80 @@ def _llm_arbitrate_cluster(
         f"候选课题：\n{cands}"
     )
     verdict = _llm_json(system, user, timeout=90)
-    if isinstance(verdict, dict) and verdict.get("action") in ("merge", "expansion", "new"):
+    if isinstance(verdict, dict) and verdict.get("action") in ("merge", "expansion", "new", "defer"):
         action = verdict["action"]
         target = verdict.get("target_id")
-        if action != "new" and not target:
+        if action in ("merge", "expansion") and not target:
             # action 指向课题但未给 id：回退最高分候选
             if scored:
                 target = scored[0]["proposal"]["proposal_id"]
             else:
                 action = "new"
                 target = None
+        if action == "defer":
+            target = None
         return action, target, verdict.get("reason", "LLM 仲裁")
     return "new", None, "LLM 仲裁失败，按新课题处理"
+
+
+def _group_merge_routes(
+    merge_routes: List[Dict[str, Any]],
+    cluster_index: Dict[str, Dict[str, Any]],
+    threshold: float = 0.30,
+) -> Dict[str, str]:
+    """同目标课题的 merge 簇连通分组（v6.9.18）。
+
+    按目标课题分组后，组内只保留一个"主簇"（成员最多）走 enrich
+    知识卡注入，其余簇只挂信息源——根治 08-16 实测 BSV 课题被 6
+    个同主题变体簇重复注入（enrich 句级去重对同义不同措辞的知识
+    卡无能为力）。
+
+    Returns:
+        {cluster_id: 同组主簇 id}——非主簇映射到主簇 id。
+    """
+    from .clusters import cluster_similarity
+
+    leader: Dict[str, str] = {}
+    groups_by_target: Dict[str, List[Dict[str, Any]]] = {}
+    for r in merge_routes:
+        c = cluster_index.get(r.get("cluster_id", ""))
+        target = r.get("target_id", "")
+        if not c or not target:
+            continue
+        groups = groups_by_target.setdefault(target, [])
+        placed = False
+        for g in groups:
+            if cluster_similarity(c, g["leader"]) >= threshold:
+                leader[c["cluster_id"]] = g["leader"]["cluster_id"]
+                # 主簇取成员更多者（组内重组时更新 follower 映射）
+                if len(c.get("member_source_ids", [])) > len(g["leader"].get("member_source_ids", [])):
+                    leader[g["leader"]["cluster_id"]] = c["cluster_id"]
+                    g["leader"] = c
+                placed = True
+                break
+        if not placed:
+            leader[c["cluster_id"]] = c["cluster_id"]
+            groups.append({"leader": c})
+    return leader
 
 
 def run_input_compose(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool = False) -> Dict[str, Any]:
     """路由落地：簇融入课题/注册新课题/挂载补充信息源（进下周工作流）。
 
-    v6.9.12 三条路由全部落地（取代旧 compose 依赖 decisions 且
-    expansion 空转）：
+    v6.9.12 三条路由落地（取代旧 compose 依赖 decisions 且 expansion
+    空转）：
     - new：register_from_idea 注册 drafts 新课题
     - merge：enrich_from_idea 注入活跃课题 + 文献挂载到 02_literature
     - expansion：文献挂载到课题 02_literature/supplementary-sources-{date}.json
       （references 校验步骤与下周 writer 可读）
     全部路由完成后簇标 linked，不再吸收新成员。
+    v6.9.18:
+    - defer 路由不落地（簇保持 open 继续积累，等待成员/知识卡成熟）；
+    - 同目标课题的多个 merge 簇先连通分组，组内只有主簇注入知识卡，
+      其余簇只挂信息源（防同主题变体簇重复注入）；
+    - 信息源挂载改用簇内 member_summaries（跨周可用），修复旧实现
+      依赖当天 summaries 文件导致跨周成员挂载必失败（08-16 实测
+      expansion 成功率 12/58）。
     """
     from proposal_lifecycle import ProposalLifecycle
     from .clusters import load_clusters, mark_linked, save_clusters
@@ -498,13 +662,17 @@ def run_input_compose(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool 
     routes_path = WEEKEND_INPUT_DIR / f"routes-{now_utc()[:10]}.json"
     routes = load_json(routes_path, default={}).get("routes", [])
 
-    # 摘要索引：source_id → 摘要条目（信息源挂载需要 title/summary/path）
+    # 摘要索引：source_id → 摘要条目（member_summaries 缺 path 的旧簇回退用）
     summaries_path = WEEKEND_INPUT_DIR / f"summaries-{now_utc()[:10]}.json"
     summaries = load_json(summaries_path, default={}).get("summaries", [])
     summary_index = {s.get("source_id", ""): s for s in summaries if isinstance(s, dict)}
 
     registry = load_clusters()
     cluster_index = {c.get("cluster_id"): c for c in registry.get("clusters", [])}
+
+    # 同目标 merge 簇分组：非主簇只挂信息源不重复注入
+    merge_routes = [r for r in routes if r.get("action") == "merge" and r.get("target_id")]
+    leader_map = _group_merge_routes(merge_routes, cluster_index)
 
     lc = ProposalLifecycle()
     actions = []
@@ -516,6 +684,35 @@ def run_input_compose(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool 
         action = r.get("action", "new")
         target_id = r.get("target_id")
 
+        if action == "defer":
+            # v6.9.18: 暂缓路由——簇保持 open 继续积累，不落地不标 linked
+            actions.append({
+                "cluster_id": cid, "cluster_title": cluster.get("title", ""),
+                "action": "defer", "result": {"success": True, "action": "defer",
+                                              "message": r.get("reason", "门槛未过，继续积累")},
+            })
+            continue
+
+        is_merge_follower = (
+            action == "merge"
+            and leader_map.get(cid, cid) != cid
+        )
+        if is_merge_follower:
+            # 同组非主簇：只挂信息源，不重复注入知识卡
+            if dry_run:
+                result = {"action": "merge_follower", "target_id": target_id, "dry_run": True}
+            else:
+                written = _write_supplementary_sources(target_id, cluster, summary_index)
+                result = {"success": written, "action": "merge_follower", "target_id": target_id,
+                          "message": "同组非主簇：仅挂载信息源（知识卡由主簇注入）"}
+                if written:
+                    mark_linked(registry, cid, target_id or "")
+            actions.append({
+                "cluster_id": cid, "cluster_title": cluster.get("title", ""),
+                "action": "merge_follower", "result": result,
+            })
+            continue
+
         idea = {
             "title": cluster.get("title", ""),
             "background": f"知识簇综合：{cluster.get('summary', '')}",
@@ -524,11 +721,11 @@ def run_input_compose(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool 
             "approach": "待进一步细化",
             "innovations": cluster.get("open_questions", []) or [cluster.get("summary", "")[:120]],
             "sources": [
-                {"title": summary_index.get(sid, {}).get("title", sid), "source_type": "weekend_cluster"}
-                for sid in cluster.get("member_source_ids", [])
-                if sid in summary_index
+                {"title": m.get("title", sid), "source_type": "weekend_cluster"}
+                for sid, m in ((ms.get("source_id", ""), ms) for ms in cluster.get("member_summaries", []))
             ],
             "keywords": cluster.get("keywords", []),
+            "cluster_id": cid,  # v6.9.18: enrich 注入标题带簇 ID 防去重误删
             "generated_at": now_utc(),
             "reliability": RELIABILITY_DERIVED,
         }
@@ -542,7 +739,6 @@ def run_input_compose(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool 
             result = dict(result) if isinstance(result, dict) else {"success": False}
             result["supplementary_written"] = _write_supplementary_sources(target_id, cluster, summary_index)
         elif action == "expansion" and target_id:
-            # v6.9.12 落地：旧版仅记录建议（空转）
             written = _write_supplementary_sources(target_id, cluster, summary_index)
             result = {"success": written, "action": "expansion", "target_id": target_id,
                       "message": "补充信息源已挂载到课题文献目录"}
@@ -550,7 +746,6 @@ def run_input_compose(state: Dict[str, Any], job: Dict[str, Any], dry_run: bool 
             result = {"action": action, "target_id": target_id, "message": "路由目标缺失，跳过"}
 
         if not dry_run and result.get("success") and action != "new":
-            # 新课题 register 后 proposal_id 在 result 里，同样标 linked
             mark_linked(registry, cid, result.get("proposal_id") or target_id or "")
         elif not dry_run and action == "new" and result.get("success"):
             mark_linked(registry, cid, result.get("proposal_id", ""))
@@ -573,6 +768,10 @@ def _write_supplementary_sources(
 
     融入下周工作流的机制：references 校验步骤与 writer 以课题目录
     为输入域，补充清单落盘后即进入下一轮优化的可见范围。
+    v6.9.18: 条目改从簇自身 member_summaries 构建（含跨周成员），
+    当天 summaries 索引仅作旧簇（无 member_summaries）的回退——
+    旧实现只用当天索引，跨周积累的簇成员全部查不到，08-16 实测
+    expansion 挂载成功率 12/58。
     """
     from proposal_lifecycle import ProposalLifecycle
 
@@ -583,18 +782,35 @@ def _write_supplementary_sources(
             return False
         lit_dir = prop_dir / "02_literature"
         lit_dir.mkdir(parents=True, exist_ok=True)
+
         entries = []
-        for sid in cluster.get("member_source_ids", []):
-            s = summary_index.get(sid)
-            if s:
-                entries.append({
-                    "source_id": sid,
-                    "title": s.get("title", ""),
-                    "summary": s.get("summary", ""),
-                    "path": s.get("path", ""),
-                    "added_via": f"cluster:{cluster.get('cluster_id', '')}",
-                    "added_at": now_utc(),
-                })
+        seen_sids = set()
+        for ms in cluster.get("member_summaries", []):
+            sid = ms.get("source_id", "")
+            if not sid or sid in seen_sids:
+                continue
+            seen_sids.add(sid)
+            entries.append({
+                "source_id": sid,
+                "title": ms.get("title", ""),
+                "summary": ms.get("summary", ""),
+                "path": ms.get("path", "") or summary_index.get(sid, {}).get("path", ""),
+                "added_via": f"cluster:{cluster.get('cluster_id', '')}",
+                "added_at": now_utc(),
+            })
+        # 旧簇回退：member_summaries 缺失时从当天摘要索引补
+        if not entries:
+            for sid in cluster.get("member_source_ids", []):
+                s = summary_index.get(sid)
+                if s:
+                    entries.append({
+                        "source_id": sid,
+                        "title": s.get("title", ""),
+                        "summary": s.get("summary", ""),
+                        "path": s.get("path", ""),
+                        "added_via": f"cluster:{cluster.get('cluster_id', '')}",
+                        "added_at": now_utc(),
+                    })
         if not entries:
             return False
         out = lit_dir / f"supplementary-sources-{now_utc()[:10]}.json"

@@ -2,7 +2,7 @@
 title: "🗺️ NSFC 强场超快课题"
 type: "moc"
 created: "2026-06-19T00:00:00Z"
-updated: "2026-08-15T13:46:44Z"
+updated: "2026-08-16T03:52:15Z"
 tags: "[\\"MOC\\", \\"NSFC\\", \\"索引\\", \\"强场超快\\", \\"#type/MOC\\", \\"#status/mature\\"]"
 related: "["Ghimire-Reis", "RABBITT", "TDSE求解器", "["Berry曲率", "北大HHG团队", "固体高次谐波", "带内电流", "带间跃迁", "德鲁德模型", "拓扑绝缘体", "瞬态吸收光谱", "高次谐波产生"]"]"
 source_raw: ""
@@ -19,6 +19,7 @@ project: "[\\"NSFC-强场超快\\"]"
 
 | 课题 | 状态 | 轮次 | 分数 | 版本 | 报告 |
 |------|------|------|------|------|------|
+| berry-mnps3-rashba | 初稿 | 第0轮 | 0.0 | [版本](versions/general-berry-mnps3-rashba-20260816.md) | [报告](reports/general-berry-mnps3-rashba-20260816.md) |
 | bsv-driven-hhg-quantum | 优化中 | 第0轮 | 0.86 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
 | moire-strong-field-probe | 优化中 | 第7轮 | 0.79 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
 | order-parameter-ultrafast-readout | 优化中 | 第0轮 | 0.74 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |

@@ -3,11 +3,12 @@
 
 from __future__ import annotations
 
+import re
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from common import file_sha256, load_json, now_utc
+from common import file_sha256, load_json, now_utc, save_json
 from paths import PROJECT_ROOT
 
 from .constants import RELIABILITY_DERIVED, RELIABILITY_RELIABLE
@@ -18,6 +19,136 @@ try:
     _log = get_logger("weekend_pipeline")
 except Exception:
     _log = None
+
+
+# ---------------------------------------------------------------------------
+# v6.9.18 方向相关性过滤
+# ---------------------------------------------------------------------------
+
+SCOPE_TERMS_PATH = PROJECT_ROOT / "memory" / "weekend-input" / "scope-terms.json"
+
+# 种子词表（NSFC-强场超快方向核心术语，中英双语）。首跑生成
+# scope-terms.json 后以文件为准，用户可手工增删。
+# 背景：08-16 实测无方向过滤，6G 漏波天线/CIGS 光伏/CVD 生长等跨领域
+# 论文全部进入聚类池并成簇（"智能透射面无线能量传输"与"二维纳米带
+# 晶体管"同簇）。research-profile.json 的 TF-IDF 关键词被运维词污染
+# （"识库/开放问题/prompt"），不可用作方向词表。
+SCOPE_SEED_TERMS = [
+    # 中文核心术语
+    "高次谐波", "强场", "超快", "阿秒", "非线性光学", "极紫外", "太赫兹",
+    "二维材料", "拓扑", "能谷", "谷极化", "莫尔", "扭转", "压缩光", "量子光",
+    "贝里相位", "缀饰", "电离", "隧穿", "相干", "飞秒", "皮秒", "瞬态",
+    "光谱学", "电子动力学", "含时密度泛函", "反铁磁", "交变磁", "铁电",
+    "激子", "自旋", "超冷", "量子几何", "手性", "层析",
+    # 英文核心术语
+    "hhg", "high harmonic", "strong field", "attosecond",
+    "ultrafast", "femtosecond", "nonlinear optic", "xuv", "extreme ultraviolet",
+    "terahertz", "thz", "2d material", "two-dimensional", "topological",
+    "valley", "moire", "twisted bilayer", "squeezed light", "squeezed vacuum",
+    "berry phase", "berry curvature", "floquet", "ionization", "tunneling",
+    "quantum light", "tddft", "electron dynamics", "altermagnet", "wigner",
+    # v6.9.18 回放补充（08-16 真实数据误杀修正）：
+    "quantum geometry", "quantum geometric", "quantum spin hall", "spin hall",
+    "single-cycle", "few-cycle", "carrier-envelope", "orbital angular momentum",
+    "tomography", "fieldoscopy", "petahertz", "frequency comb", "spectral comb",
+    "x-ray laser", "soft x-ray", "plasmon", "exciton", "magnon", "chirality",
+    "spatially resolved", "time-resolved",
+]
+
+# 词表自动补充时排除的课题标题通用词
+_SCOPE_STOPWORDS = {
+    "general", "major", "key", "the", "and", "with", "for", "from", "using",
+    "driven", "based", "probe", "readout", "optical", "inversion",
+}
+
+
+def load_scope_terms(persist: bool = True) -> List[str]:
+    """加载方向词表（文件优先；不存在则从种子词 + 活跃课题标题生成并落盘）。
+
+    词表持久化在 memory/weekend-input/scope-terms.json，用户可手工编辑
+    调整口径；文件存在即以文件为准（不再自动重建，防止覆盖人工调整）。
+    persist=False 供 dry-run 使用：只生成不落盘（零落盘不变式）。
+    """
+    if SCOPE_TERMS_PATH.exists():
+        data = load_json(SCOPE_TERMS_PATH, default={})
+        terms = data.get("terms") or []
+        if terms:
+            return [str(t).lower() for t in terms]
+
+    terms = [t.lower() for t in SCOPE_SEED_TERMS if t]
+    # 从活跃课题标题补充方向词（研究管线数据域直读，避免交叉导入）
+    try:
+        lc_data = load_json(PROJECT_ROOT / "research_proposals" / "_lifecycle.json", default={})
+        for p in (lc_data.get("proposals") or {}).values():
+            for w in re.findall(r"[a-zA-Z]{4,}", p.get("title", "").lower()):
+                if w not in _SCOPE_STOPWORDS and w not in terms:
+                    terms.append(w)
+    except Exception:
+        pass
+
+    if persist:
+        SCOPE_TERMS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        save_json(SCOPE_TERMS_PATH, {
+            "terms": terms,
+            "generated_at": now_utc(),
+            "source": "seed+proposal-titles",
+            "note": "方向相关性过滤词表，可手工增删；文件存在即以此为准",
+        })
+    return terms
+
+
+def scope_hit(text: str, terms: Optional[List[str]] = None) -> Optional[str]:
+    """检查文本是否命中方向词表，返回命中词（未命中返回 None）。
+
+    匹配口径（08-16 真实数据回放标定）：
+    - 连字符归一：'high-harmonic' 与词表 'high harmonic' 等价（实测
+      核心论文 'solid-state high-harmonic generation' 因连字符被误杀）；
+    - 英文单词（无空格）：左词界 + 允许后缀延展——'altermagnet' 命中
+      'altermagnetism'、'topological' 命中 'topologically'；
+    - 英文短语（含空格）/中文：子串匹配。
+    """
+    if not text:
+        return None
+    terms = terms or load_scope_terms()
+    lowered = re.sub(r"[-–—]", " ", text.lower())
+    for term in terms:
+        if not term:
+            continue
+        term_norm = re.sub(r"[-–—]", " ", term.lower()).strip()
+        if not term_norm:
+            continue
+        if re.search(r"[a-z]", term_norm):
+            if " " in term_norm:
+                if term_norm in lowered:
+                    return term
+            elif re.search(rf"\b{re.escape(term_norm)}", lowered):
+                return term
+        elif term_norm in lowered:
+            return term
+    return None
+
+
+# v6.9.18 运维简报识别：标题/正文命中且无论文条目的简报不是学术内容
+_OPS_BRIEFING_MARKERS = (
+    "空记录", "cron 自动运行", "个人知识库运维", "流水线运维", "文献追踪流水线运维",
+)
+
+
+def _is_ops_briefing(title: str, text: str) -> bool:
+    """识别运维性简报（08-16 实测其聚成 8 成员簇污染输入链）。
+
+    判据（满足其一）：① 正文过短（空简报）；② 标题命中运维标记；
+    ③ 正文头部命中运维标记且全文无 arXiv 编号（正常学术简报列论文）。
+    """
+    if len(text or "") < 300:
+        return True
+    title = title or ""
+    if any(m in title for m in _OPS_BRIEFING_MARKERS):
+        return True
+    if any(m in (text or "")[:600] for m in _OPS_BRIEFING_MARKERS):
+        if "arxiv" not in (text or "").lower():
+            return True
+    return False
 
 
 BRIEFING_DIR = PROJECT_ROOT / "knowledge" / "wiki" / "reviews"
@@ -355,6 +486,7 @@ def collect_all_sources(
     days: int = 7,
     paper_limit: int = 20,
     capture_limit: int = 10,
+    persist_scope: bool = True,
 ) -> Dict[str, Any]:
     """统一收集所有来源并返回结构化结果。
 
@@ -374,6 +506,10 @@ def collect_all_sources(
     2. 质量分层 tier——paper=1（学术一手）/ briefing=2（二手精选）/
        capture=3 / note=3（讨论与手工笔记）。tier ≤2 进聚类主源
        （new_paper_sources 口径不变），tier=3 仅作 gap 上下文。
+    3. v6.9.18 方向/运维过滤——paper 与方向词表（scope-terms.json）
+       零交集的跨领域论文跳过（08-16 实测 6G 天线/CIGS 光伏等成乱簇）；
+       briefing 命中运维特征（空记录/cron 运维且无论文条目）跳过
+       （08-16 实测运维简报聚成 8 成员簇）。
     """
     sources: Dict[str, Any] = {
         "briefings": collect_briefings(days=days, state=state),
@@ -385,19 +521,36 @@ def collect_all_sources(
     }
 
     # v6.9.12: 已提炼排除 + tier 标注
+    # v6.9.18: 方向过滤（paper）+ 运维简报过滤（briefing）——见函数
+    # docstring 第 3 点
     distilled = distilled_paper_ids()
+    scope_terms = load_scope_terms(persist=persist_scope)
     kept_papers = []
     excluded = 0
+    out_of_scope = 0
     for s in sources.get("papers", []):
         if s.get("source_id", "").split(":")[-1] in distilled:
             excluded += 1
+            continue
+        probe = " ".join([s.get("title", ""), s.get("abstract", "") or s.get("text", "")])
+        if scope_hit(probe, scope_terms) is None:
+            out_of_scope += 1
             continue
         s["tier"] = SOURCE_TIER_PAPER
         kept_papers.append(s)
     sources["papers"] = kept_papers
     sources["distilled_excluded"] = excluded
+    sources["out_of_scope"] = out_of_scope
+    kept_briefings = []
+    ops_skipped = 0
     for s in sources.get("briefings", []):
+        if _is_ops_briefing(s.get("path", ""), s.get("text", "")):
+            ops_skipped += 1
+            continue
         s["tier"] = SOURCE_TIER_BRIEFING
+        kept_briefings.append(s)
+    sources["briefings"] = kept_briefings
+    sources["ops_briefings_skipped"] = ops_skipped
     for s in sources.get("captures", []):
         s["tier"] = SOURCE_TIER_CAPTURE
     for s in sources.get("reference_notes", []):

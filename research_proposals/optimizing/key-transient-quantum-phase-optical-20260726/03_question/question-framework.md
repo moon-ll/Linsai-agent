@@ -15,3 +15,15 @@
 ## 与 T5 反演方法学接口
 
 本课题的反演路径需与 `T5_inversion_methodology` 协同，详见方法学手册。
+
+## 周末输入补充（2026-08-15）
+
+- paper:2026-2606.02238-sub-cycle-field-driven-dynamical-berry-phase-in-solids
+- paper:2025-2502.07390-subcycle-observation-of-interband-polarization-in-solids-dri
+- paper:2025-2510.16651-strong-field-driven-sub-cycle-band-structure-modulation-and
+
+
+- paper:2026-2606.02238-sub-cycle-field-driven-dynamical-berry-phase-in-solids
+- paper:2025-2502.07390-subcycle-observation-of-interband-polarization-in-solids-dri
+- paper:2025-2510.16651-strong-field-driven-sub-cycle-band-structure-modulation-and
+

@@ -2,7 +2,7 @@
 
 > 本文件供 AI 编码代理阅读。假设读者对本项目一无所知。
 > 项目语言：中文（所有文档、注释、脚本输出均为中文）
-> 最后更新：2026-08-15
+> 最后更新：2026-08-16
 > 提示：完整目录结构见 `docs/PROJECT-STRUCTURE.md`，完整架构说明见 `docs/ARCHITECTURE.md`。
 
 ---
@@ -218,7 +218,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 由 `linsai`、`pipeline-runner`、`researcher`、`analyst`、`writer`、`critic`、`reviewer` 7 个 profile 组成。关键协作文件包括 `state_sync.py`（论文状态总线）、`memory_bridge.py`（记忆同步）、`hermes_pipeline.py`（六阶段派活）、`proposal_lifecycle/` 包（四阶段生命周期，薄 shim `proposal_lifecycle.py` 保留 CLI）、`adversarial/` 包（对抗奖惩，薄 shim `adversarial_governance.py` 保留导入）、`weekend_pipeline/` 包（周末输入/输出/反思小任务流水线）。详见 `docs/ARCHITECTURE.md` §4。
 
-**周末流水线执行语义（v6.9.12 知识簇链路）**：input 阶段 6 job——collect → summarize（tier≤2 主源，单次 30 篇）→ cluster_assign（增量归簇，零 LLM，`clusters.py` 注册表持久化 `memory/weekend-input/clusters.json`）→ cluster_distill（簇内提炼知识卡，周限 8 簇）→ topic_match（簇 vs 全阶段课题路由：Jaccard 预筛 + LLM 仲裁）→ compose（路由落地：new 注册 / merge 融合+信息源挂载 / expansion 挂载 `02_literature/supplementary-sources-{date}.json`）。聚类防冗余：单篇不成簇、新簇与已有簇（含 linked/closed）查重、orphan 42 天超龄清理、open 簇 4 周无更新自动 closed。源甄别：已蒸馏论文（wiki/papers 有同 arxiv_id 页）排除，tier 分层 paper=1/briefing=2/capture=3/note=3。job 模板可声明 `artifact` 产物路径（`{date}` 按 job 自身 finished_at 格式化），`_verify_artifacts` 三阶段通用地校验"done 必有产物"，缺失级联重置自愈；handler 注册 key 为 `(stage, step)` 二元组；`run_stage` 按 per-job 粒度持锁（stage cron 与 20 分钟 worker 在 job 间隙协作推进），`run_next` 非阻塞抢锁、锁忙温和退出（skipped=lock_busy）、执行后补阶段终态汇总；dry-run 零落盘（预览不留假 done）；`processed_sources` 随 sync 滚动裁剪（保留 28 天）；废弃 job 由 `DEPRECATED_INPUT_JOBS` 清单在 sync 时清理 state 残留。
+**周末流水线执行语义（v6.9.18 输入链路治理）**：input 阶段 6 job——collect（方向词表过滤跨领域论文 + 运维简报识别，`scope-terms.json` 可手工编辑）→ summarize（tier≤2 主源，单次 30 篇）→ cluster_assign（增量归簇，零 LLM，中文 2-gram + 关键词 overlap，簇 ID uuid 防碰撞，3 篇起簇，`clusters.py` 注册表持久化 `memory/weekend-input/clusters.json`）→ cluster_distill（簇内提炼知识卡，周限 8 簇，标记 distilled_by=llm/fallback）→ topic_match（簇 vs 全阶段课题路由：Jaccard 预筛 + LLM 仲裁；new 动作四重门槛——成员 ≥3 + LLM 知识卡 + 方向相关 + 与现有课题相似度 <0.50，周配额 2，不达标路由 defer 继续积累）→ compose（路由落地：new 注册 + 立项决策包进 human_queue activate 人工队列 / merge 融合（同目标簇连通分组，主簇注入知识卡、其余只挂信息源）+ 信息源挂载用簇内 member_summaries 跨周可用 / expansion 挂载 `02_literature/supplementary-sources-{date}.json`）。聚类防冗余：单篇不成簇、3 篇起簇、新簇与已有簇（含 linked/closed）查重、orphan 42 天超龄清理、open 簇 4 周无更新自动 closed。源甄别：已蒸馏论文（wiki/papers 有同 arxiv_id 页）排除，tier 分层 paper=1/briefing=2/capture=3/note=3。job 模板可声明 `artifact` 产物路径（`{date}` 按 job 自身 finished_at 格式化），`_verify_artifacts` 三阶段通用地校验"done 必有产物"，缺失级联重置自愈；handler 注册 key 为 `(stage, step)` 二元组；`run_stage` 按 per-job 粒度持锁（stage cron 与 20 分钟 worker 在 job 间隙协作推进），`run_next` 非阻塞抢锁、锁忙温和退出（skipped=lock_busy）、执行后补阶段终态汇总；dry-run 零落盘（预览不留假 done，scope 词表生成同样不落盘）；`processed_sources` 随 sync 滚动裁剪（保留 28 天）；废弃 job 由 `DEPRECATED_INPUT_JOBS` 清单在 sync 时清理 state 残留。
 
 ### 提案生命周期
 
@@ -355,7 +355,7 @@ python3 scripts/migrate.py
 
 ---
 
-*版本：6.9.8*
+*版本：6.9.18*
 *日期：2026-08-15*
 *创建者：AI 编码代理*
 *上游资产来源：virtu-LinSai v2.7*

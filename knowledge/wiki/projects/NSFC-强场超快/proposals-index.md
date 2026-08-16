@@ -1,8 +1,8 @@
 ---
 title: "NSFC 课题生命周期索引"
 type: "index"
-created: "2026-08-15T13:46:44Z"
-updated: "2026-08-15T13:46:44Z"
+created: "2026-08-16T03:52:15Z"
+updated: "2026-08-16T03:52:15Z"
 tags: []
 related: []
 source_raw: ""
@@ -19,6 +19,7 @@ project: ["NSFC-强场超快"]
 
 | 课题 | 类型 | 状态 | 当前轮次 | 分数 | 最新版本 | 优化报告 |
 |------|------|------|---------|------|---------|---------|
+| berry-mnps3-rashba | 面上 | 初稿 | 第0轮 | 0.0 | [版本](versions/general-berry-mnps3-rashba-20260816.md) | [报告](reports/general-berry-mnps3-rashba-20260816.md) |
 | bsv-driven-hhg-quantum | 面上 | 优化中 | 第0轮 | 0.86 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
 | moire-strong-field-probe | 面上 | 优化中 | 第7轮 | 0.79 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
 | order-parameter-ultrafast-readout | 面上 | 优化中 | 第0轮 | 0.74 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
@@ -44,4 +45,4 @@ knowledge/wiki/projects/NSFC-强场超快/
 > 数据流：`research_proposals/`（源）→ `proposal_kb_sync.py` → `proposals/`
 > `research_proposals/`（源）→ `kb_proposal_reorg.py` → `versions/` + `reports/`
 
-> 由 `scripts/kb_proposal_reorg.py` 自动更新（2026-08-15）。
+> 由 `scripts/kb_proposal_reorg.py` 自动更新（2026-08-16）。

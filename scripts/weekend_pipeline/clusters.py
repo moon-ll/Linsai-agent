@@ -40,11 +40,13 @@ CLUSTERS_PATH = PROJECT_ROOT / "memory" / "weekend-input" / "clusters.json"
 CLUSTER_OPEN = "open"        # 积累中，可吸收新成员
 CLUSTER_LINKED = "linked"    # 已路由到课题（merge/new/expansion 均算）
 CLUSTER_CLOSED = "closed"    # 陈旧关闭（长期无新成员且未链接课题）
+CLUSTER_DEFERRED = "deferred"  # v6.9.18：路由暂缓（不满足 new 门槛，继续积累）
 
 # 归簇参数（实测标定，见 _kw_similarity 注释）
 ASSIGN_SIM_THRESHOLD = 0.22       # 新摘要 vs 已有簇：超过即归入
 FORM_CLUSTER_SIM_THRESHOLD = 0.30  # orphans 互相之间：超过可聚团
-MIN_CLUSTER_MEMBERS = 2           # 成新簇最少成员数（单篇不成簇，防冗余）
+MIN_CLUSTER_MEMBERS = 3           # 成新簇最少成员数（v6.9.18: 2→3，两篇
+                                  # 凑数簇占 08-16 实测 143 簇的绝大多数）
 ORPHAN_MAX_AGE_DAYS = 42          # orphan 超龄丢弃（一直凑不成簇的散料）
 CLUSTER_STALE_WEEKS = 4           # open 簇 N 周无新成员且未链接 → closed
 
@@ -80,12 +82,24 @@ def save_clusters(data: Dict[str, Any], path: Optional[Path] = None) -> None:
 
 
 def _tokenize(text: str) -> set:
-    """中英文混合分词（词集合）。"""
+    """中英文混合分词：中文 2-gram 滑窗 + 英文单词（v6.9.18）。
+
+    旧实现中文按 {2,8} 贪婪连续切分——中文无空格，整句被切成超长
+    token，两个不同句子的 token 集几乎恒不相交，标题相似度对中文
+    恒近 0（08-16 实测乱聚与好聚的标题分量无区分度）。2-gram 与
+    kb_text 索引同口径（内联实现，避免跨包导入私有函数），长短语
+    匹配由相邻 2-gram 组合覆盖。
+    """
     if not text:
         return set()
-    words = set(re.findall(r"[a-zA-Z]{3,}", text.lower()))
-    words.update(re.findall(r"[\u4e00-\u9fff]{2,8}", text))
-    return words
+    tokens = set()
+    for m in re.finditer(r"[a-zA-Z]{3,}", text.lower()):
+        tokens.add(m.group())
+    for m in re.finditer(r"[\u4e00-\u9fff]{2,}", text):
+        w = m.group()
+        for i in range(len(w) - 1):
+            tokens.add(w[i : i + 2])
+    return tokens
 
 
 def norm_keyword(kw: str) -> str:
@@ -149,16 +163,56 @@ def item_similarity(a: Dict[str, Any], b: Dict[str, Any]) -> float:
     return 0.7 * _overlap(kw_a, kw_b) + 0.3 * _jaccard(ti_a, ti_b)
 
 
+def cluster_similarity(a: Dict[str, Any], b: Dict[str, Any]) -> float:
+    """两簇之间的相似度（v6.9.18 compose 同课题归并注入用）。
+
+    口径与归簇一致：关键词 overlap 0.7 + 标题 Jaccard 0.3。同目标
+    课题的多个簇若彼此相似，只注入成员最多簇的知识卡，其余只挂
+    信息源——根治 08-16 实测 BSV 课题被 6 个变体簇重复注入。
+    """
+    return item_similarity(a, b)
+
+
 # ---------------------------------------------------------------------------
 # 增量归簇
 # ---------------------------------------------------------------------------
 
 
-def _new_cluster_id() -> str:
-    """生成簇 id：cl_{日期}_{短随机}。"""
-    import hashlib
-    seed = f"{now_utc()}-{id(object())}"
-    return f"cl_{now_utc()[:10].replace('-', '')}_{hashlib.sha256(seed.encode()).hexdigest()[:6]}"
+def _new_cluster_id(existing_ids: Optional[set] = None) -> str:
+    """生成簇 id：cl_{日期}_{uuid6}，注册表内查重（v6.9.18）。
+
+    旧实现用 id(object()) 做 hash seed——CPython 中临时对象立即回收，
+    id 高频复用，同批创建大量碰撞（08-16 实测 143 簇中同一 ID 最多
+    重复 10 次，mark_linked/cluster_index 按 ID 索引全部错绑）。
+    """
+    import uuid
+    existing = existing_ids or set()
+    while True:
+        cid = f"cl_{now_utc()[:10].replace('-', '')}_{uuid.uuid4().hex[:6]}"
+        if cid not in existing:
+            return cid
+
+
+def _top_group_keywords(group: List[Dict[str, Any]], top: int = 3) -> List[str]:
+    """团内高频关键词（v6.9.18 簇标题来源）。
+
+    按关键词在团内出现的成员数排序（被 ≥2 个成员共享的词更能代表
+    共同主题），同频按首次出现顺序。取代旧实现直接拿种子论文标题
+    当簇标题（单篇标题不是主题名）。
+    """
+    counts: Dict[str, int] = {}
+    order: Dict[str, int] = {}
+    for idx, g in enumerate(group):
+        for kw in (g.get("keywords") or []):
+            nk = norm_keyword(kw)
+            if not nk:
+                continue
+            counts[nk] = counts.get(nk, 0) + 1
+            order.setdefault(nk, idx)
+    ranked = sorted(counts, key=lambda k: (-counts[k], order[k]))
+    shared = [k for k in ranked if counts[k] >= 2]
+    picked = (shared or ranked)[:top]
+    return picked
 
 
 def _merge_keywords(cluster: Dict[str, Any], item: Dict[str, Any], cap: int = 12) -> None:
@@ -208,6 +262,8 @@ def assign_summaries(
 
         if best_cluster is not None and best_score >= threshold:
             # 沿已有类融入：追加成员、合并关键词、刷新时间戳
+            # v6.9.18: member_summaries 补存 path——compose 的信息源
+            # 挂载以簇内成员自述为准（跨周可用），不再依赖当天 summaries
             members = best_cluster.setdefault("member_source_ids", [])
             if sid not in members:
                 members.append(sid)
@@ -216,6 +272,7 @@ def assign_summaries(
                     "title": item.get("title", ""),
                     "summary": item.get("summary", ""),
                     "keywords": item.get("keywords", []) or [],
+                    "path": item.get("path", ""),
                 })
                 _merge_keywords(best_cluster, item)
                 best_cluster["updated_at"] = now_utc()
@@ -229,6 +286,7 @@ def assign_summaries(
                     "title": item.get("title", ""),
                     "summary": item.get("summary", ""),
                     "keywords": item.get("keywords", []) or [],
+                    "path": item.get("path", ""),
                     "first_seen": now_utc(),
                 })
             orphaned.append(sid)
@@ -247,12 +305,15 @@ def form_new_clusters(
     orphan 成团；团规模 ≥min_members 才开新簇，其余留 orphans。
     新簇需与全部已有簇（含 linked/closed）查重——与已有簇过近的
     团不开新簇，成员退回 orphans（防止换皮重开）。
+    v6.9.18: 簇标题用团内高频关键词拼接（旧实现拿种子论文标题当
+    主题名，既不是主题也无法跨语言）；簇 ID uuid 防碰撞。
     """
     orphans: List[Dict[str, Any]] = registry.get("orphans", [])
     all_clusters = registry.get("clusters", [])
     formed: List[Dict[str, Any]] = []
     remaining = list(orphans)
     deferred: List[Dict[str, Any]] = []  # 已当过种子或查重退回的，本轮不再当种子
+    existing_ids = {c.get("cluster_id") for c in all_clusters}
 
     while remaining:
         seed = remaining.pop(0)
@@ -273,7 +334,7 @@ def form_new_clusters(
             continue
 
         # 与全部已有簇查重（防换皮重开；关键词 overlap 口径与归簇一致）
-        candidate_title = seed.get("title", "")
+        candidate_title = "、".join(_top_group_keywords(group))
         candidate_kw = kw_set([k for g in group for k in (g.get("keywords") or [])])
         too_close = False
         for c in all_clusters + formed:
@@ -288,7 +349,7 @@ def form_new_clusters(
             continue
 
         cluster = {
-            "cluster_id": _new_cluster_id(),
+            "cluster_id": _new_cluster_id(existing_ids),
             "title": candidate_title,
             "keywords": sorted(candidate_kw)[:12],
             "summary": "",  # 待 cluster_distill 提炼
@@ -299,6 +360,7 @@ def form_new_clusters(
                     "title": g.get("title", ""),
                     "summary": g.get("summary", ""),
                     "keywords": g.get("keywords", []) or [],
+                    "path": g.get("path", ""),
                 }
                 for g in group
             ],
@@ -307,6 +369,7 @@ def form_new_clusters(
             "created_at": now_utc(),
             "updated_at": now_utc(),
         }
+        existing_ids.add(cluster["cluster_id"])
         all_clusters.append(cluster)
         formed.append(cluster)
 

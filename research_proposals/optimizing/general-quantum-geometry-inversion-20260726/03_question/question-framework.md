@@ -213,3 +213,30 @@
 ---
 
 *问题框架生成：question_architect | 模型：MiniMax-M2.7 | 2026-07-26*
+
+## 周末输入补充（2026-08-15）
+
+- paper:2024-2407.09628-accelerating-electron-dynamics-simulations-through-machine-l
+- paper:2025-2508.16554-machine-learning-time-propagators-for-time-dependent-density
+
+
+- paper:2024-2407.09628-accelerating-electron-dynamics-simulations-through-machine-l
+- paper:2025-2508.16554-machine-learning-time-propagators-for-time-dependent-density
+
+
+- paper:2026-260723652-carrier-envelope-phase-control-of-orbital-ang
+- paper:2026-2601.12743-twisting-harmonics-transfer-of-orbital-angular-mom
+- paper:2601.12743
+- paper:2607.23652
+
+
+- briefing:knowledge/wiki/reviews/briefing-2026-05-18.md
+- hermes_briefing:research_briefing_20260517.md
+
+
+## 周末输入补充（2026-08-16 · cl_20260816_d91ade）
+
+- paper:2024-2411.03137-review-advances-in-solid-state-high-harmonic-generation-from
+- paper:2026-2604.27750-field-driven-helicity-in-solid-state-high-harmonic-generatio
+- paper:2025-2510.15207-solid-state-high-order-harmonic-generation-emerging-frontier
+

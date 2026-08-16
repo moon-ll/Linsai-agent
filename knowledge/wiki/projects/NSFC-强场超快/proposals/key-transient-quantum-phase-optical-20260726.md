@@ -2,7 +2,7 @@
 title: "瞬态量子相的全光读写"
 type: "proposal"
 created: "2026-08-02T06:02:42Z"
-updated: "2026-08-15T06:33:11Z"
+updated: "2026-08-16T03:37:56Z"
 tags: []
 related: ["Krausz"]
 source_raw: ""
@@ -14,7 +14,7 @@ status: "optimizing"
 project_type: "key"
 optimization_rounds: 3
 last_score: 0.81
-synced_at: "2026-08-15T06:00:22Z"
+synced_at: "2026-08-16T03:37:56Z"
 ---
 
 # 瞬态量子相的全光读写
@@ -24,7 +24,7 @@ synced_at: "2026-08-15T06:00:22Z"
 **生命周期状态**：优化中  
 **优化轮次**：3  
 **当前分数**：0.81  
-**同步时间**：2026-08-15
+**同步时间**：2026-08-16
 
 ## 核心问题
 

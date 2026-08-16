@@ -1,0 +1,30 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "cluster_id": "cl_20260816_0651b6",
+  "entries": [
+    {
+      "source_id": "briefing:knowledge/wiki/reviews/briefing-2026-05-17.md",
+      "title": "强场超快光学/固体HHG研究简报（2026-05-17）",
+      "summary": "本简报汇编了固体高次谐波领域5篇最新论文，核心贡献在于：将拓扑物态与HHG定量关联（拓扑边缘态量子光学HHG效率提升1-2个数量级、Zak相位与谐波峰位线性对应、高阶拓扑绝缘体出现分数阶谐波），并揭示了激子对ZnO中HHG的竞争抑制机制以及外尔半金属中贝利曲率增强的THz三次谐波响应。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_0651b6",
+      "added_at": "2026-08-16T03:49:25Z"
+    },
+    {
+      "source_id": "hermes_briefing:research_briefing_20260601.md",
+      "title": "强场超快光学与阿秒科学研究简报",
+      "summary": "这是一份AI评分筛选的每日论文简报，从强场超快光学与阿秒科学方向精选5篇文献，其核心亮点是通过Su-Schrieffer-Heeger（SSH）链模型从理论上揭示拓扑绝缘体边缘态对量子光学高次谐波生成（HHG）的作用机制，并包含对笼目超导体AV3Sb5（A=K,Rb,Cs）中反常磁输运物理起源的研究。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_0651b6",
+      "added_at": "2026-08-16T03:49:25Z"
+    },
+    {
+      "source_id": "hermes_briefing:research_briefing_20260517.md",
+      "title": "强场超快光学/固体HHG研究简报：拓扑谐波产生、固体HHG机理与拍赫兹电子学前沿",
+      "summary": "本简报汇集5篇固体高次谐波（HHG）领域最新论文的核心进展：拓扑边缘态量子光学HHG效率较体态提升1-2个数量级、Zak相位与谐波峰位偏移呈线性关联且高阶拓扑绝缘体出现分数阶谐波、ZnO中激子导致HHG与光致发光竞争使谐波效率下降30-50%，以及外尔半金属中贝利曲率使THz三次谐波效率增强2-3倍。这些工作共同建立了拓扑保护、多体效应与非线性光学响应之间的定量关系，推动固体HHG成为探测拓扑不变量与实现光波驱动拍赫兹电子学的诊断工具。",
+      "path": "",
+      "added_via": "cluster:cl_20260816_0651b6",
+      "added_at": "2026-08-16T03:49:25Z"
+    }
+  ]
+}

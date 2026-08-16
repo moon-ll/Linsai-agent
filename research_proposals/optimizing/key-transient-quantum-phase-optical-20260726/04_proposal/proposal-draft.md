@@ -899,3 +899,29 @@ SCI 论文 6–8 篇（按 5 年期平均每年 1.2–1.6 篇）。其中 5 年�
 [66] X. Zhang, J. van den Brink, J. Li. Impact of crystal symmetries and Weyl nodes on high-harmonic generation in Weyl semimetal TaAs. arXiv:2405.16125 (2024).
 
 [67] A. Di Gaspare, S. Ghayeb, C. Knox, A. Yagmur, S. Sasaki, M. Salih, L. Li, E. H. Linfield, J. Freeman, M. S. Vitiello. Second and third harmonic generation in topological insulator-based van der Waals metamaterials. *Light Sci. Appl.* 14, 337 (2025). DOI: 10.1038/s41377-025-01847-5
+
+## 周末输入补充（2026-08-15）
+
+### 拟开展研究内容
+- paper:2026-2606.02238-sub-cycle-field-driven-dynamical-berry-phase-in-solids
+- paper:2025-2502.07390-subcycle-observation-of-interband-polarization-in-solids-dri
+- paper:2025-2510.16651-strong-field-driven-sub-cycle-band-structure-modulation-and
+
+### 创新点
+- 如何在实验中将强场驱动的动力学Berry相位与动力学相位分离，并实现阿秒精度的直接测量？
+- 带间极化的亚周期演化、能带结构调制与退相干过程之间的耦合机制能否用统一理论框架描述？
+- 由场可观测量提取的退相干时间与Berry相位的瞬态演化之间存在何种内在关联？
+- 亚周期退相干主动控制能否推广至拓扑材料等更广泛体系，并应用于量子相干器件？
+- 动力学Berry相位能否发展为能带拓扑与贝里曲率的常规阿秒探测手段？
+
+### 拟开展研究内容
+- paper:2026-2606.02238-sub-cycle-field-driven-dynamical-berry-phase-in-solids
+- paper:2025-2502.07390-subcycle-observation-of-interband-polarization-in-solids-dri
+- paper:2025-2510.16651-strong-field-driven-sub-cycle-band-structure-modulation-and
+
+### 创新点
+- 如何在实验中将强场驱动的动力学Berry相位与动力学相位分离，并实现阿秒精度的直接测量？
+- 带间极化的亚周期演化、能带结构调制与退相干过程之间的耦合机制能否用统一理论框架描述？
+- 由场可观测量提取的退相干时间与Berry相位的瞬态演化之间存在何种内在关联？
+- 亚周期退相干主动控制能否推广至拓扑材料等更广泛体系，并应用于量子相干器件？
+- 动力学Berry相位能否发展为能带拓扑与贝里曲率的常规阿秒探测手段？

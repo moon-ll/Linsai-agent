@@ -778,3 +778,28 @@ NSFC 面上要求 2–3 个创新点，按理论/方法/假说三类组织。本
 *r17 更新：2026-08-12 — 实质性修复 critic-round-7 参考文献专项评审 6 项问题（high: 1, medium: 4, low: 1）。具体修复：（1）**文献 #18（PRJ 2D Berry）**：补全真实作者署名（Yao S., Lou Z., Ge X., Zheng Y., Zeng Z., Li R.）+ 修正卷期（PRJ 13(5), 1235, 2025）；（2）**文献 #22（Nature 2021 Floquet 调制）**：替换为 Shan J.-Y. 等真实作者 + Nature 600(7888), 235–239 主刊 + 602(7895), E19 Erratum 真实页码；（3）文献数量从 28 篇扩展到 32 篇：新增 4 篇 2023-2024 最新文献（Nuckolls & Yazdani 2024 *Nat. Rev. Mater.* 莫尔物理综述、Soejima 2020 *PRB* DMRG 莫尔方法学奠基、Policht 2023 *Nat. Commun.* MoSe₂/WSe₂ 异质结 ATAS、Xie/Jin 2024 *Nature* magic-angle TBG isospin 激发）。r17 总文献数 32 篇、实际引用 25 篇、备选 7 篇。*
 
 *r18 更新：2026-08-13 — 聚焦 critic-round-7 评审的严谨性维度（0.80）。核心改动：（1）**删除全部 r17/r16/r10 等历史优化记录元描述**——保留每条文献的"作者署名 + 标题 + 期刊卷期页码 + 年份 + DOI + 与论证链的功能定位"五要素，去除"本轮（r17）相对 r16 的实质修正"等迭代元叙述（NSFC 申请书承载科学内容而非版本管理）；（2）**重复条目清理**——r17 阶段 §3 与 §6 双收录 [CITE:zhang_nat_mater_2023]（同一文献出现为 [#15] 与 [#30] 两处编号），r18 删除 §6 重复条目 [#30]，编号顺延至 §7 [#30] Vampa 与 [#31] Ghimire，总文献数从 32 篇收敛至 31 篇；（3）**引文—正文对应矩阵更新为表格形式**——明确标注每个标签的"出现文件数 + 引用次数 + 论证链角色"三要素，与实际核验的 169 处引用数字一致；（4）**统计信息段精简**——删除冗余的"r17 修复项"叙述条目，保留时间分布、国际/国内组覆盖、DOI 完整度、引文真实性核对状态四项核心数据；（5）**关键修正项从正文叙述迁出**——文献 #18 / #22 的修正记录以单句精简方式置于"统计信息—引文真实性核对状态"段末，不在每条文献的描述中重复出现。r18 维持 0 处断链，参考文献章节聚焦科学内容而非版本管理。*
+
+## 周末输入补充（2026-08-15）
+
+### 拟开展研究内容
+- paper:2026-2604.25483-probing-sliding-ferroelectricity-in-bilayer-t-_-ma
+- paper:2018-1807.02961-high-harmonic-generation-from-few-layer-hexagonal-boron-nitr
+- paper:2016-1607.00747-high-harmonic-generation-in-alpha-quartz-by-the-electron-hol
+- paper:2022-2203.10253-high-harmonic-spectroscopy-of-two-dimensional-materials
+- paper:2021-2111.08669-introduction-to-theory-of-high-harmonic-generation-in-solids
+- paper:2019-1906.10224-high-harmonic-generation-from-spin-polarised-defects-in-soli
+- briefing:knowledge/wiki/reviews/briefing-2026-06-04.md
+- hermes_briefing:research_briefing_20260522.md
+- hermes_briefing:research_briefing_20260521.md
+
+### 创新点
+- 双层Td-WTe2中HHG谱对滑移铁电极化态的区分灵敏度能否在实验条件下得到验证，所需驱动场强与样品质量要求是什么？
+- 少层体系面外HHG从类原子到类体相响应转变的临界层数由何种层间耦合与电子离域机制决定，是否普适于其他范德华材料？
+- 如何统一微观TDDFT电流与宏观传播/相位匹配效应，以定量预测实际实验中的谐波强度与偏振特征？
+- 强场下载流子从谷局域到全布里渊区离域的演化是否与层间滑移探测的时空分辨率存在权衡，如何解耦电子动力学与结构指纹？
+- 该HHG探针策略能否推广至其他滑移铁电体系（如双层MoS2、WSe2）并实现时间分辨的层间滑移与极化切换动力学追踪？
+
+### 来源
+- [weekend_cluster] Phase-matching of high harmonic generation in twisted solid
+- [weekend_cluster] 强场超快光学与阿秒科学研究简报（2026-05-21）
+

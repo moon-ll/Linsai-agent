@@ -1,5 +1,56 @@
 # 变更记录
 
+## v6.9.18 - 2026-08-16 输入链路重构：信息整合 → 课题融合/新增全链治理
+
+08-16 凌晨知识簇链路全链首跑的实测暴露四层缺陷：乱聚类（簇 ID
+碰撞最多 10 簇同名、中文标题分词失效、两篇凑数簇占 143 簇绝大
+多数）、路由泛滥（141 簇 → 72 new，54 个弱簇课题注册 drafts）、
+落地断裂（expansion 跨周挂载成功率 12/58，BSV 课题被 6 个变体簇
+重复注入）、源头杂音（运维简报聚成 8 成员簇、跨领域论文成簇）。
+本次按"源头过滤 → 聚类修复 → 路由门槛 → 落地归并"四层重构：
+
+- **源头治理（sources.py）**：① 方向词表 `scope-terms.json`
+  （约 70 个中英种子词 + 活跃课题标题词，首跑自动生成、可手工
+  编辑、文件优先）过滤跨领域论文——08-16 真实数据回放标定：连
+  字符归一（high-harmonic ≡ high harmonic）+ 英文单词左词界允许
+  后缀延展（altermagnet 命中 altermagnetism），最终仅滤 3 篇
+  真跨领域（6G 波束成形等），453 篇领域内全保留；② 运维简报
+  识别（<300 字 / 命中"空记录/cron 运维"且无论文条目）跳过，
+  实测滤 19 条。
+- **聚类修复（clusters.py）**：① 簇 ID 改 uuid4 + 注册表查重
+  （旧 id(object()) seed 因 CPython id 复用高频碰撞）；② 分词
+  改中文 2-gram 滑窗（旧 {2,8} 贪婪切分对无空格中文恒近 0，与
+  kb_text 索引同口径）；③ MIN_CLUSTER_MEMBERS 2→3；④ 簇标题
+  改团内共享关键词拼接（旧用种子论文标题）；⑤ member_summaries/
+  orphans 补存 path 供跨周挂载。真实簇数据回放：143 簇全部满足
+  阈值可达性，现有 0.22/0.30 阈值无需调整。
+- **路由门槛（input_jobs.py）**：new 动作四重门槛——成员 ≥3、
+  知识卡为 LLM 提炼（distill 新增 distilled_by 标记）、方向词表
+  有交集、与现有课题相似度 <0.50（对齐 idea_generator hold 线）
+  ——+ 周配额 2（成员数降序先到先得）；不达标路由 defer（簇保持
+  open 继续积累，不丢失）。
+- **落地修复（input_jobs.py + registration.py）**：① 信息源挂载
+  改用簇内 member_summaries（跨周可用），修复旧实现依赖当天
+  summaries 索引导致跨周成员必失败；② 同目标课题的 merge 簇
+  连通分组（按目标分组 + 簇间相似度），组内主簇注入知识卡、
+  其余只挂信息源；③ 注入标题带簇 ID 且带标记标题不参与句级去重
+  （根治多簇注入标题裸奔），无标记标题仍走去重保持同 idea 幂等；
+  ④ register_from_idea 注册前先算课题对比、注册后生成立项决策包
+  00_idea-dossier.md——新课题自动进 human_queue activate 待人工
+  队列（控制台已有渲染与 72h 催办，零前端改动），drafts→optimizing
+  激活保留为法定人工节点。
+- **数据修复（fix_input_chain_data.py，一次性）**：54 个垃圾
+  drafts 课题归档至 backups/input-chain-fix-20260816/ + 清
+  _lifecycle.json 状态；KB 垃圾镜像 108 页（reports/versions）
+  归档 + proposals-index/MOC 重建；簇注册表重置（乱聚 open/closed
+  簇 267 条成员摘要退回 orphan 池保留 LLM 成本，linked 簇 35 个
+  保留防重复注入与查重屏障）。processed_sources 772 条原样保留。
+- **验证**：test_input_clustering 扩至 94 断言（新增簇 ID 唯一性/
+  中文 2-gram/scope 与运维过滤/new 配额/distilled_by/跨周挂载/
+  归并分组/标题标记/dossier 九组），test_input_pipeline_repair
+  夹具适配新过滤；`--module` 全量 **829/829** 全绿；真实数据
+  dry-run 零落盘；修复后真实 input 链路全链重跑验证通过。
+
 ## v6.9.17 - 2026-08-16 体检修复：补提交 v6.9.16 遗漏的命名修复
 
 08h 三层诊断发现 v6.9.16 存在提交完整性缺陷：commit 29d33c9 收录了

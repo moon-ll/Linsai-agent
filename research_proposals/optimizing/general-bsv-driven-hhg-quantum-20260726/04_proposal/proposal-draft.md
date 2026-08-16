@@ -659,3 +659,126 @@ DOI 补全后，已正式发表的 25 条文献（A 级）100% 列出 DOI。
 - [weekend_cluster] Photon Statistics from Non-Hermitian Floquet Theory: High Harmonic Generation and Above-Threshold Ionization Spectra Detected via IR Detectors
 - [weekend_cluster] Theory of Photocurrent and High-Harmonic Generation with Chiral Fermions
 
+
+### 拟开展研究内容
+- paper:2026-2606.22714-emergence-of-gaussian-entanglement-and-non-gaussianity-in-hi
+- paper:2026-2605.21925-nonclassical-cutoff-fluctuations-in-squeezed-light-driven-hi
+- paper:2024-2406.10443-attosecond-pulse-synthesis-from-high-order-harmonic-generati
+- paper:2026-2604.06703-strong-field-ionization-of-atoms-with-bright-squeezed-vacuum
+
+### 创新点
+- 量子驱动HHG中多模高斯纠缠与非高斯性的微观生成机制如何由强场近似理论完整刻画？
+- XUV波段高斯纠缠态的实验测量、模式分辨与提取（如用于量子隐形传态）的可行性路径是什么？
+- 谐波截止频率亚散粒噪声涨落的自校准海森堡见证在实验上如何避免经典噪声与探测损耗的干扰？
+- 压缩噪声与谐波谱相位锁定之间的定量关联，及其对阿秒脉冲最短持续时间的物理极限如何确定？
+- 量子涨落保护电离相干性的机制是否普适，能否推广至分子、固态等更复杂强场体系？
+- 强场相互作用中压缩态的退相干与损耗如何量化，对非经典资源品质的影响可否补偿？
+
+### 拟开展研究内容
+- paper:2026-2604.06707-attosecond-quantum-spectroscopy-with-entangled-pho
+- paper:2026-2601.08671-attosecond-quantum-optics
+
+### 创新点
+- 如何在实验上实现并表征阿秒尺度的压缩光场与红外纠缠光子对？
+- 纠缠光子对的量子关联能否将阿秒时间分辨测量的精度提升至超越经典散粒噪声极限？
+- 量子关联如何在强场非线性过程（如高次谐波产生）中传递、保持或被放大？
+- 半周期压缩分布印刻于拍赫兹隧穿电流的物理机制能否用于量子调控拍赫兹电子学器件？
+- 阿秒量子光谱学在强场非平衡态动力学的实际探测中，相对经典方案能带来哪些可量化的优势？
+
+### 拟开展研究内容
+- paper:2025-2509.20876-quantum-path-control-in-high-order-harmonic-generation-via-s
+- paper:2023-2311.11257-generation-of-squeezed-high-order-harmonics
+- paper:2026-2410.15503-energy-conservation-in-quantum-optical-high-harmon
+
+### 创新点
+- 驱动场与谐波模式间的纠缠光子态及其非经典光子关联能否被实验直接测量，并用于可扩展的量子频率转换与量子信息协议？
+- 强挤压泵浦（超越适度挤压区间）下谐波量子态与光子统计将如何演化，是否会出现新的非经典态或饱和行为？
+- 振幅压缩与相位压缩光选择性抑制长短量子路径的微观机制是什么，能否推广至阈上电离、双电离等其他强场过程？
+- 在实际高强度HHG实验条件下，如何产生并维持驱动场的压缩特性以验证量子路径调控方案？
+- 量子路径筛选机制能否进一步优化，以产生更短、更亮或可定制波形的孤立阿秒脉冲及阿秒脉冲串？
+- XUV波段挤压超短脉冲的表征手段（如光子关联与光子统计测量技术）应如何发展？
+
+### 拟开展研究内容
+- paper:2014-1412.1300-high-order-harmonic-spectroscopy-for-molecular-imaging-of-po
+- paper:2021-2103.16228-self-probing-of-molecules-with-high-harmonic-generation
+- paper:2007-0707.4192-improved-lewenstein-model-for-high-order-harmonic-generation
+
+### 创新点
+- 如何在强场近似框架之外系统纳入库仑效应与多电子关联，以进一步提升再复合矩阵元的理论精度？
+- 如何将分子轨道层析成像可靠推广至更大、更脆弱的有机与生物分子体系？
+- 宏观传播效应与分子取向涨落如何影响谐波相位反演，能否发展鲁棒的补偿方案？
+- 能否利用自探测探针对化学反应中的空穴动力学与电子转移过程进行实时成像？
+
+### 拟开展研究内容
+- paper:2024-2403.19535-bright-coherent-ultrahigh-harmonics-in-the-kev-x-ray-regime-
+- paper:2403.19535
+
+### 创新点
+- 如何进一步提升keV波段的谐波转换效率与光子通量，以满足水窗成像与超快X射线光谱的实际应用需求？
+- 能否基于该相干超连续谱合成并完整表征阿秒级keV X射线脉冲？
+- 在更高光子能量（如水窗中心波段或>2 keV）下，如何优化气体压力、波导参数与驱动条件以维持有效相位匹配？
+- 长波长驱动的低单原子产率与宏观相位匹配增益之间的权衡机制及最优工作点如何确定？
+- 该方案能否推广至其他驱动波长（如更长中红外或太瓦级系统）或气体介质，实现更宽谱、更高亮度的超连续谱输出？
+
+### 拟开展研究内容
+- paper:2026-2403.04288-monochromatic-high-harmonic-generation-by-bessel-g
+- paper:2403.04288
+
+### 创新点
+- 如何在实验中精确制备具有目标折射率分布的周期性调制气体介质？
+- 几何相位与准相位匹配的补偿机制对光束参数（如锥角、拓扑荷数）和介质调制周期的容差有多大？
+- 谐波选择性与转换效率之间如何权衡，能否同时实现高选择性单色输出与足够的谐波能量？
+- 该方案能否推广至更长介质、更高谐波阶次或固体周期结构以拓展XUV波段覆盖？
+- 由此获得的单色XUV源在阿秒科学、精密光谱学等实际应用中的性能表现如何？
+
+## 周末输入补充（2026-08-16 · cl_20260816_bc4af0）
+
+### 拟开展研究内容
+- paper:2026-2604.20388-quantum-optical-signatures-of-band-topology-in-solid-state-h
+- paper:2025-2510.12443-self-attention-enabled-quantum-path-analysis-of-high-harmoni
+- paper:2018-1806.11232-topological-strong-field-physics-on-sub-laser-cycle-time-sca
+- paper:2410.15503
+- paper:2026-2601.08671-attosecond-quantum-optics
+- paper:2026-2602.16454-edge-states-and-quantum-optical-high-harmonic-gene
+
+### 创新点
+- 如何在实验上分辨固态HHG中微弱的量子光学拓扑签名（光子统计、量子压缩与关联），并克服退相干与宏观样品带来的尺寸限制？
+- 在能量守恒约束下，HHG量子态工程所能达到的光学猫态保真度与纠缠度极限是什么，如何逼近该解析上界？
+- 亚激光周期拓扑印记（贝里曲率驱动的隧穿注入）与半周期压缩分布印刻机制能否在统一量子理论框架下联合描述与主动调控？
+- 自注意力/Transformer等可解释机器学习方法能否推广至多能带、真实拓扑材料与二维体系的HHG分析，并保持与物理量子路径图像的一致性？
+- 拓扑签名探测与阿秒压缩光生成相结合，能否催生拍赫兹拓扑量子电子学等新型超快量子器件？
+
+### 来源
+- [weekend_cluster] Quantum Optical Signatures of Band Topology in Solid-State High Harmonics
+- [weekend_cluster] Self-attention enabled quantum path analysis of high-harmonic generation in solids
+- [weekend_cluster] Topological strong field physics on sub-laser cycle time scale
+- [weekend_cluster] Energy conservation in quantum optical high harmonic generation
+- [weekend_cluster] Attosecond quantum optics
+- [weekend_cluster] Edge states and quantum optical high-harmonic generation from topological insulators
+
+
+## 周末输入补充（2026-08-16 · cl_20260816_77e7d6）
+
+### 拟开展研究内容
+- paper:2025-2509.20876-quantum-path-control-in-high-order-harmonic-generation-via-s
+- paper:2023-2311.11257-generation-of-squeezed-high-order-harmonics
+- paper:2026-2410.15503-energy-conservation-in-quantum-optical-high-harmon
+- paper:2026-2604.12838-2d-quantum-path-interference-in-high-harmonic-gene
+- paper:2012-1210.4814-molecular-internal-dynamics-studied-by-quantum-path-interfer
+- paper:2015-1502.07422-spectrally-resolved-spatiotemporal-features-of-quantum-paths
+
+### 创新点
+- 如何在实验上直接测量驱动场与谐波间的纠缠光子态、非经典光子关联及谐波的光子统计演化，以验证量子光学HHG理论预言？
+- 压缩光驱动的量子路径筛选机制能否与宏观传播、相位匹配效应兼容，实现高通量、可放大的单一阿秒脉冲输出？
+- 二维量子路径干涉能否推广至复杂分子与固态体系，用于重构电荷迁移等电子动力学的时间演化并提升阿秒光谱的选择性？
+- 如何在统一框架下同时严格处理能量守恒、电离耗散与多次再散射通道，完善量子光驱动HHG的全量子理论？
+- 能否利用驱动光的量子统计（压缩、纠缠等）主动设计谐波量子态与量子路径相位，实现按需的量子频率转换与阿秒光源工程？
+
+### 来源
+- [weekend_cluster] Quantum Path Control in High-Order Harmonic Generation via Squeezed Lights
+- [weekend_cluster] Generation of squeezed high-order harmonics
+- [weekend_cluster] Energy conservation in quantum optical high harmonic generation
+- [weekend_cluster] 2D quantum-path interference in high-harmonic generation driven by highly-bichromatic fields
+- [weekend_cluster] Molecular internal dynamics studied by quantum path interferences in high order harmonic generation
+- [weekend_cluster] Spectrally resolved spatiotemporal features of quantum paths in high-order harmonic generation
+

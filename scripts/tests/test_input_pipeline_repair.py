@@ -81,10 +81,12 @@ class InputPipelineRepairTests(TestSuite):
             "collect_kb_concepts_and_methods": sources_mod.collect_kb_concepts_and_methods,
         }
         sources_mod.collect_briefings = lambda days=7, state=None: [
-            {"source_id": "briefing:b1", "type": "briefing", "text": "简报甲"}
+            # v6.9.18: ≥300 字且无论文条目判定为空/运维简报会被过滤，夹具需为正常学术简报
+            {"source_id": "briefing:b1", "type": "briefing",
+             "text": "今日 arXiv 精选：" + "固体高次谐波与超快动力学研究进展条目。" * 25}
         ]
         sources_mod.collect_paper_pool = lambda limit=20, state=None: [
-            {"source_id": "paper:p1", "type": "paper", "text": "论文甲"}
+            {"source_id": "paper:p1", "type": "paper", "title": "高次谐波论文甲", "text": "论文甲：高次谐波 HHG 研究"}
         ]
         sources_mod.collect_captures = lambda limit=10: [
             {"source_id": "capture:c1", "type": "capture", "text": "捕获甲"}

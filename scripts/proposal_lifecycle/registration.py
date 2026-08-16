@@ -177,6 +177,18 @@ class RegistrationMixin:
             name = "new-idea"
 
         proposal_id = self.generate_proposal_id(name=name, project_type=project_type)
+        # v6.9.18: 注册前先算与现有课题的对比（注册后自己会进课题清单，
+        # 相似度恒 1.0），注册成功后写立项决策包 00_idea-dossier.md——
+        # 新课题由此自动进入 human_queue 的 activate 待人工队列（控制台
+        # 已有渲染与 72h 催办），drafts→optimizing 的激活保留为法定
+        # 人工节点。
+        comparisons = []
+        try:
+            from idea_generator import _load_existing_proposals, compare_with_existing
+            comparisons = compare_with_existing(idea, _load_existing_proposals())
+        except Exception as exc:
+            if _log:
+                _log.warning(f"课题对比计算失败（不影响注册）: {exc}")
         reg = self.register(
             proposal_id=proposal_id,
             project_type=project_type,
@@ -187,6 +199,13 @@ class RegistrationMixin:
             return reg
 
         self.enrich_from_idea(proposal_id, idea)
+        if comparisons:
+            try:
+                from idea_generator import generate_idea_dossier
+                generate_idea_dossier(idea, comparisons, proposal_id)
+            except Exception as exc:
+                if _log:
+                    _log.warning(f"立项决策包生成失败（不影响注册）: {exc}")
         return {
             "success": True,
             "proposal_id": proposal_id,
@@ -235,6 +254,15 @@ class RegistrationMixin:
             for p in paragraphs:
                 if len(p.strip()) < 20:
                     continue
+                # v6.9.18: 带来源簇标记的标题段（"… · {cluster_id}"）不做
+                # 句级去重——不同簇的标题仅 ID 不同，语义 token 完全一致
+                # 会被误删，导致后续注入块缺标题裸奔（08-16 实测 BSV
+                # 课题 6 次注入仅首块有标题）。无标记标题（同一 idea
+                # 重复注入场景）仍走去重保持幂等。
+                stripped = p.lstrip()
+                if stripped.startswith("## ") and "·" in stripped.split("\n")[0]:
+                    unique.append(p)
+                    continue
                 if _sentence_similarity(p, existing) < duplicate_threshold:
                     unique.append(p)
             if not unique:
@@ -247,9 +275,14 @@ class RegistrationMixin:
             return True
 
         date_str = now_utc()[:10]
+        # v6.9.18: 注入标题段带来源簇 ID——同一课题被多个簇 enrich 时，
+        # 相同的"## 周末输入补充（date）"标题段会因与既有文本完全一致
+        # 被句级去重剔除，导致后续注入块缺标题裸奔（08-16 实测）。
+        tag = str(idea.get("cluster_id", "") or "").strip()
+        heading = f"## 周末输入补充（{date_str} · {tag}）" if tag else f"## 周末输入补充（{date_str}）"
 
         # 方向校准
-        direction_section = f"""## 周末输入补充（{date_str}）
+        direction_section = f"""{heading}
 
 **来源**：研究设想生成
 **可靠性**：{idea.get('reliability', 'derived')}
@@ -263,7 +296,7 @@ class RegistrationMixin:
         _deduplicate_append(prop_dir / "01_direction" / "direction-calibration.md", direction_section)
 
         # 缺口分析
-        gap_section = f"""## 周末输入补充（{date_str}）
+        gap_section = f"""{heading}
 
 **拟解决空白**：{idea.get('gap', '')}
 
@@ -273,7 +306,7 @@ class RegistrationMixin:
 
         # 科学问题框架
         question_items = "\n".join(f"- {q}" for q in idea.get("content", []))
-        question_section = f"""## 周末输入补充（{date_str}）
+        question_section = f"""{heading}
 
 {question_items}
 """
@@ -284,7 +317,7 @@ class RegistrationMixin:
             f"- [{s.get('source_type', 'unknown')}] {s.get('title', '')}"
             for s in idea.get("sources", [])
         )
-        proposal_section = f"""## 周末输入补充（{date_str}）
+        proposal_section = f"""{heading}
 
 ### 拟开展研究内容
 {chr(10).join(f"- {c}" for c in idea.get('content', []))}

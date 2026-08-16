@@ -2,7 +2,7 @@
 title: "Q2（科学问题）**：以 CDW（TiSe₂、1T-TaS₂）为代表的中等关联材料中，在何种 Hubbard-$U/W$ 与温度区间，HHG 偏振响应仍保留可独立辨识的 $\Omega(\mathbf{k})$、$g(\mathbf{k})$ 信息？超过该边界时，多体效应（CDW 序参量、doublon-holon 复合、带折叠）使 $\Omega$、$g$ 的辨识不可分离。"
 type: "proposal"
 created: "2026-08-02T06:02:42Z"
-updated: "2026-08-15T06:00:22Z"
+updated: "2026-08-16T03:37:56Z"
 tags: []
 related: []
 source_raw: ""
@@ -14,7 +14,7 @@ status: "optimizing"
 project_type: "general"
 optimization_rounds: 0
 last_score: 0.77
-synced_at: "2026-08-15T06:00:22Z"
+synced_at: "2026-08-16T03:37:56Z"
 ---
 
 # Q2（科学问题）**：以 CDW（TiSe₂、1T-TaS₂）为代表的中等关联材料中，在何种 Hubbard-$U/W$ 与温度区间，HHG 偏振响应仍保留可独立辨识的 $\Omega(\mathbf{k})$、$g(\mathbf{k})$ 信息？超过该边界时，多体效应（CDW 序参量、doublon-holon 复合、带折叠）使 $\Omega$、$g$ 的辨识不可分离。
@@ -24,7 +24,7 @@ synced_at: "2026-08-15T06:00:22Z"
 **生命周期状态**：优化中  
 **优化轮次**：0  
 **当前分数**：0.77  
-**同步时间**：2026-08-15
+**同步时间**：2026-08-16
 
 ## 核心问题
 

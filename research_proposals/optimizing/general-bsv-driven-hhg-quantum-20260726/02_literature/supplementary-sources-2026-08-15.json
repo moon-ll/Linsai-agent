@@ -1,38 +1,14 @@
 {
   "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
-  "cluster_id": "cl_20260815_5964ed",
+  "cluster_id": "cl_20260815_e0f052",
   "entries": [
     {
-      "source_id": "paper:2025-2504.13287-theory-of-quantum-optics-and-optical-coherence-in-high-harmo",
-      "title": "Theory of quantum optics and optical coherence in high harmonic generation",
-      "summary": "该论文发展了高次谐波产生（HHG）的量子光学与光学相干性理论框架，系统研究谐波光场中的光子关联与量子特性，为将量子光学方法应用于强场谐波辐射研究奠定理论基础。",
-      "path": "knowledge/raw/papers/2025-2504.13287-theory-of-quantum-optics-and-optical-coherence-in-high-harmo.md",
-      "added_via": "cluster:cl_20260815_5964ed",
-      "added_at": "2026-08-15T13:47:29Z"
-    },
-    {
-      "source_id": "paper:2022-2203.04354-theory-of-entanglement-and-measurement-in-high-harmonic-gene",
-      "title": "Theory of entanglement and measurement in high harmonic generation",
-      "summary": "本文将量子信息与量子测量理论引入强激光驱动过程，建立了高次谐波产生（HHG）中电子-离子-辐射场之间纠缠形成与测量的完整理论框架，证明对电离电子的检测会导致系统退相干与测量反作用，从而将HHG从半经典三步模型推进到全量子描述。该工作为利用HHG产生非经典光态和实现阿秒尺度量子调控奠定了理论基础。",
-      "path": "knowledge/raw/papers/2022-2203.04354-theory-of-entanglement-and-measurement-in-high-harmonic-gene.md",
-      "added_via": "cluster:cl_20260815_5964ed",
-      "added_at": "2026-08-15T13:47:29Z"
-    },
-    {
-      "source_id": "paper:2024-2406.13109-photon-statistics-from-non-hermitian-floquet-theory-high-har",
-      "title": "Photon Statistics from Non-Hermitian Floquet Theory: High Harmonic Generation and Above-Threshold Ionization Spectra Detected via IR Detectors",
-      "summary": "本文提出基于非厄米Floquet理论的方法，可直接从经典（含时）计算中提取高次谐波产生（HHG）与阈上电离（ATI）光谱的量子特性——即光子统计信息。该理论证明HHG/ATI光谱的量子特征可通过红外探测器测量，从而为强场光谱的光子统计实验探测提供了理论基础。",
-      "path": "knowledge/raw/papers/2024-2406.13109-photon-statistics-from-non-hermitian-floquet-theory-high-har.md",
-      "added_via": "cluster:cl_20260815_5964ed",
-      "added_at": "2026-08-15T13:47:29Z"
-    },
-    {
-      "source_id": "paper:2025-2503.02469-theory-of-photocurrent-and-high-harmonic-generation-with-chi",
-      "title": "Theory of Photocurrent and High-Harmonic Generation with Chiral Fermions",
-      "summary": "该文建立了B20型手性半金属中手性费米子在圆偏振光驱动下的非线性光学理论，预言了手性费米子诱导的光电流与高次谐波产生。该响应源于晶格手性与费米子手性的耦合，为利用拓扑手性材料实现圆二色性非线性光学效应提供了理论框架。",
-      "path": "knowledge/raw/papers/2025-2503.02469-theory-of-photocurrent-and-high-harmonic-generation-with-chi.md",
-      "added_via": "cluster:cl_20260815_5964ed",
-      "added_at": "2026-08-15T13:47:29Z"
+      "source_id": "hermes_briefing:research_briefing_20260513.md",
+      "title": "Solid-State High-Order Harmonic Generation: Emerging Frontiers in Ultrafast and Quantum Light Science",
+      "summary": "本文系统综述了固体高次谐波产生（HHG）作为超快与量子光科学研究平台的新兴前沿，涵盖纳米结构与等离激元-半导体混合实验平台及多能带理论模型所揭示的贝里相位效应、拓扑效应与非经典光产生机制。其核心贡献在于阐明了阿秒尺度的相位控制与量子相干调控策略，为发展光谱可调谐的量子工程光源和相干控制方案提供了新见解。",
+      "path": "/Users/ll/Desktop/hermes_workspace/knowledge_base/AI_wiki/briefings/research_briefing_20260513.md",
+      "added_via": "cluster:cl_20260815_e0f052",
+      "added_at": "2026-08-15T17:49:01Z"
     }
   ]
 }

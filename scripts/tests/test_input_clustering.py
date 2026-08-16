@@ -41,6 +41,11 @@ class InputClusteringTests(TestSuite):
             _write_json(self.tmp_root / "memory" / "nsfc-standards.json",
                         json.loads(standards_src.read_text(encoding="utf-8")))
 
+        # v6.9.18: 方向词表隔离（防 scope 过滤读真实仓库文件；夹具论文
+        # 一律含 hhg/高次谐波 以命中词表）
+        _write_json(self.tmp_root / "memory" / "weekend-input" / "scope-terms.json",
+                    {"terms": ["hhg", "高次谐波"]})
+
         for mod_name in list(sys.modules.keys()):
             if mod_name.startswith("weekend_pipeline") or mod_name.startswith("proposal_lifecycle"):
                 del sys.modules[mod_name]
@@ -84,8 +89,8 @@ class InputClusteringTests(TestSuite):
         # collect_all_sources 排除路径
         orig_pool = src_mod.collect_paper_pool
         src_mod.collect_paper_pool = lambda limit=20, state=None: [
-            {"source_id": "paper:2501.00001", "type": "paper", "text": "已提炼"},
-            {"source_id": "paper:2501.00002", "type": "paper", "text": "新论文"},
+            {"source_id": "paper:2501.00001", "type": "paper", "title": "HHG distilled", "text": "已提炼 HHG"},
+            {"source_id": "paper:2501.00002", "type": "paper", "title": "HHG new", "text": "新论文 HHG"},
         ]
         src_mod.collect_briefings = lambda days=7, state=None: []
         src_mod.collect_captures = lambda limit=10: []
@@ -105,9 +110,9 @@ class InputClusteringTests(TestSuite):
         from weekend_pipeline import sources as src_mod
 
         src_mod.collect_paper_pool = lambda limit=20, state=None: [
-            {"source_id": "paper:x", "type": "paper", "text": "t"}]
+            {"source_id": "paper:x", "type": "paper", "title": "HHG paper", "text": "HHG 高次谐波研究内容"}]
         src_mod.collect_briefings = lambda days=7, state=None: [
-            {"source_id": "briefing:x", "type": "briefing", "text": "t"}]
+            {"source_id": "briefing:x", "type": "briefing", "text": "今日精选 arXiv 论文若干条，" + "固体高次谐波研究进展条目。" * 30}]
         src_mod.collect_captures = lambda limit=10: [
             {"source_id": "capture:x", "type": "capture", "text": "t"}]
         src_mod.collect_reference_notes = lambda: [
@@ -168,7 +173,7 @@ class InputClusteringTests(TestSuite):
         self.assert_eq(len(registry["orphans"]), 1, "应保留在 orphans")
 
     def _test_two_similar_items_form_cluster(self):
-        """两篇相似 orphan → 成新簇。"""
+        """成簇门槛 3 篇（v6.9.18：两篇凑数簇是 08-16 实测乱聚主源）。"""
         from weekend_pipeline import clusters as cl
 
         registry = {"clusters": [], "orphans": []}
@@ -177,8 +182,20 @@ class InputClusteringTests(TestSuite):
             self._mk_summary("paper:b", "solid-state harmonic cutoff", ["HHG", "solid", "cutoff"]),
         ], registry)
         formed = cl.form_new_clusters(registry)
-        self.assert_eq(len(formed), 1, "两篇相似应成 1 簇")
-        self.assert_eq(len(formed[0]["member_source_ids"]), 2, "簇成员应为 2")
+        self.assert_eq(len(formed), 0, "两篇相似不成簇（MIN_CLUSTER_MEMBERS=3）")
+        self.assert_eq(len(registry["orphans"]), 2, "应留在 orphans 等凑第三篇")
+
+        cl.assign_summaries([
+            self._mk_summary("paper:c", "harmonic generation solid dynamics", ["HHG", "solid", "dynamics"]),
+        ], registry)
+        formed = cl.form_new_clusters(registry)
+        self.assert_eq(len(formed), 1, "第三篇到位应成 1 簇")
+        self.assert_eq(len(formed[0]["member_source_ids"]), 3, "簇成员应为 3")
+        # v6.9.18: 簇标题来自团内共享关键词，不再是种子论文标题
+        self.assert_true(
+            "hhg" in formed[0]["title"].lower() or "solid" in formed[0]["title"].lower(),
+            f"簇标题应含共享关键词: {formed[0]['title']}",
+        )
 
     def _test_new_cluster_dedup_against_existing(self):
         """新团与已有簇过近 → 不开新簇（防换皮重开）。"""
@@ -194,10 +211,11 @@ class InputClusteringTests(TestSuite):
         cl.assign_summaries([
             self._mk_summary("paper:a", "HHG solid cutoff extension", ["HHG", "solid", "cutoff", "extension"]),
             self._mk_summary("paper:b", "harmonic solid phase", ["HHG", "solid", "harmonic", "phase"]),
+            self._mk_summary("paper:c", "solid harmonic dynamics", ["HHG", "solid", "harmonic", "dynamics"]),
         ], registry)
         formed = cl.form_new_clusters(registry)
         self.assert_eq(len(formed), 0, "与已有簇过近的团不应开新簇")
-        self.assert_eq(len(registry["orphans"]), 2, "团员应退回 orphans")
+        self.assert_eq(len(registry["orphans"]), 3, "团员应退回 orphans")
 
     def _test_stale_cluster_closed(self):
         """open 簇 4 周无更新 → closed（不再吸收新成员）。"""
@@ -232,7 +250,7 @@ class InputClusteringTests(TestSuite):
                 f"# {meta.get('title', pid)}\n\n{meta.get('text', '')}", encoding="utf-8")
 
     def _test_topic_match_all_stages(self):
-        """活跃课题高置信 → merge；archived 高置信 → expansion；无匹配 → LLM 不可用回退 new。"""
+        """活跃课题高置信 → merge；archived 高置信 → expansion；弱簇 → defer；达标簇 → new（v6.9.18 门槛）。"""
         from weekend_pipeline import input_jobs
 
         self._seed_lifecycle({
@@ -260,13 +278,19 @@ class InputClusteringTests(TestSuite):
              "member_source_ids": [], "member_summaries": [], "status": "open",
              "linked_proposal_id": None, "created_at": "2026-08-01T00:00:00Z",
              "updated_at": "2026-08-10T00:00:00Z"},
+            # v6.9.18: 达标簇——3 成员 + LLM 知识卡 + 方向相关 + 不重叠 → new
+            {"cluster_id": "cl_d", "title": "squeezed light driven HHG photon statistics",
+             "keywords": ["squeezed", "hhg", "photon", "statistics"], "summary": "squeezed HHG quantum optics",
+             "member_source_ids": ["paper:d1", "paper:d2", "paper:d3"], "member_summaries": [],
+             "distilled_by": "llm", "status": "open", "linked_proposal_id": None,
+             "created_at": "2026-08-01T00:00:00Z", "updated_at": "2026-08-10T00:00:00Z"},
         ], "orphans": []}
 
         from weekend_pipeline import clusters as cl
         cl.CLUSTERS_PATH = self.tmp_root / "memory" / "weekend-input" / "clusters.json"
         cl.save_clusters(registry)
 
-        # LLM 不可用 → 纯 Jaccard 路径
+        # LLM 不可用 → 纯 Jaccard 路径（new 回退也要过门槛）
         input_jobs.is_llm_available = lambda: False
 
         from weekend_pipeline.constants import WEEKEND_INPUT_DIR
@@ -278,7 +302,8 @@ class InputClusteringTests(TestSuite):
         self.assert_eq(by_id["cl_a"]["action"], "merge", "活跃课题高置信应 merge")
         self.assert_eq(by_id["cl_a"]["target_id"], "general-active-20260101", "目标课题 id")
         self.assert_eq(by_id["cl_b"]["action"], "expansion", "archived 高置信应 expansion")
-        self.assert_eq(by_id["cl_c"]["action"], "new", "无匹配应 new（LLM 不可用回退）")
+        self.assert_eq(by_id["cl_c"]["action"], "defer", "无成员弱簇应 defer（不再泛滥 new）")
+        self.assert_eq(by_id["cl_d"]["action"], "new", "达标簇（3 成员+LLM 卡+方向相关）应 new")
 
     # ------------------------------------------------------------------
     # 链路结构：job 模板与废弃清理
@@ -326,8 +351,8 @@ class InputClusteringTests(TestSuite):
                 src_mod.collect_kb_concepts_and_methods,
                 input_jobs.is_llm_available, input_jobs._llm_json)
         src_mod.collect_paper_pool = lambda limit=20, state=None: [
-            {"source_id": "paper:p1", "type": "paper", "text": "论文一", "tier": 1},
-            {"source_id": "paper:p2", "type": "paper", "text": "论文二", "tier": 1},
+            {"source_id": "paper:p1", "type": "paper", "title": "HHG 论文一", "text": "论文一 HHG", "tier": 1},
+            {"source_id": "paper:p2", "type": "paper", "title": "HHG 论文二", "text": "论文二 HHG", "tier": 1},
         ]
         src_mod.collect_briefings = lambda days=7, state=None: []
         src_mod.collect_captures = lambda limit=10: []
@@ -459,10 +484,13 @@ class InputClusteringTests(TestSuite):
             self._mk_summary(
                 "paper:b", "harmonic generation solid state",
                 ["固态高次谐波", "强场物理", "晶体对称性", "weyl 节点", "berry 相位"]),
+            self._mk_summary(
+                "paper:c", "harmonic solids ultrafast",
+                ["固态高次谐波", "强场物理", "超快探测", "载流子动力学", "能带拓扑"]),
         ], registry)
-        self.assert_eq(len(registry["orphans"]), 2, "两篇均应先挂 orphans")
+        self.assert_eq(len(registry["orphans"]), 3, "三篇均应先挂 orphans")
         formed = cl.form_new_clusters(registry)
-        self.assert_eq(len(formed), 1, "共享 2 核心词+领域标签应成簇（overlap 口径）")
+        self.assert_eq(len(formed), 1, "共享 2 核心词+领域标签应成簇（overlap 口径 + 3 成员门槛）")
         if formed:
             self.assert_true(
                 {"固态高次谐波", "强场物理"}.issubset(set(formed[0]["keywords"])),
@@ -579,6 +607,275 @@ class InputClusteringTests(TestSuite):
             "new-idea" not in pid, f"不应回退占位名: {pid}",
         )
 
+    # ------------------------------------------------------------------
+    # v6.9.18 输入链路重构回归
+    # ------------------------------------------------------------------
+
+    def _test_cluster_ids_unique(self):
+        """同批创建大量簇时 ID 不碰撞（旧 id(object()) seed 高频复用）。"""
+        from weekend_pipeline import clusters as cl
+
+        ids = set()
+        for round_i in range(50):
+            registry = {"clusters": [], "orphans": []}
+            # 三组主题关键词完全不相交 → 各自成簇
+            for g, base in enumerate(["hhg", "attosecond", "wigner"]):
+                cl.assign_summaries([
+                    self._mk_summary(f"paper:{round_i}-{g}-{k}", f"{base} study {k}",
+                                     [base, f"{base}core"])
+                    for k in range(3)
+                ], registry)
+            formed = cl.form_new_clusters(registry)
+            for c in formed:
+                ids.add(c["cluster_id"])
+        # 每轮 3 簇（组间关键词不重叠，不会互相查重合并）
+        self.assert_eq(len(ids), 150, f"50 轮 × 3 簇 ID 应全部唯一，实际 {len(ids)}")
+
+    def _test_cn_2gram_title_similarity(self):
+        """中文标题 2-gram 相似度生效（旧整句切分口径对中文恒近 0）。
+
+        item_similarity 的标题分量权重 0.3，无关键词时总分上限 0.3；
+        同主题中文标题共享 6 个 2-gram（jaccard≈0.35 → 总分≈0.10），
+        无关标题 2-gram 零交集（总分 0）。
+        """
+        from weekend_pipeline import clusters as cl
+
+        a = {"title": "固体高次谐波的产生机制研究", "keywords": []}
+        b = {"title": "固体高次谐波的探测新方案", "keywords": []}
+        c = {"title": "无线通信波束成形优化", "keywords": []}
+        sim_ab = cl.item_similarity(a, b)
+        sim_ac = cl.item_similarity(a, c)
+        self.assert_true(sim_ab > 0.09, f"同主题中文标题相似度应显著: {sim_ab:.3f}")
+        self.assert_true(sim_ac < 0.01, f"无关中文标题相似度应近 0: {sim_ac:.3f}")
+
+    def _test_scope_and_ops_filters(self):
+        """方向词表过滤跨领域论文；运维简报过滤空/运维内容。"""
+        from weekend_pipeline import sources as src
+
+        # scope_hit：领域内命中、领域外不命中
+        self.assert_true(src.scope_hit("HHG in ZnO semiconductors", ["高次谐波", "hhg"]) == "hhg",
+                         "HHG 论文应命中词表")
+        self.assert_true(
+            src.scope_hit("High harmonic generation in ZnO", ["高次谐波", "hhg", "high harmonic"]) == "high harmonic",
+            "全称论文应命中多词词表")
+        self.assert_true(src.scope_hit("6G sub-THz leaky wave antenna beamforming", ["高次谐波", "hhg", "high harmonic"]) is None,
+                         "6G 通信论文不应命中")
+        # _is_ops_briefing：空简报/运维标题/正常学术简报
+        self.assert_true(src._is_ops_briefing("research_briefing", "短"), "过短简报应过滤")
+        self.assert_true(
+            src._is_ops_briefing("briefing-x", "hermes-briefing 每日简报空记录：cron 自动运行" + "与个人知识库运维" * 20),
+            "运维简报应过滤")
+        self.assert_true(
+            not src._is_ops_briefing("briefing-y", ("今日精选论文：arXiv:2508.12345 固体高次谐波新进展。" * 30)),
+            "含 arXiv 条目的学术简报不应过滤")
+
+    def _test_new_quota_caps_weekly_registrations(self):
+        """周配额：3 个达标簇仅 2 个 new，第 3 个 defer（08-16 泛滥根治）。"""
+        from weekend_pipeline import input_jobs
+
+        self._seed_lifecycle({
+            "general-active-20260101": {"status": "optimizing",
+                "title": "twisted moiré high harmonic", "text": "moire HHG solids"},
+        })
+        clusters = []
+        # 三个主题均含 hhg（命中 setup 写入的方向词表），主题词互不重叠
+        for i, theme in enumerate(["squeezed hhg photon", "berry hhg curvature", "floquet hhg engineering"]):
+            clusters.append({
+                "cluster_id": f"cl_q{i}", "title": f"{theme} physics",
+                "keywords": theme.split() + [f"extra{i}"], "summary": f"{theme} summary",
+                "member_source_ids": [f"paper:q{i}-{k}" for k in range(3)],
+                "member_summaries": [], "distilled_by": "llm", "status": "open",
+                "linked_proposal_id": None,
+                "created_at": "2026-08-01T00:00:00Z", "updated_at": "2026-08-10T00:00:00Z",
+            })
+        from weekend_pipeline import clusters as cl
+        cl.CLUSTERS_PATH = self.tmp_root / "memory" / "weekend-input" / "clusters.json"
+        cl.save_clusters({"clusters": clusters, "orphans": []})
+
+        input_jobs.is_llm_available = lambda: False
+        from weekend_pipeline.constants import WEEKEND_INPUT_DIR
+        result = input_jobs.run_input_topic_match(state={}, job={})
+        self.assert_true(result.get("success"), str(result))
+        routes = json.loads((WEEKEND_INPUT_DIR / f"routes-{input_jobs.now_utc()[:10]}.json").read_text(encoding="utf-8"))["routes"]
+        new_count = sum(1 for r in routes if r["action"] == "new")
+        defer_count = sum(1 for r in routes if r["action"] == "defer")
+        self.assert_eq(new_count, input_jobs.NEW_WEEKLY_QUOTA, f"new 数应等于周配额 {input_jobs.NEW_WEEKLY_QUOTA}")
+        self.assert_eq(defer_count, 1, "超额达标簇应 defer 等下周")
+
+    def _test_distill_marks_distilled_by(self):
+        """cluster_distill 标记知识卡来源（llm/fallback），new 门槛依据。"""
+        from weekend_pipeline import input_jobs
+
+        from weekend_pipeline import clusters as cl
+        registry = {"clusters": [{
+            "cluster_id": "cl_x", "title": "test cluster", "keywords": ["hhg"],
+            "summary": "", "member_source_ids": ["paper:x1", "paper:x2"],
+            "member_summaries": [
+                {"source_id": "paper:x1", "title": "t1", "summary": "s1", "keywords": []},
+                {"source_id": "paper:x2", "title": "t2", "summary": "s2", "keywords": []},
+            ],
+            "status": "open", "linked_proposal_id": None,
+            "created_at": "2026-08-01T00:00:00Z", "updated_at": input_jobs.now_utc(),
+        }], "orphans": []}
+        cl.CLUSTERS_PATH = self.tmp_root / "memory" / "weekend-input" / "clusters.json"
+        cl.save_clusters(registry)
+
+        # LLM 成功路径
+        input_jobs.is_llm_available = lambda: True
+        input_jobs._llm_json = lambda system, user, timeout=120: {
+            "title": "T", "summary": "综合摘要" * 30, "open_questions": ["q1"]}
+        result = input_jobs.run_input_cluster_distill(state={}, job={})
+        self.assert_true(result.get("success"), str(result))
+        data = cl.load_clusters()
+        self.assert_eq(data["clusters"][0].get("distilled_by"), "llm", "LLM 卡应标 llm")
+
+        # LLM 失败降级路径
+        registry["clusters"][0]["summary"] = ""
+        registry["clusters"][0]["distilled_by"] = None
+        del registry["clusters"][0]["distilled_by"]
+        registry["clusters"][0]["updated_at"] = input_jobs.now_utc()
+        cl.save_clusters(registry)
+        input_jobs._llm_json = lambda system, user, timeout=120: None
+        result = input_jobs.run_input_cluster_distill(state={}, job={})
+        self.assert_true(result.get("success"), str(result))
+        data = cl.load_clusters()
+        self.assert_eq(data["clusters"][0].get("distilled_by"), "fallback", "降级拼接应标 fallback")
+
+    def _test_supplementary_cross_week_members(self):
+        """信息源挂载用簇内 member_summaries（跨周成员可挂载）。"""
+        from weekend_pipeline import input_jobs
+        from proposal_lifecycle import ProposalLifecycle
+
+        self._seed_lifecycle({
+            "general-live-20260101": {"status": "optimizing", "title": "t", "text": "t"},
+        })
+        # 簇成员是上周的：不在当天 summary_index 里
+        cluster = {
+            "cluster_id": "cl_old", "member_source_ids": ["paper:old1", "paper:old2"],
+            "member_summaries": [
+                {"source_id": "paper:old1", "title": "上周论文一", "summary": "s1", "keywords": [], "path": "knowledge/raw/papers/a.md"},
+                {"source_id": "paper:old2", "title": "上周论文二", "summary": "s2", "keywords": [], "path": "knowledge/raw/papers/b.md"},
+            ],
+        }
+        ok = input_jobs._write_supplementary_sources(
+            "general-live-20260101", cluster, summary_index={})
+        self.assert_true(ok, "跨周成员挂载应成功（08-16 实测旧实现必失败）")
+        out = (self.tmp_root / "research_proposals" / "optimizing" / "general-live-20260101"
+               / "02_literature" / f"supplementary-sources-{input_jobs.now_utc()[:10]}.json")
+        data = json.loads(out.read_text(encoding="utf-8"))
+        self.assert_eq(len(data["entries"]), 2, "两条跨周成员均应挂载")
+        self.assert_eq(data["entries"][0]["path"], "knowledge/raw/papers/a.md", "成员自带 path 应保留")
+
+    def _test_merge_follower_grouping(self):
+        """同目标课题的相似簇分组：主簇注入，其余只挂信息源。"""
+        from weekend_pipeline import input_jobs
+
+        cluster_index = {
+            "cl_big": {"cluster_id": "cl_big", "title": "hhg", "keywords": ["hhg", "solid", "quantum"],
+                       "member_source_ids": ["a", "b", "c", "d"]},
+            "cl_small": {"cluster_id": "cl_small", "title": "hhg variant", "keywords": ["hhg", "solid", "quantum"],
+                         "member_source_ids": ["e", "f"]},
+            "cl_far": {"cluster_id": "cl_far", "title": "wigner crystal", "keywords": ["wigner", "crystal"],
+                       "member_source_ids": ["g", "h", "i"]},
+        }
+        routes = [
+            {"cluster_id": "cl_big", "action": "merge", "target_id": "p1"},
+            {"cluster_id": "cl_small", "action": "merge", "target_id": "p1"},
+            {"cluster_id": "cl_far", "action": "merge", "target_id": "p2"},
+        ]
+        leader = input_jobs._group_merge_routes(routes, cluster_index)
+        self.assert_eq(leader.get("cl_big"), "cl_big", "大簇应为主簇")
+        self.assert_eq(leader.get("cl_small"), "cl_big", "相似小簇应归并到主簇")
+        self.assert_eq(leader.get("cl_far"), "cl_far", "不同主题簇不归并")
+
+    def _test_enrich_heading_carries_cluster_tag(self):
+        """enrich 注入标题带簇 ID——同课题多簇注入不因标题去重裸奔。"""
+        from proposal_lifecycle import ProposalLifecycle
+
+        # 独立课题 id：避免与 enrich_appends 等用例共享文件（套件内
+        # tmp_root 只建一次，文件跨用例累积）
+        self._seed_lifecycle({
+            "general-heading-20260101": {"status": "optimizing", "title": "quantum hhg", "text": "t"},
+        })
+        prop_dir = self.tmp_root / "research_proposals" / "optimizing" / "general-heading-20260101"
+        for stage in ("01_direction", "02_topic", "03_question", "04_proposal"):
+            (prop_dir / stage).mkdir(parents=True, exist_ok=True)
+        lc = ProposalLifecycle()
+        for cid, bg in (("cl_m1", "背景内容甲"), ("cl_m2", "背景内容乙")):
+            lc.enrich_from_idea("general-heading-20260101", {
+                "title": f"主题 {cid}", "background": f"{bg}" + "独特背景描述。" * 5,
+                "gap": "空白" + cid, "content": ["c"], "innovations": ["i"],
+                "sources": [], "cluster_id": cid, "reliability": "derived",
+            })
+        text = (prop_dir / "01_direction" / "direction-calibration.md").read_text(encoding="utf-8")
+        self.assert_in("cl_m1", text, "第一簇标题段应保留簇 ID")
+        self.assert_in("cl_m2", text, "第二簇标题段应保留簇 ID")
+        self.assert_eq(text.count("## 周末输入补充"), 2, "两个簇应各有一个注入标题")
+
+    def _test_register_from_idea_writes_dossier(self):
+        """register_from_idea 生成立项决策包（新课题进 activate 人工队列的依据）。"""
+        from proposal_lifecycle import ProposalLifecycle
+
+        self._seed_lifecycle({
+            "general-live-20260101": {"status": "optimizing",
+                "title": "quantum hhg theory", "text": "quantum high harmonic"},
+        })
+        lc = ProposalLifecycle()
+        result = lc.register_from_idea({
+            "title": "Wigner Crystal nonlinear optics",
+            "background": "维格纳晶体非线性光学响应背景。", "gap": "高温相变缺乏统一图像。",
+            "content": ["时间分辨测量"], "innovations": ["非平衡诊断"],
+            "sources": [], "keywords": ["wigner crystal", "THz"],
+            "reliability": "derived",
+        }, project_type="general")
+        self.assert_true(result.get("success"), "注册应成功", str(result))
+        prop_dir = self.tmp_root / "research_proposals" / "drafts" / result["proposal_id"]
+        dossier = prop_dir / "00_idea-dossier.md"
+        self.assert_true(dossier.exists(), "立项决策包应生成")
+        dt = dossier.read_text(encoding="utf-8")
+        self.assert_in("激活建议", dt, "决策包应含激活建议")
+        self.assert_in("新颖性", dt, "决策包应含新颖性对比")
+
+    def _test_ops_cluster_routes_defer(self):
+        """运维簇（简报/cron 元数据）路由前置 defer，不进课题路由。
+
+        08-16 复跑实测：运维簇知识卡含个别领域词可过方向关，LLM 仲裁
+        无 reject 选项只能判 new → 注册了 general-hermes-briefing 课题。
+        """
+        from weekend_pipeline import input_jobs
+
+        # 纯函数判据
+        ops = {"title": "hermes-briefing 每日简报自动化系统与空白对话记忆",
+               "keywords": ["cron 自动运行", "每日简报", "知识管理"]}
+        academic = {"title": "二维材料中交变磁性磁态的自旋-能谷耦合",
+                    "keywords": ["交变磁性", "自旋能谷耦合", "滑移调控"]}
+        self.assert_true(input_jobs._is_ops_cluster(ops), "运维簇应被识别")
+        self.assert_true(not input_jobs._is_ops_cluster(academic), "学术簇不应误判")
+
+        # 路由端到端：运维簇 defer
+        self._seed_lifecycle({
+            "general-active-20260101": {"status": "optimizing",
+                "title": "twisted moiré high harmonic", "text": "moire HHG solids"},
+        })
+        from weekend_pipeline import clusters as cl
+        cl.CLUSTERS_PATH = self.tmp_root / "memory" / "weekend-input" / "clusters.json"
+        cl.save_clusters({"clusters": [
+            {"cluster_id": "cl_ops", "title": "每日简报、无用户交互、对话记忆",
+             "keywords": ["cron 自动任务", "hermes-briefing", "每日简报"],
+             "summary": "系统运维元数据，含一条高次谐波讨论",
+             "member_source_ids": [f"paper:o{k}" for k in range(11)],
+             "member_summaries": [], "distilled_by": "llm", "status": "open",
+             "linked_proposal_id": None,
+             "created_at": "2026-08-01T00:00:00Z", "updated_at": "2026-08-10T00:00:00Z"},
+        ], "orphans": []})
+        input_jobs.is_llm_available = lambda: True
+        input_jobs._llm_json = lambda system, user, timeout=90: {"action": "new", "target_id": None, "reason": "x"}
+        from weekend_pipeline.constants import WEEKEND_INPUT_DIR
+        result = input_jobs.run_input_topic_match(state={}, job={})
+        self.assert_true(result.get("success"), str(result))
+        routes = json.loads((WEEKEND_INPUT_DIR / f"routes-{input_jobs.now_utc()[:10]}.json").read_text(encoding="utf-8"))["routes"]
+        self.assert_eq(routes[0]["action"], "defer", "运维簇应 defer（即使 LLM 判 new）")
+
     def run_tests(self):
         self._test_distilled_papers_excluded()
         self._test_source_tiers_assigned()
@@ -597,3 +894,14 @@ class InputClusteringTests(TestSuite):
         self._test_enrich_appends_without_crash()
         self._test_register_generates_valid_id()
         self._test_register_cn_title_falls_back_to_keywords()
+        # v6.9.18 输入链路重构回归
+        self._test_cluster_ids_unique()
+        self._test_cn_2gram_title_similarity()
+        self._test_scope_and_ops_filters()
+        self._test_new_quota_caps_weekly_registrations()
+        self._test_distill_marks_distilled_by()
+        self._test_supplementary_cross_week_members()
+        self._test_merge_follower_grouping()
+        self._test_enrich_heading_carries_cluster_tag()
+        self._test_register_from_idea_writes_dossier()
+        self._test_ops_cluster_routes_defer()

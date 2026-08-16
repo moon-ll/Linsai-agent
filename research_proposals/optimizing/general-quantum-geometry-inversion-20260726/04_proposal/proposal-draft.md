@@ -894,3 +894,73 @@ NSFC 2026 三段式瘦身提质要求（立项依据+研究内容+研究方案�
 **正式发表状态联网核实计划**：项目启动后第一年内（Year 1 Q1–Q4）对 17 条预印本条目做一次系统联网核实，重点核实 [8] [9] [11] [13] [14] [17] [18] [19] [20] [21] [22] [23] [24] 等核心条目是否已在 2026-Q3/Q4 前正式发表；如已发表，更新条目格式为正式发表版并补充卷期 DOI。
 
 **[18] 与 [22] 作者重叠提示**：[17] 与 [22] 共享 Stammer 与 Rivera-Dean 两位作者（ICFO / MPSD 合作团队），分别处理"对称性破缺"与"高斯/非高斯"两个不同科学问题，引用分工独立无冗余。[18] Chowdhury & Narayan（IISc Bangalore）与 [17]/[22] 无作者重叠，独立团队工作。
+
+## 周末输入补充（2026-08-15）
+
+### 拟开展研究内容
+- paper:2024-2407.09628-accelerating-electron-dynamics-simulations-through-machine-l
+- paper:2025-2508.16554-machine-learning-time-propagators-for-time-dependent-density
+
+### 创新点
+- 机器学习传播子在长时间演化中能否保持酉性、概率守恒等量子力学基本约束，其误差累积如何系统控制？
+- 训练得到的传播子对训练分布之外的外场波形、强度、体系尺寸与化学组分的泛化能力如何？
+- 相较于高阶自适应数值积分器，机器学习传播子在不同精度要求下的实际加速比与标度优势如何量化？
+- 能否将机器学习时间传播子与机器学习势相结合，实现电子-核耦合动力学（如Ehrenfest动力学）的端到端加速？
+- 如何引入时间可逆性、规范不变性等物理信息约束，以提升学习传播子的物理一致性与可解释性？
+
+### 拟开展研究内容
+- paper:2024-2407.09628-accelerating-electron-dynamics-simulations-through-machine-l
+- paper:2025-2508.16554-machine-learning-time-propagators-for-time-dependent-density
+
+### 创新点
+- 机器学习传播子在长时间演化中能否保持酉性、概率守恒等量子力学基本约束，其误差累积如何系统控制？
+- 训练得到的传播子对训练分布之外的外场波形、强度、体系尺寸与化学组分的泛化能力如何？
+- 相较于高阶自适应数值积分器，机器学习传播子在不同精度要求下的实际加速比与标度优势如何量化？
+- 能否将机器学习时间传播子与机器学习势相结合，实现电子-核耦合动力学（如Ehrenfest动力学）的端到端加速？
+- 如何引入时间可逆性、规范不变性等物理信息约束，以提升学习传播子的物理一致性与可解释性？
+
+### 拟开展研究内容
+- paper:2026-260723652-carrier-envelope-phase-control-of-orbital-ang
+- paper:2026-2601.12743-twisting-harmonics-transfer-of-orbital-angular-mom
+- paper:2601.12743
+- paper:2607.23652
+
+### 创新点
+- CEP敏感的亚周期电子动力学如何定量决定谐波拓扑荷？其与晶体能带结构和布里渊区中电子运动的关联需要超越偶极近似的理论框架加以完善
+- OAM标度律破缺现象是否普遍存在于不同对称性、不同取向的晶体材料中？晶体反演对称性破缺的具体作用机制尚待系统表征
+- 能否将CEP调控与驱动涡旋拓扑荷结合，实现高阶、可编程涡旋谐波及阿秒时间尺度结构光场的按需生成
+- 固态涡旋谐波源在损伤阈值、产生效率和光束质量方面如何优化，以满足极紫外波段实际应用（如纳米加工、手性探测、超快光谱）的需求
+
+### 拟开展研究内容
+- briefing:knowledge/wiki/reviews/briefing-2026-05-18.md
+- hermes_briefing:research_briefing_20260517.md
+
+### 创新点
+- 高阶拓扑绝缘体的清晰拓扑谐波特征为何在部分实验中未被观测到？分数阶谐波的微观物理起源是什么？
+- SSH边界态导致的带隙频率处HHG压缩效应能否发展为区分拓扑相与平凡相、定量提取拓扑不变量的光谱诊断手段？
+- 激子多体效应与谐波辐射、光致发光之间的竞争机制如何在强场框架下统一描述，并用于主动调控半导体谐波效率？
+- 外尔半金属中贝利曲率增强的THz三次谐波响应能否推广至室温、低功耗的太赫兹非线性器件与拍赫兹电子学应用？
+- Zak相位等拓扑不变量与谐波光谱特征的线性映射在含缺陷、含退相干的真实材料中是否保持鲁棒性？
+
+### 来源
+- [weekend_cluster] 强场超快光学/固体HHG研究简报：拓扑谐波产生、固体HHG机理与拍赫兹电子学前沿
+
+
+## 周末输入补充（2026-08-16 · cl_20260816_d91ade）
+
+### 拟开展研究内容
+- paper:2024-2411.03137-review-advances-in-solid-state-high-harmonic-generation-from
+- paper:2026-2604.27750-field-driven-helicity-in-solid-state-high-harmonic-generatio
+- paper:2025-2510.15207-solid-state-high-order-harmonic-generation-emerging-frontier
+
+### 创新点
+- 谐波螺旋度与偏振态演化如何定量映射贝里曲率、Berry相位与量子几何张量，以实现能带拓扑与手性的非破坏性阿秒表征？
+- 二维材料与拓扑材料中强场载流子动力学的多带相干机制能否在统一理论框架下与实验结果定量吻合？
+- 如何提升圆偏振高次谐波与手性敏感测量的信噪比和普适性，以适应不同晶体对称性与实际材料体系？
+- 固态HHG能否发展为可实用的阿秒脉冲与新型量子光源，其相位、偏振与螺旋度如何实现精确按需调控？
+
+### 来源
+- [weekend_cluster] Review: Advances in solid-state high harmonic generation from Chinese research groups
+- [weekend_cluster] Field-driven helicity in solid-state high-harmonic generation
+- [weekend_cluster] Solid-State High-Order Harmonic Generation: Emerging Frontiers in Ultrafast and Quantum Light Science
+
