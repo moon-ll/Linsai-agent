@@ -556,10 +556,14 @@ def run_reflection_kb_deep_health(state: Dict[str, Any], job: Dict[str, Any], dr
         save_json(_kb_deep_health_path(), result)
 
     dup = result.get("deep_health", {}).get("duplicate_groups", 0)
-    _log_info(
-        f"[kb-deep-health] 重复组={dup}, derived过期={result.get('deep_health', {}).get('derived_overdue', 0)}, "
-        f"分类候选={result.get('taxonomy_candidates', {}).get('count', 0)}"
-    )
+    # v6.9.18 修复：本模块日志器为 _log（get_logger），原实现误用
+    # _log_info（复制自 knowledge_output 的辅助函数，本模块未定义），
+    # 该 job 自 v6.9.6 落地以来首次真实执行即 NameError
+    if _log:
+        _log.info(
+            f"[kb-deep-health] 重复组={dup}, derived过期={result.get('deep_health', {}).get('derived_overdue', 0)}, "
+            f"分类候选={result.get('taxonomy_candidates', {}).get('count', 0)}"
+        )
     return {"success": True, **result}
 
 
