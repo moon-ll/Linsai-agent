@@ -1,0 +1,68 @@
+# 设计一致性轮换检查指针
+# 格式：已检查机制编号 + 日期 + 结论。每轮从上次结束处继续，每轮 2-3 个。
+# 轮换表见健康检查工具提示（1-15 项）。
+
+## 已检查
+
+- #1 跨课题范例注入 — 2026-08-13 08h — 正常
+- #2 对抗评审维度轮换 — 2026-08-13 08h — 正常（已按窗口逻辑修复）
+- #3 研究设想质量门槛 — 2026-08-13 08h — 正常
+- #4 Agent 分数奖惩闭环 — 2026-08-13 12h — 正常
+- #5 Prompt 优化器正反馈循环 — 2026-08-13 12h — 正常
+- #6 P0 跨轮持久化 — 2026-08-13 16h — 正常
+- #7 质量天花板检测 — 2026-08-13 16h — 正常
+- #8 停滞课题检测 — 2026-08-13 20h — 正常（48h 窗口已修复）
+- #9 输入端熔断 — 2026-08-14 20h — 三重失效（monitor 数据源死代码 + 反思端历史不足 + 周重置被全局 updated_at 破坏）→ 已修复 2 处，告警实测触发；反思端待历史积累后自然恢复
+- #10 人工审核反馈闭环 — 2026-08-14 20h — 正常（critic/writer 双侧注入确认）
+- #11 KB 健康评分 — 2026-08-14 20h — 部分实现：指标已算 + 持久化位置偏差（cache 而非 kanban）+ "每周"退化为缓存缺失才重算（仅报告，待人工确认设计意图）
+- #12 研究趋势雷达 — 2026-08-15 00h — 部分失效：检测逻辑在 sync_all [3.7/5] 正常执行，但 kb_metrics 持久化被微调度器整文件替换剥离（v6.9.1 已修复合并写）+ lc-kb-sync 重建后未首次运行；预计 08-15 12:40 起落地，下轮复查 trends_updated_at
+- #13 微调度器轮次优先级 — 2026-08-15 00h — 正常（round_num 第一维度 + _CHAIN_ORDER 含 update_vision(7)/update_method_manual(8)）
+- #14 微调度器 stale 清理与轮次 break — 2026-08-15 00h — 正常（slot 检查前无条件清理 + round_complete 分支完整收尾）
+- #15 monitor 降级路径 — 2026-08-15 04h — 正常（import 守卫 + job.get("round",0) 规避 NameError + success/skipped 不阻塞；运行时从未触发属防御性设计）
+
+## 已检查
+
+- #12 研究趋势雷达复核 — 2026-08-15 04h — 待落地：合并写修复就位（v6.9.1），看板仍无 kb_metrics 系因 lc-kb-sync 重建后从未运行（next=08-15 12:40 首跑）；下轮 16h 复查 trends_updated_at
+- #1 跨课题范例注入复核 — 2026-08-15 08h — 正常（实时实证：0.18/0.74 注入、0.79 跳过、范文源 0.86；v6.9.3 补注入 INFO 日志闭环观测，590/590）
+- #2 对抗评审维度轮换复核 — 2026-08-15 08h — 潜在死代码（逻辑在位：[-12:]+≥6 门槛+同章节≥3 且 |Δ|<0.01×3；全部日志归档 0 触发；原因=窗口内同章节难凑 3 次+分数抖动>0.01+轮次号跨会话重置；#7/#8 已兜底。仅报告，待人工定夺放宽窗口/阈值或移除）
+- #12 研究趋势雷达三查 — 2026-08-15 08h — 待落地（lc-kb-sync 今日 12:40 首跑前看板无 kb_metrics 属预期，cron 注册表已确认在位；16h 复查 trends_updated_at，缺失则升级排查 kb_auto_sync）
+- #3 研究设想质量门槛 — 2026-08-15 12h — 正常（controller.py:260 round1 链首+v6.8.27 跳过逻辑；executor.py:1046 阈值 0.70/writer 修复/超限 blocked；运行时 2 课题 r1 首job=idea_review done + passed=True）
+- #12 研究趋势雷达四查 — 2026-08-15 12h — 待落地（cron_manifest 12:40 在位；看板无 kb_metrics；首跑在本报告落盘约 35 分钟后；16h 体检第五查，仍缺则排查 kb_auto_sync 执行链）
+- #4 Agent 分数奖惩闭环 — 2026-08-15 16h — 正常（scoring.py 全程 scores[role] 直写；memory/agent-scores.json 顶层即 writer/critic 无嵌套 agents 层；history 45/50；08-14 03:26 更新，周六无 meta-review 属预期。附注：双 100.0 顶格饱和属设计特性）
+- #12 研究趋势雷达五查（结案） — 2026-08-15 16h — 正常落地（kb_metrics.trends_updated_at=2026-08-15T04:40:08Z 即北京 12:40 lc-kb-sync 首跑；trends_rising 5 关键词；四轮待落地观察闭环，不再跟踪）
+- #11 KB 健康评分复核 — 2026-08-15 16h — 仍部分实现（看板 kb_metrics 已持久化但仅日频 coverage+trends；新鲜度/连通度仍只进 weekend-actions 报告未入 kanban；coverage=0.0 系 source_raw 纯文件名口径非数据错误。维持仅报告待人工，与上轮一致）
+- #5 Prompt 优化器正反馈循环（复核） — 2026-08-15 20h — 正常（14:00:22 锁时间戳实证执行；8 条 applied 建议在保留期内；建议池覆盖多 profile 无独占；旧建议清理符合策略）
+- #9 输入端熔断（联动复核） — 2026-08-15 20h — 正常（08-14 三重失效修复后的最后一环：monitor 读幻影 "ideas" 键恒 0 → 已改 actions 主口径；summarize 死锁+malformed 数据修复后 compose 恢复产出，告警将自动解除）
+
+- #6 P0 跨轮持久化（复核） — 2026-08-16 00h — 正常（critic optimize.py:955 / writer :1540 双侧注入 + :1398-1414 跨章节修复例外；运行时 5/5 课题 open_critical_issues 累积中，3 课题持未解决 P0 16/3/6 条，机制活跃）
+- 输入端熔断告警解除闭环 — 2026-08-16 00h — 正常（ideas-2026-08-15.json actions=2 落地：expansion→quantum-geometry + merge→bsv-driven-hhg，双课题 supplementary 文件在位；21:47 落盘→22:00 告警自动解除，时间线吻合；#9 修复链四环全部闭环结案）
+- 知识簇链路落地 — 2026-08-16 00h — 正常（clusters.json 143 簇含完整知识卡 + 164 orphans，updated 08-15T16:08Z；上轮"零成簇标定待人工"已由 v6.9.14 overlap 口径自动解决，结案）
+- #7 质量天花板检测（复核） — 2026-08-16 04h — 缺陷已修（收敛分支 recent_scores[:-1] 只约束前3轮，"3轮高位平台后当前轮骤降"被误判收敛晋级 pending_review；近触发实证 quantum-geometry [0.84,0.86,0.85,0.77] 仅浮点幸免 + key-transient 4×0.81 已满足条件待轮末触发；v6.9.16 修复为窗口内全部轮次≥0.80 + 新增 7 用例回归，796/796）
+- #10 人工审核反馈闭环（复核） — 2026-08-16 04h — 部分失效（修正 08-14 20h"正常"结论：代码链路完整 review-decide web_routes_system.py:799 / review-finalize :894 均传 session_id，但 4 次真实反馈 bsv×3 + order-param×1 全经无 session 入口 legacy :531 / CLI 提交 → review_history 恒空 → load_review_feedback_for_optimization feedback_archive.py:343 首守卫早退，注入全历史 0 次、4 反馈文件均无"## 审核对话摘要"节。仅报告待人工三选一：放宽注入守卫按 human_feedback_count / 全入口强制带 session / 接受现状）
+- 附带（08-16 04h） — --module 门禁两套件静默吞恢复：kb_distill_created_ts（v6.9.15 起从未真正运行，stub 路径 relative_to 必炸，+7）与 input_clustering（08-15 enrich 用例夹具缺 02/03/04 阶段目录，+61），门禁 721→796 零 ⚠；--web-ci 全量发现模式仍有 ghost_write_guard 等静默吞（基建改进项维持，未扩科）
+- #8 停滞课题检测（复核） — 2026-08-16 08h — 正常（代码 lifecycle_monitor.py:285-307 在位、48h+pending>0 口径正确；运行时 0 触发 max 32h。新观察：无周末感知，预测周一 00:00-08:00 BJ 4 课题将越 48h 产生预期内 stalled 告警波、worker 恢复后自愈；是否仿 v6.9.2 加周末宽限待人工，决策前仅报告）
+- #7 质量天花板收敛修复（回归观察） — 2026-08-16 08h — 修复已入库+回归绿（v6.9.16 语义+7 用例本轮 7/7；key-transient 尾部 4×0.81 就位、0.18 已修正移除；r4 critic 终态待周一解锁）；周一轮末终验：r4 真分≥0.80 应收敛晋级且 reason="质量收敛"，<0.80 不误晋级
+- 附带（08-16 08h） — v6.9.16 提交完整性缺陷已修（P1）：commit 29d33c9 收录命名回归测试但漏提修复本体（naming.py LIFECYCLE_STAGES 导入 / registration.py keywords 回退），HEAD 上套件一崩一败；补提交 671799f（v6.9.17）恢复快照一致，796/796 复验绿。触发链：01:49 周日输入运行 141 actions（new 72）注册 54 课题、46 个纯中文标题落占位名。附带观察（仅报告）：46 占位名 drafts 改名待人工（ID 迁移）；ideas 文件 UTC 命名同日双运行覆写审计记录；395 未跟踪数据文件入库策略待定
+
+- #9 输入端熔断（三复核） — 2026-08-16 12h — 正常（v6.9.18 重构后 compose 产物 ideas-2026-08-16.json actions=15 非空，monitor :333 actions 主口径兼容；最近 2 周 ideas 均非空不触发；重构未破坏数据源，解除态维持）
+- #3 研究设想质量门槛（二复核） — 2026-08-16 12h — 代码在位（controller:276-284 round1 链首+v6.8.27 跳过；executor:958+ 0.70 闭环；v6.9.18 未触及）；berry（drafts r0，human_queue 待激活）激活后为 v6.9.18 链路首个 idea_review 实测样本，下轮运行时复验
+- v6.9.18 立项决策包链路首跑 — 2026-08-16 12h — 正常（registration 注册前 compare+00_idea-dossier 落盘；human_queue 1 项 activate/berry waiting 0.2h；"new 注册+决策包进队列"设计首次真实运转）
+- 【P0 移交人工】linsai gateway 调度挂死 — 2026-08-16 12h — cron 注册表 13 条 lc- 全 active 但 08:01 起零派发（08:55 编排/09:00 反思/09-12 点监控/12:00 repair 全缺），PID 30485 存活 5h CPU 0.21s；本工具 kill 重启被用户接管取消；详见 healthcheck-2026-08-16-12h.md
+- #7 质量天花板检测（三复核） — 2026-08-16 16h — 正常（v6.9.16 语义在位；r4 真分 0.81 已入史 [0.72,0.78,0.81,0.81,0.81,r4=0.81]，伪分 0.18 已替换；quantum-geometry r1 尾 0.84/0.86/0.85/0.77 修复后不再误判；周一轮末 _check_done 终验 reason="质量收敛"）
+- #11 KB 健康评分（三复核） — 2026-08-16 16h — 部分实现·根因细化（周计算真实运转：coverage 33.4/freshness 100/isolated 24.2/score 69.8；新发现 reflection_jobs.py:396 report["kb_health"] 为死写——report 读入后从未回存，数值仅存活内存；持久化痕迹仅 2 条阈值越限文字进 weekend-actions；kanban kb_metrics 仍无周频三指标。维持仅报告待人工三选一）
+- v6.9.19 周末阶段超期补跑（新机制首验） — 2026-08-16 16h — 正常（门控/锚点/窗口/接线/dry-run 全路径追踪无缺陷；live state 实测决策全 False 无假阳性；真实触发场景待未来周末）
+- P0 gateway 挂死状态更新 — 2026-08-16 16h — 持续未解除（PID 30485 CPU 冻结 0:00.21 与 12h 完全相同，9h 零增量；13/14/15 点监控、12:40 kb-sync、12:50 kb-distill、14:00 prompt-optimize 全缺；12:11 编排与 13:47 反思均手动非派发；今晚不恢复则周一 00:30 worker 时段全停；另确认周末 repair 分支不覆盖工作日 job 解锁，2 stuck job 首次解锁窗口为周一 00:00）
+
+- P0 gateway 挂死第四轮跟踪 — 2026-08-16 20h — 未解除（PID 30485 elapsed 12:24:47 CPU 0:00.22 与 16h 零增量；17/18/19/20 整点监控全缺，12:40/12:50 KB 治理连续第 2 日缺失、14:00 prompt-optimize 缺失；18:50:30/45 kb_distill dry-run ×2 + 18:51 monitor 判定为手动排查痕迹非派发恢复；本 4h 零代码提交、self_test 840/840 全绿基线 +44）
+- #13/#14 微调度器静态快复核 — 2026-08-16 20h — 正常（代码零漂移：_CHAIN_ORDER:76/_job_priority_key:1168/update_vision=7 在位；git 自 08-15 复核后无相关提交）
+- 看板 key-transient 0.18 定性 — 2026-08-16 20h — 陈旧快照非缺陷（_lifecycle.json last_score=0.81 + pseudo_score_fix 审计在案；看板 proposals 由 scheduler 主写、自 08-15T05:45Z 修复后未运行残留旧值；monitor 合并不覆盖；gateway 恢复后自愈，不修）
+- berry 激活等待 — 2026-08-16 20h — human_queue 等 8.2h（72h 线 08-17 04:49 前不升级）；#1/#3 运行时实测继续被人工节点阻塞
+
+## 下次从这里继续
+
+- 恢复验证（gateway 重启后，最高优先）：整点 hourly-monitor 派发恢复、周一 00:00 repair 解锁 2 stuck job（注意周末分支不覆盖解锁）+ v6.9.19 catchup 首次真实 cron 触发（预期 no-op）、00:30 起 worker 时段、12:40/12:50 KB 治理恢复
+- 机制复核候选：#1 跨课题范例注入（berry 激活进入优化后的低分注入实测）/ #3 运行时复验（berry idea_review 链，已在 human_queue 等 8.2h+）/ #2 维度轮换死代码裁决（连续四轮未动，需人工定夺放宽窗口或移除）
+- 周一优先回查（按时间序）：① 00:00-08:00 stalled 告警波（先区分 gateway 未恢复的真停摆 vs 预期内误报）② 00:00 repair 解锁 moire r8-writer / order-param r1-critic 重跑结果 ③ key-transient r4 轮末收敛晋级终验（reason="质量收敛"、<0.80 不误晋级）④ 12:40/12:50 kb_metrics/蒸馏恢复刷新 ⑤ berry 激活后 v6.9.18 链路首个 idea_review 实测
+- 待人工决策清单（累积）：linsai gateway 重启（今晚不恢复则周一链路全停）/ #11 kb_health 持久化三选一（本轮新增死写根因）/ #10 反馈闭环三选一 / 停滞检测周末宽限 / 46 占位名 drafts 改名 / 395 未跟踪数据文件入库策略 / 飞书 config init 或 config bind --source hermes
+- 顺带观察：--web-ci 发现模式 ghost_write_guard / idea_review 基类 NotImplementedError 静默吞仍未收口（测试基建改进项）
+- 环境备忘：沙箱内 `crontab -l` 对本机真实 crontab 假阴性，验证 cron 状态以 hermes cron 注册表（hb.cron_list_profile）+ lifecycle_cron 幂等日志 + 派发记录为准；lifecycle_monitor 实际参数为 --dry-run（非 --check）；沙箱 kill 用户进程会被人工接管，进程级修复以报告移交为宜；kb_health.get_kb_health 独立导入必炸（门面注入设计，非缺陷）；git log --since 用本地时区（+0800）
