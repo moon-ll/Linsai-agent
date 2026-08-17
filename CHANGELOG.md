@@ -1,5 +1,28 @@
 # 变更记录
 
+## v6.9.24 - 2026-08-18 审核退回清理旧轮次残留 job（防跳轮/防提前触顶）
+
+- **缺陷**（08-18 04h 健康检查发现）：pending_review → optimizing 审核
+  退回仅归零 `optimization_rounds`，不清理 `pipeline_jobs`——退回前生命周
+  期的 done/pending job 全部残留（bsv 实证：r7 done×29 + r8 done×23 +
+  derived pending×2）。后果链：`_compute_actual_round` 整轮全 done 向上扫
+  描会消耗旧 done 轮次跳轮（新 r6 完成后一次性跳至 r8=DEFAULT_MAX_ROUNDS，
+  真实 r7/r8 两轮被吞）；`sync_checkpoint` 按 job_id 去重导致新 r7/r8 链
+  永不创建；r8-derived 残留在轮末空窗被误调度。标准人工审核退回流程即触
+  发，直接影响申请书优化轮次预算。
+- **修复**（`proposal_lifecycle/transitions.py`）：审核退回分支归零轮次时
+  将 `pipeline_jobs` 全量经 `append_archive_jobs` 归档后清空（兼容 legacy
+  dict 形态；归档失败降级 warning 不阻断）。
+- **存量数据修复**：bsv 54 个 r7/r8 残留 job 归档至 `_lifecycle_archive.json`，
+  保留 r1 活跃链 26 个（修复前备份；r8-derived attempts=0 确认无误调度产物）。
+- **回归**：新增 `scripts/tests/test_transition_reset_jobs.py`（14 用例：
+  退回清空+归档/退回后不跳轮/普通流转不清 job/dict 兼容），注册入
+  `self_test --module` 清单——`--module` 为硬编码清单非自动发现，新套件
+  不注册会被静默跳过（本轮实证）。--module 863/863、--scenario 16/16、
+  --persona 38/38 全绿。
+- 仅报告项（待人工裁决）：`test_idea_review` 无 `run_tests` 在 --module
+  静默跳过（35 用例未计入基线）；AGENTS"自动发现"表述与 --module 实现偏差。
+
 ## v6.9.22 - 2026-08-17 课题方向纠偏 + 周末输入核心主题对齐门
 
 背景（用户指示）：08-16 注册的 berry-mnps3 课题跑偏——纯准静态凝聚

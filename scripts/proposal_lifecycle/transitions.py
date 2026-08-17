@@ -68,8 +68,32 @@ class TransitionsMixin:
         # 审核退回：pending_review → optimizing 时归零优化轮次
         if from_stage == "pending_review" and to_stage == "optimizing":
             prop_state["optimization_rounds"] = 0
+            # v6.9.24: 归零轮次时同步归档清理旧轮次残留 job。
+            # 此前仅归零计数器，退回前生命周期的 done/pending job 全部残留
+            # pipeline_jobs：_compute_actual_round 按"整轮 done"向上扫描会
+            # 消耗旧 done 轮次直接跳轮（实测 bsv 2026-08-15 退回后残留
+            # r7 done×29 + r8 done×23/pending×2，新进度到 r6 完成后将被
+            # 一次性推到 r8=DEFAULT_MAX_ROUNDS 提前触顶流转，损失 2 轮
+            # 优化；r8-derived 残留还会在轮末空窗被误调度）。归档遵循
+            # "产出即资产"原则，job 证据不丢弃。
+            raw_jobs = prop_state.get("pipeline_jobs") or []
+            old_jobs = [
+                j for j in (raw_jobs.values() if isinstance(raw_jobs, dict) else raw_jobs)
+                if isinstance(j, dict)
+            ]
+            if old_jobs:
+                try:
+                    from lifecycle.utils import append_archive_jobs
+                    append_archive_jobs(proposal_id, old_jobs)
+                except Exception as e:
+                    if _log:
+                        _log.warning(f"[{proposal_id}] 归档退回前旧 job 失败（继续清空）: {e}")
+            prop_state["pipeline_jobs"] = []
             if _log:
-                _log.info(f"[{proposal_id}] 审核退回，归零 optimization_rounds")
+                _log.info(
+                    f"[{proposal_id}] 审核退回，归零 optimization_rounds，"
+                    f"归档清理旧轮次 job {len(old_jobs)} 个"
+                )
 
         self._set_proposal_state(proposal_id, prop_state)
 
