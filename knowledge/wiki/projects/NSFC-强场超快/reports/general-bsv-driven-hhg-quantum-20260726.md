@@ -3,12 +3,12 @@ title: "bsv-driven-hhg-quantum — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-bsv-driven-hhg-quantum-20260726"
 latest_round: 8
-last_score: 0.86
-critic_rounds: 11
+last_score: 0.73
+critic_rounds: 12
 optimization_reports: 5
 status: "optimizing"
-created: "2026-08-17T16:02:30Z"
-updated: "2026-08-17T16:02:30Z"
+created: "2026-08-17T20:18:12Z"
+updated: "2026-08-17T20:18:12Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,7 +18,7 @@ confidence: 1.0
 
 **课题 ID**：`general-bsv-driven-hhg-quantum-20260726`
 **累计轮次**：8
-**当前分数**：0.86
+**当前分数**：0.73
 **状态**：优化中
 
 ---
@@ -43,10 +43,11 @@ confidence: 1.0
 | 第 7 轮 | [optimization-report-round-7.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/optimization-report-round-7.md) |
 | 第 8 轮 | [optimization-report-round-8.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/optimization-report-round-8.md) |
 
-## 对抗评审（共 11 轮）
+## 对抗评审（共 12 轮）
 
 | 轮次 | 文件 |
 |------|------|
+| 第 1 轮 | [critic-round-1.bak-20260818.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-1.bak-20260818.md) |
 | 第 1 轮 | [critic-round-1.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-1.md) |
 | 第 2 轮 | [critic-round-2.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-2.md) |
 | 第 3 轮 | [critic-round-3.md](research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/critic-round-3.md) |
