@@ -86,13 +86,18 @@
 - 软卡死让出焦点（v6.8.10，本轮新触发结案） — 2026-08-17 12h — 正常·真阳性（micro_scheduler.py:1046-1070 在位；bsv 系退回重建 r1 链 26 job 全 pending + optimization_rounds=0，连续 2 时段无推进 → 12:02 正确让出；交叉验证 r1 链首 job=idea_review 符合 #3 设计）。附带发现（仅报告待人工）：get_current_focus docstring"只读"违约——实际经 _focus_proposal_for_slot 含 _auto_retry_failed_jobs（有 attempts<MAX 守卫，双上限终态安全）+软卡死 _save_focus_state+day-key 三类写副作用；生产 monitor/scheduler 决策收敛影响低，但手动 dry-run 会提前触发让出（本轮 WARNING 即本工具触发），属 dry-run 副作用家族新成员
 - 第二层扫描 — 2026-08-17 12h — 无对象（4h 唯一 commit 9f9a7da 仅报告文件）；self_test 840/840 全绿；工具提示"基线 392/395"已过时以 840 为准
 
+- P0 gateway 挂死第 9 轮（结案转观察） — 2026-08-17 16h — 已解除（PID 3538 阻塞 5h36m 后 13:13:22 自行完成启动：banner+housekeeping+watchdog 20788 派生；三件套全达成——ticker 心跳 16:01:53 BJ / gateway.log 新横幅 / repair 13:13 补跑解锁 moire r8-full_review-writer + order-param r1-references-critic 双上限 job，auto_unlock_count 均=1；catch_up=17 补跑 7 个 lc- + 4 简报；kb-sync 13:13 + kb-distill 13:19 补上 2 日缺失 KB 治理，kb_metrics.updated_at=05:13Z；14/15/16 点整点派发全 ok；13:15 管线自动提交 063dc82 昨夜手动批次入库）。根因仍未知（INDICATOR_STYLES ImportError 线索悬置）→ 降级"根因未明·观察复发"，明晨 07:37 daily-reload 为复发测试点
+- 双上限终态自动解锁·运行时终验（抽查①） — 2026-08-17 16h — 正常（08h 静态复核收官：moire repair_attempts=4/auto_unlock=1/attempts=0/pending、order-param 3/1/0/pending，"finished 超 24h 自动解锁重跑一次"设计首次端到端实证；另 quantum-geometry r1-references-critic、key-transient r4-scheme-critic 经重试路径重置 pending；全链零 failed 零 running）
+- #15 monitor 降级路径（抽查②） — 2026-08-17 16h — 正常·防御性在位（executor.py:1215-1229 fallback 完整：warning+skipped 不阻塞+optimization_rounds max 保留+last_monitor_assessment 标记；v6.8.27 round_num 取自 job.get("round",0) 修复注释在位；日志 grep 0 命中从未触发，属 ImportError 防御非死代码；主路径 job["round"] 硬取与 fallback .get 风格不一致但 job 模板必含 round，无触发路径）
+- #1 跨课题范例注入（三复核·窗口状态） — 2026-08-17 16h — 零漂移·窗口今晚开启（lifecycle/adversarial 自 v6.9.19 后无提交，00h 静态结论有效；gateway 已恢复但 13:13 落在 08:30-12:30 时段结束后，18:30-22:30 为恢复后首个 worker 窗口，order-param 0.74←bsv 0.86 注入对待首次 writer 调用）
+- 第二层扫描 — 2026-08-17 16h — 无对象（4h 唯一 commit 063dc82 纯数据：昨夜手动蒸馏批次入库 wiki 443→475、待蒸馏 78→31，"手动批次未提交"事项自然了结）；附带观察：categories.json.bak-2026-08-16（650 行）随批次误入版本库，并入数据入库策略待人工；self_test 840/840 全绿
+
 ## 下次从这里继续
 
-- gateway 第 9 轮（最高优先）：若人工已处置 → 验证三件套（profile ticker 恢复 + gateway.log 新增横幅 + repair 派发解锁 2 job，auto_unlock_count 应=1）+ 12:40/12:50 KB 治理恢复 + 18:30 worker 时段首跑；若未处置 → 记录 18:30-22:30 时段第 3 次空转、KB 治理第 3 日缺失收盘
-- #1 实测窗口（若恢复）：order-param writer 首次调用应注入 bsv 范文段
-- key-transient r4 轮末终验（若恢复且 worker 推进）：reason="质量收敛"、<0.80 不误晋级
-- berry 激活跟踪：催办线 08-19 11:49 BJ；激活后 #3 运行时实测（berry 或 bsv r1 链任一先跑均可，两课题均就绪）
-- 设计轮换：从 #1 跨课题范例注入（三复核）起继续，或按恢复态势优先 #7 终验收官；软卡死机制已结案
-- 待人工决策清单（累积）：gateway 启动挂死处置（P0，第 8 轮证据链同 08h）/ berry 激活 / 反思端熔断备份检测器死代码（改口径或移除，新）/ get_current_focus 只读语义与调度副作用分离（新）/ #11 kb_health 三选一 / #10 反馈闭环三选一 / #2 维度轮换死代码裁决 / 46 占位名改名 / 292+手动批次数据入库策略 / 飞书 config init 或 config bind --source hermes
-- 顺带观察：--web-ci 发现模式 ghost_write_guard / idea_review 基类 NotImplementedError 静默吞仍未收口（测试基建改进项）
-- 环境备忘：沙箱内 `crontab -l` 对本机真实 crontab 假阴性，验证 cron 状态以 hermes cron 注册表（hb.cron_list_profile）+ **profile 路径 ticker**（~/.hermes/profiles/linsai/cron/ticker_heartbeat，勿用根目录 ~/.hermes/cron/ticker——那是默认 profile 网关的，2026-08-17 08h 曾造成假恢复信号）+ profile gateway.log 新增行 + 派发记录为准；lifecycle_monitor 实际参数为 --dry-run（非 --check）；沙箱 kill 用户进程会被人工接管，进程级修复以报告移交为宜；kb_health.get_kb_health 独立导入必炸（门面注入设计，非缺陷）；git log --since 用本地时区（+0800）；macOS zsh 无 timeout 命令；cron jobs.json 中 schedule 字段有 dict/str 双形态，解析需兼容
+- gateway 第 10 轮（复发观察）：明晨 07:37 daily-reload 后查 linsai 网关 banner 时延（正常秒级；若再现小时级启动阻塞即复发确认，P0 升回人工处置）；日常健康判据=整点派发（jobs.json last_run_at）+ profile ticker 心跳 + output/ 目录增量
+- 今晚 18:30-22:30 worker 时段三连验（恢复后首个 worker 窗口）：① #1 实测 order-param writer 注入 bsv 范文段 ② #7 key-transient r4 轮末 _check_done 终验（全轮 ≥0.80 → reason="质量收敛"晋级 / <0.80 不误晋级）③ 2 stalled（quantum-geometry/key-transient 64h）pending 推进自愈
+- berry 激活跟踪：催办线 08-19 11:49 BJ；激活后 #3 运行时实测（berry 或 bsv r1 链任一先跑均可）
+- 设计轮换：15 项轮换表已全覆盖（#15 本轮收官），进入第二轮循环——优先复验"部分实现/待人工"项的运行面（#10 反馈闭环 / #11 kb_health）或实测窗口项（#1/#7 收官后自动闭环）；待人工裁决项不重复静态复核
+- 待人工决策清单（累积）：gateway 根因（降级观察复发，第 9 轮证据链）/ berry 激活 / 反思端熔断备份检测器死代码（改口径或移除）/ get_current_focus 只读语义与调度副作用分离 / #11 kb_health 三选一 / #10 反馈闭环三选一 / #2 维度轮换死代码裁决 / 46 占位名改名 / 手动批次+395 数据入库策略（新增：.bak 误入版本库一并处置）/ 飞书 config init 或 config bind --source hermes
+- 顺带观察（滚动）：--web-ci ghost_write_guard / idea_review 基类 NotImplementedError 静默吞未收口；看板 alert message 为首次触发快照（stuck 告警 last_seen 停 05:13 已实际解除、cron_stale 停 08-14，判读以 last_seen 为准）
+- 环境备忘：沙箱内 `crontab -l` 对本机真实 crontab 假阴性，验证 cron 状态以 hermes cron 注册表（jobs.json 的 last_run_at，ISO 字符串）+ **profile 路径 ticker**（~/.hermes/profiles/linsai/cron/ticker_heartbeat，勿用根目录 ~/.hermes/cron/ticker——默认 profile 网关的，08-17 08h 曾造成假恢复信号）+ profile logs/gateway.log 新增行 + output/ 目录增量为准；lifecycle_monitor 实际参数为 --dry-run（非 --check）；_lifecycle.json 的 proposals 为 dict、pipeline_jobs 为 **list**（job_id 在 job dict 顶层字段）；沙箱 kill 用户进程会被人工接管，进程级修复以报告移交为宜；kb_health.get_kb_health 独立导入必炸（门面注入设计，非缺陷）；git log --since 用本地时区（+0800）；macOS zsh 无 timeout 命令；cron jobs.json 中 schedule 字段有 dict/str 双形态，解析需兼容
