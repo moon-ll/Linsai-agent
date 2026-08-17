@@ -1,8 +1,8 @@
 ---
-title: "Q2（科学问题）**：以 CDW（TiSe₂、1T-TaS₂）为代表的中等关联材料中，在何种 Hubbard-$U/W$ 与温度区间，HHG 偏振响应仍保留可独立辨识的 $\Omega(\mathbf{k})$、$g(\mathbf{k})$ 信息？超过该边界时，多体效应（CDW 序参量、doublon-holon 复合、带折叠）使 $\Omega$、$g$ 的辨识不可分离。"
+title: "因此，无论是\\"量子光场改变驱动统计\\"还是\\"强关联改变响应机制\\"，这两条路径各自已被独立证明是 HHG 反演的不可回避边界；但两者的联合检验仍付阙如**——这正是 Q1 与 Q2 共同要回答的物理问题。"
 type: "proposal"
 created: "2026-08-02T06:02:42Z"
-updated: "2026-08-16T03:37:56Z"
+updated: "2026-08-17T10:43:17Z"
 tags: []
 related: []
 source_raw: ""
@@ -10,21 +10,21 @@ growth_stage: "growing"
 confidence: 1.0
 project: ["NSFC-强场超快"]
 proposal_id: "general-quantum-geometry-inversion-20260726"
-status: "optimizing"
+status: "pending_review"
 project_type: "general"
-optimization_rounds: 0
-last_score: 0.77
-synced_at: "2026-08-16T03:37:56Z"
+optimization_rounds: 1
+last_score: 0.7
+synced_at: "2026-08-17T10:43:17Z"
 ---
 
-# Q2（科学问题）**：以 CDW（TiSe₂、1T-TaS₂）为代表的中等关联材料中，在何种 Hubbard-$U/W$ 与温度区间，HHG 偏振响应仍保留可独立辨识的 $\Omega(\mathbf{k})$、$g(\mathbf{k})$ 信息？超过该边界时，多体效应（CDW 序参量、doublon-holon 复合、带折叠）使 $\Omega$、$g$ 的辨识不可分离。
+# 因此，无论是"量子光场改变驱动统计"还是"强关联改变响应机制"，这两条路径各自已被独立证明是 HHG 反演的不可回避边界；但两者的联合检验仍付阙如**——这正是 Q1 与 Q2 共同要回答的物理问题。
 
 **课题 ID**：`general-quantum-geometry-inversion-20260726`  
 **项目类型**：general  
-**生命周期状态**：优化中  
-**优化轮次**：0  
-**当前分数**：0.77  
-**同步时间**：2026-08-16
+**生命周期状态**：待校验  
+**优化轮次**：1  
+**当前分数**：0.70  
+**同步时间**：2026-08-17
 
 ## 核心问题
 
@@ -43,17 +43,17 @@ synced_at: "2026-08-16T03:37:56Z"
 
 ## 关键产物
 
-- [proposal-brief](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/00_proposal-brief.md)
-- [question-framework](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/03_question/question-framework.md)
-- [method-manual](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/03_method/method-manual.md)
-- [reading-notes](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/02_literature/reading-notes.md)
-- [proposal-draft](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft.md)
+- [proposal-brief](research_proposals/pending_review/general-quantum-geometry-inversion-20260726/00_proposal-brief.md)
+- [question-framework](research_proposals/pending_review/general-quantum-geometry-inversion-20260726/03_question/question-framework.md)
+- [method-manual](research_proposals/pending_review/general-quantum-geometry-inversion-20260726/03_method/method-manual.md)
+- [reading-notes](research_proposals/pending_review/general-quantum-geometry-inversion-20260726/02_literature/reading-notes.md)
+- [proposal-draft](research_proposals/pending_review/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft.md)
 
 ## 状态说明
 
-- 处于 **优化中** 阶段
-- 最后得分：0.77
-- 累计对抗轮次：0
+- 处于 **待校验** 阶段
+- 最后得分：0.70
+- 累计对抗轮次：1
 
 <!-- linsai-wikilinks -->
 ## 关联概念

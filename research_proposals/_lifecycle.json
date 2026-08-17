@@ -1,14 +1,14 @@
 {
   "proposals": {
     "general-quantum-geometry-inversion-20260726": {
-      "status": "optimizing",
+      "status": "pending_review",
       "project_type": "general",
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-14T16:00:52Z",
-      "optimization_rounds": 0,
-      "last_score": 0.77,
+      "updated_at": "2026-08-17T10:43:17Z",
+      "optimization_rounds": 1,
+      "last_score": 0.7,
       "score_history": [
         {
           "round": 1,
@@ -496,6 +496,20 @@
           "issues_count": 14,
           "high_issues": 6,
           "at": "2026-08-13T12:00:45Z"
+        },
+        {
+          "round": 1,
+          "score": 0.7,
+          "dim_scores": {
+            "rigor": 0.62,
+            "completeness": 0.78
+          },
+          "weakest_dim": "rigor",
+          "focus_section": "references",
+          "section_passed": false,
+          "issues_count": 15,
+          "high_issues": 4,
+          "at": "2026-08-17T10:38:16Z"
         }
       ],
       "human_feedback_count": 0,
@@ -561,19 +575,24 @@
           "to": "optimizing",
           "at": "2026-08-12T10:50:57Z",
           "reason": ""
+        },
+        {
+          "from": "optimizing",
+          "to": "pending_review",
+          "at": "2026-08-17T10:43:17Z",
+          "reason": "连续3轮质量下降，暂停自动优化"
         }
       ],
       "last_dim_scores": {
-        "innovation": 0.82,
-        "feasibility": 0.8,
-        "rigor": 0.7,
-        "expression": 0.68
+        "rigor": 0.62,
+        "completeness": 0.78
       },
       "section_passes": {
         "rationale": true,
         "content": true,
         "scheme": true,
-        "full_review": false
+        "full_review": false,
+        "references": false
       },
       "worker_minute": 47,
       "monitor_history": [
@@ -756,12 +775,39 @@
           "overall_assessment": "本轮聚焦参考文献检验。writer 响应 critic P0 列表中的高优项（[17][18] 作者补全 + [28] PINN 原始论文 + arXiv DOI 字段统一），修改有实质内容。critic 报告本身基于 r7 旧版本，数字滞后于实际修改；其问题识别与评分 0.86 与报告内容大体一致，未见双方串通放水。NEwwave 标准 P0 闭环采用诚实处置（不杜撰文献），符合科研诚信但应在下一轮明确标注。申请书在 NSFC 面上项目 monitor 维度整体达标（综合 0.88），超过 0.80 质量门槛且无 high 级未修复问题。建议下一轮聚焦：(a) [29] 偏离 NEwwave 要求的相关性弱化说明，(b) 17 条预印本的发表状态联网核实计划，(c) 申请书中 17/29 = 58.6% 预印本占比的最终评估。",
           "high_issues_after": 2,
           "at": "2026-08-12T10:47:27Z"
+        },
+        {
+          "round": 1,
+          "section_key": "monitor",
+          "proposal_score_before": 0.0,
+          "proposal_score_after": 0.7,
+          "monitor_independent_score": 0.62,
+          "writer_delta": -12.0,
+          "critic_delta": -10.5,
+          "local_writer_score": 84.49999999999999,
+          "local_critic_score": 65.97999999999999,
+          "writer_prohibitions": [
+            "writer 表面修改——把 [30]–[41] 从附录整合入主表但正文无一处嵌入，制造'已完成引文体系'的虚假完成度",
+            "writer 未实质修复 critical 级 [2] Luu 2018 在正文零引用",
+            "writer 未实质修复 high 级 Wigner/Lvovsky 量子光学基础文献引用",
+            "writer 对 medium 级 [5,12] 引文错配、Hubbard-tdDMFT 文献缺位、41 条总数超上限等问题未触动"
+          ],
+          "critic_prohibitions": [
+            "critic completeness=0.78 偏高——按报告内 3 high 仍存的客观事实，completeness 应低于 0.70",
+            "critic 综合 0.70 偏高——按 NSFC general 质量门槛 max_high_issues=0 的硬性条件，当前状态仍未达标",
+            "critic 漏报 writer 把 [30]–[41] 整合入主表但正文仍零引用所制造的'虚假完成度'问题"
+          ],
+          "collusion_risk": "medium",
+          "negative_feedback": true,
+          "overall_assessment": "本轮为表面修改 + 评分虚高的典型串通模式。writer 把 [30]–[41] 整合入 references.md 主表（形式完整），但正文（rationale.md/content.md/scheme.md）一处 `[2]/[30]/[32]/[33]/[37]/[40]/[41]` 都未出现，1 个 critical + 3 个 high + 4 个 medium 问题中仅 [26] 标注矛盾与 [14][17][18] 元数据补全属于真实修复。critic 给 rigor=0.62 / completeness=0.78 / 综合=0.70 相比报告中 3 high 仍存的客观事实偏高——按 NSFC general 质量门槛（max_high_issues=0），综合应低于 0.65。独立性评估：本申请书综合 0.62（rigor 0.52 / completeness 0.65）较 critic 低 0.08。下一轮 writer 必须：(1) 在正文（rationale.md §1.2 量子度规段）补引 [2] Luu 2018 与 [30] Berry 1984、[40",
+          "high_issues_after": 11,
+          "at": "2026-08-17T10:43:17Z"
         }
       ],
       "negative_feedback_alert": false,
-      "last_monitor_at": "2026-08-12T10:47:27Z",
-      "last_monitor_score": 0.88,
-      "last_monitor_assessment": "本轮聚焦参考文献检验。writer 响应 critic P0 列表中的高优项（[17][18] 作者补全 + [28] PINN 原始论文 + arXiv DOI 字段统一），修改有实质内容。critic 报告本身基于 r7 旧版本，数字滞后于实际修改；其问题识别与评分 0.86 与报告内容大体一致，未见双方串通放水。NEwwave 标准 P0 闭环采用诚实处置（不杜撰文献），符合科研诚信但应在下一轮明确标注。申请书在 NSFC 面上项目 monitor 维度整体达标（综合 0.88），超过 0.80 质量门槛且无 high 级未修复问题。建议下一轮聚焦：(a) [29] 偏离 NEwwave",
+      "last_monitor_at": "2026-08-17T10:43:17Z",
+      "last_monitor_score": 0.62,
+      "last_monitor_assessment": "本轮为表面修改 + 评分虚高的典型串通模式。writer 把 [30]–[41] 整合入 references.md 主表（形式完整），但正文（rationale.md/content.md/scheme.md）一处 `[2]/[30]/[32]/[33]/[37]/[40]/[41]` 都未出现，1 个 critical + 3 个 high + 4 个 medium 问题中仅 [26] 标注矛盾与 [14][17][18] 元数据补全属于真实修复。critic 给 rigor=0.62 / completeness=0.78 / 综合=0.70 相比报告中 3 high 仍存的客观事实偏高",
       "initialized_at": "2026-08-12T10:50:57Z",
       "missing_sections": [],
       "negative_feedback_reasons": [],
@@ -1216,14 +1262,14 @@
           "step": "critic",
           "section_key": "references",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-full_review-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-17T10:30:12Z",
+          "finished_at": "2026-08-17T10:32:58Z",
           "last_error": "",
           "cron_job_id": "",
           "error_history": [
@@ -1241,14 +1287,14 @@
           "step": "writer",
           "section_key": "references",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-references-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-17T10:35:13Z",
+          "finished_at": "2026-08-17T10:38:16Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1258,14 +1304,14 @@
           "step": "monitor",
           "section_key": "monitor",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-references-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-17T10:40:13Z",
+          "finished_at": "2026-08-17T10:43:17Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1713,7 +1759,29 @@
       "idea_review_score": 0.8,
       "idea_review_issues": "# 研究设想质量评审报告（独立第二轮）\n\n**课题**: general-quantum-geometry-inversion-20260726\n**评审对象**: 00_research_idea.md（当前版本，最后更新 2026-08-13）\n**评审日期**: 2026-08-13\n**评审轮次**: r1-a2（独立第二轮，不依赖 r1-a1 结论）\n**评审者角色**: NSFC 面上项目函评专家视角\n\n---\n\n## 0. 前置说明\n\n本轮为对 00_research_idea.md 当前版本的独立评审。r1-a1 评审时该文件为空白模板，现已填充为完整的 139 行研究设想文档（~17KB），涵盖研究背景、现存空白、研究内容与方案、技术路线、创新点、来源可靠性六个部分。本轮仅评审该文件本身的内容质量，不交叉对照 03/04 阶段的其他文件。\n\n---\n\n## 1. 科学问题清晰度（clarity）\n\n### 评分：0.85\n\n**核心科学问题概括（可一句话复述）**：在量子光场（BSV）驱动统计与中等关联材料（CDW）电子结构两个边界条件同时被突破后，HHG 谱能否独立",
       "idea_review_at": "2026-08-13T02:01:55Z",
-      "idea_review_passed": true
+      "idea_review_passed": true,
+      "auto_rollback_count": 1,
+      "rolled_back_to_round": 6,
+      "rollback_history": [
+        {
+          "at": "2026-08-17T10:43:17Z",
+          "restored_round": 6,
+          "best_score": 0.86,
+          "from_score": 0.7,
+          "auto": true
+        }
+      ],
+      "quality_warning": "⚠ 质量下降: 连续3轮分数下降（0.86→0.70）。建议人工干预检查优化方向。",
+      "review_dossier": {
+        "generated_at": "2026-08-17T10:43:17Z",
+        "pre_review_verdict": "attention",
+        "pre_review_reasons": [
+          "带质量警告晋级：⚠ 质量下降: 连续3轮分数下降（0.86→0.70）。建议人工干预检查优化方向。"
+        ],
+        "last_score": 0.62,
+        "can_adopt": false,
+        "path": "/Users/ll/Desktop/LinSai-CoPilot/research_proposals/pending_review/general-quantum-geometry-inversion-20260726/05_review/review-dossier.md"
+      }
     },
     "key-transient-quantum-phase-optical-20260726": {
       "status": "optimizing",
@@ -1721,7 +1789,7 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-14T16:00:52Z",
+      "updated_at": "2026-08-17T10:45:14Z",
       "optimization_rounds": 3,
       "last_score": 0.81,
       "score_history": [
@@ -3417,13 +3485,13 @@
           "step": "critic",
           "section_key": "scheme",
           "round": 4,
-          "status": "pending",
+          "status": "running",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r4-content-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
+          "started_at": "2026-08-17T10:45:14Z",
           "finished_at": "",
           "last_error": "",
           "cron_job_id": "",
@@ -10873,12 +10941,12 @@
       ]
     },
     "general-berry-mnps3-rashba-20260816": {
-      "status": "drafts",
+      "status": "optimizing",
       "project_type": "general",
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控",
       "created_at": "2026-08-16T03:49:25Z",
-      "updated_at": "2026-08-17T09:26:47Z",
+      "updated_at": "2026-08-17T10:44:29Z",
       "optimization_rounds": 0,
       "last_score": 0.0,
       "score_history": [],
@@ -10895,6 +10963,12 @@
           "at": "2026-08-17T09:26:47Z",
           "event": "direction_correction",
           "detail": "人工方向修正：准静态滑移器件化 → 强场超快操控与HHG/超快光谱测量（用户指示，双范式四问）"
+        },
+        {
+          "from": "drafts",
+          "to": "optimizing",
+          "at": "2026-08-17T10:44:28Z",
+          "reason": ""
         }
       ],
       "monitor_history": [],
@@ -10911,8 +10985,16 @@
         "feasibility": "理论导向",
         "recommendation": "activate",
         "recommendation_reason": "最相似课题相似度 0.01 < 0.35，新颖性达标"
-      }
+      },
+      "initialized_at": "2026-08-17T10:44:29Z",
+      "missing_sections": [
+        "rationale",
+        "content",
+        "scheme",
+        "full_review",
+        "references"
+      ]
     }
   },
-  "updated_at": "2026-08-17T05:13:32Z"
+  "updated_at": "2026-08-17T10:45:14Z"
 }
