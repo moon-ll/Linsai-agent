@@ -430,9 +430,16 @@ def _new_gates(
         cluster.get("title", ""), cluster.get("summary", ""),
         " ".join(cluster.get("keywords", [])),
     ])
-    from .sources import scope_hit
+    from .sources import scope_hit, core_theme_hit
     if scope_hit(cluster_text, scope_terms) is None:
         return False, "簇主题与方向词表无交集"
+    # v6.9.22: 核心范式强制关——开新课题必须命中"强场操控"或
+    # "HHG/超快光谱测量"范式词。仅命中材料/物态语境词（自旋/能谷/
+    # 激子/交变磁等）的纯静态凝聚态簇不够格注册新课题，只能通过
+    # merge/expansion 注入现有课题。08-16 实测：berry-mnps3 准静态
+    # 滑移器件化课题即从此漏洞注册。
+    if core_theme_hit(cluster_text) is None:
+        return False, "仅语境词命中，未命中强场操控/超快测量核心范式"
     # 与现有课题的重叠检查（hold 线对齐 idea_generator 口径）
     try:
         from idea_generator import IDEA_HOLD_SIMILARITY
@@ -571,6 +578,12 @@ def _llm_arbitrate_cluster(
         "expansion=主题相邻应把文献挂为补充信息源；new=值得开创新研究课题"
         "（将注册为新课题并进入人工立项队列，需具备明确科学问题）；"
         "defer=非研究内容（系统运维/流程记录）或科学含量不足，不应路由。"
+        "【核心主题约束（v6.9.22）】课题组核心范式是强场超快光学："
+        "要么通过强场/THz 光场实现物性操控（强场驱动、Floquet 工程），"
+        "要么用高次谐波光谱/超快光谱实现超快测量（HHG 谱学、泵浦-探测）。"
+        "若知识簇不含任何强场操控或超快测量维度（纯准静态凝聚态物性、"
+        "器件工程、静态第一性原理计算），不得判 new——可判 defer（主题"
+        "不对齐，继续积累等待范式嫁接）或 merge/expansion（注入现有课题）。"
         '输出 JSON：{"action": "merge|expansion|new|defer", '
         '"target_id": "课题id或null", "reason": "一句话"}。'
     )

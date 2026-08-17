@@ -10878,7 +10878,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控",
       "created_at": "2026-08-16T03:49:25Z",
-      "updated_at": "2026-08-16T03:49:25Z",
+      "updated_at": "2026-08-17T09:26:47Z",
       "optimization_rounds": 0,
       "last_score": 0.0,
       "score_history": [],
@@ -10890,6 +10890,11 @@
           "to": "drafts",
           "at": "2026-08-16T03:49:25Z",
           "reason": "注册新 proposal"
+        },
+        {
+          "at": "2026-08-17T09:26:47Z",
+          "event": "direction_correction",
+          "detail": "人工方向修正：准静态滑移器件化 → 强场超快操控与HHG/超快光谱测量（用户指示，双范式四问）"
         }
       ],
       "monitor_history": [],

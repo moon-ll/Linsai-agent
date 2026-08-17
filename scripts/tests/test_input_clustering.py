@@ -876,6 +876,63 @@ class InputClusteringTests(TestSuite):
         routes = json.loads((WEEKEND_INPUT_DIR / f"routes-{input_jobs.now_utc()[:10]}.json").read_text(encoding="utf-8"))["routes"]
         self.assert_eq(routes[0]["action"], "defer", "运维簇应 defer（即使 LLM 判 new）")
 
+    def _test_new_gate_requires_core_theme(self):
+        """v6.9.22 核心范式强制关：纯静态凝聚态簇不开新课题。
+
+        背景：08-16 注册的 berry-mnps3 课题（准静态滑移器件化，无强场/
+        超快维度）即从此漏洞通过方向关。修复后 new 门槛要求簇文本命中
+        "强场操控"或"HHG/超快光谱测量"范式词，仅命中材料/物态语境词
+        （自旋/能谷/交变磁）不够格，只能 merge/expansion 或 defer。
+        """
+        from weekend_pipeline import sources as src
+        from weekend_pipeline import input_jobs
+
+        # core_theme_hit 单元判据
+        self.assert_true(src.core_theme_hit("strong-field high harmonic generation in solids") is not None,
+                         "强场 HHG 应命中核心范式")
+        self.assert_true(src.core_theme_hit("time-resolved magnon dynamics with pump-probe") is not None,
+                         "时间分辨泵浦探测应命中核心范式")
+        self.assert_true(src.core_theme_hit("强场太赫兹驱动层间滑移切换磁序") is not None,
+                         "强场 THz 操控应命中核心范式")
+        self.assert_true(src.core_theme_hit("field-free spin orbit torque switching") is None,
+                         "field-free 静态自旋学不应命中")
+        self.assert_true(src.core_theme_hit("altermagnetic spin splitting first principles") is None,
+                         "纯静态第一性原理不应命中")
+
+        # _new_gates：纯静态簇拒 new（berry-mnps3 复现）
+        static_cluster = {
+            "cluster_id": "cl_static", "title": "二维方形晶格交变磁性自旋-能谷耦合与滑移调控",
+            "keywords": ["mnps3", "rashba", "berry curvature", "交变磁性", "自旋能谷耦合", "滑移工程"],
+            "summary": "基于第一性原理计算与自旋-Laue对称性分析，研究层间滑移对非相对论性"
+                       "自旋劈裂的可逆调控，为自旋-能谷多功能器件提供对称性设计原理。",
+            "member_source_ids": ["paper:a1", "paper:a2", "paper:a3"],
+            "distilled_by": "llm",
+        }
+        ok, reason = input_jobs._new_gates(static_cluster, [], ["交变磁", "自旋", "能谷", "berry"], 2)
+        self.assert_true(not ok, "纯静态凝聚态簇不应过 new 门槛")
+        self.assert_true("核心范式" in reason, f"拒因应指向核心范式: {reason}")
+
+        # 同簇嫁接强场超快维度后方向关放行
+        sf_cluster = dict(static_cluster)
+        sf_cluster["title"] = "强场太赫兹驱动滑移模式切换交变磁自旋劈裂与高次谐波读出"
+        sf_cluster["keywords"] = static_cluster["keywords"] + ["强场", "thz", "pump-probe", "高次谐波"]
+        ok2, reason2 = input_jobs._new_gates(sf_cluster, [], ["交变磁", "自旋", "能谷", "强场", "高次谐波"], 2)
+        self.assert_true(ok2, f"嫁接强场超快维度后应过五关: {reason2}")
+
+        # load_scope_terms 不再从课题标题自动补词（同义反复漂移引擎移除）
+        orig_path = src.SCOPE_TERMS_PATH
+        try:
+            src.SCOPE_TERMS_PATH = self.tmp_root / "memory" / "weekend-input" / "scope-terms.json"
+            self._seed_lifecycle({
+                "general-weird-20260101": {"status": "optimizing",
+                    "title": "weirdtopicxyz static device engineering", "text": ""},
+            })
+            terms = src.load_scope_terms(persist=False)
+            self.assert_true("weirdtopicxyz" not in terms,
+                             "课题标题词不应自动进入方向词表（v6.9.22 移除同义反复扩充）")
+        finally:
+            src.SCOPE_TERMS_PATH = orig_path
+
     def run_tests(self):
         self._test_distilled_papers_excluded()
         self._test_source_tiers_assigned()
@@ -905,3 +962,4 @@ class InputClusteringTests(TestSuite):
         self._test_enrich_heading_carries_cluster_tag()
         self._test_register_from_idea_writes_dossier()
         self._test_ops_cluster_routes_defer()
+        self._test_new_gate_requires_core_theme()

@@ -61,13 +61,52 @@ _SCOPE_STOPWORDS = {
     "driven", "based", "probe", "readout", "optical", "inversion",
 }
 
+# v6.9.22: 核心范式词表——"强场超快光学"的两条研究范式标志词。
+# 背景：08-16 注册的 berry-mnps3 课题跑偏（纯准静态凝聚态：第一性
+# 原理 + 滑移工程器件化，无任何强场/超快维度），用户指示纠偏方向：
+# 这一族课题要么通过强场实现操控，要么用 HHG/超快光谱实现超快测量。
+# 旧方向关只查宽词表（"自旋/能谷/激子"单命中即过），材料/物态词
+# 与范式词不分层，导致纯静态凝聚态簇可开新课题。修复：new 路由
+# 门槛强制命中本表（merge/expansion 注入现有课题不受影响——材料
+# 语境词仍由 SCOPE_SEED_TERMS 宽表覆盖采集与挂载场景）。
+CORE_THEME_TERMS = [
+    # —— 范式 A：强场操控（光场作为超快旋钮）——
+    "强场", "超强激光", "强激光", "太赫兹", "thz", "terahertz",
+    "floquet", "缀饰", "载波包络", "carrier-envelope", "电离", "ionization",
+    "隧穿", "tunneling", "波形", "waveform", "petahertz",
+    "single-cycle", "few-cycle", "sub-cycle", "亚周期",
+    # —— 范式 B：HHG/超快光谱测量（谱学作为超快探针）——
+    "高次谐波", "谐波产生", "hhg", "high harmonic", "harmonic generation",
+    "超快", "ultrafast", "阿秒", "attosecond", "飞秒", "femtosecond",
+    "皮秒", "picosecond", "瞬态", "transient", "泵浦", "pump-probe", "pump probe",
+    "时间分辨", "time-resolved", "超快光谱", "瞬态吸收", "transient absorption",
+    "瞬态反射", "fieldoscopy", "极紫外", "xuv", "extreme ultraviolet",
+]
+
+
+def core_theme_hit(text: str) -> Optional[str]:
+    """检查文本是否命中核心范式词（强场操控或 HHG/超快光谱测量）。
+
+    v6.9.22 新增：与 scope_hit（宽词表，采集过滤用）分层——本函数
+    是 new 路由的硬门槛，仅命中材料/物态语境词（自旋/能谷/激子等）
+    不算对齐核心主题。匹配归一化逻辑与 scope_hit 一致（连字符归一、
+    左词界 + 后缀延展、中英子串）。
+    """
+    return scope_hit(text, CORE_THEME_TERMS)
+
 
 def load_scope_terms(persist: bool = True) -> List[str]:
-    """加载方向词表（文件优先；不存在则从种子词 + 活跃课题标题生成并落盘）。
+    """加载方向词表（文件优先；不存在则从种子词生成并落盘）。
 
     词表持久化在 memory/weekend-input/scope-terms.json，用户可手工编辑
     调整口径；文件存在即以文件为准（不再自动重建，防止覆盖人工调整）。
     persist=False 供 dry-run 使用：只生成不落盘（零落盘不变式）。
+
+    v6.9.22: 移除"从活跃课题标题自动补词"——该机制是同义反复漂移
+    引擎（课题标题词进词表 → 新簇命中这些词算方向相关 → 注册新课题
+    → 新课题标题再扩词表），方向会越漂越宽且永不可逆（文件为准语义
+    下污染词永久 baked in）。方向扩张只应通过人工编辑词表或升级
+    SCOPE_SEED_TERMS 实现。
     """
     if SCOPE_TERMS_PATH.exists():
         data = load_json(SCOPE_TERMS_PATH, default={})
@@ -76,22 +115,13 @@ def load_scope_terms(persist: bool = True) -> List[str]:
             return [str(t).lower() for t in terms]
 
     terms = [t.lower() for t in SCOPE_SEED_TERMS if t]
-    # 从活跃课题标题补充方向词（研究管线数据域直读，避免交叉导入）
-    try:
-        lc_data = load_json(PROJECT_ROOT / "research_proposals" / "_lifecycle.json", default={})
-        for p in (lc_data.get("proposals") or {}).values():
-            for w in re.findall(r"[a-zA-Z]{4,}", p.get("title", "").lower()):
-                if w not in _SCOPE_STOPWORDS and w not in terms:
-                    terms.append(w)
-    except Exception:
-        pass
 
     if persist:
         SCOPE_TERMS_PATH.parent.mkdir(parents=True, exist_ok=True)
         save_json(SCOPE_TERMS_PATH, {
             "terms": terms,
             "generated_at": now_utc(),
-            "source": "seed+proposal-titles",
+            "source": "seed",
             "note": "方向相关性过滤词表，可手工增删；文件存在即以此为准",
         })
     return terms
