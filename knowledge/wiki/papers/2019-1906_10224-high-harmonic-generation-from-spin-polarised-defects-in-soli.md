@@ -2,9 +2,9 @@
 title: "论文精读：自旋极化缺陷的高次谐波产生（h-BN 空位的 TDDFT 研究）"
 type: "papers"
 created: "2026-08-15T23:16:48Z"
-updated: "2026-08-15T23:16:48Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["固体HHG", "TDDFT", "缺陷工程", "自旋极化", "h-BN", "二维材料", "阿秒电子动力学"]
-related: ["中红外驱动场", "固体高次谐波", "带间/带内电流", "缺陷态光谱学", "选择定则与对称性破缺"]
+related: ["中红外驱动场", "固体高次谐波", "带间/带内电流", "缺陷态光谱学", "选择定则与对称性破缺", "高次谐波产生"]
 source_raw: "2019-1906.10224-high-harmonic-generation-from-spin-polarised-defects-in-soli.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -30,4 +30,5 @@ review_status: "pending"
 - [[带间/带内电流]]
 - [[缺陷态光谱学]]
 - [[选择定则与对称性破缺]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

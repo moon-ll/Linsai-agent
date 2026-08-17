@@ -2,9 +2,9 @@
 title: "利用固体高次谐波光谱探测晶格涨落（Probing lattice fluctuations using solid-state high-harmonic spectroscopy）"
 type: "papers"
 created: "2026-08-15T22:25:15Z"
-updated: "2026-08-16T13:26:35Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["固体高次谐波", "HHG光谱学", "晶格涨落", "强场物理", "超快光学", "电子-空穴再碰撞", "结构探针", "deepxiv-论文库"]
-related: ["NSFC-强场超快", "固体HHG机制", "晶格动力学与声子", "电子-空穴动力学", "瞬态量子相光学", "谐波反演问题"]
+related: ["NSFC-强场超快", "固体HHG机制", "固体高次谐波", "晶格动力学与声子", "电子-空穴动力学", "瞬态量子相光学", "谐波反演问题"]
 source_raw: "2026-2604.10304-probing-lattice-fluctuations-using-solid-state-high-harmonic.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -64,6 +64,7 @@ review_status: "pending"
 
 - [[NSFC-强场超快]]
 - [[固体HHG机制]]
+- [[固体高次谐波]]
 - [[晶格动力学与声子]]
 - [[电子-空穴动力学]]
 - [[瞬态量子相光学]]

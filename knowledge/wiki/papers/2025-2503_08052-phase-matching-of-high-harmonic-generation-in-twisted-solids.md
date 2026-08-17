@@ -2,9 +2,9 @@
 title: "论文精读：扭转固体中高次谐波产生的相位匹配"
 type: "papers"
 created: "2026-08-15T19:39:41Z"
-updated: "2026-08-15T19:39:41Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["HHG", "相位匹配", "转角光学", "二维材料", "非线性光学", "论文精读"]
-related: ["Pancharatnam-Berry几何相位", "六方氮化硼", "准相位匹配", "固体高次谐波", "转角异质结"]
+related: ["Pancharatnam-Berry几何相位", "六方氮化硼", "准相位匹配", "固体高次谐波", "相位匹配", "转角异质结", "高次谐波产生"]
 source_raw: "2025-2503.08052-phase-matching-of-high-harmonic-generation-in-twisted-solids.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -27,5 +27,7 @@ review_status: "pending"
 - [[六方氮化硼]]
 - [[准相位匹配]]
 - [[固体高次谐波]]
+- [[相位匹配]]
 - [[转角异质结]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

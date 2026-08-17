@@ -2,9 +2,9 @@
 title: "论文精读｜强场少周期场驱动下固体带间极化的亚周期观测"
 type: "papers"
 created: "2026-08-16T14:14:01Z"
-updated: "2026-08-16T14:14:01Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["强场超快", "固体高次谐波", "带间极化", "亚周期动力学", "瞬态量子相位", "少周期脉冲"]
-related: ["半导体布洛赫方程", "固体HHG机制", "瞬态量子相位光学", "载波包络相位", "阿秒计量"]
+related: ["半导体布洛赫方程", "固体HHG机制", "相位匹配", "瞬态量子相位光学", "载波包络相位", "阿秒计量"]
 source_raw: "2025-2502.07390-subcycle-observation-of-interband-polarization-in-solids-dri.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -57,6 +57,7 @@ review_status: "pending"
 
 - [[半导体布洛赫方程]]
 - [[固体HHG机制]]
+- [[相位匹配]]
 - [[瞬态量子相位光学]]
 - [[载波包络相位]]
 - [[阿秒计量]]

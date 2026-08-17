@@ -2,9 +2,9 @@
 title: "论文精读：Frontiers of Atomic High-Harmonic Generation（原子高次谐波的前沿）"
 type: "papers"
 created: "2026-08-15T23:29:46Z"
-updated: "2026-08-16T13:26:29Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["HHG", "阿秒物理", "相位匹配", "相对论漂移", "keV-X射线", "综述精读"]
-related: ["CEP稳定", "RABBITT", "三步模型", "准相位匹配", "波形合成", "连续态-连续态跃迁", "阿秒条纹法"]
+related: ["CEP稳定", "Krausz", "RABBITT", "三步模型", "准相位匹配", "波形合成", "相位匹配", "连续态-连续态跃迁", "阿秒条纹法"]
 source_raw: "2012-1201.5094-frontiers-of-atomic-high-harmonic-generation.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -67,10 +67,12 @@ review_status: "pending"
 ## 关联概念
 
 - [[CEP稳定]]
+- [[Krausz]]
 - [[RABBITT]]
 - [[三步模型]]
 - [[准相位匹配]]
 - [[波形合成]]
+- [[相位匹配]]
 - [[连续态-连续态跃迁]]
 - [[阿秒条纹法]]
 <!-- /linsai-wikilinks -->

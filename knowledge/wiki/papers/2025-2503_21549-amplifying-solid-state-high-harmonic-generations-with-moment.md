@@ -2,9 +2,9 @@
 title: "用动量 k-gap 能带工程放大固体高次谐波产生（Pan et al., 2025, arXiv:2503.21549）"
 type: "papers"
 created: "2026-08-15T22:28:11Z"
-updated: "2026-08-15T22:28:11Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["固体HHG", "能带工程", "k-gap", "双原子晶格", "强场超快", "论文精读"]
-related: ["固体高次谐波产生", "布里渊区折叠", "电子-空穴复合", "瞬态能带调控", "超晶格"]
+related: ["Corkum", "三步模型", "固体高次谐波", "固体高次谐波产生", "布里渊区折叠", "电子-空穴复合", "瞬态能带调控", "超晶格", "高次谐波产生"]
 source_raw: "2025-2503.21549-amplifying-solid-state-high-harmonic-generations-with-moment.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -44,9 +44,13 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Corkum]]
+- [[三步模型]]
+- [[固体高次谐波]]
 - [[固体高次谐波产生]]
 - [[布里渊区折叠]]
 - [[电子-空穴复合]]
 - [[瞬态能带调控]]
 - [[超晶格]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

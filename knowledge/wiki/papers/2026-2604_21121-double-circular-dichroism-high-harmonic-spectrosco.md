@@ -2,9 +2,9 @@
 title: "双圆二色性高次谐波光谱：拓扑光电流的超快探针 —— 论文精读"
 type: "papers"
 created: "2026-08-15T19:25:11Z"
-updated: "2026-08-16T13:26:36Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["HHG光谱学", "圆二色性", "拓扑材料", "泵浦探测", "光电流", "Chern绝缘体"]
-related: ["体/边界对应", "固体高次谐波", "手性光谱学", "时间反演对称性破缺"]
+related: ["体/边界对应", "固体高次谐波", "手性光谱学", "拓扑绝缘体", "时间反演对称性破缺"]
 source_raw: "2026-2604.21121-double-circular-dichroism-high-harmonic-spectrosco.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -57,5 +57,6 @@ review_status: "pending"
 - [[体/边界对应]]
 - [[固体高次谐波]]
 - [[手性光谱学]]
+- [[拓扑绝缘体]]
 - [[时间反演对称性破缺]]
 <!-- /linsai-wikilinks -->

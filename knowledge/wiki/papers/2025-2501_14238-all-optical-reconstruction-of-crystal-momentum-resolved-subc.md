@@ -2,9 +2,9 @@
 title: "精读笔记：固体中晶体动量分辨亚周期动力学的全光重建（arXiv:2501.14238）"
 type: "papers"
 created: "2026-08-15T21:52:55Z"
-updated: "2026-08-15T21:52:55Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["固体高次谐波", "亚周期电子动力学", "量子相位检索", "全光重建", "强场超快光学", "论文精读"]
-related: ["NSFC-强场超快", "固体HHG", "晶体动量分辨", "量子相位光学读出", "阿秒动力学"]
+related: ["NSFC-强场超快", "固体HHG", "固体高次谐波", "晶体动量分辨", "相位匹配", "量子相位光学读出", "阿秒动力学"]
 source_raw: "2025-2501.14238-all-optical-reconstruction-of-crystal-momentum-resolved-subc.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -51,7 +51,9 @@ review_status: "pending"
 
 - [[NSFC-强场超快]]
 - [[固体HHG]]
+- [[固体高次谐波]]
 - [[晶体动量分辨]]
+- [[相位匹配]]
 - [[量子相位光学读出]]
 - [[阿秒动力学]]
 <!-- /linsai-wikilinks -->

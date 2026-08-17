@@ -2,9 +2,9 @@
 title: "固体高次谐波产生的倒空间轨迹视角——Li et al., PRL 2018 精读笔记"
 type: "papers"
 created: "2026-08-15T18:27:18Z"
-updated: "2026-08-16T13:26:30Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["固体高次谐波", "倒空间轨迹", "椭圆偏振依赖", "四步模型", "带间极化", "预加速"]
-related: ["三步模型", "全光能带重构", "固态阿秒物理", "电子-空穴动力学", "贝里曲率"]
+related: ["三步模型", "全光能带重构", "固体高次谐波", "固体高次谐波产生", "固态阿秒物理", "电子-空穴动力学", "贝里曲率", "高次谐波产生"]
 source_raw: "2018-1809.08109-reciprocal-space-trajectory-perspective-on-high-harmonic-gen.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -61,7 +61,10 @@ review_status: "pending"
 
 - [[三步模型]]
 - [[全光能带重构]]
+- [[固体高次谐波]]
+- [[固体高次谐波产生]]
 - [[固态阿秒物理]]
 - [[电子-空穴动力学]]
 - [[贝里曲率]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

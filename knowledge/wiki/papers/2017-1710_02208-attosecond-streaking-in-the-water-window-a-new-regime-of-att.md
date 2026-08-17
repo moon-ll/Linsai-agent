@@ -2,9 +2,9 @@
 title: "水窗阿秒条纹测量：软X射线脉冲表征的新体制（Cousin et al., 2017 精读）"
 type: "papers"
 created: "2026-08-15T23:30:42Z"
-updated: "2026-08-15T23:30:42Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["阿秒条纹", "水窗", "软X射线", "高次谐波HHG", "FROGCRAB", "孤立阿秒脉冲", "阿秒啁啾", "CEP稳定", "中红外驱动"]
-related: ["光致电离Wigner延迟", "少周期OPCPA", "振幅门控", "水窗HHG", "阿秒脉冲表征"]
+related: ["FROG", "光致电离Wigner延迟", "少周期OPCPA", "振幅门控", "水窗HHG", "阿秒脉冲表征"]
 source_raw: "2017-1710.02208-attosecond-streaking-in-the-water-window-a-new-regime-of-att.md"
 growth_stage: "growing"
 confidence: 0.75
@@ -27,6 +27,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[FROG]]
 - [[光致电离Wigner延迟]]
 - [[少周期OPCPA]]
 - [[振幅门控]]

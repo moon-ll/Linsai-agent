@@ -2,9 +2,9 @@
 title: "固体高次谐波产生（HHG）：实时TDDFT计算框架与机制分类"
 type: "concepts"
 created: "2026-08-15T17:42:03Z"
-updated: "2026-08-15T17:42:03Z"
+updated: "2026-08-17T05:19:25Z"
 tags: ["固体HHG", "实时TDDFT", "强场物理", "带内/带间机制", "贝里曲率", "偏振分辨光谱"]
-related: ["Haldane模型", "Octopus", "mBJ泛函", "三步模型", "半导体布洛赫方程", "相位匹配"]
+related: ["Haldane模型", "Octopus", "mBJ泛函", "三步模型", "半导体布洛赫方程", "固体高次谐波", "固体高次谐波产生", "相位匹配", "高次谐波产生"]
 source_raw: "solid-HHG-computation-by-material.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -40,5 +40,8 @@ review_status: "pending"
 - [[mBJ泛函]]
 - [[三步模型]]
 - [[半导体布洛赫方程]]
+- [[固体高次谐波]]
+- [[固体高次谐波产生]]
 - [[相位匹配]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

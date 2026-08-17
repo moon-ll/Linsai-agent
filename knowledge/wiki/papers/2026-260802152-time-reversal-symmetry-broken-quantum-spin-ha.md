@@ -2,9 +2,9 @@
 title: "TRS 破缺下赝自旋-1 Dirac-Rashba 系统中的量子自旋霍尔效应（论文精读）"
 type: "papers"
 created: "2026-08-16T13:24:01Z"
-updated: "2026-08-16T13:26:38Z"
+updated: "2026-08-17T05:19:30Z"
 tags: ["论文精读", "拓扑绝缘体", "量子自旋霍尔", "α-T3晶格", "Rashba自旋轨道耦合", "量子反常霍尔", "二阶拓扑绝缘体", "能谷电子学"]
-related: ["Floquet拓扑工程", "光诱导铁磁交换场", "能谷极化", "自旋-谱隙", "自旋Chern数", "赝自旋-1", "高次谐波探测拓扑相变"]
+related: ["Floquet拓扑工程", "光诱导铁磁交换场", "拓扑绝缘体", "能谷极化", "自旋-谱隙", "自旋Chern数", "赝自旋-1", "高次谐波探测拓扑相变"]
 source_raw: "2026-260802152-time-reversal-symmetry-broken-quantum-spin-ha.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -58,6 +58,7 @@ review_status: "pending"
 
 - [[Floquet拓扑工程]]
 - [[光诱导铁磁交换场]]
+- [[拓扑绝缘体]]
 - [[能谷极化]]
 - [[自旋-谱隙]]
 - [[自旋Chern数]]

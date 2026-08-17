@@ -2,9 +2,9 @@
 title: "Ultrafast Phase Retrieval in Strongly Driven Solids: From HHG Spectroscopy to Quantum Tomography（论文精读笔记）"
 type: "papers"
 created: "2026-08-15T21:50:54Z"
-updated: "2026-08-16T13:26:32Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["固体HHG", "相位检索", "量子层析", "阿秒动力学", "强场物理", "综述"]
-related: ["亚周期动力学", "全光学能带重构", "电子-空穴波包动力学", "瞬态量子相位光学", "贝里相位"]
+related: ["RABBITT", "亚周期动力学", "全光学能带重构", "电子-空穴波包动力学", "相位匹配", "瞬态量子相位光学", "贝里相位"]
 source_raw: "2025-2503.07256-ultrafast-phase-retrieval-in-strongly-driven-solids-from-hhg.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -62,9 +62,11 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[RABBITT]]
 - [[亚周期动力学]]
 - [[全光学能带重构]]
 - [[电子-空穴波包动力学]]
+- [[相位匹配]]
 - [[瞬态量子相位光学]]
 - [[贝里相位]]
 <!-- /linsai-wikilinks -->

@@ -2,9 +2,9 @@
 title: "Rainbow RABBITT 作为相干 Rabi 动力学探针——论文精读"
 type: "papers"
 created: "2026-08-15T23:42:26Z"
-updated: "2026-08-15T23:42:26Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["RABBITT", "阿秒科学", "Rabi振荡", "内边带相位", "共振缀饰", "波包干涉", "论文精读"]
-related: ["Fano共振", "rainbow-RABBITT", "光诱导结构", "缀饰态动力学", "锂原子2s→2p跃迁", "阿秒时间延迟", "阿秒脉冲串"]
+related: ["COLTRIMS", "Fano共振", "RABBITT", "VMI", "rainbow-RABBITT", "光诱导结构", "缀饰态动力学", "锂原子2s→2p跃迁", "阿秒时间延迟", "阿秒脉冲串"]
 source_raw: "2026-2606.10272-rainbow-rabbitt-as-a-probe-of-coherent-rabi-dynami.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -41,7 +41,10 @@ RABBITT 是我们看家的干涉技术：相邻两谐波各吸收/发射一个 I
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[COLTRIMS]]
 - [[Fano共振]]
+- [[RABBITT]]
+- [[VMI]]
 - [[rainbow-RABBITT]]
 - [[光诱导结构]]
 - [[缀饰态动力学]]

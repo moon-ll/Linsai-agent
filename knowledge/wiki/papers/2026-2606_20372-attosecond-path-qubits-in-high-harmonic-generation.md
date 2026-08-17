@@ -2,9 +2,9 @@
 title: "阿秒路径量子比特（APQ）论文精读：HHG 中的经典退相与迹出退相干"
 type: "papers"
 created: "2026-08-15T22:57:09Z"
-updated: "2026-08-15T22:57:09Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["HHG", "阿秒科学", "量子路径干涉", "退相干", "论文精读"]
-related: ["三步模型", "密度矩阵与纯度", "短长轨迹", "阿秒干涉测量", "非经典光产生"]
+related: ["Attosecond Path Qubits in High-Harmonic Generation: Classical Dephasing and Trace-Out Decoherence", "三步模型", "密度矩阵与纯度", "相位匹配", "短长轨迹", "阿秒干涉测量", "非经典光产生"]
 source_raw: "2026-2606.20372-attosecond-path-qubits-in-high-harmonic-generation.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -46,8 +46,10 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Attosecond Path Qubits in High-Harmonic Generation: Classical Dephasing and Trace-Out Decoherence]]
 - [[三步模型]]
 - [[密度矩阵与纯度]]
+- [[相位匹配]]
 - [[短长轨迹]]
 - [[阿秒干涉测量]]
 - [[非经典光产生]]

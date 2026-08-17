@@ -2,9 +2,9 @@
 title: "精读笔记：固体高次谐波产生的中国团队进展综述（arXiv:2411.03137）"
 type: "papers"
 created: "2026-08-15T21:50:03Z"
-updated: "2026-08-16T13:26:32Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["固体高次谐波", "综述", "强场物理", "超快光学", "量子相位测量", "精读笔记"]
-related: ["NSFC-强场超快", "带内电流", "带间极化", "瞬态量子相位光学", "谐波相位重构"]
+related: ["NSFC-强场超快", "固体高次谐波", "固体高次谐波产生", "带内电流", "带间极化", "相位匹配", "瞬态量子相位光学", "谐波相位重构", "高次谐波产生"]
 source_raw: "2024-2411.03137-review-advances-in-solid-state-high-harmonic-generation-from.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -53,8 +53,12 @@ review_status: "pending"
 ## 关联概念
 
 - [[NSFC-强场超快]]
+- [[固体高次谐波]]
+- [[固体高次谐波产生]]
 - [[带内电流]]
 - [[带间极化]]
+- [[相位匹配]]
 - [[瞬态量子相位光学]]
 - [[谐波相位重构]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

@@ -2,9 +2,9 @@
 title: "声子驱动的固体高次谐波退相干：精读笔记"
 type: "papers"
 created: "2026-08-15T22:24:23Z"
-updated: "2026-08-16T13:26:35Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["HHG", "固体高次谐波", "声子", "退相干", "电子-声子耦合", "温度依赖", "论文精读"]
-related: ["半导体Bloch方程", "电子-声子耦合", "瞬态量子相位", "退相干时间T2"]
+related: ["三步模型", "半导体Bloch方程", "固体高次谐波", "电子-声子耦合", "瞬态量子相位", "退相干时间T2"]
 source_raw: "2026-2604.07543-phonon-driven-decoherence-of-high-harmonic-generation-in-the.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -56,7 +56,9 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[三步模型]]
 - [[半导体Bloch方程]]
+- [[固体高次谐波]]
 - [[电子-声子耦合]]
 - [[瞬态量子相位]]
 - [[退相干时间T2]]

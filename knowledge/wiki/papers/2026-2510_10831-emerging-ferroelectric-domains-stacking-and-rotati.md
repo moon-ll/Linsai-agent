@@ -2,9 +2,9 @@
 title: "堆叠序与扭转角共同决定 MoS₂ 莫尔双层铁电畴景观：MD 模拟精读"
 type: "papers"
 created: "2026-08-16T13:14:16Z"
-updated: "2026-08-16T13:26:34Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["扭转电子学", "滑移铁电", "MoS2", "莫尔超晶格", "分子动力学", "二维材料"]
-related: ["二阶谐波成像", "层间剪切声子", "强场太赫兹调控", "时间分辨泵浦探测", "滑移铁电", "莫尔超晶格"]
+related: ["二阶谐波成像", "层间剪切声子", "强场太赫兹调控", "时间分辨泵浦探测", "滑移铁电", "相位匹配", "莫尔超晶格"]
 source_raw: "2026-2510.10831-emerging-ferroelectric-domains-stacking-and-rotati.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -59,5 +59,6 @@ review_status: "pending"
 - [[强场太赫兹调控]]
 - [[时间分辨泵浦探测]]
 - [[滑移铁电]]
+- [[相位匹配]]
 - [[莫尔超晶格]]
 <!-- /linsai-wikilinks -->

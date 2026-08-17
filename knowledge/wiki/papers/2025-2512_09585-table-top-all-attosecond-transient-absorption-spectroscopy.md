@@ -2,9 +2,9 @@
 title: "桌面型全阿秒瞬态吸收光谱（AATAS）精读：Xe 中 3 fs 价态空穴振荡的分辨"
 type: "papers"
 created: "2026-08-15T19:30:56Z"
-updated: "2026-08-15T19:30:56Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["阿秒瞬态吸收光谱", "高次谐波", "全阿秒泵浦探测", "价态空穴动力学", "自旋轨道波包", "Xe", "paper精读"]
-related: ["APAPS", "ATAS", "HHG光源", "XUV-XUV pump-probe", "电子相干性", "电荷迁移"]
+related: ["APAPS", "ATAS", "HHG光源", "XUV-XUV pump-probe", "电子相干性", "电荷迁移", "瞬态吸收光谱"]
 source_raw: "2025-2512.09585-table-top-all-attosecond-transient-absorption-spectroscopy.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -50,4 +50,5 @@ review_status: "pending"
 - [[XUV-XUV pump-probe]]
 - [[电子相干性]]
 - [[电荷迁移]]
+- [[瞬态吸收光谱]]
 <!-- /linsai-wikilinks -->

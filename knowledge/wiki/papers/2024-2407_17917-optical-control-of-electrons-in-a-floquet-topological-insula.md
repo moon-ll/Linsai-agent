@@ -2,9 +2,9 @@
 title: "论文精读：Optical control of electrons in a Floquet topological insulator"
 type: "papers"
 created: "2026-08-16T14:42:33Z"
-updated: "2026-08-16T14:42:33Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["Floquet工程", "拓扑绝缘体", "trARPES", "强场超快", "相干控制", "光修饰能带"]
-related: ["Berry曲率与拓扑荷", "Floquet-Bloch能带", "Hommelhoff组", "拓扑表面态", "相干布居控制", "瞬态量子相光学操控"]
+related: ["Berry曲率与拓扑荷", "Floquet-Bloch能带", "Hommelhoff组", "Optical control of electrons in a Floquet topological insulator", "拓扑绝缘体", "拓扑表面态", "相干布居控制", "瞬态量子相光学操控"]
 source_raw: "2024-2407.17917-optical-control-of-electrons-in-a-floquet-topological-insula.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -33,6 +33,8 @@ review_status: "pending"
 - [[Berry曲率与拓扑荷]]
 - [[Floquet-Bloch能带]]
 - [[Hommelhoff组]]
+- [[Optical control of electrons in a Floquet topological insulator]]
+- [[拓扑绝缘体]]
 - [[拓扑表面态]]
 - [[相干布居控制]]
 - [[瞬态量子相光学操控]]

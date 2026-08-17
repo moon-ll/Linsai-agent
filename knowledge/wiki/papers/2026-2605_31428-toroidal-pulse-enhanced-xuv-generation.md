@@ -2,9 +2,9 @@
 title: "环形势脉冲增强XUV产生（Toroidal Pulse Enhanced XUV Generation）精读笔记"
 type: "papers"
 created: "2026-08-16T14:35:10Z"
-updated: "2026-08-16T14:35:10Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["阿秒科学", "XUV光源", "非线性汤姆逊散射", "环形势脉冲", "时空非分离场", "结构光", "强场物理"]
-related: ["两色场对称性破缺", "相对论性电子动力学", "瞬态量子相位测量", "量子几何层析", "飞行环形脉冲", "高次谐波产生HHG"]
+related: ["Corkum", "两色场对称性破缺", "相位匹配", "相对论性电子动力学", "瞬态量子相位测量", "量子几何层析", "飞行环形脉冲", "高次谐波产生", "高次谐波产生HHG"]
 source_raw: "2026-2605.31428-toroidal-pulse-enhanced-xuv-generation.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -61,10 +61,13 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Corkum]]
 - [[两色场对称性破缺]]
+- [[相位匹配]]
 - [[相对论性电子动力学]]
 - [[瞬态量子相位测量]]
 - [[量子几何层析]]
 - [[飞行环形脉冲]]
+- [[高次谐波产生]]
 - [[高次谐波产生HHG]]
 <!-- /linsai-wikilinks -->

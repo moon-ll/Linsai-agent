@@ -2,9 +2,9 @@
 title: "论文精读：Kramers-Henneberger 原子量子比特中的超快量子门操作"
 type: "papers"
 created: "2026-08-16T13:30:26Z"
-updated: "2026-08-16T13:30:26Z"
+updated: "2026-08-17T05:19:30Z"
 tags: ["论文精读", "强场物理", "KH参考系", "量子比特", "超快量子门", "修饰态", "TDSE", "阿秒操控"]
-related: ["Kramers-Henneberger stabilization", "激光修饰态", "脉冲整形与最优控制", "阿秒科学", "高次谐波产生"]
+related: ["Kramers-Henneberger stabilization", "三步模型", "激光修饰态", "脉冲整形与最优控制", "阿秒科学", "高次谐波产生"]
 source_raw: "2026-260807185-ultrafast-quantum-gate-operations-in-a-kramer.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -54,6 +54,7 @@ KH 参考系是我们强场社区的老朋友——从 Gavrila 的 stabilization
 ## 关联概念
 
 - [[Kramers-Henneberger stabilization]]
+- [[三步模型]]
 - [[激光修饰态]]
 - [[脉冲整形与最优控制]]
 - [[阿秒科学]]

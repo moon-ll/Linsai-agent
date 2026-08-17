@@ -2,9 +2,9 @@
 title: "论文精读：空心高斯光束驱动的紧凑强阿秒光源（arXiv:2507.04550）"
 type: "papers"
 created: "2026-08-15T19:06:12Z"
-updated: "2026-08-15T19:06:12Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["阿秒科学", "高次谐波", "空心高斯光束", "XUV色差", "光束整形", "论文精读"]
-related: ["HHG相位匹配", "偶极相位", "单发衍射成像", "阿秒脉冲重聚焦", "非线性XUV光谱"]
+related: ["HHG相位匹配", "偶极相位", "单发衍射成像", "相位匹配", "阿秒脉冲重聚焦", "非线性XUV光谱"]
 source_raw: "2026-2507.04550-compact-intense-attosecond-sources-driven-by-hollo.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -52,6 +52,7 @@ review_status: "pending"
 - [[HHG相位匹配]]
 - [[偶极相位]]
 - [[单发衍射成像]]
+- [[相位匹配]]
 - [[阿秒脉冲重聚焦]]
 - [[非线性XUV光谱]]
 <!-- /linsai-wikilinks -->

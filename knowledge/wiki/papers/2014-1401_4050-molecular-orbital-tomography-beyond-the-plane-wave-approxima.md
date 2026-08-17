@@ -2,9 +2,9 @@
 title: "论文精读：Molecular Orbital Tomography Beyond the Plane Wave Approximation（Li et al., PRA 2014）"
 type: "papers"
 created: "2026-08-15T23:23:52Z"
-updated: "2026-08-15T23:23:52Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["HHG", "molecular-orbital-tomography", "plane-wave-approximation", "Coulomb-continuum", "N2", "强场物理", "论文精读"]
-related: ["N2 3σg HOMO", "分子轨道层析成像", "双中心干涉", "定量再散射理论(QRS)", "强场近似(SFA)", "高次谐波产生(HHG)"]
+related: ["N2 3σg HOMO", "RABBITT", "分子轨道层析成像", "双中心干涉", "定量再散射理论(QRS)", "强场近似(SFA)", "高次谐波产生", "高次谐波产生(HHG)"]
 source_raw: "2014-1401.4050-molecular-orbital-tomography-beyond-the-plane-wave-approxima.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -48,9 +48,11 @@ review_status: "pending"
 ## 关联概念
 
 - [[N2 3σg HOMO]]
+- [[RABBITT]]
 - [[分子轨道层析成像]]
 - [[双中心干涉]]
 - [[定量再散射理论(QRS)]]
 - [[强场近似(SFA)]]
+- [[高次谐波产生]]
 - [[高次谐波产生(HHG)]]
 <!-- /linsai-wikilinks -->

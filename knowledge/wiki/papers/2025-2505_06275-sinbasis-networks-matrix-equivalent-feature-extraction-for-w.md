@@ -2,9 +2,9 @@
 title: "SinBasis Networks：面向类波光学光谱图的矩阵等价特征提取——论文精读笔记"
 type: "papers"
 created: "2026-08-15T22:00:35Z"
-updated: "2026-08-16T13:26:32Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["阿秒条纹", "神经网络", "光谱图特征提取", "相位恢复", "深度学习", "强场超快"]
-related: ["FROG-CRAB", "VTGPA", "相位恢复算法", "瞬态量子相位光学", "阿秒条纹谱重建"]
+related: ["FROG", "FROG-CRAB", "RABBITT", "VTGPA", "相位恢复算法", "瞬态量子相位光学", "阿秒条纹谱重建"]
 source_raw: "2025-2505.06275-sinbasis-networks-matrix-equivalent-feature-extraction-for-w.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -54,7 +54,9 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[FROG]]
 - [[FROG-CRAB]]
+- [[RABBITT]]
 - [[VTGPA]]
 - [[相位恢复算法]]
 - [[瞬态量子相位光学]]

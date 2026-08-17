@@ -2,9 +2,9 @@
 title: "矢量相位检索实现阿秒脉冲的线性全光表征（PRL 2011 精读）"
 type: "papers"
 created: "2026-08-15T17:56:51Z"
-updated: "2026-08-16T13:26:29Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["阿秒脉冲表征", "相位检索", "矢量相位检索", "高次谐波", "时间紧支撑", "分子对齐HHG", "线性诊断"]
-related: ["CO2高次谐波", "FROG-CRAB", "HHG", "RABBITT", "分子对齐", "相干衍射成像", "阿秒条纹相机"]
+related: ["CO2高次谐波", "FROG", "FROG-CRAB", "HHG", "RABBITT", "分子对齐", "相干衍射成像", "阿秒条纹相机"]
 source_raw: "2011-1104.5086-vectorial-phase-retrieval-for-linear-characterization-of-att.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -58,6 +58,7 @@ review_status: "pending"
 ## 关联概念
 
 - [[CO2高次谐波]]
+- [[FROG]]
 - [[FROG-CRAB]]
 - [[HHG]]
 - [[RABBITT]]

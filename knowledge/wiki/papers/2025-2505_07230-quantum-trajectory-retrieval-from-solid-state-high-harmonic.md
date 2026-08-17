@@ -2,9 +2,9 @@
 title: "Quantum trajectory retrieval from solid-state high-harmonic spectra via deep learning —— 论文精读笔记"
 type: "papers"
 created: "2026-08-15T21:47:15Z"
-updated: "2026-08-16T13:26:32Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["固体高次谐波", "量子轨迹", "深度学习", "逆向问题", "超快量子相位", "阿秒动力学", "NSFC-强场超快"]
-related: ["三步模型与轨迹分析", "带间/带内电流", "物理信息神经网络", "瞬态量子相位光学", "阿秒计量学", "高次谐波产生（HHG）"]
+related: ["RABBITT", "三步模型", "三步模型与轨迹分析", "固体高次谐波", "带间/带内电流", "物理信息神经网络", "瞬态量子相位光学", "阿秒计量学", "高次谐波产生", "高次谐波产生（HHG）"]
 source_raw: "2025-2505.07230-quantum-trajectory-retrieval-from-solid-state-high-harmonic.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -65,10 +65,14 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[RABBITT]]
+- [[三步模型]]
 - [[三步模型与轨迹分析]]
+- [[固体高次谐波]]
 - [[带间/带内电流]]
 - [[物理信息神经网络]]
 - [[瞬态量子相位光学]]
 - [[阿秒计量学]]
+- [[高次谐波产生]]
 - [[高次谐波产生（HHG）]]
 <!-- /linsai-wikilinks -->

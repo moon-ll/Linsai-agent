@@ -2,9 +2,9 @@
 title: "论文精读：高次谐波光谱探测光驱动非线性各向异性反常霍尔效应（arXiv:2112.01745）"
 type: "papers"
 created: "2026-08-16T14:21:33Z"
-updated: "2026-08-16T14:21:33Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["高次谐波", "固体HHG", "反常霍尔效应", "Berry曲率", "光驱动物态", "论文精读"]
-related: ["Berry曲率", "光驱动拓扑相变", "半导体Bloch方程", "固体高次谐波产生", "瞬态量子相位"]
+related: ["Berry曲率", "光驱动拓扑相变", "半导体Bloch方程", "固体高次谐波", "固体高次谐波产生", "相位匹配", "瞬态量子相位", "高次谐波产生"]
 source_raw: "2021-2112.01745-high-harmonic-spectroscopy-of-light-driven-nonlinear-anisotr.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -66,6 +66,9 @@ review_status: "pending"
 - [[Berry曲率]]
 - [[光驱动拓扑相变]]
 - [[半导体Bloch方程]]
+- [[固体高次谐波]]
 - [[固体高次谐波产生]]
+- [[相位匹配]]
 - [[瞬态量子相位]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

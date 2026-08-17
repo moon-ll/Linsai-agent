@@ -2,9 +2,9 @@
 title: "精读：High harmonic generation from electrons moving in topological spin textures (Ono et al., 2024)"
 type: "papers"
 created: "2026-08-16T14:43:55Z"
-updated: "2026-08-16T14:43:55Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["HHG", "Berry曲率", "拓扑自旋纹理", "斯格明子", "固体高次谐波", "量子几何", "强场超快"]
-related: ["HHG层析", "emergent规范场", "反常霍尔效应", "瞬态量子相位光学"]
+related: ["HHG层析", "High harmonic generation from electrons moving in topological spin textures", "emergent规范场", "反常霍尔效应", "瞬态量子相位光学"]
 source_raw: "2024-2405.01351-high-harmonic-generation-from-electrons-moving-in-topologica.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -32,6 +32,7 @@ review_status: "pending"
 ## 关联概念
 
 - [[HHG层析]]
+- [[High harmonic generation from electrons moving in topological spin textures]]
 - [[emergent规范场]]
 - [[反常霍尔效应]]
 - [[瞬态量子相位光学]]

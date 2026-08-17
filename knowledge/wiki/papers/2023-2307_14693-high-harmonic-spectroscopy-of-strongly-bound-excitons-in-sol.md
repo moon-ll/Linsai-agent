@@ -2,9 +2,9 @@
 title: "强束缚激子的固体高次谐波光谱——arXiv:2307.14693 精读笔记"
 type: "papers"
 created: "2026-08-15T18:29:04Z"
-updated: "2026-08-16T13:26:31Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["固体高次谐波", "激子", "强场物理", "TDHF", "高次谐波光谱", "论文精读"]
-related: ["含时哈特里-福克", "固体HHG", "泵浦-探测光谱", "激子动力学", "逆问题/信号反演"]
+related: ["High-harmonic spectroscopy of strongly bound excitons in solids", "含时哈特里-福克", "固体HHG", "固体高次谐波", "泵浦-探测光谱", "激子动力学", "逆问题/信号反演"]
 source_raw: "2023-2307.14693-high-harmonic-spectroscopy-of-strongly-bound-excitons-in-sol.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -69,8 +69,10 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[High-harmonic spectroscopy of strongly bound excitons in solids]]
 - [[含时哈特里-福克]]
 - [[固体HHG]]
+- [[固体高次谐波]]
 - [[泵浦-探测光谱]]
 - [[激子动力学]]
 - [[逆问题/信号反演]]

@@ -2,9 +2,9 @@
 title: "Self-attention enabled quantum path analysis of high-harmonic generation in solids（精读笔记）"
 type: "papers"
 created: "2026-08-15T22:01:22Z"
-updated: "2026-08-15T22:01:22Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["固体HHG", "量子路径分析", "自注意力", "Transformer", "带间-带内解耦", "机器学习"]
-related: ["NSFC-强场超快", "半导体Bloch方程", "时频分析", "瞬态量子相位", "量子轨道理论", "高次谐波产生"]
+related: ["Corkum", "NSFC-强场超快", "Self-attention enabled quantum path analysis of high-harmonic generation in solids", "三步模型", "半导体Bloch方程", "时频分析", "相位匹配", "瞬态量子相位", "量子轨道理论", "高次谐波产生"]
 source_raw: "2025-2510.12443-self-attention-enabled-quantum-path-analysis-of-high-harmoni.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -42,9 +42,13 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Corkum]]
 - [[NSFC-强场超快]]
+- [[Self-attention enabled quantum path analysis of high-harmonic generation in solids]]
+- [[三步模型]]
 - [[半导体Bloch方程]]
 - [[时频分析]]
+- [[相位匹配]]
 - [[瞬态量子相位]]
 - [[量子轨道理论]]
 - [[高次谐波产生]]

@@ -4267,7 +4267,7 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-14T22:00:47Z",
+      "updated_at": "2026-08-17T05:13:32Z",
       "optimization_rounds": 7,
       "last_score": 0.79,
       "score_history": [
@@ -6232,15 +6232,15 @@
           "step": "writer",
           "section_key": "full_review",
           "round": 8,
-          "status": "failed",
+          "status": "pending",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r8-full_review-critic"
           ],
-          "attempts": 3,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-14T14:10:34Z",
-          "finished_at": "2026-08-14T14:30:34Z",
-          "last_error": "超时(1200s)",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": "",
           "error_history": [
             {
@@ -6262,9 +6262,15 @@
               "at": "2026-08-14T14:10:34Z",
               "error": "超时(1200s)",
               "attempts": 1
+            },
+            {
+              "at": "2026-08-17T05:13:32Z",
+              "error": "自动解锁(v6.8.54): 双上限耗尽且失败超24h，重置重跑（第1次/上限1）",
+              "attempts": 3
             }
           ],
-          "repair_attempts": 4
+          "repair_attempts": 4,
+          "auto_unlock_count": 1
         },
         {
           "job_id": "general-moire-strong-field-probe-20260726-r8-references-critic",
@@ -9215,7 +9221,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-14T22:00:47Z",
+      "updated_at": "2026-08-17T05:13:32Z",
       "optimization_rounds": 0,
       "last_score": 0.74,
       "score_history": [
@@ -10451,15 +10457,15 @@
           "step": "critic",
           "section_key": "references",
           "round": 1,
-          "status": "failed",
+          "status": "pending",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r1-full_review-writer"
           ],
-          "attempts": 3,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-14T12:15:15Z",
-          "finished_at": "2026-08-14T12:25:15Z",
-          "last_error": "超时(600s)",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": "",
           "error_history": [
             {
@@ -10471,9 +10477,15 @@
               "at": "2026-08-14T12:15:15Z",
               "error": "超时(600s)",
               "attempts": 1
+            },
+            {
+              "at": "2026-08-17T05:13:32Z",
+              "error": "自动解锁(v6.8.54): 双上限耗尽且失败超24h，重置重跑（第1次/上限1）",
+              "attempts": 3
             }
           ],
-          "repair_attempts": 3
+          "repair_attempts": 3,
+          "auto_unlock_count": 1
         },
         {
           "job_id": "general-order-parameter-ultrafast-readout-20260727-r1-references-writer",
@@ -10897,5 +10909,5 @@
       }
     }
   },
-  "updated_at": "2026-08-16T03:51:56Z"
+  "updated_at": "2026-08-17T05:13:32Z"
 }

@@ -2,9 +2,9 @@
 title: "明亮量子光的阿秒计量（Attosecond metrology of bright quantum light）——论文精读"
 type: "papers"
 created: "2026-08-15T21:40:43Z"
-updated: "2026-08-15T21:40:43Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["阿秒条纹", "量子光学", "压缩态", "量子态层析", "阿秒计量", "论文精读"]
-related: ["attosecond-streaking", "general-quantum-geometry-inversion", "homodyne-tomography", "squeezed-states", "高次谐波HHG"]
+related: ["Attosecond metrology of bright quantum light", "RABBITT", "attosecond-streaking", "general-quantum-geometry-inversion", "homodyne-tomography", "squeezed-states", "高次谐波HHG"]
 source_raw: "2026-2607.06395-attosecond-metrology-of-bright-quantum-light.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -34,6 +34,8 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Attosecond metrology of bright quantum light]]
+- [[RABBITT]]
 - [[attosecond-streaking]]
 - [[general-quantum-geometry-inversion]]
 - [[homodyne-tomography]]

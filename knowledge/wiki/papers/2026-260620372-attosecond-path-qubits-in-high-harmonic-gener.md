@@ -2,9 +2,9 @@
 title: "阿秒路径量子比特：HHG中的经典退相与部分迹退相（论文精读）"
 type: "papers"
 created: "2026-08-15T20:48:12Z"
-updated: "2026-08-16T13:26:36Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["HHG", "阿秒科学", "退相干", "轨迹分辨密度矩阵", "短长轨迹", "量子态工程", "论文精读"]
-related: ["shot-to-shot涨落", "三步模型", "双色场驱动", "固体HHG", "模式选择", "部分迹", "量子路径干涉", "阿秒干涉测量"]
+related: ["Attosecond Path Qubits in High-Harmonic Generation: Classical Dephasing and Trace-Out Decoherence", "shot-to-shot涨落", "三步模型", "双色场驱动", "固体HHG", "模式选择", "相位匹配", "部分迹", "量子路径干涉", "阿秒干涉测量"]
 source_raw: "2026-260620372-attosecond-path-qubits-in-high-harmonic-gener.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -73,11 +73,13 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Attosecond Path Qubits in High-Harmonic Generation: Classical Dephasing and Trace-Out Decoherence]]
 - [[shot-to-shot涨落]]
 - [[三步模型]]
 - [[双色场驱动]]
 - [[固体HHG]]
 - [[模式选择]]
+- [[相位匹配]]
 - [[部分迹]]
 - [[量子路径干涉]]
 - [[阿秒干涉测量]]

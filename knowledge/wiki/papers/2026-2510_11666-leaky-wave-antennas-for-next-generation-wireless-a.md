@@ -2,9 +2,9 @@
 title: "精读笔记：Leaky Wave Antennas for Next Generation Wireless Applications in sub-THz Frequencies — 现状与挑战（arXiv:2510.11666）"
 type: "papers"
 created: "2026-08-15T22:59:05Z"
-updated: "2026-08-15T22:59:05Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["论文精读", "leaky-wave-antenna", "sub-THz", "波束扫描", "角频耦合", "6G", "时空耦合"]
-related: ["Smith-Purcell辐射", "beam squint", "光子学辅助毫米波产生", "太赫兹源（光学整流/双色成丝/自旋电子THz）", "脉冲前沿倾斜", "角色散与时空光场调控"]
+related: ["Smith-Purcell辐射", "beam squint", "光子学辅助毫米波产生", "太赫兹源（光学整流/双色成丝/自旋电子THz）", "相位匹配", "脉冲前沿倾斜", "角色散与时空光场调控"]
 source_raw: "2026-2510.11666-leaky-wave-antennas-for-next-generation-wireless-a.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -36,6 +36,7 @@ review_status: "pending"
 - [[beam squint]]
 - [[光子学辅助毫米波产生]]
 - [[太赫兹源（光学整流/双色成丝/自旋电子THz）]]
+- [[相位匹配]]
 - [[脉冲前沿倾斜]]
 - [[角色散与时空光场调控]]
 <!-- /linsai-wikilinks -->

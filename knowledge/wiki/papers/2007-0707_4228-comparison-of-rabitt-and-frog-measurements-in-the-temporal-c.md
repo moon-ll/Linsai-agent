@@ -2,9 +2,9 @@
 title: "RABITT 与 FROG 在阿秒脉冲串时间表征中的直接对比（Kim et al., 2007）"
 type: "papers"
 created: "2026-08-15T23:22:13Z"
-updated: "2026-08-16T13:26:29Z"
+updated: "2026-08-17T05:19:25Z"
 tags: ["RABITT", "FROG", "阿秒脉冲串", "高次谐波产生", "脉冲表征", "attochirp", "PCGP重构", "长气体盒"]
-related: ["光电子能谱学", "时间延迟标定", "相位匹配与气体压强", "阿秒啁啾补偿", "阿秒计量学"]
+related: ["FROG", "光电子能谱学", "时间延迟标定", "相位匹配", "相位匹配与气体压强", "阿秒啁啾补偿", "阿秒计量学"]
 source_raw: "2007-0707.4228-comparison-of-rabitt-and-frog-measurements-in-the-temporal-c.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -55,8 +55,10 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[FROG]]
 - [[光电子能谱学]]
 - [[时间延迟标定]]
+- [[相位匹配]]
 - [[相位匹配与气体压强]]
 - [[阿秒啁啾补偿]]
 - [[阿秒计量学]]

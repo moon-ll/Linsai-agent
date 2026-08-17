@@ -2,9 +2,9 @@
 title: "时间反演对称性破缺下的量子自旋霍尔效应：赝自旋-1 Dirac-Rashba 系统的理论研究（精读笔记）"
 type: "papers"
 created: "2026-08-16T14:51:18Z"
-updated: "2026-08-16T14:51:18Z"
+updated: "2026-08-17T05:19:30Z"
 tags: ["量子自旋霍尔", "时间反演对称性破缺", "赝自旋-1", "α-T3晶格", "量子反常霍尔", "二阶拓扑绝缘体", "能谷电子学", "Rashba自旋轨道耦合", "自旋陈数", "铁磁交换场"]
-related: ["Floquet工程", "光致拓扑相变", "时间分辨ARPES", "瞬态霍尔电导", "螺旋边缘态", "角态", "谷极化输运", "超快退磁"]
+related: ["Floquet工程", "光致拓扑相变", "拓扑绝缘体", "时间分辨ARPES", "瞬态霍尔电导", "螺旋边缘态", "角态", "谷极化输运", "超快退磁"]
 source_raw: "2026-2608.02152-time-reversal-symmetry-broken-quantum-spin-hall-ef.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -60,6 +60,7 @@ review_status: "pending"
 
 - [[Floquet工程]]
 - [[光致拓扑相变]]
+- [[拓扑绝缘体]]
 - [[时间分辨ARPES]]
 - [[瞬态霍尔电导]]
 - [[螺旋边缘态]]

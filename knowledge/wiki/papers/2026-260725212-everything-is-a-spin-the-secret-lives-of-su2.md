@@ -2,9 +2,9 @@
 title: "精读：Everything is a Spin — The Secret Lives of SU(2)"
 type: "papers"
 created: "2026-08-15T19:42:40Z"
-updated: "2026-08-16T13:26:37Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["SU(2)", "贝里相位", "拓扑物态", "Klein隧穿", "圆光电流效应", "能谷电子学"]
-related: ["Berry曲率", "Floquet工程", "斯格明子", "狄拉克材料", "自旋-动量锁定", "高次谐波产生"]
+related: ["Berry曲率", "Floquet工程", "拓扑绝缘体", "斯格明子", "狄拉克材料", "自旋-动量锁定", "高次谐波产生"]
 source_raw: "2026-260725212-everything-is-a-spin-the-secret-lives-of-su2.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -62,6 +62,7 @@ review_status: "pending"
 
 - [[Berry曲率]]
 - [[Floquet工程]]
+- [[拓扑绝缘体]]
 - [[斯格明子]]
 - [[狄拉克材料]]
 - [[自旋-动量锁定]]

@@ -2,9 +2,9 @@
 title: "偏振态分辨的固体高次谐波谱学（Klemke et al. 2018）精读笔记"
 type: "papers"
 created: "2026-08-15T18:15:50Z"
-updated: "2026-08-16T13:26:30Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["固体HHG", "偏振谱学", "带间带内动力学", "TDDFT", "圆偏振XUV", "光波形调控"]
-related: ["强场光电子学", "晶体对称性", "谷选择性材料", "阿秒计量", "高次谐波产生"]
+related: ["固体高次谐波", "强场光电子学", "晶体对称性", "相位匹配", "谷选择性材料", "阿秒计量", "高次谐波产生"]
 source_raw: "2018-1805.10453-polarization-state-resolved-high-harmonic-spectroscopy-of-so.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -58,8 +58,10 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[固体高次谐波]]
 - [[强场光电子学]]
 - [[晶体对称性]]
+- [[相位匹配]]
 - [[谷选择性材料]]
 - [[阿秒计量]]
 - [[高次谐波产生]]

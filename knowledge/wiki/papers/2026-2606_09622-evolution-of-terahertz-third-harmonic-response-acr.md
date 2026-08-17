@@ -2,9 +2,9 @@
 title: "太赫兹三次谐波跨越稀土镍氧化物相图的演化（arXiv:2606.09622）精读"
 type: "papers"
 created: "2026-08-15T21:02:22Z"
-updated: "2026-08-15T21:02:22Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["THz-HHG", "三次谐波产生", "稀土镍氧化物", "负电荷转移绝缘体", "绝缘体-金属相变", "强关联体系", "非线性光学探针"]
-related: ["Mott相变", "关联材料低能多体响应", "固态高次谐波产生", "太赫兹强场驱动", "量子几何与非线性电导"]
+related: ["Mott相变", "关联材料低能多体响应", "固态高次谐波产生", "太赫兹强场驱动", "量子几何与非线性电导", "高次谐波产生"]
 source_raw: "2026-2606.09622-evolution-of-terahertz-third-harmonic-response-acr.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -40,4 +40,5 @@ review_status: "pending"
 - [[固态高次谐波产生]]
 - [[太赫兹强场驱动]]
 - [[量子几何与非线性电导]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

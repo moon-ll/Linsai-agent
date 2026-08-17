@@ -2,9 +2,9 @@
 title: "双圆双色场驱动的能谷极化：旋转坐标系与强场隧穿视角（论文精读）"
 type: "papers"
 created: "2026-08-16T13:29:06Z"
-updated: "2026-08-16T13:29:06Z"
+updated: "2026-08-17T05:19:30Z"
 tags: ["论文精读", "强场物理", "能谷电子学", "双圆场", "隧穿动力学", "Floquet工程", "亚周期调控"]
-related: ["C3动力学对称性", "Floquet能带工程", "trigonal-warping", "固体高次谐波", "波形整形", "能谷选择定则"]
+related: ["C3动力学对称性", "Floquet能带工程", "trigonal-warping", "三步模型", "固体高次谐波", "波形整形", "能谷选择定则"]
 source_raw: "2026-260803242-valley-polarization-driven-by-two-color-circu.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -57,6 +57,7 @@ Silva、Smirnova、Ivanov、Jiménez-Galán——这几个名字就是我们这�
 - [[C3动力学对称性]]
 - [[Floquet能带工程]]
 - [[trigonal-warping]]
+- [[三步模型]]
 - [[固体高次谐波]]
 - [[波形整形]]
 - [[能谷选择定则]]

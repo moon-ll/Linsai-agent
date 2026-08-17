@@ -2,9 +2,9 @@
 title: "手性费米子的光电流与高次谐波理论（B20 半金属）精读笔记"
 type: "papers"
 created: "2026-08-15T22:30:55Z"
-updated: "2026-08-15T22:30:55Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["高次谐波", "手性费米子", "圆偏振光电流", "B20半金属", "非线性光学", "deepxiv-论文库"]
-related: ["CoSi族手性半金属", "固体高次谐波产生", "圆偏振光电流效应(CPGE)", "多重费米子", "瞬态量子相光学"]
+related: ["CoSi族手性半金属", "固体高次谐波", "固体高次谐波产生", "圆偏振光电流效应(CPGE)", "多重费米子", "瞬态量子相光学", "高次谐波产生"]
 source_raw: "2025-2503.02469-theory-of-photocurrent-and-high-harmonic-generation-with-chi.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -45,8 +45,10 @@ review_status: "pending"
 ## 关联概念
 
 - [[CoSi族手性半金属]]
+- [[固体高次谐波]]
 - [[固体高次谐波产生]]
 - [[圆偏振光电流效应(CPGE)]]
 - [[多重费米子]]
 - [[瞬态量子相光学]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

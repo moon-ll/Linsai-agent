@@ -2,13 +2,13 @@
 title: "🗺️ NSFC 强场超快课题"
 type: "moc"
 created: "2026-06-19T00:00:00Z"
-updated: "2026-08-17T04:04:23Z"
-tags: "[\\"MOC\\", \\"NSFC\\", \\"索引\\", \\"强场超快\\", \\"#type/MOC\\", \\"#status/mature\\"]"
-related: "["Ghimire-Reis", "RABBITT", "TDSE求解器", "["Berry曲率", "北大HHG团队", "固体高次谐波", "带内电流", "带间跃迁", "德鲁德模型", "拓扑绝缘体", "瞬态吸收光谱", "高次谐波产生"]"]"
+updated: "2026-08-17T08:57:10Z"
+tags: "[\\\\"MOC\\\\", \\\\"NSFC\\\\", \\\\"索引\\\\", \\\\"强场超快\\\\", \\\\"#type/MOC\\\\", \\\\"#status/mature\\\\"]"
+related: "["Ghimire-Reis", "RABBITT", "TDSE求解器", "["Berry曲率", "["Ghimire-Reis", "北大HHG团队", "固体高次谐波", "带内电流", "带间跃迁", "德鲁德模型", "拓扑绝缘体", "瞬态吸收光谱", "高次谐波产生", "高次谐波产生"]"]"]"
 source_raw: ""
 growth_stage: "mature"
 confidence: "1.0"
-project: "[\\"NSFC-强场超快\\"]"
+project: "[\\\\"NSFC-强场超快\\\\"]"
 ---
 
 # NSFC 强场超快课题知识地图
@@ -64,6 +64,7 @@ raw/papers/ 中标记 project=['NSFC-强场超快'] 的论文：
 - [[RABBITT]]
 - [[TDSE求解器]]
 - [[["Berry曲率]]
+- [[["Ghimire-Reis]]
 - [[北大HHG团队]]
 - [[固体高次谐波]]
 - [[带内电流]]
@@ -71,5 +72,6 @@ raw/papers/ 中标记 project=['NSFC-强场超快'] 的论文：
 - [[德鲁德模型]]
 - [[拓扑绝缘体]]
 - [[瞬态吸收光谱]]
-- [[高次谐波产生"]]]
+- [[高次谐波产生]]
+- [[高次谐波产生"]"]]]
 <!-- /linsai-wikilinks -->

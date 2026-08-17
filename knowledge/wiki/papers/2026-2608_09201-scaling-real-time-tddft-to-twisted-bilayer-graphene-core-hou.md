@@ -2,9 +2,9 @@
 title: "论文精读 | Scaling Real-Time TDDFT to Twisted Bilayer Graphene: Core-Hour Benchmarks and Hybrid Tight-Binding Acceleration"
 type: "papers"
 created: "2026-08-15T21:19:45Z"
-updated: "2026-08-15T21:19:45Z"
+updated: "2026-08-17T05:19:30Z"
 tags: ["rt-TDDFT", "twisted-bilayer-graphene", "moire-超晶格", "tight-binding", "计算基准", "强场超快"]
-related: ["TDDFT/TB杂交", "moiré强场探针", "固体高次谐波", "多尺度模拟", "量子几何反演"]
+related: ["Scaling Real-Time TDDFT to Twisted Bilayer Graphene: Core-Hour Benchmarks and Hybrid Tight-Binding Acceleration", "TDDFT/TB杂交", "moiré强场探针", "固体高次谐波", "多尺度模拟", "量子几何反演"]
 source_raw: "2026-2608.09201-scaling-real-time-tddft-to-twisted-bilayer-graphene-core-hou.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -53,6 +53,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Scaling Real-Time TDDFT to Twisted Bilayer Graphene: Core-Hour Benchmarks and Hybrid Tight-Binding Acceleration]]
 - [[TDDFT/TB杂交]]
 - [[moiré强场探针]]
 - [[固体高次谐波]]

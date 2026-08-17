@@ -2,9 +2,9 @@
 title: "高次谐波产生中的纠缠与测量理论（Stammer 2022）— 论文精读笔记"
 type: "papers"
 created: "2026-08-15T22:32:58Z"
-updated: "2026-08-15T22:32:58Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["HHG", "量子纠缠", "量子测量", "强场物理", "非经典光", "阿秒物理", "量子光学"]
-related: ["三步模型", "分子振动波包", "条件态制备", "量子轨迹模型", "非经典光源", "高次谐波产生"]
+related: ["三步模型", "分子振动波包", "条件态制备", "相位匹配", "量子轨迹模型", "非经典光源", "高次谐波产生"]
 source_raw: "2022-2203.04354-theory-of-entanglement-and-measurement-in-high-harmonic-gene.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -48,6 +48,7 @@ review_status: "pending"
 - [[三步模型]]
 - [[分子振动波包]]
 - [[条件态制备]]
+- [[相位匹配]]
 - [[量子轨迹模型]]
 - [[非经典光源]]
 - [[高次谐波产生]]

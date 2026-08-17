@@ -2,9 +2,9 @@
 title: "论文精读：面向 XUV 泵浦–XUV 探测的高强度阿秒光束线（光子能量至 150 eV）"
 type: "papers"
 created: "2026-08-15T19:26:00Z"
-updated: "2026-08-15T19:26:00Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["论文精读", "HHG", "阿秒物理", "XUV泵浦-XUV探测", "非线性XUV", "光束线建设"]
-related: ["Zr滤片窗口", "split-and-delay", "孤立阿秒脉冲", "离子显微成像", "阿秒泵浦-阿秒探测", "高次谐波产生(HHG)"]
+related: ["Zr滤片窗口", "split-and-delay", "孤立阿秒脉冲", "相位匹配", "离子显微成像", "阿秒泵浦-阿秒探测", "高次谐波产生", "高次谐波产生(HHG)"]
 source_raw: "2026-2604.12602-high-intensity-attosecond-beamline-for-xuv-pump-xu.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -34,7 +34,9 @@ review_status: "pending"
 - [[Zr滤片窗口]]
 - [[split-and-delay]]
 - [[孤立阿秒脉冲]]
+- [[相位匹配]]
 - [[离子显微成像]]
 - [[阿秒泵浦-阿秒探测]]
+- [[高次谐波产生]]
 - [[高次谐波产生(HHG)]]
 <!-- /linsai-wikilinks -->

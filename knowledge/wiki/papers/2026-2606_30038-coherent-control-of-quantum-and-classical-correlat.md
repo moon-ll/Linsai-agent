@@ -2,9 +2,9 @@
 title: "精读笔记：Coherent Control of Quantum and Classical Correlations in Photoionization（Stenquist & Dahlström, 2026）"
 type: "papers"
 created: "2026-08-15T22:49:26Z"
-updated: "2026-08-16T13:26:37Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["attosecond-science", "coherent-control", "photoionization", "entanglement", "electron-ion-correlation", "phase-locked-pulses", "paper-notes"]
-related: ["RABBITT", "强场电离", "电子-离子符合测量", "量子-经典关联", "量子几何反演", "阿秒脉冲序列"]
+related: ["COLTRIMS", "Coherent Control of Quantum and Classical Correlations in Photoionization", "RABBITT", "强场电离", "电子-离子符合测量", "量子-经典关联", "量子几何反演", "阿秒脉冲序列"]
 source_raw: "2026-2606.30038-coherent-control-of-quantum-and-classical-correlat.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -57,6 +57,8 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[COLTRIMS]]
+- [[Coherent Control of Quantum and Classical Correlations in Photoionization]]
 - [[RABBITT]]
 - [[强场电离]]
 - [[电子-离子符合测量]]

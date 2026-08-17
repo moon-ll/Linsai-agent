@@ -2,9 +2,9 @@
 title: "论文精读：Inverse Problems in High-Harmonic Generation: A Rank-Deficiency Perspective on Attosecond Spectroscopy"
 type: "papers"
 created: "2026-08-16T14:02:33Z"
-updated: "2026-08-16T14:02:33Z"
+updated: "2026-08-17T05:19:30Z"
 tags: ["HHG逆问题", "秩亏", "TSVD正则化", "阿秒条纹", "分子轨道层析", "论文精读"]
-related: ["moiré强场探针", "正则化理论", "量子几何反演", "阿秒光谱学", "高次谐波产生"]
+related: ["Inverse Problems in High-Harmonic Generation: A Rank-Deficiency Perspective on Attosecond Spectroscopy", "moiré强场探针", "正则化理论", "相位匹配", "量子几何反演", "阿秒光谱学", "高次谐波产生"]
 source_raw: "2026-2608.09127-inverse-problems-in-high-harmonic-generation-a-rank-deficien.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -49,8 +49,10 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Inverse Problems in High-Harmonic Generation: A Rank-Deficiency Perspective on Attosecond Spectroscopy]]
 - [[moiré强场探针]]
 - [[正则化理论]]
+- [[相位匹配]]
 - [[量子几何反演]]
 - [[阿秒光谱学]]
 - [[高次谐波产生]]

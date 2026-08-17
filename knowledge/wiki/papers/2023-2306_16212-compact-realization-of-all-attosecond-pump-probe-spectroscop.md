@@ -2,9 +2,9 @@
 title: "论文精读：Compact realization of all-attosecond pump-probe spectroscopy（Kretschmar et al., Sci. Adv. 2023）"
 type: "papers"
 created: "2026-08-15T18:16:30Z"
-updated: "2026-08-16T13:26:31Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["阿秒科学", "APAPS", "高次谐波产生", "空芯光纤后压缩", "XUV-XUV泵浦探测", "瞬态蓝移", "速度映射成像"]
-related: ["VMI", "孤立阿秒脉冲产生", "少周期驱动场", "泵浦-探测光谱", "电离诱导自相位调制", "芯电子动力学"]
+related: ["VMI", "孤立阿秒脉冲产生", "少周期驱动场", "泵浦-探测光谱", "电离诱导自相位调制", "相位匹配", "芯电子动力学"]
 source_raw: "2023-2306.16212-compact-realization-of-all-attosecond-pump-probe-spectroscop.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -71,5 +71,6 @@ review_status: "pending"
 - [[少周期驱动场]]
 - [[泵浦-探测光谱]]
 - [[电离诱导自相位调制]]
+- [[相位匹配]]
 - [[芯电子动力学]]
 <!-- /linsai-wikilinks -->

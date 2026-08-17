@@ -2,9 +2,9 @@
 title: "超快电子-光学声子相互作用在石墨烯高次谐波产生中的作用（论文精读）"
 type: "papers"
 created: "2026-08-16T14:17:20Z"
-updated: "2026-08-16T14:17:20Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["高次谐波产生", "石墨烯", "电子-声子耦合", "固体HHG", "强场超快光学", "论文精读", "预印本"]
-related: ["NSFC-强场超快", "半导体布洛赫方程", "相干声子动力学", "瞬态量子相位光学", "退相干与相干性"]
+related: ["NSFC-强场超快", "半导体布洛赫方程", "相干声子动力学", "瞬态量子相位光学", "退相干与相干性", "高次谐波产生"]
 source_raw: "2026-2604.23294-role-of-ultrafast-electron-optical-phonon-interactions-in-hi.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -30,4 +30,5 @@ review_status: "pending"
 - [[相干声子动力学]]
 - [[瞬态量子相位光学]]
 - [[退相干与相干性]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

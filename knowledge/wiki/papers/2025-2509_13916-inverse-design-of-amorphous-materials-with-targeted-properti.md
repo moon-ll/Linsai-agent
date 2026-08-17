@@ -2,9 +2,9 @@
 title: "Inverse Design of Amorphous Materials with Targeted Properties — 非晶材料靶向性质逆向设计（精读笔记）"
 type: "papers"
 created: "2026-08-15T22:05:22Z"
-updated: "2026-08-15T22:05:22Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["papers", "inverse-design", "machine-learning", "amorphous-materials", "nonlinear-optics", "strong-field-ultrafast", "NSFC-强场超快"]
-related: ["强场介质设计", "玻璃/非晶材料信息学", "瞬态量子相光学", "脉冲整形闭环优化", "非线性光学逆问题"]
+related: ["Inverse Design of Amorphous Materials with Targeted Properties", "强场介质设计", "玻璃/非晶材料信息学", "瞬态量子相光学", "脉冲整形闭环优化", "非线性光学逆问题"]
 source_raw: "2025-2509.13916-inverse-design-of-amorphous-materials-with-targeted-properti.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -29,6 +29,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Inverse Design of Amorphous Materials with Targeted Properties]]
 - [[强场介质设计]]
 - [[玻璃/非晶材料信息学]]
 - [[瞬态量子相光学]]

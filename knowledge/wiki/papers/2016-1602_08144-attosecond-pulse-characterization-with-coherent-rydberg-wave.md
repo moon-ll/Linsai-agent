@@ -2,9 +2,9 @@
 title: "阿秒脉冲表征新方案：相干里德堡波包电离（Pabst & Dahlström, PRA 2016）"
 type: "papers"
 created: "2026-08-16T13:08:55Z"
-updated: "2026-08-16T13:26:30Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["阿秒脉冲表征", "里德堡波包", "量子拍", "XUV", "偶极相位", "光电子谱", "泵浦探测"]
-related: ["FROG-CRAB", "PROOF", "RABBITT", "波包回复", "电离延迟", "高次谐波产生"]
+related: ["COLTRIMS", "FROG", "FROG-CRAB", "PROOF", "RABBITT", "VMI", "波包回复", "电离延迟", "高次谐波产生"]
 source_raw: "2016-1602.08144-attosecond-pulse-characterization-with-coherent-rydberg-wave.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -65,9 +65,12 @@ Pabst 和 Dahlström 的思路让我眼前一亮的地方在于**换参考系**�
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[COLTRIMS]]
+- [[FROG]]
 - [[FROG-CRAB]]
 - [[PROOF]]
 - [[RABBITT]]
+- [[VMI]]
 - [[波包回复]]
 - [[电离延迟]]
 - [[高次谐波产生]]

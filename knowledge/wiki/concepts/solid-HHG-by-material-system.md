@@ -2,9 +2,9 @@
 title: "固体高次谐波产生"
 type: "concepts"
 created: "2026-08-15T14:15:08Z"
-updated: "2026-08-16T13:26:27Z"
+updated: "2026-08-17T05:19:25Z"
 tags: ["solid-HHG", "强场物理", "凝聚态非线性光学", "带内电流", "带间极化", "TDDFT", "半导体布洛赫方程"]
-related: ["Berry曲率与谷极化", "Houston基底SBE", "实时TDDFT", "椭圆度分辨光谱", "气相HHG三步模型", "阿秒偶极相位测量"]
+related: ["Berry曲率与谷极化", "Houston基底SBE", "三步模型", "固体高次谐波", "实时TDDFT", "椭圆度分辨光谱", "气相HHG三步模型", "阿秒偶极相位测量", "高次谐波产生"]
 source_raw: "solid-HHG-by-material-system.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -81,8 +81,11 @@ $$
 
 - [[Berry曲率与谷极化]]
 - [[Houston基底SBE]]
+- [[三步模型]]
+- [[固体高次谐波]]
 - [[实时TDDFT]]
 - [[椭圆度分辨光谱]]
 - [[气相HHG三步模型]]
 - [[阿秒偶极相位测量]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

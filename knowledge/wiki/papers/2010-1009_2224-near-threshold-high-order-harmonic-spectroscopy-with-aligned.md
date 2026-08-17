@@ -2,9 +2,9 @@
 title: "论文精读：aligned 分子的近阈值高次谐波谱学（Soifer et al., PRL 2010）"
 type: "papers"
 created: "2026-08-15T23:28:53Z"
-updated: "2026-08-16T13:26:29Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["HHG", "近阈值谐波", "分子对准", "椭圆率调控", "库仑效应", "SFA失效", "长轨迹", "N2", "O2", "论文精读"]
-related: ["三步模型", "分子排列技术", "强场近似(SFA)", "经典轨迹蒙特卡洛", "高次谐波谱学"]
+related: ["三步模型", "分子排列技术", "强场近似(SFA)", "相位匹配", "经典轨迹蒙特卡洛", "高次谐波谱学"]
 source_raw: "2010-1009.2224-near-threshold-high-order-harmonic-spectroscopy-with-aligned.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -60,6 +60,7 @@ review_status: "pending"
 - [[三步模型]]
 - [[分子排列技术]]
 - [[强场近似(SFA)]]
+- [[相位匹配]]
 - [[经典轨迹蒙特卡洛]]
 - [[高次谐波谱学]]
 <!-- /linsai-wikilinks -->

@@ -2,9 +2,9 @@
 title: "《Roadmap on Attosecond Science》(2026) 精读：阿秒科学 25 周年路线图与战略地图"
 type: "papers"
 created: "2026-08-15T21:00:45Z"
-updated: "2026-08-15T21:00:45Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["阿秒科学", "高次谐波产生", "强场超快光学", "电子动力学", "领域路线图", "XUV光源", "波形合成器"]
-related: ["ELI ALPS", "HHG新机制", "RMT方法", "波形合成器", "量子纠缠", "阿秒泵浦-探测", "阿秒瞬态吸收谱"]
+related: ["Corkum", "ELI ALPS", "HHG新机制", "RMT方法", "Roadmap on Attosecond Science", "波形合成器", "量子纠缠", "阿秒泵浦-探测", "阿秒瞬态吸收谱", "高次谐波产生"]
 source_raw: "2026-2604.15085-roadmap-on-attosecond-science.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -39,11 +39,14 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Corkum]]
 - [[ELI ALPS]]
 - [[HHG新机制]]
 - [[RMT方法]]
+- [[Roadmap on Attosecond Science]]
 - [[波形合成器]]
 - [[量子纠缠]]
 - [[阿秒泵浦-探测]]
 - [[阿秒瞬态吸收谱]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

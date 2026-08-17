@@ -2,9 +2,9 @@
 title: "《Symphony on Strong Field Approximation》精读笔记"
 type: "papers"
 created: "2026-08-15T14:43:04Z"
-updated: "2026-08-16T13:26:30Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["SFA", "强场近似", "HHG", "ATI", "NSDI", "三步模型", "鞍点近似", "CEP", "综述"]
-related: ["RESI", "三步模型", "分子成像", "量子化学势", "非序列双电离", "高次谐波产生"]
+related: ["RESI", "三步模型", "分子成像", "截止定律", "量子化学势", "非序列双电离", "高次谐波产生"]
 source_raw: "2018-1812.11447-symphony-on-strong-field-approximation.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -55,6 +55,7 @@ review_status: "pending"
 - [[RESI]]
 - [[三步模型]]
 - [[分子成像]]
+- [[截止定律]]
 - [[量子化学势]]
 - [[非序列双电离]]
 - [[高次谐波产生]]

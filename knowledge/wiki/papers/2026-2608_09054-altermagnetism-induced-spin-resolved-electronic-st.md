@@ -2,9 +2,9 @@
 title: "Altermagnetism-Induced Spin-resolved Electronic Structure in Janus FeX0.5Y0.5 Monolayers（精读笔记）"
 type: "papers"
 created: "2026-08-16T14:46:27Z"
-updated: "2026-08-16T14:46:27Z"
+updated: "2026-08-17T05:19:30Z"
 tags: ["论文精读", "altermagnetism", "能谷电子学", "Janus材料", "铁基超导", "超快自旋动力学", "应变调控"]
-related: ["Floquet工程", "tr-ARPES", "交变磁性", "反常霍尔效应", "能谷极化", "超快应变/相干声子"]
+related: ["Floquet工程", "tr-ARPES", "交变磁性", "反常霍尔效应", "能谷极化", "超快应变/相干声子", "高次谐波产生"]
 source_raw: "2026-2608.09054-altermagnetism-induced-spin-resolved-electronic-st.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -73,4 +73,5 @@ review_status: "pending"
 - [[反常霍尔效应]]
 - [[能谷极化]]
 - [[超快应变/相干声子]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

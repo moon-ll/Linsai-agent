@@ -2,9 +2,9 @@
 title: "论文精读：On the Quantum-Optical Nature of High Harmonic Generation（HHG 的量子光学本质）"
 type: "papers"
 created: "2026-08-15T18:18:46Z"
-updated: "2026-08-16T13:26:30Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["HHG", "量子光学", "QED", "阿秒物理", "频率梳", "强场物理", "单光子叠加态"]
-related: ["EUV压缩态与纠缠", "Lewenstein模型/SFA", "偶极近似破缺", "缀饰态", "超快量子光学"]
+related: ["EUV压缩态与纠缠", "Lewenstein模型", "Lewenstein模型/SFA", "三步模型", "偶极近似破缺", "相位匹配", "缀饰态", "超快量子光学"]
 source_raw: "2019-1910.13791-on-the-quantum-optical-nature-of-high-harmonic-generation.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -68,8 +68,11 @@ review_status: "pending"
 ## 关联概念
 
 - [[EUV压缩态与纠缠]]
+- [[Lewenstein模型]]
 - [[Lewenstein模型/SFA]]
+- [[三步模型]]
 - [[偶极近似破缺]]
+- [[相位匹配]]
 - [[缀饰态]]
 - [[超快量子光学]]
 <!-- /linsai-wikilinks -->

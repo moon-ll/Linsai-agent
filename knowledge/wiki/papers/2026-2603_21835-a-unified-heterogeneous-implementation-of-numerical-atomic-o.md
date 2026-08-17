@@ -2,9 +2,9 @@
 title: "ABACUS中数值原子轨道RT-TDDFT的统一异构实现"
 type: "papers"
 created: "2026-08-16T14:15:36Z"
-updated: "2026-08-16T14:15:36Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["RT-TDDFT", "ABACUS", "GPU加速", "数值原子轨道", "第一性原理", "异构计算", "强场超快"]
-related: ["ABACUS", "GPU加速", "TDDFT", "实时含时密度泛函理论", "强场动力学", "数值原子轨道基组"]
+related: ["ABACUS", "GPU加速", "TDDFT", "固体高次谐波", "固体高次谐波产生", "实时含时密度泛函理论", "强场动力学", "数值原子轨道基组", "高次谐波产生"]
 source_raw: "2026-2603.21835-a-unified-heterogeneous-implementation-of-numerical-atomic-o.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -52,7 +52,10 @@ review_status: "pending"
 - [[ABACUS]]
 - [[GPU加速]]
 - [[TDDFT]]
+- [[固体高次谐波]]
+- [[固体高次谐波产生]]
 - [[实时含时密度泛函理论]]
 - [[强场动力学]]
 - [[数值原子轨道基组]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

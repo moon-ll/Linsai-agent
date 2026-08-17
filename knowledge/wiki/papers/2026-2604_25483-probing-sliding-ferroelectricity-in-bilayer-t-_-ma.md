@@ -2,9 +2,9 @@
 title: "精读：高次谐波探测双层 Td-WTe₂ 中的滑移铁电性（arXiv:2604.25483）"
 type: "papers"
 created: "2026-08-15T18:53:30Z"
-updated: "2026-08-15T18:53:30Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["HHG", "滑移铁电性", "WTe2", "TDDFT", "偏振分辨谐波谱", "二维量子材料"]
-related: ["反演对称破缺与选择定则", "固体高次谐波产生", "层间剪切声子", "电子-晶格耦合动力学", "铁电极化翻转"]
+related: ["反演对称破缺与选择定则", "固体高次谐波", "固体高次谐波产生", "层间剪切声子", "电子-晶格耦合动力学", "铁电极化翻转", "高次谐波产生"]
 source_raw: "2026-2604.25483-probing-sliding-ferroelectricity-in-bilayer-t-_-ma.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -48,8 +48,10 @@ review_status: "pending"
 ## 关联概念
 
 - [[反演对称破缺与选择定则]]
+- [[固体高次谐波]]
 - [[固体高次谐波产生]]
 - [[层间剪切声子]]
 - [[电子-晶格耦合动力学]]
 - [[铁电极化翻转]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

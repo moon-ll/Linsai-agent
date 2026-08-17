@@ -2,9 +2,9 @@
 title: "论文精读：Quantum engineering of high harmonic generation（QSHHG 闭式理论）"
 type: "papers"
 created: "2026-08-15T20:07:03Z"
-updated: "2026-08-15T20:07:03Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["HHG", "量子光学", "多模纠缠", "QSHHG", "论文精读", "短波长非经典光源"]
-related: ["BSV驱动HHG", "NSFC-强场超快", "协方差矩阵与辛判据", "固体高次谐波", "量子频率梳"]
+related: ["BSV驱动HHG", "NSFC-强场超快", "Quantum engineering of high harmonic generation", "三步模型", "协方差矩阵与辛判据", "固体高次谐波", "量子频率梳"]
 source_raw: "2025-2505.22536-quantum-engineering-of-high-harmonic-generation.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -44,6 +44,8 @@ review_status: "pending"
 
 - [[BSV驱动HHG]]
 - [[NSFC-强场超快]]
+- [[Quantum engineering of high harmonic generation]]
+- [[三步模型]]
 - [[协方差矩阵与辛判据]]
 - [[固体高次谐波]]
 - [[量子频率梳]]

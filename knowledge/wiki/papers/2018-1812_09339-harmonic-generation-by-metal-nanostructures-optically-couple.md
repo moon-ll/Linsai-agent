@@ -2,9 +2,9 @@
 title: "论文精读：金属纳米光栅与少层WS₂光学强耦合体系的谐波产生（Drobnyh, Pachter & Sukharev, 2018）"
 type: "papers"
 created: "2026-08-15T17:55:09Z"
-updated: "2026-08-16T13:26:30Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["谐波产生", "等离激元光栅", "二维材料", "WS2", "FDTD", "非线性Drude模型", "强耦合", "二次谐波", "表面等离激元极化激元"]
-related: ["二维材料高次谐波", "混合光子-材料体系", "表面等离激元极化激元", "近场增强", "非线性光学极化率"]
+related: ["二维材料高次谐波", "混合光子-材料体系", "相位匹配", "表面等离激元极化激元", "近场增强", "非线性光学极化率"]
 source_raw: "2018-1812.09339-harmonic-generation-by-metal-nanostructures-optically-couple.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -58,6 +58,7 @@ review_status: "pending"
 
 - [[二维材料高次谐波]]
 - [[混合光子-材料体系]]
+- [[相位匹配]]
 - [[表面等离激元极化激元]]
 - [[近场增强]]
 - [[非线性光学极化率]]

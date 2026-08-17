@@ -2,9 +2,9 @@
 title: "阿秒瞬态光栅光谱（ATGS）：NIR 写入光栅 + XUV 衍射探针探测 Sb 半金属超快动力学"
 type: "papers"
 created: "2026-08-15T23:35:17Z"
-updated: "2026-08-16T13:26:33Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["阿秒科学", "瞬态光栅", "XUV探针", "高次谐波", "载流子动力学", "相干声子", "半金属"]
-related: ["Sb半金属", "四波混频", "复介电函数提取", "瞬态吸收光谱(ATAS)", "载流子-声子耦合", "高次谐波产生(HHG)"]
+related: ["Attosecond transient grating spectroscopy with near-infrared grating pulses and an extreme ultraviolet diffracted probe", "Sb半金属", "四波混频", "复介电函数提取", "瞬态吸收光谱", "瞬态吸收光谱(ATAS)", "载流子-声子耦合", "高次谐波产生", "高次谐波产生(HHG)"]
 source_raw: "2026-2407.19609-attosecond-transient-grating-spectroscopy-with-nea.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -58,10 +58,13 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Attosecond transient grating spectroscopy with near-infrared grating pulses and an extreme ultraviolet diffracted probe]]
 - [[Sb半金属]]
 - [[四波混频]]
 - [[复介电函数提取]]
+- [[瞬态吸收光谱]]
 - [[瞬态吸收光谱(ATAS)]]
 - [[载流子-声子耦合]]
+- [[高次谐波产生]]
 - [[高次谐波产生(HHG)]]
 <!-- /linsai-wikilinks -->

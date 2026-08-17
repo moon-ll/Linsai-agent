@@ -2,9 +2,9 @@
 title: "中红外飞秒激光驱动 keV X 射线波段的明亮相干超高次谐波（精读）"
 type: "papers"
 created: "2026-08-15T14:40:51Z"
-updated: "2026-08-15T14:40:51Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["HHG", "keV-X射线", "中红外驱动", "相位匹配", "毛细波导", "超连续谱", "阿秒"]
-related: ["X射线吸收谱", "三步模型与截止定律", "临界电离", "压力调谐相位匹配", "波导HHG", "高次谐波产生"]
+related: ["X射线吸收谱", "三步模型", "三步模型与截止定律", "临界电离", "压力调谐相位匹配", "截止定律", "波导HHG", "相位匹配", "高次谐波产生"]
 source_raw: "2024-2403.19535-bright-coherent-ultrahigh-harmonics-in-the-kev-x-ray-regime-.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -49,9 +49,12 @@ review_status: "pending"
 ## 关联概念
 
 - [[X射线吸收谱]]
+- [[三步模型]]
 - [[三步模型与截止定律]]
 - [[临界电离]]
 - [[压力调谐相位匹配]]
+- [[截止定律]]
 - [[波导HHG]]
+- [[相位匹配]]
 - [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

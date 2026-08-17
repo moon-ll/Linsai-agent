@@ -2,9 +2,9 @@
 title: "论文精读：Measuring and Controlling the Birth of Quantum Attosecond Pulses"
 type: "papers"
 created: "2026-08-15T20:39:38Z"
-updated: "2026-08-15T20:39:38Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["论文精读", "高次谐波", "BSV", "明亮压缩真空", "阿秒脉冲", "量子层析", "量子HHG"]
-related: ["BSV驱动HHG", "Wigner函数层析", "亚周期相干控制", "序参量超快读出", "量子HHG理论", "非经典光"]
+related: ["BSV驱动HHG", "Measuring and controlling the birth of quantum attosecond pulses", "Wigner函数层析", "三步模型", "亚周期相干控制", "序参量超快读出", "量子HHG理论", "非经典光"]
 source_raw: "2025-2502.09427-measuring-and-controlling-the-birth-of-quantum-attosecond-pu.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -26,7 +26,9 @@ Cohen 组这条线我一直在追：从早期 BSV 驱动 HHG 的光子统计异�
 ## 关联概念
 
 - [[BSV驱动HHG]]
+- [[Measuring and controlling the birth of quantum attosecond pulses]]
 - [[Wigner函数层析]]
+- [[三步模型]]
 - [[亚周期相干控制]]
 - [[序参量超快读出]]
 - [[量子HHG理论]]

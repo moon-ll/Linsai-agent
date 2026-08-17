@@ -2,9 +2,9 @@
 title: "桌面光源跨越水窗的明亮相干超快软X射线谐波——Chen et al., PRL 2010 精读"
 type: "papers"
 created: "2026-08-15T18:22:30Z"
-updated: "2026-08-15T18:22:30Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["HHG", "水窗", "软X射线", "相位匹配", "中红外驱动", "阿秒脉冲", "桌面光源"]
-related: ["截止能量标度律", "水窗生物成像", "相位匹配与吸收极限", "空间相干性", "阿秒连续谱", "高次谐波产生"]
+related: ["截止能量标度律", "水窗生物成像", "相位匹配", "相位匹配与吸收极限", "空间相干性", "阿秒连续谱", "高次谐波产生"]
 source_raw: "2010-1006.3942-bright-coherent-ultrafast-soft-x-ray-harmonics-spanning-the-.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -31,6 +31,7 @@ review_status: "pending"
 
 - [[截止能量标度律]]
 - [[水窗生物成像]]
+- [[相位匹配]]
 - [[相位匹配与吸收极限]]
 - [[空间相干性]]
 - [[阿秒连续谱]]

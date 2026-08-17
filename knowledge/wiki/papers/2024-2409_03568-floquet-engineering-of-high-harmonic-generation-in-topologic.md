@@ -2,9 +2,9 @@
 title: "Floquet 工程调控拓扑绝缘体中的高次谐波产生（论文精读笔记）"
 type: "papers"
 created: "2026-08-16T14:12:45Z"
-updated: "2026-08-16T14:12:45Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["高次谐波产生", "Floquet工程", "拓扑绝缘体", "强场超快", "论文精读", "deepxiv论文库"]
-related: ["Berry曲率", "Floquet准能带", "NSFC-强场超快", "固态HHG", "瞬态拓扑相变", "瞬态量子相光学读出"]
+related: ["Berry曲率", "Floquet准能带", "NSFC-强场超快", "固态HHG", "拓扑绝缘体", "瞬态拓扑相变", "瞬态量子相光学读出", "高次谐波产生"]
 source_raw: "2024-2409.03568-floquet-engineering-of-high-harmonic-generation-in-topologic.md"
 growth_stage: "growing"
 confidence: 0.6
@@ -52,6 +52,8 @@ review_status: "pending"
 - [[Floquet准能带]]
 - [[NSFC-强场超快]]
 - [[固态HHG]]
+- [[拓扑绝缘体]]
 - [[瞬态拓扑相变]]
 - [[瞬态量子相光学读出]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

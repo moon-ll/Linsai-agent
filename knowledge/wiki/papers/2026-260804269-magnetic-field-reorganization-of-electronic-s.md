@@ -2,9 +2,9 @@
 title: "磁场作为电子结构重塑者：莫尔双层石墨烯中的能谷选择性轨道重组（arXiv:2608.04269 精读）"
 type: "papers"
 created: "2026-08-15T19:59:06Z"
-updated: "2026-08-16T13:26:38Z"
+updated: "2026-08-17T05:19:30Z"
 tags: ["莫尔石墨烯", "磁击穿", "Lifshitz跃迁", "贝里曲率", "轨道磁矩", "能谷电子学", "Hofstadter蝴蝶", "量子振荡", "论文精读"]
-related: ["Floquet工程", "磁击穿干涉", "能谷电子学", "莫尔超晶格", "贝里曲率", "轨道磁矩", "量子振荡"]
+related: ["Floquet工程", "固体高次谐波", "磁击穿干涉", "能谷电子学", "莫尔超晶格", "贝里曲率", "轨道磁矩", "量子振荡"]
 source_raw: "2026-260804269-magnetic-field-reorganization-of-electronic-s.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -50,6 +50,7 @@ review_status: "pending"
 ## 关联概念
 
 - [[Floquet工程]]
+- [[固体高次谐波]]
 - [[磁击穿干涉]]
 - [[能谷电子学]]
 - [[莫尔超晶格]]

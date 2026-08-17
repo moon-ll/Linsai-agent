@@ -2,9 +2,9 @@
 title: "论文精读：Twisting harmonics——固体高次谐波中的轨道角动量转移"
 type: "papers"
 created: "2026-08-15T18:59:14Z"
-updated: "2026-08-15T18:59:14Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["固体HHG", "轨道角动量", "涡旋光", "结构光", "中红外驱动", "ZnO", "GaSe", "角动量守恒", "论文精读"]
-related: ["固体高次谐波产生", "强场非微扰非线性光学", "涡旋光束与拓扑荷", "贝里曲率探测"]
+related: ["固体高次谐波", "固体高次谐波产生", "强场非微扰非线性光学", "涡旋光束与拓扑荷", "贝里曲率探测", "高次谐波产生"]
 source_raw: "2026-2601.12743-twisting-harmonics-transfer-of-orbital-angular-mom.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -21,8 +21,10 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[固体高次谐波]]
 - [[固体高次谐波产生]]
 - [[强场非微扰非线性光学]]
 - [[涡旋光束与拓扑荷]]
 - [[贝里曲率探测]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

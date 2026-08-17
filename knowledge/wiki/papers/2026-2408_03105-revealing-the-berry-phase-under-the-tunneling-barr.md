@@ -2,9 +2,9 @@
 title: "论文精读：Revealing the Berry phase under the tunneling barrier（势垒之下的贝里相位）"
 type: "papers"
 created: "2026-08-15T19:01:20Z"
-updated: "2026-08-16T13:26:33Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["HHG光谱学", "贝里相位", "固态强场物理", "隧穿动力学", "非厄米系统", "双色场调控", "阿秒计量"]
-related: ["Berry curvature", "non-Hermitian topology", "quantum metric", "solid-state HHG", "two-color field control", "规范不变性", "隧穿时间"]
+related: ["Berry curvature", "Revealing the Berry phase under the tunneling barrier", "non-Hermitian topology", "quantum metric", "solid-state HHG", "two-color field control", "三步模型", "拓扑绝缘体", "规范不变性", "隧穿时间"]
 source_raw: "2026-2408.03105-revealing-the-berry-phase-under-the-tunneling-barr.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -65,10 +65,13 @@ review_status: "pending"
 ## 关联概念
 
 - [[Berry curvature]]
+- [[Revealing the Berry phase under the tunneling barrier]]
 - [[non-Hermitian topology]]
 - [[quantum metric]]
 - [[solid-state HHG]]
 - [[two-color field control]]
+- [[三步模型]]
+- [[拓扑绝缘体]]
 - [[规范不变性]]
 - [[隧穿时间]]
 <!-- /linsai-wikilinks -->

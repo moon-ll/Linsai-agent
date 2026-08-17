@@ -2,9 +2,9 @@
 title: "全光学单发 SASE FEL 脉冲时域表征：双盲全息（DBH）精读笔记"
 type: "papers"
 created: "2026-08-15T19:48:33Z"
-updated: "2026-08-16T13:26:38Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["XFEL", "SASE", "单发表征", "双盲全息", "光谱干涉", "HHG", "阿秒科学", "延时打标"]
-related: ["FROG/SPIDER 类重建算法", "光谱相位干涉测量", "泵浦-探测实验", "阿秒条纹术", "高次谐波产生 (HHG)"]
+related: ["FROG", "FROG/SPIDER 类重建算法", "RABBITT", "光谱相位干涉测量", "泵浦-探测实验", "阿秒条纹术", "高次谐波产生", "高次谐波产生 (HHG)"]
 source_raw: "2026-260800153-all-optical-single-shot-temporal-characteriza.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -52,9 +52,12 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[FROG]]
 - [[FROG/SPIDER 类重建算法]]
+- [[RABBITT]]
 - [[光谱相位干涉测量]]
 - [[泵浦-探测实验]]
 - [[阿秒条纹术]]
+- [[高次谐波产生]]
 - [[高次谐波产生 (HHG)]]
 <!-- /linsai-wikilinks -->

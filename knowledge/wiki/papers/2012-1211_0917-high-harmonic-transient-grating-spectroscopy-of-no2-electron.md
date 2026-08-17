@@ -2,9 +2,9 @@
 title: "高次谐波瞬态光栅光谱探测 NO₂ 电子弛豫（Ruf et al., 2012）——论文精读"
 type: "papers"
 created: "2026-08-15T17:53:10Z"
-updated: "2026-08-15T17:53:10Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["高次谐波光谱", "瞬态光栅", "锥形交叉", "NO2", "非绝热动力学", "轨迹表面跃迁", "XUV探测"]
-related: ["分子轨道对称性", "时间分辨光电离谱", "表面跃迁动力学 (TSH)", "飞秒泵浦-探测", "高次谐波产生 (HHG)"]
+related: ["分子轨道对称性", "时间分辨光电离谱", "表面跃迁动力学 (TSH)", "飞秒泵浦-探测", "高次谐波产生", "高次谐波产生 (HHG)"]
 source_raw: "2012-1211.0917-high-harmonic-transient-grating-spectroscopy-of-no2-electron.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -41,5 +41,6 @@ review_status: "pending"
 - [[时间分辨光电离谱]]
 - [[表面跃迁动力学 (TSH)]]
 - [[飞秒泵浦-探测]]
+- [[高次谐波产生]]
 - [[高次谐波产生 (HHG)]]
 <!-- /linsai-wikilinks -->

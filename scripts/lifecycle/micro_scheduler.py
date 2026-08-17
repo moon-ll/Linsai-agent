@@ -1264,6 +1264,24 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
         msg = "当前不在工作时段内，跳过执行（stale 清理已完成）"
         if _log:
             _log.info(msg)
+        # v6.9.21: 空档期也刷新看板 current（合并写，只改 current + 时间戳）。
+        # 背景：08-14→08-17 gateway 挂死期间 current 冻结在 08-14 22:30 的
+        # slot=18:30-22:30/in_slot=true，hourly-monitor 不覆盖该字段，
+        # 恢复后空档期也不刷新，看板/控制台误读为"时段内"。
+        try:
+            merged = load_json(KANBAN_PATH, default={})
+            if isinstance(merged, dict) and merged:
+                cur = merged.get("current") or {}
+                cur["in_slot"] = False
+                cur["slot_index"] = None
+                cur["slot"] = None
+                merged["current"] = cur
+                merged["updated_at"] = now_utc()
+                merged["updated_at_local"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                save_json(KANBAN_PATH, merged)
+        except Exception as e:
+            if _log:
+                _log.warning(f"空档期刷新看板 current 失败: {e}")
         return {"success": True, "executed_count": 0, "executed": [], "reason": msg, "skip_reason": "out_of_slot"}
 
     slot_index, (slot_start, slot_end) = slot_info

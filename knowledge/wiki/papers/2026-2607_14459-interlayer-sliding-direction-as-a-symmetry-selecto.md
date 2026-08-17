@@ -2,9 +2,9 @@
 title: "论文精读：层间滑移方向作为交错磁双层 Fe2WS4 的对称性选择器——可开关的反常霍尔与反常谷霍尔效应"
 type: "papers"
 created: "2026-08-16T14:07:13Z"
-updated: "2026-08-16T14:07:13Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["交错磁体", "滑移铁电", "能谷电子学", "反常霍尔效应", "贝里曲率", "二维材料", "论文精读"]
-related: ["反常谷霍尔效应", "太赫兹驱动相变", "滑移铁电", "莫尔超晶格", "贝里曲率与量子几何", "高次谐波对称性探测"]
+related: ["Interlayer sliding direction as a symmetry selector in altermagnetic bilayer Fe2WS4: Switchable anomalous Hall and anomalous valley Hall effects", "反常谷霍尔效应", "太赫兹驱动相变", "滑移铁电", "莫尔超晶格", "贝里曲率与量子几何", "高次谐波对称性探测"]
 source_raw: "2026-2607.14459-interlayer-sliding-direction-as-a-symmetry-selecto.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -61,6 +61,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Interlayer sliding direction as a symmetry selector in altermagnetic bilayer Fe2WS4: Switchable anomalous Hall and anomalous valley Hall effects]]
 - [[反常谷霍尔效应]]
 - [[太赫兹驱动相变]]
 - [[滑移铁电]]

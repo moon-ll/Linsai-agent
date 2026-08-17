@@ -2,9 +2,9 @@
 title: "论文精读：非线性级联量子几何选择规则增强高能带谷极化（arXiv:2605.03663）"
 type: "papers"
 created: "2026-08-15T19:20:07Z"
-updated: "2026-08-16T13:26:36Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["论文精读", "谷电子学", "非线性光学", "量子几何", "tr-ARPES", "TMD", "强场非平衡态动力学"]
-related: ["Berry曲率与量子几何", "Lindblad主方程", "强场固体动力学", "时间分辨ARPES", "级联多光子激发", "谷选择规则"]
+related: ["Berry曲率与量子几何", "Lindblad主方程", "固体高次谐波", "强场固体动力学", "时间分辨ARPES", "级联多光子激发", "谷选择规则"]
 source_raw: "2026-2605.03663-enhanced-valley-polarization-via-nonlinear-cascade.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -63,6 +63,7 @@ review_status: "pending"
 
 - [[Berry曲率与量子几何]]
 - [[Lindblad主方程]]
+- [[固体高次谐波]]
 - [[强场固体动力学]]
 - [[时间分辨ARPES]]
 - [[级联多光子激发]]

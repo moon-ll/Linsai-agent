@@ -2,9 +2,9 @@
 title: "论文精读：Attosecond quantum spectroscopy with entangled photon pairs"
 type: "papers"
 created: "2026-08-15T22:43:34Z"
-updated: "2026-08-15T22:43:34Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["论文精读", "attosecond-quantum-optics", "solid-HHG", "entangled-photon-pairs", "g2-correlation", "强场非平衡态动力学"]
-related: ["亮压缩光", "量子几何反演", "量子增强光谱", "非平衡态动力学", "高次谐波产生 (HHG)"]
+related: ["Attosecond quantum spectroscopy with entangled photon pairs", "亮压缩光", "量子几何反演", "量子增强光谱", "非平衡态动力学", "高次谐波产生", "高次谐波产生 (HHG)"]
 source_raw: "2026-2604.06707-attosecond-quantum-spectroscopy-with-entangled-pho.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -27,9 +27,11 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Attosecond quantum spectroscopy with entangled photon pairs]]
 - [[亮压缩光]]
 - [[量子几何反演]]
 - [[量子增强光谱]]
 - [[非平衡态动力学]]
+- [[高次谐波产生]]
 - [[高次谐波产生 (HHG)]]
 <!-- /linsai-wikilinks -->

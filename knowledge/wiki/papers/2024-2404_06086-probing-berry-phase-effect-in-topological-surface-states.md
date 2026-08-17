@@ -2,9 +2,9 @@
 title: "论文精读：Probing Berry phase effect in topological surface states (arXiv:2404.06086)"
 type: "papers"
 created: "2026-08-15T22:21:17Z"
-updated: "2026-08-15T22:21:17Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["拓扑表面态", "Berry相位", "强场超快光学", "全光读取", "固体HHG", "论文精读"]
-related: ["半导体布洛赫方程", "拓扑绝缘体", "瞬态量子相位光学", "贝里曲率", "高次谐波产生"]
+related: ["Probing Berry phase effect in topological surface states", "半导体布洛赫方程", "拓扑绝缘体", "瞬态量子相位光学", "贝里曲率", "高次谐波产生"]
 source_raw: "2024-2404.06086-probing-berry-phase-effect-in-topological-surface-states.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -49,6 +49,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Probing Berry phase effect in topological surface states]]
 - [[半导体布洛赫方程]]
 - [[拓扑绝缘体]]
 - [[瞬态量子相位光学]]

@@ -2,9 +2,9 @@
 title: "精读笔记：Cu-poor CIGS 中 OVC 介导的相干声子运动与量子路径干涉（阿秒瞬态吸收）"
 type: "papers"
 created: "2026-08-16T13:25:18Z"
-updated: "2026-08-16T13:25:18Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["attosecond-transient-absorption", "coherent-phonon", "CIGS", "ordered-vacancy-compound", "quantum-path-interference", "hot-carrier-cooling", "XUV-core-level-probe", "论文精读"]
-related: ["5 边探测", "Se M4", "热载流子动力学", "相干声子", "量子几何反演 proposal", "量子路径干涉", "阿秒瞬态吸收光谱"]
+related: ["5 边探测", "Se M4", "热载流子动力学", "相干声子", "瞬态吸收光谱", "量子几何反演 proposal", "量子路径干涉", "阿秒瞬态吸收光谱"]
 source_raw: "2026-2506.05621-coherent-phonon-motions-and-ordered-vacancy-compou.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -69,6 +69,7 @@ review_status: "pending"
 - [[Se M4]]
 - [[热载流子动力学]]
 - [[相干声子]]
+- [[瞬态吸收光谱]]
 - [[量子几何反演 proposal]]
 - [[量子路径干涉]]
 - [[阿秒瞬态吸收光谱]]

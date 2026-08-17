@@ -2,9 +2,9 @@
 title: "HHG-TrARPES 探针光源精读：偏振可选与亚 100 μm 光斑的工程取舍"
 type: "papers"
 created: "2026-08-15T23:01:45Z"
-updated: "2026-08-16T13:26:34Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["HHG", "TrARPES", "偏振控制", "EUV光束线", "论文精读", "低优先级池"]
-related: ["中红外泵浦-紫外探针", "光电子跃迁矩阵元", "时间分辨角分辨光电子能谱", "石墨烯超快弛豫", "轨道分辨探测", "高次谐波产生"]
+related: ["中红外泵浦-紫外探针", "光电子跃迁矩阵元", "拓扑绝缘体", "时间分辨角分辨光电子能谱", "石墨烯超快弛豫", "轨道分辨探测", "高次谐波产生"]
 source_raw: "2026-2510.16546-high-harmonic-generation-light-source-with-polariz.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -59,6 +59,7 @@ review_status: "pending"
 
 - [[中红外泵浦-紫外探针]]
 - [[光电子跃迁矩阵元]]
+- [[拓扑绝缘体]]
 - [[时间分辨角分辨光电子能谱]]
 - [[石墨烯超快弛豫]]
 - [[轨道分辨探测]]

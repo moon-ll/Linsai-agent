@@ -2,9 +2,9 @@
 title: "论文精读：用散射波函数改进Lewenstein模型定量描述原子与分子高次谐波生成（Le, Morishita & Lin, 2007）"
 type: "papers"
 created: "2026-08-15T17:52:11Z"
-updated: "2026-08-15T17:52:11Z"
+updated: "2026-08-17T05:19:25Z"
 tags: ["HHG", "Lewenstein模型", "强场近似SFA", "散射波函数", "光复合截面", "返回电子波包", "QRS理论", "分子HHG"]
-related: ["TDSE基准计算", "三步模型", "分子轨道层析成像", "双中心干涉", "定量再散射理论", "阿秒脉冲合成"]
+related: ["Lewenstein模型", "TDSE基准计算", "三步模型", "分子轨道层析成像", "双中心干涉", "定量再散射理论", "阿秒脉冲合成"]
 source_raw: "2007-0707.4192-improved-lewenstein-model-for-high-order-harmonic-generation.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -48,6 +48,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Lewenstein模型]]
 - [[TDSE基准计算]]
 - [[三步模型]]
 - [[分子轨道层析成像]]

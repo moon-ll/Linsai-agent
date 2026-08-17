@@ -2,9 +2,9 @@
 title: "论文精读：压缩强场光驱动高次谐波产生的阿秒脉冲合成（Attosecond pulse synthesis from HHG in intense squeezed light）"
 type: "papers"
 created: "2026-08-15T20:32:46Z"
-updated: "2026-08-15T20:32:46Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["HHG", "阿秒脉冲合成", "压缩光", "BSV驱动HHG", "相位锁定", "量子光源驱动", "papers"]
-related: ["NSFC-强场超快", "attosecond-pulse-synthesis", "bright-squeezed-vacuum", "谐波相位锁定", "量子轨迹模型"]
+related: ["NSFC-强场超快", "attosecond-pulse-synthesis", "bright-squeezed-vacuum", "三步模型", "谐波相位锁定", "量子轨迹模型", "高次谐波产生"]
 source_raw: "2024-2406.10443-attosecond-pulse-synthesis-from-high-order-harmonic-generati.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -44,6 +44,8 @@ review_status: "pending"
 - [[NSFC-强场超快]]
 - [[attosecond-pulse-synthesis]]
 - [[bright-squeezed-vacuum]]
+- [[三步模型]]
 - [[谐波相位锁定]]
 - [[量子轨迹模型]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

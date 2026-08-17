@@ -2,9 +2,9 @@
 title: "论文精读：高次谐波量子路径的光谱分辨时空特征（He et al., PRA 2015）"
 type: "papers"
 created: "2026-08-15T23:19:31Z"
-updated: "2026-08-15T23:19:31Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["HHG", "量子路径", "短轨道", "长轨道", "原子偶极相位", "相位匹配", "光谱分裂", "频率移动", "阿秒啁啾", "轨迹选择", "论文精读"]
-related: ["Gouy相位", "attochirp", "三步模型", "宏观相位匹配", "量子路径干涉", "阿秒脉冲产生", "高次谐波产生"]
+related: ["Gouy相位", "RABBITT", "attochirp", "三步模型", "宏观相位匹配", "相位匹配", "量子路径干涉", "阿秒脉冲产生", "高次谐波产生"]
 source_raw: "2015-1502.07422-spectrally-resolved-spatiotemporal-features-of-quantum-paths.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -24,9 +24,11 @@ review_status: "pending"
 ## 关联概念
 
 - [[Gouy相位]]
+- [[RABBITT]]
 - [[attochirp]]
 - [[三步模型]]
 - [[宏观相位匹配]]
+- [[相位匹配]]
 - [[量子路径干涉]]
 - [[阿秒脉冲产生]]
 - [[高次谐波产生]]

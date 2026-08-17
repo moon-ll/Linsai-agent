@@ -2,9 +2,9 @@
 title: "论文精读：成丝辅助的孤立阿秒脉冲产生（Filamentation-Assisted IAP Generation）"
 type: "papers"
 created: "2026-08-15T18:35:17Z"
-updated: "2026-08-15T18:35:17Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["阿秒脉冲", "成丝", "高次谐波产生", "后压缩", "Yb激光", "相位匹配", "自压缩", "论文精读"]
-related: ["光丝自压缩", "半无限气体池", "孤立阿秒脉冲 (IAP)", "少周期驱动光", "振幅门控", "高次谐波产生 (HHG)"]
+related: ["光丝自压缩", "半无限气体池", "孤立阿秒脉冲 (IAP)", "少周期驱动光", "振幅门控", "相位匹配", "高次谐波产生", "高次谐波产生 (HHG)"]
 source_raw: "2026-2412.06339-filamentation-assisted-isolated-attosecond-pulse-g.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -48,5 +48,7 @@ review_status: "pending"
 - [[孤立阿秒脉冲 (IAP)]]
 - [[少周期驱动光]]
 - [[振幅门控]]
+- [[相位匹配]]
+- [[高次谐波产生]]
 - [[高次谐波产生 (HHG)]]
 <!-- /linsai-wikilinks -->

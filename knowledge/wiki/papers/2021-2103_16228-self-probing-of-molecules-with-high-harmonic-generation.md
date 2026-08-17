@@ -2,9 +2,9 @@
 title: "分子自探测精读：以再碰撞电子作为阿秒–埃米双分辨率探针（Haessler, Caillat & Salières 2021）"
 type: "papers"
 created: "2026-08-16T13:10:03Z"
-updated: "2026-08-16T13:26:31Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["HHG", "self-probing", "分子轨道层析", "阿秒科学", "再碰撞电子", "空穴动力学", "教程综述"]
-related: ["RABBITT相位测量", "hole dynamics", "molecular orbital tomography", "三步模型", "分子排列与取向", "双中心干涉"]
+related: ["RABBITT", "RABBITT相位测量", "hole dynamics", "molecular orbital tomography", "三步模型", "分子排列与取向", "双中心干涉", "相位匹配"]
 source_raw: "2021-2103.16228-self-probing-of-molecules-with-high-harmonic-generation.md"
 growth_stage: "mature"
 confidence: 0.8
@@ -61,10 +61,12 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[RABBITT]]
 - [[RABBITT相位测量]]
 - [[hole dynamics]]
 - [[molecular orbital tomography]]
 - [[三步模型]]
 - [[分子排列与取向]]
 - [[双中心干涉]]
+- [[相位匹配]]
 <!-- /linsai-wikilinks -->

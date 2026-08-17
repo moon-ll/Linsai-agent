@@ -2,9 +2,9 @@
 title: "Keldysh 调谐钙钛矿光致发光：固体中多光子—隧穿交叉的实验验证"
 type: "papers"
 created: "2026-08-15T20:17:51Z"
-updated: "2026-08-16T13:26:31Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["Keldysh参数", "强场物理", "CsPbBr3", "钙钛矿", "固体HHG", "多光子吸收", "隧穿电离", "光致发光", "论文精读"]
-related: ["NSFC-强场超快", "Zener隧穿", "固体高次谐波产生", "序参量超快读出", "载流子超快动力学"]
+related: ["NSFC-强场超快", "Zener隧穿", "三步模型", "固体高次谐波", "固体高次谐波产生", "序参量超快读出", "载流子超快动力学", "高次谐波产生"]
 source_raw: "2024-2407.15253-keldysh-tuning-of-photoluminescence-in-a-lead-halide-perovsk.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -59,7 +59,10 @@ Keldysh 1965 年那套 γ 划分（γ≫1 多光子、γ≪1 隧穿）在我们�
 
 - [[NSFC-强场超快]]
 - [[Zener隧穿]]
+- [[三步模型]]
+- [[固体高次谐波]]
 - [[固体高次谐波产生]]
 - [[序参量超快读出]]
 - [[载流子超快动力学]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

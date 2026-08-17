@@ -2,9 +2,9 @@
 title: "论文精读：MOTReMi——基于磁光阱靶的电子与反冲离子动量成像"
 type: "papers"
 created: "2026-08-15T18:01:23Z"
-updated: "2026-08-16T13:26:30Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["COLTRIMS", "反应显微镜", "磁光阱", "冷原子靶", "符合测量", "锂原子", "动量分辨", "态制备"]
-related: ["光电离动力学", "冷靶反冲离子动量谱", "强场电离", "离子碰撞电离", "速度映射成像"]
+related: ["COLTRIMS", "VMI", "光电离动力学", "冷靶反冲离子动量谱", "强场电离", "离子碰撞电离", "速度映射成像"]
 source_raw: "2014-1411.0838-electron-and-recoil-ion-momentum-imaging-with-a-magneto-opti.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -59,6 +59,8 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[COLTRIMS]]
+- [[VMI]]
 - [[光电离动力学]]
 - [[冷靶反冲离子动量谱]]
 - [[强场电离]]

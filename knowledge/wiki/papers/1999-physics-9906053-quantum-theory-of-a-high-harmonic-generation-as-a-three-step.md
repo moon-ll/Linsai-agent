@@ -2,9 +2,9 @@
 title: "Kuchiev & Ostrovsky (1999)：高次谐波产生的全量子三步过程理论精读"
 type: "papers"
 created: "2026-08-15T17:46:02Z"
-updated: "2026-08-16T13:26:29Z"
+updated: "2026-08-17T05:19:25Z"
 tags: ["HHG", "三步模型", "ATI", "强场物理", "量子理论", "论文精读", "H⁻基准"]
-related: ["Corkum三步模型", "Lewenstein模型/SFA", "激光辅助复合(LAR)", "规范不变性", "阈上电离(ATI)", "鞍点近似"]
+related: ["Corkum", "Corkum三步模型", "Lewenstein模型", "Lewenstein模型/SFA", "三步模型", "激光辅助复合(LAR)", "相位匹配", "规范不变性", "阈上电离(ATI)", "鞍点近似", "高次谐波产生"]
 source_raw: "1999-physics-9906053-quantum-theory-of-a-high-harmonic-generation-as-a-three-step.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -57,10 +57,15 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Corkum]]
 - [[Corkum三步模型]]
+- [[Lewenstein模型]]
 - [[Lewenstein模型/SFA]]
+- [[三步模型]]
 - [[激光辅助复合(LAR)]]
+- [[相位匹配]]
 - [[规范不变性]]
 - [[阈上电离(ATI)]]
 - [[鞍点近似]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

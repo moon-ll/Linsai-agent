@@ -2,9 +2,9 @@
 title: "固体高次谐波产生的绝热理论框架：强场低频脉冲下的非微扰处理（Flegel–Pi–Frolov 2025）"
 type: "papers"
 created: "2026-08-16T14:28:11Z"
-updated: "2026-08-16T14:28:11Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["论文精读", "固体HHG", "绝热近似", "强场物理", "低频驱动", "非微扰理论"]
-related: ["ARM/TDER方法体系", "Keldysh参数", "Wannier-Stark阶梯", "Zener隧穿", "半导体Bloch方程", "瞬态量子相位"]
+related: ["ARM/TDER方法体系", "Keldysh参数", "Wannier-Stark阶梯", "Zener隧穿", "三步模型", "半导体Bloch方程", "固体高次谐波", "固体高次谐波产生", "瞬态量子相位", "高次谐波产生"]
 source_raw: "2025-2512.24496-adiabatic-approach-for-high-harmonic-generation-in-solids-in.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -36,6 +36,10 @@ Frolov 组（Voronezh，Flegel 长期合作者）是原子强场物理里解析�
 - [[Keldysh参数]]
 - [[Wannier-Stark阶梯]]
 - [[Zener隧穿]]
+- [[三步模型]]
 - [[半导体Bloch方程]]
+- [[固体高次谐波]]
+- [[固体高次谐波产生]]
 - [[瞬态量子相位]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

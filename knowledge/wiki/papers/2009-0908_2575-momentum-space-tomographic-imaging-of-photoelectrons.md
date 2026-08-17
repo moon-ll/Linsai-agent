@@ -2,9 +2,9 @@
 title: "论文精读：动量空间光电子层析成像——用偏振旋转+滤波反投影重建三维动量分布（Smeenk et al. 2009）"
 type: "papers"
 created: "2026-08-15T18:09:37Z"
-updated: "2026-08-15T18:09:37Z"
+updated: "2026-08-17T05:19:25Z"
 tags: ["论文精读", "强场电离", "光电子动量分布", "VMI", "层析成像", "Abel反演", "椭圆偏振", "滤波反投影"]
-related: ["ATI高阈电离", "Abel逆变换", "COLTRIMS反应显微镜", "Radon变换", "强场隧穿电离", "速度映射成像VMI"]
+related: ["ATI高阈电离", "Abel逆变换", "COLTRIMS", "COLTRIMS反应显微镜", "Corkum", "Radon变换", "VMI", "强场隧穿电离", "速度映射成像VMI"]
 source_raw: "2009-0908.2575-momentum-space-tomographic-imaging-of-photoelectrons.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -25,8 +25,11 @@ review_status: "pending"
 
 - [[ATI高阈电离]]
 - [[Abel逆变换]]
+- [[COLTRIMS]]
 - [[COLTRIMS反应显微镜]]
+- [[Corkum]]
 - [[Radon变换]]
+- [[VMI]]
 - [[强场隧穿电离]]
 - [[速度映射成像VMI]]
 <!-- /linsai-wikilinks -->

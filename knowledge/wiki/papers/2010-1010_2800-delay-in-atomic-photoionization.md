@@ -2,9 +2,9 @@
 title: "Delay in atomic photoionization（原子光电离中的时间延迟）精读笔记"
 type: "papers"
 created: "2026-08-15T18:27:57Z"
-updated: "2026-08-16T13:26:29Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["论文精读", "阿秒物理", "光电离时间延迟", "attosecond-streaking", "电子关联", "库仑-激光耦合"]
-related: ["Ne 2s-2p延迟争议", "RPAE", "TDSE", "Wigner时延", "阿秒条纹测量"]
+related: ["Ne 2s-2p延迟争议", "RABBITT", "RPAE", "TDSE", "Wigner时延", "阿秒条纹测量"]
 source_raw: "2010-1010.2800-delay-in-atomic-photoionization.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -65,6 +65,7 @@ review_status: "pending"
 ## 关联概念
 
 - [[Ne 2s-2p延迟争议]]
+- [[RABBITT]]
 - [[RPAE]]
 - [[TDSE]]
 - [[Wigner时延]]

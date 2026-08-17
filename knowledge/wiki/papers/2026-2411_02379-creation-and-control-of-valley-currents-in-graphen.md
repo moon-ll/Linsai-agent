@@ -2,9 +2,9 @@
 title: "Creation and control of valley currents in graphene by few cycle light pulses 精读笔记"
 type: "papers"
 created: "2026-08-15T18:39:32Z"
-updated: "2026-08-15T18:39:32Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["能谷电子学", "少周期脉冲", "太赫兹强场", "载波包络相位", "石墨烯", "光波电子学", "凝聚态强场动力学"]
-related: ["h-BN封装石墨烯", "光场诱导电流", "全局载波包络相位", "固态高次谐波", "谷电流", "贝里曲率"]
+related: ["Creation and control of valley currents in graphene by few cycle light pulses", "h-BN封装石墨烯", "光场诱导电流", "全局载波包络相位", "固态高次谐波", "谷电流", "贝里曲率"]
 source_raw: "2026-2411.02379-creation-and-control-of-valley-currents-in-graphen.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -25,6 +25,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Creation and control of valley currents in graphene by few cycle light pulses]]
 - [[h-BN封装石墨烯]]
 - [[光场诱导电流]]
 - [[全局载波包络相位]]

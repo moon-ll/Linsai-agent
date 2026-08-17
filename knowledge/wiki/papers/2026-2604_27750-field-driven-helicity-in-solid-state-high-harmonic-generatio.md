@@ -2,9 +2,9 @@
 title: "Field-driven helicity in solid-state high-harmonic generation（场驱动螺旋度：固体HHG精读笔记）"
 type: "papers"
 created: "2026-08-16T14:26:41Z"
-updated: "2026-08-16T14:26:41Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["固体HHG", "谐波螺旋度", "偏振调控", "电子结构探测", "论文精读", "NSFC强场超快"]
-related: ["Berry曲率", "偏振分辨谐波谱", "半导体布洛赫方程", "双圆场HHG", "圆二色性", "瞬态量子相位"]
+related: ["Berry曲率", "Field-driven helicity in solid-state high-harmonic generation", "偏振分辨谐波谱", "半导体布洛赫方程", "双圆场HHG", "圆二色性", "相位匹配", "瞬态量子相位"]
 source_raw: "2026-2604.27750-field-driven-helicity-in-solid-state-high-harmonic-generatio.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -54,9 +54,11 @@ review_status: "pending"
 ## 关联概念
 
 - [[Berry曲率]]
+- [[Field-driven helicity in solid-state high-harmonic generation]]
 - [[偏振分辨谐波谱]]
 - [[半导体布洛赫方程]]
 - [[双圆场HHG]]
 - [[圆二色性]]
+- [[相位匹配]]
 - [[瞬态量子相位]]
 <!-- /linsai-wikilinks -->

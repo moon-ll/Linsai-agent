@@ -2,9 +2,9 @@
 title: "Attoclock 精读：氢原子中隧穿是瞬时的——角偏移完全来自长程库仑散射（Sainadh et al., Nature 2017）"
 type: "papers"
 created: "2026-08-15T17:51:12Z"
-updated: "2026-08-16T13:26:30Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["attoclock", "tunnelling-time", "strong-field-ionization", "Coulomb-scattering", "3D-TDSE", "atomic-hydrogen", "REMI", "attosecond-streaking"]
-related: ["Keldysh 参数区", "库仑聚焦与库仑修正", "末态相互作用", "椭圆偏振少周期脉冲", "隧穿出口与轨迹模型", "隧穿时间争议"]
+related: ["COLTRIMS", "Keldysh 参数区", "库仑聚焦与库仑修正", "末态相互作用", "椭圆偏振少周期脉冲", "隧穿出口与轨迹模型", "隧穿时间争议"]
 source_raw: "2017-1707.05445-attosecond-angular-streaking-and-tunnelling-time-in-atomic-h.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -60,6 +60,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[COLTRIMS]]
 - [[Keldysh 参数区]]
 - [[库仑聚焦与库仑修正]]
 - [[末态相互作用]]

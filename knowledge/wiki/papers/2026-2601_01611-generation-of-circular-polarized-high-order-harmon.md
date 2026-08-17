@@ -2,9 +2,9 @@
 title: "论文精读：单色量子光驱动产生圆极化高次谐波（Petrovic, Stammer & Lewenstein 2026）"
 type: "papers"
 created: "2026-08-15T18:46:40Z"
-updated: "2026-08-16T13:26:34Z"
+updated: "2026-08-17T05:19:28Z"
 tags: ["高次谐波产生", "量子光学", "压缩态光场", "椭圆偏振", "非经典光", "强场物理"]
-related: ["三步模型", "光子统计与Mandel参数", "光波电子学", "双色谱驱动圆极化HHG", "量子化驱动场HHG"]
+related: ["三步模型", "光子统计与Mandel参数", "光波电子学", "双色谱驱动圆极化HHG", "相位匹配", "量子化驱动场HHG"]
 source_raw: "2026-2601.01611-generation-of-circular-polarized-high-order-harmon.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -60,5 +60,6 @@ review_status: "pending"
 - [[光子统计与Mandel参数]]
 - [[光波电子学]]
 - [[双色谱驱动圆极化HHG]]
+- [[相位匹配]]
 - [[量子化驱动场HHG]]
 <!-- /linsai-wikilinks -->

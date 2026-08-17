@@ -2,9 +2,9 @@
 title: "磁性调控单层 WSe₂ 中的 Goos-Hänchen 位移与群延迟时间：论文精读笔记"
 type: "papers"
 created: "2026-08-15T21:33:36Z"
-updated: "2026-08-16T13:26:38Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["能谷电子学", "Goos-Hänchen位移", "群延迟时间", "WSe₂", "自旋-能谷锁定", "磁势垒", "2D材料输运"]
-related: ["2D材料超快动力学", "Wigner时间延迟", "general-quantum-geometry-inversion-20260726", "光致规范场", "贝里曲率"]
+related: ["2D材料超快动力学", "RABBITT", "Wigner时间延迟", "general-quantum-geometry-inversion-20260726", "光致规范场", "贝里曲率"]
 source_raw: "2026-2607.08315-magnetic-control-of-goos-hänchen-shifts-and-group-.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -65,6 +65,7 @@ review_status: "pending"
 ## 关联概念
 
 - [[2D材料超快动力学]]
+- [[RABBITT]]
 - [[Wigner时间延迟]]
 - [[general-quantum-geometry-inversion-20260726]]
 - [[光致规范场]]

@@ -2,9 +2,9 @@
 title: "Parameter-Dimension-Aware Reconstruction of HHG Spectra via Bayesian Inference"
 type: "papers"
 created: "2026-08-15T21:22:35Z"
-updated: "2026-08-15T21:22:35Z"
+updated: "2026-08-17T05:19:30Z"
 tags: ["论文精读", "HHG", "贝叶斯推断", "逆问题", "不确定性量化", "参数可辨识性"]
-related: ["HHG逆问题", "moire-strong-field-probe-20260726", "quantum-geometry-inversion-20260726", "偶极响应矩阵", "后验相关性分析", "波形重建"]
+related: ["HHG逆问题", "moire-strong-field-probe-20260726", "quantum-geometry-inversion-20260726", "偶极响应矩阵", "后验相关性分析", "波形重建", "相位匹配"]
 source_raw: "2026-2608.09378-parameter-dimension-aware-reconstruction-of-hhg-spectra-via.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -38,4 +38,5 @@ review_status: "pending"
 - [[偶极响应矩阵]]
 - [[后验相关性分析]]
 - [[波形重建]]
+- [[相位匹配]]
 <!-- /linsai-wikilinks -->

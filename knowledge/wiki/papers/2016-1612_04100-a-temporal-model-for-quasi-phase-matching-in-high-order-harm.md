@@ -2,9 +2,9 @@
 title: "论文精读：QPM 的时间模型——HHG 准相位匹配的最佳周期应锁定驱动脉冲前沿"
 type: "papers"
 created: "2026-08-15T18:05:28Z"
-updated: "2026-08-15T18:05:28Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["HHG", "准相位匹配", "相位匹配", "等离子体动力学", "时间分辨模型", "multi-jet", "cluster-jet", "波矢失配"]
-related: ["dual-gas QPM", "反传脉冲调制", "周期性极化晶体类比", "波矢失配", "电离诱导色散", "高次谐波产生"]
+related: ["dual-gas QPM", "反传脉冲调制", "周期性极化晶体类比", "波矢失配", "电离诱导色散", "相位匹配", "高次谐波产生"]
 source_raw: "2016-1612.04100-a-temporal-model-for-quasi-phase-matching-in-high-order-harm.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -51,5 +51,6 @@ review_status: "pending"
 - [[周期性极化晶体类比]]
 - [[波矢失配]]
 - [[电离诱导色散]]
+- [[相位匹配]]
 - [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

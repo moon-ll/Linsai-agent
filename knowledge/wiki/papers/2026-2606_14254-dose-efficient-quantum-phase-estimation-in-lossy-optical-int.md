@@ -2,9 +2,9 @@
 title: "论文精读：有损光学干涉中的剂量高效量子相位估计（Dose-efficient Quantum Phase Estimation in Lossy Optical Interferometry）"
 type: "papers"
 created: "2026-08-15T22:34:59Z"
-updated: "2026-08-15T22:34:59Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["quantum-phase-estimation", "quantum-metrology", "optical-interferometry", "dose-efficiency", "loss-tolerance", "low-photon-imaging"]
-related: ["弱光成像", "损耗下的量子增强测量", "散粒噪声极限", "海森堡极限", "相位测量", "瞬态量子相位光学", "量子计量"]
+related: ["RABBITT", "弱光成像", "损耗下的量子增强测量", "散粒噪声极限", "海森堡极限", "相位测量", "瞬态量子相位光学", "量子计量", "高次谐波产生"]
 source_raw: "2026-2606.14254-dose-efficient-quantum-phase-estimation-in-lossy-optical-int.md"
 growth_stage: "seedling"
 confidence: 0.5
@@ -23,6 +23,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[RABBITT]]
 - [[弱光成像]]
 - [[损耗下的量子增强测量]]
 - [[散粒噪声极限]]
@@ -30,4 +31,5 @@ review_status: "pending"
 - [[相位测量]]
 - [[瞬态量子相位光学]]
 - [[量子计量]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

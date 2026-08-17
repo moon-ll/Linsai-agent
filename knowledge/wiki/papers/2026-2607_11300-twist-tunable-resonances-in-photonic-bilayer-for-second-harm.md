@@ -2,9 +2,9 @@
 title: "扭转角可调的光子双层共振与二次谐波产生（arXiv:2607.11300 精读）"
 type: "papers"
 created: "2026-08-16T13:59:51Z"
-updated: "2026-08-16T13:59:51Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["论文精读", "莫尔光子学", "二次谐波产生", "非线性光学", "扭转角调控", "共振增强", "光子晶体"]
-related: ["general-moire-strong-field-probe-20260726", "general-quantum-geometry-inversion-20260726", "twistronics", "准BIC", "强场高次谐波", "莫尔超晶格"]
+related: ["general-moire-strong-field-probe-20260726", "general-quantum-geometry-inversion-20260726", "twistronics", "准BIC", "强场高次谐波", "相位匹配", "莫尔超晶格"]
 source_raw: "2026-2607.11300-twist-tunable-resonances-in-photonic-bilayer-for-second-harm.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -30,5 +30,6 @@ review_status: "pending"
 - [[twistronics]]
 - [[准BIC]]
 - [[强场高次谐波]]
+- [[相位匹配]]
 - [[莫尔超晶格]]
 <!-- /linsai-wikilinks -->

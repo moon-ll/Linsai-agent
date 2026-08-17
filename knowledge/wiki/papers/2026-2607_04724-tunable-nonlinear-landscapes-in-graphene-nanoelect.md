@@ -2,9 +2,9 @@
 title: "论文精读：石墨烯纳机电系统中的可调非线性景观（整数高次谐波与声子频率梳）"
 type: "papers"
 created: "2026-08-15T21:29:27Z"
-updated: "2026-08-15T21:29:27Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["固体HHG", "石墨烯NEMS", "声子频率梳", "内共振", "非线性动力学", "对称性破缺", "周期倍化"]
-related: ["Duffing振子", "general-quantum-geometry-inversion-20260726", "偶次谐波与反演对称破缺", "光学频率梳", "固体高次谐波产生"]
+related: ["Duffing振子", "general-quantum-geometry-inversion-20260726", "偶次谐波与反演对称破缺", "光学频率梳", "固体高次谐波", "固体高次谐波产生", "截止定律", "高次谐波产生"]
 source_raw: "2026-2607.04724-tunable-nonlinear-landscapes-in-graphene-nanoelect.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -43,5 +43,8 @@ review_status: "pending"
 - [[general-quantum-geometry-inversion-20260726]]
 - [[偶次谐波与反演对称破缺]]
 - [[光学频率梳]]
+- [[固体高次谐波]]
 - [[固体高次谐波产生]]
+- [[截止定律]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

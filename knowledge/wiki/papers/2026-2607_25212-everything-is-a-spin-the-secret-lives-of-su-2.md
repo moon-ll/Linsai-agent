@@ -2,9 +2,9 @@
 title: "Everything is a Spin: The Secret Lives of SU(2)（论文精读）"
 type: "papers"
 created: "2026-08-15T23:12:39Z"
-updated: "2026-08-15T23:12:39Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["论文精读", "能谷电子学", "SU(2)几何", "Berry相位", "拓扑物态"]
-related: ["Klein隧穿", "Landau-Zener隧穿", "固体高次谐波", "圆光伏效应", "能谷选择定则", "自旋-动量锁定"]
+related: ["Klein隧穿", "Landau-Zener隧穿", "固体高次谐波", "圆光伏效应", "拓扑绝缘体", "能谷选择定则", "自旋-动量锁定"]
 source_raw: "2026-2607.25212-everything-is-a-spin-the-secret-lives-of-su-2.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -41,6 +41,7 @@ review_status: "pending"
 - [[Landau-Zener隧穿]]
 - [[固体高次谐波]]
 - [[圆光伏效应]]
+- [[拓扑绝缘体]]
 - [[能谷选择定则]]
 - [[自旋-动量锁定]]
 <!-- /linsai-wikilinks -->

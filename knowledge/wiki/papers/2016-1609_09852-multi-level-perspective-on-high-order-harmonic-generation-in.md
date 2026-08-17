@@ -2,9 +2,9 @@
 title: "固体高次谐波生成的多能级视角：绝热/非绝热跃迁与动量空间三步模型"
 type: "papers"
 created: "2026-08-15T18:29:57Z"
-updated: "2026-08-16T13:26:30Z"
+updated: "2026-08-17T05:19:26Z"
 tags: ["固体HHG", "多能级模型", "Houston态", "绝热与非绝热跃迁", "动量空间三步模型", "多平台结构", "能带色散"]
-related: ["Landau-Zener跃迁", "三步模型", "固体Ar和Kr实验", "布洛赫振荡", "带间电流与带内电流", "能带结构重构"]
+related: ["Landau-Zener跃迁", "三步模型", "固体Ar和Kr实验", "固体高次谐波", "布洛赫振荡", "带间电流与带内电流", "截止定律", "能带结构重构"]
 source_raw: "2016-1609.09852-multi-level-perspective-on-high-order-harmonic-generation-in.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -60,7 +60,9 @@ review_status: "pending"
 - [[Landau-Zener跃迁]]
 - [[三步模型]]
 - [[固体Ar和Kr实验]]
+- [[固体高次谐波]]
 - [[布洛赫振荡]]
 - [[带间电流与带内电流]]
+- [[截止定律]]
 - [[能带结构重构]]
 <!-- /linsai-wikilinks -->

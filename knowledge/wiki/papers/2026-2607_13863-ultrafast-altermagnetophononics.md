@@ -2,9 +2,9 @@
 title: "Ultrafast altermagnetophononics：超快光操控交错磁体中的磁振子–声子耦合动力学（精读笔记）"
 type: "papers"
 created: "2026-08-15T21:35:19Z"
-updated: "2026-08-15T21:35:19Z"
+updated: "2026-08-17T05:19:29Z"
 tags: ["altermagnets", "magnon-phonon-coupling", "ultrafast-dynamics", "CrSb", "strong-field-optics", "coherent-control", "超快磁学", "deepxiv-论文库"]
-related: ["NSFC-强场超快", "THz-strong-field-driving", "altermagnetism", "coherent-phonon-spectroscopy", "general-order-parameter-ultrafast-readout-20260727", "general-quantum-geometry-inversion-20260726", "time-dependent-DFT"]
+related: ["NSFC-强场超快", "THz-strong-field-driving", "Ultrafast altermagnetophononics", "altermagnetism", "coherent-phonon-spectroscopy", "general-order-parameter-ultrafast-readout-20260727", "general-quantum-geometry-inversion-20260726", "time-dependent-DFT"]
 source_raw: "2026-2607.13863-ultrafast-altermagnetophononics.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -33,6 +33,7 @@ review_status: "pending"
 
 - [[NSFC-强场超快]]
 - [[THz-strong-field-driving]]
+- [[Ultrafast altermagnetophononics]]
 - [[altermagnetism]]
 - [[coherent-phonon-spectroscopy]]
 - [[general-order-parameter-ultrafast-readout-20260727]]

@@ -46,6 +46,10 @@ knowledge/.cache/
 knowledge/.obsidian/
 knowledge/captures/
 knowledge/qa/
+# v6.9.21: 备份文件不入版本库（16h 健康检查发现 .bak 误随批次提交）
+knowledge/**/*.bak
+knowledge/**/*.bak.*
+knowledge/**/.backup/
 
 # === 项目自动生成文件 ===
 /projects/*/kb/graph.json

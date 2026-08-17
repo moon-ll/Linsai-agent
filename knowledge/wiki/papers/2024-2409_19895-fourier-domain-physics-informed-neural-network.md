@@ -2,9 +2,9 @@
 title: "Fourier Domain Physics Informed Neural Network（傅里叶域物理信息神经网络）——论文精读笔记"
 type: "papers"
 created: "2026-08-16T14:16:00Z"
-updated: "2026-08-16T14:16:00Z"
+updated: "2026-08-17T05:19:27Z"
 tags: ["PINN", "傅里叶域", "超快光学", "非线性传播方程", "反问题", "机器学习", "GNLSE"]
-related: ["傅里叶特征映射", "分裂步傅里叶法", "广义非线性薛定谔方程", "物理信息神经网络", "脉冲重构", "超连续谱产生"]
+related: ["FROG", "Fourier Domain Physics Informed Neural Network", "傅里叶特征映射", "分裂步傅里叶法", "广义非线性薛定谔方程", "物理信息神经网络", "脉冲重构", "超连续谱产生"]
 source_raw: "2024-2409.19895-fourier-domain-physics-informed-neural-network.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -61,6 +61,8 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[FROG]]
+- [[Fourier Domain Physics Informed Neural Network]]
 - [[傅里叶特征映射]]
 - [[分裂步傅里叶法]]
 - [[广义非线性薛定谔方程]]
