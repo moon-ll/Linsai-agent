@@ -73,13 +73,20 @@
 - berry 时间线修正 — 2026-08-17 04h — 上轮"72h 催办线 08-17 11:49"系 24h/72h 混淆：human_queue.py:40 ESCALATE_AFTER_H=72.0，起点 08-16 11:49 BJ，实际催办线 08-19 11:49 BJ
 - 第二层扫描 — 2026-08-17 04h — 无对象（4h 内唯一 commit c5bd887 仅含本指针文件 +15/-5，零代码变更）；self_test 840/840 全绿
 
+- P0 gateway 挂死第七轮跟踪（证据升级） — 2026-08-17 08h — 重启已发生但派发仍死：07:37 daily-reload 杀 30485 → 新 PID 3538 启动即挂死（26min CPU 0:00.15、gateway.log 零写入、未派生 MCP watchdog、profile ticker 仍冻 08-16 07:36）；sample 定位主线程阻塞于启动导入链的 open() 系统调用（22MB 早期阶段，无 FIFO 命中 profile 目录）；根因线索=hermes-agent 08-15 10:31 runtime generation 更新 + INDICATOR_STYLES ImportError 同日出现；默认 profile 网关 3535 同刻重启正常 → 条件与 HERMES_HOME=profiles/linsai 相关。今日 08:00 整点监控确认未派发。处置移交人工（本工具未动进程）
+- 假恢复信号澄清 — 2026-08-17 08h — 根目录 ~/.hermes/cron/ticker 08:02 在跳属默认网关 3535（HERMES_HOME=~/.hermes），与 linsai 无关；判读恢复必须用 profiles/linsai/cron/ticker + profile gateway.log 新增行
+- 双上限终态自动解锁（抽查①） — 2026-08-17 08h — 正常（should_auto_unlock utils.py:78 五条件+兜底；orchestrator.py:398-424 解锁链完整；moire r8-writer 3/4/57.7h、order-param r1-critic 3/3/59.7h 均满足，repair 派发即解锁；附注 moire repair_attempts=4 超理论上限 1 次属历史增量，不影响语义）
+- cron 拓扑对账（抽查②） — 2026-08-17 08h — 正常（validate_cron_topology=[] 零缺失/重复/漂移，13 条 lc- schedule 全一致；纯文件对账不依赖派发，挂死期间持续可用）
+- 告警缓存与 dry-run 口径（抽查③） — 2026-08-17 08h — 维持既知备忘（dry-run 仍合并写看板致两次手动运行 zero_progress 提前 resolve，本轮 8→7 复现；缓存最后真实落盘 08-16 12:01 与挂死吻合；生产无影响，工具单次读数即可）
+- 第二层扫描 — 2026-08-17 08h — 无对象（4h 唯一 commit b06da3b 仅日志文件）；self_test 840/840 全绿
+
 ## 下次从这里继续
 
-- gateway 第 7 轮跟踪（最高优先）：06:00 repair 派发与否（moire/order-param 2 stuck job 解锁判定点）；08:55 起 orchestrate 43.2h→48h 将进 cron_stale；若用户已重启则立即验证 ticker 恢复 + 整点监控 + 解锁补跑
-- 12:40/12:50 KB 治理回查（若恢复）：kb_metrics 当前停更 39.4h（错过 08-16 一周期），刷新确认；agent-scores 58.2h 属周末+挂死叠加预期
+- gateway 第 8 轮（最高优先）：若人工已处置 → 验证 profile ticker 恢复 + gateway.log 新增横幅 + 12:00 repair 派发与 2 stuck job 解锁（auto_unlock_count 应=1）；若未处置 → 12:40/12:50 KB 治理连续第 3 日缺失、08:30-12:30 worker 时段第二次空转，继续记录
+- #1 实测窗口（若恢复）：order-param writer 首次调用应注入 bsv 范文段
 - key-transient r4 轮末终验（若恢复且 worker 推进）：reason="质量收敛"、<0.80 不误晋级
 - berry 激活跟踪：催办线 08-19 11:49 BJ；激活后 #3 运行时实测（v6.9.18 链路首个 idea_review）
-- #1 实测窗口（若恢复）：order-param writer 首次调用应注入 bsv 范文段
-- 待人工决策清单（累积）：gateway 重启（P0）/ berry 激活 / #11 kb_health 三选一 / #10 反馈闭环三选一 / #2 维度轮换死代码裁决 / 46 占位名改名 / 395+手动批次数据入库策略 / 飞书 config init 或 config bind --source hermes
+- 设计轮换：从 #9 输入端熔断（四复核）起继续，或按恢复态势优先 #7 终验
+- 待人工决策清单（累积）：gateway 启动挂死处置（P0，sample 已定位导入链 open() 阻塞）/ berry 激活 / #11 kb_health 三选一 / #10 反馈闭环三选一 / #2 维度轮换死代码裁决 / 46 占位名改名 / 395+手动批次数据入库策略 / 飞书 config init 或 config bind --source hermes
 - 顺带观察：--web-ci 发现模式 ghost_write_guard / idea_review 基类 NotImplementedError 静默吞仍未收口（测试基建改进项）
-- 环境备忘：沙箱内 `crontab -l` 对本机真实 crontab 假阴性，验证 cron 状态以 hermes cron 注册表（hb.cron_list_profile）+ ticker 文件 mtime + 派发记录为准；lifecycle_monitor 实际参数为 --dry-run（非 --check）；沙箱 kill 用户进程会被人工接管，进程级修复以报告移交为宜；kb_health.get_kb_health 独立导入必炸（门面注入设计，非缺陷）；git log --since 用本地时区（+0800）；macOS zsh 无 timeout 命令
+- 环境备忘：沙箱内 `crontab -l` 对本机真实 crontab 假阴性，验证 cron 状态以 hermes cron 注册表（hb.cron_list_profile）+ **profile 路径 ticker**（~/.hermes/profiles/linsai/cron/ticker_heartbeat，勿用根目录 ~/.hermes/cron/ticker——那是默认 profile 网关的，2026-08-17 08h 曾造成假恢复信号）+ profile gateway.log 新增行 + 派发记录为准；lifecycle_monitor 实际参数为 --dry-run（非 --check）；沙箱 kill 用户进程会被人工接管，进程级修复以报告移交为宜；kb_health.get_kb_health 独立导入必炸（门面注入设计，非缺陷）；git log --since 用本地时区（+0800）；macOS zsh 无 timeout 命令；cron jobs.json 中 schedule 字段有 dict/str 双形态，解析需兼容
