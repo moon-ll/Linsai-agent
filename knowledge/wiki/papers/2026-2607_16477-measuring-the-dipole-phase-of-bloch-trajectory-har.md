@@ -2,11 +2,11 @@
 title: "用单块干涉仪测量 Bloch 轨迹谐波的偶极相位（固体 HHG 精读笔记）"
 type: "papers"
 created: "2026-08-15T21:37:07Z"
-updated: "2026-08-15T21:37:07Z"
+updated: "2026-08-16T13:26:38Z"
 tags: ["固体HHG", "偶极相位", "Bloch振荡", "单块干涉仪", "ZnO薄膜", "中红外驱动", "再碰撞"]
 related: ["attochirp", "三步模型", "带间极化与带内电流", "量子几何反演", "阿秒脉冲合成", "高次谐波干涉术"]
 source_raw: "2026-2607.16477-measuring-the-dipole-phase-of-bloch-trajectory-har.md"
-growth_stage: "seedling"
+growth_stage: "growing"
 confidence: 0.55
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "论文精读：Nonlinear atomic tunnelling boosted by bright squeezed vacuum"
 type: "papers"
 created: "2026-08-15T20:58:54Z"
-updated: "2026-08-15T20:58:54Z"
+updated: "2026-08-16T13:26:35Z"
 tags: ["论文精读", "BSV", "隧穿电离", "强场-量子光学交叉", "NSFC-强场超快"]
 related: ["bright squeezed vacuum", "量子轨迹", "隧穿电离", "非经典光驱动强场过程", "高次谐波产生（HHG）"]
 source_raw: "2026-2604.05783-nonlinear-atomic-tunnelling-boosted-by-bright-squeezed-vacuu.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

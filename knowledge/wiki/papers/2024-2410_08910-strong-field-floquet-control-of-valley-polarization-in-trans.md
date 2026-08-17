@@ -2,11 +2,11 @@
 title: "强场Floquet调控TMD谷极化——论文精读笔记（初筛）"
 type: "papers"
 created: "2026-08-15T21:48:35Z"
-updated: "2026-08-15T21:48:35Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["Floquet工程", "谷电子学", "过渡金属硫族化合物", "强场超快", "谷极化", "阿秒物理"]
 related: ["AC-Stark效应", "二维材料强场物理", "圆偏振选择定则", "瞬态量子相位调控"]
 source_raw: "2024-2410.08910-strong-field-floquet-control-of-valley-polarization-in-trans.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

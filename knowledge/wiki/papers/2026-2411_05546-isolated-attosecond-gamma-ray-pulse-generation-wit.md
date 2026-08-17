@@ -2,11 +2,11 @@
 title: "STOV激光驱动产生携带横向轨道角动量的孤立阿秒γ射线脉冲（arXiv 2411.05546）精读笔记"
 type: "papers"
 created: "2026-08-15T18:34:15Z"
-updated: "2026-08-15T18:34:15Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["阿秒科学", "γ射线脉冲", "STOV", "横向轨道角动量", "非线性康普顿散射", "PIC模拟"]
 related: ["光学涡旋", "时空光涡旋STOV", "涡旋高次谐波", "激光尾场加速", "等离子体镜反射", "阿秒脉冲产生"]
 source_raw: "2026-2411.05546-isolated-attosecond-gamma-ray-pulse-generation-wit.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

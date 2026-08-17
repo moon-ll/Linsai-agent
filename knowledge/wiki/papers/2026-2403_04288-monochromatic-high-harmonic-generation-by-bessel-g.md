@@ -2,11 +2,11 @@
 title: "BG光束+周期调制介质实现单色高次谐波——论文精读"
 type: "papers"
 created: "2026-08-15T18:31:58Z"
-updated: "2026-08-15T18:31:58Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["HHG", "贝塞尔-高斯光束", "准相位匹配", "单色XUV", "相位匹配调控", "水窗光源"]
 related: ["XUV单色化", "准相位匹配QPM", "无衍射光束HHG", "水窗辐射源", "相位失配工程"]
 source_raw: "2026-2403.04288-monochromatic-high-harmonic-generation-by-bessel-g.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

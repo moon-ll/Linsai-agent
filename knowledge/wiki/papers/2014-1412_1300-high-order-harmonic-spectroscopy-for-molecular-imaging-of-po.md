@@ -2,11 +2,11 @@
 title: "论文精读：High-order harmonic spectroscopy for molecular imaging of polyatomic molecules（Negro et al., Faraday Discuss. 2014）"
 type: "papers"
 created: "2026-08-15T18:21:36Z"
-updated: "2026-08-15T18:21:36Z"
+updated: "2026-08-16T13:26:30Z"
 tags: ["HHG", "分子轨道层析", "高次谐波谱学", "分子对齐", "中红外驱动", "非干涉相位重构", "papers"]
 related: ["三步模型", "中红外OPA", "分子轨道成像", "库仑修正", "强场近似(SFA)", "激光辅助分子对齐"]
 source_raw: "2014-1412.1300-high-order-harmonic-spectroscopy-for-molecular-imaging-of-po.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

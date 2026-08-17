@@ -2,11 +2,11 @@
 title: "论文精读：中等能量重离子碰撞中的动力学电磁场与电磁反常"
 type: "papers"
 created: "2026-08-15T20:40:38Z"
-updated: "2026-08-15T20:40:38Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["强场物理", "重离子碰撞", "动力学电磁场", "手征反常", "非微扰QED", "E·B不变量", "论文精读"]
 related: ["Maxwell方程数值求解", "Schwinger机制", "手征磁效应", "焦斑体积加权", "真空双折射", "超强磁场"]
 source_raw: "2026-2501.11328-dynamical-electromagnetic-fields-and-dynamical-ele.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

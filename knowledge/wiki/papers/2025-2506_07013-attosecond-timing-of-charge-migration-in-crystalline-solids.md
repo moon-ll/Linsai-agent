@@ -2,11 +2,11 @@
 title: "晶体中电荷迁移的阿秒计时（Attosecond timing of charge migration in crystalline solids）——论文精读笔记"
 type: "papers"
 created: "2026-08-15T21:49:16Z"
-updated: "2026-08-15T21:49:16Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["阿秒物理", "电荷迁移", "晶体超快动力学", "强场超快光学", "论文精读"]
 related: ["亚周期电子动力学", "瞬态量子相位", "阿秒泵浦-探测", "阿秒瞬态吸收谱", "高次谐波"]
 source_raw: "2025-2506.07013-attosecond-timing-of-charge-migration-in-crystalline-solids.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

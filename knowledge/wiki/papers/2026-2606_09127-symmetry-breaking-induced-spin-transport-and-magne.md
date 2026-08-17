@@ -2,11 +2,11 @@
 title: "论文精读：对称性破缺诱导二维交替磁体 Ru2MoSe4 的自旋输运与磁光调控"
 type: "papers"
 created: "2026-08-15T19:16:02Z"
-updated: "2026-08-15T19:16:02Z"
+updated: "2026-08-16T13:26:36Z"
 tags: ["论文精读", "交替磁体", "二维材料", "自旋输运", "磁光克尔效应", "应变工程", "能谷电子学"]
 related: ["Floquet工程", "MOKE", "S4zT对称性", "altermagnet", "压磁效应", "堆叠工程", "超快自旋动力学"]
 source_raw: "2026-2606.09127-symmetry-breaking-induced-spin-transport-and-magne.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

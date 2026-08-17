@@ -2,11 +2,11 @@
 title: "论文精读：kHz 液体薄片等离子体镜的连续相对论性高次谐波产生"
 type: "papers"
 created: "2026-08-15T18:37:22Z"
-updated: "2026-08-15T18:37:22Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["高次谐波产生", "等离子体镜", "液体薄片靶", "阿秒脉冲", "相对论光学", "CEP控制", "论文精读"]
 related: ["CWE/ROM机制", "XUV准连续谱", "kHz重频驱动激光", "孤立阿秒脉冲", "等离子体密度梯度标长", "预脉冲控制"]
 source_raw: "2026-2410.15404-continuous-relativistic-high-harmonic-generation-f.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

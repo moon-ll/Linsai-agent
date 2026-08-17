@@ -2,11 +2,11 @@
 title: "高次谐波脉冲驱动薄膜靶产生~100 as电子束（arXiv:2509.24775 精读）"
 type: "papers"
 created: "2026-08-15T23:41:34Z"
-updated: "2026-08-15T23:41:34Z"
+updated: "2026-08-16T13:26:34Z"
 tags: ["阿秒电子束", "ROM高次谐波", "激光等离子体相互作用", "PIC模拟", "薄膜靶"]
 related: ["电子束诊断", "相对论振荡镜", "超快电子衍射", "阿秒脉冲", "非线性康普顿散射"]
 source_raw: "2026-2509.24775-attosecond-electron-bunch-generation-by-an-intense.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

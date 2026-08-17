@@ -2,11 +2,11 @@
 title: "应变诱导能谷输运精读：CrBr₃/WSe₂/CrBr₃ 三层范德华异质结（arXiv:2403.02188）"
 type: "papers"
 created: "2026-08-15T18:43:47Z"
-updated: "2026-08-15T18:43:47Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["能谷电子学", "范德华异质结", "二维磁性", "WSe2", "CrBr3", "邻近交换效应", "应变工程", "第一性原理输运"]
 related: ["Floquet工程", "impulsive应变", "时间分辨Kerr旋转", "瞬态吸收光谱", "能谷劈裂", "自旋-能谷耦合", "超快退磁"]
 source_raw: "2026-2403.02188-strain-induced-valley-transport-in-crbr-_3-wse-_2-.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

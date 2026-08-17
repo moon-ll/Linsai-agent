@@ -2,11 +2,11 @@
 title: "桌面级少飞秒宽带 XUV 吸收谱仪（c-UBXAS）论文精读"
 type: "papers"
 created: "2026-08-15T19:56:10Z"
-updated: "2026-08-15T19:56:10Z"
+updated: "2026-08-16T13:26:38Z"
 tags: ["XUV吸收谱", "HHG", "低温光谱", "NiI2", "强关联材料", "非平衡动力学", "论文精读", "仪器搭建"]
 related: ["NSFC-强场超快", "仪器响应函数", "固体HHG", "瞬态XUV吸收", "范德华多铁体"]
 source_raw: "2026-260803955-a-table-top-few-femtosecond-broadband-extreme.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "交变磁体中的晶体对称性与谐波产生：磁点群控制的 HHG 指纹——论文精读"
 type: "papers"
 created: "2026-08-15T20:45:15Z"
-updated: "2026-08-15T20:45:15Z"
+updated: "2026-08-16T13:26:31Z"
 tags: ["论文精读", "交变磁体", "高次谐波", "非线性光学", "磁点群", "选择定则", "强场超快"]
 related: ["交变磁性 (altermagnetism)", "反铁磁超快动力学", "序参量超快读出", "磁对称性与选择定则", "高次谐波产生 (HHG)"]
 source_raw: "2024-2408.16926-crystal-symmetries-and-harmonic-generation-in-altermagnets.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

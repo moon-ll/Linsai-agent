@@ -2,11 +2,11 @@
 title: "对称性选择应变调控二维五角交磁体中的自旋-动量锁定与自旋输运"
 type: "papers"
 created: "2026-08-15T19:14:20Z"
-updated: "2026-08-15T19:14:20Z"
+updated: "2026-08-16T13:26:37Z"
 tags: ["交磁体", "自旋-动量锁定", "应变工程", "二维材料", "自旋输运", "对称性调控", "能谷电子学"]
 related: ["Floquet工程", "altermagnet", "ferroelasticity", "spin-momentum locking", "spin-valley transport", "太赫兹自旋动力学", "超快应变脉冲"]
 source_raw: "2026-2606.27896-symmetry-selective-strain-control-of-spin-momentum.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

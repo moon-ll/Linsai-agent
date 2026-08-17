@@ -2,11 +2,11 @@
 title: "中性分子中阿秒X射线电子波包的制备与控制——论文精读（Rossi et al., 2026）"
 type: "papers"
 created: "2026-08-15T21:08:10Z"
-updated: "2026-08-15T21:08:10Z"
+updated: "2026-08-16T13:26:37Z"
 tags: ["阿秒科学", "电荷迁移", "ISXRS", "波包动力学", "EOM-CC", "X射线非线性光学", "相干控制", "芯激发态"]
 related: ["EOM-CC", "ISXRS", "general-quantum-geometry-inversion-20260726", "偏振控制", "波包相干控制", "电荷迁移", "阿秒X射线脉冲"]
 source_raw: "2026-2606.22102-preparation-and-control-of-electronic-wave-packets.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "论文精读：明亮压缩真空（BSV）驱动固体高次谐波产生"
 type: "papers"
 created: "2026-08-15T23:34:22Z"
-updated: "2026-08-15T23:34:22Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["HHG", "固体HHG", "明亮压缩真空", "非经典光", "量子光学", "极端非线性光学", "论文精读"]
 related: ["压缩真空态", "损伤阈值", "自由载流子动力学", "超泊松光子统计", "高次谐波产生"]
 source_raw: "2026-2403.15337-high-harmonic-generation-by-bright-squeezed-vacuum.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

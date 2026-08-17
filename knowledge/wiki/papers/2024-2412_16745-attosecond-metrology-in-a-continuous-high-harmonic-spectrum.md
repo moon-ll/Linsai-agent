@@ -2,11 +2,11 @@
 title: "论文精读：连续高次谐波谱中的阿秒计量（arXiv:2412.16745）"
 type: "papers"
 created: "2026-08-15T21:51:54Z"
-updated: "2026-08-15T21:51:54Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["阿秒计量", "高次谐波", "载波包络相位", "固体超快动力学", "瞬态量子相位"]
 related: ["CEP稳定光源", "NSFC-强场超快", "亚周期分辨测量", "瞬态量子相位光学", "阿秒瞬态吸收"]
 source_raw: "2024-2412.16745-attosecond-metrology-in-a-continuous-high-harmonic-spectrum.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

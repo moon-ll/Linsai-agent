@@ -2,11 +2,11 @@
 title: "Terahertz Digital Reconfigurable Metamaterial Array for Dynamic Beamforming（0.7 THz 2-bit 数字超材料波束调控）精读笔记"
 type: "papers"
 created: "2026-08-15T18:44:46Z"
-updated: "2026-08-15T18:44:46Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["THz", "超材料", "数字编码超材料", "波束赋形", "波前调控", "论文精读", "光波电子学"]
 related: ["THz成像与无损检测", "THz波前调控", "相位编码阵列", "超表面波束扫描"]
 source_raw: "2026-2407.07743-terahertz-digital-reconfigurable-metamaterial-arra.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "阿秒X射线衍射中的电子损伤抑制：论文精读"
 type: "papers"
 created: "2026-08-15T19:45:39Z"
-updated: "2026-08-15T19:45:39Z"
+updated: "2026-08-16T13:26:37Z"
 tags: ["papers", "阿秒科学", "XFEL", "电子损伤", "衍射成像", "电荷密度"]
 related: ["价电子密度成像", "瞬态电子动力学", "硬X射线", "衍射先于破坏", "阿秒X射线脉冲", "飞秒XFEL晶体学"]
 source_raw: "2026-260729351-electronic-damage-suppression-in-x-ray-diffra.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

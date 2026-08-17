@@ -2,11 +2,11 @@
 title: "单层 MoS₂ 中应变与静电势协同调控的隧穿输运：精读笔记"
 type: "papers"
 created: "2026-08-15T21:30:29Z"
-updated: "2026-08-15T21:30:29Z"
+updated: "2026-08-16T13:26:38Z"
 tags: ["能谷电子学", "MoS₂", "应变工程", "隧穿输运", "自旋极化", "双重调控"]
 related: ["Floquet工程", "法布里-珀罗干涉", "相干声子", "能谷极化", "自旋轨道耦合", "量子几何反演"]
 source_raw: "2026-2607.04766-strain-and-potential-controlled-tunneling-in-monol.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

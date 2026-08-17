@@ -2,11 +2,11 @@
 title: "论文精读：基于亚波长金属孔-盘耦合阵列的太赫兹开关（arXiv:2510.18009）"
 type: "papers"
 created: "2026-08-15T19:11:16Z"
-updated: "2026-08-15T19:11:16Z"
+updated: "2026-08-16T13:26:34Z"
 tags: ["THz开关", "超表面", "等离激元", "MEMS", "光波电子学", "异常透射"]
 related: ["MEMS可调超表面", "THz调制器", "localized surface plasmon", "spoof surface plasmon", "强场THz"]
 source_raw: "2026-2510.18009-terahertz-switch-using-an-array-of-subwavelength-m.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

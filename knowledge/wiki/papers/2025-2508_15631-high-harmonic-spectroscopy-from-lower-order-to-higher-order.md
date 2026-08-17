@@ -2,11 +2,11 @@
 title: "论文精读：High Harmonic Spectroscopy from Lower-Order to Higher-Order Topological Insulators"
 type: "papers"
 created: "2026-08-15T20:36:42Z"
-updated: "2026-08-15T20:36:42Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["solid-state-hhg", "topological-insulators", "higher-order-topology", "hhg-spectroscopy", "edge-states", "corner-states", "channel-resolved-yield", "strong-field"]
 related: ["BSV驱动HHG", "固体高次谐波产生", "拓扑边界态", "贝里曲率与圆二色HHG", "通道分辨分析", "高阶拓扑绝缘体"]
 source_raw: "2025-2508.15631-high-harmonic-spectroscopy-from-lower-order-to-higher-order.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "Fieldoscopy at the Quantum Limit：把场分辨测量推进到单光子水平"
 type: "papers"
 created: "2026-08-15T19:51:10Z"
-updated: "2026-08-15T19:51:10Z"
+updated: "2026-08-16T13:26:34Z"
 tags: ["papers", "光波电子学", "量子光学", "场分辨测量", "单光子探测", "阿秒物理", "脉内相干性"]
 related: ["TIPTOE", "general-quantum-geometry-inversion-20260726", "佩塔赫兹电子学", "电光采样EOS", "量子-经典过渡", "阿秒条纹技术"]
 source_raw: "2026-2504.13121-fieldoscopy-at-the-quantum-limit.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

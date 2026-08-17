@@ -2,11 +2,11 @@
 title: "Quantum interference in attosecond transient absorption of laser-dressed helium atoms（Chen, Wu, Gaarde & Schafer, PRA 2013）精读笔记"
 type: "papers"
 created: "2026-08-15T17:43:01Z"
-updated: "2026-08-15T17:43:01Z"
+updated: "2026-08-16T13:26:29Z"
 tags: ["attosecond transient absorption", "quantum interference", "helium", "XUV-IR pump-probe", "AC Stark shift", "sub-cycle dynamics", "multi-photon transitions", "strong-field ionization"]
 related: ["all-optical attosecond metrology", "attosecond streaking", "delay-dependent spectrogram", "dispersive line shape", "electron interferometry", "wave packet interference"]
 source_raw: "2013-1301.0771-quantum-interference-in-attosecond-transient-absorption-of-l.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

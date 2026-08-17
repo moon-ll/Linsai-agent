@@ -2,11 +2,11 @@
 title: "论文精读：No-Go Theorems for Quantum Transport Metrics from Fixed Cost Operators（arXiv:2607.28358）"
 type: "papers"
 created: "2026-08-15T22:37:05Z"
-updated: "2026-08-15T22:37:05Z"
+updated: "2026-08-16T13:26:38Z"
 tags: ["量子最优传输", "no-go定理", "量子输运度量", "论文精读", "强场超快"]
 related: ["Wasserstein距离", "电荷迁移", "瞬态量子相位", "量子可训练性", "量子态度量"]
 source_raw: "2026-2607.28358-no-go-theorems-for-quantum-transport-metrics-from-fixed-cost.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

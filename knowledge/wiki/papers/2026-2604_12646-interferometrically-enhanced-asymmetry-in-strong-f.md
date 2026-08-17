@@ -2,11 +2,11 @@
 title: "论文精读：亮压缩真空干涉增强强场电离的不对称性（arXiv:2604.12646）"
 type: "papers"
 created: "2026-08-15T23:36:08Z"
-updated: "2026-08-15T23:36:08Z"
+updated: "2026-08-16T13:26:35Z"
 tags: ["强场电离", "亮压缩真空", "量子光学", "强场近似SFA", "光电子动量谱", "光波电子学", "双色场"]
 related: ["HHG与量子光", "亚周期动力学重建", "量子光驱动的强场过程", "隧穿电离", "非经典光场"]
 source_raw: "2026-2604.12646-interferometrically-enhanced-asymmetry-in-strong-f.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

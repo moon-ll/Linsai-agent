@@ -2,11 +2,11 @@
 title: "晶体对称性与Weyl节点对TaAs高次谐波产生的影响：论文精读"
 type: "papers"
 created: "2026-08-15T22:56:39Z"
-updated: "2026-08-15T22:56:39Z"
+updated: "2026-08-16T13:26:31Z"
 tags: ["高次谐波产生", "Weyl半金属", "TaAs", "晶体对称性", "Jones矩阵", "选择定则", "贝里曲率", "拓扑材料"]
 related: ["偏振分辨HHG", "半导体Bloch方程", "反常速度", "瞬态量子相", "非线性光学极化率"]
 source_raw: "2024-2405.16125-impact-of-crystal-symmetries-and-weyl-nodes-on-high-harmonic.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

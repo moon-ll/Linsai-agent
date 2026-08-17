@@ -2,11 +2,11 @@
 title: "论文精读：双层 ReIrGe2Se6 中的多态铁电与层锁定可切换反常谷霍尔效应"
 type: "papers"
 created: "2026-08-15T21:36:16Z"
-updated: "2026-08-15T21:36:16Z"
+updated: "2026-08-16T13:26:38Z"
 tags: ["能谷电子学", "多态铁电", "贝里曲率", "反常谷霍尔效应", "二维多铁", "第一性原理预测", "层自由度"]
 related: ["圆偏振光电流", "磁电耦合", "贝里曲率驱动输运", "超快铁电翻转", "量子几何张量", "非线性霍尔效应"]
 source_raw: "2026-2607.14461-multistate-ferroelectricity-and-switchable-layer-l.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

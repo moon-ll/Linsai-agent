@@ -2,11 +2,11 @@
 title: "铜插层双层 MoS₂ 实现超低接触电阻（arXiv:2412.18385）论文精读"
 type: "papers"
 created: "2026-08-15T18:40:37Z"
-updated: "2026-08-15T18:40:37Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["MoS₂", "二维材料", "接触电阻", "插层工程", "第一性原理计算", "晶体管", "金属-半导体界面"]
 related: ["欧姆接触", "能谷电子学", "费米能级钉扎", "超快界面电荷转移", "过渡金属硫族化合物 TMD", "金属诱导间隙态 MIGS"]
 source_raw: "2026-2412.18385-achieving-low-contact-resistance-through-copper-in.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

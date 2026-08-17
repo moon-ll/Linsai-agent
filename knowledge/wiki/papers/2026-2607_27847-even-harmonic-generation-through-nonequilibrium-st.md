@@ -2,11 +2,11 @@
 title: "偶次谐波的新来源：非平衡稳态对称性破缺（Even-harmonic generation through nonequilibrium steady-state symmetry breaking）"
 type: "papers"
 created: "2026-08-15T23:14:39Z"
-updated: "2026-08-15T23:14:39Z"
+updated: "2026-08-16T13:26:38Z"
 tags: ["固体HHG", "偶次谐波", "对称性破缺", "开放量子系统", "Lindblad主方程", "非平衡稳态"]
 related: ["HHG选择定则", "SSH模型", "超快非线性光谱", "输运电流探测", "驱动-耗散系统"]
 source_raw: "2026-2607.27847-even-harmonic-generation-through-nonequilibrium-st.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

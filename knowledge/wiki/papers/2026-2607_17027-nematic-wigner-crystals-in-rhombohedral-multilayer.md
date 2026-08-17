@@ -2,11 +2,11 @@
 title: "菱方多层石墨烯中的向列相 Wigner 晶体（论文精读）"
 type: "papers"
 created: "2026-08-15T21:26:37Z"
-updated: "2026-08-15T21:26:37Z"
+updated: "2026-08-16T13:26:38Z"
 tags: ["Wigner晶体", "向列相", "菱方石墨烯", "能谷电子学", "TDHF", "平均场理论", "位移场调控"]
 related: ["关联电子体系", "强场太赫兹驱动", "谷极化", "超快泵浦探测", "量子几何"]
 source_raw: "2026-2607.17027-nematic-wigner-crystals-in-rhombohedral-multilayer.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

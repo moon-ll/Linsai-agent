@@ -2,11 +2,11 @@
 title: "拓扑绝缘体范德华超材料中的太赫兹二次与三次谐波生成：论文精读"
 type: "papers"
 created: "2026-08-15T22:50:12Z"
-updated: "2026-08-15T22:50:12Z"
+updated: "2026-08-16T13:26:36Z"
 tags: ["二次谐波", "三次谐波", "拓扑绝缘体", "范德华超材料", "太赫兹非线性光学", "对称性工程", "非线性光学"]
 related: ["Bi2Se3", "对称性破缺", "强场太赫兹驱动", "瞬态量子相光学", "范德华堆叠", "高次谐波生成"]
 source_raw: "2026-2604.27864-second-harmonic-generation-and-third-harmonic-generation-in.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

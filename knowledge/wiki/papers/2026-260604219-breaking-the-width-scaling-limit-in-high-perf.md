@@ -2,11 +2,11 @@
 title: "打破宽度缩放极限：高性能原子级薄二维纳米带晶体管（论文精读）"
 type: "papers"
 created: "2026-08-15T20:49:55Z"
-updated: "2026-08-15T20:49:55Z"
+updated: "2026-08-16T13:26:36Z"
 tags: ["论文精读", "MoS2", "纳米带晶体管", "宽度缩放", "二维半导体", "能谷电子学"]
 related: ["NSFC-强场超快", "TMD能谷调控", "二维材料强场物理", "超快载流子动力学", "边缘态与量子限域"]
 source_raw: "2026-260604219-breaking-the-width-scaling-limit-in-high-perf.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

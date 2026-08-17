@@ -2,11 +2,11 @@
 title: "水窗高次谐波能量定标：面向单发软X射线光谱与活细胞成像（Fu et al. 2020）"
 type: "papers"
 created: "2026-08-15T18:19:45Z"
-updated: "2026-08-15T18:19:45Z"
+updated: "2026-08-16T13:26:31Z"
 tags: ["HHG", "水窗", "软X射线", "中红外驱动", "相位匹配", "松聚焦几何", "NEXAFS", "能量定标"]
 related: ["水窗软X射线源", "软X射线FEL种子注入", "近边X射线吸收精细结构", "阿秒泵浦-阿秒探测", "高次谐波产生"]
 source_raw: "2020-2003.06755-energy-scaling-of-water-window-high-order-harmonic-generatio.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

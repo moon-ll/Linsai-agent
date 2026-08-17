@@ -2,11 +2,11 @@
 title: "逐发采集超快电子衍射（Shot-to-shot Acquisition UED）精读笔记"
 type: "papers"
 created: "2026-08-15T19:55:12Z"
-updated: "2026-08-15T19:55:12Z"
+updated: "2026-08-16T13:26:34Z"
 tags: ["UED", "shot-to-shot", "泵浦-探测", "信噪比", "空间电荷展宽", "直接电子探测器", "石墨", "强场非平衡态动力学"]
 related: ["quantum-geometry-inversion提案", "泵浦-探测归一化", "空间电荷效应", "超快电子衍射", "高重频激光系统"]
 source_raw: "2026-2502.02540-shot-to-shot-acquisition-ultrafast-electron-diffra.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

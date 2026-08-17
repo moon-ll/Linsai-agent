@@ -2,11 +2,11 @@
 title: "论文精读：振动高次谐波与倍周期分岔的时间分辨电子衍射探测（arXiv:2606.27891）"
 type: "papers"
 created: "2026-08-15T21:10:59Z"
-updated: "2026-08-15T21:10:59Z"
+updated: "2026-08-16T13:26:37Z"
 tags: ["UTEM", "电子衍射", "非线性动力学", "纳米机械振子", "倍周期分岔", "文献误标警示"]
 related: ["Duffing振子", "HHG光谱学", "event-based探测", "moiré强场探测", "泵浦-探测", "量子几何反演"]
 source_raw: "2026-2606.27891-vibrational-high-harmonics-and-period-doubling-bif.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

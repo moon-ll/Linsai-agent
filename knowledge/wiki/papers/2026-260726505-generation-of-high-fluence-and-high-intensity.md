@@ -2,11 +2,11 @@
 title: "European XFEL 高通量高强度硬 X 射线阿秒脉冲产生：论文精读笔记"
 type: "papers"
 created: "2026-08-15T19:43:42Z"
-updated: "2026-08-15T19:43:42Z"
+updated: "2026-08-16T13:26:37Z"
 tags: ["阿秒科学", "XFEL", "强场物理", "非线性X射线光学", "论文精读"]
 related: ["European XFEL", "X射线ASE", "内壳层非线性电离", "纳米聚焦X射线光学", "阿秒脉冲"]
 source_raw: "2026-260726505-generation-of-high-fluence-and-high-intensity.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "纳米尺度高次谐波产生中的相位匹配效应（Blanco et al., Opt. Express 2016）"
 type: "papers"
 created: "2026-08-15T23:18:42Z"
-updated: "2026-08-15T23:18:42Z"
+updated: "2026-08-16T13:26:30Z"
 tags: ["HHG", "相位匹配", "等离激元增强", "bow-tie纳米天线", "非均匀场", "阿秒脉冲", "量子轨迹选择"]
 related: ["原子偶极相位", "孤立阿秒脉冲", "等离子体散宽带来的相位失配", "纳米天线HHG", "非均匀驱动场"]
 source_raw: "2016-1612.08528-phase-matching-effects-in-high-harmonic-generation-at-the-na.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

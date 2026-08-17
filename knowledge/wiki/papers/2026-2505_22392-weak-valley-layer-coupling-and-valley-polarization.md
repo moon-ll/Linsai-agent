@@ -2,11 +2,11 @@
 title: "中心对称 FeCl₂ 单层中的弱谷层耦合与谷极化：第一性原理预测精读"
 type: "papers"
 created: "2026-08-15T19:35:01Z"
-updated: "2026-08-15T19:35:01Z"
+updated: "2026-08-16T13:26:34Z"
 tags: ["能谷电子学", "谷极化", "谷层耦合", "二维磁性材料", "反铁磁", "PT对称", "第一性原理", "太赫兹强场"]
 related: ["Floquet工程", "堆叠工程", "强场太赫兹驱动", "瞬态圆二色光谱", "超快反铁磁自旋动力学"]
 source_raw: "2026-2505.22392-weak-valley-layer-coupling-and-valley-polarization.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "固体与空心等离激元纳米谐振腔用于载波包络相位读出"
 type: "papers"
 created: "2026-08-15T18:47:27Z"
-updated: "2026-08-15T18:47:27Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["CEP测量", "等离激元纳米天线", "光场发射", "FEM仿真", "Fowler-Nordheim发射", "强场超快光学"]
 related: ["品质因子Q", "纳米间隙热点", "超短脉冲光电流", "载波包络相位", "近场增强NFE"]
 source_raw: "2026-2404.11940-solid-and-hollow-plasmonic-nanoresonators-for-carr.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

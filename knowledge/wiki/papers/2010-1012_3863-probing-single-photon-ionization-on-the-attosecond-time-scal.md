@@ -2,11 +2,11 @@
 title: "论文精读：Probing single-photon ionization on the attosecond time scale（Klünder et al., PRL 2010）"
 type: "papers"
 created: "2026-08-15T23:32:28Z"
-updated: "2026-08-15T23:32:28Z"
+updated: "2026-08-16T13:26:29Z"
 tags: ["attosecond", "RABBITT", "Wigner时延", "光电离时延", "氩原子", "高次谐波", "连续态-连续态时延", "电子关联"]
 related: ["RABBITT侧带干涉", "Wigner-Smith时间延迟", "streaking相机", "通道间耦合", "阿秒脉冲串", "高次谐波产生（HHG）"]
 source_raw: "2010-1012.3863-probing-single-photon-ionization-on-the-attosecond-time-scal.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

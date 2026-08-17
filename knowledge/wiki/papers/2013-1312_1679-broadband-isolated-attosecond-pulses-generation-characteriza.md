@@ -2,11 +2,11 @@
 title: "宽带孤立阿秒脉冲：产生、表征与应用（Chini, Zhao & Chang 2013）精读笔记"
 type: "papers"
 created: "2026-08-15T18:24:29Z"
-updated: "2026-08-15T18:24:29Z"
+updated: "2026-08-16T13:26:30Z"
 tags: ["阿秒脉冲", "高次谐波", "时间门控", "双光学门控", "阿秒灯塔", "CEP控制", "阿秒瞬态吸收", "论文精读"]
 related: ["少周期强场驱动光源", "载波包络相位(CEP)", "阿秒条纹/CRAB表征", "高次谐波产生(HHG)"]
 source_raw: "2013-1312.1679-broadband-isolated-attosecond-pulses-generation-characteriza.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

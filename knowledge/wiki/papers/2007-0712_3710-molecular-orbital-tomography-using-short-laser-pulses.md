@@ -2,11 +2,11 @@
 title: "短激光脉冲实现分子轨道层析成像——论文精读笔记"
 type: "papers"
 created: "2026-08-15T14:27:22Z"
-updated: "2026-08-15T14:27:22Z"
+updated: "2026-08-16T13:26:29Z"
 tags: ["HHG", "分子轨道层析", "少周期脉冲", "再碰撞", "动量矩阵元", "论文精读", "强场物理"]
 related: ["CEP稳定", "Dyson轨道", "Itatani层析方案", "三步模型", "二维TDSE模拟", "高次谐波产生"]
 source_raw: "2007-0712.3710-molecular-orbital-tomography-using-short-laser-pulses.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

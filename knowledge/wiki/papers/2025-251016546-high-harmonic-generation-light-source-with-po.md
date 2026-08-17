@@ -2,11 +2,11 @@
 title: "亚100 μm束斑与偏振可选的高次谐波光源：面向TrARPES的探针工程优化（arXiv:2510.16546）"
 type: "papers"
 created: "2026-08-15T20:49:06Z"
-updated: "2026-08-15T20:49:06Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["HHG", "TrARPES", "偏振选择", "束斑工程", "中红外泵浦", "量子材料", "论文精读"]
 related: ["Bi2Se3", "光电子能谱", "双层石墨烯", "泵浦-探测技术", "过渡金属硫族化合物", "高次谐波产生"]
 source_raw: "2025-251016546-high-harmonic-generation-light-source-with-po.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

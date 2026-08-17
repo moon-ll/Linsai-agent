@@ -2,11 +2,11 @@
 title: "Leaky Wave Antennas for sub-THz 无线应用：现状与挑战（综述精读）"
 type: "papers"
 created: "2026-08-15T20:57:09Z"
-updated: "2026-08-15T20:57:09Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["leaky-wave-antenna", "sub-THz", "波束扫描", "角度-频率耦合", "6G", "JCAS", "综述精读"]
 related: ["THz产生", "光波电子学", "波束赋形", "空间啁啾", "脉冲前沿倾斜", "角色散"]
 source_raw: "2025-251011666-leaky-wave-antennas-for-next-generation-wirel.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

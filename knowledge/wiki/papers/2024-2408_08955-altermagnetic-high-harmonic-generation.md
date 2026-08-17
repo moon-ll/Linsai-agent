@@ -2,11 +2,11 @@
 title: "交变磁性高次谐波产生（Altermagnetic High Harmonic Generation）精读笔记"
 type: "papers"
 created: "2026-08-15T20:44:23Z"
-updated: "2026-08-15T20:44:23Z"
+updated: "2026-08-16T13:26:31Z"
 tags: ["交变磁性", "高次谐波产生", "固体HHG", "超快自旋电子学", "非线性光学", "序参量超快读出"]
 related: ["altermagnetism", "反铁磁超快动力学", "固体高次谐波", "对称性选择定则", "广义序参量读出方案", "自旋分辨光谱"]
 source_raw: "2024-2408.08955-altermagnetic-high-harmonic-generation.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

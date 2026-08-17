@@ -2,11 +2,11 @@
 title: "《The 2025 Roadmap to Ultrafast Dynamics》精读：超快非平衡量子材料的理论与计算地图"
 type: "papers"
 created: "2026-08-15T23:31:43Z"
-updated: "2026-08-15T23:31:43Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["超快动力学", "非平衡量子材料", "路线图", "TDDFT", "NEGF", "QED-DFT", "Floquet工程", "腔材料工程", "FAIR数据", "瞬态光谱"]
 related: ["trARPES", "光诱导超导", "强场物质相互作用", "激子凝聚", "瞬态拓扑相", "第一性原理时间分辨光谱", "腔量子电动力学", "非平衡格林函数"]
 source_raw: "2025-2501.06752-the-2025-roadmap-to-ultrafast-dynamics-frontiers-of-theoreti.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

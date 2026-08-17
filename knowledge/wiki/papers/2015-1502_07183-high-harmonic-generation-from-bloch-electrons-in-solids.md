@@ -2,11 +2,11 @@
 title: "论文精读：High Harmonic Generation from Bloch Electrons in Solids（Wu et al., PRA 2015）"
 type: "papers"
 created: "2026-08-15T19:35:55Z"
-updated: "2026-08-15T19:35:55Z"
+updated: "2026-08-16T13:26:30Z"
 tags: ["固体高次谐波", "HHG", "TDSE", "速度规范", "Houston态", "带间电流", "带内电流", "中红外驱动", "截止能量标度", "论文精读"]
 related: ["Bloch振荡", "ZnO高次谐波实验", "三步模型", "全光学能带重构", "固态再碰撞机制", "退相干时间"]
 source_raw: "2015-1502.07183-high-harmonic-generation-from-bloch-electrons-in-solids.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

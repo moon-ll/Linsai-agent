@@ -2,11 +2,11 @@
 title: "扭转异质双层中的巨非线性光学手性（Giant nonlinear optical chirality in twisted heterobilayers）"
 type: "papers"
 created: "2026-08-15T22:52:52Z"
-updated: "2026-08-15T22:52:52Z"
+updated: "2026-08-16T13:26:36Z"
 tags: ["论文精读", "扭转电子学", "二次谐波", "圆二色性", "手性光学", "TMD异质结", "非线性光学", "MoS2/WSe2"]
 related: ["SHG圆二色", "手性高次谐波", "扭转角工程", "瞬态对称性调控", "莫尔超晶格"]
 source_raw: "2026-2605.17695-giant-nonlinear-optical-chirality-in-twisted-heterobilayers.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

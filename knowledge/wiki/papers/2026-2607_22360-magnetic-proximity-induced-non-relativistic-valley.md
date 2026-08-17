@@ -2,11 +2,11 @@
 title: "论文精读：磁近邻诱导的非相对论性能谷极化（FM/AM 范德华异质结）"
 type: "papers"
 created: "2026-08-15T23:13:41Z"
-updated: "2026-08-15T23:13:41Z"
+updated: "2026-08-16T13:26:38Z"
 tags: ["能谷电子学", "交替磁体", "磁近邻效应", "范德华异质结", "超快磁动力学"]
 related: ["THz 自旋动力学", "全光磁翻转", "反铁磁自旋电子学", "时间分辨克尔效应"]
 source_raw: "2026-2607.22360-magnetic-proximity-induced-non-relativistic-valley.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

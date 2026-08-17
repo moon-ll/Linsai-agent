@@ -2,11 +2,11 @@
 title: "论文精读：AttoSHINE——SHINE 产生连续波太瓦级阿秒 X 射线脉冲"
 type: "papers"
 created: "2026-08-15T22:30:11Z"
-updated: "2026-08-15T22:30:11Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["papers", "阿秒物理", "XFEL", "超快X射线", "凝聚态电子动力学", "SHINE", "强场超快"]
 related: ["ESASE", "X射线自由电子激光", "泵浦-探测光谱", "瞬态量子相", "超快电子动力学", "阿秒脉冲产生"]
 source_raw: "2025-2506.07213-attoshine-generation-of-continuous-wave-terawatt-scale-attos.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.6
 auto_grown: true
 review_status: "pending"

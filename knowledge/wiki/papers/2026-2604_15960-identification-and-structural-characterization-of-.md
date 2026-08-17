@@ -2,11 +2,11 @@
 title: "深度学习识别与结构表征原子级扭转双层材料（CVD MoS₂）——论文精读笔记"
 type: "papers"
 created: "2026-08-15T18:42:34Z"
-updated: "2026-08-15T18:42:34Z"
+updated: "2026-08-16T13:26:35Z"
 tags: ["扭转双层TMD", "深度学习", "语义分割", "MoS₂", "二次谐波表征", "高通量筛选", "能谷电子学", "论文精读"]
 related: ["CVD生长", "二次谐波生成（SHG）", "光学衬度法", "扭转角", "拉曼光谱", "莫尔超晶格"]
 source_raw: "2026-2604.15960-identification-and-structural-characterization-of-.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

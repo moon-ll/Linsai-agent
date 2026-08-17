@@ -2,11 +2,11 @@
 title: "禁而不止：中心对称双层晶体中的稳健二次谐波（arXiv:2601.08830）精读笔记"
 type: "papers"
 created: "2026-08-15T18:54:32Z"
-updated: "2026-08-15T18:54:32Z"
+updated: "2026-08-16T13:26:35Z"
 tags: ["二次谐波", "二阶非线性", "中心对称", "二维材料", "同差探测", "四极非线性", "应变检测", "几何相位", "池中文献"]
 related: ["WSe2", "h-BN", "moiré材料", "固体高次谐波", "场分辨测量", "对称性选择定则", "石墨烯", "贝里曲率"]
 source_raw: "2026-2601.08830-forbidden-second-harmonics-in-centrosymmetric-bila.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

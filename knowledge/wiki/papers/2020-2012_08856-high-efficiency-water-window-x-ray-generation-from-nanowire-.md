@@ -2,11 +2,11 @@
 title: "纳米线阵列靶高效水窗X射线产生（Shou et al., Opt. Express 2020）精读笔记"
 type: "papers"
 created: "2026-08-15T23:17:54Z"
-updated: "2026-08-15T23:17:54Z"
+updated: "2026-08-16T13:26:31Z"
 tags: ["水窗X射线", "纳米线阵列靶", "飞秒激光", "激光等离子体相互作用", "能量转换效率", "PIC模拟"]
 related: ["X射线显微成像", "体加热机制", "新型靶设计", "激光驱动X射线源", "等离子体辐射冷却"]
 source_raw: "2020-2012.08856-high-efficiency-water-window-x-ray-generation-from-nanowire-.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

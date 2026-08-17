@@ -2,11 +2,11 @@
 title: "HHK：面向硬件的跨部位 PPG 密钥生成架构（BAN 会话密钥）精读笔记"
 type: "papers"
 created: "2026-08-15T23:37:51Z"
-updated: "2026-08-15T23:37:51Z"
+updated: "2026-08-16T13:26:36Z"
 tags: ["PPG密钥生成", "物理层安全", "体域网BAN", "极化码", "信息协调", "FPGA/RTL", "低功耗硬件", "误归类-HHG"]
 related: ["QKD后处理", "心电/脉搏间期IBI", "时间戳对齐与抖动", "模糊承诺", "等频量化", "跨部位信号同步"]
 source_raw: "2026-2605.24991-hhk-a-hardware-oriented-cross-location-ppg-key-gen.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

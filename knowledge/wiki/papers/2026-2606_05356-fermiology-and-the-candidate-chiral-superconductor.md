@@ -2,11 +2,11 @@
 title: "Fermiology and the Candidate Chiral Superconductor in Rhombohedral Tetralayer Graphene 精读笔记"
 type: "papers"
 created: "2026-08-15T19:32:59Z"
-updated: "2026-08-15T19:32:59Z"
+updated: "2026-08-16T13:26:36Z"
 tags: ["手性超导", "量子振荡", "菱方石墨烯", "能谷电子学", "费米学", "时间反演对称性破缺"]
 related: ["multitone 态", "quarter metal", "强太赫兹场", "拓扑超导", "时间分辨克尔效应", "自旋-能谷极化"]
 source_raw: "2026-2606.05356-fermiology-and-the-candidate-chiral-superconductor.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "Robust Spin Splitting and Strain-Controlled Optical Response in Monolayer CrC2N4 — 论文精读"
 type: "papers"
 created: "2026-08-15T19:15:01Z"
-updated: "2026-08-15T19:15:01Z"
+updated: "2026-08-16T13:26:37Z"
 tags: ["能谷电子学", "二维材料", "应变工程", "自旋轨道耦合", "第一性原理", "Berry曲率", "CrC2N4"]
 related: ["GW-BSE", "时间分辨Kerr/Faraday旋转", "激子效应", "相干声子驱动应变", "谷动力学", "高次谐波产生"]
 source_raw: "2026-2606.17329-robust-spin-splitting-and-strain-controlled-optica.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

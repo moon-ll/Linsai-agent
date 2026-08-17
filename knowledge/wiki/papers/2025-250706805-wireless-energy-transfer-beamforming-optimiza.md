@@ -2,11 +2,11 @@
 title: "ITS 辅助无线能量传输的波束成形优化（论文精读）"
 type: "papers"
 created: "2026-08-15T20:50:59Z"
-updated: "2026-08-15T20:50:59Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["论文精读", "无线能量传输", "智能超表面", "波束成形", "SCA优化", "近远场调控", "光波电子学"]
 related: ["SLM优化算法", "仅相位波前整形", "脉冲整形", "菲涅尔区/近场光学", "非线性传输建模"]
 source_raw: "2025-250706805-wireless-energy-transfer-beamforming-optimiza.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

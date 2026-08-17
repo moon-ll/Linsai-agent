@@ -2,11 +2,11 @@
 title: "稀有气体价壳层光电离的 Wigner 时延系统计算（Kheifets, PRA 2013）精读"
 type: "papers"
 created: "2026-08-15T18:02:18Z"
-updated: "2026-08-15T18:02:18Z"
+updated: "2026-08-16T13:26:30Z"
 tags: ["阿秒物理", "光电离时间延迟", "Wigner时延", "RPAE", "稀有气体", "Cooper最小", "RABBITT", "阿秒条纹技术", "电子关联", "论文精读"]
 related: ["Cooper minimum", "Coulomb-laser coupling", "HHG标定", "RABBITT", "Wigner time delay", "attosecond streaking", "interchannel coupling", "电子关联效应"]
 source_raw: "2013-1302.4495-time-delay-in-valence-shell-photoionization-of-noble-gas-ato.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

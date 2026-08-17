@@ -2,11 +2,11 @@
 title: "MnPS₃|WS₂ 反演破缺范德华异质结中的能谷极化、Rashba 相互作用与弱变磁性：论文精读"
 type: "papers"
 created: "2026-08-15T21:25:40Z"
-updated: "2026-08-15T21:25:40Z"
+updated: "2026-08-16T13:26:38Z"
 tags: ["papers", "能谷电子学", "变磁性", "范德华异质结", "Rashba效应", "DFT", "自旋-能谷锁定", "反铁磁"]
 related: ["Berry曲率", "Floquet工程", "MnPS3", "WS2", "反铁磁超快调控", "瞬态能谷动力学", "量子几何", "高次谐波产生"]
 source_raw: "2026-2607.16454-valley-polarization-rashba-interaction-and-weak-al.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "电子关联主导的 XUV-IR 泵浦-探测双电离：延迟扫描作为控制旋钮（Bauch et al., EPL 2010）"
 type: "papers"
 created: "2026-08-15T18:06:29Z"
-updated: "2026-08-15T18:06:29Z"
+updated: "2026-08-16T13:26:29Z"
 tags: ["双电离", "非序列双电离", "电子关联", "阿秒泵浦-探测", "XUV-IR", "含时薛定谔方程", "SAE近似", "shake-up", "再散射", "强场物理"]
 related: ["Corkum三步再碰撞模型", "单活跃电子近似适用边界", "离子激发态相干拍频", "阿秒条纹术/瞬态吸收", "非序列双电离(NSDI)与膝盖结构"]
 source_raw: "2010-1005.1253-electronic-correlations-in-double-ionization-of-atoms-in-pum.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "水窗阿秒软X射线脉冲的时空孤立（Silva et al. 2014 精读）"
 type: "papers"
 created: "2026-08-15T23:21:26Z"
-updated: "2026-08-15T23:21:26Z"
+updated: "2026-08-16T13:26:30Z"
 tags: ["阿秒物理", "高次谐波", "水窗", "软X射线", "波前旋转", "相位匹配", "单阿秒脉冲"]
 related: ["CEP stabilization", "attosecond lighthouse", "carbon K-edge", "high-pressure phase matching", "mid-IR HHG", "wavefront rotation (WFR)"]
 source_raw: "2014-1411.1964-spatio-temporal-isolation-of-attosecond-soft-x-ray-pulses-in.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

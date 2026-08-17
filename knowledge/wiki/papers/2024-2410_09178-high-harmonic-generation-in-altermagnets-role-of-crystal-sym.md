@@ -2,11 +2,11 @@
 title: "交变磁体中的高次谐波产生：晶体对称性与自旋有序的作用（精读笔记）"
 type: "papers"
 created: "2026-08-15T20:46:14Z"
-updated: "2026-08-15T20:46:14Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["高次谐波产生", "交变磁性", "晶体对称性", "自旋极化", "超快磁动力学", "第一性原理"]
 related: ["RuO2交变磁性争议", "反铁磁HHG圆二色", "固态HHG椭偏依赖", "序参量超快读出", "磁空间群选择定则"]
 source_raw: "2024-2410.09178-high-harmonic-generation-in-altermagnets-role-of-crystal-sym.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

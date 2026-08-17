@@ -2,11 +2,11 @@
 title: "少层六方氮化硼中的高次谐波产生：从单层到体响应的演化（论文精读）"
 type: "papers"
 created: "2026-08-15T18:23:27Z"
-updated: "2026-08-15T18:23:27Z"
+updated: "2026-08-16T13:26:30Z"
 tags: ["高次谐波产生", "hBN", "TDDFT", "二维材料", "强场超快光学"]
 related: ["Octopus", "原子样与体样HHG", "固态高次谐波", "堆垛工程", "层间退局域"]
 source_raw: "2018-1807.02961-high-harmonic-generation-from-few-layer-hexagonal-boron-nitr.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

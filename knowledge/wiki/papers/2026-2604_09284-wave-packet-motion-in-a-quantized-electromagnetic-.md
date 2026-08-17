@@ -2,11 +2,11 @@
 title: "量子化电磁场中的波包运动：解析结果"
 type: "papers"
 created: "2026-08-15T19:21:57Z"
-updated: "2026-08-15T19:21:57Z"
+updated: "2026-08-16T13:26:35Z"
 tags: ["量子化光场", "电子波包动力学", "强场物理", "压缩真空", "量子涨落", "解析解"]
 related: ["亮压缩真空", "激光脉冲多模描述", "自由电子波包", "量子光学×强场物理", "高次谐波产生"]
 source_raw: "2026-2604.09284-wave-packet-motion-in-a-quantized-electromagnetic-.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "量子光学高次谐波产生中的能量守恒（arXiv:2410.15503）精读笔记"
 type: "papers"
 created: "2026-08-15T19:50:16Z"
-updated: "2026-08-15T19:50:16Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["HHG", "量子光学", "能量守恒", "纠缠光场", "光学猫态", "量子态工程", "固体HHG"]
 related: ["光子数守恒", "强场近似", "条件测量", "非经典光", "高次谐波产生"]
 source_raw: "2026-2410.15503-energy-conservation-in-quantum-optical-high-harmon.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

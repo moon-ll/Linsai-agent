@@ -2,11 +2,11 @@
 title: "Quantum Optical Signatures of Band Topology in Solid-State High Harmonics — 论文精读笔记"
 type: "papers"
 created: "2026-08-15T22:22:16Z"
-updated: "2026-08-15T22:22:16Z"
+updated: "2026-08-16T13:26:35Z"
 tags: ["固体HHG", "能带拓扑", "量子光学", "高次谐波", "贝里曲率", "非经典光"]
 related: ["Floquet工程", "key-transient-quantum-phase-optical-20260726", "光子关联测量", "半导体布洛赫方程", "贝里曲率与陈数", "高次谐波产生(HHG)"]
 source_raw: "2026-2604.20388-quantum-optical-signatures-of-band-topology-in-solid-state-h.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

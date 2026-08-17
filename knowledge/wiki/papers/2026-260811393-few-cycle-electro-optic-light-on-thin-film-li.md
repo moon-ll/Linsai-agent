@@ -2,11 +2,11 @@
 title: "论文精读：Few-cycle electro-optic light on thin-film lithium niobate（TFLN 少周期电光脉冲合成与片上非线性）"
 type: "papers"
 created: "2026-08-15T20:58:00Z"
-updated: "2026-08-15T20:58:00Z"
+updated: "2026-08-16T13:26:39Z"
 tags: ["论文精读", "薄膜铌酸锂", "TFLN", "电光频率梳", "孤子自压缩", "少周期脉冲", "集成非线性光学", "高Q微腔"]
 related: ["微波光子学", "波导高次谐波产生", "腔增强非线性光学", "色散工程波导", "载波包络相位CEP", "阿秒科学"]
 source_raw: "2026-260811393-few-cycle-electro-optic-light-on-thin-film-li.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

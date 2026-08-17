@@ -2,11 +2,11 @@
 title: "论文精读：面向智能透射面（ITS）的无线能量传输波束成形优化"
 type: "papers"
 created: "2026-08-15T23:00:06Z"
-updated: "2026-08-15T23:00:06Z"
+updated: "2026-08-16T13:26:34Z"
 tags: ["论文精读", "波束成形", "智能超表面", "无线能量传输", "光波电子学", "跨领域"]
 related: ["HPA非线性", "SCA优化", "智能透射面ITS", "波前整形", "空间光调制器SLM", "近场/远场边界"]
 source_raw: "2026-2507.06805-wireless-energy-transfer-beamforming-optimization-.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

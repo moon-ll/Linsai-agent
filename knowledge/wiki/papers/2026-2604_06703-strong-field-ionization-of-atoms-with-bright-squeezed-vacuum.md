@@ -2,11 +2,11 @@
 title: "BSV 驱动 Xe 强场电离：量子涨落反而保护光电子全息相干性（arXiv:2604.06703 精读）"
 type: "papers"
 created: "2026-08-15T20:29:45Z"
-updated: "2026-08-15T20:29:45Z"
+updated: "2026-08-16T13:26:35Z"
 tags: ["papers", "BSV", "强场电离", "光电子全息", "量子光强场物理", "ATI", "非经典光"]
 related: ["HHG", "bright squeezed vacuum", "三步模型", "光电子全息", "强场电离", "量子涨落"]
 source_raw: "2026-2604.06703-strong-field-ionization-of-atoms-with-bright-squeezed-vacuum.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

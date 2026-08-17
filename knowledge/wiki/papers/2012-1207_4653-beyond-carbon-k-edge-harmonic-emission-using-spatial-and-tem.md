@@ -2,11 +2,11 @@
 title: "超越碳K边的高次谐波发射：时空合成激光场方案（论文精读）"
 type: "papers"
 created: "2026-08-15T18:25:26Z"
-updated: "2026-08-15T18:25:26Z"
+updated: "2026-08-16T13:26:29Z"
 tags: ["HHG", "截止能量扩展", "等离激元纳米天线", "少周期脉冲合成", "碳K边", "内壳层动力学", "阿秒光谱"]
 related: ["三维TDSE", "中红外驱动HHG", "相位匹配", "量子轨迹分析", "非均匀光场中的电子动力学"]
 source_raw: "2012-1207.4653-beyond-carbon-k-edge-harmonic-emission-using-spatial-and-tem.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

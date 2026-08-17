@@ -2,11 +2,11 @@
 title: "应变可调的谷极化双层石墨烯二次谐波响应——精读笔记"
 type: "papers"
 created: "2026-08-15T21:44:44Z"
-updated: "2026-08-15T21:44:44Z"
+updated: "2026-08-16T13:26:37Z"
 tags: ["能谷电子学", "双层石墨烯", "二次谐波产生", "应变工程", "非线性光学", "量子动力学方法"]
 related: ["SHG", "中红外光子学", "谷极化", "贝里曲率与量子几何", "赝自旋织构", "量子几何反演提案"]
 source_raw: "2026-2606.31684-strain-tunable-harmonic-responses-in-valley-polari.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

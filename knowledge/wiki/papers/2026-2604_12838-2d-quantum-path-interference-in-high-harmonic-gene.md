@@ -2,11 +2,11 @@
 title: "高度双色场驱动的二维量子路径干涉（2D-QPI）HHG —— arXiv:2604.12838 精读"
 type: "papers"
 created: "2026-08-15T19:20:54Z"
-updated: "2026-08-15T19:20:54Z"
+updated: "2026-08-16T13:26:35Z"
 tags: ["HHG", "双色场", "量子路径干涉", "阿秒电子动力学", "强场物理", "论文精读"]
 related: ["动力学对称性", "强场近似(SFA)", "正交偏振双色场", "相位匹配", "量子轨道/鞍点理论"]
 source_raw: "2026-2604.12838-2d-quantum-path-interference-in-high-harmonic-gene.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "Wigner 晶体的形状与空穴自掺杂：Mexican-Hat 色散中的变分研究精读"
 type: "papers"
 created: "2026-08-15T19:49:19Z"
-updated: "2026-08-15T19:49:19Z"
+updated: "2026-08-16T13:26:38Z"
 tags: ["论文精读", "Wigner晶体", "Mexican-hat色散", "空穴自掺杂", "变分蒙特卡洛", "能谷电子学", "TMD", "强关联体系"]
 related: ["Floquet带工程", "NSFC-强场超快", "TMD材料", "tr-ARPES", "泵浦-探测光谱", "能谷电子学"]
 source_raw: "2026-260800170-shape-of-wigner-crystals-and-hole-self-doping.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

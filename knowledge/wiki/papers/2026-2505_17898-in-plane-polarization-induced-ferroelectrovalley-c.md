@@ -2,11 +2,11 @@
 title: "面内极化诱导的铁电-能谷耦合：Gd取代EuCl₂单层的电控谷电子学提案"
 type: "papers"
 created: "2026-08-15T19:09:18Z"
-updated: "2026-08-15T19:09:18Z"
+updated: "2026-08-16T13:26:34Z"
 tags: ["能谷电子学", "铁电性", "二维材料", "第一性原理", "电场调控", "稀土卤化物", "papers"]
 related: ["强场THz驱动", "时间分辨圆二色光谱", "相干声子", "自旋轨道耦合", "谷极化", "铁电极化翻转"]
 source_raw: "2026-2505.17898-in-plane-polarization-induced-ferroelectrovalley-c.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "Edge states and quantum optical high-harmonic generation from topological insulators"
 type: "papers"
 created: "2026-08-15T19:28:03Z"
-updated: "2026-08-16T05:52:50Z"
+updated: "2026-08-16T13:26:35Z"
 tags: ["HHG", "强场量子光学", "拓扑绝缘体", "SSH模型", "压缩态", "边缘态", "固体HHG", "非经典光"]
 related: ["光场压缩", "固体高次谐波", "拓扑光子学", "有限尺寸效应", "贝里曲率与HHG"]
 source_raw: "2026-2602.16454-edge-states-and-quantum-optical-high-harmonic-gene.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

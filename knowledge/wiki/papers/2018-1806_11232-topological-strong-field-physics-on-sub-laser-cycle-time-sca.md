@@ -2,11 +2,11 @@
 title: "论文精读：拓扑相在亚激光周期强场响应中的印记（Silva et al., Nat. Photon. 2018）"
 type: "papers"
 created: "2026-08-15T19:36:57Z"
-updated: "2026-08-15T19:36:57Z"
+updated: "2026-08-16T13:26:30Z"
 tags: ["论文精读", "高次谐波", "拓扑材料", "贝里曲率", "阿秒动力学", "固态HHG", "强场隧穿"]
 related: ["Berry 曲率与陈数", "Haldane 模型", "场致带间隧穿", "拓扑相变", "阿秒推迟", "高次谐波产生 (HHG)"]
 source_raw: "2018-1806.11232-topological-strong-field-physics-on-sub-laser-cycle-time-sca.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

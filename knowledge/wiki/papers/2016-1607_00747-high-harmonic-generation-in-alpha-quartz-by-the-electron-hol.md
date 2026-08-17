@@ -2,11 +2,11 @@
 title: "论文精读：α-石英中电子-空穴复合主导的高次谐波产生（Otobe, PRB 2016）"
 type: "papers"
 created: "2026-08-15T18:00:29Z"
-updated: "2026-08-15T18:00:29Z"
+updated: "2026-08-16T13:26:30Z"
 tags: ["高次谐波产生", "固体HHG", "TDDFT", "电子-空穴复合", "alpha-石英", "阿秒脉冲", "强场物理", "带间动力学"]
 related: ["Bloch振荡", "Wannier-Stark局域化", "三步模型", "实时实空间TDDFT", "带间/带内机制之争", "空穴密度标度律", "紧凑阿秒源"]
 source_raw: "2016-1607.00747-high-harmonic-generation-in-alpha-quartz-by-the-electron-hol.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

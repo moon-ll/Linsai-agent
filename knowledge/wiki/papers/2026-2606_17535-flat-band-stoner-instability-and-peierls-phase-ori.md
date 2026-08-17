@@ -2,11 +2,11 @@
 title: "平带Stoner不稳定性与Peierls相位：菱面体石墨中跨维度反常霍尔效应的微观理论"
 type: "papers"
 created: "2026-08-15T21:06:09Z"
-updated: "2026-08-15T21:06:09Z"
+updated: "2026-08-16T13:26:37Z"
 tags: ["平带物理", "Stoner不稳定性", "反常霍尔效应", "菱面体石墨", "能谷极化", "超快调控", "理论精读"]
 related: ["Berry曲率", "能谷电子学", "自旋-能谷锁定", "量子几何", "量子几何反演提案20260726"]
 source_raw: "2026-2606.17535-flat-band-stoner-instability-and-peierls-phase-ori.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

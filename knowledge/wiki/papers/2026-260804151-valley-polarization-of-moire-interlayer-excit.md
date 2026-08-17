@@ -2,11 +2,11 @@
 title: "论文精读：多体相互作用驱动的莫尔层间激子复合物能谷极化（arXiv:2608.04151）"
 type: "papers"
 created: "2026-08-15T20:00:58Z"
-updated: "2026-08-15T20:00:58Z"
+updated: "2026-08-16T13:26:38Z"
 tags: ["论文精读", "莫尔超晶格", "层间激子", "能谷极化", "多体物理", "WSe2/WS2", "时间分辨PL", "能谷电子学"]
 related: ["NSFC-强场超快", "不可压缩电荷晶体", "圆二色/克尔测量", "层间激子", "时间分辨光谱", "激子Mott绝缘体", "能谷电子学"]
 source_raw: "2026-260804151-valley-polarization-of-moire-interlayer-excit.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

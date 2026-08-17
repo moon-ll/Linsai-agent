@@ -2,11 +2,11 @@
 title: "论文精读：单层Janus拓扑半导体的室温巨非线性（arXiv:2304.00750）"
 type: "papers"
 created: "2026-08-15T22:13:11Z"
-updated: "2026-08-15T22:13:11Z"
+updated: "2026-08-16T13:26:31Z"
 tags: ["Janus材料", "Berry曲率", "非线性光学", "拓扑半导体", "二维材料", "室温器件"]
 related: ["二阶非线性", "位移电流", "强场超快", "瞬态量子相变光学调控", "贝里曲率偶极", "高次谐波产生"]
 source_raw: "2023-2304.00750-giant-room-temperature-nonlinearities-from-a-monolayer-janus.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.6
 auto_grown: true
 review_status: "pending"

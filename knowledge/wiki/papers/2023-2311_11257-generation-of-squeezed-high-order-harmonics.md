@@ -2,11 +2,11 @@
 title: "论文精读：Generation of squeezed high-order harmonics（挤压态高次谐波的生成）"
 type: "papers"
 created: "2026-08-15T20:06:18Z"
-updated: "2026-08-15T20:06:18Z"
+updated: "2026-08-16T13:26:31Z"
 tags: ["高次谐波", "HHG", "挤压态", "量子光学", "量子频率转换", "XUV", "论文精读"]
 related: ["BSV驱动HHG", "NSFC-强场超快", "光子统计", "宏观量子态", "量子光驱动强场物理"]
 source_raw: "2023-2311.11257-generation-of-squeezed-high-order-harmonics.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

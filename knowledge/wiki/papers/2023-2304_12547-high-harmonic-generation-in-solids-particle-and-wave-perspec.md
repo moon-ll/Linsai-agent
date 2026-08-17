@@ -2,11 +2,11 @@
 title: "固体高次谐波生成：粒子与波动视角——Li et al. (2023) Rep. Prog. Phys. 精读笔记"
 type: "papers"
 created: "2026-08-15T19:38:53Z"
-updated: "2026-08-15T19:38:53Z"
+updated: "2026-08-16T13:26:31Z"
 tags: ["固体HHG", "三步模型", "惠更斯-菲涅尔图像", "带间电流", "阿秒科学", "强场物理", "论文精读"]
 related: ["Huygens-Fresnel picture", "LIED", "attosecond spectroscopy", "intraband/interband current", "recollision model", "semiconductor Bloch equations", "高次谐波光谱学 HHS"]
 source_raw: "2023-2304.12547-high-harmonic-generation-in-solids-particle-and-wave-perspec.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

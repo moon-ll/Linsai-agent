@@ -2,11 +2,11 @@
 title: "论文精读：High-Harmonic Generation in a Crystal Driven by Quantum Light（量子光驱动晶体中的高次谐波）"
 type: "papers"
 created: "2026-08-15T20:23:33Z"
-updated: "2026-08-15T20:23:33Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["HHG", "固体高次谐波", "量子光学驱动", "BSV", "ZnO", "P表示", "截止频率扩展"]
 related: ["Glauber-Sudarshan-P表示", "NSFC-强场超快", "bright-squeezed-vacuum", "general-bsv-driven-hhg-quantum-20260726", "半导体布洛赫方程", "带内HHG"]
 source_raw: "2025-2502.11803-high-harmonic-generation-in-a-crystal-driven-by-quantum-ligh.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "论文精读：Tracking ultrafast solid-state dynamics using high harmonic spectroscopy（VO₂ tr-HHG）"
 type: "papers"
 created: "2026-08-15T19:38:02Z"
-updated: "2026-08-15T19:38:02Z"
+updated: "2026-08-16T13:26:31Z"
 tags: ["tr-HHG", "固体高次谐波", "VO2", "绝缘体-金属相变", "隐藏相", "相干声子", "中红外驱动", "带内电流"]
 related: ["DFT计算", "强关联材料", "泵浦-探测光谱", "超快电子衍射", "高次谐波产生"]
 source_raw: "2020-2003.10430-tracking-ultrafast-solid-state-dynamics-using-high-harmonic-.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

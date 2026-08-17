@@ -2,11 +2,11 @@
 title: "铁电邻近效应零场明亮化 WSe₂/杂化钙钛矿异质结中的自旋禁戒暗激子"
 type: "papers"
 created: "2026-08-15T21:01:38Z"
-updated: "2026-08-15T21:01:38Z"
+updated: "2026-08-16T13:26:36Z"
 tags: ["暗激子", "铁电邻近效应", "WSe2", "能谷电子学", "有效自旋轨道耦合场", "转角工程"]
 related: ["Floquet工程", "二维异质结", "激子明亮化", "自旋-能谷耦合", "量子几何操控"]
 source_raw: "2026-2606.06128-ferroelectric-brightening-of-spin-forbidden-dark-e.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "高次谐波光谱揭示 TiSe₂ 中 Mott–电荷密度波相变的各向异性（arXiv: 2409.04216）"
 type: "papers"
 created: "2026-08-15T18:51:32Z"
-updated: "2026-08-15T18:51:32Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["HHG光谱学", "高次谐波", "电荷密度波", "量子相变", "TiSe₂", "偏振分辨", "关联电子体系", "非微扰动力学"]
 related: ["Mott相变", "偏振分辨非线性光谱", "固体高次谐波产生", "强场驱动电子动力学", "激子有序", "电荷密度波 (CDW)"]
 source_raw: "2026-2409.04216-high-harmonic-spectroscopy-reveals-anisotropy-of-t.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

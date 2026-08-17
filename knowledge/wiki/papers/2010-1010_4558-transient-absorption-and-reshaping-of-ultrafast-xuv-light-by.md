@@ -2,11 +2,11 @@
 title: "激光缀饰氦原子中的XUV瞬态吸收与脉冲整形 — Gaarde et al. (2010) 精读"
 type: "papers"
 created: "2026-08-15T17:55:52Z"
-updated: "2026-08-15T17:55:52Z"
+updated: "2026-08-16T13:26:29Z"
 tags: ["阿秒瞬态吸收", "Autler-Townes分裂", "激光感生透明", "氦原子", "Maxwell-Schrödinger方程", "XUV脉冲传播", "论文精读"]
 related: ["TDSE", "XUV-IR泵浦探测", "中红外驱动激光", "强场缀饰原子", "瞬态吸收光谱"]
 source_raw: "2010-1010.4558-transient-absorption-and-reshaping-of-ultrafast-xuv-light-by.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

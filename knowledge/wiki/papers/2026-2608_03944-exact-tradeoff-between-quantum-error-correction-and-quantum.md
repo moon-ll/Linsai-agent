@@ -2,11 +2,11 @@
 title: "量子纠错与量子达尔文主义的精确权衡：一个信息论 No-Go 定理"
 type: "papers"
 created: "2026-08-15T22:34:00Z"
-updated: "2026-08-15T22:34:00Z"
+updated: "2026-08-16T13:26:39Z"
 tags: ["quantum-darwinism", "quantum-error-correction", "decoherence", "no-go-theorem", "information-theory", "system-environment-interaction", "deepxiv-论文库"]
 related: ["knill-laflamme条件", "互信息冗余编码", "瞬态量子相位测量", "系统-环境信息流", "退相干与指针态", "量子纠错", "量子达尔文主义"]
 source_raw: "2026-2608.03944-exact-tradeoff-between-quantum-error-correction-and-quantum.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

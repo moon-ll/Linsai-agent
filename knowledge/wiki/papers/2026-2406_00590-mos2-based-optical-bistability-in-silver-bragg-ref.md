@@ -2,11 +2,11 @@
 title: "MoS₂-银布拉格反射镜多层结构的可见光光学双稳态（精读笔记）"
 type: "papers"
 created: "2026-08-15T18:41:37Z"
-updated: "2026-08-15T18:41:37Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["光学双稳态", "光Tamm态", "MoS₂", "Kerr非线性", "布拉格反射镜", "二维材料非线性光学", "论文精读"]
 related: ["Kerr非线性", "低阈值全光开关", "光学Tamm态", "能谷电子学", "金属-介质杂化光子结构"]
 source_raw: "2026-2406.00590-mos2-based-optical-bistability-in-silver-bragg-ref.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

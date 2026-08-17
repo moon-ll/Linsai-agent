@@ -2,11 +2,11 @@
 title: "论文精读：薄膜铌酸锂上的少周期电光脉冲（arXiv 2608.11393）"
 type: "papers"
 created: "2026-08-15T23:02:48Z"
-updated: "2026-08-15T23:02:48Z"
+updated: "2026-08-16T13:26:39Z"
 tags: ["少周期脉冲", "薄膜铌酸锂", "电光频梳", "片上非线性光学", "孤子压缩", "阿秒科学", "集成光子学"]
 related: ["中红外产生", "强场驱动光源", "微腔增强非线性", "载波包络相位", "阿秒泵浦探测"]
 source_raw: "2026-2608.11393-few-cycle-electro-optic-light-on-thin-film-lithium.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

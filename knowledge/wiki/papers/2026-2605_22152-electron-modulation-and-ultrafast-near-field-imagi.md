@@ -2,11 +2,11 @@
 title: "矢量激光场驱动的电子调制与超快近场成像：纵向偏振实现共线电子-光耦合"
 type: "papers"
 created: "2026-08-15T19:13:19Z"
-updated: "2026-08-15T19:13:19Z"
+updated: "2026-08-16T13:26:36Z"
 tags: ["阿秒科学", "电子-光子耦合", "矢量光场", "纵向偏振", "自由电子量子光学", "超快电子显微", "PINEM", "近场成像"]
 related: ["介观晶体", "相干电子能量增益与损失", "能量-动量失配", "自由电子量子比特", "超构材料断层成像", "阿秒电子脉冲"]
 source_raw: "2026-2605.22152-electron-modulation-and-ultrafast-near-field-imagi.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "滑移二维正方晶格中交变磁性与耦合准交变磁性态的互作（arXiv:2606.19977）"
 type: "papers"
 created: "2026-08-15T21:07:05Z"
-updated: "2026-08-15T21:07:05Z"
+updated: "2026-08-16T13:26:37Z"
 tags: ["altermagnetism", "准交变磁性", "NRSS", "层间滑移", "能谷电子学", "二维磁性材料", "第一性原理", "相干声子调控"]
 related: ["Janus Mn2WS2Se2", "Mn2WS4", "moiré堆叠工程", "type-IV自旋劈裂", "磁性高次谐波", "自旋织构", "量子几何反演提案"]
 source_raw: "2026-2606.19977-interplay-of-altermagnetism-and-coupled-quasi-alte.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

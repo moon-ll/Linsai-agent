@@ -2,11 +2,11 @@
 title: "高次谐波干涉仪：探测固体中亚激光周期电子动力学"
 type: "papers"
 created: "2026-08-15T22:12:29Z"
-updated: "2026-08-15T22:12:29Z"
+updated: "2026-08-16T13:26:41Z"
 tags: ["固体高次谐波", "亚周期电子动力学", "干涉测量", "量子相位重构", "强场物理"]
 related: ["带间/带内电流", "电子-空穴退相干", "瞬态量子相位", "阿秒干涉测量", "高次谐波产生"]
 source_raw: "3-2304.14704-high-harmonic-interferometer-for-probing-sub-laser-cycle-ele.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

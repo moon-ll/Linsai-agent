@@ -2,11 +2,11 @@
 title: "X-CAPPS：X射线相干阿秒脉冲对光谱学（arXiv 2607.00285 精读）"
 type: "papers"
 created: "2026-08-15T21:41:44Z"
-updated: "2026-08-15T21:41:44Z"
+updated: "2026-08-16T13:26:37Z"
 tags: ["阿秒科学", "XFEL", "受激X射线发射", "光谱干涉", "泵浦-探测", "论文精读"]
 related: ["Auger动力学", "X射线自由电子激光", "电荷迁移", "瞬态吸收光谱", "阿秒脉冲对"]
 source_raw: "2026-2607.00285-x-ray-coherent-attosecond-pulse-pair-spectroscopy.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

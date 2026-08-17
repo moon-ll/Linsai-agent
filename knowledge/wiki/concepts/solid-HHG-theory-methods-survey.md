@@ -2,11 +2,11 @@
 title: "固体 HHG 的 SBE 理论框架：规范选择、Berry 几何与扩展三步模型"
 type: "concepts"
 created: "2026-08-15T05:51:46Z"
-updated: "2026-08-15T06:33:11Z"
+updated: "2026-08-16T13:26:27Z"
 tags: ["固体HHG", "半导体布洛赫方程", "规范选择", "Berry曲率", "退相干", "TMD谷电子学"]
 related: ["2508.07869", "Berry联络", "Wannier规范", "三步模型", "相位匹配", "隧穿时间", "非经典光"]
 source_raw: "solid-HHG-theory-methods-survey.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

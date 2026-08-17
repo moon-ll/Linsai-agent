@@ -2,11 +2,11 @@
 title: "论文精读：锥靶+少周期激光产生偏振可分辨的阿秒伽马射线发射"
 type: "papers"
 created: "2026-08-15T20:00:07Z"
-updated: "2026-08-15T20:00:07Z"
+updated: "2026-08-16T13:26:39Z"
 tags: ["阿秒伽马射线", "锥靶", "非线性康普顿散射", "QED-PIC", "少周期激光", "偏振工程", "强场QED", "激光-等离子体相互作用"]
 related: ["偏振伽马探测", "对撞脉冲方案", "核动力学探测", "相对论电子层动力学", "真空双折射", "阿秒科学"]
 source_raw: "2026-260804363-polarization-resolved-attosecond-gamma-ray-em.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

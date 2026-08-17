@@ -2,11 +2,11 @@
 title: "论文精读：取向依赖的矩形纳米环激光离子加速（Orientation-Dependent Ion Acceleration from Laser-Irradiated Rectangular Nanorings）"
 type: "papers"
 created: "2026-08-15T19:23:08Z"
-updated: "2026-08-15T19:23:08Z"
+updated: "2026-08-16T13:26:35Z"
 tags: ["激光离子加速", "PIC模拟", "纳米结构靶", "近场增强", "鞘层加速", "偏振调控"]
 related: ["TNSA", "固体密度等离子体", "激光等离子体相互作用", "近场增强", "高重复频率粒子源"]
 source_raw: "2026-2603.20832-orientation-dependent-ion-acceleration-from-laser-.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

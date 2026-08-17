@@ -2,11 +2,11 @@
 title: "水窗高次谐波：中红外驱动氖原子 HHG 的 SAE 与 RMT 对比（Finger et al. 2021）"
 type: "papers"
 created: "2026-08-15T23:27:51Z"
-updated: "2026-08-15T23:27:51Z"
+updated: "2026-08-16T13:26:31Z"
 tags: ["HHG", "水窗", "mid-IR驱动源", "SAE", "RMT", "多电子效应", "数值收敛性", "论文精读"]
 related: ["三步模型与截止能量", "含时Schrödinger方程", "水窗X射线成像", "波长相度定律", "高次谐波产生"]
 source_raw: "2021-2101.10547-high-harmonic-generation-in-the-water-window-from-mid-ir-las.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

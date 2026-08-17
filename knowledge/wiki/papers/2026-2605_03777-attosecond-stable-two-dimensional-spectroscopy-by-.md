@@ -2,11 +2,11 @@
 title: "Attosecond-Stable Two-Dimensional Spectroscopy by a Sagnac-Based Modulating System and a sub-4-fs Continuum Source"
 type: "papers"
 created: "2026-08-15T20:55:18Z"
-updated: "2026-08-16T05:53:28Z"
+updated: "2026-08-16T13:26:36Z"
 tags: ["二维电子光谱", "2DES", "共路干涉", "Sagnac几何", "被动相位稳定", "多板连续谱", "少周期脉冲", "阿秒延迟精度"]
 related: ["CLIMBS", "MPC连续谱", "TWINS楔形延迟", "moiré强场探针", "相位循环与外差探测", "瞬态吸收"]
 source_raw: "2026-2605.03777-attosecond-stable-two-dimensional-spectroscopy-by-.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

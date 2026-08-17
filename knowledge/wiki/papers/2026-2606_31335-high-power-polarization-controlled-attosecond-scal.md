@@ -2,11 +2,11 @@
 title: "精读：高功率偏振可控的阿秒软X射线脉冲（SwissFEL, arXiv:2606.31335）"
 type: "papers"
 created: "2026-08-15T21:12:00Z"
-updated: "2026-08-15T21:12:00Z"
+updated: "2026-08-16T13:26:37Z"
 tags: ["阿秒科学", "自由电子激光", "软X射线", "偏振控制", "波荡器", "论文精读"]
 related: ["Apple-X波荡器", "X射线非线性光学", "增强型SASE", "泵浦-探测", "自旋与手性动力学", "阿秒脉冲产生", "高次谐波（HHG）"]
 source_raw: "2026-2606.31335-high-power-polarization-controlled-attosecond-scal.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

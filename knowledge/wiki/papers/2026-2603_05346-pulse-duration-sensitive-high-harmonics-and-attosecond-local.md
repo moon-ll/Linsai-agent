@@ -2,11 +2,11 @@
 title: "论文精读：手性晶体中脉宽敏感的高次谐波与阿秒局部手性光（arXiv:2603.05346）"
 type: "papers"
 created: "2026-08-15T22:19:21Z"
-updated: "2026-08-15T22:19:21Z"
+updated: "2026-08-16T13:26:35Z"
 tags: ["论文精读", "高次谐波", "手性晶体", "阿秒物理", "量子相位控制", "固体HHG"]
 related: ["亚周期偏振调控", "少周期脉冲", "带间相干动力学", "手性光学", "瞬态量子相位"]
 source_raw: "2026-2603.05346-pulse-duration-sensitive-high-harmonics-and-attosecond-local.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

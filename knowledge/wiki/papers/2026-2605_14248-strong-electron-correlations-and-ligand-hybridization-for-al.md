@@ -2,11 +2,11 @@
 title: "强电子关联与配体杂化是交替磁性的关键前提——DMFT 材料基准笔记"
 type: "papers"
 created: "2026-08-15T20:17:12Z"
-updated: "2026-08-15T20:17:12Z"
+updated: "2026-08-16T13:26:36Z"
 tags: ["altermagnetism", "DMFT", "强关联电子体系", "MnTe", "RuO2", "配体杂化", "自旋劈裂", "强场超快"]
 related: ["反铁磁自旋劈裂（SBE）", "序参量超快读出", "强场高次谐波", "时间分辨ARPES", "非平衡关联动力学"]
 source_raw: "2026-2605.14248-strong-electron-correlations-and-ligand-hybridization-for-al.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

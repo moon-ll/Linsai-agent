@@ -2,11 +2,11 @@
 title: "Sculpting ultrafast mid-infrared light for solid-state high harmonic generation"
 type: "papers"
 created: "2026-08-15T23:39:43Z"
-updated: "2026-08-15T23:39:43Z"
+updated: "2026-08-16T13:26:34Z"
 tags: ["论文精读", "固体HHG", "轨道角动量", "中红外", "结构光", "涡旋光束", "无真空实验"]
 related: ["Bessel-Gauss vortex", "OAM守恒", "ZnO/GaSe高次谐波", "axicon", "perfect optical vortex", "spiral phase plate", "twisted attosecond pulses"]
 source_raw: "2026-2512.19412-sculpting-ultrafast-mid-infrared-light-for-solid-s.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

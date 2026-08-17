@@ -2,11 +2,11 @@
 title: "论文精读：Theory of quantum optics and optical coherence in high harmonic generation（arXiv:2504.13287）"
 type: "papers"
 created: "2026-08-15T22:41:44Z"
-updated: "2026-08-15T22:41:44Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["HHG", "量子光学", "光学相干性", "光子关联", "非经典光", "阿秒物理", "强场物理"]
 related: ["Glabeer关联函数", "三步模型", "压缩态", "相位匹配", "量子增强计量", "量子轨迹", "阿秒脉冲表征", "驱动场消耗"]
 source_raw: "2025-2504.13287-theory-of-quantum-optics-and-optical-coherence-in-high-harmo.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

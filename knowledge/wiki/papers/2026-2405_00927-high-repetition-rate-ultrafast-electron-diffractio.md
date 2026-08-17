@@ -2,11 +2,11 @@
 title: "高重复频率直接电子探测超快电子衍射（30-kHz UED）：论文精读"
 type: "papers"
 created: "2026-08-15T18:48:23Z"
-updated: "2026-08-15T18:48:23Z"
+updated: "2026-08-16T13:26:33Z"
 tags: ["UED", "电子衍射", "直接电子探测", "空间电荷效应", "高重复频率", "泵浦-探测"]
 related: ["MeV-UED", "光激发非平衡态动力学", "单电子计数", "气相超快电子衍射", "阿秒电子脉冲"]
 source_raw: "2026-2405.00927-high-repetition-rate-ultrafast-electron-diffractio.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

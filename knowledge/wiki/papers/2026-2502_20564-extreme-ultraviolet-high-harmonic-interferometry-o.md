@@ -2,11 +2,11 @@
 title: "XUV 高次谐波干涉测量固体中激发诱导的带隙动力学 — 论文精读笔记"
 type: "papers"
 created: "2026-08-15T19:32:01Z"
-updated: "2026-08-15T19:32:01Z"
+updated: "2026-08-16T13:26:34Z"
 tags: ["固体HHG", "XUV干涉测量", "瞬态带隙", "谐波相位", "阿秒动力学", "petahertz电子学", "半导体布洛赫方程", "SiO2", "MgO"]
 related: ["petahertz 载流子动力学", "光波形控制", "固体高次谐波产生", "泵浦探测光谱", "瞬态能带重构", "阿秒相位测量"]
 source_raw: "2026-2502.20564-extreme-ultraviolet-high-harmonic-interferometry-o.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

@@ -2,11 +2,11 @@
 title: "CVD双层MoS₂光电人工突触：STM-LTM转变、算术运算与图像识别（论文精读）"
 type: "papers"
 created: "2026-08-15T19:08:24Z"
-updated: "2026-08-15T19:08:24Z"
+updated: "2026-08-16T13:26:35Z"
 tags: ["MoS2", "光电突触", "神经形态计算", "二维材料", "能谷电子学", "论文精读"]
 related: ["STM-LTM转变", "双层MoS₂", "层间电荷转移", "层间陷阱", "神经形态器件", "谷自由度"]
 source_raw: "2026-2601.15917-cvd-grown-bilayer-mos2-based-artificial-optoelectr.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

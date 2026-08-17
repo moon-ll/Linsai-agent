@@ -2,11 +2,11 @@
 title: "SALMON 2.3：分治密度泛函基态初始化实现大规模实时 TDDFT——论文精读笔记"
 type: "papers"
 created: "2026-08-15T19:18:24Z"
-updated: "2026-08-15T19:18:24Z"
+updated: "2026-08-16T13:26:37Z"
 tags: ["SALMON", "实时TDDFT", "分治DFT", "线性标度", "强场非平衡动力学", "高次谐波"]
 related: ["RT-TDDFT", "光致相变", "液体强场响应", "非晶材料超快动力学", "高次谐波产生"]
 source_raw: "2026-2606.21125-salmon-2-3-implementation-of-divide-and-conquer-gr.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

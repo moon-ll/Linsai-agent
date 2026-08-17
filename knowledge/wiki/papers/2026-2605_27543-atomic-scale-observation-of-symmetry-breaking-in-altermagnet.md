@@ -2,11 +2,11 @@
 title: "原子尺度观测交替磁 MnTe 中的对称性破缺——论文精读"
 type: "papers"
 created: "2026-08-15T20:16:34Z"
-updated: "2026-08-15T20:16:34Z"
+updated: "2026-08-16T13:26:36Z"
 tags: ["论文精读", "交替磁", "MnTe", "对称性破缺", "反铁磁", "HHG", "EMCD", "STEM"]
 related: ["偶次谐波", "反演对称破缺", "多铁性", "磁光耦合", "超快序参量读出"]
 source_raw: "2026-2605.27543-atomic-scale-observation-of-symmetry-breaking-in-altermagnet.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

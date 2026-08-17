@@ -2,11 +2,11 @@
 title: "强场驱动的子周期能带结构调制与退相干控制（Strong-field Driven Sub-cycle Band Structure Modulation and Dephasing Control）"
 type: "papers"
 created: "2026-08-15T20:35:52Z"
-updated: "2026-08-15T20:35:52Z"
+updated: "2026-08-16T13:26:32Z"
 tags: ["强场超快光学", "固体HHG", "退相干时间", "子周期动力学", "MgO", "能带调制", "深阅读候选"]
 related: ["BSV驱动HHG", "NSFC-强场超快", "动力学Stark效应", "半导体布洛赫方程SBE", "阿秒瞬态吸收"]
 source_raw: "2025-2510.16651-strong-field-driven-sub-cycle-band-structure-modulation-and.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"

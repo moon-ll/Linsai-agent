@@ -2,11 +2,11 @@
 title: "论文精读：非线性康普顿散射的时频分析——基于联合概率分布"
 type: "papers"
 created: "2026-08-15T19:19:03Z"
-updated: "2026-08-15T19:19:03Z"
+updated: "2026-08-16T13:26:36Z"
 tags: ["非线性康普顿散射", "SFQED", "时频分析", "联合概率分布", "载波包络相位", "ponderomotive红移", "子谐波结构"]
 related: ["CEP与偏振调控", "Wigner分布与Husimi分布", "全光学诊断", "强场非平衡态动力学", "辐射反作用", "非线性汤姆逊散射"]
 source_raw: "2026-2606.05203-time-frequency-analysis-of-nonlinear-compton-scatt.md"
-growth_stage: "growing"
+growth_stage: "mature"
 confidence: 0.7
 auto_grown: true
 review_status: "pending"
