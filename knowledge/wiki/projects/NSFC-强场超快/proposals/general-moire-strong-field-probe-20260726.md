@@ -2,7 +2,7 @@
 title: "反演探针：从均匀体系到莫尔自由度的扩展瓶颈。** HHG 反演材料参数的研究已在均匀单层/双层体系中取得重要进展。其发展脉络为莫尔体系的反演迁移了方法学基础，但也暴露了向莫尔自由度扩展的根本困难。"
 type: "proposal"
 created: "2026-08-02T06:02:42Z"
-updated: "2026-08-16T03:37:56Z"
+updated: "2026-08-17T13:15:38Z"
 tags: []
 related: []
 source_raw: ""
@@ -10,21 +10,21 @@ growth_stage: "growing"
 confidence: 1.0
 project: ["NSFC-强场超快"]
 proposal_id: "general-moire-strong-field-probe-20260726"
-status: "optimizing"
+status: "pending_review"
 project_type: "general"
-optimization_rounds: 7
-last_score: 0.79
-synced_at: "2026-08-16T03:37:56Z"
+optimization_rounds: 8
+last_score: 0.78
+synced_at: "2026-08-17T13:15:38Z"
 ---
 
 # 反演探针：从均匀体系到莫尔自由度的扩展瓶颈。** HHG 反演材料参数的研究已在均匀单层/双层体系中取得重要进展。其发展脉络为莫尔体系的反演迁移了方法学基础，但也暴露了向莫尔自由度扩展的根本困难。
 
 **课题 ID**：`general-moire-strong-field-probe-20260726`  
 **项目类型**：general  
-**生命周期状态**：优化中  
-**优化轮次**：7  
-**当前分数**：0.79  
-**同步时间**：2026-08-16
+**生命周期状态**：待校验  
+**优化轮次**：8  
+**当前分数**：0.78  
+**同步时间**：2026-08-17
 
 ## 核心问题
 
@@ -40,17 +40,17 @@ synced_at: "2026-08-16T03:37:56Z"
 
 ## 关键产物
 
-- [proposal-brief](research_proposals/optimizing/general-moire-strong-field-probe-20260726/00_proposal-brief.md)
-- [question-framework](research_proposals/optimizing/general-moire-strong-field-probe-20260726/03_question/question-framework.md)
-- [method-manual](research_proposals/optimizing/general-moire-strong-field-probe-20260726/03_method/method-manual.md)
-- [reading-notes](research_proposals/optimizing/general-moire-strong-field-probe-20260726/02_literature/reading-notes.md)
-- [proposal-draft](research_proposals/optimizing/general-moire-strong-field-probe-20260726/04_proposal/proposal-draft.md)
+- [proposal-brief](research_proposals/pending_review/general-moire-strong-field-probe-20260726/00_proposal-brief.md)
+- [question-framework](research_proposals/pending_review/general-moire-strong-field-probe-20260726/03_question/question-framework.md)
+- [method-manual](research_proposals/pending_review/general-moire-strong-field-probe-20260726/03_method/method-manual.md)
+- [reading-notes](research_proposals/pending_review/general-moire-strong-field-probe-20260726/02_literature/reading-notes.md)
+- [proposal-draft](research_proposals/pending_review/general-moire-strong-field-probe-20260726/04_proposal/proposal-draft.md)
 
 ## 状态说明
 
-- 处于 **优化中** 阶段
-- 最后得分：0.79
-- 累计对抗轮次：7
+- 处于 **待校验** 阶段
+- 最后得分：0.78
+- 累计对抗轮次：8
 
 <!-- linsai-wikilinks -->
 ## 关联概念

@@ -1,24 +1,24 @@
 ---
-title: "order-parameter-ultrafast-readout — 优化报告"
+title: "课题设想 — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-order-parameter-ultrafast-readout-20260727"
 latest_round: 2
-last_score: 0.74
+last_score: 0.67
 critic_rounds: 8
 optimization_reports: 2
 status: "optimizing"
-created: "2026-08-17T10:44:29Z"
-updated: "2026-08-17T10:44:29Z"
+created: "2026-08-17T16:02:30Z"
+updated: "2026-08-17T16:02:30Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
 ---
 
-# order-parameter-ultrafast-readout — 优化报告
+# 课题设想 — 优化报告
 
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
 **累计轮次**：2
-**当前分数**：0.74
+**当前分数**：0.67
 **状态**：优化中
 
 ---

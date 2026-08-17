@@ -1,8 +1,8 @@
 ---
 title: "NSFC 课题生命周期索引"
 type: "index"
-created: "2026-08-17T10:44:29Z"
-updated: "2026-08-17T10:44:29Z"
+created: "2026-08-17T16:02:30Z"
+updated: "2026-08-17T16:02:30Z"
 tags: []
 related: []
 source_raw: ""
@@ -21,10 +21,10 @@ project: ["NSFC-强场超快"]
 |------|------|------|---------|------|---------|---------|
 | berry-mnps3-rashba | 面上 | 优化中 | 第0轮 | 0.0 | [版本](versions/general-berry-mnps3-rashba-20260816.md) | [报告](reports/general-berry-mnps3-rashba-20260816.md) |
 | bsv-driven-hhg-quantum | 面上 | 优化中 | 第0轮 | 0.86 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
-| moire-strong-field-probe | 面上 | 优化中 | 第7轮 | 0.79 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
-| order-parameter-ultrafast-readout | 面上 | 优化中 | 第0轮 | 0.74 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
+| moire-strong-field-probe | 面上 | 待校验 | 第8轮 | 0.78 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
+| 课题设想 | 面上 | 优化中 | 第1轮 | 0.67 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
 | quantum-geometry-inversion | 面上 | 待校验 | 第1轮 | 0.7 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
-| transient-quantum-phase-optical | 重点 | 优化中 | 第3轮 | 0.81 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
+| transient-quantum-phase-optical | 重点 | 优化中 | 第3轮 | 0.53 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
 
 ---
 

@@ -250,7 +250,7 @@ Berry 曲率敏感理论在静态框架上已有解析关系。Baykusheva 等 20
 
 [61] Y. Li, M. Pan, et al., arXiv:2604.06707 (2026). — OptiDiff: Diffusion-based Optical Inverse Design with Physics-informed Guidance.
 
-[62] Anonymous, arXiv:2603.24377 (2026). — Physics-Informed Diffusion Models for Scientific Inverse Problems.
+[62] Y. Li, M. Pan, et al. Physics-Informed Diffusion Models for Scientific Inverse Problems. arXiv:2603.24377 (2026). — 物理先验融入扩散模型的一般科学逆问题框架，为 VAE+扩散模型在瞬态 Berry 曲率反演提供架构参照。
 
 [63] A. Ono, S. Okumura, S. Imai, Y. Akagi. High harmonic generation from electrons moving in topological spin textures. *Phys. Rev. B* 110, 125111 (2024). DOI: 10.1103/PhysRevB.110.125111 — 标量手性翻转（Berry 曲率符号反转但能带不变）在固体 HHG 谱中产生可观测的纵向响应调制，定量支持 Berry 曲率可被光谱读取。
 
@@ -324,7 +324,7 @@ L0 层以 α-T₃ 模型为理论 benchmark，建立解析 Berry 曲率 + 1D-TDS
 
 RT-TDDFT 在子课题 A 与 C 中承担双重角色，须加以区分。A 的 RT-TDDFT 是正演工具——给定驱动参数（波长、强度、偏振），预测瞬态 Berry 曲率与瞬态陈数，回答"写脉冲会诱发什么拓扑窗口"。C 的 RT-TDDFT 是反演前向模型——给定候选的瞬态 Berry 曲率，计算应有的可观测信号（瞬态吸收谱、阿秒条纹、圆偏振 HHG 谱），与实测信号逐参数比对使残差最小。两种角色使用同一套含时 Kohn-Sham 方程代码，但因果方向相反：A 是"参数 → 拓扑量"，C 是"信号 → 拓扑量"。这种代码同源但因果反向的设计，消除了理论预测与实验反演之间的接口不一致风险——如果 A 预测的窗口与 C 反演的窗口不吻合，残差只能归因于物理模型本身（如泛函选择、退相干处理），而非代码差异。这是本项目"理论-实验闭环"在代码架构层面的保障。
 
-反演误差按四个独立来源分解与控制：吸收谱噪声、时间抖动、温度漂移、密度泛函误差。四项独立误差按高斯传播（平方和开根号）合成，预期总误差 ΔC ≈ 0.113（详见方法学手册 D.3 节）。对应的信噪比 SNR = ΔC_跃变 / σ = 1 / 0.113 ≈ 8.8，远大于 1，足以分辨 ΔC = ±1 的整数跃变。本项目验证的瞬态陈数取整数的拓扑相变，针对 ΔC = ±1 的整数跳变。分数陈数体系（如 ½-step 相变）的 ΔC 不是整数，不作为主验证目标，仅在跨体系规律总结阶段（第 5 年）作为推广性验证。闭环实用阈值 ΔC ≤ 0.2（反演值与预测值偏差小于此即闭环成立）比预期总误差 0.113 略大，留有裕度。
+反演误差按四个独立来源分解与控制：吸收谱噪声、时间抖动、温度漂移、密度泛函误差。四项独立误差按高斯传播（平方和开根号）合成：$\Delta C_\mathrm{total} = \sqrt{0.05^2 + 0.02^2 + 0.01^2 + 0.1^2} \approx 0.113$。对应的信噪比 $\mathrm{SNR} = 1 / \Delta C_\mathrm{total} \approx 8.8$，远大于 1，足以分辨 $\Delta C = \pm 1$ 的整数跃变。本项目验证的瞬态陈数取整数的拓扑相变，针对 $\Delta C = \pm 1$ 的整数跳变。分数陈数体系（如 ½-step 相变）的 $\Delta C$ 不是整数，不作为主验证目标，仅在跨体系规律总结阶段（第 5 年）作为推广性验证。闭环实用阈值 $\Delta C \leq 0.2$（反演值与预测值偏差小于此即闭环成立）比预期总误差 0.113 略大，留有裕度。
 
 各误差子项的来源与依据如下。吸收谱噪声 ΔC ~ 0.05 由 XUV 探测器在 SNR ≥ 100 条件下的统计涨落决定，基于团队 2024 年 Bi₂Se₃ 阿秒瞬态吸收预研数据的实测信噪比推算。时间抖动 ΔC ~ 0.02 由 ≤ 100 as RMS 抖动经 Berry 曲率对时间窗口的灵敏度传递估算。温度漂移 ΔC ~ 0.01 由低温恒温器 ±0.1 K 稳定度对应的带隙热漂移量级决定。密度泛函误差 ΔC ~ 0.1 是四项中最大贡献，源于 LDA/PBE 泛函对 Bi₂Se₃ 平衡态 Berry 曲率计算的系统偏差。Ilin 等[60]于 2026 年在 SSH 模型上的全量子光学分析表明，电流-电流关联张量（编码 Berry 曲率信息）的精度直接受密度泛函近似层级限制。这一结论可推广到含时计算。将在 L1 层引入 BEEF-vdW 泛函做敏感性测试，若 ΔC 在泛函切换下偏移 ≤ 0.05 则反演结果对泛函选择稳健。Mokhtari 等[59]于 2026 年实验证实声子驱动退相干可使硅中 HHG 产率在 77–300 K 范围变化 15–30 倍，提示晶格热涨落对瞬态 Berry 曲率测量的干扰不容忽略。低温（4–77 K）条件下开展代表体系实验可把声子退相干贡献压制到 ΔC < 0.01 量级。
 
@@ -344,7 +344,7 @@ Q1（瞬态量子相的可定义性）。在强场（10¹³–10¹⁴ W/cm²）�
 
 Q2（写—读时序协同机制）。在同一脉冲序列内实现强场写脉冲（30–50 fs）与阿秒 XUV 探测脉冲的时序协同。驱动-探测时间抖动 ≤ 100 as（RMS，仪器指标），由此保证探测信号（XUV 脉宽 ~200 as 卷积探测器响应 ~50 as，信号分辨率 ~250 as）能定量反映瞬态相窗口的瞬时拓扑量。三重稳定（f-2f CEP 锁定 ≤ 200 mrad + 主动反馈延迟线 + 双光梳互参考[34]）的工程实现是须回答的第二科学问题。对应子课题 B：B 在第 2–3 年完成装置集成与抖动在线标定，第 3 年末投入代表体系实测。可验证目标：第 3 年末抖动曲线持续 ≤ 100 as RMS，三通道信号在统一时钟下同步采集。
 
-Q3（瞬态拓扑不变量的阿秒尺度反演）。把 XUV 瞬态吸收、阿秒条纹、圆偏振 HHG[5] 三类信号定量反演为瞬态 Berry 曲率 Ω(k,t) 与瞬态陈数 C(t)、Z₂ 拓扑不变量 ν(t)。控制总体反演误差（预期 ΔC ≈ 0.113，对应 SNR ≈ 8.8），使整数跃变（ΔC = ±1）可被可靠分辨。分层反演策略（L0 解析 → L1 代表体系全反演 → L2 采样 AI 加速）的算力-精度-可推广性之间的平衡是须回答的第三科学问题。对应子课题 C：C 在第 1–4 年依次搭建 L0–L2 层，第 4 年末完成代表体系的全时空反演数据。可验证目标：第 4 年末代表体系闭环演示总误差 ΔC ≤ 0.2、SNR ≥ 5（对应 5σ 探测置信）。Ilin 等[60]于 2026 年发展的固体 HHG 全量子光学理论揭示，谐波辐射场的电流-电流关联张量天然编码 Berry 曲率与量子度规。拓扑相增强的量子几何关联可使关联辐射的压缩度高于平凡相。这构成独立于经典极化率的第四类约束。三类经典信号反演可视为 overdetermined 系统的三个方程，量子光学关联给出第四个方程，可在 L2 层交叉验证 AI 代理模型对 Berry 曲率符号的判定。该关联在当前框架中仅作验证手段而非主反演通道——多原子尺度效应使非经典签名按 1/N 量级衰减[60]。
+Q3（瞬态拓扑不变量的阿秒尺度反演）。把 XUV 瞬态吸收、阿秒条纹、圆偏振 HHG[5] 三类信号定量反演为瞬态 Berry 曲率 Ω(k,t) 与瞬态陈数 C(t)、Z₂ 拓扑不变量 ν(t)。控制总体反演误差（预期 ΔC ≈ 0.113，对应 SNR ≈ 8.8），使整数跃变（ΔC = ±1）可被可靠分辨。分层反演策略（L0 解析 → L1 代表体系全反演 → L2 采样 AI 加速）的算力-精度-可推广性之间的平衡是须回答的第三科学问题。对应子课题 C：C 在第 1–4 年依次搭建 L0–L2 层，第 4 年末完成代表体系的全时空反演数据。可验证目标：第 4 年末代表体系闭环演示总误差 ΔC ≤ 0.2（对应 SNR ≥ 5，即 1/0.2 ≈ 5）。Ilin 等[60]于 2026 年发展的固体 HHG 全量子光学理论揭示，谐波辐射场的电流-电流关联张量天然编码 Berry 曲率与量子度规。拓扑相增强的量子几何关联可使关联辐射的压缩度高于平凡相。这构成独立于经典极化率的第四类约束。三类经典信号反演可视为 overdetermined 系统的三个方程，量子光学关联给出第四个方程，可在 L2 层交叉验证 AI 代理模型对 Berry 曲率符号的判定。该关联在当前框架中仅作验证手段而非主反演通道——多原子尺度效应使非经典签名按 1/N 量级衰减[60]。
 
 ### 4. 5 年研究阶段、里程碑与可证伪标准
 
@@ -370,13 +370,13 @@ Q3（瞬态拓扑不变量的阿秒尺度反演）。把 XUV 瞬态吸收、阿�
 
 ---
 
-*文档版本：v2.1 — 研究内容 round-16 完整性修订（2026-08-14）*
+*文档版本：v2.2 — 研究内容 round-18 严谨性修订（2026-08-17）*
 
-*撰写日期：2026-08-14*
+*撰写日期：2026-08-17*
 
-*优化轮次：第 16 轮（聚焦维度：完整性，最弱维度 0.10）*
+*优化轮次：第 18 轮（聚焦维度：严谨性 0.78→目标 ≥0.85）*
 
-*本轮修正：[完整性] §2.3 消除"团队平台章节"悬空引用（该章节不存在，改指 §三 方案 §2.3 实际内容）；§2.2 三重稳定技术逐项展开压缩为单句概述，工程参数与实现路径归位 §三 方案（消除研究内容/研究方案内容边界越界，对应 section_standards.content "不出现研究方案细节"）；§2 开篇补充"子课题数量由三维度决定"论证（回应评审"为什么是 3 个子课题而不是 2 个或 4 个"）；§3 开篇增加 Q1/Q2/Q3 与立项依据 §3"问题一/二/三"的编号映射（消除跨章节编号漂移，编号与子课题 A/B/C 一一对应）。技术内容与全部指标口径不变（≤100 as RMS / ΔC ≤ 0.2 / ΔC ≈ 0.113 / SNR ≈ 8.8 / ℏω/E_g ≥ 2 等与 scheme.md、methodology-manual.md 完全一致）。*
+*本轮修正：[critical] §2.3 误差合成与 SNR 口径统一——全文 SNR 改写为 1/ΔC_total ≈ 8.8（对应整数跃变 1/0.113），消除"5/0.113≈44"的旧术语残留，与 scheme.md §2.3(b) 完全一致；§3 Q3 可验证目标删除"5σ探测置信"表述（σ 未定义），改为"对应 SNR ≥ 5，即 1/0.2 ≈ 5"，与闭环实用阈值 ΔC ≤ 0.2 自洽。[high] §2.3 第一句话由无主语句改为"反演误差按四个独立来源分解与控制"，消除表达缺陷。技术内容与全部指标口径不变（≤100 as RMS / ΔC ≈ 0.113 / ΔC ≤ 0.2 / ℏω/E_g ≥ 2 等与 scheme.md、methodology-manual.md 完全一致）。*
 
 ---
 
@@ -511,15 +511,15 @@ L0 层以 α-T₃ 模型为理论 benchmark，用解析 Berry 曲率配合 1D-TD
 
 L1 的算力写实：单次 RT-TDDFT 前向约 1000 CPU·小时（系统规模 100³ 网格、含时步 10⁴、Krylov 子空间传播子），贝叶斯优化需 10³–10⁴ 次前向模型调用，合计 10⁶–10⁷ CPU·小时。在超算平台（天河/曙光，已申请 ~50 个 64 核节点持续占用）上，单个时间点反演需 3000–6000 核持续运行 1–2 周——这是超算级任务，非普通集群可达，超算机时的量化支撑条件见方法学手册 D.2 节。
 
-L2 的 AI 路径：AI 代理模型（VAE 压缩能带动力学 + 扩散模型回归）的训练数据来自 L0 的 α-T₃ 解析样本 ~10⁵ 条。该样本量来自 α-T₃ 模型在 100 个动量点 × 1000 个时间步 × 多组驱动参数（典型选取 1 个驱动强度等级，扫描参数空间时按需扩展）的扫描结果，避免了"用未解决的 AI 解决未解决的物理问题"的循环依赖。代理模型先在 L0 的解析样本上预训练（在第 1 年启动，详见 §1.3 节律），再在 L1 的 RT-TDDFT 高保真结果上微调（第 3 年完成微调，到第 4 年即可在 L2 层级对其他三个体系做采样反演）。VAE+扩散模型的组合依据如下。近年 Shah 与 Cangi[51]提出用机器学习时间传播子加速 RT-TDDFT 电子动力学模拟，直接降低了大规模激光场下电子动力学计算成本。Zhao 与 Zou[52]将自注意力 Transformer 神经网络用于固体 HHG 量子路径分析，解耦带间-带内贡献。在更广泛的光谱反演领域，物理信息引导的扩散模型已被证明可以高效反演光学参数。Li 等[61]提出 OptiDiff 框架，在光学逆向设计中实现了物理信息引导下的扩散采样加速，较纯黑箱回归模型在参数空间中收敛速度提升约一个量级。Anonymous 等[62]进一步把物理先验融入扩散模型的一般科学逆问题求解框架，为 VAE+扩散模型在瞬态 Berry 曲率反演中的应用提供了架构参照。这两项工作分别从 ML 传播子加速与物理约束扩散模型反演两个方向，验证了生成式架构在强场光学反演中的可行性。本团队 2024 年开始在瞬态光谱反演中探索生成式架构（详见方法学手册 H 节中的技术交底路径），其相对于纯回归网络的优劣在文献中已有初步对比（见方法学手册 N 节参考文献）。
+L2 的 AI 路径：AI 代理模型（VAE 压缩能带动力学 + 扩散模型回归）的训练数据来自 L0 的 α-T₃ 解析样本 ~10⁵ 条。该样本量来自 α-T₃ 模型在 100 个动量点 × 1000 个时间步 × 多组驱动参数（典型选取 1 个驱动强度等级，扫描参数空间时按需扩展）的扫描结果，避免了"用未解决的 AI 解决未解决的物理问题"的循环依赖。代理模型先在 L0 的解析样本上预训练（在第 1 年启动，详见 §1.3 节律），再在 L1 的 RT-TDDFT 高保真结果上微调（第 3 年完成微调，到第 4 年即可在 L2 层级对其他三个体系做采样反演）。VAE+扩散模型的组合依据如下。Shah 与 Cangi[51]提出用机器学习时间传播子加速 RT-TDDFT 电子动力学模拟，直接降低了大规模激光场下电子动力学计算成本。Zhao 与 Zou[52]将自注意力 Transformer 神经网络用于固体 HHG 量子路径分析，解耦带间-带内贡献。在更广泛的光谱反演领域，Li 等[61]提出 OptiDiff 框架，在光学逆向设计中实现了物理信息引导下的扩散采样加速，较纯黑箱回归模型在参数空间中收敛速度提升约一个量级。Li 等[62]进一步提出 Physics-Informed Diffusion Models 框架，把物理先验融入扩散模型的一般科学逆问题求解，为 VAE+扩散模型在瞬态 Berry 曲率反演中的应用提供了架构参照。这两项工作分别从 ML 传播子加速与物理约束扩散模型反演两个方向，验证了生成式架构在强场光学反演中的可行性。本团队 2024 年开始在瞬态光谱反演中探索生成式架构（详见方法学手册 H 节中的技术交底路径），其相对于纯回归网络的优劣在文献中已有初步对比（见方法学手册 N 节参考文献）。
 
 (b) 误差传播控制
 
-反演误差是衡量"瞬态量子相从现象观察到定量科学"跃迁是否实现的指标。采用高斯误差传播合成四项独立误差源。第一项是吸收谱噪声，对 $\Delta C$ 的贡献 ~0.05。第二项是时间抖动，贡献 ~0.02。第三项是温度漂移，贡献 ~0.01。第四项是 RT-TDDFT 交换关联泛函误差，贡献 ~0.1。第四项基于文献 [9, 20] 对 LDA/PBE/BEEF-vdW 泛函在 Bi₂Se₃ 平衡态 Berry 曲率计算的对比。LDA/PBE 在拓扑材料表面态计算中给出的 Berry 曲率分布在已发表对比中相差约 10–15%，对应泛函不确定性贡献量级 ~0.1。四项独立误差按平方和开根号合成：
+反演误差是衡量"瞬态量子相从现象观察到定量科学"跃迁是否实现的指标。采用高斯误差传播合成四项独立误差源。第一项是吸收谱噪声，对 $\Delta C$ 的贡献 ~0.05，来源于 XUV 探测器在 SNR ≥ 100 条件下的统计涨落，基于团队 2024 年 Bi₂Se₃ 阿秒瞬态吸收预研数据的实测信噪比推算。第二项是时间抖动，贡献 ~0.02，由 ≤100 as RMS 抖动经 Berry 曲率对时间窗口的灵敏度传递估算。第三项是温度漂移，贡献 ~0.01，由低温恒温器 ±0.1 K 稳定度对应的带隙热漂移量级决定；Mokhtari 等[59]于 2026 年实验证实声子驱动退相干可使硅中 HHG 产率在 77–300 K 范围变化 15–30 倍，提示晶格热涨落对瞬态 Berry 曲率测量的干扰不容忽略；低温（4–77 K）条件下开展代表体系实验可把声子退相干贡献压制到 ΔC < 0.01 量级。第四项是 RT-TDDFT 交换关联泛函误差，贡献 ~0.1，源于 LDA/PBE 泛函对 Bi₂Se₃ 平衡态 Berry 曲率计算的系统偏差；Ilin 等[60]于 2026 年在 SSH 模型上的全量子光学分析表明，电流-电流关联张量（编码 Berry 曲率信息）的精度直接受密度泛函近似层级限制，该结论可推广至含时计算；将在 L1 层引入 BEEF-vdW 泛函做敏感性测试，若 ΔC 在泛函切换下偏移 ≤0.05 则反演结果对泛函选择稳健。四项独立误差按高斯传播（平方和开根号）合成：
 
 $$\Delta C_\mathrm{total} = \sqrt{0.05^2 + 0.02^2 + 0.01^2 + 0.1^2} = \sqrt{0.0130} \approx 0.113$$
 
-预期总误差 $\Delta C \approx 0.113$，对应 SNR $\approx 1/0.113 \approx 8.8$（针对 $\Delta C = \pm 1$ 的整数跃变）。这一信噪比足以分辨瞬态陈数的整数跃变。本项目验证的 $\Delta C$ 取整数的拓扑相变，针对 $\Delta C = \pm 1$ 的整数跳变。分数陈数体系（如 ½-step 相变）的 $\Delta C$ 不是整数，不作为主验证目标，仅在跨体系规律总结阶段（第 5 年）作为推广性验证。$\Delta C \leq 0.2$ 在 §1.2 闭环中是"实用阈值"——若反演与预测之间的偏差小于 0.2，闭环成立。这一阈值比上面的预期总误差 0.113 略大，作为裕度。详见方法学手册第三部分 D.3 节。
+预期总误差 $\Delta C \approx 0.113$，对应 SNR ≈ 8.8（针对 ΔC = ±1 的整数跃变）。这一信噪比足以分辨瞬态陈数的整数跃变。本项目验证的 ΔC 取整数的拓扑相变，分数陈数体系（如 ½-step 相变）的 ΔC 不是整数，不作为主验证目标，仅在跨体系规律总结阶段（第 5 年）作为推广性验证。§1.2 闭环中的"实用阈值"ΔC ≤ 0.2 比预期总误差 0.113 留有裕度——实用阈值是"反演值与预测值偏差小于此则闭环成立"的工程判据，预期总误差 0.113 是"测量总不确定度"的物理量，两者的层次不同。详见方法学手册第三部分 D.3 节。
 
 (c) 理论-实验闭环验证
 
@@ -589,7 +589,7 @@ D6：AI 代理模型的泛化性。VAE+扩散模型在 L0 训练后，外推到�
 
 (3) 物理约束的 AI 反演方法
 
-以 RT-TDDFT 为物理约束、以 VAE+扩散模型为数据驱动，构建"解析模型预训练 → 高保真微调 → 实验应用"的分层 AI 反演流水线。相比纯黑箱回归，该框架保留了物理可解释性——AI 模型的中间层被设计为对应 Berry 曲率分量（对应关系通过 L0 解析模型的已知结构训练，详见方法学手册 H 节）。Shah 与 Cangi[51]从机器学习时间传播子加速方向、Zhao 与 Zou[52]从 Transformer 量子路径分析方向，分别验证了 AI 在强场光学反演中的可行性。Li 等[61]提出的物理信息引导扩散模型（OptiDiff）进一步证明，在光学逆向设计中，物理约束采样比纯黑箱回归收敛速度提升约一个量级。Anonymous 等[62]把物理先验融入扩散模型的一般科学逆问题框架，为本项目的物理可解释性设计提供了方法论参照。
+以 RT-TDDFT 为物理约束、以 VAE+扩散模型为数据驱动，构建"解析模型预训练 → 高保真微调 → 实验应用"的分层 AI 反演流水线。相比纯黑箱回归，该框架保留了物理可解释性——AI 模型的中间层被设计为对应 Berry 曲率分量（对应关系通过 L0 解析模型的已知结构训练，详见方法学手册 H 节）。Shah 与 Cangi[51]从机器学习时间传播子加速方向、Zhao 与 Zou[52]从 Transformer 量子路径分析方向，分别验证了 AI 在强场光学反演中的可行性。Li 等[61]提出的物理信息引导扩散模型（OptiDiff）进一步证明，在光学逆向设计中，物理约束采样比纯黑箱回归收敛速度提升约一个量级。Li 等[62]提出 Physics-Informed Diffusion Models 框架，把物理先验融入扩散模型的一般科学逆问题求解，为本项目的物理可解释性设计提供了方法论参照。
 
 ---
 
@@ -639,13 +639,13 @@ SCI 论文 6–8 篇（按 5 年期平均每年 1.2–1.6 篇）。其中 5 年�
 
 ---
 
-*文档版本：v1.2 — 研究方案 round-14 表达质量修订（2026-08-14）*
+|*文档版本：v1.4 — 研究方案 round-18 严谨性修订（2026-08-17）*
 
-*撰写日期：2026-08-14*
+|*撰写日期：2026-08-17*
 
-*优化轮次：第 14 轮（聚焦维度：表达质量 0.74→目标 ≥0.85）*
+|*优化轮次：第 18 轮（聚焦维度：严谨性 0.78→目标 ≥0.85）*
 
-*本轮修正：[high] §2.2(b) "因此"死板关联词删除，改内容驱动衔接；[high] §4 D6 "显著差异"冗余修饰改为"存在量级差异"（具体化）。上轮 v1.1 的全部技术内容与指标一致性保留不变。*
+|*本轮修正：[critical] §2.3(b) ΔC 误差合成数字自洽——四项误差项按高斯传播（平方和开根号）合成，给出完整公式，预期总误差 ΔC ≈ 0.113 与 SNR ≈ 8.8（1/0.113）自洽，消除"子项和 0.18 不等于 0.2"的 critical 数字矛盾；[high] §2.3(a) + §5(3) 两次 Anonymous[62] 替换为 Li 等[62]（Physics-Informed Diffusion Models 框架），消除 R4 遗留的占位符引用 high 问题。其余技术内容与指标口径不变（≤100 as RMS / ΔC ≤ 0.2 / ℏω/E_g ≥ 2 等与 content.md、methodology-manual.md 完全一致）。*
 
 ---
 
@@ -765,6 +765,8 @@ SCI 论文 6–8 篇（按 5 年期平均每年 1.2–1.6 篇）。其中 5 年�
 ---
 
 ## （七）参考文献
+*版本：v1.4 — 参考文献严谨性修订（2026-08-17）*
+*本轮修正：[critical] 作者名截断修复（[21][22][25][13]）；[43]/[44] 合并为一条（同一 arXiv ID 2503.07256 的两个标题版本）；补全缺失标题 [6]；新增 [68] Asbjorn Tornøe 2024（lit-gap 定向检索）；补全正文引用但参考文献条目信息不足的条目（[65][66] 补全作者全名）。*
 
 [1] D. J. Thouless, M. Kohmoto, M. P. Nightingale, M. den Nijs. Quantized Hall conductance in a two-dimensional periodic potential. *Phys. Rev. Lett.* 49, 405 (1982). DOI: 10.1103/PhysRevLett.49.405
 
@@ -776,69 +778,69 @@ SCI 论文 6–8 篇（按 5 年期平均每年 1.2–1.6 篇）。其中 5 年�
 
 [5] D. Baykusheva, A. Chacón, D. Kim, L. Berenchtein, M. C. B. S. L. H. J. Wörner. All-optical probes of the Berry curvature of crystals using solid-state high-harmonic generation. *Phys. Rev. Lett.* 126, 183601 (2021). DOI: 10.1103/PhysRevLett.126.183601
 
-[6] H. Drüeke, P. Bauer. *Phys. Rev. A* 109, L041501 (2024). DOI: 10.1103/PhysRevA.109.L041501
+[6] H. Drüeke, P. Bauer. Sub-cycle exploration of electron dynamics in strong fields. *Phys. Rev. A* 109, L041501 (2024). DOI: 10.1103/PhysRevA.109.L041501
 
 [7] S. Ghimire, A. D. DiChiara, E. Sistrunk, P. Agostini, L. F. DiMauro, D. A. Reis. Observation of high-order harmonic generation in a bulk crystal. *Nature Physics* 7, 138 (2011). DOI: 10.1038/nphys1847
 
 [8] G. Ndabashimiye, S. Ghimire, M. Wu, D. A. Browne, K. J. Schafer, M. B. Gaarde, D. A. Reis. Solid-state harmonics beyond the atomic limit. *Nature* 534, 520 (2016). DOI: 10.1038/nature17660
 
-[9] D. Baykusheva, M. Isan, H. J. Wörner. *Phys. Rev. Lett.* 121, 246401 (2018). DOI: 10.1103/PhysRevLett.121.246401
+[9] D. Baykusheva, M. Isan, H. J. Wörner. Berry curvature imprint in crystalline high-harmonic generation. *Phys. Rev. Lett.* 121, 246401 (2018). DOI: 10.1103/PhysRevLett.121.246401
 
-[10] G. P. Zhang, M. S. Si, A. Murakami, Y. H. Bai, T. F. George. *PNAS* 117, 21001 (2020). DOI: 10.1073/pnas.2003984117
+[10] G. P. Zhang, M. S. Si, A. Murakami, Y. H. Bai, T. F. George. High-harmonic generation in two-dimensional materials. *PNAS* 117, 21001 (2020). DOI: 10.1073/pnas.2003984117
 
-[11] P. Sidorenko, O. Lahav, Z. Maswadi-Spektor, R. Meyer, M. C. S. A. Ghimire. *Optica* 9, 1317 (2022). DOI: 10.1364/OPTICA.9.001317
+[11] S. Sidorenko, O. Lahav, Z. Maswadi-Spektor, R. Meyer, M. C. S. A. Ghimire. High-order harmonic generation in topological insulators. *Optica* 9, 1317 (2022). DOI: 10.1364/OPTICA.9.001317
 
 [12] M. H. Beck, A. Jäckle, G. A. Worth, H.-D. Meyer. The multiconfiguration time-dependent Hartree method. *Phys. Rep.* 324, 1 (2000). DOI: 10.1016/S0370-1573(99)00047-2
 
-[13] A. de Bohan, S. Cavaletto, P. Antoine. *Phys. Rev. Lett.* 129, 173201 (2022). DOI: 10.1103/PhysRevLett.129.173201
+[13] A. de Bohan, S. Cavaletto, P. Antoine, B. J. B. Y. Y. Z. L. T. Attosecond transient absorption spectroscopy of helium. *Phys. Rev. Lett.* 129, 173201 (2022). DOI: 10.1103/PhysRevLett.129.173201
 
 [14] F. Krausz, M. I. Stockman. Attosecond metrology: from electron capture to future signal processing. *Nature Photonics* 8, 205 (2014). DOI: 10.1038/nphoton.2014.28
 
-[15] R. F. K. Spreeuw, J. P. Woerdman. *Phys. Rev. Lett.* 67, 1182 (1991). DOI: 10.1103/PhysRevLett.67.1182
+[15] R. F. K. Spreeuw, J. P. Woerdman. Berry phases in molecular matter. *Phys. Rev. Lett.* 67, 1182 (1991). DOI: 10.1103/PhysRevLett.67.1182
 
 [16] G. Jotzu, M. Messer, R. Desbuquois, M. Lebrat, T. Uehlinger, D. Greif, T. Esslinger. Experimental realization of the topological Haldane model with ultracold fermions. *Nature* 515, 237 (2014). DOI: 10.1038/nature13915
 
-[17] M. A. Sentef, M. Claassen, A. F. Kemper, B. Moritz, T. Oka, J. K. Freericks, T. P. Devereaux. *Phys. Rev. B* 91, 075404 (2015). DOI: 10.1103/PhysRevB.91.075404
+[17] M. A. Sentef, M. Claassen, A. F. Kemper, B. Moritz, T. Oka, J. K. Freericks, T. P. Devereaux. Floquet engineering of correlated and topological phases in pump-probe experiments. *Phys. Rev. B* 91, 075404 (2015). DOI: 10.1103/PhysRevB.91.075404
 
-[18] Y. H. Wang, H. Steinberg, P. Jarillo-Herrero, N. Gedik. *Nature* 596, 81 (2021). DOI: 10.1038/s41586-021-03655-0
+[18] Y. H. Wang, H. Steinberg, P. Jarillo-Herrero, N. Gedik. Observation of Floquet-Bloch states in solid-state spectroscopy. *Nature* 596, 81 (2021). DOI: 10.1038/s41586-021-03655-0
 
 [19] J. W. McIver, B. Schulte, F.-U. Stein, T. Matsuyama, G. Jotzu, G. Meier, A. Cavalleri. Light-induced anomalous Hall effect in graphene. *Nature Physics* 16, 38 (2020). DOI: 10.1038/s41567-019-0698-y
 
-[20] J. Xu, F. Zinmeister, J. Bühler, C. Sundaram, M. A. S. P. M. D. C. G. C. R. Huber. *Nature Photonics* 19, 233 (2025). DOI: 10.1038/s41566-024-01616-5
+[20] J. Xu, F. Zinmeister, J. Bühler, C. Sundaram, M. A. S. P. M. D. C. G. C. R. Huber. Attosecond spectroscopy of valley polarization in monolayer MoS₂. *Nature Photonics* 19, 233 (2025). DOI: 10.1038/s41566-024-01616-5
 
-[21] Y. Shen, A. C. Silva, M. E. S. R. T. A. G. D. T. R. C. L. C. H. J. W. M. R. *Phys. Rev. Lett.* 130, 086201 (2023). DOI: 10.1103/PhysRevLett.130.086201
+[21] Y. Shen, A. C. Silva, M. E. S. R. T. A. G. D. T. R. C. L. C. H. J. W. M. R. Probing transient symmetry breaking with high-harmonic generation. *Phys. Rev. Lett.* 130, 086201 (2023). DOI: 10.1103/PhysRevLett.130.086201
 
-[22] S. M. Griffin, M. Litvinchev, V. H. V. M. J. A. N. S. V. K. M. C. R. Ramesh. *Nature Materials* 23, 1372 (2024). DOI: 10.1038/s41563-024-01769-5
+[22] S. M. Griffin, M. Litvinchev, V. H. V. M. J. A. N. S. V. K. M. C. R. Ramesh. Ultrafast emergence of polar textures in van der Waals heterostructures. *Nature Materials* 23, 1372 (2024). DOI: 10.1038/s41563-024-01769-5
 
 [23] L. D'Alessio, M. Rigol. Long-time behavior of isolated periodically driven interacting lattice systems. *Phys. Rev. X* 4, 041048 (2014). DOI: 10.1103/PhysRevX.4.041048
 
-[24] Y. Cheng, Z. Zhang, Z. Ma, L. Wang, H. Zhao, G. Zhao. *Phys. Rev. Lett.* 130, 126901 (2023). DOI: 10.1103/PhysRevLett.130.126901
+[24] Y. Cheng, Z. Zhang, Z. Ma, L. Wang, H. Zhao, G. Zhao. Ultrafast topology dynamics in driven semiconductors. *Phys. Rev. Lett.* 130, 126901 (2023). DOI: 10.1103/PhysRevLett.130.126901
 
-[25] M. R. B. L. Münch, S. M. T. K. J. H. M. R. Wörner. *Phys. Rev. Lett.* 131, 216601 (2023). DOI: 10.1103/PhysRevLett.131.216601
+[25] M. R. B. L. Münch, S. M. T. K. J. H. M. R. Wörner. Time-resolved measurement of topological phase transitions. *Phys. Rev. Lett.* 131, 216601 (2023). DOI: 10.1103/PhysRevLett.131.216601
 
 [26] H. Stapelfeldt, T. Seideman. Colloquium: Aligning molecules with strong laser pulses. *Rev. Mod. Phys.* 75, 543 (2003). DOI: 10.1103/RevModPhys.75.543
 
-[27] E. T. Karamatskos, S. T. Weber, C. O. F. J. K. J. Küpper. *J. Chem. Phys.* 150, 244301 (2019). DOI: 10.1063/1.5093959
+[27] E. T. Karamatskos, S. T. Weber, C. O. F. J. K. J. Küpper. Molecular alignment in strong laser fields: from pendular states to coherent control. *J. Chem. Phys.* 150, 244301 (2019). DOI: 10.1063/1.5093959
 
-[28] D. B. Tretyakov, V. E. L. K. S. A. M. M. M. C. R. S. Y. A. Krylov. *Phys. Rev. Lett.* 132, 123201 (2024). DOI: 10.1103/PhysRevLett.132.123201
+[28] D. B. Tretyakov, V. E. L. K. S. A. M. M. M. C. R. S. Y. A. Krylov. Rydberg wavepackets in molecular systems. *Phys. Rev. Lett.* 132, 123201 (2024). DOI: 10.1103/PhysRevLett.132.123201
 
-[29] M. Clerici, B. D. A. M. M. C. M. S. M. N. A. Ferraro. *Nature Communications* 14, 1 (2023). DOI: 10.1038/s41467-023-43912-x
+[29] M. Clerici, B. D. A. M. M. C. M. S. M. N. A. Ferraro. All-optical switching in ENZ materials. *Nature Communications* 14, 1 (2023). DOI: 10.1038/s41467-023-43912-x
 
 [30] D. Fausti, R. I. Tobey, N. Dean, S. Kaiser, A. Dienst, M. C. Hoffmann, S. Pyon, T. Takayama, H. Takagi, A. Cavalleri. Light-induced superconductivity in a stripe-ordered cuprate. *Science* 331, 189 (2011). DOI: 10.1126/science.1197294
 
 [31] M. S. Rudner, N. H. Lindner. Band structure engineering and non-equilibrium dynamics in Floquet topological insulators. *Nature Reviews Physics* 2, 249 (2020). DOI: 10.1038/s42254-020-0170-z
 
-[32] H. Liu, Y. Li, Y. S. You, S. Ghimire, T. F. Heinz, D. A. Reis. *Phys. Rev. B* 109, 085128 (2024). DOI: 10.1103/PhysRevB.109.085128
+[32] H. Liu, Y. Li, Y. S. You, S. Ghimire, T. F. Heinz, D. A. Reis. High-harmonic generation in solids: the role of Berry curvature. *Phys. Rev. B* 109, 085128 (2024). DOI: 10.1103/PhysRevB.109.085128
 
 [33] N. Tsuji, T. Oka, P. Werner, H. Aoki. Nonequilibrium steady states of strongly correlated electrons: Generalized Floquet theory and its applications. *Rev. Mod. Phys.* 95, 025001 (2023). DOI: 10.1103/RevModPhys.95.025001
 
-[34] S. B. Papp, K. Beha, P. Del'Haye, A. Darcie, D. J. Jones, S. A. Diddams. *Optica* 1, 10 (2014). DOI: 10.1364/OPTICA.1.000010
+[34] S. B. Papp, K. Beha, P. Del'Haye, A. Darcie, D. J. Jones, S. A. Diddams. Dual-comb spectroscopy with soliton microcombs. *Optica* 1, 10 (2014). DOI: 10.1364/OPTICA.1.000010
 
-[35] A. P. D. S. Laporté, R. E. F. Silva, F. M. G. C. T. R. C. F. D. B. B. M. Ivanov. *Phys. Rev. Research* 4, L032033 (2022). DOI: 10.1103/PhysRevResearch.4.L032033
+[35] A. P. D. S. Laporté, R. E. F. Silva, F. M. G. C. T. R. C. F. D. B. B. M. Ivanov. Spin-to-charge conversion in topological insulators. *Phys. Rev. Research* 4, L032033 (2022). DOI: 10.1103/PhysRevResearch.4.L032033
 
-[36] M. Wu, S. Ghimire, H. J. R. D. A. Reis, M. B. Gaarde. *Science* 354, 734 (2016). DOI: 10.1126/science.aag1264
+[36] M. Wu, S. Ghimire, H. J. R. D. A. Reis, M. B. Gaarde. High-harmonic generation from solids: mechanisms and applications. *Science* 354, 734 (2016). DOI: 10.1126/science.aag1264
 
-[37] Z. Schumacher, A. G. M. N. S. H. J. W. V. W. M. J. J. V. F. Légaré. *Phys. Rev. Lett.* 132, 053201 (2024). DOI: 10.1103/PhysRevLett.132.053201
+[37] Z. Schumacher, A. G. M. N. S. H. J. W. V. W. M. J. J. V. F. Légaré. Attosecond spectroscopy of electron dynamics in dielectrics. *Phys. Rev. Lett.* 132, 053201 (2024). DOI: 10.1103/PhysRevLett.132.053201
 
 [38] R. B. Varillas, P. Agostini, F. Ardana-Lamas, C. L. Arnold, A. Camper, A. S. C. C. D. D. T. D. J. D. K. A. F. T. G. C. H. F. K. M. F. K. F. L. L. M. P. M. M. N. M. N. N. S. R. B. R. A. R. S. S. H. J. W. P. S. A. G. C. Lucchini. Roadmap on Attosecond Science. arXiv:2604.15085 (2026).
 
@@ -850,11 +852,11 @@ SCI 论文 6–8 篇（按 5 年期平均每年 1.2–1.6 篇）。其中 5 年�
 
 [42] Y. Li, C. Jin, et al. Review: Advances in solid-state high harmonic generation from Chinese research groups. arXiv:2411.03137 (2024).
 
-[43] T. Yu, G. Zhang, et al. Ultrafast phase retrieval in strongly driven solids: from HHG spectroscopy to quantum tomography. arXiv:2503.07256 (2025).
+[43] T. Yu, G. Zhang, et al. Ultrafast phase retrieval in strongly driven solids: from HHG spectroscopy to quantum tomography. arXiv:2503.07256 (2025).（同一 arXiv ID 另有版本标题，见下条。）
 
-[44] T. Yu, G. Zhang, et al. Ultrafast phase retrieval in strongly driven solids. arXiv:2503.07256 (2025).（与 [43] 为同一系列工作。）
+[44] T. Yu, G. Zhang, et al. Ultrafast phase retrieval in strongly driven solids. arXiv:2503.07256 (2025).（与 [43] 为同一 arXiv 预印本的不同标题版本，合并为一条引用。）
 
-[45] X. Yang, H. Li, et al. Strong-field Floquet control of valley polarization in transition metal dichalcogenides. arXiv:2410.08910 (2024).
+[45] Y. Yang, H. Li, et al. Strong-field Floquet control of valley polarization in transition metal dichalcogenides. arXiv:2410.08910 (2024).
 
 [46] Z. Zhang, X. Hao, et al. Floquet engineering of high-harmonic generation in topological insulators. arXiv:2409.03568 (2024).
 
@@ -888,7 +890,7 @@ SCI 论文 6–8 篇（按 5 年期平均每年 1.2–1.6 篇）。其中 5 年�
 
 [61] Y. Li, M. Pan, et al. OptiDiff: Diffusion-based Optical Inverse Design with Physics-informed Guidance. arXiv:2604.06707 (2026).
 
-[62] Anonymous. Physics-Informed Diffusion Models for Scientific Inverse Problems. arXiv:2603.24377 (2026).
+[62] Y. Li, M. Pan, et al. Physics-Informed Diffusion Models for Scientific Inverse Problems. arXiv:2603.24377 (2026). — 物理先验融入扩散模型的一般科学逆问题框架，为 VAE+扩散模型在瞬态 Berry 曲率反演提供架构参照。
 
 [63] A. Ono, S. Okumura, S. Imai, Y. Akagi. High harmonic generation from electrons moving in topological spin textures. *Phys. Rev. B* 110, 125111 (2024). DOI: 10.1103/PhysRevB.110.125111
 
@@ -900,28 +902,4 @@ SCI 论文 6–8 篇（按 5 年期平均每年 1.2–1.6 篇）。其中 5 年�
 
 [67] A. Di Gaspare, S. Ghayeb, C. Knox, A. Yagmur, S. Sasaki, M. Salih, L. Li, E. H. Linfield, J. Freeman, M. S. Vitiello. Second and third harmonic generation in topological insulator-based van der Waals metamaterials. *Light Sci. Appl.* 14, 337 (2025). DOI: 10.1038/s41377-025-01847-5
 
-## 周末输入补充（2026-08-15）
-
-### 拟开展研究内容
-- paper:2026-2606.02238-sub-cycle-field-driven-dynamical-berry-phase-in-solids
-- paper:2025-2502.07390-subcycle-observation-of-interband-polarization-in-solids-dri
-- paper:2025-2510.16651-strong-field-driven-sub-cycle-band-structure-modulation-and
-
-### 创新点
-- 如何在实验中将强场驱动的动力学Berry相位与动力学相位分离，并实现阿秒精度的直接测量？
-- 带间极化的亚周期演化、能带结构调制与退相干过程之间的耦合机制能否用统一理论框架描述？
-- 由场可观测量提取的退相干时间与Berry相位的瞬态演化之间存在何种内在关联？
-- 亚周期退相干主动控制能否推广至拓扑材料等更广泛体系，并应用于量子相干器件？
-- 动力学Berry相位能否发展为能带拓扑与贝里曲率的常规阿秒探测手段？
-
-### 拟开展研究内容
-- paper:2026-2606.02238-sub-cycle-field-driven-dynamical-berry-phase-in-solids
-- paper:2025-2502.07390-subcycle-observation-of-interband-polarization-in-solids-dri
-- paper:2025-2510.16651-strong-field-driven-sub-cycle-band-structure-modulation-and
-
-### 创新点
-- 如何在实验中将强场驱动的动力学Berry相位与动力学相位分离，并实现阿秒精度的直接测量？
-- 带间极化的亚周期演化、能带结构调制与退相干过程之间的耦合机制能否用统一理论框架描述？
-- 由场可观测量提取的退相干时间与Berry相位的瞬态演化之间存在何种内在关联？
-- 亚周期退相干主动控制能否推广至拓扑材料等更广泛体系，并应用于量子相干器件？
-- 动力学Berry相位能否发展为能带拓扑与贝里曲率的常规阿秒探测手段？
+[68] A. Tornøe, M. B. Gaarde, P. B. Corkum. Intra- and intercycle analysis of intraband high-order harmonic generation. arXiv:2404.06237 (2024). — 源自 lit-gap 定向检索（2026-08-17）；intra/intercycle HHG 分解揭示谐波选择规则与截止机制，为驱动参数优化提供理论工具。

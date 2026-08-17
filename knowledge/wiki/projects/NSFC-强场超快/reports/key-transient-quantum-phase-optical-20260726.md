@@ -3,12 +3,12 @@ title: "transient-quantum-phase-optical — 优化报告"
 type: "proposal_reports"
 proposal_id: "key-transient-quantum-phase-optical-20260726"
 latest_round: 5
-last_score: 0.81
+last_score: 0.53
 critic_rounds: 10
 optimization_reports: 0
 status: "optimizing"
-created: "2026-08-17T10:44:29Z"
-updated: "2026-08-17T10:44:29Z"
+created: "2026-08-17T16:02:30Z"
+updated: "2026-08-17T16:02:30Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,7 +18,7 @@ confidence: 1.0
 
 **课题 ID**：`key-transient-quantum-phase-optical-20260726`
 **累计轮次**：5
-**当前分数**：0.81
+**当前分数**：0.53
 **状态**：优化中
 
 ---

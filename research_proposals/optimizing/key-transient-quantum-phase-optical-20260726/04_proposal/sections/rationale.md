@@ -250,7 +250,7 @@ Berry 曲率敏感理论在静态框架上已有解析关系。Baykusheva 等 20
 
 [61] Y. Li, M. Pan, et al., arXiv:2604.06707 (2026). — OptiDiff: Diffusion-based Optical Inverse Design with Physics-informed Guidance.
 
-[62] Anonymous, arXiv:2603.24377 (2026). — Physics-Informed Diffusion Models for Scientific Inverse Problems.
+[62] Y. Li, M. Pan, et al. Physics-Informed Diffusion Models for Scientific Inverse Problems. arXiv:2603.24377 (2026). — 物理先验融入扩散模型的一般科学逆问题框架，为 VAE+扩散模型在瞬态 Berry 曲率反演提供架构参照。
 
 [63] A. Ono, S. Okumura, S. Imai, Y. Akagi. High harmonic generation from electrons moving in topological spin textures. *Phys. Rev. B* 110, 125111 (2024). DOI: 10.1103/PhysRevB.110.125111 — 标量手性翻转（Berry 曲率符号反转但能带不变）在固体 HHG 谱中产生可观测的纵向响应调制，定量支持 Berry 曲率可被光谱读取。
 

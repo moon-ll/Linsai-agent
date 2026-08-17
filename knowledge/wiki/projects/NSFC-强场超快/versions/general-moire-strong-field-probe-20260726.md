@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-moire-strong-field-probe-20260726"
 project_type: "general"
 latest_round: 7
-last_score: 0.79
-status: "optimizing"
-created: "2026-08-17T10:44:29Z"
-updated: "2026-08-17T10:44:29Z"
+last_score: 0.78
+status: "pending_review"
+created: "2026-08-17T16:02:30Z"
+updated: "2026-08-17T16:02:30Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-moire-strong-field-probe-20260726`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.79
-**状态**：优化中
-**同步时间**：2026-08-17T10:44:29Z
+**当前分数**：0.78
+**状态**：待校验
+**同步时间**：2026-08-17T16:02:30Z
 
 ---
 
@@ -28,10 +28,10 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 192 |
+| content | content | 196 |
 | full_review | full_review | 137 |
 | rationale | rationale | 121 |
-| references | references | 228 |
+| references | references | 200 |
 | scheme | scheme | 110 |
 
 ## 课题简介
@@ -41,9 +41,9 @@ confidence: 1.0
 **课题名称**：反演探针：从均匀体系到莫尔自由度的扩展瓶颈。** HHG 反演材料参数的研究已在均匀单层/双层体系中取得重要进展。其发展脉络为莫尔体系的反演迁移了方法学基础，但也暴露了向莫尔自由度扩展的根本困难。
 **项目类型**：面上项目
 **课题 ID**：`general-moire-strong-field-probe-20260726`
-**当前状态**：优化中（第7轮，score 0.79）
+**当前状态**：待校验（等待人工核验）
 **启动日期**：2026-07-26
-**最后更新**：2026-08-14
+**最后更新**：2026-08-17
 
 ---
 
@@ -70,14 +70,14 @@ confidence: 1.0
 | 2 | 0.47 | 38 | 11 | 2026-08-03 |
 | 3 | 0.65 | 61 | 22 | 2026-08-03 |
 | 4 | 0.78 | 13 | 6 | 2026-08-03 |
-| 5 | 0.72 | 1 | 0 | 2
+| 5 | 0.72 | 1 | 0 | 2026-08-0
 
-（完整简介见 [源文件](research_proposals/optimizing/general-moire-strong-field-probe-20260726/04_proposal/proposal-draft-merged.md)）
+（完整简介见 [源文件](research_proposals/pending_review/general-moire-strong-field-probe-20260726/04_proposal/proposal-draft-merged.md)）
 
 ## 来源
 
-- 最新申请书：[research_proposals/optimizing/general-moire-strong-field-probe-20260726/04_proposal/proposal-draft-merged.md](research_proposals/optimizing/general-moire-strong-field-probe-20260726/04_proposal/proposal-draft-merged.md)
-- 各章节文件：`research_proposals/optimizing/general-moire-strong-field-probe-20260726/04_proposal/sections/`
+- 最新申请书：[research_proposals/pending_review/general-moire-strong-field-probe-20260726/04_proposal/proposal-draft-merged.md](research_proposals/pending_review/general-moire-strong-field-probe-20260726/04_proposal/proposal-draft-merged.md)
+- 各章节文件：`research_proposals/pending_review/general-moire-strong-field-probe-20260726/04_proposal/sections/`
 - 优化报告：[reports/general-moire-strong-field-probe-20260726.md](reports/general-moire-strong-field-probe-20260726.md)
 
 > 本页由 `scripts/kb_proposal_reorg.py` 自动生成。
