@@ -1,0 +1,76 @@
+{
+  "gaps": [
+    {
+      "claim": "强场超快手段可驱动层间滑移/堆叠自由度调控（研究内容核心调控手段）",
+      "missing_evidence": "content.md为0字节，研究内容全部缺失；现有12篇阅读笔记集中于立项依据（altermagnet/二维磁性/MnPS3基础电子结构），缺少强场或超快驱动层间滑移/堆叠转变的直接文献（滑移铁电场致翻转、超快堆叠动力学）",
+      "search_keywords": [
+        "sliding ferroelectricity electric field switching",
+        "interlayer sliding ultrafast dynamics",
+        "strong field stacking control 2D material",
+        "滑移铁电 超快 调控",
+        "sliding ferroelectric bilayer switching time"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "高次谐波谱学可读出Berry曲率/Rashba自旋劈裂等量子几何量（研究内容核心读出手段）",
+      "missing_evidence": "缺少HHS读出Berry曲率/量子度规/Rashba态的实验与理论文献，现有笔记中无HHS谱学读出链条的支撑文献",
+      "search_keywords": [
+        "Berry curvature high harmonic spectroscopy",
+        "high harmonic generation Rashba spin splitting",
+        "quantum metric nonlinear optical probe",
+        "HHG readout band topology experiment",
+        "高次谐波 贝里曲率 读出"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnPS3及MPX3家族具有可观测的强场非线性/高次谐波响应（研究对象可行性）",
+      "missing_evidence": "缺少MnPS3/MPX3体系非线性光学或固体高次谐波产生（实验或理论）的文献，无法支撑研究内容中选择该材料的依据",
+      "search_keywords": [
+        "MnPS3 high harmonic generation",
+        "MPX3 nonlinear optics",
+        "antiferromagnetic monolayer HHG",
+        "MnPS3 strong field optical response",
+        "二维反铁磁 高次谐波"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "层间滑移/堆叠方式与Berry曲率、Rashba劈裂存在可调耦合（研究内容物理因果链）",
+      "missing_evidence": "缺少堆叠方式依赖的量子几何量（Berry曲率/Rashba劈裂随层间位移演化）的第一性原理计算或实验调控文献，尤其是滑移铁电体系",
+      "search_keywords": [
+        "stacking dependent Berry curvature bilayer",
+        "sliding ferroelectric Rashba tuning",
+        "interlayer displacement spin splitting",
+        "stacking engineering quantum geometry control",
+        "堆叠调控 Rashba 贝里曲率"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "超快滑移调控的时间尺度与所需强场参数窗口可界定（关键科学问题设定）",
+      "missing_evidence": "缺少滑移铁电翻转/层间滑移声子(phason)超快时间尺度与临界场强的定量文献，无法支撑关键科学问题中强场参数区间和时间分辨方案的设定",
+      "search_keywords": [
+        "sliding ferroelectric switching timescale femtosecond",
+        "ultrafast interlayer phonon dynamics",
+        "2D ferroelectric critical field threshold",
+        "phason sliding mode dynamics",
+        "滑移铁电 翻转时间尺度"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "研究内容章节的缺口识别需基于强场超快+高次谐波谱学读出口径（gap-report仍为准静态器件化口径）",
+      "missing_evidence": "gap-report.md仍为准静态器件化文献口径（历史问题残留），未覆盖强场非线性/超快堆叠调控/谐波谱学读出领域文献，导致研究内容章节撰写缺乏正确的文献缺口基础",
+      "search_keywords": [
+        "strong field two-dimensional magnet review",
+        "ultrafast stacking engineering",
+        "nonlinear spectroscopy 2D magnetic material",
+        "high harmonic spectroscopy 2D materials review",
+        "强场 二维磁性 超快 综述"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

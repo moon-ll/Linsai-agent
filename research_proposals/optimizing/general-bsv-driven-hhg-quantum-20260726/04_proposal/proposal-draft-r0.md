@@ -2,7 +2,7 @@
 
 ### 1.1 科学意义与研究价值
 
-固体高次谐波产生（HHG）已在过去十多年间从"光源现象"演化为凝聚态探针工具。2011 年 Ghimire 等 [19] 在 ZnO 晶体中首次观测到非微扰固体 HHG。此后，该方向沿三条主线展开：Bi₂Se₃、Bi₂Te₃ 等拓扑绝缘体的 HHG 圆偏振选择性对 Berry 曲率敏感 [7, 25]，Luu 等 [25] 在 XUV 偏振各向异性谱学中给出了 Berry 曲率反演的方法学范式，Silva 等 [7] 在强关联体系中把该几何响应扩展到多体动力学层面。该效应在中红外（2–4 μm）驱动下最为明确，但与量子度规、带间/带内贡献等多通道耦合，需在双色场微扰一阶近似或更精细模型下分通道解读。MoS₂、WSe₂ 等过渡金属硫族化合物（TMDC）单层的 HHG 产出规律与非微扰多带模型一致 [5, 6, 17]。经典光 HHG 在 Hubbard/Mott 体系中已建立部分多体动力学基线 [7, 8, 18]，但对量子关联与量子涨落的灵敏度有限。
+固体高次谐波产生（HHG）已在过去十多年间从"光源现象"演化为凝聚态探针工具。2011 年 Ghimire 等 [19] 在 ZnO 晶体中首次观测到非微扰固体 HHG。该领域沿三条主线展开。其一，Bi₂Se₃、Bi₂Te₃ 等拓扑绝缘体的 HHG 圆偏振选择性反映 Berry 曲率（带间几何响应），Luu 等 [25] 在 XUV 偏振各向异性谱学中给出了 Berry 曲率反演的方法学范式，Silva 等 [7] 将该几何响应扩展到强关联体系的多体动力学层面。其二，MoS₂、WSe₂ 等过渡金属硫族化合物（TMDC）单层的 HHG 产出规律与非微扰多带模型一致 [5, 6, 17]。其三，经典光 HHG 在 Hubbard/Mott 体系中已建立部分多体动力学基线 [7, 8, 18]，但对量子关联与量子涨落的灵敏度有限。
 
 综合判断，经典光 HHG 已触及单粒子与部分多体修正层面，对多体关联与量子涨落仍缺乏定量灵敏度。这正是量子光场可能突破的边界。2024 年 Rasputnyi 等 [1] 首次实验观测到明亮压缩真空（BSV）驱动固体 HHG 后，一个根本性问题浮现：当光场本身进入量子域，HHG 还能否揭示经典光场无法触及的多体关联与量子涨落？
 
@@ -12,7 +12,9 @@
 
 探针有效性的可证伪判据已明确。若 QEF 在三类对照体系（弱关联 TMDC / 中等关联莫尔 / 强关联 Mott，详见 §1.2.3）上不单调上升，或独立测量（瞬态吸收、PL、tr-ARPES）与反演结果偏离超过预设阈值（方法学手册 §5.3），则将探针范式降级为"多体响应分类工具"。这是立项承诺的边界，也是科研诚信的底线。
 
-这一方向具有双重科学价值。对量子光学而言，将非经典光场的应用从量子信息、量子测量拓展到强场非平衡态物理。这一应用场景在量子光场作为"物质探针"的版图中尚待开拓。对凝聚态物理而言，经典光场 HHG 已能探测 Berry 曲率、能带结构、拓扑性质等几何响应 [7, 25]。量子光场携带的相位关联、光子数关联等额外自由度，可能对多体关联、纠缠、量子涨落提供经典光场无法达到的灵敏度。当前国际同行 Rasputnyi 2024 首例实验 [1] 与 Even Tzur 等 2024 量子态理论 [2] 已奠定基础。2025 年以来 Gothelf 等 [32] 在 ZnO 晶体中证实 BSV 驱动可将 HHG 截止频率推至相干态驱动远不能及的能区。Lange 等 [33] 在 Mott 绝缘体的激子能区预言并验证 BSV-HHG 产生的压缩光信号。Even Tzur 等 [34] 在阿秒尺度完成了 XUV 谐波场的量子态层析。三项工作分别从机制层、材料层、时间分辨层填补了关键空白。
+这一方向具有双重科学价值。对量子光学而言，将非经典光场的应用从量子信息、量子测量拓展到强场非平衡态物理，在量子光场作为"物质探针"的版图中尚属空白。对凝聚态物理而言，经典光场 HHG 已能探测 Berry 曲率、能带结构、拓扑性质等几何响应 [7, 25]，量子光场携带的相位关联、光子数关联等额外自由度，可能对多体关联、纠缠、量子涨落提供经典光场无法达到的灵敏度。
+
+当前国际同行已从三条路径推进该方向的物理基础。Rasputnyi 等 [1] 于 2024 年完成 BSV 驱动固体 HHG 首例实验，Even Tzur 等 [2] 同期建立了任意量子光态驱动 HHG 的高次谐波量子态公式。2025 年以来，Gothelf 等 [32] 在 ZnO 晶体中证实 BSV 驱动可将 HHG 截止频率推至相干态驱动远不能及的能区；Lange 等 [33] 在 Mott 绝缘体的激子能区预言并验证 BSV-HHG 产生的压缩光信号；Even Tzur 等 [34] 通过 BSV 驱动的 4-缝亚周期干涉仪在阿秒尺度完成 XUV 谐波场的量子态层析。三项工作分别从机制层、材料层、时间分辨层填补了关键空白。
 
 国内研究空白的检索证据已建立。作者于 2026-08-03 在 arXiv / Web of Science / CNKI 上以"bright squeezed vacuum"、"BSV HHG"、"quantum light HHG"、"明亮压缩真空高次谐波"、"非经典光高次谐波"等关键词组合检索，命中文献共 47 篇（arXiv 31 / WoS 11 / CNKI 5）。按团队分布为 Rasputnyi/Even Tzur/Cohen 组（Technion）14 篇、Brabec/Vampa 组（NRC-渥太华）6 篇、Lange/Madsen 组（Aarhus）4 篇、Rivera-Dean/Stammer/Ciappina 组（UCL/MPSD/ICFO）8 篇、Boroumand/Thorpe 组（渥太华）3 篇、Khurelbaatar/Litvinyuk 组（Griffith）2 篇、其他国际团队 8 篇、国内团队 2 篇（均与本课题无直接相关性，1 篇为综述提及、1 篇为气体 BSV 实验）。截至本申请书撰写日，国内团队在 BSV 驱动固体 HHG 方向未发表系统性研究工作，构成本项目的原始创新空间。
 
@@ -24,7 +26,7 @@
 
 在能带几何探测方面，Bi₂Se₃、Bi₂Te₃ 等拓扑绝缘体的 HHG 圆偏振选择性反映 Berry 曲率（带间几何响应），该几何量已被扩展到能谷极化、贝里偶极矩等更精细的拓扑响应 [7]。偏振各向异性谱学 [25] 为 Berry 曲率反演提供了方法学范式。半经典三步模型在固体中的拓展由 Vampa 等 [24] 系统建立，把带间再碰撞机制与带内电流贡献解耦。
 
-在能谷选择探测方面，MoS₂、WSe₂ 等 TMDC 单层在 0.8–1.5 μm 驱动下的多带干涉 HHG 谱可作为对照基线 [6, 17]。Wu/Schafer/Gaarde 多能级模型 [5] 给出与带隙关联的奇次谐波阶次区间：对于单层 MoS₂（$E_g \approx 1.6$ eV）在 800 nm 驱动下实验可观测 7–13 阶奇次谐波，光子能量约 10.8–20.2 eV，落入 VUV–EUV 低能端，与 Iglesias 等 [17] 实测吻合。
+在能谷选择探测方面，MoS₂、WSe₂ 等 TMDC 单层在 0.8–1.5 μm 驱动下的多带干涉 HHG 谱可作为对照基线 [6, 17]。[5] 给出与带隙关联的奇次谐波阶次区间：对于单层 MoS₂（$E_g \approx 1.6$ eV）在 800 nm 驱动下实验可观测 7–13 阶奇次谐波，光子能量约 10.8–20.2 eV，落入 VUV–EUV 低能端，与 [17] 实测吻合。
 
 在截止律预测方面，固体 HHG 截止能量不能直接套用气体三步模型 $E_{\rm cut} = I_p + 3.17\,U_p$，须由半导体布洛赫方程数值求解带间再碰撞与带内电流两通道共同预测 [5, 24]。
 
@@ -32,31 +34,31 @@
 
 #### 1.2.2 非经典光场与物质相互作用
 
-压缩真空态与明亮压缩真空（BSV）是量子光学中的核心资源。BSV 具有高光子数涨落关联、强相位敏感性，已在量子成像、量子增强测量、量子光学参量放大中得到应用 [3]。本项目涉及的 BSV 物理基线：高增益参量下转换（PDC）产生的 BSV 单脉冲光子数可达 $2\times 10^{13}$ 量级 [3, 4]。二阶关联 $g^{(2)}(0)$ 在非简并 PDC 配置下测得 2，在简并 PDC 配置下测得 $3+1/N$（$N$ 为平均光子数，高 $N$ 下趋近于 3，反映超聚束特性）[4]。两类配置由不同实验体系分别复现，非同一区间的两个端点。BSV 态的相干态展开与 Glauber 投影权重的数学形式化由 Schleich-Wheeler 框架 [20] 给出，本项目方法学手册 §1.2 沿用此框架把 BSV 分解为相干态统计混合以解析 HHG 谐波量子态。
+压缩真空态与明亮压缩真空（BSV）是量子光学中的核心资源。BSV 由高增益参量下转换（PDC）产生，单脉冲光子数可达 $2\times 10^{13}$ 量级 [3, 4]。二阶关联 $g^{(2)}(0)$ 在非简并 PDC 配置下测得 2，在简并 PDC 配置下测得 $3+1/N$（$N$ 为平均光子数，高 $N$ 下趋近于 3，反映超聚束特性）[4]。两类配置由不同实验体系分别复现。BSV 态在 Glauber 相干态基上的展开与 Glauber 投影权重的数学形式化由 Schleich-Wheeler 框架 [20] 给出——该框架把 BSV 分解为相干态统计混合，是本项目解析 BSV-HHG 谐波量子态的方法学基础。
 
 将 BSV 用于驱动 HHG，可从三个层次论证其新物理价值。光源层：BSV 改变了入射光场的统计性质（高阶光子数关联、相位压缩），与经典相干态的泊松分布形成对照。观测层：BSV 可能在某些平均功率归一化下提高光子数，但噪声协方差、$g^{(2)}(0)$ 漂移、探测器是否进入散粒噪声主导等因素共同决定 BSV HHG 的实际观测特征。本项目不预设产额增益必然转化为反演精度增益。反演层：本项目以 QEF ≥ 1.5 为阈值、以 QEF 三维度（$QEF_{\rm vis}$、$QEF_{\rm yield}^{(q_{\rm ref})}$、$QEF_{\rm yield}^{(\sum)}$）为标尺，定量验证反演是否真正提升。
 
 首例实验验证：2024 年 Rasputnyi 等 [1] 报道了 BSV 驱动固体 HHG 的首例实验，使用单脉冲光子数 $2\times 10^{13}$ 量级的 BSV 作为驱动光场。在相同平均强度下与经典光对照，报告 BSV 在指定谐波阶上效率较经典光更高（具体倍数与归一化条件详见原文 [1] §III，该数字为本项目复现基线）。本项目不预设该产额增益直接转化为探针优势。产额增益与反演精度增益是两个独立维度，按 §1.1 探针操作性定义，后者才是本项目核心目标。关于样品损伤，BSV 高峰值功率下短脉冲持续时间缩短、平均剂量降低，这与"非经典性"无直接因果联系，属经典物理效应。
 
-理论框架：2024 年 Even Tzur 等 [2] 建立了任意量子光态驱动 HHG 的高次谐波量子态公式，关键物理是"winding trail 模型"。谐波在量子相空间中呈现非平庸的相位缠绕结构，反映压缩真空态的非经典关联在 HHG 过程中的传递。Even Tzur 2024 给出两类预测：(i) 压缩相干光驱动（非零期望值），通过优化电离时间与泵浦压缩相位同步，谐波保持压缩态；(ii) 压缩真空驱动（零期望值），谐波进入 winding trail 量子态。本项目使用 BSV（明亮压缩真空，零期望值），对应第 (ii) 类预测，是 Even Tzur 2024 框架的实验验证场景。2025 年 Even Tzur 等 [34] 在双色扰动态方案中把该预测从静态层析推进到阿秒时间分辨。通过 BSV 驱动的 4-缝亚周期干涉仪，反 Radon 变换首次重建 XUV 谐波场的 Wigner 函数，证实场致隧穿本身可继承驱动光的量子统计。
+理论框架：[2] 建立了任意量子光态驱动 HHG 的高次谐波量子态公式，关键物理是"winding trail 模型"。谐波在量子相空间中呈现非平庸的相位缠绕结构，反映压缩真空态的非经典关联在 HHG 过程中的传递。[2] 给出两类预测：(i) 压缩相干光驱动（非零期望值），通过优化电离时间与泵浦压缩相位同步，谐波保持压缩态；(ii) 压缩真空驱动（零期望值），谐波进入 winding trail 量子态。本项目使用 BSV（明亮压缩真空，零期望值），对应第 (ii) 类预测，是 [2] 框架的实验验证场景。[34] 在双色扰动态方案中把该预测从静态层析推进到阿秒时间分辨。通过 BSV 驱动的 4-缝亚周期干涉仪，反 Radon 变换首次重建 XUV 谐波场的 Wigner 函数，证实场致隧穿本身可继承驱动光的量子统计。
 
 固体多带多体的机制层补齐：2025 年 Gothelf 等 [32] 在 ZnO 晶体（一维单带模型）的 BSV-HHG 理论中发现，由于 P 表示分布的高拖尾特性（$\sigma_P$ 远大于相干态），$\gamma_{\rm cutoff} = l_{\max} \cdot \tilde{g}_0 \cdot (\mu_P + 3\sigma_P)$ 公式给出的截止阶数被显著推高（从相干态/Fock 态的 $n \approx 13$ 推至 $n \gg 33$）。$S(n\omega_0) \propto K_n \tilde{g}_0^{2n}/[(n!)^2 2^{2n}] \cdot g^{(n)}(0) \cdot \langle a^\dagger a\rangle^n$ 公式直接显示，$n$ 阶谐波强度受 $n$ 阶归一化关联函数 $g^{(n)}(0)$ 调制。这是 BSV-HHG 区别于经典光 HHG 的解析可证伪机制。Wang 等 [35] 进一步在 MoS₂ 单层提出"量子刻度盘"（quantum dial）方案。以仅 5% 能量的 BSV 作为微扰，在 $3.3\times 10^{10}$ W/cm²（传统强场千分之一）的弱场下显著调控谐波谱、动量空间分布与电离，预言 K/K′ 谷的环状响应可作为谷电子学的可调自由度。
 
-必须明示：Even Tzur 2024 框架主要针对气体原子体系（其高次谐波量子态公式建立在单原子三步模型上 [26]），与本项目核心的固体多带多体体系存在物理图像差异。差异在于动量积分 vs 单动量点、Bloch 态 vs 连续态、多带耦合 vs 单带近似。Gothelf 2025 [32] 与 Wang 2025 [35] 虽已把量子光驱动框架推广到晶体与二维材料，但仍基于单带或紧束缚简化模型。本项目把 Even Tzur 2024 的形式化方法（高次谐波量子态公式、winding trail 量子态模型）拓展到固体多带多体，需引入晶体动量自由度、贝里相位、激子效应、强关联修正等新物理（与 §3.2 段 3 一致）。形式化层面的 Bloch 量子光推广可参照 Rivera-Dean 等 [16]，实空间双粒子紧束缚方案可参照 Peschel 等 [10] 处理多体电子-空穴产生与空间限制效应。
+必须指出：Even Tzur 等 [2] 的高次谐波量子态公式建立在单原子三步模型上 [26]，与本项目聚焦的固体多带多体体系存在物理图像差异——动量积分 vs 单动量点、Bloch 态 vs 连续态、多带耦合 vs 单带近似。Gothelf 等 [32] 与 Wang 等 [35] 虽已将量子光驱动框架推广到晶体与二维材料，但仍基于单带或紧束缚简化模型。本项目将 [2] 的形式化方法拓展到固体多带多体，需引入晶体动量自由度、贝里相位、激子效应、强关联修正等新物理（与 scheme.md §3.2 一致）。形式化层面的 Bloch 量子光推广可参照 Rivera-Dean 等 [16]，实空间双粒子紧束缚方案可参照 Peschel 等 [10] 处理多体电子-空穴产生与空间限制效应。
 
 #### 1.2.3 前人研究的局限与本项目的切入点
 
 物理层与方法学层两个维度上，现有工作均存在明确空白。
 
-物理层有两个层面的空白。机制层面：BSV 驱动 HHG 的微观机制尚未在固体多带多体中建立。Even Tzur 2024 框架 [2] 主要针对气体原子体系。Gothelf 2025 [32] 与 Wang 2025 [35] 把量子光推广到晶体/二维材料，但仅在单带或紧束缚简化模型上。固体多带耦合、激子效应、强关联修正下带间/带内贡献如何受光子统计影响仍属空白。
+物理层有两个层面的空白。机制层面：BSV 驱动 HHG 的微观机制尚未在固体多带多体中建立。[2] 主要针对气体原子体系，[32] 与 [35] 仅在单带或紧束缚简化模型上。固体多带耦合、激子效应、强关联修正下带间/带内贡献如何受光子统计影响仍属空白。
 
-材料层面：BSV HHG 在不同关联强度材料中的响应尚未被系统对比。经典光 HHG 虽在 Hubbard/Mott 等强关联体系已建立多体动力学基线 [8, 18]，Lange 等 [33] 已预言 Mott 体系激子能区可出现压缩光信号，但 BSV HHG 在弱关联→强关联梯度上的系统实验对比从未被开展。
+材料层面：BSV HHG 在不同关联强度材料中的响应尚未被系统对比。经典光 HHG 虽在 Hubbard/Mott 等强关联体系已建立多体动力学基线 [8, 18]，[33] 已预言 Mott 体系激子能区可出现压缩光信号，但 BSV HHG 在弱关联→强关联梯度上的系统实验对比从未被开展。
 
 本项目开展三类对照体系的 BSV-HHG 对比：(i) 弱关联半导体（单层 TMDC MoS₂、WSe₂，Hubbard $U/W \sim 0.5$，属弱关联半导体而非强关联材料）作为本征"无关联"基线 [6]；(ii) 中等关联（扭转双层 MoS₂ 莫尔超晶格，半填充附近关联绝缘相，Y3 室温可工作 [14]）；(iii) 强关联（Mott 绝缘体候选 1T-TaS₂ 等，需 4 K 低温平台）。
 
 方法学层，量子光 HHG 作为多体态非经典探针的系统方法论尚未形成。量子指纹 $Q_F$ 与量子增强因子 QEF 等核心概念虽有部分定义（见 §1.3、§1.4），但跨体系、跨观测量的统一测量协议仍待建立。本项目在 §1.3 凝练 4 个核心科学问题予以回应。
 
-物理层与方法学层的空白统一收敛于一个共性判断：BSV HHG 在固体多带多体中的探索仍是空白。机制层（Even Tzur 2024 框架 [2] 未推广到固体多带多体；Gothelf 2025 [32] 与 Wang 2025 [35] 仅在简化模型上）、材料层（未在莫尔/Mott 等不同关联强度体系系统验证）、方法学层（统一探针协议缺失）三层均未填补。本项目聚焦上述三层空白，以 BSV 为切入点，建立理论-实验-反演一体化的研究框架。
+物理层与方法学层的空白统一收敛于一个共性判断：BSV HHG 在固体多带多体中的探索仍是空白。[2] 未推广到固体多带多体；[32] 与 [35] 仅在简化模型上；材料层未在莫尔/Mott 等不同关联强度体系系统验证；方法学层统一探针协议缺失。本项目聚焦上述空白，以 BSV 为切入点，建立理论-实验-反演一体化的研究框架。
 
 ### 1.3 核心科学问题
 
@@ -84,11 +86,11 @@
 
 在量子化层面，本项目提出 BSV-经典光双光路 Mach-Zehnder 干涉方案，直接提取纯量子指纹 $Q_F$（操作化定义见 §1.3 问题 3 与 §2.5）。该方案与 Boroumand 等 [15] 提出的量子工程化 HHG 框架在概念上同源，均利用量子光与经典光的相干叠加，但在实验实现上独立。核心差异有两点。其一是光路结构：[15] 基于 SLM 单束双色场（$\omega+2\omega$）方案，本项目采用 BSV-经典光双光路 Mach-Zehnder 干涉构型。双光路可独立扫描相对强度比 $R$ 与相对相位 $\Delta\varphi$，而单束双色方案的 $\omega/2\omega$ 比例受限于相位匹配、不可独立调控。其二是物理体系：[15] 聚焦气体原子，本项目聚焦固体多带多体。
 
-关于 [15] 标题与 QSHHG 缩写的核实：arXiv:2505.22536 真实标题为"Quantum engineering of high harmonic generation"（Crossref 已确认正式版刊于 *PRL* 134, 113602 (2025)），原文未使用 QSHHG（quantum sideband HHG）缩写。QSHHG 是本项目为简洁引用而引入的中文简称，与 Boroumand 2025 量子工程化 HHG 框架在物理概念上一致。该简称在申请书全文中仅作为中文行文便利，正式引用一律使用 [15] 编号 + 论文原题。
+关于 [15] 标题与 QSHHG 缩写的核实：arXiv:2505.22536 真实标题为"Quantum engineering of high harmonic generation"（Crossref 已确认正式版刊于 *PRL* 134, 113602 (2025)），原文未使用 QSHHG（quantum sideband HHG）缩写。QSHHG 是本项目为简洁引用而引入的中文简称，与 [15] 量子工程化 HHG 框架在物理概念上一致。该简称在申请书全文中仅作为中文行文便利，正式引用一律使用 [15] 编号 + 论文原题。
 
 ---
 
-> 参考文献引用说明：本节共引用 [1]–[35] 号文献共 24 条（其中方法学手册引用 [20]、[24]、[25]），并新增引用 [32]–[35] 号 2025-2026 年关键量子光 HHG 文献共 4 条（Gothelf 2025 ZnO 晶体 BSV-HHG、Lange 2025 Mott 激子压缩、Even Tzur 2025 阿秒量子态层析、Wang 2025 量子刻度盘）；新增 [32]–[35] 编号与正文锚定位置见 references.md D 节"正文→references 编号映射表"末四行。编号、作者、标题、卷期页（年）/ arXiv ID 见 `references.md`。
+> 参考文献引用说明：本节共引用 [1]–[35] 号文献共 24 条（其中方法学手册引用 [20]、[24]、[25]），并新增引用 [32]–[35] 号 2025-2026 年关键量子光 HHG 文献共 4 条（Gothelf 等 [32] ZnO 晶体 BSV-HHG、Lange 等 [33] Mott 激子压缩、Even Tzur 等 [34] 阿秒量子态层析、Wang 等 [35] 量子刻度盘）；新增 [32]–[35] 编号与正文锚定位置见 references.md D 节"正文→references 编号映射表"末四行。编号、作者、标题、卷期页（年）/ arXiv ID 见 `references.md`。
 
 ---
 
@@ -635,150 +637,3 @@ DOI 补全后，已正式发表的 25 条文献（A 级）100% 列出 DOI。
 ---
 
 *本节由 writer 在 round-9 评审后（2026-08-13）核校，闭环 18 项 round-9 问题中的 16 项 references.md 域可处置项，2 项需正文域协同的项目（M-9.8 / L-9.16 / C-9.1）按 NSFC 标准"严禁未经核实内容"硬约束与"宁缺勿滥"引用纪律处置。*
-
-## 周末输入补充（2026-08-15）
-
-### 拟开展研究内容
-- paper:2026-2606.22714-emergence-of-gaussian-entanglement-and-non-gaussianity-in-hi
-- paper:2025-2504.13287-theory-of-quantum-optics-and-optical-coherence-in-high-harmo
-- paper:2022-2203.04354-theory-of-entanglement-and-measurement-in-high-harmonic-gene
-- paper:2024-2406.13109-photon-statistics-from-non-hermitian-floquet-theory-high-har
-- paper:2025-2503.02469-theory-of-photocurrent-and-high-harmonic-generation-with-chi
-
-### 创新点
-- 如何在实验上直接测量HHG谐波光场的光子统计与量子纠缠？红外探测器和电离电子检测方案的可行性与精度如何？
-- 压缩光等非经典驱动场能否实现对HHG谐波量子态（非高斯性、纠缠度）的主动调控乃至量子增强的阿秒光源？
-- 全量子HHG描述中电子-离子-光场多体纠缠的微观动力学机制是什么，测量反作用与退相干能否被定量预测和利用？
-- 非厄米Floquet等量子-经典对应方法的适用边界在哪里？在多电子体系与固态环境中是否依然成立？
-- 手性拓扑材料（如B20型半金属）中的固态HHG能否承载非经典光态，并实现具有圆二色性的量子非线性光学效应？
-- 半经典三步模型的量子化修正何时不可忽略，非经典驱动场与固体能带结构对谐波量子特性的联合影响如何刻画？
-
-### 来源
-- [weekend_cluster] Theory of quantum optics and optical coherence in high harmonic generation
-- [weekend_cluster] Theory of entanglement and measurement in high harmonic generation
-- [weekend_cluster] Photon Statistics from Non-Hermitian Floquet Theory: High Harmonic Generation and Above-Threshold Ionization Spectra Detected via IR Detectors
-- [weekend_cluster] Theory of Photocurrent and High-Harmonic Generation with Chiral Fermions
-
-
-### 拟开展研究内容
-- paper:2026-2606.22714-emergence-of-gaussian-entanglement-and-non-gaussianity-in-hi
-- paper:2026-2605.21925-nonclassical-cutoff-fluctuations-in-squeezed-light-driven-hi
-- paper:2024-2406.10443-attosecond-pulse-synthesis-from-high-order-harmonic-generati
-- paper:2026-2604.06703-strong-field-ionization-of-atoms-with-bright-squeezed-vacuum
-
-### 创新点
-- 量子驱动HHG中多模高斯纠缠与非高斯性的微观生成机制如何由强场近似理论完整刻画？
-- XUV波段高斯纠缠态的实验测量、模式分辨与提取（如用于量子隐形传态）的可行性路径是什么？
-- 谐波截止频率亚散粒噪声涨落的自校准海森堡见证在实验上如何避免经典噪声与探测损耗的干扰？
-- 压缩噪声与谐波谱相位锁定之间的定量关联，及其对阿秒脉冲最短持续时间的物理极限如何确定？
-- 量子涨落保护电离相干性的机制是否普适，能否推广至分子、固态等更复杂强场体系？
-- 强场相互作用中压缩态的退相干与损耗如何量化，对非经典资源品质的影响可否补偿？
-
-### 拟开展研究内容
-- paper:2026-2604.06707-attosecond-quantum-spectroscopy-with-entangled-pho
-- paper:2026-2601.08671-attosecond-quantum-optics
-
-### 创新点
-- 如何在实验上实现并表征阿秒尺度的压缩光场与红外纠缠光子对？
-- 纠缠光子对的量子关联能否将阿秒时间分辨测量的精度提升至超越经典散粒噪声极限？
-- 量子关联如何在强场非线性过程（如高次谐波产生）中传递、保持或被放大？
-- 半周期压缩分布印刻于拍赫兹隧穿电流的物理机制能否用于量子调控拍赫兹电子学器件？
-- 阿秒量子光谱学在强场非平衡态动力学的实际探测中，相对经典方案能带来哪些可量化的优势？
-
-### 拟开展研究内容
-- paper:2025-2509.20876-quantum-path-control-in-high-order-harmonic-generation-via-s
-- paper:2023-2311.11257-generation-of-squeezed-high-order-harmonics
-- paper:2026-2410.15503-energy-conservation-in-quantum-optical-high-harmon
-
-### 创新点
-- 驱动场与谐波模式间的纠缠光子态及其非经典光子关联能否被实验直接测量，并用于可扩展的量子频率转换与量子信息协议？
-- 强挤压泵浦（超越适度挤压区间）下谐波量子态与光子统计将如何演化，是否会出现新的非经典态或饱和行为？
-- 振幅压缩与相位压缩光选择性抑制长短量子路径的微观机制是什么，能否推广至阈上电离、双电离等其他强场过程？
-- 在实际高强度HHG实验条件下，如何产生并维持驱动场的压缩特性以验证量子路径调控方案？
-- 量子路径筛选机制能否进一步优化，以产生更短、更亮或可定制波形的孤立阿秒脉冲及阿秒脉冲串？
-- XUV波段挤压超短脉冲的表征手段（如光子关联与光子统计测量技术）应如何发展？
-
-### 拟开展研究内容
-- paper:2014-1412.1300-high-order-harmonic-spectroscopy-for-molecular-imaging-of-po
-- paper:2021-2103.16228-self-probing-of-molecules-with-high-harmonic-generation
-- paper:2007-0707.4192-improved-lewenstein-model-for-high-order-harmonic-generation
-
-### 创新点
-- 如何在强场近似框架之外系统纳入库仑效应与多电子关联，以进一步提升再复合矩阵元的理论精度？
-- 如何将分子轨道层析成像可靠推广至更大、更脆弱的有机与生物分子体系？
-- 宏观传播效应与分子取向涨落如何影响谐波相位反演，能否发展鲁棒的补偿方案？
-- 能否利用自探测探针对化学反应中的空穴动力学与电子转移过程进行实时成像？
-
-### 拟开展研究内容
-- paper:2024-2403.19535-bright-coherent-ultrahigh-harmonics-in-the-kev-x-ray-regime-
-- paper:2403.19535
-
-### 创新点
-- 如何进一步提升keV波段的谐波转换效率与光子通量，以满足水窗成像与超快X射线光谱的实际应用需求？
-- 能否基于该相干超连续谱合成并完整表征阿秒级keV X射线脉冲？
-- 在更高光子能量（如水窗中心波段或>2 keV）下，如何优化气体压力、波导参数与驱动条件以维持有效相位匹配？
-- 长波长驱动的低单原子产率与宏观相位匹配增益之间的权衡机制及最优工作点如何确定？
-- 该方案能否推广至其他驱动波长（如更长中红外或太瓦级系统）或气体介质，实现更宽谱、更高亮度的超连续谱输出？
-
-### 拟开展研究内容
-- paper:2026-2403.04288-monochromatic-high-harmonic-generation-by-bessel-g
-- paper:2403.04288
-
-### 创新点
-- 如何在实验中精确制备具有目标折射率分布的周期性调制气体介质？
-- 几何相位与准相位匹配的补偿机制对光束参数（如锥角、拓扑荷数）和介质调制周期的容差有多大？
-- 谐波选择性与转换效率之间如何权衡，能否同时实现高选择性单色输出与足够的谐波能量？
-- 该方案能否推广至更长介质、更高谐波阶次或固体周期结构以拓展XUV波段覆盖？
-- 由此获得的单色XUV源在阿秒科学、精密光谱学等实际应用中的性能表现如何？
-
-## 周末输入补充（2026-08-16 · cl_20260816_bc4af0）
-
-### 拟开展研究内容
-- paper:2026-2604.20388-quantum-optical-signatures-of-band-topology-in-solid-state-h
-- paper:2025-2510.12443-self-attention-enabled-quantum-path-analysis-of-high-harmoni
-- paper:2018-1806.11232-topological-strong-field-physics-on-sub-laser-cycle-time-sca
-- paper:2410.15503
-- paper:2026-2601.08671-attosecond-quantum-optics
-- paper:2026-2602.16454-edge-states-and-quantum-optical-high-harmonic-gene
-
-### 创新点
-- 如何在实验上分辨固态HHG中微弱的量子光学拓扑签名（光子统计、量子压缩与关联），并克服退相干与宏观样品带来的尺寸限制？
-- 在能量守恒约束下，HHG量子态工程所能达到的光学猫态保真度与纠缠度极限是什么，如何逼近该解析上界？
-- 亚激光周期拓扑印记（贝里曲率驱动的隧穿注入）与半周期压缩分布印刻机制能否在统一量子理论框架下联合描述与主动调控？
-- 自注意力/Transformer等可解释机器学习方法能否推广至多能带、真实拓扑材料与二维体系的HHG分析，并保持与物理量子路径图像的一致性？
-- 拓扑签名探测与阿秒压缩光生成相结合，能否催生拍赫兹拓扑量子电子学等新型超快量子器件？
-
-### 来源
-- [weekend_cluster] Quantum Optical Signatures of Band Topology in Solid-State High Harmonics
-- [weekend_cluster] Self-attention enabled quantum path analysis of high-harmonic generation in solids
-- [weekend_cluster] Topological strong field physics on sub-laser cycle time scale
-- [weekend_cluster] Energy conservation in quantum optical high harmonic generation
-- [weekend_cluster] Attosecond quantum optics
-- [weekend_cluster] Edge states and quantum optical high-harmonic generation from topological insulators
-
-
-## 周末输入补充（2026-08-16 · cl_20260816_77e7d6）
-
-### 拟开展研究内容
-- paper:2025-2509.20876-quantum-path-control-in-high-order-harmonic-generation-via-s
-- paper:2023-2311.11257-generation-of-squeezed-high-order-harmonics
-- paper:2026-2410.15503-energy-conservation-in-quantum-optical-high-harmon
-- paper:2026-2604.12838-2d-quantum-path-interference-in-high-harmonic-gene
-- paper:2012-1210.4814-molecular-internal-dynamics-studied-by-quantum-path-interfer
-- paper:2015-1502.07422-spectrally-resolved-spatiotemporal-features-of-quantum-paths
-
-### 创新点
-- 如何在实验上直接测量驱动场与谐波间的纠缠光子态、非经典光子关联及谐波的光子统计演化，以验证量子光学HHG理论预言？
-- 压缩光驱动的量子路径筛选机制能否与宏观传播、相位匹配效应兼容，实现高通量、可放大的单一阿秒脉冲输出？
-- 二维量子路径干涉能否推广至复杂分子与固态体系，用于重构电荷迁移等电子动力学的时间演化并提升阿秒光谱的选择性？
-- 如何在统一框架下同时严格处理能量守恒、电离耗散与多次再散射通道，完善量子光驱动HHG的全量子理论？
-- 能否利用驱动光的量子统计（压缩、纠缠等）主动设计谐波量子态与量子路径相位，实现按需的量子频率转换与阿秒光源工程？
-
-### 来源
-- [weekend_cluster] Quantum Path Control in High-Order Harmonic Generation via Squeezed Lights
-- [weekend_cluster] Generation of squeezed high-order harmonics
-- [weekend_cluster] Energy conservation in quantum optical high harmonic generation
-- [weekend_cluster] 2D quantum-path interference in high-harmonic generation driven by highly-bichromatic fields
-- [weekend_cluster] Molecular internal dynamics studied by quantum path interferences in high order harmonic generation
-- [weekend_cluster] Spectrally resolved spatiotemporal features of quantum paths in high-order harmonic generation
-

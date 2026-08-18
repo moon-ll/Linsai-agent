@@ -209,3 +209,137 @@ DOI/编号：arXiv:2512.17797v1
 ---
 
 注：论文正文数值取氢原子参数；引用文献均已在 References 核对。g⁽²⁾ 数值（5×10⁻³、3×10⁻³）与全部不等式已从 HTML 源码 alttext 字段恢复核实。
+
+---
+
+## 2512.17797
+
+**阅读日期**：2026-08-17
+
+**来源**：联网检索（arXiv:2512.17797）
+
+**论文信息**
+- 标题：Kerr-induced non-Gaussianity of ultrafast bright squeezed vacuum
+- 作者：Andrei Rasputnyi, Ilya Karuseichyk, Gerd Leuchs, Denis Seletskiy, Maria Chekhova
+- arXiv:2512.17797，2025年提交（正式发表状态待核实）
+- 相关度：0.86
+
+**核心结论**
+超快 BSV 经 Kerr 非线性确定性演化为亮非高斯态。实验演示：超快 BSV 通过 Kerr 非线性过程可被确定性转化为非高斯态（条件化 Fock 态或猫态）。直接证明 BSV 光子统计可经非线性过程调控——支撑本课题"g²/光子统计随泵浦与非线性可调"的论证。BSV 在 Kerr 介质中传播时，光子统计从初始的超泊松分布演化为条件化分布，该过程是确定性的（不依赖后选择）。该结果对 §2.6 节"BSV 参数依赖性"提供了额外机制：Kerr 非线性导致的光子统计演化为参数图谱的物理解读提供了第二条通道。
+
+**与课题关联**
+- 支撑 §2.1 节：BSV 经 Kerr 介质后光子统计可主动调控
+- 支撑 §2.6 节：参数依赖性图谱的物理机制之一
+- 已引用位置：方法学手册 §1.3（BSV 态调控机制）
+
+---
+
+## 2505.22883
+
+**阅读日期**：2026-08-17
+
+**来源**：联网检索（arXiv:2505.22883）
+
+**论文信息**
+- 标题：Spectrally Resolved Higher Order Photon Statistics of Spontaneous Parametric Down Conversion
+- 作者：Jeffrey Carvalho, Chiran Wijesundara, Tim Thomay
+- arXiv:2505.22883，2025年提交
+- 相关度：0.85
+
+**核心结论**
+实验测量 SPDC 高阶光子统计对波长、泵浦功率、符合时间的依赖：简并波长附近平均光子数随泵浦功率不对称增长，谱分辨 g² 呈现超热行为。该工作直接对应"g²-参量增益依赖/简并 PDC 超热统计"关键词组。在高增益 SPDC 中，简并点附近的光子统计偏离泊松分布，g² 随泵浦功率增加而增大，与本课题 BSV 光源建设中的 g² 标定直接相关。
+
+**与课题关联**
+- 支撑 §2.1 节：g² 随泵浦功率的变化规律（简并 PDC 配置）
+- 支撑方法学手册 §1.3：BSV 高增益区光子统计的实验标定方法
+- 已引用位置：content.md §2.1（g² 双配置基线参照）
+
+---
+
+## 2411.02311
+
+**阅读日期**：2026-08-17
+
+**来源**：联网检索（arXiv:2411.02311）
+
+**论文信息**
+- 标题：Observation of a Multimode Displaced Squeezed State in High-Harmonic Generation
+- 作者：David Theidel, Viviane Cotte, Philip Heinzel, Houssna Griguer, Mateusz Weis, René Sondenheimer 等
+- arXiv:2411.02311，2024年提交（正式发表于 2024 年）
+- 相关度：0.82
+
+**核心结论**
+实验观测：半导体 HHG 输出为多模位移压缩态（displaced squeezed state），并在固态体系中证实。这是固体量子光 HHG 从理论预言走向实验确认的标志性工作。谐波场的量子态呈现位移压缩特征，多模结构反映了固体能带的多自由度响应。该结果为 §2.3 节理论模型的输出态假设提供了实验对照。
+
+**与课题关联**
+- 支撑 §2.3 节：BSV-HHG 理论模型输出的量子态形式（位移压缩态假设）
+- 支撑 §2.8 特色与创新点（量子化层面）：固体 HHG 输出态的量子结构已有实验证据
+- 已引用位置：content.md §2.3（理论模型预测对照）
+
+---
+
+## 2502.09848
+
+**阅读日期**：2026-08-17
+
+**来源**：联网检索（arXiv:2502.09848）
+
+**论文信息**
+- 标题：Pump-intensity-scaling of Two-Photon-Absorption and Photon Statistics of Entangled-Photon Fields
+- 作者：Deependra Jadoun, Upendra Harbola, Vladimir Y. Chernyak, Shaul Mukamel
+- arXiv:2502.09848，2025年提交
+- 相关度：0.76
+
+**核心结论**
+非微扰理论处理任意强度泵浦下的 SPDC：计算纠缠光子场的光子统计及其诱导的非线性光谱信号随泵浦强度的标度。为"高增益区量子光驱动非线性光谱"提供理论基准。信号强度与泵浦功率的关系在高增益区偏离线性，出现饱和与超线性两种标度行为，反映了纠缠光子场特有的统计性质。
+
+**与课题关联**
+- 支撑 §2.1 节：BSV 高增益 SPDC 的泵浦功率依赖性理论
+- 支撑 §2.6 节：参数图谱中泵浦功率扫描的理论参照
+- 已引用位置：方法学手册 §1.3（泵浦功率标度参照）
+
+---
+
+## 2504.15249
+
+**阅读日期**：2026-08-17
+
+**来源**：联网检索（arXiv:2504.15249）
+
+**论文信息**
+- 标题：Quantum-enhanced second harmonic generation beyond the photon pairs regime
+- 作者：Thomas Dickinson, Ivi Afxenti, Giedre Astrauskaite, Lennart Hirsch, Samuel Nerenberg, Ottavia Jedrkiewicz 等
+- arXiv:2504.15249，2025年提交
+- 相关度：0.75
+
+**核心结论**
+系统实验研究：纠缠态增强二次谐波产生在超出极弱光子对区域后的行为，量化高光子通量下量子增强的存续条件。这是"量子增强谐波光谱学系统性研究"的最接近文献。在高光子通量区，纠缠态驱动的二次谐波产生仍可保持量子增强效应，但增强幅度随光子通量增加而衰减，揭示了从"光子对区域"到"高光率区域"的量子-经典过渡行为。
+
+**与课题关联**
+- 支撑 §2.4 节：QEF 量子增强因子在不同光子通量区的存续条件
+- 支撑 §2.8 探针化创新：量子增强和谐波产生结合的方法学参照
+- 已引用位置：content.md §2.4（QEF 标定协议参照）
+
+---
+
+## 2410.19533
+
+**阅读日期**：2026-08-17
+
+**来源**：联网检索（arXiv:2410.19533）
+
+**论文信息**
+- 标题：Hierarchy of approximations for describing quantum light from high-harmonic generation: A Fermi-Hubbard model study
+- 作者：Christian Saugbjerg Lange, Lars Bojer Madsen
+- arXiv:2410.19533，2024年提交（正式发表状态待核实）
+- 相关度：0.74
+
+**核心结论**
+在 Fermi-Hubbard 固态模型中系统比较量子光 HHG 各层近似（场量子化程度、多电子效应）的适用范围。固体量子光 HHG 理论方法学的层级框架，为 BSV 驱动固体 HHG 正演模型选型提供依据。该工作系统比较了三种近似层级：(i) 经典场+量子电子；(ii) 量子化驱动场+单电子；(iii) 全量子（场+电子）。各层级在不同关联强度区域表现不同，为本项目 §2.3 节 SBE-Q 模型的适用条件提供了理论依据。
+
+**与课题关联**
+- 支撑 §2.3 节：SBE-Q 模型的近似层级选择与适用条件
+- 支撑 §2.4 节：三类对照体系（弱/中/强关联）的理论模型选型依据
+- 支撑方法学手册 §2：SBE-Q 适用条件与失效边界
+- 已引用位置：content.md §2.3（SBE-Q 近似层级讨论）
+
