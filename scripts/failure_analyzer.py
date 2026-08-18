@@ -115,8 +115,12 @@ PATTERN_LIBRARY = [
         "regex": r"proposal-draft\.md.*size.*<.*500",
         "category": "数据缺失",
         "suggested_prompt_change": (
-            "在 writer prompt 中明确：'请基于 brief 实质扩写申请书，"
-            "总字数 ≥ 4000 字，每章节 ≥ 1200 字'。"
+            # v6.9.25: 旧文案"总字数 ≥ 4000 字，每章节 ≥ 1200 字"低于范本
+            # 体量（正文 2.5-3 万字符），曾把申请书往小拉（BENCHMARK_GUARD
+            # 拦截的历史实例）。改为篇幅对标口径。
+            "在 writer prompt 中明确：'请基于 brief 实质扩写申请书，篇幅对标"
+            "范本实测口径（立项依据 5000-8000 字、研究内容 3000-5000 字、"
+            "研究方案 5000-8000 字）；素材不足时深挖论证链，不得注水凑字数'。"
         ),
         "expected_impact": "避免 writer 仅做表面修改",
     },

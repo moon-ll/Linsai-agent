@@ -195,6 +195,9 @@ def _reap_stale_auto_sections(score_reasons: List[Dict]) -> int:
     recent_reasons = [
         r.get("reason", "") for r in (score_reasons or [])[:100]
     ]
+    # v6.9.25: 程序化 AI 检测的 top_issues 也作为"问题复现"信号——
+    # ai_pattern_analysis 段的 pattern_re（如"超长句"）命中即保留
+    recent_reasons.extend(_load_recent_ai_issues())
 
     prompt_files = _discover_prompt_files()
     backup_tracker: Dict[str, int] = {}
@@ -411,6 +414,201 @@ def _collect_agent_score_reasons() -> List[Dict]:
     return result
 
 
+# ─────────────────────────────────────────────
+# v6.9.25: 程序化 AI 检测数据源
+# ─────────────────────────────────────────────
+
+# 采集窗口（天）：与回收保留期对齐
+AI_PATTERN_WINDOW_DAYS = 14
+
+# 单次运行最多生成的 AI 检测建议数（防洪水）
+MAX_AI_PATTERN_SUGGESTIONS = 6
+
+# 问题类别 → 修复指令映射。
+# 背景：_detect_ai_patterns 的扣分项此前只注入当轮 writer/critic prompt，
+# 不进任何优化器数据源——优化器对真实失分点全盲（08-18 实测三课题
+# ceiling 触底 0.5，9 条已应用建议无一指向超长句/冗余词/自引用）。
+# 指令口径与 optimize.py 检测阈值严格一致（写明检测阈值本身，writer
+# 按此自检即可通过程序化检测）。
+AI_PATTERN_RULES = [
+    {
+        "key": "long_sentences",
+        "label": "超长句",
+        "match": re.compile(r"超长句"),
+        "target": "writer",
+        "priority": "high",
+        "instruction": (
+            "【必须】提交前逐句自检：任何单句超过 120 字必须拆分（80-120 字的"
+            "技术性长句可保留，每段不超过 2 句）；拆分后多数句子以动词或实义"
+            "成分开头。该项程序化检测每处扣 0.02，超长句堆积会把表达质量"
+            "天花板压到 0.5。"
+        ),
+    },
+    {
+        "key": "self_reference",
+        "label": "自引用泛滥",
+        "match": re.compile(r"自引用泛滥"),
+        "target": "writer",
+        "priority": "high",
+        "instruction": (
+            "【禁止】申请书正文（立项依据/研究内容/研究方案）不得用"
+            "'详§X / 见§X / 参见§X / 方法学手册§X'式自引用替代论证——检测阈值"
+            "为全文 10 处（超 15 处固定扣 0.10）。细节论证直接写入正文；"
+            "方法学细节归 04_proposal/methodology-manual.md，每节自引用不超过 5 处。"
+        ),
+    },
+    {
+        "key": "bullet_list_substitution",
+        "label": "列表替代论述",
+        "match": re.compile(r"列表替代论述"),
+        "target": "writer",
+        "priority": "high",
+        "instruction": (
+            "【禁止】用编号/项目符号列表替代段落论述（程序化检测每处扣 0.05，"
+            "上限 0.20）。论述性内容一律写成完整段落；列表仅允许用于参数表、"
+            "指标清单等确实需要逐项罗列的制表内容。"
+        ),
+    },
+    {
+        "key": "redundant_modifiers",
+        "label": "冗余修饰词",
+        "match": re.compile(r"冗余修饰词"),
+        "target": "writer",
+        "priority": "medium",
+        "instruction": (
+            "【必须】提交前全局检索计数修饰词（显著/重要/系统/良好/成熟/完整/"
+            "关键/精准/一系列/有效/高效），合计超过 12 次必须压缩到 12 次以内"
+            "（每超 1 次扣 0.01）——用具体数据、方法名、量化结论替代空泛修饰。"
+        ),
+    },
+    {
+        "key": "transition_words",
+        "label": "死板关联词",
+        "match": re.compile(r"死板关联词"),
+        "target": "writer",
+        "priority": "medium",
+        "instruction": (
+            "【必须】关联词（在此基础上/此外/同时/与此同时/因此/然而/基于此）"
+            "全文合计不超过 8 次（每超 1 次扣 0.02）；段间衔接改用内容驱动"
+            "（如'上述数值结果表明…'）。"
+        ),
+    },
+    {
+        "key": "template_phrases",
+        "label": "模板句式",
+        "match": re.compile(r"模板句式"),
+        "target": "writer",
+        "priority": "medium",
+        "instruction": (
+            "【必须】'为…提供…基础/支撑/途径/条件/工具/指导'句式全文不超过 8 次"
+            "（每超 1 次扣 0.03）；改写为具体动作与对象（'该光谱可直接分辨"
+            "两种谷极化通道的衰减时标'）。"
+        ),
+    },
+    {
+        "key": "template_subject",
+        "label": "模板主语",
+        "match": re.compile(r"模板主语"),
+        "target": "writer",
+        "priority": "medium",
+        "instruction": (
+            "【必须】'本项目拟/将/计划/旨在'句首全文不超过 5 次（每超 1 次扣 0.02）；"
+            "直接以研究动作或对象开头（'我们拟'或以物理对象作主语）。"
+        ),
+    },
+    {
+        "key": "meta_discourse",
+        "label": "元话语",
+        "match": re.compile(r"元话语"),
+        "target": "writer",
+        "priority": "medium",
+        "instruction": (
+            "【禁止】元话语（'需要特别说明的是/值得指出的是/沿着…这一主线/"
+            "一个根本性问题浮现'等）全文不超过 2 次（每超 1 次扣 0.03）；"
+            "论述直接陈述事实与推理，不做自我解说。"
+        ),
+    },
+    {
+        "key": "excessive_bold",
+        "label": "过度加粗",
+        "match": re.compile(r"加粗标记过多"),
+        "target": "writer",
+        "priority": "low",
+        "instruction": (
+            "【必须】加粗密度不超过 3 处/千字；只加粗章节内核心结论句，"
+            "不得整句/整段加粗。"
+        ),
+    },
+]
+
+
+def _load_recent_ai_issues(window_days: int = AI_PATTERN_WINDOW_DAYS) -> List[str]:
+    """读取窗口期内全课题的 ai_top_issues 字符串（供采集与回收复用）。"""
+    try:
+        from datetime import timedelta
+        cutoff = (datetime.now(timezone.utc) - timedelta(days=window_days)).strftime(
+            "%Y-%m-%dT%H:%M:%SZ"
+        )
+    except Exception:
+        return []
+
+    lc = _load_json(PROJECT_ROOT / "research_proposals" / "_lifecycle.json", {})
+    issues: List[str] = []
+    for prop in (lc.get("proposals") or {}).values():
+        for h in prop.get("score_history") or []:
+            if h.get("at", "") < cutoff:
+                continue
+            for line in h.get("ai_top_issues") or []:
+                if isinstance(line, str) and line.strip():
+                    issues.append(line.strip())
+    return issues
+
+
+def _collect_ai_pattern_hints(
+    min_evidence: int = 2,
+) -> List[Dict]:
+    """v6.9.25: 从 lifecycle score_history 的 ai_top_issues 聚合问题类别。
+
+    每个类别输出一条带 pattern_re 的 hint（进 _generate_suggestions 源 4），
+    pattern_re 用于自动段回收——程序化检测仍在复现时约束保留。
+    """
+    from collections import defaultdict
+
+    recent = _load_recent_ai_issues()
+    if not recent:
+        return []
+
+    evidence: Dict[str, Dict] = defaultdict(lambda: {"count": 0, "sample": ""})
+    for line in recent:
+        for rule in AI_PATTERN_RULES:
+            if rule["match"].search(line):
+                ev = evidence[rule["key"]]
+                ev["count"] += 1
+                if not ev["sample"]:
+                    ev["sample"] = line
+                break  # 一行只归入最匹配的一个类别
+
+    hints = []
+    for rule in AI_PATTERN_RULES:
+        ev = evidence.get(rule["key"])
+        if not ev or ev["count"] < min_evidence:
+            continue
+        hints.append({
+            "source": "ai_pattern_analysis",
+            "pattern_key": f"{rule['target']}:ai:{rule['key']}",
+            "pattern_re": rule["match"].pattern,
+            "target_profile": rule["target"],
+            "priority": rule["priority"],
+            "instruction": rule["instruction"],
+            "evidence_count": ev["count"],
+            "sample_issue": ev["sample"][:120],
+            "label": rule["label"],
+        })
+
+    hints.sort(key=lambda h: h["evidence_count"], reverse=True)
+    return hints[:MAX_AI_PATTERN_SUGGESTIONS]
+
+
 def _collect_failure_patterns() -> List[Dict]:
     """从 failure_analyzer.py 的 PATTERN_LIBRARY 读取模式和建议。"""
     patterns = []
@@ -472,8 +670,11 @@ def _inline_pattern_library() -> List[Dict]:
             "category": "数据缺失",
             "target_profile": "writer",
             "suggested_change": (
-                "在 writer prompt 中明确：'请基于 brief 实质扩写申请书，"
-                "总字数 ≥ 4000 字，每章节 ≥ 1200 字'。"
+                # v6.9.25: 与 failure_analyzer 同步修正（旧文案"总字数≥4000字"
+                # 与范本实测冲突，是 08-13 污染段的源头）
+                "在 writer prompt 中明确：'请基于 brief 实质扩写申请书，篇幅对标"
+                "范本实测口径（立项依据 5000-8000 字、研究内容 3000-5000 字、"
+                "研究方案 5000-8000 字）；素材不足时深挖论证链，不得注水凑字数'。"
             ),
             "expected_impact": "避免 writer 仅做表面修改",
         },
@@ -776,6 +977,53 @@ def _generate_suggestions(
             "created_at": _now_utc(),
         })
 
+    # 4. 程序化 AI 检测聚合（v6.9.25）
+    # 与源 1-3 的区别：数据不是 LLM 自评，而是 optimize.py 的确定性代码检测
+    # （超长句/自引用/列表替代论述等 9 类），直接对应表达质量天花板扣分。
+    for hint in _collect_ai_pattern_hints():
+        profile = hint["target_profile"]
+        files = prompt_files.get(profile, [])
+        if not files:
+            continue
+
+        target_file = files[0]
+        target_file_rel = f"~/.hermes/profiles/{profile}/{target_file.name}"
+
+        fingerprint = hashlib.md5(
+            f"ai_pattern_analysis:{hint['pattern_key']}".encode()
+        ).hexdigest()[:12]
+
+        if fingerprint in existing_ids:
+            continue
+
+        _sid = _generate_suggestion_id()
+        suggestions.append({
+            "id": _sid,
+            "source": "ai_pattern_analysis",
+            "pattern_key": hint["pattern_key"],
+            "pattern_re": hint.get("pattern_re", ""),
+            "target_profile": profile,
+            "target_file": str(target_file),
+            "target_file_display": target_file_rel,
+            "priority": hint["priority"],
+            "action": "append",
+            "content": _wrap_auto_section(
+                f"## 自动优化规则（程序化 AI 检测 {hint['evidence_count']} 轮复现："
+                f"{hint['label']}）\n\n{hint['instruction']}\n",
+                sid=_sid, pat=hint.get("pattern_re", "-"),
+            ),
+            "description": (
+                f"[{profile}] 程序化检测 {hint['label']} 近期 {hint['evidence_count']} 轮复现"
+                f"（样例：{hint['sample_issue'][:60]}）"
+            ),
+            "expected_impact": (
+                "降低表达质量天花板扣分，解除综合分 0.75 硬上限"
+            ),
+            "fingerprint": fingerprint,
+            "status": "pending",
+            "created_at": _now_utc(),
+        })
+
     return suggestions
 
 
@@ -898,6 +1146,7 @@ def cmd_analyze() -> None:
     print(f"    debug journal（prompt_tuning, 最近 {DEBUG_JOURNAL_WINDOW_DAYS}d 窗口）: {len(debug_entries)} 条")
     print(f"    agent score reasons: {len(score_reasons)} 条")
     print(f"    failure patterns: {len(failure_patterns)} 条")
+    print(f"    ai pattern hints（程序化检测，最近 {AI_PATTERN_WINDOW_DAYS}d）: {len(_collect_ai_pattern_hints())} 条")
     print(f"    prompt 文件: {sum(len(v) for v in prompt_files.values())} 个")
     print()
 

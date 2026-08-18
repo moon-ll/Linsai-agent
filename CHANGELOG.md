@@ -1,5 +1,42 @@
 # 变更记录
 
+## v6.9.25 - 2026-08-18 破解 0.9 分数学死锁（AI 检测闭环 + 锚点档位绑定 + 语言红线）
+
+背景：review_dossier 预审发现三个 pending_review 课题均不可采纳，且
+存在数学死锁——AI 写作模式检测在 `ai_ceiling < 0.7` 时把综合分 cap 至
+0.75，叠加 writer prompt 残留"总字数≥4000"低标准污染（人为拉长句、堆
+积修饰词，直接触发 AI 模式扣分），0.9+ 分在机制上不可达。本轮按
+A→D 四方案打通闭环。
+
+- **A：writer SOUL 字数污染清除**（`apply_prompt_upgrades.py` 已执行）：
+  移除"总字数≥4000字/每章节≥1200字"低标准段，替换为范本实测篇幅口径
+  （面上正文约 2.9 万字符：立项依据 5000-8000 字、研究内容 3000-5000
+  字、研究方案 5000-8000 字）；`failure_analyzer.py` 的
+  low-content-after-rewrite 模式 suggested_prompt_change 同步改为
+  篇幅对标口径，杜绝"总字数≥4000"经失败分析再注入 prompt。
+- **B：AI 检测扣分项接入 prompt_optimizer 数据源**
+  （`prompt_optimizer.py`）：新增 `AI_PATTERN_RULES`（9 类 AI 写作
+  模式→定向修复指令）与 `_collect_ai_pattern_hints`（从 lifecycle
+  score_history 的 `ai_top_issues` 聚合，证据 ≥2 才生成建议，按证据数
+  排序取 top），接入 `_generate_suggestions`——此前优化器对程序化检测
+  的重扣分项（超长句/自引用/冗余修饰）完全盲视，只盯次要问题。
+- **C：critic 锚点对比结论与 rubric 档位强制绑定**
+  （`proposal_lifecycle/optimize.py`）：critic prompt 强制要求输出
+  "锚点对比结论：达标/基本接近/差距明显"行；新增
+  `_extract_anchor_conclusion`（程序解析，无结论行不做绑定）与
+  `_apply_anchor_conclusion_binding`——差距明显→表达质量 cap 0.69、
+  综合 cap 0.84；基本接近→0.79/0.89；达标不设限。锚点对比从格式
+  要求变为分数锚，"与范本差距明显却给 0.85+"被机制阻断。
+- **D：writer SOUL 增补语言规范三条红线**（程序化检测口径）：① 句长
+  红线（单句≤120 字，80-120 字技术长句每段≤2 句，拆分后以动词开头）；
+  ② 自引用红线（正文禁"详§X"替代论证，>10 处扣分、>15 处固定扣
+  0.10）；③ 修饰词红线（10 个空泛修饰词全文合计≤12 次）；关联项
+  （列表替代论述/关联词/句首"本项目拟"/元话语/加粗密度）一并自检。
+- **回归**：新增 `scripts/tests/test_ai_pattern_anchor_binding.py`
+  （32 用例：B 数据源聚合 19 + C 锚点解析与档位绑定 13），注册入
+  `self_test --module` 硬编码清单（v6.9.24 教训：不注册会被静默跳过）。
+  `--module` 895/895 全绿。
+
 ## v6.9.24 - 2026-08-18 审核退回清理旧轮次残留 job（防跳轮/防提前触顶）
 
 - **缺陷**（08-18 04h 健康检查发现）：pending_review → optimizing 审核

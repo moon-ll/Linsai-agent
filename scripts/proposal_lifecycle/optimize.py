@@ -257,9 +257,11 @@ class OptimizeMixin:
             if waited and _log:
                 _log.info(f"[{proposal_id}] critic 报告已生成: {report_path.name}")
 
+        critic_text = ""
         if report_path.exists() and report_path.stat().st_size > 100:
             try:
                 file_content = report_path.read_text(encoding="utf-8")
+                critic_text = file_content
                 file_result = {"output": file_content}
                 score_after = self._extract_score(file_result)
                 dim_scores = self._extract_dimension_scores(file_result, min_output_len=300)  # P0-2
@@ -268,6 +270,7 @@ class OptimizeMixin:
                 if _log:
                     _log.warning(f"[{proposal_id}] 读取 critic 报告失败: {e}，回退到 stdout")
                 # 回退：使用 hermes stdout 摘要
+                critic_text = (critic_result or {}).get("output", "")
                 score_after = self._extract_score(critic_result)
                 dim_scores = self._extract_dimension_scores(critic_result, min_output_len=300)
                 issues = self._extract_issues(critic_result)
@@ -275,6 +278,7 @@ class OptimizeMixin:
             # 文件未生成（critic 未写盘），用 stdout 摘要
             if _log:
                 _log.warning(f"[{proposal_id}] critic 报告未生成，使用 stdout 摘要评分")
+            critic_text = (critic_result or {}).get("output", "")
             score_after = self._extract_score(critic_result)
             dim_scores = self._extract_dimension_scores(critic_result, min_output_len=300)
             issues = self._extract_issues(critic_result)
@@ -311,6 +315,11 @@ class OptimizeMixin:
                         f"（AI天花板={ai_ceiling:.2f}），强制 cap"
                     )
                 score_after = overall_ceiling
+
+        # v6.9.25: 锚点对比结论与评分档位强制绑定——范本锚点成为分数锚
+        score_after = self._apply_anchor_conclusion_binding(
+            proposal_id, critic_text, dim_scores, score_after, project_type
+        )
 
         # v6.8.8: references 评审专用计分——N/A 维度不纳入加权
         section_key_for_check = focus_section["key"] if focus_section else "full_review"
@@ -379,6 +388,12 @@ class OptimizeMixin:
             "section_passed": section_passed,  # P1-3
             "issues_count": len(issues),
             "high_issues": sum(1 for i in issues if i.get("severity") == "high"),
+            # v6.9.25: 程序化 AI 检测摘要随轮次入史——prompt_optimizer 聚合
+            # 全局 top_issues 生成针对性修复指令，闭合"检测扣分→优化器
+            # 看不见"的断点（实测 08-18：三课题 ceiling 触底 0.5，而优化器
+            # 9 条建议无一指向超长句/冗余词/自引用）。
+            "ai_ceiling": round(ai_check.get("ceiling", 1.0), 3),
+            "ai_top_issues": (ai_check.get("top_issues") or [])[:6],
             "at": now_utc(),
         })
         prop_state["updated_at"] = now_utc()
@@ -915,7 +930,8 @@ class OptimizeMixin:
             f"0. 模块完整性检查：确认申请书是否包含标准模块。\n"
             f"1. 读取指定的申请书文件和质量标准配置文件\n"
             f"2. 【强制】逐条对照上方'执行清单'中的每一条，对每条给出'通过/不通过'判断，不通过须引用具体段落\n"
-            f"3. 【强制】将申请书文字与 benchmark_anchors 中的范本锚点段落做结构化对比（引用申请书原文→引用锚点→指出差距）\n"
+            f"3. 【强制】将申请书文字与 benchmark_anchors 中的范本锚点段落做结构化对比（引用申请书原文→引用锚点→指出差距），"
+            f"并在'锚点对比'段落末尾给出明确结论行：`锚点对比结论：达标` 或 `锚点对比结论：基本接近` 或 `锚点对比结论：差距明显`\n"
             f"4. 【强制】引用程序化 AI 检测结果，将检测到的 AI 模式列入问题清单\n"
             f"5. 按项目类型标准做红队评审，尽可能找出问题\n"
             f"6. 重点检查写作风格：凡是发现知识整理/文献罗列/条目式堆砌/缺乏连贯叙事，标记为 [high] narrative issue\n"
@@ -924,7 +940,7 @@ class OptimizeMixin:
             f"【评审报告必须包含以下段落（缺一不可，缺失则评审无效）】\n"
             f"- '执行清单对照'段落：逐条报告上方执行清单的通过/不通过状态\n"
             f"- '写作风格评估'段落：引用程序化检测结果，评估叙述式写作合规性\n"
-            f"- '锚点对比'段落：引用申请书原文与 benchmark_anchors 对比，指出差距\n"
+            f"- '锚点对比'段落：引用申请书原文与 benchmark_anchors 对比，指出差距，末尾必须有'锚点对比结论：…'明确结论行\n"
             f"- '锚点回归'说明：每条评审意见标注违反的 rubric 档位或标准条款名称\n\n"
             f"【多维度评分（必填，按 scoring_rubric 档位打分）】\n"
             f"请从以下 4 个维度分别评分（0-1），每个维度必须引用 scoring_rubric 中对应档位描述作为依据：\n"
@@ -932,7 +948,13 @@ class OptimizeMixin:
             f"  - 可行性（feasibility）：技术路线能否落地、是否有支撑\n"
             f"  - 严谨性（rigor）：逻辑链条、文献支撑是否充分、指标口径是否一致、模块是否完整\n"
             f"  - 表达质量（expression）：是否连贯叙述式行文、是否消除AI味、是否对标范本水准\n"
-            f"  ⚠️ 表达质量评分不得超过程序化天花板。若天花板 < 0.7，表达质量必须 ≤ 天花板。\n\n"
+            f"  ⚠️ 表达质量评分不得超过程序化天花板。若天花板 < 0.7，表达质量必须 ≤ 天花板。\n"
+            f"  ⚠️ 锚点对比结论与评分档位强制绑定（v6.9.25，程序解析后强制执行）：\n"
+            f"     - 结论=差距明显 → 表达质量 ≤ 0.69，综合评分 ≤ 0.84\n"
+            f"     - 结论=基本接近 → 表达质量 ≤ 0.79，综合评分 ≤ 0.89\n"
+            f"     - 结论=达标 → 表达质量方可进入 0.85+；综合评分要打 0.90+，必须在锚点对比中"
+            f"对语体/论证密度/数据驱动/引用嵌入四项逐项举证不低于范本。\n"
+            f"     你的自评分与锚点结论不一致时，以锚点结论对应的档位上限为准，先自行修正再提交。\n\n"
             f"在评审报告末尾，必须包含如下格式的评分块（供程序解析）：\n"
             f"```\n"
             f"## 评分\n"
@@ -1732,6 +1754,69 @@ class OptimizeMixin:
             time.sleep(0.5)
 
         return False
+
+    def _apply_anchor_conclusion_binding(
+        self,
+        proposal_id: str,
+        critic_text: str,
+        dim_scores: Dict[str, float],
+        score_after: float,
+        project_type: str,
+    ) -> float:
+        """v6.9.25: 锚点对比结论与评分档位强制绑定——范本锚点成为分数锚。
+
+        背景：锚点对比此前只是格式门槛（有该段落即可），对比结论与打分
+        无量化绑定，"与范本差距明显"照样可打 0.8（08-18 实测）。绑定
+        规则与 critic prompt 中声明的档位一致，自评超限时程序强制修正。
+        结论缺失（旧格式报告）时不做绑定，保持兼容。
+        """
+        anchor_conclusion = self._extract_anchor_conclusion(critic_text)
+        if not anchor_conclusion:
+            return score_after
+
+        expr_cap, overall_cap = {
+            "差距明显": (0.69, 0.84),
+            "基本接近": (0.79, 0.89),
+            "达标": (None, None),
+        }[anchor_conclusion]
+
+        if (
+            expr_cap is not None
+            and "expression" in dim_scores
+            and dim_scores["expression"] > expr_cap
+        ):
+            if _log:
+                _log.warning(
+                    f"[{proposal_id}] 锚点结论[{anchor_conclusion}]绑定：表达质量 "
+                    f"{dim_scores['expression']:.2f} > {expr_cap:.2f}，强制 cap"
+                )
+            dim_scores["expression"] = expr_cap
+            score_after = min(
+                score_after, self._recalculate_score(dim_scores, project_type)
+            )
+        if overall_cap is not None and score_after > overall_cap:
+            if _log:
+                _log.warning(
+                    f"[{proposal_id}] 锚点结论[{anchor_conclusion}]绑定：综合分 "
+                    f"{score_after:.2f} > {overall_cap:.2f}，强制 cap"
+                )
+            score_after = overall_cap
+        return score_after
+
+    def _extract_anchor_conclusion(self, critic_text: str) -> str:
+        """v6.9.25: 从 critic 报告中提取锚点对比结论行。
+
+        识别格式：`锚点对比结论：达标|基本接近|差距明显`（critic prompt
+        v6.9.25 起强制要求）。无明确结论行时返回空串（不做档位绑定，
+        保持旧报告兼容）。
+        """
+        if not critic_text:
+            return ""
+        import re
+        m = re.search(
+            r"锚点对比结论[：:]\s*(达标|基本接近|差距明显)", critic_text
+        )
+        return m.group(1) if m else ""
 
     def _extract_score(self, critic_result: Dict[str, Any]) -> float:
         """从 critic 输出中提取综合评分。"""
