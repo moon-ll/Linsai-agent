@@ -3188,6 +3188,3845 @@
       "cron_job_id": "",
       "_archived_from": "key-transient-quantum-phase-optical-20260726",
       "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-rationale-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "rationale",
+      "round": 6,
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-04T22:55:35Z",
+      "finished_at": "2026-08-04T22:59:49Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-rationale-gap_identify",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "gap_identify",
+      "section_key": "rationale",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-rationale-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-04T23:00:36Z",
+      "finished_at": "2026-08-04T23:00:57Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-rationale-lit_search",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_search",
+      "section_key": "rationale",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-rationale-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-04T23:05:37Z",
+      "finished_at": "2026-08-04T23:15:50Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-rationale-lit_read",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_read",
+      "section_key": "rationale",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-rationale-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-04T23:20:39Z",
+      "finished_at": "2026-08-04T23:25:57Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-rationale-lit_note",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_note",
+      "section_key": "rationale",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-rationale-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-04T23:30:41Z",
+      "finished_at": "2026-08-04T23:30:41Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-rationale-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "rationale",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-rationale-critic",
+        "general-moire-strong-field-probe-20260726-r6-rationale-lit_note"
+      ],
+      "attempts": 2,
+      "scheduled_at": "",
+      "started_at": "2026-08-05T00:40:30Z",
+      "finished_at": "2026-08-05T00:45:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "repair_attempts": 1,
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-content-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "content",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-rationale-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-05T00:50:32Z",
+      "finished_at": "2026-08-05T00:56:02Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-content-gap_identify",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "gap_identify",
+      "section_key": "content",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-content-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-05T01:00:33Z",
+      "finished_at": "2026-08-05T01:01:16Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-content-lit_search",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_search",
+      "section_key": "content",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-content-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-05T01:05:33Z",
+      "finished_at": "2026-08-05T01:24:10Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-content-lit_read",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_read",
+      "section_key": "content",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-content-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-05T01:25:36Z",
+      "finished_at": "2026-08-05T01:25:36Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-content-lit_note",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_note",
+      "section_key": "content",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-content-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-05T01:30:37Z",
+      "finished_at": "2026-08-05T01:30:37Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-content-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "content",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-content-critic",
+        "general-moire-strong-field-probe-20260726-r6-content-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-05T01:35:37Z",
+      "finished_at": "2026-08-05T01:43:45Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-scheme-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "scheme",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-content-writer"
+      ],
+      "attempts": 2,
+      "scheduled_at": "",
+      "started_at": "2026-08-05T02:05:40Z",
+      "finished_at": "2026-08-05T02:14:51Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "repair_attempts": 1,
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-scheme-gap_identify",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "gap_identify",
+      "section_key": "scheme",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-scheme-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-05T02:15:42Z",
+      "finished_at": "2026-08-05T02:16:06Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-scheme-lit_search",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_search",
+      "section_key": "scheme",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-scheme-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-05T02:20:42Z",
+      "finished_at": "2026-08-05T02:26:24Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-scheme-lit_read",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_read",
+      "section_key": "scheme",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-scheme-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-05T02:30:43Z",
+      "finished_at": "2026-08-05T02:30:43Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-scheme-lit_note",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_note",
+      "section_key": "scheme",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-scheme-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-09T17:45:06Z",
+      "finished_at": "2026-08-09T17:45:06Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-scheme-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "scheme",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-scheme-critic",
+        "general-moire-strong-field-probe-20260726-r6-scheme-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-11T01:30:41Z",
+      "finished_at": "2026-08-11T01:39:13Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "repair_attempts": 2,
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-full_review-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "full_review",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-scheme-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-11T01:40:42Z",
+      "finished_at": "2026-08-11T01:45:55Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-full_review-gap_identify",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "gap_identify",
+      "section_key": "full_review",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-full_review-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-11T01:50:44Z",
+      "finished_at": "2026-08-11T01:51:20Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-full_review-lit_search",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_search",
+      "section_key": "full_review",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-full_review-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-11T01:55:44Z",
+      "finished_at": "2026-08-11T02:02:49Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-full_review-lit_read",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_read",
+      "section_key": "full_review",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-full_review-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-11T02:05:46Z",
+      "finished_at": "2026-08-11T02:05:46Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-full_review-lit_note",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_note",
+      "section_key": "full_review",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-full_review-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-11T02:10:47Z",
+      "finished_at": "2026-08-11T02:10:47Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-full_review-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "full_review",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-full_review-critic",
+        "general-moire-strong-field-probe-20260726-r6-full_review-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-11T02:15:47Z",
+      "finished_at": "2026-08-11T02:20:07Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-references-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "references",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-full_review-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T10:50:56Z",
+      "finished_at": "2026-08-12T10:53:20Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "repair_attempts": 2,
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-references-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "references",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-references-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T10:55:57Z",
+      "finished_at": "2026-08-12T11:00:35Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-monitor-monitor",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "monitor",
+      "section_key": "monitor",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-references-writer"
+      ],
+      "attempts": 2,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T11:01:46Z",
+      "finished_at": "2026-08-12T11:04:21Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "repair_attempts": 1,
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-derived-update_vision",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "update_vision",
+      "section_key": "derived",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-monitor-monitor"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T11:05:59Z",
+      "finished_at": "2026-08-12T11:07:11Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r6-derived-update_method_manual",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "update_method_manual",
+      "section_key": "derived",
+      "round": 6,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r6-derived-update_vision"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T11:11:00Z",
+      "finished_at": "2026-08-12T11:14:09Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-rationale-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "rationale",
+      "round": 7,
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T11:15:00Z",
+      "finished_at": "2026-08-12T11:19:00Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-rationale-gap_identify",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "gap_identify",
+      "section_key": "rationale",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-rationale-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T11:20:01Z",
+      "finished_at": "2026-08-12T11:21:37Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-rationale-lit_search",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_search",
+      "section_key": "rationale",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-rationale-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T11:25:02Z",
+      "finished_at": "2026-08-12T11:29:47Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-rationale-lit_read",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_read",
+      "section_key": "rationale",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-rationale-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T11:30:03Z",
+      "finished_at": "2026-08-12T11:40:18Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-rationale-lit_note",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_note",
+      "section_key": "rationale",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-rationale-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T11:45:05Z",
+      "finished_at": "2026-08-12T11:45:05Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-rationale-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "rationale",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-rationale-critic",
+        "general-moire-strong-field-probe-20260726-r7-rationale-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T11:50:06Z",
+      "finished_at": "2026-08-12T11:55:36Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-content-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "content",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-rationale-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T12:00:08Z",
+      "finished_at": "2026-08-12T12:06:17Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-content-gap_identify",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "gap_identify",
+      "section_key": "content",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-content-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T12:10:09Z",
+      "finished_at": "2026-08-12T12:10:20Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-content-lit_search",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_search",
+      "section_key": "content",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-content-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T12:11:16Z",
+      "finished_at": "2026-08-12T12:11:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-content-lit_read",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_read",
+      "section_key": "content",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-content-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T12:15:10Z",
+      "finished_at": "2026-08-12T12:21:34Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-content-lit_note",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_note",
+      "section_key": "content",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-content-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T12:25:11Z",
+      "finished_at": "2026-08-12T12:25:12Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-content-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "content",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-content-critic",
+        "general-moire-strong-field-probe-20260726-r7-content-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T12:30:12Z",
+      "finished_at": "2026-08-12T12:40:39Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-scheme-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "scheme",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-content-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T12:45:15Z",
+      "finished_at": "2026-08-12T12:49:49Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-scheme-gap_identify",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "gap_identify",
+      "section_key": "scheme",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-scheme-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T12:50:15Z",
+      "finished_at": "2026-08-12T12:51:40Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-scheme-lit_search",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_search",
+      "section_key": "scheme",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-scheme-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T12:55:16Z",
+      "finished_at": "2026-08-12T13:06:22Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-scheme-lit_read",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_read",
+      "section_key": "scheme",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-scheme-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T13:10:19Z",
+      "finished_at": "2026-08-12T13:10:19Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-scheme-lit_note",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_note",
+      "section_key": "scheme",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-scheme-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T13:15:20Z",
+      "finished_at": "2026-08-12T13:15:20Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-scheme-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "scheme",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-scheme-critic",
+        "general-moire-strong-field-probe-20260726-r7-scheme-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T13:20:20Z",
+      "finished_at": "2026-08-12T13:27:24Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-full_review-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "full_review",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-scheme-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T13:30:22Z",
+      "finished_at": "2026-08-12T13:35:04Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-full_review-gap_identify",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "gap_identify",
+      "section_key": "full_review",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-full_review-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T13:40:23Z",
+      "finished_at": "2026-08-12T13:40:32Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-full_review-lit_search",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_search",
+      "section_key": "full_review",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-full_review-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T13:45:24Z",
+      "finished_at": "2026-08-12T13:45:30Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-full_review-lit_read",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_read",
+      "section_key": "full_review",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-full_review-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T13:50:25Z",
+      "finished_at": "2026-08-12T13:50:25Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-full_review-lit_note",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_note",
+      "section_key": "full_review",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-full_review-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T13:55:25Z",
+      "finished_at": "2026-08-12T13:55:25Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-full_review-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "full_review",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-full_review-critic",
+        "general-moire-strong-field-probe-20260726-r7-full_review-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T14:00:26Z",
+      "finished_at": "2026-08-12T14:12:30Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-references-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "references",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-full_review-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T14:15:28Z",
+      "finished_at": "2026-08-12T14:17:32Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-references-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "references",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-references-critic"
+      ],
+      "attempts": 2,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T16:30:49Z",
+      "finished_at": "2026-08-12T16:40:40Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "repair_attempts": 1,
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-monitor-monitor",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "monitor",
+      "section_key": "monitor",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-references-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T16:45:51Z",
+      "finished_at": "2026-08-12T16:47:17Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-derived-update_vision",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "update_vision",
+      "section_key": "derived",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-monitor-monitor"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T16:50:52Z",
+      "finished_at": "2026-08-12T16:51:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r7-derived-update_method_manual",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "update_method_manual",
+      "section_key": "derived",
+      "round": 7,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r7-derived-update_vision"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T16:55:53Z",
+      "finished_at": "2026-08-12T16:58:38Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-rationale-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "rationale",
+      "round": 8,
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T17:00:54Z",
+      "finished_at": "2026-08-12T17:04:09Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-rationale-gap_identify",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "gap_identify",
+      "section_key": "rationale",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-rationale-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T17:05:55Z",
+      "finished_at": "2026-08-12T17:06:11Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-rationale-lit_search",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_search",
+      "section_key": "rationale",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-rationale-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T17:10:56Z",
+      "finished_at": "2026-08-12T17:22:06Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-rationale-lit_read",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_read",
+      "section_key": "rationale",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-rationale-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T17:25:58Z",
+      "finished_at": "2026-08-12T17:35:00Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-rationale-lit_note",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_note",
+      "section_key": "rationale",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-rationale-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T17:40:01Z",
+      "finished_at": "2026-08-12T17:40:01Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-rationale-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "rationale",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-rationale-critic",
+        "general-moire-strong-field-probe-20260726-r8-rationale-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T17:45:01Z",
+      "finished_at": "2026-08-12T17:48:46Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-content-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "content",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-rationale-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T17:50:02Z",
+      "finished_at": "2026-08-12T17:54:32Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-content-gap_identify",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "gap_identify",
+      "section_key": "content",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-content-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T17:55:03Z",
+      "finished_at": "2026-08-12T17:55:21Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-content-lit_search",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_search",
+      "section_key": "content",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-content-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T18:00:04Z",
+      "finished_at": "2026-08-12T18:03:37Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-content-lit_read",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_read",
+      "section_key": "content",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-content-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T18:05:05Z",
+      "finished_at": "2026-08-12T18:12:21Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-content-lit_note",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_note",
+      "section_key": "content",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-content-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T18:15:06Z",
+      "finished_at": "2026-08-12T18:15:06Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-content-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "content",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-content-critic",
+        "general-moire-strong-field-probe-20260726-r8-content-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T18:20:07Z",
+      "finished_at": "2026-08-12T18:26:05Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-scheme-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "scheme",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-content-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T18:30:09Z",
+      "finished_at": "2026-08-12T18:35:49Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-scheme-gap_identify",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "gap_identify",
+      "section_key": "scheme",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-scheme-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T18:40:10Z",
+      "finished_at": "2026-08-12T18:40:40Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-scheme-lit_search",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_search",
+      "section_key": "scheme",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-scheme-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T18:45:11Z",
+      "finished_at": "2026-08-12T18:51:04Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-scheme-lit_read",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_read",
+      "section_key": "scheme",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-scheme-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T18:55:13Z",
+      "finished_at": "2026-08-12T19:02:06Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-scheme-lit_note",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "lit_note",
+      "section_key": "scheme",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-scheme-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T19:05:14Z",
+      "finished_at": "2026-08-12T19:05:14Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-scheme-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "scheme",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-scheme-critic",
+        "general-moire-strong-field-probe-20260726-r8-scheme-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T19:10:15Z",
+      "finished_at": "2026-08-12T19:17:02Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-full_review-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "full_review",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-scheme-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-12T19:20:16Z",
+      "finished_at": "2026-08-12T19:26:27Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-full_review-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "full_review",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-full_review-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T12:35:30Z",
+      "finished_at": "2026-08-17T12:40:51Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "error_history": [
+        {
+          "at": "2026-08-12T19:45:18Z",
+          "error": "超时(900s)",
+          "attempts": 1
+        },
+        {
+          "at": "2026-08-14T11:55:09Z",
+          "error": "超时(900s)",
+          "attempts": 1
+        },
+        {
+          "at": "2026-08-14T12:05:00Z",
+          "error": "手动解锁（体检处置，超时分级后重跑）: api_error:API call failed",
+          "attempts": 3
+        },
+        {
+          "at": "2026-08-14T14:10:34Z",
+          "error": "超时(1200s)",
+          "attempts": 1
+        },
+        {
+          "at": "2026-08-17T05:13:32Z",
+          "error": "自动解锁(v6.8.54): 双上限耗尽且失败超24h，重置重跑（第1次/上限1）",
+          "attempts": 3
+        }
+      ],
+      "repair_attempts": 4,
+      "auto_unlock_count": 1,
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-references-critic",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "critic",
+      "section_key": "references",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-full_review-writer"
+      ],
+      "attempts": 2,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T13:00:36Z",
+      "finished_at": "2026-08-17T13:03:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "error_history": [
+        {
+          "at": "2026-08-17T12:55:31Z",
+          "error": "超时(600s)",
+          "attempts": 1
+        }
+      ],
+      "repair_attempts": 1,
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-references-writer",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "writer",
+      "section_key": "references",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-references-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T13:05:34Z",
+      "finished_at": "2026-08-17T13:09:10Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-monitor-monitor",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "monitor",
+      "section_key": "monitor",
+      "round": 8,
+      "status": "done",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-references-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T13:10:35Z",
+      "finished_at": "2026-08-17T13:15:39Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-derived-update_vision",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "update_vision",
+      "section_key": "derived",
+      "round": 8,
+      "status": "pending",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-monitor-monitor"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "",
+      "finished_at": "",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "general-moire-strong-field-probe-20260726-r8-derived-update_method_manual",
+      "proposal_id": "general-moire-strong-field-probe-20260726",
+      "step": "update_method_manual",
+      "section_key": "derived",
+      "round": 8,
+      "status": "pending",
+      "depends_on": [
+        "general-moire-strong-field-probe-20260726-r8-derived-update_vision"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "",
+      "finished_at": "",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-moire-strong-field-probe-20260726",
+      "_archived_at": "2026-08-18T13:02:55Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "rationale",
+      "round": 2,
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T19:15:36Z",
+      "finished_at": "2026-08-13T19:21:12Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "rationale",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T19:25:38Z",
+      "finished_at": "2026-08-13T19:26:07Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "rationale",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T19:30:39Z",
+      "finished_at": "2026-08-13T19:48:23Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "rationale",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:00:43Z",
+      "finished_at": "2026-08-13T20:00:43Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "rationale",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:05:44Z",
+      "finished_at": "2026-08-13T20:05:44Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "rationale",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-critic",
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:10:45Z",
+      "finished_at": "2026-08-13T20:16:47Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "content",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:20:46Z",
+      "finished_at": "2026-08-13T20:28:20Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "content",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-content-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:30:48Z",
+      "finished_at": "2026-08-13T20:31:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "content",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-content-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:35:49Z",
+      "finished_at": "2026-08-13T20:39:58Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "content",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-content-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:40:49Z",
+      "finished_at": "2026-08-13T20:47:00Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "content",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-content-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:50:51Z",
+      "finished_at": "2026-08-13T20:50:51Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "content",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-content-critic",
+        "key-transient-quantum-phase-optical-20260726-r2-content-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:55:52Z",
+      "finished_at": "2026-08-13T21:01:59Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "scheme",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-content-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T21:05:53Z",
+      "finished_at": "2026-08-13T21:11:09Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "scheme",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T21:15:55Z",
+      "finished_at": "2026-08-13T21:16:59Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "scheme",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T21:20:56Z",
+      "finished_at": "2026-08-13T21:38:25Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "scheme",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T21:40:59Z",
+      "finished_at": "2026-08-13T21:45:55Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "scheme",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T21:50:00Z",
+      "finished_at": "2026-08-13T21:50:00Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "scheme",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-critic",
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T21:55:01Z",
+      "finished_at": "2026-08-13T22:03:40Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-full_review-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "full_review",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:10:03Z",
+      "finished_at": "2026-08-13T22:15:07Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-full_review-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "full_review",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-full_review-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:20:04Z",
+      "finished_at": "2026-08-13T22:25:56Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-references-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "references",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-full_review-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:30:06Z",
+      "finished_at": "2026-08-13T22:33:18Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-references-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "references",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-references-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:35:07Z",
+      "finished_at": "2026-08-13T22:42:24Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-monitor-monitor",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "monitor",
+      "section_key": "monitor",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-references-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:45:08Z",
+      "finished_at": "2026-08-13T22:49:32Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-derived-update_vision",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "update_vision",
+      "section_key": "derived",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-monitor-monitor"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:50:09Z",
+      "finished_at": "2026-08-13T22:50:48Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-derived-update_method_manual",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "update_method_manual",
+      "section_key": "derived",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-derived-update_vision"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:55:10Z",
+      "finished_at": "2026-08-13T23:01:22Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "rationale",
+      "round": 3,
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T23:05:11Z",
+      "finished_at": "2026-08-13T23:11:36Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "rationale",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T23:15:13Z",
+      "finished_at": "2026-08-13T23:15:48Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "rationale",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T23:20:14Z",
+      "finished_at": "2026-08-13T23:30:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "rationale",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_search"
+      ],
+      "attempts": 2,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T00:30:30Z",
+      "finished_at": "2026-08-14T00:35:42Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "error_history": [
+        {
+          "at": "2026-08-14T00:30:30Z",
+          "error": "运行超时/进程僵死",
+          "attempts": 1
+        }
+      ],
+      "repair_attempts": 1,
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "rationale",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T00:40:31Z",
+      "finished_at": "2026-08-14T00:40:31Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "rationale",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-critic",
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_note"
+      ],
+      "attempts": 2,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T01:05:35Z",
+      "finished_at": "2026-08-14T01:13:16Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "error_history": [
+        {
+          "at": "2026-08-14T01:00:32Z",
+          "error": "超时(900s)",
+          "attempts": 1
+        }
+      ],
+      "repair_attempts": 1,
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "content",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T01:15:37Z",
+      "finished_at": "2026-08-14T01:23:39Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "content",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-content-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T01:25:38Z",
+      "finished_at": "2026-08-14T01:26:22Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "content",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-content-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T01:30:39Z",
+      "finished_at": "2026-08-14T01:47:58Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "content",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-content-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T01:50:42Z",
+      "finished_at": "2026-08-14T01:50:42Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "content",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-content-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T01:55:42Z",
+      "finished_at": "2026-08-14T01:55:42Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "content",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-content-critic",
+        "key-transient-quantum-phase-optical-20260726-r3-content-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:00:43Z",
+      "finished_at": "2026-08-14T02:08:45Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-scheme-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "scheme",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-content-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:10:44Z",
+      "finished_at": "2026-08-14T02:16:20Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-scheme-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "scheme",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:20:46Z",
+      "finished_at": "2026-08-14T02:21:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-scheme-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "scheme",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:25:47Z",
+      "finished_at": "2026-08-14T02:27:41Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-scheme-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "scheme",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:30:48Z",
+      "finished_at": "2026-08-14T02:30:48Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-scheme-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "scheme",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:35:49Z",
+      "finished_at": "2026-08-14T02:35:49Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-scheme-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "scheme",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-critic",
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:40:50Z",
+      "finished_at": "2026-08-14T02:41:08Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-full_review-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "full_review",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:45:50Z",
+      "finished_at": "2026-08-14T02:46:06Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-full_review-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "full_review",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:50:51Z",
+      "finished_at": "2026-08-14T02:51:04Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-full_review-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "full_review",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:55:52Z",
+      "finished_at": "2026-08-14T02:56:06Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-full_review-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "full_review",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:00:53Z",
+      "finished_at": "2026-08-14T03:00:53Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-full_review-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "full_review",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:05:53Z",
+      "finished_at": "2026-08-14T03:05:53Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-full_review-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "full_review",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-critic",
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:10:54Z",
+      "finished_at": "2026-08-14T03:11:09Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-references-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "references",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:15:55Z",
+      "finished_at": "2026-08-14T03:16:08Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-references-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "references",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-references-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:20:56Z",
+      "finished_at": "2026-08-14T03:21:09Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-monitor-monitor",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "monitor",
+      "section_key": "monitor",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-references-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:25:57Z",
+      "finished_at": "2026-08-14T03:26:10Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-derived-update_vision",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "update_vision",
+      "section_key": "derived",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-monitor-monitor"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:30:57Z",
+      "finished_at": "2026-08-14T03:31:10Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-derived-update_method_manual",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "update_method_manual",
+      "section_key": "derived",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-derived-update_vision"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:35:58Z",
+      "finished_at": "2026-08-14T03:36:11Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-rationale-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "rationale",
+      "round": 4,
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:40:59Z",
+      "finished_at": "2026-08-14T03:41:12Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-rationale-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "rationale",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-rationale-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:45:59Z",
+      "finished_at": "2026-08-14T03:46:15Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-rationale-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "rationale",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-rationale-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:51:00Z",
+      "finished_at": "2026-08-14T03:51:16Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-rationale-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "rationale",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-rationale-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:55:00Z",
+      "finished_at": "2026-08-14T03:55:00Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-rationale-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "rationale",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-rationale-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T04:00:01Z",
+      "finished_at": "2026-08-14T04:00:01Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-rationale-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "rationale",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-rationale-critic",
+        "key-transient-quantum-phase-optical-20260726-r4-rationale-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T04:05:02Z",
+      "finished_at": "2026-08-14T04:05:18Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-content-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "content",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-rationale-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T04:10:03Z",
+      "finished_at": "2026-08-14T04:10:18Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-content-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "content",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-content-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T04:15:03Z",
+      "finished_at": "2026-08-14T04:15:21Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-content-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "content",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-content-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T04:20:04Z",
+      "finished_at": "2026-08-14T04:20:19Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-content-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "content",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-content-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T04:25:05Z",
+      "finished_at": "2026-08-14T04:25:05Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-content-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "content",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-content-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T04:30:06Z",
+      "finished_at": "2026-08-14T04:30:06Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-content-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "content",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-content-critic",
+        "key-transient-quantum-phase-optical-20260726-r4-content-lit_note"
+      ],
+      "attempts": 2,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T10:50:03Z",
+      "finished_at": "2026-08-14T11:03:08Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "error_history": [
+        {
+          "at": "2026-08-14T10:45:00Z",
+          "error": "超时(900s)",
+          "attempts": 1
+        }
+      ],
+      "repair_attempts": 1,
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-scheme-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "scheme",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-content-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T10:45:14Z",
+      "finished_at": "2026-08-17T10:47:51Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "error_history": [
+        {
+          "at": "2026-08-14T11:20:05Z",
+          "error": "超时(900s)",
+          "attempts": 1
+        },
+        {
+          "at": "2026-08-14T11:55:00Z",
+          "error": "手动解锁（v6.8.52 超时分级后重跑）: 超时(900s)",
+          "attempts": 3
+        },
+        {
+          "at": "2026-08-14T13:15:23Z",
+          "error": "超时(1200s)",
+          "attempts": 1
+        }
+      ],
+      "repair_attempts": 3,
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-scheme-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "scheme",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-scheme-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T10:50:14Z",
+      "finished_at": "2026-08-17T10:51:02Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-scheme-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "scheme",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-scheme-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T10:55:15Z",
+      "finished_at": "2026-08-17T10:56:44Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-scheme-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "scheme",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-scheme-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T11:00:16Z",
+      "finished_at": "2026-08-17T11:00:16Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-scheme-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "scheme",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-scheme-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T11:05:16Z",
+      "finished_at": "2026-08-17T11:05:16Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-scheme-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "scheme",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-scheme-critic",
+        "key-transient-quantum-phase-optical-20260726-r4-scheme-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T11:10:17Z",
+      "finished_at": "2026-08-17T11:14:55Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-full_review-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "full_review",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-scheme-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T11:15:18Z",
+      "finished_at": "2026-08-17T11:19:28Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-full_review-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "full_review",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-full_review-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T11:20:19Z",
+      "finished_at": "2026-08-17T11:20:50Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-full_review-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "full_review",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-full_review-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T11:25:19Z",
+      "finished_at": "2026-08-17T11:28:56Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-full_review-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "full_review",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-full_review-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T11:30:20Z",
+      "finished_at": "2026-08-17T11:33:05Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-full_review-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "full_review",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-full_review-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T11:35:21Z",
+      "finished_at": "2026-08-17T11:35:21Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-full_review-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "full_review",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-full_review-critic",
+        "key-transient-quantum-phase-optical-20260726-r4-full_review-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T11:40:22Z",
+      "finished_at": "2026-08-17T11:47:54Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-references-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "references",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-full_review-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T11:50:23Z",
+      "finished_at": "2026-08-17T11:53:22Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-references-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "references",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-references-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T11:55:24Z",
+      "finished_at": "2026-08-17T12:04:40Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-monitor-monitor",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "monitor",
+      "section_key": "monitor",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-references-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-18T01:50:44Z",
+      "finished_at": "2026-08-18T01:57:31Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "error_history": [
+        {
+          "at": "2026-08-17T12:15:26Z",
+          "error": "超时(600s)",
+          "attempts": 1
+        }
+      ],
+      "repair_attempts": 2,
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-derived-update_vision",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "update_vision",
+      "section_key": "derived",
+      "round": 4,
+      "status": "pending",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-monitor-monitor"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "",
+      "finished_at": "",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r4-derived-update_method_manual",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "update_method_manual",
+      "section_key": "derived",
+      "round": 4,
+      "status": "pending",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r4-derived-update_vision"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "",
+      "finished_at": "",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T13:04:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-idea_review-idea_review",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "idea_review",
+      "section_key": "idea_review",
+      "round": 1,
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T01:50:43Z",
+      "finished_at": "2026-08-13T02:01:55Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-rationale-critic",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "critic",
+      "section_key": "rationale",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-idea_review-idea_review"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T02:20:17Z",
+      "finished_at": "2026-08-13T02:58:24Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-rationale-gap_identify",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "gap_identify",
+      "section_key": "rationale",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-rationale-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T03:00:14Z",
+      "finished_at": "2026-08-13T03:01:35Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-rationale-lit_search",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "lit_search",
+      "section_key": "rationale",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-rationale-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T03:05:14Z",
+      "finished_at": "2026-08-13T03:15:32Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-rationale-lit_read",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "lit_read",
+      "section_key": "rationale",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-rationale-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T03:20:16Z",
+      "finished_at": "2026-08-13T03:30:00Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-rationale-lit_note",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "lit_note",
+      "section_key": "rationale",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-rationale-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T03:35:18Z",
+      "finished_at": "2026-08-13T03:35:18Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-rationale-writer",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "writer",
+      "section_key": "rationale",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-rationale-critic",
+        "general-quantum-geometry-inversion-20260726-r1-rationale-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T03:40:19Z",
+      "finished_at": "2026-08-13T03:47:11Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-content-critic",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "critic",
+      "section_key": "content",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-rationale-writer",
+        "general-quantum-geometry-inversion-20260726-r1-idea_review-idea_review"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T03:50:21Z",
+      "finished_at": "2026-08-13T03:55:54Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-content-gap_identify",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "gap_identify",
+      "section_key": "content",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-content-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T04:00:23Z",
+      "finished_at": "2026-08-13T04:01:49Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-content-lit_search",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "lit_search",
+      "section_key": "content",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-content-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T04:05:23Z",
+      "finished_at": "2026-08-13T04:16:32Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-content-lit_read",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "lit_read",
+      "section_key": "content",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-content-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T04:20:26Z",
+      "finished_at": "2026-08-13T04:20:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-content-lit_note",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "lit_note",
+      "section_key": "content",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-content-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T04:25:26Z",
+      "finished_at": "2026-08-13T04:25:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-content-writer",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "writer",
+      "section_key": "content",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-content-critic",
+        "general-quantum-geometry-inversion-20260726-r1-content-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T04:30:27Z",
+      "finished_at": "2026-08-13T04:38:41Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-scheme-critic",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "critic",
+      "section_key": "scheme",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-content-writer",
+        "general-quantum-geometry-inversion-20260726-r1-idea_review-idea_review"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T10:30:20Z",
+      "finished_at": "2026-08-13T10:33:36Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-scheme-gap_identify",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "gap_identify",
+      "section_key": "scheme",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-scheme-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T10:35:21Z",
+      "finished_at": "2026-08-13T10:35:54Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-scheme-lit_search",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "lit_search",
+      "section_key": "scheme",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-scheme-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T10:40:22Z",
+      "finished_at": "2026-08-13T10:44:59Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-scheme-lit_read",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "lit_read",
+      "section_key": "scheme",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-scheme-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T10:45:23Z",
+      "finished_at": "2026-08-13T10:50:23Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-scheme-lit_note",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "lit_note",
+      "section_key": "scheme",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-scheme-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T10:55:24Z",
+      "finished_at": "2026-08-13T10:55:24Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-scheme-writer",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "writer",
+      "section_key": "scheme",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-scheme-critic",
+        "general-quantum-geometry-inversion-20260726-r1-scheme-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T11:00:24Z",
+      "finished_at": "2026-08-13T11:08:37Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-full_review-critic",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "critic",
+      "section_key": "full_review",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-scheme-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T11:10:25Z",
+      "finished_at": "2026-08-13T11:17:18Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-full_review-gap_identify",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "gap_identify",
+      "section_key": "full_review",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-full_review-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T11:20:27Z",
+      "finished_at": "2026-08-13T11:20:58Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-full_review-lit_search",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "lit_search",
+      "section_key": "full_review",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-full_review-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T11:25:27Z",
+      "finished_at": "2026-08-13T11:43:35Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-full_review-lit_read",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "lit_read",
+      "section_key": "full_review",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-full_review-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T11:45:29Z",
+      "finished_at": "2026-08-13T11:53:46Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-full_review-lit_note",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "lit_note",
+      "section_key": "full_review",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-full_review-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T11:55:31Z",
+      "finished_at": "2026-08-13T11:55:31Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-full_review-writer",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "writer",
+      "section_key": "full_review",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-full_review-critic",
+        "general-quantum-geometry-inversion-20260726-r1-full_review-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T12:00:31Z",
+      "finished_at": "2026-08-13T12:00:45Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-references-critic",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "critic",
+      "section_key": "references",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-full_review-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T10:30:12Z",
+      "finished_at": "2026-08-17T10:32:58Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "error_history": [
+        {
+          "at": "2026-08-14T12:35:16Z",
+          "error": "超时(600s)",
+          "attempts": 1
+        }
+      ],
+      "repair_attempts": 3,
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-references-writer",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "writer",
+      "section_key": "references",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-references-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T10:35:13Z",
+      "finished_at": "2026-08-17T10:38:16Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-monitor-monitor",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "monitor",
+      "section_key": "monitor",
+      "round": 1,
+      "status": "done",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-references-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-17T10:40:13Z",
+      "finished_at": "2026-08-17T10:43:17Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-derived-update_vision",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "update_vision",
+      "section_key": "derived",
+      "round": 1,
+      "status": "pending",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-monitor-monitor"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "",
+      "finished_at": "",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
+    },
+    {
+      "job_id": "general-quantum-geometry-inversion-20260726-r1-derived-update_method_manual",
+      "proposal_id": "general-quantum-geometry-inversion-20260726",
+      "step": "update_method_manual",
+      "section_key": "derived",
+      "round": 1,
+      "status": "pending",
+      "depends_on": [
+        "general-quantum-geometry-inversion-20260726-r1-derived-update_vision"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "",
+      "finished_at": "",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-quantum-geometry-inversion-20260726",
+      "_archived_at": "2026-08-18T13:06:56Z"
     }
   ]
 }

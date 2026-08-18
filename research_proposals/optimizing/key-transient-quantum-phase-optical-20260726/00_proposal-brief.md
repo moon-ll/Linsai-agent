@@ -3,7 +3,7 @@
 **课题名称**：瞬态量子相的全光读写
 **项目类型**：重点项目
 **课题 ID**：`key-transient-quantum-phase-optical-20260726`
-**当前状态**：待校验（等待人工核验）
+**当前状态**：优化中（第0轮，score 0.53）
 **启动日期**：2026-07-26
 **最后更新**：2026-08-18
 
@@ -68,9 +68,10 @@
 - 2026-08-12: archived → pending_review (保留人工审核入口：8轮优化分数震荡，需审核研究设想质量后再决定是否退回优化)
 - 2026-08-12: pending_review → optimizing 
 - 2026-08-18: optimizing → pending_review (连续3轮质量下降，暂停自动优化)
+- 2026-08-18: pending_review → optimizing (人工审核退回(major_revision)，携带结构化意见)
 
 ## 人工审核记录
-（尚未有人工审核）
+
 
 ---
 

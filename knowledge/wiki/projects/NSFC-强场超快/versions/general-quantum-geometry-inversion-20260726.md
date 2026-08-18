@@ -5,9 +5,9 @@ proposal_id: "general-quantum-geometry-inversion-20260726"
 project_type: "general"
 latest_round: 7
 last_score: 0.7
-status: "pending_review"
-created: "2026-08-18T12:51:30Z"
-updated: "2026-08-18T12:51:30Z"
+status: "optimizing"
+created: "2026-08-18T13:13:29Z"
+updated: "2026-08-18T13:13:29Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -19,8 +19,8 @@ confidence: 1.0
 **类型**：general
 **最新轮次**：第 7 轮
 **当前分数**：0.7
-**状态**：待校验
-**同步时间**：2026-08-18T12:51:30Z
+**状态**：优化中
+**同步时间**：2026-08-18T13:13:29Z
 
 ---
 
@@ -38,12 +38,12 @@ confidence: 1.0
 
 # 课题说明
 
-**课题名称**：因此，无论是"量子光场改变驱动统计"还是"强关联改变响应机制"，这两条路径各自已被独立证明是 HHG 反演的不可回避边界；但两者的联合检验仍付阙如**——这正是 Q1 与 Q2 共同要回答的物理问题。
+**课题名称**：Q2（科学问题）**：以 CDW（TiSe₂、1T-TaS₂）为代表的中等关联材料中，在何种 Hubbard-$U/W$ 与温度区间，HHG 偏振响应仍保留可独立辨识的 $\Omega(\mathbf{k})$、$g(\mathbf{k})$ 信息？超过该边界时，多体效应（CDW 序参量、doublon-holon 复合、带折叠）使 $\Omega$、$g$ 的辨识不可分离。
 **项目类型**：面上项目
 **课题 ID**：`general-quantum-geometry-inversion-20260726`
-**当前状态**：待校验（等待人工核验）
+**当前状态**：优化中（第0轮，score 0.70）
 **启动日期**：2026-07-26
-**最后更新**：2026-08-17
+**最后更新**：2026-08-18
 
 ---
 
@@ -64,16 +64,14 @@ confidence: 1.0
 
 ## 优化历史
 | 轮次 | 分数 | 问题数 | high问题 | 时间 |
-|------|------|--------|---------|------|
-| 1 | 0.58 | 12 | 4 | 2026-07-27 |
-| 2 | 0.66 | 47 | 14 | 20
+|----
 
-（完整简介见 [源文件](research_proposals/pending_review/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft-merged.md)）
+（完整简介见 [源文件](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft-merged.md)）
 
 ## 来源
 
-- 最新申请书：[research_proposals/pending_review/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft-merged.md](research_proposals/pending_review/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft-merged.md)
-- 各章节文件：`research_proposals/pending_review/general-quantum-geometry-inversion-20260726/04_proposal/sections/`
+- 最新申请书：[research_proposals/optimizing/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft-merged.md](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft-merged.md)
+- 各章节文件：`research_proposals/optimizing/general-quantum-geometry-inversion-20260726/04_proposal/sections/`
 - 优化报告：[reports/general-quantum-geometry-inversion-20260726.md](reports/general-quantum-geometry-inversion-20260726.md)
 
 > 本页由 `scripts/kb_proposal_reorg.py` 自动生成。

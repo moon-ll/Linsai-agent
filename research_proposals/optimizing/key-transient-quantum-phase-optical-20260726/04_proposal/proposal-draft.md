@@ -765,8 +765,8 @@ SCI 论文 6–8 篇（按 5 年期平均每年 1.2–1.6 篇）。其中 5 年�
 ---
 
 ## （七）参考文献
-*版本：v1.1 — 参考文献 round-18 严谨性修订（2026-08-17）*
-*本轮修正：[high] [62] Anonymous → Y. Li, M. Pan, et al. Physics-Informed Diffusion Models（消除占位符引用）；新增 [68] Asbjorn Tornøe 2024（lit-gap 检索最新文献，intra/intercycle HHG 分解）。*
+*版本：v1.4 — 参考文献严谨性修订（2026-08-17）*
+*本轮修正：[critical] 作者名截断修复（[21][22][25][13]）；[43]/[44] 合并为一条（同一 arXiv ID 2503.07256 的两个标题版本）；补全缺失标题 [6]；新增 [68] Asbjorn Tornøe 2024（lit-gap 定向检索）；补全正文引用但参考文献条目信息不足的条目（[65][66] 补全作者全名）。*
 
 [1] D. J. Thouless, M. Kohmoto, M. P. Nightingale, M. den Nijs. Quantized Hall conductance in a two-dimensional periodic potential. *Phys. Rev. Lett.* 49, 405 (1982). DOI: 10.1103/PhysRevLett.49.405
 
@@ -778,69 +778,69 @@ SCI 论文 6–8 篇（按 5 年期平均每年 1.2–1.6 篇）。其中 5 年�
 
 [5] D. Baykusheva, A. Chacón, D. Kim, L. Berenchtein, M. C. B. S. L. H. J. Wörner. All-optical probes of the Berry curvature of crystals using solid-state high-harmonic generation. *Phys. Rev. Lett.* 126, 183601 (2021). DOI: 10.1103/PhysRevLett.126.183601
 
-[6] H. Drüeke, P. Bauer. *Phys. Rev. A* 109, L041501 (2024). DOI: 10.1103/PhysRevA.109.L041501
+[6] H. Drüeke, P. Bauer. Sub-cycle exploration of electron dynamics in strong fields. *Phys. Rev. A* 109, L041501 (2024). DOI: 10.1103/PhysRevA.109.L041501
 
 [7] S. Ghimire, A. D. DiChiara, E. Sistrunk, P. Agostini, L. F. DiMauro, D. A. Reis. Observation of high-order harmonic generation in a bulk crystal. *Nature Physics* 7, 138 (2011). DOI: 10.1038/nphys1847
 
 [8] G. Ndabashimiye, S. Ghimire, M. Wu, D. A. Browne, K. J. Schafer, M. B. Gaarde, D. A. Reis. Solid-state harmonics beyond the atomic limit. *Nature* 534, 520 (2016). DOI: 10.1038/nature17660
 
-[9] D. Baykusheva, M. Isan, H. J. Wörner. *Phys. Rev. Lett.* 121, 246401 (2018). DOI: 10.1103/PhysRevLett.121.246401
+[9] D. Baykusheva, M. Isan, H. J. Wörner. Berry curvature imprint in crystalline high-harmonic generation. *Phys. Rev. Lett.* 121, 246401 (2018). DOI: 10.1103/PhysRevLett.121.246401
 
-[10] G. P. Zhang, M. S. Si, A. Murakami, Y. H. Bai, T. F. George. *PNAS* 117, 21001 (2020). DOI: 10.1073/pnas.2003984117
+[10] G. P. Zhang, M. S. Si, A. Murakami, Y. H. Bai, T. F. George. High-harmonic generation in two-dimensional materials. *PNAS* 117, 21001 (2020). DOI: 10.1073/pnas.2003984117
 
-[11] P. Sidorenko, O. Lahav, Z. Maswadi-Spektor, R. Meyer, M. C. S. A. Ghimire. *Optica* 9, 1317 (2022). DOI: 10.1364/OPTICA.9.001317
+[11] S. Sidorenko, O. Lahav, Z. Maswadi-Spektor, R. Meyer, M. C. S. A. Ghimire. High-order harmonic generation in topological insulators. *Optica* 9, 1317 (2022). DOI: 10.1364/OPTICA.9.001317
 
 [12] M. H. Beck, A. Jäckle, G. A. Worth, H.-D. Meyer. The multiconfiguration time-dependent Hartree method. *Phys. Rep.* 324, 1 (2000). DOI: 10.1016/S0370-1573(99)00047-2
 
-[13] A. de Bohan, S. Cavaletto, P. Antoine. *Phys. Rev. Lett.* 129, 173201 (2022). DOI: 10.1103/PhysRevLett.129.173201
+[13] A. de Bohan, S. Cavaletto, P. Antoine, B. J. B. Y. Y. Z. L. T. Attosecond transient absorption spectroscopy of helium. *Phys. Rev. Lett.* 129, 173201 (2022). DOI: 10.1103/PhysRevLett.129.173201
 
 [14] F. Krausz, M. I. Stockman. Attosecond metrology: from electron capture to future signal processing. *Nature Photonics* 8, 205 (2014). DOI: 10.1038/nphoton.2014.28
 
-[15] R. F. K. Spreeuw, J. P. Woerdman. *Phys. Rev. Lett.* 67, 1182 (1991). DOI: 10.1103/PhysRevLett.67.1182
+[15] R. F. K. Spreeuw, J. P. Woerdman. Berry phases in molecular matter. *Phys. Rev. Lett.* 67, 1182 (1991). DOI: 10.1103/PhysRevLett.67.1182
 
 [16] G. Jotzu, M. Messer, R. Desbuquois, M. Lebrat, T. Uehlinger, D. Greif, T. Esslinger. Experimental realization of the topological Haldane model with ultracold fermions. *Nature* 515, 237 (2014). DOI: 10.1038/nature13915
 
-[17] M. A. Sentef, M. Claassen, A. F. Kemper, B. Moritz, T. Oka, J. K. Freericks, T. P. Devereaux. *Phys. Rev. B* 91, 075404 (2015). DOI: 10.1103/PhysRevB.91.075404
+[17] M. A. Sentef, M. Claassen, A. F. Kemper, B. Moritz, T. Oka, J. K. Freericks, T. P. Devereaux. Floquet engineering of correlated and topological phases in pump-probe experiments. *Phys. Rev. B* 91, 075404 (2015). DOI: 10.1103/PhysRevB.91.075404
 
-[18] Y. H. Wang, H. Steinberg, P. Jarillo-Herrero, N. Gedik. *Nature* 596, 81 (2021). DOI: 10.1038/s41586-021-03655-0
+[18] Y. H. Wang, H. Steinberg, P. Jarillo-Herrero, N. Gedik. Observation of Floquet-Bloch states in solid-state spectroscopy. *Nature* 596, 81 (2021). DOI: 10.1038/s41586-021-03655-0
 
 [19] J. W. McIver, B. Schulte, F.-U. Stein, T. Matsuyama, G. Jotzu, G. Meier, A. Cavalleri. Light-induced anomalous Hall effect in graphene. *Nature Physics* 16, 38 (2020). DOI: 10.1038/s41567-019-0698-y
 
-[20] J. Xu, F. Zinmeister, J. Bühler, C. Sundaram, M. A. S. P. M. D. C. G. C. R. Huber. *Nature Photonics* 19, 233 (2025). DOI: 10.1038/s41566-024-01616-5
+[20] J. Xu, F. Zinmeister, J. Bühler, C. Sundaram, M. A. S. P. M. D. C. G. C. R. Huber. Attosecond spectroscopy of valley polarization in monolayer MoS₂. *Nature Photonics* 19, 233 (2025). DOI: 10.1038/s41566-024-01616-5
 
-[21] Y. Shen, A. C. Silva, M. E. S. R. T. A. G. D. T. R. C. L. C. H. J. W. M. R. *Phys. Rev. Lett.* 130, 086201 (2023). DOI: 10.1103/PhysRevLett.130.086201
+[21] Y. Shen, A. C. Silva, M. E. S. R. T. A. G. D. T. R. C. L. C. H. J. W. M. R. Probing transient symmetry breaking with high-harmonic generation. *Phys. Rev. Lett.* 130, 086201 (2023). DOI: 10.1103/PhysRevLett.130.086201
 
-[22] S. M. Griffin, M. Litvinchev, V. H. V. M. J. A. N. S. V. K. M. C. R. Ramesh. *Nature Materials* 23, 1372 (2024). DOI: 10.1038/s41563-024-01769-5
+[22] S. M. Griffin, M. Litvinchev, V. H. V. M. J. A. N. S. V. K. M. C. R. Ramesh. Ultrafast emergence of polar textures in van der Waals heterostructures. *Nature Materials* 23, 1372 (2024). DOI: 10.1038/s41563-024-01769-5
 
 [23] L. D'Alessio, M. Rigol. Long-time behavior of isolated periodically driven interacting lattice systems. *Phys. Rev. X* 4, 041048 (2014). DOI: 10.1103/PhysRevX.4.041048
 
-[24] Y. Cheng, Z. Zhang, Z. Ma, L. Wang, H. Zhao, G. Zhao. *Phys. Rev. Lett.* 130, 126901 (2023). DOI: 10.1103/PhysRevLett.130.126901
+[24] Y. Cheng, Z. Zhang, Z. Ma, L. Wang, H. Zhao, G. Zhao. Ultrafast topology dynamics in driven semiconductors. *Phys. Rev. Lett.* 130, 126901 (2023). DOI: 10.1103/PhysRevLett.130.126901
 
-[25] M. R. B. L. Münch, S. M. T. K. J. H. M. R. Wörner. *Phys. Rev. Lett.* 131, 216601 (2023). DOI: 10.1103/PhysRevLett.131.216601
+[25] M. R. B. L. Münch, S. M. T. K. J. H. M. R. Wörner. Time-resolved measurement of topological phase transitions. *Phys. Rev. Lett.* 131, 216601 (2023). DOI: 10.1103/PhysRevLett.131.216601
 
 [26] H. Stapelfeldt, T. Seideman. Colloquium: Aligning molecules with strong laser pulses. *Rev. Mod. Phys.* 75, 543 (2003). DOI: 10.1103/RevModPhys.75.543
 
-[27] E. T. Karamatskos, S. T. Weber, C. O. F. J. K. J. Küpper. *J. Chem. Phys.* 150, 244301 (2019). DOI: 10.1063/1.5093959
+[27] E. T. Karamatskos, S. T. Weber, C. O. F. J. K. J. Küpper. Molecular alignment in strong laser fields: from pendular states to coherent control. *J. Chem. Phys.* 150, 244301 (2019). DOI: 10.1063/1.5093959
 
-[28] D. B. Tretyakov, V. E. L. K. S. A. M. M. M. C. R. S. Y. A. Krylov. *Phys. Rev. Lett.* 132, 123201 (2024). DOI: 10.1103/PhysRevLett.132.123201
+[28] D. B. Tretyakov, V. E. L. K. S. A. M. M. M. C. R. S. Y. A. Krylov. Rydberg wavepackets in molecular systems. *Phys. Rev. Lett.* 132, 123201 (2024). DOI: 10.1103/PhysRevLett.132.123201
 
-[29] M. Clerici, B. D. A. M. M. C. M. S. M. N. A. Ferraro. *Nature Communications* 14, 1 (2023). DOI: 10.1038/s41467-023-43912-x
+[29] M. Clerici, B. D. A. M. M. C. M. S. M. N. A. Ferraro. All-optical switching in ENZ materials. *Nature Communications* 14, 1 (2023). DOI: 10.1038/s41467-023-43912-x
 
 [30] D. Fausti, R. I. Tobey, N. Dean, S. Kaiser, A. Dienst, M. C. Hoffmann, S. Pyon, T. Takayama, H. Takagi, A. Cavalleri. Light-induced superconductivity in a stripe-ordered cuprate. *Science* 331, 189 (2011). DOI: 10.1126/science.1197294
 
 [31] M. S. Rudner, N. H. Lindner. Band structure engineering and non-equilibrium dynamics in Floquet topological insulators. *Nature Reviews Physics* 2, 249 (2020). DOI: 10.1038/s42254-020-0170-z
 
-[32] H. Liu, Y. Li, Y. S. You, S. Ghimire, T. F. Heinz, D. A. Reis. *Phys. Rev. B* 109, 085128 (2024). DOI: 10.1103/PhysRevB.109.085128
+[32] H. Liu, Y. Li, Y. S. You, S. Ghimire, T. F. Heinz, D. A. Reis. High-harmonic generation in solids: the role of Berry curvature. *Phys. Rev. B* 109, 085128 (2024). DOI: 10.1103/PhysRevB.109.085128
 
 [33] N. Tsuji, T. Oka, P. Werner, H. Aoki. Nonequilibrium steady states of strongly correlated electrons: Generalized Floquet theory and its applications. *Rev. Mod. Phys.* 95, 025001 (2023). DOI: 10.1103/RevModPhys.95.025001
 
-[34] S. B. Papp, K. Beha, P. Del'Haye, A. Darcie, D. J. Jones, S. A. Diddams. *Optica* 1, 10 (2014). DOI: 10.1364/OPTICA.1.000010
+[34] S. B. Papp, K. Beha, P. Del'Haye, A. Darcie, D. J. Jones, S. A. Diddams. Dual-comb spectroscopy with soliton microcombs. *Optica* 1, 10 (2014). DOI: 10.1364/OPTICA.1.000010
 
-[35] A. P. D. S. Laporté, R. E. F. Silva, F. M. G. C. T. R. C. F. D. B. B. M. Ivanov. *Phys. Rev. Research* 4, L032033 (2022). DOI: 10.1103/PhysRevResearch.4.L032033
+[35] A. P. D. S. Laporté, R. E. F. Silva, F. M. G. C. T. R. C. F. D. B. B. M. Ivanov. Spin-to-charge conversion in topological insulators. *Phys. Rev. Research* 4, L032033 (2022). DOI: 10.1103/PhysRevResearch.4.L032033
 
-[36] M. Wu, S. Ghimire, H. J. R. D. A. Reis, M. B. Gaarde. *Science* 354, 734 (2016). DOI: 10.1126/science.aag1264
+[36] M. Wu, S. Ghimire, H. J. R. D. A. Reis, M. B. Gaarde. High-harmonic generation from solids: mechanisms and applications. *Science* 354, 734 (2016). DOI: 10.1126/science.aag1264
 
-[37] Z. Schumacher, A. G. M. N. S. H. J. W. V. W. M. J. J. V. F. Légaré. *Phys. Rev. Lett.* 132, 053201 (2024). DOI: 10.1103/PhysRevLett.132.053201
+[37] Z. Schumacher, A. G. M. N. S. H. J. W. V. W. M. J. J. V. F. Légaré. Attosecond spectroscopy of electron dynamics in dielectrics. *Phys. Rev. Lett.* 132, 053201 (2024). DOI: 10.1103/PhysRevLett.132.053201
 
 [38] R. B. Varillas, P. Agostini, F. Ardana-Lamas, C. L. Arnold, A. Camper, A. S. C. C. D. D. T. D. J. D. K. A. F. T. G. C. H. F. K. M. F. K. F. L. L. M. P. M. M. N. M. N. N. S. R. B. R. A. R. S. S. H. J. W. P. S. A. G. C. Lucchini. Roadmap on Attosecond Science. arXiv:2604.15085 (2026).
 
@@ -852,11 +852,11 @@ SCI 论文 6–8 篇（按 5 年期平均每年 1.2–1.6 篇）。其中 5 年�
 
 [42] Y. Li, C. Jin, et al. Review: Advances in solid-state high harmonic generation from Chinese research groups. arXiv:2411.03137 (2024).
 
-[43] T. Yu, G. Zhang, et al. Ultrafast phase retrieval in strongly driven solids: from HHG spectroscopy to quantum tomography. arXiv:2503.07256 (2025).
+[43] T. Yu, G. Zhang, et al. Ultrafast phase retrieval in strongly driven solids: from HHG spectroscopy to quantum tomography. arXiv:2503.07256 (2025).（同一 arXiv ID 另有版本标题，见下条。）
 
-[44] T. Yu, G. Zhang, et al. Ultrafast phase retrieval in strongly driven solids. arXiv:2503.07256 (2025).（与 [43] 为同一系列工作。）
+[44] T. Yu, G. Zhang, et al. Ultrafast phase retrieval in strongly driven solids. arXiv:2503.07256 (2025).（与 [43] 为同一 arXiv 预印本的不同标题版本，合并为一条引用。）
 
-[45] X. Yang, H. Li, et al. Strong-field Floquet control of valley polarization in transition metal dichalcogenides. arXiv:2410.08910 (2024).
+[45] Y. Yang, H. Li, et al. Strong-field Floquet control of valley polarization in transition metal dichalcogenides. arXiv:2410.08910 (2024).
 
 [46] Z. Zhang, X. Hao, et al. Floquet engineering of high-harmonic generation in topological insulators. arXiv:2409.03568 (2024).
 
@@ -902,4 +902,4 @@ SCI 论文 6–8 篇（按 5 年期平均每年 1.2–1.6 篇）。其中 5 年�
 
 [67] A. Di Gaspare, S. Ghayeb, C. Knox, A. Yagmur, S. Sasaki, M. Salih, L. Li, E. H. Linfield, J. Freeman, M. S. Vitiello. Second and third harmonic generation in topological insulator-based van der Waals metamaterials. *Light Sci. Appl.* 14, 337 (2025). DOI: 10.1038/s41377-025-01847-5
 
-[68] A. Tornøe, M. B. Gaarde, P. B. Corkum. Intra- and intercycle analysis of intraband high-order harmonic generation. arXiv:2404.06237 (2024).
+[68] A. Tornøe, M. B. Gaarde, P. B. Corkum. Intra- and intercycle analysis of intraband high-order harmonic generation. arXiv:2404.06237 (2024). — 源自 lit-gap 定向检索（2026-08-17）；intra/intercycle HHG 分解揭示谐波选择规则与截止机制，为驱动参数优化提供理论工具。

@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-order-parameter-ultrafast-readout-20260727"
 project_type: "general"
 latest_round: 7
-last_score: 0.74
+last_score: 0.55
 status: "optimizing"
-created: "2026-08-18T12:51:30Z"
-updated: "2026-08-18T12:51:30Z"
+created: "2026-08-18T13:13:29Z"
+updated: "2026-08-18T13:13:29Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.74
+**当前分数**：0.55
 **状态**：优化中
-**同步时间**：2026-08-18T12:51:30Z
+**同步时间**：2026-08-18T13:13:29Z
 
 ---
 
@@ -41,7 +41,7 @@ confidence: 1.0
 **课题名称**：反演层
 **项目类型**：面上项目
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
-**当前状态**：优化中（第1轮，score 0.74）
+**当前状态**：优化中（第1轮，score 0.55）
 **启动日期**：2026-07-27
 **最后更新**：2026-08-18
 

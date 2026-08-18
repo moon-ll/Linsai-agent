@@ -2,7 +2,7 @@
 title: "瞬态量子相的全光读写"
 type: "proposal"
 created: "2026-08-02T06:02:42Z"
-updated: "2026-08-18T01:57:31Z"
+updated: "2026-08-18T13:04:56Z"
 tags: []
 related: ["Krausz"]
 source_raw: ""
@@ -10,19 +10,19 @@ growth_stage: "growing"
 confidence: 1.0
 project: ["NSFC-强场超快"]
 proposal_id: "key-transient-quantum-phase-optical-20260726"
-status: "pending_review"
+status: "optimizing"
 project_type: "key"
-optimization_rounds: 4
+optimization_rounds: 0
 last_score: 0.53
-synced_at: "2026-08-18T01:57:31Z"
+synced_at: "2026-08-18T13:04:56Z"
 ---
 
 # 瞬态量子相的全光读写
 
 **课题 ID**：`key-transient-quantum-phase-optical-20260726`  
 **项目类型**：key  
-**生命周期状态**：待校验  
-**优化轮次**：4  
+**生命周期状态**：优化中  
+**优化轮次**：0  
 **当前分数**：0.53  
 **同步时间**：2026-08-18
 
@@ -47,17 +47,17 @@ synced_at: "2026-08-18T01:57:31Z"
 
 ## 关键产物
 
-- [proposal-brief](research_proposals/pending_review/key-transient-quantum-phase-optical-20260726/00_proposal-brief.md)
-- [question-framework](research_proposals/pending_review/key-transient-quantum-phase-optical-20260726/03_question/question-framework.md)
-- [method-manual](research_proposals/pending_review/key-transient-quantum-phase-optical-20260726/03_method/method-manual.md)
-- [reading-notes](research_proposals/pending_review/key-transient-quantum-phase-optical-20260726/02_literature/reading-notes.md)
-- [proposal-draft](research_proposals/pending_review/key-transient-quantum-phase-optical-20260726/04_proposal/proposal-draft.md)
+- [proposal-brief](research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/00_proposal-brief.md)
+- [question-framework](research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/03_question/question-framework.md)
+- [method-manual](research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/03_method/method-manual.md)
+- [reading-notes](research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/02_literature/reading-notes.md)
+- [proposal-draft](research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/04_proposal/proposal-draft.md)
 
 ## 状态说明
 
-- 处于 **待校验** 阶段
+- 处于 **优化中** 阶段
 - 最后得分：0.53
-- 累计对抗轮次：4
+- 累计对抗轮次：0
 
 <!-- linsai-wikilinks -->
 ## 关联概念
