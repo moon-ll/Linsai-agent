@@ -6,8 +6,8 @@ project_type: "general"
 latest_round: 0
 last_score: 0.1
 status: "optimizing"
-created: "2026-08-18T00:02:36Z"
-updated: "2026-08-18T00:02:36Z"
+created: "2026-08-18T04:01:47Z"
+updated: "2026-08-18T04:01:47Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -20,7 +20,7 @@ confidence: 1.0
 **最新轮次**：第 0 轮
 **当前分数**：0.1
 **状态**：优化中
-**同步时间**：2026-08-18T00:02:36Z
+**同步时间**：2026-08-18T04:01:47Z
 
 ---
 
@@ -32,7 +32,7 @@ confidence: 1.0
 | full_review | full_review | 0 |
 | rationale | （一）立项依据 | 78 |
 | references | references | 0 |
-| scheme | scheme | 0 |
+| scheme | （三）研究方案、特色与创新、预期研究成果 | 109 |
 
 ## 课题简介
 
@@ -43,7 +43,7 @@ confidence: 1.0
 **课题 ID**：`general-berry-mnps3-rashba-20260816`
 **当前状态**：优化中（第0轮，score 0.10）
 **启动日期**：2026-08-16
-**最后更新**：2026-08-17
+**最后更新**：2026-08-18
 
 ---
 
@@ -60,6 +60,7 @@ confidence: 1.0
 |------|------|--------|---------|------|
 | 1 | 0.10 | 10 | 2 | 2026-08-17 |
 | 1 | 0.10 | 15 | 7 | 2026-08-17 |
+| 1 | 0.10 | 16 | 8 | 2026-08-18 |
 
 ## 状态流转
 - 2026-08-16: — → drafts (注册新 proposal)
@@ -76,7 +77,7 @@ confidence: 1.0
 - `02_literature/` — 文献调研 + 针对性检索
 - `02_topic/` — 缺口分析
 - `03_question/` — 科学问题框架
-- `04_proposal/proposal-draft.md` — 
+-
 
 （完整简介见 [源文件](research_proposals/optimizing/general-berry-mnps3-rashba-20260816/04_proposal/proposal-draft-merged.md)）
 

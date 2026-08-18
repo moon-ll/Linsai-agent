@@ -5,9 +5,9 @@ proposal_id: "key-transient-quantum-phase-optical-20260726"
 project_type: "key"
 latest_round: 5
 last_score: 0.53
-status: "optimizing"
-created: "2026-08-18T00:02:36Z"
-updated: "2026-08-18T00:02:36Z"
+status: "pending_review"
+created: "2026-08-18T04:01:47Z"
+updated: "2026-08-18T04:01:47Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -19,8 +19,8 @@ confidence: 1.0
 **类型**：key
 **最新轮次**：第 5 轮
 **当前分数**：0.53
-**状态**：优化中
-**同步时间**：2026-08-18T00:02:36Z
+**状态**：待校验
+**同步时间**：2026-08-18T04:01:47Z
 
 ---
 
@@ -41,9 +41,9 @@ confidence: 1.0
 **课题名称**：瞬态量子相的全光读写
 **项目类型**：重点项目
 **课题 ID**：`key-transient-quantum-phase-optical-20260726`
-**当前状态**：优化中（第3轮，score 0.53）
+**当前状态**：待校验（等待人工核验）
 **启动日期**：2026-07-26
-**最后更新**：2026-08-17
+**最后更新**：2026-08-18
 
 ---
 
@@ -74,14 +74,14 @@ confidence: 1.0
 | 1 | 0.23 | 23 | 12 | 2026-08-04 |
 | 1 | 0.23 | 23 | 12 | 2026-08-04 |
 | 1 | 0.66 | 86 | 46 | 2026-08-04 |
-| 1 | 0.71 | 75 | 31 | 2
+| 1 | 0.71 | 75 | 31 | 2026-08-0
 
-（完整简介见 [源文件](research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/04_proposal/proposal-draft-merged.md)）
+（完整简介见 [源文件](research_proposals/pending_review/key-transient-quantum-phase-optical-20260726/04_proposal/proposal-draft-merged.md)）
 
 ## 来源
 
-- 最新申请书：[research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/04_proposal/proposal-draft-merged.md](research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/04_proposal/proposal-draft-merged.md)
-- 各章节文件：`research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/04_proposal/sections/`
+- 最新申请书：[research_proposals/pending_review/key-transient-quantum-phase-optical-20260726/04_proposal/proposal-draft-merged.md](research_proposals/pending_review/key-transient-quantum-phase-optical-20260726/04_proposal/proposal-draft-merged.md)
+- 各章节文件：`research_proposals/pending_review/key-transient-quantum-phase-optical-20260726/04_proposal/sections/`
 - 优化报告：[reports/key-transient-quantum-phase-optical-20260726.md](reports/key-transient-quantum-phase-optical-20260726.md)
 
 > 本页由 `scripts/kb_proposal_reorg.py` 自动生成。

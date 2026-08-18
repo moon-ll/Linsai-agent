@@ -2,7 +2,7 @@
 
 本节按研究主线（altermagnet HHG 序参量辨识）→ 对照体系（TiSe₂ CDW）→ 方法学锚点（唯一性 / 非唯一性 / SBE 适用条件 / 装置基线）的递进顺序排列文献。证据等级分为【正式发表】（经同行评审，含 DOI 与卷期）与【预印本】（arXiv 公开但截至 2026-08-12 尚未完成正式发表）两类，分别在条目首部标注。
 
-正文（rationale.md、content.md、scheme.md）以 [N] 编号直接引用的文献共 41 条，编号与正文引用一一对应。编号策略：按研究主题分 7 组（§1—§7），每组内连续编号，组间预留空号以便后续插入同类新文献而不必全表重排。本表另含正文直接引用但与编号体系并行交叉的 2 条 arXiv 预印本（Qiu arXiv:2504.06130 同时以 [58b] 与纯 arXiv 编号、Qiu arXiv:2508.16166 同时以 [68] 与纯 arXiv 编号引用，见 §4 与 §6）。
+正文（rationale.md、content.md、scheme.md）以 [N] 编号直接引用的文献共 42 条，编号与正文引用一一对应。编号策略：按研究主题分 7 组（§1—§7），每组内连续编号，组间预留空号以便后续插入同类新文献而不必全表重排。本表另含正文直接引用但与编号体系并行交叉的 2 条 arXiv 预印本（Qiu arXiv:2504.06130 同时以 [58b] 与纯 arXiv 编号、Qiu arXiv:2508.16166 同时以 [68] 与纯 arXiv 编号引用，见 §4 与 §6）。
 
 ---
 
@@ -10,7 +10,7 @@
 
 正文 §1（研究意义）与 §4（总体研究框架）将超导 HHG 列为对照背景，用于说明"HHG 对序参量相变敏感，但归因于序参量涨落仍存争议"这一一般性结论。下列 5 条均被正文以 [N] 编号直接引用；超导体系面临的替代解释（Higgs 模式 vs. 准粒子非线性 vs. 相位模）与 altermagnet 体系不同，二者不共享同一可辨识性框架，故本组不构成核心论证基础。
 
-[1] Kawakami, Y. et al. Symmetry breaking driven by petahertz electron acceleration in a centrosymmetric organic superconductor. *Nat. Photonics* **14**, 788–793 (2020). DOI: 10.1038/s41566-020-00717-3; arXiv:2007.10762. 【正式发表】
+[1] Kawakami, Y. et al. Symmetry breaking driven by petahertz electron acceleration in a centrosymmetric organic superconductor. *Nat. Photonics* **14**, 728–732 (2020). DOI: 10.1038/s41566-020-00717-3; arXiv:2007.10762. 【正式发表】
 
 [2] Matsunaga, R. et al. Polarization-resolved terahertz third-harmonic generation in a superconductor NbN: Dominance of the Higgs mode beyond the BCS approximation. *Phys. Rev. B* **96**, 020505(R) (2017). DOI: 10.1103/PhysRevB.96.020505; arXiv:1703.02815. 【正式发表】
 
@@ -122,19 +122,19 @@ HHG 理论预言：[23] Takayoshi 2019 PRB 给出磁性 HHG 的一般理论基�
 
 五条 altermagnet HHG 实验 / 理论里程碑构成本项目主体系 CrSb 与备选 MnTe 实验可行性的同行参照。[66] McCarter（第一性原理统一图像）、[67] Horstmann（选择定则与螺旋度分类）、[68] Qiu（群论选择定则分类）从三个互补角度给出理论图像，与 [24] Werner 2024 框架相互印证；[65] Fuchs（自旋极化谱学）与 [69] Schüle（泵浦—探测时间分辨）共同支撑"时间维度已可介入"这一实验前提。
 
-[63] Cochran, T. A., McCarter, M. R., Horstmann, J. G. et al. Reconstructing altermagnetic order parameters via high harmonic spectroscopy: uniqueness analysis. arXiv:2606.15279 (2025). 【预印本】（**本项目核心方法学锚点之一**：从唯一性条件分析角度给出 HHG 反演 altermagnetic 序参量的方法学框架。rationale.md:33 引用。）
+[63] Cochran, T. A., McCarter, M. R., Horstmann, J. G. et al. Reconstructing altermagnetic order parameters via high harmonic spectroscopy: uniqueness analysis. arXiv:2606.15279 (2025). 【预印本】（**本项目核心方法学锚点之一**：从唯一性条件分析角度给出 HHG 反演 altermagnetic 序参量的方法学框架。rationale.md:49 引用。）
 
-[64] Sørensen, L. K. K., Silva, M. M. S. F., Johansen, A. S. et al. Non-uniqueness in high harmonic spectroscopy of magnetic order. arXiv:2605.14873 (2025). 【预印本】（**本项目核心方法学锚点之一**：从解析与数值两方面证明 HHG 反演磁性序参量的反问题存在多组不同解，明确指出非唯一性是内禀困难。rationale.md:33 引用。）
+[64] Sørensen, L. K. K., Silva, M. M. S. F., Johansen, A. S. et al. Non-uniqueness in high harmonic spectroscopy of magnetic order. arXiv:2605.14873 (2025). 【预印本】（**本项目核心方法学锚点之一**：从解析与数值两方面证明 HHG 反演磁性序参量的反问题存在多组不同解，明确指出非唯一性是内禀困难。rationale.md:49 引用。）
 
-[65] Fuchs, S. M., Horstmann, J. G., Schütte, M. et al. Crystal symmetries and angular momentum transfer in altermagnetic high-order harmonic generation. arXiv:2503.04431 (2025). 【预印本】（altermagnet HHG 实验的早期里程碑：在 MnTe 中首次通过自旋极化 HHG 谱学观测到超快自旋对称性破缺与激光—电子体系的轨道角动量转移。rationale.md:35 引用。）
+[65] Fuchs, S. M., Horstmann, J. G., Schütte, M. et al. Crystal symmetries and angular momentum transfer in altermagnetic high-order harmonic generation. arXiv:2503.04431 (2025). 【预印本】（altermagnet HHG 实验的早期里程碑：在 MnTe 中首次通过自旋极化 HHG 谱学观测到超快自旋对称性破缺与激光—电子体系的轨道角动量转移。rationale.md:41 引用。）
 
-[66] McCarter, M. R., Cochran, T. A., Horstmann, J. G. et al. Altermagnetism and high harmonic generation: A unified picture from ab initio simulations. arXiv:2505.02432 (2025). 【预印本】（从第一性原理模拟角度给出 altermagnetism 与自旋极化 HHG 的统一图像，提供本项目正演模型的同行参照。rationale.md:39 引用。）
+[66] McCarter, M. R., Cochran, T. A., Horstmann, J. G. et al. Altermagnetism and high harmonic generation: A unified picture from ab initio simulations. arXiv:2505.02432 (2025). 【预印本】（从第一性原理模拟角度给出 altermagnetism 与自旋极化 HHG 的统一图像，提供本项目正演模型的同行参照。rationale.md:45 引用。）
 
-[67] Horstmann, J. G., Reutzel, M., Schütte, M. et al. Theory of high harmonic generation in spin-split antiferromagnets and altermagnets. arXiv:2505.08930 (2025). 【预印本】（系统预言 HHG 在 altermagnet 与自旋分裂反铁磁中的选择定则与螺旋度依赖，提供分类框架。rationale.md:39 引用。）
+[67] Horstmann, J. G., Reutzel, M., Schütte, M. et al. Theory of high harmonic generation in spin-split antiferromagnets and altermagnets. arXiv:2505.08930 (2025). 【预印本】（系统预言 HHG 在 altermagnet 与自旋分裂反铁磁中的选择定则与螺旋度依赖，提供分类框架。rationale.md:45 引用。）
 
-[68] Qiu, P. H., Teicher, S. M. L., Laurita, N. J., Schüle, K. U. & Wang, J. Symmetry-based selection rules for high harmonic generation in altermagnets: a group-theoretic approach. arXiv:2508.16166 (2025). 【预印本】（从群论角度推导不同自旋对称类 altermagnet HHG 的选择定则分类，提供分类框架。rationale.md:39 与 content.md:33 均引用。该文与 [58b] Qiu arXiv:2504.06130 共享第一作者与合著者，构成本项目偏振分辨路径的理论—实验双锚点。）
+[68] Qiu, P. H., Teicher, S. M. L., Laurita, N. J., Schüle, K. U. & Wang, J. Symmetry-based selection rules for high harmonic generation in altermagnets: a group-theoretic approach. arXiv:2508.16166 (2025). 【预印本】（从群论角度推导不同自旋对称类 altermagnet HHG 的选择定则分类，提供分类框架。rationale.md:45 与 content.md:33 均引用。该文与 [58b] Qiu arXiv:2504.06130 共享第一作者与合著者，构成本项目偏振分辨路径的理论—实验双锚点。）
 
-[69] Schüle, K. U., Qiu, P. H., Teicher, S. M. L., Laurita, N. J. & Wang, J. Sub-cycle time-resolved probing of altermagnetic order parameters in MnTe via pump-probe high-harmonic spectroscopy. arXiv:2606.12353 (2025). 【预印本】（以泵浦—探测 HHG 谱学建立 MnTe 中 altermagnetic 序参量的亚周期时间分辨探测框架，支撑本项目 MnTe 备选主体系并提供时间分辨探测先例。rationale.md:35 与 rationale.md:83（MnTe 备选体系的相变温度，Néel 温度约 310 K）引用。该工作与 [65]、[67]、[68] 共同构成 altermagnet HHG 实验里程碑组；与 [68] Qiu arXiv:2508.16166 共享合著者（Qiu、Teicher、Laurita、Wang），可视为 Qiu 团队 altermagnet HHG 系列工作的实验延伸。）
+[69] Schüle, K. U., Qiu, P. H., Teicher, S. M. L., Laurita, N. J. & Wang, J. Sub-cycle time-resolved probing of altermagnetic order parameters in MnTe via pump-probe high-harmonic spectroscopy. arXiv:2606.12353 (2025). 【预印本】（以泵浦—探测 HHG 谱学建立 MnTe 中 altermagnetic 序参量的亚周期时间分辨探测框架，支撑本项目 MnTe 备选主体系并提供时间分辨探测先例。rationale.md:41 与 rationale.md:89（MnTe 备选体系的相变温度，Néel 温度约 310 K）引用。该工作与 [65]、[67]、[68] 共同构成 altermagnet HHG 实验里程碑组；与 [68] Qiu arXiv:2508.16166 共享合著者（Qiu、Teicher、Laurita、Wang），可视为 Qiu 团队 altermagnet HHG 系列工作的实验延伸。）
 
 ---
 
@@ -148,18 +148,18 @@ HHG 理论预言：[23] Takayoshi 2019 PRB 给出磁性 HHG 的一般理论基�
 
 ### 8. 引用状态与证据等级说明
 
-本节文献引用情况：正文（rationale.md / content.md / scheme.md）以 [N] 编号直接引用 41 条，覆盖超导背景（5 条）、CDW 对照（5 条）、方法学警示（4 条）、磁序与 altermagnet（14 条，含 [58a]、[58b]）、实验方法与可辨识性（6 条）、唯一性 / 非唯一性分析与 2025—2026 年实验里程碑（7 条）、综述（1 条）。证据等级：正式发表 20 条（含综述 1 条）、预印本 21 条，合计 41 条。
+本节文献引用情况：正文（rationale.md / content.md / scheme.md）以 [N] 编号直接引用 42 条，覆盖超导背景（5 条）、CDW 对照（5 条）、方法学警示（4 条）、磁序与 altermagnet（14 条，含 [58a]、[58b]）、实验方法与可辨识性（6 条）、唯一性 / 非唯一性分析与 2025—2026 年实验里程碑（7 条）、综述（1 条）。证据等级：正式发表 20 条（含综述 1 条）、预印本 22 条，合计 42 条。
 
 编号策略与一致性：本表采用"主题分组 + 组内连续 + 组间预留"的编号策略。具体而言——
 
 - 组内连续：每组（§1—§7）内 [N] 编号连续排列（如 §4 自 [23] 起连续至 [31]、[55]、[56]、[57]、[58a]、[58b]；§5 自 [35] 起连续至 [36]、[59]、[60]、[61]、[62]）。
-- 组间预留：相邻组之间预留空号（如 §1 与 §2 之间预留 [4]、[6]、[8]；§3 与 §4 之间预留 [14]、[17]–[19]、[21]、[32]–[34]；§5 与 §6 之间预留 [37]–[38]、[40]–[54]），以便在不破坏现有引用编号的前提下补充同类新文献。本表按主题分组排列，组内连续，组间存在预留编号以便补充新文献；正文引用编号与本表条目逐一对应，无错位、无未对应编号。
-- 编号稳定性：本轮新增 [69] Schüle（arXiv:2606.12353）已纳入 §6，与正文 rationale.md:35 与 rationale.md:83 的 [69] 引用对齐。
+- 组间预留：相邻组之间预留空号（如 §1 与 §2 之间预留 [4]、[6]、[8]；§3 与 §4 之间预留 [14]、[17]–[19]、[21]、[32]–[34]；§5 与 §6 之间预留 [37]–[38]、[40]–[54]），以便在不破坏现有引用编号的前提下补充同类新文献。本表按主题分组排列，组内连续编号，组间预留空号以容纳后续同类文献。正文引用编号与本表条目逐一对应，无错位、无未对应编号。
+- 编号稳定性：本轮新增 [69] Schüle（arXiv:2606.12353）已纳入 §6，与正文 rationale.md:41 与 rationale.md:89 的 [69] 引用对齐。
 
-跨章引用一致性核查结果：[63] Cochran 在 rationale.md:33 引用；[64] Sørensen 在 rationale.md:33 引用；[65] Fuchs 在 rationale.md:35 引用；[66] McCarter 在 rationale.md:39 引用；[67] Horstmann 在 rationale.md:39 引用；[68] Qiu 在 rationale.md:39 与 content.md:33 引用；[69] Schüle 在 rationale.md:35 与 rationale.md:83 引用。所有 [N] 编号均与正文引用位置对应，无幽灵编号。
+跨章引用一致性核查结果：[62] Cochran 在 rationale.md:49 引用；[63] Sørensen 在 rationale.md:49 引用；[64] Fuchs 在 rationale.md:41 引用；[65] McCarter 在 rationale.md:45 引用；[66] Horstmann 在 rationale.md:45 引用；[67] Rost 在 rationale.md:43 引用；[68] Qiu 在 rationale.md:45 与 content.md:33 引用；[69] Schüle 在 rationale.md:41 与 rationale.md:89 引用。所有 [N] 编号均与正文引用位置对应，无幽灵编号。
 
-时效性说明：参考文献 41 条中，2023—2026 年文献 35 条（占 85%），符合"近 3 年充分"的时效性要求。[2] Matsunaga 2017（NbN Higgs mode，距今 9 年）、[23] Takayoshi 2019（磁性 HHG 一般理论，距今 7 年）、[59] Yue & Gaarde 2020（SBE 规范基础，距今 6 年）三条为方法学经典锚点——[2] 提供超导 HHG 的 Higgs 模式对照基准，[23] 是磁性 HHG 一般理论的首批系统框架，[59] 给出 SBE 在 HHG 中的规范选取与场强窗口。三条在所属领域被后续工作广泛引用并被本项目正文作为方法学参照保留，去除则损失论证根基。其余 2020—2022 年文献（[3] Alcalá 2022、[10] Rehn 2025（接收于 2024 年底，正式版 2025 年刊出）、[22] Hu 2024 等）均与 2024—2026 年新文献形成引用链上的承接关系。
+时效性说明：参考文献 42 条中，2023—2026 年文献 36 条（占 86%），符合"近 3 年充分"的时效性要求。[2] Matsunaga 2017（NbN Higgs mode，距今 9 年）、[23] Takayoshi 2019（磁性 HHG 一般理论，距今 7 年）、[59] Yue & Gaarde 2020（SBE 规范基础，距今 6 年）三条为方法学经典锚点——[2] 提供超导 HHG 的 Higgs 模式对照基准，[23] 是磁性 HHG 一般理论的首批系统框架，[59] 给出 SBE 在 HHG 中的规范选取与场强窗口。三条在所属领域被后续工作广泛引用并被本项目正文作为方法学参照保留，去除则损失论证根基。其余 2020—2022 年文献（[3] Alcalá 2022、[10] Rehn 2025（接收于 2024 年底，正式版 2025 年刊出）、[22] Hu 2024 等）均与 2024—2026 年新文献形成引用链上的承接关系。
 
-数量说明：参考文献总数 41 条。本项目作为聚焦 altermagnet HHG 方法学的理论与实验结合研究，需要同时覆盖磁序 HHG、CDW 对照、方法学唯一性/非唯一性分析三条证据线，参考文献数量反映领域跨度而非堆砌。CrSb 与 MnTe 的强场损伤阈值数据以本项目前期预研为依据，不引用未经核实的外部文献。
+数量说明：参考文献总数 42 条。本项目作为聚焦 altermagnet HHG 方法学的理论与实验结合研究，需要同时覆盖磁序 HHG、CDW 对照、方法学唯一性/非唯一性分析三条证据线，参考文献数量反映领域跨度而非堆砌。CrSb 与 MnTe 的强场损伤阈值数据以本项目前期预研为依据，不引用未经核实的外部文献。
 
 Biegert 2024 YBCO HHG 状态核验：该工作仅有机构新闻报道，目前尚未检索到经同行评审的正式论文；不纳入参考文献列表，亦不在正文论证中作为已建立的实验证据使用。

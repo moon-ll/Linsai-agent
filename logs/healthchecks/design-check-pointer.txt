@@ -1,7 +1,7 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-18 08h 健康检查（无缺陷，3 项运行时实证通过）
-完整报告：logs/healthchecks/healthcheck-2026-08-18-08h.md
+最后更新：2026-08-18 12h 健康检查（无关键缺陷；#2 维度轮换定性"潜在死代码+设计不一致"待人工裁决）
+完整报告：logs/healthchecks/healthcheck-2026-08-18-12h.md
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：
@@ -12,19 +12,22 @@
 5. 时区：北京时间（UTC+8）；now_utc() 产物过滤时注意 UTC=BJ-8
 6. git 版本标签：v6.9.23 已被 7daaad7 占用但 VERSION 未同步——6.9.22 起以 VERSION 文件为准推进，当前 6.9.24
 7. 网关核查走 `check_hermes_available()`（返回 hermes_cli/linsai_profile/gateway_status/cron_jobs_count，实测即时响应）
+8. transition_history 含三种 schema：标准 from/to、注册首条（仅 to）、事件注记（event/detail 键，如 direction_correction）；另有 4 条 08-04 遗留用 timestamp 替代 at——均为良性，读取方兼容
 
 【轮换表 15 项检查进度】
 第一轮（1-15 全覆盖，08-15 04h 收官）
 第二轮（收官）：
-- 已核：#12｜#1（08-17 静态 + 08-18 08h 运行时实证：bsv/berry 3 次实时注入）｜#2｜#3（08-17 16h 静态 + 08-18 08h 运行时实证：berry 首 job=r1-idea_review done）｜#4｜#7（08-18 00h 负向安全）｜#5｜#9｜#6｜#8｜#13（08-18 08h 运行时复核）｜#14｜#15
+- 已核：#12｜#1（08-17 静态 + 08-18 08h/12h 两轮运行时实证：12h 内 5 次实时注入）｜#2（08-17 16h 静态 + 12h 深挖：**32 天零触发 + dim/section 命名空间错配空转**，见下）｜#3（08-17 16h 静态 + 08-18 08h 运行时实证：berry 首 job=r1-idea_review done）｜#4｜#5｜#6｜#7（08-18 00h 负向安全 + 08-18 12h 轮末终验：key-transient 下降暂停+自动回退+dossier reject_lean 全链路符合）｜#8｜#9｜#13（08-18 08h 运行时复核）｜#14｜#15
 - 待人工裁决后复验：#10 反馈闭环（bsv human_feedback_count=3 样本累积中）｜#11 kb_health（跨周数据未满）
-- 附加：审核退回链路完整性（08-18 04h 发现→v6.9.24 修复 + 14 用例回归；08-18 08h 运行时验证：归档 112 条、bsv 26 job 纯净 r1 链）
-- gateway 复发观察：第 10 轮（07:37 daily-reload 后 banner 即时）通过，建议关闭
+- **#2 人工裁决项（12h 新增）**：`optimize.py` L137-143 用 dim_scores 最小值键（innovation/feasibility/rigor/expression/completeness）在 PROPOSAL_SECTIONS（rationale/content/scheme/full_review/references）中按 key 匹配——命名空间不相交，切换永为空操作且日志误报"已切换"；外层条件（3 次同章节 |Δ|<0.01）32 天零满足。修复前需裁决"最弱维度→章节"映射口径。
+- 附加：审核退回链路完整性（08-18 04h 发现→v6.9.24 修复 + 14 用例回归；08-18 08h 运行时验证通过）
+- gateway 复发观察：第 10 轮通过，08h 建议关闭——12h 复核 running 正常，**关闭**
 
 【下次从这里继续】
-1. #7 轮末终验：key-transient r4-monitor 执行后核对——分数史尾部 0.81/0.81/0.8/0.78/0.53，预期不晋级且 reason≠质量收敛（顺延中）
-2. bsv r1 轮末跟踪：13/26 done；轮末验证 r2 链正常创建且无 stale derived 误调度
-3. order-param r2-rationale-critic：06:00 repair 第 2 次重试已重置 pending（repair_attempts=2）；08:30 时段执行；若再失败触双上限（repair_attempts=3），观察自动解锁路径
-4. berry r1-scheme-lit_search 超时线：age 已过 1800s，观察微调度器 stale 清理动作（合法长任务被重置为已知设计权衡，只记录）
-5. 设计轮换：第三轮从 #1 重新开始，重点换运行时口径；#10/#11 仍待人工裁决后复验
-6. 测试基建（仅报告待裁决）：idea_review 套件 35 用例未注册 --module 静默跳过 + --module 硬编码清单 vs AGENTS"自动发现"表述偏差
+1. 第三轮设计轮换：从 #3 开始（#3 已双口径核验过，可从 #4 起换第三种口径），本轮已完成 #1/#2/#7
+2. bsv r1 轮末跟踪：13/26；轮末验证 r2 链正常创建且无 stale derived 误调度
+3. order-param r2-content-critic：12:02 监控重试（attempt 2/3，pending）；18:30 时段执行；若再失败触双上限（attempts≥3 或 repair≥3），观察自动解锁路径
+4. berry r1-full_review-critic：三连 1200s 超时（非输入过大：berry 225KB vs 其他 1.2MB+；其他课题同型 250-413s 完成）；14:00 repair 重试结果跟踪；若双上限终态 24h 解锁后复跑仍三连超时 → 升级人工
+5. berry r1 三章 0.1 分为占位符下限真实分（critic 产物自证）；r2 评分应反映 writer 补写内容，若 r2 仍全 0.1 则复查 writer 产物落盘
+6. #2 维度轮换修复口径人工裁决（见上）
+7. 测试基建（仅报告待裁决）：idea_review 套件 35 用例未注册 --module 静默跳过 + --module 硬编码清单 vs AGENTS"自动发现"表述偏差

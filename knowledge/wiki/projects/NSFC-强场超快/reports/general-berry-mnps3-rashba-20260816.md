@@ -4,11 +4,11 @@ type: "proposal_reports"
 proposal_id: "general-berry-mnps3-rashba-20260816"
 latest_round: 0
 last_score: 0.1
-critic_rounds: 3
+critic_rounds: 5
 optimization_reports: 0
 status: "optimizing"
-created: "2026-08-18T00:02:36Z"
-updated: "2026-08-18T00:02:36Z"
+created: "2026-08-18T04:01:47Z"
+updated: "2026-08-18T04:01:47Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -23,12 +23,14 @@ confidence: 1.0
 
 ---
 
-## 对抗评审（共 3 轮）
+## 对抗评审（共 5 轮）
 
 | 轮次 | 文件 |
 |------|------|
 | 第 1 轮 | [critic-round-1.archive-content.md](research_proposals/optimizing/general-berry-mnps3-rashba-20260816/05_review/critic-round-1.archive-content.md) |
 | 第 1 轮 | [critic-round-1.archive-rationale.md](research_proposals/optimizing/general-berry-mnps3-rashba-20260816/05_review/critic-round-1.archive-rationale.md) |
+| 第 1 轮 | [critic-round-1.archive-scheme-r2.md](research_proposals/optimizing/general-berry-mnps3-rashba-20260816/05_review/critic-round-1.archive-scheme-r2.md) |
+| 第 1 轮 | [critic-round-1.archive-scheme.md](research_proposals/optimizing/general-berry-mnps3-rashba-20260816/05_review/critic-round-1.archive-scheme.md) |
 | 第 1 轮 | [critic-round-1.md](research_proposals/optimizing/general-berry-mnps3-rashba-20260816/05_review/critic-round-1.md) |
 
 ## 来源

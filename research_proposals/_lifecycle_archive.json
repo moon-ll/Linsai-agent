@@ -2143,6 +2143,1051 @@
       "cron_job_id": "",
       "_archived_from": "general-bsv-driven-hhg-quantum-20260726",
       "_archived_at": "2026-08-17T20:14:27Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "rationale",
+      "round": 2,
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T19:15:36Z",
+      "finished_at": "2026-08-13T19:21:12Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "rationale",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T19:25:38Z",
+      "finished_at": "2026-08-13T19:26:07Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "rationale",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T19:30:39Z",
+      "finished_at": "2026-08-13T19:48:23Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "rationale",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:00:43Z",
+      "finished_at": "2026-08-13T20:00:43Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "rationale",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:05:44Z",
+      "finished_at": "2026-08-13T20:05:44Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-rationale-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "rationale",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-critic",
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:10:45Z",
+      "finished_at": "2026-08-13T20:16:47Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "content",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-rationale-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:20:46Z",
+      "finished_at": "2026-08-13T20:28:20Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "content",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-content-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:30:48Z",
+      "finished_at": "2026-08-13T20:31:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "content",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-content-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:35:49Z",
+      "finished_at": "2026-08-13T20:39:58Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "content",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-content-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:40:49Z",
+      "finished_at": "2026-08-13T20:47:00Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "content",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-content-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:50:51Z",
+      "finished_at": "2026-08-13T20:50:51Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-content-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "content",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-content-critic",
+        "key-transient-quantum-phase-optical-20260726-r2-content-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T20:55:52Z",
+      "finished_at": "2026-08-13T21:01:59Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "scheme",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-content-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T21:05:53Z",
+      "finished_at": "2026-08-13T21:11:09Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "scheme",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T21:15:55Z",
+      "finished_at": "2026-08-13T21:16:59Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "scheme",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T21:20:56Z",
+      "finished_at": "2026-08-13T21:38:25Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "scheme",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T21:40:59Z",
+      "finished_at": "2026-08-13T21:45:55Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "scheme",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T21:50:00Z",
+      "finished_at": "2026-08-13T21:50:00Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-scheme-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "scheme",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-critic",
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T21:55:01Z",
+      "finished_at": "2026-08-13T22:03:40Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-full_review-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "full_review",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-scheme-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:10:03Z",
+      "finished_at": "2026-08-13T22:15:07Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-full_review-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "full_review",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-full_review-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:20:04Z",
+      "finished_at": "2026-08-13T22:25:56Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-references-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "references",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-full_review-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:30:06Z",
+      "finished_at": "2026-08-13T22:33:18Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-references-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "references",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-references-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:35:07Z",
+      "finished_at": "2026-08-13T22:42:24Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-monitor-monitor",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "monitor",
+      "section_key": "monitor",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-references-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:45:08Z",
+      "finished_at": "2026-08-13T22:49:32Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-derived-update_vision",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "update_vision",
+      "section_key": "derived",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-monitor-monitor"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:50:09Z",
+      "finished_at": "2026-08-13T22:50:48Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r2-derived-update_method_manual",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "update_method_manual",
+      "section_key": "derived",
+      "round": 2,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r2-derived-update_vision"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T22:55:10Z",
+      "finished_at": "2026-08-13T23:01:22Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "rationale",
+      "round": 3,
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T23:05:11Z",
+      "finished_at": "2026-08-13T23:11:36Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "rationale",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T23:15:13Z",
+      "finished_at": "2026-08-13T23:15:48Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "rationale",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-13T23:20:14Z",
+      "finished_at": "2026-08-13T23:30:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "rationale",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_search"
+      ],
+      "attempts": 2,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T00:30:30Z",
+      "finished_at": "2026-08-14T00:35:42Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "error_history": [
+        {
+          "at": "2026-08-14T00:30:30Z",
+          "error": "运行超时/进程僵死",
+          "attempts": 1
+        }
+      ],
+      "repair_attempts": 1,
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "rationale",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T00:40:31Z",
+      "finished_at": "2026-08-14T00:40:31Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-rationale-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "rationale",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-critic",
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-lit_note"
+      ],
+      "attempts": 2,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T01:05:35Z",
+      "finished_at": "2026-08-14T01:13:16Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "error_history": [
+        {
+          "at": "2026-08-14T01:00:32Z",
+          "error": "超时(900s)",
+          "attempts": 1
+        }
+      ],
+      "repair_attempts": 1,
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "content",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-rationale-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T01:15:37Z",
+      "finished_at": "2026-08-14T01:23:39Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "content",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-content-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T01:25:38Z",
+      "finished_at": "2026-08-14T01:26:22Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "content",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-content-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T01:30:39Z",
+      "finished_at": "2026-08-14T01:47:58Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "content",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-content-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T01:50:42Z",
+      "finished_at": "2026-08-14T01:50:42Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "content",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-content-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T01:55:42Z",
+      "finished_at": "2026-08-14T01:55:42Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-content-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "content",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-content-critic",
+        "key-transient-quantum-phase-optical-20260726-r3-content-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:00:43Z",
+      "finished_at": "2026-08-14T02:08:45Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-scheme-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "scheme",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-content-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:10:44Z",
+      "finished_at": "2026-08-14T02:16:20Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-scheme-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "scheme",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:20:46Z",
+      "finished_at": "2026-08-14T02:21:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-scheme-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "scheme",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:25:47Z",
+      "finished_at": "2026-08-14T02:27:41Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-scheme-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "scheme",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:30:48Z",
+      "finished_at": "2026-08-14T02:30:48Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-scheme-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "scheme",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:35:49Z",
+      "finished_at": "2026-08-14T02:35:49Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-scheme-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "scheme",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-critic",
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:40:50Z",
+      "finished_at": "2026-08-14T02:41:08Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-full_review-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "full_review",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-scheme-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:45:50Z",
+      "finished_at": "2026-08-14T02:46:06Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-full_review-gap_identify",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "gap_identify",
+      "section_key": "full_review",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:50:51Z",
+      "finished_at": "2026-08-14T02:51:04Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-full_review-lit_search",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_search",
+      "section_key": "full_review",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T02:55:52Z",
+      "finished_at": "2026-08-14T02:56:06Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-full_review-lit_read",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_read",
+      "section_key": "full_review",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:00:53Z",
+      "finished_at": "2026-08-14T03:00:53Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-full_review-lit_note",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "lit_note",
+      "section_key": "full_review",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:05:53Z",
+      "finished_at": "2026-08-14T03:05:53Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-full_review-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "full_review",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-critic",
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:10:54Z",
+      "finished_at": "2026-08-14T03:11:09Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-references-critic",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "critic",
+      "section_key": "references",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-full_review-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:15:55Z",
+      "finished_at": "2026-08-14T03:16:08Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-references-writer",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "writer",
+      "section_key": "references",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-references-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:20:56Z",
+      "finished_at": "2026-08-14T03:21:09Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-monitor-monitor",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "monitor",
+      "section_key": "monitor",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-references-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:25:57Z",
+      "finished_at": "2026-08-14T03:26:10Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-derived-update_vision",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "update_vision",
+      "section_key": "derived",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-monitor-monitor"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:30:57Z",
+      "finished_at": "2026-08-14T03:31:10Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
+    },
+    {
+      "job_id": "key-transient-quantum-phase-optical-20260726-r3-derived-update_method_manual",
+      "proposal_id": "key-transient-quantum-phase-optical-20260726",
+      "step": "update_method_manual",
+      "section_key": "derived",
+      "round": 3,
+      "status": "done",
+      "depends_on": [
+        "key-transient-quantum-phase-optical-20260726-r3-derived-update_vision"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-14T03:35:58Z",
+      "finished_at": "2026-08-14T03:36:11Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "key-transient-quantum-phase-optical-20260726",
+      "_archived_at": "2026-08-18T01:57:31Z"
     }
   ]
 }
