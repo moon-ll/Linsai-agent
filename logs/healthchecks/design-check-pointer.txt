@@ -1,7 +1,7 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-18 04h 健康检查（v6.9.24 审核退回清理修复）
-完整报告：logs/healthchecks/healthcheck-2026-08-18-04h.md
+最后更新：2026-08-18 08h 健康检查（无缺陷，3 项运行时实证通过）
+完整报告：logs/healthchecks/healthcheck-2026-08-18-08h.md
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：
@@ -11,19 +11,20 @@
 4. `self_test --module` 为 self_test.py 内**硬编码清单**（非 glob 自动发现）：新测试套件必须注册进 mapping["module"]，否则被 except:pass 静默跳过（08-18 04h 实证，14 用例无声丢失）。当前基线 863/863（849 + test_transition_reset_jobs 14）
 5. 时区：北京时间（UTC+8）；now_utc() 产物过滤时注意 UTC=BJ-8
 6. git 版本标签：v6.9.23 已被 7daaad7 占用但 VERSION 未同步——6.9.22 起以 VERSION 文件为准推进，当前 6.9.24
+7. 网关核查走 `check_hermes_available()`（返回 hermes_cli/linsai_profile/gateway_status/cron_jobs_count，实测即时响应）
 
 【轮换表 15 项检查进度】
 第一轮（1-15 全覆盖，08-15 04h 收官）
-第二轮（进行中）：
-- 已核：#12 趋势雷达（08-16 16h/08-17 12h/08-18 00h 三连）｜#1 范例注入（静态+运行时，08-17）｜#2 维度轮换（08-17 12h）｜#3 idea_review 门槛（08-17 16h）｜#4 分数奖惩路径（08-17 16h）｜#7 质量天花板负向安全（08-18 00h）｜#5 优化器循环（08-17 08h/08-18 00h）｜#9 输入端熔断（08-17 20h）｜#6 P0 持久化（08-17 20h）｜#8 停滞检测（08-18 00h 自愈闭环 + 04h 运行时复核正常）｜#13 轮次优先级（08-18 04h 运行时复核正常）｜#14 stale 清理（08-17 08h/08-18 00h 窗口外复核）｜#15 monitor 降级（08-17 16h 静态/08-18 00h 收官）
-- 待人工裁决后复验：#10 反馈闭环（闭环代码在位但触发样本少）、#11 kb_health（评分写入在位但跨周数据未满）
-- 附加：审核退回链路完整性（08-18 04h 发现不一致→v6.9.24 已修复+回归 14 用例）
+第二轮（收官）：
+- 已核：#12｜#1（08-17 静态 + 08-18 08h 运行时实证：bsv/berry 3 次实时注入）｜#2｜#3（08-17 16h 静态 + 08-18 08h 运行时实证：berry 首 job=r1-idea_review done）｜#4｜#7（08-18 00h 负向安全）｜#5｜#9｜#6｜#8｜#13（08-18 08h 运行时复核）｜#14｜#15
+- 待人工裁决后复验：#10 反馈闭环（bsv human_feedback_count=3 样本累积中）｜#11 kb_health（跨周数据未满）
+- 附加：审核退回链路完整性（08-18 04h 发现→v6.9.24 修复 + 14 用例回归；08-18 08h 运行时验证：归档 112 条、bsv 26 job 纯净 r1 链）
+- gateway 复发观察：第 10 轮（07:37 daily-reload 后 banner 即时）通过，建议关闭
 
 【下次从这里继续】
-1. #1 实测窗口：order-param r2-rationale-writer——链头 critic 超时 failed（attempts=3/repair_attempts=1），06:00 BJ repair 重试成功后 writer 运行时 grep logs/linsai.log "范例注入"（第三次顺延）
-2. #7 轮末终验：key-transient r4-monitor 执行后核对 _check_done——分数史含 references=0.53，预期不晋级且 reason≠质量收敛
-3. berry r1 首跑跟踪：done=0→首个 job 应为 r1-idea_review（v6.8.26 ⑩ 前置评审）
-4. bsv r1 推进跟踪：修复后 26 job 纯净链（11 done/15 pending），验证轮末正常建 r2 链且无 stale derived 误调度
-5. gateway 第 10 轮（复发观察）：07:37 daily-reload 后查 linsai 网关 banner 时延（04:00 派发正常，存活 15h+）
-6. 设计轮换：第二轮循环待运行面项 #10 反馈闭环 / #11 kb_health（不重复静态复核，待人工裁决后复验）
-7. 测试基建（仅报告待裁决）：idea_review 套件无 run_tests 在 --module 静默跳过（35 用例未计入基线）+ --module 硬编码清单 vs AGENTS"自动发现"表述偏差
+1. #7 轮末终验：key-transient r4-monitor 执行后核对——分数史尾部 0.81/0.81/0.8/0.78/0.53，预期不晋级且 reason≠质量收敛（顺延中）
+2. bsv r1 轮末跟踪：13/26 done；轮末验证 r2 链正常创建且无 stale derived 误调度
+3. order-param r2-rationale-critic：06:00 repair 第 2 次重试已重置 pending（repair_attempts=2）；08:30 时段执行；若再失败触双上限（repair_attempts=3），观察自动解锁路径
+4. berry r1-scheme-lit_search 超时线：age 已过 1800s，观察微调度器 stale 清理动作（合法长任务被重置为已知设计权衡，只记录）
+5. 设计轮换：第三轮从 #1 重新开始，重点换运行时口径；#10/#11 仍待人工裁决后复验
+6. 测试基建（仅报告待裁决）：idea_review 套件 35 用例未注册 --module 静默跳过 + --module 硬编码清单 vs AGENTS"自动发现"表述偏差
