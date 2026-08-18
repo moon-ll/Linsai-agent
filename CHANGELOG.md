@@ -1,5 +1,33 @@
 # 变更记录
 
+## v6.9.26 - 2026-08-18 审核反馈闭环复活（双断点修复）+ 三课题带反馈退回
+
+背景：v6.9.25 落地后执行三课题（moire/key-transient/quantum-geometry）
+审核退回，验证注入时发现"审核反馈闭环"（v6.8.17 引入）从未生效——
+`load_review_feedback_for_optimization` 存在两个叠加断点，所有路径
+（Web 与 CLI）恒返回空串，人工审核意见从未进入 critic/writer prompt。
+
+- **断点 1（门闩错误）**：函数以 `review_history` 为门闩提前返回，但该
+  字段仅在带 `session_id` 的 Web 审核提交时写入——CLI/脚本提交不写，
+  反馈永远不注入。函数体实际只依赖 `human_feedback_count` 与 raw 文件，
+  门闩改为 `feedback_count`。
+- **断点 2（长度判断永假）**：旧判断 `len(lines) > 2` 恒为 False
+  （lines 最多含 header + 1 个反馈共 2 个元素），即使 Web 路径过门闩
+  也返回空串。改为 `len(lines) > 1`。
+- **附带修复**：`_structure_feedback` 派 writer 的 timeout=120s 必超时
+  （writer 实测平均 350s+），结构化 JSON 永远写不出、每次反馈提交白派
+  一次 writer。timeout 提至 480s。
+- **验证**：三个退回课题注入块 725-782 字符，反馈正文（新语言规范红
+  线/参考文献修复要求/P0 清单）实际进入 prompt。
+- **回归**：新增 `scripts/tests/test_feedback_injection.py`（8 用例：
+  无 review_history 注入/空态/文件缺失/摘要提取路径/超时参数），注册
+  入 `--module` 硬编码清单。
+- **运维执行**：prompt_optimizer auto 即时跑（应用 1 条 writer 禁占位
+  符遗留建议）；三课题 major_revision 退回（moire 携 5 高危 P0+语言
+  红线要求、key-transient 携参考文献 0.81→0.53 崩落修复要求、
+  quantum-geometry 携一致性 0.77+参考文献 0.70 补短板要求），退回后
+  rounds=0/jobs=0 干净链（v6.9.24 归档清理生效）。
+
 ## v6.9.25 - 2026-08-18 破解 0.9 分数学死锁（AI 检测闭环 + 锚点档位绑定 + 语言红线）
 
 背景：review_dossier 预审发现三个 pending_review 课题均不可采纳，且

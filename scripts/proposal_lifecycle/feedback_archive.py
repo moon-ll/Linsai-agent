@@ -159,7 +159,9 @@ class FeedbackArchiveMixin:
             f"}}\n"
         )
 
-        result = self._run_hermes("writer", prompt, timeout=120)
+        # v6.9.26: writer 实测平均 350s+，旧 timeout=120 必超时——结构化
+        # 文件永远写不出来，每次反馈提交白派一次 writer。
+        result = self._run_hermes("writer", prompt, timeout=480)
 
         # 尝试读取结构化文件
         if structured_path.exists():
@@ -336,13 +338,13 @@ def _append_session_summary_to_feedback(feedback_path: Path, session_id: str) ->
 def load_review_feedback_for_optimization(prop_state: Dict[str, Any]) -> str:
     """v6.8.17: 为优化轮次加载历史人工审核反馈。
 
-    从 review_history 和 06_feedback/ 中提取之前的审核意见，
-    供 critic/writer prompt 注入，避免重蹈覆辙。
+    从 06_feedback/ 中提取之前的审核意见，供 critic/writer prompt
+    注入，避免重蹈覆辙。
     """
-    review_history = prop_state.get("review_history", [])
-    if not review_history:
-        return ""
-
+    # v6.9.26: 旧实现以 review_history 为门闩，但该字段仅在带 session_id
+    # 的 Web 审核提交时写入——CLI/脚本提交（无 session）不写，导致退回
+    # 反馈永远不注入 critic/writer prompt（闭环断裂）。函数体实际只依赖
+    # feedback_count 与 raw 文件，门闩改为 feedback_count。
     feedback_count = prop_state.get("human_feedback_count", 0)
     if feedback_count == 0:
         return ""
@@ -371,6 +373,8 @@ def load_review_feedback_for_optimization(prop_state: Dict[str, Any]) -> str:
                 lines.append(text[:1500])
                 break
 
-    if len(lines) > 2:
+    # v6.9.26: 旧判断 len(lines) > 2 永假（lines 最多含 header+1 个反馈
+    # 共 2 个元素），函数自引入起恒返回空串——"审核反馈闭环"从未生效。
+    if len(lines) > 1:
         return "\n".join(lines)
     return ""
