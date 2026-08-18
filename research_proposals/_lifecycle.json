@@ -1773,7 +1773,7 @@
       ],
       "quality_warning": "⚠ 质量下降: 连续3轮分数下降（0.86→0.70）。建议人工干预检查优化方向。",
       "review_dossier": {
-        "generated_at": "2026-08-17T10:43:17Z",
+        "generated_at": "2026-08-18T12:27:40Z",
         "pre_review_verdict": "attention",
         "pre_review_reasons": [
           "带质量警告晋级：⚠ 质量下降: 连续3轮分数下降（0.86→0.70）。建议人工干预检查优化方向。"
@@ -4492,7 +4492,7 @@
       ],
       "quality_warning": "⚠ 质量下降: 连续3轮分数下降（0.81→0.53）。建议人工干预检查优化方向。",
       "review_dossier": {
-        "generated_at": "2026-08-18T01:57:31Z",
+        "generated_at": "2026-08-18T12:27:40Z",
         "pre_review_verdict": "reject_lean",
         "pre_review_reasons": [
           "仅通过 0/5 模块"
@@ -7074,7 +7074,7 @@
       ],
       "quality_warning": "⚠ 质量警告: 达到最大轮数8，分数0.78低于达标线0.80。已通过1/5模块。monitor评分0.80。建议人工审核。",
       "review_dossier": {
-        "generated_at": "2026-08-17T13:15:38Z",
+        "generated_at": "2026-08-18T12:27:39Z",
         "pre_review_verdict": "reject_lean",
         "pre_review_reasons": [
           "存在 5 个未解决高危问题"
@@ -8685,7 +8685,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-18T04:02:10Z",
+      "updated_at": "2026-08-18T12:45:23Z",
       "optimization_rounds": 1,
       "last_score": 0.74,
       "score_history": [
@@ -10207,15 +10207,15 @@
           "step": "critic",
           "section_key": "content",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r2-rationale-writer"
           ],
           "attempts": 2,
           "scheduled_at": "",
-          "started_at": "2026-08-18T03:30:58Z",
-          "finished_at": "2026-08-18T04:02:10Z",
-          "last_error": "运行超时/进程僵死",
+          "started_at": "2026-08-18T12:17:29Z",
+          "finished_at": "2026-08-18T12:21:21Z",
+          "last_error": "",
           "cron_job_id": "",
           "error_history": [
             {
@@ -10232,14 +10232,14 @@
           "step": "gap_identify",
           "section_key": "content",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r2-content-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-18T12:25:22Z",
+          "finished_at": "2026-08-18T12:27:36Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -10249,14 +10249,14 @@
           "step": "lit_search",
           "section_key": "content",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r2-content-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-18T12:30:22Z",
+          "finished_at": "2026-08-18T12:31:42Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -10266,14 +10266,14 @@
           "step": "lit_read",
           "section_key": "content",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r2-content-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-18T12:35:22Z",
+          "finished_at": "2026-08-18T12:35:22Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -10283,14 +10283,14 @@
           "step": "lit_note",
           "section_key": "content",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r2-content-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-18T12:40:23Z",
+          "finished_at": "2026-08-18T12:40:23Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -10300,14 +10300,14 @@
           "step": "writer",
           "section_key": "content",
           "round": 2,
-          "status": "pending",
+          "status": "running",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r2-content-critic",
             "general-order-parameter-ultrafast-readout-20260727-r2-content-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
+          "started_at": "2026-08-18T12:45:23Z",
           "finished_at": "",
           "last_error": "",
           "cron_job_id": ""
@@ -10973,7 +10973,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控",
       "created_at": "2026-08-16T03:49:25Z",
-      "updated_at": "2026-08-18T01:45:40Z",
+      "updated_at": "2026-08-18T12:21:22Z",
       "optimization_rounds": 0,
       "last_score": 0.1,
       "score_history": [
@@ -11659,15 +11659,15 @@
           "step": "critic",
           "section_key": "full_review",
           "round": 1,
-          "status": "failed",
+          "status": "pending",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r1-scheme-writer"
           ],
-          "attempts": 3,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-18T01:25:40Z",
-          "finished_at": "2026-08-18T01:45:40Z",
-          "last_error": "超时(1200s)",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": "",
           "error_history": [
             {
@@ -11676,7 +11676,7 @@
               "attempts": 1
             }
           ],
-          "repair_attempts": 1
+          "repair_attempts": 2
         },
         {
           "job_id": "general-berry-mnps3-rashba-20260816-r1-full_review-writer",
@@ -11801,5 +11801,5 @@
       ]
     }
   },
-  "updated_at": "2026-08-18T04:02:10Z"
+  "updated_at": "2026-08-18T12:45:23Z"
 }

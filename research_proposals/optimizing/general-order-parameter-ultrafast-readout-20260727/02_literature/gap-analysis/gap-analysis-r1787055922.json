@@ -1,0 +1,95 @@
+{
+  "gaps": [
+    {
+      "claim": "Cochran量子相干断层成像和Sørensen阿秒序参量重建是该项目的两大核心方法学锚点，但正文仍使用旧编号[62][63]，现已指向错误文献",
+      "missing_evidence": "Cochran和Sørensen工作的正确编号（当前references.md中已重排为[63][64]），以及这些工作与本项目方法学的直接对接关系需要文献支撑",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic",
+        "Sørensen attosecond order parameter reconstruction HHG",
+        "Cochran Sørensen HHG quantum coherence 2025 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rost等人2025年[67]被报告作为CrSb材料特异HHG指纹可探测性的关键实验里程碑，但该文献已从references.md中移除并被Horstmann替代",
+      "missing_evidence": "Rost等人2025年关于CrSb或交变磁体HHG实验观测的原始论文（幽灵引用），以及能够替代[67]支撑CrSb HHG信号可探测性的新文献",
+      "search_keywords": [
+        "Rost high harmonic generation altermagnet CrSb 2025",
+        "altermagnet HHG experimental observation CrSb material fingerprint",
+        "Rost 2025 solid state high harmonic magnetic order"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb在近红外飞秒激光作用下的损伤阈值未建立实验依据，影响强场可行性判据的可信度",
+      "missing_evidence": "CrSb材料在800nm附近飞秒激光照射下的损伤阈值数据、反射率变化强场光学响应稳定性实验",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold femtosecond",
+        "CrSb strong field optical excitation stability near-infrared",
+        "CrSb reflectivity intense laser field experimental",
+        "MnTe altermagnet femtosecond laser damage threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "固体HHG信号噪声水平（shot noise floor）的量化定义和测量方法缺乏文献依据，无法支撑信噪比判据的合理性",
+      "missing_evidence": "固体HHG噪声源（shot noise等）的系统测量和量化定义、高次谐波产生中shot noise基准的实验或理论工作",
+      "search_keywords": [
+        "solid-state HHG shot noise floor measurement",
+        "high harmonic generation noise source shot noise semiconductor",
+        "HHG signal to noise ratio definition solid"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "圆二色性HHG检测对磁有序的灵敏度极限缺乏定量实验依据，影响可辨识性判据的可信度",
+      "missing_evidence": "HHG圆二色性对磁有序参数的最小可探测变化（灵敏度极限）的实验测量数据、circular dichroism HHG detection sensitivity limit",
+      "search_keywords": [
+        "circular dichroism high harmonic generation magnetic order sensitivity",
+        "HHG detection sensitivity limit magnetic field",
+        "CD-HHG detection threshold antiferromagnet altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Fisher信息矩阵用于非线性光学反演问题的可辨识性分析缺乏直接文献支撑，方案中声称的FIM+Bayesian框架需要依据",
+      "missing_evidence": "Fisher information matrix nonlinear optics inverse problem的推导或应用、参数可辨识性分析在HHG/阿秒光谱学中的具体实践",
+      "search_keywords": [
+        "Fisher information matrix nonlinear optics inverse problem",
+        "parameter identifiability high harmonic generation spectroscopy",
+        "Bayesian inversion HHG attosecond spectroscopy reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "半导体布洛赫方程(SBE)在强场极限下的有效性范围（V/Å量级）缺乏明确文献界定，与方案中三重阈值设计相关",
+      "missing_evidence": "SBE在强场固体HHG中的有效性条件和适用范围（场强阈值、禁区带间耦合饱和）的直接实验或理论验证",
+      "search_keywords": [
+        "semiconductor Bloch equation validity strong field limit V/Angstrom",
+        "SBE interband coupling saturation strong field solid HHG",
+        "Bloch equation validity range high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三阶交变磁序参量（自旋、轨道、谷）在HHG中的可区分性（可辨识性框架）缺乏理论或实验依据",
+      "missing_evidence": "能够区分三种不同有序参量对HHG贡献的理论计算或实验方案、不同序参量在HHG通道中的分辨能力研究",
+      "search_keywords": [
+        "altermagnet three order parameters HHG distinguishability",
+        "high harmonic generation orbital magnetic order simultaneous probe",
+        "HHG order parameter distinguishability multi-band"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md中Cochran和Sørensen的arXiv编号(26xx)被标注为(2025)需要核实实际发表状态",
+      "missing_evidence": "Cochran和Sørensen工作的实际arXiv编号和预印本日期，需要更新为准确标注",
+      "search_keywords": [
+        "Cochran quantum coherence tomography arXiv 2025 2026",
+        "Sørensen attosecond order parameter arXiv",
+        "Cochran HHG quantum coherence preprint"
+      ],
+      "priority": "medium"
+    }
+  ]
+}
