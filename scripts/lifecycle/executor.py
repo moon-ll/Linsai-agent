@@ -909,7 +909,7 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         if _log:
             _log.warning(f"[{proposal_id}] 更新 open_critical_issues 失败（非关键路径）")
 
-    min_score = threshold.get("min_overall_score", 0.80)
+    min_score = threshold.get("min_overall_score", 0.85)
     weak_dims = [k for k, floor in self.DIMENSION_FLOOR.items() if k in dim_scores and dim_scores[k] < floor]
     section_passed = score_after >= min_score and len(weak_dims) == 0
 

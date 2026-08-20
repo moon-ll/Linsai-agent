@@ -191,7 +191,7 @@ def rebuild_lifecycle(dry_run: bool = False, proposal_id: Optional[str] = None,
             # 判断该模块是否对抗胜利
             project_type = state.get("project_type", "general")
             threshold = lc._get_quality_threshold(project_type)
-            min_score = threshold.get("min_overall_score", 0.8)
+            min_score = threshold.get("min_overall_score", 0.85)
             dimension_floor = getattr(lc, "DIMENSION_FLOOR", {
                 "innovation": 0.65, "feasibility": 0.65, "rigor": 0.65, "completeness": 0.60
             })

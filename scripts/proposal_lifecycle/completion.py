@@ -92,8 +92,9 @@ class CompletionMixin:
             return {"done": True, "reason": f"全部{len(self.REQUIRED_SECTIONS)}个模块对抗胜利（{','.join(passed_sections)}）"}
 
         # v6.8.16 改进1: 质量天花板检测（收敛检测）
-        # 连续 3 轮分数 ≥0.80 且每轮提升 <2% → 自动晋级到 pending_review
-        CONVERGENCE_SCORE = 0.80
+        # 连续 3 轮分数 ≥0.85 且每轮提升 <2% → 自动晋级到 pending_review
+        # v6.9.27: 收敛线随达标线整体上调（面上 0.85），防止低分课题绕过新标准
+        CONVERGENCE_SCORE = 0.85
         CONVERGENCE_ROUNDS = 3
         CONVERGENCE_DELTA = 0.02
         if len(score_history) >= CONVERGENCE_ROUNDS + 1:

@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """
-test_quality_ceiling_convergence.py — 质量天花板收敛检测回归测试（v6.9.16）
+test_quality_ceiling_convergence.py — 质量天花板收敛检测回归测试（v6.9.16 / v6.9.27）
 
 覆盖 _check_done 收敛/下降分支的边界：
-    1. 稳定收敛：窗口内 4 轮全部 ≥0.80 且每轮提升 <2% → done=True（晋级）
-    2. 骤降防误晋级：前 3 轮 ≥0.80 但当前轮骤降（0.85→0.18 类伪分数污染）
+    1. 稳定收敛：窗口内 4 轮全部 ≥0.85 且每轮提升 <2% → done=True（晋级）
+    2. 骤降防误晋级：前 3 轮 ≥0.85 但当前轮骤降（0.88→0.18 类伪分数污染）
        → 不得按"质量收敛"晋级 pending_review（v6.9.16 修复点）
-    3. 小幅跌破：前 3 轮 ≥0.80、当前轮 0.79 → 不触发收敛
+    3. 小幅跌破：前 3 轮 ≥0.85、当前轮 0.84 → 不触发收敛
     4. 连续 3 轮下降 → 走下降分支 done=True + 暂停警告（不被收敛分支截胡）
+
+v6.9.27：收敛线随达标线整体上调（0.80→0.85），测试数据同步上移。
 
 触发场景来源：2026-08-16 04h 体检发现 general-quantum-geometry 尾部
 [0.84, 0.86, 0.85, 0.77] 距误晋级仅差一个浮点步长（0.86-0.84=0.020000…
@@ -67,7 +69,7 @@ class QualityCeilingConvergenceTests(TestSuite):
 
     def run_tests(self):
         comp = self._comp
-        threshold = {"min_overall_score": 0.80}
+        threshold = {"min_overall_score": 0.85}
         sections = ["rationale", "content", "scheme", "full_review", "references"]
 
         def _state(scores):
@@ -81,28 +83,28 @@ class QualityCeilingConvergenceTests(TestSuite):
                 "open_critical_issues": [],
             }
 
-        # ---------- 1. 稳定收敛：4×0.81 平台 → done=True ----------
-        _state([0.78, 0.81, 0.81, 0.81, 0.81])
+        # ---------- 1. 稳定收敛：4×0.86 平台 → done=True ----------
+        _state([0.83, 0.86, 0.86, 0.86, 0.86])
         res = comp._check_done("p1", threshold)
-        self.assert_eq(res["done"], True, "窗口内 4 轮全 ≥0.80 且提升 <2% → 收敛晋级")
+        self.assert_eq(res["done"], True, "窗口内 4 轮全 ≥0.85 且提升 <2% → 收敛晋级")
         self.assert_in("质量收敛", res["reason"], "收敛晋级 reason 标注质量收敛")
 
         # ---------- 2. 骤降防误晋级（v6.9.16 修复点） ----------
-        # 前 3 轮 [0.83, 0.84, 0.85] ≥0.80 且相邻提升均 <2%，当前轮 0.18
+        # 前 3 轮 [0.86, 0.87, 0.88] ≥0.85 且相邻提升均 <2%，当前轮 0.18
         # （伪分数污染/真实回退）→ 修复前会以"质量收敛"晋级，修复后继续优化
-        _state([0.75, 0.83, 0.84, 0.85, 0.18])
+        _state([0.78, 0.86, 0.87, 0.88, 0.18])
         res2 = comp._check_done("p1", threshold)
         self.assert_eq(res2["done"], False, "3 轮高位后当前轮骤降 → 不按收敛晋级")
 
-        # ---------- 3. 小幅跌破：当前轮 0.79 → 不触发收敛 ----------
-        _state([0.75, 0.82, 0.83, 0.82, 0.79])
+        # ---------- 3. 小幅跌破：当前轮 0.84 → 不触发收敛 ----------
+        _state([0.78, 0.86, 0.87, 0.86, 0.84])
         res3 = comp._check_done("p1", threshold)
-        self.assert_eq(res3["done"], False, "当前轮跌破 0.80 → 不触发收敛")
+        self.assert_eq(res3["done"], False, "当前轮跌破 0.85 → 不触发收敛")
 
         # ---------- 4. 连续 3 轮下降 → 下降分支暂停（不被收敛截胡） ----------
-        # 修复前该序列命中收敛分支（前 3 轮 ≥0.80 且 deltas 全 <2%），
+        # 修复前该序列命中收敛分支（前 3 轮 ≥0.85 且 deltas 全 <2%），
         # 修复后落入下降分支：done=True + 暂停语义 + 质量警告
-        _state([0.85, 0.84, 0.82, 0.60])
+        _state([0.90, 0.89, 0.88, 0.87, 0.60])
         res4 = comp._check_done("p1", threshold)
         self.assert_eq(res4["done"], True, "连续 3 轮下降 → 触发暂停")
         self.assert_in("质量下降", res4.get("quality_warning") or "", "下降分支附质量警告")

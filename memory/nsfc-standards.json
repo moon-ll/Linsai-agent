@@ -1,6 +1,6 @@
 {
   "_description": "NSFC 三类项目质量标准（可随时调整）。本文件是撰写和评审的唯一依据，修改此文件即调整全局标准。",
-  "_last_updated": "2026-08-06",
+  "_last_updated": "2026-08-20",
   "_sources": "基于 NSFC 2026年度项目指南 + 评审专家建议 + 成功申请范本（references/nsfc-templates/）+ 申请书撰写指南 + 申请书评审指南",
   "reference_materials": {
     "_description": "撰写与评审的参考标杆文件，存放于 references/nsfc-templates/",
@@ -232,7 +232,7 @@
         "表达质量权重": 0.1
       },
       "quality_threshold": {
-        "min_overall_score": 0.8,
+        "min_overall_score": 0.85,
         "max_high_issues": 0,
         "max_medium_issues": 3
       },
@@ -268,7 +268,7 @@
         "可行性权重": 0.1
       },
       "quality_threshold": {
-        "min_overall_score": 0.85,
+        "min_overall_score": 0.9,
         "max_high_issues": 0,
         "max_medium_issues": 2
       },
@@ -304,7 +304,7 @@
         "可行性权重": 0.1
       },
       "quality_threshold": {
-        "min_overall_score": 0.9,
+        "min_overall_score": 0.95,
         "max_high_issues": 0,
         "max_medium_issues": 1
       },
