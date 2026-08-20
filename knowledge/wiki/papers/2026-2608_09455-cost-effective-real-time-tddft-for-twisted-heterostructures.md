@@ -2,9 +2,9 @@
 title: "Cost-Effective Real-Time TDDFT for Twisted Heterostructures via Adaptive Subspace Embedding（论文精读笔记）"
 type: "papers"
 created: "2026-08-16T14:06:06Z"
-updated: "2026-08-16T14:06:06Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["rt-TDDFT", "moire超晶格", "紧束缚嵌入", "激发态动力学", "计算方法", "NSFC-强场超快"]
-related: ["moiré强场探测提案", "实时间含时密度泛函", "扭转双层石墨烯", "量子几何反演提案", "高次谐波产生"]
+related: ["general-moire-strong-field-probe-20260726", "moiré强场探测提案", "实时间含时密度泛函", "扭转双层石墨烯", "量子几何反演提案", "高次谐波产生"]
 source_raw: "2026-2608.09455-cost-effective-real-time-tddft-for-twisted-heterostructures.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -53,6 +53,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[general-moire-strong-field-probe-20260726]]
 - [[moiré强场探测提案]]
 - [[实时间含时密度泛函]]
 - [[扭转双层石墨烯]]

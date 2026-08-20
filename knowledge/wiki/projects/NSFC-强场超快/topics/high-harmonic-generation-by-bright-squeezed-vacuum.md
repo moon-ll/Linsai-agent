@@ -2,9 +2,9 @@
 title: "[NSFC] High Harmonic Generation by Bright Squeezed Vacuum"
 type: "review"
 created: "2026-08-15T06:33:11Z"
-updated: "2026-08-15T06:33:11Z"
+updated: "2026-08-20T05:15:27Z"
 tags: ["deepxiv-论文库", "深度解析", "固体HHG"]
-related: ["High Harmonic Generation by Bright Squeezed Vacuum"]
+related: ["2403.15337", "High Harmonic Generation by Bright Squeezed Vacuum"]
 source_raw: ""
 growth_stage: "growing"
 confidence: 0.8
@@ -72,5 +72,6 @@ imported_at: "2026-07-02T12:13:10Z"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2403.15337]]
 - [[High Harmonic Generation by Bright Squeezed Vacuum]]
 <!-- /linsai-wikilinks -->

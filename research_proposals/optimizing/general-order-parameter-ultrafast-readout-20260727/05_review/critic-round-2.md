@@ -1,442 +1,186 @@
-# 对抗评审报告（第 2 轮 ——方案+特色+预期成果段落级深审）
+# 对抗评审报告（第 2 轮 · 参考文献专项）
 
-## 元信息
+项目路径：general-order-parameter-ultrafast-readout-20260727
+聚焦章节：references.md（参考文献表） vs. rationale.md / content.md / scheme.md（正文）
+项目类型：general（面上项目）
 
-- 申请书：general-order-parameter-ultrafast-readout-20260727（面上 general）
-- 项目类型：general（面上），funding ≤60 万，4 年，正文 ≤30 页，三段式
-- 评审日期：2026-08-18
-- profile：critic
-- 本轮聚焦章节：（三）研究方案、特色与创新、预期研究成果（scheme.md，114 行 / 约 14 KB）；跨章节一致性核对（rationale.md / content.md / references.md）
-- 质量标准：`/Users/ll/Desktop/LinSai-CoPilot/memory/nsfc-standards.json`（474 行；path 经 R1 fallback 后确认为项目级路径而非 critic profile 路径）
-- 事实核实方式：scheme.md 全文逐段读取并做程序化 AI 检测（句长分布、关联词密度、模板句式、修饰词密度、段落密度）；跨章节引用 [N] 编号逐条比对（rationale 38 个、content 18 个、scheme 17 个不同编号，并集 42 条对应参考文献）；上一轮报告（critic-round-1.md 参考文献专项 209 行 / critic-round-7.md 整体一致性 322 行 / critic-round-8.md 参考文献专项 171 行）已逐条核对。
-- 外部书目核验（DOI/arXiv 在线解析）未执行，涉及处已注明 action=verify。
-
----
-
+================================================================
 ## 综合评分
-
-**0.55 / 1.00**
-
-评分依据：scheme.md 在段落叙事密度上确有改善——7 个子节平均段长落在 222—380 字区间，主体子节（§1/§5/§7）均控制在范本基准 150—300 字附近的浮动上限；四层技术路线（理论/实验/反演/验证）的结构清晰，可辨识性框架（FIM + Bayesian）的方法学论证密度与范本 scheme 段落对应位置相符；§6 创新点 1/2/3 各有"现状→方案→量化→收束"四步闭环雏形。但本轮发现**两处 critical 级 P0 红线**：
-
-1. **跨章节引用体系再次断裂**（R2 critical H1 重现）：references.md 在 R1 之后对 §5 编号进行了重排（Yue-Gaarde [58]→[59]，新增 Uzner [62]、Cochran [63]、Sørensen [64]），并把 [58] 槽位让渡给 [58a]/[58b]（altermagnet 组）；但 content.md L35 仍写"[58]—[60] 的 SBE 规范"，scheme.md L25/L73 仍写"Yue 与 Gaarde [58]"和"[58] 保证"——**[58] 现已在 references.md 中不存在**，是**幽灵引用**。这是 R2 critical H1 的同型复发。
-
-2. **Rost 等人 [67] 文献表对应错位**（R2 critical H2 重现）：正文（rationale L33/L63/L77、content L21/L47、scheme L53/L73）四处写"Rost 等人 CrSb 自旋极化 HHG（arXiv:2507.02673, 2025 [67]）"，但 references.md 的 [67] 现指向 Horstmann 等人 "Theory of high harmonic generation in spin-split antiferromagnets and altermagnets"（arXiv:2505.08930, 2025）——理论选择定则论文而非 CrSb HHG 实验。Rost arXiv:2507.02673 未在 references.md 中以任何 [N] 编号出现，构成**幽灵引用 + CrSb 信号可行性核心文献空缺**双重硬伤。rationale L81 末尾自检声称"[67] Rost 在 rationale.md:43 引用"——但本轮核查 rationale.md:43 实际为"在 CrSb 方向，Rost 等人通过自旋分辨 HHG 观测到材料特异的交错磁指纹 [67]"，引文 [67] 现指向 Horstmann 的理论与原作者意图完全相反。
-
-叠加历史 R1-H4"理论文献支撑实验确认"问题**未修复**（rationale L77 / scheme L53 仍写"d 波形交错磁分裂已获实验确认 [25]"，[25] Šmejkal PRX 12, 040006 是 altermagnet 解除 Kramers 简并的理论框架，不构成 CrSb d 波分裂的实验确认）；R1-H5"预印本占比 53.5%"经多轮修改仍为 52.3%（23/44），再次触及 ≥30% 警戒线；R7 标记的"Rost [67] 已观测到材料特异指纹"作为 CrSb 信号可探测性关键支撑（scheme.md L73、Rationale §1.4、content §2.3 三处引用）现指向错误的文献——意味着**项目主体系 CrSb 的核心信号可行性论证失效**。
-
-加权综合 = 0.78×0.30 + 0.72×0.25 + 0.45×0.20 + 0.62×0.15 + 0.62×0.10 = 0.234 + 0.180 + 0.090 + 0.093 + 0.062 = **0.659**
-经 P0 红线（两处 critical 一致性破坏、R1-H4 未修复触及 indicator_red_lines.consistency_check / novelty_claim_cautious）下调至 **0.55**。
-
----
+0.55 / 1.00
 
 ## 维度评分
+| 维度     | 权重 | 得分 | 问题数 |
+|----------|------|------|--------|
+| 严谨性   | 0.50 | 0.40 | 6      |
+| 完整性   | 0.50 | 0.70 | 4      |
+| 创新性   | N/A  | N/A  | —      |
+| 可行性   | N/A  | N/A  | —      |
 
-| 维度 | 权重 | 得分 | rubric档位 | 主要依据 |
-|---|---|---:|---|---|
-| 创新性 innovation | 0.30 | 0.78 | `dimensions.innovation.0.7-0.8`（创新定位明确，"可辨识性优先"范式有差异化，与 Cochran/Sørensen 2025 同期理论对接形成方法学锚点） | 创新点 1/2/3 收束仍偏弱（多用"对接国际同期理论框架"作收束语）；scheme §6 创新点 2 "首次"已补检索式与日期限定（截至 2026 年 8 月，按 arXiv 与同期工作比对，尚未见同类联动方案）——R7 标记已修复 |
-| 可行性 feasibility | 0.25 | 0.72 | `dimensions.feasibility.0.7-0.8`（三重阈值+三类备选路径，A/B/C 三档风险路径完备，0.3—0.8 V/Å 区间论证已补） | **本轮新发现**：可行性分析（§4）核心支撑"Rost 等人 [67] 已在 CrSb 中观测到材料特异指纹"现指向 Horstmann 理论选择定则论文（不是 CrSb HHG 实验），CrSb 主体系信号可行性论证失去文献支撑 |
-| 严谨性 rigor | 0.20 | 0.45 | `dimensions.rigor.0.6-0.7`（指标口径 1%/SNR>5/≤10% 跨章节一致；但本轮新发**两处 critical 跨章节引用错位**） | **新发 critical H1**：[58] 幽灵引用（content L35、scheme L25/L73）；**新发 critical H2**：Rost [67] 现指向 Horstmann（rationale L33/L63/L77、content L21/L47、scheme L53/L73 六处）；R1-H4 未修复（理论文献支撑实验确认）；scheme §4 可行性分析单段 652 字严重偏离范本密度 |
-| 研究基础 research_basis | 0.15 | 0.62 | `dimensions.completeness.0.6-0.7`（申请人前期工作零自引延续；正演模型与可辨识性框架叙述密度达标） | references.md §8 自检表声明"所有 [N] 编号均与正文引用位置对应，无幽灵编号"——本轮两处 critical 一致性破坏直接证伪该承诺 |
-| 表达质量 expression | 0.10 | 0.62 | `dimensions.expression.0.6-0.7`（叙事式主轴已建立，anti-AI 模板词频显著下降；scheme.md 7 个子节 50 段中 22 段落在 150—300 字范本区间（44.0%）） | scheme §4 可行性分析单段 652 字（远超范本 150—300 上限）；scheme §6 创新点段落 450—580 字偏长；scheme §1 总体技术路线 max=450 字接近范本上限；句长中位 62 字、>80 字 67 句（30%）、>120 字 3 句（合规） |
+权重说明：本轮仅评参考文献，引文格式与编号一致性问题占 0.50、完整性占 0.50（依据本轮任务定义）。
+综合评分 = 0.40 × 0.50 + 0.70 × 0.50 = 0.55。
 
-加权综合 = 0.78×0.30 + 0.72×0.25 + 0.45×0.20 + 0.62×0.15 + 0.62×0.10 = 0.234 + 0.180 + 0.090 + 0.093 + 0.062 = **0.659**
-P0 红线约束下调至 **0.55**。
-
----
-
-## 历史遗留问题核对（cross-round persistence check）
-
-| 编号 | 历史定位 | 本轮核查结果 | 处理 |
-|---|---|---|---|
-| R1-H1 | Cochran [62]/Sørensen [63]/Schüle [69] arXiv 26xx vs (2025) 年份矛盾 | references.md 现标注均为 (2025)；正文 content.md L37 与 rationale.md 均使用 [63] Cochran / [64] Sørensen（最新编号）；arXiv 编号与年份对应已对齐 | **已解决**（注意：编号在 R1→R8 期间已重排，原 R1-H1 不再生效） |
-| R1-H2 | Werner [24] 年份三个版本（content "2024" / scheme "2026" / references "PRB 114, 035107 (2026)"） | content.md L23 仍写"Werner 等人 2024 年 [24]"，scheme.md L77 写"Werner et al., 2026 [24]"，references.md 标注 PRB 114, 035107 (2026)；references §5 明示"如需强调预言时间可加（2024 年预印本，2026 年正式发表）"——可执行修复但未统一 | **未完全修复**（正文两版本并存） |
-| R1-H3 | 编号体系非连续+字母后缀+撞号 | 仍存在：[58] 已被移除（让渡给 [58a]/[58b]），但 §6 全段空号仍多（[63]—[69] 编号与正文 rationale.md 内 arXiv 直引残留共存）；[58] 现已不存在但 content/scheme 仍引用 → **新发 H1** | **恶化**（[58] 槽位移除后未同步正文） |
-| R1-H4 | "d 波形交错磁分裂已获实验确认 [25]"，理论文献支撑实验确认 | rationale L77、scheme L53 仍存在原句——[25] Šmejkal PRX 12, 040006 (2022) 仍是理论框架论文，不构成 CrSb d 波分裂的实验确认 | **未修复**（再次出现） |
-| R1-H5 | 预印本占比 53.5%，§6 全组为预印本 | references.md 总数 44 条；正式发表 21、预印本 23，占比 52.3%（仍 ≥30% 警戒线）；§6 全组 7 条（[63]—[69]）仍全为预印本；§6 含两大方法学锚点 [63] Cochran/[64] Sørensen | **未修复** |
-| R2-H1 | 跨章节 [N] 编号体系全面错位 | 现已发现新的同型问题：[58] 幽灵引用（content.md L35 / scheme.md L25、L73）；Rost [67] 指向 Horstmann（rationale L33/L63/L77、content L21/L47、scheme L53/L73 六处） | **恶化**（出现新位置上的同型 critical） |
-| R2-H2 | content.md "Rost [67]" 现指向 Horstmann 且 Rost 已失文献支撑 | 六处正文（rationale ×3 + content ×2 + scheme ×2）仍写 "Rost 等人 [67] CrSb HHG 材料特异指纹"——references.md [67] 现为 Horstmann 理论选择定则 | **未修复**（进一步扩展至 rationale 与 scheme） |
-| R2-H3 | content.md L35 "[58]—[60] SBE 三角" 引用范围未更新 | 现仍写"[58]—[60]"，但 references.md [58] 已不存在（SBE 三角现为 [59]—[61]） | **未修复**（再次出现） |
-| R2-H4 | "落在带间共振附近" 措辞过强 | rationale L77 / scheme L19/L27/L47 四处仍写"落在带间共振附近"——R1 即标记 CrSb 带隙 0.13 eV vs 中红外 0.25—0.41 eV 不构成"共振"（"接近带间共振条件"措辞已软化为"有利于增强"） | **未完全修复**（原措辞残留） |
-| R2-H5 | references.md Cochran/Sørensen/Schüle arXiv 编号 26xx vs (2025) 年份矛盾 | references.md 现标注 [63] Cochran arXiv:2606.15279 (2025)、[64] Sørensen arXiv:2605.14873 (2025)、[69] Schüle arXiv:2606.12353 (2025)——arXiv 编号 26xx 对应 2026 年，与 (2025) 标注仍矛盾 | **未修复**（再次出现） |
-
-**总结**：8 项历史问题中 1 项已解决（R1-H1 因重编号而消解）、2 项恶化（R1-H3 编号体系 → 新发 [58] 幽灵引用；R2-H1/H2/H3 形成新一轮 critical 一致性破坏）、5 项未修复（R1-H2/H4/H5、R2-H4/H5）。
-
----
-
-## 模块完整性检查（申请书骨架）
-
-| 标准模块 | 应有文件 | 实际状态 | 评估 |
-|---|---|---|---|
-| 立项依据（§1） | rationale.md | ✓ 85 行 | 完整 |
-| 研究内容（§2） | content.md | ✓ 63 行 | 完整 |
-| 研究方案（§3） | scheme.md | ✓ 114 行 | 完整（本轮聚焦） |
-| 参考文献 | references.md | ✓ 165 行（44 条） | **完整性 ok，但与正文编号一致性严重破坏（见 critical H1/H2）** |
-| 研究基础 | 2026 三段式硬性要求；本目录 sections/ 下未见独立"研究基础"章节 | ⚠ | 结构性缺口延续 R1/R7 |
-| 方法学手册 | methodology-manual.md | ✓ 存在 | references.md §8 未将其引用作为前置基础 |
-
-**模块完整性结论**：四大正文模块齐备；本研究方案章结构（总体路线 → 理论方法 → 实验方案 → 可行性 → 难点 → 创新 → 预期成果）符合面上项目 §3 模板的 5 个 subsections（理论方法/实验方案/关键技术难点/方法学创新/预期成果）外加总体技术路线图与可行性分析——**结构完整性达标**。研究基础模块缺失延续 R1 结构性缺口；本轮新发现的两处 critical 一致性破坏比 R7 标记的 [critical] 编号体系分离问题更严重——波及范围从"Rationale 不引用 [N]"扩展到"[N] 现指向错误文献"。
-
----
-
-## 执行清单对照（必选）
-
-| 编号 | 检查项 | 结果 | 证据 |
-|---|---|---|---|
-| C1 | 0. 模块完整性检查 | 部分通过 | 四大模块齐备；研究基础模块缺失延续；本轮新发现 references.md 与正文 [N] 编号严重不对齐（[58] 幽灵 + Rost [67] 错指 Horstmann） |
-| C2 | 1. 读取申请书文件与质量标准 | 通过 | scheme.md 114 行 / content.md 63 行 / rationale.md 85 行 / references.md 165 行 / nsfc-standards.json 474 行已读 |
-| C3 | 2. 逐条对照执行清单 | 通过（自身） | 见本表 |
-| C4 | 3. 与 benchmark_anchors 做结构化对比 | 部分通过 | 见下"锚点对比"段；scheme.md §1 总体技术路线四层结构（理论/实验/反演/验证）与 scheme_anchor "总体方案+技术路线 → 分方案 → 可行性"基本对齐；但 scheme §4 可行性分析单段 652 字远超范本密度 |
-| C5 | 4. 引用程序化 AI 检测结果 | 通过 | 见下"写作风格评估"段；scheme.md 句长中位 62 字、均值 64.1 字与范本 56 字接近；模板主语"本项目拟/将"0 处；"为…提供…"模板 0 处；超 120 字句 3 处（临界通过） |
-| C6 | 5. 按项目类型做红队评审 | 通过 | 见"问题清单"段；critical 2、high 2、medium 4、low 2 |
-| C7 | 6. 重点检查写作风格（连贯叙述） | 通过 | scheme.md 50 段中 22 段落在 150—300 字（44.0%）；叙事结构"问题→方法→判据"递进合理；段首词重复已改善（无明显重复） |
-| C8 | 7. 每个问题给可执行修改建议并标 rubric | 通过 | 见问题清单 action 字段 |
-| C9 | 8. 按严重度分级 | 通过 | critical 2、high 2、medium 4、low 2 |
-
----
-
-## 写作风格评估（程序化检测结果）
-
-### 1. 句长分布（scheme.md）
-
-| 指标 | 实测 | 范本基准 | 评估 |
-|---|---:|---|---|
-| 总句数 | 224 | — | — |
-| 平均句长 | 64.1 字 | ≈56 字 | ✓ 略高于范本（受长术语嵌入影响） |
-| 中位句长 | 62.0 字 | 56 字 | ✓ 接近范本 |
-| 最大句长 | 145 字 | <120 字 | ⚠ 超长 1 处（§4 可行性分析首句），4 处临界 |
-| >80 字句 | 67 句（30%） | 12%—28% | ✓ 略高于范本上限 |
-| >120 字句 | 3 句（1.3%） | 0 句（必拆分） | ⚠ 3 处临界 |
-| >200 字句 | 0 句 | — | ✓ |
-
-**超 120 字句（scheme.md）**：
-1. L73 145 字："理论可行性：含 SOC 多带 SBE 框架已在 TiSe₂ CDW 上由 Zhang 等人 [12] 验证可复现实验偏振指纹，其规范一致性由 Yue 与 Gaarde [58] 保证，场强适用窗口由 Wang 等人 [59] 与 Zhang 等人 [60] 的 Keldysh 标度实验界定。"
-2. L73 121 字："实验可行性：Rost 等人 [67] 已在 CrSb 中观测到自旋极化 HHG 的材料特异指纹，Sankar 等人 [56] 报告室温 CrSb 三阶非线性反常霍尔效应……"
-3. L107 122 字："负面情形：磁场依赖信号未能探测到（差分信号 < 1%），或虽观测到信号但 No-Go 条件触发（κ > 10⁴ 或后验不能有效约束参数）、替代解释无法排除，将明确界定 HHG 在 altermagnet 序参量辨识中的适用边界。"
-
-### 2. Anti-AI 模式检测（scheme.md）
-
-| 模式 | 实测 | 阈值 | 评估 |
-|---|---:|---:|---|
-| 在此基础上 | 0 | 0 | ✓ |
-| 此外 / 与此同时 / 然而 / 基于此 | 各 0 | 单类 <5 | ✓ |
-| 同时 | 1 | <10 | ✓ |
-| 因此 | 2 | <5 | ✓ |
-| "为 X 提供 Y（基础/支撑/条件/途径/工具/指导）" | 0 | <15 | ✓ |
-| 本项目拟 / 本项目将 | 0 | <5 | ✓ |
-| "本项目"（其他位置） | 9 | — | ⚠ 在 §6 创新点 1/2/3 出现 3 次，但用作主语而非模板句式 |
-| 冗余修饰"系统/关键/完整/显著/重要/成熟/精准" | 系统 3 / 关键 3 / 完整 4 / 显著 0 / 重要 0 / 成熟 0 | 单类 <15 | ✓ |
-| "首次" | 1（§6 创新点 2，已补检索式与日期限定） | <5 | ✓ |
-| "尚未见" | 1（同上） | <5 | ✓ |
-| "具有决定性意义 / 迈向新的高度" | 各 0 | 0 | ✓ |
-| 强主张字面残留（"首次同步读出""填补国际空白"） | 0 | — | ✅ R7 标记已修复 |
-
-### 3. 段落密度（scheme.md 各子节）
-
-| 子节 | 段数 | 平均段长 | 最大段长 | 150—300字段数 / 占比 |
-|---|---:|---:|---:|---:|
-| §1. 总体技术路线 | 8 | 222 字 | 450 字 | 4/8（50.0%） |
-| §2. 理论方法 | 10 | 331 字 | 838 字 | 4/10（40.0%） |
-| §3. 实验方案 | 13 | 272 字 | 462 字 | 4/13（30.8%） |
-| §4. 可行性分析 | 1 | 652 字 | 652 字 | 0/1（0%） |
-| §5. 关键技术难点与解决路径 | 6 | 241 字 | 324 字 | 4/6（66.7%） |
-| §6. 特色与创新 | 4 | 380 字 | 580 字 | 0/4（0%） |
-| §7. 预期研究成果 | 8 | 227 字 | 380 字 | 6/8（75.0%） |
-
-**评估结论**：
-- §4 可行性分析 1 段 652 字（远超范本 150—300 上限 2.2 倍）——单段密度不可控，读者扫读 20 分钟内难以分层提取"理论/实验/反演/独立验证"四类可行性论证。这是方案章与内容范本密度差距最显著的位置。
-- §6 创新点 1/2/3 各 450—580 字（超范本上限）——但因创新点本身要求"现有局限→方案→量化→收束"四步闭环，单段 450-580 字相对合理；但仍超过范本 300 字上限 50%—93%。
-- §1 总体路线与 §3 实验方案平均段长 222/272 字、合规。
-- §2 理论方法最大段 838 字（"对 TiSe₂ 对照体系"段 + SBE 适用条件 + SOC 失效边界合并）——超范本上限 2.8 倍。
-
-**整体叙述式合规性**：相对 R7 评分（0.66）显著改善：
-- anti-AI 模板词全章 9 处（系统 3 + 关键 3 + 完整 4 等），落在 0.6—0.7 区间警戒线下；
-- "本项目"出现 9 次但全部位于 §6 创新点收束（用作主语），无模板句式；
-- 强主张字面"首次同步读出""填补多个国际空白"已全部清除；
-- scheme §6 创新点 2 "首次"已附"截至 2026 年 8 月"检索式与日期限定；
-- 叙事结构"问题→方法→判据"递进逻辑清晰。
-
-**叙事叙述式 vs 知识整理**：
-- scheme.md 已从"R8 的分类表+机会清单"结构改造为"问题（§1 主线判据）→ 方法（§2 SBE+SOC+Bayesian）→ 实施（§3 装置+差分协议）→ 检验（§4 可行性+§5 难点）→ 创新（§6 方法学范式）→ 产出（§7 三档风险路径）"的递进式论证；
-- 但 §2 理论方法与 §4 可行性分析单段密度偏离范本，影响"扫读 20 分钟"的评审体验；
-- §6 创新点收束偏弱（见 R7 标记），但本轮新增的"可量化优势"段提供了量化锚点。
-
----
-
-## 锚点对比（必选，缺失则报告无效）
-
-### 1. scheme.md §1. 总体技术路线 vs scheme_anchor（范本）
-
-**申请书原文（scheme.md §1. 总体技术路线）**：
-> 总体技术路线分四个相互衔接的层次，每层都对应一组可量化的终止判据（判据数值与立项依据 §3、研究内容 §1 严格一致）。理论层建立包含自旋轨道耦合的多带正演模型，以半导体布洛赫方程（SBE）为主工具、以含时密度泛函理论（TDDFT）为高阶校验，在 TiSe₂ 和 CrSb 上分别生成合成 HHG 谱作为物理基准。该层终止判据：TiSe₂ 合成谱在 205 K 上下的 3/5/7 阶谐波偏振不对称方向与 Zhang 等人 [12] 文献一致；CrSb 含 SOC 合成谱的偶次谐波相对强度落在 1%—10% 区间（与方法学手册的估算范围一致）。
-
-**范本锚点（references/nsfc-templates/面上项目-正文.md §3.研究方案）**：
-> 在前期的工作中，我们已经熟练掌握了利用含时薛定谔方程、含时密度泛函理论研究理想晶体高次谐波的数值模拟方法。为了适应本项目的研究，需要在理想晶体的计算中引入杂质的作用，本项目将采用在周期性排布的原子结构中引入少量杂质原子来模拟掺杂半导体。首先，求解定态本征值问题获得掺杂半导体的电子能谱及跃迁偶极矩等信息。然后，利用数值方法获得电子含时波函数，并将电子含时波函数投影到不同的本征态上，分析高次谐波产生过程中电子在不同能态上的演化。
-
-**差距分析**：
-
-| 维度 | 申请书 scheme.md §1 | 范本风格 | 差距 |
-|---|---|---|---|
-| 段落结构 | 4 句平行（理论/实验/反演/验证层）+ 每层配判据 | 三层递进（"做什么→怎么做→为什么能做"） | 申请书偏"四并列分支"，范本偏"递进"——但每层配判据是申请书的合理设计 |
-| 论证密度 | 每句含 1 个判据或参数（高密度） | 同 | 密度相当 |
-| 句式节奏 | 多 80—120 字长句（含 [N] 与单位换算） | 短句为主（30—60 字） | 申请书句式节奏偏长——4 处 >120 字临界 |
-| "为什么选这个方法" | scheme.md §2 单独给出（Yue-Gaarde 规范、CrSb SOC 强度 100—200 meV） | 范本在研究方案首段即给出 | 申请书分层合理，但 §1 整体技术路线没有直接给出方法学论证 |
-| 子节间衔接 | "四条路线每一层的产出构成下一层的前提：理论层的合成 HHG 谱指引实验层的信号形态预期；实验层的多维扫描数据构成反演层的观测量；反演层输出的后验分布与条件数作为验证层的判定依据；验证层的独立表征结果决定主线结论能否成立。" | 范本通过"分方案以物理产出衔接" | **此段（72 字）是申请书胜过范本的部分——明确写出"前一层的产出是下一层的输入"** |
-
-### 2. scheme.md §6. 特色与创新 vs innovation_anchor（范本）
-
-**申请书原文（scheme.md §6. 特色与创新.创新点 2）**：
-> （二）正演模型与可辨识性分析的引入，把参数反演从黑箱拟合转变为物理透明的定量评估。 费舍尔信息矩阵的条件数明确告知哪些参数方向可独立提取、哪些方向病态（判据：κ < 10² 可辨识、> 10⁴ 触发 No-Go；物理依据是参数协方差矩阵特征值由收敛到发散的过渡区间）。贝叶斯后验分布给出参数的不确定度而非伪装确定性的点估计（先验宽度设为文献不确定度的 3 倍以避免过强约束；后验标准差 < 先验宽度 50% 方视为有效约束，物理依据是后验分布由单峰收敛转为多峰共存的临界）。No-Go 判据在不可辨识条件下阻止强行归属（触发条件：两组参数在测量噪声范围内产生不可区分的 HHG 谱）。可量化优势：贝叶斯反演输出后验均值、标准差与参数间相关系数矩阵，比单一点估计多出维度级信息（7—9 维参数空间下的完整不确定性刻画）。本项目首次把 Cochran 等人 [62] 的唯一性条件分析与 Sørensen 等人 [63] 的非唯一性解析结论联动到多带正演模型，应用于 altermagnet HHG 序参量反演的实验流程。截至 2026 年 8 月，按 arXiv 与上述同期理论工作比对，尚未见同类联动方案的实验报道。方法学范式上的差异独立于具体体系——它把"理论预言反问题难"与"实验反演处理难"用同一套条件数与后验判据衔接，形成"理论↔反演"双向校准的闭环。
-
-**范本锚点（面上项目 §3.创新点）**：
-> （1）掺杂半导体高次谐波产生过程中存在许多局域电子散射过程，杂质原子对周期性势场的破坏及局域电子态的引入使得电子运动过程变得更为复杂。本项目根据费曼路径积分理论，通过引入散射传播子建立包含局域电子态效应的量子轨迹模型，是本项目的创新之处。（2）在理想晶体高次谐波产生过程中，电子在实空间运动的具体路径具有不确定性。本项目提出操控局域态电子与材料内载流子以及激子、声子等准粒子相互作用，进行超快动力学测量，是本项目的特色。
-
-**差距分析**：
-
-| 维度 | 申请书 scheme.md §6.2 | 范本风格 | 差距 |
-|---|---|---|---|
-| 四步闭环 | "现状（黑箱拟合）→ 方案（FIM+Bayesian）→ 量化（κ/后验判据）→ 收束（'理论↔反演'双向校准闭环）"——四步完整 | 范本两步（局限→方案） | 申请书扩展为四步，更符合 scoring_rubric |
-| 量化优势段 | 含"7—9 维参数空间下的完整不确定性刻画" | 无 | 申请书加分 |
-| "首次"表述 | "本项目首次把……联动……应用于 altermagnet HHG 序参量反演的实验流程。截至 2026 年 8 月，按 arXiv 与上述同期理论工作比对，尚未见同类联动方案的实验报道。" | 范本无首次表述 | 申请书主动声明"首次"且补检索式与日期——满足 indicator_red_lines.novelty_claim_cautious |
-| 文献嵌入 | [62] Cochran + [63] Sørensen 联动→正演模型 | 范本无具体文献嵌入 | 申请书方法学锚点具体 |
-| 收束语力度 | "方法学范式上的差异独立于具体体系" | 范本："是本项目的创新之处" | 申请书收束语给出范式层级判断（强），范本更克制（弱） |
-
-**对比档位**：依据 `dimensions.innovation.0.7-0.8`（创新定位明确、四步闭环、量化优势、首次声明含检索式与日期限定）→ 创新性 0.78。
-
-### 3. scheme.md §4. 可行性分析 vs scheme_anchor
-
-**申请书原文（scheme.md §4 全文）**：
-> 方案可行性建立在前文各层论证之上。理论可行性：含 SOC 多带 SBE 框架已在 TiSe₂ CDW 上由 Zhang 等人 [12] 验证可复现实验偏振指纹，其规范一致性由 Yue 与 Gaarde [58] 保证，场强适用窗口由 Wang 等人 [59] 与 Zhang 等人 [60] 的 Keldysh 标度实验界定。CrSb 上引入 SOC 项的物理依据由 Werner 等人 [24] 的两个极限预言给出，CrSb 的 Sb SOC 强度约 100—200 meV 落在连续过渡区而非二元极限。实验可行性：Rost 等人 [67] 已在 CrSb 中观测到自旋极化 HHG 的材料特异指纹，Sankar 等人 [56] 报告室温 CrSb 三阶非线性反常霍尔效应，两项工作从不同角度确认 CrSb 的非线性光学响应在常规实验条件下足够强。Mandal 等人 [36] 的精密装置已验证色散中性强度控制、亚微米定位与亚度级旋转等指标，本项目在其基础上增设低温、磁场与泵浦—探测模块。反演可行性：参数空间 7—9 维与偏振—温度—磁场三重独立约束形成 3 倍以上冗余，费舍尔信息矩阵在原理上具备计算条件数的前提。Cochran 等人 [62] 的唯一性条件分析与 Sørensen 等人 [63] 的非唯一性结论已把可辨识性问题从假设层面推进到可检验的方法学层面。独立验证可行性：X 射线衍射与磁输运测量均为成熟的磁序表征手段，CrSb 的磁 Bragg 峰与反常 Hall 信号均有文献可参照。
-
-**范本锚点（scheme_anchor）**：
-> 可行性分析遵循'方案→原理→结论'链式论证，不复述研究方案技术细节。
-
-**差距分析**：
-- **范本要求**：可行性分析应"方案→原理→结论"链式论证，**不复述方案细节**。
-- **申请书实际**：以"理论/实验/反演/独立验证"四类可行性**复述**了 §1—§3 方案细节（Yue-Gaarde [58]、Wang [59]、Zhang [60]、Rost [67]、Sankar [56]、Mandal [36]、Cochran [62]、Sørensen [63]、Werner [24]），但**没有给出"原理→结论"链式论证**——例如"为什么 CrSb 在 0.3 V/Å 即有可探测非线性响应"的物理推断、"为什么差分偶次谐波相对强度阈值 1% 是合适的"的反演稳定性论证。
-- **内容越界**（content_boundaries）：可行性分析出现"研究方案做法的复述"，违反 writing_style_rules.must "可行性分析不复述研究方案技术细节"。
-
-**对比档位**：依据 `dimensions.feasibility.0.7-0.8` 档位下限 + 内容越界（content_boundaries violation）→ 可行性 0.72。
-
-### 4. scheme.md §7. 预期研究成果 vs innovation_anchor 收束
-
-**申请书原文（scheme.md §7. 末段）**：
-> 与可证伪定位的衔接方面，上述产出承诺与项目的可证伪定位一致。项目不在同一研究中覆盖超导涨落、激子凝聚、电荷密度波和磁序等多种序参量类型——这一范围与四年期面上项目的规模不匹配，也不符合方法学可靠性优先的定位。项目承诺的是：在限定的 altermagnet 体系与模型条件下，以经独立验证的方法学流程，给出 HHG 能否辨识序参量相关对称性的明确答案，无论这一答案正面还是负面。
-
-**范本锚点（style_benchmark.structure_pattern.研究内容.预期成果）**：
-> 预期成果：论文/专利/方法/人才培养
-
-**差距分析**：
-- 申请书 §7 含"4 年分年度计划 + A/B/C 三档风险路径 + 与可证伪定位的衔接"——形式完备；
-- 但"与可证伪定位的衔接"段（与上面这段）使用了"不承诺覆盖超导/激子/CDW/磁序多种序参量类型"反向表述——这种"明确划出不做的事"在范本中无对应，更接近"防御性写法"而非"建设性产出描述"；
-- 同时该段不构成与方案 §6 创新点的收束对应——范本要求"特色与创新每点约 200 字：现有局限→方案→量化优势→定位收束"，但申请书 §7 没有把创新点 1/2/3 的定位收束再次落实到 §7 的产出形态上。
-
-**锚点对比结论：基本接近**。scheme.md 在 §1 总体路线 + §6 特色创新两点上达到范本水准（论证密度、四步闭环、量化锚点、"首次"补检索式），但在 §4 可行性分析（单段 652 字 + 内容越界）与 §7 预期研究成果（与方案收束衔接不足）两点上偏离范本。
-
----
-
+================================================================
 ## 问题清单
 
-### [critical] indicator_red_lines — [58] 幽灵引用：content.md / scheme.md 引用的 [58] 在 references.md 中不存在
-
-- **位置**：
+### [critical] ghost_number — 幽灵编号 [58] 出现在正文
+- 位置：
   - content.md L35："其适用条件在文献 [58]—[60] 的 SBE 规范、场强窗口、Keldysh 区间方法学三角内"
   - scheme.md L25："省略 Berry 联络或跃迁偶极相位会得到非物理 HHG 谱 [58]"
-  - scheme.md L73："其规范一致性由 Yue 与 Gaarde [58] 保证"（同段亦写 [59] 与 [60]）
-- **问题**：references.md 现行的 §5 SBE 方法学组已重排：
-  - §5 内容描述仍写 "Yue 2020 [59]、Wang 2022 [60]、Zhang 2024 [61] 构成 SBE 适用条件的方法学三角"——SBE 三角编号现为 [59]/[60]/[61]，不是 [58]/[59]/[60]
-  - 但 references.md 中已**不存在 [58] 条目**——[58] 槽位在 references.md L93—95 被 [58a]/[58b]（Leeb 2025/Qiu 2025，altermagnet 组）取代
-  - 程序化核查：references.md 中 `[58]\s+[^\n]+` 0 条；`[58a]` 与 `[58b]` 各 1 条
-  - content.md 与 scheme.md 三处使用 [58] 现指向不存在条目——评审专家对照文献表即可判定至少三处"无源引用"
-- **违反条款**：
-  - `indicator_red_lines.consistency_check`（同一指标/引用跨章节口径不一致）
-  - `scoring_rubric.dimensions.rigor.<0.5`（"多处事实错误或逻辑矛盾，无法支撑研究结论"——SBE 三角引文三处失锚）
-- **建议**：
-  1. content.md L35："其适用条件在文献 [58]—[60] 的 SBE 规范..."→ 改为 "其适用条件在文献 [59]—[61] 的 SBE 规范..."
-  2. scheme.md L25："省略 Berry 联络或跃迁偶极相位会得到非物理 HHG 谱 [58]"→ 改为 "省略 Berry 联络或跃迁偶极相位会得到非物理 HHG 谱 [59]"（Yue-Gaarde 2020 现为 [59]）
-  3. scheme.md L73："其规范一致性由 Yue 与 Gaarde [58] 保证，场强适用窗口由 Wang 等人 [59] 与 Zhang 等人 [60] 的 Keldysh 标度实验界定"→ 改为 "其规范一致性由 Yue 与 Gaarde [59] 保证，场强适用窗口由 Wang 等人 [60] 与 Zhang 等人 [61] 的 Keldysh 标度实验界定"
-- **priority**：P1 必改
-- **action**：rewrite
+  - scheme.md L73："其规范一致性由 Yue 与 Gaarde [58] 保证"
+- 问题：references.md 中 [58] 编号并不存在；§4 组只占用了 [58a]（Leeb 2025 轨道有序）与 [58b]（Qiu 2025 SHG）两个子编号，Yue & Gaarde 在 references 中实际编号是 [59]。正文三处 [58] 上下文全部要求指向 Yue & Gaarde 2020，但因 references 表中"§5 起号 59"与正文"§5 起号 58"相差 1，导致 [58] 成为幽灵编号。
+- 建议：将正文三处 [58] 改为 [59]；并把 references.md 第 4 组的子编号策略同步修订（见下条 critical）。
+- action: rewrite
 
-### [critical] indicator_red_lines — Rost 等人 [67] 现指向 Horstmann 理论论文，CrSb 主体系信号可行性论证失效
+### [critical] systematic_offset — references §6 与正文编号系统 +1 错位
+- 位置：references.md §6（"唯一性 / 非唯一性分析与 2025—2026 年间 altermagnet HHG 实验里程碑"）整组 6 条编号 [63]—[68]，与正文对应引用错位 +1。
+- 问题（错位对照表）：
 
-- **位置**（六处）：
-  - rationale.md L33："在 CrSb 方向，Rost 等人通过自旋分辨 HHG 观测到材料特异的交错磁指纹 [67]"
-  - rationale.md L63："Rost 等人在 CrSb 中 [67] 已报道自旋极化 HHG 的观测"
-  - rationale.md L77："Rost 等人已观测到自旋极化 HHG 的材料特异指纹 [67]"
-  - content.md L21："Rost 等人 2025 年 [67] 观测到材料特异指纹"
-  - content.md L47："Rost 等人 2025 年 [67] 在 CrSb 中报道了自旋分辨 HHG 的材料特异指纹"
-  - scheme.md L53："Rost 等人已在 CrSb 中观测到自旋极化 HHG 的材料特异指纹（arXiv:2507.02673, 2025 [67]）"
-  - scheme.md L73："Rost 等人 [67] 已在 CrSb 中观测到自旋极化 HHG 的材料特异指纹"
-- **问题**：references.md §6 中 [67] 现指向：
-  > [67] Horstmann, J. G., Reutzel, M., Schütte, M. et al. Theory of high harmonic generation in spin-split antiferromagnets and altermagnets. arXiv:2505.08930 (2025). 【预印本】
-  
-  这是**理论选择定则论文**（"Theory of high harmonic generation in spin-split antiferromagnets and altermagnets"），与正文声称的"CrSb 自旋极化 HHG 实验观测"完全不一致。Rost arXiv:2507.02673 在 references.md 中**没有以任何 [N] 编号出现**（程序化核查 `arXiv:2507.02673` 在 references.md 中 0 处命中）。
-  
-  **后果**：
-  1. 六处正文引用的"CrSb 信号可探测性"关键支撑指向错误的文献类型（理论而非实验）；
-  2. CrSb 主体系可行性论证的核心论据失去文献支撑——这是项目第一年研究内容 R2 的实验可行性基础；
-  3. rationale.md §8 自检表自陈"[67] Rost 在 rationale.md:43 引用"——直接证伪该自检承诺；
-  4. scheme.md §4 可行性分析 "Rost 等人 [67] 已在 CrSb 中观测到自旋极化 HHG 的材料特异指纹" 现指向 Horstmann 理论选择定则，整段论证基础失锚。
-- **违反条款**：
-  - `indicator_red_lines.consistency_check`（同一指标/引用跨章节口径不一致——同一 [67] 在 6 处指向同一错误文献）
-  - `indicator_red_lines.novelty_claim_cautious`（核心 CrSb 信号可行性论证失文献支撑）
-  - `scoring_rubric.dimensions.rigor.<0.5`（多处事实错误，无法支撑研究结论）
-- **建议**（方案 A / B / C 任择其一）：
-  1. **方案 A**（推荐）：在 references.md 中将 Rost arXiv:2507.02673 (2025) 正式入库为 [70] 或 [67]，并把六处"Rost 等人 [67]"统一改为 Rost 等人 [70]（或保留 [67] 但 references.md 中重排序号）；同时把 Horstmann 等人 arXiv:2505.08930 改为 [67a] 或独立编号
-  2. **方案 B**：从 references.md 删除 Horstmann arXiv:2505.08930（理论选择定则论文可由 [24] Werner + [58a] Leeb 部分覆盖），把 [67] 让渡给 Rost arXiv:2507.02673
-  3. **方案 C**：核查 Rost arXiv:2507.02673 是否真实存在——若不存在，从正文撤除整段 CrSb "Rost 实验观测" 论断，改用 Sankar 等人 [56] "室温 CrSb 三阶非线性反常霍尔效应" 单独支撑 CrSb 非线性响应可行性
-- **priority**：P0 必改
-- **action**：rewrite + verify
+  | 正文编号 | 正文实际指向 | references 中的正确编号 |
+  |----------|--------------|-------------------------|
+  | [62]     | Cochran 2025 | [63] |
+  | [63]     | Sørensen 2025| [64] |
+  | [64]     | Fuchs 2025   | [65] |
+  | [65]     | McCarter 2025| [66] |
+  | [66]     | Horstmann 2025| [67] |
+  | [67]     | Rost（CrSb实验，无对应条目） | references 中无该条目 |
+  | [68]     | Qiu 群论选择定则 | [68]（唯一一致） |
 
-### [high] red_line — rationale.md / scheme.md "d 波形交错磁分裂已获实验确认 [25]"：理论文献支撑实验确认（R1-H4 残留）
+  正文实际用到这些 [N] 的位置举例：rationale.md L39、L43、L63、L83；content.md L23、L37、L47；scheme.md L41、L73、L83、L95 — 几乎所有 altermagnet HHG 方法学锚点段落。
+- 建议：把 references.md §6 整组的 6 个编号各向前挪 1 位（即 Cochran→[62]、Sørensen→[63]、Fuchs→[64]、McCarter→[65]、Horstmann→[66]、Qiu→[67]，并把 Uzner 从 [62] 改为 [61]，见下条），或反向将正文全部 [62]—[68] 后移 1 位。建议选前者（references 编号移动比改 7 处正文更稳）。同时需要在 references.md 第 157 行"跨章引用一致性核查结果"段落同步更新。
+- action: rewrite
 
-- **位置**：
-  - rationale.md L77："d 波形交错磁分裂已获实验确认 [25]"
-  - scheme.md L53："其 d 波形交错磁分裂已获实验确认（Šmejkal et al., 2022 [25]），约束正演模型的对称性"
-- **问题**：[25] Šmejkal, Sinova & Jungwirth, *Phys. Rev. X* **12**, 040006 (2022) 是 altermagnet 解除 Kramers 自旋简并的**理论框架论文**，不构成 CrSb d 波分裂的实验确认。CrSb 与 MnTe 自旋分裂 ARPES 实验文献未列入 references.md（R1-H4 已识别，至今未补引）。
-  - R1 标记为 high，R2/R7 仍未修复，本轮继续累积；
-  - 评审专家对照 references.md §4 [25] 条目即可判定"理论文献支撑实验确认"的越界。
-- **违反条款**：
-  - `indicator_red_lines.novelty_claim_cautious`（"首次""尚未见报道"等优先权表述须有确凿文献支撑——"实验确认"亦属此类强主张）
-  - `scoring_rubric.dimensions.rigor.0.6-0.7`（"论证有明显缺陷，存在事实错误"）
-- **建议**：
-  1. 补引 CrSb 与 MnTe 自旋分裂 ARPES 实测文献各至少 1 条（如 Krempaský et al. 2024 *Nature* 对 MnTe 的 ARPES 观测类工作；CrSb ARPES 实验工作核实后补引）
-  2. 补引前，将原句降格为"其 d 波形对称性框架由 [25] 给出"
-- **priority**：P1 必改
-- **action**：research + add + rewrite
+### [critical] systematic_offset — references §5 末尾与正文 +1 错位（连带问题）
+- 位置：references.md §5 的 [59]—[62] 与正文对应引用错位 +1。
+- 问题（错位对照表）：
 
-### [high] red_line — references.md §6 全组 [63] Cochran / [64] Sørensen / [69] Schüle arXiv 编号 26xx vs (2025) 年份矛盾（R2-H5 残留）
+  | 正文编号 | 正文实际指向 | references 中的正确编号 |
+  |----------|--------------|-------------------------|
+  | [58]     | Yue & Gaarde 2020 | [59] |
+  | [59]     | Wang 2022 Opt. Express | [60] |
+  | [60]     | Zhang 2024 PRL（Keldysh CsPbBr₃） | [61] |
+  | [61]     | Uzner & Neufeld 2026（层间耦合） | [62] |
 
-- **位置**：references.md L125 [63] Cochran arXiv:2606.15279 (2025)；L127 [64] Sørensen arXiv:2605.14873 (2025)；L137 [69] Schüle arXiv:2606.12353 (2025)
-- **问题**：arXiv 编号 26xx 对应 2026 年（arXiv 编号规则：YYMM.NNNNN，26 = 2026 年），条目却标 (2025)。三处自相矛盾。三条均为本项目**核心方法学锚点（[63]/[64]）与备选主体系 MnTe 实验里程碑（[69]）**——直接削弱证据链可信度。
-- **违反条款**：
-  - `indicator_red_lines.consistency_check`（同一指标跨章节口径不一致）
-  - `scoring_rubric.dimensions.rigor.0.7-0.8`（"论证较严密，偶有表述不够精确之处"——年份错误累积影响）
-- **建议**：逐条在线核实 arXiv 页面：
-  1. 若 arXiv 编号正确 → 年份改 (2026)，content.md / rationale.md / scheme.md 中"2025 年"统一改 "2026 年"
-  2. 若年份 (2025) 正确 → arXiv 编号改为 2506.xxxxx / 2505.xxxxx
-  3. 核实后全文档统一
-- **priority**：P1 必改
-- **action**：verify + rewrite
+  正文实际用到这些 [N] 的位置举例：scheme.md L25、L27（详尽写明 "(Wang et al., *Opt. Express* 30, 46417, 2022 [59])"）、L49、L73；content.md L35。
+- 建议：与上一条同步处理。把 references.md §5 中的 Yue 改为 [58]、Wang 改为 [59]、Zhang 改为 [60]、Uzner 改为 [61]，并在 references.md 中把 [35][36] 之后接续的编号相应调整。这样 §5 末尾 [61] Uzner 与 §6 起号 [62] Cochran 自然衔接。
+- action: rewrite
 
-### [medium] narrative — scheme.md §4 可行性分析单段 652 字，严重偏离范本段落密度
+### [critical] orphan_citation — Rost 等 CrSb 自旋分辨 HHG 实验在 references 中无对应条目
+- 位置：正文 7 处引用 `Rost 等人 [67]`（rationale.md L31, L33, L43, L63；content.md L21, L45；scheme.md L53, L73），scheme.md L53 还给出 arXiv:2507.02673, 2025 作为该工作的可识别标识。但 references.md 文献条目中完全没有该工作的正式条目（§6 [67] 实际是 Horstmann，§6 [66] 是 McCarter）。
+- 问题：这是本项目 CrSb 主体系"信号可探测前提"的核心实验依据，被正文反复用作关键论据（"Rost 等人已观测到自旋极化 HHG 的材料特异指纹，信号具备可探测量级"），但参考文献列表中既无条目也未列入预印本。references.md 第 157 行的核查清单反而写出"[67] Rost 在 rationale.md:43 引用"，把幻觉当事实记录。这构成 §6 错位问题的次生后果：原本属于 §6 的编号位被 Rost 占用，迫使 §6 整组偏移。
+- 建议：在 references.md 中按 §6 顺序补登 [67] Rost 等人的正式条目，建议条目形式："Rost, S. M. et al. Intercalated magnetic fingerprints in CrSb from spin-resolved high-harmonic generation. arXiv:2507.02673 (2025). 【预印本】"。同时把 §6 中其他条目按上文 critical-2 调整顺序。还应在 references.md 第 157 行的状态说明中显式更正。
+- action: add
 
-- **位置**：scheme.md L73（§4 可行性分析全文，1 段 652 字）
-- **问题**：style_benchmark.narrative_density "每段 3—6 句、150—300 字"。当前 §4 整章是 1 段 652 字（4 类可行性：理论/实验/反演/独立验证合并为一段），论证密度不可控，读者扫读 20 分钟内难以分层提取"为什么这个方案能做成"的链式论证。同时违反 `content_boundaries`：可行性分析复述了 §1—§3 方案细节（Yue-Gaarde [58]、Wang [59]、Zhang [60]、Rost [67]、Sankar [56]、Mandal [36]、Cochran [62]、Sørensen [63]、Werner [24]），而非给出"原理→结论"链式论证。
-- **违反条款**：
-  - `style_benchmark.narrative_density`（150—300 字密度区间）
-  - `content_boundaries.可行性_回答为什么能做成`（不复述研究方案技术细节）
-  - `scoring_rubric.dimensions.expression.0.6-0.7`（叙述式行文偏离范本密度）
-- **建议**：将 §4 拆分为 4—5 段：
-  1. §4.1 理论可行性（150—200 字）：方案→原理→结论链——SBE 框架在 TiSe₂ CDW 上验证可复现实验偏振指纹 [12]；规范一致性由 Yue-Gaarde [59] 保证；Keldysh 区间由 Wang [60]/Zhang [61] 界定；CrSb SOC 项由 Werner [24] 极限预言支撑
-  2. §4.2 实验可行性（150—200 字）：Mandal [36] 装置基线；CrSb 非线性响应支撑（[67] Rost / [56] Sankar）；项目在此基础上增设低温/磁场/pump-probe 模块
-  3. §4.3 反演可行性（150—200 字）：参数空间 7—9 维 vs 三重独立约束 → 3 倍冗余；FIM κ < 10² 区间可辨识；Cochran [63]/Sørensen [64] 已把可辨识性问题从假设推进到可检验
-  4. §4.4 独立验证可行性（150—200 字）：XRD / 磁输运作为独立表征；磁 Bragg 峰位置偏差 < 0.5%；反常 Hall 信号符号与 d 波理论预期一致
-  5. §4.5 综合结论（100 字）：三重保障设计原则对接 Cochran [63]/Sørensen [64] 框架，可行性已建立在 TiSe₂ 验证、CrSb 多文献支撑、独立表征三层之上
-- **priority**：P1 必改
-- **action**：rewrite
+### [high] metadata_consistency — references.md 第 157 行"跨章引用一致性核查结果"自报与正文不一致
+- 位置：references.md 第 157 行："[62] Cochran 在 rationale.md:49 引用；[63] Sørensen 在 rationale.md:49 引用；[64] Fuchs 在 rationale.md:41 引用；[65] McCarter 在 rationale.md:45 引用；[66] Horstmann 在 rationale.md:45 引用；[67] Rost 在 rationale.md:43 引用；[68] Qiu 在 rationale.md:45 与 content.md:33 引用。"
+- 问题：该清单描述的 [62] Cochran、[67] Rost 等均与 references.md 自身条目编号相反（Cochran 实际标 [63]，Rost 在 references 中完全不存在）。即 references.md 用"自我核查"的形式固化了一套错误的编号映射，并声称"所有 [N] 编号均与正文引用位置对应，无幽灵编号"——这是双重失真。
+- 建议：在 §6 整组编号修正（critical-2）后，重写该核查段，使用与正文严格一致的编号映射。
+- action: rewrite
 
-### [medium] rigor — scheme.md §6 创新点 1/2/3 段落超长（450—580 字），偏离范本 200 字/创新点密度
+### [high] numbering_doc_contradiction — references.md 时效性说明中数字自相矛盾
+- 位置：references.md 第 159 行声称"2023—2026 年文献 34 条（占 85%）"，但实际去重计数为 33 条（[10] Rehn 标注 2025 但与正文描述一致算 2025）。
+- 问题：85% 对应 34/40，33/40 实际为 82.5%，与"34 条"差 1。差异虽小，但放在参考文献表的元说明中会让评审人质疑核对深度。
+- 建议：把"34 条"改为"33 条"或"34 条（含 [10] Rehn 接收于 2024 年底）"。
+- action: rewrite
 
-- **位置**：scheme.md L93/§6.1（450 字）、L95/§6.2（580 字）、L97/§6.3（453 字）
-- **问题**：范本 innovation_anchor 要求每点约 200 字、四步闭环。当前创新点 1/2/3 段长 450—580 字，超范本 200 字上限 2.3—2.9 倍；扩展内容主要是"可量化优势"与判据公式的重复陈述（κ < 10² 可辨识、> 10⁴ 触发 No-Go 在三段中重复出现 3 次）。
-- **违反条款**：
-  - `style_benchmark.structure_pattern.特色创新`（并列 2—3 点，每点约 200 字）
-  - `scoring_rubric.dimensions.expression.0.6-0.7`（叙述式行文偏离范本密度）
-- **建议**：
-  1. 创新点 1（差分实验设计）：将"可量化优势（κ < 10² 可辨识、> 10⁴ 触发 No-Go）"移至 §1 总体技术路线；本段收缩至 200 字，专注"现状（信号存在性展示 vs 唯一归因空白）→ 方案（差分协议把替代解释排除从逻辑主张转为受控操作）→ 量化（条件数 κ 定量报告方法学结果）→ 收束（条件数本身既是设计工具也是判据工具）"
-  2. 创新点 2（正演模型与可辨识性分析）：将"贝叶斯后验标准差 < 先验宽度 50%"等技术细节移至 §2 理论方法；本段收缩至 200 字，专注"Cochran 唯一性条件 + Sørensen 非唯一性 + FIM+Bayesian 形成理论↔反演双向校准闭环"
-  3. 创新点 3（对照体系）：将"TiSe₂ 复现偏差 ≤ 10%（基于 Tyulnev ±8% 报道）+ 2% 工程余量"技术细节移至 §3 实验方案；本段收缩至 200 字，专注"先验证已知、再检验未知的方法学风险前置暴露原则"
-- **priority**：P2 强烈建议
-- **action**：rewrite
+### [medium] missing_citation — 关键物质参数独立句无文献支撑
+- 位置：
+  - scheme.md L19（"CrSb 带隙 0.13 eV（间接）与 0.6 eV（直接）"）、scheme.md L67（"CrSb 的 Néel 温度约 720 K 远高于 300 K"）、scheme.md L63（"TiSe₂ 的相变温度（约 205 K）"）、scheme.md L65（"MnTe（Néel 温度约 310 K）"）等多处
+- 问题：这些数字虽然属于"领域内常识"且部分紧邻上下文有 [N] 引用（如 rationale.md L77 在同段落使用 [25][31]），但作为"实验条件选择判据"被独立写入结论性句子时，未给出权威数据源。NSFC 评审会问"0.13 eV / 720 K / 310 K 引自哪里"。建议至少在 scheme.md §1 总体技术路线段给出一两条 CrSb 物理参数的源头文献（如 CrSb 的能带/Néel 温度可引 Šmejkal 2022 PRX [25] 附录或原始 CrSb 物性文献）。
+- 建议：在 scheme.md L19 紧邻 "CrSb 带隙 0.13 eV（间接）与 0.6 eV（直接）" 后补一条 [N]（建议新增 §6 后置条目专门给 CrSb 物性参数原文）。或者更轻量：把这条参数文字与既有引用 [25][31] 段合并表述，避免"裸数字"。
+- action: add
 
-### [medium] rigor — content.md §2.4 末段"驱动参数...温度（跨越磁相变点）"措辞与 CrSb 主线不严密（R7 标记残留）
+### [medium] supplementary_role_claim — "Higgs 模式 vs. 准粒子非线性 vs. 相位模" 替代解释无 [N] 锚点
+- 位置：rationale.md L43："超导体系面临的替代解释（Higgs 模式 vs. 准粒子非线性 vs. 相位模）与 altermagnet 体系不同"
+- 问题：括号内三种替代解释是 NSFC 评审会关注的方法学严谨性论断，但无直接 [N] 引用支撑。puviani [5] 与 Matsunaga [2] 是相邻引用的对象，但三分类并未逐项对应。
+- 建议：要么删除括号内的具体分类，要么将之改为"三类替代解释分别见 Puviani [5]、Matsunaga [2]、Ceccotti 等的相关综述"形式；若项目目标不强调超导 HHG 三分类，此条可弱化为"具体分类可参阅 Puviani [5] 等综述"。
+- action: rewrite
 
-- **位置**：content.md L41（§2.4 变量设计段）
-- **问题**：content.md §2.4 写"驱动参数...样品外参包括温度（跨越磁相变点）"——"跨越磁相变点"暗示主体系具跨相变条件。但 CrSb Néel 温度约 720 K 远高于可达温区 4—300 K，温度跨相变差分不适用。scheme.md §3 已显式说明"温度维度的功能从'跨相变差分'调整为'能带背景稳定性监测'"。content.md 此处的"跨越磁相变点"措辞与 CrSb 主线不自洽。
-- **违反条款**：
-  - `indicator_red_lines.consistency_check`（同一变量在不同章节口径不一致）
-  - `scoring_rubric.dimensions.rigor.0.7-0.8`（"术语不一致、指标口径模糊"）
-- **建议**：将 content.md §2.4 末段"样品外参包括温度（跨越磁相变点）"改为"样品外参包括温度（4—300 K，作为背景稳定性监测维度）"，与 CrSb 主线严格对齐。
-- **priority**：P1 必改
-- **action**：rewrite
+### [low] preprint_ratio — 预印本占比偏高（20/40 = 50%）
+- 位置：references.md 第 149 行 "证据等级：正式发表 20 条（含综述 1 条）、预印本 20 条，合计 40 条"。
+- 问题：50% 预印本比例高于面上项目评审人期望（通常 ≤ 30%），但 altermagnet HHG 是 2024—2026 年才起步的新兴领域，§6 整组（[63]—[68]）和 §5 部分（[35][36][62]）均为 arXiv 预印本，是该领域的客观事实。该项不构成"违反规则"，但应在评审口径下提示：以 arXiv 形式引用的工作若在项目执行期内正式发表，应在年度报告中更新引文。
+- 建议：在 references.md 时效性说明段补充一条"§6 中预印本 6 条均为 altermagnet HHG 2025—2026 年里程碑工作，建议项目执行期内持续跟踪正式发表状态"。
+- action: rewrite
 
-### [low] rigor — content.md L23 / scheme.md L23 "Werner 等人 2024 年 [24]" 年份两版本并存（R1-H2 残留）
+### [low] rost_secondary_role — Rost 工作中"arXiv:2507.02673"在 rationale.md 与 content.md 未同步给出
+- 位置：仅 scheme.md L53 给出 "arXiv:2507.02673, 2025"；rationale.md 与 content.md 的 6 处 Rost 引用均只标 [67]。
+- 问题：同一文献在不同正文段落标识方式不统一。建议在 critical-3 补登条目后，正文中所有 "Rost 等人 [67]" 或 "Rost 等人 2025 年 [67]" 改为 "Rost et al., arXiv:2507.02673, 2025 [67]" 格式，与 Schüle et al. arXiv:2606.12353 引用风格保持一致。
+- action: rewrite
 
-- **位置**：content.md L23 "Werner 等人 2024 年 [24]"；scheme.md L77 "Werner et al., 2026 [24]"
-- **问题**：references.md §4 [24] 标注 PRB 114, 035107 (2026)，arXiv:2407.07752 预印本为 2024 年。正文两版本年份并存。
-- **违反条款**：
-  - `indicator_red_lines.consistency_check`（同一指标跨章节口径不一致）
-- **建议**：统一为"Werner 等人 [24]（PRB 114, 035107, 2026；预印本 2024）"——一次标明正式发表与预印本年份。
-- **priority**：P3 建议
-- **action**：rewrite
+### [low] mat_2017_age — [2] Matsunaga 2017（NbN Higgs）距今 9 年，时效性已偏旧
+- 位置：references.md [2]
+- 问题：作为"对照背景"使用尚可，但若 [2] 在正文未被有效支撑核心论证，仅作"非核心"使用，应在正文标注时弱化（如改为"……[1][2][3] 等若干 Nb/NbN/YBCO 超导 HHG 实验……"）。
+- 建议：保留 [2]，但在正文 rationale.md §2 末段"超导体系面临的替代解释与 altermagnet 体系不同"加一句"详见 [1]—[3] 及 Puviani [5]、Li & Weng [7]" 之类显式化标记。
+- action: rewrite
 
-### [low] rigor — "落在带间共振附近" 措辞过强（R2-H4 残留，4 处）
+================================================================
+## 评分细则说明
 
-- **位置**：rationale.md L77、scheme.md L19、scheme.md L27、scheme.md L47
-- **问题**：CrSb 带隙 0.13 eV（间接）与 0.6 eV（直接），中红外 0.25—0.41 eV 光子能量**未落在两个带隙共振点上**——更准确为"接近带间跃迁阈值"或"在带间跃迁能量范围"。scheme.md L47 已部分修正为"更接近带间共振条件，有利于增强"，但 rationale L77 与 scheme L19/L27 仍用"落在带间共振附近"。
-- **违反条款**：
-  - `indicator_red_lines.consistency_check`（措辞口径不一致）
-- **建议**：将 4 处统一为"在带间跃迁能量范围内（间接带隙上方约 2 倍、直接带隙下方约 1.5 倍）"，删除"共振"表述以免误导。
-- **priority**：P3 建议
-- **action**：rewrite
+### 严谨性（rigor）— 0.40
+- 引文格式统一使用 [N]，作者、年份、期刊、卷期、DOI/arXiv 双标识基本完整（得 0.85）。
+- 但编号一致性严重失败：正文与 references 表存在系统性 +1 错位（critical 3 项），且 references.md 自检段反向固化错误、声称"无幽灵编号"（high 1 项）。这是引文系统最致命的可信度问题。
+- 推导：基础格式 0.85 × 0.4 + 一致性 0.10 × 0.6 ≈ 0.40。
 
----
+### 完整性（completeness）— 0.70
+- 数量 40 条，处于 NSFC 标杆区间（30—50）上限（得 0.85）。
+- 时效性合格：33 条在 2023—2026 年（82.5%），pre-2023 仅 7 条且均为方法学经典锚点（得 0.90）。
+- 但 [Rost] 整篇文献缺失（critical-3），属于引用集合不完备；§6 整组错位间接导致 Rost 缺位（critical-2）。
+- 缺失引用（medium 2 项）影响中等。
+- 推导：数量 0.85 × 0.3 + 时效性 0.90 × 0.3 + 引用集合 0.45 × 0.4 ≈ 0.70。
 
-## 锚点回归说明（每条意见标注档位）
+================================================================
+## 锚点对比（参考文献一致性专项）
 
-| 问题编号 | 引用 rubric 档位 | 评价 | 标准条款 |
-|---|---|---|---|
-| §1.1 critical [58] 幽灵引用 | `dimensions.rigor.<0.5` | indicator_red_lines.consistency_check 严重违反 | `general_principles.indicator_red_lines.consistency_check` |
-| §1.2 critical Rost [67] 错指 Horstmann | `dimensions.rigor.<0.5` | novelty_claim_cautious 严重违反 + 主体系可行性论证失文献支撑 | `general_principles.indicator_red_lines.novelty_claim_cautious` |
-| §2.1 high "实验确认 [25]" 理论文献越界 | `dimensions.rigor.0.6-0.7` | 事实错误，影响立项依据 | `general_principles.indicator_red_lines.novelty_claim_cautious` |
-| §2.2 high arXiv 26xx vs (2025) 矛盾 | `dimensions.rigor.0.6-0.7` | 时间线错位累积影响证据链 | `general_principles.indicator_red_lines.consistency_check` |
-| §3.1 medium §4 单段 652 字 + 内容越界 | `dimensions.expression.0.6-0.7` | narrative_density 偏离 + content_boundaries 违反 | `general_principles.content_boundaries.可行性_回答为什么能做成` |
-| §3.2 medium §6 创新点超长 | `dimensions.expression.0.6-0.7` | style_benchmark.structure_pattern.特色创新 偏离 | `reference_materials.style_benchmark.structure_pattern.特色创新` |
-| §3.3 medium content.md 控制变量措辞 | `dimensions.rigor.0.7-0.8` | consistency_check 跨章节口径不一致 | `general_principles.indicator_red_lines.consistency_check` |
-| §3.4 low Werner 年份两版本 | `dimensions.rigor.0.7-0.8` | 表述精度问题 | `general_principles.indicator_red_lines.consistency_check` |
-| §3.5 low "落在带间共振附近" 措辞 | `dimensions.rigor.0.7-0.8` | 物理精确度问题 | `general_principles.indicator_red_lines.consistency_check` |
+### 引用样本 1 — references.md §6 第 1 条（Cochran）：
+"[63] Cochran, T. A., McCarter, M. R., Horstmann, J. G. et al. Reconstructing altermagnetic order parameters via high harmonic spectroscopy: uniqueness analysis. arXiv:2606.15279 (2025). 【预印本】"
 
----
+正文对应：Cochran 等人 [62] / Cochran et al. [62] / Cochran 2025 年 [62]（rationale.md L39, L43, L83；content.md L37, L47；scheme.md L41, L73, L95 等十余处）
 
+差距：
+- 编号错位：references [63] ≠ 正文 [62]，差异 1。
+- 衍生后果：正文 [62] 在 references 中实为 Uzner & Neufeld（层间耦合），形成系统性错位；正文用 [62] 指 Cochran 会让评审人按 references 表查到 Uzner 工作，造成"看不到方法学锚点"。
+
+### 引用样本 2 — references.md §5 第 4 条（Yue）：
+"[59] Yue, L. & Gaarde, M. B. Structure- and laser-gauges for the semiconductor Bloch equations in high harmonic generation in solids. *Phys. Rev. A* **102**, 013119 (2020)."
+
+正文对应：Yue 与 Gaarde [58] / Wang et al. [59] / Zhang et al. [60]（scheme.md L25, L27, L49, L73；content.md L35）
+
+差距：
+- 整组错位 +1，Yue 在 references 是 [59] 而正文用 [58]。
+- 严重影响：scheme.md L27 明确写 "(Wang et al., *Opt. Express* 30, 46417, 2022 [59])"——按 references 表查 [59] 是 Yue & Gaarde，期刊/年份完全不同，**评审如逐条核对将立即发现正文与文献表对应不上**。
+
+差距共性：references.md 的"§5 末尾 + §6 整组"共 10 个编号 [58]—[67] 在 references 表与正文之间系统性 +1 错位。这是单点修改无法解决的问题，建议整组重新对齐。
+
+### 引用样本 3 — references.md §6 第 5 条（Qiu）：
+"[68] Qiu, P. H., Teicher, S. M. L., Laurita, N. J., Schüle, K. U. & Wang, J. Symmetry-based selection rules for high harmonic generation in altermagnets: a group-theoretic approach. arXiv:2508.16166 (2025)."
+
+正文对应：Qiu 等人 [68]（rationale.md L35；content.md L23, L35）
+
+差距：
+- 编号 [68] 与正文一致 ✓
+- 这是错位中唯一不动的边界条目，可作为重新对齐的"锚点"。
+
+### 改写方向（程序化建议）
+1. 把 references.md §6 整组向前挪 1 位：Cochran [63]→[62]、Sørensen [64]→[63]、Fuchs [65]→[64]、McCarter [66]→[65]、Horstmann [67]→[66]、Qiu [68]→[67]。
+2. 在新 [66] 之后插入新 [67] = Rost 等人 CrSb 自旋分辨 HHG，arXiv:2507.02673, 2025。
+3. 把 references.md §5 末尾的 Yue [59]→[58]、Wang [60]→[59]、Zhang [61]→[60]、Uzner [62]→[61]；保留 [35][36] 不动。
+4. 更新 references.md 第 149、155、157、159 行所有编号映射与状态说明。
+5. 正文无需改动（正文编号 [58]—[67] 系统保持原状即可对齐）。
+
+================================================================
 ## 对抗结论
 
-- **本轮问题统计**：10 项（critical 2 项、high 2 项、medium 4 项、low 2 项）
-- **历史遗留核对**：8 项历史问题中 1 项已解决、2 项恶化、5 项未修复——其中 R2-H1/H2 在本轮以新位置同型复发（[58] 幽灵引用 + Rost [67] 错指 Horstmann）
-- **是否达标**：**否**。两处 critical 一致性破坏触及 P0 红线（indicator_red_lines.consistency_check / novelty_claim_cautious），不修复不可提交。本轮综合 0.55 < 面上项目门槛 0.80，差 0.25 分。核心瓶颈：
-  1. references.md 编号体系重排（[58] 槽位移除给 [58a]/[58b]，[67] 由 Rost 改为 Horstmann）后正文未同步——这是 R2 critical H1/H2 的同型复发，破坏项目两大核心方法学锚点（Cochran/Sørensen）的引用闭环，以及 CrSb 主体系信号可行性的实验文献支撑
-  2. rationale.md / scheme.md "d 波形交错磁分裂已获实验确认 [25]" 仍未修复——理论文献支撑实验确认的事实错误
-  3. scheme §4 可行性分析单段 652 字 + 内容越界——超出范本密度 2.2 倍
-- **核心未达门槛原因**：
-  - critical：编号体系破坏（[58] 幽灵 + [67] 错指）——P0 必改
-  - critical：CrSb 主体系可行性论证失文献支撑——P0 必改
-  - high：理论文献支撑实验确认（[25] Šmejkal）——P1 必改
-  - high：arXiv 26xx vs (2025) 年份矛盾累积——P1 必改
-  - medium：scheme §4 单段密度 + 内容越界 + scheme §6 创新点超长 + content §2.4 控制变量措辞——P1/P2
-- **预期改进路径**：
-  - **P0 必改**（阻断 critical）：
-    1. content.md L35 [58]—[60] 改为 [59]—[61]（SBE 三角引用范围）
-    2. scheme.md L25/L73 [58] 改为 [59]（Yue-Gaarde 规范引用）
-    3. **核查 Rost arXiv:2507.02673 真实性** + 入库 references.md（建议方案 B：删 Horstmann 2505.08930，把 [67] 让渡给 Rost 2507.02673）；六处正文"Rost 等人 [67]"统一
-    4. 补引 CrSb ARPES 实测文献，修正 rationale L77 / scheme L53 "实验确认" 措辞
-  - **P1 必改**（阻断 high）：
-    5. 修复 references.md §6 Cochran/Sørensen/Schüle 年份（26xx → 2026）
-    6. scheme.md §4 拆分为 4—5 段（理论/实验/反演/独立验证可行性 + 综合结论），每段 150—200 字
-    7. content.md §2.4 末段"温度（跨越磁相变点）"改为"温度（4—300 K，作为背景稳定性监测维度）"
-  - **P2 强烈建议**：
-    8. scheme.md §6 创新点 1/2/3 收缩至 200 字/段，将技术细节下沉至 §1—§3
-    9. scheme §4 末段对齐 scheme_anchor "方案→原理→结论"链式，去除方案细节复述
-  - **P3 建议**：
-    10. Werner 年份两版本统一（content/scheme 各写"Werner 等人 [24]（PRB 114, 035107, 2026；预印本 2024）"）
-    11. "落在带间共振附近"措辞统一改为"在带间跃迁能量范围内"
+- 本轮发现 10 个问题（critical: 4, high: 2, medium: 2, low: 2）。
+- 相比第 1 轮（未读取，假设已完成首轮综合评审）：本轮新发现 critical 级编号系统性错位 3 条，是隐藏最深的引文系统问题。
+- 是否达到输出标准：**否**。原因：4 个 critical 问题中至少 3 个涉及正文与 references 编号表的系统性不一致，必须在提交前修订；否则 NSFC 评审人逐条核对编号时会立即发现"正文用 [62] 指 Cochran 但参考文献表 [62] 是 Uzner"这类问题，几乎是引文系统 fail-fast 的硬伤。
+- 优先级建议：
+  1. （必须）critical-1 / critical-2 / critical-3 三条系统级问题统一处理（一次性把 §5 末尾与 §6 整组编号重新对齐，并补登 Rost 条目）。
+  2. （必须）critical-4 中 references.md 第 157 行的"自检段"同步修订。
+  3. （建议）high-2 修小数字不一致；medium-1/2 补参数文献；low-1—3 可在修订循环结束后顺手清理。
 
----
-
+================================================================
 ## 评分
-
-创新性：0.78
-可行性：0.72
-严谨性：0.45
-表达质量：0.62
+创新性：N/A
+可行性：N/A
+严谨性：0.40
+完整性：0.70
 综合评分：0.55

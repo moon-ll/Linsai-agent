@@ -2,9 +2,9 @@
 title: "Ultrafast μeV-Precision Bandgap Engineering in Low-Dimensional Topological Insulators"
 type: "papers"
 created: "2026-08-17T10:00:06Z"
-updated: "2026-08-17T10:00:06Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["低维拓扑绝缘体", "强场超快", "带隙工程", "μeV精度", "拓扑相变", "瞬态量子相"]
-related: ["低维量子材料", "强场光学调控", "拓扑能隙", "瞬态量子相光学探测", "超快泵浦-探测"]
+related: ["低维量子材料", "强场光学调控", "拓扑绝缘体", "拓扑能隙", "瞬态量子相光学探测", "超快泵浦-探测"]
 source_raw: "2025-2511.16165-ultrafast-μev-precision-bandgap-engineering-in-low-dimension.md"
 growth_stage: "growing"
 confidence: 0.45
@@ -76,6 +76,7 @@ review_status: "pending"
 
 - [[低维量子材料]]
 - [[强场光学调控]]
+- [[拓扑绝缘体]]
 - [[拓扑能隙]]
 - [[瞬态量子相光学探测]]
 - [[超快泵浦-探测]]

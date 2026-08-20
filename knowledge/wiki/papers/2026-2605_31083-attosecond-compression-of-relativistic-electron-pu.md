@@ -2,9 +2,9 @@
 title: "Attosecond Compression of Relativistic Electron Pulses via Continuous Harmonic Undulator Resonance — 论文精读"
 type: "papers"
 created: "2026-08-17T09:55:15Z"
-updated: "2026-08-17T09:55:15Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["attosecond science", "MeV UED", "harmonic undulator", "electron pulse compression", "mid-IR strong-field coupling", "pump-probe synchronization"]
-related: ["attosecond pulse generation", "longitudinal phase space manipulation", "non-integer harmonic resonance", "single-period undulator", "strong-field ultrafast optics"]
+related: ["Attosecond Compression of Relativistic Electron Pulses via Continuous Harmonic Undulator Resonance", "attosecond pulse generation", "longitudinal phase space manipulation", "non-integer harmonic resonance", "single-period undulator", "strong-field ultrafast optics", "相位匹配"]
 source_raw: "2026-2605.31083-attosecond-compression-of-relativistic-electron-pu.md"
 growth_stage: "growing"
 confidence: 0.65
@@ -75,9 +75,11 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Attosecond Compression of Relativistic Electron Pulses via Continuous Harmonic Undulator Resonance]]
 - [[attosecond pulse generation]]
 - [[longitudinal phase space manipulation]]
 - [[non-integer harmonic resonance]]
 - [[single-period undulator]]
 - [[strong-field ultrafast optics]]
+- [[相位匹配]]
 <!-- /linsai-wikilinks -->

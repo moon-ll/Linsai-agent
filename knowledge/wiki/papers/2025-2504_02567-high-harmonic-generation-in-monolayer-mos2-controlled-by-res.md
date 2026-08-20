@@ -2,9 +2,9 @@
 title: "谐振/近谐振脉冲超快调控单层MoS2紫外波段高次谐波——精读笔记（arXiv:2504.02567）"
 type: "papers"
 created: "2026-08-16T13:53:15Z"
-updated: "2026-08-16T13:53:15Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["HHG", "单层MoS2", "激子共振", "泵浦-探测", "强场超快", "二维材料"]
-related: ["moire强场探针", "固体高次谐波", "带间/带内电流", "激子动力学", "非微扰非线性光学"]
+related: ["general-moire-strong-field-probe-20260726", "moire强场探针", "固体高次谐波", "带间/带内电流", "激子动力学", "非微扰非线性光学"]
 source_raw: "2025-2504.02567-high-harmonic-generation-in-monolayer-mos2-controlled-by-res.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -27,6 +27,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[general-moire-strong-field-probe-20260726]]
 - [[moire强场探针]]
 - [[固体高次谐波]]
 - [[带间/带内电流]]

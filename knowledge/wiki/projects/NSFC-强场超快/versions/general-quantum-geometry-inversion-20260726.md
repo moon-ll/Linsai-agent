@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-quantum-geometry-inversion-20260726"
 project_type: "general"
 latest_round: 7
-last_score: 0.7
+last_score: 0.77
 status: "optimizing"
-created: "2026-08-18T13:13:29Z"
-updated: "2026-08-18T13:13:29Z"
+created: "2026-08-20T15:39:06Z"
+updated: "2026-08-20T15:39:06Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-quantum-geometry-inversion-20260726`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.7
+**当前分数**：0.77
 **状态**：优化中
-**同步时间**：2026-08-18T13:13:29Z
+**同步时间**：2026-08-20T15:39:06Z
 
 ---
 
@@ -28,22 +28,22 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 264 |
+| content | content | 240 |
 | full_review | full_review | 256 |
-| rationale | rationale | 113 |
-| references | references | 62 |
+| rationale | rationale | 112 |
+| references | references | 160 |
 | scheme | scheme | 186 |
 
 ## 课题简介
 
 # 课题说明
 
-**课题名称**：Q2（科学问题）**：以 CDW（TiSe₂、1T-TaS₂）为代表的中等关联材料中，在何种 Hubbard-$U/W$ 与温度区间，HHG 偏振响应仍保留可独立辨识的 $\Omega(\mathbf{k})$、$g(\mathbf{k})$ 信息？超过该边界时，多体效应（CDW 序参量、doublon-holon 复合、带折叠）使 $\Omega$、$g$ 的辨识不可分离。
+**课题名称**：Q2（对应 R3 + R4）：** 以 CDW（TiSe₂、1T-TaS₂）为代表的中等关联材料中，在何种 Hubbard-$U/W$ 与温度区间，HHG 偏振响应仍保留可独立辨识的 $\Omega(\mathbf{k})$、$g(\mathbf{k})$ 信息？超过该边界时，多体效应使 $\Omega$、$g$ 的辨识不可分离。
 **项目类型**：面上项目
 **课题 ID**：`general-quantum-geometry-inversion-20260726`
-**当前状态**：优化中（第0轮，score 0.70）
+**当前状态**：优化中（第0轮，score 0.77）
 **启动日期**：2026-07-26
-**最后更新**：2026-08-18
+**最后更新**：2026-08-19
 
 ---
 
@@ -64,7 +64,7 @@ confidence: 1.0
 
 ## 优化历史
 | 轮次 | 分数 | 问题数 | high问题 | 时间 |
-|----
+|------|------|--------|----
 
 （完整简介见 [源文件](research_proposals/optimizing/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft-merged.md)）
 

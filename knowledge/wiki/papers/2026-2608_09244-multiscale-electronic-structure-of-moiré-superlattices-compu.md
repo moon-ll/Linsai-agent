@@ -2,9 +2,9 @@
 title: "论文精读：Multiscale Electronic Structure of Moiré Superlattices——万原子以上 moiré 电子结构的多尺度计算成本分析"
 type: "papers"
 created: "2026-08-16T14:03:39Z"
-updated: "2026-08-16T14:03:39Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["moire超晶格", "电子结构计算", "紧束缚模型", "泵浦-探测模拟", "计算标度律", "NSFC-强场超快"]
-related: ["TDDFT", "moire强场探测", "twistronics", "混合计算管线", "量子几何反演"]
+related: ["TDDFT", "general-moire-strong-field-probe-20260726", "moire强场探测", "twistronics", "混合计算管线", "量子几何反演"]
 source_raw: "2026-2608.09244-multiscale-electronic-structure-of-moiré-superlattices-compu.md"
 growth_stage: "growing"
 confidence: 0.65
@@ -51,6 +51,7 @@ review_status: "pending"
 ## 关联概念
 
 - [[TDDFT]]
+- [[general-moire-strong-field-probe-20260726]]
 - [[moire强场探测]]
 - [[twistronics]]
 - [[混合计算管线]]

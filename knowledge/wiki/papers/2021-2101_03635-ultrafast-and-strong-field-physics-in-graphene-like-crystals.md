@@ -2,9 +2,9 @@
 title: "石墨烯类晶体中的超快强场物理：Bloch能带拓扑与高次谐波产生"
 type: "papers"
 created: "2026-08-17T09:55:36Z"
-updated: "2026-08-17T09:55:36Z"
+updated: "2026-08-19T05:16:11Z"
 tags: ["高次谐波产生", "Bloch能带拓扑", "石墨烯类晶体", "强场超快物理", "固体HHG", "拓扑探测"]
-related: ["NSFC-强场超快", "transient-quantum-phase-optical", "固态高次谐波", "瞬态量子相光学读取", "能带拓扑探测"]
+related: ["NSFC-强场超快", "transient-quantum-phase-optical", "固态高次谐波", "瞬态量子相光学读取", "能带拓扑探测", "高次谐波产生"]
 source_raw: "2021-2101.03635-ultrafast-and-strong-field-physics-in-graphene-like-crystals.md"
 growth_stage: "growing"
 confidence: 0.5
@@ -73,4 +73,5 @@ review_status: "pending"
 - [[固态高次谐波]]
 - [[瞬态量子相光学读取]]
 - [[能带拓扑探测]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

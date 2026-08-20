@@ -2,9 +2,9 @@
 title: "压缩光驱动高次谐波产生的非经典截止频率涨落"
 type: "papers"
 created: "2026-08-17T09:52:39Z"
-updated: "2026-08-17T09:52:39Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["squeezed-light", "HHG", "cutoff-fluctuations", "sub-SQL", "Heisenberg-witness", "quantum-enhanced-spectroscopy", "attosecond"]
-related: ["Moiré-strong-field-probe", "bright-squeezed-vacuum-driven-HHG", "self-calibrating-quantum-metrology", "squeezing-transfer-in-nonlinear-processes"]
+related: ["2605.21925", "Moiré-strong-field-probe", "bright-squeezed-vacuum-driven-HHG", "general-moire-strong-field-probe-20260726", "self-calibrating-quantum-metrology", "squeezing-transfer-in-nonlinear-processes", "相位匹配", "高次谐波产生"]
 source_raw: "2026-2605.21925-nonclassical-cutoff-fluctuations-in-squeezed-light-driven-hi.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -103,8 +103,12 @@ Moiré 探针本质上是把"周期性的多层结构"做成对驱动场涨落�
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2605.21925]]
 - [[Moiré-strong-field-probe]]
 - [[bright-squeezed-vacuum-driven-HHG]]
+- [[general-moire-strong-field-probe-20260726]]
 - [[self-calibrating-quantum-metrology]]
 - [[squeezing-transfer-in-nonlinear-processes]]
+- [[相位匹配]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

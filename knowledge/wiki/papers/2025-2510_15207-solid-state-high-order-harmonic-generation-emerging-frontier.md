@@ -2,9 +2,9 @@
 title: "固态高次谐波产生：超快与量子光科学的新兴前沿——论文精读笔记"
 type: "papers"
 created: "2026-08-15T22:07:22Z"
-updated: "2026-08-17T05:19:27Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["固态HHG", "量子几何", "Berry相位", "综述", "强场超快", "量子光学"]
-related: ["Berry曲率", "带间/带内电流", "拓扑物态光学读出", "瞬态量子相位光学", "量子度规", "非经典光产生", "高次谐波产生"]
+related: ["2510.15207", "Berry曲率", "带间/带内电流", "拓扑物态光学读出", "瞬态量子相位光学", "量子度规", "非经典光产生", "高次谐波产生"]
 source_raw: "2025-2510.15207-solid-state-high-order-harmonic-generation-emerging-frontier.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -42,6 +42,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2510.15207]]
 - [[Berry曲率]]
 - [[带间/带内电流]]
 - [[拓扑物态光学读出]]

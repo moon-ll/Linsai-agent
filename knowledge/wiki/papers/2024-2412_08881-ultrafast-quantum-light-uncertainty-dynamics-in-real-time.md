@@ -2,9 +2,9 @@
 title: "实时观测超快量子光不确定性动力学：四波混频压缩光与阿秒加密构想（精读笔记）"
 type: "papers"
 created: "2026-08-16T13:48:02Z"
-updated: "2026-08-16T13:48:02Z"
+updated: "2026-08-19T05:16:11Z"
 tags: ["压缩光", "四波混频", "量子不确定性", "阿秒物理", "量子加密", "超快量子光学"]
-related: ["BSV驱动HHG", "NSFC-强场超快", "平衡零拍探测", "序参量超快读出", "量子层析"]
+related: ["BSV驱动HHG", "NSFC-强场超快", "general-order-parameter-ultrafast-readout-20260727", "平衡零拍探测", "序参量超快读出", "量子层析"]
 source_raw: "2024-2412.08881-ultrafast-quantum-light-uncertainty-dynamics-in-real-time.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -53,6 +53,7 @@ review_status: "pending"
 
 - [[BSV驱动HHG]]
 - [[NSFC-强场超快]]
+- [[general-order-parameter-ultrafast-readout-20260727]]
 - [[平衡零拍探测]]
 - [[序参量超快读出]]
 - [[量子层析]]

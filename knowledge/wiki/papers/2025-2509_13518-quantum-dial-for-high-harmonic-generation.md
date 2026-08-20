@@ -2,9 +2,9 @@
 title: "Bright Squeezed Vacuum as a Quantum Dial for High-Harmonic Generation"
 type: "papers"
 created: "2026-08-17T09:48:03Z"
-updated: "2026-08-17T09:48:03Z"
+updated: "2026-08-19T05:16:11Z"
 tags: ["BSV", "HHG", "quantum-light-driving", "squeezed-vacuum", "strong-field-ultrafast", "angular-distribution", "low-damage-threshold"]
-related: ["angular-emission-control", "bright-squeezed-vacuum", "quantum-driven-HHG", "strong-field-squeezed-light"]
+related: ["Quantum Dial for High-Harmonic Generation", "angular-emission-control", "bright-squeezed-vacuum", "quantum-driven-HHG", "strong-field-squeezed-light"]
 source_raw: "2025-2509.13518-quantum-dial-for-high-harmonic-generation.md"
 growth_stage: "growing"
 confidence: 0.65
@@ -67,6 +67,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Quantum Dial for High-Harmonic Generation]]
 - [[angular-emission-control]]
 - [[bright-squeezed-vacuum]]
 - [[quantum-driven-HHG]]

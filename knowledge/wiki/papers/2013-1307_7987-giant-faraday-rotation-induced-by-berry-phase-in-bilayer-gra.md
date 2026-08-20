@@ -2,9 +2,9 @@
 title: "Giant Faraday rotation induced by Berry phase in bilayer graphene under strong terahertz fields"
 type: "papers"
 created: "2026-08-17T09:58:15Z"
-updated: "2026-08-17T09:58:15Z"
+updated: "2026-08-19T05:16:11Z"
 tags: ["Berry相位", "双层石墨烯", "法拉第旋转", "强太赫兹场", "高次边带", "瞬态量子相", "强场超快"]
-related: ["Berry相位", "双层石墨烯", "强场THz驱动", "法拉第旋转", "瞬态量子相光学", "高次边带产生"]
+related: ["Berry相位", "双层石墨烯", "强场THz驱动", "拓扑绝缘体", "法拉第旋转", "瞬态量子相光学", "高次边带产生"]
 source_raw: "2013-1307.7987-giant-faraday-rotation-induced-by-berry-phase-in-bilayer-gra.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -113,6 +113,7 @@ review_status: "pending"
 - [[Berry相位]]
 - [[双层石墨烯]]
 - [[强场THz驱动]]
+- [[拓扑绝缘体]]
 - [[法拉第旋转]]
 - [[瞬态量子相光学]]
 - [[高次边带产生]]

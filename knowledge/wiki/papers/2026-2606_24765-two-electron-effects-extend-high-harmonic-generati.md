@@ -2,9 +2,9 @@
 title: "双电子效应将高次谐波产生推进至 keV 能区"
 type: "papers"
 created: "2026-08-17T09:53:12Z"
-updated: "2026-08-17T09:53:12Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["HHG", "双电子效应", "阿秒科学", "软X射线", "强场近似", "氦原子", "鞍点方法"]
-related: ["phase-matching in keV HHG", "亚阿秒脉冲", "单电子截止定律(SAE cutoff 3.17 U_p)", "双激发态与电子关联", "水窗波段"]
+related: ["Krausz", "phase-matching in keV HHG", "亚阿秒脉冲", "单电子截止定律(SAE cutoff 3.17 U_p)", "双激发态与电子关联", "截止定律", "水窗波段", "相位匹配", "高次谐波产生"]
 source_raw: "2026-2606.24765-two-electron-effects-extend-high-harmonic-generati.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -74,9 +74,13 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Krausz]]
 - [[phase-matching in keV HHG]]
 - [[亚阿秒脉冲]]
 - [[单电子截止定律(SAE cutoff 3.17 U_p)]]
 - [[双激发态与电子关联]]
+- [[截止定律]]
 - [[水窗波段]]
+- [[相位匹配]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

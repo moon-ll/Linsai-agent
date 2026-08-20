@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-order-parameter-ultrafast-readout-20260727"
 project_type: "general"
 latest_round: 7
-last_score: 0.55
+last_score: 0.65
 status: "optimizing"
-created: "2026-08-18T13:13:29Z"
-updated: "2026-08-18T13:13:29Z"
+created: "2026-08-20T15:39:06Z"
+updated: "2026-08-20T15:39:06Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.55
+**当前分数**：0.65
 **状态**：优化中
-**同步时间**：2026-08-18T13:13:29Z
+**同步时间**：2026-08-20T15:39:06Z
 
 ---
 
@@ -28,22 +28,22 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 64 |
-| full_review | full_review | 80 |
+| content | content | 72 |
+| full_review | full_review | 102 |
 | rationale | rationale | 86 |
-| references | references | 166 |
+| references | references | 168 |
 | scheme | scheme | 115 |
 
 ## 课题简介
 
 # 课题说明
 
-**课题名称**：反演层
+**课题名称**：R27 scheme.md 跨章引用一致性修复（2026-08-19）**：本轮聚焦 scheme.md 严谨性维度（0.55 最弱），针对两处关键引用错位修复：
 **项目类型**：面上项目
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
-**当前状态**：优化中（第1轮，score 0.55）
+**当前状态**：优化中（第4轮，score 0.65）
 **启动日期**：2026-07-27
-**最后更新**：2026-08-18
+**最后更新**：2026-08-19
 
 ---
 
@@ -70,9 +70,7 @@ confidence: 1.0
 | 2 | 0.42 | 16 | 6 | 2026-08-03 |
 | 3 | 0.46 | 12 | 4 | 2026-08-03 |
 | 4 | 0.58 | 12 | 4 | 2026-08-03 |
-| 5 | 0.71 | 13 | 4 | 2026-08-03 |
-| 6 | 0.76 | 12 | 6 | 2026-08-10 |
-| 6 | 0.74 |
+| 5 
 
 （完整简介见 [源文件](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/04_proposal/proposal-draft-merged.md)）
 

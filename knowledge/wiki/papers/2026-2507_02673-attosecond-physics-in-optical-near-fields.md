@@ -2,9 +2,9 @@
 title: "光学近场中的阿秒物理：NILES 低能条纹与皮赫兹电子学（arXiv 2507.02673）"
 type: "papers"
 created: "2026-08-15T20:10:17Z"
-updated: "2026-08-17T05:19:28Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["阿秒物理", "光学近场", "CEP", "皮赫兹电子学", "NILES", "纳米结构", "强场电离", "电子动力学", "论文精读"]
-related: ["CEP 稳定与标记", "attosecond streaking", "三步模型", "三步模型与背散射", "固体高次谐波", "有质动力加速", "超快电子源", "隧穿出射初条件"]
+related: ["2507.02673", "CEP 稳定与标记", "attosecond streaking", "三步模型", "三步模型与背散射", "固体高次谐波", "有质动力加速", "超快电子源", "隧穿出射初条件"]
 source_raw: "2026-2507.02673-attosecond-physics-in-optical-near-fields.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -38,6 +38,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2507.02673]]
 - [[CEP 稳定与标记]]
 - [[attosecond streaking]]
 - [[三步模型]]

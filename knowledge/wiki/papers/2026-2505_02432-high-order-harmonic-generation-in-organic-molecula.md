@@ -2,9 +2,9 @@
 title: "固态HHG新阵地：并五苯有机分子晶体中的高次谐波生成（精读笔记）"
 type: "papers"
 created: "2026-08-15T20:08:19Z"
-updated: "2026-08-17T05:19:28Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["HHG", "固态高次谐波", "有机分子晶体", "并五苯", "偏振分辨光谱", "分子间耦合", "全光学结构探测"]
-related: ["HHG光谱学", "分子轨道层析", "序参量超快读出", "有机电子学", "相位匹配", "量子几何反演"]
+related: ["HHG光谱学", "general-order-parameter-ultrafast-readout-20260727", "分子轨道层析", "序参量超快读出", "有机电子学", "相位匹配", "量子几何反演"]
 source_raw: "2026-2505.02432-high-order-harmonic-generation-in-organic-molecula.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -66,6 +66,7 @@ review_status: "pending"
 ## 关联概念
 
 - [[HHG光谱学]]
+- [[general-order-parameter-ultrafast-readout-20260727]]
 - [[分子轨道层析]]
 - [[序参量超快读出]]
 - [[有机电子学]]

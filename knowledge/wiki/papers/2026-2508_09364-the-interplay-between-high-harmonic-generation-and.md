@@ -2,9 +2,9 @@
 title: "精读笔记：ZnO 中高次谐波产生与光致发光的相互作用——谐波发射各向异性光谱与激子角色（arXiv:2508.09364）"
 type: "papers"
 created: "2026-08-15T20:54:26Z"
-updated: "2026-08-17T05:19:28Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["HHG", "固体高次谐波", "ZnO", "光致发光", "激子", "宽禁带半导体", "多体效应", "SWIR", "论文精读"]
-related: ["Mott转变", "moiré强场探针", "固体HHG机制转变", "声子辅助复合", "激子-激子散射", "相位匹配", "等离子体诱导折射率变化"]
+related: ["Mott转变", "general-moire-strong-field-probe-20260726", "moiré强场探针", "固体HHG机制转变", "声子辅助复合", "激子-激子散射", "相位匹配", "等离子体诱导折射率变化"]
 source_raw: "2026-2508.09364-the-interplay-between-high-harmonic-generation-and.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -38,6 +38,7 @@ Jessen、Mero 和 Vrakking 这篇工作抓住了一个我做固体 HHG 时反复
 ## 关联概念
 
 - [[Mott转变]]
+- [[general-moire-strong-field-probe-20260726]]
 - [[moiré强场探针]]
 - [[固体HHG机制转变]]
 - [[声子辅助复合]]

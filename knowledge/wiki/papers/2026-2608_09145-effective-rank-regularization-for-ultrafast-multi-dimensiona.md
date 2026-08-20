@@ -2,9 +2,9 @@
 title: "Effective-Rank Regularization for Ultrafast Multi-Dimensional Inversion"
 type: "papers"
 created: "2026-08-15T21:18:50Z"
-updated: "2026-08-16T13:26:39Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["论文精读", "HHG", "阿秒反演", "正则化", "effective-rank", "量子几何", "病态问题"]
-related: ["Berry曲率重构", "moiré-strong-field-probe-20260726", "quantum-geometry-inversion-20260726", "相位恢复", "轨道层析成像"]
+related: ["Berry曲率重构", "general-moire-strong-field-probe-20260726", "moiré-strong-field-probe-20260726", "quantum-geometry-inversion-20260726", "相位恢复", "轨道层析成像"]
 source_raw: "2026-2608.09145-effective-rank-regularization-for-ultrafast-multi-dimensiona.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -63,6 +63,7 @@ merged_from: ["wiki/papers/2608.09145.md"]
 ## 关联概念
 
 - [[Berry曲率重构]]
+- [[general-moire-strong-field-probe-20260726]]
 - [[moiré-strong-field-probe-20260726]]
 - [[quantum-geometry-inversion-20260726]]
 - [[相位恢复]]

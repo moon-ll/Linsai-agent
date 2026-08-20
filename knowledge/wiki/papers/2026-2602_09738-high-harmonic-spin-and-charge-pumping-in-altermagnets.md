@@ -2,9 +2,9 @@
 title: "论文精读：交替磁体（Altermagnets）中的高次谐波自旋与电荷泵浦"
 type: "papers"
 created: "2026-08-15T20:13:57Z"
-updated: "2026-08-17T05:19:28Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["altermagnet", "高次谐波产生", "自旋泵浦", "非平衡量子输运", "太赫兹发射", "非线性自旋电子学", "论文精读"]
-related: ["NSFC-强场超快", "动量依赖自旋劈裂", "反铁磁序参量超快读出", "固态HHG机制", "拓扑绝缘体", "无SOC自旋流"]
+related: ["2602.09738", "NSFC-强场超快", "general-order-parameter-ultrafast-readout-20260727", "动量依赖自旋劈裂", "反铁磁序参量超快读出", "固态HHG机制", "拓扑绝缘体", "无SOC自旋流"]
 source_raw: "2026-2602.09738-high-harmonic-spin-and-charge-pumping-in-altermagnets.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -58,7 +58,9 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2602.09738]]
 - [[NSFC-强场超快]]
+- [[general-order-parameter-ultrafast-readout-20260727]]
 - [[动量依赖自旋劈裂]]
 - [[反铁磁序参量超快读出]]
 - [[固态HHG机制]]

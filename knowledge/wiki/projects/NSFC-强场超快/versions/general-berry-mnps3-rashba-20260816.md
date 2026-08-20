@@ -3,11 +3,11 @@ title: "berry-mnps3-rashba — 最新版本"
 type: "proposal_version"
 proposal_id: "general-berry-mnps3-rashba-20260816"
 project_type: "general"
-latest_round: 0
-last_score: 0.1
+latest_round: 1
+last_score: 0.74
 status: "optimizing"
-created: "2026-08-18T13:13:29Z"
-updated: "2026-08-18T13:13:29Z"
+created: "2026-08-20T15:39:06Z"
+updated: "2026-08-20T15:39:06Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -17,10 +17,10 @@ confidence: 1.0
 
 **课题 ID**：`general-berry-mnps3-rashba-20260816`
 **类型**：general
-**最新轮次**：第 0 轮
-**当前分数**：0.1
+**最新轮次**：第 1 轮
+**当前分数**：0.74
 **状态**：优化中
-**同步时间**：2026-08-18T13:13:29Z
+**同步时间**：2026-08-20T15:39:06Z
 
 ---
 
@@ -28,22 +28,22 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | （二）研究内容 | 67 |
+| content | （二）研究内容 | 62 |
 | full_review | full_review | 0 |
-| rationale | （一）立项依据 | 78 |
-| references | references | 0 |
+| rationale | （一）立项依据 | 76 |
+| references | 参考文献 | 82 |
 | scheme | （三）研究方案、特色与创新、预期研究成果 | 109 |
 
 ## 课题简介
 
 # 课题说明
 
-**课题名称**：平台一**选取滑移二维方晶格（耦合准交变磁候选）[11,30]，作为研究层间滑移自由度的理论原型。NiCl₂、VS₂、CrSe₂ 等多层体系的层间滑移势垒仅 16–40 meV/unitcell，滑移驱动的自旋劈裂翻转已在静态 DFT 中预言 [11]。该体系中层间滑移与自旋劈裂的耦合从未在超快时域被驱动或测量——这是平台一的核心物理问题。
+**课题名称**：目标一**：建立含时密度泛函理论框架，将层间滑移坐标作为动力学自由度引入多带紧束缚模型，实现光应力与位移电流机制对层间势垒等效调制深度的定量计算。量化指标：在 THz 驱动场强 0.1–1.0 MV/cm 范围内，计算得到相干驱动与非绝热隧穿机制的切换概率曲线，切换概率的不确定性 ≤ 10%（以 PBE、PBE+U、HSE 三种泛函的计算结果方差为度量）。
 **项目类型**：面上项目
 **课题 ID**：`general-berry-mnps3-rashba-20260816`
-**当前状态**：优化中（第0轮，score 0.10）
+**当前状态**：优化中（第1轮，score 0.74）
 **启动日期**：2026-08-16
-**最后更新**：2026-08-18
+**最后更新**：2026-08-19
 
 ---
 
@@ -61,23 +61,15 @@ confidence: 1.0
 | 1 | 0.10 | 10 | 2 | 2026-08-17 |
 | 1 | 0.10 | 15 | 7 | 2026-08-17 |
 | 1 | 0.10 | 16 | 8 | 2026-08-18 |
+| 1 | 0.67 | 7 | 4 | 2026-08-19 |
+| 1 | 0.18 | 12 | 2 | 2026-08-19 |
+| 2 | 0.64 | 42 | 18 | 2026-08-19 |
+| 2 | 0.74 | 29 | 8 | 2026-08-19 |
 
 ## 状态流转
 - 2026-08-16: — → drafts (注册新 proposal)
 - 2026-08-17: — → ? 
-- 2026-08-17: drafts → optimizing 
-
-## 人工审核记录
-（尚未有人工审核）
-
----
-
-## 课题产物索引
-- `01_direction/` — 方向校准
-- `02_literature/` — 文献调研 + 针对性检索
-- `02_topic/` — 缺口分析
-- `03_question/` — 科学问题框架
--
+- 2026-08-17: drafts → optimizi
 
 （完整简介见 [源文件](research_proposals/optimizing/general-berry-mnps3-rashba-20260816/04_proposal/proposal-draft-merged.md)）
 

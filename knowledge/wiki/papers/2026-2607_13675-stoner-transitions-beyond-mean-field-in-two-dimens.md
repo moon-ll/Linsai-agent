@@ -2,9 +2,9 @@
 title: "超越平均场的二维电子体系 Stoner 相变：图解蒙特卡洛研究（精读）"
 type: "papers"
 created: "2026-08-15T21:34:21Z"
-updated: "2026-08-16T13:26:38Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["Stoner相变", "图解蒙特卡洛", "能谷电子学", "二维电子体系", "平均场之外", "铁磁序", "能谷极化"]
-related: ["低维电子气", "梯形近似", "能谷极化", "超快序参量读出", "量子几何反演"]
+related: ["general-order-parameter-ultrafast-readout-20260727", "低维电子气", "梯形近似", "能谷极化", "超快序参量读出", "量子几何反演"]
 source_raw: "2026-2607.13675-stoner-transitions-beyond-mean-field-in-two-dimens.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -56,6 +56,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[general-order-parameter-ultrafast-readout-20260727]]
 - [[低维电子气]]
 - [[梯形近似]]
 - [[能谷极化]]

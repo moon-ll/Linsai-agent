@@ -2,9 +2,9 @@
 title: "两束对传激光产生可调周期的少阿秒电子脉冲串（论文精读）"
 type: "papers"
 created: "2026-08-15T20:11:14Z"
-updated: "2026-08-15T20:11:14Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["阿秒科学", "电子脉冲串", "参量共振", "对传激光", "强场光学", "激光加速", "超快电子探测"]
-related: ["PINEM", "序参量超快读出", "有质动力调制", "超快电子衍射", "随机加热"]
+related: ["PINEM", "general-order-parameter-ultrafast-readout-20260727", "序参量超快读出", "有质动力调制", "超快电子衍射", "随机加热"]
 source_raw: "2026-2605.14873-few-attosecond-electron-pulse-trains-with-tunable-.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -55,6 +55,7 @@ review_status: "pending"
 ## 关联概念
 
 - [[PINEM]]
+- [[general-order-parameter-ultrafast-readout-20260727]]
 - [[序参量超快读出]]
 - [[有质动力调制]]
 - [[超快电子衍射]]

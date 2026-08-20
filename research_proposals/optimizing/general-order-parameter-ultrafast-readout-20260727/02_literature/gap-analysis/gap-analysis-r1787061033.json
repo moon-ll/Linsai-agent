@@ -1,0 +1,107 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme §5 创新点2声称「首次把 Cochran 量子相干层析与 Sørensen 阿秒重建联动应用于 altermagnet HHG 序参量反演」，该「首次」优先权表述的检索范围仅限 arXiv，未在 Web of Science / Scopus 独立核验",
+      "missing_evidence": "缺少 Web of Science / Scopus 等正式数据库的检索佐证，无法排除正式期刊中已发表同类联动方案",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic",
+        "Sørensen attosecond order parameter reconstruction HHG",
+        "Cochran Sørensen HHG quantum coherence combined",
+        "quantum coherence tomography combined attosecond retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cochran 量干断层成像和 Sørensen 阿秒序参量重建是该项目的两大核心方法学锚点，正文引用编号 [62][63] 与 references.md 重排后编号 [63][64] 不一致",
+      "missing_evidence": "Cochran 和 Sørensen 工作的正确编号及其与本项目方法学的直接对接关系需要文献支撑，两篇预印本的实际 arXiv 编号和年份需要核实",
+      "search_keywords": [
+        "Cochran quantum coherence tomography arXiv 2025 2026",
+        "Sørensen attosecond order parameter arXiv",
+        "Cochran HHG quantum coherence preprint"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rost 等人 [67] 在 CrSb 中通过自旋分辨 HHG 观测到材料特异的交错磁指纹——该文献是项目核心信号可行性支撑，但 Rost arXiv:2507.02673 未被 references.md 收录，[67] 实为 Horstmann 理论论文",
+      "missing_evidence": "Rost 等人 arXiv:2507.02673 (2025) CrSb 自旋分辨 HHG 实验原文，或其他能够证明 CrSb HHG 信号可探测性的实验文献",
+      "search_keywords": [
+        "Rost CrSb high harmonic generation spin-resolved 2025",
+        "Rost arXiv 2507.02673 altermagnet HHG",
+        "CrSb spin-polarized high harmonic experimental observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 在近红外飞秒激光作用下的损伤阈值（约 0.3 V/Å）缺乏实验依据，且 scheme §3 L49 中 0.3×1.30=0.39≠0.80 的算术矛盾影响强场可行性判据可信度",
+      "missing_evidence": "CrSb 材料在 800nm 附近飞秒激光照射下的损伤阈值实验数据、反射率变化强场光学响应稳定性实验",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser damage near-infrared",
+        "CrSb strong field optical excitation stability",
+        "MnTe altermagnet femtosecond damage threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "固体 HHG 信号噪声水平（shot noise floor）的量化定义和测量方法缺乏文献依据，content §2.3 引用的「方法学手册」为项目内文件不可作为独立证据",
+      "missing_evidence": "固体 HHG 噪声源（shot noise 等）的系统测量和量化定义、高次谐波产生中 shot noise 基准的实验或理论工作",
+      "search_keywords": [
+        "solid-state HHG shot noise floor measurement",
+        "high harmonic generation noise source shot noise semiconductor",
+        "HHG signal to noise ratio definition solid",
+        "harmonic spectroscopy shot noise background statistics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "圆二色性 HHG 检测对磁有序的灵敏度极限缺乏定量实验依据，影响可辨识性判据的可信度",
+      "missing_evidence": "HHG 圆二色性对磁有序参数的最小可探测变化的实验测量数据、circular dichroism HHG detection sensitivity limit",
+      "search_keywords": [
+        "circular dichroism high harmonic generation magnetic order sensitivity",
+        "HHG detection sensitivity limit magnetic field",
+        "CD-HHG detection threshold antiferromagnet altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Fisher 信息矩阵用于非线性光学反演问题的可辨识性分析缺乏直接文献支撑，FIM+Bayesian 框架应用于 HHG 序参量反演需要依据",
+      "missing_evidence": "Fisher information matrix nonlinear optics inverse problem 的推导或应用、参数可辨识性分析在 HHG/阿秒光谱学中的具体实践",
+      "search_keywords": [
+        "Fisher information matrix nonlinear optics inverse problem",
+        "parameter identifiability high harmonic generation spectroscopy",
+        "Bayesian inversion HHG attosecond spectroscopy reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "半导体布洛赫方程(SBE)在强场极限下（V/Å 量级）的有效性范围缺乏明确文献界定，与方案中三重阈值设计直接相关",
+      "missing_evidence": "SBE 在强场固体 HHG 中的有效性条件和适用范围（场强阈值、带间耦合饱和）的直接实验或理论验证",
+      "search_keywords": [
+        "semiconductor Bloch equation validity strong field limit V/Angstrom",
+        "SBE interband coupling saturation strong field solid HHG",
+        "Bloch equation validity range high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三阶交变磁序参量（自旋、轨道、谷）在 HHG 中的可区分性缺乏理论或实验依据，可辨识性框架声称 HHG 可同时读出三种序参量需要支撑",
+      "missing_evidence": "能够区分三种不同有序参量对 HHG 贡献的理论计算或实验方案、不同序参量在 HHG 通道中的分辨能力研究",
+      "search_keywords": [
+        "altermagnet three order parameters HHG distinguishability",
+        "high harmonic generation orbital magnetic order simultaneous probe",
+        "HHG order parameter distinguishability multi-band"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "全文 45 条参考文献中预印本占比 53%（24/45），超出物理专项 30% 阈值；需补充足够的同行评审期刊正式发表文献",
+      "missing_evidence": "altermagnet HHG、序参量反演、损伤阈值等方向的正式发表论文，以降低预印本占比",
+      "search_keywords": [
+        "altermagnet high harmonic generation published",
+        "order parameter inversion nonlinear optics journal",
+        "solid-state HHG damage threshold experimental published"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

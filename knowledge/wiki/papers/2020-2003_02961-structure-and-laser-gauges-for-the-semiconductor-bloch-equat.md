@@ -2,9 +2,9 @@
 title: "SBE结构规范与激光规范及高次谐波产生：Yue & Gaarde 2020"
 type: "papers"
 created: "2026-08-17T09:47:40Z"
-updated: "2026-08-17T09:47:40Z"
+updated: "2026-08-19T05:16:11Z"
 tags: ["半导体布洛赫方程", "高次谐波产生", "规范选择", "Berry联络", "跃迁偶极相位", "强场超快光学", "固体HHG"]
-related: ["Berry联络", "keldysh-gauge", "半导体布洛赫方程(SBE)", "对称破缺材料", "规范不变性", "跃迁偶极相位(TDP)", "长度规范vs速度规范", "高次谐波产生(HHG)"]
+related: ["Berry联络", "general-order-parameter-ultrafast-readout-20260727", "keldysh-gauge", "半导体布洛赫方程(SBE)", "固体高次谐波", "对称破缺材料", "规范不变性", "跃迁偶极相位(TDP)", "长度规范vs速度规范", "高次谐波产生", "高次谐波产生(HHG)"]
 source_raw: "2020-2003.02961-structure-and-laser-gauges-for-the-semiconductor-bloch-equat.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -92,11 +92,14 @@ review_status: "pending"
 ## 关联概念
 
 - [[Berry联络]]
+- [[general-order-parameter-ultrafast-readout-20260727]]
 - [[keldysh-gauge]]
 - [[半导体布洛赫方程(SBE)]]
+- [[固体高次谐波]]
 - [[对称破缺材料]]
 - [[规范不变性]]
 - [[跃迁偶极相位(TDP)]]
 - [[长度规范vs速度规范]]
+- [[高次谐波产生]]
 - [[高次谐波产生(HHG)]]
 <!-- /linsai-wikilinks -->

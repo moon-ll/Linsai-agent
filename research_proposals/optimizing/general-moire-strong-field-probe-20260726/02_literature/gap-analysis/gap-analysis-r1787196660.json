@@ -1,0 +1,44 @@
+{
+  "gaps": [
+    {
+      "claim": "full_review.md 自述已清除全部占位符（r12/r16/r20 多次声称），但实测仍残留 9 处 [CITE:xxx] 加 3 处 [CITE:xxx_yyyy_zzzz]",
+      "missing_evidence": "全文字符串搜索未清理干净，实际正文引用数（138次/去重28标签）低于 full_review.md 自述（153次/24篇），差 15 处引用",
+      "search_keywords": [
+        "twisted bilayer graphene HHG experimental yield",
+        "TBG high harmonic generation correlated insulator",
+        "moire superlattice HHG magic angle"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R2 反演误差指标：content.md §2.2 声称 RMS < 15%，§2.3 创新点评述中多源误差逐级压缩（0.3°→0.05°→0.01°），rationale.md 称 ±0.05°，scheme.md 称 ±0.02–0.05°",
+      "missing_evidence": "该精度声称全部基于合成数据（synthetic data），缺乏实测数据或实验验证支撑；需真实的 HHG 光谱反演 benchmark 实验",
+      "search_keywords": [
+        "HHG spectroscopy inversion benchmark experimental",
+        "high harmonic generation parameter retrieval experimental validation",
+        "attosecond spectroscopy inversion error measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md §2.3 创新点评述（MoSe₂/WS₂）与 rationale §1.4 调控/探测窗口创新（hBN/MoSe₂/WS₂）存在 70% 内容重叠，违反 content_boundaries 原则",
+      "missing_evidence": "各章创新点分工边界不清，缺乏独立支撑各自创新贡献的差异化文献；需重新划界并各自引用支撑",
+      "search_keywords": [
+        "2D material HHG efficiency comparison monolayer bilayer",
+        "TMDC high harmonic generation yield versus material",
+        "hBN hexagonal boron nitride high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme §3.5 '本框架首次...' 声明（r12 已声称清理但实测仍残留），需国际首次声明的文献对标",
+      "missing_evidence": "缺乏将本框架与国际现有最强工作（Zhou 2023/Hu-Meng PNAS 2024/Mandal 2025）进行差异化对比的文献支撑",
+      "search_keywords": [
+        "all-optical control HHG closed loop experiment",
+        "Floquet engineering solid state HHG experimental",
+        "optical control Berry curvature solid state first"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

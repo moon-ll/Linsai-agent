@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "key-transient-quantum-phase-optical-20260726"
 project_type: "key"
 latest_round: 5
-last_score: 0.53
+last_score: 0.76
 status: "optimizing"
-created: "2026-08-18T13:13:29Z"
-updated: "2026-08-18T13:13:29Z"
+created: "2026-08-20T15:39:06Z"
+updated: "2026-08-20T15:39:06Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`key-transient-quantum-phase-optical-20260726`
 **类型**：key
 **最新轮次**：第 5 轮
-**当前分数**：0.53
+**当前分数**：0.76
 **状态**：优化中
-**同步时间**：2026-08-18T13:13:29Z
+**同步时间**：2026-08-20T15:39:06Z
 
 ---
 
@@ -30,7 +30,7 @@ confidence: 1.0
 |------|------|------|
 | content | content | 110 |
 | full_review | full_review | 112 |
-| rationale | rationale | 268 |
+| rationale | rationale | 260 |
 | references | references | 140 |
 | scheme | scheme | 266 |
 
@@ -41,9 +41,9 @@ confidence: 1.0
 **课题名称**：瞬态量子相的全光读写
 **项目类型**：重点项目
 **课题 ID**：`key-transient-quantum-phase-optical-20260726`
-**当前状态**：优化中（第0轮，score 0.53）
+**当前状态**：优化中（第0轮，score 0.76）
 **启动日期**：2026-07-26
-**最后更新**：2026-08-18
+**最后更新**：2026-08-19
 
 ---
 

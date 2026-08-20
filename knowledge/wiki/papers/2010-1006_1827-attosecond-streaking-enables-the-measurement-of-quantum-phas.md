@@ -2,9 +2,9 @@
 title: "Attosecond streaking enables the measurement of quantum phase"
 type: "papers"
 created: "2026-08-17T09:57:36Z"
-updated: "2026-08-17T09:57:36Z"
+updated: "2026-08-19T05:16:11Z"
 tags: ["attosecond-streaking", "quantum-phase", "强场超快", "Krausz组", "阿秒计量学"]
-related: ["attosecond-streaking", "photoelectron-tomography", "quantum-phase-retrieval", "strong-field-recombination"]
+related: ["FROG", "Krausz", "attosecond-streaking", "photoelectron-tomography", "quantum-phase-retrieval", "strong-field-recombination"]
 source_raw: "2010-1006.1827-attosecond-streaking-enables-the-measurement-of-quantum-phas.md"
 growth_stage: "growing"
 confidence: 0.5
@@ -73,6 +73,8 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[FROG]]
+- [[Krausz]]
 - [[attosecond-streaking]]
 - [[photoelectron-tomography]]
 - [[quantum-phase-retrieval]]

@@ -2,9 +2,9 @@
 title: "Deep-learning Hamiltonian reveals twist-tunable flat bands and nonlinear photocurrents in SrTiO3 moiré bilayers"
 type: "papers"
 created: "2026-08-15T21:39:01Z"
-updated: "2026-08-16T13:26:38Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["moire-twistronics", "deep-learning-Hamiltonian", "SrTiO3", "flat-bands", "nonlinear-photocurrent", "quantum-geometry", "强场超快"]
-related: ["DeepH 类机器学习哈密顿量", "shift current / injection current", "氧化物界面电子学", "莫尔平带", "量子度规与贝里曲率"]
+related: ["DeepH 类机器学习哈密顿量", "general-moire-strong-field-probe-20260726", "shift current / injection current", "氧化物界面电子学", "莫尔平带", "量子度规与贝里曲率"]
 source_raw: "2026-2607.06053-deep-learning-hamiltonian-reveals-twist-tunable-flat-bands-a.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -53,6 +53,7 @@ review_status: "pending"
 ## 关联概念
 
 - [[DeepH 类机器学习哈密顿量]]
+- [[general-moire-strong-field-probe-20260726]]
 - [[shift current / injection current]]
 - [[氧化物界面电子学]]
 - [[莫尔平带]]

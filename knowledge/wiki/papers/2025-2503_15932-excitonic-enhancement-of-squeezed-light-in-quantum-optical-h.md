@@ -2,9 +2,9 @@
 title: "精读笔记：Mott绝缘体量子光学HHG中激子增强的压缩光产生（Lange, Hansen & Madsen, arXiv:2503.15932）"
 type: "papers"
 created: "2026-08-15T20:24:38Z"
-updated: "2026-08-15T20:24:38Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["high-harmonic-generation", "squeezed-light", "Mott-insulator", "exciton", "quantum-optics", "强场超快", "非经典光"]
-related: ["BSV驱动HHG", "Hubbard模型", "doublon-holon动力学", "关联电子体系", "压缩态测量", "固态HHG"]
+related: ["2503.15932", "BSV驱动HHG", "Hubbard模型", "doublon-holon动力学", "关联电子体系", "压缩态测量", "固态HHG"]
 source_raw: "2025-2503.15932-excitonic-enhancement-of-squeezed-light-in-quantum-optical-h.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -21,6 +21,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2503.15932]]
 - [[BSV驱动HHG]]
 - [[Hubbard模型]]
 - [[doublon-holon动力学]]

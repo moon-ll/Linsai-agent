@@ -2,9 +2,9 @@
 title: "拓扑激子绝缘体精读：扭转hBN调制TMD双层中的手性p波激子凝聚（QAHE + 反向超流）"
 type: "papers"
 created: "2026-08-16T13:33:04Z"
-updated: "2026-08-16T13:33:04Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["激子凝聚", "莫尔超晶格", "扭转hBN", "TMD双层", "量子反常霍尔", "手性p波配对", "反向流动超流", "平均场理论", "能谷电子学"]
-related: ["Floquet工程", "层间相位相干", "序参量超快读出", "激子绝缘体", "铁电莫尔势", "非线性光学探针"]
+related: ["Floquet工程", "general-order-parameter-ultrafast-readout-20260727", "层间相位相干", "序参量超快读出", "激子绝缘体", "铁电莫尔势", "非线性光学探针"]
 source_raw: "2026-2509.11041-topological-excitonic-insulators-in-electron-bilay.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -51,6 +51,7 @@ review_status: "pending"
 ## 关联概念
 
 - [[Floquet工程]]
+- [[general-order-parameter-ultrafast-readout-20260727]]
 - [[层间相位相干]]
 - [[序参量超快读出]]
 - [[激子绝缘体]]

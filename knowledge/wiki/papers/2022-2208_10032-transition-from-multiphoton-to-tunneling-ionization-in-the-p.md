@@ -2,9 +2,9 @@
 title: "固体高次谐波产生中从多光子到隧穿电离的转变：论文精读笔记"
 type: "papers"
 created: "2026-08-15T20:20:36Z"
-updated: "2026-08-17T05:19:26Z"
+updated: "2026-08-19T05:16:11Z"
 tags: ["固体HHG", "隧穿电离", "多光子电离", "Keldysh参数", "半导体布洛赫方程", "功率标度律"]
-related: ["Keldysh参数", "NSFC-强场超快", "SBE", "动态带隙演化", "固体高次谐波", "固体高次谐波产生", "相位匹配", "通用序参量超快读出", "高次谐波产生"]
+related: ["Keldysh参数", "NSFC-强场超快", "SBE", "general-order-parameter-ultrafast-readout-20260727", "动态带隙演化", "固体高次谐波", "固体高次谐波产生", "相位匹配", "通用序参量超快读出", "高次谐波产生"]
 source_raw: "2022-2208.10032-transition-from-multiphoton-to-tunneling-ionization-in-the-p.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -57,6 +57,7 @@ review_status: "pending"
 - [[Keldysh参数]]
 - [[NSFC-强场超快]]
 - [[SBE]]
+- [[general-order-parameter-ultrafast-readout-20260727]]
 - [[动态带隙演化]]
 - [[固体高次谐波]]
 - [[固体高次谐波产生]]

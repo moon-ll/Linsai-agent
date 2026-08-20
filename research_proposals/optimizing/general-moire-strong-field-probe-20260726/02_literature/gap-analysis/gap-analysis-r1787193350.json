@@ -1,0 +1,44 @@
+{
+  "gaps": [
+    {
+      "claim": "探针强度窗口（10¹¹–5×10¹¹ W/cm²）与调控强度窗口（10¹¹–10¹² W/cm²）存在重叠，需论证为何两个模式可区分操作",
+      "missing_evidence": "缺乏固体莫尔体系中探针强度与调控强度窗口分隔的实验或理论依据，需证明在重叠区间内两种模式物理效应可独立解析",
+      "search_keywords": [
+        "moire superlattice high harmonic probe intensity threshold",
+        "twisted bilayer strong field intensity window separation",
+        "solid-state HHG probe vs control intensity regime"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "assumption 3 设定 >20% HHG跳变对应20 meV关联绝缘体能隙边界值，但未说明5–10 meV能隙区间是否存在更优的>25–30%可分辨窗口",
+      "missing_evidence": "缺乏magic-angle TBG关联绝缘体能隙（5–10 meV区间）与HHG响应变化量关系的实验标定数据",
+      "search_keywords": [
+        "magic angle twisted bilayer graphene correlated insulator gap meV",
+        "TBG symmetry breaking HHG sensitivity threshold",
+        "moire heterostructure HHG gap dependence experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "flat-band产额偏低作为R1降阶框架的风险，需提供该风险确实存在且需要降级路径的文献支撑",
+      "missing_evidence": "缺乏magic-angle TBG HHG flat-band yield低于常规半导体或石墨烯的实验测量数据",
+      "search_keywords": [
+        "magic angle twisted bilayer graphene high harmonic yield",
+        "TBG HHG flat band efficiency experimental",
+        "moire superlattice HHG photon flux measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "光Floquet工程调控需避免样品损伤，报告未提供莫尔体系损伤阈值的具体实验依据",
+      "missing_evidence": "缺乏twisted bilayer graphene或TMDC moire异质结在近红外飞秒激光下的损伤阈值实验数据",
+      "search_keywords": [
+        "twisted bilayer graphene laser damage threshold femtosecond",
+        "2D heterostructure near-infrared ablation threshold",
+        "moire material strong field damage threshold experimental"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

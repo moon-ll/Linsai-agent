@@ -2,9 +2,9 @@
 title: "论文精读：超快相干带隙调制的参数非线性光学探测（arXiv:2504.06130）"
 type: "papers"
 created: "2026-08-15T20:43:28Z"
-updated: "2026-08-16T13:26:34Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["光波电子学", "二次谐波产生", "光学斯塔克位移", "Bloch-Siegert位移", "二维半导体", "半导体Bloch方程", "谷电子学", "Floquet工程", "微扰非线性光学"]
-related: ["Floquet工程", "SHG对称性探测", "光学斯塔克效应", "光波电子学", "序参量超快读出"]
+related: ["Floquet工程", "SHG对称性探测", "general-order-parameter-ultrafast-readout-20260727", "光学斯塔克效应", "光波电子学", "序参量超快读出"]
 source_raw: "2026-2504.06130-ultrafast-coherent-bandgap-modulation-probed-by-pa.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -56,6 +56,7 @@ review_status: "pending"
 
 - [[Floquet工程]]
 - [[SHG对称性探测]]
+- [[general-order-parameter-ultrafast-readout-20260727]]
 - [[光学斯塔克效应]]
 - [[光波电子学]]
 - [[序参量超快读出]]

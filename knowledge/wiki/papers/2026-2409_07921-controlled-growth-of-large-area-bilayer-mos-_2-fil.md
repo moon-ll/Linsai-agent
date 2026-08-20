@@ -2,9 +2,9 @@
 title: "大面积双层MoS₂薄膜的可控CVD生长——精读笔记"
 type: "papers"
 created: "2026-08-17T09:51:36Z"
-updated: "2026-08-17T09:51:36Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["MoS2", "CVD生长", "双层TMD", "能谷电子学", "层间激子", "材料制备"]
-related: ["2D材料器件", "interlayer excitons", "twisted bilayer", "ultrafast spectroscopy", "valleytronics"]
+related: ["2D材料器件", "interlayer excitons", "twisted bilayer", "ultrafast spectroscopy", "valleytronics", "高次谐波产生"]
 source_raw: "2026-2409.07921-controlled-growth-of-large-area-bilayer-mos-_2-fil.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -60,4 +60,5 @@ review_status: "pending"
 - [[twisted bilayer]]
 - [[ultrafast spectroscopy]]
 - [[valleytronics]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

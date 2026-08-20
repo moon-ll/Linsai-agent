@@ -2,9 +2,9 @@
 title: "Observation of non-adiabatic Landau-Zener tunneling among Floquet states"
 type: "papers"
 created: "2026-08-17T09:52:16Z"
-updated: "2026-08-17T09:52:16Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["Floquet工程", "Landau-Zener隧穿", "光波电子学", "多光子光电子能谱", "强场超快光学", "固体HHG", "非绝热动力学"]
-related: ["Cu(111)", "Floquet states", "Landau-Zener transition", "high-harmonic generation in solids", "instantaneous Floquet theory", "lightwave electronics", "multi-photon photoemission", "non-perturbative light-matter coupling"]
+related: ["Cu(111)", "Floquet states", "Landau-Zener transition", "general-order-parameter-ultrafast-readout-20260727", "high-harmonic generation in solids", "instantaneous Floquet theory", "lightwave electronics", "multi-photon photoemission", "non-perturbative light-matter coupling", "固体高次谐波", "固体高次谐波产生", "高次谐波产生"]
 source_raw: "2026-2503.04431-observation-of-non-adiabatic-landau-zener-tunnelin.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -78,9 +78,13 @@ Yen 等人选择在 Cu(111) 上做这件事是有道理的。sp 金属表面态�
 - [[Cu(111)]]
 - [[Floquet states]]
 - [[Landau-Zener transition]]
+- [[general-order-parameter-ultrafast-readout-20260727]]
 - [[high-harmonic generation in solids]]
 - [[instantaneous Floquet theory]]
 - [[lightwave electronics]]
 - [[multi-photon photoemission]]
 - [[non-perturbative light-matter coupling]]
+- [[固体高次谐波]]
+- [[固体高次谐波产生]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

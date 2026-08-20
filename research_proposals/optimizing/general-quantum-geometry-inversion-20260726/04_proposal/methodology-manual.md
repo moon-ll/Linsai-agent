@@ -203,7 +203,7 @@ $$
 | 材料类别 | 代表材料 | 带隙 (eV) | 关联参数 | HHG 预期特征 | 关键文献 | 本期计划 |
 |---------|---------|----------|---------|-------------|---------|---------|
 | **CDW** | **TiSe₂** | 0 (半金属) → ~0.2 (CDW) | 电荷序序参量 | 偏振各向异性随 CDW 相变突变 | Tyulnev 2024 [CITE:tyulnev_2024_cdw] | ✅ R3 核心 |
-| **CDW** | **1T-TaS₂** | ~0.1 (Mott-CDW 竞争) | Hubbard-U + CDW | 非平庸谐波红移 | — | ✅ R3 核心 |
+|| **CDW** | **1T-TaS₂** | ~0.1 (Mott-CDW 竞争) | Hubbard-U + CDW | 非平庸谐波红移 | Queisser 2023 [CITE:queisser_2023_mott_hhg]（Mott-Hubbard HHG 理论）+ Lange 2024 [CITE:lange_2024_noninteger]（非整数谐波）| ✅ R3 核心 |
 | Mott | RNiO₃ | 0.1–0.5 (温度依赖) | U/t ~ 4–8 | doublon-holon 复合红移 | Prajapati 2024 [CITE:prajapati_2024] | 后续延伸 |
 | Mott | Sr₂CuO₃ | ~2.0 (1D 链) | U ~ 6–8 eV | 非寻常谐波红移 | Ikeda 2025 [CITE:ikeda_2025_mott] | 后续延伸 |
 | Altermagnet | MnTe | ~1.5 | 自旋分裂 (d-wave) | 磁场依赖低阶谐波各向异性 | Werner 2024 [CITE:werner_2024_alter] | 后续延伸 |

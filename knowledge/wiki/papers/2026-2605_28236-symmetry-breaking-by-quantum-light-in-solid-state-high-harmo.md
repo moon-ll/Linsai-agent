@@ -2,9 +2,9 @@
 title: "Quantum-light-driven symmetry breaking in solid-state HHG"
 type: "papers"
 created: "2026-08-17T09:49:08Z"
-updated: "2026-08-17T09:49:08Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["quantum-HHG", "symmetry-breaking", "solid-state-HHG", "graphene", "MoS2", "circular-polarization", "selection-rules"]
-related: ["固体高次谐波选择定则", "圆偏振HHG", "量子光场态工程", "量子光驱动高次谐波"]
+related: ["固体高次谐波", "固体高次谐波选择定则", "圆偏振HHG", "量子光场态工程", "量子光驱动高次谐波"]
 source_raw: "2026-2605.28236-symmetry-breaking-by-quantum-light-in-solid-state-high-harmo.md"
 growth_stage: "growing"
 confidence: 0.6
@@ -62,6 +62,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[固体高次谐波]]
 - [[固体高次谐波选择定则]]
 - [[圆偏振HHG]]
 - [[量子光场态工程]]

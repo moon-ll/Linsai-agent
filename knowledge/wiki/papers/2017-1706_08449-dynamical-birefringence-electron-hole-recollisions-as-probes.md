@@ -2,9 +2,9 @@
 title: "动态双折射：电子-空穴再碰撞作为Berry曲率探针"
 type: "papers"
 created: "2026-08-17T09:56:12Z"
-updated: "2026-08-17T09:56:12Z"
+updated: "2026-08-19T05:16:11Z"
 tags: ["papers", "强场超快", "HHG", "Berry曲率", "量子几何", "电子-空穴再碰撞", "动态双折射"]
-related: ["Berry曲率", "再碰撞物理", "瞬态量子相变光学探测", "量子几何光学读出", "高次谐波产生"]
+related: ["Berry曲率", "三步模型", "再碰撞物理", "瞬态量子相变光学探测", "量子几何光学读出", "高次谐波产生"]
 source_raw: "2017-1706.08449-dynamical-birefringence-electron-hole-recollisions-as-probes.md"
 growth_stage: "growing"
 confidence: 0.6
@@ -63,6 +63,7 @@ review_status: "pending"
 ## 关联概念
 
 - [[Berry曲率]]
+- [[三步模型]]
 - [[再碰撞物理]]
 - [[瞬态量子相变光学探测]]
 - [[量子几何光学读出]]

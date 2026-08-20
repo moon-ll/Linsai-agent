@@ -2,9 +2,9 @@
 title: "Petahertz-bandwidth spectral combs from collisional plasma X-ray laser ASE——强场 IR 场调制 XUV 等离激元激光器的梳状谱产生"
 type: "papers"
 created: "2026-08-17T09:47:10Z"
-updated: "2026-08-17T09:47:10Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["光波电子学", "XUV", "等离子体X射线激光", "ASE", "亚飞秒脉冲", "Stark效应", "强场", "梳状谱", "极紫外"]
-related: ["亚周期XUV脉冲产生", "偏振分辨", "强场电离动力学", "等离子体增益介质", "高次谐波HHG"]
+related: ["general-order-parameter-ultrafast-readout-20260727", "亚周期XUV脉冲产生", "偏振分辨", "强场电离动力学", "等离子体增益介质", "高次谐波HHG"]
 source_raw: "2026-2505.08930-petahertz-bandwidth-spectral-combs-from-the-amplif.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -73,6 +73,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[general-order-parameter-ultrafast-readout-20260727]]
 - [[亚周期XUV脉冲产生]]
 - [[偏振分辨]]
 - [[强场电离动力学]]

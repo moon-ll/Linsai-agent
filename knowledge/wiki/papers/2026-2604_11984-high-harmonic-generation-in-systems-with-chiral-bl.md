@@ -2,9 +2,9 @@
 title: "手性布洛赫态系统中的高次谐波产生：菱面体石墨烯的应用"
 type: "papers"
 created: "2026-08-17T09:59:45Z"
-updated: "2026-08-17T09:59:45Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["高次谐波", "手性布洛赫态", "菱面体石墨烯", "圆二色性", "量子几何", "谷物理", "固态HHG"]
-related: ["圆二色性HHG", "强场超快光学", "手性Bloch态", "瞬态量子相光学读出", "菱面体石墨烯", "量子几何相位"]
+related: ["圆二色性HHG", "强场超快光学", "手性Bloch态", "瞬态量子相光学读出", "菱面体石墨烯", "量子几何相位", "高次谐波产生"]
 source_raw: "2026-2604.11984-high-harmonic-generation-in-systems-with-chiral-bl.md"
 growth_stage: "growing"
 confidence: 0.75
@@ -85,4 +85,5 @@ review_status: "pending"
 - [[瞬态量子相光学读出]]
 - [[菱面体石墨烯]]
 - [[量子几何相位]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

@@ -2,9 +2,9 @@
 title: "论文精读：飞秒近红外二维异质结构的烧蚀阈值（h-BN 封装石墨烯与 TMD 单层）"
 type: "papers"
 created: "2026-08-16T14:04:47Z"
-updated: "2026-08-16T14:04:47Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["论文精读", "烧蚀阈值", "二维异质结构", "h-BN封装", "飞秒加工", "强场超快"]
-related: ["moiré强场探针", "二维材料超快动力学", "强场样品损伤窗口", "量子几何反演", "阿秒器件加工", "高次谐波产生"]
+related: ["general-moire-strong-field-probe-20260726", "moiré强场探针", "二维材料超快动力学", "强场样品损伤窗口", "量子几何反演", "阿秒器件加工", "高次谐波产生"]
 source_raw: "2026-2608.09312-femtosecond-near-infrared-ablation-thresholds-of-2d-heterost.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -54,6 +54,7 @@ h-BN 封装依赖性是我最关心的点。我们封装本来是为了空气稳
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[general-moire-strong-field-probe-20260726]]
 - [[moiré强场探针]]
 - [[二维材料超快动力学]]
 - [[强场样品损伤窗口]]

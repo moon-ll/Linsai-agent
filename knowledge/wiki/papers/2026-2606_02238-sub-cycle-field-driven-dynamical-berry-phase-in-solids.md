@@ -2,9 +2,9 @@
 title: "Sub-cycle field-driven dynamical Berry phase in solids 论文精读笔记"
 type: "papers"
 created: "2026-08-15T21:56:39Z"
-updated: "2026-08-17T05:19:29Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["强场超快光学", "阿秒科学", "Berry相位", "固体高次谐波", "亚周期动力学", "瞬态量子相位", "论文精读"]
-related: ["Berry曲率", "Sub-cycle field-driven dynamical Berry phase in solids", "固体HHG", "固体高次谐波", "拓扑超快动力学", "电子-空穴动力学", "瞬态量子相位测量"]
+related: ["2606.02238", "Berry曲率", "Sub-cycle field-driven dynamical Berry phase in solids", "固体HHG", "固体高次谐波", "拓扑超快动力学", "电子-空穴动力学", "瞬态量子相位测量"]
 source_raw: "2026-2606.02238-sub-cycle-field-driven-dynamical-berry-phase-in-solids.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -67,6 +67,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2606.02238]]
 - [[Berry曲率]]
 - [[Sub-cycle field-driven dynamical Berry phase in solids]]
 - [[固体HHG]]

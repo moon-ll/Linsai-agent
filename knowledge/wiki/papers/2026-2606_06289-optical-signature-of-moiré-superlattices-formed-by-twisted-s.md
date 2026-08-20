@@ -2,9 +2,9 @@
 title: "扭转载SrTiO₃膜莫尔超晶格的光学特征（Optical Signature of Moiré Superlattices Formed by Twisted SrTiO₃ Membranes）"
 type: "papers"
 created: "2026-08-15T20:53:38Z"
-updated: "2026-08-17T05:19:29Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["moiré超晶格", "SrTiO₃", "氧化物范性膜", "扭转角", "光学表征", "强场超快", "量子顺电体"]
-related: ["moiré平带", "twisted bilayer physics", "三步模型", "二阶非线性光学/SHG", "强场高次谐波探测", "氧化物膜转移技术"]
+related: ["general-moire-strong-field-probe-20260726", "moiré平带", "twisted bilayer physics", "三步模型", "二阶非线性光学/SHG", "强场高次谐波探测", "氧化物膜转移技术"]
 source_raw: "2026-2606.06289-optical-signature-of-moiré-superlattices-formed-by-twisted-s.md"
 growth_stage: "mature"
 confidence: 0.5
@@ -57,6 +57,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[general-moire-strong-field-probe-20260726]]
 - [[moiré平带]]
 - [[twisted bilayer physics]]
 - [[三步模型]]

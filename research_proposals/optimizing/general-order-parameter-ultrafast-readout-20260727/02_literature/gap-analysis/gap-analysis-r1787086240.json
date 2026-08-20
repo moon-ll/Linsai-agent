@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "Rost等人spin-resolved HHG观测CrSb altermagnetic序参量的实验工作被引用4次但无独立参考文献条目",
+      "missing_evidence": "arXiv:2507.02673（Rost CrSb high harmonic generation spin-resolved 2025）在references.md中无对应条目，导致[67]引用悬挂",
+      "search_keywords": [
+        "Rost CrSb high harmonic generation spin-resolved 2025",
+        "arXiv 2507.02673 altermagnet HHG",
+        "CrSb spin-polarized high harmonic experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Werner [24] 在rationale.md与content.md中年份标注不一致（2024 vs 2026），需核实原始文献发表年份",
+      "missing_evidence": "Werner altermagnet HHG理论工作实际发表年份需确认，判断是预印本vs正式发表版本问题还是标注错误",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation theory",
+        "Werner Šmejkal altermagnet HHG 2024 2025 2026",
+        "Werner spin-splitting altermagnet nonrelativistic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[62]Cochran量子相干断层成像与[63]Sørensen阿秒序参量重建两项HHG序参量反演方法在rationale.md中编号与references.md错位",
+      "missing_evidence": "Cochran HHG quantum coherence tomography与Sørensen attosecond order parameter reconstruction两项方法论文献在references.md中的编号与正文中引用编号不一致",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic",
+        "Sørensen attosecond order parameter reconstruction HHG",
+        "HHG quantum coherence tomography arXiv 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb在近红外飞秒激光强场下的光学损伤阈值未建立，影响可行性判据中'CrSb差分HHG ≥1%'实验方案的可靠性",
+      "missing_evidence": "缺少CrSb单晶在800nm、10-100fs脉冲、0.1-1 TW/cm²强度范围内的激光损伤阈值实验数据",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser ablation threshold near-infrared",
+        "CrSb strong field optical excitation stability V/Angstrom",
+        "MnTe altermagnet femtosecond damage threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG反演altermagnetic三阶序参量（自旋/轨道/晶格）的可分辨性缺乏实验验证支撑",
+      "missing_evidence": "缺少实验工作证明HHG能区分自旋分裂、轨道序、晶格畸变三类序参量的贡献比例或特征信号",
+      "search_keywords": [
+        "HHG order parameter distinguishability spin orbit lattice",
+        "altermagnet three order parameters HHG distinguishability",
+        "high harmonic generation magnetic order parameter separation experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Fisher信息条件数作为HHG反演可辨识性判据缺乏实验验证，只停留在理论框架层面",
+      "missing_evidence": "Fisher information matrix condition number用于HHG反演的可行性未通过实验数据验证，无实际测量值支撑κ阈值（10²/10²-10⁴/>10⁴）",
+      "search_keywords": [
+        "Fisher information HHG parameter retrieval experimental validation",
+        "condition number optical parameter inversion HHG measurement",
+        "attosecond spectroscopy Fisher information experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "贝叶斯后验标准差<50%作为可辨识性判据缺乏实验支撑，与实际测量噪声水平的对应关系未建立",
+      "missing_evidence": "缺少CrSb/MnTe体系HHG测量中噪声水平（shot noise/背景 drift）与贝叶斯后验标准差的实证对应数据",
+      "search_keywords": [
+        "Bayesian inversion HHG spectroscopy experimental",
+        "posterior standard deviation high harmonic retrieval measurement",
+        "HHG signal-to-noise ratio Bayesian uncertainty experimental"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

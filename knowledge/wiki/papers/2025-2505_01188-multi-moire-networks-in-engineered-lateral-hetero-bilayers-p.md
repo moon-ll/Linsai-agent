@@ -2,9 +2,9 @@
 title: "论文精读：横向异质双层中的多重莫尔网络——可编程声子重构与二次谐波产生"
 type: "papers"
 created: "2026-08-16T13:51:49Z"
-updated: "2026-08-17T05:19:27Z"
+updated: "2026-08-20T05:15:28Z"
 tags: ["moiré超晶格", "TMD横向异质结", "声子工程", "二次谐波产生", "非线性光学", "论文精读", "NSFC-强场超快"]
-related: ["Multi Moire Networks in Engineered Lateral Hetero-Bilayers: Programmable Phononic Reconfiguration and Second Harmonic Generation", "强场超快探测", "电子-声子耦合", "相干声子动力学", "瞬态SHG探测", "莫尔声子", "转角电子学"]
+related: ["Multi Moire Networks in Engineered Lateral Hetero-Bilayers: Programmable Phononic Reconfiguration and Second Harmonic Generation", "general-moire-strong-field-probe-20260726", "强场超快探测", "电子-声子耦合", "相干声子动力学", "瞬态SHG探测", "莫尔声子", "转角电子学"]
 source_raw: "2025-2505.01188-multi-moire-networks-in-engineered-lateral-hetero-bilayers-p.md"
 growth_stage: "growing"
 confidence: 0.55
@@ -58,6 +58,7 @@ review_status: "pending"
 ## 关联概念
 
 - [[Multi Moire Networks in Engineered Lateral Hetero-Bilayers: Programmable Phononic Reconfiguration and Second Harmonic Generation]]
+- [[general-moire-strong-field-probe-20260726]]
 - [[强场超快探测]]
 - [[电子-声子耦合]]
 - [[相干声子动力学]]

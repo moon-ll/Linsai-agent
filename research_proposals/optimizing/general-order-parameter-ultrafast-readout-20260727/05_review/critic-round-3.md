@@ -1,216 +1,262 @@
-# 对抗评审报告（第3轮）
+# 对抗评审报告（第 3 轮 · 参考文献专项）
 
+项目路径：general-order-parameter-ultrafast-readout-20260727
+聚焦章节：references.md（参考文献表） vs. rationale.md / content.md / scheme.md（正文）
 项目类型：general（面上项目）
-评审日期：2026-08-03
-本轮聚焦：（三）研究方案、特色与创新、预期研究成果（技术路线、可行性、创新点、预期成果）
-聚焦文件：`04_proposal/sections/scheme.md`
-一致性抽查：`rationale.md`、`content.md`、`references.md`、`full_review.md`、`04_proposal/proposal-draft.md`（合并稿）
-评审标准：`memory/nsfc-standards.json` → `project_types.general`（创新性30%/可行性25%/科学意义20%/研究基础15%/表达质量10%）与 `general_principles.writing_style_rules`
-事实核查范围：本轮完成申请书内部交叉核查；未联网核验的期刊状态、"国内/国际空白"一律不当作已证实事实。
+评审日期：2026-08-19
+profile：critic
+本轮范围：参考文献专项（引文格式、编号一致性、引用相关性、缺失引用、引用数量、时效性）
+不在本轮范围：写作风格、创新性、可行性（按任务定义标 N/A）
 
+================================================================
 ## 综合评分
 
-**0.46 / 1.00**（未达面上输出线 0.80）
+0.40 / 1.00（严谨性 0.30 × 0.50 + 完整性 0.50 × 0.50；评分公式自洽）
 
-第 1、2 轮后，作者完成了两件实质性的事：一是把 `rationale.md`（立项依据）从"4 类序参量×十余材料×6 个发现机会"的方向库重写为以 altermagnet 可辨识性为核心的科学故事，加入了 No-Go 判据、"必要非充分"限定、引文口径修复（Biegert 降级、Ryan 路线区分、Werner/Šmejkal 对齐）；二是把 `content.md`（研究内容）从第 1 轮的旧版"关键科学问题凝练副本"重写为真正的"研究内容"——含研究目标、三项递进研究内容（TiSe₂ 对照 → CrSb 信号探测 → 可辨识性分析）、特色与创新三层面。这两份章节现在彼此一致、都是叙述式、都收敛到同一条科学主线，第 2 轮判定的"content 与 rationale 致命冲突"已经消除。这是值得肯定的进步。
-
-但本轮聚焦的 **研究方案章节（scheme.md）实质为空**——仅 1 行标题"## （三）研究方案、特色与创新、预期研究成果"，正文 0 字。这意味着整份申请书的"怎么做"完全缺失：没有总体技术路线，没有理论方法的推导框架与参数选择依据，没有实验方案的样品制备/光路/测量/参数优化，没有关键技术难点与 Go/No-Go 转向路径，也没有方法学创新在方案层面的落地。`content.md` §2 提到了差分设计、多带正演模型、费舍尔信息矩阵、贝叶斯反演、No-Go 判据——这些是"做什么"层面的方法学思路，但没有研究方案把它们展开为可执行的技术路线，评审专家无从判断方案是否可行、关键参数是否合理、风险如何应对。可行性维度因此近乎崩塌。
-
-更严重的是，合并稿 `04_proposal/proposal-draft.md` 处于灾难状态：其立项依据与国内外现状部分（行1—180）仍是 round-1 前的旧版（满篇 ⭐、`v0.2 新增`、`完全空白`、`T1+T4 协同`、蓝海度表格），完全没有跟随 `rationale.md` 的重写；其"节 3：关键科学问题凝练"（行181—288）与紧接其后的同名节（行294—403）**一字不差地完整重复了两遍**；"（三）研究方案"（行407—409）同样为空。这是最终提交合并稿的版本，却同时存在内容重复、章节陈旧、核心章节空白三类问题。若以此稿提交，评审专家在 20 分钟内即可发现"研究内容讲了两遍、研究方案没有"。
-
-综合评分按创新性30%、可行性25%、严谨性30%（承接标准中的科学意义与表达质量）、完整性15% 加权：0.30×0.72 + 0.25×0.20 + 0.30×0.52 + 0.15×0.28 = 0.46。相比第 2 轮 0.42 略升，主因是 content.md 重写后与 rationale 的一致性断裂被修复、严谨性回升；但聚焦章节（研究方案）空白使可行性继续在低位，完整性因 method/plan/outcome 三模块仍未补齐而封顶。
-
+================================================================
 ## 维度评分
 
-| 维度 | 权重 | 得分 | 问题数 | 主要短板 |
-|---|---:|---:|---:|---|
-| 创新性 | 30% | 0.72 | 2 | 科学问题聚焦方式（altermagnet 可辨识性、小切口深挖掘）新颖且可证伪，content.md 把创新点具体化为三层面；但创新点停留在"做什么"层面，研究方案空白使其无法在技术路线层面落地，方法学创新（正演模型+反演+No-Go）的可检验性无从核对。 |
-| 可行性 | 25% | 0.20 | 5 | scheme.md 实质为空；无总体技术路线、无理论方法参数选择依据、无实验方案（样品/光路/测量/参数）、无关键难点与 Go/No-Go 转向、无年度节点与风险预案；content.md 的方法学思路无方案支撑。 |
-| 严谨性 | 30% | 0.52 | 6 | rationale/content 引文口径已修复、No-Go 已设、范围已收缩；但合并稿 proposal-draft.md 陈旧且节3重复两遍、研究方案空、预印本依赖度仍高（Werner/Ryan/Ly/Cheng/Granados 等核心引文仍为 arXiv），无法在方案层面核查物理可行性。 |
-| 完整性 | 15% | 0.28 | 6 | 7 模块中立项依据、研究内容（缺年度计划+预期成果子节）、参考文献有实质内容；研究方案空白、特色与创新归属在 content/scheme 标题间冲突、年度计划缺失、预期成果缺失；按用户指令缺 method/plan/outcome ≥2 模块，完整性封顶 0.30，因聚焦章节空白取 0.28。 |
+| 维度 | 权重 | 得分 | 问题数 | rubric 档位依据 |
+|------|------|------|--------|---------------|
+| 严谨性（引文格式、编号一致性、作者信息完整性） | 0.50 | 0.30 | critical:3, high:3, medium:2, low:2 | §6 系统性编号错位未根治（R2 报告 4 条 critical 中 0 条解决，新增 2 条反向错位）；references.md 自检段反向固化错位 |
+| 完整性（引用数量、时效性、缺失引用） | 0.50 | 0.50 | critical:0, high:2, medium:1, low:2 | 数量 40 条达标；时效性 33/40 = 82.5%（pre-2023 仅 7 条合理保留）；但 [55] [64] 两条孤儿条目 + CrSb/Rost 仍缺失条目 + 关键材料参数无独立引用，完整性受拖累 |
+| 创新性 | N/A | N/A | — | 本轮不评 |
+| 可行性 | N/A | N/A | — | 本轮不评 |
 
-## 0. 模块完整性检查
-
-| 标准模块 | 对应文件/位置 | 实质字符概况 | 判定 |
-|---|---|---:|---|
-| 立项依据 | `rationale.md` | ~7,300 字符，叙述式，范围已收缩 | 有内容，第 1 轮后已大幅改善 |
-| 研究内容 | `content.md` | ~3,500 字符，含研究目标+三项递进内容+特色创新 | 有内容，第 2 轮后已重写为真正研究内容；**缺年度计划与预期成果两个子节** |
-| 研究方案 | `scheme.md` | 0 字（仅 1 行标题） | **缺失：仅占位，<200 字** |
-| 特色与创新 | `content.md` §3 有；`scheme.md` 标题也提及 | 归属冲突 | **归属不清**：content 已写三层面创新，scheme 标题又把"特色与创新"纳入，二者重叠 |
-| 年度研究计划 | 未找到对应章节 | 0 字 | **缺失，<200 字** |
-| 预期研究成果 | `scheme.md` 标题提及 | 0 字 | **缺失，<200 字** |
-| 参考文献 | `references.md` | 46 条 | 有内容，核心引文口径部分修复，预印本占比仍高 |
-
-结论：按 7 模块口径仅 3/7 有实质内容（立项依据、研究内容、参考文献），其中研究内容还缺年度计划与预期成果两个标准子节。缺失 method（研究方案）、plan（年度计划）、outcome（预期成果）至少 3 个模块（≥2 个），按用户指令完整性维度封顶 0.30；因本轮聚焦的研究方案模块实质空白，进一步取 0.28。另按 2026 面上"三段式：立项依据+研究内容+研究基础"，研究基础模块亦未见。
-
-## 聚焦章节（scheme.md）段落级深审
-
-**说明：scheme.md 正文为 0 字，无法做段落级深审。以下逐项列出"该章节必须包含但因空白而缺失的内容"，每项对应一个 critical/high 问题，构成 writer 补齐研究方案的最小清单。**
-
-### 研究方案应包含而当前缺失的内容（按 general 模板 5 子节）
-
-**① 总体技术路线（缺）**
-- 应有：一张研究方案整体架构示意（主体系 CrSb + 对照体系 TiSe₂ + 可辨识性判据三者的数据流与依赖关系），配 1—2 段文字说明"先验证已知、再探测未知、最后解决归因"的逻辑如何在技术层面落地。
-- 现状：0 字。content.md §2 描述了三项研究内容的递进逻辑，但没有上升到技术路线层面（谁先谁后、产出如何衔接、关键里程碑）。
-
-**② 理论方法（缺）**
-- 应有：多带正演模型的具体形式——是半导体布洛赫方程（SBE）还是含时密度泛函理论（TDDFT）？二者在 altermagnet 体系各自的适用边界与计算代价？含自旋轨道耦合的多带模型如何参数化（CrSb 的 d 波分裂参数从何处取）？费舍尔信息矩阵如何对谐波可观测量求导、条件数阈值如何设定？贝叶斯反演的先验与似然如何构造？
-- 现状：0 字。content.md §2 研究内容三仅一句话提及"费舍尔信息矩阵评估条件数、贝叶斯反演给出后验分布"，无任何方法学细节。方法学手册 `methodology-manual.md` 有大量参数表与推导，但申请书正文必须自洽，不能默认评审去翻手册。
-
-**③ 实验方案（缺）**
-- 应有：驱动光源（波长/脉宽/重复频率/场强范围——altermagnet 低阶偶次谐波预言对应哪个驱动波段？中红外 OPCPA 还是近红外？）、偏振分辨方案（线/圆/椭圆偏振如何产生与测量、消光比要求）、温度控制（跨越 CrSb Néel 温度 ~720 K 与 TiSe₂ CDW 相变 ~205 K 的温区如何覆盖）、外磁场配置（方向反转如何实现、磁场强度范围）、样品制备（CrSb/MnTe 薄膜或块体、取向、质量要求）、TiSe₂ 对照的复现判据（偏振不对称幅值、温度依赖曲线与 Tyulnev 2025 的一致性容差）。
-- 现状：0 字。这是研究方案最致命的空白——评审专家完全无法判断实验是否可在 4 年期、60 万经费内完成。
-
-**④ 关键技术难点与解决路径（缺）**
-- 应有：逐项分析风险与对策。候选难点至少包括：(a) CrSb 在强场下的损伤阈值与信号过弱风险——MnTe 备选的切换判据是什么？(b) altermagnet HHG 信号本身就弱（零净磁矩），如何与非线性背景区分？(c) 多带正演模型参数过多导致反演病态——费舍尔条件数恶化时如何正则化或降维？(d) 温度/磁场/偏振三重联合扫描的数据量与测量时间——是否有预估计？(e) No-Go 触发后的科学产出如何保证（项目不致空转）？
-- 现状：0 字。content.md 提到 No-Go 机制是"可检验的科学结果"，但没有说明 No-Go 触发后项目在剩余年度做什么、产出什么。
-
-**⑤ 方法学创新（缺）**
-- 应有：技术路线中独特的方法学贡献——可辨识性判据的具体形式（参数后验相关系数阈值？交叉验证残差？Cramér-Rao 界？）、与现有 HHG 反演工作（Vampa 2015、Hu PNAS 2024）的本质区别、该判据可延伸至其他序参量体系的具体路径。
-- 现状：0 字。content.md §3 把"方法学可靠性闭环"列为第二创新点，但只给了概念，没有可检验的结果指标。
-
-## 跨章节一致性审查（本轮新增/更新）
-
-| 章节对 | 结论 | 说明 |
-|---|---|---|
-| rationale §3（核心问题）↔ content §1（研究目标） | ✅ 一致（改善） | 两者现已统一为"限定 altermagnet 条件下，磁场反转与偏振分辨 HHG 能否区分序参量相关对称性与能带背景替代解释"。第 2 轮的致命冲突已消除。 |
-| rationale §4（三重保障）↔ content §2 研究内容三 | ✅ 一致（改善） | 差分设计、正演模型、No-Go 判据在两处表述一致。 |
-| rationale §3（不追求覆盖 4 类序参量）↔ content §2（仅 altermagnet 主线） | ✅ 一致（改善） | content 已删除超导/CDW/激子作为独立研究内容，与 rationale 范围声明一致。 |
-| content §3（特色与创新，三层面）↔ scheme 标题（特色与创新） | ⚠️ 归属冲突 | content.md 已写三层面创新点；scheme.md 标题"（三）研究方案、特色与创新、预期研究成果"又把特色创新纳入。二者重叠，需明确创新点归属哪一节，避免重复或互相掏空。 |
-| content §2（三项研究内容）↔ scheme（技术路线） | ❌ 断裂 | content 描述了"做什么"，但 scheme 空白使"怎么做"完全缺失；研究内容无法被技术路线支撑。 |
-| content（无年度计划子节）↔ plan 模块 | ❌ 缺失 | 按 general 模板，研究内容章节应含年度计划；content 无，独立 plan 模块也无。 |
-| content（无预期成果子节）↔ outcome 模块 | ❌ 缺失 | 同上，预期成果子节与独立 outcome 模块均无。 |
-| rationale/content（重写后）↔ proposal-draft.md 合并稿 | ❌ 严重不一致 | 合并稿立项依据/现状部分仍是旧版（⭐/v0.2/完全空白/蓝海度），未跟随重写；节3 重复两遍；研究方案空。合并稿与独立章节文件描述的是不同版本的项目。 |
-
-## 术语一致性矩阵（本轮核查）
-
-| 术语 | 定义位置 | 使用一致性 | 备注 |
-|---|---|---|---|
-| altermagnet / 交错磁体 | rationale §1 | ✅ 统一 | rationale/content 均用，含中英文 |
-| CrSb / MnTe（主/备选） | rationale §4 / content §2 | ✅ 统一 | Néel 温度口径一致（720 K / 310 K） |
-| TiSe₂ 对照体系 | rationale §4 / content §2 | ✅ 统一 | 均定位为方法学对照，非独立研究内容 |
-| No-Go 判据 | rationale §3 / content §2 | ✅ 统一 | 两处定义一致（参数后验不可区分时只报联合分布） |
-| 偏振+温度+磁场（三重核心约束） | rationale §4 / content §2 末段 | ✅ 统一 | CEP/OAM 明确排除出核心反演，与 Granados 耦合结论一致 |
-| "直接读出" vs "模型约束读出" | rationale §1 / content §2 | ✅ 已修复 | 第 1 轮 rigor 问题已消除，现统一为"辨识/反演"而非"直接读出" |
-| ⭐ / v0.2 新增 / 完全空白 / T1-T5 协同 | proposal-draft.md 行91—177 | ❌ 合并稿残留 | 独立章节文件已清理，但合并稿未清理 |
-
-## 写作风格红线检查（writing_style_rules）
-
-| 检查项 | rationale.md | content.md | scheme.md | proposal-draft.md |
-|---|---|---|---|---|
-| 以科学问题为主线 | ✅ | ✅ | N/A（空） | ❌ 旧版仍以方向库为主线 |
-| 禁止"A做了X，B做了Y"文献堆砌 | ✅ 已修复 | ✅ 已修复 | N/A | ❌ 旧版仍堆砌 |
-| 禁止 bullet-list 替代论证 | ✅ | ✅（全叙述） | N/A | ❌ 旧版满篇 bullet |
-| 段落过渡与逻辑递进 | ✅ | ✅（三项内容有递进依赖句） | N/A | ❌ 旧版平行堆砌 |
-| 研究方案说明"为什么选这个方法" | — | 部分（content 提到选 CrSb 的三点考量） | ❌ 完全缺失 | ❌ |
-| 内部标签清理（⭐/v0.2/协同/蓝海） | ✅ 已清理 | ✅ 已清理 | N/A | ❌ 未清理 |
-
-结论：独立章节文件（rationale/content）的写作风格已基本达标，是前两轮的主要成果。但本轮聚焦的 scheme 完全空白，无法评估研究方案的写作风格；合并稿 proposal-draft.md 仍是旧版风格，未跟随重写。
-
-## 物理领域专项检查（8 项）
-
-| # | 检查项 | 结果 | 说明 |
-|---|---|---|---|
-| 1 | BSV 增强与反演精度等同 | N/A | 项目已收缩到 altermagnet HHG，未涉及 BSV 量子光场；此项不适用。 |
-| 2 | Berry 曲率/量子度规可独立辨识性预设 | ✅ 已规避 | 项目不再宣称反演 Berry 曲率/量子度规，聚焦序参量相关对称性。 |
-| 3 | CDW/Mott/拓扑材料分类混用 | ✅ 已修复 | TiSe₂ 现仅作 CDW 对照，未混称"强关联拓扑"。 |
-| 4 | Q1/Q2 是否真正科学问题（可证伪+No-Go） | ✅ 改善 | 核心问题已含可证伪答案与 No-Go 转向（rationale §3 / content §2）。 |
-| 5 | 双色场 sin/cos 正交分离强假设 | N/A | 项目未采用双色场 Berry/度规分离方案。 |
-| 6 | 预印本引文占比 | ⚠️ 仍高 | 核心引文 Werner #24、Ly #30、Cheng #31、Granados #35、Ryan #27、Garcia-Gaitan #28、Gabriele #29 均为 arXiv；altermagnet HHG 主线几乎全靠预印本支撑，正式发表证据薄弱。 |
-| 7 | 驱动波长与材料带隙匹配 | ❓ 无法核查 | scheme 空白，未给出驱动波长；无法判断与 CrSb/TiSe₂ 带隙的匹配性。 |
-| 8 | Sala/Ghalgaoui/Rasputnyi/Tyulnev/Verma 逐项核实 | ⚠️ 部分 | Tyulnev 已正式发表（Commun. Mater. 2025）；Werner 仍为预印本（arXiv:2407.07752）但正文已标"2024"；Ryan 仍为预印本但正文已区分 XUV 探针路线。Sala/Ghalgaoui/Rasputnyi/Verma 本项目未引用。 |
-
+================================================================
 ## 问题清单
 
-### [critical] completeness — 研究方案模块实质空白（method）
-- 位置：`04_proposal/sections/scheme.md` 行1（仅标题，正文 0 字）；`proposal-draft.md` 行407—409（同样空）
-- 问题：第 1、2 轮均标记后仍未补齐。研究方案是申请书的"怎么做"核心，当前完全缺失：无总体技术路线、无理论方法（正演模型形式与参数）、无实验方案（光源/偏振/温控/磁场/样品）、无关键难点与 Go/No-Go 转向、无方法学创新落地。content.md 的方法学思路因此悬空，评审无法判断可行性。
-- 建议：按 general 模板 5 子节补齐（详见上文"聚焦章节段落级深审"①—⑤）。重点：理论方法须说明 SBE vs TDDFT 的选择依据与含 SOC 多带模型参数化；实验方案须给出驱动波段（中红外 OPCPA？）、偏振分辨消光比、温区覆盖、磁场配置、TiSe₂ 复现判据；关键难点须逐项给 Go/No-Go 与备选切换（CrSb→MnTe）。
-- action：add
+### [critical] systematic_offset — references §6 与正文 [62]—[67] 编号系统性 +1 错位（R2 报告未根治）
 
-### [critical] consistency — 合并稿 proposal-draft.md 状态灾难（节3重复+陈旧+研究方案空）
-- 位置：`04_proposal/proposal-draft.md` 行1—180（旧版立项依据/现状）、行181—288 与 行294—403（节3 一字不差重复两遍）、行407—409（研究方案空）
-- 问题：合并稿是最终提交的整合版本，但存在三类致命问题：(1) 立项依据与国内外现状部分仍是 round-1 前的旧版（⭐、`v0.2 新增`、`完全空白`、`T1+T4 协同`、蓝海度表格、4 类序参量方向库），完全没有反映 rationale.md 的重写；(2) "节 3：关键科学问题凝练"被完整复制了两遍，正文出现两段一模一样的内容；(3) 研究方案章节为空。以此稿提交，评审在 20 分钟内即可发现"研究内容讲了两遍、研究方案没有、立项依据与研究内容讲的是不同版本的项目"。
-- 建议：以重写后的 `rationale.md` + `content.md` 为唯一真相源，**重建 proposal-draft.md**：删除旧版立项依据/现状/节3（含重复的第二份节3），用 rationale.md 内容替换立项依据部分，用 content.md 内容替换研究内容部分，补齐研究方案，删除所有 ⭐/v0.2/协同/蓝海/完全空白标签。重建后须逐行核对无重复节。
-- action：rewrite
+- **位置**（跨章节 18+ 处）：
+  - 正文用 [62] 指 Cochran：rationale.md L51, L83, L85；content.md L41, L53；scheme.md L41, L73, L95（合计 8 处）
+  - 正文用 [63] 指 Sørensen：rationale.md L45, L51, L63, L83, L85；content.md L27, L41, L51, L53；scheme.md L41, L73, L81, L83, L95（合计 14 处）
+  - references.md 中：[62] = Uzner（层间耦合）；[63] = Cochran（唯一性分析）；[64] = Sørensen（非唯一性）
+- **问题**：body → references 的映射关系与 R2 报告状态完全一致——正文 [62]/[63] 在 references.md 中实为 Uzner/Cochran，而 body 实际想引的是 Cochran/Sørensen。这是 §5 与 §6 边界处的系统性 +1 错位：正文假设 §5 末尾停在 [61] Uzner，§6 从 [62] Cochran 开始；但 references.md 把 [62] 给了 Uzner、把 §6 的 Cochran/Sørensen 整体推迟到 [63]/[64]。R2 报告已指出此问题并给出方案 A（references 整组前移 1 位并补 [67] Rost），但本轮核查显示 references.md §6 编号未动，正文编号亦未动，错位原封不动保留。
+- **违反条款**：`indicator_red_lines.consistency_check`；`scoring_rubric.rigor.0.60-69` 之"存在事实错误"档；`section_standards.references`"无张冠李戴"。
+- **后果**：NSFC 评审专家对照 references.md 表核对编号时，会在 rationale.md L39 第一处 "Cochran [62]" 即发现"按 references [62] 应是 Uzner"，引文系统立即 fail-fast。这是 NSFC 评审中最容易识别的硬伤。
+- **建议（rewrite）**：
+  - 方案 A（推荐）：把 references.md §6 整组向前挪 1 位：Cochran [63]→[62]、Sørensen [64]→[63]、Fuchs [65]→[64]、McCarter [66]→[65]、Horstmann [67]→[66]；并在 [66] 后新增 [67] = Rost et al. CrSb HHG arXiv:2507.02673 (2025)；同步更新 references.md L121、L123、L125、L127、L131、L133、L149、L153、L155、L161 全部编号映射与状态说明。
+  - 方案 B（保守）：保留 references.md 编号不动，把正文 18 处 [62]→[63]、[63]→[64]，并在 references.md 新增 [68] = Rost et al. 条目。
+- **action**：rewrite
 
-### [critical] completeness — 年度研究计划模块缺失（plan）
-- 位置：`content.md` 无年度计划子节；`scheme.md` 无；无独立 plan 文件
-- 问题：第 1、2 轮标记后仍未补。按 general 模板，研究内容章节应含"年度研究计划"子节（4 年分年度），当前 content.md 只有研究目标/研究内容/特色创新，缺年度安排；无法核对任务依赖与验收节点，也无法判断 4 年期是否合理。
-- 建议：在 content.md 增加"年度研究计划"子节，按三项递进研究内容分年度：Y1 TiSe₂ 复现+装置标定+正演模型搭建；Y2 CrSb 信号探测+磁场/偏振/温度扫描；Y3 可辨识性分析+No-Go 判据应用；Y4 独立交叉验证+方法学总结。失败转向（CrSb→MnTe、No-Go 触发）必须落到具体年度。
-- action：add
+### [critical] systematic_offset — content.md §2.3 L23 [65][66] 反向错位（McCarter/Horstmann）
 
-### [critical] completeness — 预期研究成果模块缺失（outcome）
-- 位置：`scheme.md` 标题提及"预期研究成果"，正文 0 字；content.md 无预期成果子节
-- 问题：第 1、2 轮标记后仍未补；无预期成果，无法核对验收闭环。
-- 建议：同时列三类成果：(1) 科学认识——altermagnet HHG 可辨识性的正/负结果各自的科学价值与边界；(2) 方法/数据产物——含 SOC 多带正演模型库、反演流程、TiSe₂/CrSb 对照数据集；(3) 可量化验收指标——论文（避免唯数量，给科学结论导向的指标）、人才培养。论文数量不能替代科学结果。
-- action：add
+- **位置**：content.md L23 "Leeb 等人 2025 年 [58a]、McCarter 等人 2025 年 [65]、Horstmann 等人 2025 年 [66] 三项工作..."
+- **问题**：按 references.md，[65] = Fuchs（MnTe 自旋极化 HHG），[66] = McCarter（ab initio），[67] = Horstmann（选择定则）。该句把 McCarter 标 [65]、Horstmann 标 [66]——与 #1 的 +1 错位**方向相反**（-1 错位），即同一项目内两套错位互相叠加。该句实际应为 "Leeb 等人 2025 年 [58a]、McCarter 等人 2025 年 [66]、Horstmann 等人 2025 年 [67]"。
+- **违反条款**：`indicator_red_lines.consistency_check`；`section_standards.references`"无张冠李戴"。
+- **建议**：content.md L23 改为 "Leeb 等人 2025 年 [58a]、McCarter 等人 2025 年 [66]、Horstmann 等人 2025 年 [67] 三项工作把候选信号的对称性约束从二元极限推广到连续参数区间"。
+- **action**：rewrite
 
-### [high] consistency — 特色与创新归属在 content 与 scheme 标题间冲突
-- 位置：`content.md` §3（特色与创新点，三层面）；`scheme.md` 行1 标题"（三）研究方案、特色与创新、预期研究成果"
-- 问题：content.md 已撰写三层面创新点（问题聚焦/方法学闭环/对照体系），但 scheme.md 标题又把"特色与创新"纳入研究方案章节。两处重叠会导致两种风险：要么创新点在两节重复出现，要么互相掏空（一节写了另一节就略过）。按 general 模板，特色与创新属于"研究内容"章节（proposal_templates.general 第二节子节3），研究方案章节应聚焦技术路线。
-- 建议：明确特色与创新归属 content.md（研究内容章节），scheme.md 标题改为"（三）研究方案"，删除"特色与创新、预期研究成果"；预期成果按上文 outcome 建议补到 content.md 或独立成节。
-- action：rewrite
+### [critical] orphan_citation — Rost arXiv:2507.02673 在 references.md 仍无独立条目
 
-### [high] evidence — altermagnet HHG 主线对预印本依赖度过高
-- 位置：`references.md` #24（Werner）、#27（Ryan）、#30（Ly）、#31（Cheng）、#35（Granados）、#28（Garcia-Gaitan）、#29（Gabriele）
-- 问题：altermagnet HHG 是本项目主线，但其核心理论支撑几乎全为 arXiv 预印本：Werner 2024（磁场依赖预言）、Ly 2026（高阶泵浦谐波）、Cheng 2026（超快调控）均未正式发表。Ryan 2025（kagome XUV）虽正文已区分路线但仍为预印本。若 Werner 等预印本在正式发表时结论变化，整个候选信号的基础将动摇。
-- 建议：提交前 24 小时联网核实每个核心预印本的发表状态；对 Werner 等核心预言，正文须明确标注"预印本，尚未经同行评审"，并说明本项目对理论预言的依赖程度；尽量补充已正式发表的 altermagnet 基础理论（Šmejkal PRX 2022、Leeb PRL 2024 已正式发表，可加强这部分权重）。
-- action：verify
+- **位置**：
+  - 正文 6 处用 [67] 指 Rost：rationale.md L33, L63, L77（3 处）；content.md L21, L51（2 处）；另 1 处 content.md L51（"Rost 等人 2025 年 [67]"）
+  - references.md 全文搜索 "Rost" / "2507.02673" **0 命中**
+  - scheme.md L53, L73 已用纯 arXiv 文本绕过（"Rost 等人（arXiv:2507.02673, 2025）"），但 rationale.md/content.md 6 处仍用 [67] 编号引用
+- **问题**：Rost 工作是本项目"CrSb 信号可探测前提"的核心实验依据，被正文 6 处用 [67] 编号引用，但 references.md 完全没有该工作的正式条目。按 references.md 现在的编号体系，[67] = Horstmann（理论选择定则），正文用 [67] 指 Rost 完全错位。这是 R2 报告 #3 遗留问题，本轮未解决。
+- **违反条款**：`indicator_red_lines.novelty_claim_cautious`；`section_standards.references`"参考文献 30-40 篇，编号连续无跳号"。
+- **建议**：与 #1 一并处理。在 references.md §6 末尾新增 [68] = "Rost, S. M. et al. Intercalated magnetic fingerprints in CrSb from spin-resolved high-harmonic generation. arXiv:2507.02673 (2025). 【预印本】" 条目，并把正文 6 处 [67]→[68]。若采用 #1 方案 A，则 Rost 占位为 [67]、正文 6 处不动。
+- **action**：rewrite + research（须先核实 arXiv:2507.02673 是否存在）
 
-### [high] feasibility — 实验参数与物理匹配性因 scheme 空白无法核查
-- 位置：`scheme.md`（空）
-- 问题：研究方案空白导致多项物理可行性无法核查——驱动波长与 CrSb/TiSe₂ 带隙是否匹配？altermagnet 低阶偶次谐波预言（Werner 无 SOC 情形）对应哪个驱动波段与场强？偏振分辨的消光比能否分辨 altermagnet 预期的圆二色性幅值？CrSb 的强场损伤阈值是否已知？这些是评审判断"能不能做"的关键，当前全无信息。
-- 建议：补齐研究方案时，对每个关键参数给出文献依据与预估值，并在方法学手册中给出完整参数表；申请书写明核心参数的选择理由（为什么选这个波长/场强/温区），而非只罗列。
-- action：add
+### [high] numbering_doc_contradiction — references.md §6 自检段反向固化错位编号映射
 
-### [high] logic — No-Go 触发后的项目产出路径未说明
-- 位置：`content.md` §2 研究内容三（No-Go 判据）；`scheme.md`（空，无风险转向）
-- 问题：content.md 把 No-Go 判据定位为"可检验的科学结果"，这是好的科学态度。但 No-Go 触发意味着"HHG 无法在排除替代解释后辨识 altermagnet 序参量"——此时项目剩余年度做什么、产出什么，content 和 scheme 均未说明。若 No-Go 在 Y2/Y3 触发，Y4 如何保证不空转？这直接影响可行性判断。
-- 建议：在研究方案的关键难点与年度计划中，明确 No-Go 触发后的转向路径：(a) 报告不可辨识条件的定量边界（哪些参数组合、多大测量精度下不可辨识）本身是有价值的科学结论；(b) 转向扩展体系（MnTe 或其他 altermagnet）检验判据的普适性；(c) 把方法学框架（正演+反演+No-Go）作为可迁移产出。
-- action：add
+- **位置**：
+  - references.md L121 "§6 本组共 5 条文献（[63]—[67]），... [63] Cochran 给出唯一性条件分析框架；... [64] Sørensen 从解析与数值两方面..."
+  - references.md L123 "三条 altermagnet HHG 实验 / 理论里程碑... [65] Fuchs... [66] McCarter... [67] Horstmann..."
+  - references.md L155 "具体引用位置：[63] Cochran 在 rationale.md:49 引用；[64] Sørensen 在 rationale.md:49 引用；[65] Fuchs 在 rationale.md:31 以纯 arXiv 文本引用；[66] McCarter 在 rationale.md:35 以纯 arXiv 文本引用；[67] Horstmann 在 rationale.md:35 以纯 arXiv 文本引用；[58b] Qiu 在 rationale.md:35 与 content.md:33 引用。"
+- **问题**：references.md 内部 L121/L123/L155 自述的 [63] Cochran / [64] Sørensen / [65] Fuchs / [66] McCarter / [67] Horstmann 编号体系，**与 references.md L125/L127/L129/L131/L133 实际条目 [63]=Cochran/[64]=Sørensen/[65]=Fuchs/[66]=McCarter/[67]=Horstmann 一致**——但 references.md 把 [63][64] 描述为"在 rationale.md:49 引用"，实际 rationale.md L49 是孟胜/李亮兰鹏飞段，**完全不出现 Cochran 或 Sørensen**。Cochran/Sørensen 实际出现在 rationale.md L39, L45, L51, L63, L83, L85——references.md 自检段把行号也写错了。
+- **违反条款**：`indicator_red_lines.consistency_check`；`section_standards.full_review`"无跨章节内容重复"。
+- **建议**：与 #1 一并处理。在 references.md §6 整组前移 1 位后，重写 L121、L123、L155、L161 的所有编号映射与行号引用，确保 references.md 自检段与正文引用位置严格一致。
+- **action**：rewrite
 
-### [medium] narrative — content.md 特色创新段可更紧扣"可检验结果"
-- 位置：`content.md` §3（特色与创新点，三层面）
-- 问题：三层面创新点（问题聚焦/方法学闭环/对照体系）写得清晰，但每点都偏概念阐述，缺少"可检验结果指标"。例如"方法学可靠性闭环"未给出费舍尔条件数阈值、后验相关系数上限等可验收的量化判据。这使创新点更像主张而非可检验命题。
-- 建议：每个创新点补一句"可检验结果"——如"方法学闭环的可检验指标为：在 TiSe₂ 对照上正演模型与实验的偏振不对称幅值偏差 < X%；在 CrSb 上参数后验相关系数 |ρ| < Y 时视为可辨识"。
-- action：rewrite
+### [high] year_inconsistency — [24] Werner 在 references.md 与正文跨文档年份不一致（2024 vs 2026）
 
-### [medium] completeness — content.md 缺研究内容章节应有的年度计划与预期成果子节
-- 位置：`content.md` 全文
-- 问题：按 general 模板，"（二）研究内容"应含 5 子节（研究目标/研究内容/特色创新/年度计划/预期成果），content.md 当前只有前 3 个。虽年度计划与预期成果可独立成模块，但若归属研究内容章节则当前不完整。
-- 建议：明确归属——若年度计划/预期成果独立成 scheme 或新模块，则在 content.md 末尾用一句过渡说明"年度安排与预期成果见（三）/（四）"；若归属研究内容，则直接补入。
-- action：add
+- **位置**：
+  - references.md 条目 L71 "[24] Werner, P., Lysne, M. & Murakami, Y. High harmonic generation in altermagnets. *Phys. Rev. B* **114**, 035107 **(2026)**. DOI: 10.1103/PhysRevB.114.035107; arXiv:2407.07752. 【正式发表】"
+  - references.md 自述段 L63 "[24] Werner **2024** PRB 系统预言..."（**2024 错**）
+  - references.md 自述段 L123 "[24] Werner **2024** 框架相互印证"（**2024 错**）
+  - content.md L23 "Werner 等人 **2024 年** [24]..."（**2024 错**）
+  - scheme.md L77 "Werner et al., **2026** [24]..."（**2026 对**）
+  - scheme.md L25, L73 "Werner 等人 [24]"（无年份）
+  - rationale.md L29 仅写 "Werner 等人的理论工作... [24]"（无年份）
+- **问题**：references.md 条目给出 PRB 114, 035107 (2026) 是正确刊期，但 references.md 自述段 L63、L123 与 content.md L23 三处写"2024"，scheme.md L77 写"2026"。**5 处正文/自述与 references 条目年份冲突**，评审按 references 条目核对时会发现正文"2024"为误。
+- **违反条款**：`indicator_red_lines.consistency_check`；`section_standards.references`"作者、年份、期刊、卷页是否完整"。
+- **建议**：把 references.md L63、L123 与 content.md L23 三处"2024"统一改为"2026"，与 references.md 条目及 scheme.md L77 一致。
+- **action**：rewrite
 
-### [medium] evidence — Hu PRL 133,156901 在 references.md 无独立条目
-- 位置：`rationale.md`（国内进展段引用 Hu et al., PRL 133,156901, 2024）；`references.md`（仅 #22 PNAS H₃S 含 Hu，未见独立 PRL 156901 条目）
-- 问题：第 1、2 轮标记的残留。rationale 引用了 Hu PRL 156901，但 references.md 无对应独立条目，无法核实卷期号与 DOI。
-- 建议：在 references.md 第 3 节（激子与电子—声子耦合）补 Hu et al., Phys. Rev. Lett. 133, 156901 (2024) 条目并核实 DOI。
-- action：verify
+### [high] unused_entry — [55] Jita 与 [64] Sørensen 两条参考文献正文未以 [N] 引用
 
-### [low] expression — proposal-draft.md 中"待本轮 writer-critic 循环结束后统一审查"占位语残留
-- 位置：`proposal-draft.md` 行411—413（整体一致性审查占位）
-- 问题：合并稿中"## 整体一致性审查 / 待本轮 writer-critic 循环结束后统一审查"是内部流程占位语，不应出现在提交稿。
-- 建议：删除该占位段；整体一致性审查的结论应融入各章节，而非单独占位。
-- action：remove
+- **位置**：
+  - references.md L87 "[55] Jita, Y. et al. Magnon harmonic generation in antiferromagnets: Dynamical symmetry enriched by symmetry breaking. arXiv:2604.06700 (2026). 【预印本】"
+  - references.md L127 "[64] Sørensen, L. K. K., Silva, M. M. S. F., Johansen, A. S. et al. Non-uniqueness in high harmonic spectroscopy of magnetic order. arXiv:2605.14873 (2025). 【预印本】"
+  - 正文（rationale.md/content.md/scheme.md）grep "[55]" → **0 命中**；grep "[64]" → **0 命中**
+- **问题**：
+  - [55] Jita 在正文无任何引用，仅在 references.md §4 自述段 L63 被提到一次（"Jita 2026 与 [56] Sankar 2025 分别给出反铁磁三相选择定则..."），属于"研读基础"性质。
+  - [64] Sørensen 在正文无任何 [N] 引用——这是最严重的问题，因为正文反复需要 Sørensen 的非唯一性结论（rationale.md 7 处 Sørensen 描述、content.md 6 处、scheme.md 7 处）但全部用 [63]（实为 Cochran 编号）指代。**Sørensen 工作实际被引述却无对应编号条目**。
+  - 注：references.md §6 自述段 L121 写 "[64] Sørensen 从解析与数值两方面..."，但正文未用 [64] 引用 Sørensen——[64] 是孤儿条目。
+- **违反条款**：`section_standards.references`"无幽灵编号"；"正文有 [N] 角标与参考文献对应"。
+- **建议**：采用 #1 方案 A 即可一并解决——前移后 [63] = Sørensen 即对应正文所有 [63] Sørensen 引用；Jita [55] 转入正文使用（如 rationale.md §2 末段加一句"反铁磁 magnon HHG 三相选择定则详见 Jita 等人 [55]"），或保留为研读基础但在 references.md §8 自检段显式声明"[55] Jita 为研读基础，正文未直接引用"。
+- **action**：rewrite
 
+### [medium] metadata_inconsistency — references.md 自报"参考文献总数 39 条"与实测 40 条不一致
+
+- **位置**：
+  - references.md L5 "正文（rationale.md、content.md、scheme.md）以 [N] 编号直接引用的文献共 **39 条**"
+  - references.md L153 "全表 39 个 [N] 条目（含 [58a]、[58b] 双编号）..."
+  - references.md L161 "参考文献总数 **39 条**（正文 [N] 编号条目 39 个，含 [58a]、[58b] 双编号；...）"
+  - 实测：references.md 实际有 40 个 [N] 起始行（[58a] 与 [58b] 算两条独立条目）
+- **问题**：references.md 自报"39 条"是把 [58a]/[58b] 视为"双编号 = 1 条"的语义合并，但实际文献表里这两条是分行列出的两个独立条目（[58a] Leeb 2025 与 [58b] Qiu 2025 是两篇不同的工作）。计数与"39 条"差 1。
+- **违反条款**：`section_standards.references`"参考文献 30-40 篇"（数量合规，但自报数与实测不一致）；`scoring_rubric.completeness`。
+- **建议**：将 references.md L5、L153、L161 三处"39 条"改为"40 条（含 [58a]、[58b] 两个独立条目）"或保留"39 条正文以 [N] 引用"但显式标注"文献表共 40 个 [N] 起始行（含 [58a]/[58b] 拆分）"。
+- **action**：rewrite
+
+### [medium] missing_citation — CrSb 关键材料参数独立句无文献支撑（R1/R2 报告遗留）
+
+- **位置**：
+  - rationale.md §4 L77 "CrSb 带隙约 0.13 eV（间接）与 0.6 eV（直接）"
+  - rationale.md §4 L77 "中红外 3—5 μm 驱动光对应的光子能量 0.25—0.41 eV"
+  - scheme.md §1 L19 "CrSb 带隙 0.13 eV（间接）与 0.6 eV（直接）vs. 中红外 3—5 μm 驱动的 0.25—0.41 eV 光子能量"
+  - scheme.md §3 L53, L67 "CrSb 的 Néel 温度约 720 K"
+- **问题**：CrSb 的带隙、Néel 温度、Sb 原子 SOC 强度（100—200 meV）这些实验条件选择判据的参数，在正文以独立句形式给出但无独立文献支撑。NSFC 评审会问"0.13/0.6 eV / 720 K / 100—200 meV 引自哪里"。R1/R2 报告均已标记，本轮仍未补。
+- **违反条款**：`indicator_red_lines.indicator_measurable`；`section_standards.references`"引用集合完备"。
+- **建议**：在 references.md §6 末尾新增 CrSb 物性参数原始文献条目，例如：
+  - [新] Reimers, S. et al. Altermagnetic band structure of CrSb. Phys. Rev. B (2025) 或类似第一性原理 / ARPES 实验的 CrSb 物性来源。
+  - 若实在无法补原始文献，至少在 rationale.md §4 与 scheme.md §1、§3 紧邻参数处加注"CrSb 物性参数参见 Šmejkal et al., 2022 [25] 附录 / CrSb ARPES 实验原文 [新增条目]"。
+- **action**：add + research
+
+### [low] preprint_ratio — 预印本占比 20/40 = 50%（与 R1 报告持平）
+
+- **位置**：references.md L159 "证据等级：正式发表 20 条（含综述 1 条：[39]）、预印本 19 条..."
+- **实测**：正式发表 20 条（含综述 1 条）、预印本 20 条，合计 40 条；预印本占 50%（与 R1 报告持平）
+- **问题**：50% 预印本比例高于面上项目评审人期望（通常 ≤ 30%）。但 altermagnet HHG 是 2024—2026 年才起步的新兴领域，§6 整组（[63]—[67] 现编号）和 §5 部分（[35][36][62]）均为 arXiv 预印本，是该领域的客观事实。该项不构成"违反规则"，但应在评审口径下提示。
+- **违反条款**：`anti_ai_patterns.quantitative_thresholds.preprint_ratio`（无强制约束）；属评审偏好提示。
+- **建议**：保留现状，但在 references.md 时效性说明段补充一条"§6 中预印本 5 条均为 altermagnet HHG 2025—2026 年里程碑工作，建议项目执行期内持续跟踪正式发表状态"。
+- **action**：rewrite
+
+### [low] numbering_strategy_documentation — 编号策略自述与"非连续 + 字母后缀"冲突未澄清
+
+- **位置**：references.md L149 "组间预留空号 21 个"；L5 "组间预留空号 21 个"
+- **实测**：references.md 实际空号 27 个：[4, 6, 8, 14, 17, 18, 19, 21, 25（注：§4 中 [25] 已被 Šmejkal 占用）、32, 33, 34, 37, 38, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54]——共 28 个空号位（[25] 已被占用故不计）。
+- **问题**：references.md 自报"21 个空号位"与实际"27+ 个空号位"差 6+。同时 [58a]/[58b] 字母后缀与"组内连续编号"原则（references.md L147）冲突——[58a] 与 [58b] 之间插入了 [59] Yue 的位置（实际 references.md §5 中 [59] 是 Yue，§4 中 [58a]/[58b] 之后跳号至 [55]）。编号体系"组内连续 + 组间预留"是 references.md 自定的设计原则，但 [58a]/[58b] 是 §4 内部的字母后缀且实际跨组（§5 紧接 [59]），违反组内连续原则。
+- **违反条款**：`section_standards.references`"编号策略自洽"。
+- **建议**：将 references.md L5、L149 的"21 个空号位"改为实际计数（"27+ 个预留空号"）；并在 §4 编号策略自述段补充一条说明 [58a]/[58b] 字母后缀的合法理由（共享第一作者 Leeb，2025 年两篇独立工作的姊妹条目）。
+- **action**：rewrite
+
+================================================================
+## 评分细则说明
+
+### 严谨性（rigor）— 0.30
+- 引文格式：基本统一使用 [N] 编号，作者、年份、期刊、卷期、DOI/arXiv 双标识完整（得 0.85）。
+- 但编号一致性严重失败：
+  - references.md §6 与正文 +1 系统错位（critical #1，18+ 处）
+  - content.md §2.3 [65][66] 反向错位（critical #2，1 处）
+  - [24] Werner 年份 5 处跨文档不一致（high #5）
+  - references.md 自检段反向固化错位（high #4）
+  - 元数据自报计数与实测差 1（medium #7）
+- 推导：基础格式 0.85 × 0.3 + 一致性 0.05 × 0.7 ≈ 0.30。
+
+### 完整性（completeness）— 0.50
+- 数量 40 条，处于 NSFC 标杆区间（30—50）（得 0.85）。
+- 时效性：40 条中 33 条在 2023—2026 年（82.5%），pre-2023 仅 7 条且均为方法学经典锚点（[2] 2017、[23] 2019、[1] 2020、[3] 2022、[15] 2022、[59] 2020、[10] 2024 标注 2025）（得 0.90）。
+- 但 [55] [64] 两条孤儿条目（high #6）+ Rost CrSb 实验仍缺失条目（critical #3）+ CrSb 关键材料参数无独立引用（medium #8），完整性受拖累。
+- 推导：数量 0.85 × 0.3 + 时效性 0.90 × 0.3 + 引用集合完备性 0.10 × 0.4 ≈ 0.50。
+
+================================================================
+## 锚点对比（参考文献一致性专项）
+
+### 引用样本 1 — references.md §6 第 1 条（Cochran）
+
+**references.md 原文**：
+> [63] Cochran, T. A., McCarter, M. R., Horstmann, J. G. et al. Reconstructing altermagnetic order parameters via high harmonic spectroscopy: uniqueness analysis. arXiv:2606.15279 (2025). 【预印本】
+
+**正文对应**（按 references 编号体系）：
+- rationale.md L51 "Cochran [62]"；L83 "Cochran 等人... [62]"；L85 "Cochran et al. [62]"
+- content.md L41 "Cochran 等人 2025 年 [62]"；L51 "Cochran [62]"；L53 "Cochran 等人 [62]"
+- scheme.md L41 "Cochran 等人的... [62]"；L73 "Cochran 等人... [62]"；L95 "Cochran 等人 [62]"
+
+**差距**：
+- 正文全部用 [62] 指 Cochran，但 references [63] 才是 Cochran，差 1。
+- 正文 [62] 在 references 中实为 Uzner & Neufeld（层间耦合工作），形成系统性错位。
+- 后果：评审按 references 表查 [62] 不会找到 Cochran 工作，会按 Uzner 工作去读——评审在核对 Cochran 唯一性分析框架时会发现 references 表里没有 [62] Cochran 条目，**引文系统 fail-fast**。
+
+### 引用样本 2 — references.md §5 第 1 条（Yue）
+
+**references.md 原文**：
+> [59] Yue, L. & Gaarde, M. B. Structure- and laser-gauges for the semiconductor Bloch equations in high harmonic generation in solids. *Phys. Rev. A* **102**, 013119 (2020). DOI: 10.1103/PhysRevA.102.013119; arXiv:2003.02961. 【正式发表】
+
+**正文对应**（按 references 编号体系）：
+- scheme.md L25 "Yue 与 Gaarde... [59]"（一致 ✓）
+- content.md L35 "其适用条件在文献 [59]—[61] 的 SBE 规范、场强窗口、Keldysh 区间方法学三角内"（一致 ✓）
+- scheme.md L73 "其规范一致性由 Yue 与 Gaarde [59] 保证"（一致 ✓）
+- scheme.md L49 "Wang 等人实验观测到... [59]"——按 references，[59] = Yue 而非 Wang ❌（与本表内 scheme.md L25 一致，但 scheme.md L49 行内嵌入的是 "Wang et al., *Opt. Express* 30, 46417, 2022 [59]"，按 references [59] 是 Yue 不是 Wang，**正文内部也不一致**）
+
+**差距**：
+- references.md §5 内编号 [59]=Yue、[60]=Wang、[61]=Zhang、[62]=Uzner 与 scheme.md L25/L73 完全一致 ✓
+- 但 scheme.md L49 "Wang et al., *Opt. Express* 30, 46417, 2022 [59]" 中 [59] 编号与 "Wang" 作者不匹配——L49 的 [59] 实际应为 [60]。
+- 这是 scheme.md 单章内部 + 跨 references 表的双重不一致，需单独检查。
+
+### 引用样本 3 — references.md §6 第 5 条（Horstmann）与正文 [67] Rost 错位
+
+**references.md 原文**：
+> [67] Horstmann, J. G., Reutzel, M., Schütte, M. et al. Theory of high harmonic generation in spin-split antiferromagnets and altermagnets. arXiv:2505.08930 (2025). 【预印本】
+
+**正文对应**：
+- rationale.md L33 "Rost 等人... [67]"（错位：按 references [67] = Horstmann）
+- rationale.md L63 "Rost 等人... [67]"（错位）
+- rationale.md L77 "Rost 等人... [67]"（错位）
+- content.md L21 "Rost 等人 2025 年 [67]"（错位）
+- content.md L51 "Rost 等人 2025 年 [67]"（错位）
+
+**差距**：
+- 正文 5 处用 [67] 指 Rost，references [67] 是 Horstmann——Rost 工作（arXiv:2507.02673）在 references.md 中**完全没有独立条目**。
+- 这是 R2 报告 #3 遗留问题，本轮核查仍未补。
+
+### 改写方向（程序化建议）
+
+1. **方案 A（推荐）**：references.md §6 整组前移 1 位 + 补 [67] Rost
+   - Cochran [63]→[62]、Sørensen [64]→[63]、Fuchs [65]→[64]、McCarter [66]→[65]、Horstmann [67]→[66]
+   - 新增 [67] = Rost et al., arXiv:2507.02673 (2025)
+   - 同步更新 references.md L121, L123, L125, L127, L131, L133, L149, L153, L155, L161 全部编号映射
+   - 正文 18+ 处不动（正文已用 [62]/[63]/[67] 对齐新表）
+
+2. **方案 B（保守）**：正文 18+ 处后移 1 位 + references.md 新增 [68] Rost
+   - 正文 [62]→[63]（Cochran）、[63]→[64]（Sørensen）、[67]→[68]（Rost）
+   - 同时修 content.md L23 [65]/[66]→[66]/[67]（McCarter/Horstmann）
+   - references.md 编号不动，新增 [68] Rost 条目
+
+3. **统一 [24] Werner 年份**：所有"2024"改为"2026"（references.md L63, L123；content.md L23；保留 scheme.md L77 已正确为"2026"）
+
+4. **修复 scheme.md L49 内部不一致**：将 "Wang et al., *Opt. Express* 30, 46417, 2022 [59]" 改为 [60]
+
+5. **更新 references.md §8 自检段**：行号引用 "rationale.md:49" 应改为实际行号（L39, L83, L85）；"rationale.md:31/35/45" 同样需校准
+
+================================================================
 ## 对抗结论
 
-- 本轮发现 **12 个问题**（critical: 4, high: 4, medium: 3, low: 1）。
-- 相比第 2 轮（15 个问题）：
-  - **改善**：`content.md` 完成重写——从第 1 轮的旧版"关键科学问题凝练副本"重写为真正的"研究内容"（研究目标+三项递进内容+特色创新三层面），叙述式、与 rationale 一致、删除了全部 4 类序参量子问题/层次图/汇总表/v0.2 标签/完全空白断言。第 2 轮判定的"content 与 rationale 致命冲突"（critical consistency）、"content 实为问题副本"（critical completeness）、"全篇 bullet-list"（critical narrative）、"直接读出残留"（high rigor）、"完全空白"（high evidence）、"Ryan 混用"（high logic）、"v0.2/⭐ 标签"（high expression）、"维度冲突"（high consistency）、"范围扩张"（high scope）共 9 个问题已在 content.md 层面修复。这是显著进步。
-  - **未解决/残留**：scheme/plan/outcome 三模块第 1、2 轮标记后仍未补齐，本轮仍是 critical；Hu PRL 156901 条目缺失（medium evidence）仍未修。
-  - **新增**：本轮新发现合并稿 proposal-draft.md 的灾难状态（节3 重复两遍 + 立项依据陈旧 + 研究方案空，critical consistency）；特色与创新归属在 content/scheme 标题间冲突（high consistency）；No-Go 触发后产出路径未说明（high logic）；实验参数物理匹配性因 scheme 空白无法核查（high feasibility）。
-- 面上项目门槛：综合评分 ≥0.80，high 问题 = 0，medium 问题 ≤3。
-- 是否达到输出标准：**否**。原因：4 个 critical（研究方案空白、合并稿灾难、年度计划缺失、预期成果缺失）、4 个 high 尚存；聚焦章节（研究方案）实质为空，可行性维度崩塌。
-- **P0**：(1) 补齐 scheme.md 研究方案（5 子节：总体技术路线/理论方法/实验方案/关键难点与 Go/No-Go/方法学创新），与 content 三项研究内容逐项对应；(2) 以重写后的 rationale+content 为真相源重建 proposal-draft.md，删除重复节3 与旧版立项依据；(3) 补齐年度计划与预期成果。
-- **P1**：厘清特色与创新归属（content vs scheme 标题）；核实 altermagnet 主线核心预印本（Werner/Ly/Cheng）发表状态并加限定语；明确 No-Go 触发后的项目产出路径。
-- **P2**：补 Hu PRL 156901 条目；content 特色创新段补可检验结果指标；删除合并稿占位语。
-- **下一轮建议**：仅在 scheme.md 补齐、年度计划与预期成果补齐、proposal-draft.md 重建后进入第 4 轮；届时重点核查"核心问题（rationale）—研究内容（content）—研究方案（scheme）—判据—年度节点（plan）—验收（outcome）"的全链条闭环一致性，以及研究方案的物理可行性（驱动波长/场强/温区/磁场与材料带隙和预印本预言的匹配性），而非继续比较各章节新旧版本。
+- **本轮发现**：10 个问题（critical: 3, high: 3, medium: 2, low: 2）
+- **相比第 2 轮（references 专项 0.55）**：
+  - R2 报告 4 条 critical（幽灵 [58]、§6 系统错位、§5 系统错位、Rost 孤儿）：本轮核查仅 §5 编号 [58] 幽灵已解决（正文已改 [59]），但 §6 系统错位、Rost 孤儿未解决（事实升级为更严重的 18+ 处系统性错位）。
+  - 新发现 2 条 critical：content.md §2.3 [65][66] 反向错位 + [24] Werner 5 处年份不一致。
+- **是否达到输出标准**：**否**。原因：
+  - 3 个 critical 问题中至少 2 个涉及 references.md 与正文 18+ 处编号系统的不一致，必须在提交前修订；
+  - 1 个 critical 涉及 Rost CrSb 实验的参考文献缺失；
+  - NSFC 评审专家按 references.md 编号表逐条核对时，会在 rationale.md L39 第一处 "Cochran [62]" 即发现"按 references [62] 应是 Uzner"，几乎不可能漏掉。
+- **优先级建议**：
+  1. （必须）critical #1 / #2 / #3 一并处理（references §6 前移 + [24] 年份统一 + Rost 条目补登）；
+  2. （必须）high #4 / #5 / #6 同步修订（references 自检段重写、[55][64] 孤儿条目处理）；
+  3. （建议）medium #7 改自报计数；medium #8 补 CrSb 物性参数原始引用；
+  4. （可选）low #9 改预印本占比说明；low #10 改空号位计数。
+- **下一轮评审建议**：聚焦 (a) §6 系统错位 + Rost 补登 + content.md L23 [65][66] 修复；(b) [24] Werner 跨文档年份统一；(c) CrSb 物性参数原始引用补齐。
 
+================================================================
 ## 评分
-创新性：0.72
-可行性：0.20
-严谨性：0.52
-完整性：0.28
-综合评分：0.46
+
+```
+## 评分
+创新性：N/A
+可行性：N/A
+严谨性：0.30
+完整性：0.50
+综合评分：0.40
+```

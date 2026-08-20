@@ -2,9 +2,9 @@
 title: "Bright Squeezed Vacuum驱动HHG中高斯纠缠与非高斯性的涌现——XUV量子资源的新范式"
 type: "papers"
 created: "2026-08-17T09:54:22Z"
-updated: "2026-08-17T09:54:22Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["BSV", "HHG", "高斯纠缠", "非高斯性", "XUV量子光源", "量子隐形传态", "强场超快"]
-related: ["XUV相干性", "亮压缩真空", "光场量子态工程", "量子纠缠", "非高斯态", "高斯态", "高次谐波产生"]
+related: ["FROG", "XUV相干性", "三步模型", "亮压缩真空", "光场量子态工程", "量子纠缠", "非高斯态", "高斯态", "高次谐波产生"]
 source_raw: "2026-2606.22714-emergence-of-gaussian-entanglement-and-non-gaussianity-in-hi.md"
 growth_stage: "growing"
 confidence: 0.75
@@ -83,7 +83,9 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[FROG]]
 - [[XUV相干性]]
+- [[三步模型]]
 - [[亮压缩真空]]
 - [[光场量子态工程]]
 - [[量子纠缠]]

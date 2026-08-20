@@ -2,9 +2,9 @@
 title: "光波驱动外尔费米子的太赫兹三次谐波产生（TaP）——论文精读"
 type: "papers"
 created: "2026-08-15T20:13:09Z"
-updated: "2026-08-16T13:26:34Z"
+updated: "2026-08-19T05:16:12Z"
 tags: ["太赫兹非线性光学", "外尔半金属", "三次谐波产生", "光波驱动", "非平衡动力学", "TaP", "论文精读"]
-related: ["光波电子学", "固态高次谐波", "序参量超快读出", "拓扑半金属", "谐波极化分辨测量", "贝里曲率"]
+related: ["general-order-parameter-ultrafast-readout-20260727", "光波电子学", "固态高次谐波", "序参量超快读出", "拓扑半金属", "谐波极化分辨测量", "贝里曲率"]
 source_raw: "2026-2508.16166-terahertz-third-harmonic-generation-of-lightwave-d.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -55,6 +55,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[general-order-parameter-ultrafast-readout-20260727]]
 - [[光波电子学]]
 - [[固态高次谐波]]
 - [[序参量超快读出]]
