@@ -166,10 +166,9 @@ LinSai-CoPilot/
 │
 ├── docs/                      # 项目文档与报告
 │   ├── README.md              # 本目录说明与文件清单
-│   ├── ARCHITECTURE.md        # 架构总览
-│   ├── FRAMEWORK-ARCHITECTURE.md  # 框架架构（最新）
-│   ├── PROJECT-STRUCTURE.md   # 项目结构详版
-│   ├── SCORING-STANDARDS.md   # 评分标准
+│   ├── ARCHITECTURE.md        # 完整架构说明（权威）
+│   ├── PROJECT-STRUCTURE.md   # 目录结构
+│   ├── DATA-FLOW-MAP.md       # 数据流动路径图谱
 │   ├── archive/               # 历史文档归档（含 CHANGELOG v6.7 及更早）
 │   └── prompts/               # LLM prompt 模板
 │

@@ -117,7 +117,7 @@ drafts（初稿）→ optimizing（优化中）→ pending_review（待校验）
   - 输出端：`scripts/knowledge_output.py`（`--weekly` 已委托给 `weekend_pipeline` output 阶段）归档 proposal 知识萃取，并将可靠来源信息写入 KB；AI 生成内容标记为 `derived`，无来源信息禁止入库。
   - 周末模式：worker cron 仅工作日运行（`Mon-Fri`），周末由 `weekend_pipeline/` 小任务流水线执行输入发现、输出萃取、链路反思和 KB 健康检查；`lc-weekend-worker` 每 20 分钟推进一个 pending job。
 - **文献驱动**：优先优化与当天简报关键词匹配的课题，节省模型限额。
-- **质量标准**：`memory/nsfc-standards.json` 定义面上/重点/重大三类项目的评分权重、页数限制、模板结构。
+- **质量标准**：`memory/nsfc-standards.json` 定义面上/重点/重大三类项目的评分权重、页数限制、模板结构。达标线（v6.9.27 上调）：面上 0.85 / 重点 0.90 / 重大 0.95；逃生阀：连续 5 轮无提升或满 8 轮；monitor 独立复核 < 达标线不流转。agent 奖惩分 0-150（初始 100），writer 质量门槛 <0.50 扣 5 / <0.70 扣 2，critic 虚高扣 8 / 过苛扣 4。
 - **知识库数据流转（v6.8.51 重构）**：
   - **写入口径**：所有 wiki 写入统一走 `kb_wiki.save_wiki_page` 门面（经 `knowledge_base` facade 注入依赖）。门面提供两项防御：① 调用方误传整页文本时自动剥离内层 frontmatter 并合并 meta（消灭双 frontmatter 污染）；② `content=""` 且非 append 时视为仅更新 meta、保留正文。门面统一写生长日志（`log_growth`，trigger=facade）、挂图谱节点与双向链接。提案镜像（`knowledge/research_proposals/`、`wiki/projects/*/proposals/`）是设计例外，允许直写（避免快照污染知识图谱）。
   - **每日治理（lc-kb-sync cron，12:40）**：`kb_auto_sync.py`（hermes 会话/简报/PDF 同步 + 索引重建 + 图谱重建）+ `growth_engine.py --apply`（growth_stage 规则晋升，seedling→growing→mature，无 LLM 成本）。

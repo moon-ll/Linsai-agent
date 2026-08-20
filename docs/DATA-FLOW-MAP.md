@@ -1,8 +1,10 @@
 # 数据流动路径图谱
 
 > 全链路数据流向的权威参考。记录当前已验证通畅的路径，标注已废弃路径。
-> 最后验证：2026-08-08（v6.8.15）
+> 最后验证：2026-08-20（v6.9.28）
 > AI 编码代理在涉及数据流向变更前应先查阅本文件。
+> 维护约定：本文件只维护**结构流向**，不维护具体数据量（如 PDF/简报/论文数量），
+> 数量会随运行增长而过期，请勿在此记录硬编码计数。
 
 ---
 
@@ -48,7 +50,6 @@
 | 执行模块 | `sync_engine.sync_pdf_library()` |
 | 路径常量 | `HERMES_RAW_PAPERS_DIR`（sync_engine 内定义） |
 | 触发方式 | `sync_all()` / `--sync-pdf` / lc-daily-sync cron |
-| 数据量 | 72 个 PDF + 72 个文本缓存 |
 | 质量过滤 | 仅同步有对应 PDF 文件的条目 |
 
 **状态**：通畅。PDF 从 hermes workspace 复制到知识库，同时提取文本缓存。
@@ -69,7 +70,6 @@
 | 执行模块 | `sync_engine.sync_research_briefings()` |
 | 路径常量 | `BRIEFINGS_DIR`（sync_engine 内定义） |
 | 触发方式 | `sync_all()` / `--sync-briefings` / lc-daily-sync cron |
-| 数据量 | 24 篇简报已入库 |
 | 质量过滤 | 仅同步 `research_briefing_` 前缀的详细版简报 |
 
 **状态**：通畅。简报正文去重后写入 wiki/reviews/，自动更新索引页。
@@ -91,7 +91,6 @@
 | 执行模块 | `kb_importer.import_deep_analysis_all()` |
 | 路径常量 | `BRIEFINGS_DIR`（kb_importer 内定义） |
 | 触发方式 | `sync_all()` step [3/5] / `--sync-all` |
-| 数据量 | 75 篇 wiki/papers 深度笔记 |
 | 质量过滤 | 仅处理有完整 5 维度字段的 JSON |
 
 **状态**：通畅。JSON 深度分析自动转换为 Markdown 结构化笔记。
@@ -111,7 +110,7 @@
 
 | 项目 | 值 |
 |------|-----|
-| 统一状态文件 | `memory/item-status.json`（219 条目） |
+| 统一状态文件 | `memory/item-status.json` |
 | 状态模块 | `state_sync.py`（读写 item-status.json） |
 | 周末汇聚 | `weekend_pipeline/sources.py` 三路读取 |
 
@@ -211,7 +210,6 @@ drafts/ → optimizing/ → pending_review/ → archived/
 | 状态文件 | `research_proposals/_lifecycle.json` |
 | 任务同步 | `memory/lifecycle-task-map.json` → `tasks/` |
 | 看板 | `memory/system-kanban.json` |
-| 当前 optimizing | 5 个课题 |
 
 **状态**：通畅。四阶段生命周期 + 5 模块申请书 + 4 时段轮转正常运转。
 
