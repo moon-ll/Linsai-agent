@@ -1041,6 +1041,60 @@ def _save_suggestions(suggestions: List[Dict]) -> None:
     _save_json(SUGGESTIONS_PATH, suggestions)
 
 
+def _semantic_overlap_ratio(new_content: str, existing: str) -> float:
+    """v6.9.28: 计算建议内容与现有正文的语义重叠度（双口径取 max）。
+
+    背景：v6.9.25 将历史 auto-opt 规则手工合并进 SOUL 正文（运行纪律/
+    评分纪律段），原定位标记被去除。fingerprint 去重窗口仅 7 天，过期后
+    同一问题模式的建议会以不同措辞再生成，精确子串匹配不再命中 →
+    与正文重复的规则被再次追加。
+
+    口径：
+        1. 特征词覆盖率——去注释/标题后提取词元（CJK ≥3 字、ASCII ≥2 字，
+           排除"内容/需要"等 2 字泛用词的虚假证据），统计在 existing 中的
+           命中比例；≥6 字长词整词未命中时按内部 3-gram ≥40% 判部分命中
+           （捕捉"整句重组但主干措辞复用"）。术语（TBD/待核验/researcher）
+           是规则身份的主干，同义改写仍会复用。
+        2. 字符 4-gram 包含度——两侧去空白后取新内容 4-gram 在 existing
+           中的包含比例。捕捉局部措辞大量复用的场景。
+        词级口径的盲区是"长句被完全重组"，n-gram 口径的盲区是短小新规则
+        偶撞公共短语，取 max 互补。两口径均无信号（正文过短/纯标题）时
+        返回 0——无法判定语义时不拦截，宁可多写不可误删。
+    """
+    import re as _re
+    text = _re.sub(r"<!--.*?-->", "", new_content, flags=_re.S)
+    text = _re.sub(r"^#+\s*.*$", "", text, flags=_re.M)
+
+    # 口径 1：特征词覆盖率
+    tokens = list(dict.fromkeys(
+        t for t in _re.findall(r"[\w]+", text)
+        if len(t) >= (3 if _re.match(r"[\u4e00-\u9fff]", t) else 2)
+    ))
+    token_ratio = 0.0
+    if tokens:
+        hits = 0
+        for t in tokens:
+            if t in existing:
+                hits += 1
+            elif len(t) >= 6:
+                windows = [t[i:i + 3] for i in range(len(t) - 2)]
+                window_hits = sum(1 for w in windows if w in existing)
+                if windows and window_hits / len(windows) >= 0.4:
+                    hits += 1
+        token_ratio = hits / len(tokens)
+
+    # 口径 2：字符 4-gram 包含度（两侧去空白，中英混排统一比较）
+    new_cmp = _re.sub(r"\s+", "", text)
+    existing_cmp = _re.sub(r"\s+", "", existing)
+    ngram_ratio = 0.0
+    if len(new_cmp) >= 4:
+        grams = list(dict.fromkeys(new_cmp[i:i + 4] for i in range(len(new_cmp) - 3)))
+        gram_hits = sum(1 for g in grams if g in existing_cmp)
+        ngram_ratio = gram_hits / len(grams)
+
+    return max(token_ratio, ngram_ratio)
+
+
 def _apply_suggestion(
     suggestion: Dict,
     backup_count_tracker: Optional[Dict[str, int]] = None,
@@ -1080,6 +1134,16 @@ def _apply_suggestion(
     if content_to_add in current_content:
         print(f"  ○ 内容已存在，跳过（不备份、不写入）")
         return True
+
+    # v6.9.28: 语义级去重——v6.9.25 手工合并历史规则进 SOUL 正文后，
+    # 同义建议会以不同措辞再生成，精确匹配失效；特征短语命中率 ≥60%
+    # 判定为"正文已覆盖"，跳过追加（不备份、不写入）
+    if content_to_add:
+        _ratio = _semantic_overlap_ratio(content_to_add, current_content)
+        if _ratio >= 0.6:
+            print(f"  ○ 语义重复（特征短语命中 {_ratio:.0%}），跳过（不备份、不写入）")
+            suggestion["apply_note"] = f"semantically_present:{_ratio:.0%}"
+            return True
 
     # 仅当确实需要写入时才执行备份
     backup_dir = BACKUPS_DIR

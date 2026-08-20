@@ -316,11 +316,6 @@ class OptimizeMixin:
                     )
                 score_after = overall_ceiling
 
-        # v6.9.25: 锚点对比结论与评分档位强制绑定——范本锚点成为分数锚
-        score_after = self._apply_anchor_conclusion_binding(
-            proposal_id, critic_text, dim_scores, score_after, project_type
-        )
-
         # v6.8.8: references 评审专用计分——N/A 维度不纳入加权
         section_key_for_check = focus_section["key"] if focus_section else "full_review"
         if section_key_for_check == "references" and dim_scores:
@@ -330,6 +325,18 @@ class OptimizeMixin:
                 score_after = sum(ref_dims.values()) / len(ref_dims)
                 if _log:
                     _log.info(f"[{proposal_id}] references 评审专用计分: {score_after:.2f} (dims={ref_dims})")
+
+        # v6.9.25: 锚点对比结论与评分档位强制绑定——范本锚点成为分数锚
+        # v6.9.28: ①移至 references 专用计分之后（原顺序在前者的赋值下被覆盖，
+        #          references 轮绑定形同虚设）；②references 评审跳过绑定——其口径为
+        #          rigor/completeness（文献元数据准确性），写作语体锚点不适用，
+        #          "差距明显"（引用错位）不应 cap 元数据评审分
+        anchor_conclusion = ""
+        if section_key_for_check != "references":
+            anchor_conclusion = self._extract_anchor_conclusion(critic_text)
+            score_after = self._apply_anchor_conclusion_binding(
+                proposal_id, critic_text, dim_scores, score_after, project_type
+            )
 
         # v6.8.8: 评审报告完整性验证——anti_superficial_review.programmatic_validation
         report_invalid_reason = ""
@@ -394,6 +401,9 @@ class OptimizeMixin:
             # 9 条建议无一指向超长句/冗余词/自引用）。
             "ai_ceiling": round(ai_check.get("ceiling", 1.0), 3),
             "ai_top_issues": (ai_check.get("top_issues") or [])[:6],
+            # v6.9.28: 锚点对比结论随轮次入史——范本引导效果可观测
+            # （达标/基本接近/差距明显；references 轮为空串）
+            "anchor_conclusion": anchor_conclusion,
             "at": now_utc(),
         })
         prop_state["updated_at"] = now_utc()
@@ -1065,6 +1075,86 @@ class OptimizeMixin:
         except Exception:
             return ""
 
+    # 表面修改评价关键词——monitor 的 writer_assessment 命中即视为"未实质修复"
+    _SURFACE_KEYWORDS = (
+        "未修复", "未解决", "未回应", "表面修改", "表面修复", "零改动",
+        "未执行", "未实质", "修改有限", "修改极其有限", "未做", "搁置",
+        "伪修复", "未处理",
+    )
+
+    def _build_writer_escalation_block(self, critic_report_path: str) -> str:
+        """v6.9.28: writer 顽固升级——连续两轮被判定表面修改时强制逐条响应。
+
+        背景：moire R2/R3 实测（08-20），writer 连续两轮被 monitor 判定
+        表面修改/未修复（delta -16.9 / -8.5，修复率 1/7）。惩罚在累积
+        （writer 分 57.3）但派活 prompt 无差异化，行为无矫正闭环。
+
+        触发条件（同时满足）：
+        1. agent-scores 中 writer 最近 2 条 history 均为负 delta
+        2. 两条的 reason 至少一条命中表面修改关键词
+
+        触发后动作：
+        1. 解析最新 critic 报告的 critical/high 问题行（### [severity] 标题），
+           逐条枚举进 prompt——不再依赖 writer 自行到报告中检索
+        2. 强制要求输出「问题→处理结果」对照表，未修复项必须给出具体原因
+        """
+        import json as _json
+        try:
+            scores_path = _pl.PROJECT_ROOT / "memory" / "agent-scores.json"
+            if not scores_path.exists():
+                return ""
+            scores = _json.loads(scores_path.read_text(encoding="utf-8"))
+            history = (scores.get("writer", {}) or {}).get("history", [])
+            if len(history) < 2:
+                return ""
+            recent2 = history[-2:]
+            if not all(float(h.get("delta", 0)) < 0 for h in recent2):
+                return ""
+            reasons_text = " ".join(h.get("reason", "") for h in recent2)
+            if not any(kw in reasons_text for kw in self._SURFACE_KEYWORDS):
+                return ""
+        except Exception:
+            return ""
+
+        # 解析最新 critic 报告的 critical/high 问题行
+        issue_lines: list = []
+        try:
+            if critic_report_path:
+                report = Path(critic_report_path)
+                if report.exists():
+                    for line in report.read_text(encoding="utf-8").split("\n"):
+                        s = line.strip()
+                        if not s:
+                            continue
+                        if "[critical]" in s.lower():
+                            issue_lines.append(("critical", s.lstrip("# ").strip()[:120]))
+                        elif "[high]" in s.lower():
+                            issue_lines.append(("high", s.lstrip("# ").strip()[:120]))
+                        if len(issue_lines) >= 12:
+                            break
+        except Exception:
+            issue_lines = []
+
+        header = (
+            "\n\n【顽固升级警告（v6.9.28 程序化触发）】\n"
+            "你已连续两轮被质量监督判定为表面修改/未实质修复（累积扣分中）。\n"
+            "本轮不再是常规优化：以下 critical/high 问题逐条列出，你必须逐条处理。\n"
+        )
+        if issue_lines:
+            header += "■ 本轮必须处理的问题清单（来自最新评审报告）：\n"
+            for sev, text in issue_lines:
+                header += f"  - [{sev.upper()}] {text}\n"
+        else:
+            header += (
+                "■ 请打开评审报告，先列出其中全部 critical/high 问题编号，再逐条处理。\n"
+            )
+        header += (
+            "■ 输出要求（硬性）：在修改说明末尾输出「问题→处理结果」对照表，\n"
+            "  每行格式：问题编号 | 已修复（说明改动位置）/ 部分修复（说明剩余部分）/ 无法修复（写明具体障碍）。\n"
+            "  缺少该对照表或存在未说明的跳过项，下一轮将被判定为顽固违规并继续重扣。\n"
+        )
+        return header
+
     # P1-2: 文献缺口检测和定向检索
     def _has_lit_gap(self, critic_result: Dict[str, Any]) -> bool:
         """检测 critic 是否指出了文献缺口。"""
@@ -1574,6 +1664,11 @@ class OptimizeMixin:
         _writer_score_feedback = self._load_agent_score_feedback("writer")
         if _writer_score_feedback:
             prompt += _writer_score_feedback
+
+        # v6.9.28: writer 顽固升级——连续两轮表面修改时强制逐条响应
+        _escalation_block = self._build_writer_escalation_block(latest_critic)
+        if _escalation_block:
+            prompt += _escalation_block
 
         # v6.8.27: Writer 侧注入人工审核反馈（之前只有 critic 侧注入）
         # 避免 writer 重复犯人工审核已指出的问题
