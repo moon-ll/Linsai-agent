@@ -910,6 +910,29 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     if not writer_result.get("success"):
         return {"success": False, "error": writer_result.get("error", "writer 失败")}
 
+    # v6.9.33: writer 后程序化复检——AI 天花板必须提升（防表面修改闭环）
+    # 背景：writer prompt 已注入 top_issues 明细，但历史执行不力（moire 案例
+    # 只修 1/7 问题）。复检用确定性检测验证 writer 是否实质修复表达问题：
+    # 未达标（<0.85）必须严格提升；已达标只要求不显著倒退；references 轮跳过
+    # （不涉及正文表达）。
+    ai_check_after = None
+    expression_improved = True
+    expression_not_improved_reason = ""
+    if section_key != "references" and ai_check:
+        ai_check_after = self._detect_ai_patterns(prop_dir, sections_obj)
+        ceiling_before = ai_check.get("ceiling", 1.0)
+        ceiling_after = ai_check_after.get("ceiling", 1.0)
+        if ceiling_before >= 0.85:
+            expression_improved = ceiling_after >= ceiling_before - 0.02
+        else:
+            expression_improved = ceiling_after > ceiling_before + 0.001
+        if not expression_improved:
+            expression_not_improved_reason = (
+                f"writer 未实质修复表达问题（AI 天花板 {ceiling_before:.2f}→{ceiling_after:.2f}）"
+            )
+            if _log:
+                _log.warning(f"[{proposal_id}] {expression_not_improved_reason}")
+
     # 重新读取报告计算分数（writer 不应修改 critic 报告）
     report = self._read_critic_report(prop_dir, round_num)
     score_after = report["score"]
@@ -999,6 +1022,7 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         score_after >= min_score
         and len(weak_dims) == 0
         and not report_invalid_reason
+        and expression_improved  # v6.9.33: writer 后表达天花板必须提升（防表面修改）
     )
 
     score_before = prop_state.get("last_score", 0.0)
@@ -1022,6 +1046,10 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         # v6.9.30: 程序化 AI 检测摘要随轮次入史——prompt_optimizer 聚合
         # 全局 top_issues 生成针对性修复指令（与 optimize.py 对齐）
         "ai_ceiling": round(ai_check.get("ceiling", 1.0), 3),
+        # v6.9.33: writer 后复检天花板 + 是否实质提升——防表面修改闭环可观测
+        "ai_ceiling_after": round(ai_check_after.get("ceiling", 1.0), 3) if ai_check_after else None,
+        "expression_improved": expression_improved,
+        "expression_not_improved_reason": expression_not_improved_reason,
         "ai_top_issues": (ai_check.get("top_issues") or [])[:6],
         # v6.9.30: 锚点对比结论随轮次入史——范本引导效果可观测
         # （达标/基本接近/差距明显；references 轮为空串）
@@ -1043,6 +1071,9 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         "score_before": score_before,
         "score_after": score_after,
         "section_passed": section_passed,
+        # v6.9.33: 复检结果随返回传递，monitor 可据此综合评估
+        "expression_improved": expression_improved,
+        "expression_not_improved_reason": expression_not_improved_reason,
     }
 
 

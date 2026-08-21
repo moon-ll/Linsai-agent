@@ -361,6 +361,31 @@ class ExecutorPathTests(TestSuite):
             "references 评审不应再被 600s cap 限制",
         )
 
+        # 4.7 writer 后程序化复检闭环（v6.9.33）
+        #     背景：writer prompt 已注入 top_issues 明细但执行不力（moire 案例
+        #     只修 1/7 问题）。复检用确定性检测验证 writer 是否实质修复表达：
+        #     未达标（<0.85）必须严格提升，已达标只要求不显著倒退，references 跳过。
+        self.assert_true(
+            "ai_check_after = self._detect_ai_patterns" in text,
+            "writer 后应二次运行 AI 检测（复检）",
+        )
+        self.assert_true(
+            "expression_improved" in text,
+            "应存在 expression_improved 判定",
+        )
+        self.assert_true(
+            "and expression_improved" in text,
+            "section_passed 应包含表达提升条件",
+        )
+        self.assert_true(
+            '"ai_ceiling_after"' in text,
+            "score_history 应含 ai_ceiling_after",
+        )
+        self.assert_true(
+            'if section_key != "references" and ai_check:' in text,
+            "references 轮应跳过表达复检",
+        )
+
 
 def main():
     from test_runner import print_report

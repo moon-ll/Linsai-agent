@@ -1,5 +1,27 @@
 # 变更记录
 
+## v6.9.33 - 2026-08-21 writer 后程序化复检闭环（防表面修改）
+
+背景：v6.9.30 的 AI 天花板机制生效后，writer prompt 已注入 top_issues 明细，
+但历史执行不力（moire 案例只修 1/7 问题，r2/r3 连续大额扣分）。复检用
+确定性检测验证 writer 是否实质修复表达问题，与顽固升级机制形成闭环。
+
+- **writer 后二次 AI 检测**（`executor.py` `_run_writer_step`）：writer 执行
+  成功后重新运行 `_detect_ai_patterns`，比较 writer 前后天花板
+- **提升判定**：未达标（天花板 <0.85）必须严格提升（`>` 前值）；已达标只
+  要求不显著倒退（允许 ±0.02）；references 轮跳过（不涉及正文表达）
+- **未提升即判未通过**：`expression_improved` 并入 `section_passed` 判定，
+  未提升时记录原因"writer 未实质修复表达问题（AI 天花板 X→Y）"，下一轮
+  继续优化，杜绝表面修改蒙混过关
+- **可观测性**：score_history 新增 `ai_ceiling_after` / `expression_improved`
+  / `expression_not_improved_reason`；writer 返回携带复检结果供 monitor 综合
+  评估（monitor 经 section_passes 读取未通过信号）
+- **回归守护**：`test_mechanism_hardening.py` ExecutorPathTests 新增 5 用例
+  （复检二次检测 / 提升判定 / section_passed 条件 / ai_ceiling_after 入史 /
+  references 跳过）
+- **验证**：`test_mechanism_hardening.py` 48/48 通过；`self_test.py --module`
+  961/961 通过；`py_compile` 通过
+
 ## v6.9.32 - 2026-08-21 references 评审超时放宽 + order-parameter 卡死解锁
 
 背景：v6.9.30 修复生效后暴露真问题——order-parameter r7 references-critic
