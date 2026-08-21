@@ -283,6 +283,84 @@ class MicroSchedulerRotationTests(TestSuite):
             "v6.8.19: else 分支需同步写回 last_slot_index，保持时段时间锚点",
         )
 
+        # ================================================================
+        # 测试 8（v6.9.31 修复守护）: slot_done 标记必须能驱动轮转
+        # bug 现场: 时段切换时先 pop slot_{i}_done 再读同一个内存 dict，
+        # "上一时段中途完成轮次"信号永远读不到（round_done 恒走
+        # _is_round_complete 分支）；聚焦课题每推进一轮即重置软卡死
+        # 计数，可无限持有焦点，饿死队列其余课题（08-21 实证：bsv 停滞
+        # 87.7h / berry 46.9h，order-param r6 中途完成后仍持有 slot 3）。
+        # ================================================================
+        self._write_focus_state(
+            queue=[pid_a, pid_b],
+            last_proposal_id=pid_a,
+            last_slot_index=0,
+        )
+        # pid_a 的 round 1 在 slot 0 中途完成 → slot_0_done 已置位
+        focus_path = self.tmp_root / "memory" / "lifecycle-focus.json"
+        state8 = json.loads(focus_path.read_text(encoding="utf-8"))
+        state8["slot_0_done"] = True
+        focus_path.write_text(json.dumps(state8, ensure_ascii=False), encoding="utf-8")
+
+        ctrl8 = self._make_mock_controller({pid_a: {"optimization_rounds": 1}})
+        self._patch_round_complete({2: False})  # 新轮次 round 2 未完成
+
+        result8 = self.ms._focus_proposal_for_slot(ctrl8, slot_index=1, optimizing=optimizing)
+        self.assert_eq(
+            result8, pid_b,
+            "上一时段 slot_done 置位时应轮转到队列下一个",
+            "轮次中途完成后（slot_done=True），下一时段必须让出焦点，"
+            "否则聚焦课题无限持有时段、饿死队列",
+        )
+        # 守护：flag 消费后必须清除，防止跨时段残留误判
+        persisted8 = json.loads(focus_path.read_text(encoding="utf-8"))
+        self.assert_true(
+            "slot_0_done" not in persisted8,
+            "slot_done 标记消费后应清除",
+            "标记残留会导致下一时段切换时重复让出",
+        )
+
+        # ================================================================
+        # 测试 9（v6.9.31 加固守护）: focus_history 去重——同一 (slot,
+        # proposal) 只记一条，50 条上限应覆盖多次时段切换而非约一个时段
+        # bug 现场: 每 5 分钟 tick 追加一条，满时段约 49 条冲掉前一时段
+        # 全部记录，_count_consecutive_slots 在时段切换时恒为 1，
+        # MAX_SOFT_STUCK_SLOTS=2 软卡死防线对满时段失效。
+        # ================================================================
+        self._write_focus_state(
+            queue=[pid_a, pid_b],
+            last_proposal_id=pid_a,
+            last_slot_index=0,
+        )
+        ctrl9 = self._make_mock_controller({pid_a: {"optimization_rounds": 0}})
+        self._patch_round_complete({1: False})  # round 1 未完成且无推进
+
+        # 同一时段连续调用 20 次（模拟 5 分钟 tick）
+        for _ in range(20):
+            self.ms._focus_proposal_for_slot(ctrl9, slot_index=0, optimizing=optimizing)
+        persisted9 = json.loads(focus_path.read_text(encoding="utf-8"))
+        self.assert_eq(
+            len(persisted9.get("focus_history", [])), 1,
+            "同一 (slot, proposal) 的 20 次 tick 只应记录 1 条",
+            "去重失败会让 50 条上限退化为约一个时段的窗口",
+        )
+        # 切换到 slot 1（仍聚焦 pid_a），再 20 次 tick → 2 条
+        for _ in range(20):
+            self.ms._focus_proposal_for_slot(ctrl9, slot_index=1, optimizing=optimizing)
+        persisted9b = json.loads(focus_path.read_text(encoding="utf-8"))
+        self.assert_eq(
+            len(persisted9b.get("focus_history", [])), 2,
+            "跨时段同课题应各记 1 条",
+            "时段切换记录缺失会破坏 _count_consecutive_slots 计数",
+        )
+        # 两个时段无推进 → 软卡死应触发让出（历史去重后仍正确计数）
+        result9 = self.ms._focus_proposal_for_slot(ctrl9, slot_index=2, optimizing=optimizing)
+        self.assert_eq(
+            result9, pid_b,
+            "连续 2 个时段轮次无推进应触发软卡死让出",
+            "去重后 _count_consecutive_slots 须保持原计数语义",
+        )
+
 
 if __name__ == "__main__":
     suite = MicroSchedulerRotationTests()

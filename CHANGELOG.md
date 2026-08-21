@@ -1,5 +1,33 @@
 # 变更记录
 
+## v6.9.31 - 2026-08-21 修复 slot_done 轮转信号"先删后读"缺陷（焦点无限持有、队列饥饿）
+
+背景：20h 健康检查发现 4/6 课题无进展 2-4 天（bsv 87.7h、berry 46.9h、
+quantum-geometry 40.5h、key-transient 39.4h），近 3 天全部时段被 moire 与
+order-param 垄断；bsv 的 scheme-critic 已被修复链路重置为可执行却始终轮不到
+调度，且 48h 停滞告警从未触发。定位到两个已确认缺陷 + 一项防线加固：
+
+- **slot_done 先删后读（主因）**：`_focus_proposal_for_slot` 时段切换时先
+  `state.pop(slot_{i}_done)` 再在下方对同一内存 dict `state.get()` 该键，
+  "轮次中途完成→下一时段轮转"信号（v6.8.20 设计）永远读不到。聚焦课题每
+  推进一轮即重置软卡死计数，可无限持有焦点（生产实证：order-param r6 于
+  slot 2 中途完成后 slot 3 仍持有）。修复：pop 前捕获 flag，消费点读捕获值
+- **停滞检测时钟盲区**：monitor 停滞时钟读 proposal 级 `updated_at`，会被
+  repair 重置 / cron 失败记录 / stale 清理等非执行写入刷新（bsv 实证：
+  updated_at 距 26.1h、job 实际停滞 87.7h，告警永不触发）。修复：时钟改取
+  任一 job 的 `finished_at/started_at` 最大值，无 job 时间戳回退 updated_at
+- **focus_history 去重（加固）**：旧实现每 5 分钟 tick 追加一条，50 条上限
+  仅覆盖约一个时段，`_count_consecutive_slots` 在时段切换时几乎恒为 1，
+  `MAX_SOFT_STUCK_SLOTS=2` 软卡死防线对满时段失效。改为同一 (slot,
+  proposal) 只记一条，计数语义不变
+- **测试**：`test_micro_scheduler_rotation.py` 新增测试 8（slot_done 轮转
+  守护）+ 测试 9（历史去重守护），套件 10→16 断言；新增
+  `test_stalled_clock_job_activity.py`（4 用例，含 bsv 场景复刻）并注册进
+  `self_test.py --module` 硬编码清单
+- **验证**：两套件独立运行全绿；`self_test.py --module` 954/954 通过
+  （基线 944 + 新增 10）；`py_compile` 通过；修复前缺陷均已在隔离环境
+  动态复现确认
+
 ## v6.9.30 - 2026-08-21 锚点绑定/AI 检测机制移植到线上执行路径（executor.py）
 
 背景：v6.9.28 的机制修复只落在 `optimize.py`（微调度器未调用的死代码），

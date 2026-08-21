@@ -1004,7 +1004,13 @@ def _focus_proposal_for_slot(
     # 当前时段与上一时段不同，可能需要切换 proposal
     if slot_index != last_slot_index:
         # v6.8.20: 清除上一时段的 slot_done 标记
+        # v6.9.31 修复: 必须先读取再清除——旧实现先 pop 后在下方 L1028
+        # 读同一个内存 dict，标记永远读不到，"轮次中途完成→下一时段轮转"
+        # 信号形同虚设。聚焦课题每推进一轮即重置软卡死计数，可无限持有
+        # 焦点，饿死队列其余课题（08-21 实证：bsv 停滞 87.7h、berry 46.9h，
+        # order-param r6 于 slot 2 中途完成后 slot 3 仍持有焦点）。
         prev_done_key = f"slot_{last_slot_index}_done"
+        prev_slot_done_flag = bool(state.get(prev_done_key))
         if prev_done_key in state:
             state.pop(prev_done_key, None)
 
@@ -1025,8 +1031,8 @@ def _focus_proposal_for_slot(
 
             # v6.8.20: 优先检查 slot_done 标记——如果上一时段标记为已完成，
             # 说明轮次在中途就完成了，应该轮转到下一个课题
-            prev_slot_done_key = f"slot_{last_slot_index}_done"
-            if state.get(prev_slot_done_key):
+            # v6.9.31: 读 pop 前捕获的 flag（键已在本函数开头清除）
+            if prev_slot_done_flag:
                 round_done = True
             else:
                 # 让出时段的条件：
@@ -1133,14 +1139,25 @@ def _focus_proposal_for_slot(
         pid = next_pid
 
     # 记录历史
+    # v6.9.31 加固: 同一 (slot, proposal) 只记一条——旧实现每 5 分钟 tick
+    # 追加一条，50 条上限仅覆盖约一个时段，_count_consecutive_slots 在
+    # 时段切换时几乎恒为 1，软卡死防线（MAX_SOFT_STUCK_SLOTS）对满时段
+    # 失效。去重后 50 条可覆盖约 50 次时段切换，计数语义不变
+    # （该函数只统计连续同课题的不同 slot_index 数）。
     history = state.get("focus_history", [])
-    history.append({
-        "slot_index": slot_index,
-        "slot_start": _load_focus_slots()[slot_index][0],
-        "proposal_id": pid,
-        "at": now_utc(),
-    })
-    state["focus_history"] = history[-50:]  # 只保留最近 50 条
+    last_entry = history[-1] if history else None
+    if (
+        not last_entry
+        or last_entry.get("slot_index") != slot_index
+        or last_entry.get("proposal_id") != pid
+    ):
+        history.append({
+            "slot_index": slot_index,
+            "slot_start": _load_focus_slots()[slot_index][0],
+            "proposal_id": pid,
+            "at": now_utc(),
+        })
+        state["focus_history"] = history[-50:]  # 只保留最近 50 条
     _save_focus_state(state)
 
     return pid

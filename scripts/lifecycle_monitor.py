@@ -282,9 +282,19 @@ def _check_proposals() -> Tuple[List[Dict[str, Any]], List[Dict[str, Any]]]:
         # v6.8.16 改进2: 停滞课题检测
         # v6.8.27 修复: 旧版要求 done==0 才触发，但大多数停滞课题已有部分 done job
         # 改为：只要 updated_at 超 48h 且当前还有 pending job（说明没跑完就卡了）
+        # v6.9.31 修复: 停滞时钟改用「job 级最后活动」（任一 job 的
+        # finished_at/started_at 最大值）——旧口径读 proposal 的 updated_at，
+        # 会被 repair 重置 / cron 失败记录 / stale 清理等非执行写入刷新，
+        # 掩盖真实停滞（08-21 bsv 实证：updated_at 距 26.1h、job 实际停滞
+        # 87.7h，48h 告警永不触发）。无 job 时间戳时回退 updated_at。
         STALL_THRESHOLD_HOURS = 48
         try:
-            last_activity = p.get("updated_at", "")
+            job_activity = ""
+            for j in jobs:
+                t = j.get("finished_at") or j.get("started_at") or ""
+                if t > job_activity:
+                    job_activity = t
+            last_activity = job_activity or p.get("updated_at", "")
             if last_activity:
                 last_dt = datetime.fromisoformat(last_activity.replace("Z", "+00:00"))
                 hours_since = (datetime.now(timezone.utc) - last_dt).total_seconds() // 3600
