@@ -2,9 +2,9 @@
 title: "层状固体HHG中的超快光谱与层间耦合：Uzner & Neufeld (2026) 精读笔记"
 type: "papers"
 created: "2026-08-15T20:19:49Z"
-updated: "2026-08-19T05:16:12Z"
+updated: "2026-08-21T04:52:13Z"
 tags: ["HHG", "层状固体", "层间耦合", "超快光谱学", "固体HHG", "论文精读", "维度依赖"]
-related: ["TDDFT", "Ultrafast spectroscopy and role of interlayer coupling in high harmonic generation from layered solids", "general-order-parameter-ultrafast-readout-20260727", "少层TMD", "层间耦合", "序参量全光读出", "超快载流子动力学", "高次谐波产生"]
+related: ["2604.23506", "TDDFT", "Ultrafast spectroscopy and role of interlayer coupling in high harmonic generation from layered solids", "general-order-parameter-ultrafast-readout-20260727", "少层TMD", "层间耦合", "序参量全光读出", "超快载流子动力学", "高次谐波产生"]
 source_raw: "2026-2604.23506-ultrafast-spectroscopy-and-role-of-interlayer-coupling-in-hi.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -58,6 +58,7 @@ Neufeld 组是固体 HHG 定量理论（TDDFT、半导体 Bloch 类方法）的�
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2604.23506]]
 - [[TDDFT]]
 - [[Ultrafast spectroscopy and role of interlayer coupling in high harmonic generation from layered solids]]
 - [[general-order-parameter-ultrafast-readout-20260727]]

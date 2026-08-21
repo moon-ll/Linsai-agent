@@ -1,5 +1,22 @@
 # 变更记录
 
+## v6.9.34 - 2026-08-22 周末补跑接线测试时钟依赖修复
+
+背景：08-22 00h 健康检查发现 `self_test --module` 959/961（v6.9.33 提交时
+961/961 全绿），失败集中在 `周末任务流水线测试` 两个接线用例。根因：
+`_test_weekend_stage_catchup` 的决策用例固定了时钟（08-16 周日中午），但
+接线用例调用 `_weekend_stage_catchup()` 时无法注入时钟，走真实
+`datetime.now()`——周六凌晨 00:00-09:30 窗口内三阶段入口 cron 窗口均未过，
+`_weekend_catchup_decisions` 全部返回 False，`fake.synced` 为空导致断言
+必然失败。产品行为本身正确（窗口未过本就不该补跑），纯测试时钟依赖缺陷。
+
+- orchestrator.py `_weekend_stage_catchup` 新增可选参数 `now_local`
+  （默认 None 时保持 `datetime.now()`，产品路径不变）
+- test_weekend_pipeline.py 接线/dry-run 两处调用注入固定时钟
+  `datetime(2026, 8, 16, 12, 0)`，与决策用例口径对齐；dry-run 用例从
+  "碰巧无超期阶段"变为真正验证"有超期但不落盘"
+- 验证：`self_test --module` 961/961 全量通过；py_compile 通过
+
 ## v6.9.33 - 2026-08-21 writer 后程序化复检闭环（防表面修改）
 
 背景：v6.9.30 的 AI 天花板机制生效后，writer prompt 已注入 top_issues 明细，

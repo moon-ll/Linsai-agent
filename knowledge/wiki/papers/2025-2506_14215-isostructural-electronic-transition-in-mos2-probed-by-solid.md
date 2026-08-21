@@ -2,9 +2,9 @@
 title: "等结构电子相变的 sHHG 探测——MoS2 高压谱学笔记"
 type: "papers"
 created: "2026-08-17T09:50:40Z"
-updated: "2026-08-19T05:16:11Z"
+updated: "2026-08-21T04:52:13Z"
 tags: ["sHHG", "MoS2", "高压DAC", "等结构相变", "Zuerch组", "Berry曲率", "TMD"]
-related: ["Berry曲率谱学", "K-Γ直接带隙", "TDDFT-sHHG", "固体高次谐波", "固体高次谐波产生", "相位匹配", "金刚石压砧", "高次谐波产生"]
+related: ["2506.14215", "Berry曲率谱学", "K-Γ直接带隙", "TDDFT-sHHG", "固体高次谐波", "固体高次谐波产生", "相位匹配", "金刚石压砧", "高次谐波产生"]
 source_raw: "2025-2506.14215-isostructural-electronic-transition-in-mos2-probed-by-solid.md"
 growth_stage: "growing"
 confidence: 0.55
@@ -54,6 +54,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2506.14215]]
 - [[Berry曲率谱学]]
 - [[K-Γ直接带隙]]
 - [[TDDFT-sHHG]]

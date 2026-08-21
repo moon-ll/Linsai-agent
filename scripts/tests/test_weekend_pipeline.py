@@ -468,14 +468,19 @@ class WeekendPipelineTests(TestSuite):
                 return {"success": True}
 
         fake = _FakePipeline()
-        caught = _weekend_stage_catchup(dry_run=False, pipeline=fake)
+        # v6.9.34: 注入固定时钟（周日中午，与上方决策用例一致）——真实时钟
+        # 下周六凌晨 00:00-09:30 运行时三阶段入口窗口均未过，decisions 全
+        # False，接线断言必然失败（08-22 00h 健康检查实证 959/961）
+        caught = _weekend_stage_catchup(
+            dry_run=False, pipeline=fake, now_local=datetime(2026, 8, 16, 12, 0))
         self.assert_eq(sorted(fake.synced), ["input", "output", "reflection"],
                        "三个超期阶段都应补 sync")
         self.assert_eq(len(caught), 3, "补跑记录应为 3 条")
 
         # --- 接线：dry-run 不落任何 sync
         fake2 = _FakePipeline()
-        _weekend_stage_catchup(dry_run=True, pipeline=fake2)
+        _weekend_stage_catchup(
+            dry_run=True, pipeline=fake2, now_local=datetime(2026, 8, 16, 12, 0))
         self.assert_eq(fake2.synced, [], "dry-run 不应执行 sync")
 
     def run_tests(self):

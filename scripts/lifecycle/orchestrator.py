@@ -486,17 +486,20 @@ def _weekend_catchup_decisions(
 def _weekend_stage_catchup(
     dry_run: bool = False,
     pipeline: Optional[Any] = None,
+    now_local: Optional["datetime"] = None,
 ) -> List[Dict[str, Any]]:
     """周末阶段超期补跑：补调 sync_stage_jobs，执行交给 20 分钟 worker。
 
     只补状态不跑 LLM（repair cron 不做长阻塞执行）；sync 会触发跨周
     重置（>6 天未完成的阶段 done→pending）并补建缺失的 job 模板
     （08-16 实测 v6.9.6 的 kb 深度维护 job 因反思阶段从未 sync 而长期
-    未注册）。pipeline 参数供回归测试注入隔离实例。
+    未注册）。pipeline 参数供回归测试注入隔离实例；now_local 供回归
+    测试注入固定时钟（v6.9.34：08-22 00h 实测接线用例在周六凌晨
+    00:00-09:30 窗口内因真实时钟"入口窗口未过"而必然失败）。
     """
     from weekend_pipeline import WeekendPipeline
 
-    now_local = datetime.now()  # 入口 cron 时刻为本地时间
+    now_local = now_local or datetime.now()  # 入口 cron 时刻为本地时间（可注入固定时钟）
     p = pipeline or WeekendPipeline()
     decisions = _weekend_catchup_decisions(p.state, now_local)
     caught = []

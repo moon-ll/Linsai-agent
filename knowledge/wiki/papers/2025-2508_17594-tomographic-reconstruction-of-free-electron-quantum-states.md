@@ -2,9 +2,9 @@
 title: "论文精读：自由电子量子态的层析重建（Tomographic reconstruction of free-electron quantum states）"
 type: "papers"
 created: "2026-08-15T21:57:34Z"
-updated: "2026-08-16T13:26:32Z"
+updated: "2026-08-21T04:52:13Z"
 tags: ["论文精读", "自由电子量子光学", "量子态层析", "贝叶斯反演", "深度学习反演", "PINEM", "AI驱动逆问题"]
-related: ["PINEM", "key-transient-quantum-phase-optical-20260726", "电子能量损失谱", "相位恢复", "贝叶斯推断", "量子态层析", "阿秒条纹术"]
+related: ["2508.17594", "PINEM", "key-transient-quantum-phase-optical-20260726", "电子能量损失谱", "相位恢复", "贝叶斯推断", "量子态层析", "阿秒条纹术"]
 source_raw: "2025-2508.17594-tomographic-reconstruction-of-free-electron-quantum-states.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -55,6 +55,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2508.17594]]
 - [[PINEM]]
 - [[key-transient-quantum-phase-optical-20260726]]
 - [[电子能量损失谱]]

@@ -2,9 +2,9 @@
 title: "精读笔记：面向固体体材料高次谐波光谱的精密装置（arXiv:2512.13311）"
 type: "papers"
 created: "2026-08-15T19:04:28Z"
-updated: "2026-08-17T05:19:28Z"
+updated: "2026-08-21T04:52:13Z"
 tags: ["固体HHG", "高次谐波光谱", "仪器设计", "阿秒条纹", "EUV探测", "强场物理", "少周期脉冲"]
-related: ["UV/VUV与EUV双谱仪", "价电子势重构", "固体高次谐波", "固体高次谐波产生", "场强标定", "晶体取向依赖HHG", "高次谐波产生"]
+related: ["2512.13311", "UV/VUV与EUV双谱仪", "价电子势重构", "固体高次谐波", "固体高次谐波产生", "场强标定", "晶体取向依赖HHG", "高次谐波产生"]
 source_raw: "2026-2512.13311-a-precision-apparatus-for-high-harmonic-spectrosco.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -69,6 +69,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2512.13311]]
 - [[UV/VUV与EUV双谱仪]]
 - [[价电子势重构]]
 - [[固体高次谐波]]

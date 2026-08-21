@@ -2,13 +2,13 @@
 title: "order-parameter-ultrafast-readout — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-order-parameter-ultrafast-readout-20260727"
-latest_round: 3
-last_score: 0.65
-critic_rounds: 8
-optimization_reports: 3
+latest_round: 6
+last_score: 0.69
+critic_rounds: 9
+optimization_reports: 4
 status: "optimizing"
-created: "2026-08-20T15:39:06Z"
-updated: "2026-08-20T15:39:06Z"
+created: "2026-08-21T16:05:59Z"
+updated: "2026-08-21T16:05:59Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -17,8 +17,8 @@ confidence: 1.0
 # order-parameter-ultrafast-readout — 优化报告
 
 **课题 ID**：`general-order-parameter-ultrafast-readout-20260727`
-**累计轮次**：3
-**当前分数**：0.65
+**累计轮次**：6
+**当前分数**：0.69
 **状态**：优化中
 
 ---
@@ -30,16 +30,18 @@ confidence: 1.0
 | 第 1 轮 | 0.74 | 0.00 | 0.80 | 0.70 | 0.70 | — |
 | 第 2 轮 | 0.42 | +0.03 | 0.70 | 0.22 | 0.46 | 0.25 |
 | 第 3 轮 | 0.40 | -0.34 | — | — | 0.30 | 0.50 |
+| 第 6 轮 | 0.57 | -0.24 | — | — | 0.45 | 0.70 |
 
-## 优化报告（共 3 份）
+## 优化报告（共 4 份）
 
 | 轮次 | 报告 |
 |------|------|
 | 第 1 轮 | [optimization-report-round-1.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/optimization-report-round-1.md) |
 | 第 2 轮 | [optimization-report-round-2.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/optimization-report-round-2.md) |
 | 第 3 轮 | [optimization-report-round-3.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/optimization-report-round-3.md) |
+| 第 6 轮 | [optimization-report-round-6.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/optimization-report-round-6.md) |
 
-## 对抗评审（共 8 轮）
+## 对抗评审（共 9 轮）
 
 | 轮次 | 文件 |
 |------|------|
@@ -48,6 +50,7 @@ confidence: 1.0
 | 第 3 轮 | [critic-round-3.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/critic-round-3.md) |
 | 第 4 轮 | [critic-round-4.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/critic-round-4.md) |
 | 第 5 轮 | [critic-round-5.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/critic-round-5.md) |
+| 第 6 轮 | [critic-round-6-scheme.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/critic-round-6-scheme.md) |
 | 第 6 轮 | [critic-round-6.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/critic-round-6.md) |
 | 第 7 轮 | [critic-round-7.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/critic-round-7.md) |
 | 第 8 轮 | [critic-round-8.md](research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/critic-round-8.md) |

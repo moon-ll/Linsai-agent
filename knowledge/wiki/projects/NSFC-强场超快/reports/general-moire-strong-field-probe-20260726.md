@@ -1,24 +1,24 @@
 ---
-title: "课题设想 — 优化报告"
+title: "moire-strong-field-probe — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-moire-strong-field-probe-20260726"
 latest_round: 8
-last_score: 0.62
+last_score: 0.69
 critic_rounds: 9
 optimization_reports: 5
 status: "optimizing"
-created: "2026-08-20T15:39:06Z"
-updated: "2026-08-20T15:39:06Z"
+created: "2026-08-21T16:05:59Z"
+updated: "2026-08-21T16:05:59Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
 ---
 
-# 课题设想 — 优化报告
+# moire-strong-field-probe — 优化报告
 
 **课题 ID**：`general-moire-strong-field-probe-20260726`
 **累计轮次**：8
-**当前分数**：0.62
+**当前分数**：0.69
 **状态**：优化中
 
 ---

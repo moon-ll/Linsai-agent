@@ -1,7 +1,7 @@
 # PDF 全文库
 
 > 本页自动生成，汇总所有已同步的 PDF 原文。
-> 最后更新：2026-08-20T04:40:11Z
+> 最后更新：2026-08-21T04:40:12Z
 
 共 **72** 个 PDF。
 
@@ -36,7 +36,7 @@
 | `2501.11328` | 2501.11328 | ✓ | — |
 | `2502.02540` | Shot-to-shot acquisition ultrafast electron diffraction | ✓ | ✓ |
 | `2503.04335` | 2503.04335 | ✓ | ✓ |
-| `2503.08052` | Phase-matching of high harmonic generation in twisted solids | ✓ | ✓ |
+| `2503.08052` | 2503.08052 | ✓ | ✓ |
 | `2503.21549` | 2503.21549 | ✓ | — |
 | `2504.02497` | All-electrical scheme for valley polarization in graphene | ✓ | ✓ |
 | `2504.02567` | High harmonic generation in monolayer MoS2 controlled by res | ✓ | ✓ |
@@ -60,8 +60,8 @@
 | `2510.18009` | 2510.18009 | ✓ | — |
 | `2511.18362` | 2511.18362 | ✓ | ✓ |
 | `2512.03665` | Photonic time stretch fieldoscopy: single-shot electric fiel | ✓ | ✓ |
-| `2512.09585` | 2512.09585 | ✓ | — |
-| `2512.13311` | A precision apparatus for high harmonic spectroscopy in bulk | ✓ | ✓ |
+| `2512.09585` | 2512.09585 | ✓ | ✓ |
+| `2512.13311` | 2512.13311 | ✓ | ✓ |
 | `2512.19412` | 2512.19412 | ✓ | — |
 | `2601.01611` | 2601.01611 | ✓ | — |
 | `2601.08830` | 2601.08830 | ✓ | — |
