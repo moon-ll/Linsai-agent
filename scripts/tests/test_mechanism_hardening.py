@@ -272,11 +272,85 @@ class SemanticDedupTests(TestSuite):
         self.assert_true("表题编号与正文引用一致" in after2, "全新建议应写入文件")
 
 
+class ExecutorPathTests(TestSuite):
+    """4：executor.py 线上路径机制守护（v6.9.30）。
+
+    背景：v6.9.28 的锚点绑定/AI 检测修复只落在 optimize.py（微调度器
+    未调用的死代码），线上实际执行路径 executor.py 缺失，导致
+    'template=score anchor' 机制整体失效。本套件做源码级守卫，
+    防止移植逻辑再次只修死代码。
+    """
+
+    def __init__(self):
+        super().__init__("executor 线上路径机制守护测试（v6.9.30-4）")
+
+    def setup(self):
+        self.tmp_root = create_isolated_env()
+        self._exec = Path(__file__).parent.parent / "lifecycle" / "executor.py"
+        self._text = self._exec.read_text(encoding="utf-8")
+
+    def teardown(self):
+        if self.tmp_root and self.tmp_root.exists():
+            shutil.rmtree(self.tmp_root, ignore_errors=True)
+
+    def run_tests(self):
+        text = self._text
+
+        # 4.1 critic 步骤必须先运行程序化 AI 检测（产出表达天花板）
+        pos_critic_ai = text.find("def _run_critic_step")
+        pos_ai_detect = text.find("ai_check = self._detect_ai_patterns")
+        self.assert_true(pos_critic_ai > 0, "应存在 _run_critic_step")
+        self.assert_true(pos_ai_detect > 0, "应存在 AI 检测调用")
+        self.assert_true(
+            pos_critic_ai < pos_ai_detect,
+            "AI 检测应位于 _run_critic_step 内（critic 之前）",
+        )
+
+        # 4.2 AI 检测结果必须传入 critic（ai_check_result 参数）
+        self.assert_true(
+            "ai_check_result=ai_check" in text,
+            "critic 调用应传入 ai_check_result",
+        )
+
+        # 4.3 writer 步骤必须应用锚点绑定（references 轮跳过）
+        self.assert_true(
+            "self._apply_anchor_conclusion_binding" in text,
+            "writer 步骤应调用锚点绑定",
+        )
+        pos_ref_score = text.find("references 评审专用计分")
+        pos_bind = text.find("锚点对比结论与评分档位强制绑定")
+        self.assert_true(pos_ref_score > 0, "executor 应存在 references 专用计分段")
+        self.assert_true(pos_bind > 0, "executor 应存在锚点绑定段")
+        self.assert_true(
+            pos_ref_score < pos_bind,
+            "executor 中 references 专用计分必须先于锚点绑定（防覆盖回归）",
+        )
+        self.assert_true(
+            'if section_key != "references":' in text,
+            "executor 应存在 references 轮跳过绑定的守卫",
+        )
+
+        # 4.4 score_history 必须记录 ai_ceiling / ai_top_issues / anchor_conclusion
+        self.assert_true('"ai_ceiling"' in text, "score_history 应含 ai_ceiling")
+        self.assert_true('"ai_top_issues"' in text, "score_history 应含 ai_top_issues")
+        self.assert_true('"anchor_conclusion"' in text, "score_history 应含 anchor_conclusion")
+
+        # 4.5 程序化天花板强制执行（表达分 + 综合分 cap）
+        self.assert_true(
+            "dim_scores[\"expression\"] = ceiling" in text,
+            "executor 应强制表达分 cap 至 AI 天花板",
+        )
+        self.assert_true(
+            "overall_ceiling" in text,
+            "executor 应存在综合分天花板",
+        )
+
+
 def main():
     from test_runner import print_report
 
     suites = []
-    for cls in (AnchorOrderTests, WriterEscalationTests, SemanticDedupTests):
+    for cls in (AnchorOrderTests, WriterEscalationTests, SemanticDedupTests, ExecutorPathTests):
         s = cls()
         s.setup()
         s.run_tests()

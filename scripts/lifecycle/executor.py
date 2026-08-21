@@ -143,15 +143,25 @@ def _run_critic_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     project_type = prop_state.get("project_type", "general")
     round_num = job["round"]
     section_key = job.get("section_key", "rationale")
-    from proposal_sections import PROPOSAL_SECTIONS
+    from proposal_sections import PROPOSAL_SECTIONS, ProposalSections
     section = next((s for s in PROPOSAL_SECTIONS if s["key"] == section_key), None)
     focus_section = section
     is_full_review = section_key == "full_review"
+
+    # v6.9.30: 程序化 AI 写作模式检测——critic 之前运行，产出表达质量天花板
+    # （与 optimize.py 的 _run_optimization_round 对齐；微调度器路径此前完全缺失）
+    sections_obj = ProposalSections(prop_dir / "04_proposal")
+    sections_obj.ensure_split()
+    ai_check = self._detect_ai_patterns(prop_dir, sections_obj)
+    if _log:
+        _log.info(f"[{proposal_id}] AI 检测: ceiling={ai_check['ceiling']:.2f}, "
+                  f"issues={len(ai_check['top_issues'])}")
 
     result = self._run_critic(
         proposal_id, prop_dir, project_type, round_num,
         critic_writer_timeout_s(section_key),  # v6.8.52: 大模块 1200s，其余 900s
         focus_section=focus_section, is_full_review=is_full_review,
+        ai_check_result=ai_check,  # v6.8.7: 传入程序化检测结果
     )
     if not result.get("success"):
         return {"success": False, "error": result.get("error", "critic 失败")}
@@ -879,6 +889,13 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
                 f"请参考 {lit_files[0]} 中的新文献，在修订时引用。\n"
             )
 
+    # v6.9.30: 程序化 AI 写作模式检测——writer 步骤重新运行（与 critic 步骤
+    # 结果一致，确定性），注入 writer prompt 并用于后续评分 cap
+    from proposal_sections import ProposalSections
+    sections_obj = ProposalSections(prop_dir / "04_proposal")
+    sections_obj.ensure_split()
+    ai_check = self._detect_ai_patterns(prop_dir, sections_obj)
+
     writer_result = self._run_writer_optimize(
         proposal_id, prop_dir, project_type,
         critic_result={"output": report["output"]},
@@ -888,6 +905,7 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         focus_section=focus_section,
         is_full_review=is_full_review,
         lit_supplement=lit_supplement,
+        ai_check_result=ai_check,  # v6.8.7: writer 必须修复检测到的 AI 模式问题
     )
     if not writer_result.get("success"):
         return {"success": False, "error": writer_result.get("error", "writer 失败")}
@@ -898,6 +916,72 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     dim_scores = report["dim_scores"]
     weakest_dim = self._get_weakest_dimension(dim_scores)
     issues = report["issues"]
+
+    # v6.9.30: 程序化天花板强制执行——表达质量得分不得超过 AI 检测产出的天花板
+    # （与 optimize.py 的 _run_optimization_round 对齐，微调度器路径此前缺失）
+    if ai_check and "expression" in dim_scores:
+        ceiling = ai_check.get("ceiling", 1.0)
+        if dim_scores["expression"] > ceiling:
+            if _log:
+                _log.warning(
+                    f"[{proposal_id}] 表达质量 {dim_scores['expression']:.2f} > 天花板 {ceiling:.2f}，"
+                    f"强制 cap 至 {ceiling:.2f}"
+                )
+            dim_scores["expression"] = ceiling
+            score_after = self._recalculate_score(dim_scores, project_type)
+
+    # v6.8.8: 综合分天花板——scoring_integrity_rules.rule_1
+    if ai_check:
+        ai_ceiling = ai_check.get("ceiling", 1.0)
+        overall_ceiling = 1.0
+        if ai_ceiling < 0.7:
+            overall_ceiling = 0.75
+        elif ai_ceiling < 0.8:
+            overall_ceiling = 0.80
+        elif ai_ceiling < 0.9:
+            overall_ceiling = 0.85
+        if score_after > overall_ceiling:
+            if _log:
+                _log.warning(
+                    f"[{proposal_id}] 综合分 {score_after:.2f} > 综合天花板 {overall_ceiling:.2f}"
+                    f"（AI天花板={ai_ceiling:.2f}），强制 cap"
+                )
+            score_after = overall_ceiling
+
+    # v6.8.8: references 评审专用计分——N/A 维度不纳入加权
+    if section_key == "references" and dim_scores:
+        ref_dims = {k: v for k, v in dim_scores.items() if k in ("rigor", "completeness") and v > 0}
+        if ref_dims:
+            score_after = sum(ref_dims.values()) / len(ref_dims)
+            if _log:
+                _log.info(f"[{proposal_id}] references 评审专用计分: {score_after:.2f} (dims={ref_dims})")
+
+    # v6.9.25: 锚点对比结论与评分档位强制绑定——范本锚点成为分数锚
+    # v6.9.28: references 评审跳过绑定（口径为文献元数据准确性，写作语体锚点不适用）
+    anchor_conclusion = ""
+    if section_key != "references":
+        anchor_conclusion = self._extract_anchor_conclusion(report["output"])
+        score_after = self._apply_anchor_conclusion_binding(
+            proposal_id, report["output"], dim_scores, score_after, project_type
+        )
+
+    # v6.8.8: 评审报告完整性验证——anti_superficial_review.programmatic_validation
+    report_invalid_reason = ""
+    report_path = prop_dir / "05_review" / f"critic-round-{round_num}.md"
+    if report_path.exists() and report_path.stat().st_size > 100:
+        try:
+            report_content = report_path.read_text(encoding="utf-8")
+            has_anchor = "锚点对比" in report_content or "范本对标" in report_content
+            has_style = "写作风格" in report_content
+            if section_key != "references":
+                if not has_anchor:
+                    report_invalid_reason = "缺少'锚点对比'段落"
+                elif not has_style:
+                    report_invalid_reason = "缺少'写作风格评估'段落"
+            if report_invalid_reason and _log:
+                _log.warning(f"[{proposal_id}] 评审报告不完整: {report_invalid_reason}")
+        except Exception:
+            pass
 
     # v6.8.22: P0 跨轮持久化——本轮 critic 出现的 critical/high 问题写入 open_critical_issues
     # 供下一轮 critic/writer prompt 注入，实现跨轮记忆（断裂点3）
@@ -911,7 +995,11 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
 
     min_score = threshold.get("min_overall_score", 0.85)
     weak_dims = [k for k, floor in self.DIMENSION_FLOOR.items() if k in dim_scores and dim_scores[k] < floor]
-    section_passed = score_after >= min_score and len(weak_dims) == 0
+    section_passed = (
+        score_after >= min_score
+        and len(weak_dims) == 0
+        and not report_invalid_reason
+    )
 
     score_before = prop_state.get("last_score", 0.0)
 
@@ -931,6 +1019,13 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         "section_passed": section_passed,
         "issues_count": len(issues),
         "high_issues": sum(1 for i in issues if i.get("severity") == "high"),
+        # v6.9.30: 程序化 AI 检测摘要随轮次入史——prompt_optimizer 聚合
+        # 全局 top_issues 生成针对性修复指令（与 optimize.py 对齐）
+        "ai_ceiling": round(ai_check.get("ceiling", 1.0), 3),
+        "ai_top_issues": (ai_check.get("top_issues") or [])[:6],
+        # v6.9.30: 锚点对比结论随轮次入史——范本引导效果可观测
+        # （达标/基本接近/差距明显；references 轮为空串）
+        "anchor_conclusion": anchor_conclusion,
         "at": now_utc(),
     })
     prop_state["updated_at"] = now_utc()

@@ -1,5 +1,31 @@
 # 变更记录
 
+## v6.9.30 - 2026-08-21 锚点绑定/AI 检测机制移植到线上执行路径（executor.py）
+
+背景：v6.9.28 的机制修复只落在 `optimize.py`（微调度器未调用的死代码），
+线上实际执行路径 `lifecycle/executor.py` 缺失，导致"template=score anchor"
+机制整体失效。本次将核心机制移植到 executor.py 的 `_run_critic_step` /
+`_run_writer_step`，并新增源码级回归守护。
+
+- **程序化 AI 写作模式检测**：critic 步骤之前运行 `_detect_ai_patterns`，
+  产出表达质量天花板；结果传入 critic（`ai_check_result`）与 writer
+  （writer 必须修复检测到的 AI 模式问题）
+- **程序化天花板强制执行**：表达质量分 > AI 天花板时强制 cap；综合分按
+  AI 天花板分级 cap（<0.7→0.75 / <0.8→0.80 / <0.9→0.85），与 optimize.py
+  对齐
+- **references 评审专用计分**：N/A 维度不纳入加权，且先于锚点绑定执行
+  （防覆盖回归）；references 轮跳过锚点绑定（口径不适用）
+- **锚点结论绑定**：`_extract_anchor_conclusion` + `_apply_anchor_conclusion_binding`
+  三档结论强制绑定评分档位，范本锚点成为分数锚
+- **评审报告完整性验证**：缺少"锚点对比"/"写作风格评估"段落时置
+  `report_invalid_reason`，section 判定为未通过
+- **score_history 新字段**：`ai_ceiling` / `ai_top_issues` / `anchor_conclusion`
+  随轮次入史，prompt_optimizer 可聚合全局 top_issues 生成针对性修复指令
+- **回归守护**：`test_mechanism_hardening.py` 新增 `ExecutorPathTests`
+  （14 用例）做源码级守卫，防止机制再次只修死代码
+- **验证**：`test_mechanism_hardening.py` 41/41 通过；`self_test.py --module`
+  944/944 通过；`py_compile` 通过
+
 ## v6.9.29 - 2026-08-20 项目文档瘦身（归档 4 份过期/冗余文档 + 权威文档补全）
 
 背景：用户要求对项目结构说明/规则等相关文档瘦身，清理明显过期或冗余内容，避免文档堆积。
