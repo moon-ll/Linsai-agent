@@ -288,6 +288,8 @@ class ExecutorPathTests(TestSuite):
         self.tmp_root = create_isolated_env()
         self._exec = Path(__file__).parent.parent / "lifecycle" / "executor.py"
         self._text = self._exec.read_text(encoding="utf-8")
+        self._opt_src = Path(__file__).parent.parent / "proposal_lifecycle" / "optimize.py"
+        self._opt_text = self._opt_src.read_text(encoding="utf-8")
 
     def teardown(self):
         if self.tmp_root and self.tmp_root.exists():
@@ -343,6 +345,20 @@ class ExecutorPathTests(TestSuite):
         self.assert_true(
             "overall_ceiling" in text,
             "executor 应存在综合分天花板",
+        )
+
+        # 4.6 references 评审超时 cap 必须 ≥1200s（v6.9.31）
+        #     背景：references 输入含 references.md + 三个正文章节（约 106KB），
+        #     MiniMax 慢 API 下主 critic 单章都要 1155s——600s cap 导致
+        #     order-parameter r7 references-critic 连续 3 次超时卡死。
+        opt_text = self._opt_text
+        self.assert_true(
+            "min(timeout, 1200)" in opt_text,
+            "references 评审超时 cap 应为 1200s（v6.9.31 修复）",
+        )
+        self.assert_true(
+            "min(timeout, 600)" not in opt_text,
+            "references 评审不应再被 600s cap 限制",
         )
 
 

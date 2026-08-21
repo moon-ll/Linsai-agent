@@ -1,5 +1,23 @@
 # 变更记录
 
+## v6.9.32 - 2026-08-21 references 评审超时放宽 + order-parameter 卡死解锁
+
+背景：v6.9.30 修复生效后暴露真问题——order-parameter r7 references-critic
+连续 3 次 600s 超时失败卡死（阻塞 references-writer → monitor → derived
+整条 r7 收尾链）。根因：references 评审输入含 references.md + 三个正文
+章节（约 106KB），而 MiniMax 慢 API 下主 critic 单章都要 1155s 才能完成，
+600s cap 对 references 评审过紧。
+
+- **references 评审超时 600s→1200s**（`optimize.py`）：`min(timeout, 600)`
+  改为 `min(timeout, 1200)`，对齐主 critic 大模块超时。v6.8.37 的 600s
+  假设"references 较主 critic 轻"已不成立（输入含全部正文）
+- **order-parameter r7 references-critic 手动解锁**：`--reset-stuck` 强制
+  重置 failed→pending（attempts 清零），依赖链恢复可推进
+- **回归守护**：`test_mechanism_hardening.py` ExecutorPathTests 新增
+  references 超时 cap 守护（必须 ≥1200s，禁止回退 600s）
+- **验证**：`test_mechanism_hardening.py` 43/43 通过；`self_test.py --module`
+  954/954 通过；`py_compile` 通过
+
 ## v6.9.31 - 2026-08-21 修复 slot_done 轮转信号"先删后读"缺陷（焦点无限持有、队列饥饿）
 
 背景：20h 健康检查发现 4/6 课题无进展 2-4 天（bsv 87.7h、berry 46.9h、
@@ -29,7 +47,6 @@ order-param 垄断；bsv 的 scheme-critic 已被修复链路重置为可执行�
   动态复现确认
 
 ## v6.9.30 - 2026-08-21 锚点绑定/AI 检测机制移植到线上执行路径（executor.py）
-
 背景：v6.9.28 的机制修复只落在 `optimize.py`（微调度器未调用的死代码），
 线上实际执行路径 `lifecycle/executor.py` 缺失，导致"template=score anchor"
 机制整体失效。本次将核心机制移植到 executor.py 的 `_run_critic_step` /

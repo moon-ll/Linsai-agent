@@ -811,7 +811,10 @@ class OptimizeMixin:
             # 的课题偏紧（quantum-geometry 曾连续 3 次 300s 超时、重试耗尽卡住）；
             # 600s 与调用方 critic_timeout 默认值一致，仍短于主 critic 的 900s
             # （references 评审不评创新/可行性，较主 critic 轻）。
-            return self._run_hermes("critic", prompt, min(timeout, 600))
+            # v6.9.31: 600s→1200s。实测 references 输入含 references.md + 三个正文
+            # 章节（约 106KB），且 MiniMax 慢 API 下主 critic 单章都要 1155s——
+            # 600s 对 references 评审过紧（order-parameter r7 连续 3 次超时卡死）。
+            return self._run_hermes("critic", prompt, min(timeout, 1200))
 
         elif is_full_review:
             focus_text = (
