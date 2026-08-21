@@ -1,7 +1,7 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-22 00h 健康检查（发现并修复 2 缺陷：周末补跑测试时钟依赖 v6.9.34、#10 反馈闭环第三处断裂 v6.9.35；设计抽查 #8/#9/#10 完成）
-完整报告：logs/healthchecks/healthcheck-2026-08-22-00h.md
+最后更新：2026-08-22 04h 健康检查（无关键缺陷；设计抽查 #11 部分偏差 / #13 正常；停滞课题观察升级为 3 个）
+完整报告：logs/healthchecks/healthcheck-2026-08-22-04h.md
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：
@@ -16,6 +16,7 @@
 9. proposal 级 `updated_at` 会被非 job 执行路径刷新（repair 重置/cron 失败记录/stale 清理）——评估真实停滞必须看 job 级 finished_at 最大值（v6.9.31 起 monitor 已改此口径，08-22 00h berry 50h 首次真实触发实证）
 10. **prop_state 中没有 proposal_id 键**（state.py 原样返回 proposals[pid] dict）——任何需要 proposal_id 的加载函数必须显式传参，不能 prop_state.get("proposal_id")（v6.9.35 教训：#10 闭环因此断裂 8 个版本）
 11. 周六凌晨跑健康检查注意日期敏感测试：test_weekend_pipeline 接线用例曾因真实时钟在入口窗口（周六 09:00/14:00/周日 09:00）前必失败（v6.9.34 已注入固定时钟修复；新增类似用例同样要注入时钟）
+12. `kb-health-weekly.json` 为双层嵌套：顶层 checked_at/base_health/derived_overdue...，三项健康指标在 `base_health.health` 下（第一层取值恒 None，勿误判为计算失败）
 
 【轮换表 15 项检查进度】
 第一轮（1-15 全覆盖，08-15 04h 收官）
@@ -25,13 +26,15 @@
 第三轮（08-21 20h 起）：
 - 已核：#4（运行时：agent-scores.json 顶层 writer/critic、今日有写入）→ 正常｜#5（运行时：7 profile 全覆盖 + 保留期清理 + 当日 14:00 实际应用）→ 正常｜#6（运行时：berry 12 条未解决 P0 注入生效）→ 正常
 - 已核：#8（运行时：berry 50h 首次真实触发 stalled 告警，新口径生效）→ 正常｜#9（运行时：最近 2 次周末输入 actions 141/15 非零正确不告警）→ 正常｜#10（运行时：发现 proposal_id 缺失断裂 → v6.9.35 修复，bsv 实数据返回 114 字符闭环接通）→ 已修复
+- 已核：#11（08-22 04h：08-16 反思实际计算三项指标 connectivity 2.35/coverage 0.37/week_new 200 并落盘 cache 文件，但 system-kanban kb_metrics 仅有 sync_engine 口径 coverage_pct——**部分偏差**，看板缺新鲜度/连通度，待人工裁决口径）｜#13（08-22 04h：静态 round 第一维 + _CHAIN_ORDER 7/8 在位；运行时 6/6 课题无轮次优先级倒置）→ 正常
 - **#2 人工裁决项（挂起）**：`optimize.py` L137-143 用 dim_scores 最小值键在 PROPOSAL_SECTIONS 中按 key 匹配——命名空间不相交，切换永为空操作且日志误报"已切换"；外层条件（3 次同章节 |Δ|<0.01）32 天零满足。修复前需裁决"最弱维度→章节"映射口径。
 
 【下次从这里继续】
-1. 第三轮设计轮换：从 #11 起（#11 kb_health 跨周数据或已满可复验；#12 趋势雷达上轮已核可跳；#13 微调度器优先级）
+1. 第三轮设计轮换：从 #14 起（#14 stale 清理时序 + 轮末 break；#15 monitor 降级路径；之后第三轮收官，循环回 #1 跨课题范例注入）
 2. **反馈闭环生效观察（v6.9.35 修复后）**：bsv 下轮优化 critic/writer prompt 应实际注入第 3 次反馈内容；因今天是周六，最早周一 00:30 时段可观察 debug journal 或 prompt 日志
-3. **berry/key-transient 停滞观察**：周一 worker 恢复后队列尾部课题应陆续重新获得时段；若周一晚仍零推进，升级排查轮转队列
+3. **停滞观察（升级为 3 课题）**：berry 54.9h、quantum-geometry 48.4h（本轮新增停滞）、key-transient 47.3h 逼近线；周一 worker 恢复后应陆续重新获得时段；若周一晚仍零推进，升级排查轮转队列（4 时段/日 vs 6 课题的结构性饥饿）
 4. #2 维度轮换修复口径人工裁决（见上）
 5. bsv 反馈文件编号时间倒挂（feedback-4 早于 feedback-3，疑 pending_review 退回周期重置），低优先级待查
 6. 测试基建（仅报告待裁决）：idea_review 套件 35 用例未注册 --module 静默跳过 + --module 硬编码清单 vs AGENTS"自动发现"表述偏差
-7. kb_distill_backlog 376 项慢性积压（阈值 300，5 篇/天消化不动，持续恶化）——容量问题非回归，需人工裁决提速策略
+7. kb_distill_backlog 慢性积压**加速恶化**：234（08-16）→376（08-22），6 天 +142（约 +24/天）vs 日蒸馏 5 篇，容量缺口约 5 倍——需人工裁决提速策略（提配额/周末批量/限流入池）
+8. #11 看板持久化口径人工裁决（新增）：三项 KB 健康指标已周更落盘 kb-health-weekly.json，是否需合并写入 system-kanban kb_metrics（涉及 category_coverage 0.37 与 coverage_pct 5.0 两口径并存问题）
