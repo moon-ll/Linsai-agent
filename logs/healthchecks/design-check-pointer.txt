@@ -1,35 +1,37 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-21 20h 健康检查（发现并修复 slot_done 先删后读轮转缺陷 v6.9.31；设计抽查 #4/#5/#6 正常）
-完整报告：logs/healthchecks/healthcheck-2026-08-21-20h.md
+最后更新：2026-08-22 00h 健康检查（发现并修复 2 缺陷：周末补跑测试时钟依赖 v6.9.34、#10 反馈闭环第三处断裂 v6.9.35；设计抽查 #8/#9/#10 完成）
+完整报告：logs/healthchecks/healthcheck-2026-08-22-00h.md
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：
-   `python3 -c "import sys; sys.path.insert(0,'scripts'); from hermes_bridge import cron_list; ..."`（linsai profile，17 条，含 4 条简报）
-2. `lifecycle_monitor.py` 实际参数为 `--dry-run`（工具提示词中的 `--check` 不存在）
+   `python3 -c "import sys; sys.path.insert(0,'scripts'); from hermes_bridge import cron_list; ..."`（linsai profile，17 条，含 4 条简报）。注意 schedule_display 可能为 None，打印时用 `str(x or fallback)`
+2. `lifecycle_monitor.py` 实际参数为 `--dry-run`（工具提示词中的 `--check` 不存在）；异常详情不在日志里，需直接调 `_check_proposals()` / `_check_health_signals()` 拿 anomalies
 3. `_lifecycle.json` proposals 为 dict；`pipeline_jobs` 为 list；job 字段：job_id 在顶层、轮次键为 `round`；stalled 判定线 1800s/48h
-4. `self_test --module` 为 self_test.py 内**硬编码清单**（非 glob 自动发现）：新测试套件必须注册进 mapping["module"]，否则被 except:pass 静默跳过（08-18 04h 实证，14 用例无声丢失）。当前基线 954/954（944 + test_micro_scheduler_rotation 新增 6 + test_stalled_clock_job_activity 5... 实际新增合计 10）
-5. 时区：北京时间（UTC+8）；now_utc() 产物过滤时注意 UTC=BJ-8
-6. git 版本标签：v6.9.23 已被 7daaad7 占用但 VERSION 未同步——6.9.22 起以 VERSION 文件为准推进，当前 6.9.31
+4. `self_test --module` 为 self_test.py 内**硬编码清单**（非 glob 自动发现）：新测试套件必须注册进 mapping["module"]，否则被 except:pass 静默跳过（08-18 04h 实证，14 用例无声丢失）。当前基线 961/961（v6.9.34/35 后；上轮 954 + v6.9.33 新增 7 - 本轮 v6817 套件内新增断言）
+5. 时区：北京时间（UTC+8）；now_utc() 产物过滤时注意 UTC=BJ-8；system-kanban execution_history 时间戳为 UTC
+6. git 版本标签：v6.9.23 已被 7daaad7 占用但 VERSION 未同步——6.9.22 起以 VERSION 文件为准推进，当前 6.9.35
 7. 网关核查走 `check_hermes_available()`（返回 hermes_cli/linsai_profile/gateway_status/cron_jobs_count，实测即时响应）
 8. transition_history 含三种 schema：标准 from/to、注册首条（仅 to）、事件注记（event/detail 键，如 direction_correction）；另有 4 条 08-04 遗留用 timestamp 替代 at——均为良性，读取方兼容
-9. proposal 级 `updated_at` 会被非 job 执行路径刷新（repair 重置/cron 失败记录/stale 清理）——评估真实停滞必须看 job 级 finished_at 最大值（v6.9.31 起 monitor 已改此口径）
+9. proposal 级 `updated_at` 会被非 job 执行路径刷新（repair 重置/cron 失败记录/stale 清理）——评估真实停滞必须看 job 级 finished_at 最大值（v6.9.31 起 monitor 已改此口径，08-22 00h berry 50h 首次真实触发实证）
+10. **prop_state 中没有 proposal_id 键**（state.py 原样返回 proposals[pid] dict）——任何需要 proposal_id 的加载函数必须显式传参，不能 prop_state.get("proposal_id")（v6.9.35 教训：#10 闭环因此断裂 8 个版本）
+11. 周六凌晨跑健康检查注意日期敏感测试：test_weekend_pipeline 接线用例曾因真实时钟在入口窗口（周六 09:00/14:00/周日 09:00）前必失败（v6.9.34 已注入固定时钟修复；新增类似用例同样要注入时钟）
 
 【轮换表 15 项检查进度】
 第一轮（1-15 全覆盖，08-15 04h 收官）
 第二轮（收官）：
 - 已核：#12｜#1（静态+两轮运行时实证）｜#2（**32 天零触发 + dim/section 命名空间错配空转**，待人工裁决）｜#3（静态+运行时双口径）｜#4｜#5｜#6｜#7（负向安全+轮末终验）｜#8｜#9｜#13｜#14｜#15
-- 待人工裁决后复验：#10 反馈闭环（bsv human_feedback_count=3 样本累积中）｜#11 kb_health（跨周数据未满）
+- 待人工裁决后复验：#10 → ✅ 08-22 00h 已核（发现第三处断裂并修复）｜#11 kb_health（跨周数据未满）
 第三轮（08-21 20h 起）：
 - 已核：#4（运行时：agent-scores.json 顶层 writer/critic、今日有写入）→ 正常｜#5（运行时：7 profile 全覆盖 + 保留期清理 + 当日 14:00 实际应用）→ 正常｜#6（运行时：berry 12 条未解决 P0 注入生效）→ 正常
+- 已核：#8（运行时：berry 50h 首次真实触发 stalled 告警，新口径生效）→ 正常｜#9（运行时：最近 2 次周末输入 actions 141/15 非零正确不告警）→ 正常｜#10（运行时：发现 proposal_id 缺失断裂 → v6.9.35 修复，bsv 实数据返回 114 字符闭环接通）→ 已修复
 - **#2 人工裁决项（挂起）**：`optimize.py` L137-143 用 dim_scores 最小值键在 PROPOSAL_SECTIONS 中按 key 匹配——命名空间不相交，切换永为空操作且日志误报"已切换"；外层条件（3 次同章节 |Δ|<0.01）32 天零满足。修复前需裁决"最弱维度→章节"映射口径。
-- 附加：审核退回链路完整性（v6.9.24 修复+验证）；gateway 复发观察已关闭
 
 【下次从这里继续】
-1. 第三轮设计轮换：从 #8 起（#7 已双口径核验过）
-2. **轮转恢复验证（v6.9.31 修复效果）**：明 00:30 时段焦点应切到队首 bsv（slot_done 修复后两条路径均通向 bsv）；验证 bsv scheme-critic 恢复执行、berry/quantum-geometry/key-transient 陆续重新获得时段
-3. **停滞告警首次触发验证**：bsv job 级停滞 87.7h，下一次 hourly-monitor 应产出 stalled 告警（修复后口径）
+1. 第三轮设计轮换：从 #11 起（#11 kb_health 跨周数据或已满可复验；#12 趋势雷达上轮已核可跳；#13 微调度器优先级）
+2. **反馈闭环生效观察（v6.9.35 修复后）**：bsv 下轮优化 critic/writer prompt 应实际注入第 3 次反馈内容；因今天是周六，最早周一 00:30 时段可观察 debug journal 或 prompt 日志
+3. **berry/key-transient 停滞观察**：周一 worker 恢复后队列尾部课题应陆续重新获得时段；若周一晚仍零推进，升级排查轮转队列
 4. #2 维度轮换修复口径人工裁决（见上）
-5. key-transient task_status=completed 但生命周期 6/25（24%）——任务同步口径脱节，疑旧任务手工关闭残留，低优先级待查
+5. bsv 反馈文件编号时间倒挂（feedback-4 早于 feedback-3，疑 pending_review 退回周期重置），低优先级待查
 6. 测试基建（仅报告待裁决）：idea_review 套件 35 用例未注册 --module 静默跳过 + --module 硬编码清单 vs AGENTS"自动发现"表述偏差
-7. kb_distill_backlog 347 项慢性积压（阈值 300，5 篇/天消化不动）——容量问题非回归，需人工裁决提速策略（如提高每日蒸馏量）
+7. kb_distill_backlog 376 项慢性积压（阈值 300，5 篇/天消化不动，持续恶化）——容量问题非回归，需人工裁决提速策略
