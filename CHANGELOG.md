@@ -1,5 +1,25 @@
 # 变更记录
 
+## v6.9.35 - 2026-08-22 人工审核反馈闭环第三处断裂修复（proposal_id 缺失）
+
+背景：08-22 00h 健康检查第三轮设计抽查 #10（人工审核反馈闭环）运行时实证
+断裂：bsv human_feedback_count=3、feedback-3-raw.md 存在，但
+`load_review_feedback_for_optimization` 恒返回空串。根因：`_lifecycle.json`
+的 prop_state 中**没有** proposal_id 键（state.py `_get_proposal_state`
+原样返回 proposals[pid] dict），旧实现 `prop_state.get("proposal_id")`
+恒 None → feedback_dir 拼成 `optimizing//06_feedback` 永不存在。这是该
+闭环自 v6.8.17 引入以来的第三处断裂（v6.9.26 已修门闩与长度判断两处），
+意味着历史人工审核意见从未注入过 critic/writer prompt，用户审核反馈
+学习完全失效。
+
+- feedback_archive.py `load_review_feedback_for_optimization` 新增显式
+  `proposal_id` 参数（空串时回退 prop_state 内字段，兼容旧式调用）
+- optimize.py `_load_human_feedback_block` 传入自身已有的 proposal_id
+- test_optimize_v6817_prompt_vars.py 新增端到端用例：真实结构 prop_state
+  （无 proposal_id 键）+ feedback 文件 → 走真实加载链路断言注入
+- 验证：bsv 实数据修复后返回 114 字符反馈内容；`self_test --module`
+  961/961 全量通过；py_compile 通过
+
 ## v6.9.34 - 2026-08-22 周末补跑接线测试时钟依赖修复
 
 背景：08-22 00h 健康检查发现 `self_test --module` 959/961（v6.9.33 提交时

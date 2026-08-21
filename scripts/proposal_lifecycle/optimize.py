@@ -1014,7 +1014,9 @@ class OptimizeMixin:
         prop_state = self._get_proposal_state(proposal_id) or {}
         try:
             from proposal_lifecycle.feedback_archive import load_review_feedback_for_optimization
-            block = load_review_feedback_for_optimization(prop_state)
+            # v6.9.35: 显式传 proposal_id——prop_state 中无该键（见
+            # feedback_archive.py docstring），旧实现恒返回空串闭环失效
+            block = load_review_feedback_for_optimization(prop_state, proposal_id)
         except Exception:
             return ""
         return block or ""

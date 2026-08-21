@@ -310,10 +310,66 @@ class OptimizeV6817PromptVarTests(TestSuite):
             f"实际收到的 section_key: {section_key_used}",
         )
 
+    def _test_human_feedback_end_to_end_injection(self):
+        """v6.9.35: prop_state 无 proposal_id 键（真实结构）时反馈仍必须注入。
+
+        回归背景：08-22 00h 健康检查实证 bsv human_feedback_count=3、
+        feedback-3-raw.md 存在，但 load_review_feedback_for_optimization
+        返回空串——prop_state.get("proposal_id") 恒 None，feedback_dir
+        拼成 optimizing//06_feedback 永不存在。本用例不打桩反馈加载，
+        走真实 _load_human_feedback_block 链路验证端到端注入。
+        """
+        import json
+        from proposal_lifecycle import ProposalLifecycle
+        from proposal_lifecycle.constants import PROPOSALS_ROOT
+        from proposal_sections import PROPOSAL_SECTIONS
+
+        pid = "general-v6817-regression-20260101"
+        # 真实结构复刻：prop_state 无 proposal_id 键，仅有 human_feedback_count
+        lc_file = PROPOSALS_ROOT / "_lifecycle.json"
+        state = json.loads(lc_file.read_text(encoding="utf-8"))
+        state["proposals"][pid]["human_feedback_count"] = 1
+        lc_file.write_text(
+            json.dumps(state, ensure_ascii=False, indent=2), encoding="utf-8"
+        )
+        fb_dir = PROPOSALS_ROOT / "optimizing" / pid / "06_feedback"
+        fb_dir.mkdir(parents=True, exist_ok=True)
+        (fb_dir / "feedback-1-raw.md").write_text(
+            "# 人工审核反馈（第1次）\n\n## 审核对话摘要\n用户指出：表格必须标注单位。\n",
+            encoding="utf-8",
+        )
+
+        manager = ProposalLifecycle()
+        captured = self._make_hermes_stub(manager)
+        # 不 stub _load_human_feedback_block —— 走真实加载链路
+
+        result = manager._run_critic(
+            pid, self.prop_dir, "general", 2, 300,
+            focus_section=PROPOSAL_SECTIONS[0], is_full_review=False,
+        )
+        self.assert_true(
+            result.get("success", False),
+            "端到端：_run_critic 成功（真实反馈加载链路）",
+            f"实际结果：{result}",
+        )
+        critic_prompts = [c for c in captured if c["profile"] == "critic"]
+        self.assert_true(
+            len(critic_prompts) >= 1,
+            "端到端：critic 至少调用一次 _run_hermes",
+            f"captured={len(captured)}",
+        )
+        prompt = critic_prompts[0]["prompt"]
+        self.assert_true(
+            "表格必须标注单位" in prompt,
+            "端到端：反馈内容实际注入 critic prompt（v6.9.35 proposal_id 显式传参）",
+            f"prompt 末尾 300 字符：{prompt[-300:]}",
+        )
+
     def run_tests(self):
         self._test_run_critic_injects_human_feedback()
         self._test_run_writer_optimize_derives_section_key()
         self._test_run_writer_optimize_full_review_section_key()
+        self._test_human_feedback_end_to_end_injection()
 
 
 if __name__ == "__main__":

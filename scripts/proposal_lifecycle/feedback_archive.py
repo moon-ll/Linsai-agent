@@ -335,11 +335,23 @@ def _append_session_summary_to_feedback(feedback_path: Path, session_id: str) ->
         pass
 
 
-def load_review_feedback_for_optimization(prop_state: Dict[str, Any]) -> str:
+def load_review_feedback_for_optimization(
+    prop_state: Dict[str, Any],
+    proposal_id: str = "",
+) -> str:
     """v6.8.17: 为优化轮次加载历史人工审核反馈。
 
     从 06_feedback/ 中提取之前的审核意见，供 critic/writer prompt
     注入，避免重蹈覆辙。
+
+    v6.9.35: 新增显式 proposal_id 参数——_lifecycle.json 的 prop_state
+    中**没有** proposal_id 键（state.py _get_proposal_state 原样返回
+    proposals[pid] dict），旧实现 prop_state.get("proposal_id") 恒为
+    None → feedback_dir 拼成 optimizing//06_feedback 永不存在 → 函数
+    恒返回空串。v6.9.26 修复门闩与长度判断后闭环仍断裂，bsv 实证
+    3 次反馈样本零注入。调用方（_load_human_feedback_block）本就持有
+    proposal_id，改为显式传入；空串时回退 prop_state 内字段以兼容
+    旧式调用。
     """
     # v6.9.26: 旧实现以 review_history 为门闩，但该字段仅在带 session_id
     # 的 Web 审核提交时写入——CLI/脚本提交（无 session）不写，导致退回
@@ -354,7 +366,7 @@ def load_review_feedback_for_optimization(prop_state: Dict[str, Any]) -> str:
     ]
 
     # 读取最近一次反馈文件
-    proposal_id = prop_state.get("proposal_id", "")
+    proposal_id = proposal_id or prop_state.get("proposal_id", "")
     from proposal_lifecycle.constants import PROPOSALS_ROOT
     for stage in ["optimizing"]:
         feedback_dir = PROPOSALS_ROOT / stage / proposal_id / "06_feedback"
