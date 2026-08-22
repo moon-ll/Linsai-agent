@@ -199,10 +199,13 @@ python3 scripts/growth_engine.py --apply
 cd {project}
 # v6.9.5 每日 raw→wiki 蒸馏（12:50，lc-kb-sync 之后）：
 # distill_raw_to_wiki/save_distilled_wiki 接口自 v3.x 存在但无流水线
-# 生产者，351 项 raw 积压零消化。本任务按最旧优先蒸馏 5 篇/天。
+# 生产者，351 项 raw 积压零消化。本任务按最旧优先蒸馏。
+# v6.9.38: 固定 --batch 5 改 --auto——积压 >300 时 5 篇/天追不上日增
+# 40+ 的进料速度（08-22 实测 347 项连续 46 次告警不收敛），自适应升档
+# 20 篇/天追赶，积压回落 <150 后自动降回 5 篇。
 # 注意：不用 set -e——单篇失败（批次退出码非零）不应阻断 growth 晋升
 # 等后续逻辑，kb_distill 内部已保证单篇失败跳过不中断。
-python3 scripts/kb_distill.py --batch 5
+python3 scripts/kb_distill.py --auto
 # v6.9.6 蒸馏后立即补边（kb_linker 关键词匹配，零 LLM 成本）：
 # 新蒸馏页若无 related 边会成为图谱孤岛（连通度 0.45 已低于告警线
 # 0.50）。实测一次可补 84 页/185 边。幂等：补过即不再缺。

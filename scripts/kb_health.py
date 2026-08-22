@@ -74,16 +74,25 @@ def get_kb_health() -> Dict[str, Any]:
     except Exception:
         pass
 
-    # 待蒸馏 raw：已索引但未关联 wiki 的 raw 文件
-    raw_files = list_raw_files()
-    wiki_from_raw = set()
-    for page in list_wiki_pages():
-        fm = get_wiki_page(page.get("path", ""))
-        if fm:
-            src = fm.get("frontmatter", {}).get("source_raw", "")
-            if src:
-                wiki_from_raw.add(src)
-    pending_distill = len([f for f in raw_files if f["name"] not in wiki_from_raw])
+    # 待蒸馏 raw：v6.9.38 口径统一——改调 kb_distill.pending_distill_list()
+    # 同一函数同一口径。旧实现用索引 raw_files 全集对 wiki source_raw 求
+    # 差集，未排除 _text_cache/_pdf-library.md 等中间产物，导致告警数
+    # （347）与蒸馏器实际清单（229）长期不一致，积压治理无法对账。
+    # 延迟导入防循环：kb_distill → knowledge_base → kb_health。
+    try:
+        from kb_distill import pending_distill_list
+        pending_distill = len(pending_distill_list())
+    except Exception:
+        # 降级回旧口径（清单计算失败时保底，不阻塞健康检查）
+        raw_files = list_raw_files()
+        wiki_from_raw = set()
+        for page in list_wiki_pages():
+            fm = get_wiki_page(page.get("path", ""))
+            if fm:
+                src = fm.get("frontmatter", {}).get("source_raw", "")
+                if src:
+                    wiki_from_raw.add(src)
+        pending_distill = len([f for f in raw_files if f["name"] not in wiki_from_raw])
 
     # v3.1.2: 图谱连通性（最大连通分量占比）
     graph_conn = _compute_graph_connectivity()

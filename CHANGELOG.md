@@ -1,5 +1,41 @@
 # 变更记录
 
+## v6.9.38 - 2026-08-22 周六复盘三修复：跨周重置空转 / 任务状态不回退 / KB 蒸馏积压不收敛
+
+背景：08-22 周六全天复盘发现三项机制缺陷。输入端入口 cron 09:00 触发后
+空转 3 小时（靠 6h repair 兜底救回）；key-transient 课题 job 6/25 进行中
+但任务面板显示 completed（审核退回重开后状态不回退）；KB 待蒸馏积压 347
+连续 46 次告警不收敛（日蒸馏 5 篇 vs 日增 40+），且告警口径（347）与蒸馏
+器实际清单（229）不一致，积压治理无法对账。
+
+- `weekend_pipeline/pipeline.py`（P1a）：`_reset_stage_for_new_week` 跨周
+  判定从滚动 144h 时差（`delta_days < 6`）改为自然周锚点（最近过去的周六
+  00:00 本地）。旧口径下上周完成时刻晚于本周入口 cron 时刻时（08-16 11:51
+  完成 vs 08-22 09:00 入口，时差 5 天 21 小时），入口 cron 必然差不满 6 天
+  而 no-op 却标记成功。新口径与 `lifecycle.orchestrator._weekend_catchup_
+  decisions` 锚点一致，入口 cron 即时生效，不再依赖 repair 兜底。
+- `lifecycle/micro_scheduler.py`（P1b）：任务同步补 `completed→active`
+  回退分支。审核退回归零轮次重开时，映射命中的旧任务已标 completed 并移
+  入 completed/ 目录，旧代码只处理 backlog→active，任务面板与实际 job
+  进度永久脱节。task_manager 状态机本就允许该转换并自动搬移文件。存量
+  脱节任务 key-transient r1 已手动修正回 active。
+- `kb_distill.py`（P2）：新增 `--auto` 自适应批量——积压 >300 → 20 篇/天
+  （追赶档），>150 → 10 篇/天（消化档），否则 5 篇/天（维持档），积压回
+  落后自动降档避免常态多耗 token。cron wrapper `lc_kb_distill.sh` 由固定
+  `--batch 5` 改 `--auto`（旧 wrapper 已重生成）。
+- `kb_health.py`（P2）：`pending_distill` 口径统一——改调
+  `kb_distill.pending_distill_list()` 同一函数（延迟导入防循环），旧实现
+  未排除 `_text_cache/`、`_pdf-library.md` 等中间产物导致 347 vs 229 长期
+  不一致。失败时降级回旧口径保底。
+- 测试更新：`test_mechanism_hardening.py` 新增 3 套件 20 断言（自然周锚点
+  修复主场景/同周末幂等/异常安全 + 回退分支源码守卫 + 自适应档位边界/
+  wrapper 接线/口径统一）；`test_weekend_pipeline.py` 两用例注入固定时钟
+  消除星期依赖（旧"2 天前/昨日"构造与新锚点口径冲突且周六跑必失败）；
+  `test_weekend_pipeline_hardening.py` 产物日期定位用例同步改固定时钟。
+- 验证：`self_test --module` 1006/1006 全绿（基线 +3 为新增断言）；
+  机制加固测试 68/68 通过；`kb_distill --self-check` 通过；口径统一实测
+  kb_health=229 与蒸馏器一致。
+
 ## v6.9.37 - 2026-08-22 P0 跨轮记忆被跨章节 critic 调用误标已解决（同轮入库同轮被杀）
 
 背景：08-22 16h 健康检查第四轮设计抽查 #6（P0 跨轮持久化）静态三项

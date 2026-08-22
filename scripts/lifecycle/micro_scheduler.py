@@ -691,6 +691,20 @@ def _sync_single_proposal_to_task(
                     tm.transition_task(existing_task_id, "completed")
                 elif not round_complete and task.get("status") == "backlog":
                     tm.transition_task(existing_task_id, "active")
+                # v6.9.38: 审核退回/归零轮次后重开——已完成任务拉回 active。
+                # 旧实现只处理 backlog→active，completed 任务（整轮完成时
+                # 被标完成并移入 completed/ 目录）在课题被退回重跑同轮次时
+                # 永远停在 completed，任务面板显示与实际 job 进度脱节
+                # （08-22 实测 key-transient r1 job 6/25 但任务 completed）。
+                # task_manager 状态机本就允许 completed→active 且自动搬移
+                # 文件目录，此处只是补上缺失的调用分支。
+                elif not round_complete and task.get("status") == "completed":
+                    tm.transition_task(existing_task_id, "active")
+                    if _log:
+                        _log.info(
+                            f"[task-sync] 课题轮次未完成但任务已标 completed，"
+                            f"拉回 active: {existing_task_id}"
+                        )
                 return {
                     "proposal_id": proposal_id,
                     "round": current_round,

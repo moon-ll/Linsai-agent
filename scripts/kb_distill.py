@@ -50,6 +50,15 @@ from knowledge_base import (  # noqa: E402
 DEFAULT_BATCH = 5
 MAX_OUTPUT_CHARS = 6000          # 防失控输出
 SOURCE_RAW_KEY = "source_raw"    # pending_distill 判定字段
+# v6.9.38: 自适应批量档位（--auto）——积压 >300 时 5 篇/天永远追不上
+# 日增 40+ 的进料速度（08-22 实测积压 347 且连续 46 次告警不收敛）。
+# 升档后单批 LLM 时长约 10-15 分钟（20 篇 × 30-45s/篇），12:50 窗口
+# 可承受；回落到 <150 后降回默认档，避免常态多耗 token。
+AUTO_BATCH_TIERS = [
+    (300, 20),   # 积压 >300 → 20 篇/天（追赶档）
+    (150, 10),   # 积压 >150 → 10 篇/天（消化档）
+]
+AUTO_BATCH_FLOOR = DEFAULT_BATCH  # 积压 ≤150 → 5 篇/天（维持档）
 # 排除目录（相对 KNOWLEDGE_DIR 的 posix 前缀）：
 #   raw/pdfs/_text_cache/ 是 PDF 抽取中间缓存（纯数字命名、无语义），
 #   蒸馏它们只会产出无意义 wiki 页；kb_health 计数包含它们属上游口径
@@ -173,6 +182,21 @@ def distill_one(raw_path: Path, dry_run: bool = False) -> Dict[str, Any]:
     return {"success": True, "raw": raw_rel, "wiki": wiki_rel}
 
 
+def auto_batch_size(pending_count: int) -> int:
+    """v6.9.38: 按积压量返回自适应批量档位。
+
+    Args:
+        pending_count: 当前待蒸馏总数。
+
+    Returns:
+        该档位下的每日批量（篇）。
+    """
+    for threshold, batch in AUTO_BATCH_TIERS:
+        if pending_count > threshold:
+            return batch
+    return AUTO_BATCH_FLOOR
+
+
 def run_batch(batch: int = DEFAULT_BATCH, dry_run: bool = False) -> Dict[str, Any]:
     """执行一批蒸馏。
 
@@ -270,6 +294,8 @@ def main() -> int:
     ap = argparse.ArgumentParser(description="raw→wiki 批量蒸馏器")
     ap.add_argument("--batch", type=int, default=DEFAULT_BATCH,
                     help=f"本批蒸馏篇数（默认 {DEFAULT_BATCH}）")
+    ap.add_argument("--auto", action="store_true",
+                    help="v6.9.38: 按积压量自适应批量（>300→20 篇，>150→10 篇，否则 5 篇）")
     ap.add_argument("--dry-run", action="store_true", help="仅预览不调用 LLM")
     ap.add_argument("--self-check", action="store_true", help="模块自检")
     args = ap.parse_args()
@@ -277,7 +303,15 @@ def main() -> int:
     if args.self_check:
         return 0 if _self_check() else 1
 
-    r = run_batch(batch=args.batch, dry_run=args.dry_run)
+    batch = args.batch
+    if args.auto:
+        # 先取清单定档位再执行（run_batch 内部会重新取一次，开销可忽略：
+        # 清单计算为纯文件系统遍历，无 LLM）
+        pending_count = len(pending_distill_list())
+        batch = auto_batch_size(pending_count)
+        print(f"自适应批量: 积压 {pending_count} → 本批 {batch} 篇")
+
+    r = run_batch(batch=batch, dry_run=args.dry_run)
     print(f"待蒸馏总量: {r['total_pending']}（阈值 300）")
     print(f"本批: {r['attempted']} 篇，✓ {r['ok']}，✗ {r['failed']}")
     for item in r["results"]:

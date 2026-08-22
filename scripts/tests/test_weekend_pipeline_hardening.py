@@ -184,36 +184,55 @@ class WeekendPipelineHardeningTests(TestSuite):
         )
 
     def _test_verify_artifacts_uses_finished_at_date(self):
-        """{date} 以 job 自身 finished_at 格式化：昨天 done + 昨天产物在 → 不误重置。"""
-        p = self._make_pipeline()
-        p.sync_stage_jobs("input")
-        from weekend_pipeline.constants import JOB_STATUS_DONE
-        yesterday = _utc_stamped(1)
-        for job in p.list_jobs(stage="input"):
-            job["status"] = JOB_STATUS_DONE
-            job["finished_at"] = yesterday
-        p._save()
+        """{date} 以 job 自身 finished_at 格式化：周六 done + 周六产物在 → 不误重置。
 
-        # 只创建 collect 的昨日产物；其余 6 个 job 产物缺失
-        input_dir = self.tmp_root / "memory" / "weekend-input"
-        input_dir.mkdir(parents=True, exist_ok=True)
-        (input_dir / f"sources-{yesterday[:10]}.json").write_text("{}", encoding="utf-8")
+        v6.9.38: 旧版用"昨天"构造在不同星期跑测试时行为漂移（周六跑时
+        昨日=周五早于本周六锚点，触发跨周重置遮蔽产物校验意图）。改注入
+        固定时钟冻结到周日 12:00 本地（weekend-worker 时刻），finished_at
+        取周六 12:00 本地（同周末内、UTC 日期与检查日不同）——既不触发
+        跨周重置，又保留"{date} 按 finished_at 而非检查当日定位"的语义。
+        """
+        real_dt = self.wp_mod.pipeline.datetime
 
-        p2 = self._make_pipeline()
-        p2.sync_stage_jobs("input")
-        jobs = {j["job_id"]: j.get("status") for j in p2.list_jobs(stage="input")}
-        self.assert_eq(
-            jobs.get("input_collect_sources"), "done",
-            "P1a: 产物按 finished_at（昨日）定位且存在 → 不应误重置",
-        )
-        self.assert_eq(
-            jobs.get("input_summarize_new_papers"), "pending",
-            "产物缺失的 job 应重置",
-        )
-        self.assert_eq(
-            jobs.get("input_compose_ideas"), "pending",
-            "下游依赖应级联重置",
-        )
+        class _FrozenDT(real_dt):
+            @classmethod
+            def now(cls, tz=None):
+                base = datetime(2026, 8, 23, 4, 0, 0, tzinfo=timezone.utc)  # 周日 12:00 本地
+                return base if tz is not None else base.astimezone()
+        self.wp_mod.pipeline.datetime = _FrozenDT
+        try:
+            p = self._make_pipeline()
+            p.sync_stage_jobs("input")
+            from weekend_pipeline.constants import JOB_STATUS_DONE
+            # 周六 12:00 本地 = 周六 04:00 UTC（UTC 日期 08-22 ≠ 检查日 08-23）
+            saturday = "2026-08-22T04:00:00Z"
+            for job in p.list_jobs(stage="input"):
+                job["status"] = JOB_STATUS_DONE
+                job["finished_at"] = saturday
+            p._save()
+
+            # 只创建 collect 的周六产物；其余 6 个 job 产物缺失
+            input_dir = self.tmp_root / "memory" / "weekend-input"
+            input_dir.mkdir(parents=True, exist_ok=True)
+            (input_dir / f"sources-{saturday[:10]}.json").write_text("{}", encoding="utf-8")
+
+            p2 = self._make_pipeline()
+            p2.sync_stage_jobs("input")
+            jobs = {j["job_id"]: j.get("status") for j in p2.list_jobs(stage="input")}
+            self.assert_eq(
+                jobs.get("input_collect_sources"), "done",
+                "P1a: 产物按 finished_at（周六）定位且存在 → 不应误重置",
+            )
+            self.assert_eq(
+                jobs.get("input_summarize_new_papers"), "pending",
+                "产物缺失的 job 应重置",
+            )
+            self.assert_eq(
+                jobs.get("input_compose_ideas"), "pending",
+                "下游依赖应级联重置",
+            )
+        finally:
+            self.wp_mod.pipeline.datetime = real_dt
 
     def _test_sync_backfills_artifact_field(self):
         """字段级合并：旧 state（无 artifact 字段）sync 后自动补齐。"""

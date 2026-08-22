@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from typing import Any, Callable, Dict, List, Optional
 
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 from common import file_lock, now_utc, save_json
 from paths import PROJECT_ROOT
@@ -121,8 +121,9 @@ class WeekendPipeline:
     def _reset_stage_for_new_week(self, stage: str) -> int:
         """检查是否跨周，若是则重置该阶段所有 job 为 pending。
 
-        当该阶段自身最近一次 job 完成距今超过 6 天时，视为新一周开始，
-        将该阶段所有 job 重置为 pending，清除执行记录。
+        当该阶段自身最近一次 job 完成早于本周末锚点（最近过去的周六
+        00:00，本地时间）时，视为新一周开始，将该阶段所有 job 重置为
+        pending，清除执行记录。
 
         v6.8.53: 跨周判定基准从全局 state.updated_at 改为"该阶段自身
         最近一次 job 完成时间"。旧实现读全局 updated_at——周六同一优先
@@ -130,6 +131,14 @@ class WeekendPipeline:
         它，导致 input 阶段的跨周重置永不触发：input job 自 08-01 全部
         done 后，08-08 weekend_input 变成 no-op 却标记成功，研究设想
         发现停摆两周无人察觉（运行时已证实）。
+
+        v6.9.38: 滚动 144h 时差改为自然周锚点。旧实现
+        delta_days = (now - last_fin).days < 6——上周完成时刻晚于本周
+        入口 cron 时刻时（如 08-16 11:51 完成 vs 08-22 09:00 入口，
+        时差 5 天 21 小时），入口 cron 必然差不满 6 天而 no-op 且标记
+        成功，只能等 6h repair 的超期补跑兜底（08-22 实测空转 3 小时）。
+        新口径与 lifecycle.orchestrator._weekend_catchup_decisions 的
+        锚点一致：last_fin 早于本周六 00:00 即跨周，入口 cron 即时生效。
 
         Returns: 重置的 job 数量
         """
@@ -147,9 +156,16 @@ class WeekendPipeline:
         try:
             last_fin = max(finished_times)
             last_dt = datetime.fromisoformat(last_fin.replace("Z", "+00:00"))
-            delta_days = (datetime.now(timezone.utc) - last_dt).days
-            if delta_days < 6:
+            # 本周末锚点：最近过去的周六 00:00（本地时间）。
+            # last_dt 是 UTC 时间戳，先转到本地再取锚点比较。
+            local_now = datetime.now().astimezone()
+            days_since_sat = (local_now.weekday() - 5) % 7
+            anchor = (local_now - timedelta(days=days_since_sat)).replace(
+                hour=0, minute=0, second=0, microsecond=0)
+            last_local = last_dt.astimezone()
+            if last_local >= anchor:
                 return 0
+            delta_days = (local_now.date() - last_local.date()).days
         except Exception:
             return 0
 

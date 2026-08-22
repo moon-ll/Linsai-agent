@@ -387,11 +387,192 @@ class ExecutorPathTests(TestSuite):
         )
 
 
+class WeeklyResetAnchorTests(TestSuite):
+    """5：v6.9.38 跨周重置自然周锚点修复。
+
+    背景：旧实现 delta_days = (now - last_fin).days < 6 的滚动 144h 时差
+    判定，上周完成时刻晚于本周入口 cron 时刻时（08-16 11:51 完成 vs
+    08-22 09:00 入口，时差 5 天 21 小时），入口 cron 必然差不满 6 天而
+    no-op 却标记成功，依赖 6h repair 兜底，实测空转 3 小时。
+    """
+
+    def __init__(self):
+        super().__init__("跨周重置自然周锚点测试（v6.9.38-5）")
+
+    def setup(self):
+        import tempfile
+        self.tmp = Path(tempfile.mkdtemp())
+        import weekend_pipeline.pipeline as pl
+        self._pl = pl
+        self._orig_datetime = pl.datetime
+
+    def teardown(self):
+        pl = self._pl
+        pl.datetime = self._orig_datetime
+        if self.tmp and self.tmp.exists():
+            shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _make_pipeline(self, finished_at):
+        from weekend_pipeline.pipeline import WeekendPipeline
+        p = WeekendPipeline.__new__(WeekendPipeline)
+        p.state_path = self.tmp / "state.json"
+        p.state = {"jobs": [{
+            "job_id": "t1", "stage": "input", "status": "done",
+            "finished_at": finished_at, "started_at": "x",
+            "last_error": "e", "attempts": 2, "result": {"ok": 1},
+        }]}
+        return p
+
+    def _freeze_now(self, y, m, d, hour, minute=0):
+        """把 pipeline.datetime.now 冻结到指定本地时刻（Asia/Shanghai +8）。"""
+        from datetime import datetime, timezone, timedelta as td
+        tz8 = td(hours=8)
+
+        class FakeDT(datetime):
+            _frozen = datetime(y, m, d, hour, minute, 0, tzinfo=timezone.utc) - tz8
+
+            @classmethod
+            def now(cls, tz=None):
+                return cls._frozen.astimezone() if tz is None else cls._frozen.astimezone(tz)
+        self._pl.datetime = FakeDT
+
+    def run_tests(self):
+        # 源码路径锚定测试文件自身（cwd 可能是仓库根或 scripts/）
+        _src_root = Path(__file__).parent.parent.parent
+
+        # 5.1 修复主场景：上周六 11:51 完成（本地）→ 本周六 09:00 入口。
+        #     旧滚动口径时差 5d21h（.days=5）不重置；新锚点口径
+        #     anchor=本周六 00:00 > last_fin → 立即重置。
+        self._freeze_now(2026, 8, 22, 9, 0)  # 周六 09:00 本地
+        p = self._make_pipeline("2026-08-16T03:51:56Z")  # 08-16 11:51 本地
+        n = p._reset_stage_for_new_week("input")
+        self.assert_eq(n, 1, "上周完成早于本周六锚点应重置（修复主场景）")
+        j = p.state["jobs"][0]
+        self.assert_eq(j["status"], "pending", "重置后状态应为 pending")
+        self.assert_eq(j["attempts"], 0, "重置后 attempts 应清零")
+        self.assert_true("result" not in j, "重置后 result 应清除")
+
+        # 5.2 边界保护：本周末内刚完成的 job 不被重置
+        self._freeze_now(2026, 8, 22, 12, 0)  # 周六 12:00 本地
+        p = self._make_pipeline("2026-08-22T00:30:00Z")  # 周六 08:30 本地
+        n = p._reset_stage_for_new_week("input")
+        self.assert_eq(n, 0, "本周末内完成不应重置")
+
+        # 5.3 时间戳解析失败 → 安全不重置（不抛异常）
+        p = self._make_pipeline("not-a-timestamp")
+        n = p._reset_stage_for_new_week("input")
+        self.assert_eq(n, 0, "时间戳异常应安全返回 0")
+
+        # 5.4 源码级守卫：不应再有滚动 6 天判断
+        src = (_src_root / "scripts/weekend_pipeline/pipeline.py").read_text(encoding="utf-8")
+        self.assert_true(
+            "if delta_days < 6" not in src,
+            "旧的滚动 144h 判断应已移除",
+        )
+
+
+class TaskSyncRollbackTests(TestSuite):
+    """6：v6.9.38 任务同步 completed→active 回退分支。
+
+    背景：审核退回归零轮次重开后，映射命中的旧任务已标 completed 并移入
+    completed/ 目录，同步代码只处理 backlog→active，任务面板与实际 job
+    进度永久脱节（key-transient r1 job 6/25 但任务 completed）。
+    """
+
+    def __init__(self):
+        super().__init__("任务同步回退分支测试（v6.9.38-6）")
+
+    def setup(self):
+        pass
+
+    def teardown(self):
+        pass
+
+    def run_tests(self):
+        _src_root = Path(__file__).parent.parent.parent
+        src = (_src_root / "scripts/lifecycle/micro_scheduler.py").read_text(encoding="utf-8")
+
+        # 6.1 completed→active 分支存在
+        self.assert_true(
+            'not round_complete and task.get("status") == "completed"' in src,
+            "应存在 completed 且轮次未完成的判定分支",
+        )
+        # 6.2 分支内实际调用 transition 拉回 active
+        idx = src.find('not round_complete and task.get("status") == "completed"')
+        seg = src[idx:idx + 600]
+        self.assert_true(
+            'transition_task(existing_task_id, "active")' in seg,
+            "completed 任务应被 transition 回 active",
+        )
+
+        # 6.3 状态机守卫：task_manager 允许 completed→active
+        tm_src = (_src_root / "scripts/task_manager.py").read_text(encoding="utf-8")
+        self.assert_true(
+            '"completed": {"active", "backlog"}' in tm_src,
+            "task_manager 状态机应允许 completed→active",
+        )
+
+
+class KbDistillAutoTests(TestSuite):
+    """7：v6.9.38 KB 蒸馏自适应批量 + 告警口径统一。
+
+    背景：日蒸馏 5 篇追不上日增 40+ 的进料（08-22 积压 347 连续 46 次
+    告警不收敛）；health_sensor 与 kb_distill 口径不一致（347 vs 229），
+    积压治理无法对账。
+    """
+
+    def __init__(self):
+        super().__init__("KB 蒸馏自适应批量测试（v6.9.38-7）")
+
+    def setup(self):
+        pass
+
+    def teardown(self):
+        pass
+
+    def run_tests(self):
+        import sys as _sys
+        _src_root = Path(__file__).parent.parent.parent
+        _sys.path.insert(0, str(_src_root / "scripts"))
+        from kb_distill import auto_batch_size
+
+        # 7.1 档位边界
+        self.assert_eq(auto_batch_size(347), 20, "积压 347 → 追赶档 20")
+        self.assert_eq(auto_batch_size(301), 20, "积压 301 → 追赶档 20")
+        self.assert_eq(auto_batch_size(300), 10, "积压 300（未超线）→ 消化档 10")
+        self.assert_eq(auto_batch_size(151), 10, "积压 151 → 消化档 10")
+        self.assert_eq(auto_batch_size(150), 5, "积压 150（未超线）→ 维持档 5")
+        self.assert_eq(auto_batch_size(0), 5, "零积压 → 维持档 5")
+
+        # 7.2 CLI 有 --auto 参数
+        kd_src = (_src_root / "scripts/kb_distill.py").read_text(encoding="utf-8")
+        self.assert_true('"--auto"' in kd_src, "kb_distill CLI 应有 --auto")
+
+        # 7.3 cron wrapper 已改用 --auto（源码级）
+        ctl_src = (_src_root / "scripts/lifecycle/controller.py").read_text(encoding="utf-8")
+        self.assert_true(
+            "kb_distill.py --auto" in ctl_src,
+            "cron wrapper 应调用 --auto",
+        )
+        self.assert_true(
+            "kb_distill.py --batch 5" not in ctl_src,
+            "旧的固定 --batch 5 应移除",
+        )
+
+        # 7.4 kb_health 口径统一：调用 kb_distill.pending_distill_list
+        kh_src = (_src_root / "scripts/kb_health.py").read_text(encoding="utf-8")
+        self.assert_true(
+            "from kb_distill import pending_distill_list" in kh_src,
+            "kb_health 应调用蒸馏器同源清单函数",
+        )
+
+
 def main():
     from test_runner import print_report
 
     suites = []
-    for cls in (AnchorOrderTests, WriterEscalationTests, SemanticDedupTests, ExecutorPathTests):
+    for cls in (AnchorOrderTests, WriterEscalationTests, SemanticDedupTests, ExecutorPathTests,
+                WeeklyResetAnchorTests, TaskSyncRollbackTests, KbDistillAutoTests):
         s = cls()
         s.setup()
         s.run_tests()

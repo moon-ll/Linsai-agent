@@ -359,66 +359,98 @@ class WeekendPipelineTests(TestSuite):
         运行时缺陷（已证实）：input job 08-01 全部 done 后，周六 output/reflection
         （及 weekend-worker 每 20 分钟）先跑刷新全局 updated_at → input 的跨周
         重置永不触发 → weekend_input 变 no-op 却标记成功，研究设想停摆两周。
+
+        v6.9.38: 跨周口径从滚动 144h 改自然周锚点后，本用例注入固定时钟
+        （周六 09:00，即入口 cron 实际触发时刻），消除旧版"8 天前"构造在
+        不同星期跑测试时的行为漂移。
         """
         from datetime import datetime, timezone, timedelta
 
-        p = self._make_pipeline()
-        p.sync_stage_jobs("input")
-        eight_days_ago = (
-            datetime.now(timezone.utc) - timedelta(days=8)
-        ).strftime("%Y-%m-%dT%H:%M:%SZ")
-        for job in p.list_jobs(stage="input"):
-            job["status"] = "done"
-            job["finished_at"] = eight_days_ago
-        p._save()
+        # 冻结到周六 09:00 本地（入口 cron 时刻）：用 subclass 替换模块级 datetime
+        real_dt = self.wp_mod.pipeline.datetime
 
-        # 全局 updated_at 被 output/reflection 刷新为"刚刚"（模拟同日其他阶段先跑）
-        p.state["updated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-        p._save()
+        class _FrozenDT(real_dt):
+            @classmethod
+            def now(cls, tz=None):
+                base = datetime(2026, 8, 22, 1, 0, 0, tzinfo=timezone.utc)  # 09:00 本地
+                return base if tz is not None else base.astimezone()
+        self.wp_mod.pipeline.datetime = _FrozenDT
+        try:
+            p = self._make_pipeline()
+            p.sync_stage_jobs("input")
+            eight_days_ago = (
+                datetime(2026, 8, 14, 3, 0, 0, tzinfo=timezone.utc)
+            ).strftime("%Y-%m-%dT%H:%M:%SZ")
+            for job in p.list_jobs(stage="input"):
+                job["status"] = "done"
+                job["finished_at"] = eight_days_ago
+            p._save()
 
-        p2 = self._make_pipeline()  # 重新加载状态
-        p2.sync_stage_jobs("input")
-        pending_count = sum(
-            1 for j in p2.list_jobs(stage="input") if j.get("status") == "pending"
-        )
-        self.assert_eq(
-            pending_count, 6,
-            "全局 updated_at 新鲜但 input 自身完成已 8 天 → 应重置全部 job",
-        )
+            # 全局 updated_at 被 output/reflection 刷新为"刚刚"（模拟同日其他阶段先跑）
+            p.state["updated_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+            p._save()
+
+            p2 = self._make_pipeline()  # 重新加载状态
+            p2.sync_stage_jobs("input")
+            pending_count = sum(
+                1 for j in p2.list_jobs(stage="input") if j.get("status") == "pending"
+            )
+            self.assert_eq(
+                pending_count, 6,
+                "全局 updated_at 新鲜但 input 自身完成早于本周六锚点 → 应重置全部 job",
+            )
+        finally:
+            self.wp_mod.pipeline.datetime = real_dt
 
     def _test_reset_stage_not_triggered_within_week(self):
-        """阶段自身最近完成仅 2 天 → 不重置（周内幂等）。"""
-        from datetime import datetime, timezone, timedelta
+        """v6.9.38: 本周末内刚完成 → 不重置（同周末幂等）。
 
-        p = self._make_pipeline()
-        p.sync_stage_jobs("input")
-        two_days_ago = (
-            datetime.now(timezone.utc) - timedelta(days=2)
-        ).strftime("%Y-%m-%dT%H:%M:%SZ")
-        date_str = two_days_ago[:10]
-        # v6.9.7: 产物校验三阶段通用化后，input 的 done job 也会按
-        # finished_at 日期检查产物。补齐当日产物文件，保持本测试
-        # "周内不因跨周而重置"的语义（产物齐全 → 不触发产物重置）。
-        artifacts = [
-            "sources", "summaries", "clusters-week", "distilled-clusters",
-            "routes", "ideas",
-        ]
-        input_dir = self.tmp_root / "memory" / "weekend-input"
-        input_dir.mkdir(parents=True, exist_ok=True)
-        for name in artifacts:
-            (input_dir / f"{name}-{date_str}.json").write_text("{}", encoding="utf-8")
+        旧版语义为"滚动 2 天内不重置"，与自然周锚点口径冲突（周六跑测试时
+        2 天前 = 上周四，按新口径属上周应重置——这正是修复目标：上周完成
+        本周入口应重跑）。改用本周末内（周六 00:30 本地）完成构造，并注入
+        固定时钟消除星期依赖。
+        """
+        from datetime import datetime, timezone
 
-        for job in p.list_jobs(stage="input"):
-            job["status"] = "done"
-            job["finished_at"] = two_days_ago
-        p._save()
+        real_dt = self.wp_mod.pipeline.datetime
 
-        p2 = self._make_pipeline()
-        p2.sync_stage_jobs("input")
-        done_count = sum(
-            1 for j in p2.list_jobs(stage="input") if j.get("status") == "done"
-        )
-        self.assert_eq(done_count, 6, "完成仅 2 天且产物齐全 → 不应重置")
+        class _FrozenDT(real_dt):
+            @classmethod
+            def now(cls, tz=None):
+                base = datetime(2026, 8, 22, 4, 0, 0, tzinfo=timezone.utc)  # 12:00 本地
+                return base if tz is not None else base.astimezone()
+        self.wp_mod.pipeline.datetime = _FrozenDT
+        try:
+            p = self._make_pipeline()
+            p.sync_stage_jobs("input")
+            # 周六 00:30 本地（= 前一日 16:30 UTC），晚于锚点周六 00:00 本地
+            within_weekend = "2026-08-21T16:30:00Z"
+            date_str = "2026-08-21"  # 产物校验按 finished_at 的 UTC 日期定位
+            # v6.9.7: 产物校验三阶段通用化后，input 的 done job 也会按
+            # finished_at 日期检查产物。补齐当日产物文件，保持本测试
+            # "同周末不重置"的语义（产物齐全 → 不触发产物重置）。
+            artifacts = [
+                "sources", "summaries", "clusters-week", "distilled-clusters",
+                "routes", "ideas",
+            ]
+            input_dir = self.tmp_root / "memory" / "weekend-input"
+            input_dir.mkdir(parents=True, exist_ok=True)
+            for name in artifacts:
+                (input_dir / f"{name}-{date_str}.json").write_text("{}", encoding="utf-8")
+
+            for job in p.list_jobs(stage="input"):
+                job["status"] = "done"
+                job["finished_at"] = within_weekend
+            p._save()
+
+            p2 = self._make_pipeline()
+            p2.sync_stage_jobs("input")
+            done_count = sum(
+                1 for j in p2.list_jobs(stage="input") if j.get("status") == "done"
+            )
+            self.assert_eq(done_count, 6, "本周末内完成且产物齐全 → 不应重置")
+        finally:
+            self.wp_mod.pipeline.datetime = real_dt
 
     def _test_weekend_stage_catchup(self):
         """v6.9.19: 入口 cron 错过的周末阶段由 repair 补 sync（决策 + 接线）。
