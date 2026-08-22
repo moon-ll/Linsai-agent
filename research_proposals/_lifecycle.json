@@ -13239,12 +13239,12 @@
       "last_monitor_assessment": "本轮出现严重'伪修复'反模式：writer 仅新建 references.md 40 条目（与正文不匹配），正文一字不改，导致原本'悬空引用'变成'全面张冠李戴'。monitor 独立评分 0.22（rigor 0.05/completeness 0.40），与 critic 的 0.18 处于同一极低档次但恶化方向：误将完成度从 0 提到 0.40 但同时把严谨度从 0.10 降到 0.05。critic 0.18 评分准确无遗漏，无串通风险（writer 应付、critic 给低分），monitor 推断 writer 下一轮必须强制执行：(1) 重编号正文 [N] 为 1-N 连续 + "
     },
     "general-new-idea-20260822": {
-      "status": "drafts",
+      "status": "optimizing",
       "project_type": "general",
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 交变磁体高次谐波产生与固态强场非线性光学新前沿",
       "created_at": "2026-08-22T05:40:16Z",
-      "updated_at": "2026-08-22T05:40:16Z",
+      "updated_at": "2026-08-22T15:17:01Z",
       "optimization_rounds": 0,
       "last_score": 0.0,
       "score_history": [],
@@ -13256,6 +13256,12 @@
           "to": "drafts",
           "at": "2026-08-22T05:40:16Z",
           "reason": "注册新 proposal"
+        },
+        {
+          "from": "drafts",
+          "to": "optimizing",
+          "at": "2026-08-22T15:17:01Z",
+          "reason": ""
         }
       ],
       "monitor_history": [],
@@ -13272,15 +13278,23 @@
         "feasibility": "理论导向",
         "recommendation": "activate",
         "recommendation_reason": "最相似课题相似度 0.01 < 0.35，新颖性达标"
-      }
+      },
+      "initialized_at": "2026-08-22T15:17:01Z",
+      "missing_sections": [
+        "rationale",
+        "content",
+        "scheme",
+        "full_review",
+        "references"
+      ]
     },
     "general-attosecond-streaking-20260822": {
-      "status": "drafts",
+      "status": "optimizing",
       "project_type": "general",
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 阿秒条纹技术：从超短脉冲表征到量子相位测量（手动补注册 2026-08-22）",
       "created_at": "2026-08-22T12:20:08Z",
-      "updated_at": "2026-08-22T12:20:08Z",
+      "updated_at": "2026-08-22T15:17:07Z",
       "optimization_rounds": 0,
       "last_score": 0.0,
       "score_history": [],
@@ -13292,6 +13306,12 @@
           "to": "drafts",
           "at": "2026-08-22T12:20:08Z",
           "reason": "注册新 proposal"
+        },
+        {
+          "from": "drafts",
+          "to": "optimizing",
+          "at": "2026-08-22T15:17:07Z",
+          "reason": ""
         }
       ],
       "monitor_history": [],
@@ -13308,8 +13328,16 @@
         "feasibility": "实验导向",
         "recommendation": "activate",
         "recommendation_reason": "最相似课题相似度 0.00 < 0.35，新颖性达标"
-      }
+      },
+      "initialized_at": "2026-08-22T15:17:07Z",
+      "missing_sections": [
+        "rationale",
+        "content",
+        "scheme",
+        "full_review",
+        "references"
+      ]
     }
   },
-  "updated_at": "2026-08-22T12:20:08Z"
+  "updated_at": "2026-08-22T15:17:07Z"
 }

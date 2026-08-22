@@ -6,9 +6,9 @@ latest_round: 0
 last_score: 0.0
 critic_rounds: 0
 optimization_reports: 0
-status: "drafts"
-created: "2026-08-22T12:01:55Z"
-updated: "2026-08-22T12:01:55Z"
+status: "optimizing"
+created: "2026-08-22T15:17:07Z"
+updated: "2026-08-22T15:17:07Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -19,7 +19,7 @@ confidence: 1.0
 **课题 ID**：`general-new-idea-20260822`
 **累计轮次**：0
 **当前分数**：0.0
-**状态**：初稿
+**状态**：优化中
 
 ---
 
@@ -27,7 +27,7 @@ confidence: 1.0
 
 ## 来源
 
-- 评审目录：`research_proposals/drafts/general-new-idea-20260822/05_review/`
+- 评审目录：`research_proposals/optimizing/general-new-idea-20260822/05_review/`
 - 最新版本：[versions/general-new-idea-20260822.md](versions/general-new-idea-20260822.md)
 
 > 本页由 `scripts/kb_proposal_reorg.py` 自动生成。
