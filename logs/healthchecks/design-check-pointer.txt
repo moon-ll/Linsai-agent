@@ -1,7 +1,7 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-23 00h 健康检查（发现并修复 v6.9.39 命名守卫 Bug；第五轮 #11/#12/#13 完成：#11 KB 三指标计算+周更落盘正常（system-kanban 合并维持人工裁决）、#12 趋势雷达静态+运行时实证正常、#13 轮次优先级三要素在位正常；1015/1015 全绿）
-完整报告：logs/healthchecks/healthcheck-2026-08-23-00h.md
+最后更新：2026-08-23 04h 健康检查（第五轮 #14/#15 完成收官：#14 stale 清理静态+运行时双实证正常（08-21 让出时段/stale 回收 3 次）、#15 monitor 降级路径静态验证正常（兜底未触发属预期）；1015/1015 全绿；4 stalled 均为已知周一裁决项，无新缺陷）
+完整报告：logs/healthchecks/healthcheck-2026-08-23-04h.md
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：
@@ -25,17 +25,20 @@
 18. **课题目录在 `research_proposals/optimizing/<pid>/` 等阶段子目录下**（不在顶层）——检查课题产物文件时按 status 找子目录（00h 实证一度误判"目录不存在"）
 19. **P0 未解决判定口径**：条目含 `round_resolved` 键即已解决（值=解决轮次），无该键才是未解决——不能按 `x.get('resolved')` 判（字段不存在恒 False 会把已解决误算成未解决，00h 踩坑后修正）
 20. berry P0 现状口径（08-23 00h）：open_critical_issues 40 条 = 12 未解决（无 round_resolved，first_seen r2）+ 28 已解决（round_resolved='2'）
+21. `/logs/` 整体在 .gitignore（L66）——健康检查报告 md 仅落盘不入库，健康检查提交只含本 pointer 文件（00h/04h 实证）
 
 【轮换表 15 项检查进度】
 第一轮（1-15 全覆盖，08-15 04h 收官）
 第二轮（08-22 00h 收官）：#1-#15 全部核过（#2 待人工裁决；#10 第三处断裂已修复；#11 部分偏差待裁决）
 第三轮（08-22 08h 收官）：#1-#15 全部核过（#14/#15 正常；#8 berry 首次真实触发；#10 v6.9.35 修复后接通）
 第四轮（08-23 00h 收官）：
-- #1（08-22 08h 正常）｜#2（12h 潜在死代码，人工裁决挂起）｜#3（12h 正常，v6.9.36 修复后）｜#4（12h 正常）｜#5（16h 偏差待裁决）｜#6（16h 正常，v6.9.37 修复后）｜#7（16h 正常）｜#8（20h 正常）｜#9（20h 正常）｜#10（20h 正常）｜**#11（08-23 00h：计算+周更落盘正常，kb-health-weekly 顶层 health 直取三指标（coverage 0.75/week_new 200/connectivity 2.56，06:00Z 新鲜）；system-kanban 合并双口径维持人工裁决 → 正常）**｜**#12（08-23 00h：sync_all [3.7/5] 静态在位 + kb_metrics.trends_rising 运行时实证（5 词，04:40Z 新鲜）→ 正常）**｜**#13（08-23 00h：round_num 第一维度 + _CHAIN_ORDER 含 7/8 + 专项测试在册 + order-parameter r7 链序运行时实证 → 正常）**
+- #1（08-22 08h 正常）｜#2（12h 潜在死代码，人工裁决挂起）｜#3（12h 正常，v6.9.36 修复后）｜#4（12h 正常）｜#5（16h 偏差待裁决）｜#6（16h 正常，v6.9.37 修复后）｜#7（16h 正常）｜#8（20h 正常）｜#9（20h 正常）｜#10（20h 正常）｜#11（08-23 00h：计算+周更落盘正常，kb-health-weekly 顶层 health 直取三指标（coverage 0.75/week_new 200/connectivity 2.56，06:00Z 新鲜）；system-kanban 合并双口径维持人工裁决 → 正常）｜#12（08-23 00h：sync_all [3.7/5] 静态在位 + kb_metrics.trends_rising 运行时实证（5 词，04:40Z 新鲜）→ 正常）｜#13（08-23 00h：round_num 第一维度 + _CHAIN_ORDER 含 7/8 + 专项测试在册 + order-parameter r7 链序运行时实证 → 正常）
+第五轮（08-23 04h 收官）：
+- **#14（04h：run_micro_scheduler L1281-1290 stale 清理在时段检查前无条件执行 + L1516 轮次完成 break 让出时段；运行时实证 08-21 启动 211 次/让出时段 1 次/stale 回收 3 次 → 正常）**｜**#15（04h：executor L1341-1355 降级路径 round_num_fallback=job.get("round") 修复在位、skipped 语义正确；全日志未触发属兜底预期 → 正常）**
 
 【下次从这里继续】
-1. 第五轮设计轮换：从 #14 起（#14 微调度器 stale 清理、#15 monitor 降级路径……第三轮已核过，做增量复核）
-2. **周一升级判定（重点）**：停滞三课题 berry 74.9h / quantum-geometry 68.4h / key-transient 67.3h（00h 口径，key-transient 仅 6/25）——若周一 22:30 后仍零推进，升级排查结构性饥饿（8 课题 vs 4 时段/日）
+1. 第六轮设计轮换：从 #1 起（#1 跨课题范例注入……上轮全核过，做增量复核）
+2. **周一升级判定（重点）**：停滞四课题 berry 78.9h / quantum-geometry 72.4h / key-transient 71.3h / moire 48.5h（04h 口径，key-transient 仅 6/25）——若周一 22:30 后仍零推进，升级排查结构性饥饿（8 课题 vs 4 时段/日）
 3. **writer 全局分连锁风险（周一重点）**：5 课题 auto-heal 配额未动用；若周一多课题 monitor 完成后连环触发"writer 全局分数低于 50"告警涌入人工队列，需人工裁决惩罚系数/全局-单课题解耦
 4. **kb_distill --auto 首跑观察（周日 12:50）**：积压 385 > 300 → 首次升 20 篇/天；确认 cron wrapper 生效 + 积压回落；口径统一后 kb_health 告警数应与蒸馏器清单对齐
 5. **v6.9.37 修复生效观察（周一）**：berry 12 条未解决 P0 应保持未解决并注入 writer prompt；order-parameter idea_review_required=True 建链应前置 idea_review
