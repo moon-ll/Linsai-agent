@@ -426,6 +426,8 @@ def _generate_proposal_id(idea: Dict[str, Any]) -> str:
     title = idea.get("title", "")
     # 简单拼音化/英文化
     name = safe_filename(title)[:40].strip("-").lower()
+    # v6.9.39: 名称段须字母开头（同 register_from_idea），数字开头必被校验拒绝
+    name = re.sub(r"^[0-9-]+", "", name).strip("-")
     if not name:
         name = "new-idea"
     return lc.generate_proposal_id(name=name, project_type="general")
@@ -441,6 +443,8 @@ def register_new_idea(idea: Dict[str, Any], dry_run: bool = False) -> Dict[str, 
         title = idea.get("title", "")
         name = safe_filename(title)[:40].strip("-").lower()
         name = re.sub(r"[^a-z0-9-]+", "-", name).strip("-")
+        # v6.9.39: 名称段须字母开头（同 register_from_idea），数字开头必被校验拒绝
+        name = re.sub(r"^[0-9-]+", "", name).strip("-")
         if not name:
             name = "new-idea"
         proposal_id = lc.generate_proposal_id(name=name, project_type="general")

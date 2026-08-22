@@ -1,5 +1,27 @@
 # 变更记录
 
+## v6.9.39 - 2026-08-23 注册命名守卫：课题名称段数字开头必被校验拒绝
+
+背景：00h 健康检查第三层抽查时回溯 bc190e1（08-22 周六输入端命名失败）根因。
+`register_from_idea` 从簇标题 ASCII 过滤提取 name 后，未保证命名规则要求的
+"课题名称段以字母开头"（`[a-z][a-z0-9-]{1,40}`）。标题含数字编号/波长时
+（实测 `322-frogcrab`）拼出的 `general-322-frogcrab-20260822` 必被
+`validate_proposal_id` 拒绝——注册静默失败，且 `run_input_compose` 对单条
+路由失败不阻断 job 整体 success，本周 new 配额空转需人工兜底（bc190e1
+手动补注册「阿秒条纹技术」课题）。
+
+- `proposal_lifecycle/registration.py`：`register_from_idea` name 定型前
+  剥离前导数字段（`re.sub(r"^[0-9-]+", "", name)`），空则回退占位名
+  `new-idea`（与 v6.9.16 中文标题回退链衔接）；覆盖 title 直取与
+  keywords 回退两条路径
+- `idea_generator.py`：`_generate_proposal_id` 与 `register_new_idea`
+  dry_run 分支同模式加固（防未来调用方踩坑；当前 `_generate_proposal_id`
+  无调用方属遗留代码）
+- 测试：`test_mechanism_hardening.py` 新增 NamingGuardTests（9 断言）——
+  数字开头主场景 / 中文标题 keywords 数字开头回退 / 纯数字标题占位名 /
+  正常标题不受影响 / idea_generator 两处源码级守卫
+- 验证：`self_test --module` 1015/1015 全绿（+9）
+
 ## v6.9.38 - 2026-08-22 周六复盘三修复：跨周重置空转 / 任务状态不回退 / KB 蒸馏积压不收敛
 
 背景：08-22 周六全天复盘发现三项机制缺陷。输入端入口 cron 09:00 触发后

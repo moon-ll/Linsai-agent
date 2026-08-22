@@ -175,6 +175,13 @@ class RegistrationMixin:
                 name = "-".join(en_words[:3])[:40].strip("-")
         if not name:
             name = "new-idea"
+        # v6.9.39: 命名规则要求课题名称段以字母开头（[a-z][a-z0-9-]{1,40}）。
+        # 数字开头的 name（标题含波长/编号，如 "322-frogcrab"）拼出的
+        # proposal_id 必被 validate_proposal_id 拒绝——注册静默失败且周末
+        # compose 的 job 整体仍标 success，new 配额空转需人工兜底（08-22
+        # 实测：general-322-frogcrab-20260822，bc190e1 手动补注册）。
+        # 剥离前导数字段后为空则回退占位名（与 v6.9.16 回退链衔接）。
+        name = re.sub(r"^[0-9-]+", "", name).strip("-") or "new-idea"
 
         proposal_id = self.generate_proposal_id(name=name, project_type=project_type)
         # v6.9.18: 注册前先算与现有课题的对比（注册后自己会进课题清单，

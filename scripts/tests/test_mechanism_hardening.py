@@ -31,7 +31,7 @@ import shutil
 import importlib
 from pathlib import Path
 
-from test_runner import TestSuite, create_isolated_env, patch_module_root
+from test_runner import TestSuite, create_isolated_env, patch_module_root, REAL_ROOT
 
 
 def _load_optimize_module(tmp_root: Path):
@@ -567,12 +567,135 @@ class KbDistillAutoTests(TestSuite):
         )
 
 
+class NamingGuardTests(TestSuite):
+    """8：v6.9.39 课题名称段字母开头守卫。
+
+    背景：register_from_idea 从标题 ASCII 过滤提取 name，未保证命名规则
+    要求的"名称段以字母开头"（[a-z][a-z0-9-]{1,40}）。标题含数字编号/
+    波长时 name 以数字开头（08-22 实测 "322-frogcrab"），拼出的
+    proposal_id 必被 validate_proposal_id 拒绝，注册静默失败且周末
+    compose 的 job 整体仍标 success——new 配额空转需人工兜底（bc190e1
+    手动补注册）。修复：name 定型前剥离前导数字段，空则回退占位名。
+    """
+
+    def __init__(self):
+        super().__init__("课题名称段字母开头守卫测试（v6.9.39-8）")
+
+    def setup(self):
+        self.tmp_root = create_isolated_env()
+        for stage in ["drafts", "optimizing", "pending_review", "archived"]:
+            (self.tmp_root / "research_proposals" / stage).mkdir(parents=True, exist_ok=True)
+        standards_src = REAL_ROOT / "memory" / "nsfc-standards.json"
+        if standards_src.exists():
+            (self.tmp_root / "memory").mkdir(parents=True, exist_ok=True)
+            shutil.copy(standards_src, self.tmp_root / "memory" / "nsfc-standards.json")
+        for mod_name in list(sys.modules.keys()):
+            if mod_name.startswith("proposal_lifecycle") or mod_name == "idea_generator":
+                del sys.modules[mod_name]
+        import paths
+        self._orig_project_root = paths.PROJECT_ROOT
+        paths.PROJECT_ROOT = self.tmp_root
+        import proposal_lifecycle.constants as plc
+        self._orig_plc_root = plc.PROJECT_ROOT
+        self._orig_plc_proposals = plc.PROPOSALS_ROOT
+        plc.PROJECT_ROOT = self.tmp_root
+        plc.PROPOSALS_ROOT = self.tmp_root / "research_proposals"
+        patch_module_root("proposal_lifecycle", self.tmp_root)
+
+    def teardown(self):
+        import proposal_lifecycle.constants as plc
+        plc.PROJECT_ROOT = self._orig_plc_root
+        plc.PROPOSALS_ROOT = self._orig_plc_proposals
+        import paths
+        paths.PROJECT_ROOT = self._orig_project_root
+        if self.tmp_root and self.tmp_root.exists():
+            shutil.rmtree(self.tmp_root, ignore_errors=True)
+
+    def _idea(self, title, keywords=None):
+        return {
+            "title": title,
+            "background": "测试背景",
+            "gap": "测试缺口",
+            "content": [],
+            "approach": "x",
+            "innovations": ["y"],
+            "sources": [],
+            "keywords": keywords or [],
+            "generated_at": "2026-08-22T00:00:00Z",
+        }
+
+    def run_tests(self):
+        import re as _re
+        from proposal_lifecycle import ProposalLifecycle
+        lc = ProposalLifecycle()
+
+        # 8.1 主场景（08-22 实测复现）：标题数字开头 → 剥离后注册成功
+        result = lc.register_from_idea(
+            self._idea("322-frogcrab 阿秒条纹技术", ["attosecond", "streaking"]),
+            project_type="general",
+        )
+        self.assert_true(
+            result.get("success"),
+            f"数字开头标题应注册成功而非被校验拒绝: {result.get('error', '')}",
+        )
+        pid = result.get("proposal_id", "")
+        self.assert_true(
+            not _re.match(r"^(general|key|major)-[0-9]", pid),
+            f"ID 名称段不应以数字开头: {pid}",
+        )
+        v = lc.validate_proposal_id(pid)
+        self.assert_true(v["valid"], f"剥离后的 ID 应通过命名校验: {pid}")
+
+        # 8.2 纯中文标题 → keywords 回退链 → 回退词数字开头同样剥离
+        result2 = lc.register_from_idea(
+            self._idea("阿秒条纹技术", ["322-nm", "attosecond"]),
+            project_type="general",
+        )
+        self.assert_true(
+            result2.get("success"),
+            f"中文标题走 keywords 回退应注册成功: {result2.get('error', '')}",
+        )
+        pid2 = result2.get("proposal_id", "")
+        self.assert_true(
+            not _re.match(r"^(general|key|major)-[0-9]", pid2),
+            f"keywords 数字开头同样应被剥离: {pid2}",
+        )
+
+        # 8.2b 纯数字标题 → 剥离后为空 → 回退占位名
+        result2b = lc.register_from_idea(
+            self._idea("322", []),
+            project_type="general",
+        )
+        self.assert_true(result2b.get("success"), f"纯数字标题应回退占位名注册成功: {result2b.get('error', '')}")
+
+        # 8.3 正常字母开头标题不受影响
+        result3 = lc.register_from_idea(
+            self._idea("attosecond streaking camera", ["attosecond"]),
+            project_type="general",
+        )
+        self.assert_true(result3.get("success"), "正常标题注册不受守卫影响")
+
+        # 8.4 idea_generator 两处同模式守卫（源码级，防未来调用方踩坑）
+        _src_root = Path(__file__).parent.parent.parent
+        ig_src = (_src_root / "scripts" / "idea_generator.py").read_text(encoding="utf-8")
+        self.assert_eq(
+            ig_src.count('re.sub(r"^[0-9-]+", "", name)'),
+            2,
+            "_generate_proposal_id 与 dry_run 分支均应有前导数字剥离",
+        )
+        reg_src = (_src_root / "scripts" / "proposal_lifecycle" / "registration.py").read_text(encoding="utf-8")
+        self.assert_true(
+            're.sub(r"^[0-9-]+", "", name)' in reg_src,
+            "register_from_idea 应有前导数字剥离",
+        )
+
+
 def main():
     from test_runner import print_report
 
     suites = []
     for cls in (AnchorOrderTests, WriterEscalationTests, SemanticDedupTests, ExecutorPathTests,
-                WeeklyResetAnchorTests, TaskSyncRollbackTests, KbDistillAutoTests):
+                WeeklyResetAnchorTests, TaskSyncRollbackTests, KbDistillAutoTests, NamingGuardTests):
         s = cls()
         s.setup()
         s.run_tests()
