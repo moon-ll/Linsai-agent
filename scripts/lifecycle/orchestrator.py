@@ -56,29 +56,46 @@ def _compute_actual_round(self, proposal_id: str, jobs: List[Dict[str, Any]]) ->
 
     从当前 optimization_rounds+1 开始向上扫描，若某轮全部 25 个 job 都 done，
     则认为该轮已闭环。返回应推进到的轮次。
+
+    v6.9.36 修复：_build_full_round_jobs 在 idea_review_required=True 时会顺手
+    清除该标志（副作用）。本函数只做"预期 vs 实际"比较、不落任何 job——
+    若标志在比较中被烧掉，sync_checkpoint 随后真正建轮时拿不到标志，
+    负反馈 auto-heal 的"降级重审"链在最后一环断裂（实测 08-21
+    order-param：round 7 未前置 idea_review，标志被无声消费）。
+    此处比较前快照、比较后恢复，标志只允许被"真正建轮并落盘 job"的
+    调用方（sync_checkpoint L210）消费。
     """
     prop_state = self._get_proposal_state(proposal_id)
     current_round = prop_state.get("optimization_rounds", 0) if prop_state else 0
+    saved_demote_flag = bool(prop_state.get("idea_review_required")) if prop_state else False
     if not jobs:
         return current_round
 
-    actual = current_round
-    round_num = current_round + 1
-    # 安全上限：避免无限制扫描
-    while round_num <= current_round + 20:
-        expected_jobs = self._build_full_round_jobs(proposal_id, round_num)
-        expected_ids = {j["job_id"] for j in expected_jobs}
-        statuses = {
-            job["job_id"]: job.get("status")
-            for job in jobs
-            if job["job_id"] in expected_ids
-        }
-        if len(statuses) == len(expected_ids) and all(s == JOB_STATUS_DONE for s in statuses.values()):
-            actual = round_num
-            round_num += 1
-        else:
-            break
-    return actual
+    try:
+        actual = current_round
+        round_num = current_round + 1
+        # 安全上限：避免无限制扫描
+        while round_num <= current_round + 20:
+            expected_jobs = self._build_full_round_jobs(proposal_id, round_num)
+            expected_ids = {j["job_id"] for j in expected_jobs}
+            statuses = {
+                job["job_id"]: job.get("status")
+                for job in jobs
+                if job["job_id"] in expected_ids
+            }
+            if len(statuses) == len(expected_ids) and all(s == JOB_STATUS_DONE for s in statuses.values()):
+                actual = round_num
+                round_num += 1
+            else:
+                break
+        return actual
+    finally:
+        # 恢复被比较调用顺手消费的降级标志（副作用隔离）
+        if saved_demote_flag:
+            fresh = self._get_proposal_state(proposal_id)
+            if fresh and not fresh.get("idea_review_required"):
+                fresh["idea_review_required"] = True
+                self._set_proposal_state(proposal_id, fresh)
 
 
 def _cleanup_old_round_jobs(self, proposal_id: str, current_round: int) -> int:

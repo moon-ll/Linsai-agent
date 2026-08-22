@@ -1,5 +1,30 @@
 # 变更记录
 
+## v6.9.36 - 2026-08-22 auto-heal 降级标志被比较路径消费修复（idea_review 前置失效）
+
+背景：08-22 12h 健康检查第四轮设计抽查 #3（研究设想质量门槛）运行时
+实证断裂：order-param 负反馈告警 08-21 10:00 auto-heal 清除时按设计设置
+`idea_review_required=True`（降级退回研究设想评审，理由已落盘），但其后
+创建的 round 7 job 链以 critic 开头、无 idea_review 前置，且标志已变 False。
+
+根因：`orchestrator._compute_actual_round` 把 `_build_full_round_jobs` 当
+纯"预期 vs 实际"比较函数调用，但后者在 `idea_review_required=True` 时会
+顺手清除该标志（controller L285-287 副作用）。时间线：auto-heal 置标志 →
+下一 tick 扫描时标志被比较调用烧掉（顺带 26 vs 25 不匹配延误一轮推进）→
+再下一 tick 真正建轮时标志已为 False → 降级链在最后一环无声断裂。
+
+- `lifecycle/orchestrator.py` `_compute_actual_round`：比较前快照
+  `idea_review_required`、finally 中恢复；标志只允许被"真正建轮并落盘
+  job"的调用方（sync_checkpoint）消费。签名不变，测试 monkeypatch 兼容。
+- 修复后语义：降级标志在场时，已闭环轮次会回补 idea_review job（比较
+  26 vs 25 不匹配），下一轮建链继续前置 idea_review——降级真正生效。
+- `tests/test_auto_acceptance.py` 新增 `DemoteFlagSurvivalTests`（R2b）：
+  用例 1 断言比较路径不消费标志；用例 2 断言 sync_checkpoint 回补
+  idea_review job 且仅在落盘后消费标志。
+- 数据修复：order-param 被烧掉的标志已恢复为 True（按已记录的降级理由
+  还原设计意图，round 8 建链时前置 idea_review）。
+- 验证：`self_test --module` 965/965 全绿（基线 961 → 965，+4 项断言）。
+
 ## v6.9.35 - 2026-08-22 人工审核反馈闭环第三处断裂修复（proposal_id 缺失）
 
 背景：08-22 00h 健康检查第三轮设计抽查 #10（人工审核反馈闭环）运行时实证

@@ -23,7 +23,7 @@ _SCRIPTS = Path(__file__).resolve().parent.parent
 if str(_SCRIPTS) not in sys.path:
     sys.path.insert(0, str(_SCRIPTS))
 
-from test_runner import TestSuite
+from test_runner import TestSuite, create_isolated_env, patch_module_root
 
 
 def _base_score_history(rounds=5, score=0.88):
@@ -254,6 +254,101 @@ class NegativeFeedbackHealTests(TestSuite):
             ),
             False,
             "坏时间戳应安全返回 False",
+        )
+
+
+# ============================================================
+# R2b: auto-heal 降级标志副作用隔离（v6.9.36）
+# ============================================================
+
+
+class DemoteFlagSurvivalTests(TestSuite):
+    """v6.9.36 回归：idea_review_required 不被比较路径无声消费。
+
+    背景（08-21 order-param 实证）：负反馈 auto-heal 清除告警后设置
+    idea_review_required=True 退回研究设想评审；但 _compute_actual_round
+    把 _build_full_round_jobs 当纯比较函数调用，后者的清标志副作用把
+    标志提前烧掉——真正建轮时拿不到标志，round 7 未前置 idea_review，
+    降级链在最后一环断裂。修复：比较前快照、比较后恢复。
+    """
+
+    def __init__(self):
+        super().__init__("降级标志副作用隔离")
+        self.tmp_root = None
+        self.ctrl_mod = None
+
+    def setup(self):
+        import importlib
+
+        self.tmp_root = create_isolated_env()
+        (self.tmp_root / "research_proposals" / "optimizing").mkdir(parents=True, exist_ok=True)
+        for mod_name in ("proposal_lifecycle", "lifecycle_cron_framework"):
+            sys.modules.pop(mod_name, None)
+        self.ctrl_mod = importlib.import_module("lifecycle_cron_framework")
+        patch_module_root("proposal_lifecycle", self.tmp_root)
+        patch_module_root("lifecycle_cron_framework", self.tmp_root)
+
+    def teardown(self):
+        import shutil
+
+        if self.tmp_root and self.tmp_root.exists():
+            shutil.rmtree(self.tmp_root, ignore_errors=True)
+
+    def _register(self, pid):
+        c = self.ctrl_mod.LifecycleCronController()
+        c.register(pid, project_type="general")
+        c.transition(pid, "optimizing")
+        prop_dir = c.root / "optimizing" / pid
+        prop_dir.mkdir(parents=True, exist_ok=True)
+        (prop_dir / "00_proposal-brief.md").write_text(f"# {pid}\n", encoding="utf-8")
+        (prop_dir / "04_proposal").mkdir(exist_ok=True)
+        (prop_dir / "04_proposal" / "proposal-draft.md").write_text("# draft\n", encoding="utf-8")
+        return c
+
+    def run_tests(self):
+        pid = "general-demote-fix-20260101"
+        c = self._register(pid)
+
+        # 前置：round 1 已闭环 + idea_review 已通过 → round 2 全链不含 idea_review
+        st = c._get_proposal_state(pid)
+        st["optimization_rounds"] = 1
+        st["idea_review_passed"] = True
+        c._set_proposal_state(pid, st)
+        c.sync_checkpoint(pid)
+        jobs = c._get_jobs(pid)
+        self.assert_eq(
+            len([j for j in jobs if j["step"] == "idea_review"]), 0,
+            "前置：无降级标志时 round 2 不含 idea_review",
+        )
+        for j in jobs:
+            j["status"] = "done"
+        c._save_jobs(pid, jobs)
+
+        # 模拟 auto-heal：轮次闭环后设置降级标志
+        st = c._get_proposal_state(pid)
+        st["idea_review_required"] = True
+        c._set_proposal_state(pid, st)
+
+        # ── 用例 1：_compute_actual_round 比较路径不消费降级标志 ──
+        c._compute_actual_round(pid, c._get_jobs(pid))
+        st = c._get_proposal_state(pid)
+        self.assert_eq(
+            st.get("idea_review_required"), True,
+            "_compute_actual_round 不应消费 idea_review_required（v6.9.36 修复）",
+        )
+
+        # ── 用例 2：sync_checkpoint 真正建轮时降级生效（回补 idea_review job）──
+        c.sync_checkpoint(pid)
+        jobs2 = c._get_jobs(pid)
+        idea_jobs = [j for j in jobs2 if j["step"] == "idea_review"]
+        self.assert_eq(
+            len(idea_jobs) >= 1, True,
+            "降级标志在场时 sync_checkpoint 应回补 idea_review job",
+        )
+        st = c._get_proposal_state(pid)
+        self.assert_eq(
+            st.get("idea_review_required"), False,
+            "回补 job 落盘后标志才允许被消费",
         )
 
 

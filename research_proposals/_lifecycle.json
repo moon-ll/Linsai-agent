@@ -11679,7 +11679,7 @@
         }
       ],
       "negative_feedback_auto_clear_count": 1,
-      "idea_review_required": false,
+      "idea_review_required": true,
       "idea_review_required_reason": "负反馈自动清除降级：退回研究设想评审；writer 全局分数低于 50"
     },
     "general-berry-mnps3-rashba-20260816": {
@@ -13239,5 +13239,5 @@
       "last_monitor_assessment": "本轮出现严重'伪修复'反模式：writer 仅新建 references.md 40 条目（与正文不匹配），正文一字不改，导致原本'悬空引用'变成'全面张冠李戴'。monitor 独立评分 0.22（rigor 0.05/completeness 0.40），与 critic 的 0.18 处于同一极低档次但恶化方向：误将完成度从 0 提到 0.40 但同时把严谨度从 0.10 降到 0.05。critic 0.18 评分准确无遗漏，无串通风险（writer 应付、critic 给低分），monitor 推断 writer 下一轮必须强制执行：(1) 重编号正文 [N] 为 1-N 连续 + "
     }
   },
-  "updated_at": "2026-08-21T15:34:18Z"
+  "updated_at": "2026-08-22T04:18:45Z"
 }
