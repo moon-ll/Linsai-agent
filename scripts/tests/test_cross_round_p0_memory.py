@@ -107,6 +107,28 @@ class CrossRoundP0MemoryTests(TestSuite):
         k2 = opt._issue_similarity_key("指标口径不一致,翻转效率 0.5%")
         self.assert_eq(k1, k2, "相似键忽略标点/空白差异")
 
+        # 3.5 v6.9.37 回归：跨章节 critic 调用不得误标其他章节的未解决 P0
+        # 背景：一轮内 rationale→content→scheme→full_review→references 共 5 次
+        # critic 调用共享同一 open_critical_issues；原实现把"本轮未复现"按全
+        # 章节口径判定，后续章节调用会把先前章节刚入库的 P0 误标已解决
+        # （运行时实证：6 课题全部条目 round_resolved == first_seen_round）。
+        merged4 = opt._update_open_critical_issues(
+            "p1",
+            [{"severity": "critical", "line": "content 章节自身的新问题X"}],
+            current_round=4,
+            focus_section_key="content",
+        )
+        self.assert_eq(len(merged4), 3, "content 新问题入库，历史条目不丢失")
+        high_entry = next(e for e in merged4 if e["severity"] == "high")
+        self.assert_eq(
+            high_entry["round_resolved"], None,
+            "content 章节 critic 未复现 rationale 章节的 high 问题 → 不误标已解决",
+        )
+        self.assert_eq(
+            high_entry["last_seen_round"], 3,
+            "跨章节调用不刷新其他章节条目的 last_seen_round",
+        )
+
         # ---------- 断裂点1：critic 注入（exclude_resolved=True）----------
         # 重置为 2 条未解决
         opt._state = {"open_critical_issues": [

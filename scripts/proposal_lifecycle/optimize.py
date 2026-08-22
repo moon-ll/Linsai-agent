@@ -2135,8 +2135,19 @@ class OptimizeMixin:
                 entry["round_resolved"] = None
                 entry["stale"] = False
                 seen_this_round.add(sig)
-            elif entry.get("round_resolved") is None and not entry.get("stale"):
-                # 历史未解决问题，本轮未复现 → 视为已解决
+            elif (
+                entry.get("section") == section_key
+                and entry.get("round_resolved") is None
+                and not entry.get("stale")
+            ):
+                # v6.9.37 修复：仅当条目所属章节正是本轮评审章节且未复现时才标记解决。
+                # 原实现不比较章节——一轮内后续章节的 critic 调用会把先前章节刚入库
+                # 的 P0 全部误标"已解决"（每轮含 3 个章节 critic + full_review +
+                # references 共 5 次调用，current_sigs 只含本章节问题签名，其余
+                # 章节条目一律落入"未复现→已解决"分支）。运行时实证：6 个课题全部
+                # 条目 round_resolved == first_seen_round（同轮入库同轮被杀，
+                # 08-22 16h 健康检查），跨轮 P0 记忆实际只存活到下一个 critic job，
+                # writer 跨章节修复与 completion 的 P0 清零检查因此系统性失真。
                 entry["round_resolved"] = current_round
             merged.append(entry)
 

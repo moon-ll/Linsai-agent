@@ -2,7 +2,7 @@
 title: "瞬态量子相的全光读写"
 type: "proposal"
 created: "2026-08-02T06:02:42Z"
-updated: "2026-08-18T13:04:56Z"
+updated: "2026-08-22T06:00:22Z"
 tags: []
 related: ["Krausz"]
 source_raw: ""
@@ -13,8 +13,8 @@ proposal_id: "key-transient-quantum-phase-optical-20260726"
 status: "optimizing"
 project_type: "key"
 optimization_rounds: 0
-last_score: 0.53
-synced_at: "2026-08-18T13:04:56Z"
+last_score: 0.76
+synced_at: "2026-08-22T06:00:22Z"
 ---
 
 # 瞬态量子相的全光读写
@@ -23,8 +23,8 @@ synced_at: "2026-08-18T13:04:56Z"
 **项目类型**：key  
 **生命周期状态**：优化中  
 **优化轮次**：0  
-**当前分数**：0.53  
-**同步时间**：2026-08-18
+**当前分数**：0.76  
+**同步时间**：2026-08-22
 
 ## 核心问题
 
@@ -56,7 +56,7 @@ synced_at: "2026-08-18T13:04:56Z"
 ## 状态说明
 
 - 处于 **优化中** 阶段
-- 最后得分：0.53
+- 最后得分：0.76
 - 累计对抗轮次：0
 
 <!-- linsai-wikilinks -->

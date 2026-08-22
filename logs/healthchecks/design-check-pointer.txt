@@ -1,16 +1,16 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-22 12h 健康检查（发现并修复 v6.9.36：auto-heal 降级标志被 _compute_actual_round 比较路径消费；第四轮 #2 复核/#3/#4 完成；停滞 3 课题与 kb 积压延续观察）
-完整报告：logs/healthchecks/healthcheck-2026-08-22-12h.md
+最后更新：2026-08-22 16h 健康检查（发现并修复 v6.9.37：P0 跨轮记忆被跨章节 critic 调用误标已解决——6 课题全部条目 round_resolved==first_seen_round 实证同轮入库同轮被杀；第四轮 #5/#6/#7 完成；新课题 new-idea-20260822 由周末输入端注册并在 human_queue 等激活）
+完整报告：logs/healthchecks/healthcheck-2026-08-22-16h.md
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：
    `python3 -c "import sys; sys.path.insert(0,'scripts'); from hermes_bridge import cron_list; ..."`（linsai profile，17 条，含 4 条简报）。注意 schedule_display 可能为 None，打印时用 `str(x or fallback)`
 2. `lifecycle_monitor.py` 实际参数为 `--dry-run`（工具提示词中的 `--check` 不存在）；异常详情不在日志里，需直接调 `_check_proposals()` / `_check_health_signals()` 拿 anomalies（注意前者返回 (summary, anomalies) 二元组、后者返回单个 dict 而非 list）
 3. `_lifecycle.json` proposals 为 dict；`pipeline_jobs` 为 list；job 字段：job_id 在顶层、轮次键为 `round`；stalled 判定线 1800s/48h
-4. `self_test --module` 为 self_test.py 内**硬编码清单**（非 glob 自动发现）：新测试套件必须注册进 mapping["module"]，否则被 except:pass 静默跳过（08-18 04h 实证，14 用例无声丢失）。当前基线 965/965（v6.9.36 +4；工具提示词中 392/395 为远古基线）
+4. `self_test --module` 为 self_test.py 内**硬编码清单**（非 glob 自动发现）：新测试套件必须注册进 mapping["module"]，否则被 except:pass 静默跳过（08-18 04h 实证，14 用例无声丢失）。当前基线 986/986（v6.9.37 补注册 test_cross_round_p0_memory +21；工具提示词中 392/395 为远古基线）。仍未注册套件：test_circuit_breaker/test_cron_setup_idempotent/test_ghost_write_guard/test_health_sensor/test_idea_review/test_input_summarize_shapes/test_monitor_lark_failure/test_optimize_v6817_prompt_vars（是否批量注册待人工裁决）
 5. 时区：北京时间（UTC+8）；now_utc() 产物过滤时注意 UTC=BJ-8；system-kanban execution_history 时间戳为 UTC；**logs/linsai.log 行内时间为本地 BJ 时间**（08-21 溯源时勿与 state 的 UTC 混淆）
-6. git 版本标签：v6.9.23 已被 7daaad7 占用但 VERSION 未同步——6.9.22 起以 VERSION 文件为准推进，当前 6.9.36
+6. git 版本标签：v6.9.23 已被 7daaad7 占用但 VERSION 未同步——6.9.22 起以 VERSION 文件为准推进，当前 6.9.37
 7. 网关核查走 `check_hermes_available()`（返回 hermes_cli/linsai_profile/gateway_status/cron_jobs_count，实测即时响应）
 8. transition_history 含三种 schema：标准 from/to、注册首条（仅 to）、事件注记（event/detail 键，如 direction_correction）；另有 4 条 08-04 遗留用 timestamp 替代 at——均为良性，读取方兼容
 9. proposal 级 `updated_at` 会被非 job 执行路径刷新（repair 重置/cron 失败记录/stale 清理）——评估真实停滞必须看 job 级 finished_at 最大值（v6.9.31 起 monitor 已改此口径，08-22 00h berry 50h 首次真实触发实证）
@@ -25,18 +25,19 @@
 第一轮（1-15 全覆盖，08-15 04h 收官）
 第二轮（08-22 00h 收官）：#1-#15 全部核过（#2 待人工裁决；#10 第三处断裂已修复；#11 部分偏差待裁决）
 第三轮（08-22 08h 收官）：#1-#15 全部核过（#14/#15 正常；#8 berry 首次真实触发；#10 v6.9.35 修复后接通）
-第四轮（08-22 12h 进行中）：
-- 已核：**#1（08-22 08h：正常）**｜**#2（08-22 12h 复核：命名空间不相交静态确认 + 全历史日志零命中 → 潜在死代码，人工裁决项维持挂起）**｜**#3（08-22 12h：静态三项在位 + 6 课题运行时实证；顺藤摸出 auto-heal 降级链断裂 → v6.9.36 已修复，order-param 标志已恢复）→ 正常（修复后）**｜**#4（08-22 12h：scores[role] 直挂路径 + agent-scores.json 运行时结构/历史封顶/round_ref 格式全对 → 正常）**
+第四轮（08-22 12h/16h 进行中）：
+- 已核：**#1（08-22 08h：正常）**｜**#2（08-22 12h 复核：命名空间不相交静态确认 + 全历史日志零命中 → 潜在死代码，人工裁决项维持挂起）**｜**#3（08-22 12h：静态三项在位 + 6 课题运行时实证；顺藤摸出 auto-heal 降级链断裂 → v6.9.36 已修复，order-param 标志已恢复）→ 正常（修复后）**｜**#4（08-22 12h：scores[role] 直挂路径 + agent-scores.json 运行时结构/历史封顶/round_ref 格式全对 → 正常）**｜**#5（08-22 16h：旧建议 7 天清理 + 自动段回收 + 范本守门 + 互斥锁全在位；但 TARGET_PROFILES 仅 5 个，缺 pipeline-runner/reviewer → 偏差待人工裁决）**｜**#6（08-22 16h：critic/writer 注入、跨章节修复授权、持久化三项在位且运行时活跃（6 课题各 40 条）；但发现标记解决不比较章节——一轮内后续章节 critic 误杀先前章节 P0（实证：全部条目 round_resolved==first_seen_round）→ v6.9.37 已修复）→ 正常（修复后）**｜**#7（08-22 16h：0.85/3轮/<2% 实现在位（v6.9.27 上调口径）+ v6.9.16 窗口含当前轮；从未触发属等待状态（当前分数 0.67-0.78 距平台尚远）非死代码 → 正常）**
 
 【下次从这里继续】
-1. 第四轮设计轮换：从 #5 起（#5 Prompt 优化器正反馈循环、#6 P0 跨轮持久化、#7 质量天花板……依序推进）
-2. **v6.9.36 修复生效观察（周一）**：order-param round 8 建链应前置 idea_review job（标志已恢复 True）；若周一 00:30 时段后 round 8 仍无前置，回查快照/恢复逻辑是否被并发写覆盖
-3. **writer 全局分 44.3 连锁风险（周一重点）**：5 课题 auto-heal 配额未动用；若周一多个课题 monitor 完成后连环触发"writer 全局分数低于 50"告警涌入人工队列，需人工裁决惩罚系数/全局-单课题解耦（12h 报告新增观察 #1）
-4. 停滞观察（3 课题，周一裁决点）：berry 62h、quantum-geometry 56h、key-transient 55h；周一 worker 恢复后应陆续重新获得时段；若周一晚仍零推进，升级排查轮转队列（4 时段/日 vs 6 课题的结构性饥饿）
+1. 第四轮设计轮换：从 #8 起（#8 停滞课题检测、#9 输入端熔断、#10 人工审核反馈闭环……依序推进）
+2. **v6.9.37 修复生效观察（周一）**：berry 现存 12 条未解决 P0 应保持未解决状态并注入 writer prompt（跨章节修复授权激活）；若周一后再次全量被标已解决，回查是否有其他写入方。同时观察 v6.9.36（order-param round 8 建链应前置 idea_review）
+3. 新课题 `general-new-idea-20260822`（activate 三档建议）在 human_queue 等人工激活；7 课题 vs 4 时段/日的轮转竞争周一重点观察（停滞 3 课题 berry 66h/quantum-geometry 60h/key-transient 59h 若周一晚仍零推进，升级排查结构性饥饿）
+4. **writer 全局分 44.3 连锁风险（周一重点）**：5 课题 auto-heal 配额未动用；若周一多个课题 monitor 完成后连环触发"writer 全局分数低于 50"告警涌入人工队列，需人工裁决惩罚系数/全局-单课题解耦（12h 报告观察 #1）
 5. #2 维度轮换修复口径人工裁决（08h 报告详述，静态复核已二次确认）
-6. moire 负反馈字段残留（alert=False 但 reasons/at 在且无 cleared 记录），低优先级待查
-7. bsv 反馈文件编号时间倒挂（feedback-4 早于 feedback-3），低优先级待查
-8. 测试基建（仅报告待裁决）：idea_review 套件 35 用例未注册 --module 静默跳过 + --module 硬编码清单 vs AGENTS"自动发现"表述偏差
-9. kb_distill_backlog 慢性积压**持续恶化**：234（08-16）→387（08-22 12h），6 天 +153（约 +25/天）vs 日蒸馏 5 篇，容量缺口约 5 倍——需人工裁决提速策略（提配额/周末批量/限流入池）
-10. #11 看板持久化口径人工裁决：三项 KB 健康指标已周更落盘 kb-health-weekly.json，是否需合并写入 system-kanban kb_metrics（涉及 category_coverage 0.37 与 coverage_pct 5.0 两口径并存问题）
-11. #15 fallback 路径缺专属回归测试（低优先级）
+6. #5 Prompt 优化器覆盖面人工裁决：pipeline-runner/reviewer 是否纳入 TARGET_PROFILES（16h 报告新增）
+7. 未注册 --module 套件批量注册/自动发现改造人工裁决（16h 报告清点 8 个）
+8. moire 负反馈字段残留（alert=False 但 reasons/at 在且无 cleared 记录），低优先级待查
+9. bsv 反馈文件编号时间倒挂（feedback-4 早于 feedback-3），低优先级待查
+10. kb_distill_backlog 慢性积压：385（08-22 16h），需人工裁决提速策略（提配额/周末批量/限流入池）
+11. #11 看板持久化口径人工裁决：三项 KB 健康指标已周更落盘 kb-health-weekly.json，是否需合并写入 system-kanban kb_metrics（涉及 category_coverage 0.37 与 coverage_pct 5.0 两口径并存问题）
+12. #15 fallback 路径缺专属回归测试（低优先级）

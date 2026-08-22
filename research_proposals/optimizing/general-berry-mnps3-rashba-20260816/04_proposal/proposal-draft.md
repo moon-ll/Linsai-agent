@@ -336,3 +336,18 @@ Go/No-Go 判据：若 Year 2 Q2 完成的切换概率在所有计算场强下均
 [39] Yasuda K, Wang X, Watanabe K, et al. Stacking engineering in 2D ferroelectrics. Science, 2021, 372: 1458–1462.
 
 [40] Liu S, Ayas S, Xu C, et al. First principles study of滑移铁电性 in 2D materials. Adv Funct Mater, 2024, 34: 2401156.
+
+## 周末输入补充（2026-08-22 · cl_20260822_387d99）
+
+### 拟开展研究内容
+- paper:2606.02152
+- paper:2608.09054
+- paper:2026-2606.17329-robust-spin-splitting-and-strain-controlled-optica
+- paper:2026-2606.02152-stacking-engineered-switchable-altermagnetism-in-t
+
+### 来源
+- [weekend_cluster] Stacking-Engineered Switchable Altermagnetism in Topological FeSe bilayer systems
+- [weekend_cluster] Altermagnetism-Induced Spin-resolved electronic structure in Janus FeX0.5Y0.5 Monolayers (X, Y = S, Se, Te)
+- [weekend_cluster] Robust Spin Splitting and Strain-Controlled Optical Response in Monolayer CrC2N4 for Valleytronic and Optoelectronic Applications
+- [weekend_cluster] Stacking-Engineered Switchable Altermagnetism in Topological FeSe bilayer systems
+

@@ -639,3 +639,43 @@ DOI 补全后，已正式发表的 25 条文献（A 级）100% 列出 DOI。
 ---
 
 *本节由 writer 在 round-9 评审后（2026-08-13）核校，闭环 18 项 round-9 问题中的 16 项 references.md 域可处置项，2 项需正文域协同的项目（M-9.8 / L-9.16 / C-9.1）按 NSFC 标准"严禁未经核实内容"硬约束与"宁缺勿滥"引用纪律处置。*
+
+## 周末输入补充（2026-08-22 · cl_20260815_438349）
+
+### 拟开展研究内容
+- paper:2026-2603.24377-fluctuation-induced-symmetry-breaking-in-high-harmonic-gener
+- paper:2024-2411.11042-structured-squeezed-light-allows-for-high-harmonic-generatio
+- paper:2025-2502.11803-high-harmonic-generation-in-a-crystal-driven-by-quantum-ligh
+- paper:2025-2509.13518-quantum-dial-for-high-harmonic-generation
+
+### 创新点
+- 压缩噪声的哪些分量与光子统计特征主导涨落诱导对称性破缺的效率，能否定量设计最优量子驱动态以最大化被禁谐波产率？
+- 在固体体系中，带内与带间HHG通道对量子涨落的响应有何差异，压缩噪声如何影响载流子动力学与谐波截止频率扩展的微观机制？
+- 被禁谐波携带的压缩、纠缠等非经典特征在宏观传播与相位匹配条件下能否保存，如何在实验上直接探测谐波的量子特性？
+- BSV'量子旋钮'方案能否推广至阿秒脉冲合成、轨道分辨电离等更广泛的强场过程，并在现有激光与压缩光技术上实现实验验证？
+- 现有理论多依赖Glauber-Sudarshan P表示与随机轨迹采样，如何发展超越此类经典随机近似的方法以描述强非经典性（如显著Wigner负性）驱动下的HHG？
+
+### 来源
+- [weekend_cluster] Fluctuation-induced symmetry breaking in high harmonic generation for bicircular quantum light
+- [weekend_cluster] Structured squeezed light allows for high-harmonic generation in classical forbidden geometries
+- [weekend_cluster] High-Harmonic Generation in a Crystal Driven by Quantum Light
+- [weekend_cluster] Quantum Dial for High-Harmonic Generation
+
+
+## 周末输入补充（2026-08-22 · cl_20260815_77b45e）
+
+### 拟开展研究内容
+- paper:2026-2601.01611-generation-of-circular-polarized-high-order-harmon
+- paper:2601.01611
+
+### 创新点
+- 量子场涨落突破经典圆偏振单色驱动禁戒的微观机制是什么，电子隧穿-回复动力学与驱动场光子涨落如何耦合？
+- 谐波光谱中编码的量子特征能否定量反演重构驱动场量子态（如压缩参数、光子统计分布）？
+- 如何在实验上产生并维持强场条件下所需的高光子数、高椭圆度压缩态驱动光源？
+- 所产生的高椭圆度谐波的手性纯度与偏振可控性能否满足阿秒圆偏振光源等实际应用需求？
+- 采用多色驱动、纠缠态或Fock态等更复杂量子光场时，谐波的偏振特性与光子统计是否会出现新的可调控效应？
+
+### 来源
+- [weekend_cluster] Generation of circular polarized high-order harmonics from single color quantum light
+- [weekend_cluster] Generation of circular polarized high-order harmonics from single color quantum light
+

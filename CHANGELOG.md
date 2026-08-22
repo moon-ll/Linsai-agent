@@ -1,5 +1,33 @@
 # 变更记录
 
+## v6.9.37 - 2026-08-22 P0 跨轮记忆被跨章节 critic 调用误标已解决（同轮入库同轮被杀）
+
+背景：08-22 16h 健康检查第四轮设计抽查 #6（P0 跨轮持久化）静态三项
+（critic/writer 注入、writer 跨章节修复授权、持久化）全部在位，但运行时
+数据异常：6 个 optimizing 课题全部条目 `round_resolved ==
+first_seen_round`（order-param 7/7、moire 8/8、bsv 8/8、key-transient
+4/4），quantum-geometry 更出现 first_seen=8 / resolved=1 的时间倒挂。
+
+根因：`optimize._update_open_critical_issues` 的"标记解决"分支不比较
+章节——每轮含 3 个章节 critic + full_review + references 共 5 次调用共享
+同一 open_critical_issues，`current_sigs` 只含本章节问题签名，其余章节
+条目一律落入"本轮未复现→已解决"分支。一轮内后续章节的 critic 调用会把
+先前章节刚入库的 P0 全部误标已解决，跨轮记忆实际只存活到下一个 critic
+job；writer 跨章节修复与 completion 的 P0 清零检查因此系统性失真。
+
+- `proposal_lifecycle/optimize.py`：标记解决增加
+  `entry.section == section_key` 前置条件——仅当条目所属章节正是本轮
+  评审章节且未复现时才标记解决；其他章节条目保持原状（不解决、不刷新
+  last_seen）。同章节自然生命周期（下一轮同章节评审未复现→解决）不变。
+- `tests/test_cross_round_p0_memory.py` 新增 3.5 回归（3 断言）：
+  content 章节 critic 调用不得误标 rationale 章节未解决 high 条目。
+- `self_test.py` mapping["module"] 补注册 `test_cross_round_p0_memory`
+  （此前未注册被静默跳过，本次修复的回归保护因此缺位）。
+- 数据不回滚：历史误标条目无法区分真解决/误标，维持现状；berry 现存
+  12 条未解决 P0 已受修复保护（周一恢复时段后 writer 跨章节修复应激活）。
+- 验证：`self_test --module` 986/986 全绿（基线 965→986，+21 为 P0
+  套件补注册）。
+
 ## v6.9.36 - 2026-08-22 auto-heal 降级标志被比较路径消费修复（idea_review 前置失效）
 
 背景：08-22 12h 健康检查第四轮设计抽查 #3（研究设想质量门槛）运行时

@@ -60,3 +60,17 @@
 - paper:2012-1210.4814-molecular-internal-dynamics-studied-by-quantum-path-interfer
 - paper:2015-1502.07422-spectrally-resolved-spatiotemporal-features-of-quantum-paths
 
+
+## 周末输入补充（2026-08-22 · cl_20260815_438349）
+
+- paper:2026-2603.24377-fluctuation-induced-symmetry-breaking-in-high-harmonic-gener
+- paper:2024-2411.11042-structured-squeezed-light-allows-for-high-harmonic-generatio
+- paper:2025-2502.11803-high-harmonic-generation-in-a-crystal-driven-by-quantum-ligh
+- paper:2025-2509.13518-quantum-dial-for-high-harmonic-generation
+
+
+## 周末输入补充（2026-08-22 · cl_20260815_77b45e）
+
+- paper:2026-2601.01611-generation-of-circular-polarized-high-order-harmon
+- paper:2601.01611
+
