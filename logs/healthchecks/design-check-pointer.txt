@@ -1,7 +1,7 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-23 04h 健康检查（第五轮 #14/#15 完成收官：#14 stale 清理静态+运行时双实证正常（08-21 让出时段/stale 回收 3 次）、#15 monitor 降级路径静态验证正常（兜底未触发属预期）；1015/1015 全绿；4 stalled 均为已知周一裁决项，无新缺陷）
-完整报告：logs/healthchecks/healthcheck-2026-08-23-04h.md
+最后更新：2026-08-23 08h 健康检查（第六轮 #1/#2/#3：#1 范例注入静态+运行时双实证正常（08-21 8 条注入）、#2 维度轮换维持潜在死代码并新增 ±0.01 边界量化证据（quantum-geometry full_review deltas[-0.01,0.0] 被严格小于判定排除）、#3 idea_review 三档完整 + moire 0.36→修复→0.75 全闭环实证正常；1015/1015 全绿；4 stalled 均为已知周一裁决项，无新缺陷）
+完整报告：logs/healthchecks/healthcheck-2026-08-23-08h.md
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：
@@ -35,10 +35,12 @@
 - #1（08-22 08h 正常）｜#2（12h 潜在死代码，人工裁决挂起）｜#3（12h 正常，v6.9.36 修复后）｜#4（12h 正常）｜#5（16h 偏差待裁决）｜#6（16h 正常，v6.9.37 修复后）｜#7（16h 正常）｜#8（20h 正常）｜#9（20h 正常）｜#10（20h 正常）｜#11（08-23 00h：计算+周更落盘正常，kb-health-weekly 顶层 health 直取三指标（coverage 0.75/week_new 200/connectivity 2.56，06:00Z 新鲜）；system-kanban 合并双口径维持人工裁决 → 正常）｜#12（08-23 00h：sync_all [3.7/5] 静态在位 + kb_metrics.trends_rising 运行时实证（5 词，04:40Z 新鲜）→ 正常）｜#13（08-23 00h：round_num 第一维度 + _CHAIN_ORDER 含 7/8 + 专项测试在册 + order-parameter r7 链序运行时实证 → 正常）
 第五轮（08-23 04h 收官）：
 - **#14（04h：run_micro_scheduler L1281-1290 stale 清理在时段检查前无条件执行 + L1516 轮次完成 break 让出时段；运行时实证 08-21 启动 211 次/让出时段 1 次/stale 回收 3 次 → 正常）**｜**#15（04h：executor L1341-1355 降级路径 round_num_fallback=job.get("round") 修复在位、skipped 语义正确；全日志未触发属兜底预期 → 正常）**
+第六轮（08-23 08h 进行中）：
+- **#1（08h：optimize L2244-2330 静态三要素齐（<0.75 接收 / 峰值≥0.70 范文 / 全局 _lifecycle.json 源）+ 08-21 运行时 8 条注入（quantum-geometry 0.86 → moire/order-parameter 0.50-0.74）→ 正常）**｜**#2（08h：静态 L116-148 在位（[-12:]/≥6 条/3 delta 全 |d|<0.01 切最弱），运行时 0 触发；量化：bsv content×3 deltas[0.01,-0.04] 超阈、order-param scheme×3 deltas[0.04,0.02] 超阈、quantum-geometry full_review×3 deltas[-0.01,0.0] 达界被 abs(d)<0.01 严格排除 → 维持潜在死代码待人工裁决，新增边界证据）**｜**#3（08h：controller L279-290 建链（round1 前置/passed 跳过/required 回补）+ executor L1142-1231 三档（≥0.70 过 / <0.70 修复≤3 / 超限 blocked）+ moire 08-20 全闭环实证（0.36→修复→0.75）+ 6 课题 passed 0.71-0.85 → 正常；order-parameter required=True 在场待周一建链验证）**
 
 【下次从这里继续】
-1. 第六轮设计轮换：从 #1 起（#1 跨课题范例注入……上轮全核过，做增量复核）
-2. **周一升级判定（重点）**：停滞四课题 berry 78.9h / quantum-geometry 72.4h / key-transient 71.3h / moire 48.5h（04h 口径，key-transient 仅 6/25）——若周一 22:30 后仍零推进，升级排查结构性饥饿（8 课题 vs 4 时段/日）
+1. 第六轮设计轮换：从 **#4** 起（Agent 分数奖惩闭环 scores[role] 路径 → #5 → #6）
+2. **周一升级判定（重点）**：停滞四课题 berry 82.9h / quantum-geometry 76.4h / key-transient 75.3h / moire 52.5h（08h 口径，key-transient 仅 6/25）——若周一 22:30 后仍零推进，升级排查结构性饥饿（8 课题 vs 4 时段/日）
 3. **writer 全局分连锁风险（周一重点）**：5 课题 auto-heal 配额未动用；若周一多课题 monitor 完成后连环触发"writer 全局分数低于 50"告警涌入人工队列，需人工裁决惩罚系数/全局-单课题解耦
 4. **kb_distill --auto 首跑观察（周日 12:50）**：积压 385 > 300 → 首次升 20 篇/天；确认 cron wrapper 生效 + 积压回落；口径统一后 kb_health 告警数应与蒸馏器清单对齐
 5. **v6.9.37 修复生效观察（周一）**：berry 12 条未解决 P0 应保持未解决并注入 writer prompt；order-parameter idea_review_required=True 建链应前置 idea_review
