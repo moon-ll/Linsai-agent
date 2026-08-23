@@ -8317,7 +8317,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-21T15:34:18Z",
+      "updated_at": "2026-08-23T00:55:30Z",
       "optimization_rounds": 6,
       "last_score": 0.69,
       "score_history": [
@@ -11232,6 +11232,21 @@
           "finished_at": "",
           "last_error": "",
           "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r7-idea_review-idea_review",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "idea_review",
+          "section_key": "idea_review",
+          "round": 7,
+          "status": "pending",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
         }
       ],
       "degradation_events": [
@@ -11679,7 +11694,7 @@
         }
       ],
       "negative_feedback_auto_clear_count": 1,
-      "idea_review_required": true,
+      "idea_review_required": false,
       "idea_review_required_reason": "负反馈自动清除降级：退回研究设想评审；writer 全局分数低于 50"
     },
     "general-berry-mnps3-rashba-20260816": {
@@ -13244,7 +13259,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 交变磁体高次谐波产生与固态强场非线性光学新前沿",
       "created_at": "2026-08-22T05:40:16Z",
-      "updated_at": "2026-08-22T15:17:01Z",
+      "updated_at": "2026-08-23T00:55:30Z",
       "optimization_rounds": 0,
       "last_score": 0.0,
       "score_history": [],
@@ -13286,6 +13301,453 @@
         "scheme",
         "full_review",
         "references"
+      ],
+      "pipeline_jobs": [
+        {
+          "job_id": "general-new-idea-20260822-r1-idea_review-idea_review",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "idea_review",
+          "section_key": "idea_review",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-rationale-critic",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "critic",
+          "section_key": "rationale",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-idea_review-idea_review"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-rationale-gap_identify",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "gap_identify",
+          "section_key": "rationale",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-rationale-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-rationale-lit_search",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_search",
+          "section_key": "rationale",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-rationale-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-rationale-lit_read",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_read",
+          "section_key": "rationale",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-rationale-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-rationale-lit_note",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_note",
+          "section_key": "rationale",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-rationale-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-rationale-writer",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "writer",
+          "section_key": "rationale",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-rationale-critic",
+            "general-new-idea-20260822-r1-rationale-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-content-critic",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "critic",
+          "section_key": "content",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-rationale-writer",
+            "general-new-idea-20260822-r1-idea_review-idea_review"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-content-gap_identify",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "gap_identify",
+          "section_key": "content",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-content-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-content-lit_search",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_search",
+          "section_key": "content",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-content-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-content-lit_read",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_read",
+          "section_key": "content",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-content-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-content-lit_note",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_note",
+          "section_key": "content",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-content-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-content-writer",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "writer",
+          "section_key": "content",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-content-critic",
+            "general-new-idea-20260822-r1-content-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-scheme-critic",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "critic",
+          "section_key": "scheme",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-content-writer",
+            "general-new-idea-20260822-r1-idea_review-idea_review"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-scheme-gap_identify",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "gap_identify",
+          "section_key": "scheme",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-scheme-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-scheme-lit_search",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_search",
+          "section_key": "scheme",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-scheme-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-scheme-lit_read",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_read",
+          "section_key": "scheme",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-scheme-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-scheme-lit_note",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_note",
+          "section_key": "scheme",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-scheme-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-scheme-writer",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "writer",
+          "section_key": "scheme",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-scheme-critic",
+            "general-new-idea-20260822-r1-scheme-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-full_review-critic",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "critic",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-scheme-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-full_review-writer",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "writer",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-references-critic",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "critic",
+          "section_key": "references",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-full_review-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-references-writer",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "writer",
+          "section_key": "references",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-references-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-monitor-monitor",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "monitor",
+          "section_key": "monitor",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-references-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-derived-update_vision",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "update_vision",
+          "section_key": "derived",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-monitor-monitor"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r1-derived-update_method_manual",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "update_method_manual",
+          "section_key": "derived",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r1-derived-update_vision"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        }
       ]
     },
     "general-attosecond-streaking-20260822": {
@@ -13294,7 +13756,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 阿秒条纹技术：从超短脉冲表征到量子相位测量（手动补注册 2026-08-22）",
       "created_at": "2026-08-22T12:20:08Z",
-      "updated_at": "2026-08-22T15:17:07Z",
+      "updated_at": "2026-08-23T00:55:30Z",
       "optimization_rounds": 0,
       "last_score": 0.0,
       "score_history": [],
@@ -13336,8 +13798,455 @@
         "scheme",
         "full_review",
         "references"
+      ],
+      "pipeline_jobs": [
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-idea_review-idea_review",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "idea_review",
+          "section_key": "idea_review",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-rationale-critic",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "critic",
+          "section_key": "rationale",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-idea_review-idea_review"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-rationale-gap_identify",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "gap_identify",
+          "section_key": "rationale",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-rationale-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-rationale-lit_search",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_search",
+          "section_key": "rationale",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-rationale-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-rationale-lit_read",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_read",
+          "section_key": "rationale",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-rationale-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-rationale-lit_note",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_note",
+          "section_key": "rationale",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-rationale-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-rationale-writer",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "writer",
+          "section_key": "rationale",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-rationale-critic",
+            "general-attosecond-streaking-20260822-r1-rationale-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-content-critic",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "critic",
+          "section_key": "content",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-rationale-writer",
+            "general-attosecond-streaking-20260822-r1-idea_review-idea_review"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-content-gap_identify",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "gap_identify",
+          "section_key": "content",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-content-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-content-lit_search",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_search",
+          "section_key": "content",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-content-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-content-lit_read",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_read",
+          "section_key": "content",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-content-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-content-lit_note",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_note",
+          "section_key": "content",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-content-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-content-writer",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "writer",
+          "section_key": "content",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-content-critic",
+            "general-attosecond-streaking-20260822-r1-content-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-scheme-critic",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "critic",
+          "section_key": "scheme",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-content-writer",
+            "general-attosecond-streaking-20260822-r1-idea_review-idea_review"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-scheme-gap_identify",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "gap_identify",
+          "section_key": "scheme",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-scheme-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-scheme-lit_search",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_search",
+          "section_key": "scheme",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-scheme-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-scheme-lit_read",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_read",
+          "section_key": "scheme",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-scheme-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-scheme-lit_note",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_note",
+          "section_key": "scheme",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-scheme-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-scheme-writer",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "writer",
+          "section_key": "scheme",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-scheme-critic",
+            "general-attosecond-streaking-20260822-r1-scheme-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-full_review-critic",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "critic",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-scheme-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-full_review-writer",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "writer",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-references-critic",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "critic",
+          "section_key": "references",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-full_review-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-references-writer",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "writer",
+          "section_key": "references",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-references-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-monitor-monitor",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "monitor",
+          "section_key": "monitor",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-references-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-derived-update_vision",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "update_vision",
+          "section_key": "derived",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-monitor-monitor"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-derived-update_method_manual",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "update_method_manual",
+          "section_key": "derived",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-derived-update_vision"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        }
       ]
     }
   },
-  "updated_at": "2026-08-22T15:17:07Z"
+  "updated_at": "2026-08-23T00:55:30Z"
 }

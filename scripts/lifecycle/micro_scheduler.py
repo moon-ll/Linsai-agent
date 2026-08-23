@@ -208,6 +208,24 @@ def _count_consecutive_slots(state: Dict[str, Any], proposal_id: str) -> int:
     return count
 
 
+def _current_round_done_count(jobs: List[Dict[str, Any]], round_num: int) -> int:
+    """统计指定轮次已完成 job 数（v6.9.39 软卡死推进信号）。
+
+    软卡死判定此前只看 optimization_rounds（整轮完成才 +1）——一轮
+    25-30 job 在 critic/writer 超时上限升至 1200s 后需 2-4 个时段才能
+    完成，超过 MAX_SOFT_STUCK_SLOTS=2 个时段后即使 job 每时段都在
+    实质推进（26/29、90% 进度）也会被判"轮次无推进"强制让出焦点
+    （08-23 实证 quantum-geometry r1 26/29、berry r2 12/25 均被误切）。
+    本函数提供 job 级进展信号：done 计数增加即视为推进。
+    """
+    return sum(
+        1 for j in jobs
+        if isinstance(j, dict)
+        and j.get("round") == round_num
+        and j.get("status") == JOB_STATUS_DONE
+    )
+
+
 def _is_round_complete(jobs: List[Dict[str, Any]], proposal_id: str, round_num: int) -> bool:
     """检查 proposal 的指定 round 是否全部完成。
 
@@ -1066,17 +1084,36 @@ def _focus_proposal_for_slot(
                     # v6.8.10: 软卡死检测 — 连续 ≥MAX_SOFT_STUCK_SLOTS 个时段
                     # 轮次无推进（failed job 不阻塞 pending 但又不完成，灰色地带）。
                     # 此时不卡死不返回，强制让出给下一个 proposal，避免永久占用焦点。
+                    # v6.9.39: 推进信号从"rounds 计数变化"细化为"rounds 变化 OR
+                    # 当前轮 done 数增加"——一轮 25-30 job 需 2-4 个时段，旧信号
+                    # 下超 2 个时段必误判让出（08-23 实证 26/29、12/25 被切）。
+                    # tracked 记录格式 {pid: {"round": N, "done": M}}，兼容旧 int。
                     consecutive = _count_consecutive_slots(state, prev_pid)
                     if consecutive >= MAX_SOFT_STUCK_SLOTS:
                         tracked = state.setdefault("_round_when_focused", {})
-                        first_round = tracked.get(prev_pid, completed_rounds)
-                        if first_round == completed_rounds:
-                            # 连续 N 个时段轮次无推进 → 软卡死，让出
+                        prev_tracked = tracked.get(prev_pid, completed_rounds)
+                        # 旧格式 int → 迁移为 dict（done 置 None 表示无基线）
+                        if isinstance(prev_tracked, int):
+                            prev_tracked = {"round": prev_tracked, "done": None}
+                        cur_round = completed_rounds + 1
+                        cur_done = _current_round_done_count(prev_jobs, cur_round)
+                        rec_round = prev_tracked.get("round")
+                        rec_done = prev_tracked.get("done")
+                        # rec_done is None（旧 int 迁移的首个时段）：无 done 基线
+                        # 无法判定，视为有推进以建立基线——最多少切一次，且
+                        # 软卡死在后续时段（done 不变）仍会兜底让出。
+                        has_progress = (
+                            rec_round != completed_rounds
+                            or rec_done is None
+                            or cur_done > rec_done
+                        )
+                        if not has_progress:
+                            # 连续 N 个时段 rounds 与 done 数均无变化 → 真软卡死
                             if _log:
                                 _log.warning(
                                     f"[{prev_pid}] 连续 {consecutive} 个时段"
-                                    f"轮次无推进（rounds={completed_rounds}），"
-                                    f"触发软卡死让出焦点"
+                                    f"轮次无推进（rounds={completed_rounds}，"
+                                    f"done={cur_done} 不变），触发软卡死让出焦点"
                                 )
                             # 清除跟踪记录，让出焦点
                             tracked.pop(prev_pid, None)
@@ -1084,8 +1121,11 @@ def _focus_proposal_for_slot(
                             _save_focus_state(state)
                             # 不 return，落入下方 move_to_queue_end
                         else:
-                            # 有进展，更新记录
-                            tracked[prev_pid] = completed_rounds
+                            # 有进展（轮次推进或 job 级推进），更新基线继续聚焦
+                            tracked[prev_pid] = {
+                                "round": completed_rounds,
+                                "done": cur_done,
+                            }
                             state["_round_when_focused"] = tracked
                             _save_focus_state(state)
                             state["last_slot_index"] = slot_index
@@ -1093,18 +1133,33 @@ def _focus_proposal_for_slot(
                             _save_focus_state(state)
                             return prev_pid
                     else:
-                        # 连续聚集 < N 个时段，记录初始轮次
+                        # 连续聚集 < N 个时段，记录初始基线（round + done 快照）
                         tracked = state.setdefault("_round_when_focused", {})
-                        if prev_pid not in tracked:
-                            tracked[prev_pid] = completed_rounds
+                        if prev_pid not in tracked or isinstance(tracked.get(prev_pid), int):
+                            tracked[prev_pid] = {
+                                "round": completed_rounds,
+                                "done": _current_round_done_count(
+                                    prev_jobs, completed_rounds + 1),
+                            }
                         state["_round_when_focused"] = tracked
                         _save_focus_state(state)
                         state["last_slot_index"] = slot_index
                         state["last_proposal_id"] = prev_pid
                         _save_focus_state(state)
                         return prev_pid
-        except Exception:
-            pass
+        except Exception as e:
+            # v6.9.39: 异常不再静默落入让出路径——旧实现 except pass 后直接
+            # 执行 _move_to_queue_end，任何 IO/解析异常都变成误切换课题。
+            # 改为保守"继续聚焦当前课题"：软卡死（连续 N 时段无推进）与
+            # _is_proposal_stuck 会在后续时段兜底，不会死锁焦点。
+            if _log:
+                _log.warning(
+                    f"[micro-scheduler] 让出判定异常（保守继续聚焦 {prev_pid}）: {e}"
+                )
+            state["last_slot_index"] = slot_index
+            state["last_proposal_id"] = prev_pid
+            _save_focus_state(state)
+            return prev_pid
         # 当前轮已完成：移动到队列末尾，推进到下一个
         _move_to_queue_end(state, prev_pid)
         queue = state.get("queue", [])

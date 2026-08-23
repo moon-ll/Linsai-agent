@@ -361,6 +361,106 @@ class MicroSchedulerRotationTests(TestSuite):
             "去重后 _count_consecutive_slots 须保持原计数语义",
         )
 
+        # ================================================================
+        # 测试 10（v6.9.39 修复守护）: job 级推进防软卡死误切
+        # bug 现场: 软卡死"推进"信号只有 optimization_rounds（整轮完成
+        # 才 +1），一轮 25-30 job 需 2-4 个时段 → 超 MAX_SOFT_STUCK_SLOTS=2
+        # 个时段后即使 done 数持续增加（26/29、90% 进度）也被判"轮次无
+        # 推进"强制让出（08-23 实证 quantum-geometry r1 26/29、berry r2
+        # 12/25 均被误切，用户实测"总在一轮没完成时切换课题"）。
+        # 修复: done 计数增加即视为推进，继续聚焦。
+        # ================================================================
+        # 10a. done 数在两个时段间增加（24 → 26）→ 不应误切
+        self._write_focus_state(
+            queue=[pid_a, pid_b],
+            last_proposal_id=pid_a,
+            last_slot_index=0,
+        )
+        done_counter = {"n": 24}
+        ctrl10 = MagicMock()
+        ctrl10._get_proposal_state.side_effect = lambda pid: (
+            {"optimization_rounds": 0} if pid == pid_a else {})
+        ctrl10._get_jobs.side_effect = lambda pid: [
+            {"round": 1, "status": "done"} for _ in range(done_counter["n"])
+        ] + [{"round": 1, "status": "pending"} for _ in range(29 - done_counter["n"])]
+        self._patch_round_complete({1: False})
+
+        # slot 0 首次 tick 聚焦 pid_a（记录基线 done=24）；再补一次同时段
+        # tick 补记 focus_history（真实运行 5 分钟一 tick，时段内第二次
+        # 走同时段分支追加 history——切换分支提前 return 不追加）。
+        self.ms._focus_proposal_for_slot(ctrl10, slot_index=0, optimizing=optimizing)
+        self.ms._focus_proposal_for_slot(ctrl10, slot_index=0, optimizing=optimizing)
+        # slot 1 期间推进 2 个 job → done=26
+        done_counter["n"] = 26
+        r10a = self.ms._focus_proposal_for_slot(ctrl10, slot_index=1, optimizing=optimizing)
+        self.ms._focus_proposal_for_slot(ctrl10, slot_index=1, optimizing=optimizing)
+        self.assert_eq(
+            r10a, pid_a,
+            "done 24→26 增加时第 2 个时段应继续聚焦（job 级推进）",
+            "rounds 未变但 done 增加 = 实质推进，不应判软卡死",
+        )
+        # slot 2 期间继续推进 → done=28，第 3 个时段仍不应误切
+        done_counter["n"] = 28
+        r10b = self.ms._focus_proposal_for_slot(ctrl10, slot_index=2, optimizing=optimizing)
+        self.ms._focus_proposal_for_slot(ctrl10, slot_index=2, optimizing=optimizing)
+        self.assert_eq(
+            r10b, pid_a,
+            "done 26→28 增加时第 3 个时段应继续聚焦（跨 MAX_SOFT_STUCK_SLOTS）",
+            "修复目标：一轮跨多个时段连贯推进，只要 job 有进展就不让出",
+        )
+
+        # 10b. done 数停滞（26 → 26 不变）超阈值 → 应软卡死让出（防饿死保留）
+        self._write_focus_state(
+            queue=[pid_a, pid_b],
+            last_proposal_id=pid_a,
+            last_slot_index=0,
+        )
+        ctrl10b = MagicMock()
+        ctrl10b._get_proposal_state.side_effect = lambda pid: (
+            {"optimization_rounds": 0} if pid == pid_a else {})
+        ctrl10b._get_jobs.side_effect = lambda pid: [
+            {"round": 1, "status": "done"} for _ in range(26)
+        ] + [{"round": 1, "status": "pending"} for _ in range(3)]
+        for slot in (0, 1):
+            # 每时段 2 次 tick（切换 + 同时段补 history），与真实节奏一致
+            self.ms._focus_proposal_for_slot(ctrl10b, slot_index=slot, optimizing=optimizing)
+            self.ms._focus_proposal_for_slot(ctrl10b, slot_index=slot, optimizing=optimizing)
+        r10c = self.ms._focus_proposal_for_slot(ctrl10b, slot_index=2, optimizing=optimizing)
+        self.assert_eq(
+            r10c, pid_b,
+            "done 数连续 2 个时段不变时应软卡死让出",
+            "真停滞（无 job 进展）仍须让出，防单课题饿死队列",
+        )
+
+        # 10c. 旧 int 格式 _round_when_focused 兼容（迁移不炸）
+        self._write_focus_state(
+            queue=[pid_a, pid_b],
+            last_proposal_id=pid_a,
+            last_slot_index=0,
+        )
+        focus_path10 = self.tmp_root / "memory" / "lifecycle-focus.json"
+        legacy = json.loads(focus_path10.read_text(encoding="utf-8"))
+        legacy["_round_when_focused"] = {pid_a: 0}  # 旧 int 格式
+        legacy["focus_history"] = [
+            {"slot_index": 0, "proposal_id": pid_a, "at": "2026-08-22T10:00:00Z"},
+            {"slot_index": 1, "proposal_id": pid_a, "at": "2026-08-22T20:00:00Z"},
+        ]
+        focus_path10.write_text(json.dumps(legacy, ensure_ascii=False), encoding="utf-8")
+        ctrl10c = MagicMock()
+        ctrl10c._get_proposal_state.side_effect = lambda pid: (
+            {"optimization_rounds": 0} if pid == pid_a else {})
+        ctrl10c._get_jobs.side_effect = lambda pid: [
+            {"round": 1, "status": "done"} for _ in range(26)
+        ] + [{"round": 1, "status": "pending"} for _ in range(3)]
+        r10d = self.ms._focus_proposal_for_slot(ctrl10c, slot_index=2, optimizing=optimizing)
+        self.assert_eq(
+            r10d, pid_a,
+            "旧 int 基线迁移后 done=26 有推进记录语义应保持聚焦",
+            "旧格式 done 基线为 None → 首判不比 done 只比 round，"
+            "rounds=0 相同 → 无 rounds 推进信号；done=None 不比较 → "
+            "本次更新基线后聚焦（迁移安全不误切）",
+        )
+
 
 if __name__ == "__main__":
     suite = MicroSchedulerRotationTests()
