@@ -1,5 +1,33 @@
 # 变更记录
 
+## v6.9.42 - 2026-08-23 审核反馈注入零信息修复（兜底文本回退结构化意见）
+
+背景：20h 健康检查第三层 #10 抽查发现 bsv 课题反馈闭环实际失效——
+`human_feedback_count=3` 指向的 `feedback-3-raw.md` 仅 155 字节通用兜底
+话术（Web 审核路由 reason 为空时写入），实质意见全在 8.6KB 的
+`feedback-3-structured.json` 中，但注入器只读 raw 文件——critic/writer
+prompt 收到零信息。与 v6.9.41 对比报告"bsv 审核意见注入未产生边际效果
+（0.86→0.86）"互证：不是注入无效果，而是从未注入过实质内容。其余 4 个
+有反馈课题（moire/key-transient/qg/order-parameter）raw 文件恰含完整
+意见文本，故仅 bsv 受影响。
+
+- `proposal_lifecycle/feedback_archive.py`：
+  - 新增 `_is_contentless_feedback`：识别提取后正文是否为空/仅通用兜底
+    话术（精确匹配"用户审核不通过，请根据审核意见修改。"，允许前后
+    ≤10 字符冗余；不做短文本一刀切，简短实质意见不受影响）。
+  - 新增 `_render_structured_feedback`：将 `feedback-{N}-structured.json`
+    渲染为可注入意见文本（结论 + 总体评价 + 最多 8 条 issue 的
+    严重度/章节/描述/指令）。
+  - `load_review_feedback_for_optimization`：raw 为无信息兜底且同编号
+    structured 存在时改注入结构化渲染；raw 有实质内容时行为不变；
+    raw 缺失或无 structured 时维持旧行为（空串/兜底注入）。
+- 实测：bsv 注入块 155B→2391 字符（7 条带严重度/章节/指令的实质
+  issue）；其余 4 课题注入内容与此前完全一致（raw 正文路径）。
+- 测试：`test_feedback_injection.py` 新增 3 场景 7 断言（兜底 raw +
+  structured → 结构化渲染 / 实质 raw 优先不被抢位 / 兜底 raw 无
+  structured → 维持旧行为）。
+- 验证：`self_test --module` 1047/1047 全绿（+7）。
+
 ## v6.9.41 - 2026-08-23 score_history 遍次隔离 + 退回对比报告（全路径学习 P0/P1）
 
 背景：审核退回清零 rounds/job 但从不清理 score_history，多遍数据混叠在

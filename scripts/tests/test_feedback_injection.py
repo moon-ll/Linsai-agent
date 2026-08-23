@@ -55,6 +55,12 @@ class FeedbackInjectionTests(TestSuite):
         fb_dir.mkdir(parents=True, exist_ok=True)
         (fb_dir / f"feedback-{num}-raw.md").write_text(text, encoding="utf-8")
 
+    def _write_structured(self, proposal_id: str, num: int, data):
+        fb_dir = self.tmp_root / "research_proposals" / "optimizing" / proposal_id / "06_feedback"
+        fb_dir.mkdir(parents=True, exist_ok=True)
+        (fb_dir / f"feedback-{num}-structured.json").write_text(
+            json.dumps(data, ensure_ascii=False), encoding="utf-8")
+
     def run_tests(self):
         load = self.fa_mod.load_review_feedback_for_optimization
         pid = "test-proposal-001"
@@ -94,6 +100,58 @@ class FeedbackInjectionTests(TestSuite):
             'timeout=480' in src and 'timeout=120' not in src.split("_structure_feedback")[1][:3000],
             "_structure_feedback 派 writer 超时 ≥480s（旧 120s 必超时）",
         )
+
+        # 7. v6.9.42 兜底回退：raw 为无信息通用话术 + structured 存在
+        #    → 注入结构化意见渲染（bsv 2026-08-23 实证：raw 155B 兜底、
+        #    structured 8.6KB 实质意见，旧逻辑注入零信息）
+        pid3 = "test-proposal-003"
+        self._write_feedback(
+            pid3, 3,
+            "# 人工审核反馈（第3次）\n\n**时间**: x\n**结论**: major_revision\n\n---\n\n"
+            "用户审核不通过，请根据审核意见修改。",
+        )
+        self._write_structured(pid3, 3, {
+            "verdict": "major_revision",
+            "overall_comment": "物理基线叙事不足",
+            "issues": [
+                {"section": "立项依据", "severity": "high",
+                 "description": "1.2.2 节是数据堆砌缺叙事",
+                 "instruction": "每个数据点嵌入一句话并点出对 Q1 的意义"},
+                {"section": "研究方案", "severity": "critical",
+                 "description": "技术路线与科学问题脱节",
+                 "instruction": "补 Q1-Q4 映射表"},
+            ],
+        })
+        block7 = load({"proposal_id": pid3, "human_feedback_count": 3})
+        self.assert_true("结构化审核意见" in block7, "兜底 raw 时注入结构化渲染块")
+        self.assert_true("数据堆砌缺叙事" in block7, "结构化渲染含 issue 描述")
+        self.assert_true("补 Q1-Q4 映射表" in block7, "结构化渲染含 issue 指令")
+        self.assert_true("[critical]（研究方案）" in block7, "渲染保留严重度与章节")
+        self.assert_true("用户审核不通过，请根据审核意见修改" not in block7,
+                         "通用兜底话术不再进入注入块")
+
+        # 8. raw 有实质内容时优先 raw（structured 存在也不抢位）
+        pid4 = "test-proposal-004"
+        self._write_feedback(pid4, 1, "## 审核退回意见\n\n参考文献排序必须按出现顺序修复。")
+        self._write_structured(pid4, 1, {
+            "verdict": "major_revision",
+            "overall_comment": "结构化兜底不应出现",
+            "issues": [{"severity": "low", "description": "不应注入此条"}],
+        })
+        block8 = load({"proposal_id": pid4, "human_feedback_count": 1})
+        self.assert_true("参考文献排序" in block8 and "不应注入此条" not in block8,
+                         "实质 raw 优先，结构化仅作兜底")
+
+        # 9. 兜底 raw + 无 structured → 保持旧行为（注入 raw 不崩溃）
+        pid5 = "test-proposal-005"
+        self._write_feedback(
+            pid5, 2,
+            "# 人工审核反馈（第2次）\n\n**结论**: major_revision\n\n---\n\n"
+            "用户审核不通过，请根据审核意见修改。",
+        )
+        block9 = load({"proposal_id": pid5, "human_feedback_count": 2})
+        self.assert_true(block9 != "" and "历史人工审核反馈" in block9,
+                         "无 structured 兜底时维持旧行为非空返回")
 
 
 if __name__ == "__main__":

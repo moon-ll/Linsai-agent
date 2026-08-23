@@ -335,6 +335,69 @@ def _append_session_summary_to_feedback(feedback_path: Path, session_id: str) ->
         pass
 
 
+# v6.9.42: Web 审核路由在 reason 为空时写入的通用兜底文本（web_routes_system.py
+# 两处 `reason or "用户审核不通过，请根据审核意见修改。"`）——该文本不含任何
+# 可执行意见，注入 critic/writer prompt 属零信息噪声
+_GENERIC_FEEDBACK_TEXT = "用户审核不通过，请根据审核意见修改。"
+
+
+def _is_contentless_feedback(text: str) -> bool:
+    """v6.9.42: 判断提取后的反馈正文是否为无信息兜底文本。
+
+    触发场景（bsv 实证 2026-08-23）：Web 审核提交 reason 为空但携带
+    structured_feedback 时，raw 文件仅含通用兜底话术，实质意见全部
+    落在 feedback-{N}-structured.json——注入 raw 等于零信息，且该课题
+    多遍天花板纹丝不动（v6.9.41 对比报告互证）。
+    """
+    body_lines = []
+    for ln in (text or "").splitlines():
+        s = ln.strip()
+        if not s or s.startswith(("#", "**", "---")):
+            continue
+        body_lines.append(s)
+    body = "".join(body_lines)
+    if not body:
+        return True
+    # 仅精确匹配 Web 路由的通用兜底话术（允许前后 ≤10 字符冗余）——
+    # 不做短文本一刀切，简短但实质的意见（如"参考文献未排序"）不受影响
+    return _GENERIC_FEEDBACK_TEXT in body and len(body) <= len(_GENERIC_FEEDBACK_TEXT) + 10
+
+
+def _render_structured_feedback(path: Path, feedback_num: int) -> str:
+    """v6.9.42: 将 feedback-{N}-structured.json 渲染为可注入的意见文本。
+
+    结构化文件由 submit_feedback → _structure_feedback（writer profile）
+    生成：{verdict, overall_comment, issues: [{section, severity,
+    description, instruction, ...}]}。渲染保留严重度/章节/描述/指令，
+    上限 8 条防止 prompt 膨胀。
+    """
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except Exception:
+        return ""
+    if not isinstance(data, dict):
+        return ""
+    issues = data.get("issues") or []
+    overall = (data.get("overall_comment") or "").strip()
+    if not issues and not overall:
+        return ""
+    parts = [f"（第{feedback_num}次结构化审核意见）结论: {data.get('verdict', '')}"]
+    if overall:
+        parts.append(f"总体评价: {overall[:300]}")
+    for i, iss in enumerate(issues[:8], 1):
+        if not isinstance(iss, dict):
+            continue
+        sev = str(iss.get("severity", "")).strip()
+        sec = str(iss.get("section", "")).strip()
+        desc = str(iss.get("description") or "").strip()
+        instr = str(iss.get("instruction") or "").strip()
+        line = f"{i}. [{sev}]" + (f"（{sec}）" if sec else "") + f" {desc[:300]}"
+        if instr:
+            line += f" → {instr[:200]}"
+        parts.append(line)
+    return "\n".join(parts)
+
+
 def load_review_feedback_for_optimization(
     prop_state: Dict[str, Any],
     proposal_id: str = "",
@@ -373,17 +436,32 @@ def load_review_feedback_for_optimization(
         if not feedback_dir.exists():
             continue
         raw_file = feedback_dir / f"feedback-{feedback_count}-raw.md"
+        extracted = ""
         if raw_file.exists():
             text = raw_file.read_text(encoding="utf-8")
             # 提取审核对话摘要部分
             if "## 审核对话摘要" in text:
-                summary_part = text[text.find("## 审核对话摘要"):]
-                lines.append(summary_part[:2000])
-                break
+                extracted = text[text.find("## 审核对话摘要"):][:2000]
             else:
                 # 使用完整反馈（截断）
-                lines.append(text[:1500])
-                break
+                extracted = text[:1500]
+
+        # v6.9.42: raw 为无信息兜底文本时回退到同编号结构化意见——
+        # bsv 实证：raw 仅 155B 通用话术而 structured 含 8.6KB 实质
+        # issue 清单，旧逻辑注入零信息致审核反馈闭环对该课题失效
+        if _is_contentless_feedback(extracted):
+            structured_file = feedback_dir / f"feedback-{feedback_count}-structured.json"
+            if structured_file.exists():
+                rendered = _render_structured_feedback(structured_file, feedback_count)
+                if rendered:
+                    return "\n".join([
+                        "\n\n【历史人工审核反馈（请避免同类问题）】\n",
+                        rendered,
+                    ])
+
+        if extracted:
+            lines.append(extracted)
+            break
 
     # v6.9.26: 旧判断 len(lines) > 2 永假（lines 最多含 header+1 个反馈
     # 共 2 个元素），函数自引入起恒返回空串——"审核反馈闭环"从未生效。
