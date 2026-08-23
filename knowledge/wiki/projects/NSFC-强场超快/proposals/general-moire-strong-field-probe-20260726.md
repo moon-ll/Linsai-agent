@@ -1,8 +1,8 @@
 ---
-title: "反演探针：从均匀体系到莫尔自由度的扩展瓶颈。** HHG 反演材料参数的研究已在均匀单层/双层体系中取得重要进展，为莫尔体系的反演迁移了方法学基础，但也暴露了向莫尔自由度扩展的根本困难。"
+title: "general-moire-strong-field-probe-20260726"
 type: "proposal"
 created: "2026-08-02T06:02:42Z"
-updated: "2026-08-22T06:00:22Z"
+updated: "2026-08-23T16:46:50Z"
 tags: []
 related: []
 source_raw: ""
@@ -12,19 +12,19 @@ project: ["NSFC-强场超快"]
 proposal_id: "general-moire-strong-field-probe-20260726"
 status: "optimizing"
 project_type: "general"
-optimization_rounds: 3
+optimization_rounds: 4
 last_score: 0.69
-synced_at: "2026-08-22T06:00:22Z"
+synced_at: "2026-08-23T16:46:50Z"
 ---
 
-# 反演探针：从均匀体系到莫尔自由度的扩展瓶颈。** HHG 反演材料参数的研究已在均匀单层/双层体系中取得重要进展，为莫尔体系的反演迁移了方法学基础，但也暴露了向莫尔自由度扩展的根本困难。
+# general-moire-strong-field-probe-20260726
 
 **课题 ID**：`general-moire-strong-field-probe-20260726`  
 **项目类型**：general  
 **生命周期状态**：优化中  
-**优化轮次**：3  
+**优化轮次**：4  
 **当前分数**：0.69  
-**同步时间**：2026-08-22
+**同步时间**：2026-08-23
 
 ## 核心问题
 
@@ -50,7 +50,7 @@ synced_at: "2026-08-22T06:00:22Z"
 
 - 处于 **优化中** 阶段
 - 最后得分：0.69
-- 累计对抗轮次：3
+- 累计对抗轮次：4
 
 <!-- linsai-wikilinks -->
 ## 关联概念

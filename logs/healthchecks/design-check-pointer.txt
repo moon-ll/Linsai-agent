@@ -1,7 +1,7 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-24 00h 健康检查（**第六轮收官 #13/#14/#15 全正常**：#13 round 首维度 + 链序 7/8/-1 在位（各课题 pending 单轮次无混排，order-param r7 链 idea_review(-1) 先于 critic 待周一执行）→ 正常；#14 全局 stale 清理在时段检查前无条件 + 轮次完成 break 在位（周五 211 次启动实证，让出事件至 08-21 10:01，唯一 stale 告警为 08-05 旧属性错误已修复）→ 正常；#15 降级路径 round_num_fallback=job.get("round") 在位、全日志 0 触发属兜底预期 → 正常；**运行时 6 stalled 全为软卡死时代+周末暂停遗留（周六/周日调度器 0 次启动属设计行为），周一 00:30 首时段为 v6.9.40 修复后首个验证窗口**；v6.9.42 审查无新缺陷（行为矩阵完备，raw 缺失+结构化存在为行为改进）；1047/1047 全绿；17 cron 零缺失）
-完整报告：logs/healthchecks/healthcheck-2026-08-24-00h.md
+最后更新：2026-08-24 04h 健康检查（**第七轮开启 #1/#2/#3 完成**：#1 三要素+当日 02:15 注入实证→正常；#2 三要素在位但 moire rationale deltas[-0.028,-0.04] 超阈再证不可达→维持潜在死代码；#3 controller L275-307 三口径+03:05 order-param r7 required 回补建链 0.78 通过实证→正常（备忘 7 周一验证窗口兑现）；**08-24 为周一非周日**（差点误报"周末调度违规"，weekend cron last_run 交叉验证判定）；moire critic 2×900s 超时 attempts=3 failed，06:00 repair 自愈在位；1047/1047 全绿；17 cron 零缺失；看板自愈 6→8 兑现；无关键缺陷无修复项）
+完整报告：logs/healthchecks/healthcheck-2026-08-24-04h.md
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：
@@ -28,6 +28,8 @@
 21. `/logs/` 整体在 .gitignore（L66）——健康检查报告 md 仅落盘不入库，健康检查提交只含本 pointer 文件（00h/04h 实证；12h/16h 起含知识库同步产物一并提交）
 22. **v6.9.41 遍次字段**：prop_state 新增 `pass_number`（当前遍计数）与 `score_history_archive`（[{pass, returned_at, reason, entries}]，FIFO 10 遍）；退回时归档清空当前 score_history。评估课题历史时当前 sh 只含本遍数据，跨遍分析须读 archive（16h 迁移对账 8/8 零丢失）
 23. **score_history 为每轮×5章节条目**（executor.py L1037 逐章节追加，约 5-7 条/轮）——任何"按轮"分析必须先按 round 键聚合，直接取 [-N:] 是条目级窗口（16h #7 粒度发现根因）
+24. **星期判定必须核实日历，勿凭直觉**（04h 教训：差点把周一调度误报为"周末 worker 暂停被违反"）——交叉验证法：hermes cron 注册表中 weekend-reflection（0 9 * * 0）与 weekend-input（0 9 * * 6）的 last_run/next_run 直接标定周六/周日锚点，micro-scheduler next_run 落在当天即说明当天属 1-5
+25. **agent-scores.json 顶层即 writer/critic 两键**（无 scores 嵌套，读 scores.get('scores') 会拿到整个文件、二次 .get 才到 role）——role 对象含 score/initial_score/history(50 条有界)/prohibition_violations/updated_at；全局 score 结算闭环验证法：score 差值应精确等于相邻 delta（04h 实证 44.3−8.0=36.3 吻合 moire r4）；job 失败原因字段是 last_error 非 error，error_history 仅在依赖链重试时归档 last_error（非每次失败都记录）
 
 【轮换表 15 项检查进度】
 第一轮（1-15 全覆盖，08-15 04h 收官）
@@ -46,17 +48,21 @@
 
 **第六轮（1-15）于 08-24 00h 收官；第七轮自 #1 起。**
 
+第七轮（08-24 04h 进行中）：
+- **#1（04h：optimize.py _load_cross_proposal_exemplar 三要素齐（≥0.75 不接收 / 峰值≥0.70 供样 / 全局 _lifecycle.json 源）+ 当日 02:15:20 运行时注入（moire rationale ← order-param 峰值 0.81/当前 0.69）→ 正常）**｜**#2（04h：L116-148 [-12:]/≥6条/3delta 全 |d|<0.01 在位；运行时新反证 moire rationale deltas[-0.028,-0.04] 与 references[-0.065,0.07] 均超阈、order-param scheme[0.04,0.02] 超阈 → 维持潜在死代码待人工裁决，若激活需放宽阈值至 ≥0.03 或按轮聚合（联动 #7 裁决））**｜**#3（04h：controller.py L275-307 三口径齐（round1 前置 + passed 跳过 + required 回补）+ 03:05:28 order-param r7 required=True 回补建链实证——idea_review 前置于 critic、attempt 1 score 0.78≥0.70 通过后续链 → 正常；退回重触发路径首次真实闭环）**
+
 【下次从这里继续】
-1. **第七轮设计轮换开启：从 #1 重新开始**（#1 跨课题范例注入 → #2 对抗评审维度轮换 → #3 研究设想质量门槛，每次 2-3 项依次推进；周一 00:30 后有新运行时数据，#1 的注入留痕（v6.9.3 起 INFO 日志）可作当日证据）
-1a. 看板自愈确认（周一随调度器首跑）：system-kanban current.proposals_in_optimizing 应 6→8（new-idea/attosecond 周六注册晚于调度器最后一次运行）
+1. **第七轮继续：从 #4 起**（#4 Agent 分数奖惩闭环 → #5 Prompt 优化器正反馈 → #6 P0 跨轮持久化，每次 2-3 项依次推进）；04h 已顺带核实 writer.score 结算闭环（44.3−8.0=36.3 精确吻合 moire r4 delta，history 50 条有界）——#4 静态复查可从简，重点核 monitor 完成后的奖惩写入
+1a. 看板自愈确认：✅ 已兑现（04h 核实 proposals_in_optimizing=8）
 2. **v6.9.42 生效观察（周一重点）**：bsv 下一轮优化的 critic/writer prompt 应含"（第3次结构化审核意见）"渲染块（7 项 issue），观察 writer 是否对结构化 issue 产生实质响应——这是 v6.9.41"注入未产生边际效果"结论前置条件补齐后的首个验证窗口；若天花板仍纹丝不动，问题收敛到 writer 执行力/门槛拦截
 3. **v6.9.40 生效观察（周一重点）**：微调度器恢复后 quantum-geometry（r1 26/29）/ berry（r2 12/25）应跨时段保持焦点直至轮次完成，软卡死 WARNING 应仅在 done 真冻结时出现——这是并发修复（fbddfbc）的首个验证窗口
 4. **周一升级判定（重点）**：停滞四课题 berry 95h / quantum-geometry 88h / key-transient 87h / moire 65h（20h 口径，key-transient 仅 6/25）——若周一 22:30 后仍零推进，升级排查结构性饥饿（8 课题 vs 4 时段/日）；注意 v6.9.40 消除的是"轮中误切"，真饥饿（时段总量不足）需另议
-5. **writer 全局分连锁风险（周一重点）**：44.3<50；5 课题 auto-heal 配额未动用；若周一多课题 monitor 完成后连环触发"writer 全局分数低于 50"告警涌入人工队列，需人工裁决惩罚系数/全局-单课题解耦
-6. **v6.9.41 生效观察（下个退回窗口）**：下一次审核退回时应看到 pass_number 推进 + score_history 清空 + return-comparison-pass{N}.md 生成（transitions.py 接线尚无真实退回触发，仅测试覆盖）
-7. **v6.9.37 修复生效观察（周一）**：berry 12 条未解决 P0 应保持未解决并注入 writer prompt（12h 已确认稳定保持）；order-parameter idea_review_required=True 建链应前置 idea_review
-8. **新课题首轮（周一）**：new-idea/attosecond 已建链（08:55 编排各 26 pending）待微调度器启动
-9. 人工裁决清单（累计）：#2 维度轮换口径 / #5 TARGET_PROFILES 覆盖面（缺 pipeline-runner/reviewer）/ 未注册 --module 套件批量注册（8 个）/ kb_metrics 双口径合并 / moire 负反馈字段残留 / bsv 编号倒挂复位根因 / **#7 轮级聚合口径（16h 新增）** / **#9 reflection 侧旧熔断死代码处置（16h 新增）** / **AGENTS.md 0.80→0.85 文档同步（16h 新增）** / **kb-health-weekly 格式翻转双路径兼容（20h 新增观察，暂非缺陷）**
-10. 遗留观察（低优先级）：run_input_compose 单条路由失败不阻断 job 整体 success；idea_generator._generate_proposal_id 无调用方属遗留代码；hermes_memory researcher agent loop 30s 超时维持约 1 次/小时（16h 口径未升级，12 点档密集与并发会话活动相关）
-11. #15 fallback 路径缺专属回归测试（低优先级）
-12. kb_distill 积压回落观察：385→226（16h），20 篇/天档下预计 3-4 个交易日清至低位，回落至稳态后确认告警口径不再回跳
+5. **writer 全局分连锁风险（周一重点）**：04h 口径 score=36.3<50（00:37 随 moire r4 delta -8.0 结算，44.3−8.0 精确吻合，结算闭环正常；role 级 updated_at 字段停在 07-28 属观测性瑕疵不影响判定）；5 课题 auto-heal 配额未动用；若周一多课题 monitor 完成后连环触发"writer 全局分数低于 50"告警涌入人工队列，需人工裁决惩罚系数/全局-单课题解耦
+6. **moire r5-content-critic 自愈观察（04h 新增，06:00/12:00 repair 后核）**：attempts=3 failed（2×900s 超时）、repair_attempts=1 → lc-repair 应重置重试至多 2 次；若 repair 后仍连续超时，人工评估 critic prompt 长度/超时参数（同窗口 order-param r7 critic 亦有 1 次超时，疑 LLM 响应慢的环境因素）
+7. **v6.9.41 生效观察（下个退回窗口）**：下一次审核退回时应看到 pass_number 推进 + score_history 清空 + return-comparison-pass{N}.md 生成（transitions.py 接线尚无真实退回触发，仅测试覆盖）
+8. **v6.9.37 修复生效观察（周一）**：berry 12 条未解决 P0 应保持未解决并注入 writer prompt（✅ 04h 核实 12 条 round_resolved=None 跨 90h+ 稳定）；order-parameter required 建链前置 idea_review（✅ 04h 兑现：03:05 执行 score 0.78 通过）
+9. **新课题首轮（周一）**：new-idea/attosecond 已建链（08:55 编排各 26 pending）待微调度器启动（04h 口径仍 0/26，8 课题 vs 4 时段/日轮转中）
+10. 人工裁决清单（累计）：#2 维度轮换口径 / #5 TARGET_PROFILES 覆盖面（缺 pipeline-runner/reviewer）/ 未注册 --module 套件批量注册（8 个）/ kb_metrics 双口径合并 / moire 负反馈字段残留 / bsv 编号倒挂复位根因 / **#7 轮级聚合口径（16h 新增）** / **#9 reflection 侧旧熔断死代码处置（16h 新增）** / **AGENTS.md 0.80→0.85 文档同步（16h 新增）** / **kb-health-weekly 格式翻转双路径兼容（20h 新增观察，暂非缺陷）**
+11. 遗留观察（低优先级）：run_input_compose 单条路由失败不阻断 job 整体 success；idea_generator._generate_proposal_id 无调用方属遗留代码；hermes_memory researcher agent loop 30s 超时维持约 1 次/小时（16h 口径未升级，12 点档密集与并发会话活动相关）；agent-scores role 级 updated_at 不随 delta 刷新（04h 新增，观测性瑕疵）
+12. #15 fallback 路径缺专属回归测试（低优先级）
+13. kb_distill 积压回落观察：385→226（16h），20 篇/天档下预计 3-4 个交易日清至低位，回落至稳态后确认告警口径不再回跳

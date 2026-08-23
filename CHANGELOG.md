@@ -1,5 +1,21 @@
 # 变更记录
 
+## v6.9.43 - 2026-08-24 04h 健康检查（第七轮设计抽查 #1-#3，无缺陷无修复）
+
+- 运行时：周一调度恢复正常（08-24 为周一非周日，经 weekend cron
+  last_run 交叉验证；微调度器 #0/#1 时段正常轮转，moire 卡住按设计
+  跳过切 order-parameter）；cron 17/17；回归 1047/1047 全绿；
+  看板自愈 6→8 兑现。
+- 设计抽查：#1 范例注入正常（02:15 moire←order-param 注入实证）；
+  #2 维度轮换维持潜在死代码（moire rationale deltas[-0.028,-0.04]
+  超阈再证不可达，待人工裁决）；#3 idea_review 正常（03:05
+  order-param r7 required 回补建链 0.78 通过，退回重触发首次闭环）。
+- 观察项：moire r5-content-critic 2×900s 超时 attempts=3 failed，
+  06:00 repair 自愈在位；writer.score=36.3 结算闭环验证正常
+  （44.3−8.0 精确吻合 moire r4 delta）。
+- 随附提交周一 00:07 后调度器产物（moire 轮 5 章节/评审文件、
+  order-param idea-review-r7、wiki 同步时间戳）与 pointer 更新。
+
 ## v6.9.42 - 2026-08-23 审核反馈注入零信息修复（兜底文本回退结构化意见）
 
 背景：20h 健康检查第三层 #10 抽查发现 bsv 课题反馈闭环实际失效——
