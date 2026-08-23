@@ -2,9 +2,9 @@
 title: "RABBITT"
 type: "methods"
 created: "2026-06-17T12:40:33Z"
-updated: "2026-08-23T01:00:46Z"
+updated: "2026-08-23T05:00:31Z"
 tags: ["表征方法", "阿秒", "干涉", "#type/method", "#topic/HHG", "#status/mature"]
-related: ["FROG", "Lewenstein模型", "三步模型"]
+related: ["FROG", "Lewenstein模型", "三步模型", "相位匹配", "高次谐波产生"]
 source_raw: ""
 growth_stage: "mature"
 confidence: 0.9
@@ -53,4 +53,6 @@ RABBITT（Reconstruction of Attosecond Beating By Interference of Two-photon Tra
 - [[FROG]]
 - [[Lewenstein模型]]
 - [[三步模型]]
+- [[相位匹配]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->
