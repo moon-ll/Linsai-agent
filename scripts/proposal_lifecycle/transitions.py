@@ -94,6 +94,32 @@ class TransitionsMixin:
                     f"[{proposal_id}] 审核退回，归零 optimization_rounds，"
                     f"归档清理旧轮次 job {len(old_jobs)} 个"
                 )
+            # v6.9.41: score_history 按遍次归档（P0）+ 退回对比报告（P1）。
+            # 此前退回只清 rounds/job 不清 score_history，第二遍的 r1-r3 与
+            # 第一遍的 r1-r8 混叠在同一数组（08-23 实测多课题两遍叠加），
+            # 轨迹分析/毕业报告全建立在污染数据上。归档后生成"本遍 vs
+            # 上遍"对比报告，回答"反馈注入为什么没打破天花板"。
+            try:
+                from proposal_lifecycle.pass_history import (
+                    archive_pass_history,
+                    generate_return_comparison,
+                )
+                archived = archive_pass_history(prop_state, reason=reason)
+                if _log:
+                    _log.info(
+                        f"[{proposal_id}] 第 {prop_state.get('pass_number', 1) - 1} 遍 "
+                        f"score_history 已归档（{archived} 条），开启第 "
+                        f"{prop_state.get('pass_number', 1)} 遍"
+                    )
+                # 对比报告：有上一遍数据才生成。本分支在目录移动之后执行，
+                # to_dir 即课题新位置，报告落盘其 05_review/ 子目录。
+                report = generate_return_comparison(
+                    proposal_id, prop_state, to_dir)
+                if report and _log:
+                    _log.info(f"[{proposal_id}] 退回对比报告: {report}")
+            except Exception as e:
+                if _log:
+                    _log.warning(f"[{proposal_id}] 遍次归档/对比报告失败（不阻断退回）: {e}")
 
         self._set_proposal_state(proposal_id, prop_state)
 

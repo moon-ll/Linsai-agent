@@ -1,5 +1,35 @@
 # 变更记录
 
+## v6.9.41 - 2026-08-23 score_history 遍次隔离 + 退回对比报告（全路径学习 P0/P1）
+
+背景：审核退回清零 rounds/job 但从不清理 score_history，多遍数据混叠在
+同一数组（08-23 实测 5 个课题混叠）。迁移后真相：课题实为第 3-5 遍重跑
+（非"第一轮卡 27 天"），四课题均触顶 0.84-0.86 被人工否决，且多课题
+第 2/3 遍天花板完全相同（bsv 0.86→0.86、quantum-geometry 0.86→0.86）
+——审核意见注入未产生边际效果。任何轨迹分析、毕业报告、跨课题学习
+此前均建立在污染数据上。
+
+- `proposal_lifecycle/pass_history.py`（新模块）：
+  - `archive_pass_history`：退回时把 score_history 归档到
+    `score_history_archive`（[{pass, returned_at, reason, entries}]，
+    FIFO 保留 10 遍），当前清空，`pass_number` 推进。
+  - `generate_return_comparison`：退回对比报告（本遍 vs 上遍）——分数
+    轨迹、天花板移动、模块对抗通过变化、弱维度卡点（是否响应）、综合
+    诊断（"天花板未动+通过无增长+卡点未变 → 反馈注入未产生边际效果"
+    直接指向 writer 执行力或门槛拦截问题）。
+  - `migrate_overlaid_history`：存量迁移——按 transition_history 的退回
+    时间戳把混叠条目切分成遍（幂等）。
+- `transitions.py`：退回分支接线归档 + 对比报告（异常不阻断退回）。
+- 存量迁移已执行：5 个课题切出 2-4 个历史遍，pass_number 补齐（备份
+  `/tmp/_lifecycle_backup_v6.9.41.json`）。
+- 附带修复：遍次隔离消除了跨遍分数比较污染——旧数据下第二遍 r1 的
+  分数会与第一遍 r8 比较，"连续下降→暂停"判定曾被跨遍噪声误触发。
+- 测试：`test_pass_history.py` 21 断言（归档隔离/对比报告/迁移切分/
+  transitions 集成守卫——归档须在状态落盘前）；注册进 `--module` 清单。
+- 验证：`self_test --module` 1040/1040 全绿；真实数据演示报告
+  （bsv pass3）输出正确的天花板/通过/卡点三段诊断。
+- 后续（P2，defer）：跨课题成功模式提炼等真 approve 样本 ≥3 后接入。
+
 ## v6.9.40 - 2026-08-23 软卡死误判导致课题轮次中途切换（job 级推进信号缺失）
 
 背景：用户实测课题优化总在一轮未完成时被切换，轮次推进不连贯。运行时
