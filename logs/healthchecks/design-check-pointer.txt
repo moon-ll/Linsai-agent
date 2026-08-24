@@ -1,7 +1,7 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-25 00h 健康检查（**第八轮启动：#1/#2/#3 完成**（#1 范例注入当日 5 次运行时实证 → 正常；#2 轮级聚合复核仍无 3-delta 全 |d|<0.01 窗口 → 维持潜在死代码待裁决；#3 new-idea 拦截-修复-放行当日闭环（第 1 次 <0.70 拦 → 修复 → 22:58 BJ 第 2 次 0.74 通过进优化链）→ 正常）；**确认 Bug 2 个已修复提交**：v6.9.49 should_auto_unlock 死角（order-param r7-references-critic attempts=1/repair_attempts=3 三路恢复全死实证，成因系统性：repair 2→3 清零 attempts 后单败即死角；修复=移除 attempts 达上限门槛）+ v6.9.50 AI 白名单长词优先（短词遮蔽泄漏 1 次"同时"，20h 标记项兑现）；回归 1106/1106（+3 新基线）；**kt 结构性饥饿未确证**：qg 完成后 kt 20:20/20:40 BJ 获得焦点（22:30 判定线前已获机会）；berry r2-scheme-critic 双上限今晚 ~18:50 BJ 解锁，order-param 死角 job 满最后失败 24h 后经 repair cron 解锁——两者为 should_auto_unlock 下两个验证样本；4 条 critic 超时异常（kt/moire/order-param/berry）继续为超时参数裁决积累论据）
-完整报告：logs/healthchecks/healthcheck-2026-08-25-00h.md
+最后更新：2026-08-25 04h 健康检查（**第八轮推进：#4/#5/#6 完成**（#4 分数奖惩闭环静态+运行时双确认 → 正常；#5 清理正常（库存 11 条有界、08-24 产出 2 条新鲜）+ TARGET_PROFILES 5/7 偏差维持；#6 P0 跨轮持久化 v6.9.50 后行号重锚定（critic L1063/writer L1780/跨章节 L1562+L1606-1622）+ berry 12 未解决跨 95h 稳定 → 正常）；**api_idle_spin(high) 专项排查：5 个 <30s job 全部设计内 no-op**（lit_read/lit_note 无 arxiv_id 跳过 + full_review gap 为 {"gaps":[]} → agent 秒回 []），非伪成功，哨兵工作正常；回归 1106/1106 全绿；无新缺陷、无修复提交）
+完整报告：logs/healthchecks/healthcheck-2026-08-25-04h.md（上一轮：healthcheck-2026-08-25-00h.md）
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：
@@ -31,7 +31,9 @@
 24. **星期判定必须核实日历，勿凭直觉**（04h 教训：差点把周一调度误报为"周末 worker 暂停被违反"）——交叉验证法：hermes cron 注册表中 weekend-reflection（0 9 * * 0）与 weekend-input（0 9 * * 6）的 last_run/next_run 直接标定周六/周日锚点，micro-scheduler next_run 落在当天即说明当天属 1-5
 25. **agent-scores.json 顶层即 writer/critic 两键**（无 scores 嵌套，读 scores.get('scores') 会拿到整个文件、二次 .get 才到 role）——role 对象含 score/initial_score/history(50 条有界)/prohibition_violations/updated_at；全局 score 结算闭环验证法：score 差值应精确等于相邻 delta（04h 实证 44.3−8.0=36.3 吻合 moire r4）；job 失败原因字段是 last_error 非 error，error_history 仅在依赖链重试时归档 last_error（非每次失败都记录）
 26. **`_is_weekend()` 已锚定 BUSINESS_TZ（v6.9.44，lifecycle/utils.py）**：修复前用 UTC weekday——BJ 周一 00:00-08:00 误判周末（repair 跳过 failed job 重试，"修复扫描 weekend=True 出现在周一凌晨"即此 Bug 特征签名，已绝迹）；函数现接受可选 now 参数（带时区 aware 表达，归一北京时间再判定），测试注入用 `datetime(...,tzinfo=timezone(timedelta(hours=8)))`；关联遗留：weekend_orchestrator.py L180 run_weekly_mode 仍 UTC（cron 路径不可达误判窗口，低风险待裁决）
-27. **手动修复入口**：`python3 scripts/proposal_lifecycle.py --repair [--dry-run]`（幂等，dry-run 先预览 retry 列表）；repair 对 failed job 重置语义：status→pending、attempts→0、repair_attempts+1（上限 3，与 attempts 上限共同构成双上限终态，之后 should_auto_unlock 满 24h 自动解锁一次）；v6.9.44 后周一凌晨（旧误判窗口）触发 repair 也能正常走工作日分支；**should_auto_unlock v6.9.49 起仅要求 repair_attempts 达上限（attempts 不再作门槛——repair 2→3 会清零 attempts，此后单败即落入 attempts=1/repair_attempts=3 死角，order-param r7-references-critic 实证三路恢复全死；24h 冷却+终生 1 次护栏不变）**
+27. **手动修复入口**：`python3 scripts/proposal_lifecycle.py --repair [--dry-run]`（幂等，dry-run 先预览 retry 列表）；repair 对 failed job 重置语义：status→pending、attempts→0、repair_attempts+1（上限 3，与 attempts 上限共同构成双上限终态，之后 should_auto_unlock 满 24h 自动解锁一次）；v6.9.44 后周一凌晨（旧误判窗口）触发 repair 也能正常走工作日分支；**should_auto_unlock v6.9.49 起仅要求 repair_attempts 达上限（attempts 不再作门槛——repair 2→3 会清零 attempts，此后单败即落入 attempts=1/repair_attempts=3 死角，order-param r7-references-critic 实证三路恢复全死；24h 冷却+终生 1 次护栏不变；04h 复核：全仓唯一调用方 orchestrator.py:426，语义安全）**
+28. **api_idle_spin 哨兵定性口径（04h 实证）**：信号指向 <30s done job 时，先查课题 `02_literature/targeted-research/lit-gap-*.md` 内容 + linsai.log 的"lit_search agent loop 原始输出"行再定性——lit_read/lit_note 对无 arxiv_id 报告 0s 跳过、lit_search 设计上"agent 成功即 success（0 篇≠失败，executor.py L644）"均属正常 no-op；full_review 章节 gap-analysis 可为 `{"gaps": []}`（整篇一致性无文献缺口），此时空关键词→agent 秒回 `[]` 亦正常。伪成功判别锚点：agent 输出含 API 错误特征（v6.8.46 防线）或耗时与输出量严重背离
+29. **lit-gap/gap-analysis 文件按时间新旧行隐式 section 作用域**：executor 只取 `sorted(...glob, reverse=True)[0]`（最新一份），同轮多 section 靠执行时序保证正确性——链序为 critic→gap_identify→lit_search→lit_read→lit_note→writer（critic 先行评审旧稿，writer 后修订），新课题首见"critic 早于 writer 完成"属正常勿误报
 
 【轮换表 15 项检查进度】
 第一轮（1-15 全覆盖，08-15 04h 收官）
@@ -64,17 +66,18 @@
 
 第八轮（08-25 00h 进行中）：
 - **#1（00h：optimize.py _load_cross_proposal_exemplar 三要素齐（<0.75 接收/峰值≥0.70 供样/全局 _lifecycle.json 源）+ 08-24 当日 5 次注入（moire/attosecond ← order-param 峰值 0.81）→ 正常）**｜**#2（00h：静态 [-12:]/≥6条/3delta 全 |d|<0.01 在位；按轮聚合（备忘 #23 口径）复核全部课题无满足窗口（moire rationale[-0.028,-0.04]/references[-0.065,0.07]、order-param scheme[0.04,0.02] 均超阈）→ 维持潜在死代码待人工裁决，与 #7 轮级聚合联动）**｜**#3（00h：controller 三口径 + executor 三档在位；new-idea 当日完整闭环实证（第 1 次 <0.70 拦截 → writer 修复 → 22:58 BJ 第 2 次 0.74≥0.70 放行进优化链），并证设想非不可救（回应 20h 观察 #9）→ 正常）**
+- **#4（04h：scoring.py（scripts/adversarial/ 下，非 lifecycle/）L227/233/313-354 scores[role] 顶层直连 + history[-50:]/violations[-20:] 有界 + 全仓无 ["agents"] 嵌套残留（唯一出现为 optimize.py L1104 旧 bug 注释）→ 正常；运行时 writer 72.4（36.3→67.8→72.4）/critic 114.85，近 3 条 delta 跨课题 round_ref 闭环（attosecond r1 +14.4/qg r1 +17.1/bsv r1 +4.6））**｜**#5（04h：_cleanup_old_suggestions L250 在 auto 路径 L1319 无条件调用 + 库存 11 条（applied 10/rejected_guard 1，08-18~08-24，昨日 14:00 cron 产出 2 条）有界新鲜 → 清理正常；TARGET_PROFILES L59 仍 5/7 缺 pipeline-runner/reviewer → 偏差维持待人工裁决）**｜**#6（04h：v6.9.50 后行号重锚定——critic 注入 optimize.py L1063（exclude_resolved=True）/writer 注入 L1780（False 含最近 3 条已解决）/跨章节权限 L1562-1568 _allow_cross + L1606-1622 例外条款在位；运行时 berry 40 条 = 12 未解决（全 first_seen r2，0 stale）+ 28 已解决跨 95h 稳定 → 正常）**
 
-**第八轮下一批自 #4 起。**
+**第八轮下一批自 #7 起。**
 
 【下次从这里继续】
-1. **第八轮自 #4 起**（#4 Agent 分数奖惩 → #5 Prompt 优化器正反馈 → #6 P0 跨轮持久化，每次 2-3 项依序推进）。注意 #6 静态行号 08h 已重定位（optimize.py L990/L1657/L1515-1524）；#15 行号 20h 重锚定 executor L1389-1403；**v6.9.50 后 optimize.py 白名单计数区行号再漂（L559 附近长词优先排序）**
+1. **第八轮自 #7 起**（#7 质量天花板检测 → #8 停滞课题检测 → #9 输入端熔断，每次 2-3 项依序推进）。注意 #6 静态行号 04h 已重锚定（v6.9.50 +4 行：critic L1063/writer L1780/_allow_cross L1562/例外条款 L1606-1622）；#4 scoring.py 实际路径为 `scripts/adversarial/scoring.py`（非 lifecycle/ 下）；**v6.9.50 后 optimize.py 白名单计数区行号再漂（L555 附近长词优先排序）**
 1a. 看板自愈确认：✅ 已兑现（04h 核实 proposals_in_optimizing=8）
 2. **v6.9.42 生效观察（16h 更新）**：✅ 注入块已实证生成（bsv 2391 字符结构化渲染）且今晨 04:43 修复后 writer 已消费；**剩余观察点收窄为 writer 响应质量**——bsv critic 近 3 条 0.75→0.67→0.66（expression 0.47 最弱），下一批 critic 分数是定论点；若仍纹丝不动，问题收敛到 writer 执行力/门槛拦截
 3. **v6.9.40 生效观察（周一重点）**：微调度器恢复后 quantum-geometry（r1 26/29）/ berry（r2 12/25）应跨时段保持焦点直至轮次完成，软卡死 WARNING 应仅在 done 真冻结时出现——这是并发修复（fbddfbc）的首个验证窗口
 4. **kt 停滞链（00h 更新）**：✅ 结构性饥饿未确证——qg 完成后 kt 于 20:20/20:40 BJ 获得焦点（22:30 判定线前已获执行机会）；根因链（08-20 04:45 HTTP 429 配额耗尽双失败→repair 重置→队列饥饿 4 天→守卫让出）与"守卫不区分被饿死/真软卡死"设计偏差候选维持观察，看 kt 后续 job 推进数据再定级
-5. **writer 全局分连锁风险（20h 收敛）**：✅ 今日实际兑现 1 次并完整自愈——00:37:32 moire r4 monitor 完成触发"writer 全局分数低于 50"暂停流转 → 01:10:07 24h 冷却期满自动清除 + 策略降级 idea_review_required（v6.9.0 自愈闭环端到端走通）；当前 writer 67.8（36.3→67.8 回升）/critic 117.35，history 各 50 有界。注意 moire auto-heal 配额（每课题 1 次）已消耗；若后续多课题再触发需关注配额耗尽后的连锁表现
-6. **critic 超时与双上限跟踪（00h 更新）**：08:12 重置的 4 job 中 new-idea 已于 22:58 BJ 第 2 次通过（见观察 #9）；order-param r7-references-critic 重跑后再超时，落入 **attempts=1/repair_attempts=3 死角态**（v6.9.49 修复的直接实证，满最后失败 24h 后由 repair cron 解锁）；berry r2-scheme-critic 双上限终态（attempts=3+repair_attempts=3，~18:50 BJ 今晚自动解锁重跑一次）——两者为 should_auto_unlock 新逻辑下首批验证样本。当日 monitor 4 条 critic 超时类异常（kt/moire/order-param/berry），**超时参数人工评估论据增至三条同构实证**（moire r5 2×900s 08-23 + berry r2 2×1200s 08-24 + 本轮 4 条，均 critic 长任务、均疑似 LLM 响应慢）
+5. **writer 全局分连锁风险（04h 更新）**：✅ 持续回升——36.3 → 67.8 → **72.4**（+4.6 来自 bsv r1-monitor 08-24 22:20 BJ），critic 114.85，双双健康区间，连锁风险解除中；history 各 50 有界。moire auto-heal 配额（每课题 1 次）已消耗；若后续多课题再触发需关注配额耗尽后的连锁表现
+6. **critic 超时与双上限跟踪（04h 更新）**：4 个 failed critic job（kt r1/moire r5/berry r2/order-param r7）全部 repair_attempts=3、auto_unlock_count=0——**v6.9.49 新逻辑下全部具备解锁资格**：berry 10:50Z 满 24h → 12:00Z repair 解锁（BJ 今晚 20:00）；kt 12:55Z / moire 13:35Z / order-param 13:55Z 满 → 18:00Z repair 解锁（BJ 08-26 02:00）。**下轮检查应确认 auto_unlock_count=1 且 job 重跑**（order-param 为 v6.9.49 实证样本，解锁即完成修复端到端验证）。超时参数人工评估论据维持三条同构实证 + 本批 4 条（moire r5 2×900s 08-23 + berry r2 2×1200s 08-24 + 08-24 4 条，均 critic 长任务、均疑似 LLM 响应慢）；另 new-idea r1 四次 lit_search 中 2 次 agent loop 失败降级（rationale 00:46 fallback 得 10 篇/scheme 02:31 fallback 0 篇——618+ 已处理论文排尽），scheme 章节 r1 零新文献输入，非阻塞，下轮看 scheme critic 分数边际影响
 7. **v6.9.41 生效观察（下个退回窗口）**：下一次审核退回时应看到 pass_number 推进 + score_history 清空 + return-comparison-pass{N}.md 生成（transitions.py 接线尚无真实退回触发，仅测试覆盖）
 8. **v6.9.37 修复生效观察（周一）**：berry 12 条未解决 P0 应保持未解决并注入 writer prompt（✅ 04h 核实 12 条 round_resolved=None 跨 90h+ 稳定）；order-parameter required 建链前置 idea_review（✅ 04h 兑现：03:05 执行 score 0.78 通过）
 9. **新课题首轮（00h 更新）**：✅ new-idea 质量门槛放行——22:58 BJ 第 2 次尝试 0.74≥0.70 通过，正式进入优化链（0/26 起步）；"设想根本不可救致解锁循环空转"的担忧解除，#3 门槛机制当日完整闭环。attosecond 持续推进（36/55 done）
