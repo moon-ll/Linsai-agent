@@ -274,3 +274,28 @@ XFEL（以 LCLS 为代表）可产生脉宽 500 fs 至亚飞秒、亮度高出�
 **与课题关联**：属于 FROG 类相位重构的深度学习路线，与 Zhu 等人 2026 CNN 备选方案（arXiv:2510.17949）形成技术对比。该方法的扩散模型思路可用于本课题修正算法的神经网络备选路径设计。
 
 **已引用位置**：待定（属于方法学前沿调研）
+
+---
+
+## lit-gap-1787540775（新增，2026-08-24）
+
+**阅读日期**：2026-08-24
+
+**来源**：定向检索（lit-gap-1787540775.md），general-attosecond-streaking-20260822 课题
+
+**核心结论与课题关联**：
+
+| 文献 | 核心结论 | 课题关联 |
+|------|---------|---------|
+| Cousin et al. PRX 2017 [2] | 软X射线水窗能区首次条纹测量，322 as孤立脉冲；揭示FROG-CRAB多通道失效机制（误差>20%） | rationale §1/§2.2 直接支撑，多通道失效问题核心文献 |
+| Duris et al. Nat Photonics 2024 [10] | XFEL高分辨水窗成像，碳K边生物成像 | rationale §1 水窗成像窗口论证 |
+| Zhu et al. Chin Phys B 2026 [13] | CNN自相关图输入反演条纹轨迹，抗噪性强 | rationale §2.4 国内创新（国防科大团队） |
+| Inzani et al. J Phys Photonics 2024 [12] | rACE绝对延迟校准，氩原子24 as精度 | rationale §2.4 近期进展，修正算法备选 |
+| Hutcheson et al. Phys Rev Research 2025 [14] | 氙4d-5p偶极相移动力学分解 | rationale §2.4 偶极相位理解 |
+| 国防科大团队 2023-2024 [15][16][17] | FROG-CRAB/ePIE对比、宽带快速相位反演（71 as） | rationale §3 国内现状 |
+| 曹伟等 华科大 2025 [18] | 桌面型水窗软X射线瞬态吸收装置，>300 eV | rationale §3 国内平台现状 |
+| Wang et al. Phys Rev A 2024 | HHG条纹光谱全光学反演算法 | 方法学手册参考 |
+| 王家灿等 国防科大 2024 | 阿秒脉冲表征技术综述 | rationale §3 引用 |
+| Zhang YC等 西安光机所 2025 | ATAS技术综述，国内阿秒光源布局 | rationale §3 引用 |
+
+**已引用位置**：rationale.md §1/§2.2/§2.4/§3

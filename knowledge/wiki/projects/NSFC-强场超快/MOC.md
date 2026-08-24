@@ -2,13 +2,13 @@
 title: "🗺️ NSFC 强场超快课题"
 type: "moc"
 created: "2026-06-19T00:00:00Z"
-updated: "2026-08-24T02:00:51Z"
-tags: "[\\\\\\\\\\\\\\"MOC\\\\\\\\\\\\\\", \\\\\\\\\\\\\\"NSFC\\\\\\\\\\\\\\", \\\\\\\\\\\\\\"索引\\\\\\\\\\\\\\", \\\\\\\\\\\\\\"强场超快\\\\\\\\\\\\\\", \\\\\\\\\\\\\\"#type/MOC\\\\\\\\\\\\\\", \\\\\\\\\\\\\\"#status/mature\\\\\\\\\\\\\\"]"
-related: "["2503.08052", "Ghimire-Reis", "RABBITT", "TDSE求解器", "["2503.08052", "["Berry曲率", "["Ghimire-Reis", "general-moire-strong-field-probe-20260726", "general-order-parameter-ultrafast-readout-20260727", "北大HHG团队", "固体高次谐波", "带内电流", "带间跃迁", "德鲁德模型", "拓扑绝缘体", "瞬态吸收光谱", "高次谐波产生", "高次谐波产生"]"]"]"]"]"]"]"]"
+updated: "2026-08-24T08:02:19Z"
+tags: "[\\\\\\\\\\\\\\\\"MOC\\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\\"NSFC\\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\\"索引\\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\\"强场超快\\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\\"#type/MOC\\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\\"#status/mature\\\\\\\\\\\\\\\\"]"
+related: "["2503.08052", "Ghimire-Reis", "RABBITT", "TDSE求解器", "["2503.08052", "["Berry曲率", "["Ghimire-Reis", "general-moire-strong-field-probe-20260726", "general-order-parameter-ultrafast-readout-20260727", "北大HHG团队", "固体高次谐波", "带内电流", "带间跃迁", "德鲁德模型", "拓扑绝缘体", "瞬态吸收光谱", "高次谐波产生", "高次谐波产生"]"]"]"]"]"]"]"]"]"
 source_raw: ""
 growth_stage: "mature"
 confidence: "1.0"
-project: "[\\\\\\\\\\\\\\"NSFC-强场超快\\\\\\\\\\\\\\"]"
+project: "[\\\\\\\\\\\\\\\\"NSFC-强场超快\\\\\\\\\\\\\\\\"]"
 ---
 
 # NSFC 强场超快课题知识地图
@@ -19,7 +19,7 @@ project: "[\\\\\\\\\\\\\\"NSFC-强场超快\\\\\\\\\\\\\\"]"
 
 | 课题 | 状态 | 轮次 | 分数 | 版本 | 报告 |
 |------|------|------|------|------|------|
-| attosecond-streaking | 优化中 | 第0轮 | 0.3 | [版本](versions/general-attosecond-streaking-20260822.md) | [报告](reports/general-attosecond-streaking-20260822.md) |
+| attosecond-streaking | 优化中 | 第1轮 | 0.54 | [版本](versions/general-attosecond-streaking-20260822.md) | [报告](reports/general-attosecond-streaking-20260822.md) |
 | berry-mnps3-rashba | 优化中 | 第1轮 | 0.74 | [版本](versions/general-berry-mnps3-rashba-20260816.md) | [报告](reports/general-berry-mnps3-rashba-20260816.md) |
 | bsv-driven-hhg-quantum | 优化中 | 第0轮 | 0.66 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
 | moire-strong-field-probe | 优化中 | 第4轮 | 0.68 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
@@ -79,5 +79,5 @@ raw/papers/ 中标记 project=['NSFC-强场超快'] 的论文：
 - [[拓扑绝缘体]]
 - [[瞬态吸收光谱]]
 - [[高次谐波产生]]
-- [[高次谐波产生"]"]"]"]"]"]"]]]
+- [[高次谐波产生"]"]"]"]"]"]"]"]]]
 <!-- /linsai-wikilinks -->

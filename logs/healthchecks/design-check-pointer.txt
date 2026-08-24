@@ -1,7 +1,7 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-24 12h 健康检查（**第七轮 #7/#8/#9 完成：#7 潜在死代码维持（全 8 课题 score_history 0 条 ≥0.85，最高 0.81，收敛窗口全量不可达；条目级窗口+0.80 文档滞后两项待裁决）/#8 正常（当日 3 条 stalled 真实触发 qg 104h/kt 103h/berry 111h 且三轮飞书通知）/#9 正常（monitor 文件族口径健康静默：08-16 15/08-22 25 actions；reflection 侧死代码维持原判）**；**确认并修复 v6.9.47 Bug：DOI 塞进 arxiv_id 字段致 `_ingest_new_papers` ENOENT**（attosecond r2 lit_search 10 篇丢 8 篇实证，归一化移入 doi_clean 走 doi-{slug} 清洗，+1 回归用例）；回归 1083/1083；13 lc- cron 零缺失；新报告 2 项待裁决：lit_read/lit_note DOI 路径设计缺口、api_idle_spin 对合法跳过误报）
-完整报告：logs/healthchecks/healthcheck-2026-08-24-12h.md
+最后更新：2026-08-24 16h 健康检查（**第七轮 #10/#11/#12 完成：#10 正常（v6.9.42 真实数据闭环验证——bsv feedback_count=3 注入块 2391 字符含"第3次结构化审核意见"+7 issue，今晨 04:43 修复后 writer 已运行；moire/order-param raw 有实质内容正确走 raw 路径）/#11 正常（周日嵌套格式 base_health.health 三指标 0.75/200/2.56，coverage_rate 在 category_coverage 子键——备忘 #12 已修正；kanban 日度口径 04:40Z 新鲜，双口径维持裁决）/#12 正常（trends_rising 5 词当日新鲜，HHG 1140→1249）**；v6.9.47 复核通过（路径闭环+回归在册）；回归 1083/1083；13 lc- cron 零缺失；stalled 收敛 4→2（qg 108h/kt 107h，22:30 升级判定未到）；新增待裁决：DOI 后缀伪 arxiv_id 入库（今日 2 篇实证 s41566-025-01802-1 形态））
+完整报告：logs/healthchecks/healthcheck-2026-08-24-16h.md
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：
@@ -16,7 +16,7 @@
 9. proposal 级 `updated_at` 会被非 job 执行路径刷新（repair 重置/cron 失败记录/stale 清理）——评估真实停滞必须看 job 级 finished_at 最大值（v6.9.31 起 monitor 已改此口径，08-22 00h berry 50h 首次真实触发实证）
 10. **prop_state 中没有 proposal_id 键**（state.py 原样返回 proposals[pid] dict）——任何需要 proposal_id 的加载函数必须显式传参，不能 prop_state.get("proposal_id")（v6.9.35 教训：#10 闭环因此断裂 8 个版本）
 11. 周六凌晨跑健康检查注意日期敏感测试：test_weekend_pipeline 接线用例曾因真实时钟在入口窗口（周六 09:00/14:00/周日 09:00）前必失败（v6.9.34 已注入固定时钟修复；新增类似用例同样要注入时钟）
-12. `kb-health-weekly.json` **单层结构**：顶层 checked_at / health（16 键含三指标）/ derived_overdue / derived_overdue_count——00h 实测顶层 health 直取即可（此前备忘记的 base_health.health 为错误表述，已修正）；三项指标：coverage_rate/week_new/graph_connectivity
+12. `kb-health-weekly.json` 在 `knowledge/.cache/` 下，**格式随写入方翻转：周六顶层单层（顶层 health）/周日嵌套（base_health.health）**——且周日格式中 coverage_rate 位于 `category_coverage` 子键下而非顶层（16h 实测 `d['base_health']['health']['category_coverage']['coverage_rate']`，顶层 .get('coverage_rate') 得 None 勿误报缺失）；三项指标：coverage_rate/week_new/graph_connectivity
 13. `logs/linsai.log` 每日 00:00 轮转——查工作日微调度器/范例注入等运行痕迹要 grep `linsai.log.2026-08-DD` 历史文件；范例注入（v6.9.3 起）与"让出当前时段"均有 INFO 留痕，可直接作运行时证据
 14. **`_build_full_round_jobs` 有副作用**：idea_review_required=True 时顺手清标志（v6.9.36 已在 _compute_actual_round 加快照/恢复隔离）——未来任何"只比较不落盘"的新调用方必须同样隔离，否则降级链再断
 15. **agent-scores 全局分跨课题生效**：writer/critic 分数为全局单份，`check_negative_feedback` 理由 #4（全局分 <50）会对所有课题的 monitor 完成触发告警；auto-heal 每课题仅 1 次配额，全局分长期 <50 可能连环触发涌入人工队列（12h 报告新增观察 #1，待人工裁决）
@@ -56,18 +56,20 @@
 
 - **#7（08-24 12h：静态 completion.py L94-137 三分支在位（收敛 0.85/3轮/<2% + v6.9.16 骤降防误晋级 + 下降/逃生阀）；运行时全量扫描 8 课题 score_history 0 条 ≥0.85（最高 order-param 0.81、qg 0.80）→ 收敛窗口全量不可达，维持潜在死代码；条目级窗口 [-4:]（备忘 #23）+ AGENTS.md 0.80 滞后于 v6.9.27 的 0.85，两项维持待人工裁决）**｜**#8（12h：L290-315 job 级 finished_at 口径（v6.9.31）在位 + 当日 3 条 stalled 真实触发（qg 104h/kt 103h/berry 111h）且 08:00/10:00/11:00 三轮飞书通知、无周末误报 → 正常，检测→告警闭环当日完整走通）**｜**#9（12h：monitor 侧 L319-357 文件族口径在位，最近 2 次 ideas（08-16: 15 / 08-22: 25 actions）非零健康静默（12:02 异常清单无 input_pipeline_broken）→ 正常；reflection_jobs.py L252-284 旧熔断死代码自 08-16 未变更，处置维持待人工裁决）**
 
+- **#10（08-24 16h：静态 feedback_archive.py L344-363 兜底判定 + L366-398 结构化渲染 + L449-459 回退接线在位；运行时以真实数据直接调用 load_review_feedback_for_optimization 验证——bsv（count=3）注入块 2391 字符含"（第3次结构化审核意见）结论: major_revision"+7 issue（对比修复前 155B 零信息），且今晨 04:43 bsv r1-full_review-writer 已在 v6.9.42 后运行；moire（count=4）/order-param（count=1）raw 含实质内容正确走 raw 路径不触发回退 → 正常；bsv critic 近 3 条 0.75→0.67→0.66，边际效果观察窗口（观察 #2）仍在进行）**｜**#11（16h：kb-health-weekly.json（knowledge/.cache/）周日嵌套格式 base_health.health 三指标 coverage_rate 0.75（在 category_coverage 子键）/week_new 200/graph_connectivity 2.56，checked_at 08-23T01:00Z 周节奏新鲜；kanban kb_metrics 日度口径 04:40Z 当日更新（coverage_pct 4.5/624 篇）→ 正常；双口径+格式翻转均维持既有裁决项）**｜**#12（16h：kb_metrics.trends_rising 5 词（HHG 1249↑/attosecond 65/quantum 62/TMD 52/topological 38）trends_updated_at 08-24T04:40Z 当日新鲜 → 正常）**
+
 【下次从这里继续】
-1. **第七轮继续：从 #10 起**（#10 人工审核反馈闭环 → #11 KB 健康评分 → #12 研究趋势雷达，每次 2-3 项依次推进）；注意 #6 静态行号 08h 已重定位（optimize.py L990/L1657/L1515-1524，旧备忘的 executor 行号已漂移）
+1. **第七轮收官：从 #13 起**（#13 微调度器轮次优先级 → #14 stale job 清理 → #15 monitor 降级路径，#13-#15 在 08-24 00h 第六轮均判正常，本轮为复核）；#13/#14/#15 完成后第八轮自 #1 起。注意 #6 静态行号 08h 已重定位（optimize.py L990/L1657/L1515-1524，旧备忘的 executor 行号已漂移）
 1a. 看板自愈确认：✅ 已兑现（04h 核实 proposals_in_optimizing=8）
-2. **v6.9.42 生效观察（周一重点）**：bsv 下一轮优化的 critic/writer prompt 应含"（第3次结构化审核意见）"渲染块（7 项 issue），观察 writer 是否对结构化 issue 产生实质响应——这是 v6.9.41"注入未产生边际效果"结论前置条件补齐后的首个验证窗口；若天花板仍纹丝不动，问题收敛到 writer 执行力/门槛拦截
+2. **v6.9.42 生效观察（16h 更新）**：✅ 注入块已实证生成（bsv 2391 字符结构化渲染）且今晨 04:43 修复后 writer 已消费；**剩余观察点收窄为 writer 响应质量**——bsv critic 近 3 条 0.75→0.67→0.66（expression 0.47 最弱），下一批 critic 分数是定论点；若仍纹丝不动，问题收敛到 writer 执行力/门槛拦截
 3. **v6.9.40 生效观察（周一重点）**：微调度器恢复后 quantum-geometry（r1 26/29）/ berry（r2 12/25）应跨时段保持焦点直至轮次完成，软卡死 WARNING 应仅在 done 真冻结时出现——这是并发修复（fbddfbc）的首个验证窗口
-4. **周一升级判定（重点）**：停滞四课题 berry 95h / quantum-geometry 88h / key-transient 87h / moire 65h（20h 口径，key-transient 仅 6/25）——若周一 22:30 后仍零推进，升级排查结构性饥饿（8 课题 vs 4 时段/日）；注意 v6.9.40 消除的是"轮中误切"，真饥饿（时段总量不足）需另议
+4. **周一升级判定（16h 更新）**：停滞名单 4→2——berry（3.6h 前有完成）与 moire（13.7h 前，今晨 slot 1）已恢复推进；qg 108.5h / key-transient 107.4h（16h 口径，kt 仅 6/25）仍零推进——**若周一 22:30 后仍零推进，升级排查结构性饥饿**（8 课题 vs 4 时段/日）；注意 v6.9.40 消除的是"轮中误切"，真饥饿（时段总量不足）需另议
 5. **writer 全局分连锁风险（周一重点）**：04h 口径 score=36.3<50（00:37 随 moire r4 delta -8.0 结算，44.3−8.0 精确吻合，结算闭环正常；role 级 updated_at 字段停在 07-28 属观测性瑕疵不影响判定）；5 课题 auto-heal 配额未动用；若周一多课题 monitor 完成后连环触发"writer 全局分数低于 50"告警涌入人工队列，需人工裁决惩罚系数/全局-单课题解耦
-6. **4 个重置 job 重跑观察（08h 更新，12h/16h 核）**：v6.9.44 修复后 08:12 手动 --repair 已将 4 个 attempts=3 failed job（moire r5-content-critic / bsv r1-references-critic / order-param r7-references-critic / new-idea r1-idea_review）重置 pending——moire/bsv/new-idea repair_attempt 2/3、order-param 3/3（最后一次，再失败入双上限等 24h 自动解锁）；new-idea 曾因"3 轮最高 0.56<0.7"被质量门槛拦截（error_history 在案），重跑观察是否过 0.70；原 moire critic 超时根因（2×900s）疑 LLM 响应慢环境因素，若重跑仍超时需人工评估超时参数
+6. **4 个重置 job 重跑观察（16h 核）**：v6.9.44 修复后 08:12 手动 --repair 已将 4 个 attempts=3 failed job（moire r5-content-critic / bsv r1-references-critic / order-param r7-references-critic / new-idea r1-idea_review）重置 pending——moire/bsv/new-idea repair_attempt 2/3、order-param 3/3（最后一次，再失败入双上限等 24h 自动解锁）。**16h 复核：仅 new-idea 已重跑**（attempts=2、09:53 BJ 第二次尝试后仍 <0.70、剩 1 次，三连败将入双上限终态）；moire/bsv/order-param 三个 critic 重置 job 仍 pending 未重跑（08:12 重置晚于各自当日聚焦时段，等 18:30-22:30 及后续轮转时段，属正常排队非卡死）；原 moire critic 超时根因（2×900s）疑 LLM 响应慢环境因素，若重跑仍超时需人工评估超时参数
 7. **v6.9.41 生效观察（下个退回窗口）**：下一次审核退回时应看到 pass_number 推进 + score_history 清空 + return-comparison-pass{N}.md 生成（transitions.py 接线尚无真实退回触发，仅测试覆盖）
 8. **v6.9.37 修复生效观察（周一）**：berry 12 条未解决 P0 应保持未解决并注入 writer prompt（✅ 04h 核实 12 条 round_resolved=None 跨 90h+ 稳定）；order-parameter required 建链前置 idea_review（✅ 04h 兑现：03:05 执行 score 0.78 通过）
-9. **新课题首轮（周一）**：new-idea/attosecond 已建链（08:55 编排各 26 pending）待微调度器启动（04h 口径仍 0/26，8 课题 vs 4 时段/日轮转中）
-10. 人工裁决清单（累计）：#2 维度轮换口径 / #5 TARGET_PROFILES 覆盖面（缺 pipeline-runner/reviewer）/ 未注册 --module 套件批量注册（8 个）/ kb_metrics 双口径合并 / moire 负反馈字段残留 / bsv 编号倒挂复位根因 / **#7 轮级聚合口径（16h 新增）** / **#9 reflection 侧旧熔断死代码处置（16h 新增）** / **AGENTS.md 0.80→0.85 文档同步（16h 新增）** / **kb-health-weekly 格式翻转双路径兼容（20h 新增观察，暂非缺陷）**
+9. **新课题首轮（16h 更新）**：attosecond 已实质推进（36/55 done，今晨 11:20 仍有完成）；new-idea 仍 0/26——非建链问题而是 **idea_review 质量门槛连续拦截**（attempts=2 均 <0.70，剩 1 次，三连败入双上限终态后 24h 自动解锁重跑一次；这是 #3 门槛机制正常运转，但需关注该课题设想质量是否根本不可救，若是则终态解锁循环会空转）
+10. 人工裁决清单（累计）：#2 维度轮换口径 / #5 TARGET_PROFILES 覆盖面（缺 pipeline-runner/reviewer）/ 未注册 --module 套件批量注册（8 个）/ kb_metrics 双口径合并 / moire 负反馈字段残留 / bsv 编号倒挂复位根因 / **#7 轮级聚合口径（16h 新增）** / **#9 reflection 侧旧熔断死代码处置（16h 新增）** / **AGENTS.md 0.80→0.85 文档同步（16h 新增）** / **kb-health-weekly 格式翻转双路径兼容（20h 新增观察，暂非缺陷）** / **DOI 后缀伪 arxiv_id 入库处置（16h 新增：researcher 把 10.1038/s41566-025-01802-1 的后缀塞 arxiv_id，无斜杠不触发 ENOENT 静默入库，doi 字段为空、arxiv_id 为伪 ID，今日 2 篇实证 s41566-025-01802-1/s41598-025-88665-2，references 校验/arXiv 查询将拿到伪 ID；次级变体：https://doi.org/或doi:前缀形态仍绕过 ^10\. 匹配会复现 ENOENT，未观测到实例。建议方向：归一化前剥前缀 + 无 10. 注册码的非 arXiv 形态归类 other-id，涉及入库 schema 待人工定夺）**
 11. 遗留观察（低优先级）：run_input_compose 单条路由失败不阻断 job 整体 success；idea_generator._generate_proposal_id 无调用方属遗留代码；hermes_memory researcher agent loop 30s 超时维持约 1 次/小时（16h 口径未升级，12 点档密集与并发会话活动相关）；agent-scores role 级 updated_at 不随 delta 刷新（04h 新增，观测性瑕疵）
 12. #15 fallback 路径缺专属回归测试（低优先级）
 13. kb_distill 积压回落观察：385→226（16h），20 篇/天档下预计 3-4 个交易日清至低位，回落至稳态后确认告警口径不再回跳

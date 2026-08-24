@@ -2,9 +2,9 @@
 title: "解耦拓扑绝缘体表面态与体态的高次谐波产生（Bi₂Se₃ 薄膜厚度调控 + 太赫兹扰动场）"
 type: "papers"
 created: "2026-08-15T18:57:20Z"
-updated: "2026-08-17T05:19:28Z"
+updated: "2026-08-24T05:02:19Z"
 tags: ["高次谐波产生", "拓扑绝缘体", "Bi₂Se₃", "拓扑表面态", "Berry曲率", "位移矢量", "太赫兹调控", "薄膜厚度调控"]
-related: ["位移电流", "固体高次谐波", "太赫兹条纹化", "强场超快动力学", "拓扑光子学", "相位匹配", "非线性霍尔效应"]
+related: ["Disentangling High Harmonic Generation from Surface and Bulk States of a Topological Insulator", "位移电流", "固体高次谐波", "太赫兹条纹化", "强场超快动力学", "拓扑光子学", "相位匹配", "非线性霍尔效应"]
 source_raw: "2026-2604.06051-disentangling-high-harmonic-generation-from-surfac.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -71,6 +71,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[Disentangling High Harmonic Generation from Surface and Bulk States of a Topological Insulator]]
 - [[位移电流]]
 - [[固体高次谐波]]
 - [[太赫兹条纹化]]

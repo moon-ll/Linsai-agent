@@ -3,11 +3,11 @@ title: "attosecond-streaking — 最新版本"
 type: "proposal_version"
 proposal_id: "general-attosecond-streaking-20260822"
 project_type: "general"
-latest_round: 0
-last_score: 0.3
+latest_round: 1
+last_score: 0.54
 status: "optimizing"
-created: "2026-08-24T02:00:51Z"
-updated: "2026-08-24T02:00:51Z"
+created: "2026-08-24T08:02:19Z"
+updated: "2026-08-24T08:02:19Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -17,10 +17,10 @@ confidence: 1.0
 
 **课题 ID**：`general-attosecond-streaking-20260822`
 **类型**：general
-**最新轮次**：第 0 轮
-**当前分数**：0.3
+**最新轮次**：第 1 轮
+**当前分数**：0.54
 **状态**：优化中
-**同步时间**：2026-08-24T02:00:51Z
+**同步时间**：2026-08-24T08:02:19Z
 
 ---
 
@@ -30,18 +30,18 @@ confidence: 1.0
 |------|------|------|
 | content | content | 56 |
 | full_review | full_review | 0 |
-| rationale | rationale | 112 |
-| references | references | 0 |
-| scheme | scheme | 136 |
+| rationale | rationale | 74 |
+| references | references | 64 |
+| scheme | scheme | 120 |
 
 ## 课题简介
 
 # 课题说明
 
-**课题名称**：目标 G1（对应 R1）**：建立多通道耦合 FROGCRAB 修正算法，在水窗能区（284–400 eV）多通道电离场景下将脉冲重构误差从 > 20% 降至 < 5%。验证基准为 Klausen 等人[2]报道的水窗条纹测量数据，误差定义为修正后重构脉冲相位与原始实验数据的均方根偏差。
+**课题名称**：跨能区阿秒脉冲谱相位精确重构的方法学研究——多通道耦合修正与偶极相位解耦
 **项目类型**：面上项目
 **课题 ID**：`general-attosecond-streaking-20260822`
-**当前状态**：优化中（第0轮，score 0.30）
+**当前状态**：优化中（第1轮，score 0.54）
 **启动日期**：2026-08-22
 **最后更新**：2026-08-24
 
@@ -62,6 +62,9 @@ confidence: 1.0
 | 1 | 0.16 | 8 | 1 | 2026-08-23 |
 | 1 | 0.33 | 17 | 8 | 2026-08-23 |
 | 1 | 0.30 | 27 | 15 | 2026-08-24 |
+| 1 | 0.55 | 41 | 19 | 2026-08-24 |
+| 1 | 0.50 | 36 | 10 | 2026-08-24 |
+| 2 | 0.54 | 34 | 13 | 2026-08-24 |
 
 ## 状态流转
 - 2026-08-22: — → drafts (注册新 proposal)

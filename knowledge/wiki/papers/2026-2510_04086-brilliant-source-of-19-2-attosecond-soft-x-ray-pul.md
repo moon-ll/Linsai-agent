@@ -2,9 +2,9 @@
 title: "精读：19.2 阿秒软X射线脉冲——突破原子单位时间的桌面明亮阿秒源（arXiv:2510.04086）"
 type: "papers"
 created: "2026-08-17T05:17:07Z"
-updated: "2026-08-17T05:19:28Z"
+updated: "2026-08-24T05:02:19Z"
 tags: ["阿秒脉冲", "高次谐波", "水窗软X射线", "VTGPA", "阿秒条纹术", "CEP稳定驱动", "氖介质"]
-related: ["FROG", "Volkov变换广义投影算法 (VTGPA)", "核心能级电子动力学", "水窗软X射线", "相位匹配", "阿秒条纹表征", "高次谐波产生", "高次谐波产生 (HHG)"]
+related: ["2510.04086", "FROG", "Volkov变换广义投影算法 (VTGPA)", "核心能级电子动力学", "水窗软X射线", "相位匹配", "阿秒条纹表征", "高次谐波产生", "高次谐波产生 (HHG)"]
 source_raw: "2026-2510.04086-brilliant-source-of-19-2-attosecond-soft-x-ray-pul.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -57,6 +57,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2510.04086]]
 - [[FROG]]
 - [[Volkov变换广义投影算法 (VTGPA)]]
 - [[核心能级电子动力学]]

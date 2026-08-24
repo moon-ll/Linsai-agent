@@ -1,8 +1,8 @@
 ---
 title: "NSFC 课题生命周期索引"
 type: "index"
-created: "2026-08-24T02:00:51Z"
-updated: "2026-08-24T02:00:51Z"
+created: "2026-08-24T08:02:19Z"
+updated: "2026-08-24T08:02:19Z"
 tags: []
 related: []
 source_raw: ""
@@ -19,7 +19,7 @@ project: ["NSFC-强场超快"]
 
 | 课题 | 类型 | 状态 | 当前轮次 | 分数 | 最新版本 | 优化报告 |
 |------|------|------|---------|------|---------|---------|
-| attosecond-streaking | 面上 | 优化中 | 第0轮 | 0.3 | [版本](versions/general-attosecond-streaking-20260822.md) | [报告](reports/general-attosecond-streaking-20260822.md) |
+| attosecond-streaking | 面上 | 优化中 | 第1轮 | 0.54 | [版本](versions/general-attosecond-streaking-20260822.md) | [报告](reports/general-attosecond-streaking-20260822.md) |
 | berry-mnps3-rashba | 面上 | 优化中 | 第1轮 | 0.74 | [版本](versions/general-berry-mnps3-rashba-20260816.md) | [报告](reports/general-berry-mnps3-rashba-20260816.md) |
 | bsv-driven-hhg-quantum | 面上 | 优化中 | 第0轮 | 0.66 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
 | moire-strong-field-probe | 面上 | 优化中 | 第4轮 | 0.68 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
