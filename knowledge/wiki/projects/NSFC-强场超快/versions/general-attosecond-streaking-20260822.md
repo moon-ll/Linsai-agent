@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-attosecond-streaking-20260822"
 project_type: "general"
 latest_round: 0
-last_score: 0.0
+last_score: 0.33
 status: "optimizing"
-created: "2026-08-23T20:01:57Z"
-updated: "2026-08-23T20:01:57Z"
+created: "2026-08-24T00:09:59Z"
+updated: "2026-08-24T00:09:59Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-attosecond-streaking-20260822`
 **类型**：general
 **最新轮次**：第 0 轮
-**当前分数**：0.0
+**当前分数**：0.33
 **状态**：优化中
-**同步时间**：2026-08-23T20:01:57Z
+**同步时间**：2026-08-24T00:09:59Z
 
 ---
 
@@ -28,9 +28,9 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 0 |
+| content | content | 56 |
 | full_review | full_review | 0 |
-| rationale | rationale | 0 |
+| rationale | rationale | 112 |
 | references | references | 0 |
 | scheme | scheme | 0 |
 
@@ -38,12 +38,12 @@ confidence: 1.0
 
 # 课题说明
 
-**课题名称**：（待生成）
+**课题名称**：目标 G1（对应 R1）**：建立多通道耦合 FROGCRAB 修正算法，在水窗能区（280–350 eV）多通道电离场景下将脉冲重构误差从 > 20% 降至 < 5%。验证基准为 Klausen 等人[2]报道的水窗条纹测量数据，误差定义为修正后重构脉冲相位与原始实验数据的均方根偏差。
 **项目类型**：面上项目
 **课题 ID**：`general-attosecond-streaking-20260822`
-**当前状态**：优化中（第0轮，score 0.00）
+**当前状态**：优化中（第0轮，score 0.33）
 **启动日期**：2026-08-22
-**最后更新**：2026-08-22
+**最后更新**：2026-08-23
 
 ---
 
@@ -56,7 +56,10 @@ confidence: 1.0
 ---
 
 ## 优化历史
-（尚未开始优化）
+| 轮次 | 分数 | 问题数 | high问题 | 时间 |
+|------|------|--------|---------|------|
+| 1 | 0.16 | 8 | 1 | 2026-08-23 |
+| 1 | 0.33 | 17 | 8 | 2026-08-23 |
 
 ## 状态流转
 - 2026-08-22: — → drafts (注册新 proposal)
@@ -73,10 +76,9 @@ confidence: 1.0
 - `02_topic/` — 缺口分析
 - `03_question/` — 科学问题框架
 - `04_proposal/proposal-draft.md` — 申请书正文
-- `04_proposal/methodology-manual.md` — 方法学手册（细节）
-- `05_review/` — 终审 + 对抗评审（critic-round-N.md）
-- `06_feedback/` — 人工反馈记录
+- `04_proposal/methodology-manual.md` — 方
 
+（完整简介见 [源文件](research_proposals/optimizing/general-attosecond-streaking-20260822/04_proposal/proposal-draft-merged.md)）
 
 ## 来源
 

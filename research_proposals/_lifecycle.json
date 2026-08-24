@@ -3624,7 +3624,7 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-23T19:00:25Z",
+      "updated_at": "2026-08-24T00:12:36Z",
       "optimization_rounds": 4,
       "last_score": 0.68,
       "score_history": [
@@ -5448,15 +5448,15 @@
           "step": "critic",
           "section_key": "content",
           "round": 5,
-          "status": "failed",
+          "status": "pending",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r5-rationale-writer"
           ],
-          "attempts": 3,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-23T18:45:25Z",
-          "finished_at": "2026-08-23T19:00:25Z",
-          "last_error": "超时(900s)",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": "",
           "error_history": [
             {
@@ -5465,7 +5465,7 @@
               "attempts": 1
             }
           ],
-          "repair_attempts": 1
+          "repair_attempts": 2
         },
         {
           "job_id": "general-moire-strong-field-probe-20260726-r5-content-gap_identify",
@@ -6700,9 +6700,9 @@
       "source": "expansion",
       "source_detail": "候选4：量子光场驱动的HHG，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-21T14:30:13Z",
+      "updated_at": "2026-08-24T00:12:36Z",
       "optimization_rounds": 0,
-      "last_score": 0.67,
+      "last_score": 0.66,
       "score_history": [
         {
           "round": 1,
@@ -6758,6 +6758,32 @@
           ],
           "anchor_conclusion": "基本接近",
           "at": "2026-08-21T13:29:44Z"
+        },
+        {
+          "round": 1,
+          "score": 0.66,
+          "dim_scores": {
+            "innovation": 0.84,
+            "feasibility": 0.72,
+            "rigor": 0.62,
+            "expression": 0.47
+          },
+          "weakest_dim": "expression",
+          "focus_section": "full_review",
+          "section_passed": false,
+          "issues_count": 9,
+          "high_issues": 6,
+          "ai_ceiling": 0.5,
+          "ai_ceiling_after": 0.5,
+          "expression_improved": false,
+          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 天花板 0.50→0.50）",
+          "ai_top_issues": [
+            "冗余修饰词超标：50次（阈值12），扣0.38",
+            "超长句(>120字)：23处，扣0.46",
+            "自引用泛滥：48次（阈值10/15），扣0.10"
+          ],
+          "anchor_conclusion": "基本接近",
+          "at": "2026-08-23T20:43:45Z"
         }
       ],
       "human_feedback_count": 3,
@@ -6831,7 +6857,7 @@
       "last_dim_scores": {
         "innovation": 0.84,
         "feasibility": 0.72,
-        "rigor": 0.65,
+        "rigor": 0.62,
         "expression": 0.47
       },
       "section_passes": {
@@ -7449,14 +7475,14 @@
           "step": "lit_read",
           "section_key": "full_review",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r1-full_review-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T20:20:40Z",
+          "finished_at": "2026-08-23T20:28:29Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -7466,14 +7492,14 @@
           "step": "lit_note",
           "section_key": "full_review",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r1-full_review-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T20:30:42Z",
+          "finished_at": "2026-08-23T20:30:42Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -7483,15 +7509,15 @@
           "step": "writer",
           "section_key": "full_review",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-bsv-driven-hhg-quantum-20260726-r1-full_review-critic",
             "general-bsv-driven-hhg-quantum-20260726-r1-full_review-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T20:35:43Z",
+          "finished_at": "2026-08-23T20:43:45Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -7510,7 +7536,15 @@
           "started_at": "",
           "finished_at": "",
           "last_error": "",
-          "cron_job_id": ""
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-23T21:00:45Z",
+              "error": "超时(900s)",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 2
         },
         {
           "job_id": "general-bsv-driven-hhg-quantum-20260726-r1-references-writer",
@@ -8447,7 +8481,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-23T20:00:39Z",
+      "updated_at": "2026-08-24T00:12:36Z",
       "optimization_rounds": 6,
       "last_score": 0.69,
       "score_history": [
@@ -10837,15 +10871,15 @@
           "step": "critic",
           "section_key": "references",
           "round": 7,
-          "status": "running",
+          "status": "pending",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r7-full_review-writer"
           ],
-          "attempts": 2,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-23T20:00:39Z",
+          "started_at": "",
           "finished_at": "",
-          "last_error": "超时(900s)",
+          "last_error": "",
           "cron_job_id": "",
           "error_history": [
             {
@@ -10859,7 +10893,7 @@
               "attempts": 1
             }
           ],
-          "repair_attempts": 2
+          "repair_attempts": 3
         },
         {
           "job_id": "general-order-parameter-ultrafast-readout-20260727-r7-references-writer",
@@ -13412,7 +13446,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 交变磁体高次谐波产生与固态强场非线性光学新前沿",
       "created_at": "2026-08-22T05:40:16Z",
-      "updated_at": "2026-08-23T00:55:30Z",
+      "updated_at": "2026-08-24T00:12:37Z",
       "optimization_rounds": 0,
       "last_score": 0.0,
       "score_history": [],
@@ -13469,7 +13503,15 @@
           "started_at": "",
           "finished_at": "",
           "last_error": "",
-          "cron_job_id": ""
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-23T21:41:40Z",
+              "error": "研究设想评审 3 轮均未达标（最高分 0.56 < 0.7），暂停优化等待人工介入",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 2
         },
         {
           "job_id": "general-new-idea-20260822-r1-rationale-critic",
@@ -13902,7 +13944,13 @@
           "cron_job_id": ""
         }
       ],
-      "pass_number": 1
+      "pass_number": 1,
+      "idea_review_attempts": 1,
+      "idea_review_score": 0.53,
+      "idea_review_issues": "# 课题设想独立质量评审（R1-A1）\n\n- **评审对象**：`00_research_idea.md`（最后更新 2026-08-24，全文 49 行，7 个模块齐备）\n- **评审日期**：2026-08-24\n- **评审方式**：独立评审，仅基于该文件本身；对全部 5 条支撑文献做了外部检索核验（见附录）\n- **版本说明**：本报告覆盖并取代早前针对 2026-08-22 占位版（24 行、6 模块空置）的同名评审。占位版时代的问题（模块空置、无核心科学问题、无创新点）已随本版解决，本版按完整版标准重新评审。\n\n---\n\n## 总体判断\n\n主线物理故事（交变磁体自旋分辨 HHG → 磁序超快全光读出）完整，理论-实验-应用三层递进结构清晰，明显优于常见拼盘式设想。但存在三个根基性缺陷：**① 研究对象材料体系（CrI3、FePS3）与\"交变磁体\"的定义不符**；**② \"实验空白\"陈述与 2024 年以来领域现状不符**；**③ 5 条支撑文献中 0 条通过核验**（1 条引用信息全错，4 条无法核实）。这三个问题不解决，其余结构性改善没有意义。\n\n---\n\n## 一、科学",
+      "idea_review_at": "2026-08-23T21:51:51Z",
+      "idea_review_passed": false,
+      "idea_review_blocked": true
     },
     "general-attosecond-streaking-20260822": {
       "status": "optimizing",
@@ -13910,12 +13958,218 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 阿秒条纹技术：从超短脉冲表征到量子相位测量（手动补注册 2026-08-22）",
       "created_at": "2026-08-22T12:20:08Z",
-      "updated_at": "2026-08-23T00:55:30Z",
+      "updated_at": "2026-08-24T00:01:23Z",
       "optimization_rounds": 0,
-      "last_score": 0.0,
-      "score_history": [],
-      "section_passes": {},
-      "open_critical_issues": [],
+      "last_score": 0.33,
+      "score_history": [
+        {
+          "round": 1,
+          "score": 0.16,
+          "dim_scores": {
+            "innovation": 0.2,
+            "feasibility": 0.2,
+            "rigor": 0.15,
+            "expression": 0.1
+          },
+          "weakest_dim": "expression",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 8,
+          "high_issues": 1,
+          "ai_ceiling": 0.5,
+          "ai_ceiling_after": 0.5,
+          "expression_improved": false,
+          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 天花板 0.50→0.50）",
+          "ai_top_issues": [],
+          "anchor_conclusion": "差距明显",
+          "at": "2026-08-23T22:58:40Z"
+        },
+        {
+          "round": 1,
+          "score": 0.33,
+          "dim_scores": {
+            "innovation": 0.25,
+            "feasibility": 0.3,
+            "rigor": 0.25,
+            "expression": 0.5
+          },
+          "weakest_dim": "innovation",
+          "focus_section": "content",
+          "section_passed": false,
+          "issues_count": 17,
+          "high_issues": 8,
+          "ai_ceiling": 0.5,
+          "ai_ceiling_after": 0.5,
+          "expression_improved": false,
+          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 天花板 0.50→0.50）",
+          "ai_top_issues": [
+            "死板关联词超标：13次（阈值8），扣0.10",
+            "冗余修饰词超标：22次（阈值12），扣0.10",
+            "超长句(>120字)：15处，扣0.30"
+          ],
+          "anchor_conclusion": "差距明显",
+          "at": "2026-08-23T23:43:14Z"
+        }
+      ],
+      "section_passes": {
+        "rationale": false,
+        "content": false
+      },
+      "open_critical_issues": [
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "按评分纪律（2026-08-15 校准）第 1 条占位/缺失降档规则执行：受影响维度不评出常规档位分，按\"不足正常内容 30% 以下\"的 0.1-0.3 区间给分，并在评分依据中注明\"本轮因内容缺失无",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "### [critical] missing_content — 聚焦章节 rationale.md 为 0 字节空文件",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "### [critical] missing_content — 其余四个正文模块全部 0 字节，模块完整性 0/5",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] pipeline_integrity — writer 落盘静默失败嫌疑：上游已就绪而正文零产出",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "判定：writer/lifecycle 本轮只执行了 rationale 一条内容线，**未给 content/scheme/references/full_review 任何落盘机会**。上一轮 [",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "| 4 | 引用程序化 AI 检测结果 | 已执行（附对象错位修正） | 检测报告实际对象为 proposal-draft.md（见 1.2）；其检出项已全部列入问题清单（C3/C4/C5/C6），s",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "### [critical] missing_content — 聚焦章节 content.md 为 0 字节空文件（P1）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "### [critical] module_incomplete — 其余三个正文模块（scheme/references/full_review）仍为 0 字节，模块完整性 1/5（P1）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "### [critical] detection_mismatch — 程序化检测报告对象错位：检测的是 proposal-draft.md 却标注为 content 聚焦（P1，管线侧）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "### [high] pipeline_integrity — writer/lifecycle 仅推进 rationale 内容线，content 及其后章节零产出（P1，管线侧，历史遗留仍存在）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "### [high] anti_ai — 死板关联词超标：13 次（阈值 8），\"同时\"×9（P2）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "### [high] anti_ai — 冗余修饰词超标：22 次（阈值 12），\"系统\"×7、\"重要\"×5（P2）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "### [high] anti_ai — 超长句（>120 字）15 处（P2）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "### [high] evidence_risk — 参考文献条目真实性存疑：[2]作者名含乱码\"混改\"、[12]/[13] 卷期页码异常、[4]-[8]作者姓氏小写（P1）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "| [critical] rationale.md 0 字节 | **已解决** | rationale.md 14182 字节，五层递进结构齐备（§1 背景→§2 现状→§3 国内→§4 定位） |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "content",
+          "description": "| [critical] 其余四个正文模块全部 0 字节（完整性 0/5） | **仍存在（形态更新为 3/5 缺失，完整性 1/5）** | content/scheme/references/fu",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "content",
+          "description": "| [high] writer 落盘静默失败嫌疑 | **仍存在（已精确定位）** | lifecycle 日志显示 06:55-06:58 仅 rationale 线执行；非静默失败而是轮次未覆盖，",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        }
+      ],
       "human_feedback_count": 0,
       "transition_history": [
         {
@@ -13960,12 +14214,12 @@
           "step": "idea_review",
           "section_key": "idea_review",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T22:05:58Z",
+          "finished_at": "2026-08-23T22:21:18Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -13975,14 +14229,14 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-idea_review-idea_review"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T22:25:01Z",
+          "finished_at": "2026-08-23T22:28:32Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -13992,14 +14246,14 @@
           "step": "gap_identify",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-rationale-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T22:30:02Z",
+          "finished_at": "2026-08-23T22:31:46Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14009,14 +14263,14 @@
           "step": "lit_search",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-rationale-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T22:35:03Z",
+          "finished_at": "2026-08-23T22:40:31Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14026,14 +14280,14 @@
           "step": "lit_read",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-rationale-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T22:45:04Z",
+          "finished_at": "2026-08-23T22:49:35Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14043,14 +14297,14 @@
           "step": "lit_note",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-rationale-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T22:50:05Z",
+          "finished_at": "2026-08-23T22:50:05Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14060,15 +14314,15 @@
           "step": "writer",
           "section_key": "rationale",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-rationale-critic",
             "general-attosecond-streaking-20260822-r1-rationale-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T22:55:06Z",
+          "finished_at": "2026-08-23T22:58:40Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14078,15 +14332,15 @@
           "step": "critic",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-rationale-writer",
             "general-attosecond-streaking-20260822-r1-idea_review-idea_review"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T23:00:08Z",
+          "finished_at": "2026-08-23T23:11:40Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14096,14 +14350,14 @@
           "step": "gap_identify",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-content-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T23:15:09Z",
+          "finished_at": "2026-08-23T23:18:24Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14113,14 +14367,14 @@
           "step": "lit_search",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-content-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T23:20:10Z",
+          "finished_at": "2026-08-23T23:24:55Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14130,14 +14384,14 @@
           "step": "lit_read",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-content-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T23:25:11Z",
+          "finished_at": "2026-08-23T23:33:20Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14147,14 +14401,14 @@
           "step": "lit_note",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-content-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T23:35:13Z",
+          "finished_at": "2026-08-23T23:35:13Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14164,15 +14418,15 @@
           "step": "writer",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-content-critic",
             "general-attosecond-streaking-20260822-r1-content-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T23:40:17Z",
+          "finished_at": "2026-08-23T23:43:14Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14182,15 +14436,15 @@
           "step": "critic",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-content-writer",
             "general-attosecond-streaking-20260822-r1-idea_review-idea_review"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-23T23:45:18Z",
+          "finished_at": "2026-08-23T23:56:07Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14200,14 +14454,14 @@
           "step": "gap_identify",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-scheme-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-24T00:00:23Z",
+          "finished_at": "2026-08-24T00:01:23Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14400,8 +14654,19 @@
           "cron_job_id": ""
         }
       ],
-      "pass_number": 1
+      "pass_number": 1,
+      "idea_review_attempts": 3,
+      "idea_review_score": 0.74,
+      "idea_review_issues": "# 课题设想独立质量评审（R1-A3）\n\n**评审对象**：`00_research_idea.md`（最后更新 2026-08-24）\n**评审轮次**：R1 / 评审人 A3（独立评审，未参考 A1/A2 结论）\n**评审日期**：2026-08-24\n**评审维度**：科学问题清晰度 / 创新点可检验性 / 内容-方案逻辑切分 / 方向一致性（各 0–1 分）\n\n---\n\n## 总体评价\n\n该设想围绕\"多通道电离 + 偶极相位双重干扰下的阿秒条纹谱相位重构\"提出了定义良好的核心问题，三条研究内容按\"消干扰一（多通道耦合）→ 消干扰二（偶极相位）→ 跨能区标定\"组织，链条完整、量化指标密集，整体成熟度较高。主要短板集中在四处：核心问题中\"脉冲固有相位\"与\"多电子体系量子相位\"两个测量对象存在概念滑动；\"重构误差\"度量全文未定义；研究内容二在技术路线中缺少实验验证落点；标题承诺的\"量子拍自洽检验\"未由任何研究内容承接。\n\n## 一、科学问题清晰度：0.80\n\n**优点**\n- 核心问题可一句话概括（L7），并明确拆解为两条约束（通道间相位耦合、靶材偶极相位），聚焦度好，无泛化表述。\n",
+      "idea_review_at": "2026-08-23T22:21:18Z",
+      "idea_review_passed": true,
+      "last_dim_scores": {
+        "innovation": 0.25,
+        "feasibility": 0.3,
+        "rigor": 0.25,
+        "expression": 0.5
+      }
     }
   },
-  "updated_at": "2026-08-23T20:00:39Z"
+  "updated_at": "2026-08-24T00:12:37Z"
 }

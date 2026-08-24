@@ -1,8 +1,8 @@
 ---
 title: "NSFC 课题生命周期索引"
 type: "index"
-created: "2026-08-23T20:01:57Z"
-updated: "2026-08-23T20:01:57Z"
+created: "2026-08-24T00:09:59Z"
+updated: "2026-08-24T00:09:59Z"
 tags: []
 related: []
 source_raw: ""
@@ -19,9 +19,9 @@ project: ["NSFC-强场超快"]
 
 | 课题 | 类型 | 状态 | 当前轮次 | 分数 | 最新版本 | 优化报告 |
 |------|------|------|---------|------|---------|---------|
-| attosecond-streaking | 面上 | 优化中 | 第0轮 | 0.0 | [版本](versions/general-attosecond-streaking-20260822.md) | [报告](reports/general-attosecond-streaking-20260822.md) |
+| attosecond-streaking | 面上 | 优化中 | 第0轮 | 0.33 | [版本](versions/general-attosecond-streaking-20260822.md) | [报告](reports/general-attosecond-streaking-20260822.md) |
 | berry-mnps3-rashba | 面上 | 优化中 | 第1轮 | 0.74 | [版本](versions/general-berry-mnps3-rashba-20260816.md) | [报告](reports/general-berry-mnps3-rashba-20260816.md) |
-| bsv-driven-hhg-quantum | 面上 | 优化中 | 第0轮 | 0.67 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
+| bsv-driven-hhg-quantum | 面上 | 优化中 | 第0轮 | 0.66 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
 | moire-strong-field-probe | 面上 | 优化中 | 第4轮 | 0.68 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
 | new-idea | 面上 | 优化中 | 第0轮 | 0.0 | [版本](versions/general-new-idea-20260822.md) | [报告](reports/general-new-idea-20260822.md) |
 | order-parameter-ultrafast-readout | 面上 | 优化中 | 第6轮 | 0.69 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
@@ -47,4 +47,4 @@ knowledge/wiki/projects/NSFC-强场超快/
 > 数据流：`research_proposals/`（源）→ `proposal_kb_sync.py` → `proposals/`
 > `research_proposals/`（源）→ `kb_proposal_reorg.py` → `versions/` + `reports/`
 
-> 由 `scripts/kb_proposal_reorg.py` 自动更新（2026-08-23）。
+> 由 `scripts/kb_proposal_reorg.py` 自动更新（2026-08-24）。

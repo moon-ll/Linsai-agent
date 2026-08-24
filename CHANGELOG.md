@@ -1,5 +1,33 @@
 # 变更记录
 
+## v6.9.44 - 2026-08-24 修复扫描周末误判（UTC→北京时间，周一凌晨自愈延迟根因）
+
+背景：08h 健康检查发现 4 个 attempts=3 failed job（moire/order-param/
+bsv 的 critic 900s 超时 + new-idea idea_review 600s 超时）在周一
+06:03 BJ lc-repair 后零重试。根因：`_is_weekend()`
+（scripts/lifecycle/utils.py）用 UTC weekday 判定周末，与业务时区
+北京时间偏差 8 小时——BJ 周一 00:00-08:00（UTC 仍处周日）被误判
+为周末，`run_repair` 走 `_run_weekend_repair` 分支，完全跳过工作日
+failed job 重试与 stale 清理；而微调度器 cron（`*/5 * * * 1-5`，
+本地求值）同一时刻已在正常派活，两套口径分裂。反向 BJ 周六
+00:00-08:00（UTC 周五）被误判为工作日，周末阶段补跑窗口错失。
+
+- 修复：`_is_weekend()` 锚定显式 `BUSINESS_TZ`（Asia/Shanghai，
+  UTC+8）求 weekday；新增可选 `now` 参数供测试注入带时区固定时钟，
+  任意时区 aware 表达先归一北京时间再判定，宿主机时区漂移不影响
+  业务语义。与 `_weekend_stage_catchup` 的本地时间口径对齐。
+- 新增回归：`scripts/tests/test_weekend_local_timezone.py`（11 项
+  断言，覆盖事故时刻 00:00:59/06:03:24、周六反向窗口、边界
+  07:59:59、双时区表达一致性），已注册 `self_test.py --module`
+  硬编码清单（规避未注册套件被静默跳过的坑）。
+- 验证：`--module` 1058/1058 全绿（基线 1047 + 新增 11）；修复后
+  当前时刻（周一 08:1x）判定 False 正确；4 个 failed job 由
+  12:00 repair 自然重试（UTC 04:00 周一，新旧口径均工作日）。
+- 关联观察（未修复，仅报告）：`weekend_orchestrator.py` L180
+  `run_weekly_mode` 同用 UTC weekday，但其入口 cron（周六 09:00/
+  14:00、周日 09:00 BJ）触发时刻 UTC 与 BJ 同日，cron 路径不可达
+  误判窗口，仅手动 CLI 在 BJ 周末凌晨调用会误判，低风险。
+
 ## v6.9.43 - 2026-08-24 04h 健康检查（第七轮设计抽查 #1-#3，无缺陷无修复）
 
 - 运行时：周一调度恢复正常（08-24 为周一非周日，经 weekend cron

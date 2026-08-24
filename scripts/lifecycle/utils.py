@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import os
 import uuid
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -316,9 +316,33 @@ def _save_weekend_jobs(data: Dict[str, Any]) -> None:
         save_json(WEEKEND_JOBS_PATH, data)
 
 
-def _is_weekend() -> bool:
-    """判断当前是否为周末（周六或周日）。"""
-    return datetime.now(timezone.utc).weekday() >= 5
+BUSINESS_TZ = timezone(timedelta(hours=8))
+"""业务时区（北京时间，Asia/Shanghai）。
+
+AGENTS.md 与全链路调度口径（工作日时段 00:30-03:30 等）均按北京时间
+定义；周末/工作日判定必须锚定此时区，不随宿主机时区漂移。"""
+
+
+def _is_weekend(now: Optional[datetime] = None) -> bool:
+    """判断当前是否为周末（周六或周日，按业务时区北京时间）。
+
+    v6.9.44: 改用北京时间 weekday。此前用 UTC weekday，与业务时区
+    （UTC+8）偏差 8 小时：每周一 00:00-08:00 BJ（UTC 仍处周日）被
+    误判为周末，lc-repair 走周末分支跳过 failed job 重试（08-24
+    周一实测：00:00/06:03 两次修复扫描 weekend=True，前一晚 4 个
+    attempts=3 failed job 零重试，最早拖到 12:00 repair 才自愈，
+    每周一固定损失 6-12h）；反向 BJ 周六 00:00-08:00（UTC 周五）
+    被误判为工作日，周末阶段补跑窗口错失。微调度器 cron
+    （*/5 * * * 1-5）与 _weekend_stage_catchup 均按本地时间求值，
+    本函数对齐同一口径；显式锚定 BUSINESS_TZ 而非机器本地时区，
+    保证宿主机时区变化时业务语义不变。now 参数供回归测试注入固定
+    带时区时钟（任意时区 aware 表达均先归一到北京时间再判定）。
+    """
+    if now is None:
+        now = datetime.now(BUSINESS_TZ)
+    else:
+        now = now.astimezone(BUSINESS_TZ)
+    return now.weekday() >= 5
 
 
 def _get_jobs(self, proposal_id: str) -> List[Dict[str, Any]]:
