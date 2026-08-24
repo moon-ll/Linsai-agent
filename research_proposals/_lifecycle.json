@@ -13446,7 +13446,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 交变磁体高次谐波产生与固态强场非线性光学新前沿",
       "created_at": "2026-08-22T05:40:16Z",
-      "updated_at": "2026-08-24T00:12:37Z",
+      "updated_at": "2026-08-24T01:43:10Z",
       "optimization_rounds": 0,
       "last_score": 0.0,
       "score_history": [],
@@ -13496,11 +13496,11 @@
           "step": "idea_review",
           "section_key": "idea_review",
           "round": 1,
-          "status": "pending",
+          "status": "running",
           "depends_on": [],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
+          "started_at": "2026-08-24T01:43:10Z",
           "finished_at": "",
           "last_error": "",
           "cron_job_id": "",
@@ -13958,9 +13958,9 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 阿秒条纹技术：从超短脉冲表征到量子相位测量（手动补注册 2026-08-22）",
       "created_at": "2026-08-22T12:20:08Z",
-      "updated_at": "2026-08-24T00:01:23Z",
+      "updated_at": "2026-08-24T01:45:38Z",
       "optimization_rounds": 0,
-      "last_score": 0.33,
+      "last_score": 0.3,
       "score_history": [
         {
           "round": 1,
@@ -14009,11 +14009,38 @@
           ],
           "anchor_conclusion": "差距明显",
           "at": "2026-08-23T23:43:14Z"
+        },
+        {
+          "round": 1,
+          "score": 0.3,
+          "dim_scores": {
+            "innovation": 0.25,
+            "feasibility": 0.2,
+            "rigor": 0.25,
+            "expression": 0.5
+          },
+          "weakest_dim": "feasibility",
+          "focus_section": "scheme",
+          "section_passed": false,
+          "issues_count": 27,
+          "high_issues": 15,
+          "ai_ceiling": 0.5,
+          "ai_ceiling_after": 0.5,
+          "expression_improved": false,
+          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 天花板 0.50→0.50）",
+          "ai_top_issues": [
+            "死板关联词超标：17次（阈值8），扣0.18",
+            "冗余修饰词超标：38次（阈值12），扣0.26",
+            "超长句(>120字)：18处，扣0.36"
+          ],
+          "anchor_conclusion": "差距明显",
+          "at": "2026-08-24T01:15:49Z"
         }
       ],
       "section_passes": {
         "rationale": false,
-        "content": false
+        "content": false,
+        "scheme": false
       },
       "open_critical_issues": [
         {
@@ -14164,6 +14191,213 @@
           "severity": "high",
           "section": "content",
           "description": "| [high] writer 落盘静默失败嫌疑 | **仍存在（已精确定位）** | lifecycle 日志显示 06:55-06:58 仅 rationale 线执行；非静默失败而是轮次未覆盖，",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "scheme",
+          "description": "判定：writer 按\"每轮一条内容线\"串行推进属实——上一轮的 [high] pipeline_integrity 问题**形态更新而非消失**：rationale、content 两线已兑现，但",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "scheme",
+          "description": "| 4 | 引用程序化 AI 检测结果 | 已执行（附对象错位修正） | 检测实际对象为 proposal-draft.md（见 1.3）；检出项全部列入问题清单（S8/S9/S10），severit",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "scheme",
+          "description": "| 指标红线：口径一致 | **不通过（critical）** | 水窗能区三种口径并存（S5） |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "scheme",
+          "description": "| 指标红线：首次/未见报道需支撑 | **不通过（critical）** | \"国内尚无系统性研究报道…尚属空白\"无检索范围/日期支撑（S12） |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "scheme",
+          "description": "### [critical] missing_content — 聚焦章节 scheme.md 为 0 字节空文件（P1）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "scheme",
+          "description": "### [critical] module_incomplete — references.md 与 full_review.md 仍为 0 字节，模块完整性 2/5（P1）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "scheme",
+          "description": "### [critical] detection_mismatch — 程序化检测报告对象错位第 2 次复发（P1，管线侧）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "scheme",
+          "description": "### [high] pipeline_integrity — writer 串行推进未及 scheme 线，评审连续扑空（P1，管线侧）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "scheme",
+          "description": "- 违反条款：管线调度约定（历史遗留 [high] pipeline_integrity 的延续）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "scheme",
+          "description": "### [critical] red_line（consistency_check）— 水窗能区口径跨章矛盾：285–400 vs 280–350 vs 350（P1）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "scheme",
+          "description": "### [critical] evidence_risk（citation_integrity）— 关键文献 [2] 一作归属正文与文献表分裂：Klausen vs Bizon（P1）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "scheme",
+          "description": "### [high] evidence_risk — 文献群存疑项与幽灵引用（P1）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "scheme",
+          "description": "### [high] anti_ai — 死板关联词超标：17 次（阈值 8），\"同时\"×12（P2）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "scheme",
+          "description": "### [high] anti_ai — 冗余修饰词超标：38 次（阈值 12），\"关键\"×11、\"系统\"×11（P2）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "scheme",
+          "description": "### [high] anti_ai — 超长句（>120 字）18 处（报告值；本地按句末标点复核 9 处），扣 0.36（P2）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "scheme",
+          "description": "### [high] narrative（bullet_substitution + boundary）— content.md 段落\"第一/第二/第三\"分号式条目化，且 §2.2 段 2 越界预置方",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "scheme",
+          "description": "### [high] red_line（novelty_claim_cautious）— \"国内尚无系统性研究报道…尚属空白\"无检索支撑（P2，位于非聚焦章节）",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "scheme",
+          "description": "| [critical] rationale.md 0 字节 | **已解决** | 6664 字，五层递进齐备（§1→§4），16 条文献表在 §5 |",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "scheme",
+          "description": "| [critical] content.md 0 字节 | **已解决** | 3955 字，R1/R2/R3 + G1-G3（含量化指标）+ K1-K3 齐备，总述段+分方向+目标+科学问题四要件",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "scheme",
+          "description": "| [critical] 其余正文模块 0 字节（完整性 1/5） | **仍存在（形态更新为 2/5）** | scheme/references/full_review 仍 0 字节；本轮聚焦的",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "scheme",
+          "description": "| [high] writer 落盘静默失败嫌疑 / 只执行单一内容线 | **仍存在（形态第 3 次更新）** | 07:41-07:43 推进 content+rationale 两线后停，sch",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "scheme",
+          "description": "| [critical] 检测报告对象错位（上轮：对象为 proposal-draft.md 却标注 content） | **仍存在（第 2 次复发）** | 本轮报告 10621 字符、词频逐词、",
+          "first_seen_round": 1,
+          "last_seen_round": 1,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "scheme",
+          "description": "| [high] anti_ai 死板关联词 13 次 | **仍存在且恶化** | 17 次（同时×12、然而×5），S8 |",
           "first_seen_round": 1,
           "last_seen_round": 1,
           "round_resolved": null,
@@ -14471,14 +14705,14 @@
           "step": "lit_search",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-scheme-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-24T00:30:26Z",
+          "finished_at": "2026-08-24T00:41:25Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14488,14 +14722,14 @@
           "step": "lit_read",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-scheme-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-24T00:45:28Z",
+          "finished_at": "2026-08-24T01:00:45Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14505,14 +14739,14 @@
           "step": "lit_note",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-scheme-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-24T01:05:31Z",
+          "finished_at": "2026-08-24T01:05:32Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14522,15 +14756,15 @@
           "step": "writer",
           "section_key": "scheme",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-scheme-critic",
             "general-attosecond-streaking-20260822-r1-scheme-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-24T01:10:32Z",
+          "finished_at": "2026-08-24T01:15:49Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -14540,9 +14774,77 @@
           "step": "critic",
           "section_key": "full_review",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r1-scheme-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-24T01:20:34Z",
+          "finished_at": "2026-08-24T01:36:34Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-full_review-gap_identify",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "gap_identify",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "done",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-24T01:40:37Z",
+          "finished_at": "2026-08-24T01:43:59Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-full_review-lit_search",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_search",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "running",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-full_review-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-24T01:45:38Z",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-full_review-lit_read",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_read",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-full_review-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r1-full_review-lit_note",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_note",
+          "section_key": "full_review",
+          "round": 1,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r1-full_review-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -14559,7 +14861,8 @@
           "round": 1,
           "status": "pending",
           "depends_on": [
-            "general-attosecond-streaking-20260822-r1-full_review-critic"
+            "general-attosecond-streaking-20260822-r1-full_review-critic",
+            "general-attosecond-streaking-20260822-r1-full_review-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -14662,11 +14965,23 @@
       "idea_review_passed": true,
       "last_dim_scores": {
         "innovation": 0.25,
-        "feasibility": 0.3,
+        "feasibility": 0.2,
         "rigor": 0.25,
         "expression": 0.5
-      }
+      },
+      "degradation_events": [
+        {
+          "step": "lit_search",
+          "detail": "agent_loop_failed→LiteratureService",
+          "at": "2026-08-24T00:36:26Z"
+        },
+        {
+          "step": "lit_search",
+          "detail": "agent_loop_failed→LiteratureService",
+          "at": "2026-08-24T01:51:39Z"
+        }
+      ]
     }
   },
-  "updated_at": "2026-08-24T00:12:37Z"
+  "updated_at": "2026-08-24T01:51:39Z"
 }

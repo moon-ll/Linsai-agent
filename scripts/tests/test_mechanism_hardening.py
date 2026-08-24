@@ -690,12 +690,100 @@ class NamingGuardTests(TestSuite):
         )
 
 
+class ReferencesPreflightTests(TestSuite):
+    """8：v6.9.42 references 程序化预检（任务重排核心）。
+
+    背景：references critic 被要求读 references.md（40KB，60% 是工作日志）
+    + 三个正文章节（62KB）≈ 106KB 找编号匹配——程序化可完成的任务交给
+    LLM 导致连续超时（bsv/order-param 卡死）。预检以正则完成编号一致性，
+    critic 只读 references.md + 预检表。
+    """
+
+    def __init__(self):
+        super().__init__("references 预检测试（v6.9.42-8）")
+
+    def setup(self):
+        import tempfile
+        self.tmp = Path(tempfile.mkdtemp())
+        sec = self.tmp / "04_proposal" / "sections"
+        sec.mkdir(parents=True)
+
+    def teardown(self):
+        if self.tmp and self.tmp.exists():
+            shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def _load(self):
+        import importlib
+        for mod_name in list(sys.modules):
+            if mod_name == "proposal_lifecycle.optimize":
+                del sys.modules[mod_name]
+        importlib.import_module("proposal_lifecycle.optimize")
+        from proposal_lifecycle.optimize import _references_preflight
+        return _references_preflight
+
+    def run_tests(self):
+        preflight = self._load()
+        sec = self.tmp / "04_proposal" / "sections"
+
+        # 8.1 编号一致性核心：缺失/未引用识别（粗体体例）
+        (sec / "rationale.md").write_text("论断A[1] 论断B[3] 论断C[critical] 无害", encoding="utf-8")
+        (sec / "content.md").write_text("论断D[2]", encoding="utf-8")
+        (sec / "scheme.md").write_text("论断E[5]", encoding="utf-8")
+        (sec / "references.md").write_text(
+            "## 参考文献\n\n**[1]** A. x.\n\n**[2]** B. y.\n\n**[3]** C. z.\n\n**[4]** D. w.\n",
+            encoding="utf-8")
+        out = preflight(self.tmp)
+        self.assert_true("[5]" in out.split("正文引用但列表缺失")[1].split("\n")[0],
+                         "正文引用 [5] 但列表缺失应被识别")
+        self.assert_true("[4]" in out, "列表 [4] 未被正文引用应被识别")
+        self.assert_true("4 条" in out, "粗体体例 **[N]** 应被正确计数")
+        self.assert_true("[critical]" not in out or "正文引用标记：3" in out,
+                         "英文标签 [critical] 不应计入引用编号")
+
+        # 8.2 行首体例兼容
+        (sec / "references.md").write_text("[1] A. x.\n[2] B. y.\n", encoding="utf-8")
+        out2 = preflight(self.tmp)
+        self.assert_true("2 条" in out2, "行首体例 [N] 应被识别")
+
+        # 8.3 膨胀告警（>25KB）
+        big = "## 参考文献\n\n" + "**[1]** A. padding. " + "x" * 30000 + "\n"
+        (sec / "references.md").write_text(big, encoding="utf-8")
+        out3 = preflight(self.tmp)
+        self.assert_true("膨胀告警" in out3, ">25KB 应触发膨胀告警")
+        self.assert_true("05_review" in out3, "告警应建议工作日志迁往 05_review")
+
+        # 8.4 引用数量对标
+        (sec / "references.md").write_text(
+            "\n".join(f"**[{i}]** Ref {i}." for i in range(1, 51)), encoding="utf-8")
+        out4 = preflight(self.tmp)
+        self.assert_true("超出区间" in out4, ">40 篇应标记超出区间")
+
+        # 8.5 源码级守卫：prompt 不再读正文章节、含预检注入
+        src = Path(__file__).parent.parent / "proposal_lifecycle" / "optimize.py"
+        text = src.read_text(encoding="utf-8")
+        self.assert_true(
+            "_references_preflight(prop_dir)" in text,
+            "critic prompt 应调用预检函数",
+        )
+        idx = text.find("程序化预检结果")
+        seg = text[max(0, idx - 3000):idx]
+        self.assert_true(
+            "body_files" not in seg,
+            "references 分支不应再构建正文文件列表（旧超载输入）",
+        )
+        self.assert_true(
+            "编号一致性已由预检完成" in text,
+            "prompt 应声明编号一致性已程序化完成",
+        )
+
+
 def main():
     from test_runner import print_report
 
     suites = []
     for cls in (AnchorOrderTests, WriterEscalationTests, SemanticDedupTests, ExecutorPathTests,
-                WeeklyResetAnchorTests, TaskSyncRollbackTests, KbDistillAutoTests, NamingGuardTests):
+                WeeklyResetAnchorTests, TaskSyncRollbackTests, KbDistillAutoTests, NamingGuardTests,
+                ReferencesPreflightTests):
         s = cls()
         s.setup()
         s.run_tests()

@@ -763,37 +763,38 @@ class OptimizeMixin:
         is_references = focus_section and focus_section.get("key") == "references"
 
         if is_references:
-            # v6.8.3-fix10: references 模块轻量化 prompt
-            # 参考文献检验不需要叙述式检查、创新性评分、7模块完整性检查
-            # 聚焦：引文格式、编号一致性、引用相关性、缺失引用检测
+            # v6.9.42: references 评审任务重排——程序化预检 + 输入瘦身。
+            # 旧安排的三处结构性缺陷（08-24 诊断，bsv/order-param 连续超时根因）：
+            # ① 输入超载：critic 被要求读 references.md（40KB，其中 60% 是
+            #    writer 每轮追加的核校工作日志 §D-F）+ 三个正文章节（62KB）
+            #    ≈ 106KB，900-1200s 跑不完；
+            # ② 程序化任务交给 LLM："编号一致性"（正文 [N] ↔ 列表编号比对）
+            #    本可正则完成，却让 critic 通读全文去找——而 references.md
+            #    的 §D 映射表往往已经存在（writer 上轮核校的产物）；
+            # ③ 核校日志污染文献文件：§E 核实声明/§F 闭环证据属 05_review
+            #    域内容，写入 references.md 使其从 8KB 膨胀到 40KB。
+            # 修复：预检程序化产出引用映射表（几 KB）附入 prompt，critic
+            # 只读 references.md + 映射表，不再读正文章节——输入降至
+            # ~45KB，LLM 聚焦其擅长的格式规范/时效性/相关性判断。
             ref_file = prop_dir / "04_proposal" / "sections" / "references.md"
-            # 同时读取正文，检查正文中的引用标记是否在参考文献列表中
-            body_files = [
-                str(prop_dir / "04_proposal" / "sections" / f"{s['key']}.md")
-                for s in PROPOSAL_SECTIONS
-                if s["key"] in ("rationale", "content", "scheme") and sections.section_exists(s["key"])
-            ]
-            read_instruction = (
-                f"【参考文献文件】{ref_file}\n"
-                f"【正文文件】\n" + "\n".join(f"- {p}" for p in body_files) +
-                "\n\n请读取参考文献文件和正文文件，做参考文献检验。\n"
-            )
+            preflight = _references_preflight(prop_dir)
             prompt = (
                 f"请对以下 NSFC 申请书的参考文献做第 {round_num} 轮检验。\n\n"
                 f"【项目类型】{project_type}\n\n"
-                f"{read_instruction}\n"
-                f"请执行以下检查（不需要检查写作风格、创新性或可行性）：\n"
-                f"1. 引文格式：是否统一使用 [N] 编号，作者、年份、期刊、卷页是否完整\n"
-                f"2. 编号一致性：正文中引用的 [N] 是否在参考文献列表中都能找到，反之亦然\n"
-                f"3. 引用相关性：每条参考文献是否与申请书的科学问题相关，是否有无关引用\n"
-                f"4. 缺失引用：正文中做出的重要论断是否缺少文献支撑\n"
-                f"5. 引用数量：参考文献总数是否在 20-40 篇区间（范本实测 30-40 篇为标杆）；"
-                f"正文 [N] 编号引用 10-20 次即达标，未编号引用的文献作为研读基础列入文末不算问题\n"
-                f"6. 时效性：是否包含近 3 年的文献，是否有过于陈旧的引用\n\n"
-                f"每个问题按严重程度分级（critical/high/medium/low），给出具体修改建议。\n\n"
+                f"【参考文献文件】{ref_file}\n\n"
+                f"【程序化预检结果（编号一致性已由程序完成，请直接采信并引用）】\n"
+                f"{preflight}\n\n"
+                f"请执行以下检查（不需要检查写作风格、创新性或可行性；\n"
+                f"编号一致性已由预检完成，不要重复逐条核对）：\n"
+                f"1. 引文格式：作者、年份、期刊、卷页是否完整统一（DOI/arXiv 二选一）\n"
+                f"2. 引用相关性：每条参考文献是否与申请书的科学问题相关，是否有无关引用\n"
+                f"3. 缺失引用：结合预检的未引用条目与正文论断（凭预检信息判断，无需读正文全文）\n"
+                f"4. 引用数量与时效性：总数是否在 20-40 篇区间，是否包含近 3 年文献\n\n"
+                f"每个问题按严重程度分级（critical/high/medium/low），给出具体修改建议。\n"
+                f"若预检已标记膨胀告警，请将'工作日志污染'列为问题并建议迁移至 05_review。\n\n"
                 f"【评分（必填）】\n"
                 f"只评两个维度（0-1），创新性和可行性标记为 N/A：\n"
-                f"  - 严谨性（rigor）：引文格式、编号一致性、作者信息完整性\n"
+                f"  - 严谨性（rigor）：引文格式、作者信息完整性\n"
                 f"  - 完整性（completeness）：引用数量、时效性、缺失引用情况\n\n"
                 f"在检验报告末尾，必须包含如下格式的评分块（供程序解析）：\n"
                 f"```\n"
@@ -807,13 +808,8 @@ class OptimizeMixin:
                 f"（注：创新性和可行性填 N/A，综合评分为严谨性和完整性的均值）\n"
                 f"将检验报告写入：{report_path}\n"
             )
-            # v6.8.37: references 检验超时从 300s 放宽到 600s。300s 对 references 丰富
-            # 的课题偏紧（quantum-geometry 曾连续 3 次 300s 超时、重试耗尽卡住）；
-            # 600s 与调用方 critic_timeout 默认值一致，仍短于主 critic 的 900s
-            # （references 评审不评创新/可行性，较主 critic 轻）。
-            # v6.9.31: 600s→1200s。实测 references 输入含 references.md + 三个正文
-            # 章节（约 106KB），且 MiniMax 慢 API 下主 critic 单章都要 1155s——
-            # 600s 对 references 评审过紧（order-parameter r7 连续 3 次超时卡死）。
+            # v6.9.42: 输入从 106KB 降至 ~45KB 后回归 900s 基准（旧 1200s
+            # 是为超载输入的权宜之计，任务重排后不再需要）。
             return self._run_hermes("critic", prompt, min(timeout, 1200))
 
         elif is_full_review:
@@ -2235,6 +2231,84 @@ class OptimizeMixin:
             f"以下问题是此前多轮对抗评审中反复/遗留的 P0 级问题，请务必处理：\n"
             f"{block}\n"
         )
+
+
+# ---------------------------------------------------------------------------
+# v6.9.42: references 程序化预检（编号一致性正则比对 + 膨胀检测）
+# ---------------------------------------------------------------------------
+
+def _references_preflight(prop_dir: Path) -> str:
+    """references 评审的程序化预检（零 LLM）。
+
+    完成旧 prompt 交给 critic 的"编号一致性"检查：
+    - 正文 [N] 引用标记全集（rationale/content/scheme 三章节）
+    - 文献列表编号全集（兼容 `**[N]**` 粗体与 `[N]` 行首两种体例）
+    - 两者比对：正文引用但列表缺失 / 列表存在但正文未引用 / 编号连续性
+    - 总数对标 20-40 篇区间
+    - 膨胀告警：references.md > 25KB 提示工作日志污染（35 条文献正常
+      约 8-12KB，超出部分大概率是 §D-F 核校日志，应迁 05_review）
+
+    Returns:
+        预检报告文本（几 KB，直接附入 critic prompt）。
+    """
+    import re
+
+    sections_dir = prop_dir / "04_proposal" / "sections"
+    lines = []
+
+    # ① 正文引用标记
+    body_cites: set = set()
+    per_section = {}
+    for sec in ("rationale", "content", "scheme"):
+        p = sections_dir / f"{sec}.md"
+        if not p.exists():
+            continue
+        text = p.read_text(encoding="utf-8")
+        # [N] 角标；排除 [critical]–[medium] 类英文标签（只取纯数字）
+        marks = set(int(m) for m in re.findall(r"\[(\d{1,3})\]", text))
+        per_section[sec] = sorted(marks)
+        body_cites.update(marks)
+
+    # ② 文献列表编号（粗体 **[N]** 或行首 [N]）
+    ref_path = sections_dir / "references.md"
+    ref_ids: set = set()
+    ref_size = 0
+    if ref_path.exists():
+        ref_text = ref_path.read_text(encoding="utf-8")
+        ref_size = len(ref_text.encode("utf-8"))
+        # 粗体体例：**[1]** Author...（实测 bsv 等 writer 采用）
+        ref_ids.update(int(m) for m in re.findall(r"\*\*\[(\d{1,3})\]\*\*", ref_text))
+        # 行首体例：[1] Author...
+        ref_ids.update(int(m) for m in re.findall(r"^\[(\d{1,3})\]", ref_text, re.M))
+
+    missing = sorted(body_cites - ref_ids)
+    uncited = sorted(ref_ids - body_cites)
+    continuity = (
+        "连续（1–%d 无缺口）" % max(ref_ids)
+        if ref_ids and ref_ids == set(range(1, max(ref_ids) + 1))
+        else f"不连续（缺口：{sorted(set(range(1, max(ref_ids)+1)) - ref_ids)[:10] if ref_ids else []}）"
+        if ref_ids else "（列表为空或格式未识别）"
+    )
+
+    lines.append(f"- 正文引用标记：{len(body_cites)} 个不同编号")
+    for sec, marks in per_section.items():
+        if marks:
+            lines.append(f"  - {sec}: {len(marks)} 个（{marks[0]}–{marks[-1]}）")
+    lines.append(f"- 文献列表条目：{len(ref_ids)} 条（编号 {min(ref_ids) if ref_ids else '-'}–{max(ref_ids) if ref_ids else '-'}，{continuity}）")
+    lines.append(f"- 正文引用但列表缺失：{missing if missing else '无'}")
+    lines.append(f"- 列表存在但正文未引用：{uncited if uncited else '无'}")
+    lines.append(f"- 引用数量对标：{'达标（20-40 篇）' if 20 <= len(ref_ids) <= 40 else f'超出区间（{len(ref_ids)} 篇）' if len(ref_ids) > 40 else f'低于区间（{len(ref_ids)} 篇，注意未编号的研读基础文献不算问题）'}")
+
+    # ③ 膨胀告警
+    if ref_size > 25 * 1024:
+        lines.append(
+            f"- ⚠ 膨胀告警：references.md 达 {ref_size // 1024}KB（{len(ref_ids)} 条文献正常约 "
+            f"{max(8, len(ref_ids) // 4)}-{len(ref_ids) // 3}KB）。超出部分大概率是核校工作日志"
+            f"（§D 映射表/§E 核实声明/§F 闭环证据），属 05_review 域内容——建议要求 writer "
+            f"将工作日志迁出，仅保留文献条目与条目内挂钩注释。"
+        )
+
+    return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------

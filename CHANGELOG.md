@@ -1,5 +1,40 @@
 # 变更记录
 
+## v6.9.45 - 2026-08-24 references 评审任务重排（程序化预检）+ 交变磁体设想人工改写
+
+背景：references critic 连续超时卡死 bsv/order-param 两个临门课题。诊断
+发现任务安排三处结构性缺陷：① 输入超载——critic 被要求读 references.md
+（40KB，其中 60% 是 writer 每轮追加的核校工作日志 §D-F）+ 三个正文章节
+（62KB）≈ 106KB，超时上限怎么调都跑不完；② 程序化任务交给 LLM——"编号
+一致性"（正文 [N] ↔ 列表编号比对）正则可完成，却让 critic 通读全文；
+③ 核校日志污染文献文件——35 条文献本应 8-11KB 被撑到 40KB。
+
+- `proposal_lifecycle/optimize.py`：
+  - 新增 `_references_preflight()`：程序化预检（零 LLM）——正文引用
+    标记全集（排除 [critical] 类英文标签）× 列表编号全集（兼容
+    `**[N]**` 粗体与行首两种体例）→ 缺失/未引用/连续性/数量对标 +
+    膨胀告警（>25KB 提示工作日志迁 05_review）。
+  - references 分支 prompt 重构：只读 references.md + 预检表（输入
+    106KB → ~45KB），编号一致性声明"已由程序完成"，critic 聚焦
+    格式规范/时效性/相关性判断；删除正文文件列表构建。
+- 实测预检（真实数据）：bsv 秒级输出"33 引用 vs 35 条、[27,28] 未引用"；
+  order-param 额外发现编号缺口 [4,6,8,...] 与 42 篇超区间——这些正是
+  旧超时路径要查的全部内容。
+- 交变磁体课题（general-new-idea-20260822）设想人工改写（v2）：按三份
+  idea_review 意见逐条修正——① 材料体系 MnPS₃/FePS₃/CrI₃（均非交变
+  磁体）→ MnTe（d 波自旋劈裂获 ARPES 证实）+ CrSb/RuO₂ 对照；② 删除
+  v1 全部不可考引文（Crossref 零命中），重建 DOI 可查文献；③ "首次"
+  降级并与 MnTe 既有 HHG 工作显式对账；④ 修正量纲错误（温度灵敏度
+  → 时间分辨 ≤100 fs）；⑤ 补量级论证（d 波劈裂 ~0.4 eV 与光子 0.41 eV
+  同量级，替代错用的层间交换 1.5 meV）；⑥ 重构内容/路线切分（v1 两节
+  逐字重复）；⑦ 三个创新点补可证伪判据（45°/90° 偏振周期二元判据）
+  与预设失败出口。idea_review job 已重置重评。
+- bsv 卡住的 references-critic 已重置（新 prompt 下重跑）。
+- 测试：`test_mechanism_hardening.py` 新增 ReferencesPreflightTests
+  （11 断言：粗体/行首双体例、缺失/未引用识别、英文标签排除、膨胀
+  告警、数量对标、prompt 源码守卫——不再构建正文列表）。
+- 验证：`self_test --module` 1069/1069 全绿。
+
 ## v6.9.44 - 2026-08-24 修复扫描周末误判（UTC→北京时间，周一凌晨自愈延迟根因）
 
 背景：08h 健康检查发现 4 个 attempts=3 failed job（moire/order-param/
@@ -71,6 +106,7 @@ prompt 收到零信息。与 v6.9.41 对比报告"bsv 审核意见注入未产�
   structured → 结构化渲染 / 实质 raw 优先不被抢位 / 兜底 raw 无
   structured → 维持旧行为）。
 - 验证：`self_test --module` 1047/1047 全绿（+7）。
+
 
 ## v6.9.41 - 2026-08-23 score_history 遍次隔离 + 退回对比报告（全路径学习 P0/P1）
 
