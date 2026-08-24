@@ -13446,7 +13446,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 交变磁体高次谐波产生与固态强场非线性光学新前沿",
       "created_at": "2026-08-22T05:40:16Z",
-      "updated_at": "2026-08-24T01:43:10Z",
+      "updated_at": "2026-08-24T01:53:10Z",
       "optimization_rounds": 0,
       "last_score": 0.0,
       "score_history": [],
@@ -13496,13 +13496,13 @@
           "step": "idea_review",
           "section_key": "idea_review",
           "round": 1,
-          "status": "running",
+          "status": "failed",
           "depends_on": [],
-          "attempts": 0,
+          "attempts": 1,
           "scheduled_at": "",
           "started_at": "2026-08-24T01:43:10Z",
-          "finished_at": "",
-          "last_error": "",
+          "finished_at": "2026-08-24T01:53:10Z",
+          "last_error": "评审调用失败：超时(600s)",
           "cron_job_id": "",
           "error_history": [
             {
@@ -14983,5 +14983,5 @@
       ]
     }
   },
-  "updated_at": "2026-08-24T01:51:39Z"
+  "updated_at": "2026-08-24T01:53:10Z"
 }

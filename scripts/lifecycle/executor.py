@@ -1139,7 +1139,11 @@ def _run_idea_review_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[s
             f"```\n"
             f"将评审报告写入：{prop_dir / '05_review' / f'idea-review-r{round_num}-a{attempt}.md'}\n"
         )
-        review_result = self._run_hermes("researcher", review_prompt, timeout=600)
+        # v6.9.45: 600s→1200s。idea_review 要求 researcher 联网核查文献
+        # 可靠性（Crossref/arXiv 题名检索，a3 评审明确使用），实测 600s
+        # 反复超时（08-24 v2 设想重评 elapsed=600.06s 精确卡线）。与
+        # critic 1200s 基准对齐。
+        review_result = self._run_hermes("researcher", review_prompt, timeout=1200)
         if not review_result.get("success"):
             return {"success": False, "error": f"评审调用失败：{review_result.get('error')}"}
 
