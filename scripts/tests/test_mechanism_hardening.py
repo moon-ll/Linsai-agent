@@ -777,13 +777,95 @@ class ReferencesPreflightTests(TestSuite):
         )
 
 
+class MetricsPreflightTests(TestSuite):
+    """9：v6.9.46 跨章节指标一致性预检 + writer 输入对齐 + 纯净性红线。
+
+    背景：full_review critic 读全部 5 章节（最大 180KB）找数字矛盾——
+    程序化可完成的指标比对交给 LLM（同构于 references 问题）。writer
+    无条件列出全部章节文件供读但指令只改聚焦章节；且 writer 是
+    references.md 工作日志污染的源头。
+    """
+
+    def __init__(self):
+        super().__init__("指标预检与 writer 对齐测试（v6.9.46-9）")
+
+    def setup(self):
+        import tempfile
+        self.tmp = Path(tempfile.mkdtemp())
+        sec = self.tmp / "04_proposal" / "sections"
+        sec.mkdir(parents=True)
+
+    def teardown(self):
+        if self.tmp and self.tmp.exists():
+            shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def run_tests(self):
+        import importlib
+        for mod_name in list(sys.modules):
+            if mod_name == "proposal_lifecycle.optimize":
+                del sys.modules[mod_name]
+        importlib.import_module("proposal_lifecycle.optimize")
+        from proposal_lifecycle.optimize import _cross_section_metrics_preflight
+        sec = self.tmp / "04_proposal" / "sections"
+
+        # 9.1 一致指标识别 + 差异项检出
+        (sec / "rationale.md").write_text("强度 0.5-2 TW/cm²，脉宽 30 fs，温度 300 K", encoding="utf-8")
+        (sec / "content.md").write_text("驱动 0.5-2 TW/cm²，30 fs 脉冲", encoding="utf-8")
+        (sec / "scheme.md").write_text("光强 0.5-2 TW/cm²，脉宽 28 fs（收紧）", encoding="utf-8")
+        out = _cross_section_metrics_preflight(self.tmp)
+        self.assert_true("强度 TW/cm²=0.5" in out or "峰值强度 TW/cm²" in out,
+                         "跨章节一致的强度指标应被识别")
+        self.assert_true("时间 fs" in out and "差异" in out,
+                         "30 vs 28 fs 差异应被标记")
+
+        # 9.2 无差异时不误报
+        (sec / "scheme.md").write_text("光强 0.5-2 TW/cm²，脉宽 30 fs", encoding="utf-8")
+        out2 = _cross_section_metrics_preflight(self.tmp)
+        self.assert_true("无数值集差异项" in out2, "全一致时应报告无差异")
+
+        # 9.3 源码守卫：full_review critic 排除 references + 附预检
+        src = (Path(__file__).parent.parent / "proposal_lifecycle" / "optimize.py").read_text(encoding="utf-8")
+        self.assert_true(
+            "and s['key'] != \"references\"  # v6.9.46: 排除文献列表" in src,
+            "full_review critic 文件列表应排除 references.md",
+        )
+        self.assert_true(
+            "_cross_section_metrics_preflight(prop_dir)" in src,
+            "full_review critic 应附指标预检",
+        )
+
+        # 9.4 writer 输入对齐：章节级无跨章节 P0 只列聚焦章节
+        self.assert_true(
+            "writer_read_files" in src,
+            "writer 应使用对齐后的读取列表变量",
+        )
+        self.assert_true(
+            "if focus_section and not _allow_cross:" in src,
+            "章节级且无跨章节 P0 时应只列聚焦章节",
+        )
+
+        # 9.5 纯净性红线：禁止工作日志进章节文件
+        self.assert_true(
+            "文件纯净性红线" in src,
+            "writer prompt 应含文件纯净性红线",
+        )
+        self.assert_true(
+            "严禁写入任何工作过程记录" in src,
+            "应明确禁止核校日志进章节文件",
+        )
+        self.assert_true(
+            "迁移至 05_review" in src,
+            "应要求迁移既有污染内容",
+        )
+
+
 def main():
     from test_runner import print_report
 
     suites = []
     for cls in (AnchorOrderTests, WriterEscalationTests, SemanticDedupTests, ExecutorPathTests,
                 WeeklyResetAnchorTests, TaskSyncRollbackTests, KbDistillAutoTests, NamingGuardTests,
-                ReferencesPreflightTests):
+                ReferencesPreflightTests, MetricsPreflightTests):
         s = cls()
         s.setup()
         s.run_tests()

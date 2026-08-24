@@ -818,15 +818,27 @@ class OptimizeMixin:
                 f"请检查三个章节之间的逻辑衔接、术语一致性、内容冗余/矛盾。\n"
                 f"不需要逐段细审，聚焦整体连贯性。\n\n"
             )
+            # v6.9.46: full_review 输入瘦身 + 指标一致性程序化预检。
+            # 旧安排读全部 5 章节（实测最大 ~180KB：48+46+47+33+39KB）+
+            # standards 36KB，是超时大户（4 次）。两处同构修复：
+            # ① references.md（39KB 纯文献列表）与"逻辑衔接/术语一致性/
+            #    冗余矛盾"审查无关，排除——输入立减 ~40KB；
+            # ② "指标红线：同一指标跨章节一致"的数字比对程序化完成，
+            #    预检表附入 prompt，critic 直接采信。
             files_to_read = [
                 str(prop_dir / "04_proposal" / "sections" / f"{s['key']}.md")
                 for s in PROPOSAL_SECTIONS
                 if sections.section_exists(s['key'])
+                and s['key'] != "references"  # v6.9.46: 排除文献列表
             ]
+            metrics_preflight = _cross_section_metrics_preflight(prop_dir)
             read_instruction = (
                 "【申请书章节文件】\n" +
                 "\n".join(f"- {p}" for p in files_to_read) +
-                "\n\n请读取以上全部章节文件，做整体一致性审查。\n"
+                "\n\n请读取以上章节文件，做整体一致性审查。\n"
+                "（references.md 已排除——文献列表与逻辑衔接审查无关，\n"
+                "其编号一致性由 references 专轮的程序化预检覆盖。）\n\n"
+                f"【跨章节指标一致性预检（程序完成，请直接采信）】\n{metrics_preflight}\n"
             )
         elif focus_section:
             focus_text = (
@@ -1477,11 +1489,29 @@ class OptimizeMixin:
             )
 
         # v6.7.7: 构建写入目标与读取文件列表
-        section_files = [
-            str(prop_dir / "04_proposal" / "sections" / f"{s['key']}.md")
-            for s in PROPOSAL_SECTIONS
-            if sections.section_exists(s['key'])
-        ]
+        # v6.9.46: 输入与目标对齐——旧版无条件列出全部 5 个章节文件
+        # （最大 ~180KB）供 writer "可读"，但章节级修订指令又说"只修改
+        # 聚焦章节"，输入与目标不匹配是 writer 超时的主因之一（4 次）。
+        # 章节级修订且无跨章节 P0 时只列聚焦章节；整体修订/跨章节修复
+        # 时保留全列表（references.md 仍排除——修订引用走 references 专轮）。
+        _allow_cross = bool(
+            focus_section
+            and any(
+                isinstance(e, dict) and e.get("round_resolved") is None and not e.get("stale")
+                for e in (self._load_open_critical_issues(proposal_id) or [])
+            )
+        )
+        if focus_section and not _allow_cross:
+            writer_read_files = [
+                str(prop_dir / "04_proposal" / "sections" / f"{focus_section['key']}.md")
+            ]
+        else:
+            writer_read_files = [
+                str(prop_dir / "04_proposal" / "sections" / f"{s['key']}.md")
+                for s in PROPOSAL_SECTIONS
+                if sections.section_exists(s['key'])
+                and s['key'] != "references"  # v6.9.46: 引用修订走专轮
+            ]
 
         # v6.7.10: 构建缺失模块提示
         section_key_to_cn = {s["key"]: s["cn"] for s in PROPOSAL_SECTIONS}
@@ -1597,8 +1627,8 @@ class OptimizeMixin:
         prompt = (
             f"请根据对抗评审意见优化申请书。\n\n"
             f"【主读取文件】{primary_read}\n"
-            f"【所有章节文件】\n" +
-            "\n".join(f"- {p}" for p in section_files) + "\n\n"
+            f"【章节文件】\n" +
+            "\n".join(f"- {p}" for p in writer_read_files) + "\n\n"
             f"【项目类型】{project_type}\n"
             f"【质量标准】请读取 {standards_path}，重点关注：\n"
             f"  - section_standards（每个 section 的详细撰写要求，必须逐条对标）\n"
@@ -1633,7 +1663,14 @@ class OptimizeMixin:
             f"      只更新与聚焦章节对应的细节部分。\n"
             f"   c) 文献阅读笔记：{reading_notes_path}\n"
             f"      若本轮使用了新文献（尤其是 {lit_supplement[:80] if lit_supplement else '定向检索结果'}），\n"
-            f"      请在笔记中追加一条记录：阅读日期、文献标题、来源、核心结论、与课题关联、已引用位置。\n"
+            f"      请在笔记中追加一条记录：阅读日期、文献标题、来源、核心结论、与课题关联、已引用位置。\n\n"
+            f"■ 文件纯净性红线（v6.9.46，违反即返工）：\n"
+            f"- 章节文件（尤其 references.md）只写正文内容：文献条目、条目内挂钩注释、\n"
+            f"  章节正文。严禁写入任何工作过程记录——核校日志、闭环证据索引、修复\n"
+            f"  声明、'本节由 writer 在 round-N 评审后核校'类段落一律不进章节文件。\n"
+            f"- 过程性说明写入 05_review/ 下对应报告文件（或方法学手册），不放正文。\n"
+            f"- 此前轮次写入 references.md 的 §D 映射表/§E 核实声明/§F 闭环日志\n"
+            f"  如仍在，请在本轮修订时迁移至 05_review/ 并从章节文件删除。\n"
         )
 
         # v6.8.17: cross-proposal 范例注入——从最高分课题提取范例段落
@@ -2308,6 +2345,79 @@ def _references_preflight(prop_dir: Path) -> str:
             f"将工作日志迁出，仅保留文献条目与条目内挂钩注释。"
         )
 
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# v6.9.46: 跨章节指标一致性程序化预检（full_review critic 专用）
+# ---------------------------------------------------------------------------
+
+def _cross_section_metrics_preflight(prop_dir: Path) -> str:
+    """提取各章节的量化指标并跨章节比对（零 LLM）。
+
+    对应质量标准"指标红线 P0：同一指标在不同章节的数值与口径必须一致"——
+    旧安排让 critic 通读 180KB 全文去找数字矛盾（超时大户），本函数正则
+    提取带单位的关键指标量（强度/时间/能量/温度/尺寸/百分比），按数值+
+    单位聚类，标出跨章节不一致项与全文唯一项。
+
+    Returns:
+        预检报告文本（直接附入 full_review critic prompt）。
+    """
+    import re
+
+    # 指标型"数值+单位"模式（物理量纲，排除纯编号/年份/引用角标）
+    patterns = [
+        (r"(\d+(?:\.\d+)?)\s*TW/cm[²2]", "峰值强度 TW/cm²"),
+        (r"(\d+(?:\.\d+)?)\s*GW/cm[²2]", "强度 GW/cm²"),
+        (r"(\d+(?:\.\d+)?)\s*mJ/cm[²2]", "能量密度 mJ/cm²"),
+        (r"(\d+(?:\.\d+)?)\s*(?:fs|飞秒)\b", "时间 fs"),
+        (r"(\d+(?:\.\d+)?)\s*(?:ps|皮秒)\b", "时间 ps"),
+        (r"(\d+(?:\.\d+)?)\s*(?:nm|纳米)\b", "波长/尺寸 nm"),
+        (r"(\d+(?:\.\d+)?)\s*(?:μm|um|微米)\b", "波长/尺寸 μm"),
+        (r"(\d+(?:\.\d+)?)\s*(?:meV|毫电子伏)\b", "能量 meV"),
+        (r"(\d+(?:\.\d+)?)\s*(?:eV|电子伏)\b", "能量 eV"),
+        (r"(\d+(?:\.\d+)?)\s*(?:K|开尔文)\b(?![a-zA-Z])", "温度 K"),
+        (r"(\d+(?:\.\d+)?)\s*(?:层|atomic layers?)\b", "层数"),
+        (r"(\d+(?:\.\d+)?)\s*%", "百分比"),
+    ]
+
+    sections_dir = prop_dir / "04_proposal" / "sections"
+    per_section_values: dict = {}
+    for sec in ("rationale", "content", "scheme", "full_review"):
+        p = sections_dir / f"{sec}.md"
+        if not p.exists():
+            continue
+        text = p.read_text(encoding="utf-8")
+        found = {}
+        for pat, label in patterns:
+            for m in re.finditer(pat, text):
+                val = m.group(1)
+                found.setdefault(label, set()).add(val)
+        per_section_values[sec] = found
+
+    lines = []
+    # 跨章节不一致检测：同一量纲在不同章节出现但数值集不同
+    all_labels = sorted({lbl for fv in per_section_values.values() for lbl in fv})
+    issues = []
+    consistent = []
+    for label in all_labels:
+        secs_with = {sec: fv[label] for sec, fv in per_section_values.items() if label in fv}
+        if len(secs_with) < 2:
+            continue
+        union = set().union(*secs_with.values())
+        # 章节间数值集完全一致 → 一致；存在差异 → 需人工判断（可能为区间/上限不同表述）
+        if all(v == union for v in secs_with.values()) and len(union) == 1:
+            consistent.append(f"{label}={next(iter(union))}")
+        else:
+            detail = "; ".join(f"{sec}:{sorted(v)}" for sec, v in secs_with.items())
+            issues.append(f"  - {label}: {detail}")
+    lines.append(f"- 跨章节完全一致的指标：{len(consistent)} 项"
+                 + (f"（{', '.join(consistent[:8])}{'…' if len(consistent) > 8 else ''}）" if consistent else ""))
+    if issues:
+        lines.append(f"- ⚠ 数值集存在差异的指标（{len(issues)} 项，请核对是口径差异还是矛盾）：")
+        lines.extend(issues[:10])
+    else:
+        lines.append("- 无数值集差异项")
     return "\n".join(lines)
 
 

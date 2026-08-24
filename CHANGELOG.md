@@ -1,5 +1,35 @@
 # 变更记录
 
+## v6.9.46 - 2026-08-24 超时任务全景排查：full_review/writer 同构问题批量修复
+
+背景：用户要求排查易超时任务是否与 references 评审同构。两样本统计
+（活跃 error_history 17 次 + 归档 20 次 = 37 次）：critic 系列 14 次
+（content 5、references 6 已修、full_review 4、rationale/scheme 各 3）、
+writer 系列 10 次（full_review 4、references 2）、lit_read 2 次。确认
+full_review/critic 与 writer 存在与 references 完全同构的三类问题。
+
+- full_review/critic 输入超载：旧版读全部 5 章节（实测最大 ~180KB：
+  48+46+47+33+39KB）+ standards 36KB。修复：① 排除 references.md——
+  39KB 纯文献列表与"逻辑衔接/术语一致性/冗余矛盾"审查无关，输入立减
+  ~40KB；② 新增 `_cross_section_metrics_preflight()`——"指标红线 P0：
+  同一指标跨章节一致"的数字比对程序化完成（12 类物理量纲正则提取，
+  按数值+单位聚类，标出跨章节数值集差异），预检表附入 prompt。
+- 实测预检（真实数据）：attosecond 课题立即检出 content `285 eV` vs
+  scheme `284 eV` 数值矛盾——正是指标红线要抓的目标；bsv 检出 5 项
+  差异指标（fs/nm/μm/%/eV）。
+- writer 输入与目标对齐：旧版无条件列出全部 5 章节文件供"可读"，但
+  章节级修订指令又说"只修改聚焦章节"。修复：focus_section 存在且无
+  跨章节 P0 时只列聚焦章节（references.md 全场景排除——引用修订走
+  专轮）；跨章节修复场景保留多章节列表。
+- writer 文件纯净性红线（references.md 污染源头治理）：prompt 明确
+  禁止向章节文件写入工作过程记录（核校日志/闭环证据/修复声明），
+  要求过程性内容写 05_review/，既有 §D-F 污染内容下轮修订时迁移。
+- lit_read（2 次）属必要长任务（读多篇文献全文），不动。
+- 测试：`test_mechanism_hardening.py` 新增 MetricsPreflightTests
+  （10 断言：一致/差异指标识别、不误报、references 排除守卫、writer
+  对齐守卫、纯净性红线守卫）。
+- 验证：`self_test --module` 1079/1079 全绿。
+
 ## v6.9.45 - 2026-08-24 references 评审任务重排（程序化预检）+ 交变磁体设想人工改写
 
 背景：references critic 连续超时卡死 bsv/order-param 两个临门课题。诊断
