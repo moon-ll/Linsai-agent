@@ -1,16 +1,16 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-24 08h 健康检查（**第七轮 #4/#5/#6 完成：#4 正常（scores[role] 顶层直连+08-23Z moire −8.0 跨课题结算闭环）/#5 清理正常+TARGET_PROFILES 5/7 偏差维持/#6 正常（注入三要素行号漂移至 optimize.py L990/L1657/L1515-1524；berry 12 未解决 90h+ 稳定、attosecond 今晨新增 17 条正常积累）**；**确认并修复 v6.9.44 Bug：_is_weekend UTC→北京时间**（周一 00:00-08:00 BJ 误判周末致 repair 跳过 failed job 重试，4 个 attempts=3 job 拖到 12:00 才能自愈的根因；修复后手动 --repair 已重置 4 job 待跑）；回归 1058/1058；17 cron 零缺失；无其他关键缺陷）
-完整报告：logs/healthchecks/healthcheck-2026-08-24-08h.md
+最后更新：2026-08-24 12h 健康检查（**第七轮 #7/#8/#9 完成：#7 潜在死代码维持（全 8 课题 score_history 0 条 ≥0.85，最高 0.81，收敛窗口全量不可达；条目级窗口+0.80 文档滞后两项待裁决）/#8 正常（当日 3 条 stalled 真实触发 qg 104h/kt 103h/berry 111h 且三轮飞书通知）/#9 正常（monitor 文件族口径健康静默：08-16 15/08-22 25 actions；reflection 侧死代码维持原判）**；**确认并修复 v6.9.47 Bug：DOI 塞进 arxiv_id 字段致 `_ingest_new_papers` ENOENT**（attosecond r2 lit_search 10 篇丢 8 篇实证，归一化移入 doi_clean 走 doi-{slug} 清洗，+1 回归用例）；回归 1083/1083；13 lc- cron 零缺失；新报告 2 项待裁决：lit_read/lit_note DOI 路径设计缺口、api_idle_spin 对合法跳过误报）
+完整报告：logs/healthchecks/healthcheck-2026-08-24-12h.md
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：
    `python3 -c "import sys; sys.path.insert(0,'scripts'); from hermes_bridge import cron_list; ..."`（linsai profile，17 条，含 4 条简报）。注意 schedule_display 可能为 None，打印时用 `str(x or fallback)`
 2. `lifecycle_monitor.py` 实际参数为 `--dry-run`（工具提示词中的 `--check` 不存在）；异常详情不在日志里，需直接调 `_check_proposals()` / `_check_health_signals()` 拿 anomalies——**`_check_proposals` 返回 (stats, anomalies) 二元组且 stats 为列表非 dict（勿 .get()，16h 踩坑）**、后者返回单个 dict 而非 list；**monitor 模块导入用顶层 `import lifecycle_monitor`**（`from proposal_lifecycle import lifecycle_monitor` 会 ImportError）
 3. `_lifecycle.json` proposals 为 dict；`pipeline_jobs` 为 list；job 字段：job_id 在顶层、轮次键为 `round`；stalled 判定线 1800s/48h
-4. `self_test --module` 为 self_test.py 内**硬编码清单**（非 glob 自动发现）：新测试套件必须注册进 mapping["module"]，否则被 except:pass 静默跳过（08-18 04h 实证，14 用例无声丢失）。当前基线 1058/1058（v6.9.44 新增 test_weekend_local_timezone +11，此前 v6.9.41 test_pass_history +21、v6.9.40 软卡死守护 +4、v6.9.39 NamingGuardTests +9）。仍未注册套件：test_circuit_breaker/test_cron_setup_idempotent/test_ghost_write_guard/test_health_sensor/test_idea_review/test_input_summarize_shapes/test_monitor_lark_failure/test_optimize_v6817_prompt_vars（是否批量注册待人工裁决）
+4. `self_test --module` 为 self_test.py 内**硬编码清单**（非 glob 自动发现）：新测试套件必须注册进 mapping["module"]，否则被 except:pass 静默跳过（08-18 04h 实证，14 用例无声丢失）。当前基线 1083/1083（v6.9.47 +1 DOI-in-arxiv_id 入库回归、v6.9.46 +10、v6.9.45 +11，此前 v6.9.44 test_weekend_local_timezone +11、v6.9.41 test_pass_history +21、v6.9.40 软卡死守护 +4、v6.9.39 NamingGuardTests +9；总数含随运行态浮动的数据敏感套件，以零失败为准）。仍未注册套件：test_circuit_breaker/test_cron_setup_idempotent/test_ghost_write_guard/test_health_sensor/test_idea_review/test_input_summarize_shapes/test_monitor_lark_failure/test_optimize_v6817_prompt_vars（是否批量注册待人工裁决）
 5. 时区：北京时间（UTC+8）；now_utc() 产物过滤时注意 UTC=BJ-8；system-kanban execution_history 时间戳为 UTC；**logs/linsai.log 行内时间为本地 BJ 时间**（08-21 溯源时勿与 state 的 UTC 混淆）
-6. git 版本标签：v6.9.23 已被 7daaad7 占用但 VERSION 未同步——6.9.22 起以 VERSION 文件为准推进，当前 6.9.44（08h 修复 _is_weekend UTC→北京时间；此前 v6.9.42 反馈注入兜底、v6.9.40 软卡死、v6.9.41 遍次隔离）
+6. git 版本标签：v6.9.23 已被 7daaad7 占用但 VERSION 未同步——6.9.22 起以 VERSION 文件为准推进，当前 6.9.47（12h 修复 DOI-in-arxiv_id 入库 ENOENT；此前 v6.9.46 超时同构修复、v6.9.45 references 重排+idea_review 1200s、v6.9.44 _is_weekend UTC→北京时间）
 7. 网关核查走 `check_hermes_available()`（返回 hermes_cli/linsai_profile/gateway_status/cron_jobs_count，实测即时响应）
 8. transition_history 含三种 schema：标准 from/to、注册首条（仅 to）、事件注记（event/detail 键，如 direction_correction）；另有 4 条 08-04 遗留用 timestamp 替代 at——均为良性，读取方兼容
 9. proposal 级 `updated_at` 会被非 job 执行路径刷新（repair 重置/cron 失败记录/stale 清理）——评估真实停滞必须看 job 级 finished_at 最大值（v6.9.31 起 monitor 已改此口径，08-22 00h berry 50h 首次真实触发实证）
@@ -54,8 +54,10 @@
 - **#1（04h：optimize.py _load_cross_proposal_exemplar 三要素齐（≥0.75 不接收 / 峰值≥0.70 供样 / 全局 _lifecycle.json 源）+ 当日 02:15:20 运行时注入（moire rationale ← order-param 峰值 0.81/当前 0.69）→ 正常）**｜**#2（04h：L116-148 [-12:]/≥6条/3delta 全 |d|<0.01 在位；运行时新反证 moire rationale deltas[-0.028,-0.04] 与 references[-0.065,0.07] 均超阈、order-param scheme[0.04,0.02] 超阈 → 维持潜在死代码待人工裁决，若激活需放宽阈值至 ≥0.03 或按轮聚合（联动 #7 裁决））**｜**#3（04h：controller.py L275-307 三口径齐（round1 前置 + passed 跳过 + required 回补）+ 03:05:28 order-param r7 required=True 回补建链实证——idea_review 前置于 critic、attempt 1 score 0.78≥0.70 通过后续链 → 正常；退回重触发路径首次真实闭环）**
 - **#4（08h：scoring.py L227/233 scores[role] 顶层直连无 ["agents"] 嵌套 + prohibition_violations [-20:] 有界 + 运行时 writer 36.3/critic 110.75 history 各 50 有界、最近三条 delta（08-20/21/23Z）跨课题 round_ref 闭环（order-param r5/r6、moire r4 −8.0/+8.88 于 08-23T16:37Z=BJ 00:37 结算）→ 正常）**｜**#5（08h：_cleanup_old_suggestions L250 在 auto 路径 L1319 无条件调用 + 库存 10 条（applied 9/rejected_guard 1，08-17→08-21）有界 → 清理正常；TARGET_PROFILES L59 仍 5/7 缺 pipeline-runner/reviewer → 偏差维持待人工裁决）**｜**#6（08h：注入三要素齐——critic 注入 optimize.py L990（exclude_resolved=True）/ writer 注入 L1657（exclude_resolved=False 含最近 3 条已解决）/ 跨 section 例外 L1515-1524；运行时 berry 12 未解决 90h+ 稳定、attosecond 今晨 17 条未解决正常积累、moire/bsv/order-param 各 40 条全解决 → 正常；prompt 全文不落盘，运行时以数据侧+静态为准）**
 
+- **#7（08-24 12h：静态 completion.py L94-137 三分支在位（收敛 0.85/3轮/<2% + v6.9.16 骤降防误晋级 + 下降/逃生阀）；运行时全量扫描 8 课题 score_history 0 条 ≥0.85（最高 order-param 0.81、qg 0.80）→ 收敛窗口全量不可达，维持潜在死代码；条目级窗口 [-4:]（备忘 #23）+ AGENTS.md 0.80 滞后于 v6.9.27 的 0.85，两项维持待人工裁决）**｜**#8（12h：L290-315 job 级 finished_at 口径（v6.9.31）在位 + 当日 3 条 stalled 真实触发（qg 104h/kt 103h/berry 111h）且 08:00/10:00/11:00 三轮飞书通知、无周末误报 → 正常，检测→告警闭环当日完整走通）**｜**#9（12h：monitor 侧 L319-357 文件族口径在位，最近 2 次 ideas（08-16: 15 / 08-22: 25 actions）非零健康静默（12:02 异常清单无 input_pipeline_broken）→ 正常；reflection_jobs.py L252-284 旧熔断死代码自 08-16 未变更，处置维持待人工裁决）**
+
 【下次从这里继续】
-1. **第七轮继续：从 #7 起**（#7 质量天花板检测 → #8 停滞课题检测 → #9 输入端熔断，每次 2-3 项依次推进）；注意 #6 静态行号 08h 已重定位（optimize.py L990/L1657/L1515-1524，旧备忘的 executor 行号已漂移）
+1. **第七轮继续：从 #10 起**（#10 人工审核反馈闭环 → #11 KB 健康评分 → #12 研究趋势雷达，每次 2-3 项依次推进）；注意 #6 静态行号 08h 已重定位（optimize.py L990/L1657/L1515-1524，旧备忘的 executor 行号已漂移）
 1a. 看板自愈确认：✅ 已兑现（04h 核实 proposals_in_optimizing=8）
 2. **v6.9.42 生效观察（周一重点）**：bsv 下一轮优化的 critic/writer prompt 应含"（第3次结构化审核意见）"渲染块（7 项 issue），观察 writer 是否对结构化 issue 产生实质响应——这是 v6.9.41"注入未产生边际效果"结论前置条件补齐后的首个验证窗口；若天花板仍纹丝不动，问题收敛到 writer 执行力/门槛拦截
 3. **v6.9.40 生效观察（周一重点）**：微调度器恢复后 quantum-geometry（r1 26/29）/ berry（r2 12/25）应跨时段保持焦点直至轮次完成，软卡死 WARNING 应仅在 done 真冻结时出现——这是并发修复（fbddfbc）的首个验证窗口

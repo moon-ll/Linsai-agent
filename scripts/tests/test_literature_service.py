@@ -270,6 +270,39 @@ class LiteratureServiceParserTests(TestSuite):
         self.assert_eq(result.get("skipped"), 0,
                        f"无标识论文应直接 continue 不计数（实际 {result}）")
 
+    def _test_ingest_doi_stuffed_in_arxiv_id_field(self):
+        """v6.9.47 核心回归：researcher 把期刊 DOI 塞进 arxiv_id 字段时，
+        不再因 identifier 含 "/" 导致 raw/papers 写入 ENOENT。
+
+        触发场景（08-24 11:06 attosecond r2 lit_search 实证）：中文期刊
+        论文无 arXiv 预印本，researcher agent 返回
+        {"arxiv_id": "10.1088/1674-1056/ae3474", ...}——旧实现该形态绕过
+        arxiv 校验（_extract_arxiv_id 兜底原样返回）与 DOI 清洗，slug 保留
+        "/" 使 write_text 抛 [Errno 2]，10 篇论文丢 8 篇（failed=8）且
+        lit_read/lit_note 后续全部空转。修复后归一化移入 doi_clean。
+        """
+        papers = [
+            {"arxiv_id": "10.1088/1674-1056/ae3474",
+             "title": "Autocorrelation-based CNN for noisy attosecond streaking traces",
+             "year": "2026", "authors": "Zhu et al.",
+             "score": 0.9, "tldr": "CNN 反演阿秒条纹轨迹", "is_new": True},
+        ]
+        result = self.svc._ingest_new_papers(
+            papers, source="pipeline", proposal_id="test-proposal-doi-in-arxiv"
+        )
+        self.assert_eq(result.get("ingested"), 1,
+                       f"DOI-in-arxiv_id 论文应入库（实际 {result}）")
+        self.assert_eq(result.get("failed"), 0,
+                       f"不应有失败（实际 {result}）")
+        raw_dir = self.lit_svc_mod.RAW_DIR / "papers"
+        written = list(raw_dir.glob("*doi-10-1088-1674-1056-ae3474*.md"))
+        self.assert_eq(len(written), 1,
+                       f"按 DOI slug 命名（无斜杠）的文件应落盘（实际 {len(written)}）")
+        if written:
+            content = written[0].read_text(encoding="utf-8")
+            self.assert_true("10.1088/1674-1056/ae3474" in content,
+                             f"DOI 值应写入文件（实际 {content[:300]!r}）")
+
     def run_tests(self):
         self._test_json_array_clean()
         self._test_json_array_with_markdown_fence()
@@ -285,3 +318,4 @@ class LiteratureServiceParserTests(TestSuite):
         self._test_ingest_new_papers_handles_unhashable_dict_list()
         self._test_ingest_doi_paper_without_arxiv_id()
         self._test_ingest_paper_with_neither_id()
+        self._test_ingest_doi_stuffed_in_arxiv_id_field()

@@ -1,5 +1,29 @@
 # 变更记录
 
+## v6.9.47 - 2026-08-24 DOI 塞进 arxiv_id 字段归一化：修复文献入库 ENOENT
+
+背景：12 时段例行健康检查发现 attosecond r2 课题 lit_search 解析出
+10 篇论文（全部中文/国际期刊，含 DOI 无 arXiv ID），入库失败 8 篇。
+
+- 根因：researcher agent 对无 arXiv 预印本的期刊论文常把 DOI 直接
+  塞进 `arxiv_id` 字段（如 `10.1088/1674-1056/ae3474`）。该形态
+  绕过 arXiv 校验（`_extract_arxiv_id` 兜底原样返回）与 DOI 清洗，
+  `identifier` 保留 `/` 使 `raw/papers/{identifier}.md` 的
+  `write_text` 抛 `[Errno 2]`——实测 10 篇丢 8 篇（failed=8）。
+- 修复：`_ingest_new_papers` 在 identifier 决策前归一化——非
+  arXiv 形态（`NNNN.NNNNN(vN)` / 旧式 7-8 位数字）且匹配 DOI 模式
+  （`10.\d{4,9}/...`）时移入 `doi_clean`，走既有 doi-{slug} 清洗
+  路径（点/斜杠转连字符）。
+- 测试：`test_literature_service.py` 新增
+  `_test_ingest_doi_stuffed_in_arxiv_id_field`（套件 41→42）：
+  断言 ingested=1 / failed=0 / 产物文件名
+  `*doi-10-1088-1674-1056-ae3474*.md` / 正文含原始 DOI。
+- 验证：`py_compile` 通过；`self_test --module` 1083/1083 全绿。
+- 已知缺口（仅报告待人工裁决，不在本次修复范围）：lit_read/
+  lit_note 对 DOI 论文无处理路径（`executor.py` 仅 arXiv 正则，
+  `link_to_proposal` 以 wiki/papers/{arxiv_id}.md 为键），DOI 论文
+  入库后两步骤无法消费。
+
 ## v6.9.46 - 2026-08-24 超时任务全景排查：full_review/writer 同构问题批量修复
 
 背景：用户要求排查易超时任务是否与 references 评审同构。两样本统计

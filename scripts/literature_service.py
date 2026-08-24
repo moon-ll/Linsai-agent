@@ -1024,6 +1024,22 @@ class LiteratureService:
             # v6.8.43: 支持无 arXiv ID 的期刊论文（OpenAlex/Crossref/PubMed 来源），以 DOI 作为标识
             doi = str(paper.get("doi", "") or "").strip()
             doi_clean = re.sub(r"^(https?://(dx\.)?doi\.org/|doi:)", "", doi).strip()
+            # v6.9.47: researcher agent 常把期刊 DOI 直接塞进 arxiv_id 字段
+            # （中文期刊无 arXiv 预印本，08-24 attosecond r2 lit_search 10 篇
+            # 全部此形态）。该形态绕过 arxiv 校验（_extract_arxiv_id 兜底
+            # 原样返回）与 DOI 清洗，identifier 保留 "/" 使 raw/papers
+            # write_text 抛 ENOENT——实测 10 篇丢 8 篇（failed=8）。
+            # 归一化：非 arxiv 形态且匹配 DOI 模式 → 移入 doi_clean，
+            # 走 doi-{slug} 清洗路径（点/斜杠转连字符）。
+            if (
+                arxiv_id
+                and not re.match(r"^\d{4}\.\d{4,5}(v\d+)?$", arxiv_id)
+                and not re.match(r"^\d{7,8}$", arxiv_id)
+                and re.match(r"^10\.\d{4,9}/\S+$", arxiv_id)
+            ):
+                if not doi_clean:
+                    doi_clean = arxiv_id
+                arxiv_id = ""
             if not arxiv_id and not doi_clean:
                 continue
             # v6.8.44: DOI 标识符保留点/斜杠结构（转连字符），避免 _safe_filename 剥点后
