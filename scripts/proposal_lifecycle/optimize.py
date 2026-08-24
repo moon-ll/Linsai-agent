@@ -455,16 +455,57 @@ class OptimizeMixin:
             "threshold": threshold,
         }
 
-    def _detect_ai_patterns(self, prop_dir: Path, sections: 'ProposalSections') -> Dict[str, Any]:
+    # v6.9.47: 领域术语白名单——这些复合词是科研写作/国基金模板的法定用法，
+    # 裸词计数会误伤（实测 attosecond 课题：'关键科学问题'×5 是 NSFC 模板章节、
+    # '系统误差'是物理术语、'有效性'=validity、'同时电离'=simultaneous ionization，
+    # 全部不可删——导致 writer 修复指令物理上不可执行，天花板卡死 0.50）。
+    # 计数前先替换为占位符，只统计真正的冗余用法。
+    AI_TERM_WHITELIST = [
+        "关键科学问题",      # NSFC 法定章节名
+        "关键难点",          # NSFC 模板常见章节
+        "系统误差",          # systematic error，物理术语
+        "系统偏差",          # systematic bias
+        "系统性",            # systematic(ally)，如"系统性研究/系统性成果"
+        "有效性",            # validity，如"修正项有效性"
+        "同时电离",          # simultaneous ionization，物理概念
+        "同时或近同时电离",  # "一个以上电子被同时或近同时电离"
+        "同时性",            # simultaneity
+    ]
+
+    def _detect_ai_patterns(
+        self,
+        prop_dir: Path,
+        sections: 'ProposalSections',
+        section_key: Optional[str] = None,
+    ) -> Dict[str, Any]:
         """程序化检测申请书中的 AI 写作模式，产出表达质量天花板。
 
         这是评审跑偏的核心修复：不再让 LLM 凭感觉判断 AI 味，
         而是用代码客观计数，产出 expression_quality_ceiling，
         critic 的表达质量评分不得超过此天花板。
 
+        v6.9.47 三项公平性修复：
+            ① 领域术语白名单（AI_TERM_WHITELIST）——计数前剔除法定复合词，
+              防止"关键科学问题/系统误差/有效性/同时电离"等不可删词被误伤；
+            ② 阈值千字归一——死板关联词/冗余修饰词阈值随篇幅线性放宽
+              （绝对阈值只对小篇幅合理，14K 字长文按 12 次上限意味着
+              0.86 次/千字，中文科研写作正常密度 2-4 次/千字，物理不可达）；
+            ③ raw_ceiling 字段——floor(0.5) 之前的原始值，供复检比较
+              真实进步（floor 会把 0.6→0.5 的实质改善掩埋成 0.50→0.50）；
+            ④ section_key 参数——章节级检测（单章节文本+按该章节字数
+              归一阈值），供章节级 job 复检归因，避免 writer 只修聚焦
+              章节但被三章节合并口径稀释。
+
+        Args:
+            prop_dir: proposal 目录
+            sections: ProposalSections 实例
+            section_key: 传入 "rationale"/"content"/"scheme" 时只检测该章节
+                         （None 检测三章节合并，口径与 critic 全局评分对齐）
+
         Returns:
             {
                 "ceiling": float,              # 表达质量天花板 (0.5-1.0)
+                "raw_ceiling": float,          # floor 前原始值（复检比较用）
                 "total_chars": int,            # 全文字符数
                 "details": {                   # 各检测项详情
                     "transition_words": {"count": N, "threshold": N, "penalty": float},
@@ -482,8 +523,9 @@ class OptimizeMixin:
         """
         import re
 
-        # 读取所有正文章节内容
-        body_keys = ["rationale", "content", "scheme"]
+        # 读取正文章节内容（section_key 指定时只读该章节——章节级归因口径）
+        body_keys = [section_key] if section_key in ("rationale", "content", "scheme") \
+            else ["rationale", "content", "scheme"]
         texts = []
         for key in body_keys:
             try:
@@ -494,27 +536,37 @@ class OptimizeMixin:
                 pass
 
         if not texts:
-            return {"ceiling": 0.5, "total_chars": 0, "details": {}, "report_text": "（无法读取申请书内容）", "top_issues": []}
+            return {"ceiling": 0.5, "raw_ceiling": 0.5, "total_chars": 0, "details": {},
+                    "report_text": "（无法读取申请书内容）", "top_issues": []}
 
         full_text = "\n\n".join(texts)
         total_chars = len(full_text)
         if total_chars == 0:
-            return {"ceiling": 0.5, "total_chars": 0, "details": {}, "report_text": "（申请书内容为空）", "top_issues": []}
+            return {"ceiling": 0.5, "raw_ceiling": 0.5, "total_chars": 0, "details": {},
+                    "report_text": "（申请书内容为空）", "top_issues": []}
 
         ceiling = 1.0
         details: Dict[str, Any] = {}
         top_issues: List[str] = []
 
+        # v6.9.47: 领域术语白名单——替换为等长占位符后再计数，
+        # 只统计真正的冗余用法（法定复合词不计入）
+        text_for_count = full_text
+        for term in self.AI_TERM_WHITELIST:
+            text_for_count = text_for_count.replace(term, "□" * len(term))
+
         # 1. 死板关联词
         ai_transitions = ["在此基础上", "此外", "同时", "与此同时", "因此", "然而", "基于此"]
-        transition_count = sum(full_text.count(w) for w in ai_transitions)
-        transition_threshold = 8
+        transition_count = sum(text_for_count.count(w) for w in ai_transitions)
+        # v6.9.47: 阈值千字归一——绝对阈值 8 只对小篇幅合理；
+        # 中文科研写作正常关联词密度约 1 次/千字，按 1.0/千字放宽
+        transition_threshold = max(8, int(total_chars / 1000 * 1.0))
         transition_penalty = max(0, (transition_count - transition_threshold) * 0.02)
         ceiling -= transition_penalty
         details["transition_words"] = {
             "count": transition_count, "threshold": transition_threshold,
             "penalty": round(transition_penalty, 4),
-            "found": {w: full_text.count(w) for w in ai_transitions if full_text.count(w) > 0}
+            "found": {w: text_for_count.count(w) for w in ai_transitions if text_for_count.count(w) > 0}
         }
         if transition_penalty > 0:
             top_issues.append(f"死板关联词超标：{transition_count}次（阈值{transition_threshold}），扣{transition_penalty:.2f}")
@@ -549,30 +601,34 @@ class OptimizeMixin:
         if subject_penalty > 0:
             top_issues.append(f"模板主语'本项目拟/将'句首超标：{subject_count}次（阈值{subject_threshold}），扣{subject_penalty:.2f}")
 
-        # 4. 冗余修饰词
+        # 4. 冗余修饰词（v6.9.47: 白名单过滤 + 千字归一）
         redundant_words = ["显著", "重要", "系统", "良好", "成熟", "完整", "关键", "精准", "一系列", "有效", "高效"]
-        redundant_count = sum(full_text.count(w) for w in redundant_words)
-        redundant_threshold = 12
+        redundant_count = sum(text_for_count.count(w) for w in redundant_words)
+        # v6.9.47: 阈值千字归一——绝对阈值 12 对 14K 字长文意味着 0.86 次/千字，
+        # 中文科研写作正常密度 2-4 次/千字，按 2.0/千字放宽
+        redundant_threshold = max(12, int(total_chars / 1000 * 2.0))
         redundant_penalty = max(0, (redundant_count - redundant_threshold) * 0.01)
         ceiling -= redundant_penalty
         details["redundant_modifiers"] = {
             "count": redundant_count, "threshold": redundant_threshold,
             "penalty": round(redundant_penalty, 4),
-            "found": {w: full_text.count(w) for w in redundant_words if full_text.count(w) > 0}
+            "found": {w: text_for_count.count(w) for w in redundant_words if text_for_count.count(w) > 0}
         }
         if redundant_penalty > 0:
             top_issues.append(f"冗余修饰词超标：{redundant_count}次（阈值{redundant_threshold}），扣{redundant_penalty:.2f}")
 
-        # 5. 超长句
+        # 5. 超长句（v6.9.47: 免赔额——长文自然含更多长句，前 2+0.15/千字 处免赔）
         severe_count = sum(1 for s in sentences if len(s.strip()) > 120)
-        long_penalty = severe_count * 0.02
+        long_free = 2 + int(total_chars / 1000 * 0.15)
+        long_penalty = max(0, severe_count - long_free) * 0.02
         ceiling -= long_penalty
         details["long_sentences"] = {
-            "severe_count": severe_count, "penalty": round(long_penalty, 4),
+            "severe_count": severe_count, "free_quota": long_free,
+            "penalty": round(long_penalty, 4),
             "examples": [s.strip()[:80] + "..." for s in sentences if len(s.strip()) > 120][:3]
         }
         if long_penalty > 0:
-            top_issues.append(f"超长句(>120字)：{severe_count}处，扣{long_penalty:.2f}")
+            top_issues.append(f"超长句(>120字)：{severe_count}处（免赔{long_free}处），扣{long_penalty:.2f}")
 
         # 6. 元话语
         meta_patterns = [
@@ -639,7 +695,9 @@ class OptimizeMixin:
         if self_ref_penalty > 0:
             top_issues.append(f"自引用泛滥：{self_ref_count}次（阈值10/15），扣{self_ref_penalty:.2f}")
 
-        # 天花板下限
+        # 天花板下限（v6.9.47: 保留 floor 前原始值供复检比较——
+        # floor 会把 0.6→0.5 的实质改善掩埋成 0.50→0.50，writer 被误判）
+        raw_ceiling = ceiling
         ceiling = max(ceiling, 0.5)
 
         # 构建报告文本
@@ -665,12 +723,15 @@ class OptimizeMixin:
         report_text = "\n".join(report_lines)
 
         if _log:
-            _log.info(f"AI pattern detection: ceiling={ceiling:.2f}, total_chars={total_chars}, "
-                       f"issues={len(top_issues)}")
+            _log.info(f"AI pattern detection: ceiling={ceiling:.2f} (raw={raw_ceiling:.2f}), "
+                       f"total_chars={total_chars}, issues={len(top_issues)}"
+                       + (f", section={section_key}" if section_key else ""))
 
         return {
             "ceiling": round(ceiling, 4),
+            "raw_ceiling": round(raw_ceiling, 4),
             "total_chars": total_chars,
+            "section_key": section_key,
             "details": details,
             "report_text": report_text,
             "top_issues": top_issues,
@@ -1601,26 +1662,51 @@ class OptimizeMixin:
         )
 
         # v6.8.7: 程序化 AI 检测结果——writer 必须修复检测到的 AI 模式问题
+        # v6.9.47: 附逐词量化清单（词→当前次数→目标），修复指令从"不可执行"
+        # 变为"可量化达成"；白名单术语已在计数前剔除，writer 无需处理
         ai_check_text = ""
         if ai_check_result and ai_check_result.get("top_issues"):
             ai_check_text = (
                 f"\n【程序化 AI 写作模式检测结果（必须修复）】\n"
-                f"表达质量天花板：{ai_check_result['ceiling']:.2f}\n"
+                f"表达质量天花板：{ai_check_result['ceiling']:.2f}"
+                f"（原始扣分后 {ai_check_result.get('raw_ceiling', ai_check_result['ceiling']):.2f}）\n"
                 f"当前天花板{'低于 0.7，属于严重 AI 味' if ai_check_result['ceiling'] < 0.7 else '在 0.7 以上，但仍有改进空间'}。\n"
                 f"检测到的问题：\n"
             )
             for issue in ai_check_result["top_issues"]:
                 ai_check_text += f"  - {issue}\n"
+
+            # v6.9.47: 逐词量化清单（当前次数 → 目标阈值）
+            details = ai_check_result.get("details") or {}
+            redundant = details.get("redundant_modifiers") or {}
+            transition = details.get("transition_words") or {}
+            if redundant.get("found"):
+                ai_check_text += (
+                    f"\n冗余修饰词逐词清单（已剔除'关键科学问题/系统误差/有效性'等"
+                    f"法定术语，以下为真实冗余用法，必须逐词削减）：\n"
+                )
+                thr = redundant.get("threshold", 12)
+                for w, c in sorted(redundant["found"].items(), key=lambda x: -x[1]):
+                    if c > 0:
+                        ai_check_text += f'  - "{w}" 当前 {c} 次 → 削减至 ≤{max(1, thr // 3)} 次\n'
+            if transition.get("found"):
+                ai_check_text += "\n死板关联词逐词清单（用内容驱动衔接替代）：\n"
+                for w, c in sorted(transition["found"].items(), key=lambda x: -x[1]):
+                    if c > 0:
+                        ai_check_text += f'  - "{w}" 当前 {c} 次 → 减半或替换衔接方式\n'
+
             ai_check_text += (
                 f"\n你必须在本次修改中优先解决上述 AI 模式问题：\n"
                 f"  - 死板关联词 → 用内容驱动衔接替代（进而、据此、理解…后、确立后）\n"
                 f"  - 模板句式'为...提供...' → 改为具体动词（保障、确立、对接、满足、形成）\n"
                 f"  - 模板主语'本项目拟/将' → 删除，直接以动词或内容词开头\n"
-                f"  - 冗余修饰 → 逐处删除或换具体表述\n"
+                f"  - 冗余修饰 → 按上方逐词清单逐处删除或换具体表述\n"
                 f"  - 超长句 → 拆分为短句（<60字）\n"
                 f"  - 元话语 → 删除，直接陈述科学事实\n"
                 f"  - 过度加粗 → 删除加粗标记，范本中几乎不用\n"
                 f"  - 编号列表 → 改为连贯叙述式段落\n"
+                f"注意：白名单术语（'关键科学问题''系统误差''有效性''同时电离'等）是科研法定用法，"
+                f"无需修改，也不计入扣分。\n"
                 f"修改后，每个段落与 benchmark_anchors 中的范本锚点段落对比，确保语体和论证密度达标。\n"
             )
 

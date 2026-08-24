@@ -895,6 +895,17 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     sections_obj = ProposalSections(prop_dir / "04_proposal")
     sections_obj.ensure_split()
     ai_check = self._detect_ai_patterns(prop_dir, sections_obj)
+    # v6.9.47: 章节级基线——writer 每轮只修聚焦章节，全局口径会被其余两章
+    # 稀释（单章节修复完美，全局天花板仍不动，复检误判）。正文章节 job
+    # 额外记录该章节自身的原始天花板作为复检归因基线。
+    section_baseline = None
+    if section_key in ("rationale", "content", "scheme"):
+        try:
+            section_baseline = self._detect_ai_patterns(
+                prop_dir, sections_obj, section_key=section_key
+            )
+        except Exception:
+            section_baseline = None
 
     writer_result = self._run_writer_optimize(
         proposal_id, prop_dir, project_type,
@@ -915,6 +926,11 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     # 只修 1/7 问题）。复检用确定性检测验证 writer 是否实质修复表达问题：
     # 未达标（<0.85）必须严格提升；已达标只要求不显著倒退；references 轮跳过
     # （不涉及正文表达）。
+    # v6.9.47 两项口径修复（attosecond 课题 5 连误判根因）：
+    #   ① raw 比较——floor(0.5) 会把 0.6→0.5 的实质改善掩埋成 0.50→0.50，
+    #     复检改用 floor 前原始值（raw_ceiling），真实进步可见；
+    #   ② 章节级归因——章节级 job 只修聚焦章节，全局口径被其余章节稀释，
+    #     复检以聚焦章节自身变化为准（无基线时回退全局口径）。
     ai_check_after = None
     expression_improved = True
     expression_not_improved_reason = ""
@@ -922,14 +938,42 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         ai_check_after = self._detect_ai_patterns(prop_dir, sections_obj)
         ceiling_before = ai_check.get("ceiling", 1.0)
         ceiling_after = ai_check_after.get("ceiling", 1.0)
-        if ceiling_before >= 0.85:
-            expression_improved = ceiling_after >= ceiling_before - 0.02
+        raw_before = ai_check.get("raw_ceiling", ceiling_before)
+        raw_after = ai_check_after.get("raw_ceiling", ceiling_after)
+
+        # 章节级归因：聚焦章节自身口径（有基线时优先）
+        section_after = None
+        if section_baseline and section_key in ("rationale", "content", "scheme"):
+            try:
+                section_after = self._detect_ai_patterns(
+                    prop_dir, sections_obj, section_key=section_key
+                )
+            except Exception:
+                section_after = None
+
+        if section_baseline and section_after:
+            sec_raw_b = section_baseline.get("raw_ceiling", section_baseline.get("ceiling", 1.0))
+            sec_raw_a = section_after.get("raw_ceiling", section_after.get("ceiling", 1.0))
+            if sec_raw_b >= 0.85:
+                expression_improved = sec_raw_a >= sec_raw_b - 0.02
+            else:
+                expression_improved = sec_raw_a > sec_raw_b + 0.001
+            if not expression_improved:
+                expression_not_improved_reason = (
+                    f"writer 未实质修复表达问题（{section_key} 章节原始天花板 "
+                    f"{sec_raw_b:.2f}→{sec_raw_a:.2f}，全局 {raw_before:.2f}→{raw_after:.2f}）"
+                )
         else:
-            expression_improved = ceiling_after > ceiling_before + 0.001
+            if raw_before >= 0.85:
+                expression_improved = raw_after >= raw_before - 0.02
+            else:
+                expression_improved = raw_after > raw_before + 0.001
+            if not expression_improved:
+                expression_not_improved_reason = (
+                    f"writer 未实质修复表达问题（AI 原始天花板 {raw_before:.2f}→{raw_after:.2f}，"
+                    f"floor 后 {ceiling_before:.2f}→{ceiling_after:.2f}）"
+                )
         if not expression_improved:
-            expression_not_improved_reason = (
-                f"writer 未实质修复表达问题（AI 天花板 {ceiling_before:.2f}→{ceiling_after:.2f}）"
-            )
             if _log:
                 _log.warning(f"[{proposal_id}] {expression_not_improved_reason}")
 

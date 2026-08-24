@@ -859,13 +859,172 @@ class MetricsPreflightTests(TestSuite):
         )
 
 
+class AICeilingFairnessTests(TestSuite):
+    """10：v6.9.47 AI 天花板公平性修复（白名单/千字归一/raw 比较/章节归因）。
+
+    背景：attosecond 课题 AI 天花板连续 5 轮卡死 0.50，writer 被判定
+    "未实质修复表达问题"。逐项核查发现四层叠加缺陷：① '关键科学问题'×5
+    （NSFC 法定章节）、'系统误差'（物理术语）、'有效性'（validity）、
+    '同时电离'（物理概念）等不可删词被裸词计数误伤——修复指令物理上
+    不可执行；② 绝对阈值 12 次对 14K 字长文意味着 0.86 次/千字，中文
+    科研写作正常密度 2-4 次/千字，达标不可能；③ 复检比较 floor(0.5)
+    之后的值，0.6→0.5 的实质改善被掩埋成 0.50→0.50；④ writer 每轮
+    只修聚焦章节，但复检用三章节合并口径，单章节完美修复被稀释。
+    """
+
+    def __init__(self):
+        super().__init__("AI 天花板公平性测试（v6.9.47-10）")
+
+    def setup(self):
+        self.tmp_root = create_isolated_env()
+        self._opt = _load_optimize_module(self.tmp_root)
+
+    def teardown(self):
+        if self.tmp_root and self.tmp_root.exists():
+            shutil.rmtree(self.tmp_root, ignore_errors=True)
+
+    @staticmethod
+    def _mk_sections(texts: dict):
+        """构造 read_section stub（零文件 IO）。"""
+        class _StubSections:
+            def read_section(self, key):
+                return texts.get(key, "")
+        return _StubSections()
+
+    # 干净填充文本（不含任何敏感词，纯凑字数）
+    _FILLER = "甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戌亥" * 600  # ~13.2K 字
+
+    def run_tests(self):
+        opt = self._opt
+        filler = self._FILLER
+
+        # 10.1 白名单：'关键科学问题'不计入'关键'计数
+        res = opt._detect_ai_patterns(
+            Path(self.tmp_root),
+            self._mk_sections({"rationale": "关键科学问题K1。关键科学问题K2。关键科学问题K3。",
+                               "content": "", "scheme": ""}),
+        )
+        found = res["details"]["redundant_modifiers"]["found"]
+        self.assert_true(found.get("关键", 0) == 0,
+                         "白名单术语'关键科学问题'不应计入'关键'")
+
+        # 10.2 白名单：'系统误差/有效性/同时电离'同理剔除
+        res2 = opt._detect_ai_patterns(
+            Path(self.tmp_root),
+            self._mk_sections({"rationale": "系统误差是主要误差来源。修正项有效性判据。同时电离通道。",
+                               "content": "", "scheme": ""}),
+        )
+        found2 = res2["details"]["redundant_modifiers"]["found"]
+        found2t = res2["details"]["transition_words"]["found"]
+        self.assert_true(found2.get("系统", 0) == 0, "'系统误差'不应计入'系统'")
+        self.assert_true(found2.get("有效", 0) == 0, "'有效性'不应计入'有效'")
+        self.assert_true(found2t.get("同时", 0) == 0, "'同时电离'不应计入'同时'")
+
+        # 10.3 阈值千字归一：13K 字长文冗余 16 次（~1.2/千字，正常密度）不扣分
+        # filler 13.2K 字 → 阈值 max(12, 26)；16 次真实冗余用法 < 26 → 不扣
+        text_long = filler + ("该方案显著且良好。" * 6 + "重要完整成熟精准。" * 1)  # 显×6 良×6 + 重完成精×4 = 16 次
+        res3 = opt._detect_ai_patterns(
+            Path(self.tmp_root),
+            self._mk_sections({"rationale": text_long, "content": "", "scheme": ""}),
+        )
+        self.assert_true(
+            res3["details"]["redundant_modifiers"]["count"] == 16,
+            "长文冗余词计数应为 16（filler 不含敏感词）",
+        )
+        self.assert_true(
+            res3["details"]["redundant_modifiers"]["penalty"] == 0,
+            "13K 字文本冗余 16 次（~1.2/千字正常密度）不应扣分（v6.9.47 千字归一）",
+        )
+
+        # 10.4 短文本仍严格：2K 字 20 次（10/千字）照扣
+        short_text = ("甲乙丙丁戊己庚辛壬癸子丑寅卯辰巳午未申酉戌亥" * 90
+                      + "显著重要良好成熟完整精准。" * 3)  # ~2K 字 + 18 次
+        res4 = opt._detect_ai_patterns(
+            Path(self.tmp_root),
+            self._mk_sections({"rationale": short_text, "content": "", "scheme": ""}),
+        )
+        self.assert_true(
+            res4["details"]["redundant_modifiers"]["penalty"] > 0,
+            "2K 字文本冗余 18 次（~9/千字）仍应扣分（防归一化把检测废掉）",
+        )
+
+        # 10.5 raw_ceiling：floor 掩埋修复——raw 可低于 0.5，ceiling 报 0.5
+        heavy = filler + "在此基础上，在此基础上，在此基础上，在此基础上。" * 20
+        res5 = opt._detect_ai_patterns(
+            Path(self.tmp_root),
+            self._mk_sections({"rationale": heavy, "content": "", "scheme": ""}),
+        )
+        self.assert_true(res5["ceiling"] == 0.5, "重扣分时 ceiling 应为 floor 0.5")
+        self.assert_true(res5["raw_ceiling"] < 0.5,
+                         "raw_ceiling 应保留 floor 前原始值（复检可见真实进步）")
+        self.assert_true("raw_ceiling" in res5, "返回结构应含 raw_ceiling 字段")
+
+        # 10.6 章节级检测：scheme 干净时 section_key="scheme" 口径无扣分
+        bad_rationale = "显著重要良好成熟完整精准。" * 10  # 60 次冗余
+        res6 = opt._detect_ai_patterns(
+            Path(self.tmp_root),
+            self._mk_sections({"rationale": bad_rationale, "content": "", "scheme": filler}),
+            section_key="scheme",
+        )
+        self.assert_true(
+            res6["details"]["redundant_modifiers"]["penalty"] == 0,
+            "章节级检测只看聚焦章节（scheme 干净 → 无扣分）",
+        )
+        self.assert_true(res6.get("section_key") == "scheme", "应回传 section_key")
+
+        # 10.7 长句免赔额：13K 文本 5 处长句，免赔 2+1=3 处，只扣 2 处
+        long_sentence = "这" * 130 + "。"
+        text_ls = filler + long_sentence * 5
+        res7 = opt._detect_ai_patterns(
+            Path(self.tmp_root),
+            self._mk_sections({"rationale": text_ls, "content": "", "scheme": ""}),
+        )
+        ls = res7["details"]["long_sentences"]
+        self.assert_true(ls["severe_count"] == 5, "应检出 5 处长句")
+        expected_penalty = (5 - ls["free_quota"]) * 0.02
+        self.assert_true(
+            abs(ls["penalty"] - expected_penalty) < 1e-6 and expected_penalty < 5 * 0.02,
+            f"长句应享免赔额（free={ls['free_quota']}，扣 {expected_penalty} 而非 0.10）",
+        )
+
+        # 10.8 源码守卫：executor 复检必须用 raw 比较 + 章节级归因
+        exec_src = (Path(__file__).parent.parent / "lifecycle" / "executor.py").read_text(encoding="utf-8")
+        self.assert_true(
+            'ai_check.get("raw_ceiling"' in exec_src,
+            "executor 复检应取 raw_ceiling（floor 前值）",
+        )
+        self.assert_true(
+            "section_baseline" in exec_src,
+            "executor 应建立章节级复检基线",
+        )
+        self.assert_true(
+            "章节原始天花板" in exec_src,
+            "复检日志应区分章节口径与全局口径",
+        )
+        # optimize.py 返回结构守卫
+        opt_src = (Path(__file__).parent.parent / "proposal_lifecycle" / "optimize.py").read_text(encoding="utf-8")
+        self.assert_true(
+            'AI_TERM_WHITELIST' in opt_src and '关键科学问题' in opt_src,
+            "optimize.py 应存在领域术语白名单",
+        )
+        self.assert_true(
+            "text_for_count" in opt_src,
+            "计数应基于白名单过滤后的文本",
+        )
+        # writer prompt 量化清单守卫
+        self.assert_true(
+            "逐词清单" in opt_src,
+            "writer prompt 应含逐词量化修复清单",
+        )
+
+
 def main():
     from test_runner import print_report
 
     suites = []
     for cls in (AnchorOrderTests, WriterEscalationTests, SemanticDedupTests, ExecutorPathTests,
                 WeeklyResetAnchorTests, TaskSyncRollbackTests, KbDistillAutoTests, NamingGuardTests,
-                ReferencesPreflightTests, MetricsPreflightTests):
+                ReferencesPreflightTests, MetricsPreflightTests, AICeilingFairnessTests):
         s = cls()
         s.setup()
         s.run_tests()
