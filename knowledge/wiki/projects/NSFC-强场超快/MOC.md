@@ -2,7 +2,7 @@
 title: "🗺️ NSFC 强场超快课题"
 type: "moc"
 created: "2026-06-19T00:00:00Z"
-updated: "2026-08-24T12:01:47Z"
+updated: "2026-08-24T16:15:39Z"
 tags: "[\\\\\\\\\\\\\\\\"MOC\\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\\"NSFC\\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\\"索引\\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\\"强场超快\\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\\"#type/MOC\\\\\\\\\\\\\\\\", \\\\\\\\\\\\\\\\"#status/mature\\\\\\\\\\\\\\\\"]"
 related: "["2503.08052", "Ghimire-Reis", "RABBITT", "TDSE求解器", "["2503.08052", "["Berry曲率", "["Ghimire-Reis", "general-moire-strong-field-probe-20260726", "general-order-parameter-ultrafast-readout-20260727", "北大HHG团队", "固体高次谐波", "带内电流", "带间跃迁", "德鲁德模型", "拓扑绝缘体", "瞬态吸收光谱", "高次谐波产生", "高次谐波产生"]"]"]"]"]"]"]"]"]"
 source_raw: ""
@@ -21,7 +21,7 @@ project: "[\\\\\\\\\\\\\\\\"NSFC-强场超快\\\\\\\\\\\\\\\\"]"
 |------|------|------|------|------|------|
 | attosecond-streaking | 优化中 | 第1轮 | 0.54 | [版本](versions/general-attosecond-streaking-20260822.md) | [报告](reports/general-attosecond-streaking-20260822.md) |
 | berry-mnps3-rashba | 优化中 | 第1轮 | 0.74 | [版本](versions/general-berry-mnps3-rashba-20260816.md) | [报告](reports/general-berry-mnps3-rashba-20260816.md) |
-| bsv-driven-hhg-quantum | 优化中 | 第0轮 | 0.66 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
+| bsv-driven-hhg-quantum | 待校验 | 第1轮 | 0.5 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
 | moire-strong-field-probe | 优化中 | 第4轮 | 0.68 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
 | new-idea | 优化中 | 第0轮 | 0.0 | [版本](versions/general-new-idea-20260822.md) | [报告](reports/general-new-idea-20260822.md) |
 | order-parameter-ultrafast-readout | 优化中 | 第6轮 | 0.69 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
