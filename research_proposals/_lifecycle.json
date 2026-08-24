@@ -6,8 +6,8 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-19T19:36:14Z",
-      "optimization_rounds": 0,
+      "updated_at": "2026-08-24T11:55:19Z",
+      "optimization_rounds": 1,
       "last_score": 0.77,
       "score_history": [
         {
@@ -389,12 +389,34 @@
           "overall_assessment": "本轮为表面修改 + 评分虚高的典型串通模式。writer 把 [30]–[41] 整合入 references.md 主表（形式完整），但正文（rationale.md/content.md/scheme.md）一处 `[2]/[30]/[32]/[33]/[37]/[40]/[41]` 都未出现，1 个 critical + 3 个 high + 4 个 medium 问题中仅 [26] 标注矛盾与 [14][17][18] 元数据补全属于真实修复。critic 给 rigor=0.62 / completeness=0.78 / 综合=0.70 相比报告中 3 high 仍存的客观事实偏高——按 NSFC general 质量门槛（max_high_issues=0），综合应低于 0.65。独立性评估：本申请书综合 0.62（rigor 0.52 / completeness 0.65）较 critic 低 0.08。下一轮 writer 必须：(1) 在正文（rationale.md §1.2 量子度规段）补引 [2] Luu 2018 与 [30] Berry 1984、[40",
           "high_issues_after": 11,
           "at": "2026-08-17T10:43:17Z"
+        },
+        {
+          "round": 1,
+          "section_key": "monitor",
+          "proposal_score_before": 0.0,
+          "proposal_score_after": 0.77,
+          "monitor_independent_score": 0.78,
+          "writer_delta": 17.1,
+          "critic_delta": 2.2,
+          "local_writer_score": 101.6,
+          "local_critic_score": 68.17999999999999,
+          "writer_prohibitions": [
+            "surface_change"
+          ],
+          "critic_prohibitions": [
+            "score_content_mismatch"
+          ],
+          "collusion_risk": "none",
+          "negative_feedback": false,
+          "overall_assessment": "无串通迹象：critic 在 writer 修改前给出 0.77 低于阈值并明确'未达输出标准'，writer 随后进行了可验证的实质重写（超长句 26→2、bullet→叙述、多判据矛盾消除、奠基文献嵌入），双方行为符合对抗设计。当前 content.md 质量已接近但未达 general 门槛（标准 0.85/0 high/3 medium）：残留 4 项未修复（M-1、M-3、L-1、L-2）+ 2 项部分修复（C-2/H-3 方案细节与跨章重复）+ 单章超长一倍的结构性问题。下一轮优先级：P1 压缩章节至合并上限内（同步消除与 scheme 的重复，一并解决 C-2/H-3 残留）；P2 补 M-1/M-3 两处物理依据；P3 L-1 操作定义与组装稿元话语剥离。close-to-threshold 状态下无 severe 禁止项是合理的，禁省清单为空并非放水，而是与文本实况一致。",
+          "high_issues_after": 1,
+          "at": "2026-08-24T11:17:59Z"
         }
       ],
       "negative_feedback_alert": false,
-      "last_monitor_at": "2026-08-17T10:43:17Z",
-      "last_monitor_score": 0.62,
-      "last_monitor_assessment": "本轮为表面修改 + 评分虚高的典型串通模式。writer 把 [30]–[41] 整合入 references.md 主表（形式完整），但正文（rationale.md/content.md/scheme.md）一处 `[2]/[30]/[32]/[33]/[37]/[40]/[41]` 都未出现，1 个 critical + 3 个 high + 4 个 medium 问题中仅 [26] 标注矛盾与 [14][17][18] 元数据补全属于真实修复。critic 给 rigor=0.62 / completeness=0.78 / 综合=0.70 相比报告中 3 high 仍存的客观事实偏高",
+      "last_monitor_at": "2026-08-24T11:17:59Z",
+      "last_monitor_score": 0.78,
+      "last_monitor_assessment": "无串通迹象：critic 在 writer 修改前给出 0.77 低于阈值并明确'未达输出标准'，writer 随后进行了可验证的实质重写（超长句 26→2、bullet→叙述、多判据矛盾消除、奠基文献嵌入），双方行为符合对抗设计。当前 content.md 质量已接近但未达 general 门槛（标准 0.85/0 high/3 medium）：残留 4 项未修复（M-1、M-3、L-1、L-2）+ 2 项部分修复（C-2/H-3 方案细节与跨章重复）+ 单章超长一倍的结构性问题。下一轮优先级：P1 压缩章节至合并上限内（同步消除与 scheme 的重复，一并解决 C-2/H-3 残留）；P",
       "initialized_at": "2026-08-18T13:06:56Z",
       "missing_sections": [],
       "negative_feedback_reasons": [],
@@ -872,16 +894,24 @@
           "step": "monitor",
           "section_key": "monitor",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-references-writer"
           ],
-          "attempts": 0,
+          "attempts": 2,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-24T11:10:12Z",
+          "finished_at": "2026-08-24T11:17:59Z",
           "last_error": "",
-          "cron_job_id": ""
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-24T11:05:09Z",
+              "error": "超时(600s)",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 1
         },
         {
           "job_id": "general-quantum-geometry-inversion-20260726-r1-derived-update_vision",
@@ -889,14 +919,14 @@
           "step": "update_vision",
           "section_key": "derived",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-monitor-monitor"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-24T11:20:13Z",
+          "finished_at": "2026-08-24T11:20:59Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -906,9 +936,443 @@
           "step": "update_method_manual",
           "section_key": "derived",
           "round": 1,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r1-derived-update_vision"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-24T11:25:14Z",
+          "finished_at": "2026-08-24T11:29:23Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-rationale-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "rationale",
+          "round": 2,
+          "status": "running",
+          "depends_on": [],
+          "attempts": 2,
+          "scheduled_at": "",
+          "started_at": "2026-08-24T11:55:19Z",
+          "finished_at": "",
+          "last_error": "超时(1200s)",
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-24T11:50:15Z",
+              "error": "超时(1200s)",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 1
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-rationale-gap_identify",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "gap_identify",
+          "section_key": "rationale",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-rationale-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-rationale-lit_search",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_search",
+          "section_key": "rationale",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-rationale-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-rationale-lit_read",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_read",
+          "section_key": "rationale",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-rationale-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-rationale-lit_note",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_note",
+          "section_key": "rationale",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-rationale-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-rationale-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "rationale",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-rationale-critic",
+            "general-quantum-geometry-inversion-20260726-r2-rationale-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-content-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "content",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-rationale-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-content-gap_identify",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "gap_identify",
+          "section_key": "content",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-content-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-content-lit_search",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_search",
+          "section_key": "content",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-content-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-content-lit_read",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_read",
+          "section_key": "content",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-content-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-content-lit_note",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_note",
+          "section_key": "content",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-content-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-content-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "content",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-content-critic",
+            "general-quantum-geometry-inversion-20260726-r2-content-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-scheme-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "scheme",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-content-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-scheme-gap_identify",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "gap_identify",
+          "section_key": "scheme",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-scheme-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-scheme-lit_search",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_search",
+          "section_key": "scheme",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-scheme-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-scheme-lit_read",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_read",
+          "section_key": "scheme",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-scheme-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-scheme-lit_note",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_note",
+          "section_key": "scheme",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-scheme-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-scheme-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "scheme",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-scheme-critic",
+            "general-quantum-geometry-inversion-20260726-r2-scheme-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-full_review-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "full_review",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-scheme-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-full_review-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "full_review",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-references-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "references",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-full_review-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-references-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "references",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-references-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-monitor-monitor",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "monitor",
+          "section_key": "monitor",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-references-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-derived-update_vision",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "update_vision",
+          "section_key": "derived",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-monitor-monitor"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r2-derived-update_method_manual",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "update_method_manual",
+          "section_key": "derived",
+          "round": 2,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r2-derived-update_vision"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -11889,7 +12353,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控",
       "created_at": "2026-08-16T03:49:25Z",
-      "updated_at": "2026-08-24T04:30:02Z",
+      "updated_at": "2026-08-24T10:50:05Z",
       "optimization_rounds": 1,
       "last_score": 0.74,
       "score_history": [
@@ -13191,14 +13655,14 @@
           "step": "critic",
           "section_key": "scheme",
           "round": 2,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-content-writer"
           ],
-          "attempts": 2,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "2026-08-24T04:10:02Z",
-          "finished_at": "2026-08-24T04:30:02Z",
+          "started_at": "2026-08-24T10:30:05Z",
+          "finished_at": "2026-08-24T10:50:05Z",
           "last_error": "超时(1200s)",
           "cron_job_id": "",
           "error_history": [
@@ -15530,5 +15994,5 @@
       "last_monitor_assessment": ""
     }
   },
-  "updated_at": "2026-08-24T04:30:02Z"
+  "updated_at": "2026-08-24T11:55:19Z"
 }

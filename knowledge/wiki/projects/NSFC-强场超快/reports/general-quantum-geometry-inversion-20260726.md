@@ -1,5 +1,5 @@
 ---
-title: "quantum-geometry-inversion — 优化报告"
+title: "课题设想 — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-quantum-geometry-inversion-20260726"
 latest_round: 7
@@ -7,14 +7,14 @@ last_score: 0.77
 critic_rounds: 13
 optimization_reports: 0
 status: "optimizing"
-created: "2026-08-24T08:26:44Z"
-updated: "2026-08-24T08:26:44Z"
+created: "2026-08-24T12:01:47Z"
+updated: "2026-08-24T12:01:47Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
 ---
 
-# quantum-geometry-inversion — 优化报告
+# 课题设想 — 优化报告
 
 **课题 ID**：`general-quantum-geometry-inversion-20260726`
 **累计轮次**：7
