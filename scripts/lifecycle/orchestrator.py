@@ -413,10 +413,15 @@ def run_repair(self, dry_run: bool = False) -> Dict[str, Any]:
                             f" retry job {job['job_id']} (repair_attempt {repair_attempts + 1}/{MAX_JOB_ATTEMPTS})"
                         )
                     else:
-                        # v6.8.54: 双上限耗尽终态的自动解锁（每 job 终生一次，
+                        # v6.8.54: 修复系统放弃终态的自动解锁（每 job 终生一次，
                         # 失败满 24h 后）。此前该终态只能人工解锁，2026-08-14
                         # 曾两次手动处理（key-transient r4-critic / moire
                         # r8-writer，根因均为超时分级不足，已修）。
+                        # v6.9.49: 解锁资格放宽为 repair_attempts>=MAX 即可
+                        # （原 attempts>=MAX 且 rep_att>=MAX 双门槛存在死角：
+                        # repair 重置后单次失败 → attempts=1/rep_att=3，
+                        # repair 拒绝 + 依赖链重试被 stuck 跳过 + 解锁拒绝，
+                        # 三路皆死。08-24 order-param r7-references-critic 实证）。
                         from datetime import datetime as _dt, timezone as _tz
                         if should_auto_unlock(job, _dt.now(_tz.utc)):
                             if not dry_run:
@@ -424,7 +429,7 @@ def run_repair(self, dry_run: bool = False) -> Dict[str, Any]:
                                 hist = job.get("error_history") or []
                                 hist.append({
                                     "at": now_utc(),
-                                    "error": "自动解锁(v6.8.54): 双上限耗尽且失败超24h，"
+                                    "error": "自动解锁(v6.8.54): 修复系统放弃且失败超24h，"
                                              f"重置重跑（第{job['auto_unlock_count']}次/上限1）",
                                     "attempts": job.get("attempts", 0),
                                 })

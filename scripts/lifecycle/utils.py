@@ -76,15 +76,27 @@ def append_archive_jobs(proposal_id: str, jobs: List[Dict[str, Any]]) -> int:
 
 
 def should_auto_unlock(job: Dict[str, Any], now: datetime, cooldown_hours: float = 24.0) -> bool:
-    """判断双上限耗尽的 failed job 是否应自动解锁重跑（v6.8.54）。
+    """判断修复系统已放弃的 failed job 是否应自动解锁重跑（v6.8.54，v6.9.49 放宽）。
 
-    背景：attempts 与 repair_attempts 双双耗尽后 job 进入"需人工介入"
+    背景：attempts 与 repair_attempts 耗尽后 job 进入"需人工介入"
     终态，下游 pending 全部阻塞形成课题死锁——2026-08-14 两次人工解锁
     （key-transient r4-critic / moire r8-writer），根因均为已修复的超时
-    分级问题。本策略把该终态交给 lc-repair 自动处置一次：
+    分级问题。本策略把该终态交给 lc-repair 自动处置一次。
+
+    v6.9.49 死角修复：原条件要求 attempts>=MAX 且 repair_attempts>=MAX
+    双上限齐备，但存在系统性死角——repair 在 repair_attempts 2→3 时
+    重置 attempts=0，此后 job 只需再失败一次（attempts=1, rep_att=3），
+    三条恢复路径同时失效：repair 拒绝（rep_att 达上限）、依赖链重试被
+    _is_proposal_stuck 的 rep_att>=MAX 判卡死跳过、auto_unlock 拒绝
+    （attempts<MAX）。2026-08-24 21:55 order-param r7-references-critic
+    实证死锁（94% 完成的课题被单 job 永久阻塞）。修复：解锁资格以
+    repair_attempts>=MAX（修复系统已明确放弃）为准，不再要求 attempts
+    同时达上限——run_repair 仅在 rep_att>=MAX 分支调用本函数，语义不变，
+    仅消除死角。
 
     条件（全部满足才解锁）：
-      1. failed 且 attempts >= MAX_JOB_ATTEMPTS 且 repair_attempts >= MAX
+      1. failed 且 repair_attempts >= MAX_JOB_ATTEMPTS（修复系统已放弃；
+         attempts 是否达上限不再作为门槛，v6.9.49）
       2. auto_unlock_count < 1（每个 job 终生至多自动解锁一次，
          防止坏输入导致无限重试循环）
       3. 最近一次失败距今超过 cooldown_hours（默认 24h，给根因修复
@@ -92,8 +104,6 @@ def should_auto_unlock(job: Dict[str, Any], now: datetime, cooldown_hours: float
     """
     try:
         if job.get("status") != "failed":
-            return False
-        if int(job.get("attempts", 0)) < MAX_JOB_ATTEMPTS:
             return False
         if int(job.get("repair_attempts", 0)) < MAX_JOB_ATTEMPTS:
             return False

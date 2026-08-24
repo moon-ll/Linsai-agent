@@ -165,11 +165,20 @@ class AutoUnlockPolicyTests(TestSuite):
         # ── 用例 3：终生一次上限 → 防无限重试循环 ──
         self.assert_eq(should_auto_unlock(self._terminal_job(25, auto_unlock_count=1), now),
                        False, "已自动解锁过一次不应再解锁")
-        # ── 用例 4/5：必须双上限齐备 ──
+        # ── 用例 4/5：repair 未达上限不解锁；attempts 不再作为门槛（v6.9.49） ──
         self.assert_eq(should_auto_unlock(self._terminal_job(25, repair_attempts=1), now),
                        False, "repair 未达上限不应解锁")
+        # v6.9.49 死角修复：repair 重置(attempts=0, rep_att=3)后单次失败
+        # → attempts=1/rep_att=3。原断言期望 False 会造成三路恢复皆死的
+        # 永久死锁（08-24 order-param r7-references-critic 实证），现应解锁。
         self.assert_eq(should_auto_unlock(self._terminal_job(25, attempts=1), now),
-                       False, "attempts 未达上限不应解锁")
+                       True, "repair 已放弃(attempts<MAX)且失败超24h 应解锁（v6.9.49 死角）")
+        # ── 用例 5b：死角态的冷却与终生一次约束同样生效 ──
+        self.assert_eq(should_auto_unlock(self._terminal_job(2, attempts=1), now),
+                       False, "死角态失败仅 2h 不应解锁")
+        self.assert_eq(should_auto_unlock(
+            self._terminal_job(25, attempts=1, auto_unlock_count=1), now),
+            False, "死角态已解锁过一次不应再解锁")
         # ── 用例 6：非 failed 状态 ──
         self.assert_eq(should_auto_unlock(self._terminal_job(25, status="pending"), now),
                        False, "pending 状态不应解锁")

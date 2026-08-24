@@ -1,5 +1,32 @@
 # 变更记录
 
+## v6.9.49 - 2026-08-25 should_auto_unlock 死角修复：修复系统放弃后单次失败即永久卡死
+
+背景：00h 健康检查发现 order-param r7-references-critic 陷入
+attempts=1 / repair_attempts=3 死角态，三条恢复路径全部失效：
+
+- `run_repair` 拒绝：repair_attempts >= 3（修复系统已放弃）；
+- 依赖链重试被跳过：`_is_proposal_stuck` 以 `attempts >= 3 or
+  repair_attempts >= 3` 判 stuck，ready 列表构建时整课题被 skip；
+- `should_auto_unlock` 拒绝：旧逻辑要求 attempts 与 repair_attempts
+  **同时**达上限。
+
+死角成因（系统性）：repair 对 failed job 的重置语义是 attempts→0 +
+repair_attempts+1（utils 备忘 #27）。当 repair_attempts 从 2→3 时
+attempts 被清零，此后该 job 只要再失败一次即落入 attempts=1 /
+repair_attempts=3 死角——不是偶发，是每个走到修复上限的 job 的
+必经状态。实证：berry r2-scheme-critic 若下次重跑失败也将同样卡死。
+
+修复：`should_auto_unlock` 移除 `attempts >= MAX_JOB_ATTEMPTS` 门槛，
+仅保留 `repair_attempts >= MAX_JOB_ATTEMPTS`（修复系统放弃即充分），
+维持 24h 冷却与终生 1 次两道护栏。次品 job 仍会被双上限拦住
+（repair 不再重置、依赖链重试被 stuck skip），不会无限重跑。
+
+- 测试：`test_alert_circuits.py` AutoUnlockPolicyTests 用例 5 期望
+  翻转（死角态 → 解锁），新增 5b 两子用例（死角态冷却期拒绝、
+  死角态终生次数耗尽拒绝）。
+- 验证：unlock 套件 10/10；`self_test --module` 1106/1106 全绿。
+
 ## v6.9.48 - 2026-08-24 AI 天花板公平性修复：白名单/千字归一/raw 复检/章节归因
 
 背景：attosecond 课题 AI 天花板连续 5 轮卡死 0.50，writer 每轮被
