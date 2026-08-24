@@ -552,7 +552,11 @@ class OptimizeMixin:
         # v6.9.47: 领域术语白名单——替换为等长占位符后再计数，
         # 只统计真正的冗余用法（法定复合词不计入）
         text_for_count = full_text
-        for term in self.AI_TERM_WHITELIST:
+        # v6.9.50: 长词优先替换——"同时或近同时电离"(8字)必须先于"同时电离"
+        # (4字)遮蔽，否则长词尾部被短词占位后，残余"同时或近"中的"同时"
+        # 泄漏计数 1 次（08-24 健康检查实证）。按长度降序对白名单未来
+        # 新增重叠词条同样稳健。
+        for term in sorted(self.AI_TERM_WHITELIST, key=len, reverse=True):
             text_for_count = text_for_count.replace(term, "□" * len(term))
 
         # 1. 死板关联词

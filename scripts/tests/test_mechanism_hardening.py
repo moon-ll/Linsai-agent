@@ -920,6 +920,18 @@ class AICeilingFairnessTests(TestSuite):
         self.assert_true(found2.get("有效", 0) == 0, "'有效性'不应计入'有效'")
         self.assert_true(found2t.get("同时", 0) == 0, "'同时电离'不应计入'同时'")
 
+        # 10.2b 白名单长词优先（v6.9.50）：'同时或近同时电离'必须先于
+        # '同时电离'遮蔽，否则长词尾部被短词占位后残余"同时或近"中的
+        # "同时"泄漏计数 1 次（08-24 健康检查实证）
+        res2b = opt._detect_ai_patterns(
+            Path(self.tmp_root),
+            self._mk_sections({"rationale": "一个以上电子被同时或近同时电离的过程。",
+                               "content": "", "scheme": ""}),
+        )
+        found2bt = res2b["details"]["transition_words"]["found"]
+        self.assert_true(found2bt.get("同时", 0) == 0,
+                         "'同时或近同时电离'不应因遮蔽顺序泄漏'同时'计数")
+
         # 10.3 阈值千字归一：13K 字长文冗余 16 次（~1.2/千字，正常密度）不扣分
         # filler 13.2K 字 → 阈值 max(12, 26)；16 次真实冗余用法 < 26 → 不扣
         text_long = filler + ("该方案显著且良好。" * 6 + "重要完整成熟精准。" * 1)  # 显×6 良×6 + 重完成精×4 = 16 次
