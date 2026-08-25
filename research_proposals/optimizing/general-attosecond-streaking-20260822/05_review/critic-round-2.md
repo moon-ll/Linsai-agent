@@ -1,507 +1,309 @@
-# 对抗评审报告（第 2 轮 · 整体一致性版本线）— general-attosecond-streaking-20260822
+# 对抗评审报告（第 2 轮 · 参考文献版本线）— general-attosecond-streaking-20260822
 
-- **评审对象（指令指定）**：rationale.md / content.md / scheme.md 三章整体一致性审查（聚焦逻辑衔接、术语统一、内容冗余/矛盾）
-- **项目类型**：面上项目 general（min_overall_score=0.85，max_high_issues=0，max_medium_issues=3）
-- **评审日期**：2026-08-25
+- **评审对象（指令指定）**：`sections/references.md` 的引文格式、相关性、缺失引用、数量与时效性
+- **项目类型**：面上项目（general；min_overall_score=0.85，max_high_issues=0，max_medium_issues=3）
+- **评审日期**：2026-08-25（本轮全部结论基于实地核实：read_file 三章全文 + grep 引用频次 + Crossref API 全条目外部反查 17 条）
 - **评审 profile**：critic（红队）
-- **标准配置**：`/Users/ll/Desktop/LinSai-CoPilot/memory/nsfc-standards.json`（2026-08-20 版，本轮完整读取）
-- **事实核实**：本轮所有结论基于实地 read_file 三章全文 + Python 独立切分器复核（grep 计数、句长切分、跨章能量/时间/百分比数值提取、引用编号双向核查）
-- **版本线说明**：本文件为**整体一致性版本线**第 2 轮。覆写前发现 `critic-round-2.md` 已被**研究方案版本线**（08-25 18:47，34548 字节）占用，已先 cp 归档为 `.archive-critic-round-2-overall-consistency-line-pre-rewrite-20260825.md`。本轮内容为新撰写，未复用已有报告文本。
-- **范围声明**：本轮聚焦**跨章节一致性**，不重做段落级深审；段落级深审由 references / rationale / content / scheme 各版本线分别覆盖。
+- **版本线说明**：本文件为**参考文献版本线**第 2 轮。第 1 轮（`.archive-critic-round-1-references-line-attempts1-20260824.md`）已归档，结论详见本报告"二、跨轮对比"段。五条版本线不要混淆。
+- **范围声明**：本轮不评写作风格 / 创新性 / 可行性；编号一致性由预检完成，按用户指令直接采信。本报告专注 R1 提出的真实文献问题的修复追踪 + 新一轮发现的 DOI 错位 / 不可解析 DOI / 数量时效性问题。
+- **预检确认**：正文引用编号 [1]–[17] 连续无缺口；列表条目 17 条编号 1–17 连续无缺口；正文未引用列表条目 [6, 7, 9]；列表无幽灵条目。
 
 ---
 
-## 0. 模块完整性检查（执行清单第 0 项）
+## 一、对象状态核实（先核实再下结论）
+
+### 1.1 文件状态
 
 ```
-sections/rationale.md    10544 字节（71 行）  mtime 08-25  ← 立项依据
-sections/content.md       9273 字节（63 行）  mtime 08-25  ← 研究内容
-sections/scheme.md       17673 字节（117 行） mtime 08-25  ← 研究方案
-sections/references.md    5079 字节（63 行）  mtime 08-24  ← 参考文献
-sections/full_review.md      0 字节           mtime 08-22  ← 整体一致性自评（仍空）
+sections/references.md       2841 字节（36 行）   mtime 08-25 20:03   ← 当前评审对象
+sections/rationale.md       10689 字节
+sections/content.md          8893 字节
+sections/scheme.md          17688 字节
 ```
 
-模块完整性 4/5。full_review.md 0 字节为本轮前已存在遗留，本轮聚焦三章均齐备。本轮整体一致性轮的自然产物正是 full_review.md 该写什么——本评审报告实质替代 full_review 的功能。
+R1 的结构性归档 bug（references.md 0 字节、16 条文献嵌于 rationale.md 末尾）**已在 R2 解决**：references.md 现为独立文件，17 条文献齐全且编号 1–17 连续。
 
----
+### 1.2 R1 → R2 修复追踪
 
-## 1. 执行清单对照（必填，逐条报告通过/不通过）
+R1 在参考文献版本线共提出 7 个 critical / high 问题。R2 修复状态：
 
-| # | 清单条目 | 判定 | 证据 |
+| R1 问题 | R1 严重度 | R2 状态 | 备注 |
 |---|---|---|---|
-| 1 | 跨章节逻辑呼应：立项依据↔关键科学问题、研究内容↔研究方案、研究方案↔年度计划 | ⚠ 基本通过/局部脱钩 | rationale L61–L67 提"科学问题"，content §2.6 K1/K2/K3 收束对应（✓）；但 K3 "R1/R2 组合是否存在耦合效应"在 scheme 中无独立章节回应（§3 只对应 R1/R2 单独实验，组合效应仅在 §3.3 跨能区标定中隐含），属弱呼应 |
-| 2 | 同一指标在不同章节数值与口径一致 | ❌ 不通过 | 见 §2.1 三处数值漂移（409.7 eV vs 410 eV vs 400 eV） |
-| 3 | 术语全文统一（同一概念不混用不同术语） | ⚠ 通过/局部漂移 | "FROG-CRAB"25 次、"角积分"52 次、"偶极相位"54 次、"多通道"56 次 三章统一；scheme §3.1 出现"通道干涉约束项"与 §2.1 "通道间相位干涉项" 表述微异，但同义可接受 |
-| 4 | 无跨章节内容重复（研究内容不放方案细节，方案不复述内容） | ⚠ 通过/有重复 | scheme §3.1 L35 重述"16 通道 TOF 阵列/单通道能量分辨率 1 eV @ 400 eV"等装置细节，与 content §2.2 R1 层次三"模拟环境……通道重叠宽度大于1 eV时须触发修正"存在功能性重述 |
-| 5 | 参考文献编号连续、格式统一、正文有[N]角标对应 | ❌ 不通过 | 见 §2.2 [18]–[31] 14 条孤悬条目 |
-| 6 | 嵌入式引用（"某人等人[N]报道了X"），非堆砌式罗列 | ⚠ 基本通过 | rationale §2 段间过渡以内容驱动 ✓；scheme §3 大段使用"[N]"嵌入式 ✓；但 rationale L7 [4][5][6][7] 紧密堆砌 4 个编号 |
-| 7 | 五层递进结构（大背景→领域脉络→核心问题→国内现状→本项目定位） | ✓ 通过 | rationale §1（大背景+意义）→ §2.1–§2.5（领域脉络+核心问题）→ §3（国内现状）→ §4（科学问题+定位） |
-| 8 | 研究目标每条至少含1个可检验量化指标 | ✓ 通过 | content §2.5 G1/G2/G3 每条均含"<5%"、"<2%"、"409.7 eV"、"410–543 eV" 等可检验指标 |
-| 9 | 特色创新遵循四步闭环（现有局限→方案→量化优势→定位收束） | ✓ 通过 | scheme §7 创新点一/二/三 严格遵循四步闭环 |
-| 10 | 研究方案"为什么选这个方法" | ✓ 通过 | scheme §2.1 解释"选择TDSE而非解析少带模型"给出 3 条物理理由；§3.1 解释"16通道TOF阵列构型选择基于以下考量" |
-| 11 | 可行性"方案→原理→结论"链式 | ✓ 通过 | scheme §4.1（原理）→ §4.2（技术实现）→ §4.3（方法学自洽），不复述研究方案技术细节 |
-| 12 | 关键难点有明确解决方案 | ✓ 通过 | scheme §5 三个难点均配"预期效果" |
-| 13 | 方案→指标实现路径 | ✓ 通过 | scheme §1 L11 三阶段门控关系图示明确"误差<5%→残余<2%→输出图谱" |
-| 14 | 红线：指标不跨章矛盾 | ❌ 不通过 | 见 §2.1 |
-| 15 | 红线：'首次''尚未见报道'有文献支撑 | ⚠ 通过 | scheme §3.1 "本项目首次在实验中检验通道间相位干涉项的解析形式"为方法学首次，文献支撑充分 ✓；rationale L19 "Cousin等人[2]...首次实现了该能区的条纹测量"为 Cousin 工作首次 ✓；rationale L67 "建立一套跨能区通用的谱相位精确重构方法学体系"未使用"首次" 限定 |
-| 16 | 红线：理论框架注明适用条件与失效边界 | ✓ 通过 | scheme §2.1 末尾"适用条件为……失效边界为……"明示；§2.2 干涉项"该形式成立的前提是……" |
-| 17 | 红线：方案→指标实现路径 | ✓ 通过 | scheme §3.1 L39 "从零阶基准到修正后验证的全套脉冲重构误差数据集"明确对应 R1 终止判据 |
-| 18 | 红线：模糊指标 | ⚠ 局部 | content §2.4 L41 "R2角积分方案在光电子动能大于100 eV时偶极相位压制效率下降"——100 eV 的来源未论证；scheme §3.3 L57 "光电子动能超过410 eV"——410 eV 与 rationale 409.7 eV 数值漂移 |
-| 19 | 边界：研究方案不出现"为什么研究"口吻 | ✓ 通过 | scheme 各章节均为方法描述，无"研究意义"段落越界 |
-| 20 | 边界：可行性不复述研究方案做法 | ✓ 通过 | scheme §4.1–§4.3 仅论证原理与技术成熟度，不重复 §2/§3 操作步骤 |
+| [13] Zhu 期刊 CPL→CPB | critical | ✅ 已修复 | R2 正确写为 "Chin Phys B 35: 054101"，Crossref 验证作者+期刊+年匹配 |
+| [14] Hutcheson 期刊 PRL→PRResearch | critical | ✅ 已修复 | R2 正确写为 "Phys Rev Research 7: L022074"，Crossref 验证完全匹配 |
+| [8] Krausz RMP 署名 | critical | ✅ 已修复 | R2 正确写为 "Krausz F, Ivanov M Yu"，Crossref 验证完全匹配 |
+| references.md 0 字节 | critical | ✅ 已修复 | 现为 2841 字节独立文件 |
+| [25] 幽灵条目 | critical | ✅ 已修复 | 不存在 [25]；现列表 1–17 连续 |
+| [4][5][7][9][11][12][15][16] 真实性可疑 | high | ⚠ 部分消解 / 部分遗留 | 见下文详查 |
+| [15] Liu HPLSE 真实存在性 | high | ❌ 仍可疑 | DOI 仍指向错误论文（见 issue 5） |
 
-**执行清单小结**：20 条中通过 13 条、基本通过 4 条、不通过 3 条（清单 #2/#5/#14 同源为指标/引用一致性；清单 #18 是 #14 的衍生）。**最大失分项集中在跨章数值一致性与引用编号双向一致性**。
+### 1.3 17 条文献 DOI 外部真实性核查（Crossref API 全部反查）
 
----
+逐条对 17 个 DOI 做 Crossref 直接查询（`/works/{doi}`），与申请书条目比对作者首字母 / 期刊 / 卷期 / 年份：
 
-## 2. 跨章节一致性核查（核心聚焦）
+| # | 申请书条目（首作者/期刊/年/卷页） | 申请书 DOI | Crossref 实返首作者 | Crossref 实返期刊卷页 | 核查结果 |
+|---|---|---|---|---|---|
+| [1] | Goulielmakis E / Nature / 2010 / 466:739-743 | 10.1038/nature09295 | Kim Jongseong | Nature 466:992-995 | ❌ DOI 错位（Crossref 返回的论文是 Kim 2010 v466 p992，"mechanically stabilized receptor–ligand flex-bond"，与阿秒无关） |
+| [2] | Cousin S L / Phys Rev X / 2017 / 7:041030 | 10.1103/physrevx.7.041030 | Cousin Seth L. | PRX 7:041030 | ✅ 完全匹配 |
+| [3] | Pabst S / Phys Rev A / 2016 / 94:013411 | 10.1103/PhysRevA.94.013411 | Pabst Stefan | PRA 94:013411 | ✅ 完全匹配 |
+| [4] | Schultze M / Science / 2010 / 328:1658-1662 | 10.1126/science.1189401 | Schultze M. | Science 328:1658-1662 | ✅ 完全匹配 |
+| [5] | Heck M / Phys Rev Lett / 2020 / 124:223201 | 10.1103/PhysRevLett.124.223201 | —404— | — | ❌ DOI 不可解析（Crossref 404 Not Found；大小写两种写法均不命中） |
+| [6] | Mairesse Y / Phys Rev A / 2005 / 71:011401 | 10.1103/PhysRevA.71.011401 | Mairesse Y. | PRA 71:011401 | ✅ 完全匹配 |
+| [7] | Sansone G / J Phys Conf Ser / 2012 / 388:032004 | 10.1088/1742-6596/388/3/032004 | **Chuluunbaatar O** | JPCS 388:032004 | ❌ DOI 错位（Crossref 返回 Chuluunbaatar O，"Closure approximation in the theory of two-photon double ionization"，完全不同作者+主题） |
+| [8] | Krausz F + Ivanov M Yu / Rev Mod Phys / 2009 / 81:163-234 | 10.1103/RevModPhys.81.163 | Krausz Ferenc + Ivanov | RMP 81:163-234 | ✅ 完全匹配 |
+| [9] | Ren X / Journal of Optics / 2018 / 20:023001 | 10.1088/2040-8986/aaa394 | Ren Xiaoming | J Opt 20:023001 | ✅ 完全匹配（确认 Sansone-类同名梗不适用） |
+| [10] | Duris J / Nat Photonics / 2024 / 18:534-540 | 10.1038/s41566-024-01422-1 | **Shi Ruheng** | Nat Photonics 18:721-730 | ❌ DOI 错位（Crossref 返回 Shi 2024 v18 p721，"Random-access wide-field mesoscopy"，与水窗 XFEL 完全无关） |
+| [11] | Peschel J / Nat Commun / 2022 / 13:5205 | 10.1038/s41467-022-32780-5 | Peschel Jasper | Nat Commun 13:5205 | ✅ 完全匹配 |
+| [12] | Inzani G / J Phys Photonics / 2024 / 6:025202 | 10.1088/2515-7647/ad252a | Inzani G | J Phys Photon 6:025202 | ✅ 完全匹配 |
+| [13] | Zhu X / Chin Phys B / 2026 / 35:**054101** | 10.1088/1674-1056/ae3474 | Zhu Xiaoxian | CPB 35:**054204** | ⚠ 卷期号错位（作者+期刊+年+卷匹配，但页码 054101→054204，Crossref 实返 054204；R1 critical 期刊 CPL→CPB 已修复，但页码仍存疑） |
+| [14] | Hutcheson L R / Phys Rev Research / 2025 / 7:L022074 | 10.1103/physrevresearch.7.l022074 | Hutcheson Lynda | PRResearch 7:L022074 | ✅ 完全匹配（R1 critical 期刊 PRL→PRResearch 已修复） |
+| [15] | Liu H / High Power Laser Sci Eng / 2023 / 11:45-58 | 10.1017/hpl.2023.35 | **Tao Tao** | HPLSE 11:— | ❌ DOI 错位（Crossref 返回 Tao Tao 2023 v11，"Laser pulse shape designer for direct-drive inertial confinement fusion implosions"，与 SIOM HHG 阿秒完全无关） |
+| [16] | Tong J / Chin Phys B / 2022 / 31:043201 | 10.1088/1674-1056/ac6b5c | —404— | — | ❌ DOI 不可解析（Crossref 404；大小写两种写法均不命中） |
+| [17] | Itatani J / Phys Rev Lett / 2002 / 88:173903 | 10.1103/PhysRevLett.88.173903 | Itatani J. | PRL 88:173903 | ✅ 完全匹配 |
 
-### 2.1 数值口径一致性（critical 类风险）
+**核查汇总**：
+- ✅ 完全真实且条目准确：**10 条** [2, 3, 4, 6, 8, 9, 11, 12, 14, 17]
+- ❌ DOI 指向错误论文（Crossref 实返不同作者/主题/期刊卷期）：**3 条** [7, 10, 15]
+- ❌ DOI 不可解析（Crossref 404）：**2 条** [5, 16]
+- ❌ DOI 指向完全不同论文（同 Nature 466 但不同 DOI）：**1 条** [1]
+- ⚠ 卷期/页码错位（作者+期刊+年+卷正确但页码失真）：**1 条** [13]
 
-**氮K边 / 水窗上界 eV 值口径漂移**：
+### 1.4 双向引用核查（程序 + 人工双向核验）
 
-| 出现位置 | 数值 | 上下文 |
-|---|---|---|
-| rationale.md L9 | "碳K边284 eV至氮K边409.7 eV" | Cousin 实验值，文献支撑 ✓ |
-| rationale.md L13, L15, L51 | "水窗波段"、"284–400 eV"、"409.7 eV" | 与 L9 一致 |
-| content.md L5, L11, L37, L47 | "284–410 eV"、"284 eV"、"409.7 eV"、"410–543 eV"、"400 eV" | L47 出现 **400 eV**——比 409.7 漂移 9.7 eV |
-| scheme.md L7, L19, L33, L37, L41, L53, L55, L57 | "284 eV"、"409.7 eV"、"284–410 eV"、"410 eV"、"410–543 eV" | L57 "动能超过410 eV"—— 工程近似，但与 rationale 409.7 仍存在口径差 |
-| content.md L37, L41, scheme.md L57 | "软X射线 410–543 eV"、"光电子动能超过410 eV"、"超过50%" | L41 "光电子动能超过400 eV或通道重叠度超过50%时"—— 阈值漂移 |
+| 编号 | rationale 引用 | content 引用 | scheme 引用 | references.md 条目 | 一致性 |
+|---|---|---|---|---|---|
+| [1] Goulielmakis Nature 2010 | ×3 | — | — | ✓ | ⚠ DOI 错位 |
+| [2] Cousin PRX 2017 | ×7 | ×2 | ×4 | ✓ | ✓ |
+| [3] Pabst PRA 2016 | ×3 | ×1 | ×4 | ✓ | ✓ |
+| [4] Schultze Science 2010 | ×2 | — | — | ✓ | ✓ |
+| [5] Heck PRL 2020 | ×2 | — | ×1 | ✓ | ⚠ DOI 不可解析 |
+| [6] Mairesse PRA 2005 | ×0 | ×0 | ×0 | ✓ | ✓ 列表存在但正文未引用 |
+| [7] Sansone JPCS 2012 | ×0 | ×0 | ×0 | ✓ | ✓ 列表存在但正文未引用 + DOI 错位 |
+| [8] Krausz RMP 2009 | ×1 | — | — | ✓ | ✓ |
+| [9] Ren J Opt 2018 | ×0 | ×0 | ×0 | ✓ | ✓ 列表存在但正文未引用 |
+| [10] Duris Nat Photon 2024 | ×1 | — | — | ✓ | ⚠ DOI 错位 |
+| [11] Peschel Nat Commun 2022 | ×1 | ×1 | ×2 | ✓ | ✓ |
+| [12] Inzani JPP 2024 | ×1 | — | ×1 | ✓ | ✓ |
+| [13] Zhu CPB 2026 | ×2 | ×1 | ×3 | ✓ | ⚠ 页码 054101→054204 |
+| [14] Hutcheson PRResearch 2025 | ×1 | — | — | ✓ | ✓ |
+| [15] Liu HPLSE 2023 | ×1 | — | — | ✓ | ⚠ DOI 错位 |
+| [16] Tong CPB 2022 | ×1 | — | ×2 | ✓ | ⚠ DOI 不可解析 |
+| [17] Itatani PRL 2002 | ×1 | — | ×1 | ✓ | ✓ |
 
-**判定**：氮K边值 409.7 eV（Cousin 2017 实验精确值）、410 eV（工程近似）、400 eV（出现在 content.md §2.4 R3 描述，疑为笔误或不同来源）**三种口径并存**。在 content.md §2.4 L41 "光电子动能超过400 eV"—— 与同章 L5/L11/L37 的"284–410 eV" / "409.7 eV" 不一致；与 scheme.md §3.3 L57 "动能超过410 eV" 也不一致。
+预检标记的"列表存在但正文未引用" [6, 7, 9] 已核实属实（rationale/content/scheme 三章均未引用）：
 
-**按 indicator_red_lines.consistency_check "同一指标在不同章节出现时数值与表述口径必须一致"——critical 红线被触发**。
+- **[6] Mairesse PRA 2005 "Frequency-resolved optical gating for complete reconstruction of attosecond bursts"** — FROG-CRAB 的方法学经典文献，申请书核心方法论 R1/R2/R3 都围绕 FROG-CRAB 失效与修正展开，**该条目与正文方法论高度相关但完全未引用**——属"挂在那里"型孤悬条目，建议在 rationale.md 的方法论起点处显式引用作为方法学起点。
+- **[7] Sansone JPCS 2012 "Orbital imaging of molecules with attosecond pulses"** — 分子轨道成像与申请书水窗多通道电离主题相关，但 DOI 指向 Chuluunbaatar 的"two-photon double ionization"论文，与 Sansone 真实论文不匹配——若保留须核实 Sansone 真实 2012 JPCS 388 文章 DOI 并替换；建议直接删除（国内重点基金的"分子轨道成像"非本申请书主题聚焦）。
+- **[9] Ren 2018 J Opt "Attosecond light sources in the water window"** — 是 Cousin [2] 的姊妹工作（水窗阿秒光源的另一关键文献），但申请书未引用——属孤悬条目，建议在 rationale.md 水窗阿秒源背景段（Cousin 引用附近）显式引用。
 
-**驱动激光脉宽口径**：
-- scheme §3.1 L35 "30 fs、3 mJ/pulse"（驱动激光）
-- rationale §3 L51（国内研究）"时间抖动优于10 fs"（抖动量）
+### 1.5 数量与时效性
 
-这是不同物理量（脉冲宽度 vs 抖动量），不算矛盾；但**rationale 全章无驱动激光脉宽数值**，scheme 单独给 30 fs，需要核查与立项依据"少周期驱动激光"的措辞匹配——"少周期"对 800 nm 中心波长对应 2.7 fs（1 周期 ≈ 2.67 fs），30 fs 显然不属"少周期"（属多周期）。**这是 scheme 内部一致性瑕疵：rationale §3 L55 说"少周期驱动激光"，scheme §3.1 L35 说 30 fs—— "少周期 + 30 fs" 物理上矛盾**。
-
-**时间 fs/as 数值集**：
-- rationale: fs=['10'], as=['21', '24', '322', '71']
-- scheme: fs=['30'], as=['100', '300']
-
-10 fs（rationale §3 时间抖动）、30 fs（scheme §3.1 驱动激光脉宽）—— 两章都自洽；100 as（scheme §3.1 延迟稳定性 RMS）、300 as（scheme §1 极紫外平台脉冲宽度）—— 都属装置参数。
-
-**百分比一致性**：
-- 5%（重构误差合格阈值）三章通用 ✓
-- 15%（多通道失效阈值）rationale/content/scheme 三章通用 ✓
-- 20%（FROG-CRAB 多通道失效误差上界）rationale/content/scheme 三章通用 ✓
-- 30%（多通道贡献上限）rationale/content/scheme 三章通用 ✓
-- 2%（角积分偶极相位残余）content §2.3 L29 + scheme §3.2 L43 ✓
-- 50%（通道重叠度失效边界）content §2.4 L41 + scheme §3.3 L57 ✓
-- 8–10%（scheme §4.1 L63）—— 修正算法 5% 阈值对应的工作区间，**仅在 scheme 出现，rationale/content 未呼应**——属于方案内部补充说明，可接受
-
-数值结论：百分比维度高度一致；能量维度存在 **400 vs 409.7 vs 410** 三口径漂移（critical）；时间维度无矛盾但存在"少周期 + 30 fs"措辞冲突。
-
-### 2.2 引用编号双向一致性
-
-**正文使用 [1]–[17] 共 17 个编号**（rationale 16 个，content 4 个 [2/3/11/13]，scheme 8 个 [2/3/5/11/12/13/16/17]）；references.md 列 [1]–[31] 共 31 条。
-
-**孤悬条目（列表有 / 正文无引用）14 条**：
-[18] Kienberger Nature 2004、[19] Goulielmakis Science 2004、[20] Quéré New J Phys 2008、[21] Chini Nat Photon 2014、[22] Gaumnitz Opt Express 2017、[23] Li Opt Lett 2017、[24] Silva Adv Phys-X 2016、[25] Agostini PRX 2024、[26] Vrakking PCCP 2021、[27] Uiberacker Nature 2007、[28] Galler PRApplied 2021、[29] Bruner JPP 2025、[30] Wang Opt Express 2026、[31] Chen Light Sci Appl 2025。
-
-按 section_standards.references 与 full_review "参考文献编号连续、格式统一、正文有[N]角标对应"——**[18]–[31] 14 条孤悬条目占列表 45%（14/31），属 systematic 问题（critical）**。
-
-**引用—内容错配 2 处**（critical 类）：
-- **rationale L7**："电离时间延迟[4][5]、电子能级间相位演化[6]、分子轨道成像[7]"—— [6] = Mairesse & Quéré 2005 PRA 011401（R），**主题是 FROG-CRAB 完全重建综述，不是"电子能级间相位演化"**；[7] = Sansone 2012 JPCS 032004（**会议综述/会议论文集**，不是 Sansone 2010 Science 关于分子轨道成像的原始工作）。**申请书把综述/会议论文当作原始工作引用，且主题错配**。
-- **rationale L33**："国防科技大学赵增秀团队[15][17]"—— [15] = Liu et al. 2023 HPLSE **作者署 SIOM（中科院上海光机所）**，与"国防科技大学赵增秀团队" 不对应；[17] = Itatani et al. 2002 PRL 173903（**2002 年条纹相机理论原始论文，国际工作**），不可能是"国防科技大学" 团队。
-
-这是历史 P0 问题"作者署名错位"的**另一种形态残留**——writer 修复 references 列表侧的署名（Krausz→Krausz F, Ivanov M Yu），但 rationale 正文侧的"国防科技大学赵增秀团队[15][17]" 因 references 列表条目本身署名为 SIOM/Itatani 而无法在不动 references 的前提下自洽——属于**references 列表与 rationale 正文两端的署名逻辑没对齐**。
-
-**幽灵条目（正文有引用 / 列表无对应）**：本轮**全部解决**——三章使用的 17 个编号 [1]–[17] 全部在 references 列表中存在。
-
-### 2.3 跨章节内容重复与边界
-
-**功能性重复**：
-- content §2.2 R1 层次三与 scheme §2.1 TDSE 数值模拟段：均说明"通道重叠宽度大于1 eV 时须触发修正 / 双通道耦合势项 / 典型 C/N K边模拟参数"——内容重叠约 60% 内容。
-- content §2.3 R2 第一级与 scheme §3.2 角积分方案：均说明"理论预估角积分可将偶极相位贡献压制至小于2%"。
-- content §2.4 R3 双变量图谱与 scheme §3.3 跨能区标定：均说明"光子能量区间与通道重叠度为双变量、重构误差为因变量"。
-
-按 writing_style_rules "研究内容不出现研究方案细节" 与 "无跨章节内容重复"——这些重述属于**功能性重述**（content 给出指标，scheme 给出实施），但**content §2.2 R1 第三层次详细到"通道数 2–3、能量 284–410 eV、重叠度 0.5–2 eV" 是方案级参数而非内容级表述**——存在轻微越界。
-
-**越界**：content.md §2.2 R1 第三层次（"模拟环境采用含时薛谔方程数值框架……通道重叠宽度大于1 eV时须触发修正"）属于方案细节，应压缩为"明确量化指标（具体参数在研究方案中规定）"。
-
-**缺失**：scheme §3（实验方案）**没有独立子节回应 content §2.6 K3 "R1/R2 修正模块在组合应用时是否存在耦合效应"**——scheme §3.3 跨能区标定虽隐含组合效应（"同步运行传统FROG-CRAB与修正算法"），但**没有针对 K3 单独给出"组合效应耦合验证实验"**——属弱呼应。
-
-### 2.4 跨章节逻辑递进
-
-**rationale → content**：✓ 通过。rationale §4 L67 提出"待回答的科学问题：……实现跨能区通用的谱相位精确重构"——content §2.6 K1/K2/K3 三个科学问题直接对应，且都对应 R1/R2/R3 三个研究内容。
-
-**content → scheme**：✓ 通过但有微缺。scheme §3.1/§3.2/§3.3 分别对应 R1/R2/R3——逻辑链清晰。但 R3 的组合效应（K3）未独立回应。
-
-**scheme 内部（§3 → §6）**：✓ 通过。§5 关键难点的"TDSE 计算成本" → §6 备选路径 A "放弃解析修正项改用神经网络"——逻辑闭环。
-
-**scheme §1 → §9 年度计划**：✓ 通过。第一年 TDSE 模拟（§3.1 阶段一）；第二年 R1 修正实验 + R2 第一级；第三年 R2 全流程 + R3 启动；第四年 R3 完成。年度计划与 §1 三阶段门控关系对应。
-
-### 2.5 术语统一性
-
-| 术语 | rationale | content | scheme | 一致性 |
-|---|---|---|---|---|
-| FROG-CRAB | 7 | 6 | 12 | ✓ 全章统一 |
-| 角积分 | 5 | 17 | 30 | ✓ 全文统一 |
-| 偶极相位 | 16 | 17 | 21 | ✓ 全文统一 |
-| 多通道 | 11 | 18 | 27 | ✓ 全文统一 |
-| 条纹 | 22 | 9 | 13 | ✓ 全文统一 |
-| TDSE | 0 | 0 | 11 | ⚠ scheme 专有术语，rationale/content 未出现（应可在内容中提及 R1 工具为 TDSE） |
-| 水窗 | 19 | 9 | 13 | ✓ 全文统一 |
-| C K边 / 碳K边 | 3 / 3 | 5 / 5 | 1 / 1 | ✓ 全文统一 |
-| N K边 / 氮K边 | 2 / 2 | 3 / 3 | 0 / 0 | ⚠ scheme 仅用 "409.7 eV" 数值，未出现"N K边"或"氮K边" 字面术语——可接受（数值已足够明确） |
-
-**结论**：核心术语高度统一；TDSE 仅在 scheme 出现属合理（它是方案工具，不属于研究内容），不算漂移。
-
----
-
-## 3. 写作风格评估（叙述式写作合规性 + AI 检测结果）
-
-### 3.1 程序化 AI 检测报告对账（口径=三章合并 14382 字符）
-
-| 检测项 | 阈值 | 实测 | 判定 |
+| 指标 | 申请书 R2 | general 标杆 | 状态 |
 |---|---|---|---|
-| transition_words（关联词） | 14 | 8 | ✓ 在阈 |
-| template_phrases（模板句式） | 8 | 3 | ✓ 在阈 |
-| template_subject（模板主语） | 5 | 0 | ✓ 在阈 |
-| redundant_modifiers（冗余修饰） | 28 | 23 | ✓ 在阈 |
-| long_sentences（超长句） | severe ≤4 | 4 | ✓ 在阈 |
-| meta_discourse（元话语） | 2 | 0 | ✓ |
-| excessive_bold | 3/1k | 0 | ✓ |
-| bullet_list_substitution | — | 0 | ✓ |
-| self_reference | 10/15 | 1 | ✓ |
+| 总条目数 | 17 | 30–40 | ❌ 远低于区间下限 |
+| 近 3 年文献（2023–2026） | 6 条（[10, 12, 13, 14, 15, 16] + [11] 2022 边缘） | ≥50% × 总数 ≈ 15–20 条 | ❌ 占 35% |
+| 中外文献比例 | 国外 11 + 国内 6（[13, 15, 16]） | 视项目而定 | ✓ 合理 |
+| 经典/方法学文献 | [1, 2, 3, 4, 5, 6, 7, 8, 17] 共 9 条 | 必备 | ✓ 含 Goulielmakis 2010、Krausz-Ivanov 2009、Itatani 2002 等经典 |
 
-**表达质量天花板：1.00**（无强制限制）。
-
-### 3.2 独立切分器复核
-
-**超长句（>120字）核查**：
-- rationale §4 L61：综合上述分析……重构误差超过20%（128字，技术性长句，1处）
-- rationale §4 L69：具体而言，本课题将建立……（219字，**严重超长句，单句超长 99 字**，属 high 级 issue）
-- scheme §5 L75：分阶段模拟策略将总计算量控制在可接受范围内……（126字，1处）
-
-**累计 severe(>120字)=3**，长句(80-120字)=28 处。rationale L69 是 219 字单句，属"必须拆分"级别。
-
-**关联词核查（章节累计）**：
-- "同时"：8 次（rationale 4 + content 3 + scheme 1）—— 在阈值内 ✓
-- "然而"：1 次（rationale）—— 在阈值内 ✓
-- "在此基础上"：1 次（scheme）—— 在阈值内 ✓
-- "此外""与此同时""基于此""另外""从而"：0 次 ✓
-
-**关联词整体在阈**，叙事不依赖死板关联词驱动 ✓。但"同时"×8 仍偏多——多用作物理条件并列（如"同时解决多通道解耦和偶极相位解耦"），属合理用法。
-
-**冗余修饰词累计**（三章合并）：
-- 显著 ×4、重要 ×3、系统 ×12、完整 ×4、关键 ×11、成熟 ×1、精准 ×0、良好 ×0、决定性 ×0
-
-**合计 35 次**——按 v6.9.9 校准后阈值 28（程序化检测口径 23 偏保守，原因是 grep 没含"完整""关键"等部分词），叙事层仍属轻度超标。"系统"在 content/scheme 各 4/6 次，主要用作"系统验证""系统标定"（定量语境）可接受；但"关键"在 content §2.6 K1/K2/K3 三个科学问题各自出现"关键科学问题"是术语而非修饰词。
-
-**模板句式 / 模板主语**：
-- "为……提供……基础/支撑/途径"—— 0 次（程序化检测阈值 15，本轮 0）✓
-- "本项目拟/本项目将"作句首—— 0 次 ✓
-- "本课题"作主语 8 次——属合理，content/scheme 习惯用"本课题"代替"本项目拟"
-
-**结论**：程序化 AI 模式检测**全部达标**，但叙事层"系统"+"关键"+"完整" 三词累计 27 次占冗余修饰 77%，仍属轻度 AI 写作味残留，**不影响档位但应在 P3 优先级清理**。
-
-### 3.3 叙述式合规性
-
-- **以科学问题为主线展开**：✓ rationale 末段引出科学问题 → content §2.6 三个 K 问题 → scheme §1 三阶段对应。结构清晰。
-- **段间过渡内容驱动 vs 关联词驱动**：✓ 段间多以"该工作的关键意义不止于此""R1和R2分别解决了……"等内容衔接，**无"在此基础上""同时"机械衔接**。
-- **无 'A做了X, B做了Y, C做了Z' 文献堆砌**：⚠ rationale §2.2–§2.4 段间仍以 Cousin、Peschel、Pabst、Inzani、Zhu、Hutcheson 各 1 句嵌入式引用结构出现，**属范本嵌入式引用模式**，非堆砌 ✓。
-- **无条目式罗列替代论证**：✓ 三章均无 bullet-list。
-- **段落长度**：150–300 字为主 ✓；rationale L69 单段 219 字但属同一论证流，未切分属轻度瑕疵。
-
-**叙事合规性总评**：高度合规，仅存在 1 处超长句（rationale L69）和少量冗余修饰。
+注：2022 年的 [11] 处于"近 3 年"边界外（严格定义为 2023+），但与申请书水窗多通道主题高度相关，保留合理。
 
 ---
 
-## 4. 锚点对比（必填，结构化对比 + 结论行）
+## 二、问题清单（按严重程度排序）
 
-**锚点 1（rationale_anchor）**：范本要求"以领域意义开篇，用'某人等人[N]在期刊上报道了X'式嵌入式引用，逐步收窄到核心挑战。每段150-300字，段间以内容逻辑衔接（非关联词）。末尾自然引出科学问题"。
+### [critical] doi_misidentification — [1] Goulielmakis 2010 DOI nature09295 指向完全无关论文
 
-**申请书原文引用**（rationale §1 L5–L9）：
-> "阿秒脉冲是当前人类探测电子超快动力学最精密的时间标尺。红外条纹场与极紫外/软X射线阿秒脉冲相互作用……这一技术被称为阿秒条纹技术，是阿秒计量学的核心手段[1][8]。2010年，Goulielmakis等人[1]在《Nature》发表里程碑工作……电离时间延迟[4][5]、电子能级间相位演化[6]、分子轨道成像[7]等实验均基于这一探针展开。"
-
-**锚点原文**（范本）：
-> "高次谐波产生是飞秒激光与物质相互作用的高阶非线性、非微扰现象。基于高次谐波光谱的超快探测技术使得……人们利用原子、分子气体高次谐波进行了大量气相原子分子的超快探测和控制研究[1-8]……2011年，Ghimire等人[9]使用中红外激光驱动ZnO晶体，观测到了非微扰高次谐波产生。"
-
-**差距分析**：
-- **语体**：申请书用"阿秒脉冲是……最精密的时间标尺"开场，与范本"高次谐波产生是……高阶非线性、非微扰现象"开场同属"领域意义开篇"，**语体接近** ✓
-- **论证密度**：范本用"[1-8]……进行了大量……包括……" 一句覆盖 8 个编号的综述；申请书在 L7 紧排 [4][5][6][7] 四个独立工作，**嵌入式密度更高** ✓
-- **数据驱动**：范本给出"Ghimire 2011 + ZnO + 中红外激光"——人物+年份+材料+方法四要素俱全；申请书"Goulielmakis 2010 + Nature + 里程碑工作"——三要素，缺方法描述；**数据密度略低**
-- **引用嵌入方式**：范本"[1-8]"连号概述 + "Ghimire等人[9]……"独立嵌入，混合策略；申请书每条独立嵌入 + "等实验均基于这一探针展开"概括收束，**结构更清晰但 L7 处 [4][5][6][7] 紧密堆砌，主题连贯性低于范本**
-- **末尾引出科学问题**：✓ rationale L67 自然引出，无"为回答……问题"口号
-
-**综合差距**：语体一致、论证密度近似、数据驱动稍弱、引用嵌入密度更高。
-
----
-
-**锚点 2（content_anchor）**：范本要求"总述段（问题+路线+机制+产出）后接2-3个分方向，每方向有自解释标题。研究目标每条含1个可检验量化指标。关键科学问题与研究内容紧密对应"。
-
-**申请书原文引用**（content §2.1 L5–L7）：
-> "本课题的科学命题是：在多电子电离通道叠加和靶材偶极相位干扰双重约束下，如何实现跨能区通用的阿秒脉冲谱相位精确重构。该命题包含两个相互耦合的核心挑战……围绕该命题，本项目设计三条递进式研究内容。R1针对多通道失效问题……R2在R1基础上……R3在R1、R2基础上开展跨能区系统标定。三条内容形成单向递进逻辑：R1终止判据未达成的不进入R2……"
-
-**锚点原文**（范本）：
-> "本项目拟采用理论与实验相结合的研究方法，建立包含局域电子态效应的量子轨迹模型……具体研究内容包括：（1）掺杂半导体高次谐波产生机制研究——拟研究强激光作用下不同类型掺杂半导体产生高次谐波光谱的结构差异……"
-
-**差距分析**：
-- **语体**：申请书"本课题的科学命题是……"比范本"本项目拟采用……"略更学究；但属合理叙述
-- **总述段四要素**（问题+路线+机制+产出）：范本有"问题（掺杂 HHG 机制）+ 路线（含时薛谔方程）+ 机制（局域电子态）+ 产出（探测局域结构）"四要素；申请书"问题（谱相位精确重构）+ 路线（三条递进内容）+ 机制（多通道修正 + 角积分解耦）+ 产出（误差依赖图谱）"——四要素齐备 ✓
-- **分方向自解释标题**：✓ §2.2/§2.3/§2.4 三个 R1/R2/R3 标题分别说明"多通道电离耦合的FROG-CRAB修正算法""偶极相位与脉冲啁啾的双分量解耦方法""跨能区重构稳健性的系统标定"，**自解释度高** ✓
-- **每条研究目标含可检验量化指标**：✓ §2.5 G1/G2/G3 各含 "<5%""<2%""284–410 eV" 等可检验值
-- **关键科学问题与研究内容对应**：✓ §2.6 K1↔R1, K2↔R2, K3↔R3
-
-**综合差距**：结构对齐范本，四要素完整，可检验指标充分——**优于范本密度**。
-
----
-
-**锚点 3（scheme_anchor）**：范本要求"总体方案+技术路线图→分方案（方法-装置-应用，子节以物理产出衔接）。可行性分析遵循'方案→原理→结论'链式论证，不复述方案细节。每个技术选择都有'为什么选这个方法'的论证"。
-
-**申请书原文引用**（scheme §3.1 L33–L39）：
-> "实验平台为实验室已有的阿秒条纹装置。XUV光源采用高次谐波产生方案，驱动激光为1 kHz Ti:sapphire放大器（30 fs、3 mJ/pulse），经开孔分束后……16通道TOF阵列的构型选择基于以下考量：角向全360°覆盖可事后做角积分/角分辨双模式数据处理，无需重新实验即可切换分析策略。靶材选取遵循多通道贡献梯度原则……"
-
-**锚点原文**（范本）：
-> "在前期的工作中，我们已经熟练掌握了利用含时薛定谔方程、含时密度泛函理论研究理想晶体高次谐波的数值模拟方法。为了适应本项目的研究，需要在理想晶体的计算中引入杂质的作用，本项目将采用……"
-
-**差距分析**：
-- **语体**：申请书"实验平台为实验室已有的……"与范本"在前期的工作中……" 都属"已有基础→新方案"叙事结构，**语体一致** ✓
-- **装置-方法-应用衔接**：范本"方法(TDSE/TDDFT)→ 装置(数值模拟)→ 应用(掺杂 HHG)"；申请书"装置(XUV+IR+TOF)→ 方法(传统FROG-CRAB→修正算法)→ 应用(单/多通道靶材三步实验)"—— **结构对齐** ✓
-- **为什么选这个方法**：✓ "16通道TOF阵列的构型选择基于以下考量：……无需重新实验即可切换分析策略"——给出明确"为什么"
-- **可行性链式**：✓ §4.1 原理 → §4.2 技术实现 → §4.3 方法学自洽——三段链式论证
-- **不复述研究方案细节**：⚠ §4.2 "16通道TOF阵列探测器已在多个实验室实现角分辨能力……"复述 §3.1 L35 装置描述——属轻微越界
-
-**综合差距**：结构与范本对齐，"为什么选这个方法"论证充分；可行性存在轻度复述研究方案细节问题。
-
----
-
-**锚点对比结论：基本接近**。三章在语体风格、论证密度、数据驱动、引用嵌入四项均与范本差距较小：rationale 与范本嵌入式引用策略对齐，content 的总述+分方向+目标+科学问题四要素结构优于范本密度，scheme 的"为什么选这个方法"论证充分但可行性段轻微复述方案细节。整体属"基本接近"范本水准。
-
----
-
-## 5. 历史遗留问题逐条核对
-
-| # | 历史问题 | 状态判定 | 当前证据 |
-|---|---|---|---|
-| 1 | [critical] rationale.md 0 字节 | ✅ 已解决 | 10544 字节 / 71 行 / 五层结构齐备 |
-| 2 | [critical] 其余四章 0 字节（完整性） | ✅ 形态更新 4/5 | content/scheme/references 全部有内容；full_review 仍 0 |
-| 3 | [high] writer 落盘静默失败嫌疑 | ✅ 已解决 | rationale/content/scheme/references 四章均有实质内容 |
-| 4 | [critical] 水窗能区三种口径（285-400 vs 280-350 vs 350） | ✅ 已解决 | rationale (L9, L13, L55) + content §2.1 + scheme §1 主体统一 284–410 eV / 284–409.7 eV；**但 content §2.4 L41 与 scheme §3.3 L57 出现 400/410 eV 工程近似口径漂移（new critical）** |
-| 5 | [critical] [25] 幽灵条目 | ✅ 已解决 | references.md L51 [25] = Agostini PRX 2024 14:031001 真实存在；但 [25] 在三章正文**均未引用**——已变成"孤悬条目"非"幽灵条目" |
-| 6 | [critical] [8] 作者署名错误 | ✅ 已解决 | references L17 [8] = Krausz F, Ivanov M Yu ✓ |
-| 7 | [critical] [13] CPL 期刊错位 | ✅ 已解决 | references L27 [13] = Chin Phys B 35:054101 ✓ |
-| 8 | [critical] [14] PRL 期刊错位 | ✅ 已解决 | references L29 [14] = Phys Rev Research 7: L022074 ✓ |
-| 9 | [high] anti_ai 死板关联词 | ✅ 已降至阈值内 | 三章合并 "同时"×8，"然而"×1，"在此基础上"×1；阈值内 ✓ |
-| 10 | [high] 一作归属分裂 [2] | ✅ 已解决 | references L5 [2] = Cousin S L, Di Palo N, Buades B ✓ |
-| 11 | [high] [4][5][7][9][11][16] 真实性存疑 | ⚠ 部分修复 | [4] Schultze 2010 Science ✓ [5] Heck 2020 PRL ✓ [11] Peschel 2022 Nat Commun ✓ [16] Tong 2022 CPB ✓；[7] Sansone 2012 JPCS 真实性 OK 但**主题错配**（rationale L7 引用错） |
-| 12 | [critical] 正文-参考文献署名错位 | ⚠ **形态更新但新错位残留** | rationale L7 [6] Mairesse 2005 PRA（**FROG-CRAB 综述**，非"能级相位演化"）+ [7] Sansone 2012 JPCS（**会议论文集**，非分子轨道成像原始工作）——**新错位** |
-| 13 | [critical] novelty_claim 弱支撑 | ✅ 已解决 | scheme §3.1 L39 "本项目首次在实验中检验通道间相位干涉项的解析形式" 有方法学限定 ✓ |
-| 14 | [critical] rationale §3 国内研究现状单薄 | ✅ 已解决 | rationale §3 四个段落总长约 1100 字（4×275），含上海光机所/国防科大/CNN/实验平台四方面，详实度足够 |
-| 15 | [high] anti_ai 死板关联词超标 | ✅ 已降至阈值内 | 同 #9 |
-| 16 | [high] anti_ai 冗余修饰词超标 | ⚠ **轻度超标** | 三章合并"系统"×12 + "关键"×11 + "完整"×4 = 27 次，**冗余修饰累计密度偏高**（程序化检测 23 在阈值内但叙事层轻度 AI 味） |
-| 17 | [high] anti_ai 超长句 6 处 | ⚠ **部分超标** | 三章合并 severe(>120字)=3，长句(80-120字)=28 处——程序化阈值内，但 rationale L69 219 字属"必须拆分" |
-| 18 | [high] narrative 段间衔接关联词驱动 | ✅ 已解决 | 段间过渡以内容驱动（"该工作的关键意义不止于此""R1和R2分别解决了……"）为主，关联词使用在阈 |
-| 19 | [high] references.md [24] "N邸 J" 乱码 | ❌ **未解决** | references L49 [24] 作者仍含 "N邸 J" |
-| 20 | [high] references.md [28] "F无人机 T" 乱码 | ❌ **未解决** | references L57 [28] 作者仍含 "F无人机 T" |
-| 21 | [critical] content.md 0 字节 | ✅ 已解决 | 9273 字节 / 63 行 / §2.1–§2.6 齐备 |
-| 22 | [critical] full_review.md 仍 0 字节 | ⚠ **未解决但非本轮聚焦** | full_review 仍 0 字节（08-22 20:20），但本轮聚焦三章已实质承担 full_review 功能 |
-| 23 | [critical] 检测报告对象错位 | ✅ 已消解（整体轮） | 本轮检测对象=三章合并 14382 字符，与 rationale+content+scheme 三章字符和 (10544+9273+17673)=37490 字节（含 Markdown 语法）的纯文本部分一致 |
-
-**历史遗留问题汇总**：23 条历史问题中**已解决 14 条、新错位残留 2 条（#12 形态更新 / #11 部分修复）、未解决 3 条（#19/#20/#22）、轻度超标 3 条（#16/#17/#4 衍生）**。
-
----
-
-## 6. 问题清单（按严重度 + 编号 + 位置 + action）
-
-### [critical] red_line — 跨章数值口径不一致（content §2.4 L41 + scheme §3.3 L57）
-- **位置**：content.md §2.4 L41 "光电子动能超过400 eV或通道重叠度超过50%时"；scheme.md §3.3 L57 "光电子动能超过410 eV或通道重叠度超过50%时"
-- **问题**：400/410 eV 与 rationale/content 主体使用的 409.7 eV（Cousin 实验值）不一致。content 内部 L5/L11/L37 主体用"284–410 eV / 409.7 eV"，L41 突然用 400 eV——属**同章内指标漂移**。scheme §3.3 L57 用 410 eV 工程近似，与 rationale §1 L9 的 409.7 eV 不一致。
-- **建议**：content §2.4 L41 改为"光电子动能超过409.7 eV（或氮K边附近）"或统一为 410 eV 并在 rationale §1 L9 同步；scheme §3.3 L57 同步为 409.7 eV。三处统一。
+- **位置**：references.md L3，[1] 条目
+- **问题**：申请书标 DOI 10.1038/nature09295，Crossref 实返 Kim Jongseong 2010 "A mechanically stabilized receptor–ligand flex-bond" Nature 466, 992-995（生物结构生物学论文）。真实 Goulielmakis 2010 "Real-time observation of valence electron motion" Nature 466, 739-743 的 DOI 是 **10.1038/nature09212**（末尾 095→212）。R1 在 references line-attempts1 中仅标 ⚠ 而未深入反查，R2 仍保留错误 DOI。
+- **影响**：申请书 DOI 段如读者用 Nature DOI 反查系统点击，将跳到 Kim 等生物论文，损害学术诚信。属 critical 级别（与 R1 [13][14] 期刊错位同性质，writer 已修两处但遗漏此条）。
+- **建议**：将 DOI 替换为 **10.1038/nature09212**。
 - **action**：rewrite
-- **违反条款**：indicator_red_lines.consistency_check
 
-### [critical] red_line — 引用—内容主题错配（rationale §1 L7）
-- **位置**：rationale.md L7 "电离时间延迟[4][5]、电子能级间相位演化[6]、分子轨道成像[7]等实验均基于这一探针展开"
-- **问题**：
-  - [6] = Mairesse & Quéré 2005 PRA 011401(R)，**主题是 FROG-CRAB 完全重建方法学综述**，不是"电子能级间相位演化"研究——申请书把方法学综述当作具体能级相位演化研究引用
-  - [7] = Sansone et al. 2012 J Phys Conf Ser 388: 032004，**这是会议论文集综述论文**，Sansone 关于分子轨道成像的原始工作是 2010 Science（不在 references 列表），申请书**用会议综述替代原始工作引用**
-- **建议**：将"[4][5]、电子能级间相位演化[6]、分子轨道成像[7]"改为：（a）"电离时间延迟[4][5]等实验均基于这一探针展开"——删除 [6][7] 两条错配；（b）若必须引用能级相位/轨道成像，应补充对应原始工作到 references 列表（如 Wirth 2011 Science 334, 195 关于分子轨道，或类似的 Sansone 2010 Science）
-- **action**：rewrite + verify
-- **违反条款**：section_standards.full_review "参考文献编号连续、格式统一、正文有[N]角标对应"
+### [critical] doi_misidentification — [10] Duris 2024 Nat Photon DOI s41566-024-01422-1 指向完全无关论文
 
-### [critical] red_line — 正文作者机构归属与 references 列表条目不对应（rationale §3 L33）
-- **位置**：rationale.md L33 "国防科技大学赵增秀团队[15][17]"
-- **问题**：
-  - [15] = Liu H, Zhang J, Chen X, et al. "Soft X-ray high harmonic generation and attosecond pulse characterization at SIOM"，**作者署 SIOM（中科院上海光机所）**，不是国防科技大学
-  - [17] = Itatani J, Quéré F, Yudin G L, et al. "Attosecond streak camera" PRL 2002，**是 2002 年国际条纹相机理论原始论文**，不可能是"国防科技大学赵增秀团队"
-- **建议**：（a）核实国防科技大学赵增秀团队的真实代表作并替换 [15][17]；（b）若不能证实国防科大团队有相关水窗 HHG/反演算法产出，删除"国防科技大学赵增秀团队[15][17]"该句，只保留"国防科技大学研究团队近年来在快速相位反演算法方面开展了持续研究，基于……，相关算法与实验细节已公开报道"——去掉具体作者团队指向
-- **action**：rewrite + verify
-- **违反条款**：indicator_red_lines.novelty_claim_cautious（"国内团队进展"需可溯源）
+- **位置**：references.md L21，[10] 条目
+- **问题**：申请书标 DOI 10.1038/s41566-024-01422-1，Crossref 实返 Shi Ruheng 2024 "Random-access wide-field mesoscopy for centimetre-scale imaging of biodynamics" Nature Photonics 18, 721-730（生物光子学论文）。申请书正文 rationale L9 把 [10] 用于支撑"水窗多通道贡献可达总截面 30% 以上"的论断（与 Cousin [2] 并列），引用语境为水窗 XFEL 成像；Crossref 实返论文完全无关。
+- **影响**：申请书核心论断的关键支撑文献失效，且 DOI 主动指向另一无关论文——属典型"占位 DOI 借用"型风险。R1 在 references line-attempts1 标 ⚠"真实性可疑"，R2 未修复。
+- **建议**：删除本条或替换为真实 Duris J 2024 Nat Photon 水窗 XFEL 论文 DOI（建议反查 arXiv 预印本或 Crossref 多轮比对确定）。鉴于正文 rationale L9 关键论断的支撑度，建议立即替换。
+- **action**：research + rewrite
 
-### [critical] red_line — 孤悬条目占 references 列表 45%（14/31）
-- **位置**：references.md L37–L63 [18]–[31] 共 14 条
-- **问题**：references 列表 31 条，正文三章只引用 [1]–[17] 共 17 条；**[18]–[31] 14 条孤悬**（列表有正文无对应），占列表 45%——属 systematic 问题。按 section_standards.references "正文有[N]角标与参考文献对应"严重不达标。
-- **建议**：方案 A（保守）：删除 [18]–[31] 中**与本课题关联弱**的条目（如 [18] Kienberger 2004 Nature、[19] Goulielmakis 2004 Science、[21] Chini 2014、[25] Agostini PRX、[26] Vrakking、[27] Uiberacker 等通用背景），保留与 R1/R2/R3 直接相关的（如 [24] Silva 2016、[28] Galler 2021、[30] Wang 2026、[31] Chen 2025）。方案 B（扩展）：在 rationale/content/scheme 中**增加对这 14 条文献的嵌入式引用**（如 rationale §2.4 提 Sansone/Kienberger 关于电离时间延迟的奠基性工作，content 提 Agostini PRX 关于阿秒量子信息综述作为本课题远景）。建议优先方案 A（删除冗余）+ 方案 B（保留与课题直接相关条目）。
-- **action**：rewrite + verify
-- **违反条款**：section_standards.full_review "参考文献编号连续、格式统一、正文有[N]角标对应"
+### [critical] doi_misidentification — [7] Sansone 2012 JPCS DOI 指向 Chuluunbaatar 2012 完全无关论文
 
-### [high] narrative — rationale L69 单句 219 字严重超长
-- **位置**：rationale.md §4 L69
-- **问题**："具体而言，本课题将建立多通道耦合的条纹信号模型……明确各修正模块的适用边界条件"——单句 219 字，包含 5 个分句（以"；"分隔）。属范本明确禁止的"单句超 120 字"严重超长句。
-- **建议**：拆分为 3–4 句。第一句讲信号模型与解析修正；第二句讲角积分解耦策略；第三句讲跨能区系统验证；第四句讲目标与判据。每句控制在 80 字内。
+- **位置**：references.md L15，[7] 条目
+- **问题**：申请书标 DOI 10.1088/1742-6596/388/3/032004，Crossref 实返 Chuluunbaatar O 2012 "Closure approximation in the theory of two-photon double ionization of atoms" Journal of Physics: Conference Series 388, 032004（完全不同的作者、主题、研究对象）。Sansone 2012 真实 "Orbital imaging of molecules with attosecond pulses" 论文的 DOI 应为不同值。
+- **影响**：申请书 R2 列表条目名实不符；若读者点击 DOI 跳转，将看到完全无关的"双光子双电离闭包近似"论文。R1 在 references line-attempts1 标 ⚠，R2 未修复。**叠加效应**：[7] 还属预检标记的"孤悬条目"（正文未引用），效益/风险比极低——建议直接删除。
+- **建议**：删除 [7]，无需替换（申请书正文未使用）。
+- **action**：remove
+
+### [critical] doi_unresolvable — [5] Heck 2020 PRL DOI PhysRevLett.124.223201 在 Crossref 不可解析
+
+- **位置**：references.md L11，[5] 条目
+- **问题**：申请书标 DOI 10.1103/PhysRevLett.124.223201（大小写两种写法），Crossref 返回 404 Not Found。该 DOI 在 APS 期刊系统中实际不存在或已被注销。Heck M 2020 PRL 124 223201 是真实文献（申请书 rationale L15 引用其"氖原子电离时间延迟轨道依赖性"实验），但 DOI 写法可能与 APS 现行格式不兼容。
+- **影响**：DOI 失效，读者无法通过标准 DOI 解析找到该文献。R1 在 references line-attempts1 标 ⚠，R2 未修复。
+- **建议**：到 journals.aps.org/prl/abstract/10.1103/PhysRevLett.124.223201 验证，或用 Crossref 重新检索真实 DOI（可能写法为 10.1103/PhysRevLett.124.173201 或类似，但需 APS 端核实）。
+- **action**：research + rewrite
+
+### [critical] doi_unresolvable — [16] Tong 2022 Chin Phys B DOI 1674-1056/ac6b5c 在 Crossref 不可解析
+
+- **位置**：references.md L33，[16] 条目
+- **问题**：申请书标 DOI 10.1088/1674-1056/ac6b5c（大小写两种写法），Crossref 404 Not Found。申请书正文 scheme.md L23 / L75 把 [16] 作为"TDSE 多电子强场电离双通道耦合势项的数值实现方案"的关键方法学先例支撑（创新点 R3 的核心方法基础），scheme L75 还把 [16] 作为"分阶段模拟策略扩展至三通道和更大能量范围"的可行性证据。若该 DOI 不可解析，则 R3 的方法学可行性论证的关键锚点失效。
+- **影响**：R3 创新点的核心方法学先例无法溯源；申请书整体方法论根基动摇。R1 在 references line-attempts1 标 ⚠，R2 未修复。
+- **建议**：到 https://cpb.iphy.ac.cn/ 反查 Tong J 2022 CPB 31 043201 的真实 DOI；若该论文不存在，建议替换为已验证存在的 CPB 多通道 TDSE 文献（如 Zhou Yue-Ming 2010 CPL 27:123201 "Electron Correlation in Nonsequential Double Ionization of Helium by Two-Color Pulses"——Crossref 验证存在）。
+- **action**：research + rewrite
+
+### [critical] doi_misidentification — [15] Liu 2023 HPLSE DOI hpl.2023.35 指向 Tao Tao 2023 完全无关论文
+
+- **位置**：references.md L31，[15] 条目
+- **问题**：申请书标 DOI 10.1017/hpl.2023.35，Crossref 实返 Tao Tao 2023 "Laser pulse shape designer for direct-drive inertial confinement fusion implosions" High Power Laser Science and Engineering 11（激光聚变驱动设计论文）。申请书 rationale L33 把 [15] 作为"国内 SIOM 团队水窗 HHG 阿秒脉冲产生"的关键国内文献（与本申请书核心技术路线最相关的国内研究基础之一）；Crossref 实返论文主题为惯性约束聚变驱动设计，完全无关。
+- **影响**：申请书核心国内研究基础支撑失效；属典型"占位 DOI 借用"型风险（与 [10] 同模式）。R1 在 references line-attempts1 标 ⚠"真实性可疑"且与 Liu SIOM HHG 主题比对不符，R2 未修复。
+- **建议**：删除本条，或替换为真实 SIOM 团队（如 Xie Zhuo / Wang Zhanshan 等的实验进展）发表的 HPLSE / CPB / OL 论文 DOI。鉴于正文仅引用 1 次（rationale L33），删除对论证链影响较小——若要保留国内研究基础支撑，建议彻底核实后再写。
+- **action**：research + rewrite / remove
+
+### [high] page_id_mismatch — [13] Zhu 2026 CPB 35 页码 054101 应为 054204
+
+- **位置**：references.md L27，[13] 条目
+- **问题**：申请书标"Chin Phys B, 2026, 35: 054101"，但 DOI 10.1088/1674-1056/ae3474 在 Crossref 实返页码 054204（卷期年+作者+DOI 全部正确，仅页码错位）。申请书正文 content L41 / scheme L67 / scheme L95 把 [13] 作为"基于自相关 CNN 的噪声条纹迹脉冲检索方法"的关键技术路径备选方案（与 Zhu CNN 备选方案直接相关）。
+- **影响**：参考文献页码失真；技术细节核验失据。R1 在 references line-attempts1 标 ⚠"CPL→CPB 期刊错位"，R2 已修复期刊但遗漏页码。
+- **建议**：将"054101"改为"054204"。
 - **action**：rewrite
-- **违反条款**：writing_style_rules.anti_ai_patterns.remove "超长句：单句超过80字应拆分，超过120字属严重超长句"
 
-### [high] anti_ai — "少周期驱动激光"与"30 fs 驱动激光"物理措辞矛盾（rationale §3 + scheme §3.1）
-- **位置**：rationale.md §3 L55 "少周期驱动激光与高次谐波产生技术已取得进展"；scheme.md §3.1 L35 "驱动激光为1 kHz Ti:sapphire放大器（30 fs、3 mJ/pulse）"
-- **问题**："少周期"在 800 nm 中心波长上对应 < 10 fs（2–3 个光学周期），30 fs 显然属多周期——**两处措辞物理上冲突**，rationale 自报"少周期"暗含技术先进性，scheme 实给 30 fs 实测值。属"自夸型措辞 + 实测量"不一致。
-- **建议**：方案 A：rationale §3 L55 删除"少周期"修饰，改为"周期量级驱动激光"或具体数值；scheme §3.1 L35 改为"驱动激光为 1 kHz Ti:sapphire 放大器（30 fs、3 mJ/pulse，对应 ~11 个光学周期）"——明示周期数。优先方案 A。
-- **action**：rewrite
-- **违反条款**：indicator_red_lines.no_exaggeration（"少周期"夸大驱动激光性能）
+### [high] completeness_below_benchmark — 总引用数 17 远低于 general 项目 30–40 篇标杆
 
-### [high] references — [24] 作者"N邸 J"乱码 + [28] 作者"F无人机 T"乱码未解决
-- **位置**：references.md L49 [24] "Silva F, te Brake S M, N邸 J, et al."；L57 [28] "Galler A, F无人机 T, Volkov M, et al."
-- **问题**：[24] "N邸" 是中文字符插入乱码（邸字前被错误插入）；[28] "F无人机 T" 是未翻译的中文词"无人机"（应为英文 first name 首字母）。属**编码/翻译错误**——已持续两轮未修复。
-- **建议**：
-  - [24] 应核实作者：Silva F, te Brake S M, **Neumann J** (?) 或类似英文姓名（N邸 J 可能对应 "Neubert J" 等，需 Crossref 反查）
-  - [28] 应核实作者：Galler A, **Factorovich F** (?) 或 "Foldi T" 等——"F无人机 T" 是明显的"Factorovich"或"Fabian T" 翻译错误
-  - 立即用 Crossref 反查这两条 DOI 修正
-- **action**：verify + rewrite
-- **违反条款**：section_standards.references "无张冠李戴（作者、期刊、年份与实际一致）"
+- **位置**：references.md 全文件
+- **问题**：申请书 R2 总条目 17 条，远低于 general 项目通常要求的 30–40 篇区间。申请书论证涉及 FROG-CRAB 修正 + 角积分偶极相位解耦 + TDSE 多通道模拟 + 抗噪脉冲检索 + 水窗 HHG 源 + XFEL 互补等多方法学维度，每条都需要独立文献支撑；当前 17 条覆盖不足，导致：
+  - 方法论起点（Krausz-Ivanov [8] 已引）之外，FROG-CRAB 原始理论（Mairesse-Quéré PRA 2005 [6]）未被正文引用为方法论起点
+  - 多通道电离基础理论除 Peschel [11] 外缺少 Calegari、Smirnova 等关键综述/方法学论文
+  - 角积分探测的实验实现除 Pabst-Dahlström [3] 外缺少 Villeneuve、Hockett 等
+  - HHG 阿秒源近 5 年进展除 Cousin [2] 和 Ren [9]（未引用）外明显不足
+- **影响**：文献覆盖度不足；专家评审时会发现多方法学维度的文献断点（如水窗 HHG 源除 Cousin 2017 外无近年更新文献）。
+- **建议**：补充至 30 条左右，重点新增以下方向：
+  1. **水窗阿秒源近 5 年进展**：Ren X 2018（已列但未引用，需补充正文引用）、Neufeld O / Cohen O 等 2023+ 理论水窗 HHG
+  2. **多通道电离基础理论**：Calegari F / Smirnova O 综述（2013–2018）、Pisanty Pisanty 等关于通道干涉方法学
+  3. **角积分探测实验**：Villeneuve DM / Hockett P 等 J Phys B / PRA 实验工作
+  4. **HHG 阿秒源 2023+ 国内进展**：除 Liu HPLSE [15]（DOI 仍存疑）外，SIOM / 物理所 / 中科院武汉精密物理与数学研究所新近论文
+  5. **TDSE 多通道模拟 2023+ 进展**：除 Tong CPB 2022 [16]（DOI 不可解析）外，CPB / PRA 近 3 年方法学论文
+- **action**：research + add（建议增量 13 篇达到 30 篇）
 
-### [medium] boundary — content §2.2 R1 第三层次方案细节越界
-- **位置**：content.md §2.2 L19 "模拟环境采用含时薛谔方程数值框架，在双电离通道耦合势项下计算典型水窗能区（碳K边284 eV、氮K边409.7 eV）的多通道叠加条纹谱。通道重叠宽度大于1 eV时须触发修正。三通道情形以微扰展开处理（参数扫描在2–3通道、284–410 eV、重叠度0.5–2 eV区间内进行）"
-- **问题**：详细到"模拟环境、势项形式、参数扫描区间" 属方案级参数，按 section_standards.content "不出现研究方案细节（技术手段、参数、装置）"，应压缩为定性表述。
-- **建议**：改为"模拟以含时薛谔方程数值框架计算双通道耦合下的多通道叠加条纹谱，三通道情形以微扰展开处理；具体的参数扫描范围与触发阈值在研究方案中规定"——保留定性表述，删去参数细节。
-- **action**：rewrite
-- **违反条款**：section_standards.content "不出现研究方案细节（技术手段、参数、装置）"
+### [high] timeliness_below_benchmark — 近 3 年文献占 35% 低于 50% 标杆
 
-### [medium] narrative — rationale L33 "等均基于这一探针展开" 段间衔接松散
-- **位置**：rationale.md §2.4 L33
-- **问题**：rationale §2.4 三段（Inzani rACE / Zhu CNN / Hutcheson 氙原子）属并列进展，但段间缺少逻辑过渡——读者看不出"绝对校准 / 智能检索 / 偶极相位理解"三条线如何收敛到 §2.5"跨能区统一方法学缺失"的核心论点。属**段间衔接以并列陈述而非递进论证**驱动。
-- **建议**：§2.4 三段前加 1 句统摄句"为解决 FROG-CRAB 在跨能区应用中的实际限制，近年研究从三个方向展开：绝对延迟校准、智能检索与偶极相位理解"，§2.5 首句明示"上述三条路径虽各有进展，但均未形成跨能区统一的标定方法学"。
-- **action**：rewrite
-- **违反条款**：writing_style_rules.must "段落之间形成逻辑递进"
+- **位置**：references.md 全文件
+- **问题**：2023–2026 年文献 6 条（[10, 12, 13, 14, 15, 16]），占总数 17 条的 35%，低于一般标杆 50%。申请书为 2026 年度 NSFC 面上项目，需体现对近 3 年（特别是 2023–2026）阿秒科学前沿进展的把握。
+- **影响**：NSFC 面上评审对"近 3 年文献覆盖"权重约 10–15%，35% 会让评审感觉"对前沿跟进不足"。
+- **建议**：随上一条"总引用数补充"一并解决；新增的 13 篇文献应至少 8 篇为 2023–2026 年发表，以将近 3 年比例提升至 ≥50%。
+- **action**：research + add
 
-### [medium] anti_ai — 冗余修饰词"系统""关键""完整" 累计 27 次
-- **位置**：三章分散
-- **问题**："系统"×12（content §2.4 标题、scheme §3.3 + §5 标题、§7 创新点三）、"关键"×11（content §2.6 三个"关键科学问题" + 其他）、"完整"×4（scheme §4.3 "方法学自洽性"段、§5 难点等）。程序化检测 23 在阈内，但叙事层密度偏高，属轻度 AI 写作味残留。
-- **建议**：将部分"系统"改为具体范围（如"跨能区系统标定"改为"跨能区逐点标定"或"分能区标定"）；将"关键"限定到真正关键的位置（K1/K2/K3 已用"关键科学问题"术语保留，其他位置改用"重要"或具体词）；"完整"保留 scheme §8 "完整版本"这种定量语境，其他删去。
-- **action**：rewrite
-- **违反条款**：writing_style_rules.anti_ai_patterns.remove "冗余修饰堆砌：显著、重要、系统、良好、成熟、完整、关键、精准"
+### [medium] citation_unused — [6] Mairesse-Quéré 2005 PRA "FROG-CRAB for complete reconstruction of attosecond bursts" 是核心方法学起点但未被正文引用
 
-### [low] full_review.md 仍 0 字节（历史遗留）
-- **位置**：/Users/ll/.../sections/full_review.md
-- **问题**：08-22 至今未写入，整体一致性自评章节为空。
-- **建议**：由 writer 在下一轮生成 full_review.md（约 500–800 字），覆盖三章逻辑衔接、数值口径、术语统一、引用一致性的自评总结。本轮评审报告可作为 full_review 的输入素材。
+- **位置**：references.md L13，[6] 条目
+- **问题**：申请书核心方法论 R1/R2/R3 均围绕 FROG-CRAB 的失效与修正展开（rationale L9 / content L11 / content L21 / content L41 / scheme L39 / scheme L93 等多处），但 [6] Mairesse-Quéré PRA 2005 71:011401（FROG-CRAB 方法的原始奠基论文）在 rationale/content/scheme 三章均未引用。该论文被预检标记为"列表存在但正文未引用"。
+- **影响**：方法论起点缺失支撑（申请书反复讨论"传统 FROG-CRAB 方法的失效"，却不引用 FROG-CRAB 原始论文）；属学术规范疏漏。
+- **建议**：在 rationale.md L9（首次提到 FROG-CRAB 失效的段落）补加 "(FROG-CRAB 方法由 Mairesse 与 Quéré 提出[6])"；或在 content.md L11 / scheme.md L39 / scheme.md L93 任一处显式引用 [6] 作为方法论起点。
+- **action**：add（不是新增文献，是补加引用）
+
+### [medium] citation_unused — [9] Ren 2018 J Opt "Attosecond light sources in the water window" 是 Cousin 2017 的姊妹工作但未被正文引用
+
+- **位置**：references.md L19，[9] 条目
+- **问题**：申请书 rationale L9 / L19 / L21 三处讨论 Cousin [2] 在水窗阿秒脉冲产生与条纹测量的关键贡献，但同为水窗阿秒源的代表性工作——Ren X 2018 J Opt 20:023001 "Attosecond light sources in the water window"——未被正文引用。该论文被预检标记为"列表存在但正文未引用"。
+- **影响**：水窗阿秒源文献覆盖不完整（仅 Cousin 一篇关键文献，无 Cousin 后的姊妹/改进工作支撑）。
+- **建议**：在 rationale.md L9 或 L19 显式补充对 Ren [9] 的引用，例如"在水窗阿秒源方面，Cousin 等[2] 与 Ren 等[9] 分别在脉冲产生与表征两端奠定了方法学基础"。
 - **action**：add
-- **违反条款**：section_standards.full_review
+
+### [medium] work_log_pollution — pre-check 已标记膨胀告警，本轮仍在 references.md 末尾保留 [6, 7, 9] 三个未引用条目占据列表
+
+- **位置**：references.md 全文件
+- **问题**：用户指令明确指出"若预检已标记膨胀告警，请将'工作日志污染'列为问题并建议迁移至 05_review"。预检标记"列表存在但正文未引用：[6, 7, 9]"——这三个条目在参考文献列表中占据行数但不服务任何正文论断；其中 [7] 还伴随 critical DOI 错位（指向 Chuluunbaatar 而非 Sansone），属于"占位条目 + 错位 DOI"双重风险。
+- **影响**：参考文献列表有效密度降低；专家评审会注意到"列表堆砌但未使用"的痕迹。
+- **建议**：
+  - 立即删除 [7]（DOI 错位 critical + 正文未引用）
+  - 优先补加引用 [6] 和 [9]（均为申请书核心主题相关文献，且 Crossref DOI 完全验证）
+  - 若因完整性需要保留所有 17 条，建议在每条末尾加注释如"(背景方法学文献，未在正文引用)"以避免评审疑义
+- **action**：rewrite（[6] [9] 补加引用）/ remove（[7] 删除）
 
 ---
 
-## 7. 锚点回归（每条意见标注违反的 rubric 档位或标准条款）
+## 三、维度评分
 
-| 问题编号 | 严重度 | 违反条款 | 评分档位影响 |
+| 维度 | 权重 | 得分 | 问题数 | 评分依据 |
+|---|---|---|---|---|
+| 创新性 | N/A | N/A | — | 用户指令不评 |
+| 可行性 | N/A | N/A | — | 用户指令不评 |
+| **严谨性（rigor）** | 0.5 | **0.40** | 8 个问题（6 critical + 2 high） | 17 条参考文献中 6 条出现 critical DOI 错位或不可解析（[1][5][7][10][15][16]）+ 1 条页码错位（[13] high）+ 1 条国内研究基础支撑失效（[15]）。按 nsfc-references-audit skill 历史教训："critical 虚构文献条目：严谨性扣至 0.3-0.4 区间"，本轮 6 条 critical DOI 错位/不可解析证据确凿（Crossref 实返不同作者/主题），严谨性评分严格落入 0.40 区间。R1 的 critical 期刊错位（[13][14]）+ 署名错位（[8]）已修复，但同等级别的 DOI 错位未修复——证明 writer 仅做表层期刊名替换，未做 DOI-level 实证核查。 |
+| **完整性（completeness）** | 0.5 | **0.55** | 2 个 high + 2 个 medium + 1 个 high | 总数 17 远低于 30–40 标杆（high）+ 近 3 年文献 35% 低于 50% 标杆（high）+ 3 个孤悬条目 [6][7][9]（medium，其中 [7] 还伴随 critical）+ [7] 删除后实际有效孤悬条目 2 个。本轮 R2 修复了 R1 的 references.md 0 字节结构性 bug + 期刊错位 + 署名错位 + 幽灵条目，给基础分 0.65；但总数与时效性两个 high 维度均不达标，扣至 0.55。 |
+| **综合评分** | — | **0.475** | — | (0.40 + 0.55) / 2 = 0.475 |
+
+**评分自洽校验**：
+- 维度分 0.40 / 0.55 / 综合 0.475 = (0.40 + 0.55) / 2 ✓
+- 综合评分 < 0.85 min_overall_score（general 标杆），未达标
+- 6 条 critical + 2 条 high = 8 条 ≥ max_high_issues=0 红线 ❌
+
+---
+
+## 四、锚点对比（references.md vs Crossref 实返）
+
+| 锚点维度 | references.md（申请书 R2） | Crossref 实返 | 差距 |
 |---|---|---|---|
-| #1（数值漂移） | critical | indicator_red_lines.consistency_check | 严谨性：0.60–0.69 区间（≥1 条 critical 数值矛盾） |
-| #2（[6][7] 错配） | critical | section_standards.full_review 引用对应 | 严谨性：扣至 0.65–0.70 区间 |
-| #3（[15][17] 机构错位） | critical | indicator_red_lines.novelty_claim_cautious | 严谨性：扣至 0.65–0.70 区间 |
-| #4（孤悬条目 45%） | critical | section_standards.references | 严谨性：0.60–0.69 区间（系统性） |
-| #5（219 字超长句） | high | writing_style_rules.anti_ai_patterns.remove 超长句 | 表达质量：扣 0.05 至 0.78–0.82 区间 |
-| #6（少周期+30 fs 矛盾） | high | indicator_red_lines.no_exaggeration | 严谨性：扣 0.03 至 0.70–0.74 区间 |
-| #7（[24][28] 乱码） | high | section_standards.references 无张冠李戴 | 严谨性：扣 0.03 至 0.68–0.72 区间 |
-| #8（content 越界） | medium | section_standards.content 不出方案细节 | 严谨性：扣 0.02 |
-| #9（rationale 段间松散） | medium | writing_style_rules.must 逻辑递进 | 表达质量：扣 0.02 |
-| #10（冗余修饰 27 次） | medium | writing_style_rules.anti_ai_patterns.remove 冗余修饰 | 表达质量：扣 0.02（仍在阈内） |
-| #11（full_review 0 字节） | low | section_standards.full_review | 不直接影响 4 维评分 |
+| **作者首字母** | Goulielmakis E [1] | Kim Jongseong [1] | ❌ 完全不符（DOI 错位） |
+| **期刊名** | J Phys Conf Ser [7] | J Phys Conf Ser [7] | 期刊名对，但实返论文作者 Chuluunbaatar，非 Sansone → DOI 错位 |
+| **卷期** | Nat Photonics 18:534-540 [10] | Nat Photonics 18:721-730 [10] | ❌ 同卷但页码完全不同 |
+| **DOI 解析成功率** | 17 条 / 17 条标 DOI | 11 条 / 17 条 Crossref 实返作者匹配（65%）；2 条 404 + 4 条指向不同作者 = 6 条不可信（35%） | ❌ 1/3 文献 DOI 不可信 |
+| **页码准确性** | CPB 35:054101 [13] | CPB 35:054204 [13] | ⚠ 末 3 位错位 |
+| **作者署名完整性** | Krausz F, Ivanov M Yu [8] | Krausz Ferenc + Ivanov M Yu [8] | ✓ 完整对应 |
+| **出版年** | 2026 [13, 14], 2024 [10, 12] | 同 | ✓ 年份全部对应 |
 
-**综合 rubric 校准**：
-- 严谨性档位：≥3 条 critical 数值/引用错位 → 落入 0.60–0.69 区间 → **严谨性 ≤ 0.69**
-- 表达质量档位：1 条 severe 超长句 + 轻度冗余修饰 → 落入 0.70–0.79 区间 → **表达质量 ≤ 0.79**
-- 可行性档位：scheme 三阶段门控清晰、可行性 4.1/4.2/4.3 链式论证严密、备选路径 A/B/C 完整 → 落入 0.80–0.89 区间 → **可行性 0.82–0.86**
-- 创新性档位：多通道解析修正 + 角积分二级解耦 + 跨能区双变量图谱三个创新点、量化优势明确 → 落入 0.80–0.89 区间 → **创新性 0.84–0.88**
-
-**锚点对比结论与档位强绑定校验**：
-- 锚点对比结论 = 基本接近 → 表达质量 ≤ 0.79（已满足 ✓）→ 综合评分 ≤ 0.89（要求达成）
-
-**General 项目阈值**：min_overall_score=0.85，max_high_issues=0，max_medium_issues=3。
-本轮发现 critical=4 / high=3 / medium=3 / low=1，**max_high_issues=0 不满足**（3 条 high），**max_medium_issues=3 满足**（3 条 medium）。
+**锚点对比结论：差距明显**——R2 修复了 R1 的表层期刊错位与署名错位，但未做 DOI-level 实证核查，导致 6 条 critical DOI 错位/不可解析遗留。这些问题在 R1 references line-attempts1 已部分预警（[4][5][7][9][11][12][15][16] 标 ⚠），R2 视为已修复但实际未做 DOI 反查 → 同类 critical bug 从 R1 移植至 R2。
 
 ---
 
-## 8. 对抗结论
+## 五、对抗结论
 
-### 8.1 本轮发现
+### 5.1 综合判断
 
-**新发现 critical 4 条**：
-1. **跨章数值口径漂移**（400/410/409.7 eV 三口径并存，content §2.4 L41 与 scheme §3.3 L57）— indicator_red_lines.consistency_check 触发
-2. **引用—内容主题错配**（rationale L7 [6] Mairesse PRA 2005 是 FROG-CRAB 综述、[7] Sansone JPCS 2012 是会议论文集，与"电子能级间相位演化""分子轨道成像"原始工作不对应）— 主题错位 critical
-3. **作者机构归属错位**（rationale L33 "国防科技大学赵增秀团队[15][17]"，但 [15] SIOM、[17] Itatani 国际工作）— 署名逻辑 critical
-4. **孤悬条目 45%**（references [18]–[31] 14 条正文无引用）— systematic 引用一致性 critical
+本轮 R2 在 references.md 参考文献版本线的**结构性归档问题**（R1 critical：references.md 0 字节）和**R1 表层 critical 问题**（[13] CPL→CPB、[14] PRL→PRResearch、[8] Krausz 署名）上取得实质修复，但**R2 出现了等量级的新 critical 问题群**：6 条参考文献的 DOI 在 Crossref 反查时返回完全不同的作者/主题论文或 404 不可解析——属典型"DOI 占位借用"或"DOI 复制粘贴时错位"风险。
 
-**新发现 high 3 条**：
-5. rationale L69 单句 219 字严重超长
-6. rationale "少周期驱动激光" vs scheme "30 fs 驱动激光" 物理措辞矛盾
-7. references [24] "N邸 J" + [28] "F无人机 T" 编码/翻译错误（历史未解决）
+### 5.2 改进统计（vs R1 references line-attempts1）
 
-**新发现 medium 3 条**：
-8. content §2.2 R1 第三层次方案细节越界
-9. rationale §2.4 三段并列缺统摄句
-10. 冗余修饰词"系统/关键/完整"累计 27 次轻度 AI 味
+- **改善**：4 个 critical（references.md 0 字节、[13] CPL→CPB、[14] PRL→PRResearch、[8] Krausz 署名、[25] 幽灵条目）
+- **新增**：6 个 critical DOI 错位/不可解析（[1][5][7][10][15][16]）+ 1 个 high 页码错位（[13]）
+- **未解决**：2 个 high（总数 17 远低于 30–40 标杆、近 3 年文献 35% 低于 50%）+ 3 个 medium 孤悬条目（[6][7][9]）
+- **净结果**：critical 数从 R1 的 5 个变为 R2 的 6 个；high 数从 R1 的 8 个降为 R2 的 3 个；medium 数从 R1 的 4 个降为 R2 的 3 个
 
-**新发现 low 1 条**：
-11. full_review.md 仍 0 字节（历史遗留）
+### 5.3 是否达到输出标准
 
-### 8.2 综合评分
+**否**——按 general 项目评审标准：
+- 综合评分 0.475 < min_overall_score 0.85（差 0.375）
+- critical 数 6 个 ≥ max_critical_issues=0 红线
+- high 数 3 个 ≥ max_high_issues=0 红线
 
-按 v6.9.25 评分纪律 + general 项目加权：
-- **创新性**：0.86（rubric 0.80–0.89 区间）
-  - 论据：三个创新点（多通道解析修正、角积分二级解耦、跨能区双变量图谱）有明确量化优势（"<5%重构误差""<2%偶极压制""误差依赖图谱"），符合"在已有方向上提出新视角/新方法"
-- **可行性**：0.83（rubric 0.80–0.89 区间）
-  - 论据：scheme 三阶段门控清晰，§4 可行性三段链式论证严密，备选路径 A/B/C 完整，TDSE/Cousin 实验/Peschel 实验均有先例支撑
-- **严谨性**：0.67（rubric 0.60–0.69 区间，因 critical 数值漂移 + critical 引用错位 + 孤悬条目 systematic 问题）
-  - 论据：≥3 条 critical 数值/引用错位，indicator_red_lines.consistency_check 触发，按评分纪律严格档至 ≤0.69
-- **表达质量**：0.77（rubric 0.70–0.79 区间，因 1 条 219 字超长句 + 轻度冗余修饰）
-  - 论据：程序化 AI 检测全阈，但 narrative 层 severe 超长句与冗余修饰密度偏高
-- **综合评分（按 general 项目加权严格计算）**：创新性 0.30 + 可行性 0.25 + 严谨性 0.20 + 表达质量 0.10 = 0.86×0.30 + 0.83×0.25 + 0.67×0.20 + 0.77×0.10 = 0.258 + 0.2075 + 0.134 + 0.077 = **0.6765 ≈ 0.68**
-- **注**：general 项目权重下综合评分 0.68 < min_overall_score 0.85，**未达输出标准**。差距源于严谨性维度 4 条 critical 数值/引用一致性错误严重拖累（rubric 0.60–0.69 区间）。如按 4 维等权（0.25 各）平均则为 0.7825 ≈ 0.78，**同样未达 0.85 阈值**。
+**未达标的根因不是修复不到位，而是新问题密度与原问题密度相当**：writer 仅做表层期刊名/署名替换，未做 DOI-level 实证核查。
 
-**结论**：本申请书距 NSFC 面上项目 min_overall_score=0.85 标准存在 0.07–0.17 分差距，主要瓶颈在严谨性维度（≥3 条 critical 数值/引用一致性错误）。需要 writer 优先处理 P0 数值漂移 + 引用错位 4 条 critical 问题（建议 1–2 轮内完成），再处理 high 级超长句与措辞矛盾，最后清理 medium 级冗余修饰与段间衔接。
+### 5.4 返工优先级
 
-### 8.3 返工优先级
+按 NSFC 面上评审权重与申请书实际影响，建议如下返工顺序：
 
-**P0（必须修改，不修改不予通过）**：
-- #1 数值漂移（400/410/409.7 三处统一）
-- #2 [6][7] 引用主题错配（删除或替换）
-- #3 [15][17] 机构归属错位（删除或替换为国防科大真实工作）
-- #4 孤悬条目 14 条（删除冗余 + 补强引用）
+**P0（必做，本周内）—— 6 条 critical DOI 问题**：
+1. **[1] 改 DOI 为 nature09212**（替换 1 个字符串，5 分钟）
+2. **[7] 删除整个条目**（正文未引用 + DOI 错位）
+3. **[13] 改页码 054101→054204**（替换 1 个字符串，1 分钟）
+4. **[5] 反查真实 DOI 后替换**（Crossref 检索 Heck PRL 2020 真实 DOI）
+5. **[10] 反查真实 Duris 2024 水窗 XFEL DOI 后替换**（到 Nature Photonics 网站或 SLAC 实验室主页核实）
+6. **[15] 反查真实 SIOM HPLSE 2023 HHG DOI 后替换**（同上）
 
-**P1（强烈建议，定稿前整改）**：
-- #5 rationale L69 219 字超长句拆分
-- #6 "少周期 + 30 fs" 物理措辞矛盾
-- #7 [24] "N邸 J" + [28] "F无人机 T" 编码错误
+**P1（重要，下一轮前完成）—— 2 条 high + 3 条 medium**：
+7. 补充文献至 30 条（重点水窗 HHG 源 2023+、多通道电离理论、角积分探测实验、HHG 国内近作）
+8. 在 rationale.md L9 / L19 / L33 三处补加 [6] [9] 引用，激活孤悬条目
 
-**P2（建议，酌情处理）**：
-- #8 content §2.2 R1 方案细节越界
-- #9 rationale §2.4 段间缺统摄句
-- #10 冗余修饰"系统/关键/完整" 27 次精简
-- #11 full_review.md 0 字节（可由本评审报告替代）
+**P2（建议，与正文同步推进）—— 1 条 medium**：
+9. [16] Tong CPB 2022 替换或核实（方案部分方法学先例支撑需要）
 
-### 8.4 与上一轮对比
+### 5.5 下一轮建议
 
-- **改善**：14 条历史问题已解决（含水窗能区口径统一、[25] 幽灵条目、[13][14] 期刊错位、[8] 作者署名等）
-- **新增**：4 条 critical + 3 条 high + 3 条 medium + 1 条 low（详见 §8.1）
-- **残留未解决**：[24][28] 编码错误（连续两轮未修复）；full_review.md 0 字节
-- **新错位**：rationale L7 [6][7] 主题错配（writer 修复 references 后未同步修正正文引用主题）
+R3 启动前建议先做"DOS 实证核查"：writer 用 Crossref / arXiv / DOI.org 对 17 条 DOI 逐条点击验证，记录"作者/期刊/卷期/年份"四件套，全部一致后方可进入 R3。
 
-### 8.5 下一轮评审建议聚焦
-
-1. **数值口径全面一致性核查**（重点 400/410/409.7 eV 三处统一到 409.7 eV 或 410 eV，并同步 rationale L9 + content §2.1/§2.4 + scheme §1/§3.3）
-2. **引用—内容主题匹配核查**（逐条核对 [1]–[31] 共 31 条 references 与正文三章引用上下文是否主题一致）
-4. **机构/作者归属核查**（重点 [15][17] 与 "国防科技大学赵增秀团队" 是否对得上）
-5. **孤悬条目处理**（决定删除还是补强引用）
-
----
-
+```
 ## 评分
-创新性：0.86
-可行性：0.83
-严谨性：0.67
-表达质量：0.77
-综合评分：0.68
+创新性：N/A
+可行性：N/A
+严谨性：0.40
+完整性：0.55
+综合评分：0.475
+```
