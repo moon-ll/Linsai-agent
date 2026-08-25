@@ -7,8 +7,8 @@ last_score: 0.77
 critic_rounds: 13
 optimization_reports: 0
 status: "optimizing"
-created: "2026-08-24T20:01:52Z"
-updated: "2026-08-24T20:01:52Z"
+created: "2026-08-25T00:03:10Z"
+updated: "2026-08-25T00:03:10Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0

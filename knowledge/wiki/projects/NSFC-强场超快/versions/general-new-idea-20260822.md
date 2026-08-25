@@ -3,11 +3,11 @@ title: "new-idea — 最新版本"
 type: "proposal_version"
 proposal_id: "general-new-idea-20260822"
 project_type: "general"
-latest_round: 0
-last_score: 0.74
+latest_round: 1
+last_score: 0.77
 status: "optimizing"
-created: "2026-08-24T20:01:52Z"
-updated: "2026-08-24T20:01:52Z"
+created: "2026-08-25T00:03:10Z"
+updated: "2026-08-25T00:03:10Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -17,10 +17,10 @@ confidence: 1.0
 
 **课题 ID**：`general-new-idea-20260822`
 **类型**：general
-**最新轮次**：第 0 轮
-**当前分数**：0.74
+**最新轮次**：第 1 轮
+**当前分数**：0.77
 **状态**：优化中
-**同步时间**：2026-08-24T20:01:52Z
+**同步时间**：2026-08-25T00:03:10Z
 
 ---
 
@@ -28,20 +28,20 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 70 |
+| content | content | 72 |
 | full_review | full_review | 0 |
-| rationale | rationale | 110 |
-| references | references | 0 |
+| rationale | rationale | 54 |
+| references | 参考文献 | 52 |
 | scheme | scheme | 62 |
 
 ## 课题简介
 
 # 课题说明
 
-**课题名称**：机制层**：在自旋轨道耦合可忽略、自旋劈裂由 g 波晶体对称性保护的交变磁体中，自旋劈裂如何通过带间/带内双通道的动量选择干涉，决定谐波的自旋极化、偏振对称性与阶次结构？具体而言，g 波节点面结构在动量空间的四组几何特征如何在谐波偏振各向异性图样上留下可区分的指纹？该指纹与 Rashba-like 自旋纹理所预言的图样是否构成可操作的可证伪判据？
+**课题名称**：（待生成）
 **项目类型**：面上项目
 **课题 ID**：`general-new-idea-20260822`
-**当前状态**：优化中（第0轮，score 0.74）
+**当前状态**：优化中（第1轮，score 0.77）
 **启动日期**：2026-08-22
 **最后更新**：2026-08-24
 
@@ -62,6 +62,9 @@ confidence: 1.0
 | 1 | 0.10 | 11 | 6 | 2026-08-24 |
 | 1 | 0.10 | 7 | 4 | 2026-08-24 |
 | 1 | 0.74 | 21 | 11 | 2026-08-24 |
+| 1 | 0.43 | 16 | 6 | 2026-08-24 |
+| 2 | 0.74 | 22 | 7 | 2026-08-24 |
+| 2 | 0.77 | 17 | 10 | 2026-08-24 |
 
 ## 状态流转
 - 2026-08-22: — → drafts (注册新 proposal)
@@ -76,7 +79,9 @@ confidence: 1.0
 - `01_direction/` — 方向校准
 - `02_literature/` — 文献调研 + 针对性检索
 - `02_topic/` — 缺口分析
-- `03_question/` — 
+- `03_question/` — 科学问题框架
+- `04_proposal/proposal-draft.md` — 申请书正文
+- `04_proposal
 
 （完整简介见 [源文件](research_proposals/optimizing/general-new-idea-20260822/04_proposal/proposal-draft-merged.md)）
 
