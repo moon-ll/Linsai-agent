@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-new-idea-20260822"
 project_type: "general"
 latest_round: 1
-last_score: 0.77
+last_score: 0.72
 status: "optimizing"
-created: "2026-08-25T00:03:10Z"
-updated: "2026-08-25T00:03:10Z"
+created: "2026-08-25T04:02:25Z"
+updated: "2026-08-25T04:02:25Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-new-idea-20260822`
 **类型**：general
 **最新轮次**：第 1 轮
-**当前分数**：0.77
+**当前分数**：0.72
 **状态**：优化中
-**同步时间**：2026-08-25T00:03:10Z
+**同步时间**：2026-08-25T04:02:25Z
 
 ---
 
@@ -29,21 +29,21 @@ confidence: 1.0
 | 章节 | 标题 | 行数 |
 |------|------|------|
 | content | content | 72 |
-| full_review | full_review | 0 |
 | rationale | rationale | 54 |
-| references | 参考文献 | 52 |
-| scheme | scheme | 62 |
+| references | 参考文献 | 60 |
+| research-foundation | research-foundation | 20 |
+| scheme | scheme | 78 |
 
 ## 课题简介
 
 # 课题说明
 
-**课题名称**：（待生成）
+**课题名称**：理论层**建立含 g 波自旋劈裂的紧束缚正演模型，以 Houston 基含时演化为核心算法。在 MoS₂ 上复现文献[6][16]已发表的 HHG 阶次结构以标定模型可靠性，同一流程迁移至 MnTe 顺磁相复现自旋简并基准。终止判据：MoS₂ 合成 HHG 谱在 3/5/7 阶的相对强度与文献[6][16]偏差 ≤ 10%；MnTe 顺磁相偶次谐波相对强度 < 1%。
 **项目类型**：面上项目
 **课题 ID**：`general-new-idea-20260822`
-**当前状态**：优化中（第1轮，score 0.77）
+**当前状态**：优化中（第1轮，score 0.72）
 **启动日期**：2026-08-22
-**最后更新**：2026-08-24
+**最后更新**：2026-08-25
 
 ---
 
@@ -51,7 +51,7 @@ confidence: 1.0
 （待管线生成）
 
 ## 创新点
-6. 预期研究成果
+7. 预期研究成果
 
 ---
 
@@ -65,23 +65,11 @@ confidence: 1.0
 | 1 | 0.43 | 16 | 6 | 2026-08-24 |
 | 2 | 0.74 | 22 | 7 | 2026-08-24 |
 | 2 | 0.77 | 17 | 10 | 2026-08-24 |
+| 2 | 0.75 | 27 | 15 | 2026-08-25 |
+| 2 | 0.72 | 34 | 12 | 2026-08-25 |
 
 ## 状态流转
-- 2026-08-22: — → drafts (注册新 proposal)
-- 2026-08-22: drafts → optimizing 
-
-## 人工审核记录
-（尚未有人工审核）
-
----
-
-## 课题产物索引
-- `01_direction/` — 方向校准
-- `02_literature/` — 文献调研 + 针对性检索
-- `02_topic/` — 缺口分析
-- `03_question/` — 科学问题框架
-- `04_proposal/proposal-draft.md` — 申请书正文
-- `04_proposal
+- 2026-08-22: — → draf
 
 （完整简介见 [源文件](research_proposals/optimizing/general-new-idea-20260822/04_proposal/proposal-draft-merged.md)）
 
