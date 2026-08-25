@@ -2,9 +2,9 @@
 title: "量子参数估计不确定性关系的精读笔记"
 type: "papers"
 created: "2026-08-17T09:59:09Z"
-updated: "2026-08-19T05:16:11Z"
+updated: "2026-08-25T05:12:34Z"
 tags: ["量子计量学", "参数估计", "不确定性关系", "测量兼容性", "强场超快光学", "理论方法"]
-related: ["COLTRIMS", "Cramér-Rao界", "多参数估计", "强场电离计量", "量子Fisher信息", "阿秒瞬态吸收"]
+related: ["2506.15352", "COLTRIMS", "Cramér-Rao界", "多参数估计", "强场电离计量", "量子Fisher信息", "阿秒瞬态吸收"]
 source_raw: "2025-2506.15352-quantum-parameter-estimation-uncertainty-relation.md"
 growth_stage: "growing"
 confidence: 0.6
@@ -63,6 +63,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2506.15352]]
 - [[COLTRIMS]]
 - [[Cramér-Rao界]]
 - [[多参数估计]]

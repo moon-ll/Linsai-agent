@@ -1,7 +1,7 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-25 12h 健康检查（**第八轮推进：#10/#11/#12 完成，全部正常**（#10 双注入点在位 + 4 个 optimizing 课题注入块 258-782 字符全实质内容，bsv 0 注入系晋级 pending_review 预期——含两项遗留观察收口：v6.9.42 边际效果定论（bsv 0.41→0.86 晋级）、v6.9.41 退回路径首次真实触发（return-comparison-pass3.md 08-23T04:18Z）；#11 日度 coverage_pct 4.5（08-24T04:40Z <24h 新鲜）+ 周度周日嵌套三指标 0.75/2.56 正常；#12 trends_rising 5 词日度新鲜）；cron 沙箱不可见属备忘 #1 既有口径（运行时证据：今日 00/06/12 时 repair + 每小时 monitor + 5min 微调度器全在跑）；回归 1106/1106；无新缺陷、无修复提交；bsv 晋级 pending_review 后 monitor 统计 7 课题（8-1））
-完整报告：logs/healthchecks/healthcheck-2026-08-25-12h.md（上一轮：healthcheck-2026-08-25-08h.md）
+最后更新：2026-08-25 20h 健康检查（**第八轮收官：#13/#14/#15 完成，全部正常**——微调度器轮次优先级→正常 / stale job 清理→正常 / monitor 降级路径→正常；第八轮异常基线 4 个 failed critic job，auto_unlock_count 均未触发，v6.9.49 解锁等 BJ 08-26 00:00 repair（16:00Z）应全部重跑；cron 沙箱不可见属备忘 #1 既有口径（hermes 注册表 13 个核心 lc-\* cron 全 active+ok，仅 2 简报 cron error 不阻断研究管线）；回归 1106/1106；无新缺陷、无修复提交；bsv 仍 pending_review，monitor 统计 7 课题）
+完整报告：logs/healthchecks/healthcheck-2026-08-25-20h.md（上一轮：healthcheck-2026-08-25-12h.md）
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：
@@ -74,8 +74,10 @@
 
 - **#7（08-25 08h：静态 completion.py L94-137 三分支在位（收敛 0.85/v6.9.16 全窗口防骤降/v6.9.27 线上调）；运行时全量 86 条 score_history ≥0.85 计 0 条（最高 order-param 0.81/qg 0.80）→ 收敛分支需连续 4 条 ≥0.85 全量不可达，维持潜在死代码；条目级 [-4:] 粒度 + AGENTS.md 0.80 滞后，三项裁决无变化）**｜**#8（08-25 08h：L290-315 v6.9.31 job 级 finished_at 口径在位 + 独立复算 8 课题 last_job 9-20h（attosecond 20h 最长）全 <48h 零 stalled，与 monitor 异常清单一致 → 正常；昨日 3 条真实触发当日解除的闭环结论继续有效）**｜**#9（08-25 08h：L319-357 文件族 + actions 主口径（v6.9.13）在位，最近 3 文件 141/15/25 取 [-2:] 非零健康静默 → 正常；文件族口径不依赖当日星期，无工作日误报面）**
 
+**第八轮（08-25 20h 收官：#13/#14/#15 全部正常）**｜**#13（20h：micro_scheduler.py L76-88 _CHAIN_ORDER 含 idea_review:-1/update_vision:7/update_method_manual:8 + L1277 _job_priority_key 元组首维 round_num 在位；运行时 8 课题 pending 全单轮纯净（qg r2/kt r1/moire r5/bsv r1/order-param r7/berry r2/new-idea r2/attosecond r2，且 new-idea 已推进至 r2、attosecond 有 running job）无跨轮混排 → 正常）**｜**#14（20h：全局 stale 清理 L1336-1342 先于时段检查 L1347-1350 无条件执行 + 轮次完成分支 slot_done_key（L1400/1441/1448）标记返回 skip_reason 后续 tick 空转；今日 83 条"不在时段内跳过（stale 已完成）"实证 stale 先于时段判定，今日无时段内轮次完成属预期 → 正常）**｜**#15（20h：executor L36-39 AdversarialGovernance 导入 try/except→None + L1394 降级分支 round_num_fallback=job.get("round",0) 定义先于使用（v6.9.49 行号重锚定完好）；今日 0 触发属兜底预期 → 正常）**
+
 【下次从这里继续】
-1. **第八轮自 #13 起**（#13 微调度器轮次优先级 → #14 stale job 清理 → #15 monitor 降级路径，16h 档；完成后第八轮收官，第九轮自 #1 起）。注意 #10 静态行号 12h 已重锚定（critic 人审反馈 L1058 / writer L1803 / P0 writer 注入 L1780 / _allow_cross L1562 / 例外条款 L1606-1622）；#15 降级路径行号以 08h 20h 锚定 L1389-1403 为准；**bsv 已晋级 pending_review——若人工验收退回，观察退回后 06_feedback 目录随课题移回 optimizing 且 #10 注入块恢复（联动观察项 7 已收口的 v6.9.41 机制）**
+1. **第八轮已于 08-25 20h 收官；第九轮自 #1 起**（跨课题范例注入 → #2 维度轮换 → #3 研究设想门槛，20h 档；其余按轮换表顺序推进）。v6.9.49 auto_unlock 端到端验证为本轮重点：4 个 failed critic job（berry 08-24T10:50Z/kt 12:55Z/moire 13:35Z/order-param 13:55Z，均 repair_attempts=3）冷却 24h 已过，**期待 BJ 08-26 00:00 的 repair（16:00Z）触发全部 auto_unlock_count=1 并重跑，下轮应确认**（order-param attempts=1 按 v6.9.49"以 repair_attempts 为准"同样合格，为端到端实证样本）。注意 #10 静态行号 12h 已重锚定（critic 人审反馈 L1058 / writer L1803 / P0 writer 注入 L1780 / _allow_cross L1562 / 例外条款 L1606-1622）；#15 降级路径行号以 08h 20h 锚定 L1389-1403 为准；**bsv 已晋级 pending_review——若人工验收退回，观察退回后 06_feedback 目录随课题移回 optimizing 且 #10 注入块恢复（联动观察项 7 已收口的 v6.9.41 机制）**
 1a. 看板自愈确认：✅ 已兑现（04h 核实 proposals_in_optimizing=8）
 2. **v6.9.42 生效观察（12h 正式收口 ✅）**：定论点达成——bsv 修复后 r1→r8 走完（0.41→0.86 天花板 +0.21，references 聚焦 round-9 综合 0.72 较 round-5 同聚焦 +0.06），课题晋级 pending_review；此前"0.75→0.67→0.66 纹丝不动"窗口以晋级收官，注入链路边际效果实证成立，观察项关闭（bsv 已离开优化循环，后续若退回重开由下次退回窗口观察）
 3. **v6.9.40 生效观察（周一重点）**：微调度器恢复后 quantum-geometry（r1 26/29）/ berry（r2 12/25）应跨时段保持焦点直至轮次完成，软卡死 WARNING 应仅在 done 真冻结时出现——这是并发修复（fbddfbc）的首个验证窗口

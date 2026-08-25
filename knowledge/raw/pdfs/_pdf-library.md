@@ -1,7 +1,7 @@
 # PDF 全文库
 
 > 本页自动生成，汇总所有已同步的 PDF 原文。
-> 最后更新：2026-08-24T04:40:07Z
+> 最后更新：2026-08-25T04:40:12Z
 
 共 **72** 个 PDF。
 
@@ -70,7 +70,7 @@
 | `2602.16454` | Edge states and quantum optical high-harmonic generation fro | ✓ | ✓ |
 | `2603.01427` | Valleytronics in 2D Materials Roadmap | ✓ | ✓ |
 | `2603.08203` | Large differential attosecond delays in solid state photoemi | ✓ | ✓ |
-| `2604.06051` | 2604.06051 | ✓ | — |
+| `2604.06051` | Disentangling High Harmonic Generation from Surface and Bulk | ✓ | ✓ |
 | `2604.07543` | Phonon-driven decoherence of high-harmonic generation in the | ✓ | ✓ |
 | `2604.11984` | High-harmonic generation in systems with chiral Bloch states | ✓ | ✓ |
 | `2604.12602` | 2604.12602 | ✓ | — |

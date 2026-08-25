@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-attosecond-streaking-20260822"
 project_type: "general"
 latest_round: 1
-last_score: 0.54
+last_score: 0.76
 status: "optimizing"
-created: "2026-08-25T04:02:25Z"
-updated: "2026-08-25T04:02:25Z"
+created: "2026-08-25T12:02:54Z"
+updated: "2026-08-25T12:02:54Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-attosecond-streaking-20260822`
 **类型**：general
 **最新轮次**：第 1 轮
-**当前分数**：0.54
+**当前分数**：0.76
 **状态**：优化中
-**同步时间**：2026-08-25T04:02:25Z
+**同步时间**：2026-08-25T12:02:54Z
 
 ---
 
@@ -28,11 +28,11 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 56 |
+| content | content | 64 |
 | full_review | full_review | 0 |
-| rationale | rationale | 74 |
+| rationale | rationale | 72 |
 | references | references | 64 |
-| scheme | scheme | 120 |
+| scheme | scheme | 118 |
 
 ## 课题简介
 
@@ -41,9 +41,9 @@ confidence: 1.0
 **课题名称**：跨能区阿秒脉冲谱相位精确重构的方法学研究——多通道耦合修正与偶极相位解耦
 **项目类型**：面上项目
 **课题 ID**：`general-attosecond-streaking-20260822`
-**当前状态**：优化中（第1轮，score 0.54）
+**当前状态**：优化中（第1轮，score 0.76）
 **启动日期**：2026-08-22
-**最后更新**：2026-08-24
+**最后更新**：2026-08-25
 
 ---
 
@@ -65,6 +65,8 @@ confidence: 1.0
 | 1 | 0.55 | 41 | 19 | 2026-08-24 |
 | 1 | 0.50 | 36 | 10 | 2026-08-24 |
 | 2 | 0.54 | 34 | 13 | 2026-08-24 |
+| 2 | 0.76 | 37 | 14 | 2026-08-25 |
+| 2 | 0.76 | 69 | 19 | 2026-08-25 |
 
 ## 状态流转
 - 2026-08-22: — → drafts (注册新 proposal)
@@ -78,9 +80,7 @@ confidence: 1.0
 ## 课题产物索引
 - `01_direction/` — 方向校准
 - `02_literature/` — 文献调研 + 针对性检索
-- `02_topic/` — 缺口分析
-- `03_question/` — 科学问题框架
-- `04_proposal/proposal-draft.md` —
+- `02_topi
 
 （完整简介见 [源文件](research_proposals/optimizing/general-attosecond-streaking-20260822/04_proposal/proposal-draft-merged.md)）
 

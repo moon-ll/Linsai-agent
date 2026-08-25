@@ -3,12 +3,12 @@ title: "attosecond-streaking — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-attosecond-streaking-20260822"
 latest_round: 1
-last_score: 0.54
+last_score: 0.76
 critic_rounds: 2
 optimization_reports: 0
 status: "optimizing"
-created: "2026-08-25T04:02:25Z"
-updated: "2026-08-25T04:02:25Z"
+created: "2026-08-25T12:02:54Z"
+updated: "2026-08-25T12:02:54Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,7 +18,7 @@ confidence: 1.0
 
 **课题 ID**：`general-attosecond-streaking-20260822`
 **累计轮次**：1
-**当前分数**：0.54
+**当前分数**：0.76
 **状态**：优化中
 
 ---

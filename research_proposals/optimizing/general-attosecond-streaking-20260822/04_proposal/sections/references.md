@@ -34,30 +34,3 @@
 
 [17] Itatani J, Quéré F, Yudin G L, et al. Attosecond streak camera. Phys Rev Lett, 2002, 88: 173903. DOI: 10.1103/PhysRevLett.88.173903
 
-[18] Kienberger R, Goulielmakis E, Uiberacker M, et al. Atomic transient recorder. Nature, 2004, 427: 817-821. DOI: 10.1038/nature02277
-
-[19] Goulielmakis E, Uiberacker M, Kienberger R, et al. Direct measurement of light waves. Science, 2004, 305: 1267-1269. DOI: 10.1126/science.1103536
-
-[20] Quéré F, Iwata J, Midorikawa K. Different strategies for the measurement of attosecond pulses. New J Phys, 2008, 10: 025028. DOI: 10.1088/1367-2630/10/2/025028
-
-[21] Chini M, Zhao K, Chang Z. The generation, characterization, and applications of broadband isolated attosecond pulses. Nat Photonics, 2014, 8: 178-186. DOI: 10.1038/nphoton.2013.362
-
-[22] Gaumnitz T, Jain A, Pertot Y, et al. Streaking of bound-electron dynamics in the XUV regime. Opt Express, 2017, 25: 27506-27518. DOI: 10.1364/OE.25.027506
-
-[23] Li J, Ren X, Yin Y, et al. 53-attosecond X-ray pulses. Opt Lett, 2017, 42: 2113-2116. DOI: 10.1364/OL.42.002113
-
-[24] Silva F, te Brake S M, N邸 J, et al. Strategies for the generation of isolated attosecond pulses. Adv Phys-X, 2016, 1: 344-407. DOI: 10.1080/23746149.2016.1184191
-
-[25] Agostini P, Fabre D, Jiménez-Gallardo L R, et al. Quantum information with attosecond science. Phys Rev X, 2024, 14: 031001. DOI: 10.1103/physrevx.14.031001
-
-[26] Vrakking M J J. Attosecond physics: Imaging the fastest electronic motions. Phys Chem Chem Phys, 2021, 23: 16713-16728. DOI: 10.1039/D1CP01236A
-
-[27] Uiberacker M, Uphues T, Schultze M, et al. Attosecond-based transient absorption spectroscopy. Nature, 2007, 446: 627-632. DOI: 10.1038/nature05611
-
-[28] Galler A, F无人机 T, Volkov M, et al. Neural network approach for attosecond pulse retrieval. Phys Rev Appl, 2021, 15: 064017. DOI: 10.1103/PhysRevApplied.15.064017
-
-[29] Bruner B D, Hernández-García C, Sèreys R, et al. Quantum control in attosecond metrology. J Phys Photonics, 2025, 7: 015001. DOI: 10.1088/2515-7647/ad8b2c
-
-[30] Wang Y, Song X, Li Z, et al. Intelligent reconstruction of attosecond pulses using deep learning. Opt Express, 2026, 34: 4872-4885. DOI: 10.1364/OE.524894
-
-[31] Chen T, Zhang L, Liu J, et al. Multi-dimensional reconstruction of attosecond electron dynamics in molecules. Light Sci Appl, 2025, 14: 195. DOI: 10.1038/s41377-025-01812-2

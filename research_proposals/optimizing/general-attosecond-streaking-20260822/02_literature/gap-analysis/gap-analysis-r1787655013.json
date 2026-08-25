@@ -1,0 +1,74 @@
+{
+  "gaps": [
+    {
+      "claim": "R1→R2→R3单向门控逻辑的必要性：前序未通过则后续不启动的设计缺乏文献先例支撑",
+      "missing_evidence": "没有文献证明多级递进门控（受控模拟→真实靶材验证→跨能区标定）是阿秒脉冲表征方法学验证的标准或最优路径",
+      "search_keywords": [
+        "attosecond pulse characterization validation protocol sequential gating",
+        "FROG-CRAB multi-stage verification methodology",
+        "attosecond metrology gating logic reference"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDSE双通道近似的失效边界（通道间能量差<0.5 eV时双通道近似退化为单通道）缺乏文献标定",
+      "missing_evidence": "没有文献给出TDSE双通道模型在多通道电离场景下的具体失效条件或能量差阈值",
+      "search_keywords": [
+        "TDSE multi-channel ionization validity condition energy gap",
+        "two-channel approximation breakdown strong field ionization threshold",
+        "multi-channel TDSE simulation failure criterion"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "软X射线能区（光电子动能>400 eV或通道重叠度>50%）修正框架失效边界的量化条件缺乏文献依据",
+      "missing_evidence": "缺乏文献给出FROG-CRAB修正算法在高能区或多通道高度重叠场景下的具体失效阈值",
+      "search_keywords": [
+        "FROG-CRAB high energy failure boundary soft X-ray",
+        "attosecond streaking validity range high kinetic energy",
+        "multi-channel overlap threshold attosecond characterization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "角积分对偶极相位的压制效率达到<2%的理论预估缺乏直接的实验验证文献",
+      "missing_evidence": "Pabst & Dahlström的理论预言（角积分压制偶极相位至<2%）尚无独立实验验证报道",
+      "search_keywords": [
+        "dipolar phase suppression angular integration experimental verification",
+        "Pabst Dahlström angular integration dipole phase experiment",
+        "attosecond streaking dipole phase suppression efficiency measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "非共线XUV–IR干涉仪延迟稳定性<100 as RMS的技术成熟度缺乏文献支撑",
+      "missing_evidence": "没有文献给出本项目所用非共线XUV-IR干涉仪<100 as RMS延迟稳定性的具体实验表征数据",
+      "search_keywords": [
+        "attosecond streaking interferometer delay stability measurement",
+        "XUV-IR nonlocalized interferometer temporal stability attosecond",
+        "attosecond pulse characterization delay stability benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "16通道TOF阵列探测器角向覆盖360°、能量分辨率ΔE/E≈1%的规格缺乏文献佐证",
+      "missing_evidence": "没有文献给出本项目所用16通道TOF阵列探测器同时实现360°角覆盖与1%能量分辨率的实验配置",
+      "search_keywords": [
+        "16-channel TOF array detector angular coverage energy resolution",
+        "time-of-flight detector attosecond angular resolution specification",
+        "position-sensitive detector attosecond streaking angular coverage"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "修正项嵌入FROG-CRAB代价函数不改变算法收敛路径的论断缺乏文献或推导支撑",
+      "missing_evidence": "没有文献证明在代价函数中添加通道干涉约束项对FROG-CRAB算法收敛行为无影响",
+      "search_keywords": [
+        "FROG-CRAB cost function modification convergence analysis",
+        "attosecond pulse retrieval constraint term convergence property",
+        "FROG-CRAB algorithm convergence channel interference"
+      ],
+      "priority": "medium"
+    }
+  ]
+}
