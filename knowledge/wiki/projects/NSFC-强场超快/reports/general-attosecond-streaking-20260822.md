@@ -2,13 +2,13 @@
 title: "attosecond-streaking — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-attosecond-streaking-20260822"
-latest_round: 2
-last_score: 0.72
-critic_rounds: 3
+latest_round: 4
+last_score: 0.79
+critic_rounds: 5
 optimization_reports: 0
 status: "optimizing"
-created: "2026-08-25T16:04:30Z"
-updated: "2026-08-25T16:04:30Z"
+created: "2026-08-26T00:02:15Z"
+updated: "2026-08-26T00:02:15Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -17,19 +17,21 @@ confidence: 1.0
 # attosecond-streaking — 优化报告
 
 **课题 ID**：`general-attosecond-streaking-20260822`
-**累计轮次**：2
-**当前分数**：0.72
+**累计轮次**：4
+**当前分数**：0.79
 **状态**：优化中
 
 ---
 
-## 对抗评审（共 3 轮）
+## 对抗评审（共 5 轮）
 
 | 轮次 | 文件 |
 |------|------|
 | 第 1 轮 | [critic-round-1.md](research_proposals/optimizing/general-attosecond-streaking-20260822/05_review/critic-round-1.md) |
 | 第 2 轮 | [critic-round-2.md](research_proposals/optimizing/general-attosecond-streaking-20260822/05_review/critic-round-2.md) |
 | 第 3 轮 | [critic-round-3.md](research_proposals/optimizing/general-attosecond-streaking-20260822/05_review/critic-round-3.md) |
+| 第 4 轮 | [critic-round-4.md](research_proposals/optimizing/general-attosecond-streaking-20260822/05_review/critic-round-4.md) |
+| 第 5 轮 | [critic-round-5.md](research_proposals/optimizing/general-attosecond-streaking-20260822/05_review/critic-round-5.md) |
 
 ## 来源
 

@@ -22,9 +22,7 @@
 
 [14] Hutcheson L R, Hartmann M, Borisova G D, et al. Phase evolution of strong-field ionization. Phys Rev Research, 2025, 7: L022074. DOI: 10.1103/physrevresearch.7.l022074
 
-[15] Zhang J, Li D, Wang Q, et al. High-order harmonic generation and attosecond pulse characterization in the water window. Chinese J Lasers, 2023, 50: 1015001. DOI: 10.3788/CJL202350.1015001
-
-[16] Liu Y, Chen H, Wang S, et al. Fast phase retrieval of attosecond pulse based on gradient descent iteration in the 52–127 eV energy region. Opt Express, 2022, 30: 22517-22531. DOI: 10.1364/OE.462089
+[15] White J, Chang Z. Attosecond streaking phase retrieval with neural network. Opt Express, 2019, 27: 4799. DOI: 10.1364/oe.27.004799
 
 [17] Itatani J, Quéré F, Yudin G L, et al. Attosecond streak camera. Phys Rev Lett, 2002, 88: 173903. DOI: 10.1103/PhysRevLett.88.173903
 
@@ -36,11 +34,9 @@
 
 [21] Corkum P B. Plasma perspective on strong field multiphoton ionization. Phys Rev Lett, 1993, 71: 1994-1997. DOI: 10.1103/PhysRevLett.71.1994
 
-[22] Keldysh L V. Ionization in the field of a strong electromagnetic wave. Sov Phys JETP, 1965, 20: 1307-1314
+[22] Keldysh L V. Ionization in the field of a strong electromagnetic wave. Sov Phys JETP, 1965, 20: 1307-1314. INSPIRE-HEP: https://inspirehep.net/literature/44820
 
-[23] Itatani J, Levesque J, Zeidler D, et al. Tomographic reconstruction of attosecond electron wave packets. Nature, 2004, 432: 867-871. DOI: 10.1038/nature03184
-
-[24] Eckle P, Pfeiffer A N, Cirelli C, et al. Attosecond angular streaking and tunneling delay time in strong laser field ionization. Science, 2008, 322: 1525-1529. DOI: 10.1126/science.1165756
+[24] Eckle P, Pfeiffer A N, Cirelli C, Staudte A, Dörner R, Muller H G, Büttiker M, Keller U. Attosecond ionization and tunneling delay time measurements in helium. Science, 2008, 322: 1525-1529. DOI: 10.1126/science.1163439
 
 [25] Villeneuve D M, Hockett P, Vrakking M J J, et al. Coherent imaging of an attosecond electron wave packet. Science, 2017, 356: 1150-1153. DOI: 10.1126/science.aam8393
 
@@ -48,14 +44,12 @@
 
 [27] Pazourek R, Nagele S, Burgdörfer J. Attosecond chronoscopy of photoemission. Rev Mod Phys, 2015, 87: 765-802. DOI: 10.1103/RevModPhys.87.765
 
-[28] Kuzkova N, Hrisd U, Ji F, et al. Attosecond high-harmonic interferometry probes orbital- and band-dependent dipole phase in magnesium oxide. arXiv:2508.15076, 2025
+[28] Kuzkova N, van Essen P J, de Keijzer B, Silva R E F, Galan A J, Kraus P M, et al. Attosecond high-harmonic interferometry probes orbital- and band-dependent dipole phase in magnesium oxide. arXiv:2508.15076, 2025
 
-[29] Li X, Liu X, Wang G, et al. Coulomb focusing in attosecond angular streaking. Light Sci Appl, 2024, 13: 193. DOI: 10.1038/s41377-024-01600-4
+[29] Li X, Liu X, Wang C, Ben S, Zhou S, et al. Coulomb focusing in attosecond angular streaking. Light Sci Appl, 2024, 13: 193. DOI: 10.1038/s41377-024-01600-4
 
-[30] Lucchini M, Herrmann J, Ludwig A, et al. Complete reconstruction of ultra-broadband isolated attosecond pulses including partial averaging over the angular distribution. Phys Rev Lett, 2024, 132: 223201. DOI: 10.1103/PhysRevLett.132.223201
+[30] Ortmann L, Landsman A. Understanding attosecond streaking. Rep Prog Phys, 2024, 87: 086401. DOI: 10.1088/1361-6633/ad6278
 
-[31] Zhang Y, Li S, Wang B, et al. Attosecond pulse retrieval based on PROBP method for multi-channel ionization. Opt Express, 2025, 33: 14290-14305. DOI: 10.1364/OE.532876
+[31] Kim H Y, Pi Z, Goulielmakis E. Carrier-envelope-phase-independent field sampling of single-cycle transients using homochromatic attosecond streaking. Opt Lett, 2025, 50: 1093. DOI: 10.1364/ol.543303
 
-[32] Bizau J M, Cubaynes D, Esteva J M, et al. Soft X-ray photoionization cross sections of atomic Ne, Ar, Kr, Xe in the 284–400 eV photon energy range. Phys Rev X, 2024, 14: 021049. DOI: 10.1103/PhysRevX.14.021049
-
-[33] Hu S, Chen J, Liu Y, et al. Observing the relative sign of excited-state dipole transitions by combining attosecond streaking and transient absorption spectroscopy. Phys Rev Lett, 2024, 132: 083201. DOI: 10.1103/PhysRevLett.132.083201
+[33] Kheifets A, Serov V, Vismarra F, Wörner H J. Rainbow retrieval of atomic time delays in attosecond streaking. Phys Rev A, 2026, 113: 043103. DOI: 10.1103/9jcm-8gd8
