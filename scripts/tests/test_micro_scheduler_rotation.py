@@ -461,6 +461,105 @@ class MicroSchedulerRotationTests(TestSuite):
             "本次更新基线后聚焦（迁移安全不误切）",
         )
 
+        # ================================================================
+        # 测试 11（v6.9.51）: 每完成一轮强制切换
+        # 背景: 08-25/26 attosecond 连续 2 天持焦点（r3→r6），饿死 5 课题。
+        # 根因: 切换判定只看"进行中轮次(completed_rounds+1)是否完成"，
+        #       课题完成一轮后立即创建下一轮 job → 永远判定未完成 → 不切换。
+        # 修复: _last_round_seen 快照记录各课题上次被检查时的 completed_rounds，
+        #       一旦发现轮次增加（上一时段完成了一轮）→ 强制让出。
+        # ================================================================
+        # 11a. 完成一轮后强制让出
+        self._write_focus_state(
+            queue=[pid_a, pid_b],
+            last_proposal_id=pid_a,
+            last_slot_index=0,
+        )
+        focus_path11 = self.tmp_root / "memory" / "lifecycle-focus.json"
+        st11 = json.loads(focus_path11.read_text(encoding="utf-8"))
+        st11["_last_round_seen"] = {pid_a: 0}  # A 聚焦开始时 rounds=0
+        focus_path11.write_text(json.dumps(st11, ensure_ascii=False), encoding="utf-8")
+        ctrl11 = self._make_mock_controller({pid_a: {"optimization_rounds": 1}})
+        r11a = self.ms._focus_proposal_for_slot(ctrl11, slot_index=1, optimizing=optimizing)
+        self.assert_eq(
+            r11a, pid_b,
+            "上一时段完成一轮（rounds 0→1）应强制让出到下一个课题",
+            "每完成一轮即切换：A 完成第 1 轮后不应继续持有焦点",
+        )
+
+        # 11b. 未完成新轮次（rounds 未变）→ 继续聚焦
+        self._write_focus_state(
+            queue=[pid_a, pid_b],
+            last_proposal_id=pid_a,
+            last_slot_index=0,
+        )
+        focus_path11b = self.tmp_root / "memory" / "lifecycle-focus.json"
+        st11b = json.loads(focus_path11b.read_text(encoding="utf-8"))
+        st11b["_last_round_seen"] = {pid_a: 1}  # A 上次检查时 rounds=1
+        focus_path11b.write_text(json.dumps(st11b, ensure_ascii=False), encoding="utf-8")
+        ctrl11b = self._make_mock_controller({pid_a: {"optimization_rounds": 1}})
+        queried11b = self._patch_round_complete({2: False})
+        r11b = self.ms._focus_proposal_for_slot(ctrl11b, slot_index=1, optimizing=optimizing)
+        self.assert_eq(
+            r11b, pid_a,
+            "rounds 未变（1=1）且进行中轮次未完成应继续聚焦",
+            "未完成新一轮不应让出",
+        )
+        self.assert_true(
+            2 in queried11b,
+            "rounds 未变时应回退检查进行中轮次（completed_rounds+1）",
+            f"应查询 round 2，实际查询了 {queried11b}",
+        )
+
+        # 11c. 首次聚焦（无快照）→ 记录基线，不强制让出
+        self._write_focus_state(
+            queue=[pid_a, pid_b],
+            last_proposal_id=pid_a,
+            last_slot_index=0,
+        )
+        ctrl11c = self._make_mock_controller({pid_a: {"optimization_rounds": 1}})
+        queried11c = self._patch_round_complete({2: False})
+        r11c = self.ms._focus_proposal_for_slot(ctrl11c, slot_index=1, optimizing=optimizing)
+        self.assert_eq(
+            r11c, pid_a,
+            "首次聚焦无快照应记录基线并继续聚焦",
+            "无基线无法判定是否完成一轮，保守继续聚焦",
+        )
+        focus_path11c = self.tmp_root / "memory" / "lifecycle-focus.json"
+        st11c = json.loads(focus_path11c.read_text(encoding="utf-8"))
+        self.assert_eq(
+            st11c.get("_last_round_seen", {}).get(pid_a), 1,
+            "首次聚焦后应初始化 _last_round_seen[A]=1",
+            "快照应记录 A 的 completed_rounds 基线",
+        )
+
+        # 11d. 让出后新聚焦课题快照初始化
+        self._write_focus_state(
+            queue=[pid_a, pid_b],
+            last_proposal_id=pid_a,
+            last_slot_index=0,
+        )
+        focus_path11d = self.tmp_root / "memory" / "lifecycle-focus.json"
+        st11d = json.loads(focus_path11d.read_text(encoding="utf-8"))
+        st11d["_last_round_seen"] = {pid_a: 0}
+        focus_path11d.write_text(json.dumps(st11d, ensure_ascii=False), encoding="utf-8")
+        ctrl11d = self._make_mock_controller({
+            pid_a: {"optimization_rounds": 1},
+            pid_b: {"optimization_rounds": 3},
+        })
+        r11d = self.ms._focus_proposal_for_slot(ctrl11d, slot_index=1, optimizing=optimizing)
+        self.assert_eq(
+            r11d, pid_b,
+            "A 完成一轮让出后应聚焦 B",
+            "强制让出后应切换到下一个课题",
+        )
+        st11d_after = json.loads(focus_path11d.read_text(encoding="utf-8"))
+        self.assert_eq(
+            st11d_after.get("_last_round_seen", {}).get(pid_b), 3,
+            "聚焦 B 时应初始化 _last_round_seen[B]=3",
+            "新聚焦课题应记录其 completed_rounds 基线",
+        )
+
 
 if __name__ == "__main__":
     suite = MicroSchedulerRotationTests()

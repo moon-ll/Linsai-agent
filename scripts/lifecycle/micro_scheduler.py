@@ -1067,12 +1067,30 @@ def _focus_proposal_for_slot(
             if prev_slot_done_flag:
                 round_done = True
             else:
-                # 让出时段的条件：
-                # 进行中的轮次的全部任务已完成（产物+标签双检查通过）。
-                # 卡住（stuck）不由微调度器处理，交给 repair 和健康检查发现并修复，
-                # 修复后微调度器继续推进，保证每轮优化的连续性。
-                current_round = completed_rounds + 1
-                round_done = _is_round_complete(prev_jobs, prev_pid, current_round)
+                # v6.9.51: 每完成一轮强制切换——记录各课题上次被检查时的
+                # completed_rounds，一旦发现轮次增加（上一时段完成了一轮），
+                # 立即让出焦点，防止单课题无限持有焦点饿死队列其余课题
+                # （08-25/26 实证：attosecond 连续 2 天持焦点，5 课题 stalled）。
+                last_seen = state.setdefault("_last_round_seen", {})
+                last_round = last_seen.get(prev_pid)
+                if last_round is not None and completed_rounds > last_round:
+                    round_done = True
+                    if _log:
+                        _log.info(
+                            f"[{prev_pid}] 上一时段完成第 {completed_rounds} 轮，"
+                            f"强制让出焦点（每完成一轮即切换）"
+                        )
+                else:
+                    # 让出时段的条件：
+                    # 进行中的轮次的全部任务已完成（产物+标签双检查通过）。
+                    # 卡住（stuck）不由微调度器处理，交给 repair 和健康检查发现并修复，
+                    # 修复后微调度器继续推进，保证每轮优化的连续性。
+                    current_round = completed_rounds + 1
+                    round_done = _is_round_complete(prev_jobs, prev_pid, current_round)
+                # 更新快照：记录 prev_pid 当前轮次（无论是否让出）
+                last_seen[prev_pid] = completed_rounds
+                state["_last_round_seen"] = last_seen
+                _save_focus_state(state)
 
             if not round_done:
                 # 当前轮未完成：若 prev_pid 未卡死，继续聚焦（保证轮次连续性）；
@@ -1206,6 +1224,15 @@ def _focus_proposal_for_slot(
         state["last_proposal_id"] = next_pid
         _save_focus_state(state)
         pid = next_pid
+
+    # v6.9.51: 聚焦课题轮次快照——首次聚焦时记录基线，
+    # 供"每完成一轮强制切换"判定使用
+    last_seen = state.setdefault("_last_round_seen", {})
+    if pid not in last_seen:
+        pid_state = self._get_proposal_state(pid)
+        last_seen[pid] = pid_state.get("optimization_rounds", 0) if pid_state else 0
+        state["_last_round_seen"] = last_seen
+        _save_focus_state(state)
 
     # 记录历史
     # v6.9.31 加固: 同一 (slot, proposal) 只记一条——旧实现每 5 分钟 tick

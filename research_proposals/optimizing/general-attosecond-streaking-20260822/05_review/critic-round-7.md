@@ -1,17 +1,18 @@
-# 对抗评审报告（第 7 轮 · content.md 聚焦）
+# 对抗评审报告（第 7 轮 · references.md 专项检验）
 
 **项目类型**：general（面上项目）
 **评审日期**：2026-08-26
-**聚焦章节**：sections/content.md（53 行 / 4215 字 / 7 个 [N] 角标）
-**评审范围**：content.md 段落级评审 + 跨章节一致性核查 + 历史遗留问题复核
+**聚焦章节**：`/Users/ll/Desktop/LinSai-CoPilot/research_proposals/optimizing/general-attosecond-streaking-20260822/04_proposal/sections/references.md`（55 行 / 4611 字符 / 27 条参考文献）
+**评审范围**：参考文献 [N] 编号一致性（采信预检）+ 文献真实性 DOI/arXiv 反查 + 内联引用准确性 + 引用相关性与时效性；不重做写作风格 / 创新性 / 可行性评估
+**评分纪律**：仅评严谨性（rigor）与完整性（completeness）两维度；综合评分 = (严谨性 + 完整性) / 2；创新性 / 可行性填 N/A
 
 ---
 
 ## 综合评分
 
-**0.83 / 1.00**（等权四维：创新性 0.85 / 可行性 0.86 / 严谨性 0.82 / 表达质量 0.78；未触发 P0 红线、无反查 critical 元数据失败；锚点对比结论=基本接近，对应 expression 上限 0.79/综合上限 0.89，本轮严格按档位上限下调 expression；天花板 0.94 未触及）
+**0.58 / 1.00**（严谨性 0.35 / 完整性 0.80；等权均值；rigor 受 2 条 critical 虚构文献条目触发扣至 0.3-0.4 区间下限；completeness 因近 3 年文献 25.9% 远低于 50% 阈值扣至 0.80）
 
-**评分自洽校验**：0.85×0.25 + 0.86×0.25 + 0.82×0.25 + 0.78×0.25 = 0.2125 + 0.2150 + 0.2050 + 0.1950 = 0.8275 ≈ **0.83** ✓（综合 0.83 ≤ 0.89 上限；expression 0.78 ≤ 0.79 上限）
+**评分自洽校验**：(0.35 + 0.80) / 2 = **0.575 ≈ 0.58** ✓（综合 0.58 误差 ≤ 0.02）
 
 ---
 
@@ -19,283 +20,226 @@
 
 | 维度 | 权重 | 得分 | 问题数 | 主要扣分点 |
 |------|------|------|--------|------------|
-| 创新性（innovation） | 0.25 | 0.85 | 1（medium） | R2 "先角积分提取脉冲包络、再能动量分辨修正偶极相位" 二级策略在 K2 中表述存在概念跳跃 |
-| 可行性（feasibility） | 0.25 | 0.86 | 2（1 high + 1 medium） | R3 §2.4 提及"参考 Peschel 等[11]实验数据线性拟合"但 Peschel 是 TDSE 模拟非实验数据；R2 备选路径触发条件"常规靶材上该方案失效"语义模糊 |
-| 严谨性（rigor） | 0.25 | 0.82 | 6（2 high + 4 medium） | ① K2 [33] 文献从 rationale 断引用（content 中 [33] 未出现，rationale 中提及的"彩虹检索"未在 content 复用）；② R3 §2.4 双线性回归公式位置混排——同一公式 f(overlap)=a·overlap+b·E_ph+c 在 §2.4 L33（K3 前过渡）和 §2.6 K3 同时出现，措辞冗余；③ §2.3 R2 引用文献 [25] 描述"近年工作"未具体年份或检索范围；④ §2.4 跨能区段落使用"尚未见报道"被 R5 红线规则点名（已加检索说明但仅 Web of Science 一库）；⑤ content.md 字数仅 4215，对应 R1+R2+R3+目标+关键问题，密度合理；⑥ §2.1 L5 "碳 K 边附近光电离截面的多通道贡献可达总量的 30% 以上"与 §2.4 L29 "水窗能区...碳 K 边附近多通道贡献可达 30%"实质重复 |
-| 表达质量（expression） | 0.25 | 0.78 | 4（2 high + 2 medium） | ① long_sentences 检测 7 处 ≥120 字超长句（本轮独立复核真实中文句 >100 字 4 处，密度 4/66≈6% 略高）；② "建立—实现—开展—给出"动词四件套在 §2.2–§2.4 高频出现（"建立...信号模型并给出...修正项...使...不依赖...步骤"）；③ K1/K2/K3 关键问题全部以问号句呈现，与范本中以陈述式科学问题呈现的范式略有差异（属亚风格）；④ §2.2 L13 含嵌套括号 + 数学公式 + 论证链，单句信息密度过高。本轮按锚点对比"基本接近"档位上限 0.79 严格扣减（高密度段落 + 201 字超长句 + 动词四件套叠加所致）|
+| 严谨性（rigor） | — | 0.35 | 4（2 critical + 1 high + 1 medium） | ① [critical] [33] Kheifets DOI 写成 `10.1103/PhysRevA.113.043103`（404 Not Found）——真实 DOI 是 `10.1103/9jcm-8gd8`，R5 consistency-line §147 已确认真实，R7→本轮间被改错；② [critical] [16] Huppert 整条张冠李戴：references.md 写 Opt Express 24: 25840 (2016)，DOI `10.1364/oe.24.025840`——真实论文是 Rev Sci Instrum 86, 123106 (2015)，DOI `10.1063/1.4937623`（Crossref 反查确认）；③ [high] scheme.md §4.2 L77 内联 "Huppert等[16] 2016年" 年份错位（与 references.md [16] 错误年份一致，触发"参考文献-正文-真实文献"三向错位）；④ [medium] [27] Pazourek RMP 87, 765 / [30] Ortmann RPP 87: 086401 卷号一致 ✓ 但 [30] 题目"Understanding attosecond streaking"与 references.md 表述格式一致——属低风险项 |
+| 完整性（completeness） | — | 0.80 | 3（1 high + 2 medium） | ① [high] 近 3 年文献（2023-2026）仅 7/27 = 25.9%，远低于 skill 评分纪律 50% 阈值；② [medium] 缺口 [5][7][10][23][28][32] 共 6 个编号虽为"历史已删除"无 ghost 风险，但跨章引用编号 1-33 不连续可能引起评审专家"是否有删除理由"的疑问（与 R5 consistency-line §134 残留一致）；③ [medium] 数量 27 条达标（20-40 区间），但近 3 年文献比例偏低削弱"时效性"完整性 |
 
 ---
 
-## 一、执行清单对照（逐条报告通过/不通过）
+## 一、执行清单对照（按本轮 prompt 四项）
 
-| # | 执行清单条目 | 结论 | 依据 |
-|---|------------|------|------|
-| 1 | 模块完整性：content.md 是否含标准模块 | **通过** | 含 §2.1 总述框架 + §2.2 R1 + §2.3 R2 + §2.4 R3 + §2.5 研究目标 + §2.6 关键科学问题 6 小节，对应 standards.general_principles.section_standards.content "总述段+2-3 个分方向+研究目标+关键科学问题"模板 |
-| 2 | 每条研究目标含至少 1 个可检验量化指标 | **通过** | G1 水窗多通道场景下重构误差 20%→5%；G2 跨靶材可比性误差 <5%；G3 三能区 50–543 eV + 双变量空间 <5% 合格区间，均给计算公式/定义 |
-| 3 | 关键科学问题与研究内容紧密对应 | **通过** | K1↔R1、K2↔R2、K3↔R3，K1–K3 内文直接复现对应研究内容的终止判据 |
-| 4 | 不出现研究方案细节（技术手段、参数、装置） | **基本通过（轻微越界）** | §2.4 L31 "截面数据来源于 Peschel 等人[11]的截面曲线，对应关系为 R_overlap = ∫..." 含截面计算公式 + Table 2 引用、§2.3 L21 "CNN 智能检索可作为备选路径（详见研究方案§6备选路径 B）" 跨章指 scheme。轻微越界但功能上是"算法层参数"而非"装置/操作"，对内容章节而言可接受 |
-| 5 | 分方向之间有内在逻辑，非平行堆砌 | **通过** | §2.2–§2.4 显式给出"单向门控"逻辑：R1 不达成→不进 R2；R2 不达成→不进 R3 |
-| 6 | 关键科学问题结尾收束 | **通过** | §2.6 末段 "从'单能区单问题修正'走向'跨能区通用重构体系'" 给出项目科学定位收束，符合范本 |
-| 7 | 五层递进结构（大背景→领域脉络→核心挑战→国内现状→本项目定位） | **N/A**（本轮聚焦 content，非 rationale） | §2.1 总述段含"水窗能区双重制约"前奏，但严格五层递进属于 rationale.md 范畴，不在本轮评估范围 |
-| 8 | 创新点四步闭环（现有局限→方案→量化优势→定位收束） | **N/A**（本轮聚焦 content） | 创新点在 scheme.md §7 与 rationale.md，本轮不复评 |
-
-**清单小结**：content.md 6 条核心条目全部通过或基本通过，无 P1 必改级硬伤；模块完整性、研究目标量化、研究-关键问题对应关系三项是本轮的亮点。
+| # | 检查项 | 结论 | 关键证据 |
+|---|--------|------|----------|
+| 1 | 引文格式（作者、年份、期刊、卷页、DOI/arXiv） | **不通过** | ① [16] 5 项元数据全错（期刊/卷/页/年/DOI）；② [33] DOI 404；③ 其他 25 条格式基本统一 |
+| 2 | 引用相关性 | **通过** | 27 条全部与 attosecond streaking / HHG / 阿秒脉冲表征相关（含 [1] Goulielmakis 2010 Nature 466: 739-743 虽标题不含 "attosecond" 字样但为 attosecond streaking 标志性实验）；无无关引用 |
+| 3 | 缺失引用 | **预检已确认**：无 ghost citation（正文引用但 references 缺失）；无悬空 references（列表有但正文未引用） | 预检双向核查通过 + R5/R6 已多次复核 [30][31] 引用已补齐 ✓ |
+| 4 | 引用数量与时效性 | **数量通过 / 时效性不通过** | 总数 27 条达标（20-40）；近 3 年 7 条 = 25.9%（阈值 50%） |
 
 ---
 
-## 二、写作风格评估
+## 二、[N] 引用编号 → 参考文献列表 一一对应表
 
-### 2.1 程序化 AI 检测结果复核
-| 项目 | 检测器结果 | 本轮独立复核 | 评价 |
-|------|----------|------------|------|
-| transition_words（同时/因此/然而等） | 8 次（阈值 19），未触发 | ✓ 通过：实际 "同时" 6、"因此" 1、"然而" 1，密度 < 阈值 | 未扣分 |
-| template_phrases（模板句式） | 3 次（阈值 8），未触发 | ✓ 通过 | 未扣分 |
-| template_subject（本项目拟/将） | 0 次 | ✓ 通过：content.md 全篇 "本项目" 仅 1 次（§2.6 末段），其余以 R1/R2/R3/K1/K2/K3/G1/G2/G3 主语承担，主体更分散 | 未扣分 |
-| redundant_modifiers（冗余修饰） | 27 次（阈值 38），未触发 | 本轮独立统计："系统" 7、"关键" 6、"完整" 1、"显著" 1，密度高于范本但未超阈值 | 未扣分，但 §2.2–§2.4 "系统" 与"关键"高频出现，是 AI 残留但未达红线 |
-| long_sentences（>120 字） | 7 处严重超长（免赔 4，扣 0.06） | 本轮独立复核：中文句 >100 字共 4 处（§2.4 L31 R_overlap 公式段、§2.6 K2 N₂ 电离势段、§2.6 K2 失效边界段、§2.4 L33 双线性回归段）。检测器将文献条目行也计入超长句，故报 7 处但正文真实超长仅 4 处 | 按程序检测器口径扣 0.06 等价于 expression 上限 0.94；本轮 expression=0.81 未超 |
-| meta_discourse | 0 次 | ✓ 通过 | 未扣分 |
-| excessive_bold | 0 次 | ✓ 通过 | 未扣分 |
-| bullet_list_substitution | 0 次 | ✓ 通过：content.md 全部小节为段落式，无 bullet list 替代论证 | 亮点 |
-| self_reference | 5 次（阈值 10/15） | ✓ 通过 | 未扣分 |
+| [N] | references.md 元数据（现状） | Crossref 真实记录 | 状态 |
+|-----|---------------------------|------------------|------|
+| [1] | Goulielmakis 2010 Nature 466: 739-743 | Nature 466: 739-743, vol/issue/page 一致 | ✓ 通过 |
+| [2] | Cousin 2017 PRX 7: 041030 | PRX 7, 4, 041030, "Attosecond Streaking in the Water Window" | ✓ 通过 |
+| [3] | Pabst 2016 PRA 94: 013411 | PRA 94, 1, 013411, "Eliminating the dipole phase..." | ✓ 通过 |
+| [4] | Schultze 2010 Science 328: 1658-1662 | Science 328, 5986, 1658-1662, "Delay in Photoemission" | ✓ 通过 |
+| [6] | Mairesse 2005 PRA 71: 011401 | PRA 71, 1, 011401, FROG for attosecond | ✓ 通过 |
+| [8] | Krausz Ivanov 2009 RMP 81: 163-234 | RMP 81, 1, 163-234, "Attosecond physics" | ✓ 通过 |
+| [9] | Ren 2018 J Opt 20: 023001 | J Opt 20, 2, 023001, "Attosecond light sources in the water window" | ✓ 通过 |
+| [11] | Peschel 2022 Nat Commun 13: 5205 | Nat Commun 13, 1, 5205, "Attosecond dynamics of multi-channel single photon ionization" | ✓ 通过 |
+| [12] | Inzani 2024 J Phys Photonics 6: 025007 | J Phys Photonics 6, 2, 025007, "Absolute delay calibration by analytical fitting" | ✓ 通过 |
+| [13] | Zhu 2026 Chin Phys B 35: 054204 | Chin Phys B 35, 5, 054204, "Autocorrelation-based CNN..." | ✓ 通过 |
+| [14] | Hutcheson 2025 PRR 7: L022074 | PRR 7, 2, L022074, "Phase evolution of strong-field ionization" | ✓ 通过 |
+| [15] | White Chang 2019 OE 27: 4799 | OE 27, 4, 4799, "Attosecond streaking phase retrieval with neural network" | ✓ 通过 |
+| **[16]** | **Huppert 2016 Opt Express 24: 25840, DOI 10.1364/oe.24.025840** | **真实: RSI 86, 123106 (2015), DOI 10.1063/1.4937623, "Attosecond beamline..."** | ✗ **整条张冠李戴**（5 项全错） |
+| [17] | Itatani 2002 PRL 88: 173903 | PRL 88, 17, 173903, "Attosecond Streak Camera" | ✓ 通过 |
+| [18] | Agostini 2004 RPP 67: 813-855 | RPP 67, 6, 813-855, "The physics of attosecond light pulses" | ✓ 通过 |
+| [19] | Ishii 2014 Nat Commun 5: 3331 | Nat Commun 5, 3331, "CEP-dependent HHG in water window..." | ✓ 通过 |
+| [20] | Popmintchev 2012 Science 336: 1287-1291 | Science 336, 6086, 1287-1291, "Bright Coherent Ultrahigh HHG in keV X-ray" | ✓ 通过 |
+| [21] | Corkum 1993 PRL 71: 1994-1997 | PRL 71, 13, 1994-1997, "Plasma perspective on strong field MPI" | ✓ 通过 |
+| [22] | Keldysh 1965 Sov Phys JETP 20: 1307-1314 (INSPIRE-HEP) | 历史经典论文，无 DOI；INSPIRE ID 1793133 实测可达 | ✓ 通过（无 DOI） |
+| [24] | Eckle 2008 Science 322: 1525-1529 | Science 322, 5907, 1525-1529, "Attosecond Ionization and Tunneling Delay Time" | ✓ 通过 |
+| [25] | Villeneuve 2017 Science 356: 1150-1153 | Science 356, 6343, 1150-1153, "Coherent imaging of an attosecond electron wave packet" | ✓ 通过 |
+| [26] | Klünder 2011 PRL 106: 143002 | PRL 106, 14, 143002, "Probing Single-Photon Ionization on the Attosecond Time Scale" | ✓ 通过 |
+| [27] | Pazourek 2015 RMP 87: 765-802 | RMP 87, 3, 765-802, "Attosecond chronoscopy of photoemission" | ✓ 通过 |
+| [29] | Li 2024 Light Sci Appl 13: 193 | Light Sci Appl 13, 1, 193, "Coulomb focusing in attosecond angular streaking" | ✓ 通过 |
+| [30] | Ortmann 2024 RPP 87: 086401 | RPP 87, 8, 086401, "Understanding attosecond streaking" | ✓ 通过 |
+| [31] | Kim 2025 Opt Lett 50: 1093 | Opt Lett 50, 4, 1093, "CEP-independent field sampling..." | ✓ 通过 |
+| **[33]** | **Kheifets 2026 PRA 113: 043103, DOI 10.1103/PhysRevA.113.043103** | **真实: PRA 113, 4, article-number 043103, DOI 10.1103/9jcm-8gd8** | ✗ **DOI 错位**（标题/作者/卷期正确，DOI 404） |
 
-### 2.2 叙述式合规性
-content.md 行文特征：
-- **总述段（§2.1）**采用"科学命题...包含两个相互耦合的核心挑战→两个挑战在水窗能区尤为突出→三条递进式研究内容→单向门控逻辑"四步推进，符合范本"总述段（问题+路线+机制+产出）"
-- **三个分方向（§2.2/§2.3/§2.4）**以自解释标题（"FROG-CRAB 修正算法" / "偶极相位与脉冲啁啾的双分量解耦" / "跨能区重构稳健性的系统标定"），与范本"自解释标题"特征匹配
-- **终止判据（G1/G2/G3）**每条含量化指标 + 误差度量定义 + 归一化基线，符合范本"每条目标至少含 1 个可检验量化指标"
-- **关键科学问题（K1/K2/K3）**与研究内容 R1/R2/R3 一一映射，K1/K2/K3 内文直接复现终止判据，与范本"不是泛泛列举"特征匹配
-
-**叙述式违规检查**：
-- ✓ 段落之间以内容逻辑（递进门控）衔接，未出现"在此基础上""此外""同时"等死板关联词高频
-- ✓ §2.4–§2.6 形成"标定工具→终止判据→目标→关键问题"逻辑递进
-- ✓ 文献引用以嵌入式（"Mairesse 和 Quéré[6]建立的 FROG-CRAB 算法"）为主，未出现"A 做了 X[1] B 做了 Y[2]"堆砌
-- ⚠ §2.4 L31–L33 含两处"目标/公式/判据"密集混排，单段密度高于范本（约 200 字段含 4 个数值约束 + 1 个积分公式 + 1 个回归公式），可读性略低
-
-**AI 写作味结论**：整体叙述式行文合格，AI 残留主要体现为"系统/关键/完整"三词高频（已统计但未达红线）、§2.4 R3 段落密度偏高、§2.6 K2 含 201 字长段（独立切句确认，超范本范式上限 120 字），但未出现"为...提供...基础""具有决定性意义"等典型 AI 套话。
-
----
-
-## 三、锚点对比（content.md vs general_principles.benchmark_anchors.content_example）
-
-**申请书中代表性段落（content.md §2.1 L5–L7）**：
-> "科学命题是：在多电子电离通道叠加和靶材偶极相位耦合双重约束下，如何实现跨能区通用的阿秒脉冲谱相位精确重构。该命题包含两个相互耦合的核心挑战。其一是多电子电离通道在能谱中发生重叠，导致传统 FROG-CRAB 的二阶非线性响应假设在多通道叠加条件下失效。Mairesse 和 Quéré[6]建立的 FROG-CRAB 算法在单通道条件下具有完整的脉冲重构能力，但其理论前提在多通道叠加时被通道间干涉项破坏。其二是偶极相位与脉冲固有啁啾在光谱上无法直接分离。Eckle 等人[24]建立的角条纹技术为电子隧穿延迟的精密测量奠定了实验基础，展示了角分辨探测在提取偶极相位信息方面的独特价值。"
-
-**范本锚点（reference_materials.benchmark_anchors.content_example）**：
-> "本项目拟采用理论与实验相结合的研究方法，建立包含局域电子态效应的量子轨迹模型，揭示局域电子态对高次谐波产生过程的影响机理。拟采用泵浦-探测的方案厘清掺杂半导体高次谐波产生的量子通道，并基于此探索固体高次谐波光谱在探测掺杂半导体局域电子态结构及相关电子动力学信息等方面的应用。具体研究内容包括：（1）掺杂半导体高次谐波产生机制研究……"
-
-**结构化差距对比**：
-
-| 维度 | 申请书 content §2.1 | 范本锚点 | 差距判断 |
-|------|---------------------|----------|---------|
-| 语体 | 科学命题→两个相互耦合的核心挑战→水窗能区特殊语境→三条研究内容→单向门控 | 拟采用方法→建立模型→揭示机理→（1）（2）（3）分方向条目 | 申请书以"问题—挑战—产出"递进；范本以"方法—机理—分方向"递进。**语体不同但都连贯** |
-| 论证密度 | §2.1 含 1 个科学命题 + 2 个核心挑战 + 2 个文献嵌入引用 + 1 个数值约束 + 1 个门控逻辑，约 350 字 | 范本锚点约 150 字，含 1 个研究方法 + 1 个分方向清单起点 | **申请书论证密度更高**（融入更多约束条件与门控逻辑） |
-| 数据驱动 | "30% 以上[2][11]" "322 as"（间接）等数值嵌入 | 范本锚点无具体数值，依赖分方向展开 | **申请书数据驱动更强** |
-| 引用嵌入 | "Mairesse 和 Quéré[6]建立的..." "Eckle 等人[24]建立的..." 嵌入式 | 范本"人们利用..."无具体嵌入式引用 | **申请书引用嵌入更明显** |
-| 段间过渡 | §2.1→§2.2 用 "R1 针对多通道失效问题，建立..." 承上启下 | 范本用"（1）...（2）..."切分 | **申请书过渡更紧凑** |
-
-**差距小结**：申请书 content.md 在"论证密度""数据驱动""引用嵌入"三项上**均超过或持平范本**；"语体"上更偏"问题导向"而非"方法导向"，但两种语体均属合格范式；"分方向组织"上申请书采用自解释标题式段落而非数字编号，对评审而言反而更易读。
-
-锚点对比结论：基本接近（论证密度与数据驱动优于范本；语体略偏问题导向但合格；超长句密度略高于范本 12%–28% 的 80–120 字段占比，需在 §2.4 与 §2.6 各拆分 1 处）
+**统计**：27 条中 25 条完全通过 + 2 条 critical issue（[16][33]）
 
 ---
 
-## 四、锚点回归（每条 issue 标注 rubric 档位）
+## 三、关键冲突点（按严重度分级）
 
-| Issue | Rubric 档位依据 |
-|-------|----------------|
-| #1 anti_ai / long_sentence | general_principles.writing_style_rules.anti_ai_patterns.remove "超长句：单句超过 80 字应拆分，超过 120 字属严重超长句" |
-| #2 anti_ai / 动词四件套 | general_principles.writing_style_rules.anti_ai_patterns.remove "动词堆砌：连续'建立…发展…实现…构建…'" |
-| #3 rigor / K2 [33] 引用断裂 | general_principles.indicator_red_lines.consistency_check "同一指标在不同章节出现时，数值与表述口径必须一致"（虽非数值但属跨章引用一致性） |
-| #4 rigor / R3 公式位置冗余 | general_principles.writing_style_rules.must "各章之间必须逻辑呼应：立项依据↔关键科学问题、研究内容↔研究方案、研究方案↔年度计划"（同一公式在 §2.4 与 §2.6 K3 双重出现属冗余） |
-| #5 rigor / "Peschel 实验数据" 事实错误 | general_principles.indicator_red_lines.no_exaggeration "不得无依据地拔高" + consistency_check（[11] Peschel 2022 Nat Commun 实为 TDSE 模拟，非实验数据） |
-| #6 rigor / "尚未见报道" 检索范围 | general_principles.indicator_red_lines.novelty_claim_cautious "'尚未见报道'须有确凿文献或检索范围/截止日期支撑" |
-| #7 boundary / CNN 备选路径越界 | general_principles.content_boundaries.不可越界 "研究方案不出现'为什么研究/为什么可行'口吻" |
-| #8 rigor / [25] 描述"近年工作"模糊 | general_principles.indicator_red_lines.novelty_claim_cautious（同上原则，缺年份或检索范围） |
-| #9 narrative / §2.1 与 §2.4 "30%"实质重复 | general_principles.writing_style_rules.must "段落之间形成逻辑递进" + 无跨章节重复 |
-| #10 expression / K1/K2/K3 全部以问号呈现 | general_principles.writing_style_rules.anti_ai_patterns.remove "口号式开头：'为回答…问题'、'为实现…'"（问题以问号呈现是次优解，不如陈述式直接给科学问题） |
+### [critical] literature_fabrication — [33] Kheifets DOI 404 不存在
 
----
+- **位置**：`04_proposal/sections/references.md` L55
+- **问题**：
+  - references.md 写 `[33] Kheifets A, Serov V, Vismarra F, Wörner H J. Rainbow retrieval of atomic time delays in attosecond streaking. Phys Rev A, 2026, 113: 043103. DOI: 10.1103/PhysRevA.113.043103`
+  - **doi.org/api/handles/10.1103/PhysRevA.113.043103 → HTTP 404 Not Found**
+  - 真实 DOI（Crossref + doi.org 双确认）：`10.1103/9jcm-8gd8`，已 R5 consistency-line §147 验证
+  - 标题、作者（Kheifets / Serov / Vismarra / Wörner）、卷期（PRA 113, 4）、文章号（043103）**全部正确**——仅 DOI 错位
+  - 触发 v6.9.25 评分纪律 "critical 虚构文献条目：严谨性扣至 0.3-0.4 区间"
+- **建议**：
+  - **action: rewrite** —— 将 L55 改为 `[33] Kheifets A, Serov V, Vismarra F, Wörner H J. Rainbow retrieval of atomic time delays in attosecond streaking. Phys Rev A, 2026, 113: 043103. DOI: 10.1103/9jcm-8gd8`
+  - writer 写完须跑 doi.org/api/handles/10.1103/9jcm-8gd8 验证 200 OK
+  - 注意：R5 报告已正确记录真实 DOI，R7→本轮间被改错——属"历史正确 → 当前错误"的回归 bug，建议 writer 查 git/repair log 找变更源头
+- **影响范围**：rationale §2.3 L31 / content §2.6 K2 / references.md [33] 三处引用 [33]——三向闭环中只有 references.md [33] 的 DOI 字段错位，正文表述"近期提出的'彩虹检索'"无具体卷期引用，不触发正文错位
 
-## 五、问题清单（按 P1/P2/P3 分级）
+### [critical] literature_fabrication — [16] Huppert 整条张冠李戴（5 项元数据全错）
 
-### P1（必改，否则显著影响评审通过率）
+- **位置**：`04_proposal/sections/references.md` L27
+- **问题**：
+  - references.md 写 `[16] Huppert A, Jordan I, Wörner H J. Attosecond beamline with actively stabilized and spatially separated beam paths. Opt Express, 2016, 24: 25840. DOI: 10.1364/oe.24.025840`
+  - **真实论文（Crossref 验证）**：Huppert M, Jordan I, Wörner H J. "Attosecond beamline with actively stabilized and spatially separated beam paths." **Rev Sci Instrum 86, 123106 (2015)**, DOI: 10.1063/1.4937623
+  - **5 项元数据全错**：
+    | 字段 | references.md | 真实 | 错位 |
+    |------|--------------|------|------|
+    | 期刊 | Opt Express | Rev Sci Instrum | ✗ |
+    | 卷 | 24 | 86 | ✗ |
+    | 页 | 25840 | 123106 | ✗ |
+    | 年份 | 2016 | 2015 | ✗ |
+    | DOI | 10.1364/oe.24.025840 | 10.1063/1.4937623 | ✗ |
+  - **标题正确**——这是典型 LLM 痕迹：标题未改但期刊/卷期/年/DOI 全虚构
+  - **正文 scheme.md §4.2 L77 同步错位**："Huppert等[16] 2016年报道的 He-Ne激光联合白光干涉仪方案在 XUV与IR空间分离的阿秒光束线中达到 26 as rms延迟稳定"——年份与 references.md 一致错误
+  - 触发 v6.9.25 评分纪律 "critical 虚构文献条目：严谨性扣至 0.3-0.4 区间"
+- **建议**：
+  - **action: rewrite** —— references.md L27 改为 `[16] Huppert M, Jordan I, Wörner H J. Attosecond beamline with actively stabilized and spatially separated beam paths. Rev Sci Instrum, 2015, 86: 123106. DOI: 10.1063/1.4937623`
+  - **action: rewrite** —— scheme.md §4.2 L77 "Huppert等[16] **2016年**报道..." 改为 "Huppert等[16] **2015年**报道..."（与真实年份对齐）
+  - writer 写完须跑 doi.org/api/handles/10.1063/1.4937623 验证 200 OK + Crossref 元数据比对
+  - **同步影响**：R7 overall consistency 报告 §4.2 提到的"100 as 延迟稳定性"论证基线原本引 Huppert[16] 26 as——若 Huppert 实际是 RSI 2015 而非 OE 2016，"26 as rms"这个数字是否确实来自该论文须二次确认（摘要明确提到"actively stabilized"和"white-light interferometer"，主体结果在 Huppert et al. RSI 86, 123106 (2015) 表 1 / Fig. 4，数字 26 as 与正文一致 ✓）
+- **影响范围**：scheme.md §4.2 L77（唯一引用处）；正文 [16] 年份错位是 R7→本轮间的回归 bug
 
-无。本轮 content.md 未发现触发 P0 红线、未发现 ≥ high 级的逻辑/事实错误、无跨章节重大遗漏或矛盾。所有 critical 红线已在前序轮次清理或本轮未出现。
+### [high] literature_temporal_mismatch — [16] 正文内联引用年份与 references.md 同步错位
 
-### P2（强烈建议，定稿前整改）
+- **位置**：`04_proposal/sections/scheme.md` §4.2 L77
+- **问题**：正文写 "Huppert等[16] **2016年**报道..."——与 references.md [16] 写"Opt Express, 2016, 24: 25840"年份一致（同步错位），但**真实年份是 2015**。一旦 references.md [16] 按建议改为 RSI 2015，正文也须同步改为 2015 年，否则会出现"正文年份 ≠ references.md 年份"的二级错位
+- **建议**：
+  - **action: rewrite** —— scheme.md §4.2 L77 "Huppert等[16] 2016年报道" → "Huppert等[16] 2015年报道"
+  - 与上面 [16] critical issue 的修复动作**合并为同一处编辑**——避免两次修改产生中间态
+- **触发依据**：本项是 [critical] [16] 张冠李戴的**正文衍生错位**，单独触发 [high] 是为了双重保险：若 writer 修 references.md 时漏改正文，则仍属 high 级"参考文献-正文不一致"
 
-#### #1 [high] anti_ai / long_sentence — §2.6 K2 包含 201 字单段超长句
-- **位置**：content.md §2.6 L49 "需注意：100 eV光电子动能对应的触发光子能量取决于靶材电离势——以N₂分子在N K边附近为例，电离势 I_p ≈ 14.5 eV，100 eV动能对应光子能量约114.5 eV，远低于N K边409.7 eV；因此角积分方案失效边界（100 eV光电子动能）落在软X射线能区内部的快电子区间，与多通道修正算法的失效边界（409.7 eV光子能量，N K边电离阈值）物理机制不同，但均指向软X射线能区。"
-- **问题**：单句 201 字（独立切句），属于 anti_ai_patterns 红线"单句超过 120 字属严重超长句"。该段同时承担论证功能（解释 100 eV 触发光子能量为什么落在软 X 射线能区）但读者无法一次性解析。
-- **建议**：将单句拆为 3 句：①"需注意：100 eV光电子动能对应的触发光子能量取决于靶材电离势"；②"以N₂分子在N K边附近为例，电离势 I_p ≈ 14.5 eV，100 eV动能对应光子能量约114.5 eV，远低于N K边409.7 eV"；③"因此角积分方案失效边界（100 eV光电子动能）落在软X射线能区内部的快电子区间，与多通道修正算法的失效边界（409.7 eV光子能量，N K边电离阈值）物理机制不同，但均指向软X射线能区。"
-- **action**：rewrite
+### [medium] temporal_coverage — 近 3 年文献占比 25.9% 远低于 50% 阈值
 
-#### #2 [high] rigor / consistency — §2.2 R1 L13 引用 Peschel[11] "实验数据线性拟合" 事实错误
-- **位置**：content.md §2.4 L33 "R1修正项在5%–30%通道重叠区间呈线性响应（基于Peschel等人[11]实验数据的线性拟合）"
-- **问题**：Peschel 等[11]（Nat Commun 2022, 13: 5205）是 TDSE 数值模拟工作（基于 TDSE 求解多通道光电离动力学），不是实验测量。申请书 rationale §2.2 L25 与 scheme §3.1 L41 均明确表述为"数值模拟"或"Nat Commun 数值结果"。content.md §2.4 L33 写作"实验数据的线性拟合" 属于事实口径错误。
-- **建议**：将"基于Peschel等人[11]实验数据的线性拟合"改为"基于Peschel等人[11]数值模拟结果的线性拟合"；或在更严格措辞下改为"基于Peschel等人[11]多通道电离动力学数值结果在 5%–30% 通道重叠区间的线性外推"。
-- **依据**：general_principles.indicator_red_lines.no_exaggeration（不得将模拟表述为实验）+ consistency_check（同一文献口径跨章必须一致）
-- **action**：rewrite
+- **位置**：`04_proposal/sections/references.md` 全文
+- **问题**：27 条中 2023-2026 年文献仅 7 条 = 25.9%（[12][13][14][29][30][31][33]），按 nsfc-references-audit skill "时效性 < 50% 即扣完整性"规则扣分
+- **现状**：1993-2022 年文献 20 条（74.1%），多为经典奠基（Corkum 1993 / Keldysh 1965 / Krausz 2009 RMP / Schultze 2010 Science 等）——这些是申请书需要的奠基引用，不可删除
+- **建议**：
+  - **action: research** —— 在 attosecond streaking 领域补充 2023-2026 关键新工作至 ≥13 条（≥50%），候选方向：
+    - 多通道/角分辨（已有 [29] Li 2024 Light Sci Appl / [12] Inzani 2024 JPP / [30] Ortmann 2024 RPP，可再加 1-2 条 2025-2026 进展）
+    - HHG 水窗能区（已有 [9] Ren 2018 + [19] Ishii 2014，建议补 1-2 条 2024+ 实验进展）
+    - 神经网络表征（已有 [13] Zhu 2026 + [15] White 2019，可补 1 条 2024+ CNN/Transformer 进展）
+    - 彩虹检索/相位检索（已有 [33] Kheifets 2026，可补 2024-2025 中间过渡工作）
+  - 目标：总数保持 30-35 条（仍在 20-40 标杆区间），近 3 年占比 ≥50%
+  - 注意：新增条目须逐条跑 DOI 反查 + Crossref 元数据比对，避免再次引入 critical 级 LLM 虚构文献 bug（参考 [33]/[16] 的失败模式）
+- **影响范围**：仅完整性扣分，不触发严谨性扣分（前提是新增文献全部真实）
 
-#### #3 [high] boundary / content_scheme — §2.3 L21 出现"CNN 智能检索可作为备选路径（详见研究方案§6 备选路径 B）"
-- **位置**：content.md §2.3 L21
-- **问题**：研究内容章节反向引用研究方案章节（"详见研究方案§6 备选路径 B"），虽然功能上是路径指代，但 content.md 本应回答"做什么、为什么值得做"，scheme.md 才回答"怎么做"。把方案细节（备选算法 CNN 的触发条件、计算公式）作为研究内容的关键路径写在 content 中属轻微越界。
-- **建议**：将"CNN 智能检索可作为备选路径（详见研究方案§6 备选路径 B）"改为"R2 在常规靶材上若偶极相位压制效率未能达到 2% 阈值，将启用与 R1 解析修正正交的算法路径（详见研究方案§6）"——以"算法路径"概括而非具体"CNN"指代。
-- **依据**：general_principles.content_boundaries.不可越界（研究内容不出现方案细节）
-- **action**：rewrite
+### [medium] numbering_gap — 6 个跳号 [5][7][10][23][28][32] 缺位
 
-#### #4 [high] rigor / K2 [33] 引用断裂
-- **位置**：content.md §2.6 K2；对比 rationale.md §2.3 L31 "Kheifets等人[33]近期提出的'彩虹检索'方法..."
-- **问题**：rationale.md 将 [33] Kheifets 2026 PRA 定位为"R1 修正算法向偶极相位提取维度扩展的理论参照"，content.md §2.6 K2 论述"先角积分提取脉冲包络、再能动量分辨修正偶极相位"二级策略时，未与 [33] 形成引用呼应。该策略是 content.md R2 的核心论点（K2 直接对应），而 rationale 已为该论点建立 [33] 支撑；content 不复用导致"科学问题—文献锚点—研究内容"链条出现断裂。
-- **建议**：在 K2 中段插入一句"Kheifets 等[33]近期提出的'彩虹检索'方法在多通道时延提取方面的新进展，可为二级策略的偶极相位提取维度提供理论参照"，与 rationale §2.3 形成呼应。
-- **依据**：general_principles.indicator_red_lines.consistency_check（同一科学论断跨章文献支撑一致）+ section_standards.full_review "各章之间逻辑呼应"
-- **action**：add（增加 [33] 在 K2 的引用）
-
-#### #5 [medium] rigor / novelty_claim — §2.2 L11 "据2026年8月Web of Science主题检索" 单一检索库
-- **位置**：content.md §2.2 L11 括号内"（检索说明：据2026年8月Web of Science主题检索'multi-channel FROG-CRAB correction water window'，未发现系统性跨能区修正方法学工作。）"
-- **问题**：rationale §2.5 L101 写作"联合检索Web of Science、IEEE Xplore与Scopus数据库"（三库），content 仅 Web of Science 一库。novelty_claim 的检索范围跨章不一致，且一库检索强度不足以支撑"未发现系统性跨能区修正方法学工作"的强否证。
-- **建议**：将"据2026年8月Web of Science主题检索"改为"据2026年8月联合检索Web of Science、IEEE Xplore与Scopus数据库"，与 rationale §2.5 检索口径一致；或保留单库但改为"截至2026年8月Web of Science检索（作为初步空白判据）"以降低"未发现"措辞强度。
-- **依据**：general_principles.indicator_red_lines.novelty_claim_cautious
-- **action**：rewrite
-
-#### #6 [medium] rigor / formula_redundancy — §2.4 L33 与 §2.6 K3 同一双线性回归公式 f(overlap)=a·overlap+b·E_ph+c 双重出现
-- **位置**：content.md §2.4 L33 "f(overlap) = a·overlap + b·E_ph + c" 与 §2.6 K3 L51 "以双线性回归模型 f(overlap) = a·overlap + b·E_ph + c 拟合"
-- **问题**：同一公式在 §2.4（终止判据陈述）与 §2.6 K3（关键问题陈述）两处重复出现。K3 论述本应聚焦"修正模块组合的耦合效应"这一科学问题，重复 R3 终止判据的公式细节反而稀释 K3 的科学问题独立性。
-- **建议**：将 §2.6 K3 L51 末段"以双线性回归模型 f(overlap) = a·overlap + b·E_ph + c 拟合，等高线图给出参数化等高面" 简化为"其函数形式可在双变量空间中以等高线图给出参数化等高面"——公式细节只在 §2.4 R3 终止判据中出现一次。
-- **依据**：general_principles.writing_style_rules.must "禁止简单罗列文献、数据、概念、技术参数"
-- **action**：rewrite
-
-#### #7 [medium] rigor / vague_citation — §2.3 L19 引用 [25] 描述"近年工作中得到验证"
-- **位置**：content.md §2.3 L19 "角分布平均效应在宽带脉冲表征中的作用已在近年工作中得到验证[25]"
-- **问题**：[25] 是 Villeneuve 等 2017 Science，"近年工作"在 2026 年 8 月视点下指 9 年前的工作，与"近年"语义不符（属轻度夸张或时间锚点漂移）。
-- **建议**：将"已在近年工作中得到验证[25]"改为"已在 Villeneuve 等[25] 2017 Science 的工作中得到验证"，将"近年工作"锚定为具体年份。
-- **依据**：general_principles.indicator_red_lines.novelty_claim_cautious（措辞需精确）
-- **action**：rewrite
-
-#### #8 [medium] narrative / redundancy — §2.1 L5 "30%以上"与 §2.4 L29 "可达30%"实质重复
-- **位置**：content.md §2.1 L5 "该波段碳K边附近光电离截面的多通道贡献可达总量的30%以上[2][11]" 与 §2.4 L29 "水窗能区（284–409.7 eV，碳K边至氮K边）碳K边附近多通道贡献可达30%"
-- **问题**：同一指标在 §2.1（科学命题总述段）与 §2.4（R3 跨能区背景段）实质重复，仅差[2][11]角标。
-- **建议**：§2.1 L5 保留作为科学命题的强约束证据；§2.4 L29 改为"水窗能区（284–409.7 eV）C K边附近的多通道贡献已是该能区脉冲表征精度受限的主要因素（详见§2.1 总述）"——以回指而非重复表达。
-- **依据**：general_principles.writing_style_rules.must "段落之间形成逻辑递进" + 无跨章节内容重复
-- **action**：rewrite
-
-### P3（建议，可酌情处理）
-
-#### #9 [medium] anti_ai / verb_chain — §2.2 L13 "建立...包含...信号模型，通过...标定...，并给出...修正项，使..."
-- **位置**：content.md §2.2 L13
-- **问题**：单句内含"建立—通过—给出—使"动词四件套，符合 anti_ai_patterns.remove "动词堆砌"。
-- **建议**：拆为两句："R1围绕多通道耦合的解析修正展开：在含时薛定谔方程框架下建立包含通道间相位干涉项的信号模型。通过参数扫描标定修正算法生效的阈值条件，并给出以相位差与强度比为参量的解析修正项，使修正算法不依赖额外校准步骤。"
-- **依据**：general_principles.writing_style_rules.anti_ai_patterns.remove
-- **action**：rewrite
-
-#### #10 [low] expression / 关键科学问题陈述式 vs 问号式
-- **位置**：content.md §2.6 K1/K2/K3 全部以问号句呈现
-- **问题**：范本中关键科学问题倾向于陈述式（"X 是核心挑战"），content.md K1/K2/K3 全部以"能否...？"问号呈现，虽未达 AI 套话红线（"为回答…问题"），但与范本范式略有差异。
-- **建议**：保持问号式无问题（评审专家对问号式科学问题可接受），仅作 P3 提示。若 writer 偏好陈述式，可改为"通道间相位干涉项的闭合解析形式是 R1 阶段的核心科学问题"等陈述。
-- **依据**：范本 innovation_example 与 content_example 多用陈述式；问号式属次优风格
-- **action**：optional rewrite
+- **位置**：`04_proposal/sections/references.md` 全文
+- **问题**：参考文献编号 1-33 不连续，缺口 [5][7][10][23][28][32] 共 6 个——预检已确认这些编号在 rationale/content/scheme 三章均无引用（ghost entry 风险解除），属"历史已删除"遗留——R5 consistency-line §134 + full_review.md L14 元叙述均明确"已在历史轮次中删除"
+- **建议**：
+  - **action: research/remove** —— **方案 A（推荐）**：保留现状（不重新编号），在 references.md 末尾加一行元叙述："注：编号 [5][7][10][23][28][32] 已在 R1-R5 修订轮次中删除，对应原始文献因张冠李戴 / 主题不符 / 重复引用等原因不再保留。"——避免评审专家疑惑
+  - **方案 B（备选）**：将 27 条全部重新编号为 1-27 连续，去除所有跳号——但需同步修改 rationale/content/scheme 三章所有 [N] 引用，工作量较大且无功能收益
+  - 不建议"补全 6 条新文献填满 1-33 编号"——会引入新一轮 LLM 虚构风险
+- **影响范围**：形式问题，不触发引用准确性扣分
 
 ---
 
-## 六、历史遗留问题复核（逐条核对）
+## 四、锚点对比（references.md vs Crossref/arXiv 真实记录逐字对比）
 
-### 6.1 rationale 章节历史 P0/P1 问题（本轮聚焦 content，但跨章引用一致性需复核）
+### 锚点 1：[33] Kheifets 2026 PRA（DOI 错位）
 
-| 历史 ID | 严重度 | 简述 | 本轮状态 |
-|---------|--------|------|---------|
-| R5-R6 references [33] DOI 格式异常 | P0 | R6 复核 DOI 9jcm-8gd8 200 OK，已解决 | **已解决**——references.md L53 已规范写入 [33] Kheifets 等 2026 PRA 113: 043103 |
-| R6 anti_ai_long_sentence 6 处 | P1 | R6 检测器报 7 处，独立复核真实仅 2 处 | **不适用本轮**——本轮聚焦 content，rationale 不再评估 |
-| R6 redundant_modifiers "系统" 11 次 | P1 | rationale 实测 11 次 | **不适用本轮**——本轮聚焦 content |
-| R6 §4 L93-95 双重目标 | P1 | 已解决 | **不适用本轮** |
-| R6 "尚未见报道"缺检索时间 | P1 | L75 + L69 + L79 均有 | **不适用本轮** |
-| R6 §3.1 L71 装置参数越界 | P1 | 已解决 | **不适用本轮** |
-| R7 rationale §2.3 L31 引用 [33] 但 references 缺 | P0 critical | R6 报告漏报 | **已解决**——references.md L53 已写入 [33] Kheifets 完整条目 |
-| R7 严谨性触发 [critical] red_line 抑制 | P0 | 5（2 critical + 1 high + 2 medium） | **已解决**——references.md 4 条作者虚构已全部重写：[4] Schultze M, Fieß M, Karpowicz N, Gagnon J, Korbman M, et al.；[11] Peschel J, Busto D, Plach M, Bertolino M, Hoflund M, et al.；[13] Zhu X X, Gao Y T, Wang Y M, Zhao K, Wei Z Y；[26] Klünder K, Dahlström J M, Gisselbrecht M, Fordell T, et al.。CrossRef 实测全部 200 OK |
-| R7 [12] 卷期页 025202→025007 | P0 critical | R6 残留 | **已解决**——references.md L19 写作 "J Phys Photonics, 2024, 6: 025007" |
-| R7 [29] article-number 193→250 | P0 critical | R6 残留 | **已解决**——references.md L47 写作 "Light Sci Appl, 2024, 13: 250" |
-| R7 [28] ghost entry 未修 | P1 high | R6 残留 | **已解决**——references.md 已移除 [28] Kuzkova 2025（content/rationale 章节 grep 无 [28] 残留） |
-| R7 [33] Kheifets 孤儿引用 | P0 critical | R6 报告漏报 | **已解决**——见上 |
-| R7 4 条作者虚构 | P0 critical×4 | [4]/[11]/[13]/[26] | **已解决**——见上 |
-| R7 [13] 4 位虚构 co-author | P0 critical | R6 残留 | **已解决**——Zhu X X 等 5 位真实作者已写入 references.md L21 |
-| R7 [11] Plötz→Plach | P0 critical | R6 残留 | **已解决**——已改 "Plach M" |
-| R7 [26] Ghiassi→Gisselbrecht | P0 critical | R6 残留 | **已解决**——已改 "Gisselbrecht M" |
-| R7 [4] Goh S J 虚构 | P0 critical | R6 残留 | **已解决**——Schultze M / Fieß M / Karpowicz N / Gagnon J / Korbman M 真实前 5 作者已写入 |
+| 来源 | 内容 |
+|------|------|
+| **references.md L55** | `[33] Kheifets A, Serov V, Vismarra F, Wörner H J. Rainbow retrieval of atomic time delays in attosecond streaking. Phys Rev A, 2026, 113: 043103. DOI: 10.1103/PhysRevA.113.043103` |
+| **Crossref 真实记录** | Title: "Rainbow retrieval of atomic time delays in attosecond streaking" / Authors: Anatoli Kheifets, Vladislav Serov, Federico Vismarra, Hans Jakob Wörner / Container: Physical Review A / Volume: 113 / Issue: 4 / Article-number: 043103 / DOI: 10.1103/9jcm-8gd8 / Published: 2026-04-02 |
+| **doi.org 反查 current DOI** | `https://doi.org/api/handles/10.1103/PhysRevA.113.043103` → **HTTP 404 Not Found** |
+| **doi.org 反查 real DOI** | `https://doi.org/api/handles/10.1103/9jcm-8gd8` → HTTP 200 OK |
+| **差距** | 标题、作者、卷期、文章号（113/4/043103）**全部对齐**；DOI 错位（虚假 `PhysRevA.113.043103` vs 真实 `9jcm-8gd8`）——典型 LLM "用真实期刊 + 卷期 + 文章号 + 真实文章标题" 构造伪 DOI 模式 |
+| **差距性质** | **DOI 构造性虚构**——4 个字段正确仅 DOI 错误，更隐蔽，比张冠李戴更难发现（DOI 表面格式合法 `10.1103/PRA.x.y.nnnnn` 但对应 handle 不存在） |
+| **改写方向** | 直接将 DOI 改为 `10.1103/9jcm-8gd8`，其余字段全部保留 |
 
-### 6.2 content 章节本轮发现的新增/残留问题
-- **新增**：#4 K2 [33] 引用断裂（rationale 提[33] 但 content K2 未复用）—— [high]
-- **新增**：#5 §2.2 L11 检索范围跨章不一致（单库 vs 三库）—— [medium]
-- **新增**：#2 §2.4 L33 "Peschel 实验数据" 事实错误 —— [high]
-- **新增**：#7 §2.3 L19 [25] "近年工作" 时间锚点漂移 —— [medium]
-- **新增**：#8 §2.1 与 §2.4 "30%" 实质重复 —— [medium]
+### 锚点 2：[16] Huppert 2015（整条张冠李戴）
 
-### 6.3 历史问题在 content.md 中的再核验（避免机械重复扣分）
-- rationale L31 引用 [33] 但 references 缺 [33]：**历史已解决**，本轮 references.md L53 含 [33] Kheifets 完整条目
-- rationale §2.3 L31 [33] 内容（"彩虹检索"）：**未在 content 复用**——属历史未关联的新问题（已记 #4）
-- references 元数据错位（[4]/[11]/[13]/[26]/[12]/[29]）：**全部已解决**
-- references [28] ghost entry：**已移除**
-- content.md 字数 4215（vs 范本总述段约 150 字 + 各分方向约 200-300 字 + 目标 + 关键问题，共估约 2000-3000 字）：**略高但合理**——R1/R2/R3 三段每段 500-700 字是 R3 重点设计的应有篇幅
+| 来源 | 内容 |
+|------|------|
+| **references.md L27** | `[16] Huppert A, Jordan I, Wörner H J. Attosecond beamline with actively stabilized and spatially separated beam paths. Opt Express, 2016, 24: 25840. DOI: 10.1364/oe.24.025840` |
+| **Crossref 真实记录** | Title: "Attosecond beamline with actively stabilized and spatially separated beam paths" / Authors: M. Huppert, I. Jordan, H. J. Wörner / Container: **Review of Scientific Instruments** / Volume: **86** / Issue: **12** / Page: **123106** / DOI: **10.1063/1.4937623** / Published: **2015-12-01** |
+| **scheme.md §4.2 L77** | "Huppert等[16] **2016年**报道的 He-Ne激光联合白光干涉仪方案在 XUV与IR空间分离的阿秒光束线中达到 26 as rms延迟稳定" |
+| **差距** | 标题正确 ✓ / 作者姓 Huppert A vs Huppert M（中间名首字母差异属可接受）/ **期刊、卷、页、年份、DOI 全部 5 项错位**——Opt Express 2016 → Rev Sci Instrum 2015；24: 25840 → 86: 123106；DOI 10.1364 → 10.1063；典型 "标题未改 + 期刊卷期/DOI 全虚构" LLM 痕迹 |
+| **差距性质** | **整条元数据张冠李戴**——比 DOI 构造性虚构更严重，因为期刊层面（OE→RSI）就完全错位 |
+| **改写方向** | 期刊改为 "Rev Sci Instrum"，卷改为 "86"，页改为 "123106"，年份改为 "2015"，DOI 改为 "10.1063/1.4937623"；同步修改 scheme.md §4.2 L77 年份 "2016年" → "2015年" |
+
+**锚点对比结论：差距明显**——2 条 critical issue 均属 LLM 痕迹导致的元数据构造性虚构 / 张冠李戴，是 references 真实性核验中最隐蔽的 bug 模式（DOI 表面格式合法 + 标题正确 + 卷期数字符合 PRA/OE 编号规则，但实际 handle 不存在或卷期错位）。其他 25 条锚点对比均无差距。
 
 ---
 
-## 七、跨章节一致性核查
+## 五、问题清单（按严重度 + 编号 + 位置 + action）
 
-| 核查项 | content 表述 | scheme 表述 | rationale 表述 | 一致性 |
-|--------|--------------|------------|---------------|--------|
-| 极紫外能区范围 | 50–150 eV | 50–150 eV | 50–150 eV | ✓ |
-| 水窗能区范围 | 284–409.7 eV | 284–409.7 eV | 284–409.7 eV | ✓ |
-| 软 X 射线能区范围 | 409.7–543 eV | 409.7–543 eV | 409.7–543 eV（= O K 边 543.1 eV 上限）| ✓ |
-| R1 终止判据 | 误差从 >20% 降至 <5% | 8%–10% 工作区间达 <5%；>15% 触发失效 | — | ✓ |
-| R2 终止判据 | 跨靶材可比性误差 <5% | 角积分残余 <2% + 跨靶材可比性 <5% | — | ✓ |
-| R3 终止判据 | 双变量空间 <5% 合格区间 | 双变量空间等高线 + 双线性回归边界方程 | — | ✓ |
-| 多通道贡献 30% | §2.1 L5 "30%以上" | §3.1 "15%–30%" | §2.1 "30%以上" | ✓ 但 §2.1/§2.4 内部实质重复（已记 #8）|
-| R1 工作区间 8%–10% | — | scheme §1 L7 + §4.1 L67 | rationale §2.5 "8%–10%" | ✓ |
-| 100 eV 光电子动能阈值 | §2.4 L33 + §2.6 K2 三处 | §4.3 L75 "光电子动能 >100 eV 偶极压制效率下降" | — | ✓ |
-| Kheifets [33] | 0 次（断裂） | — | 1 次 §2.3 L31 | ⚠ content 缺（已记 #4）|
-| [N] 引用编号 | [2][3][6][9][11][24][25] | — | [1][2][3][4][6][8][9][11][12][13][14][15][17][18][19][20][21][22][24][25][26][27][30][31][33] | content 仅 7 个角标（其余文献作研读基础，符合范本 10-17 次范围）|
+| # | severity | issue_type | 位置 | 问题 | action |
+|---|----------|-----------|------|------|--------|
+| 1 | critical | literature_fabrication | references.md L55 | [33] Kheifets DOI 写成 `10.1103/PhysRevA.113.043103`（404 不存在），真实 DOI 是 `10.1103/9jcm-8gd8` | rewrite |
+| 2 | critical | literature_fabrication | references.md L27 | [16] Huppert 整条张冠李戴：Opt Express 2016 → 真实 RSI 2015；24: 25840 → 真实 86: 123106；DOI 10.1364/oe.24.025840 → 真实 10.1063/1.4937623；年份 2016 → 2015（5 项全错） | rewrite |
+| 3 | high | literature_temporal_mismatch | scheme.md §4.2 L77 | "Huppert等[16] **2016年**报道" 与真实论文 2015 年错位（与 #2 同步错位） | rewrite |
+| 4 | medium | temporal_coverage | references.md 全文 | 近 3 年文献 7/27 = 25.9%（阈值 50%），时效性偏弱 | research |
+| 5 | medium | numbering_gap | references.md 全文 | 6 个跳号 [5][7][10][23][28][32] 缺位，可能引起评审专家"删除理由"疑问 | add 元叙述 / remove 跳号 |
+
+**统计**：critical 2 / high 1 / medium 2 / low 0 = 共 5 个问题
 
 ---
 
-## 八、对抗结论
+## 六、对抗结论
 
-### 7.1 本轮评审小结
-- **综合评分 0.83**：未触发 P0 红线，严谨性较 R7 的 0.62 显著修复（references 元数据已全部校核），但 content.md 仍有 K2 [33] 引用断裂、Peschel 模拟表述为实验等中等严重问题需修复
-- **关键亮点**：
-  - 总述段（§2.1）"科学命题—两个相互耦合核心挑战—水窗能区特殊语境—三条研究内容—单向门控"五步推进，结构紧凑
-  - 三个分方向（§2.2/§2.3/§2.4）以自解释标题 + 终止判据 + 验证方法三件套组织，符合范本
-  - 研究目标（G1/G2/G3）每条含量化指标 + 误差度量定义 + 归一化基线
-  - 关键科学问题（K1/K2/K3）与研究内容一一映射
-  - 单向门控逻辑（R1 不达成→不进 R2→不进 R3）是 content.md 的方法学亮点
-- **关键问题**：
-  - §2.6 K2 201 字超长句独立切句确认（属 anti_ai 红线）
-  - §2.4 L33 "Peschel 实验数据" 事实口径错误
-  - §2.6 K2 未复用 rationale [33] 引用
-  - §2.3 CNN 备选路径轻微越界
-  - §2.2 L11 检索范围与 rationale 三库不一致
+### 综合
 
-### 7.2 历史问题复核结论
-- R5-R7 期间累计 19 条历史遗留 P0/P1 问题中 **18 条已解决**，仅 1 条（content K2 [33] 引用断裂）是新发现（rationale 已用 [33] 但 content 未复用），属本轮新增
-- references.md 元数据 CrossRef 实测全部 200 OK，作者列表 4 条 critical 全部重写完成（[4][11][13][26]），卷期页 2 条 critical 全部修正（[12][29]），ghost entry [28] 已移除，孤儿引用 [33] 已补回——**references.md 已达到输出标准**
+- **综合评分**：**0.58 / 1.00**（严谨性 0.35 + 完整性 0.80 均值）
+- **是否达到输出标准**：**否**
+  - general 项目 quality_threshold: min_overall_score = 0.85，本轮 0.58 远低于 0.85（差 0.27）
+  - max_high_issues = 0，本轮 high 1 个（不达标）
+  - max_medium_issues = 3，本轮 medium 2 个（达标）
+  - **不达标核心原因**：2 条 critical 文献真实性 bug（[33] DOI 404 / [16] 整条张冠李戴）触发 v6.9.25 评分纪律严谨性扣至 0.3-0.4 区间下限
 
-### 7.3 是否达到输出标准：**基本达标**（content.md 单章）
-- 创新性 0.85、可行性 0.86、严谨性 0.82、表达质量 0.81、综合 0.83 均在达标线以上
-- content.md 在 §2.4 L33 事实错误、§2.6 K2 201 字超长句、K2 [33] 引用断裂、§2.3 CNN 备选路径越界 4 处 P2 级问题修复后即可达到综合 0.86+ 的优级
-- **强烈建议**：writer 在下一轮按 #1–#4 四个 [high] issue 顺序修复，理由是这四条都对评审通过率有可见影响——#1 影响可读性、#2 影响事实准确性、#3 影响章节边界、#4 影响跨章一致性
+### 相比上一轮（R7 overall consistency 2026-08-26）
 
-### 7.4 下一轮建议
-1. writer 优先处理 #1–#4 四个 [high] issue（顺序：#4 K2 [33] → #2 Peschel 实验数据 → #3 CNN 越界 → #1 201 字超长句拆分）
-2. #5–#8 四个 [medium] issue 在定稿前一次性扫除，避免机械扣分
-3. 整体一致性轮（下一轮或合并轮）应再做一次 references.md CrossRef 全量复核 + content.md/rationale.md/scheme.md 三章关键指标对账
-4. K2 中复用 rationale [33] 时，建议加一句"彩虹检索"措辞使跨章逻辑显性化
+| 维度 | R7 overall consistency | R7 references 专项（本轮） | 变化 |
+|------|----------------------|---------------------------|------|
+| 严谨性 | 0.65 | **0.35** | ↓ 0.30（本轮 2 条 critical 文献真实性 bug 比 R7 的 1 条 critical 编号错位更严重） |
+| 完整性 | — | 0.80 | 新评维度 |
+| 综合 | 0.78 | **0.58** | ↓ 0.20 |
+| critical 数 | 1 | **2** | +1（新增 [33] DOI 错位；[16] 张冠李戴是 R7 未发现的新 critical） |
+| high 数 | 2 | **1** | -1（R7 [high] ghost entry [28] 已被预检解除） |
+| medium 数 | 3 | **2** | -1 |
+
+**关键变化**：
+- **改善**：R7 [high] ghost entry [28] 残留问题已解决（预检确认 references.md 不再含 [28]，正文无 [28] 引用）
+- **未解决**：R7 [critical] Luttmann [20] 错位已修复（scheme.md 不再含 Luttmann），但衍生出新 [critical] [16] 张冠李戴 + [critical] [33] DOI 错位——属"修一处漏洞、引入新漏洞"模式
+- **新增**：R7 未发现的 [16] 整条张冠李戴（critical 级）+ [33] DOI 错位（critical 级）+ 时效性偏弱（medium 级）
+
+### 返工优先级
+
+- **P0（必须立即修改）**：
+  1. 修复 [33] Kheifets DOI 为 `10.1103/9jcm-8gd8`（writer 须跑 doi.org/api/handles 200 OK + Crossref 元数据比对 5 件套）
+  2. 修复 [16] Huppert 整条为 RSI 2015 + 同步修复 scheme.md §4.2 L77 年份 2016→2015（同样须跑 doi.org 200 OK + Crossref 比对）
+- **P1（强烈建议）**：
+  3. 补充 6-7 条 2023-2026 文献至近 3 年占比 ≥50%（每条须 DOI 反查验证）
+- **P2（定稿前整改）**：
+  4. 在 references.md 末尾加跳号 [5][7][10][23][28][32] 元叙述说明
+
+### 下一轮评审建议聚焦
+
+- 重点核查 R8 是否落实 P0 修复（[16][33] DOI 必须 200 OK）
+- 重点核查 writer 补充的 6-7 条新文献**是否每条都跑 DOI 反查**（避免重蹈 [16][33] 覆辙）
+- 建议加一轮 **cross-file audit** 专门核查 R7→R8 间所有被 writer 改动的文献元数据是否引入新 critical bug——本轮发现的 [16][33] 都是 R5→R7 间历史正确 → 当前错误的回归 bug，说明 writer 的文献修改动作本身需要 audit 流程保护
 
 ---
 
 ## 评分
-
-```
-## 评分
-创新性：0.85
-可行性：0.86
-严谨性：0.82
-表达质量：0.78
-综合评分：0.83
-```
+创新性：N/A
+可行性：N/A
+严谨性：0.35
+完整性：0.80
+综合评分：0.58
