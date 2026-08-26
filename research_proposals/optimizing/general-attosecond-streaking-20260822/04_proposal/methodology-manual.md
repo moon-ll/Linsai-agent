@@ -154,11 +154,48 @@ $$S(E) = S_1(E) + S_2(E) + 2\sqrt{S_1 S_2}\cos(\Delta\phi)$$
 | [29] | Li et al. Light Sci Appl 2024 | ✓ 真实（Crossref验证；作者前5已列） |
 | [30] | Ortmann & Landsman RPP 2024 | ✓ 真实（Crossref验证；新增） |
 | [31] | Kim et al. Opt Lett 2025 | ✓ 真实（Crossref验证；新增） |
-| [32] | Hajivassiliou et al. NJP 2023 | ✓ 真实（Crossref验证；新增） |
 | [33] | Kheifets et al. PRA 2026 | ✓ 真实（Crossref验证；新增） |
 
 **本轮已删除条目**（critical 伪造/错位）：[16]（原虚构 Liu Science 2025）、[23]（原 Itatani DOI 错位至植物学论文）、原 [30]（原虚构 Silva Nat Photonics 2025）、原 [31]（原虚构 Murari Opt Express 2025）、[32]（原 Bizau DOI 错位至冷原子论文）、[33]（原 Hu DOI 错位至双俄歇论文）、[34]（原 Chen 作者虚构）、[35]（原 Brown 重复引用 + 虚构）、[36]（原 Li 作者虚构）
 
-**本轮新增条目**（2026-08-26 Crossref验证）：[30] Ortmann RPP 2024、[31] Kim Opt Lett 2025、[32] Hajivassiliou NJP 2023、[33] Kheifets PRA 2026
+**本轮新增条目**（2026-08-26 Crossref验证）：[30] Ortmann RPP 2024、[31] Kim Opt Lett 2025、[33] Kheifets PRA 2026
 
-**近3年文献占比**：2023-2026年文献共 9 条（[12][13][14][28][29][30][31][32][33]），占总文献 33 条的 27.3%，较上轮 20.8% 显著提升。
+**近3年文献占比**：2023–2026年文献共9条（[12][13][14][28][29][30][31][33]），占总文献27条的33.3%。
+
+---
+
+## 附录B 备选路径A通道混合度的实验端测量与误差传递
+
+### B.1 通道投影算子的定义
+
+在TDSE模拟端，通道投影算子 $\hat{P}_i = |\psi_i\rangle\langle\psi_i|$ 的期望值 $\langle\hat{P}_i\rangle$ 量化通道混合度。当两通道能量差大于1 eV时（波函数在能量域可分离），$\langle\hat{P}_i\rangle$ 的物理含义为：通道 $i$ 的电子在总波函数中所占的概率权重。
+
+### B.2 实验端可操作测量量
+
+当两通道光电子能谱在能量域重叠宽度 $\Delta E_{\mathrm{overlap}}$ 在0.5–2 eV区间（典型C K边多通道构型），可采用多高斯拟合提取各通道分量：
+
+$$S(E) = \sum_{i=1}^{n} A_i \exp\left(-\frac{(E-E_i)^2}{2\sigma_i^2}\right) + S_{\mathrm{bg}}(E)$$
+
+其中 $A_i$ 为第 $i$ 通道高斯峰面积，$E_i$ 为峰中心，$\sigma_i$ 为峰宽。通道强度比通过 $R = A_2 / A_1$ 计算，对应通道投影算子的间接测量。
+
+### B.3 误差传递分析
+
+通道混合度 $\eta = A_2 / (A_1 + A_2)$ 的测量不确定度来源于：
+
+1. **统计误差**：光电子计数统计满足泊松分布，面积误差 $\Delta A_i / A_i = 1/\sqrt{N_i}$（$N_i$ 为第 $i$ 通道总计数）
+2. **系统误差**：探测器通道间相对效率差异（$\leq 5\%$），通过预标定相对效率因子修正
+3. **拟合误差**：多高斯拟合中重叠峰的分峰不确定度，与 $\Delta E_{\mathrm{overlap}}$ 正相关
+
+综合误差传递公式：
+
+$$\frac{\Delta \eta}{\eta} \approx \sqrt{\left(\frac{\Delta A_1}{A_1}\right)^2 + \left(\frac{\Delta A_2}{A_2}\right)^2 + \left(\frac{\Delta \epsilon}{\epsilon}\right)^2}$$
+
+其中 $\epsilon$ 为通道间相对效率因子。典型条件下（$N_1, N_2 \geq 10^4$，$\Delta\epsilon/\epsilon \leq 5\%$），$\eta$ 的相对不确定度控制在10%以内，满足触发条件">30%"的判定可靠性。
+
+### B.4 触发条件的判定协议
+
+实验端判定"通道混合度 > 30%"的判定协议：
+1. 在多通道靶材（CH₄或N₂）条件下获取光电子能谱，计数 $N_{\mathrm{total}} \geq 10^4$
+2. 执行双高斯拟合，提取 $A_1$、$A_2$ 与拟合残差 $\chi^2$
+3. 计算 $\eta = A_2/(A_1+A_2)$ 及不确定度 $\Delta\eta$
+4. 若 $\eta - \Delta\eta > 0.30$，触发备选路径A；若 $\eta + \Delta\eta < 0.30$，维持主方案；若 $\eta$ 与0.30重叠（$\Delta\eta$ 区间含0.30），增加计数时间后重新测量

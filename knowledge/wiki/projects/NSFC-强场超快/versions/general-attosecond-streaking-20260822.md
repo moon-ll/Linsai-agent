@@ -3,11 +3,11 @@ title: "attosecond-streaking — 最新版本"
 type: "proposal_version"
 proposal_id: "general-attosecond-streaking-20260822"
 project_type: "general"
-latest_round: 4
+latest_round: 5
 last_score: 0.79
 status: "optimizing"
-created: "2026-08-26T00:02:15Z"
-updated: "2026-08-26T00:02:15Z"
+created: "2026-08-26T10:18:04Z"
+updated: "2026-08-26T10:18:04Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -17,10 +17,10 @@ confidence: 1.0
 
 **课题 ID**：`general-attosecond-streaking-20260822`
 **类型**：general
-**最新轮次**：第 4 轮
+**最新轮次**：第 5 轮
 **当前分数**：0.79
 **状态**：优化中
-**同步时间**：2026-08-26T00:02:15Z
+**同步时间**：2026-08-26T10:18:04Z
 
 ---
 
@@ -28,9 +28,9 @@ confidence: 1.0
 
 | 章节 | 标题 | 行数 |
 |------|------|------|
-| content | content | 56 |
+| content | content | 54 |
 | full_review | full_review | 130 |
-| rationale | rationale | 102 |
+| rationale | rationale | 104 |
 | references | references | 56 |
 | scheme | scheme | 126 |
 
@@ -41,9 +41,9 @@ confidence: 1.0
 **课题名称**：评审轮次**：R5（整体一致性专项）
 **项目类型**：面上项目
 **课题 ID**：`general-attosecond-streaking-20260822`
-**当前状态**：优化中（第4轮，score 0.79）
+**当前状态**：优化中（第5轮，score 0.79）
 **启动日期**：2026-08-22
-**最后更新**：2026-08-25
+**最后更新**：2026-08-26
 
 ---
 

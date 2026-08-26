@@ -2,9 +2,9 @@
 title: "亚周期相位匹配效应对短阿秒脉冲串的影响 — 论文精读笔记"
 type: "papers"
 created: "2026-08-16T13:19:07Z"
-updated: "2026-08-17T05:19:28Z"
+updated: "2026-08-26T04:59:40Z"
 tags: ["HHG", "阿秒脉冲串", "相位匹配", "CEP", "激光辅助电离", "宏观传播效应", "论文精读"]
-related: ["少周期驱动场", "相位匹配", "载波包络相位控制", "阿秒啁啾", "阿秒条纹测量", "高次谐波产生"]
+related: ["2507.06386", "少周期驱动场", "相位匹配", "载波包络相位控制", "阿秒啁啾", "阿秒条纹测量", "高次谐波产生"]
 source_raw: "2026-2507.06386-subcycle-phase-matching-effects-in-short-attosecon.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -56,6 +56,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2507.06386]]
 - [[少周期驱动场]]
 - [[相位匹配]]
 - [[载波包络相位控制]]

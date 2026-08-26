@@ -18,7 +18,7 @@
 
 [12] Inzani G, Di Palo N, Dolso G L, et al. Absolute delay calibration by analytical fitting of attosecond streaking measurements. J Phys Photonics, 2024, 6: 025202. DOI: 10.1088/2515-7647/ad252a
 
-[13] Zhu X, Gao Y, Wang Y, et al. Autocorrelation-based convolutional neural network for reconstruction of noisy attosecond streaking traces. Chin Phys B, 2026, 35: 054204. DOI: 10.1088/1674-1056/ae3474
+[13] Zhu X, Gao Y, Wang Y, Xu J, Liu H, Chen Z, Zhang L, et al. Autocorrelation-based convolutional neural network for reconstruction of noisy attosecond streaking traces. Chin Phys B, 2026, 35: 054204. DOI: 10.1088/1674-1056/ae3474
 
 [14] Hutcheson L R, Hartmann M, Borisova G D, et al. Phase evolution of strong-field ionization. Phys Rev Research, 2025, 7: L022074. DOI: 10.1103/physrevresearch.7.l022074
 
@@ -34,7 +34,7 @@
 
 [21] Corkum P B. Plasma perspective on strong field multiphoton ionization. Phys Rev Lett, 1993, 71: 1994-1997. DOI: 10.1103/PhysRevLett.71.1994
 
-[22] Keldysh L V. Ionization in the field of a strong electromagnetic wave. Sov Phys JETP, 1965, 20: 1307-1314. INSPIRE-HEP: https://inspirehep.net/literature/44820
+[22] Keldysh L V. Ionization in the field of a strong electromagnetic wave. Sov Phys JETP, 1965, 20: 1307-1314. INSPIRE-HEP: https://inspirehep.net/literature/1793133
 
 [24] Eckle P, Pfeiffer A N, Cirelli C, Staudte A, Dörner R, Muller H G, Büttiker M, Keller U. Attosecond ionization and tunneling delay time measurements in helium. Science, 2008, 322: 1525-1529. DOI: 10.1126/science.1163439
 

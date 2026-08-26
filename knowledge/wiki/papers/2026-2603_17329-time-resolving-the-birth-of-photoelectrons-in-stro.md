@@ -2,9 +2,9 @@
 title: "用孤立阿秒脉冲时间分辨强场电离中光电子的诞生过程（精读笔记）"
 type: "papers"
 created: "2026-08-15T19:24:07Z"
-updated: "2026-08-17T05:19:28Z"
+updated: "2026-08-26T04:59:40Z"
 tags: ["强场电离", "阿秒脉冲", "光谱相位重构", "光电子波包", "圆偏振光", "电离时间"]
-related: ["COLTRIMS", "RABBITT", "Wigner时延", "attoclock", "量子轨迹理论", "阿秒干涉测量", "阿秒条纹术"]
+related: ["2603.17329", "COLTRIMS", "RABBITT", "Wigner时延", "attoclock", "量子轨迹理论", "阿秒干涉测量", "阿秒条纹术"]
 source_raw: "2026-2603.17329-time-resolving-the-birth-of-photoelectrons-in-stro.md"
 growth_stage: "mature"
 confidence: 0.7
@@ -68,6 +68,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2603.17329]]
 - [[COLTRIMS]]
 - [[RABBITT]]
 - [[Wigner时延]]
