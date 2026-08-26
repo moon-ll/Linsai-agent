@@ -1,5 +1,25 @@
 # 变更记录
 
+## v6.9.52 - 2026-08-27 lark-cli 路径版本自适应：修复插件升级后飞书告警通道静默失效
+
+背景：04h 健康检查发现 monitor 连续数十次报"lark-cli 不存在：
+`~/.trae-cn/plugins/trae-remote-official/lark/1.0.3/bin/lark-cli`，跳过飞书通知"。
+根因：`lifecycle_monitor.py` 用 `Path.home()/.../lark/1.0.3/bin/lark-cli`
+硬编码插件版本目录，而 TRAE lark 插件已升级到 1.0.4（新路径在 PATH 中）。
+插件升级后固定路径指向不存在的二进制 → `_send_feishu` 每次返回 False →
+monitor 检测到异常但全部静默旁路，告警防线数据出口完全失效。
+
+修复：`LARK_CLI` 改为运行时解析——扫 `~/.trae-cn/plugins/trae-remote-official/lark/*/`
+取最高已安装版本目录下的 `bin/lark-cli`，路径不存在则回退 `shutil.which`；
+无任何可用实现在时返回空串（`_send_feishu` 既有 empty 检查兜底）。不再绑定
+固定版本号，后续插件升级自动适配最高版本。
+
+- 行为变化：飞书告警通道在插件升级（1.0.3→1.0.4，实测解析到 1.0.4 且 exists）
+  后恢复可用。
+- 测试：`test_monitor_lark_failure.py` 新增"插件升级后解析最高已安装版本"
+  断言（当前 7/7 通过）。
+- 验证：`self_test --module` 全量通过（见本轮回归基线）。
+
 ## v6.9.51 - 2026-08-26 每完成一轮强制切换：修复单课题无限持有焦点饿死队列
 
 背景：08-25/26 实证 attosecond 连续 2 天持焦点（r3→r6 一天 4 轮），

@@ -1,7 +1,7 @@
 设计实现抽查轮换指针
 ====================
-最后更新：2026-08-26 18h 健康检查（**第九轮 #10/#11/#12 完成**——人工审核反馈闭环→正常（critic L1058-1060/writer L1803-1805 + feedback_archive 显式 proposal_id + structured 兜底；运行时 qg732/kt782/moire725/order-param258 实质注入，无反馈课题 clean，bsv 晋级移出为预期）/ KB 健康评分→正常（日度 kanban kb_metrics 今日 04:40Z 新鲜 coverage_pct 3.9；周度 08-23 checked_at 三指标 0.75/200/2.56）/ 研究趋势雷达→正常（sync_engine L499→L648 sync_all→L659/663 写看板，trends_rising 5词今日 04:40Z 新鲜）；回归 1106/1106；无新缺陷无修复；monitor 统计 7 课题 4 条 stalled（kt157/berry165/moire63/order-param63，attosecond 持续聚焦结构性饥饿已知候选维持裁决）；kb_distill 积压 310）
-完整报告：logs/healthchecks/healthcheck-2026-08-26-18h.md（上一轮：healthcheck-2026-08-26-08h.md）
+最后更新：2026-08-27 04h 健康检查（**第十一轮 #4/#5/#6 完成**——Agent分数奖惩闭环→正常（scoring.py scripts/adversarial/ L227/233 scores[role] 顶层无 ["agents"] 嵌套 + 运行时 memory/agent-scores.json 顶层键 writer/critic、history 各 50 有界、attosecond r5/r6/r7 delta 跨轮闭环））/ Prompt优化器正反馈循环→正常（_cleanup_old_suggestions L250 在 auto 路径 L1319 调用，库存 12 条 11 applied/1 rejected_guard 08-21~08-26 新鲜有界；TARGET_PROFILES L59 仍 5/7 缺 pipeline-runner/reviewer 偏差维持人工裁决）/ P0跨轮持久化→正常（critic optimize.py L1063 exclude_resolved=True / writer L1780 exclude_resolved=False / _build_p0_memory_text L2319 / 跨章节 _allow_cross L1562 + L1569；运行时 berry 40 条=12 未解决 stable、new-idea/attosecond 各 40 未解决为聚焦新轮正常累积）；**修复 v6.9.52**：lifecycle_monitor LARK_CLI 硬编码 1.0.3→插件升级 1.0.4 致飞书告警通道静默失效，改为动态解析最高版本目录（实测解析 1.0.4 exists，test_monitor_lark_failure 新增断言 7/7 通过）；回归 1113/1113 全绿；monitor 计数 6-7 异常（5 个 critic 双上限/重试 job 阻塞 stalled 课题已知）；下一批自 #7/#8/#9 起（质量天花板检测 / 停滞课题检测 / 输入端熔断）
+完整报告：logs/healthchecks/healthcheck-2026-08-27-04h.md（上一轮：healthcheck-2026-08-27-00h.md）
 
 【环境备忘（每次健康检查先读）】
 1. `crontab -l` 在沙箱内恒为空——cron 核查必须走 hermes cron 注册表：

@@ -27,6 +27,8 @@ from __future__ import annotations
 
 import json
 import os
+import re
+import shutil
 import subprocess
 import sys
 from datetime import datetime, timezone
@@ -38,8 +40,32 @@ sys.path.insert(0, str(PROJECT_ROOT / "scripts"))
 
 from common import now_utc, load_json, save_json  # noqa: E402
 
-# lark-cli 路径（TRAE 插件安装位置）
-LARK_CLI = str(Path.home() / ".trae-cn" / "plugins" / "trae-remote-official" / "lark" / "1.0.3" / "bin" / "lark-cli")
+# lark-cli 路径（TRAE 插件安装位置）。插件升级会变更版本目录（历史 1.0.3→1.0.4），
+# 硬编码固定版本会使插件升级后飞书告警通道静默失效，故动态取插件目录最高版本，PATH 兜底。
+_LARK_PLUGIN_DIR = Path.home() / ".trae-cn" / "plugins" / "trae-remote-official" / "lark"
+
+
+def _resolve_lark_cli() -> str:
+    """解析到已安装的 lark-cli：取插件目录中最高版本，其次 PATH 兜底。"""
+    candidates: List[Tuple[int, int, int, Path]] = []
+    if _LARK_PLUGIN_DIR.is_dir():
+        for ver_dir in _LARK_PLUGIN_DIR.iterdir():
+            if not ver_dir.is_dir():
+                continue
+            m = re.fullmatch(r"(\d+)\.(\d+)\.(\d+)", ver_dir.name)
+            if not m:
+                continue
+            cli = ver_dir / "bin" / "lark-cli"
+            if cli.exists():
+                candidates.append((int(m.group(1)), int(m.group(2)), int(m.group(3)), cli))
+    if candidates:
+        candidates.sort(key=lambda c: c[:3], reverse=True)
+        return str(candidates[0][3])
+    on_path = shutil.which("lark-cli")
+    return str(on_path) if on_path else ""
+
+
+LARK_CLI = _resolve_lark_cli()
 
 # 告警去重缓存
 ALERT_CACHE_PATH = PROJECT_ROOT / "memory" / "monitor-alert-cache.json"

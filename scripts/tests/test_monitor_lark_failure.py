@@ -181,6 +181,28 @@ class MonitorLarkFailureTests(TestSuite):
             f"_should_notify 返回: {can_notify_again}",
         )
 
+        # ================================================================
+        # 测试 5（新增）: _resolve_lark_cli 在插件升级（1.0.3→1.0.4）后
+        # 仍能解析到实际已安装的 lark-cli，避免硬编码路径静默失效
+        # ================================================================
+        fake_plugin = self.tmp_root / "lark_plugin"
+        fake_plugin.mkdir(parents=True, exist_ok=True)
+        for ver in ("1.0.3", "1.0.4"):
+            (fake_plugin / ver / "bin").mkdir(parents=True, exist_ok=True)
+            (fake_plugin / ver / "bin" / "lark-cli").write_text("", encoding="utf-8")
+
+        orig_dir = self.monitor._LARK_PLUGIN_DIR
+        self.monitor._LARK_PLUGIN_DIR = fake_plugin
+        try:
+            resolved = self.monitor._resolve_lark_cli()
+        finally:
+            self.monitor._LARK_PLUGIN_DIR = orig_dir
+        self.assert_true(
+            resolved.endswith("/1.0.4/bin/lark-cli"),
+            "插件升级(1.0.3→1.0.4)后 _resolve_lark_cli 应解析到最高已安装版本",
+            f"实际: {resolved}",
+        )
+
 
 if __name__ == "__main__":
     suite = MonitorLarkFailureTests()
