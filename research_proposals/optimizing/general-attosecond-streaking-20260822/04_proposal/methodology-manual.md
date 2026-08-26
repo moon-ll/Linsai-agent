@@ -120,7 +120,7 @@ $$S(E) = S_1(E) + S_2(E) + 2\sqrt{S_1 S_2}\cos(\Delta\phi)$$
 
 合格阈值：小于 5%
 
-失效边界：光子能量超过 409.7 eV（N K 边电离阈值）或通道重叠宽度超过 2 eV（对应多通道贡献超过 50%）
+**失效边界**：光子能量超过409.7 eV（N K边电离阈值）或通道重叠宽度超过2 eV（对应多通道贡献超过50%）。R3跨能区标定采用双线性回归模型 f(overlap, E_ph) = a·overlap + b·E_ph + c 拟合双变量误差边界，5%等高线对应合格区间，>10%等高线对应失效区间。
 
 ---
 
@@ -154,13 +154,12 @@ $$S(E) = S_1(E) + S_2(E) + 2\sqrt{S_1 S_2}\cos(\Delta\phi)$$
 | [29] | Li et al. Light Sci Appl 2024 | ✓ 真实（Crossref验证；作者前5已列） |
 | [30] | Ortmann & Landsman RPP 2024 | ✓ 真实（Crossref验证；新增） |
 | [31] | Kim et al. Opt Lett 2025 | ✓ 真实（Crossref验证；新增） |
-| [33] | Kheifets et al. PRA 2026 | ✓ 真实（Crossref验证；新增） |
 
-**本轮已删除条目**（critical 伪造/错位）：[16]（原虚构 Liu Science 2025）、[23]（原 Itatani DOI 错位至植物学论文）、原 [30]（原虚构 Silva Nat Photonics 2025）、原 [31]（原虚构 Murari Opt Express 2025）、[32]（原 Bizau DOI 错位至冷原子论文）、[33]（原 Hu DOI 错位至双俄歇论文）、[34]（原 Chen 作者虚构）、[35]（原 Brown 重复引用 + 虚构）、[36]（原 Li 作者虚构）
+**本轮已删除条目**（critical 伪造/错位/孤儿）：[16]（原虚构 Liu Science 2025）、[23]（原 Itatani DOI 错位至植物学论文）、原 [30]（原虚构 Silva Nat Photonics 2025）、原 [31]（原虚构 Murari Opt Express 2025）、[32]（原 Bizau DOI 错位至冷原子论文）、[33]（孤儿条目，正文无引用；DOI 虽经 R6 Crossref 验证为真实论文，但与本课题研究内容无直接关联）
 
-**本轮新增条目**（2026-08-26 Crossref验证）：[30] Ortmann RPP 2024、[31] Kim Opt Lett 2025、[33] Kheifets PRA 2026
+**本轮新增条目**（2026-08-26 Crossref验证）：[30] Ortmann RPP 2024、[31] Kim Opt Lett 2025
 
-**近3年文献占比**：2023–2026年文献共9条（[12][13][14][28][29][30][31][33]），占总文献27条的33.3%。
+**近3年文献占比**：2023–2026年文献共8条（[12][13][14][28][29][30][31]），占总文献26条的30.8%。
 
 ---
 

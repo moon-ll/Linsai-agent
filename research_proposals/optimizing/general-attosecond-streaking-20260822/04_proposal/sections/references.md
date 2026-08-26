@@ -6,7 +6,7 @@
 
 [3] Pabst S, Dahlström J. Eliminating the dipole phase in attosecond pulse characterization using Rydberg wave packets. Phys Rev A, 2016, 94: 013411. DOI: 10.1103/PhysRevA.94.013411
 
-[4] Schultze M, Gagnon J, Goh S J, et al. Delay in photoemission. Science, 2010, 328: 1658-1662. DOI: 10.1126/science.1189401
+[4] Schultze M, Fieß M, Karpowicz N, Gagnon J, Korbman M, et al. Delay in photoemission. Science, 2010, 328: 1658-1662. DOI: 10.1126/science.1189401
 
 [6] Mairesse Y, Quéré F. Frequency-resolved optical gating for complete reconstruction of attosecond bursts. Phys Rev A, 2005, 71: 011401. DOI: 10.1103/PhysRevA.71.011401
 
@@ -14,11 +14,11 @@
 
 [9] Ren X, Makabe K, Wang L, et al. Attosecond light sources in the water window. Journal of Optics, 2018, 20: 023001. DOI: 10.1088/2040-8986/aaa394
 
-[11] Peschel J, Busto D, Plötz P A, et al. Attosecond dynamics of multi-channel single photon ionization. Nat Commun, 2022, 13: 5205. DOI: 10.1038/s41467-022-32780-5
+[11] Peschel J, Busto D, Plach M, Bertolino M, Hoflund M, et al. Attosecond dynamics of multi-channel single photon ionization. Nat Commun, 2022, 13: 5205. DOI: 10.1038/s41467-022-32780-5
 
-[12] Inzani G, Di Palo N, Dolso G L, et al. Absolute delay calibration by analytical fitting of attosecond streaking measurements. J Phys Photonics, 2024, 6: 025202. DOI: 10.1088/2515-7647/ad252a
+[12] Inzani G, Di Palo N, Dolso G L, et al. Absolute delay calibration by analytical fitting of attosecond streaking measurements. J Phys Photonics, 2024, 6: 025007. DOI: 10.1088/2515-7647/ad252a
 
-[13] Zhu X, Gao Y, Wang Y, Xu J, Liu H, Chen Z, Zhang L, et al. Autocorrelation-based convolutional neural network for reconstruction of noisy attosecond streaking traces. Chin Phys B, 2026, 35: 054204. DOI: 10.1088/1674-1056/ae3474
+[13] Zhu X X, Gao Y T, Wang Y M, Zhao K, Wei Z Y. Autocorrelation-based convolutional neural network for reconstruction of noisy attosecond streaking traces. Chin Phys B, 2026, 35: 054204. DOI: 10.1088/1674-1056/ae3474
 
 [14] Hutcheson L R, Hartmann M, Borisova G D, et al. Phase evolution of strong-field ionization. Phys Rev Research, 2025, 7: L022074. DOI: 10.1103/physrevresearch.7.l022074
 
@@ -40,13 +40,11 @@
 
 [25] Villeneuve D M, Hockett P, Vrakking M J J, et al. Coherent imaging of an attosecond electron wave packet. Science, 2017, 356: 1150-1153. DOI: 10.1126/science.aam8393
 
-[26] Klünder K, Dahlström J M, Ghiassi K B, et al. Probing single-photon ionization on the attosecond time scale. Phys Rev Lett, 2011, 106: 143002. DOI: 10.1103/PhysRevLett.106.143002
+[26] Klünder K, Dahlström J M, Gisselbrecht M, Fordell T, et al. Probing single-photon ionization on the attosecond time scale. Phys Rev Lett, 2011, 106: 143002. DOI: 10.1103/PhysRevLett.106.143002
 
 [27] Pazourek R, Nagele S, Burgdörfer J. Attosecond chronoscopy of photoemission. Rev Mod Phys, 2015, 87: 765-802. DOI: 10.1103/RevModPhys.87.765
 
-[28] Kuzkova N, van Essen P J, de Keijzer B, Silva R E F, Galan A J, Kraus P M, et al. Attosecond high-harmonic interferometry probes orbital- and band-dependent dipole phase in magnesium oxide. arXiv:2508.15076, 2025
-
-[29] Li X, Liu X, Wang C, Ben S, Zhou S, et al. Coulomb focusing in attosecond angular streaking. Light Sci Appl, 2024, 13: 193. DOI: 10.1038/s41377-024-01600-4
+[29] Li X, Liu X, Wang C, Ben S, Zhou S, et al. Coulomb focusing in attosecond angular streaking. Light Sci Appl, 2024, 13: 250. DOI: 10.1038/s41377-024-01600-4
 
 [30] Ortmann L, Landsman A. Understanding attosecond streaking. Rep Prog Phys, 2024, 87: 086401. DOI: 10.1088/1361-6633/ad6278
 

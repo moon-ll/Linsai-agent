@@ -14276,6 +14276,1043 @@
       "cron_job_id": "",
       "_archived_from": "general-attosecond-streaking-20260822",
       "_archived_at": "2026-08-26T01:27:45Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-rationale-critic",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "critic",
+      "section_key": "rationale",
+      "round": 4,
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T18:25:29Z",
+      "finished_at": "2026-08-25T18:34:31Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-rationale-gap_identify",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "gap_identify",
+      "section_key": "rationale",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-rationale-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T18:35:30Z",
+      "finished_at": "2026-08-25T18:36:03Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-rationale-lit_search",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_search",
+      "section_key": "rationale",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-rationale-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T18:40:31Z",
+      "finished_at": "2026-08-25T18:41:09Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-rationale-lit_read",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_read",
+      "section_key": "rationale",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-rationale-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T18:45:32Z",
+      "finished_at": "2026-08-25T18:45:32Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-rationale-lit_note",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_note",
+      "section_key": "rationale",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-rationale-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T18:50:33Z",
+      "finished_at": "2026-08-25T18:50:33Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-rationale-writer",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "writer",
+      "section_key": "rationale",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-rationale-critic",
+        "general-attosecond-streaking-20260822-r4-rationale-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T18:55:34Z",
+      "finished_at": "2026-08-25T19:01:38Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-content-critic",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "critic",
+      "section_key": "content",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-rationale-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T19:05:35Z",
+      "finished_at": "2026-08-25T19:10:51Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-content-gap_identify",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "gap_identify",
+      "section_key": "content",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-content-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T19:15:37Z",
+      "finished_at": "2026-08-25T19:20:01Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-content-lit_search",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_search",
+      "section_key": "content",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-content-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T19:25:39Z",
+      "finished_at": "2026-08-25T19:27:28Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-content-lit_read",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_read",
+      "section_key": "content",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-content-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T19:30:39Z",
+      "finished_at": "2026-08-25T19:33:27Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-content-lit_note",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_note",
+      "section_key": "content",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-content-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T20:00:45Z",
+      "finished_at": "2026-08-25T20:00:45Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-content-writer",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "writer",
+      "section_key": "content",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-content-critic",
+        "general-attosecond-streaking-20260822-r4-content-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T20:05:45Z",
+      "finished_at": "2026-08-25T20:07:58Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-scheme-critic",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "critic",
+      "section_key": "scheme",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-content-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T20:10:46Z",
+      "finished_at": "2026-08-25T20:20:41Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-scheme-gap_identify",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "gap_identify",
+      "section_key": "scheme",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-scheme-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T20:25:48Z",
+      "finished_at": "2026-08-25T20:26:28Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-scheme-lit_search",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_search",
+      "section_key": "scheme",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-scheme-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T20:30:49Z",
+      "finished_at": "2026-08-25T20:32:36Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-scheme-lit_read",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_read",
+      "section_key": "scheme",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-scheme-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T20:35:50Z",
+      "finished_at": "2026-08-25T20:42:37Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-scheme-lit_note",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_note",
+      "section_key": "scheme",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-scheme-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T20:45:52Z",
+      "finished_at": "2026-08-25T20:45:52Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-scheme-writer",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "writer",
+      "section_key": "scheme",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-scheme-critic",
+        "general-attosecond-streaking-20260822-r4-scheme-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T20:50:53Z",
+      "finished_at": "2026-08-25T20:54:37Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-full_review-critic",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "critic",
+      "section_key": "full_review",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-scheme-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T20:55:53Z",
+      "finished_at": "2026-08-25T21:03:18Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-full_review-writer",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "writer",
+      "section_key": "full_review",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-full_review-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T21:05:55Z",
+      "finished_at": "2026-08-25T21:13:29Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-references-critic",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "critic",
+      "section_key": "references",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-full_review-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T21:15:57Z",
+      "finished_at": "2026-08-25T21:20:55Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-references-writer",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "writer",
+      "section_key": "references",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-references-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T21:25:58Z",
+      "finished_at": "2026-08-25T21:32:37Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-monitor-monitor",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "monitor",
+      "section_key": "monitor",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-references-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T21:35:00Z",
+      "finished_at": "2026-08-25T21:37:36Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-derived-update_vision",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "update_vision",
+      "section_key": "derived",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-monitor-monitor"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T21:40:01Z",
+      "finished_at": "2026-08-25T21:41:00Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r4-derived-update_method_manual",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "update_method_manual",
+      "section_key": "derived",
+      "round": 4,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r4-derived-update_vision"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T21:45:02Z",
+      "finished_at": "2026-08-25T21:48:04Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-rationale-critic",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "critic",
+      "section_key": "rationale",
+      "round": 5,
+      "status": "done",
+      "depends_on": [],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T21:50:03Z",
+      "finished_at": "2026-08-25T21:55:38Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-rationale-gap_identify",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "gap_identify",
+      "section_key": "rationale",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-rationale-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T22:00:05Z",
+      "finished_at": "2026-08-25T22:01:19Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-rationale-lit_search",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_search",
+      "section_key": "rationale",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-rationale-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T22:05:05Z",
+      "finished_at": "2026-08-25T22:05:24Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-rationale-lit_read",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_read",
+      "section_key": "rationale",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-rationale-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T22:10:06Z",
+      "finished_at": "2026-08-25T22:10:06Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-rationale-lit_note",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_note",
+      "section_key": "rationale",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-rationale-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T22:15:07Z",
+      "finished_at": "2026-08-25T22:15:07Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-rationale-writer",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "writer",
+      "section_key": "rationale",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-rationale-critic",
+        "general-attosecond-streaking-20260822-r5-rationale-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T22:20:08Z",
+      "finished_at": "2026-08-25T22:23:58Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-content-critic",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "critic",
+      "section_key": "content",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-rationale-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T22:25:09Z",
+      "finished_at": "2026-08-25T22:32:29Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-content-gap_identify",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "gap_identify",
+      "section_key": "content",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-content-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T22:35:10Z",
+      "finished_at": "2026-08-25T22:37:01Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-content-lit_search",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_search",
+      "section_key": "content",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-content-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T22:40:11Z",
+      "finished_at": "2026-08-25T22:43:26Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-content-lit_read",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_read",
+      "section_key": "content",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-content-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T22:45:12Z",
+      "finished_at": "2026-08-25T22:48:31Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-content-lit_note",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_note",
+      "section_key": "content",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-content-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T22:50:13Z",
+      "finished_at": "2026-08-25T22:50:13Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-content-writer",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "writer",
+      "section_key": "content",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-content-critic",
+        "general-attosecond-streaking-20260822-r5-content-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T22:55:14Z",
+      "finished_at": "2026-08-25T22:59:03Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-scheme-critic",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "critic",
+      "section_key": "scheme",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-content-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T23:00:15Z",
+      "finished_at": "2026-08-25T23:05:07Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-scheme-gap_identify",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "gap_identify",
+      "section_key": "scheme",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-scheme-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T23:10:16Z",
+      "finished_at": "2026-08-25T23:11:23Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-scheme-lit_search",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_search",
+      "section_key": "scheme",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-scheme-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T23:15:17Z",
+      "finished_at": "2026-08-25T23:16:43Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-scheme-lit_read",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_read",
+      "section_key": "scheme",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-scheme-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T23:20:18Z",
+      "finished_at": "2026-08-25T23:21:57Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-scheme-lit_note",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_note",
+      "section_key": "scheme",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-scheme-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T23:25:19Z",
+      "finished_at": "2026-08-25T23:25:19Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-scheme-writer",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "writer",
+      "section_key": "scheme",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-scheme-critic",
+        "general-attosecond-streaking-20260822-r5-scheme-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-25T23:30:19Z",
+      "finished_at": "2026-08-25T23:33:04Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-full_review-critic",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "critic",
+      "section_key": "full_review",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-scheme-writer"
+      ],
+      "attempts": 2,
+      "scheduled_at": "",
+      "started_at": "2026-08-26T00:30:30Z",
+      "finished_at": "2026-08-26T00:33:04Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "error_history": [
+        {
+          "at": "2026-08-26T00:30:30Z",
+          "error": "运行超时/进程僵死",
+          "attempts": 1
+        }
+      ],
+      "repair_attempts": 1,
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-full_review-gap_identify",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "gap_identify",
+      "section_key": "full_review",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-full_review-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-26T00:35:31Z",
+      "finished_at": "2026-08-26T00:36:22Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-full_review-lit_search",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_search",
+      "section_key": "full_review",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-full_review-gap_identify"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-26T00:40:32Z",
+      "finished_at": "2026-08-26T00:42:00Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-full_review-lit_read",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_read",
+      "section_key": "full_review",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-full_review-lit_search"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-26T00:45:33Z",
+      "finished_at": "2026-08-26T00:47:17Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-full_review-lit_note",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "lit_note",
+      "section_key": "full_review",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-full_review-lit_read"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-26T00:50:34Z",
+      "finished_at": "2026-08-26T00:50:34Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-full_review-writer",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "writer",
+      "section_key": "full_review",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-full_review-critic",
+        "general-attosecond-streaking-20260822-r5-full_review-lit_note"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-26T00:55:35Z",
+      "finished_at": "2026-08-26T01:00:39Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-references-critic",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "critic",
+      "section_key": "references",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-full_review-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-26T01:05:36Z",
+      "finished_at": "2026-08-26T01:15:55Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-references-writer",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "writer",
+      "section_key": "references",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-references-critic"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-26T01:20:39Z",
+      "finished_at": "2026-08-26T01:24:30Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-monitor-monitor",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "monitor",
+      "section_key": "monitor",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-references-writer"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-26T01:25:39Z",
+      "finished_at": "2026-08-26T01:27:45Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-derived-update_vision",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "update_vision",
+      "section_key": "derived",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-monitor-monitor"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-26T01:30:40Z",
+      "finished_at": "2026-08-26T01:31:15Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
+    },
+    {
+      "job_id": "general-attosecond-streaking-20260822-r5-derived-update_method_manual",
+      "proposal_id": "general-attosecond-streaking-20260822",
+      "step": "update_method_manual",
+      "section_key": "derived",
+      "round": 5,
+      "status": "done",
+      "depends_on": [
+        "general-attosecond-streaking-20260822-r5-derived-update_vision"
+      ],
+      "attempts": 0,
+      "scheduled_at": "",
+      "started_at": "2026-08-26T01:35:41Z",
+      "finished_at": "2026-08-26T01:37:38Z",
+      "last_error": "",
+      "cron_job_id": "",
+      "_archived_from": "general-attosecond-streaking-20260822",
+      "_archived_at": "2026-08-26T11:03:50Z"
     }
   ]
 }
