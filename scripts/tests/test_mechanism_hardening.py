@@ -1574,6 +1574,76 @@ class SectionHygieneTests(TestSuite):
                 f"guard_written_artifacts 应挂载 {guard_name}",
             )
 
+        # ================================================================
+        # 15（v6.9.62）: 遗留事项处置——维度完整性 / monitor 超时 / R1 池降噪
+        #                                                / R2 cron 闭环 / R4 隔离
+        # ================================================================
+        # 15.1 维度完整性：executor 检测 + 入史 + 奖惩跳过
+        self.assert_true(
+            "dims_partial" in exec_src and "维度解析不完整" in exec_src,
+            "writer step 应检测维度解析完整性",
+        )
+        self.assert_true(
+            "dims_present" in exec_src,
+            "维度完整性应入 score_history 可观测",
+        )
+        self.assert_true(
+            "跳过 agent 奖惩" in exec_src and "skipped_partial_dims" in exec_src,
+            "残缺维度轮应跳过 agent 奖惩（零增量而非 None）",
+        )
+        # 15.2 completion 三检测窗口过滤 partial 轮
+        comp_src = (Path(__file__).parent.parent / "proposal_lifecycle" / "completion.py").read_text(encoding="utf-8")
+        self.assert_true(
+            comp_src.count('h.get("dims_partial")') >= 3,
+            "收敛/次优平台/质量下降三个检测窗口均应过滤 dims_partial 轮",
+        )
+        # 15.3 monitor 超时上调
+        adv_const = (Path(__file__).parent.parent / "adversarial" / "constants.py").read_text(encoding="utf-8")
+        self.assert_true(
+            "MONITOR_TIMEOUT = 900" in adv_const,
+            "monitor 超时应为 900s（输入瘦身后余量）",
+        )
+        # 15.4 R1 池降噪：gate 删除 + head-miss 回退全文
+        self.assert_true(
+            'if "doi:" in head.lower() or "arxiv" in head.lower()' not in opt_src,
+            "R1：旧 gate（head 需含 doi/arxiv 字样）应删除",
+        )
+        self.assert_true(
+            "回退全文提取" in opt_src and "消除截断漏检" in opt_src,
+            "R1：head 提取为空应回退全文提取",
+        )
+        # 15.5 R2 cron 安装闭环
+        fw_src = (Path(__file__).parent.parent / "lifecycle" / "framework.py").read_text(encoding="utf-8")
+        ctl_src = (Path(__file__).parent.parent / "lifecycle" / "controller.py").read_text(encoding="utf-8")
+        self.assert_true(
+            'name="lc-daily-backup"' in fw_src and 'name="lc-daily-sync"' in fw_src,
+            "R2：framework 安装器应含备份/日终同步",
+        )
+        self.assert_true(
+            "lc_daily_backup.sh" in ctl_src and "lc_daily_sync.sh" in ctl_src,
+            "R2：controller 应生成对应 wrapper",
+        )
+        self.assert_true(
+            "DAILY_BACKUP_CRON_NAME" in fw_src,
+            "R2：cleanup 默认清单应纳入备份 cron",
+        )
+        lc_const = (Path(__file__).parent.parent / "lifecycle" / "constants.py").read_text(encoding="utf-8")
+        self.assert_true(
+            'DAILY_BACKUP_SCHEDULE = "0 13 * * *"' in lc_const,
+            "R4：备份窗口应移至 13:00（避开 worker 时段）",
+        )
+        # 15.6 R4：测试零污染
+        leak_src = (Path(__file__).parent / "test_leak_guard.py").read_text(encoding="utf-8")
+        self.assert_true(
+            "_pe._LEARNING_OPPS_CACHE = _tmp_dir" in leak_src,
+            "R4：leak_guard 应 patch 缓存路径为临时文件（零接触真实数据）",
+        )
+        # 15.7 内容边界（用户裁决）
+        self.assert_true(
+            "严禁撰写研究基础" in opt_src and "必须由申请人本人" in opt_src,
+            "内容边界红线应声明：平台/合作类内容系统不生成",
+        )
+
 
 def main():
     from test_runner import print_report

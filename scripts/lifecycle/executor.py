@@ -883,6 +883,23 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     dim_scores = report["dim_scores"]
     weakest_dim = self._get_weakest_dimension(dim_scores)
 
+    # v6.9.62: 维度完整性校验——正文章节轮期望全维度（DIMENSION_FLOOR 口径），
+    # critic 报告维度缺失（08-27 实证 attosecond r7 rationale 轮只解析出
+    # rigor/completeness 两维）会产生残缺口径均值，污染 score_history 与
+    # 天花板收敛/晋级判定（completion.py 已同步过滤 partial 轮）。
+    expected_dims = set(self.DIMENSION_FLOOR.keys())
+    dims_present = sorted(dim_scores.keys())
+    dims_partial = (
+        section_key in ("rationale", "content", "scheme")
+        and bool(expected_dims - set(dim_scores))
+    )
+    if dims_partial and _log:
+        _log.warning(
+            f"[{proposal_id}] r{round_num} {section_key} 维度解析不完整: "
+            f"{dims_present}（缺 {sorted(expected_dims - set(dim_scores))}），"
+            f"本轮分数为残缺口径"
+        )
+
     # v6.7.6: writer 修改前备份当前申请书，供 monitor 比对
     proposal_path = prop_dir / "04_proposal" / "proposal-draft.md"
     backup_path = prop_dir / "04_proposal" / f"proposal-draft-r{round_num - 1}.md"
@@ -1162,6 +1179,9 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         "quality_over_budget": (
             quality_gate_result.get("over_budget") if quality_gate_result else None
         ),
+        # v6.9.62: 维度完整性入史——残缺轮可观测，天花板/晋级检测过滤
+        "dims_partial": dims_partial,
+        "dims_present": dims_present,
         "ai_top_issues": (ai_check.get("top_issues") or [])[:6],
         # v6.9.30: 锚点对比结论随轮次入史——范本引导效果可观测
         # （达标/基本接近/差距明显；references 轮为空串）
@@ -1528,16 +1548,32 @@ def _run_monitor_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, 
             "monitor_result": monitor_result,
         }
 
-    deltas = ag.apply_monitor_result(
-        proposal_id=proposal_id,
-        round_num=round_num,
-        section_key=section_key,
-        score_before=score_before,
-        score_after=score_after,
-        dim_scores=dim_scores,
-        monitor_result=monitor_result,
-        proposal_state=prop_state,
+    # v6.9.62: 残缺维度轮跳过 agent 奖惩（对齐 v6.8.48 解析失败不误扣
+    # 模式）——critic 维度缺失时分数是残缺口径，据此加减 agent 分会误奖误罚。
+    _critic_dims = (self._read_critic_report(prop_dir, round_num).get("dim_scores") or {})
+    _dims_partial = (
+        section_key in ("rationale", "content", "scheme")
+        and bool(set(self.DIMENSION_FLOOR) - set(_critic_dims))
     )
+    if _dims_partial:
+        if _log:
+            _log.warning(
+                f"[{proposal_id}] r{round_num} {section_key} 维度残缺，"
+                f"跳过 agent 奖惩（残缺口径不参与分数调整）"
+            )
+        # 零增量（record_monitor_history 按 dict 取键，不可传 None）
+        deltas = {"writer_delta": 0, "critic_delta": 0, "skipped_partial_dims": True}
+    else:
+        deltas = ag.apply_monitor_result(
+            proposal_id=proposal_id,
+            round_num=round_num,
+            section_key=section_key,
+            score_before=score_before,
+            score_after=score_after,
+            dim_scores=dim_scores,
+            monitor_result=monitor_result,
+            proposal_state=prop_state,
+        )
 
     prop_state = ag.record_monitor_history(
         proposal_state=prop_state,

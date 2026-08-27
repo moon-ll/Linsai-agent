@@ -77,6 +77,17 @@ KB_SYNC_CRON_NAME = "lc-kb-sync"
 DEFAULT_KB_DISTILL_SCHEDULE = "50 12 * * *"  # 每天 12:50
 KB_DISTILL_CRON_NAME = "lc-kb-distill"
 
+# 每日用户数据备份 cron（v6.9.54 引入，v6.9.62 补入安装闭环 + 移窗）
+# 13:00（v6.9.62，原 03:17）——避开 00:30-03:30 worker 时段（zip 打包
+# 860MB 期间并发写可使 zf.write 抛 FileNotFoundError 致当日备份静默跳过）
+# 与 12:40/12:50 知识库任务链；午后无 worker 时段。
+DAILY_BACKUP_SCHEDULE = "0 13 * * *"  # 每天 13:00
+DAILY_BACKUP_CRON_NAME = "lc-daily-backup"
+
+# 每日日终同步 cron（v6.9.58 补录 manifest，v6.9.62 补入安装闭环）
+DAILY_SYNC_SCHEDULE = "0 23 * * *"  # 每天 23:00
+DAILY_SYNC_CRON_NAME = "lc-daily-sync"
+
 # stale 阈值：running 超过该秒数视为死锁
 # v6.8.3-fix9: 从 3600s 降低到 1800s（30min）。
 # critic/writer 的 timeout 见下方分级常量（900/1200s），正常执行最长 ~12min。

@@ -105,24 +105,28 @@ class CompletionMixin:
         CONVERGENCE_DELTA = 0.02
         if len(score_history) >= CONVERGENCE_ROUNDS + 1:
             recent = score_history[-(CONVERGENCE_ROUNDS + 1):]
-            recent_scores = [h["score"] for h in recent]
-            # v6.9.16 修复：窗口内全部轮次（含当前轮）都须 ≥0.80。
-            # 原实现只约束前 3 轮（recent_scores[:-1]），"3 轮高位平台后
-            # 当前轮骤降"（含伪分数污染，如实测 0.85→0.18）会被误判为
-            # 质量收敛而自动晋级 pending_review，掩盖质量回退。
-            if all(s >= CONVERGENCE_SCORE for s in recent_scores):
-                # 且每轮提升 <2%
-                deltas = [recent_scores[i + 1] - recent_scores[i] for i in range(len(recent_scores) - 1)]
-                if all(d < CONVERGENCE_DELTA for d in deltas):
-                    return {
-                        "done": True,
-                        "reason": (
-                            f"质量收敛：连续{CONVERGENCE_ROUNDS}轮分数≥{CONVERGENCE_SCORE:.2f}"
-                            f"且每轮提升<{CONVERGENCE_DELTA:.0%}，"
-                            f"当前{last_score:.2f}，建议人工审核确认"
-                        ),
-                        "quality_warning": None,
-                    }
+            # v6.9.62: 残缺维度轮（dims_partial，criter 维度解析不完整产生的
+            # 残缺口径均值）打断连续性——不参与收敛判定，防止残缺分数
+            # 触发自动晋级或污染平台检测。
+            if not any(h.get("dims_partial") for h in recent):
+                recent_scores = [h["score"] for h in recent]
+                # v6.9.16 修复：窗口内全部轮次（含当前轮）都须 ≥0.80。
+                # 原实现只约束前 3 轮（recent_scores[:-1]），"3 轮高位平台后
+                # 当前轮骤降"（含伪分数污染，如实测 0.85→0.18）会被误判为
+                # 质量收敛而自动晋级 pending_review，掩盖质量回退。
+                if all(s >= CONVERGENCE_SCORE for s in recent_scores):
+                    # 且每轮提升 <2%
+                    deltas = [recent_scores[i + 1] - recent_scores[i] for i in range(len(recent_scores) - 1)]
+                    if all(d < CONVERGENCE_DELTA for d in deltas):
+                        return {
+                            "done": True,
+                            "reason": (
+                                f"质量收敛：连续{CONVERGENCE_ROUNDS}轮分数≥{CONVERGENCE_SCORE:.2f}"
+                                f"且每轮提升<{CONVERGENCE_DELTA:.0%}，"
+                                f"当前{last_score:.2f}，建议人工审核确认"
+                            ),
+                            "quality_warning": None,
+                        }
 
         # v6.9.57: 次优平台检测——收敛线 0.85 在锚点达标前结构性不可达
         # （见上方注记），本检测把"贴近天花板的平台化"转为有效人工信号：
@@ -130,42 +134,48 @@ class CompletionMixin:
         # 由人工评估是否提前晋级验收（人工验收为主定位）。
         SUBOPTIMAL_FLOOR = 0.80
         if len(score_history) >= CONVERGENCE_ROUNDS + 1:
-            _recent = [h["score"] for h in score_history[-(CONVERGENCE_ROUNDS + 1):]]
-            if all(SUBOPTIMAL_FLOOR <= s < CONVERGENCE_SCORE for s in _recent):
-                _deltas = [_recent[i + 1] - _recent[i] for i in range(len(_recent) - 1)]
-                if all(abs(d) < CONVERGENCE_DELTA for d in _deltas):
-                    try:
-                        prop_state["quality_warning"] = (
-                            f"○ 次优平台：连续{CONVERGENCE_ROUNDS}轮分数在"
-                            f"{SUBOPTIMAL_FLOOR:.2f}-{CONVERGENCE_SCORE:.2f} 平台"
-                            f"（当前{last_score:.2f}），贴近程序化天花板（AI检测/锚点绑定），"
-                            f"自动提升空间有限，建议人工评估是否晋级验收"
-                        )
-                        # v6.9.59 修复：_get_proposal_state 每次从磁盘新读
-                        # （无缓存），not-done 返回路径若不显式落盘，警告只
-                        # 改了内存副本即丢失——单测 mock 返回同一 dict 引用
-                        # 曾掩盖此问题，生产端 review_dossier 永远读不到信号。
-                        self._set_proposal_state(proposal_id, prop_state)
-                    except Exception:
-                        pass  # 状态写入失败不阻断达标判定
+            _recent_all = score_history[-(CONVERGENCE_ROUNDS + 1):]
+            # v6.9.62: 残缺维度轮同样不参与平台检测（连续性被打断即不构成平台）
+            if not any(h.get("dims_partial") for h in _recent_all):
+                _recent = [h["score"] for h in _recent_all]
+                if all(SUBOPTIMAL_FLOOR <= s < CONVERGENCE_SCORE for s in _recent):
+                    _deltas = [_recent[i + 1] - _recent[i] for i in range(len(_recent) - 1)]
+                    if all(abs(d) < CONVERGENCE_DELTA for d in _deltas):
+                        try:
+                            prop_state["quality_warning"] = (
+                                f"○ 次优平台：连续{CONVERGENCE_ROUNDS}轮分数在"
+                                f"{SUBOPTIMAL_FLOOR:.2f}-{CONVERGENCE_SCORE:.2f} 平台"
+                                f"（当前{last_score:.2f}），贴近程序化天花板（AI检测/锚点绑定），"
+                                f"自动提升空间有限，建议人工评估是否晋级验收"
+                            )
+                            # v6.9.59 修复：_get_proposal_state 每次从磁盘新读
+                            # （无缓存），not-done 返回路径若不显式落盘，警告只
+                            # 改了内存副本即丢失——单测 mock 返回同一 dict 引用
+                            # 曾掩盖此问题，生产端 review_dossier 永远读不到信号。
+                            self._set_proposal_state(proposal_id, prop_state)
+                        except Exception:
+                            pass  # 状态写入失败不阻断达标判定
 
         # v6.8.16 改进1: 质量下降检测
         # 连续 3 轮分数下降 → 标记 quality_declining，附加质量警告
         DECLINE_ROUNDS = 3
         if len(score_history) >= DECLINE_ROUNDS + 1:
-            recent_scores = [h["score"] for h in score_history[-(DECLINE_ROUNDS + 1):]]
-            deltas = [recent_scores[i + 1] - recent_scores[i] for i in range(len(recent_scores) - 1)]
-            if all(d < 0 for d in deltas[-DECLINE_ROUNDS:]):
-                quality_warning = (
-                    f"⚠ 质量下降: 连续{DECLINE_ROUNDS}轮分数下降"
-                    f"（{recent_scores[-DECLINE_ROUNDS-1]:.2f}→{recent_scores[-1]:.2f}）。"
-                    f"建议人工干预检查优化方向。"
-                )
-                return {
-                    "done": True,
-                    "reason": f"连续{DECLINE_ROUNDS}轮质量下降，暂停自动优化",
-                    "quality_warning": quality_warning,
-                }
+            _decline_window = score_history[-(DECLINE_ROUNDS + 1):]
+            # v6.9.62: 残缺维度轮不参与下降判定（残缺口径均值骤降≠质量下降）
+            if not any(h.get("dims_partial") for h in _decline_window):
+                recent_scores = [h["score"] for h in _decline_window]
+                deltas = [recent_scores[i + 1] - recent_scores[i] for i in range(len(recent_scores) - 1)]
+                if all(d < 0 for d in deltas[-DECLINE_ROUNDS:]):
+                    quality_warning = (
+                        f"⚠ 质量下降: 连续{DECLINE_ROUNDS}轮分数下降"
+                        f"（{recent_scores[-DECLINE_ROUNDS-1]:.2f}→{recent_scores[-1]:.2f}）。"
+                        f"建议人工干预检查优化方向。"
+                    )
+                    return {
+                        "done": True,
+                        "reason": f"连续{DECLINE_ROUNDS}轮质量下降，暂停自动优化",
+                        "quality_warning": quality_warning,
+                    }
 
         # 条件2：连续N轮无提升（逃生阀）
         no_improve_limit = DEFAULT_NO_IMPROVEMENT_LIMIT

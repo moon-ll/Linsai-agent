@@ -63,15 +63,15 @@ CRON_MANIFEST: Dict[str, Dict[str, Any]] = {
         "depends": [],
     },
     "lc-daily-backup": {
-        "schedule": "17 3 * * *",
+        "schedule": "0 13 * * *",
         "category": "framework",
-        "purpose": "每日 03:17 用户数据备份（24h 幂等防重 + 轮转保留最近 7 份，v6.9.54）",
+        "purpose": "每日 13:00 用户数据备份（24h 幂等防重 + 轮转保留最近 7 份，v6.9.54；v6.9.62 由 03:17 移窗避开 worker 时段并发写、并补入 framework 安装闭环）",
         "depends": [],
     },
     "lc-daily-sync": {
         "schedule": "0 23 * * *",
         "category": "framework",
-        "purpose": "每日 23:00 日终同步 hermes 产出→知识库（sync_all；与 12:40 kb-sync 各覆盖半天进料，v6.9.58 补录——此前游离在清单外是拓扑对账盲区）",
+        "purpose": "每日 23:00 日终同步 hermes 产出→知识库（sync_all；与 12:40 kb-sync 各覆盖半天进料，v6.9.58 补录——此前游离在清单外是拓扑对账盲区；v6.9.62 补入安装闭环）",
         "depends": [],
     },
     KB_SYNC_CRON_NAME: {

@@ -17,6 +17,10 @@ from .constants import (
     KB_SYNC_CRON_NAME,
     DEFAULT_KB_DISTILL_SCHEDULE,
     KB_DISTILL_CRON_NAME,
+    DAILY_BACKUP_SCHEDULE,
+    DAILY_BACKUP_CRON_NAME,
+    DAILY_SYNC_SCHEDULE,
+    DAILY_SYNC_CRON_NAME,
     DEFAULT_WEEKEND_INPUT_SCHEDULE,
     DEFAULT_WEEKEND_OUTPUT_SCHEDULE,
     DEFAULT_WEEKEND_REFLECTION_SCHEDULE,
@@ -111,6 +115,10 @@ def cleanup_cron_duplicates(
             "lc-hourly-monitor",
             KB_SYNC_CRON_NAME,
             KB_DISTILL_CRON_NAME,
+            # v6.9.62（R2）：备份/日终同步纳入去重默认清单——
+            # 安装器已补，重复实例检测需同步覆盖
+            DAILY_BACKUP_CRON_NAME,
+            DAILY_SYNC_CRON_NAME,
         ]
     removed: List[Dict[str, str]] = []
     # 按 name 分组
@@ -271,6 +279,33 @@ def setup_cron_framework(
     )
     result["kb_distill"] = kb_distill
     result["success"] = result["success"] and kb_distill.get("success")
+
+    # v6.9.62（R2 闭环）：每日备份与日终同步 cron 安装——此前仅在
+    # cron_manifest 登记、靠手工实例存在（08-27 12h 健康检查 R2：teardown+
+    # setup 后永久消失且监控端结构性不可自愈），补齐安装路径。
+    extra_cleanup = self.cleanup_cron_duplicates(framework_names=["lc-daily-backup"])
+    for r in extra_cleanup:
+        if r["name"] not in removed:
+            removed.append(r["name"])
+    daily_backup = _cron_create_idempotent(
+        script_name="lc_daily_backup.sh",
+        name="lc-daily-backup",
+        schedule=DAILY_BACKUP_SCHEDULE,
+    )
+    result["daily_backup"] = daily_backup
+    result["success"] = result["success"] and daily_backup.get("success")
+
+    extra_cleanup = self.cleanup_cron_duplicates(framework_names=["lc-daily-sync"])
+    for r in extra_cleanup:
+        if r["name"] not in removed:
+            removed.append(r["name"])
+    daily_sync = _cron_create_idempotent(
+        script_name="lc_daily_sync.sh",
+        name="lc-daily-sync",
+        schedule=DAILY_SYNC_SCHEDULE,
+    )
+    result["daily_sync"] = daily_sync
+    result["success"] = result["success"] and daily_sync.get("success")
 
     return result
 

@@ -19,6 +19,7 @@ test_leak_guard.py — 测试基建防泄漏回归（v6.9.54）
 """
 
 import sys
+import shutil
 import tempfile
 import time
 from pathlib import Path
@@ -180,35 +181,37 @@ class LeakGuardSuite(TestSuite):
                 "keep<=0 防误配清空（不删除）")
 
         # ── 7. 学习机会缓存：TTL 判定逻辑 ──
+        # v6.9.62（R4）：隔离化——原实现直读/直写真实
+        # memory/.cache/learning-opps-cache.json（虽带备份还原，中途崩溃
+        # 仍会留下测试状态，违反零污染原则）。改为 patch 模块常量指向
+        # 临时文件，全程零接触真实数据。
         from datetime import datetime, timedelta, timezone
-        from proactive_engine import (
-            _LEARNING_OPPS_CACHE,
-            _learning_opps_cache_valid,
-        )
+        import proactive_engine as _pe
+        from proactive_engine import _learning_opps_cache_valid
         from common import save_json
         import json as _json
+        import tempfile as _tf
         old_ts = (datetime.now(timezone.utc) - timedelta(hours=7)).strftime("%Y-%m-%dT%H:%M:%SZ")
         fresh_ts = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
         deg_ts = (datetime.now(timezone.utc) - timedelta(minutes=30)).strftime("%Y-%m-%dT%H:%M:%SZ")
-        cache_backup = _LEARNING_OPPS_CACHE.read_text() if _LEARNING_OPPS_CACHE.exists() else None
+        _real_cache = _pe._LEARNING_OPPS_CACHE
+        _tmp_dir = Path(_tf.mkdtemp())
+        _pe._LEARNING_OPPS_CACHE = _tmp_dir / "learning-opps-cache.json"
         try:
-            save_json(_LEARNING_OPPS_CACHE, {"checked_at": old_ts, "signals": [{"x": 1}]})
+            save_json(_pe._LEARNING_OPPS_CACHE, {"checked_at": old_ts, "signals": [{"x": 1}]})
             valid, _ = _learning_opps_cache_valid()
             self.assert_true(not valid, "超过 6h 的缓存过期")
 
-            save_json(_LEARNING_OPPS_CACHE, {"checked_at": fresh_ts, "signals": [{"x": 1}]})
+            save_json(_pe._LEARNING_OPPS_CACHE, {"checked_at": fresh_ts, "signals": [{"x": 1}]})
             valid, sigs = _learning_opps_cache_valid()
             self.assert_true(valid and sigs == [{"x": 1}], "TTL 内缓存命中并返回 signals")
 
-            save_json(_LEARNING_OPPS_CACHE, {"checked_at": deg_ts, "signals": [], "degraded": True})
+            save_json(_pe._LEARNING_OPPS_CACHE, {"checked_at": deg_ts, "signals": [], "degraded": True})
             valid, _ = _learning_opps_cache_valid()
             self.assert_true(not valid, "降级条目超过 10 分钟即过期（快速重试）")
         finally:
-            # 还原现场（测试前不存在则删除）
-            if cache_backup is not None:
-                _LEARNING_OPPS_CACHE.write_text(cache_backup)
-            elif _LEARNING_OPPS_CACHE.exists():
-                _LEARNING_OPPS_CACHE.unlink()
+            _pe._LEARNING_OPPS_CACHE = _real_cache
+            shutil.rmtree(_tmp_dir, ignore_errors=True)
 
 
 if __name__ == "__main__":

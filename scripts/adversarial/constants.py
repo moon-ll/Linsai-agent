@@ -13,7 +13,10 @@ DEFAULT_INITIAL_SCORE = 100
 SCORE_MIN = 0
 SCORE_MAX = 150
 MONITOR_DELTA_CAP = 15
-MONITOR_TIMEOUT = 600
+# v6.9.62: 600→900。600s 在 MiniMax 慢速期连续触顶（08-27 new-idea monitor
+# 四连空输出超时）；v6.9.61 已把 monitor 输入从 120KB+（双份组装全文）压到
+# 评审视图+程序 diff+digest，900s 余量充足。
+MONITOR_TIMEOUT = 900
 
 ROLES = ["writer", "critic"]
 

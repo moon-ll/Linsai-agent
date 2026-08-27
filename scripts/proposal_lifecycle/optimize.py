@@ -1043,7 +1043,7 @@ class OptimizeMixin:
             f"  - programmatic_checks（程序化检测规则和表达质量天花板）\n"
             f"  - overall_review_requirements（整体评审要求，含防跑偏规则）\n"
             f"  - project_types.{project_type} 的评审标准与权重\n"
-            f"  - general_principles.writing_style_rules（叙述式写作规则）\n"
+            f"  - general_principles.writing_style_rules（叙述式写作规则）\n  - general_principles.scope_exclusion（范围排除：研究基础/工作条件/团队/经费不撰写不评审）\n"
             f"  - general_principles.writing_style_rules.anti_ai_patterns（去AI味清单）\n"
             f"  - general_principles.indicator_red_lines（P0指标红线）\n"
             f"  - general_principles.scoring_rubric（评分档位标准，必须逐条对照打分）\n"
@@ -1815,6 +1815,7 @@ class OptimizeMixin:
             f"  - general_principles.scoring_rubric（评分档位标准，写作时对标目标档位≥0.9）\n"
             f"  - reference_materials.style_benchmark（范本写作标杆摘要）\n"
             f"  - reference_materials.benchmark_anchors（范本锚点段落，写作时模仿其语体和论证密度）\n"
+            f"  - general_principles.scope_exclusion（范围排除：不撰写研究基础/工作条件/团队/经费内容）\n"
             f"【评审报告】{latest_critic}\n"
             f"{dim_focus}"
             f"{section_focus}"
@@ -1852,9 +1853,13 @@ class OptimizeMixin:
             f"  严禁把逐项对照表、处置记录、轮次说明写入该文件。\n"
             f"- 章节文件白名单（v6.9.61，程序守卫强制）：sections/ 下只允许\n"
             f"  rationale / content / scheme / full_review / references 五个模块，\n"
-            f"  严禁自创章节文件（如 research-foundation.md）——非白名单文件不进\n"
-            f"  申请书组装与评审，属内容静默丢失。研究基础/工作条件等 NSFC 模块\n"
-            f"  内容请并入 scheme.md 相应小节（或 content.md），不单独建文件。\n"
+            f"  严禁自创章节文件——非白名单文件不进申请书组装与评审，属内容\n"
+            f"  静默丢失。\n"
+            f"- 内容边界（v6.9.62，用户裁决）：申请书聚焦研究思路与研究内容，\n"
+            f"  严禁撰写研究基础/实验平台条件/设备参数/合作声明等内容——系统\n"
+            f"  不掌握申请人的真实平台与合作信息，此类内容写入必是虚构，\n"
+            f"  必须由申请人本人按实际情况补充。已有此类内容会被孤儿章节\n"
+            f"  守卫迁出存档。\n"
             f"\n"
             f"■ 内容质量纪律（v6.9.55，程序复检强制，字数本身不是判据）：\n"
             f"- 冗余是质量缺陷：同一论证不在多章节复述（跨章节重复句直接拦截），\n"
@@ -2609,10 +2614,21 @@ def _reference_source_preflight(prop_dir: Path, ref_text: str) -> list:
     if papers_dir.exists():
         for p in papers_dir.glob("*.md"):
             try:
-                # 只读头部 2KB 取 frontmatter，控制 IO（全库 700+ 篇）
+                # v6.9.62（R1 降噪）：原 gate 要求 head 含 doi:/arxiv 字样，
+                # 266/741 页被整页丢弃（其中不少页 frontmatter related 或
+                # 文件名含可提取 ID）；另有 187 个 ID 因 2KB head 截断漏检
+                # ——12h 健康检查实测 unmatched 误报率 20%-96%，公认经典
+                # 文献（Goulielmakis 2010、Krausz RMP）被标"虚构风险"。
+                # 两步降噪（不降低虚构检测灵敏度——只影响"有没有提取到"，
+                # 不影响"提取到的 ID 是否可信"）：
+                # ① 先读 head 2KB 提取（覆盖绝大多数 frontmatter，控 IO）；
+                # ② head 提取为空 → 回退全文提取（消除截断漏检）。
                 head = p.open(encoding="utf-8", errors="ignore").read(2048)
-                if "doi:" in head.lower() or "arxiv" in head.lower():
-                    pool.update(_collect_reference_ids(head))
+                ids = _collect_reference_ids(head)
+                if not ids:
+                    ids = _collect_reference_ids(
+                        p.read_text(encoding="utf-8", errors="ignore"))
+                pool.update(ids)
             except OSError:
                 continue
 

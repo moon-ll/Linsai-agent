@@ -213,6 +213,26 @@ python3 scripts/kb_linker.py --apply
 exit 0
 """.format(project=project)
 
+        # v6.9.62: 备份与日终同步 wrapper——此前仅在 manifest 登记、由手工
+        # 实例存在（teardown+setup 后永久消失，R2 安装闭环缺口），补齐生成。
+        daily_backup = """#!/bin/bash
+cd {project}
+# v6.9.54 每日用户数据备份（24h 幂等防重 + 轮转保留最近 7 份）。
+# v6.9.62: 03:17→13:00（R4）——避开 00:30-03:30 worker 时段（zip 打包
+# 860MB 期间并发写可使 zf.write 抛 FileNotFoundError 致当日备份静默跳过）
+# 与 12:40/12:50 知识库任务链。
+python3 scripts/backup_manager.py --daily
+exit 0
+""".format(project=project)
+
+        daily_sync = """#!/bin/bash
+cd {project}
+# v6.9.58 每日 23:00 日终同步 hermes 产出→知识库（与 12:40 kb-sync
+# 各覆盖半天进料）。
+python3 scripts/sync_engine.py
+exit 0
+""".format(project=project)
+
         return {
             "orchestrate": _write_wrapper_script("lc_orchestrate.sh", orchestrate),
             "repair": _write_wrapper_script("lc_repair.sh", repair),
@@ -225,6 +245,8 @@ exit 0
             "retrospective": _write_wrapper_script("lc_retrospective.sh", retrospective),
             "kb_sync": _write_wrapper_script("lc_kb_sync.sh", kb_sync),
             "kb_distill": _write_wrapper_script("lc_kb_distill.sh", kb_distill),
+            "daily_backup": _write_wrapper_script("lc_daily_backup.sh", daily_backup),
+            "daily_sync": _write_wrapper_script("lc_daily_sync.sh", daily_sync),
         }
 
     def _worker_script_for_proposal(self, proposal_id: str) -> Path:
