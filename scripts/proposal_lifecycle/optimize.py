@@ -2531,16 +2531,24 @@ def _references_preflight(prop_dir: Path) -> str:
 
 
 def _collect_reference_ids(text: str) -> set:
-    """从文本中收集 DOI 与 arXiv ID（归一化小写、去尾部标点）。"""
+    """从文本中收集 DOI 与 arXiv ID（归一化小写、去尾部标点）。
+
+    v6.9.59 修复：① DOI 排除集补全角标点（；，、）——实测条目形如
+    "DOI: 10.1364/OPTICA.510789；arXiv:2302.04127" 时全角分号不在
+    排除集，匹配吞成复合污染 ID 导致整条误报"虚构风险"（7 课题实测
+    9 条）；② arXiv 分支允许尾部句点/逗号并统一 rstrip，与 DOI 分支
+    对称（此前行尾 "arXiv:2302.04127." 整条漏提取）。
+    """
     import re as _re
     ids = set()
+    _tail = ".,;)】]”）)*`'\""
     ids.update(
-        m.lower().rstrip(".,;)】]")
-        for m in _re.findall(r"10\.\d{4,5}/[^\s,;）)\|]+", text)
+        m.lower().rstrip(_tail)
+        for m in _re.findall(r"10\.\d{4,5}/[^\s,;；，、）)\|]+", text)
     )
     ids.update(
-        m.lower()
-        for m in _re.findall(r"(?<![\d.])\d{4}\.\d{4,5}(?![\d.])", text)
+        m.lower().rstrip(_tail)
+        for m in _re.findall(r"(?<![\d.])\d{4}\.\d{4,5}(?!\d)", text)
     )
     return ids
 

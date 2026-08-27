@@ -803,6 +803,23 @@ class ReferencesPreflightTests(TestSuite):
         self.assert_true(any("[3]" in ln for ln in no_id_lines),
                          "无 ID 条目 [3] 应单独归类为无标识符")
 
+        # 8.6b（v6.9.59 回归）：ID 归一化抗污染——全角标点后缀/markdown
+        # 加粗/行尾句点不得产生复合污染 ID 或漏提取（7 课题实测 9 条误杀
+        # 形态："DOI: 10.1364/OPTICA.510789；arXiv:2302.04127."）。
+        from proposal_lifecycle.optimize import _collect_reference_ids
+        self.assert_eq(
+            _collect_reference_ids("DOI: 10.1364/OPTICA.510789；arXiv:2302.04127."),
+            {"10.1364/optica.510789", "2302.04127"},
+            "全角分号应截断 DOI，行尾句点不应吞入/漏掉 arXiv ID")
+        self.assert_eq(
+            _collect_reference_ids("参见 10.1088/0256-307x/43/2/020401** 已验证"),
+            {"10.1088/0256-307x/43/2/020401"},
+            "markdown 加粗尾缀 ** 不应污染 DOI")
+        self.assert_eq(
+            _collect_reference_ids("10.1038/s41566-025-01802-1，另见 2401.12345"),
+            {"10.1038/s41566-025-01802-1", "2401.12345"},
+            "全角逗号应截断 DOI 并独立提取相邻 arXiv ID")
+
         # 8.7 池空时跳过（课题早期不误报）——需临时隔离真实知识库根
         import proposal_lifecycle.optimize as _opt
         empty_tmp = self.tmp / "empty_case"
@@ -1263,6 +1280,49 @@ class SectionHygieneTests(TestSuite):
         self.assert_true(r["passed"], "干净章节应通过质量门")
         r = sh.quality_gate(sec4, "references", before_chars=100, prop_dir=None)
         self.assert_true(r["passed"], "references 无体量参考应恒通过")
+
+        # 12.5b（v6.9.59 回归）：正文存在跨章节重复时，references/
+        # full_review 的 writer 物理上无法修复正文冗余（指令约束只改
+        # 聚焦章节文件），不得被全局 cross 判据误拦导致晋级主路径封死
+        # （v6.9.55 重构丢失 v6.9.54 "无预算章节"出口的回归）。
+        dup_sentence = (
+            "本课题围绕强场物理与超快光学的交叉前沿展开系统性研究并建立定量表征框架。"
+        )
+        (sec4 / "rationale.md").write_text(
+            dup_sentence + "\n\n立项背景论述补充。" * 5, encoding="utf-8")
+        (sec4 / "content.md").write_text(
+            dup_sentence + "\n\n研究内容分层论述补充。" * 5, encoding="utf-8")
+        r_body = sh.quality_gate(sec4, "rationale", before_chars=100,
+                                 prop_dir=self.tmp / "general-hhg-floquet-test-20260101")
+        self.assert_true(
+            not r_body["passed"], "正文章节跨章节重复仍应拦截（评审红线）")
+        for non_body in ("references", "full_review"):
+            r_nb = sh.quality_gate(sec4, non_body, before_chars=100,
+                                   prop_dir=self.tmp / "general-hhg-floquet-test-20260101")
+            self.assert_true(
+                r_nb["passed"],
+                f"{non_body} 不应被正文跨章节冗余误拦（writer 无权改正文）",
+            )
+        # 12.5c（v6.9.59 设计边界固化）：detect_redundancy 只扫描三个
+        # 正文章节（L480），references/full_review 的结构卫生由写入门卫
+        # （guard_written_artifacts：工作日志剥离/骨架迁移）专职负责，
+        # 质量门对二者为"零信息通过"——句子重复检测对文献条目列表天然
+        # 失真（条目格式相似会误报），此分工即 v6.9.54"无预算章节恒
+        # 通过"出口的本意。此处固化该边界，防止未来误扩展。
+        (sec4 / "references.md").write_text(
+            "# 参考文献\n\n" + (dup_sentence + "\n\n") * 3, encoding="utf-8")
+        r_within = sh.quality_gate(sec4, "references", before_chars=100,
+                                   prop_dir=self.tmp / "general-hhg-floquet-test-20260101")
+        self.assert_true(
+            r_within["passed"],
+            "references 不在 detect_redundancy 扫描范围，质量门零信息通过（卫生归 guard）")
+        g_ref = sh.strip_references_worklog(self.tmp / "general-hhg-floquet-test-20260101")
+        self.assert_true(
+            g_ref is None or isinstance(g_ref, str),
+            "references 结构卫生走专职 guard 路径（不抛异常即通过）")
+        (sec4 / "references.md").write_text(
+            "# 参考文献\n\n[1] Zhang Y. et al. Nature 1, 1 (2020).\n",
+            encoding="utf-8")
 
         # 12.6 写入门卫：污染落盘后当场修复（零存活）
         (sec3 / "scheme.md").write_text(

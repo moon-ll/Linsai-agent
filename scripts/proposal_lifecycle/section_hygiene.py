@@ -257,7 +257,13 @@ def migrate_full_review_record(prop_dir: Path, dry_run: bool = False) -> Optiona
         f"<!-- v6.9.53 从 04_proposal/sections/full_review.md 迁出的核查记录 -->\n"
         f"<!-- 迁移时间：{_now_utc()}。full_review.md 已重写为全文逻辑骨架。 -->\n\n"
     )
-    out.write_text(header + text, encoding="utf-8")
+    # v6.9.59 修复：同日二次迁移改为追加（writer 污染反复复发时，首次
+    # 记录不再被覆盖丢失——产出即资产）。
+    if out.exists():
+        with out.open("a", encoding="utf-8") as f:
+            f.write(f"\n\n---\n\n<!-- 追加迁移：{_now_utc()} -->\n\n" + text)
+    else:
+        out.write_text(header + text, encoding="utf-8")
     fr.write_text(generate_skeleton(sec_dir), encoding="utf-8")
     return str(out)
 
@@ -323,7 +329,13 @@ def strip_references_worklog(prop_dir: Path, dry_run: bool = False) -> Optional[
         f"<!-- v6.9.53 从 04_proposal/sections/references.md 剥离的工作日志 -->\n"
         f"<!-- 剥离时间：{_now_utc()}。references.md 仅保留文献条目与条目内注释。 -->\n\n"
     )
-    out.write_text(header + "\n\n---\n\n".join(moved), encoding="utf-8")
+    # v6.9.59 修复：同日二次剥离改为追加，不覆盖首次记录（同上）。
+    payload = "\n\n---\n\n".join(moved)
+    if out.exists():
+        with out.open("a", encoding="utf-8") as f:
+            f.write(f"\n\n---\n\n<!-- 追加剥离：{_now_utc()} -->\n\n" + payload)
+    else:
+        out.write_text(header + payload, encoding="utf-8")
     rp.write_text("\n\n".join(keep).rstrip() + "\n", encoding="utf-8")
     return str(out)
 
@@ -608,13 +620,26 @@ def quality_gate(
     budget = SECTION_BUDGETS.get(section_key)
     over_budget = bool(budget and after > budget[1])
 
+    # v6.9.59 修复：跨章节冗余产生于三个正文章节之间，也只有正文
+    # writer（每轮聚焦一个章节、被授权修改该章节）才可能消除。
+    # references/full_review 的 writer 被指令约束"只修改聚焦章节文件"，
+    # 物理上无法修复正文冗余——对非正文章节套用全局 cross 判据会让
+    # 这两类 job 永远 passed=False，晋级主路径（5 模块全通过）被系统
+    # 性封死。v6.9.54 的"无预算章节恒通过"出口在 v6.9.55 重构时意外
+    # 丢失，本修复恢复该语义：非正文章节零信息通过——其结构卫生由
+    # 写入门卫（guard_written_artifacts）专职负责（工作日志剥离/
+    # 骨架迁移），句子重复检测对文献条目列表天然失真。
+    is_body_section = section_key in SECTION_BUDGETS
+
     redundancy = {"within": [], "cross": []}
     irrelevant: List[Dict[str, Any]] = []
     try:
         redundancy = detect_redundancy(sections_dir)
     except Exception:
         pass
-    if prop_dir is not None:
+    # 无关检测仅对正文章节适用：references 是文献条目列表、
+    # full_review 是逻辑骨架，核心术语锚定对二者天然失真。
+    if prop_dir is not None and is_body_section:
         try:
             # 无锚定则无法判定相关性——核心术语为空时跳过无关检测，
             # 避免空集导致"全部段落零命中"的误拦（fail-safe）。
@@ -623,9 +648,13 @@ def quality_gate(
         except Exception:
             irrelevant = []
 
-    # 判定 ①：跨章节重复
-    cross_exact = [c for c in redundancy["cross"] if c["kind"] == "exact"]
-    cross_sim = [c for c in redundancy["cross"] if c["kind"] == "similar"]
+    # 判定 ①：跨章节重复（仅正文章节作为拦截依据；检测结果仍随
+    # result 携带，供 critic prompt 注入线索）
+    if is_body_section:
+        cross_exact = [c for c in redundancy["cross"] if c["kind"] == "exact"]
+        cross_sim = [c for c in redundancy["cross"] if c["kind"] == "similar"]
+    else:
+        cross_exact, cross_sim = [], []
     # 判定 ②：章节内重复（聚焦章节自身的）——任一句重复 ≥3 次
     # 或 ≥3 组不同句子各自重复，均为成片复制信号
     within_sec = [w for w in redundancy["within"] if w["section"] == section_key]
@@ -755,7 +784,11 @@ def _self_check() -> bool:
         assert rep["rationale"]["status"] == "over", "超限章节应标 over"
         assert rep["content"]["status"] == "ok", "预算内章节应标 ok"
         txt = budget_report_text(sec, focus_key="rationale")
-        assert "净删" in txt and "削减至" in txt, "量化指令应包含削减目标"
+        # v6.9.59 修复：断言同步 v6.9.55 重构语义——预算报告为纯信息性
+        # 体量参考（"削减目标"量化指令已由质量检测器接管），不再包含
+        # "净删/削减至"字样。
+        assert "章节体量参考" in txt and "参考上限之上" in txt, "体量参考应标注超限章节"
+        assert "优先排查冗余" in txt, "超限提示应引导排查冗余（v6.9.55 语义）"
 
         # 2. full_review 迁移 + 骨架
         (sec / "scheme.md").write_text(

@@ -141,6 +141,11 @@ class CompletionMixin:
                             f"（当前{last_score:.2f}），贴近程序化天花板（AI检测/锚点绑定），"
                             f"自动提升空间有限，建议人工评估是否晋级验收"
                         )
+                        # v6.9.59 修复：_get_proposal_state 每次从磁盘新读
+                        # （无缓存），not-done 返回路径若不显式落盘，警告只
+                        # 改了内存副本即丢失——单测 mock 返回同一 dict 引用
+                        # 曾掩盖此问题，生产端 review_dossier 永远读不到信号。
+                        self._set_proposal_state(proposal_id, prop_state)
                     except Exception:
                         pass  # 状态写入失败不阻断达标判定
 

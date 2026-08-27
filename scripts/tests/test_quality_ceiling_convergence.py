@@ -22,6 +22,7 @@ v6.9.27：收敛线随达标线整体上调（0.80→0.85），测试数据同�
     python3 scripts/tests/test_quality_ceiling_convergence.py
 """
 
+import copy
 import sys
 import importlib
 
@@ -46,16 +47,23 @@ class QualityCeilingConvergenceTests(TestSuite):
         importlib.import_module("proposal_lifecycle.completion")
         from proposal_lifecycle.completion import CompletionMixin
 
-        # 最小实例：mock 状态读写，不触发 LLM / 日志
+        # 最小实例：mock 状态读写，不触发 LLM / 日志。
+        # v6.9.59 修复回归：mock 升级为生产语义——_get_proposal_state
+        # 每次从"磁盘"新读（common.load_json 无缓存、返回新 dict），
+        # _set_proposal_state 才落盘。此前 mock 返回同一 dict 引用，
+        # 恰好掩盖了次优平台 quality_warning not-done 路径不落盘的丢写
+        # 缺陷（v6.9.57 引入，v6.9.59 修复）。
         class _StateHolder:
             def __init__(self):
-                self._state = {}
+                self._disk = {}
+                self.set_calls = []
 
             def _get_proposal_state(self, proposal_id):
-                return self._state
+                return copy.deepcopy(self._disk.get(proposal_id))
 
             def _set_proposal_state(self, proposal_id, state):
-                self._state = state
+                self._disk[proposal_id] = copy.deepcopy(state)
+                self.set_calls.append(proposal_id)
                 return True
 
         class _FakeComp(CompletionMixin, _StateHolder):
@@ -73,7 +81,7 @@ class QualityCeilingConvergenceTests(TestSuite):
         sections = ["rationale", "content", "scheme", "full_review", "references"]
 
         def _state(scores):
-            comp._state = {
+            comp._set_proposal_state("p1", {
                 "status": "optimizing",
                 "score_history": [{"score": s} for s in scores],
                 "last_score": scores[-1],
@@ -81,7 +89,7 @@ class QualityCeilingConvergenceTests(TestSuite):
                 "optimization_rounds": len(scores),
                 "monitor_history": [],
                 "open_critical_issues": [],
-            }
+            })
 
         # ---------- 1. 稳定收敛：4×0.86 平台 → done=True ----------
         _state([0.83, 0.86, 0.86, 0.86, 0.86])
@@ -117,13 +125,19 @@ class QualityCeilingConvergenceTests(TestSuite):
         _state([0.79, 0.81, 0.82, 0.82, 0.82])
         res5 = comp._check_done("p1", threshold)
         self.assert_eq(res5["done"], False, "0.80-0.85 平台不自动晋级（人工验收为主）")
+        # v6.9.59 修复回归：not-done 路径必须显式落盘——mock 为磁盘新读
+        # 语义后，重读可见才算真正写入（修复前只改内存副本即丢失）。
+        self.assert_in(
+            "p1", comp.set_calls, "次优平台警告应显式落盘（not-done 路径）")
         warned = comp._get_proposal_state("p1").get("quality_warning") or ""
         self.assert_in("次优平台", warned, "次优平台应写 quality_warning 供人工评估")
         self.assert_in("人工评估", warned, "warning 应建议人工评估")
 
         # ---------- 6. 次优平台不误伤：窗口含 <0.80 轮次 → 不标记 ----------
         _state([0.78, 0.82, 0.82, 0.82])
-        comp._get_proposal_state("p1")["quality_warning"] = None
+        st6 = comp._get_proposal_state("p1")
+        st6["quality_warning"] = None
+        comp._set_proposal_state("p1", st6)
         comp._check_done("p1", threshold)
         warned6 = comp._get_proposal_state("p1").get("quality_warning") or ""
         self.assert_true(

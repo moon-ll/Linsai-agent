@@ -1,5 +1,60 @@
 # 变更记录
 
+## v6.9.59 - 2026-08-27 12h 健康检查：v6.9.53-57 六缺陷定向修复（晋级主路径解封 + 预检误杀 + 丢写/丢记录）
+
+三层诊断（运行时健康 + 代码缺陷 + 设计一致性 #4/#5/#6）发现并修复：
+
+- **质量门误伤非正文章节（严重，引爆前拦截）**：v6.9.55 把预算门重构
+  为质量门时丢失 v6.9.54"无预算章节恒通过"出口，且 cross 判据全局
+  化——7/7 课题正文存在跨章节重复（cross_exact 1~20）时，
+  references/full_review 轮 writer（指令约束只改聚焦章节，物理上
+  无法消除正文冗余）永远 passed=False，晋级主路径（5 模块全通过）
+  被系统性封死，且静默空转无告警；_lifecycle 中 quality_gate_passed
+  零次出现 = 新代码路径尚无真实 writer job 执行，未引爆即修复。
+  修复：非正文章节零信息通过；设计边界固化为显式语义——
+  detect_redundancy 只扫三正文章节，references/full_review 结构卫生
+  由写入门卫（guard_written_artifacts）专职负责（测试 12.5b/12.5c
+  防回归）。真实数据验证：moire/attosecond 的 references/full_review
+  恢复通过，rationale 保持拦截（3 exact + 17 similar）。
+- **section_hygiene --self-check 断言过时（复现失败）**：v6.9.55 将
+  budget_report_text 重构为纯信息性体量参考后，_self_check 仍断言
+  "净删/削减至"字样 → 自检必然失败；断言同步新语义。
+- **次优平台 quality_warning 生产端丢写（v6.9.57 功能死到达）**：
+  _get_proposal_state 每次磁盘新读无缓存，completion.py 次优平台分支
+  只写内存副本、not-done 路径无落盘调用 → 警告即写即丢，
+  review_dossier 永远读不到；单测 mock 返回同一 dict 引用恰好掩盖。
+  修复：写入后 _set_proposal_state 落盘；测试 mock 升级为磁盘新读
+  语义（deepcopy + set_calls 断言），此类丢写从此可被测出。
+- **references 预检 ID 归一化全角标点污染（7 课题实测 9 条合法文献
+  误杀）**：DOI 正则排除集不含全角"；，、"，"DOI: 10.1364/...；arXiv:
+  ..."吞成复合污染 ID 无法命中可信池 → 误报"虚构风险"；同类还有
+  markdown ** 尾缀；arXiv 分支行尾句点整条漏提取。修复：排除集补
+  全角标点 + DOI/arXiv 双分支统一 rstrip + arXiv lookahead 放宽尾部
+  句点（测试 8.6b 三组真实形态）。
+- **guard 迁移产物同日覆盖丢首次记录**：full-review-record-{date}.md
+  固定日期文件名 + write_text 覆盖写，writer 污染同日复发时首次记录
+  丢失（违反"产出即资产"）；references-worklog 同构。修复：文件已
+  存在改追加（带时间戳分隔注释）。
+- **prune_backups 误删应急备份**：按 mtime 保留 backups/ 顶层全部
+  zip 最近 7 份，含 *-manual.zip / *-pre-restore.zip（restore 撤销
+  安全网）——daily 连跑 7 天后应急备份被静默 unlink；排除出轮转候选。
+- **报告不修（待人工裁决 R1-R4）**：R1 可信池 gate 比提取器严
+  （head 预筛丢 266/741 页 + 2KB 截断 + 池不含学科经典 → unmatched
+  误报率 20%-96%，真实经典文献被标"虚构风险集中区"）；R2
+  lc-daily-backup/lc-daily-sync 入 cron_manifest 但 framework 安装器
+  /controller wrapper 不含（teardown+setup 后备份 cron 消失且不可
+  自愈）；R3 self_test _run_selected 仍旧调度（v6.9.56 teardown 修复
+  只覆盖全量入口）；R4 03:17 备份与 00:30-03:30 worker 时段重叠。
+- **设计一致性抽查（第十一轮 #4/#5/#6）**：Agent 分数奖惩闭环正常
+  （writer 73.1/critic 125.775 有界 + 跨课题 round_ref 闭环）；Prompt
+  优化器正常（库存 12 条新鲜，TARGET_PROFILES 5/7 偏差维持）；P0 跨
+  轮持久化正常（注入链经大改后完好）。下一批 #7/#8/#9。
+- **调度链路澄清**：lc-* cron 由 hermes gateway 内置调度器承载
+  （~/.hermes/profiles/linsai/），系统 crontab 为空属正常部署形态。
+- 验证：py_compile 4 文件通过；section_hygiene --self-check 通过；
+  归一化/质量门真实数据端到端通过；self_test --module **1164/1164
+  全绿**（基线 1155 + 新增 9 断言）。
+
 ## v6.9.58 - 2026-08-27 架构审计落地：前端断层修复 + 输入链路查重 + 死代码激活 + 对账盲区消除
 
 按架构级审计清单逐项处置（前端 13 天未更新/295 条后端路由活 UI 仅触达 30%）：

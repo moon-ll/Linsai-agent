@@ -210,6 +210,10 @@ def prune_backups(keep: int = DAILY_BACKUP_KEEP, backups_dir: Optional[Path] = N
 
     仅处理 backups/ 顶层的 *.zip；子目录（如 input-chain-fix-20260816）
     与非 zip 文件不动。keep <= 0 时不删除任何文件（防误配清空）。
+
+    v6.9.59 修复：*-manual.zip / *-pre-restore.zip 是人工应急与恢复
+    撤销安全网，不参与每日轮转——否则 auto 备份连跑 keep 天后应急
+    备份被静默 unlink（违反"备份优先/恢复可验证"原则）。
     """
     if keep <= 0:
         return []
@@ -217,7 +221,8 @@ def prune_backups(keep: int = DAILY_BACKUP_KEEP, backups_dir: Optional[Path] = N
     if not root.exists():
         return []
     zips = sorted(
-        (p for p in root.glob("*.zip") if p.is_file()),
+        (p for p in root.glob("*.zip")
+         if p.is_file() and not p.stem.endswith(("-manual", "-pre-restore"))),
         key=lambda p: p.stat().st_mtime,
         reverse=True,
     )
