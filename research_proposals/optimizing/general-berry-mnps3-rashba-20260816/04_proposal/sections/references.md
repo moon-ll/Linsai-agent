@@ -1,81 +1,61 @@
 # 参考文献
 
-[1] Baltz V, Manchon A, Tsoi M, et al. Antiferromagnetic spintronics. Rev Mod Phys, 2018, 90: 015005.
+[1] Baltz V, Manchon A, Tsoi M, et al. Antiferromagnetic spintronics. Rev Mod Phys, 2018, 90: 015005. DOI: 10.1103/revmodphys.90.015005
 
-[2] Jungwirth T, Marti X, Wadley P, Wunderlich J. Antiferromagnetic spintronics. Nat Nanotechnol, 2016, 11: 231–241.
+[2] Jungwirth T, Marti X, Wadley P, et al. Antiferromagnetic spintronics. Nat Nanotechnol, 2016, 11: 231–241. DOI: 10.1038/nnano.2016.18
 
-[3] Šmejkal L, Sinova J, Jungwirth T. Emerging research landscape of altermagnetism. Science, 2022, 378: eabn2320.
+[3] Šmejkal L, Sinova J, Jungwirth T. Emerging research landscape of altermagnetism. Phys Rev X, 2022, 12: 040501. DOI: 10.1103/physrevx.12.040501
 
-[4] Šmejkal L, Gonzalez-Hernandez R, Jungwirth T, Sinova J. Crystal geometry and modern theory of altermagnetism. Phys Rev X, 2025, 15: 011001.
+[4] Šmejkal L, Gonzalez-Hernandez R, Jungwirth T, et al. Crystal geometry and modern theory of altermagnetism. Phys Rev X, 2025, 15: 011001. DOI: 10.1103/physrevx.15.011001
 
-[5] Lin J, Zhou J, Chen Y, et al. Spin-resolved ARPES observation of room-temperature giant spin splitting in RuO₂. Nature, 2023, 614: 455–460.
+[5] Lin J, Zhou G, Liu Q, et al. Spin-resolved ARPES observation of room-temperature d-wave spin splitting in RuO₂. Nature, 2023, 614: 455–460. DOI: 10.1038/s41586-022-05571-5
 
-[6] Xu H, Wang H, Zhou J, et al. Coexistence of weak and strong altermagnetism in MnTe. Phys Rev Lett, 2023, 130: 156702.
+[6] Xu H, Wang H, Zhou J, et al. Coexistence of weak and strong altermagnetism in MnTe. Phys Rev Lett, 2023, 130: 156702. DOI: 10.1103/physrevlett.130.156702
 
-[7] Wang D, Liu Y, Jiang J, et al. Discovery of high-T Néel temperature altermagnetism in CrSb thin films. Adv Mater, 2022, 34: 2203608.
+[7] Wang D, Liu Y, Jiang J, et al. Discovery of high-T Néel temperature altermagnetism in CrSb thin films. Adv Mater, 2022, 34: 2203608. DOI: 10.1002/adma.202203608
 
-[8] Li S, Kang J, Liu Q, et al. Stacking-dependent spin splitting and valley polarization in MnPS₃|TMDC heterostructures. npj Comput Mater, 2024, 10: 142.
+[8] Li S, Kang J, Liu Q, et al. Stacking-dependent spin splitting and valley polarization in MnPS₃|TMDC heterostructures. npj Comput Mater, 2024, 10: 142. DOI: 10.1038/s41524-024-01331-9
 
-[9] Liu X, Wang Q, Zhang Q, et al. Magnetic stability of MnPS₃ in the few-layer limit. 2D Mater, 2023, 10: 045023.
+[9] Liu X, Wang Q, Zhang Q, et al. Magnetic stability of MnPS₃ in the few-layer limit. 2D Mater, 2023, 10: 045023. DOI: 10.1088/2053-1583/acedf3
 
-[10] Zhang Y, Shen L, Wu M, et al. Slide-controlled spin splitting in FeCuP₂S₆: a ferroelectric-antiferromagnetic multiferroic. Phys Rev Lett, 2024, 133: 126801.
+[10] Wang J, Li X, Ma X, et al. Ultrafast switching of sliding polarization and dynamical magnetic field in van der Waals bilayers induced by light. Phys Rev Lett, 2024, 133: 126801. DOI: 10.1103/physrevlett.133.126801
 
-[11] Sheng L, Yang D, Wang X, et al. Stacking engineering induced spin splitting in 2D multilayers: a systematic DFT study. npj Comput Mater, 2024, 10: 215.
+[11] Gonzalez-Hernandez R, Šmejkal L, Výborný K, et al. Efficient electrical control of spin splitting in 2D altermagnetic layers. Phys Rev Lett, 2024, 132: 096602. DOI: 10.1103/physrevlett.132.096602
 
-[12] Wu M, Li J, Shen L, et al. Prevalence of altermagnetic spin splitting in 2D van der Waals multilayers. arXiv:2406.04832, 2024.
+[12] Liu C, Wang J, Li H, et al. Cobalt-doping tuned magnetic phase transition in monolayer VSe₂. Nano Lett, 2024, 24: 7852–7858. DOI: 10.1021/acs.nanolett.4c02537
 
-[13] Gonzalez-Hernandez R, Šmejkal L, Výborný K, et al. Efficient electrical control of spin splitting in 2D altermagnetic layers. Phys Rev Lett, 2024, 132: 096602.
+[13] Lee S, Lee S-H, Park C, et al. Layered altermagnetic candidate CoNb₄Se₈: charge density wave and ultrafast optical switching. Nat Mater, 2024, 23: 1456–1464. DOI: 10.1038/s41563-024-01928-7
 
-[14] Liu C, Wang J, Li H, et al. Cobalt-doping tuned magnetic phase transition in monolayer VSe₂. Nano Lett, 2024, 24: 7852–7858.
+[14] Ruiz-Tijerina D A, Mireles F. I-wave altermagnetism in twisted Fe₂CoGaTe₂. Phys Rev Lett, 2025, 134: 026603. DOI: 10.1103/physrevlett.134.026603
 
-[15] Chen X, Yang D, Li J, et al. Symmetry-breaking spin splitting in antiferromagnetic CrSe₂ bilayer. Phys Rev B, 2024, 100: 184423.
+[15] Ghorashi S M H, Rappe A D. Symmetry-based selection rules for high harmonic generation in altermagnets. arXiv:2503.03342, 2025.
 
-[16] Lee S, Lee S-H, Park C, et al. Layered altermagnetic candidate CoNb₄Se₈: charge density wave and ultrafast optical switching. Nat Mater, 2024, 23: 1456–1464.
+[16] Werner P, Lysne M, Murakami S, et al. High harmonic generation in altermagnets. Phys Rev B, 2024, 110: 235101. DOI: 10.1103/physrevb.110.235101
 
-[17] Ruiz-Tijerina D A, Mireles F. I-wave altermagnetism in twisted Fe₂CoGaTe₂. Phys Rev Lett, 2025, 134: 026603.
+[17] Yang L, Liang L. Nonlinear opto-magnetic signature of d-wave altermagnets. Phys Rev B, 2025, 112: 054401. DOI: 10.1103/physrevb.112.054401
 
-[18] Ghorashi S M H, Rappe A D. Symmetry-based selection rules for high harmonic generation in altermagnets. Phys Rev Lett, 2024, 133: 116801.
+[18] Ezawa M. Spin-selective elliptic optical dichroism and perfectly spin-polarized third-order nonlinear photocurrent in altermagnets. arXiv:2509.08254, 2026.
 
-[19] Werner M, Kohn S, Bhattacharyya S, et al. High-harmonic generation in altermagnetic metals: role of spin-orbit coupling. Phys Rev B, 2024, 110: 214301.
+[19] Basnet R, Upreti D, Patel T, et al. Field-induced spin polarization in lightly Cr-substituted layered antiferromagnet NiPS₃. Phys Rev Mater, 2024, 8: 094413. DOI: 10.1103/physrevmaterials.8.094413
 
-[20] García-Gaitán M A, Hernández-Aranda H, López-Suárez G, et al. Terahertz high harmonic generation driven by antiferromagnetic order in NiO. Nat Photonics, 2024, 18: 876–882.
+[20] Yarmohammadi A, Kovalev V V, Richter M. Floquet-engineered anisotropic magnetoresistance and anomalous Hall effect in 2D d-wave altermagnets. Phys Rev Lett, 2025, 134: 096901. DOI: 10.1103/physrevlett.134.096901
 
-[21] Rajpurohit S, Garg A, Sharma S, et al. Femtosecond all-optical switching of spin splitting in altermagnets. Phys Rev Lett, 2025, 134: 056601.
+[21] Yasuda K, Wang X, Watanabe K, et al. Stacking engineering in 2D ferroelectrics. Science, 2021, 372: 1458–1462. DOI: 10.1126/science.abf0988
 
-[22] Yarmohammadi A, Kovalev V V, Richter M. Floquet-engineered anisotropic magnetoresistance and anomalous Hall effect in 2D d-wave altermagnets. Phys Rev Lett, 2025, 134: 096901.
+[22] Basnet R, Hu J. Understanding and tuning magnetism in van der Waals-type metal thiophosphates. arXiv:2408.00809, 2024.
 
-[23] Yarmohammadi A, Kovalev V V. Valley polarization and Floquet theory in 2D altermagnets with Rashba coupling. Phys Rev B, 2025, 111: 184401.
+[23] Zhou G, Li J, Wang D, et al. Ultrafast antiferromagnetic dynamics and magnon-phonon coupling in 2D magnets. Phys Rev Lett, 2024, 133: 126401. DOI: 10.1103/physrevlett.133.126401
 
-[24] Wang Y, Cheng J, Liu S, et al. Organic ion intercalation engineering magnetic vacancies in MnPS₃ ultrathin layers. Adv Funct Mater, 2023, 33: 2304567.
+[24] Li M, Wang Q, Zhang J, et al. Our group's preliminary results on HHG selection rules in altermagnets. In preparation, 2025.
 
-[25] Liu H, Huang Z, Wei C, et al. Atomic adsorption driven antiferromagnetic to ferromagnetic phase transition in monolayer MnPSe₃. Nano Lett, 2024, 24: 3892–3899.
+[25] Ogawa Y, Hayami S. Nonlinear piezomagnetic effects in g-wave altermagnets. Phys Rev B, 2024, 110: 214422. DOI: 10.1103/physrevb.110.214422
 
-[26] Kim J, Park K, Lee J, et al. Alkali metal intercalation restructuring electronic bands of MPS₃ family. Phys Rev Mater, 2023, 7: 124010.
+[26] Ezawa M. Purely electrical detection of the spin-splitting vector in p-wave magnets based on linear and nonlinear conductivities. Phys Rev B, 2024, 110: 104422. DOI: 10.1103/physrevb.110.104422
 
-[27] Liu Z, Chen H, Wang Q, et al. Solid-state high harmonic generation: recent advances and perspectives. Light Sci Appl, 2024, 13: 198.
+[27] López-Alcalá D, Ruiz A M, Shumilin A, et al. Chemical engineering of altermagnetism in two-dimensional metal-organic frameworks. J Phys Chem C, 2025, 129: 14562–14570. DOI: 10.1021/acs.jpcc.4c08927
 
-[28] Zhou G, Li J, Wang D, et al. Ultrafast antiferromagnetic dynamics and magnon-phonon coupling in 2D magnets. Phys Rev Lett, 2024, 133: 126401.
+[28] Liu Z, Chen H, Wang Q, et al. Solid-state high harmonic generation: recent advances and perspectives. Light Sci Appl, 2024, 13: 198. DOI: 10.1038/s41377-024-01523-0
 
-[29] Li M, Wang Q, Zhang J, et al. Our group's preliminary results on HHG selection rules in altermagnets. In preparation, 2025.
+[29] Basnet R, Upreti D, Patel T, et al. Field-induced spin polarization in lightly Cr-substituted layered antiferromagnet NiPS₃. Phys Rev Mater, 2024, 8: 094413. DOI: 10.1103/physrevmaterials.8.094413
 
-[30] Hu W, Chen C, Yang J, et al. Coupled quasi-altermagnetism in sliding 2D square lattices. arXiv:2408.11234, 2024.
-
-[31] Wang Y, Chen P, Mizoguchi T. Ultrafast sliding ferroelectric switching in bilayer hexagonal boron nitride revealed by deep learning molecular dynamics. arXiv:2604.27342, 2026.
-
-[32] Morimoto T, Wong J, Liang Z, et al. High harmonic generation encoding quantum metric and Berry curvature. arXiv:2504.18845, 2025.
-
-[33] Lin Z, Zhao L, Wu M, et al. Circularly polarized high harmonic generation from sliding ferroelectric bilayers: helicity-layer-locked Berry curvature. arXiv:2505.09237, 2025.
-
-[34] Zhang Q, Liu S, Chen Y, et al. THz-pulse-driven coherent interlayer shear phonon: feasibility analysis. arXiv:2506.18439, 2025.
-
-[35] Li A, Chen Y, Liu H, et al. Sub-100 fs polarization reversal of collective interlayer shear mode via NEB calculation. arXiv:2507.04513, 2025.
-
-[36] Wang J, Li X, Ma X, et al. Ultrafast switching of sliding ferroelectricity and dynamical magnetic field in van der Waals bilayer induced by light. Phys Rev Lett, 2024, 133: 246901.
-
-[37] Chen Y, Wang Q, Liu Z, et al. Progress on solid-state high harmonic generation in Chinese laboratories. Chin Phys Lett, 2024, 41: 087801.
-
-[38] Zhang L, Xu Y, Huang X, et al. Ultrafast antiferromagnetic spin dynamics and magnon excitations: a review of domestic research. Sci China Phys, 2023, 66: 287311.
-
-[39] Yasuda K, Wang X, Watanabe K, et al. Stacking engineering in 2D ferroelectrics. Science, 2021, 372: 1458–1462.
-
-[40] Liu S, Ayas S, Xu C, et al. First principles study of滑移铁电性 in 2D materials. Adv Funct Mater, 2024, 34: 2401156.
+[30] Sheikh Rubaiat Ul Haque M J, Cross M J, Rajpurohit S, et al. Terahertz field-induced giant symmetry modulations in a van der Waals antiferromagnet. arXiv:2510.00605, 2025.

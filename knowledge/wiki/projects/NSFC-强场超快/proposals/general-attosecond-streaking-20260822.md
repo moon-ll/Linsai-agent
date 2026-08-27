@@ -1,8 +1,8 @@
 ---
-title: "（待生成）"
+title: "general-attosecond-streaking-20260822"
 type: "proposal"
 created: "2026-08-22T15:17:07Z"
-updated: "2026-08-22T15:17:07Z"
+updated: "2026-08-26T16:42:18Z"
 tags: []
 related: []
 source_raw: ""
@@ -12,19 +12,19 @@ proposal_id: "general-attosecond-streaking-20260822"
 status: "optimizing"
 project: ["NSFC-强场超快"]
 project_type: "general"
-optimization_rounds: 0
-last_score: 0.0
-synced_at: "2026-08-22T15:17:07Z"
+optimization_rounds: 7
+last_score: 0.575
+synced_at: "2026-08-26T16:42:18Z"
 ---
 
-# （待生成）
+# general-attosecond-streaking-20260822
 
 **课题 ID**：`general-attosecond-streaking-20260822`  
 **项目类型**：general  
 **生命周期状态**：优化中  
-**优化轮次**：0  
-**当前分数**：0.00  
-**同步时间**：2026-08-22
+**优化轮次**：7  
+**当前分数**：0.57  
+**同步时间**：2026-08-26
 
 ## 核心问题
 
@@ -32,7 +32,8 @@ synced_at: "2026-08-22T15:17:07Z"
 
 ## 创新点
 
-（待提取）
+**7. 特色与创新**
+- 8. 预期研究成果
 
 ## 关键产物
 
@@ -45,8 +46,8 @@ synced_at: "2026-08-22T15:17:07Z"
 ## 状态说明
 
 - 处于 **优化中** 阶段
-- 最后得分：0.00
-- 累计对抗轮次：0
+- 最后得分：0.57
+- 累计对抗轮次：7
 
 <!-- linsai-wikilinks -->
 ## 关联概念

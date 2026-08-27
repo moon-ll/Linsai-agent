@@ -1,5 +1,50 @@
 # 变更记录
 
+## v6.9.53 - 2026-08-27 章节卫生治理：full_review 骨架化 + references 存量清洗 + 章节字数预算
+
+背景：分章节评审只限制了"单次评审读哪些章节"，没有限制章节本身的
+体量。08-27 超时率回升至 44%（11/25，全部空输出+恰好触顶型），排查
+确认三类性质不同的膨胀叠加（章节 22-48KB + critic 报告 22-42KB +
+standards 36KB = 60-90KB prompt × API 慢速 = 超时）：
+
+1. full_review.md 定位错位——writer 把"一致性核查记录"（round-N 修复
+   确认表、逐项对照）当正文写入章节文件（qg 33KB / moire 25KB /
+   order-param 23KB / kt 14KB）。真实 NSFC 申请书没有"整体一致性
+   审查"章节，该文件是派生索引；且 full_review critic 的评审输入包含
+   它自身，形成"记录越写越大→评审越来越慢"的正反馈。
+2. references.md 存量污染回归——moire 28KB 内含 [CITE:xxx] 独立映射
+   表（v6.9.46 红线之前的存量，writer 后续轮次聚焦别的章节无人清理）。
+3. 正文章节无长度预算——writer 逐条响应 critic 问题只追加不删减，
+   kt-rationale 11364 字 / qg-scheme 10900 字 / qg-content 10412 字，
+   远超 NSFC 各章节正常体量（增量累积无上限）。
+
+修复（三层）：
+
+- **P0 full_review.md 语义重定义**：新增 `section_hygiene.py` 模块。
+  一次性清洗（已执行）：4 个课题的核查记录迁至
+  `05_review/full-review-record-{date}.md`，原位重生"全文逻辑骨架"
+  （标题索引 + 衔接点 + 口径表，≤3000 字，25-33KB→1-2KB）。运行时
+  防线：full_review critic 输入同时排除 references.md 与 full_review.md
+  自身（骨架纯净性由程序化预检把关）；writer prompt 增加 full_review
+  写法指令（三部分/≤3000 字/过程性材料只进 05_review）；纯净性红线
+  扩展覆盖 full_review.md。
+- **P0 references.md 存量清洗**：`strip_references_worklog()` 按标题
+  特征（映射表/核实声明/闭环/§D-F）与 CITE 表格行剥离工作日志段落，
+  文献条目与条目内挂钩注释完整保留（moire 已执行，34 条无损）。
+  order-param 的 28KB 为分类文献列表（8 类 42 条带注释），非污染，
+  检测正确未误伤。
+- **P1 章节字数预算**：SECTION_BUDGETS（rationale 5000-8000 /
+  content 4000-7000 / scheme 6000-10000 中文字）写入 standards 的
+  section_standards；critic 附程序化预算预检（超限按 critical"压缩
+  重写"处置）；writer 附量化指令（"当前 N 字，净删 ≥M 字"）+ 字数
+  纪律（超限章节禁追加响应，改写优先于新增，细节下沉方法学手册）。
+
+- 测试：`test_mechanism_hardening.py` 新增 SectionHygieneTests
+  19 断言（预算判定/量化指令/迁移幂等/骨架纯净/条目无损/源码守卫/
+  standards 守卫）；v6.9.46 旧守卫同步更新为成员检查写法（语义不放松）。
+- 验证：`--module` 138/138 → 1132/1132 全绿；清洗后 4 课题 sections
+  总量 447KB→435KB，full_review 输入规模立减 22-32KB/次。
+
 ## v6.9.52 - 2026-08-27 lark-cli 路径版本自适应：修复插件升级后飞书告警通道静默失效
 
 背景：04h 健康检查发现 monitor 连续数十次报"lark-cli 不存在：

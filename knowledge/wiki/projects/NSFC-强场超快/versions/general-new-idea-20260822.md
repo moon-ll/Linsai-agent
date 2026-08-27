@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-new-idea-20260822"
 project_type: "general"
 latest_round: 1
-last_score: 0.72
+last_score: 0.55
 status: "optimizing"
-created: "2026-08-26T16:06:00Z"
-updated: "2026-08-26T16:06:00Z"
+created: "2026-08-27T01:50:53Z"
+updated: "2026-08-27T01:50:53Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-new-idea-20260822`
 **类型**：general
 **最新轮次**：第 1 轮
-**当前分数**：0.72
+**当前分数**：0.55
 **状态**：优化中
-**同步时间**：2026-08-26T16:06:00Z
+**同步时间**：2026-08-27T01:50:53Z
 
 ---
 
@@ -30,7 +30,7 @@ confidence: 1.0
 |------|------|------|
 | content | content | 72 |
 | rationale | rationale | 54 |
-| references | 参考文献 | 60 |
+| references | 参考文献 | 58 |
 | research-foundation | research-foundation | 20 |
 | scheme | scheme | 78 |
 
@@ -41,9 +41,9 @@ confidence: 1.0
 **课题名称**：理论层**建立含 g 波自旋劈裂的紧束缚正演模型，以 Houston 基含时演化为核心算法。在 MoS₂ 上复现文献[6][16]已发表的 HHG 阶次结构以标定模型可靠性，同一流程迁移至 MnTe 顺磁相复现自旋简并基准。终止判据：MoS₂ 合成 HHG 谱在 3/5/7 阶的相对强度与文献[6][16]偏差 ≤ 10%；MnTe 顺磁相偶次谐波相对强度 < 1%。
 **项目类型**：面上项目
 **课题 ID**：`general-new-idea-20260822`
-**当前状态**：优化中（第1轮，score 0.72）
+**当前状态**：优化中（第1轮，score 0.55）
 **启动日期**：2026-08-22
-**最后更新**：2026-08-25
+**最后更新**：2026-08-26
 
 ---
 
@@ -67,9 +67,7 @@ confidence: 1.0
 | 2 | 0.77 | 17 | 10 | 2026-08-24 |
 | 2 | 0.75 | 27 | 15 | 2026-08-25 |
 | 2 | 0.72 | 34 | 12 | 2026-08-25 |
-
-## 状态流转
-- 2026-08-22: — → draf
+| 2 | 0.55 | 9 | 3 | 2026-08-26
 
 （完整简介见 [源文件](research_proposals/optimizing/general-new-idea-20260822/04_proposal/proposal-draft-merged.md)）
 

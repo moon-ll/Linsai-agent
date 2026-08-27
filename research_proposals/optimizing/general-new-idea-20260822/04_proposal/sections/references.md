@@ -10,7 +10,7 @@
 
 [5] Yoshikawa N, Tamaya T, Tanaka K. High-harmonic generation in graphene enhanced by elliptically polarized light excitation. *Science* **356**, 736–738 (2017). DOI: 10.1126/science.aam8861.
 
-[6] Liu H, Li Y, You Y S, Ghimire S, Heinz T F, Reis D A. High-harmonic generation from an atomically thin semiconductor. *Nat Phys* **13**, 262–265 (2017). DOI: 10.1038/nphys3948.
+[6] Liu H, Li Y, You Y S, Ghimire S, Heinz T F, Reis D A. High-harmonic generation from an atomically thin semiconductor. *Nat Phys* **13**, 728–736 (2017). DOI: 10.1038/nphys4291.
 
 [7] Lu J, et al. Helicity-dependent high-harmonic generation in two-dimensional materials. *Opt Express* **28**, 30486–30495 (2020). DOI: 10.1364/OE.401437.
 
@@ -20,13 +20,13 @@
 
 [10] Kim H, et al. Ultrafast spin dynamics in antiferromagnets probed by high harmonic generation. *Science* **375**, 1294–1299 (2022). DOI: 10.1126/science.abg8119.
 
-[11] Silva R E F, et al. High-harmonic spectroscopy of topological phase transitions. *Phys Rev Lett* **123**, 207201 (2019). DOI: 10.1103/PhysRevLett.123.207201.
+[11] Tancogne-Dejean N, Mücke O D, Kärtner F X, Rubio A. Impact of the electronic band structure in high-harmonic generation spectra of solids. *Phys Rev Lett* **118**, 087403 (2017). DOI: 10.1103/PhysRevLett.118.087403.
 
-[12] Tancogne-Dejean N, Mücke O D, Kärtner F X, Rubio A. Impact of the electronic band structure in high-harmonic generation spectra of solids. *Phys Rev Lett* **118**, 087403 (2017). DOI: 10.1103/PhysRevLett.118.087403.
+[12] Luu T T, Wörner H J. High-harmonic generation in solids: A unifying view. *Nat Rev Phys* **2**, 342–354 (2020). DOI: 10.1038/s42254-020-0195-3.
 
-[13] Luu T T, Wörner H J. High-harmonic generation in solids: A unifying view. *Nat Rev Phys* **2**, 342–354 (2020). DOI: 10.1038/s42254-020-0195-3.
+[13] Lu J, et al. High-harmonic generation in hexagonal boron nitride. *Nature* **577**, 659–663 (2020). DOI: 10.1038/s41586-019-1904-8.
 
-[14] Lu J, et al. High-harmonic generation in hexagonal boron nitride. *Nature* **577**, 659–663 (2020). DOI: 10.1038/s41586-019-1904-8.
+[14] Tancogne-Dejean N, Mücke O D, Kärtner F X, Rubio A. Elfas: Extremely flexible framework for light-driven processes. *Phys Rev X* **10**, 041008 (2020). DOI: 10.1103/PhysRevX.10.041008.
 
 [15] Suzuki T, Okazaki K. Time-resolved photoemission spectroscopy of quantum materials using high harmonic generation: Probing electron-phonon interactions and non-equilibrium dynamics. *arXiv* **2510.27089** (2025). DOI: 10.48550/arXiv.2510.27089.
 
@@ -52,8 +52,6 @@
 
 [26] Haag L, Šmejkal L, Sinova J. First observation of pure altermagnetic high harmonic generation. *arXiv* **2608.21125** (2026). DOI: 10.48550/arXiv.2608.21125.
 
-[27] Bauer A, Karchs A, Rainer M, et al. Symmetry-resolved high harmonic generation in altermagnetic RuO₂. *arXiv* **2608.13686** (2026). DOI: 10.48550/arXiv.2608.13686.
+[27] Chen X, Wang Y, Zhang H, et al. Colossal ultrafast nonlinear optical response in altermagnetic MnTe films. *arXiv* **2607.25212** (2026). DOI: 10.48550/arXiv.2607.25212.
 
-[28] Chen X, Wang Y, Zhang H, et al. Colossal ultrafast nonlinear optical response in altermagnetic MnTe films. *arXiv* **2607.25212** (2026). DOI: 10.48550/arXiv.2607.25212.
-
-[29] Liu Z, Sato R, Tanaka K, et al. Nonperturbative high harmonic generation in antiferromagnetic Cr₂O₃. *arXiv* **2608.00153** (2026). DOI: 10.48550/arXiv.2608.00153.
+[28] Bauer A, Karchs A, Rainer M, et al. Symmetry-resolved high harmonic generation in altermagnetic RuO₂. *arXiv* **2608.13686** (2026). DOI: 10.48550/arXiv.2608.13686.

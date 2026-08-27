@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-24T16:00:02Z",
+      "updated_at": "2026-08-26T22:00:48Z",
       "optimization_rounds": 1,
       "last_score": 0.77,
       "score_history": [
@@ -424,6 +424,10 @@
         {
           "at": "2026-07-30T09:07:03Z",
           "error": "name 'PROPOSAL_SECTIONS' is not defined"
+        },
+        {
+          "at": "2026-08-26T22:00:48Z",
+          "error": "general-quantum-geometry-inversion-20260726-r2-rationale-critic: 超时(1200s)"
         }
       ],
       "negative_feedback_cleared": [
@@ -953,22 +957,27 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 2,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
+          "started_at": "2026-08-26T18:25:29Z",
+          "finished_at": "2026-08-26T18:45:29Z",
+          "last_error": "超时(1200s)",
           "cron_job_id": "",
           "error_history": [
             {
               "at": "2026-08-24T11:50:15Z",
               "error": "超时(1200s)",
               "attempts": 1
+            },
+            {
+              "at": "2026-08-26T18:20:26Z",
+              "error": "超时(1200s)",
+              "attempts": 1
             }
           ],
-          "repair_attempts": 2
+          "repair_attempts": 3
         },
         {
           "job_id": "general-quantum-geometry-inversion-20260726-r2-rationale-gap_identify",
@@ -2346,7 +2355,7 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-25T16:00:06Z",
+      "updated_at": "2026-08-27T00:45:31Z",
       "optimization_rounds": 0,
       "last_score": 0.76,
       "score_history": [
@@ -2559,15 +2568,15 @@
           "step": "critic",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-rationale-writer"
           ],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
+          "started_at": "2026-08-27T00:30:31Z",
+          "finished_at": "2026-08-27T00:45:31Z",
+          "last_error": "超时(900s)",
           "cron_job_id": "",
           "error_history": [
             {
@@ -2584,9 +2593,14 @@
               "at": "2026-08-25T16:00:06Z",
               "error": "自动解锁(v6.8.54): 修复系统放弃且失败超24h，重置重跑（第1次/上限1）",
               "attempts": 3
+            },
+            {
+              "at": "2026-08-27T00:30:31Z",
+              "error": "超时(900s)",
+              "attempts": 1
             }
           ],
-          "repair_attempts": 3,
+          "repair_attempts": 4,
           "auto_unlock_count": 1
         },
         {
@@ -2914,6 +2928,10 @@
         },
         {
           "at": "2026-08-25T10:00:05Z",
+          "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-26T22:00:49Z",
           "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
         }
       ],
@@ -4116,7 +4134,7 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-25T16:00:06Z",
+      "updated_at": "2026-08-27T01:05:34Z",
       "optimization_rounds": 4,
       "last_score": 0.68,
       "score_history": [
@@ -5940,15 +5958,15 @@
           "step": "critic",
           "section_key": "content",
           "round": 5,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r5-rationale-writer"
           ],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
+          "started_at": "2026-08-27T00:50:34Z",
+          "finished_at": "2026-08-27T01:05:34Z",
+          "last_error": "超时(900s)",
           "cron_job_id": "",
           "error_history": [
             {
@@ -5965,9 +5983,14 @@
               "at": "2026-08-25T16:00:06Z",
               "error": "自动解锁(v6.8.54): 修复系统放弃且失败超24h，重置重跑（第1次/上限1）",
               "attempts": 3
+            },
+            {
+              "at": "2026-08-27T00:50:34Z",
+              "error": "超时(900s)",
+              "attempts": 1
             }
           ],
-          "repair_attempts": 3,
+          "repair_attempts": 4,
           "auto_unlock_count": 1
         },
         {
@@ -6701,10 +6724,6 @@
       "low_score_alert": false,
       "cron_failures": [
         {
-          "at": "2026-08-14T22:00:47Z",
-          "error": "general-moire-strong-field-probe-20260726-r8-full_review-writer: 超时(1200s)"
-        },
-        {
           "at": "2026-08-24T16:00:02Z",
           "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
         },
@@ -6718,6 +6737,10 @@
         },
         {
           "at": "2026-08-25T10:00:05Z",
+          "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-26T22:00:49Z",
           "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
         }
       ],
@@ -9044,7 +9067,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-25T16:00:06Z",
+      "updated_at": "2026-08-26T22:00:49Z",
       "optimization_rounds": 6,
       "last_score": 0.69,
       "score_history": [
@@ -10027,10 +10050,6 @@
       "missing_sections": [],
       "cron_failures": [
         {
-          "at": "2026-08-14T22:00:47Z",
-          "error": "general-order-parameter-ultrafast-readout-20260727-r1-references-critic: 超时(600s)"
-        },
-        {
           "at": "2026-08-24T16:00:02Z",
           "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
         },
@@ -10044,6 +10063,10 @@
         },
         {
           "at": "2026-08-25T10:00:06Z",
+          "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-26T22:00:49Z",
           "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
         }
       ],
@@ -11442,15 +11465,15 @@
           "step": "critic",
           "section_key": "references",
           "round": 7,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "general-order-parameter-ultrafast-readout-20260727-r7-full_review-writer"
           ],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
+          "started_at": "2026-08-26T20:00:45Z",
+          "finished_at": "2026-08-26T20:15:45Z",
+          "last_error": "超时(900s)",
           "cron_job_id": "",
           "error_history": [
             {
@@ -11467,9 +11490,14 @@
               "at": "2026-08-25T16:00:06Z",
               "error": "自动解锁(v6.8.54): 修复系统放弃且失败超24h，重置重跑（第1次/上限1）",
               "attempts": 1
+            },
+            {
+              "at": "2026-08-26T20:00:45Z",
+              "error": "超时(900s)",
+              "attempts": 1
             }
           ],
-          "repair_attempts": 3,
+          "repair_attempts": 4,
           "auto_unlock_count": 1
         },
         {
@@ -12466,9 +12494,9 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控",
       "created_at": "2026-08-16T03:49:25Z",
-      "updated_at": "2026-08-25T16:00:06Z",
+      "updated_at": "2026-08-27T00:05:27Z",
       "optimization_rounds": 1,
-      "last_score": 0.74,
+      "last_score": 0.65,
       "score_history": [
         {
           "round": 1,
@@ -12579,6 +12607,57 @@
           "issues_count": 29,
           "high_issues": 8,
           "at": "2026-08-19T13:10:35Z"
+        },
+        {
+          "round": 2,
+          "score": 0.59,
+          "dim_scores": {
+            "innovation": 0.72,
+            "feasibility": 0.63,
+            "rigor": 0.55,
+            "expression": 0.45
+          },
+          "weakest_dim": "expression",
+          "focus_section": "scheme",
+          "section_passed": false,
+          "issues_count": 37,
+          "high_issues": 14,
+          "ai_ceiling": 0.5,
+          "ai_ceiling_after": 0.5,
+          "expression_improved": true,
+          "expression_not_improved_reason": "",
+          "ai_top_issues": [
+            "死板关联词超标：21次（阈值20），扣0.02",
+            "模板句式'为...提供...'超标：9次（阈值8），扣0.03",
+            "超长句(>120字)：31处（免赔5处），扣0.52"
+          ],
+          "anchor_conclusion": "差距明显",
+          "at": "2026-08-26T22:00:47Z"
+        },
+        {
+          "round": 2,
+          "score": 0.65,
+          "dim_scores": {
+            "innovation": 0.82,
+            "feasibility": 0.72,
+            "rigor": 0.62,
+            "expression": 0.45
+          },
+          "weakest_dim": "expression",
+          "focus_section": "full_review",
+          "section_passed": false,
+          "issues_count": 26,
+          "high_issues": 8,
+          "ai_ceiling": 0.5,
+          "ai_ceiling_after": 0.53,
+          "expression_improved": true,
+          "expression_not_improved_reason": "",
+          "ai_top_issues": [
+            "模板句式'为...提供...'超标：9次（阈值8），扣0.03",
+            "超长句(>120字)：31处（免赔5处），扣0.52"
+          ],
+          "anchor_conclusion": "差距明显",
+          "at": "2026-08-26T22:58:26Z"
         }
       ],
       "section_passes": {
@@ -13768,14 +13847,14 @@
           "step": "critic",
           "section_key": "scheme",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-content-writer"
           ],
-          "attempts": 0,
+          "attempts": 2,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-26T21:00:58Z",
+          "finished_at": "2026-08-26T21:20:40Z",
           "last_error": "",
           "cron_job_id": "",
           "error_history": [
@@ -13793,9 +13872,14 @@
               "at": "2026-08-25T16:00:06Z",
               "error": "自动解锁(v6.8.54): 修复系统放弃且失败超24h，重置重跑（第1次/上限1）",
               "attempts": 3
+            },
+            {
+              "at": "2026-08-26T21:00:58Z",
+              "error": "超时(1200s)",
+              "attempts": 1
             }
           ],
-          "repair_attempts": 3,
+          "repair_attempts": 4,
           "auto_unlock_count": 1
         },
         {
@@ -13804,14 +13888,14 @@
           "step": "gap_identify",
           "section_key": "scheme",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-scheme-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-26T21:25:58Z",
+          "finished_at": "2026-08-26T21:29:28Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -13821,14 +13905,14 @@
           "step": "lit_search",
           "section_key": "scheme",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-scheme-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-26T21:30:59Z",
+          "finished_at": "2026-08-26T21:36:28Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -13838,14 +13922,14 @@
           "step": "lit_read",
           "section_key": "scheme",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-scheme-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-26T21:40:01Z",
+          "finished_at": "2026-08-26T21:48:08Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -13855,14 +13939,14 @@
           "step": "lit_note",
           "section_key": "scheme",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-scheme-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-26T21:50:03Z",
+          "finished_at": "2026-08-26T21:50:03Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -13872,15 +13956,15 @@
           "step": "writer",
           "section_key": "scheme",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-scheme-critic",
             "general-berry-mnps3-rashba-20260816-r2-scheme-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-26T21:55:03Z",
+          "finished_at": "2026-08-26T22:00:47Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -13890,14 +13974,82 @@
           "step": "critic",
           "section_key": "full_review",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-scheme-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-26T22:05:05Z",
+          "finished_at": "2026-08-26T22:24:03Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r2-full_review-gap_identify",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "gap_identify",
+          "section_key": "full_review",
+          "round": 2,
+          "status": "done",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r2-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-26T22:25:08Z",
+          "finished_at": "2026-08-26T22:26:07Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r2-full_review-lit_search",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "lit_search",
+          "section_key": "full_review",
+          "round": 2,
+          "status": "done",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r2-full_review-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-26T22:30:09Z",
+          "finished_at": "2026-08-26T22:34:33Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r2-full_review-lit_read",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "lit_read",
+          "section_key": "full_review",
+          "round": 2,
+          "status": "done",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r2-full_review-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-26T22:35:10Z",
+          "finished_at": "2026-08-26T22:43:21Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r2-full_review-lit_note",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "lit_note",
+          "section_key": "full_review",
+          "round": 2,
+          "status": "done",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r2-full_review-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-26T22:45:12Z",
+          "finished_at": "2026-08-26T22:45:12Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -13907,14 +14059,15 @@
           "step": "writer",
           "section_key": "full_review",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
-            "general-berry-mnps3-rashba-20260816-r2-full_review-critic"
+            "general-berry-mnps3-rashba-20260816-r2-full_review-critic",
+            "general-berry-mnps3-rashba-20260816-r2-full_review-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-26T22:50:13Z",
+          "finished_at": "2026-08-26T22:58:26Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -13924,14 +14077,14 @@
           "step": "critic",
           "section_key": "references",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-full_review-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-26T23:00:15Z",
+          "finished_at": "2026-08-26T23:11:58Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -13941,16 +14094,24 @@
           "step": "writer",
           "section_key": "references",
           "round": 2,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-references-critic"
           ],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
-          "cron_job_id": ""
+          "started_at": "2026-08-26T23:35:20Z",
+          "finished_at": "2026-08-27T00:05:27Z",
+          "last_error": "运行超时/进程僵死",
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-26T23:30:17Z",
+              "error": "超时(900s)",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 1
         },
         {
           "job_id": "general-berry-mnps3-rashba-20260816-r2-monitor-monitor",
@@ -14010,10 +14171,10 @@
       "idea_review_at": "2026-08-17T21:24:00Z",
       "idea_review_passed": true,
       "last_dim_scores": {
-        "innovation": 0.78,
-        "feasibility": 0.74,
+        "innovation": 0.82,
+        "feasibility": 0.72,
         "rigor": 0.62,
-        "expression": 0.66
+        "expression": 0.45
       },
       "degradation_events": [
         {
@@ -14052,9 +14213,9 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 交变磁体高次谐波产生与固态强场非线性光学新前沿",
       "created_at": "2026-08-22T05:40:16Z",
-      "updated_at": "2026-08-25T04:00:07Z",
+      "updated_at": "2026-08-27T01:35:40Z",
       "optimization_rounds": 1,
-      "last_score": 0.72,
+      "last_score": 0.55,
       "score_history": [
         {
           "round": 1,
@@ -14265,6 +14426,28 @@
           "ai_top_issues": [],
           "anchor_conclusion": "基本接近",
           "at": "2026-08-25T02:24:25Z"
+        },
+        {
+          "round": 2,
+          "score": 0.55,
+          "dim_scores": {
+            "rigor": 0.38,
+            "completeness": 0.72
+          },
+          "weakest_dim": "rigor",
+          "focus_section": "references",
+          "section_passed": false,
+          "issues_count": 9,
+          "high_issues": 3,
+          "ai_ceiling": 0.94,
+          "ai_ceiling_after": null,
+          "expression_improved": true,
+          "expression_not_improved_reason": "",
+          "ai_top_issues": [
+            "超长句(>120字)：7处（免赔4处），扣0.06"
+          ],
+          "anchor_conclusion": "",
+          "at": "2026-08-26T20:29:20Z"
         }
       ],
       "section_passes": {
@@ -15681,14 +15864,14 @@
           "step": "writer",
           "section_key": "references",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-new-idea-20260822-r2-references-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-26T20:20:47Z",
+          "finished_at": "2026-08-26T20:29:20Z",
           "last_error": "",
           "cron_job_id": "",
           "error_history": [
@@ -15706,16 +15889,29 @@
           "step": "monitor",
           "section_key": "monitor",
           "round": 2,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "general-new-idea-20260822-r2-references-writer"
           ],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
-          "cron_job_id": ""
+          "started_at": "2026-08-27T01:25:40Z",
+          "finished_at": "2026-08-27T01:35:40Z",
+          "last_error": "超时(600s)",
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-26T20:40:49Z",
+              "error": "超时(600s)",
+              "attempts": 1
+            },
+            {
+              "at": "2026-08-27T01:20:38Z",
+              "error": "超时(600s)",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 3
         },
         {
           "job_id": "general-new-idea-20260822-r2-derived-update_vision",
@@ -15782,10 +15978,8 @@
         }
       ],
       "last_dim_scores": {
-        "innovation": 0.82,
-        "feasibility": 0.65,
-        "rigor": 0.62,
-        "expression": 0.79
+        "rigor": 0.38,
+        "completeness": 0.72
       },
       "low_score_alert": false,
       "last_monitor_at": "2026-08-24T20:27:23Z",
@@ -15798,8 +15992,8 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 阿秒条纹技术：从超短脉冲表征到量子相位测量（手动补注册 2026-08-22）",
       "created_at": "2026-08-22T12:20:08Z",
-      "updated_at": "2026-08-26T14:30:17Z",
-      "optimization_rounds": 6,
+      "updated_at": "2026-08-27T01:40:42Z",
+      "optimization_rounds": 7,
       "last_score": 0.575,
       "score_history": [
         {
@@ -17220,509 +17414,6 @@
       ],
       "pipeline_jobs": [
         {
-          "job_id": "general-attosecond-streaking-20260822-r5-rationale-critic",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "critic",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T21:50:03Z",
-          "finished_at": "2026-08-25T21:55:38Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-rationale-gap_identify",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "gap_identify",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-rationale-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T22:00:05Z",
-          "finished_at": "2026-08-25T22:01:19Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-rationale-lit_search",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "lit_search",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-rationale-gap_identify"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T22:05:05Z",
-          "finished_at": "2026-08-25T22:05:24Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-rationale-lit_read",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "lit_read",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-rationale-lit_search"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T22:10:06Z",
-          "finished_at": "2026-08-25T22:10:06Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-rationale-lit_note",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "lit_note",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-rationale-lit_read"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T22:15:07Z",
-          "finished_at": "2026-08-25T22:15:07Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-rationale-writer",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "writer",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-rationale-critic",
-            "general-attosecond-streaking-20260822-r5-rationale-lit_note"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T22:20:08Z",
-          "finished_at": "2026-08-25T22:23:58Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-content-critic",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "critic",
-          "section_key": "content",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-rationale-writer"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T22:25:09Z",
-          "finished_at": "2026-08-25T22:32:29Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-content-gap_identify",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "gap_identify",
-          "section_key": "content",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-content-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T22:35:10Z",
-          "finished_at": "2026-08-25T22:37:01Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-content-lit_search",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "lit_search",
-          "section_key": "content",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-content-gap_identify"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T22:40:11Z",
-          "finished_at": "2026-08-25T22:43:26Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-content-lit_read",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "lit_read",
-          "section_key": "content",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-content-lit_search"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T22:45:12Z",
-          "finished_at": "2026-08-25T22:48:31Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-content-lit_note",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "lit_note",
-          "section_key": "content",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-content-lit_read"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T22:50:13Z",
-          "finished_at": "2026-08-25T22:50:13Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-content-writer",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "writer",
-          "section_key": "content",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-content-critic",
-            "general-attosecond-streaking-20260822-r5-content-lit_note"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T22:55:14Z",
-          "finished_at": "2026-08-25T22:59:03Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-scheme-critic",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "critic",
-          "section_key": "scheme",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-content-writer"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T23:00:15Z",
-          "finished_at": "2026-08-25T23:05:07Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-scheme-gap_identify",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "gap_identify",
-          "section_key": "scheme",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-scheme-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T23:10:16Z",
-          "finished_at": "2026-08-25T23:11:23Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-scheme-lit_search",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "lit_search",
-          "section_key": "scheme",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-scheme-gap_identify"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T23:15:17Z",
-          "finished_at": "2026-08-25T23:16:43Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-scheme-lit_read",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "lit_read",
-          "section_key": "scheme",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-scheme-lit_search"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T23:20:18Z",
-          "finished_at": "2026-08-25T23:21:57Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-scheme-lit_note",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "lit_note",
-          "section_key": "scheme",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-scheme-lit_read"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T23:25:19Z",
-          "finished_at": "2026-08-25T23:25:19Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-scheme-writer",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "writer",
-          "section_key": "scheme",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-scheme-critic",
-            "general-attosecond-streaking-20260822-r5-scheme-lit_note"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-25T23:30:19Z",
-          "finished_at": "2026-08-25T23:33:04Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-full_review-critic",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "critic",
-          "section_key": "full_review",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-scheme-writer"
-          ],
-          "attempts": 2,
-          "scheduled_at": "",
-          "started_at": "2026-08-26T00:30:30Z",
-          "finished_at": "2026-08-26T00:33:04Z",
-          "last_error": "",
-          "cron_job_id": "",
-          "error_history": [
-            {
-              "at": "2026-08-26T00:30:30Z",
-              "error": "运行超时/进程僵死",
-              "attempts": 1
-            }
-          ],
-          "repair_attempts": 1
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-full_review-gap_identify",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "gap_identify",
-          "section_key": "full_review",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-full_review-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-26T00:35:31Z",
-          "finished_at": "2026-08-26T00:36:22Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-full_review-lit_search",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "lit_search",
-          "section_key": "full_review",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-full_review-gap_identify"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-26T00:40:32Z",
-          "finished_at": "2026-08-26T00:42:00Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-full_review-lit_read",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "lit_read",
-          "section_key": "full_review",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-full_review-lit_search"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-26T00:45:33Z",
-          "finished_at": "2026-08-26T00:47:17Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-full_review-lit_note",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "lit_note",
-          "section_key": "full_review",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-full_review-lit_read"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-26T00:50:34Z",
-          "finished_at": "2026-08-26T00:50:34Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-full_review-writer",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "writer",
-          "section_key": "full_review",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-full_review-critic",
-            "general-attosecond-streaking-20260822-r5-full_review-lit_note"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-26T00:55:35Z",
-          "finished_at": "2026-08-26T01:00:39Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-references-critic",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "critic",
-          "section_key": "references",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-full_review-writer"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-26T01:05:36Z",
-          "finished_at": "2026-08-26T01:15:55Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-references-writer",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "writer",
-          "section_key": "references",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-references-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-26T01:20:39Z",
-          "finished_at": "2026-08-26T01:24:30Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-monitor-monitor",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "monitor",
-          "section_key": "monitor",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-references-writer"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-26T01:25:39Z",
-          "finished_at": "2026-08-26T01:27:45Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-derived-update_vision",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "update_vision",
-          "section_key": "derived",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-monitor-monitor"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-26T01:30:40Z",
-          "finished_at": "2026-08-26T01:31:15Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-attosecond-streaking-20260822-r5-derived-update_method_manual",
-          "proposal_id": "general-attosecond-streaking-20260822",
-          "step": "update_method_manual",
-          "section_key": "derived",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-attosecond-streaking-20260822-r5-derived-update_vision"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-26T01:35:41Z",
-          "finished_at": "2026-08-26T01:37:38Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
           "job_id": "general-attosecond-streaking-20260822-r6-rationale-critic",
           "proposal_id": "general-attosecond-streaking-20260822",
           "step": "critic",
@@ -18700,14 +18391,14 @@
           "step": "update_vision",
           "section_key": "derived",
           "round": 7,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r7-monitor-monitor"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-26T16:30:10Z",
+          "finished_at": "2026-08-26T16:31:06Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -18717,9 +18408,443 @@
           "step": "update_method_manual",
           "section_key": "derived",
           "round": 7,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r7-derived-update_vision"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-26T16:35:10Z",
+          "finished_at": "2026-08-26T16:42:18Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-rationale-critic",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "critic",
+          "section_key": "rationale",
+          "round": 8,
+          "status": "running",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-27T01:40:42Z",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-26T17:05:13Z",
+              "error": "超时(1200s)",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 2
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-rationale-gap_identify",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "gap_identify",
+          "section_key": "rationale",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-rationale-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-rationale-lit_search",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_search",
+          "section_key": "rationale",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-rationale-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-rationale-lit_read",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_read",
+          "section_key": "rationale",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-rationale-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-rationale-lit_note",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_note",
+          "section_key": "rationale",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-rationale-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-rationale-writer",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "writer",
+          "section_key": "rationale",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-rationale-critic",
+            "general-attosecond-streaking-20260822-r8-rationale-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-content-critic",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "critic",
+          "section_key": "content",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-rationale-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-content-gap_identify",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "gap_identify",
+          "section_key": "content",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-content-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-content-lit_search",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_search",
+          "section_key": "content",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-content-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-content-lit_read",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_read",
+          "section_key": "content",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-content-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-content-lit_note",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_note",
+          "section_key": "content",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-content-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-content-writer",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "writer",
+          "section_key": "content",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-content-critic",
+            "general-attosecond-streaking-20260822-r8-content-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-scheme-critic",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "critic",
+          "section_key": "scheme",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-content-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-scheme-gap_identify",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "gap_identify",
+          "section_key": "scheme",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-scheme-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-scheme-lit_search",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_search",
+          "section_key": "scheme",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-scheme-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-scheme-lit_read",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_read",
+          "section_key": "scheme",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-scheme-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-scheme-lit_note",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "lit_note",
+          "section_key": "scheme",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-scheme-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-scheme-writer",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "writer",
+          "section_key": "scheme",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-scheme-critic",
+            "general-attosecond-streaking-20260822-r8-scheme-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-full_review-critic",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "critic",
+          "section_key": "full_review",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-scheme-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-full_review-writer",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "writer",
+          "section_key": "full_review",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-references-critic",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "critic",
+          "section_key": "references",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-full_review-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-references-writer",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "writer",
+          "section_key": "references",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-references-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-monitor-monitor",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "monitor",
+          "section_key": "monitor",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-references-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-derived-update_vision",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "update_vision",
+          "section_key": "derived",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-monitor-monitor"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-attosecond-streaking-20260822-r8-derived-update_method_manual",
+          "proposal_id": "general-attosecond-streaking-20260822",
+          "step": "update_method_manual",
+          "section_key": "derived",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-attosecond-streaking-20260822-r8-derived-update_vision"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -18764,5 +18889,5 @@
       "negative_feedback_at": "2026-08-26T14:30:17Z"
     }
   },
-  "updated_at": "2026-08-26T14:30:17Z"
+  "updated_at": "2026-08-27T01:40:42Z"
 }

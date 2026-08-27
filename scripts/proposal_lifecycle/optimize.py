@@ -18,6 +18,12 @@ from proposal_lifecycle.constants import (
     DEFAULT_SCORE_THRESHOLD,
 )
 
+# v6.9.53: 章节卫生——字数预算预检 / full_review 纯净性预检
+from proposal_lifecycle.section_hygiene import (
+    budget_report_text,
+    full_review_purity_text,
+)
+
 # v6.8.6: 范本写作标杆已提炼嵌入 nsfc-standards.json 的
 # reference_materials.style_benchmark 字段，agent 读 JSON 即可获取全部规则，
 # 无需每次读原始范本文件（节省 ~29KB token/次）。
@@ -890,20 +896,31 @@ class OptimizeMixin:
             #    冗余矛盾"审查无关，排除——输入立减 ~40KB；
             # ② "指标红线：同一指标跨章节一致"的数字比对程序化完成，
             #    预检表附入 prompt，critic 直接采信。
+            # v6.9.53: ③ full_review.md 自身也排除——它是"全文逻辑骨架"
+            # （派生索引，非申请书内容），其纯净性由程序化预检把关，
+            # 不需要 critic 通读（08-27 实证曾膨胀到 33KB 核查记录）。
             files_to_read = [
                 str(prop_dir / "04_proposal" / "sections" / f"{s['key']}.md")
                 for s in PROPOSAL_SECTIONS
                 if sections.section_exists(s['key'])
-                and s['key'] != "references"  # v6.9.46: 排除文献列表
+                and s['key'] not in ("references", "full_review")
             ]
             metrics_preflight = _cross_section_metrics_preflight(prop_dir)
+            # v6.9.53: 章节字数预算 + full_review 纯净性预检（零 LLM）
+            budget_preflight = budget_report_text(
+                prop_dir / "04_proposal" / "sections")
+            purity_preflight = full_review_purity_text(prop_dir)
             read_instruction = (
                 "【申请书章节文件】\n" +
                 "\n".join(f"- {p}" for p in files_to_read) +
                 "\n\n请读取以上章节文件，做整体一致性审查。\n"
                 "（references.md 已排除——文献列表与逻辑衔接审查无关，\n"
-                "其编号一致性由 references 专轮的程序化预检覆盖。）\n\n"
+                "其编号一致性由 references 专轮的程序化预检覆盖。\n"
+                "full_review.md 已排除——它是程序维护的逻辑骨架索引，\n"
+                "非申请书内容，其纯净性由下方预检把关。）\n\n"
                 f"【跨章节指标一致性预检（程序完成，请直接采信）】\n{metrics_preflight}\n"
+                f"{budget_preflight}"
+                f"{purity_preflight}"
             )
         elif focus_section:
             focus_text = (
@@ -913,9 +930,17 @@ class OptimizeMixin:
             )
             section_file = prop_dir / "04_proposal" / "sections" / f"{focus_section['key']}.md"
             files_to_read = [str(section_file)]
+            # v6.9.53: 聚焦章节字数预算——超限属结构性问题（writer 只追加
+            # 不删减的增量累积），必须按 critical"压缩重写"处置，程序化
+            # 口径让 critic 免于目测。
+            focus_budget = budget_report_text(
+                prop_dir / "04_proposal" / "sections",
+                focus_key=focus_section["key"],
+            )
             read_instruction = (
                 f"【申请书聚焦章节文件】{section_file}\n"
                 f"请主要读取以上聚焦章节文件；如需检查跨章节一致性，可简要读取其他章节。\n\n"
+                f"{focus_budget}"
             )
         else:
             focus_text = ""
@@ -1623,11 +1648,24 @@ class OptimizeMixin:
             primary_read = str(target_section_file)
         elif is_full_review:
             target_section_file = None
+            # v6.9.53: full_review.md 语义重定义——只写"全文逻辑骨架"。
+            # 08-27 实证：writer 把一致性核查记录（round-N 修复确认表、
+            # 逐项对照）当正文写入 full_review.md，膨胀到 25-33KB——
+            # 真实 NSFC 申请书没有"整体一致性审查"章节，该文件是派生索引。
             section_focus = (
                 f"\n【本轮为整体一致性修订】\n"
                 f"请只做章节间的衔接、术语统一、冗余删减，不要大幅改动内容。\n"
                 f"可修改任意章节文件（在 {prop_dir}/04_proposal/sections/ 下），\n"
-                f"但请保持各章节文件独立，系统会自动组装 proposal-draft.md。\n"
+                f"但请保持各章节文件独立，系统会自动组装 proposal-draft.md。\n\n"
+                f"■ full_review.md 写法（v6.9.53 起严格执行）：\n"
+                f"该文件只保留'全文逻辑骨架'，三部分、总篇幅 ≤3000 字：\n"
+                f"  ① 主线论证链（3-5 句：核心问题→研究内容→方案如何回应）\n"
+                f"  ② 章节衔接点（立项依据→研究内容→研究方案的关键承接关系）\n"
+                f"  ③ 跨章节统一口径表（关键指标/术语的唯一口径）\n"
+                f"一致性核查的过程性材料（逐项对照、处置记录、轮次说明）\n"
+                f"一律写入 {prop_dir}/05_review/ 下的报告文件，严禁进入章节文件。\n"
+                f"本轮的实际修订落在 rationale/content/scheme 三个正文文件，\n"
+                f"full_review.md 只更新骨架使其与正文一致。\n"
             )
             primary_read = str(prop_dir / "04_proposal" / "proposal-draft.md")
         else:
@@ -1636,6 +1674,17 @@ class OptimizeMixin:
             primary_read = str(prop_dir / "04_proposal" / "proposal-draft.md")
 
         # v6.8.6: 强化叙述式写作风格要求 + 去AI味 + 范本对标
+        # v6.9.53: writer 侧字数预算——章节级附聚焦章节量化指令，
+        # full_review 附全章节预算表。超限章节的修复方式从"追加响应"
+        # 转向"压缩重写"（程序复检强制）。
+        try:
+            writer_budget_text = budget_report_text(
+                prop_dir / "04_proposal" / "sections",
+                focus_key=(focus_section["key"] if focus_section else None),
+            )
+        except Exception:
+            writer_budget_text = ""
+
         narrative_requirement = (
             "\n【写作风格要求（必须遵守，对照范本 references/nsfc-templates/）】\n"
             "申请书必须是连贯的叙述/论述式研究故事，不是知识整理或文献罗列。\n"
@@ -1761,6 +1810,16 @@ class OptimizeMixin:
             f"- 过程性说明写入 05_review/ 下对应报告文件（或方法学手册），不放正文。\n"
             f"- 此前轮次写入 references.md 的 §D 映射表/§E 核实声明/§F 闭环日志\n"
             f"  如仍在，请在本轮修订时迁移至 05_review/ 并从章节文件删除。\n"
+            f"- full_review.md 同样适用（v6.9.53）：只写全文逻辑骨架（≤3000 字），\n"
+            f"  严禁把逐项对照表、处置记录、轮次说明写入该文件。\n"
+            f"\n"
+            f"■ 章节字数纪律（v6.9.53，程序复检强制）：\n"
+            f"- 各章节有字数预算（立项依据 5000-8000 / 研究内容 4000-7000 /\n"
+            f"  研究方案 6000-10000，按中文字符计）。\n"
+            f"- 聚焦章节若已超限，本轮必须净删减（压缩重写：删并重复论证、\n"
+            f"  去冗余修饰、细节下沉方法学手册），禁止以追加方式响应评审意见。\n"
+            f"- 修复问题优先用'改写现有句子'而非'新增句子'。\n"
+            f"{writer_budget_text}"
         )
 
         # v6.8.17: cross-proposal 范例注入——从最高分课题提取范例段落

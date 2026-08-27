@@ -824,10 +824,12 @@ class MetricsPreflightTests(TestSuite):
         self.assert_true("无数值集差异项" in out2, "全一致时应报告无差异")
 
         # 9.3 源码守卫：full_review critic 排除 references + 附预检
+        # v6.9.53 起 references 与 full_review 一并排除（骨架是派生索引），
+        # 守卫同步更新为成员检查写法，语义不放松。
         src = (Path(__file__).parent.parent / "proposal_lifecycle" / "optimize.py").read_text(encoding="utf-8")
         self.assert_true(
-            "and s['key'] != \"references\"  # v6.9.46: 排除文献列表" in src,
-            "full_review critic 文件列表应排除 references.md",
+            "and s['key'] not in (\"references\", \"full_review\")" in src,
+            "full_review critic 文件列表应排除 references.md 与 full_review.md",
         )
         self.assert_true(
             "_cross_section_metrics_preflight(prop_dir)" in src,
@@ -1030,13 +1032,123 @@ class AICeilingFairnessTests(TestSuite):
         )
 
 
+class SectionHygieneTests(TestSuite):
+    """11：v6.9.53 章节卫生——字数预算预检 + full_review 骨架化 + references 清洗。"""
+
+    def __init__(self):
+        super().__init__("章节卫生与字数预算测试（v6.9.53-11）")
+
+    def setup(self):
+        import tempfile
+        self.tmp = Path(tempfile.mkdtemp())
+        # 隔离加载 section_hygiene
+        for mod in list(sys.modules):
+            if mod == "proposal_lifecycle.section_hygiene":
+                del sys.modules[mod]
+        sys.path.insert(0, str(Path(__file__).parent.parent))
+        from proposal_lifecycle import section_hygiene
+        self.sh = section_hygiene
+
+    def teardown(self):
+        if self.tmp and self.tmp.exists():
+            shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def run_tests(self):
+        sh = self.sh
+        sec = self.tmp / "04_proposal" / "sections"
+        sec.mkdir(parents=True)
+
+        # 11.1 预算报告：超限/达标判定 + 量化指令
+        (sec / "rationale.md").write_text("正" * 11000, encoding="utf-8")
+        (sec / "content.md").write_text("正" * 5500, encoding="utf-8")
+        rep = sh.budget_report(sec)
+        self.assert_true(rep["rationale"]["status"] == "over", "rationale 11000 字应超限")
+        self.assert_true(rep["content"]["status"] == "ok", "content 5500 字应达标")
+        txt = sh.budget_report_text(sec, focus_key="rationale")
+        self.assert_true("净删" in txt, "超限聚焦章节应附净删量化指令")
+
+        # 11.2 full_review 迁移 + 骨架重写 + 幂等
+        (sec / "scheme.md").write_text(
+            "# 研究方案\n\n## 总体方案\n正文。\n\n## 技术路线\n正文。\n", encoding="utf-8")
+        (sec / "full_review.md").write_text(
+            "# 核查记录\n\n经前 5 轮评审修复确认，本轮 round-6 重新核查未见复发。\n" * 40,
+            encoding="utf-8")
+        out = sh.migrate_full_review_record(self.tmp, dry_run=False)
+        self.assert_true(out and Path(out).exists(), "核查记录应迁至 05_review/")
+        fr = (sec / "full_review.md").read_text(encoding="utf-8")
+        self.assert_true("round-6" not in fr, "骨架不应含轮次工作记录")
+        self.assert_true("技术路线" in fr, "骨架应含章节标题索引")
+        self.assert_true(sh.migrate_full_review_record(self.tmp) is None,
+                         "干净骨架二次执行应幂等跳过")
+
+        # 11.3 references 工作日志剥离：保留条目、剥离表格
+        entries = "\n".join(
+            f"[{i}] Zhang Y. et al. *Paper {i}*. **Nature {i}, 100 (2020).**"
+            for i in range(1, 36))
+        (sec / "references.md").write_text(
+            "# 参考文献\n\n" + entries +
+            "\n\n## §D 引用挂钩映射表\n\n| [CITE:a] | 3 | 8 | x |\n| [CITE:b] | 4 | 9 | y |\n"
+            "| [CITE:c] | 5 | 10 | z |\n\n## §E 核实声明\n已逐条核实。\n",
+            encoding="utf-8")
+        out2 = sh.strip_references_worklog(self.tmp, dry_run=False)
+        self.assert_true(out2 and Path(out2).exists(), "工作日志段落应剥离迁出")
+        ref = (sec / "references.md").read_text(encoding="utf-8")
+        self.assert_true("| [CITE:" not in ref and "核实声明" not in ref,
+                         "剥离后不应残留工作日志")
+        self.assert_true("[35]" in ref and "[1]" in ref, "全部文献条目必须保留")
+
+        # 11.4 源码守卫：critic 排除 full_review + 附预检；writer 骨架指令
+        opt_src = (Path(__file__).parent.parent / "proposal_lifecycle" / "optimize.py").read_text(encoding="utf-8")
+        self.assert_true(
+            'and s[\'key\'] not in ("references", "full_review")' in opt_src,
+            "full_review critic 文件列表应同时排除 references 与 full_review",
+        )
+        self.assert_true(
+            "budget_report_text(" in opt_src and "full_review_purity_text(" in opt_src,
+            "critic 应附字数预算与纯净性预检",
+        )
+        self.assert_true(
+            "focus_key=focus_section[\"key\"]" in opt_src,
+            "章节级 critic 应附聚焦章节预算",
+        )
+        self.assert_true(
+            "全文逻辑骨架" in opt_src and "≤3000 字" in opt_src,
+            "writer 应含 full_review 骨架写法指令",
+        )
+        self.assert_true(
+            "章节字数纪律" in opt_src and "writer_budget_text" in opt_src,
+            "writer 应含字数纪律与预算量化注入",
+        )
+        self.assert_true(
+            "full_review.md 同样适用" in opt_src,
+            "纯净性红线应扩展覆盖 full_review.md",
+        )
+
+        # 11.5 standards 守卫：预算条目已写入
+        std = json.loads((Path(__file__).parent.parent.parent / "memory" / "nsfc-standards.json").read_text(encoding="utf-8"))
+        ss = std["general_principles"]["section_standards"]
+        self.assert_true(
+            any("总字数4000-7000" in x for x in ss["content"]),
+            "content 标准应含 4000-7000 字预算",
+        )
+        self.assert_true(
+            any("总字数6000-10000" in x for x in ss["scheme"]),
+            "scheme 标准应含 6000-10000 字预算",
+        )
+        self.assert_true(
+            any("3000" in x for x in ss["full_review"]),
+            "full_review 标准应含骨架字数上限",
+        )
+
+
 def main():
     from test_runner import print_report
 
     suites = []
     for cls in (AnchorOrderTests, WriterEscalationTests, SemanticDedupTests, ExecutorPathTests,
                 WeeklyResetAnchorTests, TaskSyncRollbackTests, KbDistillAutoTests, NamingGuardTests,
-                ReferencesPreflightTests, MetricsPreflightTests, AICeilingFairnessTests):
+                ReferencesPreflightTests, MetricsPreflightTests, AICeilingFairnessTests,
+                SectionHygieneTests):
         s = cls()
         s.setup()
         s.run_tests()
