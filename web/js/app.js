@@ -417,39 +417,9 @@ function bindKbManagerEvents() {
       showToast('加载用量失败', 'error');
     }
   });
-  document.getElementById('toolbar-learning')?.addEventListener('click', openLearningManager);
+  // v6.9.58: learning 管理器死引用已清理（learning.js 未加载、DOM 已删，
+  // 原 openLearningManager 等全局函数不存在——学习入口由设置中心承接）
 
-  // 学习管理器
-  document.getElementById('learning-manager-close')?.addEventListener('click', closeLearningManager);
-  document.getElementById('learning-manager-overlay')?.addEventListener('click', (e) => {
-    if (e.target === e.currentTarget) closeLearningManager();
-  });
-  document.getElementById('learning-trigger-btn')?.addEventListener('click', async () => {
-    const btn = document.getElementById('learning-trigger-btn');
-    if (btn) btn.disabled = true;
-    showToast('🌱 启动自主学习周期...', 'info');
-    try {
-      const result = await apiPost('/api/learning/trigger', { sources: ['arxiv'], max_items: 1 });
-      if (result.created && result.created.length > 0) {
-        showToast(`✓ 学习完成，创建 ${result.created.length} 个 wiki`, 'success');
-      } else if (result.failed && result.failed.length > 0) {
-        showToast(`⚠ 学习失败: ${result.failed[0]}`, 'warning');
-      } else {
-        showToast('○ 未发现学习机会', 'info');
-      }
-      await renderLearningManager();
-    } catch (e) {
-      showToast('✗ 触发失败: ' + e.message, 'error');
-    } finally {
-      if (btn) btn.disabled = false;
-    }
-  });
-  document.querySelectorAll('#learning-manager-overlay .kb-tab').forEach(tab => {
-    tab.addEventListener('click', () => switchLearningTab(tab.dataset.tab));
-  });
-
-  // P0-2: 绑定学习配置保存按钮
-  document.getElementById('save-learning-config')?.addEventListener('click', saveLearningConfig);
 
   // v3.5.2: projects/hermes/research 事件绑定已由 ModuleLoader 统一处理，此处不再重复调用
 
@@ -534,7 +504,9 @@ async function init() {
   if (typeof bindPaperDiscussionEvents === 'function') bindPaperDiscussionEvents();
 
   // v6.8.0: 导航按钮绑定（已精简为仪表盘/控制台/全链路/知识库/设置）
+  // v6.9.58: 跳过无 data-view 的工具入口按钮（工作台/中枢为弹窗模式）
   document.querySelectorAll('.nav-btn').forEach(btn => {
+    if (!btn.dataset.view) return;
     btn.addEventListener('click', () => {
       switchToView(btn.dataset.view);
     });

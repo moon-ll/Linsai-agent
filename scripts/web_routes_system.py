@@ -31,7 +31,12 @@ handler 签名：GET/DELETE → (self, parsed, body=None, **path_params)
 import datetime
 import json
 import re
+import time as _mod_time
 from pathlib import Path
+
+# 模块加载时刻（v6.9.58）：/api/version 据此报告进程启动时间，
+# 用于识别"版本号新但代码旧"的常驻实例
+_PROCESS_LOADED_AT = _mod_time.time()
 
 import web_base
 from web_base import (
@@ -167,9 +172,16 @@ class SystemRoutesMixin:
     # --- GET ---
 
     def _sys_version(self, parsed, body=None):
-        """版本号"""
+        """版本号（v6.9.58 附进程启动时间——常驻实例可能落后于 VERSION
+        文件，仅看版本号会误判实例新旧，实测 8/3 启动的实例显示 6.9.57）"""
         version = (web_base._PROJECT_ROOT / "VERSION").read_text(encoding="utf-8").strip()
-        self._send_json({"version": version, "name": "LinSai-CoPilot"})
+        self._send_json({
+            "version": version,
+            "name": "LinSai-CoPilot",
+            "process_started_at": datetime.datetime.fromtimestamp(
+                _PROCESS_LOADED_AT, tz=datetime.timezone.utc
+            ).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        })
 
     def _sys_dashboard(self, parsed, body=None):
         """v6.0 仪表盘聚合：今日文献/任务/决策/hermes状态，一次请求返回。"""

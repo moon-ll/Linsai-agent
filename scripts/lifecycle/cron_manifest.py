@@ -68,6 +68,12 @@ CRON_MANIFEST: Dict[str, Dict[str, Any]] = {
         "purpose": "每日 03:17 用户数据备份（24h 幂等防重 + 轮转保留最近 7 份，v6.9.54）",
         "depends": [],
     },
+    "lc-daily-sync": {
+        "schedule": "0 23 * * *",
+        "category": "framework",
+        "purpose": "每日 23:00 日终同步 hermes 产出→知识库（sync_all；与 12:40 kb-sync 各覆盖半天进料，v6.9.58 补录——此前游离在清单外是拓扑对账盲区）",
+        "depends": [],
+    },
     KB_SYNC_CRON_NAME: {
         "schedule": DEFAULT_KB_SYNC_SCHEDULE,
         "category": "framework",

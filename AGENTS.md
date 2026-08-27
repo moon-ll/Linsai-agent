@@ -163,7 +163,7 @@ python3 -m py_compile scripts/*.py
 - **通信协议**：REST API + SSE（Server-Sent Events）流式输出，不引入 WebSocket。
 - **移动端优先**：侧边栏可折叠、触摸目标 ≥ 40px、响应式断点 680px/900px。
 - **无障碍**：语义化标签、键盘导航（Enter 发送、Shift+Enter 换行）。
-- **主导航（v6.8.0）**：仪表盘 / 控制台 / 全链路 / 知识库 / 设置。旧的 hermes / pipeline 页面入口已移除，相关能力并入控制台/全链路。
+- **主导航（v6.9.58）**：仪表盘 / 控制台 / 全链路 / 知识库 / 设置 + 工具入口（申请书工作台⚗️ / Hermes 中枢🤖——v6.8.0 曾移除入口致 55 端点不可达，v6.9.58 恢复）。全链路页含想法收件箱/周末任务面板，控制台含调度策略面板与总控入口。
 - **对话式审核（v6.8.0）**：待校验课题在独立 `review-page` 分屏展示（左侧申请书 5 模块 / 右侧讨论 / 底部审核操作），审核会话结束后自动归档。
 - 前端工具类前缀统一，避免内联 style；新增 CSS 类优先于内联样式。
 
@@ -236,7 +236,7 @@ Web 服务器以 Mixin 聚合 12 个路由模块，命名空间按功能归属�
 
 保障全链路稳定运转的四条辅助链路：
 
-- **健康检查**：`lifecycle_monitor.py`（每小时 cron `lc-hourly-monitor`）检测 cron 缺失/重复/漂移、卡住课题、连续失败、零进展、API 限流，异常去重后飞书通知，cron 异常自动修复；cron 拓扑以 `lifecycle/cron_manifest.py` 为单一真相源（8 个固定 cron 清单 + `validate_cron_topology()` 对账），monitor 启动时清理过期告警缓存条目；`profile_health.py` 计算 7 个 hermes profile 的健康度（单次失败标 degraded，连续 2 次失败才标 blocked）；`failure_analyzer.py` 从日志聚类 8 种失败模式。
+- **健康检查**：`lifecycle_monitor.py`（每小时 cron `lc-hourly-monitor`）检测 cron 缺失/重复/漂移、卡住课题、连续失败、零进展、API 限流，异常去重后飞书通知，cron 异常自动修复；cron 拓扑以 `lifecycle/cron_manifest.py` 为单一真相源（10 个固定 cron 清单 + `validate_cron_topology()` 对账），monitor 启动时清理过期告警缓存条目；`profile_health.py` 计算 7 个 hermes profile 的健康度（单次失败标 degraded，连续 2 次失败才标 blocked）；`failure_analyzer.py` 从日志聚类 8 种失败模式。
 - **看板系统**：`memory/system-kanban.json` 由微调度器（主写）和 `lifecycle_monitor`（合并写）协同维护，包含当前时段/聚焦课题/job 进度/执行历史/任务同步统计，前端通过 `/api/console/flow` 展示。
 - **定期修复**：`lc-repair` cron 每 6 小时执行 `orchestrator.run_repair()`，（v6.9.19 周末模式含阶段超期补跑：入口 cron 窗口已过且本周末零活动的阶段自动补 sync 交 worker 推进），重置 stuck running（阈值 1800s）、重试 failed job（最多 3 次）、补齐缺失 worker、清理旧轮次 job（删除前归档至 `research_proposals/_lifecycle_archive.json`，上限 5000 条）；双上限终态 job（attempts≥3 且 repair_attempts≥3）finished 超 24h 后自动解锁重跑一次（`should_auto_unlock`，每 job 限 1 次，`auto_unlock_count` 计数）；error_history 保存时裁剪至 10 条（`trim_error_history`）；微调度器在每次执行前无条件清理 stale job。
 - **自成长**：`strategy_optimizer.py` 基于 7 天历史给出调度参数建议（仅建议）；`prompt_optimizer.py`（每日 14:00 cron `lc-prompt-optimize`）从 debug journal/agent scores/failure patterns 生成 prompt 修改建议并自动应用（备份原文件）；`retrospective.py`（每周一 15:00 cron `lc-retrospective`）综合 5 个数据源生成结构化复盘报告。

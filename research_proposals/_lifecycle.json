@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-27T03:15:54Z",
+      "updated_at": "2026-08-27T04:04:34Z",
       "optimization_rounds": 2,
       "last_score": 0.81,
       "score_history": [
@@ -376,6 +376,10 @@
         },
         {
           "at": "2026-08-26T22:00:48Z",
+          "error": "general-quantum-geometry-inversion-20260726-r2-rationale-critic: 超时(1200s)"
+        },
+        {
+          "at": "2026-08-27T04:04:34Z",
           "error": "general-quantum-geometry-inversion-20260726-r2-rationale-critic: 超时(1200s)"
         }
       ],
@@ -1345,14 +1349,15 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 3,
-          "status": "running",
+          "status": "pending",
           "depends_on": [],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-27T03:15:54Z",
+          "started_at": "",
           "finished_at": "",
           "last_error": "",
-          "cron_job_id": ""
+          "cron_job_id": "",
+          "repair_attempts": 1
         },
         {
           "job_id": "general-quantum-geometry-inversion-20260726-r3-rationale-gap_identify",
@@ -2730,7 +2735,7 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-27T00:45:31Z",
+      "updated_at": "2026-08-27T04:04:34Z",
       "optimization_rounds": 0,
       "last_score": 0.76,
       "score_history": [
@@ -3290,10 +3295,6 @@
       "worker_minute": 59,
       "cron_failures": [
         {
-          "at": "2026-08-24T16:00:02Z",
-          "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
-        },
-        {
           "at": "2026-08-24T22:00:02Z",
           "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
         },
@@ -3307,6 +3308,10 @@
         },
         {
           "at": "2026-08-26T22:00:49Z",
+          "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-27T04:04:34Z",
           "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
         }
       ],
@@ -4509,7 +4514,7 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-27T03:06:51Z",
+      "updated_at": "2026-08-27T04:04:34Z",
       "optimization_rounds": 5,
       "last_score": 0.68,
       "score_history": [
@@ -4954,509 +4959,6 @@
       "initialized_at": "2026-08-18T13:02:56Z",
       "missing_sections": [],
       "pipeline_jobs": [
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-rationale-critic",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "critic",
-          "section_key": "rationale",
-          "round": 3,
-          "status": "done",
-          "depends_on": [],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T10:30:10Z",
-          "finished_at": "2026-08-20T10:37:48Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-rationale-gap_identify",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "gap_identify",
-          "section_key": "rationale",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-rationale-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T10:40:11Z",
-          "finished_at": "2026-08-20T10:40:57Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-rationale-lit_search",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "lit_search",
-          "section_key": "rationale",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-rationale-gap_identify"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T10:45:12Z",
-          "finished_at": "2026-08-20T10:46:36Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-rationale-lit_read",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "lit_read",
-          "section_key": "rationale",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-rationale-lit_search"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T10:50:13Z",
-          "finished_at": "2026-08-20T10:59:01Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-rationale-lit_note",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "lit_note",
-          "section_key": "rationale",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-rationale-lit_read"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T11:00:15Z",
-          "finished_at": "2026-08-20T11:00:16Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-rationale-writer",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "writer",
-          "section_key": "rationale",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-rationale-critic",
-            "general-moire-strong-field-probe-20260726-r3-rationale-lit_note"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T11:05:15Z",
-          "finished_at": "2026-08-20T11:15:29Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-content-critic",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "critic",
-          "section_key": "content",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-rationale-writer"
-          ],
-          "attempts": 2,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T11:40:21Z",
-          "finished_at": "2026-08-20T11:48:51Z",
-          "last_error": "",
-          "cron_job_id": "",
-          "error_history": [
-            {
-              "at": "2026-08-20T11:35:18Z",
-              "error": "超时(900s)",
-              "attempts": 1
-            }
-          ],
-          "repair_attempts": 1
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-content-gap_identify",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "gap_identify",
-          "section_key": "content",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-content-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T11:50:23Z",
-          "finished_at": "2026-08-20T11:51:02Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-content-lit_search",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "lit_search",
-          "section_key": "content",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-content-gap_identify"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T11:55:24Z",
-          "finished_at": "2026-08-20T11:58:16Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-content-lit_read",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "lit_read",
-          "section_key": "content",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-content-lit_search"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T12:00:26Z",
-          "finished_at": "2026-08-20T12:09:16Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-content-lit_note",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "lit_note",
-          "section_key": "content",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-content-lit_read"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T12:10:26Z",
-          "finished_at": "2026-08-20T12:10:26Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-content-writer",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "writer",
-          "section_key": "content",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-content-critic",
-            "general-moire-strong-field-probe-20260726-r3-content-lit_note"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T12:15:27Z",
-          "finished_at": "2026-08-20T12:21:27Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-scheme-critic",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "critic",
-          "section_key": "scheme",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-content-writer"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T12:25:29Z",
-          "finished_at": "2026-08-20T12:32:45Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-scheme-gap_identify",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "gap_identify",
-          "section_key": "scheme",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-scheme-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T12:35:30Z",
-          "finished_at": "2026-08-20T12:36:02Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-scheme-lit_search",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "lit_search",
-          "section_key": "scheme",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-scheme-gap_identify"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T12:40:31Z",
-          "finished_at": "2026-08-20T12:42:46Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-scheme-lit_read",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "lit_read",
-          "section_key": "scheme",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-scheme-lit_search"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T12:45:32Z",
-          "finished_at": "2026-08-20T12:55:18Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-scheme-lit_note",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "lit_note",
-          "section_key": "scheme",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-scheme-lit_read"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T13:00:35Z",
-          "finished_at": "2026-08-20T13:00:35Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-scheme-writer",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "writer",
-          "section_key": "scheme",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-scheme-critic",
-            "general-moire-strong-field-probe-20260726-r3-scheme-lit_note"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T13:05:35Z",
-          "finished_at": "2026-08-20T13:09:12Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-full_review-critic",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "critic",
-          "section_key": "full_review",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-scheme-writer"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T13:10:36Z",
-          "finished_at": "2026-08-20T13:13:35Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-full_review-gap_identify",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "gap_identify",
-          "section_key": "full_review",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-full_review-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T13:15:37Z",
-          "finished_at": "2026-08-20T13:16:19Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-full_review-lit_search",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "lit_search",
-          "section_key": "full_review",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-full_review-gap_identify"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T13:20:38Z",
-          "finished_at": "2026-08-20T13:25:18Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-full_review-lit_read",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "lit_read",
-          "section_key": "full_review",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-full_review-lit_search"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T13:30:39Z",
-          "finished_at": "2026-08-20T13:38:32Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-full_review-lit_note",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "lit_note",
-          "section_key": "full_review",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-full_review-lit_read"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T13:40:41Z",
-          "finished_at": "2026-08-20T13:40:41Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-full_review-writer",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "writer",
-          "section_key": "full_review",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-full_review-critic",
-            "general-moire-strong-field-probe-20260726-r3-full_review-lit_note"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T13:45:42Z",
-          "finished_at": "2026-08-20T13:57:00Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-references-critic",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "critic",
-          "section_key": "references",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-full_review-writer"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T14:00:46Z",
-          "finished_at": "2026-08-20T14:04:14Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-references-writer",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "writer",
-          "section_key": "references",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-references-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T14:05:45Z",
-          "finished_at": "2026-08-20T14:18:14Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-monitor-monitor",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "monitor",
-          "section_key": "monitor",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-references-writer"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T14:20:48Z",
-          "finished_at": "2026-08-20T14:21:54Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-derived-update_vision",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "update_vision",
-          "section_key": "derived",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-monitor-monitor"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T14:25:49Z",
-          "finished_at": "2026-08-20T14:26:58Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-moire-strong-field-probe-20260726-r3-derived-update_method_manual",
-          "proposal_id": "general-moire-strong-field-probe-20260726",
-          "step": "update_method_manual",
-          "section_key": "derived",
-          "round": 3,
-          "status": "done",
-          "depends_on": [
-            "general-moire-strong-field-probe-20260726-r3-derived-update_vision"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T14:30:49Z",
-          "finished_at": "2026-08-20T14:36:04Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
         {
           "job_id": "general-moire-strong-field-probe-20260726-r4-rationale-critic",
           "proposal_id": "general-moire-strong-field-probe-20260726",
@@ -6424,6 +5926,432 @@
           "finished_at": "2026-08-23T17:20:01Z",
           "last_error": "",
           "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-rationale-critic",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "critic",
+          "section_key": "rationale",
+          "round": 6,
+          "status": "done",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-27T03:45:58Z",
+          "finished_at": "2026-08-27T04:04:32Z",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-rationale-gap_identify",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "gap_identify",
+          "section_key": "rationale",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-rationale-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-rationale-lit_search",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "lit_search",
+          "section_key": "rationale",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-rationale-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-rationale-lit_read",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "lit_read",
+          "section_key": "rationale",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-rationale-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-rationale-lit_note",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "lit_note",
+          "section_key": "rationale",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-rationale-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-rationale-writer",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "writer",
+          "section_key": "rationale",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-rationale-critic",
+            "general-moire-strong-field-probe-20260726-r6-rationale-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-content-critic",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "critic",
+          "section_key": "content",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-rationale-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-content-gap_identify",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "gap_identify",
+          "section_key": "content",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-content-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-content-lit_search",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "lit_search",
+          "section_key": "content",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-content-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-content-lit_read",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "lit_read",
+          "section_key": "content",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-content-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-content-lit_note",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "lit_note",
+          "section_key": "content",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-content-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-content-writer",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "writer",
+          "section_key": "content",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-content-critic",
+            "general-moire-strong-field-probe-20260726-r6-content-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-scheme-critic",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "critic",
+          "section_key": "scheme",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-content-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-scheme-gap_identify",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "gap_identify",
+          "section_key": "scheme",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-scheme-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-scheme-lit_search",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "lit_search",
+          "section_key": "scheme",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-scheme-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-scheme-lit_read",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "lit_read",
+          "section_key": "scheme",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-scheme-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-scheme-lit_note",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "lit_note",
+          "section_key": "scheme",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-scheme-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-scheme-writer",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "writer",
+          "section_key": "scheme",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-scheme-critic",
+            "general-moire-strong-field-probe-20260726-r6-scheme-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-full_review-critic",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "critic",
+          "section_key": "full_review",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-scheme-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-full_review-writer",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "writer",
+          "section_key": "full_review",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-references-critic",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "critic",
+          "section_key": "references",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-full_review-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-references-writer",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "writer",
+          "section_key": "references",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-references-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-monitor-monitor",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "monitor",
+          "section_key": "monitor",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-references-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-derived-update_vision",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "update_vision",
+          "section_key": "derived",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-monitor-monitor"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-moire-strong-field-probe-20260726-r6-derived-update_method_manual",
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "step": "update_method_manual",
+          "section_key": "derived",
+          "round": 6,
+          "status": "pending",
+          "depends_on": [
+            "general-moire-strong-field-probe-20260726-r6-derived-update_vision"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
         }
       ],
       "degradation_events": [
@@ -6833,10 +6761,6 @@
       "low_score_alert": false,
       "cron_failures": [
         {
-          "at": "2026-08-24T16:00:02Z",
-          "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
-        },
-        {
           "at": "2026-08-24T22:00:02Z",
           "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
         },
@@ -6850,6 +6774,10 @@
         },
         {
           "at": "2026-08-26T22:00:49Z",
+          "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-27T04:04:34Z",
           "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
         }
       ],
@@ -9176,7 +9104,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-27T03:06:51Z",
+      "updated_at": "2026-08-27T04:04:34Z",
       "optimization_rounds": 7,
       "last_score": 0.69,
       "score_history": [
@@ -9694,10 +9622,6 @@
       "missing_sections": [],
       "cron_failures": [
         {
-          "at": "2026-08-24T16:00:02Z",
-          "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
-        },
-        {
           "at": "2026-08-24T22:00:02Z",
           "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
         },
@@ -9711,6 +9635,10 @@
         },
         {
           "at": "2026-08-26T22:00:49Z",
+          "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-27T04:04:34Z",
           "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
         }
       ],
@@ -9732,517 +9660,6 @@
         }
       ],
       "pipeline_jobs": [
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-rationale-critic",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "critic",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T01:00:12Z",
-          "finished_at": "2026-08-19T01:04:16Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-rationale-gap_identify",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "gap_identify",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-rationale-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T01:05:12Z",
-          "finished_at": "2026-08-19T01:05:53Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-rationale-lit_search",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "lit_search",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-rationale-gap_identify"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T01:10:13Z",
-          "finished_at": "2026-08-19T01:12:24Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-rationale-lit_read",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "lit_read",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-rationale-lit_search"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T01:15:14Z",
-          "finished_at": "2026-08-19T01:15:14Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-rationale-lit_note",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "lit_note",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-rationale-lit_read"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T01:20:14Z",
-          "finished_at": "2026-08-19T01:20:14Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-rationale-writer",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "writer",
-          "section_key": "rationale",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-rationale-critic",
-            "general-order-parameter-ultrafast-readout-20260727-r5-rationale-lit_note"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T01:25:15Z",
-          "finished_at": "2026-08-19T01:31:15Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-content-critic",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "critic",
-          "section_key": "content",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-rationale-writer"
-          ],
-          "attempts": 2,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T01:55:19Z",
-          "finished_at": "2026-08-19T02:04:12Z",
-          "last_error": "",
-          "cron_job_id": "",
-          "error_history": [
-            {
-              "at": "2026-08-19T01:50:17Z",
-              "error": "超时(900s)",
-              "attempts": 1
-            }
-          ],
-          "repair_attempts": 1
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-content-gap_identify",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "gap_identify",
-          "section_key": "content",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-content-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T02:05:20Z",
-          "finished_at": "2026-08-19T02:07:19Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-content-lit_search",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "lit_search",
-          "section_key": "content",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-content-gap_identify"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T02:10:21Z",
-          "finished_at": "2026-08-19T02:11:46Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-content-lit_read",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "lit_read",
-          "section_key": "content",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-content-lit_search"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T02:15:22Z",
-          "finished_at": "2026-08-19T02:15:22Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-content-lit_note",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "lit_note",
-          "section_key": "content",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-content-lit_read"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T02:20:22Z",
-          "finished_at": "2026-08-19T02:20:22Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-content-writer",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "writer",
-          "section_key": "content",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-content-critic",
-            "general-order-parameter-ultrafast-readout-20260727-r5-content-lit_note"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T02:25:23Z",
-          "finished_at": "2026-08-19T02:35:52Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-scheme-critic",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "critic",
-          "section_key": "scheme",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-content-writer"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T02:40:26Z",
-          "finished_at": "2026-08-19T02:46:56Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-scheme-gap_identify",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "gap_identify",
-          "section_key": "scheme",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-scheme-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T02:50:26Z",
-          "finished_at": "2026-08-19T02:51:45Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-scheme-lit_search",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "lit_search",
-          "section_key": "scheme",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-scheme-gap_identify"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T02:55:27Z",
-          "finished_at": "2026-08-19T02:55:51Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-scheme-lit_read",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "lit_read",
-          "section_key": "scheme",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-scheme-lit_search"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T03:00:29Z",
-          "finished_at": "2026-08-19T03:00:29Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-scheme-lit_note",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "lit_note",
-          "section_key": "scheme",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-scheme-lit_read"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-19T03:05:29Z",
-          "finished_at": "2026-08-19T03:05:29Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-scheme-writer",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "writer",
-          "section_key": "scheme",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-scheme-critic",
-            "general-order-parameter-ultrafast-readout-20260727-r5-scheme-lit_note"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T20:00:45Z",
-          "finished_at": "2026-08-20T20:04:52Z",
-          "last_error": "",
-          "cron_job_id": "",
-          "error_history": [
-            {
-              "at": "2026-08-19T03:10:55Z",
-              "error": "api_error:API call failed",
-              "attempts": 1
-            }
-          ],
-          "repair_attempts": 2
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-full_review-critic",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "critic",
-          "section_key": "full_review",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-scheme-writer"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T20:05:45Z",
-          "finished_at": "2026-08-20T20:12:19Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-full_review-gap_identify",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "gap_identify",
-          "section_key": "full_review",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-full_review-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T20:15:46Z",
-          "finished_at": "2026-08-20T20:16:54Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-full_review-lit_search",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "lit_search",
-          "section_key": "full_review",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-full_review-gap_identify"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T20:20:47Z",
-          "finished_at": "2026-08-20T20:22:18Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-full_review-lit_read",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "lit_read",
-          "section_key": "full_review",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-full_review-lit_search"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T20:25:48Z",
-          "finished_at": "2026-08-20T20:31:07Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-full_review-lit_note",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "lit_note",
-          "section_key": "full_review",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-full_review-lit_read"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T20:35:50Z",
-          "finished_at": "2026-08-20T20:35:50Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-full_review-writer",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "writer",
-          "section_key": "full_review",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-full_review-critic",
-            "general-order-parameter-ultrafast-readout-20260727-r5-full_review-lit_note"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T20:40:51Z",
-          "finished_at": "2026-08-20T20:55:08Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-references-critic",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "critic",
-          "section_key": "references",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-full_review-writer"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T21:00:56Z",
-          "finished_at": "2026-08-20T21:05:49Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-references-writer",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "writer",
-          "section_key": "references",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-references-critic"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T21:10:56Z",
-          "finished_at": "2026-08-20T21:22:21Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-monitor-monitor",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "monitor",
-          "section_key": "monitor",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-references-writer"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T21:25:58Z",
-          "finished_at": "2026-08-20T21:27:00Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-derived-update_vision",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "update_vision",
-          "section_key": "derived",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-monitor-monitor"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T21:30:59Z",
-          "finished_at": "2026-08-20T21:32:01Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
-        {
-          "job_id": "general-order-parameter-ultrafast-readout-20260727-r5-derived-update_method_manual",
-          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
-          "step": "update_method_manual",
-          "section_key": "derived",
-          "round": 5,
-          "status": "done",
-          "depends_on": [
-            "general-order-parameter-ultrafast-readout-20260727-r5-derived-update_vision"
-          ],
-          "attempts": 0,
-          "scheduled_at": "",
-          "started_at": "2026-08-20T21:36:00Z",
-          "finished_at": "2026-08-20T21:40:26Z",
-          "last_error": "",
-          "cron_job_id": ""
-        },
         {
           "job_id": "general-order-parameter-ultrafast-readout-20260727-r6-rationale-critic",
           "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
@@ -11226,6 +10643,432 @@
           "finished_at": "2026-08-23T19:15:19Z",
           "last_error": "",
           "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-rationale-critic",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "critic",
+          "section_key": "rationale",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-rationale-gap_identify",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "gap_identify",
+          "section_key": "rationale",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-rationale-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-rationale-lit_search",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_search",
+          "section_key": "rationale",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-rationale-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-rationale-lit_read",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_read",
+          "section_key": "rationale",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-rationale-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-rationale-lit_note",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_note",
+          "section_key": "rationale",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-rationale-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-rationale-writer",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "writer",
+          "section_key": "rationale",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-rationale-critic",
+            "general-order-parameter-ultrafast-readout-20260727-r8-rationale-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-content-critic",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "critic",
+          "section_key": "content",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-rationale-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-content-gap_identify",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "gap_identify",
+          "section_key": "content",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-content-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-content-lit_search",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_search",
+          "section_key": "content",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-content-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-content-lit_read",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_read",
+          "section_key": "content",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-content-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-content-lit_note",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_note",
+          "section_key": "content",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-content-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-content-writer",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "writer",
+          "section_key": "content",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-content-critic",
+            "general-order-parameter-ultrafast-readout-20260727-r8-content-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-scheme-critic",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "critic",
+          "section_key": "scheme",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-content-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-scheme-gap_identify",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "gap_identify",
+          "section_key": "scheme",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-scheme-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-scheme-lit_search",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_search",
+          "section_key": "scheme",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-scheme-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-scheme-lit_read",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_read",
+          "section_key": "scheme",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-scheme-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-scheme-lit_note",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "lit_note",
+          "section_key": "scheme",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-scheme-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-scheme-writer",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "writer",
+          "section_key": "scheme",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-scheme-critic",
+            "general-order-parameter-ultrafast-readout-20260727-r8-scheme-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-full_review-critic",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "critic",
+          "section_key": "full_review",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-scheme-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-full_review-writer",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "writer",
+          "section_key": "full_review",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-references-critic",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "critic",
+          "section_key": "references",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-full_review-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-references-writer",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "writer",
+          "section_key": "references",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-references-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-monitor-monitor",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "monitor",
+          "section_key": "monitor",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-references-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-derived-update_vision",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "update_vision",
+          "section_key": "derived",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-monitor-monitor"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-derived-update_method_manual",
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "step": "update_method_manual",
+          "section_key": "derived",
+          "round": 8,
+          "status": "pending",
+          "depends_on": [
+            "general-order-parameter-ultrafast-readout-20260727-r8-derived-update_vision"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
         }
       ],
       "degradation_events": [
@@ -12138,7 +11981,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控",
       "created_at": "2026-08-16T03:49:25Z",
-      "updated_at": "2026-08-27T03:10:52Z",
+      "updated_at": "2026-08-27T04:04:34Z",
       "optimization_rounds": 2,
       "last_score": 0.51,
       "score_history": [
@@ -13602,15 +13445,15 @@
           "step": "writer",
           "section_key": "references",
           "round": 2,
-          "status": "failed",
+          "status": "pending",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-references-critic"
           ],
-          "attempts": 3,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-26T23:35:20Z",
-          "finished_at": "2026-08-27T00:05:27Z",
-          "last_error": "运行超时/进程僵死",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": "",
           "error_history": [
             {
@@ -13619,7 +13462,7 @@
               "attempts": 1
             }
           ],
-          "repair_attempts": 1
+          "repair_attempts": 2
         },
         {
           "job_id": "general-berry-mnps3-rashba-20260816-r2-monitor-monitor",
@@ -14145,7 +13988,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 交变磁体高次谐波产生与固态强场非线性光学新前沿",
       "created_at": "2026-08-22T05:40:16Z",
-      "updated_at": "2026-08-27T03:06:51Z",
+      "updated_at": "2026-08-27T04:04:34Z",
       "optimization_rounds": 2,
       "last_score": 0.55,
       "score_history": [
@@ -15671,6 +15514,432 @@
           "finished_at": "",
           "last_error": "",
           "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-rationale-critic",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "critic",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-rationale-gap_identify",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "gap_identify",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-rationale-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-rationale-lit_search",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_search",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-rationale-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-rationale-lit_read",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_read",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-rationale-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-rationale-lit_note",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_note",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-rationale-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-rationale-writer",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "writer",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-rationale-critic",
+            "general-new-idea-20260822-r3-rationale-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-content-critic",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "critic",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-rationale-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-content-gap_identify",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "gap_identify",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-content-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-content-lit_search",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_search",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-content-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-content-lit_read",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_read",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-content-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-content-lit_note",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_note",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-content-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-content-writer",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "writer",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-content-critic",
+            "general-new-idea-20260822-r3-content-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-scheme-critic",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "critic",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-content-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-scheme-gap_identify",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "gap_identify",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-scheme-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-scheme-lit_search",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_search",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-scheme-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-scheme-lit_read",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_read",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-scheme-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-scheme-lit_note",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "lit_note",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-scheme-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-scheme-writer",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "writer",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-scheme-critic",
+            "general-new-idea-20260822-r3-scheme-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-full_review-critic",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "critic",
+          "section_key": "full_review",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-scheme-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-full_review-writer",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "writer",
+          "section_key": "full_review",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-references-critic",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "critic",
+          "section_key": "references",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-full_review-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-references-writer",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "writer",
+          "section_key": "references",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-references-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-monitor-monitor",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "monitor",
+          "section_key": "monitor",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-references-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-derived-update_vision",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "update_vision",
+          "section_key": "derived",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-monitor-monitor"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-new-idea-20260822-r3-derived-update_method_manual",
+          "proposal_id": "general-new-idea-20260822",
+          "step": "update_method_manual",
+          "section_key": "derived",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-new-idea-20260822-r3-derived-update_vision"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
         }
       ],
       "pass_number": 1,
@@ -15709,7 +15978,13 @@
       "low_score_alert": false,
       "last_monitor_at": "2026-08-24T20:27:23Z",
       "last_monitor_score": 0.42,
-      "last_monitor_assessment": "判定说明：任务模板『聚焦章节=monitor』为字段异常，据 critic 报告（参考文献版本线第 1 轮，04:07）与文件时间线（writer 于 04:17-04:18 修订 sections 四文件与 proposal-draft.md）判定本轮实际聚焦为 references。critic 评审严谨、评分 0.43 与内容一致、无放水，无串通。writer 修订属『结构达标、完整性回退』：文献表从无到有、格式与列表编号达标、一处实错改正，但立项依据角标未重编导致 27 个引用约 23 个错配/悬空（较修订前恶化）、上轮 critical 占位文献 [3] 未解决、并为满足标识符要求疑"
+      "last_monitor_assessment": "判定说明：任务模板『聚焦章节=monitor』为字段异常，据 critic 报告（参考文献版本线第 1 轮，04:07）与文件时间线（writer 于 04:17-04:18 修订 sections 四文件与 proposal-draft.md）判定本轮实际聚焦为 references。critic 评审严谨、评分 0.43 与内容一致、无放水，无串通。writer 修订属『结构达标、完整性回退』：文献表从无到有、格式与列表编号达标、一处实错改正，但立项依据角标未重编导致 27 个引用约 23 个错配/悬空（较修订前恶化）、上轮 critical 占位文献 [3] 未解决、并为满足标识符要求疑",
+      "cron_failures": [
+        {
+          "at": "2026-08-27T04:04:34Z",
+          "error": "general-new-idea-20260822-r2-monitor-monitor: 超时(600s)"
+        }
+      ]
     },
     "general-attosecond-streaking-20260822": {
       "status": "optimizing",
@@ -15717,7 +15992,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 阿秒条纹技术：从超短脉冲表征到量子相位测量（手动补注册 2026-08-22）",
       "created_at": "2026-08-22T12:20:08Z",
-      "updated_at": "2026-08-27T03:10:51Z",
+      "updated_at": "2026-08-27T04:05:00Z",
       "optimization_rounds": 8,
       "last_score": 0.72,
       "score_history": [
@@ -17551,15 +17826,15 @@
           "step": "critic",
           "section_key": "content",
           "round": 8,
-          "status": "failed",
+          "status": "running",
           "depends_on": [
             "general-attosecond-streaking-20260822-r8-rationale-writer"
           ],
-          "attempts": 3,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-27T02:55:51Z",
-          "finished_at": "2026-08-27T03:10:51Z",
-          "last_error": "超时(900s)",
+          "started_at": "2026-08-27T04:05:00Z",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": "",
           "error_history": [
             {
@@ -17568,7 +17843,7 @@
               "attempts": 1
             }
           ],
-          "repair_attempts": 1
+          "repair_attempts": 2
         },
         {
           "job_id": "general-attosecond-streaking-20260822-r8-content-gap_identify",
@@ -17921,5 +18196,5 @@
       "negative_feedback_at": "2026-08-26T14:30:17Z"
     }
   },
-  "updated_at": "2026-08-27T03:15:54Z"
+  "updated_at": "2026-08-27T04:05:00Z"
 }

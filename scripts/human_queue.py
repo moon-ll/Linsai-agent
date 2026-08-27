@@ -156,8 +156,13 @@ def collect_human_queue(
     for item in items:
         item["escalate"] = (
             item.get("waiting_hours") is not None
-            and item["waiting_hours"] >= escalate_after_h
+            and item.get("waiting_hours") >= escalate_after_h
         )
+
+    # v6.9.58 第四类：策略建议待人工确认——中高风险/非白名单键的
+    # strategy_optimizer 建议此前只活在 dashboard JSON 里无人消费
+    # （实测 3 周 0 采纳），接入队列获得控制台展示 + monitor 催办。
+    items.extend(_pending_strategy_suggestions(now))
 
     escalated = [i for i in items if i["escalate"]]
     return {
@@ -170,9 +175,53 @@ def collect_human_queue(
             "negative_feedback": sum(
                 1 for i in items if i["type"] == "negative_feedback"
             ),
+            "strategy": sum(1 for i in items if i["type"] == "strategy"),
             "escalated": len(escalated),
         },
     }
+
+
+_STRATEGY_CACHE = MEMORY_DIR / ".cache" / "human-queue-strategy-cache.json"
+_STRATEGY_CACHE_TTL_S = 3600
+
+
+def _pending_strategy_suggestions(now: datetime) -> List[Dict[str, Any]]:
+    """聚合待人工确认的策略建议（1h 文件缓存，防 monitor/刷页重复计算）。"""
+    cached = load_json(_STRATEGY_CACHE, {})
+    ts = cached.get("at", "")
+    if ts:
+        try:
+            age = (now - datetime.fromisoformat(ts.replace("Z", "+00:00"))).total_seconds()
+            if age < _STRATEGY_CACHE_TTL_S:
+                return cached.get("items", [])
+        except ValueError:
+            pass
+    items: List[Dict[str, Any]] = []
+    try:
+        from strategy_optimizer import AUTO_APPLY_KEYS, suggest_strategies
+        result = suggest_strategies()
+        current = result.get("current") or {}
+        for key, sug in (result.get("suggested") or {}).items():
+            if key in AUTO_APPLY_KEYS or current.get(key) == sug:
+                continue  # 白名单项由 auto_apply_low_risk 处理
+            items.append({
+                "type": "strategy",
+                "title": f"策略建议：{key}",
+                "current": current.get(key),
+                "suggested": sug,
+                "risk": result.get("risk", "unknown"),
+                "waiting_hours": None,
+                "suggested_action": "在设置中心/控制台确认应用（低风险项已自动应用）",
+            })
+    except Exception as exc:  # noqa: BLE001 —— 队列聚合不因策略模块失败而断
+        if _log:
+            _log.warning("策略建议聚合失败: %s", exc)
+    try:
+        _STRATEGY_CACHE.parent.mkdir(parents=True, exist_ok=True)
+        save_json(_STRATEGY_CACHE, {"at": now_utc(), "items": items})
+    except OSError:
+        pass
+    return items
 
 
 def run_human_queue(persist: bool = True) -> Dict[str, Any]:

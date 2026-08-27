@@ -82,6 +82,145 @@ function initLifecyclePage() {
 // ============================================
 // 仪表盘
 // ============================================
+// ============================================
+// v6.9.58: 想法收件箱 + 周末任务面板
+// （此前 5 条 incoming 端点与 weekend 3 端点无 UI，人工立项只能读文件）
+// ============================================
+function lcToggleInbox() {
+  const panel = document.getElementById('lc-inbox-panel');
+  if (!panel) return;
+  if (panel.style.display === 'none') {
+    panel.style.display = 'block';
+    lcRenderInbox();
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+async function lcRenderInbox() {
+  const panel = document.getElementById('lc-inbox-panel');
+  if (!panel) return;
+  panel.innerHTML = '<div class="ta-center pad-20 text-tertiary">加载收件箱...</div>';
+  try {
+    const data = await apiGet('/api/lifecycle/incoming');
+    if (data.status !== 'ok') throw new Error(data.error || '获取失败');
+    const ideas = data.ideas || [];
+    if (!ideas.length) {
+      panel.innerHTML = `<div class="lc-card" style="padding:14px;">📭 收件箱为空（周末簇路由 new 动作注册的设想将出现在此，等待人工激活/合并/拒绝）</div>`;
+      return;
+    }
+    let html = `<div class="lc-card" style="padding:12px 14px;"><div style="font-weight:600;margin-bottom:8px;">📥 想法收件箱（${ideas.length}）</div>`;
+    for (const idea of ideas) {
+      const id = idea.idea_id || idea.id || '';
+      const title = idea.title || idea.name || id;
+      const dossier = idea.idea_dossier || {};
+      const rec = dossier.recommendation || '';
+      html += `
+        <div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;margin-bottom:8px;">
+          <div style="font-weight:600;">${escapeHtml(title)}</div>
+          <div class="fs-072 text-tertiary" style="margin:4px 0;">
+            ${rec ? `立项预审：<strong>${escapeHtml(rec)}</strong> · ` : ''}${escapeHtml(idea.created_at || '')}
+          </div>
+          <div class="fs-072 text-tertiary">${escapeHtml((idea.background || idea.summary || '').slice(0, 150))}</div>
+          <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap;">
+            <button class="btn-text" style="color:var(--success-color);" onclick="lcInboxAccept('${escapeHtml(id)}')">✓ 激活立项</button>
+            <button class="btn-text" style="color:var(--info-color);" onclick="lcInboxExpand('${escapeHtml(id)}')">🔍 展开</button>
+            <button class="btn-text" style="color:var(--error-color);" onclick="lcInboxReject('${escapeHtml(id)}')">✗ 拒绝</button>
+          </div>
+        </div>`;
+    }
+    html += '</div>';
+    panel.innerHTML = html;
+  } catch (e) {
+    panel.innerHTML = `<div class="pad-20 text-error">收件箱加载失败：${escapeHtml(e.message)}</div>`;
+  }
+}
+
+async function lcInboxAccept(ideaId) {
+  if (!confirm(`确认激活该设想为新课题（drafts → 优化管线）？`)) return;
+  try {
+    const r = await apiPost(`/api/lifecycle/incoming/${encodeURIComponent(ideaId)}/accept`, {});
+    if (r.status === 'ok') { showToast('✓ 已激活立项', 'success'); lcRenderInbox(); renderLifecycleDashboard(); }
+    else showToast(`✗ ${r.error || '失败'}`, 'error');
+  } catch (e) { showToast(`✗ ${e.message}`, 'error'); }
+}
+
+async function lcInboxReject(ideaId) {
+  if (!confirm('确认拒绝该设想？')) return;
+  try {
+    const r = await apiPost(`/api/lifecycle/incoming/${encodeURIComponent(ideaId)}/reject`, {});
+    if (r.status === 'ok') { showToast('✓ 已拒绝', 'success'); lcRenderInbox(); }
+    else showToast(`✗ ${r.error || '失败'}`, 'error');
+  } catch (e) { showToast(`✗ ${e.message}`, 'error'); }
+}
+
+async function lcInboxExpand(ideaId) {
+  try {
+    const r = await apiPost('/api/lifecycle/incoming/expand', { idea_id: ideaId });
+    if (r.status === 'ok' && r.data) {
+      const d = r.data;
+      showModal?.(`<h3>🔍 设想详情</h3><pre style="white-space:pre-wrap;font-size:0.8rem;max-height:60vh;overflow:auto;">${escapeHtml(JSON.stringify(d, null, 2))}</pre>`) ||
+      alert(JSON.stringify(d, null, 2).slice(0, 2000));
+    } else showToast(`✗ ${r.error || '失败'}`, 'error');
+  } catch (e) { showToast(`✗ ${e.message}`, 'error'); }
+}
+
+function lcToggleWeekend() {
+  const panel = document.getElementById('lc-weekend-panel');
+  if (!panel) return;
+  if (panel.style.display === 'none') {
+    panel.style.display = 'block';
+    lcRenderWeekend();
+  } else {
+    panel.style.display = 'none';
+  }
+}
+
+async function lcRenderWeekend() {
+  const panel = document.getElementById('lc-weekend-panel');
+  if (!panel) return;
+  panel.innerHTML = '<div class="ta-center pad-20 text-tertiary">加载周末任务状态...</div>';
+  try {
+    const data = await apiGet('/api/lifecycle/weekend/status').catch(() => ({ jobs: {} }));
+    const jobs = (data.data && data.data.jobs) || data.jobs || {};
+    const defs = [
+      { key: 'weekend_input', label: '📥 输入端（检索→聚类→路由）', action: 'input' },
+      { key: 'weekend_output', label: '📤 输出端（归档萃取→知识库）', action: 'output' },
+      { key: 'weekend_reflection', label: '🪞 反思（链路复盘）', action: 'reflection' },
+    ];
+    let html = `<div class="lc-card" style="padding:12px 14px;"><div style="font-weight:600;margin-bottom:8px;">🗓️ 周末任务（周六输入/输出，周日反思；工作日可在控制台手动触发）</div>`;
+    for (const def of defs) {
+      const j = jobs[def.key] || {};
+      const status = j.status || 'pending';
+      const color = status === 'done' ? 'var(--success-color)' : status === 'failed' || status === 'running' ? 'var(--error-color)' : 'var(--text-tertiary)';
+      html += `
+        <div style="border:1px solid var(--border-color);border-radius:8px;padding:10px;margin-bottom:8px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+          <div style="flex:1;min-width:200px;">
+            <div>${def.label}</div>
+            <div class="fs-072 text-tertiary">状态 <strong style="color:${color};">${escapeHtml(status)}</strong>
+              · 完成 ${escapeHtml((j.finished_at || '—').slice(0, 16))}
+              ${j.last_error ? ` · <span class="text-error">${escapeHtml(j.last_error.slice(0, 60))}</span>` : ''}
+              ${j.attempts ? ` · 尝试 ${j.attempts} 次` : ''}</div>
+          </div>
+          <button class="btn-text fs-072" style="color:var(--warning-color);" onclick="lcWeekendRun('${def.action}')">▶ 手动执行</button>
+        </div>`;
+    }
+    html += '</div>';
+    panel.innerHTML = html;
+  } catch (e) {
+    panel.innerHTML = `<div class="pad-20 text-error">周末状态加载失败：${escapeHtml(e.message)}</div>`;
+  }
+}
+
+async function lcWeekendRun(task) {
+  if (!confirm(`手动执行周末${task}任务？（非周末时段执行，产物按当日日期落盘）`)) return;
+  try {
+    const r = await apiPost(`/api/lifecycle/weekend/${task}`, {});
+    if (r.status === 'accepted') { showToast('✓ 已启动（后台执行）', 'success'); setTimeout(lcRenderWeekend, 3000); }
+    else showToast(`✗ ${r.error || '失败'}`, 'error');
+  } catch (e) { showToast(`✗ ${e.message}`, 'error'); }
+}
+
 async function renderLifecycleDashboard() {
   const container = document.getElementById('lifecycle-body');
   if (!container) return;
@@ -133,7 +272,13 @@ async function renderLifecycleDashboard() {
     html += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcOrchestrate()">🔄 手动编排</button>`;
     html += `<button class="btn-text fs-072" style="color:var(--warning-color);" onclick="lcRepair()">🔧 手动修复</button>`;
     html += `<button class="btn-text fs-072" style="color:var(--text-secondary);" onclick="lcShowJobs()">📋 查看 cron</button>`;
+    html += `<button class="btn-text fs-072" style="color:var(--accent-color);" onclick="lcToggleInbox()">📥 想法收件箱</button>`;
+    html += `<button class="btn-text fs-072" style="color:var(--info-color);" onclick="lcToggleWeekend()">🗓️ 周末任务</button>`;
     html += `</div>`;
+
+    // v6.9.58: 想法收件箱（_incoming 人工立项队列）+ 周末任务面板（可折叠）
+    html += `<div id="lc-inbox-panel" style="display:none;margin-bottom:12px;"></div>`;
+    html += `<div id="lc-weekend-panel" style="display:none;margin-bottom:12px;"></div>`;
 
     // v6.7.6: agent scores 概览（异步加载）
     html += `<div id="lc-agent-scores" class="lc-scores-bar">加载对抗评审分数...</div>`;

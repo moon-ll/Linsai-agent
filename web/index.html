@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>林赛协作引擎</title>
-<link rel="stylesheet" href="/web/css/style.css?v=6.8.0">
+<link rel="stylesheet" href="/web/css/style.css?v=6.9.58">
 </head>
 <body>
 
@@ -58,6 +58,13 @@
       </button>
       <button class="nav-btn" data-view="settings" title="设置" aria-label="设置">
         <span aria-hidden="true">⚙️</span>
+      </button>
+      <!-- v6.9.58: 恢复 v6.8.0 移除的入口（工作台 48 端点/中枢 7 端点曾不可达） -->
+      <button class="nav-btn" id="toolbar-pipeline" title="申请书工作台" aria-label="申请书工作台">
+        <span aria-hidden="true">⚗️</span>
+      </button>
+      <button class="nav-btn" id="toolbar-hermes" title="Hermes 中枢" aria-label="Hermes 中枢">
+        <span aria-hidden="true">🤖</span>
       </button>
     </div>
   </aside>
@@ -540,22 +547,22 @@
   </div>
 </div>
 
-<script src="/web/js/core.js?v=6.8.0"></script>
-<script src="/web/js/session.js?v=6.8.0"></script>
-<script src="/web/js/slash_commands.js?v=6.8.0"></script>
-<script src="/web/js/chat.js?v=6.8.0"></script>
-<script src="/web/js/task.js?v=6.8.0"></script>
-<script src="/web/js/settings.js?v=6.8.0"></script>
-<script src="/web/js/skill.js?v=6.8.0"></script>
-<script src="/web/js/kb.js?v=6.8.0"></script>
-<script src="/web/js/app.js?v=6.8.0"></script>
-<script src="/web/js/hermes_console.js?v=6.8.0"></script>
-<script src="/web/js/paper_discussion.js?v=6.8.0"></script>
-<script src="/web/js/orchestrator.js?v=6.8.0"></script>
-<script src="/web/js/pipeline.js?v=6.8.0"></script>
-<script src="/web/js/lifecycle.js?v=6.8.0"></script>
-<script src="/web/js/console.js?v=6.8.0"></script>
-<script src="/web/js/settings_center.js?v=6.8.0"></script>
-<script src="/web/js/dashboard.js?v=6.8.0"></script>
+<script src="/web/js/core.js?v=6.9.58"></script>
+<script src="/web/js/session.js?v=6.9.58"></script>
+<script src="/web/js/slash_commands.js?v=6.9.58"></script>
+<script src="/web/js/chat.js?v=6.9.58"></script>
+<script src="/web/js/task.js?v=6.9.58"></script>
+<script src="/web/js/settings.js?v=6.9.58"></script>
+<script src="/web/js/skill.js?v=6.9.58"></script>
+<script src="/web/js/kb.js?v=6.9.58"></script>
+<script src="/web/js/app.js?v=6.9.58"></script>
+<script src="/web/js/hermes_console.js?v=6.9.58"></script>
+<script src="/web/js/paper_discussion.js?v=6.9.58"></script>
+<script src="/web/js/orchestrator.js?v=6.9.58"></script>
+<script src="/web/js/pipeline.js?v=6.9.58"></script>
+<script src="/web/js/lifecycle.js?v=6.9.58"></script>
+<script src="/web/js/console.js?v=6.9.58"></script>
+<script src="/web/js/settings_center.js?v=6.9.58"></script>
+<script src="/web/js/dashboard.js?v=6.9.58"></script>
 </body>
 </html>

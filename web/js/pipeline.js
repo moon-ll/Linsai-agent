@@ -706,7 +706,7 @@
         try {
             let data;
             try {
-                data = await apiGet(`${pidPath()}/gap-analysis`);
+                data = await apiGet(`${pidPath()}/gaps`);
                 gapReport = data;
             } catch (e) {
                 if (e.message.includes('404')) {
@@ -830,7 +830,7 @@
     async function _handleAnalyzeGaps() {
         showToast('◐ 正在运行空白分析…', 'info');
         try {
-            const result = await apiPost(`${pidPath()}/gap-analysis/run`, {});
+            const result = await apiPost(`${pidPath()}/gaps/analyze`, {});
             showToast(`✓ 空白分析完成，识别 ${result.gaps ? result.gaps.length : 0} 个空白`, 'success');
             await renderTab();
         } catch (e) {
@@ -840,7 +840,7 @@
 
     async function _exportGap(format) {
         try {
-            const data = await apiGet(`${pidPath()}/gap-analysis/export?format=${format}`);
+            const data = await apiGet(`${pidPath()}/gaps/export?format=${format}`);
             const content = data.content || '';
             const blob = new Blob([content], { type: format === 'json' ? 'application/json' : 'text/markdown' });
             const a = document.createElement('a');
@@ -1131,9 +1131,11 @@
 
     async function _viewQuestionEvidence(qId) {
         try {
-            const data = await apiGet(`${pidPath()}/questions/${encodeURIComponent(qId)}/evidence`);
+            // v6.9.58: 后端无单条 evidence 路由，从问题列表过滤该问题的背景/证据
+            const data = await apiGet(`${pidPath()}/questions`);
+            const _q = (data.questions || []).find(x => (x.id || x.question_id) === qId) || {};
             let html = `<div class="modal--lg"><h3 class="modal-title">📋 问题证据</h3>`;
-            const evidence = data.evidence || data.items || [];
+            const evidence = _q.evidence || _q.background || (typeof _q.context === 'string' ? [_q.context] : []) || [];
             if (evidence.length) {
                 html += '<div class="col-gap6">';
                 for (const ev of evidence) {
@@ -1299,7 +1301,7 @@
         if (!await confirmModal(`撰写章节「${secName}」？将使用 LLM 基于问题框架和文献生成初稿。`, '撰写')) return;
         showToast(`◐ 正在撰写「${secName}」…`, 'info');
         try {
-            const result = await apiPost(`${pidPath()}/proposal/sections/${encodeURIComponent(secName)}/write`, {});
+            const result = await apiPost(`${pidPath()}/proposal/sections/${encodeURIComponent(secName)}`, {});
             showToast(`✓ 章节已撰写${result.word_count ? '（' + result.word_count + ' 字）' : ''}`, 'success');
             await renderTab();
         } catch (e) {
@@ -1311,7 +1313,7 @@
         if (!await confirmModal('撰写全部章节？这将依次生成所有申请书章节，可能需要较长时间。', '撰写全部')) return;
         showToast('◐ 正在撰写全部章节…', 'info', 5000);
         try {
-            const result = await apiPost(`${pidPath()}/proposal/write-all`, {});
+            const result = await apiPost(`${pidPath()}/proposal/write`, {});
             const count = result.written ? result.written.length : 0;
             showToast(`✓ 已撰写 ${count} 个章节`, 'success');
             await renderTab();
@@ -1675,7 +1677,8 @@
 
     async function _editCitation(cId) {
         try {
-            const data = await apiGet(`${pidPath()}/citations/${encodeURIComponent(cId)}`);
+            // v6.9.58: 后端无单条 citation 路由，从已加载列表取
+            const data = { citation: citationsList.find(c => (c.id || c.citation_id) === cId) || {} };
             const c = data.citation || data;
             const html = `<div class="modal--lg">
                 <h3 class="modal-title">✎ 编辑文献</h3>
@@ -1717,7 +1720,7 @@
                 const btn = document.getElementById('pc-confirm');
                 setLoading(btn, true, '◐ 保存中…');
                 try {
-                    await apiPut(`${pidPath()}/citations/${encodeURIComponent(cId)}`, citation);
+                    showToast('后端暂不支持单条引用更新（仅新增/导出）', 'warning'); return;
                     showToast('✓ 文献已更新', 'success');
                     closeModal('modal-overlay');
                     await renderTab();
@@ -1734,7 +1737,7 @@
     async function _deleteCitation(cId) {
         if (!await confirmModal('确定删除该文献引用？', '删除')) return;
         try {
-            await apiDelete(`${pidPath()}/citations/${encodeURIComponent(cId)}`);
+            showToast('后端暂不支持单条引用删除（仅新增/导出）', 'warning'); return;
             showToast('✓ 文献已删除', 'success');
             await renderTab();
         } catch (e) {

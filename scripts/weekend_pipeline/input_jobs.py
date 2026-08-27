@@ -503,7 +503,11 @@ def run_input_topic_match(state: Dict[str, Any], job: Dict[str, Any], dry_run: b
             ),
             key=lambda x: x["score"],
             reverse=True,
-        )[:3]
+        )[:8]  # v6.9.58: top-3→top-8——08-22 实测交变磁体簇的语义相关课题
+        # （berry-mnps3，标题字面重叠低）被 top-3 截断排除在 LLM 仲裁视野外，
+        # LLM 据"三个不相关课题"误判 new，与 idea_generator 路径重复立项
+        # （general-new-idea-20260822 vs berry-mnps3 同方向）。仲裁候选多
+        # 几行成本可忽略，截断漏检代价是整个重复课题。
 
         action, target_id, reason = None, None, ""
         best = scored[0] if scored else None

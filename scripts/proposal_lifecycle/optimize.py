@@ -125,6 +125,10 @@ class OptimizeMixin:
         # v6.8.16 改进4: 维度轮换——连续 3 轮在同一维度原地踏步则跳过
         # v6.8.24 修复: 旧版窗口 [-6:] 在 5-section 轮转下同 section 最多出现 2 次，
         # 阈值 3 永远不可达。改为 [-12:]（覆盖 2+ 个完整轮转周期）。
+        # v6.9.58 修复: [-12:] 仍是算术错误——周期 = len(SECTIONS)+1 = 6 轮，
+        # 12 轮窗口同 section 最多 2 次，>=3 依旧不可达（实测维度轮换
+        # 0 触发 0 记录）。窗口改 [-18:]（3 个完整周期），同 section 出现
+        # 3 次的条件从 r12 起可达。
         section_cycle = current_round % (len(PROPOSAL_SECTIONS) + 1)
         if section_cycle < len(PROPOSAL_SECTIONS):
             focus_section = PROPOSAL_SECTIONS[section_cycle]
@@ -133,7 +137,7 @@ class OptimizeMixin:
             score_history = prop_state.get("score_history", [])
             if len(score_history) >= 6:
                 same_section_rounds = [
-                    h for h in score_history[-12:]
+                    h for h in score_history[-18:]
                     if h.get("focus_section") == focus_section.get("key")
                 ]
                 if len(same_section_rounds) >= 3:

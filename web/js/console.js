@@ -145,6 +145,7 @@
     review: '验收',
     activate: '激活',
     negative_feedback: '负反馈',
+    strategy: '策略',
   };
 
   function formatQueueWait(hours) {
@@ -230,6 +231,7 @@
           <button class="console-btn" data-action="repair">🔧 修复扫描</button>
           <button class="console-btn" data-action="sync_kb">🔄 同步知识库</button>
           <button class="console-btn" data-action="weekend_menu" id="console-weekend-btn">📅 周末任务 ▾</button>
+          <button class="console-btn" data-action="orchestrator_panel" id="console-orch-btn" title="调度总控：profile 健康/失败模式/策略建议">📊 总控面板</button>
         </div>
       </div>
       <div class="console-weekend-menu" id="console-weekend-menu" style="display:none;">
@@ -256,6 +258,8 @@
         <div class="console-col console-col-right">
           <div class="console-section-title">待人工处理 <span id="console-queue-count" class="console-badge">0</span></div>
           <div id="console-human-queue" class="console-alerts console-queue-list"></div>
+          <div class="console-section-title console-queue-gap">调度策略 <span id="console-strategy-count" class="console-badge">0</span></div>
+          <div id="console-strategy" class="console-alerts console-queue-list"></div>
           <div class="console-section-title console-queue-gap">告警与待处理 <span id="console-alert-count" class="console-badge">0</span></div>
           <div id="console-alerts" class="console-alerts"></div>
         </div>
@@ -280,12 +284,14 @@
       loadConsoleAgents();
       loadConsoleAlerts();
       loadConsoleHumanQueue();
+      loadConsoleStrategy();
     });
 
     loadConsoleFlow();
     loadConsoleAgents();
     loadConsoleAlerts();
     loadConsoleHumanQueue();
+    loadConsoleStrategy();
   }
 
   function toggleWeekendMenu() {
@@ -567,7 +573,90 @@
   // 动作
   // ============================================
 
+  // v6.9.58: 调度策略面板——当前值 vs 建议值 diff + 单项应用 + 历史记录
+  // 背景：strategy_optimizer 建议 3 周 0 采纳（人工确认通道无界面），
+  // human_queue 的 strategy 类事项也指向此处。
+  async function loadConsoleStrategy() {
+    const container = document.getElementById('console-strategy');
+    if (!container) return;
+    const countEl = document.getElementById('console-strategy-count');
+    try {
+      const [strats, log] = await Promise.all([
+        apiGet('/api/orchestrator/strategies').catch(() => null),
+        apiGet('/api/orchestrator/tuning-log').catch(() => null),
+      ]);
+      if (!strats) {
+        container.innerHTML = '<div class="console-alert console-alert-info"><div class="console-alert-message">策略服务暂不可用</div></div>';
+        return;
+      }
+      const current = strats.current || {};
+      const suggested = strats.suggested || {};
+      const changes = Object.keys(suggested)
+        .filter(k => suggested[k] !== current[k])
+        .map(k => ({ key: k, current: current[k], suggested: suggested[k] }));
+      if (countEl) countEl.textContent = String(changes.length);
+
+      let html = '';
+      if (changes.length === 0) {
+        html += '<div class="console-alert console-alert-info"><div class="console-alert-message">当前参数与建议一致，无需调整</div></div>';
+      } else {
+        for (const c of changes) {
+          html += `
+            <div class="console-alert console-alert-warning">
+              <div class="console-alert-header">
+                <span class="console-alert-level">${escapeHtml(c.key)}</span>
+                <span class="console-alert-time">${escapeHtml(String(c.current))} → ${escapeHtml(String(c.suggested))}</span>
+              </div>
+              <div class="console-alert-message">建议调整（risk: ${escapeHtml(strats.risk || '?')}）</div>
+              <div class="console-alert-actions">
+                <button class="console-mini-btn" data-key="${escapeHtml(c.key)}" data-val="${escapeHtml(String(c.suggested))}" data-cmd="strategy_apply">应用</button>
+              </div>
+            </div>`;
+        }
+      }
+      const history = (log && log.history) || [];
+      if (history.length) {
+        const last = history[0];
+        html += `<div class="console-alert console-alert-info" style="margin-top:6px;">
+          <div class="console-alert-message" style="font-size:0.75rem;">最近变更：${escapeHtml(last.at || '')} · ${escapeHtml(last.confirmed_by || '')} · ${Object.keys(last.new || {}).map(k => `${k}=${last.new[k]}`).join(', ')}</div>
+        </div>`;
+      }
+      container.innerHTML = html;
+      container.querySelectorAll('.console-mini-btn[data-cmd="strategy_apply"]').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const key = btn.dataset.key, val = btn.dataset.val;
+          let parsed = val;
+          if (val === 'true' || val === 'false') parsed = val === 'true';
+          else if (!isNaN(Number(val)) && val !== '') parsed = Number(val);
+          if (!confirm(`确认应用策略 ${key} = ${parsed}？（将写入 tuning-log，可审计）`)) return;
+          btn.disabled = true;
+          try {
+            const r = await apiPost('/api/orchestrator/strategies/apply', { strategies: { [key]: parsed }, confirmed_by: 'human:console' });
+            if (r.status === 'ok' || r.success) {
+              showToast(`✓ 已应用 ${key} = ${parsed}`, 'success');
+              loadConsoleStrategy();
+            } else {
+              showToast(`✗ ${r.error || '应用失败'}`, 'error');
+            }
+          } catch (e) {
+            showToast(`✗ ${e.message}`, 'error');
+          } finally { btn.disabled = false; }
+        });
+      });
+    } catch (e) {
+      console.error('console strategy:', e);
+    }
+  }
+
   async function runAction(action) {
+    if (action === 'orchestrator_panel') {
+      if (typeof Orchestrator !== 'undefined' && Orchestrator.open) {
+        Orchestrator.open();
+      } else {
+        showToast('总控模块未加载', 'error');
+      }
+      return;
+    }
     showToast(`◐ ${action} 执行中…`, 'info');
     try {
       const data = await apiPost('/api/console/action', { action });
