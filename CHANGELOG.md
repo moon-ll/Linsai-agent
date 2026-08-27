@@ -1,5 +1,39 @@
 # 变更记录
 
+## v6.9.60 - 2026-08-27 同构问题治理：手册单一真相源 + critic 报告 digest + 晋级完整性门
+
+背景：用户要求排查"其他环节是否有同类问题"。按"结构不变量只靠
+prompt 约定、写入边界信任 agent 输出"的病灶模式全环节审计，发现
+三处同构问题（研究设想/阅读笔记/手稿纯净性经查干净）：
+
+- **A. 方法学手册双真相源分裂（最严重）**：`03_method/method-manual.md`
+  （update_method_manual derived job 维护，实测 47KB 含成片重复）与
+  `04_proposal/methodology-manual.md`（writer prompt 第 9b 步 + 配套
+  同步路径两处写者维护，10KB）并存——同一资产两个文件、三个写者、
+  读者（weekend output/kb_sync vs writer prompt）各指一处，互不同步。
+  修复：单一真相源 = `03_method/method-manual.md`；writer prompt 第
+  9c 步改为"不由本步骤更新"（消除双写根源）；配套同步路径改指
+  03_method；derived 步骤 prompt 增手册质量纪律（先读后改、禁文末
+  追加重复段、禁过程记录）。存量一次性迁移：7 课题旧手册归档
+  `05_review/methodology-manual-legacy-{date}.md` + 原位 stub 指针
+  （canonical 缺失时先落位防悬空，幂等）。
+- **B. critic 报告无篇幅约束（16-37KB）**：writer 每轮必读全文，
+  是超时输入大头（章节瘦身后的最大残留输入）。新增
+  `build_critic_digest()`：报告 >25KB 时程序化提取问题结构
+  （severity 行/标题/表格/评分块，纯叙述丢弃），按字节截断至 ≤8KB
+  （中文 3 字节/字，字符截断会放大约 3 倍——首版实测 13KB 已修），
+  digest 头注明完整报告路径。实测 37KB→8KB、30KB→8KB。
+- **C. 晋级边界信任状态**：`_check_and_transition` 只看分数不查本轮
+  job 完整性——08-26 实证 bsv 带 2 个 pending derived job 晋级
+  pending_review。新增晋级完整性门：本轮存在非 done job（含 derived）
+  则暂缓晋级（记日志），下个 tick 自然重试；failed 由 repair/自动
+  解锁兜底后仍可晋级，不死锁。
+
+- 测试：SectionHygieneTests 扩展 13.1-13.4（digest 触发/限额/保留
+  结构/丢叙述、手册迁移幂等/stub/防悬空、optimize/executor/micro_
+  scheduler 三处源码守卫）。
+- 验证：189/189；self_test --module 1178/1178 全绿。
+
 ## v6.9.59 - 2026-08-27 12h 健康检查：v6.9.53-57 六缺陷定向修复（晋级主路径解封 + 预检误杀 + 丢写/丢记录）
 
 三层诊断（运行时健康 + 代码缺陷 + 设计一致性 #4/#5/#6）发现并修复：

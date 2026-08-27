@@ -544,6 +544,13 @@ def _check_and_transition(self, proposal_id: str) -> Optional[Dict[str, Any]]:
 
     在生成优化报告后调用。
     返回 transition 结果，若未达标返回 None。
+
+    v6.9.60 晋级完整性门：达标 ≠ 可晋级——本轮 job（含 update_vision/
+    update_method_manual 等 derived job）必须全部 done。08-26 实证 bsv
+    带 2 个 pending derived job 晋级 pending_review，造成流转不完整
+    （同构于"生命周期边界信任状态"缺陷）。存在非 done job 时本次
+    暂缓（记日志），下个 tick 自然重试；failed 由 repair/自动解锁
+    兜底后仍可晋级，不死锁。
     """
     try:
         prop_state = self._get_proposal_state(proposal_id)
@@ -552,6 +559,24 @@ def _check_and_transition(self, proposal_id: str) -> Optional[Dict[str, Any]]:
         threshold = self._get_quality_threshold(prop_state.get("project_type", "general"))
         done_result = self._check_done(proposal_id, threshold)
         if done_result.get("done"):
+            # 晋级完整性门：本轮存在非 done job → 暂缓
+            current_round = prop_state.get("optimization_rounds", 0) + 1
+            try:
+                jobs = self._get_jobs(proposal_id)
+            except Exception:
+                jobs = []
+            round_jobs = [j for j in jobs if j.get("round") == current_round]
+            undone = [
+                j for j in round_jobs
+                if j.get("status") not in (JOB_STATUS_DONE,)
+            ]
+            if round_jobs and undone:
+                if _log:
+                    _log.info(
+                        f"[{proposal_id}] 达标但本轮尚有 {len(undone)} 个非 done "
+                        f"job（如 {undone[0].get('step')}），暂缓晋级待补齐"
+                    )
+                return None
             if _log:
                 _log.info(
                     f"[{proposal_id}] 达标，流转到 pending_review: {done_result['reason']}"

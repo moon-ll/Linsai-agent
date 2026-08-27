@@ -1575,6 +1575,17 @@ class OptimizeMixin:
         review_dir = prop_dir / "05_review"
         critic_reports = sorted(review_dir.glob("critic-round-*.md"), reverse=True)
         latest_critic = str(critic_reports[0]) if critic_reports else ""
+        # v6.9.60: 大体量 critic 报告 digest——实测报告 16-37KB 无篇幅约束，
+        # writer 每轮读全文是超时输入大头。超阈值（25KB）时程序化提取
+        # 问题结构（severity 行/标题/评分）生成 ≤8KB digest 供读取，
+        # 完整报告路径在 digest 头部注明（需要语境时可回查）。
+        try:
+            from proposal_lifecycle.section_hygiene import build_critic_digest
+            _digest = build_critic_digest(critic_reports[0]) if critic_reports else None
+            if _digest:
+                latest_critic = str(_digest)
+        except Exception:
+            pass
 
         # P0-2: 构建维度聚焦提示
         dim_focus = ""
@@ -1627,7 +1638,7 @@ class OptimizeMixin:
 
         # 四大产物路径
         research_idea_path = prop_dir / "00_research_idea.md"
-        methodology_manual_path = prop_dir / "04_proposal" / "methodology-manual.md"
+        methodology_manual_path = prop_dir / "03_method" / "method-manual.md"
         reading_notes_path = prop_dir / "02_literature" / "reading-notes.md"
 
         if focus_section:
@@ -1813,15 +1824,16 @@ class OptimizeMixin:
             f"6. 只修改聚焦章节文件（或整体衔接涉及的章节文件），保持其他章节不变（增量优化）\n"
             f"7. 将优化后的内容覆盖写入对应章节 .md 文件（不是 proposal-draft.md）\n"
             f"8. 补齐缺失模块：若当前聚焦章节或 missing 列表中的模块为空，必须生成完整内容\n"
-            f"9. 同步更新四大产物：\n"
+            f"9. 同步更新产物：\n"
             f"   a) 课题设想：{research_idea_path}\n"
             f"      若研究内容、技术路线、创新点有重大调整，同步更新课题设想对应部分。\n"
-            f"   b) 方法学手册：{methodology_manual_path}\n"
-            f"      申请书重思路，方法学手册重细节（公式推导/参数表/技术路线图/局限性）。\n"
-            f"      只更新与聚焦章节对应的细节部分。\n"
-            f"   c) 文献阅读笔记：{reading_notes_path}\n"
+            f"   b) 文献阅读笔记：{reading_notes_path}\n"
             f"      若本轮使用了新文献（尤其是 {lit_supplement[:80] if lit_supplement else '定向检索结果'}），\n"
-            f"      请在笔记中追加一条记录：阅读日期、文献标题、来源、核心结论、与课题关联、已引用位置。\n\n"
+            f"      请在笔记中追加一条记录：阅读日期、文献标题、来源、核心结论、与课题关联、已引用位置。\n"
+            f"   c) 方法学手册：不由本步骤更新（v6.9.60 单一真相源治理）——\n"
+            f"      方法学手册唯一真相源为 03_method/method-manual.md，由轮末专职\n"
+            f"      update_method_manual 步骤统一维护，writer 不得直接写该文件\n"
+            f"      （双写曾是手册分裂膨胀的根源）。\n\n"
             f"■ 文件纯净性红线（v6.9.46，违反即返工）：\n"
             f"- 章节文件（尤其 references.md）只写正文内容：文献条目、条目内挂钩注释、\n"
             f"  章节正文。严禁写入任何工作过程记录——核校日志、闭环证据索引、修复\n"
@@ -1913,7 +1925,9 @@ class OptimizeMixin:
         只在 full_review 轮调用，避免每轮都增加 hermes 开销。
         """
         research_idea_path = prop_dir / "00_research_idea.md"
-        methodology_manual_path = prop_dir / "04_proposal" / "methodology-manual.md"
+        # v6.9.60: 方法学手册单一真相源——03_method/method-manual.md
+        # （此前 04_proposal/methodology-manual.md 与其双写分裂）
+        methodology_manual_path = prop_dir / "03_method" / "method-manual.md"
         reading_notes_path = prop_dir / "02_literature" / "reading-notes.md"
         proposal_path = prop_dir / "04_proposal" / "proposal-draft.md"
 

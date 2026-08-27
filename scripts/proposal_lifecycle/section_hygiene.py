@@ -748,13 +748,122 @@ def quality_directives_text(prop_dir: Path, focus_key: Optional[str] = None) -> 
 
 
 # ---------------------------------------------------------------------------
+# ⑦ critic 报告 digest + 方法学手册单一真相源（v6.9.60 同构问题治理）
+#
+# 同构问题排查结论（08-27 全环节审计）：
+#   A. 方法学手册双真相源——03_method/method-manual.md（update_method_manual
+#      derived job 维护，实测 47KB）与 04_proposal/methodology-manual.md
+#      （writer 维护，10KB）并存，读者（weekend/kb_sync vs writer prompt）
+#      各指一处，互不同步。修复：单一真相源 = 03_method（读者多），
+#      04_proposal 旧文件迁移存档 + 原位 stub 指针。
+#   B. critic 报告无篇幅约束（实测 16-37KB）——writer 每轮必读全文，
+#      是超时输入大头。修复：程序化 digest（提取问题结构）替代全文
+#      注入，报告 ≤ 阈值时用原文。
+# ---------------------------------------------------------------------------
+
+# critic 报告超过此值时启用 digest（writer 输入瘦身）
+CRITIC_REPORT_DIGEST_THRESHOLD = 25 * 1024
+CRITIC_DIGEST_MAX_BYTES = 8 * 1024
+
+
+def build_critic_digest(report_path: Path) -> Optional[Path]:
+    """为大体量 critic 报告生成问题结构 digest（零 LLM）。
+
+    提取规则：severity 标记行（critical/high/medium/low/严重/高/中/低）
+    整行保留 + 各级标题保留 + 评分块保留；其余叙述段丢弃。产物写入
+    同目录 .critic-digest-{原名}，供 writer 读取替代全文。
+
+    Returns:
+        digest 路径；报告未超阈值或解析失败返回 None（调用方用原文）。
+    """
+    try:
+        raw = report_path.read_text(encoding="utf-8")
+    except Exception:
+        return None
+    if len(raw.encode("utf-8")) <= CRITIC_REPORT_DIGEST_THRESHOLD:
+        return None
+
+    import re
+    sev = re.compile(
+        r"(critical|high|medium|low|严重|高优先|中优先|低优先|P0|P1)", re.I)
+    score = re.compile(r"(综合评分|总评|评分[：:]|创新性[：:]|可行性[：:]|严谨性[：:]|完整性[：:]|表达[：:])")
+    keep: List[str] = [
+        f"<!-- v6.9.60 程序 digest：全文 {len(raw.encode('utf-8')) // 1024}KB 超阈值，"
+        f"仅保留问题结构（severity 行/标题/评分）。完整报告：{report_path.name} -->"
+    ]
+    for line in raw.splitlines():
+        s = line.strip()
+        if not s:
+            continue
+        if s.startswith(("#", "```", "【", "|")) or sev.search(s) or score.search(s):
+            keep.append(line)
+    digest = "\n".join(keep)
+    # 超预算时按字节截断（中文 UTF-8 3 字节/字，字符截断会放大约 3 倍）
+    raw_digest = digest.encode("utf-8")
+    if len(raw_digest) > CRITIC_DIGEST_MAX_BYTES:
+        cut = raw_digest[: CRITIC_DIGEST_MAX_BYTES].decode("utf-8", errors="ignore")
+        digest = cut + "\n…（digest 截断，详见完整报告）"
+    out = report_path.parent / f".critic-digest-{report_path.name}"
+    try:
+        out.write_text(digest, encoding="utf-8")
+        return out
+    except Exception:
+        return None
+
+
+def migrate_methodology_manual(prop_dir: Path, dry_run: bool = False) -> Optional[str]:
+    """一次性迁移：04_proposal/methodology-manual.md 归档 + 原位 stub。
+
+    双真相源分裂修复的存量动作：03_method/method-manual.md 为唯一真相源
+    （update_method_manual derived job 维护，weekend/kb_sync 读取）；
+    04_proposal 旧文件（writer 曾写）整体迁 05_review/ 存档，原位留
+    指针 stub 防旧引用读空。
+
+    Returns:
+        迁移产物路径，未触发返回 None。
+    """
+    legacy = prop_dir / "04_proposal" / "methodology-manual.md"
+    canonical = prop_dir / "03_method" / "method-manual.md"
+    if not legacy.exists():
+        return None
+    text = legacy.read_text(encoding="utf-8")
+    if text.strip().startswith("<!-- v6.9.60") and "03_method" in text[:200]:
+        return None  # 已是 stub，幂等
+
+    out = prop_dir / "05_review" / f"methodology-manual-legacy-{_date_tag()}.md"
+    if dry_run:
+        return f"(dry-run) {out.name} ← 04_proposal 旧手册归档 + stub 指针"
+
+    review_dir = prop_dir / "05_review"
+    review_dir.mkdir(parents=True, exist_ok=True)
+    # 唯一真相源不存在时先从旧文件落位（防 stub 指针悬空）
+    if not canonical.exists():
+        canonical.parent.mkdir(parents=True, exist_ok=True)
+        canonical.write_text(text, encoding="utf-8")
+    out.write_text(
+        f"<!-- v6.9.60 从 04_proposal/methodology-manual.md 迁出的旧手册 -->\n"
+        f"<!-- 方法学手册唯一真相源：03_method/method-manual.md -->\n\n" + text,
+        encoding="utf-8",
+    )
+    stub = (
+        f"<!-- v6.9.60 方法学手册唯一真相源已迁至 03_method/method-manual.md -->\n"
+        f"<!-- 本文件为兼容指针，请勿在此写入内容。 -->\n\n"
+        f"# 方法学手册（已迁移）\n\n"
+        f"本手册的唯一真相源：`03_method/method-manual.md`。\n"
+        f"历史版本存档：`05_review/{out.name}`。\n"
+    )
+    legacy.write_text(stub, encoding="utf-8")
+    return str(out)
+
+
+# ---------------------------------------------------------------------------
 # ⑤ 批量入口与 CLI
 # ---------------------------------------------------------------------------
 
 def apply_all(project_root: Path, dry_run: bool = False) -> Dict[str, list]:
-    """对全部 optimizing 课题执行两类一次性清洗。"""
+    """对全部 optimizing 课题执行一次性清洗（含 v6.9.60 手册归档）。"""
     opt_dir = project_root / "research_proposals" / "optimizing"
-    result = {"full_review": [], "references": []}
+    result = {"full_review": [], "references": [], "methodology": []}
     if not opt_dir.exists():
         return result
     for prop_dir in sorted(opt_dir.iterdir()):
@@ -766,6 +875,9 @@ def apply_all(project_root: Path, dry_run: bool = False) -> Dict[str, list]:
         r2 = strip_references_worklog(prop_dir, dry_run=dry_run)
         if r2:
             result["references"].append({"proposal": prop_dir.name, "out": r2})
+        r3 = migrate_methodology_manual(prop_dir, dry_run=dry_run)
+        if r3:
+            result["methodology"].append({"proposal": prop_dir.name, "out": r3})
     return result
 
 

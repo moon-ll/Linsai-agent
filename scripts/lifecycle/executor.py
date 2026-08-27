@@ -1432,12 +1432,18 @@ def _run_update_method_manual_step(self, proposal_id: str, job: Dict[str, Any]) 
         method_source = proposal_path.read_text(encoding="utf-8")[:8000]
 
     prompt = (
-        f"请根据以下申请书的研究方案部分，撰写方法学手册（{manual_path}）。\n\n"
+        f"请根据以下申请书的研究方案部分，更新方法学手册（{manual_path}）。\n\n"
         f"要求：\n"
         f"1. 在申请书思路基础上，补充具体方法细节：算法/实验步骤、关键参数、验证方式\n"
         f"2. 说明潜在风险和替代方案\n"
         f"3. 方法学手册是方法层面的补充文档，不要重复申请书的思路性叙述\n"
         f"4. 直接写入文件 {manual_path}\n\n"
+        f"■ 手册质量纪律（v6.9.60，本文件是方法学手册的唯一真相源）：\n"
+        f"- 更新前先读现有手册，改写/合并既有条目，禁止在文末追加与已有\n"
+        f"  条目重复的新段落（历史膨胀实测 47KB，含成片重复）。\n"
+        f"- 同一方法细节只保留一处：参数表/判据/装置清单合并去重。\n"
+        f"- 不写入轮次说明、更新日志等过程性记录（如需注明修订，用一行\n"
+        f"  日期戳于文件头，不另起段落）。\n\n"
         f"【研究方案内容】\n{method_source}\n"
     )
     # v6.8.39: 超时 300s→600s，与 v6.8.37 references/critic 修复策略一致。

@@ -1390,6 +1390,90 @@ class SectionHygieneTests(TestSuite):
             "体量表应明示非门限语义",
         )
 
+        # ================================================================
+        # 13（v6.9.60）: 同构问题治理——手册单一真相源 / critic digest / 晋级完整性门
+        # ================================================================
+        # 13.1 critic 报告 digest：小报告不触发，大报告生成且限额
+        d1 = self.tmp / "d1" / "05_review"
+        d1.mkdir(parents=True)
+        small = d1 / "critic-round-1.md"
+        small.write_text("# 报告\n- [high] 问题一。\n", encoding="utf-8")
+        self.assert_true(
+            sh.build_critic_digest(small) is None,
+            "小报告（≤25KB）不应生成 digest",
+        )
+        big = d1 / "critic-round-2.md"
+        body = "\n".join(
+            f"叙述段落第{i}行，包含大量背景铺垫与语境说明文字内容用于膨胀。"
+            for i in range(700))
+        big.write_text(
+            "# 检验报告\n## 问题清单\n- [critical] 核心问题：指标口径矛盾。\n"
+            "- [high] 次要问题：术语不统一。\n" + body + "\n## 评分\n综合评分：0.72\n",
+            encoding="utf-8")
+        dg = sh.build_critic_digest(big)
+        self.assert_true(dg is not None and dg.exists(), "大报告应生成 digest")
+        dtext = dg.read_text(encoding="utf-8")
+        self.assert_true(
+            len(dtext.encode("utf-8")) <= sh.CRITIC_DIGEST_MAX_BYTES + 200,
+            "digest 应守住字节上限",
+        )
+        self.assert_true(
+            "[critical]" in dtext and "综合评分" in dtext,
+            "digest 应保留 severity 行与评分块",
+        )
+        self.assert_true(
+            "叙述段落第300行" not in dtext,
+            "digest 应丢弃纯叙述行",
+        )
+
+        # 13.2 手册迁移：归档 + stub + 幂等 + canonical 缺失时落位
+        m1 = self.tmp / "m1"
+        (m1 / "04_proposal").mkdir(parents=True)
+        (m1 / "04_proposal" / "methodology-manual.md").write_text(
+            "# 旧手册\nwriter 写的细节内容。\n" * 100, encoding="utf-8")
+        out = sh.migrate_methodology_manual(m1, dry_run=False)
+        self.assert_true(out and Path(out).exists(), "旧手册应归档至 05_review")
+        canon = m1 / "03_method" / "method-manual.md"
+        self.assert_true(
+            canon.exists() and canon.stat().st_size > 100,
+            "canonical 缺失时应从旧文件落位（防指针悬空）",
+        )
+        stub = (m1 / "04_proposal" / "methodology-manual.md").read_text(encoding="utf-8")
+        self.assert_true(
+            "03_method/method-manual.md" in stub and "唯一真相源" in stub,
+            "原位应留 stub 指针",
+        )
+        self.assert_true(
+            sh.migrate_methodology_manual(m1) is None,
+            "stub 状态二次迁移应幂等跳过",
+        )
+
+        # 13.3 optimize 源码守卫：digest 接入 + 手册路径 + writer 不写手册
+        self.assert_true(
+            "build_critic_digest" in opt_src,
+            "writer 应接入 critic 报告 digest（大报告瘦身）",
+        )
+        self.assert_true(
+            opt_src.count('"03_method" / "method-manual.md"') >= 2,
+            "手册路径应统一为 03_method 单一真相源",
+        )
+        self.assert_true(
+            "不由本步骤更新" in opt_src,
+            "writer prompt 应声明手册由专职步骤维护（消除双写）",
+        )
+        exec_src2 = (Path(__file__).parent.parent / "lifecycle" / "executor.py").read_text(encoding="utf-8")
+        self.assert_true(
+            "手册质量纪律" in exec_src2,
+            "update_method_manual 步骤应含手册质量纪律（去重/禁追加）",
+        )
+
+        # 13.4 晋级完整性门源码守卫
+        ms_src = (Path(__file__).parent.parent / "lifecycle" / "micro_scheduler.py").read_text(encoding="utf-8")
+        self.assert_true(
+            "暂缓晋级" in ms_src and "晋级完整性门" in ms_src,
+            "_check_and_transition 应含晋级完整性门（非 done job 暂缓）",
+        )
+
 
 def main():
     from test_runner import print_report
