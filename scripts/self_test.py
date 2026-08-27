@@ -82,13 +82,14 @@ def _run_selected(filters: List[str]) -> List[TestSuite]:
                 try:
                     if (isinstance(attr, type) and issubclass(attr, TestSuite)
                             and attr is not TestSuite):
-                        instance = attr()
-                        t0 = __import__("time").time()
-                        instance.setup()
-                        instance.run_tests()
-                        instance.teardown()
-                        instance.duration = __import__("time").time() - t0
-                        suites.append(instance)
+                        # v6.9.65（R3）：迁移到 execute_suite 调度——旧裸调
+                        # （setup/run/teardown 无保护）在套件中途崩溃时
+                        # teardown 被跳过 + 失败不计数，"--module 全绿"存在
+                        # 假阳性面（12h 健康检查 R3；v6.9.56 的同类修复只
+                        # 覆盖了全量路径）。execute_suite 统一提供 teardown
+                        # finally 保护与失败计数。
+                        from test_runner import execute_suite
+                        execute_suite(attr(), attr_name, suites)
                 except Exception as e:
                     print(f"⚠ 运行 {attr_name} 失败: {e}")
 

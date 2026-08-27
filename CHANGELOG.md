@@ -1,5 +1,51 @@
 # 变更记录
 
+## v6.9.65 - 2026-08-27 遗留事项处置收口：维度完整性防线 + monitor 超时上调 + R1/R2/R4 + R3 测试调度迁移
+
+背景：治理总结报告的五项遗留事项经用户裁决处置（事项 1 裁决为"申请
+书不涉及平台条件类内容——聚焦研究思路与内容"；事项 2-5 按建议执行）。
+时序说明：本批代码修改与 16h/20h 健康检查及人工对标优化（v6.9.62-64）
+在同一工作区并行推进，代码已随上述提交入库（v6.9.64 报告的
+1215/16/38/1466 全绿已包含本批 15.x 断言），本条目为完整补记 +
+R3 新增。其中事项 4 在核实中确诊根因：
+
+- **维度完整性防线（事项 4，确诊为解析丢失而非质量回落）**：attosecond
+  r7 rationale 轮 dim_scores 只解析出 rigor/completeness 两维
+  （innovation/feasibility 缺失），0.58 实为残缺口径均值。残缺分数进
+  score_history 会污染天花板收敛/次优平台/质量下降三类检测与 agent
+  奖惩。修复：① executor 解析后校验维度完整性（正文章节轮期望
+  DIMENSION_FLOOR 全维），dims_partial/dims_present 入史可观测；
+  ② completion.py 三个检测窗口全部过滤 partial 轮；③ monitor 收尾时
+  残缺轮跳过 agent 奖惩（零增量而非 None，对齐 v6.8.48 模式）。
+- **monitor 超时 600→900（事项 3）**：600s 在 MiniMax 慢速期连续触顶；
+  v6.9.61 输入瘦身后 900s 余量充足。同事项手动重置 3 个解锁配额耗尽
+  的终态 failed job（moire r5-content / order-param r7-references /
+  kt r1-content，manual_reset_at 审计），其余由 24h 自动解锁与依赖链
+  重试兜底。
+- **R1 可信池两步降噪（事项 2）**：删除"head 需含 doi:/arxiv 字样"
+  gate（266/741 页整页丢弃根因），head 提取为空回退全文（消除 187 个
+  截断漏检）——只影响"有没有提取到"，不影响"ID 是否可信"，灵敏度
+  不降。实测池 484→650 ID，order-param 未命中降至 5/44（原误报
+  20-96%）。
+- **R2 cron 安装闭环（事项 2）**：framework.py 补 lc-daily-backup/
+  lc-daily-sync 安装器（原仅 manifest 登记，teardown+setup 后永久
+  消失且监控端不可自愈）；controller.py 补 wrapper 生成；cleanup
+  默认清单纳入；调度常量入 lifecycle/constants.py。
+- **R4 备份窗口 + 测试零污染（事项 2）**：lc-daily-backup 03:17→13:00
+  （避开 worker 时段 860MB zip 并发写风险）；test_leak_guard 学习缓存
+  用例改 patch 临时文件（原直读真实 memory/.cache）。
+- **R3 测试调度迁移（本轮新增）**：self_test._run_selected（--module/
+  --scenario/--persona/--web 入口）从裸调迁移到 execute_suite——旧
+  实现套件中途崩溃时 teardown 跳过且失败不计数，"--module 全绿"存在
+  假阳性面（12h 健康检查 R3；v6.9.54 同类修复只覆盖全量路径）。
+- **内容边界红线（事项 1 用户裁决，与 v6.9.64 撰写范围校准互补）**：
+  writer prompt 明示"申请书聚焦研究思路与研究内容，严禁撰写研究基础/
+  实验平台条件/设备参数/合作声明——系统不掌握申请人真实信息，写入必
+  是虚构，必须由申请人本人补充"。孤儿章节内容维持 05_review 存档。
+
+- 验证：--module 1215/1215；--scenario 16/16；--persona 38/38 全绿
+  （R3 迁移后复跑确认三个入口调度行为一致）。
+
 ## v6.9.64 - 2026-08-27 撰写范围校准：聚焦研究思路，剥离研究基础/工作条件类个性化内容
 
 背景（用户校准）：范本申请书是完整真实申请书，含研究基础/研究条件等个性化

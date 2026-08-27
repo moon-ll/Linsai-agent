@@ -2739,7 +2739,7 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-27T10:00:59Z",
+      "updated_at": "2026-08-27T12:30:18Z",
       "optimization_rounds": 0,
       "last_score": 0.76,
       "score_history": [
@@ -2952,13 +2952,13 @@
           "step": "critic",
           "section_key": "content",
           "round": 1,
-          "status": "pending",
+          "status": "running",
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-rationale-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-27T00:30:31Z",
+          "started_at": "2026-08-27T12:30:18Z",
           "finished_at": "",
           "last_error": "",
           "cron_job_id": "",
@@ -18264,5 +18264,5 @@
       ]
     }
   },
-  "updated_at": "2026-08-27T12:25:17Z"
+  "updated_at": "2026-08-27T12:30:18Z"
 }
