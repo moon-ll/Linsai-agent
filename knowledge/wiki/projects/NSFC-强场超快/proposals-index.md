@@ -1,8 +1,8 @@
 ---
 title: "NSFC 课题生命周期索引"
 type: "index"
-created: "2026-08-27T03:04:54Z"
-updated: "2026-08-27T03:04:54Z"
+created: "2026-08-27T03:23:40Z"
+updated: "2026-08-27T03:23:40Z"
 tags: []
 related: []
 source_raw: ""
@@ -19,13 +19,13 @@ project: ["NSFC-强场超快"]
 
 | 课题 | 类型 | 状态 | 当前轮次 | 分数 | 最新版本 | 优化报告 |
 |------|------|------|---------|------|---------|---------|
-| attosecond-streaking | 面上 | 优化中 | 第7轮 | 0.72 | [版本](versions/general-attosecond-streaking-20260822.md) | [报告](reports/general-attosecond-streaking-20260822.md) |
-| berry-mnps3-rashba | 面上 | 优化中 | 第1轮 | 0.65 | [版本](versions/general-berry-mnps3-rashba-20260816.md) | [报告](reports/general-berry-mnps3-rashba-20260816.md) |
+| attosecond-streaking | 面上 | 优化中 | 第8轮 | 0.72 | [版本](versions/general-attosecond-streaking-20260822.md) | [报告](reports/general-attosecond-streaking-20260822.md) |
+| berry-mnps3-rashba | 面上 | 优化中 | 第2轮 | 0.51 | [版本](versions/general-berry-mnps3-rashba-20260816.md) | [报告](reports/general-berry-mnps3-rashba-20260816.md) |
 | bsv-driven-hhg-quantum | 面上 | 待校验 | 第1轮 | 0.5 | [版本](versions/general-bsv-driven-hhg-quantum-20260726.md) | [报告](reports/general-bsv-driven-hhg-quantum-20260726.md) |
-| moire-strong-field-probe | 面上 | 优化中 | 第4轮 | 0.68 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
-| new-idea | 面上 | 优化中 | 第1轮 | 0.55 | [版本](versions/general-new-idea-20260822.md) | [报告](reports/general-new-idea-20260822.md) |
-| order-parameter-ultrafast-readout | 面上 | 优化中 | 第6轮 | 0.69 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
-| 课题设想 | 面上 | 优化中 | 第1轮 | 0.77 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
+| moire-strong-field-probe | 面上 | 优化中 | 第5轮 | 0.68 | [版本](versions/general-moire-strong-field-probe-20260726.md) | [报告](reports/general-moire-strong-field-probe-20260726.md) |
+| new-idea | 面上 | 优化中 | 第2轮 | 0.55 | [版本](versions/general-new-idea-20260822.md) | [报告](reports/general-new-idea-20260822.md) |
+| order-parameter-ultrafast-readout | 面上 | 优化中 | 第7轮 | 0.69 | [版本](versions/general-order-parameter-ultrafast-readout-20260727.md) | [报告](reports/general-order-parameter-ultrafast-readout-20260727.md) |
+| 课题设想 | 面上 | 优化中 | 第2轮 | 0.81 | [版本](versions/general-quantum-geometry-inversion-20260726.md) | [报告](reports/general-quantum-geometry-inversion-20260726.md) |
 | transient-quantum-phase-optical | 重点 | 优化中 | 第0轮 | 0.76 | [版本](versions/key-transient-quantum-phase-optical-20260726.md) | [报告](reports/key-transient-quantum-phase-optical-20260726.md) |
 
 ---

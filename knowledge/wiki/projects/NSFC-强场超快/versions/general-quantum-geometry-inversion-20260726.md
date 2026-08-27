@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-quantum-geometry-inversion-20260726"
 project_type: "general"
 latest_round: 7
-last_score: 0.77
+last_score: 0.81
 status: "optimizing"
-created: "2026-08-27T03:04:54Z"
-updated: "2026-08-27T03:04:54Z"
+created: "2026-08-27T03:23:40Z"
+updated: "2026-08-27T03:23:40Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-quantum-geometry-inversion-20260726`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.77
+**当前分数**：0.81
 **状态**：优化中
-**同步时间**：2026-08-27T03:04:54Z
+**同步时间**：2026-08-27T03:23:40Z
 
 ---
 

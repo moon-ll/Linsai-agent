@@ -6,26 +6,10 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-26T22:00:48Z",
-      "optimization_rounds": 1,
-      "last_score": 0.77,
+      "updated_at": "2026-08-27T03:15:54Z",
+      "optimization_rounds": 2,
+      "last_score": 0.81,
       "score_history": [
-        {
-          "round": 1,
-          "score": 0.8,
-          "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.84,
-            "rigor": 0.72,
-            "expression": 0.78
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": true,
-          "issues_count": 14,
-          "high_issues": 6,
-          "at": "2026-08-19T17:06:16Z"
-        },
         {
           "round": 1,
           "score": 0.77,
@@ -36,59 +20,27 @@
             "expression": 0.74
           },
           "weakest_dim": "rigor",
-          "focus_section": "content",
+          "focus_section": "rationale",
           "section_passed": false,
           "issues_count": 0,
           "high_issues": 0,
-          "at": "2026-08-19T17:58:04Z"
+          "at": "2026-08-19T17:17:06Z"
         },
         {
-          "round": 1,
-          "score": 0.77,
+          "round": 9,
+          "score": 0.81,
           "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.78,
-            "rigor": 0.71,
+            "innovation": 0.85,
+            "feasibility": 0.82,
+            "rigor": 0.74,
             "expression": 0.74
           },
           "weakest_dim": "rigor",
           "focus_section": "scheme",
           "section_passed": false,
-          "issues_count": 0,
-          "high_issues": 0,
-          "at": "2026-08-19T18:42:28Z"
-        },
-        {
-          "round": 1,
-          "score": 0.77,
-          "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.78,
-            "rigor": 0.71,
-            "expression": 0.74
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 0,
-          "high_issues": 0,
-          "at": "2026-08-19T19:24:08Z"
-        },
-        {
-          "round": 1,
-          "score": 0.77,
-          "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.78,
-            "rigor": 0.71,
-            "expression": 0.74
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "references",
-          "section_passed": false,
-          "issues_count": 0,
-          "high_issues": 0,
-          "at": "2026-08-19T19:36:14Z"
+          "issues_count": 31,
+          "high_issues": 9,
+          "at": "2026-08-19T18:47:42Z"
         }
       ],
       "human_feedback_count": 1,
@@ -169,17 +121,14 @@
         }
       ],
       "last_dim_scores": {
-        "innovation": 0.82,
-        "feasibility": 0.78,
-        "rigor": 0.71,
+        "innovation": 0.85,
+        "feasibility": 0.82,
+        "rigor": 0.74,
         "expression": 0.74
       },
       "section_passes": {
-        "rationale": true,
-        "content": false,
-        "scheme": false,
-        "full_review": false,
-        "references": false
+        "rationale": false,
+        "scheme": false
       },
       "worker_minute": 47,
       "monitor_history": [
@@ -1382,6 +1331,432 @@
           "status": "pending",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r2-derived-update_vision"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-rationale-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "running",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "2026-08-27T03:15:54Z",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-rationale-gap_identify",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "gap_identify",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-rationale-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-rationale-lit_search",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_search",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-rationale-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-rationale-lit_read",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_read",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-rationale-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-rationale-lit_note",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_note",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-rationale-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-rationale-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-rationale-critic",
+            "general-quantum-geometry-inversion-20260726-r3-rationale-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-content-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-rationale-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-content-gap_identify",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "gap_identify",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-content-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-content-lit_search",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_search",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-content-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-content-lit_read",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_read",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-content-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-content-lit_note",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_note",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-content-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-content-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-content-critic",
+            "general-quantum-geometry-inversion-20260726-r3-content-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-scheme-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-content-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-scheme-gap_identify",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "gap_identify",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-scheme-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-scheme-lit_search",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_search",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-scheme-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-scheme-lit_read",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_read",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-scheme-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-scheme-lit_note",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "lit_note",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-scheme-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-scheme-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-scheme-critic",
+            "general-quantum-geometry-inversion-20260726-r3-scheme-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-full_review-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "full_review",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-scheme-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-full_review-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "full_review",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-references-critic",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "critic",
+          "section_key": "references",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-full_review-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-references-writer",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "writer",
+          "section_key": "references",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-references-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-monitor-monitor",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "monitor",
+          "section_key": "monitor",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-references-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-derived-update_vision",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "update_vision",
+          "section_key": "derived",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-monitor-monitor"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-quantum-geometry-inversion-20260726-r3-derived-update_method_manual",
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "step": "update_method_manual",
+          "section_key": "derived",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-quantum-geometry-inversion-20260726-r3-derived-update_vision"
           ],
           "attempts": 0,
           "scheduled_at": "",
@@ -4134,74 +4509,10 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-27T01:05:34Z",
-      "optimization_rounds": 4,
+      "updated_at": "2026-08-27T03:06:51Z",
+      "optimization_rounds": 5,
       "last_score": 0.68,
       "score_history": [
-        {
-          "round": 1,
-          "score": 0.76,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.8,
-            "rigor": 0.67,
-            "expression": 0.76
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 14,
-          "high_issues": 4,
-          "at": "2026-08-19T21:51:41Z"
-        },
-        {
-          "round": 1,
-          "score": 0.75,
-          "dim_scores": {
-            "innovation": 0.81,
-            "feasibility": 0.8,
-            "rigor": 0.66,
-            "expression": 0.74
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 15,
-          "high_issues": 4,
-          "at": "2026-08-19T22:26:58Z"
-        },
-        {
-          "round": 1,
-          "score": 0.77,
-          "dim_scores": {
-            "innovation": 0.84,
-            "feasibility": 0.84,
-            "rigor": 0.6,
-            "expression": 0.79
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 12,
-          "high_issues": 3,
-          "at": "2026-08-19T22:59:32Z"
-        },
-        {
-          "round": 1,
-          "score": 0.78,
-          "dim_scores": {
-            "innovation": 0.84,
-            "feasibility": 0.82,
-            "rigor": 0.69,
-            "expression": 0.78
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 0,
-          "high_issues": 0,
-          "at": "2026-08-19T23:31:25Z"
-        },
         {
           "round": 1,
           "score": 0.74,
@@ -4210,76 +4521,11 @@
             "completeness": 0.85
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "rationale",
           "section_passed": false,
           "issues_count": 7,
           "high_issues": 1,
-          "at": "2026-08-20T00:40:19Z"
-        },
-        {
-          "round": 2,
-          "score": 0.76,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.8,
-            "rigor": 0.67,
-            "expression": 0.76
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 24,
-          "high_issues": 8,
-          "at": "2026-08-20T01:42:19Z"
-        },
-        {
-          "round": 2,
-          "score": 0.76,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.8,
-            "rigor": 0.67,
-            "expression": 0.76
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 24,
-          "high_issues": 8,
-          "at": "2026-08-20T02:16:50Z"
-        },
-        {
-          "round": 2,
-          "score": 0.78,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.82,
-            "rigor": 0.74,
-            "expression": 0.76
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 11,
-          "high_issues": 6,
-          "at": "2026-08-20T03:11:44Z"
-        },
-        {
-          "round": 2,
-          "score": 0.76,
-          "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.78,
-            "rigor": 0.62,
-            "expression": 0.72,
-            "completeness": 0.85
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 29,
-          "high_issues": 7,
-          "at": "2026-08-20T03:56:34Z"
+          "at": "2026-08-20T00:32:08Z"
         },
         {
           "round": 2,
@@ -4289,75 +4535,11 @@
             "completeness": 0.72
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
-          "section_passed": false,
-          "issues_count": 19,
-          "high_issues": 5,
-          "at": "2026-08-20T04:13:44Z"
-        },
-        {
-          "round": 3,
-          "score": 0.7475,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.78,
-            "rigor": 0.72,
-            "expression": 0.74
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 51,
-          "high_issues": 17,
-          "at": "2026-08-20T11:15:29Z"
-        },
-        {
-          "round": 3,
-          "score": 0.73,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.72,
-            "rigor": 0.65,
-            "expression": 0.68
-          },
-          "weakest_dim": "rigor",
           "focus_section": "content",
           "section_passed": false,
           "issues_count": 19,
           "high_issues": 5,
-          "at": "2026-08-20T12:21:27Z"
-        },
-        {
-          "round": 3,
-          "score": 0.72,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.7,
-            "rigor": 0.62,
-            "expression": 0.65
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 21,
-          "high_issues": 4,
-          "at": "2026-08-20T13:09:12Z"
-        },
-        {
-          "round": 3,
-          "score": 0.72,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.7,
-            "rigor": 0.62,
-            "expression": 0.65
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 21,
-          "high_issues": 4,
-          "at": "2026-08-20T13:57:00Z"
+          "at": "2026-08-20T04:05:54Z"
         },
         {
           "round": 3,
@@ -4367,75 +4549,11 @@
             "completeness": 0.66
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "scheme",
           "section_passed": false,
           "issues_count": 23,
           "high_issues": 7,
-          "at": "2026-08-20T14:18:14Z"
-        },
-        {
-          "round": 4,
-          "score": 0.72,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.74,
-            "rigor": 0.58,
-            "expression": 0.72
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 58,
-          "high_issues": 12,
-          "at": "2026-08-20T17:10:48Z"
-        },
-        {
-          "round": 4,
-          "score": 0.695,
-          "dim_scores": {
-            "innovation": 0.76,
-            "feasibility": 0.78,
-            "rigor": 0.58,
-            "expression": 0.66
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 27,
-          "high_issues": 10,
-          "at": "2026-08-20T17:51:31Z"
-        },
-        {
-          "round": 4,
-          "score": 0.7,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.76,
-            "rigor": 0.55,
-            "expression": 0.72
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 6,
-          "high_issues": 3,
-          "at": "2026-08-20T18:32:14Z"
-        },
-        {
-          "round": 4,
-          "score": 0.78,
-          "dim_scores": {
-            "innovation": 0.85,
-            "feasibility": 0.82,
-            "rigor": 0.68,
-            "expression": 0.78
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 49,
-          "high_issues": 11,
-          "at": "2026-08-20T19:16:02Z"
+          "at": "2026-08-20T14:03:56Z"
         },
         {
           "round": 4,
@@ -4445,11 +4563,11 @@
             "completeness": 0.78
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "full_review",
           "section_passed": false,
           "issues_count": 29,
           "high_issues": 11,
-          "at": "2026-08-20T19:32:31Z"
+          "at": "2026-08-20T19:23:58Z"
         },
         {
           "round": 5,
@@ -4461,20 +4579,11 @@
             "expression": 0.48
           },
           "weakest_dim": "expression",
-          "focus_section": "rationale",
+          "focus_section": "references",
           "section_passed": false,
           "issues_count": 21,
           "high_issues": 9,
-          "ai_ceiling": 0.5,
-          "ai_ceiling_after": 0.5,
-          "expression_improved": false,
-          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 天花板 0.50→0.50）",
-          "ai_top_issues": [
-            "冗余修饰词超标：46次（阈值12），扣0.34",
-            "超长句(>120字)：24处，扣0.48"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-23T18:23:51Z"
+          "at": "2026-08-23T17:41:06Z"
         }
       ],
       "human_feedback_count": 4,
@@ -4614,9 +4723,9 @@
       "section_passes": {
         "rationale": false,
         "content": false,
+        "scheme": false,
         "full_review": false,
-        "references": false,
-        "scheme": false
+        "references": false
       },
       "worker_minute": 53,
       "monitor_history": [
@@ -9067,74 +9176,10 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-26T22:00:49Z",
-      "optimization_rounds": 6,
+      "updated_at": "2026-08-27T03:06:51Z",
+      "optimization_rounds": 7,
       "last_score": 0.69,
       "score_history": [
-        {
-          "round": 1,
-          "score": 0.74,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.74,
-            "rigor": 0.74,
-            "expression": 0.66
-          },
-          "weakest_dim": "expression",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 17,
-          "high_issues": 6,
-          "at": "2026-08-12T22:10:11Z"
-        },
-        {
-          "round": 1,
-          "score": 0.79,
-          "dim_scores": {
-            "innovation": 0.84,
-            "feasibility": 0.82,
-            "rigor": 0.78,
-            "expression": 0.62
-          },
-          "weakest_dim": "expression",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 11,
-          "high_issues": 4,
-          "at": "2026-08-12T22:44:35Z"
-        },
-        {
-          "round": 1,
-          "score": 0.74,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.78,
-            "rigor": 0.65,
-            "expression": 0.65
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 15,
-          "high_issues": 5,
-          "at": "2026-08-12T23:31:13Z"
-        },
-        {
-          "round": 1,
-          "score": 0.74,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.7,
-            "rigor": 0.7,
-            "expression": 0.65
-          },
-          "weakest_dim": "expression",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 11,
-          "high_issues": 5,
-          "at": "2026-08-13T01:29:27Z"
-        },
         {
           "round": 1,
           "score": 0.67,
@@ -9143,75 +9188,11 @@
             "completeness": 0.69
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "rationale",
           "section_passed": false,
           "issues_count": 18,
           "high_issues": 5,
-          "at": "2026-08-17T13:39:21Z"
-        },
-        {
-          "round": 2,
-          "score": 0.74,
-          "dim_scores": {
-            "innovation": 0.85,
-            "feasibility": 0.8,
-            "rigor": 0.78,
-            "expression": 0.62
-          },
-          "weakest_dim": "expression",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 25,
-          "high_issues": 9,
-          "at": "2026-08-18T03:28:21Z"
-        },
-        {
-          "round": 2,
-          "score": 0.55,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.72,
-            "rigor": 0.45,
-            "expression": 0.55
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 28,
-          "high_issues": 8,
-          "at": "2026-08-18T12:55:47Z"
-        },
-        {
-          "round": 2,
-          "score": 0.55,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.72,
-            "rigor": 0.45,
-            "expression": 0.62
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 10,
-          "high_issues": 2,
-          "at": "2026-08-18T13:43:01Z"
-        },
-        {
-          "round": 2,
-          "score": 0.78,
-          "dim_scores": {
-            "innovation": 0.84,
-            "feasibility": 0.8,
-            "rigor": 0.65,
-            "expression": 0.74
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 15,
-          "high_issues": 4,
-          "at": "2026-08-18T14:27:46Z"
+          "at": "2026-08-17T13:27:18Z"
         },
         {
           "round": 2,
@@ -9221,75 +9202,11 @@
             "completeness": 0.7
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "content",
           "section_passed": false,
           "issues_count": 11,
           "high_issues": 2,
-          "at": "2026-08-18T16:38:04Z"
-        },
-        {
-          "round": 3,
-          "score": 0.74,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.75,
-            "rigor": 0.74,
-            "expression": 0.62
-          },
-          "weakest_dim": "expression",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 17,
-          "high_issues": 5,
-          "at": "2026-08-18T17:36:02Z"
-        },
-        {
-          "round": 3,
-          "score": 0.74,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.72,
-            "rigor": 0.7,
-            "expression": 0.72
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 29,
-          "high_issues": 12,
-          "at": "2026-08-18T18:14:07Z"
-        },
-        {
-          "round": 3,
-          "score": 0.72,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.8,
-            "rigor": 0.55,
-            "expression": 0.79
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 17,
-          "high_issues": 5,
-          "at": "2026-08-18T19:03:31Z"
-        },
-        {
-          "round": 3,
-          "score": 0.74,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.82,
-            "rigor": 0.58,
-            "expression": 0.78
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 30,
-          "high_issues": 8,
-          "at": "2026-08-18T20:07:55Z"
+          "at": "2026-08-18T14:33:06Z"
         },
         {
           "round": 3,
@@ -9299,75 +9216,11 @@
             "completeness": 0.5
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "scheme",
           "section_passed": false,
           "issues_count": 10,
           "high_issues": 3,
-          "at": "2026-08-18T20:24:44Z"
-        },
-        {
-          "round": 4,
-          "score": 0.78,
-          "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.85,
-            "rigor": 0.68,
-            "expression": 0.76
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 0,
-          "high_issues": 0,
-          "at": "2026-08-18T21:26:24Z"
-        },
-        {
-          "round": 4,
-          "score": 0.62,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.78,
-            "rigor": 0.3,
-            "expression": 0.78
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 34,
-          "high_issues": 8,
-          "at": "2026-08-18T22:16:54Z"
-        },
-        {
-          "round": 4,
-          "score": 0.56,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.82,
-            "rigor": 0.25,
-            "expression": 0.65
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 45,
-          "high_issues": 13,
-          "at": "2026-08-18T22:54:48Z"
-        },
-        {
-          "round": 4,
-          "score": 0.43,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.78,
-            "rigor": 0.2,
-            "expression": 0.65
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 37,
-          "high_issues": 16,
-          "at": "2026-08-18T23:29:50Z"
+          "at": "2026-08-18T20:19:01Z"
         },
         {
           "round": 4,
@@ -9377,75 +9230,11 @@
             "completeness": 0.82
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "full_review",
           "section_passed": false,
           "issues_count": 11,
           "high_issues": 4,
-          "at": "2026-08-19T00:40:36Z"
-        },
-        {
-          "round": 5,
-          "score": 0.57,
-          "dim_scores": {
-            "innovation": 0.62,
-            "feasibility": 0.6,
-            "rigor": 0.4,
-            "expression": 0.4
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 55,
-          "high_issues": 14,
-          "at": "2026-08-19T01:31:15Z"
-        },
-        {
-          "round": 5,
-          "score": 0.65,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.73,
-            "rigor": 0.55,
-            "expression": 0.66
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 21,
-          "high_issues": 7,
-          "at": "2026-08-19T02:35:52Z"
-        },
-        {
-          "round": 5,
-          "score": 0.65,
-          "dim_scores": {
-            "innovation": 0.74,
-            "feasibility": 0.76,
-            "rigor": 0.5,
-            "expression": 0.65
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 18,
-          "high_issues": 9,
-          "at": "2026-08-20T20:04:52Z"
-        },
-        {
-          "round": 5,
-          "score": 0.65,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.76,
-            "rigor": 0.42,
-            "expression": 0.72
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 16,
-          "high_issues": 6,
-          "at": "2026-08-20T20:55:08Z"
+          "at": "2026-08-18T23:32:38Z"
         },
         {
           "round": 5,
@@ -9459,160 +9248,21 @@
           "section_passed": false,
           "issues_count": 9,
           "high_issues": 1,
-          "at": "2026-08-20T21:22:21Z"
+          "at": "2026-08-20T21:04:02Z"
         },
         {
           "round": 6,
-          "score": 0.77,
-          "dim_scores": {
-            "innovation": 0.85,
-            "feasibility": 0.78,
-            "rigor": 0.65,
-            "expression": 0.79
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 33,
-          "high_issues": 7,
-          "at": "2026-08-20T22:19:20Z"
-        },
-        {
-          "round": 6,
-          "score": 0.74,
-          "dim_scores": {
-            "innovation": 0.85,
-            "feasibility": 0.78,
-            "rigor": 0.55,
-            "expression": 0.74
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 46,
-          "high_issues": 9,
-          "at": "2026-08-20T22:59:04Z"
-        },
-        {
-          "round": 6,
-          "score": 0.69,
-          "dim_scores": {
-            "innovation": 0.85,
-            "feasibility": 0.78,
-            "rigor": 0.58,
-            "expression": 0.76
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 28,
-          "high_issues": 8,
-          "at": "2026-08-21T00:35:36Z"
-        },
-        {
-          "round": 6,
-          "score": 0.81,
-          "dim_scores": {
-            "innovation": 0.86,
-            "feasibility": 0.8,
-            "rigor": 0.72,
-            "expression": 0.78
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 9,
-          "high_issues": 3,
-          "at": "2026-08-21T00:55:18Z"
-        },
-        {
-          "round": 6,
-          "score": 0.575,
+          "score": 0.55,
           "dim_scores": {
             "rigor": 0.45,
             "completeness": 0.7
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "full_review",
           "section_passed": false,
           "issues_count": 4,
           "high_issues": 1,
-          "ai_ceiling": 0.5,
-          "ai_top_issues": [
-            "死板关联词超标：10次（阈值8），扣0.04",
-            "冗余修饰词超标：29次（阈值12），扣0.17",
-            "超长句(>120字)：22处，扣0.44"
-          ],
-          "anchor_conclusion": "",
-          "at": "2026-08-21T01:41:16Z"
-        },
-        {
-          "round": 7,
-          "score": 0.67,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.75,
-            "rigor": 0.62,
-            "expression": 0.5
-          },
-          "weakest_dim": "expression",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 17,
-          "high_issues": 9,
-          "ai_ceiling": 0.5,
-          "ai_top_issues": [
-            "死板关联词超标：10次（阈值8），扣0.04",
-            "冗余修饰词超标：29次（阈值12），扣0.17",
-            "超长句(>120字)：22处，扣0.44"
-          ],
-          "anchor_conclusion": "",
-          "at": "2026-08-21T03:05:34Z"
-        },
-        {
-          "round": 7,
-          "score": 0.71,
-          "dim_scores": {
-            "innovation": 0.85,
-            "feasibility": 0.78,
-            "rigor": 0.7,
-            "expression": 0.5
-          },
-          "weakest_dim": "expression",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 45,
-          "high_issues": 13,
-          "ai_ceiling": 0.5,
-          "ai_top_issues": [
-            "死板关联词超标：9次（阈值8），扣0.02",
-            "冗余修饰词超标：29次（阈值12），扣0.17",
-            "超长句(>120字)：22处，扣0.44"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-21T03:49:26Z"
-        },
-        {
-          "round": 7,
-          "score": 0.71,
-          "dim_scores": {
-            "innovation": 0.83,
-            "feasibility": 0.78,
-            "rigor": 0.66,
-            "expression": 0.5
-          },
-          "weakest_dim": "expression",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 64,
-          "high_issues": 20,
-          "ai_ceiling": 0.5,
-          "ai_top_issues": [
-            "冗余修饰词超标：28次（阈值12），扣0.16",
-            "超长句(>120字)：20处，扣0.40"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-21T10:37:44Z"
+          "at": "2026-08-21T01:06:50Z"
         },
         {
           "round": 7,
@@ -9624,17 +9274,11 @@
             "expression": 0.47
           },
           "weakest_dim": "expression",
-          "focus_section": "full_review",
+          "focus_section": "rationale",
           "section_passed": false,
           "issues_count": 27,
           "high_issues": 13,
-          "ai_ceiling": 0.5,
-          "ai_top_issues": [
-            "冗余修饰词超标：27次（阈值12），扣0.15",
-            "超长句(>120字)：18处，扣0.36"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-21T12:04:54Z"
+          "at": "2026-08-21T11:21:37Z"
         }
       ],
       "section_passes": {
@@ -12494,74 +12138,10 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控",
       "created_at": "2026-08-16T03:49:25Z",
-      "updated_at": "2026-08-27T00:05:27Z",
-      "optimization_rounds": 1,
-      "last_score": 0.65,
+      "updated_at": "2026-08-27T03:10:52Z",
+      "optimization_rounds": 2,
+      "last_score": 0.51,
       "score_history": [
-        {
-          "round": 1,
-          "score": 0.1,
-          "dim_scores": {
-            "innovation": 0.1,
-            "feasibility": 0.1,
-            "rigor": 0.1,
-            "expression": 0.1
-          },
-          "weakest_dim": "innovation",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 10,
-          "high_issues": 2,
-          "at": "2026-08-17T22:16:14Z"
-        },
-        {
-          "round": 1,
-          "score": 0.1,
-          "dim_scores": {
-            "innovation": 0.1,
-            "feasibility": 0.1,
-            "rigor": 0.1,
-            "expression": 0.1
-          },
-          "weakest_dim": "innovation",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 15,
-          "high_issues": 7,
-          "at": "2026-08-17T23:14:00Z"
-        },
-        {
-          "round": 1,
-          "score": 0.1,
-          "dim_scores": {
-            "innovation": 0.1,
-            "feasibility": 0.1,
-            "rigor": 0.1,
-            "expression": 0.1
-          },
-          "weakest_dim": "innovation",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 16,
-          "high_issues": 8,
-          "at": "2026-08-18T00:58:39Z"
-        },
-        {
-          "round": 1,
-          "score": 0.67,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.72,
-            "rigor": 0.6,
-            "expression": 0.55
-          },
-          "weakest_dim": "expression",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 7,
-          "high_issues": 4,
-          "at": "2026-08-19T11:02:08Z"
-        },
         {
           "round": 1,
           "score": 0.18,
@@ -12570,102 +12150,30 @@
             "completeness": 0.25
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "rationale",
           "section_passed": false,
           "issues_count": 12,
           "high_issues": 2,
-          "at": "2026-08-19T11:34:30Z"
+          "at": "2026-08-19T11:08:38Z"
         },
         {
           "round": 2,
-          "score": 0.64,
+          "score": 0.51,
           "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.72,
-            "rigor": 0.2,
-            "expression": 0.5
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 42,
-          "high_issues": 18,
-          "at": "2026-08-19T12:18:24Z"
-        },
-        {
-          "round": 2,
-          "score": 0.74,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.74,
-            "rigor": 0.62,
-            "expression": 0.66
+            "rigor": 0.3,
+            "completeness": 0.72
           },
           "weakest_dim": "rigor",
           "focus_section": "content",
           "section_passed": false,
-          "issues_count": 29,
-          "high_issues": 8,
-          "at": "2026-08-19T13:10:35Z"
-        },
-        {
-          "round": 2,
-          "score": 0.59,
-          "dim_scores": {
-            "innovation": 0.72,
-            "feasibility": 0.63,
-            "rigor": 0.55,
-            "expression": 0.45
-          },
-          "weakest_dim": "expression",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 37,
-          "high_issues": 14,
-          "ai_ceiling": 0.5,
-          "ai_ceiling_after": 0.5,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "死板关联词超标：21次（阈值20），扣0.02",
-            "模板句式'为...提供...'超标：9次（阈值8），扣0.03",
-            "超长句(>120字)：31处（免赔5处），扣0.52"
-          ],
-          "anchor_conclusion": "差距明显",
-          "at": "2026-08-26T22:00:47Z"
-        },
-        {
-          "round": 2,
-          "score": 0.65,
-          "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.72,
-            "rigor": 0.62,
-            "expression": 0.45
-          },
-          "weakest_dim": "expression",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 26,
-          "high_issues": 8,
-          "ai_ceiling": 0.5,
-          "ai_ceiling_after": 0.53,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "模板句式'为...提供...'超标：9次（阈值8），扣0.03",
-            "超长句(>120字)：31处（免赔5处），扣0.52"
-          ],
-          "anchor_conclusion": "差距明显",
-          "at": "2026-08-26T22:58:26Z"
+          "issues_count": 18,
+          "high_issues": 6,
+          "at": "2026-08-26T23:11:29Z"
         }
       ],
       "section_passes": {
         "rationale": false,
-        "content": false,
-        "scheme": false,
-        "full_review": false,
-        "references": false
+        "content": false
       },
       "open_critical_issues": [
         {
@@ -14163,6 +13671,432 @@
           "finished_at": "",
           "last_error": "",
           "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-rationale-critic",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "critic",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-rationale-gap_identify",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "gap_identify",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-rationale-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-rationale-lit_search",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "lit_search",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-rationale-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-rationale-lit_read",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "lit_read",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-rationale-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-rationale-lit_note",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "lit_note",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-rationale-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-rationale-writer",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "writer",
+          "section_key": "rationale",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-rationale-critic",
+            "general-berry-mnps3-rashba-20260816-r3-rationale-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-content-critic",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "critic",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-rationale-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-content-gap_identify",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "gap_identify",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-content-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-content-lit_search",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "lit_search",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-content-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-content-lit_read",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "lit_read",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-content-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-content-lit_note",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "lit_note",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-content-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-content-writer",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "writer",
+          "section_key": "content",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-content-critic",
+            "general-berry-mnps3-rashba-20260816-r3-content-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-scheme-critic",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "critic",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-content-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-scheme-gap_identify",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "gap_identify",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-scheme-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-scheme-lit_search",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "lit_search",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-scheme-gap_identify"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-scheme-lit_read",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "lit_read",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-scheme-lit_search"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-scheme-lit_note",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "lit_note",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-scheme-lit_read"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-scheme-writer",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "writer",
+          "section_key": "scheme",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-scheme-critic",
+            "general-berry-mnps3-rashba-20260816-r3-scheme-lit_note"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-full_review-critic",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "critic",
+          "section_key": "full_review",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-scheme-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-full_review-writer",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "writer",
+          "section_key": "full_review",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-full_review-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-references-critic",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "critic",
+          "section_key": "references",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-full_review-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-references-writer",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "writer",
+          "section_key": "references",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-references-critic"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-monitor-monitor",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "monitor",
+          "section_key": "monitor",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-references-writer"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-derived-update_vision",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "update_vision",
+          "section_key": "derived",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-monitor-monitor"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
+        },
+        {
+          "job_id": "general-berry-mnps3-rashba-20260816-r3-derived-update_method_manual",
+          "proposal_id": "general-berry-mnps3-rashba-20260816",
+          "step": "update_method_manual",
+          "section_key": "derived",
+          "round": 3,
+          "status": "pending",
+          "depends_on": [
+            "general-berry-mnps3-rashba-20260816-r3-derived-update_vision"
+          ],
+          "attempts": 0,
+          "scheduled_at": "",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": ""
         }
       ],
       "idea_review_attempts": 2,
@@ -14171,10 +14105,8 @@
       "idea_review_at": "2026-08-17T21:24:00Z",
       "idea_review_passed": true,
       "last_dim_scores": {
-        "innovation": 0.82,
-        "feasibility": 0.72,
-        "rigor": 0.62,
-        "expression": 0.45
+        "rigor": 0.3,
+        "completeness": 0.72
       },
       "degradation_events": [
         {
@@ -14213,219 +14145,23 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 交变磁体高次谐波产生与固态强场非线性光学新前沿",
       "created_at": "2026-08-22T05:40:16Z",
-      "updated_at": "2026-08-27T01:35:40Z",
-      "optimization_rounds": 1,
+      "updated_at": "2026-08-27T03:06:51Z",
+      "optimization_rounds": 2,
       "last_score": 0.55,
       "score_history": [
         {
           "round": 1,
-          "score": 0.1,
-          "dim_scores": {
-            "innovation": 0.1,
-            "feasibility": 0.1,
-            "rigor": 0.1,
-            "expression": 0.1
-          },
-          "weakest_dim": "innovation",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 4,
-          "high_issues": 2,
-          "ai_ceiling": 0.5,
-          "ai_ceiling_after": 0.74,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [],
-          "anchor_conclusion": "差距明显",
-          "at": "2026-08-24T17:22:15Z"
-        },
-        {
-          "round": 1,
-          "score": 0.1,
-          "dim_scores": {
-            "innovation": 0.1,
-            "feasibility": 0.1,
-            "rigor": 0.1,
-            "expression": 0.1
-          },
-          "weakest_dim": "innovation",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 11,
-          "high_issues": 6,
-          "ai_ceiling": 0.74,
-          "ai_ceiling_after": 0.72,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：16处（免赔3处），扣0.26"
-          ],
-          "anchor_conclusion": "差距明显",
-          "at": "2026-08-24T18:06:48Z"
-        },
-        {
-          "round": 1,
-          "score": 0.1,
-          "dim_scores": {
-            "innovation": 0.1,
-            "feasibility": 0.1,
-            "rigor": 0.1,
-            "expression": 0.1
-          },
-          "weakest_dim": "innovation",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 7,
-          "high_issues": 4,
-          "ai_ceiling": 0.72,
-          "ai_ceiling_after": 0.72,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：17处（免赔3处），扣0.28"
-          ],
-          "anchor_conclusion": "差距明显",
-          "at": "2026-08-24T18:53:47Z"
-        },
-        {
-          "round": 1,
-          "score": 0.74,
-          "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.74,
-            "rigor": 0.7,
-            "expression": 0.71
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 21,
-          "high_issues": 11,
-          "ai_ceiling": 0.72,
-          "ai_ceiling_after": 0.68,
-          "expression_improved": false,
-          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 原始天花板 0.72→0.68，floor 后 0.72→0.68）",
-          "ai_top_issues": [
-            "超长句(>120字)：18处（免赔4处），扣0.28"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-24T19:38:07Z"
-        },
-        {
-          "round": 1,
-          "score": 0.42500000000000004,
+          "score": 0.43,
           "dim_scores": {
             "rigor": 0.45,
             "completeness": 0.4
           },
           "weakest_dim": "completeness",
-          "focus_section": "references",
+          "focus_section": "rationale",
           "section_passed": false,
           "issues_count": 16,
           "high_issues": 6,
-          "ai_ceiling": 0.68,
-          "ai_ceiling_after": null,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：20处（免赔4处），扣0.32"
-          ],
-          "anchor_conclusion": "",
-          "at": "2026-08-24T20:18:53Z"
-        },
-        {
-          "round": 2,
-          "score": 0.74,
-          "dim_scores": {
-            "innovation": 0.75,
-            "feasibility": 0.8,
-            "rigor": 0.65,
-            "expression": 0.76
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 22,
-          "high_issues": 7,
-          "ai_ceiling": 0.96,
-          "ai_ceiling_after": 0.98,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：5处（免赔3处），扣0.04"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-24T21:35:42Z"
-        },
-        {
-          "round": 2,
-          "score": 0.77,
-          "dim_scores": {
-            "innovation": 0.83,
-            "feasibility": 0.79,
-            "rigor": 0.68,
-            "expression": 0.79
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 17,
-          "high_issues": 10,
-          "ai_ceiling": 0.98,
-          "ai_ceiling_after": 0.96,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：4处（免赔3处），扣0.02"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-24T22:46:16Z"
-        },
-        {
-          "round": 2,
-          "score": 0.75,
-          "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.75,
-            "rigor": 0.68,
-            "expression": 0.75
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 27,
-          "high_issues": 15,
-          "ai_ceiling": 0.96,
-          "ai_ceiling_after": 1.0,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：5处（免赔3处），扣0.04"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T00:53:09Z"
-        },
-        {
-          "round": 2,
-          "score": 0.72,
-          "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.65,
-            "rigor": 0.62,
-            "expression": 0.79
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 34,
-          "high_issues": 12,
-          "ai_ceiling": 1.0,
-          "ai_ceiling_after": 0.94,
-          "expression_improved": false,
-          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 原始天花板 1.00→0.94，floor 后 1.00→0.94）",
-          "ai_top_issues": [],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T02:24:25Z"
+          "at": "2026-08-24T20:07:02Z"
         },
         {
           "round": 2,
@@ -14435,27 +14171,16 @@
             "completeness": 0.72
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "content",
           "section_passed": false,
           "issues_count": 9,
           "high_issues": 3,
-          "ai_ceiling": 0.94,
-          "ai_ceiling_after": null,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：7处（免赔4处），扣0.06"
-          ],
-          "anchor_conclusion": "",
-          "at": "2026-08-26T20:29:20Z"
+          "at": "2026-08-25T02:36:39Z"
         }
       ],
       "section_passes": {
         "rationale": false,
-        "content": false,
-        "scheme": false,
-        "full_review": false,
-        "references": false
+        "content": false
       },
       "open_critical_issues": [
         {
@@ -15992,577 +15717,69 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 阿秒条纹技术：从超短脉冲表征到量子相位测量（手动补注册 2026-08-22）",
       "created_at": "2026-08-22T12:20:08Z",
-      "updated_at": "2026-08-27T02:55:51Z",
-      "optimization_rounds": 7,
+      "updated_at": "2026-08-27T03:10:51Z",
+      "optimization_rounds": 8,
       "last_score": 0.72,
       "score_history": [
         {
           "round": 1,
-          "score": 0.16,
-          "dim_scores": {
-            "innovation": 0.2,
-            "feasibility": 0.2,
-            "rigor": 0.15,
-            "expression": 0.1
-          },
-          "weakest_dim": "expression",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 8,
-          "high_issues": 1,
-          "ai_ceiling": 0.5,
-          "ai_ceiling_after": 0.5,
-          "expression_improved": false,
-          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 天花板 0.50→0.50）",
-          "ai_top_issues": [],
-          "anchor_conclusion": "差距明显",
-          "at": "2026-08-23T22:58:40Z"
-        },
-        {
-          "round": 1,
-          "score": 0.33,
-          "dim_scores": {
-            "innovation": 0.25,
-            "feasibility": 0.3,
-            "rigor": 0.25,
-            "expression": 0.5
-          },
-          "weakest_dim": "innovation",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 17,
-          "high_issues": 8,
-          "ai_ceiling": 0.5,
-          "ai_ceiling_after": 0.5,
-          "expression_improved": false,
-          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 天花板 0.50→0.50）",
-          "ai_top_issues": [
-            "死板关联词超标：13次（阈值8），扣0.10",
-            "冗余修饰词超标：22次（阈值12），扣0.10",
-            "超长句(>120字)：15处，扣0.30"
-          ],
-          "anchor_conclusion": "差距明显",
-          "at": "2026-08-23T23:43:14Z"
-        },
-        {
-          "round": 1,
-          "score": 0.3,
-          "dim_scores": {
-            "innovation": 0.25,
-            "feasibility": 0.2,
-            "rigor": 0.25,
-            "expression": 0.5
-          },
-          "weakest_dim": "feasibility",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 27,
-          "high_issues": 15,
-          "ai_ceiling": 0.5,
-          "ai_ceiling_after": 0.5,
-          "expression_improved": false,
-          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 天花板 0.50→0.50）",
-          "ai_top_issues": [
-            "死板关联词超标：17次（阈值8），扣0.18",
-            "冗余修饰词超标：38次（阈值12），扣0.26",
-            "超长句(>120字)：18处，扣0.36"
-          ],
-          "anchor_conclusion": "差距明显",
-          "at": "2026-08-24T01:15:49Z"
-        },
-        {
-          "round": 1,
-          "score": 0.55,
-          "dim_scores": {
-            "innovation": 0.72,
-            "feasibility": 0.66,
-            "rigor": 0.35,
-            "expression": 0.46
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 41,
-          "high_issues": 19,
-          "ai_ceiling": 0.5,
-          "ai_ceiling_after": 0.5,
-          "expression_improved": false,
-          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 天花板 0.50→0.50）",
-          "ai_top_issues": [
-            "死板关联词超标：18次（阈值8），扣0.20",
-            "冗余修饰词超标：54次（阈值12），扣0.42",
-            "超长句(>120字)：22处，扣0.44"
-          ],
-          "anchor_conclusion": "差距明显",
-          "at": "2026-08-24T02:17:05Z"
-        },
-        {
-          "round": 1,
-          "score": 0.5,
+          "score": 0.49,
           "dim_scores": {
             "rigor": 0.5,
             "completeness": 0.5
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "rationale",
           "section_passed": false,
           "issues_count": 36,
           "high_issues": 10,
-          "ai_ceiling": 0.5,
-          "ai_ceiling_after": null,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "死板关联词超标：17次（阈值8），扣0.18",
-            "冗余修饰词超标：50次（阈值12），扣0.38",
-            "超长句(>120字)：22处，扣0.44"
-          ],
-          "anchor_conclusion": "",
-          "at": "2026-08-24T02:28:09Z"
+          "at": "2026-08-24T02:23:47Z"
         },
         {
           "round": 2,
-          "score": 0.54,
-          "dim_scores": {
-            "innovation": 0.55,
-            "feasibility": 0.65,
-            "rigor": 0.45,
-            "expression": 0.5
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 34,
-          "high_issues": 13,
-          "ai_ceiling": 0.5,
-          "ai_ceiling_after": 0.5,
-          "expression_improved": false,
-          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 天花板 0.50→0.50）",
-          "ai_top_issues": [
-            "死板关联词超标：17次（阈值8），扣0.18",
-            "冗余修饰词超标：50次（阈值12），扣0.38",
-            "超长句(>120字)：10处，扣0.20"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-24T03:27:18Z"
-        },
-        {
-          "round": 2,
-          "score": 0.76,
-          "dim_scores": {
-            "innovation": 0.81,
-            "feasibility": 0.78,
-            "rigor": 0.66,
-            "expression": 0.78
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 37,
-          "high_issues": 14,
-          "ai_ceiling": 0.94,
-          "ai_ceiling_after": 0.96,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：7处（免赔4处），扣0.06"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T10:39:41Z"
-        },
-        {
-          "round": 2,
-          "score": 0.76,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.8,
-            "rigor": 0.68,
-            "expression": 0.78
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 69,
-          "high_issues": 19,
-          "ai_ceiling": 0.96,
-          "ai_ceiling_after": 1.0,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：6处（免赔4处），扣0.04"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T11:16:43Z"
-        },
-        {
-          "round": 2,
-          "score": 0.68,
-          "dim_scores": {
-            "innovation": 0.86,
-            "feasibility": 0.83,
-            "rigor": 0.6,
-            "expression": 0.77
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 36,
-          "high_issues": 13,
-          "ai_ceiling": 1.0,
-          "ai_ceiling_after": 1.0,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T12:06:09Z"
-        },
-        {
-          "round": 2,
-          "score": 0.47500000000000003,
+          "score": 0.475,
           "dim_scores": {
             "rigor": 0.4,
             "completeness": 0.55
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "content",
           "section_passed": false,
           "issues_count": 13,
           "high_issues": 4,
-          "ai_ceiling": 1.0,
-          "ai_ceiling_after": null,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [],
-          "anchor_conclusion": "",
-          "at": "2026-08-25T12:27:25Z"
+          "at": "2026-08-25T12:18:56Z"
         },
         {
           "round": 3,
-          "score": 0.66,
-          "dim_scores": {
-            "innovation": 0.65,
-            "feasibility": 0.68,
-            "rigor": 0.62,
-            "expression": 0.7
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 39,
-          "high_issues": 8,
-          "ai_ceiling": 1.0,
-          "ai_ceiling_after": 1.0,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T13:46:43Z"
-        },
-        {
-          "round": 3,
-          "score": 0.72,
-          "dim_scores": {
-            "innovation": 0.76,
-            "feasibility": 0.74,
-            "rigor": 0.66,
-            "expression": 0.72
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 15,
-          "high_issues": 6,
-          "ai_ceiling": 1.0,
-          "ai_ceiling_after": 1.0,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T14:34:19Z"
-        },
-        {
-          "round": 3,
-          "score": 0.73,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.75,
-            "rigor": 0.62,
-            "expression": 0.76
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 61,
-          "high_issues": 15,
-          "ai_ceiling": 1.0,
-          "ai_ceiling_after": 1.0,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T16:58:19Z"
-        },
-        {
-          "round": 3,
-          "score": 0.775,
-          "dim_scores": {
-            "innovation": 0.78,
-            "feasibility": 0.82,
-            "rigor": 0.72,
-            "expression": 0.78
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 11,
-          "high_issues": 2,
-          "ai_ceiling": 1.0,
-          "ai_ceiling_after": 0.91,
-          "expression_improved": false,
-          "expression_not_improved_reason": "writer 未实质修复表达问题（AI 原始天花板 1.00→0.91，floor 后 1.00→0.91）",
-          "ai_top_issues": [],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T17:35:53Z"
-        },
-        {
-          "round": 3,
-          "score": 0.5,
+          "score": 0.4,
           "dim_scores": {
             "rigor": 0.5,
             "completeness": 0.5
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
-          "section_passed": false,
-          "issues_count": 13,
-          "high_issues": 2,
-          "ai_ceiling": 0.91,
-          "ai_ceiling_after": null,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "冗余修饰词超标：43次（阈值34），扣0.09"
-          ],
-          "anchor_conclusion": "",
-          "at": "2026-08-25T18:00:49Z"
-        },
-        {
-          "round": 4,
-          "score": 0.66,
-          "dim_scores": {
-            "innovation": 0.3,
-            "feasibility": 0.25,
-            "rigor": 0.2,
-            "expression": 0.1
-          },
-          "weakest_dim": "expression",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 19,
-          "high_issues": 5,
-          "ai_ceiling": 0.96,
-          "ai_ceiling_after": 0.96,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "冗余修饰词超标：37次（阈值33），扣0.04"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T19:01:38Z"
-        },
-        {
-          "round": 4,
-          "score": 0.246,
-          "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.81,
-            "rigor": 0.68,
-            "expression": 0.79
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 13,
-          "high_issues": 2,
-          "ai_ceiling": 0.96,
-          "ai_ceiling_after": 0.96,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：6处（免赔4处），扣0.04"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T20:07:58Z"
-        },
-        {
-          "round": 4,
-          "score": 0.78,
-          "dim_scores": {
-            "innovation": 0.8,
-            "feasibility": 0.8,
-            "rigor": 0.72,
-            "expression": 0.76
-          },
-          "weakest_dim": "rigor",
           "focus_section": "scheme",
           "section_passed": false,
-          "issues_count": 75,
-          "high_issues": 14,
-          "ai_ceiling": 0.96,
-          "ai_ceiling_after": 0.92,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：6处（免赔4处），扣0.04"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T20:54:37Z"
-        },
-        {
-          "round": 4,
-          "score": 0.8,
-          "dim_scores": {
-            "innovation": 0.87,
-            "feasibility": 0.85,
-            "rigor": 0.78,
-            "expression": 0.72
-          },
-          "weakest_dim": "expression",
-          "focus_section": "full_review",
-          "section_passed": false,
           "issues_count": 13,
-          "high_issues": 6,
-          "ai_ceiling": 0.92,
-          "ai_ceiling_after": 0.9,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：8处（免赔4处），扣0.08"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T21:13:29Z"
+          "high_issues": 2,
+          "at": "2026-08-25T17:46:19Z"
         },
         {
           "round": 4,
-          "score": 0.5,
+          "score": 0.55,
           "dim_scores": {
             "rigor": 0.5,
             "completeness": 0.5
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "full_review",
           "section_passed": false,
           "issues_count": 5,
           "high_issues": 0,
-          "ai_ceiling": 0.9,
-          "ai_ceiling_after": null,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：9处（免赔4处），扣0.10"
-          ],
-          "anchor_conclusion": "",
-          "at": "2026-08-25T21:32:37Z"
+          "at": "2026-08-25T21:20:22Z"
         },
         {
           "round": 5,
-          "score": 0.78,
-          "dim_scores": {
-            "innovation": 0.85,
-            "feasibility": 0.82,
-            "rigor": 0.78,
-            "expression": 0.7
-          },
-          "weakest_dim": "expression",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 17,
-          "high_issues": 5,
-          "ai_ceiling": 0.9,
-          "ai_ceiling_after": 0.94,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：9处（免赔4处），扣0.10"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T22:23:58Z"
-        },
-        {
-          "round": 5,
-          "score": 0.3,
-          "dim_scores": {
-            "innovation": 0.85,
-            "feasibility": 0.84,
-            "rigor": 0.76,
-            "expression": 0.78
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 24,
-          "high_issues": 10,
-          "ai_ceiling": 0.94,
-          "ai_ceiling_after": 0.88,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：7处（免赔4处），扣0.06"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T22:59:03Z"
-        },
-        {
-          "round": 5,
-          "score": 0.79,
-          "dim_scores": {
-            "innovation": 0.3,
-            "feasibility": 0.25,
-            "rigor": 0.2,
-            "expression": 0.1
-          },
-          "weakest_dim": "expression",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 17,
-          "high_issues": 6,
-          "ai_ceiling": 0.88,
-          "ai_ceiling_after": 0.88,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：10处（免赔4处），扣0.12"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-25T23:33:04Z"
-        },
-        {
-          "round": 5,
-          "score": 0.82,
-          "dim_scores": {
-            "innovation": 0.3,
-            "feasibility": 0.25,
-            "rigor": 0.2,
-            "expression": 0.1
-          },
-          "weakest_dim": "expression",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 11,
-          "high_issues": 2,
-          "ai_ceiling": 0.88,
-          "ai_ceiling_after": 0.94,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：10处（免赔4处），扣0.12"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-26T01:00:39Z"
-        },
-        {
-          "round": 5,
-          "score": 0.5,
+          "score": 0.66,
           "dim_scores": {
             "rigor": 0.5,
             "completeness": 0.5
@@ -16572,251 +15789,35 @@
           "section_passed": false,
           "issues_count": 8,
           "high_issues": 4,
-          "ai_ceiling": 0.94,
-          "ai_ceiling_after": null,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：7处（免赔4处），扣0.06"
-          ],
-          "anchor_conclusion": "",
-          "at": "2026-08-26T01:24:30Z"
+          "at": "2026-08-26T01:15:24Z"
         },
         {
           "round": 6,
-          "score": 0.67,
-          "dim_scores": {
-            "innovation": 0.3,
-            "feasibility": 0.25,
-            "rigor": 0.2,
-            "expression": 0.1
-          },
-          "weakest_dim": "expression",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 38,
-          "high_issues": 15,
-          "ai_ceiling": 0.94,
-          "ai_ceiling_after": 0.98,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：7处（免赔4处），扣0.06"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-26T02:20:34Z"
-        },
-        {
-          "round": 6,
-          "score": 0.79,
-          "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.8,
-            "rigor": 0.78,
-            "expression": 0.74
-          },
-          "weakest_dim": "expression",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 15,
-          "high_issues": 2,
-          "ai_ceiling": 0.98,
-          "ai_ceiling_after": 0.96,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：5处（免赔4处），扣0.02"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-26T03:05:33Z"
-        },
-        {
-          "round": 6,
-          "score": 0.79,
-          "dim_scores": {
-            "innovation": 0.82,
-            "feasibility": 0.8,
-            "rigor": 0.78,
-            "expression": 0.74
-          },
-          "weakest_dim": "expression",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 15,
-          "high_issues": 2,
-          "ai_ceiling": 0.96,
-          "ai_ceiling_after": 0.9,
-          "expression_improved": false,
-          "expression_not_improved_reason": "writer 未实质修复表达问题（scheme 章节原始天花板 0.98→0.92，全局 0.96→0.90）",
-          "ai_top_issues": [
-            "超长句(>120字)：6处（免赔4处），扣0.04"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-26T03:50:10Z"
-        },
-        {
-          "round": 6,
-          "score": 0.82,
-          "dim_scores": {
-            "innovation": 0.85,
-            "feasibility": 0.83,
-            "rigor": 0.8,
-            "expression": 0.25
-          },
-          "weakest_dim": "expression",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 73,
-          "high_issues": 28,
-          "ai_ceiling": 0.9,
-          "ai_ceiling_after": 0.96,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：9处（免赔4处），扣0.10"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-26T10:39:11Z"
-        },
-        {
-          "round": 6,
-          "score": 0.7250000000000001,
+          "score": 0.72,
           "dim_scores": {
             "rigor": 0.65,
             "completeness": 0.8
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "full_review",
           "section_passed": false,
           "issues_count": 14,
           "high_issues": 3,
-          "ai_ceiling": 0.96,
-          "ai_ceiling_after": null,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：6处（免赔4处），扣0.04"
-          ],
-          "anchor_conclusion": "",
-          "at": "2026-08-26T10:59:25Z"
+          "at": "2026-08-26T10:47:10Z"
         },
         {
           "round": 7,
-          "score": 0.78,
-          "dim_scores": {
-            "innovation": 0.83,
-            "feasibility": 0.85,
-            "rigor": 0.2,
-            "expression": 0.25
-          },
-          "weakest_dim": "rigor",
-          "focus_section": "rationale",
-          "section_passed": false,
-          "issues_count": 60,
-          "high_issues": 13,
-          "ai_ceiling": 0.94,
-          "ai_ceiling_after": 0.94,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：7处（免赔4处），扣0.06"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-26T11:51:14Z"
-        },
-        {
-          "round": 7,
-          "score": 0.83,
-          "dim_scores": {
-            "innovation": 0.85,
-            "feasibility": 0.86,
-            "rigor": 0.82,
-            "expression": 0.78
-          },
-          "weakest_dim": "expression",
-          "focus_section": "content",
-          "section_passed": false,
-          "issues_count": 20,
-          "high_issues": 8,
-          "ai_ceiling": 0.94,
-          "ai_ceiling_after": 0.94,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：7处（免赔4处），扣0.06"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-26T12:28:53Z"
-        },
-        {
-          "round": 7,
-          "score": 0.83,
-          "dim_scores": {
-            "innovation": 0.85,
-            "feasibility": 0.88,
-            "rigor": 0.86,
-            "expression": 0.74
-          },
-          "weakest_dim": "expression",
-          "focus_section": "scheme",
-          "section_passed": false,
-          "issues_count": 24,
-          "high_issues": 6,
-          "ai_ceiling": 0.92,
-          "ai_ceiling_after": 0.94,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：8处（免赔4处），扣0.08"
-          ],
-          "anchor_conclusion": "",
-          "at": "2026-08-26T13:14:16Z"
-        },
-        {
-          "round": 7,
-          "score": 0.83,
-          "dim_scores": {
-            "innovation": 0.85,
-            "feasibility": 0.88,
-            "rigor": 0.86,
-            "expression": 0.74
-          },
-          "weakest_dim": "expression",
-          "focus_section": "full_review",
-          "section_passed": false,
-          "issues_count": 24,
-          "high_issues": 6,
-          "ai_ceiling": 0.94,
-          "ai_ceiling_after": 0.94,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：7处（免赔4处），扣0.06"
-          ],
-          "anchor_conclusion": "",
-          "at": "2026-08-26T13:58:36Z"
-        },
-        {
-          "round": 7,
-          "score": 0.575,
+          "score": 0.58,
           "dim_scores": {
             "rigor": 0.35,
             "completeness": 0.8
           },
           "weakest_dim": "rigor",
-          "focus_section": "references",
+          "focus_section": "rationale",
           "section_passed": false,
           "issues_count": 15,
           "high_issues": 6,
-          "ai_ceiling": 0.94,
-          "ai_ceiling_after": null,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "ai_top_issues": [
-            "超长句(>120字)：7处（免赔4处），扣0.06"
-          ],
-          "anchor_conclusion": "",
-          "at": "2026-08-26T14:20:08Z"
+          "at": "2026-08-26T14:09:10Z"
         },
         {
           "round": 8,
@@ -16828,22 +15829,11 @@
             "expression": 0.74
           },
           "weakest_dim": "rigor",
-          "focus_section": "rationale",
+          "focus_section": "content",
           "section_passed": false,
           "issues_count": 39,
           "high_issues": 14,
-          "ai_ceiling": 0.94,
-          "ai_ceiling_after": 0.92,
-          "expression_improved": true,
-          "expression_not_improved_reason": "",
-          "quality_gate_passed": false,
-          "quality_gate_reason": "质量缺陷未修复：跨章节重复句 1 处（如：理论预估该方案可将偶极相位贡献压制至小于2此时脉冲包络信息可以被独立提取）；跨章节高相似句 4 处",
-          "quality_over_budget": false,
-          "ai_top_issues": [
-            "超长句(>120字)：7处（免赔4处），扣0.06"
-          ],
-          "anchor_conclusion": "基本接近",
-          "at": "2026-08-27T02:33:26Z"
+          "at": "2026-08-27T01:57:49Z"
         }
       ],
       "section_passes": {
@@ -18561,14 +17551,14 @@
           "step": "critic",
           "section_key": "content",
           "round": 8,
-          "status": "running",
+          "status": "failed",
           "depends_on": [
             "general-attosecond-streaking-20260822-r8-rationale-writer"
           ],
-          "attempts": 2,
+          "attempts": 3,
           "scheduled_at": "",
           "started_at": "2026-08-27T02:55:51Z",
-          "finished_at": "",
+          "finished_at": "2026-08-27T03:10:51Z",
           "last_error": "超时(900s)",
           "cron_job_id": "",
           "error_history": [
@@ -18931,5 +17921,5 @@
       "negative_feedback_at": "2026-08-26T14:30:17Z"
     }
   },
-  "updated_at": "2026-08-27T02:55:51Z"
+  "updated_at": "2026-08-27T03:15:54Z"
 }

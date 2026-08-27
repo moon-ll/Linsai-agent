@@ -2480,6 +2480,7 @@ def _references_preflight(prop_dir: Path) -> str:
     ref_path = sections_dir / "references.md"
     ref_ids: set = set()
     ref_size = 0
+    ref_text = ""
     if ref_path.exists():
         ref_text = ref_path.read_text(encoding="utf-8")
         ref_size = len(ref_text.encode("utf-8"))
@@ -2515,7 +2516,106 @@ def _references_preflight(prop_dir: Path) -> str:
             f"将工作日志迁出，仅保留文献条目与条目内挂钩注释。"
         )
 
+    # ④ 来源校验（v6.9.57）：参考文献条目的 DOI/arXiv ID 必须能在课题
+    # 检索产物（02_literature/，含 targeted-research / gap-analysis /
+    # reading-notes 全部轮次）中找到——R7 实测 writer 凭记忆虚构元数据
+    # （[4][11][13][26] 作者虚构 + [12][29] 卷期页错位），此前只能靠
+    # critic 下游 CrossRef 核查救火，本预检把防线前移到评审输入。
+    lines.extend(_reference_source_preflight(prop_dir, ref_text if ref_path.exists() else ""))
+
     return "\n".join(lines)
+
+
+def _collect_reference_ids(text: str) -> set:
+    """从文本中收集 DOI 与 arXiv ID（归一化小写、去尾部标点）。"""
+    import re as _re
+    ids = set()
+    ids.update(
+        m.lower().rstrip(".,;)】]")
+        for m in _re.findall(r"10\.\d{4,5}/[^\s,;）)\|]+", text)
+    )
+    ids.update(
+        m.lower()
+        for m in _re.findall(r"(?<![\d.])\d{4}\.\d{4,5}(?![\d.])", text)
+    )
+    return ids
+
+
+def _reference_source_preflight(prop_dir: Path, ref_text: str) -> list:
+    """来源校验段（零 LLM）：references 条目 ID vs 检索产物池。
+
+    Returns:
+        追加到预检报告的行列表。
+    """
+    import re as _re
+
+    if not ref_text:
+        return []
+
+    # 可信池：课题检索产物（02_literature/ 全部轮次）+ 知识库论文页
+    # frontmatter（researcher 经检索流水线入库，DOI/arxiv_id 可信）。
+    # v6.9.57 实测：仅 02_literthesis 池漏掉大量经知识库/早期轮次来源
+    # 的经典文献（27 条中 24 条误报），扩充后误报显著收敛。
+    pool: set = set()
+    lit_dir = prop_dir / "02_literature"
+    if lit_dir.exists():
+        for p in lit_dir.rglob("*"):
+            if p.suffix.lower() in (".md", ".json") and p.is_file():
+                try:
+                    pool.update(_collect_reference_ids(
+                        p.read_text(encoding="utf-8", errors="ignore")))
+                except OSError:
+                    continue
+
+    papers_dir = _pl.PROJECT_ROOT / "knowledge" / "wiki" / "papers"
+    if papers_dir.exists():
+        for p in papers_dir.glob("*.md"):
+            try:
+                # 只读头部 2KB 取 frontmatter，控制 IO（全库 700+ 篇）
+                head = p.open(encoding="utf-8", errors="ignore").read(2048)
+                if "doi:" in head.lower() or "arxiv" in head.lower():
+                    pool.update(_collect_reference_ids(head))
+            except OSError:
+                continue
+
+    if not pool:
+        return ["- 来源校验：检索产物池与知识库均为空，跳过"]
+
+    out = []
+    unmatched = []
+    no_id = []
+    ref_ids_hit = []
+    for line in ref_text.splitlines():
+        m = _re.match(r"^(?:\*\*)?\[(\d{1,3})\]?", line.strip())
+        if not m:
+            continue
+        num = int(m.group(1))
+        ids = _collect_reference_ids(line)
+        if not ids:
+            no_id.append(num)
+            continue
+        if ids & pool:
+            ref_ids_hit.append(num)
+        else:
+            unmatched.append(num)
+
+    if unmatched:
+        out.append(
+            f"- 来源校验：{len(unmatched)}/{len(ref_ids_hit + unmatched)} 条参考文献的 DOI/arXiv ID "
+            f"未在本课题检索产物（02_literature/）与知识库中找到（编号 {unmatched[:15]}）——"
+            f"这些条目属 writer 凭学科知识引用，元数据（作者/卷期页/DOI）未经检索验证，"
+            f"是虚构风险集中区。请优先对这批做 CrossRef/DOI 核查；writer 后续轮次补充检索时"
+            f"应将命中文献回录检索池（R7 实测教训：6 条凭记忆条目经 CrossRef 核查为虚构/错位，"
+            f"致评分暴跌）。"
+        )
+    else:
+        out.append(f"- 来源校验：全部条目 ID 均命中检索产物池/知识库（池 {len(pool)} 个标识符），元数据可信度高")
+    if no_id:
+        out.append(
+            f"- ○ 无标识符条目 {len(no_id)} 条（编号 {no_id[:10]}）：无 DOI/arXiv ID 无法程序化"
+            f"溯源，建议要求 writer 补齐标识符或说明来源（书籍/报告类可豁免）。"
+        )
+    return out
 
 
 # ---------------------------------------------------------------------------

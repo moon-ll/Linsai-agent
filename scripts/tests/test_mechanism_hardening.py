@@ -782,6 +782,41 @@ class ReferencesPreflightTests(TestSuite):
             "prompt 应声明编号一致性已程序化完成",
         )
 
+        # 8.6 来源校验（v6.9.57）：未命中条目入优先核查清单、命中条目不误报
+        from proposal_lifecycle.optimize import _reference_source_preflight
+        (sec / "references.md").write_text(
+            "**[1]** Known Author. Verified title. DOI: 10.1234/known\n"
+            "**[2]** Ghost Author. Suspect title. DOI: 10.9999/ghost\n"
+            "**[3]** Plain entry without any identifier\n",
+            encoding="utf-8")
+        (self.tmp / "02_literature").mkdir(exist_ok=True)
+        (self.tmp / "02_literature" / "notes.md").write_text(
+            "10.1234/known | Verified title | 检索命中", encoding="utf-8")
+        out5 = _reference_source_preflight(self.tmp, (sec / "references.md").read_text(encoding="utf-8"))
+        warn_lines = [ln for ln in out5 if "优先核查" in ln or "未在本课题检索产物" in ln]
+        no_id_lines = [ln for ln in out5 if "无标识符" in ln]
+        self.assert_true(any("[2]" in ln for ln in warn_lines),
+                         "池外条目 [2] 应进优先核查清单")
+        self.assert_true(
+            not any("[1]" in ln for ln in warn_lines),
+            "池内条目 [1] 不应出现在未命中清单")
+        self.assert_true(any("[3]" in ln for ln in no_id_lines),
+                         "无 ID 条目 [3] 应单独归类为无标识符")
+
+        # 8.7 池空时跳过（课题早期不误报）——需临时隔离真实知识库根
+        import proposal_lifecycle.optimize as _opt
+        empty_tmp = self.tmp / "empty_case"
+        (empty_tmp / "04_proposal" / "sections").mkdir(parents=True, exist_ok=True)
+        _orig_root = _opt._pl.PROJECT_ROOT
+        _opt._pl.PROJECT_ROOT = empty_tmp
+        try:
+            out6 = _reference_source_preflight(empty_tmp, "[1] Some Ref. DOI: 10.1/x")
+        finally:
+            _opt._pl.PROJECT_ROOT = _orig_root
+        self.assert_true(
+            any("跳过" in ln for ln in out6) or out6 == [],
+            "检索池与知识库均空时应跳过来源校验")
+
 
 class MetricsPreflightTests(TestSuite):
     """9：v6.9.46 跨章节指标一致性预检 + writer 输入对齐 + 纯净性红线。

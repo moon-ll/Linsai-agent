@@ -51,6 +51,12 @@ from test_runner import TestSuite
 def _run_selected(filters: List[str]) -> List[TestSuite]:
     """根据过滤器运行指定测试套件，返回套件列表。"""
     import importlib
+    import os as _os
+    # v6.9.57：module/scenario 等多套件有序运行同样存在跨套件模块污染
+    # （实测 --module 顺序下 kb_sync 写穿真实 knowledge/），与 --web-ci
+    # 一致标记 ORDERED_FULL——顺序敏感套件仅单跑（干净环境）完整执行
+    if len(filters) > 1 or filters != ["web"]:
+        _os.environ["LINSAI_TEST_ORDERED_FULL"] = "1"
 
     suites = []
     mapping = {

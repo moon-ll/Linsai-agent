@@ -110,6 +110,26 @@ class QualityCeilingConvergenceTests(TestSuite):
         self.assert_in("质量下降", res4.get("quality_warning") or "", "下降分支附质量警告")
         self.assert_in("暂停", res4["reason"], "下降分支 reason 为暂停语义")
 
+        # ---------- 5. 次优平台（v6.9.57）：0.80-0.85 平台 → 不晋级 +
+        # quality_warning 写入 state 供人工评估 ----------
+        # 背景：收敛线 0.85 与程序化天花板（AI 检测 cap 0.85 / 锚点差距明显
+        # cap 0.84）结构性冲突，全量 32 轮实测 max 0.81，收敛分支零触发。
+        _state([0.79, 0.81, 0.82, 0.82, 0.82])
+        res5 = comp._check_done("p1", threshold)
+        self.assert_eq(res5["done"], False, "0.80-0.85 平台不自动晋级（人工验收为主）")
+        warned = comp._get_proposal_state("p1").get("quality_warning") or ""
+        self.assert_in("次优平台", warned, "次优平台应写 quality_warning 供人工评估")
+        self.assert_in("人工评估", warned, "warning 应建议人工评估")
+
+        # ---------- 6. 次优平台不误伤：窗口含 <0.80 轮次 → 不标记 ----------
+        _state([0.78, 0.82, 0.82, 0.82])
+        comp._get_proposal_state("p1")["quality_warning"] = None
+        comp._check_done("p1", threshold)
+        warned6 = comp._get_proposal_state("p1").get("quality_warning") or ""
+        self.assert_true(
+            "次优平台" not in warned6,
+            "窗口内有 <0.80 轮次（还在正常爬升通道）不应标记次优平台")
+
 
 if __name__ == "__main__":
     import time

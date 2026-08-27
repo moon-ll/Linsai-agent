@@ -94,6 +94,12 @@ class CompletionMixin:
         # v6.8.16 改进1: 质量天花板检测（收敛检测）
         # 连续 3 轮分数 ≥0.85 且每轮提升 <2% → 自动晋级到 pending_review
         # v6.9.27: 收敛线随达标线整体上调（面上 0.85），防止低分课题绕过新标准
+        # v6.9.57 结构性注记：本收敛线与程序化天花板体系冲突——AI 写作检测
+        #   ceiling<0.9 档把综合分 cap 在 0.85，锚点"差距明显"档 cap 在 0.84，
+        #   导致锚点达标前综合分无法连续 4 轮 ≥0.85（全量 32 轮实测 max 0.81，
+        #   本分支零触发，健康检查多轮定性为死代码）。在锚点对比"达标"成为
+        #   常态前，晋级的实际主路径是全模块对抗胜利 + 人工验收（dossier）。
+        #   配套的次优平台检测见下方 SUBOPTIMAL_FLOOR。
         CONVERGENCE_SCORE = 0.85
         CONVERGENCE_ROUNDS = 3
         CONVERGENCE_DELTA = 0.02
@@ -117,6 +123,26 @@ class CompletionMixin:
                         ),
                         "quality_warning": None,
                     }
+
+        # v6.9.57: 次优平台检测——收敛线 0.85 在锚点达标前结构性不可达
+        # （见上方注记），本检测把"贴近天花板的平台化"转为有效人工信号：
+        # 0.80-0.85 区间连续平台 → 不自动晋级，仅置 quality_warning，
+        # 由人工评估是否提前晋级验收（人工验收为主定位）。
+        SUBOPTIMAL_FLOOR = 0.80
+        if len(score_history) >= CONVERGENCE_ROUNDS + 1:
+            _recent = [h["score"] for h in score_history[-(CONVERGENCE_ROUNDS + 1):]]
+            if all(SUBOPTIMAL_FLOOR <= s < CONVERGENCE_SCORE for s in _recent):
+                _deltas = [_recent[i + 1] - _recent[i] for i in range(len(_recent) - 1)]
+                if all(abs(d) < CONVERGENCE_DELTA for d in _deltas):
+                    try:
+                        prop_state["quality_warning"] = (
+                            f"○ 次优平台：连续{CONVERGENCE_ROUNDS}轮分数在"
+                            f"{SUBOPTIMAL_FLOOR:.2f}-{CONVERGENCE_SCORE:.2f} 平台"
+                            f"（当前{last_score:.2f}），贴近程序化天花板（AI检测/锚点绑定），"
+                            f"自动提升空间有限，建议人工评估是否晋级验收"
+                        )
+                    except Exception:
+                        pass  # 状态写入失败不阻断达标判定
 
         # v6.8.16 改进1: 质量下降检测
         # 连续 3 轮分数下降 → 标记 quality_declining，附加质量警告
