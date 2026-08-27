@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-27T12:25:16Z",
+      "updated_at": "2026-08-27T16:00:54Z",
       "optimization_rounds": 2,
       "last_score": 0.81,
       "score_history": [
@@ -384,6 +384,10 @@
         },
         {
           "at": "2026-08-27T10:00:59Z",
+          "error": "general-quantum-geometry-inversion-20260726-r2-rationale-critic: 超时(1200s)"
+        },
+        {
+          "at": "2026-08-27T16:00:54Z",
           "error": "general-quantum-geometry-inversion-20260726-r2-rationale-critic: 超时(1200s)"
         }
       ],
@@ -1353,15 +1357,15 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 3,
-          "status": "failed",
+          "status": "pending",
           "depends_on": [],
-          "attempts": 1,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-27T12:05:16Z",
-          "finished_at": "2026-08-27T12:25:16Z",
-          "last_error": "超时(1200s)",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": "",
-          "repair_attempts": 1
+          "repair_attempts": 2
         },
         {
           "job_id": "general-quantum-geometry-inversion-20260726-r3-rationale-gap_identify",
@@ -2739,7 +2743,7 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-27T12:45:19Z",
+      "updated_at": "2026-08-27T16:00:54Z",
       "optimization_rounds": 0,
       "last_score": 0.76,
       "score_history": [
@@ -2956,11 +2960,11 @@
           "depends_on": [
             "key-transient-quantum-phase-optical-20260726-r1-rationale-writer"
           ],
-          "attempts": 2,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-27T12:30:18Z",
-          "finished_at": "2026-08-27T12:45:19Z",
-          "last_error": "超时(900s)",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": "",
           "error_history": [
             {
@@ -2989,7 +2993,7 @@
               "attempts": 1
             }
           ],
-          "repair_attempts": 1,
+          "repair_attempts": 2,
           "auto_unlock_count": 1,
           "manual_reset_at": "2026-08-27T12:20:29Z",
           "manual_reset_reason": "v6.9.62 输入瘦身后手动重置（解锁配额耗尽）"
@@ -4525,7 +4529,7 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-27T11:13:14Z",
+      "updated_at": "2026-08-27T16:00:54Z",
       "optimization_rounds": 5,
       "last_score": 0.68,
       "score_history": [
@@ -5586,7 +5590,7 @@
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-27T00:50:34Z",
+          "started_at": "",
           "finished_at": "",
           "last_error": "",
           "cron_job_id": "",
@@ -5610,9 +5614,14 @@
               "at": "2026-08-27T00:50:34Z",
               "error": "超时(900s)",
               "attempts": 1
+            },
+            {
+              "at": "2026-08-27T13:25:25Z",
+              "error": "超时(900s)",
+              "attempts": 1
             }
           ],
-          "repair_attempts": 0,
+          "repair_attempts": 2,
           "auto_unlock_count": 1,
           "manual_reset_at": "2026-08-27T12:20:29Z",
           "manual_reset_reason": "v6.9.62 输入瘦身后手动重置（解锁配额耗尽）"
@@ -9117,7 +9126,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-27T12:25:17Z",
+      "updated_at": "2026-08-27T16:00:54Z",
       "optimization_rounds": 7,
       "last_score": 0.69,
       "score_history": [
@@ -10545,7 +10554,7 @@
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-26T20:00:45Z",
+          "started_at": "",
           "finished_at": "",
           "last_error": "",
           "cron_job_id": "",
@@ -10569,9 +10578,14 @@
               "at": "2026-08-26T20:00:45Z",
               "error": "超时(900s)",
               "attempts": 1
+            },
+            {
+              "at": "2026-08-27T14:05:31Z",
+              "error": "超时(900s)",
+              "attempts": 1
             }
           ],
-          "repair_attempts": 0,
+          "repair_attempts": 2,
           "auto_unlock_count": 1,
           "manual_reset_at": "2026-08-27T12:20:29Z",
           "manual_reset_reason": "v6.9.62 输入瘦身后手动重置（解锁配额耗尽）"
@@ -12004,7 +12018,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控",
       "created_at": "2026-08-16T03:49:25Z",
-      "updated_at": "2026-08-27T11:00:05Z",
+      "updated_at": "2026-08-27T16:00:54Z",
       "optimization_rounds": 2,
       "last_score": 0.51,
       "score_history": [
@@ -13520,15 +13534,15 @@
           "step": "monitor",
           "section_key": "monitor",
           "round": 2,
-          "status": "failed",
+          "status": "pending",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-references-writer"
           ],
-          "attempts": 3,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-27T10:50:05Z",
-          "finished_at": "2026-08-27T11:00:05Z",
-          "last_error": "超时(600s)",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": "",
           "error_history": [
             {
@@ -13537,7 +13551,7 @@
               "attempts": 1
             }
           ],
-          "repair_attempts": 1
+          "repair_attempts": 2
         },
         {
           "job_id": "general-berry-mnps3-rashba-20260816-r2-derived-update_vision",
@@ -14046,7 +14060,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 交变磁体高次谐波产生与固态强场非线性光学新前沿",
       "created_at": "2026-08-22T05:40:16Z",
-      "updated_at": "2026-08-27T12:00:13Z",
+      "updated_at": "2026-08-27T16:00:54Z",
       "optimization_rounds": 2,
       "last_score": 0.55,
       "score_history": [
@@ -15579,14 +15593,22 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 3,
-          "status": "failed",
+          "status": "pending",
           "depends_on": [],
-          "attempts": 1,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-27T11:40:13Z",
-          "finished_at": "2026-08-27T12:00:13Z",
-          "last_error": "超时(1200s)",
-          "cron_job_id": ""
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-27T14:30:37Z",
+              "error": "超时(1200s)",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 2
         },
         {
           "job_id": "general-new-idea-20260822-r3-rationale-gap_identify",
@@ -16045,6 +16067,10 @@
         {
           "at": "2026-08-27T10:00:59Z",
           "error": "general-new-idea-20260822-r2-monitor-monitor: 超时(600s)"
+        },
+        {
+          "at": "2026-08-27T16:00:54Z",
+          "error": "general-new-idea-20260822-r2-monitor-monitor: 超时(600s)"
         }
       ]
     },
@@ -16054,7 +16080,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 阿秒条纹技术：从超短脉冲表征到量子相位测量（手动补注册 2026-08-22）",
       "created_at": "2026-08-22T12:20:08Z",
-      "updated_at": "2026-08-27T10:00:59Z",
+      "updated_at": "2026-08-27T16:00:54Z",
       "optimization_rounds": 8,
       "last_score": 0.72,
       "score_history": [
@@ -16742,11 +16768,17 @@
           "at": "2026-08-26T14:30:17Z"
         }
       ],
-      "negative_feedback_alert": true,
-      "negative_feedback_reasons": [
-        "monitor 独立分数连续 3 轮下降"
+      "negative_feedback_alert": false,
+      "negative_feedback_reasons": [],
+      "negative_feedback_cleared": [
+        {
+          "cleared_at": "2026-08-27T15:00:43Z",
+          "previous_reasons": [
+            "monitor 独立分数连续 3 轮下降"
+          ],
+          "reason": "auto-heal：24h 冷却期满自动清除"
+        }
       ],
-      "negative_feedback_cleared": [],
       "worker_minute": null,
       "idea_dossier": {
         "proposal_id": "general-attosecond-streaking-20260822",
@@ -18265,9 +18297,16 @@
         {
           "at": "2026-08-27T10:00:59Z",
           "error": "general-attosecond-streaking-20260822-r8-content-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-27T16:00:54Z",
+          "error": "general-attosecond-streaking-20260822-r8-content-critic: 超时(900s)"
         }
-      ]
+      ],
+      "negative_feedback_auto_clear_count": 1,
+      "idea_review_required": true,
+      "idea_review_required_reason": "负反馈自动清除降级：退回研究设想评审；monitor 独立分数连续 3 轮下降"
     }
   },
-  "updated_at": "2026-08-27T12:45:19Z"
+  "updated_at": "2026-08-27T16:00:54Z"
 }
