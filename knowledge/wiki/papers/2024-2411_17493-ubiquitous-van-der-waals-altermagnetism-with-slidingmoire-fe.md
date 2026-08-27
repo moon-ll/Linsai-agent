@@ -2,9 +2,9 @@
 title: "滑移/莫尔铁电性诱导的普适范德华交变磁性（Sheng et al., 2024, arXiv:2411.17493）"
 type: "papers"
 created: "2026-08-27T05:00:24Z"
-updated: "2026-08-27T05:00:24Z"
+updated: "2026-08-27T05:08:23Z"
 tags: ["交变磁性", "滑移铁电性", "莫尔工程", "范德华多层", "非相对论自旋劈裂", "多铁性"]
-related: ["Berry曲率", "MnPS3", "Rashba效应", "反铁磁共振", "太赫兹强场驱动", "超快磁动力学", "高次谐波产生"]
+related: ["2411.17493", "Berry曲率", "MnPS3", "Rashba效应", "反铁磁共振", "太赫兹强场驱动", "超快磁动力学", "高次谐波产生"]
 source_raw: "2024-2411.17493-ubiquitous-van-der-waals-altermagnetism-with-slidingmoire-fe.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -47,6 +47,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2411.17493]]
 - [[Berry曲率]]
 - [[MnPS3]]
 - [[Rashba效应]]

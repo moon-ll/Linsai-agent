@@ -1,5 +1,29 @@
 # 变更记录
 
+## v6.9.62 - 2026-08-27 16h 健康检查：孤儿章节守卫同日再生成丢内容修复
+
+背景：第十二轮设计抽查（#7 质量天花板 / #8 停滞检测 / #9 输入端熔断，
+全部正常）中对 v6.9.61 新增守卫做边界审查时实锤一处数据丢失：
+
+- **孤儿章节守卫同日再生成静默丢内容**（`section_hygiene.py`
+  `handle_orphan_sections`）：writer 同日在不同 job 两次违反章节白名单
+  红线时（既有实证：new-idea 曾自创 `research-foundation.md`），首次
+  孤儿被存档至 `orphan-section-{key}-{date}.md`；第二份含新内容的孤儿
+  命中 `dest.exists()` 分支被直接 `unlink()` 不存档——违反"产出即
+  资产"原则。修复：改序号后缀（`-{date}-2/-3…`）追加存档后再移除，
+  以同内容冗余存档代价换零丢失，幂等语义不变。
+- 回归：`test_mechanism_hardening.py` 新增 14.3b（再生成 → 两份存档且
+  新内容完整保留）；`section_hygiene --self-check` 通过；全量
+  `--module` 1202/1202 全绿（1198 + 4 新断言）。
+- 报告不修复（设计缺口待人工确认）：quality_warning 只写不清，课题
+  分数回升后残留历史下降警告（qg 实证）可能误导 dossier 预审。
+- 运行时最高优先发现（不属代码缺陷）：超时链致 kt r1 / moire r5 /
+  order-param r7 的 critic job 永久闭死（attempts=3 + repair_attempts=4
+  + auto_unlock_count=1 三路全拒）；qg/new-idea/attosecond 待 08-28
+  各自 24h 线首次解锁重跑，再失败将扩至 6/7 课题——"critic 超时档
+  与 writer 分离"人工裁决紧迫度显著上升。
+- 完整报告：`logs/healthchecks/healthcheck-2026-08-27-16h.md`。
+
 ## v6.9.61 - 2026-08-27 第二轮全环节审计：monitor 输入瘦身 + 笔记去重 + 检索产物裁剪 + 孤儿章节守卫
 
 背景：继续按"结构不变量靠约定、写入/读取边界信任 agent 行为"的病灶

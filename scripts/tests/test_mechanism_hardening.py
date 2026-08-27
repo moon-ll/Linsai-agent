@@ -1528,6 +1528,19 @@ class SectionHygieneTests(TestSuite):
                          "内容应完整存档 05_review/")
         self.assert_true((sec_o / "rationale.md").exists(), "白名单章节不动")
         self.assert_true(sh.handle_orphan_sections(o1) is None, "二次执行应幂等")
+        # 14.3b v6.9.62：同日再生成孤儿章节（新内容）不得静默丢弃——
+        # 原实现 dest.exists() 时直接 unlink，writer 同轮两次违反红线
+        # 的第二份内容会丢失（违反"产出即资产"），应序号后缀追加存档
+        (sec_o / "research-foundation.md").write_text(
+            "## （四）研究基础\n第二版新内容。", encoding="utf-8")
+        r = sh.handle_orphan_sections(o1)
+        self.assert_true(r and "research-foundation" in r, "再生成孤儿应再次检出")
+        docs = sorted((o1 / "05_review").glob("orphan-section-research-foundation-*.md"))
+        self.assert_true(len(docs) == 2, f"同日再生成应追加存档而非丢弃（实际 {len(docs)} 份）")
+        self.assert_true(any("第二版新内容" in d.read_text(encoding="utf-8") for d in docs),
+                         "新内容必须完整保留在追加存档中")
+        self.assert_true(not (sec_o / "research-foundation.md").exists(),
+                         "sections/ 下孤儿仍应迁出")
 
         # 14.4 monitor 瘦身源码守卫：评审视图 + 程序 diff + digest
         mon_src = (Path(__file__).parent.parent / "adversarial" / "monitor.py").read_text(encoding="utf-8")

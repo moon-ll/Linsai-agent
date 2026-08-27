@@ -2,9 +2,9 @@
 title: "Twist-induced altermagnetism in a metallic van der Waals antiferromagnet（扭转工程诱导金属范德华反铁磁体中的交变磁性）"
 type: "papers"
 created: "2026-08-27T04:58:17Z"
-updated: "2026-08-27T04:58:17Z"
+updated: "2026-08-27T05:08:24Z"
 tags: ["altermagnetism", "twistronics", "范德华反铁磁体", "PT对称性破缺", "自旋劈裂", "二维磁性", "NSFC-强场超快"]
-related: ["MnPS3", "Rashba自旋轨道耦合", "二次谐波/非线性光学", "反常霍尔效应", "太赫兹自旋动力学", "贝里曲率"]
+related: ["2602.19734", "MnPS3", "Rashba自旋轨道耦合", "二次谐波/非线性光学", "反常霍尔效应", "太赫兹自旋动力学", "贝里曲率"]
 source_raw: "2026-2602.19734-twist-induced-altermagnetism-in-a-metallic-van-der-waals-ant.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -41,6 +41,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2602.19734]]
 - [[MnPS3]]
 - [[Rashba自旋轨道耦合]]
 - [[二次谐波/非线性光学]]

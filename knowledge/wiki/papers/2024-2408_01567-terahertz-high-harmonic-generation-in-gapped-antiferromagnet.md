@@ -2,9 +2,9 @@
 title: "论文精读：带隙反铁磁链中的太赫兹高次谐波产生"
 type: "papers"
 created: "2026-08-27T04:54:25Z"
-updated: "2026-08-27T04:54:25Z"
+updated: "2026-08-27T05:08:23Z"
 tags: ["高次谐波产生", "太赫兹", "反铁磁体", "自旋波", "非线性自旋动力学", "强场THz驱动"]
-related: ["Berry曲率", "MnPS3", "反铁磁共振", "固体HHG", "朗道-栗弗席兹方程"]
+related: ["Berry曲率", "MnPS3", "反铁磁共振", "固体HHG", "朗道-栗弗席兹方程", "高次谐波产生"]
 source_raw: "2024-2408.01567-terahertz-high-harmonic-generation-in-gapped-antiferromagnet.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -30,4 +30,5 @@ review_status: "pending"
 - [[反铁磁共振]]
 - [[固体HHG]]
 - [[朗道-栗弗席兹方程]]
+- [[高次谐波产生]]
 <!-- /linsai-wikilinks -->

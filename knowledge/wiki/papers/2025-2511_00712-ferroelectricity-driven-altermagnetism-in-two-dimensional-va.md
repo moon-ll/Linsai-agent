@@ -2,9 +2,9 @@
 title: "铁电驱动的二维范德华多铁交变磁性：零净磁矩下动量依赖自旋劈裂的材料路径（论文精读）"
 type: "papers"
 created: "2026-08-27T04:57:21Z"
-updated: "2026-08-27T04:57:21Z"
+updated: "2026-08-27T05:08:24Z"
 tags: ["交变磁性", "多铁性", "二维范德华材料", "自旋劈裂", "自旋空间群", "铁电调控", "超快自旋电子学", "论文精读"]
-related: ["Berry曲率", "MnPS3", "Rashba效应", "反铁磁自旋电子学", "太赫兹铁电开关", "自旋分辨ARPES"]
+related: ["2511.00712", "Berry曲率", "MnPS3", "Rashba效应", "反铁磁自旋电子学", "太赫兹铁电开关", "自旋分辨ARPES"]
 source_raw: "2025-2511.00712-ferroelectricity-driven-altermagnetism-in-two-dimensional-va.md"
 growth_stage: "growing"
 confidence: 0.6
@@ -58,6 +58,7 @@ review_status: "pending"
 <!-- linsai-wikilinks -->
 ## 关联概念
 
+- [[2511.00712]]
 - [[Berry曲率]]
 - [[MnPS3]]
 - [[Rashba效应]]

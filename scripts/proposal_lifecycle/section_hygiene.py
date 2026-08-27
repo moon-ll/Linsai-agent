@@ -1026,15 +1026,21 @@ def handle_orphan_sections(prop_dir: Path, dry_run: bool = False) -> Optional[st
             parts.append(f"(dry-run) {p.name} → {dest.name}")
             continue
         if dest.exists():
-            p.unlink()  # 已存档过 → 直接移除幂等
-        else:
-            dest.write_text(
-                f"<!-- v6.9.61 孤儿章节存档：不在 PROPOSAL_SECTIONS 白名单，"
-                f"不进申请书组装与评审。如内容有价值请并入正文章节。 -->\n\n"
-                + p.read_text(encoding="utf-8"),
-                encoding="utf-8",
-            )
-            p.unlink()
+            # v6.9.62 修复：同日再次生成的孤儿章节可能含新内容（writer
+            # 在同轮不同 job 两次违反白名单红线），原实现直接 unlink 会
+            # 静默丢弃新版本（违反"产出即资产"）。改为序号后缀追加存档，
+            # 以"同内容冗余存档"的代价换取零丢失。
+            n = 2
+            while (review_dir / f"orphan-section-{p.stem}-{_date_tag()}-{n}.md").exists():
+                n += 1
+            dest = review_dir / f"orphan-section-{p.stem}-{_date_tag()}-{n}.md"
+        dest.write_text(
+            f"<!-- v6.9.61 孤儿章节存档：不在 PROPOSAL_SECTIONS 白名单，"
+            f"不进申请书组装与评审。如内容有价值请并入正文章节。 -->\n\n"
+            + p.read_text(encoding="utf-8"),
+            encoding="utf-8",
+        )
+        p.unlink()
         parts.append(p.name)
     return f"孤儿章节迁出：{', '.join(parts)}（已存档 05_review/，请人工并入正文）"
 
