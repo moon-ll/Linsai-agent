@@ -543,6 +543,13 @@ class OptimizeMixin:
         for key in body_keys:
             try:
                 txt = sections.read_section(key)
+                # v6.9.59: 剥离内嵌参考文献表——kt/qg 等课题的文献表内嵌在
+                # 章节文件尾部（### 参考文献），文献条目是"引用数据"而非
+                # "写作表达"，计入检测会把长条目误判为超长句（实测 kt 一篇
+                # 72 条文献表贡献 11 处假超长句，天花板被错误压至 0.50）
+                cut = txt.find("### 参考文献")
+                if cut > 0:
+                    txt = txt[:cut]
                 if txt.strip():
                     texts.append(txt)
             except Exception:

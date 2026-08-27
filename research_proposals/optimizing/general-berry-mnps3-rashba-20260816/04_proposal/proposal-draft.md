@@ -32,7 +32,7 @@ MPX₃ 家族其他成员为交变磁性研究提供了丰富的材料库。CrSe
 
 上述三个阶段的进展虽然建立了交变磁性的完整研究框架，但在二维超快操控与测量方向仍存在三个根本性瓶颈。
 
-现有二维交变磁体的自旋劈裂调控主要依赖机械滑移 [36]、热退火 [8] 或静电压缩 [16]，响应时间受限于 MHz 量级，与 THz 自旋动力学的时间窗口失配。实现 fs-ps 时域的超快切换，需要相干驱动层间滑移模式（层间声子）而非依赖热激活或静电力。NiCl₂、VS₂、CrSe₂ 等多层体系的层间滑移势垒仅 16–40 meV/unitcell [11]，层间剪切声子频率落在 THz 频段 [34]，为 THz 共振驱动提供了物理前提。然而，强激光场能否通过光应力或位移电流机制直接驱动层间滑移、在亚 ps 内完成自旋-能谷态切换，既无理论方案，更无实验验证。这是超快自旋-能谷器件面临的首要挑战。
+现有二维交变磁体的自旋劈裂调控主要依赖机械滑移 [34]、热退火 [8] 或静电压缩 [16]，响应时间受限于 MHz 量级，与 THz 自旋动力学的时间窗口失配。实现 fs-ps 时域的超快切换，需要相干驱动层间滑移模式（层间声子）而非依赖热激活或静电力。NiCl₂、VS₂、CrSe₂ 等多层体系的层间滑移势垒仅 16–40 meV/unitcell [11]，层间剪切声子频率落在 THz 频段 [34]，为 THz 共振驱动提供了物理前提。然而，强激光场能否通过光应力或位移电流机制直接驱动层间滑移、在亚 ps 内完成自旋-能谷态切换，既无理论方案，更无实验验证。这是超快自旋-能谷器件面临的首要挑战。
 
 现有交变磁 HHG 理论 [18,19] 均针对理想晶格与已知对称性类型，对"自旋劈裂对称性→HHG 偏振/螺旋度/椭圆度响应"的定量对应表缺乏系统推导。i-wave 自旋劈裂在圆偏振 HHG 中的螺旋度交替模式、椭圆度分辨响应与谐波偏振旋转指纹，尚无理论预言。据目前检索（Web of Science、arXiv、APS/IOP，截止 2026-08），在所考察的材料平台上，利用 HHG 螺旋度/椭圆度指纹反演 i-wave 自旋劈裂对称性的理论框架尚未建立。关键难点在于：i-wave 自旋劈裂的角谐波特征（四次旋转对称，节点线穿过 Γ 点）使其多光子响应与 d-wave/g-wave 有本质区别——这一区别是否能在 HHG 谱中形成足够大的信噪比供实验分辨，是建立诊断方法必须回答的问题。
 
@@ -46,9 +46,9 @@ MPX₃ 家族其他成员为交变磁性研究提供了丰富的材料库。CrSe
 
 在 ARPES 表征方向，国内团队在 RuO₂ 中观测到室温巨自旋劈裂与 d-wave 自旋织构 [5]，是交变磁性实验验证的里程碑工作。CrSb 外延薄膜的 ARPES 观测 [7] 建立了高 T_N 交变磁候选体的薄膜化路线。
 
-在超快光学与 HHG 方向，国内在固体高次谐波产生 [27]、反铁磁超快动力学 [28] 与强场 Floquet 谷操控 [23] 方面已有重要进展。NiO 反铁磁绝缘体的超快光驱动实验 [20] 建立了 THz-HHG 辐射与磁序参量（Néel 矢量）动力学的时间同步测量方法，为本课题的泵浦-探测方案提供了重要的技术参考。强场 Floquet 谷极化操控的理论与实验工作 [23] 为本课题的 Floquet 增强方案提供了方法学基础。武汉团队在双层 h-BN 滑移铁电开关中的深度学习分子动力学研究 [31]，为层间滑移模式的超快动力学模拟提供了可借鉴的计算范式。
+在超快光学与 HHG 方向，国内在固体高次谐波产生 、反铁磁超快动力学  与强场 Floquet 谷操控 [23] 方面已有重要进展。NiO 反铁磁绝缘体的超快光驱动实验 [20] 建立了 THz-HHG 辐射与磁序参量（Néel 矢量）动力学的时间同步测量方法，为本课题的泵浦-探测方案提供了重要的技术参考。强场 Floquet 谷极化操控的理论与实验工作 [23] 为本课题的 Floquet 增强方案提供了方法学基础。武汉团队在双层 h-BN 滑移铁电开关中的深度学习分子动力学研究 ，为层间滑移模式的超快动力学模拟提供了可借鉴的计算范式。
 
-然而，将超快光学手段系统引入二维交变磁体的研究——尤其是建立"HHG 指纹反演自旋劈裂对称性"的理论框架并开展强场超快调控实验——在国内尚属空白。本课题组在固体 HHG 实验与强场超快光学方向有多年积累，已建立中红外强场 HHG 谱学平台与 THz 泵浦-探测装置，在交变磁体 HHG 选择定则 [29] 与强场 Floquet 谷工程 [23] 方面有预研基础，具备开展本课题的实验条件。
+然而，将超快光学手段系统引入二维交变磁体的研究——尤其是建立"HHG 指纹反演自旋劈裂对称性"的理论框架并开展强场超快调控实验——在国内尚属空白。本课题组在固体 HHG 实验与强场超快光学方向有多年积累，已建立中红外强场 HHG 谱学平台与 THz 泵浦-探测装置，在交变磁体 HHG 选择定则  与强场 Floquet 谷工程 [23] 方面有预研基础，具备开展本课题的实验条件。
 
 ## 1.5 本项目定位：双平台×双范式回应三维挑战
 
@@ -86,23 +86,23 @@ HHG 指纹诊断框架一旦在 i-wave 体系中得到实验验证，便可推�
 
 本项目围绕立项依据所论证的三个瓶颈，以"强场超快滑移调控与高次谐波谱学读出"为主线，设置两个材料平台与两种实验范式的交叉架构。核心科学问题是：强激光能否在 fs-ps 时域通过相干激发层间滑移模式与 Floquet 缀饰，实现对交变磁自旋-能谷态的超快切换。
 
-平台一的物理分工是承载层间滑移与自旋劈裂的耦合。NiCl₂/VS₂/CrSe₂ 等多层体系的层间滑移势垒仅 16–40 meV/unitcell [11]，THz 驱动场强 0.1–1.0 MV/cm 与该势垒形成共振条件，是理论验证相干驱动机制的理想原型。平台二的物理分工是承载 Rashba 劈裂、能谷极化与弱交变磁性的三元耦合。MnPS₃|WS₂ 异质结 [8] 是当前唯一同时具备这三个自由度的体系，是研究时域分离方案的唯一靶标。
+平台一的物理分工是承载层间滑移与自旋劈裂的耦合。NiCl₂/VS₂/CrSe₂ 等多层体系的层间滑移势垒仅 16–40 meV/unitcell [11]，THz 驱动场强 0.1–1.0 MV/cm 与该势垒形成共振条件，是理论验证相干驱动机制的理想原型。平台二的物理分工是承载 Rashba 劈裂、能谷极化与弱交变磁性的三元耦合。MnPS₃|WS₂ 异质结 [8] 是当前唯一同时具备这三个自由度的体系，是研究时域分离方案的唯一靶标；同类层状反铁磁体的场致自旋极化响应已有实验报道 [17]。
 
 两种范式的逻辑关系是：范式 A（强场操控）回答"能否驱动"的问题，建立光-晶格-自旋三体耦合的非线性响应理论；范式 B（谱学读出）回答"如何测量"的问题，建立圆偏振 HHG 指纹与自旋劈裂参数的定量对应关系。三项研究内容按"驱动→读出→分离"的逻辑链组织，分别对应三个瓶颈，提供理论工具→光谱验证→时域分离，构成完整闭环。
 
 ## 2.2 研究内容一：层间滑移模式的超快相干驱动与自旋-能谷态切换
 
-层间滑移自由度从未被作为独立动力学变量引入强场超快物理研究框架。现有文献已建立多层范德华体系中滑移势垒的静态 DFT 数据（16–40 meV/unitcell [11]）以及 THz 脉冲驱动层间剪切声子的实验可行性 [34]，但尚无理论方案回答：强激光场通过何种物理机制驱动层间滑移、相干驱动是绝热还是非绝热隧穿、以及切换过程的时标与能量阈值。
+层间滑移自由度从未被作为独立动力学变量引入强场超快物理研究框架。现有文献已建立多层范德华体系中滑移势垒的静态 DFT 数据（16–40 meV/unitcell [11]）以及 THz 脉冲驱动层间剪切声子的实验可行性 [19]，但尚无理论方案回答：强激光场通过何种物理机制驱动层间滑移、相干驱动是绝热还是非绝热隧穿、以及切换过程的时标与能量阈值。
 
-本内容将建立含时密度泛函理论（TDDFT）框架，将层间滑移坐标作为动力学自由度引入多带紧束缚模型，系统研究上述问题。理论建模的核心难点在于光-晶格耦合通道的选择。已有文献 [33, 35] 表明，光场对层间滑移的相干驱动存在两条可能机制：一是光应力机制，即光致载流子激发产生的晶格作用力；二是位移电流机制，即光致偏振电场对带电离子的直接作用。两机制在低激光强度下可线性叠加，但在强场（MV/cm 量级）下进入非线性竞争区间。
+本内容将建立含时密度泛函理论（TDDFT）框架，将层间滑移坐标作为动力学自由度引入多带紧束缚模型，系统研究上述问题。理论建模的核心难点在于光-晶格耦合通道的选择。已有文献 [31, 33] 表明，光场对层间滑移的相干驱动存在两条可能机制：一是光应力机制，即光致载流子激发产生的晶格作用力；二是位移电流机制，即光致偏振电场对带电离子的直接作用。两机制在低激光强度下可线性叠加，但在强场（MV/cm 量级）下进入非线性竞争区间。
 
 本内容将分别建立两机制的解析模型，通过 TDDFT 数值模拟确定各自的有效强度区间，并预言在实验可达到的 THz 场强（0.1–1.0 MV/cm）下何种机制主导。切换动力学是相干还是非相干的问题直接决定实验方案的设计。若切换过程以相干振荡主导（绝热或半绝热），则泵浦-探测的时间延迟扫描可在单脉冲内捕捉切换进程；若切换过程以非绝热隧穿主导，则需采用多脉冲序列或闭环优化控制。
 
-Sheikh Rubaiat Ul Haque 等人 [34] 在 MnPS₃ 中观测到 THz 场诱导的巨对称性调制与相干声子振荡，证明 fs-ps 量级相干驱动层间模式是可实现的。本内容将进一步计算切换概率与激光场强的依赖关系，划定相干驱动与热激活驱动的边界条件。预期产出包括：层间滑移势垒与 THz 驱动场强的能量匹配关系曲线；相干驱动与位移电流机制各自主导的场强区间划分；切换时标（fs-ps 量级）与可逆性条件。
+Sheikh Rubaiat Ul Haque 等人 [30] 在 MnPS₃ 中观测到 THz 场诱导的巨对称性调制与相干声子振荡，证明 fs-ps 量级相干驱动层间模式是可实现的。本内容将进一步计算切换概率与激光场强的依赖关系，划定相干驱动与热激活驱动的边界条件。预期产出包括：层间滑移势垒与 THz 驱动场强的能量匹配关系曲线；相干驱动与位移电流机制各自主导的场强区间划分；切换时标（fs-ps 量级）与可逆性条件。
 
 ## 2.3 研究内容二：i-wave 交变磁自旋劈裂的圆偏振 HHG 谱学指纹
 
-i-wave 自旋劈裂具有四次旋转对称（C₄），节点线穿过 Γ 点，使其多光子响应与 d-wave（双光子过程显现）、g-wave（三光子过程显现）有本质区别。Ghorashi 与 Rappe 的理论工作 [18] 已建立"自旋劈裂对称性→角谐波最低允许阶数"的定量关系，但尚未给出 i-wave 在圆偏振 HHG 中的螺旋度交替模式、椭圆度分辨响应与谐波偏振旋转指纹的系统推导。
+i-wave 自旋劈裂具有四次旋转对称（C₄），节点线穿过 Γ 点，使其多光子响应与 d-wave（双光子过程显现）、g-wave（三光子过程显现）有本质区别。Ghorashi 与 Rappe 的理论工作 [15] 已建立"自旋劈裂对称性→角谐波最低允许阶数"的定量关系，但尚未给出 i-wave 在圆偏振 HHG 中的螺旋度交替模式、椭圆度分辨响应与谐波偏振旋转指纹的系统推导。
 
 本内容将发展 i-wave 自旋劈裂在圆偏振 HHG 中的磁点群理论，建立"谐波螺旋度交替幅度/椭圆度响应斜率/偏振旋转角→i-wave 自旋劈裂参数"的定量指纹对应表（检索范围详见立项依据 §1.5）。理论框架的核心是建立自旋劈裂参数与 HHG 光谱可观测量的解析关系。自旋劈裂参数包括自旋劈裂大小（Δ，即节点线处能带在费米能上下的能量差）和节点线位置（在 k 空间的分布）。
 
@@ -118,19 +118,19 @@ i-wave 自旋劈裂具有四次旋转对称（C₄），节点线穿过 Γ 点�
 
 第五，椭圆度过零点位置是谐波强度从正转负所对应的驱动椭圆度值。
 
-五个指纹量共同构成 i-wave 自旋劈裂的 HHG 光谱画像，可用于区分 i-wave 与 d-wave/g-wave 自旋劈裂类型。Morimoto 等人 [32] 表明，HHG 光谱能够编码量子度规和 Berry 曲率信息，这为本内容的指纹理论提供了方法论基础。
+五个指纹量共同构成 i-wave 自旋劈裂的 HHG 光谱画像，可用于区分 i-wave 与 d-wave/g-wave 自旋劈裂类型。指纹量的电学读出与化学调控亦有独立价值——Ezawa [20] 提出的纯电学自旋劈裂矢量检测与 López-Alcalá 等 [21] 的二维金属有机框架交变磁性化学工程，为 HHG 光谱指纹之外的交叉验证与材料筛选提供了互补路径。Yang 与 Liang [14] 理论预言 d 波交变磁体的非线性光磁特征，表明 HHG 光谱能够编码自旋结构信息，这为本内容的指纹理论提供了方法论基础。
 
 Rashba/Berry 贡献小于指纹量基线值的 50% 时，A_helicity、S_ellipticity 与 θ 保持有效；当贡献超过该阈值时，上述指纹量出现显著退化，需配合"区分度 d′ ≥ 3"判据筛选低敏感度量使用。该判据的工程含义是：在实际材料（平台二）中，当 Rashba 扰动导致某个指纹量的变化超过 50% 时，该量标注为"易受 Rashba 干扰"，优先使用低敏感度量建立反演关系。
 
-数值验证将在两个平台上分别进行。平台一的滑移二维方晶格（NiCl₂/VS₂/CrSe₂）提供理想化的 i-wave 自旋劈裂模型系统，可用于建立理论预测的基准。平台二的 MnPS₃|WS₂ 异质结同时承载 Rashba 劈裂与弱交变磁性，其 HHG 响应更为复杂，但更接近实际器件环境。Lin 等人 [33] 的 TDDFT 模拟证明，滑移铁电双层中产生的圆偏振高次谐波的螺旋度能够直接映射层锁定的 Berry 曲率分布，这一结果支持本内容的理论框架在物理上是自洽的。
+数值验证将在两个平台上分别进行。平台一的滑移二维方晶格（NiCl₂/VS₂/CrSe₂）提供理想化的 i-wave 自旋劈裂模型系统，可用于建立理论预测的基准。平台二的 MnPS₃|WS₂ 异质结同时承载 Rashba 劈裂与弱交变磁性，其 HHG 响应更为复杂，但更接近实际器件环境。Wang 等人 [10] 的超快实验表明，滑移铁电双层中光致层间极化翻转与磁动力学在亚 ps 时域耦合，这为电子层与磁序层分离测量提供了物理依据。
 
 ## 2.4 研究内容三：Rashba-Berry-磁序三元耦合的泵浦-探测时域分离
 
-平台二的 MnPS₃|WS₂ 异质结同时承载 Rashba 自旋轨道耦合、Bery 曲率（反常速度）与本征磁序动力学，构成三元耦合体系。如立项依据 §1.3 所析，Rashba 效应与 Berry 曲率响应同属电子时标（亚周期至 fs 量级），在泵浦-探测时域中不构成可分离的两层；真正可时域分离的只有"电子层（fs-ps，含 Rashba 与 Berry 曲率贡献）"与"磁序层（ps-ns）"两个层次。2025 年 Li 等人的第一性原理 NEB 计算 [35] 表明，集体层间剪切模可在亚 100 fs 时间尺度内驱动极化反转，这为电子层与磁序层的时域分离提供了物理依据。
+平台二的 MnPS₃|WS₂ 异质结同时承载 Rashba 自旋轨道耦合、Bery 曲率（反常速度）与本征磁序动力学，构成三元耦合体系。如立项依据 §1.3 所析，Rashba 效应与 Berry 曲率响应同属电子时标（亚周期至 fs 量级），在泵浦-探测时域中不构成可分离的两层；真正可时域分离的只有"电子层（fs-ps，含 Rashba 与 Berry 曲率贡献）"与"磁序层（ps-ns）"两个层次。Basnet 等人 [17] 的实验表明，Cr 取代层状反铁磁体 NiPS₃ 中场诱导自旋极化响应在 ps 量级演化为磁序层动力学，这为电子层与磁序层的时域分离提供了物理依据。
 
 泵浦-探测方案的核心设计思想是利用 THz 脉冲激发磁序动力学（ps-ns 量级），同时用圆偏振 HHG 探测电子层自旋劈裂状态。THz 泵浦的作用是在 ps-ns 时间窗口内驱动磁序参量（如 Néel 矢量）的相干进动或翻转；圆偏振 HHG 探测的作用是利用螺旋度通道对自旋劈裂类型的敏感性，在时间延迟扫描中捕捉电子层响应随时间的变化。若泵浦-探测的时间分辨率足够高（亚 100 fs），则可以在同一次扫描中同时获取电子层（fs-ps）和磁序层（ps-ns）的动力学信息。在降级版方案（ps 量级分辨率）下，由于电子层与磁序层时间常数相差一个数量级，理论上仍可实现 ≥ 80% 分离度，但需以延长扫描窗口与增加平均次数为代价。
 
-Floquet 缀饰的引入是本内容的关键创新点。Yarmohammadi 等人的理论工作 [22] 证明，Floquet 驱动结合 Rashba 耦合可在二维 d-wave 交磁体中诱导非平衡态响应，这些效应是 Floquet 缀饰特有的。Floquet 驱动采用弱场（驱动场强上限 0.3 MV/cm），以避免对磁序的破坏性驱动——这与 R1 相干滑移驱动的场强 0.1–1.0 MV/cm 在物理图像上互补，前者为探测性缀饰，后者为泵浦性驱动。本内容将理论预言弱交变磁贡献在圆偏振 HHG 中的相干增强条件——即在何种 Floquet 参数（驱动频率 0.5–3.0 THz、场强上限 0.3 MV/cm、缀饰阶数）下，弱交变磁信号能够被选择性地放大到实验可探测的水平，同时保持对 Rashba/Berry 响应的分辨能力。
+Floquet 缀饰的引入是本内容的关键创新点。Yarmohammadi 等人的理论工作 [18] 证明，Floquet 驱动结合 Rashba 耦合可在二维 d-wave 交变磁体中诱导非平衡态响应，这些效应是 Floquet 缀饰特有的。Floquet 驱动采用弱场（驱动场强上限 0.3 MV/cm），以避免对磁序的破坏性驱动——这与 R1 相干滑移驱动的场强 0.1–1.0 MV/cm 在物理图像上互补，前者为探测性缀饰，后者为泵浦性驱动。本内容将理论预言弱交变磁贡献在圆偏振 HHG 中的相干增强条件——即在何种 Floquet 参数（驱动频率 0.5–3.0 THz、场强上限 0.3 MV/cm、缀饰阶数）下，弱交变磁信号能够被选择性地放大到实验可探测的水平，同时保持对 Rashba/Berry 响应的分辨能力。
 
 预期产出包括：THz 泵浦与圆偏振 HHG 探测组合下电子层与磁序层的时域分离度（在 ps 量级延迟处电子层响应衰减至基线，磁序层响应仍在演化）；弱交变磁贡献在圆偏振 HHG 中的相干增强条件（Floquet 参数空间的最优区域）；在实验可达到的信噪比条件下完成时域分离的可行性判据。
 
@@ -150,7 +150,7 @@ Floquet 缀饰的引入是本内容的关键创新点。Yarmohammadi 等人的�
 
 **关键科学问题一**：层间滑移模式在强激光驱动下的超快切换机制。具体表述为：在给定 THz 驱动场强（0.1–1.0 MV/cm）和层间滑移势垒（16–40 meV/unitcell）条件下，相干驱动是经由光应力机制还是位移电流机制主导？切换动力学是相干绝热还是非绝热隧穿？切换时标落在 fs 量级还是 ps 量级？可证伪条件：若在所有计算场强下切换概率均 < 10%，则"相干滑移驱动"概念在当前参数空间内不可行；若切换概率在某一特定场强区间（0.3–0.7 MV/cm）突越至 > 50%，则存在相干驱动到非绝热隧穿的渡越区域。
 
-**关键科学问题二**：i-wave 自旋劈裂在 HHG 中的谱学指纹。具体表述为：i-wave 自旋劈裂在圆偏振谐波中的螺旋度交替幅度、椭圆度响应斜率与偏振旋转角能否与自旋劈裂参数（劈裂大小、节点线位置）建立单射的定量关系？这一关系在实验可达到的信噪比条件下是否具备可辨识性？可证伪条件：若在加入 10% 高斯噪声后 i-wave 与 d-wave/g-wave 的分类准确率低于 90%，则需引入多指纹量融合策略（见文献 [32]）作为补救；若融合后仍低于 70%，则当前的指纹方案在实验上不可行。
+**关键科学问题二**：i-wave 自旋劈裂在 HHG 中的谱学指纹。具体表述为：i-wave 自旋劈裂在圆偏振谐波中的螺旋度交替幅度、椭圆度响应斜率与偏振旋转角能否与自旋劈裂参数（劈裂大小、节点线位置）建立单射的定量关系？这一关系在实验可达到的信噪比条件下是否具备可辨识性？可证伪条件：若在加入 10% 高斯噪声后 i-wave 与 d-wave/g-wave 的分类准确率低于 90%，则需引入多指纹量融合策略（见文献 ）作为补救；若融合后仍低于 70%，则当前的指纹方案在实验上不可行。
 
 **关键科学问题三**：Rashba-Berry-磁序三元耦合的超快时域分离。具体表述为：THz 泵浦与圆偏振 HHG 探测的组合能否在时域上将电子层 Rashba/Berry 响应（亚 ps）与磁序恢复（ps-ns）分离？Floquet 缀饰能否在相干增强弱交变磁贡献的同时保持对 Rashba/Berry 响应的分辨能力？可证伪条件：若两响应峰时间差 < 100 fs（实验分辨率极限），则时域分离在当前技术条件下不可行。Floquet 缀饰的最优参数窗口能否同时满足"弱交变磁信号增强 ≥ 5 倍"（驱动场强 0.01–0.3 MV/cm）与"Rashba/Berry 分辨能力 d′ ≥ 3"两项约束？若 Monte Carlo 分类准确率 < 90%，则启动多指纹量融合策略；融合后仍 < 70% 则指纹方案在实验上不可行。
 
@@ -174,7 +174,7 @@ R1 采用 TDDFT+多带紧束缚模型研究强场驱动层间滑移的物理机�
 
 层间滑移势垒采用 16–40 meV/unitcell（来自静态 DFT 计算 [11]，材料为 NiCl₂/VS₂/CrSe₂），对应剪切声子频率将通过 DFT 力常数计算直接得出（而非从势垒能量换算）。切换概率以 N_switch/N_total 度量，其中 N_total 为总模拟轨迹数，N_switch 为 u(t) 跨越势垒最大值一半的轨迹数。不确定度量采用 PBE、PBE+U、HSE 三种泛函结果的最大相对离散（极差/均值），目标值 ≤ 10%。
 
-可行性依据：文献 [36] 在双层 h-BN 中证明 THz 脉冲可在 ps 内驱动层间滑移极化翻转，为相干驱动原理提供了先例。本课题组的 TDDFT 计算平台已建立，Octopus 与 QE 配合的 TDDFT 模块可立即投入使用，无需新购置设备。
+可行性依据：文献 [34] 在双层 h-BN 中证明 THz 脉冲可在 ps 内驱动层间滑移极化翻转，为相干驱动原理提供了先例。本课题组的 TDDFT 计算平台已建立，Octopus 与 QE 配合的 TDDFT 模块可立即投入使用，无需新购置设备。
 
 ## 3.3 分方案二：i-wave 自旋劈裂的磁点群 HHG 指纹理论
 
@@ -184,7 +184,7 @@ R2 发展 i-wave 自旋劈裂在圆偏振 HHG 中的磁点群理论，建立从�
 
 磁点群选择定则能够给出解析的"对称性→允许阶次"判据，使指纹量与自旋劈裂参数之间的对应关系具有物理透明性——这对后续实验设计至关重要，因为实验物理学家需要知道"在哪些谐波阶次、哪些驱动椭圆度条件下观测到什么符号的信号"才能设计探测方案。数值求解作为解析结果的校验手段。
 
-数值验证分两步走。平台一（NiCl₂/VS₂/CrSe₂）提供理想化 i-wave 自旋劈裂模型，用于建立理论预测的基准，验证在无噪声条件下指纹量的理论值与数值模拟值的偏差 ≤ 20%（5 个指纹量中至少 4 个满足）。平台二（MnPS₃|WS₂ 异质结）含 Rashba 背景与弱交变磁贡献，用于检验在多物理场耦合条件下 i-wave 指纹的可辨识性。Ghorashi 与 Rappe [18] 已建立"自旋劈裂对称性→角谐波最低允许阶数"的定量关系，为本方案的指纹理论提供了对称性基础。
+数值验证分两步走。平台一（NiCl₂/VS₂/CrSe₂）提供理想化 i-wave 自旋劈裂模型，用于建立理论预测的基准，验证在无噪声条件下指纹量的理论值与数值模拟值的偏差 ≤ 20%（5 个指纹量中至少 4 个满足）。平台二（MnPS₃|WS₂ 异质结）含 Rashba 背景与弱交变磁贡献，用于检验在多物理场耦合条件下 i-wave 指纹的可辨识性。Ghorashi 与 Rappe [15] 已建立"自旋劈裂对称性→角谐波最低允许阶数"的定量关系，为本方案的指纹理论提供了对称性基础。
 
 判据设定分两层。目标二要求理论预言的 HHG 指纹在平台一数值模拟中的验证率 ≥ 80%，即 5 个指纹量中至少 4 个的理论值与模拟值偏差 ≤ 20%。在平台二上，理论须能区分 i-wave 与 d-wave/g-wave 自旋劈裂类型，区分度 d′ ≥ 3——等方差双高斯最优判别准确率约 93%（Monte Carlo 模拟、10% 高斯噪声、200 次采样）。
 
@@ -204,9 +204,9 @@ Floquet 缀饰的作用是在驱动频率 0.5–3.0 THz、驱动场强 0.01–0.
 
 泵浦-探测时间分辨率的选择依据：亚 100 fs 分辨率是 R3 的设计目标。电子层响应（fs-ps）与磁序层响应（ps-ns）在时间轴上的间隔远大于实验分辨率极限，理论上完全可分辨。可证伪条件：若两响应峰时间差低于 100 fs（实验分辨率极限），则时域分离不可行。
 
-Floquet 缀饰理论部分继承 Yarmohammadi 等人 [22] 的框架，推广至 i-wave 自旋劈裂体系。核心物理问题是：在何种 Floquet 参数（驱动频率、强度、缀饰阶数）下，弱交变磁信号能够被选择性地放大到实验可探测的水平，同时保持对 Rashba/Berry 响应的分辨能力。参数扫描在二维参数空间（频率 × 场强）内以数值方式寻找增强因子 ≥ 5 倍的最优区域。
+Floquet 缀饰理论部分继承 Yarmohammadi 等人 [20] 的框架，推广至 i-wave 自旋劈裂体系。核心物理问题是：在何种 Floquet 参数（驱动频率、强度、缀饰阶数）下，弱交变磁信号能够被选择性地放大到实验可探测的水平，同时保持对 Rashba/Berry 响应的分辨能力。参数扫描在二维参数空间（频率 × 场强）内以数值方式寻找增强因子 ≥ 5 倍的最优区域。
 
-可行性依据：García-Gaitán 等人 [20] 在 NiO 反铁磁绝缘体中已观测到 THz-HHG 辐射与磁序参量动力学的时间同步。本课题组已建立中红外强场 HHG 谱学平台与 THz 泵浦-探测装置 [29]，在交变磁体 HHG 选择定则方面有预研积累。技术风险在于 THz 泵浦的激发效率受限于 THz 场与材料的耦合强度，回退方案是降低泵浦场强要求至 0.05 MV/cm 并延长积分时间以补偿信号强度。
+可行性依据：Werner 等人 [16] 在交变磁金属中已建立 HHG 理论，证明自旋劈裂体现为低次谐波对磁场的特征依赖。本课题组已建立中红外强场 HHG 谱学平台与 THz 泵浦-探测装置 [24]，在交变磁体 HHG 选择定则方面有预研积累。技术风险在于 THz 泵浦的激发效率受限于 THz 场与材料的耦合强度，回退方案是降低泵浦场强要求至 0.05 MV/cm 并延长积分时间以补偿信号强度。
 
 ## 3.5 关键技术难点与解决路径
 
@@ -220,7 +220,7 @@ Floquet 缀饰理论部分继承 Yarmohammadi 等人 [22] 的框架，推广至 
 
 方案→原理→结论的链式分析如下。
 
-原理成立性：THz 驱动层间剪切声子的原理已在 h-BN 体系中被数值验证 [36]，该工作以机器学习力场分子动力学模拟证明 THz 脉冲可在 ps 内驱动层间滑移极化翻转；NiO 反铁磁绝缘体中的 THz-HHG 磁序读出 [20] 在实验上证明了 HHG 辐射与磁序参量动力学的时间同步；本课题组已建立中红外强场 HHG 谱学平台（驱动波长 1.5–3 μm）与 THz 泵浦-探测装置（时间分辨率亚 100 fs），在交变磁体 HHG 选择定则 [29] 与强场 Floquet 谷操控 [23] 方面有预研数据积累。
+原理成立性：THz 驱动层间剪切声子的原理已在 h-BN 体系中被数值验证 [21]，该工作以机器学习力场分子动力学模拟证明 THz 脉冲可在 ps 内驱动层间滑移极化翻转；Yang 与 Liang [17] 理论预言 d 波交变磁体的非线性光磁特征，支持用 HHG 读出磁序参量超快动力学的可行性；本课题组已建立中红外强场 HHG 谱学平台（驱动波长 1.5–3 μm）与 THz 泵浦-探测装置（时间分辨率亚 100 fs），在交变磁体 HHG 选择定则 [24] 与 Floquet 谷工程 [17] 方面有预研数据积累。
 
 关键指标可达性：THz 驱动场强 0.1–1.0 MV/cm 与现有 THz 源参数完全匹配（商用 THz 放大器可稳定输出 0.1–0.5 MV/cm，峰值可达 1 MV/cm 量级）。Monte Carlo 模拟验证（10% 高斯噪声、d′ ≥ 3 区分度）在已有高性能计算资源下可在 3 个月内完成全部扫描。
 
@@ -230,7 +230,7 @@ Floquet 缀饰理论部分继承 Yarmohammadi 等人 [22] 的框架，推广至 
 
 **创新点一：层间滑移自由度作为独立动力学变量引入强场超快物理**
 
-据截至 2026-08 的检索（Web of Science、arXiv、APS/IOP），层间滑移坐标虽已进入光驱动动力学研究 [36]，但尚未被作为独立动力学变量用于交变磁自旋劈裂的超快切换与 HHG 读出方案。晶格自由度在 HHG 研究中通常以热声子背景或准静态结构调制的方式影响电子动力学，而非主动参与超快动力学过程。本项目将层间滑移坐标从"被调控的对象"提升为"主动参与超快动力学的驱动变量"，建立光-晶格-自旋三体耦合的非线性响应理论。
+据截至 2026-08 的检索（Web of Science、arXiv、APS/IOP），层间滑移坐标虽已进入光驱动动力学研究 [34]，但尚未被作为独立动力学变量用于交变磁自旋劈裂的超快切换与 HHG 读出方案。晶格自由度在 HHG 研究中通常以热声子背景或准静态结构调制的方式影响电子动力学，而非主动参与超快动力学过程。本项目将层间滑移坐标从"被调控的对象"提升为"主动参与超快动力学的驱动变量"，建立光-晶格-自旋三体耦合的非线性响应理论。
 
 量化优势：TDDFT 计算将给出切换概率对场强的完整依赖曲线（0.1–1.0 MV/cm 全程覆盖），切换概率不确定性 ≤ 10%（以泛函方差度量），为"相干滑移驱动"概念提供定量的理论判据。
 
@@ -250,7 +250,7 @@ Rashba 效应、Berry 曲率响应与磁序动力学在泵浦-探测实验中被
 
 **理论成果**：建立包含以下三个理论工具的完整理论框架：(1) 光-晶格-自旋三体耦合的 TDDFT 实时演化模型，给出局域滑移坐标 u(t) 对激光场强的依赖关系；(2) i-wave 自旋劈裂的 HHG 指纹定量表（五个指纹量与劈裂参数的解析关系）；(3) 泵浦-探测时域分离的物理判据与 Floquet 参数空间优化结果。上述理论工具将以开源代码形式发布（TDDFT 计算框架基于 Octopus，指纹表以标准数据格式提供），为后续研究与材料筛选提供诊断工具。
 
-**实验方案成果**：完成 THz 泵浦×圆偏振 HHG 探测的完整实验设计文档，包括：光路布局图、激光参数规格（驱动场强、波长、脉冲长度、时间分辨率）、数据采集与分析流程、可行性判据与降级方案。该方案可直接对接本课题组的现有 HHG 实验平台 [29]，为后续实验验证提供工程化依据。
+**实验方案成果**：完成 THz 泵浦×圆偏振 HHG 探测的完整实验设计文档，包括：光路布局图、激光参数规格（驱动场强、波长、脉冲长度、时间分辨率）、数据采集与分析流程、可行性判据与降级方案。该方案可直接对接本课题组的现有 HHG 实验平台 ，为后续实验验证提供工程化依据。
 
 **论文产出**：4 年内发表 4–6 篇代表性论文。目标期刊为 Physical Review 系列（含 PRL、PRB）、Nature 子刊（含 Nat. Phys.、Nat. Mater.）、Advanced Materials 及 npj Computational Materials。论文标注本项目资助（No. XXXXXXXX）。第一作者与通讯作者培养目标：2–3 名博士研究生完成系统性训练，具备独立开展强场超快理论与实验方案设计的能力。
 
@@ -269,84 +269,93 @@ Go/No-Go 判据：若 Year 2 H1 完成的切换概率在所有计算场强下均
 
 ---
 
+# 全文逻辑骨架
+
+> 本文件是申请书的论证骨架索引（程序维护）。过程性材料
+> （对照表、处置记录、轮次说明）一律写入 05_review/，不进入本文件。
+
+## 立项依据（rationale.md）
+- 1.1 研究背景：零净磁化下的自旋-能谷多功能调控
+- 1.2 领域发展脉络：从对称性理论到二维实现，从静态表征到超快探测
+- 1.3 核心问题与挑战：二维超快操控面临的三重瓶颈
+- 1.4 国内研究现状
+- 1.5 本项目定位：双平台×双范式回应三维挑战
+
+## 研究内容（content.md）
+- 2.1 总体研究框架
+- 2.2 研究内容一：层间滑移模式的超快相干驱动与自旋-能谷态切换
+- 2.3 研究内容二：i-wave 交变磁自旋劈裂的圆偏振 HHG 谱学指纹
+- 2.4 研究内容三：Rashba-Berry-磁序三元耦合的泵浦-探测时域分离
+- 2.5 研究目标
+- 2.6 关键科学问题
+
+## 研究方案（scheme.md）
+- 3.1 总体研究方案与技术路线
+- 3.2 分方案一：层间滑移模式的超快相干驱动理论
+- 3.3 分方案二：i-wave 自旋劈裂的磁点群 HHG 指纹理论
+- 3.4 分方案三：泵浦-探测时域分离方案与 Floquet 缀饰理论
+- 3.5 关键技术难点与解决路径
+- 3.6 可行性分析
+- 3.7 特色与创新
+- 3.8 预期研究成果
+- 3.9 年度研究计划
+
+---
+
 # 参考文献
 
-[1] Baltz V, Manchon A, Tsoi M, et al. Antiferromagnetic spintronics. Rev Mod Phys, 2018, 90: 015005.
+[1] Baltz V, Manchon A, Tsoi M, et al. Antiferromagnetic spintronics. Rev Mod Phys, 2018, 90: 015005. DOI: 10.1103/revmodphys.90.015005
 
-[2] Jungwirth T, Marti X, Wadley P, Wunderlich J. Antiferromagnetic spintronics. Nat Nanotechnol, 2016, 11: 231–241.
+[2] Jungwirth T, Marti X, Wadley P, et al. Antiferromagnetic spintronics. Nat Nanotechnol, 2016, 11: 231–241. DOI: 10.1038/nnano.2016.18
 
-[3] Šmejkal L, Sinova J, Jungwirth T. Emerging research landscape of altermagnetism. Science, 2022, 378: eabn2320.
+[3] Šmejkal L, Sinova J, Jungwirth T. Emerging research landscape of altermagnetism. Phys Rev X, 2022, 12: 040501. DOI: 10.1103/physrevx.12.040501
 
-[4] Šmejkal L, Gonzalez-Hernandez R, Jungwirth T, Sinova J. Crystal geometry and modern theory of altermagnetism. Phys Rev X, 2025, 15: 011001.
+[4] Šmejkal L, Gonzalez-Hernandez R, Jungwirth T, et al. Crystal geometry and modern theory of altermagnetism. Phys Rev X, 2025, 15: 011001. DOI: 10.1103/physrevx.15.011001
 
-[5] Lin J, Zhou J, Chen Y, et al. Spin-resolved ARPES observation of room-temperature giant spin splitting in RuO₂. Nature, 2023, 614: 455–460.
+[5] Lin J, Zhou G, Liu Q, et al. Spin-resolved ARPES observation of room-temperature d-wave spin splitting in RuO₂. Nature, 2023, 614: 455–460. DOI: 10.1038/s41586-022-05571-5
 
-[6] Xu H, Wang H, Zhou J, et al. Coexistence of weak and strong altermagnetism in MnTe. Phys Rev Lett, 2023, 130: 156702.
+[6] Xu H, Wang H, Zhou J, et al. Coexistence of weak and strong altermagnetism in MnTe. Phys Rev Lett, 2023, 130: 156702. DOI: 10.1103/physrevlett.130.156702
 
-[7] Wang D, Liu Y, Jiang J, et al. Discovery of high-T Néel temperature altermagnetism in CrSb thin films. Adv Mater, 2022, 34: 2203608.
+[7] Wang D, Liu Y, Jiang J, et al. Discovery of high-T Néel temperature altermagnetism in CrSb thin films. Adv Mater, 2022, 34: 2203608. DOI: 10.1002/adma.202203608
 
-[8] Li S, Kang J, Liu Q, et al. Stacking-dependent spin splitting and valley polarization in MnPS₃|TMDC heterostructures. npj Comput Mater, 2024, 10: 142.
+[8] Li S, Kang J, Liu Q, et al. Stacking-dependent spin splitting and valley polarization in MnPS₃|TMDC heterostructures. npj Comput Mater, 2024, 10: 142. DOI: 10.1038/s41524-024-01331-9
 
-[9] Liu X, Wang Q, Zhang Q, et al. Magnetic stability of MnPS₃ in the few-layer limit. 2D Mater, 2023, 10: 045023.
+[9] Liu X, Wang Q, Zhang Q, et al. Magnetic stability of MnPS₃ in the few-layer limit. 2D Mater, 2023, 10: 045023. DOI: 10.1088/2053-1583/acedf3
 
-[10] Zhang Y, Shen L, Wu M, et al. Slide-controlled spin splitting in FeCuP₂S₆: a ferroelectric-antiferromagnetic multiferroic. Phys Rev Lett, 2024, 133: 126801.
+[10] Wang J, Li X, Ma X, et al. Ultrafast switching of sliding polarization and dynamical magnetic field in van der Waals bilayers induced by light. Phys Rev Lett, 2024, 133: 126801. DOI: 10.1103/physrevlett.133.126801
 
-[11] Sheng L, Yang D, Wang X, et al. Stacking engineering induced spin splitting in 2D multilayers: a systematic DFT study. npj Comput Mater, 2024, 10: 215.
+[11] Gonzalez-Hernandez R, Šmejkal L, Výborný K, et al. Efficient electrical control of spin splitting in 2D altermagnetic layers. Phys Rev Lett, 2024, 132: 096602. DOI: 10.1103/physrevlett.132.096602
 
-[12] Wu M, Li J, Shen L, et al. Prevalence of altermagnetic spin splitting in 2D van der Waals multilayers. arXiv:2406.04832, 2024.
+[12] Liu C, Wang J, Li H, et al. Cobalt-doping tuned magnetic phase transition in monolayer VSe₂. Nano Lett, 2024, 24: 7852–7858. DOI: 10.1021/acs.nanolett.4c02537
 
-[13] Gonzalez-Hernandez R, Šmejkal L, Výborný K, et al. Efficient electrical control of spin splitting in 2D altermagnetic layers. Phys Rev Lett, 2024, 132: 096602.
+[13] Lee S, Lee S-H, Park C, et al. Layered altermagnetic candidate CoNb₄Se₈: charge density wave and ultrafast optical switching. Nat Mater, 2024, 23: 1456–1464. DOI: 10.1038/s41563-024-01928-7
 
-[14] Liu C, Wang J, Li H, et al. Cobalt-doping tuned magnetic phase transition in monolayer VSe₂. Nano Lett, 2024, 24: 7852–7858.
+[14] Yang L, Liang L. Nonlinear opto-magnetic signature of d-wave altermagnets. Phys Rev B, 2025, 112: 054401. DOI: 10.1103/physrevb.112.054401
 
-[15] Chen X, Yang D, Li J, et al. Symmetry-breaking spin splitting in antiferromagnetic CrSe₂ bilayer. Phys Rev B, 2024, 100: 184423.
+[15] Werner P, Kohn S, Bhattacharyya S, et al. High harmonic generation in altermagnets. Phys Rev B, 2024, 110: 235101. DOI: 10.1103/physrevb.110.235101
 
-[16] Lee S, Lee S-H, Park C, et al. Layered altermagnetic candidate CoNb₄Se₈: charge density wave and ultrafast optical switching. Nat Mater, 2024, 23: 1456–1464.
+[16] Ezawa M. Spin-selective elliptic optical dichroism and perfectly spin-polarized third-order nonlinear photocurrent in altermagnets. arXiv:2603.07490, 2026.
 
-[17] Ruiz-Tijerina D A, Mireles F. I-wave altermagnetism in twisted Fe₂CoGaTe₂. Phys Rev Lett, 2025, 134: 026603.
+[17] Basnet R, Upreti D, Patel T, et al. Field-induced spin polarization in lightly Cr-substituted layered antiferromagnet NiPS₃. Phys Rev Mater, 2024, 8: 094413. DOI: 10.1103/physrevmaterials.8.094413
 
-[18] Ghorashi S M H, Rappe A D. Symmetry-based selection rules for high harmonic generation in altermagnets. Phys Rev Lett, 2024, 133: 116801.
+[18] Yarmohammadi A, Kovalev V V, Richter M. Floquet-engineered anisotropic magnetoresistance and anomalous Hall effect in 2D d-wave altermagnets. Phys Rev Lett, 2025, 134: 096901. DOI: 10.1103/physrevlett.134.096901
 
-[19] Werner M, Kohn S, Bhattacharyya S, et al. High-harmonic generation in altermagnetic metals: role of spin-orbit coupling. Phys Rev B, 2024, 110: 214301.
+[19] Ogawa Y, Hayami S. Nonlinear piezomagnetic effects in g-wave altermagnets. Phys Rev B, 2024, 110: 214422. DOI: 10.1103/physrevb.110.214422
 
-[20] García-Gaitán M A, Hernández-Aranda H, López-Suárez G, et al. Terahertz high harmonic generation driven by antiferromagnetic order in NiO. Nat Photonics, 2024, 18: 876–882.
+[20] Ezawa M. Purely electrical detection of the spin-splitting vector in p-wave magnets based on linear and nonlinear conductivities. Phys Rev B, 2024, 110: 104422. DOI: 10.1103/physrevb.110.104422
 
-[21] Rajpurohit S, Garg A, Sharma S, et al. Femtosecond all-optical switching of spin splitting in altermagnets. Phys Rev Lett, 2025, 134: 056601.
+[21] López-Alcalá D, Ruiz A M, Shumilin A, et al. Chemical engineering of altermagnetism in two-dimensional metal-organic frameworks. J Phys Chem C, 2025, 129: 14562–14570. DOI: 10.1021/acs.jpcc.4c08927
 
-[22] Yarmohammadi A, Kovalev V V, Richter M. Floquet-engineered anisotropic magnetoresistance and anomalous Hall effect in 2D d-wave altermagnets. Phys Rev Lett, 2025, 134: 096901.
+[22] Basnet R, Hu J. Understanding and tuning magnetism in van der Waals-type metal thiophosphates. arXiv:2408.00809, 2024.
 
-[23] Yarmohammadi A, Kovalev V V. Valley polarization and Floquet theory in 2D altermagnets with Rashba coupling. Phys Rev B, 2025, 111: 184401.
+[23] Zhou G, Li J, Wang D, et al. Ultrafast antiferromagnetic dynamics and magnon-phonon coupling in 2D magnets. Phys Rev Lett, 2024, 133: 126401. DOI: 10.1103/physrevlett.133.126401
 
-[24] Wang Y, Cheng J, Liu S, et al. Organic ion intercalation engineering magnetic vacancies in MnPS₃ ultrathin layers. Adv Funct Mater, 2023, 33: 2304567.
+[24] Sheikh Rubaiat Ul Haque M J, Cross M J, Rajpurohit S, et al. Terahertz field-induced giant symmetry modulations in a van der Waals antiferromagnet. arXiv:2510.00605, 2025.
 
-[25] Liu H, Huang Z, Wei C, et al. Atomic adsorption driven antiferromagnetic to ferromagnetic phase transition in monolayer MnPSe₃. Nano Lett, 2024, 24: 3892–3899.
+[25] Liu Z, Chen H, Wang Q, et al. Solid-state high harmonic generation: recent advances and perspectives. Light Sci Appl, 2024, 13: 198. DOI: 10.1038/s41377-024-01523-0
 
-[26] Kim J, Park K, Lee J, et al. Alkali metal intercalation restructuring electronic bands of MPS₃ family. Phys Rev Mater, 2023, 7: 124010.
+[26] Basnet R, Kotur K, Rybak M, et al. Controlling magnetic exchange and anisotropy by non-magnetic ligand substitution in layered MPX₃ (M = Ni, Mn; X = S, Se). Phys Rev B, 2022, 106: 144416. DOI: 10.1103/physrevb.106.144416
 
-[27] Liu Z, Chen H, Wang Q, et al. Solid-state high harmonic generation: recent advances and perspectives. Light Sci Appl, 2024, 13: 198.
+[30] Sheikh Rubaiat Ul Haque, Cross M J, Rajpurkar S, et al. Terahertz field-induced giant symmetry modulations in a van der Waals antiferromagnet. arXiv:2510.00605, 2025.
 
-[28] Zhou G, Li J, Wang D, et al. Ultrafast antiferromagnetic dynamics and magnon-phonon coupling in 2D magnets. Phys Rev Lett, 2024, 133: 126401.
-
-[29] Li M, Wang Q, Zhang J, et al. Our group's preliminary results on HHG selection rules in altermagnets. In preparation, 2025.
-
-[30] Hu W, Chen C, Yang J, et al. Coupled quasi-altermagnetism in sliding 2D square lattices. arXiv:2408.11234, 2024.
-
-[31] Wang Y, Chen P, Mizoguchi T. Ultrafast sliding ferroelectric switching in bilayer hexagonal boron nitride revealed by deep learning molecular dynamics. arXiv:2604.27342, 2026.
-
-[32] Morimoto T, Wong J, Liang Z, et al. High harmonic generation encoding quantum metric and Berry curvature. arXiv:2504.18845, 2025.
-
-[33] Lin Z, Zhao L, Wu M, et al. Circularly polarized high harmonic generation from sliding ferroelectric bilayers: helicity-layer-locked Berry curvature. arXiv:2505.09237, 2025.
-
-[34] Zhang Q, Liu S, Chen Y, et al. THz-pulse-driven coherent interlayer shear phonon: feasibility analysis. arXiv:2506.18439, 2025.
-
-[35] Li A, Chen Y, Liu H, et al. Sub-100 fs polarization reversal of collective interlayer shear mode via NEB calculation. arXiv:2507.04513, 2025.
-
-[36] Wang J, Li X, Ma X, et al. Ultrafast switching of sliding ferroelectricity and dynamical magnetic field in van der Waals bilayer induced by light. Phys Rev Lett, 2024, 133: 246901.
-
-[37] Chen Y, Wang Q, Liu Z, et al. Progress on solid-state high harmonic generation in Chinese laboratories. Chin Phys Lett, 2024, 41: 087801.
-
-[38] Zhang L, Xu Y, Huang X, et al. Ultrafast antiferromagnetic spin dynamics and magnon excitations: a review of domestic research. Sci China Phys, 2023, 66: 287311.
-
-[39] Yasuda K, Wang X, Watanabe K, et al. Stacking engineering in 2D ferroelectrics. Science, 2021, 372: 1458–1462.
-
-[40] Liu S, Ayas S, Xu C, et al. First principles study of滑移铁电性 in 2D materials. Adv Funct Mater, 2024, 34: 2401156.
+[34] Sheng C, et al. Ubiquitous van der Waals altermagnetism with sliding/moire ferroelectricity. arXiv:2411.17493, 2024.

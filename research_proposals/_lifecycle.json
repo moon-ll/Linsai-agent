@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-27T04:04:34Z",
+      "updated_at": "2026-08-27T12:05:16Z",
       "optimization_rounds": 2,
       "last_score": 0.81,
       "score_history": [
@@ -380,6 +380,10 @@
         },
         {
           "at": "2026-08-27T04:04:34Z",
+          "error": "general-quantum-geometry-inversion-20260726-r2-rationale-critic: 超时(1200s)"
+        },
+        {
+          "at": "2026-08-27T10:00:59Z",
           "error": "general-quantum-geometry-inversion-20260726-r2-rationale-critic: 超时(1200s)"
         }
       ],
@@ -1349,11 +1353,11 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 3,
-          "status": "pending",
+          "status": "running",
           "depends_on": [],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
+          "started_at": "2026-08-27T12:05:16Z",
           "finished_at": "",
           "last_error": "",
           "cron_job_id": "",
@@ -2735,7 +2739,7 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-27T04:04:34Z",
+      "updated_at": "2026-08-27T10:00:59Z",
       "optimization_rounds": 0,
       "last_score": 0.76,
       "score_history": [
@@ -3295,10 +3299,6 @@
       "worker_minute": 59,
       "cron_failures": [
         {
-          "at": "2026-08-24T22:00:02Z",
-          "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
-        },
-        {
           "at": "2026-08-25T04:00:07Z",
           "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
         },
@@ -3312,6 +3312,10 @@
         },
         {
           "at": "2026-08-27T04:04:34Z",
+          "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-27T10:00:59Z",
           "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
         }
       ],
@@ -4514,7 +4518,7 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-27T04:04:34Z",
+      "updated_at": "2026-08-27T11:13:14Z",
       "optimization_rounds": 5,
       "last_score": 0.68,
       "score_history": [
@@ -5948,14 +5952,14 @@
           "step": "gap_identify",
           "section_key": "rationale",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r6-rationale-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-27T11:10:08Z",
+          "finished_at": "2026-08-27T11:13:14Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -6761,10 +6765,6 @@
       "low_score_alert": false,
       "cron_failures": [
         {
-          "at": "2026-08-24T22:00:02Z",
-          "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
-        },
-        {
           "at": "2026-08-25T04:00:07Z",
           "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
         },
@@ -6778,6 +6778,10 @@
         },
         {
           "at": "2026-08-27T04:04:34Z",
+          "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-27T10:00:59Z",
           "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
         }
       ],
@@ -9104,7 +9108,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-27T04:04:34Z",
+      "updated_at": "2026-08-27T11:35:09Z",
       "optimization_rounds": 7,
       "last_score": 0.69,
       "score_history": [
@@ -9622,10 +9626,6 @@
       "missing_sections": [],
       "cron_failures": [
         {
-          "at": "2026-08-24T22:00:02Z",
-          "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
-        },
-        {
           "at": "2026-08-25T04:00:07Z",
           "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
         },
@@ -9639,6 +9639,10 @@
         },
         {
           "at": "2026-08-27T04:04:34Z",
+          "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-27T10:00:59Z",
           "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
         }
       ],
@@ -10650,13 +10654,13 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 8,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [],
-          "attempts": 0,
+          "attempts": 1,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
+          "started_at": "2026-08-27T11:15:09Z",
+          "finished_at": "2026-08-27T11:35:09Z",
+          "last_error": "超时(1200s)",
           "cron_job_id": ""
         },
         {
@@ -11981,7 +11985,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控",
       "created_at": "2026-08-16T03:49:25Z",
-      "updated_at": "2026-08-27T04:04:34Z",
+      "updated_at": "2026-08-27T11:00:05Z",
       "optimization_rounds": 2,
       "last_score": 0.51,
       "score_history": [
@@ -12012,11 +12016,38 @@
           "issues_count": 18,
           "high_issues": 6,
           "at": "2026-08-26T23:11:29Z"
+        },
+        {
+          "round": 2,
+          "score": 0.51,
+          "dim_scores": {
+            "rigor": 0.3,
+            "completeness": 0.72
+          },
+          "weakest_dim": "rigor",
+          "focus_section": "references",
+          "section_passed": false,
+          "issues_count": 18,
+          "high_issues": 6,
+          "ai_ceiling": 0.53,
+          "ai_ceiling_after": null,
+          "expression_improved": true,
+          "expression_not_improved_reason": "",
+          "quality_gate_passed": true,
+          "quality_gate_reason": "质量检测零命中",
+          "quality_over_budget": false,
+          "ai_top_issues": [
+            "模板句式'为...提供...'超标：9次（阈值8），扣0.03",
+            "超长句(>120字)：27处（免赔5处），扣0.44"
+          ],
+          "anchor_conclusion": "",
+          "at": "2026-08-27T10:33:09Z"
         }
       ],
       "section_passes": {
         "rationale": false,
-        "content": false
+        "content": false,
+        "references": false
       },
       "open_critical_issues": [
         {
@@ -13445,14 +13476,14 @@
           "step": "writer",
           "section_key": "references",
           "round": 2,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-references-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-27T10:30:01Z",
+          "finished_at": "2026-08-27T10:33:09Z",
           "last_error": "",
           "cron_job_id": "",
           "error_history": [
@@ -13470,16 +13501,24 @@
           "step": "monitor",
           "section_key": "monitor",
           "round": 2,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "general-berry-mnps3-rashba-20260816-r2-references-writer"
           ],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
-          "cron_job_id": ""
+          "started_at": "2026-08-27T10:50:05Z",
+          "finished_at": "2026-08-27T11:00:05Z",
+          "last_error": "超时(600s)",
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-27T10:45:02Z",
+              "error": "超时(600s)",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 1
         },
         {
           "job_id": "general-berry-mnps3-rashba-20260816-r2-derived-update_vision",
@@ -13988,7 +14027,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 交变磁体高次谐波产生与固态强场非线性光学新前沿",
       "created_at": "2026-08-22T05:40:16Z",
-      "updated_at": "2026-08-27T04:04:34Z",
+      "updated_at": "2026-08-27T12:00:13Z",
       "optimization_rounds": 2,
       "last_score": 0.55,
       "score_history": [
@@ -15521,13 +15560,13 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 3,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [],
-          "attempts": 0,
+          "attempts": 1,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
+          "started_at": "2026-08-27T11:40:13Z",
+          "finished_at": "2026-08-27T12:00:13Z",
+          "last_error": "超时(1200s)",
           "cron_job_id": ""
         },
         {
@@ -15983,6 +16022,10 @@
         {
           "at": "2026-08-27T04:04:34Z",
           "error": "general-new-idea-20260822-r2-monitor-monitor: 超时(600s)"
+        },
+        {
+          "at": "2026-08-27T10:00:59Z",
+          "error": "general-new-idea-20260822-r2-monitor-monitor: 超时(600s)"
         }
       ]
     },
@@ -15992,7 +16035,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 阿秒条纹技术：从超短脉冲表征到量子相位测量（手动补注册 2026-08-22）",
       "created_at": "2026-08-22T12:20:08Z",
-      "updated_at": "2026-08-27T04:40:03Z",
+      "updated_at": "2026-08-27T10:00:59Z",
       "optimization_rounds": 8,
       "last_score": 0.72,
       "score_history": [
@@ -18198,8 +18241,14 @@
       "last_monitor_score": 0.55,
       "last_monitor_assessment": "本轮 references 专项聚焦批判：writer 落实了 critic 指出的 [16] Huppert 和 [33] Kheifets 两处 P0 critical 修复（Crossref 200 OK 确认），同时按建议添加跳号元叙述。但 writer 在响应 critic 的'补充近 3 年文献' P1 建议时，仅新增 1 条 [34] Liu Y 2023 Opt Express，且该条目为完全虚构（DOI 404、5 项元数据全错），与 [16] Huppert 失败模式完全一致——'真实标题+虚构期刊/卷页/DOI'。时效应从 25.9% 升至 28.6%，仍未达 50% 阈",
       "low_score_alert_reason": "分数0.57低于阈值0.65，已进行6轮优化，建议人工关注",
-      "negative_feedback_at": "2026-08-26T14:30:17Z"
+      "negative_feedback_at": "2026-08-26T14:30:17Z",
+      "cron_failures": [
+        {
+          "at": "2026-08-27T10:00:59Z",
+          "error": "general-attosecond-streaking-20260822-r8-content-critic: 超时(900s)"
+        }
+      ]
     }
   },
-  "updated_at": "2026-08-27T04:40:03Z"
+  "updated_at": "2026-08-27T12:05:16Z"
 }

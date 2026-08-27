@@ -47,7 +47,9 @@ from paths import PROJECT_ROOT
 
 BACKUPS_DIR = PROJECT_ROOT / "backups"
 # 备份范围：用户数据目录（与 .gitignore 排除范围一致 —— 用户数据不进 git，进备份）
-BACKUP_TARGETS = ["sessions", "memory", "tasks", "knowledge", "references", "projects", "persona"]
+# v6.9.59: 补 research_proposals——申请书正文（sections/proposal-draft）此前
+# 不在备份范围，违反"用户数据无价"原则（人工优化申请书前发现的盲区）
+BACKUP_TARGETS = ["sessions", "memory", "tasks", "knowledge", "references", "projects", "persona", "research_proposals"]
 # 24 小时内已有备份则 auto_backup 跳过（避免每次启动都打包）
 AUTO_BACKUP_INTERVAL_HOURS = 24
 

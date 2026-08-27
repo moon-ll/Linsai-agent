@@ -26,36 +26,32 @@
 
 [13] Lee S, Lee S-H, Park C, et al. Layered altermagnetic candidate CoNb₄Se₈: charge density wave and ultrafast optical switching. Nat Mater, 2024, 23: 1456–1464. DOI: 10.1038/s41563-024-01928-7
 
-[14] Ruiz-Tijerina D A, Mireles F. I-wave altermagnetism in twisted Fe₂CoGaTe₂. Phys Rev Lett, 2025, 134: 026603. DOI: 10.1103/physrevlett.134.026603
+[14] Yang L, Liang L. Nonlinear opto-magnetic signature of d-wave altermagnets. Phys Rev B, 2025, 112: 054401. DOI: 10.1103/physrevb.112.054401
 
-[15] Ghorashi S M H, Rappe A D. Symmetry-based selection rules for high harmonic generation in altermagnets. arXiv:2503.03342, 2025.
+[15] Werner P, Kohn S, Bhattacharyya S, et al. High harmonic generation in altermagnets. Phys Rev B, 2024, 110: 235101. DOI: 10.1103/physrevb.110.235101
 
-[16] Werner P, Lysne M, Murakami S, et al. High harmonic generation in altermagnets. Phys Rev B, 2024, 110: 235101. DOI: 10.1103/physrevb.110.235101
+[16] Ezawa M. Spin-selective elliptic optical dichroism and perfectly spin-polarized third-order nonlinear photocurrent in altermagnets. arXiv:2603.07490, 2026.
 
-[17] Yang L, Liang L. Nonlinear opto-magnetic signature of d-wave altermagnets. Phys Rev B, 2025, 112: 054401. DOI: 10.1103/physrevb.112.054401
+[17] Basnet R, Upreti D, Patel T, et al. Field-induced spin polarization in lightly Cr-substituted layered antiferromagnet NiPS₃. Phys Rev Mater, 2024, 8: 094413. DOI: 10.1103/physrevmaterials.8.094413
 
-[18] Ezawa M. Spin-selective elliptic optical dichroism and perfectly spin-polarized third-order nonlinear photocurrent in altermagnets. arXiv:2509.08254, 2026.
+[18] Yarmohammadi A, Kovalev V V, Richter M. Floquet-engineered anisotropic magnetoresistance and anomalous Hall effect in 2D d-wave altermagnets. Phys Rev Lett, 2025, 134: 096901. DOI: 10.1103/physrevlett.134.096901
 
-[19] Basnet R, Upreti D, Patel T, et al. Field-induced spin polarization in lightly Cr-substituted layered antiferromagnet NiPS₃. Phys Rev Mater, 2024, 8: 094413. DOI: 10.1103/physrevmaterials.8.094413
+[19] Ogawa Y, Hayami S. Nonlinear piezomagnetic effects in g-wave altermagnets. Phys Rev B, 2024, 110: 214422. DOI: 10.1103/physrevb.110.214422
 
-[20] Yarmohammadi A, Kovalev V V, Richter M. Floquet-engineered anisotropic magnetoresistance and anomalous Hall effect in 2D d-wave altermagnets. Phys Rev Lett, 2025, 134: 096901. DOI: 10.1103/physrevlett.134.096901
+[20] Ezawa M. Purely electrical detection of the spin-splitting vector in p-wave magnets based on linear and nonlinear conductivities. Phys Rev B, 2024, 110: 104422. DOI: 10.1103/physrevb.110.104422
 
-[21] Yasuda K, Wang X, Watanabe K, et al. Stacking engineering in 2D ferroelectrics. Science, 2021, 372: 1458–1462. DOI: 10.1126/science.abf0988
+[21] López-Alcalá D, Ruiz A M, Shumilin A, et al. Chemical engineering of altermagnetism in two-dimensional metal-organic frameworks. J Phys Chem C, 2025, 129: 14562–14570. DOI: 10.1021/acs.jpcc.4c08927
 
 [22] Basnet R, Hu J. Understanding and tuning magnetism in van der Waals-type metal thiophosphates. arXiv:2408.00809, 2024.
 
 [23] Zhou G, Li J, Wang D, et al. Ultrafast antiferromagnetic dynamics and magnon-phonon coupling in 2D magnets. Phys Rev Lett, 2024, 133: 126401. DOI: 10.1103/physrevlett.133.126401
 
-[24] Li M, Wang Q, Zhang J, et al. Our group's preliminary results on HHG selection rules in altermagnets. In preparation, 2025.
+[24] Sheikh Rubaiat Ul Haque M J, Cross M J, Rajpurohit S, et al. Terahertz field-induced giant symmetry modulations in a van der Waals antiferromagnet. arXiv:2510.00605, 2025.
 
-[25] Ogawa Y, Hayami S. Nonlinear piezomagnetic effects in g-wave altermagnets. Phys Rev B, 2024, 110: 214422. DOI: 10.1103/physrevb.110.214422
+[25] Liu Z, Chen H, Wang Q, et al. Solid-state high harmonic generation: recent advances and perspectives. Light Sci Appl, 2024, 13: 198. DOI: 10.1038/s41377-024-01523-0
 
-[26] Ezawa M. Purely electrical detection of the spin-splitting vector in p-wave magnets based on linear and nonlinear conductivities. Phys Rev B, 2024, 110: 104422. DOI: 10.1103/physrevb.110.104422
+[26] Basnet R, Kotur K, Rybak M, et al. Controlling magnetic exchange and anisotropy by non-magnetic ligand substitution in layered MPX₃ (M = Ni, Mn; X = S, Se). Phys Rev B, 2022, 106: 144416. DOI: 10.1103/physrevb.106.144416
 
-[27] López-Alcalá D, Ruiz A M, Shumilin A, et al. Chemical engineering of altermagnetism in two-dimensional metal-organic frameworks. J Phys Chem C, 2025, 129: 14562–14570. DOI: 10.1021/acs.jpcc.4c08927
+[30] Sheikh Rubaiat Ul Haque, Cross M J, Rajpurkar S, et al. Terahertz field-induced giant symmetry modulations in a van der Waals antiferromagnet. arXiv:2510.00605, 2025.
 
-[28] Liu Z, Chen H, Wang Q, et al. Solid-state high harmonic generation: recent advances and perspectives. Light Sci Appl, 2024, 13: 198. DOI: 10.1038/s41377-024-01523-0
-
-[29] Basnet R, Upreti D, Patel T, et al. Field-induced spin polarization in lightly Cr-substituted layered antiferromagnet NiPS₃. Phys Rev Mater, 2024, 8: 094413. DOI: 10.1103/physrevmaterials.8.094413
-
-[30] Sheikh Rubaiat Ul Haque M J, Cross M J, Rajpurohit S, et al. Terahertz field-induced giant symmetry modulations in a van der Waals antiferromagnet. arXiv:2510.00605, 2025.
+[34] Sheng C, et al. Ubiquitous van der Waals altermagnetism with sliding/moire ferroelectricity. arXiv:2411.17493, 2024.
