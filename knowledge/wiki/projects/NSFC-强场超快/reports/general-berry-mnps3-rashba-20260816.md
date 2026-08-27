@@ -1,5 +1,5 @@
 ---
-title: "berry-mnps3-rashba — 优化报告"
+title: "课题设想 — 优化报告"
 type: "proposal_reports"
 proposal_id: "general-berry-mnps3-rashba-20260816"
 latest_round: 1
@@ -7,14 +7,14 @@ last_score: 0.51
 critic_rounds: 10
 optimization_reports: 0
 status: "optimizing"
-created: "2026-08-27T16:03:32Z"
-updated: "2026-08-27T16:03:32Z"
+created: "2026-08-27T20:02:11Z"
+updated: "2026-08-27T20:02:11Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
 ---
 
-# berry-mnps3-rashba — 优化报告
+# 课题设想 — 优化报告
 
 **课题 ID**：`general-berry-mnps3-rashba-20260816`
 **累计轮次**：1
