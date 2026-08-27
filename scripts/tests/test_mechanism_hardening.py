@@ -1140,6 +1140,81 @@ class SectionHygieneTests(TestSuite):
             "full_review 标准应含骨架字数上限",
         )
 
+        # ================================================================
+        # 12（v6.9.54）: 写入门卫 + 预算门——不变量从约定到强制
+        # ================================================================
+        # 12.1 预算门：预算内通过 / 超限未收敛拦截 / 渐进收敛放行 / 无预算章节恒过
+        sec2 = self.tmp / "g1" / "04_proposal" / "sections"
+        sec2.mkdir(parents=True)
+        (sec2 / "content.md").write_text("正" * 5000, encoding="utf-8")
+        r = sh.budget_gate(sec2, "content", before_chars=6000)
+        self.assert_true(r["passed"] and r["applies"], "预算内章节应通过")
+
+        (sec2 / "content.md").write_text("正" * 9000, encoding="utf-8")
+        r = sh.budget_gate(sec2, "content", before_chars=9500)
+        self.assert_true(not r["passed"], "超限且净删不足 10% 应拦截")
+        self.assert_true("超限未收敛" in r["reason"], "拦截原因应可读")
+
+        (sec2 / "content.md").write_text("正" * 8100, encoding="utf-8")
+        r = sh.budget_gate(sec2, "content", before_chars=9000)
+        self.assert_true(r["passed"], "超限但净删 ≥10% 应放行（渐进收敛）")
+
+        r = sh.budget_gate(sec2, "references", before_chars=100)
+        self.assert_true(r["passed"] and not r["applies"], "references 无预算应恒通过")
+
+        # 12.2 首轮新建即超限（无基线）→ 拦截
+        sec3 = self.tmp / "g2" / "04_proposal" / "sections"
+        sec3.mkdir(parents=True)
+        (sec3 / "rationale.md").write_text("正" * 11000, encoding="utf-8")
+        r = sh.budget_gate(sec3, "rationale", before_chars=0)
+        self.assert_true(not r["passed"], "新建即超限（无基线）应拦截")
+
+        # 12.3 写入门卫：污染落盘后当场修复（零存活）
+        (sec3 / "scheme.md").write_text(
+            "# 研究方案\n\n## 总体方案\n正文。\n", encoding="utf-8")
+        (sec3 / "full_review.md").write_text(
+            "核查记录 round-9 修复确认表\n" * 30, encoding="utf-8")
+        entries = "\n".join(
+            f"[{i}] Zhang Y. et al. *P{i}*. **Nature {i}, 1 (2020).**"
+            for i in range(1, 31))
+        (sec3 / "references.md").write_text(
+            "# 参考文献\n\n" + entries +
+            "\n\n## §D 映射表\n\n| [CITE:a] | 1 | 2 | x |\n| [CITE:b] | 2 | 3 | y |\n"
+            "| [CITE:c] | 3 | 4 | z |\n", encoding="utf-8")
+        g = sh.guard_written_artifacts(self.tmp / "g2")
+        self.assert_true(
+            any("full_review" in x for x in g["repaired"]),
+            "门卫应修复 full_review 污染",
+        )
+        self.assert_true(
+            any("references" in x for x in g["repaired"]),
+            "门卫应剥离 references 工作日志",
+        )
+        fr3 = (sec3 / "full_review.md").read_text(encoding="utf-8")
+        ref3 = (sec3 / "references.md").read_text(encoding="utf-8")
+        self.assert_true("round-9" not in fr3, "门卫后骨架应无污染")
+        self.assert_true("[CITE:" not in ref3 and "[30]" in ref3,
+                         "门卫后文献应无损且无工作日志")
+
+        # 12.4 源码守卫：executor 接入门卫与预算门
+        exec_src = (Path(__file__).parent.parent / "lifecycle" / "executor.py").read_text(encoding="utf-8")
+        self.assert_true(
+            "guard_written_artifacts(prop_dir)" in exec_src,
+            "writer 成功后应执行写入门卫",
+        )
+        self.assert_true(
+            "budget_gate(_sections_dir, section_key, before_chars)" in exec_src,
+            "writer 后应执行预算门判定",
+        )
+        self.assert_true(
+            "and budget_ok" in exec_src,
+            "section_passed 应纳入预算门",
+        )
+        self.assert_true(
+            "budget_gate_passed" in exec_src,
+            "预算门判定应入 score_history 可观测",
+        )
+
 
 def main():
     from test_runner import print_report

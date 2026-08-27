@@ -49,6 +49,18 @@ try:
 except Exception:
     _log = None
 
+# v6.9.54: 写入门卫 + 预算门——结构不变量从 prompt 约定升级为确定性强制
+try:
+    from proposal_lifecycle.section_hygiene import (
+        budget_gate,
+        guard_written_artifacts,
+        section_char_count,
+    )
+except Exception:  # 守卫模块缺失时 fail-open（不阻塞主管线）
+    budget_gate = None
+    guard_written_artifacts = None
+    section_char_count = None
+
 
 def pick_next_job(self, proposal_id: str) -> Optional[Dict[str, Any]]:
     """挑选下一个可执行的 pending job（同一 proposal 串行）。"""
@@ -895,6 +907,13 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     sections_obj = ProposalSections(prop_dir / "04_proposal")
     sections_obj.ensure_split()
     ai_check = self._detect_ai_patterns(prop_dir, sections_obj)
+    # v6.9.54: 预算门基线——writer 写入前记录聚焦章节字数，
+    # 写入后据此判定"预算内 或 本轮净删 ≥10%"（超限章节渐进收敛）。
+    _sections_dir = prop_dir / "04_proposal" / "sections"
+    before_chars = (
+        section_char_count(_sections_dir, section_key)
+        if section_char_count else None
+    )
     # v6.9.47: 章节级基线——writer 每轮只修聚焦章节，全局口径会被其余两章
     # 稀释（单章节修复完美，全局天花板仍不动，复检误判）。正文章节 job
     # 额外记录该章节自身的原始天花板作为复检归因基线。
@@ -920,6 +939,41 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
     )
     if not writer_result.get("success"):
         return {"success": False, "error": writer_result.get("error", "writer 失败")}
+
+    # v6.9.54: 写入门卫——writer 落盘后、job 判定继续之前，确定性修复
+    # 结构污染（references 工作日志剥离 / full_review 骨架重写）。
+    # 根治点：污染在数据域的存活时间为零，不再依赖下一轮评审发现或
+    # 人工一次性清理（v6.9.53 的 apply_all 从此只是历史存量工具）。
+    if guard_written_artifacts:
+        try:
+            guard_result = guard_written_artifacts(prop_dir)
+            for item in guard_result.get("repaired", []):
+                if _log:
+                    _log.info(f"[{proposal_id}] 写入门卫已修复: {item}")
+            for err in guard_result.get("errors", []):
+                if _log:
+                    _log.warning(f"[{proposal_id}] 写入门卫异常（fail-open）: {err}")
+        except Exception as e:
+            if _log:
+                _log.warning(f"[{proposal_id}] 写入门卫异常（fail-open）: {e}")
+
+    # v6.9.54: 预算门——超限章节未实质收敛（预算内 或 本轮净删 ≥10%）
+    # 则 section_passed=False。膨胀章节从此无法"通过"、无法晋级。
+    budget_gate_result = None
+    budget_ok = True
+    if budget_gate:
+        try:
+            budget_gate_result = budget_gate(_sections_dir, section_key, before_chars)
+            budget_ok = budget_gate_result.get("passed", True)
+            if not budget_ok and _log:
+                _log.warning(
+                    f"[{proposal_id}] 预算门拦截: {budget_gate_result.get('reason')}"
+                )
+        except Exception as e:
+            if _log:
+                _log.warning(f"[{proposal_id}] 预算门异常（fail-open）: {e}")
+            budget_gate_result = None
+            budget_ok = True
 
     # v6.9.33: writer 后程序化复检——AI 天花板必须提升（防表面修改闭环）
     # 背景：writer prompt 已注入 top_issues 明细，但历史执行不力（moire 案例
@@ -1067,6 +1121,7 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         and len(weak_dims) == 0
         and not report_invalid_reason
         and expression_improved  # v6.9.33: writer 后表达天花板必须提升（防表面修改）
+        and budget_ok  # v6.9.54: 预算门——超限章节未收敛不得通过（防膨胀毕业）
     )
 
     score_before = prop_state.get("last_score", 0.0)
@@ -1094,6 +1149,11 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         "ai_ceiling_after": round(ai_check_after.get("ceiling", 1.0), 3) if ai_check_after else None,
         "expression_improved": expression_improved,
         "expression_not_improved_reason": expression_not_improved_reason,
+        # v6.9.54: 预算门判定入史——超限章节的收敛轨迹可观测
+        "budget_gate_passed": budget_ok,
+        "budget_gate_reason": (
+            budget_gate_result.get("reason") if budget_gate_result else None
+        ),
         "ai_top_issues": (ai_check.get("top_issues") or [])[:6],
         # v6.9.30: 锚点对比结论随轮次入史——范本引导效果可观测
         # （达标/基本接近/差距明显；references 轮为空串）

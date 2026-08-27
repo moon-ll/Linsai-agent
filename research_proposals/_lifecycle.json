@@ -15992,7 +15992,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 阿秒条纹技术：从超短脉冲表征到量子相位测量（手动补注册 2026-08-22）",
       "created_at": "2026-08-22T12:20:08Z",
-      "updated_at": "2026-08-27T01:40:42Z",
+      "updated_at": "2026-08-27T02:03:33Z",
       "optimization_rounds": 7,
       "last_score": 0.575,
       "score_history": [
@@ -18425,12 +18425,12 @@
           "step": "critic",
           "section_key": "rationale",
           "round": 8,
-          "status": "running",
+          "status": "done",
           "depends_on": [],
           "attempts": 0,
           "scheduled_at": "",
           "started_at": "2026-08-27T01:40:42Z",
-          "finished_at": "",
+          "finished_at": "2026-08-27T01:58:15Z",
           "last_error": "",
           "cron_job_id": "",
           "error_history": [
@@ -18448,14 +18448,14 @@
           "step": "gap_identify",
           "section_key": "rationale",
           "round": 8,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r8-rationale-critic"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-27T02:00:46Z",
+          "finished_at": "2026-08-27T02:03:33Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -18889,5 +18889,5 @@
       "negative_feedback_at": "2026-08-26T14:30:17Z"
     }
   },
-  "updated_at": "2026-08-27T01:40:42Z"
+  "updated_at": "2026-08-27T02:03:33Z"
 }

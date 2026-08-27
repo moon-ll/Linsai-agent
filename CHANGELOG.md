@@ -1,5 +1,38 @@
 # 变更记录
 
+## v6.9.54 - 2026-08-27 写入门卫 + 预算门：结构不变量从"prompt 约定"升级为"确定性强制"
+
+背景：用户提出"从根源上杜绝，而不是修修补补"。回溯 v6.9.28 以来的
+全部修复（锚点绑定/超时治理/AI 天花板公平性/章节卫生），反复出现的
+问题共享同一架构缺陷——**结构不变量（文件纯净性/章节体量/语义定位）
+只靠 prompt 红线约定，写入边界完全信任 agent 输出**。违规内容进入
+数据域后跨轮存续，只能靠 critic 事后发现或人工一次性清洗补救，于是
+同类问题反复复发（references §D-F 污染 → full_review 变审计日志 →
+章节无上限膨胀，三代同构问题）。
+
+根治：不变量的执行点从"LLM 自觉 + 事后评审"前移到"写入边界 + 通过
+判定"，全部确定性代码，零 LLM 参与：
+
+- **写入门卫（guard_written_artifacts）**：executor 在 writer 落盘后、
+  job 判定继续之前运行——references 工作日志段落当场剥离迁 05_review/，
+  full_review 核查记录当场迁出并重生骨架。污染在数据域的存活时间为
+  零，从此不再依赖下一轮评审发现；v6.9.53 的 apply_all 退化为历史
+  存量工具。守卫自身异常 fail-open（记录日志不阻塞主管线）。
+- **预算门（budget_gate）**：写入前记录聚焦章节中文字数基线，写入后
+  判定——通过条件为"预算内"或"本轮净删 ≥10%"（超限章节渐进压缩，
+  收敛速率保证单调收敛不死锁：至多 log₁.₁(N/max) 轮）。未收敛则
+  section_passed=False，膨胀章节无法"通过"、无法晋级 pending_review。
+  判定结果（budget_gate_passed/reason）入 score_history 可观测。
+- **无预算章节**（references）恒通过；新建即超限（无基线）拦截；
+  预算门异常 fail-open。
+
+- 接入点：executor._run_writer_step——before_chars 基线捕获 →
+  writer 成功 → guard_written_artifacts → budget_gate →
+  section_passed 纳入 budget_ok。
+- 测试：SectionHygieneTests 扩展至 33 断言（12.1-12.4：预算门四象限
+  判定/新建超限拦截/门卫当场修复零存活/文献无损/executor 源码守卫）。
+- 验证：138/138 → 152/152；self_test --module 1146/1146 全绿。
+
 ## v6.9.53 - 2026-08-27 章节卫生治理：full_review 骨架化 + references 存量清洗 + 章节字数预算
 
 背景：分章节评审只限制了"单次评审读哪些章节"，没有限制章节本身的

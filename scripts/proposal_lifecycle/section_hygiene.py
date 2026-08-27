@@ -329,6 +329,104 @@ def strip_references_worklog(prop_dir: Path, dry_run: bool = False) -> Optional[
 
 
 # ---------------------------------------------------------------------------
+# ⑥ 写入门卫 + 预算门（v6.9.54 根治层）
+#
+# 根源：结构不变量此前只靠 prompt 红线约定，写入边界完全信任 agent 输出，
+# 违规内容进入数据域后跨轮存续，只能一次性清洗补救。
+# 根治：不变量从"约定"变"强制"——
+#   - guard_written_artifacts：writer 每次落盘后立即确定性修复污染，
+#     污染在数据域的存活时间为零（守卫在 job 判 done 之前运行）；
+#   - budget_gate：超限章节未实质收敛（预算内 或 本轮净删 ≥10%）则
+#     section_passed=False——膨胀章节无法"通过"、无法晋级。10% 收敛
+#     速率保证单调收敛（至多 log₁.₁(N/max) 轮），不会死锁。
+# ---------------------------------------------------------------------------
+
+# 预算门收敛速率：超限章节本轮必须净删的比例（相对本轮初始字数）
+BUDGET_GATE_REDUCTION_RATIO = 0.10
+
+
+def guard_written_artifacts(prop_dir: Path) -> Dict[str, Any]:
+    """写入门卫：writer 落盘后立即执行确定性修复（幂等）。
+
+    在 executor 判定 writer job 成功之前调用：
+    1. references.md 出现工作日志段落 → 剥离迁 05_review/（条目无损）；
+    2. full_review.md 出现核查记录/超骨架上限 → 迁 05_review/ 并重写骨架。
+
+    污染从"跨轮存续、事后清理"变为"当轮清除、零存活"。
+
+    Returns:
+        {"repaired": [修复描述...], "errors": [异常描述...]}
+    """
+    result: Dict[str, Any] = {"repaired": [], "errors": []}
+    try:
+        r1 = migrate_full_review_record(prop_dir, dry_run=False)
+        if r1:
+            result["repaired"].append(f"full_review 骨架重写（记录迁 {Path(r1).name}）")
+    except Exception as e:  # 守卫自身故障不阻塞 job（fail-open + 记录）
+        result["errors"].append(f"full_review guard: {e}")
+    try:
+        r2 = strip_references_worklog(prop_dir, dry_run=False)
+        if r2:
+            result["repaired"].append(f"references 工作日志剥离（迁 {Path(r2).name}）")
+    except Exception as e:
+        result["errors"].append(f"references guard: {e}")
+    return result
+
+
+def section_char_count(sections_dir: Path, section_key: str) -> int:
+    """读取章节当前中文字数；文件不存在返回 0。"""
+    p = sections_dir / f"{section_key}.md"
+    if not p.exists():
+        return 0
+    return _cn_chars(p.read_text(encoding="utf-8"))
+
+
+def budget_gate(
+    sections_dir: Path,
+    section_key: str,
+    before_chars: Optional[int],
+) -> Dict[str, Any]:
+    """预算门：判定本轮写入是否满足字数纪律（确定性，零 LLM）。
+
+    通过条件（满足其一）：
+    ① 写入后字数在预算内；
+    ② 本轮净删减 ≥ before_chars × BUDGET_GATE_REDUCTION_RATIO
+       （超限章节的渐进压缩——每轮至少删 10%，单调收敛不死锁）。
+
+    不适用章节（references 无字数预算）恒通过。
+
+    Args:
+        before_chars: writer 写入前该章节中文字数（None 表示无基线，
+            首轮新建场景按 0 处理）。
+    """
+    if section_key not in SECTION_BUDGETS:
+        return {"applies": False, "passed": True, "chars": None,
+                "max": None, "before": before_chars, "reason": "无预算章节"}
+
+    after = section_char_count(sections_dir, section_key)
+    lo, hi = SECTION_BUDGETS[section_key]
+    if after <= hi:
+        return {"applies": True, "passed": True, "chars": after, "max": hi,
+                "before": before_chars, "reason": "预算内"}
+
+    base = before_chars if before_chars is not None else 0
+    if base > 0 and base - after >= base * BUDGET_GATE_REDUCTION_RATIO:
+        return {"applies": True, "passed": True, "chars": after, "max": hi,
+                "before": before_chars,
+                "reason": f"超限但本轮净删 {base - after} 字（≥10% 渐进收敛）"}
+
+    need = max(1, int(base * BUDGET_GATE_REDUCTION_RATIO)) if base > 0 else after - hi
+    return {
+        "applies": True, "passed": False, "chars": after, "max": hi,
+        "before": before_chars,
+        "reason": (
+            f"超限未收敛：{after} 字 > 预算 {hi} 字，本轮净删 "
+            f"{base - after if base > 0 else 0} 字（要求 ≥{need} 字或降至 {hi} 内）"
+        ),
+    }
+
+
+# ---------------------------------------------------------------------------
 # ⑤ 批量入口与 CLI
 # ---------------------------------------------------------------------------
 
