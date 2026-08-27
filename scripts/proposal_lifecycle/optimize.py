@@ -18,10 +18,13 @@ from proposal_lifecycle.constants import (
     DEFAULT_SCORE_THRESHOLD,
 )
 
-# v6.9.53: 章节卫生——字数预算预检 / full_review 纯净性预检
+# v6.9.53: 章节卫生——体量参考 / full_review 纯净性预检 / 质量缺陷指令
+# v6.9.55: 质量核心——writer 指令从"净删 N 字"（字数是症状）改为
+# 具体缺陷位置（冗余句/无关段——病因），字数降为上下文信号。
 from proposal_lifecycle.section_hygiene import (
     budget_report_text,
     full_review_purity_text,
+    quality_directives_text,
 )
 
 # v6.8.6: 范本写作标杆已提炼嵌入 nsfc-standards.json 的
@@ -907,9 +910,11 @@ class OptimizeMixin:
             ]
             metrics_preflight = _cross_section_metrics_preflight(prop_dir)
             # v6.9.53: 章节字数预算 + full_review 纯净性预检（零 LLM）
+            # v6.9.55: 附冗余/无关程序检测线索——critic 深挖语义层冗余
             budget_preflight = budget_report_text(
                 prop_dir / "04_proposal" / "sections")
             purity_preflight = full_review_purity_text(prop_dir)
+            quality_preflight = quality_directives_text(prop_dir)
             read_instruction = (
                 "【申请书章节文件】\n" +
                 "\n".join(f"- {p}" for p in files_to_read) +
@@ -919,6 +924,8 @@ class OptimizeMixin:
                 "full_review.md 已排除——它是程序维护的逻辑骨架索引，\n"
                 "非申请书内容，其纯净性由下方预检把关。）\n\n"
                 f"【跨章节指标一致性预检（程序完成，请直接采信）】\n{metrics_preflight}\n"
+                f"【跨章节冗余程序检测（程序初筛，请复核语义层并扩展）】\n"
+                f"{quality_preflight if quality_preflight else '（程序未检出归一化重复句——请自行检查改写式复述）'}\n"
                 f"{budget_preflight}"
                 f"{purity_preflight}"
             )
@@ -1674,9 +1681,10 @@ class OptimizeMixin:
             primary_read = str(prop_dir / "04_proposal" / "proposal-draft.md")
 
         # v6.8.6: 强化叙述式写作风格要求 + 去AI味 + 范本对标
-        # v6.9.53: writer 侧字数预算——章节级附聚焦章节量化指令，
-        # full_review 附全章节预算表。超限章节的修复方式从"追加响应"
-        # 转向"压缩重写"（程序复检强制）。
+        # v6.9.53: writer 侧章节卫生注入。
+        # v6.9.55: 质量核心重构——质量指令（具体冗余/无关位置）为主，
+        # 体量参考为辅（纯信息，不含"净删 N 字"式字数指令——字数是
+        # 症状，冗余/无关才是病因）。
         try:
             writer_budget_text = budget_report_text(
                 prop_dir / "04_proposal" / "sections",
@@ -1684,6 +1692,13 @@ class OptimizeMixin:
             )
         except Exception:
             writer_budget_text = ""
+        try:
+            writer_quality_text = quality_directives_text(
+                prop_dir,
+                focus_key=(focus_section["key"] if focus_section else None),
+            )
+        except Exception:
+            writer_quality_text = ""
 
         narrative_requirement = (
             "\n【写作风格要求（必须遵守，对照范本 references/nsfc-templates/）】\n"
@@ -1813,12 +1828,18 @@ class OptimizeMixin:
             f"- full_review.md 同样适用（v6.9.53）：只写全文逻辑骨架（≤3000 字），\n"
             f"  严禁把逐项对照表、处置记录、轮次说明写入该文件。\n"
             f"\n"
-            f"■ 章节字数纪律（v6.9.53，程序复检强制）：\n"
-            f"- 各章节有字数预算（立项依据 5000-8000 / 研究内容 4000-7000 /\n"
-            f"  研究方案 6000-10000，按中文字符计）。\n"
-            f"- 聚焦章节若已超限，本轮必须净删减（压缩重写：删并重复论证、\n"
-            f"  去冗余修饰、细节下沉方法学手册），禁止以追加方式响应评审意见。\n"
-            f"- 修复问题优先用'改写现有句子'而非'新增句子'。\n"
+            f"■ 内容质量纪律（v6.9.55，程序复检强制，字数本身不是判据）：\n"
+            f"- 冗余是质量缺陷：同一论证不在多章节复述（跨章节重复句直接拦截），\n"
+            f"  章节内重复论证合并为一次完整表述；引用其他章节结论用指代\n"
+            f"  （'如 §一所述'），不复述论证过程。\n"
+            f"- 无关内容是质量缺陷：与课题核心科学问题无关联的段落删除，\n"
+            f"  不以'背景知识'名义保留与论证链无关的堆砌——若下方附有\n"
+            f"  '相关性复核线索'，请逐段语义裁决（程序初筛存在误报，\n"
+            f"  核心论证段落保留不动）。\n"
+            f"- 修复问题优先'改写现有句子'而非'新增句子'；细节下沉方法学手册。\n"
+            f"- 论证密集的长文是合格品——只要冗余/无关零命中，不因字数扣分；\n"
+            f"  反之，充满重复的短文同样不合格。质量以密度论，不以字数论。\n"
+            f"{writer_quality_text}"
             f"{writer_budget_text}"
         )
 

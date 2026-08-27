@@ -1058,14 +1058,15 @@ class SectionHygieneTests(TestSuite):
         sec = self.tmp / "04_proposal" / "sections"
         sec.mkdir(parents=True)
 
-        # 11.1 预算报告：超限/达标判定 + 量化指令
+        # 11.1 体量参考报告：分级判定 + 偏短提示（v6.9.55 起纯信息性）
         (sec / "rationale.md").write_text("正" * 11000, encoding="utf-8")
         (sec / "content.md").write_text("正" * 5500, encoding="utf-8")
         rep = sh.budget_report(sec)
-        self.assert_true(rep["rationale"]["status"] == "over", "rationale 11000 字应超限")
-        self.assert_true(rep["content"]["status"] == "ok", "content 5500 字应达标")
+        self.assert_true(rep["rationale"]["status"] == "over", "rationale 11000 字应标 over")
+        self.assert_true(rep["content"]["status"] == "ok", "content 5500 字应标 ok")
         txt = sh.budget_report_text(sec, focus_key="rationale")
-        self.assert_true("净删" in txt, "超限聚焦章节应附净删量化指令")
+        self.assert_true("非门限" in txt, "体量表应明示非门限（质量才是判据）")
+        self.assert_true("净删" not in txt, "v6.9.55 起不应输出净删式字数指令")
 
         # 11.2 full_review 迁移 + 骨架重写 + 幂等
         (sec / "scheme.md").write_text(
@@ -1116,8 +1117,8 @@ class SectionHygieneTests(TestSuite):
             "writer 应含 full_review 骨架写法指令",
         )
         self.assert_true(
-            "章节字数纪律" in opt_src and "writer_budget_text" in opt_src,
-            "writer 应含字数纪律与预算量化注入",
+            "内容质量纪律" in opt_src and "writer_quality_text" in opt_src,
+            "writer 应含质量纪律与缺陷指令注入（v6.9.55 质量口径）",
         )
         self.assert_true(
             "full_review.md 同样适用" in opt_src,
@@ -1128,12 +1129,16 @@ class SectionHygieneTests(TestSuite):
         std = json.loads((Path(__file__).parent.parent.parent / "memory" / "nsfc-standards.json").read_text(encoding="utf-8"))
         ss = std["general_principles"]["section_standards"]
         self.assert_true(
-            any("总字数4000-7000" in x for x in ss["content"]),
-            "content 标准应含 4000-7000 字预算",
+            any("参考体量4000-7000" in x for x in ss["content"]),
+            "content 标准应含 4000-7000 参考体量（非门限）",
         )
         self.assert_true(
-            any("总字数6000-10000" in x for x in ss["scheme"]),
-            "scheme 标准应含 6000-10000 字预算",
+            any("参考体量6000-10000" in x for x in ss["scheme"]),
+            "scheme 标准应含 6000-10000 参考体量（非门限）",
+        )
+        self.assert_true(
+            any("字数非门限" in x for x in ss["content"] + ss["scheme"] + ss["rationale"]),
+            "standards 应明示质量核心口径（字数非门限）",
         )
         self.assert_true(
             any("3000" in x for x in ss["full_review"]),
@@ -1141,35 +1146,84 @@ class SectionHygieneTests(TestSuite):
         )
 
         # ================================================================
-        # 12（v6.9.54）: 写入门卫 + 预算门——不变量从约定到强制
+        # 12（v6.9.54 引入，v6.9.55 质量核心重构）: 写入门卫 + 质量门
+        # 拦截判据：冗余（跨章节/章节内重复）与无关内容——字数仅上下文
         # ================================================================
-        # 12.1 预算门：预算内通过 / 超限未收敛拦截 / 渐进收敛放行 / 无预算章节恒过
+        # 12.1 质量门核心语义：超限但无缺陷 = 实质性长文 → 放行
         sec2 = self.tmp / "g1" / "04_proposal" / "sections"
         sec2.mkdir(parents=True)
-        (sec2 / "content.md").write_text("正" * 5000, encoding="utf-8")
-        r = sh.budget_gate(sec2, "content", before_chars=6000)
-        self.assert_true(r["passed"] and r["applies"], "预算内章节应通过")
+        long_unique = "、".join(f"不同论证句编号{i}涉及HHG谱学机制差异分析" for i in range(500))
+        (sec2 / "content.md").write_text(long_unique, encoding="utf-8")
+        r = sh.quality_gate(sec2, "content", before_chars=0, prop_dir=self.tmp / "g1")
+        self.assert_true(
+            r["passed"] and r["over_budget"],
+            "超参考体量但冗余/无关零命中应放行（实质性长文）",
+        )
+        self.assert_true("实质性长文" in r["reason"], "放行理由应说明密度合格")
 
-        (sec2 / "content.md").write_text("正" * 9000, encoding="utf-8")
-        r = sh.budget_gate(sec2, "content", before_chars=9500)
-        self.assert_true(not r["passed"], "超限且净删不足 10% 应拦截")
-        self.assert_true("超限未收敛" in r["reason"], "拦截原因应可读")
+        # 12.2 跨章节重复句（归一化相同）→ 拦截
+        dup_sentence = "该体系的Floquet能带工程调控HHG产额的机制已被多组实验证实并形成共识"
+        (sec2 / "rationale.md").write_text(
+            "立项依据首段。" + dup_sentence + "。补充论述一。", encoding="utf-8")
+        (sec2 / "scheme.md").write_text(
+            "方案首段。" + dup_sentence + "。补充论述二。", encoding="utf-8")
+        r = sh.quality_gate(sec2, "scheme", before_chars=100, prop_dir=self.tmp / "g1")
+        self.assert_true(not r["passed"], "跨章节重复句应拦截（NSFC 评审红线）")
+        self.assert_true("跨章节重复句" in r["reason"], "拦截理由应指向跨章节重复")
 
-        (sec2 / "content.md").write_text("正" * 8100, encoding="utf-8")
-        r = sh.budget_gate(sec2, "content", before_chars=9000)
-        self.assert_true(r["passed"], "超限但净删 ≥10% 应放行（渐进收敛）")
-
-        r = sh.budget_gate(sec2, "references", before_chars=100)
-        self.assert_true(r["passed"] and not r["applies"], "references 无预算应恒通过")
-
-        # 12.2 首轮新建即超限（无基线）→ 拦截
+        # 12.3 章节内成片重复（≥3 次相同句）→ 拦截
         sec3 = self.tmp / "g2" / "04_proposal" / "sections"
         sec3.mkdir(parents=True)
-        (sec3 / "rationale.md").write_text("正" * 11000, encoding="utf-8")
-        r = sh.budget_gate(sec3, "rationale", before_chars=0)
-        self.assert_true(not r["passed"], "新建即超限（无基线）应拦截")
+        rep_sent = "通过双色场相位控制可以实现量子几何张量分量的选择性激发与读出验证"
+        (sec3 / "rationale.md").write_text(
+            ("开场。" + rep_sent + "。") * 4, encoding="utf-8")
+        (sec3 / "content.md").write_text("内容章独立。", encoding="utf-8")
+        (sec3 / "scheme.md").write_text("方案章独立。", encoding="utf-8")
+        r = sh.quality_gate(sec3, "rationale", before_chars=100, prop_dir=self.tmp / "g2")
+        self.assert_true(not r["passed"], "章节内重复论证 ≥3 组应拦截")
+        self.assert_true("章节内重复" in r["reason"], "拦截理由应指向章节内重复")
 
-        # 12.3 写入门卫：污染落盘后当场修复（零存活）
+        # 12.4 无关内容：程序不拦截（语义判断交 LLM），但产生复核线索
+        sec4 = self.tmp / "general-hhg-floquet-test-20260101" / "04_proposal" / "sections"
+        sec4.mkdir(parents=True)
+        # 核心术语 hhg/floquet；无关段（零术语、句句不同——纯无关场景，
+        # 不混入章节内重复以免同时触发程序化拦截）
+        off_paras = [
+            f"本课题的研究将推动相关领域的发展方向{i}，具有重要的理论意义与突出的"
+            f"实际应用价值{i}，可以为后续一系列研究工作提供坚实的理论基础和有益的"
+            f"方法学参考，也能够为同领域其他课题组开展类似探索提供可借鉴的技术路线"
+            f"与数据分析范式，从而在更广泛的层面上促进该方向的持续发展与深化，"
+            f"并为跨学科的方法迁移与理论融合创造切实可行的条件与新的可能性。"
+            for i in range(1, 7)
+        ]
+        (sec4 / "content.md").write_text("\n\n".join(off_paras), encoding="utf-8")
+        (sec4 / "rationale.md").write_text("HHG 与 Floquet 调控的立项论述。" * 3, encoding="utf-8")
+        (sec4 / "scheme.md").write_text("HHG Floquet 实验方案论述。" * 3, encoding="utf-8")
+        r = sh.quality_gate(sec4, "content", before_chars=0,
+                            prop_dir=self.tmp / "general-hhg-floquet-test-20260101")
+        self.assert_true(
+            r["passed"],
+            "无关内容不程序拦截（语义判断交 LLM，防中文论证段误伤）",
+        )
+        self.assert_true(
+            len(r.get("irrelevant") or []) > 0,
+            "疑似无关段应作为线索携带（供 prompt 注入 LLM 复核）",
+        )
+        dirs_txt = sh.quality_directives_text(
+            self.tmp / "general-hhg-floquet-test-20260101", focus_key="content")
+        self.assert_true(
+            "相关性复核线索" in dirs_txt and "语义裁决" in dirs_txt,
+            "质量指令应含无关段复核线索（LLM 裁决口径）",
+        )
+
+        # 12.5 干净章节 → 通过；references 恒通过
+        r = sh.quality_gate(sec4, "scheme", before_chars=None,
+                            prop_dir=self.tmp / "general-hhg-floquet-test-20260101")
+        self.assert_true(r["passed"], "干净章节应通过质量门")
+        r = sh.quality_gate(sec4, "references", before_chars=100, prop_dir=None)
+        self.assert_true(r["passed"], "references 无体量参考应恒通过")
+
+        # 12.6 写入门卫：污染落盘后当场修复（零存活）
         (sec3 / "scheme.md").write_text(
             "# 研究方案\n\n## 总体方案\n正文。\n", encoding="utf-8")
         (sec3 / "full_review.md").write_text(
@@ -1196,23 +1250,43 @@ class SectionHygieneTests(TestSuite):
         self.assert_true("[CITE:" not in ref3 and "[30]" in ref3,
                          "门卫后文献应无损且无工作日志")
 
-        # 12.4 源码守卫：executor 接入门卫与预算门
+        # 12.7 源码守卫：executor 接入门卫与质量门（v6.9.55 质量口径）
         exec_src = (Path(__file__).parent.parent / "lifecycle" / "executor.py").read_text(encoding="utf-8")
         self.assert_true(
             "guard_written_artifacts(prop_dir)" in exec_src,
             "writer 成功后应执行写入门卫",
         )
         self.assert_true(
-            "budget_gate(_sections_dir, section_key, before_chars)" in exec_src,
-            "writer 后应执行预算门判定",
+            "quality_gate(" in exec_src,
+            "writer 后应执行质量门判定",
         )
         self.assert_true(
-            "and budget_ok" in exec_src,
-            "section_passed 应纳入预算门",
+            "and quality_ok" in exec_src,
+            "section_passed 应纳入质量门",
         )
         self.assert_true(
-            "budget_gate_passed" in exec_src,
-            "预算门判定应入 score_history 可观测",
+            "quality_gate_passed" in exec_src,
+            "质量门判定应入 score_history 可观测",
+        )
+        self.assert_true(
+            "budget_gate(" not in exec_src,
+            "v6.9.55 起字数门应被质量门取代（不得残留）",
+        )
+
+        # 12.8 optimize 源码守卫：质量指令为主、字数为辅
+        opt_src = (Path(__file__).parent.parent / "proposal_lifecycle" / "optimize.py").read_text(encoding="utf-8")
+        self.assert_true(
+            "quality_directives_text" in opt_src,
+            "writer/critic 应注入质量缺陷指令（具体冗余位置）",
+        )
+        self.assert_true(
+            "内容质量纪律" in opt_src and "不以字数论" in opt_src,
+            "writer 纪律段应以质量为核心表述",
+        )
+        self.assert_true(
+            "非门限" in sh.budget_report_text(sec4, focus_key="content")
+            or "非门限" in (sh.budget_report_text(sec4) or ""),
+            "体量表应明示非门限语义",
         )
 
 

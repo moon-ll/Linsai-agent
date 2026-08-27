@@ -49,15 +49,17 @@ try:
 except Exception:
     _log = None
 
-# v6.9.54: 写入门卫 + 预算门——结构不变量从 prompt 约定升级为确定性强制
+# v6.9.54: 写入门卫 + 质量门——结构不变量从 prompt 约定升级为确定性强制
+# v6.9.55: 质量核心重构——拦截判据从字数（症状）改为冗余/无关（病因），
+# 字数降级为上下文信号：实质性长文（无质量缺陷）放行。
 try:
     from proposal_lifecycle.section_hygiene import (
-        budget_gate,
+        quality_gate,
         guard_written_artifacts,
         section_char_count,
     )
 except Exception:  # 守卫模块缺失时 fail-open（不阻塞主管线）
-    budget_gate = None
+    quality_gate = None
     guard_written_artifacts = None
     section_char_count = None
 
@@ -957,23 +959,26 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
             if _log:
                 _log.warning(f"[{proposal_id}] 写入门卫异常（fail-open）: {e}")
 
-    # v6.9.54: 预算门——超限章节未实质收敛（预算内 或 本轮净删 ≥10%）
-    # 则 section_passed=False。膨胀章节从此无法"通过"、无法晋级。
-    budget_gate_result = None
-    budget_ok = True
-    if budget_gate:
+    # v6.9.55: 质量门（重构自预算门）——拦截冗余/无关这两类真质量缺陷：
+    # 跨章节重复句（评审红线）、章节内成片重复论证、与课题核心术语
+    # 脱钩的无关段落。字数超限不独立拦截——无缺陷命中的实质性长文放行
+    # （字数是症状，冗余/无关才是病因）。未通过则 section_passed=False。
+    quality_gate_result = None
+    quality_ok = True
+    if quality_gate:
         try:
-            budget_gate_result = budget_gate(_sections_dir, section_key, before_chars)
-            budget_ok = budget_gate_result.get("passed", True)
-            if not budget_ok and _log:
+            quality_gate_result = quality_gate(
+                _sections_dir, section_key, before_chars, prop_dir=prop_dir)
+            quality_ok = quality_gate_result.get("passed", True)
+            if not quality_ok and _log:
                 _log.warning(
-                    f"[{proposal_id}] 预算门拦截: {budget_gate_result.get('reason')}"
+                    f"[{proposal_id}] 质量门拦截: {quality_gate_result.get('reason')}"
                 )
         except Exception as e:
             if _log:
-                _log.warning(f"[{proposal_id}] 预算门异常（fail-open）: {e}")
-            budget_gate_result = None
-            budget_ok = True
+                _log.warning(f"[{proposal_id}] 质量门异常（fail-open）: {e}")
+            quality_gate_result = None
+            quality_ok = True
 
     # v6.9.33: writer 后程序化复检——AI 天花板必须提升（防表面修改闭环）
     # 背景：writer prompt 已注入 top_issues 明细，但历史执行不力（moire 案例
@@ -1121,7 +1126,7 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         and len(weak_dims) == 0
         and not report_invalid_reason
         and expression_improved  # v6.9.33: writer 后表达天花板必须提升（防表面修改）
-        and budget_ok  # v6.9.54: 预算门——超限章节未收敛不得通过（防膨胀毕业）
+        and quality_ok  # v6.9.55: 质量门——冗余/无关缺陷未修复不得通过（防膨胀毕业）
     )
 
     score_before = prop_state.get("last_score", 0.0)
@@ -1149,10 +1154,13 @@ def _run_writer_step(self, proposal_id: str, job: Dict[str, Any]) -> Dict[str, A
         "ai_ceiling_after": round(ai_check_after.get("ceiling", 1.0), 3) if ai_check_after else None,
         "expression_improved": expression_improved,
         "expression_not_improved_reason": expression_not_improved_reason,
-        # v6.9.54: 预算门判定入史——超限章节的收敛轨迹可观测
-        "budget_gate_passed": budget_ok,
-        "budget_gate_reason": (
-            budget_gate_result.get("reason") if budget_gate_result else None
+        # v6.9.55: 质量门判定入史——冗余/无关缺陷与收敛轨迹可观测
+        "quality_gate_passed": quality_ok,
+        "quality_gate_reason": (
+            quality_gate_result.get("reason") if quality_gate_result else None
+        ),
+        "quality_over_budget": (
+            quality_gate_result.get("over_budget") if quality_gate_result else None
         ),
         "ai_top_issues": (ai_check.get("top_issues") or [])[:6],
         # v6.9.30: 锚点对比结论随轮次入史——范本引导效果可观测

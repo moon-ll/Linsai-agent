@@ -139,33 +139,33 @@ def budget_report(sections_dir: Path) -> Dict[str, Dict[str, int]]:
 
 
 def budget_report_text(sections_dir: Path, focus_key: Optional[str] = None) -> str:
-    """生成字数预算预检文本（critic 直接采信 / writer 量化指令）。"""
+    """生成章节体量上下文文本（v6.9.55 起纯信息性——不作为门限）。
+
+    字数是症状不是判据：本表只提供体量参考，供 writer/critic 定位
+    "是否有冗余嫌疑"；真正的拦截与修复指令由质量检测器
+    （detect_redundancy / detect_irrelevance）给出。
+    """
     rep = budget_report(sections_dir)
     if not rep:
         return ""
-    lines = ["【章节字数预算预检（程序完成，请直接采信）】"]
+    lines = ["【章节体量参考（程序统计，非门限——质量缺陷才是判据）】"]
     for sec, r in rep.items():
-        mark = "✓" if r["status"] == "ok" else ("⚠超限" if r["status"] == "over" else "○偏短")
+        mark = "参考上限之上" if r["status"] == "over" else ("偏短" if r["status"] == "under" else "常规区间")
         lines.append(
-            f"- {SECTION_CN.get(sec, sec)}：{r['chars']} 字（预算 {r['min']}-{r['max']}）{mark}"
+            f"- {SECTION_CN.get(sec, sec)}：{r['chars']} 字（参考 {r['min']}-{r['max']}）{mark}"
         )
     over = [s for s, r in rep.items() if r["status"] == "over"]
     if over:
         lines.append(
-            "超限章节必须压缩重写（critical）：删并重复论证、去冗余修饰、"
-            "细节下沉方法学手册，把逐条响应式追加改为改写。禁止再追加新内容。"
+            "体量超出参考区间的章节应优先排查冗余（重复论证/复述其他章节）"
+            "与无关内容——若两类缺陷零命中，属实质性长文，不因字数扣分。"
         )
     if focus_key and focus_key in rep:
         r = rep[focus_key]
-        if r["status"] == "over":
-            lines.append(
-                f"聚焦章节量化指令：{SECTION_CN.get(focus_key, focus_key)} 当前 {r['chars']} 字，"
-                f"本轮必须削减至 ≤{r['max']} 字（净删 ≥{r['chars'] - r['max']} 字）。"
-            )
-        elif r["status"] == "under":
+        if r["status"] == "under":
             lines.append(
                 f"聚焦章节偏短：{SECTION_CN.get(focus_key, focus_key)} 当前 {r['chars']} 字，"
-                f"预算下限 {r['min']} 字，需补足论证而非注水。"
+                f"参考下限 {r['min']} 字，需补足论证而非注水。"
             )
     return "\n".join(lines) + "\n"
 
@@ -329,20 +329,43 @@ def strip_references_worklog(prop_dir: Path, dry_run: bool = False) -> Optional[
 
 
 # ---------------------------------------------------------------------------
-# ⑥ 写入门卫 + 预算门（v6.9.54 根治层）
+# ⑥ 写入门卫 + 质量门（v6.9.54 引入，v6.9.55 重构为质量核心）
 #
-# 根源：结构不变量此前只靠 prompt 红线约定，写入边界完全信任 agent 输出，
-# 违规内容进入数据域后跨轮存续，只能一次性清洗补救。
-# 根治：不变量从"约定"变"强制"——
-#   - guard_written_artifacts：writer 每次落盘后立即确定性修复污染，
-#     污染在数据域的存活时间为零（守卫在 job 判 done 之前运行）；
-#   - budget_gate：超限章节未实质收敛（预算内 或 本轮净删 ≥10%）则
-#     section_passed=False——膨胀章节无法"通过"、无法晋级。10% 收敛
-#     速率保证单调收敛（至多 log₁.₁(N/max) 轮），不会死锁。
+# 设计理念（v6.9.55 校准）：字数是症状，冗余/无关是病因。
+# 一个论证密集的 8500 字章节是优质品，一个充满重复论证的 5500 字章节
+# 才是劣质品——字数门会误伤前者、放过后者。因此：
+#   - guard_written_artifacts：writer 落盘后立即确定性修复结构污染
+#     （references 工作日志 / full_review 核查记录），零存活；
+#   - quality_gate：拦截的是"质量缺陷"本身——
+#       ① 冗余：跨章节重复句（NSFC 评审红线"无跨章节内容重复"）、
+#          章节内成片重复论证；
+#       ② 无关：与课题核心术语脱钩的成片段落（跑题/复制污染）。
+#     字数超限不独立拦截：无冗余命中的超限章节按"实质性长文"放行，
+#     有冗余命中时字数并入放大理由。
 # ---------------------------------------------------------------------------
 
-# 预算门收敛速率：超限章节本轮必须净删的比例（相对本轮初始字数）
+# 预算门收敛速率（仅在有冗余命中时用于量化指令）
 BUDGET_GATE_REDUCTION_RATIO = 0.10
+
+# 冗余检测阈值
+SENT_MIN_CHARS = 20          # 短于 20 字的句子不参与重复判定（易撞车）
+CROSS_DUP_EXACT_LIMIT = 1    # 跨章节归一化完全相同句 ≥1 处即拦截
+WITHIN_DUP_EXACT_LIMIT = 3   # 章节内完全相同句 ≥3 处才拦截（允许必要强调）
+CROSS_DUP_SIM_LIMIT = 2      # 跨章节高相似句（containment>0.85）≥2 处拦截
+PARA_MIN_CHARS = 150         # 无关检测只看 >150 字的实质段落
+IRRELEVANT_RATIO_LIMIT = 0.25  # 疑似无关段落字数占比 >25% 且成片才拦截
+
+# 英文停用词（核心术语提取时排除）
+STOPWORDS_EN = {
+    "the", "and", "for", "with", "from", "that", "this", "these", "those",
+    "are", "was", "were", "has", "have", "had", "can", "will", "would",
+    "using", "used", "use", "based", "which", "into", "such", "than",
+    "then", "also", "between", "through", "under", "over", "above",
+    "where", "when", "how", "why", "what", "not", "but", "all", "any",
+    "one", "two", "three", "each", "other", "more", "most", "some",
+    "our", "its", "their", "been", "being", "both", "via", "per",
+    "within", "without", "toward", "towards", "among", "across",
+}
 
 
 def guard_written_artifacts(prop_dir: Path) -> Dict[str, Any]:
@@ -381,49 +404,318 @@ def section_char_count(sections_dir: Path, section_key: str) -> int:
     return _cn_chars(p.read_text(encoding="utf-8"))
 
 
-def budget_gate(
+# ---------------------------------------------------------------------------
+# 质量缺陷检测器（确定性，零 LLM）
+# ---------------------------------------------------------------------------
+
+def _split_sentences(text: str) -> List[str]:
+    """按中英文句读切句，过滤短句。"""
+    import re
+    raw = re.split(r"[。；？！\n]", text)
+    return [s.strip() for s in raw if len(s.strip()) >= SENT_MIN_CHARS]
+
+
+def _normalize_sentence(s: str) -> str:
+    """归一化：仅保留文字与数字（去标点/空白/格式），小写。"""
+    import re
+    return re.sub(r"[^\w\u4e00-\u9fff]+", "", s).lower()
+
+
+def _token_set(norm: str) -> set:
+    """归一化句的特征集：中文 2-gram + 英文词 + 数字串。"""
+    import re
+    feats = set()
+    # 英文词与数字
+    for w in re.findall(r"[a-z0-9]+", norm):
+        feats.add(w)
+    # 中文 2-gram
+    cn = re.findall(r"[\u4e00-\u9fff]", norm)
+    for i in range(len(cn) - 1):
+        feats.add(cn[i] + cn[i + 1])
+    return feats
+
+
+def _containment(a: set, b: set) -> float:
+    """集合包含度：交集 / 较小集合（子串包含场景比 Jaccard 更合适）。"""
+    if not a or not b:
+        return 0.0
+    return len(a & b) / min(len(a), len(b))
+
+
+def extract_core_terms(prop_dir: Path) -> set:
+    """提取课题核心术语（相关性判定的锚）。
+
+    来源优先级：00_research_idea.md → 00_proposal-brief.md → proposal_id 分词。
+    英文术语直接成词；中文不做分词（零依赖），靠英文术语 + 符号锚定，
+    误伤由"成片才拦截"的保守阈值兜底。
+    """
+    import re as _re
+    terms = set()
+    for part in prop_dir.name.split("-"):
+        if len(part) >= 3 and not part.isdigit() and part not in ("general", "key", "major"):
+            terms.add(part.lower())
+    for fname in ("00_research_idea.md", "00_proposal-brief.md"):
+        p = prop_dir / fname
+        if p.exists():
+            try:
+                text = p.read_text(encoding="utf-8")[:30000]
+            except Exception:
+                continue
+            for w in _re.findall(r"[A-Za-z][A-Za-z-]{2,}", text):
+                wl = w.lower().strip("-")
+                if wl and wl not in STOPWORDS_EN and len(wl) >= 3:
+                    terms.add(wl)
+            break
+    return terms
+
+
+def detect_redundancy(sections_dir: Path) -> Dict[str, List[Dict[str, Any]]]:
+    """冗余检测：章节内重复 + 跨章节重复（NSFC 红线）。
+
+    Returns:
+        {"within": [{section, sentence, count}],
+         "cross": [{sections, sentence, kind}]}  kind=exact|similar
+    """
+    sec_sents: Dict[str, List[str]] = {}
+    for sec in ("rationale", "content", "scheme"):
+        p = sections_dir / f"{sec}.md"
+        if not p.exists():
+            continue
+        sec_sents[sec] = _split_sentences(p.read_text(encoding="utf-8"))
+
+    # 章节内：归一化后完全相同句计数
+    within: List[Dict[str, Any]] = []
+    for sec, sents in sec_sents.items():
+        seen: Dict[str, List[str]] = {}
+        for s in sents:
+            norm = _normalize_sentence(s)
+            if len(norm) < SENT_MIN_CHARS:
+                continue
+            seen.setdefault(norm, []).append(s)
+        for norm, occ in seen.items():
+            if len(occ) >= 2:
+                within.append({"section": sec, "sentence": occ[0][:80], "count": len(occ)})
+
+    # 跨章节：精确匹配（dict）+ 高相似（同长度桶内 containment）
+    cross: List[Dict[str, Any]] = []
+    norm_map: Dict[str, List[str]] = {}
+    for sec, sents in sec_sents.items():
+        for s in sents:
+            norm = _normalize_sentence(s)
+            if len(norm) < SENT_MIN_CHARS:
+                continue
+            norm_map.setdefault(norm, []).append(sec)
+    for norm, secs in norm_map.items():
+        if len(set(secs)) >= 2:
+            cross.append({
+                "sections": sorted(set(secs)),
+                "sentence": norm[:80],
+                "kind": "exact",
+            })
+
+    # 高相似：按长度分桶控制复杂度
+    by_len: Dict[int, List[Tuple[str, str]]] = {}
+    for sec, sents in sec_sents.items():
+        for s in sents:
+            norm = _normalize_sentence(s)
+            if len(norm) < SENT_MIN_CHARS:
+                continue
+            by_len.setdefault(len(norm) // 20, []).append((sec, norm))
+    reported: set = set()
+    for _, items in by_len.items():
+        feats = [(sec, norm, _token_set(norm)) for sec, norm in items]
+        for i in range(len(feats)):
+            for j in range(i + 1, len(feats)):
+                s1, n1, f1 = feats[i]
+                s2, n2, f2 = feats[j]
+                if s1 == s2:
+                    continue  # 跨章节才算（章节内已有精确计数）
+                if n1 == n2 or _containment(f1, f2) > 0.85:
+                    key = (n1[:40], n2[:40])
+                    if key in reported or key[::-1] in reported:
+                        continue
+                    reported.add(key)
+                    cross.append({
+                        "sections": sorted({s1, s2}),
+                        "sentence": f"{n1[:40]} ≈ {n2[:40]}",
+                        "kind": "similar",
+                    })
+
+    exact_n = sum(1 for c in cross if c["kind"] == "exact")
+    sim_n = len(cross) - exact_n
+    if exact_n > CROSS_DUP_EXACT_LIMIT * 3 or sim_n > CROSS_DUP_SIM_LIMIT * 5:
+        cross = cross[:20]  # 输出防爆
+    return {"within": within, "cross": cross}
+
+
+def detect_irrelevance(sections_dir: Path, core_terms: set) -> List[Dict[str, Any]]:
+    """无关内容检测：段落级核心术语命中（保守——成片才升级）。
+
+    Returns:
+        [{section, index, chars, preview}] 疑似无关段落列表。
+    """
+    paras: List[Dict[str, Any]] = []
+    for sec in ("rationale", "content", "scheme"):
+        p = sections_dir / f"{sec}.md"
+        if not p.exists():
+            continue
+        text = p.read_text(encoding="utf-8")
+        lowered = text.lower()
+        offset = 0
+        idx = 0
+        for block in text.split("\n\n"):
+            start = lowered.find(block.lower(), offset)
+            if start >= 0:
+                offset = start + len(block)
+            stripped = block.strip()
+            if len(stripped) < PARA_MIN_CHARS or stripped.startswith(("#", "|", ">")):
+                continue
+            blob = stripped.lower()
+            hits = sum(1 for t in core_terms if t in blob)
+            if hits == 0:
+                paras.append({
+                    "section": sec, "index": idx, "chars": len(stripped),
+                    "preview": stripped[:60],
+                })
+            idx += 1
+    return paras
+
+
+def quality_gate(
     sections_dir: Path,
     section_key: str,
     before_chars: Optional[int],
+    prop_dir: Optional[Path] = None,
 ) -> Dict[str, Any]:
-    """预算门：判定本轮写入是否满足字数纪律（确定性，零 LLM）。
+    """质量门：以质量缺陷为唯一拦截判据（字数仅上下文/放大器）。
 
-    通过条件（满足其一）：
-    ① 写入后字数在预算内；
-    ② 本轮净删减 ≥ before_chars × BUDGET_GATE_REDUCTION_RATIO
-       （超限章节的渐进压缩——每轮至少删 10%，单调收敛不死锁）。
+    程序化拦截（字面确凿，零误伤）：
+    ① 跨章节归一化完全相同句 ≥1 处，或高相似句 ≥2 处（评审红线）；
+    ② 章节内任一句重复 ≥3 次，或 ≥3 组句子各自重复（成片复制）。
 
-    不适用章节（references 无字数预算）恒通过。
+    语义层线索（不拦截，交 LLM 裁决）：
+    - 无关内容检测是启发式（中文密集段落与英文术语表天然低重叠，
+      08-27 实测 40+ 段核心论证被误标），相关性判断属语义判断——
+      疑似无关段落列表注入 critic/writer prompt，由 LLM 复核裁决。
+
+    字数超限不独立拦截——无上述命中的超限章节按"实质性长文"放行。
 
     Args:
-        before_chars: writer 写入前该章节中文字数（None 表示无基线，
-            首轮新建场景按 0 处理）。
+        before_chars: writer 写入前该章节中文字数（诊断上下文）。
+        prop_dir: 课题目录（核心术语提取；None 则跳过无关检测）。
     """
-    if section_key not in SECTION_BUDGETS:
-        return {"applies": False, "passed": True, "chars": None,
-                "max": None, "before": before_chars, "reason": "无预算章节"}
-
     after = section_char_count(sections_dir, section_key)
-    lo, hi = SECTION_BUDGETS[section_key]
-    if after <= hi:
-        return {"applies": True, "passed": True, "chars": after, "max": hi,
-                "before": before_chars, "reason": "预算内"}
+    budget = SECTION_BUDGETS.get(section_key)
+    over_budget = bool(budget and after > budget[1])
 
-    base = before_chars if before_chars is not None else 0
-    if base > 0 and base - after >= base * BUDGET_GATE_REDUCTION_RATIO:
-        return {"applies": True, "passed": True, "chars": after, "max": hi,
-                "before": before_chars,
-                "reason": f"超限但本轮净删 {base - after} 字（≥10% 渐进收敛）"}
+    redundancy = {"within": [], "cross": []}
+    irrelevant: List[Dict[str, Any]] = []
+    try:
+        redundancy = detect_redundancy(sections_dir)
+    except Exception:
+        pass
+    if prop_dir is not None:
+        try:
+            # 无锚定则无法判定相关性——核心术语为空时跳过无关检测，
+            # 避免空集导致"全部段落零命中"的误拦（fail-safe）。
+            terms = extract_core_terms(prop_dir)
+            irrelevant = detect_irrelevance(sections_dir, terms) if terms else []
+        except Exception:
+            irrelevant = []
 
-    need = max(1, int(base * BUDGET_GATE_REDUCTION_RATIO)) if base > 0 else after - hi
+    # 判定 ①：跨章节重复
+    cross_exact = [c for c in redundancy["cross"] if c["kind"] == "exact"]
+    cross_sim = [c for c in redundancy["cross"] if c["kind"] == "similar"]
+    # 判定 ②：章节内重复（聚焦章节自身的）——任一句重复 ≥3 次
+    # 或 ≥3 组不同句子各自重复，均为成片复制信号
+    within_sec = [w for w in redundancy["within"] if w["section"] == section_key]
+    max_repeat = max((w["count"] for w in within_sec), default=0)
+    # 无关段落：语义判断交 LLM，程序只收集线索（见 result["irrelevant"]）
+
+    reasons: List[str] = []
+    if len(cross_exact) >= CROSS_DUP_EXACT_LIMIT:
+        sample = cross_exact[0]["sentence"][:50] if cross_exact else ""
+        reasons.append(f"跨章节重复句 {len(cross_exact)} 处（如：{sample}）")
+    if len(cross_sim) >= CROSS_DUP_SIM_LIMIT:
+        reasons.append(f"跨章节高相似句 {len(cross_sim)} 处")
+    if len(within_sec) >= WITHIN_DUP_EXACT_LIMIT or max_repeat >= WITHIN_DUP_EXACT_LIMIT:
+        sample2 = within_sec[0]["sentence"][:50] if within_sec else ""
+        reasons.append(
+            f"章节内重复论证：{len(within_sec)} 组（最高单句重复 {max_repeat} 次，如：{sample2}）"
+        )
+    # 无关占比不进拦截（语义判断交 LLM）——仅在结果中携带供 prompt 注入
+
+    if reasons:
+        detail = "；".join(reasons)
+        if over_budget:
+            detail += f"。冗余/无关同时导致膨胀：{after} 字（参考体量 ≤{budget[1] if budget else '-'}）"
+        return {
+            "applies": True, "passed": False, "chars": after, "before": before_chars,
+            "over_budget": over_budget,
+            "reason": f"质量缺陷未修复：{detail}",
+            "redundancy": redundancy, "irrelevant": irrelevant,
+        }
+
+    note = ""
+    if over_budget:
+        note = (
+            f"实质性长文放行：{after} 字（参考体量 ≤{budget[1]}），"
+            f"冗余/无关检测零命中——密度合格，字数不作为扣分项"
+        )
     return {
-        "applies": True, "passed": False, "chars": after, "max": hi,
-        "before": before_chars,
-        "reason": (
-            f"超限未收敛：{after} 字 > 预算 {hi} 字，本轮净删 "
-            f"{base - after if base > 0 else 0} 字（要求 ≥{need} 字或降至 {hi} 内）"
-        ),
+        "applies": True, "passed": True, "chars": after, "before": before_chars,
+        "over_budget": over_budget, "reason": note or "质量检测零命中",
+        "redundancy": redundancy, "irrelevant": irrelevant,
     }
+
+
+def quality_directives_text(prop_dir: Path, focus_key: Optional[str] = None) -> str:
+    """writer/critic 质量指令：冗余给处置指令，无关给复核线索（LLM 裁决）。"""
+    sections_dir = prop_dir / "04_proposal" / "sections"
+    if not sections_dir.exists():
+        return ""
+    redundancy = {"within": [], "cross": []}
+    irrelevant: List[Dict[str, Any]] = []
+    try:
+        redundancy = detect_redundancy(sections_dir)
+        terms = extract_core_terms(prop_dir)
+        if terms:
+            irrelevant = detect_irrelevance(sections_dir, terms)
+    except Exception:
+        return ""
+    lines: List[str] = []
+    cross = redundancy["cross"][:6]
+    within = redundancy["within"][:6]
+    if cross:
+        lines.append("【冗余修复指令（程序检测，逐条处置）】")
+        lines.append("以下句子在多个章节重复出现（NSFC 评审红线'无跨章节内容重复'）：")
+        for c in cross:
+            lines.append(f"- [{'/'.join(c['sections'])}] {c['sentence']}")
+        lines.append(
+            "处置：保留最合适章节中的那一份，其余删除或改写为该章节独有的"
+            "视角性引用（如方案引用立项依据结论时只写'如 §一所述'式指代，不复述论证）。"
+        )
+    if focus_key:
+        w = [x for x in within if x["section"] == focus_key][:5]
+        if w:
+            lines.append(f"\n【聚焦章节内重复论证（{focus_key}）】")
+            for x in w:
+                lines.append(f"- 重复 {x['count']} 次：{x['sentence']}")
+            lines.append("处置：合并为一次完整论证，其余删除。")
+    if irrelevant:
+        irr_focus = [p for p in irrelevant if not focus_key or p["section"] == focus_key][:8]
+        if irr_focus:
+            lines.append("\n【相关性复核线索（程序初筛，需你语义裁决）】")
+            lines.append(
+                "以下段落与课题核心术语零重叠。程序无法判断相关性（中文论证段"
+                "天然低术语密度，存在误报），请逐一复核：确属与课题论证链无关的"
+                "内容删除；属核心论证的保留（无需改动措辞）。"
+            )
+            for p in irr_focus:
+                lines.append(f"- [{p['section']} 第{p['index'] + 1}段] {p['preview']}…")
+    if not lines:
+        return ""
+    return "\n".join(lines) + "\n"
 
 
 # ---------------------------------------------------------------------------

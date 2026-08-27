@@ -273,6 +273,36 @@ def print_report(suites: List[TestSuite]):
     print("=" * 60 + "\n")
 
 
+def execute_suite(instance: "TestSuite", name: str, suites: list) -> None:
+    """执行单个测试套件，保证清理与可见性（v6.9.54）。
+
+    此前 setup/run_tests/teardown 直接串联：run_tests 中途抛异常时
+    teardown 被跳过（WebApiSuite 场景下 web_server 子进程泄漏为孤儿，
+    8 月累计 50+ 个），且崩溃套件不进 suites 报告——"全量通过"掩盖
+    了从未跑完的套件。规则：
+    - teardown 放 finally，setup 成功后必然执行；
+    - 崩溃的套件也计入报告，并追加 1 条失败结果（套件完整执行）。
+    """
+    t0 = time.time()
+    crash_msg = ""
+    try:
+        instance.setup()
+        instance.run_tests()
+    except Exception as e:  # noqa: BLE001 —— 崩溃套件必须可见且计入失败
+        crash_msg = f"{type(e).__name__}: {e}"
+        print(f"⚠ 运行 {name} 失败: {crash_msg}")
+        traceback.print_exc()
+    finally:
+        try:
+            instance.teardown()
+        except Exception as e:  # noqa: BLE001 —— 清理失败不能吞掉测试结果
+            print(f"⚠ 清理 {name} 失败: {e}")
+        instance.duration = time.time() - t0
+        if crash_msg:
+            instance.results.append(TestResult("套件完整执行", False, 0.0, crash_msg))
+        suites.append(instance)
+
+
 def run_all() -> int:
     """发现并运行所有测试套件，返回退出码（0=全过）"""
     import importlib
@@ -293,16 +323,9 @@ def run_all() -> int:
             try:
                 if (isinstance(attr, type) and issubclass(attr, TestSuite)
                         and attr is not TestSuite):
-                    instance = attr()
-                    t0 = time.time()
-                    instance.setup()
-                    instance.run_tests()
-                    instance.teardown()
-                    instance.duration = time.time() - t0
-                    suites.append(instance)
+                    execute_suite(attr(), attr_name, suites)
             except Exception as e:
-                print(f"⚠ 运行 {attr_name} 失败: {e}")
-                traceback.print_exc()
+                print(f"⚠ 实例化 {attr_name} 失败: {e}")
 
     print_report(suites)
     return 0 if all(s.summary()["failed"] == 0 for s in suites) else 1

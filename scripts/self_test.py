@@ -143,15 +143,14 @@ def run_tests(filters: Optional[List[str]] = None, web_ci: bool = False) -> Dict
                 try:
                     if (isinstance(attr, type) and issubclass(attr, TestSuite)
                             and attr is not TestSuite):
-                        instance = attr()
-                        t0 = __import__("time").time()
-                        instance.setup()
-                        instance.run_tests()
-                        instance.teardown()
-                        instance.duration = __import__("time").time() - t0
-                        suites.append(instance)
-                except Exception:
-                    pass
+                        # v6.9.54：复用 execute_suite（teardown finally 保护 +
+                        # 崩溃套件计入失败）。此前这里是一份复制调度且
+                        # except Exception: pass——WebApiSuite 因 /api/heartbeat
+                        # 超时崩溃后被静默吞掉：子进程泄漏 + 断言从未计数。
+                        from test_runner import execute_suite
+                        execute_suite(attr(), attr_name, suites)
+                except Exception as e:
+                    print(f"⚠ 实例化 {attr_name} 失败: {e}")
 
     # 汇总
     total_passed = 0

@@ -380,6 +380,34 @@ def _check_lifecycle_signals() -> list[dict]:
 # 自主学习机会检测
 # ---------------------------------------------------------------------------
 
+# 学习机会 TTL 缓存（v6.9.54）：discover_learning_opportunities 内含 arXiv/
+# Wikipedia 外网检索（实测 50s+），而 heartbeat 被前端周期轮询——同步阻塞
+# 既拖慢正式环境心跳，又使 web-ci 隔离测试的 /api/heartbeat 必然超时。
+# 学习机会无实时性诉求，缓存 6h。
+_LEARNING_OPPS_CACHE = _PROJECT_ROOT / "memory" / ".cache" / "learning-opps-cache.json"
+_LEARNING_OPPS_TTL_HOURS = 6
+
+
+def _learning_opps_cache_valid() -> tuple[bool, list]:
+    """检查学习机会缓存是否仍在 TTL 内，返回 (有效, signals)。
+
+    正常结果 TTL 6h；检索超时写入的降级条目 TTL 10 分钟（快速重试）。
+    """
+    cached = _read_json(_LEARNING_OPPS_CACHE, {})
+    checked_at = cached.get("checked_at", "")
+    if not checked_at:
+        return False, []
+    try:
+        ts = datetime.fromisoformat(checked_at.replace("Z", "+00:00"))
+    except ValueError:
+        return False, []
+    ttl = timedelta(minutes=10) if cached.get("degraded") else timedelta(hours=_LEARNING_OPPS_TTL_HOURS)
+    age = datetime.now(timezone.utc) - ts
+    if age >= ttl:
+        return False, []
+    return True, cached.get("signals", [])
+
+
 def _check_learning_opportunities() -> list[dict]:
     """检测自主学习机会，返回信号列表。"""
     signals = []
@@ -412,6 +440,11 @@ def _check_learning_opportunities() -> list[dict]:
     if week_count >= config.get("weekly_quota", 5):
         return signals
 
+    # TTL 缓存命中：跳过外网检索（v6.9.54）
+    valid, cached_signals = _learning_opps_cache_valid()
+    if valid:
+        return cached_signals
+
     # 获取策略阈值
     strategy = config.get("strategy", "balanced")
     thresholds = config.get("thresholds", {"conservative": 0.8, "balanced": 0.5, "aggressive": 0.3})
@@ -430,17 +463,34 @@ def _check_learning_opportunities() -> list[dict]:
         print(f"⚠ 无法导入 external_fetcher: {e}")
         return signals
 
-    # 发现学习机会
-    try:
-        opportunities = ef.discover_learning_opportunities(
+    # 发现学习机会（daemon 线程 + 15s 超时护栏，v6.9.54）：
+    # heartbeat 被前端周期轮询，外网检索慢/挂时不能拖死心跳接口；
+    # 超时写降级缓存（10 分钟 TTL），期间心跳直接返回空信号。
+    result_box: dict = {}
+
+    def _discover():
+        result_box["opps"] = ef.discover_learning_opportunities(
             max_results=3,
-            sources=config.get("sources", ["arxiv", "wikipedia", "raw"])
+            sources=config.get("sources", ["arxiv", "wikipedia", "raw"]),
         )
+
+    import threading
+    worker = threading.Thread(target=_discover, daemon=True)
+    worker.start()
+    worker.join(15)
+    if worker.is_alive():
+        print("⚠ 学习机会检索超时（15s），本次心跳跳过")
+        _write_json(_LEARNING_OPPS_CACHE, {"checked_at": _now_utc(), "signals": [], "degraded": True})
+        return signals
+    try:
+        opportunities = result_box.get("opps")
     except Exception as e:
         print(f"⚠ 学习机会发现失败: {e}")
         return signals
 
     if not opportunities:
+        # 空结果同样写缓存：避免每次心跳都重复失败检索
+        _write_json(_LEARNING_OPPS_CACHE, {"checked_at": _now_utc(), "signals": []})
         return signals
 
     # 取最高分
@@ -468,6 +518,7 @@ def _check_learning_opportunities() -> list[dict]:
         "top_score": overall,
     })
 
+    _write_json(_LEARNING_OPPS_CACHE, {"checked_at": _now_utc(), "signals": signals})
     return signals
 
 

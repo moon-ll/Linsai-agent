@@ -17,6 +17,7 @@ test_web_api.py — Web API 虚拟用户测试套件
 import json
 import os
 import shutil
+import signal
 import socket
 import subprocess
 import sys
@@ -65,6 +66,11 @@ class ApiClient:
                 return e.code, json.loads(raw)
             except Exception:
                 return e.code, raw
+        except (urllib.error.URLError, socket.timeout, ConnectionError, OSError) as e:
+            # 网络层失败（超时/连接拒绝等）→ 返回 0 让断言判失败，
+            # 不让异常炸穿 run_tests 导致整套件崩溃（v6.9.54：
+            # 此前 /api/heartbeat 超时抛 socket.timeout 直接蒸发整套件）
+            return 0, f"网络错误: {type(e).__name__}: {e}"
 
     def get(self, path: str) -> Tuple[int, Any]:
         return self._request("GET", path)
@@ -123,6 +129,71 @@ def _wait_for_server(url: str, timeout: int = 30) -> bool:
     return False
 
 
+def _match_orphan_server(cmdline: str) -> bool:
+    """判断一条 ps command 是否为泄漏的测试 web_server（纯函数，可测）。
+
+    匹配条件（三者同时满足，正式实例无 --root 不会被误伤）：
+    - 命令行含 web_server.py
+    - 带有 --root 参数（仅测试这样启动）
+    - --root 指向 linsai_test_* 临时隔离目录
+    """
+    return ("web_server.py" in cmdline and "--root" in cmdline
+            and "linsai_test_" in cmdline)
+
+
+def _reap_orphan_servers(exclude_pids=()) -> int:
+    """清理孤儿测试 server 进程，返回清理数量（v6.9.54）。
+
+    8 月以来历史泄漏累计 50+ 个（teardown 被跳过的年代遗留），
+    每次运行本套件时自愈清扫一次，防止任何新路径的泄漏累积。
+    """
+    try:
+        out = subprocess.run(
+            ["ps", "-eo", "pid=,command="],
+            capture_output=True, text=True, timeout=10,
+        ).stdout
+    except Exception:
+        return 0
+    killed = 0
+    for line in out.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        pid_s, _, cmd = line.partition(" ")
+        try:
+            pid = int(pid_s)
+        except ValueError:
+            continue
+        if pid in exclude_pids or pid == os.getpid():
+            continue
+        if _match_orphan_server(cmd):
+            try:
+                os.kill(pid, signal.SIGKILL)
+                killed += 1
+            except (ProcessLookupError, PermissionError):
+                pass
+    return killed
+
+
+def _kill_proc_group(proc: subprocess.Popen) -> None:
+    """按进程组终止子进程（SIGTERM → SIGKILL），覆盖孙进程。"""
+    try:
+        pgid = os.getpgid(proc.pid)
+    except ProcessLookupError:
+        return
+    try:
+        os.killpg(pgid, signal.SIGTERM)
+        proc.wait(timeout=5)
+        return
+    except (subprocess.TimeoutExpired, ProcessLookupError):
+        pass
+    try:
+        os.killpg(pgid, signal.SIGKILL)
+        proc.wait(timeout=5)
+    except Exception:
+        pass
+
+
 class WebApiSuite(TestSuite):
     """Web API 虚拟用户测试套件。"""
 
@@ -135,34 +206,52 @@ class WebApiSuite(TestSuite):
 
     def setup(self):
         """创建隔离环境 + 启动 web_server 子进程。"""
+        # 自愈清扫历史泄漏的孤儿测试 server（v6.9.54）
+        reaped = _reap_orphan_servers()
+        if reaped:
+            print(f"○ 清理 {reaped} 个历史泄漏的测试 web_server 进程")
         self.tmp_root = create_isolated_env()
         # 补充 web_server 启动必需的文件（create_isolated_env 不含这些）
         _copy_web_essentials(self.tmp_root)
+        # 关闭自主学习外呼（v6.9.54）：heartbeat 的学习机会检测内含
+        # arXiv/Wikipedia 检索（实测 50s+），CI 测试不应依赖外网
+        # （与"零成本不调 LLM API"原则一致）
+        cfg_path = self.tmp_root / "memory" / "learning-config.json"
+        if cfg_path.exists():
+            try:
+                cfg = json.loads(cfg_path.read_text(encoding="utf-8"))
+                cfg["auto_enabled"] = False
+                cfg_path.write_text(
+                    json.dumps(cfg, ensure_ascii=False, indent=2), encoding="utf-8")
+            except Exception:
+                pass
         self.port = _find_free_port()
         env = dict(os.environ)
         env["PYTHONPATH"] = str(_SCRIPTS_DIR)
         # 屏蔽可能的旧环境变量干扰
         env.pop("MINIMAX_MODEL", None)
+        # start_new_session：子进程独立进程组，teardown 可整组回收（含孙进程）
         self.server_proc = subprocess.Popen(
             [sys.executable, str(_SCRIPTS_DIR / "web_server.py"),
              "--port", str(self.port), "--root", str(self.tmp_root)],
             stdout=subprocess.DEVNULL,
             stderr=subprocess.DEVNULL,
             env=env,
+            start_new_session=True,
         )
         base_url = f"http://127.0.0.1:{self.port}"
         if not _wait_for_server(base_url, timeout=30):
             raise RuntimeError("web_server 启动超时")
-        self.client = ApiClient(base_url, timeout=15)
+        self.client = ApiClient(base_url, timeout=30)
 
     def teardown(self):
         """关闭子进程 + 清理临时目录。"""
         if self.server_proc:
-            self.server_proc.terminate()
-            try:
-                self.server_proc.wait(timeout=5)
-            except subprocess.TimeoutExpired:
-                self.server_proc.kill()
+            _kill_proc_group(self.server_proc)
+            self.server_proc = None
+        # 兜底：按 --root 匹配杀掉本套件遗留的任何 server 进程
+        if self.tmp_root:
+            _reap_orphan_servers()
         if self.tmp_root and self.tmp_root.exists():
             shutil.rmtree(self.tmp_root, ignore_errors=True)
 
