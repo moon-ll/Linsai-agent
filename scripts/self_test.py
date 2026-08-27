@@ -29,6 +29,7 @@ self_test.py — LinSai-CoPilot 内测统一入口
 """
 
 import sys
+import os
 import argparse
 from pathlib import Path
 from typing import List, Dict, Any, Optional
@@ -122,6 +123,11 @@ def run_tests(filters: Optional[List[str]] = None, web_ci: bool = False) -> Dict
         suites = _run_selected(filters)
     else:
         # 全量：通过 test_runner.run_all 的等价逻辑，但收集结果
+        # v6.9.54：--web-ci 全量顺序下标记环境变量——test_proposal_kb_sync
+        # 等套件存在跨套件模块污染（from-import 值绑定绕过 patch，历史上
+        # 曾把测试课题写穿真实 knowledge/），全量模式跳过、单跑/专项验证
+        if web_ci:
+            os.environ["LINSAI_TEST_ORDERED_FULL"] = "1"
         suites = []
         import importlib
         test_dir = _TESTS_DIR
@@ -142,11 +148,14 @@ def run_tests(filters: Optional[List[str]] = None, web_ci: bool = False) -> Dict
                 attr = getattr(mod, attr_name)
                 try:
                     if (isinstance(attr, type) and issubclass(attr, TestSuite)
-                            and attr is not TestSuite):
+                            and attr is not TestSuite
+                            and attr.__module__ == mod_name):
                         # v6.9.54：复用 execute_suite（teardown finally 保护 +
-                        # 崩溃套件计入失败）。此前这里是一份复制调度且
-                        # except Exception: pass——WebApiSuite 因 /api/heartbeat
-                        # 超时崩溃后被静默吞掉：子进程泄漏 + 断言从未计数。
+                        # 崩溃套件计入失败 + 套件间模块卫生；__module__ 过滤
+                        # 防止 from-import 的套件类被重复执行）。此前这里是一
+                        # 份复制调度且 except Exception: pass——WebApiSuite 因
+                        # /api/heartbeat 超时崩溃后被静默吞掉：子进程泄漏 +
+                        # 断言从未计数。
                         from test_runner import execute_suite
                         execute_suite(attr(), attr_name, suites)
                 except Exception as e:

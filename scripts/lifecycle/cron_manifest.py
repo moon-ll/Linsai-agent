@@ -62,6 +62,12 @@ CRON_MANIFEST: Dict[str, Dict[str, Any]] = {
         "purpose": "每周一 15:00 链路复盘",
         "depends": [],
     },
+    "lc-daily-backup": {
+        "schedule": "17 3 * * *",
+        "category": "framework",
+        "purpose": "每日 03:17 用户数据备份（24h 幂等防重 + 轮转保留最近 7 份，v6.9.54）",
+        "depends": [],
+    },
     KB_SYNC_CRON_NAME: {
         "schedule": DEFAULT_KB_SYNC_SCHEDULE,
         "category": "framework",

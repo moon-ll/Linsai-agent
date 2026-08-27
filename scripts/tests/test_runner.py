@@ -202,25 +202,53 @@ def create_isolated_env() -> Path:
     return tmp
 
 
+# patch 注册表（v6.9.54）：记录每个模块被 patch 前的原始属性值，
+# 支持同一进程内多次 patch_module_root 时先还原再打新补丁。
+_PATCH_REGISTRY: dict = {}
+
+
 def patch_module_root(module_name: str, tmp_root: Path):
-    """Monkey-patch 指定模块的 PROJECT_ROOT 指向隔离目录"""
+    """Monkey-patch 指定模块的 PROJECT_ROOT 指向隔离目录。
+
+    v6.9.54 可重入修复：派生路径替换条件是"属性值含真实根字符串"，
+    同一模块被第二个套件 patch 时这些属性已指向上一个套件的隔离根
+    （不含真实根字符串）→ 替换静默失效 → 套件拿到已删除的旧根，
+    relative_to / FileNotFoundError 崩套件（实测：test_idea_review →
+    test_optimize_v6817 → test_proposal_kb_sync 链条只有第一个能跑）。
+    现在先按注册表还原上次 patch 的原始值，再重新替换。
+    """
     import importlib
     mod = importlib.import_module(module_name)
-    # 常见模式：PROJECT_ROOT 全局变量
+
+    # 1. 还原上一次 patch（若有）
+    for attr, old in _PATCH_REGISTRY.pop(module_name, []):
+        try:
+            setattr(mod, attr, old)
+        except Exception:
+            pass
+
+    saved = []  # (attr, old_value)
+
+    # 2. 常见模式：PROJECT_ROOT 全局变量
     if hasattr(mod, "PROJECT_ROOT"):
+        saved.append(("PROJECT_ROOT", getattr(mod, "PROJECT_ROOT")))
         mod.PROJECT_ROOT = tmp_root
     # 常见模式：_get_project_root 函数
     if hasattr(mod, "_get_project_root"):
+        saved.append(("_get_project_root", getattr(mod, "_get_project_root")))
         mod._get_project_root = lambda: tmp_root
-    # 尝试覆盖派生路径
+    # 3. 覆盖派生路径（还原后属性值恢复为真实根，替换条件重新成立）
     for attr in dir(mod):
         val = getattr(mod, attr)
         if isinstance(val, Path) and str(REAL_ROOT) in str(val):
             try:
                 new_path = Path(str(val).replace(str(REAL_ROOT), str(tmp_root)))
+                saved.append((attr, val))
                 setattr(mod, attr, new_path)
             except Exception:
                 pass
+
+    _PATCH_REGISTRY[module_name] = saved
 
 
 def patch_kb_sync_noop(micro_scheduler_module) -> None:
@@ -301,6 +329,24 @@ def execute_suite(instance: "TestSuite", name: str, suites: list) -> None:
         if crash_msg:
             instance.results.append(TestResult("套件完整执行", False, 0.0, crash_msg))
         suites.append(instance)
+        # v6.9.54 模块卫生：多数测试文件用"del sys.modules + 重导入 +
+        # patch_module_root"隔离且不在 teardown 还原——重导入产生的模块
+        # 对象绑定当时的隔离根，泄漏给后续套件（实测使
+        # test_optimize_v6817 拿到已删除的旧根崩套件）。每套件结束后
+        # 弹出 proposal_lifecycle / lifecycle 系（本次确认的污染域），
+        # 强制下一套件从真实根重新导入后再做自己的 patch。
+        # 注意范围：kb_graph/kb_wiki/kb_index/kb_health/knowledge_base
+        # **不可**纳入弹出——它们之间存在大量模块级 from-import 函数
+        # 绑定（如 kb_health 的 from kb_wiki import list_wiki_pages），
+        # 只弹一部分会造成"新旧对象分裂"：测试 patch 新对象而未弹出的
+        # 旧模块仍调用旧对象（实测 KbSubmoduleTests 因此读到真实知识库
+        # 920 节点）。这些 KB 模块由各测试自身 setup/teardown 管理。
+        for mod_name in [
+            m for m in list(sys.modules)
+            if m.startswith(("proposal_lifecycle", "lifecycle"))
+            or m == "lifecycle_cron_framework"
+        ]:
+            sys.modules.pop(mod_name, None)
 
 
 def run_all() -> int:
@@ -321,8 +367,13 @@ def run_all() -> int:
         for attr_name in dir(mod):
             attr = getattr(mod, attr_name)
             try:
+                # v6.9.54：__module__ 过滤——from 别的测试文件 import 进来的
+                # 套件类会被重复执行（在本文件和来源文件各跑一次），叠加
+                # 模块卫生弹出后第二次运行的 setup 假设失效。只运行本文件
+                # 定义的类。
                 if (isinstance(attr, type) and issubclass(attr, TestSuite)
-                        and attr is not TestSuite):
+                        and attr is not TestSuite
+                        and attr.__module__ == mod_name):
                     execute_suite(attr(), attr_name, suites)
             except Exception as e:
                 print(f"⚠ 实例化 {attr_name} 失败: {e}")

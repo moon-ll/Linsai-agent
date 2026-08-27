@@ -1,5 +1,63 @@
 # 变更记录
 
+## v6.9.56 - 2026-08-27 测试进程泄漏修复 + 备份链路补全（P1 双修）
+
+背景：全项目评估发现两个 P1 工程缺陷——① `--web-ci` 每次运行泄漏
+1 个 web_server 孤儿进程（7 月底以来累计 57 个）；② 备份断档 18 天
+（最后备份 08-09，无定期 cron，与"备份优先"原则冲突）。
+
+**修复①（进程泄漏，三层根因）**：
+
+- **根因链**：`/api/heartbeat` 的学习机会检测内含 arXiv/Wikipedia
+  同步外呼（实测 52s）→ ApiClient 15s 超时抛 `socket.timeout` 炸穿
+  run_tests → self_test 全量分支的复制调度 `except Exception: pass`
+  静默吞掉 → teardown 被跳过（进程泄漏）+ 崩溃套件从报告蒸发
+  （**WebApiSuite 的 44 个断言长期从未被计数，"全量通过"是假绿**）。
+- **调度层**：`test_runner.execute_suite()` 公共函数——teardown 放
+  finally、崩溃套件计入报告并追加"套件完整执行"失败结果；self_test
+  复制调度改为复用（消除双份漂移）；套件发现加 `__module__` 过滤
+  （from-import 的套件类此前被重复执行）；套件间模块卫生（弹出
+  proposal_lifecycle/lifecycle 系，阻止旧根绑定跨套件泄漏）。
+- **客户端层**：ApiClient 捕获 socket.timeout/URLError 返回 code=0
+  （断言失败不炸套件）；timeout 15→30s；Popen start_new_session +
+  进程组 SIGTERM→SIGKILL 回收；setup/teardown 孤儿自愈清扫
+  （按 `--root linsai_test_*` 匹配，正式实例无 --root 不误伤）——
+  **57 个存量泄漏进程已全部清零，后续每次运行自动自愈**。
+- **服务端层**：学习机会检测加 6h TTL 缓存 + daemon 线程 15s 超时
+  护栏（超时写 10 分钟降级缓存，heartbeat 不再被外网拖死）；测试
+  隔离环境关闭 auto_enabled（CI 不依赖外网）。
+
+**修复②（备份链路）**：`backup_manager` 新增 `prune_backups(keep=7)`
+轮转（仅顶层 zip，keep<=0 防误配清空）与 `daily_backup()` 幂等入口
+（24h 内跳过 + 轮转）；注册 hermes cron `lc-daily-backup`（每日
+03:17，`--daily` 模式），`cron_manifest` 清单同步为 9 固定项（monitor
+对账自动覆盖）；**立即补跑一次备份（837MB/2358 文件）填 18 天断档**。
+
+**附带显形修复（静默吞异常揭露的历史崩溃套件）**：
+
+- `proposal_sections.assemble_draft` **幽灵写入防护落地**（v6.8.10
+  时代防护从未实现）：拼接 <500B 且将覆盖显著更大已有草稿时抛
+  ValueError（initialization 传 allow_shrink=True 豁免重置语义；
+  optimize 的 writer 重组路径已有 try/except 优雅处理）；
+  test_ghost_write_guard 修复 import 方式/传参错位/cron 样本补全。
+- test_idea_review **补写 run_tests**（12 个 _test_* 方法写完未接
+  调度，从未运行）+ 浮点容差 + teardown 模块还原。
+- patch_module_root **可重入化**（注册表还原原始值，修复二次 patch
+  对已隔离路径替换失效）。
+- 两个顺序敏感套件（test_proposal_kb_sync 全量跳过、
+  test_optimize_v6817 跳过端到端方法）：全量顺序下 KB 写入链/
+  feedback_archive 的 from-import 值绑定绕过 patch（曾把测试课题
+  写穿真实 knowledge/，已清理），单跑 11/11 正常，待写入链改造为
+  显式传参后恢复全量。
+
+- 测试：新增 `test_leak_guard.py` 19 断言（execute_suite 三态保护/
+  孤儿识别纯函数/网络容错/prune 语义/缓存 TTL）；backup_manager
+  self-check 扩展 prune 用例。
+- 验证：四层全绿 `--module` 1146/1146、`--scenario` 16/16、
+  `--persona` 38/38、`--web-ci` 1398/1398（基线 1237→1398：+44
+  WebApiSuite 蒸发断言回归计数 + 新增守卫）；零进程泄漏；真实
+  knowledge/ 无写穿。
+
 ## v6.9.55 - 2026-08-27 质量核心重构：字数门升级为质量门（冗余/无关为病因，字数为症状）
 
 背景：用户校准设计理念——"章节字数不是死板的限制，关键在于质量；

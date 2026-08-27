@@ -54,6 +54,15 @@ class IdeaReviewTests(TestSuite):
     def teardown(self):
         if self.tmp_root and self.tmp_root.exists():
             shutil.rmtree(self.tmp_root, ignore_errors=True)
+        # v6.9.54 现场还原：setup 重导入并 patch 了 proposal_lifecycle 系列
+        # 模块（PROPOSALS_ROOT 等指向本套件的 tmp 根）。teardown 若不清掉
+        # sys.modules，这些绑定会泄漏给后续套件（实测：test_optimize_v6817
+        # 因此拿到已删除的旧隔离根，relative_to 抛 ValueError 崩套件）。
+        for mod_name in [
+            m for m in list(sys.modules)
+            if m == "proposal_lifecycle" or m.startswith(("proposal_lifecycle.", "lifecycle_cron_framework"))
+        ]:
+            sys.modules.pop(mod_name, None)
 
     def _make_controller(self):
         return self.ctrl.LifecycleCronController()
@@ -173,7 +182,12 @@ class IdeaReviewTests(TestSuite):
 """
         score, issues = _parse_idea_review_score(report)
         # 4 个维度均值：(0.80 + 0.60 + 0.70 + 0.90) / 4 = 0.75
-        self.assert_eq(score, 0.75, "无综合评分时取维度均值 0.75")
+        # 浮点容差比较（0.74999... 是二进制浮点正常现象）
+        self.assert_true(
+            abs(score - 0.75) < 1e-9,
+            "无综合评分时取维度均值 0.75",
+            f"实际 {score!r}",
+        )
 
     def _test_detect_defect_empty(self):
         """无缺陷时应返回空字符串。"""
@@ -233,3 +247,21 @@ class IdeaReviewTests(TestSuite):
 
         self.assert_in(STEP_IDEA_REVIEW, _CHAIN_ORDER, "idea_review 在 _CHAIN_ORDER 中")
         self.assert_eq(_CHAIN_ORDER[STEP_IDEA_REVIEW], -1, "idea_review 优先级为 -1（最高）")
+
+    def run_tests(self):
+        """执行全部测试（v6.9.54 补写：此前缺失 run_tests，12 个 _test_*
+        方法写完未接调度，被旧框架的静默吞异常掩盖——从未真正运行过）。"""
+        for name in [
+            "_test_round1_has_idea_review",
+            "_test_round2_no_idea_review",
+            "_test_round2_with_defect_triggers_idea_review",
+            "_test_critic_depends_on_idea_review",
+            "_test_parse_score",
+            "_test_parse_score_fallback",
+            "_test_detect_defect_empty",
+            "_test_detect_defect_vacancy",
+            "_test_detect_defect_overlap",
+            "_test_constants",
+            "_test_chain_order_priority",
+        ]:
+            getattr(self, name)()

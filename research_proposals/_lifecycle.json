@@ -15992,9 +15992,9 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 阿秒条纹技术：从超短脉冲表征到量子相位测量（手动补注册 2026-08-22）",
       "created_at": "2026-08-22T12:20:08Z",
-      "updated_at": "2026-08-27T02:16:49Z",
+      "updated_at": "2026-08-27T02:55:51Z",
       "optimization_rounds": 7,
-      "last_score": 0.575,
+      "last_score": 0.72,
       "score_history": [
         {
           "round": 1,
@@ -16817,6 +16817,33 @@
           ],
           "anchor_conclusion": "",
           "at": "2026-08-26T14:20:08Z"
+        },
+        {
+          "round": 8,
+          "score": 0.72,
+          "dim_scores": {
+            "innovation": 0.8,
+            "feasibility": 0.72,
+            "rigor": 0.6,
+            "expression": 0.74
+          },
+          "weakest_dim": "rigor",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 39,
+          "high_issues": 14,
+          "ai_ceiling": 0.94,
+          "ai_ceiling_after": 0.92,
+          "expression_improved": true,
+          "expression_not_improved_reason": "",
+          "quality_gate_passed": false,
+          "quality_gate_reason": "质量缺陷未修复：跨章节重复句 1 处（如：理论预估该方案可将偶极相位贡献压制至小于2此时脉冲包络信息可以被独立提取）；跨章节高相似句 4 处",
+          "quality_over_budget": false,
+          "ai_top_issues": [
+            "超长句(>120字)：7处（免赔4处），扣0.06"
+          ],
+          "anchor_conclusion": "基本接近",
+          "at": "2026-08-27T02:33:26Z"
         }
       ],
       "section_passes": {
@@ -16830,10 +16857,271 @@
         {
           "severity": "critical",
           "section": "rationale",
+          "description": "### [critical] red_line_volume_page_mismatch — references.md [12] [29] 卷期页错位（R6 残留未修）",
+          "first_seen_round": 7,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "**红线抑制校验**：存在 [critical] indicator_red_lines.consistency_check + no_exaggeration（文献真实性）违规 → 严谨性按 v6.",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "| 严谨性 | 0.60 | 5 critical + 2 high + 4 medium | v6.9.25 纪律：[critical] 红线违规 → 强制 0.6-0.7 区间。C1 [34] 整",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "- long_sentences severe_count=7（免赔 4，罚 0.06）——**唯一触发惩罚项**。本轮独立复核（句号切分、排除标题行）：rationale 单章 0 处 >120 字",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "| 1 | R5 [critical] [33] DOI 格式异常；R7 [critical] [33] 虚构条目 | **已解决 + 历史误报更正** | Crossref 实测 `10.1103/",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "| 2 | R6 [critical] [22] Keldysh INSPIRE URL 错位 | **已解决** | INSPIRE recid 1793133 实测指向 Keldysh \"Ioni",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "| 3 | R6 [critical] [4][11][13][26] 作者列表虚构 | **已解决** | 本轮 Crossref 逐条复核：[4] Schultze M; Fieß M; Karp",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "| 4 | R6 [critical] [12] 页码 025202→025007 | **已解决** | 现条目 025007，Crossref 实测 J Phys Photonics 6: 025",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "| 5 | R7 [critical] [29] 页码 193→250 | **未解决** | Crossref 实测 Light Sci Appl 13 (2024) article-number=",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "| 6 | R7 [critical] 软X射线能区定义跨章不一致 | **已解决（R7 确认）** | rationale L97\"409.7–543 eV\"与 content L29/L41、sc",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "| 7 | R7 [critical] R1 区间/严谨性 0.62（rigor_consistency 残留） | **未解决** | rationale L101\"8%–10%\" vs schem",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 8 | R7 [high] [28] Kuzkova ghost entry | **已解决（删除处置）** | references.md 现无 [28]，正文三章无 [28] 引用，双向核对通",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 9 | R7 [high] rationale §2.3 L31 引用 [33] 编号错位 | **已解决** | references.md 已含 [33] 条目（见 #1），rationale",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 10 | R6 [high] anti_ai_long_sentence（R5 报 6 处） | **rationale 已解决 / 全稿未解决** | rationale 独立复核 0 处 >1",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 11 | R6 [high] redundant_modifiers\"系统\"11 次 | **部分解决** | rationale 降至 7 次，全稿 18 次（M16） |",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 12 | R6 [high] narrative_redundancy §4 L93-L95 双重目标陈述 | **该处已解决，重复病灶转移** | §4 已合并无双重陈述；但 L9↔L25 的",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 13 | R6 [high] novelty_claim 缺检索时间 | **已解决** | L9/L79 均附 2026 年 8 月检索说明 |",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "| 14 | R5 [high] boundary §3.1 装置参数越界 | **已解决** | L67-L75 现为定性描述，无装置参数 |",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "### [critical] red_line_reference_fabrication — references [34] 整条虚构 + 正文零引用（ghost）",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "### [critical] red_line_consistency — R1 修正算法\"工作区间\"三口径矛盾，与检验场景脱节",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "### [critical] citation_misattribution — Schultze[4] 张冠李戴：氩→氖、绝对→相对（两处）",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] rigor_unsourced_contradiction — 国防科大断言无引用 + 同段\"该能区\"指代自相矛盾",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] narrative_redundancy — 章内关键论断逐字级重复",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] narrative_lit_listing — L19 五连文献堆砌段（违反嵌入式引用规范）",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] anti_ai_style — 破折号插入语 13 处（范本 0）",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "### [high] anti_ai_long_sentence — 全稿 7 处 >120 字超长句（程序检测触发，rationale 单章已清零）",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "- 未解决 3 项：[29] 页码（critical）、R1 区间矛盾（critical，取证更完整）、国内断言无引用+指代矛盾（high）。",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "high",
+          "section": "rationale",
+          "description": "- 未解决 3 项：[29] 页码（critical）、R1 区间矛盾（critical，取证更完整）、国内断言无引用+指代矛盾（high）。",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
+          "description": "- 新增 5 项：[34] 虚构+ghost（critical）、Schultze 氩/氖张冠李戴（critical，两处）、[19][20] 错归 SIOM（critical）、L19 堆砌段+破折",
+          "first_seen_round": 8,
+          "last_seen_round": 8,
+          "round_resolved": null,
+          "stale": false
+        },
+        {
+          "severity": "critical",
+          "section": "rationale",
           "description": "### [critical] red_line_doi_suspect — references [33] DOI 格式异常",
           "first_seen_round": 5,
           "last_seen_round": 7,
-          "round_resolved": null,
+          "round_resolved": 8,
           "stale": false
         },
         {
@@ -16842,7 +17130,7 @@
           "description": "| 4 | R5 残留：[high] anti_ai_long_sentence — 6 处 >120 字超长句 | **部分解决** — R6 检测器报 7 处，独立复核后真实仅 2 处（L19 +",
           "first_seen_round": 6,
           "last_seen_round": 7,
-          "round_resolved": null,
+          "round_resolved": 8,
           "stale": false
         },
         {
@@ -16851,7 +17139,7 @@
           "description": "| 5 | R5 残留：[high] redundant_modifiers_density — \"系统\"高频 11 次 | **未解决** — rationale 实测\"系统\" 11 次 + \"完整",
           "first_seen_round": 6,
           "last_seen_round": 7,
-          "round_resolved": null,
+          "round_resolved": 8,
           "stale": false
         },
         {
@@ -16860,7 +17148,7 @@
           "description": "| 6 | R5 残留：[high] narrative_redundancy — §4 L93-L95 双重目标陈述重复 | **已解决** — §4 L93-95 已合并为一段，无重复 |",
           "first_seen_round": 6,
           "last_seen_round": 7,
-          "round_resolved": null,
+          "round_resolved": 8,
           "stale": false
         },
         {
@@ -16869,7 +17157,7 @@
           "description": "| 7 | R5 残留：[high] red_line_novelty_claim — rationale L75\"尚未见报道\"缺检索时间 | **已解决** — L75 + L69 + L79 均有",
           "first_seen_round": 6,
           "last_seen_round": 7,
-          "round_resolved": null,
+          "round_resolved": 8,
           "stale": false
         },
         {
@@ -16878,7 +17166,7 @@
           "description": "| 8 | R5 残留：[high] boundary_content_scheme — rationale §3.1 L71 装置参数越界 | **已解决** — rationale §3.1 L7",
           "first_seen_round": 6,
           "last_seen_round": 7,
-          "round_resolved": null,
+          "round_resolved": 8,
           "stale": false
         },
         {
@@ -16887,7 +17175,7 @@
           "description": "- 严谨性触发 [critical] red_line 抑制：本轮新发现 [critical] rigor_reference_orphan — rationale §2.3 L31 引用 [33]",
           "first_seen_round": 7,
           "last_seen_round": 7,
-          "round_resolved": null,
+          "round_resolved": 8,
           "stale": false
         },
         {
@@ -16896,7 +17184,7 @@
           "description": "| 严谨性（rigor） | 0.20 | **0.62** | 5（2 critical + 1 high + 2 medium） | [critical] rationale §2.3 L31 引",
           "first_seen_round": 7,
           "last_seen_round": 7,
-          "round_resolved": null,
+          "round_resolved": 8,
           "stale": false
         },
         {
@@ -16905,7 +17193,7 @@
           "description": "| 严谨性（rigor） | 0.20 | **0.62** | 5（2 critical + 1 high + 2 medium） | [critical] rationale §2.3 L31 引",
           "first_seen_round": 7,
           "last_seen_round": 7,
-          "round_resolved": null,
+          "round_resolved": 8,
           "stale": false
         },
         {
@@ -16914,7 +17202,7 @@
           "description": "| [critical] rigor_reference_orphan | general_principles.indicator_red_lines.consistency_check（编号 [N",
           "first_seen_round": 7,
           "last_seen_round": 7,
-          "round_resolved": null,
+          "round_resolved": 8,
           "stale": false
         },
         {
@@ -16923,268 +17211,7 @@
           "description": "| [critical] red_line_doi_suspect × 4 条 | general_principles.indicator_red_lines.no_exaggeration（文献真",
           "first_seen_round": 7,
           "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "| [critical] red_line_volume_page_mismatch × 2 条 | general_principles.indicator_red_lines.no_exagger",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "rationale",
-          "description": "| [high] completeness_ghost_entry | general_principles.section_standards.references（每条文献须有正文引用） |",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "| 1 | R5 残留 [critical] red_line_doi_suspect — references [33] DOI 格式异常 | **本轮新发现双向核查盲区** | R6 报告含 [3",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "| 2 | R6 [critical] red_line_doi_suspect — references [22] Keldysh INSPIRE URL 错位 | **未完全解决** | R6 报",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "| 3 | R6 [critical] rigor_consistency — 软 X 射线能区定义跨章不一致 | **已解决（章节内）** | rationale §4 L97 \"软X射线能区 40",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "rationale",
-          "description": "| 9 | R6 [high] completeness_ghost_entry — references [28] Kuzkova 2025 | **未解决** | rationale / cont",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "| 10 | R6 [critical] red_line_doi_suspect — references [4] Goh S J 虚构 + 顺序错位 | **未解决** | CrossRef 实测",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "| 11 | R6 [critical] red_line_doi_suspect — references [11] Plötz → Plach | **未解决** | CrossRef 实测第 3",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "| 12 | R6 [critical] red_line_doi_suspect — references [13] 4 位虚构 co-author | **未解决** | CrossRef 实测仅",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "| 13 | R6 [critical] red_line_doi_suspect — references [26] Ghiassi → Gisselbrecht | **未解决** | Cross",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "| 14 | R6 [critical] red_line_volume_page_mismatch — references [12] 025202 → 025007 | **未解决** | Cro",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "| 15 | R6 [critical] red_line_volume_page_mismatch — references [29] 页码 193 → 250 | **未解决** | CrossR",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "### [critical] rigor_reference_orphan — rationale §2.3 L31 引用 [33] 但 references.md [33] 不存在",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "- 问题：本轮独立 bidirectional check 发现 rationale.md 引用 [33]（25 处 [N] 引用之一），但 references.md 仅含 [1]–[31] 共 2",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "rationale",
-          "description": "- 建议：方案 A（推荐）：将 [33] 重新写入 references.md，文本为 \"[33] Kheifets A, Serov V, Vismarra F, Wörner H J. Rainb",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "### [critical] red_line_volume_page_mismatch — references.md [12] [29] 卷期页错位（R6 残留未修）",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "rationale",
-          "description": "### [high] completeness_ghost_entry — references [28] Kuzkova 2025 arXiv 正文未引用（R6 残留未修）",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "| 关键文献 [33] Kheifets 彩虹检索 | L31（唯一引用） | 0 处 | 0 处 | ⚠️ **rationale 孤儿引用**（[critical] red_line_doi_su",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "rationale",
-          "description": "| 关键文献 [28] Kuzkova | 0 处 | 0 处 | 0 处 | ⚠️ **ghost entry**（[high] completeness_ghost_entry） |",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "| 10 | Kheifets 等[33] 2026 彩虹检索 | rationale L31 | CrossRef: \"Rainbow retrieval of atomic time delays",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "- **[critical] 编号错位 1 处** — rationale §2.3 L31 引用 [33] 但 references.md [33] 不存在（R6 报告漏报，本轮独立双向核查首发现）",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "- **[critical] R6 残留 6 条 references 元数据错位未修** — 4 条作者虚构（[4][11][13][26]）+ 2 条卷期页错位（[12][29]），本轮 Cros",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "rationale",
-          "description": "- **[high] R6 残留 ghost entry 未修** — references [28] Kuzkova 2025 arXiv 正文三章节均未引用",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "理由：① [critical] 编号错位（rationale 引用 [33] 但 references.md 无 [33]）是 R6 报告漏报的关键漏洞，须立即修复；② R6 报告的 6 条 crit",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "- [critical] rationale §2.3 L31 引用 [33] 编号错位（重新写入 references.md [33] 条目）",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "- [critical] references.md [4] / [11] / [13] / [26] 作者列表重写（4 条）",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "- [critical] references.md [12] 卷期页 025202 → 025007",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "critical",
-          "section": "rationale",
-          "description": "- [critical] references.md [29] article-number 193 → 250",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
-          "stale": false
-        },
-        {
-          "severity": "high",
-          "section": "rationale",
-          "description": "- [high] references.md [28] Kuzkova 2025 补引（rationale §2.3 L33）或移除",
-          "first_seen_round": 7,
-          "last_seen_round": 7,
-          "round_resolved": null,
+          "round_resolved": 8,
           "stale": false
         }
       ],
@@ -18482,14 +18509,14 @@
           "step": "lit_read",
           "section_key": "rationale",
           "round": 8,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r8-rationale-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-27T02:20:46Z",
+          "finished_at": "2026-08-27T02:20:46Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -18499,14 +18526,14 @@
           "step": "lit_note",
           "section_key": "rationale",
           "round": 8,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r8-rationale-lit_read"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-27T02:25:46Z",
+          "finished_at": "2026-08-27T02:25:46Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -18516,15 +18543,15 @@
           "step": "writer",
           "section_key": "rationale",
           "round": 8,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-attosecond-streaking-20260822-r8-rationale-critic",
             "general-attosecond-streaking-20260822-r8-rationale-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-27T02:30:47Z",
+          "finished_at": "2026-08-27T02:33:26Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -18534,16 +18561,24 @@
           "step": "critic",
           "section_key": "content",
           "round": 8,
-          "status": "pending",
+          "status": "running",
           "depends_on": [
             "general-attosecond-streaking-20260822-r8-rationale-writer"
           ],
-          "attempts": 0,
+          "attempts": 2,
           "scheduled_at": "",
-          "started_at": "",
+          "started_at": "2026-08-27T02:55:51Z",
           "finished_at": "",
-          "last_error": "",
-          "cron_job_id": ""
+          "last_error": "超时(900s)",
+          "cron_job_id": "",
+          "error_history": [
+            {
+              "at": "2026-08-27T02:50:48Z",
+              "error": "超时(900s)",
+              "attempts": 1
+            }
+          ],
+          "repair_attempts": 1
         },
         {
           "job_id": "general-attosecond-streaking-20260822-r8-content-gap_identify",
@@ -18861,8 +18896,10 @@
       "idea_review_at": "2026-08-23T22:21:18Z",
       "idea_review_passed": true,
       "last_dim_scores": {
-        "rigor": 0.35,
-        "completeness": 0.8
+        "innovation": 0.8,
+        "feasibility": 0.72,
+        "rigor": 0.6,
+        "expression": 0.74
       },
       "degradation_events": [
         {
@@ -18894,5 +18931,5 @@
       "negative_feedback_at": "2026-08-26T14:30:17Z"
     }
   },
-  "updated_at": "2026-08-27T02:16:49Z"
+  "updated_at": "2026-08-27T02:55:51Z"
 }

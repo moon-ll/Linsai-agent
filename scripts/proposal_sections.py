@@ -47,6 +47,10 @@ PROPOSAL_SECTIONS = [
 SECTION_KEYS = [s["key"] for s in PROPOSAL_SECTIONS]
 SECTION_TITLES = [s["title"] for s in PROPOSAL_SECTIONS]
 
+# 幽灵写入防护阈值（v6.9.54）：拼接结果低于此字节数且将覆盖显著更大的
+# 已有草稿时拒绝写入（正常五模块占位重组约 450B，不受影响）
+MIN_ASSEMBLED_DRAFT_BYTES = 500
+
 
 class ProposalSections:
     """管理 proposal 的章节拆分与组装。"""
@@ -171,8 +175,17 @@ class ProposalSections:
         self.assemble_draft()
         return True
 
-    def assemble_draft(self) -> Path:
-        """从 sections/ 组装完整 proposal-draft.md。"""
+    def assemble_draft(self, allow_shrink: bool = False) -> Path:
+        """从 sections/ 组装完整 proposal-draft.md。
+
+        v6.9.54 幽灵写入防护：拼接结果过小且将覆盖显著更大的已有草稿时
+        抛 ValueError（此前该防护从未落地——守护测试 test_ghost_write_guard
+        因 import 错误自写下第一天起就被静默吞掉，从未运行过）。初始化
+        等明确接受重置语义的调用方传 allow_shrink=True 豁免。
+
+        Args:
+            allow_shrink: True 时允许小结果覆盖已有草稿（初始化语义）。
+        """
         parts: List[str] = []
 
         # 1. 读取标题/元信息（从 rationale 文件顶部提取 # 标题和 > 元信息）
@@ -201,6 +214,19 @@ class ProposalSections:
             parts.pop()
 
         draft = "\n".join(parts) + "\n"
+
+        # 4. 幽灵写入防护（v6.9.54）：空/残缺 sections 拼出的小结果
+        #    不得覆盖已有的大草稿（v6.8.10 时代实测：1 字节文件覆盖 73KB 申请书）
+        draft_bytes = len(draft.encode("utf-8"))
+        if (not allow_shrink and draft_bytes < MIN_ASSEMBLED_DRAFT_BYTES
+                and self.draft_path.exists()):
+            existing = self.draft_path.stat().st_size
+            if existing > max(MIN_ASSEMBLED_DRAFT_BYTES, draft_bytes * 2):
+                raise ValueError(
+                    f"拼接结果过小（{draft_bytes} 字节）将覆盖 {existing} 字节的现有草稿，"
+                    "疑似幽灵写入（sections 空/残缺），已拒绝写入"
+                )
+
         self.draft_path.write_text(draft, encoding="utf-8")
         return self.draft_path
 

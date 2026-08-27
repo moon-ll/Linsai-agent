@@ -711,6 +711,12 @@ class ReferencesPreflightTests(TestSuite):
     def teardown(self):
         if self.tmp and self.tmp.exists():
             shutil.rmtree(self.tmp, ignore_errors=True)
+        # v6.9.54 现场还原：_load() 会 del + 重导入
+        # proposal_lifecycle.optimize——重导入时其模块级常量从当时的
+        # patch 根派生。跑完不清理会留给后续套件一个绑定旧根的模块
+        # 对象（实测污染 test_optimize_v6817：standards_path 指向本
+        # 套件根，relative_to 抛 ValueError 崩套件）。
+        sys.modules.pop("proposal_lifecycle.optimize", None)
 
     def _load(self):
         import importlib

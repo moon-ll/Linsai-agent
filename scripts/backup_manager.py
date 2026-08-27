@@ -201,6 +201,54 @@ def auto_backup() -> Optional[Path]:
         return None
 
 
+# 每日备份保留份数（v6.9.54）：单份全量约 0.8GB，7 份 ≈ 5.6GB 上限
+DAILY_BACKUP_KEEP = 7
+
+
+def prune_backups(keep: int = DAILY_BACKUP_KEEP, backups_dir: Optional[Path] = None) -> list:
+    """删除最旧的备份 zip，仅保留最近 keep 份，返回被删除的 Path 列表。
+
+    仅处理 backups/ 顶层的 *.zip；子目录（如 input-chain-fix-20260816）
+    与非 zip 文件不动。keep <= 0 时不删除任何文件（防误配清空）。
+    """
+    if keep <= 0:
+        return []
+    root = backups_dir if backups_dir is not None else BACKUPS_DIR
+    if not root.exists():
+        return []
+    zips = sorted(
+        (p for p in root.glob("*.zip") if p.is_file()),
+        key=lambda p: p.stat().st_mtime,
+        reverse=True,
+    )
+    doomed = zips[keep:]
+    for p in doomed:
+        try:
+            p.unlink()
+        except OSError:
+            pass
+    return doomed
+
+
+def daily_backup(keep: int = DAILY_BACKUP_KEEP) -> dict:
+    """每日备份入口（lc-daily-backup cron 调用，v6.9.54）。
+
+    auto_backup 语义（24h 内已有备份则跳过，幂等防重）+ 轮转清理。
+    背景：备份此前仅靠 copilot_engine 启动时的 auto_backup 与手动触发，
+    2026-08-09 起断档 18 天——与"备份优先"原则冲突。
+
+    Returns:
+        {"backed_up": bool, "path": str, "pruned": int}
+    """
+    path = auto_backup()
+    pruned = prune_backups(keep=keep)
+    return {
+        "backed_up": path is not None,
+        "path": str(path.name) if path else "",
+        "pruned": len(pruned),
+    }
+
+
 def _self_check() -> None:
     """自检：创建→列表→完整性校验→projects 目录验证→清理临时备份。"""
     print("◐ backup_manager 自检...")
@@ -222,6 +270,26 @@ def _self_check() -> None:
     # 清理临时备份
     tmp.unlink()
     assert len(list_backups()) == before, "清理后备份数量异常"
+    # prune_backups（v6.9.54）：临时目录验证轮转保留语义
+    import tempfile
+    with tempfile.TemporaryDirectory() as td:
+        tdir = Path(td)
+        fake = []
+        for i in range(4):
+            p = tdir / f"2026-08-2{i}T00-00-00Z.zip"
+            p.write_bytes(b"fake")
+            import os
+            os.utime(p, (1756000000 + i * 86400, 1756000000 + i * 86400))
+            fake.append(p)
+        (tdir / "keep-me.txt").write_text("非 zip 不动")
+        (tdir / "subdir").mkdir()
+        pruned = prune_backups(keep=2, backups_dir=tdir)
+        assert len(pruned) == 2, f"应清理 2 份，实际 {len(pruned)}"
+        remaining = sorted(p.name for p in tdir.glob("*.zip"))
+        assert len(remaining) == 2, f"应保留 2 份，实际 {remaining}"
+        assert (tdir / "keep-me.txt").exists(), "非 zip 文件被误删"
+        assert (tdir / "subdir").exists(), "子目录被误删"
+        assert prune_backups(keep=0, backups_dir=tdir) == [], "keep<=0 应不删除"
     print("✓ backup_manager 自检通过")
 
 
@@ -239,10 +307,38 @@ def main() -> None:
         help="仅备份指定目录（可选: {}）".format(", ".join(BACKUP_TARGETS)),
     )
     parser.add_argument("--self-check", action="store_true", help="运行自检")
+    parser.add_argument(
+        "--daily",
+        action="store_true",
+        help="每日备份入口（cron 用）：24h 内已有备份则跳过 + 轮转保留最近 {} 份".format(DAILY_BACKUP_KEEP),
+    )
+    parser.add_argument(
+        "--prune",
+        type=int,
+        metavar="N",
+        nargs="?",
+        const=DAILY_BACKUP_KEEP,
+        help="仅执行轮转清理，保留最近 N 份（默认 {}）".format(DAILY_BACKUP_KEEP),
+    )
     args = parser.parse_args()
 
     if args.self_check:
         _self_check()
+        return
+
+    if args.daily:
+        result = daily_backup()
+        if result["backed_up"]:
+            print(f"✓ 每日备份完成: {result['path']}")
+        else:
+            print("○ 24h 内已有备份，跳过")
+        if result["pruned"]:
+            print(f"✓ 轮转清理 {result['pruned']} 份旧备份")
+        return
+
+    if args.prune is not None:
+        pruned = prune_backups(keep=args.prune)
+        print(f"✓ 保留最近 {args.prune} 份，清理 {len(pruned)} 份旧备份")
         return
 
     if args.list:

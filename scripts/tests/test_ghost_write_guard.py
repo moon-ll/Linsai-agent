@@ -47,7 +47,10 @@ class GhostWriteGuardTests(TestSuite):
         sentinel = "# sentinel\n\n已有 73KB 申请书占位，禁止被幽灵写入覆盖。\n" * 50
         draft.write_text(sentinel, encoding="utf-8")
 
-        ps = ProposalSections(prop_dir)
+        # v6.9.54 修正传参：ProposalSections 接受 04_proposal 目录本身
+        # （sections_dir = proposal_dir/sections）。此前误传课题根目录，
+        # draft_path 落在课题根 → sentinel 永远"不存在"，防护分支不可达
+        ps = ProposalSections(prop_dir / "04_proposal")
         raised = False
         msg = ""
         try:
@@ -79,13 +82,19 @@ class GhostWriteGuardTests(TestSuite):
         prop_dir = self.tmp_root / "research_proposals" / "optimizing" / "general-test-normal-20260101"
         sections_dir = prop_dir / "04_proposal" / "sections"
         sections_dir.mkdir(parents=True, exist_ok=True)
-        body = (
-            "## （一）立项依据\n\n"
-            "这是用于回归守护的章节内容，确保 assemble_draft 在内容充足时仍能正确写入。\n"
+        # v6.9.54：样例扩到 >1KB（原样例约 100 字节，连自身断言的
+        # >=1024 字节都不满足——该测试自写下以来从未真正运行过）
+        para = (
+            "强场超快光学以超短激光脉冲与物质相互作用为核心，近年来在阿秒时间尺度 "
+            "的电子动力学观测方面取得一系列突破。本项目拟围绕多通道电离过程中的 "
+            "相位恢复问题，发展兼具时间分辨与能量分辨的联合测量方案，并通过 TDDE "
+            "数值模拟与解析理论相互印证，为下一代阿秒条纹相机提供物理基础。\n\n"
         )
+        body = "## （一）立项依据\n\n" + para * 8
         (sections_dir / "rationale.md").write_text(body, encoding="utf-8")
 
-        ps = ProposalSections(prop_dir)
+        # v6.9.54 修正传参：同上，须传 04_proposal 目录
+        ps = ProposalSections(prop_dir / "04_proposal")
         result = ps.assemble_draft()
         self.assert_true(result.exists(), "正常路径下 assemble_draft 必须返回有效路径")
         size = result.stat().st_size
@@ -102,23 +111,39 @@ class GhostWriteGuardTests(TestSuite):
         检测永远拿到空字符串。修复后必须支持两种键名（last_run 优先）。
         """
         # 直接 monkey-patch hermes_bridge.cron_list_profile 返回 last_run（不 last_run_at）
-        import scripts.lifecycle_monitor as lm_module
+        # v6.9.54 修复导入：scripts.lifecycle_monitor 需要"项目根"在 sys.path，
+        # 而测试运行环境只保证 scripts/ 在 path——改用顶层导入（与其他测试一致）
+        import lifecycle_monitor as lm_module
+
+        # v6.9.54：_check_cron_status 先做拓扑对账（v6.8.54 起清单含 9 个固定
+        # cron），样本必须补全清单，否则先触发 cron_missing 走不到 stale 分支。
+        # lc-micro-scheduler 的 last_run 取 8h 前（动态），确保触发 stale。
+        from datetime import datetime, timedelta, timezone
+        iso = lambda dt: dt.strftime("%Y-%m-%dT%H:%M:%S+00:00")
+        now = datetime.now(timezone.utc)
+        eight_h_ago = iso(now - timedelta(hours=8))
+        now_iso = iso(now)
+
+        def _cron(name, sched, last_run, **extra):
+            d = {"name": name, "next_run": now_iso, "status": "active"}
+            d.update(extra)
+            d["schedule"] = sched
+            if last_run is not None:
+                d["last_run"] = last_run
+            return d
 
         sample_crons = [
-            {
-                "name": "lc-micro-scheduler",
-                # 注意：这里是 hermes_bridge 的真实输出（last_run），不是 last_run_at
-                "last_run": "2026-08-07T15:55:01+00:00",
-                "next_run": "2026-08-08T15:55:01+00:00",
-                "status": "active",
-            },
-            {
-                "name": "lc-hourly-monitor",
-                # 兜底：旧键名也应被识别
-                "last_run_at": "2026-08-08T07:00:00+00:00",
-                "next_run": "2026-08-08T08:00:00+00:00",
-                "status": "active",
-            },
+            _cron("lc-micro-scheduler", "*/5 * * * 1-5", eight_h_ago),
+            # 兜底：旧键名 last_run_at 也应被识别（lc-hourly-monitor 用旧键名）
+            _cron("lc-hourly-monitor", "0 * * * *", None, last_run_at=now_iso),
+            _cron("lc-repair", "0 */6 * * *", now_iso),
+            _cron("lc-daily-orchestrate", "55 8 * * *", now_iso),
+            _cron("lc-prompt-optimize", "0 14 * * *", now_iso),
+            _cron("lc-retrospective", "0 15 * * 1", now_iso),
+            _cron("lc-kb-sync", "40 12 * * *", now_iso),
+            _cron("lc-kb-distill", "50 12 * * *", now_iso),
+            _cron("lc-daily-backup", "17 3 * * *", now_iso),
+            _cron("lc-weekend-weekend-input", "0 9 * * 6", now_iso),
         ]
 
         captured = {}
@@ -143,13 +168,13 @@ class GhostWriteGuardTests(TestSuite):
         )
         # 关键断言：stale 检测必须能从 last_run 字段读到时间戳，
         # 即不能因为字段名错误返回 None 或抛异常。
-        # 当 last_run 在 8h 之前时，应被标记为 stale。
+        # lc-micro-scheduler 的 last_run 设为 8h 前，应被标记为 stale。
         if result is not None and result.get("type") == "cron_stale":
             stale = result.get("stale", [])
             names = [s.split(" (")[0] for s in stale]
             self.assert_true(
                 "lc-micro-scheduler" in names,
-                f"lc-micro-scheduler (last_run=2026-08-07T15:55Z，距离当前 >2h) 必须被检测为 stale，实际: {stale}",
+                f"lc-micro-scheduler (last_run=8h 前，超过 stale 阈值) 必须被检测为 stale，实际: {stale}",
             )
         else:
             self.assert_true(

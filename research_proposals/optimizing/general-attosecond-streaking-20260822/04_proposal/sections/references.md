@@ -46,14 +46,12 @@
 
 [27] Pazourek R, Nagele S, Burgdörfer J. Attosecond chronoscopy of photoemission. Rev Mod Phys, 2015, 87: 765-802. DOI: 10.1103/RevModPhys.87.765
 
-[29] Li X, Liu X, Wang C, Ben S, Zhou S, et al. Coulomb focusing in attosecond angular streaking. Light Sci Appl, 2024, 13: 193. DOI: 10.1038/s41377-024-01600-4
+[29] Li X, Liu X, Wang C, Ben S, Zhou S, et al. Coulomb focusing in attosecond angular streaking. Light Sci Appl, 2024, 13: 250. DOI: 10.1038/s41377-024-01600-4
 
 [30] Ortmann L, Landsman A. Understanding attosecond streaking. Rep Prog Phys, 2024, 87: 086401. DOI: 10.1088/1361-6633/ad6278
 
 [31] Kim H Y, Pi Z, Goulielmakis E. Carrier-envelope-phase-independent field sampling of single-cycle transients using homochromatic attosecond streaking. Opt Lett, 2025, 50: 1093. DOI: 10.1364/ol.543303
 
 [33] Kheifets A, Serov V, Vismarra F, Wörner H J. Rainbow retrieval of atomic time delays in attosecond streaking. Phys Rev A, 2026, 113: 043103. DOI: 10.1103/9jcm-8gd8
-
-[34] Liu Y, Wang J, Chen L, et al. Non-collinear attosecond streaking without the time delay scan. Opt Express, 2023, 31: 6789-6801. DOI: 10.1364/oe.484637
 
 注：编号 [5][7][10][23][28][32] 在早期修订轮次中已删除，对应文献因主题不符或被后续更精确的引用替代。编号缺口不影响正文引用完整性。

@@ -181,7 +181,9 @@ class InitializerMixin:
                 created_placeholders.append(s["key"])
 
         # 重新组装 draft，确保汇总视图与 sections 一致
-        sections.assemble_draft()
+        # allow_shrink=True：初始化语义本就是建立 sections 结构视图
+        # （drafts→optimizing 流转），接受占位重组结果小于原稿
+        sections.assemble_draft(allow_shrink=True)
 
         missing: List[str] = []
         for s in sections.section_map.values():
