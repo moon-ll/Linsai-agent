@@ -75,23 +75,6 @@
 **与本课题（general-berry-mnps3-rashba-20260816）的关联**：该文提供了“非线性光学效应作为交变磁序对称性指纹”的范式——ICME 角度依赖判定 d 波对称性，直接支撑用非线性光学（如 HHG）探测 MnPS₃ 类磁序对称性的研究思路；其 Keldysh 二阶响应框架也可扩展到更高阶非线性过程的分析。
 
 
-## 2603.07490
-
-全文已读取完毕（arXiv HTML 全文 + 元数据 + 参考文献）。以下是结构化笔记。
-
----
-
-# 论文精读笔记：arXiv:2603.07490
-
-**标题**：Spin-selective elliptic optical dichroism and perfectly spin-polarized third-order nonlinear photocurrent in altermagnets（交变磁体中的自旋选择性椭圆光学二向色性与完全自旋极化的三阶非线性光电流）
-
-**作者**：Motohiko Ezawa（东京大学应用物理系，独立作者）
-**发表**：Phys. Rev. B **114**, L111201 (2026)（Letter）；arXiv v1 2026-03-08，v2 2026-06-16；6页3图
-**分类**：cond-mat.mes-hall
-**链接**：[arxiv.org/abs/2603.07490](https://arxiv.org/abs/2603.07490)
-
----
-
 ## 研究问题（Research Question）
 
 论文的核心问题是：$d$ 波交变磁体（altermagnet）能否利用其自旋劈裂且各向异性的 Dirac 能带，实现**完全自旋选择性的光学激发**，并进一步产生**完全自旋极化的光电流**。作者具体追问三个层面：(1) 椭圆偏振光能否在该体系中实现“只激发自旋向上或只激发自旋向下电子”的完美椭圆二向色性（elliptic dichroism）；(2) 能否首次推导出**椭圆偏振光下高阶光电流**的解析公式，并用量子度规（quantum metric）与贝里曲率（Berry curvature）表达；(3) 由于交变磁体具有空间反演对称性，二阶光电流（注入流、位移流）被禁戒，那么三阶“急动电流”（jerk current，$j\propto E^3$）是否成为绝缘相中的**主导电学响应**。中心论点是：$d$ 波交变磁体的 X/Y 谷间完全相反的自旋极化 + 各向异性 Dirac 锥，为光致自旋电子学（photoinduced spintronics）提供了一个无需自旋轨道耦合即可产生 100% 自旋极化电流的理想平台。

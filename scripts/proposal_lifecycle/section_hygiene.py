@@ -385,26 +385,31 @@ def guard_written_artifacts(prop_dir: Path) -> Dict[str, Any]:
 
     在 executor 判定 writer job 成功之前调用：
     1. references.md 出现工作日志段落 → 剥离迁 05_review/（条目无损）；
-    2. full_review.md 出现核查记录/超骨架上限 → 迁 05_review/ 并重写骨架。
+    2. full_review.md 出现核查记录/超骨架上限 → 迁 05_review/ 并重写骨架；
+    3. 阅读笔记同文献重复条目 → 保留最新（v6.9.61）；
+    4. 定向检索产物滚动裁剪至最近 12 个（v6.9.61）；
+    5. 孤儿章节（非白名单 sections 文件）迁出存档（v6.9.61）。
 
-    污染从"跨轮存续、事后清理"变为"当轮清除、零存活"。
+    污染/漂移从"跨轮存续、事后清理"变为"当轮清除、零存活"。
 
     Returns:
         {"repaired": [修复描述...], "errors": [异常描述...]}
     """
     result: Dict[str, Any] = {"repaired": [], "errors": []}
-    try:
-        r1 = migrate_full_review_record(prop_dir, dry_run=False)
-        if r1:
-            result["repaired"].append(f"full_review 骨架重写（记录迁 {Path(r1).name}）")
-    except Exception as e:  # 守卫自身故障不阻塞 job（fail-open + 记录）
-        result["errors"].append(f"full_review guard: {e}")
-    try:
-        r2 = strip_references_worklog(prop_dir, dry_run=False)
-        if r2:
-            result["repaired"].append(f"references 工作日志剥离（迁 {Path(r2).name}）")
-    except Exception as e:
-        result["errors"].append(f"references guard: {e}")
+    guards = (
+        ("full_review", migrate_full_review_record),
+        ("references", strip_references_worklog),
+        ("reading-notes", dedupe_reading_notes),
+        ("targeted", prune_targeted_research),
+        ("orphan-section", handle_orphan_sections),
+    )
+    for name, fn in guards:
+        try:
+            r = fn(prop_dir, dry_run=False)
+            if r:
+                result["repaired"].append(f"[{name}] {r}")
+        except Exception as e:  # 守卫自身故障不阻塞 job（fail-open + 记录）
+            result["errors"].append(f"{name} guard: {e}")
     return result
 
 
@@ -857,27 +862,211 @@ def migrate_methodology_manual(prop_dir: Path, dry_run: bool = False) -> Optiona
 
 
 # ---------------------------------------------------------------------------
+# ⑧ 产物卫生守卫扩展（v6.9.61 第二轮全环节审计）
+#
+# 排查实锤的四处同构问题之三（第四处在 adversarial/monitor.py）：
+#   E. 阅读笔记同文献重复条目——writer 步骤 9b"追加一条记录"无查重，
+#      attosecond 同一 arXiv 文献两条笔记（2608.18905 L1/L103）。
+#      修复：dedupe_reading_notes 按 arXiv ID 分组保留最新。
+#   F. 定向检索产物无界累积——gap-analysis/*.json 与 targeted-research/
+#      lit-gap-*.md 每轮新增从不清（order-param 59+58 个文件），
+#      writer 只读最新一份。修复：滚动裁剪至最近 TARGETED_KEEP_N 个，
+#      旧件移 05_review/.archive-targeted/（不删，数据安全）。
+#   G. 孤儿章节（schema 盲区）——writer 自创非白名单章节文件（new-idea
+#      的 research-foundation.md，2.4KB"研究基础"），组装按
+#      PROPOSAL_SECTIONS 白名单进行 → 内容不进申请书、评审不读，
+#      资产静默丢失。修复：迁 05_review/orphan-section-{key}-{date}.md
+#      存档（内容不丢），writer prompt 加"禁止自创章节"红线。
+# ---------------------------------------------------------------------------
+
+# 定向检索产物保留数（覆盖约 4 轮，writer 只消费最新一份）
+TARGETED_KEEP_N = 12
+
+
+def dedupe_reading_notes(prop_dir: Path, dry_run: bool = False) -> Optional[str]:
+    """阅读笔记去重：同 arXiv ID 的多条笔记保留最新一条。
+
+    条目识别：`## {id}` 二级标题 或 条目内 `**arXiv ID:** {id}` /
+    `arXiv ID: {id}` 字段。保留同 ID 中最后一条（追加序=时间序），
+    其余删除。零 LLM。
+
+    Returns:
+        变更摘要，未触发返回 None。
+    """
+    import re
+    p = prop_dir / "02_literature" / "reading-notes.md"
+    if not p.exists():
+        return None
+    text = p.read_text(encoding="utf-8")
+    lines = text.splitlines(keepends=True)
+
+    # 按 "## " 切条目（保留 preamble）
+    entries: List[Tuple[str, List[str]]] = []
+    preamble: List[str] = []
+    cur_title, cur_lines = None, []
+    for ln in lines:
+        if ln.startswith("## ") and not ln.startswith("### "):
+            if cur_title is not None:
+                entries.append((cur_title, cur_lines))
+            cur_title, cur_lines = ln, []
+        else:
+            if cur_title is None:
+                preamble.append(ln)
+            else:
+                cur_lines.append(ln)
+    if cur_title is not None:
+        entries.append((cur_title, cur_lines))
+    if not entries:
+        return None
+
+    def entry_id(title: str, body: List[str]) -> Optional[str]:
+        m = re.match(r"##\s+(\d{4}\.\d{4,5})", title.strip())
+        if m:
+            return m.group(1)
+        for b in body[:6]:
+            m2 = re.search(r"arXiv\s*ID[：:]\s*\**(\d{4}\.\d{4,5})", b)
+            if m2:
+                return m2.group(1)
+        return None
+
+    seen: Dict[str, int] = {}  # id -> 最后一次出现索引
+    ids: List[Optional[str]] = []
+    for i, (t, b) in enumerate(entries):
+        eid = entry_id(t, b)
+        ids.append(eid)
+        if eid:
+            seen[eid] = i  # 后写覆盖 → 保留最新
+
+    keep_idx = set(range(len(entries)))
+    for eid, last in seen.items():
+        for i, x in enumerate(ids):
+            if x == eid and i != last:
+                keep_idx.discard(i)
+    if len(keep_idx) == len(entries):
+        return None  # 无重复
+
+    removed = len(entries) - len(keep_idx)
+    out_lines = list(preamble)
+    for i in sorted(keep_idx):
+        t, b = entries[i]
+        out_lines.append(t)
+        out_lines.extend(b)
+
+    if dry_run:
+        return f"(dry-run) reading-notes 去重：删除 {removed} 条同文献重复条目"
+    p.write_text("".join(out_lines), encoding="utf-8")
+    return f"reading-notes 去重：删除 {removed} 条重复条目（保留各文献最新一条）"
+
+
+def prune_targeted_research(prop_dir: Path, dry_run: bool = False) -> Optional[str]:
+    """定向检索产物滚动裁剪：每目录保留最近 TARGETED_KEEP_N 个。
+
+    gap-analysis/*.json 与 targeted-research/*.md 每轮新增无清理
+    （实测单课题 59+58 个）。旧件移动（不删除）至
+    05_review/.archive-targeted/，保数据安全。
+
+    Returns:
+        变更摘要，未触发返回 None。
+    """
+    moved = 0
+    archive_dir = prop_dir / "05_review" / ".archive-targeted"
+    for sub, pattern in (("gap-analysis", "*.json"),
+                         ("targeted-research", "lit-gap-*.md")):
+        d = prop_dir / "02_literature" / sub
+        if not d.exists():
+            continue
+        files = sorted(d.glob(pattern),
+                       key=lambda f: f.stat().st_mtime, reverse=True)
+        stale = files[TARGETED_KEEP_N:]
+        if not stale:
+            continue
+        if not dry_run:
+            archive_dir.mkdir(parents=True, exist_ok=True)
+            for f in stale:
+                dest = archive_dir / f"{sub}__{f.name}"
+                if not dest.exists():
+                    f.rename(dest)
+        moved += len(stale)
+    if moved == 0:
+        return None
+    if dry_run:
+        return f"(dry-run) 定向检索产物裁剪：{moved} 个旧件待移 .archive-targeted/"
+    return f"定向检索产物裁剪：{moved} 个旧件移 .archive-targeted/"
+
+
+def handle_orphan_sections(prop_dir: Path, dry_run: bool = False) -> Optional[str]:
+    """孤儿章节守卫：sections/ 下非白名单章节文件迁出存档。
+
+    组装（assemble_draft）按 PROPOSAL_SECTIONS 白名单进行——writer 自创
+    的章节文件（如 research-foundation.md）不进申请书、无评审覆盖，
+    属资产静默丢失。迁至 05_review/orphan-section-{key}-{date}.md，
+    内容不丢，可人工并入正文章节。
+
+    Returns:
+        变更摘要，未触发返回 None。
+    """
+    try:
+        from proposal_sections import SECTION_KEYS
+    except Exception:
+        SECTION_KEYS = {"rationale", "content", "scheme", "full_review", "references"}
+    sec_dir = prop_dir / "04_proposal" / "sections"
+    if not sec_dir.exists():
+        return None
+    orphans = [p for p in sorted(sec_dir.glob("*.md"))
+               if p.stem not in SECTION_KEYS]
+    if not orphans:
+        return None
+    review_dir = prop_dir / "05_review"
+    parts = []
+    if not dry_run:
+        review_dir.mkdir(parents=True, exist_ok=True)
+    for p in orphans:
+        dest = review_dir / f"orphan-section-{p.stem}-{_date_tag()}.md"
+        if dry_run:
+            parts.append(f"(dry-run) {p.name} → {dest.name}")
+            continue
+        if dest.exists():
+            p.unlink()  # 已存档过 → 直接移除幂等
+        else:
+            dest.write_text(
+                f"<!-- v6.9.61 孤儿章节存档：不在 PROPOSAL_SECTIONS 白名单，"
+                f"不进申请书组装与评审。如内容有价值请并入正文章节。 -->\n\n"
+                + p.read_text(encoding="utf-8"),
+                encoding="utf-8",
+            )
+            p.unlink()
+        parts.append(p.name)
+    return f"孤儿章节迁出：{', '.join(parts)}（已存档 05_review/，请人工并入正文）"
+
+
+# ---------------------------------------------------------------------------
 # ⑤ 批量入口与 CLI
 # ---------------------------------------------------------------------------
 
 def apply_all(project_root: Path, dry_run: bool = False) -> Dict[str, list]:
-    """对全部 optimizing 课题执行一次性清洗（含 v6.9.60 手册归档）。"""
+    """对全部 optimizing 课题执行一次性清洗（含 v6.9.60/61 守卫全集）。"""
     opt_dir = project_root / "research_proposals" / "optimizing"
-    result = {"full_review": [], "references": [], "methodology": []}
+    result = {
+        "full_review": [], "references": [], "methodology": [],
+        "reading_notes": [], "targeted": [], "orphan_sections": [],
+    }
     if not opt_dir.exists():
         return result
+    tasks = (
+        ("full_review", migrate_full_review_record),
+        ("references", strip_references_worklog),
+        ("methodology", migrate_methodology_manual),
+        ("reading_notes", dedupe_reading_notes),
+        ("targeted", prune_targeted_research),
+        ("orphan_sections", handle_orphan_sections),
+    )
     for prop_dir in sorted(opt_dir.iterdir()):
         if not (prop_dir / "04_proposal").exists():
             continue
-        r1 = migrate_full_review_record(prop_dir, dry_run=dry_run)
-        if r1:
-            result["full_review"].append({"proposal": prop_dir.name, "out": r1})
-        r2 = strip_references_worklog(prop_dir, dry_run=dry_run)
-        if r2:
-            result["references"].append({"proposal": prop_dir.name, "out": r2})
-        r3 = migrate_methodology_manual(prop_dir, dry_run=dry_run)
-        if r3:
-            result["methodology"].append({"proposal": prop_dir.name, "out": r3})
+        for key, fn in tasks:
+            r = fn(prop_dir, dry_run=dry_run)
+            if r:
+                result[key].append({"proposal": prop_dir.name, "out": r})
     return result
 
 

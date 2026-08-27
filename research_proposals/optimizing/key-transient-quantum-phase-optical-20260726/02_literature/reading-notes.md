@@ -1,9 +1,3 @@
-## 2606.02238
-
-Now I have enough content from the paper. Let me compile the structured notes:
-
----
-
 ## 论文结构化笔记
 **来源：** [arXiv:2606.02238](https://arxiv.org/abs/2606.02238) — *Sub-cycle field-driven dynamical Berry phase in solids*
 **作者：** Lior Faeyrman (Weizmann) · Jianing Zhang (Peking) · Misha Ivanov (Max-Born-Institut) · Liang-You Peng (Peking) · Nirit Dudovich (Weizmann) · Riccardo Piccoli (Ca' Foscari Venice)
@@ -90,12 +84,6 @@ Berry相（几何相）是量子系统中波函数沿参数空间闭合路径演
 
 **来源：** Faeyrman L, Zhang J, Ivanov M, Peng L-Y, Dudovich N, Piccoli R. *Sub-cycle field-driven dynamical Berry phase in solids.* arXiv:2606.02238. 2026 Jun 1.
 
-
-## 2605.04463
-
-已完整阅读论文全文，以下是结构化笔记：
-
----
 
 ## 论文基础信息
 

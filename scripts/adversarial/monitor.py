@@ -61,6 +61,72 @@ def _call_reviewer(prompt: str, timeout: int = MONITOR_TIMEOUT) -> Dict[str, Any
         return {"success": False, "output": "", "error": str(e), "elapsed_s": round(time.time() - t0, 2)}
 
 
+def _build_monitor_review_view(prop_dir: Path, round_num: int) -> Optional[Path]:
+    """生成 monitor 评审视图：正文章节拼接（排除 references/骨架）。
+
+    v6.9.61：monitor 此前读组装全文 proposal-draft.md（实测 40-140KB，
+    含 references 列表与 full_review 骨架——与 meta-review 无关的输入），
+    是 new-idea monitor 4 连空输出超时（600s 触顶）的直接输入侧根因。
+    critic 侧同类问题已于 v6.9.46/53 排除，monitor 是最后一个未瘦身的
+    读取方。视图写 05_review/.monitor-view-rN.md 供 prompt 引用。
+    """
+    try:
+        sec_dir = prop_dir / "04_proposal" / "sections"
+        if not sec_dir.exists():
+            return None
+        parts = []
+        for key, cn in (("rationale", "立项依据"), ("content", "研究内容"),
+                        ("scheme", "研究方案")):
+            p = sec_dir / f"{key}.md"
+            if p.exists():
+                parts.append(p.read_text(encoding="utf-8").strip())
+        if not parts:
+            return None
+        out = prop_dir / "05_review" / f".monitor-view-r{round_num}.md"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(
+            "<!-- v6.9.61 monitor 评审视图：正文三章节（references/骨架已排除） -->\n\n"
+            + "\n\n---\n\n".join(parts),
+            encoding="utf-8",
+        )
+        return out
+    except Exception:
+        return None
+
+
+def _build_monitor_diff_summary(
+    current: str, prev: str, prop_dir: Path, round_num: int,
+) -> Optional[Path]:
+    """生成 writer 修改前后 diff 摘要（零 LLM，替代让 LLM 读第二份全文）。
+
+    v6.9.61：旧 prompt 同时给 current/prev 两份组装全文（合计 80-280KB）
+    供 LLM 对比。difflib 程序化生成统一 diff，限头部 ±400 行，写
+    05_review/.monitor-diff-rN.md。
+    """
+    try:
+        import difflib
+        diff = list(difflib.unified_diff(
+            prev.splitlines(keepends=True),
+            current.splitlines(keepends=True),
+            fromfile=f"prev-r{round_num - 1}", tofile=f"current-r{round_num}",
+            n=1,
+        ))
+        if not diff:
+            return None
+        body = "".join(diff[:400])
+        if len(diff) > 400:
+            body += f"…（共 {len(diff)} 行 diff，已截断至前 400 行）\n"
+        out = prop_dir / "05_review" / f".monitor-diff-r{round_num}.md"
+        out.parent.mkdir(parents=True, exist_ok=True)
+        out.write_text(
+            f"<!-- v6.9.61 程序 diff：writer 本轮修改（+新增/-删除） -->\n\n```diff\n{body}```\n",
+            encoding="utf-8",
+        )
+        return out
+    except Exception:
+        return None
+
+
 def build_monitor_prompt(
     proposal_id: str,
     project_type: str,
@@ -74,11 +140,27 @@ def build_monitor_prompt(
     score_after: float,
     dim_scores: Dict[str, float],
     standards_path: Optional[Path] = None,
+    diff_summary_path: Optional[Path] = None,
 ) -> str:
-    """构造 monitor prompt。"""
+    """构造 monitor prompt。
+
+    v6.9.61 输入瘦身：
+    - current_draft_path 由调用方传入"评审视图"（正文三章节，排除
+      references/骨架），不再是组装全文；
+    - prev_draft_path 由 diff_summary_path（程序化 diff 摘要）替代——
+      monitor 只需知道"改了什么"，不需要再读一份全文；
+    - critic 报告超阈值时由调用方换 digest 路径。
+    """
     import adversarial_governance
 
-    prev_hint = f"\n【writer 修改前申请书】{prev_draft_path}" if prev_draft_path else ""
+    if diff_summary_path is not None:
+        prev_hint = (
+            f"\n【writer 本轮修改 diff（程序生成，+新增/-删除）】{diff_summary_path}"
+        )
+    elif prev_draft_path:
+        prev_hint = f"\n【writer 修改前申请书】{prev_draft_path}"
+    else:
+        prev_hint = ""
     dim_str = "、".join(f"{k}={v:.2f}" for k, v in dim_scores.items())
     if standards_path is None:
         standards_path = adversarial_governance.STANDARDS_PATH
@@ -136,11 +218,38 @@ def run_monitor_step(
     critic_report_path = prop_dir / "05_review" / f"critic-round-{round_num}.md"
     current_draft_path = prop_dir / "04_proposal" / "proposal-draft.md"
 
+    # v6.9.61 输入瘦身（LLM prompt 侧）：
+    # ① 评审视图替代组装全文（排除 references/骨架，40-140KB→正文三章节）；
+    # ② 程序 diff 摘要替代 prev 全文（monitor 只需"改了什么"）；
+    # ③ critic 报告超阈值换 digest。
+    # 规则检测（detect_*_prohibitions）仍读全文——本地零成本，不受影响。
+    view_path = _build_monitor_review_view(prop_dir, round_num)
+    prompt_current = view_path if view_path else current_draft_path
+    diff_path = None
+    if prev_draft_path and prev_draft_path.exists():
+        try:
+            diff_path = _build_monitor_diff_summary(
+                current_draft_path.read_text(encoding="utf-8"),
+                prev_draft_path.read_text(encoding="utf-8"),
+                prop_dir, round_num,
+            )
+        except Exception:
+            diff_path = None
+    prompt_critic = critic_report_path
+    try:
+        from proposal_lifecycle.section_hygiene import build_critic_digest
+        _dg = build_critic_digest(critic_report_path)
+        if _dg:
+            prompt_critic = _dg
+    except Exception:
+        pass
+
     prompt = build_monitor_prompt(
         proposal_id, project_type, round_num, section_key, section_name,
-        critic_report_path, current_draft_path, prev_draft_path,
+        prompt_critic, prompt_current, prev_draft_path,
         score_before, score_after, dim_scores,
         standards_path=standards_path,
+        diff_summary_path=diff_path,
     )
 
     result = _call_reviewer(prompt)

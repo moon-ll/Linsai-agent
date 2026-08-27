@@ -6,8 +6,8 @@ project_type: "general"
 latest_round: 1
 last_score: 0.55
 status: "optimizing"
-created: "2026-08-27T04:57:17Z"
-updated: "2026-08-27T04:57:17Z"
+created: "2026-08-27T05:03:28Z"
+updated: "2026-08-27T05:03:28Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -20,7 +20,7 @@ confidence: 1.0
 **最新轮次**：第 1 轮
 **当前分数**：0.55
 **状态**：优化中
-**同步时间**：2026-08-27T04:57:17Z
+**同步时间**：2026-08-27T05:03:28Z
 
 ---
 
@@ -31,7 +31,6 @@ confidence: 1.0
 | content | content | 72 |
 | rationale | rationale | 54 |
 | references | 参考文献 | 58 |
-| research-foundation | research-foundation | 20 |
 | scheme | scheme | 78 |
 
 ## 课题简介

@@ -1474,6 +1474,93 @@ class SectionHygieneTests(TestSuite):
             "_check_and_transition 应含晋级完整性门（非 done job 暂缓）",
         )
 
+        # ================================================================
+        # 14（v6.9.61）: 第二轮全环节审计——笔记去重/检索产物裁剪/孤儿章节/monitor 瘦身
+        # ================================================================
+        # 14.1 阅读笔记去重：同 arXiv ID 保留最新
+        n1 = self.tmp / "n1"
+        (n1 / "02_literature").mkdir(parents=True)
+        notes = n1 / "02_literature" / "reading-notes.md"
+        notes.write_text(
+            "# 阅读笔记\n\n## 2608.18905\n旧版记录一。\n\n## 2607.11111\n独立文献。\n\n"
+            "## 2608.18905\n新版记录二（应保留）。\n\n## 2606.17848\n独立文献二。\n\n"
+            "## 2606.17848\n新版三（应保留）。\n",
+            encoding="utf-8")
+        r = sh.dedupe_reading_notes(n1)
+        self.assert_true(r and "2 条重复" in r, "同 ID 重复条目应检出 2 条")
+        after = notes.read_text(encoding="utf-8")
+        self.assert_true("新版记录二" in after and "旧版记录一" not in after,
+                         "应保留最新一条删除旧条目")
+        self.assert_true("独立文献" in after and "新版三" in after,
+                         "无重复条目不应误删")
+        self.assert_true(sh.dedupe_reading_notes(n1) is None, "去重应幂等")
+
+        # 14.2 定向检索产物裁剪：保留最近 12 个，旧件归档不删
+        t1 = self.tmp / "t1"
+        for sub in ("gap-analysis", "targeted-research"):
+            (t1 / "02_literature" / sub).mkdir(parents=True)
+        import time as _time
+        for i in range(20):
+            f1 = t1 / "02_literature" / "gap-analysis" / f"gap-r{i}.json"
+            f1.write_text("{}", encoding="utf-8")
+            _time.sleep(0.002)
+            f2 = t1 / "02_literature" / "targeted-research" / f"lit-gap-{i}.md"
+            f2.write_text("x", encoding="utf-8")
+        r = sh.prune_targeted_research(t1)
+        self.assert_true(r and "16 个旧件" in r, "20 件/目录应裁 8+8=16")
+        remain_gap = len(list((t1 / "02_literature" / "gap-analysis").glob("*.json")))
+        arch = t1 / "05_review" / ".archive-targeted"
+        self.assert_true(remain_gap == 12, f"应保留 12 个（实际 {remain_gap}）")
+        self.assert_true(len(list(arch.glob("*"))) == 16, "旧件应移入归档（不删除）")
+
+        # 14.3 孤儿章节：非白名单迁出存档 + 幂等
+        o1 = self.tmp / "o1"
+        sec_o = o1 / "04_proposal" / "sections"
+        sec_o.mkdir(parents=True)
+        (sec_o / "rationale.md").write_text("正文。", encoding="utf-8")
+        (sec_o / "research-foundation.md").write_text("## （四）研究基础\n内容。", encoding="utf-8")
+        r = sh.handle_orphan_sections(o1)
+        self.assert_true(r and "research-foundation" in r, "孤儿章节应检出")
+        self.assert_true(not (sec_o / "research-foundation.md").exists(),
+                         "孤儿章节应从 sections/ 迁出")
+        orphan_doc = list((o1 / "05_review").glob("orphan-section-research-foundation-*.md"))
+        self.assert_true(orphan_doc and "研究基础" in orphan_doc[0].read_text(encoding="utf-8"),
+                         "内容应完整存档 05_review/")
+        self.assert_true((sec_o / "rationale.md").exists(), "白名单章节不动")
+        self.assert_true(sh.handle_orphan_sections(o1) is None, "二次执行应幂等")
+
+        # 14.4 monitor 瘦身源码守卫：评审视图 + 程序 diff + digest
+        mon_src = (Path(__file__).parent.parent / "adversarial" / "monitor.py").read_text(encoding="utf-8")
+        self.assert_true(
+            "_build_monitor_review_view" in mon_src,
+            "monitor 应生成评审视图（排除 references/骨架）",
+        )
+        self.assert_true(
+            "_build_monitor_diff_summary" in mon_src and "difflib" in mon_src,
+            "monitor 应用程序 diff 替代 prev 全文",
+        )
+        self.assert_true(
+            "build_critic_digest" in mon_src,
+            "monitor 的 critic 报告应接 digest",
+        )
+        self.assert_true(
+            "diff_summary_path=diff_path" in mon_src,
+            "run_monitor_step 应把 diff 摘要传入 prompt",
+        )
+        # 14.5 writer prompt 孤儿章节红线
+        self.assert_true(
+            "章节文件白名单" in opt_src and "严禁自创章节文件" in opt_src,
+            "writer prompt 应含章节白名单红线",
+        )
+        # 14.6 守卫注册：五个守卫全部挂载进 guard_written_artifacts
+        sh_src = (Path(__file__).parent.parent / "proposal_lifecycle" / "section_hygiene.py").read_text(encoding="utf-8")
+        for guard_name in ("dedupe_reading_notes", "prune_targeted_research",
+                           "handle_orphan_sections"):
+            self.assert_true(
+                guard_name in sh_src,
+                f"guard_written_artifacts 应挂载 {guard_name}",
+            )
+
 
 def main():
     from test_runner import print_report

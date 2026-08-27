@@ -1,9 +1,3 @@
-## 2408.07577
-
-Now I have sufficient content. Let me compile the structured note.
-
----
-
 ## 论文深度笔记
 
 **arXiv ID**: 2408.07577  

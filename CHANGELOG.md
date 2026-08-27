@@ -1,5 +1,45 @@
 # 变更记录
 
+## v6.9.61 - 2026-08-27 第二轮全环节审计：monitor 输入瘦身 + 笔记去重 + 检索产物裁剪 + 孤儿章节守卫
+
+背景：继续按"结构不变量靠约定、写入/读取边界信任 agent 行为"的病灶
+模式审计剩余环节，实锤四处（其中 monitor 是正在发生的超时现案）：
+
+- **D. monitor 输入从未瘦身（现案根因）**：monitor 同时读组装全文
+  `proposal-draft.md`（40-140KB，含 references 列表与 full_review 骨架）
+  + 上一轮组装全文（再一份）+ critic 报告 + standards，合计 120KB+。
+  08-27 new-idea monitor 4 连空输出 600s 触顶的直接输入侧根因——
+  critic 侧同类问题 v6.9.46/53 已排除，monitor 是最后一个未瘦身的
+  读取方。修复（`adversarial/monitor.py`）：① 评审视图
+  `_build_monitor_review_view`（正文三章节拼接，排除 references/骨架）
+  替代组装全文；② `_build_monitor_diff_summary`（difflib 程序 diff，
+  限 400 行）替代 prev 全文——monitor 只需"改了什么"，不需读第二份
+  全文；③ critic 报告接 v6.9.60 digest。规则检测
+  （detect_*_prohibitions）仍读全文（本地零成本不受影响）。
+- **E. 阅读笔记同文献重复条目**：writer 步骤 9b"追加一条记录"无查重，
+  attosecond 同一 arXiv 文献两条笔记（2608.18905）。修复：
+  `dedupe_reading_notes` 按 `## {arxiv-id}` 标题或条目内 arXiv ID 字段
+  分组，同 ID 保留最新（追加序=时间序），零 LLM。
+- **F. 定向检索产物无界累积**：gap-analysis/*.json 与 targeted-research/
+  lit-gap-*.md 每轮新增从不清（order-param 单课题 59+58 个文件），
+  writer 只读最新一份。修复：`prune_targeted_research` 滚动裁剪至最近
+  12 个/目录（覆盖约 4 轮），旧件移 `05_review/.archive-targeted/`
+  （移动不删除，数据安全）。
+- **G. 孤儿章节（schema 盲区，资产静默丢失）**：writer 按 NSFC 2026
+  三段式自创 `research-foundation.md`（2.4KB 研究基础），但组装按
+  PROPOSAL_SECTIONS 五模块白名单 → 内容不进申请书、评审不读。修复：
+  `handle_orphan_sections` 非白名单章节迁 `05_review/orphan-section-
+  {key}-{date}.md` 存档（内容不丢，提示人工并入正文）；writer prompt
+  加"章节文件白名单"红线（研究基础等内容并入 scheme.md 相应小节）。
+
+- 守卫挂载：E/F/G 全部并入 `guard_written_artifacts`（writer 落盘后
+  当轮执行，幂等）与 `apply_all`（一次性存量清理，已执行：去重 4 课题
+  6 条、裁剪 5 课题 234 旧件归档、孤儿章节 1 课题迁出）。
+- 测试：SectionHygieneTests 扩展 14.1-14.6（去重保最新/幂等、裁剪
+  保留数/归档不删、孤儿迁出/内容存档/幂等、monitor 三项瘦身源码守卫、
+  白名单红线、守卫注册）。
+- 验证：209/209；--module 1198/1198；--scenario 16/16 全绿。
+
 ## v6.9.60 - 2026-08-27 同构问题治理：手册单一真相源 + critic 报告 digest + 晋级完整性门
 
 背景：用户要求排查"其他环节是否有同类问题"。按"结构不变量只靠
