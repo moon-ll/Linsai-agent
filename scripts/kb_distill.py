@@ -112,9 +112,14 @@ def pending_distill_list(limit: Optional[int] = None) -> List[Path]:
         if Path(f["name"]).name in used or _is_excluded(f["path"]):
             continue
         # v6.9.73: agent 相关性第二道门——被拒（agent_rejected: true）的
-        # 论文不进蒸馏队列（保留 raw 作记录，不消耗蒸馏配额）
+        # 论文不进蒸馏队列（保留 raw 作记录，不消耗蒸馏配额）。
+        # v6.9.75: 头读窗口 500→8192——kb_importer 的 frontmatter 字段序中
+        # agent_rejected 排在 title/authors/agent_note 之后，大协作组论文
+        # （30+ 作者）实测偏移 660B+ 即溢出 500B 窗口致过滤器漏检；
+        # 8192B 可覆盖 100+ 作者（title 300B + authors 3000B + 摘要前置字段）
         try:
-            head = (KNOWLEDGE_DIR / f["path"]).open(encoding="utf-8", errors="ignore").read(500)
+            with (KNOWLEDGE_DIR / f["path"]).open(encoding="utf-8", errors="ignore") as _fh:
+                head = _fh.read(8192)
             if re.search(r"agent_rejected:\s*true", head):
                 continue
         except OSError:

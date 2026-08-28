@@ -1,5 +1,37 @@
 # 变更记录
 
+## v6.9.75 - 2026-08-28 蒸馏 gate2 过滤窗口修复 + kb_distill 测试净环境加固
+
+**修复①：pending_distill_list 头读窗口 500B→8192B**。v6.9.73 落地的
+gate2 过滤器（agent_rejected: true 不进蒸馏队列）只读 raw 文件前 500
+字节，而 kb_importer 的 frontmatter 字段序中 agent_rejected 位于
+title/authors/agent_note **之后**——大协作组论文（30+ 作者）该行偏移
+实测 660B+，溢出 500B 窗口致被拒论文漏检、仍消耗蒸馏配额。字节算术
+实证：40 作者构造用例偏移约 850B。8192B 可覆盖 100+ 作者（title 300B +
+authors 3000B + 摘要前置字段），附带把裸 open().read() 改为 with 语句。
+
+**修复②：test_kb_distill_created_ts v6.9.15 用例净环境加固**。该用例
+依赖 /tmp/fake/raw/x.md 残留文件，distill_one 读取 raw 全文（分层蒸馏
+判定 has_fulltext）后净环境（新沙箱 / 清理后）必挂 FileNotFoundError
+——改为用例自建自清（finally unlink），前后向兼容（无 read_text 的
+旧代码路径同样通过）。
+
+**回归**：self_test --module 1231/1231 全绿（1228 基线 + 本轮 3 条新
+断言：偏移>500 前置校验 / 被拒过滤 / 未拒保留）。
+
+**附带对账**：v6.9.74（蒸馏路由+并发锁）提交时未带 VERSION（文件停留
+6.9.73），本次一并推进至 6.9.75。并行会话在途的"分层蒸馏"特性
+（DEEP_DISTILL_PROMPT / distill_one 五要素）不属本提交，保留工作区。
+
+## v6.9.74 - 2026-08-28 蒸馏路由修复+并发锁（补记，原提交 f119fec 未记 CHANGELOG）
+
+- kb_distill 偏好链 glm→minimax 优先（glm 对蒸馏长 prompt 实测 104s
+  失败/篇，minimax 48s 成功/篇）
+- run_batch 加 file_lock 进程互斥（防双时段 cron 与批量并发重复蒸馏，
+  抢不到锁温和退出 lock_busy）
+- 20h 健康检查运行时实证：批量蒸馏 1.5h 内积压 365→137，minimax
+  17-48s/篇稳定
+
 ## v6.9.73 - 2026-08-28 入池双门筛选：agent 相关性打分第二道门落地
 
 **评分分布审计的延伸决策**（用户提供分布图后拍板）：DeepXiv hybrid 模式

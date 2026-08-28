@@ -72,6 +72,75 @@ class KbDistillCreatedTsTests(TestSuite):
         )
 
         self.run_v6_9_15_tests()
+        self.run_v6_9_75_tests()
+
+    def run_v6_9_75_tests(self):
+        """v6.9.75: agent_rejected 头读窗口回归（500B→8192B 修复验证）。
+
+        v6.9.73 的 gate2 过滤器只读 raw 文件前 500 字节，而
+        agent_rejected 在 frontmatter 字段序中位于 title/authors/
+        agent_note 之后——大协作组论文（30+ 作者）该行偏移 660B+，
+        溢出窗口致被拒论文漏检、仍进蒸馏队列浪费 LLM 配额。
+        """
+        import json
+        import tempfile
+        import kb_distill
+        import kb_index
+
+        def _mk_frontmatter(n_authors: int, rejected: bool) -> str:
+            authors = ", ".join(f"Author Name {i:03d}" for i in range(n_authors))
+            note = "强场相关，方向匹配，建议入池跟踪"
+            return "\n".join([
+                "---",
+                'title: "Topological photonics in twisted van der Waals heterostructures"',
+                'arxiv_id: "2608.99999"',
+                f'authors: "{authors}"',
+                'year: "2026"',
+                'tags: ["deepxiv-论文库"]',
+                'direction: "阿秒科学"',
+                'source: "hermes-简报"',
+                'imported_at: "2026-08-28T10:28:20Z"',
+                "score_deepxiv: 0.62",
+                f"score_agent: {json.dumps(2 if rejected else 7)}",
+                f'agent_note: "{note}"',
+                f"agent_rejected: {json.dumps(rejected)}",
+                'abstract: "placeholder"',
+                "---", "",
+                "# 正文",
+            ])
+
+        tmpdir = tempfile.mkdtemp(prefix="kb_distill_win_")
+        kd_dir = Path(tmpdir)
+        (kd_dir / "raw" / "papers").mkdir(parents=True)
+        # 40 作者 → agent_rejected 偏移约 850B（500B 窗口外、8192B 内）
+        rejected_md = _mk_frontmatter(40, rejected=True)
+        (kd_dir / "raw" / "papers" / "a-rejected.md").write_text(rejected_md, encoding="utf-8")
+        off = rejected_md.find("agent_rejected: true")
+        if not self.assert_true(off > 500, "构造用例偏移确实落在旧 500B 窗口之外",
+                                f"实际偏移 {off}B"):
+            return
+        (kd_dir / "raw" / "papers" / "b-accepted.md").write_text(
+            _mk_frontmatter(40, rejected=False), encoding="utf-8")
+
+        orig = (kb_distill.KNOWLEDGE_DIR, kb_distill._wiki_source_raws,
+                kb_distill._is_excluded, kb_index.list_raw_files)
+        try:
+            kb_distill.KNOWLEDGE_DIR = kd_dir
+            kb_distill._wiki_source_raws = lambda: set()
+            kb_distill._is_excluded = lambda p: False
+            kb_index.list_raw_files = lambda: [
+                {"name": "b-accepted.md", "path": "raw/papers/b-accepted.md", "mtime": 1},
+                {"name": "a-rejected.md", "path": "raw/papers/a-rejected.md", "mtime": 2},
+            ]
+            out = kb_distill.pending_distill_list()
+            names = [p.name for p in out]
+            self.assert_true("a-rejected.md" not in names,
+                             "大作者列表下 agent_rejected=true 仍被过滤（8192B 窗口）",
+                             f"实际清单 {names}")
+            self.assert_in("b-accepted.md", names, "未被拒论文正常进入蒸馏队列")
+        finally:
+            (kb_distill.KNOWLEDGE_DIR, kb_distill._wiki_source_raws,
+             kb_distill._is_excluded, kb_index.list_raw_files) = orig
 
     def run_v6_9_15_tests(self):
         """v6.9.15: distill_one 传 prefer=kb_distill（GLM 主模型路由）。"""
@@ -88,8 +157,14 @@ class KbDistillCreatedTsTests(TestSuite):
         # "/tmp/fake/raw/x.md" 不在任何隔离 KNOWLEDGE_DIR 下必然 ValueError，
         # 该回归自 v6.9.15 落地起整套件被 self_test 静默吞掉、从未真正运行。
         orig_kd = kb_distill.KNOWLEDGE_DIR
+        # v6.9.75 加固：distill_one 现会读取 raw 全文（分层蒸馏判定
+        # has_fulltext 前 1200B），此前用例依赖 /tmp 残留文件、净环境
+        # （新沙箱/清理后）必挂 FileNotFoundError——改为用例自建自清
+        fake_raw = Path("/tmp/fake/raw/x.md")
         try:
             kb_distill.KNOWLEDGE_DIR = Path("/tmp/fake")
+            fake_raw.parent.mkdir(parents=True, exist_ok=True)
+            fake_raw.write_text("---\ntitle: x\n---\n\n正文", encoding="utf-8")
             kb_distill.distill_raw_to_wiki = lambda rel: ("wiki/x.md", "prompt")
             kb_distill.save_distilled_wiki = lambda *a, **k: None
             llm_gateway.llm_complete = (
@@ -107,3 +182,4 @@ class KbDistillCreatedTsTests(TestSuite):
             kb_distill.distill_raw_to_wiki, kb_distill.save_distilled_wiki = orig
             llm_gateway.llm_complete = orig_gw
             kb_distill.KNOWLEDGE_DIR = orig_kd
+            fake_raw.unlink(missing_ok=True)
