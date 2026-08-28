@@ -52,6 +52,9 @@ HISTORY_LIMIT = 20              # 状态变迁历史保留条数
 # 全成功、critic/writer/monitor 长输出全挂，微调度器 3h 串行碾磨
 # 超时 job 烧尽 7 课题重试次数，熔断器对 429 文本检测完全失明）。
 LONG_TIMEOUT_THRESHOLD = 3      # 长输出 job 连续超时达此数 → 熔断
+# v6.9.67: probing 活性保护——试探放行后无回报的最长等待（微调度器 tick
+# 5min + 长 job 上限 1200s=20min，30min 足够覆盖正常试探完成回收）
+PROBE_TIMEOUT_S = 1800
 # 长输出主链 step（输出为完整报告/章节，token 量大）
 LONG_OUTPUT_STEPS = {
     "critic", "writer", "monitor", "idea_review",
@@ -115,7 +118,8 @@ def allow_dispatch() -> bool:
 
     closed → True；open 且未过冷却 → False；
     open 且已过冷却 → 切换为 probing 并放行一次（True）；
-    probing → False（一次试探只放行一个 job，防并发全部涌入）。
+    probing → False（一次试探只放行一个 job，防并发全部涌入）；
+    probing 超时无回报 → 重新放行一次试探（v6.9.67 活性保证）。
     """
     with file_lock(LOCK_NAME):
         st = _load()
@@ -130,7 +134,18 @@ def allow_dispatch() -> bool:
                 _save(st)
                 return True
             return False
-        # probing：本试探 job 已放行，其余拒绝
+        # probing：本试探 job 已放行，其余拒绝。
+        # v6.9.67 活性保证：放行的试探若因任何原因未执行（调用方拿 True
+        # 后退出/链头 job 不满足依赖），状态机没有任何回报可推进——
+        # 08-28 实证卡死 1h+（10:30 放行后执行记录 0 条，后续 tick 全拒）。
+        # probing 超过 PROBE_TIMEOUT_S 无回报 → 重新放行一次试探：
+        # 每 30 分钟至多烧一个试探窗口，配额恢复后 30 分钟内自愈。
+        if _age_seconds(st.get("last_transition_at", "")) >= PROBE_TIMEOUT_S:
+            st["last_transition_at"] = now_utc()
+            _append_history(st, "probing-reprobe",
+                            f"试探超时 {PROBE_TIMEOUT_S // 60}min 无回报，重新放行试探")
+            _save(st)
+            return True
         return False
 
 
@@ -315,9 +330,21 @@ def _self_check() -> None:
         st["opened_at"] = (datetime.now(timezone.utc) - timedelta(seconds=OPEN_COOLDOWN_S + 60)).strftime("%Y-%m-%dT%H:%M:%SZ")
         _save(st)
         assert allow_dispatch() is True, "冷却期满应转 probing 试探"
-        r = record_job_result(True)
-        assert r["state"] == "closed", "试探成功恢复 closed"
-        print("✓ force_open 手动熔断→冷却→probing→自愈")
+        assert allow_dispatch() is False, "probing 期间其余调用应拒绝"
+        print("✓ force_open 手动熔断→冷却→probing→单次放行")
+
+        # 路径8（v6.9.67）：probing 超时无回报 → 重新放行（活性保证）
+        st = _load()
+        assert st["state"] == "probing"
+        st["last_transition_at"] = (datetime.now(timezone.utc) - timedelta(seconds=PROBE_TIMEOUT_S + 60)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        _save(st)
+        assert allow_dispatch() is True, "probing 超时无回报应重新放行试探"
+        assert allow_dispatch() is False, "重新放行后窗口内仍应拒绝"
+        r = record_job_result(False, "超时(1200s)", job_kind="long")
+        assert r["state"] == "open", "重新试探的失败应正常回 open"
+        print("✓ probing 超时重新放行→试探失败回 open（08-28 卡死场景闭环）")
+        # 30 分钟窗口内不重复放行
+        assert allow_dispatch() is False, "open 冷却期内应拒绝"
 
     STATE_PATH = real_path
     print("✓ circuit_breaker: 自检全部通过（临时目录，零污染）")
