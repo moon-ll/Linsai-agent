@@ -1,0 +1,28 @@
+{
+  "gaps": [
+    {
+      "claim": "国内（中国）研究团队在固体高次谐波、量子光非线性光学方向已有代表性积累，构成本项目立项的国内现状基础",
+      "missing_evidence": "§1.3 国内现状仅一句团队罗列，无任何引用文献、无年份，缺少国内团队在固体HHG、量子光驱动非线性光学、HHG光谱学方向的带出处代表性论文（作者/年份/期刊），无法支撑五层递进结构中的国内现状层",
+      "search_keywords": [
+        "solid-state high harmonic generation China group",
+        "quantum light nonlinear optics Chinese experimental group",
+        "squeezed light high harmonic generation China",
+        "高次谐波 量子光 国内实验组",
+        "attosecond spectroscopy Chinese research team recent"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "半导体布洛赫方程（BSV-SBE）理论工具链在中等关联区 U/W≲1.0 内适用，可支撑 U/W∈[0.5,1.2] 相图靶标研究",
+      "missing_evidence": "缺少 SBE 类方法随关联强度 U/W 变化的适用上限的文献依据（U/W→1.0 何处失效、强关联端 1.2 是否越界），以及 TDDFT+U/张量网络/多体方法在 U/W∈[0.5,1.2] 区间对 HHG 的基准对比研究，导致工具链适用边界无引用支撑",
+      "search_keywords": [
+        "semiconductor Bloch equation validity strongly correlated limit",
+        "Hubbard U bandwidth ratio strong correlation criterion",
+        "SBE breakdown correlated material high harmonic generation",
+        "DFT+U moderately correlated regime benchmark",
+        "tensor network Hubbard model high harmonic generation"
+      ],
+      "priority": "high"
+    }
+  ]
+}
