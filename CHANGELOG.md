@@ -1,5 +1,29 @@
 # 变更记录
 
+## v6.9.76 - 2026-08-28 逃生分桶触发：critic/monitor 超时独立计数，异供应商成功不再抹掉挂起证据
+
+**08-28 晚运转暴露的盲点**：模型逃生机制（v6.9.69）上线当晚，critic/monitor
+（profile 主模型 glm-5.3@zai）三连 900s 触顶（20:50/21:45/22:50），但逃生
+未触发——全局长超时计数被 writer（主模型 MiniMax，健康）的成功清零，zai
+挂起的证据被异供应商的成功抹掉。实测确认故障形态：critic 短请求 7.6s
+正常、zai 只对"大上下文长输出"请求挂起（与 08-27/28 危机同模式）；且
+600s（hermes stale giveup 切换）+ 700s（minimax 实际生成，writer 实测
+约 12 分钟）> 900s 击杀线，hermes 内部降级即使成功也来不及完成。
+
+**修复**：
+1. circuit_breaker 分桶计数（`consecutive_escape_step_timeouts`）：
+   ESCAPE_TRIGGER_STEPS={critic, monitor}（zai 主模型步骤）的长超时独立
+   累积，阈值 2 次（ESCAPE_STEP_THRESHOLD）即激活逃生；writer 等异供应商
+   步骤的成功只清零全局计数、不清桶；桶内步骤成功才清桶。
+2. record_job_result 增加 step 参数；微调度器回报时透传 job step。
+3. 新增 CLI `--escape-open REASON`：人工确认主模型对长输出挂起但计数
+   未达阈值时直接切换备用（今晚 21:18 已手动激活，21:48 起第一次
+   主模型试探）。
+
+**验证**：circuit_breaker 自检 17 路径全过（新增分桶触发/桶清零/手动激活
+3 条）；test_mechanism_hardening 16.7-16.8 新增 6 用例；全量回归
+1237/1237；生产实测 escape_override_target() 返回 minimax-cn/MiniMax-M3。
+
 ## v6.9.75 - 2026-08-28 蒸馏 gate2 过滤窗口修复 + kb_distill 测试净环境加固
 
 **修复①：pending_distill_list 头读窗口 500B→8192B**。v6.9.73 落地的

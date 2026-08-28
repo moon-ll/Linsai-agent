@@ -1564,9 +1564,12 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
                         )
                         _step = refreshed.get("step", "")
                         _kind = "long" if _step in LONG_OUTPUT_STEPS else "short"
+                        # v6.9.76: 传 step——critic/monitor（zai 主模型步骤）
+                        # 的长超时分桶计数，异供应商 writer 成功不清零
                         cb_st = cb_record(result.get("success", False),
                                           result.get("error", ""),
-                                          job_kind=_kind)
+                                          job_kind=_kind,
+                                          step=_step)
                         # v6.9.68: 模型逃生状态可视——主模型静默挂起时调度
                         # 不停、hermes 调用强制备用模型；escape->open
                         # （主备全挂）时同样停止本轮派发

@@ -85,6 +85,14 @@ ESCAPE_FAILURE_LIMIT = 3
 # 若危机源是 minimax 本身（writer 侧触发逃生），注入无增益但无害，
 # 连续失败达限后仍会走 open 停摆兜底。
 ESCAPE_TARGET = {"provider": "minimax-cn", "model": "MiniMax-M3"}
+# ── v6.9.76 按步骤分桶触发 ──
+# 08-28 晚实证：zai 对"大上下文长输出"请求挂起（短请求 7.6s 正常），
+# critic/monitor（profile 主模型 glm-5.3@zai）连续 900s 触顶，但全局
+# 长超时计数被 writer（主模型 MiniMax，健康）的成功清零——异供应商
+# 的成功抹掉了 zai 挂起的证据，逃生永不触发。这两个步骤的超时单独
+# 分桶计数（桶内步骤成功才清零），阈值更灵敏（2 次）。
+ESCAPE_TRIGGER_STEPS = {"critic", "monitor"}
+ESCAPE_STEP_THRESHOLD = 2
 
 
 def is_timeout_error(error: str) -> bool:
@@ -125,6 +133,7 @@ def _activate_escape(st: Dict[str, Any], reason: str) -> None:
     st["escape"] = esc
     # 历史计数已消化为逃生状态，清零避免重复触发
     st["consecutive_long_timeouts"] = 0
+    st["consecutive_escape_step_timeouts"] = 0
 
 
 def escape_override_target() -> Optional[Dict[str, str]]:
@@ -243,7 +252,8 @@ def allow_dispatch() -> bool:
 
 
 def record_job_result(success: bool, error: str = "",
-                      job_kind: str = "long") -> Dict[str, Any]:
+                      job_kind: str = "long",
+                      step: str = "") -> Dict[str, Any]:
     """job 执行后回报结果，驱动状态机迁移。
 
     Args:
@@ -254,6 +264,10 @@ def record_job_result(success: bool, error: str = "",
             挂起触顶而短输出间歇成功，短 job 成功不应清零长链超时计数；
             达 LONG_TIMEOUT_THRESHOLD 触发熔断（止血碾磨）。短 job 不
             计入也不清零该计数。
+        step: job 步骤名（v6.9.76）。critic/monitor（ESCAPE_TRIGGER_STEPS，
+            profile 主模型 zai/glm-5.3）的长超时单独分桶计数——writer
+            等异供应商步骤的成功不清零该桶，桶内连续
+            ESCAPE_STEP_THRESHOLD 次即激活模型逃生。
 
     Returns:
         迁移后的状态摘要（供调用方记日志）
@@ -310,6 +324,11 @@ def record_job_result(success: bool, error: str = "",
                 "consecutive_long_timeouts": st.get("consecutive_long_timeouts", 0),
             }
 
+        # v6.9.76: 桶内步骤（critic/monitor，zai 主模型）成功清零桶计数；
+        # 异供应商步骤（writer 等）的成功不清零——zai 挂起证据不被抹掉
+        if success and step in ESCAPE_TRIGGER_STEPS:
+            st["consecutive_escape_step_timeouts"] = 0
+
         if success:
             if state in ("probing", "open"):
                 st["state"] = "closed"
@@ -336,6 +355,12 @@ def record_job_result(success: bool, error: str = "",
             # 非超时的普通失败（解析错误等）仍不触发，交既有重试机制。
             st["consecutive_long_timeouts"] = st.get("consecutive_long_timeouts", 0) + 1
             n = st["consecutive_long_timeouts"]
+            # v6.9.76: 分桶计数——critic/monitor 的超时独立累积，不受
+            # writer 成功清零影响；达 ESCAPE_STEP_THRESHOLD 即激活逃生
+            escape_step_n = st.get("consecutive_escape_step_timeouts", 0)
+            if step in ESCAPE_TRIGGER_STEPS:
+                escape_step_n += 1
+                st["consecutive_escape_step_timeouts"] = escape_step_n
             if state == "probing":
                 # v6.9.68: 试探长超时 → 激活逃生（切备用继续干）而非回 open
                 st["state"] = "closed"
@@ -344,6 +369,12 @@ def record_job_result(success: bool, error: str = "",
                 _activate_escape(st, f"试探长超时({error[:60]})")
                 _append_history(st, "probing->escape",
                                 f"试探超时({error[:60]})，激活模型逃生")
+            elif (step in ESCAPE_TRIGGER_STEPS
+                  and escape_step_n >= ESCAPE_STEP_THRESHOLD):
+                _activate_escape(st, f"{step} 连续 {escape_step_n} 次超时（分桶）")
+                _append_history(st, "closed->escape",
+                                f"{step}（zai 主模型步骤）连续 {escape_step_n} 次超时，"
+                                f"激活模型逃生（备用 {ESCAPE_TARGET['provider']}/{ESCAPE_TARGET['model']}）")
             elif state == "closed" and n >= LONG_TIMEOUT_THRESHOLD:
                 # v6.9.68: 长输出连续超时（主模型静默挂起特征）→ 激活逃生，
                 # 调度照常、hermes 强制备用模型（v6.9.66 的 open 停摆升级）
@@ -371,6 +402,7 @@ def force_reset() -> Dict[str, Any]:
         st["state"] = "closed"
         st["consecutive_api_errors"] = 0
         st["consecutive_long_timeouts"] = 0
+        st["consecutive_escape_step_timeouts"] = 0
         st["opened_at"] = ""
         esc = _escape(st)
         esc["active"] = False
@@ -381,6 +413,28 @@ def force_reset() -> Dict[str, Any]:
         _append_history(st, "manual-reset", "人工复位（含解除模型逃生）")
         _save(st)
         return {"state": st["state"]}
+
+
+def force_escape_open(reason: str = "") -> Dict[str, Any]:
+    """手动激活模型逃生（v6.9.76）。
+
+    场景：人工确认主模型供应商对长输出请求挂起（如 zai 配额期内
+    大请求排队）但熔断计数未达阈值时，直接切换备用模型干活。
+    调度不停，hermes 调用注入备用；主模型试探成功自动解除。
+    """
+    with file_lock(LOCK_NAME):
+        st = _load()
+        if st.get("state") != "closed":
+            return {"error": f"当前 state={st.get('state')}，逃生仅在 closed 下生效"}
+        _activate_escape(st, f"人工激活: {reason[:80] or '未注明'}")
+        _append_history(st, "manual-escape", f"人工激活模型逃生: {reason[:80] or '未注明'}")
+        _save(st)
+        esc = st.get("escape", {})
+        return {
+            "escape_active": esc.get("active"),
+            "escape_target": ESCAPE_TARGET,
+            "probe_due_at": esc.get("probe_due_at"),
+        }
 
 
 def force_open(reason: str = "") -> Dict[str, Any]:
@@ -554,6 +608,39 @@ def _self_check() -> None:
         assert escape_override_target() == dict(ESCAPE_TARGET), "推移后立即走备用"
         print("✓ 试探失败→窗口推移→逃生维持")
 
+        # 路径12（v6.9.76）：分桶触发——writer 成功不清零 critic/monitor 桶
+        STATE_PATH = Path(td) / "s11.json"
+        # critic 超时 1 次 → 桶计数 1
+        record_job_result(False, "超时(900s)", job_kind="long", step="critic")
+        # writer 成功（异供应商长 job）——清零全局计数但不清桶
+        record_job_result(True, job_kind="long", step="writer")
+        st = _load()
+        assert st.get("consecutive_escape_step_timeouts") == 1, \
+            f"writer 成功不应清零分桶计数: {st.get('consecutive_escape_step_timeouts')}"
+        assert st.get("consecutive_long_timeouts") == 0, "writer 成功应清零全局计数"
+        # monitor 再超时 → 桶计数 2 达阈值 → 激活逃生（全局计数仅 1，远未达 3）
+        r = record_job_result(False, "超时(900s)", job_kind="long", step="monitor")
+        assert r["state"] == "closed" and r.get("escape_active"), \
+            f"分桶达阈值应激活逃生（全局计数未达也触发）: {r}"
+        print("✓ 分桶触发：writer 成功不清零 critic/monitor 桶，桶内 2 次即逃生")
+        # 桶内步骤成功清零桶计数（逃生解除后验证）
+        st = _load()
+        st["escape"]["active"] = False
+        st["escape"]["probe_due_at"] = ""
+        st["consecutive_escape_step_timeouts"] = 1
+        _save(st)
+        record_job_result(True, job_kind="long", step="monitor")
+        st = _load()
+        assert st.get("consecutive_escape_step_timeouts") == 0, "桶内步骤成功应清零桶计数"
+        print("✓ 桶内步骤成功清零桶计数")
+
+        # 路径13（v6.9.76）：force_escape_open 手动激活
+        STATE_PATH = Path(td) / "s12.json"
+        r = force_escape_open("自检-手动逃生")
+        assert r.get("escape_active") is True, f"手动激活应生效: {r}"
+        assert escape_override_target() == dict(ESCAPE_TARGET), "手动激活后应注入备用"
+        print("✓ force_escape_open 手动激活逃生")
+
     STATE_PATH = real_path
     print("✓ circuit_breaker: 自检全部通过（临时目录，零污染）")
 
@@ -565,6 +652,8 @@ def main() -> None:
     parser.add_argument("--reset", action="store_true", help="人工复位为 closed")
     parser.add_argument("--open", metavar="REASON", nargs="?", const="",
                         help="人工熔断为 open（v6.9.66，配额耗尽/限流止血；冷却期满自动试探自愈）")
+    parser.add_argument("--escape-open", metavar="REASON", nargs="?", const="",
+                        help="人工激活模型逃生（v6.9.76，主模型对长输出挂起但计数未达阈值时直接切备用）")
     args = parser.parse_args()
 
     if args.self_check:
@@ -572,6 +661,9 @@ def main() -> None:
         return
     if args.reset:
         print(json.dumps(force_reset(), ensure_ascii=False))
+        return
+    if args.escape_open is not None:
+        print(json.dumps(force_escape_open(args.escape_open), ensure_ascii=False, indent=2))
         return
     if args.open is not None:
         print(json.dumps(force_open(args.open), ensure_ascii=False, indent=2))

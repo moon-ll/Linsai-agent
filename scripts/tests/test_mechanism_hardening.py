@@ -1740,6 +1740,51 @@ class ModelEscapeTests(TestSuite):
                 "16.6 备用连续失败达限应 open 停摆",
             )
             self.assert_true(cb.allow_dispatch() is False, "16.6 open 期间拒绝派发")
+
+            # 16.7（v6.9.76）分桶触发：writer 成功不清零 critic/monitor 桶
+            cb.STATE_PATH = self.tmp / "esc4.json"
+            cb.record_job_result(False, "超时(900s)", job_kind="long", step="critic")
+            cb.record_job_result(True, job_kind="long", step="writer")
+            st = cb._load()
+            self.assert_true(
+                st.get("consecutive_escape_step_timeouts") == 1,
+                "16.7 writer 成功不应清零分桶计数（zai 挂起证据不被抹掉）",
+            )
+            self.assert_true(
+                st.get("consecutive_long_timeouts") == 0,
+                "16.7 writer 成功应清零全局计数",
+            )
+            r = cb.record_job_result(False, "超时(900s)", job_kind="long", step="monitor")
+            self.assert_true(
+                r["state"] == "closed" and r.get("escape_active"),
+                "16.7 分桶达阈值应激活逃生（全局计数未达 3 也触发）",
+            )
+            # 桶内步骤成功清零桶计数
+            st = cb._load()
+            st["escape"]["active"] = False
+            st["escape"]["probe_due_at"] = ""
+            st["consecutive_escape_step_timeouts"] = 1
+            cb._save(st)
+            cb.record_job_result(True, job_kind="long", step="monitor")
+            self.assert_true(
+                cb._load().get("consecutive_escape_step_timeouts") == 0,
+                "16.7 桶内步骤成功应清零桶计数",
+            )
+
+            # 16.8（v6.9.76）force_escape_open 手动激活 + 微调度器传 step
+            cb.STATE_PATH = self.tmp / "esc5.json"
+            r = cb.force_escape_open("测试-手动逃生")
+            self.assert_true(
+                r.get("escape_active") is True
+                and cb.escape_override_target() == dict(cb.ESCAPE_TARGET),
+                "16.8 手动激活逃生后应注入备用模型",
+            )
+            ms_src = (Path(__file__).parent.parent / "lifecycle" /
+                      "micro_scheduler.py").read_text(encoding="utf-8")
+            self.assert_true(
+                "step=_step" in ms_src,
+                "16.8 微调度器应向熔断器传递 step（分桶计数依赖）",
+            )
         finally:
             cb.STATE_PATH = real_path
 
