@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
 
 import os
+import re
 import subprocess
 
 from common import now_utc, load_json, hermes_subprocess_env
@@ -1066,6 +1067,7 @@ class OptimizeMixin:
             f"6. 重点检查写作风格：凡是发现知识整理/文献罗列/条目式堆砌/缺乏连贯叙事，标记为 [high] narrative issue\n"
             f"7. 每个问题给出具体、可执行的修改建议，并标注违反的 rubric 条款或标准条款\n"
             f"8. 按严重程度分级（critical/high/medium/low）\n\n"
+            f"【报告体量纪律：报告全文不超过 6000 字（约 12KB）。逐条对照用简短结论行，展开论证只针对 P0/P1 问题——冗长报告本身是评审超时的直接原因之一】\n"
             f"【评审报告必须包含以下段落（缺一不可，缺失则评审无效）】\n"
             f"- '执行清单对照'段落：逐条报告上方执行清单的通过/不通过状态\n"
             f"- '写作风格评估'段落：引用程序化检测结果，评估叙述式写作合规性\n"
@@ -2295,14 +2297,47 @@ class OptimizeMixin:
         # 回退：简单平均
         return round(sum(dim_scores.values()) / max(len(dim_scores), 1), 4)
 
+    # 元叙述/表格行特征——这些行提到 [critical]/[high] 只是引用或纪律说明，
+    # 不是问题条目本身（实测 R8 报告 28 条"issue"全是表格行与评分说明，
+    # 全量注入下一轮 critic prompt 造成 6.4KB 垃圾 + 逐条核对负担）
+    _ISSUE_NOISE_PAT = re.compile(
+        r"^\s*(\||#|>|---|```)"             # 表格/标题/引用/代码块行
+        r"|红线抑制校验|纪律：|强制.*区间|评分块|综合评分"
+        r"|执行清单|对照.*通过|不通过.*\||锚点对比结论"
+    )
+
     def _extract_issues(self, critic_result: Dict[str, Any]) -> List[Dict[str, Any]]:
-        """从 critic 输出中提取问题列表（简化版，只提取严重程度）。"""
+        """从 critic 输出中提取问题列表。
+
+        v6.9.66 修复：原实现是"行内含 [sev] 标记即收"——报告中的 Markdown
+        表格行、评分说明、交叉引用（如"见 [high] anti_ai #4"）全部被误收，
+        且一行含多个标记时重复收集（内层循环不 break）。实测 R8 报告产出
+        28 条表格行垃圾，经 open_critical_issues 全量注入下一轮 critic
+        prompt（要求逐条核对），是 critic 超时恶化（24h 成功率 7%）的
+        主因之一。修复：噪声行过滤 + 每行只收最高严重级 + 实质性要求。
+        """
         output = critic_result.get("output", "")
         issues = []
+        seen_lines = set()
         for line in output.split("\n"):
-            for sev in ["critical", "high", "medium", "low"]:
-                if f"[{sev}]" in line or f"（{sev}）" in line:
-                    issues.append({"severity": sev, "line": line.strip()[:100]})
+            stripped = line.strip()
+            if len(stripped) < 20:
+                continue  # 过短行无实质内容
+            if self._ISSUE_NOISE_PAT.search(stripped):
+                continue
+            found = None
+            for sev in ("critical", "high", "medium", "low"):
+                if f"[{sev}]" in stripped or f"（{sev}）" in stripped:
+                    found = sev
+                    break  # 只收最高严重级
+            if not found:
+                continue
+            # 去重：同内容行只收一次
+            key = stripped[:80]
+            if key in seen_lines:
+                continue
+            seen_lines.add(key)
+            issues.append({"severity": found, "line": stripped[:200]})
         return issues
 
 
@@ -2441,13 +2476,26 @@ class OptimizeMixin:
         if not entries:
             return ""
 
-        unresolved = [e for e in entries if e.get("round_resolved") is None and not e.get("stale")]
+        def _is_noise(e):
+            """表格行/元叙述噪声过滤（v6.9.66）——历史存量含大量误收条目。"""
+            d = str(e.get("description", ""))
+            return bool(re.match(r"^\s*(\||#|>|---|```)", d)) or \
+                bool(re.search("红线抑制校验|纪律：|综合评分|执行清单|锚点对比结论", d))
+
+        unresolved = [e for e in entries
+                      if e.get("round_resolved") is None and not e.get("stale") and not _is_noise(e)]
+        # 上限 12 条：critical 优先，其余按 last_seen 降序——P0 记忆是聚焦信号
+        # 不是全量账本（历史全量注入实测 6.4KB 且多为重复噪声，稀释 critic 注意力）
+        unresolved.sort(key=lambda e: (
+            0 if (e.get("severity") or "").lower() == "critical" else 1,
+            -(e.get("last_seen_round", 0) or 0)))
+        unresolved = unresolved[:12]
         if exclude_resolved:
             target = unresolved
         else:
             # writer 需要看到未解决 + 最近 3 条已解决（防止反复横跳）
             resolved = sorted(
-                [e for e in entries if e.get("round_resolved") is not None],
+                [e for e in entries if e.get("round_resolved") is not None and not _is_noise(e)],
                 key=lambda e: e.get("round_resolved", 0), reverse=True,
             )[:3]
             target = unresolved + resolved

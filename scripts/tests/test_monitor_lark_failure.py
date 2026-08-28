@@ -75,6 +75,12 @@ class MonitorLarkFailureTests(TestSuite):
         self.monitor._check_proposals = lambda: (stats, anomalies)
         self.monitor._check_cron_status = lambda: None
         self.monitor._check_zero_progress = lambda stats: None
+        # v6.9.68 补桩：健康信号/负反馈自愈/人工队列同样读真实数据——
+        # 实测真实 human_queue 的 bsv 催办（>72h）泄漏进本测试致
+        # notified_count 期望 1 实际 2。单元测试只测通知路径本身。
+        self.monitor._check_health_signals = lambda: None
+        self.monitor._auto_heal_negative_feedback = lambda: []
+        self.monitor._run_human_queue_step = lambda: None
         # 桩化 _update_kanban 和 get_current_focus（避免依赖真实数据）
         self.monitor._update_kanban = lambda stats, focus: None
         self.monitor.get_current_focus = lambda: None
