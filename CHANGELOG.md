@@ -1,6 +1,32 @@
 # 变更记录
 
-## v6.9.71 - 2026-08-28 蒸馏积压画像 + research/projects 域下线（精炼第四阶段之一）
+## v6.9.72 - 2026-08-28 知识库正向作用审计 + 蒸馏双时段 + 入池 gate
+
+**知识库→申请书优化正向作用审计**（数据实证，详见会话记录）：
+
+- **lit_search 联网检索链（强正向）**：申请书 references 的实际主要来源——
+  每次 gap 驱动检索 10 篇直接进 02_literature 供 writer 引用；qg references
+  与 KB 重合 18%（11/60）、berry 11%、attosecond 3%。
+- **KB context 注入（运转中，中等强度）**：executor KB-first 预检索实测
+  返回 1571 字符/10 篇命中注入 writer prompt（去重 + 背景）。
+- **课题凝练链（间接但真实）**：周末 input→cluster→topic_match→
+  idea_generator 已产出 berry/attosecond 两课题（source=auto_idea）。
+- **蒸馏 wiki（弱正向，覆盖不足）**：笔记覆盖率仅 3.6%（756 篇缺笔记），
+  限制 KB context 命中强度——蒸馏加速正是做实此渠道。
+
+**蒸馏端加速**：新增 lc-kb-distill-pm cron（每日 18:50，--auto + kb_linker
+补边），与 12:50 主时段合计日蒸馏 40 篇（FIFO 取天然不重复，时段错开无
+并发），350 篇积压约 9 天清完（不计新进）。
+
+**入池端 gate**：generate_briefing_v3.py phase1 新增 MIN_DEEPXIV_SCORE=0.5
+（2026-07 规划项落地）——DeepXiv score <0.5 不入池；arXiv 直抓（固定
+0.5 分）与缺分条目默认放行。实测池中 score 中位 0.5、<0.5 占 21%，
+gate 后日进量约 12→9 篇。入池频率保持 4 次/天不变。
+
+注：gate 脚本与 cron 位于 hermes 侧（~/Desktop/hermes_workspace 与
+~/.hermes），不在本仓库 git 内，本条目为变更留档。
+
+## v6.9.71 - 2026-08-28 蒸馏积压画像 + research/projects 域下线（精炼第四阶段之一） - 2026-08-28 蒸馏积压画像 + research/projects 域下线（精炼第四阶段之一）
 
 **积压画像（用户问询答复）**：待蒸馏 350 篇全部来自 knowledge/raw/papers
 （arXiv 论文全文缓存），由简报检索 cron（00/06/12/18:23 每天 4 次）+ 周末
