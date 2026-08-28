@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-27T23:15:59Z",
+      "updated_at": "2026-08-28T00:50:25Z",
       "optimization_rounds": 2,
       "last_score": 0.81,
       "score_history": [
@@ -920,10 +920,10 @@
           "round": 2,
           "status": "failed",
           "depends_on": [],
-          "attempts": 1,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "2026-08-27T22:55:59Z",
-          "finished_at": "2026-08-27T23:15:59Z",
+          "started_at": "2026-08-28T00:30:25Z",
+          "finished_at": "2026-08-28T00:50:25Z",
           "last_error": "超时(1200s)",
           "cron_job_id": "",
           "error_history": [
@@ -941,9 +941,14 @@
               "at": "2026-08-27T22:00:52Z",
               "error": "自动解锁(v6.8.54): 修复系统放弃且失败超24h，重置重跑（第1次/上限1）",
               "attempts": 3
+            },
+            {
+              "at": "2026-08-28T00:30:25Z",
+              "error": "超时(1200s)",
+              "attempts": 1
             }
           ],
-          "repair_attempts": 3,
+          "repair_attempts": 4,
           "auto_unlock_count": 1
         },
         {
@@ -9142,7 +9147,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-28T00:05:21Z",
+      "updated_at": "2026-08-28T01:20:32Z",
       "optimization_rounds": 7,
       "last_score": 0.69,
       "score_history": [
@@ -10702,20 +10707,25 @@
           "round": 8,
           "status": "failed",
           "depends_on": [],
-          "attempts": 1,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "2026-08-27T23:25:04Z",
-          "finished_at": "2026-08-28T00:05:21Z",
-          "last_error": "运行超时/进程僵死",
+          "started_at": "2026-08-28T01:00:32Z",
+          "finished_at": "2026-08-28T01:20:32Z",
+          "last_error": "超时(1200s)",
           "cron_job_id": "",
           "error_history": [
             {
               "at": "2026-08-27T12:25:17Z",
               "error": "超时(1200s)",
               "attempts": 1
+            },
+            {
+              "at": "2026-08-28T01:00:32Z",
+              "error": "运行超时/进程僵死",
+              "attempts": 1
             }
           ],
-          "repair_attempts": 2
+          "repair_attempts": 3
         },
         {
           "job_id": "general-order-parameter-ultrafast-readout-20260727-r8-rationale-gap_identify",
@@ -18377,5 +18387,5 @@
       "idea_review_required_reason": "负反馈自动清除降级：退回研究设想评审；monitor 独立分数连续 3 轮下降"
     }
   },
-  "updated_at": "2026-08-28T00:05:21Z"
+  "updated_at": "2026-08-28T01:20:32Z"
 }

@@ -1553,15 +1553,26 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
                 result = self.execute_job(refreshed)
 
                 # v6.8.50: 回报熔断器——连续 api_error 触发熔断后立即停止本轮派发
+                # v6.9.66: 按 step 传 job_kind——长输出主链（critic/writer/
+                # monitor 等）的"空输出+触顶超时"计入熔断（配额限流特征，
+                # 429 文本检测对此失明），短输出 job 不计入也不清零长链计数。
                 if cb_allow_dispatch is not None:
                     try:
-                        from circuit_breaker import record_job_result as cb_record
-                        cb_st = cb_record(result.get("success", False), result.get("error", ""))
+                        from circuit_breaker import (
+                            record_job_result as cb_record,
+                            LONG_OUTPUT_STEPS,
+                        )
+                        _step = refreshed.get("step", "")
+                        _kind = "long" if _step in LONG_OUTPUT_STEPS else "short"
+                        cb_st = cb_record(result.get("success", False),
+                                          result.get("error", ""),
+                                          job_kind=_kind)
                         if cb_st.get("state") == "open" and not result.get("success"):
                             if _log:
                                 _log.warning(
                                     f"[micro-scheduler] API 熔断已开启"
-                                    f"（连续 {cb_st.get('consecutive_api_errors')} 次），本轮停止派发"
+                                    f"（api_error 连续 {cb_st.get('consecutive_api_errors')}"
+                                    f"/长输出超时连续 {cb_st.get('consecutive_long_timeouts')}），本轮停止派发"
                                 )
                             executed.append({
                                 "proposal_id": proposal_id,
