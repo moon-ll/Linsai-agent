@@ -78,10 +78,17 @@ def load_requests() -> List[Dict[str, Any]]:
 # ─────────────────────────────────────────────
 
 def _raw_frontmatter(raw_path: Path) -> Dict[str, Any]:
-    """粗提取 raw md frontmatter 的关键字段（不做完整 YAML 解析）。"""
+    """粗提取 raw md frontmatter 的关键字段（不做完整 YAML 解析）。
+
+    v6.9.77: 头读窗口 1200→8192——kb_importer 的 frontmatter 字段序中
+    score_agent/agent_rejected 位于 title/authors 之后（v6.9.75 gate2 同类），
+    35+ 作者大协作组论文偏移可超 1200B，短窗口会把 score_agent≥8 的高分
+    论文误判为摘要级、漏出深度阅读队列。
+    """
     out: Dict[str, Any] = {}
     try:
-        head = raw_path.open(encoding="utf-8", errors="ignore").read(1200)
+        with raw_path.open(encoding="utf-8", errors="ignore") as _fh:
+            head = _fh.read(8192)
     except OSError:
         return out
     m = re.search(r"arxiv_id:\s*\"?([^\n\"#]+?)\"?\s*\n", head)
@@ -202,11 +209,9 @@ def backfill_pdfs(dry_run: bool = False, limit: Optional[int] = None) -> Dict[st
         if not aid or not re.match(r"^\d{4}\.\d{4,5}", aid):
             results["skip"] += 1
             continue  # DOI 型/无 ID：暂不支持
-        try:
-            head = p.open(encoding="utf-8", errors="ignore").read(1200)
-        except OSError:
-            continue
-        if re.search(r"has_fulltext:\s*true", head):
+        # v6.9.77: 复用 _raw_frontmatter（已读 8192B 头）——此前的二次
+        # 1200B 头读既冗余又泄漏文件句柄（同日 gate2 修复的同类问题）
+        if fm.get("has_fulltext"):
             results["skip"] += 1
             continue
         rows.append((p, aid))
@@ -245,8 +250,20 @@ def _self_check() -> None:
             '---\narxiv_id: "2502.00001"\nscore_agent: 5\n---\n正文', encoding="utf-8")
         (raw_dir / "c.md").write_text(
             '---\narxiv_id: "2503.00002"\nhas_fulltext: true\n---\n正文', encoding="utf-8")
+        # v6.9.77 回归：大协作组论文（kb_importer 字段序 score_agent 位于
+        # title/authors 之后，40 作者偏移 ~1800B 溢出旧 1200B 窗口）
+        big_authors = ", ".join(
+            f"F. M. Author-With-Longname van der Berg {i:03d}" for i in range(40))
+        (raw_dir / "d.md").write_text(
+            '---\ntitle: "Large collaboration high score paper"\n'
+            'arxiv_id: "2504.00003"\n'
+            f'authors: "{big_authors}"\n'
+            'imported_at: "2026-08-29T00:00:00Z"\n'
+            "score_agent: 9\n---\n正文", encoding="utf-8")
         sel = select_candidates(raw_dir)
-        assert len(sel["deep"]) == 1 and sel["deep"][0]["path"].name == "a.md", sel
+        assert len(sel["deep"]) == 2, sel
+        assert {e["path"].name for e in sel["deep"]} == {"a.md", "d.md"}, \
+            "大作者论文的 score_agent 不应因头读窗口截断而漏检"
         assert len(sel["abstract_level"]) == 1, "c 已有全文应跳过"
     fm = _raw_frontmatter(RAW_PAPERS_DIR)
     assert isinstance(fm, dict)

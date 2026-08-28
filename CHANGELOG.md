@@ -1,5 +1,29 @@
 # 变更记录
 
+## v6.9.77 - 2026-08-29 deep_read_pipeline 头读窗口同类修复（1200B→8192B）+ backfill 冗余读清理
+
+**00h 健康检查发现（v6.9.75 同类缺陷）**：v6.9.75 修复了 kb_distill gate2
+的 500B 头读窗口（agent_rejected 位于 title/authors 之后，30+ 作者论文
+偏移 660B+ 溢出），但同日新增的 `deep_read_pipeline._raw_frontmatter`
+仍用 1200B 窗口——kb_importer 字段序中 `score_agent` 同样位于
+title/authors 之后，35+ 作者大协作组论文（物理领域百人作者常见）偏移
+可超 1200B，score_agent≥8 的高分论文会被误判为摘要级、漏出深度阅读
+队列。当前生产暂未触发（R1 数据流断点致 score_agent 字段尚未到达
+raw .md），属 R1 修复后必然引爆的潜伏缺陷。
+
+**修复**：
+1. `_raw_frontmatter` 头读窗口 1200→8192（与 gate2 修复口径一致，
+   覆盖 100+ 作者），并改用 `with` 上下文管理器（修文件句柄泄漏）。
+2. `backfill_pdfs` 删除冗余的二次 1200B 头读（既重复又泄漏句柄），
+   复用 `_raw_frontmatter` 的解析结果。
+3. `kb_distill._deep_wiki_rel` 移除未使用的 `distill_raw_to_wiki as _d`
+   死导入。
+
+**验证**：新增 `scripts/tests/test_deep_read_long_authors.py`（4 用例：
+40 作者偏移 ~1800B 命中 / 100 作者偏移 ~3400B 命中 / 短作者低分仍摘要级
+/ 超窗口 agent_rejected 可见性），已注册 self_test --module 清单；
+`deep_read_pipeline --self-check` 增加大作者回归用例；全量回归通过。
+
 ## v6.9.76 - 2026-08-28 逃生分桶触发：critic/monitor 超时独立计数，异供应商成功不再抹掉挂起证据
 
 **08-28 晚运转暴露的盲点**：模型逃生机制（v6.9.69）上线当晚，critic/monitor

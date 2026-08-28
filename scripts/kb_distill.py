@@ -209,7 +209,6 @@ def _build_deep_distill_prompt(raw_md: str, fulltext: str) -> str:
 
 def _deep_wiki_rel(raw_path: Path) -> str:
     """全文级蒸馏的 wiki 路径（与现有命名规则一致）。"""
-    from knowledge_base import distill_raw_to_wiki as _d  # 借用其命名推断
     import knowledge_base as _kb
     title_guess = raw_path.stem
     safe_name = _kb._safe_filename(title_guess)
