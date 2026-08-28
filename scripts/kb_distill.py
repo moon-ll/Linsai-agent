@@ -215,6 +215,16 @@ def run_batch(batch: int = DEFAULT_BATCH, dry_run: bool = False) -> Dict[str, An
     Returns:
         {total_pending, attempted, ok, failed, results}
     """
+    # v6.9.73: 进程级互斥锁——批量蒸馏与 cron 时段（12:50/18:50）可能并发，
+    # 无锁时两边会取到同一 pending 重复蒸馏（浪费 LLM 调用）。抢不到锁
+    # 温和退出（skipped=lock_busy），与周末流水线语义一致。
+    from common import file_lock
+    try:
+        lock_ctx = file_lock("kb-distill", blocking=False)
+        lock = lock_ctx.__enter__()
+    except Exception:
+        return {"total_pending": len(pending_distill_list()), "attempted": 0,
+                "ok": 0, "failed": 0, "results": [], "skipped": "lock_busy"}
     pending = pending_distill_list()
     todo = pending[:batch]
     results = []

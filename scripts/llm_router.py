@@ -141,7 +141,9 @@ TASK_PROVIDER_PREFS: Dict[str, Tuple[str, ...]] = {
     # 最长 369s）再降级 glm，350 篇积压按此链路约 26 小时不可行；
     # glm 直连单篇 30-60s。蒸馏为治理类长文生成任务，与 governance
     # 同级。失败仍回落全局链，无新增失败面。
-    "kb_distill": ("glm", "glm-fallback"),
+    # v6.9.73: minimax 优先——glm 对蒸馏长 prompt 实测 104s 且返回失败
+    # （08-28 18:18 实证），minimax 1.8s 稳定；glm 降为备选
+    "kb_distill": ("minimax", "glm"),
 }
 
 
