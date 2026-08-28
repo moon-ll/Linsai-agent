@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-28T00:50:25Z",
+      "updated_at": "2026-08-28T04:01:01Z",
       "optimization_rounds": 2,
       "last_score": 0.81,
       "score_history": [
@@ -371,10 +371,6 @@
       "negative_feedback_reasons": [],
       "cron_failures": [
         {
-          "at": "2026-07-30T09:07:03Z",
-          "error": "name 'PROPOSAL_SECTIONS' is not defined"
-        },
-        {
           "at": "2026-08-26T22:00:48Z",
           "error": "general-quantum-geometry-inversion-20260726-r2-rationale-critic: 超时(1200s)"
         },
@@ -388,6 +384,10 @@
         },
         {
           "at": "2026-08-27T16:00:54Z",
+          "error": "general-quantum-geometry-inversion-20260726-r2-rationale-critic: 超时(1200s)"
+        },
+        {
+          "at": "2026-08-28T04:01:01Z",
           "error": "general-quantum-geometry-inversion-20260726-r2-rationale-critic: 超时(1200s)"
         }
       ],
@@ -2754,7 +2754,7 @@
       "source": "expansion",
       "source_detail": "候选2：瞬态量子相的全光读写，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-27T22:00:52Z",
+      "updated_at": "2026-08-28T04:01:01Z",
       "optimization_rounds": 0,
       "last_score": 0.76,
       "score_history": [
@@ -3326,10 +3326,6 @@
       "worker_minute": 59,
       "cron_failures": [
         {
-          "at": "2026-08-25T10:00:05Z",
-          "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
-        },
-        {
           "at": "2026-08-26T22:00:49Z",
           "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
         },
@@ -3343,6 +3339,10 @@
         },
         {
           "at": "2026-08-27T22:00:52Z",
+          "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-28T04:01:01Z",
           "error": "key-transient-quantum-phase-optical-20260726-r1-content-critic: 超时(900s)"
         }
       ],
@@ -4545,7 +4545,7 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-27T23:20:03Z",
+      "updated_at": "2026-08-28T04:01:01Z",
       "optimization_rounds": 5,
       "last_score": 0.68,
       "score_history": [
@@ -6804,10 +6804,6 @@
       "low_score_alert": false,
       "cron_failures": [
         {
-          "at": "2026-08-25T10:00:05Z",
-          "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
-        },
-        {
           "at": "2026-08-26T22:00:49Z",
           "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
         },
@@ -6821,6 +6817,10 @@
         },
         {
           "at": "2026-08-27T22:00:52Z",
+          "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-28T04:01:01Z",
           "error": "general-moire-strong-field-probe-20260726-r5-content-critic: 超时(900s)"
         }
       ],
@@ -9147,7 +9147,7 @@
       "source": "expansion",
       "source_detail": "来自 hermes workspace 课题雏形 T4_order_parameters",
       "created_at": "2026-07-27T13:38:41Z",
-      "updated_at": "2026-08-28T01:20:32Z",
+      "updated_at": "2026-08-28T04:01:01Z",
       "optimization_rounds": 7,
       "last_score": 0.69,
       "score_history": [
@@ -9665,14 +9665,6 @@
       "missing_sections": [],
       "cron_failures": [
         {
-          "at": "2026-08-25T10:00:06Z",
-          "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
-        },
-        {
-          "at": "2026-08-26T22:00:49Z",
-          "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
-        },
-        {
           "at": "2026-08-27T04:04:34Z",
           "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
         },
@@ -9683,6 +9675,14 @@
         {
           "at": "2026-08-27T22:00:52Z",
           "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-28T04:01:01Z",
+          "error": "general-order-parameter-ultrafast-readout-20260727-r7-references-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-28T04:01:01Z",
+          "error": "general-order-parameter-ultrafast-readout-20260727-r8-rationale-critic: 超时(1200s)"
         }
       ],
       "negative_feedback_reasons": [],
@@ -12049,7 +12049,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 二维材料中交变磁性磁态的自旋-能谷耦合与滑移调控",
       "created_at": "2026-08-16T03:49:25Z",
-      "updated_at": "2026-08-27T22:50:55Z",
+      "updated_at": "2026-08-28T04:01:01Z",
       "optimization_rounds": 2,
       "last_score": 0.51,
       "score_history": [
@@ -14128,6 +14128,10 @@
         {
           "at": "2026-08-25T10:00:06Z",
           "error": "general-berry-mnps3-rashba-20260816-r2-scheme-critic: 超时(1200s)"
+        },
+        {
+          "at": "2026-08-28T04:01:01Z",
+          "error": "general-berry-mnps3-rashba-20260816-r3-rationale-critic: 超时(1200s)"
         }
       ]
     },
@@ -14137,7 +14141,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 交变磁体高次谐波产生与固态强场非线性光学新前沿",
       "created_at": "2026-08-22T05:40:16Z",
-      "updated_at": "2026-08-28T00:00:18Z",
+      "updated_at": "2026-08-28T04:01:01Z",
       "optimization_rounds": 2,
       "last_score": 0.55,
       "score_history": [
@@ -15627,15 +15631,15 @@
           "step": "monitor",
           "section_key": "monitor",
           "round": 2,
-          "status": "failed",
+          "status": "pending",
           "depends_on": [
             "general-new-idea-20260822-r2-references-writer"
           ],
-          "attempts": 3,
+          "attempts": 0,
           "scheduled_at": "",
-          "started_at": "2026-08-27T01:25:40Z",
-          "finished_at": "2026-08-27T01:35:40Z",
-          "last_error": "超时(600s)",
+          "started_at": "",
+          "finished_at": "",
+          "last_error": "",
           "cron_job_id": "",
           "error_history": [
             {
@@ -15647,9 +15651,15 @@
               "at": "2026-08-27T01:20:38Z",
               "error": "超时(600s)",
               "attempts": 1
+            },
+            {
+              "at": "2026-08-28T04:01:01Z",
+              "error": "自动解锁(v6.8.54): 修复系统放弃且失败超24h，重置重跑（第1次/上限1）",
+              "attempts": 3
             }
           ],
-          "repair_attempts": 3
+          "repair_attempts": 3,
+          "auto_unlock_count": 1
         },
         {
           "job_id": "general-new-idea-20260822-r2-derived-update_vision",
@@ -16178,6 +16188,10 @@
         {
           "at": "2026-08-27T22:00:53Z",
           "error": "general-new-idea-20260822-r2-monitor-monitor: 超时(600s)"
+        },
+        {
+          "at": "2026-08-28T04:01:01Z",
+          "error": "general-new-idea-20260822-r3-rationale-critic: 超时(1200s)"
         }
       ]
     },
@@ -16187,7 +16201,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 阿秒条纹技术：从超短脉冲表征到量子相位测量（手动补注册 2026-08-22）",
       "created_at": "2026-08-22T12:20:08Z",
-      "updated_at": "2026-08-27T22:00:53Z",
+      "updated_at": "2026-08-28T04:01:01Z",
       "optimization_rounds": 8,
       "last_score": 0.72,
       "score_history": [
@@ -18437,6 +18451,10 @@
         {
           "at": "2026-08-27T22:00:53Z",
           "error": "general-attosecond-streaking-20260822-r8-content-critic: 超时(900s)"
+        },
+        {
+          "at": "2026-08-28T04:01:01Z",
+          "error": "general-attosecond-streaking-20260822-r8-content-critic: 超时(900s)"
         }
       ],
       "negative_feedback_auto_clear_count": 1,
@@ -18444,5 +18462,5 @@
       "idea_review_required_reason": "负反馈自动清除降级：退回研究设想评审；monitor 独立分数连续 3 轮下降"
     }
   },
-  "updated_at": "2026-08-28T01:20:32Z"
+  "updated_at": "2026-08-28T04:01:01Z"
 }
