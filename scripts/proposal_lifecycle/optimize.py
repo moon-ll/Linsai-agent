@@ -1991,10 +1991,34 @@ class OptimizeMixin:
         这些进程会继续运行导致 CLI 端口/管道不释放，Python 侧永远收不到子进程退出信号。
         """
         env = hermes_subprocess_env()
+        # v6.9.68: 提前 hermes 自身 stale 放弃阈值。默认需 5 次连续静默挂起
+        # 才触发 give-up（error_classifier 7b 分支 → should_fallback=True →
+        # hermes 按 fallback 链切换供应商），而 api_max_retries=3 结构性达不到；
+        # 且 3×300s(大上下文 stale)=900s 恰好等于 CoPilot 击杀线，进程死在
+        # 重试循环中途连报错都来不及输出（08-27/28 实证：9 个终态 job 全为
+        # 超时+零输出+零 429 文本）。降为 2 次让 give-up 在击杀前发生，
+        # hermes 得以按自身链降级（与 CoPilot 侧模型逃生双保险）。
+        env.setdefault("HERMES_STREAM_STALE_GIVEUP", "2")
 
         import time
         import signal
         cmd = ["hermes", "--profile", profile, "-z", prompt]
+        # v6.9.68: 模型逃生——主模型静默挂起（长输出连续超时→熔断器判定）
+        # 时强制本次调用走备用模型。hermes 内部降级只认明确报错（429/
+        # billing 等 FailoverReason），静默挂起归为同供应商重试，编排层
+        # 注入是唯一出路。试探窗口内返回 None（本次走主模型试探）。
+        try:
+            from circuit_breaker import escape_override_target
+            _esc_target = escape_override_target()
+        except Exception:
+            _esc_target = None
+        if _esc_target:
+            cmd += ["--provider", _esc_target["provider"], "-m", _esc_target["model"]]
+            if _log:
+                _log.info(
+                    f"[model-escape] {profile} 强制备用模型: "
+                    f"{_esc_target['provider']}/{_esc_target['model']}"
+                )
         t0 = time.time()
         proc = None
         try:

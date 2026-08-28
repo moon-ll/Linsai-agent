@@ -1,5 +1,36 @@
 # 变更记录
 
+## v6.9.69 - 2026-08-28 模型逃生机制：主模型静默挂起时备用模型接管而非停摆
+
+**根因（08-27/28 危机复盘）**：zai 限额期失败形态是"静默挂起"（连接建立后
+无字节返回、无 429 文本）。hermes 内部降级只认明确报错（error_classifier
+的 rate_limit/billing 分支），普通 TimeoutError 归为同供应商重试；唯一能从
+挂起走到降级的 stale-giveup 需 5 次连续静默而重试上限 3 次结构性达不到，
+且 3×300s(大上下文 stale)=900s 恰好等于 CoPilot 击杀线——9 个终态 job
+全部死在重试循环中途（超时+零输出+零 429），备用链 3 条一条都没轮到。
+
+**三层修复**：
+1. 编排层模型逃生（circuit_breaker.py + optimize.py `_run_hermes`）：
+   长输出 job 连续超时达 LONG_TIMEOUT_THRESHOLD(3) 时激活逃生——调度
+   照常不停摆，hermes 调用经 `escape_override_target()` 注入
+   `--provider minimax-cn -m MiniMax-M3` 强制备用模型；每 30min 放行一次
+   主模型试探（成功即解除）；备用连续失败达 ESCAPE_FAILURE_LIMIT(3)
+   → open 真停摆（主备全挂）。api_error（明确 429）路径保持原停摆语义。
+2. 提前 hermes 自身 stale 放弃（`HERMES_STREAM_STALE_GIVEUP=2` 环境注入）：
+   give-up 触发 error_classifier 7b 分支 should_fallback=True，hermes
+   得以在击杀前按自身 fallback 链降级（与编排层逃生双保险）。
+3. profile 链首跨供应商（hermes 侧配置，已备份）：critic/reviewer 的
+   fallback 链首 zai/glm-5.2（同账户兜不住账户级限额）调整为
+   minimax-cn/MiniMax-M3 优先。
+
+**验证**：circuit_breaker 自检 14 路径全过（逃生激活/注入/试探解除/主备
+全挂停摆/probing 长超时转逃生）；test_mechanism_hardening 新增 16.x 套件
+12 用例（源码守卫+功能闭环）；全量模块回归 1227/1227；端到端实弹验证
+（mock Popen 走真实代码路径）四场景全过，日志确认
+`[model-escape] critic 强制备用模型: minimax-cn/MiniMax-M3`。
+生产熔断器已复位 closed（主模型实测恢复 19.6s），今晚 18:30 时段起
+201 个积压 job 恢复推进。
+
 ## v6.9.68 - 2026-08-28 优化环节运转评估：critic 超时根因治理（报告解析噪声闭环）+ 测试隔离补桩
 
 按用户指令评估申请书优化环节近期运转。数据结论：**质量机制本身在生效

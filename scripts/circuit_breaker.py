@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""circuit_breaker.py — API 配额熔断器（v6.8.50 双平面架构·维持平面防御层）
+"""circuit_breaker.py — API 配额熔断器 + 模型逃生（v6.9.68）
 
 背景：2026-08-14 MiniMax Token Plan 耗尽期间，微调度器持续派发 job、
 hermes 持续 429 空转三小时（v6.8.48 已让这类 job 标记 success=False +
@@ -14,6 +14,22 @@ error=api_error:*）。本模块在此之上止血：连续 API 错误达到阈�
     probing（放行 1 个 job 试探）
       ├─ 成功 → closed（计数清零）
       └─ api_error → open（重新计时）
+
+v6.9.68 模型逃生层（closed 状态下的模型选择器）：
+    背景（08-27/28 实证）：主模型（zai/glm-5.3）限额期的失败形态是
+    "静默挂起"——连接建立后无字节返回、无 429 文本。hermes 内部降级
+    只认明确报错（error_classifier 的 rate_limit/billing 分支）；
+    普通 TimeoutError 归为 retryable（同供应商重试），唯一能从挂起
+    走到降级的 stale-giveup 需要 5 次连续静默，而重试上限 3 次结构性
+    达不到；且 3×300s(stale)=900s 恰好等于 CoPilot 击杀线，进程死在
+    重试循环中途连报错都来不及输出。
+    行为：长输出 job 连续超时达 LONG_TIMEOUT_THRESHOLD 时不再停摆，
+    而是激活逃生——调度照常，_run_hermes 经 escape_override_target()
+    给 hermes 调用注入 --provider/-m 强制备用模型；每隔
+    ESCAPE_PROBE_INTERVAL_S 放行一次主模型试探，成功即解除；
+    备用模型连续失败达 ESCAPE_FAILURE_LIMIT → open 真停摆。
+    api_error（明确 429 文本）路径保持原停摆语义不变——此时 hermes
+    内部 fallback 链已耗尽，注入备用无意义。
 
 状态文件：memory/circuit-state.json（fcntl 锁保护，原子写入）
 
@@ -60,12 +76,89 @@ LONG_OUTPUT_STEPS = {
     "critic", "writer", "monitor", "idea_review",
     "update_vision", "update_method_manual",
 }
+# ── v6.9.68 模型逃生参数 ──
+# 逃生激活后每隔此间隔放行一次主模型试探（成功即解除逃生）
+ESCAPE_PROBE_INTERVAL_S = 1800
+# 备用模型连续失败达此数 → open 真停摆（主备全挂）
+ESCAPE_FAILURE_LIMIT = 3
+# 逃生目标（跨供应商备用模型）。zai 静默挂起时 MiniMax 接管；
+# 若危机源是 minimax 本身（writer 侧触发逃生），注入无增益但无害，
+# 连续失败达限后仍会走 open 停摆兜底。
+ESCAPE_TARGET = {"provider": "minimax-cn", "model": "MiniMax-M3"}
 
 
 def is_timeout_error(error: str) -> bool:
     """失败 error 是否为超时类（超时/timeout/触顶）。"""
     e = str(error or "")
     return "超时" in e or "timeout" in e.lower()
+
+
+def _ts_plus(seconds: float) -> str:
+    """当前 UTC 时间 + seconds 的 ISO 时间戳。"""
+    return (datetime.now(timezone.utc) + timedelta(seconds=seconds)
+            ).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _escape(st: Dict[str, Any]) -> Dict[str, Any]:
+    """懒取并规范化 escape 子状态。"""
+    esc = st.get("escape")
+    if not isinstance(esc, dict):
+        esc = {}
+    esc.setdefault("active", False)
+    esc.setdefault("activated_at", "")
+    esc.setdefault("probe_due_at", "")
+    esc.setdefault("probe_in_flight", False)
+    esc.setdefault("escape_failures", 0)
+    esc.setdefault("escape_runs", 0)
+    return esc
+
+
+def _activate_escape(st: Dict[str, Any], reason: str) -> None:
+    """激活模型逃生：调度照常，hermes 调用强制备用模型。"""
+    esc = _escape(st)
+    esc["active"] = True
+    esc["activated_at"] = now_utc()
+    esc["probe_due_at"] = _ts_plus(ESCAPE_PROBE_INTERVAL_S)
+    esc["probe_in_flight"] = False
+    esc["escape_failures"] = 0
+    esc["escape_runs"] = 0
+    st["escape"] = esc
+    # 历史计数已消化为逃生状态，清零避免重复触发
+    st["consecutive_long_timeouts"] = 0
+
+
+def escape_override_target() -> Optional[Dict[str, str]]:
+    """模型逃生激活时返回备用模型目标，否则 None。
+
+    调用方（proposal_lifecycle/optimize.py 的 _run_hermes）据此给
+    hermes 命令附加 --provider/-m 强制备用模型。试探窗口到期时本次
+    调用走主模型（返回 None）并占用窗口（probe_in_flight=True），
+    由 record_job_result 的试探回报解除占用。
+
+    归因说明：微调度器近似串行派发（每 tick 一个 job），probe 窗口
+    占用期间的回报视为试探结果；极小概率的并发混报自愈无损
+    （误解除→下次长超时重新激活；误停摆→冷却后 probing 自愈）。
+    """
+    with file_lock(LOCK_NAME):
+        st = _load()
+        if st.get("state") != "closed":
+            return None
+        esc = _escape(st)
+        if not esc.get("active"):
+            return None
+        due = esc.get("probe_due_at", "")
+        if (due and not esc.get("probe_in_flight")
+                and _age_seconds(due) >= 0):
+            esc["probe_in_flight"] = True
+            esc["probe_due_at"] = ""
+            st["escape"] = esc
+            _append_history(st, "escape-probe", "主模型试探窗口开启（本调用走主模型）")
+            _save(st)
+            return None
+        esc["escape_runs"] = int(esc.get("escape_runs", 0)) + 1
+        st["escape"] = esc
+        _save(st)
+        return dict(ESCAPE_TARGET)
 
 
 def _default_state() -> Dict[str, Any]:
@@ -169,6 +262,53 @@ def record_job_result(success: bool, error: str = "",
     with file_lock(LOCK_NAME):
         st = _load()
         state = st.get("state", "closed")
+        esc = _escape(st)
+        escape_active = bool(esc.get("active")) and state == "closed"
+
+        if escape_active and success:
+            if esc.get("probe_in_flight"):
+                # 主模型试探成功 → 解除逃生，回主模型
+                esc["active"] = False
+                esc["probe_in_flight"] = False
+                esc["probe_due_at"] = ""
+                esc["escape_failures"] = 0
+                st["escape"] = esc
+                _append_history(st, "escape-closed", "主模型试探成功，解除模型逃生")
+            else:
+                esc["escape_failures"] = 0
+                st["escape"] = esc
+        elif escape_active and not success:
+            if esc.get("probe_in_flight"):
+                # 主模型试探失败 → 关闭窗口，推移下次试探（不计入
+                # 普通失败计数，避免误触发重新激活清掉备用失败历史）
+                esc["probe_in_flight"] = False
+                esc["probe_due_at"] = _ts_plus(ESCAPE_PROBE_INTERVAL_S)
+                st["escape"] = esc
+                _append_history(
+                    st, "escape-probe-fail",
+                    f"主模型试探失败({str(error)[:60]})，"
+                    f"{ESCAPE_PROBE_INTERVAL_S // 60}min 后再试")
+            else:
+                # 备用模型失败 → 计数；达限说明主备全挂，open 真停摆
+                esc["escape_failures"] = int(esc.get("escape_failures", 0)) + 1
+                if esc["escape_failures"] >= ESCAPE_FAILURE_LIMIT:
+                    esc["active"] = False
+                    st["escape"] = esc
+                    st["state"] = "open"
+                    st["opened_at"] = now_utc()
+                    _append_history(
+                        st, "escape->open",
+                        f"备用模型连续 {esc['escape_failures']} 次失败"
+                        f"（主备全挂），暂停派发")
+                else:
+                    st["escape"] = esc
+            _save(st)
+            return {
+                "state": st["state"],
+                "escape_active": bool(st.get("escape", {}).get("active")),
+                "consecutive_api_errors": st.get("consecutive_api_errors", 0),
+                "consecutive_long_timeouts": st.get("consecutive_long_timeouts", 0),
+            }
 
         if success:
             if state in ("probing", "open"):
@@ -197,15 +337,20 @@ def record_job_result(success: bool, error: str = "",
             st["consecutive_long_timeouts"] = st.get("consecutive_long_timeouts", 0) + 1
             n = st["consecutive_long_timeouts"]
             if state == "probing":
-                st["state"] = "open"
-                st["opened_at"] = now_utc()
-                st["last_probe_result"] = "long_timeout"
-                _append_history(st, "probing->open", f"试探超时({error[:60]})，重新熔断")
+                # v6.9.68: 试探长超时 → 激活逃生（切备用继续干）而非回 open
+                st["state"] = "closed"
+                st["opened_at"] = ""
+                st["last_probe_result"] = "long_timeout->escape"
+                _activate_escape(st, f"试探长超时({error[:60]})")
+                _append_history(st, "probing->escape",
+                                f"试探超时({error[:60]})，激活模型逃生")
             elif state == "closed" and n >= LONG_TIMEOUT_THRESHOLD:
-                st["state"] = "open"
-                st["opened_at"] = now_utc()
-                _append_history(st, "closed->open",
-                                f"长输出 job 连续 {n} 次超时（配额限流特征），暂停派发")
+                # v6.9.68: 长输出连续超时（主模型静默挂起特征）→ 激活逃生，
+                # 调度照常、hermes 强制备用模型（v6.9.66 的 open 停摆升级）
+                _activate_escape(st, f"长输出连续 {n} 次超时")
+                _append_history(st, "closed->escape",
+                                f"长输出 job 连续 {n} 次超时（主模型静默挂起特征），"
+                                f"激活模型逃生（备用 {ESCAPE_TARGET['provider']}/{ESCAPE_TARGET['model']}）")
         else:
             # 非 API 类失败（如解析错误）不触发熔断，交给既有重试机制
             pass
@@ -213,6 +358,7 @@ def record_job_result(success: bool, error: str = "",
         _save(st)
         return {
             "state": st["state"],
+            "escape_active": bool(st.get("escape", {}).get("active")),
             "consecutive_api_errors": st.get("consecutive_api_errors", 0),
             "consecutive_long_timeouts": st.get("consecutive_long_timeouts", 0),
         }
@@ -226,7 +372,13 @@ def force_reset() -> Dict[str, Any]:
         st["consecutive_api_errors"] = 0
         st["consecutive_long_timeouts"] = 0
         st["opened_at"] = ""
-        _append_history(st, "manual-reset", "人工复位")
+        esc = _escape(st)
+        esc["active"] = False
+        esc["probe_in_flight"] = False
+        esc["probe_due_at"] = ""
+        esc["escape_failures"] = 0
+        st["escape"] = esc
+        _append_history(st, "manual-reset", "人工复位（含解除模型逃生）")
         _save(st)
         return {"state": st["state"]}
 
@@ -235,11 +387,16 @@ def force_open(reason: str = "") -> Dict[str, Any]:
     """手动熔断为 open（v6.9.66，人工确认配额耗尽/限流时止血）。
 
     冷却期满后自动转 probing 试探——配额恢复即自愈，无需再人工复位。
+    v6.9.68：手动熔断同时解除模型逃生（open 期间调度全停，逃生无意义）。
     """
     with file_lock(LOCK_NAME):
         st = _load()
         st["state"] = "open"
         st["opened_at"] = now_utc()
+        esc = _escape(st)
+        esc["active"] = False
+        esc["probe_in_flight"] = False
+        st["escape"] = esc
         _append_history(st, "manual-open", f"人工熔断: {reason[:80] or '未注明'}")
         _save(st)
         return {"state": st["state"], "opened_at": st["opened_at"]}
@@ -298,18 +455,20 @@ def _self_check() -> None:
         assert r["state"] == "open", "试探失败应回 open"
         print("✓ 试探失败→重新熔断")
 
-        # 路径6（v6.9.66）：长输出 job 连续超时 → 熔断；短 job 成功不清零
+        # 路径6（v6.9.66→v6.9.68）：长输出 job 连续超时 → 激活模型逃生（非停摆）
         STATE_PATH = Path(td) / "s5.json"
         for i in range(LONG_TIMEOUT_THRESHOLD):
             r = record_job_result(False, f"超时(900s) #{i}", job_kind="long")
-        assert r["state"] == "open", f"长输出连续 {LONG_TIMEOUT_THRESHOLD} 次超时应熔断: {r}"
-        print(f"✓ 长输出连续 {LONG_TIMEOUT_THRESHOLD} 次超时 → open")
+        assert r["state"] == "closed" and r.get("escape_active"), \
+            f"长输出连续 {LONG_TIMEOUT_THRESHOLD} 次超时应激活逃生（closed+escape）: {r}"
+        assert allow_dispatch() is True, "逃生期间调度照常"
+        print(f"✓ 长输出连续 {LONG_TIMEOUT_THRESHOLD} 次超时 → 模型逃生激活（调度不停）")
         # 短 job 超时不计数
         STATE_PATH = Path(td) / "s6.json"
         for _ in range(LONG_TIMEOUT_THRESHOLD + 2):
             r = record_job_result(False, "超时(300s)", job_kind="short")
-        assert r["state"] == "closed" and r["consecutive_long_timeouts"] == 0, \
-            "短 job 超时不应触发长链熔断"
+        assert r["state"] == "closed" and r["consecutive_long_timeouts"] == 0 \
+            and not r.get("escape_active"), "短 job 超时不应触发生链逃生"
         print("✓ 短 job 超时不计入长链熔断")
         # 短 job 成功不清零长链计数，长 job 成功清零
         STATE_PATH = Path(td) / "s7.json"
@@ -318,10 +477,12 @@ def _self_check() -> None:
         r = record_job_result(False, "超时(1200s)", job_kind="long")
         assert r["consecutive_long_timeouts"] == 2, \
             f"短 job 成功不应清零长链计数（期望 2，实际 {r['consecutive_long_timeouts']}）"
-        assert r["state"] == "closed", "2 次未达阈值不应熔断"
+        assert r["state"] == "closed" and not r.get("escape_active"), \
+            "2 次未达阈值不应激活逃生"
         r = record_job_result(False, "超时(900s)", job_kind="long")
-        assert r["state"] == "open", "长链连续超时（跨短成功）达阈值应熔断"
-        print("✓ 短成功不清零/长成功清零，跨短成功连续超时仍熔断")
+        assert r["state"] == "closed" and r.get("escape_active"), \
+            "长链连续超时（跨短成功）达阈值应激活逃生"
+        print("✓ 短成功不清零/长成功清零，跨短成功连续超时仍激活逃生")
         # 路径7（v6.9.66）：force_open 手动熔断 + 冷却自愈
         STATE_PATH = Path(td) / "s8.json"
         force_open("自检-人工熔断")
@@ -341,10 +502,57 @@ def _self_check() -> None:
         assert allow_dispatch() is True, "probing 超时无回报应重新放行试探"
         assert allow_dispatch() is False, "重新放行后窗口内仍应拒绝"
         r = record_job_result(False, "超时(1200s)", job_kind="long")
-        assert r["state"] == "open", "重新试探的失败应正常回 open"
-        print("✓ probing 超时重新放行→试探失败回 open（08-28 卡死场景闭环）")
-        # 30 分钟窗口内不重复放行
-        assert allow_dispatch() is False, "open 冷却期内应拒绝"
+        assert r["state"] == "closed" and r.get("escape_active"), \
+            f"重新试探的长超时应激活逃生（v6.9.68）: {r}"
+        print("✓ probing 超时重新放行→试探长超时→激活逃生（08-28 场景闭环升级）")
+
+        # 路径9（v6.9.68）：逃生激活 → escape_override_target 返回备用模型
+        assert escape_override_target() == dict(ESCAPE_TARGET), \
+            "逃生激活期间（试探未到期）应返回备用模型目标"
+        print(f"✓ 逃生期间 hermes 调用注入备用 {ESCAPE_TARGET['provider']}/{ESCAPE_TARGET['model']}")
+        # 备用模型成功 → 逃生维持（failures 清零）
+        r = record_job_result(True)
+        assert r["state"] == "closed" and r.get("escape_active"), "备用成功应维持逃生"
+        # 备用模型失败累积，达限 → open 真停摆
+        for i in range(ESCAPE_FAILURE_LIMIT):
+            r = record_job_result(False, f"超时(900s) #esc{i}", job_kind="long")
+        assert r["state"] == "open" and not r.get("escape_active"), \
+            f"备用连续 {ESCAPE_FAILURE_LIMIT} 次失败应 open 停摆（主备全挂）: {r}"
+        assert allow_dispatch() is False, "open 期间应拒绝派发"
+        print(f"✓ 备用连续 {ESCAPE_FAILURE_LIMIT} 次失败 → open 真停摆")
+
+        # 路径10（v6.9.68）：试探窗口到期 → 主模型试探 → 成功解除
+        STATE_PATH = Path(td) / "s9.json"
+        for _ in range(LONG_TIMEOUT_THRESHOLD):
+            record_job_result(False, "超时(900s)", job_kind="long")
+        assert escape_override_target() == dict(ESCAPE_TARGET), "窗口未到期走备用"
+        st = _load()
+        st["escape"]["probe_due_at"] = (datetime.now(timezone.utc) - timedelta(seconds=60)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        _save(st)
+        assert escape_override_target() is None, "窗口到期应放行主模型试探"
+        st = _load()
+        assert st["escape"]["probe_in_flight"] is True, "试探窗口应被占用"
+        assert escape_override_target() == dict(ESCAPE_TARGET), "窗口占用中其余调用走备用"
+        r = record_job_result(True)
+        assert r["state"] == "closed" and not r.get("escape_active"), "主模型试探成功应解除逃生"
+        assert escape_override_target() is None, "解除后不再注入备用"
+        print("✓ 试探窗口到期→主模型试探成功→解除逃生全链路")
+
+        # 路径11（v6.9.68）：试探失败 → 推移窗口，逃生维持
+        STATE_PATH = Path(td) / "s10.json"
+        for _ in range(LONG_TIMEOUT_THRESHOLD):
+            record_job_result(False, "超时(900s)", job_kind="long")
+        st = _load()
+        st["escape"]["probe_due_at"] = (datetime.now(timezone.utc) - timedelta(seconds=60)).strftime("%Y-%m-%dT%H:%M:%SZ")
+        _save(st)
+        assert escape_override_target() is None
+        r = record_job_result(False, "超时(900s)", job_kind="long")
+        assert r["state"] == "closed" and r.get("escape_active"), "试探失败应维持逃生"
+        st = _load()
+        assert st["escape"]["probe_in_flight"] is False and st["escape"]["probe_due_at"], \
+            "试探失败应关闭窗口并推移下次试探"
+        assert escape_override_target() == dict(ESCAPE_TARGET), "推移后立即走备用"
+        print("✓ 试探失败→窗口推移→逃生维持")
 
     STATE_PATH = real_path
     print("✓ circuit_breaker: 自检全部通过（临时目录，零污染）")

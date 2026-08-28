@@ -1645,6 +1645,105 @@ class SectionHygieneTests(TestSuite):
         )
 
 
+class ModelEscapeTests(TestSuite):
+    """16：v6.9.68 模型逃生——主模型静默挂起时备用模型接管而非停摆。"""
+
+    def __init__(self):
+        super().__init__("模型逃生机制测试（v6.9.68-16）")
+
+    def setup(self):
+        import tempfile
+        self.tmp = Path(tempfile.mkdtemp())
+        sys.path.insert(0, str(Path(__file__).parent.parent))
+        # 隔离加载 circuit_breaker（避免模块缓存串状态）
+        for mod in list(sys.modules):
+            if mod == "circuit_breaker":
+                del sys.modules[mod]
+        import circuit_breaker
+        self.cb = circuit_breaker
+
+    def teardown(self):
+        if self.tmp and self.tmp.exists():
+            shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def run_tests(self):
+        cb = self.cb
+        real_path = cb.STATE_PATH
+        try:
+            # 16.1 源码守卫：_run_hermes 注入备用模型 + 提前 stale give-up
+            opt_src = (Path(__file__).parent.parent / "proposal_lifecycle" /
+                       "optimize.py").read_text(encoding="utf-8")
+            self.assert_true(
+                "escape_override_target" in opt_src and '"--provider"' in opt_src,
+                "16.1 _run_hermes 应经 escape_override_target 注入 --provider/-m",
+            )
+            self.assert_true(
+                'HERMES_STREAM_STALE_GIVEUP", "2"' in opt_src,
+                "16.1 hermes 调用应注入 HERMES_STREAM_STALE_GIVEUP=2（give-up 先于击杀）",
+            )
+            # 16.2 源码守卫：熔断器逃生参数与查询接口
+            cb_src = (Path(__file__).parent.parent / "circuit_breaker.py").read_text(encoding="utf-8")
+            self.assert_true(
+                "ESCAPE_TARGET" in cb_src and "ESCAPE_FAILURE_LIMIT" in cb_src
+                and "def escape_override_target" in cb_src,
+                "16.2 circuit_breaker 应定义逃生目标/失败上限/查询接口",
+            )
+            self.assert_true(
+                "escape_active" in cb_src and "escape-probe" in cb_src,
+                "16.2 record_job_result 应回报 escape_active 并支持试探窗口",
+            )
+            # 16.3 源码守卫：微调度器逃生可视
+            ms_src = (Path(__file__).parent.parent / "lifecycle" /
+                      "micro_scheduler.py").read_text(encoding="utf-8")
+            self.assert_true(
+                "模型逃生激活中" in ms_src and "escape_active" in ms_src,
+                "16.3 微调度器应回报逃生状态日志",
+            )
+
+            # 16.4 功能闭环：连续长超时 → 逃生激活（调度不停）→ 注入备用
+            cb.STATE_PATH = self.tmp / "esc1.json"
+            for _ in range(cb.LONG_TIMEOUT_THRESHOLD):
+                r = cb.record_job_result(False, "超时(900s)", job_kind="long")
+            self.assert_true(
+                r["state"] == "closed" and r.get("escape_active"),
+                "16.4 连续长超时应激活逃生而非停摆",
+            )
+            self.assert_true(cb.allow_dispatch() is True, "16.4 逃生期间调度照常")
+            self.assert_true(
+                cb.escape_override_target() == dict(cb.ESCAPE_TARGET),
+                "16.4 逃生期间应返回备用模型目标",
+            )
+
+            # 16.5 功能闭环：主模型试探成功 → 解除逃生
+            cb.STATE_PATH = self.tmp / "esc2.json"
+            for _ in range(cb.LONG_TIMEOUT_THRESHOLD):
+                cb.record_job_result(False, "超时(900s)", job_kind="long")
+            st = cb._load()
+            st["escape"]["probe_due_at"] = "2020-01-01T00:00:00Z"  # 远古即到期
+            cb._save(st)
+            self.assert_true(cb.escape_override_target() is None,
+                             "16.5 试探窗口到期应放行主模型（None）")
+            r = cb.record_job_result(True)
+            self.assert_true(
+                r["state"] == "closed" and not r.get("escape_active"),
+                "16.5 主模型试探成功应解除逃生",
+            )
+
+            # 16.6 功能闭环：备用连续失败达限 → open 真停摆（主备全挂）
+            cb.STATE_PATH = self.tmp / "esc3.json"
+            for _ in range(cb.LONG_TIMEOUT_THRESHOLD):
+                cb.record_job_result(False, "超时(900s)", job_kind="long")
+            for _ in range(cb.ESCAPE_FAILURE_LIMIT):
+                r = cb.record_job_result(False, "超时(900s)", job_kind="long")
+            self.assert_true(
+                r["state"] == "open" and not r.get("escape_active"),
+                "16.6 备用连续失败达限应 open 停摆",
+            )
+            self.assert_true(cb.allow_dispatch() is False, "16.6 open 期间拒绝派发")
+        finally:
+            cb.STATE_PATH = real_path
+
+
 def main():
     from test_runner import print_report
 
@@ -1652,7 +1751,7 @@ def main():
     for cls in (AnchorOrderTests, WriterEscalationTests, SemanticDedupTests, ExecutorPathTests,
                 WeeklyResetAnchorTests, TaskSyncRollbackTests, KbDistillAutoTests, NamingGuardTests,
                 ReferencesPreflightTests, MetricsPreflightTests, AICeilingFairnessTests,
-                SectionHygieneTests):
+                SectionHygieneTests, ModelEscapeTests):
         s = cls()
         s.setup()
         s.run_tests()

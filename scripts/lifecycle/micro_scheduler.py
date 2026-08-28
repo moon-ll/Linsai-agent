@@ -1567,6 +1567,15 @@ def run_micro_scheduler(self, max_jobs: int = 1, time_limit_s: int = 240) -> Dic
                         cb_st = cb_record(result.get("success", False),
                                           result.get("error", ""),
                                           job_kind=_kind)
+                        # v6.9.68: 模型逃生状态可视——主模型静默挂起时调度
+                        # 不停、hermes 调用强制备用模型；escape->open
+                        # （主备全挂）时同样停止本轮派发
+                        if cb_st.get("escape_active") and _log:
+                            _log.warning(
+                                f"[micro-scheduler] 模型逃生激活中：hermes 调用"
+                                f"强制备用模型，调度照常（job "
+                                f"{refreshed.get('step')} success={result.get('success')}）"
+                            )
                         if cb_st.get("state") == "open" and not result.get("success"):
                             if _log:
                                 _log.warning(
