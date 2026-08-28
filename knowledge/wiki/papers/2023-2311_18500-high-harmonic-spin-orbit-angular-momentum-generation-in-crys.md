@@ -2,9 +2,9 @@
 title: "论文精读：固体高次谐波中保持多尺度动力学对称性的自旋-轨道角动量产生"
 type: "papers"
 created: "2026-08-28T05:02:02Z"
-updated: "2026-08-28T05:02:02Z"
+updated: "2026-08-28T05:24:02Z"
 tags: ["固体HHG", "动力学对称性", "自旋角动量", "轨道角动量", "结构光", "圆二色HHG", "自旋轨道耦合", "选择定则"]
-related: ["Berry曲率探测", "MnPS3反铁磁体", "Rashba自旋轨道耦合", "圆二色HHG", "涡旋光驱动"]
+related: ["Berry曲率探测", "MnPS3反铁磁体", "Rashba自旋轨道耦合", "固体高次谐波", "圆二色HHG", "涡旋光驱动"]
 source_raw: "2023-2311.18500-high-harmonic-spin-orbit-angular-momentum-generation-in-crys.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -26,6 +26,7 @@ review_status: "pending"
 - [[Berry曲率探测]]
 - [[MnPS3反铁磁体]]
 - [[Rashba自旋轨道耦合]]
+- [[固体高次谐波]]
 - [[圆二色HHG]]
 - [[涡旋光驱动]]
 <!-- /linsai-wikilinks -->

@@ -807,4 +807,15 @@ def _self_check() -> None:
 
 
 if __name__ == "__main__":
-    _self_check()
+    # v6.9.68: 默认执行全量同步——此前默认跑 _self_check()，被 lc-daily-sync
+    # cron 当作"日终同步"调度了数周（每晚自检即退出，实际从未同步）。
+    # 自检请显式使用 --self-check。
+    import sys as _sys
+    if "--self-check" in _sys.argv:
+        _self_check()
+    else:
+        print("◐ sync_engine 全量同步开始（--self-check 仅自检）...")
+        result = sync_all()
+        ok = result.get("success")
+        print(("✓" if ok else "✗") + " 同步完成")
+        _sys.exit(0 if ok else 1)

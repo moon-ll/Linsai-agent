@@ -15,7 +15,7 @@ HERMES_PROFILE = "linsai"  # cron 统一挂在 linsai profile，便于 hermes_br
 # worker / repair / orchestrate / weekend 的默认 cron 表达式
 DEFAULT_ORCHESTRATE_SCHEDULE = "55 8 * * *"
 DEFAULT_WORKER_INTERVAL = "47 * * * 1-5"  # v6.7.7: 周中运行，周末暂停
-DEFAULT_REPAIR_SCHEDULE = "0 */6 * * *"
+DEFAULT_REPAIR_SCHEDULE = "0 */12 * * *"  # v6.9.68: 6h→12h 降频（28 次扫描/7d 中有效动作近零）
 
 # 周末任务 cron 表达式（周六输入/输出，周日反思）
 DEFAULT_WEEKEND_INPUT_SCHEDULE = "0 9 * * 6"

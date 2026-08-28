@@ -136,14 +136,13 @@ class GhostWriteGuardTests(TestSuite):
             _cron("lc-micro-scheduler", "*/5 * * * 1-5", eight_h_ago),
             # 兜底：旧键名 last_run_at 也应被识别（lc-hourly-monitor 用旧键名）
             _cron("lc-hourly-monitor", "0 * * * *", None, last_run_at=now_iso),
-            _cron("lc-repair", "0 */6 * * *", now_iso),
+            _cron("lc-repair", "0 */12 * * *", now_iso),
             _cron("lc-daily-orchestrate", "55 8 * * *", now_iso),
             _cron("lc-prompt-optimize", "0 14 * * *", now_iso),
             _cron("lc-retrospective", "0 15 * * 1", now_iso),
             _cron("lc-kb-sync", "40 12 * * *", now_iso),
             _cron("lc-kb-distill", "50 12 * * *", now_iso),
             _cron("lc-daily-backup", "0 13 * * *", now_iso),
-            _cron("lc-daily-sync", "0 23 * * *", now_iso),
             _cron("lc-weekend-weekend-input", "0 9 * * 6", now_iso),
         ]
 

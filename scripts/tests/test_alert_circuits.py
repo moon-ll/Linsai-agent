@@ -124,10 +124,10 @@ class CronTopologyTests(TestSuite):
 
         # ── 用例 5：清单必须覆盖全部固定 cron（防新增遗漏） ──
         expected = {
-            "lc-daily-orchestrate", "lc-repair", "lc-prompt-optimize",
+            "lc-daily-orchestrate", "lc-repair",
             "lc-retrospective", "lc-kb-sync", "lc-hourly-monitor",
             "lc-micro-scheduler",
-        }
+        }  # v6.9.68: lc-prompt-optimize 暂停移出清单（恢复时加回）
         missing = expected - set(CRON_MANIFEST)
         self.assert_eq(missing, set(), f"清单缺少固定 cron: {missing}")
 

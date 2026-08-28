@@ -2,9 +2,9 @@
 title: "高次谐波谱学探测同质双层中的层赝自旋与贝里曲率——精读笔记"
 type: "papers"
 created: "2026-08-28T04:53:23Z"
-updated: "2026-08-28T04:53:23Z"
+updated: "2026-08-28T05:24:02Z"
 tags: ["高次谐波谱学", "贝里曲率", "层赝自旋", "同质双层TMD", "谐波偏振测量", "亚周期动力学"]
-related: ["MnPS3", "Rashba效应", "层赝自旋", "椭圆偏振依赖", "贝里曲率", "高次谐波产生 (HHG)"]
+related: ["MnPS3", "Rashba效应", "固体高次谐波", "层赝自旋", "椭圆偏振依赖", "贝里曲率", "高次谐波产生", "高次谐波产生 (HHG)"]
 source_raw: "2024-2504.09861-high-harmonic-spectroscopy-of-layer-pseudospin-and-berry-cur.md"
 growth_stage: "growing"
 confidence: 0.7
@@ -50,8 +50,10 @@ review_status: "pending"
 
 - [[MnPS3]]
 - [[Rashba效应]]
+- [[固体高次谐波]]
 - [[层赝自旋]]
 - [[椭圆偏振依赖]]
 - [[贝里曲率]]
+- [[高次谐波产生]]
 - [[高次谐波产生 (HHG)]]
 <!-- /linsai-wikilinks -->

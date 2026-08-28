@@ -50,12 +50,13 @@ CRON_MANIFEST: Dict[str, Dict[str, Any]] = {
         "purpose": "每 6h 链路修复：stale 重置/失败重试/双上限自动解锁",
         "depends": [],
     },
-    "lc-prompt-optimize": {
-        "schedule": DEFAULT_PROMPT_OPTIMIZE_SCHEDULE,
-        "category": "framework",
-        "purpose": "每日 14:00 prompt 自动优化（备份原文件）",
-        "depends": [],
-    },
+    # lc-prompt-optimize 已于 v6.9.68 暂停并移出期望拓扑（否则 monitor
+    # 每小时对账报 missing）。暂停原因与整改项：只增不减（41/41 append）、
+    # 审计虚标 verified、writer SOUL 12.5KB 而分数净-27。恢复方法：
+    #   hermes --profile linsai cron create "0 14 * * *" --name lc-prompt-optimize \
+    #     --script lc_prompt_optimize.sh --no-agent --deliver local \
+    #     --workdir /Users/ll/Desktop/LinSai-CoPilot
+    # 并把条目加回本清单（schedule 常量 DEFAULT_PROMPT_OPTIMIZE_SCHEDULE 保留）。
     "lc-retrospective": {
         "schedule": DEFAULT_RETROSPECTIVE_SCHEDULE,
         "category": "framework",
@@ -66,12 +67,6 @@ CRON_MANIFEST: Dict[str, Dict[str, Any]] = {
         "schedule": "0 13 * * *",
         "category": "framework",
         "purpose": "每日 13:00 用户数据备份（24h 幂等防重 + 轮转保留最近 7 份，v6.9.54；v6.9.62 由 03:17 移窗避开 worker 时段并发写、并补入 framework 安装闭环）",
-        "depends": [],
-    },
-    "lc-daily-sync": {
-        "schedule": "0 23 * * *",
-        "category": "framework",
-        "purpose": "每日 23:00 日终同步 hermes 产出→知识库（sync_all；与 12:40 kb-sync 各覆盖半天进料，v6.9.58 补录——此前游离在清单外是拓扑对账盲区；v6.9.62 补入安装闭环）",
         "depends": [],
     },
     KB_SYNC_CRON_NAME: {

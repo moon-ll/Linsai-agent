@@ -190,12 +190,21 @@ class CronStaleWeekendGraceTests(TestSuite):
             _iso(datetime.now(timezone.utc) - timedelta(hours=8))
         self.assert_eq(self._with_patch(crons8), None, "repair 8h 未跑不告警")
 
+        # v6.9.68: repair 降频 6h→12h，stale 阈值随之 2×12h=24h——
+        # 13h 未跑属正常间隔内；26h 未跑才超宽限
         crons13 = self._base_crons()
         self._find(crons13, "lc-repair")["created_at"] = \
             _iso(datetime.now(timezone.utc) - timedelta(hours=13))
         result = self._with_patch(crons13)
+        self.assert_eq(result is None, True,
+                       "repair 13h 未跑属 12h 调度正常间隔")
+
+        crons26 = self._base_crons()
+        self._find(crons26, "lc-repair")["created_at"] = \
+            _iso(datetime.now(timezone.utc) - timedelta(hours=26))
+        result = self._with_patch(crons26)
         self.assert_eq(result is not None and result.get("type"), "cron_stale",
-                       "repair 13h 未跑超宽限检出")
+                       "repair 26h 未跑超宽限检出")
 
     def run_tests(self):
         self._test_runs_today_weekday_only()

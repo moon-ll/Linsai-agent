@@ -1,6 +1,56 @@
 # 变更记录
 
-## v6.9.69 - 2026-08-28 模型逃生机制：主模型静默挂起时备用模型接管而非停摆
+## v6.9.70 - 2026-08-28 全项目精炼：三阶段落地（修假动作/删死资产/降低价值运行）
+
+按四线排查（后端调用图/cron 实效/前端触达/数据域健康）产出的精炼方案，
+三阶段执行完毕。
+
+**第一阶段：修"假动作"（账实相符）**
+
+- **备份幂等判断 bug（数据安全级）**：list_backups 按文件名排序取"最新"，
+  8/27 晚 6.8MB 的 research_proposals 专项备份（--only）在字典序上压过
+  837MB 全量包，使 auto_backup 的 24h 幂等判断持续被"喂饱"而跳过——
+  lc-daily-backup 自注册起 0 次真实全量执行。修复：--only 专项包文件名
+  加 partial 标记 + 幂等判断排除 partial + 存量专项包重命名。修复后
+  手动触发立即产出 865MB 全量包（含 research_proposals 3418 文件）。
+- **lc-daily-sync 删除**：wrapper 实际跑 _self_check() 冒充同步（每晚
+  自检即退出、14 天零 23:00 同步记录），且 12:40 kb-sync 已覆盖全部
+  真实增量（日均 0-4 篇）。cron+manifest+wrapper+测试基线四处清除；
+  sync_engine __main__ 默认行为改为真 sync_all（--self-check 显式自检），
+  消除"调错入口"陷阱。
+- **lc-prompt-optimize 暂停**：只增不减（41/41 append）、审计虚标
+  verified（与文件 mtime 矛盾）、writer SOUL 724B→12.5KB 而分数净 -27。
+  cron 删除 + 移出期望拓扑（含恢复命令注释）+ 测试基线同步。整改项
+  （hash 校验/reap 配额/体量上限）留待恢复前完成。
+- **monitor 告警降噪**：去重窗口 4h→24h + 夜间静默（22:00-08:00 只入
+  缓存不发送，次日工作时段补发）——此前 7 天 90 条通知 90% 是同批
+  卡死 job 复读。
+
+**第二阶段：删死资产（11 项归档/删除）**
+
+- 归档至 docs/archive/refactored-20260828/：citation_manager / taste_engine
+  / quality_evaluator / lineage_tracker（4 个零 import 遗迹模块）+
+  web/js/learning|projects|research.js（3 个死前端文件，96 端点零触达）。
+- 移入 scripts/manual_ops/（手动运维工具与主代码隔离）：daily_health_check
+  / kb_repair_papers / kb_fill_wiki_notes / regenerate_optimization_reports
+  / check_boundary / alias_learner。
+- 删除 memory/proposal-initial-scores.json（全项目零读写）。
+
+**第三阶段：降低价值运行**
+
+- lc-repair 降频 6h→12h（28 次扫描/7d 有效动作近零；stale 阈值随间隔
+  自适应 24h，宽限测试同步更新为 13h 正常/26h 告警两档）。
+- logs/healthchecks 滚动清理（保留 7 天，39 份过期清除；守护逻辑挂入
+  lc_daily_backup.sh 每日执行）。
+
+**明确不动（价值核心确认）**：微调度器（85% 有效派发）、kb-sync/kb-distill
+（唯一同步与消化口）、周末四任务、三子包（零死文件）、4 个高频模块
+（零死函数）、备份轮转。
+
+- 验证：四层回归 1228/16/38/1479 全绿；cron 拓扑对账 0 问题；全量
+  备份修复后实测落盘。
+
+## v6.9.69 - 2026-08-28 模型逃生机制：主模型静默挂起时备用模型接管而非停摆 - 2026-08-28 模型逃生机制：主模型静默挂起时备用模型接管而非停摆
 
 **根因（08-27/28 危机复盘）**：zai 限额期失败形态是"静默挂起"（连接建立后
 无字节返回、无 429 文本）。hermes 内部降级只认明确报错（error_classifier

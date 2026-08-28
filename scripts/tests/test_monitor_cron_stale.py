@@ -90,7 +90,7 @@ class MonitorCronStaleTests(TestSuite):
         def _full_set(overrides):
             base = {
                 "lc-micro-scheduler": micro_sched,
-                "lc-repair": "0 */6 * * *",
+                "lc-repair": "0 */12 * * *",
                 "lc-daily-orchestrate": "55 8 * * *",
                 "lc-hourly-monitor": "0 * * * *",
                 "lc-prompt-optimize": "0 14 * * *",
@@ -98,7 +98,6 @@ class MonitorCronStaleTests(TestSuite):
                 "lc-kb-sync": "40 12 * * *",
                 "lc-kb-distill": "50 12 * * *",  # v6.9.5 新增，纳入拓扑清单
                 "lc-daily-backup": "0 13 * * *",  # v6.9.54 新增，纳入拓扑清单
-                "lc-daily-sync": "0 23 * * *",  # v6.9.58 补录，纳入拓扑清单
                 "lc-weekend-weekend-input": "0 9 * * 6",
             }
             crons = []

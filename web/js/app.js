@@ -1,6 +1,6 @@
 /**
  * app.js — 入口模块：事件绑定 + 初始化
- * 依赖：core.js, session.js, chat.js, task.js, settings.js, skill.js, kb.js, learning.js
+ * 依赖：core.js, session.js, chat.js, task.js, settings.js, skill.js, kb.js（learning.js 已归档）
  */
 
 // ============================================

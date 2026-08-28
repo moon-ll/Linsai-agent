@@ -73,8 +73,19 @@ ALERT_CACHE_PATH = PROJECT_ROOT / "memory" / "monitor-alert-cache.json"
 # 系统看板路径
 KANBAN_PATH = PROJECT_ROOT / "memory" / "system-kanban.json"
 
-# 告警去重窗口（秒）
-ALERT_DEDUP_WINDOW = 4 * 3600  # 4 小时
+# 告警去重窗口（秒）。v6.9.68: 4h→24h——实测同批卡死 job 每 4h 复读一次，
+# 7 天 90 条通知 90% 是重复（真实需人工的仅 2 类）；24h 冷却 + 夜间静默
+# 把通知压缩为"每日至多一轮、只在工作时段"
+ALERT_DEDUP_WINDOW = 24 * 3600  # 24 小时
+# 夜间静默窗口（本地小时，不含边界）：22:00-08:00 只入缓存不发送
+QUIET_HOURS = (22, 8)
+
+
+def _in_quiet_hours() -> bool:
+    """当前是否处于夜间静默窗口（22:00-08:00）。"""
+    h = datetime.now().hour
+    lo, hi = QUIET_HOURS
+    return h >= lo or h < hi
 
 try:
     from logger import get_logger
@@ -953,13 +964,20 @@ def run_monitor(dry_run: bool = False) -> Dict[str, Any]:
         alert_lines: List[str] = []
         alert_keys: List[str] = []
         alert_messages: List[str] = []
+        # v6.9.68 夜间静默：异常照常入缓存与看板，但不发送飞书——
+        # 次日首个工作时段的检测自然发出（_should_notify 24h 冷却未耗尽
+        # 则由当日首次非静默运行补发同批异常）
+        quiet = _in_quiet_hours()
+        if quiet and _log:
+            _log.info("夜间静默窗口（22:00-08:00），本次异常只入缓存不发送通知")
         for a in anomalies:
             alert_key = f"{a.get('type')}:{a.get('proposal_id', '')}:{a.get('job_id', '')}"
             if _should_notify(alert_key):
                 alert_lines.append(f"- {a['message']}")
                 alert_keys.append(alert_key)
                 alert_messages.append(a["message"])
-                notified.append(alert_key)
+                if not quiet:
+                    notified.append(alert_key)
 
         if alert_lines:
             now_str = datetime.now().strftime("%Y-%m-%d %H:%M")

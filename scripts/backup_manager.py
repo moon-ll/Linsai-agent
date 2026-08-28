@@ -99,6 +99,12 @@ def create_backup(targets: Optional[list] = None, label: str = "") -> Optional[P
     _ensure_backups_dir()
     stamp = _utc_stamp()
     suffix = "-{}".format(label) if label else ""
+    # v6.9.68: 专项备份（--only）文件名加 partial 标记——此前专项备份与
+    # 全量共享命名空间，list_backups()[0] 会把几 MB 的专项包当成"最新
+    # 全量"，使 auto_backup 的 24h 幂等判断被喂饱而持续跳过（实测
+    # lc-daily-backup 自注册起 0 次真实执行，全量备份间隔被拉到 19 天）
+    if targets != BACKUP_TARGETS:
+        suffix += "-partial"
     zip_path = BACKUPS_DIR / "{}{}.zip".format(stamp, suffix)
 
     files = _collect_files(targets)
@@ -191,13 +197,14 @@ def auto_backup() -> Optional[Path]:
         新建备份的 Path；跳过或失败返回 None。
     """
     try:
-        backups = list_backups()
-        if backups:
-            newest = backups[0]
+        # v6.9.68: 幂等判断只认全量备份（partial 专项包不参与）
+        full_backups = [p for p in list_backups() if "partial" not in p.name]
+        if full_backups:
+            newest = full_backups[0]
             mtime = datetime.fromtimestamp(newest.stat().st_mtime, tz=timezone.utc)
             age_hours = (datetime.now(timezone.utc) - mtime).total_seconds() / 3600
             if age_hours < AUTO_BACKUP_INTERVAL_HOURS:
-                return None  # 近期已备份，跳过
+                return None  # 近期已有全量备份，跳过
         return create_backup(label="auto")
     except Exception:
         return None
