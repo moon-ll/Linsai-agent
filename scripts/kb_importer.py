@@ -139,6 +139,10 @@ def import_candidate(arxiv_id: str, project: str = "") -> Optional[str]:
     direction = _nz(candidate.get("direction"))
     score = candidate.get("score_deepxiv") or 0
     ai_reason = _nz(candidate.get("ai_reason"))
+    # v6.9.73: agent 相关性第二道门字段（简报 cron Step 1.5 打分）
+    score_agent = candidate.get("score_agent")
+    agent_note = _nz(candidate.get("agent_note"))
+    agent_rejected = bool(candidate.get("agent_rejected"))
 
     slug = _slugify(title)
     filename = f"{year}-{arxiv_id}-{slug}.md"
@@ -190,6 +194,9 @@ def import_candidate(arxiv_id: str, project: str = "") -> Optional[str]:
         f'source: "hermes-简报"',
         f'imported_at: "{_now_utc()}"',
         f"score_deepxiv: {score}",
+        f"score_agent: {json.dumps(score_agent)}",
+        f'agent_note: "{agent_note}"',
+        f"agent_rejected: {json.dumps(agent_rejected)}",
         f'abstract: "{abstract_short}"',
         "status: \"unseen\"",
         "unified_status: \"pool\"",

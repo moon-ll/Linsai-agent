@@ -1,6 +1,37 @@
 # 变更记录
 
-## v6.9.72 - 2026-08-28 知识库正向作用审计 + 蒸馏双时段 + 入池 gate
+## v6.9.73 - 2026-08-28 入池双门筛选：agent 相关性打分第二道门落地
+
+**评分分布审计的延伸决策**（用户提供分布图后拍板）：DeepXiv hybrid 模式
+score 自 2026-07 起退化为占位值（0.5/0.33，无区分度，实测时间线：5 月
+98% 真分→7 月 100% 固定值），gate1 单独已不足以筛质量。用户拍板方案：
+保留低分 gate 做第一道；新增 agent 相关性打分做第二道；入池频率 4 次/天
+保持。
+
+**双门结构**：
+
+- **Gate 1（脚本内，已有）**：MIN_DEEPXIV_SCORE=0.5——挡 DeepXiv 低分
+  档（0.33）；arXiv 直抓（固定 0.5）与缺分条目放行。
+- **Gate 2（agent 打分，本轮新增）**：简报 cron 新增 Step 1.5——agent
+  按研究方向词表（scope-terms.json 85 词，覆盖研究主题而非仅 optimizing
+  课题）逐篇判断相关性，1-10 打分写回池 json（score_agent/agent_note），
+  <4 分标 agent_rejected=true 且不生成知识库简报。判断要求以物理内涵为
+  准（禁字面匹配、禁套话）。
+
+**下游贯通**：
+
+- kb_importer：池 json → CoPilot frontmatter 透传 score_agent/agent_note/
+  agent_rejected 三字段。
+- kb_distill.pending_distill_list：agent_rejected=true 的条目不进蒸馏
+  队列（raw 保留作记录，不消耗配额）。
+- 简报 cron prompt 重建（Step 1.5 + 输出格式加 GATE-2 行）；重建过程中
+  发现 hermes CLI create 不接受位置 prompt（版本差异），走 create
+  no-agent 占位 → cron edit --agent --prompt 两步路径完成。
+
+- 验证：编译通过；pending 判定过滤逻辑回归通过；四层 1228/16/38/1455
+  全绿。观察点：下轮 18:23 cron 的 GATE-2 输出（打分数/通过数/拒绝数）。
+
+## v6.9.72 - 2026-08-28 知识库正向作用审计 + 蒸馏双时段 + 入池 gate - 2026-08-28 知识库正向作用审计 + 蒸馏双时段 + 入池 gate
 
 **知识库→申请书优化正向作用审计**（数据实证，详见会话记录）：
 

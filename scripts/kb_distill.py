@@ -107,11 +107,19 @@ def pending_distill_list(limit: Optional[int] = None) -> List[Path]:
     """
     from kb_index import list_raw_files
     used = _wiki_source_raws()
-    files = [
-        (f["mtime"], KNOWLEDGE_DIR / f["path"])
-        for f in list_raw_files()
-        if Path(f["name"]).name not in used and not _is_excluded(f["path"])
-    ]
+    files = []
+    for f in list_raw_files():
+        if Path(f["name"]).name in used or _is_excluded(f["path"]):
+            continue
+        # v6.9.73: agent 相关性第二道门——被拒（agent_rejected: true）的
+        # 论文不进蒸馏队列（保留 raw 作记录，不消耗蒸馏配额）
+        try:
+            head = (KNOWLEDGE_DIR / f["path"]).open(encoding="utf-8", errors="ignore").read(500)
+            if re.search(r"agent_rejected:\s*true", head):
+                continue
+        except OSError:
+            pass
+        files.append((f["mtime"], KNOWLEDGE_DIR / f["path"]))
     files.sort(key=lambda t: t[0])  # 最旧优先
     out = [p for _, p in files]
     return out[:limit] if limit is not None else out
