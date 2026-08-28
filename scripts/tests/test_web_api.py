@@ -329,25 +329,7 @@ class WebApiSuite(TestSuite):
         code, _ = c.get("/api/knowledge/aliases")
         self.assert_status(code, 200, "GET aliases")
 
-        # === v2.7.0 项目面板 ===
-        code, _ = c.get("/api/projects")
-        self.assert_status(code, 200, "GET /api/projects")
-
-        code, data = c.get("/api/projects/nsfc/dashboard")
-        self.assert_status(code, 200, "GET NSFC 仪表盘")
-        self.assert_json_field(data, "available", "NSFC dashboard 含 available")
-
-        code, _ = c.get("/api/projects/nsfc/decisions?limit=3")
-        self.assert_status(code, 200, "GET NSFC 决策")
-
-        code, _ = c.get("/api/projects/nsfc/chapters")
-        self.assert_status(code, 200, "GET NSFC 章节")
-
-        code, _ = c.get("/api/projects/papers/candidates")
-        self.assert_status(code, 200, "GET 文献候选")
-
-        code, _ = c.get("/api/projects/papers/briefings")
-        self.assert_status(code, 200, "GET 文献简报列表")
+        # v6.9.71: projects 域已随前端下线归档，路由断言移除
 
         # === v2.7.0 hermes 控制台 ===
         code, data = c.get("/api/hermes/cron")
@@ -368,26 +350,7 @@ class WebApiSuite(TestSuite):
         code, _ = c.get("/api/providers/current")
         self.assert_status(code, 200, "GET 当前 provider")
 
-        # === v3.5 课题指导路由（research）===
-        code, data = c.get("/api/research/projects")
-        self.assert_status(code, 200, "GET /api/research/projects 列表")
-        self.assert_json_field(data, "projects", "research 列表含 projects 字段")
-
-        code, data = c.post("/api/research/projects", {
-            "name": "WebAPI自检课题", "goal": "验证课题路由",
-        })
-        self.assert_status(code, 200, "POST /api/research/projects 创建")
-        research_pid = data.get("project_id", "") if isinstance(data, dict) else ""
-        self.assert_true(bool(research_pid), "research 课题ID非空")
-
-        if research_pid:
-            code, data = c.get(f"/api/research/projects/{research_pid}")
-            self.assert_status(code, 200, "GET /api/research/projects/{id} 详情")
-            self.assert_json_field(data, "project_id", "research 详情含 project_id")
-
-            # 清理：删除测试课题
-            code, _ = c.delete(f"/api/research/projects/{research_pid}")
-            self.assert_status(code, 200, "DELETE /api/research/projects/{id} 清理")
+        # v6.9.71: research 域已随前端下线归档，路由断言移除
 
         # === 自主学习路由（learning）===
         code, data = c.get("/api/learning/log")
@@ -418,7 +381,6 @@ class WebApiSuite(TestSuite):
 
         # === 路由覆盖扩展（v3.5.7）：提升路由覆盖率 18% → 25%+ ===
         for _t in [
-            self.test_research_extended_routes,
             self.test_tasks_crud_routes,
             self.test_skills_routes,
             self.test_system_routes,
@@ -436,50 +398,7 @@ class WebApiSuite(TestSuite):
     # 路由覆盖扩展（v3.5.7）
     # ------------------------------------------------------------------
 
-    def test_research_extended_routes(self):
-        """research 路由扩展：单元列表/创建、课题记忆、工作流规划。
-
-        需先创建临时课题，测试完成后在 finally 中删除，避免残留。
-        """
-        c = self.client
-        code, data = c.post("/api/research/projects", {
-            "name": "路由扩展自检课题", "goal": "验证扩展路由",
-        })
-        self.assert_status(code, 200, "POST research 创建课题（扩展）")
-        pid = data.get("project_id", "") if isinstance(data, dict) else ""
-        self.assert_true(bool(pid), "research 课题ID非空（扩展）")
-        if not pid:
-            return
-        try:
-            # GET 单元列表
-            code, data = c.get(f"/api/research/projects/{pid}/units")
-            self.assert_status(code, 200, "GET /api/research/projects/{id}/units")
-            self.assert_json_field(data, "units", "units 列表含 units 字段")
-
-            # POST 创建单元
-            code, data = c.post(f"/api/research/projects/{pid}/units", {
-                "title": "扩展测试单元",
-                "acceptance_criteria": ["验证路由可达"],
-            })
-            self.assert_status(code, 200, "POST /api/research/projects/{id}/units")
-            self.assert_json_field(data, "unit_id", "创建单元含 unit_id")
-
-            # GET 课题记忆
-            code, data = c.get(f"/api/research/projects/{pid}/memory")
-            self.assert_status(code, 200, "GET /api/research/projects/{id}/memory")
-            self.assert_json_field(data, "context", "memory 含 context 字段")
-
-            # POST 工作流规划（批量规划单元）
-            code, data = c.post(f"/api/research/projects/{pid}/workflow/plan", {
-                "unit_specs": [
-                    {"title": "规划单元A", "acceptance_criteria": ["完成调研"]},
-                ],
-            })
-            self.assert_status(code, 200, "POST /api/research/projects/{id}/workflow/plan")
-            self.assert_json_field(data, "unit_ids", "workflow/plan 含 unit_ids")
-        finally:
-            # 清理：删除测试课题（含其单元/知识库/记忆）
-            c.delete(f"/api/research/projects/{pid}")
+    # v6.9.71: test_research_extended_routes 已随 research 域下线移除
 
     def test_tasks_crud_routes(self):
         """tasks 路由扩展：创建/更新/删除。

@@ -14,10 +14,10 @@ v3.5.6: 拆分为 Mixin 架构。本文件仅负责：
     - web_routes_system.py           系统状态路由
     - web_routes_skills.py           技能路由
     - web_routes_learning.py         学习路由
-    - web_routes_projects.py         项目/NSFC/论文池路由
+    - （web_routes_projects.py 已于 v6.9.71 随前端下线归档）
     - web_routes_hermes.py           Hermes 路由
     - web_routes_upload.py           上传/文件路由
-    - web_routes_research.py         课题指导模块路由（独立分派器）
+    - （web_routes_research.py 已于 v6.9.71 随前端下线归档）
     - web_routes_pipeline.py         研究管线路由（独立分派器）
     - web_routes_orchestrator.py     林赛总控路由（独立分派器，v6.7）
 
@@ -47,17 +47,15 @@ from web_routes_kb import KbRoutesMixin, _KB_ROUTES
 from web_routes_system import SystemRoutesMixin, _SYSTEM_ROUTES
 from web_routes_skills import SkillRoutesMixin, _SKILL_ROUTES
 from web_routes_learning import LearningRoutesMixin, _LEARNING_ROUTES
-from web_routes_projects import ProjectRoutesMixin, _PROJECT_ROUTES
 from web_routes_hermes import HermesRoutesMixin, _HERMES_ROUTES
 from web_routes_upload import UploadRoutesMixin, _UPLOAD_ROUTES
-from web_routes_research import ResearchRoutesMixin
 from web_routes_pipeline import PipelineRoutesMixin
 from web_routes_orchestrator import OrchestratorRoutesMixin
 from web_routes_settings import SettingsRoutesMixin, _SETTINGS_ROUTES
 
 
 # ---------------------------------------------------------------------------
-# 统一路由表（不含 research，research 有独立分派器）
+# 统一路由表
 # ---------------------------------------------------------------------------
 _ALL_ROUTE_TABLES = [
     _SESSION_ROUTES,
@@ -66,7 +64,6 @@ _ALL_ROUTE_TABLES = [
     _SYSTEM_ROUTES,
     _SKILL_ROUTES,
     _LEARNING_ROUTES,
-    _PROJECT_ROUTES,
     _HERMES_ROUTES,
     _UPLOAD_ROUTES,
     _SETTINGS_ROUTES,
@@ -83,10 +80,8 @@ class RequestHandler(
     SystemRoutesMixin,
     SkillRoutesMixin,
     LearningRoutesMixin,
-    ProjectRoutesMixin,
     HermesRoutesMixin,
     UploadRoutesMixin,
-    ResearchRoutesMixin,
     PipelineRoutesMixin,
     OrchestratorRoutesMixin,
     SettingsRoutesMixin,
@@ -96,7 +91,7 @@ class RequestHandler(
     """HTTP 请求处理器：静态文件 + REST API + SSE。
 
     继承所有域路由 Mixin，通过统一分派器 _dispatch_all 路由请求。
-    课题模块（research）使用独立分派器 _dispatch_research_routes 优先处理。
+    （research/projects 域已随前端下线归档，v6.9.71）
     """
 
     def _dispatch_all(self, method: str, path: str, parsed, body=None) -> bool:
@@ -142,9 +137,6 @@ class RequestHandler(
             self._send_static(path[5:])
             return
 
-        # 课题模块路由（独立分派器，字符串模式）
-        if self._dispatch_research_routes("GET", path, parsed):
-            return
 
         # 研究管线路由（独立分派器）
         if self._dispatch_pipeline_routes("GET", path, parsed):
@@ -168,10 +160,6 @@ class RequestHandler(
             _log.info(f"POST {path}")
         body = self._read_json_body()
 
-        # 课题模块路由（独立分派器，字符串模式）
-        if self._dispatch_research_routes("POST", path, parsed, body):
-            return
-
         # 研究管线路由（独立分派器）
         if self._dispatch_pipeline_routes("POST", path, parsed, body):
             return
@@ -194,10 +182,6 @@ class RequestHandler(
             _log.info(f"PUT {path}")
         body = self._read_json_body()
 
-        # 课题模块路由（独立分派器，字符串模式）
-        if self._dispatch_research_routes("PUT", path, parsed, body):
-            return
-
         # 研究管线路由（独立分派器）
         if self._dispatch_pipeline_routes("PUT", path, parsed, body):
             return
@@ -215,9 +199,6 @@ class RequestHandler(
         if _log:
             _log.info(f"DELETE {path}")
 
-        # 课题模块路由（独立分派器，字符串模式）
-        if self._dispatch_research_routes("DELETE", path, parsed):
-            return
 
         # 研究管线路由（独立分派器）
         if self._dispatch_pipeline_routes("DELETE", path, parsed):
@@ -296,7 +277,6 @@ def _self_check() -> bool:
     # 6. RequestHandler 可导入且继承正确
     try:
         assert hasattr(RequestHandler, "_dispatch_all"), "缺少 _dispatch_all"
-        assert hasattr(RequestHandler, "_dispatch_research_routes"), "缺少 _dispatch_research_routes"
         assert hasattr(RequestHandler, "_dispatch_pipeline_routes"), "缺少 _dispatch_pipeline_routes"
         assert hasattr(RequestHandler, "_send_json"), "缺少 _send_json"
         assert hasattr(RequestHandler, "_send_sse"), "缺少 _send_sse"

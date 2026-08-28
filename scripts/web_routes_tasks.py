@@ -11,8 +11,9 @@
     - PUT    /api/tasks/{tid}/progress   更新进度
     - DELETE /api/tasks/{tid}            删除任务
 
-_do_dispatch_hermes 方法也位于本 Mixin（任务创建/派活共用），它调用
-web_routes_projects 中的 _write_dispatch_to_hermes_plans / _dispatch_hermes_async。
+_do_dispatch_hermes 方法也位于本 Mixin（任务创建/派活共用），调用
+hermes_dispatch 的 write_dispatch_to_hermes_plans / dispatch_hermes_async
+（v6.9.71 自已归档的 web_routes_projects 抽离）。
 
 路由表格式：(HTTP方法, re.compile(正则), handler名)
 handler 签名：GET/DELETE → (self, parsed, **path_params)
@@ -32,7 +33,7 @@ import hermes_bridge as hb  # noqa: F401  (派活链路依赖，保持显式导�
 # v5.2: kanban_reader 桥接 hermes kanban.db
 import kanban_reader as kr
 # _do_dispatch_hermes 依赖 projects 模块中的跨进程派活函数
-from web_routes_projects import _write_dispatch_to_hermes_plans, _dispatch_hermes_async
+from hermes_dispatch import write_dispatch_to_hermes_plans, dispatch_hermes_async
 
 
 # ---------------------------------------------------------------------------
@@ -71,13 +72,13 @@ class TaskRoutesMixin:
         dispatch_id = dispatch["id"]
         # 1. 写 hermes plans/ 目录（跨进程契约，让 hermes cron/agent 能读到）
         try:
-            _write_dispatch_to_hermes_plans(prompt, project, dispatch_id)
+            write_dispatch_to_hermes_plans(prompt, project, dispatch_id)
         except Exception as e:
             if _log:
                 _log.debug("写入 hermes plans 失败: %s", e)
         # 2. 起异步线程执行 oneshot 并回写结果（补齐 fire-and-forget 缺口）
         threading.Thread(
-            target=_dispatch_hermes_async,
+            target=dispatch_hermes_async,
             args=(dispatch_id, prompt, 300),
             daemon=True,
         ).start()
