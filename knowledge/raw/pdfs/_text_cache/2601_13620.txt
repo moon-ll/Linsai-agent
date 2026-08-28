@@ -1,0 +1,695 @@
+1 
+ 
+Photo- and thermally-induced huge layer decoupling in twisted bilayer WSe2 
+A. Nakamura1,2, Y. Chiashi2,†, T. Shimojima1,‡, Y. Tanaka2, S. Akatsuka2, M. Sakano2,§, 
+ S. Masubuchi3, T. Machida3, K. Watanabe4, T. Taniguchi5, and K. Ishizaka1,2,* 
+1RIKEN Center for Emergent Matter Science, Wako, Saitama 351-0198, Japan. 
+2Quantum-Phase Electronics Center and Department of Applied Physics, The University of Tokyo, 
+Hongo, Tokyo 113-8656, Japan. 
+3Institute of Industrial Science, The University of Tokyo, Meguro, Tokyo 153-8505, Japan. 
+4Research Center for Electronic and Optical Materials, National Institute for Materials Science, 1-1 
+Namiki, Tsukuba 305-0044, Japan  
+5Research Center for Materials Nanoarchitectonics, National Institute for Materials Science,  1-1 
+Namiki, Tsukuba 305-0044, Japan 
+Present address: 
+†National Institute of Advanced Industrial Science and Technology, Tsukuba, Ibaraki, 305-8568, 
+Japan 
+‡Department of Physics, Nagoya University, Furo-cho, Aichi 464-8601, Japan 
+§Graduate School of Informatics and Engineering, The University of Electro-Communications, 
+Chofu-gaoka, Tokyo 182-8585, Japan 
+Email: ishizaka@ap.t.u-tokyo.ac.jp 
+Abstract 
+Twisted bilayer systems host a wealth of emergent phenomena , such as flat -band 
+superconductivity, ferromagnetism, and ferroelectricity, arising from moiré superlattices and 
+unconventional interlayer coupling. Despite their central role, direct and quantitative access 
+to the three-dimensional atomic arrangement in these systems has remained elusive due to 
+their nanoscale dimensions. Here, we introduce an automated dark-field electron tomography 
+technique that enables  quantitative three-dimensional structural analysis of atomically thin 
+materials with sub-ångström precision.  By applying this method to twisted bilayer WSe₂, we 
+precisely visualize the twist -angle-dependent structural relaxation appearing as the AB/BA 
+stacking domains separated by 10-20 nm domain walls. In the marginally twisted region (𝜃 ≤ 
+0.1°), we uncover a significant expansion of the interlayer spacing compared to the bulk 
+configuration, exceeding 0.1 Å, along with a remarkable temperature -driven interlayer 
+decoupling. Ultrafast measurements further reveal optically induced interlayer separation of 
+~0.2 Å on the picosecond timescale, attributed to transient exciton formation. These findings 
+not only establish a powerful approach for visualizing hidden out-of-plane structures in 
+2 
+ 
+atomically thin micro-flake materials, but also uncover the intrinsic fragility and dynamical 
+tunability of interlayer coupling in moiré-engineered 2-dimensional materials. 
+3 
+ 
+ Twisted bilayers of van der Waals materials have opened new frontiers in condensed 
+matter physics, offering a versatile platform for realizing strongly correlated, topological, 
+and ferroelectric phases. When two atomically thin crystals are stacked with a slight 
+rotational mismatch, long -wavelength m oiré superlattices emerge, reshaping the band 
+structure and vibrational modes through periodic modulation of the local atomic registry. 
+These engineered systems exhibit an extraordinary array of phenomena, including flat -band 
+superconductivity [1–3], gate -tunable ferromagnetism  [4], and polar textures akin to 
+ferroelectricity [5–7]. While graphene -based m oiré systems have led this revolution, 
+semiconducting transition metal dichalcogenides (TMDs) provide an equally rich landscape, 
+where twist angle, stacking sequence, and layer composition can be precisely controlled to 
+manipulate superconductivity [8,9], correlated insulating states [10–12], moiré excitons [13], 
+phonon modes [14], and charge -density waves [15]. As such, twisted bilayer TMDs have 
+rapidly become a model system for probing and designing emergent quantum states. 
+These phenomena originate from the three -dimensional (3D) atomic arrangement 
+created when two atomically thin layers are twisted to form a moiré superlattice . In twisted 
+bilayers, a small twist angle reorganizes the local atomic registry both in -plane and out-of-
+plane, giving rise to reconstructed AB/BA domains, domain walls, and a spatially modulated 
+interlayer geometry across the moiré unit cell   [16,17], as shown in Fig. 1(a,b) . This 
+reconstructed 3D structure strongly modifies the interlayer coupling, which in turn governs 
+a wide range of emergent properties: interlayer hybridization underpins the formation of flat 
+bands [1,2,10], out -of-plane polarization couples with in -plane shear to enable sliding 
+ferroelectricity [5–7], and excitonic properties can be tuned by controlling the interlayer 
+distance to favor intralayer or interlayer excitons  [18]. Therefore, understanding moiré 
+materials requires quantitative knowledge of both in -plane and out -of-plane structural 
+degrees of freedom.  However, these two aspects have so far been accessed in a highly 
+unbalanced manner: in-plane structures have been extensively imaged using  piezoresponse 
+force microscopy,  scanning tunneling microscop y (STM), and transmission electron 
+microscopy (TEM), whereas quantitative measurements of out-of-plane (stacking-direction) 
+structure have proven exceptionally challenging. Atomic force microscopy and theoretical 
+4 
+ 
+modeling suggest interlayer spacing varia tions of 0.1 –0.8 Å across the m oiré 
+superlattice [17,19–24], but three -dimensional reconstruction of  the interlayer geometry 
+remains elusive, posing a significant barrier to  understanding and engineering moiré-driven 
+phenomena. 
+In principle, diffraction measurements provide a route to extracting 3D structural 
+information from two -dimensional (2D) materials, just as in conventional crystals. As an 
+illustrative example, Fig. 1 (c) shows a dark -field TEM image of the 0 2 diffraction from 
+twisted bilayer WSe₂ , revealing triangular AB/BA domains via intensity contrast. This 
+contrast arises from the scattering-vector [𝒒 = (𝑞𝑥, 𝑞𝑦, 𝑞𝑧)] dependence of the diffraction 
+intensity 𝑆(𝒒), which differs between AB and BA stacking due to their opposing rod -like 
+scattering features along 𝑞𝑧. The 𝑞𝑧-resolved intensity encodes structural parameters such as 
+the selenium height (h) and interlayer spacing (d), offering a pathway to quantify the out-of-
+plane structure from tilt -dependent diffraction patterns. However, conventional x -ray 
+diffraction is not viable for atomically thin micro -flake samples. While positron diffraction 
+has succeeded in millimeter-scale bilayer graphene [25], its applicability remains limited for 
+micro-flakes as well. In contrast, TEM offers a compelling solution. As well as the sufficient 
+spatial resolution that can access the AB/BA stacking domain structure, recent advances in 
+automated 3D electron diffraction tomography enable high-precision refinement of 3D 
+structural models  [26,27] based on the diffraction intensity . Similar principles can be 
+extended to atomically thin materials using tilt -dependent dark -field imaging  [28], and 
+further integrated with ultrafast TEM to resolve structural dynamics on picosecond 
+timescales. These emerging techniques provide a powerful foundation for probing the elusive 
+3D crystal structure and its dynamics in 2D materials. 
+In this study, we introduce a method we term “automated dark -field tomography”, 
+which enables quantitative reconstruction of the 3D structure of twisted bilayer systems from 
+tilt-series dark -field TEM images. Using this approach, we first reveal the twist -angle-
+dependent structural relaxation, showing the evolution from fully-relaxed AB/BA domains 
+in marginally twisted regions to incompletely relaxed structures at larger twist angles. We 
+5 
+ 
+then directly determine the interlayer spacing and chalcogen atom height in both twisted and 
+naturally stacked bilayer WSe₂, revealing that both are significantly expanded compared to 
+the bulk 2H-WSe₂ phase. Strikingly, we find that fully relaxed AB/BA domains of twisted 
+bilayer WSe₂ exhibit sub -ångström interlayer decoupling upon heating, an effect absent in 
+naturally stacked counterparts. Moreover, by integrating ultrafast TEM techniques  [29,30], 
+we uncover a light -induced, nonthermal expansion of the interlayer spacing on the 
+picosecond timescale, with magnitudes exceeding those  in bulk materials. These results 
+establish a powerful new methodology for structural analysis of 2D materials and reveal the 
+exceptional fragility and tunability of interlayer coupling in twisted bilayers, driven by both 
+thermal and optical stimuli. 
+ 
+Automated dark-field tomography in bilayer WSe2 
+To begin with, we discuss the relationship between the dark-field image and the crystal 
+structure of twisted- and natural-bilayer WSe2. Figure 1(c) shows 0 2 dark-field images of 
+the 0.10° twisted-bilayer WSe2 at the sample tilt 𝛼 = 10°, 18°, and 24° [see Fig. 1(d) and Sec. 
+1 in Supplemental Mate rials]. Characteristic triangular patterns  corresponding to the twist 
+angle of 0.10° are observed in the dark-field images, where the dark/bright contrast changes 
+as 𝛼 is varied. This contrast arises from the local stacking configurations realized by the 
+reconstruction of the moiré superlattice in small-angle twisted-bilayer TMDs [31], which can 
+be understood as follows . Fig ures 1(e,f) show  the crystal structure and kinematically 
+simulated dark-field intensity profile 𝐼02(02̅)(𝒒) of AB and  BA stacking bilayer WSe2 as a 
+function of 𝒒 (see Sec. 1 in Supplemental Materials) . Finite-size along the out-of-plane (z) 
+direction in the twisted-bilayer system results in the rod-like  𝐼02(02̅)(𝒒)  along 𝑞𝑧 direction. 
+The dashed white  line denotes the  cross-section of the  Ewald sphere , and t he angle 𝜙 
+monotonically changes when the sample tilt 𝛼 is changed. Therefore, the 𝑞𝑧 dependence of 
+ 𝐼02(02̅)(𝒒) can be obtained via the α-dependent dark-field intensities. The triangular contrast 
+in Fig. 1(c) corresponds to the difference of 𝐼02(𝑞𝑧) in local stacking domains. As such dark-
+field intensity is strongly dependent on the local crystal structure, it can be used for real -
+6 
+ 
+space visualization of the stacking configurations  including boundary  in principle . 
+Furthermore, the analytical expression of  𝐼02(𝑞𝑧) for fully relaxed AB/BA stacking region 
+contains the full atomic coordinates of WSe 2, thus we can quantitatively determine the 3D 
+crystal structure  parameters from automatically collected  𝛼 -dependent dark -field image 
+intensity 𝐼02(𝒒) (see Sec. 1 in Supplemental Materials ). This method, which we refer to as  
+automated dark-field tomography, can be used for atomically thin flake samples in  general. 
+Natural-bilayer 2 H-WSe2 also shows rod-like 𝐼02(𝒒)  [Figs. 1(g,h)] with 𝑞𝑧  dependence 
+significantly different from AB/BA stacking. Thus the crystal structure parameters of natural-
+bilayer 2H-WSe2 can also be determined from automated dark-field tomography. 
+ 
+Twist-angle dependent relaxation of crystal structure 
+Here, we investigate how the crystal structure relaxation evolves as a function of twist 
+angle 𝜃 using automated dark -field tomography. Although the target twist angle during 
+sample preparation was 0.3°, we observe a range of domain sizes at different positions within 
+the same flake due to the extrinsic inhomogeneity. Fig. 2(a) shows the dark -field intensity 
+𝐼02(𝛼) curves taken within the AB/BA stacking domains and at the domain wall under 
+marginally twisted (𝜃 <0.05°) conditions. As described above, 𝐼02(𝛼) exhibits distinct peak 
+structures depending on the local stacking configurations. As a result, the dark-field images 
+at 𝛼 = 24° [Fig. 2(b-d)] visualize the stacking domains. To qualitatively evaluate the local 
+stacking configurations, we focused on the angular shift of the peak in 𝐼02(𝛼) between 0° 
+and 10°. This peak in Fig. 2(a) monotonically changes among the AB domain, BA domain, 
+and domain wall regions, suggesting that its relative position is sensitive to the local stacking 
+configuration across the domain wall. Based on this observation, we use the relative spatial 
+variation of the center of mass (CoM) between 0° and 10° [Fig. 2(e-g)] to visualize shifts in 
+the 𝐼02(𝛼) peak position associated with local stacking configurations. It should be noted that 
+the absolute CoM value appears as “angle” but cannot be directly assigned to any structural 
+parameter, as the peak is very broad and the CoM depends on the selected angular window. 
+CoM in Fig. 2(e,f) clearly visualizes the domain walls (appearing as yellow in the CoM 
+7 
+ 
+colorscale) as well as the fully relaxed AB/BA domain regions (brown/light green). Here we 
+note that the present spatial resolution is better than the pixel size (6.32 nm). The CoM profile 
+in Fig. 2(h,i) exhibits a clear step -like change between the AB and BA domains, reflecting 
+the presence of a well-defined domain wall between fully relaxed AB/BA domains. The full 
+width of this step is approximately 15 nm , which is comparable to that reported for bilayer 
+graphene (~10 nm) [32]. The CoM becomes nearly flat within about 10 nm away from the 
+domain wall suggesting that the AB/BA stacking relaxation is essentially complete over most 
+of the domain area. At a larger twist angle of 𝜃 =0.27° in Fig. 2(g), the contrast is lower than 
+that at smaller twist angles, implying incomplete relaxation in the AB/BA stacking regions. 
+The CoM profile in Fig. 2(j) no longer shows a step -like feature separated by flat AB/BA 
+regions, but instead exhibits a more gradual variation across the moiré period. This indicates 
+that the stacking configuration is continuously modulated over the entire  region, rather than 
+being fully relaxed into AB/BA domains separated by narrow domain walls. Notably, this 
+incomplete relaxation occurs even though the moiré period is still about five times larger than 
+the domain-wall width observed at smaller twist angles. 
+The present results reveal a distinct feature of domain walls in twisted-bilayer systems. 
+Previous studies have shown that AB/BA stacking reconstruction becomes significant below 
+about 1 ° in both twisted -bilayer graphene and transition metal dichalcogenides  [16,17], 
+which is consistent with the clear AB/BA domain contrast of the dark -field images in Fig. 
+2(b-d). Nonetheless, the present results show that  deviation from the fully relaxed AB/BA 
+stacking configuration already exists across nearly the entire region even at a relatively small 
+angle (𝜃 =0.27°) due to the intrinsic strain caused by twisted structure, a point that has not 
+been fully discussed in previous studies. In contrast, we found nearly homogeneous AB/BA 
+stacking when 𝜃 ≤ 0.10 ° , probably because the domain size is much larger than the 
+characteristic domain-wall width.  These results indicate that, at twist angles below 0.10°, 
+most of the AB/BA domain region is nearly fully relaxed into AB/BA stacking configurations 
+while the local structure remains incompletely relaxed over nearly the entire domain area  at 
+θ = 0.27°. 
+ 
+8 
+ 
+Crystal structure refinement of twisted- and natural-bilayer WSe2 
+Here, we experimentally determine the interlayer distance of twisted - and natural -
+bilayer WSe2 using automated dark-field tomography. We focus on the twist angle 𝜃 ≤ 0.10° 
+because our structural refinement is based on the assumption that the local crystal structure 
+is fully relaxed to AB/BA stacking. Figure 3(a) shows the dark-field intensity 𝐼02(𝛼) curves 
+taken within the AB/BA stacking domains of 𝜃 = 0.10°, as marked by the blue/red rectangles 
+in the inset image. We fitted them by the squared structure factor  |𝑆02(𝛼, 𝑑TBL, ℎTBL)|2 to 
+determine 𝑑TBL and ℎTBL [see Sec. 1 in Supplemental Materials  for details]. We assumed 
+that the selenium height ℎTBL is identical for all selenium atoms for simplicity. The solid gray 
+curves in Fig. 3(a) are the fitting results that most well reproduce the experimental data. Here 
+we obtained the structural parameters as 𝑑TBL = 6.64 ±  0.10 Å and ℎTBL = 1.76 ±  0.10 
+Å. We also measured the natural-bilayer 2 H-WSe2, as shown in the inset in Fig. 3(b). 
+Similarly to the twisted-bilayer sample, 𝐼02(𝛼) of the bilayer 2H-WSe2 was taken at the blue 
+rectangle region (inset) and fitted by the gray solid curve. 𝑑2𝐻 and ℎ2𝐻 are obtained as 6.63 
+± 0.10 Å and 1.77 ± 0.10 Å, respectively. 
+The results of crystal structure refinements  for twisted- and natural- bilayer WSe2 are 
+summarized in Fig. 3(c), along with the literature values for bulk 2H-WSe₂ [33]. The results 
+of structural relaxation from density-functional theory (DFT) calculations are also plotted by 
+filled markers  (see methods) . Compared with bulk 2H -WSe2, both twisted - and natural -
+bilayer WSe2 show a significantly large interlayer distance d, although the selenium height h 
+is seemingly scattered within the experimental error. The larger interlayer distance observed 
+in both bilayer systems suggests a reduced interlayer coupling, which should significantly 
+affect their electronic and optical properties, as discussed later. The DFT calculation results 
+(filled markers) also show the significant difference between the interlayer distance of bulk 
+and bilayer samples , well reproducing the experimental results.  This result gives the 
+validation of the DFT calculations in twisted-bilayer systems, at least in the relaxed AB/BA 
+regions.  
+ 
+9 
+ 
+Thermally-induced sub-Å interlayer decoupling  
+We further perform the temperature-dependent automated dark -field tomography  of 
+natural- and twisted-bilayer WSe2, and reveal the thermally induced sub-Å interlayer 
+decoupling in the twisted-bilayer sample. Fig. 3(d) shows the temperature-dependent 𝐼02(𝛼) 
+curves for 24° < 𝛼 < 35°, taken at the BA stacking region of 𝜃 = 0.10°. At 400 K, the peak 
+position is slightly shifted towards the lower 𝛼 direction compared to 300 K. On the other 
+hand, 𝐼02(𝛼) for the natural-bilayer sample [Fig. 3(e)] does not show any significant shift. 
+Similar behaviors were also observed in the AB stacking counterpart, other 𝛼 region, and 
+marginally twisted regions (𝜃 < 0.05°) [Sec. 2 in Supplemental Materials]. Correspondingly, 
+the fitting results of the twisted-bilayer sample show the change in the interlayer distance  
+Δ𝑑TBL = 𝑑TBL(𝑇 = 400 K) − 𝑑TBL(𝑇 = 300 K)  of 0.08 Å  [Fig. 3(f)], whereas no 
+significant change is observed in the natural-bilayer sample [Fig. 3(g)]. The estimated linear 
+thermal expansion coefficient  along z for the twisted -bilayer sample is 𝛽 = 8.0 × 10 -5 K-1, 
+which is much larger than those of the natural-bilayer sample (< 2.0 × 10-5 K-1) and the bulk 
+2H-WSe2 sample [34] (1.0 × 10-5 K-1) as summarized in Fig. 3(h). This value is comparable 
+to polymers such as polyvinyl chloride,  showing larger thermal expansion compared to 
+inorganic solids [35].  These results reveal an anomalously large thermally induced sub -Å 
+interlayer decoupling in fully relaxed AB/BA domains of twisted bilayer WSe₂, far exceeding 
+that of the natural 2H bilayer. However, since the present comparison is effectively made 
+between a 3R -like twisted region and a natural 2H bilayer, the current experiment alone 
+cannot determine whether this behavior sh ould be attributed to the 3R -stack-like local 
+stacking itself or to the twisted bilayer prepared by tear-and-stack method. Direct comparison 
+with natural 3R and 2H bilayers, for example in MoS₂, will be an important direction for 
+future work because no bulk 3R -WSe₂ crystal has been reported from which an equivalent 
+reference bilayer could be prepared. 
+This anomalously large thermal expansion  and sub-Å interlayer decoupling observed 
+exclusively in the twisted -bilayer sample may originate from its unique bonding 
+configuration associated with the catenary -like interlayer state. In twisted bilayers, the 
+10 
+ 
+interlayer coupling is highly nonuniform across the moiré superlattice: theoretical 
+studies [23,17,20] have predicted a substantial difference in the interlayer spacing between 
+the AA stacking regions, where the layers are maximally separated at the vertices of the 
+triangular pattern, and the AB/BA stacking regions, where the layers are most closely spaced, 
+with a magnitude on the order of several tenths of an ångström.  A recent STM study also 
+reveals the out-of-plane atomic reconstruction depending on the stacking  [36]. The present 
+results, obtained from the structurally relaxed AB/BA regions, already indicate an unusually 
+strong anharmonicity in the interlayer bonding potential of the twisted-bilayer system. Such 
+enhanced anharmonicity may naturally lead to a large out -of-plane thermal response, far 
+exceeding that of natural bilayers and bulk crystals. Although the current analysis can be 
+applied to only fully relaxed AB/BA regions, further improvement of the structure model 
+will enable us to access local crystal structure for larger twist angle s, AA regions and the 
+ridge-like domain boundaries of the moiré lattice. Probing these local structures is expected 
+to provide decisive insights into how structural relaxation, anharmonicity, and thermally 
+induced interlayer decoupling evolve with moiré geometry in the future. 
+ 
+Non-thermal interlayer decoupling induced by pulsed light 
+We further investigate the photoinduced structural dynamics of twisted -bilayer WSe2 
+(Sample #2) using ultrafast TEM [Fig. 4(a)]. Sample #2 is characterized  in Sec. 3 in 
+Supplemental Materials. Figure 4(b) shows the 0 2 dark-field image 𝐼02(𝑡) of twisted-bilayer 
+WSe2 before photoexcitation , where triangular patterns are observed . Although the se 
+reconstructed AB/BA stacking domains in Fig. 4(b) were stable under equilibrium conditions 
+for more than a month, they change abruptly and irreversibly when the sample is continuously 
+photoexcited by a sequence of 25 kHz 2.4 eV light pulses for several days [see Fig. 4(c) and 
+Sec. 3 in Supplemental Materials]. The AB/BA domains at the center of the image lose the 
+ordered triangular shape, but after one week, the structura l AB/BA domain shown in Fig. 
+4(c) was stable with a marginal twist angle of less than 0.05°.  
+11 
+ 
+Here, we investigate the crystal structure dynamics of such marginally twisted WSe2 
+from the time -dependent change in dark -field image intensity. Figure 4(d) shows the 0 2 
+dark-field image of twisted-bilayer WSe2 measured at α =24.1°. When the 2.4 eV light pulse 
+of 0.33 mJ/cm 2 excites the sample, the dark-field-image intensity in the AB (BA) stacking 
+region decreases (increase s), as shown in Figs. 4(e,f). We found that triangular AB/BA 
+domains also show a similar trend, as in Fig. S12 in Supplemental Materials, suggesting that 
+the observed domain -dependent change in dark -field images is universal regardless of the 
+domain shape . To quantitative ly analyze the dark-field intensity, we subtracted the 
+background and obtained the normalized dark-field intensity  𝐼̅02(𝑡) for AB/BA domains as 
+shown in Fig. 4(g) (see Sec. 4 in Supplemental Materials for details). 𝐼̅02(𝑡) of the AB (BA) 
+domain decreases (increases) immediately after the photoexcitation, within the time 
+resolution 4 ps, and then relaxes back. 
+From the transient dark field intensity change, we further evaluate the time dependence 
+of the interlayer distance  𝑑TBL(𝑡), revealing a sub-Å change in the interlayer distance. By 
+comparing 𝐼02(𝑡)  and the simulated crystal structure factor |𝑆02(𝛼, 𝑑TBL, ℎTBL)|2 
+quantitatively, we can determine 𝑑TBL(𝑡). For BA stacking, the effect of ℎTBL(𝑡) on 𝐼02(𝑡) 
+is negligible, and we can only evaluate 𝑑TBL(𝑡) (see Sec. 5 in Supplemental Material).  As 
+shown in Fig. 5(a), the obtained Δ𝑑TBL(𝑡) = 𝑑TBL(𝑡) − 𝑑TBL(𝑡 < 0) increases by 0.2 Å at t 
+~ 0 and subsequently relaxes. Regarding the AB stacking, on the other hand, ℎTBL and 𝑑TBL 
+both contribute to 𝐼02(𝑡)  and they cannot be independently evaluated. Here we a dopt 
+ΔℎTBL(𝑡) = ℎTBL(𝑡) − ℎTBL(𝑡 < 0) = 0, which provides the  solution of  Δ𝑑TBL(𝑡) similar 
+to the BA stacking (see Sec. 5 in Supplemental Material).  
+As shown in Fig. 5(a), in the relaxation process, Δ𝑑TBL apparently shows the fast (about 
+50 ps) and slow (> 200 ps) relaxation components. To discuss the origin of these relaxation 
+components, we evaluated the change in the transient lattice temperature 𝛥𝑇 from the Debye-
+Waller factor of 4 0 diffraction intensity, which is further normalized by that just after the 
+photo-excitation ( 𝛥𝑇max) (see Sec. 5 in Supplemental Materials ). The 𝛥𝑇/𝛥𝑇max curve in 
+Fig. 5(b) behaves differently from Δ𝑑TBL: an exponential decay curve with a single time 
+constant of 200 ps can well describe 𝛥𝑇/𝛥𝑇max curve between 0 and 400 ps. These results 
+12 
+ 
+indicate that the photoinduced change in the interlayer distance cannot be attributed to the 
+change in the transient lattice temperature and should be non -thermal, at least in the fast (< 
+50 ps) timescale. 
+The appearance of fast and slow decay components in the interlayer distance  is 
+reminiscent of exciton dynamics observed in monolayer samples [37–40]. When the exciton 
+density is sufficiently high in these systems, relatively fast (< 100 ps) decay of excitons due 
+to the exciton-exciton annihilation process has been reported in addition to the slow (100 ps 
+~ few ns) recombination process.  Such an exciton -exciton annihilation process is not 
+observed in bulk and, therefore, is unique to atomically thin samples  [39]. These previous 
+studies indicate that the non -thermal interlayer decoupling  observed in Fig. 5(a) may be 
+attributed to the positive stress due to the exciton generation that is located at around 1.5-1.7 
+eV in twisted-bilayer WSe2 [41]. The stress caused by the semiconductor carriers, including 
+excitons, is usually described by deformation potential, which is related to the pressure -
+dependent electronic band structure  [42]. Considering that the hydrostatic pressure 
+significantly affects the interlayer coupling and bandgap in the bilayer system  [43], the 
+deformation potential mechanism caused by the exciton is a plausible scenario for the change 
+in the interlayer distance. In addition, we also mention that the  Δ𝑑TBL at 400 ps [Fig. 5(a)] 
+is not fully relaxed to the initial state while 𝛥𝑇/𝛥𝑇max is almost zero [Fig. 5(b)]. This 
+indicates the relatively slow ( t > 400 ps) exciton recombination process, in addition to the 
+fast exciton-exciton annihilation (< 50 ps) and thermal relaxation (~ 200 ps)  as summarized 
+in Fig. 5(c). To further verify the exciton-induced interlayer -decoupling scenario,  future 
+measurements with varying photon energy and fluence would be valuable.  In particular, 
+photon-energy dependence could help identify which excitonic states contribute to the 
+interlayer decoupling. 
+The observed 0.2 Å change in interlayer distance is significantly larger as compared to 
+previous studies on various bulk materials [43,44]. In bulk graphite  [43], the magnitude of 
+the change in interlayer distance is less than 0.01 Å even at a pump fluence of 11 mJ/cm 2, a 
+value significantly different from the present result (0.2 Å at 0.33 mJ/cm2). Δ𝑑TBL = 0.2 Å is 
+comparable to the 25 -50% interlayer distance variation between AA and AB/BA stacking 
+13 
+ 
+predicted by the theoretical calculations  [23,17,20]. Although we do not observe any 
+reversible change in the AB/BA stacking domain shape on the picosecond scale, frequent 
+repetition of such a giant change in the interlayer distance may induce the deformation of the 
+local twist angle and the resultant disordered domain structures, as seen in Fig. 4(b,c). Such 
+a photoinduced domain reconstruction should be further investigated in future studies. 
+ 
+Discussion: Impact of sub-Å interlayer decoupling 
+The observed thermally and optically induced sub-Å interlayer decoupling  will 
+significantly impact  various properties  of twisted materials. The previous experiments 
+reported that the properties of twisted-bilayer systems are significantly modified via a change 
+in the interlayer distance , e.g., t uning of superconductivity  [45], change in the indirect 
+bandgap [20], formation of commensurate stacking  [46], and modification of the electronic 
+van Hove singularities  [24]. In addition, m any theoretical calculations  [20,19,21,24,47,48] 
+have revealed the band structure modification  due to the change in the interlayer distance 
+because it can directly affect the interlayer coupling. Based on the theoretical calculation in 
+Ref. [20], Δ𝑑TBL = 0.2 Å changes the indirect bandgap of MoS2 by about 100 meV, although 
+the direct bandgap at the K point is not significantly modified [20]. Such a large modification 
+of the bandgap may induce direct -indirect bandgap transition in twisted-bilayer TMD 
+semiconductors. Therefore, the thermally and optically induced sub-Å interlayer decoupling 
+revealed by the present work should be essential in interpreting future research on twisted-
+bilayer systems. In particular, an interlayer decoupling effect caused by the excitons should 
+play an essential role in the optical nature of the twisted-bilayer system.  
+ 
+Conclusions 
+In conclusion, we  investigated the thermally and optically induced  interlayer 
+decoupling in twisted-bilayer WSe 2 using TEM. A newly developed  automated dark-field 
+tomography enables visualization of the local stacking configurations , including the 
+boundary regions, and reveals that full relaxation into AB/BA stacking occurs only when the 
+domain size is at least about one order larger than the domain -wall width. This technique 
+14 
+ 
+further quantitatively determines the three -dimensional crystal structure of twisted - and 
+natural-bilayer WSe 2, revealing  that both twisted - and natural -bilayer samples show  
+interlayer decoupling by 0.15 Å  compared to bulk samples. Additional thermally-induced 
+interlayer decoupling is also observed only in the twisted-bilayer sample, which is 
+significantly larger than  the bulk and natural -bilayer samples . Further investigation of 
+picosecond crystal structure dynamics after photoexcitation revealed a non-thermal interlayer 
+decoupling reaching 0.2 Å, probably due to the exciton generation . Such sub-Å interlayer 
+decoupling in equilibrium and non -equilibrium states  should significantly impact  the 
+electronic and optical properties of twisted -bilayer materials , and should be carefully 
+considered in future studies. Application of the TEM-based methods presented in this study 
+to a variety of materials/phenomena, such as sliding ferroelectricity  [5–7], moiré enhanced 
+charge-density wave [15], and light-induced ferromagnetism [49], is a promising direction in 
+the future.   
+15 
+ 
+ 
+Fig. 1. (a) Schematic of superlattice relaxation in twisted-bilayer WSe 2. Dark- and light-
+green spheres denote tungsten and selenium atoms,  respectively. For clarity, the spatial 
+variation of interlayer distance due to the relaxation is emphasized . (b) Top view of th e 
+twisted-bilayer WSe2. AA, AB, and BA stand for the AA, AB, and BA stacking  regions of 
+WSe2 layers (c) 0 2 dark-field images of 0.1° twisted-bilayer WSe2 at the sample tilt 𝛼 = 10°, 
+18°, and 24°, respectively. The triangular contrast reflects the AB/BA stacking domains. (d) 
+Schematic of the automated dark -field tomography. Dark -field images of twisted -bilayer 
+WSe2 are recorded by changing the sample tilt α. (e) Side view of the twisted-bilayer WSe2 
+at relaxed AB and BA stacking regions. 𝑑TBL  and ℎTBL  denote interlayer distance and 
+selenium height. (f) The calculated diffraction intensity profile for AB, BA  stacking bilayer 
+WSe2, which is squared crystal structure factor |𝑆(𝒒)|2 described in Sec. 1 in Supplemental 
+Materials. The dashed white line denotes the Ewald sphere corresponding to 𝛼 =18°. (g) Side 
+view of natural -bilayer 2 H-WSe2. 𝑑2H  and ℎ2H  denote interlayer distance and selenium 
+height. (h) The calculated diffraction intensity profile for 2H stacking bilayer WSe2. 
+  
+
+16 
+ 
+ 
+Fig. 2. (a) Automated dark-field tomography data of 0 2 diffraction  𝐼02(𝛼) for AB/BA 
+stacking domains and domain wall (DW) in marginally-twisted-bilayer WSe2 (𝜃< 0.05°). 
+The blue, red, and small white  regions in the inset show where 𝐼02(𝛼) is obtained. The 
+white region is also indicated by white arrow for clarity. (b-d) Twist-angle dependence of 
+0 2 dark-field images of twisted-bilayer WSe2. (e-g) Twist-angle dependence of the center 
+of mass (CoM) between 0 ° and 10°. (h-j) The profile of CoM along the black arrows in 
+e-g. 
+ 
+
+17 
+ 
+ 
+ 
+Fig. 3. (a) Automated dark-field tomography data of 0 2 diffraction [ 𝐼02(𝛼)] of AB and BA 
+stacking domains in twisted-bilayer WSe2. The blue and red regions in the inset show where 
+𝐼02(𝛼) is obtained. The solid gray curves denote fitting results. The white scale bar in the 
+inset denotes 100 nm. The vertical ax es of a -d are on a linear scale.  (b) 𝐼02(𝛼) of natural-
+bilayer 2H-WSe2. The blue rectangle in the inset shows where 𝐼02(𝛼) is obtained. In the inset, 
+1L, 2L, and ML indicate monolayer, bilayer, and multilayer WSe 2 obtained from the bulk 
+2H-WSe2 by exfoliation. The white scale bar in the inset denote s 500 nm.  (c) Interlayer 
+distance ( 𝑑TBL, 𝑑2𝐻) and selenium height ( ℎTBL, ℎ2𝐻) obtained from automated dark -field 
+tomography. Blue open circles denote the result of twisted-bilayer WSe2, while the red open 
+triangle is that of natural -bilayer 2H-WSe2. We performed five independent measurements 
+on the twisted-bilayer WSe2 by changing the sample  (#1, #2) and position (4 positions on 
+sample #1) in the sample. The black rectangle is the interlayer distance and selenium height 
+of bulk 2H-WSe2 in the literature [33]. The filled markers denote the DFT calculation results 
+(see methods). (d,e) Magnified 𝐼02(𝛼) curve measured at 300 K and 400 K. (f,g) Temperature 
+dependence of the interlayer distance 𝑑TBL and 𝑑2𝐻 obtained from the fitting (see Sec. 1 in 
+Supplemental Materials). (h) The list of the interlayer distance d, selenium height h, and 
+
+18 
+ 
+linear thermal expansion coefficient 𝛽 obtained from the automated dark -field tomography 
+and density-functional calculations. For the twisted-bilayer WSe2, we use the results obtained 
+from a.  
+19 
+ 
+Fig. 4. (a) Schematic of ultrafast TEM measurement on twisted-bilayer WSe2 (see methods 
+for details). The sample tilt α was fixed to 24.1°. (b,c) 0 2 dark-field images of twisted-bilayer 
+WSe2 before and one week after continuous photoexcitation by a 2.4 eV light pulses. The 
+bright and dark regions denote AB and BA stacking domains, respectively. (d) The 0 2 dark-
+field image of twisted -bilayer WSe 2 before photoexcitation ( t < 0). There is a monolayer 
+region at the bottom-left region, denoted by the white dashed line. (e,f) Change in 0 2 dark -
+field images 𝐼02(𝑡) − 𝐼02(𝑡 < 0)  before and after photoexcitation. (g) A background -
+subtracted normalized dark -field image intensity  𝐼̅02(𝑡) at the blue and red rectangles in d  
+(see Sec. 4 in Supplemental Materials for details).   
+
+20 
+ 
+  
+Fig. 5. (a) Time-dependence of the relative change in interlayer distance Δ𝑑TBL in AB/BA 
+stacking region estimated from the automated dark -field tomography results (see Sec. 4 in 
+Supplemental Materials for details). (b) Time dependence of the change in lattice temperature 
+𝛥𝑇 normalized by that just after photoexcitation  𝛥𝑇max. The solid gray curve denotes the 
+single exponential function with a time constant τ = 200 ps  [see Sec. 5 in Supplemental 
+Materials for detail s]. (c) Schematic of optically -induced interlayer decoupling in AB/BA 
+stacking twisted-bilayer WSe 2. The interlayer distance Δ𝑑TBL is changed by 0.2 Å by the 
+photoexcitation.  
+  
+
+21 
+ 
+Methods 
+ 
+Setup of (ultrafast) transmission electron microscopy 
+Transmission electron microscopy measurements were performed using a previously 
+described system  [29] based on Tecnai Femto (Thermo Fisher Scientific) . The 150 -μm 
+condenser aperture was used for all measurements. We used a 20 -μm objective aperture for 
+bright-field and dark-field measurements unless otherwise denoted. A selected-area aperture 
+of 200  μ m was used for the diffraction measurements.  For the automated dark -field 
+tomography measurements, sample -tilt-dependent dark -field images are automatically 
+collected with an angle step of 0.5 °. For the time-resolved measurements in Fig. 4,  we use 
+1030-nm light source PHAROS (Light Conversion) with  the repetition rate of 25 kHz. We 
+used frequency-doubled 514-nm light with a fluence of 330  μJ/cm2 as the pump light. The 
+total time resolution was set at 4  ps for data acquisition to maintain a good signal -to-noise 
+ratio throughout the entire measurement, although the best time resolution of our ultrafast 
+transmission electron microscopy system was 750 fs.  The beam diameter of the pump light 
+(~160 m) was set much larger than that of the sample (< 10 m). The spatial resolution of 
+the dark -field imaging  was measured using a 0 2 dark -field image at bilayer -monolayer 
+boundary region under the same experimental conditions as those used in Fig. 2. As shown 
+in Fig. S13, the dark -field intensity is changed within one pixel of the image . This result 
+indicates that the present measurements achieve a spatial resolution better than the pixel size 
+(6.32 nm). 
+ 
+Sample preparation 
+The twisted -bilayer WSe 2 and few-layer 2H -WSe2 samples were fabricated by the 
+mechanical exfoliation of bulk 2H -WSe2 (2D Semiconductors) and dry-transfer method 
+using Elvacite 2552C (Lucite International Inc.) as a polymer stamp  [50]. The twist angles 
+were set to 0.3° by tear-and-stack method [51], although the actual twist angle slightly varies 
+around this value depending on the position. T he WSe2 flakes were sandwiched between a 
+few layers of hexagonal boron nitride (hBN) and then placed on an amorphous silicon nitride 
+22 
+ 
+(SiNx) substrate (Norcada Inc.). We prepared two twisted-bilayer WSe2 samples (Sample #1 
+and #2), which are used for temperature -dependent and time -resolved measurements, 
+respectively. We use 20-nm and 100-nm SiNx substrate for Sample #1 and #2, respectively. 
+The local twist angle 𝜃 of twisted-bilayer WSe2 is determined from the domain size L using 
+the relation 𝐿 = 𝑎/[2sin(𝜃/2)], where 𝑎 = 3.32 Å is lattice constant. 
+ 
+Drift correction of time-dependent data 
+ For the time-dependent dark-field image measurement in Fig. 4, we performed time-
+dependent dark-field image measurements repeatedly, and these data are summed to improve 
+the signal -to-noise ratio. Before the summation, the sample drift between several 
+measurements was corrected. We numerically evaluated the cross -correlation of dark -field 
+images as follows: 
+𝐴𝑡,𝑛(𝑥𝑖, 𝑦𝑗) = ∑ 𝐼𝑡,𝑛(𝑥𝑝, 𝑦𝑞)𝐼ref(𝑥𝑝 − 𝑥𝑖, 𝑦𝑞 − 𝑦𝑗)
+𝑁/4
+𝑝,𝑞=−𝑁/4
+, 
+where 𝐼𝑡,𝑛(𝑥𝑝, 𝑦𝑞) is the dark-field image at delay time t of n-th measurement, 𝐼ref(𝑥𝑝, 𝑦𝑞) is 
+the dark-field image at t = -100 ps of the first measurement, 𝑥𝑖,𝑝, 𝑦𝑗,𝑞 represents the pixelated 
+position in the image, N = 256 is the image size. Therefore, 𝐴𝑡,𝑛(𝑥𝑖, 𝑦𝑗)  is the cross -
+correlation of the central part of the image. We estimated the shift of the dark-field image as 
+the maximum position of 𝐴𝑡,𝑛(𝑥𝑖, 𝑦𝑗), by which the respective image was shifted. The typical 
+magnitude of the shift was 0-4 pixels. All analyses were done using multi -dimensional data 
+analysis and visualization platform lys [52]. 
+ 
+Density-functional calculations 
+ Density-functional theory (DFT) calculations  using VASP package  [53] were 
+performed to evaluate the structural parameters of AB and 2H stacking bilayer WSe 2 and 
+bulk 2H-WSe2. It is noted that we do not include the effect of twisted crystal structure for 
+AB stacking bilayer WSe2. The calculations were performed in the framework of the van der 
+Waals density functional theory [54] using the pseudo-potential method in conjunction with 
+23 
+ 
+the generalized gradient approximation. The wave functions were expanded in the plane 
+wave basis with the cutoff energy of 500 eV to ensure good convergence of the stress and 
+elastic tensor. The k-point sampling was set to 9 × 9 × 4 in the first Brillouin zone.  The a 
+axis length was fixed to 3.32 Å, which is experimentally determined by the electron 
+diffraction measurement. The interlayer distance and selenium height  were relaxed with a 
+force convergence of 0.001 5 eV/Å. Although the two selenium heights are relaxed 
+independently, the difference between them are less than 0.001 Å. 
+ 
+Acknowledgments: 
+This work was supported by JSPS KAKENHI (Grant numbers 25K00057, JP20H01834, 
+JP21H05235 , JP24K01285 , 24H00410, JP25H01251), JST PRESTO (Grant number 
+JPMJPR24JA), CREST ( Grant number. JPMJCR20B4). T. S. acknowledges support from 
+Toray  Science  Foundation (#23-6405) 、 The Sumitomo Foundation . K.W. and T.T. 
+acknowledge support from the JSPS KAKENHI (Grant numbers 21H05233 and 23H02052) , 
+JST CREST (JPMJCR24A5), and World Premier International Research Center Initiative 
+(WPI), MEXT, Japan. 
+ 
+References 
+[1] Y. Cao, V. Fatemi, S. Fang, K. Watanabe, T. Taniguchi, E. Kaxiras, and P. Jarillo -Herrero, 
+Unconventional superconductivity in magic-angle graphene superlattices, Nature 556, 7699 (2018). 
+[2] X. Lu et al., Superconductors, orbital magnets and correlated states in magic -angle bilayer graphene, 
+Nature 574, 7780 (2019). 
+[3] R. Bistritzer and A. H. MacDonald, Moiré bands in twisted double-layer graphene, Proceedings of the 
+National Academy of Sciences 108, 12233 (2011). 
+[4] A. L. Sharpe, E. J. Fox, A. W. Barnard, J. Finney, K. Watanabe, T. Taniguchi, M. A. Kastner, and D. 
+Goldhaber-Gordon, Emergent ferromagnetism near three-quarters filling in twisted bilayer graphene, 
+Science 365, 605 (2019). 
+[5] Z. Zheng et al., Unconventional ferroelectricity in moiré heterostructures, Nature 588, 7836 (2020). 
+[6] M. Vizner Stern, Y. Waschitz, W. Cao, I. Nevo, K. Watanabe, T. Taniguchi, E. Sela, M. Urbakh, O. 
+Hod, and M. Ben Shalom, Interfacial ferroelectricity by van der Waals sliding, Science 372, 1462 
+(2021). 
+[7] K. Yasuda, X. Wang, K. Watanabe, T. Taniguchi, and P. Jarillo-Herrero, Stacking-engineered 
+ferroelectricity in bilayer boron nitride, Science 372, 1458 (2021). 
+[8] Y. Xia, Z. Han, K. Watanabe, T. Taniguchi, J. Shan, and K. F. Mak, Superconductivity in twisted 
+bilayer WSe2, Nature 637, 833 (2025). 
+[9] Y. Guo et al., Superconductivity in 5.0° twisted bilayer WSe2, Nature 637, 839 (2025). 
+[10] L. Wang et al., Correlated electronic phases in twisted bilayer transition metal dichalcogenides, Nat. 
+Mater. 19, 8 (2020). 
+[11] Y. Tang et al., Simulation of Hubbard model physics in WSe2/WS2 moiré superlattices, Nature 579, 
+7799 (2020). 
+24 
+ 
+[12] Y. Xu, S. Liu, D. A. Rhodes, K. Watanabe, T. Taniguchi, J. Hone, V. Elser, K. F. Mak, and J. Shan, 
+Correlated insulating states at fractional fillings of moiré superlattices, Nature 587, 7833 (2020). 
+[13] D. Huang, J. Choi, C.-K. Shih, and X. Li, Excitons in semiconductor moiré superlattices, Nat. 
+Nanotechnol. 17, 3 (2022). 
+[14] J. Quan et al., Phonon renormalization in reconstructed MoS2 moiré superlattices, Nat. Mater. 20, 8 
+(2021). 
+[15] W.-M. Zhao, L. Zhu, Z. Nie, Q.-Y. Li, Q.-W. Wang, L.-G. Dou, J.-G. Hu, L. Xian, S. Meng, and S.-C. 
+Li, Moiré enhanced charge density wave state in twisted 1T-TiTe2/1T-TiSe2 heterostructures, Nat. 
+Mater. 21, 3 (2022). 
+[16] H. Yoo et al., Atomic and electronic reconstruction at the van der Waals interface in twisted bilayer 
+graphene, Nature Materials 18, 448 (2019). 
+[17] A. Weston et al., Atomic reconstruction in twisted bilayers of transition metal dichalcogenides, Nat. 
+Nanotechnol. 15, 7 (2020). 
+[18] X. Ma, S. Fu, J. Ding, M. Liu, A. Bian, F. Hong, J. Sun, X. Zhang, X. Yu, and D. He, Robust Interlayer 
+Exciton in WS2 /MoSe2 van der Waals Heterostructure under High Pressure, Nano Lett. 21, 8035 
+(2021). 
+[19] I. Brihuega, P. Mallet, H. González-Herrero, G. Trambly de Laissardière, M. M. Ugeda, L. Magaud, J. 
+M. Gómez-Rodríguez, F. Ynduráin, and J.-Y. Veuillen, Unraveling the Intrinsic and Robust Nature of 
+van Hove Singularities in Twisted Bilayer Graphene by Scanning Tunneling Microscopy and 
+Theoretical Analysis, Phys. Rev. Lett. 109, 196802 (2012). 
+[20] K. Liu, L. Zhang, T. Cao, C. Jin, D. Qiu, Q. Zhou, A. Zettl, P. Yang, S. G. Louie, and F. Wang, 
+Evolution of interlayer coupling in twisted molybdenum disulfide bilayers, Nat Commun 5, 1 (2014). 
+[21] E. Del Corro et al., Fine tuning of optical transition energy of twisted bilayer graphene via interlayer 
+distance modulation, Phys. Rev. B 95, 085138 (2017). 
+[22] B. L. Chittari, N. Leconte, S. Javvaji, and J. Jung, Pressure induced compression of flatbands in twisted 
+bilayer graphene, Electron. Struct. 1, 015001 (2018). 
+[23] T. Devakul, V. Crépel, Y. Zhang, and L. Fu, Magic in twisted transition metal dichalcogenide bilayers, 
+Nat Commun 12, 1 (2021). 
+[24] Y.-X. Zhao, X.-F. Zhou, Y. Zhang, and L. He, Oscillations of the Spacing between van Hove 
+Singularities Induced by sub-\AA{}ngstrom Fluctuations of Interlayer Spacing in Graphene 
+Superlattices, Phys. Rev. Lett. 127, 266801 (2021). 
+[25] Y. Fukaya, Y. Zhao, H.-W. Kim, J. R. Ahn, H. Fukidome, and I. Matsuda, Atomic arrangements of 
+quasicrystal bilayer graphene: Interlayer distance expansion, Phys. Rev. B 104, L180202 (2021). 
+[26] L. Palatinus, P. Brázda, P. Boullay, O. Perez, M. Klementová, S. Petit, V. Eigner, M. Zaarour, and S. 
+Mintova, Hydrogen positions in single nanocrystals revealed by electron diffraction, Science 355, 166 
+(2017). 
+[27] P. B. Klar, Y. Krysiak, H. Xu, G. Steciuk, J. Cho, X. Zou, and L. Palatinus, Accurate structure models 
+and absolute configuration determination using dynamical effects in continuous -rotation 3D electron 
+diffraction data, Nat. Chem. 15, 848 (2023). 
+[28] S. H. Sung, N. Schnitzer, L. Brown, J. Park, and R. Hovden, Stacking, strain, and twist in 2D materials 
+quantified by 3D electron diffraction, Phys. Rev. Materials 3, 064003 (2019). 
+[29] A. Nakamura, T. Shimojima, Y. Chiashi, M. Kamitani, H. Sakai, S. Ishiwata, H. Li, and K. Ishizaka, 
+Nanoscale Imaging of Unusual Photoacoustic Waves in Thin Flake VTe 2, Nano Letters 20, 4932 
+(2020). 
+[30] T. Shimojima, A. Nakamura, and K. Ishizaka, Development of five-dimensional scanning transmission 
+electron microscopy, Review of Scientific Instruments 94, 023705 (2023). 
+[31] L. Brown, R. Hovden, P. Huang, M. Wojcik, D. A. Muller, and J. Park, Twinning and Twisting of Tri - 
+and Bilayer Graphene, Nano Letters 12, 1609 (2012). 
+[32] J. S. Alden, A. W. Tsen, P. Y. Huang, R. Hovden, L. Brown, J. Park, D. A. Muller, and P. L. McEuen, 
+Strain solitons and topological defects in bilayer graphene, Proceedings of the National Academy of 
+Sciences of the United States of America 110, 11256 (2013). 
+25 
+ 
+[33] W. J. Schutte, J. L. De Boer, and F. Jellinek, Crystal structures of tungsten disulfide and diselenide, 
+Journal of Solid State Chemistry 70, 207 (1987). 
+[34] S. H. El-Mahalawy and B. L. Evans, The thermal expansion of 2H-MoS2, 2H-MoSe2 and 2H-WSe2 
+between 20 and 800°C, J Appl Cryst 9, 5 (1976). 
+[35] M. Titow, PVC Technology (Springer Science & Business Media, 2012). 
+[36] H. Zhao, S. Yang, C. Ge, D. Zhang, L. Huang, M. Chen, A. Pan, and X. Wang, Tunable Out -of-Plane 
+Reconstructions in Moiré Superlattices of Transition Metal Dichalcogenide Heterobilayers, ACS Nano 
+18, 27479 (2024). 
+[37] D. Sun, Y. Rao, G. A. Reider, G. Chen, Y. You, L. Brézin, A. R. Harutyunyan, and T. F. Heinz, 
+Observation of Rapid Exciton–Exciton Annihilation in Monolayer Molybdenum Disulfide, Nano Lett. 
+14, 5625 (2014). 
+[38] S. Mouri, Y. Miyauchi, M. Toh, W. Zhao, G. Eda, and K. Matsuda, Nonlinear photoluminescence in 
+atomically thin layered WSe 2 arising from diffusion-assisted exciton-exciton annihilation, Phys. Rev. 
+B 90, 155449 (2014). 
+[39] N. Kumar, Q. Cui, F. Ceballos, D. He, Y. Wang, and H. Zhao, Exciton-exciton annihilation in MoSe 2 
+monolayers, Phys. Rev. B 89, 125427 (2014). 
+[40] M. Kulig, J. Zipfel, P. Nagler, S. Blanter, C. Schüller, T. Korn, N. Paradiso, M. M. Glazov, and A. 
+Chernikov, Exciton Diffusion and Halo Effects in Monolayer Semiconductors, Phys. Rev. Lett. 120, 
+207401 (2018). 
+[41] T. I. Andersen et al., Excitons in a reconstructed moiré potential in twisted WSe2/WSe2 homobilayers, 
+Nat. Mater. 20, 480 (2021). 
+[42] P. Ruello and V. E. Gusev, Physical mechanisms of coherent acoustic phonons generation by ultrafast 
+laser action, Ultrasonics 56, 21 (2015). 
+[43] F. Carbone, P. Baum, P. Rudolf, and A. H. Zewail, Structural Preablation Dynamics of Graphite 
+Observed by Ultrafast Electron Crystallography, Phys. Rev. Lett. 100, 035501 (2008). 
+[44] T. Suzuki et al., Ultrafast optical stress on ${\mathrm{BaFe}}_{2}{\mathrm{As}}_{2}$, Phys. Rev. 
+Research 3, 033222 (2021). 
+[45] M. Yankowitz, S. Chen, H. Polshyn, Y. Zhang, K. Watanabe, T. Taniguchi, D. Graf, A. F. Young, and 
+C. R. Dean, Tuning superconductivity in twisted bilayer graphene, Science 363, 1059 (2019). 
+[46] M. Yankowitz, K. Watanabe, T. Taniguchi, P. San-Jose, and B. J. LeRoy, Pressure-induced 
+commensurate stacking of graphene on boron nitride, Nat Commun 7, 13168 (2016). 
+[47] S. Carr, S. Fang, P. Jarillo-Herrero, and E. Kaxiras, Pressure dependence of the magic twist angle in 
+graphene superlattices, Phys. Rev. B 98, 085144 (2018). 
+[48] M. Romanova and V. Vlček, Stochastic many-body calculations of moiré states in twisted bilayer 
+graphene at high pressures, Npj Comput Mater 8, 11 (2022). 
+[49] X. Wang et al., Light-induced ferromagnetism in moiré superlattices, Nature 604, 468 (2022). 
+[50] S. Masubuchi, M. Morimoto, S. Morikawa, M. Onodera, Y. Asakawa, K. Watanabe, T. Taniguchi, and 
+T. Machida, Autonomous robotic searching and assembly of two-dimensional crystals to build van der 
+Waals superlattices, Nat Commun 9, 1 (2018). 
+[51] K. Kim et al., van der Waals Heterostructures with High Accuracy Rotational Alignment, Nano Lett. 
+16, 1989 (2016). 
+[52] A. Nakamura, lys: interactive multi-dimensional data analysis and visualization platform, Journal of 
+Open Source Software 8, 5869 (2023). 
+[53] G. Kresse and J. Hafner, Ab initio molecular dynamics for liquid metals, Physical Review B 47, 558 
+(1993). 
+[54] S. Grimme, J. Antony, S. Ehrlich, and H. Krieg, A consistent and accurate ab initio parametrization of 
+density functional dispersion correction (DFT-D) for the 94 elements H-Pu, The Journal of Chemical 
+Physics 132, 154104 (2010). 
+[55] C. Riekel, Structure refinement of TiSe2 by neutron diffraction, Journal of Solid State Chemistry 17, 
+389 (1976). 
+[56] F. A. Cevallos et al., Liquid Salt Transport Growth of Single Crystals of the Layered Dichalcogenides 
+MoS2 and WS2, Crystal Growth & Design 19, 5762 (2019). 
+26 
+ 
+[57] K. D. Bronsema, G. W. Bus, and G. A. Wiegers, The crystal structure of vanadium ditelluride, 
+V1+xTe2, Journal of Solid State Chemistry 53, 415 (1984). 
+[58] B. E. Brown, The crystal structures of NbT 2 and TaTe 2, Acta Cryst 20, 264 (1966). 
+[59] B. E. Brown, The crystal structures of WTe 2 and high-temperature MoTe 2, Acta Crystallographica 20, 
+268 (1966). 
+[60] A. Spijkerman, J. L. de Boer, A. Meetsma, G. A. Wiegers, and S. van Smaalen, X -ray crystal-structure 
+refinement of the nearly commensurate phase of 1 T − TaS 2 in ( 3 + 2 ) -dimensional superspace, 
+Phys. Rev. B 56, 13757 (1997). 
+[61] T. Sörgel, J. Nuss, U. Wedig, R. K. Kremer, and M. Jansen, A new low temperature modification of 
+TaTe2—Comparison to the room temperature and the hypothetical 1T-TaTe2 modification, Materials 
+Research Bulletin 41, 987 (2006).

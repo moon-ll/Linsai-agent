@@ -146,6 +146,12 @@ TASK_PROVIDER_PREFS: Dict[str, Tuple[str, ...]] = {
     "kb_distill": ("minimax", "glm"),
 }
 
+# v6.9.75: 任务级输出预算——推理模型（reasoning tokens 计入 completion
+# 上限）写长文时 4096 不够，按 prefer 标签放宽
+TASK_MAX_TOKENS = {
+    "kb_distill_deep": 16384,
+}
+
 
 def _apply_task_preference(
     ordered: List["LLMProvider"], prefer: Optional[str]
@@ -295,7 +301,8 @@ class LLMProvider:
     def __repr__(self) -> str:
         return f"LLMProvider({self.name}/{self.type})"
 
-    def call(self, system_prompt: str, messages: List[Dict[str, str]], timeout: int = 60):
+    def call(self, system_prompt: str, messages: List[Dict[str, str]], timeout: int = 60,
+             max_tokens: Optional[int] = None):
         """调用 LLM 获取回复。
 
         返回: (response_text, usage_dict)
@@ -388,8 +395,9 @@ class LLMProvider:
             "model": model,
             "messages": [{"role": "system", "content": system_prompt}] + messages,
             "temperature": 0.7,
-            "max_tokens": 4096,
+            "max_tokens": max_tokens or 4096,
         }
+
 
         headers = {
             "Content-Type": "application/json",
@@ -489,7 +497,10 @@ class LLMRouter:
                     _log.info(f"LLM 路由: 强制使用 provider={provider.name}")
                 for attempt in range(retry + 1):
                     try:
-                        result, usage = provider.call(system_prompt, messages, timeout)
+                        result, usage = provider.call(
+                            system_prompt, messages, timeout,
+                            max_tokens=TASK_MAX_TOKENS.get(prefer or ""),
+                        )
                         provider.failure_count = 0
                         self._last_used = provider.name
                         if _log:

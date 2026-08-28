@@ -20,7 +20,12 @@ try:
     from PyPDF2 import PdfReader
     HAS_PYPDF2 = True
 except ImportError:
-    HAS_PYPDF2 = False
+    try:
+        # v6.9.75: pypdf 是 PyPDF2 的后继维护版（API 兼容），venv 中装有
+        from pypdf import PdfReader
+        HAS_PYPDF2 = True
+    except ImportError:
+        HAS_PYPDF2 = False
 
 
 # ============================================================

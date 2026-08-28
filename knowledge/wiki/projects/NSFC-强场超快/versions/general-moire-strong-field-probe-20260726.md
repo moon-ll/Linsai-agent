@@ -4,10 +4,10 @@ type: "proposal_version"
 proposal_id: "general-moire-strong-field-probe-20260726"
 project_type: "general"
 latest_round: 7
-last_score: 0.68
+last_score: 0.72
 status: "optimizing"
-created: "2026-08-28T08:27:37Z"
-updated: "2026-08-28T08:27:37Z"
+created: "2026-08-28T12:38:56Z"
+updated: "2026-08-28T12:38:56Z"
 project: ["NSFC-强场超快"]
 growth_stage: "growing"
 confidence: 1.0
@@ -18,9 +18,9 @@ confidence: 1.0
 **课题 ID**：`general-moire-strong-field-probe-20260726`
 **类型**：general
 **最新轮次**：第 7 轮
-**当前分数**：0.68
+**当前分数**：0.72
 **状态**：优化中
-**同步时间**：2026-08-28T08:27:37Z
+**同步时间**：2026-08-28T12:38:56Z
 
 ---
 
@@ -30,7 +30,7 @@ confidence: 1.0
 |------|------|------|
 | content | content | 170 |
 | full_review | 全文逻辑骨架 | 34 |
-| rationale | rationale | 115 |
+| rationale | rationale | 100 |
 | references | references | 132 |
 | scheme | scheme | 76 |
 
@@ -41,9 +41,9 @@ confidence: 1.0
 **课题名称**：Y1（2027.01–2027.12）** R1 理论就绪，样品合作对接。单层 MoS₂/WSe₂ 能带与跃迁偶极矩 TDDFT 标定完成，相对 DFT 文献偏差 < 5%；SBE 框架从 ZnO/MgO 迁移到 MoS₂ 单层完成；TMDC 莫尔样品合作意向签订；Floquet 有效哈密顿量推导完成。
 **项目类型**：面上项目
 **课题 ID**：`general-moire-strong-field-probe-20260726`
-**当前状态**：优化中（第4轮，score 0.68）
+**当前状态**：优化中（第5轮，score 0.72）
 **启动日期**：2026-07-26
-**最后更新**：2026-08-23
+**最后更新**：2026-08-28
 
 ---
 
@@ -59,17 +59,17 @@ confidence: 1.0
 ## 优化历史
 | 轮次 | 分数 | 问题数 | high问题 | 时间 |
 |------|------|--------|---------|------|
-| 1 | 0.76 | 14 | 4 | 2026-08-19 |
-| 1 | 0.75 | 15 | 4 | 2026-08-19 |
-| 1 | 0.77 | 12 | 3 | 2026-08-19 |
-| 1 | 0.78 | 0 | 0 | 2026-08-19 |
 | 1 | 0.74 | 7 | 1 | 2026-08-20 |
-| 2 | 0.76 | 24 | 8 | 2026-08-20 |
-| 2 | 0.76 | 24 | 8 | 2026-08-20 |
-| 2 | 0.78 | 11 | 6 | 2026-08-20 |
-| 2 | 0.76 | 29 | 7 | 2026-08-20 |
 | 2 | 0.69 | 19 | 5 | 2026-08-20 |
-| 3 | 0
+| 3 | 0.62 | 23 | 7 | 2026-08-20 |
+| 4 | 0.69 | 29 | 11 | 2026-08-20 |
+| 5 | 0.68 | 21 | 9 | 2026-08-23 |
+| 6 | 0.72 | 0 | 0 | 2026-08-28 |
+
+## 状态流转
+- 2026-07-26: — → drafts (注册新 proposal)
+- 2026-07-26: drafts → optimizing (批量确认思路可行，进入优化)
+- 2026-07-29: optimizing → pending_review (连续3轮
 
 （完整简介见 [源文件](research_proposals/optimizing/general-moire-strong-field-probe-20260726/04_proposal/proposal-draft-merged.md)）
 

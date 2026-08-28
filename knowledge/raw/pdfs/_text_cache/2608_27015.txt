@@ -1,0 +1,1023 @@
+Field-driven attosecond deflection of electron beams at the position of planar foils
+Xiaofan Gui ,1, 2 Kenichi L. Ishikawa ,2, 3, 4 and Yuya Morimoto 1, 5
+1RIKEN Center for Advanced Photonics, RIKEN, 2-1 Hirosawa, Wako, Saitama, 351-0198, Japan
+2Department of Nuclear Engineering and Management,
+Graduate School of Engineering, The University of Tokyo,
+7-3-1 Hongo, Bunkyo-ku, Tokyo 113-8656, Japan
+3Photon Science Center, Graduate School of Engineering,
+The University of Tokyo, 7-3-1 Hongo, Bunkyo-ku, Tokyo 113-8656, Japan
+4Research Institute for Photon Science and Laser Technology,
+The University of Tokyo, 7-3-1 Hongo, Bunkyo-ku, Tokyo 113-0033, Japan
+5RIKEN Pioneering Research Institute, RIKEN, 2-1 Hirosawa, Wako, Saitama, 351-0198, Japan
+(Dated: August 28, 2026)
+While the coupling of free-electron beams and light has enabled the control of quantum states in
+electrons and the generation of ultrashort electron pulses, it can induce artifacts when probing a
+laser-driven sample with an electron beam. Here, we theoretically study optical-field-driven beam
+deflection that inevitably occurs at the location of a laser-excited sample. Treating electrons in
+a beam as classical point particles and focusing on thin planar samples, we conduct a systematic
+study of the instantaneous deflection amplitudes with respect to light polarization, material type,
+thickness, and interaction geometry. Fors-polarized excitation fields, the deflection amplitude is
+strictly proportional to the excitation-field amplitude in a foil, making beam deflection unavoidable.
+Conversely, forp-polarized fields, a nontrivial relationship emerges between the deflection amplitude
+and the field amplitude due to the interplay of electric and magnetic fields coupled with the electron–
+light velocity mismatch. Crucially, we demonstrate that the deflection can be minimized even under
+high field strengths by selecting an optimal configuration for a given foil material and thickness.
+These findings provide key guidelines for designing future time-resolved imaging experiments using
+ultrashort electron beams.
+I. INTRODUCTION
+Ultrafast electron microscopy and diffraction are pow-
+erful tools to investigate ultrafast structural dynamics
+on the nano or atomic scale [1–4]. Typically, a dynam-
+ical process is initiated by an ultrashort laser pulse and
+probed by a time-delayed electron pulse in the absence
+of the pump field. A crystalline foil with a thickness
+of tens to hundreds of nanometers is usually employed
+as a sample in transmission electron diffraction [3, 5].
+In contrast, due to the recent development of ultra-
+short electron beam technologies, dynamics occurring on
+timescales faster than the pump pulse duration is becom-
+ing accessible. The shaping of free-electron beams with
+light waves [6, 7] has enabled the generation and detec-
+tion of attosecond electron pulses [8–15], thereby lead-
+ing to the observation of dynamics at the sub-optical-
+cycle level [16, 17]. The propagation and oscillation of
+electromagnetic fields were visualized on their natural
+spatial and temporal scales [18]. Modulation of trans-
+mission electron diffraction intensities on the attosecond
+timescale has also been reported [11]. In these experi-
+ments, the optically modulated ultrashort electron pulses
+probed the sample in the presence of the excitation light
+field.
+As exemplified by Lorentz electron microscopy, elec-
+tron trajectories and phases are highly sensitive to elec-
+tric and magnetic fields, enabling electromagnetic field
+imaging. Conversely, when samples under strong elec-
+tromagnetic fields are observed, interactions between free
+electrons and the fields can hinder accurate observation
+of the sample state. Quantum mechanically, an electron
+in an oscillating electromagnetic field is described by a su-
+perposition of states involving virtual-photon absorption
+and emission processes [19]. In electron-beam scattering
+by atomic targets under an oscillating electric field (i.e.,
+free-free transition), the energy of the scattered electrons
+changes, accompanied by a modulated angular distribu-
+tion [20–23]. Classical mechanically, the energy, mo-
+mentum, and position of the beam undergo time-periodic
+modulation due to the time-dependent Lorentz force. At-
+tosecond electron diffraction from a crystalline foil ex-
+posed to a laser field exhibited time-periodic modulations
+in diffraction intensity, driven mainly by field-induced
+instantaneous beam deflection [11]. To faithfully probe
+the structure of a sample under excitation using electron
+diffraction, the field-driven shifts in the beam’s momen-
+tum have to be suppressed. On the other hand, one can
+actively utilize the ultrafast position or momentum shift
+to, for example, slice electrons within a short time win-
+dow by transiently enhancing the diffraction probability.
+In order to control the influence of the optical field on the
+scattering process, comprehensive knowledge of the ultra-
+fast light-electron interaction in the vicinity of a sample,
+especially inside a foil, is necessary. However, both ex-
+perimental and theoretical studies on optically-excited
+foil [24–35] so far have considered only the energy and
+momentum shifts remaining after the completion of the
+electron-light interaction, as they are directly observable
+quantities.
+In this study, we present a systematic study of the
+light-field-induced transverse momentum modulation of
+arXiv:2608.27015v1  [physics.optics]  27 Aug 2026
+2
+sub-relativistic electron beams in planar foils. Using an-
+alytically obtained optical fields around a foil [12], we
+calculate the electromagnetic response of an electron de-
+scribed as a point particle. The electron transverse mo-
+mentum shift is evaluated by integrating the Lorentz
+force along the beam trajectory. We compare the am-
+plitudes of the transient beam deflection for different foil
+materials, thicknesses, light polarizations, wavelengths,
+and configurations. By identifying the physical mecha-
+nisms responsible for the deflection, we reveal the con-
+ditions for suppressing transient beam deflection while
+maintaining high electric field strength, which are nec-
+essary for future attosecond electron diffraction experi-
+ments.
+The remainder of this paper is organized as follows.
+Section II introduces the theoretical model and defines
+the quantities which characterize the instantaneous de-
+flection. Sections III and IV present the results forp-
+polarized ands-polarized light fields, respectively. Sec-
+tion V summarizes the main findings.
+II. THEORETICAL METHODS
+An analytical approach is employed to investigate
+the momentum modulation of a swift electron [blue in
+Fig. 1(a)] induced by the optical field (red) inside and
+around a laser-excited sample foil (green rectangle). This
+interaction gives rise to an instantaneous deflection at the
+sample position, as illustrated in the inset of Fig. 1(a).
+Both metallic and dielectric foils are considered.
+The sample foil is modeled as a laterally infinite slab
+with uniform thicknessD. The incident field is linearly
+polarized and a monochromatic plane wave. If neces-
+sary, the deflection caused by a pulsed field can be ex-
+pressed as a coherent superposition of those obtained
+with monochromatic plane waves. The electromagnetic
+field is given by the superposition of the incident, re-
+flected, and transmitted waves, including thin-film inter-
+ference. The refractive index of the foil is used as a pa-
+rameter. The explicit analytical expressions of the fields
+and the corresponding calculation procedure are given in
+a previous study [12].
+The momentum change of the electron at the foil cen-
+ter is obtained by integrating the Lorentz force over time
+along the trajectory from the remote past to the foil cen-
+ter,
+∆p(ϕ0) =−e
+Z 0
+−∞
+[E(re(t), t;ϕ 0) +v e ×B(r e(t), t;ϕ 0)] dt,
+(1)
+wheree(>0) is the elementary charge and the in-
+stant at which the electron reaches the foil center is
+taken ast= 0 without loss of generality. Here,
+E(re(t), t;ϕ 0) andB(r e(t), t;ϕ 0) denote the optical elec-
+tric and magnetic fields, respectively, at the posi-
+tionr e(t). The incident electric field is expressed as
+Ein(x, t) =ϵ inE0 cos (kin ·x−ωt+ϕ 0). where, we de-
+fineϕ 0 as the phase delay of the incident light. The
+transmitted, reflected, and refracted waves are also given
+analytically as in Ref. [12]. Far from the foil (t=±∞),
+the field amplitude is assumed to vanish smoothly and
+asymptotically.
+At the laser field amplitude considered in this work
+(109 V/m, corresponding to the intensity of 1.3×
+1011 W/cm2), the transverse displacement of the elec-
+tron and the velocity modulation are negligible compared
+with its longitudinal motion and incident velocity, respec-
+tively, and therefore the electron trajectory is approxi-
+mated as a straight line,
+re(t)≈v et,(2)
+where the center of the foil is assumed to be at the origin
+of the spatial coordinate, andv e =v eˆzis the incident
+electron velocity. The instantaneous deflection angle is
+then defined as
+α(ϕ0)≈ ∆p⊥(ϕ0)
+pz0
+,(3)
+wherep z0 =γm eve is the initial longitudinal momentum
+of the incident electron,m e is the electron rest mass,γ
+is the Lorentz factor, and ∆p ⊥(ϕ0) is the light-induced
+transverse momentum shift. The direction of the trans-
+verse deflection changes depending on the geometry and
+polarization. Because it takes only tens to hundreds of
+attoseconds for a swift electron to pass through a thin
+sample with a thickness of tens of nanometers, the angle
+can be considered nearly constant during the time the
+electron passes through it. Figure. 1(c) shows the evolu-
+tion of the instantaneous electron deflection angle along
+the propagation direction for three representative phase
+delays. Indeed, the angle remains almost constant while
+the electron traverses the foil.
+Because the driving optical field is monochromatic and
+periodic in time, ∆p ⊥(ϕ0) andα(ϕ 0) are periodic func-
+tions ofϕ 0. We therefore scanϕ 0 over 2πand evaluate
+the amplitude of the instantaneous deflection angle,
+αsample ≡max
+ϕ0∈[0,2π]
+|α(ϕ0)|.(4)
+The blue curve in Fig. 1(b) shows the instantaneous de-
+flection at the foil center,α(ϕ 0), together with the fi-
+nal deflection angle att= +∞,α fin(ϕ0), shown by the
+black dashed line. The calculation conditions are given
+in the figure caption. Bothα(ϕ 0) andα fin(ϕ0) oscillate
+sinusoidally with a period of 2π. This shows that both
+the instantaneous and final deflections originate from a
+linear interaction with the optical electromagnetic field,
+unlike the Kapitza-Dirac effect [36] associated with the
+ponderomotive effect. Because both the amplitudes and
+the phase offsets differ,α sample should be investigated
+separately fromα fin, highlighting the importance of sep-
+arately investigatingα sample. Moreover,α fin vanishes in
+the absence of the foil, as required by energy-momentum
+conservation [12], whereasαsample can be finite even with-
+out a foil.
+3
+(a)
+Reflected wave
+Transmitted wave
+Incident wave
+Foil
+Foil
+D
+(b)
+With field
+Without field
+(c)
+e
+FIG. 1: (a) Schematic of the electron-light interaction at a planar foil. The interaction with the light field (red)
+modulates the electron-beam trajectory (blue) and thus induces a phase-dependent instantaneous deflection angle at
+the foil center,α(ϕ 0), and a final deflection angle after the interaction,α fin(ϕ0). (b) Deflection angles as functions of
+the incident light phase delayϕ 0. The calculation is performed for a 100-keV electron interacting with a 1030-nm
+laser field of incident amplitudeE 0 = 1.0×10 9 V/m. The sample is a 50-nm-thick Si foil. The selected geometry is
+θlaser = 60◦ andθ foil = 20◦, see Fig. 2(a). (c) Instantaneous electron deflection angle as a function of the
+longitudinal positionzforϕ 0 =π/2 (blue),ϕ 0 = 0 (red), andϕ 0 = 3π/2 (green). The vertical dotted lines indicate
+the entrance, center, and exit positions of the foil, which are also marked by triangles on each curve.
+Throughout this work, we consider a geometric con-
+figuration in which the normal vector of the foil surface
+lies in the plane defined by the wave vectors of the elec-
+tron and the incident light. As shown in Fig. 2(a),θ laser
+denotes the angle between the incident-light wave vec-
+tor and the electron propagation direction, whereasθ foil
+denotes the angle between the foil normal and the elec-
+tron propagation direction. Based on these definitions,
+the calculation ofα sample is repeated over the angle pairs
+(θlaser, θfoil), yielding the dependence on these angles, as
+shown in Figs. 2(b)–2(d). In the upper-left region of the
+αsample distribution, the laser and electron are incident
+on the foil from the same side of the foil, whereas in the
+lower-right region they are incident from opposite sides
+of the foil. The deflection amplitudes are generally larger
+in the upper-left region because of the smaller electron–
+light phase mismatch along thez-direction. This effect is
+represented by a factor proportional to 1/Ω arising from
+the temporal integral in Eq. (1), where Ω =ω−k ∥ve and
+k∥ is thez-component of the optical wave vector. Unless
+otherwise specified, the calculations are performed for an
+electron kinetic energy of 100 keV and an incident laser
+wavelength of 1030 nm at an amplitude of 10 9 V/m.
+III. INSTANTANEOUS DEFLECTION UNDER
+p-POLARIZED EXCITATION
+This section discusses the instantaneous deflection un-
+derp-polarized excitation, for which the deflection is re-
+stricted to thex-direction [see Fig. 2(a)]. We first inves-
+tigate the relative contributions of electric and magnetic
+fields of light. We then compareα sample for different ma-
+terials and foil thicknesses. We analyze the relationship
+betweenα sample and the electric field amplitudes in a
+foil and discuss geometries suitable for sub-cycle electron
+diffraction. We introduce a simple model for qualita-
+tively predictingα sample without elaborate calculations.
+We then discuss the dependences on electron kinetic en-
+ergy and laser wavelength.
+A. Importance of Magnetic Field Contribution
+At the kinetic energy of 100 keV considered in this
+work, the velocity of the free electrons reaches 54.8% of
+the speed of light. Therefore, the magnetic term in the
+Lorentz force [Eq. (1)] cannot be neglected. To analyze
+its contribution, we consider a 50-nm-thick Si foil as an
+example. Figure 2(b) shows theα sample obtained from
+the combined action of the electric- and magnetic-field
+terms, while Figs. 2(c) and 2(d) show the corresponding
+results obtained by retaining only the electric- and the
+magnetic-field terms, respectively. Although these con-
+tributions are not independently observable, their com-
+parison shows that the magnetic-field contribution is not
+negligible and can significantly modify the total deflec-
+tion. The fine structures appearing in Fig. 2(b) mainly
+originate from the electric-field contribution [Fig. 2(c)].
+For typical dielectrics, thex-components of the incident
+and reflected electric fields have opposite signs in the
+vicinity of the foil [see Fig. 2(a)], and therefore inter-
+fere destructively. By contrast, the magnetic fields of
+the incident and reflected waves have the same sign and
+therefore interfere constructively.
+B. Material and Thickness Dependence
+We compareα sample for three representative foil mate-
+rials at three different thicknesses. As a dielectric with
+a relatively low refractive index, we choose silicon ni-
+tride (Si 3N4,n= 2.01), which is commonly used as a
+sample-support membrane in electron microscopy. For
+comparison, we also consider silicon (Si,n= 3.57) as a
+dielectric with a higher refractive index, and aluminum
+4
+x
+y 𝜃𝑓𝑜𝑖𝑙
+𝜃𝑙𝑎𝑠𝑒𝑟
+z
+(a)
+𝐸𝑖𝑛𝑐
+𝐵𝑖𝑛𝑐
+𝑘𝑟𝑒𝑓
+𝐸𝑟𝑒𝑓
+𝐵𝑟𝑒𝑓
+𝑘𝑖𝑛𝑐
+e
+FIG. 2: (a) Geometry of thep-polarized light-electron interaction at a planar foil. The laser incidence angleθ laser
+and the foil angleθ foil define the configuration. (b)–(d) Instantaneous deflection amplitude at the sample,α sample,
+over the angles of (θ laser, θfoil) for a 50-nm-thick Si foil: (b) total Lorentz-force contribution, (c) electric-field
+contribution only, and (d) magnetic-field contribution only.
+-60
+-30
+30
+60
+Foil angle, θfoil (deg)
+(a) Si3N4, 10 nm
+ (b) Si3N4, 30 nm
+ (c) Si3N4, 100 nm
+-60
+-30
+30
+60
+Foil angle, θfoil (deg)
+(d) Si, 10 nm
+ (e) Si, 30 nm
+ (f) Si, 100 nm
+45 90 135 180
+Laser angle, θlaser (deg)
+-60
+-30
+30
+60
+Foil angle, θfoil (deg)
+(g) Al, 10 nm
+45 90 135 180
+Laser angle, θlaser (deg)
+(h) Al, 30 nm
+45 90 135 180
+Laser angle, θlaser (deg)
+(i) Al, 100 nm
+0.0
+0.2
+0.4
+0.6
+0.8
+αsample (mrad)
+0.22 0.45 0.67
+0.37
+0.73
+1.10
+Ecenter, p/E0
+(j) Si3N4, 30 nm
+0.23 0.46 0.69
+0.24
+0.47
+0.71
+Ecenter, p/E0
+(k) Si, 30 nm
+0.37 0.73 1.10
+αsample (mrad)
+0.04
+0.07
+0.11
+Esurface, p/E0
+(l) Al, 30 nm
+FIG. 3: Instantaneous deflection amplitudes at the planar sample,α sample, underp-polarized excitation for different
+foil materials and thicknesses. Panels (a)–(i) showα sample for each (θlaser, θfoil). The rows correspond to Si 3N4, Si,
+and Al, and the columns to thicknesses of 10, 30, and 100 nm. Panels (j) and (k) show the relation between the
+normalized foil-center electric-field amplitude,E center,p/E0, andα sample for 30-nm-thick Si3N4 and Si foils,
+respectively. Panel (l) shows the ratioE surface,p/E0 for 30-nm-thick Al foils. Each point in panels (j)–(l) corresponds
+to one angular pair (θ laser, θfoil).
+(Al,n+ik= 1.32 + 9.73i) as a metallic foil. For each
+material, we consider three different thicknesses within
+the range commonly used in transmission electron mi-
+croscopy: 10, 30, and 100 nm.
+Figure 3 shows the calculation results. The most pro-
+nounced difference is observed between the metallic and
+dielectric foils. Al (bottom row) exhibits a larger overall
+deflection amplitude than Si (middle row) and Si3N4 (top
+row) for the same thickness. In contrast, Si and Si 3N4
+show a high degree of similarity, withα sample remaining
+below about 0.4 mrad over most configurations.
+We examine the thickness dependence of Si 3N4. In
+Fig. 3(a), the low-deflection region appears as a broad
+vertical stripe extending overθ laser ≈30 ◦–90◦. This
+nearly vertical feature indicates a weak dependence on
+θfoil and suggests that the contribution of the reflected
+5
+wave is negligibly small for the 10-nm-thick Si 3N4 foil.
+In Fig. 3(b), and more clearly in Fig. 3(c), this low-
+deflection feature becomes inclined and extends over a
+much broader range ofθ laser, approximately from 25 ◦ to
+120◦. At the same time, the high-deflection region be-
+comes more concentrated at the corners of the maps.
+A similar but stronger thickness dependence is seen
+in Figs. 3(d)–3(f) for Si. A substantial change appears
+in Fig. 3(f), where the low-deflection feature becomes
+much more inclined than that in Si 3N4, and the high-
+deflection regions become more evident in the left cor-
+ners. This comparison shows that the thickness depen-
+dence is much stronger for Si than for Si 3N4 in the 10–
+30 nm range, whereas the 100-nm cases already differ
+substantially from the thinner foils for both dielectrics.
+By contrast, for Al, the patterns do not strongly de-
+pend on the thickness. In particular, those at 30 and
+100 nm are nearly identical [Figs. 3(h)–3(i)]. The op-
+tical penetration depth of Al is approximately 17 nm.
+Therefore, once the foil thickness reaches a few tens of
+nanometers, the optical fields inside and behind the foil
+are strongly attenuated, and the response becomes dom-
+inated by surface reflection. This also explains the low-
+deflection region at the lower right, where the electron
+interacts mainly with the attenuated transmitted field
+because the light is incident from the opposite side of
+the foil. In the limit of total reflection,α sample coincides
+withα fin, and the configuration for a vanishing deflection
+angle is given by electron–light velocity matching along
+thex-direction [12, 25]. The above results show that,
+underp-polarized excitation, the magnitude and config-
+uration dependence ofα sample vary with the foil material
+and thickness, while the strength of the thickness depen-
+dence is material dependent.
+C. Corelation with the Electric-Field Amplitude at
+the Foil Center
+From an experimental perspective, the electric-field
+amplitude at the foil center is also of considerable in-
+terest. To investigate the relationship betweenα sample
+and the electric-field amplitude inside the foil underp-
+polarized excitation, we define
+Ecenter,p ≡max
+ϕ0∈[0,2π]
+|Ex,p(rcenter;ϕ 0)|,(5)
+whereE x,p denotes thex-component of the electric field
+underp-polarized excitation, andr center = 0 denotes the
+position at the center of the foil. Note that the value of
+ϕ0 that maximizes|E x,p(rcenter;ϕ 0)|does not necessarily
+coincide with that which maximizes|α(ϕ 0)|. If a non-
+trivial relationship exists betweenα sample andE center,p,
+configurations may be identified in which the sample is
+strongly excited while the electron-beam direction is only
+weakly modulated. To examine this relationship, we plot
+αsample againstE center,p/E0 in Figs. 3(j)–3(l), whereE 0
+is the incident optical-field amplitude. Each point corre-
+sponds to a geometric configuration (θ laser, θfoil).
+In Fig. 3(j), the data points for the 30-nm-thick Si 3N4
+foil are distributed over approximately 0–0.65 mrad along
+the horizontal axis (α sample) and 0–1.0 along the verti-
+cal axis (E center,p/E0). The distribution is broad, with
+multiple different values ofE center,p/E0 corresponding to
+similar values ofα sample. Similarly, no clear one-to-one
+correspondence is found for the 30-nm-thick Si [Fig. 3(k)]
+and 30-nm-thick Al [Fig. 3(l)] foils. Because the opti-
+cal field is strongly attenuated in Al foils, we evaluate
+the electric field amplitude at the light-incident surface
+(Esurface,p) rather than at the center. These results show
+that the two quantities do not exhibit a simple linear
+relation underp-polarized excitation. The main reason
+is thatα sample is not a local quantity, but an accumu-
+lated response of the electron to the optical field along
+its trajectory.
+To identify experimentally favorable configurations,
+we searched for angular points that simultaneously give
+a small instantaneous deflection (α sample <0.1 mrad)
+and a large electric-field amplitude at the foil center
+(Ecenter,p/E0 >0.5). For the 30-nm-thick Si 3N4 foil,
+this condition is satisfied aroundθ laser ≃58 ◦–59◦ and
+θfoil ≃32 ◦–33◦, whereE center,p/E0 reaches approxi-
+mately 0.87. For the 30-nm-thick Si foil, no point in the
+present angular scan meets this criterion; relaxing the
+criterion toα sample <0.12 mrad yields favorable points
+aroundθ laser ≃69 ◦–70◦ andθ foil ≃ −56 ◦ to−55 ◦, with
+Ecenter,p/E0 ≃0.50. Although the available foil angles
+θfoil are limited when observing the transmission diffrac-
+tion of crystalline samples, the deflection amplitudes can
+be controlled by adjustingθ laser and the film thickness.
+D. Three-Wave Model: A Simplified Picture
+To extract the physical mechanism underlying the
+thickness and configuration dependence ofα sample dis-
+cussed in Sec. III B, we introduce a simplified three-wave
+model. In this model, we neglect the light–electron in-
+teraction inside the foil, and the foil is approximated as
+a zero-thickness interface crossing atx=z=0. In addi-
+tion, only three plane-wave components are retained: the
+incident, reflected, and transmitted waves, as shown in
+Fig. 4(c). The electromagnetic fields considered for the
+Lorentz-force in Eq. (1) are chosen according to the side
+from which the light reaches the interface. In the upper-
+left region of the configuration-dependence plots, where
+the laser and electron are incident from the same side
+of the foil, the electron interacts with the superposition
+of the incident and reflected waves before reaching the
+foil. In the lower-right region, where the laser is incident
+from the opposite side, the electron interacts only with
+the transmitted wave.
+The reflection and transmission coefficients forp-
+polarized light denoted byr p andt p are expressed byr p =
+−|r|andt p =
+p
+1− |r| 2, where a reflection phase shift
+ofπand a transmission phase shift of zero are assumed.
+The corresponding power reflectivity isR=|r p|2 =|r| 2.
+6
+(c)
+Reflected wave Transmitted wave
+Incident wave
+Foil
+(a) (b)
+x
+y z
+e
+FIG. 4: Three-wave model for the instantaneous
+deflection underp-polarized excitation. (a) and (b)
+Normal-incidence reflectivitiesRas a function of foil
+thickness for Si3N4 and Si, respectively. (c) Schematic
+of the simplified geometry, where the foil is treated as a
+zero-thickness interface and only the incident, reflected,
+and transmitted waves are considered. (d)–(f)
+Calculatedα sample forR= 0.1 (d), 0.5 (e), and 1.0 (f).
+Within this framework, the complicated material- and
+thickness-dependent optical responses are represented by
+the single parameterR.
+For a plane wave propagating at an angleθrelative
+to the electron, we writeg(θ) = (cosθ−β)/(1−βcosθ),
+whereβ=v e/c. Withg i =g(θ laser) for the incident wave
+andg r =g(π+ 2θ foil −θ laser) for the reflected wave, the
+deflection amplitude is analytically given by
+αsample = eE0
+ωpz0
+(gi +
+√
+R gr
+ ,same-side incidence,
+√
+1−R|g i|,opposite-side incidence.
+(6)
+Here, same-side and opposite-side incidence refer to con-
+figurations in which the laser and electron are incident
+from the same and opposite sides of the foil, respectively.
+Thus, the model directly connectsα sample to the reflec-
+tivity and geometry.
+We consider three representative values:R= 0.1, 0.5,
+and 1.0. The casesR= 0.1 andR= 0.5 approximately
+represent 30-nm-thick Si 3N4 and Si foils under normal
+incidence [Figs. 4(a) and 4(b)], respectively, whileR=
+1.0 corresponds to a perfect electric conductor (PEC).
+Figures 4(d)–4(f) show the configuration dependence of
+αsample forR= 0.1, 0.5, and 1.0, respectively. All three
+results share a common feature: a low-deflection region
+appears in the intermediateθ laser range, whereas larger
+deflection amplitudes appear at both smaller and larger
+θlaser. The contrast between the low- and high-deflection
+regions becomes stronger asRincreases.
+ForR= 0.1 [Fig. 4(d)], the three-wave model repro-
+duces the relatively weak contrast of the 30-nm-thick
+Si3N4 result [Fig. 3(b)]: the low-deflection region extends
+over an intermediateθ laser range, with weak dependence
+ofθ foil. ForR= 0.5 [Fig. 4(e)], comparison with the
+30-nm-thick Si [Fig. 3(e)] shows that the upper-left re-
+gion is well reproduced, suggesting that the dominant
+contribution is interference between the incident and re-
+flected waves. However, the lower-right region differs:
+the calculation for Si shows a smoother, tilted struc-
+ture, whereas the three-wave model gives a nearly ver-
+tical stripe pattern because the field discontinuities at
+the surface and the fields inside the foil are neglected.
+ForR= 1.0 [Fig. 4(f)], corresponding to total reflec-
+tion, the distribution closely resembles the 30-nm-thick
+Al result [Fig. 3(h)]: both show a strong-deflection re-
+gion in the upper-left and a nearly vanishingα sample in
+the lower-right. The good qualitative reproducibility of
+the three-wave model indicates that optical reflectivity
+and the associated interference between the incident and
+reflected waves capture the dominant features of the con-
+figuration dependence ofα sample. The model therefore
+provides a simple physical picture of the instantaneous
+deflection around a thin foil.
+E. Electron-energy and laser-wavelength
+dependence
+The above results are for 100-keV electron energy and
+1030-nm laser wavelength. To examine the dependence
+ofα sample on the electron energy and laser wavelength,
+we compareα sample for a 30-nm-thick Si foil at three
+different electron kinetic energies, 30, 100, and 200 keV,
+and at three laser wavelengths, 515 nm [Fig. 5(a)–5(c)],
+1030 nm [Fig. 5(d)–5(f)], and 2000 nm [Fig. 5(g)–5(i)].
+For a fixed laser wavelength, the overall magnitude of
+αsample decreases as the electron kinetic energy increases.
+This trend can be explained by Eqs. (1) and (3). The
+transverse momentum exchange comprises electric- and
+magnetic-field contributions. The electric-field contribu-
+tion has no direct velocity factor, whereas the magnetic-
+field contribution containsv e through thev e ×Bterm.
+However, this velocity dependence is insufficient to com-
+pensate for the increase in the initial longitudinal mo-
+mentump z0. Therefore,α sample becomes smaller at
+higher electron energies.
+For a fixed electron energy, the deflection generally in-
+creases as the laser wavelength is increased. This de-
+pendence can be directly understood from Eq. (1). For
+a fixed incident electric-field amplitude, the time inte-
+gral of an optical-cycle force gives a characteristic factor
+of 1/Ω = 1/(ω−k ∥ve). Therefore, a longer wavelength
+7
+(i.e., a smallerω) leads to a larger momentum change
+and hence a stronger instantaneous deflection.
+IV. INSTANTANEOUS DEFLECTION UNDER
+s-POLARIZED EXCITATION
+We now turn to the case of ans-polarized excitation
+field. In contrast to thep-polarized case, where the de-
+flection occurs along thex-direction, the deflection un-
+ders-polarized excitation occurs along they-direction.
+In addition,s-polarized excitation does not induce any
+longitudinal energy exchange. Moreover, the final de-
+flectionα fin vanishes [12]. Therefore, the instantaneous
+deflection by thes-polarized field is very similar to that
+without a foil.
+A. Magnetic Field Contribution
+We investigate the role of the magnetic field under
+s-polarized excitation by adopting the same foil thick-
+ness (50-nm-thick Si) as in thep-polarized case dis-
+cussed in Sec. III A. Figures 6(b)–6(d) showα sample ob-
+tained from the combined electric and magnetic fields,
+the electric-field-only contribution, and the magnetic-
+field-only contribution, respectively. Compare to case
+ofp-polarization, the dependence on the geometrical
+angles is much weaker because the electric-field vector
+points along they-axis. Moreover, unlike the case ofp-
+polarization, the electric and magnetic fields contribute
+almost equally in the upper-left angular region, and the
+total deflection is greatly suppressed. Due to the bound-
+ary conditions see Fig.6(a), the effect of the magnetic
+field is enhanced, whereas that of the electric field is at-
+tenuated [see Fig. 6(a)]. In addition, the electric and
+magnetic components of the Lorentz force act in opposite
+transverse directions. Thus partial cancellation occurs.
+B. Material and thickness dependence
+Figure 7 shows simulatedα sample unders-polarized ex-
+citation for the three materials and three thicknesses.
+The overall material dependence is markedly different
+from that in thep-polarized case [Figs. 3(a)–3(i)]. For Al
+[Figs. 7(g)–7(i)],α sample remains close to zero for all three
+thicknesses. As we will see in Sec. IV C, fors-polarized
+excitation, the instantaneous deflection amplitude at the
+sample position is proportional to the internal electric-
+field amplitude at the foil center,E center,s, as in the case
+without a foil.
+In contrast, dielectric foils exhibit nonzero deflection
+because a finite electric field exists inside the foil. For
+Si3N4, the 10-nm-thick result [Fig. 7(a)] shows high de-
+flection amplitudes over most of the angle combinations,
+with a narrow low-deflection band running diagonally
+across the map. This band satisfying|θ laser −θ foil| ≈90 ◦
+corresponds to grazing incidence at the foil surface, where
+the incident light is almost completely reflected at the
+foil interface (t s ≈0) [37], resulting in a negligibly small
+electric field and deflection at the sample position. The
+weak dependence on (θ laser, θfoil) stems from the nearly
+constant reflectivity fors-polarized light except grazing
+incidence. As the thickness increases to 30 nm [Fig. 7(b)],
+the high-deflection region shrinks and the low-deflection
+diagonal band broadens. At 100 nm [Fig. 7(c)], the dis-
+tribution is dominated by lower values over most of the
+angular range. For Si, the thickness dependence follows a
+similar but more pronounced trend. The deflection angle
+decreases with increasing foil thickness.
+The thickness dependence can be understood from
+the normal-incidence reflectivity shown in Figs. 4(a) and
+4(b). Fors-polarized excitation,α sample is proportional
+toE center,s, as will be shown in the following subsection.
+In the present thin-film geometry, a larger reflectivity
+means weaker coupling of the incident light into the foil,
+leading to a smaller field at the sample center and hence
+a smallerα sample. The generally higher reflectivity of Si
+than that of Si 3N4 also explains why the deflection is
+more strongly suppressed in Si.
+The results for the dielectrics [Figs. 7(a)–7(f)] show an
+approximate symmetry between the upper-left and lower-
+right regions. This symmetry can also be understood
+based on the internal electric field. For the paired angular
+configurations in these two regions, the absolute angle of
+incidence with respect to the foil normal is the same.
+Therefore, the magnitude of thes-polarized electric field
+inside the foil is the same.
+C. Relation between the amplitude of the internal
+electric field andα sample
+We compareα sample with the normalized amplitude of
+the internal electric field,E center,s/E0. Interestingly, in
+strong contrast to thep-polarization case [Fig. 3(j)–(l)],
+the numerical results in Figs. 7(j)–7(l) show that the data
+points for each material collapse onto a straight line.
+This linear relation can be directly understood from
+Eq. (1). Let us consider an arbitrarys-polarized plane-
+wave component,E j = (0, E j,y,0),k j = (k j,x,0, k j,z),
+andB j =k j ×E j/ω= (B j,x,0,0) withB j,x =
+−(kj,z/ω)Ej,y. The transverse Lorentz force for the elec-
+tron moving along thez-direction isE j,y +v eBj,x =
+(1−v ekj,z/ω)Ej,y = Ω j/ωEj,y, with Ω j =ω−k j,zve.
+Since the field sampled by the electron along its trajec-
+toryz=v etoscillates as cos(Ω jt), the time integral in
+Eq. (1) gives a factor proportional to 1/Ωj, which cancels
+the Ω j factor in the transverse Lorentz force. Accord-
+ingly, the temporal integral of the transverse force is in-
+dependent of both the electron velocity and the electron-
+laser angle, and is directly connected to the electric field
+amplitude.
+Summing over all the plane-wave components includ-
+ing those inside a foil, the remaining contribution to the
+8
+-60
+-30
+30
+60
+Foil angle, θfoil (deg)
+(a) 515 nm, 30 keV
+ (b) 515 nm, 100 keV
+ (c) 515 nm, 200 keV
+-60
+-30
+30
+60
+Foil angle, θfoil (deg)
+(d) 1030 nm, 30 keV
+ (e) 1030 nm, 100 keV
+ (f) 1030 nm, 200 keV
+45 90 135 180
+Laser angle, θlaser (deg)
+-60
+-30
+30
+60
+Foil angle, θfoil (deg)
+(g) 2000 nm, 30 keV
+45 90 135 180
+Laser angle, θlaser (deg)
+(h) 2000 nm, 100 keV
+45 90 135 180
+Laser angle, θlaser (deg)
+(i) 2000 nm, 200 keV
+0.0
+0.2
+0.4
+0.6
+0.8
+1.0
+1.2
+1.4
+1.6
+αsample (mrad)
+FIG. 5: Instantaneous deflection amplitudes,α sample, for a 30-nm-thick Si foil underp-polarized excitation at
+different electron kinetic energies and laser wavelengths. Panels (a)–(c) show the results at a wavelength of 515 nm
+for electron kinetic energies of 30, 100, and 200 keV, respectively. Panels (d)–(f) show the corresponding results at a
+wavelength of 1030 nm. Panels (g)–(i) show the corresponding results at a wavelength of 2000 nm.
+x
+y 𝜃𝑓𝑜𝑖𝑙
+𝜃𝑙𝑎𝑠𝑒𝑟
+z
+(a)
+𝐸𝑖𝑛𝑐
+𝐵𝑖𝑛𝑐
+𝑘𝑟𝑒𝑓
+𝐸𝑟𝑒𝑓
+𝐵𝑟𝑒𝑓
+𝑘𝑖𝑛𝑐
+e
+FIG. 6: Electric- and magnetic-field contributions toα sample unders-polarized excitation for a 50-nm-thick Si foil.
+The same set of parameters is used as in Fig. 2. (a) Illustration of the geometry. (b)–(d) Calculatedα sample by
+considering (b) the total Lorentz-force contribution, (c) the electric-field contribution only, and (d) the
+magnetic-field contribution only.
+momentum shift is determined by the internal electric
+field amplitude at the foil center, giving
+αsample = e
+ωpz0
+Ecenter,s,(7)
+which explains the linear dependence betweenα sample
+and the internals-polarized field amplitude observed in
+Fig. 7(j)–7(l).
+This observation has an important implication from
+the experimental point of view that increasing the inter-
+nal electric-field amplitude inevitably increases the in-
+stantaneous deflection angle. Thus, it is difficult to real-
+ize a strong excitation field at the sample position while
+keepingα sample small in thes-polarized geometry. Con-
+versely, if this quantity can be translated into a measur-
+able physical quantity, it would be possible to perform
+in-situ characterization of the electric field amplitudes
+inside a material. Equation. (7) also indicates that, as in
+the case ofp-polarization, a longer wavelength induces a
+stronger instantaneous deflection.
+9
+-60
+-30
+30
+60
+Foil angle, θfoil (deg)
+(a) Si3N4, 10 nm
+ (b) Si3N4, 30 nm
+ (c) Si3N4, 100 nm
+-60
+-30
+30
+60
+Foil angle, θfoil (deg)
+(d) Si, 10 nm
+ (e) Si, 30 nm
+ (f) Si, 100 nm
+45 90 135 180
+Laser angle, θlaser (deg)
+-60
+-30
+30
+60
+Foil angle, θfoil (deg)
+(g) Al, 10 nm
+45 90 135 180
+Laser angle, θlaser (deg)
+(h) Al, 30 nm
+45 90 135 180
+Laser angle, θlaser (deg)
+(i) Al, 100 nm
+0.0
+0.2
+0.4
+0.6
+αsample (mrad)
+0.20 0.39 0.59
+0.3
+0.7
+1.0
+Ecenter, S/E0
+(j) Si3N4, 30 nm
+0.14 0.28 0.42
+0.2
+0.5
+0.7
+Ecenter, S/E0
+(k) Si, 30 nm
+0.833 1.667 2.500
+αsample (mrad) ×10−4
+1.433
+2.867
+4.300
+Ecenter, S/E0
+×10−4
+(l) Al, 30 nm
+FIG. 7: Instantaneous deflection amplitudes at the planar sample,α sample, unders-polarized excitation for different
+foil materials and thicknesses. Panels (a)–(i) showα sample for each (θlaser, θfoil). The rows correspond to Si 3N4, Si,
+and Al, and the columns to thicknesses of 10, 30, and 100 nm. Panels (j)–(l) show the relationship between the
+normalized internals-polarized electric-field amplitude at the foil center,E center,s/E0, andα sample for 30-nm-thick
+Si3N4, Si, and Al foils, respectively. Each point in panels (j)–(l) corresponds to one angular pair (θ laser, θfoil).
+V. CONCLUSION
+We have presented a comprehensive theoretical study
+of the field-driven deflection of sub-relativistic electrons
+within laser-excited planar foils. The amplitude of the
+instantaneous angle,α sample, depends on light polariza-
+tion, field amplitude, foil material, thickness, and in-
+teraction geometry. The magnetic field of light signifi-
+cantly influences the deflection regardless of the polar-
+ization direction. A key factor underlying the geomet-
+ric dependence is optical reflectance and transmittance.
+Forp-polarized excitation, there are nontrivial relation-
+ships betweenα sample and the electric field amplitude in
+a foil due to the complex interplay of the forces induced
+by the electric and magnetic fields in combination with
+the velocity mismatch alongz-direction (i.e., Ω). There-
+fore, for a foil with a given material type and thickness,
+there exist geometries that give nearly vanishingα sample.
+In contrast, fors-polarized excitation,α sample scales lin-
+early with the internal electric-field amplitude as if the
+foil were absent. These findings provide practical guide-
+lines for selecting optimal experimental configurations
+that minimize or maximize beam deflection while main-
+taining strong optical excitation within the foils.
+ACKNOWLEDGMENTS
+This research was supported by MEXT/JSPS KAK-
+ENHI (Grant Nos. JP25K22230 and JP25K01734), JST
+FOREST (Grant No. JPMJFR2228), and the Gor-
+don and Betty Moore Foundation. This work was
+also partially supported by the RIKEN TRIP initiative
+(HIKARI-COOL Tokyo). X.G. acknowledges support
+from the Doctoral Student Special Incentives Program
+for International Students (SEUT-RA Type IS), Gradu-
+ate School of Engineering, The University of Tokyo.
+[1] W. E. King, G. H. Campbell, A. Frank, B. Reed, J. F.
+Schmerge, B. J. Siwick, B. C. Stuart, and P. M. We-
+ber, Ultrafast electron microscopy in materials science,
+biology, and chemistry, Journal of Applied Physics97,
+111101 (2005).
+10
+[2] A. H. Zewail, Four-dimensional electron microscopy, Sci-
+ence328, 187 (2010).
+[3] G. Sciaini and R. J. D. Miller, Femtosecond electron
+diffraction: heralding the era of atomically resolved
+dynamics, Reports on Progress in Physics74, 096101
+(2011).
+[4] D. Filippetto, P. Musumeci, R. Li, B. J. Siwick, M. R.
+Otto, M. Centurion, and J. P. F. Nunes, Ultrafast elec-
+tron diffraction: Visualizing dynamic states of matter,
+Reviews of Modern Physics94, 045004 (2022).
+[5] Y. Morimoto, I. Roland, S. Rennesson, F. Semond,
+P. Boucaud, and P. Baum, Laser damage of free-standing
+nanometer membranes, Journal of Applied Physics122,
+215303 (2017).
+[6] F. J. Garc´ ıa de Abajo, A. Polman, C. I. Velasco, M. Ko-
+ciak, L. H. G. Tizei, O. St´ ephan, S. Meuret, T. San-
+nomiya, K. Akiba, Y. Auad,et al., Roadmap for quan-
+tum nanophotonics with free electrons, ACS Photonics
+12, 4760 (2025).
+[7] G. M. Vanacore, I. Madan, G. Berruto, K. Wang, E. Po-
+marico, R. J. Lamb, D. McGrouther, I. Kaminer, B. Bar-
+wick, F. J. Garc´ ıa de Abajo, and F. Carbone, Attosec-
+ond coherent control of free-electron wave functions using
+semi-infinite light fields, Nature Communications9, 2694
+(2018).
+[8] K. E. Priebe, C. Rathje, S. V. Yalunin, T. Hohage,
+A. Feist, S. Sch¨ afer, and C. Ropers, Attosecond electron
+pulse trains and quantum state reconstruction in ultra-
+fast transmission electron microscopy, Nature Photonics
+11, 793 (2017).
+[9] A. Ryabov, J. W. Thurner, D. Nabben, M. V. Tsarev,
+and P. Baum, Attosecond metrology in a continuous-
+beam transmission electron microscope, Science Ad-
+vances6, eabb1393 (2020).
+[10] M. V. Tsarev, A. Ryabov, and P. Baum, Free-electron
+qubits and maximum-contrast attosecond pulses via
+temporal Talbot revivals, Physical Review Research3,
+043033 (2021).
+[11] Y. Morimoto and P. Baum, Field-induced rocking-curve
+effects in attosecond electron diffraction, Physical Review
+Letters132, 216902 (2024).
+[12] Y. Morimoto and P. Baum, Attosecond control of elec-
+tron beams at dielectric and absorbing membranes, Phys-
+ical Review A97, 033815 (2018).
+[13] Y. Morimoto and P. Baum, Diffraction and microscopy
+with attosecond electron pulse trains, Nature Physics14,
+252 (2018).
+[14] M. Koz´ ak, N. Sch¨ onenberger, and P. Hommelhoff, Pon-
+deromotive generation and detection of attosecond free-
+electron pulse trains, Physical Review Letters120,
+103203 (2018).
+[15] Y. Tachibana, M. Ouill´ e, T. Hosobata, T. Isoshima,
+Y. Takizawa, Y. Yamagata, and Y. Morimoto, Attosec-
+ond shaping of multi-electron pulses in a home-built
+37-kev beamline, Scientific Reports 10.1038/s41598-026-
+63961-7 (2026).
+[16] J. H. Gaida, H. Louren¸ co-Martins, M. Sivis,
+T. Rittmann, A. Feist, F. J. Garc´ ıa de Abajo, and
+C. Ropers, Attosecond electron microscopy by free-
+electron homodyne detection, Nature Photonics18, 509
+(2024).
+[17] T. Bucher, H. Nahari, H. Herzig Sheinfux, R. Ruimy,
+A. Niedermayr, R. Dahan, Q. Yan, Y. Adiv, M. Yannai,
+J. Chen,et al., Coherently amplified ultrafast imaging us-
+ing a free-electron interferometer, Nature Photonics18,
+809 (2024).
+[18] D. Nabben, J. Kuttruff, L. Stolz, A. Ryabov, and
+P. Baum, Attosecond electron microscopy of sub-cycle
+optical dynamics, Nature619, 63 (2023).
+[19] C. J. Joachain, N. J. Kylstra, and R. M. Potvliege,Atoms
+in Intense Laser Fields(Cambridge University Press,
+Cambridge, UK, 2012).
+[20] N. M. Kroll and K. M. Watson, Inelastic atom-atom scat-
+tering within an intense laser beam, Physical Review A
+13, 1018 (1976).
+[21] A. Weingartshofer, J. K. Holmes, G. Caudle, E. M.
+Clarke, and H. Kruger, Direct observation of multiphoton
+processes in laser-induced free-free transitions, Physical
+Review Letters39, 269 (1977).
+[22] Y. Morimoto, R. Kanya, and K. Yamanouchi, Light-
+dressing effect in laser-assisted elastic electron scattering
+by Xe, Physical Review Letters115, 123201 (2015).
+[23] Y. Morimoto, R. Kanya, and K. Yamanouchi, Laser-
+assisted electron diffraction for femtosecond molecular
+imaging, J. Chem. Phys.140, 064201 (2014).
+[24] F. O. Kirchner, A. Gliserin, F. Krausz, and P. Baum,
+Laser streaking of free electrons at 25 kev, Nature Pho-
+tonics8, 52 (2014).
+[25] D. Ehberger, A. Ryabov, and P. Baum, Tilted electron
+pulses, Physical Review Letters121, 094801 (2018).
+[26] D. Ehberger, K. J. Mohler, T. Vasileiadis, R. Ernstorfer,
+L. Waldecker, and P. Baum, Terahertz compression of
+electron pulses at a planar mirror membrane, Physical
+Review Applied11, 024034 (2019).
+[27] A. Feist, S. V. Yalunin, S. Sch¨ afer, and C. Ropers, High-
+purity free-electron momentum states prepared by three-
+dimensional optical phase modulation, Physical Review
+Research2, 043227 (2020).
+[28] B. M. Ferrari, C. J. R. Duncan, I. Ostroman, M. G. Bravi,
+P. Rosi,et al., Realization of a pre-sample photonic-based
+free-electron modulator in ultrafast transmission electron
+microscopes, ACS Photonics12, 5864 (2025).
+[29] Y. Morimoto, B.-H. Chen, and P. Baum, Free-electron
+tomography of few-cycle optical waveforms, Annalen der
+Physik534, 2200193 (2022).
+[30] T. Plettner, R. L. Byer, E. Colby, B. Cowan, C. M. S.
+Sears, J. E. Spencer, and R. H. Siemann, Visible-laser
+acceleration of relativistic electrons in a semi-infinite vac-
+uum, Physical Review Letters95, 134801 (2005).
+[31] I. Madan, V. Leccese, A. Mazur, F. Barantani, T. La-
+Grange, A. Sapozhnik, P. M. Tengdin, S. Gargiulo,
+E. Rotunno, J.-C. Olaya, I. Kaminer, V. Grillo, F. J.
+Garc´ ıa de Abajo, F. Carbone, and G. M. Vanacore, Ul-
+trafast transverse modulation of free electrons by inter-
+action with shaped optical fields, ACS Photonics9, 3215
+(2022).
+[32] S. Meuret, H. Louren¸ co-Martins, S. J. Weber, F. Houdel-
+lier, and A. Arbouet, Photon-induced near-field electron
+microscopy of nanostructured metallic films and mem-
+branes, ACS Photonics11, 977 (2024).
+[33] W. Wang, D. Zheng, S. Huang, J. Li,et al., Energy-
+momentum transfer in the free-electron–photon interac-
+tion mediated by a film, Physical Review B109, 134305
+(2024).
+[34] N. M¨ uller, S. el Kabil, G. Vosse, L. Hansen, C. Rathje,
+and S. Sch¨ afer, Spectrally resolved free electron-light cou-
+pling strength in a transition metal dichalcogenide, arXiv
+preprint (2024), arXiv:2405.12017 [cond-mat.mes-hall].
+11
+[35] M. Taleb, P. H. Bittorf, M. Black, M. Hentschel, W. Sigle,
+B. Haas, C. Koch, P. A. van Aken, H. Giessen, and
+N. Talebi, Ultrafast phonon-mediated dephasing of color
+centers in hexagonal boron nitride probed by electron
+beams, Nat. Commun.16, 2326 (2025).
+[36] D. L. Freimund, K. Aflatooni, and H. Batelaan, Observa-
+tion of the Kapitza–Dirac effect, Nature413, 142 (2001).
+[37] E. Hecht,Optics, Global Edition, 5th ed. (Pearson Edu-
+cation Limited, 2016).

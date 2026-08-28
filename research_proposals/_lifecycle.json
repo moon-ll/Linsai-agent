@@ -6,7 +6,7 @@
       "source": "new",
       "source_detail": "",
       "created_at": "2026-07-26T10:25:04Z",
-      "updated_at": "2026-08-28T04:01:01Z",
+      "updated_at": "2026-08-28T12:25:10Z",
       "optimization_rounds": 2,
       "last_score": 0.81,
       "score_history": [
@@ -1401,14 +1401,14 @@
           "step": "lit_search",
           "section_key": "rationale",
           "round": 3,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r3-rationale-gap_identify"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-28T11:01:00Z",
+          "finished_at": "2026-08-28T11:12:07Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1418,14 +1418,14 @@
           "step": "lit_read",
           "section_key": "rationale",
           "round": 3,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-quantum-geometry-inversion-20260726-r3-rationale-lit_search"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-28T12:25:10Z",
+          "finished_at": "2026-08-28T12:25:10Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -1830,6 +1830,11 @@
           "step": "lit_search",
           "detail": "agent_loop_failed→LiteratureService",
           "at": "2026-08-13T11:31:29Z"
+        },
+        {
+          "step": "lit_search",
+          "detail": "agent_loop_failed→LiteratureService",
+          "at": "2026-08-28T11:07:01Z"
         }
       ],
       "low_score_alert": false,
@@ -4545,9 +4550,9 @@
       "source": "expansion",
       "source_detail": "候选3：莫尔超晶格的强场量子调控，来自 candidate_directions.md",
       "created_at": "2026-07-26T11:43:17Z",
-      "updated_at": "2026-08-28T04:01:01Z",
+      "updated_at": "2026-08-28T12:35:12Z",
       "optimization_rounds": 5,
-      "last_score": 0.68,
+      "last_score": 0.72,
       "score_history": [
         {
           "round": 1,
@@ -4620,6 +4625,40 @@
           "issues_count": 21,
           "high_issues": 9,
           "at": "2026-08-23T17:41:06Z"
+        },
+        {
+          "round": 6,
+          "score": 0.72,
+          "dim_scores": {
+            "innovation": 0.84,
+            "feasibility": 0.72,
+            "rigor": 0.62,
+            "expression": 0.7
+          },
+          "weakest_dim": "rigor",
+          "focus_section": "rationale",
+          "section_passed": false,
+          "issues_count": 0,
+          "high_issues": 0,
+          "ai_ceiling": 0.72,
+          "ai_ceiling_after": 0.68,
+          "expression_improved": false,
+          "expression_not_improved_reason": "writer 未实质修复表达问题（rationale 章节原始天花板 0.78→0.74，全局 0.72→0.68）",
+          "quality_gate_passed": false,
+          "quality_gate_reason": "质量缺陷未修复：跨章节重复句 4 处（如：该框架已在zno单层偶次谐波偏振旋转角上验证复现偏差6对照细节见方法学手册）；跨章节高相似句 16 处",
+          "quality_over_budget": false,
+          "dims_partial": true,
+          "dims_present": [
+            "expression",
+            "feasibility",
+            "innovation",
+            "rigor"
+          ],
+          "ai_top_issues": [
+            "超长句(>120字)：20处（免赔6处），扣0.28"
+          ],
+          "anchor_conclusion": "基本接近",
+          "at": "2026-08-28T11:24:23Z"
         }
       ],
       "human_feedback_count": 4,
@@ -4752,9 +4791,9 @@
       "critic_profile": "critic",
       "last_dim_scores": {
         "innovation": 0.84,
-        "feasibility": 0.78,
+        "feasibility": 0.72,
         "rigor": 0.62,
-        "expression": 0.48
+        "expression": 0.7
       },
       "section_passes": {
         "rationale": false,
@@ -6059,15 +6098,15 @@
           "step": "writer",
           "section_key": "rationale",
           "round": 6,
-          "status": "pending",
+          "status": "done",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r6-rationale-critic",
             "general-moire-strong-field-probe-20260726-r6-rationale-lit_note"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
+          "started_at": "2026-08-28T11:20:01Z",
+          "finished_at": "2026-08-28T11:24:23Z",
           "last_error": "",
           "cron_job_id": ""
         },
@@ -6077,13 +6116,13 @@
           "step": "critic",
           "section_key": "content",
           "round": 6,
-          "status": "pending",
+          "status": "running",
           "depends_on": [
             "general-moire-strong-field-probe-20260726-r6-rationale-writer"
           ],
           "attempts": 0,
           "scheduled_at": "",
-          "started_at": "",
+          "started_at": "2026-08-28T12:35:12Z",
           "finished_at": "",
           "last_error": "",
           "cron_job_id": ""
@@ -14141,7 +14180,7 @@
       "source": "auto_idea",
       "source_detail": "来自研究设想生成: 交变磁体高次谐波产生与固态强场非线性光学新前沿",
       "created_at": "2026-08-22T05:40:16Z",
-      "updated_at": "2026-08-28T04:01:01Z",
+      "updated_at": "2026-08-28T11:45:03Z",
       "optimization_rounds": 2,
       "last_score": 0.55,
       "score_history": [
@@ -15631,15 +15670,15 @@
           "step": "monitor",
           "section_key": "monitor",
           "round": 2,
-          "status": "pending",
+          "status": "failed",
           "depends_on": [
             "general-new-idea-20260822-r2-references-writer"
           ],
-          "attempts": 0,
+          "attempts": 3,
           "scheduled_at": "",
-          "started_at": "",
-          "finished_at": "",
-          "last_error": "",
+          "started_at": "2026-08-28T11:30:03Z",
+          "finished_at": "2026-08-28T11:45:03Z",
+          "last_error": "超时(900s)",
           "cron_job_id": "",
           "error_history": [
             {
@@ -15656,9 +15695,14 @@
               "at": "2026-08-28T04:01:01Z",
               "error": "自动解锁(v6.8.54): 修复系统放弃且失败超24h，重置重跑（第1次/上限1）",
               "attempts": 3
+            },
+            {
+              "at": "2026-08-28T11:30:03Z",
+              "error": "超时(900s)",
+              "attempts": 1
             }
           ],
-          "repair_attempts": 3,
+          "repair_attempts": 4,
           "auto_unlock_count": 1
         },
         {
@@ -18462,5 +18506,5 @@
       "idea_review_required_reason": "负反馈自动清除降级：退回研究设想评审；monitor 独立分数连续 3 轮下降"
     }
   },
-  "updated_at": "2026-08-28T04:01:01Z"
+  "updated_at": "2026-08-28T12:35:12Z"
 }

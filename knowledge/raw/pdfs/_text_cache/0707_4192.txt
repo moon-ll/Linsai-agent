@@ -1,0 +1,473 @@
+arXiv:0707.4192v1  [physics.atom-ph]  27 Jul 2007
+Improved Lewenstein model for high-order harmonic generat ion of atoms and
+molecules with scattering wavefunctions
+Anh-Thu Le, ∗1 Toru Morishita, 1,2 and C. D. Lin 1
+1Department of Physics, Cardwell Hall, Kansas State Univers ity, Manhattan, KS 66506, USA
+2Department of Applied Physics and Chemistry, University of Electro-Communications,
+1-5-1 Chofu-ga-oka, Chofu-shi, Tokyo, 182-8585, Japan
+(Dated: November 2, 2018)
+We demonstrate a simple method to improve the Lewenstein mod el for the description of high-
+order harmonic generation (HHG). It is shown that HHG spectr a can be expressed as the product
+of a returning electron wave packet and the photo-recombina tion cross sections, where the former
+can be extracted from the Lewenstein model. By replacing pla ne waves with scattering waves in
+the calculation of recombination matrix elements, we showe d that the resulting HHG spectra agree
+well with those from solving the time-dependent Schr¨ odinger equation. The improved model can be
+used for quantitative calculations of high harmonics gener ated by molecules.
+PACS numbers: 42.65.Ky, 33.80.Rv
+When an atom is subjected to a strong driving laser
+ﬁeld, one of the nonlinear response processes is the gen-
+eration of high-order harmonics. In the past decade,
+high-order harmonic generation (HHG) has been used
+extensively for the generation of single attosecond pulses
+[1, 2, 3] and attosecond pulse trains [4], thus opening
+up new opportunities for attosceond time-resolved spec-
+troscopy. HHG is understood using the three-step model
+[5, 6] – ﬁrst the electron is released by tunnel ioniza-
+tion; second, it is accelerated by the oscillating electric
+ﬁeld of the laser and later driven back to the target ion;
+and third, the electron recombines with the ion to emit
+a high energy photon. A semiclassical formulation of the
+three-step model based on the strong ﬁeld approximation
+(SF A) is given by Lewenstein et al [6]. In this SF A model
+(often called Lewenstein model), the liberated continuum
+electron experiences the full eﬀect from the laser ﬁeld, but
+not from the ion that it has left behind. In spite of this
+limitation, Lewenstein model has been widely used for
+understanding the HHG by atoms and molecules. Since
+the continuum electron needs to come back to revisit the
+parent ion in order to emit radiation, the neglect of the
+electron-ion interaction is rather questionable. Thus, var-
+ious eﬀorts have been made to improve upon the Lewen-
+stein model, by including Coulomb distortion [7, 8], or
+by using Ehrenfest theorem [9]. These improvements,
+however, still do not lead to satisfactory agreement with
+exact calculations, nor do they reveal how the target af-
+fects the HHG spectra.
+According to the three-step model, the last step of
+HHG is the recombination process. Taking this model
+seriously, one can ask if the HHG yield can be written
+as the product of a returning electron wave packet with
+the photo-recombination cross section, and if the electron
+∗Email address: atle@phys.ksu.edu
+wave packet is largely independent of the targets. These
+two assumptions are at the heart of the tomographic pro-
+cedure of Itatani et al. [10]. Their validity has been es-
+tablished for N 2 and O 2 molecules where the HHG spec-
+tra were calculated using the Lewenstein model and the
+photo-recombination cross sections were calculated using
+the plane-wave approximation (PW A) [11]. The indepen-
+dence of the returning wave-packet on the atomic rare gas
+targets has recently been investigated by Levesque et al.
+[12], where the dipole matrix elements (or recombination
+cross sections) were also calculated within the PW A.
+More recently, using HHG spectra obtained from
+numerical solutions of the time-dependent Schr¨ odinger
+equations (TDSE) for atoms in an intense laser ﬁeld,
+Morishita et al. [13] showed that the “exact” TDSE re-
+sults can be expressed as
+S(ω) = W (E) dσ(ω)
+dΩk
+, (1)
+where dσ/dΩk is the “exact” photo-recombination (dif-
+ferential) cross section. Here W describes the ﬂux of the
+returning electrons, which we will call a “wave-packet”.
+The electron energy E is related to the emitted photon
+energy ω by the relation E = k2/2 = ω − Ip, with Ip be-
+ing the ionization potential of the target (atomic units are
+used throughout this paper, unless otherwise indicated).
+The method for solving the TDSE and the calculation of
+dσ/dΩk are described later.
+In this Letter, we will ﬁrst show that if the HHG yield
+calculated within the Lewenstein model is written as
+SSF A(ω) = W SF A(E) dσP W (ω)
+dΩk
+, (2)
+then the electron “wave packet” W SF A will be largely
+identical to W T DSE obtained from Eq. (1) by solving the
+TDSE in the same laser pulse. Here dσP W /dΩk is the
+recombination cross section calculated the plane wave ap-
+proximation. In the improved Lewenstein model, or the
+2
+40 45 50 55 60 65 70 75 80
+Electron energy (eV)
+0
+0.2
+0.4
+0.6
+0.8
+1
+Electron wave−packet (arb. units)
+TDSE (Ne)
+TDSE (scaled H)
+Lewenstein (Ne)
+FIG. 1: (Color online) Comparison of the electron “wave
+packets” extracted from the exact HHG spectra of Ne, ob-
+tained by solving the TDSE (solid black line), and from the
+Lewenstein model (dashed blue line). Also shown is the TDSE
+result for a scaled H (dotted red line). The laser pulse is wit h
+duration of 10.3 fs, peak intensity of 2 × 1014 W/cm2 and
+mean wavelength of 1064 nm.
+scattering wave based strong-ﬁeld approximation (SW-
+SF A), we propose that the HHG be calculated by
+SSW −SF A(ω) = W SF A(E) dσ(ω)
+dΩk
+. (3)
+In Fig. 1, we show the wave-packets extracted from
+the HHG spectra of Ne (solid black line) and from scaled
+H (dotted red line) by using Eq. (1), where the “exact”
+HHG spectra are obtained from the solution of the TDSE
+and the photo-recombination cross sections are calcu-
+lated with “exact” scattering wavefunctions. The eﬀec-
+tive nuclear charge of the companion H is chosen such
+that it has the same 1s binding energy as the Ne(2p)
+state. We use a laser pulse with duration (FWHM) of
+10.3 fs, peak intensity of 2 × 1014 W/cm2 and mean wave-
+length of 1064 nm. Clearly, the two wave packets agree
+very well. Additional evidences of such agreement can be
+found in our recent work [13], where Eq. (1) was also uti-
+lized to extract very accurate photo-recombination cross
+sections for a variety of atomic targets. The extracted
+electron wave packet W SF A is shown as the dashed blue
+line. This result, which has been normalized to that of
+the TDSE near the cutoﬀ, agrees reasonably well with
+the TDSE result. We have also performed calculations
+for diﬀerent atoms and with diﬀerent laser parameters to
+conﬁrm this conclusion.
+Having established the good agreement between W SF A
+and W T DSE , we now present the main results in Fig. 2.
+Here we show the HHG spectra calculated using the di-
+rect solution of the TDSE (solid red lines), Lewenstein
+model (dotted blue lines), together with the SW-SF A
+model (solid black lines) for Ar, Xe, and Ne. For Ar
+15 20 25 30 35 40 45 50 55 60 65 70
+Photon energy (eV)
+10
+−9
+10
+−7
+10
+−5
+10
+−3
+10
+−1
+10
+1
+10
+3
+HHG yield (arb. units)
+TDSE
+Lewenstein
+Improved Lewenstein
+Ar(a)
+15 20 25 30 35 40 45 50 55
+Photon energy (eV)
+10
+−8
+10
+−6
+10
+−4
+10
+−2
+10
+0
+HHG yield (arb. units)
+TDSE
+Lewenstein
+Improved Lewenstein
+Xe(b)
+25 30 35 40 45 50 55 60 65 70 75
+Photon energy (eV)
+10
+−10
+10
+−8
+10
+−6
+10
+−4
+10
+−2
+HHG yield (arb. units)
+TDSE
+Lewenstein
+Improved Lewenstein
+Ne(c)
+FIG. 2: (Color online) Comparison of the HHG yields ob-
+tained from numerical solution of the TDSE (solid red lines) ,
+the Lewenstein model (dashed blue lines), and the improved
+Lewenstein model (solid black lines) for Ar (a), Xe (b), and
+Ne (c).
+and Ne, the laser pulse has peak intensity of 2 × 1014
+W/cm2 and mean wavelength of 800 nm. The laser du-
+ration (FWHM) is 10 fs for Ar and 20 fs for Ne. For
+Xe, the corresponding parameters are 5 × 1013 W/cm2,
+1600nm, and 7.8 fs, respectively. The HHG yields for
+Ar are shifted vertically in order to show their detailed
+structures. For Ne and Xe, the SF A and SW-SF A re-
+sults are normalized to the TDSE results near the cutoﬀ,
+i.e., close to 3 .2Up + Ip, where Up is the ponderomotive
+energy.
+First we compare the SF A and the TDSE results.
+Clearly, the Lewenstein model agrees reasonably well
+only in some range near the HHG cutoﬀ for all three
+cases. For Ar, they agree well for a broad range from
+70 eV down to 40 eV. Near 40 eV, the slope of the
+TDSE curve changes and the two results start to devi-
+ate. The discrepancy reaches more than two orders of
+magnitude near the ionization threshold (15.76 eV). For
+3
+10 20 30 40 50 60 70 80 90 100
+Photon energy (eV)
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+10 20 30 40 50 60 70 80 90 100
+0
+0.1
+0.2
+0.3
+0.4
+0.5
+Exact
+PWA
+10 20 30 40 50 60 70 80 90 100
+0
+0.2
+0.4
+0.6
+0.8
+1
+Photo−recombination cross section (arb. unit)
+Ar
+Xe
+Ne
+(a)
+(b)
+(c)
+FIG. 3: (Color online) Photo-recombination cross sections of
+Ar (a), Xe (b) and Ne (c), obtained by using exact scatter-
+ing wavefunctions (solid curves) and within the plane-wave
+approximation (dashed curves).
+Xe, the Lewenstein model underestimates the HHG yield
+by up to one or two orders of magnitude, begining just
+below the cutoﬀ. The inaccuracy of the SF A for lower
+harmonics is usually interpreted as due to the neglect of
+the interaction between the target ion and the continuum
+electron in the three-step model. While this interpreta-
+tion is qualitatively correct, it does not explain why in
+some cases the agreement is better. For example, see
+Fig. 2(c) for Ne. Here the HHG yield from the Lewen-
+stein model disagrees with the TDSE results only in the
+range from 28 eV to 45 eV.
+We next examine the prediction of the SW-SF A model.
+From Fig. 2 it is clear that it gives much better agree-
+ment with the TDSE results for all three atoms shown. In
+some cases, the discrepancy has been reduced from two
+orders of magnitude in the SF A to about a factor of two
+in the SW-SF A. Since the recombination cross sections
+calculated using “exact” scattering wavefunctions are in-
+dependent of the electromagnetic gauges used, unlike the
+SF A, the SW-SF A model has no gauge-dependence issues.
+There are some “unphysical” sharp spikes in Fig. 2, near
+22 eV in Ar, 17 eV in Xe, and 32 eV in Ne. They are due
+to the “Cooper minima” where the photo-recombination
+cross sections dσP W /dΩk vanish (see Fig. 3).
+In order to understand the nature of the improvement
+in the SW-SF A, we now analyze the photo-recombination
+cross sections. In Figs. 3 (a), (b), and (c) we compare
+the exact results, dσ/dΩk, with dσP W /dΩk for Ar, Xe,
+and Ne, respectively. The ﬁgures show that, by approx-
+imating scattering waves by plane waves, the calculated
+dipole matrix elements are quite inadequate for electron
+energies below 100 eV. In particular, in Ne there is a spu-
+rious “Cooper minimum” near 32 eV if the plane wave
+is used. This minimum is totally absent for the whole
+energy range in the exact result. The Cooper minima
+are known to be related to the zeros in the dipole ma-
+trix elements and they are absent for Ne since the 2p
+wavefunction is nodeless [14]. We note, from Fig. 3(b),
+the position of the Cooper minimum for Ar predicted by
+using the PW A is shifted lower by about 20 eV as com-
+pared to the exact result. For the Xe case, the shift is
+even larger (the “exact” Cooper minimum, which is near
+80 eV, is not clearly seen in Fig. 3(b)).
+The theoretical method for the numerical solution of
+the TDSE has been described previously [15, 16]. The
+electric ﬁeld of the laser pulse is written in the form
+E(t) = E0a(t) cos(ωt + φ), with the envelope given by
+a(t) = cos 2(πt/τ ), where τ is 2.75 times the FWHM of
+the laser pulse. All the atoms are approximated by a
+one-electron model potential V (r) which has the form of
+V (r) = Vs(r) − 1/r. The parameters in the model po-
+tential are chosen such that the binding energies of the
+ground state and the ﬁrst few excited states are close to
+the experimental values. We then propagate the initial
+ground state in time using the split operator method.
+The laser parameters were chosen such that the deple-
+tion eﬀect is small. Typically the ground state survival
+probability is more than about 95%.
+Photo-recombination cross section is determined as
+dσ(ω)
+dΩk
+= ω3
+2πk
+⏐
+⏐⟨Ψ+
+k |z|Φ0⟩
+⏐
+⏐2
+, (4)
+where |Ψ+⟩ and |Φ0⟩ are the scattering wavefunction and
+the ground state wavefuntion, respectively, and Ω k ≡
+{θk, φk} is the direction of k. The returning electron
+that contributes most to the HHG is the one that prop-
+agates along the laser polarization direction. Therefore,
+the relevant cross section is for k that is parallel to z-axis
+(the laser polarization axis), that is, θk = 0 or π.
+For each model potential V (r), continuum scatter-
+ing wavefunctions are calculated numerically, using the
+partial-wave expansion
+Ψ+
+k (r) =
+∞∑
+l=0
+ıleıδl Rkl(r)
+k
+l∑
+m=−l
+Y ∗
+lm(θk, φk)Ylm(θ, φ) (5)
+where δl(k) is the partial-wave phase shift. With this
+scattering wave function, “exact” photo-recombination
+cross section is then obtained by using Eq. 4. Note that
+for atoms which have p 0 ground states, only l = 0, 2 and
+m = 0 will contribute to the dipole matrix element. It
+4
+25 30 35 40 45
+Electron energy (eV)
+10
+−4
+10
+−3
+10
+−2
+10
+−1
+10
+0
+10
+1
+10
+2
+10
+3
+10
+4
+Electron wave−packet (arb. units)
+Ar
+Ne
+25 30 35 40 45
+0
+0.2
+0.4
+0.6
+0.8
+1
+FIG. 4: (Color online) The electron wave-packets, extracte d
+from the HHG spectra for Ne and Ar under the same laser
+ﬁeld. The inset shows the wave-packets in the linear scale
+with the Ne data shifted horizontally by -1.2 eV. The HHG
+are obtained within the Lewenstein model with 1064 nm laser,
+peak intensity of 2 × 1014 W/cm2, duration of 50 fs.
+is interesting to note that for all the systems considered
+here, the shape of dσ/dΩk as functions of photon energy
+are quite close to the total (integrated) cross sections,
+obtained by averaging over m = − 1, 0, 1 initial states.
+In the PW A, a plane-wave (2 π)−3/2 exp(ıkr) is used to
+obtain dσP W /dΩk.
+So far we have extracted photo-recombination cross
+sections from Ar, Xe, and Ne by using companion atoms
+with nearly identical ionization potentials, as compared
+to the atoms under consideration [13]. This is used to
+greatly simplify the analysis. In the following, we will
+show that this requirement can be relaxed. As the wave
+packets obtained within the Lewenstein model agree rea-
+sonably well with the TDSE results, for our purpose we
+only use the Lewenstein model in the subsequent analy-
+sis. In Fig. 4, we show the comparison of the wave packet
+from Ne ( Ip = 21 .56 eV) and Ar ( Ip = 15 .76 eV) in the
+same 1064 nm laser pulse with peak intensity of 2 × 1014
+W/cm2, duration (FWHM) of 50 fs. Clearly, the two
+wave packets lie nicely within a common envelope. This
+can be seen even more clearly in the inset, where the
+data are plotted in linear scale with the Ne data shifted
+horizontally by -1.2 eV. We note that the small details
+below 33 eV also agree well. This conclusion is also con-
+ﬁrmed by our calculations using the TDSE with diﬀerent
+laser parameters and with other atoms. This supports
+that the independence of the wave packet on the target
+structure can also be extended to systems with diﬀerent
+ionization potentials.
+In this Letter, we have shown that the improved
+Lewenstein model is capable of describing HHG spec-
+tra close to the accuracy that can only be achieved by
+solving the TDSE directly. Extending this model to
+molecules, we expect that accurate HHG spectra from
+molecular targets can be calculated. For molecules, ac-
+curate solutions of the TDSE are very time-consuming,
+if not impossible. Using the Lewenstein model, the
+HHG as well as the dipole matrix elements can be eas-
+ily calculated [17, 18] to extract the wave packet. Sim-
+ilarly, theoretical tools for the calculation of molecular
+photo-recombination (or photoionization) cross sections
+are quite mature, and general computer codes are avail-
+able even for large molecules [19]. Thus it is expected
+that HHG spectra generated by molecules can be cal-
+culated using the SW-SF A model readily. Finally, we
+mention that the present analysis has not yet addressed
+the phases of the harmonics. Further studies would be
+needed to disentangle the phases due to the laser and the
+target separately. This step is needed in order to incorpo-
+rate propagation eﬀect of the medium on the generated
+high harmonics.
+This work was supported in part by the Chemical Sci-
+ences, Geosciences and Biosciences Division, Oﬃce of Ba-
+sic Energy Sciences, Oﬃce of Science, U. S. Department
+of Energy. TM is also supported by a Grant-in-Aid for
+Scientiﬁc Research (C) from the Ministry of Education,
+Culture, Sports, Science and Technology, Japan, by the
+21st Century COE program on “Coherent Optical Sci-
+ence”, and by a Japanese Society for the Promotion of
+Science (JSPS) Bilateral joint program between US and
+Japan.
+[1] M. Drescher et al. , Nature (London) 419, 803 (2002).
+[2] T. Sekikawa et al. , Nature (London) 432, 605 (2004).
+[3] G. Sansone et al. , Science 314, 443 (2006).
+[4] R. Lopez-Martens et al. , Phys. Rev. Lett. 94, 033001
+(2005).
+[5] P. B. Corkum, Phys. Rev. Lett. 71, 1994 (1993).
+[6] M. Lewenstein et al. , Phys. Rev. A 49, 2117 (1994).
+[7] M. Yu. Ivanov, T. Brabec, and N. Burnett, Phys. Rev. A
+54, 742 (1996).
+[8] J. Z. Kaminski and F. Ehlotzky, Phys. Rev. A , 54, 3678
+(1996).
+[9] A. Gordon and F. X. K¨ artner, Phys. Rev. Lett. 95,
+223901 (2005).
+[10] J. Itatani et al. , Nature 432, 867 (2004).
+[11] V. H. Le, et al. , Phys. Rev. A., 76, 013414 (2007).
+[12] J. Levesque et al. , Phys. Rev. Lett. 98, 183903 (2007).
+[13] T. Morishita, A. T. Le, Z. Chen, and C. D.
+Lin, arXiv:0707.3157v1 [physics.atom-ph] (submitted to
+Phys. Rev. Lett.).
+[14] A. F. Starace, Theory of atomic photoionization , Springer
+Verlag, Berlin (1982).
+[15] Z. Chen et al. , Phys. Rev. A 74, 053405 (2006).
+[16] T. Morishita et al. , Phys. Rev. A 75, 023407 (2007).
+[17] X. X. Zhou et al. , Phys. Rev. A 71, 061801(R) (2005).
+[18] A. T. Le et al. , Phys. Rev. A 73, 041402(R) (2006).
+[19] S. Tonzani, Comput. Phys. Comm. 176, 146 (2007).

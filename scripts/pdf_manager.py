@@ -480,14 +480,35 @@ class PdfLibrary:
         return text
 
     def _extract_text_deepxiv(self, pdf_path: Path) -> Optional[str]:
-        """策略 1：调用 deepxiv_knowledge/pdf_extractor（PyPDF2）。"""
+        """策略 1：pypdf 本地抽取（优先）/ deepxiv_knowledge/pdf_extractor。"""
         try:
+            # v6.9.75: 优先 pypdf_extract_local.py（本地文件路径，venv 解释器
+            # 带 pypdf；系统 python3 无 PyPDF2/pypdf，旧链路三级全败实测）
+            import shutil as _shutil
+            local_extractor = Path(__file__).parent / "deepxiv_knowledge" / "pypdf_extract_local.py"
+            py_exe = str(Path.home() / ".venv" / "bin" / "python3")
+            if local_extractor.exists() and Path(py_exe).exists():
+                result = subprocess.run(
+                    [py_exe, str(local_extractor), str(pdf_path)],
+                    capture_output=True, text=True, timeout=60,
+                )
+                if result.returncode == 0 and len(result.stdout.strip()) > 200:
+                    return result.stdout.strip()
             extractor_path = Path(__file__).parent / "deepxiv_knowledge" / "pdf_extractor.py"
             if not extractor_path.exists():
                 return None
-            # 通过 subprocess 调用，避免直接导入非标准库依赖
+            # 通过 subprocess 调用，避免直接导入非标准库依赖。
+            # v6.9.75: 解释器探测——系统 python3 无 PyPDF2/pypdf，优先
+            # 探测带库的解释器（~/.venv/bin/python3 等）
+            import shutil as _shutil
+            py_candidates = [
+                str(Path.home() / ".venv" / "bin" / "python3"),
+                "python3",
+            ]
+            py_exe = next((c for c in py_candidates
+                           if _shutil.which(c) or Path(c).exists()), "python3")
             result = subprocess.run(
-                ["python3", str(extractor_path), "--extract-text", str(pdf_path)],
+                [py_exe, str(extractor_path), "--extract-text", str(pdf_path)],
                 capture_output=True,
                 text=True,
                 timeout=60,

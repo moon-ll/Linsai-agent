@@ -158,6 +158,64 @@ def _ensure_source_raw(llm_output: str, raw_rel: str, wiki_type: str,
     return fm + llm_output
 
 
+
+
+# 五要素深度蒸馏 prompt（v6.9.75）：用户校准的知识库质量标准
+DEEP_DISTILL_PROMPT = """请基于以下论文【全文】撰写一篇深度研究笔记（林赛，强场超快光学 PI 视角）。
+
+【硬性要求】核心要点必须完整覆盖以下五要素，每要素一节、各有实质内容：
+1. 研究问题（Research Question）：论文要回答的核心问题、目标或中心论点
+2. 研究背景（Background）：学术脉络、前人工作、研究动机
+3. 研究方法（Data & Method）：数据来源、实验/理论/计算方法、材料体系、关键技术
+4. 主要发现与核心结论（Main Results & Findings）：关键结果与定量发现——【全文中出现的数值必须原样保留（含单位），不得凭记忆改写或省略】
+5. 潜在研究方向（Limitations & Open Questions）：局限性、注意事项、未解决的问题
+
+【结构】输出 markdown（frontmatter 系统补写，直接以 # 标题开始）：
+# 标题
+
+## 林赛的理解
+（第一人称：这篇工作对我们的研究意味着什么、可以怎么用）
+
+## 研究问题
+
+## 研究背景
+
+## 研究方法
+
+## 主要发现与核心结论
+
+## 潜在研究方向
+
+## 与林赛研究的关联
+（具体的实验/理论接口，引用本组方向词：HHG、阿秒、强场驱动、交变磁、莫尔、量子几何等）
+
+## 来源
+- 蒸馏自全文（deep-read）
+"""
+
+
+def _build_deep_distill_prompt(raw_md: str, fulltext: str) -> str:
+    """构造五要素深度蒸馏 prompt：raw 元数据 + 全文（截断）。"""
+    # raw md 的 frontmatter 元数据（标题/作者/年份）供参照
+    meta_part = raw_md[:800]
+    ft = fulltext[:40000]  # 全文截断（约 1 万 token），覆盖绝大多数论文正文
+    return (
+        DEEP_DISTILL_PROMPT
+        + "\n\n【论文元数据（frontmatter）】\n" + meta_part
+        + "\n\n【论文全文】\n" + ft
+        + ("\n\n[全文超长已截断]" if len(fulltext) > 40000 else "")
+    )
+
+
+def _deep_wiki_rel(raw_path: Path) -> str:
+    """全文级蒸馏的 wiki 路径（与现有命名规则一致）。"""
+    from knowledge_base import distill_raw_to_wiki as _d  # 借用其命名推断
+    import knowledge_base as _kb
+    title_guess = raw_path.stem
+    safe_name = _kb._safe_filename(title_guess)
+    return f"wiki/papers/{safe_name}.md"
+
+
 def distill_one(raw_path: Path, dry_run: bool = False) -> Dict[str, Any]:
     """蒸馏单篇 raw → wiki。
 
@@ -165,34 +223,82 @@ def distill_one(raw_path: Path, dry_run: bool = False) -> Dict[str, Any]:
         {success, raw, wiki, skipped?, error?}
     """
     raw_rel = raw_path.relative_to(KNOWLEDGE_DIR).as_posix()
-    prepped = distill_raw_to_wiki(raw_rel)
-    if not prepped:
-        return {"success": False, "raw": raw_rel, "error": "prompt 生成失败"}
-    wiki_rel, prompt = prepped
+
+    # v6.9.75: 分层蒸馏——有全文（deep-read 管线标记 has_fulltext 且
+    # _text_cache 命中）走五要素深度蒸馏；否则摘要级轻量笔记。
+    raw_text_full = raw_path.read_text(encoding="utf-8", errors="ignore")
+    fulltext = None
+    if re.search(r"has_fulltext:\s*true", raw_text_full[:1200]):
+        m_aid = re.search(r'arxiv_id:\s*"?([\d]{4}\.[\d]{4,5})', raw_text_full)
+        if m_aid:
+            try:
+                from pdf_manager import PdfLibrary
+                fulltext = PdfLibrary().get_pdf_text(m_aid.group(1))
+            except Exception:
+                fulltext = None
+
+    digest_level = "fulltext" if fulltext else "abstract"
+    if fulltext:
+        prompt = _build_deep_distill_prompt(raw_text_full, fulltext)
+        wiki_rel = _deep_wiki_rel(raw_path)
+        system = (
+            "你是知识库蒸馏器（深度阅读模式）。基于论文全文按五要素结构"
+            "撰写研究笔记，直接输出 Markdown 正文（frontmatter 由系统补写），"
+            "不要输出解释。五要素必须各有实质内容，定量数据保留原文数值。"
+        )
+        timeout = 240
+    else:
+        prepped = distill_raw_to_wiki(raw_rel)
+        if not prepped:
+            return {"success": False, "raw": raw_rel, "error": "prompt 生成失败"}
+        wiki_rel, prompt = prepped
+        system = (
+            "你是知识库蒸馏器。按用户指令把原始文献提炼为 wiki 页面，"
+            "直接输出 Markdown 正文（frontmatter 由系统补写），不要输出解释。"
+            "注意：输入仅为摘要级元数据，笔记中不得编造未给出的数值或细节。"
+        )
+        timeout = 150
+
     if dry_run:
-        return {"success": True, "raw": raw_rel, "wiki": wiki_rel, "skipped": True}
+        return {"success": True, "raw": raw_rel, "wiki": wiki_rel,
+                "skipped": True, "digest_level": digest_level}
 
     from llm_gateway import llm_complete
     # v6.9.15: prefer="kb_distill" → GLM 主模型直连（默认 MiniMax 主链
     # 429 限额期单篇重试+降级最长 369s，350 篇积压不可行）。
+    # v6.9.74: glm 对蒸馏长 prompt 104s 失败，改 minimax 优先。
     ok, text, meta = llm_complete(
-        "你是知识库蒸馏器。按用户指令把原始文献提炼为 wiki 页面，"
-        "直接输出 Markdown 正文（frontmatter 由系统补写），不要输出解释。",
-        prompt, timeout=150, prefer="kb_distill",
+        system, prompt, timeout=timeout,
+        prefer="kb_distill_deep" if digest_level == "fulltext" else "kb_distill",
+    )
+    # v6.9.75: 空输出重试一次——minimax 推理模型偶发 reasoning tokens
+    # 吃满 completion 配额导致正文为空（实测 3/5 概率对长 prompt 触发），
+    # 重试一次通常即正常。
+    if (not ok or not text or not text.strip()):
+        ok, text, meta = llm_complete(
+        system, prompt, timeout=timeout,
+        prefer="kb_distill_deep" if digest_level == "fulltext" else "kb_distill",
     )
     if not ok or not text or not text.strip():
         return {"success": False, "raw": raw_rel,
                 "error": f"LLM 失败: {str(meta.get('error', ''))[:60]}"}
-    if len(text) > MAX_OUTPUT_CHARS:
-        text = text[:MAX_OUTPUT_CHARS] + "\n\n... [蒸馏输出超长截断]"
+    # v6.9.75: 全文级五要素蒸馏输出预算加倍（6000 字符曾把第五要素截掉）
+    out_budget = MAX_OUTPUT_CHARS * 2 if digest_level == "fulltext" else MAX_OUTPUT_CHARS
+    if len(text) > out_budget:
+        text = text[:out_budget] + "\n\n... [蒸馏输出超长截断]"
 
     wiki_type = wiki_rel.split("/")[1] if "/" in wiki_rel else "concepts"
     # source_raw 必须是纯文件名——kb_health 以 name 对 name 匹配判定
     # pending_distill，带 raw/ 前缀会导致蒸馏后计数不减。
     final = _ensure_source_raw(text, raw_path.name, wiki_type,
                                Path(wiki_rel).stem)
+    # v6.9.75: 标注蒸馏层级（fulltext 五要素精读 / abstract 摘要级）
+    # 锚点用 source_raw（kb_distill 产物必有），review_status 不一定存在
+    final = re.sub(r'(source_raw:\s*"[^"]*")',
+                   rf'\1\ndigest_level: "{digest_level}"', final, count=1)
     save_distilled_wiki(wiki_rel, final, raw_rel)
-    return {"success": True, "raw": raw_rel, "wiki": wiki_rel}
+    return {"success": True, "raw": raw_rel, "wiki": wiki_rel,
+            "digest_level": digest_level}
 
 
 def auto_batch_size(pending_count: int) -> int:
