@@ -1,0 +1,153 @@
+{
+ "a2": {
+  "doi": "10.1038/nature14517",
+  "nauth": 8,
+  "authors": [
+   "Vampa",
+   "Hammond",
+   "Thiré",
+   "Schmidt",
+   "Légaré",
+   "McDonald",
+   "Brabec",
+   "Corkum"
+  ]
+ },
+ "a19": {
+  "doi": "10.1038/nature11025",
+  "nauth": 9,
+  "authors": [
+   "Shafir",
+   "Soifer",
+   "Bruner",
+   "Dagan",
+   "Mairesse",
+   "Patchkovskii",
+   "Ivanov",
+   "Smirnova",
+   "Dudovich"
+  ]
+ },
+ "s23_fab": [
+  {
+   "id": "2412.03935v2",
+   "title": "Floquet-Bloch Valleytronics",
+   "first3": [
+    "Sotirios Fragkos",
+    "Baptiste Fabre",
+    "Olena Tkach"
+   ]
+  },
+  {
+   "id": "1806.07858v4",
+   "title": "Transport in Floquet-Bloch bands",
+   "first3": [
+    "C. J. Fujiwara",
+    "Kevin Singh",
+    "Zachary A. Geiger"
+   ]
+  },
+  {
+   "id": "1410.5364v2",
+   "title": "Scattering Theory for Floquet-Bloch States",
+   "first3": [
+    "Thomas Bilitewski",
+    "Nigel R. Cooper"
+   ]
+  },
+  {
+   "id": "2112.12788v2",
+   "title": "Topological pumping in a Floquet-Bloch band",
+   "first3": [
+    "Joaquín Minguzzi",
+    "Zijie Zhu",
+    "Kilian Sandholzer"
+   ]
+  },
+  {
+   "id": "2002.03051v1",
+   "title": "Non-exponential decay in Floquet-Bloch bands",
+   "first3": [
+    "Alec Cao",
+    "Cora J. Fujiwara",
+    "Roshan Sajjad"
+   ]
+  },
+  {
+   "id": "2212.14213v1",
+   "title": "Visual observation of optical Floquet-Bloch oscillations",
+   "first3": [
+    "Zhen Zhang",
+    "Yuan Li",
+    "Xiankai Sun"
+   ]
+  }
+ ],
+ "s12_mos2": [],
+ "lit_files": [
+  "02_literature/reading-notes.md",
+  "02_literature/targeted-research/lit-gap-1791224222.md",
+  "02_literature/targeted-research/candidates-1791224224.bib",
+  "02_literature/targeted-research/lit-gap-1791317780.md",
+  "02_literature/targeted-research/candidates-1791255711.bib",
+  "02_literature/targeted-research/candidates-1791165692.bib",
+  "02_literature/targeted-research/lit-gap-1791255710.md",
+  "02_literature/targeted-research/candidates-1791317781.bib",
+  "02_literature/targeted-research/lit-gap-1791165690.md",
+  "02_literature/gap-analysis/gap-analysis-r1791314136.json",
+  "02_literature/gap-analysis/gap-analysis-r1791211518.json",
+  "02_literature/gap-analysis/gap-analysis-r1791250256.json",
+  "02_literature/gap-analysis/gap-analysis-r1791149442.json"
+ ],
+ "grep": {
+  "rationale.md": {
+   "量子光": 1,
+   "压缩真空": 1,
+   "双色场": 6,
+   "阿秒": 2,
+   "Kronig": 3,
+   "Penney": 3,
+   "Landau": 2,
+   "Zener": 2,
+   "Houston": 7,
+   "Wannier": 1,
+   "Floquet": 5
+  },
+  "content.md": {
+   "压缩真空": 1,
+   "双色场": 13,
+   "Kronig": 2,
+   "Penney": 2,
+   "Landau": 6,
+   "Zener": 6,
+   "Houston": 6,
+   "Wannier": 1,
+   "Floquet": 11
+  },
+  "scheme.md": {
+   "双色场": 15,
+   "Kronig": 1,
+   "Penney": 1,
+   "Landau": 4,
+   "Zener": 5,
+   "Houston": 13,
+   "Wannier": 2,
+   "Floquet": 12
+  }
+ },
+ "ctx": {
+  "rationale.md[20]": [
+   "间分辨的同时获取，需要驱动场波形既能调控单周期内发射，又能在动量空间分辨带内与带间通道的相位干涉。Rasputnyi 等[20]用亮压缩真空驱动 Mg 掺杂 LiNbO3，证明非经典光场亦可激发固态非微扰谐波"
+  ],
+  "rationale.md[21]": [
+   "等[20]用亮压缩真空驱动 Mg 掺杂 LiNbO3，证明非经典光场亦可激发固态非微扰谐波。量子光驱动晶体谐波的理论拓展[21]与该工作指向同一结论——缺乏以双色场门控直接观测 k 分辨子循环相位干涉与 La"
+  ],
+  "content.md[20]": [
+   "与缺陷态的局域化关联尤为紧密[6]，与 Berry 反常电流在低光子能量占优的指纹[3]高度同区。Rasputnyi 等[20]用亮压缩真空驱动 Mg 掺杂 LiNbO3 证明，缺陷态可使谐波产额高于纯晶体，"
+  ],
+  "scheme.md[20]": [
+   "中，退火可逆性、缺陷密度标度、子带隙选择规则三条均已分别在单材料上被报道（Jiang 等[17]、Rasputnyi 等[20]）。本项目把三条组合成可执行协议，原理上是已知方法学的协同应用。 k 分辨子循",
+   "5]在 Bi2Se3/Bi2Te3 中示范。缺陷密度调控（缺陷-反常甄别）由 You 等[17]、Rasputnyi 等[20]在单材料上示范。泵浦-探测 Floquet 读出（拓扑态实时探针）由综述中示范的"
+  ]
+ }
+}

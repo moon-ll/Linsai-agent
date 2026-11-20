@@ -1,0 +1,44 @@
+{
+  "gaps": [
+    {
+      "claim": "参考文献[4][5]存在署名错配，历史P0未解",
+      "missing_evidence": "申请书中[4][5]引用的实际署名与文献不匹配；[34]–[37]/[40]缺位",
+      "search_keywords": [
+        "Khurelbaatar HHG quantum light preprint",
+        "Rivera-Dean quantum HHG solid state",
+        "Even Tzur quantum enhancement factor HHG framework"
+      ],
+      "priority": "critical"
+    },
+    {
+      "claim": "BSV驱动HHG固体态实验的完整链路缺乏独立文献支撑",
+      "missing_evidence": "整篇缺少bright squeezed vacuum driven HHG solid state full chain实验支撑",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation experiment",
+        "BSV driven HHG solid state",
+        "quantum light solid harmonic generation first observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子增强因子(QEF)框架缺乏独立引用支撑",
+      "missing_evidence": "Even Tzur quantum enhancement factor HHG QEF框架需要独立文献",
+      "search_keywords": [
+        "quantum enhancement factor HHG QEF",
+        "Even Tzur quantum photon HHG enhancement",
+        "photon statistics nonlinear optical yield enhancement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子几何张量光学反演实验精度缺乏独立文献支撑",
+      "missing_evidence": "QGT reconstruction accuracy experimental baseline需要独立文献",
+      "search_keywords": [
+        "quantum geometry tensor optical inversion experimental precision",
+        "Berry curvature reconstruction experimental uncertainty",
+        "Fisher information quantum optics parameter estimation"
+      ],
+      "priority": "high"
+    }
+  ]
+}

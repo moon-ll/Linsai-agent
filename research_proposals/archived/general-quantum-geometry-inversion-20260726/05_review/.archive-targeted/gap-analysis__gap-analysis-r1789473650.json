@@ -1,0 +1,150 @@
+{
+  "gaps": [
+    {
+      "claim": "固体HHG由Ghimire等2011年在ZnO晶体首次实验验证，构成固体HHG研究范式起点",
+      "missing_evidence": "缺少Ghimire 2011 Nature Physics论文的实验细节（驱动波长、谐波阶数、首次明确证实非微扰机制等）以支持'范式起点'论断",
+      "search_keywords": [
+        "Ghimire 2011 ZnO solid-state high harmonic generation Nature Physics",
+        "first observation solid HHG ZnO mid-infrared nonperturbative",
+        "solid HHG paradigm origin experimental verification2011"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rasputnyi等在Mg:LiNbO₃与非晶硅a-Si中实现BSV驱动固体HHG，效率较经典光提升10²–10³倍",
+      "missing_evidence": "缺少Rasputnyi 2024 BSV-HHG固体实验论文的具体实验参数（波长范围、增强倍数依据、平均强度归一化方法）",
+      "search_keywords": [
+        "Rasputnyi bright squeezed vacuum solid high harmonic generation 2024",
+        "BSV driven HHG Mg:LiNbO3 a-Si experiment",
+        "quantum light squeezed HHG 100-1000 times enhancement solid state",
+        "Rasputnyi arXiv 2024 squeezed light HHG experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Berry/Provost/Thouless 1980s量子几何数学起源作为反演方法基础",
+      "missing_evidence": "缺少原始文献链接（Berry 1984 PRL, Provost-Vallee 1980, Thouless-Kohmoto-Nightingale-den Nijs 1982 PRL）以锚定量子几何张量形式化起源",
+      "search_keywords": [
+        "Berry 1984 quantum phase adiabatic PRL",
+        "Provost Vallee 1980 Riemannian quantum metric",
+        "Thouless TKNN 1982 quantized Hall conductance PRL",
+        "quantum geometry tensor foundational definition Berry Provost Thouless"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Luu-Wörner 2018 Nat Commun首次实验证明HHG可测量石英Berry曲率",
+      "missing_evidence": "缺少Luu-Wörner 2018 Nat Commun 9:916论文的实验细节（晶向、椭圆度依赖、Berry曲率积分对比）",
+      "search_keywords": [
+        "Luu Worner 2018 Nature Communications Berry curvature quartz HHG",
+        "measurement Berry curvature solids high harmonic generation polarization",
+        "Nat Commun 9 916 HHG Berry curvature quartz experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "气相HHG研究脉络（作为固体HHG前传）",
+      "missing_evidence": "缺少气相原子分子HHG代表性综述或Lewenstein/Corkum三步模型作为嵌入式过渡引证",
+      "search_keywords": [
+        "gas phase high harmonic generation review",
+        "Lewenstein strong field approximation HHG",
+        "Corkum three-step model HHG gas phase",
+        "atomic HHG review attosecond pulse generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "高次谐波反演量子几何张量（Berry曲率+量子度量）的理论框架",
+      "missing_evidence": "缺少Sodemann-Fu 2015 PRL量子度量非线性响应预言与Liu-Fu-Kais等量子几何HHG理论作为核心机制支撑",
+      "search_keywords": [
+        "Sodemann Fu 2015 quantum metric nonlinear optical response PRL",
+        "Liu Fu Kais quantum geometry HHG solid state",
+        "quantum geometry tensor high harmonic generation theory framework",
+        "Berry curvature quantum metric HHG inversion formalism"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "量子度量（quantum metric）的实验HHG测量方法",
+      "missing_evidence": "缺少量子度量HHG测量的理论预言或近期实验方案（区别于Berry曲率测量）",
+      "search_keywords": [
+        "quantum metric high harmonic generation measurement",
+        "Fubini-Study metric nonlinear optical probe",
+        "quantum metric HHG retrieval recent experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV（bright squeezed vacuum）光源的实验制备与参数（g(2)(0)>1.5、r≤1.5）",
+      "missing_evidence": "缺少BSV实验制备参数（OPCPA压缩度、光子数校准、g2测量）作为技术可行性支撑",
+      "search_keywords": [
+        "bright squeezed vacuum g2 measurement NOPA photon statistics",
+        "squeezing parameter r definition experimental calibration",
+        "OPCPA squeezed vacuum photon number calibration g2 zero-delay"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Ghilgaoui等BSV驱动原子气体HHG效率增强与BSV单模热统计物理依据",
+      "missing_evidence": "缺少BSV-HHG原子气体实验的量子效率增强物理依据（单模热统计为何提升HHG）",
+      "search_keywords": [
+        "BSV driven HHG atomic gas quantum efficiency enhancement",
+        "Ghilgaoui bright squeezed vacuum harmonic generation atomic",
+        "thermal photon statistics super-Poissonian HHG enhancement mechanism"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "f-sum rule在强关联高次谐波中的角色（5-15%红移、U/W>0.5判据）",
+      "missing_evidence": "缺少f-sum rule在强关联HHG中的理论推导或近期论文支撑带宽重整化与红移定量关系",
+      "search_keywords": [
+        "f-sum rule high harmonic generation Hubbard U bandwidth renormalization",
+        "harmonic redshift strongly correlated U over W scaling",
+        "sum rule solid state HHG bandwidth renormalization strongly correlated"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "强场半导体布洛赫方程（SBE）在BSV量子光驱动下的扩展",
+      "missing_evidence": "缺少SBE从经典驱动到量子光场驱动的最新理论扩展（Lewenstein-Płachta、Stammer、Thorpe等）",
+      "search_keywords": [
+        "semiconductor Bloch equation quantum optical field HHG",
+        "quantum light driven SBE HHG solid state theory",
+        "Thorpe Lewenstein quantum optics HHG framework",
+        "Lewenstein Ciappina quantum light HHG review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Mn3Sn非共线反铁磁HHG读出量子几何（近期实验或理论）",
+      "missing_evidence": "缺少Mn3Sn非线性HHG实验或量子几何理论作为替代系统的国内对比基础",
+      "search_keywords": [
+        "Mn3Sn nonlinear Hall high harmonic generation",
+        "non-collinear antiferromagnet HHG Berry curvature",
+        "Mn3Sn ultrafast spectroscopy quantum geometry"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内固体HHG与量子几何读出代表性工作（用于§1.4国内现状段改写嵌入）",
+      "missing_evidence": "缺少国内课题组（华师、中科院物理所、国科大等）在固体HHG、量子几何反演方面的近期代表性论文",
+      "search_keywords": [
+        "solid-state high harmonic generation China group recent",
+        "国内固体高次谐波 量子几何 实验组",
+        "attosecond strong field China experimental group Berry curvature HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Bi₂Te₃拓扑绝缘体作为量子几何HHG反演的基准体系（实验验证）",
+      "missing_evidence": "缺少Bi₂Te₃中HHG读出Berry曲率/量子度量的实验论文（如Luu-Wörner、Jain、Tyulnev系列）",
+      "search_keywords": [
+        "Bi2Te3 high harmonic generation Berry curvature experimental",
+        "topological insulator HHG quantum geometry retrieval",
+        "Jain Tyulnev TiSe2 Bi2Te3 high harmonic polarization asymmetry"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

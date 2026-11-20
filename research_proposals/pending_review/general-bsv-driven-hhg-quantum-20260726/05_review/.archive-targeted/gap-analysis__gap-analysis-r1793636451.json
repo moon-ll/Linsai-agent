@@ -1,0 +1,49 @@
+{
+  "gaps": [
+    {
+      "claim": "Liu 等关于单层 MoS₂ 中高次谐波产生的具体成果及其与 BSV 驱动固体 HHG 的关系。",
+      "missing_evidence": "缺少该论断与 Liu 等原始成果之间的直接引文绑定。应核验文献[6]是否确为单层 MoS₂ 的相关研究，并在句末补挂[6]；如[6]不能直接支持该论断，需补充能够证明材料体系、BSV特征及主要结论的原始论文或权威综述，并给出 DOI。",
+      "search_keywords": [
+        "Liu single-layer MoS2 high-order harmonic generation",
+        "monolayer MoS2 HHG polarization dependence",
+        "bisection symmetry violation solid-state HHG MoS2",
+        "单层MoS2 高次谐波 Liu"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "单层 MoS₂ 中与能谷选择相关的第7—9阶高次谐波模拟结果。",
+      "missing_evidence": "缺少能够直接支撑能谷依赖性、7—9阶谐波范围及相应模拟结论的引文。应核验文献[15]，将[15]直接补挂到该数值性论断处；若[15]未同时覆盖能谷机制和7—9阶结果，需分别补充能谷分辨 HHG 的原始模拟论文或权威数值研究。",
+      "search_keywords": [
+        "monolayer MoS2 valley-resolved high harmonic generation",
+        "MoS2 valley 7th 9th harmonic simulation",
+        "valley-dependent HHG TDDFT MoS2",
+        "单层MoS2 能谷 7阶 9阶 高次谐波 模拟"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Vampa 等提出的三步模型用于解释高次谐波产生过程。",
+      "missing_evidence": "缺少该方法学论断的直接文献锚点。应将三步模型对应的文献[5]直接补挂到该句，并核验[5]是否为 Vampa 等人的原始模型论文或权威方法学综述；必要时补充半经典三步模型的奠基性论文，以支撑模型来源、物理假设和适用边界。",
+      "search_keywords": [
+        "Vampa three-step model high harmonic generation",
+        "Vampa semiclassical three-step model HHG strong-field",
+        "semiclassical three-step model attosecond HHG Vampa",
+        "高次谐波 三步模型 Vampa"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "文献[27]所述成果的作者单位包含武汉理工大学。",
+      "missing_evidence": "现有引文元数据不支持该机构归属。DOI 10.1103/hph3-kzb2 的九名作者单位被核验为武汉工程大学6人、华中科技大学3人，未见武汉理工大学；需要以论文首页、出版社元数据或 Crossref 作者单位信息进一步确认，并将正文中的“武汉理工大学”更正为“武汉工程大学”，同时检查是否应将“第二单位华中科技大学”改为更准确的作者单位表述。",
+      "search_keywords": [
+        "10.1103/hph3-kzb2",
+        "10.1103/hph3-kzb2 author affiliations",
+        "武汉工程大学 华中科技大学 高次谐波",
+        "Wuhan Institute of Technology HUST high-order harmonic generation"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

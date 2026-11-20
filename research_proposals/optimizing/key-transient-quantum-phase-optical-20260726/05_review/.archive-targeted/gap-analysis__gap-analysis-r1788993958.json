@@ -1,0 +1,15 @@
+{
+  "gaps": [
+    {
+      "claim": "94 as 噪声合成与 30 分钟标定周期的实验可行性（§2.2(a) L87-89）",
+      "missing_evidence": "缺少长时阿秒泵浦-探测延迟稳定方案（≥30 分钟尺度、≤100 as RMS）的文献支撑，仅 [34] 双光梳不够",
+      "search_keywords": [
+        "attosecond pump-probe long-term delay stability",
+        "sub-100 attosecond stabilization30 minutes",
+        "active feedback delay line attosecond metrology",
+        "XUV-IR interferometer delay drift hours"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

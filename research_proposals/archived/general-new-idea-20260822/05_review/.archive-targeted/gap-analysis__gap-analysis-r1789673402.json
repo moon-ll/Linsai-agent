@@ -1,0 +1,95 @@
+{
+  "gaps": [
+    {
+      "claim": "紧束缚 + Houston 基含时演化作为 HHG 正演模型在 MnTe/CrSb 这类自旋群保护的反常磁体上的适用性",
+      "missing_evidence": "缺少 Houston 含时演化在含 SOC 反常磁体（g-wave/d-wave/i-wave）多带 HHG 中的具体应用案例与精度基准",
+      "search_keywords": [
+        "Houston basis time-dependent spin-orbit coupling HHG",
+        "tight-binding SOC altermagnet high harmonic",
+        "spin group symmetry HHG altermagnet benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Fisher 信息矩阵在三维参数空间反演中条件数 κ < 10² 的可达性",
+      "missing_evidence": "缺少 HHG 反演中 Fisher 条件数典型值与可观测误差传播的实证基准",
+      "search_keywords": [
+        "Fisher information matrix high harmonic retrieval",
+        "inverse problem condition number HHG",
+        "Fisher condition number solid HHG inversion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "0.5–2 TW/cm² 驱动场强处于 HHG 离阈条件与材料损伤阈值之间的安全窗口",
+      "missing_evidence": "缺少反常磁体/磁性材料在中红外 TW/cm² 量级场强下的损伤阈值与离阈场强的实验数据",
+      "search_keywords": [
+        "TW/cm2 mid-infrared magnetic material damage threshold",
+        "HHG threshold altermagnet MnTe CrSb mid-IR",
+        "ionization damage threshold antiferromagnet mid-infrared"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "反常磁体 HHG 选择规则（自旋群/磁群）的对称性约束理论",
+      "missing_evidence": "缺少自旋群选择规则在 HHG 谱上可观测的具体判据与高次谐波中自旋通道分离度量的实验/理论参考",
+      "search_keywords": [
+        "spin group selection rule high harmonic generation",
+        "magnetic point group HHG altermagnet selection rule",
+        "alternagnetic harmonic spin channel"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MoS₂ 作为非磁参照体系的合理性（§5.1 选 MoS₂ 而非石墨/SiO₂ 的依据）",
+      "missing_evidence": "缺少 MoS₂ 与石墨/SiO₂ 等非磁体系在 mid-IR HHG 中作为反常磁体背景对照的可比性论证",
+      "search_keywords": [
+        "MoS2 high harmonic generation mid-infrared reference",
+        "nonmagnetic substrate HHG background comparison",
+        "graphite SiO2 HHG vs MoS2 background"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "5 μm 作为备用驱动波长（而非 4 μm/7 μm）的物理依据",
+      "missing_evidence": "缺少 4/5/7 μm 不同中心波长在反常磁体 HHG 中截止能量/谐波效率对比数据",
+      "search_keywords": [
+        "mid-infrared driver wavelength 4 5 7 micron HHG cutoff",
+        "5 micron driver altermagnet MnTe CrSb high harmonic",
+        "wavelength dependence HHG efficiency antiferromagnet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "带内 SOC 0.3 eV 与 Γ-K 方向劈裂 0.5–0.75 eV 的实测口径来源",
+      "missing_evidence": "缺少 MnTe 中 SOC 单一值 0.3 eV 与劈裂 0.5–0.75 eV 在 Γ-K 方向的原始 ARPES/自旋分辨 ARPES 数据来源",
+      "search_keywords": [
+        "MnTe spin splitting Gamma-K ARPES value eV",
+        "Osumi PRB 109 115102 MnTe anisotropic spin splitting",
+        "MnTe spin-orbit coupling intraband 0.3 eV ARPES"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "后验标准差 σ_posterior < 先验宽度 50% 作为 T_N 反演门控判据的合理性",
+      "missing_evidence": "缺少 HHG 反演中后验标准差门控判据在其他体系（CDW/Mott）的应用先例与典型阈值",
+      "search_keywords": [
+        "posterior standard deviation Bayesian HHG inversion criterion",
+        "T_N retrieval high harmonic spectroscopy uncertainty",
+        "Bayesian inversion T_N phase transition HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "SQUID ±2 K 独立测定值作为 T_N 反演真值的对比可行性",
+      "missing_evidence": "缺少 HHG 反演 T_N 与 SQUID 独立测定的对照验证案例",
+      "search_keywords": [
+        "HHG T_N inversion SQUID validation",
+        "Neel temperature retrieval high harmonic spectroscopy benchmark",
+        "order parameter ultrafast readout HHG vs SQUID"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

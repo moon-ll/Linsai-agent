@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "Korshunov 等关于 CrSb 电荷序的研究由第一性原理计算和中子散射共同发现。",
+      "missing_evidence": "需要核验原始论文的完整方法与结果，确认实验手段实际为非弹性 X 射线散射（IXS），并查明所观测的 Kohn 反常或漫散射信号，同时确认第一性原理计算的支撑内容；现有摘要证据不足以支持“中子散射”表述。若确实要声称采用中子散射，还需补充独立的、明确报告 CrSb 电荷序中子散射结果的文献。",
+      "search_keywords": [
+        "arXiv:2603.25317 CrSb inelastic X-ray scattering",
+        "PMC13721962 CrSb charge order Kohn anomaly diffuse scattering",
+        "Korshunov CrSb charge order first-principles IXS",
+        "CrSb charge order neutron scattering",
+        "CrSb magnetoelectric coupling inelastic x-ray scattering"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

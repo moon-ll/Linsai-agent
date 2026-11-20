@@ -1,0 +1,113 @@
+{
+  "gaps": [
+    {
+      "claim": "Liu等[6]已在单层MoS₂中首次观测到经典光驱动的HHG，作为本项目BSV-HHG的对照基准",
+      "missing_evidence": "缺乏Liu等关于单层MoS₂经典光HHG首次观测的明确文献支撑（作者、年份、期刊、DOI）",
+      "search_keywords": [
+        "Liu monolayer MoS2 high harmonic generation",
+        "MoS2 HHG first observation classical light",
+        "single layer MoS2 high harmonic spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Hu等与Wu等被同时挂为[13]的引文错挂",
+      "missing_evidence": "缺少Hu等和Wu等的原始文献条目以确认其正确编号与对应工作内容",
+      "search_keywords": [
+        "Hu high harmonic generation solid",
+        "Wu high harmonic transition metal dichalcogenide",
+        "MoS2 high harmonic Hu 2023",
+        "MoS2 HHG Wu experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Iglesias等应在[17]而非[16]、FAIR数据原则应在[21]而非[20]、E.Tzur-Cohen应在[27]而非[26]、Wang等应在[28]而非[27]，需逐条重映射",
+      "missing_evidence": "全部错挂引文的原始出处与正确编号需要逐一核对（19个编号23处）",
+      "search_keywords": [
+        "Iglesias high harmonic Berry curvature",
+        "FAIR data principles quantum optics",
+        "Tzur-Cohen attosecond streaking",
+        "Wang solid HHG semiconductor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "等带隙SnS₂非关联对照的物理合理性",
+      "missing_evidence": "缺乏SnS₂作为TMDC等带隙非关联对照体系的能带与HHG特性参考数据",
+      "search_keywords": [
+        "SnS2 high harmonic generation",
+        "SnS2 bandgap exciton TMDC",
+        "SnS2 non-interacting reference HHG",
+        "SnS2 MoS2 bandgap comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "QEF（量子增强因子）的实验基准与已观测最大值",
+      "missing_evidence": "缺少BSV-HHG中QEF的实验参考数据（典型值、依赖关系、已有报道的最大QEF）",
+      "search_keywords": [
+        "quantum enhancement factor high harmonic generation",
+        "QEF bright squeezed vacuum HHG",
+        "QEF parameter scan squeezed light harmonic",
+        "quantum enhancement HHG benchmark experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV光场驱动固体HHG的实验可行性证据（Rasputnyi等2024）",
+      "missing_evidence": "需引用Rasputnyi等关于BSV驱动固体HHG首次实验观测的明确文献",
+      "search_keywords": [
+        "Rasputnyi bright squeezed vacuum HHG",
+        "squeezed light solid HHG experiment 2024",
+        "BSV driven HHG Mg:LiNbO3 a-Si first observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "PINN-MCMC反演方法在HHG中的应用先例",
+      "missing_evidence": "缺少PINN-MCMC或类似贝叶斯反演方法在HHG光谱分析中的文献先例与精度基准",
+      "search_keywords": [
+        "physics-informed neural network HHG inversion",
+        "Bayesian inversion high harmonic spectroscopy",
+        "MCMC retrieval harmonic spectrum",
+        "PINN MCMC spectroscopy benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "单层MoS₂ 7-9阶HHG计数率及实验可行性",
+      "missing_evidence": "缺少单层TMDC在中红外驱动下7-9阶谐波光子计数率的实验或理论估算文献",
+      "search_keywords": [
+        "monolayer MoS2 high harmonic count rate",
+        "MoS2 few-layer harmonic yield mid-infrared",
+        "TMDC harmonic photon flux measurement",
+        "MoS2 7th 9th harmonic intensity"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV光场g^(2)(0)双配置基线复现的实验参考",
+      "missing_evidence": "缺少BSV二阶关联函数g^(2)(0)在HHG实验条件下的典型值与稳定性数据",
+      "search_keywords": [
+        "g2 zero bright squeezed vacuum measurement",
+        "NOPA g2 photon statistics BSV",
+        "squeezed vacuum second order correlation HHG",
+        "g2 calibration BSV solid HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "反馈带宽10Hz与PID 1kHz的工程口径分歧涉及两类锁定环路",
+      "missing_evidence": "缺少BSV光源相位锁定与态参数反馈两环路带宽需求的工程文献参考",
+      "search_keywords": [
+        "squeezed light PID feedback bandwidth",
+        "OPA phase lock loop bandwidth",
+        "squeezing cavity feedback stabilization",
+        "BSV locking electronics"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

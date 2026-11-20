@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme §2.3(b) 将 Neufeld[30] 表述为“实验—计算对照”，并以其作为泛函或计算基准的支撑。",
+      "missing_evidence": "缺少 Neufeld[30] 原文对其研究性质的直接证明。评审认定该文属于纯计算基准，因此当前表述缺少实验数据来源，且“实验—计算对照”的定性有误。需核对该文的原始全文、方法与结论；若要保留实验—计算对照的论点，还应补充其所对比实验数据的原始实验文献。",
+      "search_keywords": [
+        "\"Neufeld\" 泛函基准 非线性光学",
+        "\"Neufeld\" computational benchmark optical response",
+        "\"Neufeld\" experiment calculation comparison",
+        "\"Neufeld\" density functional theory optical"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

@@ -1,0 +1,114 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV（压缩真空）增强HHG在强关联材料中是否成立",
+      "missing_evidence": "Rasputnyi[13]仅在Si中完成实验，缺乏BSV-HHG在过渡金属氧化物、铜氧化物、莫特绝缘体等强关联体系中的实验或理论证据",
+      "search_keywords": [
+        "bright squeezed vacuum HHG strongly correlated materials",
+        "non-classical light high harmonic generation correlated electron system",
+        "BSV driven HHG Mott insulator",
+        "squeezed light high harmonic transition metal oxide"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三层因果链（光场统计→可观测项→Fisher信息）的信息论框架支撑Q1",
+      "missing_evidence": "缺乏Fisher信息/Cramér-Rao界在HHG量子几何参数估计中的理论文献，特别是光场统计性质对量子几何量Fisher信息贡献的定量分析",
+      "search_keywords": [
+        "Fisher information quantum geometry estimation",
+        "Cramér-Rao bound high harmonic spectroscopy",
+        "quantum Fisher information Berry curvature measurement",
+        "information-theoretic limit HHG reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Q2将'量子几何反演问题'重构为'可辨识性边界'可证伪命题",
+      "missing_evidence": "缺乏可辨识性理论（identifiability theory）在量子几何逆问题中的应用文献，特别是反演问题的统计可辨识条件与实验可分辨性分析",
+      "search_keywords": [
+        "identifiability inverse problem quantum geometry",
+        "statistical identifiability Berry curvature reconstruction",
+        "well-posedness quantum metric inversion",
+        "identifiable inverse problem solid-state spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG量子几何反演方法的整体定位（区别于既有能带反演、Berry曲率测量工作）",
+      "missing_evidence": "文献检索边界说明'未单独提出'，但缺乏与既有量子几何测量方法（输运、光学、ARPES、扫描探针）的系统对比综述，特别是HHG相对其他方法的优势/局限",
+      "search_keywords": [
+        "quantum geometry measurement review solid state 2024 2025",
+        "Berry curvature measurement techniques comparison",
+        "quantum metric experimental probe review",
+        "high harmonic spectroscopy band geometry review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "相干态假设的破缺对HHG量子几何反演的影响（瓶颈一）",
+      "missing_evidence": "缺乏非经典光驱动HHG的最新实验进展（2024-2026），特别是BSV、纠缠光子、单光子级别光场下的HHG产率与光谱特性",
+      "search_keywords": [
+        "nonclassical light HHG experiment 2024 2025",
+        "entangled photon driven high harmonic generation",
+        "photon-number statistics HHG",
+        "quantum optics strong-field attosecond review 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "单电子紧束缚假设的破缺（瓶颈二）：多体/关联效应在固体HHG中的作用",
+      "missing_evidence": "缺乏多体效应（激子关联、库仑关联、去相干）在固体HHG中的最新理论与实验综述，特别是如何影响量子几何量的提取",
+      "search_keywords": [
+        "many-body effects solid HHG review",
+        "excitonic contribution high harmonic spectroscopy",
+        "correlation effects strong-field HHG solid",
+        "decoherence electron dynamics HHG solid"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "'Ω对奇、g对偶'对称性论断的预研残差量级支撑",
+      "missing_evidence": "缺乏时间反演/空间反演对称性下Berry曲率（奇函数）与量子度规（偶函数）在HHG光谱中的分离提取实验数据与理论预研",
+      "search_keywords": [
+        "Berry curvature odd parity time reversal HHG",
+        "quantum metric even parity inversion symmetry",
+        "symmetry decomposition Berry curvature metric HHG",
+        "复Berry相 实部虚部 实验解耦 固体"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "PINN在量子几何反演中的边际价值（实证反例）",
+      "missing_evidence": "缺乏PINN（物理信息神经网络）在HHG光谱反演/量子几何重建任务中失败案例或与传统方法对比的基准测试文献",
+      "search_keywords": [
+        "physics-informed neural network inverse problem failure",
+        "PINN spectral reconstruction benchmark",
+        "neural network Berry curvature reconstruction limitation",
+        "machine learning quantum geometry inversion comparison"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "'加性vs乘性增强'对照实验设计的物理基础",
+      "missing_evidence": "缺乏加性增强（如多光子共振叠加）与乘性增强（如BSV量子压缩放大）在HHG中的机制对比文献，特别是可分离性的实验判据",
+      "search_keywords": [
+        "additive versus multiplicative enhancement HHG",
+        "multiphoton resonance HHG enhancement mechanism",
+        "quantum enhancement versus classical enhancement HHG",
+        "squeezed light multiplicative amplification HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV→CDW迁移假说：CDW序参量的BSV-HHG读出可行性",
+      "missing_evidence": "缺乏CDW材料（1T-TaS2、2H-NbSe2等）中高次谐波光谱学探测CDW序参量的最新实验，以及BSV对CDW信号的增强预研",
+      "search_keywords": [
+        "charge density wave HHG spectroscopy",
+        "CDW order parameter ultrafast HHG readout",
+        "1T-TaS2 high harmonic generation",
+        "BSV probe CDW order parameter"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

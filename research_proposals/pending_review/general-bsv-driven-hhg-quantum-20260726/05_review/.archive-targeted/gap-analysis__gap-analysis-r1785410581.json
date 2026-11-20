@@ -1,0 +1,160 @@
+{
+  "meta": {
+    "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+    "focus_section": "（六）预期研究成果 / §2.8 预期成果 + 全文参考文献模块",
+    "review_round": 6,
+    "review_date": "2026-07-30",
+    "analysis_date": "2026-07-30",
+    "evidence_source": "05_review/critic-round-6.md",
+    "filter_rule": "仅保留需要外部文献/引文/检索证据支撑的论点；纯格式、纯分层映射、纯期刊定位、纯术语统一、纯风险分层、纯计数逻辑类问题已剔除",
+    "total_review_issues": 20,
+    "literature_gaps_extracted": 12,
+    "note": "本轮重新聚焦：以第 6 轮评审报告为唯一证据源，独立提取文献/引用/检索支撑缺口。"
+  },
+  "gaps": [
+    {
+      "claim": "预期成果 bullet 1 把'双光路干涉、参数依赖性 mapping、QEF 标定'并列称为'三条新方案'，但全章未引用任何 BSV/经典光对照光路方法学的同行基准（强度/脉宽/聚焦/光子统计匹配范式），无法证明'建立实验方法'在何种程度上高于已有报道",
+      "missing_evidence": "需要补:(1) BSV 光子统计 g^{(2)}(0)、r、g^{(2)}(τ) 标定的同行文献 (Spasibko 2012, Iskhakov 2012, Manceau 2017);(2) BSV 衰减器/电控位移台匹配经典光的工程类工作 (Chekhova 2015 综述、Allevi 2020);(3) 固体 HHG 双光路 BSV/经典对照的 2024-2025 最新报道 (Rasputnyi 2024, Boroumand 2025, Even Tzur 2024) 是否已建立同样范式。",
+      "search_keywords": [
+        "Spasibko Iskhakov BSV g2 photon statistics calibration",
+        "bright squeezed vacuum classical light matching protocol",
+        "BSV HHG two-arm interferometer comparison 2024 2025",
+        "attenuator displacement stage squeezed vacuum matching",
+        "Chekhova Allevi BSV experimental review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预期成果 bullet 1 把'QEF 标定'列入三条新方案之一，但全章未引用任何关于不确定度/重复性/系统误差分析的方法学文献，无法定义'QEF 标定完成'的验收条件",
+      "missing_evidence": "需要补:(1) HHG 谱仪能量/强度不确定度的标准方法 (VUV 标定文献、Lopez 2013、Dahlstrom 2013);(2) 量子计量中 Fisher 信息/Kelly 不确定度传播 (Pezze 2018 综述、Polino 2020);(3) 多脉冲统计平均的方差传播 (Bevington-Robinson 标准)。",
+      "search_keywords": [
+        "HHG spectrometer intensity uncertainty calibration",
+        "Fisher information squeezed light spectroscopy",
+        "photon counting statistics variance propagation HHG",
+        "Kelly uncertainty nonlinear optics",
+        "shot-by-shot HHG statistics error bar"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预期成果 bullet 2 主张发表 Nature Phys./PRL 1–2 篇（BSV-HHG 首例 + 量子指纹实验 + 探针方法学），但全章缺目标期刊近年在'squeezed light HHG / quantum light HHG / BSV HHG'主题上的实证基准（发文清单/命中率/同行评审周期），无法判断承诺的合理性",
+      "missing_evidence": "需要补:(1) 近 5 年 Nature Physics / PRL 在 squeezed light HHG、quantum light HHG 主题的发文清单与平均影响;(2) 同期强场/阿秒/量子光方向的 Nature Phys. 投稿命中率参考;(3) 综述论文拟投 PRL 的可行性参考 (PRL 综述政策与同类先例)。",
+      "search_keywords": [
+        "Nature Physics squeezed light high harmonic 2022 2023 2024",
+        "Physical Review Letters quantum light HHG",
+        "PRL bright squeezed vacuum HHG",
+        "Nature Physics publication rate strong-field quantum optics",
+        "PRL review article policy physical review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预期成果 bullet 2 主张'BSV-HHG 首例'，与已有 Rasputnyi 2024 (CLEO)/Boroumand 2025/Li 2019/2205.11161/Even Tzur 2024 等前沿文献的优先权边界未在参考文献中系统体现，'首例'既无体系限定也无提交前检索证据",
+      "missing_evidence": "需要补:(1) Rasputnyi 2024 CLEO 完整 proceedings 引用并核实是否已正式发表于期刊;(2) Boroumand 2025 (arXiv:2505.22536) 和 Li 2019 (arXiv:1908.07283) / Li 2022 (arXiv:2205.11161) 全文核读 (是否真用首例/QEF/Q_F 等价定义);(3) Even Tzur 2024 PRR 6, 023064 是否给出 QEF 等价指标;(4) 2025-2026 是否有 PRL/Optica/PNAS 跟进实验;(5) 优先权判据的方法论文献 (Garrison & Beveridge 2022)。",
+      "search_keywords": [
+        "Rasputnyi BSV HHG CLEO 2024 proceedings",
+        "Boroumand 2025 quantum sideband HHG theory",
+        "Li 2019 squeezed light visibility measurement",
+        "Even Tzur quantum state HHG formula",
+        "priority claim scientific first demonstration criteria"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预期成果 bullet 2 把'首例 + 量子指纹 + 探针方法学'压缩为 1–2 篇，但与已有 BSV/经典 HHG 文献中'首例论文'与'方法学论文'的实际拆分范式没有引用基础，论文主题切分与归类没有对照先例",
+      "missing_evidence": "需要补:(1) 强场量子光主题的论文 A/B 拆分范式 (Pisanty 2019 综述、Lein 2007 评估);(2) 探针方法学 vs 首例原创在强场物理顶刊的常见打包方式 (Krausz & Ivanov 2009 Rev. Mod. Phys.、Caldirola 综述);(3) NSFC 对方法学论文/综述的归类规范。",
+      "search_keywords": [
+        "strong-field methodology paper vs original research",
+        "HHG probe methodology review original paper distinction",
+        "Krausz Ivanov attosecond review 2009",
+        "NSFC methodology paper classification guidelines",
+        "Pisanty Lewenstein strong-field review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "预期成果 bullet 3 称'QEF 三维度 + Q_F 全景图'，但 QEF（QEF_vis、QEF_yield^{(q_ref)}、QEF_yield^{(Σ)}）与 Q_F 的原始方法学锚点文献未引用，符号定义、层级关系与观测量分类无法被同行复核",
+      "missing_evidence": "需要补:(1) quantum enhancement factor / quantum fingerprint 在 HHG 领域的原始定义文献 (Li 2019, Boroumand 2025, Even Tzur 2024);(2) 量子光场干涉可见度的同行工作 (Manceau 2017、Iskhakov 2012);(3) 经典 HHG 探针可推广性论文 (Ghimire 2011, Bauer & Hansen 2024 综述);(4) 量子测量中 fidelity / Fisher information 类比指标。",
+      "search_keywords": [
+        "Li 2019 quantum enhancement factor HHG definition",
+        "Boroumand 2025 quantum sideband HHG QEF",
+        "Even Tzur Gorlach 2024 PRR quantum HHG fingerprint",
+        "Bauer Hansen HHG review 2024 multi-particle",
+        "Manceau Iskhakov BSV interferometric visibility"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预期成果 bullet 3 把'多体关联反演协议'列为必达成果，但 QEF 增强并不自动等同反演精度提升，且未引用任何关于多体反演对象选择（关联长度/激发寿命/序参量）、误差传递、identifiability 的方法学文献",
+      "missing_evidence": "需要补:(1) 多体态反演中的量子 Fisher 信息应用 (Cox 2016, Pezze 2018 综述、Polino 2020);(2) HHG 谱反演 Hubbard 模型参数的先例 (Sato 2023 PRR、Imai 2023、Murakami 2018 PRL);(3) No-Go / 不确定性传播的统计推断论文 (p-value vs Bayes 后验);(4) HHG 谱 shot-by-shot 反演方法学 (Hu 2024 PNAS 121, e2317656121 范式)。",
+      "search_keywords": [
+        "Fisher information many-body state tomography",
+        "Hubbard parameter retrieval HHG",
+        "quantum multiparameter estimation HHG",
+        "shot-by-shot HHG Bayesian inversion",
+        "identifiability nonlinear spectroscopy strong-field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预期成果 bullet 3 声称'可推广方法论'，但未引用任何关于'适用域'与'迁移验证'的方法学先例（留出样品、盲测、跨体系交叉验证），'可推广'目前是无法证伪的宣传语",
+      "missing_evidence": "需要补:(1) 强场/凝聚态探针跨材料迁移验证的同类工作 (Lucchini 2020、Lakhotia 2020、Sainadh 2019);(2) 量子计量中'留出样品 / 盲测'的验证范式;(3) HHG 谱可推广性方法学论文 (Schubert 2014、Plaja 2017 综述)。",
+      "search_keywords": [
+        "HHG probe transferability cross-material validation",
+        "blind sample strong-field spectroscopy validation",
+        "Lucchini HHG migration material",
+        "Schubert HHG reproducibility 2014",
+        "Plaja strong-field HHG review 2017"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "预期成果 bullet 3 把 TMDC + 莫尔超晶格 + Mott 列为'三类对照体系'，但三类体系与 BSV 探针的已有基准文献覆盖不全（尤其 Mott/强磁场条件依赖），无法证明反演协议的可行性",
+      "missing_evidence": "需要补:(1) TMDC (MoS2/WSe2) 的经典光 HHG 基线 (Liu et al. 2017 Nat. Phys.、Yoshida et al. 2022);(2) 扭转双层 MoS2 莫尔超晶格关联绝缘态的最新 HHG 范式 (Wu et al. 2024 arXiv:2311.16655 全文、Cao 2024 Nat. Phys. 莫尔);(3) Mott 绝缘体 (1T-TaS2、κ-(BEDT-TTF)2Cu[N(CN)2]Br) HHG 经典光文献 (Silva 2018 Nat. Photon.、Murakami 2018 PRL、Murakami 2021 PRR、Imai/Ikeda 等 2022-2024 更新);(4) BSV 探针已在哪些 Hubbard/Mott 体系做过先例 (若有)。",
+      "search_keywords": [
+        "Wu 2024 moire superlattice HHG correlated insulator",
+        "Silva Murakami Hubbard HHG theory review",
+        "1T-TaS2 high harmonic generation",
+        "Mott insulator BSV probe non-classical light",
+        "twisted bilayer MoS2 correlated insulator"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预期成果整体缺数据集、代码/软件、开放与复现计划，但申请书引用了 'Hu et al., PNAS 121, e2317656121 (2024)' shot-by-shot 关联分析范式，需要补该文献所代表的 HHG 数据共享/开放惯例，以及 FAIR 数据原则在 NSFC 项目中的对应物",
+      "missing_evidence": "需要补:(1) FAIR 数据原则与 NSFC 数据共享指南 2024-2026 版本;(2) Zenodo / Figshare / Materials Cloud 上典型 HHG 数据集元数据规范;(3) Nature / PRL 数据可用性政策原文;(4) HHG 实验常用开放软件 (tddft-lcao、SBE 求解器、octopus) 的开源许可先例。",
+      "search_keywords": [
+        "NSFC data sharing policy 2024 2025 2026",
+        "FAIR data high-harmonic generation dataset",
+        "Zenodo HHG dataset metadata",
+        "Nature data availability HHG policy",
+        "open source HHG simulation code license"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预期成果隐含专利/软件著作权维度，但全章缺任何关于'BSV-HHG 光路/QEF 标定协议/Q_F 反演算法'的可专利性 / 已授权专利案例引用，无法判断是否真有新颖性可申请",
+      "missing_evidence": "需要补:(1) USPTO/CNIPA/Google Patents 检索 squeezed vacuum nonlinear optics patent;(2) high harmonic probe calibration patent 先例;(3) 非经典光光谱专利与软件著作权案例;(4) 强场物理专利与基础研究开放惯例的政策讨论 (LIT 2020, Nature Comment)。",
+      "search_keywords": [
+        "squeezed vacuum nonlinear optics patent USPTO",
+        "high harmonic probe calibration patent CNIPA",
+        "non-classical light spectroscopy IP filing",
+        "quantum HHG patent 2023 2024 2025",
+        "open science strong-field physics licensing"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "全文缺独立'参考文献'模块（标准模块完全缺失），正文虽有作者—年份/期刊片段，但不能替代规范参考文献表，关键论断无法系统追溯，且与'首例'优先权声明相关的检索证据（截止日期、检索数据库、关键词、检索结果）也未在文中归档",
+      "missing_evidence": "需要补:(1) NSFC 2024-2026 推荐参考文献格式与 DOI/arXiv 标注规范;(2) 已有 BSV-HHG 文献的最近更新检索 (Web of Science / Scopus / arXiv 截止 2026-07);(3) 优先权主张检索核查清单的具体做法 (Garrison & Beveridge 2022、Nature 优先权政策);(4) 申请书全文每条引文的完整 metadata 补全（作者、题名、期刊、卷、页/文章号、年份、DOI/arXiv）。",
+      "search_keywords": [
+        "NSFC 2026 proposal reference format DOI arXiv",
+        "BSV HHG 2024 2025 2026 literature search WoS Scopus",
+        "priority claim scientific first demonstration criteria",
+        "Web of Science bright squeezed vacuum HHG citation report",
+        "arXiv search quantum light HHG 2026"
+      ],
+      "priority": "high"
+    }
+  ]
+}

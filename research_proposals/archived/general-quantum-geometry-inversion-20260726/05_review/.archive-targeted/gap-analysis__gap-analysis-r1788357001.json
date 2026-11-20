@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV驱动固体HHG相比经典光场的量子增强效应缺乏系统性实验验证",
+      "missing_evidence": "缺乏在相同条件下直接比较BSV与经典光场驱动HHG效率的实验数据，以及量子增强因子QEF的定量实验标定",
+      "search_keywords": [
+        "bright squeezed vacuum HHG enhancement factor experimental",
+        "BSV driven solid state high harmonic quantum enhancement",
+        "quantum enhancement factor HHG experimental validation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子几何张量(QGT)反演精度与实验不确定度的基准数据缺失",
+      "missing_evidence": "缺乏量子几何张量（Berry曲率+量子度规）从HHG光谱反演的实验精度评估，以及Fisher信息量化的参数估计误差基准",
+      "search_keywords": [
+        "quantum geometry tensor reconstruction accuracy experimental",
+        "Berry curvature HHG inversion uncertainty experimental",
+        "Fisher information quantum geometry parameter estimation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子光驱动HHG中光子统计特性与材料响应耦合的完整理论-实验链路未建立",
+      "missing_evidence": "缺乏端到端的量子光-HHG光谱学框架，从BSV光子数分布到谐波产额再到量子几何提取的完整实验演示",
+      "search_keywords": [
+        "end-to-end quantum HHG spectroscopy pipeline",
+        "bright squeezed vacuum solid HHG full chain experiment",
+        "quantum light driven attosecond spectroscopy complete chain"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "半导体布洛赫方程(SBE)在量子光驱动强场区域的适用边界缺乏实验验证",
+      "missing_evidence": "缺乏SBE在BSV强场（峰值场强±1 V/Å）下的有效性验证，以及带间耦合饱和效应的实验判据",
+      "search_keywords": [
+        "semiconductor Bloch equation validity strong field BSV",
+        "SBE breakdown criterion bright squeezed vacuum solid HHG",
+        "interband coupling saturation strong field limit experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "量子增强HHG谱学方法的普适性验证（跨材料体系）缺失",
+      "missing_evidence": "缺乏在多种材料（LiNbO₃、a-Si以外）上验证量子光驱动HHG可辨识性的实验，以及跨材料体系的可迁移性数据",
+      "search_keywords": [
+        "quantum enhanced HHG cross-material validation",
+        "BSV driven HHG different semiconductors efficiency",
+        "quantum HHG spectroscopy material robustness"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

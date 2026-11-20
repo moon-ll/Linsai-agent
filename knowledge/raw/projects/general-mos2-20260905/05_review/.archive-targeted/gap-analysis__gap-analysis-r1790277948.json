@@ -1,0 +1,35 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.0 L9 句中\"Patra 五构型罗列\"作为扭转 MoS₂/WSe₂ 异质结 χ⁽²⁾ 张量激活规律的引用基础",
+      "missing_evidence": "缺少 Patra Cocchi 关于 twisted homobilayer MoS₂ 五构型 SHG/DFT-Wannier 工作（chi_xxx 张量、几何锁定 φ₀、HHG/SHG 阶数共享对称性来源）的原文支撑",
+      "search_keywords": [
+        "Patra Cocchi twisted MoS2 SHG DFT-Wannier",
+        "twisted homobilayer MoS2 chi_xxx tensor five configurations",
+        "twisted MoS2 SHG geometric locking phi_0"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 L19/L21 \"Peterka 非单调曲线属同一类\"基线引用 + L21 提及 C₃/C₃v/D₃d 逐段重拟合的判据来源",
+      "missing_evidence": "缺少 Peterka 关于扭转 MoS₂/WSe₂ HHG/PL 非单调随扭转角变化曲线的原始实验/理论文献，以及 D3d vs D3h 点群 HHG 选择规则差异的判据来源",
+      "search_keywords": [
+        "Peterka twisted MoS2 WSe2 high harmonic non-monotonic",
+        "D3d D3h point group HHG selection rule MoS2",
+        "twisted homobilayer TMD C3 symmetry mirror plane SHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2 L41 \"TBG >0.15 且超 2σ→重新检视\"+\"统计不确定度以下→接受零假设\"+\"角度与失谐联合结构\"统计判据基线",
+      "missing_evidence": "缺少 TBG 谐波各向异性基线、2σ 噪声阈值的实验标定来源，以及角度与失谐可分离性的统计推断依据",
+      "search_keywords": [
+        "twisted bilayer graphene HHG anisotropy baseline 2 sigma",
+        "TBG magic angle HHG noise floor harmonic yield",
+        "angle detuning separability joint structure harmonic generation"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

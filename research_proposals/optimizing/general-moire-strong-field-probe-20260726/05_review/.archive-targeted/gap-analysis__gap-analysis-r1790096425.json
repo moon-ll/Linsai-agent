@@ -1,0 +1,56 @@
+{
+  "gaps": [
+    {
+      "claim": "Shan 等 2021 年在层状磁绝缘体 MnPSe₃ 中实验演示 Floquet 周期驱动对光学非线性的巨调制（>30%）",
+      "missing_evidence": "[15] 原文 arXiv:2206.08385 摘要需核实，确认是 MnPSe₃ 实验工作而非电荷序理论预言；需找到原文中具体的调制幅度数值（>30%）与周期驱动实验条件的出处",
+      "search_keywords": [
+        "Shan MnPSe3 Floquet optical nonlinearity 2021",
+        "arXiv:2206.08385 coherent control optical nonlinearity",
+        "van der Waals magnetic insulator Floquet modulation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ikeda [12] 报告的莫特能隙 Δ_Mott 数值",
+      "missing_evidence": "原文 arXiv:2508.00296v2 中 Δ_Mott=1.76 eV 单值（约 1.5–1.8 eV 区间）的具体实验条件与温度依赖（260 K 约 1.5 eV），以及与申请书 §1.5 中 50–400 倍对比口径的精确数值依据",
+      "search_keywords": [
+        "Ikeda 1T-TaS2 DMFT Mott gap 1.76 eV",
+        "arXiv:2508.00296 TaS2 Mott insulator gap",
+        "1T-TaS2 DMFT Hubbard U260 K gap"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sun 等 2025 年 [28] 在莫尔强关联多体求解上的方法学参照",
+      "missing_evidence": "需核实 Sun/Niedermeier/Antão/Fumega/Lado (Aalto University) 2025 年工作的具体方法（自洽平均场、张量网络等）及其与本项目 R1 多体反演方法学的关联性，而非国内归属",
+      "search_keywords": [
+        "Sun Niedermeier Fumega Lado Aalto moire many-body 2025",
+        "self-consistent mean field moire Hubbard 2025",
+        "DOI 10.1103/krjp-mn4v moire correlated states"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔关联绝缘体能隙 Δ_CI 典型量级（5–20 meV 区间）",
+      "missing_evidence": "需找到 Lian 等 [19] 原文能否支撑区间端点（5 meV 与 20 meV）的实验/理论证据，以及其他莫尔体系能隙的横向比较数据，统一 §1.5 双口径问题",
+      "search_keywords": [
+        "Lian twisted bilayer graphene correlation gap meV",
+        "moire Mott insulator charge gap 5 20 meV",
+        "TBG correlated insulator gap ARPES tunneling spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.6 末「在本次检索范围内（截至 2026-09）尚未见报道」的优先权边界声明",
+      "missing_evidence": "需补充近 3 个月内（2026-06 至 2026-09）关于莫尔强场探测/莫尔 HHG 反演/莫尔 Floquet 工程 + 可测靶标对接的最新文献，确保优先权声明的真实性与边界准确性",
+      "search_keywords": [
+        "moire strong field probe 2026",
+        "moire high harmonic inversion 2026",
+        "Floquet engineering moire correlated insulator 2026",
+        "莫尔 高次谐波 反演 2026"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

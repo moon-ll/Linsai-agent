@@ -1,0 +1,25 @@
+{
+  "proposal_id": "general-phonon-hhg-20261101",
+  "cluster_id": "orphan-route-2026-11-07",
+  "clusters": [
+    "orphan-route-2026-11-07"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2610.18279-coherent-phonon-generation-from-prethermal-carrier-populatio",
+      "title": "Coherent Phonon Generation from Prethermal Carrier Populations in a Semiconductor",
+      "summary": "本文报道在半导体中由尚未热化（预热）的载流子布居直接驱动产生相干声子，证明晶格相干响应的时间尺度可短于载流子-载流子散射热化时间。声子驱动力被关联到瞬时非热电子布居而非热化后的电子温度，从而将超快载流子产生与非平衡晶格动力学在亚皮秒尺度上贯通。该结果为强场激发（如固体HHG场景）后利用相干声子诊断电子-晶格非平衡耦合提供了物理依据。",
+      "path": "knowledge/raw/papers/2026-2610.18279-coherent-phonon-generation-from-prethermal-carrier-populatio.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T10:21:18Z"
+    },
+    {
+      "source_id": "paper:2026-2601.21825-spectral-properties-of-high-order-harmonic-radiation-enhance",
+      "title": "Spectral properties of high-order harmonic radiation enhanced by XUV-driven electron-hole dynamics",
+      "summary": "系统分析了XUV+IR双色组合驱动下超越常规三步模型截止能量的高次谐波辐射的光谱特性：IR驱动的价带（价）电子与XUV脉冲预先激发产生的核空穴复合，可将谐波截止能量显著延展。研究发现该延展谐波的偶极相位对IR-XUV相对延迟及IR强度高度敏感，而啁啾XUV脉冲时间相干性的下降会显著抑制谐波信号强度。上述结果为实验上延展谐波的能量校准与核空穴通道的机制甄别提供了定量参考。",
+      "path": "knowledge/raw/papers/2026-2601.21825-spectral-properties-of-high-order-harmonic-radiation-enhance.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T16:45:07Z"
+    }
+  ]
+}

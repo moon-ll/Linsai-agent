@@ -1,0 +1,85 @@
+{
+  "gaps": [
+    {
+      "claim": "α-MnTe自旋劈裂的合并口径0.3–0.8 eV（[2,15]）",
+      "missing_evidence": "缺少Krempaský[2]与Osumi[15]两文献合并口径0.3–0.8 eV的具体实验/理论依据及能带K-path细节",
+      "search_keywords": [
+        "Krempaský MnTe spin splitting ARPES 0.3 0.8 eV",
+        "Osumi PRB 109 115102 MnTe anisotropic spin splitting Γ-K Γ-M",
+        "MnTe spin-resolved ARPES d-wave band splitting value"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "α-MnTe中d波自旋纹理的实验确认（Krempaský 2024）",
+      "missing_evidence": "需要Krempaský 2024 Nature α-MnTe自旋分辨ARPES测量的原始数据/图（d波vs g波判据）",
+      "search_keywords": [
+        "Krempaský Nature 2024 MnTe spin-resolved ARPES d-wave",
+        "MnTe alternating spin texture experiment Krempaský",
+        "α-MnTe spin splitting nodal plane experimental verification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Šmejkal 2022 理论预言的d/g波形分类及非相对论自旋劈裂机制",
+      "missing_evidence": "需要Šmejkal[1] 2022提出altermagnet分类的原始理论框架及d-wave/g-wave判据",
+      "search_keywords": [
+        "Šmejkal altermagnet spin group theory 2022 d-wave g-wave",
+        "altermagnet crystal symmetry protected spin splitting theory",
+        "nonrelativistic spin splitting altermagnet Šmejkal Science Advances 2022"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb自旋劈裂值（Long[11] 2026或类似）作为序参量",
+      "missing_evidence": "缺少CrSb自旋劈裂能带测量数据及实球谐函数Y₄⁻³节点结构与CrSb能带对称性对应的文献依据",
+      "search_keywords": [
+        "CrSb spin splitting ARPES g-wave altermagnet",
+        "CrSb g-wave spin splitting magnitude eV",
+        "real spherical harmonics Y4-3 node structure CrSb band"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "波型归属分歧（Usanov[20]、Dal Din[32]、Osumi[15]三家不同结论）",
+      "missing_evidence": "缺少Usanov、Dal Din、Osumi三篇关于α-MnTe自旋劈裂波型判定不一致的原文及具体证据",
+      "search_keywords": [
+        "Usanov MnTe spin splitting wave assignment",
+        "Dal Din α-MnTe altermagnet d-wave g-wave assignment",
+        "Osumi MnTe d-wave spin splitting controversy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Werner[3]、Mizuno[12]、Haag[13]等理论框架对altermagnet的预言",
+      "missing_evidence": "缺少Werner、Mizuno、Haag三篇关于altermagnet非线性光学/瞬态自旋极化的理论预测原文",
+      "search_keywords": [
+        "Werner altermagnet nonlinear optical response theory",
+        "Mizuno altermagnet spin group selection rule",
+        "Haag MnTe altermagnet ultrafast spin polarization theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "强场激光与物质相互作用中高次谐波作为兼具时间分辨与结构敏感探针的论证",
+      "missing_evidence": "缺少高次谐波光谱学作为凝聚态结构探针（Berry曲率、能带、对称性）的代表性综述/引文",
+      "search_keywords": [
+        "high harmonic spectroscopy solid state Berry curvature review",
+        "HHG as structural probe condensed matter review",
+        "Ghimire solid HHG structure sensitivity review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "气相HHG三步模型作为对比基线",
+      "missing_evidence": "缺少Lewenstein/Corkum等气相HHG三步模型的标准引文（范本中通常用[1-8]范围标注的经典文献）",
+      "search_keywords": [
+        "Corkum three-step model HHG",
+        "Lewenstein HHG three-step model recollision",
+        "three-step model attosecond strong field approximation"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

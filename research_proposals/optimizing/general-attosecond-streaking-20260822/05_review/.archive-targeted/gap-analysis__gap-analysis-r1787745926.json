@@ -1,0 +1,43 @@
+{
+  "gaps": [
+    {
+      "claim": "Peschel 等人[11]的截面数据被描述为实验数据，实际为 TDSE 模拟数据",
+      "missing_evidence": "需明确区分 Peschel 等人工作为模拟研究而非实验，需补充真实水窗能区多通道电离截面的实验测量数据或标注该数据来源为理论模拟",
+      "search_keywords": [
+        "water window multi-channel ionization cross section experimental data",
+        "soft X-ray photoionization cross section measurement carbon K-edge",
+        "284-410 eV ionization cross section rare gas experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "碳 K 边附近光电离截面的多通道贡献可达总量的 30% 以上",
+      "missing_evidence": "该 30% 阈值缺乏具体文献支撑，需补充原始测量/计算文献",
+      "search_keywords": [
+        "carbon K-edge multi-channel photoionization percentage 30%",
+        "water window 284-410 eV multi-channel contribution fraction",
+        "N 1s ionization multi-channel cross section measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 R2 中引用文献 [25] 描述为'近年工作'但未给出具体年份或检索范围",
+      "missing_evidence": "需补充该引用的具体发表年份及检索策略说明",
+      "search_keywords": [
+        "attosecond streaking multi-channel correction 2023 2024 2025",
+        "FROG-CRAB multi-channel TDSE validation recent work"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.4 跨能区段落使用'尚未见报道'仅基于 Web of Science 单库检索",
+      "missing_evidence": "需补充更全面的数据库检索说明（Web of Science + Scopus + arXiv 等），或修正为'目前检索范围内尚未见系统性研究'",
+      "search_keywords": [
+        "cross-energy attosecond pulse reconstruction methodology gap",
+        "multi-channel attosecond streaking validation systematic review",
+        "soft X-ray attosecond metrology unified framework gap"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

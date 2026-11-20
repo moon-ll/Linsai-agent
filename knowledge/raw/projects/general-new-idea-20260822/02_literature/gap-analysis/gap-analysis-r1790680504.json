@@ -1,0 +1,127 @@
+{
+  "gaps": [
+    {
+      "claim": "MCMC/Gelman-Rubin 作为参数反演工具的选用",
+      "missing_evidence": "清单 2 指出该方法仅称'常用工具'，缺少为何选用 MCMC 而非其他反演方法（贝叶斯神经网络、遗传算法、模拟退火等）的论证文献支撑",
+      "search_keywords": [
+        "MCMC parameter inversion condensed matter",
+        "Gelman-Rubin convergence diagnostic",
+        "Bayesian inference vs genetic algorithm inverse problem",
+        "Markov chain Monte Carlo spectroscopy fitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Krempaský 相关具名论述（§2、§3，共 2 处）",
+      "missing_evidence": "正文出现具名论述但未挂 [7] 角标，需追溯 Krempaský 原始工作以提供引用支撑",
+      "search_keywords": [
+        "Krempaský spin texture photoemission",
+        "Krempaský g-wave symmetry",
+        "Krempaský spin-resolved ARPES"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Osumi 相关具名论述（§5.1、§5.4、§6.2，共 4 处）",
+      "missing_evidence": "正文出现具名论述但未挂 [13] 角标，4 处引用密度高，必须逐处回溯原始文献",
+      "search_keywords": [
+        "Osumi PRB 109 115102",
+        "Osumi 0.3 eV gap",
+        "Osumi spin-orbit coupling band structure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Amin 相关具名论述（§2 或 §3）",
+      "missing_evidence": "具名论述但缺少 [25] 角标引用",
+      "search_keywords": [
+        "Amin spin splitting topological",
+        "Amin Kerr rotation",
+        "Amin nonlinear spectroscopy material"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mizuno 相关具名论述（§3）",
+      "missing_evidence": "具名论述但缺少 [18] 角标引用，疑涉及产额或多光子激发方法",
+      "search_keywords": [
+        "Mizuno second harmonic generation yield",
+        "Mizuno multiphoton excitation",
+        "Mizuno nonlinear spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ly 相关具名论述（§3 或 §5.1）",
+      "missing_evidence": "具名论述但缺少 [20] 角标引用",
+      "search_keywords": [
+        "Ly multiphoton resonance selection rule",
+        "Ly photocurrent g-wave",
+        "Ly nonlinear response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Liu 关于产额的具名论述（§3 或 §5.2）",
+      "missing_evidence": "具名论述但缺少 [3] 角标引用，且产额外推已被自认无直接文献，文献缺口与缺引叠加",
+      "search_keywords": [
+        "Liu photoemission yield second harmonic",
+        "Liu multiphoton yield benchmark",
+        "Liu SHG conversion efficiency"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Haag 相关具名论述（§6.2）",
+      "missing_evidence": "具名论述但缺少 [17] 角标引用，且该处嵌入创新点'现有局限'综述",
+      "search_keywords": [
+        "Haag theoretical model spin-orbit",
+        "Haag tight-binding g-wave",
+        "Haag existing limitations SHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Osumi 0.3 eV 能隙的 SOC 归因（§6.3）",
+      "missing_evidence": "问题 6 指出 Osumi 0.3 eV 能隙的 SOC 归因未核对原文，需反查 PRB 109, 115102 确认归属，避免张冠李戴",
+      "search_keywords": [
+        "PRB 109 115102 Osumi",
+        "Physical Review B 109 115102 spin-orbit",
+        "Osumi 2024 PRB band gap"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Werner 相关'现有局限'论述（嵌入创新点 §3）",
+      "missing_evidence": "创新点中嵌入 Werner/Mizuno/Haag 文献缺口综述，需回溯 Werner 原始工作以支撑'现有局限'的具体物理表现",
+      "search_keywords": [
+        "Werner multiphoton SHG g-wave limitation",
+        "Werner second harmonic existing limitation",
+        "Werner spin texture measurement constraint"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "产额、畴尺寸、κ、差分目标值四个关键量（§4 可行性 + §5.2 难点二）",
+      "missing_evidence": "清单 3 与问题 5 指出四量悬置预研、§4 却断言'可达性成立'，缺少同类材料/体系的参考文献作为可行性背书",
+      "search_keywords": [
+        "second harmonic generation yield benchmark material",
+        "antiferromagnetic domain size SHG",
+        "second harmonic susceptibility kappa reference",
+        "SHG differential signal benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "紧束缚模型以 g 波晶体对称性构造自旋劈裂项的输出（行 115，创新点一）",
+      "missing_evidence": "创新点中'偏振选择规则表与自旋极化率阶次序列'作为新方法输出，缺少与同领域已有偏振选择规则文献的对比支撑",
+      "search_keywords": [
+        "polarization selection rule second harmonic",
+        "spin polarization order parameter tight-binding",
+        "g-wave symmetry selection rule SHG"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

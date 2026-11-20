@@ -1,0 +1,65 @@
+{
+  "gaps": [
+    {
+      "claim": "Sun 等 QTCI 具名结论复现句（正文以作者名+具体结果陈述 Sun 团队成果，但句内无引文角标，位于 L23/L57/L67/L97/L117 五句之列）",
+      "missing_evidence": "Sun 团队关于 QTCI 的原始论文出处，需满足作者-年份-期刊-具名数值与正文复现一致；评审建议随句补挂角标（候选 [5]），对齐「首现句全挂」纪律",
+      "search_keywords": [
+        "Sun",
+        "QTCI",
+        "twisted bilayer graphene",
+        "moiré"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Lee 等多体效应具名复现句（陈述 Lee 团队多体/关联效应相关具体结果，句内无角标）",
+      "missing_evidence": "Lee 等多体效应的原始论文（评审已外部核验 [26]=TD-aGW 多体增强、Nat. Commun. 2024，表述吻合）；建议随句补挂角标（候选 [14]/[26]）",
+      "search_keywords": [
+        "Lee",
+        "many-body",
+        "TD-aGW",
+        "moiré correlated states",
+        "Nature Communications 2024"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Lian 30–40 meV 具名数值复现句（正文复现 Lian 等的 30–40 meV 能标，句内无角标）",
+      "missing_evidence": "Lian 等 Nat. Phys. 论文中 30–40 meV 能标（关联能隙/带宽类）的原始出处；建议随句补挂角标（候选 [23]）",
+      "search_keywords": [
+        "Lian",
+        "Nature Physics",
+        "30-40 meV",
+        "moiré",
+        "correlation gap"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Ikeda 1.76 eV 具名数值复现句（正文复现 Ikeda 等的 1.76 eV 数值，句内无角标；该值参与 1.76 eV/5–20 meV=352/88、1.5 eV 端=300/75 等程序化复算，溯源要求更高）",
+      "missing_evidence": "Ikeda 等给出 1.76 eV（驱动光子能量/阈值）的原始论文出处；建议随句补挂角标（候选 [12]）",
+      "search_keywords": [
+        "Ikeda",
+        "1.76 eV",
+        "high-harmonic generation",
+        "solid",
+        "nonperturbative"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.3 L55「国内多家单位已实现 ±0.05° 扭转角控制精度」能力断言（无具名单位、无角标）",
+      "missing_evidence": "国内机构实现 ±0.05° 扭转角控制精度的具名实验论文或公开报道；该值同时充当 ±0.02° 指标 4 处对照基线，来源必须可溯",
+      "search_keywords": [
+        "twist angle control",
+        "0.05 degree precision",
+        "twisted bilayer graphene",
+        "deterministic stacking",
+        "magic-angle fabrication",
+        "China"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

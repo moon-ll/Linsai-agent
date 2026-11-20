@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "round": 3,
+    "focus_section": "references.md（55 条）+ writer 修改 diff 核验",
+    "project_type": "general",
+    "files_reviewed": [
+      "critic-round-3-references.md",
+      ".monitor-view-r3.md",
+      ".monitor-diff-r3.md",
+      "04_proposal/sections/references.md"
+    ],
+    "independent_verifications_performed": [
+      "arXiv:2410.15503 abs 页（curl 直连）：v2（2026-03-21 修订）题名 = Information-theoretic perspective on energy conservation in high harmonic generation——writer 新题名逐字正确，critic [46] high 属实且已修复",
+      "arXiv:2508.00296 v1/v2 双版本：v1 旧题 = ...reflecting the sub-cycle evolution of the Mott transition...（critic 令回录者），v2（2026-08-13 修订）= High-harmonic generation during ultrafast melting of a Mott insulating state（与条目现值一致）——critic [10] high 系 v1 旧数据误报，writer 未照改是正确的",
+      "arXiv:2605.28236 abs 页：作者序 Stammer→Rivera-Dean→Kim→Chacón→Gao→Granados 与条目一致；提交人（From: Granados）≠ 首作——critic [9] medium 误报",
+      "CrossRef 10.1038/s41567-024-02678-8：Nat. Phys. 21:110-117，Kang/Kim/Qian/Neves/Ye/Jung…18 人作者链——writer [52] 升级著录五件套精确匹配",
+      "CrossRef 10.1038/s41563-026-02617-3：至今无卷/页（vol=None）——[4] 卷期系外部依赖，暂不可回填",
+      "CrossRef 10.1038/nphys1847：print 2011-02 / online 2010-12——条目按刊版 2011 著录合规，critic [24] 建议方向存疑",
+      "正文 §2.4.4（view L405）grep：'遵循 Wilkinson 等 2016 年[50]提出的…（FAIR）原则'——critic '[50] 无正文语境' 误报",
+      ".r3-arxiv-resp.json 工件解析：编号 9/10/46 三条 arXiv API 反查 JSONDecodeError（429 限流）——critic 误报集中于反查通道故障条目",
+      "references.md 程序扫描：55 条连续无缺口、† 预印本 16 条（29.1%）、工作日志残留 0 处",
+      "研究方案可执行性扫描（view L541-969）：阈值/判据/降级 167 处、样品 37 处、温区 36 处、DMFT/TRIQS 23 处；场强（W/cm²、MV/cm）0 处、脉宽（fs/飞秒）0 处、年度进度 0 处、机时预算 0 处"
+    ],
+    "standards_source": "/Users/ll/Desktop/LinSai-CoPilot/memory/nsfc-standards.json (project_types.general: 创新0.35/可行0.29/意义0.24/表达0.12)"
+  },
+  "monitor_independent_score": 0.79,
+  "monitor_dim_scores": {
+    "innovation": 0.85,
+    "feasibility": 0.78,
+    "rigor": 0.8,
+    "completeness": 0.7
+  },
+  "executability_score": 0.7,
+  "executability_issues": [
+    "研究方案无驱动光场参数口径：全文 0 处场强（W/cm²、MV/cm）与脉宽（fs/飞秒）数字，实验条件无法直接确定——立项依据引用的 Ikeda 红移基准（11 阶约 50 meV、1.7%）已入文，但未转化为本项目的场强/脉宽工作点（操作性五问之装置/序列问部分缺答）",
+    "无年度进度安排与机时/时间预算：方案各任务与技术指标节均无'第X年'计划与机时匹配（操作性五问之时间预算问未答，v7.0.2 口径下不算通过）",
+    "参考文献 55 条超 20-40 上限 15 条、† 预印本 16 条（29.1%）贴 30% 线：R1 critical→R2 52→55 反增→R3 仍 55，三轮未压缩（影响成品交付口径，非开工硬阻塞）"
+  ],
+  "writer_assessment": "本轮 4 处修改（[2][4][46][52]）经 monitor 独立反查全部正确，非表面修复：[46] 新题名与 arXiv v2（2026-03-21 修订）逐字一致；[52] 升级著录与 CrossRef 五件套（Nat. Phys. 21:110-117、18 人作者链、DOI 精确匹配）；[2] DOI 大小写与 [4] 过程日志残留均按 low 项修复到位。但 critic 返工清单五项仅完成②⑤及两条 low：④（删 [50] 并压总数至 ≤40）整项跳过——其中不删 [50] 因正文 §2.4.4 有真实 FAIR 挂钩语境属正确判断，但总数压缩是唯一跨三轮的实质未解决项；对 [10][9][50] 三条未采纳指令无 disposition 记录（沉默不执行恰为正确处理，但过程不可见、与怠工不可区分）。无杜撰、无占位符、无错误引用新增、无僵化模板迹象；修改量少而准，符合'接近达标时只做必要微调'的合理情形，唯总数压缩除外。",
+  "critic_assessment": "评审工作量真实：38 条 DOI 走 CrossRef CSL + 25 条 arXiv abs 页全量反查（工件 .r3-doi-resp.json/.r3-arxiv-resp.json 在案可复核），R2 对账 7 项'已解决'经 monitor 抽验全部准确，且抓到 [46] v1→v2 改题这一隐蔽真实问题（本轮最有价值发现，monitor 独立证实）与 [52] 应升级未升级。但 11 项中 3 项误报：[10]（high）基于 v1 旧题名，照其指令回录会把与当前 v2 一致的正确条目改错（最危险的误报类型）；[9] 混淆 arXiv 提交人与首作（abs 页作者序与条目一致）；[50] 漏检正文 §2.4.4 的 FAIR 挂钩语境。误报根源可定位：.r3-arxiv-resp.json 显示 9/10/46 恰为 arXiv API 429 限流失败（JSONDecodeError）后改抓 abs 页的条目，版本污染。评分 0.70 对 3 个误报项扣了分，实际状态略好于此；但'未达输出标准'的结论因总数超标真问题而成立，未放水。",
+  "writer_prohibitions": [
+    "条目总数压缩连续三轮未执行：R1 critic 标 critical 要求压至 40 内、R2 由 52 反增至 55、本轮返工清单④明示'删 [50] 后压至 ≤40'仍整项跳过（55 条、†16 条 29.1% 贴线）——唯一实质跨轮未解决项",
+    "对未采纳的 3 条 critic 指令（[10][9][50]）未留 disposition/核实记录：实际不改均为正确处理（critic 误报），但无记录时沉默不执行与消极怠工不可区分，且导致④的真实部分（压总数）被连带跳过"
+  ],
+  "critic_prohibitions": [
+    "[10] high 误报：令回录的'原题' High harmonic generation reflecting the sub-cycle evolution of the Mott transition under a mid-infrared electric field 实为 v1（2025-08-01）旧题；条目现值与当前 v2（2026-08-13 修订）题名 High-harmonic generation during ultrafast melting of a Mott insulating state 完全一致，照办将把正确条目改错。根源：该条 arXiv API 反查失败（.r3-arxiv-resp.json JSONDecodeError），abs 页抓取混入旧版数据",
+    "[9] medium 误报：arXiv:2605.28236 abs 页作者序即为 Stammer→Rivera-Dean→Kim→Chacón→Gao→Granados，与条目一致；提交人（From: Granados）≠ 首作，'首作存疑'不成立",
+    "[50] medium 误报：正文 §2.4.4（R3 任务 3 HMG-Schema-1.0）明确写有'遵循 Wilkinson 等 2016 年[50]提出的可发现、可访问、可互操作、可复用（FAIR）原则'，'正文无 FAIR/数据管理语境'与磁盘文本不符（三章节 grep 漏检）",
+    "[24] low 建议方向存疑：条目按刊版著录（CrossRef print 2011-02、vol 7:138-141），引文规范应取刊版年 2011；建议改 2010（在线先行年）与规范相反——低危但会把对的改错"
+  ],
+  "writer_suggested_delta": 3,
+  "critic_suggested_delta": 2,
+  "collusion_risk": "none",
+  "negative_feedback": false,
+  "overall_assessment": "无串通、无通胀：critic 0.50→0.70 升分对应可独立核实的质量提升（R2 的 [45] 作者链虚构已按真身修复，monitor 抽验 González-Monge/Willemann/Feist 属实；两条 high 中 [46] 真且已修复）。writer 修改少而准——4 处经独立反查全对，跳过的 3 条恰为 critic 误报（不照改反而保住正确条目），符合'接近达标时必要微调'的合理情形；唯一实质缺陷是总数压缩三轮未动。critic 真问题抓得准（[46] v2 改题极隐蔽）、误报也集中（3/11），全部可归因于 arXiv API 限流后的版本污染，建议下轮反查强制以 abs 页当前版本为准并核对 last revised 日期、对 API 失败条目标注'未核验'而非降级采信。当前参考文献真实性风险已解除；距 0.85 输出门槛的剩余项：① 条目 55→≤40 压缩（最高优先，三轮积欠）；② [4] 卷期（外部依赖，投稿前回填）。可执行性 0.70：方法学逻辑链与判据体系完备（Go/No-Go×阈值×降级 167 处、样品/温区/算法栈具体），但激光场强/脉宽口径与年度机时预算两处补齐后方可直接开工。"
+}

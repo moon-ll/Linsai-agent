@@ -1,0 +1,67 @@
+{
+  "gaps": [
+    {
+      "claim": "references.md 声称全部 28 篇已 verify，但 6 条关键引文与 CrossRef 外部数据库存在归属错误（Nikola 2021 / Hu & Meng PNAS 2024 / Xu & Zhou npj QM 2024 / Zhou Nature 2023 / Heide Nature Physics 2024 / Qiu Nat Commun 2024）",
+      "missing_evidence": "缺乏针对这 6 条引文的 CrossRef/DOI 外部权威数据库核查记录与更正后的正确归属（正确作者、期刊、卷期、年份）；需要原始一手论文 PDF 或 DOI 链接以替换错误归属",
+      "search_keywords": [
+        "Nikola 2021 moiré high harmonic generation DOI",
+        "Hu Meng PNAS 2024 moiré attosecond verification",
+        "Xu Zhou npj Quantum Materials 2024 twisted bilayer verify",
+        "Zhou Nature 2023 strong field moiré CrossRef",
+        "Heide Nature Physics 2024 moiré nonlinear CrossRef",
+        "Qiu Nature Communications 2024 moiré HHG verify"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "joya_arxiv_2026 标注 arXiv:2608.02384，编号符合 YYMM.NNNNN 规范但未注明发表状态、未给出正文使用位置、未在 references.md 中说明该文献在'区分微扰 SHG 与强场 HHG'上的差异化作用",
+      "missing_evidence": "缺乏该 arXiv 编号的发表状态核查（是否已被期刊接收/仍在预印本），缺乏该论文具体内容细节以确认其确实讨论了 SHG vs HHG 区分",
+      "search_keywords": [
+        "arXiv 2608.02384 joya publication status",
+        "joya 2026 perturbative SHG strong field HHG distinction",
+        "moiré SHG versus high harmonic generation review 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md 自称'内部 verify 与 CrossRef 一致'，但前轮 round-6 发现的 ≥6 条 critical 归属错误在 r10/r11 重构中仍未触及，方法学上缺乏外部权威数据库核查环节",
+      "missing_evidence": "缺乏系统性的 CrossRef / DOI.org / Semantic Scholar 外部权威数据库核查流程与每条引文的核验证据（DOI 解析截图、CrossRef 元数据返回记录）",
+      "search_keywords": [
+        "CrossRef API DOI verification tool",
+        "NSFC proposal citation verification methodology",
+        "CrossRef metadata bibliographic check workflow"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md 统计信息存在内部不一致：行 134 称'2024-2026 最新成果 15 篇'，行 3 称'16 篇'，相差 1 篇对应 joya_arxiv_2026 是否纳入最新成果的口径差异",
+      "missing_evidence": "缺乏 28 篇引文的精确发表年份分类清单，以及'最新成果'的统一定义（是否包含预印本/是否包含 2024-2026 已正式发表的论文）",
+      "search_keywords": [
+        "NSFC 参考文献时效性统计规范",
+        "面上项目 最新研究成果 统计口径"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "references.md 行 104/105/109/114/118 标注为'备选（建议引用）'的 7 条引文（xu_morimoto_nat_rev_phys_2021、wang_chu_liu_cps_2023、bistritzer_macdonald_pnas_2011、zhang_nat_mater_2023、pisanty_prl_2019、vampa_nature_2015 等）在 rationale.md / content.md / scheme.md 中均无 CITE 标签使用，构成冗余条目",
+      "missing_evidence": "需要决定保留这 7 条引文则必须找到正文中的使用位置（如 Berry 曲率综述、莫尔超晶格基础理论、强场 HHG 奠基性工作等论点），或删除以避免 NSFC 评审专家质疑'为什么列了不用'",
+      "search_keywords": [
+        "Bistritzer MacDonald 2011 PNAS moiré continuum model citation usage",
+        "Vampa 2015 Nature HHG linker theory citation",
+        "Pisanty 2019 PRL HHG gauge invariant citation",
+        "Xu Morimoto 2021 Nature Reviews Physics nonlinear geometry",
+        "nonlinear Hall effect Berry curvature moiré review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "正文 46 处 CITE 标签与 references.md 28 条标签的闭环核验，但 review 报告未明确给出每条 CITE 的真实文献指针，需要确认每条 CITE 是否能精确定位到 references.md 的对应条目",
+      "missing_evidence": "缺乏正文 46 处 CITE 标签与 references.md 28 条条目的完整双向映射表（每条 CITE 对应哪条 references 条目，反之每条 references 条目被哪些 CITE 引用）",
+      "search_keywords": [
+        "NSFC proposal CITE bibliography bidirectional mapping",
+        "citation graph completeness check NSFC"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV驱动的HHG产生机制及与相干态驱动的差异",
+      "missing_evidence": "缺乏BSV驱动HHG的实验或理论原创文献支撑（仅有1篇[1]引用），缺少与经典驱动HHG效率对比的量化数据",
+      "search_keywords": [
+        "bright squeezed vacuum driven high harmonic generation",
+        "BSV HHG solid",
+        "squeezed light high harmonic generation experiment",
+        "quantum driving field HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SBE-Q模型在固体多带系统中的推广及与气体HHG框架的区别",
+      "missing_evidence": "缺乏SBE-Q（SBE quantum）模型在固体多带HHG中的原始文献支撑，对气体[2]框架的推广边界缺乏对比性引用",
+      "search_keywords": [
+        "SBE-Q model solid HHG",
+        "quantum trajectory semiconductor Bloch equations",
+        "solid-state strong-field Bloch equation multi-band",
+        "two-band model HHG semiconductor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TMDC无反演对称下偶次谐波通道的存在性及强度",
+      "missing_evidence": "§2.2声明7–13阶奇次谐波观测窗口，但§2.3用q=8偶次作算例，缺少TMDC无反演对称系统偶次谐波存在的文献依据",
+      "search_keywords": [
+        "MoS2 even-order harmonic generation",
+        "TMDC second harmonic HHG broken inversion symmetry",
+        "even-order harmonics transition metal dichalcogenide",
+        "monolayer MoS2 parity selection rule HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "g(2)(0)双配置（纠缠≈1 vs 经典=1）作为HHG驱动光源的可行性",
+      "missing_evidence": "缺乏BSV源g(2)(0)可调节至纠缠上限并稳定驱动固体的实验先例",
+      "search_keywords": [
+        "g2 zero-delay squeezed light characterization",
+        "BSV photon statistics solid HHG driver",
+        "bright squeezed vacuum generation high-flux",
+        "sub-Poissonian super-Poissonian HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "q·1.55 eV量级作为TMDC HHG偶次谐波能量判据的物理依据",
+      "missing_evidence": "缺少MoS2/WSe2等TMDC多带间能级差≈1.5 eV的能带结构文献支撑",
+      "search_keywords": [
+        "MoS2 bandgap monolayer 1.55 eV",
+        "TMDC band structure 1.5 eV interband",
+        "MoS2 monolayer direct gap 1.8 eV",
+        "transition metal dichalcogenide valence band splitting"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Q_F非零机制（双带量子化对|g^(2)|增益的补偿）",
+      "missing_evidence": "缺乏Q_F作为可量化指标在HHG中使用的先例文献，缺少双光路干涉相消方案提升|g^(2)|的信噪比对比数据",
+      "search_keywords": [
+        "g2 enhancement balanced homodyne HHG",
+        "squeezed state enhancement interferometric detection",
+        "two-path interference squeezing measurement",
+        "Q factor high harmonic generation quantum correlation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV光场应用于固体HHG的国际同行进展（对比定位）",
+      "missing_evidence": "缺少BSV驱动HHG的最新国际同行工作（2024-2026），用以定位本项目的原创性边界",
+      "search_keywords": [
+        "bright squeezed vacuum HHG 2024",
+        "quantum light HHG solid 2025",
+        "BSV high harmonic review",
+        "non-classical light strong-field ionization HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "单层MoS2 HHG实验先例与计数率依赖的预研可行性",
+      "missing_evidence": "Liu等[6]单层MoS2 HHG实验的原文细节（驱动波长、强度、计数率）需进一步核实与引用扩展",
+      "search_keywords": [
+        "Liu MoS2 monolayer high harmonic generation",
+        "monolayer MoS2 HHG mid-infrared",
+        "MoS2 harmonic yield experimental",
+        "TMDC HHG driver wavelength fluence"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

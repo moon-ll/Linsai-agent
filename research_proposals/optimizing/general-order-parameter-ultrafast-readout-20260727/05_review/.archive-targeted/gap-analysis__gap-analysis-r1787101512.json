@@ -1,0 +1,87 @@
+{
+  "gaps": [
+    {
+      "claim": "Fuchs MnTe自旋极化高次谐波产生的实验观测",
+      "missing_evidence": "该论断以纯arXiv文本形式提及，未分配[N]编号引用，违反round-4 medium-7要求",
+      "search_keywords": [
+        "Fuchs MnTe spin-polarized high harmonic generation",
+        "MnTe altermagnet HHG experimental",
+        "Fuchs 2024 MnTe ultrafast magneto-optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Schüle交变磁体非线性光学理论",
+      "missing_evidence": "该论断以纯arXiv文本形式提及，未分配[N]编号引用，违反round-4 medium-7要求",
+      "search_keywords": [
+        "Schüle altermagnet nonlinear optics",
+        "Schüle HHG altermagnet theory",
+        "altermagnet nonlinear optical response theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Weber交变磁体高次谐波理论",
+      "missing_evidence": "该论断以纯arXiv文本形式提及，未分配[N]编号引用，违反round-4 medium-7要求",
+      "search_keywords": [
+        "Weber altermagnet high harmonic generation",
+        "altermagnet HHG theory Weber",
+        "alternating magnet harmonic generation theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "McCarter交变磁体理论",
+      "missing_evidence": "该论断以纯arXiv文本形式提及，未分配[N]编号引用，违反round-4 medium-7要求",
+      "search_keywords": [
+        "McCarter altermagnet theory",
+        "altermagnet magnetic order HHG McCarter",
+        "McCarter 2024 2025 altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Horstmann交变磁体高次谐波实验",
+      "missing_evidence": "该论断以纯arXiv文本形式提及，未分配[N]编号引用，违反round-4 medium-7要求",
+      "search_keywords": [
+        "Horstmann altermagnet HHG",
+        "Horstmann high harmonic generation experiment",
+        "altermagnet ultrafast optics Horstmann"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb超快激光损伤阈值",
+      "missing_evidence": "缺乏CrSb材料在飞秒激光近红外波段下的损伤阈值实验数据，需独立于Mandal之外的文献支撑",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser ablation",
+        "CrSb strong field optical excitation stability",
+        "MnTe femtosecond damage threshold altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "自旋flop场强的独立文献支撑",
+      "missing_evidence": "仅引用Šmejkal的工作，缺乏其他独立实验/理论组给出的自旋flop场强数据",
+      "search_keywords": [
+        "spin flop field altermagnet CrSb",
+        "altermagnet magnetic phase transition critical field",
+        "CrSb spin flop experimental measurement",
+        "Šmejkal spin splitting altermagnet experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "半导体布洛赫方程(SBE)在强场下的 validity range (V/Å量级)",
+      "missing_evidence": "缺乏SBE在强场极限下适用性的系统验证文献，需说明V/Å场强下SBE仍有效的理论/实验依据",
+      "search_keywords": [
+        "semiconductor Bloch equation strong field validity",
+        "SBE breakdown V/Angstrom solid HHG",
+        "Keldysh parameter solid high harmonic validity range",
+        "interband coupling saturation strong field limit"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

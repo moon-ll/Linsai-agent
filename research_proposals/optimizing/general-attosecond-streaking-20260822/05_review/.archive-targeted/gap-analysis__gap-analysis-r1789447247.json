@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale L9：「2010年Goulielmakis等人在《Nature》报告条纹测量所记录的不只是脉冲包络，而是光电离释放电子波包的完整量子谱相位」——[1]实为Kr离子阿秒瞬态吸收(ATAS)测密度矩阵，被错挂为条纹测量",
+      "missing_evidence": "需要区分阿秒瞬态吸收(ATAS)与阿秒条纹(attosecond streaking)两类方法的标志性文献：要么换Itatani[29]承担streaking论述，要么改写为ATAS并补streaking原始文献（Kienberger 2004 Nature / Goulielmakis 2004 Science 等）",
+      "search_keywords": [
+        "Itatani attosecond streaking 2004 Nature",
+        "Goulielmakis attosecond streak camera 2004 Science measurement",
+        "Kienberger single attosecond pulse streaking",
+        "attosecond transient absorption vs streaking difference",
+        "Goulielmakis 2010 Nature density matrix krypton"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L27：「以氦作为探测气体」——与content L9「2017年氪条纹数据再分析」互斥，需按Reply自述refine氪数据口径重写",
+      "missing_evidence": "需要Cousin 2017 PRX 7 041030原文中reanalysis目标原子种类的明确表述，及其Reply/Comment中关于氪或氩的标注",
+      "search_keywords": [
+        "Cousin 2017 PRX 7 041030 attosecond streaking neon krypton reanalysis",
+        "Cousin water window attosecond reply comment helium krypton",
+        "PRX 7 041030 attosecond pulse retrieval target gas species"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L35：「Villeneuve[15]仍作角分布平均保证宽带重建稳健」——R2判例已证其为脉冲链全息选择m=0 f波，支撑错位",
+      "missing_evidence": "需要Villeneuve的原文里关于多通道干涉选择m=0 f波或脉冲链全息反演的论述；并补充真正的「角分布平均用于宽带重建稳健性」的原始出处（如Pabst Dahlström PRA 94 013411 2016 angular integration / PANDA方法）",
+      "search_keywords": [
+        "Villeneuve attosecond pulse holographic m=0 f-wave",
+        "Pabst Dahlstrom PANDA angular integration dipole phase 2016",
+        "PRA 94 013411 attosecond streaking dipole phase suppression",
+        "attosecond streaking angular averaging broadband reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L57/L59/L61：水窗光源建成、反演已实现、TDSE积累等国内现状关键断言零引文零团队锚点",
+      "missing_evidence": "国内水窗阿秒光源、反演方法、TDSE模拟方面的代表性团队与文献：上海光机所/物理所/长春光机所/西安光机所/华中科大的水窗HHG或阿秒脉冲表征工作；需补3-4处国内文献或平台实名支撑",
+      "search_keywords": [
+        "水窗 阿秒光源 中国 实验组",
+        "water window attosecond pulse Chinese group",
+        "国内 阿秒脉冲测量 上海光机所",
+        "兰鹏飞 水窗 阿秒",
+        "魏志义 阿秒 中国",
+        "solid-state HHG China group",
+        "attosecond metrology Chinese research team"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L45：「Ortmann[28]梳理FROG-CRAB与PROBP适用边界」经反查无据（PROBP系2022 NJP另家方法）",
+      "missing_evidence": "需要Ortmann原文是否提及PROBP/PROBP全称与出处；若Ortmann未提PROBP，需补PROBP方法原始出处（2022 NJP PROBP）并独立引用",
+      "search_keywords": [
+        "Ortmann 2022 attosecond streaking review FROG-CRAB",
+        "PROBP 2022 New Journal Physics attosecond pulse reconstruction",
+        "phase retrieval attosecond pulse comparison methods review",
+        "Ortmann FROG-CRAB PROBP attosecond"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale L67：「水窗（284–409.7 eV）截面数据主要整理自NIST与Peschel[7]（Ne 2s2p XUV能区），能区错配未限定」",
+      "missing_evidence": "需要NIST water window (284-410 eV) photoionization cross section 数据库或LBNL数据库的明确引用；以及Peschel Ne 2s2p XUV（~30-50 eV）截面数据的能区限定表述",
+      "search_keywords": [
+        "NIST water window photoionization cross section 284 410 eV",
+        "LBNL photoionization cross section neon carbon nitrogen K-shell",
+        "Peschel Nature Communications 13 5205 Ne 2p RABBIT cross section XUV",
+        "water window neon nitrogen carbon photoionization cross section database",
+        "soft X-ray 284-410 eV atomic photoionization cross section reference"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

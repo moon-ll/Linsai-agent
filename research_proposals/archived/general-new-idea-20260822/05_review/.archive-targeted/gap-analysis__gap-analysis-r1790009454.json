@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "§2 L23\"在角分辨光电子能谱与扫描隧道谱两条独立实验路径上获得交叉验证\"——CrSb g波自旋劈裂的多实验路径交叉验证",
+      "missing_evidence": "所引[23] Ding (2405.12687)、[24] Reimers、[25] Yang (2405.12575)全为ARPES族实验,缺少CrSb g波自旋劈裂的STM/STS独立观测文献;若要保留\"两路径表述\"须补真实STM证据",
+      "search_keywords": [
+        "CrSb STM spin splitting",
+        "CrSb scanning tunneling spectroscopy g-wave",
+        "CrSb STS altermagnet surface state",
+        "CrSb real-space imaging spin polarization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2 L21 vs §4 L53 Long [11] 同一dHvA工作双份展开,CrSb体相自旋劈裂三维Brillouin区映射",
+      "missing_evidence": "CrSb体相量子振荡/ARPES三维动量空间自旋劈裂映射的独立验证数据(目前主要依赖Long等单一dHvA工作)",
+      "search_keywords": [
+        "CrSb de Haas-van Alphen spin splitting 3D mapping",
+        "CrSb quantum oscillation altermagnet Fermi surface",
+        "CrSb ARPES full Brillouin zone spin texture",
+        "CrSb bulk altermagnet spin splitting verification"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2 L29 α-MnTe g波自旋劈裂0.1–0.5 eV、含能带整体0.3–0.8 eV的实测数值",
+      "missing_evidence": "α-MnTe自旋分辨ARPES动量依赖自旋劈裂幅值的定量测量,尤其是Γ-K与Γ-M方向各向异性数值的实验文献支撑(目前主要依赖Krempaský/Osumi PRB等)",
+      "search_keywords": [
+        "alpha-MnTe spin-resolved ARPES anisotropic splitting",
+        "MnTe g-wave spin splitting magnitude experimental eV",
+        "Osumi MnTe PRB 109 115102 splitting",
+        "MnTe Krempasky ARPES d-wave nodal plane magnitude"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§4 L53 Lee/Long/Li/Jaeschke四文献MnTe/CrSb HHG实验综述的产出端支撑",
+      "missing_evidence": "MnTe、CrSb等交替磁体高次谐波产生实验的独立实验组验证(尤其是MnTe HHG首篇观测之外的其他独立实验证据)",
+      "search_keywords": [
+        "MnTe high harmonic generation experiment independent",
+        "CrSb altermagnet HHG experimental observation",
+        "MnTe solid HHG mid-infrared second observation",
+        "altermagnet high harmonic generation experimental replication"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2 L23 CrSb g波自旋劈裂交叉验证需要的第二条独立实验路径(替代STM或补充STM)",
+      "missing_evidence": "CrSb除ARPES外的STM/STS或输运实验对g波自旋劈裂的独立测量证据",
+      "search_keywords": [
+        "CrSb STM topography surface magnetic order",
+        "CrSb tunneling spectroscopy spin polarized",
+        "CrSb magnetic force microscopy altermagnet",
+        "CrSb spin-polarized STM altermagnet domain"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

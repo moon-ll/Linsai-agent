@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "§三.1第3段称所采用的像散变换方案“已由已发表工作证明”，特别是其无需参考光束、能够将方位相位结构映射为强度条纹，并可在谐波波段实现直接成像。",
+      "missing_evidence": "该句缺少直接、就地嵌入的文献证据锚点；Granados等人的原始研究[27]直到§三.7才被引用。需核验[27]是否同时支持像散变换机制、方位相位到强度图样的映射以及谐波段直接成像，并将其直接标注在该句，最好给出对应页码、图号或公式位置。若[27]仅覆盖部分论断，还需补充相应的原始实验或理论论文。",
+      "search_keywords": [
+        "Granados astigmatic transformation orbital angular momentum harmonic generation",
+        "astigmatic transformation azimuthal phase intensity pattern high-order harmonic",
+        "direct imaging orbital angular momentum harmonic generation astigmatic optical system",
+        "harmonic OAM imaging astigmatic transformation no reference beam"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

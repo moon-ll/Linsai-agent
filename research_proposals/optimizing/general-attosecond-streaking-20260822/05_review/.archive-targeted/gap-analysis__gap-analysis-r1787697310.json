@@ -1,0 +1,69 @@
+{
+  "gaps": [
+    {
+      "claim": "角积分对偶极相位的天然压制效率与光电子动能的量化依赖关系",
+      "missing_evidence": "角积分方案在光电子动能>100 eV时偶极相位压制效率下降至<2%阈值的直接实验或理论数据",
+      "search_keywords": [
+        "Pabst Dahlström angular integration dipole phase suppression efficiency kinetic energy",
+        "attosecond streaking dipole phase suppression vs electron kinetic energy",
+        "angular integrated streaking dipole phase energy dependence 100 eV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "光电子与原子实相互作用的散射相位行为在不同能区之间存在本质差异",
+      "missing_evidence": "软X射线能区（409.7-543 eV）相比极紫外和水窗能区散射相位行为差异的直接实验或理论比较数据",
+      "search_keywords": [
+        "soft X-ray photoelectron scattering phase high energy vs low energy",
+        "scattering phase behavior energy dependence EUV water window soft X-ray attosecond",
+        "N K-edge above threshold photoelectron scattering phase attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "水窗能区多通道贡献>15%时重构误差开始显著偏离、>30%时误差>20%的定量阈值",
+      "missing_evidence": "Cousin 2017 Phys Rev X 7 041030 中关于15%和30%误差阈值的具体实验数据",
+      "search_keywords": [
+        "Cousin 2017 PRX water window multi-channel 15% 30% error threshold",
+        "FROG-CRAB multi-channel failure 15 percent 30 percent reconstruction error"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R3双变量误差依赖图谱方法——以光子能量区间为横轴、通道重叠度为纵轴",
+      "missing_evidence": "该图谱化标定方法本身的参考文献支撑，应有类似双变量误差图的先例",
+      "search_keywords": [
+        "dual variable error map spectroscopy calibration attosecond",
+        "bivariate error map photon energy channel overlap attosecond pulse characterization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R3多通道电离验证协议的标准化框架",
+      "missing_evidence": "该协议作为标准化框架的直接引用，需已有公开的标准化协议",
+      "search_keywords": [
+        "multi-channel ionization validation protocol attosecond spectroscopy standard",
+        "attosecond pulse characterization validation protocol multi-channel"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "目标G1中'以待修正条纹迹的拟合残差为误差指标'的具体指标定义",
+      "missing_evidence": "拟合残差作为误差指标的量化定义和验证方法，需参照性文献说明其有效性",
+      "search_keywords": [
+        "streaking trace fitting residual error metric attosecond pulse characterization",
+        "FROG-CRAB reconstruction error fitting residual definition"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "极紫外能区（50-150 eV）光电离主要最外层价电子贡献、多通道可忽略的判断",
+      "missing_evidence": "极紫外能区多通道贡献可忽略的直接数据或文献支撑",
+      "search_keywords": [
+        "EUV 50-150 eV photoionization single channel valence electron dominant",
+        "extreme ultraviolet multi-channel ionization negligible contribution attosecond"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

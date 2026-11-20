@@ -1,0 +1,111 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb 中 Sb 5p 原子 SOC 约 0.3—0.4 eV 为原子物理标准值",
+      "missing_evidence": "缺少 Sb 5p 原子自旋轨道耦合标准值的原始文献支撑（原子物理教科书或 NIST 数据）",
+      "search_keywords": [
+        "Sb 5p spin-orbit coupling atomic value",
+        "antimony 5p SOC 0.3 eV",
+        "Sb atom spin-orbit splitting NIST"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 经晶体场与 Cr 3d 杂化后有效 SOC 落在 Werner 预言的两个极限之间",
+      "missing_evidence": "缺少 Werner 关于 CrSb 反常霍尔与自旋分裂上下极限的具体理论预言文献",
+      "search_keywords": [
+        "Werner CrSb anomalous Hall spin splitting limit",
+        "CrSb altermagnet SOC effective value Cr 3d hybridization",
+        "CrSb spin splitting first-principles prediction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 带隙初值 0.13/0.6 eV 不同情景分歧与 [39] DLM 金属态情景",
+      "missing_evidence": "缺少 CrSb 带隙 DFT/ARPES 实验测量文献（区分金属/半导体情景）及 DLM 态计算参考 [39]",
+      "search_keywords": [
+        "CrSb band gap DFT calculation 0.13 0.6 eV",
+        "CrSb ARPES band gap experimental",
+        "CrSb DFT+U metallic semiconducting",
+        "dynamical mean field theory CrSb reference 39"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "d 波自旋分裂先验 0.1—1.0 eV 范围合理性",
+      "missing_evidence": "缺少 MnTe/CrSb 等 d 波 altermagnet 自旋分裂 ARPES 实验测量值的精确数值文献",
+      "search_keywords": [
+        "MnTe spin splitting ARPES magnitude eV",
+        "CrSb d-wave altermagnet spin splitting value",
+        "Krempaský MnTe spin-resolved ARPES d-wave",
+        "altermagnet spin splitting experimental range"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "现有 HHG 反演多用视觉比对/单通道强度，本项目以 κ+后验宽度双判据闭环（创新点 §三.6）",
+      "missing_evidence": "缺少现有 HHG 反演方法的局限与对比文献（如单通道强度拟合/视觉对比类工作）",
+      "search_keywords": [
+        "high harmonic spectroscopy inverse problem prior work",
+        "HHG inversion single channel intensity fitting limitation",
+        "solid HHG retrieval visual comparison benchmark",
+        "Fisher information HHG inversion"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "中子衍射 Néel 矢量方向、Sankar 等 [24] 非线性反常霍尔各向异性作为已知磁序对照方法（§三.3 难点四）",
+      "missing_evidence": "缺少 CrSb 中子衍射 Néel 矢量方向测量文献及 Sankar 等非线性反常霍尔各向异性具体参考",
+      "search_keywords": [
+        "CrSb neutron diffraction Neel vector",
+        "Sankar CrSb nonlinear anomalous Hall",
+        "CrSb antiferromagnetic order neutron measurement",
+        "CrSb spin orientation experimental determination"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "费舍尔信息矩阵 FIM 与贝叶斯反演相对单点估计的量化优势（§三.6 创新点）",
+      "missing_evidence": "缺少 FIM/贝叶斯反演在 HHG 量子几何反演中的先驱工作与维度级信息输出优势的具体文献",
+      "search_keywords": [
+        "Fisher information matrix attosecond HHG inversion",
+        "Bayesian inversion high harmonic generation posterior",
+        "FIM quantum geometry retrieval HHG",
+        "point estimation vs Fisher information high harmonic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "HHG 噪声 σ=0.5%—0.8% 与 SNR 信噪比阈值的实验依据",
+      "missing_evidence": "缺少固体 HHG 实验噪声水平与 SNR 阈值的统计测量文献",
+      "search_keywords": [
+        "solid HHG experimental signal-to-noise ratio",
+        "high harmonic spectroscopy noise floor measurement",
+        "HHG detection sensitivity threshold"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "TiSe₂ 上 SBE 长度规范+保留跃迁偶极相位的对照验证锚点（Yue-Gaarde 工作）",
+      "missing_evidence": "缺少 Yue-Gaarde 关于 SBE 长度规范、跃迁偶极相位保持的 TiSe₂ HHG 对照实验文献",
+      "search_keywords": [
+        "Yue Gaarde TiSe2 high harmonic generation SBE",
+        "length gauge semiconductor Bloch equation HHG",
+        "TiSe2 high harmonic spectroscopy transition dipole phase",
+        "TiSe2 SBE benchmark model"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "驱动光子能量 ħω 与 d 波节点截面典型 0.3 eV 对应关系（§三.3 第 2 段）",
+      "missing_evidence": "缺少 d 波 altermagnet 自旋节点分裂能量与中红外驱动光子能量匹配关系的实验依据",
+      "search_keywords": [
+        "altermagnet d-wave spin node splitting mid-infrared driver",
+        "MnTe CrSb mid-infrared high harmonic photon energy matching",
+        "d-wave spin splitting 0.3 eV experimental"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

@@ -1,0 +1,17 @@
+{
+  "gaps": [
+    {
+      "claim": "§2 L31：'SBE（固态高次谐波中的半导体布洛赫方程方法）给出的产额谱与实验谱形高度接近'——该定量断言目前零 [N] 挂靠",
+      "missing_evidence": "缺少可支撑'SBE 模拟产额谱与实验 HHG 谱形定量吻合'这一先例的同行评议文献；评审建议优先复用现有参考文献 [45]（Vampa 等人用 SBE/半导体模型拟合实验谱的先例），或提供等效的 SBE-实验谱形对比文献，避免定量断言无出处悬空",
+      "search_keywords": [
+        "semiconductor Bloch equations high harmonic generation yield spectrum",
+        "SBE simulation HHG experimental spectrum agreement",
+        "Vampa solid-state harmonic spectrum fitting",
+        "Bloch oscillator model high harmonic generation experiment comparison",
+        "solid high harmonic generation numerical model experimental yield"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

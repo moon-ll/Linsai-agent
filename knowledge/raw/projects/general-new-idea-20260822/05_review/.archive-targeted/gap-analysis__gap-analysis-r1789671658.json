@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "MnTe g波自旋分裂动量依赖通过带间/带内双通道干涉写入谐波频谱的物理机制（§2.1 L4-L5 '揭示动量依赖自旋劈裂通过带间/带内双通道干涉写入谐波频谱'）",
+      "missing_evidence": "缺少MnTe g波自旋分裂与HHG带间/带内干涉通道的直接理论或实验证据，以及g波动量依赖自旋纹理如何通过干涉编码进谐波频谱的对比性研究",
+      "search_keywords": [
+        "MnTe g-wave altermagnet interband intraband HHG interference",
+        "altermagnet spin splitting momentum dependent harmonic channel",
+        "MnTe high harmonic generation band structure coupling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "自旋极化率序列与偏振选择规则表作为R1输出",
+      "missing_evidence": "缺少altermagnet自旋极化率/偏振选择规则随谐波阶次变化的系统实验或TDDFT基准数据",
+      "search_keywords": [
+        "altermagnet spin polarization HHG selection rule table",
+        "MnTe harmonic spin channel polarization dependence",
+        "antiferromagnet high harmonic polarization rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "劈裂幅度反演精度达±0.05 eV、奈尔矢量取向±10°的R3定量反演能力（§2.5目标3）",
+      "missing_evidence": "缺少HHG反演磁结构参数（特别是劈裂幅度/奈尔矢量取向）能达到亚0.1 eV和10°精度的文献基准或贝叶斯反演误差传播验证",
+      "search_keywords": [
+        "HHG inversion magnetic structure Bayesian error",
+        "high harmonic spectroscopy Neel vector retrieval accuracy",
+        "Bayesian posterior uncertainty HHG band splitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "T_N反演与SQUID独立测定值的偏差≤±3 K一致性检验",
+      "missing_evidence": "缺少HHG反演T_N与SQUID独立测量精度的直接对比数据，以及反常Hall符号/XRD ±10 K外部对照链的实验基准",
+      "search_keywords": [
+        "high harmonic Neel temperature retrieval SQUID comparison",
+        "HHG phase transition detection accuracy benchmark",
+        "anomalous Hall Neel temperature cross validation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "磁相变动力学≤100 fs时间分辨目标",
+      "missing_evidence": "缺少MnTe等g波altermagnet磁相变超快时间尺度（≤100 fs）的实验测量数据或TDDFT模拟预测",
+      "search_keywords": [
+        "MnTe ultrafast magnetic phase transition 100 fs",
+        "altermagnet spin dynamics femtosecond timescale",
+        "antiferromagnetic order parameter ultrafast decay"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "0.3-3 THz反铁磁共振频区",
+      "missing_evidence": "缺少MnTe/CrSb等altermagnet反铁磁共振频率落在0.3-3 THz频区的直接测量文献",
+      "search_keywords": [
+        "MnTe antiferromagnetic resonance THz frequency",
+        "altermagnet THz magnon mode spectroscopy",
+        "CrSb antiferromagnetic resonance terahertz"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "<0.3/0.3-0.7/>0.7 SOC劈裂幅度三档判据与0.4-0.6过渡区（§2.5目标1/2）",
+      "missing_evidence": "缺少SOC劈裂幅度落点（<0.3 eV, 0.3-0.7 eV, >0.7 eV）对应不同HHG响应机制的基准文献，特别是0.4-0.6 eV过渡区的判据依据",
+      "search_keywords": [
+        "spin-orbit splitting amplitude HHG regime classification",
+        "SOC strength band structure altermagnet three regime",
+        "MnTe CrSb spin splitting magnitude benchmark"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,92 @@
+{
+  "gaps": [
+    {
+      "claim": "驱动波长 3-5 μm 作为中红外 HHG 读出磁序参数的最佳光源选择",
+      "missing_evidence": "缺少 3-5 μm 中红外波段用于磁序/反铁磁序 HHG 读出的实验或理论文献支撑，未引用关键实验先例或参数优化文献",
+      "search_keywords": [
+        "mid-infrared 3-5 micron HHG magnetic order",
+        "altermagnet HHG mid-infrared wavelength",
+        "long wavelength HHG antiferromagnet readout",
+        "3 micron high harmonic generation magnetic symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "磁场 7 T 作为 HHG 探测磁性序参量的工作磁场强度",
+      "missing_evidence": "缺少 7 T 磁场环境下固体 HHG 实验或外磁场调控磁序的文献支撑，未说明该磁场强度的选择依据",
+      "search_keywords": [
+        "7 Tesla magnetic field HHG solid",
+        "high magnetic field high harmonic generation",
+        "magnetic field altermagnet HHG",
+        "strong magnetic field HHG magnetic order probe"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "温区 4-300 K 作为反铁磁/反铁磁序相变附近的实验温区窗口",
+      "missing_evidence": "缺少 4-300 K 温区（尤其覆盖 Néel 温度 720K/310K、TiSe₂ 205K 等相变点）HHG 实验温度调控文献，未说明为何该温区覆盖可分辨序参量",
+      "search_keywords": [
+        "variable temperature HHG solid 4K-300K",
+        "cryogenic temperature high harmonic generation magnetic",
+        "HHG across Neel temperature",
+        "temperature dependent HHG altermagnet phase transition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "OPA/OPCPA 装置作为方案的核心驱动源",
+      "missing_evidence": "缺少 OPA/OPCPA 系统在中红外 HHG 实验中的具体参数文献支撑（重复率、脉冲能量、波长调谐范围等），未引用成熟装置参考",
+      "search_keywords": [
+        "OPCPA mid-infrared HHG driver",
+        "optical parametric amplifier high harmonic generation",
+        "OPA solid HHG experiment parameters",
+        "OPCPA attosecond magnetic order probe"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "可辨识性判据以费舍尔条件数 cut-off 和贝叶斯后验相关系数 |ρ| 为量化阈值",
+      "missing_evidence": "缺少 Fisher 信息矩阵条件数用于 HHG 反演问题可辨识性判据的已发表方法学文献，缺少贝叶斯后验相关系数 |ρ| 阈值定义的引用",
+      "search_keywords": [
+        "Fisher information matrix identifiability inversion",
+        "Bayesian posterior correlation inverse problem threshold",
+        "condition number reconstruction uniqueness HHG",
+        "identifiability criteria ultrafast spectroscopy inversion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG 反演磁性序参量的贝叶斯/正则化推断框架的可辨识性",
+      "missing_evidence": "缺少 HHG 光谱反演量子序参量（Berry 曲率、磁化率）的 Fisher 信息量化文献，缺少 HHG 谱-序参量映射的可辨识性先验研究",
+      "search_keywords": [
+        "high harmonic spectroscopy inverse problem identifiability",
+        "Fisher information HHG order parameter",
+        "Bayesian inference HHG magnetic reconstruction",
+        "quantum geometry reconstruction harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "反铁磁/反铁磁 (altermagnet) HHG 读出序参量的实验可行性",
+      "missing_evidence": "缺少 altermagnet (RuO2、MnTe 等) HHG 实验直接读出反铁磁序参量的已发表文献支持，未给出实验先例或最新进展",
+      "search_keywords": [
+        "altermagnet high harmonic generation experiment",
+        "RuO2 MnTe HHG magnetic order",
+        "antiferromagnet HHG readout published",
+        "spin symmetry HHG altermagnet experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Plan B 替代方案（无磁场情形/共线探测/低温光学方案）的参数依据",
+      "missing_evidence": "Plan B 占比 34.7% 超阈，缺少每个 Plan B 子方案的文献依据（如共线 HHG 探测磁性已有实验、低温 HHG 装置参考），导致替代路径说服力不足",
+      "search_keywords": [
+        "collinear HHG magnetic order probe",
+        "no magnetic field HHG magnetic symmetry",
+        "cryogenic HHG setup plan B",
+        "alternative HHG magnetic readout scheme"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

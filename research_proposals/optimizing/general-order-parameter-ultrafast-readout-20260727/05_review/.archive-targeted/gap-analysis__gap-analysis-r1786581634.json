@@ -1,0 +1,48 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme §5 创新点2声称\"本项目首次把 Cochran 量子相干层析与 Sørensen 阿秒重建联动应用于 altermagnet HHG 序参量反演的实验流程\"，该\"首次\"优先权表述的检索范围仅限 arXiv",
+      "missing_evidence": "缺少 Web of Science / Scopus 等正式数据库的检索佐证，且未给出具体检索式，无法排除正式期刊中已发表同类联动方案",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic",
+        "Sørensen attosecond reconstruction HHG",
+        "altermagnet order parameter harmonic inversion",
+        "quantum coherence tomography combined attosecond retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme §3 L49 给出 CrSb 损伤阈值约 0.3 V/Å，并据此推导工作场强上限 0.8 V/Å（含30%工程余量），但 0.3×1.30=0.39≠0.80，且工作上限高于损伤阈值",
+      "missing_evidence": "缺少 CrSb 或同类过渡金属磷族化物（MnTe 等 altermagnet）的飞秒激光损伤阈值的独立实验文献支撑，导致阈值数值来源不明、算术不自洽",
+      "search_keywords": [
+        "CrSb femtosecond laser damage threshold",
+        "transition metal pnictide optical breakdown near-infrared",
+        "MnTe femtosecond ablation threshold",
+        "altermagnet ultrafast laser damage V per Angstrom"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content §2.3 与 scheme §2 引用\"方法学手册\"给出关键数值（背景漂移标准差、合成谱噪声 1%—10% 区间），但该手册为项目内文件，不可作为独立证据",
+      "missing_evidence": "缺少已发表文献对 HHG 测量背景漂移统计特性、合成谱噪声水平的独立定量支撑，这些数值的物理依据悬空",
+      "search_keywords": [
+        "high harmonic generation background drift standard deviation",
+        "HHG synthetic spectrum noise level percent",
+        "solid-state HHG measurement noise characterization",
+        "harmonic spectroscopy shot noise background statistics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "全文 45 条参考文献中预印本占比 53%（24/45），超出物理专项 30% 阈值",
+      "missing_evidence": "缺少足够的同行评审期刊正式发表文献替代预印本，尤其需补充 altermagnet HHG、序参量反演、损伤阈值等方向的正式发表论文",
+      "search_keywords": [
+        "altermagnet high harmonic generation published",
+        "order parameter inversion nonlinear optics journal",
+        "solid-state HHG damage threshold experimental published",
+        "high harmonic spectroscopy reconstruction peer-reviewed"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

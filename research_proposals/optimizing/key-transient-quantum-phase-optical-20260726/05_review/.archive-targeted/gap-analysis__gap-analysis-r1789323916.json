@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "MoS₂在低频区的ℏω/E_g范围应核定为0.10-0.19（而非0.10-1.03），需对应物理核算依据",
+      "missing_evidence": "缺少MoS₂在中红外驱动波长(4-8 μm)与带隙(1.6 eV)下ℏω/E_g比值的精确计算依据或实验文献支撑",
+      "search_keywords": [
+        "MoS2 bandgap 1.6 eV mid-infrared HHG",
+        "MoS2 high harmonic generation 4-8 micron",
+        "MoS2 hbar omega bandgap ratio",
+        "MoS2 HHG Keldysh parameter mid-infrared"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "ℏω/E_g在1-2范围属转换区，需用环路相位替代一阶Floquet展开",
+      "missing_evidence": "缺少Floquet展开收敛性边界条件与转换区需要Wilson loop/环路相位方法的判据文献",
+      "search_keywords": [
+        "Floquet expansion convergence criterion Wilson loop",
+        "Floquet adiabatic regime breakdown Keldysh parameter",
+        "Wilson loop Berry phase strong field solid",
+        "Floquet sideband validity range semiconductor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content L21 'Floquet展开到一阶即足够收敛'强断言的截断误差量级",
+      "missing_evidence": "缺少一阶Floquet展开截断误差估计或该判据在固体HHG文献中的支撑引用",
+      "search_keywords": [
+        "Floquet expansion first order truncation error",
+        "Floquet high harmonic generation convergence",
+        "first-order Floquet approximation validity solid HHG",
+        "Floquet-Bloch expansion truncation error estimate"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

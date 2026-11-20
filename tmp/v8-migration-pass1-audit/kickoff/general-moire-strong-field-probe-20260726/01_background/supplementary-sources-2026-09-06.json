@@ -1,0 +1,22 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "cl_20260815_83695e",
+  "entries": [
+    {
+      "source_id": "paper:2026-2509.11041-topological-excitonic-insulators-in-electron-bilay",
+      "title": "Topological excitonic insulators in electron bilayers modulated by twisted hBN",
+      "summary": "本文提出以扭转氮化硼调制的过渡金属硫族化合物电子双层为实现拓扑激子绝缘体的平台：在每莫尔元胞总空穴填充 ν=1 时，自发层间相位相干驱动形成手性 p 波激子凝聚体，从而产生拓扑非平庸的激子绝缘态。该方案将莫尔工程与层间激子凝聚结合，为能谷电子学体系中的拓扑超流/拓扑激子物态提供了理论途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_83695e",
+      "added_at": "2026-09-06T11:33:54Z"
+    },
+    {
+      "source_id": "paper:2509.11041",
+      "title": "Topological excitonic insulators in electron bilayers modulated by twisted hBN",
+      "summary": "本文提出将两层TMD单层用扭转hBN双层/多层隔开的结构，扭转hBN既抑制层间隧穿以保证自发相位相干，又形成铁电摩尔条纹对两层施加相反的三角晶格调制势；平均场理论证明该体系在特定摩尔填充下无需磁场即可实现拓扑激子绝缘体态，将层间激子凝聚与拓扑物态相结合。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_83695e",
+      "added_at": "2026-09-06T11:33:54Z"
+    }
+  ]
+}

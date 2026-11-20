@@ -1,0 +1,234 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/" xmlns:arxiv="http://arxiv.org/schemas/atom" xmlns="http://www.w3.org/2005/Atom">
+  <id>https://arxiv.org/api/s7QvJHcN2jEmfe2fUROhwzRY8aI</id>
+  <title>arXiv Query: search_query=&amp;id_list=1610.04548,1406.4826,1605.04743,2010.04381,2009.11237&amp;start=0&amp;max_results=5</title>
+  <updated>2026-11-13T13:16:01Z</updated>
+  <link href="https://arxiv.org/api/query?search_query=&amp;start=0&amp;max_results=5&amp;id_list=1610.04548,1406.4826,1605.04743,2010.04381,2009.11237" type="application/atom+xml"/>
+  <opensearch:itemsPerPage>5</opensearch:itemsPerPage>
+  <opensearch:totalResults>5</opensearch:totalResults>
+  <opensearch:startIndex>0</opensearch:startIndex>
+  <entry>
+    <id>http://arxiv.org/abs/1406.4826v1</id>
+    <title>Strong light-matter coupling in two-dimensional atomic crystals</title>
+    <updated>2014-06-18T18:19:50Z</updated>
+    <link href="https://arxiv.org/abs/1406.4826v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1406.4826v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Two dimensional (2D) atomic crystals of graphene, and transition metal dichalcogenides have emerged as a class of materials that show strong light-matter interaction. This interaction can be further controlled by embedding such materials into optical microcavities. When the interaction is engineered to be stronger than the dissipation of light and matter entities, one approaches the strong coupling regime resulting in the formation of half-light half-matter bosonic quasiparticles called microcavity polaritons. Here we report the evidence of strong light-matter coupling and formation of microcavity polaritons in a two dimensional atomic crystal of molybdenum disulphide (MoS2) embedded inside a dielectric microcavity at room temperature. A Rabi splitting of 46 meV and highly directional emission is observed from the MoS2 microcavity owing to the coupling between the 2D excitons and the cavity photons. Realizing strong coupling effects at room temperature in a disorder free potential landscape is central to the development of practical polaritonic circuits and switches.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2014-06-18T18:19:50Z</published>
+    <arxiv:comment>25 pages, 7 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Xiaoze Liu</name>
+    </author>
+    <author>
+      <name>Tal Galfsky</name>
+    </author>
+    <author>
+      <name>Zheng Sun</name>
+    </author>
+    <author>
+      <name>Fengnian Xia</name>
+    </author>
+    <author>
+      <name>Erh-chen Lin</name>
+    </author>
+    <author>
+      <name>Yi-Hsien Lee</name>
+    </author>
+    <author>
+      <name>Stéphane Kéna-Cohen</name>
+    </author>
+    <author>
+      <name>Vinod M. Menon</name>
+    </author>
+    <arxiv:doi>10.1038/nphoton.2014.304</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/nphoton.2014.304" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1605.04743v2</id>
+    <title>Room-temperature exciton-polaritons with two-dimensional WS2</title>
+    <updated>2016-08-30T12:47:44Z</updated>
+    <link href="https://arxiv.org/abs/1605.04743v2" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1605.04743v2" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Two-dimensional transition metal dichalcogenides exhibit strong optical transitions with significant potential for optoelectronic devices. In particular they are suited for cavity quantum electrodynamics in which strong coupling leads to polariton formation as a root to realisation of inversionless lasing, polariton condensationand superfluidity. Demonstrations of such strongly correlated phenomena to date have often relied on cryogenic temperatures, high excitation densities and were frequently impaired by strong material disorder. At room-temperature, experiments approaching the strong coupling regime with transition metal dichalcogenides have been reported, but well resolved exciton-polaritons have yet to be achieved. Here we report a study of monolayer WS$_2$ coupled to an open Fabry-Perot cavity at room-temperature, in which polariton eigenstates are unambiguously displayed. In-situ tunability of the cavity length results in a maximal Rabi splitting of $\hbar Ω_{\rm{Rabi}} = 70$ meV, exceeding the exciton linewidth. Our data are well described by a transfer matrix model appropriate for the large linewidth regime. This work provides a platform towards observing strongly correlated polariton phenomena in compact photonic devices for ambient temperature applications.</summary>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-05-16T12:13:00Z</published>
+    <arxiv:comment>12 pages, 6 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mes-hall"/>
+    <author>
+      <name>Lucas C. Flatten</name>
+    </author>
+    <author>
+      <name>Zhengyu He</name>
+    </author>
+    <author>
+      <name>David M. Coles</name>
+    </author>
+    <author>
+      <name>Aurelien A. P. Trichet</name>
+    </author>
+    <author>
+      <name>Alex W. Powell</name>
+    </author>
+    <author>
+      <name>Robert A. Taylor</name>
+    </author>
+    <author>
+      <name>Jamie H. Warner</name>
+    </author>
+    <author>
+      <name>Jason M. Smith</name>
+    </author>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2009.11237v1</id>
+    <title>Experimental observation of topological exciton-polaritons in transition metal dichalcogenide monolayers</title>
+    <updated>2020-09-23T16:16:24Z</updated>
+    <link href="https://arxiv.org/abs/2009.11237v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2009.11237v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>The rise of quantum science and technologies motivates photonics research to seek new platforms with strong light-matter interactions to facilitate quantum behaviors at moderate light intensities. One promising platform to reach such strong light-matter interacting regimes is offered by polaritonic metasurfaces, which represent ultrathin artificial media structured on nano-scale and designed to support polaritons - half-light half-matter quasiparticles. Topological polaritons, or 'topolaritons', offer an ideal platform in this context, with unique properties stemming from topological phases of light strongly coupled with matter. Here we explore polaritonic metasurfaces based on 2D transition metal dichalcogenides (TMDs) supporting in-plane polarized exciton resonances as a promising platform for topological polaritonics. We enable a spin-Hall topolaritonic phase by strongly coupling valley polarized in-plane excitons in a TMD monolayer with a suitably engineered all-dielectric topological photonic metasurface. We first show that the strong coupling between topological photonic bands supported by the metasurface and excitonic bands in MoSe2 yields an effective phase winding and transition to a topolaritonic spin-Hall state. We then experimentally realize this phenomenon and confirm the presence of one-way spin-polarized edge topolaritons. Combined with the valley polarization in a MoSe2 monolayer, the proposed system enables a new approach to engage the photonic angular momentum and valley degree of freedom in TMDs, offering a promising platform for photonic/solid-state interfaces for valleytronics and spintronics.</summary>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-09-23T16:16:24Z</published>
+    <arxiv:comment>31 page, 10 figures</arxiv:comment>
+    <arxiv:primary_category term="cond-mat.mes-hall"/>
+    <author>
+      <name>Mengyao Li</name>
+    </author>
+    <author>
+      <name>Ivan Sinev</name>
+    </author>
+    <author>
+      <name>Fedor Benimetskiy</name>
+    </author>
+    <author>
+      <name>Tatyana Ivanova</name>
+    </author>
+    <author>
+      <name>Ekaterina Khestanova</name>
+    </author>
+    <author>
+      <name>Svetlana Kiriushechkina</name>
+    </author>
+    <author>
+      <name>Anton Vakulenko</name>
+    </author>
+    <author>
+      <name>Sriram Guddala</name>
+    </author>
+    <author>
+      <name>Maurice Skolnick</name>
+    </author>
+    <author>
+      <name>Vinod Menon</name>
+    </author>
+    <author>
+      <name>Dmitry Krizhanovskii</name>
+    </author>
+    <author>
+      <name>Andrea Alù</name>
+    </author>
+    <author>
+      <name>Anton Samusev</name>
+    </author>
+    <author>
+      <name>Alexander B. Khanikaev</name>
+    </author>
+    <arxiv:doi>10.1038/s41467-021-24728-y</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/s41467-021-24728-y" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/1610.04548v3</id>
+    <title>Polaritons in layered 2D materials</title>
+    <updated>2017-07-07T06:51:31Z</updated>
+    <link href="https://arxiv.org/abs/1610.04548v3" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/1610.04548v3" rel="related" type="application/pdf" title="pdf"/>
+    <summary>In recent years, enhanced light-matter interactions through a plethora of dipole-type polaritonic excitations have been observed in two-dimensional (2D) layered materials. In graphene, electrically tunable and highly confined plasmon-polaritons were predicted and observed, opening up opportunities for optoelectronics, bio-sensing and other mid-infrared applications. In hexagonal boron nitride (hBN), low-loss infrared-active phonon-polaritons exhibit hyperbolic behavior for some frequencies, allowing for ray-like propagation exhibiting high quality factors and hyperlensing effects. In transition metal dichalcogenides (TMDs), reduced screening in the 2D limit leads to optically prominent excitons with large binding energy, with these polaritonic modes having been recently observed with scanning near field optical microscopy (SNOM). Here, we review recent progress in state-of-the-art experiments, survey the vast library of polaritonic modes in 2D materials, their optical spectral properties, figures-of-merit and application space. Taken together, the emerging field of 2D material polaritonics and their hybrids provide enticing avenues for manipulating light-matter interactions across the visible, infrared to terahertz spectral ranges, with new optical control beyond what can be achieved using traditional bulk materials.</summary>
+    <category term="cond-mat.mes-hall" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2016-10-14T17:36:00Z</published>
+    <arxiv:primary_category term="cond-mat.mes-hall"/>
+    <arxiv:journal_ref>Nature Materials 16, 182--194 (2017)</arxiv:journal_ref>
+    <author>
+      <name>Tony Low</name>
+    </author>
+    <author>
+      <name>Andrey Chaves</name>
+    </author>
+    <author>
+      <name>Joshua D. Caldwell</name>
+    </author>
+    <author>
+      <name>Anshuman Kumar</name>
+    </author>
+    <author>
+      <name>Nicholas X. Fang</name>
+    </author>
+    <author>
+      <name>Phaedon Avouris</name>
+    </author>
+    <author>
+      <name>Tony F. Heinz</name>
+    </author>
+    <author>
+      <name>Francisco Guinea</name>
+    </author>
+    <author>
+      <name>Luis Martin-Moreno</name>
+    </author>
+    <author>
+      <name>Frank Koppens</name>
+    </author>
+    <arxiv:doi>10.1038/nmat4792</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1038/nmat4792" title="doi"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2010.04381v1</id>
+    <title>Ultralow Threshold Polariton Condensate in a Monolayer Semiconductor Microcavity at Room Temperature</title>
+    <updated>2020-10-09T05:58:54Z</updated>
+    <link href="https://arxiv.org/abs/2010.04381v1" rel="alternate" type="text/html"/>
+    <link href="https://arxiv.org/pdf/2010.04381v1" rel="related" type="application/pdf" title="pdf"/>
+    <summary>Atomically thin transition metal dichalcogenides possess valley dependent functionalities that are usually available only at crogenic temperatures, constrained by various valley depolarization scatterings. The formation of exciton polaritons by coherently superimposing excitons and microcavity photons potentially harnesses the valley polarized polariton polariton interactions for novel valleytronics devices. Robust EPs have been demonstrated at room temperature in TMDs microcavity, however, the coherent polariton lasing and condensation remain elusive. Herein, we demonstrate for the first time the realization of EP condensation in a TMD microcavity at room temperature. The continuous wave pumped EP condensation and lasing with ultralow thresholdsis evidenced by the macroscopic occupation of the ground state, that undergoes a nonlinear increase of the emission and a continuous blueshift, a build up of spatial coherence, and a detuning-controlled threshold. Our work presents a critically important step towards exploiting nonlinear polariton polariton interactions and polaritonic devices with valley functionality at room temperature.</summary>
+    <category term="physics.optics" scheme="http://arxiv.org/schemas/atom"/>
+    <category term="cond-mat.mtrl-sci" scheme="http://arxiv.org/schemas/atom"/>
+    <published>2020-10-09T05:58:54Z</published>
+    <arxiv:comment>21 pages, 5 figures</arxiv:comment>
+    <arxiv:primary_category term="physics.optics"/>
+    <author>
+      <name>Jiaxin Zhao</name>
+    </author>
+    <author>
+      <name>Rui Su</name>
+    </author>
+    <author>
+      <name>Antonio Fieramosca</name>
+    </author>
+    <author>
+      <name>Weijie Zhao</name>
+    </author>
+    <author>
+      <name>Wei Du</name>
+    </author>
+    <author>
+      <name>Xue Liu</name>
+    </author>
+    <author>
+      <name>Carole Diederichs</name>
+    </author>
+    <author>
+      <name>Daniele Sanvitto</name>
+    </author>
+    <author>
+      <name>Timothy C. H. Liew</name>
+    </author>
+    <author>
+      <name>Qihua Xiong</name>
+    </author>
+    <arxiv:doi>10.1021/acs.nanolett.1c01162</arxiv:doi>
+    <link rel="related" href="https://doi.org/10.1021/acs.nanolett.1c01162" title="doi"/>
+  </entry>
+</feed>

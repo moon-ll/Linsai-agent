@@ -1,0 +1,81 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme 正文将 [38] 作为瞬态对称破缺 / SHG 标志信号的依据（Shen 瞬态对称破缺 HHG）",
+      "missing_evidence": "[38] 所挂 DOI 10.1103/PhysRevLett.130.086201 经 Crossref 核验实为量子反常霍尔限域手性边缘通道文章，与论点无关；缺少真实的『强场驱动瞬态对称破缺导致二次谐波/偶次谐波出现』的实验或理论原始文献（正确 DOI/arXiv ID）",
+      "search_keywords": [
+        "transient symmetry breaking second harmonic generation solid",
+        "light-induced inversion symmetry breaking SHG ultrafast",
+        "strong-field induced even harmonic generation symmetry breaking",
+        "subcycle symmetry breaking high harmonic experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[4] 用于支撑亚周期电子动力学（Drüeke 亚周期电子动力学）",
+      "missing_evidence": "[4] 所挂 DOI 10.1103/PhysRevA.109.L041501 真身为抑制电磁局域态密度文章，非亚周期电子动力学工作；缺少 Drüeke 等人亚周期电子动力学的真实文献条目（正确期刊卷页/DOI/arXiv ID）",
+      "search_keywords": [
+        "Drüeke subcycle electron dynamics",
+        "Drüeke Bauer high harmonic subcycle",
+        "subcycle electron dynamics solid Phys Rev A 2024",
+        "sub-cycle interband dynamics semiconductor theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4 D2『参照同类长时阿秒泵浦-探测主动稳定方案的公开报道』——三重稳定（f-2f CEP 锁定+主动反馈延迟线+双光梳互参考）可实现 ≤100 as 抖动",
+      "missing_evidence": "该关键先例无 [N] 角标，缺少可核验的长时阿秒泵浦-探测延迟主动稳定的公开报道文献（含实测 RMS 抖动数值、稳定时长、反馈架构）",
+      "search_keywords": [
+        "attosecond pump-probe delay active stabilization long-term RMS jitter",
+        "f-2f CEP stabilization dual comb cross reference attosecond",
+        "attosecond interferometer delay stability sub-100 as feedback",
+        "long-term timing jitter attosecond beamline active feedback delay line"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2(a) 三重稳定分项噪声预算（80 as / 50 as 分项）与商售方案对比构成 ≤100 as 协同上限",
+      "missing_evidence": "缺少各分项噪声（CEP 锁定残余相位噪声、延迟线机械/热漂移、双光梳互参考残余）实测数值的文献出处，目前分项预算数值未附引用；也缺少商售 CEP/延迟稳定方案性能指标的可引用来源",
+      "search_keywords": [
+        "CEP stabilization residual phase noise attosecond measurement",
+        "delay line thermal drift time constant attosecond stabilization",
+        "dual comb cross-referencing timing jitter measurement",
+        "commercial CEP stabilization performance specification attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4 D2 备份方案：抖动超标时改用 attoclock 几何路径替代 RABBITT，牺牲带宽换稳定",
+      "missing_evidence": "缺少 attoclock 与 RABBITT 在带宽/时间分辨/稳定性要求上的定量对比文献，用以支撑『牺牲带宽换稳定』这一权衡的可行性",
+      "search_keywords": [
+        "attoclock vs RABBITT temporal resolution comparison",
+        "attoclock streaking geometry timing precision",
+        "RABBITT bandwidth requirement phase retrieval limitation",
+        "attosecond metrology technique comparison bandwidth stability"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3 VAE+扩散生成模型作为反演代理模型的选型依据",
+      "missing_evidence": "§5(1) 末三句的文献定位与 §2.3 论证重复但未见新增可核验来源；缺少 VAE/扩散模型在光学反问题（含高次谐波/光谱反演）中泛化性与精度的原始基准文献",
+      "search_keywords": [
+        "diffusion model inverse problem optical spectroscopy benchmark",
+        "variational autoencoder surrogate model nonlinear optics inversion",
+        "generative model physics inverse problem accuracy benchmark",
+        "diffusion model attosecond spectroscopy retrieval"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2 各技术选择与已验方法参数（RABBITT / 阿秒条纹 / TDSE 求解器）一致",
+      "missing_evidence": "scheme 未对接 knowledge/wiki/methods/ 已验参数表，方法学手册 G.1–G.3/D.2 引用指向课题外不可核验文件；缺少 RABBITT、阿秒条纹、TDSE 求解器公开文献中的标准参数/误差指标作为可核验引用",
+      "search_keywords": [
+        "RABBITT phase retrieval standard parameters accuracy",
+        "attosecond streaking retrieval error benchmark parameters",
+        "TDSE solver strong field convergence benchmark parameters",
+        "attosecond metrology validated parameter reference"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

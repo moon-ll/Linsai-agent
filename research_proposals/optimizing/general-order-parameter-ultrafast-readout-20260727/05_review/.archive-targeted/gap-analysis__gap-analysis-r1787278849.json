@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "Weber等人的altermagnet高次谐波理论中使用了不存在的元素符号'NdMu2Si₂'（Mu不存在于元素周期表）",
+      "missing_evidence": "该引用属于虚构文献，需要查找 Weber 等人关于 altermagnet HHG 的真实论文（可能应为 Werner et al. 2408.08955 或 Weber et al. 相关工作）",
+      "search_keywords": [
+        "Weber altermagnet high harmonic generation theory",
+        "Werner altermagnet HHG spin splitting",
+        "2408.08955 Werner altermagnet",
+        "2408.05187 Weber spin splitting"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale.md L33 引用的 Du et al., arXiv:2609.21303（2025）使用未来日期，arXiv:2609为2026年9月刊号，超出检索截止线",
+      "missing_evidence": "需要替换为真实存在的2025年或更早发表的论文",
+      "search_keywords": [
+        "Du high harmonic generation altermagnet 2025",
+        "quantum coherence tomography solid state HHG 2025",
+        "Cochran HHG quantum coherence 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale.md L33 引用的 Terashima et al., arXiv:2601.19105, 2026 未在 references.md 登记",
+      "missing_evidence": "需要查找该论文并补充完整参考文献信息，或提供已登记的替代文献",
+      "search_keywords": [
+        "Terashima high harmonic generation altermagnet",
+        "2601.19105 attosecond order parameter",
+        "Fuchs MnTe spin-polarized HHG experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cochran量子相干断层成像（quantum coherence tomography）用于HHG序参量重建的2025-2026年最新进展",
+      "missing_evidence": "需要Cochran 2025-2026年发表的HHG量子相干断层成像论文支撑方法学论述",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic generation 2025",
+        "Cochran HHG order parameter reconstruction arXiv 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sørensen阿秒HHG序参量重建的2025-2026年最新进展",
+      "missing_evidence": "需要Sørensen 2025-2026年发表的阿秒HHG序参量重建论文",
+      "search_keywords": [
+        "Sørensen attosecond HHG order parameter reconstruction 2025",
+        "Sørensen high harmonic order parameter arXiv 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb材料的飞秒激光损伤阈值具体数值缺乏实验支撑",
+      "missing_evidence": "需要CrSb ultrafast laser damage threshold的实验测量数据或相关材料参照数据",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser ablation threshold",
+        "transition metal pnictide optical breakdown strong field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Fuchs MnTe自旋极化高次谐波的实验观测证据",
+      "missing_evidence": "需要Fuchs 2024-2025年发表的MnTe altermagnet HHG实验论文",
+      "search_keywords": [
+        "Fuchs MnTe spin-polarized high harmonic generation",
+        "MnTe altermagnet HHG experimental 2024",
+        "Fuchs 2024 ultrafast magneto-optics MnTe"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CrSb spin-polarized high harmonic实验观测的完整链路（驱动场参数、信号强度等）",
+      "missing_evidence": "需要Rost 2025年发表的CrSb HHG spin-resolved实验的具体参数",
+      "search_keywords": [
+        "Rost CrSb high harmonic generation spin-resolved 2025",
+        "2507.02673 altermagnet HHG CrSb experimental"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

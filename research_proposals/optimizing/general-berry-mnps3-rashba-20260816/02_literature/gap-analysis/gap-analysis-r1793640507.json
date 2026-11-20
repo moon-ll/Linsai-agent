@@ -1,0 +1,56 @@
+{
+  "gaps": [
+    {
+      "claim": "六光子阶数作为研究方案中的核心判据，目前主要由预印本[12][40]支撑。",
+      "missing_evidence": "需要回查[12][40]原文，确认其是否直接给出六光子过程或六光子阶数的判据、推导条件、数值结果及适用边界，并在首次引文处明确标注“预印本”。若该判据直接决定研究路线或可行性结论，还应补充独立的同行评议文献，或引用预印本后续正式发表版本进行交叉验证，避免由未标注的预印本单独承担核心论证。",
+      "search_keywords": [
+        "arXiv:2606.27548 six-photon harmonic emission",
+        "six-photon order threshold semiconductor harmonic generation",
+        "六光子过程 谐波发射 判据",
+        "multi-photon harmonic emission sixth-order threshold",
+        "six-photon process peer-reviewed harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "研究方案中的U演化方案目前由预印本[12][40]提供方法依据，其具体实现步骤和适用条件尚需一手文献逐项核实。",
+      "missing_evidence": "需要从[12][40]的正文、补充材料或Methods中定位U的取值方式、含时演化方程、参数更新规则、数值实现步骤及其与谐波计算之间的对应关系，并明确这些内容属于预印本结果。若申请书将U演化用于核心数值判据或预期结果，应增加同行评议的独立方法文献或正式发表版本作为佐证，同时说明预印本结论是否已被后续工作验证。",
+      "search_keywords": [
+        "arXiv:2606.27548 Hubbard U evolution",
+        "arXiv:2609.01844 Hubbard U time evolution",
+        "time-dependent Hubbard U harmonic generation",
+        "Hubbard U evolution equation time-dependent density functional theory",
+        "含时 Hubbard U 演化 谐波 半导体",
+        "on-site U parameter dynamics ultrafast harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[20][36]与[12][40]并列用于核心判据或方法依据时，其出版状态和引用表述尚未完成一致性核实。",
+      "missing_evidence": "需要核对[12][20][36][40]的完整书目信息、arXiv编号、版本日期、DOI及正式发表状态，建立“具体论点—原始出处—证据内容—出版状态”的对应关系。若[20][36]同样属于预印本，应在首次引文处同步标注“预印本”；若已有正式版本，应更新为正式版本并核查预印本与正式版是否存在实质差异。",
+      "search_keywords": [
+        "arXiv:2606.27548 publication status",
+        "arXiv:2609.01844 publication status",
+        "[20] [36] [40] 参考文献 出版状态",
+        "preprint peer-reviewed version harmonic generation Hubbard U",
+        "DOI arXiv:2606.27548",
+        "DOI arXiv:2609.01844"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[42] Hamer文献中“HOMO 10.58 eV”与“实验11.3 eV”的数值、物理含义及比较口径尚未对原文核实。",
+      "missing_evidence": "需要查阅Hamer原文Methods、结果表和补充材料，确认10.58 eV具体表示HOMO能级、第一电离能还是其他能量量，并记录其计算对象、结构模型、赝势或基组、收敛及能量外推方法；还需追溯11.3 eV实验值的原始文献。若10.58 eV和11.3 eV并非均直接来自[42]，应分别引用相应的计算来源和实验一手来源，不能仅以[42]同时承载两个数值。",
+      "search_keywords": [
+        "Hamer HOMO 10.58 eV 11.3 eV",
+        "Hamer 10.58 eV ionization energy Methods",
+        "Hamer hBN HOMO experimental ionization energy",
+        "hBN first ionization energy 11.3 eV experiment",
+        "hBN HOMO 10.58 eV calculation",
+        "Hamer supplementary information HOMO energy"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

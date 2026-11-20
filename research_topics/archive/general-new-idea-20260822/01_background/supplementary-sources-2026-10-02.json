@@ -1,0 +1,14 @@
+{
+  "proposal_id": "general-new-idea-20260822",
+  "cluster_id": "orphan-route-2026-10-02",
+  "entries": [
+    {
+      "source_id": "paper:2026-2609.20559-high-order-correlations-and-ultrafast-wigner-negat",
+      "title": "High-order correlations and ultrafast Wigner negativities in bright-squeezed-vacuum-driven high-harmonic generation",
+      "summary": "该文将高次谐波产生（HHG）扩展到由亮压缩真空（bright squeezed vacuum, BSV）这一宏观量子态驱动的强场非线性区，系统分析了谐波发射场的高阶（超出二阶）关联函数。核心结果表明，BSV 驱动的 HHG 不仅保留强非线性响应，还能在超快（驱动脉冲乃至亚周期）时间尺度上生成具有 Wigner 负性的非经典谐波光态，为'强场物理 × 连续变量量子光学'的交叉方向提供了直接证据与理论框架。",
+      "path": "knowledge/raw/papers/2026-2609.20559-high-order-correlations-and-ultrafast-wigner-negat.md",
+      "added_via": "cluster:orphan-route-2026-10-02",
+      "added_at": "2026-10-02T16:43:15Z"
+    }
+  ]
+}

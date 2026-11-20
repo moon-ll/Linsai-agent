@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "均匀体系QGT反演由Bauer-Hansen开创（[13]挂点内容不符，真实文献为一维拓扑体系HHG拓扑相差异）",
+      "missing_evidence": "需要找到真正在均匀/体相体系中通过HHG反演量子度规张量(QGT)的先例论文",
+      "search_keywords": [
+        "Luu Wörner Nat Commun 2018 Berry curvature quartz HHG",
+        "quantum metric tensor HHG inversion bulk crystal",
+        "quantum geometry tensor retrieval high harmonic generation",
+        "QGT reconstruction solid HHG polarization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "利用多维光场（椭偏依赖加多频场）反演Berry曲率与量子度规的方法学先例",
+      "missing_evidence": "缺少通过椭圆依赖+多频场组合反演Berry曲率和QGT的代表性实验或理论文献",
+      "search_keywords": [
+        "ellipticity dependent HHG Berry curvature retrieval",
+        "multi-color field HHG quantum geometry inversion",
+        "polarimetry Berry curvature HHG Luu Worner",
+        "bicircular HHG topological reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Shan等2021年Nature文章非莫尔体系中>30%光学非线性调制及标度关系的具体数值与适用条件",
+      "missing_evidence": "[15] Shan 2021 Nature论文的原始数据（调制深度30%、能隙15meV、强度-能隙比标度律）的精确数值与适用条件需要核实",
+      "search_keywords": [
+        "Shan 2021 Nature optical nonlinearity giant modulation",
+        "correlated insulator light-induced Floquet bandwidth modulation",
+        "ac-Stark effect intensity gap scaling correlated insulator",
+        "Nikola 2021 Nature twisted bilayer Floquet"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "magic-angle TBG的HHG全光学表征（Molinero等2024 Optica H3/H5/H7抑制与扭转角依赖）",
+      "missing_evidence": "需要核实Molinero 2024 Optica TBG HHG实验的扭转角精度、谐波阶数范围、H3/H5/H7抑制比的定量数据",
+      "search_keywords": [
+        "Molinero 2024 Optica twisted bilayer graphene HHG",
+        "TBG magic angle high harmonic generation suppression",
+        "Mrudul 2024 twisted bilayer high harmonic",
+        "graphene moire HHG twist angle dependence"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔关联能隙典型中值约10meV作为外推基准",
+      "missing_evidence": "需要不同莫尔体系（TBG、tMoS2/WSe2等）关联能隙的统计范围与典型值数据",
+      "search_keywords": [
+        "moire superlattice correlated insulator gap meV",
+        "magic angle TBG correlated gap transport measurement",
+        "tWSe2 tMoS2 Mott insulator gap energy scale",
+        "flat band gap meV twisted bilayer"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Bauer-Hansen [13]在正文9处挂点的真实归属需要重新对齐",
+      "missing_evidence": "需要找到能支撑'均匀体系反演QGT/Berry曲率先例'论断的正确文献，替换[13]错误挂点",
+      "search_keywords": [
+        "Luu Worner 2018 Nat Commun alpha quartz Berry curvature",
+        "topological insulator HHG Berry curvature retrieval experiment",
+        "2D material quantum geometry HHG polarization measurement",
+        "first observation Berry curvature HHG bulk solid"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

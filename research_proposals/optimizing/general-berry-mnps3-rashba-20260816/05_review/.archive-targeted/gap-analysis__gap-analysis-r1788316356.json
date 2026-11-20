@@ -1,0 +1,88 @@
+{
+  "gaps": [
+    {
+      "claim": "i-wave交变磁体圆偏振驱动下高次谐波螺旋度交替指纹遵循Ghorashi-Rappe对称性选择规则",
+      "missing_evidence": "文献表缺少Ghorashi-Rappe原文条目（正文[15]实为Werner HHG论文，张冠李戴），指纹支柱论证悬空，需补条目并重锚",
+      "search_keywords": [
+        "Ghorashi Rappe high harmonic generation altermagnet",
+        "i-wave altermagnet circular polarization harmonic selection rule",
+        "Ghorashi Rappe altermagnet nonlinear optics",
+        "altermagnet HHG helicity alternating fingerprint theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Werner等关于交变磁体非相对论自旋劈裂驱动HHG的理论预言",
+      "missing_evidence": "[15]编号真身为Werner HHG论文但被错配给Ghorashi论述，Werner自身论述需单独重锚编号并核对论文内容与正文主张匹配",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation",
+        "Werner spin splitting high harmonic theory",
+        "nonrelativistic spin splitting altermagnet nonlinear response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "正文L19/L39两处由Haque文献支撑的论述（同一文献被赋予两个编号）",
+      "missing_evidence": "[30]为幽灵编号（文献表中不存在），需核实Haque原文的真实存在性及其与论述主题的匹配，并统一编号",
+      "search_keywords": [
+        "Haque altermagnet high harmonic generation",
+        "Haque spin splitting Berry curvature",
+        "Haque altermagnetism 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "层间剪切声子/滑移铁电THz动力学论述",
+      "missing_evidence": "正文以[19]标注THz剪切声子论述，但[19]实为Ogawa g-wave压磁论文，该论述缺乏正确的剪切声子/滑移铁电动力学文献支撑",
+      "search_keywords": [
+        "sliding ferroelectricity interlayer shear phonon THz",
+        "interlayer shear mode van der Waals bilayer frequency",
+        "ferroelectric soft mode far-infrared sliding"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "g-wave压磁序参量及其超快动力学",
+      "missing_evidence": "Ogawa g-wave压磁论文被错配至THz剪切声子处，需移回g-wave论述；g-wave序参量光学读出/探测先例文献亦不足",
+      "search_keywords": [
+        "Ogawa g-wave piezomagnetism",
+        "g-wave piezomagnetic antiferromagnet symmetry",
+        "piezomagnetic order parameter ultrafast dynamics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "关键科学问题KQ2/KQ3证伪判据与Floquet选择性增强相关论述（L71空引用、[11]张冠李戴）",
+      "missing_evidence": "L71处引用为空、[11]内容与论述主题不符，Floquet选择性增强与证伪判据论述需以主题为真值源补充可验证文献",
+      "search_keywords": [
+        "Floquet engineering altermagnet spin splitting",
+        "Floquet selectivity high harmonic enhancement",
+        "Floquet Rashba coupling light-induced",
+        "Floquet band engineering 2D magnet THz"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "所提靶标体系是当前唯一可实现该HHG指纹读出的唯一靶标",
+      "missing_evidence": "'当前唯一''唯一靶标'等优先权表述无系统检索证据支撑，缺少第二靶标备选材料文献",
+      "search_keywords": [
+        "i-wave altermagnet material candidate",
+        "2D altermagnet material realization",
+        "altermagnet high harmonic generation target material",
+        "piezomagnetic antiferromagnet candidate material"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "螺旋度交替幅度退化50%阈值与分离度D_sep≥0.80量化指标",
+      "missing_evidence": "两指标无基线定义与文献先例（圆二色谱调制度/左右旋谐波相对差的量化方法、指纹判别阈值先例）",
+      "search_keywords": [
+        "circular dichroism high harmonic modulation depth quantification",
+        "helicity dependent harmonic yield relative difference",
+        "HHG magnetic order detection threshold metric",
+        "spectral fingerprint separation metric order parameter"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "gaps": [
+    {
+      "claim": "Floquet 稳态假设（H_Floquet 等效描述）在所提方案 λ≥2 μm、脉宽 <50 fs（对应仅 3–8 个光周期）的高场读出条件下成立",
+      "missing_evidence": "缺少少周期（亚 10 光周期）强场 Floquet 适用性的先例文献支撑；评审已点名 MgO 少周期 Floquet-HHG 指认先例需补充，且 10–15 光周期这一 KB 参数表阈值本身在方案中需有正式文献引用而非仅知识库内部参数",
+      "search_keywords": [
+        "few-cycle Floquet high harmonic generation",
+        "MgO Floquet HHG few-cycle",
+        "sub-10-cycle Floquet regime validity",
+        "Floquet steady-state assumption few-cycle limit",
+        "少周期 Floquet 高次谐波 适用条件"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献 [19] 中 30–40 meV 数值引自 arXiv:2308.10799v2，但条目所列为刊版且未做 arXiv 双标",
+      "missing_evidence": "缺少对 arXiv:2308.10799（Lian 等关于扭转 MoS₂/WSe₂ 激子结合能/有效质量的工作）正式刊版的确认，需核对 v2 预印本与发表版数值是否一致，并补全双 ID 与 DOI 标注；若数值有出入需注明'正式版数值待核'",
+      "search_keywords": [
+        "arXiv:2308.10799",
+        "Lian twisted MoS2 WSe2 exciton binding",
+        "moiré heterostructure exciton effective mass",
+        "twisted TMD exciton 30 40 meV",
+        "Lian 2024 扭转双层 激子"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

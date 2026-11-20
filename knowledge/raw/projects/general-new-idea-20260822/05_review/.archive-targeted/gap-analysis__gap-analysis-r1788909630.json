@@ -1,0 +1,115 @@
+{
+  "gaps": [
+    {
+      "claim": "Osumi等人在MnTe中观测到d波样自旋纹理ARPES结论",
+      "missing_evidence": "[16]被错挂为自旋分辨ARPES+MnTe d波样纹理，但APS官方摘要实际为photon-energy-tunable ARPES+DFT；需要原始MnTe d波自旋纹理ARPES实验文献，或改用[2]/[21]支撑该论断",
+      "search_keywords": [
+        "Osumi MnTe ARPES d-wave spin texture",
+        "MnTe spin-resolved ARPES d-wave altermagnet",
+        "MnTe giant band splitting PRB 109 115102"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[18] Bhattacharya/Bao的MnTe g波自旋纹理角度依赖预言",
+      "missing_evidence": "[18]作者链拼凑且内容错挂：真实文献为Liu Y Q, Si M S, Zhang G P等关于RuO₂的HHG工作；需替换为Haque[14]等真实MnTe各向异性HHG理论文献",
+      "search_keywords": [
+        "Haque MnTe anisotropic high harmonic generation altermagnet",
+        "MnTe g-wave angular dependence HHG theory",
+        "MnTe d-wave altermagnet HHG prediction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb高次谐波生成实验的Nature2026文献[11]",
+      "missing_evidence": "[11]集体作者\"CrSb Collaboration et al.\"系虚构，真实一作为Long M, Weinberger T I, Wu Z et al. (arXiv:2601.14526)；需核实正确的Nature条目",
+      "search_keywords": [
+        "Long Weinberger Wu CrSb altermagnet Nature 2026",
+        "arXiv 2601.14526 CrSb spin splitting",
+        "CrSb d-wave spin splitting experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnTe自旋极化HHG Nature2024实验[25]",
+      "missing_evidence": "[25]文章号46476应为2116，且需核实MnTe spin-polarized HHG的Nature官方条目（可能为Amin Nature 2024或Liu等）",
+      "search_keywords": [
+        "Amin MnTe altermagnet HHG Nature 2024",
+        "MnTe spin-polarized high harmonic generation Nature",
+        "Nature 2116 MnTe d-wave HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Bi2Te3/Bi2Se3非线性HHG光谱学[26]",
+      "missing_evidence": "[26]一作Liu Z应为Yang G、文章号56647应为1442；需核实Bi2Te3拓扑绝缘体HHG的真实Nature Communications条目",
+      "search_keywords": [
+        "Yang Bi2Te3 high harmonic generation Nature Communications1442",
+        "Bi2Te3 topological insulator HHG Yang",
+        "Nature Communications 1442 Bi2Te3 harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MoS2高次谐波生成复现性及阶次数据",
+      "missing_evidence": "Liu 2017单层MoS2基频0.30 eV 6-13阶HHG数据已在scheme修正，但残留[12][13]（arXiv 2605.25128/2606.31573）2026年代号式编号未经反查；需Crossref/Google Scholar核实真实性",
+      "search_keywords": [
+        "arXiv 2605.25128 high harmonic generation",
+        "arXiv 2606.31573 altermagnet HHG",
+        "Liu 2017 MoS2 monolayer HHG mid-infrared",
+        "MoS2 high harmonic generation Peterka"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CrSb altermagnet自旋分裂d波特征的ARPES实验定量值",
+      "missing_evidence": "缺少CrSb d-wave spin splitting eV量级ARPES实验数据；scheme中提到具体数值但content未引用原始实验测量",
+      "search_keywords": [
+        "CrSb ARPES spin splitting eV experimental",
+        "CrSb d-wave spin splitting ARPES measurement",
+        "CrSb nonrelativistic spin splitting magnitude ARPES"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnTe g波/d波自旋纹理的实验测量值（自旋分裂幅度、动量依赖）",
+      "missing_evidence": "目标3要求奈尔矢量±10°反演精度，但缺少MnTe d-wave自旋纹理角度依赖的ARPES实验定量数据作为基准",
+      "search_keywords": [
+        "MnTe d-wave spin texture momentum dependent ARPES",
+        "MnTe spin polarization angle dependence ARPES",
+        "MnTe altermagnet band structure spin splitting angle"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "2D altermagnet材料（Fe2CoGaTe2等）twisted bilayer HHG预言",
+      "missing_evidence": "Fe2CoGaTe2 21.79°扭转d-wave劈裂的HHG指纹缺失；需要2D altermagnet扭转双层HHG的理论或实验研究",
+      "search_keywords": [
+        "Fe2CoGaTe2 twisted bilayer altermagnet HHG",
+        "2D altermagnet twisted bilayer spin splitting",
+        "twisted bilayer altermagnet HHG fingerprint"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "磁场反转差分信号≥1%目标值的物理来源（MnTe HHG磁场依赖理论预言）",
+      "missing_evidence": "目标2将\"≥1%\"设为验收判据但L29标注为立项假设；需补MnTe在±7T下自旋极化谐波信号差分的定量理论/实验文献作为依据",
+      "search_keywords": [
+        "MnTe magnetic field HHG spin polarization differential",
+        "altermagnet HHG magnetic field reversal signal percent",
+        "MnTe HHG Neel vector orientation field dependence"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "SOC阈值灵敏度分析的理论基础（强场自旋轨道耦合对HHG影响）",
+      "missing_evidence": "content L19称SOC阈值由R1灵敏度分析确定，需强场下自旋轨道耦合对谐波产率影响的定量文献（0.3/0.6 V/Å的物理依据）",
+      "search_keywords": [
+        "spin-orbit coupling high harmonic generation strong field threshold",
+        "SOC strength HHG spin polarization modulation V/Angstrom",
+        "altermagnet HHG spin-orbit coupling field strength scaling"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

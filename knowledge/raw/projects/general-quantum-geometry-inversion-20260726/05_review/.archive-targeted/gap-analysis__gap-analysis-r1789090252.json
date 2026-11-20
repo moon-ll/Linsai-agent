@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "三档加性/乘性可辨识性阈值 R<1.2/1.2≤R<2/R≥2 缺乏统计依据",
+      "missing_evidence": "缺少 Fisher 信息比解析推导、效应量 Cohen's d 对应、噪声水平下 ROC 曲线或贝叶斯模型比较的分档物理依据",
+      "search_keywords": [
+        "Fisher information ratio additive multiplicative HHG inversion",
+        "Cohen's d effect size nonlinear spectroscopy threshold",
+        "Bayesian model comparison harmonic generation identifiability",
+        "ROC curve attosecond spectroscopy parameter retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ikeda [13] Sr₂CuO₃ 静态红移定标被错误外推为反演误差标度（[13] 实为 Mott 熔化动力学 arXiv:2508.00296）",
+      "missing_evidence": "缺少 Ikeda 2025 Sr₂CuO₃ Mott 熔化动力学与静态红移定标的区分依据，缺少光致熔化 vs CDW 序参量竞争的多体起源分类文献",
+      "search_keywords": [
+        "Ikeda Sr2CuO3 Mott insulator photoinduced melting arXiv:2508.00296",
+        "harmonic redshift CDW order parameter 1T-TaS2",
+        "Mott melting versus CDW order parameter HHG many-body",
+        "doublon holon high harmonic generation redshift"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "f-sum rule 阈值标度律 (1+0.5·U/W) 为待验证假说但已用于所有 R4 Go 判据",
+      "missing_evidence": "缺少 n=5000 弱关联档独立校准固定阈值的实测文献，缺少 U/W=0.5/1.0 多体带重整化对 f-sum rule 偏移的系统实验数据",
+      "search_keywords": [
+        "f-sum rule Hubbard U bandwidth renormalization solid HHG",
+        "moderately correlated regime U/W ratio harmonic generation",
+        "sum rule violation ratio strongly correlated electron gas",
+        "f-sum rule bandwidth scaling U over W experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Bi₂Te₃ 体相 HHG 产额10⁻⁵ photons/pulse 直接沿用 Mg:LiNbO₃ 体系，未单独标定（拓扑表面态与体相通道竞争可能降低体相通量）",
+      "missing_evidence": "缺少 Bi₂Te₃ 体相 1.5 μm驱动 HHG 产额实测文献，缺少拓扑表面态与体相通道 HHG 竞争效率的标定数据",
+      "search_keywords": [
+        "Bi2Te3 high harmonic generation 1.5 micron mid-infrared",
+        "topological insulator surface state bulk HHG channel competition",
+        "Bi2Te3 bulk bandgap HHG photon flux measurement",
+        "Bi2Se3 Bi2Te3 Sb2Te3 topological insulator high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "TiSe₂ 突变 ≥2° 判据缺对照排除设计（未设计变温对照剔除晶格热膨胀贡献）",
+      "missing_evidence": "缺少 1T-TaS₂ 顺电态（CDW 序参量消失）的温度依赖谐波谱对照文献，缺少普通温度响应（非序参量特异）与 CDW 序参量谐波特异性区分的实验数据",
+      "search_keywords": [
+        "1T-TaS2 paraelectric phase temperature dependence harmonic generation",
+        "TiSe2 charge density wave versus lattice thermal expansion HHG",
+        "CDW order parameter versus ordinary temperature response harmonic spectroscopy",
+        "Tyulnev TiSe2 high harmonic polarization asymmetry temperature"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV 双模压缩真空态 POVM 推导涉及三组并列数学对象（POVM、求偏迹、光子数分布）的物理结论",
+      "missing_evidence": "缺少 BSV 单模近似适用条件与 idler 真空投影内禀属性的理论文献支撑，缺少 POVM 推导的实验验证或对照推导",
+      "search_keywords": [
+        "bright squeezed vacuum single mode approximation breakdown",
+        "idler detector efficiency imperfect BSV quantum light POVM",
+        "squeezed vacuum mixed state detection efficiency photon number distribution",
+        "BSV signal idler heralding conditional single-mode squeezed state"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

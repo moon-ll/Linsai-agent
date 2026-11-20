@@ -1,0 +1,64 @@
+{
+  "_meta": {
+    "round": 2,
+    "focus_section": "references.md + 正文侧引用一致性",
+    "project_type": "general",
+    "files_reviewed": [
+      "critic-round-2.md",
+      ".monitor-view-r2.md",
+      ".monitor-diff-r2.md"
+    ],
+    "independent_verifications_performed": [
+      "arXiv:2601.20695 (Baykusheva Nat. Mater. 25, 937-943, 2026) — verified via arxiv.org",
+      "arXiv:2605.01388 (Du-Li-Lu doublon-holon HHG) — verified via arxiv.org",
+      "arXiv:2609.02466 (Uchida et al. SrCuO2/Pr2CuO4 dimensional HHG) — verified via arxiv.org/pdf/2609.02466",
+      "正文 [N] 角标与 references.md 编号一致性扫描",
+      "AI 写作味密度检查（在此基础上/为..提供..基础/具有..意义/本项目拟句首）"
+    ],
+    "standards_source": "/Users/ll/Desktop/LinSai-CoPilot/memory/nsfc-standards.json (project_types.general)"
+  },
+  "monitor_independent_score": 0.78,
+  "monitor_dim_scores": {
+    "innovation": 0.85,
+    "feasibility": 0.80,
+    "rigor": 0.78,
+    "completeness": 0.62
+  },
+  "weighting_evidence": {
+    "scheme": "NSFC general project evaluation focus (project_types.general.evaluation_focus): 创新性 0.35 + 可行性 0.29 + 科学意义 0.24 + 表达质量 0.12。",
+    "weighted_overall_check": "0.85*0.35 + 0.80*0.29 + 0.78*0.24 + 0.62*0.12 ≈ 0.298 + 0.232 + 0.187 + 0.074 ≈ 0.791。考虑 references 章节（[N] 一致性）属于 rigor + completeness 共同作用，调整为 0.78。",
+    "rigor_trajectory": "R1 critic 评分 0.50 基于'正文 5 处错位未同步'。实际 monitor 核验：正文 §1.2 末段 + §1.3 第三条证据线 + §1.2 段中 Baykusheva/Du/Bauer/Uchida 5 处全部已修复至正确编号与作者。critic 报告的'未同步修复'判断与实际申请书状态不符——critic 报告时间点早于 writer 提交修改。rigor 提升至 0.78 主要扣分：52→55 条目反增（vs R1 critic 要求压缩 12 条至 40）、预印本比例从 44.2% 上升到 45.5%（vs 30% 安全线）。",
+    "completeness_trajectory": "R1 critic 0.60 主要扣分：52 条超 30-40 标杆 12 条 + 预印本 23 条占 44.2% + 时效性 54%。本轮修复：新增 3 条真实 arXiv（全部联网验证真实存在，发表/提交于 2026 年）。但恶化：52→55 反增、预印本 23→25 占比 45.5%↑。新加 3 条 2026 年 arXiv 拉高时效性至约 58%（+4pp）。综合仅微增到 0.62。"
+  },
+  "writer_assessment": "writer 本轮修复了 R1 critic 标红的 4 处 critical 编号—作者—内容错位的**正文侧**部分，这是重大 P0 修复：(1) 'Baykusheva 等 2026 年 [26]'→'[53]'（新增真实条目 arXiv:2601.20695 Nat. Mater. 25, 937-943）；(2) 'Du 等 2026 年 [27]'→'[54]'（新增 arXiv:2605.01388 1D Hubbard 精确对角化）；(3) 'Bauer 等 2026 年 [12]'→'Cárdenas 等 2026 年 [12]'（保留 R1 修复，指向真实 arXiv:2604.13901）；(4) 'Uchida、Murakami 等 2026 年 [12]'→'Uchida 等 2026 年 [55]'（删除 Murakami 是规范引用——Uchida 为第一作者，删除共作者非错误；新增 arXiv:2609.02466 经联网核实作者列表确实含 Murakami/Takayoshi）。这 4 处修复把'半迁移态'恢复为正文+references.md 双向一致。3 条新加的 arXiv 引用 monitor 独立联网核实全部真实存在，可查到摘要/作者列表/DOI 链接，无杜撰嫌疑。AI 写作味密度极低（'在此基础上' 0 次、'为...提供...基础' 0 次、'具有...意义' 0 次、'本项目拟/将' 句首 0 次），写作水准高。但**仍有 2 个未根治问题**：(a) references.md 条目数 52→55 反增而非压缩，critic R1 标 critical 的 30-40 标杆 + 12 条方法学借鉴降级均未完成；(b) 预印本比例 23/52=44.2%→25/55=45.5%，反而恶化（3 条新增全部是 2026 年 arXiv）。这两项虽非 P0 红线（无 DOI 错配、无张冠李戴），但属 completeness 红线（条目超标、时效性结构失衡）。修改整体方向正确（修 P0 + 加新引用），但完整性目标（30-40 条标杆、30% 预印本安全线）未达成。",
+  "critic_assessment": "critic 报告的**核心论断'4 处 critical 编号—作者—内容错位正文未同步修复'与实际修改后申请书状态不符**——monitor 独立核验显示 4 处正文侧引用全部已正确修复（Baykusheva→[53]、Du→[54]、Bauer→Cárdenas [12]、Uchida→[55]）。critic 报告时间点早于 writer 提交最终修改快照。但 critic 报告的**次级论断全部成立**：(1) 52 条超 30-40 标杆 12 条——critic 标 critical，本轮 52→55 反增，问题更严重；(2) 预印本 23 条占 44.2%——本轮 25/55=45.5% 反而恶化；(3) 真实 Baykusheva/Du 文献未入主列表——本轮已补入 [53][54]；(4) [12] v 标识、[13] v2 实质修订、scheme.md 参数对齐（21/25 fs）——本轮 diff 未见响应。critic 评分 0.55 整体偏低（应区分'P0 红线触发 vs 完整性扣分'），因 P0 红线已修而未加分（评分已提交）。critic 报告存在以下轻微遗漏：(a) 未提示新加 [55] 真实条目应解决原 'Uchida/Murakami 错位' 中 Murakami 的去向（实际 Uchida 为第一作者，删除共作者不构成错位）；(b) [53] Baykusheva 实际已发表于 Nat. Mater. 25, 937-943 (2026)，critic 仅指 arXiv 号，未提正式期刊。整体而言 critic 评审方向准确，问题识别清晰，但报告时间点与最终状态错位导致综合评分被压低约 0.10-0.15。",
+  "writer_prohibitions": [
+    "条目膨胀未压缩：52→55 反增，违背 critic R1 标 critical 的'30-40 标杆 + 12 条方法学借鉴降级附录'要求。completeness 评分因此被压至 0.62。",
+    "预印本占比恶化：23/52=44.2%→25/55=45.5%，3 条新增全部是 2026 年 arXiv，无正式发表版本。虽未触发 P0 红线，但 30% 安全线完全失守。"
+  ],
+  "writer_prohibitions_resolved": [
+    "P0 红线已修复：4 处 critical 编号—作者—内容错位全部在正文侧正确同步，'半迁移态'解除。",
+    "新加 3 条 arXiv 引用真实性已 monitor 联网核实（arXiv:2601.20695 / 2605.01388 / 2609.02466），无杜撰。"
+  ],
+  "critic_prohibitions": [
+    "报告时间点错位：critic 报告基于'writer 修改前快照'，但 writer 实际已提交正文侧修复。critic 应在 writer 提交修改后复核正文角标与 references.md 一致性，而非依据 R1 报告基线直接套用 0.55 评分。",
+    "轻微遗漏：未核实新加 [53] 已发表于 Nat. Mater. 25, 937-943 (2026) 而非仅 arXiv 预印本；未提示 [55] Uchida et al. 作者列表含 Murakami，writer 删除共作者不构成错位。"
+  ],
+  "writer_suggested_delta": 6,
+  "critic_suggested_delta": 5,
+  "collusion_risk": "low",
+  "collusion_rationale": "未发现 writer-critic 主动串通（无放水迹象）。critic 报告核心论断（4 处 critical 错位未修）与实际申请书状态不符，更可能源于（a）critic 报告基于 R1 评审快照未复核 writer 实际修改，或（b）writer 修改完成时间晚于 critic 报告生成时间。critic 评分 0.55 偏严苛（应区分 P0 红线 0.50 与完整性 0.60 单独扣分），writer 实质性修复 4 处 P0 但 completeness 未改善（52→55 反增）。如果串通放水，writer 应减少修改以维持低分；实际 writer 大幅修改并新增 3 条真实 arXiv 引用——这是**真改但没改到位**的典型场景，非串通。",
+  "negative_feedback": false,
+  "negative_feedback_rationale": "writer 本轮实质性修复了 critic 报告的 4 处 P0 编号—作者—内容错位的正文侧（Baykusheva→[53]、Du→[54]、Bauer→Cárdenas [12]、Uchida→[55] 全部同步），新加 3 条 arXiv 引用全部真实可查（monitor 联网核实 arXiv:2601.20695、2605.01388、2609.02466 三条均存在，含摘要/作者/DOI）。修复方向正确，触发 P0 红线降级路径。**未触发 negative_feedback 的原因**：(1) writer 不是'评审已识别→不修复'，而是'评审识别 P0 → 修复 P0'；(2) 新加 3 条引用全部真实可联网核实，无杜撰/张冠李戴；(3) 52→55 反增与预印本占比恶化属于 completeness 维度问题，不构成 P0 红线；(4) 整体写作水准与论证密度仍属 NSFC general 较高档次。",
+  "overall_assessment": "本轮修改的总体判断：**P0 红线解除，完整性未改善，综合评分 0.78（介于 critic 0.55 与 monitor R5 0.68 之间）**。writer 实质性修复了 critic 标红的 4 处 critical 编号—作者—内容错位（正文 + references.md 双侧一致），并新增 3 条经 monitor 联网核实的真实 arXiv 引用（[53] Baykusheva et al. Nat. Mater. 25, 937-943, 2026、[54] Du-Li-Lu 1D Hubbard 精确对角化、[55] Uchida et al. SrCuO₂/Pr₂CuO₄ 维度对比），从 critic R1 报告的'半迁移态'恢复为一致状态。**但仍有 2 个未根治问题**：(1) references.md 条目数 52→55 反增而非压缩 12 条至 40 条以下，critic R1 标 critical 的 30-40 标杆未达成；(2) 预印本占比 44.2%→45.5% 反而恶化（3 条新增全部为 2026 年 arXiv），30% 安全线失守。critic 综合评分 0.55 偏严苛，主要源于报告时间点与实际修改后申请书错位——critic 报告基于 R1 评审快照判定'4 处 critical 错位未同步'，但 monitor 核验正文侧实际已全部修复。维度评分：innovation 0.85（不受 references 评审影响，三项创新点（BSV 反演框架/可辨识性量化/CDW 相图）逻辑闭环）、feasibility 0.80（不涉及 references，R1-R4 链条完整）、rigor 0.78（P0 修复是重大提升，从 0.50 跃升；扣分因 52→55 反增 + 预印本恶化）、completeness 0.62（条目膨胀抵消修复，30-40 标杆未达成）。按 general 权重综合 0.298+0.232+0.187+0.074≈0.791，调整为 0.78（保守估计因仍存在未压缩条目问题）。建议：(1) writer 在下一轮把 12-15 条方法学借鉴定位条目（[15][16][18][23][24][47][48][49][51][52] 等）降级附录，主列表压缩至 40 条；(2) 把 3 条 2026 年 arXiv 标记为'已正式发表时替换'，避免预印本占比超 45% 的红线；(3) 修复 [12] v 标识与 [13] v2 实质修订核实（critic R1 仍标的 medium 问题）；(4) 核实 scheme.md 中 25 fs FWHM 参数与 rationale §1.2 中 21/25 fs 表述对齐。",
+  "evidence_references": {
+    "verified_real_new_arxiv": {
+      "53_Baykusheva_2026": "arXiv:2601.20695, 'Quantum control of Hubbard excitons' by Baykusheva, Carmichael, Weber, Lu, Glerean, Meng, De Oliveira, Homes, Zaliznyak, Gu, Dean, Rubio, Kennes, Claassen, Mitrano. Submitted 2026-01-27. Published as Nat. Mater. 25, 937-943 (2026). DOI 10.1038/s41563-026-02517-6. Verified via arxiv.org/abs/2601.20695.",
+      "54_Du_Li_Lu_2026": "arXiv:2605.01388, 'Tracking doublon-holon dynamics in high-harmonic generation from Mott insulators' by Du, Li, Li, Lu. Uses exact diagonalization + time-dependent density-matrix propagation on 1D Hubbard chain. Verified via arxiv.org/html/2605.01388.",
+      "55_Uchida_et_al_2026": "arXiv:2609.02466, 'Prominent Dimensional Effects on High-order Harmonic Generation in Strongly Correlated Electron Systems' by K. Uchida, S. Takayoshi, Y. Murakami, D. Song, A.M. Hallas, M. Watanabe, T. Konishi, A. Nakano, K. Tanaka. Verified via arxiv.org/pdf/2609.02466. Author list includes Murakami, so writer's deletion of Murakami from in-text citation is correct first-author convention (only Uchida cited as lead author)."
+    },
+    "writer_deletion_of_murakami_rationale": "arxiv:2609.02466 第一作者为 K. Uchida (Kyoto University)，Murakami 为第三作者。NSFC 引用规范以第一作者为代表，因此正文写 'Uchida 等 2026 年 [55]' 正确，删除共作者 Murakami 不构成信息丢失或错位。critic R1 报告中'删除 Murakami'的担忧不成立。",
+    "pre_mutation_state": "R1 报告时正文 §1.2 末段、§1.3 第三条证据线存在 4 处 critical 错位（Baykusheva→[26]、Du→[27]、Bauer→[12]、Uchida/Murakami→[12]）。writer R2 修改后 monitor 独立搜索申请书全文确认这 4 处全部已正确同步。",
+    "post_mutation_state": "正文 §1.2 L27: 'Baykusheva 等 2026 年 [53]'、'Du 等 2026 年 [54]'、'Cárdenas 等 2026 年 [12]'、'Uchida 等 2026 年 [55]'; §1.3 L47: 'Baykusheva 等 2026 年 [53]'、'Du 等 2026 年 [54]'、'Cárdenas 等 2026 年 [12]'、'Uchida 等 2026 年 [55]'。与 references.md [53][54][55] 双向一致。"
+  }
+}

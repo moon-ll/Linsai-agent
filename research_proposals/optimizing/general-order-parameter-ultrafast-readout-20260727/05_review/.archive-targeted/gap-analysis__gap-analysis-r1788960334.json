@@ -1,0 +1,72 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb 与 MnTe 均属于 g 波 altermagnet（d 波系错误定性）",
+      "missing_evidence": "缺少 CrSb g 波对称性的三维 k 空间测绘实证、MnTe g 波对称性实证、以及全文 d 波→g 波替换所依据的 2024—2025 年最新文献",
+      "search_keywords": [
+        "CrSb g-wave altermagnet three-dimensional k-space ARPES",
+        "CrSb g-wave altermagnet s41467-025-56647-7",
+        "arXiv 2405.12687 g-wave altermagnet CrSb",
+        "MnTe g-wave altermagnet Belashchenko PRL 134.086701",
+        "altermagnet spin splitting symmetry d-wave vs g-wave classification",
+        "altermagnet nodal planes symmetry classification review 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "d 波自旋分裂先验值 100—500 meV 与 ARPES 实测约 1.0 eV 不符",
+      "missing_evidence": "缺少 CrSb/MnTe 自旋劈裂幅度的 ARPES 实测数值（0.4—1.2 eV 区间）作为正演模型先验依据",
+      "search_keywords": [
+        "CrSb spin splitting ARPES magnitude eV",
+        "MnTe spin splitting ARPES experiment",
+        "altermagnet spin splitting experimental value review",
+        "Osumi MnTe PRB 109 115102 spin splitting",
+        "CrSb d-wave spin splitting ARPES experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "场强 0.3—0.8 V/Å 对应光强 1.2×10¹²—8.5×10¹² W/cm²（原换算 8×10¹²—2×10¹³ 错误）",
+      "missing_evidence": "缺少强场光强-电场换算公式 I=½cε₀E² 的标准引用或实验校准数据，以校正括注数值",
+      "search_keywords": [
+        "strong field intensity electric field conversion V per Angstrom W per cm2",
+        "HHG driving field strength intensity benchmark solid state",
+        "Ghimire 2011 ZnO mid-infrared HHG field strength intensity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "差分协议以温度跨 Néel ×磁场反向×偏振三轴乘积控制实现 HHG 序参量读出",
+      "missing_evidence": "缺少 CrSb Néel 温度（约 720 K）高于可达温区时磁场×偏振双差分协议的可行性实验依据",
+      "search_keywords": [
+        "altermagnet HHG magnetic field differential protocol",
+        "CrSb magnetic field order parameter switching HHG",
+        "spin-polarized HHG magnetic field reversal altermagnet experiment",
+        "magnetic field driven HHG symmetry breaking differential measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TiSe₂ 实验—理论双源证据链支撑高阶谐波序参量重建",
+      "missing_evidence": "缺少 TiSe₂ 高次谐波偏振不对称性理论与实验的定量一致性证据（Tyulnev/Zhang 工作）",
+      "search_keywords": [
+        "Tyulnev TiSe2 high harmonic polarization asymmetry",
+        "TiSe2 HHG experiment theory quantitative agreement",
+        "TiSe2 semiconductor Bloch equation high harmonic generation",
+        "Zhang TiSe2 anomalous Hall high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "HHG 序参量重建在 CrSb/MnTe 上 SNR>5（对应 1% 一致性）作为判据阈值",
+      "missing_evidence": "缺少固体 HHG 序参量反演的 SNR 阈值、shot noise floor、光子计数统计等信噪比基准文献",
+      "search_keywords": [
+        "solid-state HHG shot noise floor photon counting",
+        "HHG signal to noise ratio altermagnet experimental",
+        "high harmonic spectroscopy detection limit magnetic order",
+        "Fisher information matrix HHG parameter retrieval condition number"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

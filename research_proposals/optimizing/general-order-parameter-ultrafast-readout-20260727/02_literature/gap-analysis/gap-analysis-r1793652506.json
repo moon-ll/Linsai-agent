@@ -1,0 +1,16 @@
+{
+  "gaps": [
+    {
+      "claim": "§二.5 L89 关于「相邻体系的时间分辨磁光实验」的定性概述（用于支撑三档判据科学价值的论述）",
+      "missing_evidence": "正文缺 [14] 角标——rationale §一.2 已挂 Yang 等人 [14]，但 content 章该论断处未给出引用标记，违反「正文有[N]角标对应」的引用纪律；需在句尾补「Yang 等人 [14]」闭合论证链",
+      "search_keywords": [
+        "time-resolved magneto-optical spectroscopy",
+        "ultrafast magneto-optics",
+        "time-resolved MOKE",
+        "Yang ultrafast magnetic dynamics"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

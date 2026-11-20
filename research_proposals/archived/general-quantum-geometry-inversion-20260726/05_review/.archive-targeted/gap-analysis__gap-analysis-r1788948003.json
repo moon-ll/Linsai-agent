@@ -1,0 +1,114 @@
+{
+  "gaps": [
+    {
+      "claim": "[45] 支撑的“2024年自旋量子几何张量”工作，正文作者名 Xiao 与参考文献作者 Xiang、L.、Jin、H.、Wang、J. 不一致。",
+      "missing_evidence": "缺少可核验且作者、年份、题名、版本与 arXiv:2406.02257 完全一致的原始文献元数据及正文引文。",
+      "search_keywords": [
+        "arXiv:2406.02257",
+        "2406.02257 Xiang Jin Wang spin quantum geometry tensor",
+        "Xiang Jin Wang spin quantum geometry 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ghimire 等人在 2011 年以 ZnO 晶体实验首次证实固体高次谐波产生，并构成固体 HHG 研究范式的起点。",
+      "missing_evidence": "缺少该首例固体 HHG 实验的原始论文，以及用于支持“首次”“研究范式起点”表述的同期权威综述。",
+      "search_keywords": [
+        "Ghimire 2011 ZnO solid-state high harmonic generation first observation",
+        "Observation of high-order harmonic generation from a solid crystal",
+        "solid-state high harmonic generation review 2011 ZnO"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Luu 与 Wörner 在 2018 年通过 α-quartz 固体 HHG 偏振测量反演 Berry 曲率。",
+      "missing_evidence": "缺少该 Berry 曲率—高次谐波偏振反演工作的原始实验论文；尤其需要核验实验对象、测量观测量、反演量及 2018 年发表信息。",
+      "search_keywords": [
+        "Luu Wörner 2018 alpha quartz high harmonic Berry curvature",
+        "measurement of Berry curvature in solids using high harmonic generation",
+        "solid-state HHG polarization Berry curvature 2018"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "自旋量子几何张量是量子几何反演的重要理论基础，能够连接自旋结构与高次谐波或非线性光学响应。",
+      "missing_evidence": "缺少 spin quantum geometry tensor 的原始定义论文，以及其与 Berry 曲率、量子度规及非线性响应之间关系的可核验文献。",
+      "search_keywords": [
+        "spin quantum geometry tensor",
+        "spin quantum metric nonlinear optical response",
+        "spin-resolved high harmonic generation",
+        "quantum geometry tensor Berry curvature quantum metric"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子光与强关联体系的联合效应，尤其是 BSV/压缩光驱动 Mott 绝缘体高次谐波，仍缺少面向 Berry 曲率与量子度规反演的系统联合检验。",
+      "missing_evidence": "缺少能够同时覆盖量子光驱动、强关联 Mott 态和 Berry/度规高次谐波反演的原始研究或直接可比证据。",
+      "search_keywords": [
+        "bright squeezed vacuum Mott insulator high harmonic generation",
+        "compressed light driven Mott insulator high harmonic generation",
+        "squeezed light strong correlation high harmonic",
+        "quantum light Berry curvature inversion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子态描述层级会显著影响 HHG 预测，且三种描述差异小于10%可作为数值阶段 Go 判据。",
+      "missing_evidence": "缺少纯态、混合态和非相干/退相干量子态 HHG 正演结果的定量比较基准，以及10%误差阈值依据。",
+      "search_keywords": [
+        "quantum state description high harmonic generation pure mixed state",
+        "decoherence effect solid-state HHG",
+        "density matrix versus wavefunction high harmonic generation",
+        "squeezed light high harmonic mixed state",
+        "HHG quantum light theoretical comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Lange 等的 Mott 绝缘体压缩光高次谐波工作构成量子光与强关联联合研究的先例。",
+      "missing_evidence": "缺少文献[20]的完整、可核验引文信息，并需通过原文核实其是否确实同时研究压缩光和 Mott 绝缘体高次谐波。",
+      "search_keywords": [
+        "Lange Mott insulator squeezed light high harmonic generation",
+        "Lange compressed light high harmonic Mott insulator",
+        "Mott insulator high harmonic compressed light",
+        "Lange HHG Mott insulator paper"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "单模压缩真空态可通过 idler 真空投影直接得到，并对应 signal 条件态。",
+      "missing_evidence": "缺少条件态、测量诱导非高斯性、idler 投影及单模压缩态之间关系的量子光学原始依据。",
+      "search_keywords": [
+        "idler projection signal conditional state squeezed vacuum",
+        "conditional signal state idler measurement squeezed vacuum",
+        "measurement-induced non-Gaussianity single-mode squeezed state",
+        "heralding single-mode squeezed vacuum idler detector"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目提出量子光驱动的固体 HHG 量子态描述方法，具有明确的方法学和科学增量。",
+      "missing_evidence": "缺少相关量子光 HHG 理论及实验研究的系统基线，需区分原子/气体体系、固体体系、量子态表征及反演方法四类证据。",
+      "search_keywords": [
+        "quantum light driven high harmonic generation",
+        "squeezed light high harmonic generation experiment",
+        "quantum light solid-state HHG theory",
+        "high harmonic generation photon statistics",
+        "quantum enhancement factor HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "项目将基于 HHG 实现 Berry 曲率、量子度规或其他量子几何量的高灵敏反演。",
+      "missing_evidence": "缺少量子几何量与 HHG 振幅、相位、偏振、椭圆率、截断能等可测量观测量之间的定量映射及实验验证文献。",
+      "search_keywords": [
+        "Berry curvature high harmonic spectroscopy",
+        "quantum metric high harmonic spectroscopy",
+        "quantum geometry nonlinear optical response",
+        "high harmonic reconstruction of Berry curvature",
+        "HHG quantum geometry inversion"
+      ],
+      "priority": "high"
+    }
+  ]
+}

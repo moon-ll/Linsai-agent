@@ -1,0 +1,163 @@
+{
+  "_meta": {
+    "purpose": "跨章数值/机制口径登记（params registry）。canonical 为唯一正确口径，stale_patterns 为禁止复用的旧表述/错挂形式；writer 修订时须对照本表防回退。",
+    "created": "2026-10-17",
+    "updated": "2026-11-01",
+    "source": "评审团第三轮修改（manual-revision-20261016）+ 第四轮修改（manual-revision-20261024），依据 R1/R3 联网核实结论；panel 第五轮 writer 修改：文献表 43→40（删 [10]/[14]/[26] 弱锚）全稿联动重排，params canonical 同步"
+  },
+  "entries": [
+    {
+      "key": "citation_bai_multicarrier_hall",
+      "canonical": "Bai 三载流子霍尔溯源（APL 126, 042402, 2025）＝[30]；正文挂靠 rationale §一.2 国内研究段",
+      "stale_patterns": [
+        "三载流子分析溯源至多带输运而非反常霍尔 [32]",
+        "Bai [32]"
+      ],
+      "note": "R3-01 critical：文献表缩编 46→40 重排后正文未同步，Bai 真身 [32] 被挂成 [34]（[34] 实为 Zhang 磁振子第一性原理）。2026-10-17 修复并播种防回退。 编号同步：2026-11-10 references 轮重排（新增 4 条池内文献，尾区编号后移）后 canonical 编号更新为 [30]。"
+    },
+    {
+      "key": "citation_kravchuk_gwave_magnon",
+      "canonical": "Kravchuk g 波手性磁振子理论（PRB 112, 144421, 2025）＝[31]；正文挂靠 content §二.3 与 scheme §三.2",
+      "stale_patterns": [
+        "保持 g 波对称且不受易轴各向异性改变 [33]",
+        "Kravchuk 等人 [33]"
+      ],
+      "note": "R3-04 critical：两处 [35]→[33]。[35] 实为 Mizuno 自旋点群 HHG 定则。 编号同步：2026-11-10 references 轮重排（新增 4 条池内文献，尾区编号后移）后 canonical 编号更新为 [31]。"
+    },
+    {
+      "key": "citation_zhang_lswt_chiral_magnon",
+      "canonical": "Zhang 线性自旋波预言（PRB 111, 174451, 2025）＝[32]；正文挂靠 content §二.3，与 Singh [17] 构成预言—证实链",
+      "stale_patterns": [
+        "Zhang 等人 [34] 以线性自旋波理论预言"
+      ],
+      "note": "R3-03 critical：[36] 实为 Yu 反常输运。scheme §三.3 的 Yu=[36] 为正确挂法，勿误改。 编号同步：2026-11-10 references 轮重排（新增 4 条池内文献，尾区编号后移）后 canonical 编号更新为 [32]。"
+    },
+    {
+      "key": "citation_mizuno_spin_group_selection_rule",
+      "canonical": "Mizuno 自旋点群选择定则（Phys. Rev. B 114, L200403, 2026，DOI 10.1103/1vc6-c7rs；原 arXiv:2606.31573 已出正式版）＝[34]；正文挂靠 content §二.3",
+      "stale_patterns": [
+        "Mizuno [35]"
+      ],
+      "note": "R3-02 critical + R3-07 medium：[37] 实为 Grzybowski CoO 迟滞文；2026-10-19 正式版已出（PRB 114(20) L200403），refs 按正式版著录并撤【预印本】标。 编号同步：2026-11-10 references 轮重排（新增 4 条池内文献，尾区编号后移）后 canonical 编号更新为 [34]。"
+    },
+    {
+      "key": "citation_werner_altermagnet_hhg",
+      "canonical": "Werner 交错磁 HHG 两 SOC 极限（PRB 110, 235101, 2024）＝[8]；正文挂靠 rationale/content/scheme 多处",
+      "stale_patterns": [
+        "Werner 等人 [10] 在 SOC 可忽略极限下的预言",
+        "Werner 等人 [10] 的理论给出了候选信号的存在性预言"
+      ],
+      "note": "R1-01/R2-01 critical：scheme §三.3 与 §5 两处误标 [13]（[13] 实为 Wang-Meng 相干声子）。Werner 一文在 scheme 内同作者两号并存是易漏检回归点。 编号同步：2026-11-10 references 轮重排（新增 4 条池内文献，尾区编号后移）后 canonical 编号更新为 [8]。"
+    },
+    {
+      "key": "citation_mandal_precision_apparatus",
+      "canonical": "Mandal 块体固体 HHG 精密装置（Rev. Sci. Instrum. 97, 045209, 2026）＝[18]",
+      "stale_patterns": [
+        "构成本项目装置搭建的工程基线 [21]"
+      ],
+      "note": "R1-01/R2-05 critical：[24] 实为 Uzner-Neufeld 层间耦合。scheme §三.4 的 Mandal [21] 原本已挂对。 编号同步：2026-11-10 references 轮重排（新增 4 条池内文献，尾区编号后移）后 canonical 编号更新为 [18]。"
+    },
+    {
+      "key": "numerics_chiral_magnon_splitting_27meV",
+      "canonical": "27(2) meV（Singh arXiv:2511.16086 v2 正文自旋波拟合折算值，动量维六重劈裂换算，能量维度受谱仪分辨率约 20 meV 限制未直接分辨）",
+      "stale_patterns": [
+        "27\\(5\\)"
+      ],
+      "note": "R1-03 high + R3-03 high：本轮 R1/R3 正文级核验证实原文为 27(2) meV（v1/v2 摘要均无 27(5)，上轮 canonical 'v1 摘要载 27(5)' 被证伪），canonical 反转为 27(2) 并播种旧值防回退；刊版发表后以刊版复核。"
+    },
+    {
+      "key": "expression_sigma_design_estimate",
+      "canonical": "σ = 0.5%—0.8%（设计估值区间，第 1 年随装置信噪比标定一并定值）",
+      "stale_patterns": [
+        "σ = 0.5%—0.8%（预研实测区间）"
+      ],
+      "note": "R1-02 high：装置第 1 年才搭建，'预研实测'与时间线矛盾；折算区间 0.75%—1.6% 不变。"
+    },
+    {
+      "key": "expression_tn_733k_measurement_caliber",
+      "canonical": "733(4) K（中子衍射+磁化率口径定值；既有热力学—输运口径文献测值约 705—723 K，差异属测量口径不同，量级判断不受影响）",
+      "stale_patterns": [],
+      "note": "R1-06 low：口径差异说明补入 rationale §一.4，避免评审误判选择性引值。"
+    },
+    {
+      "key": "expression_field_strength_conversion_chain",
+      "canonical": "工作区间 0.30—0.80 V/Å 两档端点闭合：低重频 1 kHz×1.5 mJ×100 fs×Ø0.5—1.3 mm；高重频 30 μJ·50 fs·Ø95 μm→0.80、10 μJ·30 fs·Ø190 μm→0.30",
+      "stale_patterns": [
+        "1—2 mJ × 百微米焦斑",
+        "10—30 μJ × 30—50 μm 焦斑"
+      ],
+      "note": "P0 #3/#4 critical（上轮已修）：场强换算链闭合，本轮 R1 复核通过；播种防回退。对应光强 1.2×10¹²—8.5×10¹² W/cm²（I = ½cε₀E²）。"
+    },
+    {
+      "key": "expression_internal_doc_reference",
+      "canonical": "本项目装置参数附录（去内部化的一般表述）",
+      "stale_patterns": [
+        "方法学手册 §装置参数表",
+        "方法学手册附录一致",
+        "方法学手册一致"
+      ],
+      "note": "R2-06 high（上轮）+ R1-07/R2-10 medium（本轮）：内部文件名残留；上轮修 scheme 两处，本轮修 full_review 口径表 L21/L23 两处变体。"
+    },
+    {
+      "key": "expression_search_timestamp_format",
+      "canonical": "2026 年 8 月（中文月份格式）",
+      "stale_patterns": [
+        "2026-08 检索",
+        "截至 2026-08"
+      ],
+      "note": "R2-08 medium：数字月份时间戳残留 4 处（rationale §一.1/§一.2、content §二.5、scheme §7）。"
+    },
+    {
+      "key": "expression_final_verdict_wording",
+      "canonical": "最终判定（d/g 波型争议的裁决动词统一用词）",
+      "stale_patterns": [
+        "锁定终判",
+        "确定终判",
+        "若终判为"
+      ],
+      "note": "R2-15 medium：'终判'法律用语越界 4 处统一替换（rationale/content/scheme）。"
+    },
+    {
+      "key": "citation_ref17_doi_only",
+      "canonical": "[15] Liu RuO₂ HHG 各向异性仅以 DOI 10.1103/9gv7-vhxw 著录（PRB 112, L081105），该文无可定位的 arXiv 预印本版本",
+      "stale_patterns": [
+        "arXiv:2410.05360"
+      ],
+      "note": "R1-02 high + R3-01 critical：2410.05360 为冰盖水弹性波无关论文（J. Fluid Mech. 1002, A24），错挂删除；正确 arXiv 号两轮检索未获，禁止代填，定稿前 NASA ADS 按 DOI 反查一次，查得后可补回。"
+    },
+    {
+      "key": "expression_g1_threshold_design_value",
+      "canonical": "TiSe₂ 复现 10% 阈值为本项目设计取值（同类实验典型重复性量级经验参照 + 工程余量合成；Tyulnev [1] 原文未报告该不确定度数值）",
+      "stale_patterns": [
+        "Tyulnev 实验 3/5/7 阶谐波相对强度约 10% 量级的不确定度",
+        "文献实验不确定度量级"
+      ],
+      "note": "R1-01 critical + R3-02 critical：[1] 原文无 10% 不确定度数值（误差棒口径仅 one standard deviation），自设阈值伪装文献数值不可辩护；rationale §一.3 / scheme §三.5 / full_review 对照表 / content §二.0 四处联动改设计取值口径。"
+    },
+    {
+      "key": "citation_nbse2_rt_tddft_pair",
+      "canonical": "Rehn [3] 与 Ahmed [4] 两组 NbSe₂ 研究同为实时 TDDFT（[3] 聚焦 2H 与 CDW 两相谐波响应，[4] 聚焦泵浦强度依赖），不构成解析方法对照",
+      "stale_patterns": [
+        "实时 TDDFT 与解析方法互为方法学互补",
+        "HHG 解析理论"
+      ],
+      "note": "R1-04 medium + R3-04 high：arXiv:2310.03080 全文方法段明示 RT-TDDFT，'解析理论'对照轴不存在。"
+    },
+    {
+      "key": "expression_exciton_strongly_bound",
+      "canonical": "[8] Jensen 研究对象为强束缚激子的 HHG 谱学（激子态相干布居在谐波谱中留下可反演的独特签名）",
+      "stale_patterns": [
+        "激子凝聚的 HHG 响应 \\[8\\]"
+      ],
+      "note": "R1-05 medium + R3-06 medium：原文题名 strongly bound excitons，全文无 exciton condensation 表述，'激子凝聚'属对象升格；范围排除语中的'激子凝聚'（不挂 [8]）可保留。"
+    },
+    {
+      "key": "expression_zhang37_long_range_exchange",
+      "canonical": "Zhang [32]：CrSb 手性磁振子劈裂主要由两条长程交换相互作用（体对角线方向）的劈裂驱动",
+      "stale_patterns": [
+        "第 11、12 近邻交换通道（J₁₁/J₁₂）驱动"
+      ],
+      "note": "R3-05 medium：arXiv:2503.12920 摘要原文作 long-range exchange interactions along body diagonal lines，未以 J₁₁/J₁₂ 指称；旧表述混用 [20] 参数体系。"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "cl_20260815_134f69",
+  "entries": [
+    {
+      "source_id": "briefing:knowledge/wiki/reviews/briefing-2026-05-14.md",
+      "title": "每日简报：强场超快光学研究（固态HHG与阿秒物理前沿）",
+      "summary": "本文是一份强场超快光学领域的文献调研简报，核心梳理了2026年固体高次谐波与阿秒物理的最新进展：包括Agostini等人的阿秒科学路线图（指出HHG探测中微扰/非微扰边界为未解决问题、时间分辨率已近1阿秒但能量与空间分辨率仍是挑战），以及利用双泵浦方案区分固体HHG中OAM转移的结构烧孔与动力学烧孔机制的研究（为产生涡旋阿秒脉冲提供路径）。",
+      "path": "knowledge/wiki/reviews/briefing-2026-05-14.md",
+      "added_via": "cluster:cl_20260815_134f69",
+      "added_at": "2026-08-15T17:49:03Z"
+    },
+    {
+      "source_id": "hermes_briefing:research_briefing_20260514.md",
+      "title": "强场超快光学研究简报",
+      "summary": "该简报汇编并评述了2025年以来固态高次谐波（HHG）与阿秒物理领域的5篇新论文，核心内容包括：阿秒科学路线图对HHG探测极限与光场波形合成的展望、利用双泵浦方案区分固体HHG中OAM转移的结构烧孔与动力学烧孔机制，以及用Jaynes-Cummings型量子光学模型揭示能带拓扑在HHG光谱中的可观测指纹。简报进一步将这些进展转化为可实验验证的思路，如拓扑材料（WTe₂）中OAM转移效率与拓扑不变量的关联、奇偶次谐波强度比作为拓扑序参量等。",
+      "path": "/Users/ll/Desktop/hermes_workspace/knowledge_base/AI_wiki/briefings/research_briefing_20260514.md",
+      "added_via": "cluster:cl_20260815_134f69",
+      "added_at": "2026-08-15T17:49:03Z"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "gaps": [
+    {
+      "claim": "（三）研究方案章节为0字节空文件，阿秒条纹谱测量与脉冲重构的完整技术路线缺乏任何方法论文献支撑",
+      "missing_evidence": "缺少阿秒条纹实验方案设计（光路构型、延迟扫描、电子能谱测量）与重构算法实现及验证的方法学文献，方案撰写时无具体技术路线可引用",
+      "search_keywords": [
+        "attosecond streaking experimental setup design",
+        "streaking spectroscopy delay scan electron spectrometer",
+        "attosecond pulse retrieval algorithm implementation",
+        "FROGCRAB retrieval experimental scheme"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "特色与创新要件无独立载体，创新点仅存在于上游00_research_idea.md，未与现有阿秒脉冲重构方法进行文献对比以确立新颖性",
+      "missing_evidence": "缺少FROGCRAB、VM-TDAP、inzani rACE神经网络等现有重构方法的系统性对比与性能基准文献，无法定位本课题创新点相对国际前沿的增量",
+      "search_keywords": [
+        "attosecond pulse retrieval methods comparison",
+        "rACE neural network attosecond pulse reconstruction",
+        "FROGCRAB phase retrieval performance benchmark",
+        "attosecond metrology retrieval algorithm review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预期研究成果仅有content.md中嵌于目标段的终止判据，缺乏可对照的阿秒脉冲表征保真度定量基准文献",
+      "missing_evidence": "缺少水窗波段及多电子壳层阿秒脉冲重构保真度、重构误差的定量基准文献，预期成果可达性判断无文献依据",
+      "search_keywords": [
+        "water window attosecond pulse retrieval fidelity",
+        "attosecond pulse reconstruction error benchmark",
+        "streaking retrieval accuracy quantitative assessment"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

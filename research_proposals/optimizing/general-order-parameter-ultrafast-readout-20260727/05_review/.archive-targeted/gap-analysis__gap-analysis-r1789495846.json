@@ -1,0 +1,44 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb T_N 实测值 733(4) K 的原始实验文献支撑",
+      "missing_evidence": "content L41 标注 CrSb T_N=733 K[27] 但 rationale×3、scheme×3、full_review 口径表仍滞留 720 K；需要找到 T_N=733(4) K 的原始实验论文（如中子衍射/磁化率测量）以统一全文口径",
+      "search_keywords": [
+        "CrSb Neel temperature 733 K",
+        "CrSb antiferromagnetic transition neutron diffraction",
+        "CrSb T_N experimental magnetization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Tyulnev 等人 TiSe2 CDW 各向异性谐波复现幅度 ≤10% 的实验数据",
+      "missing_evidence": "content L7/L87 挂靠 Tyulnev 实验实测（±8%）；rationale/scheme 仍挂 Zhang 理论偏差；需要 Tyulnev 原论文中各向异性谐波分量幅度随温度变化的实测百分比",
+      "search_keywords": [
+        "Tyulnev TiSe2 anisotropic harmonic amplitude",
+        "TiSe2 CDW high harmonic polarization dependence",
+        "Tyulnev Nature 2024 TiSe2 second harmonic"
+      ]
+    },
+    {
+      "claim": "Zhang 等人 TiSe2 谐波各向异性理论偏差的原始文献",
+      "missing_evidence": "rationale L55、scheme L11/L39/L71/L107 挂靠 Zhang 理论偏差，需明确该理论预测的偏差百分比及其与 Tyulnev 实验的对比",
+      "search_keywords": [
+        "Zhang TiSe2 harmonic anisotropy theory",
+        "TiSe2 density functional theory high harmonic",
+        "TiSe2 CDW order parameter nonlinear response theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "σ×1.5—2.0 SNR>5 判据在 HHG 实验中的首次提出文献",
+      "missing_evidence": "全文 19 处复用该判据但缺少原始方法学文献支撑（信噪比阈值 1.5-2.0 与 σ=0.5%-0.8% 折算 0.75%-1.6% 的依据）",
+      "search_keywords": [
+        "high harmonic signal-to-noise threshold criterion",
+        "HHG detection limit standard deviation 2 sigma",
+        "solid HHG measurement reproducibility metric"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

@@ -1,0 +1,93 @@
+{
+  "gaps": [
+    {
+      "claim": "Werner (L81/L101/L111) 等人关于交错磁高次谐波理论预言的关键论断缺文献锚点",
+      "missing_evidence": "scheme仅16个唯一角标，低于范本嵌入密度；Werner关于altermagnet HHG selection rule的理论论文缺少具体引用支撑",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation selection rule",
+        "altermagnet HHG theory Werner",
+        "g-wave d-wave i-wave altermagnet HHG selection rule",
+        "PRB 110 235101 Rashba Zeeman altermagnet HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Murakami (L55/L113/L125) 关于交错磁体自旋分裂与非线性光学响应的论断缺文献支撑",
+      "missing_evidence": "缺乏Murakami关于altermagnet非线性光学响应的原始理论文献",
+      "search_keywords": [
+        "Murakami altermagnet nonlinear optical response",
+        "Murakami spin splitting altermagnet theory",
+        "altermagnet spin splitting magnitude MnTe CrSb",
+        "nonrelativistic spin splitting antiferromagnet nonlinear optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Tyulnev (L41/L127) 关于TiSe2 CDW高次谐波极化各向异性实验的关键数据缺文献支撑",
+      "missing_evidence": "scheme提及Tyulnev工作但缺少完整文献锚点；极化依赖CDW HHG振幅的实验值未引",
+      "search_keywords": [
+        "Tyulnev Nature 2024 TiSe2 second harmonic",
+        "TiSe2 CDW high harmonic polarization dependence",
+        "TiSe2 charge density wave nonlinear optics",
+        "Tyulnev TiSe2 anisotropic harmonic amplitude"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhang (L27/L127) 关于MnTe g-wave交变磁HHG振幅预测的论断缺文献支撑",
+      "missing_evidence": "缺乏Zhang关于MnTe高次谐波振幅极化依赖的具体理论预测文献",
+      "search_keywords": [
+        "Zhang MnTe d-wave altermagnet HHG amplitude prediction",
+        "MnTe harmonic generation theory Zhang",
+        "MnTe g-wave HHG polarization prediction",
+        "MnTe harmonic intensity polarization ratio theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Dziurawiec (L125) 等人关于CrSb反常霍尔效应自旋分裂极限的论断缺文献支撑",
+      "missing_evidence": "scheme提到Dziurawiec工作但角标缺失；CrSb anomalous Hall spin splitting的原始实验数据未引",
+      "search_keywords": [
+        "Dziurawiec CrSb anomalous Hall spin splitting",
+        "CrSb anomalous Hall effect experimental",
+        "CrSb anomalous Hall conductivity spin splitting",
+        "Werner CrSb anomalous Hall spin splitting limit"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Leeb (L43) 等人关于MnTe自旋分裂ARPES实验的论断缺文献支撑",
+      "missing_evidence": "缺乏Leeb关于α-MnTe自旋分辨ARPES d-wave自旋分裂的实验文献",
+      "search_keywords": [
+        "Leeb MnTe spin-resolved ARPES altermagnet",
+        "alpha-MnTe d-wave spin splitting ARPES",
+        "MnTe spin-resolved ARPES experimental magnitude",
+        "Leeb Nature Communications MnTe ARPES"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Wang Wang Meng (rationale L49) 关于MnTe B1g相干声子交错磁对称破缺的论断缺文献支撑",
+      "missing_evidence": "缺乏Wang等关于α-MnTe B1g相干声子诱导磁有序/对称破缺的超快实验文献",
+      "search_keywords": [
+        "Wang Meng MnTe coherent phonon altermagnet 2026",
+        "alpha-MnTe B1g coherent phonon magnetic order",
+        "MnTe coherent phonon symmetry breaking ultrafast",
+        "MnTe B1g phonon magnetic order picosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb自旋分裂磁化率计算的SOC阈值（中等优先级）",
+      "missing_evidence": "缺乏CrSb altermagnet SOC有效值与Cr 3d/Sb 5p杂化的理论定量阈值",
+      "search_keywords": [
+        "CrSb spin-orbit coupling effective value",
+        "CrSb SOC Cr 3d Sb5p hybridization",
+        "CrSb altermagnet SOC perturbative threshold",
+        "antimony 5p spin-orbit coupling value"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

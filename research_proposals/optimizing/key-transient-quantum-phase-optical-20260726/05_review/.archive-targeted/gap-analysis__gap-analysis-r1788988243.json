@@ -1,0 +1,99 @@
+{
+  "gaps": [
+    {
+      "claim": "亚周期电子动力学与强场瞬态量子相位的实验观测",
+      "missing_evidence": "rationale L9 引用的 [4] 实为 Strekha 慢光 LDOS 文献，Drüeke&Bauer 亚周期动力学文全库无命中；需替换为真实的 subcycle electron dynamics 实验观测文献",
+      "search_keywords": [
+        "Drüeke Bauer subcycle electron dynamics high harmonic",
+        "subcycle electron dynamics solid attosecond",
+        "agostini subcycle ionization attosecond",
+        "Kienberger subcycle electron wave packet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "强场瞬态晶格极化与体光伏效应的微观起源",
+      "missing_evidence": "rationale L63 引用的 [31] 挂 Plaja/Torres/Becker，但 DOI 真一作=Cavaletto 等 4 人；需按 Crossref 官方作者列重录关于强场体光伏/瞬态极化的原始文献",
+      "search_keywords": [
+        "Cavaletto bulk photovoltaic strong field",
+        "Plaja Torres Becker strong field polarization",
+        "transient bulk photovoltaic effect ultrafast",
+        "Sturman Fridkin bulk photovoltaic review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "固体 Bloch 方程与时间依赖密度泛函的耦合方法学基础",
+      "missing_evidence": "rationale L21 引用的 [32]=Junquera 极性氧化物 RMP，但 Tsuji 强场 TDDFT-Bloch 系列真身应为 Aoki 等 RMP 86,779(2014)；需替换为正确的固体强场方法学综述",
+      "search_keywords": [
+        "Aoki RMP 86 779 2014 time-dependent density functional",
+        "TDDFT semiconductor Bloch equation solid HHG",
+        "Yabana Bertsch TDDFT strong field review",
+        "Krausz Ivanov strong field review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "瞬态对称破缺的高次谐波信号标志",
+      "missing_evidence": "rationale L29 引用的 [38] DOI 真身=Zhou 量子反常霍尔边缘通道文，'Shen 瞬态对称破缺'题名无命中；scheme L71 标志信号需改引真实 light-induced symmetry breaking HHG 文献",
+      "search_keywords": [
+        "light-induced symmetry breaking HHG second harmonic",
+        "transient inversion symmetry breaking solid attosecond",
+        "even harmonic generation symmetry breaking strong field",
+        "subcycle symmetry breaking high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "瞬态拓扑相/量子相位光学读出的实验观测",
+      "missing_evidence": "rationale L17/L21 引用的 [18] Science 1241373 于 Crossref 与 doi.org 双 404；R3 已指出跨轮未修；需替换为真实的瞬态拓扑/量子相位读出 Science 文章",
+      "search_keywords": [
+        "transient topological phase optical readout Science",
+        "attosecond Berry phase measurement Science",
+        "light-induced topological phase transition ultrafast",
+        "Floquet topological phase transition solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子光驱动高次谐波的增强因子 QEF 框架",
+      "missing_evidence": "rationale L45/L89/L91 + content L33/L45/L47 引用作者多处错挂（Iin→Ilin, Jakob→Rivera-Dean, B.Lorenzo→Batista, Stammer 条目错挂）；需重检索量子光 HHG QEF 的真实作者与文献",
+      "search_keywords": [
+        "Even Tzur quantum enhancement factor high harmonic",
+        "Khurelbaatar quantum light HHG solid",
+        "Rivera-Dean quantum HHG preprint",
+        "Lange compressed squeezed light HHG strongly correlated",
+        "Batista quantum optics HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "反问题参数空间有效秩维度的统计判据（ΔC≤0.2）",
+      "missing_evidence": "rationale L87-89 中 ΔC≤0.2 阈值物理依据实为团队自定工程判据却引[28]Ilin 作标定依据；[28]系 SSH 模型量子；需替换为真实的反问题参数空间有效秩/可识别性判据文献",
+      "search_keywords": [
+        "Fisher information parameter identifiability inverse problem",
+        "condition number nonlinear optics HHG inversion",
+        "effective rank regularization parameter inverse problem",
+        "Hansen Rank-Deficient Discrete Ill-Posed Problems"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "固体高次谐波反演秩亏维度与正则化参数选取",
+      "missing_evidence": "rationale L45-49 出现连续三句以上无编号引用陈述链；缺乏有效秩维度与 L-curve/Tikhonov 正则化选取的独立支撑文献",
+      "search_keywords": [
+        "L-curve Tikhonov regularization HHG spectroscopy",
+        "ill-posed inversion regularization parameter attosecond",
+        "effective rank regularization parameter inverse problem",
+        "condition number attosecond spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "三库联合检索与 Roadmap 重复支持（冗余声明）",
+      "missing_evidence": "rationale L39 三库检索声明 vs L11 Roadmap 已列同方向支持；存在自相矛盾但与文献无关，属冗余修辞",
+      "search_keywords": [],
+      "priority": "low"
+    }
+  ]
+}

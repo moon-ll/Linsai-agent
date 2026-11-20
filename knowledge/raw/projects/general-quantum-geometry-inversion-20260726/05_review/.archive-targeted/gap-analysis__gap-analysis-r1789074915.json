@@ -1,0 +1,65 @@
+{
+  "gaps": [
+    {
+      "claim": "申请书L19锁定1.6 μm（Rasputnyi 2024实验波长，光子能量0.775 eV）与R2/R3/R4理论计算1.5 μm（0.83 eV）存在跨章节矛盾，需统一为单一驱动波长",
+      "missing_evidence": "缺少Rasputnyi 2024 BSV驱动固体HHG实验（Mg:LiNbO₃、a-Si）的驱动波长、产额增强倍数（10²–10³倍）的精确实验参数，以及与1.5 μm驱动下Bi₂Te₃带间通道能量匹配的同行评议数据",
+      "search_keywords": [
+        "Rasputnyi 2024 BSV solid high harmonic generation Mg:LiNbO3",
+        "bright squeezed vacuum driven HHG a-Si 1.6 micron",
+        "BSV HHG photon energy 0.775 eV experiment",
+        "Bi2Te3 high harmonic generation 1.5 micron mid-infrared",
+        "squeezed light solid HHG 10^2 10^3 enhancement yield"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Q1/Q2科学问题在rationale与content逐字复述，NSFC红线问题需补文献支撑BSV光场统计与中等关联电子结构两个边界条件的相继突破",
+      "missing_evidence": "缺少BSV光场g²/二阶关联函数与固体HHG产额增强的实验验证文献，以及中等关联电子结构（U/W~1）的多体高次谐波理论框架文献",
+      "search_keywords": [
+        "bright squeezed vacuum g2 high harmonic generation yield",
+        "moderately correlated electron U/W ratio HHG theory",
+        "BSV photon statistics nonlinear optics enhancement experiment",
+        "Hubbard U bandwidth ratio solid HHG framework",
+        "quantum light strongly correlated HHG multichannel"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1.1 L5单段连嵌10条引用（Cui/Xiang/Xu/Wang 2026 [51]非厄米Zeeman量子几何张量分解、2D Dirac节点Ω^A磁单极通量、Hodge对偶曲率-通量表示、winding数几何化等）属骨架堆砌，缺材料体系/观测条件/数值幅度/同行评议状态",
+      "missing_evidence": "缺少非厄米量子几何张量的实验观测、2D Dirac节点的具体材料体系（如石墨烯/TBG/α-T3 lattice）、Ω^A磁单极通量的数值幅度（具体数值而非仅拓扑陈述）、以及winding数几何化在HHG反演中的同行评议应用案例",
+      "search_keywords": [
+        "non-Hermitian Zeeman quantum geometry tensor 2D Dirac",
+        "Hodge dual curvature flux 2D magnet",
+        "non-Hermitian quantum geometry HHG inversion",
+        "alpha-T3 lattice Berry curvature magnetic monopole",
+        "winding number geometry high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1.3三条证据线（L37/L39/L41）单段873字连嵌10条引用骨架，缺四要素（材料/条件/数值/观测结果），属R1历史反馈点名问题",
+      "missing_evidence": "缺少三条证据线所引文献的具体材料体系、实验条件（波长/场强/温度）、数值幅度（具体倍数/eV/meV）、同行评议状态等四要素的详细数据",
+      "search_keywords": [
+        "solid-state HHG Berry curvature experimental material wavelength",
+        "quantum metric nonlinear optical response numerical amplitude",
+        "high harmonic generation reconstruction condition number experimental",
+        "Berry curvature HHG inversion signal-to-noise ratio experimental",
+        "solid HHG polarization circular dichroism Berry measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme §7.1 L257-267「现有局限」段罗列Ghorlach 2023（BSV突破经典截止定律，KFR机制）、Rasputnyi 2024（Mg:LiNbO₃/a-Si 10²–10³倍增强）等四项工作，缺机制层因果递进",
+      "missing_evidence": "缺少从KFR势垒电离机制（原子体系）到固体带间/带内通道机制（固体体系）的因果衔接文献，以及BSV产额增强与Berry/度规反演解析关系的理论建立文献",
+      "search_keywords": [
+        "KFR barrier ionization mechanism solid HHG band transition",
+        "BSV driven HHG interband intraband coupling mechanism",
+        "Gorlach Even Tzur squeezed light HHG breakdown mechanism",
+        "squeezed light HHG Berry curvature metric inversion theoretical",
+        "BSV high harmonic generation enhancement mechanism solid state"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

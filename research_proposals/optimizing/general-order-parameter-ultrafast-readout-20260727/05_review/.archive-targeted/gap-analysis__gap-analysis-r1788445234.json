@@ -1,0 +1,94 @@
+{
+  "gaps": [
+    {
+      "claim": "SBE在长度规范与速度规范下等效性的前提条件（省略Berry联络或跃迁偶极相位会得到非物理HHG谱）",
+      "missing_evidence": "缺少Yue与Gaarde关于SBE规范等效性、B偶联络和跃迁偶极相位对HHG谱影响的原始或综述文献支撑",
+      "search_keywords": [
+        "Yue Gaarde semiconductor Bloch equation gauge invariance",
+        "velocity gauge length gauge HHG Berry connection",
+        "transition dipole phase high harmonic generation solid"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TiSe₂的SBE配合现象学平均场模型能复现反常霍尔电导率实验值",
+      "missing_evidence": "缺少Zhang等人利用SBE+现象学平均场复现TiSe₂反常霍尔电导率的具体文献",
+      "search_keywords": [
+        "TiSe2 anomalous Hall conductivity SBE calculation",
+        "TiSe2 time-dependent semiconductor Bloch equation",
+        "Zhang TiSe2 Hall effect HHG theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sankar等CrSb的HHG spin-resolved实验测量非线性霍尔电导率为10⁻⁵ Ω⁻¹级",
+      "missing_evidence": "缺少Sankar CrSb非线性霍尔电导率spin-resolved高次谐波实验的原始文献",
+      "search_keywords": [
+        "Sankar CrSb high harmonic generation nonlinear Hall",
+        "CrSb spin-resolved HHG experiment nonlinear conductivity",
+        "CrSb altermagnet high harmonic generation first observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Tyulnev报道的TiSe₂ HHG复现偏差为±8%",
+      "missing_evidence": "缺少Tyulnev关于TiSe₂ HHG偏振不对称和振幅偏差±8%的实验文献",
+      "search_keywords": [
+        "Tyulnev TiSe2 high harmonic generation polarization asymmetry",
+        "TiSe2 HHG amplitude deviation experimental benchmark",
+        "Tyulnev TiSe2 charge density wave HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "中红外波段驱动（0.1-1.0 V/Å，γ≈0.5-2）强场区间的固体HHG可行性",
+      "missing_evidence": "缺少中红外驱动固体HHG在Keldysh参数0.5-2区间的实验基准文献",
+      "search_keywords": [
+        "mid-infrared driving solid HHG Keldysh parameter",
+        "0.8 V/Angstrom solid-state HHG experiment",
+        "Keldysh parameter solid high harmonic generation regime"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb的Néel温度205 K作为强场实验窗口",
+      "missing_evidence": "缺少CrSb Néel温度205 K及其在强场实验中作为温度窗口的实验依据",
+      "search_keywords": [
+        "CrSb Neel temperature 205 K magnetic phase",
+        "CrSb altermagnet magnetic ordering temperature",
+        "CrSb antiferromagnetic transition ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb非线性霍尔电导率与反常霍尔电导率的数量级关系（10⁻⁵ Ω⁻¹级）",
+      "missing_evidence": "缺少CrSb非线性霍尔电导率绝对测量或理论预估的对比文献",
+      "search_keywords": [
+        "CrSb nonlinear Hall conductivity measurement",
+        "CrSb anomalous Hall conductivity order of magnitude",
+        "altermagnet nonlinear Hall response solid state"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "差分子空间投影对能带背景的压制比>95%作为本项目独立量化优势",
+      "missing_evidence": "缺少差分子空间投影方法在HHG背景压制中达到>95%效率的已有文献基准",
+      "search_keywords": [
+        "differential subspace projection HHG background suppression",
+        "orbital subspace filtering high harmonic generation",
+        "symmetry-resolved HHG background rejection efficiency"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "贝叶斯后验标准差<50%作为序参量约束的可行目标",
+      "missing_evidence": "缺少贝叶斯推断HHG光谱序参量在强场实验噪声下后验标准差<50%的可行性文献",
+      "search_keywords": [
+        "Bayesian inference high harmonic spectroscopy order parameter",
+        "posterior uncertainty attosecond spectroscopy inverse problem",
+        "Fisher information high harmonic generation parameter retrieval"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

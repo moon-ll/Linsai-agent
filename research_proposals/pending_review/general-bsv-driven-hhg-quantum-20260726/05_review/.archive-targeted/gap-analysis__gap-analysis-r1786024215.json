@@ -1,0 +1,50 @@
+{
+  "gaps": [
+    {
+      "claim": "QSHHG（quantum-state HHG）作为本项目自创命名，与 Even Tzur 2023 / Boroumand 2025 / Wang 2025 已有量子光驱动高次谐波工作的差异化论证偏弱",
+      "missing_evidence": "缺少 Even Tzur 2023 (arXiv:2311.11257)、Boroumand 2025、Wang 2025 等关键文献的具体技术路线（光源类型、量子态制备、HHG 观测对象、量化指标）对比表，以及本项目双光路 Mach-Zehnder 方案相对单束双色方案的优势论证文献",
+      "search_keywords": [
+        "Even Tzur 2023 squeezed HHG arXiv:2311.11257 publication",
+        "Boroumand 2025 quantum engineering HHG framework",
+        "Wang 2025 quantum light high harmonic generation HUST",
+        "Mach-Zehnder interferometer quantum HHG versus single beam two color",
+        "QSHHG nomenclature quantum state harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Plan B 触发条件 g² 偏离 > 30% 的方法学出处（为何 30% 而非 20% 或 50%）",
+      "missing_evidence": "缺少 BSV 光子统计 g² 测量不确定度、漂移判定阈值设定的方法学文献支撑（实验统计误差、噪声模型对 g² 判据的影响）",
+      "search_keywords": [
+        "g2 photon statistics measurement uncertainty",
+        "bright squeezed vacuum g2 deviation threshold criterion",
+        "photon correlation function error bound HHG driver",
+        "BSV stability metric experimental determination"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "QEF（Quantum Enhancement Factor）三维度（系统化/探针化/量子化）框架的对照文献",
+      "missing_evidence": "缺少 QEF 在 HHG 领域的明确定义文献、三维度框架（系统化/探针化/量子化）的同行工作对照，特别是与 Boroumand 2025 量子工程化 HHG 框架的差异化论证",
+      "search_keywords": [
+        "quantum enhancement factor HHG definition published",
+        "QEF three-dimensional framework HHG",
+        "nonclassical light HHG yield enhancement ratio benchmark",
+        "quantum engineered HHG framework Boroumand",
+        "g2 scaling high harmonic yield nonclassical light"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Plan B 风险升级判据 Y1-Y4 各时间节点与 §2.7 年度计划的逐项对齐",
+      "missing_evidence": "缺少量子光驱动固体 HHG 实验的典型时间线、同类工作 Y1-Y4 可达成里程碑的文献参考（特别是 Even Tzur / Boroumand / Wang 等已发表工作的实验进度）",
+      "search_keywords": [
+        "quantum light driven solid HHG experimental timeline",
+        "BSV HHG experiment milestone reference published",
+        "quantum HHG first observation year timeline",
+        "nonclassical light solid HHG experimental progress"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

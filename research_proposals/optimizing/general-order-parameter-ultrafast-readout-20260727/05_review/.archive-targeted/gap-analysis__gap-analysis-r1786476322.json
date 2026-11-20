@@ -1,0 +1,104 @@
+{
+  "gaps": [
+    {
+      "claim": "Werner/Leeb/Šmejkal/Ly/Jita 等人的预印本系统预言了 altermagnet 的 HHG 候选信号与轨道有序贡献",
+      "missing_evidence": "缺少这些预印本（Werner, Leeb, Šmejkal, Ly, Jita）的逐条核验：发表年份、期刊、具体结论与递进/差异关系，目前为综述性引用堆砌而非论证嵌入",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation",
+        "Šmejkal altermagnet prediction",
+        "Leeb orbital order altermagnet HHG",
+        "Ly altermagnet HHG theory",
+        "Jita altermagnet nonlinear optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Fuchs/Rost/Schüle/McCarter/Horstmann/Qiu/Sankar/Ren 等近期预印本支撑 altermagnet HHG 研究",
+      "missing_evidence": "缺少这些近期预印本（Fuchs, Rost, Schüle, McCarter, Horstmann, Qiu, Sankar, Ren）的具体内容核验，以及它们与本项目科学问题（不可辨识性/磁场翻转）的直接关联证据",
+      "search_keywords": [
+        "Fuchs altermagnet HHG",
+        "Schüle altermagnet nonlinear",
+        "McCarter altermagnet theory",
+        "Horstmann altermagnet HHG",
+        "Qiu altermagnet experiment",
+        "Sankar altermagnet HHG",
+        "Ren altermagnet HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "磁场反转可作为独立翻转条件，分离 altermagnet 序参量与能带背景贡献",
+      "missing_evidence": "缺少磁场反转作为 HHG 独立控制变量的实验/理论文献，特别是磁场反转能否真正翻转 altermagnetic 序而不改变能带结构的前提论证",
+      "search_keywords": [
+        "magnetic field reversal HHG altermagnet control",
+        "altermagnet field switching nonlinear optics",
+        "Zeeman effect high harmonic generation",
+        "magnetic order HHG field switch"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "通过固体 HHG 可排除能带背景等替代解释，区分序参量相关对称性破缺与能带背景贡献",
+      "missing_evidence": "缺少在 HHG 谱中分离能带背景贡献的方法学文献，'排除'的可检验标准、残余不可排除范围、适用条件均未界定",
+      "search_keywords": [
+        "band structure disentanglement HHG spectroscopy",
+        "altermagnet band contribution separation",
+        "HHG inversion band vs order parameter",
+        "multi-band HHG background subtraction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "'看到指纹≠确定序参量'的不可辨识性是固体 HHG 走向定量序参量谱学的核心障碍",
+      "missing_evidence": "缺少 HHG 逆问题不适定性/不可辨识性的理论/方法学文献，未见对该核心矛盾的直接定量论证",
+      "search_keywords": [
+        "HHG identifiability inverse problem order parameter",
+        "solid HHG spectroscopy non-uniqueness",
+        "high harmonic inversion ill-posed",
+        "symmetry breaking HHG uniqueness"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目将限定 altermagnet 材料与多带正演模型条件下 HHG 可读出序参量",
+      "missing_evidence": "缺少多带正演模型在 altermagnet HHG 定量分析中的适用边界文献，以及模型预测与已有实验的对比验证",
+      "search_keywords": [
+        "multi-band forward model HHG altermagnet",
+        "tight-binding altermagnet HHG simulation",
+        "band structure calculation altermagnet nonlinear optics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "超导、激子、多体、涡旋光等旁线效应在 HHG 中的作用被引入作为对比",
+      "missing_evidence": "缺少这些旁线主题与 altermagnet HHG 的直接因果连接文献，目前为知识性扩展但未论证对核心问题的支撑/对照价值",
+      "search_keywords": [
+        "superconductivity HHG signature",
+        "exciton high harmonic generation",
+        "many-body HHG correlation effect",
+        "vortex light high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "HHG 序参量信号可由外部表征（磁光Kerr、XRD、中子散射等）独立支撑",
+      "missing_evidence": "缺少 HHG 测量与磁有序外部表征的交叉验证文献，无法判断 HHG 信号能否独立支撑序参量判定",
+      "search_keywords": [
+        "magnetic order HHG cross-validation Kerr XRD neutron",
+        "external characterization altermagnet HHG correlation",
+        "magneto-optical Kerr harmonic spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "本项目填补 altermagnet HHG 序参量读出的'首次/空白'",
+      "missing_evidence": "'首次'与'空白'表述需逐条核验，缺乏对同类工作的系统调研以证明创新性的唯一性",
+      "search_keywords": [
+        "altermagnet HHG first observation experiment",
+        "solid-state HHG order parameter retrieval pioneering",
+        "altermagnet ultrafast readout domestic international"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

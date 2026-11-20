@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV（明亮压缩真空）作为量子光源可驱动固体HHG并产生量子增强效应",
+      "missing_evidence": "缺少BSV直接驱动固体高次谐波产生的实验观测证据，特别是Stobinska/Even-Tzur团队以外独立实验组的复现或扩展实验数据",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation experiment",
+        "BSV driven HHG solid state experimental",
+        "squeezed light HHG quantum enhancement observation",
+        "quantum light solid harmonic generation first observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子增强因子QEF三维度指标体系（QEF_vis、QEF_yield^(q_ref)、QEF_yield^(∑)）的物理基础和量化定义",
+      "missing_evidence": "缺少QEF三维度的理论推导依据，特别是与传统非线性光学转换效率、压缩度、g2光子统计关联函数之间的量化关系文献",
+      "search_keywords": [
+        "quantum enhancement factor HHG framework QEF",
+        "QEF yield visibility squeezed light nonlinear",
+        "nonlinear quantum optics conversion efficiency metric",
+        "g2 photon statistics HHG enhancement quantification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内在BSV驱动量子HHG方向尚属空白（§1.1段5检索声明：5个关键词组合命中47篇，无国内团队）",
+      "missing_evidence": "缺少对国内强场超快/量子光学团队（如中科院物理所、上海光机所、清华、北大、华东师大等）在BSV-HHG交叉方向的最新工作检索，特别是2024-2026年间的进展核实",
+      "search_keywords": [
+        "BSV 高次谐波 中国",
+        "量子光 强场非线性 国内",
+        "明亮压缩真空 阿秒 国内团队",
+        "squeezed vacuum attosecond China group",
+        "quantum light HHG Chinese research group 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子光驱动HHG与传统经典光驱动HHG在可见度、产额、产额求和三维度上的对比框架",
+      "missing_evidence": "缺少经典相干光与BSV驱动HHG产额比、g2关联测量、光子计数谱的直接对比实验数据，特别是高光子数（>10^6）下量子优势是否仍保持",
+      "search_keywords": [
+        "classical vs quantum light HHG comparison yield",
+        "coherent state squeezed state HHG ratio",
+        "photon counting HHG g2 measurement",
+        "high photon number squeezed light quantum advantage limit"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "BSV的绝对光子数标定与g2(0)零延迟二阶关联函数测量方法",
+      "missing_evidence": "缺少NOPA（光学参量放大器）输出BSV的绝对光子数标定方法学文献，特别是从g2(0)→平均光子数的转换公式与误差传播",
+      "search_keywords": [
+        "NOPA absolute photon number calibration",
+        "bright squeezed vacuum g2 zero delay measurement",
+        "BSV photon number per pulse characterization",
+        "optical parametric amplifier squeezed light photon flux"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "固体HHG（sHHG）与原子HHG在量子光驱动下的本质区别（§1.2前人研究局限性）",
+      "missing_evidence": "缺少Ghimire 2011固体HHG开创性工作与原子HHG在多带结构、能带选择性、相干性方面的系统对比综述，特别是量子光入射下的相干性差异",
+      "search_keywords": [
+        "solid state vs atomic HHG multiband coherence",
+        "Ghimire 2011 solid HHG pioneering review",
+        "semiconductor HHG vs gas HHG quantum light response",
+        "multi-band HHG coherence quantum light driving"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

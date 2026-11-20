@@ -1,0 +1,14 @@
+{
+  "gaps": [
+    {
+      "claim": "场强-光强换算依据：0.3—0.8 V/Å场强对应的激光光强换算及文献支撑",
+      "missing_evidence": "缺少固体HHG实验中V/Å场强与W/cm²光强的标准换算关系及中红外驱动场强典型值范围",
+      "search_keywords": [
+        "solid-state HHG driving field strength V/Angstrom W/cm2",
+        "mid-infrared HHG field strength conversion",
+        "high harmonic generation Keldysh parameter regime"
+      ]
+    }
+  ],
+  "section": "full_review"
+}

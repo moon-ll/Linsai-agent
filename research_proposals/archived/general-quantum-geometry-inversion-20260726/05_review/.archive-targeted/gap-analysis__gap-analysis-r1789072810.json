@@ -1,0 +1,59 @@
+{
+  "gaps": [
+    {
+      "claim": "§5.1 中 PINN 在数据稀缺/欠定/病态问题下存在已知失效场景（如欠定区反演退化为模式坍缩、外推区约束层与 MSE 优化方向冲突）",
+      "missing_evidence": "缺乏 PINN 在欠定反演、外推区、ill-posed inverse problem 中失效模式的具体文献支撑（Karniadakis [41] 综述被引但未具体指出失效场景）",
+      "search_keywords": [
+        "PINN failure mode ill-posed inverse problem",
+        "physics-informed neural network extrapolation breakdown",
+        "PINN data scarcity mode collapse",
+        "Karniadakis PINN review limitations"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§5.4 中等关联 f-sum rule 阈值放宽至 5%×(1+0.5·U/W) 的标度律来源",
+      "missing_evidence": "f-sum rule 在 Hubbard U/W 不同区间的违反/放宽比例缺乏文献依据（强关联体系 f-sum rule 带宽重整化的定量标度）",
+      "search_keywords": [
+        "f-sum rule Hubbard U bandwidth renormalization",
+        "f-sum rule violation strongly correlated U/W scaling",
+        "sum rule violation ratio strongly correlated electron gas",
+        "f-sum rule bandwidth scaling U over W"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§5.2 弱关联 f-sum rule 取为软约束 5%、中等关联按 U/W 标度放宽——同一物理量两档位宽严定义不一的文献依据",
+      "missing_evidence": "缺乏 f-sum rule 在不同关联强度体系（弱关联、中等关联、外推档）中作为 HHG 反演约束的统一标度律文献",
+      "search_keywords": [
+        "f-sum rule soft constraint high harmonic generation inversion",
+        "f-sum rule threshold strongly correlated HHG",
+        "sum rule scaling relation Hubbard U bandwidth"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§7.2 多色场可辨识性创新——三指标联合假阳性 <1% 的统计判据来源",
+      "missing_evidence": "缺乏多色场 HHG 反演中 cond(I)<10、Ω/g 联合估计误差椭球短长轴比 0.32、三指标联合假阳性 <1% 的方法学先例或基准文献",
+      "search_keywords": [
+        "multi-color HHG identifiability condition number",
+        "Fisher information HHG multi-parameter inversion benchmark",
+        "false positive rate multi-indicator spectroscopic inversion",
+        "condition number multi-color attosecond spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§5.1 PINN 早停 patience=50 的设定依据与外推失效点",
+      "missing_evidence": "PINN 在 U/W>1.2 外推区约束层与 MSE 优化方向冲突的具体失效阈值与可降级触发条件文献支撑",
+      "search_keywords": [
+        "PINN extrapolation threshold breakdown",
+        "physics-informed neural network early stopping criterion ill-posed",
+        "PINN constraint loss MSE conflict extrapolation",
+        "PINN strong correlation failure mode"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

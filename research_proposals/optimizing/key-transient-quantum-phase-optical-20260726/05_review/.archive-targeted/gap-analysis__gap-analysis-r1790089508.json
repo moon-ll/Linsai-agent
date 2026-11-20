@@ -1,0 +1,25 @@
+{
+  "gaps": [
+    {
+      "claim": "Uzan-Narovlansky 等于 2024 年已观测带间 Berry 相位（相位分辨精度推进到阿秒量级的更早先例）",
+      "missing_evidence": "缺少 Uzan-Narovlansky 2024 关于带间 Berry 相位时域测量的具体文献（arXiv 编号、DOI、关键定量指标）",
+      "search_keywords": [
+        "Uzan-Narovlansky 2024 Berry phase attosecond",
+        "interband Berry phase time-resolved 2024 measurement",
+        "attosecond interferometry Berry phase Uzan"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Faeyrman 等把瞬态 Berry 相测量从强度层推到相位层（相位分辨反演的最新代表性工作）",
+      "missing_evidence": "缺少 Faeyrman 等瞬态 Berry 相位相关工作的精确出处与相位分辨精度数据",
+      "search_keywords": [
+        "Faeyrman transient Berry phase",
+        "Berry phase transient measurement spectroscopy",
+        "phase-resolved Berry phase detection solid"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

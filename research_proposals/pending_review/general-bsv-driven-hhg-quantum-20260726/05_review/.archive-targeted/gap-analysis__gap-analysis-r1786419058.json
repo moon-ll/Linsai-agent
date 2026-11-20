@@ -1,0 +1,61 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.4 创新点 1 主张 BSV 驱动 HHG 是'首次'实现量子光与强场非线性耦合的实验方案",
+      "missing_evidence": "缺少 BSV/squeezed/quantum light 驱动 HHG 已有实验的系统检索，未给出文献边界条件（哪些工作已做、哪些未做）",
+      "search_keywords": [
+        "bright squeezed vacuum HHG experiment",
+        "squeezed light high harmonic generation experimental",
+        "quantum light driven strong field nonlinear",
+        "quantum photon HHG first observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.4 创新点 2 主张'首次'实现 BSV 单光子计数分辨的 HHG 光谱学",
+      "missing_evidence": "缺少单光子分辨 HHG 光谱学方法的已有工作对比，以及 quantum light spectroscopy 与 HHG 结合的边界文献",
+      "search_keywords": [
+        "photon-counting HHG spectroscopy",
+        "single photon resolution harmonic spectrum",
+        "quantum spectroscopy strong field attosecond",
+        "g2 HHG measurement photon statistics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2.1 关于固体 HHG 历史发展的'首次'优先权主张",
+      "missing_evidence": "缺少精确的历史文献引用支持固体 HHG 关键节点的首发权，如 Ghimire 2011、Schubert 2014、Vampa 2015 等",
+      "search_keywords": [
+        "Ghimire 2011 solid HHG first observation",
+        "solid state high harmonic generation history pioneering",
+        "bulk crystal HHG first experiment reference",
+        "Vampa 2015 solid HHG reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.1 关于 BSV 驱动 HHG 国内空白/未开展的主张",
+      "missing_evidence": "虽有 arXiv/WoS/CNKI 检索方法学证据，但缺少国内主要强场小组（上海光机所、国防科大、华中科大、兰大等）在 quantum light HHG / squeezed HHG 方向的具体工作清单与对比",
+      "search_keywords": [
+        "quantum light HHG China group",
+        "squeezed light strong field China 国内 强场小组",
+        "上海光机 量子光 高次谐波",
+        "华中科大 squeezed vacuum HHG",
+        "国防科大 BSV HHG",
+        "兰大 量子光 阿秒"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.2.1 关于 MoS₂ HHG 截止阶次/能量的定量描述",
+      "missing_evidence": "缺少 MoS₂ HHG 截止能量/谐波阶次的精确实验文献支撑（具体到谐波阶数与驱动场条件）",
+      "search_keywords": [
+        "MoS2 high harmonic generation cutoff experimental",
+        "TMDC monolayer HHG harmonic order",
+        "MoS2 bulk HHG cutoff energy measurement",
+        "Liu MoS2 harmonic generation"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

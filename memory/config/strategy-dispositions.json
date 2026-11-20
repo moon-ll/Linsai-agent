@@ -1,0 +1,14 @@
+{
+  "critic_timeout": {
+    "status": "auto_resolved",
+    "resolution": "v7.2.32 裁决（补录至账本 v7.2.43）：建议已过期——critic/writer timeout 实际已是 1200-1500s（scripts/lifecycle/constants.py CRITIC_WRITER_TIMEOUT_LARGE_S/DEFAULT_S），早超过建议值 450。无需应用。",
+    "suggested": 450,
+    "at": "2026-10-24T01:30:00Z"
+  },
+  "writer_timeout": {
+    "status": "auto_resolved",
+    "resolution": "v7.2.32 裁决（补录至账本 v7.2.43）：建议已过期——实际 writer timeout 1200-1500s 早超过建议值 900。无需应用。",
+    "suggested": 900,
+    "at": "2026-10-24T01:30:00Z"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "gaps": [
+    {
+      "claim": "Jessen 等已发表工作报道的 SSH 模型第五次谐波谱形转变强度，可作为本项目判别指标 I_threshold 的外部取值基准。",
+      "missing_evidence": "需要核实并直接引用 Jessen 等原始论文及其补充材料，明确第五次谐波由平庸相特征向拓扑边缘态特征转变的具体判据、强度或谱形变化量、强度提取方式及计算或实验条件；还应说明这些数据为何能够标定本项目的 I_threshold，而非仅笼统指向该文。",
+      "search_keywords": [
+        "Jessen SSH model fifth harmonic spectral shape transition intensity",
+        "Jessen fifth harmonic SSH topological edge state",
+        "SSH model fifth-harmonic spectrum shape transition",
+        "fifth harmonic intensity benchmark topological SSH chain",
+        "Jessen 第五次谐波 谱形转变 SSH 拓扑边缘态"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "ESSH 模型中偶次与奇次高次谐波具有不同选择定则，其物理来源及其与边缘态局域电子态、拓扑相和局域电子态效应的关系，可作为方向一的重要物理机制依据。",
+      "missing_evidence": "缺少直接讨论 ESSH/SSH 边缘态模型中奇偶谐波选择定则的原始文献依据。需要补充能够明确支持以下内容的文献：允许与禁戒的谐波阶次、对称性破缺或边缘态占据对选择定则的影响、相应理论判据或机制解释，以及可与本项目双变量 CD×边带探针相衔接的结论。",
+      "search_keywords": [
+        "edge-state SSH model even odd harmonic selection rules",
+        "SSH chain high harmonic generation odd even harmonics edge states",
+        "even and odd harmonic generation topological SSH model",
+        "inversion symmetry selection rules nonlinear harmonics SSH chain",
+        "ESSH 奇偶谐波 选择定则 边缘态",
+        "SSH 拓扑链 高次谐波 奇偶阶次 选择定则"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

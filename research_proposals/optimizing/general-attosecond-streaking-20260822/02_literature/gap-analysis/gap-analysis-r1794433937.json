@@ -1,0 +1,26 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.1 L7 处 Cousin 等的具名论断（首现于 content 章但零角标，章内无法溯源，违反引用自足性）",
+      "missing_evidence": "该论断的引用标注。论点本身已在 rationale 章挂 [2]，缺口并非缺新文献，而是 content 章缺失指向 Cousin 等原始工作的同源角标，需补引以恢复章内可溯源性",
+      "search_keywords": [
+        "Cousin attosecond streaking",
+        "attosecond streaking spectral phase",
+        "attosecond pulse characterization Cousin"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.2 L21 与 §2.3 L35 两处正文断言“[40] 的测量…给出定量图景”，支撑文献仅为 arXiv 预印本（†），且所涉“部分能区”未界定",
+      "missing_evidence": "两类证据：① [40] 预印本的同行评审正式发表版本（或同测量结论的独立文献佐证），以支撑正文中“测量给出定量图景”的确证性表述；② 界定“部分能区”范围的能区划分文献（如多通道贡献随光子能量变化的实测/计算数据），使预印本结论的适用边界可核查",
+      "search_keywords": [
+        "attosecond streaking measurement multi-channel",
+        "photoionization delay water window",
+        "electron correlation attosecond streaking 400 eV",
+        "multichannel contribution streaking spectrogram"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

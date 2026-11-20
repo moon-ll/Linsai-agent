@@ -1,0 +1,73 @@
+{
+  "gaps": [
+    {
+      "claim": "2018年前后，圆形二色性（CD）反演可用于识别SSH类拓扑相并确立相关研究路线的可行性。",
+      "missing_evidence": "缺少2018年前后直接提出CD反演、谱学量与SSH拓扑相识别之间关系的奠基性原始文献。现有[35]为Tornow于2026年在线发表的定量检验工作，不能单独支撑“2018年前后可行性被确立”的时间判断；应为L17和L83补充奠基文献，并将[35]仅用于支撑后续定量检验结论。",
+      "search_keywords": [
+        "Luu Wörner 2018 circular dichroism inversion SSH topology",
+        "2018 circular dichroism topological phase identification SSH model",
+        "momentum-space circular dichroism inversion SSH insulator",
+        "band structure topology reconstruction circular dichroism 2018"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "实验上在β-WP₂中已经观测到低阈值真空紫外（VUV）谐波产生，并实现了相关物理量的定量重构。",
+      "missing_evidence": "缺少能够明确支撑该实验事实的具名原始文献，包括材料相态、谐波波段、阈值特征以及定量重构结果。正文目前既无实验主语，也无可追溯出处；需补充与Lv等2021年工作相对应的实验论文并核对其中是否确实包含“定量重构”结论。",
+      "search_keywords": [
+        "Lv 2021 beta-WP2 low-threshold VUV high harmonic generation",
+        "β-WP₂ vacuum ultraviolet high-harmonic generation experiment",
+        "beta tungsten phosphide VUV HHG threshold",
+        "WP2 high harmonic generation quantitative reconstruction",
+        "拓扑相 β-WP₂ 真空紫外 谐波 产生 实验"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "高阶拓扑相中“高阶拓扑相HHG信号消失”的现象已经被实验观察到。",
+      "missing_evidence": "若保留“已观察到”的事实性表述，需要补充直接报告高阶拓扑相HHG抑制、信号消失或其谱学证据的原始实验或理论文献，并核实该文献的结论能否外推至申请书所指体系；否则应删除这一来源依赖型断言，统一表述为“该拓扑印记是否可观测仍是开放问题”。",
+      "search_keywords": [
+        "β-WP₂ higher-order topological phase HHG signal disappearance",
+        "high-order topological insulator high-harmonic generation suppression",
+        "higher-order topological phase harmonic generation experiment",
+        "topological phase HHG signal vanishes",
+        "高阶拓扑相 高次谐波 信号消失"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "文献[23]仍属于2025年预印本。",
+      "missing_evidence": "该状态判断与实表所列“Comput. Mater. Sci. 268, 114641 (2026)”不一致。需要通过出版社正式页面、DOI及预印本存档核验最终出版信息、作者与版本对应关系，并据正式出版记录删除正文中的“预印本2025年”括注或准确说明版本关系。",
+      "search_keywords": [
+        "\"Computational Materials Science\" 268 114641",
+        "\"114641\" \"Comput. Mater. Sci.\"",
+        "114641 2026 DOI",
+        "article 114641 preprint 2025 final publication"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Haldane模型及其“复相位复格点磁通”或等价复格点通量机制可作为SSH研究背景或三模型对比中的理论参照。",
+      "missing_evidence": "缺少Haldane原始文献对复格点磁通、能带拓扑性质及量子化响应的直接支撑。应补充Haldane于1988年发表的原始论文，并确保正文表述与原论文中的复格点磁通和 Chern 绝缘体结论一致。",
+      "search_keywords": [
+        "Haldane 1988 Chern insulator complex hopping flux",
+        "Haldane 1988 original paper honeycomb lattice flux",
+        "Haldane model quantized Hall conductivity original article",
+        "Haldane SSH three-model comparison"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "ZnO是“激子-HHG竞争”的典型代表。",
+      "missing_evidence": "L95和L117的代表性判断尚未与已有[25]建立明确挂靠。需要核实Jessen等ZnO实验文献是否同时提供了激子效应、HHG产生及二者竞争或关联的证据，并在相关论断处补充[25]或更精确的原始出处。",
+      "search_keywords": [
+        "Jessen ZnO high harmonic generation photoluminescence exciton competition",
+        "ZnO exciton HHG photoluminescence Jessen",
+        "excitonic effect high-harmonic generation ZnO experiment",
+        "ZnO high harmonic generation excitonic contribution"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

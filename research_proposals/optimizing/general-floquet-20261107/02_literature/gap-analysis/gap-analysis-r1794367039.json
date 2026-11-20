@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.2所述纯Floquet通道在高频非共振区的主项随光强平方增长，并随驱动频率呈ω⁻¹衰减。",
+      "missing_evidence": "content.md正文缺少能够直接支撑该高频非共振区幂次标度、适用阶数及频率衰减机制的文献引用；文献支点仅置于scheme侧会导致研究内容单读时无法核验。建议至少补挂评审指定的[13][27]，并明确文献分别支撑光强标度、频率标度还是完整的Floquet微扰展开推导。",
+      "search_keywords": [
+        "high-frequency off-resonant Floquet amplitude scaling",
+        "Floquet harmonic inverse frequency dependence",
+        "Floquet perturbative expansion strong-field scaling",
+        "laser-induced high harmonic intensity power law",
+        "非共振Floquet 高频 频率标度"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3所述逆法拉第通道的高频耗散尾随光强平方增长，并随驱动频率呈ω⁻³衰减。",
+      "missing_evidence": "缺少直接给出逆法拉第响应或Floquet耗散尾频率立方反比关系的理论或实验文献；尤其需要区分耗散尾与实部Floquet主项，并说明ω⁻³标度所对应的微扰阶数、通道选择规则和适用频段。建议补挂[13][27]中实际能够支持该结论的来源，而非仅引用一般Floquet背景文献。",
+      "search_keywords": [
+        "inverse Faraday effect omega^-3 scaling",
+        "Floquet dissipative tail cubic frequency suppression",
+        "high-order perturbative inverse Faraday response",
+        "circularly polarized light magneto-electric optical rectification",
+        "逆法拉第 高频 耗散尾 三次频率反比"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3关于共不可约表示能够精确对应Floquet响应通道或选择定则的论断。",
+      "missing_evidence": "缺少建立共不可约表示分类与Floquet通道、磁振子/电子响应分支及选择定则之间精确对应关系的群论文献；需要说明所采用的母群、子群、磁空间群或射影表示约定，并给出该对应关系成立的前提。建议在content.md对应段直接补挂[8]，避免仅依赖scheme或rationale中的引用。",
+      "search_keywords": [
+        "co-irreducible representation Floquet symmetry channels",
+        "co-irreducible representation selection rules magnetic space group",
+        "little group projective representation Floquet classification",
+        "magnetic symmetry Floquet transition selection rules",
+        "共不可约表示 Floquet 通道 选择定则"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,41 @@
+{
+  "proposal_id": "general-phonon-hhg-20261101",
+  "cluster_id": "cl_20261029_a9188b",
+  "clusters": [
+    "cl_20261029_a9188b"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2024-2402.13450-on-the-fly-machine-learned-force-fields-for-warm-dense-matte",
+      "title": "On-the-fly machine learned force fields for warm dense matter simulations",
+      "summary": "开发了一套在线（on-the-fly）机器学习力场分子动力学模拟框架，用于温密物质（WDM）的大尺度模拟。力场基于核方法与贝叶斯线性回归构建，在MD运行过程中按需触发DFT参考计算并在线更新模型，从而以极少的第一性原理调用获得接近DFT精度的势能面。结合Gauss Spectral Quadrature加速的DFT参考计算，将第一性原理模拟扩展到温密物质此前不可及的空间尺度和时间长度。",
+      "path": "knowledge/raw/papers/2024-2402.13450-on-the-fly-machine-learned-force-fields-for-warm-dense-matte.md",
+      "added_via": "cluster:cl_20261029_a9188b",
+      "added_at": "2026-11-01T14:40:09Z"
+    },
+    {
+      "source_id": "paper:2026-2601.17137-on-the-fly-machine-learned-force-fields-for-high-fidelity-po",
+      "title": "On-the-Fly Machine-Learned Force Fields for High-Fidelity Polymer Glass Transition Simulations",
+      "summary": "本文将从头算分子动力学（AIMD）与在线（on-the-fly）机器学习力场构建耦合：在模拟运行过程中按需触发DFT计算并增量训练力场，仅需约1000个AIMD采样构型即可获得覆盖玻璃化转变全程的高保真OTF-MLFF。对12种结构类型各异（芳香族/脂肪族/杂原子/支链）的聚合物，玻璃化转变温度Tg的模拟预测与实验高度一致，而计算成本较全程AIMD降低约6个数量级，使聚合物玻璃化转变的高精度规模化模拟成为可能。",
+      "path": "knowledge/raw/papers/2026-2601.17137-on-the-fly-machine-learned-force-fields-for-high-fidelity-po.md",
+      "added_via": "cluster:cl_20261029_a9188b",
+      "added_at": "2026-11-01T14:40:09Z"
+    },
+    {
+      "source_id": "paper:2025-2510.25439-finite-temperature-ferroelectric-phase-transitions-from-mach",
+      "title": "Finite-Temperature Ferroelectric Phase Transitions from Machine-Learned Force Fields",
+      "summary": "该文用在线主动学习的机器学习力场（MLFF）模拟BaTiO3、PbTiO3等四种经典铁电氧化物的有限温结构相变，发现仅以0 K基态结构作为训练输入即可定性预测所有主要结构相及其相变。系统对比LDA、PBEsol与r2SCAN泛函，表明PBEsol训练的MLFF对相变预测最可靠，凸显基态势能面质量决定向有限温外推的能力。该结果为低成本构建材料温致相图提供了新范式。",
+      "path": "knowledge/raw/papers/2025-2510.25439-finite-temperature-ferroelectric-phase-transitions-from-mach.md",
+      "added_via": "cluster:cl_20261029_a9188b",
+      "added_at": "2026-11-01T14:40:09Z"
+    },
+    {
+      "source_id": "paper:2023-2302.12993-complexity-of-many-body-interactions-in-transition-metals-vi",
+      "title": "Complexity of Many-Body Interactions in Transition Metals via Machine-Learned Force Fields from the TM23 Data Set",
+      "summary": "构建并开放TM23数据集：在统一DFT设置下覆盖3d/4d/5d全系列过渡金属在bcc/fcc/hcp固相与液相的能量-力-应力参考数据，作为机器学习力场(MLFF)的系统基准。在同一数据上对比FLARE（稀疏高斯过程+在线主动学习）与NequIP（E(3)等变消息传递神经网络），发现等变消息传递模型在力、能量、应力预测上全面占优且数据效率更高。结果定量刻画了过渡金属多体相互作用的复杂度随d带填充与物相（液相较固相显著更难）的系统变化，标定了不同类别MLFF的能力边界。",
+      "path": "knowledge/raw/papers/2023-2302.12993-complexity-of-many-body-interactions-in-transition-metals-vi.md",
+      "added_via": "cluster:cl_20261029_a9188b",
+      "added_at": "2026-11-01T14:40:09Z"
+    }
+  ]
+}

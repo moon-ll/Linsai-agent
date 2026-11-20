@@ -1,0 +1,90 @@
+{
+  "gaps": [
+    {
+      "claim": "D3d群论错误修正需引用点群特征标表与D3d/D3h对比的群论权威文献",
+      "missing_evidence": "缺乏D3d点群对称元素(i, σ_d, S6, C2')的群论权威参考及D3d vs D3h区别(MoS2 2H vs 3R stacking)的实验/计算证据",
+      "search_keywords": [
+        "D3d point group character table",
+        "D3d D3h symmetry difference TMD",
+        "MoS2 2H 3R stacking group theory",
+        "transition metal dichalcogenide point group symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peterka 2023 APL Photonics 8, 086103论文的真实arXiv前驱号需核实",
+      "missing_evidence": "缺少Peterka et al. APL Photonics 2023 MoS2 high harmonic generation论文的arXiv预印本编号确认",
+      "search_keywords": [
+        "Peterka MoS2 high harmonic generation APL Photonics 2023",
+        "Peterka HHG transition metal dichalcogenide resonant excitation arXiv",
+        "2306 MoS2 HHG preprint"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MoS2/WSe2 II型能带对齐作为协同体系优势的论证需补充实验/计算证据",
+      "missing_evidence": "缺少MoS2/WSe2异质结II型能带对齐的能带结构实验数据(ARPES/STS)及其与莫尔势周期间的关系",
+      "search_keywords": [
+        "MoS2 WSe2 type II band alignment ARPES",
+        "MoS2 WSe2 heterostructure band structure moire period",
+        "twisted heterobilayer TMD type-II alignment experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔势改写激子跃迁偶极矩/极化的物理机制需要机制图像段",
+      "missing_evidence": "缺少莫尔势对激子跃迁偶极矩空间调制的理论/计算证据(如TBG/TMD moire exciton dipole modulation)",
+      "search_keywords": [
+        "moire potential exciton dipole moment modulation",
+        "moire superlattice exciton transition dipole spatial modulation",
+        "moire exciton oscillator strength theory",
+        "interlayer exciton moire dipole coupling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "ARPES vs 阿秒探测在测量moire势/电子关联方面的优势对比需要定量论证",
+      "missing_evidence": "缺少ARPES(空间/能量分辨率)与阿秒HHG(时间/动量分辨率)在moire势测量上的互补性数据与对比文献",
+      "search_keywords": [
+        "ARPES vs ultrafast spectroscopy moire superlattice comparison",
+        "high harmonic spectroscopy band structure resolution advantage",
+        "moire band structure ARPES time-resolved comparison"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "高压下(hBN几何相位、Nebgen CrI3高压HHG、Hu高压方法学)协同体系响应的最新进展",
+      "missing_evidence": "缺少高压条件下莫尔体系HHG/阿秒测量的最新实验证据",
+      "search_keywords": [
+        "high pressure moire heterostructure high harmonic generation",
+        "pressure tuning moire superlattice ultrafast",
+        "diamond anvil cell HHG moire",
+        "高压 莫尔 超快 谐波"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内MoS2/扭转TMD HHG研究组的具体工作引用",
+      "missing_evidence": "缺少国内课题组在MoS2高次谐波、扭转TMD异质结制备方面的代表性论文(范本要求国内现状独立段)",
+      "search_keywords": [
+        "国内 过渡金属硫族化合物 高次谐波",
+        "中国 TMD 异质结 扭转角 HHG",
+        "solid HHG MoS2 Chinese group",
+        "twisted MoS2 WSe2 homostructure fabrication China"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "国内阿秒/强场超快研究组在水窗高次谐波、阿秒光源方面的进展",
+      "missing_evidence": "缺少国内阿秒光源与水窗能区HHG研究组的代表性论文",
+      "search_keywords": [
+        "中国 水窗 高次谐波",
+        "国内 阿秒光源 进展",
+        "water window HHG Chinese group attosecond source",
+        "中国 阿秒 强场超快 课题组"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

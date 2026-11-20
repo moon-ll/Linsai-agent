@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "方向三定量框架的关键参数（110fs 退相位时间、45fs 特征时间、93meV 拉比分裂）依赖 Sortino[17]（arXiv:2510.03052）单一预印本作为唯一锚点，且 45fs 一处被评审指出原文实为 LP–X 周期而非 LP–UP 拉比分裂",
+      "missing_evidence": "经同行评审的正式刊版或独立第三方文献，对 TMD 微腔激子-极化激元的拉比分裂能量与退相位/退相干时间给出可复核的实测或理论数值，以替换或 corroborate 预印本来源，并核实 45fs 的物理归属对象",
+      "search_keywords": [
+        "exciton-polariton Rabi splitting TMD microcavity",
+        "MoS2 microcavity polariton dephasing time",
+        "LP-UP splitting energy meV monolayer",
+        "cavity exciton-polariton coherence time"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "“尚未见同步测量的报道”（方向三的新颖性声明）",
+      "missing_evidence": "带检索范围与截止日期（截至 2026-11）的系统性文献排查，证明尚无对 BIC/anapole 体系进行时域-频域（或瞬态非线性）同步测量的工作，使新颖性声明可被审计",
+      "search_keywords": [
+        "time-resolved second harmonic generation TMD",
+        "transient nonlinear spectroscopy monolayer TMD",
+        "pump-probe SHG ultrafast polarization",
+        "simultaneous time-frequency resolved measurement BIC"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "“Trolle 等人给出的 2H 相理论行为”（偶数层 SHG 趋零）——Trolle[3] 实为单层激子理论，偶数层趋零行为需另挂实测来源 Kumar[1]/Malard[2]",
+      "missing_evidence": "明确支撑 2H 堆垛偶数层二阶非线性趋零的实验或对称性分析文献，以替换错误的引用归属（改挂 [1,2] 或改述为“对称性预期行为”并配独立出处）",
+      "search_keywords": [
+        "second harmonic generation even layers 2H MoS2",
+        "SHG layer parity suppression TMD",
+        "Malard SHG few-layer MoS2",
+        "inversion symmetry even-layer second harmonic generation"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

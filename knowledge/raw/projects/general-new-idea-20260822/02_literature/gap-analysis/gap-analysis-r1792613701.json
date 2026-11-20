@@ -1,0 +1,104 @@
+{
+  "gaps": [
+    {
+      "claim": "α-MnTe 交变磁体的奈尔温度 T_N 的 canonical 口径应为 307–310 K（需含 307 K 说明），骨架表与 rationale 章列仅写\"约 310 K\"，抹去了实文 307–310 K 双值表述",
+      "missing_evidence": "缺少给出 α-MnTe 奈尔温度精确区间 307–310 K 及其测定方法/文献出处的实验文献（中子衍射、磁性测量、ARPES 温度依赖等），以支撑骨架表数值与正文一致",
+      "search_keywords": [
+        "alpha-MnTe Neel temperature 307 K 310 K",
+        "MnTe antiferromagnet Neel temperature neutron diffraction measurement",
+        "α-MnTe 奈尔温度 中子衍射 测定",
+        "MnTe easy-axis orientation Neel vector neutron"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "三光子总能量应统一为 3×0.41≈1.23 eV，与匹配判据双重表述绑定",
+      "missing_evidence": "缺少 0.41 eV 光子能量来源文献（中红外激光中心波长 ~3 μm 对应 0.413 eV）及其与三光子吸收匹配的实验/理论依据，scheme 行 55 的 1.24 eV 缺乏出处说明",
+      "search_keywords": [
+        "0.41 eV mid-infrared photon energy 3 micron",
+        "three-photon absorption 1.23 eV 3 um pump",
+        "中红外 3 微米 光子能量 0.41 eV",
+        "photon energy 0.41 eV third harmonic solid-state HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnTe 等交变磁体具有 ~100 meV 自旋劈裂，可用于自旋分辨高次谐波谱学探测",
+      "missing_evidence": "缺少 alpha-MnTe 自旋劈裂能量的最新实验测量（ARPES / 时间分辨 ARPES）与理论（第一性原理含自旋轨道耦合）文献支撑 100 meV 量级数值",
+      "search_keywords": [
+        "alpha-MnTe spin splitting 100 meV ARPES",
+        "MnTe spin orbit coupling spin splitting first-principles",
+        "交变磁体 自旋劈裂 时间分辨 ARPES",
+        "altermagnet spin splitting energy scale MnTe 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "d 波/g 波超导配对符号的角动量命名与节点面几何可作为区分判据的物理基础",
+      "missing_evidence": "缺少 d/g 波超导序参量对称性与其节点结构（点节点/线节点/面节点）的实验证据（相干散射、穿透深度、ARPES）与理论分类文献",
+      "search_keywords": [
+        "d-wave g-wave superconducting pairing symmetry nodes",
+        "superconducting order parameter higher angular momentum classification review",
+        "d 波 g 波 超导 对称性 节点 实验",
+        "superconducting gap symmetry ARPES nodal structure evidence"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "交变磁体中的 Floquet-Rashba 效应及其奇宇称/更高角动量配对的拓展",
+      "missing_evidence": "缺少 arXiv:2606.21281 Floquet-Rashba 与相关 Floquet 拓扑超导奇宇称对称性扩展的引用支撑，以及 MnPS3 等材料中 Rashba  superconductivity 的实验/理论文献",
+      "search_keywords": [
+        "Floquet Rashba effect altermagnet",
+        "Floquet topological superconductor odd-parity pairing symmetry extension",
+        "MnPS3 Rashba superconductivity pairing symmetry",
+        "光 Floquet 效应 Rashba 自旋轨道耦合 拓扑超导"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnPS3 的圆二色性/螺旋度选择规则可用于判定超导序参量的手性",
+      "missing_evidence": "缺少 MnPS3 圆二色性实验测量与超导序参量手性预测之间的对应关系文献（拉曼/光学圆二色性 + 理论螺旋序参量）",
+      "search_keywords": [
+        "MnPS3 circular dichroism helicity selection rule",
+        "MnPS3 superconducting order parameter chirality prediction",
+        "MnPS3 circular polarization Raman experiment",
+        "磁各向异性 圆二色性 超导 手性 序参量"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "全文引用密度 54 处为范本口径（10–17）3 倍，仍属残留问题，需补充/规范文献引用密度至范本水平",
+      "missing_evidence": "需在保持论证链完整前提下增补具名文献支撑（而非仅嵌入式编号），特别是 rationale 关键论点（磁序三分类铺垫、可区分判据基础）缺少具体作者/年份具名引用",
+      "search_keywords": [
+        "altermagnet spin group symmetry classification review 2024",
+        "spontaneous time reversal symmetry breaking altermagnet review",
+        "交变磁体 综述 自旋群 对称性 分类",
+        "ultrafast strong-field probing of magnetic order"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "方案中 k 网格收敛配置（20×20×20）、时间步长 5 as/2.5 as、8 条能带、2–3 光学周期演化等参数设置需文献支撑其收敛性与物理合理性",
+      "missing_evidence": "缺少 TDDFT/TDSE 强场模拟中 k 网格密度、时间步长、截断能带数的收敛性验证文献（参考相），用于论证参数选择非任意",
+      "search_keywords": [
+        "TDDFT strong-field simulation k-point grid convergence solid HHG",
+        "time-dependent Kohn-Sham convergence time step band cutoff",
+        "强场 模拟 收敛性 k 网格 时间步长 能带数",
+        "convergence testing real-time TDDFT high harmonic generation solid"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "中红外驱动固体 HHG 与三光子吸收过程的选择性优势（相比800 nm 单光子跃迁）需文献支撑",
+      "missing_evidence": "缺少中红外多光子 HHG 相对于近红外单光子 HHG 在激发通道、抑制背景、选择性探测方面的对比实验文献",
+      "search_keywords": [
+        "mid-infrared driven solid-state HHG multiphoton advantage",
+        "three-photon absorption 2 um high harmonic generation ZnO",
+        "中红外 驱动 高次谐波 多光子 选择性",
+        "wavelength-dependent HHG yield solid comparison mid-IR"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

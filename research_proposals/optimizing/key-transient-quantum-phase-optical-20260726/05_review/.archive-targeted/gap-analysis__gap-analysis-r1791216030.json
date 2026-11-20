@@ -1,0 +1,29 @@
+{
+  "gaps": [
+    {
+      "claim": "关联泛函对 Berry 相关物理量敏感（Ilin[29]被虚构挂此归因）",
+      "missing_evidence": "需要真实文献支撑'DFT泛函选择对Berry相关物理量（如Berry曲率/相）具有敏感性'这一方向性判断；Ilin 文实为 SSH 单侧腔中 HHG 的量子光学理论（密度矩阵演化、光子统计），通篇不涉泛函-Berry量关系；Neufeld 等 J. Phys. Chem. Lett. 2024 的泛函基准工作可作为正当替代来源",
+      "search_keywords": [
+        "DFT functional sensitivity Berry curvature",
+        "benchmark functionals strong-field TDDFT",
+        "Berry phase density functional dependence",
+        "topological property functional benchmarking",
+        "Neufeld benchmarking functionals adiabatic TDDFT"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MoS₂多层体相带隙为1.6 eV",
+      "missing_evidence": "MoS₂不同层数（体相间接带隙、双层、单层直接带隙）的公认实验/第一性原理值；现有文本1.6 eV与公认体相间接带隙1.2–1.3 eV、双层约1.55 eV存在偏差，需要引用正确的层数-带隙对应文献予以修正",
+      "search_keywords": [
+        "MoS2 bandgap layer-dependent",
+        "MoS2 bulk indirect bandgap 1.2 eV",
+        "MoS2 bilayer 1.55 eV",
+        "MoS2 monolayer direct gap 1.8 eV",
+        "two-dimensional MoS2 electronic structure transition"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

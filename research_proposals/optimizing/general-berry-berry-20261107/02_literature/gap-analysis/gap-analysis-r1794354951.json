@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "碲或碲烯实验平台能够作为研究对象和实验依据，并支撑§1.5所述的实测表现，例如±20 V条件下的相关响应。",
+      "missing_evidence": "§1.5的碲平台定位句目前没有引文。需优先核验现有文献[34,39]是否提供了碲烯器件、测量条件、±20 V实测结果及其与拟研究机制的直接对应关系，并将其作为原始实验依据挂接；如现有文献不能直接支撑所述数值或平台功能，还需补充相应的原始实验论文或高质量综述。",
+      "search_keywords": [
+        "碲烯 ±20 V 实验平台",
+        "碲烯 非线性响应 栅压 实验",
+        "tellurene device ±20 V experimental response",
+        "tellurene nonlinear optical response gate voltage",
+        "elemental tellurene ultrafast measurement 20 V"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "方案章使用的200 fs和300 fs时间尺度属于有文献依据的参照值，并可作为本项目相关动力学分析的基准。",
+      "missing_evidence": "需追溯200 fs、300 fs数值的原始出处，明确其对应的材料体系、实验或计算方法、泵浦条件、时间零点定义及适用范围；还应说明这些数值是直接引用、参照值还是本项目设定。可优先核验文献[33]，并在该数值首次出现处补充与原始来源对应的引文及口径说明。",
+      "search_keywords": [
+        "\"200 fs\" \"300 fs\" valley population",
+        "200 fs 300 fs ultrafast relaxation valley",
+        "谷间布居 200 fs 300 fs",
+        "超快动力学 时间尺度 谷间布居",
+        "pump-probe intervally relaxation 200 fs 300 fs"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "方案章使用的23%和60%谷间布居比例有明确的文献测量或计算依据，且与前述fs时间尺度属于相同或可比较的物理口径。",
+      "missing_evidence": "需查明23%和60%两组比例的原始来源，说明比例的具体定义、分母或统计区间、对应材料与激发条件，并交代其与项目模型的映射关系。应在百分比集合首次出现处引用原始研究，优先核验文献[33]是否同时报告这些比例及其时间尺度；若不能，应分别补充对应来源。",
+      "search_keywords": [
+        "\"23%\" \"60%\" valley population",
+        "valley population ratio 23 60 percent",
+        "谷间布居比例 23% 60%",
+        "intervalley population percentage ultrafast spectroscopy",
+        "nonlinear Hall valley population tellurene"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

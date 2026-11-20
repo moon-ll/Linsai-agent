@@ -1,0 +1,59 @@
+{
+  "gaps": [
+    {
+      "claim": "HHG对能带结构、跃迁偶极矩、Berry曲率与多体关联高度敏感（孤立断言未展开）",
+      "missing_evidence": "缺少HHG作为莫尔超晶格能带结构/跃迁偶极矩/Berry曲率/多体关联探针的方法学论证文献，特别是近三年综述或关键实验证明",
+      "search_keywords": [
+        "high harmonic generation moire superlattice probe review",
+        "HHG band structure Berry curvature sensitivity",
+        "solid HHG moire potential reconstruction",
+        "high harmonic spectroscopy transition metal dichalcogenide moire"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔势反演误差压缩至15%以内、扭转角分辨率±0.02°的可行性论证（缺少'为什么是15%而非20%'、'为什么SNR=50是门槛'的因果说明）",
+      "missing_evidence": "缺少HHG反演莫尔势/扭转角的精度基准文献，包括现有实验/理论能达到的反演误差上限、SNR阈值与反演精度的定量关系",
+      "search_keywords": [
+        "high harmonic generation moire potential inversion accuracy",
+        "twist angle precision high harmonic spectroscopy",
+        "HHG retrieval SNR threshold accuracy",
+        "moire superlattice reconstruction error benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TMDC莫尔本征角不均匀典型0.1°–0.5°（应变弛豫+twist disorder）",
+      "missing_evidence": "缺少TMDC莫尔异质结扭转角不均匀性的实验测量数据，包括STM/电学输运/光学测量给出的角不均匀分布",
+      "search_keywords": [
+        "twisted bilayer TMDC twist angle disorder",
+        "moire heterostructure twist angle inhomogeneity",
+        "TMDC moire strain relaxation twist disorder",
+        "twist angle uniformity TMDC heterobilayer measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "关联能隙5–20meV（§1.5 L75与content L19/L62/L78三处出现，rationale 20meV上端未在content L19实测区间复现）",
+      "missing_evidence": "缺少TMDC莫尔异质结关联能隙的实验测量值文献，特别是5–20meV区间的输运/光学/STM测量数据，用于支撑申请人给定的范围",
+      "search_keywords": [
+        "correlated insulator moire TMDC gap measurement",
+        "moire superlattice correlation gap meV transport",
+        "WSe2 WS2 moire correlated state gap spectroscopy",
+        "magic angle TMDC Mott gap experimental value"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale与content L50的扭转角分辨率双档披露口径差异（实测档±0.05°–0.1°由角不均匀限制，HHG光斑平均角读出）",
+      "missing_evidence": "缺少HHG光斑对扭转角平均效应的理论/模拟文献，论证HHG空间积分天然给出面平均角而非局部角的物理图像",
+      "search_keywords": [
+        "high harmonic generation spatial averaging twist angle",
+        "HHG probe spot average moire angle",
+        "solid HHG moire spatial resolution limit"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

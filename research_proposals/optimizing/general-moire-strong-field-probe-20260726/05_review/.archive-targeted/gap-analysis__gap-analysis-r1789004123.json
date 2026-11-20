@@ -1,0 +1,44 @@
+{
+  "gaps": [
+    {
+      "claim": "Molinero 等 2024 年在 Optica 报道的 magic-angle TBG 的 HHG 全光学表征中 H₃/H₅/H₇ 在 θ_mag ≈ 1.12° 附近相对 1.22°/1.05° 出现谐波抑制",
+      "missing_evidence": "需要核实 Molinero 2024 Optica 论文实际扭转角数值与谐波抑制结论是否一致，以及补充 Mrudul 2024 等同期独立实验/理论对 TBG HHG 扭转角依赖性的验证",
+      "search_keywords": [
+        "Molinero 2024 Optica twisted bilayer graphene high harmonic generation",
+        "TBG HHG magic angle harmonic suppression",
+        "Mrudul twisted bilayer high harmonic generation 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Shan 2021 Nature 报道的 >30% 光学非线性调制（外推到莫尔体系推出 20% 跳变阈值与 I_c 区间）",
+      "missing_evidence": "需要 Shan et al. 2021 Nature 论文原始数据以验证 >30% 调制幅度的实验测量条件、激光参数、莫尔超晶格参数对应关系；外推到本项目莫尔体系需确认体系同构性",
+      "search_keywords": [
+        "Shan 2021 Nature moiré superlattice optical nonlinearity giant modulation",
+        "Floquet engineering moiré correlated insulator ac-Stark",
+        "Nikola 2021 Nature twisted bilayer correlated insulator"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[16] 提供 3×10¹¹ W/cm² 谐波饱和门槛与态密度估算依据（flat-band 态密度→饱和强度估算链）",
+      "missing_evidence": "需要找到 flat-band 莫尔超晶格态密度计算的原始文献以及对应饱和强度的实验/理论值，验证 [16] 是否包含该数据或需另寻 flat-band HHG saturation intensity 阈值参考",
+      "search_keywords": [
+        "flat-band moiré density of states high harmonic generation",
+        "twisted bilayer graphene HHG saturation intensity 3e11 W/cm2",
+        "flat band HHG saturation threshold moiré superlattice"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "实时 DMFT 将谱峰位移归因亚周期 Mott 熔化（arXiv 预印本 [12]，2025，状态待核）",
+      "missing_evidence": "需要核实 [12] arXiv 预印本是否已正式发表（Nature/PRL/PRX 等期刊），查找实时 DMFT 莫尔体系亚周期 Mott 熔化与 HHG 谱峰位移的同行评审版本",
+      "search_keywords": [
+        "real-time DMFT sub-cycle Mott melting moiré superlattice",
+        "DMFT high harmonic generation spectral shift arXiv 2025",
+        "Mott insulator ultrafast melting DMFT HHG published journal"
+      ],
+      "priority": "high"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb 在 0.3 V/Å 强场下损伤阈值的设定",
+      "missing_evidence": "目前仅 Cheng 2026 间接证据支撑；Sankar 2025 等补充文献仍待正式发表核实，缺乏 CrSb 飞秒激光损伤阈值或强场光学击穿的直接测量数据",
+      "search_keywords": [
+        "CrSb femtosecond laser damage threshold",
+        "CrSb strong field ablation threshold",
+        "transition metal pnictide optical breakdown near-infrared",
+        "MnTe femtosecond damage threshold",
+        "altermagnet ultrafast laser damage"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "半导体 Bloch 方程 (SBE) 在 0.1–1.0 V/Å 强场范围的适用性",
+      "missing_evidence": "缺少 SBE 在该强场区间有效性的明确文献支持，特别是与 CrSb/HHG 强场计算相关的数值验证与边界条件文献",
+      "search_keywords": [
+        "semiconductor Bloch equation validity strong field",
+        "SBE high harmonic generation field strength range",
+        "interband coupling saturation strong field limit",
+        "Kane model HHG validity V/Angstrom"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "altermagnet HHG 序参量反演实验流程的'首次'定位",
+      "missing_evidence": "创新点 2 仍字面残留'首次'，需要 2026-08 之前边界检索式核查是否存在 altermagnet HHG 序参量反演/参数提取的同类实验流程文献",
+      "search_keywords": [
+        "altermagnet HHG order parameter extraction",
+        "altermagnet high harmonic inverse problem",
+        "Néel vector retrieval HHG experiment",
+        "altermagnetic order parameter ultrafast readout"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnTe 备选样品跨越磁相变点的高次谐波响应",
+      "missing_evidence": "scheme.md §3 提到 MnTe 备选但'跨越磁相变点'措辞未澄清，未引用 MnTe 光学反射率/磁相变温度与 HHG 响应的具体实验数据",
+      "search_keywords": [
+        "MnTe altermagnet optical reflectivity Néel temperature",
+        "MnTe magnetic phase transition HHG",
+        "MnTe Kerr effect ultrafast",
+        "altermagnet MnTe strong field nonlinear"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "序参量反演量化判据（≤10% 误差、SNR > 5、50% 后验区间）的物理依据",
+      "missing_evidence": "rationale.md 量化判据密度低（≤10%、SNR > 5、50% 后验等判据 0 字面出现），缺少反演精度/Fisher 信息/后验置信度阈值的同行文献支撑",
+      "search_keywords": [
+        "Fisher information nonlinear optics inverse problem",
+        "Bayesian inversion HHG precision threshold",
+        "parameter identifiability high harmonic spectroscopy",
+        "signal-to-noise ratio altermagnet HHG detection"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

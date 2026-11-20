@@ -1,0 +1,170 @@
+{
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "cluster_id": "orphan-route-2026-11-13",
+  "clusters": [
+    "orphan-route-2026-11-13",
+    "cl_20261106_191cbc"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2025-PhysRevLett.134.096504-many-body-effects-on-high-harmonic-generation-in-hubbard-lad",
+      "title": "Many-Body Effects on High-Harmonic Generation in Hubbard Ladders",
+      "summary": "本文基于 Hubbard 梯（Hubbard ladder）模型系统研究强关联体系中固体高次谐波的多体效应，揭示了 U/t 比值（关联强度）对谐波谱结构、关联诱导的电荷涨落动力学以及由此衍生的 doublon–holon 三步模型的影响，给出适用于中等关联区（U/W∼中等）HHG 的完整理论图像。",
+      "path": "knowledge/raw/papers/2025-PhysRevLett.134.096504-many-body-effects-on-high-harmonic-generation-in-hubbard-lad.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2025-s41598-025-17540-x-high-power-dual-swir-mir-opcpa-source-for-high-order-harmoni",
+      "title": "High power, dual SWIR-MIR OPCPA source for high-order harmonics generation",
+      "summary": "报道了一台高功率、SWIR 与 MIR 双波段输出的 OPCPA 激光源，专门面向固体高次谐波产生（HHG）的驱动需求设计。系统评估了 MIR 驱动场在 10^13 W/cm² 量级下对不同带隙固体的驱动能力。结合 Keldysh 参数判据，给出了带隙小于 5 eV 与约 7 eV 两类固体进入隧穿电离区所需的场强条件，为固体 HHG 实验中驱动源参数与靶材选择提供了定量依据。",
+      "path": "knowledge/raw/papers/2025-s41598-025-17540-x-high-power-dual-swir-mir-opcpa-source-for-high-order-harmoni.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2022-2207.02830-enhancement-of-high-harmonic-generation-in-bulk-floquet-syst",
+      "title": "Enhancement of High Harmonic Generation in Bulk Floquet Systems",
+      "summary": "该文从理论上证明周期性强驱动场在体材料中形成的Floquet态可显著增强高次谐波产生（HHG），其机制源于Floquet能带修饰导致的电子态密度与跃迁偶极矩重构。该工作建立了Floquet工程与固态HHG相干调控之间的直接联系，为通过外加周期场设计提升谐波产率提供了新途径。",
+      "path": "knowledge/raw/papers/2022-2207.02830-enhancement-of-high-harmonic-generation-in-bulk-floquet-syst.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2024-s41567-024-02640-8-ultrafast-high-harmonic-spectroscopy-of-solids",
+      "title": "Ultrafast high-harmonic spectroscopy of solids",
+      "summary": "这是 Ghimire 组 2024 年发表于 Nature Physics 的综述，系统总结了固体高次谐波光谱（HHGS）作为全光学探针的发展：利用强场驱动下产生的谐波产率、截止能量、偏振与圆二色等可观测量，反演电子能带结构、Berry 曲率与量子几何、拓扑特征及多体关联。综述梳理了带间/带内双电流发射框架在各材料类别（半导体、TMD、拓扑材料、Mott 与关联体系）中的实验与理论进展，并展望了 HHG 向亚周期时间分辨探测序参量与关联动力学的拓展。对以强场谐波为探针的在跑课题，这是一篇方法论基线文献。",
+      "path": "knowledge/raw/papers/2024-s41567-024-02640-8-ultrafast-high-harmonic-spectroscopy-of-solids.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2023-2308.15087-on-the-limitations-of-the-semi-classical-picture-in-high-har",
+      "title": "On the limitations of the semi-classical picture in high harmonic generation",
+      "summary": "本文系统检视高次谐波产生（HHG）中半经典三步模型与强场近似（SFA）框架的适用边界，逐环节梳理其在电离、自由演化与复合过程中所依赖的近似（平面波连续态、忽略母离子库仑势、定相/大作用量极限、单一轨迹主导）。核心结论是：谐波谱与相位中的若干特征无法由纯经典轨迹图像给出，必须引入量子轨道、隧穿相位与波包扩散等量子修正，从而为半经典模型的使用划定明确的有效域。",
+      "path": "knowledge/raw/papers/2023-2308.15087-on-the-limitations-of-the-semi-classical-picture-in-high-har.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T16:47:06Z"
+    },
+    {
+      "source_id": "paper:2025-2506.13063-high-harmonic-generation-in-solids-interplay-between-defect",
+      "title": "High Harmonic Generation in solids: interplay between defect states and band structure (near-bandgap fingerprints)",
+      "summary": "该条目为占位符：本次检索未获得独立可核实的新文献（无摘要、无正文，元数据自述建议在系统去重阶段剔除）。仅从标题看，主题指向固体高次谐波中缺陷态与能带结构的相互作用及其在近带隙区域留下的谱学指纹。但具体科学贡献无法核验，不建议在任何课题中直接引用其结论，应先经 arXiv:2506.13063 或其关联工作（2310.17007 系列）确认文献真实存在与内容后再深读。",
+      "path": "knowledge/raw/papers/2025-2506.13063-high-harmonic-generation-in-solids-interplay-between-defect.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T19:22:35Z"
+    },
+    {
+      "source_id": "paper:2018-1803.00778-finite-system-effects-on-high-harmonic-generation-from-atoms",
+      "title": "Finite-system effects on high-harmonic generation: from atoms to solids",
+      "summary": "利用自洽TDDFT在统一框架下考察从单原子、原子链/团簇到体相固体的HHG，发现截止能随体系尺寸近似线性增长，并在体系超过电子-空穴最大传播长度后收敛于体相值。工作给出固态HHG产额模拟的有限尺寸收敛判据（每方向N≳60核），并以电子-空穴复合传播长度为核心物理量，把原子再碰撞图像与固体带间复合辐射机制纳入同一实空间传播框架。",
+      "path": "knowledge/raw/papers/2018-1803.00778-finite-system-effects-on-high-harmonic-generation-from-atoms.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T19:22:35Z"
+    },
+    {
+      "source_id": "paper:2024-2407.15253-keldysh-tuning-of-photoluminescence-in-a-lead-halide-perovsk",
+      "title": "Keldysh tuning of photoluminescence in a lead halide perovskite crystal",
+      "summary": "在CsPbBr₃铅卤钙钛矿晶体中，通过调节强AC场的振幅与频率，实验直接观测到光致发光随Keldysh参数γ变化从多光子吸收（幂律标度，γ≫1）经非幂律过渡区（γ≈1）到量子隧穿（指数阈值标度，γ≪1）的完整交叉，建立了各γ区间的标度律。该工作为固体强场物理（如固态HHG）中Keldysh参数区间的划分提供了首个明确的实验验证。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T19:22:35Z"
+    },
+    {
+      "source_id": "paper:2012-1207.4653-beyond-carbon-k-edge-harmonic-emission-using-spatial-and-tem",
+      "title": "Beyond Carbon K-edge harmonic emission using spatial and temporal synthesized laser field",
+      "summary": "该文通过数值模拟证明，将时间合成的延迟少周期脉冲与纳米等离激元天线产生的空间非均匀激光场相结合，可在氦原子中用常规800 nm飞秒激光使高次谐波截止能量突破半经典极限、超越碳K边（最高达4.5Up）。这种时空协同增强机制为在阿秒时间尺度上研究内壳层光电离过程开辟了新途径。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T19:22:35Z"
+    },
+    {
+      "source_id": "paper:2026-2603.17329-time-resolving-the-birth-of-photoelectrons-in-stro",
+      "title": "Time-resolving the birth of photoelectrons in strong-field ionization with an isolated attosecond pulse",
+      "summary": "本文理论上提出并演示了一种利用隔离阿秒脉冲（IAP）对强场电离中光电子的诞生过程进行时间分辨的方案，其核心在于不干预相互作用的前提下提取出射电子波包的相位信息。该方案为普适性光电离过程中的阿秒电子动力学提供了相位重构与时域表征的新工具。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T19:22:35Z"
+    },
+    {
+      "source_id": "paper:2024-2407.05964-ultrafast-energy-dispersive-soft-x-ray-diffraction-in-the-wa",
+      "title": "Ultrafast energy-dispersive soft-x-ray diffraction in the water window with a laser-driven source",
+      "summary": "演示了首个基于桌面激光驱动源的飞秒时间分辨、能量色散水窗软X射线衍射实验：以10 kHz、2.1 μm中红外OPCPA驱动的高次谐波源覆盖284-531 eV全水窗范围。能量色散构型使宽谱软X射线按能量展开、单发即可采集全水窗衍射信息，避免了单色器的通量损失，为元素特异性超快结构动力学提供了同步辐射共振软X射线衍射（RSXD）的桌面替代方案。",
+      "path": "knowledge/raw/papers/2024-2407.05964-ultrafast-energy-dispersive-soft-x-ray-diffraction-in-the-wa.md",
+      "added_via": "cluster:cl_20261106_191cbc",
+      "added_at": "2026-11-13T20:40:27Z"
+    },
+    {
+      "source_id": "paper:2021-2109.09686-water-window-high-harmonic-generation-with-08-µm-and-22-µm-o",
+      "title": "Water-window high harmonic generation with 0.8-µm and 2.2-µm OPCPAs at 100 kHz",
+      "summary": "在同一套 100 kHz 高平均功率 OPCPA 框架下，对 0.8 µm 与 2.2 µm 两种驱动波长产生水窗（≥284 eV）高次谐波的性能做了直接实验对比。结果显示：中红外 2.2 µm 虽然更容易把截止能量推入水窗，但 0.8 µm 驱动凭借更高的单原子产额和有利的宏观相位匹配，在水窗光子通量上不落下风甚至更优，实测宏观波长标度远比单原子图像平缓。这确立了高重复频率短波长 OPCPA 作为高通量水窗软 X 射线源的一条切实可行（且常被低估）的路线。",
+      "path": "knowledge/raw/papers/2021-2109.09686-water-window-high-harmonic-generation-with-08-µm-and-22-µm-o.md",
+      "added_via": "cluster:cl_20261106_191cbc",
+      "added_at": "2026-11-13T20:40:27Z"
+    },
+    {
+      "source_id": "paper:2020-2003.06755-energy-scaling-of-water-window-high-order-harmonic-generatio",
+      "title": "Energy scaling of water window high-order harmonic generation for single-shot soft X-ray spectroscopy and live-cell imaging",
+      "summary": "本文利用太瓦级中红外飞秒激光与松聚焦几何结合中性气体靶，通过优化相位匹配实现了水窗高次谐波产生的鲁棒能量标度，获得超过3.5纳焦的软X射线谐波脉冲能量（较先前工作提升两个数量级）。该光源实现了单发近边X射线吸收精细结构（NEXAFS）测量，验证了其在单次软X射线光谱学和活细胞成像中的应用潜力。",
+      "path": "",
+      "added_via": "cluster:cl_20261106_191cbc",
+      "added_at": "2026-11-13T20:40:27Z"
+    },
+    {
+      "source_id": "paper:2013-1310.7008-generation-of-attosecond-soft-x-ray-pulses-in-the-water-wind",
+      "title": "Generation of attosecond soft X-ray pulses in the water window using few-cycle IR pulses",
+      "summary": "利用BIBO-OPCPA输出的CEP稳定、1.6 μm亚2周期中红外脉冲驱动气体高次谐波，将截止光子能量推至325 eV，谐波谱覆盖水窗并跨越碳K边（284 eV）。通过CEP扫描观察到软X射线发射的半周期级调制，证明少周期驱动下可对水窗谐波结构进行时域调控，为水窗孤立阿秒软X射线脉冲的产生提供了直接证据与驱动源方案。",
+      "path": "knowledge/raw/papers/2013-1310.7008-generation-of-attosecond-soft-x-ray-pulses-in-the-water-wind.md",
+      "added_via": "cluster:cl_20261106_191cbc",
+      "added_at": "2026-11-13T20:40:27Z"
+    },
+    {
+      "source_id": "paper:2024-2410.10189-complete-temporal-characterization-of-isolating-water-window",
+      "title": "Complete temporal characterization of isolating water window attosecond pulses",
+      "summary": "提出并实验演示了针对水窗区孤立阿秒脉冲的完整时间表征方法，在碳 K 边（约 284 eV）附近重建了孤立阿秒脉冲的完整时间结构（幅度与相位）。该工作将阿秒计量学从传统 XUV 波段推进到水窗软 X 射线波段，为水窗阿秒计量学及内壳层多通道光发射延迟测量奠定了实验基础。",
+      "path": "knowledge/raw/papers/2024-2410.10189-complete-temporal-characterization-of-isolating-water-window.md",
+      "added_via": "cluster:cl_20261106_191cbc",
+      "added_at": "2026-11-13T20:40:27Z"
+    },
+    {
+      "source_id": "paper:2020-2011.11079-low-frequency-and-moiré-floquet-engineering-a-review",
+      "title": "Low-frequency and Moiré Floquet engineering: a review",
+      "summary": "该综述系统梳理了低频Floquet工程的基本理论与调控策略，重点探讨了其在扭转角敏感的莫尔超晶格范德华体系中的应用，通过光场多重调控实现对电子能带结构的灵活剪裁。",
+      "path": "knowledge/raw/papers/2020-2011.11079-low-frequency-and-moiré-floquet-engineering-a-review.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T23:03:24Z"
+    },
+    {
+      "source_id": "paper:2025-2502.09427-measuring-and-controlling-the-birth-of-quantum-attosecond-pu",
+      "title": "Measuring and controlling the birth of quantum attosecond pulses",
+      "summary": "该工作提出用亮压缩真空（BSV）与强相干驱动场共同激发高次谐波，利用两种量子态不同驱动场之间的亚周期干涉对谐波场进行量子态层析，首次在量子阿秒脉冲'诞生'时刻直接测量并调控其量子特性（如压缩与密度矩阵结构）。这为阿秒时间尺度上的非经典光场制备与表征提供了新范式。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T23:03:24Z"
+    },
+    {
+      "source_id": "paper:2026-2608.17854-a-quantum-optical-concept-of-attosecond-pulses-the",
+      "title": "A quantum optical concept of attosecond pulses: the attoquants",
+      "summary": "本文提出阿秒脉冲的量子光学新概念“attoquant”（阿秒量子），指出在高次谐波产生的量子描述下，即使各次谐波之间不存在经典的相位锁定，谐波间固有的量子关联（纠缠与多模压缩）依然能够承载并定义阿秒脉冲结构。该工作将“谐波相位锁定才能形成阿秒脉冲串”的经典判据推广至量子光学层面，并在多光子极限下恢复经典图像。",
+      "path": "knowledge/raw/papers/2026-2608.17854-a-quantum-optical-concept-of-attosecond-pulses-the.md",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T23:03:24Z"
+    },
+    {
+      "source_id": "briefing:knowledge/wiki/reviews/briefing-2026-07-17.md",
+      "title": "林赛每日简报 2026-07-17：阿秒量子光学与 STM 亚周期操控文献综述",
+      "summary": "本文并非研究论文，而是一份每日对话记忆简报，核心记录了对阿秒量子光学（6 fs FWM 产生明亮压缩真空并首次观测亚周期时间依赖压缩）、近拍赫兹单发场探测 PTF、双色场 STM 亚周期电流方向控制与原子分辨电荷转移、以及 GASFIR 强场电离率近似器等 5 篇文献的讨论及其与林赛 TMD/ZnO 800 nm HHG 平台的可移植接口。同时记录了当日完成的 26 篇无归档论文深度分析重做与 3 篇空壳 JSON 笔记补全。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T23:03:24Z"
+    },
+    {
+      "source_id": "briefing:knowledge/wiki/reviews/briefing-2026-07-25.md",
+      "title": "林赛每日简报 2026-07-25：量子 HHG 亚周期相位匹配机制与 action phase 框架向固体 HHG 迁移",
+      "summary": "本文为研究日志而非学术论文，核心智力产出是对 [2607.20941] 的深度分析：发现相干光与亮压缩真空联合驱动量子 HHG 中的全新 sub-cycle 相位匹配机制——量子扰动 σ 将四种发射通道（P1-P4）推向不同最优压强，且 φ_act = φ_coh + σ 分解可移植到固体 HHG。日志同时记录了将 action phase 框架迁移至固体 HHG 作为重大课题的关键决策，以及当日推送管线的断网补跑等运维事项。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-13",
+      "added_at": "2026-11-13T23:03:24Z"
+    }
+  ]
+}

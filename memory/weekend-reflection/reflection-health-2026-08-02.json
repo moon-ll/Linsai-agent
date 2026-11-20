@@ -1,0 +1,809 @@
+{
+  "checked_at": "2026-08-02T01:00:32Z",
+  "status": "healthy",
+  "alerts": {
+    "error": 0,
+    "warning": 0
+  },
+  "proposals": {
+    "optimizing": 5,
+    "pending_review": 0,
+    "archived": 0
+  },
+  "pipeline_failed_jobs": 0,
+  "dashboard": {
+    "profiles": {
+      "profiles": {
+        "linsai": {
+          "status": "working",
+          "success_rate_24h": null,
+          "dispatch_count_24h": 0,
+          "avg_duration_s": 0,
+          "recent_error": "",
+          "suggestion": ""
+        },
+        "pipeline-runner": {
+          "status": "working",
+          "success_rate_24h": null,
+          "dispatch_count_24h": 0,
+          "avg_duration_s": 0,
+          "recent_error": "",
+          "suggestion": ""
+        },
+        "researcher": {
+          "status": "idle",
+          "success_rate_24h": null,
+          "dispatch_count_24h": 0,
+          "avg_duration_s": 0,
+          "recent_error": "",
+          "suggestion": ""
+        },
+        "analyst": {
+          "status": "idle",
+          "success_rate_24h": null,
+          "dispatch_count_24h": 0,
+          "avg_duration_s": 0,
+          "recent_error": "",
+          "suggestion": ""
+        },
+        "writer": {
+          "status": "idle",
+          "success_rate_24h": null,
+          "dispatch_count_24h": 0,
+          "avg_duration_s": 0,
+          "recent_error": "",
+          "suggestion": ""
+        },
+        "critic": {
+          "status": "idle",
+          "success_rate_24h": null,
+          "dispatch_count_24h": 0,
+          "avg_duration_s": 0,
+          "recent_error": "",
+          "suggestion": ""
+        },
+        "reviewer": {
+          "status": "idle",
+          "success_rate_24h": null,
+          "dispatch_count_24h": 0,
+          "avg_duration_s": 0,
+          "recent_error": "",
+          "suggestion": ""
+        }
+      },
+      "alerts": [],
+      "window_hours": 24,
+      "computed_at": "2026-08-02T01:00:32Z"
+    },
+    "failures": {
+      "patterns": [
+        {
+          "id": "env-pollution",
+          "label": "环境变量污染（PYTHONHOME 等）",
+          "category": "环境",
+          "occurrences": 0,
+          "sample_errors": [],
+          "suggested_prompt_change": "（v6.6.3 已修复：clean_subprocess_env 自动 pop 22 个 Python 变量）",
+          "expected_impact": "hermes 子进程不再因 IDE 注入的 PYTHONHOME 崩溃"
+        }
+      ],
+      "summary": {
+        "total_errors": 0,
+        "total_warnings": 9,
+        "top_pattern": "env-pollution",
+        "top_pattern_label": "环境变量污染（PYTHONHOME 等）",
+        "involved_proposals": {
+          "general-test-hhg-20260106": 9
+        }
+      },
+      "window_hours": 24,
+      "computed_at": "2026-08-02T01:00:32Z"
+    },
+    "strategies": {
+      "current": {
+        "stagger_seconds": 90,
+        "max_rounds": 5,
+        "score_threshold": 0.8,
+        "no_improvement_limit": 3,
+        "critic_timeout": 300,
+        "writer_timeout": 600
+      },
+      "suggested": {
+        "stagger_seconds": 90,
+        "max_rounds": 5,
+        "score_threshold": 0.8,
+        "no_improvement_limit": 3,
+        "critic_timeout": 300,
+        "writer_timeout": 600
+      },
+      "reasons": [],
+      "risk": "low",
+      "activity": {
+        "days": 1,
+        "avg_dispatch_per_day": 0.0,
+        "avg_duration_s": 0,
+        "total_timeout": 0,
+        "total_success": 0,
+        "total_fail": 0,
+        "success_rate": null
+      },
+      "score_stats": {
+        "avg_score": 0.488,
+        "max_score": 0.82,
+        "min_score": 0.06,
+        "pass_rate": 0.062,
+        "samples": 32
+      },
+      "computed_at": "2026-08-02T01:00:32Z"
+    },
+    "pipeline_quality": {
+      "proposals": [
+        {
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "stages": [
+            {
+              "stage": "01_direction",
+              "label": "方向校准",
+              "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/01_direction/direction-calibration.md",
+              "exists": true,
+              "size": 299,
+              "score": 0.0,
+              "issues": [
+                "文件过小（299 字节）",
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "02_literature",
+              "label": "文献调研",
+              "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/02_literature/literature-report.md",
+              "exists": true,
+              "size": 143,
+              "score": 0.0,
+              "issues": [
+                "文件过小（143 字节）",
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "02_topic",
+              "label": "缺口分析",
+              "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/02_topic/gap-report.md",
+              "exists": true,
+              "size": 272,
+              "score": 0.0,
+              "issues": [
+                "文件过小（272 字节）",
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "03_question",
+              "label": "科学问题",
+              "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/03_question/question-framework.md",
+              "exists": true,
+              "size": 248,
+              "score": 0.0,
+              "issues": [
+                "文件过小（248 字节）",
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "04_proposal",
+              "label": "申请书",
+              "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/04_proposal/proposal-draft.md",
+              "exists": true,
+              "size": 29810,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "05_review",
+              "label": "自检报告",
+              "path": "research_proposals/optimizing/general-bsv-driven-hhg-quantum-20260726/05_review/review-report.md",
+              "exists": false,
+              "size": 0,
+              "score": 0.0,
+              "issues": [
+                "文件不存在"
+              ]
+            }
+          ],
+          "overall_quality": 0.067,
+          "growth_actions": [
+            {
+              "stage": "04_proposal",
+              "label": "申请书",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            }
+          ]
+        },
+        {
+          "proposal_id": "key-transient-quantum-phase-optical-20260726",
+          "stages": [
+            {
+              "stage": "01_direction",
+              "label": "方向校准",
+              "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/01_direction/direction-calibration.md",
+              "exists": true,
+              "size": 7615,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "02_literature",
+              "label": "文献调研",
+              "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/02_literature/literature-report.md",
+              "exists": true,
+              "size": 26584,
+              "score": 0.7,
+              "issues": [
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "02_topic",
+              "label": "缺口分析",
+              "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/02_topic/gap-report.md",
+              "exists": true,
+              "size": 30772,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "03_question",
+              "label": "科学问题",
+              "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/03_question/question-framework.md",
+              "exists": true,
+              "size": 564,
+              "score": 0.2,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "04_proposal",
+              "label": "申请书",
+              "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/04_proposal/proposal-draft.md",
+              "exists": true,
+              "size": 40337,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "05_review",
+              "label": "自检报告",
+              "path": "research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/05_review/review-report.md",
+              "exists": false,
+              "size": 0,
+              "score": 0.0,
+              "issues": [
+                "文件不存在"
+              ]
+            }
+          ],
+          "overall_quality": 0.35,
+          "growth_actions": [
+            {
+              "stage": "01_direction",
+              "label": "方向校准",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "02_topic",
+              "label": "缺口分析",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "03_question",
+              "label": "科学问题",
+              "action": "auto_retry",
+              "reason": "质量 0.2 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "04_proposal",
+              "label": "申请书",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            }
+          ]
+        },
+        {
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "stages": [
+            {
+              "stage": "01_direction",
+              "label": "方向校准",
+              "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/01_direction/direction-calibration.md",
+              "exists": true,
+              "size": 8407,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "02_literature",
+              "label": "文献调研",
+              "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/02_literature/literature-report.md",
+              "exists": true,
+              "size": 15900,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "02_topic",
+              "label": "缺口分析",
+              "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/02_topic/gap-report.md",
+              "exists": true,
+              "size": 35985,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "03_question",
+              "label": "科学问题",
+              "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/03_question/question-framework.md",
+              "exists": true,
+              "size": 564,
+              "score": 0.2,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "04_proposal",
+              "label": "申请书",
+              "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/04_proposal/proposal-draft.md",
+              "exists": true,
+              "size": 35517,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "05_review",
+              "label": "自检报告",
+              "path": "research_proposals/optimizing/general-order-parameter-ultrafast-readout-20260727/05_review/review-report.md",
+              "exists": false,
+              "size": 0,
+              "score": 0.0,
+              "issues": [
+                "文件不存在"
+              ]
+            }
+          ],
+          "overall_quality": 0.3,
+          "growth_actions": [
+            {
+              "stage": "01_direction",
+              "label": "方向校准",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "02_literature",
+              "label": "文献调研",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "02_topic",
+              "label": "缺口分析",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "03_question",
+              "label": "科学问题",
+              "action": "auto_retry",
+              "reason": "质量 0.2 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "04_proposal",
+              "label": "申请书",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            }
+          ]
+        },
+        {
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "stages": [
+            {
+              "stage": "01_direction",
+              "label": "方向校准",
+              "path": "research_proposals/optimizing/general-moire-strong-field-probe-20260726/01_direction/direction-calibration.md",
+              "exists": true,
+              "size": 7248,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "02_literature",
+              "label": "文献调研",
+              "path": "research_proposals/optimizing/general-moire-strong-field-probe-20260726/02_literature/literature-report.md",
+              "exists": true,
+              "size": 17666,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "02_topic",
+              "label": "缺口分析",
+              "path": "research_proposals/optimizing/general-moire-strong-field-probe-20260726/02_topic/gap-report.md",
+              "exists": true,
+              "size": 27871,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "03_question",
+              "label": "科学问题",
+              "path": "research_proposals/optimizing/general-moire-strong-field-probe-20260726/03_question/question-framework.md",
+              "exists": true,
+              "size": 555,
+              "score": 0.2,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "04_proposal",
+              "label": "申请书",
+              "path": "research_proposals/optimizing/general-moire-strong-field-probe-20260726/04_proposal/proposal-draft.md",
+              "exists": true,
+              "size": 66887,
+              "score": 0.7,
+              "issues": [
+                "章节不完整（仅 2 个）"
+              ]
+            },
+            {
+              "stage": "05_review",
+              "label": "自检报告",
+              "path": "research_proposals/optimizing/general-moire-strong-field-probe-20260726/05_review/review-report.md",
+              "exists": false,
+              "size": 0,
+              "score": 0.0,
+              "issues": [
+                "文件不存在"
+              ]
+            }
+          ],
+          "overall_quality": 0.35,
+          "growth_actions": [
+            {
+              "stage": "01_direction",
+              "label": "方向校准",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "02_literature",
+              "label": "文献调研",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "02_topic",
+              "label": "缺口分析",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "03_question",
+              "label": "科学问题",
+              "action": "auto_retry",
+              "reason": "质量 0.2 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            }
+          ]
+        },
+        {
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "stages": [
+            {
+              "stage": "01_direction",
+              "label": "方向校准",
+              "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/01_direction/direction-calibration.md",
+              "exists": true,
+              "size": 7381,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "02_literature",
+              "label": "文献调研",
+              "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/02_literature/literature-report.md",
+              "exists": true,
+              "size": 13023,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "02_topic",
+              "label": "缺口分析",
+              "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/02_topic/gap-report.md",
+              "exists": true,
+              "size": 20266,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "03_question",
+              "label": "科学问题",
+              "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/03_question/question-framework.md",
+              "exists": true,
+              "size": 12628,
+              "score": 0.4,
+              "issues": [
+                "章节不完整（仅 0 个）",
+                "无引用占位符"
+              ]
+            },
+            {
+              "stage": "04_proposal",
+              "label": "申请书",
+              "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/04_proposal/proposal-draft.md",
+              "exists": true,
+              "size": 80889,
+              "score": 0.7,
+              "issues": [
+                "章节不完整（仅 2 个）"
+              ]
+            },
+            {
+              "stage": "05_review",
+              "label": "自检报告",
+              "path": "research_proposals/optimizing/general-quantum-geometry-inversion-20260726/05_review/review-report.md",
+              "exists": true,
+              "size": 17923,
+              "score": 0.8,
+              "issues": [
+                "引用占位符较少（8 个）"
+              ]
+            }
+          ],
+          "overall_quality": 0.517,
+          "growth_actions": [
+            {
+              "stage": "01_direction",
+              "label": "方向校准",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "02_literature",
+              "label": "文献调研",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "02_topic",
+              "label": "缺口分析",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            },
+            {
+              "stage": "03_question",
+              "label": "科学问题",
+              "action": "auto_retry",
+              "reason": "质量 0.4 < 0.6，issues: 章节不完整（仅 0 个）, 无引用占位符"
+            }
+          ]
+        },
+        {
+          "proposal_id": "2026_NSFG_strongfield_ultrafast",
+          "stages": [
+            {
+              "stage": "01_direction",
+              "label": "方向校准",
+              "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/01_direction/direction-calibration.md",
+              "exists": false,
+              "size": 0,
+              "score": 0.0,
+              "issues": [
+                "文件不存在"
+              ]
+            },
+            {
+              "stage": "02_literature",
+              "label": "文献调研",
+              "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/02_literature/literature-report.md",
+              "exists": false,
+              "size": 0,
+              "score": 0.0,
+              "issues": [
+                "文件不存在"
+              ]
+            },
+            {
+              "stage": "02_topic",
+              "label": "缺口分析",
+              "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/02_topic/gap-report.md",
+              "exists": false,
+              "size": 0,
+              "score": 0.0,
+              "issues": [
+                "文件不存在"
+              ]
+            },
+            {
+              "stage": "03_question",
+              "label": "科学问题",
+              "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/03_question/question-framework.md",
+              "exists": false,
+              "size": 0,
+              "score": 0.0,
+              "issues": [
+                "文件不存在"
+              ]
+            },
+            {
+              "stage": "04_proposal",
+              "label": "申请书",
+              "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/04_proposal/proposal-draft.md",
+              "exists": false,
+              "size": 0,
+              "score": 0.0,
+              "issues": [
+                "文件不存在"
+              ]
+            },
+            {
+              "stage": "05_review",
+              "label": "自检报告",
+              "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast/05_review/review-report.md",
+              "exists": false,
+              "size": 0,
+              "score": 0.0,
+              "issues": [
+                "文件不存在"
+              ]
+            }
+          ],
+          "overall_quality": 0.0,
+          "growth_actions": []
+        }
+      ],
+      "growth_actions_total": 18,
+      "computed_at": "2026-08-02T01:00:32Z"
+    },
+    "lifecycle_consistency": {
+      "checked_at": "2026-08-02T01:00:32Z",
+      "inconsistencies": [
+        {
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "type": "round_gap",
+          "detail": "critic 报告轮次不连续，缺失 [3]",
+          "round_nums": [
+            1,
+            2,
+            4,
+            5,
+            6
+          ],
+          "missing": [
+            3
+          ]
+        },
+        {
+          "proposal_id": "general-quantum-geometry-inversion-20260726",
+          "type": "score_lost",
+          "detail": "critic 报告 critic-round-1.md 评分 0.58，但 _lifecycle.json 中存在 score=0 的记录",
+          "file": "critic-round-1.md",
+          "file_score": 0.58
+        },
+        {
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "type": "round_gap",
+          "detail": "critic 报告轮次不连续，缺失 [7]",
+          "round_nums": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            8
+          ],
+          "missing": [
+            7
+          ]
+        },
+        {
+          "proposal_id": "general-moire-strong-field-probe-20260726",
+          "type": "score_lost",
+          "detail": "critic 报告 critic-round-1.md 评分 0.31，但 _lifecycle.json 中存在 score=0 的记录",
+          "file": "critic-round-1.md",
+          "file_score": 0.31
+        },
+        {
+          "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+          "type": "round_mismatch",
+          "detail": "_lifecycle.json 记录 6 轮，实际有 7 份 critic 报告",
+          "lifecycle_rounds": 6,
+          "actual_files": [
+            "critic-round-1.md",
+            "critic-round-2.md",
+            "critic-round-3.md",
+            "critic-round-4.md",
+            "critic-round-5.md",
+            "critic-round-6.md",
+            "critic-round-7.md"
+          ]
+        },
+        {
+          "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+          "type": "score_lost",
+          "detail": "critic 报告 critic-round-1.md 评分 0.72，但 _lifecycle.json 中存在 score=0 的记录",
+          "file": "critic-round-1.md",
+          "file_score": 0.72
+        }
+      ],
+      "orphan_dirs": [
+        {
+          "proposal_id": "2026_NSFG_strongfield_ultrafast",
+          "path": "research_proposals/archived/2026_NSFG_strongfield_ultrafast",
+          "detail": "磁盘存在但该 proposal 未在 _lifecycle.json 中注册"
+        }
+      ],
+      "summary": {
+        "total": 5,
+        "inconsistent_count": 6,
+        "orphan_count": 1
+      }
+    },
+    "computed_at": "2026-08-02T01:00:32Z"
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "proposal_id": "general-bsv-driven-hhg-quantum-20260726",
+  "cluster_id": "orphan-route-2026-11-07",
+  "clusters": [
+    "orphan-route-2026-11-07"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2605.28236-symmetry-breaking-by-quantum-light-in-solid-state-high-harmo",
+      "title": "Symmetry breaking by quantum light in solid-state high-harmonic generation",
+      "summary": "本文提出并论证：圆偏振量子光（压缩真空等非经典态）驱动固体高次谐波产生时，可打破经典圆偏振驱动下的动力学对称性，使石墨烯与 MoS2 中经典严格禁戒的谐波级次被激发出来。该工作建立了『光场量子涨落 → 驱动对称性破缺 → 新谐波通道开启』的物理图像，开辟了以量子统计工程调控固体非线性光响应的路径。",
+      "path": "knowledge/raw/papers/2026-2605.28236-symmetry-breaking-by-quantum-light-in-solid-state-high-harmo.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T02:41:04Z"
+    },
+    {
+      "source_id": "paper:2026-2606.22714-emergence-of-gaussian-entanglement-and-non-gaussia",
+      "title": "Emergence of Gaussian entanglement and non-Gaussianity in high-harmonic generation driven by bright squeezed light",
+      "summary": "本文研究用亮压缩真空（BSV）驱动高次谐波产生（HHG）时，谐波辐射何时表现为非经典高斯量子态、又在何种条件下高斯描述失效。核心方案是双色驱动——强相干场 ω 加微扰性 BSV 场 2ω：对称性破缺开启的偶次谐波，其幅值在微扰区内对 BSV 正交分量近似线性，使偶次谐波流形成为一个分布式多模高斯纠缠态（等价于一个集体压缩模），可用协方差矩阵完整解析表征。作者进一步以连续变量量子隐形传态保真度为操作基准，证明只有\"2ω 模 vs 其余全部谐波\"的集体二分给出超越经典极限的量子优势，并通过 Wigner 函数层析定位了高斯性崩溃的阈值（Isqu≈3.6×10⁻⁵ a.u.，r≈14）。",
+      "path": "knowledge/raw/papers/2026-2606.22714-emergence-of-gaussian-entanglement-and-non-gaussia.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T02:41:04Z"
+    },
+    {
+      "source_id": "paper:2026-2609.20559-high-order-correlations-and-ultrafast-wigner-negat",
+      "title": "High-order correlations and ultrafast Wigner negativities in bright-squeezed-vacuum-driven high-harmonic generation",
+      "summary": "本文研究以明亮压缩真空（bright squeezed vacuum, BSV）这一非经典强光态作为驱动场的原子和气体高次谐波产生（HHG），考察谐波辐射的量子统计特性。结果表明，BSV 驱动的高次谐波表现出高阶光子关联（高阶关联函数显著偏离经典场），且谐波模的 Wigner 函数在超快（亚周期/飞秒量级）时间窗内呈现负值——即在 XUV 频段产生了时间可分辨的非经典、非高斯光态。该工作把强场物理与量子光学结合起来，为在极紫外/软X射线区生成和超快探测非经典光提供了新途径。",
+      "path": "knowledge/raw/papers/2026-2609.20559-high-order-correlations-and-ultrafast-wigner-negat.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T02:41:04Z"
+    },
+    {
+      "source_id": "paper:2025-2508.00273-spatially-inhomogeneous-field-induced-harmonic-radiation-in",
+      "title": "Spatially inhomogeneous field induced harmonic radiation in solids",
+      "summary": "针对空间非均匀驱动场（如纳米等离激元热点局域场）作用下的固体谐波辐射，建立了含非均匀系数的动力学方程，其描述能力优于逐点求解的半导体Bloch方程。以石墨烯为中心对称二维模型体系，理论证明场的空间不均匀性可打破正负半周期对称性，从而诱导通常被禁戒的偶次谐波并显著增强谐波辐射产率。该工作在纳米光场局域化与固体高次谐波之间建立了定量桥梁，提供了通过驱动场空间工程调控固体谐波谱的工具。",
+      "path": "knowledge/raw/papers/2025-2508.00273-spatially-inhomogeneous-field-induced-harmonic-radiation-in.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T07:20:49Z"
+    },
+    {
+      "source_id": "paper:2022-2203.04354-theory-of-entanglement-and-measurement-in-high-harmonic-gene",
+      "title": "Theory of entanglement and measurement in high harmonic generation",
+      "summary": "建立了将强驱动激光场量子化的高次谐波产生（HHG）全量子理论，证明出射态中谐波辐射与剩余驱动场普遍处于纠缠态，且纠缠熵随谐波阶数（即每个谐波光子消耗的驱动光子数）增大而增长。理论表明：对驱动场做光子数基的投影测量可将谐波场条件化为近似纯的相干态，而若不对驱动场测量（求迹）则谐波约化态为混合态、相干性下降。该框架把半经典HHG描述解释为对驱动场的一种事后选择，为强场物理与量子光学的交叉及HHG非经典光源研究奠定基础。",
+      "path": "knowledge/raw/papers/2022-2203.04354-theory-of-entanglement-and-measurement-in-high-harmonic-gene.md",
+      "added_via": "cluster:orphan-route-2026-11-07",
+      "added_at": "2026-11-07T23:23:15Z"
+    }
+  ]
+}

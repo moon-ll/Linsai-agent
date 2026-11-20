@@ -1,0 +1,54 @@
+{
+  "verdict": "major_revision",
+  "overall_comment": "决策包预审 reject_lean：4/5 模块未达 0.85 通过线，8 个高危问题未解决。退回继续优化，全部模块通过且高危清零后再进验收。",
+  "issues": [
+    {
+      "section": "立项依据",
+      "severity": "high",
+      "issue_type": "logic",
+      "description": "立项依据 R7 仅 0.58，远低于通过线，为本遍最弱模块",
+      "instruction": "重写立项依据，强化科学问题凝练与论证链条，达到 0.85 通过线",
+      "action": "rewrite",
+      "target_passage": ""
+    },
+    {
+      "section": "研究内容",
+      "severity": "high",
+      "issue_type": "method",
+      "description": "研究内容 R8 0.78 未达 0.85 通过线",
+      "instruction": "针对 R8 critic 意见实质修改研究内容章节，通过章节评审",
+      "action": "rewrite",
+      "target_passage": ""
+    },
+    {
+      "section": "研究方案",
+      "severity": "high",
+      "issue_type": "feasibility",
+      "description": "研究方案（含创新与成果）R8 0.71 未达通过线",
+      "instruction": "修订研究方案，补强技术路线可行性与特色创新论证",
+      "action": "rewrite",
+      "target_passage": ""
+    },
+    {
+      "section": "整篇一致性",
+      "severity": "high",
+      "issue_type": "logic",
+      "description": "整篇一致性 R8 0.76 未达通过线，模块间衔接存在断裂",
+      "instruction": "整篇一致性修订，消除章节间逻辑与术语不一致",
+      "action": "verify",
+      "target_passage": ""
+    },
+    {
+      "section": "其他",
+      "severity": "critical",
+      "issue_type": "evidence",
+      "description": "决策包列 8 个未解决高危问题（合计未解决 15 项）",
+      "instruction": "逐条响应全部高危问题，禁止沉默式微调，修复后清零",
+      "action": "verify",
+      "target_passage": ""
+    }
+  ],
+  "suggestions": [
+    "按 0.85 通过线逐模块优化，优先立项依据（最弱 0.58）"
+  ]
+}

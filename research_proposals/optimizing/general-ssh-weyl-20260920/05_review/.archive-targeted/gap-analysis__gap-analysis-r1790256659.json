@@ -1,0 +1,89 @@
+{
+  "gaps": [
+    {
+      "claim": "Pilch TaP 实验幂律 I_{3f} ∝ I_f^{2.3}（§2.4 L41/L43）作为'超长散射时间指纹'机制链证据",
+      "missing_evidence": "Pilch et al. arXiv 2508.16166v2（=Nano Letters 2025 刊版）摘要实测明确表述为 'perturbative cubic power-law dependence'，严格 I^3 而非 I^{2.3}；需要同行评审或重复实验数据明确支持 2.3 次幂的非微扰幂律",
+      "search_keywords": [
+        "Pilch TaP terahertz third harmonic power law",
+        "Weyl semimetal nonlinear response power law exponent",
+        "TaP nonlinear conductivity perturbative cubic",
+        "2508.16166",
+        "terahertz third harmonic Weyl semimetal nonperturbative"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "You 2017 提出 HHG-激子光致发光强度切换机制及 I_threshold 阈值（§2.5 L51/L55）",
+      "missing_evidence": "You et al. 2017 Nature Communications 8:724 (s41467-017-00989-4) 主题为非晶熔融石英 HHG 解耦长程周期性的实验观测，论文内容是损伤阈值约 10^14 W/cm² (~2.1 V/Å) at 1 kHz，未涉及 HHG-激子 PL 切换或 I_threshold；缺少真正讨论激子-PL 与 HHG 强度切换的同行评审文献",
+      "search_keywords": [
+        "high harmonic exciton photoluminescence switching",
+        "HHG exciton coupling intensity threshold",
+        "solid HHG exciton PL intensity correlation",
+        "exciton-mediated high harmonic generation switching",
+        "B-exciton A-exciton high harmonic threshold MoS2 WSe2"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhang[32] 被引作'确立 HHG 可作体相拓扑探针'（§2.1 L5）",
+      "missing_evidence": "Zhang 类 Bi2Se3 拓扑绝缘体论文（如 arXiv 1101.3583 Zhang/Wang/Zhang 2011）综述 TI 太赫兹-红外应用，并非关于 HHG 拓扑探针能力的实证；需要确认真实被引文献是否真为支持 HHG 探针拓扑的正面论证，或改正为否定性结论（Schmid et al. Nature 2021 'tunable non-integer HHG in TI' 类似否定立场）",
+      "search_keywords": [
+        "high harmonic generation topological insulator probe bulk surface",
+        "HHG topological signature extraction controversy",
+        "Bi2Se3 Bi2Te3 HHG bulk surface disentanglement Nature",
+        "Schmid tunable non-integer HHG topological insulator",
+        "topological probe HHG debate controversy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Pooyan & Hansen 高次谐波理论机制（PRB 111）作为方向二支撑（§2.2 L19、§2.3 L29/L31 引用错位）",
+      "missing_evidence": "Pooyan 与 Hansen 真实文献需重新核实；Jürß/Bauer 2019 PRX/Jürß系列 SSH-HHG (arXiv 1902.04120) 及 arXiv 2508.15631 PRB 111.014308 (2025) 系列是该方向真正参考文献，申请书引用 Pooyan [26] 与 Hansen [28] 时年份 2024、文献号错位",
+      "search_keywords": [
+        "Pooyan Hansen SSH high harmonic generation Berry",
+        "Jurss Bauer SSH high harmonic PRX 2019",
+        "PRB 111 014308 high harmonic SSH",
+        "topological edge state HHG theory 2024 2025",
+        "Berry curvature SSH chain harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R_HOTI≥10、Δκ≥20%、30 fs 阈值作为方向二的可检验量化指标无物理依据（§2.2 L23、§2.3 L35）",
+      "missing_evidence": "缺乏明确文献支撑的高阶拓扑绝缘体 HHG 探针阈值标准；arXiv 2508.15631 明确写 'for HOTI we did not observe clear topological features in the harmonic responses'，意味着 R_HOTI≥10 阈值在现行文献中既无理论预言也无实验数据支撑；Δκ (gap-shifted 谱权重变化 20%) 同样缺乏标定依据",
+      "search_keywords": [
+        "higher order topological insulator HHG threshold ratio",
+        "HOTI high harmonic probe benchmark R HOTI",
+        "Bi2Se3 high order topological HHG selection rule",
+        "kagome lattice breathing HHG channel intensity",
+        "arXiv 2508.15631 high harmonic topology threshold"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Cd³As² Dirac 半金属、graphene、热电子对照实验的强度阈值与拓扑特征对照（§2.5 ZnO 参照 + 一般拓扑 HHG 综述）",
+      "missing_evidence": "申请书 §2.5 把 You 2017 与不属同一文献的 HHG-激子 PL 切换机制混用；缺乏真正讨论 Dirac 半金属 HHG 中阈值与 Berry curvature 贡献定量关系的同行评审文献；需要 separate 拓扑/非拓扑对照体系的 benchmark 文献",
+      "search_keywords": [
+        "Dirac semimetal Cd3As2 HHG Berry curvature benchmark",
+        "graphene high harmonic threshold perturbative regime",
+        "ZnO HHG reference baseline benchmark",
+        "topological versus trivial high harmonic contrast",
+        "s41467-017-00989-4 amorphous HHG damage threshold"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "预印本[38][36][30]承载核心量级与新自由度论断（§2.1 L7、§2.2 L19）",
+      "missing_evidence": "缺少已通过同行评审的正式刊本引用作为支撑；当前论断主要依赖 arXiv 预印本，需要补刊本（如 Acta Physica Sinica、Phys. Rev. B、J. Phys. Condens. Matter、New J. Phys. 等）核实数值后正式引用",
+      "search_keywords": [
+        "high harmonic generation topological insulator published version",
+        "SSH Weyl high harmonic peer reviewed article 2024 2025",
+        "preprint to journal version high harmonic solid",
+        "arXiv 2508.16166 Nano Letters accept",
+        "SSH high harmonic PRD PRB published 2025"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,52 @@
+{
+  "gaps": [
+    {
+      "claim": "国内莫尔材料强场/超快光学研究现状（立项依据五层递进第4层·国内现状层）",
+      "missing_evidence": "references 已自列 5 个国内组（Hu/Meng 物理所、Zhou/清华、Wang/复旦、Wang/中科院、Yao/张江）但无一进入 §1.2 叙述；目前仅北大 Ma 2025 相位匹配一段（108 字，技术补充口吻），缺少这些国内组在莫尔超晶格强场、超快光学、非线性光学方向的代表性工作文献以支撑成层叙述",
+      "search_keywords": [
+        "moire superlattice strong field China",
+        "twisted bilayer ultrafast optics Chinese group",
+        "solid-state high harmonic generation China group",
+        "莫尔材料 强场 超快 国内 实验组",
+        "moire heterostructure nonlinear optics Chinese research group",
+        "Hu Meng PNAS high harmonic inversion moire"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔超晶格作为强场探针与主动调控对象的物理机理（rationale 论证主体）",
+      "missing_evidence": "机理层面引证不足：莫尔平带/迷你带对强场非线性响应的作用机制、固体 HHG 带间/带内机制在莫尔体系的适用性、Floquet 能带调制的定量机制等理论文献支撑（评审指出的论证缺口之一，属需补足论证而非注水）",
+      "search_keywords": [
+        "moire flat band high harmonic generation mechanism",
+        "semiconductor Bloch equation moire superlattice",
+        "intraband interband mechanism solid HHG twisted bilayer",
+        "Floquet engineering moire band modulation theory",
+        "moiré miniband strong field nonlinear response"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale 中 2 处关键引用的 DOI 与论文标题/内容不符（Crossref 实锤引文硬伤）",
+      "missing_evidence": "DOI-标题-内容匹配的正确原始文献以替换现有错误引文，需对莫尔强场方向核心参考文献（如 TBG 高次谐波、Floquet 调控、阿秒瞬态吸收、损伤阈值等引用簇）逐条核实书目信息",
+      "search_keywords": [
+        "twisted bilayer graphene high harmonic generation",
+        "Nikola Nature 2021 Floquet optical nonlinearity",
+        "Policht attosecond transient absorption moire superlattice",
+        "graphene femtosecond laser damage threshold Roberts 2011",
+        "moire correlated insulator optical Stark experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔材料 Floquet 工程/光学非线性巨调控首次实验演示的优先权归属（优先权红线）",
+      "missing_evidence": "正确的优先权原始文献与作者归属（如 Nature 2021 巨调控论文的第一作者/作者列表核实，Shan 与 Nikola 归属澄清），避免将开创性工作优先权错置给后续工作",
+      "search_keywords": [
+        "Shan J.-Y. Nature 2021 giant modulation optical nonlinearity Floquet",
+        "Nikola 2021 Nature Floquet engineering author list",
+        "Floquet engineering semiconductor nonlinear optics first demonstration",
+        "optical Stark effect moire exciton pioneering experiment"
+      ],
+      "priority": "high"
+    }
+  ]
+}

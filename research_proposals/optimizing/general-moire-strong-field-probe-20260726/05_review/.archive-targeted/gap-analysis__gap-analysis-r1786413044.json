@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "缺少独立的'国内研究现状'层，范本要求五层递进结构（大背景→领域脉络→核心问题→国内现状→本项目定位）中缺失国内研究现状",
+      "missing_evidence": "缺乏对国内研究团队在moiré材料强场探测、固体HHG、超快光学领域工作进展的系统梳理文献",
+      "search_keywords": [
+        "moire superlattice strong field China",
+        "twisted bilayer ultrafast optics Chinese group",
+        "solid-state high harmonic generation China group",
+        "莫尔材料 强场 超快 中国",
+        "moire heterostructure nonlinear optics domestic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md行55残留'首次'表述（Zhou 2023上下文，技术性使用），该novelty声明需要文献支撑",
+      "missing_evidence": "缺少明确证据证明Zhou 2023工作确实是该技术方向的首次报道，需要同期/更早的同类工作进行对比",
+      "search_keywords": [
+        "Zhou 2023 moire strong field probe",
+        "moire Floquet engineering first",
+        "moiré superlattice light Floquet pioneering",
+        "twisted bilayer strong field harmonic early work"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "3处'尚未见报道'表述虽有文献上下文但措辞需审慎，需要充分文献证明确实无人报道",
+      "missing_evidence": "缺少系统性文献检索证据来支撑'尚未见报道'的绝对性声明，需要覆盖moiré+强场+非线性光学交叉领域的穷尽式检索",
+      "search_keywords": [
+        "moire angle resolved nonlinear optics",
+        "moiré superlattice high harmonic generation",
+        "twisted 2D material strong field attosecond",
+        "moiré heterostructure ultrafast carrier dynamics",
+        "moiré valleytronics strong field probe"
+      ],
+      "priority": "high"
+    }
+  ]
+}

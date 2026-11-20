@@ -1,0 +1,19 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "issues": 5,
+  "stages": {
+    "review_researcher": "ok(1059s)",
+    "review_critic": "ok(532s)",
+    "review_reviewer": "ok(518s)",
+    "writer": "ok(481s)",
+    "verify": "需返工"
+  },
+  "params_injected": true,
+  "post_hooks": {
+    "draft_resync": true,
+    "long_sentences": "4→4"
+  },
+  "success": true,
+  "verdict": "需返工",
+  "elapsed_s": 2996.2
+}

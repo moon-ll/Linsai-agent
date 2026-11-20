@@ -1,0 +1,107 @@
+{
+  "gaps": [
+    {
+      "claim": "莫尔势反演是欠定逆问题（参数维度10-20 vs 有效秩~10 HHG数据点）",
+      "missing_evidence": "缺少莫尔超晶格参数空间维度与高次谐波光谱信息量（Fisher information）对比的理论或计算文献，无法支撑'反演欠定'的具体数字论证",
+      "search_keywords": [
+        "moiré potential inverse problem ill-posed",
+        "high harmonic generation Fisher information solid state",
+        "HHG spectral information content moiré",
+        "quantum geometry reconstruction HHG data dimensionality"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Nikola 2021被引为莫尔HHG开创性工作",
+      "missing_evidence": "该引文归属存疑（被CrossRef核查标记为critical错误），需要重新检索2020-2022年莫尔超晶格HHG的首发论文或综述，核实正确归属",
+      "search_keywords": [
+        "Nikola 2021 moiré harmonic generation",
+        "first moiré HHG experiment 2021",
+        "twisted bilayer high harmonic generation 2021"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Hu/Meng PNAS 2024被引为强场莫尔相关工作",
+      "missing_evidence": "该引文期刊与作者归属被CrossRef核查标记为critical错误，需要检索2024年PNAS上莫尔强场或阿秒相关论文的正确出处",
+      "search_keywords": [
+        "Hu Meng PNAS 2024 moiré",
+        "PNAS 2024 twisted bilayer strong field",
+        "PNAS 2024 moiré attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhou Nature 2023被引为莫尔量子几何相关工作",
+      "missing_evidence": "该引文归属被CrossRef核查标记为critical错误，需要检索2023年Nature上莫尔能带几何或贝里曲率测量的正确文献",
+      "search_keywords": [
+        "Zhou Nature 2023 moiré Berry curvature",
+        "Nature 2023 twisted bilayer quantum geometry",
+        "moiré band topology measurement 2023"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Heide Nature Physics 2024被引为固体HHG理论相关工作",
+      "missing_evidence": "该引文归属被CrossRef核查标记为critical错误，需要检索2024年Nature Physics上HHG或强场理论的正确出处",
+      "search_keywords": [
+        "Heide Nature Physics 2024 high harmonic",
+        "Nature Physics 2024 solid HHG theory",
+        "Heide HHG semiconductor first principles"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Qiu Nat Commun 2024被引为莫尔非平衡动力学研究",
+      "missing_evidence": "该引文归属被CrossRef核查标记为critical错误，需要核实Nature Communications 2024上莫尔超晶格超快动力学正确文献",
+      "search_keywords": [
+        "Qiu Nature Communications 2024 moiré",
+        "Nat Commun 2024 moiré ultrafast",
+        "twisted bilayer nonlinear spectroscopy 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Xu/Zhou npj Quantum Materials 2024被引为相关理论工作",
+      "missing_evidence": "该引文归属被CrossRef核查标记为critical错误，需要检索2024年npj Quantum Materials上相关理论工作的正确归属",
+      "search_keywords": [
+        "Xu Zhou npj Quantum Materials 2024",
+        "npj QM 2024 moiré theory",
+        "moiré band structure calculation 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "高次谐波光谱可解码莫尔势完整量子几何（贝里曲率+量子度量）",
+      "missing_evidence": "缺乏HHG直接测量贝里曲率与量子度量的最新实验验证文献（特别是2023-2025年），现有综述多为理论提议",
+      "search_keywords": [
+        "HHG Berry curvature measurement experiment",
+        "high harmonic spectroscopy quantum geometry solid",
+        "HHG quantum metric reconstruction experimental",
+        "attosecond Berry curvature solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转角精度±0.05°内可分辨HHG调制深度",
+      "missing_evidence": "缺少扭转角精度与HHG调制深度对应关系的实验统计文献，需检索2022-2025年莫尔HHG实验中角度精度与光谱响应的定量数据",
+      "search_keywords": [
+        "twisted bilayer twist angle precision HHG",
+        "moiré HHG modulation depth angle dependence",
+        "twist angle calibration HHG spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔强场响应中多体关联增强可通过HHG谱权重转移检测",
+      "missing_evidence": "缺少2022-2025年关联莫尔体系HHG多体增强（如Mott绝缘体HHG红移）的同行评议实验文献支撑",
+      "search_keywords": [
+        "correlated moiré HHG many-body enhancement",
+        "Mott insulator high harmonic generation spectral shift",
+        "interaction driven moiré strong field response",
+        "Mott HHG experimental observation"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

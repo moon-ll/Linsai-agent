@@ -1,0 +1,65 @@
+{
+  "gaps": [
+    {
+      "claim": "3.2 L21「反平行堆叠普查给出的 16.4/39.9/25.5 meV/unitcell」数值出处 — content L11 已挂 [22]，但 L67 和 2.8 节裸用未挂引用",
+      "missing_evidence": "缺少反平行堆叠能量壁垒实验测量（如 PBE+U/Scan/DFT-D3）首次提出 16.4/39.9/25.5 meV/unitcell 数值的原始文献；现有 [22] 引用链接不清晰且在 scheme.md 跨章出现时漏挂",
+      "search_keywords": [
+        "antiparallel stacking energy MnPS3 16.4 meV unitcell",
+        "CrPS3 interlayer stacking energy first-principles",
+        "transition metal thiophosphate stacking barrier DFT"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "3.3 L37 末句 √J 与单量 d′ 恒等声明 — S_W 加权方式需两类协方差定义对齐 content L73",
+      "missing_evidence": "缺少 d′ (d-prime) 信号检测理论在 HHG channel separation 中的标准定义与加权协方差 S_W = σ₁² + σ₂² vs 类先验加权的原始文献出处",
+      "search_keywords": [
+        "d-prime signal detection theory classification",
+        "Swets d prime separability metric definition",
+        "sensitivity index d prime standard definition psychophysics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "3.4 L59-61 D_sep 高斯重叠近似公式 — 1−τ₁/τ₂ 应改为 1−√(2τ₁τ₂/(τ₁²+τ₂²))，公式溯源缺失",
+      "missing_evidence": "缺少 Gaussian normalized overlap integral 1−√(2τ₁τ₂/(τ₁²+τ₂²)) 的原始推导文献（信号检测论/分类学/物理学中的归一化高斯重叠度量）",
+      "search_keywords": [
+        "Gaussian normalized overlap integral separability",
+        "Bhattacharyya coefficient Gaussian distributions",
+        "d prime Gaussian overlap formula derivation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content L17「Li 等（arXiv:2605.20067, 2026）」vs references [41] 首作实为 Zhang Q（末作 Li L）",
+      "missing_evidence": "arXiv:2605.20067 真实作者列表验证 — 首作 Zhang Q / 末作 Li L 的官方记录",
+      "search_keywords": [
+        "arXiv 2605.20067 authors",
+        "2605.20067 Zhang FePS3 magnon phonon",
+        "FePS3 three-wave mixing 2026 arXiv author list"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "3.2 L15 平面波截断能 80–100 Ry 起步 vs 知识库 dft-soc 600 eV 基准（≈163.5 Ry）— 对测结论预期说明缺失",
+      "missing_evidence": "缺少 80–100 Ry（约 1086–1358 eV）作为磁性 vdW 层状体系 TDDFT 平面波截断能基准的同行先例与对测验证文献",
+      "search_keywords": [
+        "plane wave cutoff energy 2D antiferromagnet TDDFT 80 Ry",
+        "MnPS3 NiPS3 plane wave cutoff convergence",
+        "vdW magnetic material DFT cutoff benchmark eV"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "3.4 L59-61 D_sep 派生 9 ps→0.45 ns、0.85 ns 处 D_sep=0.854 时间常数 τ₁, τ₂ 的实验出处",
+      "missing_evidence": "缺少 MnPS3/NiPS3/FePS3 类 vdW 反铁磁体 THz 驱退磁两时间常数实验测量（τ₁ ≈ 1–10 ps 快分量，τ₂ ≈ 数百 ps 慢分量）的具体出处",
+      "search_keywords": [
+        "NiPS3 THz demagnetization two exponential",
+        "FePS3 ultrafast magnetization two time constants",
+        "MnPS3 antiferromagnetic dynamics ps timescale transient"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

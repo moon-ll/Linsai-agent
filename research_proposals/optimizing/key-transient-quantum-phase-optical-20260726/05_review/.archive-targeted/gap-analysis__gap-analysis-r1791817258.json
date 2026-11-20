@@ -1,0 +1,19 @@
+{
+  "gaps": [
+    {
+      "claim": "近期的 MLFF-MD 工作已揭示 SoD 簇形变机制（§2.1 L23 处具名机制断言，归属'近期 MLFF-MD 工作'）",
+      "missing_evidence": "该学术声称行内无嵌入式引用 [N]；文献表亦无对应条目，属孤儿引用（具名无号），违反 citation_style 嵌入式引用规范；评审建议补引实文（如 arXiv:2608.02456 两步相变动力学）或直接删去机制细节句",
+      "search_keywords": [
+        "machine learning force field molecular dynamics phase transition",
+        "MLFF-MD two-step phase transition dynamics",
+        "SoD cluster deformation mechanism",
+        "S octahedral distortion molecular dynamics",
+        "Co3Sn2S2 structural dynamics MLFF",
+        "soft-mode-driven cluster dynamics",
+        "arXiv:2608.02456"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

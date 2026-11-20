@@ -1,0 +1,51 @@
+{
+  "gaps": [
+    {
+      "claim": "瞬态量子相的定义、实现、测量三轴构成必然闭环而非三件事并列",
+      "missing_evidence": "rationale §2 line 25仅作断言，缺少No-Go条件或理论框架证明三轴不可分性（即缺少任意一轴则无法完成瞬态量子相全光读写任务的理论论证）",
+      "search_keywords": [
+        "quantum phase measurement control loop necessity",
+        "transient quantum phase define measure realizability theorem",
+        "No-Go theorem quantum parameter estimation completeness",
+        "quantum phase tomography control feedback inseparability",
+        "瞬态量子相 定义 测量 闭环 理论证明"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "立项依据§1中国内研究现状覆盖极薄弱，仅有国际竞争分析",
+      "missing_evidence": "缺少中国国内研究组在固体高次谐波产生、阿秒科学、瞬态量子相超快测量方向的代表性工作文献，无法体现国内竞争态势与研究基础",
+      "search_keywords": [
+        "solid-state high harmonic generation China group",
+        "attosecond science Chinese research team",
+        "固体高次谐波 中国 实验组",
+        "瞬态量子相 超快光学 国内",
+        "ultrafast Berry phase measurement China experimental",
+        "强场 非线性光学 中国 最新进展",
+        "time-resolved HHG spectroscopy domestic China"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1和§2.2中关于SHG偏振旋转、超快量子相探测的前人工作以文献堆砌方式呈现，缺乏分析性综述",
+      "missing_evidence": "缺少对已有工作（如Xu等Nature Photonics[20]、Griffin等Nat. Mater.[22]）之间的逻辑关联与局限性分析，需要综述性或批判性文献来连接这些独立工作并指出其不足",
+      "search_keywords": [
+        "SHG polarization rotation ultrafast quantum phase review",
+        "second harmonic generation probe quantum phase limitations",
+        "ultrafast nonlinear optical probe quantum phase comparison",
+        "attosecond quantum phase measurement techniques review survey",
+        "超快非线性光学 量子相探测 综述 局限性"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "参考文献中存在4条幽灵引用[1][2][4][43]，引用内容不可核实",
+      "missing_evidence": "这4条引用的具体文献信息缺失或不完整，需要找到对应的实际论文或确认引用来源，否则论点无文献支撑",
+      "search_keywords": [
+        "ghost citation verification proposal rationale",
+        "unresolved reference solid-state HHG attosecond quantum phase"
+      ],
+      "priority": "high"
+    }
+  ]
+}

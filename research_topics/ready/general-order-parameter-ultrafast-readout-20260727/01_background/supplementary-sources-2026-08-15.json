@@ -1,0 +1,22 @@
+{
+  "proposal_id": "general-order-parameter-ultrafast-readout-20260727",
+  "cluster_id": "cl_20260815_b51739",
+  "entries": [
+    {
+      "source_id": "hermes_briefing:research_briefing_20260522.md",
+      "title": "Phase-matching of high harmonic generation in twisted solid",
+      "summary": "该论文提出在扭转堆叠的二维固体中利用层间扭曲角引入几何Pancharatnam-Berry相位，以补偿固体高次谐波产生过程中的波矢失配，从而实现任意阶谐波的相位匹配。该方法突破了传统固体HHG中相位匹配难以调控的瓶颈，有望显著提升相干极紫外光源的转换效率。",
+      "path": "/Users/ll/Desktop/hermes_workspace/knowledge_base/AI_wiki/briefings/research_briefing_20260522.md",
+      "added_via": "cluster:cl_20260815_b51739",
+      "added_at": "2026-08-15T17:48:59Z"
+    },
+    {
+      "source_id": "hermes_briefing:research_briefing_20260521.md",
+      "title": "强场超快光学与阿秒科学研究简报（2026-05-21）",
+      "summary": "该简报汇总了强场超快光学与阿秒科学领域17篇arXiv新论文，核心亮点包括用固体高次谐波（HHG）探测双层Td-WTe₂滑动铁电极化切换动力学、量子回波机制产生可调谐相干高次谐波、石墨烯HHG中的超快电子-声子耦合效应，以及能带拓扑与HHG效率间的量子光学关联等新物理。简报按子方向（固体HHG、拓扑HHG、阿秒光电子学、辐射源物理等）为每篇论文提炼一句话关键发现并给出相关性评分，为领域动态追踪提供一站式参考。",
+      "path": "/Users/ll/Desktop/hermes_workspace/knowledge_base/AI_wiki/briefings/research_briefing_20260521.md",
+      "added_via": "cluster:cl_20260815_b51739",
+      "added_at": "2026-08-15T17:48:59Z"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "Korshunov 等人的 X 射线漫散射和非弹性散射结果被用于支撑“T > T_N 时 M 点存在短程电荷涨落及约 6 meV 的 Kohn 类异常”。",
+      "missing_evidence": "当前既缺少可溯源的参考文献编号和完整条目，也存在定量事实错挂。已有线索 arXiv:2603.25317 表明：Kohn 类异常应在 T_N 处的声子色散中形成；进入磁有序相后，软模由交换应变重整化的幅度约为 6 meV，而 T > T_N 时软模频率约为 4 meV。因此需要补入该文献，并按“T_N 处形成 Kohn 类异常、T < T_N 时约 6 meV 重整化”的正确相位关系改写。",
+      "search_keywords": [
+        "arXiv:2603.25317",
+        "Korshunov X-ray diffuse scattering inelastic scattering Kohn anomaly",
+        "Kohn anomaly transition temperature exchange strain 6 meV",
+        "magnetic ordered phase soft-mode renormalization 6 meV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Kravchuk 文献被表述为通过多体微扰计算得到约 20 fs 的手性寿命差异。",
+      "missing_evidence": "现有 [36] 实际属于解析自旋模型理论，公开摘要中没有约 20 fs 的数值依据，因而既不能充分支撑该定量结果，也不能支撑“多体微扰计算”这一方法描述。需要定位给出 20 fs 手性寿命差异的原始论文，优先选择包含超快动力学测量或明确时间尺度计算的原始研究；若无法找到，应删除 20 fs 数值，并将方法准确表述为“解析磁性理论计算”。",
+      "search_keywords": [
+        "Kravchuk 20 fs chiral lifetime difference",
+        "Kravchuk chiral lifetime magnetic dynamics",
+        "analytic spin model 20 fs chirality lifetime",
+        "ultrafast chiral domain lifetime 20 fs",
+        "many-body perturbation chiral lifetime 20 fs magnetic order"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "目标材料的相变温度约为 200 K。",
+      "missing_evidence": "当前 [2] 是理论复现文献，并非该材料相变温度的实验出处，不能单独支撑约 200 K 的实验性陈述。需要改引实验文献 [1]，或采用 [1,2] 的组合引用，并核实二者对应的材料、晶相和升温或降温测量条件是否一致。",
+      "search_keywords": [
+        "MnTe Néel temperature 200 K experiment",
+        "alpha-MnTe phase transition temperature 200 K",
+        "MnTe magnetic phase transition experimental 200 K",
+        "MnTe X-ray diffraction Néel temperature 200 K"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

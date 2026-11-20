@@ -1,0 +1,31 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.3 L69所述“Lian等2024年证明谷极化激子莫特绝缘态”以及“Xiong等2024年进一步给出可调谐谷赝自旋序”需要分别由对应实验论文直接支撑；现有总括引用[19,20,24]与相关WSe₂/WS₂关联绝缘态实验不对应。",
+      "missing_evidence": "需要核验并补挂Lian团队和Xiong团队的原始实验论文，确认作者、年份、期刊卷页、DOI及具体结论与申请书表述的一一对应关系。现有[20]（Hu等的声子—电子耦合工作）和[24]（Peterka等的谐波调控工作）不能作为这两个关联绝缘态论点的证据；应在全书检查同类编号族及“已有/进一步”等比较性表述的引文归属。",
+      "search_keywords": [
+        "Lian 2024 valley-polarized exciton Mott insulator",
+        "Xiong 2024 tunable valley pseudospin order",
+        "WSe2 valley exciton Mott insulator 2024",
+        "WS2 tunable valley-pseudospin order Science 380 860",
+        "Lian Nat Phys 2024 exciton Mott insulator DOI",
+        "Xiong Science 2024 380 860 DOI"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.4 L83关于“即使达到SNR=50，数据秩仍会进一步折减，因而12–24个实参数相对于18个独立数据点仍然欠定”的判断缺少定量依据。",
+      "missing_evidence": "需要给出SNR、噪声模型与数据矩阵秩之间的明确关系，至少包括奇异值或噪声阈值的计算、有效秩或等效自由度数值，以及秩折减后相对于待估参数数量的统计可辨识性判据。该结论主要需要项目自己的误差传播、Jacobian/Fisher-information分析或数值模拟支撑；可补充噪声协方差降秩、PCA/SVD有效秩判定及病态逆问题可辨识性的方法学文献，但不能仅以一般性文献替代本项目的定量推导。",
+      "search_keywords": [
+        "effective degrees of freedom noisy covariance matrix rank shrinkage",
+        "PCA singular value noise threshold measurement noise",
+        "rank deficiency matrix SNR singular spectrum",
+        "Fisher information effective parameter number ill-posed inverse problem",
+        "regularization identifiability independent data points parameters",
+        "噪声协方差 有效自由度 秩折减 奇异值"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

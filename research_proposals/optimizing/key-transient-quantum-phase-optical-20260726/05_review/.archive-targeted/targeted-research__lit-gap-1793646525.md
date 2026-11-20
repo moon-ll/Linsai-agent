@@ -1,0 +1,44 @@
+# 定向文献检索报告
+
+## 课题
+key-transient-quantum-phase-optical-20260726
+
+## 章节
+rationale
+
+## 检索关键词
+- Lorenzo ultrafast、transient topology optical probe、Lorenzo high harmonic generation topology、国内 瞬态拓扑 超快探测、中国 high harmonic generation topological、transient Chern number ultrafast optics China、Weyl semimetal HHG 中国团队、transient topological invariant all-optical inversion、time-resolved Chern number retrieval optics、transient Z2 invariant ultrafast probe
+
+## 检索结果
+
+- 2508.15631 | High Harmonic Spectroscopy from Lower-Order to Higher-Order Topological Insulators | Bryan Lorenzo, Carlos Batista, Milad Jangjan, Dasol Kim, Jean Menotti, Feng Liu, Wenlong Gao, Shambhu Ghimire, Camilo Granados, Alexis Chacón | 2025 | 0.95 | Lorenzo（第一作者）与 Chacón 团队（含宁波东方理工、SLAC 合作）系统研究 Haldane/Kane-Mele/呼吸Kagome 模型的高次谐波光谱，证明螺旋度、圆二色性、通道分辨谐波产额可全光探测低阶与高阶拓扑绝缘体的拓扑相，拓扑相谐波增强达两个数量级，已发表于 PRB 114, 084307 (2026) | 来源：本地知识库
+- 2604.21121 | Double circular dichroism high harmonic spectroscopy: An ultrafast probe for topological photocurrents | Osamah Sufyan, Ofer Neufeld | 2026 | 0.9 | 提出双圆二色性（DCD）谐波光谱：泵浦-探测双圆偏振独立控制，实现时间分辨的全光探测拓扑光电流，体/边态贡献符号相反可分离，DCD 随阿秒时间尺度振荡可用于探测拓扑光流瞬时动力学 | 来源：本地知识库
+- 2610.28046 | Attosecond Quantum Optical Spectroscopy of Topological Materials | C. Granados, J. Rivera-Dean, D. Kim, A. Chacón et al. | 2026 | 0.9 | 量子光驱动 HHG 开辟拓扑探测新信道：Haldane Chern 绝缘体与 Kane-Mele 拓扑绝缘体的螺旋度分辨强度关联 g2(0) 在拓扑相普遍增强，二向色关联随 Chern 数变号，经典光谱中缺失的拓扑签名可由光子统计揭示 | 来源：本地知识库
+- 2601.03881 | Ultrafast laser-driven topological phase patterning | Jianyu Wu, Arthur Niedermayr, Gaolong Cao, Oscar Grånäs et al. | 2026 | 0.85 | 飞秒脉冲干涉形成瞬态光栅，驱动 WTe2 中拓扑 Td 相与平庸 1T* 相的可逆结构转变，超快电镜以纳米/皮秒分辨率实时成像拓扑异质结与相界传播，实现空间可编程的拓扑量子相光刻 | 来源：联网检索
+- 2508.19063 | Optical control over topological Chern number in moiré materials | Olivier Huber, Kilian Kuhlbrodt, Eric Anderson, Weijie Li et al. | 2025 | 0.85 | 在扭曲 MoTe2 同质双层中用圆偏振光共振激发吸引极化子跃迁，实现多体 Chern 数 +1↔-1 的全光非热翻转，可写入持久 Chern 畴与拓扑边缘态，为全光拓扑量子电路奠基 | 来源：本地知识库
+- 2502.14800 | Discovery of transient topological crystalline order in optically driven SnSe | Masataka Mogi, Dongsung Choi, Kyoung Hun Oh, Binghai Yan, Nuh Gedik et al. | 2025 | 0.85 | 飞秒带隙激发在 ~0.8 eV 带隙半导体 SnSe 中发现热学不可达的瞬态拓扑晶体序：trARPES 揭示亚皮秒内带隙中出现 Dirac 线性色散（vf=2.5×10^5 m/s）及多个偏离高对称点的 Dirac 点，室温持续数皮秒 | 来源：联网检索
+- 2408.03115 | Chiral Floquet Engineering on Topological Fermions in Chiral Crystals | Benshu Fan, Wenhui Duan, Angel Rubio, Peizhe Tang | 2024 | 0.8 | 中国团队（唐沛慈/段文辉等）研究手性晶体 CoSi 高 Chern 数拓扑费米子的圆偏振光 Floquet 工程化：光泵浦使 Weyl 点在动量空间位移并产生瞬态反常霍尔信号，提出中红外泵浦+THz Kerr/Faraday 探测的实验方案 | 来源：联网检索
+- 2609.19348 | Time-resolved topology of aperiodically driven systems | Justin T. Cole, Christina Jörg, Terry A. Loring, Alexander Cerjan | 2026 | 0.8 | 提出演化历史谱定域化子（spectral localizer）框架，从有限时间幺正演化算符直接分类 Chern 拓扑，给出时间分辨的定域 Chern 标记，可在实际动力学中追踪瞬态拓扑保护的产生、丧失与恢复 | 来源：联网检索
+- 2602.16454 | Edge states and quantum optical high-harmonic generation from topological insulators | Christian Saugbjerg Lange et al. | 2026 | 0.78 | SSH 模型量子光学 HHG：拓扑/平庸两相的谐波辐射在带隙频率处均呈压缩态，谐波谱可区分两相而压缩度仅在短链下可区分，揭示偶极耦合强度支配拓扑材料的非经典 HHG 响应 | 来源：本地知识库
+- 2604.20388 | Quantum Optical Signatures of Band Topology in Solid-State High Harmonics | Denis Ilin, Alexander S. Solntsev, Ivan Iorsh | 2026 | 0.75 | 基于密度矩阵的固体 HHG 通用理论：光腔中 SSH 链拓扑相的 HHG 响应与量子光特征强于平庸相，腔-物质相互作用产生压缩高次谐波量子光，建立能带拓扑与光子统计的直接联系 | 来源：本地知识库
+- 2604.27864 | Second harmonic generation and third harmonic generation in topological insulator-based van der Waals metamaterials | Alessandra Di Gaspare, Sara Ghayeb Zamharir, Miriam S. Vitiello et al. | 2026 | 0.75 | 首次实验实现拓扑绝缘体 THz 高次谐波：开口谐振环阵列嵌入 Bi2Se3/(InBi)2Se3 范德华异质结，在 6.4-9.7 THz 观测到奇次（体心对称）与偶次（拓扑表面态对称破缺）谐波，区分体/表面贡献 | 来源：本地知识库
+- 2507.09234 | Revealing Material-Dependent Bicircular High-Order Harmonic Generation in 2D Semiconductors via Real-Space Trajectories | Qing-Guo Fan, Kang Lai, Wen-hao Liu, Zhi Wang et al. (中科院半导体所) | 2025 | 0.72 | 中国团队 TDDFT+实空间轨迹模型揭示 MoS2/hBN 双色圆偏振 HHG 的材料依赖性：MoS2 中贝里曲率驱动的反常霍尔速度与 Bloch 速度相互作用产生双峰产额，无需重计算即可从能带+贝里曲率预测谐波响应 | 来源：本地知识库
+- 2510.16546 | High harmonic generation light source with polarization selectivity and sub-100-μm beam size for time- and angle-resolved photoemission spectroscopy | Haoyuan Zhong, Xuanxi Cai, Changhua Bao, Zhensheng Tao, Shuyun Zhou et al. | 2025 | 0.7 | 中国团队（陶镇生/周树云）研制偏振可选、57×90 μm 小束斑 HHG 探针光源配 2 μm 中红外泵浦，在 Bi2Se3 拓扑绝缘体上演示偏振选择增强不同对称性能带，140 fs 时间分辨捕获石墨烯双弛豫通道 | 来源：本地知识库
+- 2508.06910 | Probing Fermi surface topology by ultrafast pump pulse dynamics | Debamalya Dutta, Kush Saha | 2025 | 0.68 | 提出用低强度光脉冲的动力学响应探测费米面拓扑：脉冲期间与脉冲后振荡电流的幅值比在 Fermi 能级对齐鞍点（Lifshitz 相变）时达到极小，为非平衡域识别拓扑 Lifshitz 相变提供无损实时方案 | 来源：联网检索
+- 2510.15207 | Solid-State High-Order Harmonic Generation: Emerging Frontiers in Ultrafast and Quantum Light Science | Marcelo F. Ciappina | 2025 | 0.65 | 综述固体 HHG 前沿：贝里相位与拓扑效应的谐波编码、激元与晶格强场调控、量子/压缩光场驱动的非经典谐波、OAM 转移及纳米结构增强平台，梳理拓扑-关联-量子光学交叉方向 | 来源：本地知识库
+- 2306.09766 | Ultrafast switching of topological invariants by light-driven strain | Tae Gwan Park, Seungil Baek, Junho Park et al. | 2023 | 0.62 | 超快光致面外应变 (~7%) 驱动 Bi2Se3 拓扑不变量 Z2=1↔0 的瞬态翻转：光泵浦-NIR/THz 探测分辨表面-体杂化与能带宇称反转序列，实现室温下拓扑不变量的超快开关与相干电导调制 | 来源：联网检索
+
+## 多源学术检索补充（arxiv+openalex+semantic_scholar）
+
+标准引用格式（可直接用于 references.md 修订）：/Users/ll/Desktop/LinSai-CoPilot/research_proposals/optimizing/key-transient-quantum-phase-optical-20260726/02_literature/targeted-research/candidates-1793646527.bib
+
+- arXiv:2303.13934 | Reversible spin-optical interface in luminescent organic radicals | Sebastian Gorgon, Kuo Lv, Jeannine Grüne | 2023 | Nature | 引用:203 | 来源：openalex | Abstract Molecules present a versatile platform for quantum information science 1,2 and are candidates for sensing and computation applications 3,4 . 
+- arXiv:1106.0400 | Real-Time Detection and Rapid Multiwavelength Follow-up Observations of a Highly Subluminous Type II-P Supernova from the Palomar Transient Factory Survey | Avishay Gal-Yam, Mansi M. Kasliwal, Iair Arcavi | 0 | The Astrophysical Journal | 引用:72 | 来源：arxiv | The Palomar Transient Factory (PTF) is an optical wide-field variability survey carried out using a camera with a 7.8 square degree field of view moun
+- DOI:10.1007/978-3-030-73893-8 | Springer Handbook of Atomic, Molecular, and Optical Physics | Gordon W. F. Drake | 2023 | Springer handbooks | 引用:64 | 来源：openalex | 
+- arXiv:1705.10052 | The unblinking eye on the sky | Eric C. Bellm, Shrinivas R. Kulkarni | 0 | Nature Astronomy | 引用:56 | 来源：arxiv | From near-Earth asteroids to superluminous supernovae and counterparts to gravitational wave sources, the Zwicky Transient Facility will soon scan the
+- arXiv:2104.01030 | Hard X-ray Transient Grating Spectroscopy on Bismuth Germanate | Jeremy R. Rouxel, Danny Fainozzi, Roman Mankowsky | 0 | Nature Photonics | 引用:51 | 来源：arxiv | Optical-domain Transient Grating (TG) spectroscopy is a versatile background-free four-wave-mixing technique used to probe vibrational, magnetic and e
+- DOI:10.1103/physrevb.75.115120 | Selective optical probing of the charge-density-wave phases in NbSe3 | Katsuhiro Shimatake, Yasunori Toda, Satoshi Tanda | 2007 | Physical Review B | 引用:30 | 来源：openalex | We report a study of the ultrafast single particle dynamics in quasi-one-dimensional ${\mathrm{NbSe}}_{3}$ whisker crystals using a two-color pump-pro
+- arXiv:2309.00303 | Optical Probing of Ultrafast Laser-Induced Solid-to-Overdense-Plasma Transitions | Yasmina Azamoum, Georg Alexander Becker, Sebastian Keppler | 0 | Light: Science & Applications | 引用:14 | 来源：arxiv | Understanding the target dynamics during its interaction with a relativistic ultrashort laser pulse is a challenging fundamental multi-physics problem
+- arXiv:2201.10769 | Ultrafast Suppression of the Ferroelectric Instability in KTaO$_3$ | Viktor Krapivin, Mingqiang Gu, D. Hickox-Young | 0 | Physical Review Letters | 引用:11 | 来源：arxiv | We use an x-ray free-electron laser to study the ultrafast lattice dynamics following above band-gap photoexcitation of the incipient ferroelectric po
+- arXiv:2004.04452 | Ultrafast Topological Engineering in Metamaterials | Renwen Yu, Rasoul Alaee, Robert W. Boyd | 0 | Physical Review Letters | 引用:11 | 来源：arxiv | Transient optical heating provides an efficient way to trigger phase transitions in naturally occurring media through ultrashort laser pulse irradiati
+- arXiv:2302.02716 | Ultrafast entropy production in pump-probe experiments | Lorenzo Caprini, Hartmut Löwen, R. Matthias Geilhufe | 2024 | Nature Communications | 引用:9 | 来源：openalex | Abstract The ultrafast control of materials has opened the possibility to investigate non-equilibrium states of matter with striking properties, such 

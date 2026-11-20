@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "Hasan 等测量 Xe Auger 偏移 1.32 fs（Han 实为 Comment 方作者，两案混同即作者虚构）",
+      "missing_evidence": "缺少 arXiv:2512.19965 原文作者链确认（Hasan, Gao, Liang, Yuan, Eisenhutt, Tsai, Chen, Wörner）及该实验对 Xe Auger 时移的实测值",
+      "search_keywords": [
+        "arXiv:2512.19965 Xe Auger time shift Hasan",
+        "Hasan Xe Auger 1.32 fs attosecond streaking",
+        "2512.19965 attosecond soft X-ray Auger shift"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Han Comment 对 Cousin 2017 PRX 7 041030 中 19.2 as 脉冲重构的反驳细节（VTGNA/VTQNA 与 VPGTA 算法差异）",
+      "missing_evidence": "缺少 Han Comment 全文中关于 VPGTA（原文拼写）算法及其变体 VTGNA/VTQNA 的描述与定义",
+      "search_keywords": [
+        "Han Comment VTGNA Cousin 19.2 as krypton reanalysis",
+        "VTGNA VPGTA attosecond pulse reconstruction algorithm",
+        "Han Ultrafast Science 2026 6:0145 Comment krypton streaking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "水窗能区 He/Ne/Ar/Kr/Xe 各通道多通道电离贡献百分比（氦近零、氖 8%–15%）",
+      "missing_evidence": "缺少稀有气体 K 壳层/L 壳层多通道电离分支比与通道重叠度的量化文献，以支撑 scheme 中氦氖氩氪靶材-档位映射",
+      "search_keywords": [
+        "multichannel ionization branching ratio water window rare gas",
+        "rare gas K-shell Auger branching ratio Ne Ar Kr",
+        "FROG-CRAB multichannel breakdown percentage Ne 2p Ne 2s"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "光电子角积分后偶极相位被抑制（PANDA/angular integration dipole phase suppression）的理论预言与实验验证",
+      "missing_evidence": "缺少 Pabst/Dahlstrom PRA 94 013411 2016 PANDA 理论及 Peschel Ne 2p 角分辨 RABBIT 实验对偶极相位被抑制的对照证据",
+      "search_keywords": [
+        "Pabst Dahlstrom PANDA angular integration dipole phase 2016",
+        "Peschel Nature Communications Ne 2p angular streaking dipole phase",
+        "angular integration dipole phase suppression attosecond streaking experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "多通道 TDSE 模拟中通道间相位干涉项与解析修正项对条纹信号的影响",
+      "missing_evidence": "缺少 Shi Thumm 六维 TDSE 水窗阿秒脉冲反演论文中通道耦合修正项的解析形式与量级",
+      "search_keywords": [
+        "six-dimensional TDSE water window attosecond multichannel",
+        "Shi Thumm interchannel coupling correction term HHG streaking",
+        "multichannel TDSE analytical correction attosecond pulse retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "甲烷、氮气作为多通道判据主检验的可行性证据与水窗高段氪氙的标定数据",
+      "missing_evidence": "缺少甲烷/氮气 K 壳层多通道电离贡献率实验与水窗高段（>500 eV）氪氙 FROG-CRAB 误差基准数据",
+      "search_keywords": [
+        "methane nitrogen K-shell multichannel attosecond streaking",
+        "krypton xenon water window attosecond streaking high harmonic",
+        "methane nitrogen attosecond pulse characterization benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rACE 神经网络阿秒脉冲反演单通道极限精度（80 as / 24 as）的对比基准",
+      "missing_evidence": "缺少 rACE 原始论文中阿秒脉冲反演精度与单通道极限条件的明确描述",
+      "search_keywords": [
+        "rACE neural network attosecond pulse reconstruction accuracy",
+        "rACE 80 as 24 as single channel limit",
+        "Inzani neural network attosecond retrieval pulse duration"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

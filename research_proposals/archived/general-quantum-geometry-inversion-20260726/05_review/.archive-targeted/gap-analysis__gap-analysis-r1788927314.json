@@ -1,0 +1,158 @@
+{
+  "gaps": [
+    {
+      "claim": "三层量子态描述能够从经典场基线逐步过渡到量子光驱动的固体HHG，并保持物理量定义和预测结果的一致性",
+      "missing_evidence": "缺少支持经典驱动、量子光场驱动及固体HHG统一理论描述之间关系的理论文献，尤其是量子光驱动强场非线性过程从原子体系向固体体系扩展的依据",
+      "search_keywords": [
+        "quantum light driven high harmonic generation solid state theory",
+        "quantum optical field semiconductor Bloch equations HHG",
+        "quantum light strong-field nonlinear response solid",
+        "classical quantum correspondence high harmonic generation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "在固体HHG中应采用同一固体能带模型下的经典SBE截止位置作为基线，而不能直接外推原子体系的3.17系数",
+      "missing_evidence": "缺少系统比较原子三步模型截止规律与固体HHG中能带色散、Bloch振荡、带间跃迁共同决定截止位置的理论或数值研究",
+      "search_keywords": [
+        "solid-state high harmonic generation cutoff band dispersion Bloch trajectory",
+        "solid HHG cutoff not 3.17 law",
+        "semiconductor Bloch equations high harmonic cutoff",
+        "three-step model solid-state HHG cutoff comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子光场驱动固体HHG的增强或修正可通过相对于经典SBE基线的差分量进行识别",
+      "missing_evidence": "缺少量子光驱动与同等平均场经典驱动固体HHG的直接对照研究，以及量子增强因子、产率差分和统计显著性定义的文献支撑",
+      "search_keywords": [
+        "quantum enhancement factor high harmonic generation",
+        "quantum light versus classical light HHG comparison",
+        "bright squeezed vacuum high harmonic generation solid state",
+        "quantum optical driving field nonlinear spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1阶段经典光场基线足以建立固体HHG的截止、谱形和参数反演基准",
+      "missing_evidence": "缺少证明经典SBE或半导体布洛赫方程在目标固体、场强和驱动波长范围内适用性的基准研究，尤其是与实时TDDFT或多体模型的交叉验证",
+      "search_keywords": [
+        "semiconductor Bloch equation validity strong-field solid HHG",
+        "SBE versus TDDFT high harmonic generation benchmark",
+        "solid-state HHG multiband model validation",
+        "strong-field semiconductor Bloch equation applicability range"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "在量子几何反演中，Berry曲率、量子度量和跃迁偶极矩等量可以由多通道HHG谱和偏振信息联合约束",
+      "missing_evidence": "缺少证明不同量子几何量对HHG振幅、相位、偏振和圆二色性具有可区分响应的理论反演或实验测量文献",
+      "search_keywords": [
+        "Berry curvature quantum metric high harmonic generation inversion",
+        "quantum geometry tensor HHG spectroscopy",
+        "Berry curvature and quantum metric nonlinear optical response",
+        "polarization resolved HHG quantum geometry reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "多参数HHG反演能够通过灵敏度矩阵、Fisher信息或贝叶斯后验判定参数是否可辨识",
+      "missing_evidence": "缺少将参数可辨识性、条件数、误差传播或Fisher信息正式应用于固体HHG/量子几何反演的文献",
+      "search_keywords": [
+        "Fisher information high harmonic spectroscopy parameter estimation",
+        "identifiability quantum geometry HHG inversion",
+        "Jacobian condition number nonlinear optics inverse problem",
+        "Bayesian inversion high harmonic generation spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "通过增加偏振、温度、磁场、CEP或驱动波长等实验维度，可以解除量子几何反演中的参数简并",
+      "missing_evidence": "缺少多观测通道联合约束提升HHG反演秩或降低参数相关性的理论分析和实验验证",
+      "search_keywords": [
+        "multi-parameter constraint high harmonic spectroscopy inversion",
+        "polarization temperature field resolved HHG parameter retrieval",
+        "CEP scan Berry curvature high harmonic measurement",
+        "experimental identifiability nonlinear optical spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子度量可通过非线性磁阻等独立实验路径获得，并可作为HHG量子几何反演的外部参照",
+      "missing_evidence": "除已引用的Sb2Te3研究外，仍需支持非线性输运测量量子度量、其温度/散射时间依赖性及与光学量子几何量对应关系的独立文献",
+      "search_keywords": [
+        "quantum metric nonlinear magnetoresistance experiment",
+        "quantum metric nonlinear transport independent measurement",
+        "quantum metric Sb2Te3 nonlinear magnetoresistance",
+        "quantum geometry optical transport correspondence"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "强关联修正可通过f-sum rule、带宽重整化或Hubbard U相关约束纳入HHG反演",
+      "missing_evidence": "缺少将强关联电子结构、谱权重和f-sum rule约束明确连接到固体HHG谱形或截止特征的理论研究",
+      "search_keywords": [
+        "f-sum rule strongly correlated high harmonic generation",
+        "Hubbard U bandwidth renormalization solid-state HHG",
+        "many-body correction semiconductor Bloch equation HHG",
+        "Mott insulator high harmonic generation sum rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "亮压缩真空驱动下的光子统计参数能够被可靠标定并用于解释HHG增强",
+      "missing_evidence": "缺少关于亮压缩真空绝对光子数、压缩参数、g2及相对强度噪声的实验标定方法，以及这些参数与非线性转换效率/HHG产率关联的文献",
+      "search_keywords": [
+        "bright squeezed vacuum absolute photon number calibration",
+        "bright squeezed vacuum g2 measurement parametric amplifier",
+        "squeezing parameter calibration nonlinear optics",
+        "bright squeezed vacuum relative intensity noise characterization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子光场输入可在固体HHG实验中保持可控的单模或有效模式描述",
+      "missing_evidence": "缺少评估多模结构、信号光/闲频光探测效率、损耗和混合态对量子驱动HHG预测影响的理论或实验研究",
+      "search_keywords": [
+        "bright squeezed vacuum multimode effects nonlinear spectroscopy",
+        "squeezed vacuum imperfect detection efficiency HHG",
+        "quantum light loss mixed state high harmonic generation",
+        "single-mode approximation bright squeezed vacuum validity"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "PINN或其他物理约束神经网络能够稳定地完成HHG量子几何参数反演，并优于传统正则化方法",
+      "missing_evidence": "缺少针对HHG或非线性光谱反演的PINN、增广拉格朗日约束、Tikhonov正则化对比，以及噪声、分布外样本和多解条件下的性能基准",
+      "search_keywords": [
+        "physics-informed neural network high harmonic spectroscopy inversion",
+        "PINN nonlinear optics inverse problem benchmark",
+        "augmented Lagrangian PINN spectroscopy reconstruction",
+        "PINN versus Tikhonov regularization optical inversion"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "增广拉格朗日或自洽约束循环能够提高SBE反演的收敛性和物理约束满足程度",
+      "missing_evidence": "缺少该类优化方法用于半导体布洛赫方程、强场HHG或量子光驱动模型的收敛性、稳定性和计算代价比较",
+      "search_keywords": [
+        "augmented Lagrangian semiconductor Bloch equations convergence",
+        "constraint optimization semiconductor Bloch equation HHG",
+        "self-consistent loop versus augmented Lagrangian nonlinear optics",
+        "physics constrained optimization high harmonic generation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "量子光驱动HHG可以从气相理论框架推广到固体体系，并保留可检验的量子增强效应",
+      "missing_evidence": "缺少从气相量子光HHG到固体能带、晶格和多体相互作用体系的明确理论推广或实验验证",
+      "search_keywords": [
+        "quantum light high harmonic generation atom to solid state",
+        "quantum optical HHG semiconductor theory",
+        "bright squeezed vacuum driven solid-state HHG theory",
+        "quantum enhancement high harmonic generation condensed matter"
+      ],
+      "priority": "high"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.3 R2 探针方案中涉及阿秒瞬态吸收光谱（ATAS）的技术描述缺乏实验文献支撑",
+      "missing_evidence": "缺少 Policht 2023 Nat. Commun. ATAS 实验工作作为技术路线中 ATAS 测量的参照依据",
+      "search_keywords": [
+        "Policht ATAS attosecond transient absorption",
+        "policht_natcomm_2023 attosecond spectroscopy",
+        "ATAS high harmonic probe solid-state",
+        "attosecond transient absorption moiré superlattice"
+      ],
+      "priority": "high"
+    }
+  ]
+}

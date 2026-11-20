@@ -1,0 +1,73 @@
+{
+  "gaps": [
+    {
+      "claim": "强场超快激光驱动滑移铁电翻转的调控方案参数（驱动场强、翻转时间尺度）缺乏文献依据",
+      "missing_evidence": "缺少滑移铁电材料在静电场/强光场下翻转阈值场强与超快翻转时间尺度的实验数据，scheme.md（0字节）中技术路线与分方案的驱动参数设计无文献支撑",
+      "search_keywords": [
+        "sliding ferroelectric switching threshold electric field",
+        "sliding ferroelectricity ultrafast laser switching time",
+        "interlayer sliding ferroelectric femtosecond dynamics",
+        "滑移铁电 电场翻转 阈值 超快",
+        "optical field control sliding ferroelectric bilayer"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "高次谐波谱学读出Berry曲率/Rashba自旋劈裂的方案缺乏可行性验证文献",
+      "missing_evidence": "缺少HHG对自旋轨道耦合体系（Rashba/Dresselhaus劈裂带）或Berry曲率敏感性的实验与理论工作，读出方案的灵敏度与判据设计无先例支撑",
+      "search_keywords": [
+        "Berry curvature high harmonic spectroscopy",
+        "high harmonic generation Rashba spin splitting",
+        "HHG circular dichroism spin-orbit band topology",
+        "高次谐波 贝里曲率 读出 实验",
+        "nonlinear optical probe spin split band"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnPS3及类似MPS3材料在强场飞秒激光下的损伤阈值与稳定性数据缺失，可行性分析无法开展",
+      "missing_evidence": "缺少MnPS3/MnPSe3等过渡金属磷三硫族化合物在近红外强场下的损伤阈值、可承受场强范围、强场下结构稳定性数据",
+      "search_keywords": [
+        "MnPS3 femtosecond laser damage threshold",
+        "MPS3 strong field optical breakdown near-infrared",
+        "antiferromagnetic phosphorus trichalcogenide high field stability",
+        "2D magnet ablation threshold femtosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "含自旋轨道耦合与磁性的强场正演模型（SBE/实时TDDFT）用于该体系HHG谱反演的适用性未论证",
+      "missing_evidence": "缺少将半导体布洛赫方程或实时TDDFT应用于自旋劈裂磁性材料HHG计算的先例，方案中正演模型选择与反演链条设计缺乏方法论依据",
+      "search_keywords": [
+        "semiconductor Bloch equation spin-orbit high harmonic",
+        "real-time TDDFT magnetic material high harmonic generation",
+        "HHG simulation antiferromagnet spin splitting",
+        "SBE Rashba band nonlinear optics model"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "悬空引文问题——references.md为0字节，正文引用文献无法核对",
+      "missing_evidence": "rationale.md（18,338字节）与content.md（13,049字节）中引用的文献缺少参考文献列表，无法确认引用真实性与准确性（历史#2遗留未解决）",
+      "search_keywords": [
+        "MnPS3 band structure antiferromagnetic first principles",
+        "sliding ferroelectricity review experiment",
+        "solid-state high harmonic generation review",
+        "Berry curvature nonlinear optical response",
+        "Rashba effect 2D magnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnPS3少层/单层样品制备与转角堆叠的实验可行性缺乏文献支撑",
+      "missing_evidence": "缺少MnPS3单层/少层剥离、异质结堆叠及转角样品制备的成功案例与表征方法文献，方案中样品环节可行性存疑",
+      "search_keywords": [
+        "MnPS3 monolayer exfoliation fabrication",
+        "MnPS3 heterostructure twisted stacking",
+        "2D magnetic material device fabrication encapsulation",
+        "MnPSe3 few-layer sample preparation"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

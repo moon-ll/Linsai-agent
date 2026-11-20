@@ -1,0 +1,25 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.2.2 L25：BSV 光源「单脉冲光子数可达 2×10^13」的量化概述句",
+      "missing_evidence": "该句为无限定来源的量化断言，支撑文献 Rasputnyi 等[1] 被后置到 L29 才出现，句位缺即时角标，光子流强数据无法同句溯源",
+      "search_keywords": [
+        "bright squeezed vacuum photon number per pulse",
+        "BSV high harmonic generation photon flux",
+        "Rasputnyi squeezed vacuum solid HHG Nature Physics 2024"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "§1.2.2 L37：基于 Rivera-Dean[31] 的预言性论断句",
+      "missing_evidence": "所引文献处于在线优先状态、卷期页码尚未分配，预言句缺少「在线优先」状态限定语，引用的可核验性与体例一致性（同段 [17] 已有体例）不足",
+      "search_keywords": [
+        "Rivera-Dean high harmonic generation",
+        "squeezed vacuum high harmonic generation theory prediction",
+        "quantum light HHG online first"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.6 L155 处提出的\"声子-电子耦合修正项\"作为莫尔强场反演模型中的物理修正成分",
+      "missing_evidence": "缺少支撑该修正项存在必要性与具体形式的引文（[N] 引用），方案章亦无对应推导落点；评审建议补 [14]（Hu 2024）并同步方案章对应小节",
+      "search_keywords": [
+        "phonon-electron coupling twisted bilayer graphene",
+        "electron-phonon correction moiré superlattice HHG",
+        "lattice relaxation strong-field probe twisted heterostructure",
+        "Hu 2024 phonon moiré high harmonic",
+        "vibronic coupling HHG 2D materials",
+        "声子修正 莫尔 高次谐波"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

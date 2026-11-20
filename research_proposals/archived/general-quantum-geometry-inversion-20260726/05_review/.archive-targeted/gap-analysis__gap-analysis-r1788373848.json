@@ -1,0 +1,42 @@
+{
+  "gaps": [
+    {
+      "claim": "L129 引用 [40] 但 references.md 仅 [1]–[33]，[40] 缺位",
+      "missing_evidence": "Karniadakis et al. Nat. Rev. Phys. 3, 422–440 (2021) 关于 physics-informed neural networks 的权威综述未列入参考文献",
+      "search_keywords": [
+        "Karniadakis physics-informed neural network Nat Rev Phys 2021",
+        "PINN nonlinear optics inverse problem review"
+      ],
+      "priority": "critical"
+    },
+    {
+      "claim": "rationale 引 [34][35][36][37] 但 references.md 仅 [1]–[33]，跨章引用缺 4 篇",
+      "missing_evidence": "需补充：Ghimire 2011 (固体HHG开创性工作)、Runge-Gross 1984 (量子态层析理论基础)、Lvovsky 2009 (量子态层析实验方法)、Breitenbach 1997 (Squeezed light产生)",
+      "search_keywords": [
+        "Ghimire ZnO solid-state high harmonic generation 2011",
+        "Runge-Gross quantum state tomography 1984",
+        "Lvovsky quantum state tomography review 2009",
+        "Breitenbach squeezed light generation 1997"
+      ],
+      "priority": "critical"
+    },
+    {
+      "claim": "[5] Ghalgaoui 2023 作者署名错位，实为 Gorlach A., Even-Tzur M., Birk M. Nat. Phys. 19, 1689–1696 (2023)",
+      "missing_evidence": "文献 [5] 的正确作者信息和卷期信息，用于支撑 BSV 驱动 HHG 的量子增强效应",
+      "search_keywords": [
+        "Gorlach Even-Tzur Birk Nat Phys 2023 bright squeezed vacuum high harmonic",
+        "BSV driven HHG solid state Nature Physics 2023"
+      ],
+      "priority": "critical"
+    },
+    {
+      "claim": "§2.5 L141 f-sum rule 阈值'由训练集确定'——回避量化，缺乏强关联基线的文献支撑",
+      "missing_evidence": "缺少 f-sum rule 偏差阈值与 Hubbard U/带宽比关联的定量文献，或强关联固体 HHG 中 f-sum rule 破缺的系统性实验数据",
+      "search_keywords": [
+        "f-sum rule strongly correlated Hubbard U high harmonic generation",
+        "f-sum rule violation solid-state HHG bandwidth renormalization"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

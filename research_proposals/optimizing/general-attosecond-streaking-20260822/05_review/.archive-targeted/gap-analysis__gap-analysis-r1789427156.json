@@ -1,0 +1,93 @@
+{
+  "gaps": [
+    {
+      "claim": "Peschel[7]被作为水窗能区多通道TDSE模拟、重叠宽度0.5-2 eV映射、15%/30%阈值三重支撑",
+      "missing_evidence": "[7]真实内容是Ne 2p RABBITT相位研究（εs/εd连续态），无水窗TDSE耦合、无通道重叠度映射、无15%/30%阈值数据；需要找到水窗能区真实的多通道TDSE模拟文献作为替代锚点",
+      "search_keywords": [
+        "water window multi-channel TDSE attosecond streaking",
+        "Peschel Nature Communications Ne 2p RABBITT",
+        "interchannel coupling attosecond pulse retrieval",
+        "Cousin PRX 2017 water window attosecond streaking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "15%/30%/20%通道重叠度阈值与20%基准的文献归属",
+      "missing_evidence": "15%/30%阈值句在rationale/content/scheme三章跨章逐字双份，但原始文献未核实；需要找到Cousin 2017 PRX或其他水窗阿秒实验中真实报告的通道贡献百分比数据，或将这些阈值明确标注为本方案设计值",
+      "search_keywords": [
+        "Cousin PRX 7 041030 water window attosecond streaking multichannel threshold",
+        "attosecond streaking multichannel ionization retrieval error percentage",
+        "water window Auger branching ratio Ne K-shell",
+        "multi-channel ionization contribution percentage attosecond retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme §5声称Peschel等已实现双通道耦合TDSE模拟作为TDSE选型论证的文献地基",
+      "missing_evidence": "[7]原文无\"双通道耦合TDSE模拟\"内容（其\"通道\"指分波而非电离阈通道）；需要找到真实的多通道电离阈值耦合TDSE模拟文献，或将选型论证改为基于物理判据而非文献先例",
+      "search_keywords": [
+        "multi-channel ionization TDSE simulation attosecond streaking",
+        "two-channel TDSE attosecond retrieval coupling",
+        "interchannel coupling time-dependent Schrödinger equation streaking",
+        "dual channel TDSE simulation multi-electron"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme L51/L121中混合度映射函数(0.5-2 eV重叠宽度)与表2通道重叠度映射的文献依据",
+      "missing_evidence": "Peschel[7]无通道重叠度映射内容；需要找到N₂ 15.58→115.6 eV换算、通道重叠宽度计算的原始理论文献，或将其标注为本方案设计参数",
+      "search_keywords": [
+        "channel overlap width attosecond streaking multi-channel",
+        "N2 ionization threshold 15.58 eV cross section",
+        "photoionization cross section overlap energy width EUV water window",
+        "channel coupling strength multichannel TDSE attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "N₂ 15.58→115.6 eV换算及通道重叠宽度的理论依据",
+      "missing_evidence": "该换算出现在content §2.2/K1/K2但content标准禁止渗方案细节，且无明确文献支撑此特定数值",
+      "search_keywords": [
+        "N2 photoionization cross section 15.58 eV threshold",
+        "nitrogen 1s binding energy 409.7 eV soft X-ray",
+        "multi-channel ionization overlap width eV",
+        "N2 K-shell ionization cross section water window"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "水窗阿秒条纹实验中\"角积分抑制偶极相位\"（Pabst-Dahlström方法）的实验验证文献",
+      "missing_evidence": "scheme中\"角度积分抑制偶极相位\"作为R2方案核心步骤，但缺乏直接的实验验证文献（如Pabst-Dahlström 2016 PANDA的实测数据）",
+      "search_keywords": [
+        "Pabst Dahlstrom angular integration attosecond streaking dipole phase",
+        "PANDA attosecond streaking rare gas target",
+        "angular averaged streaking experimental verification",
+        "dipole phase suppression kinetic energy dependence"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "16通道TOF阵列探测器角度积分的实验先例文献",
+      "missing_evidence": "scheme中16通道TOF阵列作为R3实现路径，但未引用具体的探测器设计/标定文献",
+      "search_keywords": [
+        "16 channel TOF array detector attosecond streak camera",
+        "Laurent attosecond TOF detector Rev Sci Instrum",
+        "TOF array angular resolution attosecond spectrometry",
+        "angular integration dipole phase suppression multi-channel"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme §4中TOF弃磁瓶的物理判据论证",
+      "missing_evidence": "评审通过但缺乏与磁瓶式电子谱仪在阿秒条纹场景下的对比文献",
+      "search_keywords": [
+        "TOF vs magnetic bottle attosecond streaking",
+        "time-of-flight electron spectrometer attosecond pulse retrieval",
+        "magnetic bottle electron spectrometer multi-channel limitation",
+        "TOF detector energy resolution attosecond streaking"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "full_review"
+}

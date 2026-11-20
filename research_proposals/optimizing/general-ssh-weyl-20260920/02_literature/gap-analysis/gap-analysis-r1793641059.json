@@ -1,0 +1,19 @@
+{
+  "gaps": [
+    {
+      "claim": "“首次将高阶拓扑量在 HHG 谱中不可观测这一断言转为可量化检验的命题”的原创性定位。",
+      "missing_evidence": "缺少证明该命题尚未被已有研究提出的系统检索与相近文献对比。需说明检索数据库、检索式、检索时间范围及纳入和排除标准，并引用高阶拓扑绝缘体、拓扑边界态及拓扑材料高次谐波产生/非线性光谱响应方面的最接近工作，阐明其与本方案的差别。若无法排除既有研究，应将“首次”弱化为“据我们所知”或“拟系统检验”。",
+      "search_keywords": [
+        "高阶拓扑绝缘体 高次谐波生成 HHG",
+        "高阶拓扑材料 非线性光学响应 谐波谱",
+        "拓扑边界态 高次谐波辐射",
+        "higher-order topological insulator high harmonic generation",
+        "higher-order topological insulator nonlinear optical response",
+        "topological edge states HHG spectroscopy",
+        "harmonic emission topological insulator"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

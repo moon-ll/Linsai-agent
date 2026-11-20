@@ -1,0 +1,4 @@
+{
+  "gaps": [],
+  "note": "agent 未返回标准 JSON gaps 格式，视为无文献缺口。原文前200字: {\"gaps\": [{\"claim\": \"CrSb 等 d 波自旋劈裂序参量的实验观测数值范围（rationale 给出约 0.6 eV，scheme 先验给出 100—500 meV，存在跨章矛盾）\", \"missing_evidence\": \"CrSb/MnTe/RuO2 等 d 波 altermagnet 自旋劈裂的 ARPES 实验标定值与 band-resolved d-wave/g-w"
+}

@@ -1,0 +1,28 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.2 L31「Liu 等…首次观测到经典光驱动 HHG」——具名作者 + 「首次」优先权断言，但文献表 40 条中无任何 Liu 条目",
+      "missing_evidence": "缺少 Liu 等人关于经典光驱动固体 HHG 首次观测的原始文献条目（评审经 refs 核验指向 Liu 2017, Nat. Photonics 11, 28）；若无该文献支撑，则「首次」优先权主张不成立，需删去「首次」并改引现有 [36]",
+      "search_keywords": [
+        "Liu 2017 Nature Photonics high harmonic generation solid",
+        "first observation classical light driven HHG solid",
+        "high-order harmonic generation solid state first observation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "全章 15 处具名引用首现处缺角标（Iglesias、Gothelf、Tzur、Li、Lange、Rasputnyi、Boroumand、Jiang 等），正文角标仅 9 处，低于范本 10-17 区间",
+      "missing_evidence": "需逐条核验各具名断言在文献表/检索池（lit-gap、candidates.bib、reading-notes）中均有对应真实条目，并在首现处挂正确角标（评审建议 [11]/[15]/[2,23]/[8]/[16]/[1]/[10]/[14]）；池中无记录者须补充检索，防止具名引用凭记忆杜撰",
+      "search_keywords": [
+        "Gothelf quantum light HHG theory",
+        "Even Tzur three-step model single atom HHG",
+        "Iglesias polarization resolved harmonic MoS2",
+        "Rasputnyi HHG yield precision",
+        "Boroumand high harmonic generation",
+        "Jiang monolayer MoS2 high harmonic"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

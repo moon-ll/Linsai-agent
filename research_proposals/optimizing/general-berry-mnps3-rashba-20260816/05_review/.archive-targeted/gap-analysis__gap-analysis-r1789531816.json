@@ -1,0 +1,71 @@
+{
+  "gaps": [
+    {
+      "claim": "NRSS（nonrelativistic spin splitting）按堆垛对称性分为 S1/S2 两类，S2 表现为 altermagnetism 型",
+      "missing_evidence": "缺少 NRSS 分类（S1 vs S2 堆垛）的原始理论/实验文献支撑，特别是 altermagnetism 型与堆垛构型的对应关系",
+      "search_keywords": [
+        "nonrelativistic spin splitting stacking classification altermagnet",
+        "S1 S2 stacking NRSS MnPS3",
+        "altermagnetism stacking dependent spin splitting",
+        "Smejkal altermagnet spin group symmetry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "THz 单光子能量 4-8 meV 与滑移势垒 16-40 meV 的多光子匹配机制",
+      "missing_evidence": "缺少 THz 场（4-8 meV 光子能量）驱动层间滑移越过势垒（16-40 meV）所需光子数与匹配效率的定量论证",
+      "search_keywords": [
+        "THz driven interlayer sliding barrier overcome",
+        "multiphoton interlayer sliding van der Waals",
+        "THz phonon excitation sliding ferroelectric barrier",
+        "terahertz field sliding transition barrier"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "非线性声子通道作为光应力/红外声子之外的第三条驱动机制，与三通道划分口径统一",
+      "missing_evidence": "缺少非线性声子通道驱动层间滑移的实验或第一性原理证据（区别于线性光应力和红外声子直接激发）",
+      "search_keywords": [
+        "nonlinear phonon channel interlayer sliding",
+        "anharmonic phonon driven sliding ferroelectric",
+        "nonlinear phonon excitation van der Waals homostructure",
+        "nonlinear lattice dynamics layer sliding"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R1 预期产出'三通道各自主导的场强区间划分'与目标量化指标衔接",
+      "missing_evidence": "缺少三通道（光应力/红外声子/非线性声子）各自主导场强区间的实验标定或理论预测文献",
+      "search_keywords": [
+        "three channel sliding mechanism field strength threshold",
+        "dominant channel field dependent interlayer sliding",
+        "sliding ferroelectric mechanism field range",
+        "channel competition sliding driving mechanism"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "五个指纹量的'首选 2 + 辅助 3'分组依据与圆偏振 HHG 中 i-wave 劈裂的定量谱学指纹",
+      "missing_evidence": "缺少 i-wave altermagnet 在圆偏振 HHG 中的指纹量定义文献，特别是椭圆度过零点和阶次周期性作为判据的实验依据",
+      "search_keywords": [
+        "i-wave altermagnet circular HHG fingerprint",
+        "circular polarized HHG altermagnet signature",
+        "ellipticity zero crossing altermagnet harmonic",
+        "harmonic order periodicity altermagnet spectrum"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnPS3|WS2 异质结中 i-wave 与 d-wave/g-wave 的分类区分度 d′≥3 对应 10% 噪声下双样本判别准确率 93%",
+      "missing_evidence": "缺少 d′（detectability index）与高斯噪声下判别准确率换算的标准统计文献，以及不同 altermagnet 波型在异质结 HHG 中的区分度基准",
+      "search_keywords": [
+        "d-prime detectability accuracy Gaussian noise conversion",
+        "signal detection theory two sample discrimination",
+        "altermagnet d-wave g-wave i-wave HHG distinguishability",
+        "MnPS3 WS2 heterostructure altermagnet HHG"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "content"
+}

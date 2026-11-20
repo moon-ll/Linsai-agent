@@ -1,0 +1,63 @@
+{
+  "gaps": [
+    {
+      "claim": "拟首次被实验反演信号观测到的瞬态量子相",
+      "missing_evidence": "L222 novelty claim '拟首次被实验反演信号观测到' 缺少系统检索范围和截止日期的文献佐证，需确认无前人实验工作",
+      "search_keywords": [
+        "transient quantum phase experimental inversion HHG",
+        "subcycle quantum phase retrieval solid state experiment",
+        "attosecond transient phase reconstruction harmonic signal",
+        "all-optical quantum phase readout experimental demonstration",
+        "瞬态量子相 实验反演 高次谐波"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预印本[58-62]引用的AI/逆问题方法",
+      "missing_evidence": "references [58-62] 为预印本，核实状态不明，需确认是否已正式发表及同行评审状态，或补充已发表的替代文献",
+      "search_keywords": [
+        "VAE diffusion model physics inverse problem",
+        "generative surrogate model spectroscopy inversion peer-reviewed",
+        "physics-informed neural network nonlinear optics inversion published",
+        "variational autoencoder optical parameter retrieval journal",
+        "diffusion model scientific inverse problem surrogate publication"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "研究方案中AI逆问题方法与已有基准的锚点对比",
+      "missing_evidence": "锚点对比不通过，研究方案中提出的物理约束AI反演方法缺少与已有benchmark方法的定量对比文献",
+      "search_keywords": [
+        "HHG spectroscopy inversion benchmark comparison",
+        "nonlinear optics inverse problem method comparison quantitative",
+        "physics-informed neural network benchmark optical inversion",
+        "Bayesian vs neural network parameter retrieval spectroscopy",
+        "attosecond spectroscopy reconstruction method validation benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Shah与Cangi[51]、Zhao与Zou[52]的AI物理逆问题方法可迁移至HHG反演",
+      "missing_evidence": "§2.3(a)和§5(3)中重复引用这四篇文献形成文献堆砌，需补充更多样化的、已发表的AI逆问题文献以拓宽文献基础",
+      "search_keywords": [
+        "machine learning nonlinear optics inverse problem generalization",
+        "neural network HHG parameter retrieval cross-material",
+        "physics-constrained deep learning optical inverse problem published",
+        "deep learning spectroscopy phase retrieval method",
+        "AI-driven attosecond spectroscopy inversion peer-reviewed"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "RT-TDDFT计算成本与紧束缚混合方法的可行性",
+      "missing_evidence": "研究方案中混合TDDFT-紧束缚计算策略缺少计算成本基准和可行性论证文献",
+      "search_keywords": [
+        "real-time TDDFT computational cost benchmark core-hour",
+        "TDDFT tight-binding hybrid strong field solid HHG",
+        "RT-TDDFT superlattice computational feasibility cost scaling",
+        "ab initio strong field simulation core-hour benchmark"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,114 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb中通过磁场反转（±H）差分作为主提取维度的物理前提已建立",
+      "missing_evidence": "缺少CrSb或其他altermagnet中磁场可调制/反转altermagnetic order的实验证据（磁相图、磁化曲线、奈尔温度附近的磁响应），以及磁场强度阈值（需多少Tesla可实现反转）的前期数据",
+      "search_keywords": [
+        "CrSb altermagnet magnetic field order parameter modulation",
+        "CrSb magnetic phase diagram Neel temperature",
+        "altermagnet order reversal magnetic field Tesla",
+        "CrSb magnetization anomalous Hall"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1% HHG信号差分（磁场反转前后）可在实验噪声底限之上被可靠测量",
+      "missing_evidence": "缺少CrSb或类似altermagnet中典型HHG产额、磁场反转前后差分幅度、探测器shot noise底限、以及累积时间/重复率对SNR提升的定量文献",
+      "search_keywords": [
+        "solid-state HHG signal-to-noise ratio altermagnet experimental",
+        "HHG magnetic field differential signal amplitude percent",
+        "HHG shot noise floor photon count limit",
+        "CrSb HHG yield photon flux measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "磁Bragg峰/反常Hall电导交叉验证可作为HHG序参量提取的独立判据",
+      "missing_evidence": "缺少HHG光谱与磁Bragg峰（中子散射）或反常Hall电导（输运）在altermagnet中提供独立序参量证据的对照实验文献，以及三种测量在时间/空间分辨率上的可比性分析",
+      "search_keywords": [
+        "magnetic Bragg peak altermagnet neutron diffraction CrSb",
+        "anomalous Hall altermagnet CrSb experimental signature",
+        "HHG cross-validation magnetic order transport",
+        "altermagnet spin structure neutron diffraction fingerprint"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Fisher信息矩阵在HHG反演中的阈值判据（如后验50%即单峰）已建立",
+      "missing_evidence": "缺少Fisher信息矩阵应用于HHG光谱反演序参量的具体阈值/置信区间文献，特别是后验分布单峰判据的统计意义、所需样本量及与Cramer-Rao下界的关系",
+      "search_keywords": [
+        "Fisher information high harmonic inversion Cramer-Rao bound",
+        "posterior distribution unimodal Bayesian HHG spectroscopy",
+        "statistical criterion HHG parameter reconstruction confidence",
+        "Fisher information nonlinear optics inverse problem threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "No-Go机制（特定对称性/数据条件下HHG无法唯一提取序参量）的理论框架已建立",
+      "missing_evidence": "缺少HHG反演中No-Go定理（对称性约束、测量不完备导致反演非唯一）的文献，特别是本项目所引用的No-Go机制的具体理论出处与适用边界",
+      "search_keywords": [
+        "No-Go theorem inverse problem spectroscopy uniqueness",
+        "HHG retrieval non-identifiability symmetry constraint",
+        "Bayesian inversion identifiability HHG spectroscopy",
+        "inverse problem altermagnet order parameter uniqueness"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb中altermagnetic order的高次谐波指纹已有具体的理论预言或初步观测",
+      "missing_evidence": "缺少针对CrSb体系的HHG能带分辨贡献、偏振依赖性、自旋极化谐波信号强度的具体理论计算/实验观测（区别于一般altermagnet HHG工作如Werner等）",
+      "search_keywords": [
+        "CrSb high harmonic generation theory prediction band-resolved",
+        "CrSb spin-polarized HHG calculation ab initio",
+        "CrSb nonlinear optical response altermagnet specific",
+        "CrSb TDDFT high harmonic spectrum prediction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TiSe₂作为CDW-HHG对照体系的科学合理性已通过既有文献验证",
+      "missing_evidence": "缺少TiSe₂中HHG探测CDW序参量的实验先例（特别是磁场响应行为），以及TiSe₂与CrSb两类序参量（CDW vs altermagnetic）提取路径等价性的论证文献",
+      "search_keywords": [
+        "TiSe2 CDW high harmonic generation experimental observation",
+        "TiSe2 charge density wave HHG magnetic field response",
+        "TiSe2 ultrafast HHG order parameter fingerprint",
+        "TiSe2 HHG CDW symmetry breaking"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "半导体Bloch方程（SBE）与TDDFT在CrSb/altermagnet强关联体系中的适用边界已建立",
+      "missing_evidence": "缺少SBE在强关联altermagnet体系（多带、自旋极化、 Hubbard U修正）中适用条件的文献，以及TDDFT+U对CrSb电子结构和HHG响应可靠性验证的对照计算",
+      "search_keywords": [
+        "semiconductor Bloch equations altermagnet strongly correlated applicability",
+        "TDDFT+U CrSb band structure altermagnet validation",
+        "SBE multi-band spin-polarized HHG theory limitation",
+        "TDDFT high harmonic spectrum strongly correlated material"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "磁场—序参量耦合系数可作为独立可测量物理量在四年面上项目中完成",
+      "missing_evidence": "缺少CrSb中磁化强度、磁化率、比热、中子散射联合测量序参量温度依赖的实验文献，作为耦合系数提取的输入",
+      "search_keywords": [
+        "CrSb magnetic susceptibility order parameter temperature dependence",
+        "CrSb spin-flop transition altermagnet",
+        "CrSb magnetic structure low temperature neutron",
+        "CrSb magnetization curve altermagnetic order"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "OPA低温强磁+X射线/输运并行测量的实验可行性已有同类项目实施先例",
+      "missing_evidence": "缺少HHG+低温强磁+X射线衍射/输运并行测量的4年项目级别实施先例文献，包括时间分配、技术整合、数据同步方案",
+      "search_keywords": [
+        "HHG cryostat strong magnet simultaneous X-ray diffraction",
+        "ultrafast X-ray HHG transport concurrent measurement",
+        "multimodal ultrafast spectroscopy cryogenic experimental",
+        "high harmonic generation simultaneous transport probe feasibility"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

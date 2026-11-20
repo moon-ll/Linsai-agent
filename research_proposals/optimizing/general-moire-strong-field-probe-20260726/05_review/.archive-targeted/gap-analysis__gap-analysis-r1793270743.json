@@ -1,0 +1,31 @@
+{
+  "gaps": [
+    {
+      "claim": "“精度 <5%”目前被表述为已具备的测量能力，但缺少文献依据。",
+      "missing_evidence": "需要补充与拟测量观测量和反演方法直接相关的方法学文献，用于说明仪器分辨率、标定误差、信号重建误差及总误差预算为何能够支持 5% 以内的精度；优先选择报告重复性、偏差或不确定度的实验研究。若 5% 仅为本项目预设的验收目标，则不应以既成事实表述，也不需要外部文献证明，但应明确标注为“协议目标（方案章 §3.2）”并给出计算或标定方法。",
+      "search_keywords": [
+        "solid-state high-harmonic spectroscopy measurement uncertainty",
+        "strong-field moire fringe reconstruction accuracy",
+        "ΔΣ(ω) self-energy reconstruction precision",
+        "polarization-resolved pump-probe measurement precision",
+        "强场 莫尔 探测 精度 不确定度",
+        "高次谐波 测量 误差预算"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "“ZnO 基准偏差 <2%”缺少基准数据、比较指标和原始文献的明确归属。",
+      "missing_evidence": "需要引用 ZnO 体相高次谐波实验的原始论文或可靠数据来源，并给出用于比较的物理量，例如截止能、谱峰位置或目标频段积分强度；同时应说明“偏差”的计算定义、实验不确定度以及 2% 阈值的来源。若该数值是本项目方案阶段拟达到的模型—实验偏差目标，而非已有结果，应改写为前瞻性协议目标，并关联方案章的验证与验收方法。",
+      "search_keywords": [
+        "ZnO bulk high-order harmonic generation spectrum",
+        "ZnO solid-state HHG cutoff energy benchmark",
+        "Ghimire ZnO high harmonic generation 2010",
+        "ZnO crystal high harmonic emission experimental uncertainty",
+        "1.76 eV ZnO high harmonic cutoff",
+        "ZnO 高次谐波 截止能 实验"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

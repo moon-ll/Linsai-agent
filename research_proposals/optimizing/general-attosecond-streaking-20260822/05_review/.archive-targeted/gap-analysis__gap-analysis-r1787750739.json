@@ -1,0 +1,44 @@
+{
+  "gaps": [
+    {
+      "claim": "§4.2 技术实现称非共线 XUV-IR 干涉仪的延迟稳定性已达到优于 100 as，未提供文献支撑",
+      "missing_evidence": "缺乏 100 as 量级延迟稳定性的实验文献或技术报告",
+      "search_keywords": [
+        "XUV-IR interferometer delay stability attosecond",
+        "non-collinear XUV-IR attosecond streak delay stability",
+        "attosecond streak camera interferometer temporal resolution"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.1 装置参数 16 通道 TOF 阵列探测器、ΔE/E≈0.25% 等具体技术指标无文献引用",
+      "missing_evidence": "16 通道 TOF 阵列探测器的技术指标（ΔE/E≈0.25%）缺乏可追溯的文献支撑或装置已有验证报告",
+      "search_keywords": [
+        "16 channel TOF array detector energy resolution",
+        "time-of-flight detector 0.25 percent energy resolution attosecond",
+        "TOF array detector angular resolution attosecond spectrometry"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 适用条件 0.5–2 eV 重叠宽度与 §3.1 靶材选取段 CH₄/N₂ 多通道贡献 15%–30% 之间缺乏映射依据",
+      "missing_evidence": "多通道贡献百分比（15%–30%）与重叠宽度（0.5–2 eV）之间的换算关系或对应阈值无文献支撑",
+      "search_keywords": [
+        "multi-channel photoionization overlap width eV",
+        "attosecond streaking channel overlap energy width",
+        "photoionization cross section multi-channel overlap threshold eV"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§6 备选路径 A 触发条件通道混合度 >30% 与 §3.3 失效边界多通道贡献 >50% 存在数量级/阈值分歧",
+      "missing_evidence": "30% 与 50% 两个多通道触发阈值缺乏统一的实验或理论文献支撑",
+      "search_keywords": [
+        "multi-channel ionization threshold percentage attosecond",
+        "channel mixing threshold FROG-CRAB attosecond streaking",
+        "photoionization multi-channel fraction measurement threshold"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

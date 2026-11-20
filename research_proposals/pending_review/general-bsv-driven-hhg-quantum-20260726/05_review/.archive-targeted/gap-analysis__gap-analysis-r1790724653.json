@@ -1,0 +1,61 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.7 L77 创新点一指出'经典光驱动多带 SBE 与气体原子量子光 HHG 框架均未明确声明适用条件—失效边界'，即现有两类主流模型均未给出适用边界",
+      "missing_evidence": "需要具体引用现有的多带 SBE 半导体 HHG 文献与气体原子量子光 HHG 框架文献（多篇），以实证方式说明这些工作未声明适用边界或失效条件，而非以泛指概括承担举证责任",
+      "search_keywords": [
+        "semiconductor Bloch equations high harmonic generation",
+        "multiband SBE HHG applicability",
+        "quantum light HHG gas atom framework",
+        "few-cycle SBE validity range",
+        "quantum-optical HHG model"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.3 L33、§3.5 L55、§3.7 L79 三处具名提及 'Liu 等'（两处）与 'Boroumand 等'（一处）的研究结论，但未挂载 [N] 引用编号",
+      "missing_evidence": "Liu 等（应为 [6] Liu 2017）具体是哪一方向的贡献；Boroumand 等对应 [15] QSHHG，应在正文具名处补挂对应 [N]，并核对引用条目作者/年份/期刊一致",
+      "search_keywords": [
+        "Liu 2017 quantum HHG semiconductor",
+        "Boroumand quantum HHG",
+        "QSHHG quantum steering HHG",
+        "quantum-driven high harmonic generation review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.2 L15 论证'高增益 PDC 在宽增益范围内保留高阶光子数关联并可连续调节'，作为选择 PDC 而非低光子数压缩腔的依据",
+      "missing_evidence": "需要引用实验或理论文献直接证明'高增益 PDC 宽增益范围高阶光子数关联保留'与'压缩腔高阶关联不足'，目前仅有内禀论证而无外部文献背书",
+      "search_keywords": [
+        "high-gain parametric down-conversion photon number correlation",
+        "squeezed vacuum higher-order photon correlation",
+        "PDC vs squeezing cavity g(2) g(3)",
+        "multimode PDC photon statistics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.6 L69 以 [18] 莫尔超晶格绝缘相谐波信号作为'10% 可见度阈值的量级参照'，并称与 75–360 倍同阶",
+      "missing_evidence": "[18] 原图谐波增强倍数需回到原文重新核算（历史轮复算为 88–352，与申请书 75–360 不闭合）；需要确认 [18] 实验参数（光子能量、强度、极化）与本项目方案的可比性，并补充至少 1–2 篇其他莫尔/超晶格 HHG 实验文献作为交叉验证",
+      "search_keywords": [
+        "moiré superlattice high harmonic generation visibility",
+        "twisted bilayer graphene HHG enhancement factor",
+        "[18] original article figure verification",
+        "solid-state HHG visibility threshold reference"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.5 L55 'Bloch 形式化分工'的选用理由，以及 §3.3 L29 Jensen 间隙形式作为隔离'纯统计放大'协议的判据核心",
+      "missing_evidence": "Bloch 形式化相对其他半经典/全量子形式化的优势需要文献支撑；Jensen 不等式/间隙在统计隔离协议中的应用需要方法学原始文献（非纯教科书），如因果推断或量子计量学中的统计放大隔离方法",
+      "search_keywords": [
+        "Bloch formalism semiconductor optics justification",
+        "Jensen gap statistical amplification isolation",
+        "semiconductor Bloch equation vs density matrix HHG",
+        "Jensen inequality quantum metrology"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

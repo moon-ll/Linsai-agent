@@ -1,0 +1,48 @@
+{
+  "gaps": [
+    {
+      "claim": "国内尚未见 altermagnet HHG 序参量反演的报道",
+      "missing_evidence": "缺乏国内超快磁光/磁性体系 HHG 相邻工作（CrSb/MnTe 样品生长、输运或光谱测量），无法支撑检索结论",
+      "search_keywords": [
+        "CrSb growth transport China",
+        "MnTe altermagnet Chinese group",
+        "antiferromagnet HHG ultrafast China",
+        "CrSb thin film China synthesis",
+        "国内 交变磁 超快 光谱"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 自旋分裂波型存在 d 波与 g 波争议",
+      "missing_evidence": "缺少 CrSb g 波 dHvA 节点证认文献（[36]对应原文），仅有 d 波 [17] 单边口径",
+      "search_keywords": [
+        "CrSb dHvA g-wave altermagnet",
+        "CrSb de Haas-van Alphen spin splitting",
+        "CrSb quantum oscillation node altermagnet",
+        "Reimers CrSb thin film STS"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb 中同类 d 波自旋分裂与终判依据",
+      "missing_evidence": "缺少 CrSb 自旋分裂波型 d/g 争议的并行引用与 dHvA 节点校准方法学依据",
+      "search_keywords": [
+        "CrSb spin splitting d-wave g-wave controversy",
+        "CrSb altermagnet wave type identification",
+        "altermagnet dHvA node calibration"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Liu 等人 (arXiv:2606.23806) 关于非相对论自旋轨道耦合效应",
+      "missing_evidence": "arXiv:2606.23806 未编入文献表，需补全作者、标题、期刊定位信息（Nonrelativistic SOC Effects in Odd-Parity Coplanar Magnets）",
+      "search_keywords": [
+        "arXiv:2606.23806 Nonrelativistic SOC coplanar magnet",
+        "Liu odd-parity coplanar antiferromagnet spin-orbit",
+        "coplanar magnet nonrelativistic spin splitting 2026"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

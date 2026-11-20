@@ -1,0 +1,11 @@
+{
+  "entries": [
+    {
+      "source_id": "paper:2026-2605.08049-light-driven-octupolar-inverse-faraday-effect-and-multipolar",
+      "title": "Light-driven octupolar inverse Faraday effect and multipolar order in Mott insulators",
+      "summary": "本文通过Floquet-Schrieffer-Wolff（高频范扶累克型）展开证明，圆偏振光在4d²/5d² Mott绝缘体中可诱导出八极版本的逆法拉第效应：光驱动的静态有效场与磁八极矩呈线性耦合。由于该耦合对序参量是线性的，这一机制为操控和探测对中子衍射等传统手段不可见的隐藏多极序提供了全光学途径。此外，该静态八极场进一步与晶格自由度耦合，预言了可用结构探测手段分辨的光致结构畸变指纹。",
+      "path": "knowledge/raw/papers/2026-2605.08049-light-driven-octupolar-inverse-faraday-effect-and-multipolar.md"
+    }
+  ],
+  "updated_at": "2026-11-20T16:35:32Z"
+}

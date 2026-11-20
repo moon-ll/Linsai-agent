@@ -1,0 +1,53 @@
+{
+  "gaps": [
+    {
+      "claim": "Nikola 等 2021 年论文的作者署名应为 Shan J.-Y. 等，rationale 中 4 处 Nikola 署名与 references.md 中 Shan J.-Y. 不一致",
+      "missing_evidence": "该 Nature 论文真实作者为 Shan J.-Y. 等而非 Nikola，rationale 全文 4 处引用 Nikola 等与 scheme L43 的 Shan 等及 references.md [22] 条目存在署名双重错位",
+      "search_keywords": [
+        "Shan J.-Y. Nature 2021 giant modulation optical nonlinearity Floquet",
+        "nikola_nature_2021 Shan authorship correction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L75 用 ΔT/E_gap 比例推导 I_c 阈值，但 ΔT 是强度跳变量与驱动强度阈值 I_c 之间非线性映射关系缺乏公式支撑",
+      "missing_evidence": "缺少 ΔT ∝ E_drive/E_gap 到 I_c 临界强度的定量推导公式；content §2.1/§2.2 中 δW_flat = e²E₀²/(4m*ω²) 量化预言与 rationale §1.4 的线性比例推导不对等",
+      "search_keywords": [
+        "ac-Stark effect临界强度关联绝缘态光致熔化推导公式",
+        "Floquet bandwidth modulation critical intensity formula",
+        "Nikola 2021 Floquet modulation intensity gap scaling derivation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L75 缺少 Xu 2024 配套引用，与 L39/L59 双引 Lian+Xu 的完整性不一致",
+      "missing_evidence": "L39 和 L59 均引用 Lian+Xu 双人，但 L75 推导 I_c 阈值处仅引 Lian，缺少 Xu Nat. Commun. 2024 关联态外场可调性的配套支撑",
+      "search_keywords": [
+        "Xu Nat Commun 2024 moire exciton valley pseudospin order tunable",
+        "Lian Nat Phys 2024 WS2 WSe2 moire Mott insulator",
+        "moire correlated insulator gate tunable optical excitation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔超晶格 HHG 探针强度阈值窗口缺乏实验数据支撑",
+      "missing_evidence": "rationale 提及探针/调控双模式强度窗口分离，但缺少莫尔超晶格在强场下的损伤阈值实验数据作为强度上限依据",
+      "search_keywords": [
+        "twisted bilayer graphene laser damage threshold femtosecond",
+        "moire superlattice high harmonic intensity window separation",
+        "TBG HHG strong field intensity limit damage"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "莫尔体系 HHG 反演中 Tikhonov 正则化与 L-curve 正则化参数选择方法的文献支撑不足",
+      "missing_evidence": "rationale 提出三层正则化框架但缺少 L-curve 方法选参的具体文献依据；莫尔欠定反演中正则化策略的可行性需要文献支撑",
+      "search_keywords": [
+        "Tikhonov regularization L-curve high harmonic inversion",
+        "ill-posed inversion regularization moire nonlinear optics",
+        "regularization parameter selection attosecond spectroscopy"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

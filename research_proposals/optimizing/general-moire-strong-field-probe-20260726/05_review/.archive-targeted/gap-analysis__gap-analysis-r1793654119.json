@@ -1,0 +1,19 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.4中“直接观察到 Floquet-Bloch 边带态”的表述",
+      "missing_evidence": "现有被引文献只能支撑“Floquet-Bloch 边带态可被高次谐波探测”或“HHG 谱可作为边带态存在的实验证据”，不能证明研究者“直接观察到”边带态。若保留“直接观察”这一强断言，需要补充明确直接测量或分辨 Floquet-Bloch 边带态的同行评议原始实验文献；否则应改为“以 HHG 谱给出 Floquet-Bloch 边带态的实验证据”，并准确说明现有文献提供的是间接谱学证据。",
+      "search_keywords": [
+        "direct observation Floquet-Bloch sideband states experiment",
+        "Floquet-Bloch sidebands direct spectroscopy",
+        "high harmonic generation probe Floquet-Bloch states",
+        "HHG spectroscopy Floquet sidebands solids",
+        "time-resolved Floquet sideband spectroscopy",
+        "Floquet Bloch 边带态 直接观测",
+        "高次谐波 探测 Floquet-Bloch 边带态"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

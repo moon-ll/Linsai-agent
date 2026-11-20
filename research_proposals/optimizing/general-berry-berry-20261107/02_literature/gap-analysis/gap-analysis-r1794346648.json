@@ -1,0 +1,107 @@
+{
+  "gaps": [
+    {
+      "claim": "1.4 P3 吴喜龙碲声子句：碲（Te）中手性声子调控 Berry 曲率偶极（BCD）、实现非线性霍尔符号翻转（国内现状段太赫兹调控支柱论断）",
+      "missing_evidence": "原挂 [20] 实为 Ye 等 WTe₂ Edelstein 效应论文，与碲/手性声子/符号翻转四要素均不匹配；需补挂正确文献——Chen 等关于碲手性声子调控 BCD 的预印本（arXiv:2411.18843，即 scheme §3.4.2 已挂的 [22]），并核实首作署名",
+      "search_keywords": [
+        "chiral phonon",
+        "Berry curvature dipole",
+        "tellurium",
+        "nonlinear Hall effect sign reversal",
+        "arXiv 2411.18843"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.1 P6 处论断：'BCD 拓扑相变点放大'机制；与 1.4 P4 同挂 [23] 但后者表述为'Berry 联络极化率偶极'，两处机制量互斥",
+      "missing_evidence": "需核查 [23] 原文实际内容以统一口径；若 [23] 为 Berry 联络极化率偶极论文，则 1.1 P6 需另行补挂一篇 BCD 随拓扑相变增强/放大的理论文献",
+      "search_keywords": [
+        "Berry curvature dipole",
+        "topological phase transition",
+        "nonlinear Hall effect theory",
+        "Berry connection polarizability dipole"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.2 P6 [13] 句：Cd₃As₂ 被表述为'强关联半导体'",
+      "missing_evidence": "文献支撑与事实不符——[13] 条目题名即为 Dirac semimetal；需以 Cd₃As₂ 作为拓扑 Dirac 半金属的原始/权威文献（如 Cd₃As₂ 输运或 ARPES 探测 Dirac 锥的工作）替换或校正该论断",
+      "search_keywords": [
+        "Cd3As2",
+        "Dirac semimetal",
+        "topological semimetal",
+        "three-dimensional Dirac cone"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.2 P4 Ma 句具名成果（零角标无对应条目）",
+      "missing_evidence": "需补 Ma 等人关于 BCD/非线性霍尔相关工作的原始论文条目，并核对其发表年份与句述一致",
+      "search_keywords": [
+        "Ma",
+        "Berry curvature dipole",
+        "nonlinear Hall effect",
+        "quantum nonlinear Hall"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.1 P6 Nb₂ₙ₊₁SiₙTe₄ₙ₊₂ 材料族具名成果（零角标无对应条目）",
+      "missing_evidence": "需补 Nb₂ₙ₊₁SiₙTe₄ₙ₊₂（铌硅碲）极性/拓扑半金属家族的原始发现文献，支撑该材料族在非线性霍尔/BCD 语境下的引用",
+      "search_keywords": [
+        "Nb2n+1SinTe4n+2",
+        "niobium silicon telluride",
+        "polar semimetal",
+        "Wyl semimetal",
+        "Berry curvature dipole"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.4 P4 NbIrTe₄ 具名成果（零角标无对应条目）",
+      "missing_evidence": "需补 NbIrTe₄ 作为 Weyl/极性半金属及其非线性输运（BCD 或非线性霍尔）相关原始文献",
+      "search_keywords": [
+        "NbIrTe4",
+        "Weyl semimetal",
+        "polar metal",
+        "nonlinear Hall effect",
+        "Berry curvature dipole"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.4 P2 石墨烯/黑磷异质结具名成果（零角标无对应条目）",
+      "missing_evidence": "需补石墨烯/黑磷（BP）异质结中 BCD 或量子非线性霍尔相关原始论文，支撑该具名论断",
+      "search_keywords": [
+        "graphene black phosphorus heterostructure",
+        "Berry curvature dipole",
+        "nonlinear Hall effect",
+        "inversion symmetry breaking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1.2 P7 Eslami 句：'2025 年计算'与 [15] 条目年份 (2026) 不符",
+      "missing_evidence": "需核实 Eslami 等计算工作的真实发表/预印本年份，统一正文表述与参考文献条目年份；若以预印本年份引用需注明版本",
+      "search_keywords": [
+        "Eslami",
+        "Berry curvature dipole",
+        "first-principles calculation",
+        "nonlinear Hall"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "1.3 P7 Ce₃Bi₄Pd₃ 实验证据句：实验观测论断转挂理论文 [31]",
+      "missing_evidence": "需补 Ce₃Bi₄Pd₃（Kondo 绝缘体体系）非线性霍尔/BCD 实验观测的原始实验论文，或明确注明经理论文转引",
+      "search_keywords": [
+        "Ce3Bi4Pd3",
+        "Kondo insulator",
+        "nonlinear Hall effect",
+        "Berry curvature dipole experimental"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

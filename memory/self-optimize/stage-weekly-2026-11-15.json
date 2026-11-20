@@ -1,0 +1,134 @@
+{
+  "generated_at": "2026-11-15T01:19:49Z",
+  "window": {
+    "cur_start": "2026-11-08T01:19:49Z",
+    "prev_start": "2026-11-01T01:19:49Z"
+  },
+  "stages": [
+    {
+      "step": "llm_router:glm",
+      "cur_total": 442,
+      "prev_total": 1153,
+      "cur_failure_rate": 25.6,
+      "prev_failure_rate": 21.4,
+      "cur_p50_s": 36.5,
+      "prev_p50_s": 26.1,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:minimax",
+      "cur_total": 414,
+      "prev_total": 472,
+      "cur_failure_rate": 63.0,
+      "prev_failure_rate": 74.2,
+      "cur_p50_s": 0.0,
+      "prev_p50_s": 0.0,
+      "regressions": []
+    },
+    {
+      "step": "hermes_agent:researcher",
+      "cur_total": 228,
+      "prev_total": 221,
+      "cur_failure_rate": 32.9,
+      "prev_failure_rate": 41.6,
+      "cur_p50_s": 277.5,
+      "prev_p50_s": 219.9,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:kimi",
+      "cur_total": 200,
+      "prev_total": 233,
+      "cur_failure_rate": 26.5,
+      "prev_failure_rate": 19.3,
+      "cur_p50_s": 39.0,
+      "prev_p50_s": 56.7,
+      "regressions": [
+        "R1 失败率 19.3%→26.5%（+7.2pp）"
+      ]
+    },
+    {
+      "step": "llm_router:glm-fallback",
+      "cur_total": 88,
+      "prev_total": 16,
+      "cur_failure_rate": 98.9,
+      "prev_failure_rate": 100.0,
+      "cur_p50_s": 0.0,
+      "prev_p50_s": 0.0,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:claude",
+      "cur_total": 43,
+      "prev_total": 23,
+      "cur_failure_rate": 93.0,
+      "prev_failure_rate": 100.0,
+      "cur_p50_s": 0.0,
+      "prev_p50_s": 0.0,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:minimax-fallback",
+      "cur_total": 38,
+      "prev_total": 26,
+      "cur_failure_rate": 81.6,
+      "prev_failure_rate": 84.6,
+      "cur_p50_s": 0.0,
+      "prev_p50_s": 0.0,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:(all-failed)",
+      "cur_total": 13,
+      "prev_total": 15,
+      "cur_failure_rate": 100.0,
+      "prev_failure_rate": 100.0,
+      "cur_p50_s": 242.1,
+      "prev_p50_s": 362.9,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:c-ok",
+      "cur_total": 0,
+      "prev_total": 7,
+      "cur_failure_rate": null,
+      "prev_failure_rate": 0.0,
+      "cur_p50_s": null,
+      "prev_p50_s": 0.0,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:c-think",
+      "cur_total": 0,
+      "prev_total": 7,
+      "cur_failure_rate": null,
+      "prev_failure_rate": 100.0,
+      "cur_p50_s": null,
+      "prev_p50_s": 0.0,
+      "regressions": []
+    },
+    {
+      "step": "llm_router:q-think",
+      "cur_total": 0,
+      "prev_total": 7,
+      "cur_failure_rate": null,
+      "prev_failure_rate": 100.0,
+      "cur_p50_s": null,
+      "prev_p50_s": 0.0,
+      "regressions": []
+    }
+  ],
+  "regressions": [
+    {
+      "step": "llm_router:kimi",
+      "flags": [
+        "R1 失败率 19.3%→26.5%（+7.2pp）"
+      ]
+    }
+  ],
+  "summary": {
+    "stages_compared": 11,
+    "regression_count": 1,
+    "note": "规则：R1 失败率 ≥+5pp（样本≥5）；R2 p50 ≥+50%（上周 p50≥60s）；窗口样本 <3 的低频阶段不比对"
+  }
+}

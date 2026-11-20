@@ -1,0 +1,41 @@
+{
+  "gaps": [
+    {
+      "claim": "“该类卫星主要分布在 54–64 eV 关联阈附近”，并据此将观测卫星峰归属于 shake-up 关联通道。",
+      "missing_evidence": "缺少直接报告 54–64 eV 区间卫星峰位置及其阈值归属的原始实验文献或高精度多电子理论计算文献。支撑材料应明确目标离子或电子态、关联阈能量、卫星峰能量、实验或计算方法以及能量不确定度；仅有综述性陈述不足以支撑该定量区间。现有 [20] Tarrant 未被正文实引，需核验其是否确实给出该能区数据，否则应补充直接文献。",
+      "search_keywords": [
+        "54 64 eV shake-up satellite threshold photoionization",
+        "shake-up satellite energy near correlation threshold",
+        "correlation-induced satellite high-harmonic spectroscopy",
+        "Tarrant shake-up satellite threshold spectrum",
+        "inner-valence shake-up satellite 54 eV 64 eV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "“以含关联方法单独核算 shake-up 残离子关联通道”具有明确理论含义、适用条件及可复现性。",
+      "missing_evidence": "缺少对所采用关联方法的具体命名和原始方法文献，例如 R-matrix、CI-TDSE 或其他明确的含关联多电子方法；还需文献说明该方法对所研究离子态、shake-up 通道及阈附近能区的适用边界，并提供与实验或其他可靠方法的基准对照。当前“含关联方法”无法据以选择模型或复现计算。",
+      "search_keywords": [
+        "CI-TDSE shake-up satellite photoionization",
+        "R-matrix shake-up satellite threshold calculation",
+        "multiconfigurational time-dependent Schrödinger equation inner-valence shake-up",
+        "coupled-cluster photoionization shake-up satellite",
+        "correlated multielectron method benchmark inner-valence ionization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.1 中将 Peschel[7]、Ortmann[23] 和 Cousin[2] 概括为“两项理论工作”。",
+      "missing_evidence": "缺少能够核实各文献成果类型的原始出处或准确的书目信息。Peschel[7] 属于角分辨 RABBIT 实验工作，Ortmann[23] 属于综述，Cousin[2] 属于实验工作，因此需要逐项核对并采用“方法学综述与实验证据”等准确表述，同时保证相应文献在正文实引。",
+      "search_keywords": [
+        "Peschel angular-resolved RABBIT attosecond experiment",
+        "Ortmann review attosecond streaking multielectron dynamics",
+        "Cousin attosecond streaking experiment",
+        "Peschel RABBIT photoelectron angular distribution",
+        "Ortmann Cousin attosecond spectroscopy review"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

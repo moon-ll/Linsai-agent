@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "§一.1 首段末'定量幅度与文献报道的偏差落在文献不确定度量级之内'：本项目计算结果与文献 [1]（Tyulnev 等 TiSe₂ 各向异性谐波观测）的定量幅度偏差处于文献不确定度量级",
+      "missing_evidence": "缺少支撑该论断的具体数值证据：需要 [1] 原文报道幅度值及其不确定度数值、[2] 与本项目复算值与 [1] 的具体偏差数值；R1-01/R3-02 核验已证实 [1] 原文并无不确定度数值，现有'文献不确定度量级'口径属已废表述的残留变体，无文献可支撑",
+      "search_keywords": [
+        "TiSe2",
+        "anisotropic high harmonic generation",
+        "charge density wave amplitude",
+        "experimental uncertainty harmonic yield"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§一.4 MnTe ARPES 自旋分裂观测的两处引用（[28] Krempaský 与 [29] Osumi）在正文被读作重复挂靠，两文贡献未区分",
+      "missing_evidence": "缺少对两次独立 MnTe 自旋分裂观测各自贡献的文献级区分：需要确认两文的观测手段/精度/结论差异（例如 bulk-ARPES 与自旋分辨测量的互补性、分裂能量数值 0.8 eV 口径归属），以便正文注明两次独立观测互证而非同一工作的重复引用",
+      "search_keywords": [
+        "MnTe antiferromagnetic spin splitting",
+        "Krempaskky bulk ARPES",
+        "Osumi spin-resolved ARPES",
+        "antiferromagnet spin splitting energy"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

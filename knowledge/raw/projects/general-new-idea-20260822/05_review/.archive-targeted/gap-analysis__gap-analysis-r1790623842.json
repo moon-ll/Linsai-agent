@@ -1,0 +1,86 @@
+{
+  "gaps": [
+    {
+      "claim": "Werner 等人提出高次谐波产生的一般化选择规则，作为本项目对称性筛选的对照框架",
+      "missing_evidence": "正文§2.1 具名 Werner 但未挂[N]编号；需要确认 Werner 关于 HHG 普适选择规则的具体出处并补挂引用编号",
+      "search_keywords": [
+        "Werner high harmonic generation selection rules",
+        "generalized selection rule HHG symmetry",
+        "Werner nonlinear selection rule HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Haag 等人在 α-MnTe 上测得非平衡自旋密度偏振-角度响应，作为本项目偏振-角度映射读出的对比基准",
+      "missing_evidence": "正文§2.1 提及 Haag 但仅一处[17]显式挂编号；需核对 [17] 是否就是 Haag 关于 α-MnTe 偏振-角度 HHG 的具体文献，并补齐其他可能的 α-MnTe HHG 偏振响应文献作为对照",
+      "search_keywords": [
+        "Haag α-MnTe high harmonic generation",
+        "non-equilibrium spin polarization MnTe HHG",
+        "alpha-MnTe polarization-angle HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mizuno 提出自旋群分析用于 HHG 体系，对应本项目内容一的对称性筛选物理图像",
+      "missing_evidence": "正文§2.1 具名 Mizuno 但未挂[N]编号；需检索 Mizuno 关于自旋群(spin group)与 HHG 选择规则分析的具体论文并补挂引用",
+      "search_keywords": [
+        "Mizuno spin group analysis HHG",
+        "spin group symmetry high harmonic generation",
+        "Mizuno antiferromagnet HHG selection rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ly 提出磁序驱动高次谐波产生框架，作为本项目区分磁相变前后谐波响应差异的对照",
+      "missing_evidence": "正文§2.1 具名 Ly 但未挂[N]编号；需检索 Ly 关于磁序/反铁磁序驱动 HHG 的原始工作并补挂引用编号",
+      "search_keywords": [
+        "Ly magnetic order driven HHG",
+        "antiferromagnet driven high harmonic generation Ly",
+        "Ly magnetic phase HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Osumi 在对称性/自旋分析与 HHG 偏振依赖方面的工作",
+      "missing_evidence": "正文§2.2 与§2.6 两处具名 Osumi 但未挂[N]编号；需检索 Osumi 对称性筛选或自旋 HHG 偏振依赖的相关论文并补挂引用",
+      "search_keywords": [
+        "Osumi spin symmetry HHG",
+        "Osumi high harmonic polarization magnetic",
+        "Osumi HHG ellipticity dependence"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Krempaský 关于 α-MnTe 或磁性材料 HHG 自旋极化角分辨的工作",
+      "missing_evidence": "正文§2.6 具名 Krempaský 但未挂[N]编号；需检索 Krempaský 在 α-MnTe 或磁二向色性 HHG 方面的具体文献并补挂引用",
+      "search_keywords": [
+        "Krempaský alpha-MnTe",
+        "Krempaský magnetic dichroism HHG",
+        "Krempaský spin resolved HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Usanov 在磁性体系 HHG 偏振/自旋分辨相关工作",
+      "missing_evidence": "正文§2.6 具名 Usanov 但未挂[N]编号；需检索 Usanov 关于磁性 HHG 或自旋极化谐波的具体论文并补挂引用",
+      "search_keywords": [
+        "Usanov magnetic high harmonic generation",
+        "Usanov spin polarized HHG",
+        "Usanov HHG magnetic material"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "椭圆率-螺旋度参数序列能够唯一区分 g 波自旋纹理与纯 SOC 机制写入谐波频谱的两种通道",
+      "missing_evidence": "§2.3 该唯一性论证仅一句带过，缺乏将椭圆率/螺旋度依赖作为 SOC vs 对称交换通道区分判据的文献支撑；需要补充在磁性材料 HHG 中利用椭圆率扫描分离 SOC 与磁交换贡献的实验/理论文献",
+      "search_keywords": [
+        "ellipticity dependence HHG magnetic material",
+        "helicity HHG spin orbit exchange",
+        "ellipticity scan distinguish SOC magnetic exchange HHG",
+        "g-wave spin texture HHG ellipticity"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,64 @@
+{
+  "gaps": [
+    {
+      "claim": "3 μm 驱动场能够'进入共振窗口'以增强 MnTe 中的高次谐波产生（content.md §2.2 L25）",
+      "missing_evidence": "评审明确判定该论证'不成立'。缺少对反铁磁体/拓扑材料中 HHG 共振增强机制的定量文献支撑，特别是关于驱动波长、共振条件（带隙倍数、激子态、磁振子态）与谐波产额之间关系的实验与理论证据",
+      "search_keywords": [
+        "high harmonic generation resonance condition antiferromagnet",
+        "HHG MnTe driving wavelength",
+        "multicycle HHG resonance enhancement",
+        "resonance HHG topological material",
+        "antiferromagnet HHG bandgap resonance"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "在 MnTe 单晶体系中开展自旋/偏振分辨 HHG 测量（content.md §2.1 首句，121 字长句）",
+      "missing_evidence": "该项目核心实验系统在文献中的可行性、可重复性及前期工作基础需要明确引证。缺少关于 MnTe 或同类反铁磁拓扑材料中 HHG 已有实验报告、磁光谐波产生理论框架的支撑文献，以证明该测量方案具备可执行的技术基础与预期信号强度",
+      "search_keywords": [
+        "MnTe high harmonic generation",
+        "spin-resolved HHG antiferromagnet",
+        "magnetic HHG altermagnet",
+        "polarization-resolved HHG topological",
+        "nonlinear magneto-optical MnTe harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "使用 SOC（自旋轨道耦合）量级差作为材料选择与体系区分的论证依据（content.md §2.2 L19）",
+      "missing_evidence": "评审标记'部分通过'。缺少将 SOC 量级差异与 HHG 选择定则、谐波产额、自旋角动量注入效率直接关联的定量文献；需引证 SOC 在 HHG 通道选择与偏振依赖中的具体机制研究",
+      "search_keywords": [
+        "spin-orbit coupling HHG selection rule",
+        "SOC effect high harmonic generation yield",
+        "spin-orbit coupling nonlinear optics magnetic",
+        "HHG spin angular momentum transfer",
+        "SOC magnitude nonlinear susceptibility"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MoS₂ 作为验证层用于标定/对比 HHG 信号（content.md 与 rationale 关联处）",
+      "missing_evidence": "缺少 MoS₂ 及同类过渡金属硫族化合物在 HHG 实验中作为标准参考样品的文献依据，特别是其与磁性体系（如 MnTe）信号强度的可比性、层数/堆叠对谐波产额的影响",
+      "search_keywords": [
+        "MoS2 high harmonic generation",
+        "TMDC HHG reference sample",
+        "transition metal dichalcogenide HHG",
+        "layer-dependent HHG MoS2",
+        "2D material HHG benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "利用超导磁体在低温强场条件下实现 HHG 信号提取（与 content.md 关联的实验装置）",
+      "missing_evidence": "缺少在超导磁体强磁场（≥5 T 类）与低温（≤10 K）环境中实现 HHG 测量的可行性文献，包括磁场对谐波相位、偏振态、电子动力学影响的理论与实验报道",
+      "search_keywords": [
+        "HHG strong magnetic field",
+        "cryogenic HHG experiment",
+        "superconducting magnet harmonic generation",
+        "magnetic field HHG electron dynamics",
+        "low temperature high harmonic generation"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "gaps": [
+    {
+      "claim": "瞬态拓扑量子相可通过全光学手段进行可观测、可定量的测量，并构成区别于现有静态或准静态拓扑表征的新方法。",
+      "missing_evidence": "缺少瞬态/光诱导拓扑相、超快拓扑相变及其全光学探测的代表性理论与实验文献；还需要文献证明拟议观测量与瞬态拓扑不变量或拓扑序参量之间的明确对应关系。",
+      "search_keywords": [
+        "transient topological phase all-optical measurement",
+        "light-induced topological phase ultrafast spectroscopy",
+        "Floquet topological insulator optical probe",
+        "time-resolved topology Berry curvature measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "项目提出的瞬态拓扑全光测量理论相较 MIT-Reis、MPQ-Krausz、ELI-ALPS 等国际团队已有超快固体强场和拓扑动力学研究具有明确差异化。",
+      "missing_evidence": "缺少上述国际团队近年代表性论文及研究路线综述，无法逐项比较其研究对象、驱动方式、时间分辨、观测量和反演能力，也无法证明本项目填补了国际现有方法未覆盖的空白。",
+      "search_keywords": [
+        "MIT Reis ultrafast topological phase solid",
+        "MPQ Krausz attosecond solid topology",
+        "ELI-ALPS ultrafast topological materials",
+        "international state of the art transient quantum phase optical measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内尚缺少面向瞬态量子相的‘写入—读取—反演’一体化全光研究体系，本项目具有明确的国内定位空缺。",
+      "missing_evidence": "缺少国内相关团队在光诱导量子相、超快拓扑动力学、固体高次谐波和瞬态光谱反演方面的系统文献调研与对比证据，因而无法支持‘国内空缺’或‘率先建立’类判断。",
+      "search_keywords": [
+        "China ultrafast transient quantum phase optical spectroscopy",
+        "中国 光诱导 拓扑相 超快 光谱",
+        "中国 固体高次谐波 拓扑动力学",
+        "国内 瞬态量子相 反演"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "‘写—读—反演’闭环范式能够由光场写入瞬态量子相、通过光学信号实时读取，并进一步反演其量子几何或拓扑信息。",
+      "missing_evidence": "缺少分别支持相干光控量子相写入、时间分辨光学读取以及由光谱反演量子几何/拓扑量的文献，更缺少三者形成闭环的先例或方法学依据。",
+      "search_keywords": [
+        "coherent control light-induced quantum phase write read",
+        "ultrafast optical readout transient topological phase",
+        "inverse spectroscopy quantum geometry Berry curvature",
+        "closed-loop ultrafast quantum material control"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "SHG 可作为瞬态量子相写入后的实时触发或读取信号。",
+      "missing_evidence": "缺少时间分辨二次谐波用于探测对称性破缺、相变、拓扑或量子几何动力学的实验依据；还需文献证明其时间分辨率、信噪比和选择定则足以支持所述实时触发机制。",
+      "search_keywords": [
+        "time-resolved second harmonic generation phase transition",
+        "ultrafast SHG symmetry breaking quantum materials",
+        "SHG probe topological phase dynamics",
+        "second harmonic generation real-time trigger ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "绝热分区判据能够为瞬态拓扑相提供物理上成立且可操作的定义，并支撑全光测量理论。",
+      "missing_evidence": "缺少非平衡体系瞬时拓扑不变量、绝热/非绝热分区、Floquet 拓扑及时间依赖 Berry 曲率定义的理论文献；尤其需要澄清在强场驱动和有限退相干条件下判据的适用范围。",
+      "search_keywords": [
+        "instantaneous topological invariant nonequilibrium",
+        "adiabatic partition criterion transient topology",
+        "time-dependent Berry curvature strong field",
+        "nonequilibrium Floquet topology nonadiabatic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "物理约束 AI 可以从强场非线性光学或高次谐波信号中稳定反演瞬态量子相信息，并可通过迁移学习应对实验与模拟之间的分布漂移。",
+      "missing_evidence": "缺少物理信息神经网络或物理约束机器学习用于超快光谱、HHG、量子态/材料参数反演的代表性文献；还缺少仿真到实验迁移、域适应、分布外泛化及其量化指标的文献依据。",
+      "search_keywords": [
+        "physics-informed machine learning ultrafast spectroscopy inverse problem",
+        "machine learning high harmonic spectroscopy reconstruction",
+        "sim-to-real domain adaptation spectroscopy",
+        "transfer learning distribution shift quantum materials spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "项目从现有控制对象谱系的‘第三级’推进到‘第四级’，代表量子相全光操控能力的实质跃迁。",
+      "missing_evidence": "缺少对现有光控层级或控制对象谱系的权威综述与代表性工作支撑，也缺少证明所谓‘第四级’尚未实现及其科学增量的对比文献。",
+      "search_keywords": [
+        "hierarchy of coherent control quantum materials review",
+        "ultrafast control order parameter quantum phase review",
+        "light control topology quantum geometry review",
+        "all-optical control transient quantum phases"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "两套 OPCPA 平台及 RT-TDDFT 计算体系足以支撑瞬态量子相写入、全光读取和理论反演。",
+      "missing_evidence": "缺少与拟用 OPCPA 脉冲参数、场强、波段和时间分辨相匹配的同类实验文献，以及 RT-TDDFT 描述强场驱动固体、HHG、瞬态拓扑和量子几何响应的验证性文献。",
+      "search_keywords": [
+        "OPCPA strong-field solid-state ultrafast experiment",
+        "RT-TDDFT solid high harmonic generation validation",
+        "real-time TDDFT light-induced topological phase",
+        "attosecond transient quantum materials OPCPA"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

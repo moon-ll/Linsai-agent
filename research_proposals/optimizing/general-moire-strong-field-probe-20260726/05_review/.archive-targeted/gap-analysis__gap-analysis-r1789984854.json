@@ -1,0 +1,95 @@
+{
+  "gaps": [
+    {
+      "claim": "N = 2^32 量级 1D super-moiré 体系以张量网络自洽平均场获得收敛解的方法学锚点（Sun 等 2025 Phys. Rev. Research）",
+      "missing_evidence": "需要确认 [28] Sun 等 2025 Phys. Rev. Research 的真实作者链、卷期与张量网络自洽平均场 1D super-moiré 体系的能级/系统规模细节",
+      "search_keywords": [
+        "Sun tensor network self-consistent mean field super-moiré 1D",
+        "Phys Rev Research 2025 tensor network super-moiré 2^32",
+        "DMRG self-consistent mean field supermoire"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔关联态 Δ_CI 较非莫尔 Mott 低 25–400 倍（5–20 meV vs 约 0.5–2 eV）的数值链",
+      "missing_evidence": "5–20 meV 的莫尔关联态电荷/能隙区间缺乏直接实验或理论文献支撑，需补莫尔平带半带宽度、关联态 Δ_CI 实验测定或 RPA/DMRG 估计",
+      "search_keywords": [
+        "moire flat band charge gap meV correlated insulator",
+        "moire superlattice correlation gap 5 meV 20 meV experimental",
+        "moire Mott insulator excitation gap experimental measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Lian 锚点 5–10 meV 与创新点一 25–400 倍分子（5–20 meV）的口径一致性",
+      "missing_evidence": "需要 Lian 等原始文献中莫尔体系能隙/Δ_CI 上下界 5–10 meV 的明确实测值与误差范围",
+      "search_keywords": [
+        "Lian moire correlation gap 5 meV 10 meV",
+        "Lian twisted bilayer graphene gap measurement",
+        "Lian moire Mott insulator ARPES scanning tunneling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[27] arXiv:2607.22532 真实作者链（需更正为 Anish Kumar, Suman Chatterjee, Kenji Watanabe, Takashi Taniguchi, Kausik Majumdar）及发表期刊",
+      "missing_evidence": "需 arXiv API 实测 arXiv:2607.22532 的完整作者列表、发表年份、Nano Letters vs 其他期刊口径统一",
+      "search_keywords": [
+        "arXiv 2607.22532 Kumar Chatterjee Watanabe Taniguchi Majumdar",
+        "moire superlattice supermoire exciton Kumar 2025 Nano Letters",
+        "second-order moire exciton bilayer TMD Kumar"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[12] Ikeda 体系为一维铜酸盐 Sr₂CuO₃ 而非 1T-TaS₂，及 6 MV/cm（≈9.6×10^10 W/cm²）Mott 熔融判据",
+      "missing_evidence": "需要 Ikeda 等 2025 arXiv:2508.00296 原文确认 Sr₂CuO₃ Mott 熔融阈值 6 MV/cm 与 1D cuprate 体系归属",
+      "search_keywords": [
+        "Ikeda Sr2CuO3 Mott insulator melting 6 MV/cm",
+        "arXiv 2508.00296 Ikeda 1D cuprate Mott melting",
+        "Sr2CuO3 photoinduced insulator metal transition threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "1T-TaS₂ 实际电荷能隙约 0.2–0.3 eV 而非 0.5–2 eV 的体系能隙归属",
+      "missing_evidence": "需补 1T-TaS₂ CDW/Mott 相电荷能隙 0.2–0.3 eV 的扫描隧道谱/ARPES 实验数据",
+      "search_keywords": [
+        "1T-TaS2 charge density wave gap 0.2 eV 0.3 eV",
+        "1T-TaS2 Mott gap experimental STS ARPES",
+        "1T-TaS2 CDW gap measurement tunneling spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "10^-15 → 10^-18 阈值与 2–3 个数量级上限的实验依据",
+      "missing_evidence": "缺少导致莫尔能隙/Δ_CI 测量精度提升 2–3 个数量级所需的实验参数（相干时间、信噪比、累积时间）的定量推导",
+      "search_keywords": [
+        "high harmonic spectroscopy signal-to-noise 2 order magnitude",
+        "moire correlation gap detection sensitivity threshold",
+        "HHG detection limit meV accuracy order magnitude"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "δ = 11.5 meV 四极激子杂化能作 Δ_CI 对照的概念合法性",
+      "missing_evidence": "需要 interlayer exciton hybridization 四极激子与莫尔关联 Δ_CI 在同一能标下可比的物理依据及 Δ_CI 对照文献 [19][26]",
+      "search_keywords": [
+        "moire interlayer exciton hybridization meV energy scale",
+        "delta_CI charge gap moire Hubbard model reference",
+        "moire Mott gap exciton hybridization comparison"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "1.3μm 端典型强度 1.1–4.3×10^11 W/cm² 与调控窗口上限 2×10^11 W/cm² 的实验/技术边界",
+      "missing_evidence": "缺乏 1.3μm 固体 HHG 实验中典型峰值强度、损伤阈值与 2×10^11 W/cm² 调控窗口的实验依据",
+      "search_keywords": [
+        "1.3 micron mid-infrared solid HHG damage threshold intensity",
+        "1.3 um MoS2 WSe2 high harmonic generation peak intensity",
+        "mid-IR HHG damage threshold 10^11 W/cm2 2D material"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

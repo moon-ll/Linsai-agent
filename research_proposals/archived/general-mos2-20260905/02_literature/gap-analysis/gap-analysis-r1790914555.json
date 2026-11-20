@@ -1,0 +1,58 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.1 末句将 Luu 等（Nature 521,498）的工作描述为\"0.5—2.5 keV 水窗孤立阿秒脉冲\"，即声称固体 HHG 已实现 keV 量级水窗波段孤立阿秒脉冲发射",
+      "missing_evidence": "Luu 等原始工作实际为 ZnO 晶体的 EUV（极端紫外）高次谐波谱学研究，并非水窗波段或孤立阿秒脉冲；当前段落缺少对固体 EUV 高次谐波谱学的正确原始引证，也缺少关于 keV 水窗固体 HHG 在实验上尚无先例这一事实的明确文献依据",
+      "search_keywords": [
+        "EUV high-harmonic spectroscopy of solids",
+        "ZnO high harmonic generation Luu",
+        "solid-state HHG extreme ultraviolet",
+        "attosecond pulse generation solids water-window",
+        "keV HHG solids"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1 首段称\"少周期脉冲在水窗波段扩展\"，并将其归因于 Ndabashimiye 等（Nature 534,520）",
+      "missing_evidence": "Ndabashimiye 等原始工作为固态稀有气体（Ar/Kr）在 VUV—EUV 波段的多平台高次谐波产生，\"水窗波段扩展\"属于错挂；缺少对 VUV—EUV 多平台固体 HHG 原始文献的正确引用，也缺少说明\"多平台超越原子极限\"这一实际贡献的支撑",
+      "search_keywords": [
+        "Ndabashimiye solid rare gas high harmonic",
+        "VUV EUV HHG solid argon krypton",
+        "multi-plateau high harmonic generation solid",
+        "solid-state HHG vacuum ultraviolet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 第四条路线提出\"London 规范与 Coulomb 规范下带间电流密度差值即规范不变性检验\"，作为理论判据",
+      "missing_evidence": "该具名论断缺乏原始 [N] 锚点，需补充规范不变性（gauge invariance）在固体高次谐波理论中的原始推导或方法学文献，特别是电流密度 JTL（interband current density）在不同规范下等价的严格证明",
+      "search_keywords": [
+        "gauge invariance solid high harmonic generation",
+        "interband current density HHG London Coulomb gauge",
+        "Joulson norm JTL high harmonic",
+        "gauge-invariant formulation solid HHG theory",
+        "intraband interband current gauge"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.2 末句以纯指针句形式引用 Zhong 等综述[24]：\"近期综述性的进展讨论见 Zhong 等[24]\"",
+      "missing_evidence": "纯指针句无信息量，缺少 Zhong 等综述中一个可嵌入论证的具体结论；需定位该综述的核心论点（如 BCC/莫尔超晶格 HHG、扭转角依赖性、或某一标志性结论），并以具名嵌入式引用替代纯指针",
+      "search_keywords": [
+        "Zhong review high harmonic generation moire",
+        "Zhong review twisted bilayer HHG",
+        "moire superlattice high harmonic review",
+        "twisted van der Waals heterostructure HHG review",
+        "Zhong bilayer graphene moire HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "references 表存在 [8] 跳号，且文末凡例声明\"[2]–[7] 不参与逐条编号引用\"与 §1 首段实际编号引用 [2][4][5,6][7] 矛盾，构成系统性参考文献-正文不一致",
+      "missing_evidence": "需要补齐缺失的 [8] 条目（若原文确实漏引则补充，若属编号失误则重排连续编号），并对凡例进行修正使其与正文实际引用一致；此问题虽形式上属格式/一致性，但根因是引用-条目对应性缺失",
+      "search_keywords": [],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

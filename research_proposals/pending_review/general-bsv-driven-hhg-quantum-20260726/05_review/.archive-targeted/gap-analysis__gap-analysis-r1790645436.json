@@ -1,0 +1,66 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.2 L27 引用 [31] 时归为 'Lange-Madsen'，实际首作为 Gothelf，Lange 系二作",
+      "missing_evidence": "需要 [31] 的正确作者署名顺序（Gothelf 为首作），并据此调整文中作者锚定表述为 'Gothelf 等 [31]' 或 'Gothelf-Lange-Madsen [31]'",
+      "search_keywords": [
+        "Gothelf supramolecular",
+        "Gothelf Lange Madsen organic semiconductor",
+        "Gothelf J Org Chem 2004 self-assembly"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L41 声称'参照 [8] 中 Mott 体系磁场调控理论'，但 [8] 实为 Floquet DMFT+AC 驱动理论，不含磁场调控内容",
+      "missing_evidence": "需要补充 κ 族有机电荷转移盐体系中真正讨论磁场调控（磁输运、金属-绝缘体转变磁场效应）的实验/理论文献作为 '磁场调控' 的真实出处",
+      "search_keywords": [
+        "kappa-BEDT-TTF magnetic field metal-insulator transition",
+        "kappa-Cl Mott insulator magnetic transport",
+        "organic Mott insulator field-induced superconductivity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L41 将 κ-Br 归为'强关联/Mott 绝缘体候选'，但 κ-Br 在环境压力下为 11.5 K 超导金属，真正 Mott 绝缘体是 κ-Cl",
+      "missing_evidence": "需要 κ-(BEDT-TTF)₂Cu[N(CN)₂]X 体系的相图、物性分类文献，明确区分 κ-Br（超导金属）、κ-Cl（Mott 绝缘体）、κ-Cu[N(CN)₂]Br 在加压下的金属-绝缘体转变边界，以支撑'近 Mott 边界关联金属'的准确表述",
+      "search_keywords": [
+        "kappa-BEDT-TTF phase diagram",
+        "kappa-Cl Mott insulator antiferromagnetic",
+        "kappa-Br ambient pressure superconductor 11.5K",
+        "BEDT-TTF Cu[N(CN)2]Br Mott boundary"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references [13] 在 §2.3 L41 被标注为'截至 2026-08 仍为预印本'，实际 Wu 等 2023-12 已刊 PRL 131, 256201",
+      "missing_evidence": "需要将该条目更新为正式刊版：Wu et al., Phys. Rev. Lett. 131, 256201 (2023)，题名 'Giant Correlated Gap...'，并删除'预印本'限定语句",
+      "search_keywords": [
+        "Wu giant correlated gap PRL 131 256201 2023",
+        "Wu 2023 Mott insulator photoemission PRL published version",
+        "10.1103/PhysRevLett.131.256201"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 末段涉及'二维截面插值''参数依赖性图谱'等方案细节（L15/L23/L53）目前缺乏实现方法文献支撑",
+      "missing_evidence": "需要补充 SLM 相位匹配扫描的二维参数空间插值方法、二阶关联函数计数率可测性估算（探测器量子效率/积分时间预算）、角度分辨 HHG 长时积分信噪比建模的参考实现文献",
+      "search_keywords": [
+        "spatial light modulator phase retrieval 2D interpolation",
+        "g2 measurement counting rate estimation single photon detector",
+        "high harmonic generation angular resolved integration time"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3 SBE-Q 多带拓展声称与 [2]/[31] 有清晰区隔，但 [31] 作者归属错位连带影响区隔论证基础",
+      "missing_evidence": "在 [31] 作者修正后，需复核其方法学范畴（是否涉及多带 Hubbard、半经验紧束缚 vs 纯有机自组装），确认 SBE-Q 多带拓展的相对优势点对应的对比对象文献是否仍成立",
+      "search_keywords": [
+        "semiempirical tight-binding extended Hubbard multi-band",
+        "Gothelf self-assembly vs multi-band Hubbard model",
+        "organic charge transfer salt band structure calculation method comparison"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

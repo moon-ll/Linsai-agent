@@ -1,0 +1,85 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb序参量沿𝒴₄⁻³=z·y·(3x²−y²)实球谐函数变化（g波）",
+      "missing_evidence": "[N]编号引用（Long等41.5 T dHvA论文及其3D bulk g波对称性实证）",
+      "search_keywords": [
+        "CrSb de Haas-van Alphen g-wave symmetry",
+        "Long CrSb dHvA 41.5T bulk g-wave",
+        "arXiv:2601.19105 CrSb g-wave order parameter",
+        "Nature s41586-026-10902-z CrSb three-dimensional bulk"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb三维bulk-resolved g波序参量测绘",
+      "missing_evidence": "[N]编号引用（Nature 2026 bulk-resolved g波序参量论文）",
+      "search_keywords": [
+        "CrSb bulk-resolved g-wave order parameter Nature",
+        "CrSb three-dimensional Fermi surface symmetry",
+        "arXiv:2601.19105 Nature CrSb bulk g-wave"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb d波→g波符号体系修正（Ding PRL 133.206401支撑）",
+      "missing_evidence": "[N]编号引用（Ding PRL 133.206401的CrSb g波自旋劈裂~0.93 eV实验）",
+      "search_keywords": [
+        "Ding PRL 133.206401 CrSb spin splitting",
+        "CrSb g-wave spin splitting 0.93 eV",
+        "Physical Review Letters 133 206401 altermagnet CrSb"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "温度窗口可行性论证（Woodgate 2026-03 预印本）",
+      "missing_evidence": "[N]编号引用（arXiv:2603.15035 DLM Woodgate论文）",
+      "search_keywords": [
+        "Woodgate dynamic Lanczos method 2026 arXiv",
+        "arXiv:2603.15035 altermagnet temperature window",
+        "Woodgate correlated electron DLM preprint"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb d波分裂先验量级（100—500 meV）",
+      "missing_evidence": "需更新至ARPES实测0.4—1.2 eV并补引文",
+      "search_keywords": [
+        "CrSb ARPES spin splitting magnitude eV",
+        "CrSb nonrelativistic spin splitting ARPES experiment",
+        "Šmejkal CrSb g-wave band splitting measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "0.3—0.8 V/Å场强对应光强换算",
+      "missing_evidence": "需要实验/理论计算的典型场强-光强换算参考",
+      "search_keywords": [
+        "solid-state HHG field strength intensity conversion V/Å to W/cm2",
+        "CrSb altermagnet HHG driving field intensity",
+        "MnTe TiSe2 HHG typical driving field"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MnTe g波/交变磁自旋劈裂的3D对称性分类",
+      "missing_evidence": "三维k空间g波序参量ARPES证据引文",
+      "search_keywords": [
+        "MnTe 3D g-wave altermagnet ARPES",
+        "MnTe spin-resolved ARPES symmetry classification",
+        "Belashchenko MnTe g-wave PRL 134.086701"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "d波vs g波altermagnet分类标准（节点面数量差异）",
+      "missing_evidence": "比较性综述或理论分类论文献",
+      "search_keywords": [
+        "altermagnet d-wave g-wave i-wave symmetry classification review",
+        "Šmejkal altermagnet PRX 15 011001 symmetry",
+        "altermagnet nodal planes spin group theory"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

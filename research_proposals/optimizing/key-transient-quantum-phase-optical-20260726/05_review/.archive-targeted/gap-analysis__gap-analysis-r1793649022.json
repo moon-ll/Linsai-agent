@@ -1,0 +1,24 @@
+{
+  "gaps": [
+    {
+      "claim": "机器学习力场（NequIP 类）反演工作流的跨温度/跨构型泛化误差可控制在基线 1.5 倍以内（§2.2 L51、§2.3 L73 的量化目标）",
+      "missing_evidence": "目前该量化目标无任何文献依据或核定协议支撑，评审已指出 scheme 章零落点。需要支撑两类证据：(1) MLIP 跨外推区（高温/未见构型）误差增长的实测文献，确立 1.5 倍量级的合理性；(2) 泛化误差核定方法论文献（committee/ensemble 不确定度、active learning 外推判据），为'1.5 倍'提供可操作的核定协议出处",
+      "search_keywords": [
+        "machine learning interatomic potential generalization error out-of-distribution",
+        "uncertainty quantification neural network force field committee model",
+        "active learning molecular dynamics extrapolation detection"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "通过扩展扫描规模获得 ≥20 组瞬态窗口的可行性（§2.2 窗口数目标的规模论证）",
+      "missing_evidence": "评审指出无'扫描网格×材料→窗口数'换算依据。需要高通量/参数扫描类文献支撑单体系可稳定产出多组独立瞬态窗口（扫描-收敛关系），为窗口数目标的规模合理性提供先例",
+      "search_keywords": [
+        "high-throughput parameter scan ultrafast simulation transient window statistics",
+        "convergence sampling laser-induced phase transition simulations"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

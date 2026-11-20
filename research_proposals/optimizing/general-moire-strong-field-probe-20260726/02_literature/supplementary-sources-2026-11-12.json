@@ -1,0 +1,183 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "references-backfill-r2-20261112",
+  "purpose": "参考文献表 11 条零池记录条目的回录核验（critic-round-2-references medium 项）；全部条目 2026-11-12 经 CrossRef / arXiv Atom API 逐字段实核（题名/期刊/卷/期/页/年份/首作），核验留痕见 05_review/references-notes.md 第十节",
+  "entries": [
+    {
+      "n": 2,
+      "source_id": "crossref:10.1038/s41578-024-00682-1",
+      "title": "A microscopic perspective on moiré materials",
+      "authors": [
+        "Nuckolls K. P.",
+        "Yazdani A."
+      ],
+      "journal": "Nature Reviews Materials 9(7), 460–480 (2024)",
+      "doi": "10.1038/s41578-024-00682-1",
+      "cited_as": "[2]",
+      "added_via": "cluster:references-backfill-r2-20261112",
+      "verified": "crossref",
+      "added_at": "2026-11-12T03:20:00Z"
+    },
+    {
+      "n": 3,
+      "source_id": "crossref:10.1038/s41567-024-02640-8",
+      "title": "Ultrafast high-harmonic spectroscopy of solids",
+      "authors": [
+        "Heide C.",
+        "Kobayashi Y.",
+        "Haque S. R. U.",
+        "Ghimire S."
+      ],
+      "journal": "Nature Physics 20(10), 1546–1557 (2024)",
+      "doi": "10.1038/s41567-024-02640-8",
+      "cited_as": "[3]",
+      "added_via": "cluster:references-backfill-r2-20261112",
+      "verified": "crossref",
+      "added_at": "2026-11-12T03:20:00Z"
+    },
+    {
+      "n": 9,
+      "source_id": "crossref:10.1038/s41563-024-01951-8",
+      "title": "Nonlinear physics of moiré superlattices",
+      "authors": [
+        "Du L.",
+        "Huang Z.",
+        "Zhang J."
+      ],
+      "journal": "Nature Materials 23(9), 1179–1192 (2024)",
+      "doi": "10.1038/s41563-024-01951-8",
+      "cited_as": "[9]",
+      "added_via": "cluster:references-backfill-r2-20261112",
+      "verified": "crossref",
+      "added_at": "2026-11-12T03:20:00Z"
+    },
+    {
+      "n": 10,
+      "source_id": "crossref:10.1038/s41535-024-00702-x",
+      "title": "Floquet engineering of anomalous Hall effects in monolayer MoS₂",
+      "authors": [
+        "Cao H.",
+        "Sun J.-T.",
+        "Meng S."
+      ],
+      "journal": "npj Quantum Materials 9(1), 90 (2024)",
+      "doi": "10.1038/s41535-024-00702-x",
+      "cited_as": "[10]",
+      "added_via": "cluster:references-backfill-r2-20261112",
+      "verified": "crossref",
+      "added_at": "2026-11-12T03:20:00Z"
+    },
+    {
+      "n": 14,
+      "source_id": "crossref:10.1103/krjp-mn4v",
+      "title": "Self-consistent tensor network method for correlated super-moiré matter beyond one billion sites",
+      "authors": [
+        "Sun Y.",
+        "Niedermeier M.",
+        "Antão T. V. C."
+      ],
+      "journal": "Physical Review Research 7(4), 043288 (2025)",
+      "doi": "10.1103/krjp-mn4v",
+      "arxiv": "2503.04373",
+      "cited_as": "[14]",
+      "added_via": "cluster:references-backfill-r2-20261112",
+      "verified": "crossref",
+      "added_at": "2026-11-12T03:20:00Z"
+    },
+    {
+      "n": 16,
+      "source_id": "crossref:10.1038/s41467-018-03397-4",
+      "title": "Measurement of the Berry curvature of solids using high-harmonic spectroscopy",
+      "authors": [
+        "Luu T. T.",
+        "Wörner H. J."
+      ],
+      "journal": "Nature Communications 9(1), 916 (2018)",
+      "doi": "10.1038/s41467-018-03397-4",
+      "cited_as": "[16]",
+      "added_via": "cluster:references-backfill-r2-20261112",
+      "verified": "crossref",
+      "added_at": "2026-11-12T03:20:00Z"
+    },
+    {
+      "n": 30,
+      "source_id": "crossref:10.1364/OE.558894",
+      "title": "Improving signal-to-noise ratios in pump-probe spectroscopy on light-sensitive samples by adapting pulse repetition rates",
+      "authors": [
+        "Velsink M. C.",
+        "Illienko M.",
+        "Chaudhary K."
+      ],
+      "journal": "Optics Express 33(11), 23632–23644 (2025)",
+      "doi": "10.1364/OE.558894",
+      "arxiv": "2501.05121",
+      "cited_as": "[30]",
+      "added_via": "cluster:references-backfill-r2-20261112",
+      "verified": "crossref",
+      "added_at": "2026-11-12T03:20:00Z"
+    },
+    {
+      "n": 33,
+      "source_id": "arxiv:2510.09548",
+      "title": "Mapping the moiré potential in multi-layer rhombohedral graphene",
+      "authors": [
+        "Seewald E.",
+        "Ghosh S.",
+        "Verma N."
+      ],
+      "arxiv": "2510.09548 (2025, 预印本；abs 页无 journal_ref，14 作者)",
+      "cited_as": "[33]",
+      "added_via": "cluster:references-backfill-r2-20261112",
+      "verified": "arxiv-atom-api",
+      "added_at": "2026-11-12T03:20:00Z"
+    },
+    {
+      "n": 34,
+      "source_id": "crossref:10.1038/s41586-025-10085-z",
+      "title": "Imaging the sub-moiré potential using an atomic single electron transistor",
+      "authors": [
+        "Klein D. R.",
+        "Zondiner U.",
+        "Keren A."
+      ],
+      "journal": "Nature 650(8103), 875–881 (2026)",
+      "doi": "10.1038/s41586-025-10085-z",
+      "cited_as": "[34]",
+      "added_via": "cluster:references-backfill-r2-20261112",
+      "verified": "crossref",
+      "added_at": "2026-11-12T03:20:00Z"
+    },
+    {
+      "n": 35,
+      "source_id": "crossref:10.1038/s41586-022-05190-2",
+      "title": "Attosecond clocking of correlations between Bloch electrons",
+      "authors": [
+        "Freudenstein J.",
+        "Borsch M.",
+        "Meierhofer M."
+      ],
+      "journal": "Nature 610(7931), 290–295 (2022)",
+      "doi": "10.1038/s41586-022-05190-2",
+      "cited_as": "[35]",
+      "added_via": "cluster:references-backfill-r2-20261112",
+      "verified": "crossref",
+      "added_at": "2026-11-12T03:20:00Z"
+    },
+    {
+      "n": 37,
+      "source_id": "crossref:10.1063/5.0273558",
+      "title": "Active stabilization for ultralong acquisitions in an attosecond pump–probe beamline",
+      "authors": [
+        "Csizmadia T.",
+        "Gulyás Oldal L.",
+        "Gilicze B."
+      ],
+      "journal": "APL Photonics 10(8), 080803 (2025)",
+      "doi": "10.1063/5.0273558",
+      "cited_as": "[37]",
+      "added_via": "cluster:references-backfill-r2-20261112",
+      "verified": "crossref",
+      "added_at": "2026-11-12T03:20:00Z"
+    }
+  ]
+}

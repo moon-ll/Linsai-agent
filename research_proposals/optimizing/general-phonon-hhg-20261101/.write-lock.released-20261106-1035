@@ -1,0 +1,6 @@
+# .write-lock — round-6 单写者冻结声明
+- 持有者：TraeCode 会话（round-6 唯一 writer/critic）
+- 冻结时间：2026-11-06T09:20（Asia/Shanghai）
+- 用途：round-6 实质类修复（B1–B6）+ 同版本复评窗口
+- 允许写入范围：04_proposal/sections/*.md、05_review/critic-round-6-*.md、05_review/critic-round-5-*.md（定向复核追加）、02_literature/reading-notes.md
+- 解除：round-6 复评落盘、哈希复核后改名 .write-lock.released-<时间>

@@ -1,0 +1,91 @@
+{
+  "gaps": [
+    {
+      "claim": "TOF 飞行时间窗 ~500 ns 覆盖 0–500 eV 动能电子的方法学支撑",
+      "missing_evidence": "缺少 TOF 飞行时间窗口与光电子动能范围对应关系的实验/方法学文献支撑",
+      "search_keywords": [
+        "time-of-flight electron spectrometer 500 ns time window",
+        "TOF 0-500 eV photoelectron kinetic energy range",
+        "attosecond streaking TOF detector energy range calibration"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDSE 模拟时间步长 ≤0.2 as 与 R1 解析修正项相位灵敏度的匹配依据",
+      "missing_evidence": "缺少 TDSE 时间步长与多通道耦合相位分辨精度的定量关系文献",
+      "search_keywords": [
+        "TDSE time step 0.2 attosecond convergence",
+        "multi-channel TDSE phase accuracy attosecond streaking",
+        "time-dependent Schrodinger equation step size attosecond pulse retrieval"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peschel 等关于 Ne 2s2p 价壳层双光子 RABBIT 通道间干涉的原始研究",
+      "missing_evidence": "缺少 Peschel 2022/2024 对 Ne 2p 或 Ne 2s2p 双光子 RABBIT 多通道干涉的原始论文确认（rationalle、content、scheme 三章表述不一致：'Ne 2p 外层' vs 'Ne 2s2p 价电子'）",
+      "search_keywords": [
+        "Peschel two-photon RABBIT neon 2p angular streaking",
+        "Peschel Nature Communications Ne 2p multichannel RABBIT",
+        "Peschel 2022 neon valence RABBIT interchannel coupling",
+        "Peschel Ne 2s2p two-photon RABBIT multichannel angular"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Cousin 等水窗多通道电离导致 FROG-CRAB 失效的临界阈值（15%/30%通道重叠度）",
+      "missing_evidence": "scheme.md §3.3 中提及'通道重叠度大于 15% 时启用 R1 修正算法'，需 Cousin 2017 PRX 041030 或后续工作给出多通道贡献度与重构误差的定量关系",
+      "search_keywords": [
+        "Cousin 2017 Phys Rev X 041030 water window attosecond streaking multichannel",
+        "FROG-CRAB multichannel ionization breakdown threshold percentage",
+        "water window attosecond pulse retrieval interchannel coupling 15% 30%",
+        "Cousin PRX 7 041030 multichannel error attosecond reconstruction"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Pabst & Dahlström 角积分偶极相位抑制方法在氩/氪等惰性气体上的实验验证",
+      "missing_evidence": "缺少 Pabst-Dahlström 角积分偶极相位抑制方案在稀有气体靶上有效性的实验验证文献（scheme 提到该方法作为 R2 修正手段）",
+      "search_keywords": [
+        "Pabst Dahlstrom angular integration dipole phase suppression",
+        "PANDA attosecond streaking dipole phase argon krypton",
+        "angular averaged streaking rare gas target validation",
+        "Pabst 2016 PRA 94 013411 PANDA angular integration"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rACE 神经网络重构算法在水窗/多通道条件下的精度边界与失效阈值",
+      "missing_evidence": "scheme 中提及 rACE/VTQNA 类神经算法作为备选路径，需其与传统 FROG-CRAB 在多通道场景下精度对比的文献依据",
+      "search_keywords": [
+        "rACE neural network attosecond pulse retrieval multi-channel limitation",
+        "Inzani rACE attosecond streaking multi-channel correction",
+        "VTGPA attosecond retrieval krypton reanalysis Ardana-Lamas",
+        "machine learning attosecond pulse retrieval accuracy benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "多通道 TDSE 仿真中通道投影算符与 interchannel coupling 的定量耦合强度",
+      "missing_evidence": "缺少 Peschel 等对通道间耦合强度的定量描述（如双通道 TDSE 哈密顿量中耦合项的形式与强度）",
+      "search_keywords": [
+        "two-channel TDSE attosecond streaking coupling strength",
+        "interchannel coupling attosecond pulse retrieval quantitative",
+        "channel projection operator multi-channel TDSE ionization",
+        "Peschel multichannel TDSE attosecond streaking theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "16 通道 TOF 阵列探测器相对单通道大面积探测器的角分辨优势定量证据",
+      "missing_evidence": "scheme §3.2 首段提及选择 16 通道而非大面积均质探测器，需角分辨对偶极相位压制效果的定量文献支撑",
+      "search_keywords": [
+        "16 channel TOF array detector attosecond streaking",
+        "angular resolution TOF electron spectrometer attosecond",
+        "Laurent attosecond TOF detector Rev Sci Instrum 2012",
+        "multichannel TOF detector dipole phase suppression advantage"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

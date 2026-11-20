@@ -1,0 +1,45 @@
+{
+  "gaps": [
+    {
+      "claim": "[34]Jiang2024 文献一文两述：rationale §2.3 称「第一性原理计算」、content §2.1 称「Jones 矩阵形式分析」",
+      "missing_evidence": "缺少 Jiang2024 (arXiv:2405.16125) 原文具体方法描述，需核实该工作究竟使用第一性原理还是 Jones 矩阵形式分析（multi-band tight-binding or first-principles）作为主要方法",
+      "search_keywords": [
+        "Jiang 2024 semi-Dirac high harmonic generation",
+        "arXiv 2405.16125 Jones matrix analysis semi-Dirac",
+        "semi-Dirac band structure HHG theoretical method"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TaP 三次谐波标度律存在「立方功率律 I³」与「I_3f∝I_f^2.5」两种互相矛盾的表述",
+      "missing_evidence": "缺少 Schmitt 2025 原文（应出自 TaP THz 三次谐波实验）中关于谐波强度 vs 驱动场强的精确幂律关系",
+      "search_keywords": [
+        "Schmitt 2025 TaP third harmonic scaling",
+        "TaP Weyl semimetal THz cubic harmonic generation",
+        "Weyl semimetal nonlinear optical response intensity scaling law"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "semi-Dirac/AHHG 增强效应双号并存：Yue&Gaarde[35]（PRL 2023，rationale 称「2024 年」）与 Medic[47]（PRB 2024）分工不清",
+      "missing_evidence": "缺少两文明确分工：(a) Yue&Gaarde PRL 2023 与 (b) Medic PRB 2024 分别具体解决何种 semi-Dirac HHG 问题、两者关系（独立/竞争/互补），以及 Yue&Gaarde 真实发表年份",
+      "search_keywords": [
+        "Yue Gaarde semi-Dirac high harmonic PRL 2023 2024",
+        "Medic PRB 2024 semi-Dirac HHG enhancement",
+        "AHHG anomalous HHG semi-Dirac point tight-binding"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "宇称判据双归属：[38]（2026）与 Bharti&Dixit 2022 PRB 105, 155140 同时被引用",
+      "missing_evidence": "缺少 Bharti Dixit 2022 PRB 105 155140 原始论文中关于宇称选择定则的具体表述，需核实该判据是否首创于该工作，亦需核实 [38]（2026）的工作是否为同一判据的不同应用或独立发展",
+      "search_keywords": [
+        "Bharti Dixit PRB 105 155140 parity selection rule HHG",
+        "high harmonic generation parity selection rule solid",
+        "circularly polarized HHG selection rule topological"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "full_review"
+}

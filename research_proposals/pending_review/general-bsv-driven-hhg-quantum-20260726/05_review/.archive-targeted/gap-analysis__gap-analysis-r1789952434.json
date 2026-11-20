@@ -1,0 +1,39 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme 全章 [14]–[33] 系统性错挂为表−1，24 处引用 17 个语义锚指向错误文献（如 [24]Berry 曲率反演应为表[25]Luu & Wörner；[29]Liouville 对称性选择规则应为表[30]孪生光束 CPL；[32]量子阿秒逐脉冲应为表[33]Even Tzur；[14]Boroumand 框架应为表[15]），需按内容—文献全量重映射并同步 references 表注旧章节号",
+      "missing_evidence": "缺乏直接验证每条引用与实际文献内容匹配的一一对应核查表，需获取 14–33 号引用对应的原始 arXiv/DOI 论文标题与摘要以完成内容—文献全量重映射",
+      "search_keywords": [
+        "Luu Wörner Berry curvature quartz HHG Nat Commun 2018",
+        "Even Tzur quantum attosecond pulse retrieval arXiv",
+        "Boroumand solid HHG framework reference",
+        "孪生光束 twin beam CPL high harmonic selection rule",
+        "Liouville path integral HHG selection rule solid",
+        "Berry curvature inversion solid HHG Luu Worner 2018"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "L75'[1, 20]'挂于 TMDC 的 T₂ 估算语义不匹配，须一并重挂",
+      "missing_evidence": "需要找到真正涉及 TMDC 高次谐波退相干时间 T₂ 估算的原始文献（与 [1] 和 [20] 的当前内容比对）",
+      "search_keywords": [
+        "TMDC high harmonic generation dephasing time T2",
+        "MoS2 WSe2 HHG coherence time experimental",
+        "transition metal dichalcogenide HHG decoherence timescale"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.2 L59'[16] 多带模型计算'逐条判归属",
+      "missing_evidence": "需要核对 [16] 是否为多带模型计算的实际文献；如不实，需找真正的多带高次谐波计算参考（如半导体 Bloch 方程多带计算、Aversa-Sipe 多带耦合 HHG）",
+      "search_keywords": [
+        "multiband high harmonic generation semiconductor Bloch equation",
+        "Aversa Sipe multiband HHG theory PRB",
+        "many-band HHG solid calculation model",
+        "multiband coupling high harmonic generation solid"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "scheme"
+}

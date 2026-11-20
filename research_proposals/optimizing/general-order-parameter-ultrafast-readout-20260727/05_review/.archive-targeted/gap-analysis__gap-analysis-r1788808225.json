@@ -1,0 +1,59 @@
+{
+  "gaps": [
+    {
+      "claim": "G1/G2/G3 采用'四档判据（正—部分正—边缘—负）'作为分层证伪口径",
+      "missing_evidence": "缺少定义四档分类（正/部分正/边缘/负）的统计判据或方法论文献支撑（如 Bayesian 决策理论、No-Go 判据的多层分类标准）",
+      "search_keywords": [
+        "Bayesian decision multi-tier classification inverse problem",
+        "No-Go criterion statistical evidence tier",
+        "ill-posed inversion falsifiable four-level",
+        "多档统计判据 反问题 部分正 边缘"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CEP 扫描与 OAM 调控用于打破 Berry-curvature 对称简并的实验可行性",
+      "missing_evidence": "缺少将载波包络相位（CEP）扫描与轨道角动量（OAM）调控用于打破对称简并、提取 Berry-curvature 的实验或理论文献支撑",
+      "search_keywords": [
+        "CEP scan Berry curvature measurement solid state",
+        "orbital angular momentum HHG symmetry breaking",
+        "OAM high harmonic generation Berry phase",
+        "carrier-envelope phase Berry curvature HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "将 HHG 反演参数分为三类（结构/序参量/电子态）共 7—9 子参数的合理性",
+      "missing_evidence": "缺少将 HHG 反问题参数按物理类别分组、并量化维度区间（有效秩/可辨识性）的方法论或综述文献",
+      "search_keywords": [
+        "HHG inverse problem parameter classification",
+        "high harmonic spectroscopy parameter identifiability",
+        "nonlinear optics inverse problem dimensionality",
+        "attosecond spectroscopy Fisher information parameter space"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "多通道联合测量（V1）可提升 HHG 反问题参数可辨识性",
+      "missing_evidence": "缺少多通道/多变量联合反演在 HHG 或非线性光学逆问题中提升可辨识性的定量文献支撑（如联合测量 vs 单测量的条件数/Fisher 信息对比）",
+      "search_keywords": [
+        "multi-channel inversion identifiability HHG",
+        "joint measurement parameter identifiability nonlinear optics",
+        "multi-channel Fisher information attosecond spectroscopy",
+        "多通道反演 可辨识性 高次谐波"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG 反问题中样本规模（采样点数与 FIM 秩）的定量估算",
+      "missing_evidence": "缺少 HHG 反问题中 Fisher Information Matrix (FIM) 秩分析与样本规模（采集光谱数/偏振数/温度数）量化估算的方法论文献",
+      "search_keywords": [
+        "Fisher information rank sample size HHG inversion",
+        "FIM condition number attosecond spectroscopy",
+        "sample size estimation inverse problem nonlinear optics",
+        "Fisher信息矩阵 秩 样本规模 高次谐波"
+      ],
+      "priority": "high"
+    }
+  ]
+}

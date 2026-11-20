@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "Avetissian 等人 [35] 在多带 HHG 框架中证明耦合体系的 Berry 响应可在 k 空间分辨",
+      "missing_evidence": "需要确认 [35] 真作 Avetissian, Matevosyan, Mkrtchian, Phys. Rev. B 111, 045415 (2025) 确实包含多带 HHG 框架下的 Berry 响应 k空间分辨证据；缺少该论文具体内容以验证引用准确性",
+      "search_keywords": [
+        "Avetissian Mkrtchian multiband HHG Berry curvature PRB 111 045415 2025",
+        "multiband high harmonic generation Berry response k-space resolution",
+        "Phys Rev B 111 045415 Avetissian 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Almeida 等人 [34] 在菱面体多层石墨烯中给出圆二色性符号反转与 Berry 响应的定量联系",
+      "missing_evidence": "需要核实 Almeida, Kort-Kamp, Scheurer 的菱面体多层石墨烯工作内容，确认圆二色性符号反转与 Berry 响应的定量关系，并验证'较 MoS₂ 和 hBN 高约两个数量级'的数值是否在该工作给出",
+      "search_keywords": [
+        "Almeida Kort-Kamp Scheurer rhombohedral multilayer graphene Berry curvature",
+        "rhombohedral graphite circular dichroism Berry curvature quantitative",
+        "biased bilayer graphene Berry curvature magnitude MoS2 hBN comparison"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Patra 与 Cocchi [31] 2026 年用群论与 DFT-Wannier 计算证明扭转 MoS₂ 双层在 C₃ 点群下出现 χ_xxx 分量并产生 φ₀ = θ_tw/2 的几何锁定",
+      "missing_evidence": "需要反查 arXiv:2607.19937 是否确为 Patra 与 Cocchi 关于扭转 MoS₂ 双层 SHG 中 χ_xxx 与 φ₀ 几何锁定的真作，并核实其发表期刊与年份；缺少对 C₃ 点群下 χ_xxx 出现条件的对称性分析支撑",
+      "search_keywords": [
+        "Patra Cocchi twisted MoS2 bilayer second harmonic generation 2026 arXiv 2607.19937",
+        "DFT-Wannier twisted MoS2 chi_xxx C3 point group SHG",
+        "MoS2 twisted homobilayer geometric locking phi_0 twist angle SHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转 MoS₂ 双层对称性从 D₃h（H 型堆叠）退化以及 H/R 型点群区分",
+      "missing_evidence": "缺乏扭转 MoS₂ 同质双层在 0°/60°（H 型 vs R 型堆叠）下点群从 D₃h 到 C₃ 退化的明确群论分析与 DFT验证文献",
+      "search_keywords": [
+        "twisted homobilayer MoS2 D3h to C3 symmetry breaking",
+        "MoS2 AA AB stacking point group H-type R-type",
+        "twisted bilayer MoS2 stacking symmetry DFT group theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 反演链 Ω(k) 中 Berry 曲率 HHG 反演的实验精度基准（σ_Ω ≤ 0.15）",
+      "missing_evidence": "缺少 MoS₂ 或类似 TMD 同质双层中 Berry 曲率通过谐波反演的实测精度与置信区间数据，σ_Ω ≤ 0.15 的可行性缺乏文献基准",
+      "search_keywords": [
+        "Berry curvature retrieval high harmonic MoS2 experimental uncertainty",
+        "quantum geometry inversion TMD precision sigma",
+        "solid HHG Berry curvature inversion accuracy benchmark"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MoS₂/WSe₂ 扭转异质结中激子—莫尔势耦合通道的失谐量扫描判据（0, ±50, ±100 meV）",
+      "missing_evidence": "缺乏 MoS₂/WSe₂ type-II 异质结中 A/B 激子失谐量 ±100 meV 范围内 HHG 或 SHG 抑制曲线的实验数据，作为协同通道可分离性的指纹证据",
+      "search_keywords": [
+        "MoS2 WSe2 heterobilayer exciton detuning high harmonic generation",
+        "type-II TMD heterostructure HHG detuning suppression",
+        "MoS2 WSe2 moire exciton coupling HHG resonance detuning"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "扭转 MoS₂/WSe₂ 同一样品同光路叠加两条基线得到协同放大系数 α_syn ≥ 0.15",
+      "missing_evidence": "缺少在同一扭转异质结中通过叠加纯激子基线与纯扭转角基线获得协同放大系数的实验或理论先例，α_syn ≥ 0.15 的量级缺乏文献支撑",
+      "search_keywords": [
+        "MoS2 WSe2 twist angle exciton synergy harmonic amplification",
+        "synergy factor exciton moire potential HHG twisted heterobilayer",
+        "cooperative amplification coefficient TMD heterostructure SHG HHG"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

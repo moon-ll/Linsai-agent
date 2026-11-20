@@ -1,0 +1,15 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.2.3 BSV驱动HHG首次实验观测（Rasputnyi 2024 BSV驱动固体HHG实验）需要精确文献定位",
+      "missing_evidence": "BSV驱动HHG固体实验的精确arXiv号/DOI未在申请书中明确引用，可能缺少该关键里程碑文献",
+      "search_keywords": [
+        "Rasputnyi bright squeezed vacuum solid HHG 2024",
+        "BSV driven high harmonic Mg:LiNbO3 a-Si experiment",
+        "squeezed light HHG solid state first observation",
+        "BSV HHG 1600 nm photon energy experiment"
+      ]
+    }
+  ],
+  "section": "rationale"
+}

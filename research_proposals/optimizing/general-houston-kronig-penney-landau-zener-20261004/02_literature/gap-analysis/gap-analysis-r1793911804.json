@@ -1,0 +1,44 @@
+{
+  "gaps": [
+    {
+      "claim": "§3 L89（及 content 章同句）：'Berry 曲率在中心对称晶体中处处恒为零'作为方向一基线扣除的判据表述，缺时间反演对称这一适用前提",
+      "missing_evidence": "需要支撑'Ω(k)≡0 须反演对称与时间反演对称同时成立'的文献依据——即中心对称磁性（破缺时间反演）晶体中 Berry 曲率可非零的反例研究，以及非磁性中心对称材料（如 MgO）中 Berry 曲率严格为零的理论表述",
+      "search_keywords": [
+        "Berry curvature centrosymmetric crystal time-reversal symmetry",
+        "Berry curvature vanishing inversion plus time-reversal",
+        "nonmagnetic centrosymmetric materials Berry curvature zero",
+        "magnetic centrosymmetric crystal nonzero Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1 L25 引用 de las Heras 的工作，refs[49] 条目仍标注（预印本），但该文已见刊",
+      "missing_evidence": "文献条目本身需要更新：补刊版信息 Nano Lett. 2026, 26, 9722–9731 的卷页与 DOI，撤除（预印本）限定，使引用状态与正式见刊版本一致",
+      "search_keywords": [
+        "de las Heras Nano Letters 2026 26 9722",
+        "de las Heras high harmonic solids published DOI"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1 L5 'Liu 等在单层 MoS₂…'具名论断句零角标，[11] 首现迟至 §2.2，论点在断言处缺少即时的引用支撑",
+      "missing_evidence": "在 L5 句尾补挂引用 [11]，使具名成果论断在首次出现处即获文献支撑（文献已存在于 refs，属引用落位缺口而非新文献缺口）",
+      "search_keywords": [
+        "Liu monolayer MoS2 high-order harmonic generation",
+        "MoS2 solid high harmonic generation monolayer"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.5 L73 '尚无报道/没有公开方案'两处新颖性论断缺检索限定，同段其他论断均有检索口径",
+      "missing_evidence": "需要限定检索范围的文献核查支撑（如公开数据库检索日期与范围的声明），以支撑'据公开文献检索…尚无'的统一句式",
+      "search_keywords": [
+        "Kronig-Penney high harmonic generation",
+        "Landau-Zener semiconductor high harmonics prior work",
+        "k-resolved gating high harmonic spectroscopy"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

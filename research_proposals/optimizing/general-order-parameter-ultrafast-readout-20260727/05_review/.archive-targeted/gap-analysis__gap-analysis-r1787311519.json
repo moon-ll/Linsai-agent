@@ -1,0 +1,40 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb 样品在强场中红外 HHG 实验中的损伤阈值参数（评审 H7：申请书三处出现'预研已有'与'启动后待标定'口径矛盾，无法判断预研数值是否可信）",
+      "missing_evidence": "缺乏 CrSb 及同类过渡金属磷族/altermagnet 材料（MnTe 等）在近红外飞秒强场下损伤阈值的文献基准数据，无法用外部实验数据统一三处口径或验证预研值的量级合理性",
+      "search_keywords": [
+        "CrSb femtosecond laser damage threshold",
+        "CrSb strong-field ablation threshold near-infrared",
+        "transition metal pnictide ultrafast laser damage threshold",
+        "altermagnet MnTe femtosecond laser damage",
+        "CrSb reflectivity intense laser field experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L33 国际进展段连续堆砌 8 项工作（McCarter→Horstmann→Qiu→Sankar→Ren→Terashima→Du→Singh），呈现为'某人做了某事'清单而非批判性综合（评审 2b 不通过）",
+      "missing_evidence": "缺少对上述 altermagnet HHG 理论/实验工作的系统性对比文献（如综述或方法比较类工作），无法将八项工作按'与可辨识性判据的关系'重新组织论证，需核实各工作的具体结论差异",
+      "search_keywords": [
+        "altermagnet high harmonic generation review",
+        "McCarter altermagnet nonlinear optics theory",
+        "Horstmann Qiu altermagnet HHG calculation",
+        "Terashima Du Singh altermagnet nonlinear response",
+        "altermagnet HHG theory comparison"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "三层量化判据（调制深度 10%、反演精度 1%、SNR>5、条件数 κ、后验 50%）的取值依据（评审 2g 虽判'量化通过'但未验证数值是否有文献先例支撑）",
+      "missing_evidence": "缺乏固体 HHG 实验典型信噪比水平、圆二色/磁性差分信号典型调制深度、以及非线性光学反演问题条件数/后验收敛判据的文献参考值，量化指标无外部对照",
+      "search_keywords": [
+        "solid-state HHG signal-to-noise ratio measurement",
+        "HHG circular dichroism magnetic modulation depth",
+        "Fisher information condition number nonlinear optics inversion",
+        "Bayesian inversion spectroscopy posterior convergence criterion",
+        "altermagnet HHG differential signal amplitude percent"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

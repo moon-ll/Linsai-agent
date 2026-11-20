@@ -1,0 +1,29 @@
+{
+  "entries": [
+    {
+      "source_id": "paper:2025-2511.14678-giant-enhancement-of-attosecond-tunnel-ionization-competes-w",
+      "title": "Giant enhancement of attosecond tunnel ionization competes with disorder-driven decoherence in silicon",
+      "summary": "在硅的晶体-非晶相变过程中，用强场高次谐波（HHG）谱学观测到谐波谱的剧烈重塑。定量发现非晶相中阿秒隧穿电离产率较晶相增强超过250倍，同时无序驱动的电子-空穴退相干与该增强效应竞争，共同决定谱形演化。该工作确立了“电离增强 vs. 退相干”的竞争机制，并示范了固体HHG作为结构序/无序度超快探针的潜力。",
+      "path": "knowledge/raw/papers/2025-2511.14678-giant-enhancement-of-attosecond-tunnel-ionization-competes-w.md"
+    },
+    {
+      "source_id": "paper:2026-2609.11858-sub-cycle-doublon-holon-dynamics-in-one-dimensiona",
+      "title": "Sub-cycle doublon-holon dynamics in one-dimensional Mott insulators revealed by two-color high-harmonic spectroscopy",
+      "summary": "该工作将双色（ω+2ω）强场波形合成引入一维Mott绝缘体的固态高次谐波谱学，首次实现了对强驱动下doublon-holon（双占据-空位）对产生与复合的亚光学周期动力学的直接测量。通过扫描两色场相对相位改变载波周期内电场波形的不对称性，偶次谐波的产额与相位对关联激发的周期内时序高度敏感，从而把以往只能整体观测的非平衡多体动力学分解到亚周期时间尺度上读出。结果为强关联体系中'关联激子对'的超快产生-复合物理提供了波形层面的直接谱学证据。",
+      "path": "knowledge/raw/papers/2026-2609.11858-sub-cycle-doublon-holon-dynamics-in-one-dimensiona.md"
+    },
+    {
+      "source_id": "paper:2026-2609.12880-multidimensional-attosecond-clocking-near-dirac-co",
+      "title": "Multidimensional attosecond clocking near Dirac cones in graphite",
+      "summary": "本文将双色（ω–2ω）高次谐波谱学扩展为多维‘阿秒计时’方案，用于读取石墨中Dirac锥附近的子周期电子动力学，并同时提取谐波相位与attochirp等定时信息。其价值在于把已在气体与固体中发展的谐波定时技术推广到石墨的Dirac电子体系，通过多维参数扫描区分不同发射通道（带内电流/带间极化）与不同动量区域的发射时序，为线性色散电子的强场时间响应提供基准。",
+      "path": "knowledge/raw/papers/2026-2609.12880-multidimensional-attosecond-clocking-near-dirac-co.md"
+    },
+    {
+      "source_id": "paper:2026-2610.35440-harp-a-simulation-tool-for-high-order-harmonic-gen",
+      "title": "HarP: a simulation tool for high-order harmonic generation and propagation in gases",
+      "summary": "本文介绍了HarP，一个用于气体中高次谐波产生（HHG）及其宏观传播模拟的软件工具。它将微观单原子量子动力学（通过求解强场近似或TDSE获得单原子响应）与驱动激光和高次谐波的宏观传播相耦合，可自洽计算相位匹配、吸收、色散与聚焦效应。该工具面向阿秒科学中定量模拟谐波源特性（通量、相位、发散角）的需求。",
+      "path": "knowledge/raw/papers/2026-2610.35440-harp-a-simulation-tool-for-high-order-harmonic-gen.md"
+    }
+  ],
+  "updated_at": "2026-11-20T16:35:32Z"
+}

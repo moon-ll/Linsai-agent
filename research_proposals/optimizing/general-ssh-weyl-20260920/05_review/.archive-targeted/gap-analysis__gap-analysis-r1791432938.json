@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "Lorenzo[20] 在 2025/2026 年报告 HHG 在拓扑材料中的相关结果（rat L31 写 2025、con L5/L17 写 2026）",
+      "missing_evidence": "文献 [20] 的实际发表年份与卷期信息未定，存在版本冲突；需要从正式刊本（而非预印本）核实该作者关于拓扑材料 HHG 的最早同行评审出版记录",
+      "search_keywords": [
+        "Lorenzo high harmonic generation topological",
+        "Lorenzo HHG Weyl semimetal 2025",
+        "topological material HHG review 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参 reading-notes 2606.02238 等 4 处内部编号/文件名括注（rat L5/L9/L19/L54、sch L83）所指向的 HHG 相关工作",
+      "missing_evidence": "这些内部 reading-notes 与裸 arXiv 号（2205.06616 等）实际对应的正式文献身份未落地到 [N] 编号体系，评审专家无法核验",
+      "search_keywords": [
+        "arXiv 2606.02238 HHG",
+        "arXiv 2205.06616 high harmonic generation",
+        "Weyl semimetal HHG arXiv 2022"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "sch L83 两个裸 arXiv 号对应的 TaP/TaAs 同族 Weyl 半金属 HHG 共享形参工作",
+      "missing_evidence": "这些预印本是否已正式发表、其形参（晶格常数、自旋轨道耦合强度等）来源需要正式同行评审文献支撑，而非仅以 arXiv 编号裸引",
+      "search_keywords": [
+        "TaAs TaP high harmonic generation",
+        "Weyl semimetal HHG node selection",
+        "Schmidt Berova Weyl HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "sch L101「开关差分」方法使 Y（Berry 曲率关闭差分谱）具有独立指纹",
+      "missing_evidence": "「开关式（on/off）差分法」在 HHG 中分离几何贡献与动力学贡献的方法学先例需要文献支撑，目前仅有内部声明而无外部方法学引用",
+      "search_keywords": [
+        "switch off Berry curvature HHG",
+        "on-off difference high harmonic generation",
+        "selective band closure HHG control"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "「23→35 次自称句反弹」反映对本项目方法独立性、阈值超越性的主张缺乏外部文献背书",
+      "missing_evidence": "项目方声称的「首次」「独立」「超阈」等定位需要同时引用同领域竞争工作的最新报告作为对比基准，否则评审无法判断领先性",
+      "search_keywords": [
+        "HHG Weyl first observation",
+        "topological HHG independent probe benchmark",
+        "Berry curvature HHG pioneering"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "σ₀ 三开关全关基线定义及 X+Y+Z=(σ_full−σ₀)/σ_full 嵌套差分公式（sch L51/L125）",
+      "missing_evidence": "该嵌套差分公式的数学可分解性（开关独立性假设）需要引用 HHG 因果分解或过程分解领域的先驱文献作为方法学根基",
+      "search_keywords": [
+        "high harmonic generation process decomposition",
+        "causal factorization HHG nested difference",
+        "band-resolved HHG contribution analysis"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Luu 与 Wörner[4] 于 2018 年在 α-石英中以 HHG 圆二色性（CD）谱重构 Berry 曲率分布",
+      "missing_evidence": "[4] 文献的完整书目信息（期刊、卷期、页码）未在评审中核验，且仅此一篇作为「HHG 作为能带几何内禀探针的方法学地位」单一来源，建议补强至 2-3 篇独立方法学确证",
+      "search_keywords": [
+        "Luu Wörner 2018 α-quartz HHG circular dichroism Berry",
+        "HHG Berry curvature reconstruction experiment",
+        "solid HHG CD spectroscopy topological"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peng 团队 MgO 独立合作工作（rat L54）",
+      "missing_evidence": "该合作工作是否已正式发表、是否仅停留在会议/预印本阶段、其与项目 HHG 几何探针主线的关系需要文献证据支持",
+      "search_keywords": [
+        "Peng MgO HHG collaboration",
+        "MgO high harmonic generation Berry curvature",
+        "Peng group HHG oxide"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rat §1 提及「同源综述见 §1」（rat L9）所指向的 HHG/拓扑综述",
+      "missing_evidence": "该综述引用指向本章不存在的综述小节，属于孤儿引用；需补挂一篇权威 HHG-in-topological-materials 综述作为方法学锚点",
+      "search_keywords": [
+        "high harmonic generation topological materials review",
+        "HHG Weyl Dirac review",
+        "solid-state HHG review 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ciappina[22] 于 2025 年的综述作为 HHG 理论基础锚点（con L19）",
+      "missing_evidence": "[22] 是否为正式发表的同行评审综述、其覆盖范围与本项目方法学衔接点未明，需补充 Ciappina 系列工作目录以确认定位",
+      "search_keywords": [
+        "Ciappina HHG review 2025",
+        "Ciappina high harmonic generation solid",
+        "Ciappina Lewenstein HHG overview"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

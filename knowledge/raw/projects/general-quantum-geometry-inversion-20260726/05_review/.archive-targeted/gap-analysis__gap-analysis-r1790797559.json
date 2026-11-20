@@ -1,0 +1,135 @@
+{
+  "gaps": [
+    {
+      "claim": "Gao 等 2023 年的具名论断（L7），关于固体 HHG 与压缩光/量子光结合的具体结论",
+      "missing_evidence": "Gao 2023 年相关工作未挂 [N]，条目 [49] 已入参考文献表但正文未挂靠；需补挂对应编号并核实原文是否支持该断言",
+      "search_keywords": [
+        "Gao 2023 high harmonic generation solid",
+        "Gao solid HHG squeezed light",
+        "Gao quantum light HHG solid"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Silva 的具名论断（L9），具体内容需对照正文核实",
+      "missing_evidence": "Silva 相关工作未挂 [N]，需从参考文献表中匹配对应条目并补挂；如未在表中则需检索补充",
+      "search_keywords": [
+        "Silva high harmonic generation solid",
+        "Silva HHG recollision",
+        "Silva quantum geometry HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhang 的具名论断（L11），需对照正文核实其论断内容",
+      "missing_evidence": "Zhang 相关工作未挂 [N]，需匹配参考文献表条目补挂",
+      "search_keywords": [
+        "Zhang high harmonic generation solid",
+        "Zhang HHG quantum geometry",
+        "Zhang solid state HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cárdenas 的具名论断（L23），需对照正文核实",
+      "missing_evidence": "Cárdenas 相关工作未挂 [N]，需匹配参考文献表条目补挂",
+      "search_keywords": [
+        "Cárdenas high harmonic generation",
+        "Cárdenas HHG topology",
+        "Cárdenas solid HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Breitenbach 的具名论断（L25），涉及压缩光/压缩真空的实验工作",
+      "missing_evidence": "Breitenbach 关于 squeezed light 的开创性工作未挂 [N]，需补挂（经典 Breitenbach 1997/2005 squeezed vacuum 相关）",
+      "search_keywords": [
+        "Breitenbach squeezed vacuum",
+        "Breitenbach squeezed light experiment",
+        "Breitenbach 1997 squeezed light"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Uzan 的具名论断（L37），需对照正文核实",
+      "missing_evidence": "Uzan 相关工作未挂 [N]，需匹配参考文献表条目补挂",
+      "search_keywords": [
+        "Uzan quantum optics HHG",
+        "Uzan squeezed light HHG",
+        "Uzan attosecond physics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Runge-Gross 1984 定理（L47），DFT 的奠基性定理",
+      "missing_evidence": "Runge-Gross 1984 定理未挂 [N]，条目 [34] 已入参考文献表但未挂靠正文，需补挂并核对原文",
+      "search_keywords": [
+        "Runge-Gross theorem 1984 DFT",
+        "Runge-Gross density functional theory original",
+        "Runge-Gross Phys Rev Lett 1984"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Onida 的具名论断（L47），涉及固体 DFT/GW 计算方法",
+      "missing_evidence": "Onida 关于固体能带计算方法（GW 近似等）的论断未挂 [N]，需补挂 Onida et al. 1995/2002 经典综述类工作",
+      "search_keywords": [
+        "Onida GW approximation solid",
+        "Onida electronic excitations solids review",
+        "Onida Many-Body Perturbation Theory"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Sodemann-Fu 的具名论断（L47），涉及量子度规/非线性霍尔效应等量子几何相关工作",
+      "missing_evidence": "Sodemann-Fu 相关工作未挂 [N]，需补挂（如 Phys. Rev. Lett. 2015 量子度规非线性输运）",
+      "search_keywords": [
+        "Sodemann Fu quantum metric nonlinear",
+        "Sodemann Fu 2015 PRL nonlinear Hall",
+        "Sodemann Fu quantum geometry response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Provost 的具名论断（L47），涉及量子度规/贝里联络的经典定义",
+      "missing_evidence": "Provost 与 Vallee 1980 年量子度规定义工作未挂 [N]，需补挂",
+      "search_keywords": [
+        "Provost Vallee 1980 quantum metric",
+        "Provost Vallee Berry connection definition",
+        "Provost geometric structure quantum states"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Berry 的具名论断（L75），涉及贝里相位相关奠基性工作",
+      "missing_evidence": "Berry 1984 年贝里相位原始论文未挂 [N]，需补挂",
+      "search_keywords": [
+        "Berry 1984 quantal phase factors",
+        "Berry phase original paper",
+        "Berry geometric phase PRSL"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.6 首句：Lange 与 Madsen 2026 年关于拓扑绝缘体边缘态 + 量子光统一框架的工作",
+      "missing_evidence": "该断言挂 [22]，但 [22] 在 §1.1 已对应 Lange 等 2025 一维 Mott 激子挤压（PRL 135:043603）——一号双用、张冠李戴；评审判断真身疑为 [47]（Ilin 等，Band Topology in Solid-State High Harmonics），且注释表 [43] 还有第三处 Lange-ZnO 工作，需重新核对原始文献并挂正确编号",
+      "search_keywords": [
+        "Lange Madsen 2026 topological insulator HHG",
+        "Ilin band topology solid high harmonics",
+        "Lange topological insulator edge state quantum light"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.2 L47：MgO 谱经典 SBE（半导体布洛赫方程）复现的引用",
+      "missing_evidence": "当前挂 [26]（Lewenstein 原子 SFA），属机制错挂；R1-references 已判应改 [18]（Vampa 固体 SBE），未执行；需核查 Vampa et al. 固体 SBE 原文并改挂 [18]",
+      "search_keywords": [
+        "Vampa semiconductor Bloch equations solid HHG",
+        "Vampa 2015 PRL SBE HHG",
+        "Vampa solid state Bloch equations MgO"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

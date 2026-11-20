@@ -1,0 +1,40 @@
+{
+  "gaps": [
+    {
+      "claim": "比普通绝缘体高 2-3 个数量级已在多组数据中复现",
+      "missing_evidence": "缺少具体体系（除 TaP/[16] 外）的实验数据引用来支撑\"多组数据复现\"这一断言；当前句末 [16] 仅报告立方律标度关系，未给出增强倍数，导致孤儿证据",
+      "search_keywords": [
+        "high-order harmonic generation enhancement topological insulator",
+        "HHG band structure sensitivity 2-3 orders magnitude",
+        "topological insulator HHG yield comparison trivial insulator",
+        "Weyl semimetal HHG enhancement experimental",
+        "nonperturbative HHG solid enhancement factor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R≥2 阈值定标依据（取增强上限 100 倍对应的对数尺度比值）",
+      "missing_evidence": "需要 [20] 之外的实验或理论文献明确报告 HHG 产率增强倍数及其在 R 值（对数比值）上的实际分布，以校正\"下界 100 倍\"为\"上限 100 倍\"的方向性偏差，并为 R≥2 提供独立佐证",
+      "search_keywords": [
+        "HHG yield enhancement ratio logarithmic scale",
+        "topological material HHG intensity ratio experimental",
+        "Berry curvature HHG signal strength ratio",
+        "HHG enhancement factor upper limit topological",
+        "log10 enhancement ratio HHG topological insulator"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Luu 与 Wörner[4] 于 2018 年首次以 HHG 反演 MgO 的 Berry 曲率分布，确立方法学地位",
+      "missing_evidence": "该引用本身存在，但缺少与\"首次/方法学地位\"判断相关的同期或前后方法学比较文献（如其他 HHG 能带几何反演工作），用于支撑\"首次\"这一历史性断言",
+      "search_keywords": [
+        "Luu Wörner 2018 Berry curvature HHG MgO",
+        "first HHG band structure reconstruction",
+        "HHG Berry curvature measurement pioneer",
+        "all-optical band structure tomography HHG"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

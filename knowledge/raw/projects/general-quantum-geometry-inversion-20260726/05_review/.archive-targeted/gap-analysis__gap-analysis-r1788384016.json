@@ -1,0 +1,15 @@
+{
+  "gaps": [
+    {
+      "claim": "idler端真空投影条件测量假设的失效边界：当idler探测器量子效率 η_i < 1 或压缩参数 r → 大值时，残存混合分量破坏单模压缩真空假设，该边界对 R2/R3 所有 Ω/g 反演结论有连锁影响",
+      "missing_evidence": "缺少 idler 探测器量子效率不足或强压缩极限下 BSV 单模近似失效的实验表征或理论分析文献",
+      "search_keywords": [
+        "bright squeezed vacuum single mode approximation breakdown",
+        "idler detector efficiency imperfect BSV quantum light",
+        "squeezed vacuum mixed state detection efficiency",
+        "quantum light HHG nonideal detector condition"
+      ],
+      "priority": "high"
+    }
+  ]
+}

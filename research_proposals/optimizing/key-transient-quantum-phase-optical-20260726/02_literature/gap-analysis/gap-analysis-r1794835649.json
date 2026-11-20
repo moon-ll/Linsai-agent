@@ -1,0 +1,35 @@
+{
+  "gaps": [
+    {
+      "claim": "L57：Berry曲率由吸收谱读取亦有先例，且多体作用对两者的修饰被给出明确的适用范围（转述他人具体成果）",
+      "missing_evidence": "content章节重述rationale已挂文献的成果时抹去角标，需补挂Tornow文献[7]，以'某人等人[N]报道了X'句式半句嵌入论证链",
+      "search_keywords": [
+        "Berry curvature optical absorption spectroscopy measurement",
+        "many-body corrections Berry curvature optical response",
+        "Tornow Berry curvature absorption spectrum"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "L67：陈数可编码在Berry曲率中，也可编码在量子度规中，同一工作还给出简并系统中量子度规的测量协议（转述他人具体成果）",
+      "missing_evidence": "content章节重述时零角标，需补挂Zhang文献[20]，具名句应挂[N]并半句嵌入",
+      "search_keywords": [
+        "Chern number encoded in quantum metric",
+        "degenerate system quantum geometric tensor measurement protocol",
+        "Zhang quantum metric polarization spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "refs表[1][2]为孤儿条目，正文零角标，与头注'与正文角标一一对应'的承诺不符",
+      "missing_evidence": "rationale理论基线段需补挂[1][2]角标，或删除孤儿条目使文献表与正文引用一一对应",
+      "search_keywords": [
+        "Floquet engineering topological bands review",
+        "light-induced anomalous Hall effect graphene",
+        "high harmonic generation solid state topology"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "content"
+}

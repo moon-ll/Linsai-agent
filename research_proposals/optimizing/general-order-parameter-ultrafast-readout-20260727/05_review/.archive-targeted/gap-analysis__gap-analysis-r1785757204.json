@@ -1,0 +1,108 @@
+{
+  "gaps": [
+    {
+      "claim": "HHG 可在统一框架下读出激子、超导、铁磁、反铁磁、交错磁、CDW 四类序参量",
+      "missing_evidence": "缺少 HHG 在固体中针对上述每一类序参量已有实验读出的代表性论文，以及在多序共存条件下 HHG 可同时分辨的反演案例与边界条件",
+      "search_keywords": [
+        "solid HHG order parameter readout review",
+        "high harmonic spectroscopy antiferromagnet CDW superconductor",
+        "HHG excitonic order parameter attosecond solid",
+        "all-optical reconstruction order parameter HHG multiband"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "altermagnet（交错磁体）HHG 实验完全空白，是本课题要填补的空白",
+      "missing_evidence": "缺少对 altermagnet HHG 实验现状的全面综述（是否 0 篇 vs 已有零星工作未列入）、Šmejkal 类理论预言的最新期刊版与实验验证文献",
+      "search_keywords": [
+        "altermagnet high harmonic generation experiment",
+        "altermagnetism HHG spectroscopy RuO2 MnTe",
+        "Šmejkal altermagnet review 2024",
+        "spin-splitting altermagnet ultrafast probe"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "PDW（pair density wave）作为新前沿且与 HHG 探针方法直接相关",
+      "missing_evidence": "缺少 PDW 体系 HHG/光学读出的实验或综述文献；现有 PDW 探测多依赖 NMR/STM/Quantum Oscillation，需要文献支持 HHG 是否具备可辨识性",
+      "search_keywords": [
+        "pair density wave high harmonic generation",
+        "PDW optical ultrafast probe",
+        "PDW LESCO cuprate order parameter HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Hidden order (如 URu2Si2) 作为新前沿对 HHG 开放",
+      "missing_evidence": "缺少 URu2Si2 hidden order 序参量的 HHG/阿秒/强场光学读出文献；现有手段仍以 X 射线散射、比热、STM 为主",
+      "search_keywords": [
+        "hidden order URu2Si2 ultrafast optics",
+        "URu2Si2 HHG high harmonic",
+        "hidden order order parameter optical readout"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "NbSe2 CDW—超导共存区中 HHG 能区分能带重构、散射率变化与两个序参量演化（核心科学矛盾）",
+      "missing_evidence": "缺少 NbSe2（或类似体系）HHG 实验中能将多个序参量从总谐波响应中解耦出来的可辨识性论证文献；现有 tr-ARPES、tr-XRD、PES 文献能提供哪些独立约束需明确",
+      "search_keywords": [
+        "NbSe2 high harmonic generation CDW superconductor",
+        "HHG multiband order parameter coexistence",
+        "NbSe2 ultrafast probe band structure scattering rate",
+        "tr-ARPES NbSe2 CDW order parameter"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG 在时间、深度、直接性、强场、多维、环境适应性上全面优于 XRD/STM/ARPES",
+      "missing_evidence": "缺少量化对比文献：tr-XRD 与 tr-ARPES 的最新时间分辨（亚 ps 级）、HHG 在固体中的有效探测深度（穿透、吸收、相位匹配、厚度依赖）、以及三者在对称性/有序性分辨能力的可比基准",
+      "search_keywords": [
+        "ultrafast X-ray diffraction time resolution bench mark",
+        "time-resolved ARPES sub-picosecond comparison",
+        "HHG probe depth solid absorption phase matching",
+        "ultrafast spectroscopy comparison review XRD ARPES HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "'HHG 对对称性敏感'等同于'HHG 可直接读出序参量'",
+      "missing_evidence": "缺少 HHG 对称性选择定则与序参量反演的可辨识性文献；缺少 HHG vs XRD/ARPES 在对称分辨上的定量比较论文",
+      "search_keywords": [
+        "high harmonic spectroscopy symmetry selection rule order parameter",
+        "HHG inversion symmetry breaking readout solid",
+        "high harmonic generation anisotropy order parameter"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG 与 HHG-XUV 两种术语在立项依据中互换使用且功能等价",
+      "missing_evidence": "缺少明确区分 HHG 作为驱动源 vs HHG 衍生 XUV 作为探测源的综述；缺少固体 HHG-XUV 光谱学在序参量读出方面的最新（2023—2026）实验论文",
+      "search_keywords": [
+        "HHG-XUV spectroscopy solid order parameter",
+        "high harmonic generation probe vs driver solid",
+        "attosecond transient absorption solid review 2024"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Šmejkal 交错磁体理论文献作为本课题的核心理论基础之一",
+      "missing_evidence": "Šmejkal 论文的期刊口径与后文/参考文献存在冲突，需要核查其已发表的期刊版本（包括 Science Advances、Physical Review X、Nature Reviews Physics 等的最新综述）",
+      "search_keywords": [
+        "Šmejkal altermagnet Nature Reviews Physics",
+        "Šmejkal Science Advances altermagnetism 2022 2024",
+        "altermagnet classification collinear spin group theory review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "21/46 条参考文献为预印本，影响严谨性",
+      "missing_evidence": "核心预印本需要找到对应的期刊发表版本或后续验证论文（特别是涉及序参量读出、altermagnetism 实验验证、HHG 反演方法的论文）",
+      "search_keywords": [
+        "high harmonic spectroscopy solid journal version 2024 2025",
+        "attosecond order parameter readout published version",
+        "arXiv to journal HHG solid order parameter"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

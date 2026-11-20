@@ -1,0 +1,114 @@
+{
+  "gaps": [
+    {
+      "claim": "2011 年 Ghimire 等人在 ZnO 晶体中以中红外激光观测到非微扰固体 HHG 的首例实验及其后续内禀动量效应、Berry 曲率读出需要正确归位的引用支撑",
+      "missing_evidence": "[1] 指向 Ghimire ZnO 2011 需实文确认（PRL 107, 167407）；[2] '内禀柱面动量效应'实文未核实；[3] 现指向 nature14456（Luu Wörner Nature 2015 标题为 EUV 固体谐波谱，非 Berry 曲率读出）；Berry 曲率读出真正首例需重新对位至 Luu/Wörner NC 9, 916 (2018) 或相关 PRX 13, 031011",
+      "search_keywords": [
+        "Ghimire ZnO PRL 107 167407 2011 high harmonic generation",
+        "Luu Worner Nature Communications 9 916 2018 Berry curvature HHG quartz",
+        "Schubert Vampa Ghimire Schumann 2014 PRL ZnO intraband momentum",
+        "extreme ultraviolet high harmonic spectroscopy solids Nature 2015"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Vampa 等人把能带、电流与再碰撞相位联系起来，奠定带间极化与截止阶次解析基础",
+      "missing_evidence": "[9] 现指向 Molinero Optica 条目，须替换为 Vampa 等带间极化与截止阶次解析理论（Vampa PRL 115, 193603 (2015) 或后续 PRL 120, 215503 / JPB 53, 144003）；需确认 Vampa 真实作者署名下的极化-截止解析论文",
+      "search_keywords": [
+        "Vampa interband polarization cutoff law PRL 115 193603",
+        "Vampa Krausz Ghimire semiconductor Bloch equation high harmonic cutoff",
+        "Vampa band-resolved intraband interband HHG ZnO"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.5 第 1 段引用 [23] Fan 分析 MoS₂/hBN 反向旋转双圆场需要文献支撑",
+      "missing_evidence": "[23] 标 arXiv:2508.12563 实文为 Si/AlAs 键长压缩调制截止，无 MoS₂/hBN 反向旋转双圆场内容；需检索真正的 MoS₂/hBN 反向旋转（counter-rotating）双圆极化高次谐波实验文献，以及键长-截止调控实文",
+      "search_keywords": [
+        "counter-rotating circularly polarized HHG MoS2 hBN",
+        "dual circular high harmonic generation TMDC hBN heterostructure",
+        "Si AlAs bond length compression cutoff high harmonic arXiv 2508.12563",
+        "co-rotating counter-rotating bicircular HHG transition metal dichalcogenide"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1 第 2 段提及两束可见脉冲（624-698 nm）激发与失谐独立控制的双色泵浦实验",
+      "missing_evidence": "[15] APL Photonics 8, 086103 (2023) 实文参数为泵浦 1.25-2 eV（失谐 1.46-1.91 eV）、驱动 0.62 eV/2000 nm，未见 624-698 nm 双脉冲；需检索真正的 624-698 nm 可见双脉冲泵浦 MoS₂ 或 TMDC HHG 失谐控制实验，或按刊版参数改写",
+      "search_keywords": [
+        "two-color 624 nm 698 nm pump MoS2 high harmonic",
+        "APL Photonics 8 086103 2023 MoS2 detuning pump",
+        "visible dual-pulse detuning control HHG transition metal dichalcogenide",
+        "2 eV pump 0.62 eV driver MoS2 HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 第 2 段 Ma '以几何相位实现 4×10⁻⁵' 的扭转相位匹配工程论断需要文献支撑",
+      "missing_evidence": "[22] 标 Ma 扭转相位匹配第五谐波效率 4×10⁻⁵ 需实文确认（疑 PRL 135, 166902 扭转 hBN 第五谐波），但 '以几何相位实现' 表述与原文中 '扭转相位匹配 Pancharatnam-Berry 相位补偿失配' 不符；需核对 Ma 实文 PRL 卷期及准确表述",
+      "search_keywords": [
+        "Ma twisted bilayer hBN fifth harmonic generation PRL 135 166902",
+        "twisted homobilayer hBN Pancharatnam-Berry phase matching HHG efficiency",
+        "Ma twisted hBN 4e-5 fifth harmonic generation",
+        "geometric phase twist HHG enhancement bilayer hBN"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Hu 'PNAS' [27] MoS₂ 双圆场 HHG 选律需要文献支撑",
+      "missing_evidence": "[27] 现指向 Cárdenas 预印本，真 PNAS 文应在表 [26]；需检索 Hu 关于 MoS₂ 或 TMDC 双圆高次谐波选律的 PNAS 发表（含 Hu/Han/Ji et al. PNAS 关于 TMDC 双圆 HHG 选律工作）",
+      "search_keywords": [
+        "Hu PNAS MoS2 bicircular high harmonic selection rule",
+        "MoS2 counter-rotating bicircular HHG circular dichroism",
+        "Hu PNAS TMDC HHG selection rule 2023 2024",
+        "Langer Hu PNAS monolayer MoS2 high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Patra & Cocchi [29] 关于扭转 MoS₂ SHG DFT-Wannier 工作需要文献支撑",
+      "missing_evidence": "[29] 现指向 Molinero Optica（与 [9] 双撞）；Patra Cocchi 扭转 MoS₂ SHG DFT-Wannier 实际论文需重新检索（疑 npj Comput Mater 或 PCCP 2023-2025），并核对五配置 chi_xxx 张量计算与几何锁相 φ₀ 预测",
+      "search_keywords": [
+        "Patra Cocchi twisted MoS2 SHG DFT Wannier",
+        "twisted homobilayer MoS2 chi_xxx tensor five configurations",
+        "Patra Cocchi nonlinear optics twisted TMDC first principles",
+        "DFT Wannier twisted MoS2 second harmonic generation geometric locking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Kim WS₂ [40] HHG 反演对称破缺实验需要文献支撑",
+      "missing_evidence": "[40] 现指向 Han 阿秒脉冲（与 [39] 双撞）；Kim 关于 WS₂ HHG 反演对称破缺的真文需重新检索（NC 16, 9825, DOI 10.1038/s41467-025-65725-9 为候选，需实文标题与作者顺序确认）",
+      "search_keywords": [
+        "Kim WS2 high harmonic generation inversion symmetry breaking",
+        "Nature Communications 16 9825 2025 WS2 HHG",
+        "Kim WS2 broken inversion HHG third harmonic odd only",
+        "10.1038/s41467-025-65725-9 WS2 high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Zhong TrARPES [26] 时间分辨 ARPES 节点需要文献支撑",
+      "missing_evidence": "[26] 现指向 PNAS Hu MoS₂ 文，TrARPES 真文应在表内他条；需检索 Zhong 关于 MoS₂ 或 TMDC 时间分辨 ARPES 测量（节点能隙/激子动力学）",
+      "search_keywords": [
+        "Zhong trARPES MoS2 time-resolved photoemission",
+        "time-resolved ARPES MoS2 exciton dynamics node",
+        "Zhong transient ARPES transition metal dichalcogenide HHG pump",
+        "trARPES TMDC ultrafast bandgap renormalization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "本课题扭转同质双层 TMDC 高次谐波各向异性与对称破缺的基础理论框架与参考 2-8（研读基础）需要准确文献",
+      "missing_evidence": "清单 7 指出 [2]-[7] 研读基础标称'不参与编号引用'但实际全部被正文引用；需按实文重新对位（包括 Ghimire 2011、Schubert 2014、Vampa 2015、Luu Wörner 2015/2018、Baykusheva、Choi Grobis Lu You 等）",
+      "search_keywords": [
+        "Baykusheva solid HHG review manuscript cited",
+        "Ghimire Schubert Vampa 2013 2014 intraband HHG",
+        "Choi Grobis Lu You solid HHG MoS2",
+        "Pedersen solid HHG ZnO visible review"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

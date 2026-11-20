@@ -1,0 +1,82 @@
+{
+  "gaps": [
+    {
+      "claim": "[23] Ma 等人关于 MnTe 动量分辨 SHG 的工作被错写为实验观测",
+      "missing_evidence": "需要确认 Ma 等人论文（PRB 111, 064311）原文是否为理论预言而非实验；如确为理论，则需补充 MnTe 动量分辨 SHG 实际实验验证文献",
+      "search_keywords": [
+        "Ma MnTe momentum-resolved second harmonic generation",
+        "PRB 111 064311 RuO2 CuF2 MnTe altermagnet SHG theory",
+        "MnTe altermagnet SHG experimental observation",
+        "momentum-resolved SHG altermagnet spin splitting experimental verification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[25][26] 关于 CrSb/MnTe 自旋分裂 d/g 波型争议的实验依据",
+      "missing_evidence": "[25] d 波 vs g 波争议尚无定论，需补充最新 dHvA/STM/ARPES 实验对 CrSb/MnTe 自旋分裂波型的判定性证据",
+      "search_keywords": [
+        "CrSb d-wave g-wave altermagnet controversy",
+        "CrSb de Haas-van Alphen spin splitting",
+        "MnTe anisotropic spin splitting experimental ARPES",
+        "altermagnet spin splitting d-wave g-wave experimental determination"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内 MnTe 分子束外延（MBE）生长进展",
+      "missing_evidence": "[35] 国内 MnTe MBE 生长无参考文献支撑，需检索国内课题组 MnTe 薄膜 MBE 生长相关文献",
+      "search_keywords": [
+        "MnTe MBE molecular beam epitaxy China",
+        "MnTe 薄膜 分子束外延 国内",
+        "α-MnTe thin film growth Chinese group",
+        "MnTe altermagnet film MBE growth"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内 CrSb 单晶生长进展",
+      "missing_evidence": "[35] 国内 CrSb 单晶生长无参考文献支撑，需检索国内课题组 CrSb 单晶生长/输运相关文献",
+      "search_keywords": [
+        "CrSb single crystal growth China",
+        "CrSb 单晶生长 国内 输运",
+        "CrSb altermagnet crystal synthesis Chinese group",
+        "CrSb transport Neel temperature China"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Tyulnev 等人 [6] 在 TiSe₂ 中 CDW 相各向异性谐波分量观测",
+      "missing_evidence": "需确认 Tyulnev et al. Nature 2024 TiSe₂ 各向异性 SHG/CDW 谐波原始论文及具体温度阈值（200 K）的精确表述",
+      "search_keywords": [
+        "Tyulnev TiSe2 second harmonic generation Nature 2024",
+        "TiSe2 CDW anisotropic harmonic temperature threshold",
+        "TiSe2 charge density wave nonlinear optical response",
+        "Tyulnev TiSe2 high harmonic CDW 200K"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[23] Ma 等人理论预言 RuO₂/CuF₂/MnTe 中 Pancharatnam-Berry 张量识别自旋分裂",
+      "missing_evidence": "需检索 Ma 等人 PRB 111, 064311 论文中关于 Pancharatnam-Berry 张量、QGT 在 SHG 中识别 d 波特征的核心理论表述",
+      "search_keywords": [
+        "Ma Pancharatnam-Berry tensor SHG altermagnet",
+        "quantum geometry tensor second harmonic generation RuO2",
+        "Berry curvature SHG fingerprint altermagnet theory",
+        "PRB 111 064311 Ma theory prediction"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Ghimire 等人 [9] 2011 年 ZnO 中红外非微扰 HHG 首次观测",
+      "missing_evidence": "[9] Ghimire Nature Physics 2011 论文为固体 HHG 起点，需确认原文实验参数（波长、谐波阶次、强度阈值）",
+      "search_keywords": [
+        "Ghimire ZnO high harmonic generation Nature Physics 2011",
+        "solid-state HHG first observation mid-infrared",
+        "ZnO nonperturbative high harmonic experiment",
+        "Ghimire Nature Physics 7 138 ZnO HHG"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

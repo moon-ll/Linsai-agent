@@ -1,0 +1,95 @@
+{
+  "gaps": [
+    {
+      "claim": "交变磁体（altermagnet）高次谐波产生尚无实验观测报道（创新点二核心断言）",
+      "missing_evidence": "原支撑文献[26]为伪造arXiv条目（2608.21125实为随机图论论文），删除后断言失去文献核实；需检索是否存在交变磁HHG真实实验论文（如MnTe自旋极化HHG），若存在将直接推翻'尚无实验报道'断言",
+      "search_keywords": [
+        "altermagnet high harmonic generation experiment",
+        "MnTe spin-polarized high harmonic generation",
+        "first observation altermagnetic HHG",
+        "ultrafast spin symmetry breaking MnTe harmonic",
+        "spin-resolved HHG antiferromagnet experiment"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnTe薄膜中存在巨型超快非线性光学响应",
+      "missing_evidence": "原引用[27]为伪造条目（2607.25212实为SU(2)量子论综述），该论点无真实文献支撑；需MnTe或交变磁体超快非线性光学响应测量的真实实验论文",
+      "search_keywords": [
+        "MnTe colossal nonlinear optical response",
+        "ultrafast nonlinear optics MnTe film",
+        "altermagnet nonlinear optical response experiment",
+        "MnTe strong field nonlinear spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "RuO₂交变磁体中对称性分辨HHG，及对称适配波函数方法作为理论基函数（scheme §2承重引用）",
+      "missing_evidence": "原引用[28]为伪造条目（2608.13686实为分子HHG的Herman-Kluk传播子方法论文），承重引用失效；需对称性分辨HHG实验/理论及对称适配波函数（对称化基组）用于强场非线性计算的真实方法学文献",
+      "search_keywords": [
+        "symmetry-resolved high harmonic generation RuO2",
+        "altermagnet nonlinear optics RuO2",
+        "symmetry-adapted wavefunction strong field basis",
+        "group theory selection rule high harmonic solid",
+        "symmetrized basis nonlinear optical response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "中科院物理所等国内团队已建立3 μm中红外固体HHG实验平台（rationale L41）",
+      "missing_evidence": "当前[24]指向Yu理论论文《Tunable Odd-Parity Spin Splittings》，与实验平台无关；需国内实验组中红外强场HHG平台建设与实验结果的真实文献",
+      "search_keywords": [
+        "中科院物理所 中红外 高次谐波 实验平台",
+        "mid-infrared solid high harmonic generation Chinese group",
+        "3 micron HHG experiment platform",
+        "国内 固体高次谐波 实验进展",
+        "Institute of Physics CAS mid-infrared HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Luu & Wörner 高次谐波光谱探测固体能带/Berry曲率的奠基性工作（rationale L33）",
+      "missing_evidence": "编号错位（新表[15]为Suzuki）导致经典文献引用失效，需以正确元数据重新定位原始论文",
+      "search_keywords": [
+        "Luu Wörner high harmonic spectroscopy solid",
+        "Berry curvature measurement high harmonic generation",
+        "extreme ultraviolet solid band structure harmonic"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MoS₂（Kang）、hBN、Hancock等宽禁带半导体固体HHG代表性实验工作（rationale L35/L37/L39）",
+      "missing_evidence": "编号错位（新[16]为Long CrSb、新[18]为Sasabe、新[19]为Sun噪声谱学）导致固体HHG代表性实验文献引用全部失效，需逐一恢复正文论点与正确文献的对应",
+      "search_keywords": [
+        "MoS2 high harmonic generation experiment",
+        "hBN hexagonal boron nitride high harmonic generation",
+        "Hancock high harmonic generation solid",
+        "wide bandgap semiconductor HHG mid-infrared experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "实时TDDFT模拟固体HHG的理论方法学基础（rationale旧[17]引用点）",
+      "missing_evidence": "编号错位（新[17]为Mizuno）后TDDFT方法学引用失效，需实时含时密度泛函计算固体高次谐波的原始方法文献支撑",
+      "search_keywords": [
+        "real-time TDDFT high harmonic generation solid",
+        "time-dependent density functional theory solid HHG",
+        "TDDFT attosecond electron dynamics crystal"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "交变磁性非相对论自旋劈裂机制与国内外研究现状（Werner/Weber/Long CrSb/Mizuno/Zhang-Andreev/Che等，rationale L33–L45）",
+      "missing_evidence": "正文新旧两套编号混用，[15]–[28]共15+处引用无法确认指向；需逐条核实上述作者真实论文（含Suzuki、Sasabe、Sun噪声谱学、Che等新表条目）并建立正文-文献表一一对应",
+      "search_keywords": [
+        "Werner altermagnet high harmonic generation theory",
+        "Weber nonrelativistic spin splitting altermagnet",
+        "Long CrSb altermagnet spin splitting",
+        "Zhang Andreev spin high harmonic",
+        "Mizuno high harmonic generation solid state",
+        "Suzuki Sasabe altermagnet nonlinear"
+      ],
+      "priority": "high"
+    }
+  ]
+}

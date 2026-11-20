@@ -1,0 +1,341 @@
+{
+ "1": {
+  "doi": "10.1038/nphys1847",
+  "verdict": "OK",
+  "cr_title": "Observation of high-order harmonic generation in a bulk crystal",
+  "cr_author": "Ghimire",
+  "cr_journal": "Nature Physics",
+  "cr_vol": "7",
+  "cr_page": "138-141",
+  "cr_year": 2011
+ },
+ "2": {
+  "doi": "10.1126/science.aam8861",
+  "verdict": "OK",
+  "cr_title": "High-harmonic generation in graphene enhanced by elliptically polarized light excitation",
+  "cr_author": "Yoshikawa",
+  "cr_journal": "Science",
+  "cr_vol": "356",
+  "cr_page": "736-738",
+  "cr_year": 2017
+ },
+ "3": {
+  "doi": "10.1038/nphys3946",
+  "verdict": "OK",
+  "cr_title": "High-harmonic generation from an atomically thin semiconductor",
+  "cr_author": "Liu",
+  "cr_journal": "Nature Physics",
+  "cr_vol": "13",
+  "cr_page": "262-265",
+  "cr_year": 2017
+ },
+ "4": {
+  "doi": "10.1103/PhysRevLett.113.073901",
+  "verdict": "OK",
+  "cr_title": "Theoretical Analysis of High-Harmonic Generation in Solids",
+  "cr_author": "Vampa",
+  "cr_journal": "Physical Review Letters",
+  "cr_vol": "113",
+  "cr_page": "073901",
+  "cr_year": 2014
+ },
+ "5": {
+  "doi": "10.1103/PhysRevB.94.115164",
+  "verdict": "OK",
+  "cr_title": "High-order harmonic generation in solids: A unifying approach",
+  "cr_author": "Luu",
+  "cr_journal": "Physical Review B",
+  "cr_vol": "94",
+  "cr_page": "115164",
+  "cr_year": 2016
+ },
+ "6": {
+  "doi": "10.1103/PhysRevX.12.031042",
+  "verdict": "TITLE_SIM=0.64",
+  "cr_title": "Beyond Conventional Ferromagnetism and Antiferromagnetism: A Phase with Nonrelativistic Spin and Crystal Rotation Symmetry",
+  "cr_author": "Šmejkal",
+  "cr_journal": "Physical Review X",
+  "cr_vol": "12",
+  "cr_page": "031042",
+  "cr_year": 2022
+ },
+ "7": {
+  "doi": "10.1038/s41586-023-06907-7",
+  "verdict": "OK",
+  "cr_title": "Altermagnetic lifting of Kramers spin degeneracy",
+  "cr_author": "Krempaský",
+  "cr_journal": "Nature",
+  "cr_vol": "626",
+  "cr_page": "517-522",
+  "cr_year": 2024
+ },
+ "8": {
+  "doi": "10.1038/s41586-026-10902-z",
+  "verdict": "OK",
+  "cr_title": "3D bulk-resolved g-wave altermagnetic order parameter in CrSb",
+  "cr_author": "Long",
+  "cr_journal": "Nature",
+  "cr_vol": "656",
+  "cr_page": "854-860",
+  "cr_year": 2026
+ },
+ "9": {
+  "doi": "10.1103/PhysRevLett.133.206401",
+  "verdict": "TITLE_SIM=0.28",
+  "cr_title": "Large Band Splitting in\n                    <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\" display=\"inline\">\n                      <mml:mrow>\n                        <mml:mi>g</mml:mi>\n                      </mml:mrow>\n                    </mml:math>\n                    -Wave Altermagnet CrSb",
+  "cr_author": "Ding",
+  "cr_journal": "Physical Review Letters",
+  "cr_vol": "133",
+  "cr_page": "206401",
+  "cr_year": 2024
+ },
+ "10": {
+  "doi": "10.1038/s41467-024-46476-5",
+  "verdict": "OK",
+  "cr_title": "Direct observation of altermagnetic band splitting in CrSb thin films",
+  "cr_author": "Reimers",
+  "cr_journal": "Nature Communications",
+  "cr_vol": "15",
+  "cr_page": "2116",
+  "cr_year": 2024
+ },
+ "11": {
+  "doi": "10.1038/s41467-025-56647-7",
+  "verdict": "OK",
+  "cr_title": "Three-dimensional mapping of the altermagnetic spin splitting in CrSb",
+  "cr_author": "Yang",
+  "cr_journal": "Nature Communications",
+  "cr_vol": "16",
+  "cr_page": "1442",
+  "cr_year": 2025
+ },
+ "13": {
+  "doi": "10.1103/PhysRevB.109.115102",
+  "verdict": "OK",
+  "cr_title": "Observation of a giant band splitting in altermagnetic MnTe",
+  "cr_author": "Osumi",
+  "cr_journal": "Physical Review B",
+  "cr_vol": "109",
+  "cr_page": "115102",
+  "cr_year": 2024
+ },
+ "16": {
+  "doi": "10.1103/PhysRevB.110.235101",
+  "verdict": "OK",
+  "cr_title": "High harmonic generation in altermagnets",
+  "cr_author": "Werner",
+  "cr_journal": "Physical Review B",
+  "cr_vol": "110",
+  "cr_page": "235101",
+  "cr_year": 2024
+ },
+ "17": {
+  "doi": "10.1103/ypfs-fy39",
+  "verdict": "TITLE_SIM=0.32",
+  "cr_title": "Signatures of bulk g-wave altermagnetism in optically excited\n                    <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\">\n                      <mml:mrow>\n                        <mml:mi>α</mml:mi>\n                        <mml:mtext>−</mml:mtext>\n                        <mml:mi>MnTe</mml:mi>\n                      </mml:mrow>\n                    </mml:math>",
+  "cr_author": "Haag",
+  "cr_journal": "Physical Review Materials",
+  "cr_vol": "10",
+  "cr_page": "074413",
+  "cr_year": 2026
+ },
+ "19": {
+  "doi": "10.1186/s40580-026-00536-2",
+  "verdict": "OK",
+  "cr_title": "Symmetry-driven spin splitting in altermagnets: an angle-resolved photoemission spectroscopy perspective",
+  "cr_author": "Liu",
+  "cr_journal": "Nano Convergence",
+  "cr_vol": "13",
+  "cr_page": "6",
+  "cr_year": 2026,
+  "arxiv": "2602.13590",
+  "status": "ok_api",
+  "ax_title": "Altermagnetism, ARPES, symmetry, non-relativistic band splitting",
+  "ax_author": "Jiayu Liu",
+  "journal_ref": "",
+  "ax_doi": "10.1186/s40580-026-00536-2"
+ },
+ "20": {
+  "doi": "10.1088/1361-648X/ae6385",
+  "verdict": "OK",
+  "cr_title": "High-harmonic spin and charge pumping in altermagnets",
+  "cr_author": "Ly",
+  "cr_journal": "Journal of Physics: Condensed Matter",
+  "cr_vol": "38",
+  "cr_page": "175803",
+  "cr_year": 2026,
+  "arxiv": "2602.09738",
+  "status": "ok_api",
+  "ax_title": "High-Harmonic Spin and Charge Pumping in Altermagnets",
+  "ax_author": "Ousmane Ly",
+  "journal_ref": "",
+  "ax_doi": ""
+ },
+ "21": {
+  "doi": "10.1103/9gv7-vhxw",
+  "verdict": "TITLE_SIM=0.39",
+  "cr_title": "Anisotropic high harmonic generation as a gauge of altermagnetism in\n                    <mml:math xmlns:mml=\"http://www.w3.org/1998/Math/MathML\">\n                      <mml:msub>\n                        <mml:mi>RuO</mml:mi>\n                        <mml:mn>2</mml:mn>\n                      </mml:msub>\n                    </mml:math>",
+  "cr_author": "Liu",
+  "cr_journal": "Physical Review B",
+  "cr_vol": "112",
+  "cr_page": "L081105",
+  "cr_year": 2025
+ },
+ "22": {
+  "doi": "10.1103/PhysRevLett.118.087403",
+  "verdict": "OK",
+  "cr_title": "Impact of the Electronic Band Structure in High-Harmonic Generation Spectra of Solids",
+  "cr_author": "Tancogne-Dejean",
+  "cr_journal": "Physical Review Letters",
+  "cr_vol": "118",
+  "cr_page": "087403",
+  "cr_year": 2017
+ },
+ "23": {
+  "doi": "10.1038/nature14652",
+  "verdict": "OK",
+  "cr_title": "Real-time observation of interfering crystal electrons in high-harmonic generation",
+  "cr_author": "Hohenleutner",
+  "cr_journal": "Nature",
+  "cr_vol": "523",
+  "cr_page": "572-575",
+  "cr_year": 2015
+ },
+ "24": {
+  "doi": "10.1016/j.progsurf.2025.100795",
+  "verdict": "OK",
+  "cr_title": "Time-resolved photoemission spectroscopy of quantum materials using high harmonic generation: probing electron-phonon interactions and non-equilibrium dynamics",
+  "cr_author": "Suzuki",
+  "cr_journal": "Progress in Surface Science",
+  "cr_vol": "100",
+  "cr_page": "100795",
+  "cr_year": 2025
+ },
+ "25": {
+  "doi": "10.1038/s41586-024-08234-x",
+  "verdict": "OK",
+  "cr_title": "Nanoscale imaging and control of altermagnetism in MnTe",
+  "cr_author": "Amin",
+  "cr_journal": "Nature",
+  "cr_vol": "636",
+  "cr_page": "348-353",
+  "cr_year": 2024
+ },
+ "26": {
+  "doi": "10.1103/m8lc-f8gk",
+  "verdict": "OK",
+  "cr_title": "Observation of Switchable Chiral Magnons in an Altermagnet",
+  "cr_author": "Liu",
+  "cr_journal": "Physical Review Letters",
+  "cr_vol": "136",
+  "cr_page": "236705",
+  "cr_year": 2026,
+  "arxiv": "2605.14124",
+  "status": "ok_api",
+  "ax_title": "Observation of Switchable Chiral Magnons in an Altermagnet",
+  "ax_author": "Zheyuan Liu",
+  "journal_ref": "",
+  "ax_doi": "10.1103/m8lc-f8gk"
+ },
+ "27": {
+  "doi": "10.1038/s42005-025-02232-9",
+  "verdict": "OK",
+  "cr_title": "Topological Weyl altermagnetism in CrSb",
+  "cr_author": "Li",
+  "cr_journal": "Communications Physics",
+  "cr_vol": "8",
+  "cr_page": "311",
+  "cr_year": 2025,
+  "arxiv": "2405.14777",
+  "status": "ok_api",
+  "ax_title": "Topological Weyl Altermagnetism in CrSb",
+  "ax_author": "Cong Li",
+  "journal_ref": "Communications Physics, 8, 311 (2025)",
+  "ax_doi": "10.1038/s42005-025-02232-9"
+ },
+ "28": {
+  "doi": "10.1103/PhysRevLett.132.036702",
+  "verdict": "OK",
+  "cr_title": "Broken Kramers Degeneracy in Altermagnetic MnTe",
+  "cr_author": "Lee",
+  "cr_journal": "Physical Review Letters",
+  "cr_vol": "132",
+  "cr_page": "036702",
+  "cr_year": 2024
+ },
+ "30": {
+  "doi": "10.7498/aps.66.134207",
+  "verdict": "OK",
+  "cr_title": "High harmonic generation experiments based on solid-state supercontinuum",
+  "cr_author": "Liu Yang-Yang",
+  "cr_journal": "Acta Physica Sinica",
+  "cr_vol": "66",
+  "cr_page": "134207",
+  "cr_year": 2017
+ },
+ "31": {
+  "doi": "10.1038/s41566-018-0129-0",
+  "verdict": "OK",
+  "cr_title": "High-harmonic spectroscopy of ultrafast many-body dynamics in strongly correlated systems",
+  "cr_author": "Silva",
+  "cr_journal": "Nature Photonics",
+  "cr_vol": "12",
+  "cr_page": "266-270",
+  "cr_year": 2018
+ },
+ "32": {
+  "doi": "10.1038/nature14517",
+  "verdict": "OK",
+  "cr_title": "Linking high harmonics from gases and solids",
+  "cr_author": "Vampa",
+  "cr_journal": "Nature",
+  "cr_vol": "522",
+  "cr_page": "462-464",
+  "cr_year": 2015
+ },
+ "12": {
+  "arxiv": "2511.01690",
+  "status": "ok_api",
+  "ax_title": "Unconventional relativistic spin polarization of electronic bands in an altermagnet",
+  "ax_author": "A. Dal Din",
+  "journal_ref": "",
+  "ax_doi": "",
+  "verdict": "OK"
+ },
+ "14": {
+  "arxiv": "2603.16635",
+  "status": "ok_api",
+  "ax_title": "Discerning ground state and photoemission-induced spin textures in altermagnetic $α$-MnTe",
+  "ax_author": "D. A. Usanov",
+  "journal_ref": "",
+  "ax_doi": "",
+  "verdict": "OK"
+ },
+ "15": {
+  "arxiv": "2511.02447",
+  "status": "ok_api",
+  "ax_title": "Non-altermagnetic spin texture in MnTe",
+  "ax_author": "Meng Zeng",
+  "journal_ref": "",
+  "ax_doi": "",
+  "verdict": "OK"
+ },
+ "18": {
+  "arxiv": "2606.31573",
+  "status": "ok_api",
+  "ax_title": "High-harmonic spin-current signatures of altermagnetic spin-group symmetry",
+  "ax_author": "Koki Mizuno",
+  "journal_ref": "",
+  "ax_doi": "",
+  "verdict": "OK"
+ },
+ "29": {
+  "arxiv": "2503.10797",
+  "status": "ok_api",
+  "ax_title": "Atomic Altermagnetism",
+  "ax_author": "Rodrigo Jaeschke-Ubiergo",
+  "journal_ref": "",
+  "ax_doi": "",
+  "verdict": "OK"
+ }
+}

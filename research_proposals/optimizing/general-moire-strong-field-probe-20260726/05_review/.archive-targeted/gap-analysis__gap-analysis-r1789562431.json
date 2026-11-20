@@ -1,0 +1,15 @@
+{
+  "gaps": [
+    {
+      "claim": "莫尔异质结双档口径（合成数据档 ±0.02° vs 实测预期档 ±0.05°–0.1°）的科学合理性",
+      "missing_evidence": "需要实测 HHG 反演扭转角的精度范围文献（界定 ±0.05°–0.1° 的物理依据：本征角不均匀、莫尔周期误判阈值）",
+      "search_keywords": [
+        "twist angle reconstruction real experiment uncertainty",
+        "moire superlattice twist angle disorder measurement",
+        "HHG moire retrieval real sample accuracy",
+        "moire heterostructure twist angle inhomogeneity statistics"
+      ]
+    }
+  ],
+  "section": "full_review"
+}

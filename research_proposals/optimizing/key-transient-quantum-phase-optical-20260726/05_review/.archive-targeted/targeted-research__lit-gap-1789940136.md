@@ -1,0 +1,29 @@
+# 定向文献检索报告
+
+## 课题
+key-transient-quantum-phase-optical-20260726
+
+## 章节
+scheme
+
+## 检索关键词
+- attosecond transient absorption time resolution XUV pulse duration、ATA temporal jitter streaking convolution、attosecond pump probe time resolution budget、circularly polarized HHG Berry curvature sensitivity、Luu Worner 2018 Berry curvature quartz HHG、circular high harmonic Berry curvature reconstruction、Floquet topological insulator solid state experimental verification、Floquet band structure Bi2Se3 time-resolved ARPES、light-induced Floquet topological state observation、alpha-T3 lattice second-order nonlinear response magnitude
+
+## 检索结果
+
+- 2608.20821 | Attosecond Transient Polarimetry | N. Mayer, K. Gannan, S. R. Leone, L. B. Drescher | 2026 | 0.95 | Introduce elliptical-dichroic attosecond transient absorption spectroscopy (eDATAS) unifying circular/linear dichroic ATAS, with helium validation and in-situ XUV polarimetry | 来源：本地知识库
+- 2608.25121 | Carrier-Resolved Attosecond Valley Polarimetry of Monolayer MoS2 | N. Rana, L. Yue, M. B. Gaarde | 2026 | 0.93 | SBE simulations show Mo 4p core-level ATA is a quantitative carrier-resolved valley polarimeter for monolayer MoS2, with linear calibration C = 0.96·VP | 来源：本地知识库
+- 2609.17500 | Visualizing Berry curvature in a Floquet-Chern insulator | Y. Kim, R. Acharya, H. E. Aguirre, L. Figari, D. P. Shoemaker, F. Mahmood | 2026 | 0.94 | Circular-dichroism Tr-ARPES directly maps light-induced Berry curvature of Floquet-Bloch states on Bi2Se3 surface, resolving alternating-sign features at Floquet gaps | 来源：本地知识库
+- 2608.02038 | Floquet topological state induced by light-driven band inversion in SnTe | F. K. et al. | 2026 | 0.92 | TR-ARPES observation of transient Dirac-cone/band inversion in SnTe under0.88 eV femtosecond pump: first direct evidence of Floquet topological insulator in bulk semiconductor | 来源：联网检索
+- 2512.09585 | Table-top all-attosecond transient absorption spectroscopy | M. Volkov, B. Schütte et al. (MBI Berlin) | 2026 | 0.95 | First time-resolved all-attosecond transient absorption (AATAS) using table-top HHG source, observing 3.17 fs coherent hole motion in Xe+ spin-orbit states | 来源：本地知识库
+- 2407.17917 | Optical control of electrons in a Floquet topological insulator | D. M. B. Lesko, T. Weitz, S. Wittigschlager, W. Li, C. Heide, O. Neufeld, P. Hommelhoff et al. | 2024 | 0.93 | Demonstrates harmonic Floquet spectroscopy in graphene: photocurrent circular dichroism, all-optical anomalous Hall effect, 31 pA valley-polarized current from FTI state | 来源：本地知识库
+- 2503.00469 | Extracting RABBITT-like phase information from time-dependent transient absorption spectra | D. B. et al. | 2025 | 0.88 | Analytical + TDSE proof that spectral XUV phase is retrievable from transient absorption cross-section oscillations, equivalent to RABBITT phase | 来源：本地知识库
+- 2411.01729 | Covariance Analysis of Impulsive Streaking | C. H. et al. | 2024 | 0.86 | Formal framework for covariance analysis of impulsive angular streaking with large XFEL/IR timing jitter, extracting photoemission delay without single-shot requirement | 来源：本地知识库
+- 2505.06275 | SinBasis Networks: Matrix-Equivalent Feature Extraction for Wave-Like Optical Spectrograms | Y. Z. et al. | 2025 | 0.82 | Reformulates attosecond streaking phase retrieval as computer-vision problem with sin-basis embedded CNN/ViT/Capsule architectures on 80k synthetic streaking spectrograms | 来源：本地知识库
+- 2403.02853 | Observing the relative sign of excited-state dipole transitions by combining attosecond streaking and transient absorption spectroscopy | M. V. et al. | 2024 | 0.85 | Single-focal-volume simultaneous streaking+TA in helium with ePIE retrieval yields 195 as XUV pulse, calibrating absolute time-zero for transient absorption | 来源：本地知识库
+- 2501.04545 | Hallmarks of spin textures for high-harmonic generation in two-dimensional materials | F. C. et al. | 2025 | 0.84 | Theoretical framework connecting spin-texture-induced Berry curvature to even-order HHG in 2D materials, with focus on twofold rotational symmetry breaking | 来源：本地知识库
+- 2507.09234 | Revealing Material-Dependent Bicircular High-Order Harmonic Generation in 2D Semiconductors via Real-Space Trajectories | X. Z. et al. | 2025 | 0.83 | rt-TDDFT shows MoS2 and hBN have material-dependent bicircular HHG response, explained by real-space trajectory model including Berry curvature | 来源：本地知识库
+- 2405.16125 | Impact of crystal symmetries and Weyl nodes on high-harmonic generation in Weyl semimetal TaAs | L. J. et al. | 2024 | 0.8 | HHG signatures in Weyl semimetal TaAs are dominated by laser parameters rather than Weyl cones; elliptical HHG and CEP dependence do not efficiently probe topology | 来源：本地知识库
+- 2409.00285 | Radiation-induced dynamical formation of Floquet-Bloch bands in Dirac Hamiltonians | F. G. et al. | 2024 | 0.82 | Theoretical analysis using t-t' method of non-periodic driving effects on Floquet-Bloch formation, relevant for Bi2Se3 and other Dirac surface state TR-ARPES | 来源：联网检索
+- 2411.05988 | Band structure and optical response of Kekulé-modulated α-T3 model | C. et al. | 2024 | 0.78 | Tight-binding study of α-T3 lattice with √3×√3 Kekulé modulation reveals new intervalley optical transitions and van Hove singularities in optical response | 来源：联网检索
+- 2608.05488 | Polarization-resolved core exciton dynamics in LiF using attosecond transient absorption spectroscopy | K. J. Gannan, L. B. Drescher, R. Quintero-Bermudez, N. Rana, C. Huang et al. | 2025 | 0.82 | ATA study of LiF core excitons reveals polarization-dependent dynamics, validating eDATAS-like elliptical dichroic framework on solid-state target | 来源：联网检索

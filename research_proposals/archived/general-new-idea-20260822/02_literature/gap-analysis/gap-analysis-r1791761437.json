@@ -1,0 +1,58 @@
+{
+  "gaps": [
+    {
+      "claim": "§4 L59 声称'原子尺度的 g 波铁性有序已在 La₂O₃Mn₂Se₂、Ba₂CaOsO₆…获得证实'",
+      "missing_evidence": "需要 (a) 区分 La₂O₃Mn₂Se₂（d 波形式因子）与 Ba₂CaOsO₆（g₃̄ 波形式因子）的实验/理论证据，分体系分波型引用；(b) 明确该结论为 DFT/对称性理论预言而非实验直接证实；(c) 补充对应原始理论或计算文献支撑各材料独立波型判定",
+      "search_keywords": [
+        "altermagnet",
+        "g-wave",
+        "d-wave",
+        "spinexchange form factor",
+        "La2O3Mn2Se2 DFT",
+        "Ba2CaOsO6",
+        "A2O3M2Se2 family",
+        "muon spin relaxation alternagnetic",
+        "ARPES altermagnetic nodal plane"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4 L63 具名提及'中科院物理所（2024）与北大刘运全课题组'的国内交变磁/高次谐波进展",
+      "missing_evidence": "需补 [N] 编号引用：(a) 中科院物理所 2024 年在交变磁或高次谐波方向的具体工作；(b) 刘运全课题组（北大）在 HHG/阿秒或磁性探测方向的可索引文献条目，以支持具名进展的真实性",
+      "search_keywords": [
+        "Institute of Physics CAS altermagnet 2024",
+        "Liu Yunquan Peking University HHG",
+        "刘运全 北大 高次谐波",
+        "CAS IoP MnTe alternagnet",
+        "Peking University attosecond magnetic",
+        "北京大学 交变磁 谐波"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2 L25 声称'Lee 等人[28]在同一时期'做了与 MnTe/CoTe 母体材料 ARPES 或自旋分辨谱相关的工作",
+      "missing_evidence": "当前引用 [28] 指代不清（Lee PRL 2024 与 Long 2026 跨两年），需替换/补充为：(a) 与 Krempaský 等人[7]（2024）同期的 MnTe 或 CoTe ARPES 工作；(b) 2024 年内能确证母体层状化合物电子自旋织构的最新文献，使'同期'在时间窗口内自洽",
+      "search_keywords": [
+        "MnTe ARPES 2024",
+        "CoTe alternagnet band structure",
+        "Krempasý Neutron diffraction MnTe",
+        "spin-resolved ARPES layered chalcogenide 2024",
+        "layered altermagnet nodal plane ARPES"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "references.md 中 [33] Ciappina（高次谐波/阿秒领域综述或方法）与 [34] Fan（交变磁或 MnTe 谐波相关）未在正文任何章节出现引用",
+      "missing_evidence": "两篇文献当前为孤儿引用，需根据其内容决定：(a) 删除并在表头'七条'改'五条'以清理；或 (b) 在 §3 核心挑战、§4 国内外现状或 §5 定位节中嵌入实质性引用，使文献与论点发生直接支撑关系（Ciappina 适合支撑 HHG 方法/强场近似语境，Fan 适合支撑 MnTe/交变磁谐波偏振诊断语境）",
+      "search_keywords": [
+        "Ciappina high harmonic generation review",
+        "Ciappina HHG solid-state",
+        "Fan MnTe altermagnet HHG",
+        "Fan harmonic polarization magnetic solid",
+        "n-alkane high harmonic generation transition"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,81 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.4 R3 三个可证伪假设（>20% 阈值与 30% 关联莫尔HHG响应关系）的阈值依据引用 Nikola 2021",
+      "missing_evidence": "Nikola 2021 实际归属为 Shan et al.（引文归属错误 C10），需要找到正确的关联莫尔系统中HHG响应强度相对于无关联系统的定量增强文献（约30%或相近量级）",
+      "search_keywords": [
+        "Shan 2021 moiré high harmonic generation",
+        "correlated moiré HHG enhancement",
+        "interaction driven moiré strong field response",
+        "Mott insulator HHG spectral weight transfer"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§三 创新点1 '从根本上突破了现有莫尔HHG理论仅适用于无关联紧束缚的限制'",
+      "missing_evidence": "需要确凿文献证明：现有莫尔HHG理论主流均建立在无关联紧束缚框架上，且本项目提出的多体关联扩展是首创性突破；C10/C11/C12 引文（Nikola 2021, Hu/Meng PNAS 2024, Zhou Nature 2023）归属错误削弱该论断",
+      "search_keywords": [
+        "moiré superlattice HHG tight-binding review",
+        "many-body moiré HHG theory first principles",
+        "correlated electron moiré high harmonic generation theory",
+        "TDDFT moiré heterostructure HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 R1 强场三段式降阶（Floquet+Keldysh+多体格林函数）的方法学背书引用 Zhou Nature 2023",
+      "missing_evidence": "Zhou Nature 2023 引文归属错误（C12），需要找到正确的强场 Floquet-Keldysh 多体理论应用于莫尔/强关联系统的原始文献",
+      "search_keywords": [
+        "Floquet Keldysh many-body moiré",
+        "non-equilibrium Green's function twisted bilayer",
+        "Floquet TDDFT strongly correlated 2D",
+        "Keldysh Floquet strongly correlated honeycomb"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 R2 多观测联合反演方案的方法学背书引用 Hu/Meng PNAS 2024 与 Qiu Nat Commun 2024",
+      "missing_evidence": "Hu/Meng PNAS 2024 与 Qiu Nat Commun 2024 引文归属错误（C11/C13），需要找到正确的多物理量联合反演贝里曲率/量子度规的方法学原文",
+      "search_keywords": [
+        "multi-observable inversion Berry curvature quantum metric",
+        "joint reconstruction band geometry moiré HHG",
+        "Bayesian inversion HHG band geometry",
+        "combined observables Berry curvature metric moiré"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 R3 光 Floquet 主动调控方案的方法学背书引用 Heide Nature Physics 2024",
+      "missing_evidence": "Heide Nature Physics 2024 引文归属错误（C14），需要找到正确的中红外/太赫兹 Floquet 调控莫尔能带结构的实验或理论原文",
+      "search_keywords": [
+        "Floquet engineering moiré band structure",
+        "light induced Floquet twisted bilayer",
+        "mid-infrared Floquet control moiré",
+        "circularly polarized Floquet moiré superlattice"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 R2 2D 莫尔材料贝里曲率/量子度规量化反演的方法学背书引用 Xu/Zhou npj QM 2024 与 PRJ 2024 2D Berry",
+      "missing_evidence": "Xu/Zhou npj QM 2024 与 PRJ 2024 2D Berry 引文归属错误（C15），需要找到正确的二维贝里曲率精确测量与反演参考文献",
+      "search_keywords": [
+        "2D Berry curvature precise measurement",
+        "quantum metric reconstruction 2D material HHG",
+        "npj Quantum Materials Berry curvature 2024",
+        "2D moiré Berry curvature experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.4 R3 TDDFT 核时估算与可行性背书引用 Amato PRB 2024",
+      "missing_evidence": "Amato PRB 2024 引文归属错误，需找到正确的 TDDFT 莫尔/2D 异质结计算量与可扩展性评估文献（>10^8 核时标注依据）",
+      "search_keywords": [
+        "TDDFT moiré heterostructure computational cost",
+        "real-time TDDFT 2D material scalability",
+        "TDDFT core hours twisted bilayer benchmark",
+        "TDDFT feasibility moiré HHG"
+      ],
+      "priority": "high"
+    }
+  ]
+}

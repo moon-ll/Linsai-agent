@@ -1,0 +1,73 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.1(a) 低频区段声称的'Floquet-Bloch 含时 Wilson 圈'机制",
+      "missing_evidence": "需要Floquet-Bloch态含时Wilson圈/贝里相调控拓扑能隙的理论或实验文献，但当前引用[29]实为Tan α-Bi₄Br₄低温瞬态反射谱实验（载流子屏蔽+相干声子调制带隙），与强场精确调控拓扑能隙无关",
+      "search_keywords": [
+        "Floquet-Bloch time-resolved Wilson loop",
+        "strong-field topological bandgap control Floquet",
+        "含时 Wilson 圈 Floquet 拓扑能隙 强场"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1(a) 低频区段'强场精确调控拓扑能隙'的物理机制",
+      "missing_evidence": "缺少强场激光驱动下主动调控拓扑能隙（μeV–meV 量级）的方法学文献，现有候选仅覆盖弱扰动反射谱学",
+      "search_keywords": [
+        "strong-field topological bandgap engineering",
+        "Floquet control topological gap solid-state HHG",
+        "强场 拓扑能隙 调控 高次谐波"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2(a) 2 μm 端 75 mrad 对应 64 as 的数值换算",
+      "missing_evidence": "缺少中红外 OPCPA 驱动阿秒脉冲宽度-发散角换算公式及端点值复算依据，方案应援引标准 RABBITT/streaking 角度-时间换算文献以自洽核验",
+      "search_keywords": [
+        "attosecond streaking angular distribution time mapping",
+        "mid-infrared OPCPA RABBITT angular dispersion attosecond",
+        "阿秒 条纹 角度-时间 换算 中红外"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2(b) 'ATA 每数据点 100 发'采样方案与 SNR 0.01 误差预算",
+      "missing_evidence": "缺少阿秒瞬态吸收（ATA）单发采样噪声极限与多发平均收敛到 1% 精度的实验先例文献，需引用 ATA 重复率-信噪比定量关系",
+      "search_keywords": [
+        "attosecond transient absorption single-shot SNR",
+        "ATA averaging convergence photon noise limit",
+        "阿秒 瞬态吸收 单发 平均 信噪比"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2(a)(b) 阿秒条纹（attosecond streaking）作为主方案的时间分辨能力基准",
+      "missing_evidence": "缺少近年来 OPCPA 驱动水窗/中红外阿秒条纹测量的时间分辨基准（≤100 as），现有引用[26][14]需升级到最新 ICFO/ETH 100 kHz 装置实验",
+      "search_keywords": [
+        "mid-infrared attosecond streaking 100 kHz OPCPA",
+        "water window attosecond streaking pulse duration benchmark",
+        "中红外 阿秒条纹 时间分辨 OPCPA 2024 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.1(a) Co₃Sn₂S₂/1T-TaS₂ 等拓扑材料 HHG 类比标度的合理性",
+      "missing_evidence": "需要拓扑半金属 HHG 产率-节点拓扑荷类比标度的最新实验验证（TaAs/TaP/Kagome），当前仅引用理论，缺 2024–2025 直接观测",
+      "search_keywords": [
+        "Weyl semimetal HHG yield scaling topological charge",
+        "kagome HHG enhancement orders of magnitude experimental",
+        "拓扑半金属 高次谐波 产率 标度律 实验"
+      ]
+    },
+    {
+      "claim": "§1 高频区 Floquet-Magnus 1/ω 收敛的强场适用性",
+      "missing_evidence": "缺少 Floquet-Magnus 展开在 1.5–2 μm 驱动下收敛到 10% 误差内的高频区有效域文献，需引用高频区定义与高阶修正系统分析",
+      "search_keywords": [
+        "Floquet-Magnus expansion high-frequency regime validity",
+        "strong-field Floquet expansion convergence mid-infrared",
+        "Floquet-Magnus 高频区 收敛 中红外"
+      ]
+    }
+  ],
+  "section": "scheme"
+}

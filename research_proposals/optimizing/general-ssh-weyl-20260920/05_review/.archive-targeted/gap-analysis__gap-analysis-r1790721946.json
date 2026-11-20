@@ -1,0 +1,66 @@
+{
+  "gaps": [
+    {
+      "claim": "高阶拓扑相（HOTI）的 HHG 信号'消失'问题仍是开放问题，本项目以 Bi₂Se₃ 家族 HOTI 为原型解决这一瓶颈",
+      "missing_evidence": "缺少系统综述或代表性文献明确指出 HOTI HHG 信号消失/抑制是尚未解决的核心难题；需补充说明在 HOTI 体系中观测 HHG 已发表的实验/理论工作及其局限性",
+      "search_keywords": [
+        "higher-order topological insulator high harmonic generation",
+        "HOTI HHG edge state disappearance",
+        "Bi2Se3 high-order topological harmonic generation",
+        "topological insulator HHG signal suppression"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Bi₂Se₃ 家族 HOTI 中边态与体态 HHG 信号差异达 2–3 个数量级（100–1000 倍，取下界 100 倍），S_edge=0.2 与 R≥2 阈值链据此设定",
+      "missing_evidence": "scheme.md 与 content.md 表述不一致（content 改'≤100 倍'但 scheme 未迁移），且 reference [20] 实报 'up to 2 个数量级'；需重新核对 [20] 原文并补引能独立佐证该量级范围的理论/实验文献（边态贡献比例、S_edge 阈值合理性）",
+      "search_keywords": [
+        "Bi2Se3 topological edge state HHG ratio",
+        "higher-order topological insulator edge state contribution harmonic",
+        "topological edge bulk harmonic generation magnitude order"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "高阶 CD 角度依赖与对称破缺诱导边带信号的二维参数空间（δ_CD/ΔI_gap/ΔI_rev）作为 HOTI 联合判据，判别成功率 ≥95%",
+      "missing_evidence": "§5.3 提及的三个判别量（压缩度阈值响应）不在 §3.4.2 的三判别量集合中，且 ≥95% 的成功率阈值缺乏文献基线；需补充 CD 角、gap 强度、反转对称破缺带边信号在已有 HHG 拓扑识别文献中的定义与判别精度数据",
+      "search_keywords": [
+        "circular dichroism HHG topological identification",
+        "high harmonic generation inversion symmetry breaking topological",
+        "HHG topological phase discriminator accuracy benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TaP 在驱动频段 0.3–1 THz、峰值场 tens of kV/cm 弱场区的三次谐波校核窗与 Pilch 等人[16] 实验窗口对齐",
+      "missing_evidence": "引用 [16] 已存在但需验证其实验驱动场参数是否覆盖 0.3–1 THz 与 tens of kV/cm 区间；需补引 TaP/Weyl 半金属 THz 三次谐波相关实验或基准文献以确认参数对齐依据",
+      "search_keywords": [
+        "TaP Weyl semimetal terahertz third harmonic generation",
+        "Weyl semimetal THz nonlinear response Pilch",
+        "TaP weak field THz harmonic experimental"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "X+Y+Z 方案判据与多带引擎在 Weyl 半金属极限下的基准测试一致（σ₀/σ_full<0.05 的闭合条件）",
+      "missing_evidence": "方案章直接断言与多带紧束缚方法在 Weyl 极限下的基准一致，但未给出基准测试文献或与已发表多带 HHG 计算（如 TDDFT、k·p 紧束缚 Weyl HHG）对比的具体引用；需补引 Weyl 半金属多带 HHG 基准文献",
+      "search_keywords": [
+        "Weyl semimetal multi-band tight-binding HHG benchmark",
+        "k dot p Weyl high harmonic generation benchmark",
+        "Weyl node HHG multi-band calculation reference"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "高阶拓扑相判别成功率 ≥95% 作为 G1 主指标的可达性",
+      "missing_evidence": "缺少 HHG 拓扑相自动判别/机器学习分类文献中报告的成功率基线数据，无法判定 95% 是否为保守、可比或过高的阈值；需补充相关分类精度文献",
+      "search_keywords": [
+        "machine learning HHG topological classification accuracy",
+        "topological phase identification harmonic generation success rate",
+        "deep learning HHG material classification benchmark"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

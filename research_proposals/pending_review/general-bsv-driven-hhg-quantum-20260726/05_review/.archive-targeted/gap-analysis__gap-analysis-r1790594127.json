@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "华东师范大学吴健团队在钠原子隧穿电离上以 300 nJ BSV 等效 7.1 μJ 相干光的作用，非线性效率提升超过 20 倍",
+      "missing_evidence": "当前误挂文献 [1]=Rasputnyi（ZnO 固体 HHG），需补真身文献：Wu 组 Nature 2026 论文（DOI 10.1038/s41586-026-10485-9），含 300 nJ/7.1 μJ/>20 倍/钠原子/角条纹等原始数据",
+      "search_keywords": [
+        "10.1038/s41586-026-10485-9",
+        "BSV sodium tunneling ionization Wu group Nature 2026",
+        "spatiotemporal coupling BSV HHG sodium atom",
+        "BSV 300 nJ equivalent 7.1 microjoule coherent"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Phys. Rep. 86, 116401 (2023) 引用的 HHG 综述核心证据",
+      "missing_evidence": "期刊缩写错写为 Phys. Rep.，实际应为 Rep. Prog. Phys. 86, 116401 (2023)；需补/更正正确条目（DOI 10.1088/1361-6633/acf144，Li-Lan-Zhu-Lu）",
+      "search_keywords": [
+        "10.1088/1361-6633/acf144",
+        "Reports on Progress in Physics 86 116401 2023 HHG review",
+        "Li Lan Zhu Lu high harmonic generation review",
+        "solid HHG review Rep Prog Phys 2023"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "g²(0)=3+1/N 原始出处与光源验收指标的文献锚",
+      "missing_evidence": "references.md 缺 [3] 与 [22] 两个条目（编号 34 条跳号），正文 §2.1 '[3,4]' 与 [22] 引用链条断裂；需补齐 g²(0)=3+1/N 的原始 Hanbury Brown–Twiss 型相干性理论文献，以及 BSV 光束质量因子 M² 或时空耦合验收指标的文献",
+      "search_keywords": [
+        "g2(0)=3+1/N Hanbury Brown Twiss coherence",
+        "second-order autocorrelation coherent state",
+        "BSV beam quality M2 measurement standard",
+        "spatiotemporal beam quality acceptance criterion HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§1.3 末段 [35] 关于 BSV 驱动固体 HHG 的具体实验/理论结论",
+      "missing_evidence": "正文写'Phys. Rev. Lett. (2025)'但条目及 CrossRef 实查均为 Phys. Rev. A 112, 043119 (2025)，需更正期刊缩写并核查该 PRA 文献是否真正支撑文中具体论点",
+      "search_keywords": [
+        "Phys Rev A 112 043119 2025",
+        "10.1103/PhysRevA.112.043119",
+        "BSV driven solid HHG 2025",
+        "spatiotemporal vortex HHG solid 2025"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Ghimire 等人 2011 年首次在中红外激光驱动 ZnO 晶体中观测到非微扰高次谐波产生",
+      "missing_evidence": "正文写 2011 年观测，条目/期刊实际为 2010（在线 2010-12，刊印 2011-02 Nature）；需统一年份表述或括注'在线 2010/刊印 2011'，并核实 Ghimire 2010/2011 Nature 原文以确认非微扰 HHG 与 ZnO 体系的关键实验参数",
+      "search_keywords": [
+        "Ghimire 2010 ZnO crystal high harmonic generation",
+        "Ghimire Nature 2011 475 78 solid HHG",
+        "nonperturbative high harmonic generation ZnO mid-infrared",
+        "10.1038/nature10111"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,45 @@
+{
+  "gaps": [
+    {
+      "claim": "§1.2 首句：Ghimire 等人 2010/2011 年使用中红外激光驱动 ZnO 晶体观测到非微扰高次谐波产生（HHG 在固体中的奠基性具名论断）",
+      "missing_evidence": "该具名论断句缺少 [N] 角标；references 中已有对应条目 [32] 但正文未挂接，属引用孤儿（citation_orphan）。需将 Ghimire 等原始论文（非微扰固体 HHG 开创性工作）的引用补在论断句尾，并按全书首现顺序复核后续编号。",
+      "search_keywords": [
+        "Ghimire ZnO high-order harmonic generation",
+        "nonperturbative HHG solid mid-infrared",
+        "solid-state high harmonic generation 2011 PRL"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.2 首次出现 Hu 等人工作的具名论断（与 §1.3 整句复述为同一工作）",
+      "missing_evidence": "Hu 等同一工作在 §1.2 首现处缺 [24] 角标，仅在 §1.3 复述处出现，造成重复引用且首现未挂（duplication_citation）。该工作已核实为 PRL 133, 156901（作者单位中科院物理所），需在 §1.2 首现句尾补 [24]，§1.3 压缩承接，消除双处各引一半的隐患。",
+      "search_keywords": [
+        "Hu PRL 133 156901 moiré",
+        "moiré exciton strong-field physics",
+        "twisted transition metal dichalcogenide nonlinear spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.3 Sun 等人 QTCI 方法实现 N~10⁹ 粒子的具名定量论断（获得收敛解）",
+      "missing_evidence": "该具名定量论断缺 [33] 角标（citation_orphan）；references 中虽有方法学关联注，但正文未挂接。需将 Sun 等 QTCI（量子轨道/经典系综类降阶方法）大规模计算的原始论文引用补在'获得收敛解'句尾，以支撑 N~10⁹ 规模数值的出处。",
+      "search_keywords": [
+        "Sun QTCI high harmonic generation",
+        "quantum trajectory classical ensemble TDSE large-scale",
+        "strong-field SBE reduced-order simulation 10^9"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§1.2/§1.3 引用的 Ikeda 等 2025 工作（Δ_Mott=1.76 eV，arXiv:2508.00296）",
+      "missing_evidence": "该支撑文献目前仅为预印本（v2 仍 unpublished），正文虽已标注但正式版本文献缺位。若投稿/申报周期内该文未正式发表，存在支撑文献效力不足的风险，建议持续跟踪其期刊正式版本（如 PRL/PRX/Nat. Commun. 等）并届时替换为正式卷期页码。",
+      "search_keywords": [
+        "Ikeda moiré Mott gap 1.76 eV",
+        "arXiv 2508.00296 published",
+        "twisted bilayer Mott transition optical spectroscopy"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

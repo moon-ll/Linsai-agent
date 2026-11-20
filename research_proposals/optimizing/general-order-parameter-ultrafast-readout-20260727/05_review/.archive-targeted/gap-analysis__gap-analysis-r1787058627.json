@@ -1,0 +1,75 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme.md L25/L73 中 'Yue 与 Gaarde [58]' 和 '[58] 保证' ——[58] 在 references.md 中已不存在（已拆分为 [58a]/[58b]），属幽灵引用",
+      "missing_evidence": "需要重新确认 [58] 对应的原始文献编号，Yue 与 Gaarde 在 HHG 领域的具体工作是什么，是否被 [58a] 或 [58b] 覆盖",
+      "search_keywords": [
+        "Yue Gaarde high harmonic generation",
+        "Gaarde semiconductor high harmonic theory",
+        "Yue attosecond spectroscopy solid-state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rost 等人 [67] 在 CrSb 中通过自旋分辨 HHG 观测到材料特异的交错磁指纹——该文献是项目核心信号可行性支撑，但 references.md [67] 实为 Horstmann 理论论文，Rost arXiv:2507.02673 未收入",
+      "missing_evidence": "Rost 等人 arXiv:2507.02673 (2025) CrSb 自旋分辨 HHG 实验原文，用于证明 CrSb HHG 信号可探测性",
+      "search_keywords": [
+        "Rost CrSb high harmonic generation spin-resolved 2025",
+        "Rost arXiv 2507.02673 altermagnet HHG",
+        "CrSb spin-polarized high harmonic experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md L73/Rationale §1.4/content §2.3 三处引用 'Rost [67] 已观测到材料特异指纹'——该证据链指向错误文献，CrSb 信号可行性论证失效",
+      "missing_evidence": "需要真实的 CrSb HHG 实验观测报告（不一定是 Rost），证明材料特异的交错磁指纹可在 HHG 信号中被探测",
+      "search_keywords": [
+        "CrSb high harmonic generation experimental observation",
+        "altermagnet CrSb HHG material-specific fingerprint",
+        "CrSb ultrafast magneto-optics high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale L77 / scheme L53 声称 'd 波形交错磁分裂已获实验确认 [25]'——[25] Šmejkal PRX 12, 040006 是理论框架，不构成实验确认",
+      "missing_evidence": "需要实验确认 CrSb d 波分裂的直接证据（非理论计算），如自旋分解 ARPES、输运测量或非线性光学测量",
+      "search_keywords": [
+        "CrSb d-wave spin splitting experimental",
+        "CrSb band structure spin-orbit experiment",
+        "CrSb angle-resolved photoemission d-wave"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Rost 等人已在 CrSb 中观测到材料特异的交错磁指纹（scheme L73）——作为三重阈值方案中信号可辨识性的核心支撑，若无实证则整条技术路线根基动摇",
+      "missing_evidence": "CrSb 材料 HHG 产率、信号对比度、噪声水平的实验数据，或等效的磁有序探测文献",
+      "search_keywords": [
+        "CrSb high harmonic yield photon flux",
+        "CrSb HHG signal-to-noise ratio",
+        "altermagnet CrSb ultrafast magneto-optics measurement",
+        "CrSb magnetic order HHG detection limit"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme §4 可行性分析中 '0.3—0.8 V/Å 区间论证' 需要实验标定依据——SBE 方程在该场强区间的适用性需要实验对照",
+      "missing_evidence": "SBE 方程与实验在强场区间的对比数据，或半导体布洛赫方程有效场强范围的实验验证",
+      "search_keywords": [
+        "semiconductor Bloch equation validity strong field V/Angstrom",
+        "SBE interband coupling saturation experimental",
+        "solid-state HHG field strength calibration experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "scheme §5 反演重建中 Bayesian 框架的参数先验分布需要文献依据——CrSb 多带模型的参数空间先验不能凭空构造",
+      "missing_evidence": "CrSb 或 altermagnet 多带模型的参数估计范围（能带宽度、偶合强度、Berry 曲率幅度等）的文献数据",
+      "search_keywords": [
+        "CrSb band structure parameters DFT",
+        "altermagnet multi-band model parameter range",
+        "CrSb Berry curvature magnitude first-principles"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

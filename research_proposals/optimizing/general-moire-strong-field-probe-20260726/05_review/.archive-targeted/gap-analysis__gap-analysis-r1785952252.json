@@ -1,0 +1,124 @@
+{
+  "gaps": [
+    {
+      "claim": "SALMON 2.3 作为 R1 莫尔超晶格 TDDFT 计算的核心平台锚定",
+      "missing_evidence": "缺乏 SALMON 2.3 在大尺度莫尔超晶格（>1000 原子超胞）实时 TDDFT 强场计算的可扩展性、精度基准、与其它 TDDFT 代码对比的文献支撑",
+      "search_keywords": [
+        "SALMON TDDFT moire supercell benchmark",
+        "real-time TDDFT twisted bilayer scalability",
+        "SALMON 2.3 large-scale moire heterostructure"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R2 多观测联合反演框架与 Hu/Meng 2024「多维反演」的同源性划界",
+      "missing_evidence": "缺乏 Hu/Meng 2024 PNAS 多维反演方法学的原文细节（目标函数、参数维度、先验约束、收敛判据），无法支撑本项目多观测联合反演在算法层、物理量空间、统计推断范式上的差异化",
+      "search_keywords": [
+        "Hu Meng PNAS 2024 moire high harmonic multidimensional inversion",
+        "moire HHG joint spectral reconstruction framework",
+        "multi-observable Bayesian inference moire spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R3 主动调控 I_c ∝ Δ_CI² 标度律推导",
+      "missing_evidence": "缺乏 I_c（调控电流/强度系数）与 Δ_CI²（圆二色性差）标度律的原始理论来源与实验验证文献，需补充推导依据及前序工作的实验测量",
+      "search_keywords": [
+        "circular dichroism high harmonic generation scaling law",
+        "HHG helicity dependent current theory",
+        "bi-circular HHG control intensity scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔势反演的正则化方法选择（§3.2 R1 末段与 §3.3 R2 算法段）",
+      "missing_evidence": "缺乏莫尔势反演中 Tikhonov/LASSO/贝叶斯正则化的对比研究文献，特别是在参数维度 12-24 vs 数据维度 10-18 这一欠定/良态边界下的最优正则化选择依据",
+      "search_keywords": [
+        "moire potential inversion regularization Tikhonov LASSO",
+        "underdetermined inverse problem solid-state HHG",
+        "Bayesian regularization high harmonic spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "kozak_apl_2023 反复作为「参数依据」引用但缺具体论点支撑",
+      "missing_evidence": "需查证 Kozak APL 2023 论文中是否实际包含强场莫尔/扭转双层体系的电子温度、散射率、阻尼系数等具体参数，以及这些参数在多段重复引用时各自的支撑论点",
+      "search_keywords": [
+        "Kozak APL 2023 moire strong field",
+        "twisted bilayer electron temperature scattering rate",
+        "strong field moire damping parameter experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Bauer-Hansen 2018 在强场莫尔/扭转体系边界划界",
+      "missing_evidence": "缺乏 Bauer-Hansen 2018 强场理论原文以核验其对莫尔/扭转体系的可适用性边界，避免「前序工作被简单否定」的误划界",
+      "search_keywords": [
+        "Bauer Hansen 2018 strong field theory review",
+        "TDDFT strong field semiconductor benchmark 2018",
+        "Hansen Bauer high harmonic generation theory"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Zhou 2023 莫尔强场工作边界与本项目差异化",
+      "missing_evidence": "需 Zhou Nature 2023 莫尔强场论文原文以核验其覆盖的体系、参数范围、调控手段，明确本项目 R3 主动调控与 Zhou 2023 的非重叠区",
+      "search_keywords": [
+        "Zhou Nature 2023 moire strong field",
+        "moire high harmonic generation experimental 2023",
+        "twisted bilayer strong field response Zhou"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Tyulnev 2024 工作与本项目读出模式的边界",
+      "missing_evidence": "需 Tyulnev 2024 论文原文以核验其反演/读出方法学与本项目 R2 的差异点",
+      "search_keywords": [
+        "Tyulnev 2024 high harmonic spectroscopy inversion",
+        "Tyulnev attosecond spectroscopy moire",
+        "Tyulnev 2024 orbital reconstruction HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "大设施（如上海超强超短激光装置/阿秒光源）作为可选延伸的对接方案",
+      "missing_evidence": "缺乏对应大设施的开放课题指南、机时申请流程、技术参数（峰值功率、重复频率、阿秒脉宽）的官方文献，以支撑「仅作为可选延伸」的对接可行性",
+      "search_keywords": [
+        "Shanghai ultra-intense laser facility attosecond beamline",
+        "China attosecond light source parameter 2026",
+        "national major science facility strong field opening call"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§3.5 创新点 3「强场调控通用框架可推广到关联莫尔体系」",
+      "missing_evidence": "缺乏强场调控方法学从弱关联到强关联体系的推广边界文献（莫特绝缘体、flat band 系统），目前「可推广」论述过于普适，未给出物理量适用范围与失效条件",
+      "search_keywords": [
+        "strong field control correlated electron generalization",
+        "HHG strongly correlated material extension",
+        "Mott insulator Floquet high harmonic generalization"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R1 段关联修正数学公式与 Hubbard U/t 重整化方法",
+      "missing_evidence": "缺乏 DFT+U / DFT+DMFT 在扭转双层莫尔体系中对强场 HHG 响应修正的对比基准文献，以及 Hubbard U 取值对 HHG 谱预测的影响",
+      "search_keywords": [
+        "DFT+U twisted bilayer moire strong field",
+        "DMFT high harmonic generation benchmark",
+        "Hubbard U parameter HHG spectrum moire"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R1 段中「Molinero 估算」的扩展性论证",
+      "missing_evidence": "Molinero 2024 的 8 Wannier 轨道 SBE 计算被引用为可行性依据，但缺乏其对更大超胞（>1000 原子）、更长演化时间（>100 fs）的可扩展性评估",
+      "search_keywords": [
+        "Molinero 2024 semiconductor Bloch equations moire",
+        "Wannier orbital SBE scalability twisted bilayer",
+        "SBE moire supercell extended simulation"
+      ],
+      "priority": "low"
+    }
+  ]
+}

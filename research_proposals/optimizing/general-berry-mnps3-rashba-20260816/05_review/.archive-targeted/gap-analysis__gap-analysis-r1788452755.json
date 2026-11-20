@@ -1,0 +1,94 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §1.2 'Sheng 等 [14]' 引用 — 实际 [14] 是 Yang/Liang，应为 [28]",
+      "missing_evidence": "Sheng 等关于 MnPS3/Rashba/滑动铁电相关研究的具体论文引用缺失或编号错误",
+      "search_keywords": [
+        "Sheng MnPS3 sliding ferroelectric",
+        "Sheng interlayer sliding MnPS3 Rashba",
+        "Sheng MnPS3 layer-dependent"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1.2 'Basnet 等 [16]' 关于 Fe2CoGaTe2 21.79° 扭转论文 — 该论文根本不在参考文献表",
+      "missing_evidence": "Fe2CoGaTe2 扭转双层 21.79° 自旋分裂相关实验/理论论文缺失",
+      "search_keywords": [
+        "Fe2CoGaTe2 twisted bilayer spin splitting",
+        "Fe2CoGaTe2 21.79 degree twist",
+        "Fe2CoGaTe2 altermagnet bilayer"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1.2 'Werner 等 [18]' — [18] 实际是 Basnet Cr-NiPS3，应为 [15] (Werner HHG altermagnets PRB 110:235101)",
+      "missing_evidence": "Werner HHG altermagnets PRB 110:235101 论文引用需要核对并修正",
+      "search_keywords": [
+        "Werner altermagnet high harmonic PRB 110 235101",
+        "Werner HHG altermagnets Physical Review B",
+        "Werner spin-splitting altermagnet HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale 'García-Gaitán 等 [19]' — 参考文献表中无 García-Gaitán 任何条目（幻像引用）",
+      "missing_evidence": "García-Gaitán 关于 sliding ferroelectric / MnPS3 / 范德华磁体的论文需要补充或替换",
+      "search_keywords": [
+        "García-Gaitán MnPS3 sliding ferroelectric",
+        "García-Gaitán van der Waals antiferromagnet",
+        "García-Gaitán MnPS3 ferroelectric"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale 'Rajpurohit 等 [20]' — [20] 实际是 Ogawa (nonlinear piezomagnetic in g-wave)，Rajpurohit 实为 [25] Sheikh Rubaiat Ul Haque 第三作者",
+      "missing_evidence": "Rajpurohit 关于 altermagnet HHG 或非线性光学的工作引用需要核对并修正编号",
+      "search_keywords": [
+        "Rajpurohit altermagnet high harmonic generation",
+        "Rajpurohit HHG spin splitting",
+        "Haque Rajpurohit altermagnet nonlinear optics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale 'Yarmohammadi 等 [21]' — [21] 实际是 Ezawa (electrical detection in p-wave)，Yarmohammadi 应为 [19]",
+      "missing_evidence": "Yarmohammadi 关于 MnPS3 / Rashba / 二维磁体的工作论文需要补全到参考文献表",
+      "search_keywords": [
+        "Yarmohammadi MnPS3 Rashba",
+        "Yarmohammadi 2D antiferromagnet spin splitting",
+        "Yarmohammadi layered magnetic material"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "清单4: 参考文献仅 28 条，[34] 为幽灵引用 (正文 ≥35 次但参考文献表不足)",
+      "missing_evidence": "参考文献表数量不足需补到 30-40 条；[34] 幽灵引用需替换为真实文献",
+      "search_keywords": [
+        "MnPS3 high harmonic generation",
+        "sliding ferroelectricity THz switching",
+        "altermagnet HHG spin polarization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "rationale §1.2/§1.4、content §2.3/§2.4、scheme §3.3/§3.4/§3.6 多处作者-编号错位 (≥11 处)",
+      "missing_evidence": "需要重新核对所有正文引用与参考文献表的一致性，纠正 ≥11 处错位",
+      "search_keywords": [
+        "altermagnet HHG Werner Weber Šmejkal",
+        "CrSb MnTe spin-polarized HHG",
+        "sliding ferroelectricity MnPS3 ARPES"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "清单16: content §2.3 与 scheme §3.3 五指纹量定义段近乎逐字复述 (跨章节内容重复 P0 红线)",
+      "missing_evidence": "两个章节需要分别引用不同的支撑文献以避免重复",
+      "search_keywords": [
+        "high harmonic generation fingerprints Berry curvature quantum metric",
+        "HHG spectroscopy symmetry invariant multiorbital",
+        "high harmonic spectrum symmetry analysis"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

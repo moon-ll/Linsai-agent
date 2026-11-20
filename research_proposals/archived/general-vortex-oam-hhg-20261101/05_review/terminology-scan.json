@@ -1,0 +1,239 @@
+{
+  "checked": true,
+  "at": "2026-11-07T04:05:58Z",
+  "proposal": "general-vortex-oam-hhg-20261101",
+  "sections_scanned": [
+    "content",
+    "full_review",
+    "method_manual",
+    "rationale",
+    "scheme"
+  ],
+  "cjk_variant_pairs": [
+    {
+      "a": "中心对称",
+      "b": "时间不对称",
+      "freq_a": 17,
+      "freq_b": 15,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "时间不对称",
+      "b": "晶体对称",
+      "freq_a": 15,
+      "freq_b": 14,
+      "sections_a": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "角动量",
+      "b": "角谐分量",
+      "freq_a": 35,
+      "freq_b": 24,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "分方向三",
+      "b": "分方向二",
+      "freq_a": 16,
+      "freq_b": 16,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "周期数",
+      "b": "周期基线",
+      "freq_a": 56,
+      "freq_b": 15,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "研究内",
+      "b": "研究目标",
+      "freq_a": 20,
+      "freq_b": 15,
+      "sections_a": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "的破缺",
+      "b": "称性破缺",
+      "freq_a": 19,
+      "freq_b": 15,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "周期区",
+      "b": "周期基线",
+      "freq_a": 19,
+      "freq_b": 15,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "破缺量",
+      "b": "破缺相图",
+      "freq_a": 63,
+      "freq_b": 14,
+      "sections_a": [
+        "content",
+        "full_review",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "scheme"
+      ]
+    },
+    {
+      "a": "心对称",
+      "b": "晶体对称",
+      "freq_a": 18,
+      "freq_b": 14,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "中心对称",
+      "b": "转对称",
+      "freq_a": 17,
+      "freq_b": 14,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ]
+    },
+    {
+      "a": "中心对称",
+      "b": "体对称",
+      "freq_a": 17,
+      "freq_b": 14,
+      "sections_a": [
+        "content",
+        "method_manual",
+        "rationale",
+        "scheme"
+      ],
+      "sections_b": [
+        "content",
+        "full_review",
+        "rationale",
+        "scheme"
+      ]
+    }
+  ],
+  "token_variant_groups": [],
+  "summary": {
+    "cjk_pair_candidates": 461,
+    "token_variant_groups": 0,
+    "note": "候选报告不改文：处置归 writer/critic 契约；数值口径归 params_registry"
+  }
+}

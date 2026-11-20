@@ -1,0 +1,27 @@
+{
+  "gaps": [
+    {
+      "claim": "content L35 的空白声明「尚无公开报道」（以该方向无公开报道作为研究缺口立论依据）",
+      "missing_evidence": "支撑空白声明的系统检索证据：明确检索数据库、检索式与时间范围，给出命中文献清单并逐条说明其与本课题方向（缺陷态证据 / k 分辨子循环动力学读出）不构成重合，证明「无公开报道」经检索验证而非主观断言；按 canonical 检索声明分工，该检索依据应沉淀于立项依据 §2.3，正文以回指方式引用",
+      "search_keywords": [
+        "defect states high harmonic generation solid",
+        "defect-mediated HHG solid-state",
+        "k-resolved sub-cycle electron dynamics",
+        "solid HHG defect density control"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "content L37 排除性论断：Rasputnyi 等[18]观测到的亮压缩真空使 4–7 次谐波产额较同均强经典光增强 5–15 倍，「该机制属驱动场量子统计效应，不构成缺陷态的证据」",
+      "missing_evidence": "区分两类增强机理的对照文献：当前仅有 [18] 单篇实验引文，缺少缺陷态/杂质/空位介导固体 HHG 的机理研究作为对照组，以及量子光场（非经典统计）驱动 HHG 的理论文献，以在机理层面支撑「增强源于驱动场统计性质、可排除缺陷态通道」这一论断，避免排除论证仅凭单篇实验推断",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation",
+        "quantum statistics light field solid HHG",
+        "impurity vacancy defect contribution solid HHG",
+        "quantum-optical effects high-order harmonic generation"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

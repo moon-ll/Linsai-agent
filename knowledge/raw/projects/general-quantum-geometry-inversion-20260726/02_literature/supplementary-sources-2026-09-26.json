@@ -1,0 +1,38 @@
+{
+  "proposal_id": "general-quantum-geometry-inversion-20260726",
+  "cluster_id": "cl_20260829_2314ae",
+  "entries": [
+    {
+      "source_id": "paper:2021-2101.03635-ultrafast-and-strong-field-physics-in-graphene-like-crystals",
+      "title": "Ultrafast and Strong-Field Physics in Graphene-Like Crystals: Bloch Band Topology and High-Harmonic Generation",
+      "summary": "该工作建立了石墨烯类二维晶体在超快强激光场下高次谐波产生（HHG）的理论框架（基于含时密度矩阵/半导体Bloch方程），系统揭示了Bloch能带拓扑（Berry曲率、量子度规及带隙/亚晶格破缺）对谐波强度、偏振与相位的调控机制。核心贡献在于提出固体HHG可作为非接触超快探针，直接读取能带拓扑信息（如拓扑不变量与谷自由度），架起了强场非线性光学与拓扑量子材料之间的桥梁。",
+      "path": "",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-09-26T22:40:35Z"
+    },
+    {
+      "source_id": "paper:2021-2103.04967-light-matter-coupling-and-quantum-geometry-in-moiré-material",
+      "title": "Light-matter coupling and quantum geometry in moiré materials",
+      "summary": "该工作建立了莫尔材料中光-物质耦合强度与量子几何量（Berry曲率、量子度规）之间的定量关系，揭示了量子几何在决定偶极矩阵元中的核心作用，并以此为基础提出了Floquet调控莫尔平带色散的通用理论框架。",
+      "path": "knowledge/raw/papers/2021-2103.04967-light-matter-coupling-and-quantum-geometry-in-moiré-material.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-09-26T22:40:35Z"
+    },
+    {
+      "source_id": "paper:2025-2507.15853-optimized-fabrication-procedure-for-high-quality-graphene-ba",
+      "title": "Optimized Fabrication Procedure for High-Quality Graphene-based Moiré Superlattice Devices",
+      "summary": "本文系统优化了石墨烯莫尔超晶格器件的制备工艺，通过精确控制扭转角实现高均匀性样品，显著提升了器件质量与可重复性，为强场超快实验提供了高质量的样品基础。",
+      "path": "knowledge/raw/papers/2025-2507.15853-optimized-fabrication-procedure-for-high-quality-graphene-ba.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-09-26T22:40:35Z"
+    },
+    {
+      "source_id": "paper:2022-2207.02830-enhancement-of-high-harmonic-generation-in-bulk-floquet-syst",
+      "title": "Enhancement of High Harmonic Generation in Bulk Floquet Systems",
+      "summary": "提出双场方案：在产生高次谐波的线偏振强探针之外，叠加一束频率低于带隙的辅助周期驱动（Floquet驱动），理论证明其形成的Floquet准能带可将体材料谐波产率提升约两个数量级。通过半导体Bloch方程数值解并结合Floquet边带分析，把增强归结为边带-带隙共振与动态局域化两类可控机制，建立了Floquet工程与固态HHG主动调控之间的直接联系。",
+      "path": "knowledge/raw/papers/2022-2207.02830-enhancement-of-high-harmonic-generation-in-bulk-floquet-syst.md",
+      "added_via": "cluster:cl_20260829_2314ae",
+      "added_at": "2026-09-26T22:40:35Z"
+    }
+  ]
+}

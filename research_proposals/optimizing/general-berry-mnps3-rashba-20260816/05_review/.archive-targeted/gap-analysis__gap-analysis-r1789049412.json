@@ -1,0 +1,35 @@
+{
+  "gaps": [
+    {
+      "claim": "[30] Manchon 2015 是 Rashba 耦合 Hamiltonian 与门控可调性的'现代综述'",
+      "missing_evidence": "[30] Manchon 2015 已发表 11 年，'现代综述'表述失实；缺少 2020 年后关于 Rashba 耦合门控可调性的替代综述文献支撑",
+      "search_keywords": [
+        "Rashba spin-orbit coupling review 2023",
+        "gate-tunable Rashba Hamiltonian review",
+        "Rashba coupling field-effect transistor review"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[22] Sheng 2024 arXiv:2411.17493 给出 16-40 meV/unitcell 的静态 DFT 能量面普查数值",
+      "missing_evidence": "[22] Sheng 2024 arXiv:2411.17493 abstract 未声明此具体数值范围，精确参数过度引申；缺少给出 MnPS3 反平行堆叠层间滑移势垒 16-40 meV/unitcell 的具体文献",
+      "search_keywords": [
+        "MnPS3 interlayer sliding energy barrier DFT",
+        "MnPS3 antiferroelectric stacking energy landscape",
+        "van der Waals bilayer sliding barrier first-principles meV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[23] González 2025 npj 2D Mater Appl 10:11 在 80-100 Ry 截断能下达成电子结构与声子色散共同收敛",
+      "missing_evidence": "[23] González 2025 npj 2D Mater Appl 10:11 abstract 仅声明 DFT+spin-Laue，未声明 80-100 Ry 截断能数值；缺少该截断能下电子结构与声子色散共同收敛的实证文献",
+      "search_keywords": [
+        "plane wave cutoff energy convergence phonon dispersion 2D antiferromagnet",
+        "DFT 80-100 Ry cutoff magnetic insulator convergence",
+        "MnPS3 first-principles cutoff energy benchmark"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

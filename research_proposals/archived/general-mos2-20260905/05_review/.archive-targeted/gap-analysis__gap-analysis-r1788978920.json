@@ -1,0 +1,47 @@
+{
+  "gaps": [
+    {
+      "claim": "MoS2 高次谐波产生需覆盖至 15 阶以满足 α_syn≥0.15 测量精度（rationale §3 子问题一指标定义）",
+      "missing_evidence": "缺 15 阶及以上 MoS2/TMDC 高次谐波产生的实验观测数据文献支撑；当前仅依赖单一 Peterka 2023 工作（APL Photonics）",
+      "search_keywords": [
+        "MoS2 high harmonic 15th order",
+        "MoS2 monolayer high harmonic generation cutoff",
+        "TMDC high harmonic generation high order 13 15",
+        "transition metal dichalcogenide HHG 15th harmonic experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "单层 MoS2 中 A 激子（~1.9 eV）与 B 激子（~2.04 eV）的精确共振能量数值",
+      "missing_evidence": "rationale L35 写 1s_B 激子约 2.03 eV，content/scheme 写 B 激子 ~2.04 eV，存在数值不一致；缺统一的激子能量精确测量文献",
+      "search_keywords": [
+        "MoS2 monolayer A B exciton energy precision",
+        "MoS2 exciton binding energy 2.04 eV experimental",
+        "monolayer MoS2 B exciton 1s state energy measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "可见与近红外泵浦激发 MoS2 A、B 激子结合中红外驱动产生高次谐波的物理机制",
+      "missing_evidence": "Peterka 2023 工作在 rationale §1.1 L9 与 §2.2 L35 两处近全量重复展开；缺其他独立实验或理论工作支撑共振增强 HHG 机制",
+      "search_keywords": [
+        "MoS2 exciton enhanced high harmonic generation",
+        "resonant pumping TMDC HHG mid-infrared",
+        "MoS2 A B exciton HHG coherence",
+        "Peterka MoS2 exciton HHG replication independent"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Heide 等关于 MoS2 单层高次谐波产生的研究结论被全文复述",
+      "missing_evidence": "Heide 工作在 content L19 与 rationale 间跨章整段复述；缺其他关于 MoS2/TMDC HHG 第一性原理 TDDFT 计算的独立工作支撑机制论述",
+      "search_keywords": [
+        "MoS2 high harmonic TDDFT calculation independent",
+        "monolayer MoS2 HHG theory mechanism",
+        "transition metal dichalcogenide high harmonic DFT calculation",
+        "MoS2 interband intraband HHG theoretical"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "gaps": [
+    {
+      "claim": "多电子电离通道重叠使传统 FROGCRAB 二阶非线性响应假设失效，重构误差超过 20%，且 2018–2026 年尚无根本性解决方案",
+      "missing_evidence": "目前仅依赖 2017 年 Science 水窗实验（arXiv:1710.02208）单一快照；缺少 2018–2026 年确认/复现多通道电离下 FROGCRAB 失效的后续实验与理论文献；设想的 '2023 Nature Photonics 17, 629–635' 报道未经核实，缺少可检索的 arXiv ID/DOI",
+      "search_keywords": [
+        "FROGCRAB multichannel ionization failure",
+        "attosecond streaking multi-electron shell retrieval error",
+        "water window attosecond pulse retrieval fidelity",
+        "streaking retrieval second-order response breakdown"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "靶材偶极相位与阿秒脉冲固有啁啾同时编码于条纹相位，现有方法无法在不预先校准靶材相位的前提下解耦",
+      "missing_evidence": "仅有 2010 年 Nature Physics（arXiv:1006.1827）一个证据点；缺少 2015–2026 年偶极相位/Wigner 时延修正与脉冲相位分离的方法学文献（如 RABBITT 相位修正、双靶材差分、参考原子法）来支撑'解耦是领域公认未解问题'的判断",
+      "search_keywords": [
+        "dipole phase streaking decoupling",
+        "Wigner time delay correction attosecond streaking",
+        "calibration-free attosecond pulse phase retrieval",
+        "atomic phase separation pulse chirp photoionization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内研究现状（NSFC 立项依据五层递进结构中的'国内现状'层）",
+      "missing_evidence": "全部 3 篇文献均为国外工作（Nature Physics/Science/PRL），立项依据中完全没有国内阿秒条纹/阿秒计量代表性工作的文献支撑",
+      "search_keywords": [
+        "attosecond streaking China experimental group",
+        "阿秒条纹 阿秒脉冲表征 国内",
+        "attosecond metrology Chinese team 中科院",
+        "water window attosecond source China"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "跨能区（极紫外–水窗–软X射线）谱相位重构缺乏统一理论框架，已有修正方案均针对特定能区定制",
+      "missing_evidence": "缺少不同能区条纹测量/检索稳健性的系统比较研究或统一方法学文献；也缺少水窗及软X射线能区 2020–2026 年最新条纹实验进展（目前仅 2017 年单一实验支撑该能区可开展条纹测量）",
+      "search_keywords": [
+        "attosecond streaking photon energy scaling",
+        "XUV soft X-ray streaking comparison",
+        "water window attosecond streaking recent experiment",
+        "streaking retrieval robustness energy region"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "角积分探测对偶极角动量相位的天然抑制效应可移植到常规阿秒脉冲表征场景",
+      "missing_evidence": "仅有 2016 年 PRL 里德堡量子拍方案（arXiv:1602.08144）依赖特定波包制备条件；缺少角积分条纹测量抑制偶极相位的独立验证文献，以及量子拍方案与常规表征场景兼容性检验的文献",
+      "search_keywords": [
+        "angle-integrated photoelectron spectrum dipole phase",
+        "Rydberg wavepacket quantum beat attosecond characterization",
+        "angular integration phase suppression photoionization streaking"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "脉冲重构精度 < 5% 误差是现有 FROGCRAB 在多通道场景下从未达到的指标，> 20% 为公认基准",
+      "missing_evidence": "缺少条纹检索算法（FROGCRAB/PROOF/VTG-FROG/神经网络等）重构误差的定量基准文献，无法支撑 5%/20% 两个指标数值的可信度",
+      "search_keywords": [
+        "FROGCRAB retrieval accuracy benchmark",
+        "streaking algorithm comparison PROOF VTG-FROG",
+        "attosecond pulse retrieval error quantification",
+        "neural network attosecond streaking retrieval"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "2024–2026 年阿秒条纹技术作为'多电子体系量子相位精密探针'的最新国际进展",
+      "missing_evidence": "文献依据止步于 2017 年，缺少近三年（2023–2026）利用条纹测量重构电子波包相位/多体动力学的前沿工作，无法论证'从脉冲表征工具向量子相位探针演进'是当前国际活跃方向",
+      "search_keywords": [
+        "attosecond streaking electron wavepacket phase reconstruction 2024 2025",
+        "streaking spectroscopy many-electron dynamics recent",
+        "attosecond metrology review 2025"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,498 @@
+{
+ "ax_2503.16547": {
+  "id": "2503.16547",
+  "title": "Empowering Medical Multi-Agents with Clinical Consultation Flow for Dynamic Diagnosis",
+  "authors": [
+   "Sihan Wang",
+   "Suiyang Jiang",
+   "Yibo Gao",
+   "Boming Wang",
+   "Shangqi Gao",
+   "Xiahai Zhuang"
+  ],
+  "journal_ref": null,
+  "doi": null
+ },
+ "ax_2601.21273": {
+  "id": "2601.21273",
+  "title": "Efficient high-harmonic generation in van der Waals ferroelectric NbOI$_2$ crystals",
+  "authors": [
+   "Tianchen Hu",
+   "Feng Li",
+   "Junhan Huang",
+   "Chen Qian",
+   "Ruoxuan Ding",
+   "Hao Wang",
+   "Qiaomei Liu",
+   "Qiong Wu",
+   "Ruifeng Lu",
+   "Chunmei Zhang",
+   "Nanlin Wang"
+  ],
+  "journal_ref": null,
+  "doi": null
+ },
+ "ax_2508.07869": {
+  "id": "2508.07869",
+  "title": "Semiconductor Bloch equations in Wannier gauge with well-behaved dephasing",
+  "authors": [
+   "Martin Thümmler",
+   "Thomas Lettau",
+   "Alexander Croy",
+   "Ulf Peschel",
+   "Stefanie Gräfe"
+  ],
+  "journal_ref": "Computer Physics Communications Volume 320, March 2026, 109958",
+  "doi": "10.1016/j.cpc.2025.109958"
+ },
+ "ax_2403.15337": {
+  "id": "2403.15337",
+  "title": "High Harmonic Generation by Bright Squeezed Vacuum",
+  "authors": [
+   "Andrei Rasputnyi",
+   "Zhaopin Chen",
+   "Michael Birk",
+   "Oren Cohen",
+   "Ido Kaminer",
+   "Michael Krüger",
+   "Denis Seletskiy",
+   "Maria Chekhova",
+   "Francesco Tani"
+  ],
+  "journal_ref": null,
+  "doi": "10.1038/s41567-024-02659-x"
+ },
+ "ax_2405.01571": {
+  "id": "2405.01571",
+  "title": "High-harmonic generation in zinc oxide subjected to intense mid-infrared femtosecond laser pulse",
+  "authors": [
+   "Boyan Obreshkov",
+   "Tzveta Apostolova"
+  ],
+  "journal_ref": "Applied Physics B (2025) 131:158",
+  "doi": "10.1007/s00340-025-08506-y"
+ },
+ "ax_2401.12929": {
+  "id": "2401.12929",
+  "title": "Unveiling the Role of Electron-Phonon Scattering in Dephasing High-Order Harmonics in Solids",
+  "authors": [
+   "Viacheslav Korolev",
+   "Thomas Lettau",
+   "Vipin Krishna",
+   "Alexander Croy",
+   "Michael Zuerch",
+   "Christian Spielmann",
+   "Maria Waechtler",
+   "Ulf Peschel",
+   "Stefanie Graefe",
+   "Giancarlo Soavi",
+   "Daniil Kartashov"
+  ],
+  "journal_ref": null,
+  "doi": null
+ },
+ "s16_hanggi_nbtoi2": [
+  {
+   "id": "2601.12470v1",
+   "title": "Stabilizing van der Waals NbOI2 by SiO2 encapsulation for Photonic Applications",
+   "authors": [
+    "Gia Quyet Ngo",
+    "Fatemeh Abtahi",
+    "Jakub Regner",
+    "Hossein Esfandiar",
+    "Peter Munzert",
+    "Jan Plutnar",
+    "Zdenek Sofer",
+    "Falk Eilenberger",
+    "Sebastian W. Schmitt"
+   ]
+  },
+  {
+   "id": "2605.01285v1",
+   "title": "Composition-Driven Tunable Optical and Electrical Properties in Van der Waals Ferroelectric NbOI2-xClx Alloys",
+   "authors": [
+    "Gaolei Zhao",
+    "Juhe Liu",
+    "Jinkai Huo",
+    "Tian Han",
+    "Yunhao Tong",
+    "Hu Wang",
+    "Konstantin Kozadaev",
+    "Andrei Zheltkovich",
+    "Changsen Sun",
+    "Alexei Tolstik"
+   ]
+  },
+  {
+   "id": "2605.13707v1",
+   "title": "Giant optical spin-orbit interactions in ferroelectric van der Waals waveguides",
+   "authors": [
+    "Ding Xu",
+    "Saeed Rahmanian Koshkaki",
+    "Vicente Galicia",
+    "Chun-Ying Huang",
+    "Victoria Quirós-Cordero",
+    "Jakhangirkhodja A. Tulyagankhodjaev",
+    "André Koch Liston",
+    "Daniel G. Chica",
+    "Emma Lian",
+    "Amirhosein Amini"
+   ]
+  }
+ ],
+ "s21_pisanty": [
+  {
+   "id": "2408.07577v2",
+   "title": "Squeezed states of light after high-harmonic generation in excited atomic systems",
+   "authors": [
+    "J. Rivera-Dean",
+    "H. B. Crispin",
+    "P. Stammer",
+    "Th. Lamprou",
+    "E. Pisanty",
+    "M. Krüger",
+    "P. Tzallas",
+    "M. Lewenstein",
+    "M. F. Ciappina"
+   ]
+  },
+  {
+   "id": "1806.03974v1",
+   "title": "Determination of the spectral variation origin in high-order harmonic generation in noble gases",
+   "authors": [
+    "V. E. Nefedova",
+    "M. F. Ciappina",
+    "O. Finke",
+    "M. Albrecht",
+    "J. Vábek",
+    "M. Kozlová",
+    "N. Suárez",
+    "E. Pisanty",
+    "M. Lewenstein",
+    "J. Nejdl"
+   ]
+  },
+  {
+   "id": "2003.00277v2",
+   "title": "The imaginary part of the high-harmonic cutoff",
+   "authors": [
+    "Emilio Pisanty",
+    "Marcelo F. Ciappina",
+    "Maciej Lewenstein"
+   ]
+  },
+  {
+   "id": "1404.6242v3",
+   "title": "Spin conservation in high-order-harmonic generation using bicircular fields",
+   "authors": [
+    "Emilio Pisanty",
+    "Misha Ivanov",
+    "Suren Sukiasyan"
+   ]
+  },
+  {
+   "id": "2107.12887v3",
+   "title": "High photon number entangled states and coherent state superposition from the extreme-ultraviolet to the far infrared",
+   "authors": [
+    "Philipp Stammer",
+    "Javier Rivera-Dean",
+    "Theocharis Lamprou",
+    "Emilio Pisanty",
+    "Marcelo F. Ciappina",
+    "Paraskevas Tzallas",
+    "Maciej Lewenstein"
+   ]
+  },
+  {
+   "id": "1606.01931v1",
+   "title": "High harmonic interferometry of the Lorentz force in strong mid-infrared laser fields",
+   "authors": [
+    "Emilio Pisanty",
+    "Daniel D. Hickstein",
+    "Benjamin R. Galloway",
+    "Charles G. Durfee",
+    "Henry C. Kapteyn",
+    "Margaret M. Murnane",
+    "Misha Ivanov"
+   ]
+  }
+ ],
+ "s23_klemke": [],
+ "c04_bai": [
+  {
+   "doi": "10.1038/s41567-020-01052-8",
+   "title": "High-harmonic generation from topological surface states",
+   "first": "Bai",
+   "nauth": 9,
+   "container": "Nature Physics",
+   "vol": "17",
+   "page": "311-315",
+   "year": 2020
+  },
+  {
+   "doi": "10.3788/col202321.043801",
+   "title": "Distinguishing high-harmonic generation from surface and bulk states in topological insulator Bi2Se3",
+   "first": "Jiang",
+   "nauth": 6,
+   "container": "Chinese Optics Letters",
+   "vol": "21",
+   "page": "043801",
+   "year": 2023
+  },
+  {
+   "doi": "10.1021/acsphotonics.3c00722.s001",
+   "title": "Time-Resolved Second-Harmonic Generation in Topological Insulator Bi2Te3: Competing Contributions from Dirac S",
+   "first": "?",
+   "nauth": 0,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  }
+ ],
+ "c24_multilevel": [
+  {
+   "doi": "10.1142/9789811279560_0001",
+   "title": "Probing Topological Phase Transition Using High-order Harmonic Generation",
+   "first": "Ghimire",
+   "nauth": 1,
+   "container": "High-Order Harmonic Generation in Solids",
+   "vol": null,
+   "page": "1-16",
+   "year": 2024
+  },
+  {
+   "doi": "10.1142/9789811279560_0004",
+   "title": "Theory of Topological Effects on High-Order Harmonic Generation in Solids",
+   "first": "Jürß",
+   "nauth": 4,
+   "container": "High-Order Harmonic Generation in Solids",
+   "vol": null,
+   "page": "72-90",
+   "year": 2024
+  },
+  {
+   "doi": "10.1142/9789811279560_0011",
+   "title": "High-Order Harmonic Generation in Solids: Dependence on Target and Laser Properties",
+   "first": "Navarrete",
+   "nauth": 3,
+   "container": "High-Order Harmonic Generation in Solids",
+   "vol": null,
+   "page": "266-295",
+   "year": 2024
+  }
+ ],
+ "c27_baykusheva": [
+  {
+   "doi": "10.1021/acs.nanolett.1c02145.s001",
+   "title": "All-Optical Probe of Three-Dimensional Topological Insulators Based on High-Harmonic Generation by Circularly ",
+   "first": "?",
+   "nauth": 0,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  },
+  {
+   "doi": "10.1021/acs.nanolett.1c02145",
+   "title": "All-Optical Probe of Three-Dimensional Topological Insulators Based on High-Harmonic Generation by Circularly ",
+   "first": "Baykusheva",
+   "nauth": 12,
+   "container": "Nano Letters",
+   "vol": "21",
+   "page": "8970-8978",
+   "year": 2021
+  },
+  {
+   "doi": "10.1364/cleo_qels.2019.fm4m.6",
+   "title": "High-Harmonic Generation from Topological Insulators",
+   "first": "Baykusheva",
+   "nauth": 8,
+   "container": "Conference on Lasers and Electro-Optics",
+   "vol": null,
+   "page": "FM4M.6",
+   "year": 2019
+  }
+ ],
+ "c31_yue_gauges": [
+  {
+   "doi": "10.1103/physreva.101.053411",
+   "title": "Structure gauges and laser gauges for the semiconductor Bloch equations in high-order harmonic generation in s",
+   "first": "Yue",
+   "nauth": 2,
+   "container": "Physical Review A",
+   "vol": "101",
+   "page": "053411",
+   "year": 2020
+  },
+  {
+   "doi": "10.1142/9789811279560_0003",
+   "title": "Wannier Approach to the Semiconductor Bloch Equations",
+   "first": "Molinero",
+   "nauth": 3,
+   "container": "High-Order Harmonic Generation in Solids",
+   "vol": null,
+   "page": "50-71",
+   "year": 2024
+  },
+  {
+   "doi": "10.3403/30137986",
+   "title": "Railway applications. Gauges",
+   "first": "?",
+   "nauth": 0,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  }
+ ],
+ "c05_authors": [
+  "Schmid C",
+  "Weigl L",
+  "Grössing P",
+  "Junk V",
+  "Gorini C",
+  "Schlauderer S",
+  "Ito S",
+  "Meierhofer M",
+  "Hofmann N",
+  "Afanasiev D",
+  "Crewse J",
+  "Kokh K",
+  "Tereshchenko O",
+  "Güdde J",
+  "Evers F",
+  "Wilhelm J",
+  "Richter K",
+  "Höfer U",
+  "Huber R"
+ ],
+ "c20_rasputnyi": [
+  {
+   "doi": "10.1364/cleo_fs.2024.fm4b.3",
+   "title": "High Harmonic Generation by Bright Squeezed Vacuum",
+   "first": "Rasputnyi",
+   "nauth": 8,
+   "container": "CLEO 2024",
+   "vol": null,
+   "page": "FM4B.3",
+   "year": 2024
+  },
+  {
+   "doi": "10.21203/rs.3.rs-10205760/v1",
+   "title": "Generation of bright quantum high-order harmonic driven by combined coherent and bright squeezed vacuum light",
+   "first": "Luo",
+   "nauth": 9,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": 2026
+  },
+  {
+   "doi": "10.1038/s41567-024-02659-x",
+   "title": "High-harmonic generation by a bright squeezed vacuum",
+   "first": "Rasputnyi",
+   "nauth": 9,
+   "container": "Nature Physics",
+   "vol": "20",
+   "page": "1960-1965",
+   "year": 2024
+  }
+ ],
+ "c15_thummler": [
+  {
+   "doi": "10.2139/ssrn.5402079",
+   "title": "Semiconductor Bloch Equations in Wannier Gauge With Well-Behaved Dephasing",
+   "first": "Thümmler",
+   "nauth": 5,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": 2025
+  },
+  {
+   "doi": "10.1016/j.cpc.2025.109958",
+   "title": "Semiconductor Bloch equations in Wannier gauge with well-behaved dephasing",
+   "first": "Thümmler",
+   "nauth": 5,
+   "container": "Computer Physics Communications",
+   "vol": "320",
+   "page": "109958",
+   "year": 2026
+  },
+  {
+   "doi": "10.70675/c87dcf6cz8a68z4222z8abaze88542fc7c40",
+   "title": "Bloch oscillations and Wannier Stark Ladder study in Semiconductor Superlattice",
+   "first": "Meng",
+   "nauth": 1,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  }
+ ],
+ "c28_korolev": [
+  {
+   "doi": "10.1021/acs.jpclett.6c01354.s001",
+   "title": "Role of Ultrafast Electron-Thermal-Phonon Interactions in High Harmonic Generation and Dephasing from Graphene",
+   "first": "?",
+   "nauth": 0,
+   "container": "",
+   "vol": null,
+   "page": null,
+   "year": null
+  },
+  {
+   "doi": "10.1007/978-1-4613-4271-7_80",
+   "title": "On the Role of Nonelectronic Phonon Processes in Mutual Electron-Phonon Drag",
+   "first": "Kocevar",
+   "nauth": 1,
+   "container": "Phonon Scattering in Solids",
+   "vol": null,
+   "page": "299-301",
+   "year": 1976
+  },
+  {
+   "doi": "10.1007/978-1-4613-4271-7_28",
+   "title": "Phonon Scattering in Amorphous Solids",
+   "first": "Pohl",
+   "nauth": 1,
+   "container": "Phonon Scattering in Solids",
+   "vol": null,
+   "page": "107-114",
+   "year": 1976
+  }
+ ],
+ "c22_zno": [
+  {
+   "doi": "10.1007/s00340-025-08506-y",
+   "title": "High-harmonic generation in zinc oxide subjected to intense mid-infrared femtosecond laser pulse",
+   "first": "Obreshkov",
+   "nauth": 2,
+   "container": "Applied Physics B",
+   "vol": "131",
+   "page": "158",
+   "year": 2025
+  },
+  {
+   "doi": "10.21175/rad.sum.abstr.book.2022.32.3",
+   "title": "High harmonic generation in crystalline silicon and zinc oxide irradiated by an intense ultrashort infrared la",
+   "first": "Apostolova",
+   "nauth": 1,
+   "container": "Book of Abstracts",
+   "vol": null,
+   "page": null,
+   "year": 2022
+  },
+  {
+   "doi": "10.1088/1742-6596/1571/1/012012",
+   "title": "Blueshifts of high-order harmonic generation in crystalline silicon subjected to intense femtosecond near-infr",
+   "first": "Obreshkov",
+   "nauth": 2,
+   "container": "Journal of Physics: Conference Series",
+   "vol": "1571",
+   "page": "012012",
+   "year": 2020
+  }
+ ]
+}

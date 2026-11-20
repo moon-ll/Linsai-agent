@@ -1,0 +1,108 @@
+{
+  "source": "2026_NSFG_strongfield_ultrafast",
+  "source_path": "/Users/ll/Desktop/hermes_workspace/research_proposals/2026_NSFG_strongfield_ultrafast",
+  "imported_at": "2026-07-26T05:45:01Z",
+  "file_count": 44,
+  "files": [
+    {
+      "source": "drafts/nsfc_application_v0.1.md",
+      "target": "00_imported/drafts/nsfc_application_v0.1.md",
+      "label": "申请书草稿"
+    },
+    {
+      "source": "drafts/nsfc_application_v0.2.md",
+      "target": "00_imported/drafts/nsfc_application_v0.2.md",
+      "label": "申请书草稿"
+    },
+    {
+      "source": "archive/drafts/nsfc_application_v0.2_2026-06-12_17-00.md",
+      "target": "00_imported/archive/drafts/nsfc_application_v0.2_2026-06-12_17-00.md",
+      "label": "申请书草稿"
+    },
+    {
+      "source": "reports/2026-06-18_5reports/验收报告.md",
+      "target": "00_imported/reports/2026-06-18_5reports/验收报告.md",
+      "label": "精读报告"
+    },
+    {
+      "source": "reports/2026-06-18_5reports/验收报告_v1.5.md",
+      "target": "00_imported/reports/2026-06-18_5reports/验收报告_v1.5.md",
+      "label": "精读报告"
+    },
+    {
+      "source": "reports/2026-06-18_5reports/00_散落文件说明_2026-06-18.md",
+      "target": "00_imported/reports/2026-06-18_5reports/00_散落文件说明_2026-06-18.md",
+      "label": "精读报告"
+    },
+    {
+      "source": "reports/2026-06-18_5reports/README.md",
+      "target": "00_imported/reports/2026-06-18_5reports/README.md",
+      "label": "精读报告"
+    },
+    {
+      "source": "reports/2026-06-18_5reports/验收报告_v1.9.md",
+      "target": "00_imported/reports/2026-06-18_5reports/验收报告_v1.9.md",
+      "label": "精读报告"
+    },
+    {
+      "source": "reports/2026-06-18_5reports/验收报告_v1.8.md",
+      "target": "00_imported/reports/2026-06-18_5reports/验收报告_v1.8.md",
+      "label": "精读报告"
+    },
+    {
+      "source": "reports/2026-06-18_5reports/PLAN.md",
+      "target": "00_imported/reports/2026-06-18_5reports/PLAN.md",
+      "label": "精读报告"
+    },
+    {
+      "source": "reports/2026-06-18_5reports/验收报告_v1.7.md",
+      "target": "00_imported/reports/2026-06-18_5reports/验收报告_v1.7.md",
+      "label": "精读报告"
+    },
+    {
+      "source": "reports/2026-06-18_5reports/验收报告_v1.3.md",
+      "target": "00_imported/reports/2026-06-18_5reports/验收报告_v1.3.md",
+      "label": "精读报告"
+    },
+    {
+      "source": "reports/2026-06-18_5reports/验收报告_v1.2.md",
+      "target": "00_imported/reports/2026-06-18_5reports/验收报告_v1.2.md",
+      "label": "精读报告"
+    },
+    {
+      "source": "reports/2026-06-18_5reports/验收报告_v1.6.md",
+      "target": "00_imported/reports/2026-06-18_5reports/验收报告_v1.6.md",
+      "label": "精读报告"
+    },
+    {
+      "source": "deliverables/立项依据汇总_v0.2_2026-06-14.md",
+      "target": "00_imported/deliverables/立项依据汇总_v0.2_2026-06-14.md",
+      "label": "立项依据"
+    },
+    {
+      "source": "deliverables/立项依据汇总_2026-06-14.md",
+      "target": "00_imported/deliverables/立项依据汇总_2026-06-14.md",
+      "label": "立项依据"
+    },
+    {
+      "source": "topics/T4_order_parameters/notes/立项依据_v0.1.md",
+      "target": "00_imported/topics/T4_order_parameters/notes/立项依据_v0.1.md",
+      "label": "立项依据"
+    },
+    {
+      "source": "topics/T4_order_parameters/notes/立项依据_v0.2.md",
+      "target": "00_imported/topics/T4_order_parameters/notes/立项依据_v0.2.md",
+      "label": "立项依据"
+    },
+    {
+      "source": "topics/T5_inversion_methodology/notes/立项依据_v0.1.md",
+      "target": "00_imported/topics/T5_inversion_methodology/notes/立项依据_v0.1.md",
+      "label": "立项依据"
+    },
+    {
+      "source": "topics/T2_valleytronics/notes/立项依据_v0.1.md",
+      "target": "00_imported/topics/T2_valleytronics/notes/立项依据_v0.1.md",
+      "label": "立项依据"
+    }
+  ]
+}

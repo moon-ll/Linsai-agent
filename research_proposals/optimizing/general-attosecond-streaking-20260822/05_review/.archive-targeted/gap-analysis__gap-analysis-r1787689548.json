@@ -1,0 +1,56 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme.md引用[5][7][10][16][23][30][31]在references.md中缺失，参考文献不完整",
+      "missing_evidence": "references.md编号跳号，缺失7条文献([5][7][10][16][23][30][31])，且scheme.md正文中声称引用的[31]实际不存在",
+      "search_keywords": [
+        "Cousin attosecond streaking water window Phys Rev X 2017",
+        "attosecond streaking multi-channel ionization review",
+        "FROG-CRAB multi-channel validation",
+        "water window attosecond pulse characterization validation protocol"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Cousin等[2]关于水窗区阿秒条纹多通道失效的实验观测缺乏引用核实",
+      "missing_evidence": "scheme.md L38提及'Cousin等[2]仅观测了多通道失效现象'，但[2]号文献在references.md中的实际内容未经验证",
+      "search_keywords": [
+        "Cousin attosecond streaking water window Phys Rev X 2017",
+        "Cousin PRX 2017 multi-channel ionization failure",
+        "attosecond streaking water window multi-electron"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Inzani等[12]的rACE方法缺乏文献核实",
+      "missing_evidence": "scheme.md L42提及'Inzani等[12]的rACE方法'，但[12]号文献的实际发表信息未经验证",
+      "search_keywords": [
+        "Inzani rACE attosecond pulse retrieval neural network",
+        "inzani attosecond streaking neural network reconstruction",
+        "attosecond pulse reconstruction neural network 2024"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Peschel等[11]关于多通道单光子电离动力学检索误差的研究缺乏文献核实",
+      "missing_evidence": "scheme.md L40提及'Peschel等[11]在多通道单光子电离动力学中确认了检索误差的瓶颈地位'，但[11]号文献的实际内容未经验证",
+      "search_keywords": [
+        "Peschel multi-channel ionization attosecond retrieval error",
+        "multi-channel photoionization attosecond streaking accuracy",
+        "attosecond streaking retrieval fidelity multi-electron"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "scheme.md引用[2][3][11][12][13][15][29]声称支撑实验方案，但实际文献完整性未核实",
+      "missing_evidence": "scheme.md多个位置引用文献支撑R1/R2/R3门控方案，但这些文献在references.md中的编号与实际内容对应关系未完全确认",
+      "search_keywords": [
+        "FROG-CRAB multi-channel correction experimental validation",
+        "attosecond pulse reconstruction error reduction multi-channel",
+        "angular-integrated attosecond streaking dipole phase suppression",
+        "attosecond pulse characterization rare gas target angular average"
+      ],
+      "priority": "high"
+    }
+  ]
+}

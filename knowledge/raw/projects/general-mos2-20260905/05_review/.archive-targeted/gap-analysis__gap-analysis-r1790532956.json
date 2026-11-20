@@ -1,0 +1,45 @@
+{
+  "gaps": [
+    {
+      "claim": "第三条理论路线：Wannier-Bloch 轨迹方法在轨迹中引入 Berry 连接与跃迁矩阵元的动量依赖，揭示能带结构对谐波发射的调制机制",
+      "missing_evidence": "§2.1 L27 以'相关工作'占位叙述，缺少具体作者+期刊+[N] 嵌入式引用；需补 1-2 篇将 Berry 连接与动量依赖跃迁矩阵元嵌入 Wannier-Bloch 轨迹的代表性理论工作",
+      "search_keywords": [
+        "Wannier-Bloch trajectory high harmonic generation",
+        "Berry connection momentum-dependent transition dipole HHG",
+        "semiconductor Bloch equations Berry connection harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "第四条理论路线：Berry 连接/曲率在谐波发射中的规范依赖问题及其处理方案",
+      "missing_evidence": "§2.1 L29 以'相关工作'占位叙述，缺少具名作者与 [N] 引用；需补关于 Berry 几何量规范依赖、gauge-invariant 谐波辐射理论的关键文献",
+      "search_keywords": [
+        "Berry curvature gauge dependence high harmonic generation",
+        "gauge invariant Berry connection HHG",
+        "anomalous velocity gauge invariant harmonic emission"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转双层 MoS₂ 中莫尔势对介电函数 ε 的调制幅度（ε 莫尔调制幅度区间）",
+      "missing_evidence": "§2.2 L35 全文悬置'方案章 §2 由 TDDFT 给出具体数值'，立项依据阶段缺乏机制参数的预估锚定；需补 TDDFT 或第一性原理计算对扭转 MoS₂ 双层/异质结介电常数莫尔调制的已有文献数值（如数量级 0.05-0.2），或至少 1 篇先导性 TDDFT 工作作为预估基准",
+      "search_keywords": [
+        "TDDFT twisted bilayer MoS2 dielectric",
+        "moiré potential dielectric function MoS2",
+        "first-principles dielectric constant twisted transition metal dichalcogenide"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "MgO 晶体各向异性 HHG 实验验证",
+      "missing_evidence": "§2.1 L23 误将理论工作 [9] Vampa PRB 91,064302（SBE 框架理论标度律）作为 MgO 各向异性 HHG 的实验验证引用；MgO 各向异性 HHG 实验实际归属 [5] You 等人 Nat. Phys. 13,345（2017）；需替换正确文献并补齐'理论标度律 [9] + 实验验证 [5]'分工引注",
+      "search_keywords": [
+        "You Nat Phys 13 345 MgO high harmonic",
+        "MgO crystal anisotropy HHG experiment",
+        "Vampa PRB 91 064302 SBE theory"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

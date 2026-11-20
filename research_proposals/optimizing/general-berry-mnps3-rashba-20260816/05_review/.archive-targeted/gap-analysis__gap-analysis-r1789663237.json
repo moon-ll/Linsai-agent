@@ -1,0 +1,87 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.3 L35 沿用 Michishita 的 arXiv:2606.31573 实测作者应为 Mizuno Koki，涉及 i-wave altermagnet 圆偏振 HHG 选择定则",
+      "missing_evidence": "需要确认 arXiv:2606.31573 真实作者署名（Mizuno Koki 而非 Michishita），并核查全文其余处是否同步更新",
+      "search_keywords": [
+        "arXiv:2606.31573 Mizuno Koki altermagnet",
+        "i-wave altermagnet HHG selection rule Mizuno",
+        "2606.31573 spin group symmetry circularly polarized harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.6 L71 dP/dE > 1.0/(MV/cm) 经验判据作为 R3 切换概率 P > 50% 的设计判据缺文献锚点",
+      "missing_evidence": "缺少 dP/dE 与电场强度阈值关系的实验/理论锚点；建议引用 [25] Rajpurohit 线性关系外推或同类 THz 场致磁相变阈值数据",
+      "search_keywords": [
+        "Rajpurohit THz coherent phonon spin splitting linear",
+        "THz field induced spin reorientation threshold MV/cm",
+        "terahertz magnetization switching critical field derivative",
+        "MnPS3 THz field driven spin transition"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L31 椭圆度过零点位置由节点线存在直接确定，节点线（nodal line）作为 altermagnet i-wave 拓扑特征缺乏最新文献支撑",
+      "missing_evidence": "需要 i-wave altermagnet 节点线与 HHG 椭圆度响应映射的理论或计算文献",
+      "search_keywords": [
+        "nodal line altermagnet HHG ellipticity",
+        "i-wave alternagnet band structure node line",
+        "alternagnet node line harmonic generation signature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L31 螺旋度交替的阶次周期性由 C6 对称性下六光子过程的最低允许阶数决定 [15]",
+      "missing_evidence": "需要 C6 对称 HHG 选择定则（奇偶阶交替 + 螺旋度锁定）的原始推导与实验验证文献（参照 [15] 已引用但需确认具体内容）",
+      "search_keywords": [
+        "C6 symmetry high harmonic selection rule helicity",
+        "six-photon process HHG polarization alternating",
+        "rotational symmetry HHG photon order helicity locking"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L33–L35「独立验证渠道」段罗列电学/椭圆度/压磁/自旋流/异质结五条通道，每条通道需嵌入式引用支撑",
+      "missing_evidence": "缺少五条独立验证通道（电学输运、椭圆度、压磁响应、自旋流、异质结工程）各自对应的近期文献锚点 [19][12][14][18][7]",
+      "search_keywords": [
+        "alternagnet electrical transport spin current measurement",
+        "piezo-magnetism altermagnet 2D antiferromagnet",
+        "spin pumping altermagnet MnPS3 CrSb",
+        "altermagnet heterostructure proximity HHG probe"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.4 L43 τ1 ≈ 1–9 ps / τ2 ≈ 1–4 ns 双时标动力学数据，磁序恢复时域常数（m 指数衰减细节）",
+      "missing_evidence": "已有数据但 §1.2 与 §3.4 已详述，本处第三次重复；需文献仅作指代背景而非新引证",
+      "search_keywords": [
+        "antiferromagnetic order recovery time ps ns MnPS3",
+        "two-exponential magnetization relaxation van der Waals antiferromagnet",
+        "spin order recovery timescale Cr-doped NiPS3"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.4 L43 [16] Basnet 静态磁化证据在时域分离段关联弱，需迁至 §2.3 作磁点群指纹背景",
+      "missing_evidence": "需补充磁点群指纹静态磁化参考与动态 HHG 通道对比的近期文献",
+      "search_keywords": [
+        "Basnet NiPS3 PRB 109 184405 magnetic symmetry",
+        "magnetic point group fingerprint MnPS3",
+        "NiPS3 antiferromagnetic symmetry HHG channel"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.3 独立验证渠道中 [7] 异质结工程对应 MnPS3/异质结 HHG 探测的实验或理论文献",
+      "missing_evidence": "需要异质结（如 MnPS3/h-BN、MnPS3/TMD）HHG 或自旋极化探测的近期文献",
+      "search_keywords": [
+        "MnPS3 heterostructure HHG probe",
+        "van der Waals antiferromagnet heterostructure spin polarized HHG",
+        "MnPS3 hBN interface high harmonic generation"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

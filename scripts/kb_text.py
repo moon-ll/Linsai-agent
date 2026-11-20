@@ -1,0 +1,330 @@
+#!/usr/bin/env python3
+"""kb_text.py — 知识库文本处理基础工具。
+
+提供分词、文档分块、IDF 计算、frontmatter 解析/生成、安全文件名等底层工具，
+被 kb_graph / kb_wiki / kb_index / kb_health 子模块共享依赖。
+
+用法示例：
+    >>> from kb_text import _tokenize, parse_frontmatter, build_frontmatter
+    >>> tokens = _tokenize("固体高次谐波产生")
+    >>> fm, body = parse_frontmatter("---\\ntitle: 测试\\n---\\n正文")
+
+规范：
+    - 仅使用 Python 3 标准库
+    - 不修改任何函数逻辑，自 knowledge_base.py 物理迁移而来
+"""
+
+import math
+import re
+from typing import Any, Dict, List, Set, Tuple
+
+from common import safe_filename as _safe_filename
+
+
+# ─────────────────────────────────────────────
+# 常量
+# ─────────────────────────────────────────────
+
+_STOPWORDS: Set[str] = {
+    # 中文停用词（合并自 kb_text / research_profiler / project_kb 三处定义）
+    "的", "了", "是", "在", "我", "有", "和", "就", "不", "人",
+    "都", "一", "一个", "上", "也", "很", "到", "说", "要", "去",
+    "你", "会", "着", "没有", "看", "好", "自己", "这", "那",
+    "可以", "他", "她", "它", "们", "与", "及", "或", "但是", "因为",
+    "所以", "如果", "则", "而", "于", "以", "为", "之", "其", "将",
+    "被", "把", "让", "向", "从", "对", "关于", "根据", "按照",
+    "我们", "这个", "那个", "什么", "怎么", "如何", "为什么",
+    "个", "等", "可", "能", "给", "还", "你们", "他们",
+    "还是", "或者", "以及",
+    # 英文停用词（合并自 research_profiler / project_kb）
+    "the", "a", "an", "is", "are", "was", "were", "be", "been", "being",
+    "have", "has", "had", "do", "does", "did", "will", "would", "could",
+    "should", "may", "might", "must", "shall", "can", "need", "dare",
+    "of", "to", "in", "for", "on", "with", "at", "by", "from", "as",
+    "into", "through", "during", "before", "after", "above", "below",
+    "between", "under", "again", "further", "then", "once", "here",
+    "there", "when", "where", "why", "how", "all", "any", "both", "each",
+    "few", "more", "most", "other", "some", "such", "no", "nor", "not",
+    "only", "own", "same", "so", "than", "too", "very", "just", "and",
+    "but", "if", "or", "because", "until", "while", "about", "against",
+    "this", "that", "these", "those", "i", "me", "my", "myself", "we",
+    "our", "you", "your", "he", "him", "his", "she", "her", "it", "its",
+    "they", "them", "their",
+}
+
+
+# ─────────────────────────────────────────────
+# Frontmatter 解析与生成
+# ─────────────────────────────────────────────
+
+_FRONTMATTER_RE = re.compile(r"^---\s*\n(.*?)\n---\s*\n(.*)$", re.DOTALL)
+
+
+def _parse_list_value(inner: str) -> List[str]:
+    """解析 frontmatter 行内数组的值（v7.2.75）。
+
+    背景（BUG-37）：原实现用 `inner.split(",")` 切分，**引号内的逗号也被切**。
+    形如 `related: ["固体高次谐波辐射的理论分析 (Vampa et al., PRL 2014)"]`
+    被切成 2 项 `'固体高次谐波辐射的理论分析 (Vampa et al.'` + `'PRL 2014)'`，
+    写回时 `build_frontmatter` 再拼回去就变成两个独立标签
+    （`"固体高次谐波辐射的理论分析 (Vampa et al."` + `"PRL 2014)"`）——
+    **每次 save_wiki_page 都永久切割一次**，且 `discover_related` 的
+    「related 已含该标题」判定永远不成立 → kb_linker 反复尝试补同一条边
+    → 补边不收敛。
+
+    改为：先按引号边界切分，只有引号外的逗号才是分隔符。
+    """
+    items: List[str] = []
+    buf = ""
+    quote = ""
+    for ch in inner:
+        if quote:
+            if ch == quote:
+                quote = ""
+            buf += ch
+            continue
+        if ch in ('"', "'"):
+            quote = ch
+            buf += ch
+            continue
+        if ch == ",":
+            if buf.strip():
+                items.append(buf.strip().strip('"').strip("'"))
+            buf = ""
+            continue
+        buf += ch
+    if buf.strip():
+        items.append(buf.strip().strip('"').strip("'"))
+    return items
+
+
+def parse_frontmatter(text: str) -> Tuple[Dict[str, Any], str]:
+    """解析 Markdown 文件的 YAML frontmatter。
+
+    Returns:
+        (frontmatter_dict, body_markdown)
+    """
+    m = _FRONTMATTER_RE.match(text)
+    if not m:
+        return {}, text
+    yaml_text = m.group(1).strip()
+    body = m.group(2).strip()
+    meta: Dict[str, Any] = {}
+    for line in yaml_text.split("\n"):
+        line = line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if ":" in line:
+            key, val = line.split(":", 1)
+            key = key.strip()
+            val = val.strip()
+            # 简单类型推断
+            if val.startswith("[") and val.endswith("]"):
+                # 数组：["a", "b"] 或 [a, b]
+                meta[key] = _parse_list_value(val[1:-1])
+            elif val.lower() in ("true", "false"):
+                meta[key] = val.lower() == "true"
+            elif re.match(r"^\d+\.\d+$", val):
+                meta[key] = float(val)
+            elif re.match(r"^\d+$", val):
+                meta[key] = int(val)
+            else:
+                meta[key] = val.strip('"').strip("'")
+        # v7.2.45 修复：title 语义恒为字符串——纯数字 title（如 `title: 46`）
+        # 被类型推断成 int，消费方 kb_health_weekend._detect_duplicate_concepts
+        # 的 `page.get("title","").lower()` 直接抛 AttributeError，整条周末
+        # 反思链（kb_merge_duplicates → calibration → link_deep_review →
+        # taxonomy_apply）全部崩溃。
+        # v7.3.1 边界修复：同类“字符串语义字段”统一在解析边界收窄为 str
+        # （标量字段 title/name/source_raw/summary；列表字段 aliases/related/
+        # tags 逐元素收窄），避免 int 值流到任何 `.lower()` / 文本比较消费方。
+        # 数字类型推断只保留给显式数值键（latest_round / settled_count /
+        # confidence / year / round / score / version 等）。
+        for _str_key in ("title", "name", "source_raw", "summary"):
+            if _str_key in meta and not isinstance(meta[_str_key], str):
+                meta[_str_key] = str(meta[_str_key])
+        for _list_key in ("aliases", "related", "tags"):
+            _val = meta.get(_list_key)
+            if _val is None:
+                continue
+            if isinstance(_val, list):
+                meta[_list_key] = [str(_item) for _item in _val]
+            elif not isinstance(_val, str):
+                meta[_list_key] = str(_val)
+    return meta, body
+
+
+def build_frontmatter(meta: Dict[str, Any]) -> str:
+    """将字典转换为 YAML frontmatter 字符串（Obsidian 兼容格式）。"""
+    import json as _json
+    lines = ["---"]
+    for key, val in meta.items():
+        if isinstance(val, list):
+            if not val:
+                lines.append(f'{key}: []')
+                continue
+            # P1-16: 去重保持顺序，防止标签重复累积
+            # 若列表元素是 dict 等不可哈希类型（如 status_history），
+            # 去重集合会抛 unhashable type；此时回退为 JSON 序列化（保持顺序）。
+            try:
+                seen = set()
+                deduped = []
+                for v in val:
+                    if v not in seen:
+                        seen.add(v)
+                        deduped.append(v)
+                items = ', '.join(f'"{v}"' for v in deduped)
+                lines.append(f'{key}: [{items}]')
+            except TypeError:
+                lines.append(f'{key}: {_json.dumps(val, ensure_ascii=False)}')
+        elif isinstance(val, bool):
+            lines.append(f'{key}: {"true" if val else "false"}')
+        elif isinstance(val, (int, float)):
+            lines.append(f'{key}: {val}')
+        else:
+            # 字符串值，简单转义双引号
+            s = str(val).replace('"', '\\"')
+            lines.append(f'{key}: "{s}"')
+    lines.append("---")
+    return "\n".join(lines)
+
+
+# ─────────────────────────────────────────────
+# 文本处理工具
+# ─────────────────────────────────────────────
+
+def _tokenize(text: str) -> List[str]:
+    """分词：中文 2-gram 滑窗 + 英文单词 + 数字。
+
+    v6.8.51 瘦身：原实现生成 2/3/4-gram 全展开（8 字中文词 → 18 个 token），
+    导致 580 篇文档膨胀出 28.4 万词条 / 157MB 索引，其中 46% 词条仅出现一次。
+    现收敛为 2-gram：查询与文档同法分词，长短语匹配由相邻 2-gram 组合覆盖，
+    索引体积约降 60%。英文/数字保持不变。
+    """
+    tokens = []
+    # 中文 2-gram 滑窗（连续 2 字以上）
+    for m in re.finditer(r"[\u4e00-\u9fff]{2,}", text):
+        word = m.group()
+        for i in range(len(word) - 1):
+            tokens.append(word[i : i + 2])
+    # 英文单词
+    for m in re.finditer(r"[a-zA-Z_][a-zA-Z0-9_]{1,}", text):
+        tokens.append(m.group().lower())
+    # 数字
+    for m in re.finditer(r"\d+\.?\d*", text):
+        tokens.append(m.group())
+    return [t for t in tokens if t not in _STOPWORDS and len(t) >= 2]
+
+
+def _chunk_document(text: str, max_chars: int = 500) -> List[Dict[str, str]]:
+    """将文档按段落分块，每块不超过 max_chars 字符。"""
+    chunks = []
+    paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
+    current_text = ""
+    current_idx = 0
+
+    for para in paragraphs:
+        if len(current_text) + len(para) + 2 <= max_chars:
+            current_text += para + "\n\n"
+        else:
+            if current_text:
+                chunks.append({"id": f"chunk_{current_idx}", "text": current_text.strip()})
+                current_idx += 1
+            current_text = para + "\n\n"
+
+    if current_text:
+        chunks.append({"id": f"chunk_{current_idx}", "text": current_text.strip()})
+
+    return chunks
+
+
+def _compute_idf(doc_count: int, term_doc_freq: Dict[str, int]) -> Dict[str, float]:
+    idf = {}
+    for term, freq in term_doc_freq.items():
+        idf[term] = math.log(doc_count / (freq + 1)) + 1
+    return idf
+
+
+# ─────────────────────────────────────────────
+# 自检
+# ─────────────────────────────────────────────
+
+def _self_check() -> bool:
+    """自检：验证 tokenize/chunk/IDF/frontmatter 解析等文本工具。
+
+    使用临时目录隔离，测试核心功能的正确性。
+    """
+    import tempfile
+
+    print("=" * 50)
+    print("◐ kb_text 自检")
+    print("=" * 50)
+
+    passed = 0
+    total = 0
+    tmp_dir = tempfile.mkdtemp(prefix="kb_text_test_")
+
+    try:
+        # [1/5] 分词：中文词组 + 英文单词
+        total += 1
+        tokens = _tokenize("固体高次谐波产生 HHG")
+        has_cjk = any("高次" in t or "固体" in t for t in tokens)
+        has_en = "hhg" in tokens
+        if has_cjk and has_en:
+            passed += 1
+            print(f"  [1/{total}] ✓ 分词: 中文+英文 (tokens={len(tokens)})")
+        else:
+            print(f"  [1/{total}] ✗ 分词: has_cjk={has_cjk}, has_en={has_en}")
+
+        # [2/5] 文档分块
+        total += 1
+        long_text = "段落一内容。\n\n段落二内容。\n\n段落三内容。"
+        chunks = _chunk_document(long_text, max_chars=20)
+        if len(chunks) >= 2 and all("text" in c and "id" in c for c in chunks):
+            passed += 1
+            print(f"  [2/{total}] ✓ 分块: {len(chunks)} 块")
+        else:
+            print(f"  [2/{total}] ✗ 分块: chunks={len(chunks)}")
+
+        # [3/5] IDF 计算
+        total += 1
+        idf = _compute_idf(10, {"激光": 2, "相位": 5})
+        if isinstance(idf, dict) and "激光" in idf and idf["激光"] > idf["相位"]:
+            passed += 1
+            print(f"  [3/{total}] ✓ IDF: 低频词权重更高 (激光={idf['激光']:.2f}, 相位={idf['相位']:.2f})")
+        else:
+            print(f"  [3/{total}] ✗ IDF: idf={idf}")
+
+        # [4/5] frontmatter 解析
+        total += 1
+        fm_text = '---\ntitle: "测试"\ntags: ["HHG", "固体"]\nconfidence: 0.8\ngrowth_stage: "mature"\n---\n正文内容'
+        fm, body = parse_frontmatter(fm_text)
+        if (fm.get("title") == "测试" and fm.get("confidence") == 0.8
+                and fm.get("growth_stage") == "mature" and "正文" in body):
+            passed += 1
+            print(f"  [4/{total}] ✓ frontmatter 解析: title={fm['title']}, tags={fm.get('tags')}")
+        else:
+            print(f"  [4/{total}] ✗ frontmatter 解析: fm={fm}")
+
+        # [5/5] frontmatter 生成（往返一致性）
+        total += 1
+        meta = {"title": "往返测试", "tags": ["a", "b"], "confidence": True}
+        built = build_frontmatter(meta)
+        fm2, _ = parse_frontmatter(built + "\n正文")
+        if fm2.get("title") == "往返测试" and fm2.get("tags") == ["a", "b"] and fm2.get("confidence") is True:
+            passed += 1
+            print(f"  [5/{total}] ✓ frontmatter 往返: 标签去重+类型保持")
+        else:
+            print(f"  [5/{total}] ✗ frontmatter 往返: fm2={fm2}")
+    finally:
+        import shutil
+        shutil.rmtree(tmp_dir, ignore_errors=True)
+
+    ok = passed == total
+    print(f"\n{'✓' if ok else '✗'} kb_text: {passed}/{total} 通过")
+    return ok
+
+
+if __name__ == "__main__":
+    import sys
+    sys.exit(0 if _self_check() else 1)

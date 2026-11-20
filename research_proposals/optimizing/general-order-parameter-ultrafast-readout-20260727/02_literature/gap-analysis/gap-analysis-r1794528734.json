@@ -1,0 +1,30 @@
+{
+  "gaps": [
+    {
+      "claim": "rationale §一.1 L11/L15 与 §一.2 L43/L47/L53/L55 中 Tyulnev、Zhang[2]、Ma、Yang、Sankar、Murakami、Dziurawiec、Granados 八位作者的研究成果具名首现详述（具体观测/机制论断），但首现处零角标，读者在立项依据内无法溯源这些具名论断",
+      "missing_evidence": "首现处即挂的支撑文献：评审指定挂现有文献表 [1][2][13][12][14][6][4][22]。需逐条核验每个具名论断与所挂文献真实对应（作者、体系、结论三者一致），尤其核对现有文献表中这 8 个编号是否确有对应条目；若某姓氏在 45 条文献表中无精确对应来源，则需补充检索该作者原始论文并入库",
+      "search_keywords": [
+        "Tyulnev nonlinear optical detection",
+        "Zhang 高次谐波 序参量",
+        "Ma ultrafast order parameter readout",
+        "Yang nonlinear Hall effect",
+        "Sankar altermagnet MnTe",
+        "Murakami nonlinear Hall theory Berry curvature dipole",
+        "Dziurawiec antiferromagnet optical response",
+        "Granados optical detection magnetic order"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "rationale §一.2 L47 称文献 [14] 报道了『宽带非线性反常霍尔效应』（broadband nonlinear anomalous Hall effect），评审裁定该效应名称错植——[14] 实际为 nonlinear Hall 效应（scheme L99 表述正确），『反常』二字导致论点与被引文献的真实内容不符",
+      "missing_evidence": "需核验 [14] 原文的确切报道对象：若 [14] 仅支持普通非线性霍尔效应，则要么删『反常』统一为『宽带非线性霍尔响应』，要么补充检索真正报道『宽带非线性霍尔（响应/效应）』的实证文献作为该论断的独立支撑，并按引用三源对照纪律入库",
+      "search_keywords": [
+        "broadband nonlinear Hall effect",
+        "nonlinear Hall response antiferromagnet",
+        "Berry curvature dipole nonlinear transport"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "full_review"
+}

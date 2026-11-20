@@ -1,0 +1,165 @@
+{
+  "gaps": [
+    {
+      "claim": "3R菱方堆垛打破反演对称，使多层MoS2整体具备体相χ(2)，且χ(2)随层数相干叠加——这是本课题'本征非线性放大'的物理前提，rationale第一层（大背景）需要文献支撑'高χ(2) TMD+共振纳米光子'范式已经确立",
+      "missing_evidence": "缺3R-TMD体相χ(2)的定量文献（χ(2)张量大小、层数依赖的相干叠加律、相干长度截断）以及'体相2H χ(2)=0'的对照证据；需可溯源综述+原始论文，并给出数值区间以支撑'高χ(2)'判断",
+      "search_keywords": [
+        "3R-MoS2 second harmonic generation inversion symmetry breaking layer number scaling",
+        "rhombohedral TMDC bulk chi(2) nonlinear coefficient quantification",
+        "atomically phase-matched second-harmonic generation 2D crystal",
+        "3R-stacked transition metal dichalcogenide non-local metasurface second-harmonic generation Nature Photonics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "3R-MoS2超表面实验上已实现10^2-10^3倍SHG增强（原子级边缘加工达3个量级以上）",
+      "missing_evidence": "缺逐条可溯源的定量文献，且现有数据与本claim存在偏差需修正：arXiv:2503.20161 实测2000倍(约3.3个数量级)SHG强度增强、SHG转换效率约1%、双共振+30°扭转角；arXiv:2410.11033 实测>150倍(740nm, A激子共振)。'10^2-10^3倍'与'10^3倍'的表述低估了已被报道的实验上限，会在评审中构成事实性错误；需按'已有最强实验≈2000倍/η≈1%'重写基线",
+      "search_keywords": [
+        "Giant Second Harmonic Generation from 3R-MoS2 Metasurfaces 2000-fold enhancement conversion efficiency",
+        "Nonlinear van der Waals metasurfaces resonantly enhanced light generation 150-fold 740nm A exciton",
+        "Giant second-harmonic generation rhombohedral transition metal dichalcogenide metasurfaces Optics Communications"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "准BIC理论预言SHG增益可达10^6倍",
+      "missing_evidence": "缺该10^6预言的原始出处与其适用边界（该数字来自arXiv:2410.11033针对<100nm厚BIC结构的理论计算，而非实验兑现，且与其同文报道的实测>150倍属同一工作）。需注明'同一篇文献中理论10^6 vs 实测>150'的落差，明确这是本课题的兑现目标而非已有结果；同时需补充后续是否有人推进兑现的检索证据",
+      "search_keywords": [
+        "quasi-BIC 10^6 second harmonic enhancement theoretical prediction 3R-MoS2",
+        "second harmonic generation bound states in the continuum enhancement 10^6 10^5 experiment",
+        "Quasi-BIC and Reflective Mode Coupling Drives SHG Beyond the Q Factor Limit"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "WS2/MoS2异质双层anapole纳米天线实现102倍SHG增强、转换效率η=3.3×10^-7",
+      "missing_evidence": "缺原始出处与精确数值核对：arXiv:2411.06156/Light Sci Appl 14, 346 (2025) 实际表述为'up to 10^2 SHG enhancement'、'SHG conversion efficiency reaching ≈10^-7'，未标注3.3×10^-7这一具体数值。需回原文/补充材料确认精度，或改写为'≈10^-7量级'。同时需补该工作的机制细节（激子共振+anapole条件同时满足才达最大值）作为'双条件耦合'论证的支撑",
+      "search_keywords": [
+        "Tognazzi interface second harmonic generation bulk WS2 MoS2 hetero-bilayer van der Waals nanoantennas anapole exciton",
+        "anapole exciton synergistic enhancement second harmonic nanoantenna van der Waals",
+        "light science applications 2025 WS2 MoS2 nanoantenna interface SHG efficiency"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "图案化WS2准BIC超表面实现室温激子-极化激元强耦合、约45 fs拉比振荡、约110 fs相干时间",
+      "missing_evidence": "缺原始出处与数值核对（已核对arXiv:2510.03052 abstract：coherence time up to ~110 fs、Rabi oscillations ~45 fs period，确认无误）；但该文属三本征态模型（光子+亮激子+暗激子），而本课题技术路线写'三态模型/上-下极化激元支'需与之区分并说明差异；同时需补强耦合判据（Rabi劈裂>2(γph+γex)）与所用超快泵浦/探测参量（~150 fs FWHM=40 meV 泵浦、3.5 μm 焦斑）以支撑时间分辨测量的可行性论证",
+      "search_keywords": [
+        "Ultrafast dynamics coherent exciton-polaritons van der Waals semiconductor metasurfaces 45 fs Rabi 110 fs coherence",
+        "strong coupling criterion Rabi splitting versus linewidth exciton polariton metasurface",
+        "self-hybridized BIC WS2 metasurface three-eigenstate model bright dark exciton"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "激子-极化激元强耦合拉比劈裂约90 meV（强耦合区判据、SHG沿上/下极化激元支演化）",
+      "missing_evidence": "该数值在已核实文献中无对应来源，属需溯源或修正项：已核实值为arXiv:2209.01944（self-hybridized BIC WS2，Q≈370，环境温度）Rabi劈裂116 meV；相关报道另有180 meV、137/124 meV、室温等离激元-激子极化激元可达~200 meV甚至>500 meV。90 meV仅见于中文综述类论述中作为室温极化激元的量级判据（如researching.cn: 'Rabi splitting of 90[meV]'对应k_BT≈26 meV的室温判据），并非本体系实测值。需重新标定：若以WS2超表面为平台应引用116 meV量级，或明确将90 meV写成'室温可用劈裂量级下限'并注明来源；同时需补强耦合判据公式与超快动力学文献支撑'SHG沿极化激元支演化≥一个量级'这一尚未被任何实验验证的新颖点",
+      "search_keywords": [
+        "self-hybridized bound states in the continuum van der Waals metasurfaces Rabi splitting 116 meV WS2 Q 370",
+        "strong coupling between excitons chiral quasibound states in the continuum bulk WS2 metasurface",
+        "room temperature exciton polariton Rabi splitting 90 meV criterion kBT 26 meV",
+        "Second Harmonic Generation from exciton-polaritons strong coupling monolayer WS2 multilayer WSe2 metasurface"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "界面χ(2)与体相χ(2)从未被定量分离，需建立分离协议并给出χ(2)(N,堆垛序,扭转角)标度律",
+      "missing_evidence": "缺'界面χ(2) vs 体相χ(2)'定量分离方法的现有方法学文献（干涉相位差拟合/角度-偏振分辨SHG的既有实现），以及'体相项随N相干叠加至相干长度截断、界面项不饱和'的可对照实验证据；需检索相干长度l_c标定方法、多层体相SHG相干叠加实验（如双层MoS2+石墨烯emergent SHG、Janus异质双层堆垛序依赖）与准相位匹配研究，用于论证'分离可行'而非仅为主张",
+      "search_keywords": [
+        "interface versus bulk second-order nonlinearity separation thickness dependence van der Waals",
+        "emergent second-harmonic generation van der Waals heterostructure bilayer MoS2 graphene",
+        "quasi-phase-matched frequency conversion van der Waals semiconductors thicker may not be better coherence length",
+        "second harmonic generation 2D moire superlattices bilayer transition metal dichalcogenides",
+        "Nonlinear optical responses Janus MoSSe MoS2 heterobilayers stacking order strain first-principles"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "基频-谐波双共振（临界耦合注入 + 高效谐波辐射）的联合设计优于单Q值提升，SHG效率取决于Q与吸收率共同作用",
+      "missing_evidence": "缺支撑'增强倍数与Q(ω)×Q(2ω)乘积标定、在临界耦合点出现极值'这一核心创新判据的方法学文献：需补TCMT（时间耦合模理论）框架下SHG效率~Q×吸收率/失谐的推导出处、以及'谐波提取效率受辐射通道限制'的相关工作；检索到的'Quasi-BIC and Reflective Mode Coupling Drives SHG Beyond the Q Factor Limit'(Small)直接支持'单靠Q不足'但也构成对纯Q标度律的替代解释，申请书必须正面回应；另需补频率转换效率-带宽权衡与临界耦合超薄纳米光子学的理论文献",
+      "search_keywords": [
+        "temporal coupled mode theory SHG efficiency Q factor absorptance critical coupling metasurface",
+        "dual resonance fundamental harmonic simultaneous second harmonic generation design metasurface",
+        "overcoming efficiency bandwidth tradeoff optical harmonics nonlinear time-variant resonators",
+        "critically coupled zeroth-order resonance ultrathin nonlinear photonics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "anapole态把光场局域于天线内部与界面以最大化激发界面非线性（anapole作为独立增强机制）",
+      "missing_evidence": "缺anapole态用于非线性增强的独立物理支撑文献（非仅SHG工作，还需anapole态的基本物理：电偶极与环形偶极相消干涉、非辐射、局域场增强机制、准BIC对称性破缺机制），以及Mie共振/MLM（多极矩晶格模式）与BIC三者的统一耦合模描述文献，用于支撑'三模与χ(2)激子峰放进同一能量流分配问题'的设计框架可行性",
+      "search_keywords": [
+        "anapole state nonradiating electric dipole toroidal interference metasurface local field enhancement",
+        "multifaceted anapole from physics to applications review",
+        "Mie multipole lattice mode metasurface high Q resonance coupled mode theory nonlinear",
+        "bound state in the continuum metasurface origin symmetry breaking quasi-BIC high Q"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "原子级边缘图案化制备3R-MoS2超表面（20-25nm超薄、原子级锐利边缘破缺面内对称性、准BIC）",
+      "missing_evidence": "缺该工作的原始出处与定量结论（arXiv:2410.20960 / Chalmers）需与'3个量级'增强说法逐一对应核对；并需补3R相材料的晶圆级可控制备文献（wafer-scale CVD/MOCVD、3R相选择性生长、良率与相纯度表征），以支撑技术路线第一步'晶圆级3R-MoS2经原子级边缘图案化制备参数化阵列'的可行性论证——dossier已将晶圆级制备划为边界界定外，但rationale的'国内现状/挑战'层仍需给出供给链现状的文献依据",
+      "search_keywords": [
+        "Ultrathin 3R-MoS2 metasurfaces atomically precise edges efficient nonlinear nanophotonics enhancement",
+        "wafer-scale 3R phase MoS2 CVD growth phase purity monolayer uniform",
+        "MOCVD epitaxy wafer-scale transition metal dichalcogenide monolayers comparison",
+        "atomic layer etching precision nanofabrication two-dimensional material metasurface pattern"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "WSe2/扭转异质结可将非线性工作谱段拓展，作为χ(2)(N,θ)标度律的外推检验与激子能量匹配普适性判据",
+      "missing_evidence": "缺扭转异质结非线性光学（SHG随扭转角θ依赖）的实验文献以支撑'χ(2)随扭转角标度律'的可行性：需检索PRB 105, 115420 (2022) 'Second harmonic generation control in twisted bilayers of transition metal dichalcogenides'、ACS Nano 2025 'Probing the twist-controlled interlayer coupling'、以及64°堆垛WSe2/WS2 SHG增强等具体工作的定量结论，用于论证θ作为独立调控自由度的可行性与已有覆盖范围（说明本课题与之区别）",
+      "search_keywords": [
+        "second harmonic generation control twisted bilayers transition metal dichalcogenides polarization resolved twist angle",
+        "twist-controlled interlayer coupling probed by optical second-harmonic generation",
+        "enhancement of second-harmonic generation 64 degree stacked WSe2 WS2 heterobilayer local strain",
+        "WSe2 second harmonic generation layer number stacking phase metasurface"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "超快泵浦下有限相干时间对转换效率的限制函数η(t_coh)——SHG动力学与极化激元超快动力学的关联量尚未被测量",
+      "missing_evidence": "缺'非线性转换效率随相干时间衰减'的理论/实验文献（DeMarchi/Blasco 等延时效应、coherence-time-limited nonlinear conversion、极化激元退相干与非线性转换耦合），以及固体超快SHG时间分辨测量的方法学先例；这是本课题最核心新颖点（四篇对比文献群均未触及），必须用'相关但不同'的文献证明可行性与空白，而非仅陈述'无人做过'",
+      "search_keywords": [
+        "coherence time limit nonlinear frequency conversion efficiency femtosecond dephasing",
+        "ultrafast time-resolved second harmonic generation transient solid state measurement",
+        "exciton polariton dephasing coherence time nonlinear conversion efficiency",
+        "ultrafast giant enhancement second harmonic generation level occupation engineering van der Waals"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "χ(3)级联与和频混叠、激子荧光背景、热效应、样品损伤等替代解释的排除方法具有判别力（偏振选择定则、泵浦二次方律、时间门控、拉曼/PL指纹对照）",
+      "missing_evidence": "缺各排除判据的方法学出处：χ(2)SHG与χ(3)级联的偏振依赖差异、SHG严格泵浦二次方律检验的判据、荧光谱线与SHG谱线的区分方法、激光加热损伤阈值与拉曼/PL指纹监控方法。需检索非线性光学的标准判别方法文献与TMD超表面损伤阈值文献，为'排除替代解释'章节提供可引证的依据",
+      "search_keywords": [
+        "distinguishing second harmonic generation from cascading third order polarization selection rules",
+        "power dependence quadratic law second harmonic generation test saturation damage threshold",
+        "photoluminescence Raman fingerprint damage characterization TMD metasurface laser heating",
+        "time gated fluorescence background removal second harmonic spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "五层递进中'国内研究现状'层需要本土研究力量的代表性工作作为对比基准",
+      "missing_evidence": "缺国内单位在该方向的代表性成果文献（如中科院上海微系统所/中科院物理所/西安交大/浙大/哈工大等在TMD非线性超表面、准BIC、二维材料二次谐波、激子极化激元方向的工作），用于构建'国内现状与本课题定位'的对标叙事；需注意同一团队的多篇工作应合并标注避免虚增文献量，同时需与国外主线（ANU/Neshev组、Uppsala、Polytechnique、CNR等）形成对比而非简单罗列",
+      "search_keywords": [
+        "中国科学院 二维材料 超表面 二次谐波 准BIC 强耦合 激子极化激元 课题组",
+        "China TMD metasurface second harmonic generation quasi-BIC strong coupling group 2024 2025",
+        "西安交通大学 浙江大学 二维材料 非线性光学 超表面 二次谐波",
+        "Ultrafast all-optical switching nonlinear 3R-MoS2 van der Waals metasurface Nature 2025"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "文献总量与结构不足：正文引用需35-47次、文献表需30-40篇，当前 references.md 为0字节、嵌入引用为0处",
+      "missing_evidence": "缺文献表的分类化骨架与反查机制：需按五层递进（①TMD非线性χ(2)基础 ②超表面共振机制BIC/Mie/Anapole ③SHG增强实验工作 ④激子-极化激元强耦合动力学 ⑤方法学/理论工具）分层铺开30-40篇，每篇须可溯源（DOI/arXiv ID + 作者+年份+期刊）并与正文[N]编号一一反查；需注意去重基线（已读过的6704个ID）避免与既有综述库重复计数，同时标注预印本与正式发表版的关系（如arXiv:2606.26751 与Optics Communications 584, 131825 (2025)等重复条目需择一）",
+      "search_keywords": [
+        "review second harmonic generation dielectric metasurface bound state in the continuum nonlinear nanophotonics 2024 2025",
+        "van der Waals nonlinear metasurface research progress review excitation enhancement",
+        "exciton polariton metasurface review strong coupling TMDC"
+      ],
+      "priority": "high"
+    }
+  ]
+}

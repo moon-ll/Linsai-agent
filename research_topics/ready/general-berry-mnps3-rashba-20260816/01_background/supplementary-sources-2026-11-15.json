@@ -1,0 +1,129 @@
+{
+  "proposal_id": "general-berry-mnps3-rashba-20260816",
+  "cluster_id": "cl_20261106_2c9663",
+  "clusters": [
+    "cl_20261106_2c9663"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2024-2406.04474-stoichiometry-induced-ferromagnetism-in-altermagnetic-candid",
+      "title": "Stoichiometry-Induced Ferromagnetism in Altermagnetic Candidate MnTe",
+      "summary": "在 InP(111) 衬底上 MBE 生长的 MnTe 薄膜中，作者证明此前报道的弱铁磁性与金属型输运源于本征富 Mn（缺 Te）的化学计量偏差，而非化学计量 MnTe 的本征性质。与此同时，薄膜中的反常霍尔效应来自交错磁自旋劈裂能带的贝里曲率（本征机制），并由 ARPES 直接证实了能带自旋劈裂。该工作将 MnTe 薄膜的'表观铁磁性'与'拓扑性输运响应'解耦为分别由化学计量与交错磁能带结构控制的两条通道。",
+      "path": "knowledge/raw/papers/2024-2406.04474-stoichiometry-induced-ferromagnetism-in-altermagnetic-candid.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2607.28441-heteroepitaxial-altermagnetic-mnte-thin-films-on-inp111-with",
+      "title": "Heteroepitaxial altermagnetic MnTe thin films on InP(111) with anomalous Hall response",
+      "summary": "该工作通过MBE在InP(111)衬底上异质外延生长出交变磁性（altermagnetic）MnTe薄膜，并在这种名义上磁矩完全补偿、反常霍尔被对称性禁戒的磁体中观测到了反常霍尔响应（含磁滞的蝶形磁阻与非线性磁阻）。DFT计算表明InP(111)界面破坏了MnTe的晶体对称性、诱导出净磁极化，从而解禁了反常霍尔通道。这确立了界面工程作为操控交变磁性自旋-输运功能的可行途径，为反铁磁/交变磁体器件提供了新的材料平台。",
+      "path": "knowledge/raw/papers/2026-2607.28441-heteroepitaxial-altermagnetic-mnte-thin-films-on-inp111-with.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2603.00242-conductivity-scaling-of-the-anomalous-hall-effect-in-the-alt",
+      "title": "Conductivity scaling of the anomalous Hall effect in the altermagnetic semiconductor α-MnTe",
+      "summary": "本文在 SrF2(111) 衬底上外延生长的交变磁半导体 α-MnTe 薄膜中系统测量了反常霍尔效应，发现反常霍尔电导率服从跳跃机制的标度律，且样品间差异完全由纵向电导率变化解释。据此将这一零净磁矩反铁磁半导体中的巨大 AHE 起源锚定到交变磁自旋劈裂能带的内禀 Berry 曲率上，确立其为反铁磁交变磁序的本征性质而非外禀散射或磁性杂质效应。",
+      "path": "knowledge/raw/papers/2026-2603.00242-conductivity-scaling-of-the-anomalous-hall-effect-in-the-alt.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2605.25953-berry-curvature-driven-transport-in-silicon-compatible-alter",
+      "title": "Berry Curvature Driven Transport in Silicon-Compatible Altermagnetic α-MnTe Thin Films",
+      "summary": "首次通过分子束外延（MBE）在 Si(111) 衬底上直接外延交替磁性（altermagnetic）半导体 α-MnTe，建立与主流硅工艺兼容的交替磁性薄膜平台。输运测量揭示由带内贝里曲率驱动的稳健反常霍尔效应，证明在零净磁矩的反铁磁交替磁序中，时间反演破缺仍可被宏观电学信号直接读出。该工作为硅基集成的交替磁性自旋电子学与贝里曲率量子几何调控提供了可用的材料体系。",
+      "path": "knowledge/raw/papers/2026-2605.25953-berry-curvature-driven-transport-in-silicon-compatible-alter.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2503.23735-altermagnetism-and-weak-ferromagnetism",
+      "title": "Altermagnetism and Weak Ferromagnetism",
+      "summary": "本文以 La2CuO4 为统一模型，对比反铁磁序与弱铁磁序的微观机制和电子结构，揭示无净磁矩条件下能带自旋分裂的交错磁性起源。研究进一步厘清压磁性与反常霍尔效应对磁空间群、磁矩取向及自旋轨道耦合的依赖，表明自旋分裂、净磁化和霍尔响应是相关但不等价的磁性序特征。",
+      "path": "knowledge/raw/papers/2025-2503.23735-altermagnetism-and-weak-ferromagnetism.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2510.21511-examining-the-spin-structure-of-altermagnetic-candidate-mnte",
+      "title": "Examining the Spin Structure of Altermagnetic Candidate MnTe Grown with Near Ideal Stoichiometry",
+      "summary": "本文用MBE生长出近理想化学计量比的α-MnTe薄膜并系统检视其自旋结构：中子衍射确认反铁磁长程序（T_N≈307 K），极化中子反射测得几乎可忽略的净磁化，证明磁矩高度补偿。在此基础上确认了g波对称的自旋劈裂各向异性与~1.1 eV的价带自旋劈裂，将近理想化学计量比的MnTe确立为研究本征交替磁性物理的干净材料平台。",
+      "path": "knowledge/raw/papers/2025-2510.21511-examining-the-spin-structure-of-altermagnetic-candidate-mnte.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2024-2308.11180-broken-kramers-degeneracy-in-altermagnetic-mnte",
+      "title": "Broken Kramers' degeneracy in altermagnetic MnTe",
+      "summary": "在MBE生长的α-MnTe薄膜上通过原位ARPES首次直接观测到交变磁（altermagnet）的自旋劈裂能带：Kramers简并随磁有序在Néel温度TN=267 K以下打开，d带自旋劈裂达370 meV。该结果为交变磁作为铁磁与反铁磁之外的第三类基本磁性提供了直接光谱证据，表明零净磁矩体系同样可具有媲美铁磁的大自旋劈裂。",
+      "path": "knowledge/raw/papers/2024-2308.11180-broken-kramers-degeneracy-in-altermagnetic-mnte.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2502.11876-magnetization-symmetry-for-the-mnte-altermagnetic-candidate",
+      "title": "Magnetization symmetry for the MnTe altermagnetic candidate",
+      "summary": "本文对MnTe单晶进行面内角度分辨的磁化测量，通过M(α)的对称性分析确认了其altermagnetic（交替磁）基态：磁化各向异性呈现与三条等价易轴对应的三重对称特征。关键发现是单畴样品中某一易轴的择优占据破坏了名义三重对称，产生了可由磁化测量的各向异性分量直接探测的隐藏对称性破缺，为区分交替磁体与常规共线反铁磁体提供了宏观实验判据。",
+      "path": "knowledge/raw/papers/2025-2502.11876-magnetization-symmetry-for-the-mnte-altermagnetic-candidate.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2510.02777-magnetocaloric-effect-for-the-altermagnetic-candidate-mnte",
+      "title": "Magnetocaloric effect for the altermagnetic candidate MnTe",
+      "summary": "本文在交错磁候选材料MnTe中，于Néel温度以下实验测量了磁热效应（磁场诱导的熵变/绝热温变）。由于理想交错磁态净磁化为零、与外磁场几乎不耦合，观测到的磁热信号直接证实了自旋轨道耦合（SOC）诱导的自旋极化确实出现在MnTe的altermagnetic态中。这为交错磁性提供了宏观热力学层面的证据，并暗示MnTe在反铁磁/无净磁化磁制冷方面具有应用潜力。",
+      "path": "knowledge/raw/papers/2025-2510.02777-magnetocaloric-effect-for-the-altermagnetic-candidate-mnte.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2608.02416-magnetically-tunable-symmetry-enforced-nodal-lines-producing",
+      "title": "Magnetically tunable symmetry-enforced nodal lines producing huge anomalous Hall conductivity in altermagnetic α-MnTe",
+      "summary": "在交替磁α-MnTe中识别出两组由镜面Mz与滑移Gz对称性强制的节点线，它们在自旋轨道耦合/对称性破缺下开隙并作为Berry曲率热点，贡献巨大的反常霍尔电导（AHC）。进一步证明自旋倾斜（非共线磁性）可打破共线态中对AHC的对称性禁戒，使AHC随磁序参量连续可调。该工作确立了零净磁矩交替磁体系中'对称性强制拓扑带隙+磁性序参量调控输运'的范式。",
+      "path": "knowledge/raw/papers/2026-2608.02416-magnetically-tunable-symmetry-enforced-nodal-lines-producing.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2603.21455-control-of-band-structure-in-the-altermagnetic-candidate-mnt",
+      "title": "Control of band structure in the altermagnetic candidate MnTe by temperature and strain",
+      "summary": "该工作对交变磁性（altermagnetism）候选材料 MnTe 开展太赫兹光谱测量，观测到自旋劈裂带与受主能级之间的 THz 吸收特征。该吸收的温度依赖与磁相变（奈尔转变附近）行为一致，为 MnTe 中无净磁矩但存在 k 空间自旋劈裂的交变磁性电子结构提供了直接的谱学证据。论文进一步展示温度与应变两个调控自由度对能带结构（自旋劈裂）的操控。",
+      "path": "knowledge/raw/papers/2026-2603.21455-control-of-band-structure-in-the-altermagnetic-candidate-mnt.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2024-2402.01613-altermagnetic-lifting-of-kramers-spin-degeneracy",
+      "title": "Altermagnetic lifting of Kramers spin degeneracy",
+      "summary": "本文利用自旋分辨与圆二色角分辨光电子能谱（SARPES/CD-ARPES）在反铁磁半导体α-MnTe中首次直接观测到交错磁体中Kramers自旋简并的解除（Nature 626, 517），证实了净磁化为零但时间反演破缺的能带自旋劈裂。实验观测到约370 meV的d波型动量依赖自旋劈裂，其来源为非相对论交换作用而非自旋轨道耦合，SOC仅作小的相对论修正，从实验上确立了交错磁性作为铁磁、传统反铁磁之外第三类基本磁序的地位。",
+      "path": "knowledge/raw/papers/2024-2402.01613-altermagnetic-lifting-of-kramers-spin-degeneracy.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2502.18597-altermagnetic-nanotextures-revealed-in-bulk-mnte",
+      "title": "Altermagnetic nanotextures revealed in bulk MnTe",
+      "summary": "该工作利用纳米聚焦软X射线磁圆二色（nano-XMCD）显微术对200 nm厚的体相MnTe薄片成像，直接观测到具有三重对称性的交变磁畴与纳米尺度磁纹理，证明交变磁序是体相本征属性而非表面效应。XMCD信号在Mn L2,3吸收边两侧多次变号的谱形特征排除了铁磁性残余或表面贡献，为交变磁性提供了体相、元素分辨的直接实验证据。",
+      "path": "knowledge/raw/papers/2025-2502.18597-altermagnetic-nanotextures-revealed-in-bulk-mnte.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2026-2604.07653-strain-continuously-rotates-the-néel-vector-in-altermagnetic",
+      "title": "Strain continuously rotates the Néel vector in altermagnetic MnTe",
+      "summary": "本文通过原位应变下的磁光测量证明，在交变磁体 MnTe 中应变的主要效应是使 Néel 矢量在畴内连续旋转，而非通过畴壁运动实现去孪晶化。这意味着应变成为连续调控磁点群对称性的干净手柄，可平滑地调制由对称性决定的自旋劈裂方向及相关的反常光学/输运响应。该结论修正了以往将应变效应简单归结为去孪晶的解读，为交变磁体的对称性工程与器件调控提供了新范式。",
+      "path": "knowledge/raw/papers/2026-2604.07653-strain-continuously-rotates-the-néel-vector-in-altermagnetic.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2508.18360-light-induced-odd-parity-altermagnets-on-dimerized-lattices",
+      "title": "Light-induced odd-parity altermagnets on dimerized lattices",
+      "summary": "提出利用圆偏振光将二聚化格子上的PT对称共线反铁磁动力学转化为奇宇称（p波）交替磁体：光驱动在保持零净磁矩的同时解除PT联合对称保护的自旋简并，产生动量奇次（p波对称性）的自旋劈裂。基于Floquet理论证明该光致p波交替磁序可承载非平庸拓扑，随光强、频率与螺旋度调控可实现Chern绝缘体与Weyl半金属相，且圆偏振光螺旋度翻转可切换Chern数符号与Weyl点手性（PRB 113, L060409, 2025）。",
+      "path": "knowledge/raw/papers/2025-2508.18360-light-induced-odd-parity-altermagnets-on-dimerized-lattices.md",
+      "added_via": "cluster:cl_20261106_2c9663",
+      "added_at": "2026-11-15T00:20:27Z"
+    }
+  ]
+}

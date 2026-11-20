@@ -1,0 +1,63 @@
+{
+  "gaps": [
+    {
+      "claim": "ARPES 测量 g 波自旋劈裂的峰位提取精度（≤10%）具有实验先例与可靠性依据",
+      "missing_evidence": "缺少 ARPES 自旋劈裂峰位提取方法学文献（如峰拟合、能量分辨劈裂间距测量、劈裂峰位随温度/角度演化的分辨率与不确定度基准），以及 ARPES 峰位与 SQUID/XRD 外部对照的既有实验实践；方案端需引用的 Osumi[13] 未在研究内容章对应承接",
+      "search_keywords": [
+        "ARPES spin splitting peak extraction accuracy",
+        "time-reversal symmetry breaking ARPES peak fitting temperature dependence",
+        "spin splitting energy separation resolution uncertainty ARPES",
+        "altermagnet ARPES spin splitting measurement alpha-MnTe"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "α-MnTe 奈尔温度 T_N 与奈尔矢量取向的反演先验宽度设置为 ±10 K、±10°，且均严于先验宽度 50% 判据",
+      "missing_evidence": "缺少反演/贝叶斯推断中先验宽度设定方法学文献（prior width scaling、Bayesian parameter estimation for material properties、posterior confidence interval coverage），以及 α-MnTe 现有 T_N 与易轴取向的实验测量值文献作为先验中心依据；现有括注「对应先验宽度 50%」数值不成立，需文献支撑先验宽度的选取原则",
+      "search_keywords": [
+        "Bayesian inference prior width parameter estimation uncertainty",
+        "prior sensitivity analysis physical parameter retrieval",
+        "alpha-MnTe Neel temperature measurement 310 K",
+        "alpha-MnTe easy axis orientation neutron diffraction",
+        "Neel vector direction MnTe antiferromagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "τ_onset（HHG 起始时间/开启延迟）作为 dτ_onset/dT 反演指标的定义与提取方案",
+      "missing_evidence": "缺少瞬态高次谐波/时间分辨信号的开启时间提取方法学文献（onset time extraction、temporal profile fitting、rise time of harmonic emission、fluence-dependent delay in HHG），以及强场电子-声子耦合导致的载流子冷却/散射时间尺度文献作为斜率 dτ_onset/dT 的物理基线",
+      "search_keywords": [
+        "high harmonic onset time extraction transient",
+        "time-resolved high harmonic generation rise time fluence dependence",
+        "carrier cooling time scale ultrafast spectroscopy strong field",
+        "electron-phonon coupling relaxation time temperature dependence solid",
+        "time-resolved HHG attosecond transient absorption onset"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "相区划分以 SQUID 实测 T_N 为界（而非以设计值 310 K 为界）",
+      "missing_evidence": "缺少 SQUID 磁化曲线确定 T_N 的方法学与不确定度文献（SQUID magnetometry Neel temperature determination），以及 α-MnTe 多晶/单晶 T_N 报道值的实验文献（文献间 T_N 分散度）作为相区边界不确定度依据",
+      "search_keywords": [
+        "SQUID magnetometry Neel temperature determination uncertainty",
+        "alpha-MnTe Neel temperature 310 K experimental",
+        "antiferromagnetic phase boundary magnetometry susceptibility cusp",
+        "MnTe Neel temperature thin film substrate strain dependence"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "跨章「第二提取维度」（ARPES 峰位/自旋分辨谱、XRD 主峰与第二峰、瞬态信号多维提取）作为统一的多维交叉验证通道",
+      "missing_evidence": "缺少同一物性多维交叉验证（多通道反演、consistency across observables、joint inversion multi-dataset）的文献依据，以及各提取维度方法学的原始引用；现有跨章命名漂移需文献层面锚定各维度的方法学出处",
+      "search_keywords": [
+        "multi-observable data fusion inverse problem consistency",
+        "joint Bayesian inversion multiple observables",
+        "ARPES spin momentum distribution extraction method",
+        "XRD Bragg peak refinement phase identification method",
+        "cross-validation independent measurement channels parameter retrieval"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

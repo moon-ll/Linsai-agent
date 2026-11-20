@@ -1,0 +1,54 @@
+{
+  "gaps": [
+    {
+      "claim": "立项依据 §1.2 标题为「国内外研究现状」但实质内容几乎全为国外文献，国内研究提及仅 1 次，违反五层递进结构中「国内现状」层",
+      "missing_evidence": "国内莫尔超晶格强场超快研究现状几乎空白，需补充国内代表性研究组工作",
+      "search_keywords": [
+        "moire superlattice strong field China",
+        "twisted bilayer ultrafast optics Chinese group",
+        "solid-state high harmonic generation China group",
+        "莫尔材料 强场 超快 中国",
+        "moire heterostructure nonlinear optics domestic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "文献 #18 缺失作者署名，信息不完整",
+      "missing_evidence": "references.md 第 18 篇文献未标注作者姓名，引用信息不完整",
+      "search_keywords": [
+        "reference 18 full citation",
+        "文献 #18 作者信息"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「读出—改写闭环」范式与现有独立工作（MoS2 HHG / Molinero 2024 / Mrudul 2024 / Hu & Meng 2024）的差异化需更充分文献支撑",
+      "missing_evidence": "读出+改写整合范式首创性的对比文献不足",
+      "search_keywords": [
+        "moire HHG inversion literature review",
+        "Floquet moire调控 vs HHG反演 整合"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R1 降阶框架中 Molinero 2024 计算规模估算以及 Hu/Meng/Zhang/Su/Wang 方法学背书需更明确引用",
+      "missing_evidence": "莫尔超晶格 TDDFT 计算成本基准数据引用不足",
+      "search_keywords": [
+        "twisted bilayer real-time TDDFT scaling",
+        "TBG TDDFT computational cost benchmark",
+        "moire superlattice multiscale electronic structure cost"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "R3 光 Floquet 工程调控莫尔关联态的实验先例（Nikola 2021 / Zhou 2023 / Tyulnev 2024）需补充直接支撑",
+      "missing_evidence": "光 Floquet 调控莫尔量子态的实验验证文献不足",
+      "search_keywords": [
+        "moire Floquet topological phase transition experimental",
+        "twisted bilayer Floquet strong field",
+        "optical Floquet moire quantum state"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

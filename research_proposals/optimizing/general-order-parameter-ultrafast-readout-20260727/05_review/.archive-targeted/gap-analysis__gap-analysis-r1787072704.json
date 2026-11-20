@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "Fuchs等人在MnTe中通过自旋极化HHG谱学观测到超快自旋对称性破缺",
+      "missing_evidence": "rationale.md L31标注[64]但references.md L129标注为[65]，引用编号系统性错位，需核实原始文献并统一编号",
+      "search_keywords": [
+        "Fuchs MnTe spin-polarized high harmonic generation",
+        "MnTe ultrafast spin symmetry breaking HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb反射率损伤阈值0.8 V/Å",
+      "missing_evidence": "损伤阈值无可核查文献载体，需实验数据或他人工作支撑",
+      "search_keywords": [
+        "CrSb femtosecond laser damage threshold",
+        "CrSb strong field ablation threshold V/Angstrom"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目与Cochran/Sørensen同期工作的差异在于实验验证+多带SOC，但未论证为何需新实验而非直接复用其理论框架",
+      "missing_evidence": "需引用Cochran量子相干断层成像和Sørensen阿秒序参量重建的具体论文，证明现有理论框架不足以支撑本项目目标",
+      "search_keywords": [
+        "Cochran quantum coherence tomography high harmonic arXiv",
+        "Sørensen attosecond order parameter reconstruction HHG",
+        "Cochran HHG quantum coherence 2025 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "ghost [58]残留、orphan Rost引用",
+      "missing_evidence": "存在幽灵引用（正文中提及但参考文献列表缺失）和孤立引用（列表存在但正文未实际引用），需清理并核实所有引用编号",
+      "search_keywords": [
+        "Rost CrSb high harmonic generation spin-resolved 2025",
+        "Rost arXiv 2507.02673 altermagnet HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "判据阈值的物理依据以四项核心可证伪阈值为骨架，物理依据部分为经验性引用Tyulnev ±8%",
+      "missing_evidence": "Tyulnev ±8%经验性引用缺乏直接支撑，需补充该误差范围的原始实验依据",
+      "search_keywords": [
+        "Tyulnev high harmonic generation error analysis",
+        "HHG measurement uncertainty Tyulnev",
+        "altermagnet HHG signal noise floor"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "申请人前期工作在文献表无任何自引",
+      "missing_evidence": "申请人团队在CrSb/HHG/阿秒方面的前期工作未在references.md中以自引形式体现，研究基础论证力度不足",
+      "search_keywords": [
+        "applicant HHG altermagnet CrSb previous work",
+        "ultrafast magnetism high harmonic applicant group"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

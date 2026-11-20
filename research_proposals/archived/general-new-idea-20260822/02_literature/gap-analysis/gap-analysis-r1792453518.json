@@ -1,0 +1,20 @@
+{
+  "gaps": [
+    {
+      "claim": "§4 国内现状层关于「2024 年以来公开进展涵盖…」（含自旋信息提取与定量反演的理论与实验工作）、以及「国内尚未见同类研究」的空白声明",
+      "missing_evidence": "缺少 2024–2026 年间国内/华人课题组在交变磁体（α-MnTe、CrSb 等）及强场超快/高次谐波方向的代表性近期实引文献；目前 §4 国内现状段仅 162 字，唯一实引 [29] 为 2017 年文献，「2024 年以来进展」一语无任何 [N] 编号支撑，且全章因净减字数跌破 5000 字下限，证据缺口与字数缺口叠加",
+      "search_keywords": [
+        "交变磁 altermagnet 中国",
+        "α-MnTe 高次谐波 HHG",
+        "MnTe spin splitting 2024 2025",
+        "ultrafast spectroscopy altermagnet China",
+        "固体高次谐波 自旋劈裂 国内",
+        "time-resolved ARPES α-MnTe",
+        "CrSb MnTe 自旋电子学 综述",
+        "HHG 强场 超快 自旋极化"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

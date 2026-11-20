@@ -1,0 +1,97 @@
+{
+  "proposal_id": "general-houston-kronig-penney-landau-zener-20261004",
+  "cluster_id": "orphan-route-2026-11-14",
+  "clusters": [
+    "orphan-route-2026-11-14"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2019-1905.05205-disorder-effects-on-the-origin-of-high-order-harmonic-genera",
+      "title": "Disorder Effects on the Origin of High-Order Harmonic Generation in Solids",
+      "summary": "用Floquet-Keldysh非平衡格林函数方法研究无序对固体高次谐波产生的影响，证明每个谐波电流分量可分解为相干与非相干两部分，且随无序增强发生从相干发射主导到非相干发射主导的交叉。结果表明晶体周期性是固体HHG相干机制（带内电流等在宏观上相干叠加）的前提，而基于杂质/无序散射的非相干通道可在非晶体系中维持谐波发射，为理解非晶固体HHG实验提供了理论基础。",
+      "path": "knowledge/raw/papers/2019-1905.05205-disorder-effects-on-the-origin-of-high-order-harmonic-genera.md",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T02:42:44Z"
+    },
+    {
+      "source_id": "paper:2024-2409.08959-full-minimal-coupling-maxwell-tddft-an-ab-initio-framework-f",
+      "title": "Full minimal coupling Maxwell-TDDFT: An ab initio framework for light-matter phenomena beyond the dipole approximation",
+      "summary": "该文构建了超越偶极近似的完整最小耦合 Maxwell-TDDFT 第一性原理框架：将含时全时空变化的矢势 A(r,t) 与标势 φ(r,t) 通过最小耦合哈密顿量进入 TDDFT Kohn-Sham 方程，并与时域麦克斯韦方程自洽双向传播，实现光场与多体电子动力学的完整反馈。由此电偶极近似之外的多极阶次、磁场分量、推迟效应与介质内光传播效应自动纳入，无需唯象参数。框架为强场下高次谐波等非线性光-物质过程提供了无参数的 ab initio 基准，并给出偶极近似适用性的判据。",
+      "path": "knowledge/raw/papers/2024-2409.08959-full-minimal-coupling-maxwell-tddft-an-ab-initio-framework-f.md",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T02:42:44Z"
+    },
+    {
+      "source_id": "paper:2025-2505.09387-technical-review-time-dependent-density-functional-theory-fo",
+      "title": "Technical review: Time-dependent density functional theory for attosecond physics ranging from gas-phase to solids",
+      "summary": "Yabana组撰写的技术综述，系统梳理实时TDDFT在从气相到固体阿秒物理中的完整应用链条，并以硅等晶体为演示对象给出固体高次谐波（HHG）的第一性原理计算基准：时变Kohn-Sham方程实时传播、感应电流傅里叶变换提取谐波谱。文中明确指出单胞微观计算的固有局限——缺失宏观传播（相位匹配/吸收）导致实验中的峰结构无法复现——并通过偏振角依赖性分析揭示谐波发射受能带各向异性与带间跃迁选择定则支配的微观机制。整体构成固态HHG理论建模的参考框架。",
+      "path": "knowledge/raw/papers/2025-2505.09387-technical-review-time-dependent-density-functional-theory-fo.md",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T02:42:44Z"
+    },
+    {
+      "source_id": "paper:2026-2403.04288-monochromatic-high-harmonic-generation-by-bessel-g",
+      "title": "Monochromatic high-harmonic generation by Bessel-Gauss beam in periodically modulated media",
+      "summary": "该论文提出了一种利用贝塞尔-高斯（Bessel-Gauss）驱动光束与周期性调制气体介质相结合的单色高次谐波产生新方案：通过设计BG光束的几何相位和介质折射率分布，使目标谐波阶次的相位失配在一个调制周期内恰好补偿为2πn，实现该谐波的相长干涉与选择性增强。该方案无需传统滤波即可直接产生近单色的高次谐波输出。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T02:42:44Z"
+    },
+    {
+      "source_id": "paper:2017-1706.08449-dynamical-birefringence-electron-hole-recollisions-as-probes",
+      "title": "Dynamical birefringence: Electron-hole recollisions as probes of Berry curvature",
+      "summary": "本文提出'动态双折射'机制：强场驱动的电子-空穴对在晶体能带内加速并再碰撞产生高次谐波时，能带的Berry曲率通过反常（横向）速度改变再碰撞轨迹与谐波的偏振态，使线偏振驱动场下发射出椭圆偏振谐波。谐波椭偏率随晶体取向/驱动场方向的依赖关系可反演电子-空穴波包所穿越k空间路径上的Berry曲率分布，从而为利用固态HHG在阿秒时间尺度全光学读取能带量子几何信息奠定理论基础。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T02:42:44Z"
+    },
+    {
+      "source_id": "paper:2026-2603.21835-a-unified-heterogeneous-implementation-of-numerical-atomic-o",
+      "title": "A Unified Heterogeneous Implementation of Numerical Atomic Orbitals-Based Real-Time TDDFT within the ABACUS Package",
+      "summary": "该工作在国产第一性原理软件包ABACUS中实现了基于数值原子轨道（NAO）基组的实时含时密度泛函理论（RT-TDDFT）的统一CPU+GPU异构架构实现，显著提升了大规模电子动力学模拟的计算效率与可扩展性。该实现为强激光与物质相互作用等需要大规模实时演化计算的超快动力学研究提供了切实可行的计算工具。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T06:43:40Z"
+    },
+    {
+      "source_id": "paper:2026-260929284-strong-field-driven-non-linear-electron-dynam",
+      "title": "Strong-Field-Driven Non-Linear Electron Dynamics in Thiophene Oligomers",
+      "summary": "本文用实时含时密度泛函理论（RT-TDDFT）结合行列式重叠（determinant-overlap）布居分析框架，在态分辨水平追踪了单环噻吩（1T）与四联噻吩（4T）在强激光场下的强度依赖非线性电子动力学。核心发现是扩展π共轭（4T）使非线性激发阈值相对1T降低数个数量级，且强场驱动下出现基态完全耗尽并伴随顺序激发态吸收通道。高次谐波产生（HHG）谱被证明明确反映分子长度与对称性差异，为共轭分子光限幅机制提供了态分辨的微观图像。",
+      "path": "knowledge/raw/papers/2026-260929284-strong-field-driven-non-linear-electron-dynam.md",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T06:43:40Z"
+    },
+    {
+      "source_id": "paper:2026-2605.27252-real-time-time-dependent-density-functional-theory",
+      "title": "Real-Time Time-Dependent Density Functional Theory for Pump-Probe Spectroscopies",
+      "summary": "该文阐述了实时含时密度泛函理论（RT-TDDFT）作为模拟泵浦-探测光谱的第一性原理框架，可直接在阿秒至亚飞秒时间尺度上追踪和解读激光驱动的超快电子动力学。其核心贡献在于将实时密度传播方法与泵浦-探测实验方案相结合，为强场激光技术进步下的非平衡电子动力学测量提供了理论预测与实验对照工具。",
+      "path": "",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T06:43:40Z"
+    },
+    {
+      "source_id": "paper:2025-2505.19894-laser-dressed-partial-density-of-states",
+      "title": "Laser-dressed partial density of states",
+      "summary": "提出激光修饰部分态密度（laser-dressed PDOS）方法，把传统 PDOS 的轨道投影推广到强激光场驱动的含时体系，实现亚周期时间分辨的轨道成分追踪。以 ZnO 为演示体系，展示驱动场周期内不同轨道通道的态密度被场选择性重构，给出轨道分辨的瞬态成键结构图像。该方法为固态强场相互作用（瞬态吸收、谐波产生等）提供了可解释的轨道级微观诊断量。",
+      "path": "knowledge/raw/papers/2025-2505.19894-laser-dressed-partial-density-of-states.md",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T06:43:40Z"
+    },
+    {
+      "source_id": "paper:2024-2410.14385-attosecond-vortices-in-semiconductor-materials",
+      "title": "Attosecond vortices in semiconductor materials",
+      "summary": "首次在理论上提出在半导体（ZnO）中利用强场高次谐波产生短波长阿秒涡旋光束的方案。方法上结合含退相干时间的半导体Bloch方程（微观非线性响应）与薄片宏观传播模型，预言平台区各阶谐波携带按阶数缩放的轨道角动量，并相干叠加合成具有螺旋波前的扭曲阿秒脉冲列。该工作将结构化阿秒光源从气体体系拓展至固态体系，为小型化、短波长的OAM阿秒光源提供了理论蓝图。",
+      "path": "knowledge/raw/papers/2024-2410.14385-attosecond-vortices-in-semiconductor-materials.md",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T06:43:40Z"
+    },
+    {
+      "source_id": "paper:2024-2404.10293-orbital-angular-momentum-beam-assisted-high-order-harmonic-g",
+      "title": "Orbital Angular Momentum Beam assisted High-Order Harmonic Generation in Semiconductor Materials",
+      "summary": "本文将半导体布洛赫方程与薄板传播模型相结合，模拟携带轨道角动量（OAM）的 Laguerre-Gauss 涡旋光束驱动 ZnO 等半导体的高次谐波产生及其远场辐射特性。计算成功复现已发表 ZnO 涡旋光 HHG 实验的谱特征与角分布，为包含 H5-H10 低阶区在内的谐波谱角动量选择定则提供了微观理论验证。",
+      "path": "knowledge/raw/papers/2024-2404.10293-orbital-angular-momentum-beam-assisted-high-order-harmonic-g.md",
+      "added_via": "cluster:orphan-route-2026-11-14",
+      "added_at": "2026-11-14T10:03:12Z"
+    }
+  ]
+}

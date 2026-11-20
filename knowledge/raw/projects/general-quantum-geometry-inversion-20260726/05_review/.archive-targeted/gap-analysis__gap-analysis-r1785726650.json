@@ -1,0 +1,61 @@
+{
+  "gaps": [
+    {
+      "claim": "Faeyrman et al. [18] 在 MgO 中用 6–10 MV/cm 强 THz 场首次实验解耦出复 Berry 相的实部（~0.1–0.3 rad）与虚部（~0.05–0.15），是 Uzan 等 [12] 2024 年间接观测之后的「关键实验里程碑」",
+      "missing_evidence": "该结论目前仅有 2026 年预印本（arXiv:2606.02238）支撑，尚未经同行评审独立复核；缺少独立的实验复现论文、理论背书论文、或领域综述对该数值的引用与确认",
+      "search_keywords": [
+        "complex Berry phase real imaginary part measurement solid state",
+        "terahertz strong field Berry curvature MgO experiment",
+        "Faeyrman Berry phase 2026 verification",
+        "non-Abelian Berry phase decomposition experiment review",
+        "复Berry相 实部虚部 实验解耦 固体"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "「从 Uzan [12]（2024 间接观测）→ Faeyrman [18]（2026 实虚部分解）→ Liu/Fu/Kais [7] + Luu/Wörner [3] + arXiv:2606.06999 [25]」构成量子几何不变量研究的连贯递进叙事",
+      "missing_evidence": "§1.2 第 1 段在 480 字内堆叠 5 条引文，但缺少将这些独立结果组织为「为什么合在一起反而构成矛盾或盲点」的综述性/分析性文献；缺少一篇能够同时涵盖 HHG 探测 Berry 曲率、THz 场调控 Berry 相、强场反演量子几何三方面进展的近期 review article",
+      "search_keywords": [
+        "quantum geometric invariants high harmonic generation review 2024 2025",
+        "Berry curvature measurement progress review attosecond",
+        "strong-field quantum geometry review",
+        "high harmonic spectroscopy band geometry review",
+        "量子几何不变量 强场 实验综述"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "预印本引文 [20][21][22][23][24][25][26][28] 所承载的具体物理结论（如数值结果、机制断言）被作为论证链的硬节点",
+      "missing_evidence": "这 9 条均为预印本（含多条 arXiv:2606.xxxxx 2026 H2 条目），无同行评审背书；缺少与这些预印本结论对应的已发表 peer-reviewed 替代文献，或缺少对这些预印本观点的批判性/重复性研究",
+      "search_keywords": [
+        "quantum geometry inversion peer reviewed 2024 2025",
+        "Berry curvature high harmonic spectroscopy Nature Phys Rev Lett 2024 2025",
+        "solid state high harmonic generation quantum geometry published",
+        "attosecond strong field band geometry peer reviewed"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "强 THz 场（6–10 MV/cm 量级）能「瞬时打破中心对称性」并调控 Berry 相的论断",
+      "missing_evidence": "缺少关于强场瞬态中心对称破缺的具体理论或实验机制文献；Faeyrman [18] 单一来源不足以支撑该机制断言的普适性，需要中心对称破缺的强场动力学综述或独立实验验证",
+      "search_keywords": [
+        "terahertz induced symmetry breaking solid state ultrafast",
+        "strong field inversion symmetry breaking Berry phase mechanism",
+        "ultrafast centrosymmetric breaking THz field dynamics",
+        "THz field quantum geometry control mechanism"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "量子几何「反演」（inversion，即从光场响应反推 g(k) 张量）的可行性与唯一性论证",
+      "missing_evidence": "立项依据聚焦于强场探测量子几何，但缺少关于「从 HHG 光谱反推量子几何量」这一逆问题本身的可解性、条件唯一性、误差传播的专门文献（属于方法学基础的引用空白）",
+      "search_keywords": [
+        "inverse problem quantum geometry reconstruction",
+        "high harmonic generation Berry curvature retrieval uniqueness",
+        "band structure reconstruction high harmonic spectroscopy inverse",
+        "quantum geometric tensor retrieval algorithm convergence"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

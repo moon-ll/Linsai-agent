@@ -1,0 +1,14 @@
+{
+  "proposal_id": "general-ssh-weyl-20260920",
+  "cluster_id": "orphan-route-2026-10-23",
+  "entries": [
+    {
+      "source_id": "paper:2023-2305.03921-efficient-high-harmonic-generation-in-nonlinear-photonic-moi",
+      "title": "Efficient high harmonic generation in nonlinear photonic moiré superlattice",
+      "summary": "该论文数值证明，在硅基非线性光子莫尔超晶格中，平带局域效应可显著增强三次谐波与五次谐波的产生效率，为利用莫尔平带调控强场非线性光学过程提供了理论方案。",
+      "path": "knowledge/raw/papers/2023-2305.03921-efficient-high-harmonic-generation-in-nonlinear-photonic-moi.md",
+      "added_via": "cluster:orphan-route-2026-10-23",
+      "added_at": "2026-10-23T16:44:49Z"
+    }
+  ]
+}

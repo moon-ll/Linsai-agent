@@ -1,0 +1,137 @@
+{
+  "gaps": [
+    {
+      "claim": "SSH/Sus-Schriefer-Heeger模型在强场高次谐波领域的前人研究脉络（首次观测、关键里程碑）",
+      "missing_evidence": "缺乏SSH模型高次谐波产生的首次实验观测和理论预言文献，以及SSH拓扑相变对HHG光谱调控的早期工作",
+      "search_keywords": [
+        "SSH model high harmonic generation",
+        "Su-Schrieffer-Heeger HHG topological",
+        "SSH topological phase ultrafast spectroscopy",
+        "topological edge state high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Weyl半金属在强场HHG中的Berry曲率贡献与圆极化选择定则",
+      "missing_evidence": "缺少Weyl节点附近Berry曲率分布对HHG偏振依赖的实验和第一性原理计算文献",
+      "search_keywords": [
+        "Weyl semimetal high harmonic generation",
+        "Berry curvature Weyl HHG circular dichroism",
+        "topological semimetal HHG selection rule",
+        "Weyl node nonlinear optical response"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "拓扑非平庸材料（SSH/Weyl）HHG相对传统材料的独特性/局限性",
+      "missing_evidence": "缺乏与传统Dirac材料（石墨烯、拓扑绝缘体）HHG的对比基准，以及拓扑态在强场下的退相干和稳定性数据",
+      "search_keywords": [
+        "topological material HHG comparison graphene",
+        "Weyl semimetal HHG decoherence strong field",
+        "topological phase stability ultrafast"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "强场拓扑HHG核心挑战：拓扑保护态在强光场下的崩解阈值与Berry连接破坏机制",
+      "missing_evidence": "缺少拓扑保护态在TW/cm²量级光场下的稳定性理论计算与实验观测文献",
+      "search_keywords": [
+        "topological protection breakdown strong field",
+        "Berry connection strong field HHG",
+        "Floquet topological phase high harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内SSH/Weyl体系强场超快光谱研究的现状与课题组定位",
+      "missing_evidence": "缺乏国内课题组在SSH/Weyl体系HHG/拓扑超快方向的代表性工作和实验进展",
+      "search_keywords": [
+        "国内 拓扑 半金属 高次谐波",
+        "Weyl semimetal HHG China group",
+        "拓扑 超快 中国 实验组",
+        "中国 强场 HHG 拓扑 材料"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Weyl半金属HHG效率2-3个数量级增强的数值锚点",
+      "missing_evidence": "缺少数值锚点来源——需要具体的驱动条件（波长、强度）、谐波阶次范围、对照基准（普通金属或半导体）",
+      "search_keywords": [
+        "Weyl semimetal HHG enhancement factor",
+        "topological HHG yield enhancement comparison",
+        "Weyl HHG efficiency vs trivial metal"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Luu-Wörner 2018 Nat Commun石英HHG Berry曲率重构作为方法学起点",
+      "missing_evidence": "需要核实Luu-Wörner 2018原文及其方法对SSH/Weyl体系的适用性",
+      "search_keywords": [
+        "Luu Worner 2018 Nat Commun Berry curvature quartz HHG",
+        "solid HHG Berry curvature reconstruction original"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "固态HHG产生中Berry曲率贡献与能带结构贡献的分离方法",
+      "missing_evidence": "缺乏将Berry曲率贡献从总HHG信号中分离的实验方案或反演方法文献",
+      "search_keywords": [
+        "Berry curvature separation HHG inverse problem",
+        "intraband interband contribution HHG disentangle",
+        "quantum geometry reconstruction HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "SSH模型一维拓扑边态在强场下的HHG指纹（局域态 vs 扩展态）",
+      "missing_evidence": "缺少SSH边态对HHG特定阶次贡献的理论预测文献",
+      "search_keywords": [
+        "SSH edge state HHG fingerprint",
+        "topological edge mode nonlinear optics",
+        "zero mode HHG signature"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Weyl半金属节点分离（node separation）对HHG截止能量与平台结构的标定关系",
+      "missing_evidence": "缺乏节点距离作为HHG光谱特征的定量关系文献",
+      "search_keywords": [
+        "Weyl node separation HHG cutoff",
+        "Weyl semimetal HHG plateau structure",
+        "node distance high harmonic spectroscopy"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "强场HHG中拓扑不变量的可观测性（陈数/Zak相位/Z2）的实验证据",
+      "missing_evidence": "缺少从HHG信号中提取拓扑不变量的可观测性与唯一性的理论证明文献",
+      "search_keywords": [
+        "topological invariant HHG observable Zak phase",
+        "Chern number high harmonic retrieval",
+        "Z2 invariant HHG measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "陈绝缘体/Chern绝缘体HHG的对比基准（非SSH非Weyl但拓扑）",
+      "missing_evidence": "缺少Chern绝缘体HHG的对比实验数据用于凸显SSH/Weyl的独特性",
+      "search_keywords": [
+        "Chern insulator high harmonic generation",
+        "anomalous Hall HHG topological",
+        "Chern number HHG experiment"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "拓扑材料HHG的最新（2024-2026）实验进展",
+      "missing_evidence": "缺少2024-2026年SSH/Weyl体系HHG的最新实验观测文献",
+      "search_keywords": [
+        "topological HHG 2024 2025 experiment",
+        "Weyl HHG recent observation",
+        "SSH HHG 2025 experimental"
+      ],
+      "priority": "high"
+    }
+  ],
+  "section": "rationale"
+}

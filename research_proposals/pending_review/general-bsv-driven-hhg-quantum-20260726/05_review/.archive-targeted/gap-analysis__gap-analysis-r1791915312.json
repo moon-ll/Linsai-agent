@@ -1,0 +1,72 @@
+{
+  "gaps": [
+    {
+      "claim": "SBE-Q 模型的'误差管理方法（信度区间量化+逐项溯源）在公开文献中尚未形成系统化先例'——评审问题 8 的优先权声明缺乏检索边界",
+      "missing_evidence": "需要：(a) 明确文献检索范围（数据库、检索式、截止日期），如'截至 2026 年 9 月 Web of Science / Scopus 检索'；(b) 列出已核查的对标文献（贝叶斯 SBE、多带 SBE 误差估计、HHG 反演不确定度论文等）以证明空白成立",
+      "search_keywords": [
+        "semiconductor Bloch equation uncertainty quantification",
+        "many-body SBE Bayesian inference",
+        "HHG inversion confidence interval",
+        "multiband SBE error estimation high harmonic",
+        "doped semiconductor HHG retrieval uncertainty"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "引用 [37] 作为反演拟合的磁输运对照基线，但当前以元叙述形式'[37] 见对照基线注释'出现（评审问题 7）",
+      "missing_evidence": "缺少对 [37] 所报道磁输运基线（g 因子、有效质量、回旋共振）的具体数值与方法学描述，无法让评审验证该基线与本项目光学反演口径的对接合理性",
+      "search_keywords": [
+        "Landau level fan diagram g-factor doped semiconductor",
+        "Zeeman splitting cyclotron resonance transport measurement",
+        "magnetic transport benchmark HHG retrieval",
+        "de Haas-van Alphen doped semiconductor effective mass"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "反演拟合优度的统一门限（R²、AIC）在 §3.4 / 风险节 / 研究内容章的一致性声明（评审问题 3），但 §3.6 实证不存在这些门限",
+      "missing_evidence": "需要：(a) 在 §3.6 风险节补出门限数值；(b) 引用 HHG 反演 / 光谱重建领域的惯例文献佐证所选阈值（如 R²≥0.95、ΔAIC≥6、Hannan-Quinn 等）的合理性，避免纯自定阈值",
+      "search_keywords": [
+        "HHG retrieval R-squared goodness of fit",
+        "AIC model selection ultrafast spectroscopy",
+        "Hannan-Quinn criterion spectral reconstruction",
+        "adjacent bin correlation HHG inversion"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "SBE-Q 模型'带有可验证边界的预测工具'属性，与现有'经典光驱动多带 SBE [5]'及'气体原子量子光 HHG 框架 [2]'的对比定位（锚点对 2）",
+      "missing_evidence": "[5] 与 [2] 的'适用条件未明确声明'这一关键批判需要具体页码/章节/引文的实质引用（而非仅参考文献编号），并补充近年方法学综述对 SBE 适用域的描述，否则新颖性对比基础薄弱",
+      "search_keywords": [
+        "multiband semiconductor Bloch equation validity domain review",
+        "quantum optical framework high harmonic generation review",
+        "semiconductor HHG model applicability boundary",
+        "SBE perturbative regime breakdown review"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "SLM 双光路锁相 150 mrad 量级稳定度作为工程化实施依据，评审指其'仅间接先例'",
+      "missing_evidence": "缺少同量级（≤150 mrad）双色场锁相稳定度的直接实验文献（反馈控制、主动稳定、互相关锁定等方案），目前先例主要为间接推导，需补一至两条近年直接报道",
+      "search_keywords": [
+        "spatial light modulator bichromatic phase locking mrad",
+        "active stabilization two-color interferometer HHG",
+        "dual SLM coherent control phase stability",
+        "heterodyne locking two-color field stability measurement"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "800 nm 基线选择 vs 中红外先例的'为什么选'论证（清单 2 通过项），需文献层面的产额/截止阶对比支撑",
+      "missing_evidence": "评审仅说'给了理由'，但 TDSE/SBE 框架下 800 nm 与中红外驱动 HHG 截止阶、转换效率、偶极矩相位对比的代表性文献（如 Schubert 2021 类工作）未明确引用，存在论证跳跃风险",
+      "search_keywords": [
+        "800 nm vs mid-infrared HHG cutoff comparison",
+        "wavelength scaling high harmonic yield semiconductor",
+        "intraband interband ratio wavelength dependence",
+        "Schubert semiconductor HHG wavelength scaling"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "scheme"
+}

@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.1.2 L83：TRB-WSM 覆盖 TaP[16]、type-I/II 覆盖 TaAs[15]，将 TaP/TaAs 分别挂入不同模型",
+      "missing_evidence": "TaP 与 TaAs 均属于反演破缺 type-I Weyl 半金属家族，评审指出同族拆挂两种模型自相矛盾。需文献明确 TaP/TaAs 的节点类型归属（type-I vs type-II vs TRB-WSM），并提供体系中 type-II Weyl 点的实验/理论存在证据",
+      "search_keywords": [
+        "TaAs Weyl semimetal node type classification",
+        "TaP Weyl semimetal type-I type-II",
+        "TRB-WSM triple ring bulk Weyl TaAs TaP",
+        "Weyl semimetal type-I type-II experimental confirmation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§3.2.1 L99：X（节点）与 Y（曲率）指纹均挂 Bharti-Dixit[25] 宇称规则，三类贡献独立指纹论证",
+      "missing_evidence": "X 与 Y 共享同一宇称规则判据，两因素无法独立识别。需为曲率贡献 Y 寻找独立于 Bharti-Dixit 宇称规则的判据，例如曲率开关差分谱形（differential spectrum under curvature on/off）相关文献，或嵌套差分作为唯一分解判据的理论依据",
+      "search_keywords": [
+        "Berry curvature signature high harmonic generation",
+        "curvature switch differential HHG spectrum",
+        "Weyl node parity rule harmonic generation independent identifier",
+        "nested difference decomposition HHG topological"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "T₂=1.5 fs（方案章驱动窗口相关参数）的取值依据",
+      "missing_evidence": "评审指出 T₂=1.5 fs 未注出处，方法页虽可溯源但方案章本身缺乏引用。需补充 Bi₂Se₃ 家族 HOTI 或相关拓扑材料中退相干时间 T₂ 测量的原始文献支撑",
+      "search_keywords": [
+        "Bi2Se3 dephasing time T2 measurement",
+        "topological insulator coherence time ultrafast",
+        "HOTI dephasing time fs scale",
+        "Bi2Se3 T2 1.5 fs"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.2 L49：Δt 定义为\"拟合标准差\"，30 fs 自定标→10 fs 目标换算链",
+      "missing_evidence": "Δt 拟合标准差未指明拟合对象与时间窗，换算链缺乏文献锚定。需补充高次谐波压缩度时间分辨演化采用指数拟合的先例文献，以及时间窗≥25 fs 的选取依据",
+      "search_keywords": [
+        "harmonic compression exponential fit time-resolved",
+        "HHG pulse compression time window fitting",
+        "high harmonic temporal profile exponential decay fit",
+        "compression metric time resolution fs"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§5.3 L229 与 §2.2 L57 关于 ΔI_rev 的定义（激子-HHG 通道切换可逆区间，R_HHG/exc 强度比偏离1再返回1）",
+      "missing_evidence": "ΔI_rev 作为通道耦合量被用作联合判据，但评审指出与\"谐波压缩度阈值响应\"混淆。需文献明确激子通道与 HHG 通道之间强度比作为可逆性判据的物理基础，以及通道切换的驱动强度依赖性",
+      "search_keywords": [
+        "exciton HHG channel coupling reversible",
+        "R_HHG/exc intensity ratio switching criterion",
+        "excitonic channel high harmonic generation cross-coupling",
+        "channel switching driving intensity threshold"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

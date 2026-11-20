@@ -1,0 +1,92 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV 驱动固体高次谐波产生的首例实验及 5-15 倍产率提升（Rasputnyi 等 2024 Nature Physics）",
+      "missing_evidence": "该结论目前仅由申请书单篇引用支撑，需核实原始论文是否确实报道 4-7 阶谐波的 5-15 倍产率提升，以及对比基准（同平均强度经典光）的定义方式；另需补充该方向的后续独立实验验证",
+      "search_keywords": [
+        "BSV driven solid-state high harmonic generation",
+        "bright squeezed vacuum high harmonic generation solid",
+        "Rasputnyi Nature Physics 2024 bright squeezed vacuum",
+        "squeezed light high harmonic generation enhancement semiconductor"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 的超聚束特性 g^(2)(0)≈3，且非简并 PDC 配置取 2",
+      "missing_evidence": "缺少对简并/非简并 PDC 方案下 g^(2)(0) 取值差异的明确文献依据，特别是 g^(2)(0)=3 对应的具体生成方案与实验值来源",
+      "search_keywords": [
+        "bright squeezed vacuum g2(0) three photon bright",
+        "degenerate parametric down-conversion squeezed light g2",
+        "nondegenerate PDC g2 photon number distribution",
+        "bright squeezed vacuum generation single mode"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子涨落破坏驱动场的动力学对称性而保留晶体空间对称性（Stammer 等，预印本 arXiv:2605.28236）",
+      "missing_evidence": "预印本未经同行评议，且该结论所依据的量子涨落-对称性破缺机制缺少独立文献支撑；需检索经典/强场领域关于量子涨落破坏相干性（spatial-coherence/decoherence of strong-field driver）的既有文献，作为预印本结论的旁证",
+      "search_keywords": [
+        "quantum fluctuations break symmetry strong field driven",
+        "quantum noise decoherence strong-field high harmonic generation",
+        "squeezed field quantum fluctuations nonperturbative harmonic emission",
+        "quantum effects in high harmonic generation solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Even Tzur 等的阿秒工作首次重建 Wigner 函数并证实相关量子光学特征",
+      "missing_evidence": "预印本性质，且\"首次\"\"证实\"表述缺乏充分的优先权文献检索支撑；需补检索同区间（阿秒/固态 HHG 中 Wigner 函数重建与密度矩阵表征）的先行工作",
+      "search_keywords": [
+        "attosecond Wigner function reconstruction solid",
+        "attosecond quantum state tomography density matrix high harmonic",
+        "Even Tzur attosecond Wigner function",
+        "time-frequency Wigner function attosecond field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "量子轨迹模型用于描述局域电子态对高次谐波产生的影响（方案章方法基础）",
+      "missing_evidence": "申请书方法章承诺建立含局域电子态效应的量子轨迹模型，但该模型体系在固态强场 HHG 中的既有实现与精度基准文献支撑未在立项依据中交代；需补引经典势隧穿/三步模型、量子轨迹方法及固态 HHG 轨迹计算的代表性工作",
+      "search_keywords": [
+        "quantum trajectory model strong field high harmonic generation solid state",
+        "quantum trajectory simulation solid-state HHG local electronic states",
+        "Lewenstein model solid state high harmonic generation",
+        "semiclassical trajectory intraband Bloch HHG"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "QEF 与干涉可见度型 QEF_vis 作为 BSV 驱动 HHG 的判别指标",
+      "missing_evidence": "QEF_yield^(Σ) 全谐波求和比在研究内容 2.3 节无定义落点，缺少可追溯的指标定义来源；QEF_vis 借用钨针尖双色场量子干涉范式，需补该范式的原始文献以支撑可见度比值的定义与可测性",
+      "search_keywords": [
+        "quantum enhancement factor HHG definition",
+        "two-color field quantum interference tungsten tip visibility",
+        "attosecond quantum interference electron source visibility measurement",
+        "field-driven versus material-driven contribution HHG"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV 驱动 HHG 中的多体态探针与响应分类（三层降级判据）",
+      "missing_evidence": "降级判据体系（多体态探针→分类工具→响应特征化）在方案章无命名锚点，立项依据侧亦缺少支撑\"用多体响应分类区分 HHG主导机制\"这一方法论主张的方法学文献（多体响应函数/密度关联谱在强场光学中的既有应用）",
+      "search_keywords": [
+        "many-body response function strong-field optics",
+        "density-density correlation ultrafast spectroscopy charge fluctuation",
+        "charge fluctuation many-body classification high harmonic generation mechanism",
+        "nonequilibrium many-body dynamics solid strong field spectroscopy"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "参考文献规模与预印本比例：正文引用 31 处、文献 46 篇、预印本 10 篇（22%）",
+      "missing_evidence": "预印本占比偏高且多数承担机制层核心论证，需为每个机制层核心论点补充已发表同行评议文献作为替代或佐证（尤其 BSV-HHG 机制、涨落破缺对称性、Wigner 重建三条主线）",
+      "search_keywords": [
+        "bright squeezed vacuum high harmonic generation peer reviewed",
+        "quantum noise strong field symmetry breaking experiment",
+        "Wigner function attosecond spectroscopy published journal"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

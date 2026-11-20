@@ -1,0 +1,48 @@
+{
+  "gaps": [
+    {
+      "claim": "σ_α≈√2·δ·N_cutoff/max 噪声传播公式的物理/数学来源与适用条件",
+      "missing_evidence": "该公式在 scheme §5 中被引用但未给出推导或文献溯源，content §2.2 中 grep=0 也无相关定义，缺少对 √2 因子、线性噪声叠加假设的理论依据或参考来源",
+      "search_keywords": [
+        "noise propagation formula",
+        "signal-to-noise scaling √2",
+        "Gaussian noise variance addition",
+        "measurement uncertainty propagation spectral"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TDDFT + 紧束缚—TDSE + 协同耦合模型三层组合方法的边界互补性论证",
+      "missing_evidence": "虽然 R2 指出'组合理由散落'已闭合，但缺少专门讨论三种方法适用边界（能量尺度、时间尺度、体系尺寸）的方法学综述或基准比较文献支撑该组合策略的最优性",
+      "search_keywords": [
+        "TDDFT TDSE multiscale coupling review",
+        "tight-binding TDSE excited state benchmark",
+        "hybrid quantum-classical electronic structure review",
+        "method comparison exciton TDDFT"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "反演 Ω(k) 与 ARPES 重建 Ω_ref(k) 的皮尔逊相关系数 r≥0.8 作为可行性判据",
+      "missing_evidence": "未给出 r≥0.8 阈值的文献依据或惯例来源，缺少 ARPES 能带反演领域常用的相似度量化指标与阈值的参考文献",
+      "search_keywords": [
+        "ARPES band structure inversion validation",
+        "Pearson correlation threshold spectroscopy",
+        "band dispersion reconstruction accuracy metric"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "N=30→36 修正因子 1.074→1.061 与 k=4→5 拟合参数 √(30/25)=1.095 的统计修正模型",
+      "missing_evidence": "评审指出两种修正均不能有效闭合缺口，但方案中此类基于样本数与参数数的偏差修正常见于统计/光谱学文献，缺少对应的标准修正方法引用（如贝塞尔校正、Akaike/Bayesian 信息准则、自由度补偿公式的原始文献）",
+      "search_keywords": [
+        "Bessel correction finite sample",
+        "Akaike information criterion model selection",
+        "degrees of freedom correction spectroscopic fitting",
+        "reduced chi-square goodness of fit"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

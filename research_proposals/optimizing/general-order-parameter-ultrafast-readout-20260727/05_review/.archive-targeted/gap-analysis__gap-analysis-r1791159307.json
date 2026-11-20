@@ -1,0 +1,37 @@
+{
+  "gaps": [
+    {
+      "claim": "由非弹性中子散射观测到 CrSb 沿 Γ-L 方向的能量劈裂达 27(2) meV（§2.3，第 39 行）",
+      "missing_evidence": "原始文献 [26] arXiv:2511.16086v2 明确指出 27(2) meV 系 SpinW 拟合提取值，与谱仪分辨率 20 meV 相当、能量维度未直接分辨，申请书把拟合值写成直接观测值。需补（a）SpinW 方法学原始文献以正名拟合来源；（b）若要维持\"观测到\"措辞，需补充直接分辨能量劈裂的实验文献（如更高分辨率的非弹性中子散射或 RIXS 实验）",
+      "search_keywords": [
+        "CrSb inelastic neutron scattering spin wave",
+        "CrSb SpinW fitting magnon dispersion",
+        "CrSb RIXS antiferromagnetic splitting",
+        "CrSb neutron scattering high resolution"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "CrSb 在 SOC 正演中须避开高对称方向简并窗口（§2.3，第 35 行，基于 [44] 自旋电流谐波选择定则的延伸约束）",
+      "missing_evidence": "[44] 的选择定则原文明确自限\"对象是自旋电流谐波、弱 SOC 极限、不能直接平移\"，但申请书直接以\"避开高对称方向简并窗口\"作硬约束，SOC 正演对 CrSb 高对称方向简并窗口的预扫描依据悬置。需补充（a）CrSb 在 GGA/GGA+U+SOC 框架下的第一性原理能带计算文献以核实简并窗口位置；（b）类似六方结构 AFM 在 SOC 下高对称点对称性破缺的参照研究",
+      "search_keywords": [
+        "CrSb first-principles band structure SOC",
+        "CrSb DFT GGA+U spin-orbit coupling",
+        "hexagonal antiferromagnet high-symmetry point degeneracy SOC",
+        "CrSb electronic structure calculation"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "G1 子判据中\"同向趋势\"温度旁证（§2.0 G1，第 7 行，需给出可操作定义）",
+      "missing_evidence": "现有措辞无明确操作口径（不同时点数量、相变判断标准等），[6] 约文内容已入实但作为对照基准缺乏方法学引用。需补充不同时点演化判据（南界或拉丁界关键温度区域不对称比方法学引用",
+      "search_keywords": [
+        "temperature dependent asymmetry ratio magnetic phase transition",
+        "CrSb Neel temperature asymmetry evolution",
+        "magnetic symmetry breaking temperature trend ultrafast"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

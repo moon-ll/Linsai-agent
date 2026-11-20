@@ -1,0 +1,61 @@
+{
+  "gaps": [
+    {
+      "claim": "BSV-HHG 固体实验由华中科技大学（陆培祥团队）开展，机构归属正确",
+      "missing_evidence": "[9] 实为 HUST/陆培祥团队成果，被错挂为兰州大学；缺华中科技大学/陆培祥团队 BSV 驱动固体 HHG 实验的可引用一手文献核验（作者机构、DOI）",
+      "search_keywords": [
+        "Liang Li Peixiang Lu BSV high harmonic solid",
+        "HUST bright squeezed vacuum high harmonic generation ZnO Mg:LiNbO3",
+        "华中科技大学 陆培祥 BSV 高次谐波",
+        "Rasputnyi Lu HUST squeezed vacuum HHG solid state"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "国内 BSV 驱动固体 HHG 实验积累与国际同类工作形成对照",
+      "missing_evidence": "[3,4] 系 MPL Erlangen + Moscow State 国际成果（Rasputnyi/卡赞斯基/莫斯科大学等），被用于支撑\"国内积累\"论断；缺国内 BSV 实验、PDC 光源制备、量子光场调控的真实中国团队文献",
+      "search_keywords": [
+        "bright squeezed vacuum HHG Chinese group",
+        "BSV 光场 国内 实验 固体 高次谐波",
+        "中国 参量下转换 PDC制备 量子光",
+        "国内 BSV 驱动 高次谐波 量子光场",
+        "中国量子光源 HHG 实验组"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "BSV-HHG 量子增强因子 QEF 维度区分（QEF_vis / QEF_yield / 第三维）的方法学地位",
+      "missing_evidence": "QEF 三维度定义在 §1.1 即前置，但 §1.4 与全文未承接；缺 QEF 维度区分的理论出处或先例文献（如 Pisanty、Khurelbaatar 等 BSV-HHG 量子增强因子的定义形式与可见度/产额分类依据）",
+      "search_keywords": [
+        "quantum enhancement factor BSV HHG definition",
+        "Khurelbaatar Pisanty BSV high harmonic enhancement",
+        "BSV driven HHG visibility yield ratio metric",
+        "QEF squeezed vacuum harmonic quantum advantage"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Luu/Wörner 2018 Nat Commun 与拓扑绝缘体 HHG 的 Berry 曲率映射方法学范式",
+      "missing_evidence": "在 §1.1 段2 与 §1.2.1 双份复述，需合并去重；缺 Berry 曲率→HHG 的关键里程碑文献（Luu Wörner 2018、Silva 2019、Murakami 2020、Vampa 2015 等）单点权威引用以替代双份",
+      "search_keywords": [
+        "Luu Worner 2018 Nat Commun Berry curvature HHG quartz",
+        "Vampa 2015 PRL Berry curvature HHG reconstruction",
+        "Murakami Silva 2019 high harmonic generation Berry curvature",
+        "topological insulator HHG circular polarization Berry"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "关联绝缘体/CDW HHG 与多体 U/W 基准",
+      "missing_evidence": "Murakami/Silva 等关联绝缘体 HHG 文献在 §1.1 与 §1.2.1 双份复述；缺关联绝缘体 HHG 单一权威引用（Baykusheva、Uchida、Murakami 2021 等）",
+      "search_keywords": [
+        "Baykusheva correlated insulator HHG TaS2",
+        "Uchida 1T-TaS2 HHG charge density wave",
+        "Murakami 2021 Mott insulator high harmonic",
+        "correlated insulator HHG U/W Hubbard benchmark"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "rationale"
+}

@@ -1,0 +1,46 @@
+{
+  "proposal_id": "general-mos2-20260905",
+  "cluster_id": "cl_20260905_3b988a",
+  "entries": [
+    {
+      "source_id": "paper:2025-2504.02567-high-harmonic-generation-in-monolayer-mos2-controlled-by-res",
+      "title": "High harmonic generation in monolayer MoS2 controlled by resonant and near-resonant pulses on ultrashort time scales",
+      "summary": "该工作实验研究了单层MoS2中的非微扰高次谐波产生（HHG），通过谐振与近谐振脉冲预激发，在超短时间尺度上实现了对紫外波段谐波发射的有效调控。研究揭示了激发光与MoS2激子/跃迁共振对固态HHG产率和超快动力学的操控机制，为二维材料中相干极紫外/紫外光源的主动控制提供了新途径。",
+      "path": "",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-09-26T22:40:35Z"
+    },
+    {
+      "source_id": "paper:2020-2005.01718-high-order-nonlinear-optical-response-of-a-twisted-bilayer-g",
+      "title": "High-order nonlinear optical response of a twisted bilayer graphene",
+      "summary": "Tatsuhiko N. Ikeda 采用非微扰计算方法，证明扭转双层石墨烯在强激光驱动下存在单层及常规双层石墨烯均不具备的新型高次谐波产生通道，其物理机制归因于扭转结构引入的独特动力学对称性。",
+      "path": "knowledge/raw/papers/2020-2005.01718-high-order-nonlinear-optical-response-of-a-twisted-bilayer-g.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-09-26T22:40:35Z"
+    },
+    {
+      "source_id": "paper:2022-2212.02354-high-harmonic-generation-from-artificially-stacked-2d-crysta",
+      "title": "High-harmonic generation from artificially stacked 2D crystals",
+      "summary": "通过人工堆叠二维晶体（扭转角工程）实现强场高次谐波产生，实验观测到相干的逐层累积效应，揭示堆叠构型对谐波强度与偏振的调控规律，为扭转ronics时代的强场非线性光学奠定实验基础。",
+      "path": "knowledge/raw/papers/2022-2212.02354-high-harmonic-generation-from-artificially-stacked-2d-crysta.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-09-26T22:40:35Z"
+    },
+    {
+      "source_id": "paper:2024-2410.11541-dependence-of-high-harmonic-generation-in-twisted-bilayer-gr",
+      "title": "Dependence of high-harmonic generation in twisted bilayer graphene on laser pulse ellipticity",
+      "summary": "系统比较了AA堆垛、AB堆垛双层石墨烯与扭转双层石墨烯（TBG）在椭圆偏振强场驱动下的高次谐波生成（HHG），发现有限椭圆度反而可增强特定阶谐波（椭圆增强效应），并出现左/右旋椭圆光响应不对称的椭圆二向色性。二向色性在对称堆垛（AA/AB）中沿高对称取向被对称性禁戒，而在扭转结构中有限且大小与符号随扭转角变化，据此提出用HHG椭圆二向色性作为识别扭转角、堆垛构型与堆垛缺陷的光学指纹。",
+      "path": "knowledge/raw/papers/2024-2410.11541-dependence-of-high-harmonic-generation-in-twisted-bilayer-gr.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-09-26T22:40:35Z"
+    },
+    {
+      "source_id": "paper:2021-2408.09364-high-order-harmonic-generation-from-twisted-bilayer-graphene",
+      "title": "High-order harmonic generation from twisted bilayer graphene driven by a midinfrared laser field",
+      "summary": "本文用长度规范半导体布洛赫方程（SBE）结合莫尔超晶格紧束缚能带，系统模拟了中红外强场驱动扭转双层石墨烯（tBLG）的高次谐波产生。核心发现是谐波产率与谱形对扭转角高度敏感：随扭转角减小、能带平带化（范霍夫奇点/魔角平带）显著增强谐波发射。结果表明 HHG 谱可作为读取 tBLG 莫尔能带结构的全光学强场探针。",
+      "path": "knowledge/raw/papers/2021-2408.09364-high-order-harmonic-generation-from-twisted-bilayer-graphene.md",
+      "added_via": "cluster:cl_20260905_3b988a",
+      "added_at": "2026-09-26T22:40:35Z"
+    }
+  ]
+}

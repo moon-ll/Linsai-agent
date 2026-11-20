@@ -1,0 +1,88 @@
+{
+  "gaps": [
+    {
+      "claim": "CrSb在0.3—0.8 V/Å强场驱动下能够保持样品稳定，且损伤判据可设定为反射率变化不超过5%。",
+      "missing_evidence": "缺少CrSb样品在近红外强场或飞秒激光激发下的损伤阈值、反射率变化、烧蚀或结构稳定性实验数据；最好同时有与脉冲宽度、重复频率、光斑尺寸和样品厚度相关的阈值测量。",
+      "search_keywords": [
+        "CrSb ultrafast laser damage threshold",
+        "CrSb femtosecond laser damage",
+        "CrSb strong-field optical excitation stability",
+        "CrSb reflectivity change intense laser field",
+        "CrSb near-infrared pump probe damage threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Mandal 2025提供了本项目实验装置或测量方法的可行性基线，并可扩展至本项目所需的约4倍驱动场强。",
+      "missing_evidence": "缺少Mandal 2025装置的实际驱动场强、脉冲参数、样品处光强及HHG信号水平与本项目目标参数之间的定量对比，也缺少证明该装置在提高至目标场强后仍能维持样品稳定和探测灵敏度的实验或方法学文献。",
+      "search_keywords": [
+        "Mandal 2025 high harmonic generation experimental setup field strength",
+        "Mandal 2025 ultrafast spectroscopy CrSb",
+        "CrSb high harmonic generation laser intensity",
+        "solid-state HHG scaling with driving field strength",
+        "high-field ultrafast experiment damage threshold CrSb"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "可通过X射线衍射或磁输运测量独立验证强场诱导的序参量变化及其与HHG信号变化之间的对应关系。",
+      "missing_evidence": "缺少将超快HHG与时间分辨X射线衍射、磁性X射线散射或磁输运联合使用来读出磁序/轨道序/晶格序参量的实验先例，以及CrSb适用的具体测量方案、时间分辨率和可观测信号依据。",
+      "search_keywords": [
+        "CrSb time-resolved X-ray diffraction magnetic order",
+        "CrSb ultrafast magnetotransport",
+        "CrSb magnetic order X-ray scattering",
+        "combined high harmonic generation and X-ray diffraction order parameter",
+        "ultrafast order parameter readout magnetotransport"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "本项目提出的“唯一归因”序参量读出框架不同于现有MnTe和CrSb实验中仅证明信号存在性的研究。",
+      "missing_evidence": "缺少对Werner 2024理论框架、MnTe实验和CrSb实验的逐项比较文献，明确现有工作能够观测到哪些HHG信号、是否能够区分磁序与晶格/轨道/载流子动力学贡献，以及尚未解决的参数不可辨识性问题。",
+      "search_keywords": [
+        "Werner 2024 altermagnet high harmonic generation",
+        "MnTe high harmonic generation experiment magnetic order",
+        "CrSb high harmonic generation experiment altermagnet",
+        "altermagnet HHG order parameter readout",
+        "high harmonic generation disentangle magnetic and structural contributions",
+        "parameter identifiability altermagnet nonlinear optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "目前尚未见基于HHG同时区分三类瓶颈并实现序参量唯一归因的研究。",
+      "missing_evidence": "缺少覆盖“信号来源混淆、参数不可辨识性和独立验证不足”三类问题的系统文献检索与综述性证据，尤其需要引用已有HHG反演、磁性HHG、非线性光学参数识别和多模态交叉验证研究，以限定“尚未见”结论的适用范围。",
+      "search_keywords": [
+        "high harmonic spectroscopy inverse problem parameter identifiability",
+        "magnetic high harmonic generation order parameter retrieval",
+        "HHG disentanglement magnetic structural electronic contributions",
+        "nonlinear optics inverse problem parameter degeneracy",
+        "multimodal validation ultrafast order parameter measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Altermagnet体系已经达到MnTe、CrSb等材料中可通过超快光学或HHG观测相关序参量信号的实验里程碑。",
+      "missing_evidence": "需要补充MnTe和CrSb相关实验论文，分别证明材料的实验制备/磁序表征、反演对称性破缺或自旋相关响应，以及HHG或其他超快非线性光学信号的实际观测，避免将理论预测、信号存在性和序参量定量读出混为一谈。",
+      "search_keywords": [
+        "MnTe altermagnet experimental observation ultrafast optics",
+        "CrSb altermagnet experimental observation nonlinear optics",
+        "CrSb magnetic order experimental evidence",
+        "MnTe high harmonic generation experiment",
+        "altermagnet optical response experiment 2024 2025 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Werner 2024为本项目关于altermagnet光学响应或HHG序参量读出的理论框架提供了直接依据。",
+      "missing_evidence": "缺少对Werner 2024论文中适用材料、理论可观测量、对称性判据和读出限制的准确归纳，也缺少说明本项目如何超越该框架、从理论信号预测推进到实验序参量反演的文献支撑。",
+      "search_keywords": [
+        "Werner altermagnet 2024 optical response",
+        "Werner 2024 altermagnet nonlinear optics",
+        "altermagnet symmetry high harmonic generation theory",
+        "altermagnet order parameter optical readout theory"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

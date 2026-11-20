@@ -1,0 +1,32 @@
+{
+  "gaps": [
+    {
+      "claim": "在所考察的 Floquet 奇宇称磁体文献中，逆法拉第通道尚未被分离出来。",
+      "missing_evidence": "缺少能够支撑该优先权判断的系统性文献检索与对比论证。现有[13][27]仅涉及单点机制，不能证明相关工作均未实现通道分离。需要补充覆盖 Floquet 驱动磁体、逆法拉第效应、磁光响应分解及奇宇称磁体的综述或代表性原始文献，并说明检索范围、时间边界、纳入与排除标准，同时区分既有工作与本方案拟提出的通道分离。",
+      "search_keywords": [
+        "Floquet odd-parity magnet inverse Faraday effect channel separation",
+        "Floquet magnetic material inverse Faraday channel-resolved response",
+        "light-induced magnetic order Faraday circular dichroise separation",
+        "Floquet altermagnet magneto-optical response",
+        "AB'-CrI3 Floquet inverse Faraday effect",
+        "Floquet 奇宇称磁体 逆法拉第效应 通道分离",
+        "磁致光响应 逆法拉第 通道分解 文献综述"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "利用芯能级自旋轨道耦合及 Schiff XMCD 对称性分析表征磁序、局部磁矩取向或对称性破缺。",
+      "missing_evidence": "该具名机制的正文论述目前没有角标挂靠。需要补充 Schiff XMCD 方法的原始方法文献或权威综述，说明其对磁矩取向和对称性的判别原理，并提供该方法或相近 XMCD 对称性分析在 CrI3、MnPSe3、MnPS3 等目标体系中的应用依据；可优先核对并挂靠报告所指的文献[7]。",
+      "search_keywords": [
+        "Schiff XMCD symmetry analysis magnetic order",
+        "Schiff X-ray magnetic circular dichroism spin orientation",
+        "core-level spin-orbit coupling XMCD magnetic structure",
+        "CrI3 XMCD magnetic symmetry spin-orbit coupling",
+        "MnPS3 MnPSe3 XMCD magnetic order",
+        "芯能级 自旋轨道耦合 Schiff XMCD 对称性分析"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

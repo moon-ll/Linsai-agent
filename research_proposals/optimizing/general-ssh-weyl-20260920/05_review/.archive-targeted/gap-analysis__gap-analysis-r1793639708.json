@@ -1,0 +1,38 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.3 K2 处引用 [12]（Liu 等关于 ESSH 选择定则）：边界态偶/奇次谐波选择定则作为'六条线索'之一及其在 K2 科学问题中的支撑",
+      "missing_evidence": "该引用目前为'挂名零内容'——正文只复述前条内容，未陈述 [12] 的实质结论（光斑移至边界时偶次谐波增强的偶/奇选择定则）。需要补一句实质性转述使引用与论点对应，或者确认该文确实不支撑此论点并删除该编号",
+      "search_keywords": [
+        "SSH model even harmonic generation edge states",
+        "topological edge state harmonic selection rule",
+        "Liu ESSH higher harmonics selection rules",
+        "boundary enhanced even harmonics strong field"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "全文参考文献的预印本占比控制（清单8/问题7：7/21 篇为预印本，占 33.3%，超 30% 参考线）",
+      "missing_evidence": "需逐篇核查 7 篇预印本的见刊状态，用正式刊版替换 arXiv 引用。已确认线索：[19]（Lorenzo 等）已见刊（DOI:10.1103/7zjc-4b4r），应删'预印本第二版'表述改引刊版；其余 6 篇需检索其期刊发表版本（标题/作者匹配的正式 DOI）",
+      "search_keywords": [
+        "Lorenzo high harmonic generation topological phase PhysRev 7zjc-4b4r",
+        "arXiv preprint published version lookup by title",
+        "Weyl semimetal HHG publication journal version",
+        "high-order topological insulator harmonic generation published"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.2 方向一相指纹判定指标 δ_FP<5% 误判率的实验可行性（问题5：缺样本规模与误判操作定义）",
+      "missing_evidence": "需要文献支撑'每相 N 个样本、误判定义'这类统计操作约定的领域惯例，即 HHG 谱相指纹/分类判定中误差率评估的典型样本量与阈值设定方法，使 δ_FP 指标补写的操作定义有先例可循",
+      "search_keywords": [
+        "HHG spectral fingerprint classification error rate",
+        "high harmonic spectroscopy phase identification benchmark",
+        "machine learning HHG spectra classification sample size",
+        "false positive rate definition harmonic spectrum"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,25 @@
+{
+  "proposal_id": "general-moire-strong-field-probe-20260726",
+  "cluster_id": "orphan-route-2026-11-08",
+  "clusters": [
+    "orphan-route-2026-11-08"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2019-1906.10224-high-harmonic-generation-from-spin-polarised-defects-in-soli",
+      "title": "High-Harmonic generation from spin-polarised defects in solids",
+      "summary": "本文用自旋极化的第一性原理实时TDDFT研究单层六方氮化硼中硼空位（自旋极化缺陷）对固态高次谐波的产生的影响，发现自旋向上与自旋向下通道给出显著不同的谐波谱。缺陷破坏局域几何与反演对称性从而开启偶次谐波，而自旋依赖的波函数局域化与电子-电子相互作用共同造成两自旋通道谐波结构与产率的差异。结果表明谐波谱携带缺陷与自旋的特异性指纹，可在非磁性固体中实现自旋选择的阿秒电子动力学探测与调控。",
+      "path": "knowledge/raw/papers/2019-1906.10224-high-harmonic-generation-from-spin-polarised-defects-in-soli.md",
+      "added_via": "cluster:orphan-route-2026-11-08",
+      "added_at": "2026-11-08T03:04:02Z"
+    },
+    {
+      "source_id": "paper:2026-2610.15108-resonant-dispersive-wave-emission-a-route-toward-few-cycle-t",
+      "title": "Resonant dispersive wave emission: a route toward few-cycle, tunable strong-field drivers in the visible",
+      "summary": "本文利用大芯径充气毛细管中的高阶孤子动力学产生共振色散波（RDW），实现 220–752 nm 宽带连续调谐、峰值功率达多 GW、脉宽小于 10 fs 的可见/近紫外少周期强场光源。该色散波脉冲与残余泵浦在光谱上天然分离，作为短波长 HHG 驱动源可显著提升极紫外转换效率。工作为固体 HHG 谱学实验提供了波长可按需选取的新型少周期强场驱动方案。",
+      "path": "knowledge/raw/papers/2026-2610.15108-resonant-dispersive-wave-emission-a-route-toward-few-cycle-t.md",
+      "added_via": "cluster:orphan-route-2026-11-08",
+      "added_at": "2026-11-08T13:22:51Z"
+    }
+  ]
+}

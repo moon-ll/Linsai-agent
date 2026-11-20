@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "§2.4 L51 正文具名引用 Zhu 等（arXiv:2608.02393）关于 Floquet 拓扑/相干激发/层间滑移的相关结论，作为§2.4 内容的方法学或物理图像支撑",
+      "missing_evidence": "幽灵引用：references.md 43 条中无对应条目，refs 凡例要求'正文按 [N] 编号引用'，需补全条目或替换为已有 Floquet 文献 [46]（具体文献实体缺失）",
+      "search_keywords": [
+        "arXiv:2608.02393",
+        "Zhu Floquet MnPS3",
+        "Floquet topological altermagnet",
+        "Floquet interlayer sliding coherent excitation",
+        "光致相干层间滑移"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.2 L23 正文以行内 arXiv 号 2605.20067 引用 Li 等关于 MnPS₃ 或反铁磁自旋-能谷耦合的工作，作为反铁磁体圆偏振 HHG 选择定则或自旋-能谷锁定机制的支撑",
+      "missing_evidence": "Li（2605.20067）已在 references.md 建有条目 [41]，但正文未挂 [N] 而直接写 arXiv 号，导致引用入口断裂，读者无法索引到完整书目信息",
+      "search_keywords": [
+        "arXiv:2605.20067",
+        "Li MnPS3 antiferromagnet HHG",
+        "alternagnet spin-valley locking HHG",
+        "Li circularly polarized HHG selection rule"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L39 正文以行内 arXiv 号 2606.31573 引用 Mizuno 等关于 Floquet 缀饰或 Berry 曲率二色性信号的工作，作为时域自旋-能谷态分离或 Berry 曲率光学读出的物理依据",
+      "missing_evidence": "Mizuno（2606.31573）已在 references.md 建有条目 [42]，但正文行内引用未挂 [42]，引用体系不一致，需补挂 [N] 编号",
+      "search_keywords": [
+        "arXiv:2606.31573",
+        "Mizuno Floquet Berry curvature",
+        "Mizuno altermagnet HHG dichroism",
+        "Berry curvature optical readout MnPS3"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§2.3 L29 中 [15] 文献（Ghorashi-Rappe 类工作）被分别冠以'定性判据'/'定量预言'/'定性预言'三种互斥定语，需核查原文后统一为'定量关系（角谐波最低允许阶数）'，作为圆偏振 HHG 角度依赖判据的文献锚点",
+      "missing_evidence": "[15] 文献的实际内容描述在原文中存在多版本不一致，缺一次基于原文摘要/正文的事实校核以确定该工作究竟给出的是定性图像还是定量阈值，并据此统一全文 grep '定性/定量' 用语",
+      "search_keywords": [
+        "Ghorashi Rappe antiferromagnet HHG angular",
+        "MnPS3 circular HHG angular harmonic order",
+        "alternagnet HHG selection rule angular momentum"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§2.7 L89 中 i-wave C₆ 六次旋转对称的论断需限定在平台一三方晶系背景下，并需文献支撑'三重旋转容许 cos(3φ) 谐波而六重旋转禁止'这一选择定则",
+      "missing_evidence": "原文仅以未挂引用的方式陈述对称性-谐波阶次的对应关系，未给出具体的群论判据或对称性-谐波选择定则的原始文献（如 MHC 群论、Fleischer 等关于晶体对称性 HHG 选择定则的工作）",
+      "search_keywords": [
+        "crystal symmetry HHG selection rule",
+        "MnPS3 C3 rotational symmetry harmonic generation",
+        "Fleischer Kfir HHG symmetry",
+        "point group HHG angular dependence"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

@@ -1,0 +1,90 @@
+{
+  "gaps": [
+    {
+      "claim": "g波自旋劈裂节点面 → HHG偏振各向异性的定量映射（截止2026年8月检索），Werner/Haag/Mizuno/Ly均未给出",
+      "missing_evidence": "缺：g波交变磁体（MnTe/CrSb）HHG偏振各向异性的定量映射实验或理论预言（节点面方向、偏振角度依赖谐波强度公式）；确认Werner 2024/2026理论、Haag MnTe预言、Mizuno自旋群选择规则三篇最新论文的具体结论",
+      "search_keywords": [
+        "g-wave altermagnet high harmonic generation polarization anisotropy",
+        "Werner altermagnet HHG selection rule 2026",
+        "Haag MnTe HHG polarization prediction",
+        "Mizuno spin group HHG selection rule",
+        "Ly magnetic order HHG framework altermagnet"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "MnTe自旋劈裂幅度 0.4–0.6 eV（Γ–K窄化口径工程估计）",
+      "missing_evidence": "缺：α-MnTe自旋劈裂在Γ–K方向0.4–0.6 eV的实验测量文献（Krempaský Nature 2024 spin-resolved ARPES或Osumi PRB 109 115102的各向异性数据），明确节点面方向Γ–K vs Γ–M的劈裂差值",
+      "search_keywords": [
+        "Krempasky MnTe spin-resolved ARPES 2024 Nature",
+        "Osumi PRB 109 115102 MnTe anisotropic spin splitting",
+        "alpha-MnTe d-wave altermagnet band splitting eV",
+        "MnTe spin splitting nodal plane ARPES experimental"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Osumi[15]MnTe自旋劈裂+节点线+PT破缺的基准数据",
+      "missing_evidence": "缺：Osumi关于MnTe节点线和PT破缺的完整细节描述（仅作为基准引用），需要在rationale而非content详述",
+      "search_keywords": [
+        "Osumi PRB 109 115102 MnTe nodal line PT symmetry",
+        "MnTe d-wave spin splitting0.4 0.6 eV"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "目标2 差分阈值暂用 ≥1%（content暂缺vs scheme ≥1%）",
+      "missing_evidence": "缺：差分方法在HHG或反演问题中可检测阈值约1%的文献支持（HHG谐波强度比值、偏振比、椭圆依赖的最小可分辨变化）",
+      "search_keywords": [
+        "HHG differential detection threshold percentage",
+        "high harmonic polarization ratio minimum detectable",
+        "harmonic signal difference 1% resolution"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb/α-MnTe 在Cr/Sb和Te的SOC有效值与DFT+U/GW基准",
+      "missing_evidence": "缺：CrSb g波和MnTe d波交变磁体的自旋轨道耦合强度、DFT+U/GW基准带隙与实验对比、Werner等理论预言节点线/d-wave/g-wave分类的最新论文",
+      "search_keywords": [
+        "CrSb altermagnet DFT+U band gap",
+        "MnTe spin-orbit coupling strength eV",
+        "Werner altermagnet spin splitting prediction 2025",
+        "g-wave i-wave altermagnet spin group classification"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "CrSb/MnTe 高次谐波产额与中红外损伤阈值（TW/cm²量级）",
+      "missing_evidence": "缺：磁性材料HHG产额与中红外（3-10 μm）驱动场损伤阈值的实验数据，特别是MnTe/CrSb在TW/cm²量级的中红外产生高次谐波的可行性",
+      "search_keywords": [
+        "altermagnet HHG yield mid-infrared",
+        "CrSb MnTe TW/cm2 damage threshold",
+        "antiferromagnet high harmonic generation efficiency",
+        "solid HHG magnetic material mid-IR driver"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Werner/Haag/Mizuno/Ly 截至2026年8月文献检索结果：四家均未给出g波→HHG偏振各向异性定量映射",
+      "missing_evidence": "缺：四篇关键理论论文的最新版本/预印本（确认截至2026年8月检索是否仍未给出定量映射），特别是Werner arXiv最新预印本",
+      "search_keywords": [
+        "Werner altermagnet HHG arXiv 2026",
+        "Haag altermagnet nonlinear optics preprint 2026",
+        "Mizuno spin group altermagnet harmonic 2026",
+        "Ly magnetic order HHG antiferromagnet 2026"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "Cohen-Mansour/Ly的磁序驱动HHG框架与本项目方法学区隔",
+      "missing_evidence": "缺：Ly2026磁序驱动HHG框架的完整方法学描述（理论模型、输入输出参数），用于明确本项目与之的方法学差异",
+      "search_keywords": [
+        "Ly 2026 magnetic order driven HHG framework",
+        "Cohen-Mansour antiferromagnet HHG theoretical framework",
+        "magnetic order parameter high harmonic retrieval"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

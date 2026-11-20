@@ -1,0 +1,4 @@
+{
+  "gaps": [],
+  "note": "agent 未返回标准 JSON gaps 格式，视为无文献缺口。原文前200字: {\"gaps\": [{\"claim\": \"本研究与 Fuchs[64]/Rost[67] 的差异主要由\"唯一归因方法学\"承担，但未与 Murakami [16] 多通道混合模型形成完整的对照论证\", \"missing_evidence\": \"缺少 Murakami 多通道混合模型在反铁磁/交替磁体 HHG 中的完整方法论描述及其与本项目单通道归因方案的对比文献\", \"search_keywords"
+}

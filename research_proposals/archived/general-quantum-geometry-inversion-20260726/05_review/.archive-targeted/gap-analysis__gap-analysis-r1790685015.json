@@ -1,0 +1,74 @@
+{
+  "gaps": [
+    {
+      "claim": "Gorlach/Khurelbaatar/Ikeda/Du/Ciappina/Lvovsky 等人的具名论述在文中 L39/57/65/165/173 处出现但缺少 [N] 引用编号锚定，且 references 中存在死编号 [47][48]，需挂靠到具体文献 [7][12][10][21][19][14]",
+      "missing_evidence": "量子几何张量反演、高次谐波产生（HHG）、Berry 曲率相关理论与实验工作的原始文献支撑，特别是 Gorlach 等关于介观量子几何的近期工作、Khurelbaatar 关于固体 HHG 的模型、Ikeda 关于几何与拓扑的论述、Du 与 Ciappina 关于原子/分子 HHG 的奠基论文、Lvovsky 在量子光学/量子态层析方面的工作",
+      "search_keywords": [
+        "Gorlach quantum geometry inversion HHG",
+        "Khurelbaatar solid high harmonic generation",
+        "Ikeda quantum metric topological",
+        "Ciappina high harmonic generation model",
+        "Lvovsky quantum state tomography",
+        "quantum geometric tensor reconstruction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "U/W 上界三口径互斥的统一定义（主区 ≲1.0、扩展验证区 ≤1.2 含 1T-TaS₂ Mott-CDW 区、失效界 >0.5 触发降级）需以原始文献支撑，特别是 1T-TaS₂ 在 U/W≈1.0–1.2 区间的 Mott-CDW 相变判据",
+      "missing_evidence": "强关联体系中 Hubbard U 与带宽 W 之比的相分类标准；1T-TaS₂ 中 CDW-Mott 转变对应的临界 U/W 值的实验与第一性原理计算文献；DMFT/tdDMFT 框架中 U/W 作为相图控制参数的权威综述",
+      "search_keywords": [
+        "1T-TaS2 Mott CDW U/W ratio",
+        "Hubbard U bandwidth phase diagram strongly correlated",
+        "tdDMFT phase boundary criterion",
+        "Mott transition critical U/W ratio",
+        "1T-TaS2 charge density wave Hubbard model"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§7.2 L345 给出 Bonferroni 校正后族错误率声称 '<1%'，但经三指标联合检验复算实际约 4.9%，需要正确引用多重比较校正方法论与统计推导依据",
+      "missing_evidence": "Bonferroni 校正族错误率（FWER）的精确公式；多重假设检验中 α 分配与检验数 m 的关系；面向 HHG/光学实验的多指标联合检验统计学处理文献",
+      "search_keywords": [
+        "Bonferroni correction family-wise error rate",
+        "multiple hypothesis testing HHG statistics",
+        "Bonferroni alpha adjustment formula",
+        "FWER multiple comparison correction"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R 落 1.2–2 档作为'放大档'的语义需与 Rasputnyi 2024 在 Mg:LiNbO₃ 与 a-Si 上 BSV 驱动的固体 HHG 增强倍数（4–7 次谐波产额 5–15 倍）建立定量映射，且 §2.2 任务 4 Go 判据中'≥1.2 即放大档'与 §7.1 创新点论述存在语义冲突",
+      "missing_evidence": "固体 HHG 中谐波增强倍数的定量文献（特别是 BSV/Bloch 态 Berry 曲率诱导的谐波产额增强区间划分）；不同 R 值档位与物理增强机制的对应关系；近期实验报道的 4–7 次谐波增强区间数据",
+      "search_keywords": [
+        "Bloch state vector high harmonic enhancement factor",
+        "solid HHG Berry curvature driven enhancement",
+        "Rasputnyi Mg:LiNbO3 harmonic yield",
+        "a-Si HHG enhancement ratio 4-7 harmonic",
+        "Berry curvature HHG amplification threshold"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Aversa-Sipe 框架的发表年份在文中存在两处不一致：L103 写'1995'，L123 写'1994'，refs[27] 标注 1995，需通过原始文献核实正确年份以消除引用歧义",
+      "missing_evidence": "Aversa 与 Sipe 关于原子在强激光场中 HHG 的 Lewenstein 模型替代框架的原始论文出处及确切发表年份（Phys. Rev. A 或其他期刊记录）",
+      "search_keywords": [
+        "Aversa Sipe 1995 HHG model strong field",
+        "Aversa Sipe atomic high harmonic generation framework",
+        "Lewenstein model alternative Aversa Sipe"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "§7.1 L321 关于'BSV 驱动的固体 HHG 首次实现'的'首次'声明需配套系统性文献综述支撑，以排除已有同类工作的遗漏（'未见建立'类统一检索语虽然合格但需对应文献证据）",
+      "missing_evidence": "BSV（Berry 谱矢量/类 Bloch 矢量）驱动的固体 HHG 的先前理论与实验工作综述；与 Berry/度规反演解析关系建立相关的最新进展；2018-01 至 2026-07 期间关于量子几何反演 HHG 的系统性检索证据",
+      "search_keywords": [
+        "Bloch spectral vector solid high harmonic generation",
+        "quantum geometry HHG analytic inversion",
+        "Berry curvature driven solid HHG review",
+        "quantum metric HHG spectral interference"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

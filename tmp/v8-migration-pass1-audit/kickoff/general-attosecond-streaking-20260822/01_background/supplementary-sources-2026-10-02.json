@@ -1,0 +1,38 @@
+{
+  "proposal_id": "general-attosecond-streaking-20260822",
+  "cluster_id": "cl_20260918_fb8927",
+  "entries": [
+    {
+      "source_id": "paper:2013-1312.1679-broadband-isolated-attosecond-pulses-generation-characteriza",
+      "title": "Broadband Isolated Attosecond Pulses: Generation, Characterization, and Applications",
+      "summary": "本文综述了利用偏振门控、双光学门控和阿秒灯塔等时间门控技术，在驱动激光单个半周期内选择性激活高次谐波产生，从而获得带宽与中心频率相当、理论上可压缩至单光周期的超宽带孤立阿秒脉冲的最新进展。文章指出这些方法能充分利用谐波谱的平台区和截止区以克服光谱筛选技术的局限，核心挑战在于对载波包络相位与激光偏振动力学的精确控制，并讨论了相关脉冲表征与应用。",
+      "path": "",
+      "added_via": "cluster:cl_20260918_fb8927",
+      "added_at": "2026-10-02T19:01:04Z"
+    },
+    {
+      "source_id": "paper:2023-2309.02647-extension-of-all-optical-reconstruction-method-for-isolated",
+      "title": "Extension of all-optical reconstruction method for isolated attosecond pulses using high-harmonic generation",
+      "summary": "本文扩展了基于高次谐波产生的全光重构方法，用于表征孤立阿秒脉冲的时域结构（振幅与相位）。该方法无需传统电子能谱测量，仅通过光学手段即可完成阿秒脉冲重构，推进了阿秒相位测量的实验技术发展。",
+      "path": "knowledge/raw/papers/2023-2309.02647-extension-of-all-optical-reconstruction-method-for-isolated.md",
+      "added_via": "cluster:cl_20260918_fb8927",
+      "added_at": "2026-10-02T19:01:04Z"
+    },
+    {
+      "source_id": "paper:2024-2407.05937-generation-and-characterization-of-isolated-attosecond-pulse",
+      "title": "Generation and characterization of isolated attosecond pulses at the carbon K-edge",
+      "summary": "本文在水窗下边界——碳K边（~284 eV）——产生并直接表征了孤立阿秒脉冲，把孤立阿秒脉冲的产生与条纹测量从几十eV的XUV波段推进到软X射线水窗区。利用少周期中红外驱动结合时间门控获得跨越碳K边的连续谱，并通过激光辅助光电离的条纹测量给出孤立脉冲的时域表征，为水窗区元素选择的内壳层电子动力学阿秒研究建立了完整技术路径。",
+      "path": "knowledge/raw/papers/2024-2407.05937-generation-and-characterization-of-isolated-attosecond-pulse.md",
+      "added_via": "cluster:cl_20260918_fb8927",
+      "added_at": "2026-10-02T19:01:04Z"
+    },
+    {
+      "source_id": "paper:2020-s41467-020-16480-6-attosecond-science-based-on-high-harmonic-generation-from-ga",
+      "title": "Attosecond science based on high harmonic generation from gases and solids",
+      "summary": "本文为 Chang 组发表于 Nature Communications 的 perspective，系统综述了基于气体与固体高次谐波产生的水窗阿秒光源现状。核心脉络是：以 1.3-2.1 μm 中红外驱动将 HHG 截止推至水窗（C/N/O K 边），结合双光学门控等技术产生孤立阿秒 X-ray 脉冲，并用 streaking 与瞬态吸收谱研究 K 边电荷迁移等超快动力学。文章并对比气体三步模型与固体带间/带内发射机制，展望了面向凝聚相体系的阿秒科学方向。",
+      "path": "knowledge/raw/papers/2020-s41467-020-16480-6-attosecond-science-based-on-high-harmonic-generation-from-ga.md",
+      "added_via": "cluster:cl_20260918_fb8927",
+      "added_at": "2026-10-02T19:01:04Z"
+    }
+  ]
+}

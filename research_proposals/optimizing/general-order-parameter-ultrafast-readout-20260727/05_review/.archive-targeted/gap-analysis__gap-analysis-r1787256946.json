@@ -1,0 +1,34 @@
+{
+  "gaps": [
+    {
+      "claim": "Cochran量子相干断层成像与Sørensen阿秒序参量重构两种方法的关系与差异尚无文献支撑",
+      "missing_evidence": "缺乏Cochran方法与Sørensen方法的系统比较、以及联合使用这两种方法进行HHG序参量反演的实验验证文献",
+      "search_keywords": [
+        "Cochran quantum coherence tomography Sørensen comparison HHG",
+        "combined HHG order parameter retrieval validation experimental",
+        "quantum coherence tomography attosecond retrieval integrated approach"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "HHG序参量反演方法缺乏端到端实验验证",
+      "missing_evidence": "缺少从HHG测量到序参量提取的完整链路实验演示文献",
+      "search_keywords": [
+        "end-to-end HHG order parameter inversion experimental demonstration",
+        "attosecond spectroscopy parameter retrieval experimental validation",
+        "HHG spectroscopy inversion error measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "交变磁体HHG序参量多参数约束缺乏文献支撑",
+      "missing_evidence": "缺少磁场-偏振-温度多参数联合约束的交变磁体HHG实验文献",
+      "search_keywords": [
+        "altermagnet order parameter HHG multi-parameter constraint",
+        "CrSb high harmonic generation magnetic field polarization temperature",
+        "altermagnet HHG Fisher information parameter retrieval"
+      ],
+      "priority": "medium"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "gaps": [
+    {
+      "claim": "content.md L43 称 \"Jakob 等[15]证明，瞬态吸收中的 RABBITT 类振荡可以提取 XUV 光谱相位\"，但 references [15] 实际是 Rivera-Dean 等的 AQI 工作，不支撑 TA-RABBITT 相位提取",
+      "missing_evidence": "缺少 Jakob 等关于从时间依赖瞬态吸收谱提取 RABBITT 类相位信息的真实文献（Phys. Rev. Research 7, 023244, 2025）",
+      "search_keywords": [
+        "Jakob RABBITT phase transient absorption",
+        "time-dependent transient absorption RABBITT phase extraction solid",
+        "PhysRevResearch.7.023244"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md L45 称 \"Stammer 等[16]建立的阿秒弱测量解释，说明干涉相位包含超越经典轨迹的信息\"，但 references [16] 实际是 Shirley 1965（与弱测量无关的周期哈密顿量求解）",
+      "missing_evidence": "缺少 Stammer 等关于阿秒干涉作为弱测量的真实文献（arXiv:2508.09048 \"Weak measurement in strong laser field physics\"2025）",
+      "search_keywords": [
+        "Stammer weak measurement attosecond interferometry",
+        "weak measurement strong laser field physics 2508.09048",
+        "attosecond interferometry weak value phase shift"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md L47 称 \"Stammer 等[17]的阿秒量子干涉工作提示辐射场的量子统计可以编码干涉相位\"，但 references [17] 实际是 Kitagawa 等 2010 周期驱动系统拓扑分类，不支撑量子光学关联论点",
+      "missing_evidence": "缺少 Stammer 等关于辐射场量子统计/光子统计编码干涉相位的真实文献（如 arXiv:2510.19045 Colloquium 或同类量子光 HHG 综述）",
+      "search_keywords": [
+        "Stammer quantum optics HHG photon statistics",
+        "Lewenstein Ciappina quantum light HHG review2510.19045",
+        "quantum state harmonic field interference attosecond"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md L21 / §2.1 引用 Faeyrman 等[13] 作为亚周期复 Berry 相位实验支撑，但 references [13] 真身是 Uzan-Narovlansky 等 Nature626, 66-71 (2024)激光驱动晶体的能带间 Berry 相位观测，与亚周期复 Berry 相位追踪并非同一工作",
+      "missing_evidence": "缺少 Faeyrman 等关于亚周期动力学 Berry 相位（sub-cycle field-driven dynamical Berry phase）的真实文献作为时间分辨反演实验锚点",
+      "search_keywords": [
+        "Faeyrman sub-cycle dynamical Berry phase solid",
+        "2606.02238 sub-cycle Berry phase",
+        "time-resolved Berry phase attosecond solid measurement"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references [31] 整条错挂（真身应为 Cavaletto 等 NRP 7, 38-49 (2025)，Crossref 反查确认），影响 §2.2 强场-固体综述对瞬态写入窗口论证的支撑完整性",
+      "missing_evidence": "缺少 Cavaletto 等关于强场驱动固体阿秒科学综述（Nature Reviews Physics 2025）的整条正确引用条目",
+      "search_keywords": [
+        "Cavaletto attoscience strong-field driven solids review NRP 2025",
+        "Nature Reviews Physics strong field solids attosecond",
+        "10.1038/s42254-024-00784-3 author list"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "references [32] DOI 错（当前为 Junquera 极性氧化物 RMP 95, 025001 (2023)），内容却描述为 Floquet 强关联体系综述（真身为 Aoki 等 RMP 86, 779 (2014)），影响 §2.1 Floquet-Bloch 含时 Wilson 圈理论根基",
+      "missing_evidence": "缺少 Aoki 等关于周期驱动强关联电子非平衡稳态综述（Rev. Mod. Phys. 86, 779 (2014)，DOI 10.1103/RevModPhys.86.779）的整条正确引用",
+      "search_keywords": [
+        "Aoki Floquet strongly correlated nonequilibrium RMP 86779",
+        "RevModPhys.86.779 periodic drive Hubbard",
+        "generalized Floquet theory strongly correlated electrons"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md L31 五个材料体系按物理功能递进（Bi₂Se₃ 瞬时陈数窗口 / MoS₂ 能谷与 Wilson 圈 / MnBi₂Te₄ 和 Co₃Sn₂S₂ 磁拓扑 / 1T-TaS₂ CDW 调制），全段 0 引用，缺每个体系的强场 HHG 或非线性光学直接支撑",
+      "missing_evidence": "缺少五类材料在强场/阿秒/非线性光学下的具体 HHG、非线性响应或拓扑指纹实验/理论文献",
+      "search_keywords": [
+        "Bi2Se3 strong-field high harmonic generation circular polarization Baykusheva",
+        "MnBi2Te4 HHG magnetic configuration topological phase Jia2020",
+        "Co3Sn2S2 Weyl second harmonic generation quadrupole",
+        "MoS2 monolayer high harmonic generation valley polarized Liu 2019",
+        "1T-TaS2 charge density wave high harmonic generation strong field"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content.md L45 弱测量理论向固体扩展的适用边界（带间跃迁、多体关联、传播效应），缺弱测量理论在固体强场 HHG 中适用边界的理论文献",
+      "missing_evidence": "缺少弱测量理论与半导体 Bloch方程、固体多体效应耦合的理论边界分析文献",
+      "search_keywords": [
+        "weak measurement semiconductor Bloch equations solid HHG",
+        "weak value amplification solid-state strong field",
+        "multi-body weak measurement extension solid attosecond"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "content.md L23 §2.1 1T-TaS₂ 的 CDW 熔化背景需区分关联序参数变化与体带隙变化，不能把结构相变直接解释为拓扑相变，缺关联有序背景对 HHG/拓扑响应调制的实验/理论证据",
+      "missing_evidence": "缺少 CDW/Mott 序参数与强场 HHG 拓扑响应解耦的实验或第一性原理研究",
+      "search_keywords": [
+        "CDW order high harmonic generation solid decoupling",
+        "Mott insulator strong field HHG topological response",
+        "1T-TaS2 charge density wave nonlinear optics strong field"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "content.md L25 §2.1 跨区转换还需通过 α-T₃ 模型检验 α-T₃ 晶格模型作为转换区兼容性判据基准，缺 α-T₃ 模型在 HHG/瞬态拓扑中的具体应用文献",
+      "missing_evidence": "缺少 α-T₃（或 dice lattice）模型在强场 HHG、Berry 几何或 Floquet 拓扑中的理论计算文献",
+      "search_keywords": [
+        "alpha-T3 model HHG Berry curvature",
+        "dice lattice strong field harmonic generation",
+        "alpha-T3 model Floquet topological phase transient"
+      ]
+    }
+  ]
+}

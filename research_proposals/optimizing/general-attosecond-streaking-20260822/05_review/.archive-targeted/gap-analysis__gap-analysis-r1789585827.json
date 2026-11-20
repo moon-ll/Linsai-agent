@@ -1,0 +1,79 @@
+{
+  "gaps": [
+    {
+      "claim": "阿秒streaking方法的最新发展现状与多通道电离对水窗波段阿秒脉冲重构的影响",
+      "missing_evidence": "近3年（2024-2026）关于多通道TDSE对水窗阿秒streaking重构精度影响的文献占比仅29.6%，需要补充Cousin 2017 PRX、Peschel 2022 Ne 2p RABBITT等多通道电离阈值与误差量化最新研究",
+      "search_keywords": [
+        "water window attosecond streaking multichannel TDSE",
+        "Cousin 2017 PRX 7 041030",
+        "Peschel Ne 2p RABBITT interchannel coupling",
+        "attosecond pulse retrieval multichannel error",
+        "FROG-CRAB breakdown water window"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "阿秒脉冲表征方法（streaking、RABBITT、FROG-CRAB、VTGPA、rACE）的近期进展",
+      "missing_evidence": "缺少2024-2026年阿秒脉冲重构算法与神经网络方法（rACE、VTGPA）的最新论文支撑",
+      "search_keywords": [
+        "VTGPA attosecond pulse reconstruction 2025",
+        "rACE neural network attosecond retrieval",
+        "Ardana-Lamas krypton streaking reanalysis 2025",
+        "attosecond pulse characterization 2024 2026"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "[22] Keldysh 1965 JETP 强场电离基础理论的引用可靠性",
+      "missing_evidence": "[22] Keldysh原文的INSPIRE-HEP URL指向Lanczos 1938植物学论文而非Keldysh 1965 Sov Phys JETP 20:1307原文，需要补正确的DOI或INSPIRE URL",
+      "search_keywords": [
+        "Keldysh 1965 Sov Phys JETP 20 1307 DOI",
+        "Keldysh ionization strong field JETP original",
+        "INSPIRE-HEP Keldysh 1965 ionization"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "水窗波段阿秒光源产生的国内研究进展",
+      "missing_evidence": "缺少国内课题组在水窗能区（284-543 eV）阿秒光源与streaking实验的近期文献",
+      "search_keywords": [
+        "water window high harmonic generation China",
+        "中国 水窗 阿秒光源",
+        "国内 阿秒 streaking 实验",
+        "水窗能区 HHG 实验进展"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "多电子/多通道效应对阿秒streaking角度积分的影响（Pabst-Dahlstrom PANDA理论）",
+      "missing_evidence": "[30] PANDA理论提出后缺少其在2024-2026年间的实验验证与拓展研究",
+      "search_keywords": [
+        "Pabst Dahlstrom 2016 PRA 94 013411 PANDA",
+        "angular integration dipole phase attosecond streaking experiment",
+        "rare gas attosecond streaking angular averaging verification"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "[31] 阿秒时间尺度分子结构动力学与多通道电离耦合",
+      "missing_evidence": "[31]相关性强但未在正文引用，需要评估其与立项依据中阿秒方法学的关联性或补充正文引用",
+      "search_keywords": [
+        "attosecond molecular structure dynamics multichannel",
+        "ultrafast electron dynamics attosecond spectroscopy",
+        "molecular attosecond streaking 2025"
+      ],
+      "priority": "low"
+    },
+    {
+      "claim": "[33] Kheifets 2026 PRA 113:043103 阿秒电离理论最新进展",
+      "missing_evidence": "[33]为2026年最新论文但未在正文引用，需要补充到立项依据中作为多通道TDSE理论的最新支撑",
+      "search_keywords": [
+        "Kheifets 2026 Phys Rev A 113 043103",
+        "attosecond ionization theory multichannel 2026",
+        "PRA 113 043103 attosecond streaking"
+      ],
+      "priority": "low"
+    }
+  ],
+  "section": "rationale"
+}

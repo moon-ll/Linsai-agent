@@ -1,0 +1,49 @@
+{
+  "gaps": [
+    {
+      "claim": "§3.3 装置升级现状 380 mrad(≈645 as)与需求 59 mrad 之间存在 6.4 倍差距，70—90 as\"典型值\"无预研支撑",
+      "missing_evidence": "缺少支持 kHz 级闭环 CEP 主动补偿可将抖动压缩至 <60 mrad 范围的实验/工程文献，以及 70—90 as 时间抖动典型值的实证报告",
+      "search_keywords": [
+        "CEP stabilization <60 mrad active feedback",
+        "attosecond timing jitter 70 as kHz laser",
+        "carrier-envelope phase stabilization 100 as repetition rate",
+        "CEP closed-loop compression sub-100 as"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4 §3.3 主线谐波 H13≈5.04 eV 已入 XUV 段，需补 XUV 光源、产生、滤波、隔离方案，以支撑 streaking/RABBITT 相位提取主路径",
+      "missing_evidence": "缺少适用于 1.6 μm/3.2 μm 驱动 + 固体 HHG 体系产生 XUV 段谐波的滤波（金属薄膜/多层膜）和孤立化（单脉冲挑选/gating）方案支撑文献，特别是 hBN/MoS₂ 等材料 HHG 的孤立化与 streaking 应用先例",
+      "search_keywords": [
+        "solid-state HHG XUV streaking isolation",
+        "high harmonic single pulse picker solid",
+        "metal filter XUV MoS2 HHG",
+        "RABBITT 1.6 um driver solid harmonic"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§4 L51 三层剥离设计值 >25%→18%（7pct）与 σ_Ω≤0.15 无推导来源",
+      "missing_evidence": "缺乏对聚合物辅助剥离三层方案中各层良率/角度方差统计及对应残余 twist angle 方差 σ_Ω≤0.15 的实验统计文献与误差预算参考",
+      "search_keywords": [
+        "polymer-assisted layer exfoliation yield statistics",
+        "2D material transfer angle variance sigma",
+        "deterministic mechanical exfoliation three layer",
+        "twist angle disorder moire heterostructure statistics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "§5 L61 Δφ≈17°、21.8°/φ₀=10.9°、1.5—3.5 eV 锁定取自预印本 [29]（arXiv:2607.19937）未附 arXiv 号",
+      "missing_evidence": "[29] 引用的 Patra-Cocchi 预印本需要正式标注 arXiv:2607.19937，并核查其相角与能量窗口数值是否已在 peer-reviewed 期刊发表以确认稳健性",
+      "search_keywords": [
+        "Patra Cocchi twisted MoS2 SHG arXiv 2607.19937",
+        "twisted homobilayer MoS2 SHG phase lag DFT-Wannier",
+        "second harmonic generation MoS2 C3 symmetry peer reviewed",
+        "arXiv 2607.19937 publication journal"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

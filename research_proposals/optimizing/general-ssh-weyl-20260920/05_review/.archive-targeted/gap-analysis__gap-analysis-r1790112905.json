@@ -1,0 +1,78 @@
+{
+  "gaps": [
+    {
+      "claim": "scheme.md 0字节、technical route 与可行性分析整体缺失（清单1-6不通过）",
+      "missing_evidence": "缺少对SSH模型+Weyl半金属高次谐波方案的方法选择论证、可行性链式论证、降级条件等技术路线类支撑文本（此处属结构/逻辑类，非文献类）",
+      "search_keywords": [],
+      "priority": "high"
+    },
+    {
+      "claim": "references.md 0字节、文献表整体缺失（历史#2残留）",
+      "missing_evidence": "缺rationale [1]-[40]的独立文献条目，以及content新引[41]-[47]对应文献条目",
+      "search_keywords": [
+        "high harmonic generation Weyl semimetal",
+        "Berry curvature high harmonic generation",
+        "SSH model topological phase high harmonic",
+        "Su-Schrieffer-Heeger ultrafast spectroscopy",
+        "Weyl semimetal high harmonic generation circular dichroism"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "content §2.1-§2.4 L46-L63 引用[41]-[47]无文献条目；Bharti与semi-Dirac论断两章双号双作者并存",
+      "missing_evidence": "缺Bharti双圆极化HHG原文献（rationale[38] vs content[42]）及semi-Dirac HHG文献（rationale[35] Yue&Gaarde vs content[47] Medic），需要确认真实归属",
+      "search_keywords": [
+        "Bharti circularly polarized high harmonic generation",
+        "Yue Gaarde semi-Dirac high harmonic generation",
+        "Medic semi-Dirac high harmonic",
+        "double circular polarization HHG topological",
+        "semi-Dirac point HHG nonlinear optics"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "Bernoulli型shift vector分类（content §2.7 K2 L75）需修正并补文献支撑",
+      "missing_evidence": "shift vector二阶几何量文献及shift vector与Berry曲率对跃迁矩阵元修正的原始文献",
+      "search_keywords": [
+        "shift vector transition dipole moment",
+        "shift vector second-order geometric quantity",
+        "shift vector nonlinear optical response",
+        "shift current shift vector Berry curvature"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "R/T阈值（content G4 L65）需ZnO 800/1800 nm双基线定标流程",
+      "missing_evidence": "缺ZnO中红外800 nm与1800 nm基线下HHG产率参考实验数据及双基线定标方法文献",
+      "search_keywords": [
+        "ZnO high harmonic generation 800 nm 1800 nm",
+        "ZnO mid-infrared HHG baseline",
+        "ZnO HHG driver wavelength dependence Ghimire",
+        "ZnO solid HHG wavelength scaling"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "降级条件（content §2.6 L67）需补备选路径技术路线支撑",
+      "missing_evidence": "缺Weyl半金属与SSH拓扑态HHG的备选测量/计算路径文献（如拓扑保护破坏时的退化信号、紧束缚近似失效时的替代方案等）",
+      "search_keywords": [
+        "Weyl semimetal HHG backup methodology",
+        "SSH model HHG tight-binding alternative",
+        "TDDFT vs tight-binding HHG benchmark",
+        "many-body HHG backup calculation method"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "反AI检测：超120字长句拆分后需补技术方法类支撑短语文献",
+      "missing_evidence": "缺对应短句技术方法的原始文献引用，便于拆句后仍保留引用完整性",
+      "search_keywords": [
+        "high harmonic generation review",
+        "solid-state HHG technique review",
+        "topological material HHG methodology review"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "scheme"
+}

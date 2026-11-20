@@ -1,0 +1,60 @@
+{
+  "gaps": [
+    {
+      "claim": "HHG对能带结构、跃迁偶极矩、Berry曲率与多体关联高度敏感（孤证断言未展开）",
+      "missing_evidence": "缺少HHG作为能带结构/跃迁偶极矩/Berry曲率/多体关联探针的系统性方法学综述或典型案例文献支撑",
+      "search_keywords": [
+        "high harmonic generation band structure probe review",
+        "HHG transition dipole moment sensitivity",
+        "HHG Berry curvature retrieval method",
+        "high harmonic spectroscopy many-body correlation"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "扭转角分辨率±0.02°相较电衍射ex-situ标定样品制备精度±0.05°收紧2.5倍",
+      "missing_evidence": "缺少扭转角电学/STM标定精度的基准数据，以及HHG方法在角分辨精度上的可比benchmark",
+      "search_keywords": [
+        "moire superlattice twist angle measurement precision",
+        "twist angle metrology ex-situ benchmark",
+        "HHG twist angle retrieval accuracy",
+        "moire heterostructure angle disorder twist inhomogeneity"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "TMDC莫尔异质结莫尔势反演误差压缩至15%以内的可行性（SNR=50条件下）",
+      "missing_evidence": "缺少HHG反演莫尔势精度15%的实验/理论benchmark，以及SNR=50作为反演可行门槛的依据",
+      "search_keywords": [
+        "high harmonic generation moire potential inversion",
+        "HHG inverse problem moire superlattice accuracy",
+        "HHG spectroscopy SNR threshold retrieval error",
+        "moire potential reconstruction benchmark"
+      ],
+      "priority": "high"
+    },
+    {
+      "claim": "莫尔势的微观图像与关联能隙的输运指纹（STM与电学输运两条路径触及不到亚周期窗口）",
+      "missing_evidence": "缺少STM/输运测量莫尔势精度极限与时间分辨率的定量对比文献，以及HHG方法在亚周期窗口的优势证据",
+      "search_keywords": [
+        "STM moire potential imaging resolution",
+        "transport measurement moire superlattice gap",
+        "sub-cycle HHG ultrafast probe advantage",
+        "time-resolved moire potential dynamics"
+      ],
+      "priority": "medium"
+    },
+    {
+      "claim": "扭转双层/异质结莫尔超晶格作为关联、拓扑与能带工程研究核心平台（magic-angle TBG起源）",
+      "missing_evidence": "缺少2018年以来莫尔超晶格在关联绝缘态、超导、拓扑方向的代表性进展综述",
+      "search_keywords": [
+        "magic angle twisted bilayer graphene correlated insulator",
+        "moire superlattice correlated states review",
+        "twisted bilayer graphene unconventional superconductivity",
+        "moire heterostructure topological flat band"
+      ],
+      "priority": "medium"
+    }
+  ],
+  "section": "content"
+}

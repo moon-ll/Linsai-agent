@@ -1,0 +1,48 @@
+# 对抗评审报告（第 2 轮·整体一致性审查 full_review）
+
+项目：general-phonon-hhg（面上）；聚焦：三章节逻辑衔接、术语一致性、冗余/矛盾。评审前实读 rationale/content/scheme 三文件现行全文，所有数值（U_p、γ、21 阶能量、cos²60°=0.25、5 fs→31°、22/32 cm⁻¹ 周期、五组步长比）已程序复算，无一处不闭合。
+
+## 执行清单对照
+清单0. 通过——rationale/content/scheme 三模块齐备，体量均在参考区间
+清单1. 通过——标准文件实读于 /Users/ll/Desktop/LinSai-CoPilot/memory/nsfc-standards.json
+清单2. 通过——8 条程序冗余指令逐条 grep 复核，见问题清单 1
+清单3. 通过——2 对锚点完成引用-对比-差距，结论行见下
+清单4. 通过——程序化检测结果（禁用词零命中、模板句 0、超长句 11 处）已入问题清单
+清单5. 通过——红队评审按 general 加权执行（.35/.29/.24/.12 以 json 实读为准）
+清单6. 通过——知识整理/罗列风险已查，未发现条目式堆砌段
+清单7. 通过——每条问题附违反条款（section_standards.content[2]、anti_ai_patterns、indicator_red_lines.consistency_check）
+清单8. 通过——severity 分级完成：0 critical / 1 high / 5 medium / 1 low
+
+## 锚点对比
+对比一（立项依据）
+申请书原文：Neufeld 等人[23]用泵浦-探测-多维载波包络相位谱学考察单层六方氮化硼中的相干光学声子，发现谐波产额随泵浦-探测延迟强烈振荡。
+锚点原文：2011年，Ghimire等人[9]使用中红外激光驱动ZnO晶体，观测到了非微扰高次谐波产生。
+差距：嵌入式引用、数值密度与由远及近收窄均与范本同构，达到范本语体。
+对比二（研究方案）
+申请书原文：主通道用瞬态反射耗散测量目标模的频率、退相干时间与相对振荡幅度，副通道用二次谐波探测测量同一模的非线性响应相位。
+锚点原文：首先，求解定态本征值问题获得掺杂半导体的电子能谱及跃迁偶极矩等信息。然后，利用数值方法获得电子演化的含时波函数……
+差距：同为"方法—量—衔接"执行链且论证密度更高，但现存 11 处超 120 字句与残留复述拉低整体表达档。
+锚点对比结论：基本接近
+
+## 写作风格评估
+三章节均为连贯论证段，无 bullet 罗列；段间以内容逻辑衔接，"在此基础上/此外"零命中，"为…提供…"模板句 0 次，防御句 0.2-1.3 处/千字（低于 2/千字阈值）。短板：超 120 字句 11 处（rationale 2、content 3、scheme 6）；程序检测的 8 处跨章复述已基本改写，仅 1 处残留。程序化检测结果：禁用词（口径/锚定/触发等 19 词）零命中；直引号 102 处 vs 全角引号 2 处混用。
+
+## 问题清单
+1. [high] redundancy｜content L11/L29 vs rationale L65/L89、scheme L5.4·L11｜程序复述 8 处仅剩"瞬时对称性破缺通道会在甄别之前改变允许的阶次集合，若不先行扣除，任何份额表都只是一组拟合参数"整句在 rationale L65 与 content L29 双全文复现｜content L29 改为"如立项依据第 3 节所述，该通道先改写阶次集合再进入份额"，删除复述（违反 section_standards.content[2]、modification_priority.P2"跨章节重复"）
+   论证：该句是三条通道的定义性判词，双份全文出现使评审在 20 分钟内两次读到同句；其余 7 处程序复述均已改为指针式引用，唯此句漏改，属程序冗余修复指令的未清残留，故按 high 立案而非 medium。
+2. [medium] terminology｜rationale L23 vs content L27/scheme L155｜同一 Ginsberg[21]共振带在立项依据称"声子极化激元"、后两章称"声子-声激子极化激元"｜全文统一为"声子极化激元"（违反 indicator_red_lines.consistency_check、skill 陷阱 4 术语漂移）
+3. [medium] terminology｜content L73 vs rationale L65/content L33/scheme 4.3｜同一判据两名称："相位差判据"1 处 vs "相位判据"11 处｜L73 统一为"相位判据"（违反 consistency_check）
+4. [medium] anti_ai｜scheme 6 处（L29/43/69/128/145/153 等）｜超 120 字严重超长句全文 11 处，scheme 占 6 处，最长达 153 字（消融对照段）｜按"设置—用途"拆为 2 句（违反 anti_ai_patterns"超长句：超 120 字属严重超长句"、写作规范 5）
+5. [medium] expression｜全文｜直引号 102 处与全角引号 2 处混用（content L5/L7 两处全角）｜统一为中文全角引号（违反 modification_priority.P1"格式细节"）
+6. [medium] indicator_def｜scheme L79｜s_geom=cos²φ 映射"以非手性对照与数值正演联合标定"，但映射成立条件（φ 小角度近似/单模主导）未界定｜补一句适用区间与失效标志（违反 indicator_red_lines.theory_applicability）
+7. [low] citation_style｜rationale｜正文 [N] 引用 41 次，超出"编号引用 10-20 次、其余整体列入"的范本校准｜非关键论断处可去编号改整体表述（违反 style_benchmark.citation_style）
+
+已解决的历史 P0（逐条核对现行文本）：rationale/content/scheme 0 字节缺失（三文件 7167/5143/9797 字）；"首次"无支撑（content L5 已改"据 2026 年 11 月检索（Web of Science 与 arXiv）尚未见"，带范围带日期）；21 阶能量（scheme L45 复算 12.4/8.1 eV 自洽）；Keldysh 量纲（scheme L41 已改 γ=√(I_p/2U_p) 并逐档复算吻合）；[49][50] 悬空（正文编号止于[40]，无孤儿）；位移电流相位互斥（rationale L65/scheme L11 统一为"位移正交、几何同相、门槛 60°"）；18 处条目化（已全部连贯段化）。此 9 项不再扣分。
+相关性复核：rationale 第 11/19/20/22-26 段均为 Hu 先例边界、通道性质、维度缺口、国内现状四层论证链的实义段，保留。
+
+## 评分
+创新性：0.85
+可行性：0.84
+严谨性：0.84
+表达质量：0.74
+综合评分：0.83

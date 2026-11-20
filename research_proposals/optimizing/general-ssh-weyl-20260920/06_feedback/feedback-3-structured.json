@@ -1,0 +1,26 @@
+{
+  "verdict": "major_revision",
+  "overall_comment": "v7.3.0 验收标准升级：方法手册开工就绪度成为第六评审模块硬门，全部 pending_review 课题退回 optimizing 在新框架下升级一轮。申请书正文分数维持原状，不因本次退回降档。",
+  "issues": [
+    {
+      "section": "method_manual",
+      "severity": "critical",
+      "issue_type": "readiness",
+      "description": "方法手册未经八要素就绪度评审，未建立 L0-L4 分级与过线记录",
+      "instruction": "按 method-manual skill 四节八要素清单逐方法单元补齐：①每项研究内容对应方法单元 ②原理表述 ③参数表可复算（数值+单位+出处）④实施协议（步骤/装置/软件） ⑤数据判据（与口径表一致）⑥失效模式与边界 ⑦资源估算 ⑧溯源闭环（口径表双向索引+KB 方法页引用）；经 method_manual critic 评审达 L3 且 readiness/rigor ≥0.85",
+      "action": "revise",
+      "target_passage": "03_method/method-manual.md"
+    },
+    {
+      "section": "scheme",
+      "severity": "medium",
+      "issue_type": "consistency",
+      "description": "手册与申请书方案的口径一致性未经手册评审链核对",
+      "instruction": "手册升级时对照 params.json 口径表与 scheme.md 技术路线，数值与机制表述双向索引一致",
+      "action": "verify",
+      "target_passage": "04_proposal/sections/scheme.md"
+    }
+  ],
+  "retreated_at": "2026-11-02T16:02:11Z",
+  "retreat_reason": "v7.3.0 手册维度升级（用户裁决 2026-11-02）"
+}

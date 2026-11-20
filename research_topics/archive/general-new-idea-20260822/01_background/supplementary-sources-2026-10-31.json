@@ -1,0 +1,41 @@
+{
+  "proposal_id": "general-new-idea-20260822",
+  "cluster_id": "cl_20260815_7d5ea3",
+  "clusters": [
+    "cl_20260815_7d5ea3"
+  ],
+  "entries": [
+    {
+      "source_id": "paper:2026-2508.09364-the-interplay-between-high-harmonic-generation-and",
+      "title": "The interplay between high-harmonic generation and photoluminescence in ZnO: Anisotropic spectral properties of harmonic emission and the role of excitons",
+      "summary": "该工作实验对比了 ZnO 中高次谐波产生（HHG）与光致发光（PL）在强度和光谱上的不同行为，揭示谐波发射具有依赖晶体取向的各向异性光谱特性。研究表明激子在谐波辐射与荧光发射的相互耦合/竞争中起关键作用，为理解固体 HHG 的微观机制提供了新视角。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_7d5ea3",
+      "added_at": "2026-10-31T13:20:27Z"
+    },
+    {
+      "source_id": "briefing:knowledge/wiki/reviews/briefing-2026-05-27.md",
+      "title": "每日简报 2026-05-27：强场超快光学与阿秒科学研究简报",
+      "summary": "本简报基于AI评分从36篇候选文献中精选4篇固态高次谐波产生（HHG）领域论文，重点推荐ZnO中HHG与光致发光竞争机制的研究，该工作揭示了谐波发射的各向异性光谱特性及激子的关键作用。其余选文涵盖菱方石墨烯中手性布洛赫态的HHG、扭转固体的相位匹配及固态HHG前沿综述，共同勾勒出固态强场超快光学的最新进展。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_7d5ea3",
+      "added_at": "2026-10-31T13:20:27Z"
+    },
+    {
+      "source_id": "hermes_briefing:research_briefing_20260527.md",
+      "title": "ZnO中高次谐波产生与光致发光的相互作用：谐波发射的各向异性光谱特性及激子的作用",
+      "summary": "该工作利用1500 nm短波红外强场驱动ZnO晶体，精确区分了HHG与光致发光（PL）的物理机制：HHG呈非微扰强度标度并因等离子体折射率变化而光谱蓝移，PL则呈超线性增长并红移约200 meV（激子-激子散射+声子辅助复合），且第5次谐波在特定阈值强度下发生主导机制转变（疑为带间→带内）。这为实验上抑制/分离PL以获取干净HHG信号、以及利用PL-HHG双通道互补诊断载流子密度与电子动力学提供了定量依据。",
+      "path": "",
+      "added_via": "cluster:cl_20260815_7d5ea3",
+      "added_at": "2026-10-31T13:20:27Z"
+    },
+    {
+      "source_id": "paper:2025-2512.15370-orientation-dependent-high-harmonic-generation-in-zno",
+      "title": "Orientation-dependent high harmonic generation in ZnO",
+      "summary": "系统研究ZnO中高次谐波产率与偏振随晶体取向（激光偏振相对晶轴夹角）的变化，揭示纤锌矿C6v六重对称性对各阶谐波调制的支配作用。通过区分带内布洛赫加速与带间复合两条通道各自的各向异性来源（能带色散与带间偶极矩阵元），建立取向依赖固体HHG的微观机制图景。结果表明取向扫描谐波谱可作为读取ZnO晶体对称性与能带各向异性的超快探针。",
+      "path": "knowledge/raw/papers/2025-2512.15370-orientation-dependent-high-harmonic-generation-in-zno.md",
+      "added_via": "cluster:cl_20260815_7d5ea3",
+      "added_at": "2026-10-31T13:20:27Z"
+    }
+  ]
+}
